@@ -4,61 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 98942CE8D49
-	for <qemu-riscv@archiver.kernel.org>; Thu, 19 Sep 2024 04:47:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EA9EDCE8D4C
+	for <qemu-riscv@archiver.kernel.org>; Thu, 19 Sep 2024 04:48:39 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sr94C-0007KF-Oa; Thu, 19 Sep 2024 00:46:56 -0400
+	id 1sr94m-0001dT-Dj; Thu, 19 Sep 2024 00:47:32 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <pierrick.bouvier@linaro.org>)
- id 1sr949-0007HZ-IK
- for qemu-riscv@nongnu.org; Thu, 19 Sep 2024 00:46:53 -0400
-Received: from mail-pg1-x536.google.com ([2607:f8b0:4864:20::536])
+ id 1sr94j-0001QI-NV
+ for qemu-riscv@nongnu.org; Thu, 19 Sep 2024 00:47:30 -0400
+Received: from mail-pf1-x42b.google.com ([2607:f8b0:4864:20::42b])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <pierrick.bouvier@linaro.org>)
- id 1sr945-00074V-TJ
- for qemu-riscv@nongnu.org; Thu, 19 Sep 2024 00:46:53 -0400
-Received: by mail-pg1-x536.google.com with SMTP id
- 41be03b00d2f7-656d8b346d2so243055a12.2
- for <qemu-riscv@nongnu.org>; Wed, 18 Sep 2024 21:46:49 -0700 (PDT)
+ id 1sr94d-0007LQ-Fm
+ for qemu-riscv@nongnu.org; Thu, 19 Sep 2024 00:47:29 -0400
+Received: by mail-pf1-x42b.google.com with SMTP id
+ d2e1a72fcca58-71971d20a95so316709b3a.3
+ for <qemu-riscv@nongnu.org>; Wed, 18 Sep 2024 21:47:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1726721207; x=1727326007; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=okWQnCc9i+a9qTeP/CljeFJtPOK3zSl+MYdGWF+XBiU=;
- b=VrhlSWTc9V5dHH2sQc/rklQx7Oc6XSVZfVRXWGzvVwOhL2j8EWlsjmYAJyxIo179sU
- a6rUp3xXSfus6GftUtzDYeQfTkYt/cmpmXzqnZLvM7y4cfq17IKkQm33Sx50XBvpf18d
- DYjn2luzFQ0xmIsNVFIXY1pmWnWmX8nuYqq9XotnZfApli9mImRS4PTU6tUhv+FxyQE/
- Fl1K1Y+NAffQdbqorSS0LPhbqkHgTRrljm0HGsEH7XTJ7tZ58u+XhDdJlZwrwqTbQjc4
- xoffcQ/3DSIHoN+vmqw+JK16cJ9gCwOBw1KLwZKnEKEonsuBVmZqTqpeqb1bluyYsL1y
- yhyg==
+ d=linaro.org; s=google; t=1726721242; x=1727326042; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=XTfod+luVyICpEfgZ8Uh3DA36M6kM7v+mrR6MBDF7uk=;
+ b=gySmbAwF3yQ1JULozXtkfqpb9Wyrr64X1tk3Ncjgb7LgUXzQHQuOlP/Lo7JdhEJzkh
+ iSpJgxjYmkYDPFy+GYc5xfFUyokT8AAPAJoJ9uXEXQAiVU6WPJ9o9ZjKUvj8IQawXB4l
+ qNPypWqK8+HxBpWtqEDPBL7UtUPHk05qndYzYF03W9tiaq1Os3gCnE/+J79UxveA9cvx
+ W9/DpnSNW7ziz8PoRm3u8Ftx0utqMToO8cm9YNClrnPswptgFoUjFD56i0IUJnRJH739
+ vz5xox2J6cnKRXaEm8TRP+W6KvYGhBcHk5XR9WKf6zVRph5LsFtPVZbuliAHxXv996ni
+ VIqg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726721207; x=1727326007;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=okWQnCc9i+a9qTeP/CljeFJtPOK3zSl+MYdGWF+XBiU=;
- b=im/lP6oth+Q2Ur7tGtu0gAGkAfcer9SMJm5Js8ZbhLeE9nciPsur9CmtCZ/vCQM2hd
- Zcc9Syt4IdiIry0h0+O6l6+oQhziF8/kcvGmygACAZEwFUWgJmrmrX4S6IKSsCqiluVu
- 3vfLJjdjfFNqRrzbsI91yphkKk3j0CpzmPxRa7ikVqDFrd2+nNvEIM/uzUSSkIgVNZmu
- rnVVok8xhG/QryG3AvlmPG4hRVOA4ss2vQEJ+MCLJ2JvqRqX0fWAg/aR7zjLhzhR3RWI
- apcXEFKfpXv5rGUnTUWhTpJdfswEg7ai0yPj3ELFnQ/tV2zSMNJb7FdzsKSTMEZjQm8R
- kyyQ==
+ d=1e100.net; s=20230601; t=1726721242; x=1727326042;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=XTfod+luVyICpEfgZ8Uh3DA36M6kM7v+mrR6MBDF7uk=;
+ b=oadMe/iMPFfS/Q2AkfjS6B2G0Q57YxFsYHdt4MRTbH0vh6eMMc37+u5VEZZJim66yC
+ ELdn90aDI8EQ7wgY9o3c412DkLg/BP7ZmTq4F/8Y4ZAQPSpQt6H0TSJXA3eOYlCcEHfJ
+ qOK36/LT6HtoXmMBSGGQaX3+XAFwg+AsBbnXSvKOP2QQnG1f82TvTc6mTC2gP5x1I/cV
+ 3efYfyh5CT3qynvseInKdPpLAInem9J21DJu5P/ldYCin36Zs4TbDhMuYYCQJtZ/bOcQ
+ DSqDCPn6WGhHtJIcP9NLSQiR4xWT33pjfJxtdXD7L5pJsOU4vsu3SX+xucwv/Guo39J1
+ IuwQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVHO5QXNcFVle6lTKukfWrxyksvUaHpyMGS5ss8a8C5oNDijk08fZ7B6JDGEL7ntdb5d+0lTsg8QtMW@nongnu.org
-X-Gm-Message-State: AOJu0Yz5/mr5zrqxSXMsMEqIvKJqUrVBPc88AuxZvF5QFX7vHgtKm87r
- uP0yecxnKAToODMScqghk6YurnIFo4QBJmsgc0UcRvsykPIcojXtv3vHv/u5kxA=
-X-Google-Smtp-Source: AGHT+IFTeoz0sc18zegnRwG9uqK1i/tdvMiZIsB+jYHs0tQzrYbWKu22/eeI4GvU6Dyul2n7o0JIuw==
-X-Received: by 2002:a05:6a21:1690:b0:1cf:4348:d5c8 with SMTP id
- adf61e73a8af0-1d112e8bfaemr31800828637.39.1726721206933; 
- Wed, 18 Sep 2024 21:46:46 -0700 (PDT)
+ AJvYcCW7s0iiolr8xcYXsmuKOhsuKU+gEhqLV9cQ1a75fIEhGLtTn2V8hcaLBTDLLtCgsymtnT9QtJl0Ltz/@nongnu.org
+X-Gm-Message-State: AOJu0Yw1GCPZEPbGe3EFkQ0Vp4dCIN4u64gAzitQxcYxhZkEGRv+Xxc3
+ DV/nMnZVyWABRGuxCl4FxKspMrQctPu1VloAR1ZwZzNMf+3MMxWf7lNjJFqinI8=
+X-Google-Smtp-Source: AGHT+IENpGOMxkAxVpBEbVxwqYg+XoCNj0Y+tup5K+eTLr6T9UQRMpy2wwxVgVE7FTWLiR+Ma6cVKg==
+X-Received: by 2002:a05:6a00:2d10:b0:717:9462:8bda with SMTP id
+ d2e1a72fcca58-71936a5fb10mr30684467b3a.12.1726721242032; 
+ Wed, 18 Sep 2024 21:47:22 -0700 (PDT)
 Received: from linaro.. (216-180-64-156.dyn.novuscom.net. [216.180.64.156])
  by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-71944bc279csm7478601b3a.188.2024.09.18.21.46.45
+ d2e1a72fcca58-71944bc279csm7478601b3a.188.2024.09.18.21.47.20
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 18 Sep 2024 21:46:46 -0700 (PDT)
+ Wed, 18 Sep 2024 21:47:21 -0700 (PDT)
 From: Pierrick Bouvier <pierrick.bouvier@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Palmer Dabbelt <palmer@dabbelt.com>,
@@ -105,16 +106,16 @@ Cc: Palmer Dabbelt <palmer@dabbelt.com>,
  Jesper Devantier <foss@defmacro.it>, Marcelo Tosatti <mtosatti@redhat.com>,
  Peter Maydell <peter.maydell@linaro.org>,
  Pierrick Bouvier <pierrick.bouvier@linaro.org>
-Subject: [PATCH v3 00/34] Use g_assert_not_reached instead of (g_)assert(0,
- false)
-Date: Wed, 18 Sep 2024 21:46:07 -0700
-Message-Id: <20240919044641.386068-1-pierrick.bouvier@linaro.org>
+Subject: [PATCH v3 18/34] hw/net: remove break after g_assert_not_reached()
+Date: Wed, 18 Sep 2024 21:46:25 -0700
+Message-Id: <20240919044641.386068-19-pierrick.bouvier@linaro.org>
 X-Mailer: git-send-email 2.39.5
+In-Reply-To: <20240919044641.386068-1-pierrick.bouvier@linaro.org>
+References: <20240919044641.386068-1-pierrick.bouvier@linaro.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::536;
- envelope-from=pierrick.bouvier@linaro.org; helo=mail-pg1-x536.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::42b;
+ envelope-from=pierrick.bouvier@linaro.org; helo=mail-pf1-x42b.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -137,109 +138,28 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-This series cleans up all usages of assert/g_assert who are supposed to stop
-execution of QEMU. We replace those by g_assert_not_reached().
-It was suggested recently when cleaning codebase to build QEMU with gcc
-and tsan: https://lore.kernel.org/qemu-devel/54bb02a6-1b12-460a-97f6-3f478ef766c6@linaro.org/.
+This patch is part of a series that moves towards a consistent use of
+g_assert_not_reached() rather than an ad hoc mix of different
+assertion mechanisms.
 
-In more, cleanup useless break and return after g_assert_not_reached();
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+Signed-off-by: Pierrick Bouvier <pierrick.bouvier@linaro.org>
+---
+ hw/net/net_rx_pkt.c | 1 -
+ 1 file changed, 1 deletion(-)
 
-And finally, ensure with scripts/checkpatch.pl that we don't reintroduce
-(g_)assert(false) in the future.
-
-New commits (removing return) need review.
-
-Tested that it build warning free with gcc and clang.
-
-If a maintainer could pull the whole series, this would be much more easier than
-integrating various parts of it in different subsystems. Thanks!
-
-v3
-- drop changes on .promela files
-- some changes were already merged
-
-v2
-- align backslashes for some changes
-- add summary in all commits message
-- remove redundant comment
-
-v1
-https://lore.kernel.org/qemu-devel/20240910221606.1817478-1-pierrick.bouvier@linaro.org/T/#t
-
-Pierrick Bouvier (34):
-  hw/acpi: replace assert(0) with g_assert_not_reached()
-  hw/arm: replace assert(0) with g_assert_not_reached()
-  hw/net: replace assert(0) with g_assert_not_reached()
-  migration: replace assert(0) with g_assert_not_reached()
-  qobject: replace assert(0) with g_assert_not_reached()
-  target/ppc: replace assert(0) with g_assert_not_reached()
-  block: replace assert(false) with g_assert_not_reached()
-  hw/hyperv: replace assert(false) with g_assert_not_reached()
-  hw/net: replace assert(false) with g_assert_not_reached()
-  hw/nvme: replace assert(false) with g_assert_not_reached()
-  hw/pci: replace assert(false) with g_assert_not_reached()
-  hw/ppc: replace assert(false) with g_assert_not_reached()
-  migration: replace assert(false) with g_assert_not_reached()
-  target/i386/kvm: replace assert(false) with g_assert_not_reached()
-  accel/tcg: remove break after g_assert_not_reached()
-  block: remove break after g_assert_not_reached()
-  hw/acpi: remove break after g_assert_not_reached()
-  hw/net: remove break after g_assert_not_reached()
-  hw/scsi: remove break after g_assert_not_reached()
-  hw/tpm: remove break after g_assert_not_reached()
-  target/arm: remove break after g_assert_not_reached()
-  target/riscv: remove break after g_assert_not_reached()
-  fpu: remove break after g_assert_not_reached()
-  tcg/loongarch64: remove break after g_assert_not_reached()
-  include/qemu: remove return after g_assert_not_reached()
-  hw/hyperv: remove return after g_assert_not_reached()
-  hw/net: remove return after g_assert_not_reached()
-  hw/pci: remove return after g_assert_not_reached()
-  hw/ppc: remove return after g_assert_not_reached()
-  migration: remove return after g_assert_not_reached()
-  qobject: remove return after g_assert_not_reached()
-  qom: remove return after g_assert_not_reached()
-  tests/qtest: remove return after g_assert_not_reached()
-  scripts/checkpatch.pl: emit error when using assert(false)
-
- include/qemu/pmem.h                     |  1 -
- accel/tcg/plugin-gen.c                  |  1 -
- block/qcow2.c                           |  2 +-
- block/ssh.c                             |  1 -
- hw/acpi/aml-build.c                     |  3 +--
- hw/arm/highbank.c                       |  2 +-
- hw/hyperv/hyperv_testdev.c              |  7 +++----
- hw/hyperv/vmbus.c                       | 15 ++++++---------
- hw/net/e1000e_core.c                    |  4 +---
- hw/net/i82596.c                         |  2 +-
- hw/net/igb_core.c                       |  4 +---
- hw/net/net_rx_pkt.c                     |  3 +--
- hw/net/vmxnet3.c                        |  1 -
- hw/nvme/ctrl.c                          |  8 ++++----
- hw/pci/pci-stub.c                       |  6 ++----
- hw/ppc/ppc.c                            |  1 -
- hw/ppc/spapr_events.c                   |  3 +--
- hw/scsi/virtio-scsi.c                   |  1 -
- hw/tpm/tpm_spapr.c                      |  1 -
- migration/dirtyrate.c                   |  3 +--
- migration/migration-hmp-cmds.c          |  2 +-
- migration/postcopy-ram.c                | 21 +++++++--------------
- migration/ram.c                         |  8 +++-----
- qobject/qlit.c                          |  2 +-
- qobject/qnum.c                          | 12 ++++--------
- qom/object.c                            |  1 -
- target/arm/hyp_gdbstub.c                |  1 -
- target/i386/kvm/kvm.c                   |  4 ++--
- target/ppc/dfp_helper.c                 |  8 ++++----
- target/ppc/mmu_helper.c                 |  2 +-
- target/riscv/monitor.c                  |  1 -
- tests/qtest/acpi-utils.c                |  1 -
- fpu/softfloat-parts.c.inc               |  2 --
- target/riscv/insn_trans/trans_rvv.c.inc |  2 --
- tcg/loongarch64/tcg-target.c.inc        |  1 -
- scripts/checkpatch.pl                   |  3 +++
- 36 files changed, 50 insertions(+), 90 deletions(-)
-
+diff --git a/hw/net/net_rx_pkt.c b/hw/net/net_rx_pkt.c
+index 6b9c4c9559d..0ea87344745 100644
+--- a/hw/net/net_rx_pkt.c
++++ b/hw/net/net_rx_pkt.c
+@@ -376,7 +376,6 @@ net_rx_pkt_calc_rss_hash(struct NetRxPkt *pkt,
+         break;
+     default:
+         g_assert_not_reached();
+-        break;
+     }
+ 
+     net_toeplitz_key_init(&key_data, key);
 -- 
 2.39.5
 
