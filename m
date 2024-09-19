@@ -4,62 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 17179CE8D4C
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EB0D2CE8D49
 	for <qemu-riscv@archiver.kernel.org>; Thu, 19 Sep 2024 04:50:44 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sr94g-0001Ag-Ib; Thu, 19 Sep 2024 00:47:26 -0400
+	id 1sr94E-0007Tn-7r; Thu, 19 Sep 2024 00:46:58 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <pierrick.bouvier@linaro.org>)
- id 1sr94e-00011V-IF
- for qemu-riscv@nongnu.org; Thu, 19 Sep 2024 00:47:24 -0400
-Received: from mail-pl1-x62e.google.com ([2607:f8b0:4864:20::62e])
+ id 1sr94C-0007NU-OQ
+ for qemu-riscv@nongnu.org; Thu, 19 Sep 2024 00:46:56 -0400
+Received: from mail-pf1-x436.google.com ([2607:f8b0:4864:20::436])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <pierrick.bouvier@linaro.org>)
- id 1sr94Z-0007Ik-9V
- for qemu-riscv@nongnu.org; Thu, 19 Sep 2024 00:47:24 -0400
-Received: by mail-pl1-x62e.google.com with SMTP id
- d9443c01a7336-20570b42f24so5295085ad.1
- for <qemu-riscv@nongnu.org>; Wed, 18 Sep 2024 21:47:18 -0700 (PDT)
+ id 1sr946-00074v-IX
+ for qemu-riscv@nongnu.org; Thu, 19 Sep 2024 00:46:56 -0400
+Received: by mail-pf1-x436.google.com with SMTP id
+ d2e1a72fcca58-7198cb6bb02so269158b3a.3
+ for <qemu-riscv@nongnu.org>; Wed, 18 Sep 2024 21:46:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1726721238; x=1727326038; darn=nongnu.org;
+ d=linaro.org; s=google; t=1726721209; x=1727326009; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=3PbYSPAJ6rnlNnfP+6+lqxv7ue/rw4dEH/6Q+9usd0U=;
- b=d8IhT31dlD9nqG7Jr77XL0TfTShRtN9693+0ugU/8uq+5SfiILyQ7cmz6sKWvHHdMC
- I3oDnRWoCsIjzVEKCHuDyGDJykXUU3gZCLIFNjTQWbS84Wsg40ad4vUazOunpc4EIOu8
- tHD+1hJeRjSaju3dAR1S17gQDpcK81lqnuOYYe/+boOiC0CVGaUjnsSj6SXHRdllFzy9
- PrdpLSfX0JybB69/9GGBDmh90P+dVjifWz0dXISQ8G076Ua0uUYO/MT2Xp2w4RC9+sfO
- 7zTreCxwZfxSd5SU8teqRJ7sKE15IqLsT1n5pSg7IAB2hxA3IPK/MxjmU1ofq9dniCwL
- 0k3w==
+ bh=bKE/FaSnwekzuSHN/DiZj4HlusD3QhW4e3YSU1WvaKE=;
+ b=BgRLrtp2FfUm5k+m5778bT6fjdYWQThywwVhYOJU8M+4JHwHA+xNwcsXPrjOOoVvD5
+ xN9bIjZnjPXJh2z6g0EW2MaoxHBEa2nqna79CXtB9/WANEINW6NgudNJVipdwaqlzqls
+ VHX0wF326vkYfeoGywhyboNs2nHLqhR4OhR2MTR1MinDRabeOAl0KtUB9kjHAfbXI6nX
+ +/E///hFOQ0sm6EES7WYjPyrKi+xXM8gfmPX35knnCtjffpagHLtSxWD3jUdcCStYhsj
+ 4+TWSL72OSxuV3FNghNWaUi2HlSb9RKMOusubviUyfk3R8gq7YVD8U1qKKbAP/LBW88n
+ fVSw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726721238; x=1727326038;
+ d=1e100.net; s=20230601; t=1726721209; x=1727326009;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=3PbYSPAJ6rnlNnfP+6+lqxv7ue/rw4dEH/6Q+9usd0U=;
- b=bd2MysxhT0GpN+Vboig6NgHutZUgETcZfmlCD7rEbfkcLeyR0DNeTT6IDPorULICwj
- 5ypxTjfcv7UCyRIxa27NgBkl0G1iEJz7+xVxxKeiLf320WCg4ooGsdPLxfYy8V0a3tNG
- fjDMZE9uHtljT27hmTw6MReXNVQxI0WtdUk7dxl1bDDkbtO4lxdSmiXjUNGFHZHoBZyp
- sam9uCsqgv6o48sS0Iu/jGRqhnFJeE+FAUTZNABpsU34BX440+32kPZwK8ewwZct0Tyu
- 43mb+2mB6Lqwd130zA16UQ6D4zhCJ/DJKInce6ic3pTEuFEU+KbPOBpEwqBn1GXZ2dGP
- cSRg==
+ bh=bKE/FaSnwekzuSHN/DiZj4HlusD3QhW4e3YSU1WvaKE=;
+ b=p497oBihEmlIYAz0GDhjOx/PdAMTfsPDkv+FPGMzW6NEa7xyNB8+zBWLZqCccJBtFy
+ KXJTDeHXJ/1/c14YpFT+S2cxvJBzi4atsTap1Jijf7RkE9/xY4I2bQ0H+FjPzb3QCvS9
+ +jZigXyUc/jASQ3vRAm1yfsxsYO4ifBWU4FauPnIuH4FbzFCCq6k0hbbGHdx6oswDqkb
+ JWwdknTBmJZcVrxjcnjy4hsLwwI9CygkzH0Xi4VkT/dN9WnGvf8AjYNYgvBYw6glyXBk
+ 4U3yIgXj6bSDtbMhsG8d7XU/3qgmfOHnsBpI/hZl1zybJcqit9Ql0QMe391i/JBxDz+l
+ qePw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUvxiqA5D6DAvQOeCvSDFeYsruLNHytGAB2nPqOI3KragpAP/tq5M5sIeOqN9It4DyUyprCuk3POGVj@nongnu.org
-X-Gm-Message-State: AOJu0Yy5w9DBhKfyCxkGdMG2LYOoL8oEBoqA1jVqCCFN3efSpq8FBy4t
- be00/bgYKrOvEJQM3SZ2YtkFXsG8obYSEeZqBV+NeEAyNqOsVFVrqTQGxOipjd0=
-X-Google-Smtp-Source: AGHT+IF3mDmH9rpxImg7I9ZiTJydkdGhhv3x9u+IP9aPf7aanW6JNd2XCY8CeZpnshOcXFIkUiIf+g==
-X-Received: by 2002:a05:6a20:43a0:b0:1d2:e8f6:7e6 with SMTP id
- adf61e73a8af0-1d2e8f60a4bmr8759330637.13.1726721237824; 
- Wed, 18 Sep 2024 21:47:17 -0700 (PDT)
+ AJvYcCVS6p4utl3xPCBLVXM6M9VTBYwN6FJPSeM7JGcXXROiR0bX7+VS/qEdpaAoUxx8/RuA3gDSAJBYeDC1@nongnu.org
+X-Gm-Message-State: AOJu0Yx0NPS6WqYXkYNpS3V6J665p07GhHmneb01DwswHzm8XcNXK9nV
+ 1IXL0VtsKJUeR9tgpVLVbrU7aBNriO1w3x99UkqdBQeDzRD1xGqUsBvBCLzjn88=
+X-Google-Smtp-Source: AGHT+IFSLpGq1tdAK7kcH0oPXH2ipnr8o9jAFjv4J5HFm8vaiwaqPv2XJ4VGf5F1OUzUb1F//zn0vg==
+X-Received: by 2002:a05:6a00:2389:b0:70e:8e3a:10ee with SMTP id
+ d2e1a72fcca58-719261d9b0dmr36234028b3a.21.1726721208838; 
+ Wed, 18 Sep 2024 21:46:48 -0700 (PDT)
 Received: from linaro.. (216-180-64-156.dyn.novuscom.net. [216.180.64.156])
  by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-71944bc279csm7478601b3a.188.2024.09.18.21.47.16
+ d2e1a72fcca58-71944bc279csm7478601b3a.188.2024.09.18.21.46.47
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 18 Sep 2024 21:47:17 -0700 (PDT)
+ Wed, 18 Sep 2024 21:46:48 -0700 (PDT)
 From: Pierrick Bouvier <pierrick.bouvier@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Palmer Dabbelt <palmer@dabbelt.com>,
@@ -106,16 +106,17 @@ Cc: Palmer Dabbelt <palmer@dabbelt.com>,
  Jesper Devantier <foss@defmacro.it>, Marcelo Tosatti <mtosatti@redhat.com>,
  Peter Maydell <peter.maydell@linaro.org>,
  Pierrick Bouvier <pierrick.bouvier@linaro.org>
-Subject: [PATCH v3 16/34] block: remove break after g_assert_not_reached()
-Date: Wed, 18 Sep 2024 21:46:23 -0700
-Message-Id: <20240919044641.386068-17-pierrick.bouvier@linaro.org>
+Subject: [PATCH v3 01/34] hw/acpi: replace assert(0) with
+ g_assert_not_reached()
+Date: Wed, 18 Sep 2024 21:46:08 -0700
+Message-Id: <20240919044641.386068-2-pierrick.bouvier@linaro.org>
 X-Mailer: git-send-email 2.39.5
 In-Reply-To: <20240919044641.386068-1-pierrick.bouvier@linaro.org>
 References: <20240919044641.386068-1-pierrick.bouvier@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::62e;
- envelope-from=pierrick.bouvier@linaro.org; helo=mail-pl1-x62e.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::436;
+ envelope-from=pierrick.bouvier@linaro.org; helo=mail-pf1-x436.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -143,25 +144,24 @@ g_assert_not_reached() rather than an ad hoc mix of different
 assertion mechanisms.
 
 Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
-Reviewed-by: Richard W.M. Jones <rjones@redhat.com>
-Reviewed-by: Kevin Wolf <kwolf@redhat.com>
 Signed-off-by: Pierrick Bouvier <pierrick.bouvier@linaro.org>
 ---
- block/ssh.c | 1 -
- 1 file changed, 1 deletion(-)
+ hw/acpi/aml-build.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/block/ssh.c b/block/ssh.c
-index 27d582e0e3d..871e1d47534 100644
---- a/block/ssh.c
-+++ b/block/ssh.c
-@@ -474,7 +474,6 @@ static int check_host_key(BDRVSSHState *s, SshHostKeyCheck *hkc, Error **errp)
-                                        errp);
-         }
-         g_assert_not_reached();
--        break;
-     case SSH_HOST_KEY_CHECK_MODE_KNOWN_HOSTS:
-         return check_host_key_knownhosts(s, errp);
+diff --git a/hw/acpi/aml-build.c b/hw/acpi/aml-build.c
+index 6d4517cfbe3..006c506a375 100644
+--- a/hw/acpi/aml-build.c
++++ b/hw/acpi/aml-build.c
+@@ -534,7 +534,7 @@ void aml_append(Aml *parent_ctx, Aml *child)
+     case AML_NO_OPCODE:
+         break;
      default:
+-        assert(0);
++        g_assert_not_reached();
+         break;
+     }
+     build_append_array(parent_ctx->buf, buf);
 -- 
 2.39.5
 
