@@ -4,62 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E59C1CE8D4C
-	for <qemu-riscv@archiver.kernel.org>; Thu, 19 Sep 2024 04:48:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9A582CE8D4C
+	for <qemu-riscv@archiver.kernel.org>; Thu, 19 Sep 2024 04:48:55 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sr959-0003RV-KK; Thu, 19 Sep 2024 00:47:55 -0400
+	id 1sr94x-0002Q2-9s; Thu, 19 Sep 2024 00:47:43 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <pierrick.bouvier@linaro.org>)
- id 1sr952-0002tQ-SU
- for qemu-riscv@nongnu.org; Thu, 19 Sep 2024 00:47:49 -0400
-Received: from mail-pf1-x433.google.com ([2607:f8b0:4864:20::433])
+ id 1sr94n-0001kK-Pi
+ for qemu-riscv@nongnu.org; Thu, 19 Sep 2024 00:47:33 -0400
+Received: from mail-pg1-x52b.google.com ([2607:f8b0:4864:20::52b])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <pierrick.bouvier@linaro.org>)
- id 1sr94x-0007Vh-EA
- for qemu-riscv@nongnu.org; Thu, 19 Sep 2024 00:47:48 -0400
-Received: by mail-pf1-x433.google.com with SMTP id
- d2e1a72fcca58-7178df70f28so309269b3a.2
- for <qemu-riscv@nongnu.org>; Wed, 18 Sep 2024 21:47:42 -0700 (PDT)
+ id 1sr94h-0007NF-AO
+ for qemu-riscv@nongnu.org; Thu, 19 Sep 2024 00:47:33 -0400
+Received: by mail-pg1-x52b.google.com with SMTP id
+ 41be03b00d2f7-7d4f85766f0so296319a12.2
+ for <qemu-riscv@nongnu.org>; Wed, 18 Sep 2024 21:47:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1726721262; x=1727326062; darn=nongnu.org;
+ d=linaro.org; s=google; t=1726721246; x=1727326046; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Mp3yl1TjwHpJ2DET+AsHEAo67XBOppY+FOew/7+eLo4=;
- b=tE1BxwPyBoTGTKbdpek6UmorZjdhfwByDWB0563pMvAre+A9Zwz6TnzEOmAs4SWIaL
- ioGNgxhjSkCFJ/WaTewa30vPYQhuGtHt8vNDOBf8644ztQOmHi+hdOcd710m0nwUO7QT
- fSGaGa6wk3wh9uqGyTf6YEqXJkTvnQcpXLclawdeGWkyqxl/RE7HdoFfj/CML/j9oN0+
- z/YVwGK5SnML2MsufugMdFUreElHvOgIKOiG/kqZFr7RPyZ9WbCiqCLYup3b4vKPpLcQ
- 7v3BylD00llHphvXqCy5QBMlpJJDl4tvbq/hoWDSR358+gK+Q9wc9uUUiatbhex31vYD
- E6KA==
+ bh=kRUr7Rigd7KXsxIxUKl75LNzfJl8HLKhUx0dIIEBKEI=;
+ b=Iie9R8s/mGs6pOIb+fjkjPZLhwHE8/fh8FbDSToEjvUEk0tR92gxIx0TvBJ0LKhP5X
+ dLdfDFBpNdddZpiN+/r6hNrV8sIHqGPOaw86FiMtmTtFmEljqnvuRr0QewYIkejv9fSM
+ BoRtcMbhTaCve11N1C2lphdkCKp/+1P8HcLDexM5rKfB+SJUmXjZQE0a800nw570lhhM
+ WKxaJPPw/M0f9MpEjxd+ILaG6abXsaNP2euay+JA0xa9lTsfBaMC2JQ5W789FO//nJDv
+ E9hgfrFB9Z9JzRymuDP5dhKnwxchwg7gejxfICe8ZkzVUUAI4qldoCbZh7cFbdh0PcCN
+ r6ig==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726721262; x=1727326062;
+ d=1e100.net; s=20230601; t=1726721246; x=1727326046;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Mp3yl1TjwHpJ2DET+AsHEAo67XBOppY+FOew/7+eLo4=;
- b=xGVKjESM0g1hXWDh/x8Dr0Nz1gKxKQ2mVnncAHUTY6VG3K8OgkReSFOjzmkBwQUC5z
- Y3w+jUznn97uJW4E7cSW3AqQkNUX5T13OdtNQ8VORfiVXwmqrBTFeQfK808d3O8e/oUF
- I84g6kqaZycAcWoRLSJhx+7MR4wuC6vUTrKsZCGijVKY9CMMgGJyVX29+iULyBnhfp76
- ZvzR52+2bI/5ZgYuiDwwar+/VJS2pXfq7sUD6Di25M+YIrgiOwvsf8IXd6Bt7gdK1oMr
- H7K/7L1jnfcDWl8M2dGGeP9Xjl43Z4Cb9jGMaRbLfE07AHeRMa/OBFUlVGsNGuw4h5np
- tceA==
+ bh=kRUr7Rigd7KXsxIxUKl75LNzfJl8HLKhUx0dIIEBKEI=;
+ b=mZT/jvwmMHH/v9vpFGUOmsOKZYSKjr4otGGqa8DraJsei+GnX6iXThc8wBLmSxMYQy
+ jFEjQ+KgeE3HtFqd4cfNiCaZoD/1eTkdK+jChMJhdGeiGEPIi6EZCoDdkjvmW513G65t
+ vC9h06owni9FY9k5Hlip88UDab5T/lHwShQsgd0XdAua2mZJ3pPwAZKWKB/STwKYiQRT
+ 1wN4FhkLiv3qV5GPju6q9vIip1R8TzAa316pYU5+I8tMOFF8V9Ip6U0oJOtuVEXhJgKI
+ tO/8soO94o2wUwGuF/Z2JKWhHcy2fncoDzinEq2OVU+sqFVQq1OVCWQyc9EFsYEM7IOe
+ +2LQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVsPNwskFzZSJ8eIFukzvOotsLGrSHai5eoSOrnycm4PUr5yRVnX9sMOOsrB3wcIX0glADeP4xwUQiu@nongnu.org
-X-Gm-Message-State: AOJu0Ywr0Xq1FxV3lJxkcFj/nP39zaGco2QdwEIssTHaXQC3c/+ERgEV
- 11j8L7tTUS80u/hQeiN4j/OFRBLWST4DOp9IdP4tY1N0EQVSK5A8q8wyiWdmMZI=
-X-Google-Smtp-Source: AGHT+IGTH8Je8M6ejpwdBpT0Z6Qq2OjP8dnJm8Cntg/tnIi4gVE22oFZXABE3c3Lz1gX4VojsLrJsA==
-X-Received: by 2002:a05:6a00:2daa:b0:717:9154:b5b6 with SMTP id
- d2e1a72fcca58-7192606ce9emr38950232b3a.7.1726721261958; 
- Wed, 18 Sep 2024 21:47:41 -0700 (PDT)
+ AJvYcCUNynKvOLjSMDVOnGBNkLAf12tHi8NNhgwLfqIMDGHKrqN/TBXYCR8EWyG93vND/+/qMO8MtAsXgPtV@nongnu.org
+X-Gm-Message-State: AOJu0Yxll8MDWVKKFXp6vZN8G3pOBwmdW+p0h/FgTRhc79kHaq1TBN8Y
+ 9Aw9xGIzK9SNizEMCYnyy+z4z6bp2Nor9re6nJll8BuzxmagEk9SAYtYiWKmllg=
+X-Google-Smtp-Source: AGHT+IH/FIQf5IQhPyXOoAeAod0TK8mpE9ZpDATxxMEhePCSvOyFGL8wr8yUWnyqTIM9Ik9UbYX11A==
+X-Received: by 2002:a05:6a21:2d8a:b0:1cf:1217:ce87 with SMTP id
+ adf61e73a8af0-1cf75ea2251mr39237052637.2.1726721245964; 
+ Wed, 18 Sep 2024 21:47:25 -0700 (PDT)
 Received: from linaro.. (216-180-64-156.dyn.novuscom.net. [216.180.64.156])
  by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-71944bc279csm7478601b3a.188.2024.09.18.21.47.40
+ d2e1a72fcca58-71944bc279csm7478601b3a.188.2024.09.18.21.47.24
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 18 Sep 2024 21:47:41 -0700 (PDT)
+ Wed, 18 Sep 2024 21:47:25 -0700 (PDT)
 From: Pierrick Bouvier <pierrick.bouvier@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Palmer Dabbelt <palmer@dabbelt.com>,
@@ -106,16 +106,16 @@ Cc: Palmer Dabbelt <palmer@dabbelt.com>,
  Jesper Devantier <foss@defmacro.it>, Marcelo Tosatti <mtosatti@redhat.com>,
  Peter Maydell <peter.maydell@linaro.org>,
  Pierrick Bouvier <pierrick.bouvier@linaro.org>
-Subject: [PATCH v3 28/34] hw/pci: remove return after g_assert_not_reached()
-Date: Wed, 18 Sep 2024 21:46:35 -0700
-Message-Id: <20240919044641.386068-29-pierrick.bouvier@linaro.org>
+Subject: [PATCH v3 20/34] hw/tpm: remove break after g_assert_not_reached()
+Date: Wed, 18 Sep 2024 21:46:27 -0700
+Message-Id: <20240919044641.386068-21-pierrick.bouvier@linaro.org>
 X-Mailer: git-send-email 2.39.5
 In-Reply-To: <20240919044641.386068-1-pierrick.bouvier@linaro.org>
 References: <20240919044641.386068-1-pierrick.bouvier@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::433;
- envelope-from=pierrick.bouvier@linaro.org; helo=mail-pf1-x433.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::52b;
+ envelope-from=pierrick.bouvier@linaro.org; helo=mail-pg1-x52b.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -145,27 +145,21 @@ assertion mechanisms.
 Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 Signed-off-by: Pierrick Bouvier <pierrick.bouvier@linaro.org>
 ---
- hw/pci/pci-stub.c | 2 --
- 1 file changed, 2 deletions(-)
+ hw/tpm/tpm_spapr.c | 1 -
+ 1 file changed, 1 deletion(-)
 
-diff --git a/hw/pci/pci-stub.c b/hw/pci/pci-stub.c
-index c6950e21bd4..3397d0c82ea 100644
---- a/hw/pci/pci-stub.c
-+++ b/hw/pci/pci-stub.c
-@@ -47,13 +47,11 @@ void hmp_pcie_aer_inject_error(Monitor *mon, const QDict *qdict)
- MSIMessage pci_get_msi_message(PCIDevice *dev, int vector)
- {
-     g_assert_not_reached();
--    return (MSIMessage){};
- }
- 
- uint16_t pci_requester_id(PCIDevice *dev)
- {
-     g_assert_not_reached();
--    return 0;
- }
- 
- /* Required by ahci.c */
+diff --git a/hw/tpm/tpm_spapr.c b/hw/tpm/tpm_spapr.c
+index e084e987e6e..5f7a0dfc617 100644
+--- a/hw/tpm/tpm_spapr.c
++++ b/hw/tpm/tpm_spapr.c
+@@ -206,7 +206,6 @@ static int tpm_spapr_do_crq(struct SpaprVioDevice *dev, uint8_t *crq_data)
+                 break;
+             default:
+                 g_assert_not_reached();
+-                break;
+             }
+             trace_tpm_spapr_do_crq_get_version(be32_to_cpu(local_crq.data));
+             spapr_tpm_send_crq(dev, &local_crq);
 -- 
 2.39.5
 
