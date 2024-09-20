@@ -4,83 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E4E1CCF3973
-	for <qemu-riscv@archiver.kernel.org>; Thu, 19 Sep 2024 21:17:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BFDE6CF58C9
+	for <qemu-riscv@archiver.kernel.org>; Fri, 20 Sep 2024 04:28:53 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1srOWk-0004NI-9W; Thu, 19 Sep 2024 17:17:26 -0400
+	id 1srVG6-0008Av-Pk; Fri, 20 Sep 2024 00:28:42 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <gregorhaas1997@gmail.com>)
- id 1srOWh-0004JZ-VT; Thu, 19 Sep 2024 17:17:23 -0400
-Received: from mail-pl1-x62f.google.com ([2607:f8b0:4864:20::62f])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <gregorhaas1997@gmail.com>)
- id 1srOWf-0000gH-RN; Thu, 19 Sep 2024 17:17:23 -0400
-Received: by mail-pl1-x62f.google.com with SMTP id
- d9443c01a7336-2054e22ce3fso14506085ad.2; 
- Thu, 19 Sep 2024 14:17:20 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
+ id 1srVG4-00089O-1B; Fri, 20 Sep 2024 00:28:41 -0400
+Received: from out30-131.freemail.mail.aliyun.com ([115.124.30.131])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
+ id 1srVFz-0007Vr-KQ; Fri, 20 Sep 2024 00:28:39 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1726780639; x=1727385439; darn=nongnu.org;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=EoSjHxGhf0A2MNCQwDDUg4rIGiQy/h0AKZYL30BhkPs=;
- b=Ez744S5PTHBsbh8mWDkUqO3om/zja+oAHw1q5uzOdXoSBABQZOUpkn9Up9VGDGsn8j
- D6Ujl0tKhko+WDDFU9GUgC+cBkp0nPX4mjVH9LkiV9MWVe8Aayi4QX+Qb74roVGtOkz+
- 9JrUjW+w9T0G4PoPopNoaQAnspL3MXF3319Zu9GLRfCaRSjryPdq1zKw1VM2KNBl4YSX
- xTM3kfDVsxqiGlkNNgMnQOS+74CEl0vUgc0q1EVWFcqASRbLtwcyVUwZ89G4YUYmKLKE
- lpAXE4o4vuJoPtZlYw4k1hAlBNxhFiTIpyKly8VKyEqLNbmSD89ItBH9o77kwUgrONE3
- QrgQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726780639; x=1727385439;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=EoSjHxGhf0A2MNCQwDDUg4rIGiQy/h0AKZYL30BhkPs=;
- b=OyZDXexKFfiM25D00XM/ikhsiTKsbnZbhCjsDfWZr8031H5e0evEt81P2VPjCAw6BV
- vCPmMxz1w7/HfPCKxhueTjE9u84nrv7HS9ZZZep1ZZb+qGLHuJEiLbCN7IX8oBPuk9ir
- HII+GpHp+bcRcyJTsl/3peA4l5D8TIFnByy18xAawj5weCtCDiU18E3Js4yB1ze4/kFa
- c8qbH9nbbxpkpzLcX56CjKIHTJIooiViSwKV6RM7324oI1cUHLJxwXtKL9RiUP6XEVDC
- PvTpp1733PJRnpg2Sz4bdQrcTZxr+aonJ+VgjQdFa9gYzJ9gxtrIWztTp0P0RQ8yhXCe
- F6XQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWQky7WNVY5ayWMqzqwLw8cyiDL17SRXMWb5zHruCB+k/K/750Dcq7HkTX3RgZDPcshzGQj93DL/tAf@nongnu.org,
- AJvYcCXiSu7zO4FcmMD7h93GxaTs7kanT+mgeo90S1VIffPKTh4kSxcwx/gqK3VH/w8KnjRZF+1ubdC+cAEOJw==@nongnu.org
-X-Gm-Message-State: AOJu0YwAO3LXCNxMGjSLBNimDL9IBAoJUhC/eh7IcLQ3Ww5qlZkbgEZ1
- J+NfaoPgzxm8yjAKUy8CgwplSIs/Ps9IAQIzzi70vewqwdqFGPX6ohqKERonmex3BE5Fb0C2lgi
- tWJAk4hnBM550X29gxJp7zPRgZso=
-X-Google-Smtp-Source: AGHT+IHAvGMT4xeFtLIjE6EjMcJl2/vC+wLjcFSVbyA8+lR9ePxEbtdjGl5qTFACGv5YpvFSqsQYDFi4sgPo32XRcpQ=
-X-Received: by 2002:a17:902:f7c5:b0:207:45f1:d1fe with SMTP id
- d9443c01a7336-208d843e28dmr4947685ad.61.1726780639256; Thu, 19 Sep 2024
- 14:17:19 -0700 (PDT)
+ d=linux.alibaba.com; s=default;
+ t=1726806500; h=Content-Type:Message-ID:Date:MIME-Version:Subject:To:From;
+ bh=8gbIu4gMkY2DovfYpcLSoO6UpjE62TzSCvz97mFhAac=;
+ b=RjJ3jnWN6OFUCkJkEg0FW8AA391NSNAYpl0ulzGTSjvDZ0Fw/d/LyYuNJPVuilpqpreq5YHkBJ8dnfk/gKe+KjmxiaMKoJHGPG+F31SypZM6YQvp7UBgKcGa9CnijNion6IGCvegyTNzGAfOx9XPBW70xPsLd6LepnNcNBU255k=
+Received: from 30.166.64.81(mailfrom:zhiwei_liu@linux.alibaba.com
+ fp:SMTPD_---0WFJpG91_1726806497) by smtp.aliyun-inc.com;
+ Fri, 20 Sep 2024 12:28:18 +0800
+Content-Type: multipart/alternative;
+ boundary="------------0zcXMjZUsgBUHcKiOYt0JBFS"
+Message-ID: <f007a9e0-eb65-45c1-8ae2-e13fcffd199c@linux.alibaba.com>
+Date: Fri, 20 Sep 2024 12:27:11 +0800
 MIME-Version: 1.0
-References: <20240805210444.497723-1-gregorhaas1997@gmail.com>
- <CAKmqyKM_qgc+wwrDRzZM1yda=dZziM=1rGU2_SDeJU9PTnacVg@mail.gmail.com>
- <20240917-2683603a6ea10148772d365e@orel>
-In-Reply-To: <20240917-2683603a6ea10148772d365e@orel>
-From: Gregor Haas <gregorhaas1997@gmail.com>
-Date: Thu, 19 Sep 2024 14:16:42 -0700
-Message-ID: <CAMqWt3ofKAZVMjDcpA=xYcwaRw9ZJ51o1g+pp2vobVoyT2ODkQ@mail.gmail.com>
-Subject: Re: [PATCH v3 0/1] Add support for generating OpenSBI domains in the
- device tree
-To: Andrew Jones <ajones@ventanamicro.com>
-Cc: Alistair Francis <alistair23@gmail.com>, qemu-devel@nongnu.org,
- qemu-riscv@nongnu.org, 
- atishp@rivosinc.com, dbarboza@ventanamicro.com, alistair.francis@wdc.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::62f;
- envelope-from=gregorhaas1997@gmail.com; helo=mail-pl1-x62f.google.com
-X-Spam_score_int: -17
-X-Spam_score: -1.8
-X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v4 02/12] tcg/riscv: Add basic support for vector
+To: 0x48 Swung <swung0x48@outlook.com>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>
+Cc: "qemu-riscv@nongnu.org" <qemu-riscv@nongnu.org>,
+ "palmer@dabbelt.com" <palmer@dabbelt.com>,
+ "alistair.francis@wdc.com" <alistair.francis@wdc.com>,
+ "dbarboza@ventanamicro.com" <dbarboza@ventanamicro.com>,
+ "liwei1518@gmail.com" <liwei1518@gmail.com>,
+ "bmeng.cn@gmail.com" <bmeng.cn@gmail.com>,
+ TANG Tiancheng <tangtiancheng.ttc@alibaba-inc.com>
+References: <20240911132630.461-1-zhiwei_liu@linux.alibaba.com>
+ <20240911132630.461-3-zhiwei_liu@linux.alibaba.com>
+ <0d591570-02c6-48c9-9e3f-ef47ac20ce7d@linaro.org>
+ <b87e7a7e-41fd-4b26-bde3-9adca9babb24@linux.alibaba.com>
+ <33101e38-080d-4444-a8c3-9d01827e243f@linaro.org>
+ <b88244bc-aaf7-42f9-a90f-e4027ac72ebf@linux.alibaba.com>
+ <20e20fde-830f-4314-a944-e7973bda5d8c@linaro.org>
+ <SY8P300MB02825DF878585DDC68EB088CE06C2@SY8P300MB0282.AUSP300.PROD.OUTLOOK.COM>
+Content-Language: en-US
+From: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
+In-Reply-To: <SY8P300MB02825DF878585DDC68EB088CE06C2@SY8P300MB0282.AUSP300.PROD.OUTLOOK.COM>
+Received-SPF: pass client-ip=115.124.30.131;
+ envelope-from=zhiwei_liu@linux.alibaba.com;
+ helo=out30-131.freemail.mail.aliyun.com
+X-Spam_score_int: -174
+X-Spam_score: -17.5
+X-Spam_bar: -----------------
+X-Spam_report: (-17.5 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, ENV_AND_HDR_SPF_MATCH=-0.5,
+ HTML_MESSAGE=0.001, RCVD_IN_DNSWL_NONE=-0.0001,
+ RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001, RCVD_IN_VALIDITY_SAFE_BLOCKED=0.001,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001, UNPARSEABLE_RELAY=0.001,
+ USER_IN_DEF_DKIM_WL=-7.5,
+ USER_IN_DEF_SPF_WL=-7.5 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -96,63 +82,356 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Hi Drew,
+This is a multi-part message in MIME format.
+--------------0zcXMjZUsgBUHcKiOYt0JBFS
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 
-On Tue, Sep 17, 2024 at 5:45=E2=80=AFAM Andrew Jones <ajones@ventanamicro.c=
-om> wrote:
->
-> On Mon, Sep 09, 2024 at 01:27:05PM GMT, Alistair Francis wrote:
-> > On Tue, Aug 6, 2024 at 7:05=E2=80=AFAM Gregor Haas <gregorhaas1997@gmai=
-l.com> wrote:
-> > >
-> > > This patch series adds support for specifying OpenSBI domains on the =
-QEMU
-> > > command line. A simple example of what this looks like is below, incl=
-uding
-> > > mapping the board's UART into the secondary domain:
-> >
-> > Thanks for the patch, sorry it took me so long to look into this
-> >
-> > >
-> > > qemu-system-riscv64 -machine virt -bios fw_jump.bin -cpu max -smp 2 -=
-m 4G -nographic \
-> > >         -device opensbi-memregion,id=3Dmem,base=3D0xBC000000,order=3D=
-26,mmio=3Dfalse \
-> > >         -device opensbi-memregion,id=3Duart,base=3D0x10000000,order=
-=3D12,mmio=3Dtrue,device0=3D"/soc/serial@10000000" \
-> > >         -device opensbi-domain,id=3Ddomain,possible-harts=3D0-1,boot-=
-hart=3D0x0,next-addr=3D0xBC000000,next-mode=3D1,region0=3Dmem,perms0=3D0x3f=
-,region1=3Duart,perms1=3D0x3f
-> >
-> > This will need documentation added under docs (probably under
-> > docs/system/riscv) of how this should be used.
-> >
-> > I'm not convinced this is something we want though. A user can dump
-> > the QEMU DTB and edit it to support OpenSBI domains if they want.
-> >
->
-> I also feel like this is just pushing the population of device tree
-> nodes from an editor of a .dts file to the QEMU command line. If some
-> generation is needed, then maybe we need a script, possibly one which
-> has the same command line inputs as proposed here. afaik, we haven't
-> typically taken patches which help overlay the generated devicetree
-> with additional nodes. For example, see [1] for one such proposal
-> and rejection.
->
-> [1] https://lore.kernel.org/all/20210926183410.256484-1-sjg@chromium.org/
-> Thanks,
-> drew
 
-Thanks for the link! After reading through that chain, I can see that there=
- is
-typically high resistance to guest-specific device tree patches. As such, I=
-'ll
-probably abandon this patch series rather than doing more work to clean it =
-up.
-I do wonder why there is so much resistance to these types of changes when =
-the
-need for them arises so often in various boot firmwares.
+On 2024/9/20 12:01, 0x48 Swung wrote:
+> Hey everyone! Late to the party. Life happens sometimes ;)
+> Just discovered this patch and this mail list, and I'd like to provide 
+> some background story here.
+> I originally provided my initial implementation in a downstream repo 
+> last year, namely 
+> https://github.com/plctlab/plct-qemu/tree/plct-riscv-backend-rvv .
+> I'm new to contributing to qemu and also take part in the open-source 
+> community upstreaming process as a whole, so I may make mistakes in my 
+> following claims, but I see some confusion here:
+> 1. The PLCT branch (which includes my original commits) is 
+> open-sourced using GPLv2, which follows QEMU's upstream repo. So 
+> according to the license, my modification should be EXPLICITLY shown 
+> in the patch, but I haven't seen any.
+I think I have carefully processed it.
+> 2. I do consent upstreaming my patch last year, in the form of a patch 
+> submitted with modifications from T-head, and on behalf of them. And 
+> it was agreed back in the days that I can be mentioned as one of the 
+> authors. But it turnsout that there's no "sign-off", "author", 
+> "co-author" line mentioning me.
+
+The author of this patch is you. You can see it from the "From: 
+Swung0x48<swung0x48@outlook.com>" in the patch.
+
+In V4, TianCheng thinks he also have done some contribution to this 
+patch. Thus he adds himself as a co-author.
+
+> If I don't speak out in this situation, does it imply that this patch 
+> is purely LIU Zhiwei's work and have nothing to do with me?
+No. I just review this patch set and sent it to the mail list. None of 
+this patch set belong to me.
+>
+> I'd like LIU to separate my patch and his modification to two separate 
+> patches, and explicitly name where are those patches coming from, so 
+> that this patch can comply to GPLv2 license and can we clarify those 
+> misunderstandings.
+
+I think we have done it. Welcome to point out my mistake if you find some.
 
 Thanks,
-Gregor
+Zhiwei
+
+>
+> I don't want to take it personally , but I do smell something's wrong 
+> going on here...
+>
+> Best Regards,
+> Swung0x48 (aka. Huang Shiyuan)
+>
+> Get Outlook for Android <https://aka.ms/AAb9ysg>
+> ------------------------------------------------------------------------
+> *From:* Richard Henderson <richard.henderson@linaro.org>
+> *Sent:* Wednesday, September 18, 2024 10:27:16 PM
+> *To:* LIU Zhiwei <zhiwei_liu@linux.alibaba.com>; qemu-devel@nongnu.org 
+> <qemu-devel@nongnu.org>
+> *Cc:* qemu-riscv@nongnu.org <qemu-riscv@nongnu.org>; 
+> palmer@dabbelt.com <palmer@dabbelt.com>; alistair.francis@wdc.com 
+> <alistair.francis@wdc.com>; dbarboza@ventanamicro.com 
+> <dbarboza@ventanamicro.com>; liwei1518@gmail.com 
+> <liwei1518@gmail.com>; bmeng.cn@gmail.com <bmeng.cn@gmail.com>; 
+> Swung0x48 <swung0x48@outlook.com>; TANG Tiancheng 
+> <tangtiancheng.ttc@alibaba-inc.com>
+> *Subject:* Re: [PATCH v4 02/12] tcg/riscv: Add basic support for vector
+> On 9/18/24 12:43, LIU Zhiwei wrote:
+> >
+> > On 2024/9/18 18:11, Richard Henderson wrote:
+> >> On 9/18/24 07:17, LIU Zhiwei wrote:
+> >>>
+> >>> On 2024/9/12 2:41, Richard Henderson wrote:
+> >>>> On 9/11/24 06:26, LIU Zhiwei wrote:
+> >>>>> From: Swung0x48<swung0x48@outlook.com>
+> >>>>>
+> >>>>> The RISC-V vector instruction set utilizes the LMUL field to group
+> >>>>> multiple registers, enabling variable-length vector registers. This
+> >>>>> implementation uses only the first register number of each group 
+> while
+> >>>>> reserving the other register numbers within the group.
+> >>>>>
+> >>>>> In TCG, each VEC_IR can have 3 types (TCG_TYPE_V64/128/256), and the
+> >>>>> host runtime needs to adjust LMUL based on the type to use different
+> >>>>> register groups.
+> >>>>>
+> >>>>> This presents challenges for TCG's register allocation. 
+> Currently, we
+> >>>>> avoid modifying the register allocation part of TCG and only 
+> expose the
+> >>>>> minimum number of vector registers.
+> >>>>>
+> >>>>> For example, when the host vlen is 64 bits and type is 
+> TCG_TYPE_V256, with
+> >>>>> LMUL equal to 4, we use 4 vector registers as one register 
+> group. We can
+> >>>>> use a maximum of 8 register groups, but the V0 register number 
+> is reserved
+> >>>>> as a mask register, so we can effectively use at most 7 register 
+> groups.
+> >>>>> Moreover, when type is smaller than TCG_TYPE_V256, only 7 
+> registers are
+> >>>>> forced to be used. This is because TCG cannot yet dynamically 
+> constrain
+> >>>>> registers with type; likewise, when the host vlen is 128 bits and
+> >>>>> TCG_TYPE_V256, we can use at most 15 registers.
+> >>>>>
+> >>>>> There is not much pressure on vector register allocation in TCG 
+> now, so
+> >>>>> using 7 registers is feasible and will not have a major impact 
+> on code
+> >>>>> generation.
+> >>>>>
+> >>>>> This patch:
+> >>>>> 1. Reserves vector register 0 for use as a mask register.
+> >>>>> 2. When using register groups, reserves the additional registers 
+> within
+> >>>>>     each group.
+> >>>>>
+> >>>>> Signed-off-by: TANG Tiancheng<tangtiancheng.ttc@alibaba-inc.com>
+> >>>>> Co-authored-by: TANG Tiancheng<tangtiancheng.ttc@alibaba-inc.com>
+> >>>>
+> >>>> If there is a co-author, there should be another Signed-off-by.
+> >>>
+> >>> This patch has added a tag:
+> >>>
+> >>> Signed-off-by: TANG Tiancheng<tangtiancheng.ttc@alibaba-inc.com>
+> >>>
+> >>>
+> >>> Do you mean we should add the same tag twice?
+> >>
+> >> The from line is "Swung0x48 <swung0x48@outlook.com>".
+> >> If this is an alternate email for TANG Tiancheng,
+> >
+> > No, Swung0x48 is another author.
+>
+> Then we need a proper Signed-off-by line from that author.
+>
+>
+> r~
+--------------0zcXMjZUsgBUHcKiOYt0JBFS
+Content-Type: text/html; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  </head>
+  <body>
+    <p><br>
+    </p>
+    <div class="moz-cite-prefix">On 2024/9/20 12:01, 0x48 Swung wrote:<br>
+    </div>
+    <blockquote type="cite"
+cite="mid:SY8P300MB02825DF878585DDC68EB088CE06C2@SY8P300MB0282.AUSP300.PROD.OUTLOOK.COM">
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <div dir="auto">Hey ever<span>yone! Late to the <span>party. Life
+            happens sometimes ;)</span></span></div>
+      <div dir="auto"><span><span>Just discovered this patch and this
+            mail list, and I'd like to provide some back<span>ground
+              story here.</span></span></span></div>
+      <div dir="auto">I originally provided my initial implementation in
+        a downstream repo last year, namely <a rel="noreferrer noopener"
+href="https://github.com/plctlab/plct-qemu/tree/plct-riscv-backend-rvv"
+style="font-family: sans-serif; font-size: medium; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; color: rgb(0, 120, 212); background-color: rgb(255, 255, 255);"
+          moz-do-not-send="true" class="moz-txt-link-freetext">https://github.com/plctlab/plct-qemu/tree/plct-riscv-backend-rvv</a> .</div>
+      <div dir="auto">I'm new to contributing to qemu and also take part
+        in the open-source community upstreaming process as a whole, so
+        I may make mistakes in my following claims, but I see some
+        confusion here:</div>
+      <div dir="auto">1. The PLCT branch (which includes my original
+        commits) is open-sourced using GPLv2, which follows QEMU's
+        upstream repo. So acc<span>ording to the license, my
+          modification should be EXPLICITLY shown in the patch, but I
+          haven't seen any.</span></div>
+    </blockquote>
+    I think I have carefully processed it.<br>
+    <blockquote type="cite"
+cite="mid:SY8P300MB02825DF878585DDC68EB088CE06C2@SY8P300MB0282.AUSP300.PROD.OUTLOOK.COM">
+      <div dir="auto"><span>2. I do consent upstreaming my patch last
+          year, in the form of a patch submitted with modifications from
+          T-head, and on behalf of them. And it was agreed back in the
+          days that I can be mentioned as one of the authors. But it
+          turns<span> out that there's no "sign-off", "author",
+            "co-author" line mentioning me.</span></span></div>
+    </blockquote>
+    <p>The author of this patch is you. You can see it from the "<font
+        size="2"><span style="font-size:11pt;">From:
+          Swung0x48<a class="moz-txt-link-rfc2396E" href="mailto:swung0x48@outlook.com">&lt;swung0x48@outlook.com&gt;</a></span></font>" in the
+      patch.</p>
+    <p>In V4, TianCheng thinks he also have done some contribution to
+      this patch. Thus he adds himself as a co-author.<br>
+    </p>
+    <blockquote type="cite"
+cite="mid:SY8P300MB02825DF878585DDC68EB088CE06C2@SY8P300MB0282.AUSP300.PROD.OUTLOOK.COM">
+      <div dir="auto"><span><span> If I don't speak out in this situ<span>ation,
+              does it imply that this patch is purely LIU Zhiwei's work
+              and have nothing to <span>do with me?</span></span></span></span></div>
+    </blockquote>
+    No. I just review this patch set and sent it to the mail list. None
+    of this patch set belong to me.<br>
+    <blockquote type="cite"
+cite="mid:SY8P300MB02825DF878585DDC68EB088CE06C2@SY8P300MB0282.AUSP300.PROD.OUTLOOK.COM">
+      <div dir="auto"><span><span><span><span><br>
+              </span></span></span></span></div>
+      <div dir="auto"><span><span><span><span>I'd like LIU to separate
+                my patch and his modifi<span>cation to two separate
+                  patches, and explicitly name where are tho<span>se
+                    patches com<span>ing from, so that this patch can
+                      comply to GPLv2 license and can we clarify those
+                      misun<span>derstandings.</span></span></span></span></span></span></span></span></div>
+    </blockquote>
+    <p>I think we have done it. Welcome to point out my mistake if you
+      find some.</p>
+    <p>Thanks,<br>
+      Zhiwei<br>
+    </p>
+    <blockquote type="cite"
+cite="mid:SY8P300MB02825DF878585DDC68EB088CE06C2@SY8P300MB0282.AUSP300.PROD.OUTLOOK.COM">
+      <div dir="auto"><span><span><span><span><br>
+              </span></span></span></span></div>
+      <div dir="auto"><span><span><span><span>I don't want to take it <span>personally
+                  , but I do smell something's wrong going on here...</span></span></span></span></span></div>
+      <div dir="auto"><span><span><span><span><span><br>
+                </span></span></span></span></span></div>
+      <div dir="auto"><span><span><span><span><span>Best Rega<span>rds,</span></span></span></span></span></span></div>
+      <div dir="auto"><span><span><span><span><span><span>Swung0x48
+                    (aka. Huang Shiyuan)</span></span></span></span></span></span></div>
+      <div><br>
+      </div>
+      <div id="ms-outlook-mobile-signature" dir="auto">Get <a
+          href="https://aka.ms/AAb9ysg" moz-do-not-send="true">
+          Outlook for Android</a></div>
+      <hr style="display:inline-block;width:98%" tabindex="-1">
+      <div id="divRplyFwdMsg" dir="ltr"><font style="font-size:11pt"
+          face="Calibri, sans-serif" color="#000000"><b>From:</b>
+          Richard Henderson <a class="moz-txt-link-rfc2396E" href="mailto:richard.henderson@linaro.org">&lt;richard.henderson@linaro.org&gt;</a><br>
+          <b>Sent:</b> Wednesday, September 18, 2024 10:27:16 PM<br>
+          <b>To:</b> LIU Zhiwei <a class="moz-txt-link-rfc2396E" href="mailto:zhiwei_liu@linux.alibaba.com">&lt;zhiwei_liu@linux.alibaba.com&gt;</a>;
+          <a class="moz-txt-link-abbreviated" href="mailto:qemu-devel@nongnu.org">qemu-devel@nongnu.org</a> <a class="moz-txt-link-rfc2396E" href="mailto:qemu-devel@nongnu.org">&lt;qemu-devel@nongnu.org&gt;</a><br>
+          <b>Cc:</b> <a class="moz-txt-link-abbreviated" href="mailto:qemu-riscv@nongnu.org">qemu-riscv@nongnu.org</a>
+          <a class="moz-txt-link-rfc2396E" href="mailto:qemu-riscv@nongnu.org">&lt;qemu-riscv@nongnu.org&gt;</a>; <a class="moz-txt-link-abbreviated" href="mailto:palmer@dabbelt.com">palmer@dabbelt.com</a>
+          <a class="moz-txt-link-rfc2396E" href="mailto:palmer@dabbelt.com">&lt;palmer@dabbelt.com&gt;</a>; <a class="moz-txt-link-abbreviated" href="mailto:alistair.francis@wdc.com">alistair.francis@wdc.com</a>
+          <a class="moz-txt-link-rfc2396E" href="mailto:alistair.francis@wdc.com">&lt;alistair.francis@wdc.com&gt;</a>; <a class="moz-txt-link-abbreviated" href="mailto:dbarboza@ventanamicro.com">dbarboza@ventanamicro.com</a>
+          <a class="moz-txt-link-rfc2396E" href="mailto:dbarboza@ventanamicro.com">&lt;dbarboza@ventanamicro.com&gt;</a>; <a class="moz-txt-link-abbreviated" href="mailto:liwei1518@gmail.com">liwei1518@gmail.com</a>
+          <a class="moz-txt-link-rfc2396E" href="mailto:liwei1518@gmail.com">&lt;liwei1518@gmail.com&gt;</a>; <a class="moz-txt-link-abbreviated" href="mailto:bmeng.cn@gmail.com">bmeng.cn@gmail.com</a>
+          <a class="moz-txt-link-rfc2396E" href="mailto:bmeng.cn@gmail.com">&lt;bmeng.cn@gmail.com&gt;</a>; Swung0x48
+          <a class="moz-txt-link-rfc2396E" href="mailto:swung0x48@outlook.com">&lt;swung0x48@outlook.com&gt;</a>; TANG Tiancheng
+          <a class="moz-txt-link-rfc2396E" href="mailto:tangtiancheng.ttc@alibaba-inc.com">&lt;tangtiancheng.ttc@alibaba-inc.com&gt;</a><br>
+          <b>Subject:</b> Re: [PATCH v4 02/12] tcg/riscv: Add basic
+          support for vector</font>
+        <div> </div>
+      </div>
+      <div class="BodyFragment"><font size="2"><span
+            style="font-size:11pt;">
+            <div class="PlainText">On 9/18/24 12:43, LIU Zhiwei wrote:<br>
+              &gt; <br>
+              &gt; On 2024/9/18 18:11, Richard Henderson wrote:<br>
+              &gt;&gt; On 9/18/24 07:17, LIU Zhiwei wrote:<br>
+              &gt;&gt;&gt;<br>
+              &gt;&gt;&gt; On 2024/9/12 2:41, Richard Henderson wrote:<br>
+              &gt;&gt;&gt;&gt; On 9/11/24 06:26, LIU Zhiwei wrote:<br>
+              &gt;&gt;&gt;&gt;&gt; From:
+              Swung0x48<a class="moz-txt-link-rfc2396E" href="mailto:swung0x48@outlook.com">&lt;swung0x48@outlook.com&gt;</a><br>
+              &gt;&gt;&gt;&gt;&gt;<br>
+              &gt;&gt;&gt;&gt;&gt; The RISC-V vector instruction set
+              utilizes the LMUL field to group<br>
+              &gt;&gt;&gt;&gt;&gt; multiple registers, enabling
+              variable-length vector registers. This<br>
+              &gt;&gt;&gt;&gt;&gt; implementation uses only the first
+              register number of each group while<br>
+              &gt;&gt;&gt;&gt;&gt; reserving the other register numbers
+              within the group.<br>
+              &gt;&gt;&gt;&gt;&gt;<br>
+              &gt;&gt;&gt;&gt;&gt; In TCG, each VEC_IR can have 3 types
+              (TCG_TYPE_V64/128/256), and the<br>
+              &gt;&gt;&gt;&gt;&gt; host runtime needs to adjust LMUL
+              based on the type to use different<br>
+              &gt;&gt;&gt;&gt;&gt; register groups.<br>
+              &gt;&gt;&gt;&gt;&gt;<br>
+              &gt;&gt;&gt;&gt;&gt; This presents challenges for TCG's
+              register allocation. Currently, we<br>
+              &gt;&gt;&gt;&gt;&gt; avoid modifying the register
+              allocation part of TCG and only expose the<br>
+              &gt;&gt;&gt;&gt;&gt; minimum number of vector registers.<br>
+              &gt;&gt;&gt;&gt;&gt;<br>
+              &gt;&gt;&gt;&gt;&gt; For example, when the host vlen is 64
+              bits and type is TCG_TYPE_V256, with<br>
+              &gt;&gt;&gt;&gt;&gt; LMUL equal to 4, we use 4 vector
+              registers as one register group. We can<br>
+              &gt;&gt;&gt;&gt;&gt; use a maximum of 8 register groups,
+              but the V0 register number is reserved<br>
+              &gt;&gt;&gt;&gt;&gt; as a mask register, so we can
+              effectively use at most 7 register groups.<br>
+              &gt;&gt;&gt;&gt;&gt; Moreover, when type is smaller than
+              TCG_TYPE_V256, only 7 registers are<br>
+              &gt;&gt;&gt;&gt;&gt; forced to be used. This is because
+              TCG cannot yet dynamically constrain<br>
+              &gt;&gt;&gt;&gt;&gt; registers with type; likewise, when
+              the host vlen is 128 bits and<br>
+              &gt;&gt;&gt;&gt;&gt; TCG_TYPE_V256, we can use at most 15
+              registers.<br>
+              &gt;&gt;&gt;&gt;&gt;<br>
+              &gt;&gt;&gt;&gt;&gt; There is not much pressure on vector
+              register allocation in TCG now, so<br>
+              &gt;&gt;&gt;&gt;&gt; using 7 registers is feasible and
+              will not have a major impact on code<br>
+              &gt;&gt;&gt;&gt;&gt; generation.<br>
+              &gt;&gt;&gt;&gt;&gt;<br>
+              &gt;&gt;&gt;&gt;&gt; This patch:<br>
+              &gt;&gt;&gt;&gt;&gt; 1. Reserves vector register 0 for use
+              as a mask register.<br>
+              &gt;&gt;&gt;&gt;&gt; 2. When using register groups,
+              reserves the additional registers within<br>
+              &gt;&gt;&gt;&gt;&gt;     each group.<br>
+              &gt;&gt;&gt;&gt;&gt;<br>
+              &gt;&gt;&gt;&gt;&gt; Signed-off-by: TANG
+              Tiancheng<a class="moz-txt-link-rfc2396E" href="mailto:tangtiancheng.ttc@alibaba-inc.com">&lt;tangtiancheng.ttc@alibaba-inc.com&gt;</a><br>
+              &gt;&gt;&gt;&gt;&gt; Co-authored-by: TANG
+              Tiancheng<a class="moz-txt-link-rfc2396E" href="mailto:tangtiancheng.ttc@alibaba-inc.com">&lt;tangtiancheng.ttc@alibaba-inc.com&gt;</a><br>
+              &gt;&gt;&gt;&gt;<br>
+              &gt;&gt;&gt;&gt; If there is a co-author, there should be
+              another Signed-off-by.<br>
+              &gt;&gt;&gt;<br>
+              &gt;&gt;&gt; This patch has added a tag:<br>
+              &gt;&gt;&gt;<br>
+              &gt;&gt;&gt; Signed-off-by: TANG
+              Tiancheng<a class="moz-txt-link-rfc2396E" href="mailto:tangtiancheng.ttc@alibaba-inc.com">&lt;tangtiancheng.ttc@alibaba-inc.com&gt;</a><br>
+              &gt;&gt;&gt;<br>
+              &gt;&gt;&gt;<br>
+              &gt;&gt;&gt; Do you mean we should add the same tag twice?<br>
+              &gt;&gt;<br>
+              &gt;&gt; The from line is "Swung0x48
+              <a class="moz-txt-link-rfc2396E" href="mailto:swung0x48@outlook.com">&lt;swung0x48@outlook.com&gt;</a>".<br>
+              &gt;&gt; If this is an alternate email for TANG Tiancheng,<br>
+              &gt; <br>
+              &gt; No, Swung0x48 is another author.<br>
+              <br>
+              Then we need a proper Signed-off-by line from that author.<br>
+              <br>
+              <br>
+              r~<br>
+            </div>
+          </span></font></div>
+    </blockquote>
+  </body>
+</html>
+
+--------------0zcXMjZUsgBUHcKiOYt0JBFS--
 
