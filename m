@@ -4,68 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 55704C78853
-	for <qemu-riscv@archiver.kernel.org>; Fri, 20 Sep 2024 14:28:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9D091CF9C4B
+	for <qemu-riscv@archiver.kernel.org>; Fri, 20 Sep 2024 15:11:21 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1srecY-0008HE-82; Fri, 20 Sep 2024 10:28:30 -0400
+	id 1srfHs-0002iP-GI; Fri, 20 Sep 2024 11:11:12 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
- id 1srecO-0008Cx-9d; Fri, 20 Sep 2024 10:28:20 -0400
-Received: from out30-118.freemail.mail.aliyun.com ([115.124.30.118])
+ (Exim 4.90_1) (envelope-from <laurent@vivier.eu>)
+ id 1srfHl-0002Ho-Kb; Fri, 20 Sep 2024 11:11:05 -0400
+Received: from mout.kundenserver.de ([217.72.192.75])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
- id 1srecK-0006Qt-4i; Fri, 20 Sep 2024 10:28:20 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linux.alibaba.com; s=default;
- t=1726842483; h=Content-Type:Message-ID:Date:MIME-Version:Subject:To:From;
- bh=4+Z1zB86W08EFswS88V1tEOdDVh9ogt/XoR/HKLOluE=;
- b=KcWrpncWPcMGON4QhfhqqP0uPQReh3Q96F5KCUYAN4wc5/w81KcjkQJ6s78hTpGSRoHWENjRlH803OxL+4tXuUHSGfWV+P+4avgv/C5+Yi2CrDzjB8QtEDlgHJIhxBzNdEpc38jLRUUcPOqIe8WTztMichIpknyRVe1yyWPgrt0=
-Received: from 192.168.3.95(mailfrom:zhiwei_liu@linux.alibaba.com
- fp:SMTPD_---0WFLKmIh_1726842477) by smtp.aliyun-inc.com;
- Fri, 20 Sep 2024 22:27:58 +0800
-Content-Type: multipart/alternative;
- boundary="------------GcLzkqPsHQyKeZ4EltwQppKH"
-Message-ID: <a7973dea-a430-473f-b0e9-c85fdeda1ac3@linux.alibaba.com>
-Date: Fri, 20 Sep 2024 22:26:51 +0800
+ (Exim 4.90_1) (envelope-from <laurent@vivier.eu>)
+ id 1srfHg-0003nw-2L; Fri, 20 Sep 2024 11:11:04 -0400
+Received: from quad ([82.64.211.94]) by mrelayeu.kundenserver.de (mreue109
+ [212.227.15.183]) with ESMTPSA (Nemesis) id 1N7iKq-1rwy9X2rg2-01514m; Fri, 20
+ Sep 2024 17:10:37 +0200
+From: Laurent Vivier <laurent@vivier.eu>
+To: qemu-devel@nongnu.org
+Cc: Brian Cain <bcain@quicinc.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Weiwei Li <liwei1518@gmail.com>, Laurent Vivier <laurent@vivier.eu>,
+ Alistair Francis <alistair.francis@wdc.com>, qemu-riscv@nongnu.org,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Bin Meng <bmeng.cn@gmail.com>, Palmer Dabbelt <palmer@dabbelt.com>
+Subject: [PATCH 3/6] linux-user,riscv: move to syscalltbl file
+Date: Fri, 20 Sep 2024 17:10:31 +0200
+Message-ID: <20240920151034.859533-4-laurent@vivier.eu>
+X-Mailer: git-send-email 2.46.0
+In-Reply-To: <20240920151034.859533-1-laurent@vivier.eu>
+References: <20240920151034.859533-1-laurent@vivier.eu>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 02/12] tcg/riscv: Add basic support for vector
-To: 0x48 Swung <swung0x48@outlook.com>,
- Richard Henderson <richard.henderson@linaro.org>,
- "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>,
- "liwei1518@gmail.com" <liwei1518@gmail.com>
-Cc: "qemu-riscv@nongnu.org" <qemu-riscv@nongnu.org>,
- "palmer@dabbelt.com" <palmer@dabbelt.com>,
- "alistair.francis@wdc.com" <alistair.francis@wdc.com>,
- "dbarboza@ventanamicro.com" <dbarboza@ventanamicro.com>,
- "liwei1518@gmail.com" <liwei1518@gmail.com>,
- "bmeng.cn@gmail.com" <bmeng.cn@gmail.com>,
- TANG Tiancheng <tangtiancheng.ttc@alibaba-inc.com>
-References: <20240911132630.461-1-zhiwei_liu@linux.alibaba.com>
- <20240911132630.461-3-zhiwei_liu@linux.alibaba.com>
- <0d591570-02c6-48c9-9e3f-ef47ac20ce7d@linaro.org>
- <b87e7a7e-41fd-4b26-bde3-9adca9babb24@linux.alibaba.com>
- <33101e38-080d-4444-a8c3-9d01827e243f@linaro.org>
- <b88244bc-aaf7-42f9-a90f-e4027ac72ebf@linux.alibaba.com>
- <20e20fde-830f-4314-a944-e7973bda5d8c@linaro.org>
- <SY8P300MB02825DF878585DDC68EB088CE06C2@SY8P300MB0282.AUSP300.PROD.OUTLOOK.COM>
-Content-Language: en-US
-From: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
-In-Reply-To: <SY8P300MB02825DF878585DDC68EB088CE06C2@SY8P300MB0282.AUSP300.PROD.OUTLOOK.COM>
-Received-SPF: pass client-ip=115.124.30.118;
- envelope-from=zhiwei_liu@linux.alibaba.com;
- helo=out30-118.freemail.mail.aliyun.com
-X-Spam_score_int: -174
-X-Spam_score: -17.5
-X-Spam_bar: -----------------
-X-Spam_report: (-17.5 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, ENV_AND_HDR_SPF_MATCH=-0.5,
- HTML_MESSAGE=0.001, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001, UNPARSEABLE_RELAY=0.001, USER_IN_DEF_DKIM_WL=-7.5,
- USER_IN_DEF_SPF_WL=-7.5 autolearn=ham autolearn_force=no
+Content-Transfer-Encoding: 8bit
+X-Provags-ID: V03:K1:Aaeiu90qW+EuQmGGoP2vi1ziKHBzq9unBeROqxkq480FWH8+2LY
+ cs0IQUV1Y9MDZOEESsL5z09LoesKu8VmN1efiSQ41Jqy0+3mdDnkgmrlOnPpDzsphtkuiG/
+ wGWW2yKPbiLO/nX9nz8JJ8UHM2u++ola4jYZvgREQ+KDHM/FN1nZc6NRC3C6jvN0p05VRFD
+ /uRU56ZgECE4u2vVCTMSA==
+UI-OutboundReport: notjunk:1;M01:P0:2ZlScIq7I2k=;taihnGN3gymaff2hPL64UUqZx6U
+ XfDt94oaCfroi9S6Gs4c09RQ+C+Z3bQqKtO4WkpYDpjKhRi/bkesZyusp4sSlVbWi1ShoqGbo
+ EZhpORrUyKnXBO4dDVaTDCalFPAHgqksRwjSu5EEyLjnA+9FDHv4vtHsYs50SgyrB/4ZFlTQL
+ x0ZlddU9otMG6tkKwMBJHoZuc4JfuP1ENvK81GWF6lrYqfwquV0eZA4bejyVSUajq2KgyFK8C
+ 9WjTiYv/Faq721zk01qvlh/+2P1bI/uVz+vAOo9JWxVNZZv1A6wZFJ+XFCR5iUOJ3Wb9pJk6c
+ 6pHuoIjYHLUakn21Xit1JVBJe0zdENGTt29EgPVxeTGlDtka9YLoDwJNLvLFIvMX+mRIzEVU9
+ QR47/CHSzY2La8qoDKzj4pqigJ8nZ5akJ7maTEg3XS6282bMhzGpTefhIDokI4uphwPRKUKEk
+ 59mKmEiVS4F+ozhIqr/5ctYeYf0aJQ9kvAkdkNBUw6wuIYWnRGNLqsXUx0M0YBpzXMh+YIF8z
+ lPYS6e1k9uZ7mLJobV17tNhkMNTDRZnD06wgO3VqGb4l2ZbXtaWXOvFyCS3aNOwCzQoLvzK2Y
+ X2Tq0GHxch8/MZpgByuhsAAoYys5nOUw3oKUhs4zUnvV0ofz8eRT0506PdQliyRBPca/LC+sg
+ 0VBQwxqBQDQNaVdTYumquyNQZ0snLDqyO8ApJ8KgtZuaskr6qLTeEgSshje2OLd8PNcp9gmfO
+ SQ6FAgFP8Y7rvRhBkFrcG/r/8lyWiErSA==
+Received-SPF: pass client-ip=217.72.192.75; envelope-from=laurent@vivier.eu;
+ helo=mout.kundenserver.de
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_NONE=-0.0001,
+ RCVD_IN_MSPIKE_H4=0.001, RCVD_IN_MSPIKE_WL=0.001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -81,329 +75,1244 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-This is a multi-part message in MIME format.
---------------GcLzkqPsHQyKeZ4EltwQppKH
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Since kernel v6.11 riscv has moved from syscall_nr.h file
+to syscall.tbl (3db80c999deb ("riscv: convert to generic syscall
+table"))
 
+Update linux-user scripts to be able to retrieve syscall numbers
+from linux syscall.tbl instead of syscall_nr.h.
+New syscall.tbl is imported from linux v6.11 using updated
+scripts/update-syscalltbl.sh
 
-On 2024/9/20 12:01, 0x48 Swung wrote:
-> Hey everyone! Late to the party. Life happens sometimes ;)
-> Just discovered this patch and this mail list, and I'd like to provide 
-> some background story here.
-> I originally provided my initial implementation in a downstream repo 
-> last year, namely 
-> https://github.com/plctlab/plct-qemu/tree/plct-riscv-backend-rvv .
-> I'm new to contributing to qemu and also take part in the open-source 
-> community upstreaming process as a whole, so I may make mistakes in my 
-> following claims, but I see some confusion here:
-> 1. The PLCT branch (which includes my original commits) is 
-> open-sourced using GPLv2, which follows QEMU's upstream repo. So 
-> according to the license, my modification should be EXPLICITLY shown 
-> in the patch, but I haven't seen any.
-> 2. I do consent upstreaming my patch last year, in the form of a patch 
-> submitted with modifications from T-head, and on behalf of them. And 
-> it was agreed back in the days that I can be mentioned as one of the 
-> authors. But it turnsout that there's no "sign-off", "author", 
-> "co-author" line mentioning me. If I don't speak out in this 
-> situation, does it imply that this patch is purely LIU Zhiwei's work 
-> and have nothing to do with me?
->
-> I'd like LIU to separate my patch and his modification to two separate 
-> patches, and explicitly name where are those patches coming from, so 
-> that this patch can comply to GPLv2 license and can we clarify those 
-> misunderstandings.
->
-> I don't want to take it personally , but I do smell something's wrong 
-> going on here...
+Signed-off-by: Laurent Vivier <laurent@vivier.eu>
+---
+ configs/targets/riscv32-linux-user.mak |   3 +
+ configs/targets/riscv64-linux-user.mak |   3 +
+ linux-user/riscv/cpu_loop.c            |   2 +-
+ linux-user/riscv/meson.build           |   6 +
+ linux-user/riscv/syscall.tbl           | 405 +++++++++++++++++++++++++
+ linux-user/riscv/syscall32_nr.h        | 325 --------------------
+ linux-user/riscv/syscall64_nr.h        | 331 --------------------
+ linux-user/riscv/syscall_nr.h          |  15 -
+ linux-user/riscv/syscallhdr.sh         |  28 ++
+ scripts/gensyscalls.sh                 |   2 -
+ scripts/update-syscalltbl.sh           |   1 +
+ 11 files changed, 447 insertions(+), 674 deletions(-)
+ create mode 100644 linux-user/riscv/syscall.tbl
+ delete mode 100644 linux-user/riscv/syscall32_nr.h
+ delete mode 100644 linux-user/riscv/syscall64_nr.h
+ delete mode 100644 linux-user/riscv/syscall_nr.h
+ create mode 100644 linux-user/riscv/syscallhdr.sh
 
-I think there was a misunderstanding. But I will not explain it too much 
-here. If you agree, please don't block this work and send the tag as 
-Daniel and Markus point out.
+diff --git a/configs/targets/riscv32-linux-user.mak b/configs/targets/riscv32-linux-user.mak
+index 9761618e67f4..0dbaf5210ac8 100644
+--- a/configs/targets/riscv32-linux-user.mak
++++ b/configs/targets/riscv32-linux-user.mak
+@@ -4,3 +4,6 @@ TARGET_ABI_DIR=riscv
+ TARGET_XML_FILES= gdb-xml/riscv-32bit-cpu.xml gdb-xml/riscv-32bit-fpu.xml gdb-xml/riscv-64bit-fpu.xml gdb-xml/riscv-32bit-virtual.xml
+ CONFIG_SEMIHOSTING=y
+ CONFIG_ARM_COMPATIBLE_SEMIHOSTING=y
++TARGET_SYSTBL_ABI=32
++TARGET_SYSTBL_ABI=common,32,riscv,memfd_secret
++TARGET_SYSTBL=syscall.tbl
+diff --git a/configs/targets/riscv64-linux-user.mak b/configs/targets/riscv64-linux-user.mak
+index cfd1fd382f92..477cd4523e2b 100644
+--- a/configs/targets/riscv64-linux-user.mak
++++ b/configs/targets/riscv64-linux-user.mak
+@@ -4,3 +4,6 @@ TARGET_ABI_DIR=riscv
+ TARGET_XML_FILES= gdb-xml/riscv-64bit-cpu.xml gdb-xml/riscv-32bit-fpu.xml gdb-xml/riscv-64bit-fpu.xml gdb-xml/riscv-64bit-virtual.xml
+ CONFIG_SEMIHOSTING=y
+ CONFIG_ARM_COMPATIBLE_SEMIHOSTING=y
++TARGET_SYSTBL_ABI=64
++TARGET_SYSTBL_ABI=common,64,riscv,rlimit,memfd_secret
++TARGET_SYSTBL=syscall.tbl
+diff --git a/linux-user/riscv/cpu_loop.c b/linux-user/riscv/cpu_loop.c
+index 52c49c2e4264..0af533e186fd 100644
+--- a/linux-user/riscv/cpu_loop.c
++++ b/linux-user/riscv/cpu_loop.c
+@@ -47,7 +47,7 @@ void cpu_loop(CPURISCVState *env)
+             break;
+         case RISCV_EXCP_U_ECALL:
+             env->pc += 4;
+-            if (env->gpr[xA7] == TARGET_NR_arch_specific_syscall + 15) {
++            if (env->gpr[xA7] == TARGET_NR_riscv_flush_icache) {
+                 /* riscv_flush_icache_syscall is a no-op in QEMU as
+                    self-modifying code is automatically detected */
+                 ret = 0;
+diff --git a/linux-user/riscv/meson.build b/linux-user/riscv/meson.build
+index beb989a7caac..b2e7df0f4f65 100644
+--- a/linux-user/riscv/meson.build
++++ b/linux-user/riscv/meson.build
+@@ -5,3 +5,9 @@ vdso_64_inc = gen_vdso.process('vdso-64.so',
+ 
+ linux_user_ss.add(when: 'TARGET_RISCV32', if_true: vdso_32_inc)
+ linux_user_ss.add(when: 'TARGET_RISCV64', if_true: vdso_64_inc)
++
++syscall_nr_generators += {
++  'riscv': generator(sh,
++                      arguments: [ meson.current_source_dir() / 'syscallhdr.sh', '@INPUT@', '@OUTPUT@', '@EXTRA_ARGS@' ],
++                      output: '@BASENAME@_nr.h')
++}
+diff --git a/linux-user/riscv/syscall.tbl b/linux-user/riscv/syscall.tbl
+new file mode 100644
+index 000000000000..845e24eb372e
+--- /dev/null
++++ b/linux-user/riscv/syscall.tbl
+@@ -0,0 +1,405 @@
++# SPDX-License-Identifier: GPL-2.0 WITH Linux-syscall-note
++#
++# This file contains the system call numbers for all of the
++# more recently added architectures.
++#
++# As a basic principle, no duplication of functionality
++# should be added, e.g. we don't use lseek when llseek
++# is present. New architectures should use this file
++# and implement the less feature-full calls in user space.
++#
++0	common	io_setup			sys_io_setup			compat_sys_io_setup
++1	common	io_destroy			sys_io_destroy
++2	common	io_submit			sys_io_submit			compat_sys_io_submit
++3	common	io_cancel			sys_io_cancel
++4	time32	io_getevents			sys_io_getevents_time32
++4	64	io_getevents			sys_io_getevents
++5	common	setxattr			sys_setxattr
++6	common	lsetxattr			sys_lsetxattr
++7	common	fsetxattr			sys_fsetxattr
++8	common	getxattr			sys_getxattr
++9	common	lgetxattr			sys_lgetxattr
++10	common	fgetxattr			sys_fgetxattr
++11	common	listxattr			sys_listxattr
++12	common	llistxattr			sys_llistxattr
++13	common	flistxattr			sys_flistxattr
++14	common	removexattr			sys_removexattr
++15	common	lremovexattr			sys_lremovexattr
++16	common	fremovexattr			sys_fremovexattr
++17	common	getcwd				sys_getcwd
++18	common	lookup_dcookie			sys_ni_syscall
++19	common	eventfd2			sys_eventfd2
++20	common	epoll_create1			sys_epoll_create1
++21	common	epoll_ctl			sys_epoll_ctl
++22	common	epoll_pwait			sys_epoll_pwait			compat_sys_epoll_pwait
++23	common	dup				sys_dup
++24	common	dup3				sys_dup3
++25	32	fcntl64				sys_fcntl64			compat_sys_fcntl64
++25	64	fcntl				sys_fcntl
++26	common	inotify_init1			sys_inotify_init1
++27	common	inotify_add_watch		sys_inotify_add_watch
++28	common	inotify_rm_watch		sys_inotify_rm_watch
++29	common	ioctl				sys_ioctl			compat_sys_ioctl
++30	common	ioprio_set			sys_ioprio_set
++31	common	ioprio_get			sys_ioprio_get
++32	common	flock				sys_flock
++33	common	mknodat				sys_mknodat
++34	common	mkdirat				sys_mkdirat
++35	common	unlinkat			sys_unlinkat
++36	common	symlinkat			sys_symlinkat
++37	common	linkat				sys_linkat
++# renameat is superseded with flags by renameat2
++38	renameat renameat			sys_renameat
++39	common	umount2				sys_umount
++40	common	mount				sys_mount
++41	common	pivot_root			sys_pivot_root
++42	common	nfsservctl			sys_ni_syscall
++43	32	statfs64			sys_statfs64			compat_sys_statfs64
++43	64	statfs				sys_statfs
++44	32	fstatfs64			sys_fstatfs64			compat_sys_fstatfs64
++44	64	fstatfs				sys_fstatfs
++45	32	truncate64			sys_truncate64			compat_sys_truncate64
++45	64	truncate			sys_truncate
++46	32	ftruncate64			sys_ftruncate64			compat_sys_ftruncate64
++46	64	ftruncate			sys_ftruncate
++47	common	fallocate			sys_fallocate			compat_sys_fallocate
++48	common	faccessat			sys_faccessat
++49	common	chdir				sys_chdir
++50	common	fchdir				sys_fchdir
++51	common	chroot				sys_chroot
++52	common	fchmod				sys_fchmod
++53	common	fchmodat			sys_fchmodat
++54	common	fchownat			sys_fchownat
++55	common	fchown				sys_fchown
++56	common	openat				sys_openat
++57	common	close				sys_close
++58	common	vhangup				sys_vhangup
++59	common	pipe2				sys_pipe2
++60	common	quotactl			sys_quotactl
++61	common	getdents64			sys_getdents64
++62	32	llseek				sys_llseek
++62	64	lseek				sys_lseek
++63	common	read				sys_read
++64	common	write				sys_write
++65	common	readv				sys_readv			sys_readv
++66	common	writev				sys_writev			sys_writev
++67	common	pread64				sys_pread64			compat_sys_pread64
++68	common	pwrite64			sys_pwrite64			compat_sys_pwrite64
++69	common	preadv				sys_preadv			compat_sys_preadv
++70	common	pwritev				sys_pwritev			compat_sys_pwritev
++71	32	sendfile64			sys_sendfile64
++71	64	sendfile			sys_sendfile64
++72	time32	pselect6			sys_pselect6_time32		compat_sys_pselect6_time32
++72	64	pselect6			sys_pselect6
++73	time32	ppoll				sys_ppoll_time32		compat_sys_ppoll_time32
++73	64	ppoll				sys_ppoll
++74	common	signalfd4			sys_signalfd4			compat_sys_signalfd4
++75	common	vmsplice			sys_vmsplice
++76	common	splice				sys_splice
++77	common	tee				sys_tee
++78	common	readlinkat			sys_readlinkat
++79	stat64	fstatat64			sys_fstatat64
++79	64	newfstatat			sys_newfstatat
++80	stat64	fstat64				sys_fstat64
++80	64	fstat				sys_newfstat
++81	common	sync				sys_sync
++82	common	fsync				sys_fsync
++83	common	fdatasync			sys_fdatasync
++84	common	sync_file_range			sys_sync_file_range		compat_sys_sync_file_range
++85	common	timerfd_create			sys_timerfd_create
++86	time32	timerfd_settime			sys_timerfd_settime32
++86	64	timerfd_settime			sys_timerfd_settime
++87	time32	timerfd_gettime			sys_timerfd_gettime32
++87	64	timerfd_gettime			sys_timerfd_gettime
++88	time32	utimensat			sys_utimensat_time32
++88	64	utimensat			sys_utimensat
++89	common	acct				sys_acct
++90	common	capget				sys_capget
++91	common	capset				sys_capset
++92	common	personality			sys_personality
++93	common	exit				sys_exit
++94	common	exit_group			sys_exit_group
++95	common	waitid				sys_waitid			compat_sys_waitid
++96	common	set_tid_address			sys_set_tid_address
++97	common	unshare				sys_unshare
++98	time32	futex				sys_futex_time32
++98	64	futex				sys_futex
++99	common	set_robust_list			sys_set_robust_list		compat_sys_set_robust_list
++100	common	get_robust_list			sys_get_robust_list		compat_sys_get_robust_list
++101	time32	nanosleep			sys_nanosleep_time32
++101	64	nanosleep			sys_nanosleep
++102	common	getitimer			sys_getitimer			compat_sys_getitimer
++103	common	setitimer			sys_setitimer			compat_sys_setitimer
++104	common	kexec_load			sys_kexec_load			compat_sys_kexec_load
++105	common	init_module			sys_init_module
++106	common	delete_module			sys_delete_module
++107	common	timer_create			sys_timer_create		compat_sys_timer_create
++108	time32	timer_gettime			sys_timer_gettime32
++108	64	timer_gettime			sys_timer_gettime
++109	common	timer_getoverrun		sys_timer_getoverrun
++110	time32	timer_settime			sys_timer_settime32
++110	64	timer_settime			sys_timer_settime
++111	common	timer_delete			sys_timer_delete
++112	time32	clock_settime			sys_clock_settime32
++112	64	clock_settime			sys_clock_settime
++113	time32	clock_gettime			sys_clock_gettime32
++113	64	clock_gettime			sys_clock_gettime
++114	time32	clock_getres			sys_clock_getres_time32
++114	64	clock_getres			sys_clock_getres
++115	time32	clock_nanosleep			sys_clock_nanosleep_time32
++115	64	clock_nanosleep			sys_clock_nanosleep
++116	common	syslog				sys_syslog
++117	common	ptrace				sys_ptrace			compat_sys_ptrace
++118	common	sched_setparam			sys_sched_setparam
++119	common	sched_setscheduler		sys_sched_setscheduler
++120	common	sched_getscheduler		sys_sched_getscheduler
++121	common	sched_getparam			sys_sched_getparam
++122	common	sched_setaffinity		sys_sched_setaffinity		compat_sys_sched_setaffinity
++123	common	sched_getaffinity		sys_sched_getaffinity		compat_sys_sched_getaffinity
++124	common	sched_yield			sys_sched_yield
++125	common	sched_get_priority_max		sys_sched_get_priority_max
++126	common	sched_get_priority_min		sys_sched_get_priority_min
++127	time32	sched_rr_get_interval		sys_sched_rr_get_interval_time32
++127	64	sched_rr_get_interval		sys_sched_rr_get_interval
++128	common	restart_syscall			sys_restart_syscall
++129	common	kill				sys_kill
++130	common	tkill				sys_tkill
++131	common	tgkill				sys_tgkill
++132	common	sigaltstack			sys_sigaltstack			compat_sys_sigaltstack
++133	common	rt_sigsuspend			sys_rt_sigsuspend		compat_sys_rt_sigsuspend
++134	common	rt_sigaction			sys_rt_sigaction		compat_sys_rt_sigaction
++135	common	rt_sigprocmask			sys_rt_sigprocmask		compat_sys_rt_sigprocmask
++136	common	rt_sigpending			sys_rt_sigpending		compat_sys_rt_sigpending
++137	time32	rt_sigtimedwait			sys_rt_sigtimedwait_time32	compat_sys_rt_sigtimedwait_time32
++137	64	rt_sigtimedwait			sys_rt_sigtimedwait
++138	common	rt_sigqueueinfo			sys_rt_sigqueueinfo		compat_sys_rt_sigqueueinfo
++139	common	rt_sigreturn			sys_rt_sigreturn		compat_sys_rt_sigreturn
++140	common	setpriority			sys_setpriority
++141	common	getpriority			sys_getpriority
++142	common	reboot				sys_reboot
++143	common	setregid			sys_setregid
++144	common	setgid				sys_setgid
++145	common	setreuid			sys_setreuid
++146	common	setuid				sys_setuid
++147	common	setresuid			sys_setresuid
++148	common	getresuid			sys_getresuid
++149	common	setresgid			sys_setresgid
++150	common	getresgid			sys_getresgid
++151	common	setfsuid			sys_setfsuid
++152	common	setfsgid			sys_setfsgid
++153	common	times				sys_times			compat_sys_times
++154	common	setpgid				sys_setpgid
++155	common	getpgid				sys_getpgid
++156	common	getsid				sys_getsid
++157	common	setsid				sys_setsid
++158	common	getgroups			sys_getgroups
++159	common	setgroups			sys_setgroups
++160	common	uname				sys_newuname
++161	common	sethostname			sys_sethostname
++162	common	setdomainname			sys_setdomainname
++# getrlimit and setrlimit are superseded with prlimit64
++163	rlimit	getrlimit			sys_getrlimit			compat_sys_getrlimit
++164	rlimit	setrlimit			sys_setrlimit			compat_sys_setrlimit
++165	common	getrusage			sys_getrusage			compat_sys_getrusage
++166	common	umask				sys_umask
++167	common	prctl				sys_prctl
++168	common	getcpu				sys_getcpu
++169	time32	gettimeofday			sys_gettimeofday		compat_sys_gettimeofday
++169	64	gettimeofday			sys_gettimeofday
++170	time32	settimeofday			sys_settimeofday		compat_sys_settimeofday
++170	64	settimeofday			sys_settimeofday
++171	time32	adjtimex			sys_adjtimex_time32
++171	64	adjtimex			sys_adjtimex
++172	common	getpid				sys_getpid
++173	common	getppid				sys_getppid
++174	common	getuid				sys_getuid
++175	common	geteuid				sys_geteuid
++176	common	getgid				sys_getgid
++177	common	getegid				sys_getegid
++178	common	gettid				sys_gettid
++179	common	sysinfo				sys_sysinfo			compat_sys_sysinfo
++180	common	mq_open				sys_mq_open			compat_sys_mq_open
++181	common	mq_unlink			sys_mq_unlink
++182	time32	mq_timedsend			sys_mq_timedsend_time32
++182	64	mq_timedsend			sys_mq_timedsend
++183	time32	mq_timedreceive			sys_mq_timedreceive_time32
++183	64	mq_timedreceive			sys_mq_timedreceive
++184	common	mq_notify			sys_mq_notify			compat_sys_mq_notify
++185	common	mq_getsetattr			sys_mq_getsetattr		compat_sys_mq_getsetattr
++186	common	msgget				sys_msgget
++187	common	msgctl				sys_msgctl			compat_sys_msgctl
++188	common	msgrcv				sys_msgrcv			compat_sys_msgrcv
++189	common	msgsnd				sys_msgsnd			compat_sys_msgsnd
++190	common	semget				sys_semget
++191	common	semctl				sys_semctl			compat_sys_semctl
++192	time32	semtimedop			sys_semtimedop_time32
++192	64	semtimedop			sys_semtimedop
++193	common	semop				sys_semop
++194	common	shmget				sys_shmget
++195	common	shmctl				sys_shmctl			compat_sys_shmctl
++196	common	shmat				sys_shmat			compat_sys_shmat
++197	common	shmdt				sys_shmdt
++198	common	socket				sys_socket
++199	common	socketpair			sys_socketpair
++200	common	bind				sys_bind
++201	common	listen				sys_listen
++202	common	accept				sys_accept
++203	common	connect				sys_connect
++204	common	getsockname			sys_getsockname
++205	common	getpeername			sys_getpeername
++206	common	sendto				sys_sendto
++207	common	recvfrom			sys_recvfrom			compat_sys_recvfrom
++208	common	setsockopt			sys_setsockopt			sys_setsockopt
++209	common	getsockopt			sys_getsockopt			sys_getsockopt
++210	common	shutdown			sys_shutdown
++211	common	sendmsg				sys_sendmsg			compat_sys_sendmsg
++212	common	recvmsg				sys_recvmsg			compat_sys_recvmsg
++213	common	readahead			sys_readahead			compat_sys_readahead
++214	common	brk				sys_brk
++215	common	munmap				sys_munmap
++216	common	mremap				sys_mremap
++217	common	add_key				sys_add_key
++218	common	request_key			sys_request_key
++219	common	keyctl				sys_keyctl			compat_sys_keyctl
++220	common	clone				sys_clone
++221	common	execve				sys_execve			compat_sys_execve
++222	32	mmap2				sys_mmap2
++222	64	mmap				sys_mmap
++223	32	fadvise64_64			sys_fadvise64_64		compat_sys_fadvise64_64
++223	64	fadvise64			sys_fadvise64_64
++224	common	swapon				sys_swapon
++225	common	swapoff				sys_swapoff
++226	common	mprotect			sys_mprotect
++227	common	msync				sys_msync
++228	common	mlock				sys_mlock
++229	common	munlock				sys_munlock
++230	common	mlockall			sys_mlockall
++231	common	munlockall			sys_munlockall
++232	common	mincore				sys_mincore
++233	common	madvise				sys_madvise
++234	common	remap_file_pages		sys_remap_file_pages
++235	common	mbind				sys_mbind
++236	common	get_mempolicy			sys_get_mempolicy
++237	common	set_mempolicy			sys_set_mempolicy
++238	common	migrate_pages			sys_migrate_pages
++239	common	move_pages			sys_move_pages
++240	common	rt_tgsigqueueinfo		sys_rt_tgsigqueueinfo		compat_sys_rt_tgsigqueueinfo
++241	common	perf_event_open			sys_perf_event_open
++242	common	accept4				sys_accept4
++243	time32	recvmmsg			sys_recvmmsg_time32		compat_sys_recvmmsg_time32
++243	64	recvmmsg			sys_recvmmsg
++# Architectures may provide up to 16 syscalls of their own between 244 and 259
++244	arc	cacheflush			sys_cacheflush
++245	arc	arc_settls			sys_arc_settls
++246	arc	arc_gettls			sys_arc_gettls
++247	arc	sysfs				sys_sysfs
++248	arc	arc_usr_cmpxchg			sys_arc_usr_cmpxchg
++
++244	csky	set_thread_area			sys_set_thread_area
++245	csky	cacheflush			sys_cacheflush
++
++244	nios2	cacheflush			sys_cacheflush
++
++244	or1k	or1k_atomic			sys_or1k_atomic
++
++258	riscv	riscv_hwprobe			sys_riscv_hwprobe
++259	riscv	riscv_flush_icache		sys_riscv_flush_icache
++
++260	time32	wait4				sys_wait4			compat_sys_wait4
++260	64	wait4				sys_wait4
++261	common	prlimit64			sys_prlimit64
++262	common	fanotify_init			sys_fanotify_init
++263	common	fanotify_mark			sys_fanotify_mark
++264	common	name_to_handle_at		sys_name_to_handle_at
++265	common	open_by_handle_at		sys_open_by_handle_at
++266	time32	clock_adjtime			sys_clock_adjtime32
++266	64	clock_adjtime			sys_clock_adjtime
++267	common	syncfs				sys_syncfs
++268	common	setns				sys_setns
++269	common	sendmmsg			sys_sendmmsg			compat_sys_sendmmsg
++270	common	process_vm_readv		sys_process_vm_readv
++271	common	process_vm_writev		sys_process_vm_writev
++272	common	kcmp				sys_kcmp
++273	common	finit_module			sys_finit_module
++274	common	sched_setattr			sys_sched_setattr
++275	common	sched_getattr			sys_sched_getattr
++276	common	renameat2			sys_renameat2
++277	common	seccomp				sys_seccomp
++278	common	getrandom			sys_getrandom
++279	common	memfd_create			sys_memfd_create
++280	common	bpf				sys_bpf
++281	common	execveat			sys_execveat			compat_sys_execveat
++282	common	userfaultfd			sys_userfaultfd
++283	common	membarrier			sys_membarrier
++284	common	mlock2				sys_mlock2
++285	common	copy_file_range			sys_copy_file_range
++286	common	preadv2				sys_preadv2			compat_sys_preadv2
++287	common	pwritev2			sys_pwritev2			compat_sys_pwritev2
++288	common	pkey_mprotect			sys_pkey_mprotect
++289	common	pkey_alloc			sys_pkey_alloc
++290	common	pkey_free			sys_pkey_free
++291	common	statx				sys_statx
++292	time32	io_pgetevents			sys_io_pgetevents_time32	compat_sys_io_pgetevents
++292	64	io_pgetevents			sys_io_pgetevents
++293	common	rseq				sys_rseq
++294	common	kexec_file_load			sys_kexec_file_load
++# 295 through 402 are unassigned to sync up with generic numbers don't use
++403	32	clock_gettime64			sys_clock_gettime
++404	32	clock_settime64			sys_clock_settime
++405	32	clock_adjtime64			sys_clock_adjtime
++406	32	clock_getres_time64		sys_clock_getres
++407	32	clock_nanosleep_time64		sys_clock_nanosleep
++408	32	timer_gettime64			sys_timer_gettime
++409	32	timer_settime64			sys_timer_settime
++410	32	timerfd_gettime64		sys_timerfd_gettime
++411	32	timerfd_settime64		sys_timerfd_settime
++412	32	utimensat_time64		sys_utimensat
++413	32	pselect6_time64			sys_pselect6			compat_sys_pselect6_time64
++414	32	ppoll_time64			sys_ppoll			compat_sys_ppoll_time64
++416	32	io_pgetevents_time64		sys_io_pgetevents		compat_sys_io_pgetevents_time64
++417	32	recvmmsg_time64			sys_recvmmsg			compat_sys_recvmmsg_time64
++418	32	mq_timedsend_time64		sys_mq_timedsend
++419	32	mq_timedreceive_time64		sys_mq_timedreceive
++420	32	semtimedop_time64		sys_semtimedop
++421	32	rt_sigtimedwait_time64		sys_rt_sigtimedwait		compat_sys_rt_sigtimedwait_time64
++422	32	futex_time64			sys_futex
++423	32	sched_rr_get_interval_time64	sys_sched_rr_get_interval
++424	common	pidfd_send_signal		sys_pidfd_send_signal
++425	common	io_uring_setup			sys_io_uring_setup
++426	common	io_uring_enter			sys_io_uring_enter
++427	common	io_uring_register		sys_io_uring_register
++428	common	open_tree			sys_open_tree
++429	common	move_mount			sys_move_mount
++430	common	fsopen				sys_fsopen
++431	common	fsconfig			sys_fsconfig
++432	common	fsmount				sys_fsmount
++433	common	fspick				sys_fspick
++434	common	pidfd_open			sys_pidfd_open
++435	common	clone3				sys_clone3
++436	common	close_range			sys_close_range
++437	common	openat2				sys_openat2
++438	common	pidfd_getfd			sys_pidfd_getfd
++439	common	faccessat2			sys_faccessat2
++440	common	process_madvise			sys_process_madvise
++441	common	epoll_pwait2			sys_epoll_pwait2		compat_sys_epoll_pwait2
++442	common	mount_setattr			sys_mount_setattr
++443	common	quotactl_fd			sys_quotactl_fd
++444	common	landlock_create_ruleset		sys_landlock_create_ruleset
++445	common	landlock_add_rule		sys_landlock_add_rule
++446	common	landlock_restrict_self		sys_landlock_restrict_self
++447	memfd_secret	memfd_secret		sys_memfd_secret
++448	common	process_mrelease		sys_process_mrelease
++449	common	futex_waitv			sys_futex_waitv
++450	common	set_mempolicy_home_node		sys_set_mempolicy_home_node
++451	common	cachestat			sys_cachestat
++452	common	fchmodat2			sys_fchmodat2
++453	common	map_shadow_stack		sys_map_shadow_stack
++454	common	futex_wake			sys_futex_wake
++455	common	futex_wait			sys_futex_wait
++456	common	futex_requeue			sys_futex_requeue
++457	common	statmount			sys_statmount
++458	common	listmount			sys_listmount
++459	common	lsm_get_self_attr		sys_lsm_get_self_attr
++460	common	lsm_set_self_attr		sys_lsm_set_self_attr
++461	common	lsm_list_modules		sys_lsm_list_modules
++462	common	mseal				sys_mseal
+diff --git a/linux-user/riscv/syscall32_nr.h b/linux-user/riscv/syscall32_nr.h
+deleted file mode 100644
+index 42376ac8c7d2..000000000000
+--- a/linux-user/riscv/syscall32_nr.h
++++ /dev/null
+@@ -1,325 +0,0 @@
+-/*
+- * This file contains the system call numbers.
+- * Do not modify.
+- * This file is generated by scripts/gensyscalls.sh
+- */
+-#ifndef LINUX_USER_RISCV_SYSCALL32_NR_H
+-#define LINUX_USER_RISCV_SYSCALL32_NR_H
+-
+-#define TARGET_NR_io_setup 0
+-#define TARGET_NR_riscv_flush_icache (TARGET_NR_arch_specific_syscall + 15)
+-#define TARGET_NR_riscv_hwprobe (TARGET_NR_arch_specific_syscall + 14)
+-#define TARGET_NR_io_destroy 1
+-#define TARGET_NR_io_submit 2
+-#define TARGET_NR_io_cancel 3
+-#define TARGET_NR_setxattr 5
+-#define TARGET_NR_lsetxattr 6
+-#define TARGET_NR_fsetxattr 7
+-#define TARGET_NR_getxattr 8
+-#define TARGET_NR_lgetxattr 9
+-#define TARGET_NR_fgetxattr 10
+-#define TARGET_NR_listxattr 11
+-#define TARGET_NR_llistxattr 12
+-#define TARGET_NR_flistxattr 13
+-#define TARGET_NR_removexattr 14
+-#define TARGET_NR_lremovexattr 15
+-#define TARGET_NR_fremovexattr 16
+-#define TARGET_NR_getcwd 17
+-#define TARGET_NR_lookup_dcookie 18
+-#define TARGET_NR_eventfd2 19
+-#define TARGET_NR_epoll_create1 20
+-#define TARGET_NR_epoll_ctl 21
+-#define TARGET_NR_epoll_pwait 22
+-#define TARGET_NR_dup 23
+-#define TARGET_NR_dup3 24
+-#define TARGET_NR_fcntl64 25
+-#define TARGET_NR_inotify_init1 26
+-#define TARGET_NR_inotify_add_watch 27
+-#define TARGET_NR_inotify_rm_watch 28
+-#define TARGET_NR_ioctl 29
+-#define TARGET_NR_ioprio_set 30
+-#define TARGET_NR_ioprio_get 31
+-#define TARGET_NR_flock 32
+-#define TARGET_NR_mknodat 33
+-#define TARGET_NR_mkdirat 34
+-#define TARGET_NR_unlinkat 35
+-#define TARGET_NR_symlinkat 36
+-#define TARGET_NR_linkat 37
+-#define TARGET_NR_umount2 39
+-#define TARGET_NR_mount 40
+-#define TARGET_NR_pivot_root 41
+-#define TARGET_NR_nfsservctl 42
+-#define TARGET_NR_statfs64 43
+-#define TARGET_NR_fstatfs64 44
+-#define TARGET_NR_truncate64 45
+-#define TARGET_NR_ftruncate64 46
+-#define TARGET_NR_fallocate 47
+-#define TARGET_NR_faccessat 48
+-#define TARGET_NR_chdir 49
+-#define TARGET_NR_fchdir 50
+-#define TARGET_NR_chroot 51
+-#define TARGET_NR_fchmod 52
+-#define TARGET_NR_fchmodat 53
+-#define TARGET_NR_fchownat 54
+-#define TARGET_NR_fchown 55
+-#define TARGET_NR_openat 56
+-#define TARGET_NR_close 57
+-#define TARGET_NR_vhangup 58
+-#define TARGET_NR_pipe2 59
+-#define TARGET_NR_quotactl 60
+-#define TARGET_NR_getdents64 61
+-#define TARGET_NR_llseek 62
+-#define TARGET_NR_read 63
+-#define TARGET_NR_write 64
+-#define TARGET_NR_readv 65
+-#define TARGET_NR_writev 66
+-#define TARGET_NR_pread64 67
+-#define TARGET_NR_pwrite64 68
+-#define TARGET_NR_preadv 69
+-#define TARGET_NR_pwritev 70
+-#define TARGET_NR_sendfile64 71
+-#define TARGET_NR_signalfd4 74
+-#define TARGET_NR_vmsplice 75
+-#define TARGET_NR_splice 76
+-#define TARGET_NR_tee 77
+-#define TARGET_NR_readlinkat 78
+-#define TARGET_NR_fstatat64 79
+-#define TARGET_NR_fstat64 80
+-#define TARGET_NR_sync 81
+-#define TARGET_NR_fsync 82
+-#define TARGET_NR_fdatasync 83
+-#define TARGET_NR_sync_file_range 84
+-#define TARGET_NR_timerfd_create 85
+-#define TARGET_NR_acct 89
+-#define TARGET_NR_capget 90
+-#define TARGET_NR_capset 91
+-#define TARGET_NR_personality 92
+-#define TARGET_NR_exit 93
+-#define TARGET_NR_exit_group 94
+-#define TARGET_NR_waitid 95
+-#define TARGET_NR_set_tid_address 96
+-#define TARGET_NR_unshare 97
+-#define TARGET_NR_set_robust_list 99
+-#define TARGET_NR_get_robust_list 100
+-#define TARGET_NR_getitimer 102
+-#define TARGET_NR_setitimer 103
+-#define TARGET_NR_kexec_load 104
+-#define TARGET_NR_init_module 105
+-#define TARGET_NR_delete_module 106
+-#define TARGET_NR_timer_create 107
+-#define TARGET_NR_timer_getoverrun 109
+-#define TARGET_NR_timer_delete 111
+-#define TARGET_NR_syslog 116
+-#define TARGET_NR_ptrace 117
+-#define TARGET_NR_sched_setparam 118
+-#define TARGET_NR_sched_setscheduler 119
+-#define TARGET_NR_sched_getscheduler 120
+-#define TARGET_NR_sched_getparam 121
+-#define TARGET_NR_sched_setaffinity 122
+-#define TARGET_NR_sched_getaffinity 123
+-#define TARGET_NR_sched_yield 124
+-#define TARGET_NR_sched_get_priority_max 125
+-#define TARGET_NR_sched_get_priority_min 126
+-#define TARGET_NR_restart_syscall 128
+-#define TARGET_NR_kill 129
+-#define TARGET_NR_tkill 130
+-#define TARGET_NR_tgkill 131
+-#define TARGET_NR_sigaltstack 132
+-#define TARGET_NR_rt_sigsuspend 133
+-#define TARGET_NR_rt_sigaction 134
+-#define TARGET_NR_rt_sigprocmask 135
+-#define TARGET_NR_rt_sigpending 136
+-#define TARGET_NR_rt_sigqueueinfo 138
+-#define TARGET_NR_rt_sigreturn 139
+-#define TARGET_NR_setpriority 140
+-#define TARGET_NR_getpriority 141
+-#define TARGET_NR_reboot 142
+-#define TARGET_NR_setregid 143
+-#define TARGET_NR_setgid 144
+-#define TARGET_NR_setreuid 145
+-#define TARGET_NR_setuid 146
+-#define TARGET_NR_setresuid 147
+-#define TARGET_NR_getresuid 148
+-#define TARGET_NR_setresgid 149
+-#define TARGET_NR_getresgid 150
+-#define TARGET_NR_setfsuid 151
+-#define TARGET_NR_setfsgid 152
+-#define TARGET_NR_times 153
+-#define TARGET_NR_setpgid 154
+-#define TARGET_NR_getpgid 155
+-#define TARGET_NR_getsid 156
+-#define TARGET_NR_setsid 157
+-#define TARGET_NR_getgroups 158
+-#define TARGET_NR_setgroups 159
+-#define TARGET_NR_uname 160
+-#define TARGET_NR_sethostname 161
+-#define TARGET_NR_setdomainname 162
+-#define TARGET_NR_getrlimit 163
+-#define TARGET_NR_setrlimit 164
+-#define TARGET_NR_getrusage 165
+-#define TARGET_NR_umask 166
+-#define TARGET_NR_prctl 167
+-#define TARGET_NR_getcpu 168
+-#define TARGET_NR_getpid 172
+-#define TARGET_NR_getppid 173
+-#define TARGET_NR_getuid 174
+-#define TARGET_NR_geteuid 175
+-#define TARGET_NR_getgid 176
+-#define TARGET_NR_getegid 177
+-#define TARGET_NR_gettid 178
+-#define TARGET_NR_sysinfo 179
+-#define TARGET_NR_mq_open 180
+-#define TARGET_NR_mq_unlink 181
+-#define TARGET_NR_mq_notify 184
+-#define TARGET_NR_mq_getsetattr 185
+-#define TARGET_NR_msgget 186
+-#define TARGET_NR_msgctl 187
+-#define TARGET_NR_msgrcv 188
+-#define TARGET_NR_msgsnd 189
+-#define TARGET_NR_semget 190
+-#define TARGET_NR_semctl 191
+-#define TARGET_NR_semop 193
+-#define TARGET_NR_shmget 194
+-#define TARGET_NR_shmctl 195
+-#define TARGET_NR_shmat 196
+-#define TARGET_NR_shmdt 197
+-#define TARGET_NR_socket 198
+-#define TARGET_NR_socketpair 199
+-#define TARGET_NR_bind 200
+-#define TARGET_NR_listen 201
+-#define TARGET_NR_accept 202
+-#define TARGET_NR_connect 203
+-#define TARGET_NR_getsockname 204
+-#define TARGET_NR_getpeername 205
+-#define TARGET_NR_sendto 206
+-#define TARGET_NR_recvfrom 207
+-#define TARGET_NR_setsockopt 208
+-#define TARGET_NR_getsockopt 209
+-#define TARGET_NR_shutdown 210
+-#define TARGET_NR_sendmsg 211
+-#define TARGET_NR_recvmsg 212
+-#define TARGET_NR_readahead 213
+-#define TARGET_NR_brk 214
+-#define TARGET_NR_munmap 215
+-#define TARGET_NR_mremap 216
+-#define TARGET_NR_add_key 217
+-#define TARGET_NR_request_key 218
+-#define TARGET_NR_keyctl 219
+-#define TARGET_NR_clone 220
+-#define TARGET_NR_execve 221
+-#define TARGET_NR_mmap2 222
+-#define TARGET_NR_fadvise64_64 223
+-#define TARGET_NR_swapon 224
+-#define TARGET_NR_swapoff 225
+-#define TARGET_NR_mprotect 226
+-#define TARGET_NR_msync 227
+-#define TARGET_NR_mlock 228
+-#define TARGET_NR_munlock 229
+-#define TARGET_NR_mlockall 230
+-#define TARGET_NR_munlockall 231
+-#define TARGET_NR_mincore 232
+-#define TARGET_NR_madvise 233
+-#define TARGET_NR_remap_file_pages 234
+-#define TARGET_NR_mbind 235
+-#define TARGET_NR_get_mempolicy 236
+-#define TARGET_NR_set_mempolicy 237
+-#define TARGET_NR_migrate_pages 238
+-#define TARGET_NR_move_pages 239
+-#define TARGET_NR_rt_tgsigqueueinfo 240
+-#define TARGET_NR_perf_event_open 241
+-#define TARGET_NR_accept4 242
+-#define TARGET_NR_arch_specific_syscall 244
+-#define TARGET_NR_prlimit64 261
+-#define TARGET_NR_fanotify_init 262
+-#define TARGET_NR_fanotify_mark 263
+-#define TARGET_NR_name_to_handle_at 264
+-#define TARGET_NR_open_by_handle_at 265
+-#define TARGET_NR_syncfs 267
+-#define TARGET_NR_setns 268
+-#define TARGET_NR_sendmmsg 269
+-#define TARGET_NR_process_vm_readv 270
+-#define TARGET_NR_process_vm_writev 271
+-#define TARGET_NR_kcmp 272
+-#define TARGET_NR_finit_module 273
+-#define TARGET_NR_sched_setattr 274
+-#define TARGET_NR_sched_getattr 275
+-#define TARGET_NR_renameat2 276
+-#define TARGET_NR_seccomp 277
+-#define TARGET_NR_getrandom 278
+-#define TARGET_NR_memfd_create 279
+-#define TARGET_NR_bpf 280
+-#define TARGET_NR_execveat 281
+-#define TARGET_NR_userfaultfd 282
+-#define TARGET_NR_membarrier 283
+-#define TARGET_NR_mlock2 284
+-#define TARGET_NR_copy_file_range 285
+-#define TARGET_NR_preadv2 286
+-#define TARGET_NR_pwritev2 287
+-#define TARGET_NR_pkey_mprotect 288
+-#define TARGET_NR_pkey_alloc 289
+-#define TARGET_NR_pkey_free 290
+-#define TARGET_NR_statx 291
+-#define TARGET_NR_rseq 293
+-#define TARGET_NR_kexec_file_load 294
+-#define TARGET_NR_clock_gettime64 403
+-#define TARGET_NR_clock_settime64 404
+-#define TARGET_NR_clock_adjtime64 405
+-#define TARGET_NR_clock_getres_time64 406
+-#define TARGET_NR_clock_nanosleep_time64 407
+-#define TARGET_NR_timer_gettime64 408
+-#define TARGET_NR_timer_settime64 409
+-#define TARGET_NR_timerfd_gettime64 410
+-#define TARGET_NR_timerfd_settime64 411
+-#define TARGET_NR_utimensat_time64 412
+-#define TARGET_NR_pselect6_time64 413
+-#define TARGET_NR_ppoll_time64 414
+-#define TARGET_NR_io_pgetevents_time64 416
+-#define TARGET_NR_recvmmsg_time64 417
+-#define TARGET_NR_mq_timedsend_time64 418
+-#define TARGET_NR_mq_timedreceive_time64 419
+-#define TARGET_NR_semtimedop_time64 420
+-#define TARGET_NR_rt_sigtimedwait_time64 421
+-#define TARGET_NR_futex_time64 422
+-#define TARGET_NR_sched_rr_get_interval_time64 423
+-#define TARGET_NR_pidfd_send_signal 424
+-#define TARGET_NR_io_uring_setup 425
+-#define TARGET_NR_io_uring_enter 426
+-#define TARGET_NR_io_uring_register 427
+-#define TARGET_NR_open_tree 428
+-#define TARGET_NR_move_mount 429
+-#define TARGET_NR_fsopen 430
+-#define TARGET_NR_fsconfig 431
+-#define TARGET_NR_fsmount 432
+-#define TARGET_NR_fspick 433
+-#define TARGET_NR_pidfd_open 434
+-#define TARGET_NR_clone3 435
+-#define TARGET_NR_close_range 436
+-#define TARGET_NR_openat2 437
+-#define TARGET_NR_pidfd_getfd 438
+-#define TARGET_NR_faccessat2 439
+-#define TARGET_NR_process_madvise 440
+-#define TARGET_NR_epoll_pwait2 441
+-#define TARGET_NR_mount_setattr 442
+-#define TARGET_NR_quotactl_fd 443
+-#define TARGET_NR_landlock_create_ruleset 444
+-#define TARGET_NR_landlock_add_rule 445
+-#define TARGET_NR_landlock_restrict_self 446
+-#define TARGET_NR_memfd_secret 447
+-#define TARGET_NR_process_mrelease 448
+-#define TARGET_NR_futex_waitv 449
+-#define TARGET_NR_set_mempolicy_home_node 450
+-#define TARGET_NR_cachestat 451
+-#define TARGET_NR_fchmodat2 452
+-#define TARGET_NR_map_shadow_stack 453
+-#define TARGET_NR_futex_wake 454
+-#define TARGET_NR_futex_wait 455
+-#define TARGET_NR_futex_requeue 456
+-#define TARGET_NR_statmount 457
+-#define TARGET_NR_listmount 458
+-#define TARGET_NR_lsm_get_self_attr 459
+-#define TARGET_NR_lsm_set_self_attr 460
+-#define TARGET_NR_lsm_list_modules 461
+-#define TARGET_NR_mseal 462
+-#define TARGET_NR_syscalls 463
+-
+-#endif /* LINUX_USER_RISCV_SYSCALL32_NR_H */
+diff --git a/linux-user/riscv/syscall64_nr.h b/linux-user/riscv/syscall64_nr.h
+deleted file mode 100644
+index 96ee92ec31f8..000000000000
+--- a/linux-user/riscv/syscall64_nr.h
++++ /dev/null
+@@ -1,331 +0,0 @@
+-/*
+- * This file contains the system call numbers.
+- * Do not modify.
+- * This file is generated by scripts/gensyscalls.sh
+- */
+-#ifndef LINUX_USER_RISCV_SYSCALL64_NR_H
+-#define LINUX_USER_RISCV_SYSCALL64_NR_H
+-
+-#define TARGET_NR_io_setup 0
+-#define TARGET_NR_riscv_flush_icache (TARGET_NR_arch_specific_syscall + 15)
+-#define TARGET_NR_riscv_hwprobe (TARGET_NR_arch_specific_syscall + 14)
+-#define TARGET_NR_io_destroy 1
+-#define TARGET_NR_io_submit 2
+-#define TARGET_NR_io_cancel 3
+-#define TARGET_NR_io_getevents 4
+-#define TARGET_NR_setxattr 5
+-#define TARGET_NR_lsetxattr 6
+-#define TARGET_NR_fsetxattr 7
+-#define TARGET_NR_getxattr 8
+-#define TARGET_NR_lgetxattr 9
+-#define TARGET_NR_fgetxattr 10
+-#define TARGET_NR_listxattr 11
+-#define TARGET_NR_llistxattr 12
+-#define TARGET_NR_flistxattr 13
+-#define TARGET_NR_removexattr 14
+-#define TARGET_NR_lremovexattr 15
+-#define TARGET_NR_fremovexattr 16
+-#define TARGET_NR_getcwd 17
+-#define TARGET_NR_lookup_dcookie 18
+-#define TARGET_NR_eventfd2 19
+-#define TARGET_NR_epoll_create1 20
+-#define TARGET_NR_epoll_ctl 21
+-#define TARGET_NR_epoll_pwait 22
+-#define TARGET_NR_dup 23
+-#define TARGET_NR_dup3 24
+-#define TARGET_NR_fcntl 25
+-#define TARGET_NR_inotify_init1 26
+-#define TARGET_NR_inotify_add_watch 27
+-#define TARGET_NR_inotify_rm_watch 28
+-#define TARGET_NR_ioctl 29
+-#define TARGET_NR_ioprio_set 30
+-#define TARGET_NR_ioprio_get 31
+-#define TARGET_NR_flock 32
+-#define TARGET_NR_mknodat 33
+-#define TARGET_NR_mkdirat 34
+-#define TARGET_NR_unlinkat 35
+-#define TARGET_NR_symlinkat 36
+-#define TARGET_NR_linkat 37
+-#define TARGET_NR_umount2 39
+-#define TARGET_NR_mount 40
+-#define TARGET_NR_pivot_root 41
+-#define TARGET_NR_nfsservctl 42
+-#define TARGET_NR_statfs 43
+-#define TARGET_NR_fstatfs 44
+-#define TARGET_NR_truncate 45
+-#define TARGET_NR_ftruncate 46
+-#define TARGET_NR_fallocate 47
+-#define TARGET_NR_faccessat 48
+-#define TARGET_NR_chdir 49
+-#define TARGET_NR_fchdir 50
+-#define TARGET_NR_chroot 51
+-#define TARGET_NR_fchmod 52
+-#define TARGET_NR_fchmodat 53
+-#define TARGET_NR_fchownat 54
+-#define TARGET_NR_fchown 55
+-#define TARGET_NR_openat 56
+-#define TARGET_NR_close 57
+-#define TARGET_NR_vhangup 58
+-#define TARGET_NR_pipe2 59
+-#define TARGET_NR_quotactl 60
+-#define TARGET_NR_getdents64 61
+-#define TARGET_NR_lseek 62
+-#define TARGET_NR_read 63
+-#define TARGET_NR_write 64
+-#define TARGET_NR_readv 65
+-#define TARGET_NR_writev 66
+-#define TARGET_NR_pread64 67
+-#define TARGET_NR_pwrite64 68
+-#define TARGET_NR_preadv 69
+-#define TARGET_NR_pwritev 70
+-#define TARGET_NR_sendfile 71
+-#define TARGET_NR_pselect6 72
+-#define TARGET_NR_ppoll 73
+-#define TARGET_NR_signalfd4 74
+-#define TARGET_NR_vmsplice 75
+-#define TARGET_NR_splice 76
+-#define TARGET_NR_tee 77
+-#define TARGET_NR_readlinkat 78
+-#define TARGET_NR_newfstatat 79
+-#define TARGET_NR_fstat 80
+-#define TARGET_NR_sync 81
+-#define TARGET_NR_fsync 82
+-#define TARGET_NR_fdatasync 83
+-#define TARGET_NR_sync_file_range 84
+-#define TARGET_NR_timerfd_create 85
+-#define TARGET_NR_timerfd_settime 86
+-#define TARGET_NR_timerfd_gettime 87
+-#define TARGET_NR_utimensat 88
+-#define TARGET_NR_acct 89
+-#define TARGET_NR_capget 90
+-#define TARGET_NR_capset 91
+-#define TARGET_NR_personality 92
+-#define TARGET_NR_exit 93
+-#define TARGET_NR_exit_group 94
+-#define TARGET_NR_waitid 95
+-#define TARGET_NR_set_tid_address 96
+-#define TARGET_NR_unshare 97
+-#define TARGET_NR_futex 98
+-#define TARGET_NR_set_robust_list 99
+-#define TARGET_NR_get_robust_list 100
+-#define TARGET_NR_nanosleep 101
+-#define TARGET_NR_getitimer 102
+-#define TARGET_NR_setitimer 103
+-#define TARGET_NR_kexec_load 104
+-#define TARGET_NR_init_module 105
+-#define TARGET_NR_delete_module 106
+-#define TARGET_NR_timer_create 107
+-#define TARGET_NR_timer_gettime 108
+-#define TARGET_NR_timer_getoverrun 109
+-#define TARGET_NR_timer_settime 110
+-#define TARGET_NR_timer_delete 111
+-#define TARGET_NR_clock_settime 112
+-#define TARGET_NR_clock_gettime 113
+-#define TARGET_NR_clock_getres 114
+-#define TARGET_NR_clock_nanosleep 115
+-#define TARGET_NR_syslog 116
+-#define TARGET_NR_ptrace 117
+-#define TARGET_NR_sched_setparam 118
+-#define TARGET_NR_sched_setscheduler 119
+-#define TARGET_NR_sched_getscheduler 120
+-#define TARGET_NR_sched_getparam 121
+-#define TARGET_NR_sched_setaffinity 122
+-#define TARGET_NR_sched_getaffinity 123
+-#define TARGET_NR_sched_yield 124
+-#define TARGET_NR_sched_get_priority_max 125
+-#define TARGET_NR_sched_get_priority_min 126
+-#define TARGET_NR_sched_rr_get_interval 127
+-#define TARGET_NR_restart_syscall 128
+-#define TARGET_NR_kill 129
+-#define TARGET_NR_tkill 130
+-#define TARGET_NR_tgkill 131
+-#define TARGET_NR_sigaltstack 132
+-#define TARGET_NR_rt_sigsuspend 133
+-#define TARGET_NR_rt_sigaction 134
+-#define TARGET_NR_rt_sigprocmask 135
+-#define TARGET_NR_rt_sigpending 136
+-#define TARGET_NR_rt_sigtimedwait 137
+-#define TARGET_NR_rt_sigqueueinfo 138
+-#define TARGET_NR_rt_sigreturn 139
+-#define TARGET_NR_setpriority 140
+-#define TARGET_NR_getpriority 141
+-#define TARGET_NR_reboot 142
+-#define TARGET_NR_setregid 143
+-#define TARGET_NR_setgid 144
+-#define TARGET_NR_setreuid 145
+-#define TARGET_NR_setuid 146
+-#define TARGET_NR_setresuid 147
+-#define TARGET_NR_getresuid 148
+-#define TARGET_NR_setresgid 149
+-#define TARGET_NR_getresgid 150
+-#define TARGET_NR_setfsuid 151
+-#define TARGET_NR_setfsgid 152
+-#define TARGET_NR_times 153
+-#define TARGET_NR_setpgid 154
+-#define TARGET_NR_getpgid 155
+-#define TARGET_NR_getsid 156
+-#define TARGET_NR_setsid 157
+-#define TARGET_NR_getgroups 158
+-#define TARGET_NR_setgroups 159
+-#define TARGET_NR_uname 160
+-#define TARGET_NR_sethostname 161
+-#define TARGET_NR_setdomainname 162
+-#define TARGET_NR_getrlimit 163
+-#define TARGET_NR_setrlimit 164
+-#define TARGET_NR_getrusage 165
+-#define TARGET_NR_umask 166
+-#define TARGET_NR_prctl 167
+-#define TARGET_NR_getcpu 168
+-#define TARGET_NR_gettimeofday 169
+-#define TARGET_NR_settimeofday 170
+-#define TARGET_NR_adjtimex 171
+-#define TARGET_NR_getpid 172
+-#define TARGET_NR_getppid 173
+-#define TARGET_NR_getuid 174
+-#define TARGET_NR_geteuid 175
+-#define TARGET_NR_getgid 176
+-#define TARGET_NR_getegid 177
+-#define TARGET_NR_gettid 178
+-#define TARGET_NR_sysinfo 179
+-#define TARGET_NR_mq_open 180
+-#define TARGET_NR_mq_unlink 181
+-#define TARGET_NR_mq_timedsend 182
+-#define TARGET_NR_mq_timedreceive 183
+-#define TARGET_NR_mq_notify 184
+-#define TARGET_NR_mq_getsetattr 185
+-#define TARGET_NR_msgget 186
+-#define TARGET_NR_msgctl 187
+-#define TARGET_NR_msgrcv 188
+-#define TARGET_NR_msgsnd 189
+-#define TARGET_NR_semget 190
+-#define TARGET_NR_semctl 191
+-#define TARGET_NR_semtimedop 192
+-#define TARGET_NR_semop 193
+-#define TARGET_NR_shmget 194
+-#define TARGET_NR_shmctl 195
+-#define TARGET_NR_shmat 196
+-#define TARGET_NR_shmdt 197
+-#define TARGET_NR_socket 198
+-#define TARGET_NR_socketpair 199
+-#define TARGET_NR_bind 200
+-#define TARGET_NR_listen 201
+-#define TARGET_NR_accept 202
+-#define TARGET_NR_connect 203
+-#define TARGET_NR_getsockname 204
+-#define TARGET_NR_getpeername 205
+-#define TARGET_NR_sendto 206
+-#define TARGET_NR_recvfrom 207
+-#define TARGET_NR_setsockopt 208
+-#define TARGET_NR_getsockopt 209
+-#define TARGET_NR_shutdown 210
+-#define TARGET_NR_sendmsg 211
+-#define TARGET_NR_recvmsg 212
+-#define TARGET_NR_readahead 213
+-#define TARGET_NR_brk 214
+-#define TARGET_NR_munmap 215
+-#define TARGET_NR_mremap 216
+-#define TARGET_NR_add_key 217
+-#define TARGET_NR_request_key 218
+-#define TARGET_NR_keyctl 219
+-#define TARGET_NR_clone 220
+-#define TARGET_NR_execve 221
+-#define TARGET_NR_mmap 222
+-#define TARGET_NR_fadvise64 223
+-#define TARGET_NR_swapon 224
+-#define TARGET_NR_swapoff 225
+-#define TARGET_NR_mprotect 226
+-#define TARGET_NR_msync 227
+-#define TARGET_NR_mlock 228
+-#define TARGET_NR_munlock 229
+-#define TARGET_NR_mlockall 230
+-#define TARGET_NR_munlockall 231
+-#define TARGET_NR_mincore 232
+-#define TARGET_NR_madvise 233
+-#define TARGET_NR_remap_file_pages 234
+-#define TARGET_NR_mbind 235
+-#define TARGET_NR_get_mempolicy 236
+-#define TARGET_NR_set_mempolicy 237
+-#define TARGET_NR_migrate_pages 238
+-#define TARGET_NR_move_pages 239
+-#define TARGET_NR_rt_tgsigqueueinfo 240
+-#define TARGET_NR_perf_event_open 241
+-#define TARGET_NR_accept4 242
+-#define TARGET_NR_recvmmsg 243
+-#define TARGET_NR_arch_specific_syscall 244
+-#define TARGET_NR_wait4 260
+-#define TARGET_NR_prlimit64 261
+-#define TARGET_NR_fanotify_init 262
+-#define TARGET_NR_fanotify_mark 263
+-#define TARGET_NR_name_to_handle_at 264
+-#define TARGET_NR_open_by_handle_at 265
+-#define TARGET_NR_clock_adjtime 266
+-#define TARGET_NR_syncfs 267
+-#define TARGET_NR_setns 268
+-#define TARGET_NR_sendmmsg 269
+-#define TARGET_NR_process_vm_readv 270
+-#define TARGET_NR_process_vm_writev 271
+-#define TARGET_NR_kcmp 272
+-#define TARGET_NR_finit_module 273
+-#define TARGET_NR_sched_setattr 274
+-#define TARGET_NR_sched_getattr 275
+-#define TARGET_NR_renameat2 276
+-#define TARGET_NR_seccomp 277
+-#define TARGET_NR_getrandom 278
+-#define TARGET_NR_memfd_create 279
+-#define TARGET_NR_bpf 280
+-#define TARGET_NR_execveat 281
+-#define TARGET_NR_userfaultfd 282
+-#define TARGET_NR_membarrier 283
+-#define TARGET_NR_mlock2 284
+-#define TARGET_NR_copy_file_range 285
+-#define TARGET_NR_preadv2 286
+-#define TARGET_NR_pwritev2 287
+-#define TARGET_NR_pkey_mprotect 288
+-#define TARGET_NR_pkey_alloc 289
+-#define TARGET_NR_pkey_free 290
+-#define TARGET_NR_statx 291
+-#define TARGET_NR_io_pgetevents 292
+-#define TARGET_NR_rseq 293
+-#define TARGET_NR_kexec_file_load 294
+-#define TARGET_NR_pidfd_send_signal 424
+-#define TARGET_NR_io_uring_setup 425
+-#define TARGET_NR_io_uring_enter 426
+-#define TARGET_NR_io_uring_register 427
+-#define TARGET_NR_open_tree 428
+-#define TARGET_NR_move_mount 429
+-#define TARGET_NR_fsopen 430
+-#define TARGET_NR_fsconfig 431
+-#define TARGET_NR_fsmount 432
+-#define TARGET_NR_fspick 433
+-#define TARGET_NR_pidfd_open 434
+-#define TARGET_NR_clone3 435
+-#define TARGET_NR_close_range 436
+-#define TARGET_NR_openat2 437
+-#define TARGET_NR_pidfd_getfd 438
+-#define TARGET_NR_faccessat2 439
+-#define TARGET_NR_process_madvise 440
+-#define TARGET_NR_epoll_pwait2 441
+-#define TARGET_NR_mount_setattr 442
+-#define TARGET_NR_quotactl_fd 443
+-#define TARGET_NR_landlock_create_ruleset 444
+-#define TARGET_NR_landlock_add_rule 445
+-#define TARGET_NR_landlock_restrict_self 446
+-#define TARGET_NR_memfd_secret 447
+-#define TARGET_NR_process_mrelease 448
+-#define TARGET_NR_futex_waitv 449
+-#define TARGET_NR_set_mempolicy_home_node 450
+-#define TARGET_NR_cachestat 451
+-#define TARGET_NR_fchmodat2 452
+-#define TARGET_NR_map_shadow_stack 453
+-#define TARGET_NR_futex_wake 454
+-#define TARGET_NR_futex_wait 455
+-#define TARGET_NR_futex_requeue 456
+-#define TARGET_NR_statmount 457
+-#define TARGET_NR_listmount 458
+-#define TARGET_NR_lsm_get_self_attr 459
+-#define TARGET_NR_lsm_set_self_attr 460
+-#define TARGET_NR_lsm_list_modules 461
+-#define TARGET_NR_mseal 462
+-#define TARGET_NR_syscalls 463
+-
+-#endif /* LINUX_USER_RISCV_SYSCALL64_NR_H */
+diff --git a/linux-user/riscv/syscall_nr.h b/linux-user/riscv/syscall_nr.h
+deleted file mode 100644
+index 0a5a2f2fb161..000000000000
+--- a/linux-user/riscv/syscall_nr.h
++++ /dev/null
+@@ -1,15 +0,0 @@
+-/*
+- * Syscall numbers from asm-generic, common for most
+- * of recently-added arches including RISC-V.
+- */
+-
+-#ifndef LINUX_USER_RISCV_SYSCALL_NR_H
+-#define LINUX_USER_RISCV_SYSCALL_NR_H
+-
+-#ifdef TARGET_RISCV32
+-# include "syscall32_nr.h"
+-#else
+-# include "syscall64_nr.h"
+-#endif
+-
+-#endif
+diff --git a/linux-user/riscv/syscallhdr.sh b/linux-user/riscv/syscallhdr.sh
+new file mode 100644
+index 000000000000..4069dc59b684
+--- /dev/null
++++ b/linux-user/riscv/syscallhdr.sh
+@@ -0,0 +1,28 @@
++#!/bin/sh
++# SPDX-License-Identifier: GPL-2.0
++
++in="$1"
++out="$2"
++my_abis=`echo "($3)" | tr ',' '|'`
++prefix="$4"
++offset="$5"
++
++fileguard=LINUX_USER_X86_64_`basename "$out" | sed \
++    -e 'y/abcdefghijklmnopqrstuvwxyz/ABCDEFGHIJKLMNOPQRSTUVWXYZ/' \
++    -e 's/[^A-Z0-9_]/_/g' -e 's/__/_/g'`
++grep -E "^[0-9A-Fa-fXx]+[[:space:]]+${my_abis}" "$in" | sort -n | (
++    echo "#ifndef ${fileguard}"
++    echo "#define ${fileguard} 1"
++    echo ""
++
++    while read nr abi name entry compat ; do
++    if [ -z "$offset" ]; then
++        echo "#define TARGET_NR_${prefix}${name} $nr"
++    else
++        echo "#define TARGET_NR_${prefix}${name} ($offset + $nr)"
++        fi
++    done
++
++    echo ""
++    echo "#endif /* ${fileguard} */"
++) > "$out"
+diff --git a/scripts/gensyscalls.sh b/scripts/gensyscalls.sh
+index 68de3f1aca3c..babbc6127de4 100755
+--- a/scripts/gensyscalls.sh
++++ b/scripts/gensyscalls.sh
+@@ -93,8 +93,6 @@ generate_syscall_nr()
+ mkdir "$TMP/asm"
+ > "$TMP/asm/bitsperlong.h"
+ 
+-generate_syscall_nr riscv 32 "$output/linux-user/riscv/syscall32_nr.h"
+-generate_syscall_nr riscv 64 "$output/linux-user/riscv/syscall64_nr.h"
+ generate_syscall_nr hexagon 32 "$output/linux-user/hexagon/syscall_nr.h"
+ generate_syscall_nr loongarch 64 "$output/linux-user/loongarch64/syscall_nr.h"
+ rm -fr "$TMP"
+diff --git a/scripts/update-syscalltbl.sh b/scripts/update-syscalltbl.sh
+index c3f898fd9f6c..cf3ea1dea143 100755
+--- a/scripts/update-syscalltbl.sh
++++ b/scripts/update-syscalltbl.sh
+@@ -10,6 +10,7 @@ arch/mips/kernel/syscalls/syscall_o32.tbl,linux-user/mips/syscall_o32.tbl \
+ scripts/syscall.tbl,linux-user/openrisc/syscall.tbl \
+ arch/parisc/kernel/syscalls/syscall.tbl,linux-user/hppa/syscall.tbl \
+ arch/powerpc/kernel/syscalls/syscall.tbl,linux-user/ppc/syscall.tbl \
++scripts/syscall.tbl,linux-user/riscv/syscall.tbl \
+ arch/s390/kernel/syscalls/syscall.tbl,linux-user/s390x/syscall.tbl \
+ arch/sh/kernel/syscalls/syscall.tbl,linux-user/sh4/syscall.tbl \
+ arch/sparc/kernel/syscalls/syscall.tbl,linux-user/sparc64/syscall.tbl \
+-- 
+2.46.0
 
-Thanks,
-Zhiwei
-
->
-> Best Regards,
-> Swung0x48 (aka. Huang Shiyuan)
->
-> Get Outlook for Android <https://aka.ms/AAb9ysg>
-> ------------------------------------------------------------------------
-> *From:* Richard Henderson <richard.henderson@linaro.org>
-> *Sent:* Wednesday, September 18, 2024 10:27:16 PM
-> *To:* LIU Zhiwei <zhiwei_liu@linux.alibaba.com>; qemu-devel@nongnu.org 
-> <qemu-devel@nongnu.org>
-> *Cc:* qemu-riscv@nongnu.org <qemu-riscv@nongnu.org>; 
-> palmer@dabbelt.com <palmer@dabbelt.com>; alistair.francis@wdc.com 
-> <alistair.francis@wdc.com>; dbarboza@ventanamicro.com 
-> <dbarboza@ventanamicro.com>; liwei1518@gmail.com 
-> <liwei1518@gmail.com>; bmeng.cn@gmail.com <bmeng.cn@gmail.com>; 
-> Swung0x48 <swung0x48@outlook.com>; TANG Tiancheng 
-> <tangtiancheng.ttc@alibaba-inc.com>
-> *Subject:* Re: [PATCH v4 02/12] tcg/riscv: Add basic support for vector
-> On 9/18/24 12:43, LIU Zhiwei wrote:
-> >
-> > On 2024/9/18 18:11, Richard Henderson wrote:
-> >> On 9/18/24 07:17, LIU Zhiwei wrote:
-> >>>
-> >>> On 2024/9/12 2:41, Richard Henderson wrote:
-> >>>> On 9/11/24 06:26, LIU Zhiwei wrote:
-> >>>>> From: Swung0x48<swung0x48@outlook.com>
-> >>>>>
-> >>>>> The RISC-V vector instruction set utilizes the LMUL field to group
-> >>>>> multiple registers, enabling variable-length vector registers. This
-> >>>>> implementation uses only the first register number of each group 
-> while
-> >>>>> reserving the other register numbers within the group.
-> >>>>>
-> >>>>> In TCG, each VEC_IR can have 3 types (TCG_TYPE_V64/128/256), and the
-> >>>>> host runtime needs to adjust LMUL based on the type to use different
-> >>>>> register groups.
-> >>>>>
-> >>>>> This presents challenges for TCG's register allocation. 
-> Currently, we
-> >>>>> avoid modifying the register allocation part of TCG and only 
-> expose the
-> >>>>> minimum number of vector registers.
-> >>>>>
-> >>>>> For example, when the host vlen is 64 bits and type is 
-> TCG_TYPE_V256, with
-> >>>>> LMUL equal to 4, we use 4 vector registers as one register 
-> group. We can
-> >>>>> use a maximum of 8 register groups, but the V0 register number 
-> is reserved
-> >>>>> as a mask register, so we can effectively use at most 7 register 
-> groups.
-> >>>>> Moreover, when type is smaller than TCG_TYPE_V256, only 7 
-> registers are
-> >>>>> forced to be used. This is because TCG cannot yet dynamically 
-> constrain
-> >>>>> registers with type; likewise, when the host vlen is 128 bits and
-> >>>>> TCG_TYPE_V256, we can use at most 15 registers.
-> >>>>>
-> >>>>> There is not much pressure on vector register allocation in TCG 
-> now, so
-> >>>>> using 7 registers is feasible and will not have a major impact 
-> on code
-> >>>>> generation.
-> >>>>>
-> >>>>> This patch:
-> >>>>> 1. Reserves vector register 0 for use as a mask register.
-> >>>>> 2. When using register groups, reserves the additional registers 
-> within
-> >>>>>     each group.
-> >>>>>
-> >>>>> Signed-off-by: TANG Tiancheng<tangtiancheng.ttc@alibaba-inc.com>
-> >>>>> Co-authored-by: TANG Tiancheng<tangtiancheng.ttc@alibaba-inc.com>
-> >>>>
-> >>>> If there is a co-author, there should be another Signed-off-by.
-> >>>
-> >>> This patch has added a tag:
-> >>>
-> >>> Signed-off-by: TANG Tiancheng<tangtiancheng.ttc@alibaba-inc.com>
-> >>>
-> >>>
-> >>> Do you mean we should add the same tag twice?
-> >>
-> >> The from line is "Swung0x48 <swung0x48@outlook.com>".
-> >> If this is an alternate email for TANG Tiancheng,
-> >
-> > No, Swung0x48 is another author.
->
-> Then we need a proper Signed-off-by line from that author.
->
->
-> r~
---------------GcLzkqPsHQyKeZ4EltwQppKH
-Content-Type: text/html; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  </head>
-  <body>
-    <p><br>
-    </p>
-    <div class="moz-cite-prefix">On 2024/9/20 12:01, 0x48 Swung wrote:<br>
-    </div>
-    <blockquote type="cite"
-cite="mid:SY8P300MB02825DF878585DDC68EB088CE06C2@SY8P300MB0282.AUSP300.PROD.OUTLOOK.COM">
-      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-      <div dir="auto">Hey ever<span>yone! Late to the <span>party. Life
-            happens sometimes ;)</span></span></div>
-      <div dir="auto"><span><span>Just discovered this patch and this
-            mail list, and I'd like to provide some back<span>ground
-              story here.</span></span></span></div>
-      <div dir="auto">I originally provided my initial implementation in
-        a downstream repo last year, namely <a rel="noreferrer noopener"
-href="https://github.com/plctlab/plct-qemu/tree/plct-riscv-backend-rvv"
-style="font-family: sans-serif; font-size: medium; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; color: rgb(0, 120, 212); background-color: rgb(255, 255, 255);"
-          moz-do-not-send="true" class="moz-txt-link-freetext">https://github.com/plctlab/plct-qemu/tree/plct-riscv-backend-rvv</a> .</div>
-      <div dir="auto">I'm new to contributing to qemu and also take part
-        in the open-source community upstreaming process as a whole, so
-        I may make mistakes in my following claims, but I see some
-        confusion here:</div>
-      <div dir="auto">1. The PLCT branch (which includes my original
-        commits) is open-sourced using GPLv2, which follows QEMU's
-        upstream repo. So acc<span>ording to the license, my
-          modification should be EXPLICITLY shown in the patch, but I
-          haven't seen any.</span></div>
-      <div dir="auto"><span>2. I do consent upstreaming my patch last
-          year, in the form of a patch submitted with modifications from
-          T-head, and on behalf of them. And it was agreed back in the
-          days that I can be mentioned as one of the authors. But it
-          turns<span> out that there's no "sign-off", "author",
-            "co-author" line mentioning me. If I don't speak out in this
-            situ<span>ation, does it imply that this patch is purely LIU
-              Zhiwei's work and have nothing to <span>do with me?</span></span></span></span></div>
-      <div dir="auto"><span><span><span><span><br>
-              </span></span></span></span></div>
-      <div dir="auto"><span><span><span><span>I'd like LIU to separate
-                my patch and his modifi<span>cation to two separate
-                  patches, and explicitly name where are tho<span>se
-                    patches com<span>ing from, so that this patch can
-                      comply to GPLv2 license and can we clarify those
-                      misun<span>derstandings.</span></span></span></span></span></span></span></span></div>
-      <div dir="auto"><span><span><span><span><br>
-              </span></span></span></span></div>
-      <div dir="auto"><span><span><span><span>I don't want to take it <span>personally
-                  , but I do smell something's wrong going on here...</span></span></span></span></span></div>
-    </blockquote>
-    <p>I think there was a misunderstanding. But I will not explain it
-      too much here. If you agree, please don't block this work and send
-      the tag as Daniel and Markus point out.</p>
-    <p>Thanks,<br>
-      Zhiwei<br>
-    </p>
-    <blockquote type="cite"
-cite="mid:SY8P300MB02825DF878585DDC68EB088CE06C2@SY8P300MB0282.AUSP300.PROD.OUTLOOK.COM">
-      <div dir="auto"><span><span><span><span><span><br>
-                </span></span></span></span></span></div>
-      <div dir="auto"><span><span><span><span><span>Best Rega<span>rds,</span></span></span></span></span></span></div>
-      <div dir="auto"><span><span><span><span><span><span>Swung0x48
-                    (aka. Huang Shiyuan)</span></span></span></span></span></span></div>
-      <div><br>
-      </div>
-      <div id="ms-outlook-mobile-signature" dir="auto">Get <a
-          href="https://aka.ms/AAb9ysg" moz-do-not-send="true">
-          Outlook for Android</a></div>
-      <hr style="display:inline-block;width:98%" tabindex="-1">
-      <div id="divRplyFwdMsg" dir="ltr"><font style="font-size:11pt"
-          face="Calibri, sans-serif" color="#000000"><b>From:</b>
-          Richard Henderson <a class="moz-txt-link-rfc2396E" href="mailto:richard.henderson@linaro.org">&lt;richard.henderson@linaro.org&gt;</a><br>
-          <b>Sent:</b> Wednesday, September 18, 2024 10:27:16 PM<br>
-          <b>To:</b> LIU Zhiwei <a class="moz-txt-link-rfc2396E" href="mailto:zhiwei_liu@linux.alibaba.com">&lt;zhiwei_liu@linux.alibaba.com&gt;</a>;
-          <a class="moz-txt-link-abbreviated" href="mailto:qemu-devel@nongnu.org">qemu-devel@nongnu.org</a> <a class="moz-txt-link-rfc2396E" href="mailto:qemu-devel@nongnu.org">&lt;qemu-devel@nongnu.org&gt;</a><br>
-          <b>Cc:</b> <a class="moz-txt-link-abbreviated" href="mailto:qemu-riscv@nongnu.org">qemu-riscv@nongnu.org</a>
-          <a class="moz-txt-link-rfc2396E" href="mailto:qemu-riscv@nongnu.org">&lt;qemu-riscv@nongnu.org&gt;</a>; <a class="moz-txt-link-abbreviated" href="mailto:palmer@dabbelt.com">palmer@dabbelt.com</a>
-          <a class="moz-txt-link-rfc2396E" href="mailto:palmer@dabbelt.com">&lt;palmer@dabbelt.com&gt;</a>; <a class="moz-txt-link-abbreviated" href="mailto:alistair.francis@wdc.com">alistair.francis@wdc.com</a>
-          <a class="moz-txt-link-rfc2396E" href="mailto:alistair.francis@wdc.com">&lt;alistair.francis@wdc.com&gt;</a>; <a class="moz-txt-link-abbreviated" href="mailto:dbarboza@ventanamicro.com">dbarboza@ventanamicro.com</a>
-          <a class="moz-txt-link-rfc2396E" href="mailto:dbarboza@ventanamicro.com">&lt;dbarboza@ventanamicro.com&gt;</a>; <a class="moz-txt-link-abbreviated" href="mailto:liwei1518@gmail.com">liwei1518@gmail.com</a>
-          <a class="moz-txt-link-rfc2396E" href="mailto:liwei1518@gmail.com">&lt;liwei1518@gmail.com&gt;</a>; <a class="moz-txt-link-abbreviated" href="mailto:bmeng.cn@gmail.com">bmeng.cn@gmail.com</a>
-          <a class="moz-txt-link-rfc2396E" href="mailto:bmeng.cn@gmail.com">&lt;bmeng.cn@gmail.com&gt;</a>; Swung0x48
-          <a class="moz-txt-link-rfc2396E" href="mailto:swung0x48@outlook.com">&lt;swung0x48@outlook.com&gt;</a>; TANG Tiancheng
-          <a class="moz-txt-link-rfc2396E" href="mailto:tangtiancheng.ttc@alibaba-inc.com">&lt;tangtiancheng.ttc@alibaba-inc.com&gt;</a><br>
-          <b>Subject:</b> Re: [PATCH v4 02/12] tcg/riscv: Add basic
-          support for vector</font>
-        <div> </div>
-      </div>
-      <div class="BodyFragment"><font size="2"><span
-            style="font-size:11pt;">
-            <div class="PlainText">On 9/18/24 12:43, LIU Zhiwei wrote:<br>
-              &gt; <br>
-              &gt; On 2024/9/18 18:11, Richard Henderson wrote:<br>
-              &gt;&gt; On 9/18/24 07:17, LIU Zhiwei wrote:<br>
-              &gt;&gt;&gt;<br>
-              &gt;&gt;&gt; On 2024/9/12 2:41, Richard Henderson wrote:<br>
-              &gt;&gt;&gt;&gt; On 9/11/24 06:26, LIU Zhiwei wrote:<br>
-              &gt;&gt;&gt;&gt;&gt; From:
-              Swung0x48<a class="moz-txt-link-rfc2396E" href="mailto:swung0x48@outlook.com">&lt;swung0x48@outlook.com&gt;</a><br>
-              &gt;&gt;&gt;&gt;&gt;<br>
-              &gt;&gt;&gt;&gt;&gt; The RISC-V vector instruction set
-              utilizes the LMUL field to group<br>
-              &gt;&gt;&gt;&gt;&gt; multiple registers, enabling
-              variable-length vector registers. This<br>
-              &gt;&gt;&gt;&gt;&gt; implementation uses only the first
-              register number of each group while<br>
-              &gt;&gt;&gt;&gt;&gt; reserving the other register numbers
-              within the group.<br>
-              &gt;&gt;&gt;&gt;&gt;<br>
-              &gt;&gt;&gt;&gt;&gt; In TCG, each VEC_IR can have 3 types
-              (TCG_TYPE_V64/128/256), and the<br>
-              &gt;&gt;&gt;&gt;&gt; host runtime needs to adjust LMUL
-              based on the type to use different<br>
-              &gt;&gt;&gt;&gt;&gt; register groups.<br>
-              &gt;&gt;&gt;&gt;&gt;<br>
-              &gt;&gt;&gt;&gt;&gt; This presents challenges for TCG's
-              register allocation. Currently, we<br>
-              &gt;&gt;&gt;&gt;&gt; avoid modifying the register
-              allocation part of TCG and only expose the<br>
-              &gt;&gt;&gt;&gt;&gt; minimum number of vector registers.<br>
-              &gt;&gt;&gt;&gt;&gt;<br>
-              &gt;&gt;&gt;&gt;&gt; For example, when the host vlen is 64
-              bits and type is TCG_TYPE_V256, with<br>
-              &gt;&gt;&gt;&gt;&gt; LMUL equal to 4, we use 4 vector
-              registers as one register group. We can<br>
-              &gt;&gt;&gt;&gt;&gt; use a maximum of 8 register groups,
-              but the V0 register number is reserved<br>
-              &gt;&gt;&gt;&gt;&gt; as a mask register, so we can
-              effectively use at most 7 register groups.<br>
-              &gt;&gt;&gt;&gt;&gt; Moreover, when type is smaller than
-              TCG_TYPE_V256, only 7 registers are<br>
-              &gt;&gt;&gt;&gt;&gt; forced to be used. This is because
-              TCG cannot yet dynamically constrain<br>
-              &gt;&gt;&gt;&gt;&gt; registers with type; likewise, when
-              the host vlen is 128 bits and<br>
-              &gt;&gt;&gt;&gt;&gt; TCG_TYPE_V256, we can use at most 15
-              registers.<br>
-              &gt;&gt;&gt;&gt;&gt;<br>
-              &gt;&gt;&gt;&gt;&gt; There is not much pressure on vector
-              register allocation in TCG now, so<br>
-              &gt;&gt;&gt;&gt;&gt; using 7 registers is feasible and
-              will not have a major impact on code<br>
-              &gt;&gt;&gt;&gt;&gt; generation.<br>
-              &gt;&gt;&gt;&gt;&gt;<br>
-              &gt;&gt;&gt;&gt;&gt; This patch:<br>
-              &gt;&gt;&gt;&gt;&gt; 1. Reserves vector register 0 for use
-              as a mask register.<br>
-              &gt;&gt;&gt;&gt;&gt; 2. When using register groups,
-              reserves the additional registers within<br>
-              &gt;&gt;&gt;&gt;&gt;     each group.<br>
-              &gt;&gt;&gt;&gt;&gt;<br>
-              &gt;&gt;&gt;&gt;&gt; Signed-off-by: TANG
-              Tiancheng<a class="moz-txt-link-rfc2396E" href="mailto:tangtiancheng.ttc@alibaba-inc.com">&lt;tangtiancheng.ttc@alibaba-inc.com&gt;</a><br>
-              &gt;&gt;&gt;&gt;&gt; Co-authored-by: TANG
-              Tiancheng<a class="moz-txt-link-rfc2396E" href="mailto:tangtiancheng.ttc@alibaba-inc.com">&lt;tangtiancheng.ttc@alibaba-inc.com&gt;</a><br>
-              &gt;&gt;&gt;&gt;<br>
-              &gt;&gt;&gt;&gt; If there is a co-author, there should be
-              another Signed-off-by.<br>
-              &gt;&gt;&gt;<br>
-              &gt;&gt;&gt; This patch has added a tag:<br>
-              &gt;&gt;&gt;<br>
-              &gt;&gt;&gt; Signed-off-by: TANG
-              Tiancheng<a class="moz-txt-link-rfc2396E" href="mailto:tangtiancheng.ttc@alibaba-inc.com">&lt;tangtiancheng.ttc@alibaba-inc.com&gt;</a><br>
-              &gt;&gt;&gt;<br>
-              &gt;&gt;&gt;<br>
-              &gt;&gt;&gt; Do you mean we should add the same tag twice?<br>
-              &gt;&gt;<br>
-              &gt;&gt; The from line is "Swung0x48
-              <a class="moz-txt-link-rfc2396E" href="mailto:swung0x48@outlook.com">&lt;swung0x48@outlook.com&gt;</a>".<br>
-              &gt;&gt; If this is an alternate email for TANG Tiancheng,<br>
-              &gt; <br>
-              &gt; No, Swung0x48 is another author.<br>
-              <br>
-              Then we need a proper Signed-off-by line from that author.<br>
-              <br>
-              <br>
-              r~<br>
-            </div>
-          </span></font></div>
-    </blockquote>
-  </body>
-</html>
-
---------------GcLzkqPsHQyKeZ4EltwQppKH--
 
