@@ -4,142 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EF266CF58CB
-	for <qemu-riscv@archiver.kernel.org>; Fri, 20 Sep 2024 04:45:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 663B3C78820
+	for <qemu-riscv@archiver.kernel.org>; Fri, 20 Sep 2024 11:27:18 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1srVVW-0004yA-NK; Fri, 20 Sep 2024 00:44:38 -0400
+	id 1srbn2-0004dq-MG; Fri, 20 Sep 2024 07:27:08 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <swung0x48@outlook.com>)
- id 1srUq3-00079z-FF; Fri, 20 Sep 2024 00:01:47 -0400
-Received: from mail-me3aus01olkn2081a.outbound.protection.outlook.com
- ([2a01:111:f403:2818::81a]
- helo=AUS01-ME3-obe.outbound.protection.outlook.com)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <swung0x48@outlook.com>)
- id 1srUq0-0003TK-Oo; Fri, 20 Sep 2024 00:01:47 -0400
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=RKT+Qjknt5JNoMHrgj/YJqWRxmaOykPqor+rAFUb8KYtYdglYIss+M5zGxcGlADfiuNO+Otd+ZT3DWrUoWQ6CGQpl6HcfOBkIIGljzmHotbl0fgfCw10dJOOi6tiHA+d52b/BjtTx2ecBpBM28R2ycIJuqdKPnjkRhhzha8HLaipmUMfdXHOi0QMTS7WFtttiPQfH4oQvhCiVJ67XWvq8jih1Pp/kJCM2wTvAzpg3grcPOOvG0QJrocRCCF+wRZ1c/JYR8sqRONVu76khcpiB6o0RqvHGzZBH67rY5IhVkirITe6UhJXb8c+N3HfMWURTpaimSsqWErev3Hu6HPZtw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=Ex7raIjRS9Vz/xflVtDRKgPcFKc0WMt++ecnfwwBym0=;
- b=BqFXaDxT9dcxujOziXx2lY7V7pc7+5YxMDRoZjmHyLBZsT+C+QG3lYpITTrlqcDXLki63fxmzbKKFsKkvIO3eRWu62OgOATppVUfnDrIQNAz1kmPZOMju2ebBViYljdSQe+Ki+oJORWTOg2ciWZRxXdhcrgPGi+JiIOrG9I2oKfwTUN5DYmP57VPNX6eEAzYKvbwh8zEthT43bhWkuKsSuhjdOVGHNixBmVRFQc7iXoINOtBDltEFJ4OWevkDg+IHeifSM4epHNibMd0l3B/aitxKG8y8hNw3CRf/M6AewbTsl3sEDCB3waq2Joghya8MR4x11LUZ46jpon8TJbR2g==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=none; dmarc=none;
- dkim=none; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=outlook.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Ex7raIjRS9Vz/xflVtDRKgPcFKc0WMt++ecnfwwBym0=;
- b=egwty39qNpSVwdUQTJIyaOiK0IvQLCPHEuay/lwfRTowjqYJ2HhOzq5HxQc5bMsvTlVK0mGU/XhTd+vP/pHYbtMP1aaIALDc4hPsBAX1RfEUaezebymSbrarQEDi8wF+vdiM25OZP84fb0Ww4VgbpOltIoDeKo+DJljOOlGdlaf3/1ND752RyKhz5wihSDrQLRrp8t3ZriiaVZr7NDW2uG/h7lnYN2ovQsxtwoBARH7T+De7dKVDdlyOiBGaj+JnGS48lFhLggxcYEz6UwNQ3rtVGW7EFQ1sjUKpsOt8tZ5WlQILgQ6DHgSyoQOnr/vX1a9OEGA2nj9PeTzHEHpkbQ==
-Received: from SY8P300MB0282.AUSP300.PROD.OUTLOOK.COM (2603:10c6:10:262::8) by
- SY8P300MB0571.AUSP300.PROD.OUTLOOK.COM (2603:10c6:10:299::14) with
- Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.7982.17; Fri, 20 Sep 2024 04:01:35 +0000
-Received: from SY8P300MB0282.AUSP300.PROD.OUTLOOK.COM
- ([fe80::70b2:a779:d7b3:2e0f]) by SY8P300MB0282.AUSP300.PROD.OUTLOOK.COM
- ([fe80::70b2:a779:d7b3:2e0f%4]) with mapi id 15.20.7962.022; Fri, 20 Sep 2024
- 04:01:35 +0000
-From: 0x48 Swung <swung0x48@outlook.com>
-To: Richard Henderson <richard.henderson@linaro.org>, LIU Zhiwei
- <zhiwei_liu@linux.alibaba.com>, "qemu-devel@nongnu.org"
- <qemu-devel@nongnu.org>
-CC: "qemu-riscv@nongnu.org" <qemu-riscv@nongnu.org>, "palmer@dabbelt.com"
- <palmer@dabbelt.com>, "alistair.francis@wdc.com" <alistair.francis@wdc.com>,
- "dbarboza@ventanamicro.com" <dbarboza@ventanamicro.com>,
- "liwei1518@gmail.com" <liwei1518@gmail.com>, "bmeng.cn@gmail.com"
- <bmeng.cn@gmail.com>, TANG Tiancheng <tangtiancheng.ttc@alibaba-inc.com>
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1srbmx-0004dG-OW
+ for qemu-riscv@nongnu.org; Fri, 20 Sep 2024 07:27:03 -0400
+Received: from mail-pf1-x436.google.com ([2607:f8b0:4864:20::436])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1srbmv-00048q-6W
+ for qemu-riscv@nongnu.org; Fri, 20 Sep 2024 07:27:03 -0400
+Received: by mail-pf1-x436.google.com with SMTP id
+ d2e1a72fcca58-7198de684a7so1404887b3a.2
+ for <qemu-riscv@nongnu.org>; Fri, 20 Sep 2024 04:27:00 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=ventanamicro.com; s=google; t=1726831619; x=1727436419; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=BdeW3p24owznaYlqCLJU8dQ2EYtHaCE6uN6OzIGGVp0=;
+ b=G5rTPPTZ3B1M+6YmnldP78RO0ObMzA7JrEgE6jbR9BBjFniNaHibPsCudB6f1k9+p3
+ kG1ivnnUytqr68SSQp2XpgOZkowBcGPkPgycta3ulpq3scmhGz/wgh40t90/lQdZG6CL
+ Uqh2vtJBnPgtC9i4Y8Q5dZZGA76DfvrZLfzwpfm2p6vBHWGgbT9ofVBGClwQl4lMjq7W
+ V/YbDDSXq+JPSjI9oXv0Mz3zAgUg+6bsbD/Brly+ETwKmTbxNbE7PSBcGrjKUM8IXFfO
+ Digotj2XZAXHaqzY847qDXouvMPBVFasot6SIqRby6K4IJiP2ldtM0Lu19iu3leoBLKD
+ tUiQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1726831619; x=1727436419;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=BdeW3p24owznaYlqCLJU8dQ2EYtHaCE6uN6OzIGGVp0=;
+ b=m0z/fnjxsEgJJhJpb+tN50CMR2tk04AcGF2xF4E/2eDJl7i7CCIEihVbUpYcb00bPj
+ 1xmNzJNzV3CFQ2F45SKBQaWHRMYgE5t+BL6PkEVw/dJBeALiNqDRC187uWHPbbo0AJ3e
+ SFk0lLBp8znaBwOrZQn4+FWLSZlC6MBEX9XxyOLNcCep1gLtWFKuaQOgtCMzCttbFlVU
+ L0PEaE+iLI6mAqKGpdNXzAaDW39AckWF4NKbJ6JmGAhVxazMBkKdn2HUSiR1YbPxhdws
+ pEOFADaQv75vzHpqL+ngStgPQlroVKCUVJp60kZkvoUALNTsiE+P9zs9JeaMO+YhAd3t
+ jiZg==
+X-Gm-Message-State: AOJu0YzdRj9h2WppzSy6bvsOYmA8L5Uef2S3UfBYpzNKXqhmiqEXkTN9
+ LyweSetuS2BhFJZaL0ssy4iQdjSYYmew3qfoWXHtOpNokjvR3Hthz8Q6ibkf4O8=
+X-Google-Smtp-Source: AGHT+IEqOa4eHD+YJbcRQ53I4UxRmDg2TQGcYEcDR/OMXSnqlHRCAN6oSGl+yxvwvfFS/Xkv28odNA==
+X-Received: by 2002:a05:6a00:3e02:b0:717:839c:6822 with SMTP id
+ d2e1a72fcca58-7199ce8f2b2mr3834319b3a.17.1726831618788; 
+ Fri, 20 Sep 2024 04:26:58 -0700 (PDT)
+Received: from [192.168.68.110] (201-68-240-33.dsl.telesp.net.br.
+ [201.68.240.33]) by smtp.gmail.com with ESMTPSA id
+ d2e1a72fcca58-71944b7ee58sm9656894b3a.127.2024.09.20.04.26.55
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 20 Sep 2024 04:26:58 -0700 (PDT)
+Message-ID: <e1ecceab-084e-4864-a361-e5f06fa4b57d@ventanamicro.com>
+Date: Fri, 20 Sep 2024 08:26:52 -0300
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
 Subject: Re: [PATCH v4 02/12] tcg/riscv: Add basic support for vector
-Thread-Topic: [PATCH v4 02/12] tcg/riscv: Add basic support for vector
-Thread-Index: AQHbBE6HkCjgGq4WQkCpc+O+WxTXqLJS672AgAofvACAAFJBAIAACN+AgAA+ggCAAlv36A==
-Date: Fri, 20 Sep 2024 04:01:35 +0000
-Message-ID: <SY8P300MB02825DF878585DDC68EB088CE06C2@SY8P300MB0282.AUSP300.PROD.OUTLOOK.COM>
+To: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>, qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, palmer@dabbelt.com, alistair.francis@wdc.com,
+ liwei1518@gmail.com, bmeng.cn@gmail.com, richard.henderson@linaro.org,
+ Swung0x48 <swung0x48@outlook.com>,
+ TANG Tiancheng <tangtiancheng.ttc@alibaba-inc.com>
 References: <20240911132630.461-1-zhiwei_liu@linux.alibaba.com>
  <20240911132630.461-3-zhiwei_liu@linux.alibaba.com>
- <0d591570-02c6-48c9-9e3f-ef47ac20ce7d@linaro.org>
- <b87e7a7e-41fd-4b26-bde3-9adca9babb24@linux.alibaba.com>
- <33101e38-080d-4444-a8c3-9d01827e243f@linaro.org>
- <b88244bc-aaf7-42f9-a90f-e4027ac72ebf@linux.alibaba.com>
- <20e20fde-830f-4314-a944-e7973bda5d8c@linaro.org>
-In-Reply-To: <20e20fde-830f-4314-a944-e7973bda5d8c@linaro.org>
-Accept-Language: en-US
 Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-ms-reactions: allow
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: SY8P300MB0282:EE_|SY8P300MB0571:EE_
-x-ms-office365-filtering-correlation-id: 9b5b4a7b-79a6-4e34-d1ef-08dcd928eb61
-x-microsoft-antispam: BCL:0;
- ARA:14566002|8060799006|19110799003|14030799003|461199028|15080799006|12050799009|7092599003|9400799024|440099028|3412199025|4302099013|3430499032|102099032|1602099012|10035399004;
-x-microsoft-antispam-message-info: =?us-ascii?Q?qmmZ1r53EyJ+XpcHotY8eJ0tsVfxQluGEtl81zKU6VqrdGxO3qBElSyrsbfm?=
- =?us-ascii?Q?qUNRcgylDRQH4ecvYzWwU2nyya77mlPUVMIPKDW3eGnwjXY9aJa12JuUN4d2?=
- =?us-ascii?Q?qK8eIUfIDAVbv3LIdBLsyl6IBVMD02N2kS+7YKYcgrastJQGjpMLo4r7zg4g?=
- =?us-ascii?Q?saQcwPw/fK5NfbfipgYRgacBrLGjZN23FCq8Zwn6e0k5Mqd37b1QQcLdqMT3?=
- =?us-ascii?Q?B1B2KJxSYYxXhJ6afVYDMr52fzQ4CmjeibdslHyeVNdnd64gYzvtJOxaBC8D?=
- =?us-ascii?Q?vin491yvCNvXA7AvmHBXiKBtn0Nb8zxEcSjCiWXkIpBNO0e0nn61yPi034gH?=
- =?us-ascii?Q?UGnee6VnXMH4mvqdjIXejpTxEmno5HryEttkfuk3Xh/zDsCwA1gOQr7IlspO?=
- =?us-ascii?Q?HLL62vJzED1tJko0NuhcrdPAJSfCkcG2GL/6fothZayNqNzNnIU92Q5qIzIS?=
- =?us-ascii?Q?EW+4ZvivF9zZY7HKcZ4qUhwaVytHe8Q0gXgbmVPg5IR6XitArA25KNSNQb2x?=
- =?us-ascii?Q?Z6DKomRZ/4ZAgLFK1Dtdj97PLo1IFS0HS88juWkZobIsXifJujnuT71pGs2U?=
- =?us-ascii?Q?lpz2brMLNwl6d3jMMX20eEjrnubAtn34v8omhDWKnYny0gLCW9i6Petu1UZT?=
- =?us-ascii?Q?AeGgcv1Tv8BzMhf0HwCUxr1BkC1NAr3nbANWPm62Bn/Sb2ws6OkxPaU7Bpcl?=
- =?us-ascii?Q?Z40foQPrpXPPq6TFNvMw2LwliH0KS7PQhgF7RieYq9oQM183FB9TaTPaUmfu?=
- =?us-ascii?Q?OxJo5TnomSmWZqDU/284rOu/neSYc305e/BsEfVFRmSkUrcNNtGEJgznFuMx?=
- =?us-ascii?Q?WxNKBwp/tjBoLa7G50QnKvgA4XFb+8fxQniMK8SNqIk+ykzQc41R0CHPfYnG?=
- =?us-ascii?Q?qeKq0vrwUuRQk1LXb4U3juU2uV/oRSB9IGmZnWzWhHRtBZ5igVeZ96wcSf2s?=
- =?us-ascii?Q?Ncw4C00Ur5WwXv4MVmjr/A=3D=3D?=
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?us-ascii?Q?LObRskrN3EMe+SWFUyPVAqO6jA8j0lYHA4ipcdynIjECcqzwZcN0s5k1pyg3?=
- =?us-ascii?Q?EXikJ/q2QCLjXNl0er3EEVGwlk2x9oZHn2S6y3sOY/xFlO6khW2y1aqPdxSD?=
- =?us-ascii?Q?JILjHyFuA+BBkDMO8Kzfh6ZLk2KiFPvqSKki0p0h5us+QzSNJpc7hVg77vm7?=
- =?us-ascii?Q?hMYX48LBqbLSS4EtumJlgyiNt8lj7syrmEail+NZ1rRAe4dW14nPZHF4RamS?=
- =?us-ascii?Q?+S3x7nwe+HOK4O8909uKVjDqIJaUUa0GMpTiCnUY0/B2gAZv1FPrYOl9fpZ6?=
- =?us-ascii?Q?jbMntgnuSiQxdct1hFoSEzqgkNVRUBdo9UyyRFai0jYAmn0q8kv/Zg3to4gc?=
- =?us-ascii?Q?fqXgc0HMVM1ZeqwS5IeTsh+8DUSQeSreLTqlkq9Ar5jkW7vvuEQE20og8t6E?=
- =?us-ascii?Q?C+HPT86riq7GuAZMNhZvHvktbcQpcZgxeAGS09O4O6QWN34Y+jBaSQn1XqxS?=
- =?us-ascii?Q?cFLdjfIoiiHwn7rcb9nZnwihkxNWVXTYZ9baBHQAMWVo0ZzcMtsu0Ul3tYeE?=
- =?us-ascii?Q?bSL4Li9+wAntgQ33ZUQilGTUJT9ShS/gBlKRmaCwlqoGx4nhlUMPmj6cGKLZ?=
- =?us-ascii?Q?+XoDvNcX0UG1TDG0Uj2W9PpOQP6YL6oi4yXkvm2p9uYSZXNk+fLoE4fVuJd2?=
- =?us-ascii?Q?F9P3TpMzq+jC0yBcEVhhsRd53Cybg9zIy5zMglUAVNPz9mk/qPH1X/UtzSLc?=
- =?us-ascii?Q?y6oQT/r8BUuHVlfa4/9Vh9ZIGxk5nd5KnrUHJC9FzSJKykGjJ6BdLCNhJScq?=
- =?us-ascii?Q?PtPz86c+D/iQf0IPwpYs8k+GtZy2Q1ObA49ZFNXFN4Kw+r0uKU4hJD/hwSLE?=
- =?us-ascii?Q?I3FF5FRBHDr1sAoCdJojyolnZUqnR6VV+9ZtU/fVR1YgalGq9ar+BEIuqKSq?=
- =?us-ascii?Q?Yy9JrrvHL6n0FhkuCcX8IV9fgf9ObN+pt33KivFLWkPDF+BL2CId/rEFsRbo?=
- =?us-ascii?Q?R+MqIEKQH1HgLyhOgoPjFGY8+l2Db11KoNzNDiH14EuTDgH7VqtNXNskXcOt?=
- =?us-ascii?Q?BXR0E8mhkjYbot7inI7F8RB9390QTKs0x+VYR0lEcRH0QH51gO9zQ5oMAjm3?=
- =?us-ascii?Q?bGmi8lu/kxMHTuSbj94foRBR+PdvnBmF3e+Wl54eMQ8reoqgPIQ/P6/Y+sC+?=
- =?us-ascii?Q?jweBgGtjNDnmcy3wirA/5Sj5Y8XIFtrMVRGkCvKodZVe+3vM5JdPb8VafV7A?=
- =?us-ascii?Q?WlsTkv4/XCrqNOpMmH5+EDhkFNUE2Age36u9Vfo5bNdT79ag7XMSuVQi9qOP?=
- =?us-ascii?Q?XnDlf480qzBXjRquYYTA?=
-Content-Type: multipart/alternative;
- boundary="_000_SY8P300MB02825DF878585DDC68EB088CE06C2SY8P300MB0282AUSP_"
-MIME-Version: 1.0
-X-OriginatorOrg: outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: SY8P300MB0282.AUSP300.PROD.OUTLOOK.COM
-X-MS-Exchange-CrossTenant-RMS-PersistedConsumerOrg: 00000000-0000-0000-0000-000000000000
-X-MS-Exchange-CrossTenant-Network-Message-Id: 9b5b4a7b-79a6-4e34-d1ef-08dcd928eb61
-X-MS-Exchange-CrossTenant-originalarrivaltime: 20 Sep 2024 04:01:35.0379 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 84df9e7f-e9f6-40af-b435-aaaaaaaaaaaa
-X-MS-Exchange-CrossTenant-rms-persistedconsumerorg: 00000000-0000-0000-0000-000000000000
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SY8P300MB0571
-Received-SPF: pass client-ip=2a01:111:f403:2818::81a;
- envelope-from=swung0x48@outlook.com;
- helo=AUS01-ME3-obe.outbound.protection.outlook.com
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+In-Reply-To: <20240911132630.461-3-zhiwei_liu@linux.alibaba.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::436;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pf1-x436.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001, HTML_MESSAGE=0.001,
- SPF_HELO_PASS=-0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
-X-Mailman-Approved-At: Fri, 20 Sep 2024 00:44:37 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -154,300 +99,405 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
---_000_SY8P300MB02825DF878585DDC68EB088CE06C2SY8P300MB0282AUSP_
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+Hi Zhiwei,
 
-Hey everyone! Late to the party. Life happens sometimes ;)
-Just discovered this patch and this mail list, and I'd like to provide some=
- background story here.
-<https://github.com/plctlab/plct-qemu/tree/plct-riscv-backend-rvv>I origina=
-lly provided my initial implementation in a downstream repo last year, name=
-ly https://github.com/plctlab/plct-qemu/tree/plct-riscv-backend-rvv .
-I'm new to contributing to qemu and also take part in the open-source commu=
-nity upstreaming process as a whole, so I may make mistakes in my following=
- claims, but I see some confusion here:
-1. The PLCT branch (which includes my original commits) is open-sourced usi=
-ng GPLv2, which follows QEMU's upstream repo. So according to the license, =
-my modification should be EXPLICITLY shown in the patch, but I haven't seen=
- any.
-2. I do consent upstreaming my patch last year, in the form of a patch subm=
-itted with modifications from T-head, and on behalf of them. And it was agr=
-eed back in the days that I can be mentioned as one of the authors. But it =
-turns out that there's no "sign-off", "author", "co-author" line mentioning=
- me. If I don't speak out in this situation, does it imply that this patch =
-is purely LIU Zhiwei's work and have nothing to do with me?
-
-I'd like LIU to separate my patch and his modification to two separate patc=
-hes, and explicitly name where are those patches coming from, so that this =
-patch can comply to GPLv2 license and can we clarify those misunderstanding=
-s.
-
-I don't want to take it personally , but I do smell something's wrong going=
- on here...
-
-Best Regards,
-Swung0x48 (aka. Huang Shiyuan)
-
-Get Outlook for Android<https://aka.ms/AAb9ysg>
-________________________________
-From: Richard Henderson <richard.henderson@linaro.org>
-Sent: Wednesday, September 18, 2024 10:27:16 PM
-To: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>; qemu-devel@nongnu.org <qemu-=
-devel@nongnu.org>
-Cc: qemu-riscv@nongnu.org <qemu-riscv@nongnu.org>; palmer@dabbelt.com <palm=
-er@dabbelt.com>; alistair.francis@wdc.com <alistair.francis@wdc.com>; dbarb=
-oza@ventanamicro.com <dbarboza@ventanamicro.com>; liwei1518@gmail.com <liwe=
-i1518@gmail.com>; bmeng.cn@gmail.com <bmeng.cn@gmail.com>; Swung0x48 <swung=
-0x48@outlook.com>; TANG Tiancheng <tangtiancheng.ttc@alibaba-inc.com>
-Subject: Re: [PATCH v4 02/12] tcg/riscv: Add basic support for vector
-
-On 9/18/24 12:43, LIU Zhiwei wrote:
->
-> On 2024/9/18 18:11, Richard Henderson wrote:
->> On 9/18/24 07:17, LIU Zhiwei wrote:
->>>
->>> On 2024/9/12 2:41, Richard Henderson wrote:
->>>> On 9/11/24 06:26, LIU Zhiwei wrote:
->>>>> From: Swung0x48<swung0x48@outlook.com>
->>>>>
->>>>> The RISC-V vector instruction set utilizes the LMUL field to group
->>>>> multiple registers, enabling variable-length vector registers. This
->>>>> implementation uses only the first register number of each group whil=
-e
->>>>> reserving the other register numbers within the group.
->>>>>
->>>>> In TCG, each VEC_IR can have 3 types (TCG_TYPE_V64/128/256), and the
->>>>> host runtime needs to adjust LMUL based on the type to use different
->>>>> register groups.
->>>>>
->>>>> This presents challenges for TCG's register allocation. Currently, we
->>>>> avoid modifying the register allocation part of TCG and only expose t=
-he
->>>>> minimum number of vector registers.
->>>>>
->>>>> For example, when the host vlen is 64 bits and type is TCG_TYPE_V256,=
- with
->>>>> LMUL equal to 4, we use 4 vector registers as one register group. We =
-can
->>>>> use a maximum of 8 register groups, but the V0 register number is res=
-erved
->>>>> as a mask register, so we can effectively use at most 7 register grou=
-ps.
->>>>> Moreover, when type is smaller than TCG_TYPE_V256, only 7 registers a=
-re
->>>>> forced to be used. This is because TCG cannot yet dynamically constra=
-in
->>>>> registers with type; likewise, when the host vlen is 128 bits and
->>>>> TCG_TYPE_V256, we can use at most 15 registers.
->>>>>
->>>>> There is not much pressure on vector register allocation in TCG now, =
-so
->>>>> using 7 registers is feasible and will not have a major impact on cod=
-e
->>>>> generation.
->>>>>
->>>>> This patch:
->>>>> 1. Reserves vector register 0 for use as a mask register.
->>>>> 2. When using register groups, reserves the additional registers with=
-in
->>>>>     each group.
->>>>>
->>>>> Signed-off-by: TANG Tiancheng<tangtiancheng.ttc@alibaba-inc.com>
->>>>> Co-authored-by: TANG Tiancheng<tangtiancheng.ttc@alibaba-inc.com>
->>>>
->>>> If there is a co-author, there should be another Signed-off-by.
->>>
->>> This patch has added a tag:
->>>
->>> Signed-off-by: TANG Tiancheng<tangtiancheng.ttc@alibaba-inc.com>
->>>
->>>
->>> Do you mean we should add the same tag twice?
->>
->> The from line is "Swung0x48 <swung0x48@outlook.com>".
->> If this is an alternate email for TANG Tiancheng,
->
-> No, Swung0x48 is another author.
-
-Then we need a proper Signed-off-by line from that author.
+On 9/11/24 10:26 AM, LIU Zhiwei wrote:
+> From: Swung0x48 <swung0x48@outlook.com>
+> 
+> The RISC-V vector instruction set utilizes the LMUL field to group
+> multiple registers, enabling variable-length vector registers. This
+> implementation uses only the first register number of each group while
+> reserving the other register numbers within the group.
+> 
+> In TCG, each VEC_IR can have 3 types (TCG_TYPE_V64/128/256), and the
+> host runtime needs to adjust LMUL based on the type to use different
+> register groups.
+> 
+> This presents challenges for TCG's register allocation. Currently, we
+> avoid modifying the register allocation part of TCG and only expose the
+> minimum number of vector registers.
+> 
+> For example, when the host vlen is 64 bits and type is TCG_TYPE_V256, with
+> LMUL equal to 4, we use 4 vector registers as one register group. We can
+> use a maximum of 8 register groups, but the V0 register number is reserved
+> as a mask register, so we can effectively use at most 7 register groups.
+> Moreover, when type is smaller than TCG_TYPE_V256, only 7 registers are
+> forced to be used. This is because TCG cannot yet dynamically constrain
+> registers with type; likewise, when the host vlen is 128 bits and
+> TCG_TYPE_V256, we can use at most 15 registers.
+> 
+> There is not much pressure on vector register allocation in TCG now, so
+> using 7 registers is feasible and will not have a major impact on code
+> generation.
+> 
+> This patch:
+> 1. Reserves vector register 0 for use as a mask register.
+> 2. When using register groups, reserves the additional registers within
+>     each group.
+> 
+> Signed-off-by: TANG Tiancheng <tangtiancheng.ttc@alibaba-inc.com>
+> Co-authored-by: TANG Tiancheng <tangtiancheng.ttc@alibaba-inc.com>
+> Reviewed-by: Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
+> ---
 
 
-r~
+As Rixchard already pointed out, we must have a "Signed-off-by" tag with the "author" of
+the patch, and it must be the exact spelling. So in this case:
 
---_000_SY8P300MB02825DF878585DDC68EB088CE06C2SY8P300MB0282AUSP_
-Content-Type: text/html; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+Signed-off-by: Swung0x48 <swung0x48@outlook.com>
 
-<html>
-<head>
-<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Dus-ascii"=
->
-</head>
-<body>
-<div dir=3D"auto">Hey ever<span>yone! Late to the&nbsp;<span>party. Life ha=
-ppens sometimes ;)</span></span></div>
-<div dir=3D"auto"><span><span>Just discovered this patch and this mail list=
-, and I'd like to provide some back<span>ground story here.</span></span></=
-span></div>
-<div dir=3D"auto"><a rel=3D"noreferrer noopener" href=3D"https://github.com=
-/plctlab/plct-qemu/tree/plct-riscv-backend-rvv"></a>I originally provided m=
-y initial implementation in a downstream repo last year, namely&nbsp;<a rel=
-=3D"noreferrer noopener" href=3D"https://github.com/plctlab/plct-qemu/tree/=
-plct-riscv-backend-rvv" style=3D"font-family: sans-serif; font-size: medium=
-; font-style: normal; font-variant-ligatures: normal; font-variant-caps: no=
-rmal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: sta=
-rt; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -=
-webkit-text-stroke-width: 0px; white-space: normal; color: rgb(0, 120, 212)=
-; background-color: rgb(255, 255, 255);">https://github.com/plctlab/plct-qe=
-mu/tree/plct-riscv-backend-rvv</a>&nbsp;.</div>
-<div dir=3D"auto">I'm new to contributing to qemu and also take part in the=
- open-source community upstreaming process as a whole, so I may make mistak=
-es in my following claims, but I see some confusion here:</div>
-<div dir=3D"auto">1. The PLCT branch (which includes my original commits) i=
-s open-sourced using GPLv2, which follows QEMU's upstream repo. So acc<span=
->ording to the license, my modification should be EXPLICITLY shown in the p=
-atch, but I haven't seen any.</span></div>
-<div dir=3D"auto"><span>2. I do consent upstreaming my patch last year, in =
-the form of a patch submitted with modifications from T-head, and on behalf=
- of them. And it was agreed back in the days that I can be mentioned as one=
- of the authors. But it turns<span>
- out that there's no &quot;sign-off&quot;, &quot;author&quot;, &quot;co-aut=
-hor&quot; line mentioning me. If I don't speak out in this situ<span>ation,=
- does it imply that this patch is purely LIU Zhiwei's work and have nothing=
- to&nbsp;<span>do with me?</span></span></span></span></div>
-<div dir=3D"auto"><span><span><span><span><br>
-</span></span></span></span></div>
-<div dir=3D"auto"><span><span><span><span>I'd like LIU to separate my patch=
- and his modifi<span>cation to two separate patches, and explicitly name wh=
-ere are tho<span>se patches com<span>ing from, so that this patch can compl=
-y to GPLv2 license and can we clarify
- those misun<span>derstandings.</span></span></span></span></span></span></=
-span></span></div>
-<div dir=3D"auto"><span><span><span><span><br>
-</span></span></span></span></div>
-<div dir=3D"auto"><span><span><span><span>I don't want to take it&nbsp;<spa=
-n>personally , but I do smell something's wrong going on here...</span></sp=
-an></span></span></span></div>
-<div dir=3D"auto"><span><span><span><span><span><br>
-</span></span></span></span></span></div>
-<div dir=3D"auto"><span><span><span><span><span>Best Rega<span>rds,</span><=
-/span></span></span></span></span></div>
-<div dir=3D"auto"><span><span><span><span><span><span>Swung0x48 (aka. Huang=
- Shiyuan)</span></span></span></span></span></span></div>
-<div><br>
-</div>
-<div id=3D"ms-outlook-mobile-signature" dir=3D"auto">Get <a href=3D"https:/=
-/aka.ms/AAb9ysg">
-Outlook for Android</a></div>
-<hr style=3D"display:inline-block;width:98%" tabindex=3D"-1">
-<div id=3D"divRplyFwdMsg" dir=3D"ltr"><font face=3D"Calibri, sans-serif" st=
-yle=3D"font-size:11pt" color=3D"#000000"><b>From:</b> Richard Henderson &lt=
-;richard.henderson@linaro.org&gt;<br>
-<b>Sent:</b> Wednesday, September 18, 2024 10:27:16 PM<br>
-<b>To:</b> LIU Zhiwei &lt;zhiwei_liu@linux.alibaba.com&gt;; qemu-devel@nong=
-nu.org &lt;qemu-devel@nongnu.org&gt;<br>
-<b>Cc:</b> qemu-riscv@nongnu.org &lt;qemu-riscv@nongnu.org&gt;; palmer@dabb=
-elt.com &lt;palmer@dabbelt.com&gt;; alistair.francis@wdc.com &lt;alistair.f=
-rancis@wdc.com&gt;; dbarboza@ventanamicro.com &lt;dbarboza@ventanamicro.com=
-&gt;; liwei1518@gmail.com &lt;liwei1518@gmail.com&gt;; bmeng.cn@gmail.com
- &lt;bmeng.cn@gmail.com&gt;; Swung0x48 &lt;swung0x48@outlook.com&gt;; TANG =
-Tiancheng &lt;tangtiancheng.ttc@alibaba-inc.com&gt;<br>
-<b>Subject:</b> Re: [PATCH v4 02/12] tcg/riscv: Add basic support for vecto=
-r</font>
-<div>&nbsp;</div>
-</div>
-<div class=3D"BodyFragment"><font size=3D"2"><span style=3D"font-size:11pt;=
-">
-<div class=3D"PlainText">On 9/18/24 12:43, LIU Zhiwei wrote:<br>
-&gt; <br>
-&gt; On 2024/9/18 18:11, Richard Henderson wrote:<br>
-&gt;&gt; On 9/18/24 07:17, LIU Zhiwei wrote:<br>
-&gt;&gt;&gt;<br>
-&gt;&gt;&gt; On 2024/9/12 2:41, Richard Henderson wrote:<br>
-&gt;&gt;&gt;&gt; On 9/11/24 06:26, LIU Zhiwei wrote:<br>
-&gt;&gt;&gt;&gt;&gt; From: Swung0x48&lt;swung0x48@outlook.com&gt;<br>
-&gt;&gt;&gt;&gt;&gt;<br>
-&gt;&gt;&gt;&gt;&gt; The RISC-V vector instruction set utilizes the LMUL fi=
-eld to group<br>
-&gt;&gt;&gt;&gt;&gt; multiple registers, enabling variable-length vector re=
-gisters. This<br>
-&gt;&gt;&gt;&gt;&gt; implementation uses only the first register number of =
-each group while<br>
-&gt;&gt;&gt;&gt;&gt; reserving the other register numbers within the group.=
-<br>
-&gt;&gt;&gt;&gt;&gt;<br>
-&gt;&gt;&gt;&gt;&gt; In TCG, each VEC_IR can have 3 types (TCG_TYPE_V64/128=
-/256), and the<br>
-&gt;&gt;&gt;&gt;&gt; host runtime needs to adjust LMUL based on the type to=
- use different<br>
-&gt;&gt;&gt;&gt;&gt; register groups.<br>
-&gt;&gt;&gt;&gt;&gt;<br>
-&gt;&gt;&gt;&gt;&gt; This presents challenges for TCG's register allocation=
-. Currently, we<br>
-&gt;&gt;&gt;&gt;&gt; avoid modifying the register allocation part of TCG an=
-d only expose the<br>
-&gt;&gt;&gt;&gt;&gt; minimum number of vector registers.<br>
-&gt;&gt;&gt;&gt;&gt;<br>
-&gt;&gt;&gt;&gt;&gt; For example, when the host vlen is 64 bits and type is=
- TCG_TYPE_V256, with<br>
-&gt;&gt;&gt;&gt;&gt; LMUL equal to 4, we use 4 vector registers as one regi=
-ster group. We can<br>
-&gt;&gt;&gt;&gt;&gt; use a maximum of 8 register groups, but the V0 registe=
-r number is reserved<br>
-&gt;&gt;&gt;&gt;&gt; as a mask register, so we can effectively use at most =
-7 register groups.<br>
-&gt;&gt;&gt;&gt;&gt; Moreover, when type is smaller than TCG_TYPE_V256, onl=
-y 7 registers are<br>
-&gt;&gt;&gt;&gt;&gt; forced to be used. This is because TCG cannot yet dyna=
-mically constrain<br>
-&gt;&gt;&gt;&gt;&gt; registers with type; likewise, when the host vlen is 1=
-28 bits and<br>
-&gt;&gt;&gt;&gt;&gt; TCG_TYPE_V256, we can use at most 15 registers.<br>
-&gt;&gt;&gt;&gt;&gt;<br>
-&gt;&gt;&gt;&gt;&gt; There is not much pressure on vector register allocati=
-on in TCG now, so<br>
-&gt;&gt;&gt;&gt;&gt; using 7 registers is feasible and will not have a majo=
-r impact on code<br>
-&gt;&gt;&gt;&gt;&gt; generation.<br>
-&gt;&gt;&gt;&gt;&gt;<br>
-&gt;&gt;&gt;&gt;&gt; This patch:<br>
-&gt;&gt;&gt;&gt;&gt; 1. Reserves vector register 0 for use as a mask regist=
-er.<br>
-&gt;&gt;&gt;&gt;&gt; 2. When using register groups, reserves the additional=
- registers within<br>
-&gt;&gt;&gt;&gt;&gt; &nbsp;&nbsp;&nbsp; each group.<br>
-&gt;&gt;&gt;&gt;&gt;<br>
-&gt;&gt;&gt;&gt;&gt; Signed-off-by: TANG Tiancheng&lt;tangtiancheng.ttc@ali=
-baba-inc.com&gt;<br>
-&gt;&gt;&gt;&gt;&gt; Co-authored-by: TANG Tiancheng&lt;tangtiancheng.ttc@al=
-ibaba-inc.com&gt;<br>
-&gt;&gt;&gt;&gt;<br>
-&gt;&gt;&gt;&gt; If there is a co-author, there should be another Signed-of=
-f-by.<br>
-&gt;&gt;&gt;<br>
-&gt;&gt;&gt; This patch has added a tag:<br>
-&gt;&gt;&gt;<br>
-&gt;&gt;&gt; Signed-off-by: TANG Tiancheng&lt;tangtiancheng.ttc@alibaba-inc=
-.com&gt;<br>
-&gt;&gt;&gt;<br>
-&gt;&gt;&gt;<br>
-&gt;&gt;&gt; Do you mean we should add the same tag twice?<br>
-&gt;&gt;<br>
-&gt;&gt; The from line is &quot;Swung0x48 &lt;swung0x48@outlook.com&gt;&quo=
-t;.<br>
-&gt;&gt; If this is an alternate email for TANG Tiancheng,<br>
-&gt; <br>
-&gt; No, Swung0x48 is another author.<br>
-<br>
-Then we need a proper Signed-off-by line from that author.<br>
-<br>
-<br>
-r~<br>
-</div>
-</span></font></div>
-</body>
-</html>
 
---_000_SY8P300MB02825DF878585DDC68EB088CE06C2SY8P300MB0282AUSP_--
+More info here:
+
+https://www.qemu.org/docs/master/devel/submitting-a-patch.html
+
+-----
+
+Your patches must include a Signed-off-by: line. This is a hard requirement
+because it’s how you say “I’m legally okay to contribute this and happy for it
+to go into QEMU”. The process is modelled after the Linux kernel policy.
+
+If you wrote the patch, make sure your "From:" and "Signed-off-by:"
+lines use the same spelling. It's okay if you subscribe or contribute to
+the list via more than one address, but using multiple addresses in one
+commit just confuses things. If someone else wrote the patch, git will
+include a "From:" line in the body of the email (different from your
+envelope From:) that will give credit to the correct author; but again,
+that author's Signed-off-by: line is mandatory, with the same spelling.
+
+-----
+
+However, you can't just amend this tag in the patch though since you're not Swung0x48.
+We need Swung0x48 to reply here ack indicating that it is ok to add the Signed-off-by
+as required, as a indication that Swung0x48 is ok with the legal implications of
+doing so.
+
+
+Thanks,
+
+Daniel
+
+
+>   tcg/riscv/tcg-target-con-str.h |   1 +
+>   tcg/riscv/tcg-target.c.inc     | 126 ++++++++++++++++++++++++---------
+>   tcg/riscv/tcg-target.h         |  78 +++++++++++---------
+>   tcg/riscv/tcg-target.opc.h     |  12 ++++
+>   4 files changed, 151 insertions(+), 66 deletions(-)
+>   create mode 100644 tcg/riscv/tcg-target.opc.h
+> 
+> diff --git a/tcg/riscv/tcg-target-con-str.h b/tcg/riscv/tcg-target-con-str.h
+> index d5c419dff1..b2b3211bcb 100644
+> --- a/tcg/riscv/tcg-target-con-str.h
+> +++ b/tcg/riscv/tcg-target-con-str.h
+> @@ -9,6 +9,7 @@
+>    * REGS(letter, register_mask)
+>    */
+>   REGS('r', ALL_GENERAL_REGS)
+> +REGS('v', ALL_VECTOR_REGS)
+>   
+>   /*
+>    * Define constraint letters for constants:
+> diff --git a/tcg/riscv/tcg-target.c.inc b/tcg/riscv/tcg-target.c.inc
+> index d334857226..966d1ad981 100644
+> --- a/tcg/riscv/tcg-target.c.inc
+> +++ b/tcg/riscv/tcg-target.c.inc
+> @@ -32,38 +32,14 @@
+>   
+>   #ifdef CONFIG_DEBUG_TCG
+>   static const char * const tcg_target_reg_names[TCG_TARGET_NB_REGS] = {
+> -    "zero",
+> -    "ra",
+> -    "sp",
+> -    "gp",
+> -    "tp",
+> -    "t0",
+> -    "t1",
+> -    "t2",
+> -    "s0",
+> -    "s1",
+> -    "a0",
+> -    "a1",
+> -    "a2",
+> -    "a3",
+> -    "a4",
+> -    "a5",
+> -    "a6",
+> -    "a7",
+> -    "s2",
+> -    "s3",
+> -    "s4",
+> -    "s5",
+> -    "s6",
+> -    "s7",
+> -    "s8",
+> -    "s9",
+> -    "s10",
+> -    "s11",
+> -    "t3",
+> -    "t4",
+> -    "t5",
+> -    "t6"
+> +    "zero", "ra",  "sp",  "gp",  "tp",  "t0",  "t1",  "t2",
+> +    "s0",   "s1",  "a0",  "a1",  "a2",  "a3",  "a4",  "a5",
+> +    "a6",   "a7",  "s2",  "s3",  "s4",  "s5",  "s6",  "s7",
+> +    "s8",   "s9",  "s10", "s11", "t3",  "t4",  "t5",  "t6",
+> +    "v0",   "v1",  "v2",  "v3",  "v4",  "v5",  "v6",  "v7",
+> +    "v8",   "v9",  "v10", "v11", "v12", "v13", "v14", "v15",
+> +    "v16",  "v17", "v18", "v19", "v20", "v21", "v22", "v23",
+> +    "v24",  "v25", "v26", "v27", "v28", "v29", "v30", "v31",
+>   };
+>   #endif
+>   
+> @@ -100,6 +76,16 @@ static const int tcg_target_reg_alloc_order[] = {
+>       TCG_REG_A5,
+>       TCG_REG_A6,
+>       TCG_REG_A7,
+> +
+> +    /* Vector registers and TCG_REG_V0 reserved for mask. */
+> +    TCG_REG_V1,  TCG_REG_V2,  TCG_REG_V3,  TCG_REG_V4,
+> +    TCG_REG_V5,  TCG_REG_V6,  TCG_REG_V7,  TCG_REG_V8,
+> +    TCG_REG_V9,  TCG_REG_V10, TCG_REG_V11, TCG_REG_V12,
+> +    TCG_REG_V13, TCG_REG_V14, TCG_REG_V15, TCG_REG_V16,
+> +    TCG_REG_V17, TCG_REG_V18, TCG_REG_V19, TCG_REG_V20,
+> +    TCG_REG_V21, TCG_REG_V22, TCG_REG_V23, TCG_REG_V24,
+> +    TCG_REG_V25, TCG_REG_V26, TCG_REG_V27, TCG_REG_V28,
+> +    TCG_REG_V29, TCG_REG_V30, TCG_REG_V31,
+>   };
+>   
+>   static const int tcg_target_call_iarg_regs[] = {
+> @@ -127,6 +113,9 @@ static TCGReg tcg_target_call_oarg_reg(TCGCallReturnKind kind, int slot)
+>   #define TCG_CT_CONST_J12  0x1000
+>   
+>   #define ALL_GENERAL_REGS   MAKE_64BIT_MASK(0, 32)
+> +#define ALL_VECTOR_REGS    MAKE_64BIT_MASK(32, 32)
+> +#define ALL_DVECTOR_REG_GROUPS 0x5555555500000000
+> +#define ALL_QVECTOR_REG_GROUPS 0x1111111100000000
+>   
+>   #define sextreg  sextract64
+>   
+> @@ -766,6 +755,23 @@ static void tcg_out_addsub2(TCGContext *s,
+>       }
+>   }
+>   
+> +static bool tcg_out_dup_vec(TCGContext *s, TCGType type, unsigned vece,
+> +                                   TCGReg dst, TCGReg src)
+> +{
+> +    return false;
+> +}
+> +
+> +static bool tcg_out_dupm_vec(TCGContext *s, TCGType type, unsigned vece,
+> +                                    TCGReg dst, TCGReg base, intptr_t offset)
+> +{
+> +    return false;
+> +}
+> +
+> +static void tcg_out_dupi_vec(TCGContext *s, TCGType type, unsigned vece,
+> +                                    TCGReg dst, int64_t arg)
+> +{
+> +}
+> +
+>   static const struct {
+>       RISCVInsn op;
+>       bool swap;
+> @@ -1881,6 +1887,36 @@ static void tcg_out_op(TCGContext *s, TCGOpcode opc,
+>       }
+>   }
+>   
+> +static void tcg_out_vec_op(TCGContext *s, TCGOpcode opc,
+> +                           unsigned vecl, unsigned vece,
+> +                           const TCGArg args[TCG_MAX_OP_ARGS],
+> +                           const int const_args[TCG_MAX_OP_ARGS])
+> +{
+> +    switch (opc) {
+> +    case INDEX_op_mov_vec: /* Always emitted via tcg_out_mov.  */
+> +    case INDEX_op_dup_vec: /* Always emitted via tcg_out_dup_vec.  */
+> +    default:
+> +        g_assert_not_reached();
+> +    }
+> +}
+> +
+> +void tcg_expand_vec_op(TCGOpcode opc, TCGType type, unsigned vece,
+> +                       TCGArg a0, ...)
+> +{
+> +    switch (opc) {
+> +    default:
+> +        g_assert_not_reached();
+> +    }
+> +}
+> +
+> +int tcg_can_emit_vec_op(TCGOpcode opc, TCGType type, unsigned vece)
+> +{
+> +    switch (opc) {
+> +    default:
+> +        return 0;
+> +    }
+> +}
+> +
+>   static TCGConstraintSetIndex tcg_target_op_def(TCGOpcode op)
+>   {
+>       switch (op) {
+> @@ -2100,6 +2136,30 @@ static void tcg_target_init(TCGContext *s)
+>   {
+>       tcg_target_available_regs[TCG_TYPE_I32] = 0xffffffff;
+>       tcg_target_available_regs[TCG_TYPE_I64] = 0xffffffff;
+> +    s->reserved_regs = 0;
+> +
+> +    switch (riscv_lg2_vlenb) {
+> +    case TCG_TYPE_V64:
+> +        tcg_target_available_regs[TCG_TYPE_V64] = ALL_VECTOR_REGS;
+> +        tcg_target_available_regs[TCG_TYPE_V128] = ALL_DVECTOR_REG_GROUPS;
+> +        tcg_target_available_regs[TCG_TYPE_V256] = ALL_QVECTOR_REG_GROUPS;
+> +        s->reserved_regs |= (~ALL_QVECTOR_REG_GROUPS & ALL_VECTOR_REGS);
+> +        break;
+> +    case TCG_TYPE_V128:
+> +        tcg_target_available_regs[TCG_TYPE_V64] = ALL_VECTOR_REGS;
+> +        tcg_target_available_regs[TCG_TYPE_V128] = ALL_VECTOR_REGS;
+> +        tcg_target_available_regs[TCG_TYPE_V256] = ALL_DVECTOR_REG_GROUPS;
+> +        s->reserved_regs |= (~ALL_DVECTOR_REG_GROUPS & ALL_VECTOR_REGS);
+> +        break;
+> +    default:
+> +        /* Guaranteed by Zve64x. */
+> +        tcg_debug_assert(riscv_lg2_vlenb >= TCG_TYPE_V256);
+> +
+> +        tcg_target_available_regs[TCG_TYPE_V64] = ALL_VECTOR_REGS;
+> +        tcg_target_available_regs[TCG_TYPE_V128] = ALL_VECTOR_REGS;
+> +        tcg_target_available_regs[TCG_TYPE_V256] = ALL_VECTOR_REGS;
+> +        break;
+> +    }
+>   
+>       tcg_target_call_clobber_regs = -1u;
+>       tcg_regset_reset_reg(tcg_target_call_clobber_regs, TCG_REG_S0);
+> @@ -2115,7 +2175,6 @@ static void tcg_target_init(TCGContext *s)
+>       tcg_regset_reset_reg(tcg_target_call_clobber_regs, TCG_REG_S10);
+>       tcg_regset_reset_reg(tcg_target_call_clobber_regs, TCG_REG_S11);
+>   
+> -    s->reserved_regs = 0;
+>       tcg_regset_set_reg(s->reserved_regs, TCG_REG_ZERO);
+>       tcg_regset_set_reg(s->reserved_regs, TCG_REG_TMP0);
+>       tcg_regset_set_reg(s->reserved_regs, TCG_REG_TMP1);
+> @@ -2123,6 +2182,7 @@ static void tcg_target_init(TCGContext *s)
+>       tcg_regset_set_reg(s->reserved_regs, TCG_REG_SP);
+>       tcg_regset_set_reg(s->reserved_regs, TCG_REG_GP);
+>       tcg_regset_set_reg(s->reserved_regs, TCG_REG_TP);
+> +    tcg_regset_set_reg(s->reserved_regs, TCG_REG_V0);
+>   }
+>   
+>   typedef struct {
+> diff --git a/tcg/riscv/tcg-target.h b/tcg/riscv/tcg-target.h
+> index 1a347eaf6e..12a7a37aaa 100644
+> --- a/tcg/riscv/tcg-target.h
+> +++ b/tcg/riscv/tcg-target.h
+> @@ -28,42 +28,28 @@
+>   #include "host/cpuinfo.h"
+>   
+>   #define TCG_TARGET_INSN_UNIT_SIZE 4
+> -#define TCG_TARGET_NB_REGS 32
+> +#define TCG_TARGET_NB_REGS 64
+>   #define MAX_CODE_GEN_BUFFER_SIZE  ((size_t)-1)
+>   
+>   typedef enum {
+> -    TCG_REG_ZERO,
+> -    TCG_REG_RA,
+> -    TCG_REG_SP,
+> -    TCG_REG_GP,
+> -    TCG_REG_TP,
+> -    TCG_REG_T0,
+> -    TCG_REG_T1,
+> -    TCG_REG_T2,
+> -    TCG_REG_S0,
+> -    TCG_REG_S1,
+> -    TCG_REG_A0,
+> -    TCG_REG_A1,
+> -    TCG_REG_A2,
+> -    TCG_REG_A3,
+> -    TCG_REG_A4,
+> -    TCG_REG_A5,
+> -    TCG_REG_A6,
+> -    TCG_REG_A7,
+> -    TCG_REG_S2,
+> -    TCG_REG_S3,
+> -    TCG_REG_S4,
+> -    TCG_REG_S5,
+> -    TCG_REG_S6,
+> -    TCG_REG_S7,
+> -    TCG_REG_S8,
+> -    TCG_REG_S9,
+> -    TCG_REG_S10,
+> -    TCG_REG_S11,
+> -    TCG_REG_T3,
+> -    TCG_REG_T4,
+> -    TCG_REG_T5,
+> -    TCG_REG_T6,
+> +    TCG_REG_ZERO, TCG_REG_RA,  TCG_REG_SP,  TCG_REG_GP,
+> +    TCG_REG_TP,   TCG_REG_T0,  TCG_REG_T1,  TCG_REG_T2,
+> +    TCG_REG_S0,   TCG_REG_S1,  TCG_REG_A0,  TCG_REG_A1,
+> +    TCG_REG_A2,   TCG_REG_A3,  TCG_REG_A4,  TCG_REG_A5,
+> +    TCG_REG_A6,   TCG_REG_A7,  TCG_REG_S2,  TCG_REG_S3,
+> +    TCG_REG_S4,   TCG_REG_S5,  TCG_REG_S6,  TCG_REG_S7,
+> +    TCG_REG_S8,   TCG_REG_S9,  TCG_REG_S10, TCG_REG_S11,
+> +    TCG_REG_T3,   TCG_REG_T4,  TCG_REG_T5,  TCG_REG_T6,
+> +
+> +    /* RISC-V V Extension registers */
+> +    TCG_REG_V0,   TCG_REG_V1,  TCG_REG_V2,  TCG_REG_V3,
+> +    TCG_REG_V4,   TCG_REG_V5,  TCG_REG_V6,  TCG_REG_V7,
+> +    TCG_REG_V8,   TCG_REG_V9,  TCG_REG_V10, TCG_REG_V11,
+> +    TCG_REG_V12,  TCG_REG_V13, TCG_REG_V14, TCG_REG_V15,
+> +    TCG_REG_V16,  TCG_REG_V17, TCG_REG_V18, TCG_REG_V19,
+> +    TCG_REG_V20,  TCG_REG_V21, TCG_REG_V22, TCG_REG_V23,
+> +    TCG_REG_V24,  TCG_REG_V25, TCG_REG_V26, TCG_REG_V27,
+> +    TCG_REG_V28,  TCG_REG_V29, TCG_REG_V30, TCG_REG_V31,
+>   
+>       /* aliases */
+>       TCG_AREG0          = TCG_REG_S0,
+> @@ -156,6 +142,32 @@ typedef enum {
+>   
+>   #define TCG_TARGET_HAS_tst              0
+>   
+> +/* vector instructions */
+> +#define TCG_TARGET_HAS_v64              0
+> +#define TCG_TARGET_HAS_v128             0
+> +#define TCG_TARGET_HAS_v256             0
+> +#define TCG_TARGET_HAS_andc_vec         0
+> +#define TCG_TARGET_HAS_orc_vec          0
+> +#define TCG_TARGET_HAS_nand_vec         0
+> +#define TCG_TARGET_HAS_nor_vec          0
+> +#define TCG_TARGET_HAS_eqv_vec          0
+> +#define TCG_TARGET_HAS_not_vec          0
+> +#define TCG_TARGET_HAS_neg_vec          0
+> +#define TCG_TARGET_HAS_abs_vec          0
+> +#define TCG_TARGET_HAS_roti_vec         0
+> +#define TCG_TARGET_HAS_rots_vec         0
+> +#define TCG_TARGET_HAS_rotv_vec         0
+> +#define TCG_TARGET_HAS_shi_vec          0
+> +#define TCG_TARGET_HAS_shs_vec          0
+> +#define TCG_TARGET_HAS_shv_vec          0
+> +#define TCG_TARGET_HAS_mul_vec          0
+> +#define TCG_TARGET_HAS_sat_vec          0
+> +#define TCG_TARGET_HAS_minmax_vec       0
+> +#define TCG_TARGET_HAS_bitsel_vec       0
+> +#define TCG_TARGET_HAS_cmpsel_vec       0
+> +
+> +#define TCG_TARGET_HAS_tst_vec          0
+> +
+>   #define TCG_TARGET_DEFAULT_MO (0)
+>   
+>   #define TCG_TARGET_NEED_LDST_LABELS
+> diff --git a/tcg/riscv/tcg-target.opc.h b/tcg/riscv/tcg-target.opc.h
+> new file mode 100644
+> index 0000000000..b80b39e1e5
+> --- /dev/null
+> +++ b/tcg/riscv/tcg-target.opc.h
+> @@ -0,0 +1,12 @@
+> +/*
+> + * Copyright (c) C-SKY Microsystems Co., Ltd.
+> + *
+> + * This work is licensed under the terms of the GNU GPL, version 2 or
+> + * (at your option) any later version.
+> + *
+> + * See the COPYING file in the top-level directory for details.
+> + *
+> + * Target-specific opcodes for host vector expansion.  These will be
+> + * emitted by tcg_expand_vec_op.  For those familiar with GCC internals,
+> + * consider these to be UNSPEC with names.
+> + */
 
