@@ -4,85 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 02558CF9C6C
-	for <qemu-riscv@archiver.kernel.org>; Sun, 22 Sep 2024 04:47:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5B76ECF9C64
+	for <qemu-riscv@archiver.kernel.org>; Sun, 22 Sep 2024 11:55:11 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1ssEUh-0001LP-F9; Sun, 22 Sep 2024 00:46:47 -0400
+	id 1ssLB6-0004fu-ML; Sun, 22 Sep 2024 07:55:00 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1ssEUZ-0001Jz-HB
- for qemu-riscv@nongnu.org; Sun, 22 Sep 2024 00:46:41 -0400
-Received: from mail-ed1-x52e.google.com ([2a00:1450:4864:20::52e])
+ id 1ssLB0-0004eR-Vz
+ for qemu-riscv@nongnu.org; Sun, 22 Sep 2024 07:54:55 -0400
+Received: from mail-ej1-x62a.google.com ([2a00:1450:4864:20::62a])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1ssEUX-0000HK-SA
- for qemu-riscv@nongnu.org; Sun, 22 Sep 2024 00:46:39 -0400
-Received: by mail-ed1-x52e.google.com with SMTP id
- 4fb4d7f45d1cf-5c3d209db94so4325525a12.3
- for <qemu-riscv@nongnu.org>; Sat, 21 Sep 2024 21:46:36 -0700 (PDT)
+ id 1ssLAz-0001S5-95
+ for qemu-riscv@nongnu.org; Sun, 22 Sep 2024 07:54:54 -0400
+Received: by mail-ej1-x62a.google.com with SMTP id
+ a640c23a62f3a-a8a6d1766a7so475974466b.3
+ for <qemu-riscv@nongnu.org>; Sun, 22 Sep 2024 04:54:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1726980395; x=1727585195; darn=nongnu.org;
+ d=linaro.org; s=google; t=1727006092; x=1727610892; darn=nongnu.org;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=Z4wRGO3WMtZOMMRmXRpzMnVueAGeW7bgzBASsvxYp40=;
- b=erWiYaw02YajNjKiubaVAhOU7jBSOtbkN6pcfYQbFSyRTi3hm3KLJOCVWm6hNj9DW3
- daHQjzBgmNsogRfAcRSRwZEfOmcuoZyfk2U+VxGyaOQGOOKeS44ThRTL0mOf8zn+bHEL
- kPiDvJsjjJw1pIBHfx+A/42vdpZ9szWsNYJjk9UR5HhDRd1IVC/4EF2XZe6d2uc3GtDr
- NGj93lqo+wZpYx3avkmfEBG3oKsKyVJHGsghvzbOuDM1jZyhwo1gzOGVYCh1FsRZIBve
- Sl9D77zxP4ivMNg/UWN54nwpK0RYQ47nW3i58Wg8xeAbKwweI5hlPZVV8oWqaDP3hONE
- 4zuw==
+ bh=cQPPKjoskTOTK3LYERWWhHFjw+QNYmzQnQN/w7onA7g=;
+ b=KTYxJ/w+xqqVBVb0d6fjFf5oX0UgipPV463nwSe6u6WLbQTSim2X7C2e0sHZtxdBhc
+ iYNtakx4ZTQsNrd9FDdxib0FFwB9aTcwPchyUMKgzqSb7YZq/neQZhtSGnU2GWkWjYCk
+ H2eKUDljJ2jtynxnUCb0uX1QhNu0QKHdTUy2tTnTLhITb+UhUlsOH6bM3tPsRzwPs3/z
+ gjJ2W1V3rAKJVR2ErprRtoItsWq/hLwZGm1VLtD/sfAh84rtUJ0r8ywLED6x/twd9rVy
+ sJfXY4wI4ehi14C9wil3AzGeP1tl766ewMBnKyEdU0XDsalGu2TwB6FwEG/K0iTB0GHY
+ ZiVQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1726980395; x=1727585195;
+ d=1e100.net; s=20230601; t=1727006092; x=1727610892;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=Z4wRGO3WMtZOMMRmXRpzMnVueAGeW7bgzBASsvxYp40=;
- b=S5mrBFgPt5L2AC9EKPK0wk4RyGnYsCoxex9k3CiHtunc++spZMcLmNCwAcQM4pCZW7
- 71p4OQNJei0VUTztZlZip7nCggX6qwFiptLcDf6a8Sa56ANL6LyyHV8Z8hrtlAKVXMUA
- k483CvkjQDumEmXR3p5d0p59kXRjzHR9nio78v2ETQbWHZn4MLNT6l9Kbvkfza/EuEQ3
- Y5iCb3KGmloVLMV7oBrMhWclSBeXbPugeAGflGw8v6mYWQVd8j9+VqWGQg8eV0A87QxJ
- xwd8HnlR+GJJcN/ryYN7Ct891bhbmMf3+7cQXo5lsvyMr19seZmNn7XWcf7alEwCTR5a
- gbuA==
-X-Gm-Message-State: AOJu0YzAdrNPfM7st/ng4SIEdzhrnEXOJ5no1kZ0ORA6sNCWZfVYiWcl
- X/aV++3kyL1zOIkujfepJpN+LUsF0floGh0bAVONKJV50Nk9oCXhdMqK5bNJCEw=
-X-Google-Smtp-Source: AGHT+IFmYr52nzzI+F6Vk4Fnvs9/GvGw/ClnP4UBcO5sxIdB1mzMPxNCU+G/hSj6t51AUVaTgpXXHA==
-X-Received: by 2002:a05:6402:208a:b0:5c4:bcd1:9c7a with SMTP id
- 4fb4d7f45d1cf-5c4bcd19f20mr6736153a12.8.1726980395294; 
- Sat, 21 Sep 2024 21:46:35 -0700 (PDT)
+ bh=cQPPKjoskTOTK3LYERWWhHFjw+QNYmzQnQN/w7onA7g=;
+ b=lhbw6Ojnf1VwCkik65Hs1SU9ZHsWGSn6VxLlLIGlRsOh7+UpGgxJyYwonmXb9Ivaa/
+ agZgJN2I3NDoDuDwArKvI1dsV3CoRHJH/5ALCKX+kB9S98Ht8ZGuqJ3DGekJs4pKlfnh
+ 3KsJcNtP+1IHssITarHKRRPpLUz3xlGoM61KiD4tJIv5WCxXInLl/IQsjrUf/EDKny0H
+ 71Jtnq53ZQKC8Q0oFrKi85EbxlcS28TlkT63tUJXq8Ywiigahp4uQO61VgSk4JL34ncN
+ GaJspgT1FTG4LOm50/Q1VD3P19HwdziyLp7lcyGtDtAFv8an+FJU3J2mlTzsUP9C9OSP
+ G+Bg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVTsf+H4QbBgIdwcpCCdWgsTGvAnwHnYbqwILkl7sgu/tc0dt5NpdBhnisxhCX+bxeNr24ZB9YhXcmN@nongnu.org
+X-Gm-Message-State: AOJu0YxujWekBqNqi7/Bri8LxGDqOvsTxpAZ7hmFg/qBybBgMcUmO4ID
+ bT8fuTZQsn7PGZqgsyJwAAGB+JCiMPonrB7lQ31D8fvBL9acjP1rWns3KDy2vk8=
+X-Google-Smtp-Source: AGHT+IEPPbcvduJ/L7SbHbEr+GnxZMzQSrFSfZBpkaeTnwCn/ugikpN9vrlUBXMqYGzPCNVGJHu+kw==
+X-Received: by 2002:a17:907:96ab:b0:a86:7ba9:b061 with SMTP id
+ a640c23a62f3a-a90d5167108mr834922766b.64.1727006091658; 
+ Sun, 22 Sep 2024 04:54:51 -0700 (PDT)
 Received: from [10.5.50.249] (90-181-218-29.rco.o2.cz. [90.181.218.29])
  by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5c42bb559d8sm8856309a12.22.2024.09.21.21.46.34
+ a640c23a62f3a-a90612df5afsm1075350166b.162.2024.09.22.04.54.50
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sat, 21 Sep 2024 21:46:34 -0700 (PDT)
-Message-ID: <0dba42ab-83fb-44f8-9802-1f2e53bb89ba@linaro.org>
-Date: Sun, 22 Sep 2024 06:46:32 +0200
+ Sun, 22 Sep 2024 04:54:51 -0700 (PDT)
+Message-ID: <728dae74-481b-4ad7-be91-7fd52a3d7aa9@linaro.org>
+Date: Sun, 22 Sep 2024 13:54:49 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 03/12] tcg/riscv: Add vset{i}vli and ld/st vec ops
-To: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>, qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, palmer@dabbelt.com, alistair.francis@wdc.com,
- dbarboza@ventanamicro.com, liwei1518@gmail.com, bmeng.cn@gmail.com,
- TANG Tiancheng <tangtiancheng.ttc@alibaba-inc.com>
-References: <20240911132630.461-1-zhiwei_liu@linux.alibaba.com>
- <20240911132630.461-4-zhiwei_liu@linux.alibaba.com>
+Subject: Re: [PATCH 0/6] linux-user: move all remaining archs to syscalltbl
+To: Laurent Vivier <laurent@vivier.eu>, qemu-devel@nongnu.org
+Cc: Brian Cain <bcain@quicinc.com>, Liu Zhiwei
+ <zhiwei_liu@linux.alibaba.com>, Weiwei Li <liwei1518@gmail.com>,
+ Alistair Francis <alistair.francis@wdc.com>, qemu-riscv@nongnu.org,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Bin Meng <bmeng.cn@gmail.com>, Palmer Dabbelt <palmer@dabbelt.com>
+References: <20240920151034.859533-1-laurent@vivier.eu>
 Content-Language: en-US
 From: Richard Henderson <richard.henderson@linaro.org>
-In-Reply-To: <20240911132630.461-4-zhiwei_liu@linux.alibaba.com>
+In-Reply-To: <20240920151034.859533-1-laurent@vivier.eu>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::52e;
- envelope-from=richard.henderson@linaro.org; helo=mail-ed1-x52e.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::62a;
+ envelope-from=richard.henderson@linaro.org; helo=mail-ej1-x62a.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -98,21 +101,86 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 9/11/24 15:26, LIU Zhiwei wrote:
-> @@ -2129,6 +2389,7 @@ static void tcg_target_qemu_prologue(TCGContext *s)
->   
->   static void tcg_out_tb_start(TCGContext *s)
->   {
-> +    s->riscv_cur_type = TCG_TYPE_COUNT;
->       /* nothing to do */
->   }
->   
+On 9/20/24 17:10, Laurent Vivier wrote:
+> linux v6.11 has moved all the remaining archs to syscalltbl,
+> update QEMU accordingly.
+> 
+> Remove scripts/gensyscalls.sh that is now useless.
+> 
+> Update headers to v6.11
+> 
+> Based-on: <20240918074256.720617-1-laurent@vivier.eu>
+> 
+> Laurent Vivier (6):
+>    linux-user,aarch64: move to syscalltbl file
+>    linux-user,openrisc: move to syscalltbl file
+>    linux-user,riscv: move to syscalltbl file
+>    linux-user,hexagon: move to syscalltbl file
+>    linux-user,loongarch: move to syscalltbl file
+>    linux-user: update syscall.tbl to Linux v6.11
 
-I recently realized that the vector config is call-clobbered.
-We need this reset as well in tcg_out_call_int(), and prepare_host_addr().
-
-In prepare_host_addr, place the reset just after the two calls to new_ldst_label().
-
+Queued, thanks.
 
 r~
+
+> 
+>   configs/targets/aarch64-linux-user.mak     |   2 +
+>   configs/targets/aarch64_be-linux-user.mak  |   2 +
+>   configs/targets/hexagon-linux-user.mak     |   2 +
+>   configs/targets/loongarch64-linux-user.mak |   2 +
+>   configs/targets/or1k-linux-user.mak        |   2 +
+>   configs/targets/riscv32-linux-user.mak     |   3 +
+>   configs/targets/riscv64-linux-user.mak     |   3 +
+>   linux-user/aarch64/meson.build             |   6 +
+>   linux-user/aarch64/syscall_64.tbl          | 405 +++++++++++++++++++++
+>   linux-user/aarch64/syscall_nr.h            | 331 +----------------
+>   linux-user/aarch64/syscallhdr.sh           |  28 ++
+>   linux-user/arm/syscall.tbl                 |   1 +
+>   linux-user/hexagon/meson.build             |   6 +
+>   linux-user/hexagon/syscall.tbl             | 405 +++++++++++++++++++++
+>   linux-user/hexagon/syscall_nr.h            | 348 ------------------
+>   linux-user/hexagon/syscallhdr.sh           |  28 ++
+>   linux-user/i386/syscall_32.tbl             |   7 +-
+>   linux-user/loongarch64/meson.build         |   7 +
+>   linux-user/loongarch64/syscall.tbl         | 405 +++++++++++++++++++++
+>   linux-user/loongarch64/syscall_nr.h        | 324 -----------------
+>   linux-user/loongarch64/syscallhdr.sh       |  28 ++
+>   linux-user/meson.build                     |   2 +
+>   linux-user/openrisc/meson.build            |   5 +
+>   linux-user/openrisc/syscall.tbl            | 405 +++++++++++++++++++++
+>   linux-user/openrisc/syscall_nr.h           | 350 ------------------
+>   linux-user/openrisc/syscallhdr.sh          |  28 ++
+>   linux-user/riscv/cpu_loop.c                |   2 +-
+>   linux-user/riscv/meson.build               |   6 +
+>   linux-user/riscv/syscall.tbl               | 405 +++++++++++++++++++++
+>   linux-user/riscv/syscall32_nr.h            | 325 -----------------
+>   linux-user/riscv/syscall64_nr.h            | 331 -----------------
+>   linux-user/riscv/syscall_nr.h              |  15 -
+>   linux-user/riscv/syscallhdr.sh             |  28 ++
+>   linux-user/syscall_defs.h                  |   7 +-
+>   linux-user/x86_64/syscall_64.tbl           |   8 +-
+>   scripts/gensyscalls.sh                     | 103 ------
+>   scripts/update-syscalltbl.sh               |   5 +
+>   37 files changed, 2231 insertions(+), 2139 deletions(-)
+>   create mode 100644 linux-user/aarch64/syscall_64.tbl
+>   create mode 100644 linux-user/aarch64/syscallhdr.sh
+>   create mode 100644 linux-user/hexagon/meson.build
+>   create mode 100644 linux-user/hexagon/syscall.tbl
+>   delete mode 100644 linux-user/hexagon/syscall_nr.h
+>   create mode 100644 linux-user/hexagon/syscallhdr.sh
+>   create mode 100644 linux-user/loongarch64/syscall.tbl
+>   delete mode 100644 linux-user/loongarch64/syscall_nr.h
+>   create mode 100644 linux-user/loongarch64/syscallhdr.sh
+>   create mode 100644 linux-user/openrisc/meson.build
+>   create mode 100644 linux-user/openrisc/syscall.tbl
+>   delete mode 100644 linux-user/openrisc/syscall_nr.h
+>   create mode 100644 linux-user/openrisc/syscallhdr.sh
+>   create mode 100644 linux-user/riscv/syscall.tbl
+>   delete mode 100644 linux-user/riscv/syscall32_nr.h
+>   delete mode 100644 linux-user/riscv/syscall64_nr.h
+>   delete mode 100644 linux-user/riscv/syscall_nr.h
+>   create mode 100644 linux-user/riscv/syscallhdr.sh
+>   delete mode 100755 scripts/gensyscalls.sh
+> 
+
 
