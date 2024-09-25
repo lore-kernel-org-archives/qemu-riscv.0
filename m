@@ -4,89 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C8730C369D5
-	for <qemu-riscv@archiver.kernel.org>; Wed, 25 Sep 2024 12:00:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 11519CF58E5
+	for <qemu-riscv@archiver.kernel.org>; Wed, 25 Sep 2024 13:36:25 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1stQfM-0006Z9-8z; Wed, 25 Sep 2024 07:58:44 -0400
+	id 1stSBN-0002aX-1l; Wed, 25 Sep 2024 09:35:53 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <cleger@rivosinc.com>)
- id 1stQf3-0005Ax-3R
- for qemu-riscv@nongnu.org; Wed, 25 Sep 2024 07:58:26 -0400
-Received: from mail-wr1-x429.google.com ([2a00:1450:4864:20::429])
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1stSBJ-0002R7-0Y
+ for qemu-riscv@nongnu.org; Wed, 25 Sep 2024 09:35:49 -0400
+Received: from mail-ua1-x92c.google.com ([2607:f8b0:4864:20::92c])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <cleger@rivosinc.com>)
- id 1stQf1-0000i6-5J
- for qemu-riscv@nongnu.org; Wed, 25 Sep 2024 07:58:24 -0400
-Received: by mail-wr1-x429.google.com with SMTP id
- ffacd0b85a97d-375e5c12042so3496613f8f.3
- for <qemu-riscv@nongnu.org>; Wed, 25 Sep 2024 04:58:22 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1stSBE-0004Db-A9
+ for qemu-riscv@nongnu.org; Wed, 25 Sep 2024 09:35:48 -0400
+Received: by mail-ua1-x92c.google.com with SMTP id
+ a1e0cc1a2514c-848b77c89e0so1993955241.0
+ for <qemu-riscv@nongnu.org>; Wed, 25 Sep 2024 06:35:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1727265501; x=1727870301;
- darn=nongnu.org; 
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=AVwwvNZTDkJx0gmpOxGh5ddASHBGIzNT4u9n31ZE25I=;
- b=J0wQGPyARllY5uRLfP/BDQAgrxsfUDtGEDG2YS5lBv0/IeyKyceQbBpJw1nLCEWSl7
- 1DIXOLlfvwS8LaoKYRoC7gnABaVlCUZfCwQqwYkydjwM08chlyXsZk97TP8q77PCVmGu
- 2Hg7kst8IN0EyC0VBaQltaCUi08+QfD0vOHZVgdHQ+j7uH7QmSKKeMC9tEKspdORmMbJ
- YrrSA3jPhqmai+tpe/JYLyt5N4SBXUMe2ZLqFzt3sA7hOZGryFKBg4JheA8tvrEX/vNQ
- aKEh9whaLhHszlZposP8xF66pxaaHNuh4YRrzy9ozyJ3se9xTpNjFOwErR6o/DabK9Zw
- 0poA==
+ d=ventanamicro.com; s=google; t=1727271342; x=1727876142; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=GG83+Wb23DqVtcPbDqqweVQ4D3Pv90RDqT6FHWTRc2o=;
+ b=hJyzItnRq+xatE+6ekmgulb1x0DQJ497+J6jG9bUTulwPQC/2zfnh/5DVOaGuz1Biq
+ AW1yKlPbiXY8uGPBZnTqT2Li0bxjqgbT9Cq+kH/FmR33l0e9AwLjizXfZkokJM/K/vkR
+ N9LhUUAPUb4iVZYviLSmTmQHYjtMjlAaCjk38SoCKttdlMtQMEtAcAjhgE7rmr09y4GL
+ KkVgFctR3OmxpOpaNQWST3QfqSBz8JiOzYxd6GMC8kTG1IIAecca/scA13cpNQCgh8I5
+ 7yxcVvMuGjZsujSFPnbXwpck8AekK4Sf1DVxL+l9syINLFs36ypqSQcgmrBjX69zVL1v
+ 1EWA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1727265501; x=1727870301;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=AVwwvNZTDkJx0gmpOxGh5ddASHBGIzNT4u9n31ZE25I=;
- b=AfNDqXoOveEOrU91ck0p9Ir4jqPhaI5sBLYbQHx7eI1KeioUXeRIpkrQs67Au7moZX
- ukAMMrV9UzjTcT389uE4hZwAUW2Fh3Qiwb/guhlWXxBUTjpE314b4GicZ4ruXxOFA6hP
- q36+zUQ8DxypGjLfkI+vuhw1bLJQ/1rgPeFAZ1qW5mK2w4ipCikUAJksLbNDi9Rc4WkC
- w9diQZW9A5W+SEAPoXwrtwT4HHxmX/0VD71OPhpAS8vY89vgkpq4+UWa38dZs/iKim3n
- 2jiWbg3Volq7uaImlOvlA2DytFhQjy79OS+nfBVqLipI9imRddKKEFb7uTewQzUK1iWq
- NQlQ==
-X-Gm-Message-State: AOJu0YwGMas/9by/AZqwnyDOQSfodiii8myjrVRh2UG9BzgpkWiDuqiR
- z2F7cLzHPyMuvY+MaI4qrPDL2OOUfOM72guOvqeS2nWwX3BDc+rOH9BSYMcUHwTZTe3EvvCA9og
- r
-X-Google-Smtp-Source: AGHT+IEGywPzFSyZ3yorDA+A9/p0BCPmvUoHf0kXD9riXsT2wN3IoeCqNFrt6v8omhahaW+o8X0k3A==
-X-Received: by 2002:a5d:4946:0:b0:374:c1a9:b989 with SMTP id
- ffacd0b85a97d-37cc2464e4fmr1804630f8f.1.1727265500746; 
- Wed, 25 Sep 2024 04:58:20 -0700 (PDT)
-Received: from carbon-x1.. ([2a01:e0a:e17:9700:16d2:7456:6634:9626])
+ d=1e100.net; s=20230601; t=1727271342; x=1727876142;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=GG83+Wb23DqVtcPbDqqweVQ4D3Pv90RDqT6FHWTRc2o=;
+ b=RQqAmohGQO2f08WsTWf+wyrCyoBBgNmK9mA2yChhOcVwj7ghq3CdXUR4NR1O3Vv8w6
+ d7rGHDsiOXhGTkeGjLk9V1zEuS4xCS6CmgCnxU3PSjRgK3S1DYk0eGNR2QGqc02nWWQ5
+ 6ruGfX8BF79oQ5BTyS6WEN41HlA4a0jPYYTwPMK0Jmk7z+lQ6OWYKO1ewGtePybmAxZA
+ yGHH6ztjTouUpgpe0Uo3jM45UXha7QwgiElaC7zHX/eq7JPJjT5iqwj1wD+aM6mg6+Iu
+ rHXJYx63ro+fSayahI9QrlQuOZm9jhMG+PucZ3I2bARdbrX6NUmpW/9Ugo0yVYDmGa/U
+ d/Mg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVwKrt3UfxTRu710I47B56WDWZb2fj2hfx3vN6XqpdE1v9iXMVT6+nb5CPdpDV5J5mmYMjuUc5lmdPH@nongnu.org
+X-Gm-Message-State: AOJu0YyhImVtk4Nlmm2iZnNyILVt14jTkAo+wBSKTxKaGFuBEWdf1q1u
+ n8VfktZTDAKlvot1MRgSpMeiCTYcE40lIrkVfcW2JhgPAiD4xja39ZBUKuWtUH4=
+X-Google-Smtp-Source: AGHT+IGQ5kbgBFbxqlXzuYa5f+J/glX+RkQiI3wGhwBIkW1Auk0SuuQ04R+GVqu7lvhLWuXgxpJCGw==
+X-Received: by 2002:a05:6122:20a6:b0:4f5:22cc:71b9 with SMTP id
+ 71dfb90a1353d-505c1d96569mr2319100e0c.5.1727271342557; 
+ Wed, 25 Sep 2024 06:35:42 -0700 (PDT)
+Received: from [192.168.68.110] ([187.101.184.93])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-37cbc2ab52fsm3770612f8f.13.2024.09.25.04.58.19
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 25 Sep 2024 04:58:20 -0700 (PDT)
-From: =?UTF-8?q?Cl=C3=A9ment=20L=C3=A9ger?= <cleger@rivosinc.com>
-To: qemu-riscv@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>
-Cc: =?UTF-8?q?Cl=C3=A9ment=20L=C3=A9ger?= <cleger@rivosinc.com>,
- Weiwei Li <liwei1518@gmail.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Ved Shanbhogue <ved@rivosinc.com>, Atish Patra <atishp@rivosinc.com>,
- qemu-devel@nongnu.org
-Subject: [PATCH v2 8/8] target/riscv: Add Smdbltrp ISA extension enable switch
-Date: Wed, 25 Sep 2024 13:58:06 +0200
-Message-ID: <20240925115808.77874-9-cleger@rivosinc.com>
-X-Mailer: git-send-email 2.45.2
-In-Reply-To: <20240925115808.77874-1-cleger@rivosinc.com>
-References: <20240925115808.77874-1-cleger@rivosinc.com>
+ 71dfb90a1353d-505a9f85883sm2003524e0c.31.2024.09.25.06.35.39
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 25 Sep 2024 06:35:41 -0700 (PDT)
+Message-ID: <70658cf5-4a72-4b83-8390-cb0a3506e6eb@ventanamicro.com>
+Date: Wed, 25 Sep 2024 10:35:37 -0300
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::429;
- envelope-from=cleger@rivosinc.com; helo=mail-wr1-x429.google.com
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] target/riscv/csr.c: Fix an access to VXSAT
+To: Evgenii Prokopiev <evgenii.prokopiev@syntacore.com>, palmer@dabbelt.com
+Cc: alistair.francis@wdc.com, bmeng.cn@gmail.com, liwei1518@gmail.com,
+ zhiwei_liu@linux.alibaba.com, qemu-riscv@nongnu.org, qemu-devel@nongnu.org
+References: <20240925093531.382347-1-evgenii.prokopiev@syntacore.com>
+Content-Language: en-US
+From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+In-Reply-To: <20240925093531.382347-1-evgenii.prokopiev@syntacore.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::92c;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-ua1-x92c.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, SPF_HELO_NONE=0.001,
+ T_SPF_TEMPERROR=0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -102,34 +97,47 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Add the switch to enable the Smdbltrp ISA extension.
 
-Signed-off-by: Clément Léger <cleger@rivosinc.com>
----
- target/riscv/cpu.c | 2 ++
- 1 file changed, 2 insertions(+)
 
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index dd3351832a..44da17bc9a 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -183,6 +183,7 @@ const RISCVIsaExtData isa_edata_arr[] = {
-     ISA_EXT_DATA_ENTRY(zhinxmin, PRIV_VERSION_1_12_0, ext_zhinxmin),
-     ISA_EXT_DATA_ENTRY(smaia, PRIV_VERSION_1_12_0, ext_smaia),
-     ISA_EXT_DATA_ENTRY(smcntrpmf, PRIV_VERSION_1_12_0, ext_smcntrpmf),
-+    ISA_EXT_DATA_ENTRY(smdbltrp, PRIV_VERSION_1_12_0, ext_smdbltrp),
-     ISA_EXT_DATA_ENTRY(smepmp, PRIV_VERSION_1_12_0, ext_smepmp),
-     ISA_EXT_DATA_ENTRY(smrnmi, PRIV_VERSION_1_12_0, ext_smrnmi),
-     ISA_EXT_DATA_ENTRY(smstateen, PRIV_VERSION_1_12_0, ext_smstateen),
-@@ -1492,6 +1493,7 @@ const RISCVCPUMultiExtConfig riscv_cpu_extensions[] = {
-     MULTI_EXT_CFG_BOOL("sstc", ext_sstc, true),
- 
-     MULTI_EXT_CFG_BOOL("smaia", ext_smaia, false),
-+    MULTI_EXT_CFG_BOOL("smdbltrp", ext_smdbltrp, false),
-     MULTI_EXT_CFG_BOOL("smepmp", ext_smepmp, false),
-     MULTI_EXT_CFG_BOOL("smrnmi", ext_smrnmi, false),
-     MULTI_EXT_CFG_BOOL("smstateen", ext_smstateen, false),
--- 
-2.45.2
+On 9/25/24 6:35 AM, Evgenii Prokopiev wrote:
+> The register VXSAT should be RW only to the first bit.
+> The remaining bits should be 0.
+> 
+> The RISC-V Instruction Set Manual Volume I: Unprivileged Architecture
+> 
+> The vxsat CSR has a single read-write least-significant bit (vxsat[0])
+> that indicates if a fixed-point instruction has had to saturate an output
+> value to fit into a destination format. Bits vxsat[XLEN-1:1]
+> should be written as zeros.
+> 
+> Signed-off-by: Evgenii Prokopiev <evgenii.prokopiev@syntacore.com>
+> ---
 
+Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+
+>   target/riscv/csr.c | 4 ++--
+>   1 file changed, 2 insertions(+), 2 deletions(-)
+> 
+> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+> index bd080f92b5..69c41212e9 100644
+> --- a/target/riscv/csr.c
+> +++ b/target/riscv/csr.c
+> @@ -717,7 +717,7 @@ static RISCVException write_vxrm(CPURISCVState *env, int csrno,
+>   static RISCVException read_vxsat(CPURISCVState *env, int csrno,
+>                                    target_ulong *val)
+>   {
+> -    *val = env->vxsat;
+> +    *val = env->vxsat & BIT(0);
+>       return RISCV_EXCP_NONE;
+>   }
+>   
+> @@ -727,7 +727,7 @@ static RISCVException write_vxsat(CPURISCVState *env, int csrno,
+>   #if !defined(CONFIG_USER_ONLY)
+>       env->mstatus |= MSTATUS_VS;
+>   #endif
+> -    env->vxsat = val;
+> +    env->vxsat = val & BIT(0);
+>       return RISCV_EXCP_NONE;
+>   }
+>   
 
