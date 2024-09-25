@@ -4,91 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0D2A6CF9C7E
-	for <qemu-riscv@archiver.kernel.org>; Wed, 25 Sep 2024 15:14:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CCA81CCF9E8
+	for <qemu-riscv@archiver.kernel.org>; Wed, 25 Sep 2024 16:39:22 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1stTiK-00079g-NZ; Wed, 25 Sep 2024 11:14:00 -0400
+	id 1stV2q-0006PM-Ar; Wed, 25 Sep 2024 12:39:16 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <paolo.savini@embecosm.com>)
- id 1stTiI-00077p-ST
- for qemu-riscv@nongnu.org; Wed, 25 Sep 2024 11:13:59 -0400
-Received: from mail-ej1-x636.google.com ([2a00:1450:4864:20::636])
+ (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
+ id 1stV2n-0006LN-M4
+ for qemu-riscv@nongnu.org; Wed, 25 Sep 2024 12:39:13 -0400
+Received: from mail-ej1-x632.google.com ([2a00:1450:4864:20::632])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <paolo.savini@embecosm.com>)
- id 1stTiH-0000zG-9M
- for qemu-riscv@nongnu.org; Wed, 25 Sep 2024 11:13:58 -0400
-Received: by mail-ej1-x636.google.com with SMTP id
- a640c23a62f3a-a90188ae58eso867265466b.1
- for <qemu-riscv@nongnu.org>; Wed, 25 Sep 2024 08:13:56 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
+ id 1stV2m-0005Ty-4Z
+ for qemu-riscv@nongnu.org; Wed, 25 Sep 2024 12:39:13 -0400
+Received: by mail-ej1-x632.google.com with SMTP id
+ a640c23a62f3a-a8d29b7edc2so6278866b.1
+ for <qemu-riscv@nongnu.org>; Wed, 25 Sep 2024 09:39:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=embecosm.com; s=google; t=1727277236; x=1727882036; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=GKy/CyRSVUaBnXxnNttl6Oo4OhYAsB0CU8IGh0o82+4=;
- b=F39FhoWIOMGB8gyO3Q07LybEG4UXHhBemZ9hBj9NLpBoHlGIC6ZCwd/6WWYM6DJPtV
- QkcC3kWEwgvNJiyFvEJH8ln8+Am+CVEZPZ2GRFYgbv1BXOFrGPsDyHrC9HVVRemr0yRw
- RTS/aAjtLQ3du8LFnLPPfOrwfvNqa3uPg3zpsmu3B1X8vez1mJeXCQ9TSxXJCFz/Ap9S
- EICr0FzFrr9eebZESIttGPI98r5L1C5zY+nE0UU9BHseOYgZxMD3UUKYvkrlP+RGZLZq
- vBPu8WrI2NCHGLgTB1bJ/i75QTdpa+UpyOb34qWp2jxNaZqlf7TOE3s4RzJj/tKrAOtK
- yHkA==
+ d=ventanamicro.com; s=google; t=1727282350; x=1727887150; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=1Z435ziM7/tTwXvzSmTfZy2EC4XDAX34xouZ7aIOlIs=;
+ b=LwY0OXgteTGCTGimU5Js2JGUcwhWKj38pGphZ/qZJ7iHVz1GAEPBS5qGdq4N4PxkCQ
+ PCHk+2f0x90FYwCStR9iogfoiMOnM3qpFzGXgUDG1WsL4t6IUmOmTsOVnHMehBFCUW5c
+ f6qYsqzxo9ImzdDl4K9uBXcSdWTBYRmPJWNBc/ssof9YxzVxW6I8xjFdzvEybjdceKkI
+ xRwpLfu2aEvO/omXweedMEY3zIcG0SFIIumqYK29ScV3b9Rh8RhBr65dP2dXbIdoStiM
+ F8pnqBFkWjERGpcuWWSP1PLKVi2/nX2YRUe3Z4DQo0/T1gq3s7Km9i7vIeUckqchYq39
+ 2gLw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1727277236; x=1727882036;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=GKy/CyRSVUaBnXxnNttl6Oo4OhYAsB0CU8IGh0o82+4=;
- b=RHrG5wKKBcD3c8UV3Rr62c0M5M49ItING4jmxnQFDKVyszEzhaZnzXqfGtORnVqf5P
- YZag0Zl4l4rpAKwelkMbk0zMR3fwGg576VScSEy4yxYUeUrKtFo8jQvuE5D5jWXTbQ+l
- +T8D9hrEsRQVdAWSWSImcWlVQ6TkizgecRKbSNtJT8kQH4hmNZmuYmuGz/c0cAmwA4Kp
- CCJkTTDcwv8uxv02Q+Bwl2HMuztKwZCVZSWPK4HqLHPNuuRpJa1uwEi2Jley8RY1GCOZ
- xViGle6nJCUluYii2pPyHLhZ1O1CVE/V9XFPa1kPubD+UdUQI+Rq5X9nf5I5RZrX9OPD
- wsDA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWAAJk7K7z3eFR8tDQNT97SiAAPdPWZ/bSVX7rHRP3MeZwgrG0RkKFqTdONv9ecPB4l5C3eKZPifhyw@nongnu.org
-X-Gm-Message-State: AOJu0Yz1ryoIkTMmPc8+37aWeUd1Jsn09Z/Esn7NLoCjSEKpWdeSUtGi
- MVFKhrIngFNt4xWU6VpBDOJ/FL6fCDYRGkPPsUK/lhGPnvr6KT1bQCAWRZW2U6E=
-X-Google-Smtp-Source: AGHT+IFX8vn/C3P/lrh4VPZgXIMuYD9h7SXvjQbxfcVgmrwNly3VMwsOtUlOfYUPXWD2u3I09DJo5w==
-X-Received: by 2002:a17:907:970e:b0:a8d:6073:2c13 with SMTP id
- a640c23a62f3a-a93a03b6d6cmr299279466b.33.1727277235574; 
- Wed, 25 Sep 2024 08:13:55 -0700 (PDT)
-Received: from paolo-laptop-amd.sou.embecosm-corp.com ([212.69.42.53])
+ d=1e100.net; s=20230601; t=1727282350; x=1727887150;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=1Z435ziM7/tTwXvzSmTfZy2EC4XDAX34xouZ7aIOlIs=;
+ b=fIId/z4i8381XstpuxIBwlzT7cFKx79N7nzSuCuvh1+A4xIoxKj6FoYmJYzmqnlSrV
+ J0RSC/qOrw1vQj71n3aEyN0lTQrsusTy2t1mHuzo9OPQab6MMewsIscKOZXk5lKaeev8
+ Ogf66gztFc1g+VDKoCxHH7Q5OogWJmDWNIAbmc8M4uLyW5kZ9dZOMCEY6pXgv1EdFhdk
+ a4T2wbakK+S81O8Rk4a9GisBtBp4gFyJK42hmOSA0a9UqGrcQuzASCyXC5pO0iQSPXsb
+ 5ftTt6B/0MxEjfnsjINVrDUDTg568+Ui39AeBtWN+K83Qz0pRyWWNNMPgEM9DqdXAyOf
+ D5PQ==
+X-Gm-Message-State: AOJu0Yw8OFvx6y5XU8YtUUB5yisgbpx6q6v2pTzyE+J0YyEpsxEODr8E
+ yQXGmjtHvxmd+BauiokwtiaqMsrHW+xzD6Uav3cF9wAlXo10ZAlh6afjJxzpuL904BqAeCgeCdz
+ h
+X-Google-Smtp-Source: AGHT+IERX02swcPEoiblQuuic3gAEeqmOswgPsVWcbmUh+C8ghu3DeH4LxWkSEre3wbkr5Qvqi67YQ==
+X-Received: by 2002:a17:907:9487:b0:a7a:8586:d36b with SMTP id
+ a640c23a62f3a-a93a03305a3mr326532566b.3.1727282349900; 
+ Wed, 25 Sep 2024 09:39:09 -0700 (PDT)
+Received: from localhost (2001-1ae9-1c2-4c00-20f-c6b4-1e57-7965.ip6.tmcz.cz.
+ [2001:1ae9:1c2:4c00:20f:c6b4:1e57:7965])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a9393138af7sm217158566b.206.2024.09.25.08.13.54
+ a640c23a62f3a-a9392f4fb94sm228009766b.58.2024.09.25.09.39.09
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 25 Sep 2024 08:13:55 -0700 (PDT)
-From: Paolo Savini <paolo.savini@embecosm.com>
-To: qemu-devel@nongnu.org,
-	qemu-riscv@nongnu.org
-Cc: Paolo Savini <paolo.savini@embecosm.com>,
- Richard Handerson <richard.henderson@linaro.org>,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bmeng.cn@gmail.com>,
- Weiwei Li <liwei1518@gmail.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Helene Chelin <helene.chelin@embecosm.com>, Nathan Egge <negge@google.com>,
- Max Chou <max.chou@sifive.com>
-Subject: [RFC 1/1] target/riscv: use a simplified loop to emulate rvv
- loads/stores only in user mode.
-Date: Wed, 25 Sep 2024 16:13:30 +0100
-Message-ID: <20240925151330.50215-2-paolo.savini@embecosm.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20240925151330.50215-1-paolo.savini@embecosm.com>
-References: <20240925151330.50215-1-paolo.savini@embecosm.com>
+ Wed, 25 Sep 2024 09:39:09 -0700 (PDT)
+From: Andrew Jones <ajones@ventanamicro.com>
+To: qemu-riscv@nongnu.org,
+	qemu-devel@nongnu.org
+Cc: palmer@dabbelt.com, alistair.francis@wdc.com, bmeng.cn@gmail.com,
+ liwei1518@gmail.com, dbarboza@ventanamicro.com,
+ zhiwei_liu@linux.alibaba.com
+Subject: [PATCH] hw/riscv/virt: Comment absence of #msi-cells
+Date: Wed, 25 Sep 2024 18:39:09 +0200
+Message-ID: <20240925163908.215456-2-ajones@ventanamicro.com>
+X-Mailer: git-send-email 2.46.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::636;
- envelope-from=paolo.savini@embecosm.com; helo=mail-ej1-x636.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::632;
+ envelope-from=ajones@ventanamicro.com; helo=mail-ej1-x632.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -104,37 +94,38 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-The simplified emulation of vector loads and stores that bypasses the memory
-probing in the vext_ldst_us helper function seem to benefit only the user mode.
-We therefore limit this approach to the user mode configuration.
+commit 6df664f87c73 ("Revert "hw/riscv/virt.c: imsics DT: add
+'#msi-cells'"") removed #msi-cells. Now that we have a Linux
+commit to reference add a comment explaining why it was removed
+to avoid it getting added back due to DT validation failures.
 
-Signed-off-by: Paolo Savini <paolo.savini@embecosm.com>
+Signed-off-by: Andrew Jones <ajones@ventanamicro.com>
 ---
- target/riscv/vector_helper.c | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+ hw/riscv/virt.c | 10 ++++++++++
+ 1 file changed, 10 insertions(+)
 
-diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
-index 9026661573..08f71abc22 100644
---- a/target/riscv/vector_helper.c
-+++ b/target/riscv/vector_helper.c
-@@ -648,6 +648,7 @@ vext_ldst_us(void *vd, target_ulong base, CPURISCVState *env, uint32_t desc,
- 
-     VSTART_CHECK_EARLY_EXIT(env);
- 
-+#ifdef CONFIG_USER_ONLY
-     /* For data sizes <= 64 bits and for LMUL=1 with VLEN=128 bits we get a
-      * better performance by doing a simple simulation of the load/store
-      * without the overhead of prodding the host RAM */
-@@ -692,7 +693,7 @@ vext_ldst_us(void *vd, target_ulong base, CPURISCVState *env, uint32_t desc,
-         vext_set_tail_elems_1s(evl, vd, desc, nf, esz, max_elems);
-         return;
-     }
--
-+#endif
- 
-     vext_cont_ldst_elements(&info, base, env->vreg, env->vstart, evl, desc,
-                             log2_esz, false);
+diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+index cef41c150aaf..4fd9c0edf038 100644
+--- a/hw/riscv/virt.c
++++ b/hw/riscv/virt.c
+@@ -552,6 +552,16 @@ static void create_fdt_one_imsic(RISCVVirtState *s, hwaddr base_addr,
+                           FDT_IMSIC_INT_CELLS);
+     qemu_fdt_setprop(ms->fdt, imsic_name, "interrupt-controller", NULL, 0);
+     qemu_fdt_setprop(ms->fdt, imsic_name, "msi-controller", NULL, 0);
++    /*
++     * Per the DT binding, we should also add #msi-cells with a value of zero.
++     * But, Linux which does not include commit db8e81132cf0 ("of/irq: Support
++     * #msi-cells=<0> in of_msi_get_domain") does not properly handle #msi-cells
++     * with a value of zero. For this reason, the property has intentionally
++     * been left out. It's harmless to not add it since the absence of the
++     * property and a value of zero for the property mean the same thing.
++     * However, since the DT binding requires the property, DT validation may
++     * fail.
++     */
+     qemu_fdt_setprop(ms->fdt, imsic_name, "interrupts-extended",
+                      imsic_cells, ms->smp.cpus * sizeof(uint32_t) * 2);
+     qemu_fdt_setprop(ms->fdt, imsic_name, "reg", imsic_regs,
 -- 
-2.34.1
+2.46.0
 
 
