@@ -4,85 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 38CDFCCF9E8
-	for <qemu-riscv@archiver.kernel.org>; Wed, 25 Sep 2024 17:54:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D8269CCF9E9
+	for <qemu-riscv@archiver.kernel.org>; Thu, 26 Sep 2024 08:40:44 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1stWCm-0001ce-Ni; Wed, 25 Sep 2024 13:53:36 -0400
+	id 1stk2i-00021Q-LW; Thu, 26 Sep 2024 04:40:08 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1stWCb-0001SF-06
- for qemu-riscv@nongnu.org; Wed, 25 Sep 2024 13:53:25 -0400
-Received: from mail-ua1-x935.google.com ([2607:f8b0:4864:20::935])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1stWCY-0005wb-CM
- for qemu-riscv@nongnu.org; Wed, 25 Sep 2024 13:53:24 -0400
-Received: by mail-ua1-x935.google.com with SMTP id
- a1e0cc1a2514c-84876d069acso15296241.3
- for <qemu-riscv@nongnu.org>; Wed, 25 Sep 2024 10:53:17 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1727286796; x=1727891596; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=DNgmnswPo2nFwsXoBk0eLKeqHi2pOl7ck6V96JQ/8uk=;
- b=YUkG3UDCmbSMnSdiG9SrDkSTLJ0iOY3ORyQ2bFtuYrX04szpijmvWfpw5LFIJFLoN+
- TTbz44NiA2YoHgYsUQXhZEgPWMKPv/cn+SCHgIgXQEQkjygPSsE6wdzIyDgSxoRxWG27
- eibvVCTKZ7fepxYYqFOgeWZkaO/ZeuuLtUku9Ge2JK25m0uX31/lEdMxMu2ENRa0VWpj
- V+hoiXUzwsuw0HxdSmRAevhhum51CmPrdiwH6e6H9sAktLdK/nSG1bhtAQaxeKXu20eH
- 3y5FZgBTUdiNPsDdYeTZUqZzREdXnOTWnQ4ZzUOdzv0qZx59xmF/pK5nufPBQpk3LomJ
- Gx8Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1727286796; x=1727891596;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=DNgmnswPo2nFwsXoBk0eLKeqHi2pOl7ck6V96JQ/8uk=;
- b=n5p+Jzn8xxJDWirR58aI8zQUjRrEMgem+PUvzlSiliTTFpCdZ8j2//JZw3JjartVyW
- 33cxGxp5GBhu/xscBXRTiIJhe1tCBOE0Yk5iJYQwnx6b/Tuzz/3PMw3aCHOj+gK0h3Q7
- UVT3Vy60MZb8FduRw3yOMrmyz0ozC/W+SaqSrlMQ8FBcZ7j3e+xdIdbx17QCBLixDEWD
- rhnz1mT7VGStnygciauyEdS87dPvuhHjowHKUr+aBxdZCYFxOe5/MOjSeh2LKALAmgbQ
- 3QM+9Gv6cTWmQnn2gUiws8xJeqAFsnndGY031gmb1X2l1qkc9Px9lMUIXpt3OJckSqcb
- 6Ifw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXdUW97W0TMXTFkUIpH6I6gsHBTMYEdY36v0O05NX8f4zBSIdBg0NSfV16vzyCXJC3uAFiFXi3JuCxK@nongnu.org
-X-Gm-Message-State: AOJu0Yxh37eZQlzJsLM5iF6ye029Ic6fKf+BsPQKuEGGlWfHUT9vQINj
- n9rHzGH6byA+6UXSKcHm0IVT0PaJfLzAM4kDCXeRpGWX7JsHPxLQ0Qq3O2A6UpU=
-X-Google-Smtp-Source: AGHT+IEy+fwHxf4TYkfp5IMfjNJrSmGQWJMq7L1w0zKcvPhCJMYCBcFOFp8XQdZnqXPZRn578gopQg==
-X-Received: by 2002:a05:6102:ccd:b0:49e:928f:7976 with SMTP id
- ada2fe7eead31-4a15dc997c6mr3643661137.12.1727286796126; 
- Wed, 25 Sep 2024 10:53:16 -0700 (PDT)
-Received: from [192.168.68.110] ([187.101.184.93])
- by smtp.gmail.com with ESMTPSA id
- a1e0cc1a2514c-84e9bb5d9b0sm105497241.31.2024.09.25.10.53.13
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 25 Sep 2024 10:53:15 -0700 (PDT)
-Message-ID: <1ed85a7b-dbab-4fa5-bc98-24b46d1d9845@ventanamicro.com>
-Date: Wed, 25 Sep 2024 14:53:11 -0300
+ (Exim 4.90_1) (envelope-from <evgenii.prokopiev@syntacore.com>)
+ id 1stk2g-0001xr-DX; Thu, 26 Sep 2024 04:40:06 -0400
+Received: from mta-04.yadro.com ([89.207.88.248])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <evgenii.prokopiev@syntacore.com>)
+ id 1stk2e-0004OH-KH; Thu, 26 Sep 2024 04:40:06 -0400
+DKIM-Filter: OpenDKIM Filter v2.11.0 mta-04.yadro.com 5DA12C0003
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=syntacore.com;
+ s=mta-04; t=1727339997;
+ bh=v06OyEokpOs4ZV+K6KA2XIy905nLsPkN/5l90UL+GZw=;
+ h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type:From;
+ b=C05xnINnF7l/O7RNPha17uruJ1lciNC6Sp1KkdU7OJOawWoOSORpjN9G8EuRZ6adl
+ zlc18LLDRfKOTGVbW1fm0HCbj5L22D1drw1D8er0Kbnu0HiDxHqC3jJkPSOAxwzBS1
+ Sq/IssieXA7vazHoaF/44b7WM71AF67wEhb4Qe0R4MRry7RZGjlRRaRfh462XWIdgJ
+ Gixrrb2HpLvYCBxyzpCzH9wyxuevOtiNTXFRl/NzFvGMiQQa4VLPuvRuNANwjTfkzr
+ 9tV9S8h8XBPQ+ih90yCE5kf8+fEpN+yeVxikxh89ffMdXcijkcgDW/8BfkLqK2UNyM
+ 1euIQ8FMNzeWw==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=syntacore.com;
+ s=mta-03; t=1727339997;
+ bh=v06OyEokpOs4ZV+K6KA2XIy905nLsPkN/5l90UL+GZw=;
+ h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type:From;
+ b=HdgxGpGyX5TO6pAp5yK8TCXAwWldQeyHy4S3lc90q376Aa9Y3JW3/Z10I+iQtqUiK
+ e3GJgfLPgx/GsIe1OWX1lU8IV5cW7Bk+mEjwSjr5e0bDXaQ74Z07Z5GpbV3R3u1mgy
+ dXjGVEiE6pZJZ45ta3mjaly0z/xJWnlfqJTgf+ufF0h2N+9mLLTqJ7JwqyM1W7Rh9/
+ IpnQi1lxCA5Z4hcbMT9SsLBGcj5eEuK8XC6MgvsL/bGNWWustszGvSprYQfxnZGtvc
+ bm35O7cqBhSni3MpoBVkGgPFlWScU1XEX1fw3odVBoxlbGCSVV3ZrvS3skx82IFLo8
+ 2GJU6Tsqq/6Xw==
+From: Evgenii Prokopiev <evgenii.prokopiev@syntacore.com>
+To: <dbarboza@ventanamicro.com>
+CC: <alistair.francis@wdc.com>, <bmeng.cn@gmail.com>,
+ <evgenii.prokopiev@syntacore.com>, <liwei1518@gmail.com>,
+ <palmer@dabbelt.com>, <qemu-devel@nongnu.org>, <qemu-riscv@nongnu.org>,
+ <zhiwei_liu@linux.alibaba.com>
+Subject: [PATCH v2] target/riscv/csr.c: Fix an access to VXSAT
+Date: Thu, 26 Sep 2024 11:39:44 +0300
+Message-ID: <20240926083944.15807-1-evgenii.prokopiev@syntacore.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <70658cf5-4a72-4b83-8390-cb0a3506e6eb@ventanamicro.com>
+References: <70658cf5-4a72-4b83-8390-cb0a3506e6eb@ventanamicro.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] hw/riscv/virt: Comment absence of #msi-cells
-To: Andrew Jones <ajones@ventanamicro.com>, qemu-riscv@nongnu.org,
- qemu-devel@nongnu.org
-Cc: palmer@dabbelt.com, alistair.francis@wdc.com, bmeng.cn@gmail.com,
- liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com
-References: <20240925163908.215456-2-ajones@ventanamicro.com>
-Content-Language: en-US
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <20240925163908.215456-2-ajones@ventanamicro.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::935;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-ua1-x935.google.com
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: T-EXCH-09.corp.yadro.com (172.17.11.59) To
+ T-EXCH-12.corp.yadro.com (172.17.11.143)
+Received-SPF: permerror client-ip=89.207.88.248;
+ envelope-from=evgenii.prokopiev@syntacore.com; helo=mta-04.yadro.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_VALIDITY_CERTIFIED_BLOCKED=0.001, RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001,
+ SPF_HELO_NONE=0.001, T_SPF_PERMERROR=0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -98,41 +80,47 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
+The register VXSAT should be RW only to the first bit.
+The remaining bits should be 0.
 
+The RISC-V Instruction Set Manual Volume I: Unprivileged Architecture
 
-On 9/25/24 1:39 PM, Andrew Jones wrote:
-> commit 6df664f87c73 ("Revert "hw/riscv/virt.c: imsics DT: add
-> '#msi-cells'"") removed #msi-cells. Now that we have a Linux
-> commit to reference add a comment explaining why it was removed
-> to avoid it getting added back due to DT validation failures.
-> 
-> Signed-off-by: Andrew Jones <ajones@ventanamicro.com>
-> ---
+The vxsat CSR has a single read-write least-significant bit (vxsat[0])
+that indicates if a fixed-point instruction has had to saturate an output
+value to fit into a destination format. Bits vxsat[XLEN-1:1]
+should be written as zeros.
 
+Signed-off-by: Evgenii Prokopiev <evgenii.prokopiev@syntacore.com>
 Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+---
+Changes since v1: 
+	- Added reviewed-by tag
+ target/riscv/csr.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
->   hw/riscv/virt.c | 10 ++++++++++
->   1 file changed, 10 insertions(+)
-> 
-> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-> index cef41c150aaf..4fd9c0edf038 100644
-> --- a/hw/riscv/virt.c
-> +++ b/hw/riscv/virt.c
-> @@ -552,6 +552,16 @@ static void create_fdt_one_imsic(RISCVVirtState *s, hwaddr base_addr,
->                             FDT_IMSIC_INT_CELLS);
->       qemu_fdt_setprop(ms->fdt, imsic_name, "interrupt-controller", NULL, 0);
->       qemu_fdt_setprop(ms->fdt, imsic_name, "msi-controller", NULL, 0);
-> +    /*
-> +     * Per the DT binding, we should also add #msi-cells with a value of zero.
-> +     * But, Linux which does not include commit db8e81132cf0 ("of/irq: Support
-> +     * #msi-cells=<0> in of_msi_get_domain") does not properly handle #msi-cells
-> +     * with a value of zero. For this reason, the property has intentionally
-> +     * been left out. It's harmless to not add it since the absence of the
-> +     * property and a value of zero for the property mean the same thing.
-> +     * However, since the DT binding requires the property, DT validation may
-> +     * fail.
-> +     */
->       qemu_fdt_setprop(ms->fdt, imsic_name, "interrupts-extended",
->                        imsic_cells, ms->smp.cpus * sizeof(uint32_t) * 2);
->       qemu_fdt_setprop(ms->fdt, imsic_name, "reg", imsic_regs,
+diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+index bd080f92b5..69c41212e9 100644
+--- a/target/riscv/csr.c
++++ b/target/riscv/csr.c
+@@ -717,7 +717,7 @@ static RISCVException write_vxrm(CPURISCVState *env, int csrno,
+ static RISCVException read_vxsat(CPURISCVState *env, int csrno,
+                                  target_ulong *val)
+ {
+-    *val = env->vxsat;
++    *val = env->vxsat & BIT(0);
+     return RISCV_EXCP_NONE;
+ }
+ 
+@@ -727,7 +727,7 @@ static RISCVException write_vxsat(CPURISCVState *env, int csrno,
+ #if !defined(CONFIG_USER_ONLY)
+     env->mstatus |= MSTATUS_VS;
+ #endif
+-    env->vxsat = val;
++    env->vxsat = val & BIT(0);
+     return RISCV_EXCP_NONE;
+ }
+ 
+-- 
+2.34.1
+
 
