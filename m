@@ -4,67 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D8269CCF9E9
-	for <qemu-riscv@archiver.kernel.org>; Thu, 26 Sep 2024 08:40:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 590B8CDE038
+	for <qemu-riscv@archiver.kernel.org>; Thu, 26 Sep 2024 21:55:12 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1stk2i-00021Q-LW; Thu, 26 Sep 2024 04:40:08 -0400
+	id 1stwRq-0002Aq-VQ; Thu, 26 Sep 2024 17:54:55 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <evgenii.prokopiev@syntacore.com>)
- id 1stk2g-0001xr-DX; Thu, 26 Sep 2024 04:40:06 -0400
-Received: from mta-04.yadro.com ([89.207.88.248])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <evgenii.prokopiev@syntacore.com>)
- id 1stk2e-0004OH-KH; Thu, 26 Sep 2024 04:40:06 -0400
-DKIM-Filter: OpenDKIM Filter v2.11.0 mta-04.yadro.com 5DA12C0003
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=syntacore.com;
- s=mta-04; t=1727339997;
- bh=v06OyEokpOs4ZV+K6KA2XIy905nLsPkN/5l90UL+GZw=;
- h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type:From;
- b=C05xnINnF7l/O7RNPha17uruJ1lciNC6Sp1KkdU7OJOawWoOSORpjN9G8EuRZ6adl
- zlc18LLDRfKOTGVbW1fm0HCbj5L22D1drw1D8er0Kbnu0HiDxHqC3jJkPSOAxwzBS1
- Sq/IssieXA7vazHoaF/44b7WM71AF67wEhb4Qe0R4MRry7RZGjlRRaRfh462XWIdgJ
- Gixrrb2HpLvYCBxyzpCzH9wyxuevOtiNTXFRl/NzFvGMiQQa4VLPuvRuNANwjTfkzr
- 9tV9S8h8XBPQ+ih90yCE5kf8+fEpN+yeVxikxh89ffMdXcijkcgDW/8BfkLqK2UNyM
- 1euIQ8FMNzeWw==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=syntacore.com;
- s=mta-03; t=1727339997;
- bh=v06OyEokpOs4ZV+K6KA2XIy905nLsPkN/5l90UL+GZw=;
- h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type:From;
- b=HdgxGpGyX5TO6pAp5yK8TCXAwWldQeyHy4S3lc90q376Aa9Y3JW3/Z10I+iQtqUiK
- e3GJgfLPgx/GsIe1OWX1lU8IV5cW7Bk+mEjwSjr5e0bDXaQ74Z07Z5GpbV3R3u1mgy
- dXjGVEiE6pZJZ45ta3mjaly0z/xJWnlfqJTgf+ufF0h2N+9mLLTqJ7JwqyM1W7Rh9/
- IpnQi1lxCA5Z4hcbMT9SsLBGcj5eEuK8XC6MgvsL/bGNWWustszGvSprYQfxnZGtvc
- bm35O7cqBhSni3MpoBVkGgPFlWScU1XEX1fw3odVBoxlbGCSVV3ZrvS3skx82IFLo8
- 2GJU6Tsqq/6Xw==
-From: Evgenii Prokopiev <evgenii.prokopiev@syntacore.com>
-To: <dbarboza@ventanamicro.com>
-CC: <alistair.francis@wdc.com>, <bmeng.cn@gmail.com>,
- <evgenii.prokopiev@syntacore.com>, <liwei1518@gmail.com>,
- <palmer@dabbelt.com>, <qemu-devel@nongnu.org>, <qemu-riscv@nongnu.org>,
- <zhiwei_liu@linux.alibaba.com>
-Subject: [PATCH v2] target/riscv/csr.c: Fix an access to VXSAT
-Date: Thu, 26 Sep 2024 11:39:44 +0300
-Message-ID: <20240926083944.15807-1-evgenii.prokopiev@syntacore.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <70658cf5-4a72-4b83-8390-cb0a3506e6eb@ventanamicro.com>
-References: <70658cf5-4a72-4b83-8390-cb0a3506e6eb@ventanamicro.com>
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1stwRp-00029I-Iw
+ for qemu-riscv@nongnu.org; Thu, 26 Sep 2024 17:54:53 -0400
+Received: from mail-pl1-x62d.google.com ([2607:f8b0:4864:20::62d])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1stwRn-00041f-MX
+ for qemu-riscv@nongnu.org; Thu, 26 Sep 2024 17:54:53 -0400
+Received: by mail-pl1-x62d.google.com with SMTP id
+ d9443c01a7336-208ccde82e6so12324855ad.0
+ for <qemu-riscv@nongnu.org>; Thu, 26 Sep 2024 14:54:51 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=ventanamicro.com; s=google; t=1727387689; x=1727992489; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=QDhMwVp4WPp75qDkVYZW8GjhKxnmHDCQVmLs6bLp9g0=;
+ b=cKlfVD8g7tbtDgZQkM3HIiqGjpjc8NjXSx3KgKljO5FYKVhoenS69btLFe1XuhqAzF
+ qmDB1nsmEQypTgTe1OyCRImTBtKAlRpUxyrK7Yp+whWfFN66vBMMejcBiBOhmtS3VqML
+ tGfyo8NWBqFeSPlkZhdtxLHVbCNxju7y9KdwkWAQLYapeCGoNBLN7hpAn5/NwNBTCkwo
+ 3bimCYBzif4v4E2AFxaQjsI8VcBOE6548dPgyXj1EM9sSIo7uLZ4Wl8DdU5MRKNwJNwV
+ xKU3bVjqdhx5iXLjNMQB5SmJlo8oXliDds8n8LYK4QRYr6PtPDApA+ercE/WMVFy4+gd
+ PJyA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1727387689; x=1727992489;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=QDhMwVp4WPp75qDkVYZW8GjhKxnmHDCQVmLs6bLp9g0=;
+ b=IzLzYy9YI7DT/9NjoPzu7VQht+8sxYpUy1JEeGT96PY3EADOem+98H2ntaJl5t1XTN
+ r4IoE8pmeGR6Jo4yA7CiENRff386cu1uG5g5nOmQto0KY1Bt0T3bp9mjqCZNfC4kt0EO
+ n5ZHVcWsrm16aLLsJ0WvCk6F4AzV2XvCu0ODPjndtnR8vBZEV9ejj2rMiMqcwIMeROwU
+ zOyqjWOR1aAExsGV/sCGIsXoHfihiIDMUH1vvYKVQl3Dc3s1H8ODihWF0THKIhUbydQw
+ Llii1kutXMMe8r1qjLCABUEGitvzkqejmZ7k3Zh17tUO4kqocLrB1ud3Wr0YocFbrT6/
+ b+bQ==
+X-Gm-Message-State: AOJu0Yy+FRVe45kRuPfYYIg6DV41MqYO4gWAtI/5lTH/l/wdUilwEUr/
+ 4AuC8QI/04v64l5iFE4BW87WN/0j1CkSx+j0ifgeQpfeetzQQnkG23gYfMSFoTg=
+X-Google-Smtp-Source: AGHT+IEK+hcxyOKXxBOxHtYwZ1QXIoej7AGmEQioCQXxwyq12I5N2oYkM+f2WmxsbTaCFO2mvvCLRQ==
+X-Received: by 2002:a17:902:d490:b0:200:abb6:4daf with SMTP id
+ d9443c01a7336-20b37b7b72amr16412175ad.39.1727387689618; 
+ Thu, 26 Sep 2024 14:54:49 -0700 (PDT)
+Received: from [192.168.68.110] ([187.101.184.93])
+ by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-20b37e4dbc0sm2819305ad.243.2024.09.26.14.54.46
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 26 Sep 2024 14:54:49 -0700 (PDT)
+Message-ID: <230d58bc-6c92-4ee3-a28c-e2f0c93a819b@ventanamicro.com>
+Date: Thu, 26 Sep 2024 18:54:45 -0300
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: T-EXCH-09.corp.yadro.com (172.17.11.59) To
- T-EXCH-12.corp.yadro.com (172.17.11.143)
-Received-SPF: permerror client-ip=89.207.88.248;
- envelope-from=evgenii.prokopiev@syntacore.com; helo=mta-04.yadro.com
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v7 7/8] target/riscv: Add max32 CPU for RV64 QEMU
+To: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>, qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, palmer@dabbelt.com, alistair.francis@wdc.com,
+ liwei1518@gmail.com, bmeng.cn@gmail.com
+References: <20240919055048.562-1-zhiwei_liu@linux.alibaba.com>
+ <20240919055048.562-8-zhiwei_liu@linux.alibaba.com>
+Content-Language: en-US
+From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+In-Reply-To: <20240919055048.562-8-zhiwei_liu@linux.alibaba.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::62d;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pl1-x62d.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_VALIDITY_CERTIFIED_BLOCKED=0.001, RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001,
- SPF_HELO_NONE=0.001, T_SPF_PERMERROR=0.01 autolearn=ham autolearn_force=no
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -80,47 +96,67 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-The register VXSAT should be RW only to the first bit.
-The remaining bits should be 0.
 
-The RISC-V Instruction Set Manual Volume I: Unprivileged Architecture
 
-The vxsat CSR has a single read-write least-significant bit (vxsat[0])
-that indicates if a fixed-point instruction has had to saturate an output
-value to fit into a destination format. Bits vxsat[XLEN-1:1]
-should be written as zeros.
+On 9/19/24 2:50 AM, LIU Zhiwei wrote:
+> We may need 32-bit max for RV64 QEMU. Thus we add these two CPUs
+> for RV64 QEMU.
+> 
+> The reason we don't expose them to RV32 QEMU is that we already have
+> max cpu with the same configuration. Another reason is that we want
+> to follow the RISC-V custom where addw instruction doesn't exist in
+> RV32 CPU.
+> 
+> Signed-off-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
+> Suggested-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+> ---
 
-Signed-off-by: Evgenii Prokopiev <evgenii.prokopiev@syntacore.com>
 Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
----
-Changes since v1: 
-	- Added reviewed-by tag
- target/riscv/csr.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-index bd080f92b5..69c41212e9 100644
---- a/target/riscv/csr.c
-+++ b/target/riscv/csr.c
-@@ -717,7 +717,7 @@ static RISCVException write_vxrm(CPURISCVState *env, int csrno,
- static RISCVException read_vxsat(CPURISCVState *env, int csrno,
-                                  target_ulong *val)
- {
--    *val = env->vxsat;
-+    *val = env->vxsat & BIT(0);
-     return RISCV_EXCP_NONE;
- }
- 
-@@ -727,7 +727,7 @@ static RISCVException write_vxsat(CPURISCVState *env, int csrno,
- #if !defined(CONFIG_USER_ONLY)
-     env->mstatus |= MSTATUS_VS;
- #endif
--    env->vxsat = val;
-+    env->vxsat = val & BIT(0);
-     return RISCV_EXCP_NONE;
- }
- 
--- 
-2.34.1
-
+>   target/riscv/cpu-qom.h |  1 +
+>   target/riscv/cpu.c     | 12 +++++++-----
+>   2 files changed, 8 insertions(+), 5 deletions(-)
+> 
+> diff --git a/target/riscv/cpu-qom.h b/target/riscv/cpu-qom.h
+> index 4464c0fd7a..62115375cd 100644
+> --- a/target/riscv/cpu-qom.h
+> +++ b/target/riscv/cpu-qom.h
+> @@ -30,6 +30,7 @@
+>   #define RISCV_CPU_TYPE_NAME(name) (name RISCV_CPU_TYPE_SUFFIX)
+>   
+>   #define TYPE_RISCV_CPU_MAX              RISCV_CPU_TYPE_NAME("max")
+> +#define TYPE_RISCV_CPU_MAX32            RISCV_CPU_TYPE_NAME("max32")
+>   #define TYPE_RISCV_CPU_BASE32           RISCV_CPU_TYPE_NAME("rv32")
+>   #define TYPE_RISCV_CPU_BASE64           RISCV_CPU_TYPE_NAME("rv64")
+>   #define TYPE_RISCV_CPU_BASE128          RISCV_CPU_TYPE_NAME("x-rv128")
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index 86ce15252a..baf8fba467 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -448,11 +448,9 @@ static void riscv_max_cpu_init(Object *obj)
+>   
+>       env->priv_ver = PRIV_VERSION_LATEST;
+>   #ifndef CONFIG_USER_ONLY
+> -#ifdef TARGET_RISCV32
+> -    set_satp_mode_max_supported(cpu, VM_1_10_SV32);
+> -#else
+> -    set_satp_mode_max_supported(cpu, VM_1_10_SV57);
+> -#endif
+> +    set_satp_mode_max_supported(RISCV_CPU(obj),
+> +        riscv_cpu_mxl(&RISCV_CPU(obj)->env) == MXL_RV32 ?
+> +        VM_1_10_SV32 : VM_1_10_SV57);
+>   #endif
+>   }
+>   
+> @@ -2945,6 +2943,10 @@ static const TypeInfo riscv_cpu_type_infos[] = {
+>       DEFINE_BARE_CPU(TYPE_RISCV_CPU_RV32E,        MXL_RV32,  rv32e_bare_cpu_init),
+>   #endif
+>   
+> +#if (defined(TARGET_RISCV64) && !defined(CONFIG_USER_ONLY))
+> +    DEFINE_DYNAMIC_CPU(TYPE_RISCV_CPU_MAX32,     MXL_RV32,  riscv_max_cpu_init),
+> +#endif
+> +
+>   #if defined(TARGET_RISCV64)
+>       DEFINE_DYNAMIC_CPU(TYPE_RISCV_CPU_BASE64,    MXL_RV64,  rv64_base_cpu_init),
+>       DEFINE_VENDOR_CPU(TYPE_RISCV_CPU_SIFIVE_E51, MXL_RV64,  rv64_sifive_e_cpu_init),
 
