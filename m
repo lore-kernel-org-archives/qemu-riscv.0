@@ -4,57 +4,57 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 43135CDD1AF
-	for <qemu-riscv@archiver.kernel.org>; Fri, 27 Sep 2024 13:27:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B3F30CDD1AF
+	for <qemu-riscv@archiver.kernel.org>; Fri, 27 Sep 2024 13:27:40 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1suAz8-00056N-Gx; Fri, 27 Sep 2024 09:26:14 -0400
+	id 1suAz5-0004jo-5Y; Fri, 27 Sep 2024 09:26:11 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <trdthg47@gmail.com>)
- id 1su6Tu-0006zb-7L; Fri, 27 Sep 2024 04:37:42 -0400
-Received: from mail-pl1-x636.google.com ([2607:f8b0:4864:20::636])
+ id 1su50L-0000OU-QD; Fri, 27 Sep 2024 03:03:05 -0400
+Received: from mail-ot1-x332.google.com ([2607:f8b0:4864:20::332])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <trdthg47@gmail.com>)
- id 1su6Ts-0004Qx-8i; Fri, 27 Sep 2024 04:37:41 -0400
-Received: by mail-pl1-x636.google.com with SMTP id
- d9443c01a7336-20696938f86so16264505ad.3; 
- Fri, 27 Sep 2024 01:37:39 -0700 (PDT)
+ id 1su50J-0000oQ-Jb; Fri, 27 Sep 2024 03:03:04 -0400
+Received: by mail-ot1-x332.google.com with SMTP id
+ 46e09a7af769-710e910dd7dso1191699a34.2; 
+ Fri, 27 Sep 2024 00:03:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1727426258; x=1728031058; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1727420581; x=1728025381; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:from:to:cc:subject:date:message-id:reply-to;
  bh=TvI9qw5LAWNZpYaJ0urC7M+CoFwaemgKRzivOqo/UZc=;
- b=RuySMNzSCULeDuzJhCUXpyfxMaVVp+7VRUr4U/dpiZj31M2V4LY+xW7RPdHRrwyH/I
- MIJOz0NztMYTQeyQGcfzyX+JDj4TIduCuoay77+D8+usjN3vaVUwG0uHuWh0C6UhT6CL
- yTrT3+w2nrbnu66HeSxLHPmQHbn8Psa2EIwPjLB9t9IKPanv5mG+g4uW8spvdehUCCe6
- zEIwpep1gLqiYJMjGyCT4CwHTbBL4Q3UijZoEFMg+Fomlua613CYph40VTjImpBMCoSm
- wn0KuMf5c/AT8xlk1nOAwunebgCdMwdM3bVNQbF+pBaEVWHQoqoCsgoBF5F2W3Z/XhuB
- o/BQ==
+ b=fGENAApT+U9uADkTUQHazMOud22EOm4HR/JfEJoKc175jOTPkKN+Q53eqPfz9y4Gag
+ GTQIBqaWeZWISZuXS28BubRGDCiY/Mrh6F2rUg3waqJR7IfrtzN7v1Z+iL7gSugO9zHX
+ +MSxyq2yWG1BRZnqDr5eYYWU89uO1Ry/TsXp/UJ4ycEJbDkjMjD0ai6RhuZ9hKWJXTXQ
+ MQKJiCwHOfRTa4NKeuykBLHQbUAIIj9KLVsnDSkrHwDdmaS0ES/e4vVHGv3bsqVicqvJ
+ fe5eaZ4AMDAckRc3E2yljclUmdcHhsIkp2NAN+RMNgtnvzdRn3FOw8uHYUQ5FUx5lHX9
+ BRgw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1727426258; x=1728031058;
+ d=1e100.net; s=20230601; t=1727420581; x=1728025381;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
  bh=TvI9qw5LAWNZpYaJ0urC7M+CoFwaemgKRzivOqo/UZc=;
- b=fmpmdzIa9gg2sNiReG015B50dlj0r+idIMpcK1vJyNGWh7YhQjQPtE+1NOzUk+YMiJ
- cBmBfabNsdJ3CeG53htZ62SFod5GEdItu8e4SP8giO9php6MCxKEx20mQpre3ksgltO1
- tolNh6MzGCe/72/f4zTUkZtSZmDm3HrnzRMopsuMjLZ6tKwMPV4XkkJjgt8fUljOtclf
- 0HExf0JI+94TyFbHWw+J8+weosIs9FHk4tEGJZRwbpR0Jj6TLz1cksXVW7NWCcVBeDfR
- uF2b/O6x2DZSNX2SUJ1izK9waRfRTHtnjiLioFajv8zv00KcGFHH2kLmu10R+xiS8+Q/
- 06WQ==
-X-Gm-Message-State: AOJu0Yw1w3mQKu9Q2eiQ53Gxk/tIYDbwxid8n8rG/Lo89hAvRfgzaQDO
- uTRK/N0LIc26mRG18aQDZ2w9Jz55DZc0PyhbvpsJ0XyEvIBqSGuyjmkYMYxrl3k=
-X-Google-Smtp-Source: AGHT+IFnm5oR7IV1sQMDsP1Q2JcStDzUjrASaGP94WoNm7+BWZxTXXssx5s4zTwfaXD9y36dT1B3sA==
-X-Received: by 2002:a17:902:c948:b0:20b:43f8:d764 with SMTP id
- d9443c01a7336-20b43f8d994mr13041225ad.8.1727426257557; 
- Fri, 27 Sep 2024 01:37:37 -0700 (PDT)
+ b=LgoshaDjgc7HPTLoxIWNzC09vYhCmrjOwuuiBe6m73Tgc1XU+tWD05f+zpQNlYTZhv
+ HgHxfX5e4oAHcrYRyL2d6owGUOyOHv9kAfdLnmENDWhgtoN7AhAfnKOYcll4G57QLfwI
+ gJTbONSJ37z4mjLeO6GQDMPJQxfg13sc1SyqJvqfIWMt0U4hWEoI6C6zl3pddEQkx2qE
+ JR9x/T6uf1W75XlfZnJKdus3c7REBcQLqteFnM5KJxHSIOwDXgDG1YXPx5n9HM2up1Sc
+ 5vaIvJWaju20D3/UiblQRVh41yeFVZhtmxbHLvEZuFy/Yr7nIe09lJDIHbFTpiY7yZB6
+ S5tA==
+X-Gm-Message-State: AOJu0YzjWZAhTceUTEB70yR30pc7ZvYEmS1AcEPFxFLxFboZbHkbmQTS
+ LBrxyAZqRr8+6zz1lX+uDG5gh/2yM4Wskfq46J126Er8LcjBuQpdKfHBf4AbJbk=
+X-Google-Smtp-Source: AGHT+IGdrX7rjZgBcko51d9fxy+GqiQi2O7d1vBrLdA3tBEqGISwObz+mT2hZ8/tj36n4jpNzuyu7Q==
+X-Received: by 2002:a05:6358:784:b0:1b1:acd5:dd98 with SMTP id
+ e5c5f4694b2df-1becbc4b5f1mr164103755d.7.1727420580871; 
+ Fri, 27 Sep 2024 00:03:00 -0700 (PDT)
 Received: from localhost.localdomain ([124.16.141.247])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-20b37e0d64asm9401245ad.178.2024.09.27.01.37.35
+ 41be03b00d2f7-7e6db294ebdsm947830a12.19.2024.09.27.00.02.59
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 27 Sep 2024 01:37:37 -0700 (PDT)
+ Fri, 27 Sep 2024 00:03:00 -0700 (PDT)
 From: MingZhu Yan <trdthg47@gmail.com>
 X-Google-Original-From: MingZhu Yan <yanmingzhu@iscas.ac.cn>
 To: qemu-riscv@nongnu.org
@@ -62,13 +62,13 @@ Cc: qemu-devel@nongnu.org, trdthg47@gmail.com,
  MingZhu Yan <yanmingzhu@iscas.ac.cn>
 Subject: [PATCH] hw/char/riscv_htif: Fix htif_mm_write that causes infinite
  loop in ACT.
-Date: Fri, 27 Sep 2024 16:35:08 +0800
-Message-Id: <20240927083508.59483-1-yanmingzhu@iscas.ac.cn>
+Date: Fri, 27 Sep 2024 15:00:18 +0800
+Message-Id: <20240927070018.10121-1-yanmingzhu@iscas.ac.cn>
 X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::636;
- envelope-from=trdthg47@gmail.com; helo=mail-pl1-x636.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::332;
+ envelope-from=trdthg47@gmail.com; helo=mail-ot1-x332.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -77,7 +77,7 @@ X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
-X-Mailman-Approved-At: Fri, 27 Sep 2024 09:26:04 -0400
+X-Mailman-Approved-At: Fri, 27 Sep 2024 09:26:01 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
