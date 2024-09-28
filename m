@@ -4,80 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B3F30CDD1AF
-	for <qemu-riscv@archiver.kernel.org>; Fri, 27 Sep 2024 13:27:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A9BDFCF6493
+	for <qemu-riscv@archiver.kernel.org>; Sat, 28 Sep 2024 10:40:48 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1suAz5-0004jo-5Y; Fri, 27 Sep 2024 09:26:11 -0400
+	id 1suUrg-0005PP-Fe; Sat, 28 Sep 2024 06:39:52 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <trdthg47@gmail.com>)
- id 1su50L-0000OU-QD; Fri, 27 Sep 2024 03:03:05 -0400
-Received: from mail-ot1-x332.google.com ([2607:f8b0:4864:20::332])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <trdthg47@gmail.com>)
- id 1su50J-0000oQ-Jb; Fri, 27 Sep 2024 03:03:04 -0400
-Received: by mail-ot1-x332.google.com with SMTP id
- 46e09a7af769-710e910dd7dso1191699a34.2; 
- Fri, 27 Sep 2024 00:03:02 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1727420581; x=1728025381; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=TvI9qw5LAWNZpYaJ0urC7M+CoFwaemgKRzivOqo/UZc=;
- b=fGENAApT+U9uADkTUQHazMOud22EOm4HR/JfEJoKc175jOTPkKN+Q53eqPfz9y4Gag
- GTQIBqaWeZWISZuXS28BubRGDCiY/Mrh6F2rUg3waqJR7IfrtzN7v1Z+iL7gSugO9zHX
- +MSxyq2yWG1BRZnqDr5eYYWU89uO1Ry/TsXp/UJ4ycEJbDkjMjD0ai6RhuZ9hKWJXTXQ
- MQKJiCwHOfRTa4NKeuykBLHQbUAIIj9KLVsnDSkrHwDdmaS0ES/e4vVHGv3bsqVicqvJ
- fe5eaZ4AMDAckRc3E2yljclUmdcHhsIkp2NAN+RMNgtnvzdRn3FOw8uHYUQ5FUx5lHX9
- BRgw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1727420581; x=1728025381;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=TvI9qw5LAWNZpYaJ0urC7M+CoFwaemgKRzivOqo/UZc=;
- b=LgoshaDjgc7HPTLoxIWNzC09vYhCmrjOwuuiBe6m73Tgc1XU+tWD05f+zpQNlYTZhv
- HgHxfX5e4oAHcrYRyL2d6owGUOyOHv9kAfdLnmENDWhgtoN7AhAfnKOYcll4G57QLfwI
- gJTbONSJ37z4mjLeO6GQDMPJQxfg13sc1SyqJvqfIWMt0U4hWEoI6C6zl3pddEQkx2qE
- JR9x/T6uf1W75XlfZnJKdus3c7REBcQLqteFnM5KJxHSIOwDXgDG1YXPx5n9HM2up1Sc
- 5vaIvJWaju20D3/UiblQRVh41yeFVZhtmxbHLvEZuFy/Yr7nIe09lJDIHbFTpiY7yZB6
- S5tA==
-X-Gm-Message-State: AOJu0YzjWZAhTceUTEB70yR30pc7ZvYEmS1AcEPFxFLxFboZbHkbmQTS
- LBrxyAZqRr8+6zz1lX+uDG5gh/2yM4Wskfq46J126Er8LcjBuQpdKfHBf4AbJbk=
-X-Google-Smtp-Source: AGHT+IGdrX7rjZgBcko51d9fxy+GqiQi2O7d1vBrLdA3tBEqGISwObz+mT2hZ8/tj36n4jpNzuyu7Q==
-X-Received: by 2002:a05:6358:784:b0:1b1:acd5:dd98 with SMTP id
- e5c5f4694b2df-1becbc4b5f1mr164103755d.7.1727420580871; 
- Fri, 27 Sep 2024 00:03:00 -0700 (PDT)
-Received: from localhost.localdomain ([124.16.141.247])
- by smtp.gmail.com with ESMTPSA id
- 41be03b00d2f7-7e6db294ebdsm947830a12.19.2024.09.27.00.02.59
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 27 Sep 2024 00:03:00 -0700 (PDT)
-From: MingZhu Yan <trdthg47@gmail.com>
-X-Google-Original-From: MingZhu Yan <yanmingzhu@iscas.ac.cn>
-To: qemu-riscv@nongnu.org
-Cc: qemu-devel@nongnu.org, trdthg47@gmail.com,
- MingZhu Yan <yanmingzhu@iscas.ac.cn>
-Subject: [PATCH] hw/char/riscv_htif: Fix htif_mm_write that causes infinite
- loop in ACT.
-Date: Fri, 27 Sep 2024 15:00:18 +0800
-Message-Id: <20240927070018.10121-1-yanmingzhu@iscas.ac.cn>
-X-Mailer: git-send-email 2.34.1
+ (Exim 4.90_1) (envelope-from <balaton@eik.bme.hu>)
+ id 1suUre-0005HB-0U; Sat, 28 Sep 2024 06:39:50 -0400
+Received: from zero.eik.bme.hu ([2001:738:2001:2001::2001])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <balaton@eik.bme.hu>)
+ id 1suUrb-00005e-Mo; Sat, 28 Sep 2024 06:39:49 -0400
+Received: from zero.eik.bme.hu (localhost [127.0.0.1])
+ by zero.eik.bme.hu (Postfix) with ESMTP id D3A6E4E6010;
+ Sat, 28 Sep 2024 12:39:39 +0200 (CEST)
+X-Virus-Scanned: amavisd-new at eik.bme.hu
+Received: from zero.eik.bme.hu ([127.0.0.1])
+ by zero.eik.bme.hu (zero.eik.bme.hu [127.0.0.1]) (amavisd-new, port 10028)
+ with ESMTP id ULQswipGQ6RH; Sat, 28 Sep 2024 12:39:37 +0200 (CEST)
+Received: by zero.eik.bme.hu (Postfix, from userid 432)
+ id C0D7C4E6004; Sat, 28 Sep 2024 12:39:37 +0200 (CEST)
+Received: from localhost (localhost [127.0.0.1])
+ by zero.eik.bme.hu (Postfix) with ESMTP id BE681746F60;
+ Sat, 28 Sep 2024 12:39:37 +0200 (CEST)
+Date: Sat, 28 Sep 2024 12:39:37 +0200 (CEST)
+From: BALATON Zoltan <balaton@eik.bme.hu>
+To: Phil Dennis-Jordan <phil@philjordan.eu>
+cc: qemu-devel@nongnu.org, agraf@csgraf.de, peter.maydell@linaro.org, 
+ pbonzini@redhat.com, rad@semihalf.com, quic_llindhol@quicinc.com, 
+ marcin.juszkiewicz@linaro.org, stefanha@redhat.com, mst@redhat.com, 
+ slp@redhat.com, richard.henderson@linaro.org, eduardo@habkost.net, 
+ marcel.apfelbaum@gmail.com, gaosong@loongson.cn, jiaxun.yang@flygoat.com, 
+ chenhuacai@kernel.org, kwolf@redhat.com, hreitz@redhat.com, 
+ philmd@linaro.org, shorne@gmail.com, palmer@dabbelt.com, 
+ alistair.francis@wdc.com, bmeng.cn@gmail.com, liwei1518@gmail.com, 
+ dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com, 
+ jcmvbkbc@gmail.com, marcandre.lureau@redhat.com, berrange@redhat.com, 
+ akihiko.odaki@daynix.com, qemu-arm@nongnu.org, qemu-block@nongnu.org, 
+ qemu-riscv@nongnu.org
+Subject: Re: [PATCH v3 02/14] hw/display/apple-gfx: Adds PCI implementation
+In-Reply-To: <20240928085727.56883-3-phil@philjordan.eu>
+Message-ID: <67acdfdc-348d-fcd2-7891-06a38349beb1@eik.bme.hu>
+References: <20240928085727.56883-1-phil@philjordan.eu>
+ <20240928085727.56883-3-phil@philjordan.eu>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::332;
- envelope-from=trdthg47@gmail.com; helo=mail-ot1-x332.google.com
-X-Spam_score_int: -17
-X-Spam_score: -1.8
+Content-Type: multipart/mixed;
+ boundary="3866299591-1085095182-1727519977=:26933"
+Received-SPF: pass client-ip=2001:738:2001:2001::2001;
+ envelope-from=balaton@eik.bme.hu; helo=zero.eik.bme.hu
+X-Spam_score_int: -18
+X-Spam_score: -1.9
 X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001, SPF_HELO_NONE=0.001,
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
-X-Mailman-Approved-At: Fri, 27 Sep 2024 09:26:01 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -92,83 +75,204 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Applications sometimes only write the lower 32-bit payload bytes, this is used
-in ACT tests. As a workaround, this refers to the solution of sail-riscv.
-if the payload is written a few times with the same value, we process the whole
-htif command anyway.
+  This message is in MIME format.  The first part should be readable text,
+  while the remaining parts are likely unreadable without MIME-aware tools.
 
-Signed-off-by: MingZhu Yan <yanmingzhu@iscas.ac.cn>
----
- hw/char/riscv_htif.c | 35 +++++++++++++++++++----------------
- 1 file changed, 19 insertions(+), 16 deletions(-)
+--3866299591-1085095182-1727519977=:26933
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8BIT
 
-diff --git a/hw/char/riscv_htif.c b/hw/char/riscv_htif.c
-index 9bef60def1..d74cce3bef 100644
---- a/hw/char/riscv_htif.c
-+++ b/hw/char/riscv_htif.c
-@@ -65,16 +65,8 @@ void htif_symbol_callback(const char *st_name, int st_info, uint64_t st_value,
- {
-     if (strcmp("fromhost", st_name) == 0) {
-         fromhost_addr = st_value;
--        if (st_size != 8) {
--            error_report("HTIF fromhost must be 8 bytes");
--            exit(1);
--        }
-     } else if (strcmp("tohost", st_name) == 0) {
-         tohost_addr = st_value;
--        if (st_size != 8) {
--            error_report("HTIF tohost must be 8 bytes");
--            exit(1);
--        }
-     } else if (strcmp("begin_signature", st_name) == 0) {
-         begin_sig_addr = st_value;
-     } else if (strcmp("end_signature", st_name) == 0) {
-@@ -290,18 +282,26 @@ static void htif_mm_write(void *opaque, hwaddr addr,
-                           uint64_t value, unsigned size)
- {
-     HTIFState *s = opaque;
--    if (addr == TOHOST_OFFSET1) {
--        if (s->tohost == 0x0) {
--            s->allow_tohost = 1;
--            s->tohost = value & 0xFFFFFFFF;
-+    int htif_cmd_write = 0;
-+    if (size == 8 && addr == TOHOST_OFFSET1) {
-+        htif_cmd_write = 1;
-+        s->tohost = value;
-+        htif_handle_tohost_write(s, s->tohost);
-+    } else if (size == 4 && addr == TOHOST_OFFSET1) {
-+        if ((value) == (s->tohost & 0xFFFF)) {
-+            s->allow_tohost = s->allow_tohost + 1;
-         } else {
-             s->allow_tohost = 0;
-         }
--    } else if (addr == TOHOST_OFFSET2) {
--        if (s->allow_tohost) {
--            s->tohost |= value << 32;
--            htif_handle_tohost_write(s, s->tohost);
-+        s->tohost = deposit64(s->tohost, 0, 32, value);
-+    } else if (size == 4 && addr == TOHOST_OFFSET2) {
-+        if ((value & 0xFF) == (s->tohost & 0xFF00)) {
-+            s->allow_tohost = s->allow_tohost + 1;
-+        } else {
-+            s->allow_tohost = 1;
-         }
-+        htif_cmd_write = 1;
-+        s->tohost = deposit64(s->tohost, 32, 32, value);
-     } else if (addr == FROMHOST_OFFSET1) {
-         s->fromhost_inprogress = 1;
-         s->fromhost = value & 0xFFFFFFFF;
-@@ -312,6 +312,9 @@ static void htif_mm_write(void *opaque, hwaddr addr,
-         qemu_log("Invalid htif write: address %016" PRIx64 "\n",
-             (uint64_t)addr);
-     }
-+    if ((s->tohost == 1 && htif_cmd_write) || s->allow_tohost > 2) {
-+        htif_handle_tohost_write(s, s->tohost);
-+    }
- }
- 
- static const MemoryRegionOps htif_mm_ops = {
--- 
-2.34.1
+On Sat, 28 Sep 2024, Phil Dennis-Jordan wrote:
+> This change wires up the PCI variant of the paravirtualised
+> graphics device, mainly useful for x86-64 macOS guests, implemented
+> by macOS's ParavirtualizedGraphics.framework. It builds on code
+> shared with the vmapple/mmio variant of the PVG device.
+>
+> Signed-off-by: Phil Dennis-Jordan <phil@philjordan.eu>
+> ---
+> hw/display/Kconfig         |   5 ++
+> hw/display/apple-gfx-pci.m | 138 +++++++++++++++++++++++++++++++++++++
+> hw/display/meson.build     |   1 +
+> 3 files changed, 144 insertions(+)
+> create mode 100644 hw/display/apple-gfx-pci.m
+>
+> diff --git a/hw/display/Kconfig b/hw/display/Kconfig
+> index 179a479d220..c2ec268f8e9 100644
+> --- a/hw/display/Kconfig
+> +++ b/hw/display/Kconfig
+> @@ -152,3 +152,8 @@ config MAC_PVG_VMAPPLE
+>     bool
+>     depends on MAC_PVG
+>     depends on ARM
+> +
+> +config MAC_PVG_PCI
+> +    bool
+> +    depends on MAC_PVG && PCI
+> +    default y if PCI_DEVICES
+> diff --git a/hw/display/apple-gfx-pci.m b/hw/display/apple-gfx-pci.m
+> new file mode 100644
+> index 00000000000..9370258ee46
+> --- /dev/null
+> +++ b/hw/display/apple-gfx-pci.m
+> @@ -0,0 +1,138 @@
+> +/*
+> + * QEMU Apple ParavirtualizedGraphics.framework device, PCI variant
+> + *
+> + * Copyright © 2023-2024 Phil Dennis-Jordan
+> + *
+> + * This work is licensed under the terms of the GNU GPL, version 2 or later.
+> + * See the COPYING file in the top-level directory.
+> + *
+> + * ParavirtualizedGraphics.framework is a set of libraries that macOS provides
+> + * which implements 3d graphics passthrough to the host as well as a
+> + * proprietary guest communication channel to drive it. This device model
+> + * implements support to drive that library from within QEMU as a PCI device
+> + * aimed primarily at x86-64 macOS VMs.
+> + */
+> +
+> +#include "apple-gfx.h"
+> +#include "hw/pci/pci_device.h"
+> +#include "hw/pci/msi.h"
+> +#include "qapi/error.h"
+> +#include "trace.h"
+> +#import <ParavirtualizedGraphics/ParavirtualizedGraphics.h>
+> +
+> +typedef struct AppleGFXPCIState {
+> +    PCIDevice parent_obj;
+> +
+> +    AppleGFXState common;
+> +} AppleGFXPCIState;
 
+You don't need typedef here because OBJECT_DECLARE_SIMPLE_TYPE will add 
+that. You can also put the struct AppleGFXPCIState definition after the 
+OBJECT_DECLARE_SIMPLE_TYPE line. (See other devices for example.)
+
+Regards,
+BALATON Zoltan
+
+> +
+> +OBJECT_DECLARE_SIMPLE_TYPE(AppleGFXPCIState, APPLE_GFX_PCI)
+> +
+> +static const char* apple_gfx_pci_option_rom_path = NULL;
+> +
+> +static void apple_gfx_init_option_rom_path(void)
+> +{
+> +    NSURL *option_rom_url = PGCopyOptionROMURL();
+> +    const char *option_rom_path = option_rom_url.fileSystemRepresentation;
+> +    if (option_rom_url.fileURL && option_rom_path != NULL) {
+> +        apple_gfx_pci_option_rom_path = g_strdup(option_rom_path);
+> +    }
+> +    [option_rom_url release];
+> +}
+> +
+> +static void apple_gfx_pci_init(Object *obj)
+> +{
+> +    AppleGFXPCIState *s = APPLE_GFX_PCI(obj);
+> +
+> +    if (!apple_gfx_pci_option_rom_path) {
+> +        /* Done on device not class init to avoid -daemonize ObjC fork crash */
+> +        PCIDeviceClass *pci = PCI_DEVICE_CLASS(object_get_class(obj));
+> +        apple_gfx_init_option_rom_path();
+> +        pci->romfile = apple_gfx_pci_option_rom_path;
+> +    }
+> +
+> +    apple_gfx_common_init(obj, &s->common, TYPE_APPLE_GFX_PCI);
+> +}
+> +
+> +static void apple_gfx_pci_interrupt(PCIDevice *dev, AppleGFXPCIState *s,
+> +                                    uint32_t vector)
+> +{
+> +    bool msi_ok;
+> +    trace_apple_gfx_raise_irq(vector);
+> +
+> +    msi_ok = msi_enabled(dev);
+> +    if (msi_ok) {
+> +        msi_notify(dev, vector);
+> +    }
+> +}
+> +
+> +static void apple_gfx_pci_realize(PCIDevice *dev, Error **errp)
+> +{
+> +    AppleGFXPCIState *s = APPLE_GFX_PCI(dev);
+> +    Error *err = NULL;
+> +    int ret;
+> +
+> +    pci_register_bar(dev, PG_PCI_BAR_MMIO,
+> +                     PCI_BASE_ADDRESS_SPACE_MEMORY, &s->common.iomem_gfx);
+> +
+> +    ret = msi_init(dev, 0x0 /* config offset; 0 = find space */,
+> +                   PG_PCI_MAX_MSI_VECTORS, true /* msi64bit */,
+> +                   false /*msi_per_vector_mask*/, &err);
+> +    if (ret != 0) {
+> +        error_propagate(errp, err);
+> +        return;
+> +    }
+> +
+> +    @autoreleasepool {
+> +        PGDeviceDescriptor *desc = [PGDeviceDescriptor new];
+> +        desc.raiseInterrupt = ^(uint32_t vector) {
+> +            apple_gfx_pci_interrupt(dev, s, vector);
+> +        };
+> +
+> +        apple_gfx_common_realize(&s->common, desc);
+> +        [desc release];
+> +        desc = nil;
+> +    }
+> +}
+> +
+> +static void apple_gfx_pci_reset(Object *obj, ResetType type)
+> +{
+> +    AppleGFXPCIState *s = APPLE_GFX_PCI(obj);
+> +    [s->common.pgdev reset];
+> +}
+> +
+> +static void apple_gfx_pci_class_init(ObjectClass *klass, void *data)
+> +{
+> +    DeviceClass *dc = DEVICE_CLASS(klass);
+> +    PCIDeviceClass *pci = PCI_DEVICE_CLASS(klass);
+> +    ResettableClass *rc = RESETTABLE_CLASS(klass);
+> +
+> +    assert(rc->phases.hold == NULL);
+> +    rc->phases.hold = apple_gfx_pci_reset;
+> +    dc->desc = "macOS Paravirtualized Graphics PCI Display Controller";
+> +    dc->hotpluggable = false;
+> +    set_bit(DEVICE_CATEGORY_DISPLAY, dc->categories);
+> +
+> +    pci->vendor_id = PG_PCI_VENDOR_ID;
+> +    pci->device_id = PG_PCI_DEVICE_ID;
+> +    pci->class_id = PCI_CLASS_DISPLAY_OTHER;
+> +    pci->realize = apple_gfx_pci_realize;
+> +
+> +    // TODO: Property for setting mode list
+> +}
+> +
+> +static TypeInfo apple_gfx_pci_types[] = {
+> +    {
+> +        .name          = TYPE_APPLE_GFX_PCI,
+> +        .parent        = TYPE_PCI_DEVICE,
+> +        .instance_size = sizeof(AppleGFXPCIState),
+> +        .class_init    = apple_gfx_pci_class_init,
+> +        .instance_init = apple_gfx_pci_init,
+> +        .interfaces = (InterfaceInfo[]) {
+> +            { INTERFACE_PCIE_DEVICE },
+> +            { },
+> +        },
+> +    }
+> +};
+> +DEFINE_TYPES(apple_gfx_pci_types)
+> +
+> diff --git a/hw/display/meson.build b/hw/display/meson.build
+> index 70d855749c0..ceb7bb07612 100644
+> --- a/hw/display/meson.build
+> +++ b/hw/display/meson.build
+> @@ -67,6 +67,7 @@ system_ss.add(when: 'CONFIG_ATI_VGA', if_true: [files('ati.c', 'ati_2d.c', 'ati_
+>
+> system_ss.add(when: 'CONFIG_MAC_PVG',         if_true: [files('apple-gfx.m'), pvg, metal])
+> system_ss.add(when: 'CONFIG_MAC_PVG_VMAPPLE', if_true: [files('apple-gfx-vmapple.m'), pvg, metal])
+> +system_ss.add(when: 'CONFIG_MAC_PVG_PCI',     if_true: [files('apple-gfx-pci.m'), pvg, metal])
+>
+> if config_all_devices.has_key('CONFIG_VIRTIO_GPU')
+>   virtio_gpu_ss = ss.source_set()
+>
+--3866299591-1085095182-1727519977=:26933--
 
