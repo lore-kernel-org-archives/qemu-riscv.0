@@ -4,63 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DC498CF6493
-	for <qemu-riscv@archiver.kernel.org>; Sat, 28 Sep 2024 12:01:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 85DD7CF6497
+	for <qemu-riscv@archiver.kernel.org>; Sat, 28 Sep 2024 12:01:47 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1suW6s-0006rt-UN; Sat, 28 Sep 2024 07:59:38 -0400
+	id 1suW6t-0006wt-HN; Sat, 28 Sep 2024 07:59:39 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <phil@philjordan.eu>)
- id 1suTHR-0008Hb-1M
- for qemu-riscv@nongnu.org; Sat, 28 Sep 2024 04:58:21 -0400
-Received: from mail-wr1-x432.google.com ([2a00:1450:4864:20::432])
+ id 1suTHb-0000Hw-MF
+ for qemu-riscv@nongnu.org; Sat, 28 Sep 2024 04:58:31 -0400
+Received: from mail-wr1-x42f.google.com ([2a00:1450:4864:20::42f])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <phil@philjordan.eu>)
- id 1suTHO-0002HK-6I
- for qemu-riscv@nongnu.org; Sat, 28 Sep 2024 04:58:19 -0400
-Received: by mail-wr1-x432.google.com with SMTP id
- ffacd0b85a97d-37cd0b5515fso1421760f8f.2
- for <qemu-riscv@nongnu.org>; Sat, 28 Sep 2024 01:58:17 -0700 (PDT)
+ id 1suTHZ-0002J8-J9
+ for qemu-riscv@nongnu.org; Sat, 28 Sep 2024 04:58:31 -0400
+Received: by mail-wr1-x42f.google.com with SMTP id
+ ffacd0b85a97d-37ccfada422so1487662f8f.2
+ for <qemu-riscv@nongnu.org>; Sat, 28 Sep 2024 01:58:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=philjordan-eu.20230601.gappssmtp.com; s=20230601; t=1727513897; x=1728118697;
+ d=philjordan-eu.20230601.gappssmtp.com; s=20230601; t=1727513908; x=1728118708;
  darn=nongnu.org; 
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=zl3mKVns8uJPgYMQEV1u67mSsyfy3FBABb4tiuHMiDI=;
- b=hPSLhB6CerAxQnY2lOU/dQ3JKrCdfxtAgwR6grSkxWHysihVe9OQkHd9dB0BEpJRfh
- ZLllGktn6xq2wG1rnQ0Zdceb2EpEInOJXgnFdooYtA3xyZGzMHJ2tAF0mrAWC5Qfx0wX
- dbQmvd/M9Q6nKovJXGGi0c85lpCJEo7yQFdz8rjKRpX2AJp9Hk29UkRelFkzzVQUCfV3
- 514ie0e9QsBNp/esX7+phvMZVzZL0Ernaz/nSuY/2Vxi6gNG6Fb5YhKFNuDojIPu0+iN
- obIz4iWLU8hPM3qwzNqyGfVhQEyr9pmULEayl2CbFIidlx3RDoSOKV6e4aZ1fOGbdR1M
- za7w==
+ bh=TnhSO9Zp03vZcISVYUidyjWsniT7WLSHtpVFi0MugPQ=;
+ b=njx9waH74qbqDXHcDBKt3h1/WqnJlwdGs94AngFZmrtaQ+FB68I+RmvUMT3j8dUfO3
+ dV15YjRj+iZx1qktsaq9udrFiOUnzKjWtfflS77Ern1KjaacY7uE4y2BhjYvXvnFBaB6
+ KIOMMFI96xJerFH99mgQljs+P0MOXpPoH3dVMqOH+eHDbMK+MRtm36Q6aL7uge48Vnli
+ 3qeG6PbiB/9pvcDmqIfDKfgwfR3Gk+zpZ1LzoMWQbYdIB5c0K+RKZ8S3/oyNebamldDe
+ fMuvWklsSQQLWes7t2i8V00K3Uvcr1MwfpYeiu3CVJTZ7DY1v1RJsdCenn3H4j93+2vB
+ VQbg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1727513897; x=1728118697;
+ d=1e100.net; s=20230601; t=1727513908; x=1728118708;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=zl3mKVns8uJPgYMQEV1u67mSsyfy3FBABb4tiuHMiDI=;
- b=tntCOJYEYbp3o5+1fctecvEQUHJXrRTWkdlt4MM4s6qNeALr8IpOUHPrt3pyvYS3us
- T4eYReNjauy/Yr36SePZfR+6/qEl75bnqR4m1MLiNVgVX93dwAipN5bvKoKaHFDqyc5W
- /6tebxg04n8OP5kVvr++vccjwpF481DAS73vAO37XbTqNI2/KyQD5R7z2kpiAI89a49s
- 7FjvoLcZrOObL+kSleZgkecSvaXtGR3O08QoDIVNaw9UQY2P0zWZlyc0Ot00VgoLULfX
- 4N1R24+p5azUSGfiWpnmROg/rTDomhVs8Ct3tfwiY94a6qZRQm0BFceycEduJ1fp5CcG
- z1wA==
+ bh=TnhSO9Zp03vZcISVYUidyjWsniT7WLSHtpVFi0MugPQ=;
+ b=YOPPcvV4VdVitZT+P7LPAYlC8x5VuKk9MxdhNLf+3TUcIjEJ0N9AlCfJXJQ63p/quW
+ atdPsBElJPKzgmZkPyyZzxa0PSgnBy37gQIAkqqBKtbgrbJsU5Nll13SvMV4TvYJrRvc
+ O7rF83+sjkpa3gNI0aWO8H6Gjjnx/upj5htO93svqj7O/7aCD/hjT6bg3+jTeXzXJbBg
+ vg+WYTzJ+mfPKcrqNeXr9a+oe3UlE6PzV0Q1DgmtiTCvvc++4Nqe6xH12RnIYMSJ32Cm
+ fRv6nE0rj9oH7csUTQBIoDNhtn5B9RJh8nJajnJajrWshNbkz9TBnV8QU02iOW8TrfES
+ C1Eg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVZnAomvyVqsZbquQnS96f04fvba608Miy66++wmQMyhAA3UhKNj2jolf8edGozbKcSkM18V0NgwLE2@nongnu.org
-X-Gm-Message-State: AOJu0YyMOBwK7wn2bWlZu67ykf1p+VXAqWlVkA+zNVx6HxcCaLWvWa/W
- YqIJ2Y+Jn5l2fORkD/QJxVxxhe5be4B4LIedtQOSm/Oi9kSOWZ6acWJPyAeRwA==
-X-Google-Smtp-Source: AGHT+IH2R3p6guMhPbRVNykPnRlw6yvmRItzkIF+0idgQV6Gc41dE5JP/kJiAhkONRmXUdvHiJSM/Q==
-X-Received: by 2002:adf:ed4e:0:b0:374:bad2:6a5e with SMTP id
- ffacd0b85a97d-37cd5ab7535mr3210984f8f.28.1727513896501; 
- Sat, 28 Sep 2024 01:58:16 -0700 (PDT)
+ AJvYcCXyaqcAfTU6IukiEtkRqTnmV4WjkHD/EA+zjipUx9OT2U00645liQ/YOIGGq+AEy5JPVoOkMwt7Yi/3@nongnu.org
+X-Gm-Message-State: AOJu0YwvMEbnVGb7acQ6yE7VFUlsI1UbtPKHSj4GcvIWhPdHrt13M3Da
+ mBuEaBkOrs3TTXB9EPKjaYrIkismurOY7SAq5iBg+3DSISMrIDTJLwxXzaXbJQ==
+X-Google-Smtp-Source: AGHT+IF8xMaG7MBJHZEk74+QrN0YF9AJ8nWp056uZqQG03nR5muYjTa1Yb5gJAfdiHMw2RWQd28kuw==
+X-Received: by 2002:a5d:6acf:0:b0:37c:c4bc:181c with SMTP id
+ ffacd0b85a97d-37cd5a6b66cmr3694968f8f.11.1727513907803; 
+ Sat, 28 Sep 2024 01:58:27 -0700 (PDT)
 Received: from localhost.localdomain ([2001:4bb8:2ae:e42d:7dbb:76ba:120d:8a28])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-37cd57423afsm4313167f8f.90.2024.09.28.01.58.06
+ ffacd0b85a97d-37cd57423afsm4313167f8f.90.2024.09.28.01.58.22
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Sat, 28 Sep 2024 01:58:16 -0700 (PDT)
+ Sat, 28 Sep 2024 01:58:27 -0700 (PDT)
 From: Phil Dennis-Jordan <phil@philjordan.eu>
 To: qemu-devel@nongnu.org
 Cc: agraf@csgraf.de, phil@philjordan.eu, peter.maydell@linaro.org,
@@ -75,17 +75,16 @@ Cc: agraf@csgraf.de, phil@philjordan.eu, peter.maydell@linaro.org,
  jcmvbkbc@gmail.com, marcandre.lureau@redhat.com, berrange@redhat.com,
  akihiko.odaki@daynix.com, qemu-arm@nongnu.org, qemu-block@nongnu.org,
  qemu-riscv@nongnu.org
-Subject: [PATCH v3 02/14] hw/display/apple-gfx: Adds PCI implementation
-Date: Sat, 28 Sep 2024 10:57:15 +0200
-Message-Id: <20240928085727.56883-3-phil@philjordan.eu>
+Subject: [PATCH v3 04/14] hw/display/apple-gfx: Adds configurable mode list
+Date: Sat, 28 Sep 2024 10:57:17 +0200
+Message-Id: <20240928085727.56883-5-phil@philjordan.eu>
 X-Mailer: git-send-email 2.39.3 (Apple Git-145)
 In-Reply-To: <20240928085727.56883-1-phil@philjordan.eu>
 References: <20240928085727.56883-1-phil@philjordan.eu>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: neutral client-ip=2a00:1450:4864:20::432;
- envelope-from=phil@philjordan.eu; helo=mail-wr1-x432.google.com
+Received-SPF: neutral client-ip=2a00:1450:4864:20::42f;
+ envelope-from=phil@philjordan.eu; helo=mail-wr1-x42f.google.com
 X-Spam_score_int: -10
 X-Spam_score: -1.1
 X-Spam_bar: -
@@ -108,188 +107,334 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-This change wires up the PCI variant of the paravirtualised
-graphics device, mainly useful for x86-64 macOS guests, implemented
-by macOS's ParavirtualizedGraphics.framework. It builds on code
-shared with the vmapple/mmio variant of the PVG device.
+This change adds a property 'display_modes' on the graphics device
+which permits specifying a list of display modes. (screen resolution
+and refresh rate)
+
+PCI variant of apple-gfx only for the moment.
 
 Signed-off-by: Phil Dennis-Jordan <phil@philjordan.eu>
 ---
- hw/display/Kconfig         |   5 ++
- hw/display/apple-gfx-pci.m | 138 +++++++++++++++++++++++++++++++++++++
- hw/display/meson.build     |   1 +
- 3 files changed, 144 insertions(+)
- create mode 100644 hw/display/apple-gfx-pci.m
+ hw/display/apple-gfx-pci.m |  43 ++++++++++-
+ hw/display/apple-gfx.h     |  17 ++++-
+ hw/display/apple-gfx.m     | 151 ++++++++++++++++++++++++++++++++++---
+ 3 files changed, 198 insertions(+), 13 deletions(-)
 
-diff --git a/hw/display/Kconfig b/hw/display/Kconfig
-index 179a479d220..c2ec268f8e9 100644
---- a/hw/display/Kconfig
-+++ b/hw/display/Kconfig
-@@ -152,3 +152,8 @@ config MAC_PVG_VMAPPLE
-     bool
-     depends on MAC_PVG
-     depends on ARM
-+
-+config MAC_PVG_PCI
-+    bool
-+    depends on MAC_PVG && PCI
-+    default y if PCI_DEVICES
 diff --git a/hw/display/apple-gfx-pci.m b/hw/display/apple-gfx-pci.m
-new file mode 100644
-index 00000000000..9370258ee46
---- /dev/null
+index 9370258ee46..ea86a1f4a21 100644
+--- a/hw/display/apple-gfx-pci.m
 +++ b/hw/display/apple-gfx-pci.m
-@@ -0,0 +1,138 @@
-+/*
-+ * QEMU Apple ParavirtualizedGraphics.framework device, PCI variant
-+ *
-+ * Copyright © 2023-2024 Phil Dennis-Jordan
-+ *
-+ * This work is licensed under the terms of the GNU GPL, version 2 or later.
-+ * See the COPYING file in the top-level directory.
-+ *
-+ * ParavirtualizedGraphics.framework is a set of libraries that macOS provides
-+ * which implements 3d graphics passthrough to the host as well as a
-+ * proprietary guest communication channel to drive it. This device model
-+ * implements support to drive that library from within QEMU as a PCI device
-+ * aimed primarily at x86-64 macOS VMs.
-+ */
+@@ -16,6 +16,7 @@
+ #include "apple-gfx.h"
+ #include "hw/pci/pci_device.h"
+ #include "hw/pci/msi.h"
++#include "hw/qdev-properties.h"
+ #include "qapi/error.h"
+ #include "trace.h"
+ #import <ParavirtualizedGraphics/ParavirtualizedGraphics.h>
+@@ -101,6 +102,46 @@ static void apple_gfx_pci_reset(Object *obj, ResetType type)
+     [s->common.pgdev reset];
+ }
+ 
++static void apple_gfx_pci_get_display_modes(Object *obj, Visitor *v,
++                                            const char *name, void *opaque,
++                                            Error **errp)
++{
++    Property *prop = opaque;
++    AppleGFXDisplayModeList *mode_list = object_field_prop_ptr(obj, prop);
 +
-+#include "apple-gfx.h"
-+#include "hw/pci/pci_device.h"
-+#include "hw/pci/msi.h"
++    apple_gfx_get_display_modes(mode_list, v, name, errp);
++}
++
++static void apple_gfx_pci_set_display_modes(Object *obj, Visitor *v,
++                                            const char *name, void *opaque,
++                                            Error **errp)
++{
++    Property *prop = opaque;
++    AppleGFXDisplayModeList *mode_list = object_field_prop_ptr(obj, prop);
++
++    apple_gfx_set_display_modes(mode_list, v, name, errp);
++}
++
++const PropertyInfo apple_gfx_pci_prop_display_modes = {
++    .name  = "display_modes",
++    .description =
++        "Colon-separated list of display modes; "
++        "<width>x<height>@<refresh-rate>; the first mode is considered "
++        "'native'. Example: 3840x2160@60:2560x1440@60:1920x1080@60",
++    .get   = apple_gfx_pci_get_display_modes,
++    .set   = apple_gfx_pci_set_display_modes,
++};
++
++#define DEFINE_PROP_DISPLAY_MODES(_name, _state, _field) \
++    DEFINE_PROP(_name, _state, _field, apple_gfx_pci_prop_display_modes, \
++                AppleGFXDisplayModeList)
++
++static Property apple_gfx_pci_properties[] = {
++    DEFINE_PROP_DISPLAY_MODES("display-modes", AppleGFXPCIState,
++                              common.display_modes),
++    DEFINE_PROP_END_OF_LIST(),
++};
++
+ static void apple_gfx_pci_class_init(ObjectClass *klass, void *data)
+ {
+     DeviceClass *dc = DEVICE_CLASS(klass);
+@@ -118,7 +159,7 @@ static void apple_gfx_pci_class_init(ObjectClass *klass, void *data)
+     pci->class_id = PCI_CLASS_DISPLAY_OTHER;
+     pci->realize = apple_gfx_pci_realize;
+ 
+-    // TODO: Property for setting mode list
++    device_class_set_props(dc, apple_gfx_pci_properties);
+ }
+ 
+ static TypeInfo apple_gfx_pci_types[] = {
+diff --git a/hw/display/apple-gfx.h b/hw/display/apple-gfx.h
+index 995ecf7f4a7..baad4a98652 100644
+--- a/hw/display/apple-gfx.h
++++ b/hw/display/apple-gfx.h
+@@ -5,14 +5,28 @@
+ #define TYPE_APPLE_GFX_PCI          "apple-gfx-pci"
+ 
+ #include "qemu/typedefs.h"
++#include "qemu/osdep.h"
+ 
+ typedef struct AppleGFXState AppleGFXState;
+ 
++typedef struct AppleGFXDisplayMode {
++    uint16_t width_px;
++    uint16_t height_px;
++    uint16_t refresh_rate_hz;
++} AppleGFXDisplayMode;
++
++typedef struct AppleGFXDisplayModeList {
++    GArray *modes;
++} AppleGFXDisplayModeList;
++
+ void apple_gfx_common_init(Object *obj, AppleGFXState *s, const char* obj_name);
++void apple_gfx_get_display_modes(AppleGFXDisplayModeList *mode_list, Visitor *v,
++                                 const char *name, Error **errp);
++void apple_gfx_set_display_modes(AppleGFXDisplayModeList *mode_list, Visitor *v,
++                                 const char *name, Error **errp);
+ 
+ #ifdef __OBJC__
+ 
+-#include "qemu/osdep.h"
+ #include "exec/memory.h"
+ #include "ui/surface.h"
+ #include <dispatch/dispatch.h>
+@@ -38,6 +52,7 @@ struct AppleGFXState {
+     bool new_frame;
+     bool cursor_show;
+     QEMUCursor *cursor;
++    AppleGFXDisplayModeList display_modes;
+ 
+     dispatch_queue_t render_queue;
+     /* The following fields should only be accessed from render_queue: */
+diff --git a/hw/display/apple-gfx.m b/hw/display/apple-gfx.m
+index 6ef1048d93d..358192db6a0 100644
+--- a/hw/display/apple-gfx.m
++++ b/hw/display/apple-gfx.m
+@@ -16,6 +16,9 @@
+ #include "trace.h"
+ #include "qemu-main.h"
+ #include "qemu/main-loop.h"
++#include "qemu/cutils.h"
++#include "qapi/visitor.h"
 +#include "qapi/error.h"
-+#include "trace.h"
-+#import <ParavirtualizedGraphics/ParavirtualizedGraphics.h>
+ #include "ui/console.h"
+ #include "monitor/monitor.h"
+ #include "qapi/error.h"
+@@ -23,9 +26,10 @@
+ #include <mach/mach_vm.h>
+ #import <ParavirtualizedGraphics/ParavirtualizedGraphics.h>
+ 
+-static const PGDisplayCoord_t apple_gfx_modes[] = {
+-    { .x = 1440, .y = 1080 },
+-    { .x = 1280, .y = 1024 },
++static const AppleGFXDisplayMode apple_gfx_default_modes[] = {
++    { 1920, 1080, 60 },
++    { 1440, 1080, 60 },
++    { 1280, 1024, 60 },
+ };
+ 
+ typedef struct PGTask_s { // Name matches forward declaration in PG header
+@@ -264,7 +268,6 @@ static void set_mode(AppleGFXState *s, uint32_t width, uint32_t height)
+ static void create_fb(AppleGFXState *s)
+ {
+     s->con = graphic_console_init(NULL, 0, &apple_gfx_fb_ops, s);
+-    set_mode(s, 1440, 1080);
+ 
+     s->cursor_show = true;
+ }
+@@ -466,20 +469,24 @@ static void apple_gfx_register_task_mapping_handlers(AppleGFXState *s,
+     return disp_desc;
+ }
+ 
+-static NSArray<PGDisplayMode*>* apple_gfx_prepare_display_mode_array(void)
++static NSArray<PGDisplayMode*>* apple_gfx_create_display_mode_array(
++    const AppleGFXDisplayMode display_modes[], int display_mode_count)
+ {
+-    PGDisplayMode *modes[ARRAY_SIZE(apple_gfx_modes)];
++    PGDisplayMode **modes = alloca(sizeof(modes[0]) * display_mode_count);
+     NSArray<PGDisplayMode*>* mode_array = nil;
+     int i;
+ 
+-    for (i = 0; i < ARRAY_SIZE(apple_gfx_modes); i++) {
++    for (i = 0; i < display_mode_count; i++) {
++        const AppleGFXDisplayMode *mode = &display_modes[i];
++        PGDisplayCoord_t mode_size = { mode->width_px, mode->height_px };
+         modes[i] =
+-            [[PGDisplayMode alloc] initWithSizeInPixels:apple_gfx_modes[i] refreshRateInHz:60.];
++            [[PGDisplayMode alloc] initWithSizeInPixels:mode_size
++                                        refreshRateInHz:mode->refresh_rate_hz];
+     }
+ 
+-    mode_array = [NSArray arrayWithObjects:modes count:ARRAY_SIZE(apple_gfx_modes)];
++    mode_array = [NSArray arrayWithObjects:modes count:display_mode_count];
+ 
+-    for (i = 0; i < ARRAY_SIZE(apple_gfx_modes); i++) {
++    for (i = 0; i < display_mode_count; i++) {
+         [modes[i] release];
+         modes[i] = nil;
+     }
+@@ -516,6 +523,8 @@ static void apple_gfx_register_task_mapping_handlers(AppleGFXState *s,
+ void apple_gfx_common_realize(AppleGFXState *s, PGDeviceDescriptor *desc)
+ {
+     PGDisplayDescriptor *disp_desc = nil;
++    const AppleGFXDisplayMode *display_modes = apple_gfx_default_modes;
++    int num_display_modes = ARRAY_SIZE(apple_gfx_default_modes);
+ 
+     QTAILQ_INIT(&s->tasks);
+     s->render_queue = dispatch_queue_create("apple-gfx.render",
+@@ -533,7 +542,127 @@ void apple_gfx_common_realize(AppleGFXState *s, PGDeviceDescriptor *desc)
+     s->pgdisp = [s->pgdev newDisplayWithDescriptor:disp_desc
+                                               port:0 serialNum:1234];
+     [disp_desc release];
+-    s->pgdisp.modeList = apple_gfx_prepare_display_mode_array();
 +
-+typedef struct AppleGFXPCIState {
-+    PCIDevice parent_obj;
-+
-+    AppleGFXState common;
-+} AppleGFXPCIState;
-+
-+OBJECT_DECLARE_SIMPLE_TYPE(AppleGFXPCIState, APPLE_GFX_PCI)
-+
-+static const char* apple_gfx_pci_option_rom_path = NULL;
-+
-+static void apple_gfx_init_option_rom_path(void)
-+{
-+    NSURL *option_rom_url = PGCopyOptionROMURL();
-+    const char *option_rom_path = option_rom_url.fileSystemRepresentation;
-+    if (option_rom_url.fileURL && option_rom_path != NULL) {
-+        apple_gfx_pci_option_rom_path = g_strdup(option_rom_path);
++    if (s->display_modes.modes != NULL && s->display_modes.modes->len > 0) {
++        display_modes =
++            &g_array_index(s->display_modes.modes, AppleGFXDisplayMode, 0);
++        num_display_modes = s->display_modes.modes->len;
 +    }
-+    [option_rom_url release];
++    s->pgdisp.modeList =
++        apple_gfx_create_display_mode_array(display_modes, num_display_modes);
+ 
+     create_fb(s);
+ }
++
++void apple_gfx_get_display_modes(AppleGFXDisplayModeList *mode_list, Visitor *v,
++                                 const char *name, Error **errp)
++{
++    GArray *modes = mode_list->modes;
++    /* 3 uint16s (max 5 digits) and 3 separator characters per mode + nul. */
++    size_t buffer_size = (5 + 1) * 3 * modes->len + 1;
++
++    char *buffer = alloca(buffer_size);
++    char *pos = buffer;
++
++    unsigned used = 0;
++    buffer[0] = '\0';
++    for (guint i = 0; i < modes->len; ++i)
++    {
++        AppleGFXDisplayMode *mode =
++            &g_array_index(modes, AppleGFXDisplayMode, i);
++        int rc = snprintf(pos, buffer_size - used,
++                          "%s%"PRIu16"x%"PRIu16"@%"PRIu16,
++                          i > 0 ? ":" : "",
++                          mode->width_px, mode->height_px,
++                          mode->refresh_rate_hz);
++        used += rc;
++        pos += rc;
++        assert(used < buffer_size);
++    }
++
++    pos = buffer;
++    visit_type_str(v, name, &pos, errp);
 +}
 +
-+static void apple_gfx_pci_init(Object *obj)
++void apple_gfx_set_display_modes(AppleGFXDisplayModeList *mode_list, Visitor *v,
++                                 const char *name, Error **errp)
 +{
-+    AppleGFXPCIState *s = APPLE_GFX_PCI(obj);
-+
-+    if (!apple_gfx_pci_option_rom_path) {
-+        /* Done on device not class init to avoid -daemonize ObjC fork crash */
-+        PCIDeviceClass *pci = PCI_DEVICE_CLASS(object_get_class(obj));
-+        apple_gfx_init_option_rom_path();
-+        pci->romfile = apple_gfx_pci_option_rom_path;
-+    }
-+
-+    apple_gfx_common_init(obj, &s->common, TYPE_APPLE_GFX_PCI);
-+}
-+
-+static void apple_gfx_pci_interrupt(PCIDevice *dev, AppleGFXPCIState *s,
-+                                    uint32_t vector)
-+{
-+    bool msi_ok;
-+    trace_apple_gfx_raise_irq(vector);
-+
-+    msi_ok = msi_enabled(dev);
-+    if (msi_ok) {
-+        msi_notify(dev, vector);
-+    }
-+}
-+
-+static void apple_gfx_pci_realize(PCIDevice *dev, Error **errp)
-+{
-+    AppleGFXPCIState *s = APPLE_GFX_PCI(dev);
-+    Error *err = NULL;
++    Error *local_err = NULL;
++    const char *endptr;
++    char *str;
 +    int ret;
++    unsigned int val;
++    uint32_t num_modes;
++    GArray *modes;
++    uint32_t mode_idx;
 +
-+    pci_register_bar(dev, PG_PCI_BAR_MMIO,
-+                     PCI_BASE_ADDRESS_SPACE_MEMORY, &s->common.iomem_gfx);
-+
-+    ret = msi_init(dev, 0x0 /* config offset; 0 = find space */,
-+                   PG_PCI_MAX_MSI_VECTORS, true /* msi64bit */,
-+                   false /*msi_per_vector_mask*/, &err);
-+    if (ret != 0) {
-+        error_propagate(errp, err);
++    visit_type_str(v, name, &str, &local_err);
++    if (local_err) {
++        error_propagate(errp, local_err);
 +        return;
 +    }
 +
-+    @autoreleasepool {
-+        PGDeviceDescriptor *desc = [PGDeviceDescriptor new];
-+        desc.raiseInterrupt = ^(uint32_t vector) {
-+            apple_gfx_pci_interrupt(dev, s, vector);
-+        };
-+
-+        apple_gfx_common_realize(&s->common, desc);
-+        [desc release];
-+        desc = nil;
-+    }
-+}
-+
-+static void apple_gfx_pci_reset(Object *obj, ResetType type)
-+{
-+    AppleGFXPCIState *s = APPLE_GFX_PCI(obj);
-+    [s->common.pgdev reset];
-+}
-+
-+static void apple_gfx_pci_class_init(ObjectClass *klass, void *data)
-+{
-+    DeviceClass *dc = DEVICE_CLASS(klass);
-+    PCIDeviceClass *pci = PCI_DEVICE_CLASS(klass);
-+    ResettableClass *rc = RESETTABLE_CLASS(klass);
-+
-+    assert(rc->phases.hold == NULL);
-+    rc->phases.hold = apple_gfx_pci_reset;
-+    dc->desc = "macOS Paravirtualized Graphics PCI Display Controller";
-+    dc->hotpluggable = false;
-+    set_bit(DEVICE_CATEGORY_DISPLAY, dc->categories);
-+
-+    pci->vendor_id = PG_PCI_VENDOR_ID;
-+    pci->device_id = PG_PCI_DEVICE_ID;
-+    pci->class_id = PCI_CLASS_DISPLAY_OTHER;
-+    pci->realize = apple_gfx_pci_realize;
-+
-+    // TODO: Property for setting mode list
-+}
-+
-+static TypeInfo apple_gfx_pci_types[] = {
++    // Count colons to estimate modes. No leading/trailing colons so start at 1.
++    num_modes = 1;
++    for (size_t i = 0; str[i] != '\0'; ++i)
 +    {
-+        .name          = TYPE_APPLE_GFX_PCI,
-+        .parent        = TYPE_PCI_DEVICE,
-+        .instance_size = sizeof(AppleGFXPCIState),
-+        .class_init    = apple_gfx_pci_class_init,
-+        .instance_init = apple_gfx_pci_init,
-+        .interfaces = (InterfaceInfo[]) {
-+            { INTERFACE_PCIE_DEVICE },
-+            { },
-+        },
++        if (str[i] == ':') {
++            ++num_modes;
++        }
 +    }
-+};
-+DEFINE_TYPES(apple_gfx_pci_types)
 +
-diff --git a/hw/display/meson.build b/hw/display/meson.build
-index 70d855749c0..ceb7bb07612 100644
---- a/hw/display/meson.build
-+++ b/hw/display/meson.build
-@@ -67,6 +67,7 @@ system_ss.add(when: 'CONFIG_ATI_VGA', if_true: [files('ati.c', 'ati_2d.c', 'ati_
- 
- system_ss.add(when: 'CONFIG_MAC_PVG',         if_true: [files('apple-gfx.m'), pvg, metal])
- system_ss.add(when: 'CONFIG_MAC_PVG_VMAPPLE', if_true: [files('apple-gfx-vmapple.m'), pvg, metal])
-+system_ss.add(when: 'CONFIG_MAC_PVG_PCI',     if_true: [files('apple-gfx-pci.m'), pvg, metal])
- 
- if config_all_devices.has_key('CONFIG_VIRTIO_GPU')
-   virtio_gpu_ss = ss.source_set()
++    modes = g_array_sized_new(false, true, sizeof(AppleGFXDisplayMode), num_modes);
++
++    endptr = str;
++    for (mode_idx = 0; mode_idx < num_modes; ++mode_idx)
++    {
++        AppleGFXDisplayMode mode = {};
++        if (mode_idx > 0)
++        {
++            if (*endptr != ':') {
++                goto separator_error;
++            }
++            ++endptr;
++        }
++
++        ret = qemu_strtoui(endptr, &endptr, 10, &val);
++        if (ret || val > UINT16_MAX || val == 0) {
++            error_setg(errp, "width of '%s' must be a decimal integer number "
++                       "of pixels in the range 1..65535", name);
++            goto out;
++        }
++        mode.width_px = val;
++        if (*endptr != 'x') {
++            goto separator_error;
++        }
++
++        ret = qemu_strtoui(endptr + 1, &endptr, 10, &val);
++        if (ret || val > UINT16_MAX || val == 0) {
++            error_setg(errp, "height of '%s' must be a decimal integer number "
++                       "of pixels in the range 1..65535", name);
++            goto out;
++        }
++        mode.height_px = val;
++        if (*endptr != '@') {
++            goto separator_error;
++        }
++
++        ret = qemu_strtoui(endptr + 1, &endptr, 10, &val);
++        if (ret) {
++            error_setg(errp, "refresh rate of '%s'"
++                       " must be a non-negative decimal integer (Hertz)", name);
++        }
++        mode.refresh_rate_hz = val;
++        g_array_append_val(modes, mode);
++    }
++
++    mode_list->modes = modes;
++    goto out;
++
++separator_error:
++    error_setg(errp, "Each display mode takes the format "
++               "'<width>x<height>@<rate>', modes are separated by colons. (:)");
++out:
++    g_free(str);
++    return;
++}
 -- 
 2.39.3 (Apple Git-145)
 
