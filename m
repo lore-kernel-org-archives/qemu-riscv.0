@@ -4,93 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4B59ACF6497
-	for <qemu-riscv@archiver.kernel.org>; Sat, 28 Sep 2024 12:01:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 89F00CF64A3
+	for <qemu-riscv@archiver.kernel.org>; Mon, 30 Sep 2024 12:49:15 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1suW6t-0006w6-EX; Sat, 28 Sep 2024 07:59:39 -0400
+	id 1svFpR-00081k-2A; Mon, 30 Sep 2024 08:48:41 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <phil@philjordan.eu>)
- id 1suTH8-0007rw-1s
- for qemu-riscv@nongnu.org; Sat, 28 Sep 2024 04:58:02 -0400
-Received: from mail-wr1-x436.google.com ([2a00:1450:4864:20::436])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1svFpO-00080K-5G
+ for qemu-riscv@nongnu.org; Mon, 30 Sep 2024 08:48:38 -0400
+Received: from mail-wr1-x434.google.com ([2a00:1450:4864:20::434])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <phil@philjordan.eu>)
- id 1suTH5-0002F8-J2
- for qemu-riscv@nongnu.org; Sat, 28 Sep 2024 04:58:01 -0400
-Received: by mail-wr1-x436.google.com with SMTP id
- ffacd0b85a97d-37cd8972738so936540f8f.3
- for <qemu-riscv@nongnu.org>; Sat, 28 Sep 2024 01:57:58 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1svFpM-00067x-DN
+ for qemu-riscv@nongnu.org; Mon, 30 Sep 2024 08:48:37 -0400
+Received: by mail-wr1-x434.google.com with SMTP id
+ ffacd0b85a97d-37cd26c6dd1so3321877f8f.3
+ for <qemu-riscv@nongnu.org>; Mon, 30 Sep 2024 05:48:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=philjordan-eu.20230601.gappssmtp.com; s=20230601; t=1727513877; x=1728118677;
- darn=nongnu.org; 
+ d=linaro.org; s=google; t=1727700514; x=1728305314; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=ezdNH92l/f3wZ8d6SIBGztD5KzOv8BJuw8J/3sO/X/A=;
- b=NjykWxFD9zq33XisnaiQdho+EM0xDvK/OugtBMY8a4BgPJd2GjHSiw5ekaihggrF5R
- 8erTC1e3PSDXu5tGEsQgKdSry4C16xA3UycaPDjpWA8i+gQT5Rs++V3h0Q5OwVr+2SwU
- N5Uj5apeniI1+x8y8oVrrNeHvpfF8GBAzFGC5iODa65mFzH/WE3CsD0McIi4XU38K+Vi
- eEC+1kmyW02jW1HkSGHCCd8RTcGzemFFs7LDLMx6nt5uH0HL1W25Rhmz3SEOPQnhWR+M
- wPamdTk0V25SMt44IXzn0H5Kcd+QkAHAUiFb5QcexCxnsSeXuy/qITXLKxTboRqyqim0
- uaLQ==
+ bh=uzm24+ZWrwMOuzZZfqf6biduFwcmS7XxAWWZizuNc3E=;
+ b=kcaRKTLWVdxSp1v+2AuVQcUs2z2lVsjzt9aXB2dk5UhXcrWa8YThKD57qG0teJlZQU
+ vikNhyN/jDUjreo8rPPUBSh5Nj/BpZWgL9K5mAreWGd87jAJ8oVq0EMiyFJia9dehKZj
+ IH4LdSDunIqEOrJHKSfywXg0mie9YjEswGxsd52uW5z8lTnku1axNOVQY7xACBWe1Qxa
+ E3+46HRGOi2Jgs89uo2c1n5/pQvySCqAL9HZpQ5P7oYdiaDN+JB6RKqJvLHCctBLHo3K
+ RPQrGfl0caDoPEyt1JRmo4HYWd3PnEjOlRcnOvpA4Qz1DDaoD+c1A5F1HGg0Y9gxmqDW
+ m/dA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1727513877; x=1728118677;
+ d=1e100.net; s=20230601; t=1727700514; x=1728305314;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=ezdNH92l/f3wZ8d6SIBGztD5KzOv8BJuw8J/3sO/X/A=;
- b=bnkAIdJidYPSE3N2ydruohkoO2ajXGZmLQva1s2rR+X1EkUfLNhEucrViC6NCpo54h
- Vt1+PbykfxbLmdltReIAfFNyLHnJ5xhvgWAPXzGJw4WBzHafANXceet/ujrV5nvDXY25
- CPiBSQkM3H89GZPuShGsvhyx5urg+ZsqdOiddyouPJP90tRTODt0x+IrN2J3uqhnDHKG
- jK5q20nyWfinwF/zL9qTDCj4nvWUSVSvcb3deKNtehVmgqv1dIZ8oGWPL8Nf1Rtxy2J6
- Wyo3TXAMKiAMqtlvI7aefCoiv6IMpvK25wpgdRjrhZ92leTr+z6Q4Pl7DkKP3jvkEm+L
- /ozQ==
+ bh=uzm24+ZWrwMOuzZZfqf6biduFwcmS7XxAWWZizuNc3E=;
+ b=XW5K5zrIF4wy0cqBH6mwpxMnk4aEqeJcTtPAe9GDKPrEdoXOh0RUsDgx/zF3KpEV1t
+ A6NmE3RnqiKaQ6ROTbXD1BrLMj+jXMzSYh6FXtLNj7IthltTW7hF08Hr8ENjJsd43lnh
+ S9F429I/nYxolXjejMrBH7O/OWfmhCtwbYI5sWHFJJ25YX+FGaHi25Ns0LA70YiMA83Y
+ W7jOdIF43MdolD2p7unEShNRYhes5cjC2UG+++uuO+Cxg7jQJ60VXU/L+ZAt3amnRYbh
+ RRmAbZ6iDDJH+aSDFSKEmSe4T13cEvCR1uIguOuaXrD4YyIpiI/eEjO8ofECCN3UOHEv
+ AffA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXyye0/pMnzzgn6oQYjbiuR74licF0JOWU7HisB2e1RvsH7k2XID3DiLfvs3lfoq1fEnqTh04DCgFTa@nongnu.org
-X-Gm-Message-State: AOJu0YzYQa6CfvJl1y7+xk91iZOCF1l9HLjlmNQOZXloXAqkpfahyt21
- kJindLqR/WIzUZPSrZ1IZ+3RQwRvH62k9WIeVT5WMCAeDZ/5ghpIA0zJEjgcSw==
-X-Google-Smtp-Source: AGHT+IGOAP9rTRljyxi9JqbpvbLNmgeGfivG1g4QKSm4v05bpUkbj2vIrasV19luqwA++uTrzyKfxQ==
-X-Received: by 2002:adf:e982:0:b0:374:b31e:3b36 with SMTP id
- ffacd0b85a97d-37cd5aaf6a4mr3438174f8f.6.1727513876788; 
- Sat, 28 Sep 2024 01:57:56 -0700 (PDT)
-Received: from localhost.localdomain ([2001:4bb8:2ae:e42d:7dbb:76ba:120d:8a28])
+ AJvYcCVezpaZb88b3MFJ0EPVpmIF4dQOMh1giwmmycsSohTS/L3ev3kN8m2HB4650afWyJnuZy3QTIUBGk1Y@nongnu.org
+X-Gm-Message-State: AOJu0YzQuhq8gk/QxMpKiRkD1P6rCKRYd1L9wZHa3mNy9jtRsx1DF6R7
+ dY0C3w8uuePmW6xT5Zg5x1kT2IcZ+Jwe1mhKNp9Tno5gIzHEVPYYlpDofGTyNz0=
+X-Google-Smtp-Source: AGHT+IG+WpDxktDwhDeAB7ZoaSFd8qPxhHZHMtpY9pSMS0NDmTy9YHm3YWJCoEIAfidwgw3P3C9cOg==
+X-Received: by 2002:adf:fa88:0:b0:37c:cce6:997d with SMTP id
+ ffacd0b85a97d-37cd5a8c952mr11781297f8f.20.1727700513641; 
+ Mon, 30 Sep 2024 05:48:33 -0700 (PDT)
+Received: from localhost.localdomain ([78.196.4.158])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-37cd57423afsm4313167f8f.90.2024.09.28.01.57.40
+ ffacd0b85a97d-37cd56e6408sm8975801f8f.48.2024.09.30.05.48.32
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Sat, 28 Sep 2024 01:57:56 -0700 (PDT)
-From: Phil Dennis-Jordan <phil@philjordan.eu>
+ Mon, 30 Sep 2024 05:48:33 -0700 (PDT)
+From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
-Cc: agraf@csgraf.de, phil@philjordan.eu, peter.maydell@linaro.org,
- pbonzini@redhat.com, rad@semihalf.com, quic_llindhol@quicinc.com,
- marcin.juszkiewicz@linaro.org, stefanha@redhat.com, mst@redhat.com,
- slp@redhat.com, richard.henderson@linaro.org, eduardo@habkost.net,
- marcel.apfelbaum@gmail.com, gaosong@loongson.cn, jiaxun.yang@flygoat.com,
- chenhuacai@kernel.org, kwolf@redhat.com, hreitz@redhat.com,
- philmd@linaro.org, shorne@gmail.com, palmer@dabbelt.com,
- alistair.francis@wdc.com, bmeng.cn@gmail.com, liwei1518@gmail.com,
- dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com,
- jcmvbkbc@gmail.com, marcandre.lureau@redhat.com, berrange@redhat.com,
- akihiko.odaki@daynix.com, qemu-arm@nongnu.org, qemu-block@nongnu.org,
- qemu-riscv@nongnu.org
-Subject: [PATCH v3 00/14] macOS PV Graphics and new vmapple machine type
-Date: Sat, 28 Sep 2024 10:57:13 +0200
-Message-Id: <20240928085727.56883-1-phil@philjordan.eu>
-X-Mailer: git-send-email 2.39.3 (Apple Git-145)
+Cc: Thomas Huth <thuth@redhat.com>, Paolo Bonzini <pbonzini@redhat.com>,
+ qemu-riscv@nongnu.org, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ =?UTF-8?q?Marc-Andr=C3=A9=20Lureau?= <marcandre.lureau@redhat.com>,
+ Anton Johansson <anjo@rev.ng>, Palmer Dabbelt <palmer@dabbelt.com>,
+ Bin Meng <bmeng.cn@gmail.com>, Weiwei Li <liwei1518@gmail.com>,
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+Subject: [PATCH] hw/riscv/spike: Replace tswap64() by ldq_endian_p()
+Date: Mon, 30 Sep 2024 14:48:31 +0200
+Message-ID: <20240930124831.54232-1-philmd@linaro.org>
+X-Mailer: git-send-email 2.45.2
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: neutral client-ip=2a00:1450:4864:20::436;
- envelope-from=phil@philjordan.eu; helo=mail-wr1-x436.google.com
-X-Spam_score_int: -10
-X-Spam_score: -1.1
-X-Spam_bar: -
-X-Spam_report: (-1.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, SPF_HELO_NONE=0.001,
- SPF_NEUTRAL=0.779 autolearn=no autolearn_force=no
+Received-SPF: pass client-ip=2a00:1450:4864:20::434;
+ envelope-from=philmd@linaro.org; helo=mail-wr1-x434.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
-X-Mailman-Approved-At: Sat, 28 Sep 2024 07:59:36 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -105,192 +98,109 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-(Apologies to anyone who has received more than one version of this
-series of emails; my git-send-email was misconfigured and this is
-a new attempt.)
+Hold the target endianness in HTIFState::target_is_bigendian.
+Pass the target endianness as argument to htif_mm_init().
+Replace tswap64() calls by ldq_endian_p() ones.
 
-This patch set introduces a new ARM and macOS HVF specific machine type
-called "vmapple", as well as a family of display devices based on the
-ParavirtualizedGraphics.framework in macOS. One of the display adapter
-variants, apple-gfx-vmapple, is required for the new machine type, while
-apple-gfx-pci can be used to enable 3D graphics acceleration with x86-64
-macOS guest OSes.
-
-Previous versions of this patch set were submitted semi-separately:
-the original vmapple patch set by Alexander Graf included a monolithic
-implementation of apple-gfx-vmapple. I subsequently reviewed and reworked
-the latter to support the PCI variant of the device as well and submitted
-the result in isolation. As requested in subsequent review, I have now
-recombined this with the original vmapple patch set, which I have updated
-and improved in a few ways as well.
-
-The vmapple machine type approximates the configuration in macOS's own
-Virtualization.framework when running arm64 macOS guests. In addition to
-generic components such as a GICv3 and an XHCI USB controller, it
-includes nonstandard extensions to the virtio block device, a special
-"hardware" aes engine, a configuration device, a pvpanic variant, a
-"backdoor" interface, and of course the apple-gfx paravirtualised display
-adapter.
-
-There are currently a few limitations to this which aren't intrinsic,
-just imperfect emulation of the VZF, but it's good enough to be just
-about usable for some purposes:
-
- * macOS 12 guests only. Versions 13+ currently fail during early boot.
- * macOS 11+ arm64 hosts only, with hvf accel. (Perhaps some differences
-   between Apple M series CPUs and TCG's aarch64 implementation? macOS
-   hosts only because ParavirtualizedGraphics.framework is a black box
-   implementing most of the logic behind the apple-gfx device.)
- * PCI devices use legacy IRQs, not MSI/MSI-X. As far as I can tell,
-   we'd need to include the GICv3 ITS, but it's unclear to me what
-   exactly needs wiring up.
- * Due to lack of MSI(-X), event delivery from USB devices to the guest
-   macOS isn't working correctly. My current conclusion is that the
-   OS's XHCI driver simply was never designed to work with legacy IRQs.
-   The upshot is that keyboard and mouse/tablet input is very laggy.
-   The solution would be to implement MSI(-X) support or figure out how
-   to make hcd-xhci-sysbus work with the macOS guest, if at all possible.
-   (EHCI and UHCI/OHCI controllers are not an option as the VMAPPLE
-   guest kernel does not include drivers for these.)
- * The guest OS must first be provisioned using Virtualization.framework;
-   the disk images can subsequently be used in Qemu. (See docs.)
-
-The apple-gfx device can be used independently from the vmapple machine
-type, at least in the PCI variant. It mainly targets x86-64 macOS guests
-from version 11 on, but also includes a UEFI bootrom for basic
-framebuffer mode. macOS 11 is also required on the host side, as well
-as a GPU that supports the Metal API. On the guest side, this provides
-3D acceleration/GPGPU support with a baseline Metal feature set,
-irrespective of the host GPU's feature set. A few limitations in the
-current integration:
-
- * Although it works fine with TCG, it does not work correctly
-   cross-architecture: x86-64 guests on arm64 hosts appear to make
-   some boot progress, but rendering is corrupted. I suspect
-   incompatible texture memory layouts; I have no idea if this is
-   fixable.
- * ParavirtualizedGraphics.framework and the guest driver support
-   multi-headed configurations. The current Qemu integration always
-   connects precisely 1 display.
- * State serialisation and deserialisation is currently not
-   implemented, though supported in principle by the framework.
-   Both apple-gfx variants thus set up a migration blocker.
- * Rendering efficiency could be better. The GPU-rendered guest
-   framebuffer is copied to system memory and uses Qemu's usual
-   CPU-based drawing. For maximum efficiency, the Metal texture
-   containing the guest framebuffer could be drawn directly to
-   a Metal view in the host window, staying on the GPU. (Similar
-   to the OpenGL/virgl render path on other platforms.)
-
+Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 ---
+Based-on: <20240930073450.33195-2-philmd@linaro.org>
+          "qemu/bswap: Introduce ld/st_endian_p() API"
 
-v2 -> v3:
+Note: this is a non-QOM device!
+---
+ include/hw/char/riscv_htif.h |  4 +++-
+ hw/char/riscv_htif.c         | 17 +++++++++++------
+ hw/riscv/spike.c             |  2 +-
+ 3 files changed, 15 insertions(+), 8 deletions(-)
 
- * Merged the apple-gfx and vmapple patchsets.
- * Squashed a bunch of later apple-gfx patches into the main one.
-   (dGPU support, queried MMIO area size, host GPU picking logic.)
- * Rebased on latest upstream, fixing any breakages due to internal
-   Qemu API changes.
- * apple-gfx: Switched to re-entrant MMIO. This is supported by the
-   underlying framework and simplifies the MMIO forwarding code which
-   was previously different on x86-64 vs aarch64.
- * vmapple: Fixes for minor bugs and comments from the last round of
-   review.
- * vmapple aes, conf, apple-gfx: Switched reset methods to implement
-   the ResettableClass base's interface.
- * vmapple: switched from virtio-hid to an XHCI USB controller and
-   USB mouse and tablet devices. macOS does not provide drivers for
-   virtio HID devices, at least not in version 12's vmapple kernel.
-   So input now sort of works (interrupt issues) rather than not
-   at all. Use network-based remote access to the guest OS as a
-   work-around.
-
-
-Alexander Graf (9):
-  hw: Add vmapple subdir
-  hw/misc/pvpanic: Add MMIO interface
-  hvf: arm: Ignore writes to CNTP_CTL_EL0
-  gpex: Allow more than 4 legacy IRQs
-  hw/vmapple/aes: Introduce aes engine
-  hw/vmapple/bdif: Introduce vmapple backdoor interface
-  hw/vmapple/cfg: Introduce vmapple cfg region
-  hw/vmapple/virtio-blk: Add support for apple virtio-blk
-  hw/vmapple/vmapple: Add vmapple machine type
-
-Phil Dennis-Jordan (5):
-  hw/display/apple-gfx: Introduce ParavirtualizedGraphics.Framework
-    support
-  hw/display/apple-gfx: Adds PCI implementation
-  ui/cocoa: Adds non-app runloop on main thread mode
-  hw/display/apple-gfx: Adds configurable mode list
-  MAINTAINERS: Add myself as maintainer for apple-gfx, reviewer for HVF
-
- MAINTAINERS                     |  15 +
- docs/system/arm/vmapple.rst     |  63 +++
- docs/system/target-arm.rst      |   1 +
- hw/Kconfig                      |   1 +
- hw/arm/sbsa-ref.c               |   2 +-
- hw/arm/virt.c                   |   2 +-
- hw/block/virtio-blk.c           |  19 +-
- hw/display/Kconfig              |  14 +
- hw/display/apple-gfx-pci.m      | 179 +++++++++
- hw/display/apple-gfx-vmapple.m  | 215 ++++++++++
- hw/display/apple-gfx.h          |  72 ++++
- hw/display/apple-gfx.m          | 668 ++++++++++++++++++++++++++++++++
- hw/display/meson.build          |   3 +
- hw/display/trace-events         |  26 ++
- hw/i386/microvm.c               |   2 +-
- hw/loongarch/virt.c             |   2 +-
- hw/meson.build                  |   1 +
- hw/mips/loongson3_virt.c        |   2 +-
- hw/misc/Kconfig                 |   4 +
- hw/misc/meson.build             |   1 +
- hw/misc/pvpanic-mmio.c          |  61 +++
- hw/openrisc/virt.c              |  12 +-
- hw/pci-host/gpex.c              |  36 +-
- hw/riscv/virt.c                 |  12 +-
- hw/vmapple/Kconfig              |  32 ++
- hw/vmapple/aes.c                | 584 ++++++++++++++++++++++++++++
- hw/vmapple/bdif.c               | 245 ++++++++++++
- hw/vmapple/cfg.c                | 106 +++++
- hw/vmapple/meson.build          |   5 +
- hw/vmapple/trace-events         |  26 ++
- hw/vmapple/trace.h              |   1 +
- hw/vmapple/virtio-blk.c         | 212 ++++++++++
- hw/vmapple/vmapple.c            | 661 +++++++++++++++++++++++++++++++
- hw/xtensa/virt.c                |   2 +-
- include/hw/misc/pvpanic.h       |   1 +
- include/hw/pci-host/gpex.h      |   7 +-
- include/hw/pci/pci_ids.h        |   1 +
- include/hw/virtio/virtio-blk.h  |  12 +-
- include/hw/vmapple/bdif.h       |  31 ++
- include/hw/vmapple/cfg.h        |  68 ++++
- include/hw/vmapple/virtio-blk.h |  39 ++
- include/qemu-main.h             |   2 +
- meson.build                     |   5 +
- target/arm/hvf/hvf.c            |   9 +
- ui/cocoa.m                      |  15 +-
- 45 files changed, 3443 insertions(+), 34 deletions(-)
- create mode 100644 docs/system/arm/vmapple.rst
- create mode 100644 hw/display/apple-gfx-pci.m
- create mode 100644 hw/display/apple-gfx-vmapple.m
- create mode 100644 hw/display/apple-gfx.h
- create mode 100644 hw/display/apple-gfx.m
- create mode 100644 hw/misc/pvpanic-mmio.c
- create mode 100644 hw/vmapple/Kconfig
- create mode 100644 hw/vmapple/aes.c
- create mode 100644 hw/vmapple/bdif.c
- create mode 100644 hw/vmapple/cfg.c
- create mode 100644 hw/vmapple/meson.build
- create mode 100644 hw/vmapple/trace-events
- create mode 100644 hw/vmapple/trace.h
- create mode 100644 hw/vmapple/virtio-blk.c
- create mode 100644 hw/vmapple/vmapple.c
- create mode 100644 include/hw/vmapple/bdif.h
- create mode 100644 include/hw/vmapple/cfg.h
- create mode 100644 include/hw/vmapple/virtio-blk.h
-
+diff --git a/include/hw/char/riscv_htif.h b/include/hw/char/riscv_htif.h
+index df493fdf6b..24868ddfe1 100644
+--- a/include/hw/char/riscv_htif.h
++++ b/include/hw/char/riscv_htif.h
+@@ -35,6 +35,7 @@ typedef struct HTIFState {
+     hwaddr tohost_offset;
+     hwaddr fromhost_offset;
+     MemoryRegion mmio;
++    bool target_is_bigendian;
+ 
+     CharBackend chr;
+     uint64_t pending_read;
+@@ -49,6 +50,7 @@ void htif_symbol_callback(const char *st_name, int st_info, uint64_t st_value,
+ 
+ /* legacy pre qom */
+ HTIFState *htif_mm_init(MemoryRegion *address_space, Chardev *chr,
+-                        uint64_t nonelf_base, bool custom_base);
++                        uint64_t nonelf_base, bool custom_base,
++                        bool target_is_bigendian);
+ 
+ #endif
+diff --git a/hw/char/riscv_htif.c b/hw/char/riscv_htif.c
+index 9bef60def1..77951f3c76 100644
+--- a/hw/char/riscv_htif.c
++++ b/hw/char/riscv_htif.c
+@@ -30,7 +30,6 @@
+ #include "qemu/timer.h"
+ #include "qemu/error-report.h"
+ #include "exec/address-spaces.h"
+-#include "exec/tswap.h"
+ #include "sysemu/dma.h"
+ #include "sysemu/runstate.h"
+ 
+@@ -211,13 +210,17 @@ static void htif_handle_tohost_write(HTIFState *s, uint64_t val_written)
+                     SHUTDOWN_CAUSE_GUEST_SHUTDOWN, exit_code);
+                 return;
+             } else {
++                bool be = s->target_is_bigendian;
+                 uint64_t syscall[8];
++
+                 cpu_physical_memory_read(payload, syscall, sizeof(syscall));
+-                if (tswap64(syscall[0]) == PK_SYS_WRITE &&
+-                    tswap64(syscall[1]) == HTIF_DEV_CONSOLE &&
+-                    tswap64(syscall[3]) == HTIF_CONSOLE_CMD_PUTC) {
++                if (ldq_endian_p(be, &syscall[0]) == PK_SYS_WRITE &&
++                    ldq_endian_p(be, &syscall[1]) == HTIF_DEV_CONSOLE &&
++                    ldq_endian_p(be, &syscall[3]) == HTIF_CONSOLE_CMD_PUTC) {
+                     uint8_t ch;
+-                    cpu_physical_memory_read(tswap64(syscall[2]), &ch, 1);
++
++                    cpu_physical_memory_read(ldl_endian_p(be, &syscall[2]),
++                                             &ch, 1);
+                     qemu_chr_fe_write(&s->chr, &ch, 1);
+                     resp = 0x100 | (uint8_t)payload;
+                 } else {
+@@ -320,7 +323,8 @@ static const MemoryRegionOps htif_mm_ops = {
+ };
+ 
+ HTIFState *htif_mm_init(MemoryRegion *address_space, Chardev *chr,
+-                        uint64_t nonelf_base, bool custom_base)
++                        uint64_t nonelf_base, bool custom_base,
++                        bool target_is_bigendian)
+ {
+     uint64_t base, size, tohost_offset, fromhost_offset;
+ 
+@@ -345,6 +349,7 @@ HTIFState *htif_mm_init(MemoryRegion *address_space, Chardev *chr,
+     s->pending_read = 0;
+     s->allow_tohost = 0;
+     s->fromhost_inprogress = 0;
++    s->target_is_bigendian = target_is_bigendian;
+     qemu_chr_fe_init(&s->chr, chr, &error_abort);
+     qemu_chr_fe_set_handlers(&s->chr, htif_can_recv, htif_recv, htif_event,
+         htif_be_change, s, NULL, true);
+diff --git a/hw/riscv/spike.c b/hw/riscv/spike.c
+index 64074395bc..0989cd4a41 100644
+--- a/hw/riscv/spike.c
++++ b/hw/riscv/spike.c
+@@ -327,7 +327,7 @@ static void spike_board_init(MachineState *machine)
+ 
+     /* initialize HTIF using symbols found in load_kernel */
+     htif_mm_init(system_memory, serial_hd(0), memmap[SPIKE_HTIF].base,
+-                 htif_custom_base);
++                 htif_custom_base, TARGET_BIG_ENDIAN);
+ }
+ 
+ static void spike_set_signature(Object *obj, const char *val, Error **errp)
 -- 
-2.39.3 (Apple Git-145)
+2.45.2
 
 
