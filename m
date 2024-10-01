@@ -4,79 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DC6B1CEACE5
-	for <qemu-riscv@archiver.kernel.org>; Tue,  1 Oct 2024 16:12:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3643BCEACE8
+	for <qemu-riscv@archiver.kernel.org>; Tue,  1 Oct 2024 16:36:56 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1svfTx-0005Xm-3p; Tue, 01 Oct 2024 12:12:13 -0400
+	id 1svfrX-0003ou-63; Tue, 01 Oct 2024 12:36:35 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1svfTe-0005Wo-Pe; Tue, 01 Oct 2024 12:11:56 -0400
-Received: from mail-qv1-xf2c.google.com ([2607:f8b0:4864:20::f2c])
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1svfrV-0003oG-AF
+ for qemu-riscv@nongnu.org; Tue, 01 Oct 2024 12:36:33 -0400
+Received: from mail-pf1-x436.google.com ([2607:f8b0:4864:20::436])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1svfTc-0003Ab-78; Tue, 01 Oct 2024 12:11:54 -0400
-Received: by mail-qv1-xf2c.google.com with SMTP id
- 6a1803df08f44-6cb37b34a87so40816006d6.0; 
- Tue, 01 Oct 2024 09:11:50 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1svfrP-0005pQ-9U
+ for qemu-riscv@nongnu.org; Tue, 01 Oct 2024 12:36:33 -0400
+Received: by mail-pf1-x436.google.com with SMTP id
+ d2e1a72fcca58-71b070ff24dso5138861b3a.2
+ for <qemu-riscv@nongnu.org>; Tue, 01 Oct 2024 09:36:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1727799110; x=1728403910; darn=nongnu.org;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=4W/uO5gFzop3Vn7VW7r+255Jx/9QDITdeNJGg8Y6eKA=;
- b=J+HB8aCM2RqnW2vbJjroVgDlsKda2ttI8zKeng+5++G8Zf0wNxWAMyzIsKesk7DyIr
- ErbrMGhEsf1NTQfruhZcNNkbLDxvG6GwowvHDWMVoPP6u0pqHiH4US2WM2KX0lLpAeAv
- QUgiF86sNC0j68+qtXRlP37ILY5VkvCdVDUYGT+9BJh4iRCJxAzOnVL4XGEAGx7sdsFJ
- 3eyNodPZ8dCNqLCUwtR6WtrGye/IYLhzLaoZjaUB/QCoEDTAYVgQ/RRe/97o7uTzMPuA
- 9eH0dmUfuuXjo4u9ed2puGSQOJh8grJISsdVs9cIyFL3AvjopuzumYRaOZ/6WMJxiiFo
- Dftw==
+ d=ventanamicro.com; s=google; t=1727800583; x=1728405383; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=PpOtqP90E4Q6mUPyAcuNdqtxXQ/kO96V91KNrsTZRmU=;
+ b=PWjN0FMs+ecjfcNaMvn53v42ZOeqH0WyoAlXjMzD1FmpRHqPSvrOPR2J0SZrWS7cST
+ qRmTQhGmOBIJ7Rt+LeUE/o4V0WMR8Fy5GM/yfiRUSOxyfLHxaxQ9WMffZTvfdVVrdO3c
+ 3m2uoTm98A7inYQsnANpcRol5cv4YpVLtDTqfjbKBfCC5YxVibCHXA6YSsTCFsoN4lpy
+ nvbjEw6wYpRnaOZv2p0evWjJwyYIPeK/j00nDqRpBul5c8IV+PPiXcKp71qUVTFBaShl
+ baxraq4crSLMxHBSHdpK6yewmm1AArNnhXVVEzvFuJvCqMQvkN/lwTbDF7MdQkw4X1cp
+ JnLQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1727799110; x=1728403910;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=4W/uO5gFzop3Vn7VW7r+255Jx/9QDITdeNJGg8Y6eKA=;
- b=l9O+WvwW83/XCbMI1PtogjJ3RjoZGQqY/qz56Fo/qCFKHrzDMCtoCRJIvjFNT4ydVR
- Lc3+l2l3rKkp7uWJ2m8lY+lRW0oHtRsa+XP145hJz6yFoibk3Q5UhJYjPDeyW8HqP3sr
- W3v/+IL6L0/Gh/5Poq8U0YguU4EvDBfNHl3dI3r0Hi0rv7SgdJQokL4NS+vY9DH3QQkR
- jt5t6f0AHJ79xq77WtChSBMRMCa6i60QlhI7nxHy65Br9hB0L2NewNompx70kcV9Z2An
- PzYlZAmacIHIdfMT2NpZ3uwMHdtHvoEAVmHNrpWuAB6OoIGdpUb04/8xp8N6zxKweKa8
- m73w==
+ d=1e100.net; s=20230601; t=1727800583; x=1728405383;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=PpOtqP90E4Q6mUPyAcuNdqtxXQ/kO96V91KNrsTZRmU=;
+ b=HXvFqsnpJC/PZwOvL402Vu72xTQUPpTJxwZ5avvhS0EKbpWmVOSEDS95fPi4bKYWJ5
+ dAhX8SoGTcyAR4DK3Uryypcd+xs7jNg2OkLx6KS7lyeKUis3UQi8MuyROpabj2fIzjju
+ WTrv1BJiRLg8SmFtyoJraivA5vXH8dHcBQyIw4/FTnajFYNIqmtQtsoS1n9ILq6FxbaD
+ f58fK+0n+Hqw4hTifS0KUkRPQvLZ/voPNqS+xYUcQUZqI5ThsuXyCeMmKIfrceIYgLG+
+ 0alaQpDjWdlXXCw26SugEge/4ZjUkScYJL2f56O4qAM0Tj4Llo4MTtiPTGKsEM5JbwWn
+ SgQA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWi7qDG2lpDB/A8/aNVvdAMX/M8nclY6FFYYhlUOWzDz2LG4jlpLA6IlffhI8Y16r+mqn0O3UPd5S2N@nongnu.org
-X-Gm-Message-State: AOJu0YxCJGpSWpjQKhe6wBU2q/yTagBNofdBRd8HR6pmHPH/ojME99Ww
- vKiej17v0A7ITSctjSKA4+ocQdNqk3meAAALBTxXaXcjSL3IJA1zpKWv9eDDmgDNcIuJdskXNVa
- WjXZqOIwWjene+CnxTd20QQI73Tt6VA==
-X-Google-Smtp-Source: AGHT+IEpEsyewQ0afuqTTdtpQz9qrkWBgU9QYZcef+7U5vYkLHyOBUdq1L0IQA3KyAkl6UTHatv5Ri7K77h9Nm9V9SY=
-X-Received: by 2002:a05:6102:54a2:b0:49b:e7d7:3e1b with SMTP id
- ada2fe7eead31-4a2cefe047cmr13081735137.3.1727763160902; Mon, 30 Sep 2024
- 23:12:40 -0700 (PDT)
+ AJvYcCVBMHzi0aT84OCKQbTsQw5SPFyrg+eh/+Tp0bpjfu9FI3xau+C9RbMC2Pz7maoyLOA3spNuxDVkjy/8@nongnu.org
+X-Gm-Message-State: AOJu0YydCfOtyt96ZU9dCCOJWWjvkCY89jAnlcrGrBpDLXQc9R1E7TKM
+ Zxnw3FSJdOoIR+u1huJQXQQ03roXSZ1krQ1HB7HX5jEhI0jvXsHerVsWv3RkQ6c=
+X-Google-Smtp-Source: AGHT+IEuWnNk5Y3kiGDHLS+eK1AWTAfVuf6KPqty+mz4A+w1rTYR6pSiPeyu7Ibei+520ZVJ9geCBA==
+X-Received: by 2002:a05:6a20:2d28:b0:1ce:d418:a45c with SMTP id
+ adf61e73a8af0-1d5e2d54c41mr375029637.50.1727800582840; 
+ Tue, 01 Oct 2024 09:36:22 -0700 (PDT)
+Received: from [192.168.68.110] (200-206-229-93.dsl.telesp.net.br.
+ [200.206.229.93]) by smtp.gmail.com with ESMTPSA id
+ d2e1a72fcca58-71b26517bcesm8490047b3a.99.2024.10.01.09.36.19
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 01 Oct 2024 09:36:22 -0700 (PDT)
+Message-ID: <b1ce0a4b-9e05-43de-a22c-90daae45ca22@ventanamicro.com>
+Date: Tue, 1 Oct 2024 13:36:18 -0300
 MIME-Version: 1.0
-References: <20240927083508.59483-1-yanmingzhu@iscas.ac.cn>
-In-Reply-To: <20240927083508.59483-1-yanmingzhu@iscas.ac.cn>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Tue, 1 Oct 2024 16:12:14 +1000
-Message-ID: <CAKmqyKMobSzu-q8jdPhAU9PMG2GsGG1eOsemSS-Ny2vrX+wSbQ@mail.gmail.com>
-Subject: Re: [PATCH] hw/char/riscv_htif: Fix htif_mm_write that causes
- infinite loop in ACT.
-To: MingZhu Yan <trdthg47@gmail.com>
-Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, 
- MingZhu Yan <yanmingzhu@iscas.ac.cn>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::f2c;
- envelope-from=alistair23@gmail.com; helo=mail-qv1-xf2c.google.com
-X-Spam_score_int: -2
-X-Spam_score: -0.3
-X-Spam_bar: /
-X-Spam_report: (-0.3 / 5.0 requ) BAYES_00=-1.9, DATE_IN_PAST_06_12=1.543,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+User-Agent: Mozilla Thunderbird
+Subject: Re: [RFC 1/1] target/riscv: use a simplified loop to emulate rvv
+ loads/stores only in user mode.
+To: Paolo Savini <paolo.savini@embecosm.com>, qemu-devel@nongnu.org,
+ qemu-riscv@nongnu.org
+Cc: Richard Handerson <richard.henderson@linaro.org>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bmeng.cn@gmail.com>,
+ Weiwei Li <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Helene Chelin <helene.chelin@embecosm.com>, Nathan Egge <negge@google.com>,
+ Max Chou <max.chou@sifive.com>
+References: <20240925151330.50215-1-paolo.savini@embecosm.com>
+ <20240925151330.50215-2-paolo.savini@embecosm.com>
+Content-Language: en-US
+From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+In-Reply-To: <20240925151330.50215-2-paolo.savini@embecosm.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::436;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pf1-x436.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=no autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -92,97 +105,52 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Fri, Sep 27, 2024 at 11:26=E2=80=AFPM MingZhu Yan <trdthg47@gmail.com> w=
-rote:
->
-> Applications sometimes only write the lower 32-bit payload bytes, this is=
- used
-> in ACT tests. As a workaround, this refers to the solution of sail-riscv.
+Paolo,
 
-I'm not sure what ACT is, but this feels like a guest bug, not a QEMU issue=
-.
+Usually we amend the existing patch with a new version instead of sending
+a new patch to amend a previous patch that got comments.
 
-Alistair
+I suggest you merge this change with your first patch here:
 
-> if the payload is written a few times with the same value, we process the=
- whole
-> htif command anyway.
->
-> Signed-off-by: MingZhu Yan <yanmingzhu@iscas.ac.cn>
+https://patchew.org/QEMU/20240717153040.11073-1-paolo.savini@embecosm.com/20240717153040.11073-2-paolo.savini@embecosm.com/#aff5f930-d291-4ff5-8f24-53291059d59a@linaro.org
+
+Set it as v2 and re-send.
+
+
+Thanks,
+
+
+Daniel
+
+On 9/25/24 12:13 PM, Paolo Savini wrote:
+> The simplified emulation of vector loads and stores that bypasses the memory
+> probing in the vext_ldst_us helper function seem to benefit only the user mode.
+> We therefore limit this approach to the user mode configuration.
+> 
+> Signed-off-by: Paolo Savini <paolo.savini@embecosm.com>
 > ---
->  hw/char/riscv_htif.c | 35 +++++++++++++++++++----------------
->  1 file changed, 19 insertions(+), 16 deletions(-)
->
-> diff --git a/hw/char/riscv_htif.c b/hw/char/riscv_htif.c
-> index 9bef60def1..d74cce3bef 100644
-> --- a/hw/char/riscv_htif.c
-> +++ b/hw/char/riscv_htif.c
-> @@ -65,16 +65,8 @@ void htif_symbol_callback(const char *st_name, int st_=
-info, uint64_t st_value,
->  {
->      if (strcmp("fromhost", st_name) =3D=3D 0) {
->          fromhost_addr =3D st_value;
-> -        if (st_size !=3D 8) {
-> -            error_report("HTIF fromhost must be 8 bytes");
-> -            exit(1);
-> -        }
->      } else if (strcmp("tohost", st_name) =3D=3D 0) {
->          tohost_addr =3D st_value;
-> -        if (st_size !=3D 8) {
-> -            error_report("HTIF tohost must be 8 bytes");
-> -            exit(1);
-> -        }
->      } else if (strcmp("begin_signature", st_name) =3D=3D 0) {
->          begin_sig_addr =3D st_value;
->      } else if (strcmp("end_signature", st_name) =3D=3D 0) {
-> @@ -290,18 +282,26 @@ static void htif_mm_write(void *opaque, hwaddr addr=
-,
->                            uint64_t value, unsigned size)
->  {
->      HTIFState *s =3D opaque;
-> -    if (addr =3D=3D TOHOST_OFFSET1) {
-> -        if (s->tohost =3D=3D 0x0) {
-> -            s->allow_tohost =3D 1;
-> -            s->tohost =3D value & 0xFFFFFFFF;
-> +    int htif_cmd_write =3D 0;
-> +    if (size =3D=3D 8 && addr =3D=3D TOHOST_OFFSET1) {
-> +        htif_cmd_write =3D 1;
-> +        s->tohost =3D value;
-> +        htif_handle_tohost_write(s, s->tohost);
-> +    } else if (size =3D=3D 4 && addr =3D=3D TOHOST_OFFSET1) {
-> +        if ((value) =3D=3D (s->tohost & 0xFFFF)) {
-> +            s->allow_tohost =3D s->allow_tohost + 1;
->          } else {
->              s->allow_tohost =3D 0;
->          }
-> -    } else if (addr =3D=3D TOHOST_OFFSET2) {
-> -        if (s->allow_tohost) {
-> -            s->tohost |=3D value << 32;
-> -            htif_handle_tohost_write(s, s->tohost);
-> +        s->tohost =3D deposit64(s->tohost, 0, 32, value);
-> +    } else if (size =3D=3D 4 && addr =3D=3D TOHOST_OFFSET2) {
-> +        if ((value & 0xFF) =3D=3D (s->tohost & 0xFF00)) {
-> +            s->allow_tohost =3D s->allow_tohost + 1;
-> +        } else {
-> +            s->allow_tohost =3D 1;
->          }
-> +        htif_cmd_write =3D 1;
-> +        s->tohost =3D deposit64(s->tohost, 32, 32, value);
->      } else if (addr =3D=3D FROMHOST_OFFSET1) {
->          s->fromhost_inprogress =3D 1;
->          s->fromhost =3D value & 0xFFFFFFFF;
-> @@ -312,6 +312,9 @@ static void htif_mm_write(void *opaque, hwaddr addr,
->          qemu_log("Invalid htif write: address %016" PRIx64 "\n",
->              (uint64_t)addr);
->      }
-> +    if ((s->tohost =3D=3D 1 && htif_cmd_write) || s->allow_tohost > 2) {
-> +        htif_handle_tohost_write(s, s->tohost);
-> +    }
->  }
->
->  static const MemoryRegionOps htif_mm_ops =3D {
-> --
-> 2.34.1
->
->
+>   target/riscv/vector_helper.c | 3 ++-
+>   1 file changed, 2 insertions(+), 1 deletion(-)
+> 
+> diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
+> index 9026661573..08f71abc22 100644
+> --- a/target/riscv/vector_helper.c
+> +++ b/target/riscv/vector_helper.c
+> @@ -648,6 +648,7 @@ vext_ldst_us(void *vd, target_ulong base, CPURISCVState *env, uint32_t desc,
+>   
+>       VSTART_CHECK_EARLY_EXIT(env);
+>   
+> +#ifdef CONFIG_USER_ONLY
+>       /* For data sizes <= 64 bits and for LMUL=1 with VLEN=128 bits we get a
+>        * better performance by doing a simple simulation of the load/store
+>        * without the overhead of prodding the host RAM */
+> @@ -692,7 +693,7 @@ vext_ldst_us(void *vd, target_ulong base, CPURISCVState *env, uint32_t desc,
+>           vext_set_tail_elems_1s(evl, vd, desc, nf, esz, max_elems);
+>           return;
+>       }
+> -
+> +#endif
+>   
+>       vext_cont_ldst_elements(&info, base, env->vreg, env->vstart, evl, desc,
+>                               log2_esz, false);
 
