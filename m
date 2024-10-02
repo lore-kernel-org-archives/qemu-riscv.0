@@ -4,82 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E52E8CF3189
-	for <qemu-riscv@archiver.kernel.org>; Wed,  2 Oct 2024 01:06:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6AC68CF3195
+	for <qemu-riscv@archiver.kernel.org>; Wed,  2 Oct 2024 05:46:52 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1svnn0-0007M1-05; Tue, 01 Oct 2024 21:04:26 -0400
+	id 1svsBe-0004Gd-Ej; Wed, 02 Oct 2024 01:46:12 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1svnmb-0006z2-Qi
- for qemu-riscv@nongnu.org; Tue, 01 Oct 2024 21:04:02 -0400
-Received: from mail-pl1-x62a.google.com ([2607:f8b0:4864:20::62a])
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1svsBQ-0004FJ-Nu; Wed, 02 Oct 2024 01:45:56 -0400
+Received: from mail-ua1-x930.google.com ([2607:f8b0:4864:20::930])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1svnma-0002pE-1L
- for qemu-riscv@nongnu.org; Tue, 01 Oct 2024 21:04:01 -0400
-Received: by mail-pl1-x62a.google.com with SMTP id
- d9443c01a7336-20b7a4336easo21696105ad.3
- for <qemu-riscv@nongnu.org>; Tue, 01 Oct 2024 18:03:59 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1svsBP-0004Qe-1V; Wed, 02 Oct 2024 01:45:56 -0400
+Received: by mail-ua1-x930.google.com with SMTP id
+ a1e0cc1a2514c-84e962c9a99so1867580241.2; 
+ Tue, 01 Oct 2024 22:45:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1727831039; x=1728435839; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ d=gmail.com; s=20230601; t=1727847950; x=1728452750; darn=nongnu.org;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=/3poKE/9C9XgFE59tMY0QZWKf4rB7frGZ2ed/FANpzo=;
- b=c/zPpsWLLPxon3IQLx9A0gMuY/iSR5HQXMTO1IiUpBmDER8SA6AOKJ/yz82xZX9S+l
- TEtDmCXA7F8fROFmCPyxOvaqL0/n6uhq4j4UvvT4QUkYecjUqBzbPWvGMqbqbo5C/N4h
- l07XDxzz+N35AdGkUA5Nhb+9JG3foZCRmkVxRw9njzCdC5YnKFD9SVqqjdMtifiZIuMA
- BuQX9w37XGN9aiKFp5YtOcc4XtM3PfmvQqCJZqMr7QWX+379dQW8tEGZJl5j0N/8z+5a
- aPvlWsyg8596ujHKAMCUjqeYiu/60qIk9vWSRAbm/QtnJxl5KYktjfwWApZIZTdZL3ZC
- C+pA==
+ bh=KmSQcK0z0DgYs22RTHsqMdyBfifB74uH137hPv4CngQ=;
+ b=JXdJTDoChElKYW3tceQ5QebaNAlm2Jes3Rz2TorBWMZWZqq1jqLEb+cSGAeqR97hBA
+ 6n5VerxErpaizOAIl0e63//YDau/1KpNi5zk3wduga0mtNyvkTFRPVCFjB7RA96xzgMb
+ 4fQ0zPYixicEelPEHbkzSDaFCSYU0KUePooCPNiivmcqyl+GnP6YrxU89ofmpo8DLPB2
+ yCqn6nOhbf4UpifdRkGAgaYRTQy3EC6F4Uqt+YZ+EKNrJJbFX9Y0qAVzGI2AcPTAbHX1
+ fhFAQCJkKElAUfz4hR1Rb6cv6pW2lzGdpsmF0TVb3fZKdnmntNcy6Ts65W8YhpXwIudK
+ 7dJA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1727831039; x=1728435839;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ d=1e100.net; s=20230601; t=1727847950; x=1728452750;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=/3poKE/9C9XgFE59tMY0QZWKf4rB7frGZ2ed/FANpzo=;
- b=nW5H/NBM0IZcVrtGn+TybeTcZJqmXfz4i8itGnhfSTsEi1i4q/l5hQibCDbj04FsEe
- s6sl8cjvkpHWL3rJwVMGGS2c1kYTc3QU6soBXa6DWX/f1OVErhnpshjShXEgj0JS/Csi
- B1nwASq/xMuJKr2RYs1sBIIUq6F5tIqzaPCv1SioVeuDkaWx33YZH9bYxFJPCsv6ULFJ
- YT9SrcH4cVe5yTDkrFo/+KZyqe+JQTNLMJ5ITtQLETix6FDbW9kj26vDTPOOFkrnycFR
- LMZdVe2Cdy0Au1iVfxQEYrOy2UHeH5TD3rfka+a67qGX5BedfIQOcMQheGN0UBMNM1Hc
- bPDA==
-X-Gm-Message-State: AOJu0Yyc0dULWpUGpAe/tRfRjyW0mL0G7tYq4LqmqqCSLQY+eAgKt5R7
- 0XZVOWEmdA5+tSJgtyq6R0cfloN2yIVNbxciHa/7ndgcd36DUYDBs16XwBpUMnU=
-X-Google-Smtp-Source: AGHT+IGuVwjPVKQPScxS3ndNemjG5BxXmUTrS8MSxdanO/z+bBGfGcRQodUWEm7c4FxsuP5qzbZDGQ==
-X-Received: by 2002:a17:902:d50d:b0:20b:a9b2:b560 with SMTP id
- d9443c01a7336-20bc59ae51emr22044465ad.6.1727831038740; 
- Tue, 01 Oct 2024 18:03:58 -0700 (PDT)
-Received: from grind.. (200-206-229-93.dsl.telesp.net.br. [200.206.229.93])
- by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-20b37d63971sm76061295ad.4.2024.10.01.18.03.54
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 01 Oct 2024 18:03:58 -0700 (PDT)
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-To: qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
- liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
- peter.maydell@linaro.org, Tomasz Jeznach <tjeznach@rivosinc.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Frank Chang <frank.chang@sifive.com>
-Subject: [PATCH v8 10/12] hw/riscv/riscv-iommu: add DBG support
-Date: Tue,  1 Oct 2024 22:03:05 -0300
-Message-ID: <20241002010314.1928515-11-dbarboza@ventanamicro.com>
-X-Mailer: git-send-email 2.45.2
-In-Reply-To: <20241002010314.1928515-1-dbarboza@ventanamicro.com>
-References: <20241002010314.1928515-1-dbarboza@ventanamicro.com>
+ bh=KmSQcK0z0DgYs22RTHsqMdyBfifB74uH137hPv4CngQ=;
+ b=sLFhPAl7VuIDAkoRsnSijVZIrNT9vJi9oS5v0X5oXakPqYTCNGb4yMOJNEXdwcN3zr
+ 194kgbUW2+kBrgOXptGAwUc5MwG1k56VQKUqvQZJWs6dreb6hCaiQ2q1QVCbmCRR7v23
+ qSNgZQV0junLtJ4Qr6l/abR4eliEdxJ+VlPqGAQTACMmsG9u+Wlv9KCtVS8POxaa7H5K
+ vEJ+Ej6fEoGffdNJgVybnnjuBQq3ixwxbVbiOR6Lm2C5lLQp4dUXVQgpsEsvHdkcAA8t
+ CRQQPAeY7hImlRqRm1oxTl/0p/Shda4/5bvffdzQdEwuKbsWURu0unyIgAEB5jkf7wY0
+ A0Jg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWx7vqtMrqQ/xua/jiTpXGLve+y2x6T4wGrMkDSA5bVrEecJEFzeqKpKgKGlq3fObFm5ym0phkUtFB3@nongnu.org,
+ AJvYcCXj2TRm4LfKzaBAc/ctOebvEt8xDkUfRjCC+itU9PpIA3N8CX3DOewkNVDCMrRHBYCpK9RpKRtxIXr1Uw==@nongnu.org
+X-Gm-Message-State: AOJu0YzAKUX90S2vLYCoNQKfaP5bBVtkF8etCNTO0HK8kmuTTRs7jJQR
+ E6QTRB2kEDyEPCN2WOy3j5FH8qrSq7PzSE2ocpDxHRRVnEFHcdVTAuXxtjbqToABA8tLqfQiHXS
+ hWqd3Cv4UQ8JDOPeLbfusDlPjf7I=
+X-Google-Smtp-Source: AGHT+IEKhOq/ywkWJZckvMl4Nv6dVN8znO54E6I8P8fZgJ8/tpR5W6aFoCHXbrfFVZudt8t9rG0bCXu3g8ocl6ufXTQ=
+X-Received: by 2002:a05:6102:3a0b:b0:49b:e62d:b5d4 with SMTP id
+ ada2fe7eead31-4a3e6929ef9mr2069719137.21.1727847950509; Tue, 01 Oct 2024
+ 22:45:50 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::62a;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pl1-x62a.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+References: <70658cf5-4a72-4b83-8390-cb0a3506e6eb@ventanamicro.com>
+ <20240926083944.15807-1-evgenii.prokopiev@syntacore.com>
+In-Reply-To: <20240926083944.15807-1-evgenii.prokopiev@syntacore.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Wed, 2 Oct 2024 15:45:24 +1000
+Message-ID: <CAKmqyKMmYPG0_jyrJFxvnxhTGTCAz4L5Lf6FouZpy3ZtywNiGA@mail.gmail.com>
+Subject: Re: [PATCH v2] target/riscv/csr.c: Fix an access to VXSAT
+To: Evgenii Prokopiev <evgenii.prokopiev@syntacore.com>
+Cc: dbarboza@ventanamicro.com, alistair.francis@wdc.com, bmeng.cn@gmail.com, 
+ liwei1518@gmail.com, palmer@dabbelt.com, qemu-devel@nongnu.org, 
+ qemu-riscv@nongnu.org, zhiwei_liu@linux.alibaba.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2607:f8b0:4864:20::930;
+ envelope-from=alistair23@gmail.com; helo=mail-ua1-x930.google.com
+X-Spam_score_int: -17
+X-Spam_score: -1.8
+X-Spam_bar: -
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -97,149 +94,58 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Tomasz Jeznach <tjeznach@rivosinc.com>
+On Thu, Sep 26, 2024 at 6:41=E2=80=AFPM Evgenii Prokopiev
+<evgenii.prokopiev@syntacore.com> wrote:
+>
+> The register VXSAT should be RW only to the first bit.
+> The remaining bits should be 0.
+>
+> The RISC-V Instruction Set Manual Volume I: Unprivileged Architecture
+>
+> The vxsat CSR has a single read-write least-significant bit (vxsat[0])
+> that indicates if a fixed-point instruction has had to saturate an output
+> value to fit into a destination format. Bits vxsat[XLEN-1:1]
+> should be written as zeros.
+>
+> Signed-off-by: Evgenii Prokopiev <evgenii.prokopiev@syntacore.com>
+> Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 
-DBG support adds three additional registers: tr_req_iova, tr_req_ctl and
-tr_response.
-
-The DBG cap is always enabled. No on/off toggle is provided for it.
-
-Signed-off-by: Tomasz Jeznach <tjeznach@rivosinc.com>
-Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Reviewed-by: Frank Chang <frank.chang@sifive.com>
 Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
----
- hw/riscv/riscv-iommu-bits.h | 17 +++++++++++
- hw/riscv/riscv-iommu.c      | 59 +++++++++++++++++++++++++++++++++++++
- 2 files changed, 76 insertions(+)
 
-diff --git a/hw/riscv/riscv-iommu-bits.h b/hw/riscv/riscv-iommu-bits.h
-index 96a994b9aa..6359ae0353 100644
---- a/hw/riscv/riscv-iommu-bits.h
-+++ b/hw/riscv/riscv-iommu-bits.h
-@@ -82,6 +82,7 @@ struct riscv_iommu_pq_record {
- #define RISCV_IOMMU_CAP_ATS             BIT_ULL(25)
- #define RISCV_IOMMU_CAP_T2GPA           BIT_ULL(26)
- #define RISCV_IOMMU_CAP_IGS             GENMASK_ULL(29, 28)
-+#define RISCV_IOMMU_CAP_DBG             BIT_ULL(31)
- #define RISCV_IOMMU_CAP_PAS             GENMASK_ULL(37, 32)
- #define RISCV_IOMMU_CAP_PD8             BIT_ULL(38)
- #define RISCV_IOMMU_CAP_PD17            BIT_ULL(39)
-@@ -184,6 +185,22 @@ enum {
-     RISCV_IOMMU_INTR_COUNT
- };
- 
-+/* 5.24 Translation request IOVA (64bits) */
-+#define RISCV_IOMMU_REG_TR_REQ_IOVA     0x0258
-+
-+/* 5.25 Translation request control (64bits) */
-+#define RISCV_IOMMU_REG_TR_REQ_CTL      0x0260
-+#define RISCV_IOMMU_TR_REQ_CTL_GO_BUSY  BIT_ULL(0)
-+#define RISCV_IOMMU_TR_REQ_CTL_NW       BIT_ULL(3)
-+#define RISCV_IOMMU_TR_REQ_CTL_PID      GENMASK_ULL(31, 12)
-+#define RISCV_IOMMU_TR_REQ_CTL_DID      GENMASK_ULL(63, 40)
-+
-+/* 5.26 Translation request response (64bits) */
-+#define RISCV_IOMMU_REG_TR_RESPONSE     0x0268
-+#define RISCV_IOMMU_TR_RESPONSE_FAULT   BIT_ULL(0)
-+#define RISCV_IOMMU_TR_RESPONSE_S       BIT_ULL(9)
-+#define RISCV_IOMMU_TR_RESPONSE_PPN     RISCV_IOMMU_PPN_FIELD
-+
- /* 5.27 Interrupt cause to vector (64bits) */
- #define RISCV_IOMMU_REG_ICVEC           0x02F8
- #define RISCV_IOMMU_ICVEC_CIV           GENMASK_ULL(3, 0)
-diff --git a/hw/riscv/riscv-iommu.c b/hw/riscv/riscv-iommu.c
-index 6bb7ab6c53..c719aa5bc9 100644
---- a/hw/riscv/riscv-iommu.c
-+++ b/hw/riscv/riscv-iommu.c
-@@ -1761,6 +1761,50 @@ static void riscv_iommu_process_pq_control(RISCVIOMMUState *s)
-     riscv_iommu_reg_mod32(s, RISCV_IOMMU_REG_PQCSR, ctrl_set, ctrl_clr);
- }
- 
-+static void riscv_iommu_process_dbg(RISCVIOMMUState *s)
-+{
-+    uint64_t iova = riscv_iommu_reg_get64(s, RISCV_IOMMU_REG_TR_REQ_IOVA);
-+    uint64_t ctrl = riscv_iommu_reg_get64(s, RISCV_IOMMU_REG_TR_REQ_CTL);
-+    unsigned devid = get_field(ctrl, RISCV_IOMMU_TR_REQ_CTL_DID);
-+    unsigned pid = get_field(ctrl, RISCV_IOMMU_TR_REQ_CTL_PID);
-+    RISCVIOMMUContext *ctx;
-+    void *ref;
-+
-+    if (!(ctrl & RISCV_IOMMU_TR_REQ_CTL_GO_BUSY)) {
-+        return;
-+    }
-+
-+    ctx = riscv_iommu_ctx(s, devid, pid, &ref);
-+    if (ctx == NULL) {
-+        riscv_iommu_reg_set64(s, RISCV_IOMMU_REG_TR_RESPONSE,
-+                                 RISCV_IOMMU_TR_RESPONSE_FAULT |
-+                                 (RISCV_IOMMU_FQ_CAUSE_DMA_DISABLED << 10));
-+    } else {
-+        IOMMUTLBEntry iotlb = {
-+            .iova = iova,
-+            .perm = ctrl & RISCV_IOMMU_TR_REQ_CTL_NW ? IOMMU_RO : IOMMU_RW,
-+            .addr_mask = ~0,
-+            .target_as = NULL,
-+        };
-+        int fault = riscv_iommu_translate(s, ctx, &iotlb, false);
-+        if (fault) {
-+            iova = RISCV_IOMMU_TR_RESPONSE_FAULT | (((uint64_t) fault) << 10);
-+        } else {
-+            iova = iotlb.translated_addr & ~iotlb.addr_mask;
-+            iova >>= TARGET_PAGE_BITS;
-+            iova &= RISCV_IOMMU_TR_RESPONSE_PPN;
-+
-+            /* We do not support superpages (> 4kbs) for now */
-+            iova &= ~RISCV_IOMMU_TR_RESPONSE_S;
-+        }
-+        riscv_iommu_reg_set64(s, RISCV_IOMMU_REG_TR_RESPONSE, iova);
-+    }
-+
-+    riscv_iommu_reg_mod64(s, RISCV_IOMMU_REG_TR_REQ_CTL, 0,
-+        RISCV_IOMMU_TR_REQ_CTL_GO_BUSY);
-+    riscv_iommu_ctx_put(s, ref);
-+}
-+
- typedef void riscv_iommu_process_fn(RISCVIOMMUState *s);
- 
- static void riscv_iommu_update_icvec(RISCVIOMMUState *s, uint64_t data)
-@@ -1925,6 +1969,12 @@ static MemTxResult riscv_iommu_mmio_write(void *opaque, hwaddr addr,
- 
-         return MEMTX_OK;
- 
-+    case RISCV_IOMMU_REG_TR_REQ_CTL:
-+        process_fn = riscv_iommu_process_dbg;
-+        regb = RISCV_IOMMU_REG_TR_REQ_CTL;
-+        busy = RISCV_IOMMU_TR_REQ_CTL_GO_BUSY;
-+        break;
-+
-     default:
-         break;
-     }
-@@ -2062,6 +2112,9 @@ static void riscv_iommu_realize(DeviceState *dev, Error **errp)
-         s->cap |= RISCV_IOMMU_CAP_SV32X4 | RISCV_IOMMU_CAP_SV39X4 |
-                   RISCV_IOMMU_CAP_SV48X4 | RISCV_IOMMU_CAP_SV57X4;
-     }
-+    /* Enable translation debug interface */
-+    s->cap |= RISCV_IOMMU_CAP_DBG;
-+
-     /* Report QEMU target physical address space limits */
-     s->cap = set_field(s->cap, RISCV_IOMMU_CAP_PAS,
-                        TARGET_PHYS_ADDR_SPACE_BITS);
-@@ -2118,6 +2171,12 @@ static void riscv_iommu_realize(DeviceState *dev, Error **errp)
-     stl_le_p(&s->regs_wc[RISCV_IOMMU_REG_IPSR], ~0);
-     stl_le_p(&s->regs_ro[RISCV_IOMMU_REG_ICVEC], 0);
-     stq_le_p(&s->regs_rw[RISCV_IOMMU_REG_DDTP], s->ddtp);
-+    /* If debug registers enabled. */
-+    if (s->cap & RISCV_IOMMU_CAP_DBG) {
-+        stq_le_p(&s->regs_ro[RISCV_IOMMU_REG_TR_REQ_IOVA], 0);
-+        stq_le_p(&s->regs_ro[RISCV_IOMMU_REG_TR_REQ_CTL],
-+            RISCV_IOMMU_TR_REQ_CTL_GO_BUSY);
-+    }
- 
-     /* Memory region for downstream access, if specified. */
-     if (s->target_mr) {
--- 
-2.45.2
+Alistair
 
+> ---
+> Changes since v1:
+>         - Added reviewed-by tag
+>  target/riscv/csr.c | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
+>
+> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+> index bd080f92b5..69c41212e9 100644
+> --- a/target/riscv/csr.c
+> +++ b/target/riscv/csr.c
+> @@ -717,7 +717,7 @@ static RISCVException write_vxrm(CPURISCVState *env, =
+int csrno,
+>  static RISCVException read_vxsat(CPURISCVState *env, int csrno,
+>                                   target_ulong *val)
+>  {
+> -    *val =3D env->vxsat;
+> +    *val =3D env->vxsat & BIT(0);
+>      return RISCV_EXCP_NONE;
+>  }
+>
+> @@ -727,7 +727,7 @@ static RISCVException write_vxsat(CPURISCVState *env,=
+ int csrno,
+>  #if !defined(CONFIG_USER_ONLY)
+>      env->mstatus |=3D MSTATUS_VS;
+>  #endif
+> -    env->vxsat =3D val;
+> +    env->vxsat =3D val & BIT(0);
+>      return RISCV_EXCP_NONE;
+>  }
+>
+> --
+> 2.34.1
+>
+>
 
