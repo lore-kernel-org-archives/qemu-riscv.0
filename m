@@ -4,96 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AD803CF3199
-	for <qemu-riscv@archiver.kernel.org>; Wed,  2 Oct 2024 07:24:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 66543CF31A1
+	for <qemu-riscv@archiver.kernel.org>; Wed,  2 Oct 2024 08:45:47 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1svtiR-0001y4-Ow; Wed, 02 Oct 2024 03:24:07 -0400
+	id 1svuzI-0000t7-Uu; Wed, 02 Oct 2024 04:45:37 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <akihiko.odaki@daynix.com>)
- id 1svtiQ-0001xf-7S
- for qemu-riscv@nongnu.org; Wed, 02 Oct 2024 03:24:06 -0400
-Received: from mail-pg1-x534.google.com ([2607:f8b0:4864:20::534])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <akihiko.odaki@daynix.com>)
- id 1svtiO-0006GV-Eb
- for qemu-riscv@nongnu.org; Wed, 02 Oct 2024 03:24:05 -0400
-Received: by mail-pg1-x534.google.com with SMTP id
- 41be03b00d2f7-7c3e1081804so2991950a12.3
- for <qemu-riscv@nongnu.org>; Wed, 02 Oct 2024 00:24:03 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=daynix-com.20230601.gappssmtp.com; s=20230601; t=1727853843; x=1728458643;
- darn=nongnu.org; 
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=x+yNnlpwhiZpabLHZVwIMl3B7TF+vNXNQHUE0P2wfOQ=;
- b=Q0drN2Tg4QVwxwQs0W/luHpIE7lsU3NtmvoWVVjZaekzdfyLcJq+pp49fAXMl9UVUM
- wfUW6iposQ+wXX2uNwk3SpC1jLw6OrJTnSkuydNFsLN6ZZZcZSn/txHQdB4oIjdPGt5N
- K5QFWz41OwA0dxi1/c1F8X7F4qTyx9ILkTafF7iHe0nioBtryc+ppGrZ0EkZct5nfBla
- UjvARfhfal5SAJuRiDOcWu1MZQGgMRY56LF7ui8/YDKZNk7wOg8U6C4MtyzwCMTBeZZJ
- HFlbTwAv3QbRbOTDZ+XaKEsDvwnK/0b39ZxHJMvnwxqcqm6/+LzIv38k1te/hZYZeZOe
- rjJQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1727853843; x=1728458643;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=x+yNnlpwhiZpabLHZVwIMl3B7TF+vNXNQHUE0P2wfOQ=;
- b=DlY7gNyv8NCZ6sYGKu36mkIT4JINNh+i5ewIxxctBJ5kN2N06h8OPZNCKjY7Ecgk3g
- z5A31/uBCDyGix7XD2+AR6AA9J3zSoXsIIc8U1FkfmupP/dobZ9xB1QXnnNN3ImRKPIL
- 0wFRknnra30DdXzEKTDHR/5qiqacfRh+zfOVHInIMqTSSPMG5k31F67WxanhdLd10H2u
- 6Up2v41mUNCvkiM61Jy9UyDbxzIfS3YpveomDY3W8HAegmCSga6Xt76oToHGN8tm8nFq
- XkXBzjH9FZKF9SEcJECHPs80q4dzFCg3il4cZYGdy9PDXjFGG6kbFZpy5GZGMLqEq0lJ
- eVZQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXNbOAje1imr83NoBAZmV6HZsVtaL04a73UIk038X6yx5lDG9keUfyilPnStMLHj63wvRNXwVWizI8P@nongnu.org
-X-Gm-Message-State: AOJu0YyI8Nj+jlSCO8TbCMJRPvG77skdAY3+wdc8IYIJNJHYW1XwA8iP
- rNYbrOirn4JozwX4FYB0sR9wlWQyhkq0V9qyKp9Zzx+L3gp3XyfN6s4bTYCzdNo=
-X-Google-Smtp-Source: AGHT+IHbvGejo+5oIyKA5gHt58vzRnAOGfT6qHRGDbfW1PE5rsFN2OvLzLREZyAAw6hRDq3F+yrQYA==
-X-Received: by 2002:a05:6a21:2d8d:b0:1d2:e458:4063 with SMTP id
- adf61e73a8af0-1d5e2d9e263mr3185688637.33.1727853842686; 
- Wed, 02 Oct 2024 00:24:02 -0700 (PDT)
-Received: from [157.82.207.107] ([157.82.207.107])
- by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-71b2649a2c1sm9175411b3a.35.2024.10.02.00.23.56
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 02 Oct 2024 00:24:02 -0700 (PDT)
-Message-ID: <8a18ce67-8a38-4567-a903-38d5ef687b57@daynix.com>
-Date: Wed, 2 Oct 2024 16:23:55 +0900
+ (Exim 4.90_1) (envelope-from <evgenii.prokopiev@syntacore.com>)
+ id 1svuzB-0000np-7W; Wed, 02 Oct 2024 04:45:29 -0400
+Received: from mta-03.yadro.com ([89.207.88.253])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <evgenii.prokopiev@syntacore.com>)
+ id 1svuz8-0006VT-Rr; Wed, 02 Oct 2024 04:45:28 -0400
+DKIM-Filter: OpenDKIM Filter v2.11.0 mta-03.yadro.com 820F0E0002
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=syntacore.com;
+ s=mta-04; t=1727858720;
+ bh=YWgp+nUhRuaUeTwcZgW6/CrX71g4ZWUTBkPmFsdMynw=;
+ h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type:From;
+ b=QXpi7L0TcC1uYJCZYcZwvfJSeLapKzg99981wVcFutFw1U/CVPi2szQoh6WJ3Cs+N
+ 2jyreiYwrtt9pNyFwb0tFHgLz9aA0gP6MPnNcAcdCG6/oTMjseDnBDCHJkjyfsl+4A
+ 2arATOWEq4qiY6LQMMKtM0t//gyIql2qaXswyZdmBggdJ91KR3ZyBpfbQLxjdHDLNC
+ xgDUdIJ0wrJQYwomaE5bnyOZEocZLYmrz2SOc4DHIEhc2PMqGxRHxhx1OpLcBtHNez
+ WYZauhpaj6vI2uLdlx/ox0KN/Fo+yyk8feM71pVgDwBEeOR7I431QfB4leiKG8CqHj
+ tC2chnO5kIzmA==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=syntacore.com;
+ s=mta-03; t=1727858720;
+ bh=YWgp+nUhRuaUeTwcZgW6/CrX71g4ZWUTBkPmFsdMynw=;
+ h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type:From;
+ b=GHWVYnE2hikWZkvLULnz3ELdeqhCUlaxkK65K9CQqO79084Ps194NMn5sDNQJTq8d
+ se9HEl6q1XQpgiOnuB7A8TCJY0ilqGpcoXvsImIPihqeB0m6yJ9E2ZdVae32USR4RG
+ TNPlTGt+UNEsJqtf/k/3SDig4LTCzaZDGJyH8oVKV7JH9lcH+PbLvcjYILToLLNr8f
+ EhFpPM6dCzS2YvGGr9gmb2WC7lQk7QrM164Yh+dJxqEcVnMe+t4+7/iskfAVSw0sy1
+ 6DoGMoOUDZBZDNUt5hxg77Jxty1Em0uxXDufzljCHwhHHHkHDWl3acvA6wYHkdEzQI
+ 7dpB0rT0fF4VQ==
+From: Evgenii Prokopiev <evgenii.prokopiev@syntacore.com>
+To: <alistair23@gmail.com>
+CC: <alistair.francis@wdc.com>, <bmeng.cn@gmail.com>,
+ <dbarboza@ventanamicro.com>, <evgenii.prokopiev@syntacore.com>,
+ <liwei1518@gmail.com>, <palmer@dabbelt.com>, <qemu-devel@nongnu.org>,
+ <qemu-riscv@nongnu.org>, <zhiwei_liu@linux.alibaba.com>
+Subject: [PATCH v3] target/riscv/csr.c: Fix an access to VXSAT
+Date: Wed, 2 Oct 2024 11:44:36 +0300
+Message-ID: <20241002084436.89347-1-evgenii.prokopiev@syntacore.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <CAKmqyKMmYPG0_jyrJFxvnxhTGTCAz4L5Lf6FouZpy3ZtywNiGA@mail.gmail.com>
+References: <CAKmqyKMmYPG0_jyrJFxvnxhTGTCAz4L5Lf6FouZpy3ZtywNiGA@mail.gmail.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 03/14] ui/cocoa: Adds non-app runloop on main thread
- mode
-To: Phil Dennis-Jordan <phil@philjordan.eu>, qemu-devel@nongnu.org
-Cc: agraf@csgraf.de, peter.maydell@linaro.org, pbonzini@redhat.com,
- rad@semihalf.com, quic_llindhol@quicinc.com, marcin.juszkiewicz@linaro.org,
- stefanha@redhat.com, mst@redhat.com, slp@redhat.com,
- richard.henderson@linaro.org, eduardo@habkost.net,
- marcel.apfelbaum@gmail.com, gaosong@loongson.cn, jiaxun.yang@flygoat.com,
- chenhuacai@kernel.org, kwolf@redhat.com, hreitz@redhat.com,
- philmd@linaro.org, shorne@gmail.com, palmer@dabbelt.com,
- alistair.francis@wdc.com, bmeng.cn@gmail.com, liwei1518@gmail.com,
- dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com, jcmvbkbc@gmail.com,
- marcandre.lureau@redhat.com, berrange@redhat.com, qemu-arm@nongnu.org,
- qemu-block@nongnu.org, qemu-riscv@nongnu.org
-References: <20240928085727.56883-1-phil@philjordan.eu>
- <20240928085727.56883-4-phil@philjordan.eu>
-Content-Language: en-US
-From: Akihiko Odaki <akihiko.odaki@daynix.com>
-In-Reply-To: <20240928085727.56883-4-phil@philjordan.eu>
-Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: none client-ip=2607:f8b0:4864:20::534;
- envelope-from=akihiko.odaki@daynix.com; helo=mail-pg1-x534.google.com
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_NONE=0.001 autolearn=unavailable autolearn_force=no
+Content-Type: text/plain
+X-ClientProxiedBy: T-EXCH-09.corp.yadro.com (172.17.11.59) To
+ T-EXCH-12.corp.yadro.com (172.17.11.143)
+Received-SPF: permerror client-ip=89.207.88.253;
+ envelope-from=evgenii.prokopiev@syntacore.com; helo=mta-03.yadro.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_VALIDITY_CERTIFIED_BLOCKED=0.001, RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001,
+ SPF_HELO_NONE=0.001, T_SPF_PERMERROR=0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -109,31 +80,48 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 2024/09/28 17:57, Phil Dennis-Jordan wrote:
-> Various system frameworks on macOS and other Apple platforms
-> require a main runloop to be processing events on the process’s
-> main thread. The Cocoa UI’s requirement to run the process as a
-> Cocoa application automatically enables this runloop, but it
-> can be useful to have the runloop handling events even without
-> the Cocoa UI active.
-> 
-> This change adds a non-app runloop mode to the cocoa_main
-> function. This can be requested by other code, while the Cocoa UI
-> additionally enables app mode. This arrangement ensures there is
-> only one qemu_main function switcheroo, and the Cocoa UI’s app
-> mode requirement and other subsystems’ runloop requests don’t
-> conflict with each other.
+The register VXSAT should be RW only to the first bit.
+The remaining bits should be 0.
 
-gtk and sdl need to run in the main thread so stealing the main thread 
-by setting qemu_main will break them. Please investigate the possibility 
-of running CFRunLoop in another thread.
+The RISC-V Instruction Set Manual Volume I: Unprivileged Architecture
 
-> 
-> The main runloop is required for the AppleGFX PV graphics device,
-> so the runloop request call has been added to its initialisation.
+The vxsat CSR has a single read-write least-significant bit (vxsat[0])
+that indicates if a fixed-point instruction has had to saturate an output
+value to fit into a destination format. Bits vxsat[XLEN-1:1]
+should be written as zeros.
 
-Please move this patch before any other patches that require it.
+Signed-off-by: Evgenii Prokopiev <evgenii.prokopiev@syntacore.com>
+Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+---
+Changes since v2:
+    - Added reviewed-by tag
+ target/riscv/csr.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-Regards,
-Akihiko Odaki
+diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+index bd080f92b5..69c41212e9 100644
+--- a/target/riscv/csr.c
++++ b/target/riscv/csr.c
+@@ -717,7 +717,7 @@ static RISCVException write_vxrm(CPURISCVState *env, int csrno,
+ static RISCVException read_vxsat(CPURISCVState *env, int csrno,
+                                  target_ulong *val)
+ {
+-    *val = env->vxsat;
++    *val = env->vxsat & BIT(0);
+     return RISCV_EXCP_NONE;
+ }
+ 
+@@ -727,7 +727,7 @@ static RISCVException write_vxsat(CPURISCVState *env, int csrno,
+ #if !defined(CONFIG_USER_ONLY)
+     env->mstatus |= MSTATUS_VS;
+ #endif
+-    env->vxsat = val;
++    env->vxsat = val & BIT(0);
+     return RISCV_EXCP_NONE;
+ }
+ 
+-- 
+2.34.1
+
 
