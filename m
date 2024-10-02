@@ -4,62 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2E5D8CF6D2C
-	for <qemu-riscv@archiver.kernel.org>; Wed,  2 Oct 2024 13:58:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 97C36CF6D2C
+	for <qemu-riscv@archiver.kernel.org>; Wed,  2 Oct 2024 13:58:19 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1svzr9-0007Iu-Mt; Wed, 02 Oct 2024 09:57:31 -0400
+	id 1svzr9-0007JF-QZ; Wed, 02 Oct 2024 09:57:32 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <paolo.savini@embecosm.com>)
- id 1svzqx-0007F8-86
- for qemu-riscv@nongnu.org; Wed, 02 Oct 2024 09:57:23 -0400
-Received: from mail-ej1-x62f.google.com ([2a00:1450:4864:20::62f])
+ id 1svzqv-0007Eo-UL
+ for qemu-riscv@nongnu.org; Wed, 02 Oct 2024 09:57:17 -0400
+Received: from mail-lf1-x12d.google.com ([2a00:1450:4864:20::12d])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <paolo.savini@embecosm.com>)
- id 1svzqv-0003XE-LX
- for qemu-riscv@nongnu.org; Wed, 02 Oct 2024 09:57:19 -0400
-Received: by mail-ej1-x62f.google.com with SMTP id
- a640c23a62f3a-a8ce5db8668so1155606766b.1
- for <qemu-riscv@nongnu.org>; Wed, 02 Oct 2024 06:57:16 -0700 (PDT)
+ id 1svzqt-0003Wa-JD
+ for qemu-riscv@nongnu.org; Wed, 02 Oct 2024 09:57:17 -0400
+Received: by mail-lf1-x12d.google.com with SMTP id
+ 2adb3069b0e04-53997328633so4801879e87.3
+ for <qemu-riscv@nongnu.org>; Wed, 02 Oct 2024 06:57:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=embecosm.com; s=google; t=1727877436; x=1728482236; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=dBJVgoGbVEBWCKNsYWowDSG5FlAgb+PmFPWTiOzZRq8=;
- b=cuFnPkRk4qJHhcbZwWPqeUddItysQQUi5grPE3vl1JeeuYexphDGxu4tkpP2VBdFle
- dWG3ZSLqzDEm867cnJGQeXRtubsCsSf74R3wSPHmGeJcEGvuM+kTYsf5yPTKI/k/J2Vu
- GTM8pxOnnWlmX9XS+i+OOTTME7TdY2FuevemquX73brmlJlO20CtHkBZPt5UlD9vWfQ9
- 3KaeIBCl36PLH1GlNEIbKm2b7uEx/TvWLH3ywCnQLHgR6glwqxm/prMZR24cFVGEFjgc
- JsNIRcI5lO+0tVbzyWQy2pNhtEDjYQXFneXY9NfJMik7aKSiT7sKwWjfQn2bXKKSUu+n
- lKqQ==
+ d=embecosm.com; s=google; t=1727877432; x=1728482232; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=W2qnYyllQATbKabq15eZV8KBacEwjWblY8OQUHuJ92s=;
+ b=Yk+Ho58GTr9HzpKLb31aWYz3AY3RXj/65hfDkepjQ4laja7gsKfh7ahEE0TVBO39Um
+ Um6hDDKdWdkeyhIgL9egPeALz1Z80RuJH+AJnIhXyXaJWIsRaWYUV2WXxVJX+6kiKB9F
+ TB0mno4RhaaqE6Iv3YfmpfU2vPf9zFFeD1++fAqri5bDJTpYjl2tSFGxj2+hbJWDRcoJ
+ kmSMps1zyfh1UpXhupJa5yvFW9pLmY/H9fSLgdDQVbrjxHef30C3zro8vfhCvl6sYBGz
+ opoFQ6pPekNk5uV/s473WPI+QLhWbwKCaT5yPDK7k4+RDK4lf0G3u7fLV7M2yO99ZqGX
+ c7lQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1727877436; x=1728482236;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=dBJVgoGbVEBWCKNsYWowDSG5FlAgb+PmFPWTiOzZRq8=;
- b=gI2H6NmrwuxbdnunbbzJt0lFqGYp9QgYb0uVTAOK5q3L+vjNquJvZCsazIt2oTH4da
- nQJ2m499650U1a8/U3nH9WkM2d6t19HWmLaS1DFLv+BnFyZ112kXRorm6vtCQrilscOZ
- 7/Zz5TiSwxPQk4Op8QN5iFabZ+7NA+qQfqpnPwwbgFlqozIEiOik6vaitinV5Lc57Eb4
- cAhWTQo9j1mxCC7zRf+RI1c30PHq/0CCY0DOPdD0f8HPKyWsGxDWQNf9nxQ/hYfuxg/y
- 1IJw/AA4afHrFTvicLGFYd0pVJvtKOt4voqG7+Ktun6OjH9WxYPGvBfXIQpRT00sfGGo
- EmsQ==
+ d=1e100.net; s=20230601; t=1727877432; x=1728482232;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=W2qnYyllQATbKabq15eZV8KBacEwjWblY8OQUHuJ92s=;
+ b=T7EP3S1zbM3bbdad50lXj+cj9/tfTL1ANjqWqJ2jh7kHqKigvIDV87xucfJzvAHMfG
+ +pWkKCdQvH61Y5c0f/vUBaw7W1fXnErCPsRl27omckUX/w2Cw4owMsVpF8HDDox/vSEU
+ KMFIOIb/AZhyaitE7pnmKHN36so9R3iZthXfK+yKrcVESHdjCqME4YKfR7pQYFvOnTVO
+ 3UM97vxVwkubjiDrcvGs9UJ6du/dqjo3PuAw5WjeRBqk5mAFjlojfH7MfPKMD12LDie1
+ SYoENQHUkLo/bgeMRQtfidKpVFWwAna+8EM6+lXEw8xX0REFuUKokHMgrzI7yS0gy30d
+ HnSA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVkfz6KdItiH2cceXMn3ser0Tl3BEhd89zWVyv2k/GX/ssj8zL/bszlcFXyRcxqOaK9WKJCUN1zkUq+@nongnu.org
-X-Gm-Message-State: AOJu0YwKpMU/UyvdMhUfdZuOMUVDtMzWyMkW4xUIZq6RLn4iHd8VVRID
- 3vQrvSwenddt7Ins2+uZJIyRnKhOjaiL30VxYHH5WOI30T/QOeuLQYsg6FenqS0=
-X-Google-Smtp-Source: AGHT+IGVrRNaX3N4Uh0UxUnYWKoPCTGvCx05N/H4p7a6zbGPRvniW83vmxJP3sNMLJbGtnS7ZLqIaw==
-X-Received: by 2002:a17:907:989:b0:a7a:a892:8e05 with SMTP id
- a640c23a62f3a-a98f8269b77mr336659866b.33.1727877435666; 
- Wed, 02 Oct 2024 06:57:15 -0700 (PDT)
+ AJvYcCU/qvljcmqYqhj8CnTePX5q6zCWLDr0oYvRHQqP1lJw76UykQLH5UQ+MKmmhbMZZGq3sG9cVG2FIkWs@nongnu.org
+X-Gm-Message-State: AOJu0YxewH3YnDo3NK0hVvLXhn/rMkubESRdn3WYiPgn4KsMjzlJQwiF
+ bmGZbBFW+DcoPL/tUpP9uCMQAQppKucbLKqLA77s3xZrAWn60hh0njl94RMNUZA=
+X-Google-Smtp-Source: AGHT+IGLBequ+PB+kzbbB5UlSsfsWZ6bUSYQUpdeza6js8WJKS38eNl+Vh61jFmqnJrWTaiSq2Xtgw==
+X-Received: by 2002:a05:6512:b9c:b0:533:4505:5b2a with SMTP id
+ 2adb3069b0e04-539a067ae19mr3027015e87.28.1727877431690; 
+ Wed, 02 Oct 2024 06:57:11 -0700 (PDT)
 Received: from paolo-laptop-amd.sou.embecosm-corp.com ([212.69.42.53])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a93c299ac8esm869975266b.222.2024.10.02.06.57.14
+ a640c23a62f3a-a93c299ac8esm869975266b.222.2024.10.02.06.57.10
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 02 Oct 2024 06:57:15 -0700 (PDT)
+ Wed, 02 Oct 2024 06:57:11 -0700 (PDT)
 From: Paolo Savini <paolo.savini@embecosm.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
@@ -72,24 +71,22 @@ Cc: Paolo Savini <paolo.savini@embecosm.com>,
  Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
  Helene Chelin <helene.chelin@embecosm.com>, Nathan Egge <negge@google.com>,
  Max Chou <max.chou@sifive.com>
-Subject: [RFC v2 1/2] target/riscv: rvv: reduce the overhead for simple RISC-V
- vector unit-stride loads and stores
-Date: Wed,  2 Oct 2024 14:57:07 +0100
-Message-ID: <20241002135708.99146-2-paolo.savini@embecosm.com>
+Subject: [RFC v2 0/2] target/riscv: use a simplified loop to emulate rvv
+ loads/stores only in user mode.
+Date: Wed,  2 Oct 2024 14:57:06 +0100
+Message-ID: <20241002135708.99146-1-paolo.savini@embecosm.com>
 X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20241002135708.99146-1-paolo.savini@embecosm.com>
-References: <20241002135708.99146-1-paolo.savini@embecosm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::62f;
- envelope-from=paolo.savini@embecosm.com; helo=mail-ej1-x62f.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::12d;
+ envelope-from=paolo.savini@embecosm.com; helo=mail-lf1-x12d.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -105,85 +102,39 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Helene CHELIN <helene.chelin@embecosm.com>
+The new version of the patch addresses the suggestion given by Richard Handerson
+here:
 
-This patch improves the performance of the emulation of the RVV unit-stride
-loads and stores in the following cases:
+https://patchew.org/QEMU/20240717153040.11073-1-paolo.savini@embecosm.com/20240717153040.11073-2-paolo.savini@embecosm.com/#aff5f930-d291-4ff5-8f24-53291059d59a@linaro.org
 
-- when the data being loaded/stored per iteration amounts to 8 bytes or less.
-- when the vector length is 16 bytes (VLEN=128) and there's no grouping of the
-  vector registers (LMUL=1).
+about the ineffectiveness of the optimization of the load/store loop for small
+vector and data sizes when QEMU is in system mode.
 
-The optimization consists of avoiding the overhead of probing the RAM of the
-host machine and doing a loop load/store on the input data grouped in chunks
-of as many bytes as possible (8,4,2,1 bytes).
+Changes:
+- Wrap the optimization of simple RISC-V vector unit-stride loads and stores into a user mode configuration directive.
 
-Co-authored-by: Helene CHELIN <helene.chelin@embecosm.com>
-Co-authored-by: Paolo Savini <paolo.savini@embecosm.com>
+Cc: Richard Handerson <richard.henderson@linaro.org>
+Cc: Palmer Dabbelt <palmer@dabbelt.com>
+Cc: Alistair Francis <alistair.francis@wdc.com>
+Cc: Bin Meng <bmeng.cn@gmail.com>
+Cc: Weiwei Li <liwei1518@gmail.com>
+Cc: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Cc: Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
+Cc: Helene Chelin <helene.chelin@embecosm.com>
+Cc: Nathan Egge <negge@google.com>
+Cc: Max Chou <max.chou@sifive.com>
 
-Signed-off-by: Helene CHELIN <helene.chelin@embecosm.com>
----
- target/riscv/vector_helper.c | 46 ++++++++++++++++++++++++++++++++++++
- 1 file changed, 46 insertions(+)
+Helene CHELIN (1):
+  target/riscv: rvv: reduce the overhead for simple RISC-V vector
+    unit-stride loads and stores
 
-diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
-index 29849a8b66..4b444c6bc5 100644
---- a/target/riscv/vector_helper.c
-+++ b/target/riscv/vector_helper.c
-@@ -633,6 +633,52 @@ vext_ldst_us(void *vd, target_ulong base, CPURISCVState *env, uint32_t desc,
- 
-     VSTART_CHECK_EARLY_EXIT(env);
- 
-+    /* For data sizes <= 64 bits and for LMUL=1 with VLEN=128 bits we get a
-+     * better performance by doing a simple simulation of the load/store
-+     * without the overhead of prodding the host RAM */
-+    if ((nf == 1) && ((evl << log2_esz) <= 8 ||
-+	((vext_lmul(desc) == 0) && (simd_maxsz(desc) == 16)))) {
-+
-+	uint32_t evl_b = evl << log2_esz;
-+
-+        for (uint32_t j = env->vstart; j < evl_b;) {
-+	    addr = base + j;
-+            if ((evl_b - j) >= 8) {
-+                if (is_load)
-+                    lde_d_tlb(env, adjust_addr(env, addr), j, vd, ra);
-+                else
-+                    ste_d_tlb(env, adjust_addr(env, addr), j, vd, ra);
-+                j += 8;
-+            }
-+            else if ((evl_b - j) >= 4) {
-+                if (is_load)
-+                    lde_w_tlb(env, adjust_addr(env, addr), j, vd, ra);
-+                else
-+                    ste_w_tlb(env, adjust_addr(env, addr), j, vd, ra);
-+                j += 4;
-+            }
-+            else if ((evl_b - j) >= 2) {
-+                if (is_load)
-+                    lde_h_tlb(env, adjust_addr(env, addr), j, vd, ra);
-+                else
-+                    ste_h_tlb(env, adjust_addr(env, addr), j, vd, ra);
-+                j += 2;
-+            }
-+            else {
-+                if (is_load)
-+                    lde_b_tlb(env, adjust_addr(env, addr), j, vd, ra);
-+                else
-+                    ste_b_tlb(env, adjust_addr(env, addr), j, vd, ra);
-+                j += 1;
-+            }
-+        }
-+
-+        env->vstart = 0;
-+        vext_set_tail_elems_1s(evl, vd, desc, nf, esz, max_elems);
-+        return;
-+    }
-+
-+
-     vext_cont_ldst_elements(&info, base, env->vreg, env->vstart, evl, desc,
-                             log2_esz, false);
-     /* Probe the page(s).  Exit with exception for any invalid page. */
+Paolo Savini (1):
+  target/riscv: use a simplified loop to emulate rvv loads/stores only in user mode.
+
+ target/riscv/vector_helper.c | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
 -- 
-2.17.1
+2.34.1
 
 
