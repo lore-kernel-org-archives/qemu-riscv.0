@@ -4,82 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 56774CF34BC
-	for <qemu-riscv@archiver.kernel.org>; Thu,  3 Oct 2024 18:35:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A4974CF34BC
+	for <qemu-riscv@archiver.kernel.org>; Thu,  3 Oct 2024 18:35:41 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1swQej-0007N5-54; Thu, 03 Oct 2024 14:34:29 -0400
+	id 1swQeq-0007UG-02; Thu, 03 Oct 2024 14:34:36 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <debug@rivosinc.com>)
- id 1swQeA-0007Am-EZ
- for qemu-riscv@nongnu.org; Thu, 03 Oct 2024 14:33:55 -0400
-Received: from mail-pj1-x1034.google.com ([2607:f8b0:4864:20::1034])
+ id 1swQeW-0007Gv-Kv
+ for qemu-riscv@nongnu.org; Thu, 03 Oct 2024 14:34:19 -0400
+Received: from mail-pj1-x1033.google.com ([2607:f8b0:4864:20::1033])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <debug@rivosinc.com>)
- id 1swQe8-0004rr-FP
- for qemu-riscv@nongnu.org; Thu, 03 Oct 2024 14:33:54 -0400
-Received: by mail-pj1-x1034.google.com with SMTP id
- 98e67ed59e1d1-2e0be1afa85so1168496a91.1
- for <qemu-riscv@nongnu.org>; Thu, 03 Oct 2024 11:33:52 -0700 (PDT)
+ id 1swQeU-0005EP-No
+ for qemu-riscv@nongnu.org; Thu, 03 Oct 2024 14:34:16 -0400
+Received: by mail-pj1-x1033.google.com with SMTP id
+ 98e67ed59e1d1-2e09ff2d890so1179931a91.0
+ for <qemu-riscv@nongnu.org>; Thu, 03 Oct 2024 11:34:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1727980431; x=1728585231;
+ d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1727980453; x=1728585253;
  darn=nongnu.org; 
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Ga7R1uOAlM8Z9Av05EldzmqrBkl0NtrIogEPK+RuKUk=;
- b=lBRT49IA3LXwEFnFocLNhZM3AT3f+EFVIrPTA3bGK+RDS6mGXagnRoFRqVXDudsK3K
- ZpxW4dDRmujHSd6T9OpEeZrG7EtuzNP6LtjYybYxcMgVZwlAA+KdII1xjs+vS7jy4zdn
- usNDjpJciXYQJyecTAdBv3mMbM+iwb/5ciTa/Xs+9Qp4+ECT10jk4TlmS08kxU4d6XD5
- nYfo909j6qaqOhWuCSQZ1aussKmdqrLjFGpBspHEKyAL5ZU302spkuctJM4SHZmygGRl
- WFlF6pSYx+2Iym3143sau/oA9PhvonnneVvBEA4BQEU2eUaaZuBT9TisKrDEC+CZ/Y/u
- pRog==
+ bh=FLg+s4rzz0OrmKj4UlRhD/WmbjGBPBMHWdNHXxUKfXo=;
+ b=h6+LPAAuNvcSmlP5une64fccS7ki+WCv0YLCNvm7ZLMIqLOPs0Vhs7pyaZTV4FaQa3
+ YMo0Ggs2lRDQGeCh5FSX1SogUuMlWH2BQfImhfojs9x0VTMFjm4/DwuYvD0Kz8+tTtV7
+ shINP/33pDuwQFH32yieXLuF7Y9vYuK9dneSRAv3zA2895ROsMIWsudvu7t5R5GxNFmj
+ MZHoUVFXSnA6WyZSzPhcAW8c0H34sYjz2yrNV2YCePja5Zfx/Mw9uZtTCI5ltYj9v8Tr
+ Gdkc4xzsTIeIaoSzAW+zxAXRy/g0PYx/1ntNoedi6Bh7/E/QMkpbrIpkf+5ayGbZqsev
+ hs9A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1727980431; x=1728585231;
+ d=1e100.net; s=20230601; t=1727980453; x=1728585253;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Ga7R1uOAlM8Z9Av05EldzmqrBkl0NtrIogEPK+RuKUk=;
- b=seChJKiiZSdj33VcXzQLU7tHWDoU3k3FqE+trb1b48SCjKeYu9jlcWoukg0A2aKTe5
- 3A0CV2/ohlvYJoiXBPy8wj64w8XSy1htfORGQay+tZnLLAK0GwjiTzlP6sbxf09bc5Ih
- 3/sIwnrgkd0yzxvh/LgooViYvrb8pZNVu5xx51v2EYjPr3mPQeYLYrrRtGP3wE2bYPQD
- 7p5exMhQBYQ93CFW6zkAJ3r9YbkKVUAKef8SzblqfpCNAq2f4hf8ZyhZT2ii1obPJlb2
- q87nRwfOhM13iU5b/XhCQGWEsCEi+1+YceVwj3Vpy3q8aG6i6aRwDQ9P3kdJNkACuLf1
- 0jFQ==
-X-Gm-Message-State: AOJu0YzGr6tWNVWByoUYpya8OLc5P5Kwq7bz4l9oC6AMnTVJCs25+cve
- zvNXhRuJfrd+z0hLqyZI8KEOFkoW+D7OgNE7dr7OD8qdbXB7TGppG5L3YVZLgrDzbsTTD14PoeS
- i
-X-Google-Smtp-Source: AGHT+IF54j41JqIA1gur7GUMri/mExrvSeD7cCdSD1oE69Cle4dttu9c9CJNprDpld1dLKzt3DBedA==
-X-Received: by 2002:a17:90a:43c4:b0:2c9:7ebd:b957 with SMTP id
- 98e67ed59e1d1-2e1e621e54bmr46944a91.11.1727980431005; 
- Thu, 03 Oct 2024 11:33:51 -0700 (PDT)
+ bh=FLg+s4rzz0OrmKj4UlRhD/WmbjGBPBMHWdNHXxUKfXo=;
+ b=MPiQN6kszszAPWg08vyPok4WSPcwLGCuhS2ttgX/YQLzSlTNpBYUvBXlAmyXoQRebh
+ 8KVV0EhPZrsPWnZuQzTeBvNlF6tNdgQzO/DkHBa8qDwbH79QnLCwuGpigmVfk0ZHEjkA
+ a9hcHDX0Zpb5ryt/kWRs4MvrG8lJ/ug4r6qZ2MVjUOKfowDNSD3chibpGiOPm4Z+BAgr
+ CCZKeXx4B5T2lBDb1nXT3ED5BKnG11al+OPrqxCxNuNRX9kQ5tvv9rtvrW2lHQxZFVMK
+ B1Qv6ilUgYooIGV8ee6wzu6eg3iBiULuGa9ReeCeuz/XtwRmEaGzVfBjWtwjdeskmtHK
+ 5r1g==
+X-Gm-Message-State: AOJu0YzT5zFZgazb5J8LKA/jIS1pHw0AQVUvTn6fzmU15snurkmLBZbJ
+ 0TK6WkjbAwHUyVmRU7mnmZ32UpE3Naz30rPTBgf7YcOwbswN0Q8FXs3JGZxE2Lv4CC4XZO1Br6w
+ j
+X-Google-Smtp-Source: AGHT+IGghkKfjhtfw/7Ya0wwQsYcJUQXH/502s+XSigzNqPRmRPZNhuXRh5HVvt6mT+XGiAdh7jMoQ==
+X-Received: by 2002:a17:90b:4b85:b0:2e0:7012:335a with SMTP id
+ 98e67ed59e1d1-2e1e620e121mr49150a91.6.1727980452948; 
+ Thu, 03 Oct 2024 11:34:12 -0700 (PDT)
 Received: from debug.ba.rivosinc.com ([64.71.180.162])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-20beefad16asm11796245ad.193.2024.10.03.11.33.49
+ d9443c01a7336-20beefad16asm11796245ad.193.2024.10.03.11.34.12
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 03 Oct 2024 11:33:50 -0700 (PDT)
+ Thu, 03 Oct 2024 11:34:12 -0700 (PDT)
 From: Deepak Gupta <debug@rivosinc.com>
 To: qemu-riscv@nongnu.org,
 	qemu-devel@nongnu.org
 Cc: palmer@dabbelt.com, Alistair.Francis@wdc.com, bmeng.cn@gmail.com,
  liwei1518@gmail.com, dbarboza@ventanamicro.com,
  zhiwei_liu@linux.alibaba.com, jim.shu@sifive.com, kito.cheng@sifive.com,
- Deepak Gupta <debug@rivosinc.com>, Andy Chiu <andy.chiu@sifive.com>,
- Richard Henderson <richard.henderson@linaro.org>,
+ Deepak Gupta <debug@rivosinc.com>,
  Alistair Francis <alistair.francis@wdc.com>
-Subject: [PATCH v15 03/21] target/riscv: Introduce elp state and enabling
- controls for zicfilp
-Date: Thu,  3 Oct 2024 11:33:24 -0700
-Message-ID: <20241003183342.679249-4-debug@rivosinc.com>
+Subject: [PATCH v15 21/21] target/riscv: Expose zicfiss extension as a cpu
+ property
+Date: Thu,  3 Oct 2024 11:33:42 -0700
+Message-ID: <20241003183342.679249-22-debug@rivosinc.com>
 X-Mailer: git-send-email 2.45.0
 In-Reply-To: <20241003183342.679249-1-debug@rivosinc.com>
 References: <20241003183342.679249-1-debug@rivosinc.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1034;
- envelope-from=debug@rivosinc.com; helo=mail-pj1-x1034.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1033;
+ envelope-from=debug@rivosinc.com; helo=mail-pj1-x1033.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -101,254 +100,24 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-zicfilp introduces a new state elp ("expected landing pad") in cpu.
-During normal execution, elp is idle (NO_LP_EXPECTED) i.e not expecting
-landing pad. On an indirect call, elp moves LP_EXPECTED. When elp is
-LP_EXPECTED, only a subsquent landing pad instruction can set state back
-to NO_LP_EXPECTED. On reset, elp is set to NO_LP_EXPECTED.
-
-zicfilp is enabled via bit2 in *envcfg CSRs. Enabling control for M-mode
-is in mseccfg CSR at bit position 10.
-
-On trap, elp state is saved away in *status.
-Adds elp to the migration state as well.
-
 Signed-off-by: Deepak Gupta <debug@rivosinc.com>
-Co-developed-by: Jim Shu <jim.shu@sifive.com>
-Co-developed-by: Andy Chiu <andy.chiu@sifive.com>
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 ---
- target/riscv/cpu.c      |  3 +++
- target/riscv/cpu.h      |  2 ++
- target/riscv/cpu_bits.h |  6 ++++++
- target/riscv/csr.c      | 31 +++++++++++++++++++++++++++++++
- target/riscv/machine.c  | 19 +++++++++++++++++++
- target/riscv/pmp.c      |  5 +++++
- target/riscv/pmp.h      |  3 ++-
- 7 files changed, 68 insertions(+), 1 deletion(-)
+ target/riscv/cpu.c | 1 +
+ 1 file changed, 1 insertion(+)
 
 diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index b7201a69df..05f727222e 100644
+index ac5ad6fa9d..0751d08d85 100644
 --- a/target/riscv/cpu.c
 +++ b/target/riscv/cpu.c
-@@ -1010,6 +1010,9 @@ static void riscv_cpu_reset_hold(Object *obj, ResetType type)
-     env->menvcfg = 0;
- #endif
- 
-+    /* on reset elp is clear */
-+    env->elp = false;
-+
-     env->xl = riscv_cpu_mxl(env);
-     riscv_cpu_update_mask(env);
-     cs->exception_index = RISCV_EXCP_NONE;
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index 2623f6cf75..e9f26b5121 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -230,6 +230,8 @@ struct CPUArchState {
- 
-     target_ulong jvt;
- 
-+    /* elp state for zicfilp extension */
-+    bool      elp;
- #ifdef CONFIG_USER_ONLY
-     uint32_t elf_flags;
- #endif
-diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
-index 7e3f629356..8df6043ef1 100644
---- a/target/riscv/cpu_bits.h
-+++ b/target/riscv/cpu_bits.h
-@@ -552,6 +552,8 @@
- #define MSTATUS_TVM         0x00100000 /* since: priv-1.10 */
- #define MSTATUS_TW          0x00200000 /* since: priv-1.10 */
- #define MSTATUS_TSR         0x00400000 /* since: priv-1.10 */
-+#define MSTATUS_SPELP       0x00800000 /* zicfilp */
-+#define MSTATUS_MPELP       0x020000000000 /* zicfilp */
- #define MSTATUS_GVA         0x4000000000ULL
- #define MSTATUS_MPV         0x8000000000ULL
- 
-@@ -582,6 +584,7 @@ typedef enum {
- #define SSTATUS_XS          0x00018000
- #define SSTATUS_SUM         0x00040000 /* since: priv-1.10 */
- #define SSTATUS_MXR         0x00080000
-+#define SSTATUS_SPELP       MSTATUS_SPELP   /* zicfilp */
- 
- #define SSTATUS64_UXL       0x0000000300000000ULL
- 
-@@ -754,6 +757,7 @@ typedef enum RISCVException {
- 
- /* Execution environment configuration bits */
- #define MENVCFG_FIOM                       BIT(0)
-+#define MENVCFG_LPE                        BIT(2) /* zicfilp */
- #define MENVCFG_CBIE                       (3UL << 4)
- #define MENVCFG_CBCFE                      BIT(6)
- #define MENVCFG_CBZE                       BIT(7)
-@@ -767,11 +771,13 @@ typedef enum RISCVException {
- #define MENVCFGH_STCE                      BIT(31)
- 
- #define SENVCFG_FIOM                       MENVCFG_FIOM
-+#define SENVCFG_LPE                        MENVCFG_LPE
- #define SENVCFG_CBIE                       MENVCFG_CBIE
- #define SENVCFG_CBCFE                      MENVCFG_CBCFE
- #define SENVCFG_CBZE                       MENVCFG_CBZE
- 
- #define HENVCFG_FIOM                       MENVCFG_FIOM
-+#define HENVCFG_LPE                        MENVCFG_LPE
- #define HENVCFG_CBIE                       MENVCFG_CBIE
- #define HENVCFG_CBCFE                      MENVCFG_CBCFE
- #define HENVCFG_CBZE                       MENVCFG_CBZE
-diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-index ea3560342c..57cef9e682 100644
---- a/target/riscv/csr.c
-+++ b/target/riscv/csr.c
-@@ -1598,6 +1598,11 @@ static RISCVException write_mstatus(CPURISCVState *env, int csrno,
-         }
-     }
- 
-+    /* If cfi lp extension is available, then apply cfi lp mask */
-+    if (env_archcpu(env)->cfg.ext_zicfilp) {
-+        mask |= (MSTATUS_MPELP | MSTATUS_SPELP);
-+    }
-+
-     mstatus = (mstatus & ~mask) | (val & mask);
- 
-     env->mstatus = mstatus;
-@@ -2344,6 +2349,10 @@ static RISCVException write_menvcfg(CPURISCVState *env, int csrno,
-         mask |= (cfg->ext_svpbmt ? MENVCFG_PBMTE : 0) |
-                 (cfg->ext_sstc ? MENVCFG_STCE : 0) |
-                 (cfg->ext_svadu ? MENVCFG_ADUE : 0);
-+
-+        if (env_archcpu(env)->cfg.ext_zicfilp) {
-+            mask |= MENVCFG_LPE;
-+        }
-     }
-     env->menvcfg = (env->menvcfg & ~mask) | (val & mask);
- 
-@@ -2396,6 +2405,10 @@ static RISCVException write_senvcfg(CPURISCVState *env, int csrno,
-         return ret;
-     }
- 
-+    if (env_archcpu(env)->cfg.ext_zicfilp) {
-+        mask |= SENVCFG_LPE;
-+    }
-+
-     env->senvcfg = (env->senvcfg & ~mask) | (val & mask);
-     return RISCV_EXCP_NONE;
- }
-@@ -2433,6 +2446,10 @@ static RISCVException write_henvcfg(CPURISCVState *env, int csrno,
- 
-     if (riscv_cpu_mxl(env) == MXL_RV64) {
-         mask |= env->menvcfg & (HENVCFG_PBMTE | HENVCFG_STCE | HENVCFG_ADUE);
-+
-+        if (env_archcpu(env)->cfg.ext_zicfilp) {
-+            mask |= HENVCFG_LPE;
-+        }
-     }
- 
-     env->henvcfg = (env->henvcfg & ~mask) | (val & mask);
-@@ -2897,6 +2914,10 @@ static RISCVException read_sstatus_i128(CPURISCVState *env, int csrno,
-         mask |= SSTATUS64_UXL;
-     }
- 
-+    if (env_archcpu(env)->cfg.ext_zicfilp) {
-+        mask |= SSTATUS_SPELP;
-+    }
-+
-     *val = int128_make128(sstatus, add_status_sd(MXL_RV128, sstatus));
-     return RISCV_EXCP_NONE;
- }
-@@ -2908,6 +2929,11 @@ static RISCVException read_sstatus(CPURISCVState *env, int csrno,
-     if (env->xl != MXL_RV32 || env->debugger) {
-         mask |= SSTATUS64_UXL;
-     }
-+
-+    if (env_archcpu(env)->cfg.ext_zicfilp) {
-+        mask |= SSTATUS_SPELP;
-+    }
-+
-     /* TODO: Use SXL not MXL. */
-     *val = add_status_sd(riscv_cpu_mxl(env), env->mstatus & mask);
-     return RISCV_EXCP_NONE;
-@@ -2923,6 +2949,11 @@ static RISCVException write_sstatus(CPURISCVState *env, int csrno,
-             mask |= SSTATUS64_UXL;
-         }
-     }
-+
-+    if (env_archcpu(env)->cfg.ext_zicfilp) {
-+        mask |= SSTATUS_SPELP;
-+    }
-+
-     target_ulong newval = (env->mstatus & ~mask) | (val & mask);
-     return write_mstatus(env, CSR_MSTATUS, newval);
- }
-diff --git a/target/riscv/machine.c b/target/riscv/machine.c
-index 492c2c6d9d..c3a06c288d 100644
---- a/target/riscv/machine.c
-+++ b/target/riscv/machine.c
-@@ -350,6 +350,24 @@ static const VMStateDescription vmstate_jvt = {
-     }
- };
- 
-+static bool elp_needed(void *opaque)
-+{
-+    RISCVCPU *cpu = opaque;
-+
-+    return cpu->cfg.ext_zicfilp;
-+}
-+
-+static const VMStateDescription vmstate_elp = {
-+    .name = "cpu/elp",
-+    .version_id = 1,
-+    .minimum_version_id = 1,
-+    .needed = elp_needed,
-+    .fields = (const VMStateField[]) {
-+        VMSTATE_BOOL(env.elp, RISCVCPU),
-+        VMSTATE_END_OF_LIST()
-+    }
-+};
-+
- const VMStateDescription vmstate_riscv_cpu = {
-     .name = "cpu",
-     .version_id = 10,
-@@ -422,6 +440,7 @@ const VMStateDescription vmstate_riscv_cpu = {
-         &vmstate_debug,
-         &vmstate_smstateen,
-         &vmstate_jvt,
-+        &vmstate_elp,
-         NULL
-     }
- };
-diff --git a/target/riscv/pmp.c b/target/riscv/pmp.c
-index 9eea397e72..1111d08d08 100644
---- a/target/riscv/pmp.c
-+++ b/target/riscv/pmp.c
-@@ -598,6 +598,11 @@ void mseccfg_csr_write(CPURISCVState *env, target_ulong val)
-         val &= ~(MSECCFG_MMWP | MSECCFG_MML | MSECCFG_RLB);
-     }
- 
-+    /* M-mode forward cfi to be enabled if cfi extension is implemented */
-+    if (env_archcpu(env)->cfg.ext_zicfilp) {
-+        val |= (val & MSECCFG_MLPE);
-+    }
-+
-     env->mseccfg = val;
- }
- 
-diff --git a/target/riscv/pmp.h b/target/riscv/pmp.h
-index f5c10ce85c..e0530a17a3 100644
---- a/target/riscv/pmp.h
-+++ b/target/riscv/pmp.h
-@@ -44,7 +44,8 @@ typedef enum {
-     MSECCFG_MMWP  = 1 << 1,
-     MSECCFG_RLB   = 1 << 2,
-     MSECCFG_USEED = 1 << 8,
--    MSECCFG_SSEED = 1 << 9
-+    MSECCFG_SSEED = 1 << 9,
-+    MSECCFG_MLPE =  1 << 10,
- } mseccfg_field_t;
- 
- typedef struct {
+@@ -1473,6 +1473,7 @@ const RISCVCPUMultiExtConfig riscv_cpu_extensions[] = {
+     MULTI_EXT_CFG_BOOL("smcntrpmf", ext_smcntrpmf, false),
+     MULTI_EXT_CFG_BOOL("zifencei", ext_zifencei, true),
+     MULTI_EXT_CFG_BOOL("zicfilp", ext_zicfilp, false),
++    MULTI_EXT_CFG_BOOL("zicfiss", ext_zicfiss, false),
+     MULTI_EXT_CFG_BOOL("zicsr", ext_zicsr, true),
+     MULTI_EXT_CFG_BOOL("zihintntl", ext_zihintntl, true),
+     MULTI_EXT_CFG_BOOL("zihintpause", ext_zihintpause, true),
 -- 
 2.45.0
 
