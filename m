@@ -4,87 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B032BCF34BC
-	for <qemu-riscv@archiver.kernel.org>; Thu,  3 Oct 2024 18:38:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AD418CF34BC
+	for <qemu-riscv@archiver.kernel.org>; Thu,  3 Oct 2024 18:40:33 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1swQes-0007X0-Q7; Thu, 03 Oct 2024 14:34:38 -0400
+	id 1swQkT-0006CU-QX; Thu, 03 Oct 2024 14:40:25 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <debug@rivosinc.com>)
- id 1swQeO-0007Fw-T8
- for qemu-riscv@nongnu.org; Thu, 03 Oct 2024 14:34:11 -0400
-Received: from mail-pj1-x1033.google.com ([2607:f8b0:4864:20::1033])
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1swQkN-0006A1-Da
+ for qemu-riscv@nongnu.org; Thu, 03 Oct 2024 14:40:19 -0400
+Received: from mail-pf1-x42f.google.com ([2607:f8b0:4864:20::42f])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <debug@rivosinc.com>)
- id 1swQeK-000530-6v
- for qemu-riscv@nongnu.org; Thu, 03 Oct 2024 14:34:07 -0400
-Received: by mail-pj1-x1033.google.com with SMTP id
- 98e67ed59e1d1-2e09fe0a878so1000716a91.1
- for <qemu-riscv@nongnu.org>; Thu, 03 Oct 2024 11:33:59 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1swQkL-00075O-66
+ for qemu-riscv@nongnu.org; Thu, 03 Oct 2024 14:40:18 -0400
+Received: by mail-pf1-x42f.google.com with SMTP id
+ d2e1a72fcca58-71afb729f24so1103922b3a.0
+ for <qemu-riscv@nongnu.org>; Thu, 03 Oct 2024 11:40:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1727980438; x=1728585238;
- darn=nongnu.org; 
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=suiGAQRfyMh8K1b9uLibp1VRaeCHB9aUrAtUyQNMeEg=;
- b=zrLfwGKXi+nNj+Bo3S33T5c3mrUAX+V3B7ju9taGPq3H0TsnC5O/CyHFyzLzMOb89M
- 5VYrSRm47ISZkG+fiV1wckI48371/nD2JreI7ggXE+EH/b8IChT36EZZSzF36ETGv7Hh
- ijyfjCiZFWGiWoN7HbTjkHcJD7aYLd5F0OlPg/hU5SsSPoPBRCzkjwRjItloGyg/lt1/
- qaPVmTALRPKDLBx7XDFlCg9vQ5okKvrxl4WLN6/iNVPHSaAZyBPeUvLBPFQkHwi+cwZd
- snwZazOu4PXPTRZDBUcdHRYfH1OAAOO1etc2Hs3Ze9MMw4yfCjhqFM+vugW970DU1cIG
- nD9Q==
+ d=linaro.org; s=google; t=1727980816; x=1728585616; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=2fkMoD0i9taLeZEjrUv4HUb+iox9NK53uddLKBBo2XE=;
+ b=FS6nqf/EMAKlL6UMvKU8qiY7fwKcaxxhcaWXd5mNZLXIg3pRkNd23DRCVNs9B/ofPP
+ y6Y4dKxQiecFWApJUyUjQyl1tBVtGLl0sLNhgC+zOPSjaQD1ADFe3MeUXbivqA/jBdND
+ QR5jWZ9tXwBAKJpGzpJ9bE8v+sRuboYFrxKH7EOcSQTC4ja/xbArpUWKPApBltB+tDr+
+ 07qC8Ve7hFHQcjrZDda+BOEP8JZOURFzEgKozOZJIRLvnJ1o+Nm2nkFHlt1sGNoBN9wc
+ QSZgaQsA0TbP1edGshI7O4SzDM/WR+u5XbgJK7Uu5N2gcS+gSxGS6tl/pHJYoKpP1gIH
+ xC7Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1727980438; x=1728585238;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=suiGAQRfyMh8K1b9uLibp1VRaeCHB9aUrAtUyQNMeEg=;
- b=oXGkKPEbxQdHJUvJlU4PeEPuadO8uo2qpY1XQhoPV+Y1w0kycuXqEvDEcZJSaK98BF
- ya6/7oCE2HR7Zj1csq8K3UcXLucFZMVbkP06q46Q4ufvobHqKzPaId4x5m3i1UCChoGj
- DawTZENWG6tf8uj1copr5c4KCvZLl95P0Y2HTTMBaXZ2d5e6wui5FqKAXap/0TcFS5e4
- 4sh8FZN+VBmP2QseYCBpaNdzq4W59UCUHTb1tO4vj+tsOOPbHtdgjCc5cxTwCagca+Ao
- /djnKVlW2uUo5JUdiqAvt1t3xgUotHXVJP/n96TfilvOd9lgwSXpfPPlTr6WMapCd/2d
- jOYA==
-X-Gm-Message-State: AOJu0YxJXQAXYInQpESqZKF3NCEtQg540MW77Rb6fVqnbWMHVWj5N3uC
- rFhcFR9CkuUBxy+iUIUCe8flgM82NEPcpGWy3G840R0lA5OYAgqRzV+VAZMjlekBM6nYr/xtK+6
- 1
-X-Google-Smtp-Source: AGHT+IGu6xa6xK2N0k9ZkJnnMIgCKP/MwQyL6iUOi/wkwbe5gApewvrZ3r6kPyDDRw3D89yXMlfV5A==
-X-Received: by 2002:a17:90a:e60e:b0:2d3:c976:dd80 with SMTP id
- 98e67ed59e1d1-2e1e63c0000mr15147a91.39.1727980438448; 
- Thu, 03 Oct 2024 11:33:58 -0700 (PDT)
-Received: from debug.ba.rivosinc.com ([64.71.180.162])
+ d=1e100.net; s=20230601; t=1727980816; x=1728585616;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=2fkMoD0i9taLeZEjrUv4HUb+iox9NK53uddLKBBo2XE=;
+ b=B7V+Bva84QVMPjuCBTer269Io2S9tAjNb9JmiJfm+ft9SUwE/tb+o2bB1UJWHEcd3d
+ Et97gl90RCo5L2GZdNEG0r+MknEGu/peP9xZc6iljJToZBmi0JFk5l++JsQKGihEXp2b
+ kOIP2W2AaQJExYNEei56hiIlWt2Ge9W+qFNkyF8wvzzOIW2KawjVpvJ00decOraAS98H
+ 0O25M0lgTMxnuFu43lK++D7q6h5EEzQR2v3RjjSUq/wY76DUAz7jfc7N8j/zw3mbT/lj
+ 28TjcmAMuEKRrej2DY4KGSdqJJW9CO+wfxWwyr4ffUx8TjC2mmzaPGAboReal/ak6mBq
+ oHGw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVOMEp8q50+h3qMIAtdDtejn7a2ng7f7rYLiJbJJ/rER5xRolxLreuXWQjCpetdpGbS/ZFGG5+DDj1J@nongnu.org
+X-Gm-Message-State: AOJu0Yz3MCkSWlfKiJ7xkDB1m/5q2K3QMuE9rzgdUA0LOD3pciu3Pd4A
+ q0nwB9s61XWo9+/9D9K5hT1UokR8FgwxSO0pcO3Y3aBKSFHq4Isc5wYfpXsoHrg=
+X-Google-Smtp-Source: AGHT+IHPrfoFmJfxRdMnQa1fizFfUp4Z4DbduIgNHmu8NlYDjDZabKfVgF9CzvwSNFw261SU60j8zg==
+X-Received: by 2002:a05:6a00:4b52:b0:714:1fc3:79fb with SMTP id
+ d2e1a72fcca58-71de22dd687mr193130b3a.0.1727980815598; 
+ Thu, 03 Oct 2024 11:40:15 -0700 (PDT)
+Received: from [192.168.0.4] (174-21-81-121.tukw.qwest.net. [174.21.81.121])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-20beefad16asm11796245ad.193.2024.10.03.11.33.57
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 03 Oct 2024 11:33:58 -0700 (PDT)
-From: Deepak Gupta <debug@rivosinc.com>
-To: qemu-riscv@nongnu.org,
-	qemu-devel@nongnu.org
-Cc: palmer@dabbelt.com, Alistair.Francis@wdc.com, bmeng.cn@gmail.com,
- liwei1518@gmail.com, dbarboza@ventanamicro.com,
- zhiwei_liu@linux.alibaba.com, jim.shu@sifive.com, kito.cheng@sifive.com,
- Deepak Gupta <debug@rivosinc.com>,
- Alistair Francis <alistair.francis@wdc.com>
-Subject: [PATCH v15 09/21] target/riscv: Expose zicfilp extension as a cpu
- property
-Date: Thu,  3 Oct 2024 11:33:30 -0700
-Message-ID: <20241003183342.679249-10-debug@rivosinc.com>
-X-Mailer: git-send-email 2.45.0
-In-Reply-To: <20241003183342.679249-1-debug@rivosinc.com>
-References: <20241003183342.679249-1-debug@rivosinc.com>
+ d2e1a72fcca58-71dd9ddeee5sm1685558b3a.106.2024.10.03.11.40.14
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 03 Oct 2024 11:40:15 -0700 (PDT)
+Message-ID: <ec6ed202-f67c-402a-9abc-19c31f03ec8d@linaro.org>
+Date: Thu, 3 Oct 2024 11:40:12 -0700
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1033;
- envelope-from=debug@rivosinc.com; helo=mail-pj1-x1033.google.com
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 1/1] target/riscv: enable floating point unit
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bmeng.cn@gmail.com>
+Cc: Weiwei Li <liwei1518@gmail.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Andrew Jones <ajones@ventanamicro.com>,
+ Peter Maydell <peter.maydell@linaro.org>, qemu-riscv@nongnu.org,
+ qemu-devel@nongnu.org, kvm-riscv@lists.infradead.org
+References: <20240925061704.12440-1-heinrich.schuchardt@canonical.com>
+Content-Language: en-US
+From: Richard Henderson <richard.henderson@linaro.org>
+In-Reply-To: <20240925061704.12440-1-heinrich.schuchardt@canonical.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::42f;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pf1-x42f.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -100,25 +104,32 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Signed-off-by: Deepak Gupta <debug@rivosinc.com>
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
----
- target/riscv/cpu.c | 1 +
- 1 file changed, 1 insertion(+)
+On 9/24/24 23:17, Heinrich Schuchardt wrote:
+> The status and mstatus CSRs contain bit field FS, which control if the
+> floating point unit of RISC-V hart is enabled.
+> 
+> There seems to be no specification prescribing the value of the field when
+> entering S-mode from M-mode. But OpenSBI, as the leading SBI M-mode
+> firmware, has set a precedent by enabling the FPU by setting the value of
+> FS to 3 (dirty).
+> 
+> In TCG mode, QEMU uses OpenSBI by default. Users can reasonably expect that
+> software running QEMU in TCG mode and in KVM mode behaves similarly.
+> 
+> When QEMU in KVM mode creates a vCPU, Linux' KVM code sets FS=1 (initial)
+> in kvm_riscv_vcpu_fp_reset(). However, QEMU internally keeps a value of
+> FS=0 (off) and then synchronizes this value into KVM. Thus VS-mode software
+> is invoked with a disabled floating point unit.
 
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 05f727222e..135559fc95 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -1469,6 +1469,7 @@ const RISCVCPUMultiExtConfig riscv_cpu_extensions[] = {
-     MULTI_EXT_CFG_BOOL("sscofpmf", ext_sscofpmf, false),
-     MULTI_EXT_CFG_BOOL("smcntrpmf", ext_smcntrpmf, false),
-     MULTI_EXT_CFG_BOOL("zifencei", ext_zifencei, true),
-+    MULTI_EXT_CFG_BOOL("zicfilp", ext_zicfilp, false),
-     MULTI_EXT_CFG_BOOL("zicsr", ext_zicsr, true),
-     MULTI_EXT_CFG_BOOL("zihintntl", ext_zihintntl, true),
-     MULTI_EXT_CFG_BOOL("zihintpause", ext_zihintpause, true),
--- 
-2.45.0
+This suggests that qemu is incorrectly syncing the registers from kvm at vcpu startup.
 
+> +    if (riscv_has_ext(env, RVF) || riscv_has_ext(env, RVD)) {
+> +        env->mstatus = set_field(env->mstatus, MSTATUS_FS, env->misa_mxl);
+
+Storing misa_mxl here is wrong.  That's '1' for rv32 and '2' for rv64.
+You want a single constant value, either '1' (initial) or '2' (clean).
+ From the kvm source, initial seems preferable.
+
+
+r~
 
