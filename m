@@ -4,87 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 68BEDCF34AD
-	for <qemu-riscv@archiver.kernel.org>; Thu,  3 Oct 2024 13:32:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0750BCF34BE
+	for <qemu-riscv@archiver.kernel.org>; Thu,  3 Oct 2024 18:34:24 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1swLw4-0003Wj-92; Thu, 03 Oct 2024 09:32:04 -0400
+	id 1swQeK-0007BI-6b; Thu, 03 Oct 2024 14:34:05 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1swLvw-00031a-Vt
- for qemu-riscv@nongnu.org; Thu, 03 Oct 2024 09:31:58 -0400
-Received: from mail-wm1-x330.google.com ([2a00:1450:4864:20::330])
+ (Exim 4.90_1) (envelope-from <debug@rivosinc.com>)
+ id 1swQe8-00079k-EF
+ for qemu-riscv@nongnu.org; Thu, 03 Oct 2024 14:33:52 -0400
+Received: from mail-pl1-x62d.google.com ([2607:f8b0:4864:20::62d])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1swLvt-0006Nq-Jv
- for qemu-riscv@nongnu.org; Thu, 03 Oct 2024 09:31:56 -0400
-Received: by mail-wm1-x330.google.com with SMTP id
- 5b1f17b1804b1-42cae4eb026so9575065e9.0
- for <qemu-riscv@nongnu.org>; Thu, 03 Oct 2024 06:31:50 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <debug@rivosinc.com>)
+ id 1swQe5-0004qu-K2
+ for qemu-riscv@nongnu.org; Thu, 03 Oct 2024 14:33:52 -0400
+Received: by mail-pl1-x62d.google.com with SMTP id
+ d9443c01a7336-20b9b35c7c3so13149105ad.3
+ for <qemu-riscv@nongnu.org>; Thu, 03 Oct 2024 11:33:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1727962308; x=1728567108; darn=nongnu.org;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=F9cOXpNhSmBifNEyV/bBsyxBMVGRUf/psW3BKjgVN30=;
- b=Oz1+mYa91cYyx4WqyrR2Ayc4ChITEm0Bw2eUeuQtqlTmKZ7xv8jE70JnyR0WCyDXbL
- 5yhedo7jZ1KAqO+5dZysTZZ1m7MjQK2QnF2Hh6VrZKCImZQdinYzvDSCKA1XJFdkTPLW
- y1h7Ta1b89DhDnvezlaZMZHpcJEYSe5VxxFuVOoTk4eHMwThk14dd3DHvTKI2xVas426
- nLgXWmrLXvEcGrykYFAyHpyosTrfY93nnER7LP0xZj+XBDUjAxvcf1KA4TU/1patOayy
- hzPiTF5nuyAokDU4e9+elvd4Fyxp3uBvPjzDjC67UHuSHUXi3p1aZJeM3/ej5bDaq3hj
- CAVQ==
+ d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1727980427; x=1728585227;
+ darn=nongnu.org; 
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=0bfeDVPBZSmp2+YS83iZFQ1P4nx4twWjptbvaC9FnRY=;
+ b=RDZ5ce8VjPHYufLlh4mqcY6ffZKCCgFt9u0p8/dSSRJmvSW1T/q5D72rGx8dHyk/TD
+ 1DLjILidlFP6g98DIDM2Pj+JMzl+bCKcAijzMOlrBvyI+UuTYzmtgzPenrrI1kgjdNjM
+ SAOCKSiS++6gxcrO8pIznrRRrgflnK6hr4RJA/+LSnz6b0jtYvEFb0WmlHW/Ix7W+0Ze
+ 1yWcVA3g5nsNOiIu942o3EVlX57SHifHyGZ0FPfk8dzKJAfw3jcqSiM5Y8iCUQjYqP0z
+ F9/KNSfruh4wD4j/e8Vv3vx0gfACAAIZOKNHemzbbAhXlEd+IVQcMj0jS2K9xu0iXolw
+ psWQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1727962308; x=1728567108;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=F9cOXpNhSmBifNEyV/bBsyxBMVGRUf/psW3BKjgVN30=;
- b=vDo9pnsrbkZ7+L8rZDAz+csXBCzK9GvVmOhNZgcKQl0OJ1pjWcArcBeWQTjATVgp2b
- zlXI1TzSScRkKnqxk4yw/zsBxxeipZX/MPg7PlKmVuhW8++KcObJZSBpRDiSIc83Q69E
- thRHbgcOuxdaoPN+I7uIGvSaBbHO98OvYByGoIKwuGUFT3Ve42Y+Jw9szyBKzp0I6+H3
- FCFzz7bhu2k0mJXCVEJ36xeOHqORpYu5uNY8Ztl3awGh26Dedb+8Yne4+P4szjZMDJc7
- ISSlWuW6pKiVsPFMPplLYNXBHdtPEf5HthVuW+r2Dj085BO4xbdITMhQthLSLrdRA5p+
- GF5Q==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUNpxuK0/T/52upCRdbvEcCVkGvwqp2JLxAmK7O3kNgepBkJEuFBjr1ZF3/QMyxo1nBui8KDEEfmLHr@nongnu.org
-X-Gm-Message-State: AOJu0Yw1z3068LsoQ2t8qTAQJ3e/4WaGubYrLqbK5tQ1mmbYl1UobLn4
- MH2gPxlI4/dRLb297g4dEqrR17Lw/AmZORJL8tAlqqdDRi1BxXKBnJlDkroVkAo=
-X-Google-Smtp-Source: AGHT+IGJmAISL+dKwgLSNoTCm5TjYgEQYsuTea/TcfdXlz6huTi7P2+8RHZ3GwjvxHq7KKUij2mmxg==
-X-Received: by 2002:adf:a791:0:b0:37c:ccdf:a2e3 with SMTP id
- ffacd0b85a97d-37cfb9d0f43mr3607978f8f.33.1727962307705; 
- Thu, 03 Oct 2024 06:31:47 -0700 (PDT)
-Received: from localhost (cst2-173-13.cust.vodafone.cz. [31.30.173.13])
+ d=1e100.net; s=20230601; t=1727980427; x=1728585227;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=0bfeDVPBZSmp2+YS83iZFQ1P4nx4twWjptbvaC9FnRY=;
+ b=PuUVJsOvoNkULyEiWDf1R0oletjnc/RkuTQoJ0KkiYqWXEgc7XmWlbGr6LG7kM8QLz
+ vccOZpIu0tViRUZsNVShMSK3plT9SqHhRRyhQtwU4DXY8Zqt5TExhX8KZBPwgoSoj+uT
+ 6/saL3Zv0apjpCRLWEJVffWqGCPjrJCvMkhstfGCxQwPHwB9DCGQtTvlNAdKKRC1WLQ6
+ 0yTXLCC/0gr+tkHn5UGWmIVlufYivPKY2VUkIvuD0x7mT2+Ohzph2kTC9fAAbGIjs7Kz
+ 3jEWy3elWQhiy5JKbMCTiJbuOeITppIBKDgUce0NhK1kA7WINVtr9VErfJL3kitBxqQm
+ EaaQ==
+X-Gm-Message-State: AOJu0YwBAhnroQl1YEUbhlwxBk4x9JBdSJd/Mxw4VrU3L0Zv6fmkI2iC
+ ijmtKKAoKkE1lZChWTD5zOp2AeqwjkFjQ/+eUL0U4OLHcyEdZrNUDNtj/p9d9+YzL4Q/DBsaL2Q
+ 7
+X-Google-Smtp-Source: AGHT+IHsljXce6llMyx2ID95OCmfQhStjlvfsMqpMIFv5FfxqYNYd4gv5PmIgACDWh6rDTL9ddQu4Q==
+X-Received: by 2002:a17:903:32c1:b0:20b:58f2:e1a0 with SMTP id
+ d9443c01a7336-20bfdfd4340mr1893385ad.18.1727980427259; 
+ Thu, 03 Oct 2024 11:33:47 -0700 (PDT)
+Received: from debug.ba.rivosinc.com ([64.71.180.162])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-37d082e6f35sm1270467f8f.113.2024.10.03.06.31.46
+ d9443c01a7336-20beefad16asm11796245ad.193.2024.10.03.11.33.46
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 03 Oct 2024 06:31:47 -0700 (PDT)
-Date: Thu, 3 Oct 2024 15:31:46 +0200
-From: Andrew Jones <ajones@ventanamicro.com>
-To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
- bmeng@tinylab.org, liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, 
- palmer@rivosinc.com, peter.maydell@linaro.org,
- Tomasz Jeznach <tjeznach@rivosinc.com>, Sebastien Boeuf <seb@rivosinc.com>
-Subject: Re: [PATCH v8 03/12] hw/riscv: add RISC-V IOMMU base emulation
-Message-ID: <20241003-bd98395898af6d83eeef0be4@orel>
-References: <20241002010314.1928515-1-dbarboza@ventanamicro.com>
- <20241002010314.1928515-4-dbarboza@ventanamicro.com>
- <20241003-c10c27e0855533db764a1490@orel>
- <7c5f0fce-fc66-4fca-90be-aa2d4f7a4b04@ventanamicro.com>
+ Thu, 03 Oct 2024 11:33:46 -0700 (PDT)
+From: Deepak Gupta <debug@rivosinc.com>
+To: qemu-riscv@nongnu.org,
+	qemu-devel@nongnu.org
+Cc: palmer@dabbelt.com, Alistair.Francis@wdc.com, bmeng.cn@gmail.com,
+ liwei1518@gmail.com, dbarboza@ventanamicro.com,
+ zhiwei_liu@linux.alibaba.com, jim.shu@sifive.com, kito.cheng@sifive.com,
+ Deepak Gupta <debug@rivosinc.com>
+Subject: [PATCH v15 00/21] riscv support for control flow integrity extensions
+Date: Thu,  3 Oct 2024 11:33:21 -0700
+Message-ID: <20241003183342.679249-1-debug@rivosinc.com>
+X-Mailer: git-send-email 2.45.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <7c5f0fce-fc66-4fca-90be-aa2d4f7a4b04@ventanamicro.com>
-Received-SPF: pass client-ip=2a00:1450:4864:20::330;
- envelope-from=ajones@ventanamicro.com; helo=mail-wm1-x330.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::62d;
+ envelope-from=debug@rivosinc.com; helo=mail-pl1-x62d.google.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -100,148 +95,178 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Thu, Oct 03, 2024 at 10:06:11AM GMT, Daniel Henrique Barboza wrote:
-> 
-> 
-> On 10/3/24 6:26 AM, Andrew Jones wrote:
-> > On Tue, Oct 01, 2024 at 10:02:58PM GMT, Daniel Henrique Barboza wrote:
-> > ...
-> > > +/*
-> > > + * RISCV IOMMU Address Translation Lookup - Page Table Walk
-> > > + *
-> > > + * Note: Code is based on get_physical_address() from target/riscv/cpu_helper.c
-> > > + * Both implementation can be merged into single helper function in future.
-> > > + * Keeping them separate for now, as error reporting and flow specifics are
-> > > + * sufficiently different for separate implementation.
-> > > + *
-> > > + * @s        : IOMMU Device State
-> > > + * @ctx      : Translation context for device id and process address space id.
-> > > + * @iotlb    : translation data: physical address and access mode.
-> > > + * @return   : success or fault cause code.
-> > > + */
-> > > +static int riscv_iommu_spa_fetch(RISCVIOMMUState *s, RISCVIOMMUContext *ctx,
-> > > +    IOMMUTLBEntry *iotlb)
-> > > +{
-> > > +    dma_addr_t addr, base;
-> > > +    uint64_t satp, gatp, pte;
-> > > +    bool en_s, en_g;
-> > > +    struct {
-> > > +        unsigned char step;
-> > > +        unsigned char levels;
-> > > +        unsigned char ptidxbits;
-> > > +        unsigned char ptesize;
-> > > +    } sc[2];
-> > > +    /* Translation stage phase */
-> > > +    enum {
-> > > +        S_STAGE = 0,
-> > > +        G_STAGE = 1,
-> > > +    } pass;
-> > > +    MemTxResult ret;
-> > > +
-> > > +    satp = get_field(ctx->satp, RISCV_IOMMU_ATP_MODE_FIELD);
-> > > +    gatp = get_field(ctx->gatp, RISCV_IOMMU_ATP_MODE_FIELD);
-> > > +
-> > > +    en_s = satp != RISCV_IOMMU_DC_FSC_MODE_BARE;
-> > > +    en_g = gatp != RISCV_IOMMU_DC_IOHGATP_MODE_BARE;
-> > > +
-> > > +    /*
-> > > +     * Early check for MSI address match when IOVA == GPA. This check
-> > > +     * is required to ensure MSI translation is applied in case
-> > > +     * first-stage translation is set to BARE mode. In this case IOVA
-> > > +     * provided is a valid GPA. Running translation through page walk
-> > > +     * second stage translation will incorrectly try to translate GPA
-> > > +     * to host physical page, likely hitting IOPF.
-> > > +     */
-> > 
-> > Why was this comment expanded from the simple
-> > 
-> > "Early check for MSI address match when IOVA == GPA."
-> > 
-> > The comment is now incorrect since the check is required even when
-> > first-stage translation is not BARE. I just skimmed the spec again trying
-> > to figure out if the removal of '!en_s' is a hack or a fix, and I'm
-> > inclined to say "fix", but it's an incomplete fix. I found a sentence that
-> > says
-> > 
-> > "If the virtual memory scheme selected for first-stage is Bare but the
-> > scheme for the second-stage is not Bare then the IOVA is a GPA."
-> > 
-> > which, in a way, defines a GPA to only be a GPA when second-stage is used
-> > (and all MSI translation specifications refer to GPAs). However, maybe I
-> > missed it, but I couldn't find any actual reason that the MSI table can't
-> > be used when first-stage is not BARE and second-stage is (and, of course,
-> > it makes no difference for single-stage translations to call IOVAs GPAs
-> > or not).
-> > 
-> > Now, I also see
-> > 
-> > "If the virtual memory scheme selected for neither stage is Bare then the
-> > IOVA is a VA. Two-stage address translation is in effect. The first-stage
-> > translates the VA to a GPA and the second-stage translates the GPA to a
-> > SPA."
-> > 
-> > in the spec, which means we should probably change the removal of '!en_s'
-> > to '!(en_s && en_g)'. VFIO+irqbypass would still work with that and, when
-> > Linux learns to support two-stage translation, we wouldn't incorrectly try
-> > to check for a GVA in the MSI table.
-> 
-> Ok. It seems to me that we can't rely on the riscv-iommu spec alone to let
-> us know how to detect if IOVA == GPA, given that one of the main usages
-> we have ATM (VFIO irqbypass) will use GPAs with S-stage enabled.
-> 
-> (Note: shouldn't we open a bug against the riscv-iommu spec?)
-> 
+v15 for riscv zicfilp and zicfiss extensions support in qemu.
 
-I can try writing a sentence or two for the spec to clarify this and send
-a PR.
+I've rebased again on https://github.com/alistair23/qemu/blob/riscv-to-apply.next
+(tag: pull-riscv-to-apply-20241002)
 
-> I like the idea of ruling out the case where IOVA == VA since that is clear
-> in the spec. We also know that MSI entries will always contains GPAs.
-> 
-> This is the change I'm going to make in v9:
-> 
-> 
->     /*
->      * Early check for MSI address match when IOVA == GPA to
->      * support VFIO+irqbypass. The riscv-iommu spec doesn't
->      * consider the case where a GPA can be produced by S-stage
->      * only, but we have real life examples like Linux VFIO that
->      * work that way. The spec alone does not provide a reliable
->      * way of detecting if IOVA == GPA.
->      *
->      * The spec is clear about what is a VA: "If the virtual
->      * memory scheme selected for neither stage is Bare then
->      * the IOVA is a VA", in our case "(en_s && en_g)". We also
->      * know that MSI tables will always hold GPAs.
->      *
->      * Thus the check consists of ruling out VAs and checking
->      * the MSI table.
->      */
->     if (!(en_s && en_g) && (iotlb->perm & IOMMU_WO) &&
->         riscv_iommu_msi_check(s, ctx, iotlb->iova)) {
->         iotlb->target_as = &s->trap_as;
->         iotlb->translated_addr = iotlb->iova;
->         iotlb->addr_mask = ~TARGET_PAGE_MASK;
->         return 0;
->     }
+There is an additional patch in this with comment title
+"target/riscv: disallow probe accesses to shadow stack"
 
-LGTM
+cache block operations of clean, flush and inval have store semantics.
+These operations on shadow stack must look like regular stores and must
+always raise store/AMO access fault. However with current logic,
+`probe_access_flags` will succeed because it will be seen as a load.
+In order to prevent that `get_physical_address` must receive `probe`
+parameter. Depending on that parameter, `get_physical_address` can return
+TRANSLATE_PMP_FAIL.
 
-Thanks,
-drew
+In v15, this is created as a new commit so that we can review and discuss
+it out and placed this next to below commit.
+"target/riscv: mmu changes for zicfiss shadow stack protection"
 
-> 
-> Tomasz, let me know if you have any opinions against it. I intend to send
-> the v9 start of next week.
-> 
-> 
-> Thanks,
-> 
-> 
-> Daniel
-> 
-> 
-> > 
-> > Thanks,
-> > drew
+If this looks good, eventually I'll squash both the commits.
+
+zicfilp and zicfiss spec pdf
+----------------------------
+https://github.com/riscv/riscv-cfi/releases/download/v1.0/riscv-cfi.pdf
+
+github sources to spec
+https://github.com/riscv/riscv-cfi
+
+
+Links for previous versions
+[1] - v1 https://lists.nongnu.org/archive/html/qemu-devel/2024-07/msg06017.html
+[2] - v2 https://lore.kernel.org/all/ed23bcbc-fdc4-4492-803c-daa95880375a@linaro.org/T/
+[3] - v3 https://lists.nongnu.org/archive/html/qemu-devel/2024-08/msg01005.html
+[4] - v4 https://lore.kernel.org/all/20240816010711.3055425-6-debug@rivosinc.com/T/
+[5] - v5
++https://lore.kernel.org/all/20240820000129.3522346-1-debug@rivosinc.com/T/#m7b9cc847e739ec86f9569a3ca9f3d9377b01e21
+[6] - v6 https://mail.gnu.org/archive/html/qemu-riscv/2024-08/msg00418.html
+[7] - v7 https://lore.kernel.org/all/20240822082504.3979610-1-debug@rivosinc.com/
+[8] - v8 https://lore.kernel.org/all/20240823190140.4156920-1-debug@rivosinc.com/T/
+[9] - v9 https://lore.kernel.org/all/20240826152949.294506-1-debug@rivosinc.com/
+[10]- v10 https://lore.kernel.org/all/20240827231906.553327-1-debug@rivosinc.com/
+[11]- v11 https://lore.kernel.org/all/20240828174739.714313-1-debug@rivosinc.com/
+[12]- v12 https://lore.kernel.org/all/20240829233425.1005029-1-debug@rivosinc.com/
+[13]- v14 https://lore.kernel.org/all/20240912235320.3768582-1-debug@rivosinc.com/
+
+---
+v15:
+   - Extended `get_physical_address` to take `probe` parameter. This is to ensure
+     that cbo.clean/flush/inval accesses to shadow stack always lead to store/AMO
+     access fault
+
+v14:
+   - Rebased on https://github.com/alistair23/qemu/blob/riscv-to-apply.next
+v13:
+   - Fixed bug(s) reported by richard that
+         - shadow stack doesn't exist in M-mode
+         - shadow stack is not available in M + U only config
+   - updated commit messages with removal of `ufcfien` and `ubcfien` mentions
+v12
+   - Moved ssamoswap to trans_rvzicfiss.
+   - Fixed bcfi_enabled in disascontext to rely only on tb flag
+   - added comment on why PMP_TRANSLATE_FAIL for stores on shadow stack page
+
+v11:
+   - default *envcfg and priv for qemu-user are handled in `riscv_cpu_reset_hold`
+v10:
+   - Exposed *envcfg CSR and priv to qemu-user as well and removed special
+     state management for *envcfg related feature enabling for qemu-user
+   - Exposing zicfilp and zicfiss as different patch
+v9:
+   - fix switch case fallthrough for sw_check excp in patch 4
+v8:
+   - fixed up `gen_cmpxchg` to store extra word2 during compile to raise storeAMO always
+v7:
+   - Updated decode_save_opc to take extra argument of excp_uw2 and
+     updated callsites
+   - added a helper for promoting load faults to store faults
+   - Removed stale comments and edited existed comments
+v6:
+   - Added support extra store word 2 for tcg compile and extraction during unwind
+   - Using extra word, AMO instructions and shadow stack instructions can raise store fault
+   - some alignment and cosmetic changes
+   - added vmstate migration support for elp and ssp cpu state
+v5:
+   - Simplified elp tracking and lpad implementation as per suggestion by richard
+   - Simplified shadow stack mmu checks as per suggestion by richard
+   - Converged zicfiss compressed and non-comressed instructions to same translation
+   - Removed trace hooks. Don't need for upstream.
+
+v4:
+   - elp state in cpu is true/false instead of enum and elp cleared
+     unconditionally on trap entry. elp in *status cleared unconditionally on
+     trap return.
+   - Moved logic for branch tracking in instruction translation from tb_start.
+   - fixed zicfiss dependency on 'A'
+   - `cpu_get_fcfien/bcfien` helpers checks fixed to check for extension first.
+   - removed trace hook enums. Instead added dedicated trace helpers wherever needed.
+   - fixed/simplified instruction format in decoder for lpad, sspush, sspopchk
+   - simplified tlb index logic for shadow stack instructions. Removed SUM TB_FLAG
+   - access to ssp CSR is gated on `cpu_get_bcfien` instead of duplicated logic
+   - removed vDSO related changes for now.
+v3:
+   - Removed prctl specific patches because they need to be upstream
+     in kernel first.
+   - As suggested by Richard, added TB flag if fcfi enabled
+   - Re-worked translation for landing pad and shadow stack instructions
+     to not require helper.
+   - tcg helpers only for cfi violation cases so that trace hooks can be
+     placed.
+   - Style changes.
+   - fixes assert condition in accel/tcg
+
+v2:
+   - added missed file (in v1) for shadow stack instructions implementation.
+
+Deepak Gupta (21):
+  target/riscv: expose *envcfg csr and priv to qemu-user as well
+  target/riscv: Add zicfilp extension
+  target/riscv: Introduce elp state and enabling controls for zicfilp
+  target/riscv: save and restore elp state on priv transitions
+  target/riscv: additional code information for sw check
+  target/riscv: tracking indirect branches (fcfi) for zicfilp
+  target/riscv: zicfilp `lpad` impl and branch tracking
+  disas/riscv: enable `lpad` disassembly
+  target/riscv: Expose zicfilp extension as a cpu property
+  target/riscv: Add zicfiss extension
+  target/riscv: introduce ssp and enabling controls for zicfiss
+  target/riscv: tb flag for shadow stack  instructions
+  target/riscv: mmu changes for zicfiss shadow stack protection
+  target/riscv: disallow probe accesses to shadow stack
+  target/riscv: AMO operations always raise store/AMO fault
+  target/riscv: update `decode_save_opc` to store extra word2
+  target/riscv: implement zicfiss instructions
+  target/riscv: compressed encodings for sspush and sspopchk
+  disas/riscv: enable disassembly for zicfiss instructions
+  disas/riscv: enable disassembly for compressed sspush/sspopchk
+  target/riscv: Expose zicfiss extension as a cpu property
+
+ disas/riscv.c                                 |  77 +++++++-
+ disas/riscv.h                                 |   4 +
+ target/riscv/cpu.c                            |  14 ++
+ target/riscv/cpu.h                            |  31 ++-
+ target/riscv/cpu_bits.h                       |  17 ++
+ target/riscv/cpu_cfg.h                        |   2 +
+ target/riscv/cpu_helper.c                     | 184 ++++++++++++++++--
+ target/riscv/cpu_user.h                       |   1 +
+ target/riscv/csr.c                            |  84 ++++++++
+ target/riscv/insn16.decode                    |   4 +
+ target/riscv/insn32.decode                    |  26 ++-
+ .../riscv/insn_trans/trans_privileged.c.inc   |   8 +-
+ target/riscv/insn_trans/trans_rva.c.inc       |   4 +-
+ target/riscv/insn_trans/trans_rvd.c.inc       |   4 +-
+ target/riscv/insn_trans/trans_rvf.c.inc       |   4 +-
+ target/riscv/insn_trans/trans_rvh.c.inc       |   8 +-
+ target/riscv/insn_trans/trans_rvi.c.inc       |  61 +++++-
+ target/riscv/insn_trans/trans_rvvk.c.inc      |  10 +-
+ target/riscv/insn_trans/trans_rvzacas.c.inc   |   4 +-
+ target/riscv/insn_trans/trans_rvzfh.c.inc     |   4 +-
+ target/riscv/insn_trans/trans_rvzicfiss.c.inc | 114 +++++++++++
+ target/riscv/insn_trans/trans_svinval.c.inc   |   6 +-
+ target/riscv/internals.h                      |   3 +
+ target/riscv/machine.c                        |  38 ++++
+ target/riscv/op_helper.c                      |  17 ++
+ target/riscv/pmp.c                            |   5 +
+ target/riscv/pmp.h                            |   3 +-
+ target/riscv/tcg/tcg-cpu.c                    |  29 +++
+ target/riscv/translate.c                      |  44 ++++-
+ 29 files changed, 749 insertions(+), 61 deletions(-)
+ create mode 100644 target/riscv/insn_trans/trans_rvzicfiss.c.inc
+
+-- 
+2.45.0
+
 
