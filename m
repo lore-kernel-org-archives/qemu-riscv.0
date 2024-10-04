@@ -4,78 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 276E6CF884D
-	for <qemu-riscv@archiver.kernel.org>; Fri,  4 Oct 2024 16:00:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DA590CF884D
+	for <qemu-riscv@archiver.kernel.org>; Fri,  4 Oct 2024 16:31:03 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1swkgs-0007QJ-6u; Fri, 04 Oct 2024 11:58:02 -0400
+	id 1swlCm-00042D-DS; Fri, 04 Oct 2024 12:31:00 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1swkgq-0007Oy-LL
- for qemu-riscv@nongnu.org; Fri, 04 Oct 2024 11:58:00 -0400
-Received: from mail-pl1-x62e.google.com ([2607:f8b0:4864:20::62e])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1swlCl-000424-Bu
+ for qemu-riscv@nongnu.org; Fri, 04 Oct 2024 12:30:59 -0400
+Received: from mail-lf1-x130.google.com ([2a00:1450:4864:20::130])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1swkgn-0000rD-S2
- for qemu-riscv@nongnu.org; Fri, 04 Oct 2024 11:58:00 -0400
-Received: by mail-pl1-x62e.google.com with SMTP id
- d9443c01a7336-20b84bfbdfcso22833045ad.0
- for <qemu-riscv@nongnu.org>; Fri, 04 Oct 2024 08:57:57 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1swlCj-0005VO-Lg
+ for qemu-riscv@nongnu.org; Fri, 04 Oct 2024 12:30:59 -0400
+Received: by mail-lf1-x130.google.com with SMTP id
+ 2adb3069b0e04-5398ec2f3c3so3064680e87.1
+ for <qemu-riscv@nongnu.org>; Fri, 04 Oct 2024 09:30:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1728057476; x=1728662276; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=q7P/vkTeYr6HUnOpNznXnJLMsi4cdSGYBwLw5gEMJ3I=;
- b=Zg3U9w/3iEnbmbE714Gx2phMlEQdm8Y1uu3fpa/GwQOliatbSSngkXTa1UykksyEOb
- 3DiRBrTOTP8vt8jnoAHe5lVmke8bIa0l38uST/VBdKmjbqgGKaHKtHHflf88wOBkqXkh
- XGJ/jSkVq2KHfmrSgwB/b4bKODfSAJOWtfnBIITWXaPxc01+yN7zAT06b4G1WoDCjGuJ
- TKVZI2eoyFkhKigN8gR+5cPAj+xyzA2wPRW/EIneKGYi38/Uwu3lyC3wE39N4TduoVQT
- NtV4doyBKIT+l+yrt2jSZs17cBC/S4s5yTOAYRnH161UnNzJgVTAnHUyH0+vqWV4yvLg
- 6EeA==
+ d=linaro.org; s=google; t=1728059455; x=1728664255; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=5nyIdscBf9eExt1kzAJJIA/rxjuPVcdO2ELN/HXgCsA=;
+ b=nxA9KIXYqC19s8kcDB1MZPLC5n5M7wDvXRaLCGZws4KNByrh/gLWmNVu3Rcmuh/+VQ
+ WOKS0NKx3Ij6a8BGC2gIhj500792alM2/ve1XPbNfV/UKhFpqI9QDra27l7Os42mCEa1
+ 8QEPfqh+35U8z8wr5R8lDoLlVxzsQI8fFOvt2M1sX7e/8VgMKDnx3lNlGwxstlN/fCo1
+ fw56/sGzUHDrGqYBtp2+QL5QehL9V2FX6Ys7K2YFZO2QmHIBlCcgsNzBNzJDKmCZlLC+
+ LiHenaaM2A0Azh9HF+LnwmYWSfZDS+2d6Sxp2jeQrSzuVyci5hmtkqOS3ujNNZibqTOJ
+ Naag==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728057476; x=1728662276;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=q7P/vkTeYr6HUnOpNznXnJLMsi4cdSGYBwLw5gEMJ3I=;
- b=rbRAK2Dd5jAymrq0L56DIhVFwKpJehzOZbbgqD3aVpClYIJ/Tb05ZG+kY683aoTyWX
- yhBMbONR7+DmHdXe3AphObSLIHI3cypRlAtf4+YNUQldnuhPEivo/ehGMVCMjXbNJIAn
- iHcIo6lU7jD6jthRpMn/2dR3Ef0yq6T43Q5zj7qkB2jEckb7pfSHCeZkokGQaqsQ5ni9
- CPbdll7hKMiAcp9H/PV6VS0TipHYk6nFq/4m2kKt08gNrtC7Gfh+z1EXhyfHVHOXqxzf
- ga9E83KQPakzkp7z5kxCOW4fbiBCrqkjrzLUvoCnPOrSJcP4CiDKOiytN/zWku7E5uh/
- uHBA==
-X-Gm-Message-State: AOJu0YzMjgQ4d+pMJf8GAs1nNogPWsBUR2ZNVsUYV5S6f+DhwDhP+c+/
- p4Yeq2/m5wJh8KSWAJAkD3REQk4GyF7QzZPGwEcx9MJBleM5jQfJXIvA0OWAI3U=
-X-Google-Smtp-Source: AGHT+IHEefu48e3B3xHtY25rzbPhabWpC8rj5dscH0qq3ZLxbIBkKH8izYonZvqm9LPiGN0WBgESEQ==
-X-Received: by 2002:a17:903:22c4:b0:20b:46c6:3e47 with SMTP id
- d9443c01a7336-20be19a0972mr112825055ad.29.1728057476202; 
- Fri, 04 Oct 2024 08:57:56 -0700 (PDT)
-Received: from grind.. (200-206-229-93.dsl.telesp.net.br. [200.206.229.93])
+ d=1e100.net; s=20230601; t=1728059455; x=1728664255;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=5nyIdscBf9eExt1kzAJJIA/rxjuPVcdO2ELN/HXgCsA=;
+ b=FqaMeWFgjzqpqpyoJ7VBg7mFMQQzIpzCktwSAjCcJGaLyGudI3ubP6dJ2ffYyLgmBh
+ P5JRE53ZIyFJL1bJ13LyUeSS7FT8S3/ALHEs3Wl9aR1o+sX0RtSwlS4/I9DLWNH2+IHp
+ VVYKCn6TSpqzJwbjlsc76d0ggM5etzQvJOxKpwSEvegx65g4pa4XjSCpetggkslnDVnI
+ Sl3jLmJYle7YCFVtoSrn9RHMdazeN1VFwjxY63nIZlScNElYtO+eN15iK5BNJ4+Z/wll
+ B+3ok/ex/jO/IpK3fT0uSh/lMQ0VSaZ7aHzkMP+W8MrTkgZSmkLNlqis4jdcERjpttrH
+ 4dIg==
+X-Gm-Message-State: AOJu0YwYT3hg7xd1dgkuf5DmdtiTHd4YKUc71vSQSluluNDlQANuy+Hh
+ KDDRS+yMBFQxNXPeWUlJppZY0Vs2hcPko0SQ+I7+JVeXrMZdcv8AbnmtkHwRN8c=
+X-Google-Smtp-Source: AGHT+IHmjxOjWQa3xJUQaDHEtw0LVQF0onnQXPwHXy/V6NSJ50nhb5B/Ol9t4OvRDYTK4rI87UyR7A==
+X-Received: by 2002:a05:6512:a8f:b0:536:a50a:3c25 with SMTP id
+ 2adb3069b0e04-539ab8625dbmr2108527e87.12.1728059454912; 
+ Fri, 04 Oct 2024 09:30:54 -0700 (PDT)
+Received: from localhost.localdomain ([91.223.100.150])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-20c139306cfsm107635ad.170.2024.10.04.08.57.53
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 04 Oct 2024 08:57:55 -0700 (PDT)
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+ 2adb3069b0e04-539aff281aasm305e87.256.2024.10.04.09.30.47
+ (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
+ Fri, 04 Oct 2024 09:30:54 -0700 (PDT)
+From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
- liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
- ajones@ventanamicro.com, Tomasz Jeznach <tjeznach@rivosinc.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Frank Chang <frank.chang@sifive.com>
-Subject: [PATCH v9 08/12] hw/riscv/riscv-iommu: add Address Translation Cache
- (IOATC)
-Date: Fri,  4 Oct 2024 12:57:15 -0300
-Message-ID: <20241004155721.2154626-9-dbarboza@ventanamicro.com>
+Cc: qemu-riscv@nongnu.org, qemu-s390x@nongnu.org,
+ Thomas Huth <thuth@redhat.com>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Pierrick Bouvier <pierrick.bouvier@linaro.org>, qemu-ppc@nongnu.org,
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+Subject: [PATCH v2 00/25] misc: Use explicit endian LD/ST API
+Date: Fri,  4 Oct 2024 13:30:16 -0300
+Message-ID: <20241004163042.85922-1-philmd@linaro.org>
 X-Mailer: git-send-email 2.45.2
-In-Reply-To: <20241004155721.2154626-1-dbarboza@ventanamicro.com>
-References: <20241004155721.2154626-1-dbarboza@ventanamicro.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::62e;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pl1-x62e.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::130;
+ envelope-from=philmd@linaro.org; helo=mail-lf1-x130.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -98,317 +93,79 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Tomasz Jeznach <tjeznach@rivosinc.com>
+For targets (or HW) which are only built for a particular
+endianness, the generic LD/ST helpers are defined as the
+target endianness variant. For example, on big-endian
+targets, stl_p() is equivalent of stl_be_p().
 
-The RISC-V IOMMU spec predicts that the IOMMU can use translation caches
-to hold entries from the DDT. This includes implementation for all cache
-commands that are marked as 'not implemented'.
+This series replaces in bulk these LD/ST calls.
 
-There are some artifacts included in the cache that predicts s-stage and
-g-stage elements, although we don't support it yet. We'll introduce them
-next.
+This is helpful for the single binary project where we
+want to build a single binary for multiple targets of
+different endianness.
 
-Signed-off-by: Tomasz Jeznach <tjeznach@rivosinc.com>
-Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Reviewed-by: Frank Chang <frank.chang@sifive.com>
-Acked-by: Alistair Francis <alistair.francis@wdc.com>
----
- hw/riscv/riscv-iommu.c | 204 ++++++++++++++++++++++++++++++++++++++++-
- hw/riscv/riscv-iommu.h |   3 +
- 2 files changed, 203 insertions(+), 4 deletions(-)
+Philippe Mathieu-Daudé (25):
+  gdbstub/helpers: Have ldtul_p() definition use ldn_p()
+  target/hexagon: Replace ldtul_p() -> ldl_p()
+  target/alpha: Replace ldtul_p() -> ldq_p()
+  target/s390x: Replace ldtul_p() -> ldq_p()
+  gdbstub/helpers: Introduce ldtul_$endian_p() helpers
+  target/alpha: Use explicit little-endian LD/ST API
+  target/hexagon: Use explicit little-endian LD/ST API
+  hw/i386: Use explicit little-endian LD/ST API
+  target/i386: Use explicit little-endian LD/ST API
+  target/avr: Use explicit little-endian LD/ST API
+  linux-user/i386: Use explicit little-endian LD/ST API
+  target/loongarch: Use explicit little-endian LD/ST API
+  target/sh4: Use explicit little-endian LD/ST API
+  target/tricore: Use explicit little-endian LD/ST API
+  target/rx: Use explicit little-endian LD/ST API
+  target/riscv: Use explicit little-endian LD/ST API
+  hw/m68k: Use explicit big-endian LD/ST API
+  target/m68k: Use explicit big-endian LD/ST API
+  hw/sparc: Use explicit big-endian LD/ST API
+  target/sparc: Use explicit big-endian LD/ST API
+  target/hppa: Use explicit big-endian LD/ST API
+  hw/s390x: Use explicit big-endian LD/ST API
+  target/s390x: Use explicit big-endian LD/ST API
+  target/openrisc: Use explicit big-endian LD/ST API
+  hw/ppc/e500: Use explicit big-endian LD/ST API
 
-diff --git a/hw/riscv/riscv-iommu.c b/hw/riscv/riscv-iommu.c
-index f2679f3740..cef54b56ba 100644
---- a/hw/riscv/riscv-iommu.c
-+++ b/hw/riscv/riscv-iommu.c
-@@ -64,6 +64,15 @@ struct RISCVIOMMUContext {
-     uint64_t msiptp;            /* MSI redirection page table pointer */
- };
- 
-+/* Address translation cache entry */
-+struct RISCVIOMMUEntry {
-+    uint64_t iova:44;           /* IOVA Page Number */
-+    uint64_t pscid:20;          /* Process Soft-Context identifier */
-+    uint64_t phys:44;           /* Physical Page Number */
-+    uint64_t gscid:16;          /* Guest Soft-Context identifier */
-+    uint64_t perm:2;            /* IOMMU_RW flags */
-+};
-+
- /* IOMMU index for transactions without process_id specified. */
- #define RISCV_IOMMU_NOPROCID 0
- 
-@@ -1154,13 +1163,132 @@ static AddressSpace *riscv_iommu_space(RISCVIOMMUState *s, uint32_t devid)
-     return &as->iova_as;
- }
- 
-+/* Translation Object cache support */
-+static gboolean riscv_iommu_iot_equal(gconstpointer v1, gconstpointer v2)
-+{
-+    RISCVIOMMUEntry *t1 = (RISCVIOMMUEntry *) v1;
-+    RISCVIOMMUEntry *t2 = (RISCVIOMMUEntry *) v2;
-+    return t1->gscid == t2->gscid && t1->pscid == t2->pscid &&
-+           t1->iova == t2->iova;
-+}
-+
-+static guint riscv_iommu_iot_hash(gconstpointer v)
-+{
-+    RISCVIOMMUEntry *t = (RISCVIOMMUEntry *) v;
-+    return (guint)t->iova;
-+}
-+
-+/* GV: 1 PSCV: 1 AV: 1 */
-+static void riscv_iommu_iot_inval_pscid_iova(gpointer key, gpointer value,
-+                                             gpointer data)
-+{
-+    RISCVIOMMUEntry *iot = (RISCVIOMMUEntry *) value;
-+    RISCVIOMMUEntry *arg = (RISCVIOMMUEntry *) data;
-+    if (iot->gscid == arg->gscid &&
-+        iot->pscid == arg->pscid &&
-+        iot->iova == arg->iova) {
-+        iot->perm = IOMMU_NONE;
-+    }
-+}
-+
-+/* GV: 1 PSCV: 1 AV: 0 */
-+static void riscv_iommu_iot_inval_pscid(gpointer key, gpointer value,
-+                                        gpointer data)
-+{
-+    RISCVIOMMUEntry *iot = (RISCVIOMMUEntry *) value;
-+    RISCVIOMMUEntry *arg = (RISCVIOMMUEntry *) data;
-+    if (iot->gscid == arg->gscid &&
-+        iot->pscid == arg->pscid) {
-+        iot->perm = IOMMU_NONE;
-+    }
-+}
-+
-+/* GV: 1 GVMA: 1 */
-+static void riscv_iommu_iot_inval_gscid_gpa(gpointer key, gpointer value,
-+                                            gpointer data)
-+{
-+    RISCVIOMMUEntry *iot = (RISCVIOMMUEntry *) value;
-+    RISCVIOMMUEntry *arg = (RISCVIOMMUEntry *) data;
-+    if (iot->gscid == arg->gscid) {
-+        /* simplified cache, no GPA matching */
-+        iot->perm = IOMMU_NONE;
-+    }
-+}
-+
-+/* GV: 1 GVMA: 0 */
-+static void riscv_iommu_iot_inval_gscid(gpointer key, gpointer value,
-+                                        gpointer data)
-+{
-+    RISCVIOMMUEntry *iot = (RISCVIOMMUEntry *) value;
-+    RISCVIOMMUEntry *arg = (RISCVIOMMUEntry *) data;
-+    if (iot->gscid == arg->gscid) {
-+        iot->perm = IOMMU_NONE;
-+    }
-+}
-+
-+/* GV: 0 */
-+static void riscv_iommu_iot_inval_all(gpointer key, gpointer value,
-+                                      gpointer data)
-+{
-+    RISCVIOMMUEntry *iot = (RISCVIOMMUEntry *) value;
-+    iot->perm = IOMMU_NONE;
-+}
-+
-+/* caller should keep ref-count for iot_cache object */
-+static RISCVIOMMUEntry *riscv_iommu_iot_lookup(RISCVIOMMUContext *ctx,
-+    GHashTable *iot_cache, hwaddr iova)
-+{
-+    RISCVIOMMUEntry key = {
-+        .gscid = get_field(ctx->gatp, RISCV_IOMMU_DC_IOHGATP_GSCID),
-+        .pscid = get_field(ctx->ta, RISCV_IOMMU_DC_TA_PSCID),
-+        .iova  = PPN_DOWN(iova),
-+    };
-+    return g_hash_table_lookup(iot_cache, &key);
-+}
-+
-+/* caller should keep ref-count for iot_cache object */
-+static void riscv_iommu_iot_update(RISCVIOMMUState *s,
-+    GHashTable *iot_cache, RISCVIOMMUEntry *iot)
-+{
-+    if (!s->iot_limit) {
-+        return;
-+    }
-+
-+    if (g_hash_table_size(s->iot_cache) >= s->iot_limit) {
-+        iot_cache = g_hash_table_new_full(riscv_iommu_iot_hash,
-+                                          riscv_iommu_iot_equal,
-+                                          g_free, NULL);
-+        g_hash_table_unref(qatomic_xchg(&s->iot_cache, iot_cache));
-+    }
-+    g_hash_table_add(iot_cache, iot);
-+}
-+
-+static void riscv_iommu_iot_inval(RISCVIOMMUState *s, GHFunc func,
-+    uint32_t gscid, uint32_t pscid, hwaddr iova)
-+{
-+    GHashTable *iot_cache;
-+    RISCVIOMMUEntry key = {
-+        .gscid = gscid,
-+        .pscid = pscid,
-+        .iova  = PPN_DOWN(iova),
-+    };
-+
-+    iot_cache = g_hash_table_ref(s->iot_cache);
-+    g_hash_table_foreach(iot_cache, func, &key);
-+    g_hash_table_unref(iot_cache);
-+}
-+
- static int riscv_iommu_translate(RISCVIOMMUState *s, RISCVIOMMUContext *ctx,
--    IOMMUTLBEntry *iotlb)
-+    IOMMUTLBEntry *iotlb, bool enable_cache)
- {
-+    RISCVIOMMUEntry *iot;
-+    IOMMUAccessFlags perm;
-     bool enable_pid;
-     bool enable_pri;
-+    GHashTable *iot_cache;
-     int fault;
- 
-+    iot_cache = g_hash_table_ref(s->iot_cache);
-     /*
-      * TC[32] is reserved for custom extensions, used here to temporarily
-      * enable automatic page-request generation for ATS queries.
-@@ -1168,9 +1296,43 @@ static int riscv_iommu_translate(RISCVIOMMUState *s, RISCVIOMMUContext *ctx,
-     enable_pri = (iotlb->perm == IOMMU_NONE) && (ctx->tc & BIT_ULL(32));
-     enable_pid = (ctx->tc & RISCV_IOMMU_DC_TC_PDTV);
- 
-+    iot = riscv_iommu_iot_lookup(ctx, iot_cache, iotlb->iova);
-+    perm = iot ? iot->perm : IOMMU_NONE;
-+    if (perm != IOMMU_NONE) {
-+        iotlb->translated_addr = PPN_PHYS(iot->phys);
-+        iotlb->addr_mask = ~TARGET_PAGE_MASK;
-+        iotlb->perm = perm;
-+        fault = 0;
-+        goto done;
-+    }
-+
-     /* Translate using device directory / page table information. */
-     fault = riscv_iommu_spa_fetch(s, ctx, iotlb);
- 
-+    if (!fault && iotlb->target_as == &s->trap_as) {
-+        /* Do not cache trapped MSI translations */
-+        goto done;
-+    }
-+
-+    /*
-+     * We made an implementation choice to not cache identity-mapped
-+     * translations, as allowed by the specification, to avoid
-+     * translation cache evictions for other devices sharing the
-+     * IOMMU hardware model.
-+     */
-+    if (!fault && iotlb->translated_addr != iotlb->iova && enable_cache) {
-+        iot = g_new0(RISCVIOMMUEntry, 1);
-+        iot->iova = PPN_DOWN(iotlb->iova);
-+        iot->phys = PPN_DOWN(iotlb->translated_addr);
-+        iot->gscid = get_field(ctx->gatp, RISCV_IOMMU_DC_IOHGATP_GSCID);
-+        iot->pscid = get_field(ctx->ta, RISCV_IOMMU_DC_TA_PSCID);
-+        iot->perm = iotlb->perm;
-+        riscv_iommu_iot_update(s, iot_cache, iot);
-+    }
-+
-+done:
-+    g_hash_table_unref(iot_cache);
-+
-     if (enable_pri && fault) {
-         struct riscv_iommu_pq_record pr = {0};
-         if (enable_pid) {
-@@ -1310,13 +1472,40 @@ static void riscv_iommu_process_cq_tail(RISCVIOMMUState *s)
-             if (cmd.dword0 & RISCV_IOMMU_CMD_IOTINVAL_PSCV) {
-                 /* illegal command arguments IOTINVAL.GVMA & PSCV == 1 */
-                 goto cmd_ill;
-+            } else if (!(cmd.dword0 & RISCV_IOMMU_CMD_IOTINVAL_GV)) {
-+                /* invalidate all cache mappings */
-+                func = riscv_iommu_iot_inval_all;
-+            } else if (!(cmd.dword0 & RISCV_IOMMU_CMD_IOTINVAL_AV)) {
-+                /* invalidate cache matching GSCID */
-+                func = riscv_iommu_iot_inval_gscid;
-+            } else {
-+                /* invalidate cache matching GSCID and ADDR (GPA) */
-+                func = riscv_iommu_iot_inval_gscid_gpa;
-             }
--            /* translation cache not implemented yet */
-+            riscv_iommu_iot_inval(s, func,
-+                get_field(cmd.dword0, RISCV_IOMMU_CMD_IOTINVAL_GSCID), 0,
-+                cmd.dword1 & TARGET_PAGE_MASK);
-             break;
- 
-         case RISCV_IOMMU_CMD(RISCV_IOMMU_CMD_IOTINVAL_FUNC_VMA,
-                              RISCV_IOMMU_CMD_IOTINVAL_OPCODE):
--            /* translation cache not implemented yet */
-+            if (!(cmd.dword0 & RISCV_IOMMU_CMD_IOTINVAL_GV)) {
-+                /* invalidate all cache mappings, simplified model */
-+                func = riscv_iommu_iot_inval_all;
-+            } else if (!(cmd.dword0 & RISCV_IOMMU_CMD_IOTINVAL_PSCV)) {
-+                /* invalidate cache matching GSCID, simplified model */
-+                func = riscv_iommu_iot_inval_gscid;
-+            } else if (!(cmd.dword0 & RISCV_IOMMU_CMD_IOTINVAL_AV)) {
-+                /* invalidate cache matching GSCID and PSCID */
-+                func = riscv_iommu_iot_inval_pscid;
-+            } else {
-+                /* invalidate cache matching GSCID and PSCID and ADDR (IOVA) */
-+                func = riscv_iommu_iot_inval_pscid_iova;
-+            }
-+            riscv_iommu_iot_inval(s, func,
-+                get_field(cmd.dword0, RISCV_IOMMU_CMD_IOTINVAL_GSCID),
-+                get_field(cmd.dword0, RISCV_IOMMU_CMD_IOTINVAL_PSCID),
-+                cmd.dword1 & TARGET_PAGE_MASK);
-             break;
- 
-         case RISCV_IOMMU_CMD(RISCV_IOMMU_CMD_IODIR_FUNC_INVAL_DDT,
-@@ -1831,6 +2020,10 @@ static void riscv_iommu_realize(DeviceState *dev, Error **errp)
-                                          riscv_iommu_ctx_equal,
-                                          g_free, NULL);
- 
-+    s->iot_cache = g_hash_table_new_full(riscv_iommu_iot_hash,
-+                                         riscv_iommu_iot_equal,
-+                                         g_free, NULL);
-+
-     s->iommus.le_next = NULL;
-     s->iommus.le_prev = NULL;
-     QLIST_INIT(&s->spaces);
-@@ -1840,6 +2033,7 @@ static void riscv_iommu_unrealize(DeviceState *dev)
- {
-     RISCVIOMMUState *s = RISCV_IOMMU(dev);
- 
-+    g_hash_table_unref(s->iot_cache);
-     g_hash_table_unref(s->ctx_cache);
- }
- 
-@@ -1847,6 +2041,8 @@ static Property riscv_iommu_properties[] = {
-     DEFINE_PROP_UINT32("version", RISCVIOMMUState, version,
-         RISCV_IOMMU_SPEC_DOT_VER),
-     DEFINE_PROP_UINT32("bus", RISCVIOMMUState, bus, 0x0),
-+    DEFINE_PROP_UINT32("ioatc-limit", RISCVIOMMUState, iot_limit,
-+        LIMIT_CACHE_IOT),
-     DEFINE_PROP_BOOL("intremap", RISCVIOMMUState, enable_msi, TRUE),
-     DEFINE_PROP_BOOL("off", RISCVIOMMUState, enable_off, TRUE),
-     DEFINE_PROP_BOOL("s-stage", RISCVIOMMUState, enable_s_stage, TRUE),
-@@ -1901,7 +2097,7 @@ static IOMMUTLBEntry riscv_iommu_memory_region_translate(
-         /* Translation disabled or invalid. */
-         iotlb.addr_mask = 0;
-         iotlb.perm = IOMMU_NONE;
--    } else if (riscv_iommu_translate(as->iommu, ctx, &iotlb)) {
-+    } else if (riscv_iommu_translate(as->iommu, ctx, &iotlb, true)) {
-         /* Translation disabled or fault reported. */
-         iotlb.addr_mask = 0;
-         iotlb.perm = IOMMU_NONE;
-diff --git a/hw/riscv/riscv-iommu.h b/hw/riscv/riscv-iommu.h
-index af3fcafc19..9f15f3b27f 100644
---- a/hw/riscv/riscv-iommu.h
-+++ b/hw/riscv/riscv-iommu.h
-@@ -69,6 +69,9 @@ struct RISCVIOMMUState {
- 
-     GHashTable *ctx_cache;          /* Device translation Context Cache */
- 
-+    GHashTable *iot_cache;          /* IO Translated Address Cache */
-+    unsigned iot_limit;             /* IO Translation Cache size limit */
-+
-     /* MMIO Hardware Interface */
-     MemoryRegion regs_mr;
-     uint8_t *regs_rw;  /* register state (user write) */
+ hw/m68k/bootinfo.h                   |  28 ++---
+ include/gdbstub/helpers.h            |   6 +-
+ hw/i386/multiboot.c                  |  36 +++---
+ hw/i386/x86-common.c                 |  26 ++---
+ hw/m68k/mcf5208.c                    |   2 +-
+ hw/m68k/next-cube.c                  |   2 +-
+ hw/m68k/q800.c                       |   4 +-
+ hw/ppc/ppce500_spin.c                |  24 ++--
+ hw/s390x/ipl.c                       |   4 +-
+ hw/s390x/s390-pci-inst.c             | 166 +++++++++++++--------------
+ hw/sparc/leon3.c                     |  42 +++----
+ hw/sparc/sun4m.c                     |   6 +-
+ hw/sparc64/sun4u.c                   |   6 +-
+ linux-user/i386/signal.c             |   4 +-
+ target/alpha/gdbstub.c               |   2 +-
+ target/avr/gdbstub.c                 |   4 +-
+ target/hexagon/gdbstub.c             |  10 +-
+ target/hppa/gdbstub.c                |   2 +-
+ target/i386/gdbstub.c                |  30 ++---
+ target/i386/tcg/sysemu/excp_helper.c |   4 +-
+ target/i386/xsave_helper.c           |  32 +++---
+ target/loongarch/gdbstub.c           |   8 +-
+ target/m68k/gdbstub.c                |   2 +-
+ target/m68k/helper.c                 |  10 +-
+ target/openrisc/gdbstub.c            |   2 +-
+ target/riscv/gdbstub.c               |  14 +--
+ target/rx/cpu.c                      |   2 +-
+ target/rx/gdbstub.c                  |  24 ++--
+ target/s390x/gdbstub.c               |  34 +++---
+ target/s390x/ioinst.c                |   2 +-
+ target/sh4/gdbstub.c                 |  36 +++---
+ target/sparc/gdbstub.c               |   6 +-
+ target/tricore/gdbstub.c             |   2 +-
+ 33 files changed, 292 insertions(+), 290 deletions(-)
+
 -- 
 2.45.2
 
