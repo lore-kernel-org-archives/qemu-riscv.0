@@ -4,58 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2AE66CF8840
-	for <qemu-riscv@archiver.kernel.org>; Fri,  4 Oct 2024 16:37:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AB0DFCF884D
+	for <qemu-riscv@archiver.kernel.org>; Fri,  4 Oct 2024 16:40:31 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1swlHu-0001MM-JR; Fri, 04 Oct 2024 12:36:21 -0400
+	id 1swlJi-0007IU-5l; Fri, 04 Oct 2024 12:38:10 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1swlGb-0006my-C7
- for qemu-riscv@nongnu.org; Fri, 04 Oct 2024 12:35:00 -0400
-Received: from mail-lj1-x230.google.com ([2a00:1450:4864:20::230])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1swlHh-0001KW-QX
+ for qemu-riscv@nongnu.org; Fri, 04 Oct 2024 12:36:09 -0400
+Received: from mail-lj1-x236.google.com ([2a00:1450:4864:20::236])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1swlGZ-0006Bp-RM
- for qemu-riscv@nongnu.org; Fri, 04 Oct 2024 12:34:57 -0400
-Received: by mail-lj1-x230.google.com with SMTP id
- 38308e7fff4ca-2facf48166bso30181881fa.0
- for <qemu-riscv@nongnu.org>; Fri, 04 Oct 2024 09:34:55 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1swlHe-0006ay-GV
+ for qemu-riscv@nongnu.org; Fri, 04 Oct 2024 12:36:05 -0400
+Received: by mail-lj1-x236.google.com with SMTP id
+ 38308e7fff4ca-2fadc95ccfcso27497831fa.1
+ for <qemu-riscv@nongnu.org>; Fri, 04 Oct 2024 09:36:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1728059694; x=1728664494; darn=nongnu.org;
+ d=linaro.org; s=google; t=1728059761; x=1728664561; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=F7K2UdhT0lmKAUQ5+UAlf+1d8SHSmOIhciQuHFY8P5Y=;
- b=QPqeOSfcwv1jDxwn/udV857brkXxg6kQbLWXWgDAtLnIoiVcy7g0YCDluulBamH93o
- C5X0PGpEbyVdxNO46soHEzkRFjRk2PC6eTXou3qEb0gOM13YskzGmUHOZzxjCZ+/0Z4T
- 2lTCGlMBUdVQbtm3nPABF7SesZ3FmDJ7wJisIpGo6U/27szjmzvHEeJZG5r6G+4XOHuM
- 3S9eJ6EdwietkEX8TROANuz45nKrIrsq368mQZvdGWMu8o9NjE4gQRsnN4HYRSeDxFi7
- 3sjJUuVk5QmxRa2BxFvsatDoVMz6OSElrStrHYDqREfRMnZvXCc1Ft6iWq/Xj57vxlid
- sYJw==
+ bh=OORWjVjOZFqIjyOcIzgstQ5I3F8E3+RG/c415FzxU5E=;
+ b=TyBD6zukJ3Kij6T6j4InFLVBuqL1a3MAlIXxjuTQxV+6Zu/i5pii/71GF6SuoJ+gHs
+ 6QMFLfe50P5cywZ3AfnS0b3MrU/zpe4boKYgyuQCLnhZ86zQDyUopGvPTempbvuTtX3u
+ yGoHsb/NMoF7QWg0nrtr8sgTIQMqwDljtbUZkA1CWOe6mBliX7MDXl0mhwuffiatMGsy
+ Gp0TqnRmuZWfmz3dtoIYm8KsW21lMB1QrvmvvYFN0qEXcXfkBwVBscjRcZ7/SFIFj+e5
+ gAtkaxlPV5eyFdzv75CRKZMoZmWUeB3q86j4plAg9j1L4r/gP8E6dgH9XNs+Nz2Nm4zO
+ 3RQQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728059694; x=1728664494;
+ d=1e100.net; s=20230601; t=1728059761; x=1728664561;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=F7K2UdhT0lmKAUQ5+UAlf+1d8SHSmOIhciQuHFY8P5Y=;
- b=BLz7zsv2NqRWkynEqXxwMzbU2lL3arLWylFfLyiWRLixlOG9Faaeu8BR4M1nbZploY
- 7I5dcT3CJibBls9kshDyF1Uf4HFfjsPLZr202nJUjsQR+/us1zrYVHD/fwy5/XOao2bl
- qtH5roHLCMHmVY6t7QKvOTnGmgdIuAhyx3V8TZ7LnNNDTC97hPCLkhOPIDfrG68S9CPd
- P7hgTzUTaYMLAKpvbdOY7SZtHoX5TE7Gj04wSUaLfLJwH+eLjUx63zqQnKLz9qYlxX1E
- Y27qu02aNbh3Nf73b+AtDUSb4cUb//2naiHAWKVN+C95B7mkVd4y5rlaiHv5+/y8k+Bz
- fYzw==
-X-Gm-Message-State: AOJu0YzhyW6VFG9yoLycwIiPvDhTDFL5sSqgZZMyNb68YpJxBwUdhuSc
- uZb8gx2lPRVx03e7e47O0hwsG+swt+p48puF6N+abHp7AZIDv6QUBomNQK5+u34=
-X-Google-Smtp-Source: AGHT+IHKa20agFRS0/RoXwo1gRuQeymjsJwVOH9rO7MgcDcdz82bu2Uw2J6Cuwgy3fCCBlYYn2+2rA==
-X-Received: by 2002:a05:6512:12c4:b0:539:964c:16d9 with SMTP id
- 2adb3069b0e04-539ab9e6f6bmr2435493e87.57.1728059694180; 
- Fri, 04 Oct 2024 09:34:54 -0700 (PDT)
+ bh=OORWjVjOZFqIjyOcIzgstQ5I3F8E3+RG/c415FzxU5E=;
+ b=mLqPaX94E54FTfRXIZKFMl+wGs6AGNvcEmggeuMxucUM+Oq+t7pG5ApTaD2MeRx0gL
+ 8wABQf1idZFqujt4CBe4XINeqld+GIkFaJ4ZQU6Q54uPMtzEB+Z28ti9xmHankbO274S
+ U2pMZupVkzAXZfk/HpZHW3e+pOeO988cn3Pu00uflWpf+cVpYXaR9FImQBD4yKPV7uB9
+ 1UFFWTBVJu7a/rAqaEy6vS4IQK3oM1tZkMmexnMMrhCbktjpzfW8ygHpH38Um1/FnmjX
+ 2aQNwyEfzyeSMfWHOjnmDx5mgDqlRXt9+EBPKVMp2C5y5gcatuWqYDLolERQToPg8CYc
+ x6/w==
+X-Gm-Message-State: AOJu0YxlnPLEw75bNtPk+6k1OFc2peWoQe/pNddRB97cZ1X79Gu9YNjo
+ 42PGzZGKDMHtAfOu4HMqaaSxnD7zSLF4UzKW5lYbPw2RT8IZksWj6TtzAA6+mec=
+X-Google-Smtp-Source: AGHT+IGThjDUuL9uRpDV3ZvuaVWWraIJPbDLq54yh68I9sL1Oe1J7rZUEDrM7ohnD0TaA40IBq0wDg==
+X-Received: by 2002:a2e:a543:0:b0:2fa:c5b0:3994 with SMTP id
+ 38308e7fff4ca-2faf3c60358mr21419471fa.13.1728059760737; 
+ Fri, 04 Oct 2024 09:36:00 -0700 (PDT)
 Received: from localhost.localdomain ([91.223.100.150])
  by smtp.gmail.com with ESMTPSA id
- 2adb3069b0e04-539afec8276sm2366e87.86.2024.10.04.09.34.44
+ 38308e7fff4ca-2faf9b336c3sm214031fa.113.2024.10.04.09.35.54
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Fri, 04 Oct 2024 09:34:53 -0700 (PDT)
+ Fri, 04 Oct 2024 09:35:59 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, qemu-s390x@nongnu.org,
@@ -63,24 +63,24 @@ Cc: qemu-riscv@nongnu.org, qemu-s390x@nongnu.org,
  Richard Henderson <richard.henderson@linaro.org>,
  Pierrick Bouvier <pierrick.bouvier@linaro.org>, qemu-ppc@nongnu.org,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-Subject: [PATCH v2 16/25] target/riscv: Use explicit little-endian LD/ST API
-Date: Fri,  4 Oct 2024 13:30:32 -0300
-Message-ID: <20241004163042.85922-17-philmd@linaro.org>
+Subject: [PATCH v2 21/25] target/hppa: Use explicit big-endian LD/ST API
+Date: Fri,  4 Oct 2024 13:30:37 -0300
+Message-ID: <20241004163042.85922-22-philmd@linaro.org>
 X-Mailer: git-send-email 2.45.2
 In-Reply-To: <20241004163042.85922-1-philmd@linaro.org>
 References: <20241004163042.85922-1-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::230;
- envelope-from=philmd@linaro.org; helo=mail-lj1-x230.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::236;
+ envelope-from=philmd@linaro.org; helo=mail-lj1-x236.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -96,82 +96,36 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-The Risc-V architecture uses little endianness. Directly use
-the little-endian LD/ST API.
+The HPPA architecture uses big endianness. Directly use
+the big-endian LD/ST API.
 
 Mechanical change using:
 
-  $ end=le; \
+  $ end=be; \
     for acc in uw w l q tul; do \
       sed -i -e "s/ld${acc}_p(/ld${acc}_${end}_p(/" \
              -e "s/st${acc}_p(/st${acc}_${end}_p(/" \
-        $(git grep -wlE '(ld|st)t?u?[wlq]_p' target/riscv/); \
+        $(git grep -wlE '(ld|st)t?u?[wlq]_p' target/hppa/); \
     done
 
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 ---
- target/riscv/gdbstub.c | 14 +++++++-------
- 1 file changed, 7 insertions(+), 7 deletions(-)
+ target/hppa/gdbstub.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/target/riscv/gdbstub.c b/target/riscv/gdbstub.c
-index c07df972f1e..2e042f117f3 100644
---- a/target/riscv/gdbstub.c
-+++ b/target/riscv/gdbstub.c
-@@ -84,15 +84,15 @@ int riscv_cpu_gdb_write_register(CPUState *cs, uint8_t *mem_buf, int n)
+diff --git a/target/hppa/gdbstub.c b/target/hppa/gdbstub.c
+index 0daa52f7af2..537d0d2dfff 100644
+--- a/target/hppa/gdbstub.c
++++ b/target/hppa/gdbstub.c
+@@ -150,7 +150,7 @@ int hppa_cpu_gdb_read_register(CPUState *cs, GByteArray *mem_buf, int n)
+ int hppa_cpu_gdb_write_register(CPUState *cs, uint8_t *mem_buf, int n)
+ {
+     CPUHPPAState *env = cpu_env(cs);
+-    uint32_t val = ldl_p(mem_buf);
++    uint32_t val = ldl_be_p(mem_buf);
  
-     switch (mcc->misa_mxl_max) {
-     case MXL_RV32:
--        tmp = (int32_t)ldl_p(mem_buf);
-+        tmp = (int32_t)ldl_le_p(mem_buf);
-         length = 4;
-         break;
-     case MXL_RV64:
-     case MXL_RV128:
-         if (env->xl < MXL_RV64) {
--            tmp = (int32_t)ldq_p(mem_buf);
-+            tmp = (int32_t)ldq_le_p(mem_buf);
-         } else {
--            tmp = ldq_p(mem_buf);
-+            tmp = ldq_le_p(mem_buf);
-         }
-         length = 8;
-         break;
-@@ -130,7 +130,7 @@ static int riscv_gdb_set_fpu(CPUState *cs, uint8_t *mem_buf, int n)
-     CPURISCVState *env = &cpu->env;
- 
-     if (n < 32) {
--        env->fpr[n] = ldq_p(mem_buf); /* always 64-bit */
-+        env->fpr[n] = ldq_le_p(mem_buf); /* always 64-bit */
-         return sizeof(uint64_t);
-     }
-     return 0;
-@@ -162,7 +162,7 @@ static int riscv_gdb_set_vector(CPUState *cs, uint8_t *mem_buf, int n)
-     if (n < 32) {
-         int i;
-         for (i = 0; i < vlenb; i += 8) {
--            env->vreg[(n * vlenb + i) / 8] = ldq_p(mem_buf + i);
-+            env->vreg[(n * vlenb + i) / 8] = ldq_le_p(mem_buf + i);
-         }
-         return vlenb;
-     }
-@@ -193,7 +193,7 @@ static int riscv_gdb_set_csr(CPUState *cs, uint8_t *mem_buf, int n)
-     CPURISCVState *env = &cpu->env;
- 
-     if (n < CSR_TABLE_SIZE) {
--        target_ulong val = ldtul_p(mem_buf);
-+        target_ulong val = ldtul_le_p(mem_buf);
-         int result;
- 
-         result = riscv_csrrw_debug(env, n, NULL, val, -1);
-@@ -226,7 +226,7 @@ static int riscv_gdb_set_virtual(CPUState *cs, uint8_t *mem_buf, int n)
-         RISCVCPU *cpu = RISCV_CPU(cs);
-         CPURISCVState *env = &cpu->env;
- 
--        env->priv = ldtul_p(mem_buf) & 0x3;
-+        env->priv = ldtul_le_p(mem_buf) & 0x3;
-         if (env->priv == PRV_RESERVED) {
-             env->priv = PRV_S;
-         }
+     switch (n) {
+     case 0:
 -- 
 2.45.2
 
