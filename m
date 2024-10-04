@@ -4,90 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8A294CF34C3
-	for <qemu-riscv@archiver.kernel.org>; Thu,  3 Oct 2024 21:03:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CB061CF34D9
+	for <qemu-riscv@archiver.kernel.org>; Fri,  4 Oct 2024 00:37:07 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1swSyl-0007Lo-Rd; Thu, 03 Oct 2024 17:03:19 -0400
+	id 1swWJ1-0004ML-K1; Thu, 03 Oct 2024 20:36:27 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1swSyf-0007Ip-4A
- for qemu-riscv@nongnu.org; Thu, 03 Oct 2024 17:03:13 -0400
-Received: from mail-wm1-x32c.google.com ([2a00:1450:4864:20::32c])
+ (Exim 4.90_1) (envelope-from <debug@rivosinc.com>)
+ id 1swWIz-0004Ln-Hl
+ for qemu-riscv@nongnu.org; Thu, 03 Oct 2024 20:36:25 -0400
+Received: from mail-pj1-x1030.google.com ([2607:f8b0:4864:20::1030])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1swSyd-0000Gk-66
- for qemu-riscv@nongnu.org; Thu, 03 Oct 2024 17:03:12 -0400
-Received: by mail-wm1-x32c.google.com with SMTP id
- 5b1f17b1804b1-42cbface8d6so18025055e9.3
- for <qemu-riscv@nongnu.org>; Thu, 03 Oct 2024 14:03:10 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <debug@rivosinc.com>)
+ id 1swWIx-0005tw-Hc
+ for qemu-riscv@nongnu.org; Thu, 03 Oct 2024 20:36:25 -0400
+Received: by mail-pj1-x1030.google.com with SMTP id
+ 98e67ed59e1d1-2e07d85e956so1332705a91.3
+ for <qemu-riscv@nongnu.org>; Thu, 03 Oct 2024 17:36:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1727989389; x=1728594189; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=1ogKuEvpJG9qrjpZiP0Rtoap+HaJtxmOoDNKwVPs9vw=;
- b=h7MhsmvilE/K8Z1dmJuGEvrbMH+pKnVo6RZrL//pLOgLKod4fsWrizkf1UPn8Qx3di
- fWg4dx9lQ7d+hzte0rumjl84twimiIPbezzWJF5LA50mg1fjLjfGbrgyjCXJY7D8JDF9
- 63NbCWkjJa+6iOE4hH95joRhEtF/fSzDeCiBicXCkhAMS5SpSXoPC7cBzGGL4Z734eYK
- 9KQQtzND4DwHvAeX2Ke2lrYKDFc+DDzAUmQ+kqV+H2ci51CXJzSZ7RBuZmnqwK6NT9ji
- KRdG+CvuXaAM7QxCckel6wf+oYVkOEelBoqFb+9/uqRu3sOHXKg98c32b5VaQt8Z5H7E
- WuSg==
+ d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1728002181; x=1728606981;
+ darn=nongnu.org; 
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=/MFfB4q8izso0/HXm1SZlNmo7GAp+rQZtUeNXDZQm+Y=;
+ b=jsVTImU+fKMuFIO8Mdslgt+UEF3C18js0onE0LLhpLleF2XniE1TMEVg1LflFl+Aca
+ WfCv1upg6xUS+hu8ufZrm4M/lx0tD/kdjbwEGqJGBFLZOL3kjtRnuJVpM/gZcPiuVGzW
+ P6BEEiLZ8FFXj/ufYs59uDwETfbCwMsxQjrKiL8Vwm2QFXCkxPQGzhVE8P2YjH4RTQz8
+ ZW8vgaJaE8pqqBsKofg+5h60FC8mJhKoLejRebolL7JlSr+rj+WspdVIRJ0+dC7F9SD3
+ ctyCZRR8VT0/6xOIzijWflug+ULV0EDaJudTMAVRuhrps7Cl2zqrsCPib3Z3YmbE2gFQ
+ UKmg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1727989389; x=1728594189;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=1ogKuEvpJG9qrjpZiP0Rtoap+HaJtxmOoDNKwVPs9vw=;
- b=h4bFPoRYtHAcZ0sVzI6Vh8/5Bh69hCkEZXNFhIYqthZJ88yg3tfIpOpR9c9i13Fc5K
- TZ4vfXUQQJtXQA3G5mJDVmDJZeZBosa75oKc9VWwY4DPo7ZIeJ00Igg8Q3/He9JZ1Qw7
- TVCvmh1W0Dn3acaiI1vITzahDEKT1HduWWbdCicN1icijeaKmtE9FdOyOkvo3hcbbM9v
- PIxnR0p8t5CA4PmyY9Fow8lUytFRUQBpEkCcxNVoEPbKO+m5nh0ij74E/j694b8OURHE
- 2JOUamoI+8UmfoxF6dARb0ifncjWb5zd8qflHIyOYocA4jBI/5pug8nuhB4tjlUbx0QH
- d50A==
-X-Forwarded-Encrypted: i=1;
- AJvYcCV/6okhWrpiPo+78rEAfCZxHQxtpp2nqM8CTxs1BDN21J7YXxiKHzOiFXkMh+nOZuwBfCXyAqdp93cX@nongnu.org
-X-Gm-Message-State: AOJu0Yxd5pWk3NEVlZ9vSzQsshOP11foQUqAKvzxzqEjBHUWpaHKqt1s
- 9UL/fnsFTH0Kv4MUfy41qBg0yd5hN5aoYPomw+wX7XaLtaYieuc5P4/wtwO79ug=
-X-Google-Smtp-Source: AGHT+IE2Ql6Sc1xnLlqJP5X7PTh3Lxr5Qq/5EOoJ3tjB+HW3wf9bsMXFpAvgDhb3X7IFdfauVBaPoA==
-X-Received: by 2002:a05:600c:4f52:b0:42c:bd5a:9455 with SMTP id
- 5b1f17b1804b1-42f85aba082mr2946365e9.18.1727989389443; 
- Thu, 03 Oct 2024 14:03:09 -0700 (PDT)
-Received: from [172.33.27.23] (134.pool62-36-43.static.orange.es.
- [62.36.43.134]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-42f7a02eb3csm52717555e9.43.2024.10.03.14.03.07
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 03 Oct 2024 14:03:08 -0700 (PDT)
-Message-ID: <71f9e218-a5a7-4f24-9b8e-a8af11ad2f41@linaro.org>
-Date: Thu, 3 Oct 2024 23:03:06 +0200
+ d=1e100.net; s=20230601; t=1728002181; x=1728606981;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=/MFfB4q8izso0/HXm1SZlNmo7GAp+rQZtUeNXDZQm+Y=;
+ b=bsBl1RQKescuHwPAcvxWKH1fCf/DNwtf810nuzI9ECkuHP8KTQUmVbFgJ7yvmrnvct
+ 2IwOjaGQIAnSYvPS3PDfQs3B8n/1QQwE1+i9NfQwfDJ40eVR/P11xtb2zHmYICA7CNdo
+ okHBDwtuhA+Tk6uO8J8APjCf3pegeglC25xN6xpqt2jNlhI2DcMsjKDO3ZMB7uxuRA5h
+ ugWhF9REIlATDy2qZZVnh3vLRBzuZU/ufM1e8COTJ/DiVjq/2C7JG4pePvmEydLYMPmw
+ 0AO0CIkVcBn0TY7poMrajf/2m7C/SQm5qfmGBFNeqmQACKswT0VOm5csx/4ZRxvfC8eH
+ IDqw==
+X-Gm-Message-State: AOJu0YzfWXlWn2GaSotFvXl3OGua8h8S/2RBWuOCeWlkcjitTu2bmk7y
+ 2+hy4Z6nBsl59A3VHQmW98QCwTOobOeBTQEaLCOEofcp3omhMrGRKIRPpGZibcFw3HKnuiFI6rT
+ k
+X-Google-Smtp-Source: AGHT+IFzlRbujHTH/uM+D0RWrqHnxAj60ytKlOgOg8yqjM3UgQu7KIS62LEakQimR8qKIMDfIvYUlw==
+X-Received: by 2002:a17:90b:b83:b0:2e0:8719:5efa with SMTP id
+ 98e67ed59e1d1-2e1e621e79bmr1105313a91.13.1728002181567; 
+ Thu, 03 Oct 2024 17:36:21 -0700 (PDT)
+Received: from debug.ba.rivosinc.com ([64.71.180.162])
+ by smtp.gmail.com with ESMTPSA id
+ 98e67ed59e1d1-2e1e86657casm151245a91.43.2024.10.03.17.36.20
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 03 Oct 2024 17:36:21 -0700 (PDT)
+Date: Thu, 3 Oct 2024 17:36:19 -0700
+From: Deepak Gupta <debug@rivosinc.com>
+To: qemu-riscv@nongnu.org, qemu-devel@nongnu.org
+Cc: palmer@dabbelt.com, Alistair.Francis@wdc.com, bmeng.cn@gmail.com,
+ liwei1518@gmail.com, dbarboza@ventanamicro.com,
+ zhiwei_liu@linux.alibaba.com, jim.shu@sifive.com, kito.cheng@sifive.com
+Subject: Re: [PATCH v15 14/21] target/riscv: disallow probe accesses to
+ shadow stack
+Message-ID: <Zv84gz6RPTuIkAWw@debug.ba.rivosinc.com>
+References: <20241003183342.679249-1-debug@rivosinc.com>
+ <20241003183342.679249-15-debug@rivosinc.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] hw/riscv/spike: Replace tswap64() by ldq_endian_p()
-To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>, qemu-devel@nongnu.org
-Cc: Thomas Huth <thuth@redhat.com>, Paolo Bonzini <pbonzini@redhat.com>,
- qemu-riscv@nongnu.org, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- =?UTF-8?Q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>,
- Anton Johansson <anjo@rev.ng>, Palmer Dabbelt <palmer@dabbelt.com>,
- Bin Meng <bmeng.cn@gmail.com>, Weiwei Li <liwei1518@gmail.com>
-References: <20240930124831.54232-1-philmd@linaro.org>
- <c08eef57-6e93-4856-a1a4-634ce687997e@ventanamicro.com>
- <69ec3c06-ad14-4c86-8361-61dd8fbc67c7@ilande.co.uk>
- <3567507b-4e1e-4924-9088-8be3b09f552f@ventanamicro.com>
-Content-Language: en-US
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-In-Reply-To: <3567507b-4e1e-4924-9088-8be3b09f552f@ventanamicro.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::32c;
- envelope-from=philmd@linaro.org; helo=mail-wm1-x32c.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+Content-Type: text/plain; charset=us-ascii; format=flowed
+Content-Disposition: inline
+In-Reply-To: <20241003183342.679249-15-debug@rivosinc.com>
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1030;
+ envelope-from=debug@rivosinc.com; helo=mail-pj1-x1030.google.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -104,125 +97,119 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 2/10/24 17:01, Daniel Henrique Barboza wrote:
-> On 10/2/24 11:44 AM, Mark Cave-Ayland wrote:
->> On 02/10/2024 15:17, Daniel Henrique Barboza wrote:
->>
->>> Phil, this patch breaks 'make check-avocado' in my env:
+On Thu, Oct 03, 2024 at 11:33:35AM -0700, Deepak Gupta wrote:
+>`check_zicbom_access` (`cbo.clean/flush/inval`) may probe shadow stack
+>memory and must always raise store/AMO access fault because it has store
+>semantics.
+>
+>For non-shadow stack memory even though `cbo.clean/flush/inval` have
+>store semantics, it will not fault if read is allowed (probably to follow
+>`clflush` on x86). Although if read is not allowed, eventually
+>`probe_write` will do store page (or access) fault (if permissions don't
+>allow it).
+>
+>cbo operations on shadow stack memory must always raise store access fault.
+>Thus extending `get_physical_address` to recieve `probe` parameter as well.
+>
+>Signed-off-by: Deepak Gupta <debug@rivosinc.com>
+>---
+> target/riscv/cpu_helper.c | 22 +++++++++++++---------
+> 1 file changed, 13 insertions(+), 9 deletions(-)
+>
+>diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+>index 5580f5f3f3..ab46f694b5 100644
+>--- a/target/riscv/cpu_helper.c
+>+++ b/target/riscv/cpu_helper.c
+>@@ -884,7 +884,7 @@ static int get_physical_address(CPURISCVState *env, hwaddr *physical,
+>                                 target_ulong *fault_pte_addr,
+>                                 int access_type, int mmu_idx,
+>                                 bool first_stage, bool two_stage,
+>-                                bool is_debug)
+>+                                bool is_debug, bool is_probe)
+> {
+>     /*
+>      * NOTE: the env->pc value visible here will not be
+>@@ -1030,7 +1030,7 @@ restart:
+>             int vbase_ret = get_physical_address(env, &vbase, &vbase_prot,
+>                                                  base, NULL, MMU_DATA_LOAD,
+>                                                  MMUIdx_U, false, true,
+>-                                                 is_debug);
+>+                                                 is_debug, false);
+>
+>             if (vbase_ret != TRANSLATE_SUCCESS) {
+>                 if (fault_pte_addr) {
+>@@ -1117,8 +1117,11 @@ restart:
+>         /* if bcfi enabled, PTE_W is not reserved and shadow stack page */
+>         if (cpu_get_bcfien(env) && first_stage) {
+>             sstack_page = true;
+>-            /* if ss index, read and write allowed. else only read allowed */
+>-            rwx = is_sstack_idx ? PTE_R | PTE_W : PTE_R;
+>+            /*
+>+             * if ss index, read and write allowed. else if not a probe
+>+             * then only read allowed
+>+             */
+>+            rwx = is_sstack_idx ? (PTE_R | PTE_W) : (is_probe ? rwx :  PTE_R);
+
+hmm... there is a bug here. Above would allow writes to go through if probed.
+
+It should be 
 
 
->>> On 9/30/24 9:48 AM, Philippe Mathieu-Daudé wrote:
->>>> Hold the target endianness in HTIFState::target_is_bigendian.
->>>> Pass the target endianness as argument to htif_mm_init().
->>>> Replace tswap64() calls by ldq_endian_p() ones.
->>>>
->>>> Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
->>>> ---
->>>> Based-on: <20240930073450.33195-2-philmd@linaro.org>
->>>>            "qemu/bswap: Introduce ld/st_endian_p() API"
->>>>
->>>> Note: this is a non-QOM device!
->>>> ---
->>>>   include/hw/char/riscv_htif.h |  4 +++-
->>>>   hw/char/riscv_htif.c         | 17 +++++++++++------
->>>>   hw/riscv/spike.c             |  2 +-
->>>>   3 files changed, 15 insertions(+), 8 deletions(-)
->>>>
->>>> diff --git a/include/hw/char/riscv_htif.h 
->>>> b/include/hw/char/riscv_htif.h
->>>> index df493fdf6b..24868ddfe1 100644
->>>> --- a/include/hw/char/riscv_htif.h
->>>> +++ b/include/hw/char/riscv_htif.h
->>>> @@ -35,6 +35,7 @@ typedef struct HTIFState {
->>>>       hwaddr tohost_offset;
->>>>       hwaddr fromhost_offset;
->>>>       MemoryRegion mmio;
->>>> +    bool target_is_bigendian;
->>>>       CharBackend chr;
->>>>       uint64_t pending_read;
->>>> @@ -49,6 +50,7 @@ void htif_symbol_callback(const char *st_name, int 
->>>> st_info, uint64_t st_value,
->>>>   /* legacy pre qom */
->>>>   HTIFState *htif_mm_init(MemoryRegion *address_space, Chardev *chr,
->>>> -                        uint64_t nonelf_base, bool custom_base);
->>>> +                        uint64_t nonelf_base, bool custom_base,
->>>> +                        bool target_is_bigendian);
->>>>   #endif
->>>> diff --git a/hw/char/riscv_htif.c b/hw/char/riscv_htif.c
->>>> index 9bef60def1..77951f3c76 100644
->>>> --- a/hw/char/riscv_htif.c
->>>> +++ b/hw/char/riscv_htif.c
->>>> @@ -30,7 +30,6 @@
->>>>   #include "qemu/timer.h"
->>>>   #include "qemu/error-report.h"
->>>>   #include "exec/address-spaces.h"
->>>> -#include "exec/tswap.h"
->>>>   #include "sysemu/dma.h"
->>>>   #include "sysemu/runstate.h"
->>>> @@ -211,13 +210,17 @@ static void htif_handle_tohost_write(HTIFState 
->>>> *s, uint64_t val_written)
->>>>                       SHUTDOWN_CAUSE_GUEST_SHUTDOWN, exit_code);
->>>>                   return;
->>>>               } else {
->>>> +                bool be = s->target_is_bigendian;
->>>>                   uint64_t syscall[8];
->>>> +
->>>>                   cpu_physical_memory_read(payload, syscall, 
->>>> sizeof(syscall));
->>>> -                if (tswap64(syscall[0]) == PK_SYS_WRITE &&
->>>> -                    tswap64(syscall[1]) == HTIF_DEV_CONSOLE &&
->>>> -                    tswap64(syscall[3]) == HTIF_CONSOLE_CMD_PUTC) {
->>>> +                if (ldq_endian_p(be, &syscall[0]) == PK_SYS_WRITE &&
->>>> +                    ldq_endian_p(be, &syscall[1]) == 
->>>> HTIF_DEV_CONSOLE &&
->>>> +                    ldq_endian_p(be, &syscall[3]) == 
->>>> HTIF_CONSOLE_CMD_PUTC) {
->>>>                       uint8_t ch;
->>>> -                    cpu_physical_memory_read(tswap64(syscall[2]), 
->>>> &ch, 1);
->>>> +
->>>> +                    cpu_physical_memory_read(ldl_endian_p(be, 
->>>> &syscall[2]),
->>
->>                                                   ^^^^^^^^^^^^
->>
->> Shouldn't this be ldq_endian_p() for a 64-bit value?
+               rwx = is_sstack_idx ? (PTE_R | PTE_W) : (is_probe ? 0 :  PTE_R);
 
-Oops, thanks Mark, stupid c/p mistake.
+I'll fix it in next version.
+Still need higher level feedback on patch that if it's okay to extend
+`get_physical_address` to recieve `probe` parameter.
 
-> Bingo! This change fixes make check-avocado and the OpenSBI boot:
-> 
-> $ git diff
-> diff --git a/hw/char/riscv_htif.c b/hw/char/riscv_htif.c
-> index 77951f3c76..0ed038a70c 100644
-> --- a/hw/char/riscv_htif.c
-> +++ b/hw/char/riscv_htif.c
-> @@ -219,7 +219,7 @@ static void htif_handle_tohost_write(HTIFState *s, 
-> uint64_t val_written)
->                       ldq_endian_p(be, &syscall[3]) == 
-> HTIF_CONSOLE_CMD_PUTC) {
->                       uint8_t ch;
-> 
-> -                    cpu_physical_memory_read(ldl_endian_p(be, 
-> &syscall[2]),
-> +                    cpu_physical_memory_read(ldq_endian_p(be, 
-> &syscall[2]),
->                                                &ch, 1);
->                       qemu_chr_fe_write(&s->chr, &ch, 1);
->                       resp = 0x100 | (uint8_t)payload;
-> 
-> $ ./build/qemu-system-riscv32 -M spike --nographic
-> 
-> OpenSBI v1.5.1
->     ____                    _____ ____ _____
->    / __ \                  / ____|  _ \_   _|
->   | |  | |_ __   ___ _ __ | (___ | |_) || |
->   | |  | | '_ \ / _ \ '_ \ \___ \|  _ < | |
->   | |__| | |_) |  __/ | | |____) | |_) || |_
->    \____/| .__/ \___|_| |_|_____/|____/_____|
->          | |
->          |_|
-> (...)
 
-I'll take that as a T-b tag :P Thanks Daniel!
+>             break;
+>         }
+>         return TRANSLATE_FAIL;
+>@@ -1327,13 +1330,13 @@ hwaddr riscv_cpu_get_phys_page_debug(CPUState *cs, vaddr addr)
+>     int mmu_idx = riscv_env_mmu_index(&cpu->env, false);
+>
+>     if (get_physical_address(env, &phys_addr, &prot, addr, NULL, 0, mmu_idx,
+>-                             true, env->virt_enabled, true)) {
+>+                             true, env->virt_enabled, true, false)) {
+>         return -1;
+>     }
+>
+>     if (env->virt_enabled) {
+>         if (get_physical_address(env, &phys_addr, &prot, phys_addr, NULL,
+>-                                 0, MMUIdx_U, false, true, true)) {
+>+                                 0, MMUIdx_U, false, true, true, false)) {
+>             return -1;
+>         }
+>     }
+>@@ -1447,7 +1450,7 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
+>         /* Two stage lookup */
+>         ret = get_physical_address(env, &pa, &prot, address,
+>                                    &env->guest_phys_fault_addr, access_type,
+>-                                   mmu_idx, true, true, false);
+>+                                   mmu_idx, true, true, false, probe);
+>
+>         /*
+>          * A G-stage exception may be triggered during two state lookup.
+>@@ -1470,7 +1473,7 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
+>
+>             ret = get_physical_address(env, &pa, &prot2, im_address, NULL,
+>                                        access_type, MMUIdx_U, false, true,
+>-                                       false);
+>+                                       false, probe);
+>
+>             qemu_log_mask(CPU_LOG_MMU,
+>                           "%s 2nd-stage address=%" VADDR_PRIx
+>@@ -1507,7 +1510,8 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
+>     } else {
+>         /* Single stage lookup */
+>         ret = get_physical_address(env, &pa, &prot, address, NULL,
+>-                                   access_type, mmu_idx, true, false, false);
+>+                                   access_type, mmu_idx, true, false, false,
+>+                                   probe);
+>
+>         qemu_log_mask(CPU_LOG_MMU,
+>                       "%s address=%" VADDR_PRIx " ret %d physical "
+>-- 
+>2.45.0
+>
 
