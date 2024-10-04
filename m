@@ -4,58 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2E889CF8840
-	for <qemu-riscv@archiver.kernel.org>; Fri,  4 Oct 2024 16:33:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 10D02CF884D
+	for <qemu-riscv@archiver.kernel.org>; Fri,  4 Oct 2024 16:33:40 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1swlEg-0006e5-So; Fri, 04 Oct 2024 12:32:59 -0400
+	id 1swlEv-0007eU-Lz; Fri, 04 Oct 2024 12:33:13 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1swlEP-0006Fy-17
- for qemu-riscv@nongnu.org; Fri, 04 Oct 2024 12:32:43 -0400
-Received: from mail-lj1-x22f.google.com ([2a00:1450:4864:20::22f])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1swlEq-0007HK-Ii
+ for qemu-riscv@nongnu.org; Fri, 04 Oct 2024 12:33:08 -0400
+Received: from mail-lf1-x136.google.com ([2a00:1450:4864:20::136])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1swlEN-0005mO-9a
- for qemu-riscv@nongnu.org; Fri, 04 Oct 2024 12:32:40 -0400
-Received: by mail-lj1-x22f.google.com with SMTP id
- 38308e7fff4ca-2fad784e304so29809001fa.2
- for <qemu-riscv@nongnu.org>; Fri, 04 Oct 2024 09:32:38 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1swlEm-0005p8-JY
+ for qemu-riscv@nongnu.org; Fri, 04 Oct 2024 12:33:07 -0400
+Received: by mail-lf1-x136.google.com with SMTP id
+ 2adb3069b0e04-5389917ef34so2772642e87.2
+ for <qemu-riscv@nongnu.org>; Fri, 04 Oct 2024 09:33:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1728059557; x=1728664357; darn=nongnu.org;
+ d=linaro.org; s=google; t=1728059583; x=1728664383; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=nZpimvVQnGecchp1DSJAwynwQ1iesRuTNy8I2ClNlvc=;
- b=Wr03iigyfvI5hDMkTCBshimDW281wdofMt9QlGJ0rkY0WHGDSwZAXhcv/ZO66XSCW4
- NrFq7vGOVDLQ1y+BjyF84sM7SN6p4tY00kEFAhmLcZ9rF0nMS4V3yE9qwiMS8Snc+aQG
- 3liULDInWpE5EzlI0oW9vu+lrZ/OyqLNl2ci/wafSl9dAVggVOCg0SBqw3heigfTzUXI
- PP+td8nZj9MdVQMh5sMgZaEUAJqk8QZLQfxxdoC9XVfiReRVLqhkZg16YBed6h4QYVPz
- QzupXQBwyrZRLu7y/7Vm8iZ0ETHMQusZEQGPRh4lXdqaMCSfil1icpZ6rBsZxE8Xnw1a
- 8K6w==
+ bh=2s/tzGPg/LmnPo+rxsPQADcqJffZEpvaXgXhuXN6AeQ=;
+ b=sAI8EQpCYesTCsw2GsCCQcrNrdCSx9ho3tzjWRFFR+Z9PfhiJZwNYB3qZrw6eJyY+E
+ s2tVNL7nTS6yuzxKCK5TB7BJShNnDhTU4DOs3pZbRYicp/2KYbShxGJtjWjSIs9OlP+5
+ oGiEidj7NwcWp5RYo5bD8mR7ECWelg1f9hRmejNg16Mpwf840eFImEdkRbQk3sVWXt9E
+ iUM61x/1UhF28HcF8IP7qMPnkG+4gcOv4i486Zzgh3ZZV0vw93mk5N+0mSXxxdSgAvDs
+ FEUOTltjwd9dBo/H1M/nkwi8gd8UfnfvlKH2nmBPFR95MI/BEBmAaxr/GIq15edMji0U
+ Vjww==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728059557; x=1728664357;
+ d=1e100.net; s=20230601; t=1728059583; x=1728664383;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=nZpimvVQnGecchp1DSJAwynwQ1iesRuTNy8I2ClNlvc=;
- b=XRsFqIZhnsVoP8Fb2MoryL26yR6OtiHZ+3nfdRCKM0nr7ydUuxl3OAywuC4eGww4Qk
- jsuzp6qm56+R6mifu1BTPWjDdXWTbSzgmOluIFIRnsoZXkd0+cUK0dhwszwRejbdV72J
- h0xsRNe1nNtWMKbYkBtCXYO7fmAVyOgzlDiuoA9LsuCYQS2KMgsYAwTAvb8rQmJ+RC66
- YqfrLW1e1hG9C74CnYSZmvwbAJa00tGtwqVIqpn9HEfeQ9gYGk5RGdPfTq0SVxr7/J98
- zBOJuEnsOQL10+2TdV93DW9Kz2rcMLO0ZCcgzKhdFBaikxHgSgFIyxHvrGGGUFpUyonY
- KUNQ==
-X-Gm-Message-State: AOJu0YznH7TlB0GE/weUOi7OGjAup7s66x36wdjqyH7rFYF0AdxE5HbS
- XQPI8MCHjOvjXD/mwPn+CBV03RAWUrnu6kHZxXpn7intTOMHRpHei1l03o7jG3s=
-X-Google-Smtp-Source: AGHT+IESnbCx3EdGKG1FtJeY8vVI0UmMpyzLTgCEarsQnpb3j/g31sMRPD1Fmkc1iDWQo0CJPCsgag==
-X-Received: by 2002:a2e:a58a:0:b0:2f7:64b9:ff90 with SMTP id
- 38308e7fff4ca-2faf3c017d0mr17237501fa.9.1728059557389; 
- Fri, 04 Oct 2024 09:32:37 -0700 (PDT)
+ bh=2s/tzGPg/LmnPo+rxsPQADcqJffZEpvaXgXhuXN6AeQ=;
+ b=KbPzwDfvW607VzYzqmz2mIMTF6s8OQ+WNBrR9ruh78kiGuWTxTVtiibTarZZTLH1pX
+ viKkagH37jOGmkApQJpinlGrV5vOK2lLrpYChGNuWVFIoPTDKHyQ4VyUeizK75+57WFh
+ YBddjhhFYh7GpTjm01tkOaZOCU58mJwLp6szx88BYZ8Rrh82YZHfC/rXwLbdClsWDunn
+ NZa8DGnZA5E3Sgexyb7vhUI50xv9j/GlSv8ymrQvCLQrBC+8FNLBvleKMpg+I08OJozz
+ rn/duiLnBm8uHQk+UIbvz1bDdgHFBRAY6SSrvRXvV0F8B5k+wNUZ3mrC2rFDG49JTyqS
+ XDlw==
+X-Gm-Message-State: AOJu0YzgpIrAg4GcCZB9+V3JgtXk+J6cd9Y+LsREP+ULLgwoig05Qol8
+ CnvjwnMH4o4hf/Vdubo2cZnRSeU3zKuejwGCCLMsFEpL0U+UH8PF4PGs6lsYHNg=
+X-Google-Smtp-Source: AGHT+IGC4fHpQTA+27ggAZsNhRcHU2c/GQgEsPn+l3WUcVvbsSReakNbFECwUaxnJDpvvOqCLsru5w==
+X-Received: by 2002:a05:6512:39c5:b0:535:6cbf:51a3 with SMTP id
+ 2adb3069b0e04-539ab88a017mr2509555e87.25.1728059582806; 
+ Fri, 04 Oct 2024 09:33:02 -0700 (PDT)
 Received: from localhost.localdomain ([91.223.100.150])
  by smtp.gmail.com with ESMTPSA id
- 38308e7fff4ca-2faf9b3ac99sm189601fa.130.2024.10.04.09.32.31
+ 2adb3069b0e04-539afec8255sm1950e87.83.2024.10.04.09.32.57
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Fri, 04 Oct 2024 09:32:35 -0700 (PDT)
+ Fri, 04 Oct 2024 09:33:01 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, qemu-s390x@nongnu.org,
@@ -63,24 +63,24 @@ Cc: qemu-riscv@nongnu.org, qemu-s390x@nongnu.org,
  Richard Henderson <richard.henderson@linaro.org>,
  Pierrick Bouvier <pierrick.bouvier@linaro.org>, qemu-ppc@nongnu.org,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-Subject: [PATCH v2 07/25] target/hexagon: Use explicit little-endian LD/ST API
-Date: Fri,  4 Oct 2024 13:30:23 -0300
-Message-ID: <20241004163042.85922-8-philmd@linaro.org>
+Subject: [PATCH v2 09/25] target/i386: Use explicit little-endian LD/ST API
+Date: Fri,  4 Oct 2024 13:30:25 -0300
+Message-ID: <20241004163042.85922-10-philmd@linaro.org>
 X-Mailer: git-send-email 2.45.2
 In-Reply-To: <20241004163042.85922-1-philmd@linaro.org>
 References: <20241004163042.85922-1-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::22f;
- envelope-from=philmd@linaro.org; helo=mail-lj1-x22f.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::136;
+ envelope-from=philmd@linaro.org; helo=mail-lf1-x136.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -96,7 +96,7 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-The Hexagon architecture uses little endianness. Directly use
+The x86 architecture uses little endianness. Directly use
 the little-endian LD/ST API.
 
 Mechanical change using:
@@ -105,62 +105,217 @@ Mechanical change using:
     for acc in uw w l q tul; do \
       sed -i -e "s/ld${acc}_p(/ld${acc}_${end}_p(/" \
              -e "s/st${acc}_p(/st${acc}_${end}_p(/" \
-        $(git grep -wlE '(ld|st)t?u?[wlq]_p' target/hexagon/); \
+        $(git grep -wlE '(ld|st)t?u?[wlq]_p' target/i386/); \
     done
 
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 ---
- target/hexagon/gdbstub.c | 10 +++++-----
- 1 file changed, 5 insertions(+), 5 deletions(-)
+ target/i386/gdbstub.c                | 30 +++++++++++++-------------
+ target/i386/tcg/sysemu/excp_helper.c |  4 ++--
+ target/i386/xsave_helper.c           | 32 ++++++++++++++--------------
+ 3 files changed, 33 insertions(+), 33 deletions(-)
 
-diff --git a/target/hexagon/gdbstub.c b/target/hexagon/gdbstub.c
-index 557b3029785..12d6b3bbcbb 100644
---- a/target/hexagon/gdbstub.c
-+++ b/target/hexagon/gdbstub.c
-@@ -52,7 +52,7 @@ int hexagon_gdb_write_register(CPUState *cs, uint8_t *mem_buf, int n)
-     CPUHexagonState *env = cpu_env(cs);
+diff --git a/target/i386/gdbstub.c b/target/i386/gdbstub.c
+index 4acf485879e..28ccf06309d 100644
+--- a/target/i386/gdbstub.c
++++ b/target/i386/gdbstub.c
+@@ -89,10 +89,10 @@ static int gdb_read_reg_cs64(uint32_t hflags, GByteArray *buf, target_ulong val)
+ static int gdb_write_reg_cs64(uint32_t hflags, uint8_t *buf, target_ulong *val)
+ {
+     if (hflags & HF_CS64_MASK) {
+-        *val = ldq_p(buf);
++        *val = ldq_le_p(buf);
+         return 8;
+     }
+-    *val = ldl_p(buf);
++    *val = ldl_le_p(buf);
+     return 4;
+ }
  
-     if (n == HEX_REG_P3_0_ALIASED) {
--        uint32_t p3_0 = ldl_p(mem_buf);
-+        uint32_t p3_0 = ldl_le_p(mem_buf);
-         for (int i = 0; i < NUM_PREGS; i++) {
-             env->pred[i] = extract32(p3_0, i * 8, 8);
+@@ -221,7 +221,7 @@ int x86_cpu_gdb_read_register(CPUState *cs, GByteArray *mem_buf, int n)
+ static int x86_cpu_gdb_load_seg(X86CPU *cpu, X86Seg sreg, uint8_t *mem_buf)
+ {
+     CPUX86State *env = &cpu->env;
+-    uint16_t selector = ldl_p(mem_buf);
++    uint16_t selector = ldl_le_p(mem_buf);
+ 
+     if (selector != env->segs[sreg].selector) {
+ #if defined(CONFIG_USER_ONLY)
+@@ -262,15 +262,15 @@ int x86_cpu_gdb_write_register(CPUState *cs, uint8_t *mem_buf, int n)
+     if (n < CPU_NB_REGS) {
+         if (TARGET_LONG_BITS == 64) {
+             if (env->hflags & HF_CS64_MASK) {
+-                env->regs[gpr_map[n]] = ldtul_p(mem_buf);
++                env->regs[gpr_map[n]] = ldtul_le_p(mem_buf);
+             } else if (n < CPU_NB_REGS32) {
+-                env->regs[gpr_map[n]] = ldtul_p(mem_buf) & 0xffffffffUL;
++                env->regs[gpr_map[n]] = ldtul_le_p(mem_buf) & 0xffffffffUL;
+             }
+             return sizeof(target_ulong);
+         } else if (n < CPU_NB_REGS32) {
+             n = gpr_map32[n];
+             env->regs[n] &= ~0xffffffffUL;
+-            env->regs[n] |= (uint32_t)ldl_p(mem_buf);
++            env->regs[n] |= (uint32_t)ldl_le_p(mem_buf);
+             return 4;
          }
-@@ -60,14 +60,14 @@ int hexagon_gdb_write_register(CPUState *cs, uint8_t *mem_buf, int n)
-     }
+     } else if (n >= IDX_FP_REGS && n < IDX_FP_REGS + 8) {
+@@ -281,8 +281,8 @@ int x86_cpu_gdb_write_register(CPUState *cs, uint8_t *mem_buf, int n)
+     } else if (n >= IDX_XMM_REGS && n < IDX_XMM_REGS + CPU_NB_REGS) {
+         n -= IDX_XMM_REGS;
+         if (n < CPU_NB_REGS32 || TARGET_LONG_BITS == 64) {
+-            env->xmm_regs[n].ZMM_Q(0) = ldq_p(mem_buf);
+-            env->xmm_regs[n].ZMM_Q(1) = ldq_p(mem_buf + 8);
++            env->xmm_regs[n].ZMM_Q(0) = ldq_le_p(mem_buf);
++            env->xmm_regs[n].ZMM_Q(1) = ldq_le_p(mem_buf + 8);
+             return 16;
+         }
+     } else {
+@@ -290,18 +290,18 @@ int x86_cpu_gdb_write_register(CPUState *cs, uint8_t *mem_buf, int n)
+         case IDX_IP_REG:
+             if (TARGET_LONG_BITS == 64) {
+                 if (env->hflags & HF_CS64_MASK) {
+-                    env->eip = ldq_p(mem_buf);
++                    env->eip = ldq_le_p(mem_buf);
+                 } else {
+-                    env->eip = ldq_p(mem_buf) & 0xffffffffUL;
++                    env->eip = ldq_le_p(mem_buf) & 0xffffffffUL;
+                 }
+                 return 8;
+             } else {
+                 env->eip &= ~0xffffffffUL;
+-                env->eip |= (uint32_t)ldl_p(mem_buf);
++                env->eip |= (uint32_t)ldl_le_p(mem_buf);
+                 return 4;
+             }
+         case IDX_FLAGS_REG:
+-            env->eflags = ldl_p(mem_buf);
++            env->eflags = ldl_le_p(mem_buf);
+             return 4;
  
-     if (n < TOTAL_PER_THREAD_REGS) {
--        env->gpr[n] = ldl_p(mem_buf);
-+        env->gpr[n] = ldl_le_p(mem_buf);
-         return sizeof(target_ulong);
-     }
+         case IDX_SEG_REGS:
+@@ -327,10 +327,10 @@ int x86_cpu_gdb_write_register(CPUState *cs, uint8_t *mem_buf, int n)
+             return 4;
  
-     n -= TOTAL_PER_THREAD_REGS;
+         case IDX_FP_REGS + 8:
+-            cpu_set_fpuc(env, ldl_p(mem_buf));
++            cpu_set_fpuc(env, ldl_le_p(mem_buf));
+             return 4;
+         case IDX_FP_REGS + 9:
+-            tmp = ldl_p(mem_buf);
++            tmp = ldl_le_p(mem_buf);
+             env->fpstt = (tmp >> 11) & 7;
+             env->fpus = tmp & ~0x3800;
+             return 4;
+@@ -348,7 +348,7 @@ int x86_cpu_gdb_write_register(CPUState *cs, uint8_t *mem_buf, int n)
+             return 4;
  
-     if (n < NUM_PREGS) {
--        env->pred[n] = ldl_p(mem_buf) & 0xff;
-+        env->pred[n] = ldl_le_p(mem_buf) & 0xff;
-         return sizeof(uint8_t);
-     }
+         case IDX_MXCSR_REG:
+-            cpu_set_mxcsr(env, ldl_p(mem_buf));
++            cpu_set_mxcsr(env, ldl_le_p(mem_buf));
+             return 4;
  
-@@ -117,7 +117,7 @@ static int gdb_put_vreg(CPUHexagonState *env, uint8_t *mem_buf, int n)
+         case IDX_CTL_CR0_REG:
+diff --git a/target/i386/tcg/sysemu/excp_helper.c b/target/i386/tcg/sysemu/excp_helper.c
+index 8fb05b1f531..de6765099f3 100644
+--- a/target/i386/tcg/sysemu/excp_helper.c
++++ b/target/i386/tcg/sysemu/excp_helper.c
+@@ -86,7 +86,7 @@ static bool ptw_translate(PTETranslate *inout, hwaddr addr, uint64_t ra)
+ static inline uint32_t ptw_ldl(const PTETranslate *in, uint64_t ra)
  {
-     int i;
-     for (i = 0; i < ARRAY_SIZE(env->VRegs[n].uw); i++) {
--        env->VRegs[n].uw[i] = ldl_p(mem_buf);
-+        env->VRegs[n].uw[i] = ldl_le_p(mem_buf);
-         mem_buf += 4;
+     if (likely(in->haddr)) {
+-        return ldl_p(in->haddr);
++        return ldl_le_p(in->haddr);
      }
-     return MAX_VEC_SIZE_BYTES;
-@@ -127,7 +127,7 @@ static int gdb_put_qreg(CPUHexagonState *env, uint8_t *mem_buf, int n)
+     return cpu_ldl_mmuidx_ra(in->env, in->gaddr, in->ptw_idx, ra);
+ }
+@@ -94,7 +94,7 @@ static inline uint32_t ptw_ldl(const PTETranslate *in, uint64_t ra)
+ static inline uint64_t ptw_ldq(const PTETranslate *in, uint64_t ra)
  {
-     int i;
-     for (i = 0; i < ARRAY_SIZE(env->QRegs[n].uw); i++) {
--        env->QRegs[n].uw[i] = ldl_p(mem_buf);
-+        env->QRegs[n].uw[i] = ldl_le_p(mem_buf);
-         mem_buf += 4;
+     if (likely(in->haddr)) {
+-        return ldq_p(in->haddr);
++        return ldq_le_p(in->haddr);
      }
-     return MAX_VEC_SIZE_BYTES / 8;
+     return cpu_ldq_mmuidx_ra(in->env, in->gaddr, in->ptw_idx, ra);
+ }
+diff --git a/target/i386/xsave_helper.c b/target/i386/xsave_helper.c
+index 996e9f3bfef..fc10bfa6718 100644
+--- a/target/i386/xsave_helper.c
++++ b/target/i386/xsave_helper.c
+@@ -43,8 +43,8 @@ void x86_cpu_xsave_all_areas(X86CPU *cpu, void *buf, uint32_t buflen)
+     for (i = 0; i < CPU_NB_REGS; i++) {
+         uint8_t *xmm = legacy->xmm_regs[i];
+ 
+-        stq_p(xmm,     env->xmm_regs[i].ZMM_Q(0));
+-        stq_p(xmm + 8, env->xmm_regs[i].ZMM_Q(1));
++        stq_le_p(xmm,     env->xmm_regs[i].ZMM_Q(0));
++        stq_le_p(xmm + 8, env->xmm_regs[i].ZMM_Q(1));
+     }
+ 
+     header->xstate_bv = env->xstate_bv;
+@@ -58,8 +58,8 @@ void x86_cpu_xsave_all_areas(X86CPU *cpu, void *buf, uint32_t buflen)
+         for (i = 0; i < CPU_NB_REGS; i++) {
+             uint8_t *ymmh = avx->ymmh[i];
+ 
+-            stq_p(ymmh,     env->xmm_regs[i].ZMM_Q(2));
+-            stq_p(ymmh + 8, env->xmm_regs[i].ZMM_Q(3));
++            stq_le_p(ymmh,     env->xmm_regs[i].ZMM_Q(2));
++            stq_le_p(ymmh + 8, env->xmm_regs[i].ZMM_Q(3));
+         }
+     }
+ 
+@@ -101,10 +101,10 @@ void x86_cpu_xsave_all_areas(X86CPU *cpu, void *buf, uint32_t buflen)
+         for (i = 0; i < CPU_NB_REGS; i++) {
+             uint8_t *zmmh = zmm_hi256->zmm_hi256[i];
+ 
+-            stq_p(zmmh,      env->xmm_regs[i].ZMM_Q(4));
+-            stq_p(zmmh + 8,  env->xmm_regs[i].ZMM_Q(5));
+-            stq_p(zmmh + 16, env->xmm_regs[i].ZMM_Q(6));
+-            stq_p(zmmh + 24, env->xmm_regs[i].ZMM_Q(7));
++            stq_le_p(zmmh,      env->xmm_regs[i].ZMM_Q(4));
++            stq_le_p(zmmh + 8,  env->xmm_regs[i].ZMM_Q(5));
++            stq_le_p(zmmh + 16, env->xmm_regs[i].ZMM_Q(6));
++            stq_le_p(zmmh + 24, env->xmm_regs[i].ZMM_Q(7));
+         }
+ 
+ #ifdef TARGET_X86_64
+@@ -177,8 +177,8 @@ void x86_cpu_xrstor_all_areas(X86CPU *cpu, const void *buf, uint32_t buflen)
+     for (i = 0; i < CPU_NB_REGS; i++) {
+         const uint8_t *xmm = legacy->xmm_regs[i];
+ 
+-        env->xmm_regs[i].ZMM_Q(0) = ldq_p(xmm);
+-        env->xmm_regs[i].ZMM_Q(1) = ldq_p(xmm + 8);
++        env->xmm_regs[i].ZMM_Q(0) = ldq_le_p(xmm);
++        env->xmm_regs[i].ZMM_Q(1) = ldq_le_p(xmm + 8);
+     }
+ 
+     env->xstate_bv = header->xstate_bv;
+@@ -191,8 +191,8 @@ void x86_cpu_xrstor_all_areas(X86CPU *cpu, const void *buf, uint32_t buflen)
+         for (i = 0; i < CPU_NB_REGS; i++) {
+             const uint8_t *ymmh = avx->ymmh[i];
+ 
+-            env->xmm_regs[i].ZMM_Q(2) = ldq_p(ymmh);
+-            env->xmm_regs[i].ZMM_Q(3) = ldq_p(ymmh + 8);
++            env->xmm_regs[i].ZMM_Q(2) = ldq_le_p(ymmh);
++            env->xmm_regs[i].ZMM_Q(3) = ldq_le_p(ymmh + 8);
+         }
+     }
+ 
+@@ -241,10 +241,10 @@ void x86_cpu_xrstor_all_areas(X86CPU *cpu, const void *buf, uint32_t buflen)
+         for (i = 0; i < CPU_NB_REGS; i++) {
+             const uint8_t *zmmh = zmm_hi256->zmm_hi256[i];
+ 
+-            env->xmm_regs[i].ZMM_Q(4) = ldq_p(zmmh);
+-            env->xmm_regs[i].ZMM_Q(5) = ldq_p(zmmh + 8);
+-            env->xmm_regs[i].ZMM_Q(6) = ldq_p(zmmh + 16);
+-            env->xmm_regs[i].ZMM_Q(7) = ldq_p(zmmh + 24);
++            env->xmm_regs[i].ZMM_Q(4) = ldq_le_p(zmmh);
++            env->xmm_regs[i].ZMM_Q(5) = ldq_le_p(zmmh + 8);
++            env->xmm_regs[i].ZMM_Q(6) = ldq_le_p(zmmh + 16);
++            env->xmm_regs[i].ZMM_Q(7) = ldq_le_p(zmmh + 24);
+         }
+ 
+ #ifdef TARGET_X86_64
 -- 
 2.45.2
 
