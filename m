@@ -4,91 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8ECA2CFA74C
-	for <qemu-riscv@archiver.kernel.org>; Fri,  4 Oct 2024 08:33:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 29C47CFA763
+	for <qemu-riscv@archiver.kernel.org>; Fri,  4 Oct 2024 10:47:08 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1swdky-0008US-VS; Fri, 04 Oct 2024 04:33:48 -0400
+	id 1swfpt-00039c-V6; Fri, 04 Oct 2024 06:47:02 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1swdkx-0008Tt-Hr
- for qemu-riscv@nongnu.org; Fri, 04 Oct 2024 04:33:47 -0400
-Received: from mail-wr1-x42b.google.com ([2a00:1450:4864:20::42b])
+ (Exim 4.90_1) (envelope-from <yongxuan.wang@sifive.com>)
+ id 1swfpp-00038v-RG
+ for qemu-riscv@nongnu.org; Fri, 04 Oct 2024 06:46:58 -0400
+Received: from mail-pl1-x62d.google.com ([2607:f8b0:4864:20::62d])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1swdkv-0005Gl-Kh
- for qemu-riscv@nongnu.org; Fri, 04 Oct 2024 04:33:47 -0400
-Received: by mail-wr1-x42b.google.com with SMTP id
- ffacd0b85a97d-37ce9644daaso1267438f8f.3
- for <qemu-riscv@nongnu.org>; Fri, 04 Oct 2024 01:33:45 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <yongxuan.wang@sifive.com>)
+ id 1swfpo-0002FL-88
+ for qemu-riscv@nongnu.org; Fri, 04 Oct 2024 06:46:57 -0400
+Received: by mail-pl1-x62d.google.com with SMTP id
+ d9443c01a7336-20b5affde14so15068585ad.3
+ for <qemu-riscv@nongnu.org>; Fri, 04 Oct 2024 03:46:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1728030823; x=1728635623; darn=nongnu.org;
- h=in-reply-to:content-transfer-encoding:content-disposition
- :mime-version:references:message-id:subject:cc:to:from:date:from:to
- :cc:subject:date:message-id:reply-to;
- bh=NX1DIh9sXghlblX73NWkF6svT+pBeh8+IHHszzhYzNE=;
- b=eEYDuCHZ2w/oyWTNtzkmNGexld0SpnBwvPEMXJ3hUiPgGZXJolQrbYK4gZFhN5oKI4
- WguQUjWyoZ58BBSB0hPGFPu24e3J2UYyql8SVZQic+NQmuMcyVHC98I4PSj9H+NT+u9R
- 6meNFFQCdJJrHGlp5IrT3bnMlWH124wBiysPtk176CtEZD7bLm9VTQRp24EkE5PrYK/s
- 1kQMPXlGc7Dvxn8XKSBO0hedqa8vdHLnnrwt7TVrgtPPAT5CA1+0YI1bG8b3KFl9weJ/
- Lo3wqe5lkqKbFS/pDMdKS2CQoOaLy56LoOt+FkAehkU58jLpNjeYdGV39d9MhQM9VWf7
- 4T6g==
+ d=sifive.com; s=google; t=1728038814; x=1728643614; darn=nongnu.org;
+ h=message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=2EYWkqMp5+ScbByXROSgqeJzT9vZRrCTIkgx3WQ4s7I=;
+ b=Kn7S2itoO4TZCSmiwwEnu3/ZAyt5rcK6ztN17a62Gm2mamktIKJv4/VySob50hyWLl
+ vlVmCHKt87HqxlzuJg5WpSOEQxdziq9B/VjsygGi1uo8r4mgy+btOw+hOhUVGBjzL259
+ dOthXPvkEhMHzGoZ2eaipJcoTRDQacBQIF19b+adR14wj8CLiK+Cs6BrrCYtqimgO/aY
+ 9/clPVgkkSv3IiAprf3qU0ESN+Uj9Xba4PVRpcmZG+z5IYX4GDUIj7LUpRpGeg0vQ1+B
+ gJQfE/rWBMho10ZIXtKxc64lAR1Go4Sb0SZf3rqKN3v7XBfBFOITt7yomH97G+UkAVBh
+ 8yFg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728030823; x=1728635623;
- h=in-reply-to:content-transfer-encoding:content-disposition
- :mime-version:references:message-id:subject:cc:to:from:date
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=NX1DIh9sXghlblX73NWkF6svT+pBeh8+IHHszzhYzNE=;
- b=uogcKCyj1LLXiVR0ba9On/c5ZHdbNsr/KGkh+Z0j4IX08FQx1cWeBZ0JKwZyRlHaVE
- XuQ0Ff4+hLy9tCBLhXNonlNCEKo11q/ni4tciaidocTs+RI002oTxGiAF7XcNZOnDtX3
- Ew5The1gMc72WXs6l2HQekguH37AchOZiSiwG8Qheu8mXbxu2TgVqwodcW0gtKTpuphA
- 3DJZ4fKAYpoqCJsg82Fa+KiC1CeVJaz/jubIsJqAr9QJ8R6KUKbp2CHJ8DFjlw1Hhqn4
- NkKjEvM+aqRTSVXgnEnt+HciG/n1VY3CwCLEB1LdZD7rFNhJ03KVgX1Swll5x6fqtdUL
- jKOg==
+ d=1e100.net; s=20230601; t=1728038814; x=1728643614;
+ h=message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=2EYWkqMp5+ScbByXROSgqeJzT9vZRrCTIkgx3WQ4s7I=;
+ b=CkjdRpGEQ/f4WK7RrCoyd8Y8nsynrjA17Yvpk8Di91hb4hgldgtJI6tMwqaav8fYcr
+ cxbDVLU35iYZ7onZxRX+8FsMylbVnq1Nk0lzeV1xrc8e79XGn6eS/CftuSLLP1gCfAWU
+ RRSV+BS2Xx5cf910YGbK/wIyKVLoJGoWIkJBqADViNd2FTgVIqJm/JzRXDkni7at02Ot
+ owCsj5ZBor+cAV77oS/gqOm88Xmtk0yyr1hNA+66aFePycjpwr54QiG8G12p/dmocOfM
+ lIwgk3V31ofeoyOsnGJU5ujC7wBceEZzSY9aXjgo/NqJFpErxwVMq2FmYQGFEoMfes6w
+ Ixew==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWKxuThqc3Zsy+iDV+IaPiAhW8qpINLE+OnuOFgs4NWLEsDpADhq+OjMP2sKT2utpupZ97XtFcgRogn@nongnu.org
-X-Gm-Message-State: AOJu0YyY1h4a0IyTjf7BvErnU1sK7nwbgF3tavR0Vj3bG8MTd8iCAhvr
- WvlyxOyYrHk42guSyeuI4jkpbVEvfTbFcL80MIK3tTNDn/guGdfOmIvNJCbtItQ=
-X-Google-Smtp-Source: AGHT+IEdRfRhtjc5qJOSKeguahs0d7Kmokhoozt6NCZN7TsY//45P0ms4y7JhMUVYn62Sy+V46ujqg==
-X-Received: by 2002:a5d:63ca:0:b0:374:c15a:8556 with SMTP id
- ffacd0b85a97d-37d0eae4bc3mr1217682f8f.50.1728030823056; 
- Fri, 04 Oct 2024 01:33:43 -0700 (PDT)
-Received: from localhost (cst2-173-13.cust.vodafone.cz. [31.30.173.13])
+ AJvYcCXeP7n7r+Wbvkjzgr3tCFn4m27H2/V0gEOKdTWxX7DatTmeQai79Wop2mdU+qGbeZAErDaRmV+u5hJs@nongnu.org
+X-Gm-Message-State: AOJu0YzeI7/O9slALbxE2PXLfnarb3eif0q4b6dwutL1sZASPHY/FPaO
+ Vn3zL9pZSnQwF0Z24U2/k5oSvtdMaOr+1vQsZePNvb8ZEHhdECvXVaiahAsSlVE=
+X-Google-Smtp-Source: AGHT+IHiGCpczB7u4Rup2ki8NEO5XPj2bTXGcZcNkQU/pwnjlebkNLhpjDxRDM+Q5KEI+cHtY84Hww==
+X-Received: by 2002:a17:903:4404:b0:20b:6125:69be with SMTP id
+ d9443c01a7336-20bff177771mr32401745ad.49.1728038814245; 
+ Fri, 04 Oct 2024 03:46:54 -0700 (PDT)
+Received: from hsinchu26.internal.sifive.com
+ (59-124-168-89.hinet-ip.hinet.net. [59.124.168.89])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-37d082d1f11sm2779517f8f.96.2024.10.04.01.33.42
+ d9443c01a7336-20beead24e7sm21986685ad.10.2024.10.04.03.46.52
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 04 Oct 2024 01:33:42 -0700 (PDT)
-Date: Fri, 4 Oct 2024 10:33:41 +0200
-From: Andrew Jones <ajones@ventanamicro.com>
-To: Tomasz Jeznach <tjeznach@rivosinc.com>
-Cc: Daniel Henrique Barboza <dbarboza@ventanamicro.com>, 
- qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
- bmeng@tinylab.org, liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, 
- palmer@rivosinc.com, peter.maydell@linaro.org,
- Sebastien Boeuf <seb@rivosinc.com>
-Subject: Re: [PATCH v8 03/12] hw/riscv: add RISC-V IOMMU base emulation
-Message-ID: <20241004-2c8c6a6af4d598c78638a091@orel>
-References: <20241002010314.1928515-1-dbarboza@ventanamicro.com>
- <20241002010314.1928515-4-dbarboza@ventanamicro.com>
- <20241003-c10c27e0855533db764a1490@orel>
- <7c5f0fce-fc66-4fca-90be-aa2d4f7a4b04@ventanamicro.com>
- <CAH2o1u6h5nOMuGq8opXQNm6M=D=TrvygmoS+hHwmrgViy3reFA@mail.gmail.com>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <CAH2o1u6h5nOMuGq8opXQNm6M=D=TrvygmoS+hHwmrgViy3reFA@mail.gmail.com>
-Received-SPF: pass client-ip=2a00:1450:4864:20::42b;
- envelope-from=ajones@ventanamicro.com; helo=mail-wr1-x42b.google.com
+ Fri, 04 Oct 2024 03:46:53 -0700 (PDT)
+From: Yong-Xuan Wang <yongxuan.wang@sifive.com>
+To: qemu-devel@nongnu.org,
+	qemu-riscv@nongnu.org
+Cc: greentime.hu@sifive.com, vincent.chen@sifive.com, frank.chang@sifive.com,
+ jim.shu@sifive.com, Yong-Xuan Wang <yongxuan.wang@sifive.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bmeng.cn@gmail.com>,
+ Weiwei Li <liwei1518@gmail.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
+Subject: [PATCH v2 1/1] hw/intc/riscv_aplic: Check and update pending when
+ write sourcecfg
+Date: Fri,  4 Oct 2024 18:46:47 +0800
+Message-Id: <20241004104649.13129-1-yongxuan.wang@sifive.com>
+X-Mailer: git-send-email 2.17.1
+Received-SPF: pass client-ip=2607:f8b0:4864:20::62d;
+ envelope-from=yongxuan.wang@sifive.com; helo=mail-pl1-x62d.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -104,184 +98,113 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Thu, Oct 03, 2024 at 11:36:00AM GMT, Tomasz Jeznach wrote:
-> On Thu, Oct 3, 2024 at 6:06 AM Daniel Henrique Barboza
-> <dbarboza@ventanamicro.com> wrote:
-> >
-> >
-> >
-> > On 10/3/24 6:26 AM, Andrew Jones wrote:
-> > > On Tue, Oct 01, 2024 at 10:02:58PM GMT, Daniel Henrique Barboza wrote:
-> > > ...
-> > >> +/*
-> > >> + * RISCV IOMMU Address Translation Lookup - Page Table Walk
-> > >> + *
-> > >> + * Note: Code is based on get_physical_address() from target/riscv/cpu_helper.c
-> > >> + * Both implementation can be merged into single helper function in future.
-> > >> + * Keeping them separate for now, as error reporting and flow specifics are
-> > >> + * sufficiently different for separate implementation.
-> > >> + *
-> > >> + * @s        : IOMMU Device State
-> > >> + * @ctx      : Translation context for device id and process address space id.
-> > >> + * @iotlb    : translation data: physical address and access mode.
-> > >> + * @return   : success or fault cause code.
-> > >> + */
-> > >> +static int riscv_iommu_spa_fetch(RISCVIOMMUState *s, RISCVIOMMUContext *ctx,
-> > >> +    IOMMUTLBEntry *iotlb)
-> > >> +{
-> > >> +    dma_addr_t addr, base;
-> > >> +    uint64_t satp, gatp, pte;
-> > >> +    bool en_s, en_g;
-> > >> +    struct {
-> > >> +        unsigned char step;
-> > >> +        unsigned char levels;
-> > >> +        unsigned char ptidxbits;
-> > >> +        unsigned char ptesize;
-> > >> +    } sc[2];
-> > >> +    /* Translation stage phase */
-> > >> +    enum {
-> > >> +        S_STAGE = 0,
-> > >> +        G_STAGE = 1,
-> > >> +    } pass;
-> > >> +    MemTxResult ret;
-> > >> +
-> > >> +    satp = get_field(ctx->satp, RISCV_IOMMU_ATP_MODE_FIELD);
-> > >> +    gatp = get_field(ctx->gatp, RISCV_IOMMU_ATP_MODE_FIELD);
-> > >> +
-> > >> +    en_s = satp != RISCV_IOMMU_DC_FSC_MODE_BARE;
-> > >> +    en_g = gatp != RISCV_IOMMU_DC_IOHGATP_MODE_BARE;
-> > >> +
-> > >> +    /*
-> > >> +     * Early check for MSI address match when IOVA == GPA. This check
-> > >> +     * is required to ensure MSI translation is applied in case
-> > >> +     * first-stage translation is set to BARE mode. In this case IOVA
-> > >> +     * provided is a valid GPA. Running translation through page walk
-> > >> +     * second stage translation will incorrectly try to translate GPA
-> > >> +     * to host physical page, likely hitting IOPF.
-> > >> +     */
-> > >
-> > > Why was this comment expanded from the simple
-> > >
-> > > "Early check for MSI address match when IOVA == GPA."
-> > >
-> > > The comment is now incorrect since the check is required even when
-> > > first-stage translation is not BARE. I just skimmed the spec again trying
-> > > to figure out if the removal of '!en_s' is a hack or a fix, and I'm
-> > > inclined to say "fix", but it's an incomplete fix. I found a sentence that
-> > > says
-> > >
-> > > "If the virtual memory scheme selected for first-stage is Bare but the
-> > > scheme for the second-stage is not Bare then the IOVA is a GPA."
-> > >
-> > > which, in a way, defines a GPA to only be a GPA when second-stage is used
-> > > (and all MSI translation specifications refer to GPAs). However, maybe I
-> > > missed it, but I couldn't find any actual reason that the MSI table can't
-> > > be used when first-stage is not BARE and second-stage is (and, of course,
-> > > it makes no difference for single-stage translations to call IOVAs GPAs
-> > > or not).
-> > >
-> > > Now, I also see
-> > >
-> > > "If the virtual memory scheme selected for neither stage is Bare then the
-> > > IOVA is a VA. Two-stage address translation is in effect. The first-stage
-> > > translates the VA to a GPA and the second-stage translates the GPA to a
-> > > SPA."
-> > >
-> > > in the spec, which means we should probably change the removal of '!en_s'
-> > > to '!(en_s && en_g)'. VFIO+irqbypass would still work with that and, when
-> > > Linux learns to support two-stage translation, we wouldn't incorrectly try
-> > > to check for a GVA in the MSI table.
-> >
-> > Ok. It seems to me that we can't rely on the riscv-iommu spec alone to let
-> > us know how to detect if IOVA == GPA, given that one of the main usages
-> > we have ATM (VFIO irqbypass) will use GPAs with S-stage enabled.
-> >
-> > (Note: shouldn't we open a bug against the riscv-iommu spec?)
-> >
-> > I like the idea of ruling out the case where IOVA == VA since that is clear
-> > in the spec. We also know that MSI entries will always contains GPAs.
-> >
-> > This is the change I'm going to make in v9:
-> >
-> >
-> 
-> It might be worth it to quote spec definitions of IOVA, GPA, SPA.
-> 
-> IOVA: I/O Virtual Address: Virtual address for DMA by devices
-> GPA: Guest Physical Address: An address in the virtualized physical
-> memory space of a virtual machine.
-> SPA: Supervisor Physical Address: Physical address used to access
-> memory and memory-mapped resources.
-> 
-> From IOMMU specification it's pretty clear, an untranslated address is
-> always an IOVA.
-> 
-> If you look at the introduction section and section 2.3. "Process to
-> translate an IOVA", translation (if enabled by the device/process
-> context) to GPA, SPA is expressed as:
-> 
-> step #17: GPA = FSC[IOVA]
-> step #19: SPA = IOHGATP[GPA]
-> 
-> With that, MSI address translations always use GPA as an input
-> (section 2.3.3. "Process to translate addresses of MSIs"), and is done
-> as step #18 of the IOVA translation.
-> 
-> And now:
-> If FSC.Mode == Bare, step #17 translation is simple GPA = IOVA
-> If IOHGATP.Mode == Bare, step #19 translation is simple SPA = GPA
-> 
-> If both FSC and IOHGATP modes are bare, no address translation is
-> performed, and SPA = GPA = IOVA. However if "MSI page tables are
-> enabled, then the MSI address translation process specified in Section
-> 2.3.3 is invoked".  This was the reason to put the
-> riscv_iommu_msi_check() function before check for pass-through mode
-> check.
-> 
-> If FSC.Mode == Bare and untranslated address given to the function
-> riscv_iommu_spa_fetch() is an GPA = IOVA. It could also be SPA if
-> IOHGATP.Mode == Bare, but it is irrelevant for the MSI address
-> translation.  That is the reason to put only the check for !en_s in
-> before riscv_iommu_msi_check() call.
-> 
-> I'm aware that VFIO uses S-Stage translation only, but it does not
-> change the hardware logic. For such cases VFIO can provide IMSIC
-> register mappings in S-Stage PT to emulate MSI doorbell registers (if
-> needed). When S-Stage translation is used, an untranslated address
-> processed by the IOMMU hardware is still an IOVA, even if the guest OS
-> / VFIO user treats it as PA.
+The section 4.5.2 of the RISC-V AIA specification says that any write
+to a sourcecfg register of an APLIC might (or might not) cause the
+corresponding interrupt-pending bit to be set to one if the rectified
+input value is high (= 1) under the new source mode.
 
-This would work for guest interrupt file mappings, but MRIFs won't work
-and the note of the "Device contexts at an IOMMU" section of the AIA spec
-points out that VCPU migration may become more difficult to manage.
+If an interrupt is asserted before the driver configs its interrupt
+type to APLIC, it's pending bit will not be set except a relevant
+write to a setip or setipnum register. When we write the interrupt
+type to sourcecfg register, if the APLIC device doesn't check
+rectified input value and update the pending bit, this interrupt
+might never becomes pending.
 
-> 
-> Modification of the check to include en_g ( !(en_s && en_g) && ,,, )
-> will incorrectly enable MSI address translation for an IOVA address
-> (as defined in IOMMU spec) if G-Stage translation is set to Bare mode.
-> 
-> I'd suggest to keep the s/g stage checks here as:
->       if ((iotlb->perm & IOMMU_WO) && !en_s &&
->           riscv_iommu_msi_check(s, ctx, iotlb->iova)) {
->           ...
->       }
-> 
-> Hope that helps this discussion.
+For APLIC.m, we can manully set pending by setip or setipnum
+registers in driver. But for APLIC.w, the pending status totally
+depends on the rectified input value, we can't control the pending
+status via mmio registers. In this case, hw should check and update
+pending status for us when writing sourcecfg registers.
 
-Yes, it certainly helps, thank you. It points out that step 17 of "Process
-to translate an IOVA" produces a GPA which is consumed by step 18 for the
-MSI translation (and there's no other way to get to step 18). OIOW, we
-must do a first-stage translation before we check the MSI page table,
-which means we can't do an early MSI check unless we have strictly !en_s.
+Update QEMU emulation to handle "pre-existing" interrupts.
 
-This is unfortunate, considering the current state of VFIO+irqbypass and
-the IOMMU driver. I also wonder if it's really necessary. It seems to me
-that the MSI page table should always be checked first when either S-stage
-or G-stage is Bare (so there's only a single-stage of translation) and
-msiptp.MODE is not Off. I can't see what harm could come from that and it
-would give system software the ability to leverage code that already knows
-how to manage single-stage IOMMUs for device assignment.
+Signed-off-by: Yong-Xuan Wang <yongxuan.wang@sifive.com>
+Acked-by: Alistair Francis <alistair.francis@wdc.com>
 
-Thanks,
-drew
+---
+v2:
+- fix checkpatch warning
+---
+ hw/intc/riscv_aplic.c | 51 ++++++++++++++++++++++++++++---------------
+ 1 file changed, 33 insertions(+), 18 deletions(-)
+
+diff --git a/hw/intc/riscv_aplic.c b/hw/intc/riscv_aplic.c
+index 32edd6d07bb3..4a262c82f078 100644
+--- a/hw/intc/riscv_aplic.c
++++ b/hw/intc/riscv_aplic.c
+@@ -159,31 +159,42 @@ static bool is_kvm_aia(bool msimode)
+     return kvm_irqchip_in_kernel() && msimode;
+ }
+ 
++static bool riscv_aplic_irq_rectified_val(RISCVAPLICState *aplic,
++                                          uint32_t irq)
++{
++    uint32_t sourcecfg, sm, raw_input, irq_inverted;
++
++    if (!irq || aplic->num_irqs <= irq) {
++        return false;
++    }
++
++    sourcecfg = aplic->sourcecfg[irq];
++    if (sourcecfg & APLIC_SOURCECFG_D) {
++        return false;
++    }
++
++    sm = sourcecfg & APLIC_SOURCECFG_SM_MASK;
++    if (sm == APLIC_SOURCECFG_SM_INACTIVE) {
++        return false;
++    }
++
++    raw_input = (aplic->state[irq] & APLIC_ISTATE_INPUT) ? 1 : 0;
++    irq_inverted = (sm == APLIC_SOURCECFG_SM_LEVEL_LOW ||
++                    sm == APLIC_SOURCECFG_SM_EDGE_FALL) ? 1 : 0;
++
++    return !!(raw_input ^ irq_inverted);
++}
++
+ static uint32_t riscv_aplic_read_input_word(RISCVAPLICState *aplic,
+                                             uint32_t word)
+ {
+-    uint32_t i, irq, sourcecfg, sm, raw_input, irq_inverted, ret = 0;
++    uint32_t i, irq, rectified_val, ret = 0;
+ 
+     for (i = 0; i < 32; i++) {
+         irq = word * 32 + i;
+-        if (!irq || aplic->num_irqs <= irq) {
+-            continue;
+-        }
+ 
+-        sourcecfg = aplic->sourcecfg[irq];
+-        if (sourcecfg & APLIC_SOURCECFG_D) {
+-            continue;
+-        }
+-
+-        sm = sourcecfg & APLIC_SOURCECFG_SM_MASK;
+-        if (sm == APLIC_SOURCECFG_SM_INACTIVE) {
+-            continue;
+-        }
+-
+-        raw_input = (aplic->state[irq] & APLIC_ISTATE_INPUT) ? 1 : 0;
+-        irq_inverted = (sm == APLIC_SOURCECFG_SM_LEVEL_LOW ||
+-                        sm == APLIC_SOURCECFG_SM_EDGE_FALL) ? 1 : 0;
+-        ret |= (raw_input ^ irq_inverted) << i;
++        rectified_val = riscv_aplic_irq_rectified_val(aplic, irq);
++        ret |= rectified_val << i;
+     }
+ 
+     return ret;
+@@ -702,6 +713,10 @@ static void riscv_aplic_write(void *opaque, hwaddr addr, uint64_t value,
+             (aplic->sourcecfg[irq] == 0)) {
+             riscv_aplic_set_pending_raw(aplic, irq, false);
+             riscv_aplic_set_enabled_raw(aplic, irq, false);
++        } else {
++            if (riscv_aplic_irq_rectified_val(aplic, irq)) {
++                riscv_aplic_set_pending_raw(aplic, irq, true);
++            }
+         }
+     } else if (aplic->mmode && aplic->msimode &&
+                (addr == APLIC_MMSICFGADDR)) {
+-- 
+2.17.1
+
 
