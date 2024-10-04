@@ -4,58 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 172C2CF8840
-	for <qemu-riscv@archiver.kernel.org>; Fri,  4 Oct 2024 16:36:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2AE66CF8840
+	for <qemu-riscv@archiver.kernel.org>; Fri,  4 Oct 2024 16:37:35 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1swlH1-0008Hu-9T; Fri, 04 Oct 2024 12:35:23 -0400
+	id 1swlHu-0001MM-JR; Fri, 04 Oct 2024 12:36:21 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1swlGq-0007Hv-O1
- for qemu-riscv@nongnu.org; Fri, 04 Oct 2024 12:35:12 -0400
-Received: from mail-lj1-x229.google.com ([2a00:1450:4864:20::229])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1swlGb-0006my-C7
+ for qemu-riscv@nongnu.org; Fri, 04 Oct 2024 12:35:00 -0400
+Received: from mail-lj1-x230.google.com ([2a00:1450:4864:20::230])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1swlGo-0006Ov-Cz
- for qemu-riscv@nongnu.org; Fri, 04 Oct 2024 12:35:12 -0400
-Received: by mail-lj1-x229.google.com with SMTP id
- 38308e7fff4ca-2fabfc06c26so22722791fa.2
- for <qemu-riscv@nongnu.org>; Fri, 04 Oct 2024 09:35:08 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1swlGZ-0006Bp-RM
+ for qemu-riscv@nongnu.org; Fri, 04 Oct 2024 12:34:57 -0400
+Received: by mail-lj1-x230.google.com with SMTP id
+ 38308e7fff4ca-2facf48166bso30181881fa.0
+ for <qemu-riscv@nongnu.org>; Fri, 04 Oct 2024 09:34:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1728059707; x=1728664507; darn=nongnu.org;
+ d=linaro.org; s=google; t=1728059694; x=1728664494; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=FMPHX1jqQUTWI4pf2r0FuqonzJoCTqpttYtMaDPMSzU=;
- b=qpnimFtK6rIxbKY9VVh/UCpMRuYEjoz4H1C7JOAP81QG0G9FcUSbKagjEey/fvKg03
- +p06zPEI2eHHgLh9LR9RWxi1F0yO/2BcRm2KXGqyO3Irdp1yFLatTJwbG0L6fea8CN5y
- 5TvjxyBw6jkYx3CfbUzu9Qw7CtGewyQI5umFtbnB3F1JnDpk6/17xtmeplV+5G+k3Zkf
- XmJBAqqRg5Lc66H52GbsNjwDs2uq8V/ySkbypIE6ksvZLtQ7xiNKX5qGWVZdJBseShTS
- xorJa2JKR5GZFzIffzteIV+XRiccqkDMJCZj3MBIENxdIaY37YV/7KKYxfZ4lVhLVdlI
- ji+A==
+ bh=F7K2UdhT0lmKAUQ5+UAlf+1d8SHSmOIhciQuHFY8P5Y=;
+ b=QPqeOSfcwv1jDxwn/udV857brkXxg6kQbLWXWgDAtLnIoiVcy7g0YCDluulBamH93o
+ C5X0PGpEbyVdxNO46soHEzkRFjRk2PC6eTXou3qEb0gOM13YskzGmUHOZzxjCZ+/0Z4T
+ 2lTCGlMBUdVQbtm3nPABF7SesZ3FmDJ7wJisIpGo6U/27szjmzvHEeJZG5r6G+4XOHuM
+ 3S9eJ6EdwietkEX8TROANuz45nKrIrsq368mQZvdGWMu8o9NjE4gQRsnN4HYRSeDxFi7
+ 3sjJUuVk5QmxRa2BxFvsatDoVMz6OSElrStrHYDqREfRMnZvXCc1Ft6iWq/Xj57vxlid
+ sYJw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728059707; x=1728664507;
+ d=1e100.net; s=20230601; t=1728059694; x=1728664494;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=FMPHX1jqQUTWI4pf2r0FuqonzJoCTqpttYtMaDPMSzU=;
- b=S/fka5Yr4EbG3jJpClVcljwmpoL/HJG0FYABVUQmrvy0RBTaMLxVDJW/lPzmDZTD1w
- 9m0/R7ZKDDvr20fKAaBaEXyLgXjL496eELvr/Q1DZXop5UmPMDt0gCX2laP07VwFD0jh
- yoDp2DlCOkgLXEZ3W/IzhBi2Kx0y5Si6hDafd0hgImxW0BM570r4V4uc8bYaAk/7MNzt
- F6IWG4gSQCbsWXxAh9VauRd5byM+TQtrPHGexkd6fircBVa4jWnvQ907NX6J/Pgi/WjS
- 9maluxX+hvlq/zNRiuAPbCl7PcDyO8KPYHSbBNgLWDWwQnZwTabMr6JlFZbyZkLByDKU
- 32TA==
-X-Gm-Message-State: AOJu0YwpdURAHvJ/PJGgkGki89OcZhU3hJkaZ9BotRGCb8tqieSQ3MUx
- UM816pxzi06+DKmuX4yg0jrdR0S1bJZKGfLqwGYUR7E707TgqmAYmPpL6ef7WFs=
-X-Google-Smtp-Source: AGHT+IGx7YQ9AludivP/JgpYsPv0iqZu3pTCEacheY6CQHjkkwcmkF+BNjJ5qSRXCNW56q6LonKaKg==
-X-Received: by 2002:a2e:3806:0:b0:2f3:b8dc:7d24 with SMTP id
- 38308e7fff4ca-2faf3c5f4f3mr16451211fa.17.1728059707174; 
- Fri, 04 Oct 2024 09:35:07 -0700 (PDT)
+ bh=F7K2UdhT0lmKAUQ5+UAlf+1d8SHSmOIhciQuHFY8P5Y=;
+ b=BLz7zsv2NqRWkynEqXxwMzbU2lL3arLWylFfLyiWRLixlOG9Faaeu8BR4M1nbZploY
+ 7I5dcT3CJibBls9kshDyF1Uf4HFfjsPLZr202nJUjsQR+/us1zrYVHD/fwy5/XOao2bl
+ qtH5roHLCMHmVY6t7QKvOTnGmgdIuAhyx3V8TZ7LnNNDTC97hPCLkhOPIDfrG68S9CPd
+ P7hgTzUTaYMLAKpvbdOY7SZtHoX5TE7Gj04wSUaLfLJwH+eLjUx63zqQnKLz9qYlxX1E
+ Y27qu02aNbh3Nf73b+AtDUSb4cUb//2naiHAWKVN+C95B7mkVd4y5rlaiHv5+/y8k+Bz
+ fYzw==
+X-Gm-Message-State: AOJu0YzhyW6VFG9yoLycwIiPvDhTDFL5sSqgZZMyNb68YpJxBwUdhuSc
+ uZb8gx2lPRVx03e7e47O0hwsG+swt+p48puF6N+abHp7AZIDv6QUBomNQK5+u34=
+X-Google-Smtp-Source: AGHT+IHKa20agFRS0/RoXwo1gRuQeymjsJwVOH9rO7MgcDcdz82bu2Uw2J6Cuwgy3fCCBlYYn2+2rA==
+X-Received: by 2002:a05:6512:12c4:b0:539:964c:16d9 with SMTP id
+ 2adb3069b0e04-539ab9e6f6bmr2435493e87.57.1728059694180; 
+ Fri, 04 Oct 2024 09:34:54 -0700 (PDT)
 Received: from localhost.localdomain ([91.223.100.150])
  by smtp.gmail.com with ESMTPSA id
- 38308e7fff4ca-2faf9b3b441sm195821fa.139.2024.10.04.09.35.01
+ 2adb3069b0e04-539afec8276sm2366e87.86.2024.10.04.09.34.44
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Fri, 04 Oct 2024 09:35:06 -0700 (PDT)
+ Fri, 04 Oct 2024 09:34:53 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, qemu-s390x@nongnu.org,
@@ -63,17 +63,17 @@ Cc: qemu-riscv@nongnu.org, qemu-s390x@nongnu.org,
  Richard Henderson <richard.henderson@linaro.org>,
  Pierrick Bouvier <pierrick.bouvier@linaro.org>, qemu-ppc@nongnu.org,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-Subject: [PATCH v2 17/25] hw/m68k: Use explicit big-endian LD/ST API
-Date: Fri,  4 Oct 2024 13:30:33 -0300
-Message-ID: <20241004163042.85922-18-philmd@linaro.org>
+Subject: [PATCH v2 16/25] target/riscv: Use explicit little-endian LD/ST API
+Date: Fri,  4 Oct 2024 13:30:32 -0300
+Message-ID: <20241004163042.85922-17-philmd@linaro.org>
 X-Mailer: git-send-email 2.45.2
 In-Reply-To: <20241004163042.85922-1-philmd@linaro.org>
 References: <20241004163042.85922-1-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::229;
- envelope-from=philmd@linaro.org; helo=mail-lj1-x229.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::230;
+ envelope-from=philmd@linaro.org; helo=mail-lj1-x230.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -96,140 +96,82 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-The M68K architecture uses big endianness. Directly use
-the big-endian LD/ST API.
+The Risc-V architecture uses little endianness. Directly use
+the little-endian LD/ST API.
 
 Mechanical change using:
 
-  $ end=be; \
+  $ end=le; \
     for acc in uw w l q tul; do \
       sed -i -e "s/ld${acc}_p(/ld${acc}_${end}_p(/" \
              -e "s/st${acc}_p(/st${acc}_${end}_p(/" \
-        $(git grep -wlE '(ld|st)t?u?[wlq]_p' hw/m68k/); \
+        $(git grep -wlE '(ld|st)t?u?[wlq]_p' target/riscv/); \
     done
 
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 ---
- hw/m68k/bootinfo.h  | 28 ++++++++++++++--------------
- hw/m68k/mcf5208.c   |  2 +-
- hw/m68k/next-cube.c |  2 +-
- hw/m68k/q800.c      |  4 ++--
- 4 files changed, 18 insertions(+), 18 deletions(-)
+ target/riscv/gdbstub.c | 14 +++++++-------
+ 1 file changed, 7 insertions(+), 7 deletions(-)
 
-diff --git a/hw/m68k/bootinfo.h b/hw/m68k/bootinfo.h
-index 70c1dc0e8c3..0b3e7c4ea01 100644
---- a/hw/m68k/bootinfo.h
-+++ b/hw/m68k/bootinfo.h
-@@ -14,39 +14,39 @@
+diff --git a/target/riscv/gdbstub.c b/target/riscv/gdbstub.c
+index c07df972f1e..2e042f117f3 100644
+--- a/target/riscv/gdbstub.c
++++ b/target/riscv/gdbstub.c
+@@ -84,15 +84,15 @@ int riscv_cpu_gdb_write_register(CPUState *cs, uint8_t *mem_buf, int n)
  
- #define BOOTINFO0(base, id) \
-     do { \
--        stw_p(base, id); \
-+        stw_be_p(base, id); \
-         base += 2; \
--        stw_p(base, sizeof(struct bi_record)); \
-+        stw_be_p(base, sizeof(struct bi_record)); \
-         base += 2; \
-     } while (0)
- 
- #define BOOTINFO1(base, id, value) \
-     do { \
--        stw_p(base, id); \
-+        stw_be_p(base, id); \
-         base += 2; \
--        stw_p(base, sizeof(struct bi_record) + 4); \
-+        stw_be_p(base, sizeof(struct bi_record) + 4); \
-         base += 2; \
--        stl_p(base, value); \
-+        stl_be_p(base, value); \
-         base += 4; \
-     } while (0)
- 
- #define BOOTINFO2(base, id, value1, value2) \
-     do { \
--        stw_p(base, id); \
-+        stw_be_p(base, id); \
-         base += 2; \
--        stw_p(base, sizeof(struct bi_record) + 8); \
-+        stw_be_p(base, sizeof(struct bi_record) + 8); \
-         base += 2; \
--        stl_p(base, value1); \
-+        stl_be_p(base, value1); \
-         base += 4; \
--        stl_p(base, value2); \
-+        stl_be_p(base, value2); \
-         base += 4; \
-     } while (0)
- 
- #define BOOTINFOSTR(base, id, string) \
-     do { \
--        stw_p(base, id); \
-+        stw_be_p(base, id); \
-         base += 2; \
--        stw_p(base, \
-+        stw_be_p(base, \
-                  (sizeof(struct bi_record) + strlen(string) + \
-                   1 /* null termination */ + 3 /* padding */) & ~3); \
-         base += 2; \
-@@ -59,13 +59,13 @@
- 
- #define BOOTINFODATA(base, id, data, len) \
-     do { \
--        stw_p(base, id); \
-+        stw_be_p(base, id); \
-         base += 2; \
--        stw_p(base, \
-+        stw_be_p(base, \
-                  (sizeof(struct bi_record) + len + \
-                   2 /* length field */ + 3 /* padding */) & ~3); \
-         base += 2; \
--        stw_p(base, len); \
-+        stw_be_p(base, len); \
-         base += 2; \
-         for (unsigned i_ = 0; i_ < len; ++i_) { \
-             stb_p(base++, data[i_]); \
-diff --git a/hw/m68k/mcf5208.c b/hw/m68k/mcf5208.c
-index b6677ad6bc3..e37cd50d189 100644
---- a/hw/m68k/mcf5208.c
-+++ b/hw/m68k/mcf5208.c
-@@ -359,7 +359,7 @@ static void mcf5208evb_init(MachineState *machine)
-         /* Initial PC is always at offset 4 in firmware binaries */
-         ptr = rom_ptr(0x4, 4);
-         assert(ptr != NULL);
--        env->pc = ldl_p(ptr);
-+        env->pc = ldl_be_p(ptr);
-     }
- 
-     /* Load kernel.  */
-diff --git a/hw/m68k/next-cube.c b/hw/m68k/next-cube.c
-index 9b78767ea8e..9832213e7ec 100644
---- a/hw/m68k/next-cube.c
-+++ b/hw/m68k/next-cube.c
-@@ -1036,7 +1036,7 @@ static void next_cube_init(MachineState *machine)
-         /* Initial PC is always at offset 4 in firmware binaries */
-         ptr = rom_ptr(0x01000004, 4);
-         g_assert(ptr != NULL);
--        env->pc = ldl_p(ptr);
-+        env->pc = ldl_be_p(ptr);
-         if (env->pc >= 0x01020000) {
-             error_report("'%s' does not seem to be a valid firmware image.",
-                          bios_name);
-diff --git a/hw/m68k/q800.c b/hw/m68k/q800.c
-index fa7683bf76f..556604e1dcf 100644
---- a/hw/m68k/q800.c
-+++ b/hw/m68k/q800.c
-@@ -684,9 +684,9 @@ static void q800_machine_init(MachineState *machine)
- 
-             ptr = rom_ptr(MACROM_ADDR, bios_size);
-             assert(ptr != NULL);
--            stl_phys(cs->as, 0, ldl_p(ptr));    /* reset initial SP */
-+            stl_phys(cs->as, 0, ldl_be_p(ptr));    /* reset initial SP */
-             stl_phys(cs->as, 4,
--                     MACROM_ADDR + ldl_p(ptr + 4)); /* reset initial PC */
-+                     MACROM_ADDR + ldl_be_p(ptr + 4)); /* reset initial PC */
+     switch (mcc->misa_mxl_max) {
+     case MXL_RV32:
+-        tmp = (int32_t)ldl_p(mem_buf);
++        tmp = (int32_t)ldl_le_p(mem_buf);
+         length = 4;
+         break;
+     case MXL_RV64:
+     case MXL_RV128:
+         if (env->xl < MXL_RV64) {
+-            tmp = (int32_t)ldq_p(mem_buf);
++            tmp = (int32_t)ldq_le_p(mem_buf);
+         } else {
+-            tmp = ldq_p(mem_buf);
++            tmp = ldq_le_p(mem_buf);
          }
+         length = 8;
+         break;
+@@ -130,7 +130,7 @@ static int riscv_gdb_set_fpu(CPUState *cs, uint8_t *mem_buf, int n)
+     CPURISCVState *env = &cpu->env;
+ 
+     if (n < 32) {
+-        env->fpr[n] = ldq_p(mem_buf); /* always 64-bit */
++        env->fpr[n] = ldq_le_p(mem_buf); /* always 64-bit */
+         return sizeof(uint64_t);
      }
- }
+     return 0;
+@@ -162,7 +162,7 @@ static int riscv_gdb_set_vector(CPUState *cs, uint8_t *mem_buf, int n)
+     if (n < 32) {
+         int i;
+         for (i = 0; i < vlenb; i += 8) {
+-            env->vreg[(n * vlenb + i) / 8] = ldq_p(mem_buf + i);
++            env->vreg[(n * vlenb + i) / 8] = ldq_le_p(mem_buf + i);
+         }
+         return vlenb;
+     }
+@@ -193,7 +193,7 @@ static int riscv_gdb_set_csr(CPUState *cs, uint8_t *mem_buf, int n)
+     CPURISCVState *env = &cpu->env;
+ 
+     if (n < CSR_TABLE_SIZE) {
+-        target_ulong val = ldtul_p(mem_buf);
++        target_ulong val = ldtul_le_p(mem_buf);
+         int result;
+ 
+         result = riscv_csrrw_debug(env, n, NULL, val, -1);
+@@ -226,7 +226,7 @@ static int riscv_gdb_set_virtual(CPUState *cs, uint8_t *mem_buf, int n)
+         RISCVCPU *cpu = RISCV_CPU(cs);
+         CPURISCVState *env = &cpu->env;
+ 
+-        env->priv = ldtul_p(mem_buf) & 0x3;
++        env->priv = ldtul_le_p(mem_buf) & 0x3;
+         if (env->priv == PRV_RESERVED) {
+             env->priv = PRV_S;
+         }
 -- 
 2.45.2
 
