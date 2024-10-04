@@ -4,58 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 10D02CF884D
-	for <qemu-riscv@archiver.kernel.org>; Fri,  4 Oct 2024 16:33:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7096BCF884D
+	for <qemu-riscv@archiver.kernel.org>; Fri,  4 Oct 2024 16:33:52 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1swlEv-0007eU-Lz; Fri, 04 Oct 2024 12:33:13 -0400
+	id 1swlEl-0006pg-4R; Fri, 04 Oct 2024 12:33:03 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1swlEq-0007HK-Ii
- for qemu-riscv@nongnu.org; Fri, 04 Oct 2024 12:33:08 -0400
-Received: from mail-lf1-x136.google.com ([2a00:1450:4864:20::136])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1swlEf-0006U6-Hq
+ for qemu-riscv@nongnu.org; Fri, 04 Oct 2024 12:32:57 -0400
+Received: from mail-lf1-x130.google.com ([2a00:1450:4864:20::130])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1swlEm-0005p8-JY
- for qemu-riscv@nongnu.org; Fri, 04 Oct 2024 12:33:07 -0400
-Received: by mail-lf1-x136.google.com with SMTP id
- 2adb3069b0e04-5389917ef34so2772642e87.2
- for <qemu-riscv@nongnu.org>; Fri, 04 Oct 2024 09:33:04 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1swlEb-0005nl-I3
+ for qemu-riscv@nongnu.org; Fri, 04 Oct 2024 12:32:57 -0400
+Received: by mail-lf1-x130.google.com with SMTP id
+ 2adb3069b0e04-5399041167cso4061629e87.0
+ for <qemu-riscv@nongnu.org>; Fri, 04 Oct 2024 09:32:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1728059583; x=1728664383; darn=nongnu.org;
+ d=linaro.org; s=google; t=1728059570; x=1728664370; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=2s/tzGPg/LmnPo+rxsPQADcqJffZEpvaXgXhuXN6AeQ=;
- b=sAI8EQpCYesTCsw2GsCCQcrNrdCSx9ho3tzjWRFFR+Z9PfhiJZwNYB3qZrw6eJyY+E
- s2tVNL7nTS6yuzxKCK5TB7BJShNnDhTU4DOs3pZbRYicp/2KYbShxGJtjWjSIs9OlP+5
- oGiEidj7NwcWp5RYo5bD8mR7ECWelg1f9hRmejNg16Mpwf840eFImEdkRbQk3sVWXt9E
- iUM61x/1UhF28HcF8IP7qMPnkG+4gcOv4i486Zzgh3ZZV0vw93mk5N+0mSXxxdSgAvDs
- FEUOTltjwd9dBo/H1M/nkwi8gd8UfnfvlKH2nmBPFR95MI/BEBmAaxr/GIq15edMji0U
- Vjww==
+ bh=jZ9Y3dHzcheJ9MIl5G4LIQKrlHzrSEJ4E+LpPuujorA=;
+ b=KyU2KUAQ25rGA/7hl5DZJFVaMVukNyEetIlZ46G6/Qe+gtkicCP4LbHlZxiYR2wIFS
+ IzfX9HyhwTjC6QnC5fqIzUhN5Swb36E5jez2XTE2LGEcMjXrGKEnpYYHeNoyIlbo4vgV
+ 3AzngzeOwPYjRx+tp8jzGTK1AICOSrX8RIb3/OHDw2GOfWgdxcwoZnDLh3Kg8m5+/kIL
+ e+/AnFK1psOXT34vChOohtJwQuiUVXCBA6WIZ+SgsqrdTYXr9uhBpR0/nRb8MqUPdUGM
+ a93HufKtqS/J1PI/QGGEOGVdVbQneyyR14OzlvFlLbiLFAvM6pvfZkc1DCkVGgtw+yhY
+ Uz7Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728059583; x=1728664383;
+ d=1e100.net; s=20230601; t=1728059570; x=1728664370;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=2s/tzGPg/LmnPo+rxsPQADcqJffZEpvaXgXhuXN6AeQ=;
- b=KbPzwDfvW607VzYzqmz2mIMTF6s8OQ+WNBrR9ruh78kiGuWTxTVtiibTarZZTLH1pX
- viKkagH37jOGmkApQJpinlGrV5vOK2lLrpYChGNuWVFIoPTDKHyQ4VyUeizK75+57WFh
- YBddjhhFYh7GpTjm01tkOaZOCU58mJwLp6szx88BYZ8Rrh82YZHfC/rXwLbdClsWDunn
- NZa8DGnZA5E3Sgexyb7vhUI50xv9j/GlSv8ymrQvCLQrBC+8FNLBvleKMpg+I08OJozz
- rn/duiLnBm8uHQk+UIbvz1bDdgHFBRAY6SSrvRXvV0F8B5k+wNUZ3mrC2rFDG49JTyqS
- XDlw==
-X-Gm-Message-State: AOJu0YzgpIrAg4GcCZB9+V3JgtXk+J6cd9Y+LsREP+ULLgwoig05Qol8
- CnvjwnMH4o4hf/Vdubo2cZnRSeU3zKuejwGCCLMsFEpL0U+UH8PF4PGs6lsYHNg=
-X-Google-Smtp-Source: AGHT+IGC4fHpQTA+27ggAZsNhRcHU2c/GQgEsPn+l3WUcVvbsSReakNbFECwUaxnJDpvvOqCLsru5w==
-X-Received: by 2002:a05:6512:39c5:b0:535:6cbf:51a3 with SMTP id
- 2adb3069b0e04-539ab88a017mr2509555e87.25.1728059582806; 
- Fri, 04 Oct 2024 09:33:02 -0700 (PDT)
+ bh=jZ9Y3dHzcheJ9MIl5G4LIQKrlHzrSEJ4E+LpPuujorA=;
+ b=vCJPJRnkGb4yf7TdByJnI1mlTMqo+k/WbTWxhHBOZDswO+ummxvVLRkqR4PghjR0zm
+ 7aPnak2nPR8L1LDGM1uMpCzcJwSjpzsEKUxaS/qjaHI+FWz14mUSj22/nN/0UHo3m8oT
+ fVxuge8/D4GaxEb+Y/Rr6edUT90xwAeM1W1GpXpEWxxI0JVqHGg4dyJ/WmesfaKbSU+3
+ YU2L9LdOhyRBE1bQfeLaK2mNyqmrCz50VFom1V4nrh5rk1cPXbqw+7NJqeeGE6/cMGna
+ dthmdbOVGVGIvZruijguSuu7mUky+gCQxi5S3Hs6KHuwPbWw7CSuSBKR+9X8e3wgv3/J
+ 2QBA==
+X-Gm-Message-State: AOJu0YxGyRowWBBdgMxIhwi9V8J39hZIdv/YBr5tpj0MuR2fLAVyAMml
+ wKL5+mzCwaFvALKt6a3zeXPB4DVpMa+7aWAFXuZ889OcyTMn9ex8g/ihNzrkd+zD3GrZKNjEiuD
+ wDbFccg==
+X-Google-Smtp-Source: AGHT+IHO/h9QS0QGe+oGvo2tEB19fT95aY4PEqiVdzvqtaeaTRCYxnudY6thA7Ns5FFkcfpZXrtGFw==
+X-Received: by 2002:a05:6512:ad2:b0:539:905c:15c5 with SMTP id
+ 2adb3069b0e04-539ab87df0fmr3562367e87.35.1728059569747; 
+ Fri, 04 Oct 2024 09:32:49 -0700 (PDT)
 Received: from localhost.localdomain ([91.223.100.150])
  by smtp.gmail.com with ESMTPSA id
- 2adb3069b0e04-539afec8255sm1950e87.83.2024.10.04.09.32.57
+ 2adb3069b0e04-539afec1096sm2073e87.8.2024.10.04.09.32.44
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Fri, 04 Oct 2024 09:33:01 -0700 (PDT)
+ Fri, 04 Oct 2024 09:32:49 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, qemu-s390x@nongnu.org,
@@ -63,17 +64,17 @@ Cc: qemu-riscv@nongnu.org, qemu-s390x@nongnu.org,
  Richard Henderson <richard.henderson@linaro.org>,
  Pierrick Bouvier <pierrick.bouvier@linaro.org>, qemu-ppc@nongnu.org,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-Subject: [PATCH v2 09/25] target/i386: Use explicit little-endian LD/ST API
-Date: Fri,  4 Oct 2024 13:30:25 -0300
-Message-ID: <20241004163042.85922-10-philmd@linaro.org>
+Subject: [PATCH v2 08/25] hw/i386: Use explicit little-endian LD/ST API
+Date: Fri,  4 Oct 2024 13:30:24 -0300
+Message-ID: <20241004163042.85922-9-philmd@linaro.org>
 X-Mailer: git-send-email 2.45.2
 In-Reply-To: <20241004163042.85922-1-philmd@linaro.org>
 References: <20241004163042.85922-1-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::136;
- envelope-from=philmd@linaro.org; helo=mail-lf1-x136.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::130;
+ envelope-from=philmd@linaro.org; helo=mail-lf1-x130.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -105,217 +106,194 @@ Mechanical change using:
     for acc in uw w l q tul; do \
       sed -i -e "s/ld${acc}_p(/ld${acc}_${end}_p(/" \
              -e "s/st${acc}_p(/st${acc}_${end}_p(/" \
-        $(git grep -wlE '(ld|st)t?u?[wlq]_p' target/i386/); \
+        $(git grep -wlE '(ld|st)t?u?[wlq]_p' hw/i386/); \
     done
 
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 ---
- target/i386/gdbstub.c                | 30 +++++++++++++-------------
- target/i386/tcg/sysemu/excp_helper.c |  4 ++--
- target/i386/xsave_helper.c           | 32 ++++++++++++++--------------
- 3 files changed, 33 insertions(+), 33 deletions(-)
+ hw/i386/multiboot.c  | 36 ++++++++++++++++++------------------
+ hw/i386/x86-common.c | 26 +++++++++++++-------------
+ 2 files changed, 31 insertions(+), 31 deletions(-)
 
-diff --git a/target/i386/gdbstub.c b/target/i386/gdbstub.c
-index 4acf485879e..28ccf06309d 100644
---- a/target/i386/gdbstub.c
-+++ b/target/i386/gdbstub.c
-@@ -89,10 +89,10 @@ static int gdb_read_reg_cs64(uint32_t hflags, GByteArray *buf, target_ulong val)
- static int gdb_write_reg_cs64(uint32_t hflags, uint8_t *buf, target_ulong *val)
- {
-     if (hflags & HF_CS64_MASK) {
--        *val = ldq_p(buf);
-+        *val = ldq_le_p(buf);
-         return 8;
-     }
--    *val = ldl_p(buf);
-+    *val = ldl_le_p(buf);
-     return 4;
- }
+diff --git a/hw/i386/multiboot.c b/hw/i386/multiboot.c
+index 3332712ab35..ba4ead5270c 100644
+--- a/hw/i386/multiboot.c
++++ b/hw/i386/multiboot.c
+@@ -133,9 +133,9 @@ static void mb_add_mod(MultibootState *s,
  
-@@ -221,7 +221,7 @@ int x86_cpu_gdb_read_register(CPUState *cs, GByteArray *mem_buf, int n)
- static int x86_cpu_gdb_load_seg(X86CPU *cpu, X86Seg sreg, uint8_t *mem_buf)
- {
-     CPUX86State *env = &cpu->env;
--    uint16_t selector = ldl_p(mem_buf);
-+    uint16_t selector = ldl_le_p(mem_buf);
+     p = (char *)s->mb_buf + s->offset_mbinfo + MB_MOD_SIZE * s->mb_mods_count;
  
-     if (selector != env->segs[sreg].selector) {
- #if defined(CONFIG_USER_ONLY)
-@@ -262,15 +262,15 @@ int x86_cpu_gdb_write_register(CPUState *cs, uint8_t *mem_buf, int n)
-     if (n < CPU_NB_REGS) {
-         if (TARGET_LONG_BITS == 64) {
-             if (env->hflags & HF_CS64_MASK) {
--                env->regs[gpr_map[n]] = ldtul_p(mem_buf);
-+                env->regs[gpr_map[n]] = ldtul_le_p(mem_buf);
-             } else if (n < CPU_NB_REGS32) {
--                env->regs[gpr_map[n]] = ldtul_p(mem_buf) & 0xffffffffUL;
-+                env->regs[gpr_map[n]] = ldtul_le_p(mem_buf) & 0xffffffffUL;
-             }
-             return sizeof(target_ulong);
-         } else if (n < CPU_NB_REGS32) {
-             n = gpr_map32[n];
-             env->regs[n] &= ~0xffffffffUL;
--            env->regs[n] |= (uint32_t)ldl_p(mem_buf);
-+            env->regs[n] |= (uint32_t)ldl_le_p(mem_buf);
-             return 4;
-         }
-     } else if (n >= IDX_FP_REGS && n < IDX_FP_REGS + 8) {
-@@ -281,8 +281,8 @@ int x86_cpu_gdb_write_register(CPUState *cs, uint8_t *mem_buf, int n)
-     } else if (n >= IDX_XMM_REGS && n < IDX_XMM_REGS + CPU_NB_REGS) {
-         n -= IDX_XMM_REGS;
-         if (n < CPU_NB_REGS32 || TARGET_LONG_BITS == 64) {
--            env->xmm_regs[n].ZMM_Q(0) = ldq_p(mem_buf);
--            env->xmm_regs[n].ZMM_Q(1) = ldq_p(mem_buf + 8);
-+            env->xmm_regs[n].ZMM_Q(0) = ldq_le_p(mem_buf);
-+            env->xmm_regs[n].ZMM_Q(1) = ldq_le_p(mem_buf + 8);
-             return 16;
-         }
+-    stl_p(p + MB_MOD_START,   start);
+-    stl_p(p + MB_MOD_END,     end);
+-    stl_p(p + MB_MOD_CMDLINE, cmdline_phys);
++    stl_le_p(p + MB_MOD_START,   start);
++    stl_le_p(p + MB_MOD_END,     end);
++    stl_le_p(p + MB_MOD_CMDLINE, cmdline_phys);
+ 
+     mb_debug("mod%02d: "HWADDR_FMT_plx" - "HWADDR_FMT_plx,
+              s->mb_mods_count, start, end);
+@@ -168,9 +168,9 @@ int load_multiboot(X86MachineState *x86ms,
+     /* Ok, let's see if it is a multiboot image.
+        The header is 12x32bit long, so the latest entry may be 8192 - 48. */
+     for (i = 0; i < (8192 - 48); i += 4) {
+-        if (ldl_p(header+i) == 0x1BADB002) {
+-            uint32_t checksum = ldl_p(header+i+8);
+-            flags = ldl_p(header+i+4);
++        if (ldl_le_p(header+i) == 0x1BADB002) {
++            uint32_t checksum = ldl_le_p(header+i+8);
++            flags = ldl_le_p(header+i+4);
+             checksum += flags;
+             checksum += (uint32_t)0x1BADB002;
+             if (!checksum) {
+@@ -223,11 +223,11 @@ int load_multiboot(X86MachineState *x86ms,
+                  mb_kernel_size, (size_t)mh_entry_addr);
      } else {
-@@ -290,18 +290,18 @@ int x86_cpu_gdb_write_register(CPUState *cs, uint8_t *mem_buf, int n)
-         case IDX_IP_REG:
-             if (TARGET_LONG_BITS == 64) {
-                 if (env->hflags & HF_CS64_MASK) {
--                    env->eip = ldq_p(mem_buf);
-+                    env->eip = ldq_le_p(mem_buf);
-                 } else {
--                    env->eip = ldq_p(mem_buf) & 0xffffffffUL;
-+                    env->eip = ldq_le_p(mem_buf) & 0xffffffffUL;
-                 }
-                 return 8;
-             } else {
-                 env->eip &= ~0xffffffffUL;
--                env->eip |= (uint32_t)ldl_p(mem_buf);
-+                env->eip |= (uint32_t)ldl_le_p(mem_buf);
-                 return 4;
+         /* Valid if mh_flags sets MULTIBOOT_HEADER_HAS_ADDR. */
+-        uint32_t mh_header_addr = ldl_p(header+i+12);
+-        uint32_t mh_load_end_addr = ldl_p(header+i+20);
+-        uint32_t mh_bss_end_addr = ldl_p(header+i+24);
++        uint32_t mh_header_addr = ldl_le_p(header+i+12);
++        uint32_t mh_load_end_addr = ldl_le_p(header+i+20);
++        uint32_t mh_bss_end_addr = ldl_le_p(header+i+24);
+ 
+-        mh_load_addr = ldl_p(header+i+16);
++        mh_load_addr = ldl_le_p(header+i+16);
+         if (mh_header_addr < mh_load_addr) {
+             error_report("invalid load_addr address");
+             exit(1);
+@@ -239,7 +239,7 @@ int load_multiboot(X86MachineState *x86ms,
+ 
+         uint32_t mb_kernel_text_offset = i - (mh_header_addr - mh_load_addr);
+         uint32_t mb_load_size = 0;
+-        mh_entry_addr = ldl_p(header+i+28);
++        mh_entry_addr = ldl_le_p(header+i+28);
+ 
+         if (mh_load_end_addr) {
+             if (mh_load_end_addr < mh_load_addr) {
+@@ -364,22 +364,22 @@ int load_multiboot(X86MachineState *x86ms,
+ 
+     /* Commandline support */
+     kcmdline = g_strdup_printf("%s %s", kernel_filename, kernel_cmdline);
+-    stl_p(bootinfo + MBI_CMDLINE, mb_add_cmdline(&mbs, kcmdline));
++    stl_le_p(bootinfo + MBI_CMDLINE, mb_add_cmdline(&mbs, kcmdline));
+ 
+-    stl_p(bootinfo + MBI_BOOTLOADER, mb_add_bootloader(&mbs, bootloader_name));
++    stl_le_p(bootinfo + MBI_BOOTLOADER, mb_add_bootloader(&mbs, bootloader_name));
+ 
+-    stl_p(bootinfo + MBI_MODS_ADDR,  mbs.mb_buf_phys + mbs.offset_mbinfo);
+-    stl_p(bootinfo + MBI_MODS_COUNT, mbs.mb_mods_count); /* mods_count */
++    stl_le_p(bootinfo + MBI_MODS_ADDR,  mbs.mb_buf_phys + mbs.offset_mbinfo);
++    stl_le_p(bootinfo + MBI_MODS_COUNT, mbs.mb_mods_count); /* mods_count */
+ 
+     /* the kernel is where we want it to be now */
+-    stl_p(bootinfo + MBI_FLAGS, MULTIBOOT_FLAGS_MEMORY
++    stl_le_p(bootinfo + MBI_FLAGS, MULTIBOOT_FLAGS_MEMORY
+                                 | MULTIBOOT_FLAGS_BOOT_DEVICE
+                                 | MULTIBOOT_FLAGS_CMDLINE
+                                 | MULTIBOOT_FLAGS_MODULES
+                                 | MULTIBOOT_FLAGS_MMAP
+                                 | MULTIBOOT_FLAGS_BOOTLOADER);
+-    stl_p(bootinfo + MBI_BOOT_DEVICE, 0x8000ffff); /* XXX: use the -boot switch? */
+-    stl_p(bootinfo + MBI_MMAP_ADDR,   ADDR_E820_MAP);
++    stl_le_p(bootinfo + MBI_BOOT_DEVICE, 0x8000ffff); /* XXX: use the -boot switch? */
++    stl_le_p(bootinfo + MBI_MMAP_ADDR,   ADDR_E820_MAP);
+ 
+     mb_debug("multiboot: entry_addr = %#x", mh_entry_addr);
+     mb_debug("           mb_buf_phys   = "HWADDR_FMT_plx, mbs.mb_buf_phys);
+diff --git a/hw/i386/x86-common.c b/hw/i386/x86-common.c
+index 992ea1f25e9..b86c38212ea 100644
+--- a/hw/i386/x86-common.c
++++ b/hw/i386/x86-common.c
+@@ -586,7 +586,7 @@ static bool load_elfboot(const char *kernel_filename,
+     uint64_t elf_low, elf_high;
+     int kernel_size;
+ 
+-    if (ldl_p(header) != 0x464c457f) {
++    if (ldl_le_p(header) != 0x464c457f) {
+         return false; /* no elfboot */
+     }
+ 
+@@ -669,8 +669,8 @@ void x86_load_linux(X86MachineState *x86ms,
+      * kernel protocol version.
+      * Please see https://www.kernel.org/doc/Documentation/x86/boot.txt
+      */
+-    if (ldl_p(header + 0x202) == 0x53726448) /* Magic signature "HdrS" */ {
+-        protocol = lduw_p(header + 0x206);
++    if (ldl_le_p(header + 0x202) == 0x53726448) /* Magic signature "HdrS" */ {
++        protocol = lduw_le_p(header + 0x206);
+     } else {
+         /*
+          * This could be a multiboot kernel. If it is, let's stop treating it
+@@ -762,7 +762,7 @@ void x86_load_linux(X86MachineState *x86ms,
+ 
+     /* highest address for loading the initrd */
+     if (protocol >= 0x20c &&
+-        lduw_p(header + 0x236) & XLF_CAN_BE_LOADED_ABOVE_4G) {
++        lduw_le_p(header + 0x236) & XLF_CAN_BE_LOADED_ABOVE_4G) {
+         /*
+          * Linux has supported initrd up to 4 GB for a very long time (2007,
+          * long before XLF_CAN_BE_LOADED_ABOVE_4G which was added in 2013),
+@@ -781,7 +781,7 @@ void x86_load_linux(X86MachineState *x86ms,
+          */
+         initrd_max = UINT32_MAX;
+     } else if (protocol >= 0x203) {
+-        initrd_max = ldl_p(header + 0x22c);
++        initrd_max = ldl_le_p(header + 0x22c);
+     } else {
+         initrd_max = 0x37ffffff;
+     }
+@@ -797,10 +797,10 @@ void x86_load_linux(X86MachineState *x86ms,
+     sev_load_ctx.cmdline_size = strlen(kernel_cmdline) + 1;
+ 
+     if (protocol >= 0x202) {
+-        stl_p(header + 0x228, cmdline_addr);
++        stl_le_p(header + 0x228, cmdline_addr);
+     } else {
+-        stw_p(header + 0x20, 0xA33F);
+-        stw_p(header + 0x22, cmdline_addr - real_addr);
++        stw_le_p(header + 0x20, 0xA33F);
++        stw_le_p(header + 0x22, cmdline_addr - real_addr);
+     }
+ 
+     /* handle vga= parameter */
+@@ -824,7 +824,7 @@ void x86_load_linux(X86MachineState *x86ms,
+                 exit(1);
              }
-         case IDX_FLAGS_REG:
--            env->eflags = ldl_p(mem_buf);
-+            env->eflags = ldl_le_p(mem_buf);
-             return 4;
- 
-         case IDX_SEG_REGS:
-@@ -327,10 +327,10 @@ int x86_cpu_gdb_write_register(CPUState *cs, uint8_t *mem_buf, int n)
-             return 4;
- 
-         case IDX_FP_REGS + 8:
--            cpu_set_fpuc(env, ldl_p(mem_buf));
-+            cpu_set_fpuc(env, ldl_le_p(mem_buf));
-             return 4;
-         case IDX_FP_REGS + 9:
--            tmp = ldl_p(mem_buf);
-+            tmp = ldl_le_p(mem_buf);
-             env->fpstt = (tmp >> 11) & 7;
-             env->fpus = tmp & ~0x3800;
-             return 4;
-@@ -348,7 +348,7 @@ int x86_cpu_gdb_write_register(CPUState *cs, uint8_t *mem_buf, int n)
-             return 4;
- 
-         case IDX_MXCSR_REG:
--            cpu_set_mxcsr(env, ldl_p(mem_buf));
-+            cpu_set_mxcsr(env, ldl_le_p(mem_buf));
-             return 4;
- 
-         case IDX_CTL_CR0_REG:
-diff --git a/target/i386/tcg/sysemu/excp_helper.c b/target/i386/tcg/sysemu/excp_helper.c
-index 8fb05b1f531..de6765099f3 100644
---- a/target/i386/tcg/sysemu/excp_helper.c
-+++ b/target/i386/tcg/sysemu/excp_helper.c
-@@ -86,7 +86,7 @@ static bool ptw_translate(PTETranslate *inout, hwaddr addr, uint64_t ra)
- static inline uint32_t ptw_ldl(const PTETranslate *in, uint64_t ra)
- {
-     if (likely(in->haddr)) {
--        return ldl_p(in->haddr);
-+        return ldl_le_p(in->haddr);
-     }
-     return cpu_ldl_mmuidx_ra(in->env, in->gaddr, in->ptw_idx, ra);
- }
-@@ -94,7 +94,7 @@ static inline uint32_t ptw_ldl(const PTETranslate *in, uint64_t ra)
- static inline uint64_t ptw_ldq(const PTETranslate *in, uint64_t ra)
- {
-     if (likely(in->haddr)) {
--        return ldq_p(in->haddr);
-+        return ldq_le_p(in->haddr);
-     }
-     return cpu_ldq_mmuidx_ra(in->env, in->gaddr, in->ptw_idx, ra);
- }
-diff --git a/target/i386/xsave_helper.c b/target/i386/xsave_helper.c
-index 996e9f3bfef..fc10bfa6718 100644
---- a/target/i386/xsave_helper.c
-+++ b/target/i386/xsave_helper.c
-@@ -43,8 +43,8 @@ void x86_cpu_xsave_all_areas(X86CPU *cpu, void *buf, uint32_t buflen)
-     for (i = 0; i < CPU_NB_REGS; i++) {
-         uint8_t *xmm = legacy->xmm_regs[i];
- 
--        stq_p(xmm,     env->xmm_regs[i].ZMM_Q(0));
--        stq_p(xmm + 8, env->xmm_regs[i].ZMM_Q(1));
-+        stq_le_p(xmm,     env->xmm_regs[i].ZMM_Q(0));
-+        stq_le_p(xmm + 8, env->xmm_regs[i].ZMM_Q(1));
-     }
- 
-     header->xstate_bv = env->xstate_bv;
-@@ -58,8 +58,8 @@ void x86_cpu_xsave_all_areas(X86CPU *cpu, void *buf, uint32_t buflen)
-         for (i = 0; i < CPU_NB_REGS; i++) {
-             uint8_t *ymmh = avx->ymmh[i];
- 
--            stq_p(ymmh,     env->xmm_regs[i].ZMM_Q(2));
--            stq_p(ymmh + 8, env->xmm_regs[i].ZMM_Q(3));
-+            stq_le_p(ymmh,     env->xmm_regs[i].ZMM_Q(2));
-+            stq_le_p(ymmh + 8, env->xmm_regs[i].ZMM_Q(3));
          }
+-        stw_p(header + 0x1fa, video_mode);
++        stw_le_p(header + 0x1fa, video_mode);
      }
  
-@@ -101,10 +101,10 @@ void x86_cpu_xsave_all_areas(X86CPU *cpu, void *buf, uint32_t buflen)
-         for (i = 0; i < CPU_NB_REGS; i++) {
-             uint8_t *zmmh = zmm_hi256->zmm_hi256[i];
- 
--            stq_p(zmmh,      env->xmm_regs[i].ZMM_Q(4));
--            stq_p(zmmh + 8,  env->xmm_regs[i].ZMM_Q(5));
--            stq_p(zmmh + 16, env->xmm_regs[i].ZMM_Q(6));
--            stq_p(zmmh + 24, env->xmm_regs[i].ZMM_Q(7));
-+            stq_le_p(zmmh,      env->xmm_regs[i].ZMM_Q(4));
-+            stq_le_p(zmmh + 8,  env->xmm_regs[i].ZMM_Q(5));
-+            stq_le_p(zmmh + 16, env->xmm_regs[i].ZMM_Q(6));
-+            stq_le_p(zmmh + 24, env->xmm_regs[i].ZMM_Q(7));
-         }
- 
- #ifdef TARGET_X86_64
-@@ -177,8 +177,8 @@ void x86_cpu_xrstor_all_areas(X86CPU *cpu, const void *buf, uint32_t buflen)
-     for (i = 0; i < CPU_NB_REGS; i++) {
-         const uint8_t *xmm = legacy->xmm_regs[i];
- 
--        env->xmm_regs[i].ZMM_Q(0) = ldq_p(xmm);
--        env->xmm_regs[i].ZMM_Q(1) = ldq_p(xmm + 8);
-+        env->xmm_regs[i].ZMM_Q(0) = ldq_le_p(xmm);
-+        env->xmm_regs[i].ZMM_Q(1) = ldq_le_p(xmm + 8);
+     /* loader type */
+@@ -839,7 +839,7 @@ void x86_load_linux(X86MachineState *x86ms,
+     /* heap */
+     if (protocol >= 0x201) {
+         header[0x211] |= 0x80; /* CAN_USE_HEAP */
+-        stw_p(header + 0x224, cmdline_addr - real_addr - 0x200);
++        stw_le_p(header + 0x224, cmdline_addr - real_addr - 0x200);
      }
  
-     env->xstate_bv = header->xstate_bv;
-@@ -191,8 +191,8 @@ void x86_cpu_xrstor_all_areas(X86CPU *cpu, const void *buf, uint32_t buflen)
-         for (i = 0; i < CPU_NB_REGS; i++) {
-             const uint8_t *ymmh = avx->ymmh[i];
+     /* load initrd */
+@@ -879,8 +879,8 @@ void x86_load_linux(X86MachineState *x86ms,
+         sev_load_ctx.initrd_data = initrd_data;
+         sev_load_ctx.initrd_size = initrd_size;
  
--            env->xmm_regs[i].ZMM_Q(2) = ldq_p(ymmh);
--            env->xmm_regs[i].ZMM_Q(3) = ldq_p(ymmh + 8);
-+            env->xmm_regs[i].ZMM_Q(2) = ldq_le_p(ymmh);
-+            env->xmm_regs[i].ZMM_Q(3) = ldq_le_p(ymmh + 8);
-         }
+-        stl_p(header + 0x218, initrd_addr);
+-        stl_p(header + 0x21c, initrd_size);
++        stl_le_p(header + 0x218, initrd_addr);
++        stl_le_p(header + 0x21c, initrd_size);
      }
  
-@@ -241,10 +241,10 @@ void x86_cpu_xrstor_all_areas(X86CPU *cpu, const void *buf, uint32_t buflen)
-         for (i = 0; i < CPU_NB_REGS; i++) {
-             const uint8_t *zmmh = zmm_hi256->zmm_hi256[i];
+     /* load kernel and setup */
+@@ -926,7 +926,7 @@ void x86_load_linux(X86MachineState *x86ms,
+         kernel_size = setup_data_offset + sizeof(struct setup_data) + dtb_size;
+         kernel = g_realloc(kernel, kernel_size);
  
--            env->xmm_regs[i].ZMM_Q(4) = ldq_p(zmmh);
--            env->xmm_regs[i].ZMM_Q(5) = ldq_p(zmmh + 8);
--            env->xmm_regs[i].ZMM_Q(6) = ldq_p(zmmh + 16);
--            env->xmm_regs[i].ZMM_Q(7) = ldq_p(zmmh + 24);
-+            env->xmm_regs[i].ZMM_Q(4) = ldq_le_p(zmmh);
-+            env->xmm_regs[i].ZMM_Q(5) = ldq_le_p(zmmh + 8);
-+            env->xmm_regs[i].ZMM_Q(6) = ldq_le_p(zmmh + 16);
-+            env->xmm_regs[i].ZMM_Q(7) = ldq_le_p(zmmh + 24);
-         }
+-        stq_p(header + 0x250, prot_addr + setup_data_offset);
++        stq_le_p(header + 0x250, prot_addr + setup_data_offset);
  
- #ifdef TARGET_X86_64
+         setup_data = (struct setup_data *)(kernel + setup_data_offset);
+         setup_data->next = 0;
 -- 
 2.45.2
 
