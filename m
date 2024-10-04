@@ -4,77 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 54FB8CF8850
-	for <qemu-riscv@archiver.kernel.org>; Fri,  4 Oct 2024 16:42:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DA7A6CF884D
+	for <qemu-riscv@archiver.kernel.org>; Fri,  4 Oct 2024 16:42:52 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1swlNK-0002Dl-DS; Fri, 04 Oct 2024 12:41:56 -0400
+	id 1swlKW-0000XD-2e; Fri, 04 Oct 2024 12:39:00 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1swlNC-00024I-Oa
- for qemu-riscv@nongnu.org; Fri, 04 Oct 2024 12:41:46 -0400
-Received: from mail-lf1-x12e.google.com ([2a00:1450:4864:20::12e])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1swlIa-0002Si-S4
+ for qemu-riscv@nongnu.org; Fri, 04 Oct 2024 12:37:02 -0400
+Received: from mail-lf1-x134.google.com ([2a00:1450:4864:20::134])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1swlNB-0007Cf-0Q
- for qemu-riscv@nongnu.org; Fri, 04 Oct 2024 12:41:46 -0400
-Received: by mail-lf1-x12e.google.com with SMTP id
- 2adb3069b0e04-53988c54ec8so2788585e87.0
- for <qemu-riscv@nongnu.org>; Fri, 04 Oct 2024 09:41:44 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1swlIW-0006jG-PW
+ for qemu-riscv@nongnu.org; Fri, 04 Oct 2024 12:36:59 -0400
+Received: by mail-lf1-x134.google.com with SMTP id
+ 2adb3069b0e04-5398e3f43f3so2920693e87.2
+ for <qemu-riscv@nongnu.org>; Fri, 04 Oct 2024 09:36:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1728060103; x=1728664903; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=kB3ZtAz3XEwZvlOLzS/NbhoRCoAtuz8HX62gKHoEQpw=;
- b=M0icU7F2VuYiSj9KTnn3A2f3rSQYFyvWoiCry9pxvmtiLZfWF63eOGxA2biM4WuPRK
- VQSKlu87Ckpaln0GY3H9ymol/p2J9gRpgabD2EC5UemYNnR3r2m2biCDolFNl+ROBuV4
- mQ2dJvPjFkyKREBf6KgaXh21X4hrWOUi0Ihr7aqjLvVC+Kpv3AZAhSlbAZbNTL713RF7
- srjk3BggUOVHJs3U64NAE3xZ7m38YyMsqBT/BiFlMudSf6DKksZt3sn+RA0L/I5IZgB9
- 89N1eNA7BaTabvSZHN1tDtfSO2lCBzWvhsG7M9IYb90z1U4dVbV3w9WqCCOjTKVoygux
- O5rA==
+ d=linaro.org; s=google; t=1728059815; x=1728664615; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=/xxV2v0QPsMAJ2+RBFGZoSHYGXcFciUFYUOuAoIuqTc=;
+ b=adK7yN1lhJKKvrYX1L2gLziUONI67JzxOz/5mkmk7eUn3zM1jWnjquJOnpgmq0LG9r
+ g55SaHF6U6oewVeaddLqPFJ68Tp3TmCeebZKcz/syghGEAZ5YxW9ZOMWrttEO4bx/5O6
+ nMtkgcK3LA/u8VzclZPAh5OEGjKCVqrBmbCyf4iWGSaH20abkFj4lky49Xd1Pbp68Cvx
+ K7soQSFuubOFyx904xElv+6SZP3NlN95i/M7kLG+xeFXyY28OZMxq4Mxtlno1t86OajQ
+ nEqhC5ZpLXj31lZYLQTuakjL7RZV+Pqr5lE+GDd28gFQg/FLS2IAzftArVokV9MV0GeT
+ gIZw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728060103; x=1728664903;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=kB3ZtAz3XEwZvlOLzS/NbhoRCoAtuz8HX62gKHoEQpw=;
- b=OM01ul87sPhuxpWHxFqPqhvawDTmSNpg8L1CW92OwmGArLsabGwVwgf42a+5XkATno
- F8h1GCIM+GcoektFQ/VWvqF8G79uMc+gGrc9L+6tT4Kz46eDC3FMQyNwPXx2ivrPEOmA
- qsppO7xLTbfL9TgRtj3roy93FpsLF8x7JBu4OIqgR/NDRlgE7lmKCKDHF25vEWSgH5Tl
- N5fajM/Xg0RiXjwc9DGCsQ9dKAcBpwUjZk5jFTVcPqDJt7/diSoPKytFIrW3dupAOSF7
- f9n0fqfq9lJzvCoqMo2m6XLZnmEH0bZIVQrzUm+b2RA1zNEygGGaWnegHWfB82TM1GF/
- +Jig==
-X-Gm-Message-State: AOJu0YzfzpfVxWaXBgN6mOgFM1MnfgQJ5P8ZdGFehScSjy91s+6K6o3D
- qGx1yKeTe6RNbLztI29Hqadtkqu8qui9lSmE+jk34qnXrnUm/9m+LidU3Zeznn4=
-X-Google-Smtp-Source: AGHT+IHTzZyLnKKAduJSs3wJNzJl6SJnKRygY12UTU4C/h9iSNFiY0vz+TFehs7M6+JHAZ/+ng36WQ==
-X-Received: by 2002:a05:6512:318e:b0:536:7cfb:6998 with SMTP id
- 2adb3069b0e04-539ab89e01bmr2604563e87.35.1728060102940; 
- Fri, 04 Oct 2024 09:41:42 -0700 (PDT)
-Received: from [192.168.132.175] ([91.223.100.150])
+ d=1e100.net; s=20230601; t=1728059815; x=1728664615;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=/xxV2v0QPsMAJ2+RBFGZoSHYGXcFciUFYUOuAoIuqTc=;
+ b=QCeRnec58fSuH0M7bmJHPaiW17c/2QZluWZKHLsrFlQCZQWW0P+OY/i0NjceSmG68T
+ xDv9+4LNqC2oFgmgHrqkAoNSbGpGktdtBh88GzfgDJ/OejT7SVAtG5kg35cZTNF4tpHJ
+ lsGATGsB2m4TDnt/pXWPtmnoRaurRJuwUMU3TcDtJkUzw+mIhPVbyT6id1o72ZvMIbyV
+ HWutf9tIkm5jj90QspKvMvFd1fKASOSMQi47rz2csKvkV57Ci2a7MB9B6HmvlqwYIyT1
+ fEyDw70iGIS8+Vg1ODnHiPLF1o3COLemjUjGmLYE4j0gFHEAtP1B7bY/A15jyHuUMiIa
+ rMMw==
+X-Gm-Message-State: AOJu0YyvfG0IHyIgvAY4+A1gJEqa49SWi6ZjmA59yQ/1ne7vB0cVIVSa
+ uqFOTT2Y6TCf3L9VuszanjqyhVVVyxpZ8Uv1u+R/CrWm8Zbe1uCZuQN9z7sUsrA=
+X-Google-Smtp-Source: AGHT+IHRO/heO4stSqHxn6O54m0xlWSECyVCdwPbXS8fz06hWXQKcyCH5b3Xwjeh40ry/zu4NRL9bA==
+X-Received: by 2002:ac2:4c49:0:b0:539:88ae:ded6 with SMTP id
+ 2adb3069b0e04-539ab87e1ebmr2548554e87.35.1728059814899; 
+ Fri, 04 Oct 2024 09:36:54 -0700 (PDT)
+Received: from localhost.localdomain ([91.223.100.150])
  by smtp.gmail.com with ESMTPSA id
- 2adb3069b0e04-539aff1d12esm2651e87.175.2024.10.04.09.41.38
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 04 Oct 2024 09:41:41 -0700 (PDT)
-Message-ID: <7d0b35a9-52c4-4ec9-878d-06c1f54c599a@linaro.org>
-Date: Fri, 4 Oct 2024 13:41:34 -0300
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 18/25] target/m68k: Use explicit big-endian LD/ST API
+ 2adb3069b0e04-539aff235casm1392e87.226.2024.10.04.09.36.49
+ (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
+ Fri, 04 Oct 2024 09:36:54 -0700 (PDT)
+From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, qemu-s390x@nongnu.org,
  Thomas Huth <thuth@redhat.com>,
  Richard Henderson <richard.henderson@linaro.org>,
- Pierrick Bouvier <pierrick.bouvier@linaro.org>, qemu-ppc@nongnu.org
+ Pierrick Bouvier <pierrick.bouvier@linaro.org>, qemu-ppc@nongnu.org,
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+Subject: [PATCH v2 25/25] hw/ppc/e500: Use explicit big-endian LD/ST API
+Date: Fri,  4 Oct 2024 13:30:41 -0300
+Message-ID: <20241004163042.85922-26-philmd@linaro.org>
+X-Mailer: git-send-email 2.45.2
+In-Reply-To: <20241004163042.85922-1-philmd@linaro.org>
 References: <20241004163042.85922-1-philmd@linaro.org>
- <20241004163042.85922-19-philmd@linaro.org>
-Content-Language: en-US
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-In-Reply-To: <20241004163042.85922-19-philmd@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::12e;
- envelope-from=philmd@linaro.org; helo=mail-lf1-x12e.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::134;
+ envelope-from=philmd@linaro.org; helo=mail-lf1-x134.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -97,27 +96,93 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 4/10/24 18:30, Philippe Mathieu-Daudé wrote:
-> The M68K architecture uses big endianness. Directly use
-> the big-endian LD/ST API.
-> 
-> Mechanical change using:
-> 
->    $ end=be; \
->      for acc in uw w l q tul; do \
->        sed -i -e "s/ld${acc}_p(/ld${acc}_${end}_p(/" \
->               -e "s/st${acc}_p(/st${acc}_${end}_p(/" \
->          $(git grep -wlE '(ld|st)t?u?[wlq]_p' target/m68k/); \
->      done
-> 
-> Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+The 32-bit PPC architecture uses big endianness. Directly use
+the big-endian LD/ST API for the E500 hardware.
 
-Per v1:
-Reviewed-by: Thomas Huth <huth@tuxfamily.org>
+Mechanical change using:
 
-> ---
->   target/m68k/gdbstub.c |  2 +-
->   target/m68k/helper.c  | 10 +++++-----
->   2 files changed, 6 insertions(+), 6 deletions(-)
+  $ end=be; \
+    for acc in uw w l q tul; do \
+      sed -i -e "s/ld${acc}_p(/ld${acc}_${end}_p(/" \
+             -e "s/st${acc}_p(/st${acc}_${end}_p(/" \
+        $(git grep -wlE '(ld|st)t?u?[wlq]_p' hw/*/*e500*); \
+    done
+
+Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+---
+ hw/ppc/ppce500_spin.c | 24 ++++++++++++------------
+ 1 file changed, 12 insertions(+), 12 deletions(-)
+
+diff --git a/hw/ppc/ppce500_spin.c b/hw/ppc/ppce500_spin.c
+index e08739a443d..8e0ef9467e4 100644
+--- a/hw/ppc/ppce500_spin.c
++++ b/hw/ppc/ppce500_spin.c
+@@ -64,9 +64,9 @@ static void spin_reset(DeviceState *dev)
+     for (i = 0; i < MAX_CPUS; i++) {
+         SpinInfo *info = &s->spin[i];
+ 
+-        stl_p(&info->pir, i);
+-        stq_p(&info->r3, i);
+-        stq_p(&info->addr, 1);
++        stl_be_p(&info->pir, i);
++        stq_be_p(&info->r3, i);
++        stq_be_p(&info->addr, 1);
+     }
+ }
+ 
+@@ -96,9 +96,9 @@ static void spin_kick(CPUState *cs, run_on_cpu_data data)
+     hwaddr map_start;
+ 
+     cpu_synchronize_state(cs);
+-    stl_p(&curspin->pir, env->spr[SPR_BOOKE_PIR]);
+-    env->nip = ldq_p(&curspin->addr) & (map_size - 1);
+-    env->gpr[3] = ldq_p(&curspin->r3);
++    stl_be_p(&curspin->pir, env->spr[SPR_BOOKE_PIR]);
++    env->nip = ldq_be_p(&curspin->addr) & (map_size - 1);
++    env->gpr[3] = ldq_be_p(&curspin->r3);
+     env->gpr[4] = 0;
+     env->gpr[5] = 0;
+     env->gpr[6] = 0;
+@@ -106,7 +106,7 @@ static void spin_kick(CPUState *cs, run_on_cpu_data data)
+     env->gpr[8] = 0;
+     env->gpr[9] = 0;
+ 
+-    map_start = ldq_p(&curspin->addr) & ~(map_size - 1);
++    map_start = ldq_be_p(&curspin->addr) & ~(map_size - 1);
+     mmubooke_create_initial_mapping(env, 0, map_start, map_size);
+ 
+     cs->halted = 0;
+@@ -141,14 +141,14 @@ static void spin_write(void *opaque, hwaddr addr, uint64_t value,
+         stb_p(curspin_p, value);
+         break;
+     case 2:
+-        stw_p(curspin_p, value);
++        stw_be_p(curspin_p, value);
+         break;
+     case 4:
+-        stl_p(curspin_p, value);
++        stl_be_p(curspin_p, value);
+         break;
+     }
+ 
+-    if (!(ldq_p(&curspin->addr) & 1)) {
++    if (!(ldq_be_p(&curspin->addr) & 1)) {
+         /* run CPU */
+         run_on_cpu(cpu, spin_kick, RUN_ON_CPU_HOST_PTR(curspin));
+     }
+@@ -163,9 +163,9 @@ static uint64_t spin_read(void *opaque, hwaddr addr, unsigned len)
+     case 1:
+         return ldub_p(spin_p);
+     case 2:
+-        return lduw_p(spin_p);
++        return lduw_be_p(spin_p);
+     case 4:
+-        return ldl_p(spin_p);
++        return ldl_be_p(spin_p);
+     default:
+         hw_error("ppce500: unexpected %s with len = %u", __func__, len);
+     }
+-- 
+2.45.2
 
 
