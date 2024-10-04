@@ -4,58 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5CDFBCF8850
-	for <qemu-riscv@archiver.kernel.org>; Fri,  4 Oct 2024 16:34:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4911ECF8840
+	for <qemu-riscv@archiver.kernel.org>; Fri,  4 Oct 2024 16:34:07 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1swlFX-0000Db-MG; Fri, 04 Oct 2024 12:33:54 -0400
+	id 1swlFc-0000dZ-UZ; Fri, 04 Oct 2024 12:33:57 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1swlFK-000850-47
- for qemu-riscv@nongnu.org; Fri, 04 Oct 2024 12:33:38 -0400
-Received: from mail-lf1-x133.google.com ([2a00:1450:4864:20::133])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1swlF1-0007pb-NN
+ for qemu-riscv@nongnu.org; Fri, 04 Oct 2024 12:33:23 -0400
+Received: from mail-lj1-x231.google.com ([2a00:1450:4864:20::231])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1swlFG-0005uj-Hv
- for qemu-riscv@nongnu.org; Fri, 04 Oct 2024 12:33:37 -0400
-Received: by mail-lf1-x133.google.com with SMTP id
- 2adb3069b0e04-53992157528so2801398e87.2
- for <qemu-riscv@nongnu.org>; Fri, 04 Oct 2024 09:33:33 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1swlEz-0005rc-1N
+ for qemu-riscv@nongnu.org; Fri, 04 Oct 2024 12:33:19 -0400
+Received: by mail-lj1-x231.google.com with SMTP id
+ 38308e7fff4ca-2facf48157dso25858461fa.2
+ for <qemu-riscv@nongnu.org>; Fri, 04 Oct 2024 09:33:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1728059613; x=1728664413; darn=nongnu.org;
+ d=linaro.org; s=google; t=1728059595; x=1728664395; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=A2b2LwHBDDNlQ4lpraog9QbauHHDsoDaj9FTLQzChw4=;
- b=SUWGMhS8Rb1Z8N6M5Ui0gGXejRg6XVT7CurNAYKpuy+W/qKzQKmt8s04pFlA21fb99
- 9C5YvEm7CU2XWbBI569KpEPOohBPZM/TRHDNVkIwGYO9dq9Cjwgclt5bLko8f2B8prkM
- D5fNDzTUC2EM4xDnFQO/b2WjYG8T5OLKEokukRLXj0h22AQFr6TAFvZUFJHqxjdn+Cfm
- 2oSGpX1M0uRKOYyJ8c9Lb7FwRsormh4gKd/47kKgiBv+Cpx3WpLTEH73HAm53oRLt7RT
- 58PPFhsHAFpq9LCCJdTohWN73WyHlyPVGsrygEnX+J6jVdcB6ovwA12LUa4qaNj/9qRv
- rUsA==
+ bh=Sos7CbirHso2UkebMmuBOYVoWuS2tFtvh+AVgSe77UQ=;
+ b=FSX6BOSJB9wZcloMRiCyaAT97UBbQi1NKzy9WJdy9whe6In7PtuKCv1qdeb4TH87Ig
+ X2NrfrL0fXFcwNYyOxPBR1fxFvmkVmPo9Wr5eRKlA+ckacRSCVoO22gn9jVCK5ZH6CcM
+ 2JF2RJMhFD0BBo3WXwX4f1ylheyk8SjXQ6On1ygaR2/lTw5QoqO6LcR0ghvwGH8UkBop
+ wdZvYYQCbRf7s7+RvZ8krEKvCInILR89VxXt2X5otiTowTsBYh44mzoUH13DdCpYNzck
+ X/O9bFAqBXFWNvSmFLqABPoncYLPlsHCPi5DtOW1pkHafP84W1hWrXA9if0mZTLo6piN
+ KaRA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728059613; x=1728664413;
+ d=1e100.net; s=20230601; t=1728059595; x=1728664395;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=A2b2LwHBDDNlQ4lpraog9QbauHHDsoDaj9FTLQzChw4=;
- b=wpJ95saJTrb/dKssdHwAa31ADEQK6qDCqgpp4aCEI0pEe0Gw2AinQYp+vRQqKpnzIP
- ukW/f2GOXmckWIQk3kwnXwgb3C0yOgvfUH69WPRcI1XxInJ+kyq6cnulN7ddfKN8wP6w
- dK4Ya3pQBXuOV2V1gHz1NGeE+Unrbb224jQz6sRXf37nhZVmgD6NPOg2A3SY2E8DCztv
- 6iCCwLMb4oiqzVpPyRIPMdExKC8w2waHLvpBA+cUJ0H/a+mXgzXqihlmItkVfagkPc1x
- iJ/kFYnaH1EAJ9gWwtlVl+CDlZRnwglj6/4e18MZUwOQHpd+P8XSrDV+yQNENRFebFtU
- Qmug==
-X-Gm-Message-State: AOJu0YyPdnKhUnZRH6WjA/dvJqchdA2MOfkyKNFnIjg3BEpAQPz7QBW3
- FkLr7rOU2uBAK3ypPOHdqyAdeRhMmyVvUq3wA2mXBjH5Twm0lOCeB2NBxt4qnOo=
-X-Google-Smtp-Source: AGHT+IE2tfM5rvhVPb80atGah5MIPpETq8Uf1KrfbOqWb+mDr5qJDR6o+kAOVJuXXSpQr5au/SoHYw==
-X-Received: by 2002:a05:6512:692:b0:533:c9d:a01b with SMTP id
- 2adb3069b0e04-539ab88a4a7mr2428184e87.29.1728059612608; 
- Fri, 04 Oct 2024 09:33:32 -0700 (PDT)
+ bh=Sos7CbirHso2UkebMmuBOYVoWuS2tFtvh+AVgSe77UQ=;
+ b=RZVjw2Dah2H0Rb8GsDS/TZwvP4mCAOtbpIN3SQjNPvQs0F69anfJDmK8brgXjxLUNv
+ OJyibhEgLIdIueDprUhxt0kYjsmSgWrmFF9jmJBBUq4AFNadJfOZCp8WQbOK1FMPCtfS
+ 9tJU2GjKQWNz+H2XCtBmQS84CV5iNvtWLyBlMyRqgHkSYy3mJsRcfScATJKQhKxsFMuf
+ BQLfZ41GaL60uNiT+IsAn4UNqBeIUDebtdXhjCfT2mdTMQ06ltRdK5Iquu6cLX3kKHbq
+ ox4DwkQC8tzymccsDFMpZjbJ6zZiqOSisuiM3ctKuT8/vexEA/U13nnC1dmlH3GOJ2Sc
+ P+8g==
+X-Gm-Message-State: AOJu0YzSL8kRxzC12CUL7oiBBOS4MQr5tYOIM5k9KiV/+GcnhK3UhkEt
+ KfQS30vumHuiJ1vP79xxgOnWJSvxpSUzKrWhEt8fVv14jwUM1a9++z1vVvXBlTk=
+X-Google-Smtp-Source: AGHT+IHeOcG9Bnpx0IjVn7kLXVDgEz9fm68zgEHM60SbXPFLEIbauMEVjdnVKL9SBHFoEGkeAwTBUQ==
+X-Received: by 2002:a05:651c:1986:b0:2fa:c5b0:39a3 with SMTP id
+ 38308e7fff4ca-2faf3c13677mr18816021fa.14.1728059595277; 
+ Fri, 04 Oct 2024 09:33:15 -0700 (PDT)
 Received: from localhost.localdomain ([91.223.100.150])
  by smtp.gmail.com with ESMTPSA id
- 2adb3069b0e04-539aff234d7sm718e87.188.2024.10.04.09.33.25
+ 38308e7fff4ca-2faf9ac461fsm207201fa.47.2024.10.04.09.33.10
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Fri, 04 Oct 2024 09:33:32 -0700 (PDT)
+ Fri, 04 Oct 2024 09:33:14 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, qemu-s390x@nongnu.org,
@@ -63,17 +63,17 @@ Cc: qemu-riscv@nongnu.org, qemu-s390x@nongnu.org,
  Richard Henderson <richard.henderson@linaro.org>,
  Pierrick Bouvier <pierrick.bouvier@linaro.org>, qemu-ppc@nongnu.org,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-Subject: [PATCH v2 11/25] linux-user/i386: Use explicit little-endian LD/ST API
-Date: Fri,  4 Oct 2024 13:30:27 -0300
-Message-ID: <20241004163042.85922-12-philmd@linaro.org>
+Subject: [PATCH v2 10/25] target/avr: Use explicit little-endian LD/ST API
+Date: Fri,  4 Oct 2024 13:30:26 -0300
+Message-ID: <20241004163042.85922-11-philmd@linaro.org>
 X-Mailer: git-send-email 2.45.2
 In-Reply-To: <20241004163042.85922-1-philmd@linaro.org>
 References: <20241004163042.85922-1-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::133;
- envelope-from=philmd@linaro.org; helo=mail-lf1-x133.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::231;
+ envelope-from=philmd@linaro.org; helo=mail-lj1-x231.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -96,29 +96,43 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-The x86 architecture uses little endianness. Directly use
+The AVR architecture uses little endianness. Directly use
 the little-endian LD/ST API.
+
+Mechanical change using:
+
+  $ end=le; \
+    for acc in uw w l q tul; do \
+      sed -i -e "s/ld${acc}_p(/ld${acc}_${end}_p(/" \
+             -e "s/st${acc}_p(/st${acc}_${end}_p(/" \
+        $(git grep -wlE '(ld|st)t?u?[wlq]_p' target/avr/); \
+    done
 
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 ---
- linux-user/i386/signal.c | 4 ++--
+ target/avr/gdbstub.c | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/linux-user/i386/signal.c b/linux-user/i386/signal.c
-index cb90711834f..0f11dba831f 100644
---- a/linux-user/i386/signal.c
-+++ b/linux-user/i386/signal.c
-@@ -754,8 +754,8 @@ static bool restore_sigcontext(CPUX86State *env, struct target_sigcontext *sc)
-     env->eip = tswapl(sc->rip);
- #endif
+diff --git a/target/avr/gdbstub.c b/target/avr/gdbstub.c
+index d6d3c1479b3..aea71282a58 100644
+--- a/target/avr/gdbstub.c
++++ b/target/avr/gdbstub.c
+@@ -69,13 +69,13 @@ int avr_cpu_gdb_write_register(CPUState *cs, uint8_t *mem_buf, int n)
  
--    cpu_x86_load_seg(env, R_CS, lduw_p(&sc->cs) | 3);
--    cpu_x86_load_seg(env, R_SS, lduw_p(&sc->ss) | 3);
-+    cpu_x86_load_seg(env, R_CS, lduw_le_p(&sc->cs) | 3);
-+    cpu_x86_load_seg(env, R_SS, lduw_le_p(&sc->ss) | 3);
+     /*  SP */
+     if (n == 33) {
+-        env->sp = lduw_p(mem_buf);
++        env->sp = lduw_le_p(mem_buf);
+         return 2;
+     }
  
-     tmpflags = tswapl(sc->eflags);
-     env->eflags = (env->eflags & ~0x40DD5) | (tmpflags & 0x40DD5);
+     /*  PC */
+     if (n == 34) {
+-        env->pc_w = ldl_p(mem_buf) / 2;
++        env->pc_w = ldl_le_p(mem_buf) / 2;
+         return 4;
+     }
+ 
 -- 
 2.45.2
 
