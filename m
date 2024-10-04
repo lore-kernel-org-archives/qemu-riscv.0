@@ -4,58 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4A5DCCF8840
-	for <qemu-riscv@archiver.kernel.org>; Fri,  4 Oct 2024 16:33:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E0FBCCF8840
+	for <qemu-riscv@archiver.kernel.org>; Fri,  4 Oct 2024 16:33:04 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1swlDV-0004OG-0N; Fri, 04 Oct 2024 12:31:45 -0400
+	id 1swlDv-0005HQ-Sv; Fri, 04 Oct 2024 12:32:11 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1swlDS-0004LU-Sg
- for qemu-riscv@nongnu.org; Fri, 04 Oct 2024 12:31:43 -0400
-Received: from mail-lf1-x134.google.com ([2a00:1450:4864:20::134])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1swlDu-0005EQ-9g
+ for qemu-riscv@nongnu.org; Fri, 04 Oct 2024 12:32:10 -0400
+Received: from mail-lj1-x22f.google.com ([2a00:1450:4864:20::22f])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1swlDQ-0005ad-MV
- for qemu-riscv@nongnu.org; Fri, 04 Oct 2024 12:31:42 -0400
-Received: by mail-lf1-x134.google.com with SMTP id
- 2adb3069b0e04-5398b589032so3879451e87.1
- for <qemu-riscv@nongnu.org>; Fri, 04 Oct 2024 09:31:40 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1swlDs-0005hG-23
+ for qemu-riscv@nongnu.org; Fri, 04 Oct 2024 12:32:10 -0400
+Received: by mail-lj1-x22f.google.com with SMTP id
+ 38308e7fff4ca-2fabe5c8c26so22571121fa.2
+ for <qemu-riscv@nongnu.org>; Fri, 04 Oct 2024 09:32:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1728059498; x=1728664298; darn=nongnu.org;
+ d=linaro.org; s=google; t=1728059526; x=1728664326; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=srr/+wHoyELt07jjPH89qrlEvr/MIKBSh1HnIzun2fE=;
- b=XfIB3/HOKogcZq/TTpn2mwWX7F3m1ILil+ggf0zuHBOhtsbB58weTeg2+BCeA4CpDI
- v4IqQ1JwEjcz8AZn9F7p9N9MsdFLxsoYl03jpmK4l8NKrlvVlZTlw29/bS1elNxS7xt+
- lKMQpVt4UkBVN0NNEsutz8heacF41JMu1jO80rNp8i9vtsfwsi4Ui1JDQws/VD+qpROZ
- KdvFHRbR6VC6bZLjv4QmulQqNwQp319QMYZ8p94FLg3uEelK9mykpwM21c80ui7oB2FH
- GPWPbld4zDy+DZjF32ua90RYZJCTf6biCdu1uuzzIi56O0iqD8cEHkYSqPrZTminKBeF
- 00SA==
+ bh=fKHjWYe4hWo3y6AeSVqqoaCH56JRUztKe8mH70Hqsj0=;
+ b=i2/RIa90UJ5HcmJkX0mtWXoQsdZZq+tyvEEbeoQeXftOnapYbGJYFrXrBfgzGUdNqF
+ V2w4YALqvYtZYMj2r0UdiRepdbFK/BBZMJ+x5ODzo/A7bnd3+o4GxdijTSvw+LbgANoy
+ yF1shnSDd1VnqJTTeBFfLANaBjoFcImBiM7ZwWEUNBGenvw7Lhod4XeTT8bZ6+cBYimU
+ 0FKqy2QBdiJJQNXx6VPAH8kiR36dxWCF+Hp9yJg3JWML+PMa8zmrkCnXvPzVuXt/ocBQ
+ jtHtuUtUNnyYU3t41JOrYVWwni8bPuQDrwcxpeyvLtKm1WiZOP25ckxXDJfJdVxnuxcr
+ Jm8Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728059498; x=1728664298;
+ d=1e100.net; s=20230601; t=1728059526; x=1728664326;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=srr/+wHoyELt07jjPH89qrlEvr/MIKBSh1HnIzun2fE=;
- b=ROKlWFz5PPwWjqo3q4YYIcMD2W81Em7UtL+NUUADWOFXVxzig3MsJoqByJ9sSGM8MA
- sfW3CWvxy1/Yha5f4IaH9xdgpbdDN2ldHXx3mkdh2cNjqz7lPFSTwDFUes0xsqKmZRzm
- q56QOZ8Rmd/ljgnZriIq7qTTyuP78GkwHYj0QWSnGY74/2zC8Fyni4G9EoC0NEvghAXT
- pK7D/C9Myxs+HWHfWAcUejvUhaWRQWIOK0WYh85+89B+4Q+B8ZlIOgOhV2a9yS90eXZm
- FCzov/3eY5rXQPOPWBpz1lsymKn5kMN6DvGSXihgtDpVC/fXjyzdARjlIEERozsLtTtJ
- 9ocA==
-X-Gm-Message-State: AOJu0YyZnTKL8ommZXZ4ua8/3k/eOwJR59ILq1mSKkMg0kw/MiK82UDK
- Kr9bl9K5fkPHVLjAvveMwLdSwOJ0bVQjKjaRYMWjbBpwzO5gS7saSA2dN8abZCs=
-X-Google-Smtp-Source: AGHT+IHJR7ib8v93RUrkaUqyzDERERj0oMk+Ip4lCEyAPZf7wutYpoQaivUCAVQhCezLA/67oTXy1w==
-X-Received: by 2002:a05:6512:e93:b0:539:947e:18a6 with SMTP id
- 2adb3069b0e04-539ab9cf223mr3337059e87.47.1728059498371; 
- Fri, 04 Oct 2024 09:31:38 -0700 (PDT)
+ bh=fKHjWYe4hWo3y6AeSVqqoaCH56JRUztKe8mH70Hqsj0=;
+ b=XzuJaj9EArzb894IKWMe7IN+ilMVCByisRPq3UDvG3jQfkj3XU4kfJVTbViVF9Jxqu
+ 6cA2p88yP4SGRX/PWg/zQBskZWdDyO6fEyursiIw0AvbXAsKtGe4NWRqHSmy/CoKhym9
+ L6kWsvmk0YSWPAYfg8ceokd8IJy8Pi0w7epXyTbSjkcMSGNmy02XB2YPDyDQSDc6oSOp
+ R9ppvE0Kuh47im/lRHxb7l2M6oslmL73/+L5h9KOlh7VCeGDTaFrNQrfq6mCsU4jfCPy
+ ki0JI0MpApluY9MxTtVFzdGVtRxPUeS+sDsGdmmDxWrhYD5M7iJJESrJNpJONwXaJLMX
+ aYuA==
+X-Gm-Message-State: AOJu0Ywfq5MBkQt+WkepAJ1rAMqeGzNG3HCmT+LXMm2ffbjYLf2LANe7
+ W+z85A/i/ZIaebLQmOG7uy9B3Ofy84hPzSKX9fs/q0PZu4B82t6GsbfhZ9Ny3VY=
+X-Google-Smtp-Source: AGHT+IEMDO5su4/asKew0kpLbAIKmyXmPonSSWE40YWku84+mJzIUTJQbpBvY7rsFfmLpNmfBGcL4Q==
+X-Received: by 2002:a05:6512:b90:b0:539:936c:983e with SMTP id
+ 2adb3069b0e04-539ab9ed416mr2061219e87.53.1728059526340; 
+ Fri, 04 Oct 2024 09:32:06 -0700 (PDT)
 Received: from localhost.localdomain ([91.223.100.150])
  by smtp.gmail.com with ESMTPSA id
- 2adb3069b0e04-539afec1034sm1885e87.13.2024.10.04.09.31.32
+ 2adb3069b0e04-539aff2838esm425e87.270.2024.10.04.09.32.00
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Fri, 04 Oct 2024 09:31:36 -0700 (PDT)
+ Fri, 04 Oct 2024 09:32:04 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, qemu-s390x@nongnu.org,
@@ -63,17 +63,17 @@ Cc: qemu-riscv@nongnu.org, qemu-s390x@nongnu.org,
  Richard Henderson <richard.henderson@linaro.org>,
  Pierrick Bouvier <pierrick.bouvier@linaro.org>, qemu-ppc@nongnu.org,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-Subject: [PATCH v2 03/25] target/alpha: Replace ldtul_p() -> ldq_p()
-Date: Fri,  4 Oct 2024 13:30:19 -0300
-Message-ID: <20241004163042.85922-4-philmd@linaro.org>
+Subject: [PATCH v2 05/25] gdbstub/helpers: Introduce ldtul_$endian_p() helpers
+Date: Fri,  4 Oct 2024 13:30:21 -0300
+Message-ID: <20241004163042.85922-6-philmd@linaro.org>
 X-Mailer: git-send-email 2.45.2
 In-Reply-To: <20241004163042.85922-1-philmd@linaro.org>
 References: <20241004163042.85922-1-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::134;
- envelope-from=philmd@linaro.org; helo=mail-lf1-x134.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::22f;
+ envelope-from=philmd@linaro.org; helo=mail-lj1-x22f.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -96,31 +96,26 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-The Alpha target is only built for 64-bit.
-Using ldtul_p() is pointless, replace by ldq_p().
-
-Mechanical change doing:
-
-  $ sed -i -e 's/ldtul_p/ldq_p/' $(git grep -wl ldtul_p target/alpha/)
+Introduce ldtul_le_p() and ldtul_be_p() to use directly
+in place of ldtul_p() when a target endianness is fixed.
 
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 ---
- target/alpha/gdbstub.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ include/gdbstub/helpers.h | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/target/alpha/gdbstub.c b/target/alpha/gdbstub.c
-index 13694fd321e..bf5091c2a6e 100644
---- a/target/alpha/gdbstub.c
-+++ b/target/alpha/gdbstub.c
-@@ -59,7 +59,7 @@ int alpha_cpu_gdb_read_register(CPUState *cs, GByteArray *mem_buf, int n)
- int alpha_cpu_gdb_write_register(CPUState *cs, uint8_t *mem_buf, int n)
- {
-     CPUAlphaState *env = cpu_env(cs);
--    target_ulong tmp = ldtul_p(mem_buf);
-+    target_ulong tmp = ldq_p(mem_buf);
-     CPU_DoubleU d;
+diff --git a/include/gdbstub/helpers.h b/include/gdbstub/helpers.h
+index fd83e366a51..e783d166865 100644
+--- a/include/gdbstub/helpers.h
++++ b/include/gdbstub/helpers.h
+@@ -99,5 +99,7 @@ static inline uint8_t *gdb_get_reg_ptr(GByteArray *buf, int len)
+ #endif
  
-     switch (n) {
+ #define ldtul_p(addr) ldn_p(addr, TARGET_LONG_SIZE)
++#define ldtul_le_p(addr) ldn_le_p(addr, TARGET_LONG_SIZE)
++#define ldtul_be_p(addr) ldn_be_p(addr, TARGET_LONG_SIZE)
+ 
+ #endif /* _GDBSTUB_HELPERS_H_ */
 -- 
 2.45.2
 
