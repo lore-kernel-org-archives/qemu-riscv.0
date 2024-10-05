@@ -4,86 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3E335CF8868
-	for <qemu-riscv@archiver.kernel.org>; Sat,  5 Oct 2024 01:29:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 64CAFCF8869
+	for <qemu-riscv@archiver.kernel.org>; Sat,  5 Oct 2024 01:39:47 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1swtbi-0005O3-0x; Fri, 04 Oct 2024 21:29:18 -0400
+	id 1swtlc-00070G-84; Fri, 04 Oct 2024 21:39:34 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1swtbg-0005Ng-RA
- for qemu-riscv@nongnu.org; Fri, 04 Oct 2024 21:29:16 -0400
-Received: from mail-pj1-x1034.google.com ([2607:f8b0:4864:20::1034])
+ id 1swtlO-0006zG-Lv
+ for qemu-riscv@nongnu.org; Fri, 04 Oct 2024 21:39:20 -0400
+Received: from mail-pj1-x1033.google.com ([2607:f8b0:4864:20::1033])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1swtbf-0006cs-BH
- for qemu-riscv@nongnu.org; Fri, 04 Oct 2024 21:29:16 -0400
-Received: by mail-pj1-x1034.google.com with SMTP id
- 98e67ed59e1d1-2e078d28fe9so1966067a91.2
- for <qemu-riscv@nongnu.org>; Fri, 04 Oct 2024 18:29:14 -0700 (PDT)
+ id 1swtlL-0007dZ-Tx
+ for qemu-riscv@nongnu.org; Fri, 04 Oct 2024 21:39:18 -0400
+Received: by mail-pj1-x1033.google.com with SMTP id
+ 98e67ed59e1d1-2e199b1d157so2064774a91.2
+ for <qemu-riscv@nongnu.org>; Fri, 04 Oct 2024 18:39:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1728091754; x=1728696554; darn=nongnu.org;
+ d=linaro.org; s=google; t=1728092347; x=1728697147; darn=nongnu.org;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=MYdCuhRdFeP/4oLJSAnE6LdLiXFG0bMoi7kIm8NsyEg=;
- b=IqtHhmOkv098iTcnkQ9iWmEWrB1wPdEg2e+mVs1+lLYng6p5//K/cI/RESLIluFE+c
- LmudGQFv3b/QTCI1duwzBz6hQvi04UltWPu9q4uLtZbDsq/WX+9P6bj7zqyWDyniJkdd
- rjrIxTaCgj0gYeoCn2qe8B5vIrah7gy/iLB4eRTWuKqBYWMznhuZ21Ui1hDRq4wPC3t8
- jywqX5aE8fPtoc55jqBM4YZgqHnWXhHTii6CXMkfMrYsWvJEjBx4n5/vMtfG0B8Q2rzy
- eiIkNqeSdojGZZ+nK7/THL78mQ3Ty90KtCfXgI2/y/LdXxk0PgX+B9G+uhuymG2lBsqL
- PJfQ==
+ bh=rohLClojdk8wkdcu6fQZFqY88qAJfLBOIF9elHTCyFE=;
+ b=xqrg7Va2LfHabOh1DkDal76sJ/4sggd6G+ryHRDqsv4yKRRTbHX+h3YHrqcx55kUeA
+ ckftM6sHFCCU4j0iNcbJL0ZALlenlaXHy6k4Y7pKxt1pzLfANrIfjY/lQSJ0gX8E+T5a
+ UAO+hyy9Vc1g06rju9yf8b2qG9gv4g4UfvLjIuuNpoinJ4cuoYJavClvhTchuv3uZrHb
+ CtNbowTKk8KqRQtzrStlm+yxw47ut3tCuqqoIhGcY4neNK7ZApdpTpWFtHwZaoNak4sZ
+ w7TqPLn5LMIPZ9pLdACAeloxEQ9Ab74iRUk7IQEgLIvGw70v3NZ0kHmd64bjlpkgiWuT
+ 7CQw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728091754; x=1728696554;
+ d=1e100.net; s=20230601; t=1728092347; x=1728697147;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=MYdCuhRdFeP/4oLJSAnE6LdLiXFG0bMoi7kIm8NsyEg=;
- b=cQPbFsWNvTmlbdikwbYU4smpH8CBVa9//C6dmDIRlaKVrTuH803p8BIzLkv/G5qW5H
- fqHsS9RlqK2B4obR61fanImuA+cnzDoOZKRu6ZeqnB+DSRxI+gGU3/M10Jq/tHFAk6Eg
- Gwy+c029kN3hEUH+rj8Wl5pkm30rfBaz4WWZWi0WtT7phguOwCi2z7BO65agadTNw0t4
- CYhPcHsyQJ+wFxQ5DuT+RfYfhmuDT5F9aSy2Z5s/XBDYEJDoFcPo/mx6GpuB/Fs+7x+h
- orQ0mopMy5B7+Mv72SD8q3nrWxO9qqd/1q1RYR5qFDWpNTVIb81d6bCdYhkDdIi9rVER
- 2l1w==
-X-Gm-Message-State: AOJu0Yz6mHe+Xm0rfOHuEvGlXK1D6KNKs2kY4ykdYZ4WtDgKvsiL7ELf
- TN0m9J0pqncsiZzOsNU8Xj4lWNDcBqJxXDalARZAY9L/J0tzj3X+3uJAd0Y1or8=
-X-Google-Smtp-Source: AGHT+IG44kZRYTEMUkeTNvkbLPGjmMWO4bpZtvq35wKf0Gg2wsIxRhHIZTIv55PNAHqRGCH0Ax7wJw==
-X-Received: by 2002:a17:90a:658c:b0:2d8:898c:3e9b with SMTP id
- 98e67ed59e1d1-2e1e631ec64mr5459248a91.25.1728091753682; 
- Fri, 04 Oct 2024 18:29:13 -0700 (PDT)
+ bh=rohLClojdk8wkdcu6fQZFqY88qAJfLBOIF9elHTCyFE=;
+ b=EruGA+nAJso+TLK9IBgiJK9rH7AGfkaPjBM5HxygirrmOg4UpCqxp57RTHxKETatBr
+ qUUM2CnEIx/YVHtqrk28cfhWivkUC9Ul5mb6aKRa8K6tC7n8Au96fK3p1s52jkAFC3e9
+ WGLNGmqtkuDjgFqfLQ7WYYSvbsc7+hmR+0n6YGiQhFMtS+G2N3LEg97R1Pr66XoofAeH
+ H8M0dWrFStPnFtHrIQhSSSQyyHPucf09LHYKvzL+9E1oT8BCAW/vUqiMYznh8HNer4ZQ
+ FAc5l9Z5ZavV65/BvY/W2badZCsgWOCo8W5if1xeM0lQfecyF5ewt2i6nlJsPi/pFjzS
+ cc+A==
+X-Gm-Message-State: AOJu0YyzZVLqfY3Y/+PjcmfIxFeGgdo1HD5gAMA4ygG3qxNBNmqR/oKX
+ g1pZkx07LujVv3sH9zFFj3K6ECHu3FLZhFjPjX1lJCAFw+alraRQWsC1UkN4JFk=
+X-Google-Smtp-Source: AGHT+IHpdJE+Ia9NF9NA/ecEHCT8ni3gOSTEurybXV/XFtH5AADLv4cnHXKH7yDsYu7E1LqPEH6iSQ==
+X-Received: by 2002:a17:90b:1a85:b0:2d8:8ead:f013 with SMTP id
+ 98e67ed59e1d1-2e1e621355dmr5493811a91.7.1728092347468; 
+ Fri, 04 Oct 2024 18:39:07 -0700 (PDT)
 Received: from [192.168.0.4] (174-21-81-121.tukw.qwest.net. [174.21.81.121])
  by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-2e1e8665833sm2353799a91.38.2024.10.04.18.29.12
+ d9443c01a7336-20c1398ee06sm4517555ad.288.2024.10.04.18.39.06
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 04 Oct 2024 18:29:13 -0700 (PDT)
-Message-ID: <ffd96faa-9226-42f8-8bab-c8edb5b905a1@linaro.org>
-Date: Fri, 4 Oct 2024 18:29:11 -0700
+ Fri, 04 Oct 2024 18:39:07 -0700 (PDT)
+Message-ID: <5a1606e1-649f-4bda-83e9-aff8c9dfd9f4@linaro.org>
+Date: Fri, 4 Oct 2024 18:39:05 -0700
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 17/25] hw/m68k: Use explicit big-endian LD/ST API
+Subject: Re: [PATCH v2 00/25] misc: Use explicit endian LD/ST API
 To: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
  qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, qemu-s390x@nongnu.org,
  Thomas Huth <thuth@redhat.com>,
- Pierrick Bouvier <pierrick.bouvier@linaro.org>, qemu-ppc@nongnu.org
+ Pierrick Bouvier <pierrick.bouvier@linaro.org>, qemu-ppc@nongnu.org,
+ Alistair Francis <Alistair.Francis@wdc.com>
 References: <20241004163042.85922-1-philmd@linaro.org>
- <20241004163042.85922-18-philmd@linaro.org>
 Content-Language: en-US
 From: Richard Henderson <richard.henderson@linaro.org>
-In-Reply-To: <20241004163042.85922-18-philmd@linaro.org>
+In-Reply-To: <20241004163042.85922-1-philmd@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1034;
- envelope-from=richard.henderson@linaro.org; helo=mail-pj1-x1034.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1033;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pj1-x1033.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -100,27 +100,46 @@ Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 On 10/4/24 09:30, Philippe Mathieu-Daudé wrote:
-> The M68K architecture uses big endianness. Directly use
-> the big-endian LD/ST API.
-> 
-> Mechanical change using:
-> 
->    $ end=be; \
->      for acc in uw w l q tul; do \
->        sed -i -e "s/ld${acc}_p(/ld${acc}_${end}_p(/" \
->               -e "s/st${acc}_p(/st${acc}_${end}_p(/" \
->          $(git grep -wlE '(ld|st)t?u?[wlq]_p' hw/m68k/); \
->      done
-> 
-> Signed-off-by: Philippe Mathieu-Daudé<philmd@linaro.org>
-> ---
->   hw/m68k/bootinfo.h  | 28 ++++++++++++++--------------
->   hw/m68k/mcf5208.c   |  2 +-
->   hw/m68k/next-cube.c |  2 +-
->   hw/m68k/q800.c      |  4 ++--
->   4 files changed, 18 insertions(+), 18 deletions(-)
+> Philippe Mathieu-Daudé (25):
+>    gdbstub/helpers: Have ldtul_p() definition use ldn_p()
+>    target/hexagon: Replace ldtul_p() -> ldl_p()
+>    target/alpha: Replace ldtul_p() -> ldq_p()
+>    target/s390x: Replace ldtul_p() -> ldq_p()
+>    gdbstub/helpers: Introduce ldtul_$endian_p() helpers
+>    target/alpha: Use explicit little-endian LD/ST API
+>    target/hexagon: Use explicit little-endian LD/ST API
+>    hw/i386: Use explicit little-endian LD/ST API
+>    target/i386: Use explicit little-endian LD/ST API
+>    target/avr: Use explicit little-endian LD/ST API
+>    linux-user/i386: Use explicit little-endian LD/ST API
+>    target/loongarch: Use explicit little-endian LD/ST API
+>    target/sh4: Use explicit little-endian LD/ST API
+>    target/tricore: Use explicit little-endian LD/ST API
+>    target/rx: Use explicit little-endian LD/ST API
+>    target/riscv: Use explicit little-endian LD/ST API
+>    hw/m68k: Use explicit big-endian LD/ST API
+>    target/m68k: Use explicit big-endian LD/ST API
+>    hw/sparc: Use explicit big-endian LD/ST API
+>    target/sparc: Use explicit big-endian LD/ST API
+>    target/hppa: Use explicit big-endian LD/ST API
+>    hw/s390x: Use explicit big-endian LD/ST API
+>    target/s390x: Use explicit big-endian LD/ST API
+>    target/openrisc: Use explicit big-endian LD/ST API
+>    hw/ppc/e500: Use explicit big-endian LD/ST API
 
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+The sh4, rx, and riscv targets *can* support multiple endianness.
+
+While we removed sh4eb for system mode, we still support sh4eb-linux-user, and therefore 
+the target/sh4 patch affecting gdbstub is wrong.
+
+RX sets endianness via a pin sampled at reset; if we ever implement this, it would be via 
+a property on the cpu.  RISCV sets endianness via a couple of bits in MSTATUS; system mode 
+would always use little-endian, but riscv64eb-user isn't out of the question.
+
+While we have never supported rx or riscv in big-endian, but there's no reason that we 
+can't, and those target/ patches make things harder. Since target/ will *always* have 
+TARGET_BIG_ENDIAN available, I don't see that we're saving anything there.
+
 
 r~
 
