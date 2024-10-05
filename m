@@ -4,79 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 13560CF8869
-	for <qemu-riscv@archiver.kernel.org>; Sat,  5 Oct 2024 01:11:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 377A0CF8869
+	for <qemu-riscv@archiver.kernel.org>; Sat,  5 Oct 2024 01:12:19 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1swtJh-0002Jn-3X; Fri, 04 Oct 2024 21:10:41 -0400
+	id 1swtKr-0003va-72; Fri, 04 Oct 2024 21:11:53 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1swtJf-0002GI-TJ
- for qemu-riscv@nongnu.org; Fri, 04 Oct 2024 21:10:39 -0400
-Received: from mail-pf1-x434.google.com ([2607:f8b0:4864:20::434])
+ id 1swtKo-0003us-HY
+ for qemu-riscv@nongnu.org; Fri, 04 Oct 2024 21:11:50 -0400
+Received: from mail-pg1-x52a.google.com ([2607:f8b0:4864:20::52a])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1swtJe-0004Hp-97
- for qemu-riscv@nongnu.org; Fri, 04 Oct 2024 21:10:39 -0400
-Received: by mail-pf1-x434.google.com with SMTP id
- d2e1a72fcca58-71dea49e808so990084b3a.1
- for <qemu-riscv@nongnu.org>; Fri, 04 Oct 2024 18:10:37 -0700 (PDT)
+ id 1swtKm-0004SJ-8S
+ for qemu-riscv@nongnu.org; Fri, 04 Oct 2024 21:11:50 -0400
+Received: by mail-pg1-x52a.google.com with SMTP id
+ 41be03b00d2f7-656d8b346d2so1816737a12.2
+ for <qemu-riscv@nongnu.org>; Fri, 04 Oct 2024 18:11:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1728090637; x=1728695437; darn=nongnu.org;
+ d=linaro.org; s=google; t=1728090707; x=1728695507; darn=nongnu.org;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=LEMMggDTZaOuKhxsdWNC9wlZXzM5eEyf67p8QFxmr04=;
- b=n023rBWTZbffv05GtLq/ph5Xg9aDzWbwFJXF6MAxBbuKnfEUU9TNE6S1eRvKk7cbSM
- me9i+tVpWYfDxGUEnjTN/00k+ZO+OE5IiiyW4umTVgD1cVCggWtWJUaL3hI/h6AkXKE8
- m8jR+yPJeVoXrr/k2CT/BIUk1kH6tqtqM+e8mZ9c7FyE/w8K48YV5VIq5HwYVMCJ4xyu
- waTLB8UqELb3H5OqRuECNl6gQOhGKtjYS2T4x60LQe+VY0CRQmWt4GEVhD8rRMoghaIp
- Pd8BiRJVD3veRTsx6BnVCjolJL1D/WFERAt4Y3qh3DrfUB0R0/YBRAos8/X9wk+g/P9u
- 8sOA==
+ bh=D7UQm6DL0s5HXHwVotYce7ubE+bc7/wYsUc2wrNKYZY=;
+ b=LyMPjrOorzm07vAXjK5MVuTIIKuOL9o/G1VF0h+tQzWfEOWv/cM/6x3J70lqtrtSOI
+ xayo0j+KnKDXN65VDfS68mp+rOPRM16aD6aoezDQAbWlUbvUuEOglgzdbug50TlTkHzr
+ Dtmvb3AuyNyFcKTL+wxoONoyL2bo+j8Dmulio/HxUiNXXyppVVDN01EKbANpVtan7R/r
+ zNH22tMIkFrHT6UM18RGKs7gFBeN9O0ejgsYdYF5an54xyxNZ7RqESP+GAPn5gA63bMl
+ F52Ljpn8jLJJ2klGwfjdvYce2MIIohL798apKRBRGe2gkRu/QV2/8MLJo3mxLhLuSFvB
+ Fv+A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728090637; x=1728695437;
+ d=1e100.net; s=20230601; t=1728090707; x=1728695507;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=LEMMggDTZaOuKhxsdWNC9wlZXzM5eEyf67p8QFxmr04=;
- b=EVMlTbBFWJDAGyg2ZU+xEfBsSPd+o9vJXZD/+qIAle+AD6fKIMxGqcb+SZJ7x6TMtm
- mMbvdpKhAiZnZssLTrDwUpvvJUm4nxKFrbRZLaLDPBvl5ZUDgkqYANGfJYnmofIwzAWo
- 2E20ANHhFUueN5gZ9bX1zx4OR0E7G3sedfRz0Oit8LRpreBORxBZ+jZbeV8CYoe3zZoN
- +GLkFH+i9wuITeQrhYnNecOg5NuJ2nmbg/+P630WpVMUCrWWpWUVTWtBL72YfzS5EqZB
- Hb4NJ9/GgcfuZ/2s1opSeuAxdWNpwzH3BENKw29cZj6Q8K0xH51MN0jdXHgtTvvkk+yL
- glXA==
-X-Gm-Message-State: AOJu0YzIjeBkJ3hAEpVQ4MNKzJuihNJtnjPSbiCHiEUWLR/G7srHKBn3
- juQG30JpDdjhVLQarfGEWtwE4jjPfnUL4zaceXMIGYfDAw+jxBQGCeCYNAUFKgg=
-X-Google-Smtp-Source: AGHT+IHZwKcaNdo+BG1NA0+x+5P6W2gEj/7CxlNWviyewGuRuCGuy1xNxwHyG8ISfuMjHQFKAIRpfg==
-X-Received: by 2002:aa7:888e:0:b0:71d:f2e3:a87a with SMTP id
- d2e1a72fcca58-71df2e3abdamr1033726b3a.3.1728090636815; 
- Fri, 04 Oct 2024 18:10:36 -0700 (PDT)
+ bh=D7UQm6DL0s5HXHwVotYce7ubE+bc7/wYsUc2wrNKYZY=;
+ b=CECR8d6+53Lz1jH3VXXwnXZxIxru/iBnMLcy1Ij0/XH+CXi0ZT2GSBcR7sQVejA104
+ e27y9Dn6vczQuMb6DFFhiN09ZaBGaa4ZSufRMb3ne5DL7qVWLQfflteF+6UjK+qeTST1
+ cpFyLFeKm62YTtxL2EfpdMbuE8La+TwbJUNaA4L6qCY1diBIhe/X3w4Y8sTyOmRel0ol
+ IIt+wlZVzi19SCSn3zjQ/7ueeOcAs2zPoBK0nu39ICdszcTBFQoOnYzBVidsbtUYCAW7
+ UwE0V0zxqMC1THDYoskglAQN20dZRbS0HirVRwceT3SWGMefNP/V/k8aahRlO0N+8jwu
+ hDUw==
+X-Gm-Message-State: AOJu0Yw39StSStgUOheqR4/cw3bE0X0L4z7oZ+LMId+EmO6iRkytGqUq
+ B+dEffZAur43YpuRb6tN/nuc7C/oVzgsGxNQm5ES+ZSRoL73OFLxTvx2kXSxOWA=
+X-Google-Smtp-Source: AGHT+IHP9/Vv+29z6kUYHdihQ6HuXxVqZu35QBpe8bNo+11TJXQiKoqdUh4OF7B1B3F3Ap6dSEInxA==
+X-Received: by 2002:a17:902:ea0a:b0:1fb:1afb:b864 with SMTP id
+ d9443c01a7336-20bfde546d0mr83710245ad.5.1728090706716; 
+ Fri, 04 Oct 2024 18:11:46 -0700 (PDT)
 Received: from [192.168.0.4] (174-21-81-121.tukw.qwest.net. [174.21.81.121])
  by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-71df0cd3528sm504378b3a.86.2024.10.04.18.10.36
+ d9443c01a7336-20c138af98fsm4463525ad.35.2024.10.04.18.11.45
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 04 Oct 2024 18:10:36 -0700 (PDT)
-Message-ID: <b131bfdb-5a76-4c86-bb8e-487c8e352013@linaro.org>
-Date: Fri, 4 Oct 2024 18:10:34 -0700
+ Fri, 04 Oct 2024 18:11:46 -0700 (PDT)
+Message-ID: <8076946b-0a25-4124-9b60-9cd0696b47ba@linaro.org>
+Date: Fri, 4 Oct 2024 18:11:44 -0700
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 03/25] target/alpha: Replace ldtul_p() -> ldq_p()
+Subject: Re: [PATCH v2 04/25] target/s390x: Replace ldtul_p() -> ldq_p()
 To: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
  qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, qemu-s390x@nongnu.org,
  Thomas Huth <thuth@redhat.com>,
  Pierrick Bouvier <pierrick.bouvier@linaro.org>, qemu-ppc@nongnu.org
 References: <20241004163042.85922-1-philmd@linaro.org>
- <20241004163042.85922-4-philmd@linaro.org>
+ <20241004163042.85922-5-philmd@linaro.org>
 Content-Language: en-US
 From: Richard Henderson <richard.henderson@linaro.org>
-In-Reply-To: <20241004163042.85922-4-philmd@linaro.org>
+In-Reply-To: <20241004163042.85922-5-philmd@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::434;
- envelope-from=richard.henderson@linaro.org; helo=mail-pf1-x434.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::52a;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pg1-x52a.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -100,19 +100,20 @@ Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 On 10/4/24 09:30, Philippe Mathieu-Daudé wrote:
-> The Alpha target is only built for 64-bit.
+> The S390X  target is only built for 64-bit.
 > Using ldtul_p() is pointless, replace by ldq_p().
 > 
 > Mechanical change doing:
 > 
->    $ sed -i -e 's/ldtul_p/ldq_p/' $(git grep -wl ldtul_p target/alpha/)
+>    $ sed -i -e 's/ldtul_p/ldq_p/' $(git grep -wl ldtul_p target/s390x/)
 > 
 > Signed-off-by: Philippe Mathieu-Daudé<philmd@linaro.org>
 > ---
->   target/alpha/gdbstub.c | 2 +-
->   1 file changed, 1 insertion(+), 1 deletion(-)
+>   target/s390x/gdbstub.c | 30 +++++++++++++++---------------
+>   1 file changed, 15 insertions(+), 15 deletions(-)
 
 Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+
 
 r~
 
