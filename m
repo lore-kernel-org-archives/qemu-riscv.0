@@ -4,75 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 377A0CF8869
-	for <qemu-riscv@archiver.kernel.org>; Sat,  5 Oct 2024 01:12:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BB940CF8868
+	for <qemu-riscv@archiver.kernel.org>; Sat,  5 Oct 2024 01:14:18 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1swtKr-0003va-72; Fri, 04 Oct 2024 21:11:53 -0400
+	id 1swtMq-0004wv-CW; Fri, 04 Oct 2024 21:13:56 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1swtKo-0003us-HY
- for qemu-riscv@nongnu.org; Fri, 04 Oct 2024 21:11:50 -0400
+ id 1swtMN-0004sJ-8Y
+ for qemu-riscv@nongnu.org; Fri, 04 Oct 2024 21:13:28 -0400
 Received: from mail-pg1-x52a.google.com ([2607:f8b0:4864:20::52a])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1swtKm-0004SJ-8S
- for qemu-riscv@nongnu.org; Fri, 04 Oct 2024 21:11:50 -0400
+ id 1swtML-0004cv-M5
+ for qemu-riscv@nongnu.org; Fri, 04 Oct 2024 21:13:27 -0400
 Received: by mail-pg1-x52a.google.com with SMTP id
- 41be03b00d2f7-656d8b346d2so1816737a12.2
- for <qemu-riscv@nongnu.org>; Fri, 04 Oct 2024 18:11:47 -0700 (PDT)
+ 41be03b00d2f7-7e9f998e1e4so123606a12.1
+ for <qemu-riscv@nongnu.org>; Fri, 04 Oct 2024 18:13:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1728090707; x=1728695507; darn=nongnu.org;
+ d=linaro.org; s=google; t=1728090804; x=1728695604; darn=nongnu.org;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=D7UQm6DL0s5HXHwVotYce7ubE+bc7/wYsUc2wrNKYZY=;
- b=LyMPjrOorzm07vAXjK5MVuTIIKuOL9o/G1VF0h+tQzWfEOWv/cM/6x3J70lqtrtSOI
- xayo0j+KnKDXN65VDfS68mp+rOPRM16aD6aoezDQAbWlUbvUuEOglgzdbug50TlTkHzr
- Dtmvb3AuyNyFcKTL+wxoONoyL2bo+j8Dmulio/HxUiNXXyppVVDN01EKbANpVtan7R/r
- zNH22tMIkFrHT6UM18RGKs7gFBeN9O0ejgsYdYF5an54xyxNZ7RqESP+GAPn5gA63bMl
- F52Ljpn8jLJJ2klGwfjdvYce2MIIohL798apKRBRGe2gkRu/QV2/8MLJo3mxLhLuSFvB
- Fv+A==
+ bh=EJRRWqzkhEEsiiuXDawiHMWnOpeb7W+mfMDLB8750A8=;
+ b=ySzVc49DnTmtryKSKNvx1k8bw3oqbx8MTN19tIQyp/YpOVTa3lFKEC065VqJEpaTsp
+ NGdg3Z20pyJNVheU7RxomSShR5M42q7w0agKpIfY7oJehZIGTGOEnDCOjAtuj6O8BJZW
+ P9lenf0tgCkUuGCfgQI1fpUzfvuvz6lG9VDgTN7zmOPr6MvwudAdMLLi5+Sk8e8+kS2I
+ sc0bp+0ElYuX2z2LRNWoeUArniRl7NZ2ff5f6E/v9gOyGEaDNmyHEisLW6hLFh4ZAs+2
+ In3QJe0b6YRm2KAgUR2tCMMaLyx0KVkOvj/aQbANvLRubs1PloW4kgdtEvexvh7UlvlT
+ EOzw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728090707; x=1728695507;
+ d=1e100.net; s=20230601; t=1728090804; x=1728695604;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=D7UQm6DL0s5HXHwVotYce7ubE+bc7/wYsUc2wrNKYZY=;
- b=CECR8d6+53Lz1jH3VXXwnXZxIxru/iBnMLcy1Ij0/XH+CXi0ZT2GSBcR7sQVejA104
- e27y9Dn6vczQuMb6DFFhiN09ZaBGaa4ZSufRMb3ne5DL7qVWLQfflteF+6UjK+qeTST1
- cpFyLFeKm62YTtxL2EfpdMbuE8La+TwbJUNaA4L6qCY1diBIhe/X3w4Y8sTyOmRel0ol
- IIt+wlZVzi19SCSn3zjQ/7ueeOcAs2zPoBK0nu39ICdszcTBFQoOnYzBVidsbtUYCAW7
- UwE0V0zxqMC1THDYoskglAQN20dZRbS0HirVRwceT3SWGMefNP/V/k8aahRlO0N+8jwu
- hDUw==
-X-Gm-Message-State: AOJu0Yw39StSStgUOheqR4/cw3bE0X0L4z7oZ+LMId+EmO6iRkytGqUq
- B+dEffZAur43YpuRb6tN/nuc7C/oVzgsGxNQm5ES+ZSRoL73OFLxTvx2kXSxOWA=
-X-Google-Smtp-Source: AGHT+IHP9/Vv+29z6kUYHdihQ6HuXxVqZu35QBpe8bNo+11TJXQiKoqdUh4OF7B1B3F3Ap6dSEInxA==
-X-Received: by 2002:a17:902:ea0a:b0:1fb:1afb:b864 with SMTP id
- d9443c01a7336-20bfde546d0mr83710245ad.5.1728090706716; 
- Fri, 04 Oct 2024 18:11:46 -0700 (PDT)
+ bh=EJRRWqzkhEEsiiuXDawiHMWnOpeb7W+mfMDLB8750A8=;
+ b=N+w3WUrUugS9ZorOJ2/Z3hPh8jR+CnB3HLFKc2u24G6EQKeqv/XNDTGdmxpjbgJwt3
+ i4buJfkxnQ/tGUb0pvvjADQQlqgstgByU2zCuVGmOScCz9cinOT6gacCN9fbTBNcyqTv
+ FEn/9H68QlsHBZmZrDNzKMyZcFGVD4vffWcd44CqlHrYVjMYvvaSAaLm5VyMjAHvYZWY
+ TB3SkdeOsetrJkLZzsbj8usSZV1JHfLYvzVl71O9g6qbTABERjMsvQ1I32T9tpePJ6ST
+ ZHsfmg9DnKGngUvN1y157Mk/gfubAA2xkSoXPZzibqS/NqkrEXi0KJr0K8DLEFDtMF0I
+ MKMA==
+X-Gm-Message-State: AOJu0Yy+aZLMyi/jr9sIJUu37eRXgLXuo0fNTwhQyqo/sHDzLz7fxXFl
+ j2FdVBPsJTWwAyj6SDTvimoII7JEZFBVqKpCeTYIUAoUV6SQ6RlNsGcdhU4GGAI53901Ved3GBE
+ h
+X-Google-Smtp-Source: AGHT+IEiHBu1Ijn5d1Kaarw6gC7/ht1fxt7RTstZ+4Uwp41BAPPSYa82MAB2k8OgL+uRHZNmxwDhZQ==
+X-Received: by 2002:a05:6a20:6f91:b0:1d2:f00e:47bb with SMTP id
+ adf61e73a8af0-1d6dfa417a1mr5979511637.21.1728090804432; 
+ Fri, 04 Oct 2024 18:13:24 -0700 (PDT)
 Received: from [192.168.0.4] (174-21-81-121.tukw.qwest.net. [174.21.81.121])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-20c138af98fsm4463525ad.35.2024.10.04.18.11.45
+ 41be03b00d2f7-7e9f6833cdcsm644781a12.49.2024.10.04.18.13.23
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 04 Oct 2024 18:11:46 -0700 (PDT)
-Message-ID: <8076946b-0a25-4124-9b60-9cd0696b47ba@linaro.org>
-Date: Fri, 4 Oct 2024 18:11:44 -0700
+ Fri, 04 Oct 2024 18:13:24 -0700 (PDT)
+Message-ID: <9ad4d5c9-7f47-40dd-a180-023282e4f459@linaro.org>
+Date: Fri, 4 Oct 2024 18:13:22 -0700
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 04/25] target/s390x: Replace ldtul_p() -> ldq_p()
+Subject: Re: [PATCH v2 05/25] gdbstub/helpers: Introduce ldtul_$endian_p()
+ helpers
 To: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
  qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, qemu-s390x@nongnu.org,
  Thomas Huth <thuth@redhat.com>,
  Pierrick Bouvier <pierrick.bouvier@linaro.org>, qemu-ppc@nongnu.org
 References: <20241004163042.85922-1-philmd@linaro.org>
- <20241004163042.85922-5-philmd@linaro.org>
+ <20241004163042.85922-6-philmd@linaro.org>
 Content-Language: en-US
 From: Richard Henderson <richard.henderson@linaro.org>
-In-Reply-To: <20241004163042.85922-5-philmd@linaro.org>
+In-Reply-To: <20241004163042.85922-6-philmd@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 Received-SPF: pass client-ip=2607:f8b0:4864:20::52a;
@@ -83,7 +85,7 @@ X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -100,19 +102,26 @@ Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 On 10/4/24 09:30, Philippe Mathieu-Daudé wrote:
-> The S390X  target is only built for 64-bit.
-> Using ldtul_p() is pointless, replace by ldq_p().
+> Introduce ldtul_le_p() and ldtul_be_p() to use directly
+> in place of ldtul_p() when a target endianness is fixed.
 > 
-> Mechanical change doing:
-> 
->    $ sed -i -e 's/ldtul_p/ldq_p/' $(git grep -wl ldtul_p target/s390x/)
-> 
-> Signed-off-by: Philippe Mathieu-Daudé<philmd@linaro.org>
+> Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 > ---
->   target/s390x/gdbstub.c | 30 +++++++++++++++---------------
->   1 file changed, 15 insertions(+), 15 deletions(-)
+>   include/gdbstub/helpers.h | 2 ++
+>   1 file changed, 2 insertions(+)
+> 
+> diff --git a/include/gdbstub/helpers.h b/include/gdbstub/helpers.h
+> index fd83e366a51..e783d166865 100644
+> --- a/include/gdbstub/helpers.h
+> +++ b/include/gdbstub/helpers.h
+> @@ -99,5 +99,7 @@ static inline uint8_t *gdb_get_reg_ptr(GByteArray *buf, int len)
+>   #endif
+>   
+>   #define ldtul_p(addr) ldn_p(addr, TARGET_LONG_SIZE)
+> +#define ldtul_le_p(addr) ldn_le_p(addr, TARGET_LONG_SIZE)
+> +#define ldtul_be_p(addr) ldn_be_p(addr, TARGET_LONG_SIZE)
 
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+I'd be happier if these were defined in the preceeding ifdef for now.
 
 
 r~
