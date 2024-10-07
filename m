@@ -4,49 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 42902CFB440
-	for <qemu-riscv@archiver.kernel.org>; Mon,  7 Oct 2024 10:06:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 47D35CFB440
+	for <qemu-riscv@archiver.kernel.org>; Mon,  7 Oct 2024 10:32:40 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sxkcM-0003SK-Kh; Mon, 07 Oct 2024 06:05:30 -0400
+	id 1sxl2I-0001Hy-JT; Mon, 07 Oct 2024 06:32:18 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhao1.liu@intel.com>)
- id 1sxkcJ-0003RB-MY; Mon, 07 Oct 2024 06:05:28 -0400
-Received: from mgamail.intel.com ([192.198.163.17])
+ id 1sxl2A-0001DS-4W; Mon, 07 Oct 2024 06:32:11 -0400
+Received: from mgamail.intel.com ([192.198.163.11])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhao1.liu@intel.com>)
- id 1sxkcG-0007hD-Jc; Mon, 07 Oct 2024 06:05:26 -0400
+ id 1sxl27-0002G4-GZ; Mon, 07 Oct 2024 06:32:09 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1728295525; x=1759831525;
+ t=1728297127; x=1759833127;
  h=date:from:to:cc:subject:message-id:references:
  mime-version:in-reply-to;
- bh=AnOcALsZJg/wxyrcnpW+cGt1cV5NfTexgZo0XTBcLLw=;
- b=cn/Dypl5g3XxaTJsowQRA46wHK0Mvj+ndpx+BYpkOU2DYtg8bFTHXwqO
- DXgRUffbUhn9wBC0UfF0+t8D/l7xNwTb2lazCN1YspFB3UzFbDrgnS/IJ
- 8zWL4vas7yk6k/F3lZWQn3gNpFVW6DxFRyq59NenrsNsHw3nZaOri2hlO
- ay9K6lb8htyS8NO70GqL98ROae/WodMoKJGsHrR3M9QjlJVVkov4gIPmD
- 3jRwde0NB/bahzT4HoCWqGWtbrGbcz32+GHARecx+JuYtsB829kI3/TQV
- Spp1rbsny+AfZv5uAFLsF++oYz3H8LX0dsMFeOhs5l9KSvvkSLiJ6dr8d A==;
-X-CSE-ConnectionGUID: W/gsPrPySUW6uC/UpZ0fNQ==
-X-CSE-MsgGUID: uudJT6i4ThWkSsE+hNOGpQ==
-X-IronPort-AV: E=McAfee;i="6700,10204,11217"; a="27319853"
-X-IronPort-AV: E=Sophos;i="6.11,184,1725346800"; d="scan'208";a="27319853"
-Received: from orviesa010.jf.intel.com ([10.64.159.150])
- by fmvoesa111.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 07 Oct 2024 03:05:19 -0700
-X-CSE-ConnectionGUID: 7gJQIEZzT8mpzKFWqrHFdQ==
-X-CSE-MsgGUID: ogeD7LVYT4KOliHP51MW6A==
+ bh=jhJUK+AWFll4gfSxpcVeHGVJ440uyTmTNkzlK2H16Kk=;
+ b=N7SXfege0Wes4ly/Gd3A9xQO711B8hnOWG3ZuLqhG/aySauWUAARX7uy
+ JcPKyqUzMGBxRNMxycFL+YmUUb013ZuyDVC/lV5r0qOIzz+Dni7IwIKIX
+ /yKcgStu/XOYA2ueQVjQw/vR4cuS8MrrFti3EU5sxXJLnZlNaPNKS72Yu
+ WbjBrRpUBk82uo+zm9sp+H0xomhKEZYUB4wU9Es1+0CUiDb7OqKRyvqqV
+ g/uG/jhIQA7BubqqjRuCwFQiMErnrQtwR6Vw4+6NW0/9PZEV7O6EjdX1+
+ ClSZdzuMS6Y5XtqRF3gukqJNGBqTZVepY9S45iRzO03qlWhfBNJnkKpeX g==;
+X-CSE-ConnectionGUID: C8JhfIWuQAWIYLtHYy3j4A==
+X-CSE-MsgGUID: ZSWHk0pCSBa+paBmVjEFUQ==
+X-IronPort-AV: E=McAfee;i="6700,10204,11217"; a="38044285"
+X-IronPort-AV: E=Sophos;i="6.11,184,1725346800"; d="scan'208";a="38044285"
+Received: from orviesa004.jf.intel.com ([10.64.159.144])
+ by fmvoesa105.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 07 Oct 2024 03:32:02 -0700
+X-CSE-ConnectionGUID: o2wxnFLcQ8aCs2GXkI/Wpg==
+X-CSE-MsgGUID: 9taj1YQOS2OUtO3z+NOWIQ==
 X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.11,184,1725346800"; d="scan'208";a="75258677"
+X-IronPort-AV: E=Sophos;i="6.11,184,1725346800"; d="scan'208";a="80401926"
 Received: from liuzhao-optiplex-7080.sh.intel.com (HELO localhost)
  ([10.239.160.36])
- by orviesa010.jf.intel.com with ESMTP; 07 Oct 2024 03:05:13 -0700
-Date: Mon, 7 Oct 2024 18:21:24 +0800
+ by orviesa004.jf.intel.com with ESMTP; 07 Oct 2024 03:31:56 -0700
+Date: Mon, 7 Oct 2024 18:48:07 +0800
 From: Zhao Liu <zhao1.liu@intel.com>
-To: Alireza Sanaee <alireza.sanaee@huawei.com>
+To: Jonathan Cameron <Jonathan.Cameron@huawei.com>
 Cc: Daniel P =?iso-8859-1?Q?=2E_Berrang=E9?= <berrange@redhat.com>,
  Igor Mammedov <imammedo@redhat.com>, Eduardo Habkost <eduardo@habkost.net>,
  Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
@@ -58,23 +58,22 @@ Cc: Daniel P =?iso-8859-1?Q?=2E_Berrang=E9?= <berrange@redhat.com>,
  Marcelo Tosatti <mtosatti@redhat.com>,
  Alex =?iso-8859-1?Q?Benn=E9e?= <alex.bennee@linaro.org>,
  Peter Maydell <peter.maydell@linaro.org>,
- Jonathan Cameron <Jonathan.Cameron@huawei.com>,
- Sia Jee Heng <jeeheng.sia@starfivetech.com>, qemu-devel@nongnu.org,
+ Sia Jee Heng <jeeheng.sia@starfivetech.com>,
+ Alireza Sanaee <alireza.sanaee@huawei.com>, qemu-devel@nongnu.org,
  kvm@vger.kernel.org, qemu-riscv@nongnu.org, qemu-arm@nongnu.org,
  Zhenyu Wang <zhenyu.z.wang@intel.com>,
  Dapeng Mi <dapeng1.mi@linux.intel.com>,
  Yongwei Ma <yongwei.ma@intel.com>, Zhao Liu <zhao1.liu@intel.com>
-Subject: Re: [PATCH v2 6/7] i386/cpu: Update cache topology with machine's
- configuration
-Message-ID: <ZwO2JIMJ+lX0N61h@intel.com>
+Subject: Re: [PATCH v2 2/7] qapi/qom: Define cache enumeration and properties
+Message-ID: <ZwO8Z6pABtp2Zfi3@intel.com>
 References: <20240908125920.1160236-1-zhao1.liu@intel.com>
- <20240908125920.1160236-7-zhao1.liu@intel.com>
- <20240911110028.00001d3d@huawei.com>
+ <20240908125920.1160236-3-zhao1.liu@intel.com>
+ <20240917095126.000036f1@Huawei.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20240911110028.00001d3d@huawei.com>
-Received-SPF: pass client-ip=192.198.163.17; envelope-from=zhao1.liu@intel.com;
+In-Reply-To: <20240917095126.000036f1@Huawei.com>
+Received-SPF: pass client-ip=192.198.163.11; envelope-from=zhao1.liu@intel.com;
  helo=mgamail.intel.com
 X-Spam_score_int: -44
 X-Spam_score: -4.5
@@ -99,40 +98,75 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Hi Ali,
+Hi Jonathan,
+
+Thanks for your review and feedback!
 
 [snip]
 
-> > +
-> > +    /*
-> > +     * TODO: Add a SMPCompatProps.has_caches flag to avoid useless
-> > Updates
-> > +     * if user didn't set smp_cache.
-> > +     */
-> Hi Zhao,
+> > Note, define cache topology based on CPU topology level with two
+> > reasons:
+> > 
+> >  1. In practice, a cache will always be bound to the CPU container
+> >     (either private in the CPU container or shared among multiple
+> >     containers), and CPU container is often expressed in terms of CPU
+> >     topology level.
+> >  2. The x86's cache-related CPUIDs encode cache topology based on APIC
+> >     ID's CPU topology layout. And the ACPI PPTT table that ARM/RISCV
+> >     relies on also requires CPU containers to help indicate the private
 > 
-> Thanks for sending this patchset so quickly. I really appreciate the
-> TODO already :)
+> Really trivial but CPU Containers are a different ACPI concept.
+> For PPTT they are referred to as Processor Groups. Wonderfully they
+> 'might match a Processor Container in the namespace' which rather implies
+> they might not.  In QEMU they always will because the next bit of the
+> spec matters. "In that case this entry will match the value of the _UID
+> method of the associated processor container. Where there is a match it must
+> be represented."
+> 
+> So having said all that, CPU container is probably fine as a description.
 
-Welcome! And I'm also sorry for a long silence. Now I'm back from the
-vacation and will keep pushing this series forward.
+Thanks for the explanation!
 
-> It also helps me avoid going through every single
-> layer, especially when I want to avoid matching system registers in
-> ARM, particularly when there's no description in the command line.
+> >     shared hierarchy of the cache. Therefore, for SMP systems, it is
+> >     natural to use the CPU topology hierarchy directly in QEMU to define
+> >     the cache topology.
+> > 
+> > Suggested-by: Daniel P. Berrange <berrange@redhat.com>
+> > Signed-off-by: Zhao Liu <zhao1.liu@intel.com>
+> > Tested-by: Yongwei Ma <yongwei.ma@intel.com>
+>
+> Seems fine but my gut would be to combine this and next patch so we can
+> see how it is used (assuming no one asked for it to be separate!)
 
-Great! I also noticed your patch for this "TODO" and will help you
-review it soon.
+No problem. I intended to make it easier to review the QAPI part, but
+these two patches were simple enough that I was happy to combine them.
 
-Regards,
+> Version numbers need an update I guess.
+
+Ah, yes!
+
+> Reviewed-by: Jonathan Cameron <Jonathan.Cameron@huawei.com>
+
+Thanks!
+
+> > +##
+> > +# @SmpCachePropertiesWrapper:
+> > +#
+> > +# List wrapper of SmpCacheProperties.
+> > +#
+> > +# @caches: the list of SmpCacheProperties.
+> > +#
+> > +# Since 9.1
+> 
+> Needs updating to 9.2 I guess.
+
+Yes, I think so, too.
+
+Thanks,
 Zhao
 
-> > +    x86_cpu_update_smp_cache_topo(ms, cpu);
-> > +
-> >      qemu_register_reset(x86_cpu_machine_reset_cb, cpu);
-> >  
-> >      if (cpu->env.features[FEAT_1_EDX] & CPUID_APIC || ms->smp.cpus >
-> > 1) {
+> > +##
+> > +{ 'struct': 'SmpCachePropertiesWrapper',
+> > +  'data': { 'caches': ['SmpCacheProperties'] } }
 > 
-
 
