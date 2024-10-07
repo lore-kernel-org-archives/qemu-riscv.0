@@ -4,45 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 52CF9CFB440
-	for <qemu-riscv@archiver.kernel.org>; Mon,  7 Oct 2024 03:52:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4F0BDCFB43C
+	for <qemu-riscv@archiver.kernel.org>; Mon,  7 Oct 2024 04:28:40 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sxen2-0001z1-33; Sun, 06 Oct 2024 23:52:08 -0400
-Received: from eggs.gnu.org ([2001:470:142:3::10])
+	id 1sxfMF-0005rS-41; Mon, 07 Oct 2024 00:28:31 -0400
+Received: from eggs.gnu.org ([209.51.188.92])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
- id 1sxen0-0001ym-QM; Sun, 06 Oct 2024 23:52:06 -0400
-Received: from out30-124.freemail.mail.aliyun.com ([115.124.30.124])
+ id 1sxf8B-0004T6-E2; Mon, 07 Oct 2024 00:18:06 -0400
+Received: from out30-111.freemail.mail.aliyun.com ([115.124.30.111])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
- id 1sxemx-000814-UQ; Sun, 06 Oct 2024 23:52:06 -0400
+ id 1sxf3H-0001F5-0Q; Mon, 07 Oct 2024 00:08:59 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=linux.alibaba.com; s=default;
- t=1728273113; h=From:To:Subject:Date:Message-Id:MIME-Version;
- bh=tPUaAwnZss3gUgr7WUV2NsDqMky9cJt0gFBrh9g2XyA=;
- b=e//bfv2ShLG7l0eOKaRgXJsCMg3n9ZI65jEbzuLFKfeI6evtk1ajhWbqJh4CGoAYA2YPovtIzN+5B4E9BhH9/3A4guuKntq3jvUarz1rcmOctZ/9Rj8jhXjg3ief/ipZZsORjrFhwAqjGWXqulx06sZDnrsFEsl0U4/0LOqIJg0=
+ t=1728274124; h=From:To:Subject:Date:Message-Id:MIME-Version;
+ bh=kbhkNAflIjFQzxSp5wJZlmlVvimUd8ZzBB1vDppvOYU=;
+ b=aMrY0s3tAX+LO3MXgHiFjMW701ZOYBnED1sHZpd6+DIS357/w7lbAeKXQugHS8+/b9e9JmKkFFf+0VEhsh4Q+3OGplnKYoNd2YWF/v3sPGIEDx6HChibdiOSK9Tr8IrwQwm27BxrBgi+POme7GWnsZ5SIS3+GhyQS0Sz42mkvzI=
 Received: from localhost.localdomain(mailfrom:zhiwei_liu@linux.alibaba.com
- fp:SMTPD_---0WGLTtSb_1728273111) by smtp.aliyun-inc.com;
- Mon, 07 Oct 2024 11:51:52 +0800
+ fp:SMTPD_---0WGLZQ7U_1728274122) by smtp.aliyun-inc.com;
+ Mon, 07 Oct 2024 12:08:43 +0800
 From: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, palmer@dabbelt.com, alistair.francis@wdc.com,
  dbarboza@ventanamicro.com, liwei1518@gmail.com, bmeng.cn@gmail.com,
  TANG Tiancheng <tangtiancheng.ttc@alibaba-inc.com>
-Subject: [PATCH v1 5/7] target/riscv: Enable 32-bit only registers for RV64
- with sxl32
-Date: Mon,  7 Oct 2024 11:33:58 +0800
-Message-Id: <20241007033400.50163-6-zhiwei_liu@linux.alibaba.com>
+Subject: [PATCH v1 6/7] target/riscv: Reset SXL and UXL according to sxl32
+Date: Mon,  7 Oct 2024 11:33:59 +0800
+Message-Id: <20241007033400.50163-7-zhiwei_liu@linux.alibaba.com>
 X-Mailer: git-send-email 2.39.3 (Apple Git-146)
 In-Reply-To: <20241007033400.50163-1-zhiwei_liu@linux.alibaba.com>
 References: <20241007033400.50163-1-zhiwei_liu@linux.alibaba.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=115.124.30.124;
+Received-SPF: pass client-ip=115.124.30.111;
  envelope-from=zhiwei_liu@linux.alibaba.com;
- helo=out30-124.freemail.mail.aliyun.com
+ helo=out30-111.freemail.mail.aliyun.com
 X-Spam_score_int: -174
 X-Spam_score: -17.5
 X-Spam_bar: -----------------
@@ -69,36 +68,40 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 From: TANG Tiancheng <tangtiancheng.ttc@alibaba-inc.com>
 
-Allow reading 32-bit only registers like timeh and stimecmph when
-booting a 32-bit Linux kernel on RV64 when sxl32 is true.
+When boot a 32-bit system, sxl and uxl should be set to 1 by OpenSBI. However,
+OpenSBI does not support this feature.
+
+We temporarily force QEMU reset SXL and UXL to MXL_RV32 when sxl32 is enabled.
 
 Signed-off-by: TANG Tiancheng <tangtiancheng.ttc@alibaba-inc.com>
 ---
- target/riscv/csr.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ target/riscv/cpu.c | 13 +++++++++++--
+ 1 file changed, 11 insertions(+), 2 deletions(-)
 
-diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-index 93a5cf87ed..c412ac8e31 100644
---- a/target/riscv/csr.c
-+++ b/target/riscv/csr.c
-@@ -161,7 +161,7 @@ skip_ext_pmu_check:
- 
- static RISCVException ctr32(CPURISCVState *env, int csrno)
- {
--    if (riscv_cpu_mxl(env) != MXL_RV32) {
-+    if (env->xl != MXL_RV32) {
-         return RISCV_EXCP_ILLEGAL_INST;
-     }
- 
-@@ -481,7 +481,7 @@ static RISCVException sstc(CPURISCVState *env, int csrno)
- 
- static RISCVException sstc_32(CPURISCVState *env, int csrno)
- {
--    if (riscv_cpu_mxl(env) != MXL_RV32) {
-+    if (env->xl != MXL_RV32) {
-         return RISCV_EXCP_ILLEGAL_INST;
-     }
- 
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index baf8fba467..9dbbb1ca77 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -933,8 +933,17 @@ static void riscv_cpu_reset_hold(Object *obj, ResetType type)
+          * The reset status of SXL/UXL is undefined, but mstatus is WARL
+          * and we must ensure that the value after init is valid for read.
+          */
+-        env->mstatus = set_field(env->mstatus, MSTATUS64_SXL, env->misa_mxl);
+-        env->mstatus = set_field(env->mstatus, MSTATUS64_UXL, env->misa_mxl);
++        if (cpu->cfg.sxl32) {
++            env->mstatus = set_field(env->mstatus, MSTATUS64_SXL,
++                                      MXL_RV32);
++            env->mstatus = set_field(env->mstatus, MSTATUS64_UXL,
++                                      MXL_RV32);
++        } else {
++            env->mstatus = set_field(env->mstatus, MSTATUS64_SXL,
++                                      env->misa_mxl);
++            env->mstatus = set_field(env->mstatus, MSTATUS64_UXL,
++                                      env->misa_mxl);
++        }
+         if (riscv_has_ext(env, RVH)) {
+             env->vsstatus = set_field(env->vsstatus,
+                                       MSTATUS64_SXL, env->misa_mxl);
 -- 
 2.43.0
 
