@@ -4,87 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2AEE7CF042A
-	for <qemu-riscv@archiver.kernel.org>; Tue,  8 Oct 2024 22:54:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2CAAFCF042A
+	for <qemu-riscv@archiver.kernel.org>; Tue,  8 Oct 2024 22:54:22 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1syJ2Y-0000Th-Qo; Tue, 08 Oct 2024 18:50:50 -0400
+	id 1syJ2D-0000GN-Bv; Tue, 08 Oct 2024 18:50:29 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <debug@rivosinc.com>)
- id 1syJ2U-0000NK-L8
- for qemu-riscv@nongnu.org; Tue, 08 Oct 2024 18:50:46 -0400
-Received: from mail-pl1-x634.google.com ([2607:f8b0:4864:20::634])
+ id 1syJ2B-0000FK-Km
+ for qemu-riscv@nongnu.org; Tue, 08 Oct 2024 18:50:27 -0400
+Received: from mail-pl1-x633.google.com ([2607:f8b0:4864:20::633])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <debug@rivosinc.com>)
- id 1syJ2Q-000419-60
- for qemu-riscv@nongnu.org; Tue, 08 Oct 2024 18:50:46 -0400
-Received: by mail-pl1-x634.google.com with SMTP id
- d9443c01a7336-20bb610be6aso68086195ad.1
- for <qemu-riscv@nongnu.org>; Tue, 08 Oct 2024 15:50:40 -0700 (PDT)
+ id 1syJ29-0003wc-T4
+ for qemu-riscv@nongnu.org; Tue, 08 Oct 2024 18:50:27 -0400
+Received: by mail-pl1-x633.google.com with SMTP id
+ d9443c01a7336-20c693b68f5so78545ad.1
+ for <qemu-riscv@nongnu.org>; Tue, 08 Oct 2024 15:50:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1728427840; x=1729032640;
+ d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1728427824; x=1729032624;
  darn=nongnu.org; 
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=FLg+s4rzz0OrmKj4UlRhD/WmbjGBPBMHWdNHXxUKfXo=;
- b=d+Zd1zrpeB3JdrPG0nsnd0YC7iuT+fVECWv2Sm7uZtWH/TStHMQYLJ0bhwTLXQ4syW
- qc4sRHriCjJNJsFooX5Y46+wCfw0uax44JcxmbwXfHQFwJrm1ssgNaUIyyyKkQFmJdyS
- OIjY3XBymuPasDQRR4vNGnKvv/l5wqSmfBTvT7BN6PSS2EcF79GC8ZR/uVbWKq2DKV9/
- u0CPR4rObpuKJmJIliCRwo3DaH1I99SvByWAkZGaVSs/HbBwNbPyzuiseUi5/xMHCfug
- adtITCc209oMDqUqw4kYsWj+tHsHlWmTnLSY+isg+0vvEawi9tMW6ctiSQIsV6qXA7TN
- XgyQ==
+ bh=NpvZYJph47UbMl7k6pfcf7IX44LlneT6ofd0Ip0BFwA=;
+ b=PSi3qFPxkcJ7qWTJKlNXxkPcGzruE/fpbh6SRvXr3yAM050QleXVc8QXMbgiZIOwIh
+ ok9qxwXVBOZkktIf2mZEGWCaWp0aMGoLwzJbptyfc+eUDeoeo/d0ewDPjGlhuxOzs0/2
+ sHFO0eXEAYWlzRv1gW2eC4+kq2okqX91vZr+1fc7Lh5TxEbnItGJuHlnqPgGirHjMY9m
+ 7XZ2SRvLT7u5nRz0J3Jgvp1WG+2OTJLNosQgeBduOUr5DaNswKBClX+JTywqPzrC3V4Q
+ HVMNJpwLV+PJvZ/a3mCxY/QQHjWp1sPotn8WFqtj4QN27JsJh9cowz28SfCAaiC9V2XH
+ nx0Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728427840; x=1729032640;
+ d=1e100.net; s=20230601; t=1728427824; x=1729032624;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=FLg+s4rzz0OrmKj4UlRhD/WmbjGBPBMHWdNHXxUKfXo=;
- b=k081gwatJmkb8Ifnw+qvEzMobcruN4ykgKVB8Xo1agbGvyizrK2hvSlxV8TUrAeyD6
- UbAX1wtjmYkdvLJvY1iMM7hDct+8eIWuV37RIRt+NVD/Crjne58R3rSYyQuP8Ca1E9iS
- 5dboP9aMqgbhk1iTid5DSFjw8cMaoHe/mnBzv1KFJySExUMTTRcJDPm6Jxloja5ScK1E
- oYWky5BN7vDeWxK+csjgCvvkEvhv6kF4dRxA0iRbr/ZZ//S5VujiwySwWD6QYT3PqJox
- 6QeMiqPCPjgMdEl8G1/PYD+aMpZlQFGAR/QkIBlLpxof8zmPWiR8nyl5NqIHNVcs10X1
- 4qPA==
-X-Gm-Message-State: AOJu0YxrFsMZZ7DhYNbQiQCPGG1uIuYtP0UKpJLbZFHT/Us9IhOYGHCM
- vR0RYRdkzQZdQFz38bMZKe7+r7Q0CuTjMJ63rcrN7u+2seArfrsRjVhH47F0ZmHb5H6X38Ni93Z
- Z
-X-Google-Smtp-Source: AGHT+IEWo+OwTN8wk7H9DcHXvWRcdB4QQeyPRO3aE5PjZR+n5lZst3NZv8jmD1LxE+0q2mwd+D+CAg==
-X-Received: by 2002:a17:902:d3c1:b0:20b:57f0:b378 with SMTP id
- d9443c01a7336-20c63791688mr5523685ad.50.1728427839796; 
- Tue, 08 Oct 2024 15:50:39 -0700 (PDT)
+ bh=NpvZYJph47UbMl7k6pfcf7IX44LlneT6ofd0Ip0BFwA=;
+ b=AS/T57uRj+GF9c2pMTaPmaDFuMwPY0Xc3L5KETNkXG1yt1+tFAsL/ZTRH21HoXsZ9r
+ 2G1lVsnG4p0H0l7HuqZyrF5hc/uiphjNJIiFoqO3PinsmDWxWiogp+Byq5gRB0d0KQVC
+ jPQfMrPClNxWsLMD2DeTMBCiOXXUdeEivQ35SHNp+hG5M/ruYdpN0OVmdLL2Xx0/1Lje
+ VLyN37Nb7JBz4Vnz5OOkxEQ5zr8fVax79D9RZLCxBwKvBdlZW1zdzmonNdNgrHQNRJ/5
+ R5PUfiNdaar7CR21O3SaZiIjk/FeiP/4sRhhKShdc0oDQ5S47D2QlpiiMcNVExW5mToD
+ c2Yw==
+X-Gm-Message-State: AOJu0Yx0yJntTerVhu9DGXvzPOSp7DWRGe7bDGdU1zQfZqSgYqCtIfsT
+ gUv7Sr5Edku68GV0/xjuzseYq4nZzkMrsU6WwzLZX3URNTmhhYzlZCmiocFHtUWcYslP7HkQna2
+ k
+X-Google-Smtp-Source: AGHT+IG12vn39VWr/udr+Bq7G85Hvn+0B37oGRBC/8SfSGeoGHdVkhJMiQMS8XSZClViZ3IpucX5lg==
+X-Received: by 2002:a17:902:ce8e:b0:20b:59ae:fe08 with SMTP id
+ d9443c01a7336-20c6377d18amr7277135ad.42.1728427824493; 
+ Tue, 08 Oct 2024 15:50:24 -0700 (PDT)
 Received: from debug.ba.rivosinc.com ([64.71.180.162])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-20c138af962sm60006105ad.26.2024.10.08.15.50.38
+ d9443c01a7336-20c138af962sm60006105ad.26.2024.10.08.15.50.23
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 08 Oct 2024 15:50:39 -0700 (PDT)
+ Tue, 08 Oct 2024 15:50:24 -0700 (PDT)
 From: Deepak Gupta <debug@rivosinc.com>
 To: qemu-riscv@nongnu.org,
 	qemu-devel@nongnu.org
 Cc: palmer@dabbelt.com, Alistair.Francis@wdc.com, bmeng.cn@gmail.com,
  liwei1518@gmail.com, dbarboza@ventanamicro.com,
  zhiwei_liu@linux.alibaba.com, jim.shu@sifive.com, kito.cheng@sifive.com,
- Deepak Gupta <debug@rivosinc.com>,
+ Deepak Gupta <debug@rivosinc.com>, Andy Chiu <andy.chiu@sifive.com>,
+ Richard Henderson <richard.henderson@linaro.org>,
  Alistair Francis <alistair.francis@wdc.com>
-Subject: [PATCH v16 20/20] target/riscv: Expose zicfiss extension as a cpu
- property
-Date: Tue,  8 Oct 2024 15:50:10 -0700
-Message-ID: <20241008225010.1861630-21-debug@rivosinc.com>
+Subject: [PATCH v16 08/20] disas/riscv: enable `lpad` disassembly
+Date: Tue,  8 Oct 2024 15:49:58 -0700
+Message-ID: <20241008225010.1861630-9-debug@rivosinc.com>
 X-Mailer: git-send-email 2.45.0
 In-Reply-To: <20241008225010.1861630-1-debug@rivosinc.com>
 References: <20241008225010.1861630-1-debug@rivosinc.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::634;
- envelope-from=debug@rivosinc.com; helo=mail-pl1-x634.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::633;
+ envelope-from=debug@rivosinc.com; helo=mail-pl1-x633.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
 X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -101,23 +101,92 @@ Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 Signed-off-by: Deepak Gupta <debug@rivosinc.com>
+Co-developed-by: Jim Shu <jim.shu@sifive.com>
+Co-developed-by: Andy Chiu <andy.chiu@sifive.com>
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 ---
- target/riscv/cpu.c | 1 +
- 1 file changed, 1 insertion(+)
+ disas/riscv.c | 18 +++++++++++++++++-
+ disas/riscv.h |  2 ++
+ 2 files changed, 19 insertions(+), 1 deletion(-)
 
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index ac5ad6fa9d..0751d08d85 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -1473,6 +1473,7 @@ const RISCVCPUMultiExtConfig riscv_cpu_extensions[] = {
-     MULTI_EXT_CFG_BOOL("smcntrpmf", ext_smcntrpmf, false),
-     MULTI_EXT_CFG_BOOL("zifencei", ext_zifencei, true),
-     MULTI_EXT_CFG_BOOL("zicfilp", ext_zicfilp, false),
-+    MULTI_EXT_CFG_BOOL("zicfiss", ext_zicfiss, false),
-     MULTI_EXT_CFG_BOOL("zicsr", ext_zicsr, true),
-     MULTI_EXT_CFG_BOOL("zihintntl", ext_zihintntl, true),
-     MULTI_EXT_CFG_BOOL("zihintpause", ext_zihintpause, true),
+diff --git a/disas/riscv.c b/disas/riscv.c
+index 5965574d87..2942a5800f 100644
+--- a/disas/riscv.c
++++ b/disas/riscv.c
+@@ -976,6 +976,7 @@ typedef enum {
+     rv_op_amocas_h  = 945,
+     rv_op_wrs_sto = 946,
+     rv_op_wrs_nto = 947,
++    rv_op_lpad = 948,
+ } rv_op;
+ 
+ /* register names */
+@@ -2236,6 +2237,7 @@ const rv_opcode_data rvi_opcode_data[] = {
+     { "amocas.h", rv_codec_r_a, rv_fmt_aqrl_rd_rs2_rs1, NULL, 0, 0, 0 },
+     { "wrs.sto", rv_codec_none, rv_fmt_none, NULL, 0, 0, 0 },
+     { "wrs.nto", rv_codec_none, rv_fmt_none, NULL, 0, 0, 0 },
++    { "lpad", rv_codec_lp, rv_fmt_imm, NULL, 0, 0, 0 },
+ };
+ 
+ /* CSR names */
+@@ -2929,7 +2931,13 @@ static void decode_inst_opcode(rv_decode *dec, rv_isa isa)
+             case 7: op = rv_op_andi; break;
+             }
+             break;
+-        case 5: op = rv_op_auipc; break;
++        case 5:
++            op = rv_op_auipc;
++            if (dec->cfg->ext_zicfilp &&
++                (((inst >> 7) & 0b11111) == 0b00000)) {
++                op = rv_op_lpad;
++            }
++            break;
+         case 6:
+             switch ((inst >> 12) & 0b111) {
+             case 0: op = rv_op_addiw; break;
+@@ -4488,6 +4496,11 @@ static uint32_t operand_tbl_index(rv_inst inst)
+     return ((inst << 54) >> 56);
+ }
+ 
++static uint32_t operand_lpl(rv_inst inst)
++{
++    return inst >> 12;
++}
++
+ /* decode operands */
+ 
+ static void decode_inst_operands(rv_decode *dec, rv_isa isa)
+@@ -4875,6 +4888,9 @@ static void decode_inst_operands(rv_decode *dec, rv_isa isa)
+         dec->imm = sextract32(operand_rs2(inst), 0, 5);
+         dec->imm1 = operand_imm2(inst);
+         break;
++    case rv_codec_lp:
++        dec->imm = operand_lpl(inst);
++        break;
+     };
+ }
+ 
+diff --git a/disas/riscv.h b/disas/riscv.h
+index 16a08e4895..1182457aff 100644
+--- a/disas/riscv.h
++++ b/disas/riscv.h
+@@ -166,6 +166,7 @@ typedef enum {
+     rv_codec_r2_immhl,
+     rv_codec_r2_imm2_imm5,
+     rv_codec_fli,
++    rv_codec_lp,
+ } rv_codec;
+ 
+ /* structures */
+@@ -228,6 +229,7 @@ enum {
+ #define rv_fmt_rs1_rs2                "O\t1,2"
+ #define rv_fmt_rd_imm                 "O\t0,i"
+ #define rv_fmt_rd_uimm                "O\t0,Ui"
++#define rv_fmt_imm                    "O\ti"
+ #define rv_fmt_rd_offset              "O\t0,o"
+ #define rv_fmt_rd_uoffset             "O\t0,Uo"
+ #define rv_fmt_rd_rs1_rs2             "O\t0,1,2"
 -- 
 2.45.0
 
