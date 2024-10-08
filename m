@@ -4,72 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A1E01CED24D
-	for <qemu-riscv@archiver.kernel.org>; Tue,  8 Oct 2024 00:50:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 49816CED24D
+	for <qemu-riscv@archiver.kernel.org>; Tue,  8 Oct 2024 01:20:55 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sxyQn-0007Qd-PY; Mon, 07 Oct 2024 20:50:30 -0400
+	id 1sxyre-0006BM-F4; Mon, 07 Oct 2024 21:18:16 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1sxyQe-0007Hg-Fb; Mon, 07 Oct 2024 20:50:21 -0400
-Received: from mail-vk1-xa2e.google.com ([2607:f8b0:4864:20::a2e])
+ id 1sxyr7-0005Xr-JM; Mon, 07 Oct 2024 21:17:42 -0400
+Received: from mail-ua1-x930.google.com ([2607:f8b0:4864:20::930])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1sxyQc-0005eF-Vy; Mon, 07 Oct 2024 20:50:20 -0400
-Received: by mail-vk1-xa2e.google.com with SMTP id
- 71dfb90a1353d-50ac0c8cd48so1479047e0c.1; 
- Mon, 07 Oct 2024 17:50:18 -0700 (PDT)
+ id 1sxyr5-0008TH-7W; Mon, 07 Oct 2024 21:17:40 -0400
+Received: by mail-ua1-x930.google.com with SMTP id
+ a1e0cc1a2514c-84f29f2547fso1299169241.0; 
+ Mon, 07 Oct 2024 18:17:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1728348617; x=1728953417; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1728350256; x=1728955056; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=/aOAazVGZzuUQuCoiM6TIgT8pILzareCk0Lqih6zbHM=;
- b=QdovmfLdMxYP8Bm5ey6gL6WmobNBnNVQwfOvgJhWmyQnexm0q/4eeUfO6xAGkRsATa
- KlY/EFTla0AEUqUk7LRbiOLaSqchAkS7kiZueauU2okkJmnBiRCaed5SHFgOYHONEOgI
- uCkiu+kl8esLToctWiOnrWi7DFLOVFswUg1m+uITr27Dur6unjsOBzCIejaH90PjAmg9
- VJjSftULKrfhhUhMlOeaO+9j0PGT8YM+4A4pKHDvEhWIrf/pG4K9LaspkFuZrOwdz6pn
- XxHrtxNUV0BZI/OzXVcAg4iHX1Mjzn7gfLS4SYkWkRmA8WmIm1mjhAi7+P6f3gVmNg61
- Nhfw==
+ bh=H7XcROQHzaMp4c2pQ5mw9PeqZzqv/Ez36cA9tpdGmts=;
+ b=K4fveUZD3Ownoz2Hp8W4uafTCuSyz773qghmSwniEHnRu5K+INIpg9E//PaDf9Hq3c
+ UXxBc/RMOqXB3kI8ZZ5MMN+tQdplu5gJOEjVc/6pOgvjn5zypI5iyFXvTpDT8ZhmWdgO
+ miVxutxnBKuf2uJRAeQNSMZCCcrWcC0gahorNgTEzw4d8GcVOGzzEJGUMgUwL2ZCDr8v
+ +LvKgqQp5R0fF4Fxq2+hz92PHM7++ZO3zDmvq/tP2M2gJPYy7GkJKGl50jm0LRtc0BGQ
+ Fv6yrk2MBaLMbdL1RZjdYH/RXFs1FAzf80rMJgqZzwdhbj1jhD5Y0jekp7MVMt/UyhJY
+ cNow==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728348617; x=1728953417;
+ d=1e100.net; s=20230601; t=1728350256; x=1728955056;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=/aOAazVGZzuUQuCoiM6TIgT8pILzareCk0Lqih6zbHM=;
- b=iKvQ5vX05SuC5dJ2W+Fwao3rrly9OlpDnoyZnPn8wZK8bM2Fdynb+wzpUSsVlhVhlR
- KT59kP7Fparo9xqwnx8PGlb/lPr48TXR9l1EZvR/9Y1gdtopBeAdYaUvduYONX1Qlz/J
- eUzjRmX5rMs7+qvE+b71ZymdPEcrBVxVJ95kx6NymGWglBQFqANGZQ42u6uK1IKYtc0s
- tJBdK+5a89KpZ9JZ1A9W36oZsAsG1VY8x+sXkf9kOc6P09X0mHe5vDif02+xpxx0aLak
- LEXO71WkJKDW7+QhkRA3U+IJxI7Lh9LaeaaHwEeM7DtKhfK3GDeDVmGGg85W0+bdkCGd
- 1l/w==
+ bh=H7XcROQHzaMp4c2pQ5mw9PeqZzqv/Ez36cA9tpdGmts=;
+ b=jd4iBBAa7Gwl8qzUw+qoZsTPwmxKMGLMC+BCK/LeM0cvyQSZHiMxRoYROXKD4Sk/B0
+ eg9Wk9Jl8UP6B3hlG2DpG3qOWI3YSavApJkNxJPssuB73E2RpIWjWBcxDsM3x4AD+AGT
+ 8KTQMMJVE8wi5qb9Ibvb/O5FKH5AZDGNiDd1QVwgzmqFG7F0NXep91w66ludTqtCe17G
+ RJ7+KlZqq3GO6MgV8AlPHJHjVEzjdrV7BCxKQxibVcVywxLkXscW7ehXqmG67Zj+bph5
+ h9XZKiXGgYmACAijjRrPq2Q+97Mufizkbni/ucfeazH3n9E9QWPpd3cFPFZIHeC6bh/3
+ nCeQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXQoSoItYnWCdLKTBd43J9JrkNJIO/lqR6Ork2YVaprvh8Rhx5surjfuzpgzNZ86Cy3ZJPxa/jUxodL@nongnu.org
-X-Gm-Message-State: AOJu0Yxz8ba7vWTyIzeiTPa9WECSdnnavsfk24bbQY69xURIzjb5aHF5
- LjLddJcxIQtSXyoorf0D3aatNvAU6S2/NzV9nR1jbnLmCxargtZXVyRYZX6PzxpgVDHvzLMdsEF
- ilhXbEMuwAm4wOVXO+kSc0/XjLgA=
-X-Google-Smtp-Source: AGHT+IHOxoa3jgDuMwUPp1P4elaIQ5pUNLDGLnSjafEnUbztGs1p3RoIl8Fh7orWx3o/z1Ex0YTXSp7ZsQUrGU1Ugvc=
-X-Received: by 2002:a05:6102:f0b:b0:49b:f255:179a with SMTP id
- ada2fe7eead31-4a405749686mr12091143137.5.1728348617559; Mon, 07 Oct 2024
- 17:50:17 -0700 (PDT)
+ AJvYcCVOco5m+TvsCdQMQfBDzpJrFnp9dCGlYta9BHdhgMb0K/Q11vS3i2ZLxTX5nBQArdVjdsQs6DbV/vrr@nongnu.org
+X-Gm-Message-State: AOJu0YxTBXopQDyKD2y2WVpkWrWiQzxPk0fWVothqQuWH/YnwhJP2+n1
+ 6vKiynLEOXFtZm80cDprbT4jXwCpf37R4kdY56V5SA9Aho/A/cKt+JvwkefBD1yEIvpGW5rnxNO
+ TgwwxvvV7wR1fYlYM5DB1+R0nx3k=
+X-Google-Smtp-Source: AGHT+IEOLPrkggHEBAx19gWSsT9KlLjPJMUVyFnd0spGUs/FgRm9s0B7W9n/afgGJ600gGpCv62LkRGItKTF5NVrMas=
+X-Received: by 2002:a05:6102:b07:b0:4a3:a0b1:b94 with SMTP id
+ ada2fe7eead31-4a4057620eemr8833563137.9.1728350256662; Mon, 07 Oct 2024
+ 18:17:36 -0700 (PDT)
 MIME-Version: 1.0
 References: <20240919055048.562-1-zhiwei_liu@linux.alibaba.com>
- <20240919055048.562-9-zhiwei_liu@linux.alibaba.com>
-In-Reply-To: <20240919055048.562-9-zhiwei_liu@linux.alibaba.com>
+In-Reply-To: <20240919055048.562-1-zhiwei_liu@linux.alibaba.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Tue, 8 Oct 2024 10:49:51 +1000
-Message-ID: <CAKmqyKNhS6zLPNLN4=-v_t01aOL4e9qK3BiYX7cMLAvhooGNjA@mail.gmail.com>
-Subject: Re: [PATCH v7 8/8] tests/avocado: Boot Linux for RV32 cpu on RV64 QEMU
+Date: Tue, 8 Oct 2024 11:17:10 +1000
+Message-ID: <CAKmqyKOAnhskgqw1RU-3cSkUUCVRj7B614QT3RWn5t-pD=CziQ@mail.gmail.com>
+Subject: Re: [PATCH v7 0/8] target/riscv: Expose RV32 cpu to RV64 QEMU
 To: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
 Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, palmer@dabbelt.com, 
  alistair.francis@wdc.com, dbarboza@ventanamicro.com, liwei1518@gmail.com, 
- bmeng.cn@gmail.com
+ bmeng.cn@gmail.com, TANG Tiancheng <tangtiancheng.ttc@alibaba-inc.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::a2e;
- envelope-from=alistair23@gmail.com; helo=mail-vk1-xa2e.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::930;
+ envelope-from=alistair23@gmail.com; helo=mail-ua1-x930.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -93,54 +92,73 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Thu, Sep 19, 2024 at 3:57=E2=80=AFPM LIU Zhiwei <zhiwei_liu@linux.alibab=
+On Thu, Sep 19, 2024 at 3:53=E2=80=AFPM LIU Zhiwei <zhiwei_liu@linux.alibab=
 a.com> wrote:
 >
-> make check-avocado AVOCADO_TESTS=3Dtests/avocado/tuxrun_baselines.py: \
-> TuxRunBaselineTest:test_riscv64_rv32
+> From: TANG Tiancheng <tangtiancheng.ttc@alibaba-inc.com>
 >
-> Signed-off-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
-> Suggested-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+> This patch set aims to expose 32-bit RISC-V cpu to RV64 QEMU. Thus
+> qemu-system-riscv64 can directly boot a RV32 Linux.
+>
+> This patch set has been tested with 6.9.0 Linux Image.
+> And add an avocado tuxrun test in tests/avocado.
+>
+> v7:
+>   Remove cpu of "any".
+>
+> v6:
+>   Use TUXRUN test case instead of boot_linux_console
+>   Add any32 and max32 cpu for RV64 QEMU
+>
+> v5:
+>   Rebase to master and add tags
+>
+> v4:
+>   Drop UL completely in PATCH v3 2/7, 4/7, 5/7.
+>   Avocado: Add "if=3Dnone" to "-drive" option in QEMU command line
+>
+> v3:
+>   Rebase to the master branch
+>
+> v2:
+>   Remove the line that was inadvertently left in PATCH v1 4/6.
+>   Add an avocado test.
+>
+> v1:
+>   https://mail.gnu.org/archive/html/qemu-riscv/2024-06/msg00501.html
+>
+> LIU Zhiwei (2):
+>   target/riscv: Add max32 CPU for RV64 QEMU
+>   tests/avocado: Boot Linux for RV32 cpu on RV64 QEMU
+>
+> TANG Tiancheng (6):
+>   target/riscv: Add fw_dynamic_info32 for booting RV32 OpenSBI
+>   target/riscv: Adjust PMP size for no-MMU RV64 QEMU running RV32
+>   target/riscv: Correct SXL return value for RV32 in RV64 QEMU
+>   target/riscv: Detect sxl to set bit width for RV32 in RV64
+>   target/riscv: Correct mcause/scause bit width for RV32 in RV64 QEMU
+>   target/riscv: Enable RV32 CPU support in RV64 QEMU
 
-Acked-by: Alistair Francis <alistair.francis@wdc.com>
+Thanks!
+
+Applied to riscv-to-apply.next
 
 Alistair
 
-> ---
->  tests/avocado/tuxrun_baselines.py | 16 ++++++++++++++++
->  1 file changed, 16 insertions(+)
 >
-> diff --git a/tests/avocado/tuxrun_baselines.py b/tests/avocado/tuxrun_bas=
-elines.py
-> index 736e4aa289..589c7f254b 100644
-> --- a/tests/avocado/tuxrun_baselines.py
-> +++ b/tests/avocado/tuxrun_baselines.py
-> @@ -533,6 +533,22 @@ def test_riscv64_maxcpu(self):
+>  configs/targets/riscv64-softmmu.mak |  2 +-
+>  hw/riscv/boot.c                     | 35 +++++++++++++++++++----------
+>  hw/riscv/sifive_u.c                 |  3 ++-
+>  include/hw/riscv/boot.h             |  4 +++-
+>  include/hw/riscv/boot_opensbi.h     | 29 ++++++++++++++++++++++++
+>  target/riscv/cpu-qom.h              |  1 +
+>  target/riscv/cpu.c                  | 28 ++++++++++++++++-------
+>  target/riscv/cpu.h                  |  5 ++++-
+>  target/riscv/cpu_helper.c           | 25 +++++++++++++++------
+>  target/riscv/pmp.c                  |  2 +-
+>  tests/avocado/tuxrun_baselines.py   | 16 +++++++++++++
+>  11 files changed, 118 insertions(+), 32 deletions(-)
 >
->          self.common_tuxrun(csums=3Dsums)
->
-> +    def test_riscv64_rv32(self):
-> +        """
-> +        :avocado: tags=3Darch:riscv64
-> +        :avocado: tags=3Dmachine:virt
-> +        :avocado: tags=3Dtuxboot:riscv32
-> +        :avocado: tags=3Dcpu:rv32
-> +        """
-> +        sums =3D { "Image" :
-> +                 "89599407d7334de629a40e7ad6503c73670359eb5f5ae9d686353a=
-3d6deccbd5",
-> +                 "fw_jump.elf" :
-> +                 "f2ef28a0b77826f79d085d3e4aa686f1159b315eff9099a37046b1=
-8936676985",
-> +                 "rootfs.ext4.zst" :
-> +                 "7168d296d0283238ea73cd5a775b3dd608e55e04c7b92b76ecce31=
-bb13108cba" }
-> +
-> +        self.common_tuxrun(csums=3Dsums)
-> +
->      def test_s390(self):
->          """
->          :avocado: tags=3Darch:s390x
 > --
 > 2.43.0
 >
