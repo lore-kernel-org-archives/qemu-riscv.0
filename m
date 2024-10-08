@@ -4,71 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 49816CED24D
-	for <qemu-riscv@archiver.kernel.org>; Tue,  8 Oct 2024 01:20:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8B227CED24D
+	for <qemu-riscv@archiver.kernel.org>; Tue,  8 Oct 2024 01:23:52 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sxyre-0006BM-F4; Mon, 07 Oct 2024 21:18:16 -0400
+	id 1sxyuz-0000Tb-JJ; Mon, 07 Oct 2024 21:21:42 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1sxyr7-0005Xr-JM; Mon, 07 Oct 2024 21:17:42 -0400
-Received: from mail-ua1-x930.google.com ([2607:f8b0:4864:20::930])
+ id 1sxytg-0003Gf-6D; Mon, 07 Oct 2024 21:20:20 -0400
+Received: from mail-ua1-x92c.google.com ([2607:f8b0:4864:20::92c])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1sxyr5-0008TH-7W; Mon, 07 Oct 2024 21:17:40 -0400
-Received: by mail-ua1-x930.google.com with SMTP id
- a1e0cc1a2514c-84f29f2547fso1299169241.0; 
- Mon, 07 Oct 2024 18:17:37 -0700 (PDT)
+ id 1sxytd-0000Wt-L7; Mon, 07 Oct 2024 21:20:19 -0400
+Received: by mail-ua1-x92c.google.com with SMTP id
+ a1e0cc1a2514c-84f44816b1eso974009241.3; 
+ Mon, 07 Oct 2024 18:20:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1728350256; x=1728955056; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1728350416; x=1728955216; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=H7XcROQHzaMp4c2pQ5mw9PeqZzqv/Ez36cA9tpdGmts=;
- b=K4fveUZD3Ownoz2Hp8W4uafTCuSyz773qghmSwniEHnRu5K+INIpg9E//PaDf9Hq3c
- UXxBc/RMOqXB3kI8ZZ5MMN+tQdplu5gJOEjVc/6pOgvjn5zypI5iyFXvTpDT8ZhmWdgO
- miVxutxnBKuf2uJRAeQNSMZCCcrWcC0gahorNgTEzw4d8GcVOGzzEJGUMgUwL2ZCDr8v
- +LvKgqQp5R0fF4Fxq2+hz92PHM7++ZO3zDmvq/tP2M2gJPYy7GkJKGl50jm0LRtc0BGQ
- Fv6yrk2MBaLMbdL1RZjdYH/RXFs1FAzf80rMJgqZzwdhbj1jhD5Y0jekp7MVMt/UyhJY
- cNow==
+ bh=2rbYRBfYga1tuey+kEmP39XDZmz7Rkg7RYbC+Fwev44=;
+ b=i7094ypAaG3g9nZ7jhow6VO7j7bmbokMJkGKEAb3trX6aC+Ze3VRHinr+bLaeK75/h
+ Is7E5ieGwpShY1wiRVdQqjwCdEyzCoObMTmTJpZWlXWhLTfKfPe8grhxJZhtCzxLcpnG
+ J+V3WS6E1TowLnj8pihphS8ah7ejG1lmdmXEcGGKbJQl/9psZXPVBwAfrPKxc5Jpj1hu
+ Qgr7aDhldY/obmyAvF47pTO53s/WvkXiq/W3c7S4aXsH5lFLHM6PDD96wY6TW2TSV42x
+ F9Qxcn472d3UwsBx28JvyGJgvkG7K8s53oJxvPrEr5XudUrQ2veF/zaKDIw48Rmvx8+B
+ B7qw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728350256; x=1728955056;
+ d=1e100.net; s=20230601; t=1728350416; x=1728955216;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=H7XcROQHzaMp4c2pQ5mw9PeqZzqv/Ez36cA9tpdGmts=;
- b=jd4iBBAa7Gwl8qzUw+qoZsTPwmxKMGLMC+BCK/LeM0cvyQSZHiMxRoYROXKD4Sk/B0
- eg9Wk9Jl8UP6B3hlG2DpG3qOWI3YSavApJkNxJPssuB73E2RpIWjWBcxDsM3x4AD+AGT
- 8KTQMMJVE8wi5qb9Ibvb/O5FKH5AZDGNiDd1QVwgzmqFG7F0NXep91w66ludTqtCe17G
- RJ7+KlZqq3GO6MgV8AlPHJHjVEzjdrV7BCxKQxibVcVywxLkXscW7ehXqmG67Zj+bph5
- h9XZKiXGgYmACAijjRrPq2Q+97Mufizkbni/ucfeazH3n9E9QWPpd3cFPFZIHeC6bh/3
- nCeQ==
+ bh=2rbYRBfYga1tuey+kEmP39XDZmz7Rkg7RYbC+Fwev44=;
+ b=IxloRV9u7BcToEVSECjvZW18raC3QGoHnnhuQdgTD9yTLJr5IyUJ8iq0Gr2HGWEG4O
+ L6vKNxztKZ+MBQIwvq7IJff/t6lS8lIlFFcRwKPN7E5+IOw71FOxFM8gFtgthuVt8z0E
+ mRuzYEIWFcVhl88q2LtODHMZRIBsJXGGM9vna8EPS9fFQ2fG/RT65jLOnH8JUApa+LEB
+ LJtqC/9N6N7B+IJnQs4TUjIMHUf1uXf6lXk9BkCnR7lhNNKOk2B8iBiFEW2DpCEXvOke
+ B7DR9FXANxyfSiMjsoXXKBVGOCG/HyZHSSxl3ZF7EMYk+uYcbNgqDMzFiE9C1sz3aHMt
+ im0A==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVOco5m+TvsCdQMQfBDzpJrFnp9dCGlYta9BHdhgMb0K/Q11vS3i2ZLxTX5nBQArdVjdsQs6DbV/vrr@nongnu.org
-X-Gm-Message-State: AOJu0YxTBXopQDyKD2y2WVpkWrWiQzxPk0fWVothqQuWH/YnwhJP2+n1
- 6vKiynLEOXFtZm80cDprbT4jXwCpf37R4kdY56V5SA9Aho/A/cKt+JvwkefBD1yEIvpGW5rnxNO
- TgwwxvvV7wR1fYlYM5DB1+R0nx3k=
-X-Google-Smtp-Source: AGHT+IEOLPrkggHEBAx19gWSsT9KlLjPJMUVyFnd0spGUs/FgRm9s0B7W9n/afgGJ600gGpCv62LkRGItKTF5NVrMas=
-X-Received: by 2002:a05:6102:b07:b0:4a3:a0b1:b94 with SMTP id
- ada2fe7eead31-4a4057620eemr8833563137.9.1728350256662; Mon, 07 Oct 2024
- 18:17:36 -0700 (PDT)
+ AJvYcCUsVqTeZpcc3wb0LS28ZjA6x5SSmX44MiLNQNHIDepVFWG8bMN5MufD/rfjNsi8a7U41HIZ0FRh63bv9g==@nongnu.org,
+ AJvYcCXRcCPEQ6J0kIrtRaUkDt7qLpBCjdB7Azvy3N+woNEEeL9H0+Nmb7DoGhnuj18LgqmqOMuViCBwzZCu@nongnu.org
+X-Gm-Message-State: AOJu0YxfQhSf9SM8lZuN/wJWel2955WqRwLoGfhyMYF08QBA5gj5ALLv
+ CuoDcOreXoH3T1O6ZmGg/UZIU29Vih32AcG2dxelxCLU10DRFPfXNQo4jdLT8XjYyr7n9x66PPi
+ z1Lo8qcjINdD4z2h2sPmk/C1E8wg=
+X-Google-Smtp-Source: AGHT+IHxQfS1cYiAkZWrPtd1Py4HQPE4YNl+b11VhUo1PmyRMAQXir+r4b96vgu8NFWxxTe6g0kp539QlL9UEm5bDFc=
+X-Received: by 2002:a05:6102:2ac9:b0:4a3:d99b:9970 with SMTP id
+ ada2fe7eead31-4a4058caf21mr7885908137.19.1728350416125; Mon, 07 Oct 2024
+ 18:20:16 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240919055048.562-1-zhiwei_liu@linux.alibaba.com>
-In-Reply-To: <20240919055048.562-1-zhiwei_liu@linux.alibaba.com>
+References: <20240918140229.124329-1-s.makarov@syntacore.com>
+ <20240918140229.124329-2-s.makarov@syntacore.com>
+In-Reply-To: <20240918140229.124329-2-s.makarov@syntacore.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Tue, 8 Oct 2024 11:17:10 +1000
-Message-ID: <CAKmqyKOAnhskgqw1RU-3cSkUUCVRj7B614QT3RWn5t-pD=CziQ@mail.gmail.com>
-Subject: Re: [PATCH v7 0/8] target/riscv: Expose RV32 cpu to RV64 QEMU
-To: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, palmer@dabbelt.com, 
- alistair.francis@wdc.com, dbarboza@ventanamicro.com, liwei1518@gmail.com, 
- bmeng.cn@gmail.com, TANG Tiancheng <tangtiancheng.ttc@alibaba-inc.com>
+Date: Tue, 8 Oct 2024 11:19:50 +1000
+Message-ID: <CAKmqyKOpBe9jYQwV9JsdsLzgs=rOJnS1g0Q7ER2WTd_JdqdzCw@mail.gmail.com>
+Subject: Re: [PATCH 1/2] hw/intc: Make zeroth priority register read-only
+To: Sergey Makarov <s.makarov@syntacore.com>
+Cc: Alistar.Francis@wdc.com, bmeng.cn@gmail.com, palmer@dabbelt.com, 
+ qemu-riscv@nongnu.org, qemu-devel@nongnu.org
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::930;
- envelope-from=alistair23@gmail.com; helo=mail-ua1-x930.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::92c;
+ envelope-from=alistair23@gmail.com; helo=mail-ua1-x92c.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -92,75 +93,51 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Thu, Sep 19, 2024 at 3:53=E2=80=AFPM LIU Zhiwei <zhiwei_liu@linux.alibab=
-a.com> wrote:
+On Thu, Sep 19, 2024 at 12:04=E2=80=AFAM Sergey Makarov <s.makarov@syntacor=
+e.com> wrote:
 >
-> From: TANG Tiancheng <tangtiancheng.ttc@alibaba-inc.com>
+> According to PLIC specification chapter 4, zeroth
+> priority register is reserved. Discard writes to
+> this register.
 >
-> This patch set aims to expose 32-bit RISC-V cpu to RV64 QEMU. Thus
-> qemu-system-riscv64 can directly boot a RV32 Linux.
->
-> This patch set has been tested with 6.9.0 Linux Image.
-> And add an avocado tuxrun test in tests/avocado.
->
-> v7:
->   Remove cpu of "any".
->
-> v6:
->   Use TUXRUN test case instead of boot_linux_console
->   Add any32 and max32 cpu for RV64 QEMU
->
-> v5:
->   Rebase to master and add tags
->
-> v4:
->   Drop UL completely in PATCH v3 2/7, 4/7, 5/7.
->   Avocado: Add "if=3Dnone" to "-drive" option in QEMU command line
->
-> v3:
->   Rebase to the master branch
->
-> v2:
->   Remove the line that was inadvertently left in PATCH v1 4/6.
->   Add an avocado test.
->
-> v1:
->   https://mail.gnu.org/archive/html/qemu-riscv/2024-06/msg00501.html
->
-> LIU Zhiwei (2):
->   target/riscv: Add max32 CPU for RV64 QEMU
->   tests/avocado: Boot Linux for RV32 cpu on RV64 QEMU
->
-> TANG Tiancheng (6):
->   target/riscv: Add fw_dynamic_info32 for booting RV32 OpenSBI
->   target/riscv: Adjust PMP size for no-MMU RV64 QEMU running RV32
->   target/riscv: Correct SXL return value for RV32 in RV64 QEMU
->   target/riscv: Detect sxl to set bit width for RV32 in RV64
->   target/riscv: Correct mcause/scause bit width for RV32 in RV64 QEMU
->   target/riscv: Enable RV32 CPU support in RV64 QEMU
+> Signed-off-by: Sergey Makarov <s.makarov@syntacore.com>
 
-Thanks!
-
-Applied to riscv-to-apply.next
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
+> ---
+>  hw/intc/sifive_plic.c | 9 +++++++--
+>  1 file changed, 7 insertions(+), 2 deletions(-)
 >
->  configs/targets/riscv64-softmmu.mak |  2 +-
->  hw/riscv/boot.c                     | 35 +++++++++++++++++++----------
->  hw/riscv/sifive_u.c                 |  3 ++-
->  include/hw/riscv/boot.h             |  4 +++-
->  include/hw/riscv/boot_opensbi.h     | 29 ++++++++++++++++++++++++
->  target/riscv/cpu-qom.h              |  1 +
->  target/riscv/cpu.c                  | 28 ++++++++++++++++-------
->  target/riscv/cpu.h                  |  5 ++++-
->  target/riscv/cpu_helper.c           | 25 +++++++++++++++------
->  target/riscv/pmp.c                  |  2 +-
->  tests/avocado/tuxrun_baselines.py   | 16 +++++++++++++
->  11 files changed, 118 insertions(+), 32 deletions(-)
+> diff --git a/hw/intc/sifive_plic.c b/hw/intc/sifive_plic.c
+> index e559f11805..3f3ee96ebc 100644
+> --- a/hw/intc/sifive_plic.c
+> +++ b/hw/intc/sifive_plic.c
+> @@ -189,8 +189,13 @@ static void sifive_plic_write(void *opaque, hwaddr a=
+ddr, uint64_t value,
 >
+>      if (addr_between(addr, plic->priority_base, plic->num_sources << 2))=
+ {
+>          uint32_t irq =3D (addr - plic->priority_base) >> 2;
+> -
+> -        if (((plic->num_priorities + 1) & plic->num_priorities) =3D=3D 0=
+) {
+> +        if (irq =3D=3D 0) {
+> +            /* IRQ 0 source prioority is reserved */
+> +            qemu_log_mask(LOG_GUEST_ERROR,
+> +                          "%s: Invalid source priority write 0x%"
+> +                          HWADDR_PRIx "\n", __func__, addr);
+> +            return;
+> +        } else if (((plic->num_priorities + 1) & plic->num_priorities) =
+=3D=3D 0) {
+>              /*
+>               * if "num_priorities + 1" is power-of-2, make each register=
+ bit of
+>               * interrupt priority WARL (Write-Any-Read-Legal). Just filt=
+er
 > --
-> 2.43.0
+> 2.34.1
 >
 >
 
