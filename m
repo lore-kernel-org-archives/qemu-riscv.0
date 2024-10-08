@@ -4,88 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1FAC2CF042A
-	for <qemu-riscv@archiver.kernel.org>; Tue,  8 Oct 2024 22:52:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 42797CF042B
+	for <qemu-riscv@archiver.kernel.org>; Tue,  8 Oct 2024 22:52:20 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1syJ26-00009v-CF; Tue, 08 Oct 2024 18:50:22 -0400
+	id 1syJ2A-0000Em-U5; Tue, 08 Oct 2024 18:50:26 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <debug@rivosinc.com>)
- id 1syJ24-000093-PC
- for qemu-riscv@nongnu.org; Tue, 08 Oct 2024 18:50:20 -0400
-Received: from mail-pl1-x62c.google.com ([2607:f8b0:4864:20::62c])
+ id 1syJ27-0000BB-6W
+ for qemu-riscv@nongnu.org; Tue, 08 Oct 2024 18:50:23 -0400
+Received: from mail-pl1-x62b.google.com ([2607:f8b0:4864:20::62b])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <debug@rivosinc.com>)
- id 1syJ20-0003tF-Ut
- for qemu-riscv@nongnu.org; Tue, 08 Oct 2024 18:50:20 -0400
-Received: by mail-pl1-x62c.google.com with SMTP id
- d9443c01a7336-20b7eb9e81eso73500245ad.2
- for <qemu-riscv@nongnu.org>; Tue, 08 Oct 2024 15:50:16 -0700 (PDT)
+ id 1syJ24-0003uX-SJ
+ for qemu-riscv@nongnu.org; Tue, 08 Oct 2024 18:50:22 -0400
+Received: by mail-pl1-x62b.google.com with SMTP id
+ d9443c01a7336-20b78ee6298so39750155ad.2
+ for <qemu-riscv@nongnu.org>; Tue, 08 Oct 2024 15:50:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1728427815; x=1729032615;
+ d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1728427819; x=1729032619;
  darn=nongnu.org; 
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=61DmhqGlxZdTdu0z6XnaxhiYNNsj39PmvrjUzzuF3V4=;
- b=ClIxMuHiQ8ZZQplo231m2J5MSM6n5rHrh5T6CqPXFeekFbXo50/rgz6UdTS3M+gGIj
- af8C7+nGex19DcVZgeYXUJnJOVtSv/Q0W1bX5CEB91jD3oglJw60QDM1mItzV1hjSu/j
- caTL7dn6ET8BydJ1e0vbgdvl9FlL8imMvTElrUe6TflXsuWx1umMQ/rIwW1sn99uLK36
- uUYBa099K+1REWQmbOUcaFqlBWS3ONL12BsulxwmA5bxe87i9JsLrPa5u87WRxWALZpf
- imG2ah9an5o/mVcNCMkJ+lOE8hvMBlDyPImDy4iB4E8kylOef+E0v/KTLmThScJEFqz6
- ZaKA==
+ bh=P3fhINZSx5ghMlTitfFFmHEIn/w1CK0xQ5bZQ2eIF2c=;
+ b=DWkSuo96X7jQn4GURP+0pW8O49sSiU48tYFNGhZIepJEMhW8TqftuRY/6QULL0q/AT
+ z/b9uxOgoKlMIGNKjv0gqHo2N2iej/Oj2KmX8whHEJWKb3GKYEvbL4ZdSuZpjDbSHj8P
+ J/EsQ79JUgensDEIXQ2bq7Yq/VSC/UJ/OC9mSQnLocZlf35nac4Y4e6gdgbzCAsSyidx
+ VtTc2spM/8/djhn3fv+Q2m8jb2a8qYOjBbJ5GivkOE8enUoHm4UkbRBURQCsIlXtY5G0
+ bjM0ZBRFX0KTVSDZPOVUtatPh3NcQvaGLdD/bfE1V5As5Av6zWhucw1d1hMkftmowtHI
+ LqQA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728427815; x=1729032615;
+ d=1e100.net; s=20230601; t=1728427819; x=1729032619;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=61DmhqGlxZdTdu0z6XnaxhiYNNsj39PmvrjUzzuF3V4=;
- b=HZUpaL4FEfaidUfKacde0KN37pLfgxsOm/p+2j+d8OxOAvVACoeFdS+0h+wYYw46Ms
- r3GvMXjpqlYn091WiXA1eC5XDBQB0n9YvWEI1ZEe1eQMnuYjnrKsMh2bGztFAdzmily8
- qbwR8FmO5KHv2o3gmMXLj0skfJV4mC0E6YmyUMG3hPZ27ZX3+qPY2ii9YxlIp9F7aIfO
- oSscZQ6geAotvkFT49oRG729ZDHjvLhzTO/y2fBmWP5cxKIqCwmUeJiP7NBg40HubJrU
- jTY69Wx0OxNFmwxehdTvw2K6zYdf1omsX4GfcxPWYLu6+QuF2NK6ObebHBuD8hzBoQUR
- txLg==
-X-Gm-Message-State: AOJu0YziUDPjsRg0C9DFVQyoOS/yT455vit8zr4M45F8aAHRMT3eTM11
- lKM1G4K9/qcex0a0hWp2uY5xh4CPQQFlFMpthTfU1Gi4mYtaaI2HmLYXohvxlxa7Kd/v+kr5Vfs
- r
-X-Google-Smtp-Source: AGHT+IE60vOaedx53a6PzITj5GQ1D48k64F3az1EVTJW0qwB1jtPs1nfFd336iVlYVyxus1dOGXZag==
-X-Received: by 2002:a17:902:e547:b0:20c:68e4:443d with SMTP id
- d9443c01a7336-20c68e44610mr706785ad.34.1728427815502; 
- Tue, 08 Oct 2024 15:50:15 -0700 (PDT)
+ bh=P3fhINZSx5ghMlTitfFFmHEIn/w1CK0xQ5bZQ2eIF2c=;
+ b=oM3YGqh+vXOBBg447W7M1QHUGrDcMhBD3l6g1XGFtE8fA1LjAsB5B/LzKnRuG8svrG
+ hlekeSI/N2jVcwYcPNPNghMriRfxZTt1j3nopUtYJRHtut15vu28pDRBnUE8TZnERgtJ
+ JoTfzYoo9RYP0q8UFo+HpAY49dMtesCnGuJR9DbVHJ0MpSA+PRmvtbBhFy85awuwC4Lg
+ v002Ti4VMn/FH3uDkuq5h/jS1dtC2fULtXfEhkdab1AH9Y55Mtz2izB8aQ5gQ0I/b3ZD
+ zifdtVPfUka/mH6496/HZ10vVeWb1+bnsCpVwzXlZq85PVSOzhhLpq390k2YHMHca9XC
+ 9EJA==
+X-Gm-Message-State: AOJu0YwmICQ5VYi6BIRPNCTDnOP0Q5tIsvm3tkWJNc7Dl9rPdG1yEc61
+ Ql2vhZqjFf0+83uXlM/+n+f4B5SQ4XsBeUGaJa54Ps2U3IGY7JUYqeFiz6bgseQjt04VfvxCtqQ
+ U
+X-Google-Smtp-Source: AGHT+IEbC7MMimJk+cMI03aVtQrhBRrhIMhaknVFRpOKZMhm1vqWJDpy8tsQ/rP0/1kGcYJhCWngiA==
+X-Received: by 2002:a17:902:dad0:b0:20b:4c02:ee66 with SMTP id
+ d9443c01a7336-20c63780057mr9458335ad.43.1728427819398; 
+ Tue, 08 Oct 2024 15:50:19 -0700 (PDT)
 Received: from debug.ba.rivosinc.com ([64.71.180.162])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-20c138af962sm60006105ad.26.2024.10.08.15.50.14
+ d9443c01a7336-20c138af962sm60006105ad.26.2024.10.08.15.50.18
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 08 Oct 2024 15:50:15 -0700 (PDT)
+ Tue, 08 Oct 2024 15:50:19 -0700 (PDT)
 From: Deepak Gupta <debug@rivosinc.com>
 To: qemu-riscv@nongnu.org,
 	qemu-devel@nongnu.org
 Cc: palmer@dabbelt.com, Alistair.Francis@wdc.com, bmeng.cn@gmail.com,
  liwei1518@gmail.com, dbarboza@ventanamicro.com,
  zhiwei_liu@linux.alibaba.com, jim.shu@sifive.com, kito.cheng@sifive.com,
- Deepak Gupta <debug@rivosinc.com>,
- Richard Henderson <richard.henderson@linaro.org>,
- Alistair Francis <alistair.francis@wdc.com>
-Subject: [PATCH v16 01/20] target/riscv: expose *envcfg csr and priv to
- qemu-user as well
-Date: Tue,  8 Oct 2024 15:49:51 -0700
-Message-ID: <20241008225010.1861630-2-debug@rivosinc.com>
+ Deepak Gupta <debug@rivosinc.com>, Andy Chiu <andy.chiu@sifive.com>,
+ Richard Henderson <richard.henderson@linaro.org>
+Subject: [PATCH v16 04/20] target/riscv: save and restore elp state on priv
+ transitions
+Date: Tue,  8 Oct 2024 15:49:54 -0700
+Message-ID: <20241008225010.1861630-5-debug@rivosinc.com>
 X-Mailer: git-send-email 2.45.0
 In-Reply-To: <20241008225010.1861630-1-debug@rivosinc.com>
 References: <20241008225010.1861630-1-debug@rivosinc.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::62c;
- envelope-from=debug@rivosinc.com; helo=mail-pl1-x62c.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::62b;
+ envelope-from=debug@rivosinc.com; helo=mail-pl1-x62b.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
 X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -101,82 +100,171 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Execution environment config CSR controlling user env and current
-privilege state shouldn't be limited to qemu-system only. *envcfg
-CSRs control enabling of features in next lesser mode. In some cases
-bits *envcfg CSR can be lit up by kernel as part of kernel policy or
-software (user app) can choose to opt-in by issuing a system call
-(e.g. prctl). In case of qemu-user, it should be no different because
-qemu is providing underlying execution environment facility and thus
-either should provide some default value in *envcfg CSRs or react to
-system calls (prctls) initiated from application. priv is set to PRV_U
-and menvcfg/senvcfg set to 0 for qemu-user on reest.
+elp state is recorded in *status on trap entry (less privilege to higher
+privilege) and restored in elp from *status on trap exit (higher to less
+privilege).
 
-`henvcfg` has been left for qemu-system only because it is not expected
-that someone will use qemu-user where application is expected to have
-hypervisor underneath which is controlling its execution environment. If
-such a need arises then `henvcfg` could be exposed as well.
-
-Relevant discussion:
-https://lore.kernel.org/all/CAKmqyKOTVWPFep2msTQVdUmJErkH+bqCcKEQ4hAnyDFPdWKe0Q@mail.gmail.com/
+Additionally this patch introduces a forward cfi helper function to
+determine if current privilege has forward cfi is enabled or not based on
+*envcfg (for U, VU, S, VU, HS) or mseccfg csr (for M).
 
 Signed-off-by: Deepak Gupta <debug@rivosinc.com>
-Suggested-by: Richard Henderson <richard.henderson@linaro.org>
+Co-developed-by: Jim Shu <jim.shu@sifive.com>
+Co-developed-by: Andy Chiu <andy.chiu@sifive.com>
 Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 ---
- target/riscv/cpu.c | 5 +++++
- target/riscv/cpu.h | 9 +++++----
- 2 files changed, 10 insertions(+), 4 deletions(-)
+ target/riscv/cpu.h        |  1 +
+ target/riscv/cpu_helper.c | 54 +++++++++++++++++++++++++++++++++++++++
+ target/riscv/op_helper.c  | 17 ++++++++++++
+ 3 files changed, 72 insertions(+)
 
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 658bdb4ae1..24ca0bfcaa 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -1003,7 +1003,12 @@ static void riscv_cpu_reset_hold(Object *obj, ResetType type)
-     }
- 
-     pmp_unlock_entries(env);
-+#else
-+    env->priv = PRV_U;
-+    env->senvcfg = 0;
-+    env->menvcfg = 0;
- #endif
-+
-     env->xl = riscv_cpu_mxl(env);
-     riscv_cpu_update_mask(env);
-     cs->exception_index = RISCV_EXCP_NONE;
 diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index 1619c3acb6..2623f6cf75 100644
+index e9f26b5121..6c5e199e72 100644
 --- a/target/riscv/cpu.h
 +++ b/target/riscv/cpu.h
-@@ -234,8 +234,12 @@ struct CPUArchState {
-     uint32_t elf_flags;
- #endif
+@@ -547,6 +547,7 @@ void riscv_cpu_set_geilen(CPURISCVState *env, target_ulong geilen);
+ bool riscv_cpu_vector_enabled(CPURISCVState *env);
+ void riscv_cpu_set_virt_enabled(CPURISCVState *env, bool enable);
+ int riscv_env_mmu_index(CPURISCVState *env, bool ifetch);
++bool cpu_get_fcfien(CPURISCVState *env);
+ G_NORETURN void  riscv_cpu_do_unaligned_access(CPUState *cs, vaddr addr,
+                                                MMUAccessType access_type,
+                                                int mmu_idx, uintptr_t retaddr);
+diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+index a935377b4a..d7b776c556 100644
+--- a/target/riscv/cpu_helper.c
++++ b/target/riscv/cpu_helper.c
+@@ -33,6 +33,7 @@
+ #include "cpu_bits.h"
+ #include "debug.h"
+ #include "tcg/oversized-guest.h"
++#include "pmp.h"
  
--#ifndef CONFIG_USER_ONLY
-     target_ulong priv;
-+    /* CSRs for execution environment configuration */
-+    uint64_t menvcfg;
-+    target_ulong senvcfg;
+ int riscv_env_mmu_index(CPURISCVState *env, bool ifetch)
+ {
+@@ -63,6 +64,33 @@ int riscv_env_mmu_index(CPURISCVState *env, bool ifetch)
+ #endif
+ }
+ 
++bool cpu_get_fcfien(CPURISCVState *env)
++{
++    /* no cfi extension, return false */
++    if (!env_archcpu(env)->cfg.ext_zicfilp) {
++        return false;
++    }
 +
++    switch (env->priv) {
++    case PRV_U:
++        if (riscv_has_ext(env, RVS)) {
++            return env->senvcfg & SENVCFG_LPE;
++        }
++        return env->menvcfg & MENVCFG_LPE;
 +#ifndef CONFIG_USER_ONLY
-     /* This contains QEMU specific information about the virt state. */
-     bool virt_enabled;
-     target_ulong geilen;
-@@ -445,12 +449,9 @@ struct CPUArchState {
-     target_ulong upmmask;
-     target_ulong upmbase;
++    case PRV_S:
++        if (env->virt_enabled) {
++            return env->henvcfg & HENVCFG_LPE;
++        }
++        return env->menvcfg & MENVCFG_LPE;
++    case PRV_M:
++        return env->mseccfg & MSECCFG_MLPE;
++#endif
++    default:
++        g_assert_not_reached();
++    }
++}
++
+ void cpu_get_tb_cpu_state(CPURISCVState *env, vaddr *pc,
+                           uint64_t *cs_base, uint32_t *pflags)
+ {
+@@ -546,6 +574,15 @@ void riscv_cpu_swap_hypervisor_regs(CPURISCVState *env)
+     }
+     bool current_virt = env->virt_enabled;
  
--    /* CSRs for execution environment configuration */
--    uint64_t menvcfg;
-     uint64_t mstateen[SMSTATEEN_MAX_COUNT];
-     uint64_t hstateen[SMSTATEEN_MAX_COUNT];
-     uint64_t sstateen[SMSTATEEN_MAX_COUNT];
--    target_ulong senvcfg;
-     uint64_t henvcfg;
- #endif
-     target_ulong cur_pmmask;
++    /*
++     * If zicfilp extension available and henvcfg.LPE = 1,
++     * then apply SPELP mask on mstatus
++     */
++    if (env_archcpu(env)->cfg.ext_zicfilp &&
++        get_field(env->henvcfg, HENVCFG_LPE)) {
++        mstatus_mask |= SSTATUS_SPELP;
++    }
++
+     g_assert(riscv_has_ext(env, RVH));
+ 
+     if (current_virt) {
+@@ -1760,6 +1797,11 @@ void riscv_cpu_do_interrupt(CPUState *cs)
+     if (env->priv <= PRV_S && cause < 64 &&
+         (((deleg >> cause) & 1) || s_injected || vs_injected)) {
+         /* handle the trap in S-mode */
++        /* save elp status */
++        if (cpu_get_fcfien(env)) {
++            env->mstatus = set_field(env->mstatus, MSTATUS_SPELP, env->elp);
++        }
++
+         if (riscv_has_ext(env, RVH)) {
+             uint64_t hdeleg = async ? env->hideleg : env->hedeleg;
+ 
+@@ -1808,6 +1850,11 @@ void riscv_cpu_do_interrupt(CPUState *cs)
+         riscv_cpu_set_mode(env, PRV_S, virt);
+     } else {
+         /* handle the trap in M-mode */
++        /* save elp status */
++        if (cpu_get_fcfien(env)) {
++            env->mstatus = set_field(env->mstatus, MSTATUS_MPELP, env->elp);
++        }
++
+         if (riscv_has_ext(env, RVH)) {
+             if (env->virt_enabled) {
+                 riscv_cpu_swap_hypervisor_regs(env);
+@@ -1839,6 +1886,13 @@ void riscv_cpu_do_interrupt(CPUState *cs)
+         riscv_cpu_set_mode(env, PRV_M, virt);
+     }
+ 
++    /*
++     * Interrupt/exception/trap delivery is asynchronous event and as per
++     * zicfilp spec CPU should clear up the ELP state. No harm in clearing
++     * unconditionally.
++     */
++    env->elp = false;
++
+     /*
+      * NOTE: it is not necessary to yield load reservations here. It is only
+      * necessary for an SC from "another hart" to cause a load reservation
+diff --git a/target/riscv/op_helper.c b/target/riscv/op_helper.c
+index 25a5263573..eddedacf4b 100644
+--- a/target/riscv/op_helper.c
++++ b/target/riscv/op_helper.c
+@@ -309,6 +309,15 @@ target_ulong helper_sret(CPURISCVState *env)
+ 
+     riscv_cpu_set_mode(env, prev_priv, prev_virt);
+ 
++    /*
++     * If forward cfi enabled for new priv, restore elp status
++     * and clear spelp in mstatus
++     */
++    if (cpu_get_fcfien(env)) {
++        env->elp = get_field(env->mstatus, MSTATUS_SPELP);
++    }
++    env->mstatus = set_field(env->mstatus, MSTATUS_SPELP, 0);
++
+     return retpc;
+ }
+ 
+@@ -349,6 +358,14 @@ target_ulong helper_mret(CPURISCVState *env)
+     }
+ 
+     riscv_cpu_set_mode(env, prev_priv, prev_virt);
++    /*
++     * If forward cfi enabled for new priv, restore elp status
++     * and clear mpelp in mstatus
++     */
++    if (cpu_get_fcfien(env)) {
++        env->elp = get_field(env->mstatus, MSTATUS_MPELP);
++    }
++    env->mstatus = set_field(env->mstatus, MSTATUS_MPELP, 0);
+ 
+     return retpc;
+ }
 -- 
 2.45.0
 
