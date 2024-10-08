@@ -4,71 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 75645CED24E
-	for <qemu-riscv@archiver.kernel.org>; Tue,  8 Oct 2024 01:29:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 98D1DCED24E
+	for <qemu-riscv@archiver.kernel.org>; Tue,  8 Oct 2024 01:30:54 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sxz2D-0001rp-W8; Mon, 07 Oct 2024 21:29:10 -0400
+	id 1sxz3r-0003E1-P1; Mon, 07 Oct 2024 21:30:51 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1sxz2B-0001rX-Pd; Mon, 07 Oct 2024 21:29:07 -0400
-Received: from mail-vk1-xa2d.google.com ([2607:f8b0:4864:20::a2d])
+ id 1sxz3q-0003Dh-31; Mon, 07 Oct 2024 21:30:50 -0400
+Received: from mail-ua1-x930.google.com ([2607:f8b0:4864:20::930])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1sxz2A-0001Qu-AY; Mon, 07 Oct 2024 21:29:07 -0400
-Received: by mail-vk1-xa2d.google.com with SMTP id
- 71dfb90a1353d-507904d0800so1858993e0c.2; 
- Mon, 07 Oct 2024 18:29:05 -0700 (PDT)
+ id 1sxz3j-0001js-QE; Mon, 07 Oct 2024 21:30:49 -0400
+Received: by mail-ua1-x930.google.com with SMTP id
+ a1e0cc1a2514c-84f965407beso298621241.3; 
+ Mon, 07 Oct 2024 18:30:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1728350945; x=1728955745; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1728351042; x=1728955842; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=wXluBs+iVXc6KdOSe3VOOCiiod9pTBKFvC+tyqg4brc=;
- b=ih0c4mZzYSfcINIPRznAZARdNuHjVnnnaJ9VRQJHoAK7MQWNssHgYmXfMvCkx6bSG0
- MOd4hbmgqJhtBoc+nVcWR+2nnsSv+W+0EQogepdGsfLj3G1/3HZ8hOcoZjeQ+Uty5E6i
- 56WDYsK4dHDLXx1kSDshfQC2wSjQTx+eloRfKsaZFJOkM+yeDU3lQR6HV+AZSbuwTlYw
- CV6CZffzwWOn9V861gKM3y8/+ZTgP1+m5bPb7QFV99PP5epH0o6ZGBmEb3LbOs215buu
- Z6anSzyzKFyWzvjbz0faWq7CgviXibW2sAqdNZrWeGSfypIxV9K5NrDwFw43kcaTYc9N
- Tycw==
+ bh=oKifHFSpcfjlmRYnmhwnCfwktQUFaMDiwzDKEfJqBpU=;
+ b=E4T++4jBh9uA5S8X+6dWOhkuqszOWG4ktNH7GZtN68E5ngqgnQkZH4a1xfX7ww6YrA
+ 4qzXTC/WjtouiTj1sKFtsUvj6o3/mbgrW9kEpQnyt8DSq6YqZ+VQi0AjqHj21hBh1NBN
+ ocQod7tA24V3fyeUuA4/x/I8wp458oFX+VZEa+Ox4/IhTEr28kk4/iKibDTjXo9pUsY5
+ HyGiTt+BUmOZlk6Nn0VxcmV3XsdsjA0KNN8Gs1FBjc27zg0wgCg2kEhcORCbGzYch0c+
+ SfAvv8AcIvZfbVc4PXIR2GV0qlnEONyBGqPeWntWH2onoXXW9umpmGSNSVjjSUnuxsWY
+ pMig==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728350945; x=1728955745;
+ d=1e100.net; s=20230601; t=1728351042; x=1728955842;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=wXluBs+iVXc6KdOSe3VOOCiiod9pTBKFvC+tyqg4brc=;
- b=GdgPK5wj4y/TkLMwoGbOYmK86zE6TofQ+ozhpirGFE6rBJuKIoiXd3RH7AbpBH+0DK
- LIjzD4ZbPgfK1rmequCvDH4YOrhIGcdO3PfIYMbXr0TSX3+kVR9ItV60Xm+ZecXCnjNX
- MpsVaeL9C03SoKC7psZxTo4rKBXSO+7i2I9R6F53jy/JSEsvtKu7hqoBukYg3MCZkDPm
- 9WHSe4iMHu9uAbxryvIaJjoyXkErEDEVzSLGpXM1F44zcpiCFPvkhsntAMLBkehc1PVd
- vdq8Dmr3gLBQzGInEwrq/HOL92xz+SheW32Ai8eSK2hEQ5XxeinzShHT29LlXGfjCW5Y
- BYHg==
+ bh=oKifHFSpcfjlmRYnmhwnCfwktQUFaMDiwzDKEfJqBpU=;
+ b=U9iz08wgagzRcJmTz2xR8+1lVK1qL3sDqvgpHhIdttQw+LKJ3NhixX4SHUmLP4zwvJ
+ S2nhRhzFT6zDmRq5u1zmBkv+ELi3GxmZBpVbRD7556j2y5+ywAI+HM+XSaMY8mo6fa26
+ ubkH7Zz8iPTH6h7SuCssMYAw3b25Ge0kOwJaRZvzNRc1fFrHf+sLCdDkxO4wTUztTQRY
+ 5TKVNCl5JAToZHFiypRR3IS8S2MJuT+kmeVfrWcQlERHbUnNuvtgivToeixIDs4uvqHy
+ La/4AV2RnD4DB3dtkrbAQf/+UoEsndlH49dMEjxB32Tm8fc39U6pZU7TkYDDe3XXFa2w
+ D2bg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVxi3y3sz4uio8TeldJwQj69Gq+V9h9z1ImxeJO2BNLW1futC4XuWMXAeWxguZ33XgfiJW80ymllw9f@nongnu.org,
- AJvYcCVyg1x9wSfKCCROk3IJrKLSwyAcxhgCnTHxsgYHvDLE66pxB3iBNAZBpY3YSP+dP6Zq2mEj6+OWDBpZRQ==@nongnu.org
-X-Gm-Message-State: AOJu0YwSuKde6aFhMf0mDLDR5J66j7ff/AkptlMJsb+V8Yq3VqUVOhY0
- WgCm5y2b69T11EQzGtiT40WjCL74/s+JPYefFKof1yEbtoZeVVq4VeL8ghECaU6gcmVNkDf1f+F
- 2J9AxLJOlSGdBAhp16Dsfj0PXNY0=
-X-Google-Smtp-Source: AGHT+IFyxNOKd3aF8hhf9v77gPUZPc8+MWR46KBa3HdUFy40XJlFBdbpUM/h2hz3CjeG4CGiAwgBaATaBtuMSABidE0=
-X-Received: by 2002:a05:6122:1dac:b0:50a:cb38:31c7 with SMTP id
- 71dfb90a1353d-50c8545b23cmr10990793e0c.3.1728350944737; Mon, 07 Oct 2024
- 18:29:04 -0700 (PDT)
+ AJvYcCWo8Bs7gBOMP0FeKaxBgv8rLh8c9F2NxobA2jXoT5WxJmTeLOSXd74dxc2XUkji2zPhQOijtxpiyZTz@nongnu.org
+X-Gm-Message-State: AOJu0YwE0JtTOuQwwMy8DfT4kOfoH1pGHawSU3vr6Hyp2ZJPk0LJH152
+ gjKYqXDrq8OaRkSidgTqApeAcdU2f51pM/b7LjqAkYs4GpIlhavuLpuzwxArPXd2i9fmdHjrZDZ
+ GxDGv2P4eLOD9X5vuZImZV24QMhw=
+X-Google-Smtp-Source: AGHT+IFr7gbLzlb2uL/CbydTofMcuMrjTFkL2bWCj2oY9TBFfL4DJgT8KVPbUojLVE1qhgevbJhDBLiped81EP7jIOU=
+X-Received: by 2002:a05:6102:370a:b0:497:7b07:8d08 with SMTP id
+ ada2fe7eead31-4a4057860dfmr7770195137.17.1728351042071; Mon, 07 Oct 2024
+ 18:30:42 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240918140229.124329-1-s.makarov@syntacore.com>
-In-Reply-To: <20240918140229.124329-1-s.makarov@syntacore.com>
+References: <20240930165258.72258-1-rbradford@rivosinc.com>
+In-Reply-To: <20240930165258.72258-1-rbradford@rivosinc.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Tue, 8 Oct 2024 11:28:38 +1000
-Message-ID: <CAKmqyKMaEiHAPGhyBJKSKrLKSYqfosD4Px=BZFCORubd28zT=g@mail.gmail.com>
-Subject: Re: [PATCH 0/2] riscv: hw/intc: Fixes for standard conformance
-To: Sergey Makarov <s.makarov@syntacore.com>
-Cc: Alistar.Francis@wdc.com, bmeng.cn@gmail.com, palmer@dabbelt.com, 
- qemu-riscv@nongnu.org, qemu-devel@nongnu.org
+Date: Tue, 8 Oct 2024 11:30:16 +1000
+Message-ID: <CAKmqyKP-Z8MP3ijv7JhA-khNFrcQ5C3DpePtXg-nCVmQeD2zkQ@mail.gmail.com>
+Subject: Re: [PATCH] target/riscv: Set vtype.vill on CPU reset
+To: Rob Bradford <rbradford@rivosinc.com>
+Cc: qemu-devel@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>, 
+ Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bmeng.cn@gmail.com>, 
+ Weiwei Li <liwei1518@gmail.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>, 
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
+ "open list:RISC-V TCG CPUs" <qemu-riscv@nongnu.org>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::a2d;
- envelope-from=alistair23@gmail.com; helo=mail-vk1-xa2d.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::930;
+ envelope-from=alistair23@gmail.com; helo=mail-ua1-x930.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -92,30 +95,18 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Thu, Sep 19, 2024 at 12:04=E2=80=AFAM Sergey Makarov <s.makarov@syntacor=
-e.com> wrote:
+On Tue, Oct 1, 2024 at 2:53=E2=80=AFAM Rob Bradford <rbradford@rivosinc.com=
+> wrote:
 >
-> *** Patchset goal ***
+> The RISC-V unprivileged specification "31.3.11. State of Vector
+> Extension at Reset" has a note that recommends vtype.vill be set on
+> reset as part of ensuring that the vector extension have a consistent
+> state at reset.
 >
-> This patchset aims to improve standard conformance for SiFive PLIC
-> implementation.
+> This change now makes QEMU consistent with Spike which sets vtype.vill
+> on reset.
 >
-> *** Testing cases ***
->
-> Currently there are no automated tests for these changes, but there
-> are several test cases, with which these changes may be checked:
-> 1. Zeroth priority register can be checked by reading it after
->    writing to it. Without patch its value would be the same which
->    is written there, but with it it would be zero;
-> 2. Trigger call of `sifive_plic_irq_request` with level 0.
->    Without second patch it will clear pending bit, but with it
->    pending bit won't be cleared.
-> If anyone knows how this can be turned into automated test, help
-> would be appreciated.
->
-> Sergey Makarov (2):
->   hw/intc: Make zeroth priority register read-only
->   hw/intc: Don't clear pending bits on IRQ lowering
+> Signed-off-by: Rob Bradford <rbradford@rivosinc.com>
 
 Thanks!
 
@@ -123,12 +114,25 @@ Applied to riscv-to-apply.next
 
 Alistair
 
+> ---
+>  target/riscv/cpu.c | 1 +
+>  1 file changed, 1 insertion(+)
 >
->  hw/intc/sifive_plic.c | 15 +++++++++++----
->  1 file changed, 11 insertions(+), 4 deletions(-)
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index 4bda754b01..af602e3caf 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -997,6 +997,7 @@ static void riscv_cpu_reset_hold(Object *obj, ResetTy=
+pe type)
+>      cs->exception_index =3D RISCV_EXCP_NONE;
+>      env->load_res =3D -1;
+>      set_default_nan_mode(1, &env->fp_status);
+> +    env->vill =3D true;
 >
+>  #ifndef CONFIG_USER_ONLY
+>      if (cpu->cfg.debug) {
 > --
-> 2.34.1
+> 2.46.0
 >
 >
 
