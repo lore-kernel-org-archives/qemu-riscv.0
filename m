@@ -4,87 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DCF67CEF172
-	for <qemu-riscv@archiver.kernel.org>; Tue,  8 Oct 2024 13:19:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E9CE1CF042B
+	for <qemu-riscv@archiver.kernel.org>; Tue,  8 Oct 2024 22:50:44 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1syA7G-00081D-U5; Tue, 08 Oct 2024 09:19:06 -0400
+	id 1syJ2F-0000I2-40; Tue, 08 Oct 2024 18:50:31 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1syA7E-00080M-72
- for qemu-riscv@nongnu.org; Tue, 08 Oct 2024 09:19:04 -0400
-Received: from mail-pf1-x435.google.com ([2607:f8b0:4864:20::435])
+ (Exim 4.90_1) (envelope-from <debug@rivosinc.com>)
+ id 1syJ2C-0000Fx-TE
+ for qemu-riscv@nongnu.org; Tue, 08 Oct 2024 18:50:29 -0400
+Received: from mail-pl1-x636.google.com ([2607:f8b0:4864:20::636])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1syA7C-0006Tx-Ir
- for qemu-riscv@nongnu.org; Tue, 08 Oct 2024 09:19:03 -0400
-Received: by mail-pf1-x435.google.com with SMTP id
- d2e1a72fcca58-71dec1cf48fso3343892b3a.0
- for <qemu-riscv@nongnu.org>; Tue, 08 Oct 2024 06:19:02 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <debug@rivosinc.com>)
+ id 1syJ2B-0003xK-Dr
+ for qemu-riscv@nongnu.org; Tue, 08 Oct 2024 18:50:28 -0400
+Received: by mail-pl1-x636.google.com with SMTP id
+ d9443c01a7336-20b9b35c7c3so64959385ad.3
+ for <qemu-riscv@nongnu.org>; Tue, 08 Oct 2024 15:50:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1728393541; x=1728998341; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=vUtWP+u6fE63bthqpfLYVO0uC7oFUPoAQibLzBQsyDo=;
- b=XnF5ZSwBE/XZr2hRCZMJuCbwSGhaP8xb5tRt1bOjRl2M+Cz+19+SIeMkq7DRy9pE/a
- fqnzBTXmlxTOR5gDWlk5WScHSHl5U99mknzRoc8nfnnbHT93rt2gjXbTuAMRRb+FCDF7
- FVLsX+MKpkmEtJQdTp8YRDaND893OhtHnXrrW94ZQVbq3Su1v0eWSfx1BM53AElwVGxC
- Rr5D3mmEoqiKsalc7jPjsjMQmgIUJ+SUsHc8Pj8Og4L8QUUvJgEDR54515eZBxWf/yuz
- fdHI+epU57z4ukiEZqtavlBWQDY4ytb6DMpMlMHX4J3EgbrZAjLP7tjYaxIxmEcByKWV
- NAyw==
+ d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1728427826; x=1729032626;
+ darn=nongnu.org; 
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=suiGAQRfyMh8K1b9uLibp1VRaeCHB9aUrAtUyQNMeEg=;
+ b=PEAHefjbCyIOMfbfb8YPhlhMmUFhlcdajwIqJL0x90ilOuDzh9vhzL4PaUW83EtPdH
+ 9FLBoRESys+WR8LhJiucWoQxrAWF5+DnQv1galzc6qHtvZw0Urrqq7C9D0EGatOS4vDY
+ AAoDcf+4nYnTEIWlUrnGnfN+m3lcf9pSEaOLnWwxFF7anMoWQLtogYA5C1nZV/VC2xHN
+ gAjgwxFdL8ZvVDWLqrIee3vQpeTYti21vhQhaEXocHm6qi7PzhhSmMT6PU2dRyz6OL7z
+ f+ZmJPGeHbHsTsdv7CvY5xFCESYjQbPy/otbQesNb+pEz+78N4BEBfcF1ir2UmJlVDcE
+ iERw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728393541; x=1728998341;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=vUtWP+u6fE63bthqpfLYVO0uC7oFUPoAQibLzBQsyDo=;
- b=jEvY4lPSyAnBfh6LVgyNeLyDHkDkCNS2PVloHWBRbaXlr4Cc7/hsZDlymDS5jO/CnL
- t9tCY6dfAz1EP875QbD7mzmUoioYnFRIsw3ViT5TmXMiCYNA3TR4JMKwP/Fait3QSH+6
- 3/CCOPj0tOTghqcPrDL4vc8MYRXQ+syxH6scdEIwKaj7iMitqMKSJftM/ihmB3wLumbh
- dghPcZHM8Pv+Ypcwxt9oOSnQdzPfCTLjGyiNCEYMHOb/rLvo6LJIOXhBP9kB2BHQ7g53
- IrAE3EeeVYC4bm1pSbRTMSPTCGVGjkD9rZ85mKKFUWp9XaX3eyESec53UXsHM40sO4dR
- Xcug==
-X-Gm-Message-State: AOJu0YzmhHk/MtTnbAz25IEtGs3oLmWMjDKT0GRM9gCwhswHV/j6PTnB
- QLZgMaU+WToqXZcSrrHG7Bjzpxs9bioxEfQQv+psOEYiICT2u7DZm2W/qPT3lEM=
-X-Google-Smtp-Source: AGHT+IFRaK32VGNx4JvMuNiGzmCwsEjodo3m7EovrXjrx68PTurvuMFanv4rTJyKTCiu112MVq6Vtw==
-X-Received: by 2002:a05:6a00:ac1:b0:717:8aaf:43be with SMTP id
- d2e1a72fcca58-71de22de04dmr25890024b3a.0.1728393540732; 
- Tue, 08 Oct 2024 06:19:00 -0700 (PDT)
-Received: from [192.168.0.4] (174-21-81-121.tukw.qwest.net. [174.21.81.121])
+ d=1e100.net; s=20230601; t=1728427826; x=1729032626;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=suiGAQRfyMh8K1b9uLibp1VRaeCHB9aUrAtUyQNMeEg=;
+ b=biLzXLmI9PwPyxkxmp4Qzl4CI5jmXeCpdl+FG4gEIWQIOx7OlI3TkxnZRFtCATR0Qw
+ aP2hqcYlfV5rJZrt/JxIy2MKxAUhY+p8N9tAbX0pE3TsHwMnYoZASVUPXFkVOV8/d+Ib
+ rYE9f0ukitdcWDgz3SljaO905btcuItd6fzov3TtH8ykdCHJLchS8JdJhBPXc+9EFzX8
+ pqg11ST5rBdl8agJVCEEFSPXCfLPhcjxO0+fTciUU/pj6tO1NHItthgM8XemFaWwGgiL
+ oKFiDmBaIfc26WKdbgH/UEYpKO57D4/4EH1e6JpkhwDgRHoqCb7RZI16sMGUuQqd9gTY
+ coTA==
+X-Gm-Message-State: AOJu0Yzsyu81oqcfxQlyzi/nVZTx+SXINC8hO1Owf5+gVrqEuMfqpkJk
+ unF67hMmlIJBc/KIjZ5+69gZ/JT6ySk4+Gb5wrOPs57G5PWTV/0vZHSnTbB9ieKrEOgUs10ySfl
+ g
+X-Google-Smtp-Source: AGHT+IE1IZTwJVEGdid5Qwr+4IuRz3Iz4YUg8XMoaA6zrUqeDvyGJ6IWuEDltfBxhMX6iORM3vIecw==
+X-Received: by 2002:a17:903:18f:b0:202:4047:e419 with SMTP id
+ d9443c01a7336-20c6377bb70mr8421435ad.25.1728427825915; 
+ Tue, 08 Oct 2024 15:50:25 -0700 (PDT)
+Received: from debug.ba.rivosinc.com ([64.71.180.162])
  by smtp.gmail.com with ESMTPSA id
- 41be03b00d2f7-7e9f6833a95sm5803560a12.52.2024.10.08.06.18.59
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 08 Oct 2024 06:19:00 -0700 (PDT)
-Message-ID: <4a1bf9c0-7dad-4762-8131-709c1013469a@linaro.org>
-Date: Tue, 8 Oct 2024 06:18:58 -0700
+ d9443c01a7336-20c138af962sm60006105ad.26.2024.10.08.15.50.24
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 08 Oct 2024 15:50:25 -0700 (PDT)
+From: Deepak Gupta <debug@rivosinc.com>
+To: qemu-riscv@nongnu.org,
+	qemu-devel@nongnu.org
+Cc: palmer@dabbelt.com, Alistair.Francis@wdc.com, bmeng.cn@gmail.com,
+ liwei1518@gmail.com, dbarboza@ventanamicro.com,
+ zhiwei_liu@linux.alibaba.com, jim.shu@sifive.com, kito.cheng@sifive.com,
+ Deepak Gupta <debug@rivosinc.com>,
+ Alistair Francis <alistair.francis@wdc.com>
+Subject: [PATCH v16 09/20] target/riscv: Expose zicfilp extension as a cpu
+ property
+Date: Tue,  8 Oct 2024 15:49:59 -0700
+Message-ID: <20241008225010.1861630-10-debug@rivosinc.com>
+X-Mailer: git-send-email 2.45.0
+In-Reply-To: <20241008225010.1861630-1-debug@rivosinc.com>
+References: <20241008225010.1861630-1-debug@rivosinc.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v5 03/12] tcg/riscv: Add vset{i}vli and ld/st vec ops
-To: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>, qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, palmer@dabbelt.com, alistair.francis@wdc.com,
- dbarboza@ventanamicro.com, liwei1518@gmail.com, bmeng.cn@gmail.com,
- TANG Tiancheng <tangtiancheng.ttc@alibaba-inc.com>
-References: <20241007025700.47259-1-zhiwei_liu@linux.alibaba.com>
- <20241007025700.47259-4-zhiwei_liu@linux.alibaba.com>
- <a370de66-d966-44d2-9dee-091b28082fcc@linaro.org>
- <e6cd032a-e183-445c-821e-9fed93fe0389@linux.alibaba.com>
-Content-Language: en-US
-From: Richard Henderson <richard.henderson@linaro.org>
-In-Reply-To: <e6cd032a-e183-445c-821e-9fed93fe0389@linux.alibaba.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::435;
- envelope-from=richard.henderson@linaro.org; helo=mail-pf1-x435.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::636;
+ envelope-from=debug@rivosinc.com; helo=mail-pl1-x636.google.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -100,93 +100,25 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 10/8/24 01:51, LIU Zhiwei wrote:
->> It occurs to me that, rather than caching valid_frac_lmul[][], we can pre-compute 
->> encode_vtype and lmul_eq_avl.
-> 
-> Do you mean cache vtype and lmul_eq_avl for different (lmul, sew) pairs instead of 
-> valid_frac_lmul?
+Signed-off-by: Deepak Gupta <debug@rivosinc.com>
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+---
+ target/riscv/cpu.c | 1 +
+ 1 file changed, 1 insertion(+)
 
-Or even one step further:
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index 05f727222e..135559fc95 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -1469,6 +1469,7 @@ const RISCVCPUMultiExtConfig riscv_cpu_extensions[] = {
+     MULTI_EXT_CFG_BOOL("sscofpmf", ext_sscofpmf, false),
+     MULTI_EXT_CFG_BOOL("smcntrpmf", ext_smcntrpmf, false),
+     MULTI_EXT_CFG_BOOL("zifencei", ext_zifencei, true),
++    MULTI_EXT_CFG_BOOL("zicfilp", ext_zicfilp, false),
+     MULTI_EXT_CFG_BOOL("zicsr", ext_zicsr, true),
+     MULTI_EXT_CFG_BOOL("zihintntl", ext_zihintntl, true),
+     MULTI_EXT_CFG_BOOL("zihintpause", ext_zihintpause, true),
+-- 
+2.45.0
 
-typedef struct VsetCache {
-     unsigned movi_insn;
-     unsigned vset_insn;
-} VsetCache;
-
-static VsetCache riscv_vset_cache[3][4];
-
-static void set_vtype(TCGContext *s, TCGType type, MemOp vsew)
-{
-     const VsetCache *p = &riscv_vset_cache[type - TCG_TYPE_V64][vsew];
-
-     s->riscv_cur_type = type;
-     s->riscv_cur_vsew = vsew;
-
-     if (p->movi_insn) {
-         tcg_out32(s->p->movi_insn);
-     }
-     tcg_out32(s, p->vset_insn);
-}
-
-static bool vtype_check(unsigned vtype)
-{
-     unsigned long tmp;
-     asm("vsetvl %0, zero, %1" : "=r"(tmp) : "r"(vtype));     /* in .inst form */
-     return tmp != 0;
-}
-
-static void probe_frac_lmul_1(TCGType type, MemOp vsew)
-{
-     VsetCache *p = &riscv_vset_cache[type - TCG_TYPE_V64][vsew];
-     unsigned avl = tcg_type_size(type) >> vsew;
-     int lmul = type - riscv_lg2_vlenb;
-     unsigned vtype = encode_vtype(true, true, vsew, lmul & 7);
-     bool lmul_eq_avl = true;
-
-     /* Guaranteed by Zve64x. */
-     assert(lmul < 3);
-
-     /*
-      * For LMUL < -3, the host vector size is so large that TYPE
-      * is smaller than the minimum 1/8 fraction.
-      *
-      * For other fractional LMUL settings, implementations must
-      * support SEW settings between SEW_MIN and LMUL * ELEN, inclusive.
-      * So if ELEN = 64, LMUL = 1/2, then SEW will support e8, e16, e32,
-      * but e64 may not be supported. In other words, the hardware only
-      * guarantees SEW_MIN <= SEW <= LMUL * ELEN.  Check.
-      */
-     if (lmul < 0 && (lmul < -3 || !vtype_check(vtype)) {
-         vtype = encode_vtype(true, true, vsew, VLMUL_M1);
-         lmul_eq_avl = false;
-     }
-
-     if (avl < 32) {
-         p->vset_insn = encode_vseti(OPC_VSETIVLI, TCG_REG_ZERO, avl, vtype);
-     } else if (lmul_eq_avl) {
-         /* rd != 0 and rs1 == 0 uses vlmax */
-         p->vset_insn = encode_vset(OPC_VSETVLI, TCG_REG_TMP0, TCG_REG_ZERO, vtype);
-     } else {
-         p->movi_insn = encode_i(OPC_ADDI, TCG_REG_TMP0, TCG_REG_ZERO, avl);
-         p->vset_insn = encode_vset(OPC_VSETVLI, TCG_REG_ZERO, TCG_REG_TMP0, vtype);
-     }
-}
-
-static void probe_frac_lmul(void)
-{
-     /* Match riscv_lg2_vlenb to TCG_TYPE_V64. */
-     QEMU_BUILD_BUG_ON(TCG_TYPE_V64 != 3);
-
-     for (TCGType t = TCG_TYPE_V64; t <= TCG_TYPE_V256; t++) {
-         for (MemOp e = MO_8; e <= MO_64; e++) {
-             probe_frac_lmul_1(t, e);
-         }
-     }
-}
-
-So that everything is pre-computed at startup.
-
-
-r~
 
