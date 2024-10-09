@@ -4,86 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AA0C2CF042D
-	for <qemu-riscv@archiver.kernel.org>; Wed,  9 Oct 2024 01:38:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 79BC8CF043B
+	for <qemu-riscv@archiver.kernel.org>; Wed,  9 Oct 2024 03:52:27 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1syLeX-0005PP-My; Tue, 08 Oct 2024 21:38:13 -0400
+	id 1syNk7-0006J5-Ah; Tue, 08 Oct 2024 23:52:07 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1syLeV-0005Og-5o
- for qemu-riscv@nongnu.org; Tue, 08 Oct 2024 21:38:11 -0400
-Received: from mail-pl1-x634.google.com ([2607:f8b0:4864:20::634])
+ (Exim 4.90_1) (envelope-from <atishp@rivosinc.com>)
+ id 1syNk6-0006Iq-GH
+ for qemu-riscv@nongnu.org; Tue, 08 Oct 2024 23:52:06 -0400
+Received: from mail-pf1-x433.google.com ([2607:f8b0:4864:20::433])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1syLeT-0002i0-8Q
- for qemu-riscv@nongnu.org; Tue, 08 Oct 2024 21:38:10 -0400
-Received: by mail-pl1-x634.google.com with SMTP id
- d9443c01a7336-20b6c311f62so55995625ad.0
- for <qemu-riscv@nongnu.org>; Tue, 08 Oct 2024 18:38:08 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <atishp@rivosinc.com>)
+ id 1syNk4-0007sM-Du
+ for qemu-riscv@nongnu.org; Tue, 08 Oct 2024 23:52:06 -0400
+Received: by mail-pf1-x433.google.com with SMTP id
+ d2e1a72fcca58-71df2b0a2f7so3215394b3a.3
+ for <qemu-riscv@nongnu.org>; Tue, 08 Oct 2024 20:52:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1728437887; x=1729042687; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=kx9e1ru/C4RfIorxCVdypn59eLRtvKXerUCvaGI/Hj0=;
- b=iDaqyXHq+Z/663Q+gL0J/0Q5BGW/QLYGTz6XiAPiIEAnoZkoRHTUqtLKGzxS6FMVXa
- Yzv9iy6FWRdGCKdNYwX7+YATIYo0ZQyDucIjByCawc5GRh+UHPIk4Az/d6QHoqkxasy/
- w0xwOZ9OHeYx07N88+utyNND3Clu3jWvBjBVEVRoNqsVOGuxcD2csO+JI1X4Uzb6CIkC
- K6H/f08FhPuTN3YaL4plWQmklyb+TXjMG7pMhBpmtP6dLEJ6xQLWUGG7g11FuuJiitXc
- T0MMAI3GSyEMESTRifXVU39MU3rL96S2a1PzwtJXPnuC2IP2Zve+nEK3dCxLWL/cyGm9
- aC0g==
+ d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1728445922; x=1729050722;
+ darn=nongnu.org; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=zm5uKMZ1YJ4NZYBCBWN5xcaqHfKmlW82HIGsBN15l98=;
+ b=Xs2BXeILOXrLmocOUadM6kVhWrk7ZpalCGmq/1oiS2+KK1a+LKifNj5xoWtef63g0G
+ oPuGwAuK+IHVY6J2Z+tYJnmZeLHp/QkXLCV5nt9f/j7osG9PyecYRT2gPHPsNwbufkjA
+ xZn7CgR3Y9ZTBSKjo87+GwWfB3D+7mLD5z9vipurWk1boDqDVq5FcDertqtN/BiLKxqL
+ 45NU4E1U6V3myNlv4eBeRf9bqgEvNAATry/tn3wIBvDEYbRGwtJVhAIaJ6OzTzg/scVT
+ bf6YxWh10wB6qr0tyIAz35pp4oVcgancijhYZ1AxW8nFDJQ9IryFw1g5Pmrbc2Dzy5N9
+ nzrQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728437887; x=1729042687;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=kx9e1ru/C4RfIorxCVdypn59eLRtvKXerUCvaGI/Hj0=;
- b=rM/FBqISDguKHWeqwAoIc5R205Ll2JZTrjuWi7bRUAuqspVr2BjbAyEMtQ8JtAQSBc
- 4sUY0BzgD54jX+6n6q3ZzIsMGeBhtak7d8jnIjNaJmtsIWtZWLuVw8g8kxuPcRIP2FoH
- 4DVHjiNPddxwXHsZ1uGDPCGrkAut+ChHuiN/DDTj+3evzMr07HOXpOdz6CXbAPsxnRIo
- 9QHzyJouYpS5kY5w8/R1i64nU+IOa2GPv7kjhPO8sxbLBkSIblkCWW6aVRn4WXbISFtV
- FkWYVxQyLo6L1WJU31fy6W7UQ/KnYGmTHW2z/Z0Tv0DxmFE/+5Wt7hbYw25gX52P+V7t
- Q0Aw==
-X-Gm-Message-State: AOJu0YyLV/44tQtCGL96K6twVab0xcb1hSfV9ve/AXSx33C03H8mFCc5
- UflFVfHUFOQsd2W0z6r0PAfmXAsq+rREUzAhG4IOk7FjCs3ekG3vdOI2Io01gHs=
-X-Google-Smtp-Source: AGHT+IEtCClo7xFdWLUnxKQgzkGDPuVdeL+yI1DSE5v0NPhdjnMrbB3jm2ZykWOZfLgPo9p5NAUidg==
-X-Received: by 2002:a17:902:ecce:b0:20b:8ed8:9c74 with SMTP id
- d9443c01a7336-20c63802504mr12119275ad.49.1728437887598; 
- Tue, 08 Oct 2024 18:38:07 -0700 (PDT)
-Received: from [192.168.0.4] (174-21-81-121.tukw.qwest.net. [174.21.81.121])
- by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-20c139876c7sm61374425ad.249.2024.10.08.18.38.06
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 08 Oct 2024 18:38:07 -0700 (PDT)
-Message-ID: <9c6ed649-846b-4f1a-bcd1-b5b8a0d589f9@linaro.org>
-Date: Tue, 8 Oct 2024 18:38:05 -0700
+ d=1e100.net; s=20230601; t=1728445922; x=1729050722;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=zm5uKMZ1YJ4NZYBCBWN5xcaqHfKmlW82HIGsBN15l98=;
+ b=bvnavTXXI7mEGkKDtAQR4qiLQzstMLQN9zBh49pFwb8P3O2qqufs+ccf0RAEyEVLvZ
+ f81sKUUJaBKTKCPAQ3c7bNKzF/f1kLGlCNEsxmuqU60WjtNXyvy9Ukx6/yQ1QL1E0bWm
+ agVExlWPSYBvj87X+JosZmZbHLDMmT1k8CmPafnPBpkF3FbSwIl7s00rzncQDHKqD1tB
+ RLxDRq+Zaxj5XWckzXh3ojRAh+U/DA2sz/OYstn0z9T/Vq9vyq4MUjoTBdGc3VKYznZ3
+ qPC8axUiM4cK49aDq3KNKYVE+SchSVQeIgmnZw3+j3IoUOuV48iY5NRkVZF49mWeTdwy
+ KqUQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWjQiNjiA6Sj9oftRFK1iqDWx1x5y8qpCZWTh1BH4ni2tkyd8BT4OYQf8ucZ2xdHww2KIBb+0/3DKcm@nongnu.org
+X-Gm-Message-State: AOJu0Yx4sAiW0TEcL6BSWvqBfoyO5Qn/nqLRwXGGSBZKpT7EFFxkQFm3
+ VVItkSOjaH31OPu1sc1Igdgq7GURNH2FCjobNA0PYCO6Km5C7YW9fushG2naDDbcO7XEPA+0PhT
+ 4Q5LhFTdffXQUUhDqXPtVniClpJQP7rZb95BiYw==
+X-Google-Smtp-Source: AGHT+IE2jCukXJi9D80kULoWxmIOMwLrJzRvAB2QGMGRL1sw30K8fLn572MWLmNpIFlVWxkdU2h1+hkpT23efOmc5xg=
+X-Received: by 2002:a05:6a20:d497:b0:1cf:2d52:415e with SMTP id
+ adf61e73a8af0-1d8a3c3a48amr1338673637.36.1728445922477; Tue, 08 Oct 2024
+ 20:52:02 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v5 02/12] tcg/riscv: Add basic support for vector
-To: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>, qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, palmer@dabbelt.com, alistair.francis@wdc.com,
- dbarboza@ventanamicro.com, liwei1518@gmail.com, bmeng.cn@gmail.com,
- Huang Shiyuan <swung0x48@outlook.com>,
- TANG Tiancheng <tangtiancheng.ttc@alibaba-inc.com>
-References: <20241007025700.47259-1-zhiwei_liu@linux.alibaba.com>
- <20241007025700.47259-3-zhiwei_liu@linux.alibaba.com>
-Content-Language: en-US
-From: Richard Henderson <richard.henderson@linaro.org>
-In-Reply-To: <20241007025700.47259-3-zhiwei_liu@linux.alibaba.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::634;
- envelope-from=richard.henderson@linaro.org; helo=mail-pl1-x634.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+References: <20240910174747.148141-1-alexei.filippov@syntacore.com>
+ <CAKmqyKPH33Lf5YdNrdHEQ9K0ZLrnJmvcGi9DjsP6gKNQZYAxaA@mail.gmail.com>
+In-Reply-To: <CAKmqyKPH33Lf5YdNrdHEQ9K0ZLrnJmvcGi9DjsP6gKNQZYAxaA@mail.gmail.com>
+From: Atish Kumar Patra <atishp@rivosinc.com>
+Date: Tue, 8 Oct 2024 20:51:51 -0700
+Message-ID: <CAHBxVyEFDkDm5Tiytiemxohj1YdqdBiKk2YSiFdQ83dqN5zvyw@mail.gmail.com>
+Subject: Re: [RFC PATCH 0/2] target/riscv: Add support for machine specific
+ pmu's events
+To: Alistair Francis <alistair23@gmail.com>
+Cc: Alexei Filippov <alexei.filippov@syntacore.com>, palmer@dabbelt.com, 
+ alistair.francis@wdc.com, bmeng.cn@gmail.com, dbarboza@ventanamicro.com, 
+ zhiwei_liu@linux.alibaba.com, liwei1518@gmail.com, qemu-devel@nongnu.org, 
+ qemu-riscv@nongnu.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2607:f8b0:4864:20::433;
+ envelope-from=atishp@rivosinc.com; helo=mail-pf1-x433.google.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -99,20 +96,135 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 10/6/24 19:56, LIU Zhiwei wrote:
-> +    }
->   
->       tcg_target_call_clobber_regs = -1u;
->       tcg_regset_reset_reg(tcg_target_call_clobber_regs, TCG_REG_S0);
+On Mon, Oct 7, 2024 at 7:52=E2=80=AFPM Alistair Francis <alistair23@gmail.c=
+om> wrote:
+>
+> On Wed, Sep 11, 2024 at 3:49=E2=80=AFAM Alexei Filippov
+> <alexei.filippov@syntacore.com> wrote:
+> >
+> > Following original patch [1] here's a patch with support of machine
+> > specific pmu events and PoC with initial support for sifive_u's HPM.
+>
+> Thanks for the patch.
+>
+> I'm hesitate to support these callback functions as I feel they
+> (callbacks in the CPU to the machine in general) are clunky.
+>
+> I think the cover letter, code and commit messages need more details here=
+.
+>
+> First can you link to the exact spec you are trying to implement
+> (RISC-V has a habit of creating multiple "ratified" specs that are all
+> incompatible). It's really handy to point to the exact PDF in the
+> cover letter or commit message to just be really clear what you are
+> supporting.
+>
 
-I believe all of the vector registers are call-clobbered?
-This needs
+This patch is trying to implement SiFive specific event encodings.
+There is no standard
+RISC-V ISA involved here.
 
--       tcg_target_call_clobber_regs = -1u;
-+       tcg_target_call_clobber_regs = -1;
+> Secondly, can you describe why this is useful? What is the point of
+> machine specific PMU events? Why do we want to support this in QEMU?
+>
 
-so that all 64 registers begin as call-clobbered.
+I happen to work on a similar implementation as well. Apologies for
+not seeing this patch earlier.
+Here is the link to the series that I have been working on to
+implement a similar feature.
+https://github.com/atishp04/qemu/tree/b4/pmu_event_machine
+I will send it to the mailing list tomorrow after some checkpatch fixes.
 
+Regarding the motivation, RISC-V ISA doesn't  define any standard
+event encodings.
+The virt machine implemented event encodings defined in the SBI PMU
+extension because
+there was nothing else available. There is an active performance
+events TG who is working on defining
+the standard events for RISC-V but not the encodings. The goal is
+provide flexibility for the platforms while
+allowing a minimum set of events that would work across platforms.
 
-r~
+However, any platform would define their own event encodings and want
+to support those in their Qemu
+machine implementation. That's why, we should disassociate the event
+encodings in the pmu.c to make it
+more generic and usable across machines.
+
+> The callbacks should also have some documentation in the code base so
+> others can implement the functionality.
+>
+> It might also be helpful to split this patch up a little bit more. A
+> quick read through and it seems like the patches could be a little
+> smaller, making it easier to review.
+>
+> Finally, for the next version CC @Atish Patra  who has ended up being
+> the PMU person :)
+>
+
+Thanks for Ccing me. I completely missed this patch earlier. Few
+thoughts by looking at this series.
+
+@Alexei:
+1. Event encoding needs to be widened to 64 bits. That's what I tried
+to achieve with my implementation
+along with a bunch of other cleanups.
+
+2. Why do we need machine specific counter write/read functions ? If
+we really need it, we should definitely have that
+as a separate patch as my implementation only focussed on
+disassociating the events and pmu implementation.
+
+Please take a look at the patches shared above or the mailing list
+(should land tomorrow) and let me know your thoughts.
+I am happy to collaborate on your patches so that we have more than
+just a virt machine that we can test with this series.
+
+> Alistair
+>
+> >
+> > =3D=3D Test scenarios =3D=3D
+> >
+> > So, I tested this patches on current Linux master with perf.
+> > something like `perf stat -e branch-misses perf bench mem memcpy` works
+> > just fine, also 'perf record -e branch-misses perf bench mem memcpy'
+> > collect samples just fine and `perf report` works.
+> >
+> > =3D=3D ToDos / Limitations =3D=3D
+> >
+> > Second patch is only inital sifive_u's HPM support, without any
+> > filtering, events combining features or differrent counting
+> > algorithm for different events. There are also no tests, but if you
+> > have any suggestions about where I need to look to implement them, plea=
+se
+> > point me to.
+> >
+> > =3D=3D Changes since original patch =3D=3D
+> >
+> > - Rebased to current master
+> >
+> > [1] https://lore.kernel.org/all/20240625144643.34733-1-alexei.filippov@=
+syntacore.com/
+> >
+> > Alexei Filippov (2):
+> >   target/riscv: Add support for machine specific pmu's events
+> >   hw/riscv/sifive_u.c: Add initial HPM support
+> >
+> >  hw/misc/meson.build            |   1 +
+> >  hw/misc/sifive_u_pmu.c         | 384 +++++++++++++++++++++++++++++++++
+> >  hw/riscv/sifive_u.c            |  14 ++
+> >  include/hw/misc/sifive_u_pmu.h |  24 +++
+> >  target/riscv/cpu.c             |  20 +-
+> >  target/riscv/cpu.h             |   9 +
+> >  target/riscv/csr.c             |  93 +++++---
+> >  target/riscv/pmu.c             | 138 ++++++------
+> >  target/riscv/pmu.h             |  19 +-
+> >  9 files changed, 599 insertions(+), 103 deletions(-)
+> >  create mode 100644 hw/misc/sifive_u_pmu.c
+> >  create mode 100644 include/hw/misc/sifive_u_pmu.h
+> >
+> > --
+> > 2.34.1
+> >
+> >
 
