@@ -4,83 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1C1A2CED628
-	for <qemu-riscv@archiver.kernel.org>; Wed,  9 Oct 2024 23:10:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CB14ECED628
+	for <qemu-riscv@archiver.kernel.org>; Wed,  9 Oct 2024 23:10:50 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1syfnv-0006pe-MC; Wed, 09 Oct 2024 19:09:15 -0400
+	id 1syfnp-0006mY-Lz; Wed, 09 Oct 2024 19:09:09 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <atishp@rivosinc.com>)
- id 1syfnq-0006mp-K1
- for qemu-riscv@nongnu.org; Wed, 09 Oct 2024 19:09:10 -0400
-Received: from mail-pg1-x52d.google.com ([2607:f8b0:4864:20::52d])
+ id 1syfnn-0006lZ-2z
+ for qemu-riscv@nongnu.org; Wed, 09 Oct 2024 19:09:07 -0400
+Received: from mail-pj1-x102d.google.com ([2607:f8b0:4864:20::102d])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <atishp@rivosinc.com>)
- id 1syfnn-0000hJ-1z
- for qemu-riscv@nongnu.org; Wed, 09 Oct 2024 19:09:09 -0400
-Received: by mail-pg1-x52d.google.com with SMTP id
- 41be03b00d2f7-7e9f98f2147so168312a12.1
- for <qemu-riscv@nongnu.org>; Wed, 09 Oct 2024 16:09:06 -0700 (PDT)
+ id 1syfnk-0000gr-Ub
+ for qemu-riscv@nongnu.org; Wed, 09 Oct 2024 19:09:06 -0400
+Received: by mail-pj1-x102d.google.com with SMTP id
+ 98e67ed59e1d1-2e2887c3c50so302073a91.0
+ for <qemu-riscv@nongnu.org>; Wed, 09 Oct 2024 16:09:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1728515345; x=1729120145;
+ d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1728515343; x=1729120143;
  darn=nongnu.org; 
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=NNIhf0diuxJoxU55DlT10sYTiHd5YymT+dpY9nybit0=;
- b=Gc+YF8CUq+a2FCH5aCppKsio4bIi9lxIh/cZ/ZjD8RQYdsKPQT0I8anbUoK4ZqN5Jd
- eVux7N4H10h8QpuhATaIGk+TmQ/YE7lEDE1N4ZFxv8MFZr8f9B3zcR7O6wqoFIH8pH12
- WVpIta1DjoQGfHQiZF9WLTgOt4jjN8AYQPIQv7u/3SU0YU1PpS3JbX//l6wukadWJYgW
- KemYjNyzsv2GGH79YuluAheV3GLJs7bNnmwu5UtlUGi0/stFeL+wfgsZCQm+nO1elxRG
- 3PQhtA++78NIZUmzolOc2REqvSmHwimKJqXHyz/IJUpojnM3Pdq689HMcqit4Cx9QaE2
- EVQA==
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=F4xAck7ZT8Ovl6HOOBp7iHK6etT+iXqunvWzmMhI1cQ=;
+ b=zsOLhHj/vzJNKcOak/g5MckDiFFz7R3EQZL4X8ZukepQXtfQQOwqxkAKTWKlyC36K9
+ UUXh9N1LUU9W/ybR/CpGJTlLDsQC3JsoQ4KVAKMMV0OwNE+GUI8oVQUzS9SP3jHdfnLh
+ Jm+M7XOzc4vrcwJSRWNKyUCJ1SdKacsEDMTQ8BO6GLYfHjRaeZHaRdSA4uYamiijIbf/
+ ZtWIcA9daO2n39OgzUQ1Wc7/HAe0ZuG3r3lO5SmAW7MID/tbO7FUHwO0Rgptswh9yTfT
+ 5XgURxaqq/+WBOLFsvJswnvRfjUzwSoRuJbFa0mnP30dpHmqblY1EJsfX4JHH9y1SEBg
+ 2WQw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728515345; x=1729120145;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=NNIhf0diuxJoxU55DlT10sYTiHd5YymT+dpY9nybit0=;
- b=JJyucYfVLmith3fNYl8us93TThp7zIgC4lrKABrnkMiJXmNU4RYgoqqm41eumbm+nc
- jji9M/hk1zOY3Ph8U84AGEWYX36PJmEt9i3XlWGHw5z3jDjaeAisyMyIUyMQophfMB2d
- RjjP3b6m2tnwNlSFTU+XAsS+AtJki9hP6ghtuTGCRb898S7V87Lzfh1IOxOoPitR6oL6
- Qi943EGMyM8SZJU5Zv0Nj+wyNH69W088zYghfKqpyFGjKta+iUPcW++Z83VIwS5HQLwQ
- 4IhT6KUelKZbJqYDJdtFVqnJd2CLRYXFayt9rZxjizwt9+983DaVQkW9VJq2Ioo4XYn+
- Zz6A==
-X-Gm-Message-State: AOJu0YwCaHfL/Ka9NEQk0lZW/IekpFLAHGrGreWqE/D1xFT2a4YRsdzt
- 5520M7gLYlpfzA1b9+FhdAAzhHrloTNNwY9JNw5HOps8esDlS1GFcTTVk8IDVKU=
-X-Google-Smtp-Source: AGHT+IFea4CgrpfVTe+vtoV4SsGXoIxJb8yb9BeH13wks42l4w6F9PH7op1cQSwDGzsjpQ27qF0BAA==
-X-Received: by 2002:a17:90a:70ca:b0:2e2:c98e:c33f with SMTP id
- 98e67ed59e1d1-2e2c98ec41cmr1335161a91.1.1728515345677; 
- Wed, 09 Oct 2024 16:09:05 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1728515343; x=1729120143;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=F4xAck7ZT8Ovl6HOOBp7iHK6etT+iXqunvWzmMhI1cQ=;
+ b=q0Okukh6r4CbMlqzRzP53beeju9tXv6EbOyeqWGLSR9IeFKQgYN5IK7vPRYcBATMrf
+ nwhsaY+LYON7TLKyYdY+mntkqUj2kd7ZKv33xLoM5tgE8l/rOwNImwm8JNIIdqnM7Xvm
+ +Q5sxudB4p7MdivnfrT8qygMVFzueEx8sZUV6lG9gZ9r+sIgWXM2gh4lBrAqXSQwqxIC
+ //CRodTZ4djkgjvHcjqMvGaf/BgclMvOhbY1PQKLWDcMq5Pmb+yIAAp5p/LMQ8YDV2Zt
+ 26ap10dAlb5+dE2uvE/wqIy2VJFXfnicDFFZkkx1s2Ms4NYE3HQm5QGSvo13JN37PNRQ
+ /ZoQ==
+X-Gm-Message-State: AOJu0Yy9vHJdEUfE1CW9hj1O2velSl7hiCWFpAq5QxQnNysMU9FbZXsf
+ IEVSNo3VwcZBTxCLRsdsbqC6D6Mn1OPdUVuLEiIDPx11cb/Wi8K4JizafRUWBoQ=
+X-Google-Smtp-Source: AGHT+IFEY75V2HiL37ApCU0lYqmptRWbz1zO3vdKX+/mWGqE5TqAyme8PDdB5BH3X+7bqNPH72/3Vw==
+X-Received: by 2002:a17:90b:430f:b0:2e2:bd9a:4ff4 with SMTP id
+ 98e67ed59e1d1-2e2bd9a5225mr2748289a91.24.1728515343372; 
+ Wed, 09 Oct 2024 16:09:03 -0700 (PDT)
 Received: from atishp.ba.rivosinc.com ([64.71.180.162])
  by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-2e2a55f9855sm2271902a91.2.2024.10.09.16.09.04
+ 98e67ed59e1d1-2e2a55f9855sm2271902a91.2.2024.10.09.16.09.02
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 09 Oct 2024 16:09:05 -0700 (PDT)
+ Wed, 09 Oct 2024 16:09:03 -0700 (PDT)
 From: Atish Patra <atishp@rivosinc.com>
-Date: Wed, 09 Oct 2024 16:09:00 -0700
-Subject: [PATCH RFC 02/10] target/riscv: Introduce helper functions for pmu
- hashtable lookup
+Subject: [PATCH RFC 00/10] Allow platform specific PMU event encoding
+Date: Wed, 09 Oct 2024 16:08:58 -0700
+Message-Id: <20241009-pmu_event_machine-v1-0-dcbd7a60e3ba@rivosinc.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20241009-pmu_event_machine-v1-2-dcbd7a60e3ba@rivosinc.com>
-References: <20241009-pmu_event_machine-v1-0-dcbd7a60e3ba@rivosinc.com>
-In-Reply-To: <20241009-pmu_event_machine-v1-0-dcbd7a60e3ba@rivosinc.com>
+X-B4-Tracking: v=1; b=H4sIAAoNB2cC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
+ vPSU3UzU4B8JSMDIxNDAwML3YLc0vjUstS8kvjcxOSMzLxU3SQL82RTC0MDk1QzQyWgvoKi1LT
+ MCrCZ0UpBbs5KsbW1AHjGRytoAAAA
 To: qemu-riscv@nongnu.org, qemu-devel@nongnu.org
 Cc: alexei.filippov@syntacore.com, Atish Patra <atishp@rivosinc.com>, 
  palmer@dabbelt.com, liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, 
  bin.meng@windriver.com, dbarboza@ventanamicro.com, alistair.francis@wdc.com
 X-Mailer: b4 0.15-dev-13183
-Received-SPF: pass client-ip=2607:f8b0:4864:20::52d;
- envelope-from=atishp@rivosinc.com; helo=mail-pg1-x52d.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::102d;
+ envelope-from=atishp@rivosinc.com; helo=mail-pj1-x102d.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
 X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -96,147 +96,74 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-The pmu implementation requires hashtable lookup operation sprinkled
-through the file. Add a helper function that allows to consolidate
-the implementation and extend it in the future easily.
+Currently, the pmu implementation is virt machine specific that
+implements the SBI PMU encodings. In the future, individual machines
+would want to implement their own custom event encodings as there
+is no standard event encoding defined by the ISA. There is a performance
+events TG which is working on defining standard set of events but not
+encodings. That allows flexibility for platforms to choose whatever
+encoding scheme they want. However, that means the generic pmu code
+should be flexible enough to allow that in Qemu as well.
+
+This series aims to solve that problem by first disassociating the
+common pmu implementation and event encoding. The event encoding is
+specific to a platform and should be defined in the platform specific
+machine or cpu implementation. The newly defined callbacks can be invoked
+from machine specific cpu implementation or machine code itself depending
+on the requirement.
+
+The first 5 patches in the series are generic improvements and cleanups
+where as the last 5 actually implements the disassociation for the virt
+machine. The current series can also be found at[2].
+
+I recently found that Alexei has done a similar effort for SiFive FU740[1]
+but the implementation differs from this one based on how the cpu callbacks
+are invoked. For example, Alexei's series implements a single callback for
+all the events and has defined machine specific counter read/write callbacks.
+However, it just defaults to get_ticks() for every event. IMO, that is
+confusing to the users unless we can actually emulate more generic events or
+machine specific events.
+
+I have separate callbacks for each type of events that we currently support
+in Qemu (cycle, instruction, TLB events). Separate callbacks seems a better
+approach to avoid ambiguity as we have very limited event capability in qemu.
+I am open to converging them to one callback as well if we think we will
+be extending set of events in the future.
+
+Once we converge on the approaches, we can consolidate the patches
+so that both SiFive FU740 and virt machine can use the same abstraction.
+
+Cc: alexei.filippov@syntacore.com
+
+[1] https://lore.kernel.org/all/20240910174747.148141-1-alexei.filippov@syntacore.com/T/
+[2] https://github.com/atishp04/qemu/tree/b4/pmu_event_machine
 
 Signed-off-by: Atish Patra <atishp@rivosinc.com>
 ---
- target/riscv/pmu.c | 56 ++++++++++++++++++++++++++----------------------------
- 1 file changed, 27 insertions(+), 29 deletions(-)
+Atish Patra (10):
+      target/riscv: Fix the hpmevent mask
+      target/riscv: Introduce helper functions for pmu hashtable lookup
+      target/riscv: Protect the hashtable modifications with a lock
+      target/riscv: Use uint64 instead of uint as key
+      target/riscv: Rename the PMU events
+      target/riscv: Define PMU event related structures
+      hw/riscv/virt.c : Disassociate virt PMU events
+      target/riscv: Update event mapping hashtable for invalid events
+      target/riscv : Use the new tlb fill event functions
+      hw/riscv/virt.c: Generate the PMU node from the machine
 
-diff --git a/target/riscv/pmu.c b/target/riscv/pmu.c
-index e05ab067d2f2..a88c321a6cad 100644
---- a/target/riscv/pmu.c
-+++ b/target/riscv/pmu.c
-@@ -265,6 +265,21 @@ static void riscv_pmu_cycle_update_priv(CPURISCVState *env,
-     counter_arr[env->priv] += delta;
- }
- 
-+static bool riscv_pmu_htable_lookup(RISCVCPU *cpu, uint32_t key,
-+                                    uint32_t *value)
-+{
-+    GHashTable *table = cpu->pmu_event_ctr_map;
-+    gpointer val_ptr;
-+
-+    val_ptr = g_hash_table_lookup(table, GUINT_TO_POINTER(key));
-+    if (!val_ptr) {
-+        return false;
-+    }
-+
-+    *value = GPOINTER_TO_UINT(val_ptr);
-+    return true;
-+}
-+
- void riscv_pmu_update_fixed_ctrs(CPURISCVState *env, target_ulong newpriv,
-                                  bool new_virt)
- {
-@@ -277,18 +292,15 @@ int riscv_pmu_incr_ctr(RISCVCPU *cpu, enum riscv_pmu_event_idx event_idx)
-     uint32_t ctr_idx;
-     int ret;
-     CPURISCVState *env = &cpu->env;
--    gpointer value;
- 
-     if (!cpu->cfg.pmu_mask) {
-         return 0;
-     }
--    value = g_hash_table_lookup(cpu->pmu_event_ctr_map,
--                                GUINT_TO_POINTER(event_idx));
--    if (!value) {
-+
-+    if (!riscv_pmu_htable_lookup(cpu, event_idx, &ctr_idx)) {
-         return -1;
-     }
- 
--    ctr_idx = GPOINTER_TO_UINT(value);
-     if (!riscv_pmu_counter_enabled(cpu, ctr_idx)) {
-         return -1;
-     }
-@@ -306,7 +318,6 @@ bool riscv_pmu_ctr_monitor_instructions(CPURISCVState *env,
-                                         uint32_t target_ctr)
- {
-     RISCVCPU *cpu;
--    uint32_t event_idx;
-     uint32_t ctr_idx;
- 
-     /* Fixed instret counter */
-@@ -315,14 +326,8 @@ bool riscv_pmu_ctr_monitor_instructions(CPURISCVState *env,
-     }
- 
-     cpu = env_archcpu(env);
--    if (!cpu->pmu_event_ctr_map) {
--        return false;
--    }
--
--    event_idx = RISCV_PMU_EVENT_HW_INSTRUCTIONS;
--    ctr_idx = GPOINTER_TO_UINT(g_hash_table_lookup(cpu->pmu_event_ctr_map,
--                               GUINT_TO_POINTER(event_idx)));
--    if (!ctr_idx) {
-+    if (!riscv_pmu_htable_lookup(cpu, RISCV_PMU_EVENT_HW_INSTRUCTIONS,
-+                                 &ctr_idx)) {
-         return false;
-     }
- 
-@@ -332,7 +337,6 @@ bool riscv_pmu_ctr_monitor_instructions(CPURISCVState *env,
- bool riscv_pmu_ctr_monitor_cycles(CPURISCVState *env, uint32_t target_ctr)
- {
-     RISCVCPU *cpu;
--    uint32_t event_idx;
-     uint32_t ctr_idx;
- 
-     /* Fixed mcycle counter */
-@@ -341,16 +345,8 @@ bool riscv_pmu_ctr_monitor_cycles(CPURISCVState *env, uint32_t target_ctr)
-     }
- 
-     cpu = env_archcpu(env);
--    if (!cpu->pmu_event_ctr_map) {
--        return false;
--    }
--
--    event_idx = RISCV_PMU_EVENT_HW_CPU_CYCLES;
--    ctr_idx = GPOINTER_TO_UINT(g_hash_table_lookup(cpu->pmu_event_ctr_map,
--                               GUINT_TO_POINTER(event_idx)));
--
--    /* Counter zero is not used for event_ctr_map */
--    if (!ctr_idx) {
-+    if (!riscv_pmu_htable_lookup(cpu, RISCV_PMU_EVENT_HW_CPU_CYCLES,
-+                                &ctr_idx)) {
-         return false;
-     }
- 
-@@ -381,6 +377,7 @@ int riscv_pmu_update_event_map(CPURISCVState *env, uint64_t value,
- {
-     uint32_t event_idx;
-     RISCVCPU *cpu = env_archcpu(env);
-+    uint32_t mapped_ctr_idx;
- 
-     if (!riscv_pmu_counter_valid(cpu, ctr_idx) || !cpu->pmu_event_ctr_map) {
-         return -1;
-@@ -398,8 +395,7 @@ int riscv_pmu_update_event_map(CPURISCVState *env, uint64_t value,
-     }
- 
-     event_idx = value & MHPMEVENT_IDX_MASK;
--    if (g_hash_table_lookup(cpu->pmu_event_ctr_map,
--                            GUINT_TO_POINTER(event_idx))) {
-+    if (riscv_pmu_htable_lookup(cpu, event_idx, &mapped_ctr_idx)) {
-         return 0;
-     }
- 
-@@ -472,8 +468,10 @@ static void pmu_timer_trigger_irq(RISCVCPU *cpu,
-         return;
-     }
- 
--    ctr_idx = GPOINTER_TO_UINT(g_hash_table_lookup(cpu->pmu_event_ctr_map,
--                               GUINT_TO_POINTER(evt_idx)));
-+    if (!riscv_pmu_htable_lookup(cpu, evt_idx, &ctr_idx)) {
-+        return;
-+    }
-+
-     if (!riscv_pmu_counter_enabled(cpu, ctr_idx)) {
-         return;
-     }
-
--- 
-2.34.1
+ hw/riscv/virt.c           | 102 +++++++++++++++++++++++-
+ target/riscv/cpu.h        |  52 ++++++++++--
+ target/riscv/cpu_bits.h   |   4 +-
+ target/riscv/cpu_helper.c |  21 ++---
+ target/riscv/pmu.c        | 198 +++++++++++++++++++++-------------------------
+ target/riscv/pmu.h        |   3 +-
+ 6 files changed, 246 insertions(+), 134 deletions(-)
+---
+base-commit: 19a9809808a51291008f72d051d0f9b3499fc223
+change-id: 20241008-pmu_event_machine-b87c58104e61
+--
+Regards,
+Atish patra
 
 
