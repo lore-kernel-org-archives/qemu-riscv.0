@@ -4,67 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D4D14CED628
-	for <qemu-riscv@archiver.kernel.org>; Wed,  9 Oct 2024 23:10:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0BC3DCED639
+	for <qemu-riscv@archiver.kernel.org>; Wed,  9 Oct 2024 23:11:00 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1syfo1-0006tZ-Kp; Wed, 09 Oct 2024 19:09:21 -0400
+	id 1syfo2-0006tq-Fv; Wed, 09 Oct 2024 19:09:22 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <atishp@rivosinc.com>)
- id 1syfnw-0006q9-Gn
- for qemu-riscv@nongnu.org; Wed, 09 Oct 2024 19:09:16 -0400
-Received: from mail-pg1-x52e.google.com ([2607:f8b0:4864:20::52e])
+ id 1syfnt-0006ox-49
+ for qemu-riscv@nongnu.org; Wed, 09 Oct 2024 19:09:13 -0400
+Received: from mail-pj1-x102d.google.com ([2607:f8b0:4864:20::102d])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <atishp@rivosinc.com>)
- id 1syfnu-0000l0-Rr
- for qemu-riscv@nongnu.org; Wed, 09 Oct 2024 19:09:16 -0400
-Received: by mail-pg1-x52e.google.com with SMTP id
- 41be03b00d2f7-7db637d1e4eso212612a12.2
- for <qemu-riscv@nongnu.org>; Wed, 09 Oct 2024 16:09:14 -0700 (PDT)
+ id 1syfnr-0000jK-Fp
+ for qemu-riscv@nongnu.org; Wed, 09 Oct 2024 19:09:12 -0400
+Received: by mail-pj1-x102d.google.com with SMTP id
+ 98e67ed59e1d1-2e2d1858cdfso53736a91.1
+ for <qemu-riscv@nongnu.org>; Wed, 09 Oct 2024 16:09:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1728515353; x=1729120153;
+ d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1728515350; x=1729120150;
  darn=nongnu.org; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=6d6JNNpqypFV+9JaSGoihlcnT/RjodexqM4x572K+eU=;
- b=zxw2m0HNCPVTxYepjPt5dyECnWpjUupcGNGAUnVnIBHAH4EY6gO1r9270H1ftFD/RD
- z7Qyob62o01PMBGF1Lopjz0djGF2w9JNShFVJaJqJ09gbNxK59qqgHpPG+c+aQjhpvfV
- xD/QeW5wCvHF47wbttOTRHScdNjwyXQJ3S+uKMF0IB2tpixFXRuJKuF+RkZzH/tLod8Z
- hvp0b2RsNSN6vXycSZAL+LmL0Xr/p3CaRNhIZEM+0a3RjLs4R5h1Vdl8jILq1XoUa1sS
- CCyNIHvSoxeJkgevT77x1kJNX/cbnvakztbuiXDT+0isPPEhdXNeeo2lLriGcllpUkEI
- zBOQ==
+ :reply-to; bh=lb97YCo8PMaDnRqrQoCvwMDNjIlFQjHaZLCUrwXXHsI=;
+ b=kyCWk/m6s937XhFJrBNIhoKMS58aVFTzCK1ihvqeVYyFBDpWsrFsWLNzyKxNJBIMWX
+ ix0BeKaYO0lVcRxQ765hRGHp2oqwQzPPmcVIvN/u70vPQMlZ6/AGnkP/HyR455dtZcJ/
+ mqAcc22EuKEE1RcBmljtBWxncg/eAa/GV6VJxqtHCwNCBuDDOdMbCPLwaWYMWjoUcymN
+ NPcTKTBoBFTIeUmmKKS3i5g3VchmLr3wiYncV6oyqMRKQ5Hs9PeGfXAvHKhjC1PwS41I
+ yeZyMILZz4RvQdjnltZVhxhDfP4aIlfFtWlqC+sB00R5nBPmPMe+D3yXjdbWZz6qr/Ay
+ BgAA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728515353; x=1729120153;
+ d=1e100.net; s=20230601; t=1728515350; x=1729120150;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=6d6JNNpqypFV+9JaSGoihlcnT/RjodexqM4x572K+eU=;
- b=FuUDmFVCs5TfwFSZt/VBPbZf67UciNzdebHHitXUlm6bt1x94d9gOTANoFF9cGG3vw
- 7x8PEcbc6RC4ent4Pvd2wO/2Uu1P10V77YYkRmp4O/hIhydLy0w8GjLjVGRuEGRbPH7T
- jVvEpm7Y26OdI2m6VwY+vnvL+h9ABNmKcPsZOV/8IGErVzeYRg6MtkW6yonDtafvpw3j
- s6kchSsIA881GwF16yokvK4gG/iFP+lPTI7Jk4useuy8zPkZRuFYZNBs/sP1EdPQ7V2h
- 7Jb8v3RG6QpoAEXZSB4bkK81gHpiYnSbr2FJo5wDaGm2IBcT+b1wIM4GjP3Z7dXZLve3
- QAiA==
-X-Gm-Message-State: AOJu0YytL/AxZy8PBEN3MuHkYjl33YL8GBMb5HQ4vbZWS2w4ovp2d5Mm
- wb2SlqaWogm5qVvP31ksV3F2Uw8K7zfHfo8gHBaXBfl1Ekmq/CT+9UFnBIPXavI=
-X-Google-Smtp-Source: AGHT+IFWLLJRVm0Y+Uydiha3gGooMyMtA97UJ/mikC4+VrsGfl89XCOGMb1vzqA8x/bwreMUO4/31g==
-X-Received: by 2002:a17:90a:bc92:b0:2e2:8d82:df13 with SMTP id
- 98e67ed59e1d1-2e2a21e6d03mr4557518a91.8.1728515353355; 
- Wed, 09 Oct 2024 16:09:13 -0700 (PDT)
+ bh=lb97YCo8PMaDnRqrQoCvwMDNjIlFQjHaZLCUrwXXHsI=;
+ b=qF1KNAVwdOkGPJPqpjwhFbnWQoxPjk4LRId9hoUQrcZuiuLorPpkJ0OzDSpK1hfgrT
+ ilvt8UGnND8ZPbIyLV2mciTYY8f/VabJTa0u7Clb6xWOkxUAdEs9fICMXhOAYrgCU1MT
+ Qj+lmT19yLKeHR1kSdZJwMtAhGlygA+/yMUjr/u/YDmyPV/MfuKq4yxOMJYhgaNHDRRd
+ tIXb9/XnD7shd7xjrW7NDmie6wCF29LCQLHO5Rv3N9u9MUpdPbeUxNm4fiJUB6hE6VTg
+ rROOkd4wyNvLY00fFsSqYm86BTgE31XLrq7AhBxmsAHr5H6bTt+QROZE4PvNVjRX+ENH
+ gOUQ==
+X-Gm-Message-State: AOJu0YzgbxcNimqNxdapvMSyr3J1v/GnB9bfFxR6ixVMkwjw2xd1aWwj
+ JYzjUbnnpwfNpm9Mhze4eIPENVTnPQO4lzFQiFMSlVBq1eebAg1EdfUn0dHM98A=
+X-Google-Smtp-Source: AGHT+IGd4am5nLssTGqIfRsluvKElFYqfp/ur/w677nYIlxXGniWKNoVZJv114HF1B3IFUvgQMBZ/Q==
+X-Received: by 2002:a17:90a:de83:b0:2e2:d3e1:f863 with SMTP id
+ 98e67ed59e1d1-2e2d3e21303mr70177a91.12.1728515350047; 
+ Wed, 09 Oct 2024 16:09:10 -0700 (PDT)
 Received: from atishp.ba.rivosinc.com ([64.71.180.162])
  by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-2e2a55f9855sm2271902a91.2.2024.10.09.16.09.12
+ 98e67ed59e1d1-2e2a55f9855sm2271902a91.2.2024.10.09.16.09.08
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 09 Oct 2024 16:09:13 -0700 (PDT)
+ Wed, 09 Oct 2024 16:09:09 -0700 (PDT)
 From: Atish Patra <atishp@rivosinc.com>
-Date: Wed, 09 Oct 2024 16:09:07 -0700
-Subject: [PATCH RFC 09/10] target/riscv : Use the new tlb fill event functions
+Date: Wed, 09 Oct 2024 16:09:04 -0700
+Subject: [PATCH RFC 06/10] target/riscv: Define PMU event related
+ structures
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20241009-pmu_event_machine-v1-9-dcbd7a60e3ba@rivosinc.com>
+Message-Id: <20241009-pmu_event_machine-v1-6-dcbd7a60e3ba@rivosinc.com>
 References: <20241009-pmu_event_machine-v1-0-dcbd7a60e3ba@rivosinc.com>
 In-Reply-To: <20241009-pmu_event_machine-v1-0-dcbd7a60e3ba@rivosinc.com>
 To: qemu-riscv@nongnu.org, qemu-devel@nongnu.org
@@ -72,14 +73,14 @@ Cc: alexei.filippov@syntacore.com, Atish Patra <atishp@rivosinc.com>,
  palmer@dabbelt.com, liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, 
  bin.meng@windriver.com, dbarboza@ventanamicro.com, alistair.francis@wdc.com
 X-Mailer: b4 0.15-dev-13183
-Received-SPF: pass client-ip=2607:f8b0:4864:20::52e;
- envelope-from=atishp@rivosinc.com; helo=mail-pg1-x52e.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::102d;
+ envelope-from=atishp@rivosinc.com; helo=mail-pj1-x102d.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
 X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -95,79 +96,54 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-We have TLB related event call back available now. Invoke
-them from generic cpu helper code so that other machines can
-implement those as well in the future. The virt machine is
-the only user for now though.
-
 Signed-off-by: Atish Patra <atishp@rivosinc.com>
 ---
- target/riscv/cpu_helper.c | 21 +++++++--------------
- target/riscv/pmu.c        |  2 +-
- target/riscv/pmu.h        |  2 +-
- 3 files changed, 9 insertions(+), 16 deletions(-)
+ target/riscv/cpu.h | 25 +++++++++++++++++++++++++
+ 1 file changed, 25 insertions(+)
 
-diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-index 0f1655a221bd..5161fc86dbfe 100644
---- a/target/riscv/cpu_helper.c
-+++ b/target/riscv/cpu_helper.c
-@@ -1295,23 +1295,16 @@ void riscv_cpu_do_unaligned_access(CPUState *cs, vaddr addr,
+diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+index 2ac391a7cf74..53426710f73e 100644
+--- a/target/riscv/cpu.h
++++ b/target/riscv/cpu.h
+@@ -189,6 +189,28 @@ typedef struct PMUFixedCtrState {
+         uint64_t counter_virt_prev[2];
+ } PMUFixedCtrState;
  
- static void pmu_tlb_fill_incr_ctr(RISCVCPU *cpu, MMUAccessType access_type)
- {
--    enum virt_pmu_event_idx pmu_event_type;
-+    uint64_t event_type = ULONG_MAX;
-+    CPURISCVState *env = &cpu->env;
++typedef uint64_t (*PMU_EVENT_CYCLE_FUNC)(RISCVCPU *);
++typedef uint64_t (*PMU_EVENT_INSTRET_FUNC)(RISCVCPU *);
++typedef uint64_t (*PMU_EVENT_TLB_FUNC)(RISCVCPU *, MMUAccessType access_type);
++
++typedef struct PMUEventInfo {
++    /* Event ID (BIT [0:55] valid) */
++    uint64_t event_id;
++    /* Supported hpmcounters for this event */
++    uint32_t counter_mask;
++    /* Bitmask of valid event bits */
++    uint64_t event_mask;
++} PMUEventInfo;
++
++typedef struct PMUEventFunc {
++    /* Get the ID of the event that can monitor cycles */
++    PMU_EVENT_CYCLE_FUNC get_cycle_id;
++    /* Get the ID of the event that can monitor cycles */
++    PMU_EVENT_INSTRET_FUNC get_intstret_id;
++    /* Get the ID of the event that can monitor TLB events*/
++    PMU_EVENT_TLB_FUNC get_tlb_access_id;
++} PMUEventFunc;
++
+ struct CPUArchState {
+     target_ulong gpr[32];
+     target_ulong gprh[32]; /* 64 top bits of the 128-bit registers */
+@@ -386,6 +408,9 @@ struct CPUArchState {
+     target_ulong mhpmeventh_val[RV_MAX_MHPMEVENTS];
  
--    switch (access_type) {
--    case MMU_INST_FETCH:
--        pmu_event_type = VIRT_PMU_EVENT_CACHE_ITLB_PREFETCH_MISS;
--        break;
--    case MMU_DATA_LOAD:
--        pmu_event_type = VIRT_PMU_EVENT_CACHE_DTLB_READ_MISS;
--        break;
--    case MMU_DATA_STORE:
--        pmu_event_type = VIRT_PMU_EVENT_CACHE_DTLB_WRITE_MISS;
--        break;
--    default:
--        return;
-+    if (env->pmu_efuncs.get_tlb_access_id) {
-+        event_type = env->pmu_efuncs.get_tlb_access_id(cpu, access_type);
-     }
+     PMUFixedCtrState pmu_fixed_ctrs[2];
++    PMUEventInfo *pmu_events;
++    PMUEventFunc pmu_efuncs;
++    int num_pmu_events;
  
--    riscv_pmu_incr_ctr(cpu, pmu_event_type);
-+    if (event_type != ULONG_MAX) {
-+        riscv_pmu_incr_ctr(cpu, event_type);
-+    }
- }
- 
- bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
-diff --git a/target/riscv/pmu.c b/target/riscv/pmu.c
-index 24c2fe82c247..e80f0f911fa3 100644
---- a/target/riscv/pmu.c
-+++ b/target/riscv/pmu.c
-@@ -274,7 +274,7 @@ void riscv_pmu_update_fixed_ctrs(CPURISCVState *env, target_ulong newpriv,
-     riscv_pmu_icount_update_priv(env, newpriv, new_virt);
- }
- 
--int riscv_pmu_incr_ctr(RISCVCPU *cpu, enum virt_pmu_event_idx event_idx)
-+int riscv_pmu_incr_ctr(RISCVCPU *cpu, uint64_t event_idx)
- {
-     uint32_t ctr_idx;
-     int ret;
-diff --git a/target/riscv/pmu.h b/target/riscv/pmu.h
-index 75a22d596b69..810ac2fae797 100644
---- a/target/riscv/pmu.h
-+++ b/target/riscv/pmu.h
-@@ -30,7 +30,7 @@ void riscv_pmu_timer_cb(void *priv);
- void riscv_pmu_init(RISCVCPU *cpu, Error **errp);
- int riscv_pmu_update_event_map(CPURISCVState *env, uint64_t value,
-                                uint32_t ctr_idx);
--int riscv_pmu_incr_ctr(RISCVCPU *cpu, enum virt_pmu_event_idx event_idx);
-+int riscv_pmu_incr_ctr(RISCVCPU *cpu, uint64_t event_idx);
- void riscv_pmu_generate_fdt_node(void *fdt, uint32_t cmask, char *pmu_name);
- int riscv_pmu_setup_timer(CPURISCVState *env, uint64_t value,
-                           uint32_t ctr_idx);
+     target_ulong sscratch;
+     target_ulong mscratch;
 
 -- 
 2.34.1
