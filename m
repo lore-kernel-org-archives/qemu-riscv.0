@@ -4,68 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 48A30CEDD97
-	for <qemu-riscv@archiver.kernel.org>; Wed,  9 Oct 2024 14:02:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 88550CEDD97
+	for <qemu-riscv@archiver.kernel.org>; Wed,  9 Oct 2024 14:05:14 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1syXFg-0006fc-2g; Wed, 09 Oct 2024 10:01:20 -0400
+	id 1syXJ9-0001Oe-Rv; Wed, 09 Oct 2024 10:04:55 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <phil@philjordan.eu>)
- id 1syXFc-0006dl-Hw
- for qemu-riscv@nongnu.org; Wed, 09 Oct 2024 10:01:16 -0400
-Received: from mail-vk1-xa2f.google.com ([2607:f8b0:4864:20::a2f])
+ id 1syXJ7-0001Nf-SA
+ for qemu-riscv@nongnu.org; Wed, 09 Oct 2024 10:04:54 -0400
+Received: from mail-ua1-x931.google.com ([2607:f8b0:4864:20::931])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <phil@philjordan.eu>)
- id 1syXFZ-0006aE-6x
- for qemu-riscv@nongnu.org; Wed, 09 Oct 2024 10:01:16 -0400
-Received: by mail-vk1-xa2f.google.com with SMTP id
- 71dfb90a1353d-50c9feaed3dso1221772e0c.1
- for <qemu-riscv@nongnu.org>; Wed, 09 Oct 2024 07:01:12 -0700 (PDT)
+ id 1syXJ2-00071t-Vl
+ for qemu-riscv@nongnu.org; Wed, 09 Oct 2024 10:04:53 -0400
+Received: by mail-ua1-x931.google.com with SMTP id
+ a1e0cc1a2514c-84f965407beso867659241.3
+ for <qemu-riscv@nongnu.org>; Wed, 09 Oct 2024 07:04:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=philjordan-eu.20230601.gappssmtp.com; s=20230601; t=1728482472; x=1729087272;
+ d=philjordan-eu.20230601.gappssmtp.com; s=20230601; t=1728482688; x=1729087488;
  darn=nongnu.org; 
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=SND2Qtyr6/qis6t0z3vm3/ix/MT1Wd+0FoAx5WvSVqk=;
- b=eq+SGYNh3eb2NuuJTPBdk09fSxgwogLd9qCRj/GoyBiWKjK6SKPNCU0zqbPzBoCCFp
- yxoFb2+gJw2VfiZRS/ZKkT4WrUQMoq3NEsTpDrjZvFVJ/667B64nWp59v4W+9epG56uI
- 9Q+d78zcseFFFbIuiHnA8cL/d+hxqn1C9hKjuyhjqLf7VFUkgvcwsCxDWDbzSto4YqBf
- Zyew3CZQjzlTcj70fSj4n33yJ0RpC54I47BwJ5AB7CKRddpPo4VrsK83gECB4GiNLBTw
- 3GA1u8xAfu9xa3KbUKs3bVdlcfhr3lvBo4YMVSQgWT8QmKZm5iPFuknmnK5yKEasReK+
- IY/w==
+ bh=PTsp4AY2TFBV8FVa5M4I58DD5eBCOHu1R0FoC83Kkik=;
+ b=qzUNTePJrbpLzHwLBR8LbxEI0pS0bgSda4AhkwIhz4CmKxwk2OLIDCLoKzhU8Z2gFB
+ 6n8+0knDNymr8OJtuQZ9wQV85rX6f7xDNMp4WsTcy5cci5zvUJaTF1kScuzTn3lnvFrD
+ UanJDS4ESu7YXBeesiBPDvEEZsqBzcBf4Ya89ZKoTFy7bjWxSdVSwq8WxSKdmxnaSZ7f
+ 860QiNPQJNljO1AX61zJddxH2+mW4j0yLx+NsnYpDAh97fmhwD+y/J5avf1txfwhW4oQ
+ 8eQpc7zbk0Y5VezGTMhZpKrGzwxuCCrhnUmrh0vrvXC+3bHZrXi5BATW9RuYwtbRxAcS
+ 3mTg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728482472; x=1729087272;
+ d=1e100.net; s=20230601; t=1728482688; x=1729087488;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=SND2Qtyr6/qis6t0z3vm3/ix/MT1Wd+0FoAx5WvSVqk=;
- b=nPU7iz+8kTv3fk4viC5l8wfi2yoAD/zaaJI4/kIYuSskIMXfxTR2W90HomMrKisYtd
- nnRACKowWX6a5Vd1E3/DNAiwQWnRRInNnQcF8pt74HnuiO4ApDEkDNtUglCj0N6aZ+m9
- M+DAv6uO48onsE7YN2ajxgHOxytgMIcSKNFAIQyaOBhCRUixqWZ8BjExqil7HW8/yE+W
- DFkQ9ubV9Mm/jQsPpRSyvRWaWbO+qq5DDak5TYsgGqrfXl/CHQCss4wub8eeRdQl1EIH
- oBpQFxoWErX8A045KCcXhhkfEr5tDokrxht53Uyyb3C8fMJ/rSuK0w1DgubrWmoP9AKx
- pl/w==
+ bh=PTsp4AY2TFBV8FVa5M4I58DD5eBCOHu1R0FoC83Kkik=;
+ b=hGUr0AgnAZOve95ELy6NWlwaQ9vlt0n4bqoRRpDVdgtTazvuxASStrdMzPDFGjOINX
+ ILym14GvaGeIyG1XvGnEAeoT7mB3/ivqMm/cuglLmmzdyQ20r1+3Nv720nxPYDhPm7Tt
+ SzDsTg7wDE0rUvkNdk+NE5e2O1JaYRugy3jsiM/GgOfXtOojeI3I1Io/cpZSS0pKRCjE
+ UFBgTEqBOY12KipZ1G1v2b3qtT+s1apIBAtIb1qdrlkVz24l+iTwYdN0yYqJdOdOswXr
+ Z2qVVh5iSN0CxSvBAgsf19Ah6/27++JupW94mgsdgBWJ6/tsVmhlTGTKs2tjesoUUYYX
+ s1UA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCW4FfmV0m/giDA0MEp39niyxdly6ktzWTHcd2eXDvysWmf/n9qz52DW9DMOJ9Hl1LtCQQY15ocD+F2g@nongnu.org
-X-Gm-Message-State: AOJu0YxuU/ydHq8Q7Jby62FxSFHiYiC2rSHbMe3YlQxbOA5f1mldvA0Y
- ROzVSSdM00zBtz/wTt3BaN7dZb0tHLVekKNyqFV7W3sN29UTbtoxhoVMmjwCvo3XGl3VyE/UqIr
- Vz9ww9xpt+M1n53MCHnNyrA0FygAwxZOCQSFE
-X-Google-Smtp-Source: AGHT+IELNU8sMknyTL1OAIh8wclRcH7X5P/2Mnjc1L8xLQzmGQYwiRYFFsjwpzReyEj6O2pm9LwVNdTCBVnEbyYWed0=
-X-Received: by 2002:a05:6122:4687:b0:509:3dc0:fdd9 with SMTP id
- 71dfb90a1353d-50cf02511c4mr1613344e0c.0.1728482471235; Wed, 09 Oct 2024
- 07:01:11 -0700 (PDT)
+ AJvYcCVnXsZP7vLOdkCAKEH50NXh41Eb1QlDdSGOw5k+2OgyqxNi2vtLXj5ffcYXUHIsg6hzwDnWeNWAMkBm@nongnu.org
+X-Gm-Message-State: AOJu0YyjdX2N8FLDZRs0KvKu+lijggHvzGaDm9yUTx7HUfmh15gTx5qT
+ wUlYziMKnT7RkV3MImuwpyS0y+B+RGYkWxQkW0jAIP+6rZNduGpoS4r0tdxwDivU+YwEvBnmODO
+ S2r2Lhxbs9HEN/ay66HfpAWFBelecXf2T/+gf
+X-Google-Smtp-Source: AGHT+IFJFf1AjfYGJq4t4EU9oiyOLds90e+nHNoDMC0gs7NlK2xOqy3bhXbJzabKdD+oglq6PrJ9+kHLtPaT3czEpSw=
+X-Received: by 2002:a05:6122:21a4:b0:50a:ba7b:5a23 with SMTP id
+ 71dfb90a1353d-50cf09b8658mr1469509e0c.6.1728482687674; Wed, 09 Oct 2024
+ 07:04:47 -0700 (PDT)
 MIME-Version: 1.0
 References: <20240928085727.56883-1-phil@philjordan.eu>
- <20240928085727.56883-12-phil@philjordan.eu>
- <7af710d1-e337-41b8-9328-0488fc20f438@daynix.com>
-In-Reply-To: <7af710d1-e337-41b8-9328-0488fc20f438@daynix.com>
+ <20240928085727.56883-5-phil@philjordan.eu>
+ <ab82d2b3-4b06-4f9e-b58a-ea9a5d6c5000@daynix.com>
+In-Reply-To: <ab82d2b3-4b06-4f9e-b58a-ea9a5d6c5000@daynix.com>
 From: Phil Dennis-Jordan <phil@philjordan.eu>
-Date: Wed, 9 Oct 2024 16:00:59 +0200
-Message-ID: <CAAibmn2XBPDO++ZaRV_Vt_zK-sDrkkRdkKd89x7hBcNhtEmGqQ@mail.gmail.com>
-Subject: Re: [PATCH v3 11/14] hw/vmapple/bdif: Introduce vmapple backdoor
- interface
+Date: Wed, 9 Oct 2024 16:04:36 +0200
+Message-ID: <CAAibmn3JxwY4ZF0nNxZpR5ULwCaVhD0X-VU8h_gDu7Kgr_UpHw@mail.gmail.com>
+Subject: Re: [PATCH v3 04/14] hw/display/apple-gfx: Adds configurable mode list
 To: Akihiko Odaki <akihiko.odaki@daynix.com>
 Cc: qemu-devel@nongnu.org, agraf@csgraf.de, peter.maydell@linaro.org, 
  pbonzini@redhat.com, rad@semihalf.com, quic_llindhol@quicinc.com, 
@@ -77,10 +76,10 @@ Cc: qemu-devel@nongnu.org, agraf@csgraf.de, peter.maydell@linaro.org,
  bmeng.cn@gmail.com, liwei1518@gmail.com, dbarboza@ventanamicro.com, 
  zhiwei_liu@linux.alibaba.com, jcmvbkbc@gmail.com, marcandre.lureau@redhat.com, 
  berrange@redhat.com, qemu-arm@nongnu.org, qemu-block@nongnu.org, 
- qemu-riscv@nongnu.org, Alexander Graf <graf@amazon.com>
-Content-Type: multipart/alternative; boundary="000000000000b2f5b906240bafe9"
-Received-SPF: neutral client-ip=2607:f8b0:4864:20::a2f;
- envelope-from=phil@philjordan.eu; helo=mail-vk1-xa2f.google.com
+ qemu-riscv@nongnu.org
+Content-Type: multipart/alternative; boundary="0000000000009983f206240bbcdb"
+Received-SPF: neutral client-ip=2607:f8b0:4864:20::931;
+ envelope-from=phil@philjordan.eu; helo=mail-ua1-x931.google.com
 X-Spam_score_int: -10
 X-Spam_score: -1.1
 X-Spam_bar: -
@@ -102,823 +101,851 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
---000000000000b2f5b906240bafe9
+--0000000000009983f206240bbcdb
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 
-On Sat, 5 Oct 2024 at 07:12, Akihiko Odaki <akihiko.odaki@daynix.com> wrote=
-:
+On Fri, 4 Oct 2024 at 06:17, Akihiko Odaki <akihiko.odaki@daynix.com> wrote:
 
 > On 2024/09/28 17:57, Phil Dennis-Jordan wrote:
-> > From: Alexander Graf <graf@amazon.com>
+> > This change adds a property 'display_modes' on the graphics device
+> > which permits specifying a list of display modes. (screen resolution
+> > and refresh rate)
 > >
-> > The VMApple machine exposes AUX and ROOT block devices (as well as USB
-> OTG
-> > emulation) via virtio-pci as well as a special, simple backdoor platfor=
-m
-> > device.
+> > PCI variant of apple-gfx only for the moment.
 > >
-> > This patch implements this backdoor platform device to the best of my
-> > understanding. I left out any USB OTG parts; they're only needed for
-> > guest recovery and I don't understand the protocol yet.
-> >
-> > Signed-off-by: Alexander Graf <graf@amazon.com>
 > > Signed-off-by: Phil Dennis-Jordan <phil@philjordan.eu>
 > > ---
-> >   hw/vmapple/Kconfig        |   3 +
-> >   hw/vmapple/bdif.c         | 245 +++++++++++++++++++++++++++++++++++++=
-+
-> >   hw/vmapple/meson.build    |   1 +
-> >   hw/vmapple/trace-events   |   5 +
-> >   include/hw/vmapple/bdif.h |  31 +++++
-> >   5 files changed, 285 insertions(+)
-> >   create mode 100644 hw/vmapple/bdif.c
-> >   create mode 100644 include/hw/vmapple/bdif.h
+> >   hw/display/apple-gfx-pci.m |  43 ++++++++++-
+> >   hw/display/apple-gfx.h     |  17 ++++-
+> >   hw/display/apple-gfx.m     | 151 ++++++++++++++++++++++++++++++++++---
+> >   3 files changed, 198 insertions(+), 13 deletions(-)
 > >
-> > diff --git a/hw/vmapple/Kconfig b/hw/vmapple/Kconfig
-> > index a73504d5999..68f88876eb9 100644
-> > --- a/hw/vmapple/Kconfig
-> > +++ b/hw/vmapple/Kconfig
-> > @@ -1,3 +1,6 @@
-> >   config VMAPPLE_AES
-> >       bool
+> > diff --git a/hw/display/apple-gfx-pci.m b/hw/display/apple-gfx-pci.m
+> > index 9370258ee46..ea86a1f4a21 100644
+> > --- a/hw/display/apple-gfx-pci.m
+> > +++ b/hw/display/apple-gfx-pci.m
+> > @@ -16,6 +16,7 @@
+> >   #include "apple-gfx.h"
+> >   #include "hw/pci/pci_device.h"
+> >   #include "hw/pci/msi.h"
+> > +#include "hw/qdev-properties.h"
+> >   #include "qapi/error.h"
+> >   #include "trace.h"
+> >   #import <ParavirtualizedGraphics/ParavirtualizedGraphics.h>
+> > @@ -101,6 +102,46 @@ static void apple_gfx_pci_reset(Object *obj,
+> ResetType type)
+> >       [s->common.pgdev reset];
+> >   }
 > >
-> > +config VMAPPLE_BDIF
-> > +    bool
-> > +
-> > diff --git a/hw/vmapple/bdif.c b/hw/vmapple/bdif.c
-> > new file mode 100644
-> > index 00000000000..36b5915ff30
-> > --- /dev/null
-> > +++ b/hw/vmapple/bdif.c
-> > @@ -0,0 +1,245 @@
-> > +/*
-> > + * VMApple Backdoor Interface
-> > + *
-> > + * Copyright =C2=A9 2023 Amazon.com, Inc. or its affiliates. All Right=
-s
-> Reserved.
-> > + *
-> > + * This work is licensed under the terms of the GNU GPL, version 2 or
-> later.
-> > + * See the COPYING file in the top-level directory.
-> > + */
-> > +
-> > +#include "qemu/osdep.h"
-> > +#include "hw/vmapple/bdif.h"
-> > +#include "qemu/log.h"
-> > +#include "qemu/module.h"
-> > +#include "qapi/error.h"
-> > +#include "trace.h"
-> > +#include "hw/block/block.h"
-> > +#include "sysemu/block-backend.h"
-> > +
-> > +#define REG_DEVID_MASK      0xffff0000
-> > +#define DEVID_ROOT          0x00000000
-> > +#define DEVID_AUX           0x00010000
-> > +#define DEVID_USB           0x00100000
-> > +
-> > +#define REG_STATUS          0x0
-> > +#define REG_STATUS_ACTIVE     BIT(0)
-> > +#define REG_CFG             0x4
-> > +#define REG_CFG_ACTIVE        BIT(1)
-> > +#define REG_UNK1            0x8
-> > +#define REG_BUSY            0x10
-> > +#define REG_BUSY_READY        BIT(0)
-> > +#define REG_UNK2            0x400
-> > +#define REG_CMD             0x408
-> > +#define REG_NEXT_DEVICE     0x420
-> > +#define REG_UNK3            0x434
-> > +
-> > +typedef struct vblk_sector {
->
-> Please use VblkSector for the tag name too.
->
-> > +    uint32_t pad;
-> > +    uint32_t pad2;
-> > +    uint32_t sector;
-> > +    uint32_t pad3;
-> > +} VblkSector;
-> > +
-> > +typedef struct vblk_req_cmd {
-> > +    uint64_t addr;
-> > +    uint32_t len;
-> > +    uint32_t flags;
-> > +} VblkReqCmd;
-> > +
-> > +typedef struct vblk_req {
-> > +    VblkReqCmd sector;
-> > +    VblkReqCmd data;
-> > +    VblkReqCmd retval;
-> > +} VblkReq;
-> > +
-> > +#define VBLK_DATA_FLAGS_READ  0x00030001
-> > +#define VBLK_DATA_FLAGS_WRITE 0x00010001
-> > +
-> > +#define VBLK_RET_SUCCESS  0
-> > +#define VBLK_RET_FAILED   1
-> > +
-> > +static uint64_t bdif_read(void *opaque, hwaddr offset, unsigned size)
+> > +static void apple_gfx_pci_get_display_modes(Object *obj, Visitor *v,
+> > +                                            const char *name, void
+> *opaque,
+> > +                                            Error **errp)
 > > +{
-> > +    uint64_t ret =3D -1;
-> > +    uint64_t devid =3D (offset & REG_DEVID_MASK);
->
-> The parenthes in this line are unnecessary.
->
+> > +    Property *prop = opaque;
+> > +    AppleGFXDisplayModeList *mode_list = object_field_prop_ptr(obj,
+> prop);
 > > +
-> > +    switch (offset & ~REG_DEVID_MASK) {
-> > +    case REG_STATUS:
-> > +        ret =3D REG_STATUS_ACTIVE;
-> > +        break;
-> > +    case REG_CFG:
-> > +        ret =3D REG_CFG_ACTIVE;
-> > +        break;
-> > +    case REG_UNK1:
-> > +        ret =3D 0x420;
-> > +        break;
-> > +    case REG_BUSY:
-> > +        ret =3D REG_BUSY_READY;
-> > +        break;
-> > +    case REG_UNK2:
-> > +        ret =3D 0x1;
-> > +        break;
-> > +    case REG_UNK3:
-> > +        ret =3D 0x0;
-> > +        break;
-> > +    case REG_NEXT_DEVICE:
-> > +        switch (devid) {
-> > +        case DEVID_ROOT:
-> > +            ret =3D 0x8000000;
-> > +            break;
-> > +        case DEVID_AUX:
-> > +            ret =3D 0x10000;
-> > +            break;
-> > +        }
-> > +        break;
-> > +    }
-> > +
-> > +    trace_bdif_read(offset, size, ret);
-> > +    return ret;
+> > +    apple_gfx_get_display_modes(mode_list, v, name, errp);
 > > +}
 > > +
-> > +static void le2cpu_sector(VblkSector *sector)
+> > +static void apple_gfx_pci_set_display_modes(Object *obj, Visitor *v,
+> > +                                            const char *name, void
+> *opaque,
+> > +                                            Error **errp)
 > > +{
-> > +    sector->sector =3D le32_to_cpu(sector->sector);
+> > +    Property *prop = opaque;
+> > +    AppleGFXDisplayModeList *mode_list = object_field_prop_ptr(obj,
+> prop);
+> > +
+> > +    apple_gfx_set_display_modes(mode_list, v, name, errp);
 > > +}
 > > +
-> > +static void le2cpu_reqcmd(VblkReqCmd *cmd)
-> > +{
-> > +    cmd->addr =3D le64_to_cpu(cmd->addr);
-> > +    cmd->len =3D le32_to_cpu(cmd->len);
-> > +    cmd->flags =3D le32_to_cpu(cmd->flags);
-> > +}
-> > +
-> > +static void le2cpu_req(VblkReq *req)
-> > +{
-> > +    le2cpu_reqcmd(&req->sector);
-> > +    le2cpu_reqcmd(&req->data);
-> > +    le2cpu_reqcmd(&req->retval);
-> > +}
-> > +
-> > +static void vblk_cmd(uint64_t devid, BlockBackend *blk, uint64_t value=
-,
-> > +                     uint64_t static_off)
-> > +{
-> > +    VblkReq req;
-> > +    VblkSector sector;
-> > +    uint64_t off =3D 0;
-> > +    char *buf =3D NULL;
-> > +    uint8_t ret =3D VBLK_RET_FAILED;
-> > +    int r;
-> > +
-> > +    cpu_physical_memory_read(value, &req, sizeof(req));
-> > +    le2cpu_req(&req);
-> > +
-> > +    if (req.sector.len !=3D sizeof(sector)) {
-> > +        ret =3D VBLK_RET_FAILED;
-> > +        goto out;
-> > +    }
-> > +
-> > +    /* Read the vblk command */
-> > +    cpu_physical_memory_read(req.sector.addr, &sector, sizeof(sector))=
-;
-> > +    le2cpu_sector(&sector);
-> > +
-> > +    off =3D sector.sector * 512ULL + static_off;
-> > +
-> > +    /* Sanity check that we're not allocating bogus sizes */
-> > +    if (req.data.len > (128 * 1024 * 1024)) {
+> > +const PropertyInfo apple_gfx_pci_prop_display_modes = {
+> > +    .name  = "display_modes",
+> > +    .description =
+> > +        "Colon-separated list of display modes; "
+> > +        "<width>x<height>@<refresh-rate>; the first mode is considered "
+> > +        "'native'. Example: 3840x2160@60:2560x1440@60:1920x1080@60",
 >
-> Use MiB defined in: include/qemu/units.h
-> The parentheses on the right hand are also unnecessary.
+> Please use DEFINE_PROP_ARRAY() instead of inventing your own way to
+> define an array.
 >
-> > +        goto out;
-> > +    }
-> > +
-> > +    buf =3D g_malloc0(req.data.len);
-> > +    switch (req.data.flags) {
-> > +    case VBLK_DATA_FLAGS_READ:
-> > +        r =3D blk_pread(blk, off, req.data.len, buf, 0);
-> > +        trace_bdif_vblk_read(devid =3D=3D DEVID_AUX ? "aux" : "root",
-> > +                             req.data.addr, off, req.data.len, r);
-> > +        if (r < 0) {
-> > +            goto out;
-> > +        }
-> > +        cpu_physical_memory_write(req.data.addr, buf, req.data.len);
-> > +        ret =3D VBLK_RET_SUCCESS;
-> > +        break;
-> > +    case VBLK_DATA_FLAGS_WRITE:
-> > +        /* Not needed, iBoot only reads */
-> > +        break;
-> > +    default:
-> > +        break;
-> > +    }
-> > +
-> > +out:
-> > +    g_free(buf);
-> > +    cpu_physical_memory_write(req.retval.addr, &ret, 1);
-> > +}
-> > +
-> > +static void bdif_write(void *opaque, hwaddr offset,
-> > +                       uint64_t value, unsigned size)
-> > +{
-> > +    VMAppleBdifState *s =3D opaque;
-> > +    uint64_t devid =3D (offset & REG_DEVID_MASK);
-> > +
-> > +    trace_bdif_write(offset, size, value);
-> > +
-> > +    switch (offset & ~REG_DEVID_MASK) {
-> > +    case REG_CMD:
-> > +        switch (devid) {
-> > +        case DEVID_ROOT:
-> > +            vblk_cmd(devid, s->root, value, 0x0);
-> > +            break;
-> > +        case DEVID_AUX:
-> > +            vblk_cmd(devid, s->aux, value, 0x0);
-> > +            break;
-> > +        }
-> > +        break;
-> > +    }
-> > +}
-> > +
-> > +static const MemoryRegionOps bdif_ops =3D {
-> > +    .read =3D bdif_read,
-> > +    .write =3D bdif_write,
-> > +    .endianness =3D DEVICE_NATIVE_ENDIAN,
-> > +    .valid =3D {
-> > +        .min_access_size =3D 1,
-> > +        .max_access_size =3D 8,
-> > +    },
-> > +    .impl =3D {
-> > +        .min_access_size =3D 1,
-> > +        .max_access_size =3D 8,
-> > +    },
+
+Looks like the ability to specify array properties on the Qemu command line
+has recently been added. I'm pretty sure I still need the custom set/get
+implementations for each array element (display mode) though.
+
+
+> > +    .get   = apple_gfx_pci_get_display_modes,
+> > +    .set   = apple_gfx_pci_set_display_modes,
 > > +};
 > > +
-> > +static void bdif_init(Object *obj)
-> > +{
-> > +    VMAppleBdifState *s =3D VMAPPLE_BDIF(obj);
+> > +#define DEFINE_PROP_DISPLAY_MODES(_name, _state, _field) \
+> > +    DEFINE_PROP(_name, _state, _field,
+> apple_gfx_pci_prop_display_modes, \
+> > +                AppleGFXDisplayModeList)
 > > +
-> > +    memory_region_init_io(&s->mmio, obj, &bdif_ops, obj,
-> > +                         "VMApple Backdoor Interface",
-> VMAPPLE_BDIF_SIZE);
-> > +    sysbus_init_mmio(SYS_BUS_DEVICE(obj), &s->mmio);
-> > +}
-> > +
-> > +static Property bdif_properties[] =3D {
-> > +    DEFINE_PROP_DRIVE("aux", VMAppleBdifState, aux),
-> > +    DEFINE_PROP_DRIVE("root", VMAppleBdifState, root),
+> > +static Property apple_gfx_pci_properties[] = {
+> > +    DEFINE_PROP_DISPLAY_MODES("display-modes", AppleGFXPCIState,
+> > +                              common.display_modes),
 > > +    DEFINE_PROP_END_OF_LIST(),
 > > +};
 > > +
-> > +static void bdif_class_init(ObjectClass *klass, void *data)
-> > +{
-> > +    DeviceClass *dc =3D DEVICE_CLASS(klass);
-> > +
-> > +    dc->desc =3D "VMApple Backdoor Interface";
-> > +    device_class_set_props(dc, bdif_properties);
-> > +}
-> > +
-> > +static const TypeInfo bdif_info =3D {
-> > +    .name          =3D TYPE_VMAPPLE_BDIF,
-> > +    .parent        =3D TYPE_SYS_BUS_DEVICE,
-> > +    .instance_size =3D sizeof(VMAppleBdifState),
-> > +    .instance_init =3D bdif_init,
-> > +    .class_init    =3D bdif_class_init,
-> > +};
-> > +
-> > +static void bdif_register_types(void)
-> > +{
-> > +    type_register_static(&bdif_info);
-> > +}
-> > +
-> > +type_init(bdif_register_types)
-> > diff --git a/hw/vmapple/meson.build b/hw/vmapple/meson.build
-> > index bcd4dcb28d2..d4624713deb 100644
-> > --- a/hw/vmapple/meson.build
-> > +++ b/hw/vmapple/meson.build
-> > @@ -1 +1,2 @@
-> >   system_ss.add(when: 'CONFIG_VMAPPLE_AES',  if_true: files('aes.c'))
-> > +system_ss.add(when: 'CONFIG_VMAPPLE_BDIF', if_true: files('bdif.c'))
-> > diff --git a/hw/vmapple/trace-events b/hw/vmapple/trace-events
-> > index 1c9a3326eb4..fc8e9cc5897 100644
-> > --- a/hw/vmapple/trace-events
-> > +++ b/hw/vmapple/trace-events
-> > @@ -19,3 +19,8 @@ aes_2_write_unknown(uint64_t offset) "offset=3D0x%"PR=
-Ix64
-> >   aes_2_write(uint64_t offset, uint64_t val) "offset=3D0x%"PRIx64"
-> val=3D0x%"PRIx64
-> >   aes_dump_data(const char *desc, const char *hex) "%s%s"
+> >   static void apple_gfx_pci_class_init(ObjectClass *klass, void *data)
+> >   {
+> >       DeviceClass *dc = DEVICE_CLASS(klass);
+> > @@ -118,7 +159,7 @@ static void apple_gfx_pci_class_init(ObjectClass
+> *klass, void *data)
+> >       pci->class_id = PCI_CLASS_DISPLAY_OTHER;
+> >       pci->realize = apple_gfx_pci_realize;
 > >
-> > +# bdif.c
-> > +bdif_read(uint64_t offset, uint32_t size, uint64_t value)
-> "offset=3D0x%"PRIx64" size=3D0x%x value=3D0x%"PRIx64
-> > +bdif_write(uint64_t offset, uint32_t size, uint64_t value)
-> "offset=3D0x%"PRIx64" size=3D0x%x value=3D0x%"PRIx64
-> > +bdif_vblk_read(const char *dev, uint64_t addr, uint64_t offset,
-> uint32_t len, int r) "dev=3D%s addr=3D0x%"PRIx64" off=3D0x%"PRIx64" size=
-=3D0x%x
-> r=3D%d"
+> > -    // TODO: Property for setting mode list
+> > +    device_class_set_props(dc, apple_gfx_pci_properties);
+> >   }
+> >
+> >   static TypeInfo apple_gfx_pci_types[] = {
+> > diff --git a/hw/display/apple-gfx.h b/hw/display/apple-gfx.h
+> > index 995ecf7f4a7..baad4a98652 100644
+> > --- a/hw/display/apple-gfx.h
+> > +++ b/hw/display/apple-gfx.h
+> > @@ -5,14 +5,28 @@
+> >   #define TYPE_APPLE_GFX_PCI          "apple-gfx-pci"
+> >
+> >   #include "qemu/typedefs.h"
+> > +#include "qemu/osdep.h"
+> >
+> >   typedef struct AppleGFXState AppleGFXState;
+> >
+> > +typedef struct AppleGFXDisplayMode {
+> > +    uint16_t width_px;
+> > +    uint16_t height_px;
+> > +    uint16_t refresh_rate_hz;
+> > +} AppleGFXDisplayMode;
 > > +
-> > diff --git a/include/hw/vmapple/bdif.h b/include/hw/vmapple/bdif.h
-> > new file mode 100644
-> > index 00000000000..65ee43457b9
-> > --- /dev/null
-> > +++ b/include/hw/vmapple/bdif.h
-> > @@ -0,0 +1,31 @@
-> > +/*
-> > + * VMApple Backdoor Interface
-> > + *
-> > + * Copyright =C2=A9 2023 Amazon.com, Inc. or its affiliates. All Right=
-s
-> Reserved.
-> > + *
-> > + * This work is licensed under the terms of the GNU GPL, version 2 or
-> later.
-> > + * See the COPYING file in the top-level directory.
-> > + */
+> > +typedef struct AppleGFXDisplayModeList {
+> > +    GArray *modes;
+> > +} AppleGFXDisplayModeList;
 > > +
-> > +#ifndef HW_VMAPPLE_BDIF_H
-> > +#define HW_VMAPPLE_BDIF_H
+> >   void apple_gfx_common_init(Object *obj, AppleGFXState *s, const char*
+> obj_name);
+> > +void apple_gfx_get_display_modes(AppleGFXDisplayModeList *mode_list,
+> Visitor *v,
+> > +                                 const char *name, Error **errp);
+> > +void apple_gfx_set_display_modes(AppleGFXDisplayModeList *mode_list,
+> Visitor *v,
+> > +                                 const char *name, Error **errp);
+> >
+> >   #ifdef __OBJC__
+> >
+> > -#include "qemu/osdep.h"
+> >   #include "exec/memory.h"
+> >   #include "ui/surface.h"
+> >   #include <dispatch/dispatch.h>
+> > @@ -38,6 +52,7 @@ struct AppleGFXState {
+> >       bool new_frame;
+> >       bool cursor_show;
+> >       QEMUCursor *cursor;
+> > +    AppleGFXDisplayModeList display_modes;
+> >
+> >       dispatch_queue_t render_queue;
+> >       /* The following fields should only be accessed from render_queue:
+> */
+> > diff --git a/hw/display/apple-gfx.m b/hw/display/apple-gfx.m
+> > index 6ef1048d93d..358192db6a0 100644
+> > --- a/hw/display/apple-gfx.m
+> > +++ b/hw/display/apple-gfx.m
+> > @@ -16,6 +16,9 @@
+> >   #include "trace.h"
+> >   #include "qemu-main.h"
+> >   #include "qemu/main-loop.h"
+> > +#include "qemu/cutils.h"
+> > +#include "qapi/visitor.h"
+> > +#include "qapi/error.h"
+> >   #include "ui/console.h"
+> >   #include "monitor/monitor.h"
+> >   #include "qapi/error.h"
+> > @@ -23,9 +26,10 @@
+> >   #include <mach/mach_vm.h>
+> >   #import <ParavirtualizedGraphics/ParavirtualizedGraphics.h>
+> >
+> > -static const PGDisplayCoord_t apple_gfx_modes[] = {
+> > -    { .x = 1440, .y = 1080 },
+> > -    { .x = 1280, .y = 1024 },
+> > +static const AppleGFXDisplayMode apple_gfx_default_modes[] = {
+> > +    { 1920, 1080, 60 },
+> > +    { 1440, 1080, 60 },
+> > +    { 1280, 1024, 60 },
+> >   };
+> >
+> >   typedef struct PGTask_s { // Name matches forward declaration in PG
+> header
+> > @@ -264,7 +268,6 @@ static void set_mode(AppleGFXState *s, uint32_t
+> width, uint32_t height)
+> >   static void create_fb(AppleGFXState *s)
+> >   {
+> >       s->con = graphic_console_init(NULL, 0, &apple_gfx_fb_ops, s);
+> > -    set_mode(s, 1440, 1080);
+> >
+> >       s->cursor_show = true;
+> >   }
+> > @@ -466,20 +469,24 @@ static void
+> apple_gfx_register_task_mapping_handlers(AppleGFXState *s,
+> >       return disp_desc;
+> >   }
+> >
+> > -static NSArray<PGDisplayMode*>*
+> apple_gfx_prepare_display_mode_array(void)
+> > +static NSArray<PGDisplayMode*>* apple_gfx_create_display_mode_array(
+> > +    const AppleGFXDisplayMode display_modes[], int display_mode_count)
+> >   {
+> > -    PGDisplayMode *modes[ARRAY_SIZE(apple_gfx_modes)];
+> > +    PGDisplayMode **modes = alloca(sizeof(modes[0]) *
+> display_mode_count);
+> >       NSArray<PGDisplayMode*>* mode_array = nil;
+> >       int i;
+> >
+> > -    for (i = 0; i < ARRAY_SIZE(apple_gfx_modes); i++) {
+> > +    for (i = 0; i < display_mode_count; i++) {
+> > +        const AppleGFXDisplayMode *mode = &display_modes[i];
+> > +        PGDisplayCoord_t mode_size = { mode->width_px, mode->height_px
+> };
+> >           modes[i] =
+> > -            [[PGDisplayMode alloc]
+> initWithSizeInPixels:apple_gfx_modes[i] refreshRateInHz:60.];
+> > +            [[PGDisplayMode alloc] initWithSizeInPixels:mode_size
 > > +
-> > +#include "hw/sysbus.h"
-> > +#include "qom/object.h"
+> refreshRateInHz:mode->refresh_rate_hz];
+> >       }
+> >
+> > -    mode_array = [NSArray arrayWithObjects:modes
+> count:ARRAY_SIZE(apple_gfx_modes)];
+> > +    mode_array = [NSArray arrayWithObjects:modes
+> count:display_mode_count];
+> >
+> > -    for (i = 0; i < ARRAY_SIZE(apple_gfx_modes); i++) {
+> > +    for (i = 0; i < display_mode_count; i++) {
+> >           [modes[i] release];
+> >           modes[i] = nil;
+> >       }
+> > @@ -516,6 +523,8 @@ static void
+> apple_gfx_register_task_mapping_handlers(AppleGFXState *s,
+> >   void apple_gfx_common_realize(AppleGFXState *s, PGDeviceDescriptor
+> *desc)
+> >   {
+> >       PGDisplayDescriptor *disp_desc = nil;
+> > +    const AppleGFXDisplayMode *display_modes = apple_gfx_default_modes;
+> > +    int num_display_modes = ARRAY_SIZE(apple_gfx_default_modes);
+> >
+> >       QTAILQ_INIT(&s->tasks);
+> >       s->render_queue = dispatch_queue_create("apple-gfx.render",
+> > @@ -533,7 +542,127 @@ void apple_gfx_common_realize(AppleGFXState *s,
+> PGDeviceDescriptor *desc)
+> >       s->pgdisp = [s->pgdev newDisplayWithDescriptor:disp_desc
+> >                                                 port:0 serialNum:1234];
+> >       [disp_desc release];
+> > -    s->pgdisp.modeList = apple_gfx_prepare_display_mode_array();
 > > +
-> > +#define TYPE_VMAPPLE_BDIF "vmapple-bdif"
-> > +OBJECT_DECLARE_SIMPLE_TYPE(VMAppleBdifState, VMAPPLE_BDIF)
+> > +    if (s->display_modes.modes != NULL && s->display_modes.modes->len >
+> 0) {
+> > +        display_modes =
+> > +            &g_array_index(s->display_modes.modes, AppleGFXDisplayMode,
+> 0);
+> > +        num_display_modes = s->display_modes.modes->len;
+> > +    }
+> > +    s->pgdisp.modeList =
+> > +        apple_gfx_create_display_mode_array(display_modes,
+> num_display_modes);
+> >
+> >       create_fb(s);
+> >   }
 > > +
-> > +struct VMAppleBdifState {
-> > +    /* <private> */
-> > +    SysBusDevice parent_obj;
+> > +void apple_gfx_get_display_modes(AppleGFXDisplayModeList *mode_list,
+> Visitor *v,
+> > +                                 const char *name, Error **errp)
+> > +{
+> > +    GArray *modes = mode_list->modes;
+> > +    /* 3 uint16s (max 5 digits) and 3 separator characters per mode +
+> nul. */
+> > +    size_t buffer_size = (5 + 1) * 3 * modes->len + 1;
 > > +
-> > +    /* <public> */
-> > +    BlockBackend *aux;
-> > +    BlockBackend *root;
-> > +    MemoryRegion mmio;
-> > +};
+> > +    char *buffer = alloca(buffer_size);
+> > +    char *pos = buffer;
 > > +
-> > +#define VMAPPLE_BDIF_SIZE 0x00200000
+> > +    unsigned used = 0;
+> > +    buffer[0] = '\0';
+> > +    for (guint i = 0; i < modes->len; ++i)
+> > +    {
+> > +        AppleGFXDisplayMode *mode =
+> > +            &g_array_index(modes, AppleGFXDisplayMode, i);
+> > +        int rc = snprintf(pos, buffer_size - used,
+> > +                          "%s%"PRIu16"x%"PRIu16"@%"PRIu16,
+> > +                          i > 0 ? ":" : "",
+> > +                          mode->width_px, mode->height_px,
+> > +                          mode->refresh_rate_hz);
+> > +        used += rc;
+> > +        pos += rc;
+> > +        assert(used < buffer_size);
+> > +    }
+> > +
+> > +    pos = buffer;
+> > +    visit_type_str(v, name, &pos, errp);
+> > +}
+> > +
+> > +void apple_gfx_set_display_modes(AppleGFXDisplayModeList *mode_list,
+> Visitor *v,
+> > +                                 const char *name, Error **errp)
+> > +{
+> > +    Error *local_err = NULL;
+> > +    const char *endptr;
+> > +    char *str;
+> > +    int ret;
+> > +    unsigned int val;
+> > +    uint32_t num_modes;
+> > +    GArray *modes;
+> > +    uint32_t mode_idx;
+> > +
+> > +    visit_type_str(v, name, &str, &local_err);
+> > +    if (local_err) {
+> > +        error_propagate(errp, local_err);
+> > +        return;
+> > +    }
+> > +
+> > +    // Count colons to estimate modes. No leading/trailing colons so
+> start at 1.
+> > +    num_modes = 1;
+> > +    for (size_t i = 0; str[i] != '\0'; ++i)
+> > +    {
+> > +        if (str[i] == ':') {
+> > +            ++num_modes;
+> > +        }
+> > +    }
+> > +
+> > +    modes = g_array_sized_new(false, true, sizeof(AppleGFXDisplayMode),
+> num_modes);
+> > +
+> > +    endptr = str;
+> > +    for (mode_idx = 0; mode_idx < num_modes; ++mode_idx)
+> > +    {
+> > +        AppleGFXDisplayMode mode = {};
+> > +        if (mode_idx > 0)
+> > +        {
+> > +            if (*endptr != ':') {
+> > +                goto separator_error;
+> > +            }
+> > +            ++endptr;
+> > +        }
+> > +
+> > +        ret = qemu_strtoui(endptr, &endptr, 10, &val);
+> > +        if (ret || val > UINT16_MAX || val == 0) {
+> > +            error_setg(errp, "width of '%s' must be a decimal integer
+> number "
+> > +                       "of pixels in the range 1..65535", name);
+> > +            goto out;
+> > +        }
+> > +        mode.width_px = val;
+> > +        if (*endptr != 'x') {
+> > +            goto separator_error;
+> > +        }
+> > +
+> > +        ret = qemu_strtoui(endptr + 1, &endptr, 10, &val);
+> > +        if (ret || val > UINT16_MAX || val == 0) {
+> > +            error_setg(errp, "height of '%s' must be a decimal integer
+> number "
+> > +                       "of pixels in the range 1..65535", name);
+> > +            goto out;
+> > +        }
+> > +        mode.height_px = val;
+> > +        if (*endptr != '@') {
+> > +            goto separator_error;
+> > +        }
+> > +
+> > +        ret = qemu_strtoui(endptr + 1, &endptr, 10, &val);
+> > +        if (ret) {
+> > +            error_setg(errp, "refresh rate of '%s'"
+> > +                       " must be a non-negative decimal integer
+> (Hertz)", name);
+> > +        }
+> > +        mode.refresh_rate_hz = val;
+> > +        g_array_append_val(modes, mode);
+> > +    }
+> > +
+> > +    mode_list->modes = modes;
+> > +    goto out;
+> > +
+> > +separator_error:
+> > +    error_setg(errp, "Each display mode takes the format "
+> > +               "'<width>x<height>@<rate>', modes are separated by
+> colons. (:)");
+> > +out:
+> > +    g_free(str);
+> > +    return;
+> > +}
 >
-> Please move VMAppleBdifState and VMAPPLE_BDIF_SIZE into: hw/vmapple/bdif.=
-c
-> They are both private.
 >
 
-Hmm, the same thing applies to the cfg device and the virtio-blk extension;
-the only thing that's actually interesting to have in a header file are the
-device type string definitions, so I think I'll put all of them in a single
-/include/hw/vmapple/vmapple.h file.
-
-
-> > +
-> > +#endif /* HW_VMAPPLE_BDIF_H */
->
->
-
---000000000000b2f5b906240bafe9
+--0000000000009983f206240bbcdb
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
 <div dir=3D"ltr"><div dir=3D"ltr"><br></div><br><div class=3D"gmail_quote">=
-<div dir=3D"ltr" class=3D"gmail_attr">On Sat, 5 Oct 2024 at 07:12, Akihiko =
+<div dir=3D"ltr" class=3D"gmail_attr">On Fri, 4 Oct 2024 at 06:17, Akihiko =
 Odaki &lt;<a href=3D"mailto:akihiko.odaki@daynix.com">akihiko.odaki@daynix.=
 com</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"marg=
 in:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1e=
 x">On 2024/09/28 17:57, Phil Dennis-Jordan wrote:<br>
-&gt; From: Alexander Graf &lt;<a href=3D"mailto:graf@amazon.com" target=3D"=
-_blank">graf@amazon.com</a>&gt;<br>
+&gt; This change adds a property &#39;display_modes&#39; on the graphics de=
+vice<br>
+&gt; which permits specifying a list of display modes. (screen resolution<b=
+r>
+&gt; and refresh rate)<br>
 &gt; <br>
-&gt; The VMApple machine exposes AUX and ROOT block devices (as well as USB=
- OTG<br>
-&gt; emulation) via virtio-pci as well as a special, simple backdoor platfo=
-rm<br>
-&gt; device.<br>
+&gt; PCI variant of apple-gfx only for the moment.<br>
 &gt; <br>
-&gt; This patch implements this backdoor platform device to the best of my<=
-br>
-&gt; understanding. I left out any USB OTG parts; they&#39;re only needed f=
-or<br>
-&gt; guest recovery and I don&#39;t understand the protocol yet.<br>
-&gt; <br>
-&gt; Signed-off-by: Alexander Graf &lt;<a href=3D"mailto:graf@amazon.com" t=
-arget=3D"_blank">graf@amazon.com</a>&gt;<br>
 &gt; Signed-off-by: Phil Dennis-Jordan &lt;<a href=3D"mailto:phil@philjorda=
 n.eu" target=3D"_blank">phil@philjordan.eu</a>&gt;<br>
 &gt; ---<br>
-&gt;=C2=A0 =C2=A0hw/vmapple/Kconfig=C2=A0 =C2=A0 =C2=A0 =C2=A0 |=C2=A0 =C2=
-=A03 +<br>
-&gt;=C2=A0 =C2=A0hw/vmapple/bdif.c=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0| 245 +=
-+++++++++++++++++++++++++++++++++++++<br>
-&gt;=C2=A0 =C2=A0hw/vmapple/meson.build=C2=A0 =C2=A0 |=C2=A0 =C2=A01 +<br>
-&gt;=C2=A0 =C2=A0hw/vmapple/trace-events=C2=A0 =C2=A0|=C2=A0 =C2=A05 +<br>
-&gt;=C2=A0 =C2=A0include/hw/vmapple/bdif.h |=C2=A0 31 +++++<br>
-&gt;=C2=A0 =C2=A05 files changed, 285 insertions(+)<br>
-&gt;=C2=A0 =C2=A0create mode 100644 hw/vmapple/bdif.c<br>
-&gt;=C2=A0 =C2=A0create mode 100644 include/hw/vmapple/bdif.h<br>
+&gt;=C2=A0 =C2=A0hw/display/apple-gfx-pci.m |=C2=A0 43 ++++++++++-<br>
+&gt;=C2=A0 =C2=A0hw/display/apple-gfx.h=C2=A0 =C2=A0 =C2=A0|=C2=A0 17 ++++-=
+<br>
+&gt;=C2=A0 =C2=A0hw/display/apple-gfx.m=C2=A0 =C2=A0 =C2=A0| 151 ++++++++++=
+++++++++++++++++++++++++---<br>
+&gt;=C2=A0 =C2=A03 files changed, 198 insertions(+), 13 deletions(-)<br>
 &gt; <br>
-&gt; diff --git a/hw/vmapple/Kconfig b/hw/vmapple/Kconfig<br>
-&gt; index a73504d5999..68f88876eb9 100644<br>
-&gt; --- a/hw/vmapple/Kconfig<br>
-&gt; +++ b/hw/vmapple/Kconfig<br>
-&gt; @@ -1,3 +1,6 @@<br>
-&gt;=C2=A0 =C2=A0config VMAPPLE_AES<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0bool<br>
-&gt;=C2=A0 =C2=A0<br>
-&gt; +config VMAPPLE_BDIF<br>
-&gt; +=C2=A0 =C2=A0 bool<br>
-&gt; +<br>
-&gt; diff --git a/hw/vmapple/bdif.c b/hw/vmapple/bdif.c<br>
-&gt; new file mode 100644<br>
-&gt; index 00000000000..36b5915ff30<br>
-&gt; --- /dev/null<br>
-&gt; +++ b/hw/vmapple/bdif.c<br>
-&gt; @@ -0,0 +1,245 @@<br>
-&gt; +/*<br>
-&gt; + * VMApple Backdoor Interface<br>
-&gt; + *<br>
-&gt; + * Copyright =C2=A9 2023 Amazon.com, Inc. or its affiliates. All Righ=
-ts Reserved.<br>
-&gt; + *<br>
-&gt; + * This work is licensed under the terms of the GNU GPL, version 2 or=
- later.<br>
-&gt; + * See the COPYING file in the top-level directory.<br>
-&gt; + */<br>
-&gt; +<br>
-&gt; +#include &quot;qemu/osdep.h&quot;<br>
-&gt; +#include &quot;hw/vmapple/bdif.h&quot;<br>
-&gt; +#include &quot;qemu/log.h&quot;<br>
-&gt; +#include &quot;qemu/module.h&quot;<br>
-&gt; +#include &quot;qapi/error.h&quot;<br>
-&gt; +#include &quot;trace.h&quot;<br>
-&gt; +#include &quot;hw/block/block.h&quot;<br>
-&gt; +#include &quot;sysemu/block-backend.h&quot;<br>
-&gt; +<br>
-&gt; +#define REG_DEVID_MASK=C2=A0 =C2=A0 =C2=A0 0xffff0000<br>
-&gt; +#define DEVID_ROOT=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 0x00000000<br>
-&gt; +#define DEVID_AUX=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A00x00010000<=
-br>
-&gt; +#define DEVID_USB=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A00x00100000<=
-br>
-&gt; +<br>
-&gt; +#define REG_STATUS=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 0x0<br>
-&gt; +#define REG_STATUS_ACTIVE=C2=A0 =C2=A0 =C2=A0BIT(0)<br>
-&gt; +#define REG_CFG=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A00x4<br=
->
-&gt; +#define REG_CFG_ACTIVE=C2=A0 =C2=A0 =C2=A0 =C2=A0 BIT(1)<br>
-&gt; +#define REG_UNK1=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 0x8<br>
-&gt; +#define REG_BUSY=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 0x10<br>
-&gt; +#define REG_BUSY_READY=C2=A0 =C2=A0 =C2=A0 =C2=A0 BIT(0)<br>
-&gt; +#define REG_UNK2=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 0x400<br>
-&gt; +#define REG_CMD=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A00x408<=
-br>
-&gt; +#define REG_NEXT_DEVICE=C2=A0 =C2=A0 =C2=A00x420<br>
-&gt; +#define REG_UNK3=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 0x434<br>
-&gt; +<br>
-&gt; +typedef struct vblk_sector {<br>
-<br>
-Please use VblkSector for the tag name too.<br>
-<br>
-&gt; +=C2=A0 =C2=A0 uint32_t pad;<br>
-&gt; +=C2=A0 =C2=A0 uint32_t pad2;<br>
-&gt; +=C2=A0 =C2=A0 uint32_t sector;<br>
-&gt; +=C2=A0 =C2=A0 uint32_t pad3;<br>
-&gt; +} VblkSector;<br>
-&gt; +<br>
-&gt; +typedef struct vblk_req_cmd {<br>
-&gt; +=C2=A0 =C2=A0 uint64_t addr;<br>
-&gt; +=C2=A0 =C2=A0 uint32_t len;<br>
-&gt; +=C2=A0 =C2=A0 uint32_t flags;<br>
-&gt; +} VblkReqCmd;<br>
-&gt; +<br>
-&gt; +typedef struct vblk_req {<br>
-&gt; +=C2=A0 =C2=A0 VblkReqCmd sector;<br>
-&gt; +=C2=A0 =C2=A0 VblkReqCmd data;<br>
-&gt; +=C2=A0 =C2=A0 VblkReqCmd retval;<br>
-&gt; +} VblkReq;<br>
-&gt; +<br>
-&gt; +#define VBLK_DATA_FLAGS_READ=C2=A0 0x00030001<br>
-&gt; +#define VBLK_DATA_FLAGS_WRITE 0x00010001<br>
-&gt; +<br>
-&gt; +#define VBLK_RET_SUCCESS=C2=A0 0<br>
-&gt; +#define VBLK_RET_FAILED=C2=A0 =C2=A01<br>
-&gt; +<br>
-&gt; +static uint64_t bdif_read(void *opaque, hwaddr offset, unsigned size)=
-<br>
-&gt; +{<br>
-&gt; +=C2=A0 =C2=A0 uint64_t ret =3D -1;<br>
-&gt; +=C2=A0 =C2=A0 uint64_t devid =3D (offset &amp; REG_DEVID_MASK);<br>
-<br>
-The parenthes in this line are unnecessary.<br>
-<br>
-&gt; +<br>
-&gt; +=C2=A0 =C2=A0 switch (offset &amp; ~REG_DEVID_MASK) {<br>
-&gt; +=C2=A0 =C2=A0 case REG_STATUS:<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 ret =3D REG_STATUS_ACTIVE;<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 break;<br>
-&gt; +=C2=A0 =C2=A0 case REG_CFG:<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 ret =3D REG_CFG_ACTIVE;<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 break;<br>
-&gt; +=C2=A0 =C2=A0 case REG_UNK1:<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 ret =3D 0x420;<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 break;<br>
-&gt; +=C2=A0 =C2=A0 case REG_BUSY:<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 ret =3D REG_BUSY_READY;<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 break;<br>
-&gt; +=C2=A0 =C2=A0 case REG_UNK2:<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 ret =3D 0x1;<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 break;<br>
-&gt; +=C2=A0 =C2=A0 case REG_UNK3:<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 ret =3D 0x0;<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 break;<br>
-&gt; +=C2=A0 =C2=A0 case REG_NEXT_DEVICE:<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 switch (devid) {<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 case DEVID_ROOT:<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 ret =3D 0x8000000;<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 break;<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 case DEVID_AUX:<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 ret =3D 0x10000;<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 break;<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 break;<br>
-&gt; +=C2=A0 =C2=A0 }<br>
-&gt; +<br>
-&gt; +=C2=A0 =C2=A0 trace_bdif_read(offset, size, ret);<br>
-&gt; +=C2=A0 =C2=A0 return ret;<br>
-&gt; +}<br>
-&gt; +<br>
-&gt; +static void le2cpu_sector(VblkSector *sector)<br>
-&gt; +{<br>
-&gt; +=C2=A0 =C2=A0 sector-&gt;sector =3D le32_to_cpu(sector-&gt;sector);<b=
+&gt; diff --git a/hw/display/apple-gfx-pci.m b/hw/display/apple-gfx-pci.m<b=
 r>
-&gt; +}<br>
-&gt; +<br>
-&gt; +static void le2cpu_reqcmd(VblkReqCmd *cmd)<br>
-&gt; +{<br>
-&gt; +=C2=A0 =C2=A0 cmd-&gt;addr =3D le64_to_cpu(cmd-&gt;addr);<br>
-&gt; +=C2=A0 =C2=A0 cmd-&gt;len =3D le32_to_cpu(cmd-&gt;len);<br>
-&gt; +=C2=A0 =C2=A0 cmd-&gt;flags =3D le32_to_cpu(cmd-&gt;flags);<br>
-&gt; +}<br>
-&gt; +<br>
-&gt; +static void le2cpu_req(VblkReq *req)<br>
-&gt; +{<br>
-&gt; +=C2=A0 =C2=A0 le2cpu_reqcmd(&amp;req-&gt;sector);<br>
-&gt; +=C2=A0 =C2=A0 le2cpu_reqcmd(&amp;req-&gt;data);<br>
-&gt; +=C2=A0 =C2=A0 le2cpu_reqcmd(&amp;req-&gt;retval);<br>
-&gt; +}<br>
-&gt; +<br>
-&gt; +static void vblk_cmd(uint64_t devid, BlockBackend *blk, uint64_t valu=
-e,<br>
+&gt; index 9370258ee46..ea86a1f4a21 100644<br>
+&gt; --- a/hw/display/apple-gfx-pci.m<br>
+&gt; +++ b/hw/display/apple-gfx-pci.m<br>
+&gt; @@ -16,6 +16,7 @@<br>
+&gt;=C2=A0 =C2=A0#include &quot;apple-gfx.h&quot;<br>
+&gt;=C2=A0 =C2=A0#include &quot;hw/pci/pci_device.h&quot;<br>
+&gt;=C2=A0 =C2=A0#include &quot;hw/pci/msi.h&quot;<br>
+&gt; +#include &quot;hw/qdev-properties.h&quot;<br>
+&gt;=C2=A0 =C2=A0#include &quot;qapi/error.h&quot;<br>
+&gt;=C2=A0 =C2=A0#include &quot;trace.h&quot;<br>
+&gt;=C2=A0 =C2=A0#import &lt;ParavirtualizedGraphics/ParavirtualizedGraphic=
+s.h&gt;<br>
+&gt; @@ -101,6 +102,46 @@ static void apple_gfx_pci_reset(Object *obj, Rese=
+tType type)<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0[s-&gt;common.pgdev reset];<br>
+&gt;=C2=A0 =C2=A0}<br>
+&gt;=C2=A0 =C2=A0<br>
+&gt; +static void apple_gfx_pci_get_display_modes(Object *obj, Visitor *v,<=
+br>
 &gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0uint64_t static_off)<br>
-&gt; +{<br>
-&gt; +=C2=A0 =C2=A0 VblkReq req;<br>
-&gt; +=C2=A0 =C2=A0 VblkSector sector;<br>
-&gt; +=C2=A0 =C2=A0 uint64_t off =3D 0;<br>
-&gt; +=C2=A0 =C2=A0 char *buf =3D NULL;<br>
-&gt; +=C2=A0 =C2=A0 uint8_t ret =3D VBLK_RET_FAILED;<br>
-&gt; +=C2=A0 =C2=A0 int r;<br>
-&gt; +<br>
-&gt; +=C2=A0 =C2=A0 cpu_physical_memory_read(value, &amp;req, sizeof(req));=
-<br>
-&gt; +=C2=A0 =C2=A0 le2cpu_req(&amp;req);<br>
-&gt; +<br>
-&gt; +=C2=A0 =C2=A0 if (req.sector.len !=3D sizeof(sector)) {<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 ret =3D VBLK_RET_FAILED;<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 goto out;<br>
-&gt; +=C2=A0 =C2=A0 }<br>
-&gt; +<br>
-&gt; +=C2=A0 =C2=A0 /* Read the vblk command */<br>
-&gt; +=C2=A0 =C2=A0 cpu_physical_memory_read(req.sector.addr, &amp;sector, =
-sizeof(sector));<br>
-&gt; +=C2=A0 =C2=A0 le2cpu_sector(&amp;sector);<br>
-&gt; +<br>
-&gt; +=C2=A0 =C2=A0 off =3D sector.sector * 512ULL + static_off;<br>
-&gt; +<br>
-&gt; +=C2=A0 =C2=A0 /* Sanity check that we&#39;re not allocating bogus siz=
-es */<br>
-&gt; +=C2=A0 =C2=A0 if (req.data.len &gt; (128 * 1024 * 1024)) {<br>
-<br>
-Use MiB defined in: include/qemu/units.h<br>
-The parentheses on the right hand are also unnecessary.<br>
-<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 goto out;<br>
-&gt; +=C2=A0 =C2=A0 }<br>
-&gt; +<br>
-&gt; +=C2=A0 =C2=A0 buf =3D g_malloc0(req.data.len);<br>
-&gt; +=C2=A0 =C2=A0 switch (req.data.flags) {<br>
-&gt; +=C2=A0 =C2=A0 case VBLK_DATA_FLAGS_READ:<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 r =3D blk_pread(blk, off, req.data.len, b=
-uf, 0);<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 trace_bdif_vblk_read(devid =3D=3D DEVID_A=
-UX ? &quot;aux&quot; : &quot;root&quot;,<br>
+ =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 const char *name, void *opaque,<br>
 &gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0req.data.addr, off, req.data.len, r);<br=
->
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 if (r &lt; 0) {<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 goto out;<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 cpu_physical_memory_write(req.data.addr, =
-buf, req.data.len);<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 ret =3D VBLK_RET_SUCCESS;<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 break;<br>
-&gt; +=C2=A0 =C2=A0 case VBLK_DATA_FLAGS_WRITE:<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 /* Not needed, iBoot only reads */<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 break;<br>
-&gt; +=C2=A0 =C2=A0 default:<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 break;<br>
-&gt; +=C2=A0 =C2=A0 }<br>
+ =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 Error **errp)<br>
+&gt; +{<br>
+&gt; +=C2=A0 =C2=A0 Property *prop =3D opaque;<br>
+&gt; +=C2=A0 =C2=A0 AppleGFXDisplayModeList *mode_list =3D object_field_pro=
+p_ptr(obj, prop);<br>
 &gt; +<br>
-&gt; +out:<br>
-&gt; +=C2=A0 =C2=A0 g_free(buf);<br>
-&gt; +=C2=A0 =C2=A0 cpu_physical_memory_write(req.retval.addr, &amp;ret, 1)=
-;<br>
+&gt; +=C2=A0 =C2=A0 apple_gfx_get_display_modes(mode_list, v, name, errp);<=
+br>
 &gt; +}<br>
 &gt; +<br>
-&gt; +static void bdif_write(void *opaque, hwaddr offset,<br>
+&gt; +static void apple_gfx_pci_set_display_modes(Object *obj, Visitor *v,<=
+br>
 &gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0 =C2=A0uint64_t value, unsigned size)<br>
+ =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 const char *name, void *opaque,<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
+ =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 Error **errp)<br>
 &gt; +{<br>
-&gt; +=C2=A0 =C2=A0 VMAppleBdifState *s =3D opaque;<br>
-&gt; +=C2=A0 =C2=A0 uint64_t devid =3D (offset &amp; REG_DEVID_MASK);<br>
+&gt; +=C2=A0 =C2=A0 Property *prop =3D opaque;<br>
+&gt; +=C2=A0 =C2=A0 AppleGFXDisplayModeList *mode_list =3D object_field_pro=
+p_ptr(obj, prop);<br>
 &gt; +<br>
-&gt; +=C2=A0 =C2=A0 trace_bdif_write(offset, size, value);<br>
-&gt; +<br>
-&gt; +=C2=A0 =C2=A0 switch (offset &amp; ~REG_DEVID_MASK) {<br>
-&gt; +=C2=A0 =C2=A0 case REG_CMD:<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 switch (devid) {<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 case DEVID_ROOT:<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 vblk_cmd(devid, s-&gt;root,=
- value, 0x0);<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 break;<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 case DEVID_AUX:<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 vblk_cmd(devid, s-&gt;aux, =
-value, 0x0);<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 break;<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 break;<br>
-&gt; +=C2=A0 =C2=A0 }<br>
+&gt; +=C2=A0 =C2=A0 apple_gfx_set_display_modes(mode_list, v, name, errp);<=
+br>
 &gt; +}<br>
 &gt; +<br>
-&gt; +static const MemoryRegionOps bdif_ops =3D {<br>
-&gt; +=C2=A0 =C2=A0 .read =3D bdif_read,<br>
-&gt; +=C2=A0 =C2=A0 .write =3D bdif_write,<br>
-&gt; +=C2=A0 =C2=A0 .endianness =3D DEVICE_NATIVE_ENDIAN,<br>
-&gt; +=C2=A0 =C2=A0 .valid =3D {<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 .min_access_size =3D 1,<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 .max_access_size =3D 8,<br>
-&gt; +=C2=A0 =C2=A0 },<br>
-&gt; +=C2=A0 =C2=A0 .impl =3D {<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 .min_access_size =3D 1,<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 .max_access_size =3D 8,<br>
-&gt; +=C2=A0 =C2=A0 },<br>
+&gt; +const PropertyInfo apple_gfx_pci_prop_display_modes =3D {<br>
+&gt; +=C2=A0 =C2=A0 .name=C2=A0 =3D &quot;display_modes&quot;,<br>
+&gt; +=C2=A0 =C2=A0 .description =3D<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;Colon-separated list of display mod=
+es; &quot;<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;&lt;width&gt;x&lt;height&gt;@&lt;re=
+fresh-rate&gt;; the first mode is considered &quot;<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 &quot;&#39;native&#39;. Example: 3840x216=
+0@60:2560x1440@60:1920x1080@60&quot;,<br>
+<br>
+Please use DEFINE_PROP_ARRAY() instead of inventing your own way to <br>
+define an array.<br></blockquote><div><br></div><div>Looks like the ability=
+ to specify array properties on the Qemu command line has recently been add=
+ed. I&#39;m pretty sure I still need the custom set/get implementations for=
+ each array element (display mode) though.<br></div><div>=C2=A0</div><block=
+quote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1=
+px solid rgb(204,204,204);padding-left:1ex">
+&gt; +=C2=A0 =C2=A0 .get=C2=A0 =C2=A0=3D apple_gfx_pci_get_display_modes,<b=
+r>
+&gt; +=C2=A0 =C2=A0 .set=C2=A0 =C2=A0=3D apple_gfx_pci_set_display_modes,<b=
+r>
 &gt; +};<br>
 &gt; +<br>
-&gt; +static void bdif_init(Object *obj)<br>
-&gt; +{<br>
-&gt; +=C2=A0 =C2=A0 VMAppleBdifState *s =3D VMAPPLE_BDIF(obj);<br>
+&gt; +#define DEFINE_PROP_DISPLAY_MODES(_name, _state, _field) \<br>
+&gt; +=C2=A0 =C2=A0 DEFINE_PROP(_name, _state, _field, apple_gfx_pci_prop_d=
+isplay_modes, \<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 AppleGFXDispl=
+ayModeList)<br>
 &gt; +<br>
-&gt; +=C2=A0 =C2=A0 memory_region_init_io(&amp;s-&gt;mmio, obj, &amp;bdif_o=
-ps, obj,<br>
+&gt; +static Property apple_gfx_pci_properties[] =3D {<br>
+&gt; +=C2=A0 =C2=A0 DEFINE_PROP_DISPLAY_MODES(&quot;display-modes&quot;, Ap=
+pleGFXPCIState,<br>
 &gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0 =C2=A0 =C2=A0&quot;VMApple Backdoor Interface&quot;, VMAPPLE_BDIF_S=
-IZE);<br>
-&gt; +=C2=A0 =C2=A0 sysbus_init_mmio(SYS_BUS_DEVICE(obj), &amp;s-&gt;mmio);=
-<br>
-&gt; +}<br>
-&gt; +<br>
-&gt; +static Property bdif_properties[] =3D {<br>
-&gt; +=C2=A0 =C2=A0 DEFINE_PROP_DRIVE(&quot;aux&quot;, VMAppleBdifState, au=
-x),<br>
-&gt; +=C2=A0 =C2=A0 DEFINE_PROP_DRIVE(&quot;root&quot;, VMAppleBdifState, r=
-oot),<br>
+ =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 common.display_modes),<br>
 &gt; +=C2=A0 =C2=A0 DEFINE_PROP_END_OF_LIST(),<br>
 &gt; +};<br>
 &gt; +<br>
-&gt; +static void bdif_class_init(ObjectClass *klass, void *data)<br>
-&gt; +{<br>
-&gt; +=C2=A0 =C2=A0 DeviceClass *dc =3D DEVICE_CLASS(klass);<br>
-&gt; +<br>
-&gt; +=C2=A0 =C2=A0 dc-&gt;desc =3D &quot;VMApple Backdoor Interface&quot;;=
-<br>
-&gt; +=C2=A0 =C2=A0 device_class_set_props(dc, bdif_properties);<br>
-&gt; +}<br>
-&gt; +<br>
-&gt; +static const TypeInfo bdif_info =3D {<br>
-&gt; +=C2=A0 =C2=A0 .name=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =3D TYPE_VMAPPL=
-E_BDIF,<br>
-&gt; +=C2=A0 =C2=A0 .parent=C2=A0 =C2=A0 =C2=A0 =C2=A0 =3D TYPE_SYS_BUS_DEV=
-ICE,<br>
-&gt; +=C2=A0 =C2=A0 .instance_size =3D sizeof(VMAppleBdifState),<br>
-&gt; +=C2=A0 =C2=A0 .instance_init =3D bdif_init,<br>
-&gt; +=C2=A0 =C2=A0 .class_init=C2=A0 =C2=A0 =3D bdif_class_init,<br>
-&gt; +};<br>
-&gt; +<br>
-&gt; +static void bdif_register_types(void)<br>
-&gt; +{<br>
-&gt; +=C2=A0 =C2=A0 type_register_static(&amp;bdif_info);<br>
-&gt; +}<br>
-&gt; +<br>
-&gt; +type_init(bdif_register_types)<br>
-&gt; diff --git a/hw/vmapple/meson.build b/hw/vmapple/meson.build<br>
-&gt; index bcd4dcb28d2..d4624713deb 100644<br>
-&gt; --- a/hw/vmapple/meson.build<br>
-&gt; +++ b/hw/vmapple/meson.build<br>
-&gt; @@ -1 +1,2 @@<br>
-&gt;=C2=A0 =C2=A0system_ss.add(when: &#39;CONFIG_VMAPPLE_AES&#39;,=C2=A0 if=
-_true: files(&#39;aes.c&#39;))<br>
-&gt; +system_ss.add(when: &#39;CONFIG_VMAPPLE_BDIF&#39;, if_true: files(&#3=
-9;bdif.c&#39;))<br>
-&gt; diff --git a/hw/vmapple/trace-events b/hw/vmapple/trace-events<br>
-&gt; index 1c9a3326eb4..fc8e9cc5897 100644<br>
-&gt; --- a/hw/vmapple/trace-events<br>
-&gt; +++ b/hw/vmapple/trace-events<br>
-&gt; @@ -19,3 +19,8 @@ aes_2_write_unknown(uint64_t offset) &quot;offset=3D=
-0x%&quot;PRIx64<br>
-&gt;=C2=A0 =C2=A0aes_2_write(uint64_t offset, uint64_t val) &quot;offset=3D=
-0x%&quot;PRIx64&quot; val=3D0x%&quot;PRIx64<br>
-&gt;=C2=A0 =C2=A0aes_dump_data(const char *desc, const char *hex) &quot;%s%=
-s&quot;<br>
+&gt;=C2=A0 =C2=A0static void apple_gfx_pci_class_init(ObjectClass *klass, v=
+oid *data)<br>
+&gt;=C2=A0 =C2=A0{<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0DeviceClass *dc =3D DEVICE_CLASS(klass);<br>
+&gt; @@ -118,7 +159,7 @@ static void apple_gfx_pci_class_init(ObjectClass *=
+klass, void *data)<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0pci-&gt;class_id =3D PCI_CLASS_DISPLAY_OTHER=
+;<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0pci-&gt;realize =3D apple_gfx_pci_realize;<b=
+r>
 &gt;=C2=A0 =C2=A0<br>
-&gt; +# bdif.c<br>
-&gt; +bdif_read(uint64_t offset, uint32_t size, uint64_t value) &quot;offse=
-t=3D0x%&quot;PRIx64&quot; size=3D0x%x value=3D0x%&quot;PRIx64<br>
-&gt; +bdif_write(uint64_t offset, uint32_t size, uint64_t value) &quot;offs=
-et=3D0x%&quot;PRIx64&quot; size=3D0x%x value=3D0x%&quot;PRIx64<br>
-&gt; +bdif_vblk_read(const char *dev, uint64_t addr, uint64_t offset, uint3=
-2_t len, int r) &quot;dev=3D%s addr=3D0x%&quot;PRIx64&quot; off=3D0x%&quot;=
-PRIx64&quot; size=3D0x%x r=3D%d&quot;<br>
+&gt; -=C2=A0 =C2=A0 // TODO: Property for setting mode list<br>
+&gt; +=C2=A0 =C2=A0 device_class_set_props(dc, apple_gfx_pci_properties);<b=
+r>
+&gt;=C2=A0 =C2=A0}<br>
+&gt;=C2=A0 =C2=A0<br>
+&gt;=C2=A0 =C2=A0static TypeInfo apple_gfx_pci_types[] =3D {<br>
+&gt; diff --git a/hw/display/apple-gfx.h b/hw/display/apple-gfx.h<br>
+&gt; index 995ecf7f4a7..baad4a98652 100644<br>
+&gt; --- a/hw/display/apple-gfx.h<br>
+&gt; +++ b/hw/display/apple-gfx.h<br>
+&gt; @@ -5,14 +5,28 @@<br>
+&gt;=C2=A0 =C2=A0#define TYPE_APPLE_GFX_PCI=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 &quot;apple-gfx-pci&quot;<br>
+&gt;=C2=A0 =C2=A0<br>
+&gt;=C2=A0 =C2=A0#include &quot;qemu/typedefs.h&quot;<br>
+&gt; +#include &quot;qemu/osdep.h&quot;<br>
+&gt;=C2=A0 =C2=A0<br>
+&gt;=C2=A0 =C2=A0typedef struct AppleGFXState AppleGFXState;<br>
+&gt;=C2=A0 =C2=A0<br>
+&gt; +typedef struct AppleGFXDisplayMode {<br>
+&gt; +=C2=A0 =C2=A0 uint16_t width_px;<br>
+&gt; +=C2=A0 =C2=A0 uint16_t height_px;<br>
+&gt; +=C2=A0 =C2=A0 uint16_t refresh_rate_hz;<br>
+&gt; +} AppleGFXDisplayMode;<br>
 &gt; +<br>
-&gt; diff --git a/include/hw/vmapple/bdif.h b/include/hw/vmapple/bdif.h<br>
-&gt; new file mode 100644<br>
-&gt; index 00000000000..65ee43457b9<br>
-&gt; --- /dev/null<br>
-&gt; +++ b/include/hw/vmapple/bdif.h<br>
-&gt; @@ -0,0 +1,31 @@<br>
-&gt; +/*<br>
-&gt; + * VMApple Backdoor Interface<br>
-&gt; + *<br>
-&gt; + * Copyright =C2=A9 2023 Amazon.com, Inc. or its affiliates. All Righ=
-ts Reserved.<br>
-&gt; + *<br>
-&gt; + * This work is licensed under the terms of the GNU GPL, version 2 or=
- later.<br>
-&gt; + * See the COPYING file in the top-level directory.<br>
-&gt; + */<br>
+&gt; +typedef struct AppleGFXDisplayModeList {<br>
+&gt; +=C2=A0 =C2=A0 GArray *modes;<br>
+&gt; +} AppleGFXDisplayModeList;<br>
 &gt; +<br>
-&gt; +#ifndef HW_VMAPPLE_BDIF_H<br>
-&gt; +#define HW_VMAPPLE_BDIF_H<br>
+&gt;=C2=A0 =C2=A0void apple_gfx_common_init(Object *obj, AppleGFXState *s, =
+const char* obj_name);<br>
+&gt; +void apple_gfx_get_display_modes(AppleGFXDisplayModeList *mode_list, =
+Visitor *v,<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
+ =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0const char *name, Error **=
+errp);<br>
+&gt; +void apple_gfx_set_display_modes(AppleGFXDisplayModeList *mode_list, =
+Visitor *v,<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
+ =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0const char *name, Error **=
+errp);<br>
+&gt;=C2=A0 =C2=A0<br>
+&gt;=C2=A0 =C2=A0#ifdef __OBJC__<br>
+&gt;=C2=A0 =C2=A0<br>
+&gt; -#include &quot;qemu/osdep.h&quot;<br>
+&gt;=C2=A0 =C2=A0#include &quot;exec/memory.h&quot;<br>
+&gt;=C2=A0 =C2=A0#include &quot;ui/surface.h&quot;<br>
+&gt;=C2=A0 =C2=A0#include &lt;dispatch/dispatch.h&gt;<br>
+&gt; @@ -38,6 +52,7 @@ struct AppleGFXState {<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0bool new_frame;<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0bool cursor_show;<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0QEMUCursor *cursor;<br>
+&gt; +=C2=A0 =C2=A0 AppleGFXDisplayModeList display_modes;<br>
+&gt;=C2=A0 =C2=A0<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0dispatch_queue_t render_queue;<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0/* The following fields should only be acces=
+sed from render_queue: */<br>
+&gt; diff --git a/hw/display/apple-gfx.m b/hw/display/apple-gfx.m<br>
+&gt; index 6ef1048d93d..358192db6a0 100644<br>
+&gt; --- a/hw/display/apple-gfx.m<br>
+&gt; +++ b/hw/display/apple-gfx.m<br>
+&gt; @@ -16,6 +16,9 @@<br>
+&gt;=C2=A0 =C2=A0#include &quot;trace.h&quot;<br>
+&gt;=C2=A0 =C2=A0#include &quot;qemu-main.h&quot;<br>
+&gt;=C2=A0 =C2=A0#include &quot;qemu/main-loop.h&quot;<br>
+&gt; +#include &quot;qemu/cutils.h&quot;<br>
+&gt; +#include &quot;qapi/visitor.h&quot;<br>
+&gt; +#include &quot;qapi/error.h&quot;<br>
+&gt;=C2=A0 =C2=A0#include &quot;ui/console.h&quot;<br>
+&gt;=C2=A0 =C2=A0#include &quot;monitor/monitor.h&quot;<br>
+&gt;=C2=A0 =C2=A0#include &quot;qapi/error.h&quot;<br>
+&gt; @@ -23,9 +26,10 @@<br>
+&gt;=C2=A0 =C2=A0#include &lt;mach/mach_vm.h&gt;<br>
+&gt;=C2=A0 =C2=A0#import &lt;ParavirtualizedGraphics/ParavirtualizedGraphic=
+s.h&gt;<br>
+&gt;=C2=A0 =C2=A0<br>
+&gt; -static const PGDisplayCoord_t apple_gfx_modes[] =3D {<br>
+&gt; -=C2=A0 =C2=A0 { .x =3D 1440, .y =3D 1080 },<br>
+&gt; -=C2=A0 =C2=A0 { .x =3D 1280, .y =3D 1024 },<br>
+&gt; +static const AppleGFXDisplayMode apple_gfx_default_modes[] =3D {<br>
+&gt; +=C2=A0 =C2=A0 { 1920, 1080, 60 },<br>
+&gt; +=C2=A0 =C2=A0 { 1440, 1080, 60 },<br>
+&gt; +=C2=A0 =C2=A0 { 1280, 1024, 60 },<br>
+&gt;=C2=A0 =C2=A0};<br>
+&gt;=C2=A0 =C2=A0<br>
+&gt;=C2=A0 =C2=A0typedef struct PGTask_s { // Name matches forward declarat=
+ion in PG header<br>
+&gt; @@ -264,7 +268,6 @@ static void set_mode(AppleGFXState *s, uint32_t wi=
+dth, uint32_t height)<br>
+&gt;=C2=A0 =C2=A0static void create_fb(AppleGFXState *s)<br>
+&gt;=C2=A0 =C2=A0{<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0s-&gt;con =3D graphic_console_init(NULL, 0, =
+&amp;apple_gfx_fb_ops, s);<br>
+&gt; -=C2=A0 =C2=A0 set_mode(s, 1440, 1080);<br>
+&gt;=C2=A0 =C2=A0<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0s-&gt;cursor_show =3D true;<br>
+&gt;=C2=A0 =C2=A0}<br>
+&gt; @@ -466,20 +469,24 @@ static void apple_gfx_register_task_mapping_hand=
+lers(AppleGFXState *s,<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0return disp_desc;<br>
+&gt;=C2=A0 =C2=A0}<br>
+&gt;=C2=A0 =C2=A0<br>
+&gt; -static NSArray&lt;PGDisplayMode*&gt;* apple_gfx_prepare_display_mode_=
+array(void)<br>
+&gt; +static NSArray&lt;PGDisplayMode*&gt;* apple_gfx_create_display_mode_a=
+rray(<br>
+&gt; +=C2=A0 =C2=A0 const AppleGFXDisplayMode display_modes[], int display_=
+mode_count)<br>
+&gt;=C2=A0 =C2=A0{<br>
+&gt; -=C2=A0 =C2=A0 PGDisplayMode *modes[ARRAY_SIZE(apple_gfx_modes)];<br>
+&gt; +=C2=A0 =C2=A0 PGDisplayMode **modes =3D alloca(sizeof(modes[0]) * dis=
+play_mode_count);<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0NSArray&lt;PGDisplayMode*&gt;* mode_array =
+=3D nil;<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0int i;<br>
+&gt;=C2=A0 =C2=A0<br>
+&gt; -=C2=A0 =C2=A0 for (i =3D 0; i &lt; ARRAY_SIZE(apple_gfx_modes); i++) =
+{<br>
+&gt; +=C2=A0 =C2=A0 for (i =3D 0; i &lt; display_mode_count; i++) {<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 const AppleGFXDisplayMode *mode =3D &amp;=
+display_modes[i];<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 PGDisplayCoord_t mode_size =3D { mode-&gt=
+;width_px, mode-&gt;height_px };<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0modes[i] =3D<br>
+&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 [[PGDisplayMode alloc] init=
+WithSizeInPixels:apple_gfx_modes[i] refreshRateInHz:60.];<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 [[PGDisplayMode alloc] init=
+WithSizeInPixels:mode_size<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
+ =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 refr=
+eshRateInHz:mode-&gt;refresh_rate_hz];<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0}<br>
+&gt;=C2=A0 =C2=A0<br>
+&gt; -=C2=A0 =C2=A0 mode_array =3D [NSArray arrayWithObjects:modes count:AR=
+RAY_SIZE(apple_gfx_modes)];<br>
+&gt; +=C2=A0 =C2=A0 mode_array =3D [NSArray arrayWithObjects:modes count:di=
+splay_mode_count];<br>
+&gt;=C2=A0 =C2=A0<br>
+&gt; -=C2=A0 =C2=A0 for (i =3D 0; i &lt; ARRAY_SIZE(apple_gfx_modes); i++) =
+{<br>
+&gt; +=C2=A0 =C2=A0 for (i =3D 0; i &lt; display_mode_count; i++) {<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0[modes[i] release];<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0modes[i] =3D nil;<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0}<br>
+&gt; @@ -516,6 +523,8 @@ static void apple_gfx_register_task_mapping_handle=
+rs(AppleGFXState *s,<br>
+&gt;=C2=A0 =C2=A0void apple_gfx_common_realize(AppleGFXState *s, PGDeviceDe=
+scriptor *desc)<br>
+&gt;=C2=A0 =C2=A0{<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0PGDisplayDescriptor *disp_desc =3D nil;<br>
+&gt; +=C2=A0 =C2=A0 const AppleGFXDisplayMode *display_modes =3D apple_gfx_=
+default_modes;<br>
+&gt; +=C2=A0 =C2=A0 int num_display_modes =3D ARRAY_SIZE(apple_gfx_default_=
+modes);<br>
+&gt;=C2=A0 =C2=A0<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0QTAILQ_INIT(&amp;s-&gt;tasks);<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0s-&gt;render_queue =3D dispatch_queue_create=
+(&quot;apple-gfx.render&quot;,<br>
+&gt; @@ -533,7 +542,127 @@ void apple_gfx_common_realize(AppleGFXState *s, =
+PGDeviceDescriptor *desc)<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0s-&gt;pgdisp =3D [s-&gt;pgdev newDisplayWith=
+Descriptor:disp_desc<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0port:0 serialNum:1234];<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0[disp_desc release];<br>
+&gt; -=C2=A0 =C2=A0 s-&gt;pgdisp.modeList =3D apple_gfx_prepare_display_mod=
+e_array();<br>
 &gt; +<br>
-&gt; +#include &quot;hw/sysbus.h&quot;<br>
-&gt; +#include &quot;qom/object.h&quot;<br>
+&gt; +=C2=A0 =C2=A0 if (s-&gt;display_modes.modes !=3D NULL &amp;&amp; s-&g=
+t;display_modes.modes-&gt;len &gt; 0) {<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 display_modes =3D<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &amp;g_array_index(s-&gt;di=
+splay_modes.modes, AppleGFXDisplayMode, 0);<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 num_display_modes =3D s-&gt;display_modes=
+.modes-&gt;len;<br>
+&gt; +=C2=A0 =C2=A0 }<br>
+&gt; +=C2=A0 =C2=A0 s-&gt;pgdisp.modeList =3D<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 apple_gfx_create_display_mode_array(displ=
+ay_modes, num_display_modes);<br>
+&gt;=C2=A0 =C2=A0<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0create_fb(s);<br>
+&gt;=C2=A0 =C2=A0}<br>
 &gt; +<br>
-&gt; +#define TYPE_VMAPPLE_BDIF &quot;vmapple-bdif&quot;<br>
-&gt; +OBJECT_DECLARE_SIMPLE_TYPE(VMAppleBdifState, VMAPPLE_BDIF)<br>
-&gt; +<br>
-&gt; +struct VMAppleBdifState {<br>
-&gt; +=C2=A0 =C2=A0 /* &lt;private&gt; */<br>
-&gt; +=C2=A0 =C2=A0 SysBusDevice parent_obj;<br>
-&gt; +<br>
-&gt; +=C2=A0 =C2=A0 /* &lt;public&gt; */<br>
-&gt; +=C2=A0 =C2=A0 BlockBackend *aux;<br>
-&gt; +=C2=A0 =C2=A0 BlockBackend *root;<br>
-&gt; +=C2=A0 =C2=A0 MemoryRegion mmio;<br>
-&gt; +};<br>
-&gt; +<br>
-&gt; +#define VMAPPLE_BDIF_SIZE 0x00200000<br>
+&gt; +void apple_gfx_get_display_modes(AppleGFXDisplayModeList *mode_list, =
+Visitor *v,<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
+ =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0const char *name, Error **=
+errp)<br>
+&gt; +{<br>
+&gt; +=C2=A0 =C2=A0 GArray *modes =3D mode_list-&gt;modes;<br>
+&gt; +=C2=A0 =C2=A0 /* 3 uint16s (max 5 digits) and 3 separator characters =
+per mode + nul. */<br>
+&gt; +=C2=A0 =C2=A0 size_t buffer_size =3D (5 + 1) * 3 * modes-&gt;len + 1;=
 <br>
-Please move VMAppleBdifState and VMAPPLE_BDIF_SIZE into: hw/vmapple/bdif.c<=
-br>
-They are both private.<br></blockquote><div><br></div><div>Hmm, the same th=
-ing applies to the cfg device and the virtio-blk extension; the only thing =
-that&#39;s actually interesting to have in a header file are the device typ=
-e string definitions, so I think I&#39;ll put all of them in a single /incl=
-ude/hw/vmapple/vmapple.h file.<br></div><div>=C2=A0</div><blockquote class=
-=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rg=
-b(204,204,204);padding-left:1ex">
 &gt; +<br>
-&gt; +#endif /* HW_VMAPPLE_BDIF_H */<br>
+&gt; +=C2=A0 =C2=A0 char *buffer =3D alloca(buffer_size);<br>
+&gt; +=C2=A0 =C2=A0 char *pos =3D buffer;<br>
+&gt; +<br>
+&gt; +=C2=A0 =C2=A0 unsigned used =3D 0;<br>
+&gt; +=C2=A0 =C2=A0 buffer[0] =3D &#39;\0&#39;;<br>
+&gt; +=C2=A0 =C2=A0 for (guint i =3D 0; i &lt; modes-&gt;len; ++i)<br>
+&gt; +=C2=A0 =C2=A0 {<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 AppleGFXDisplayMode *mode =3D<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &amp;g_array_index(modes, A=
+ppleGFXDisplayMode, i);<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 int rc =3D snprintf(pos, buffer_size - us=
+ed,<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
+ =C2=A0 =C2=A0 =C2=A0 &quot;%s%&quot;PRIu16&quot;x%&quot;PRIu16&quot;@%&quo=
+t;PRIu16,<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
+ =C2=A0 =C2=A0 =C2=A0 i &gt; 0 ? &quot;:&quot; : &quot;&quot;,<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
+ =C2=A0 =C2=A0 =C2=A0 mode-&gt;width_px, mode-&gt;height_px,<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
+ =C2=A0 =C2=A0 =C2=A0 mode-&gt;refresh_rate_hz);<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 used +=3D rc;<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 pos +=3D rc;<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 assert(used &lt; buffer_size);<br>
+&gt; +=C2=A0 =C2=A0 }<br>
+&gt; +<br>
+&gt; +=C2=A0 =C2=A0 pos =3D buffer;<br>
+&gt; +=C2=A0 =C2=A0 visit_type_str(v, name, &amp;pos, errp);<br>
+&gt; +}<br>
+&gt; +<br>
+&gt; +void apple_gfx_set_display_modes(AppleGFXDisplayModeList *mode_list, =
+Visitor *v,<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
+ =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0const char *name, Error **=
+errp)<br>
+&gt; +{<br>
+&gt; +=C2=A0 =C2=A0 Error *local_err =3D NULL;<br>
+&gt; +=C2=A0 =C2=A0 const char *endptr;<br>
+&gt; +=C2=A0 =C2=A0 char *str;<br>
+&gt; +=C2=A0 =C2=A0 int ret;<br>
+&gt; +=C2=A0 =C2=A0 unsigned int val;<br>
+&gt; +=C2=A0 =C2=A0 uint32_t num_modes;<br>
+&gt; +=C2=A0 =C2=A0 GArray *modes;<br>
+&gt; +=C2=A0 =C2=A0 uint32_t mode_idx;<br>
+&gt; +<br>
+&gt; +=C2=A0 =C2=A0 visit_type_str(v, name, &amp;str, &amp;local_err);<br>
+&gt; +=C2=A0 =C2=A0 if (local_err) {<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 error_propagate(errp, local_err);<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 return;<br>
+&gt; +=C2=A0 =C2=A0 }<br>
+&gt; +<br>
+&gt; +=C2=A0 =C2=A0 // Count colons to estimate modes. No leading/trailing =
+colons so start at 1.<br>
+&gt; +=C2=A0 =C2=A0 num_modes =3D 1;<br>
+&gt; +=C2=A0 =C2=A0 for (size_t i =3D 0; str[i] !=3D &#39;\0&#39;; ++i)<br>
+&gt; +=C2=A0 =C2=A0 {<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 if (str[i] =3D=3D &#39;:&#39;) {<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 ++num_modes;<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
+&gt; +=C2=A0 =C2=A0 }<br>
+&gt; +<br>
+&gt; +=C2=A0 =C2=A0 modes =3D g_array_sized_new(false, true, sizeof(AppleGF=
+XDisplayMode), num_modes);<br>
+&gt; +<br>
+&gt; +=C2=A0 =C2=A0 endptr =3D str;<br>
+&gt; +=C2=A0 =C2=A0 for (mode_idx =3D 0; mode_idx &lt; num_modes; ++mode_id=
+x)<br>
+&gt; +=C2=A0 =C2=A0 {<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 AppleGFXDisplayMode mode =3D {};<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 if (mode_idx &gt; 0)<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 {<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 if (*endptr !=3D &#39;:&#39=
+;) {<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 goto separato=
+r_error;<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 ++endptr;<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
+&gt; +<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 ret =3D qemu_strtoui(endptr, &amp;endptr,=
+ 10, &amp;val);<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 if (ret || val &gt; UINT16_MAX || val =3D=
+=3D 0) {<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 error_setg(errp, &quot;widt=
+h of &#39;%s&#39; must be a decimal integer number &quot;<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
+ =C2=A0 =C2=A0&quot;of pixels in the range 1..65535&quot;, name);<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 goto out;<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 mode.width_px =3D val;<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 if (*endptr !=3D &#39;x&#39;) {<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 goto separator_error;<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
+&gt; +<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 ret =3D qemu_strtoui(endptr + 1, &amp;end=
+ptr, 10, &amp;val);<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 if (ret || val &gt; UINT16_MAX || val =3D=
+=3D 0) {<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 error_setg(errp, &quot;heig=
+ht of &#39;%s&#39; must be a decimal integer number &quot;<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
+ =C2=A0 =C2=A0&quot;of pixels in the range 1..65535&quot;, name);<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 goto out;<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 mode.height_px =3D val;<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 if (*endptr !=3D &#39;@&#39;) {<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 goto separator_error;<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
+&gt; +<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 ret =3D qemu_strtoui(endptr + 1, &amp;end=
+ptr, 10, &amp;val);<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 if (ret) {<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 error_setg(errp, &quot;refr=
+esh rate of &#39;%s&#39;&quot;<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
+ =C2=A0 =C2=A0&quot; must be a non-negative decimal integer (Hertz)&quot;, =
+name);<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 mode.refresh_rate_hz =3D val;<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 g_array_append_val(modes, mode);<br>
+&gt; +=C2=A0 =C2=A0 }<br>
+&gt; +<br>
+&gt; +=C2=A0 =C2=A0 mode_list-&gt;modes =3D modes;<br>
+&gt; +=C2=A0 =C2=A0 goto out;<br>
+&gt; +<br>
+&gt; +separator_error:<br>
+&gt; +=C2=A0 =C2=A0 error_setg(errp, &quot;Each display mode takes the form=
+at &quot;<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0&quot;&#39;&lt=
+;width&gt;x&lt;height&gt;@&lt;rate&gt;&#39;, modes are separated by colons.=
+ (:)&quot;);<br>
+&gt; +out:<br>
+&gt; +=C2=A0 =C2=A0 g_free(str);<br>
+&gt; +=C2=A0 =C2=A0 return;<br>
+&gt; +}<br>
 <br>
 </blockquote></div></div>
 
---000000000000b2f5b906240bafe9--
+--0000000000009983f206240bbcdb--
 
