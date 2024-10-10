@@ -4,60 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0C18FCF11D0
-	for <qemu-riscv@archiver.kernel.org>; Thu, 10 Oct 2024 11:49:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4BCC5CF11D0
+	for <qemu-riscv@archiver.kernel.org>; Thu, 10 Oct 2024 12:05:13 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1syrfj-0003nG-0W; Thu, 10 Oct 2024 07:49:35 -0400
+	id 1syruo-0006yo-CP; Thu, 10 Oct 2024 08:05:10 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alexei.filippov@syntacore.com>)
- id 1syrff-0003mX-Og; Thu, 10 Oct 2024 07:49:31 -0400
+ id 1syrui-0006jS-ME; Thu, 10 Oct 2024 08:05:04 -0400
 Received: from mta-03.yadro.com ([89.207.88.253])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alexei.filippov@syntacore.com>)
- id 1syrfc-0000ez-EN; Thu, 10 Oct 2024 07:49:31 -0400
-DKIM-Filter: OpenDKIM Filter v2.11.0 mta-03.yadro.com 271F4E000B
+ id 1syruf-00063d-A9; Thu, 10 Oct 2024 08:05:04 -0400
+DKIM-Filter: OpenDKIM Filter v2.11.0 mta-03.yadro.com 9818AE0017
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yadro.com; s=mta-04;
- t=1728560960; bh=0lTK80os3XtA7KvfezUh3FBr5cgL23Qc5mGV/l6i3HI=;
+ t=1728561896; bh=fFVBRLoXNPpVTe8dVSdU2KVuUrjPCM3c0blcCfYlR0I=;
  h=Message-ID:Date:MIME-Version:Subject:To:From:Content-Type:From;
- b=axSb9HHNtr4z4uHTfMc7zQ/14TvfsL5iG3cwpUOv+GOFw/y/MItM6OH5L5lPpsIUL
- ZP8yB42NeY9CXJxBQXcS28mIHtnqJ5CtGuGt+ETkbFUrizpLjOxZwS1ExHpXlC8M1j
- P+aHG5+ooS+Q4l7B6LcHmVu/ihZlTcUlqKqVxa7cAmJBxSyhc6l9cW/OKO/IjdJUZJ
- Yybtmxz7Si1PaKZTcU0d+d+wB3V+1Xcdb7LuxHFDLU55U54HPpn7VfelCM3sSx4Q4v
- KUDFDugRvemEZ6ODNtrYLC6O1YPFth6s7GcMaZgliaZUpT265ViJPCeAvN9NpLBVzT
- RLCVlNzB4QWhA==
+ b=OpQrbX/9govS306llGMDe/r9nsqvaRVqAxv8OJ+VsPKDEtjVHcBwHZg01A7715zMr
+ VKsFXbryDMQR3J5o7du54JImmL3fsY/sEg5Qj/6QgqDhOaCMu08zv0ilNNMvl7I4l2
+ 2Ara/UQ4gP+IW2w82DfMZs+5LNRqxes5Mmh6374eZ/iTqCBEhmZxEvLu//DG9+pFgE
+ 3YxKNcJl6HqkNT8jRxvlaTWp6u+0F+hDJ2IwEfMlhCueHisjeYHxZKHKYX2gKSyfsw
+ rgBuhyxjYDCTvfzX0eyRKx0RyLcfX46Slnouq4GpFPW/Zk+euUxGz/I1TKCNrFaLZR
+ vT9mCmi1JMcnQ==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yadro.com; s=mta-03;
- t=1728560960; bh=0lTK80os3XtA7KvfezUh3FBr5cgL23Qc5mGV/l6i3HI=;
+ t=1728561896; bh=fFVBRLoXNPpVTe8dVSdU2KVuUrjPCM3c0blcCfYlR0I=;
  h=Message-ID:Date:MIME-Version:Subject:To:From:Content-Type:From;
- b=edIqFWRm2AG6UYI5cvWMT+/aYYLREBAkZ8qoJsyA+JWwqy+Ct42WQA+P+e+kjEhrr
- icQwz9znT8RgJWphJQhXCPalus8QzlCmlN8BhxDCt3Kvxt9lVZcM6iVUUu0sFVtejO
- nL4jHPTcUXA2GQ/yLLi+j+dzUaDa2FWoTuRA5FzNqyz2iQdSOLgu7G58rzRm9MIBGL
- 28vtbBdDH3VuqwZLyQW9lJzoehoM4dIpAeW3GatgfZRnbmk3IA4ap5EnsI9uStT+cg
- 8E/agm2jYa9ssn2mkfVXgKqB0Hq6vq4j8ma5e55oPixGX6r9BmaFv++DSCWRCeNhlE
- yiVoO6h6NWJAg==
-Message-ID: <71a77e97-e55d-41e4-9b3b-bef07c45b015@yadro.com>
-Date: Thu, 10 Oct 2024 14:49:18 +0300
+ b=bCes0XtJUcy5o04pxQ3Vt6Sj7uvk0fLnv8gjlUsZyzRXeAbELCiK9HfkHbC9LkCih
+ O/L61fYwRU5QulfPVY047QFflkPXGNwkzIFy7/QBwb7MvAkATFxihkeYLMASh4KaQl
+ pm9LorLExL95ffKyKaNfZx8sa1cWnjrOXE/pNUMaTLGus2brMSwrLi25o7EcWTzdpj
+ nbTq3qjNlECC0L2nN57L2yfiMqJVqIBy2Y37kFS+jLyH+FY/8pVPkXD5Ae8jjuBSd7
+ H7xV9YuGHSW0up+ju/z4tPIKNhvW/oWi4GBzF184UJ7HwAtqqTiaTBl6CK1nJTs2/6
+ mUXhJMqZNKfmQ==
+Message-ID: <d3c4174e-1659-4409-9b42-7562e40ad0a8@yadro.com>
+Date: Thu, 10 Oct 2024 15:04:55 +0300
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [RFC PATCH 0/2] target/riscv: Add support for machine specific
- pmu's events
-To: Atish Kumar Patra <atishp@rivosinc.com>, Alistair Francis
- <alistair23@gmail.com>
-CC: Alexei Filippov <alexei.filippov@syntacore.com>, <palmer@dabbelt.com>,
- <alistair.francis@wdc.com>, <bmeng.cn@gmail.com>,
- <dbarboza@ventanamicro.com>, <zhiwei_liu@linux.alibaba.com>,
- <liwei1518@gmail.com>, <qemu-devel@nongnu.org>, <qemu-riscv@nongnu.org>
-References: <20240910174747.148141-1-alexei.filippov@syntacore.com>
- <CAKmqyKPH33Lf5YdNrdHEQ9K0ZLrnJmvcGi9DjsP6gKNQZYAxaA@mail.gmail.com>
- <CAHBxVyEFDkDm5Tiytiemxohj1YdqdBiKk2YSiFdQ83dqN5zvyw@mail.gmail.com>
+Subject: Re: [PATCH RFC 02/10] target/riscv: Introduce helper functions for
+ pmu hashtable lookup
+To: Atish Patra <atishp@rivosinc.com>, <qemu-riscv@nongnu.org>,
+ <qemu-devel@nongnu.org>
+CC: <alexei.filippov@syntacore.com>, <palmer@dabbelt.com>,
+ <liwei1518@gmail.com>, <zhiwei_liu@linux.alibaba.com>,
+ <bin.meng@windriver.com>, <dbarboza@ventanamicro.com>,
+ <alistair.francis@wdc.com>
+References: <20241009-pmu_event_machine-v1-0-dcbd7a60e3ba@rivosinc.com>
+ <20241009-pmu_event_machine-v1-2-dcbd7a60e3ba@rivosinc.com>
 Content-Language: en-US
 From: Alexei Filippov <alexei.filippov@yadro.com>
-In-Reply-To: <CAHBxVyEFDkDm5Tiytiemxohj1YdqdBiKk2YSiFdQ83dqN5zvyw@mail.gmail.com>
+In-Reply-To: <20241009-pmu_event_machine-v1-2-dcbd7a60e3ba@rivosinc.com>
 Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: T-EXCH-06.corp.yadro.com (172.17.10.110) To
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: T-EXCH-08.corp.yadro.com (172.17.11.58) To
  T-EXCH-12.corp.yadro.com (172.17.11.143)
 Received-SPF: permerror client-ip=89.207.88.253;
  envelope-from=alexei.filippov@syntacore.com; helo=mta-03.yadro.com
@@ -85,141 +84,147 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 
 
-On 09.10.2024 06:51, Atish Kumar Patra wrote:
-> On Mon, Oct 7, 2024 at 7:52 PM Alistair Francis <alistair23@gmail.com> wrote:
->>
->> On Wed, Sep 11, 2024 at 3:49 AM Alexei Filippov
->> <alexei.filippov@syntacore.com> wrote:
->>>
->>> Following original patch [1] here's a patch with support of machine
->>> specific pmu events and PoC with initial support for sifive_u's HPM.
->>
->> Thanks for the patch.
->>
->> I'm hesitate to support these callback functions as I feel they
->> (callbacks in the CPU to the machine in general) are clunky.
->>
->> I think the cover letter, code and commit messages need more details here.
->>
->> First can you link to the exact spec you are trying to implement
->> (RISC-V has a habit of creating multiple "ratified" specs that are all
->> incompatible). It's really handy to point to the exact PDF in the
->> cover letter or commit message to just be really clear what you are
->> supporting.
->>
+On 10.10.2024 02:09, Atish Patra wrote:
+> The pmu implementation requires hashtable lookup operation sprinkled
+> through the file. Add a helper function that allows to consolidate
+> the implementation and extend it in the future easily.
 > 
-> This patch is trying to implement SiFive specific event encodings.
-> There is no standard
-> RISC-V ISA involved here.
+> Signed-off-by: Atish Patra <atishp@rivosinc.com>
+> ---
+>   target/riscv/pmu.c | 56 ++++++++++++++++++++++++++----------------------------
+>   1 file changed, 27 insertions(+), 29 deletions(-)
 > 
->> Secondly, can you describe why this is useful? What is the point of
->> machine specific PMU events? Why do we want to support this in QEMU?
->>
+> diff --git a/target/riscv/pmu.c b/target/riscv/pmu.c
+> index e05ab067d2f2..a88c321a6cad 100644
+> --- a/target/riscv/pmu.c
+> +++ b/target/riscv/pmu.c
+> @@ -265,6 +265,21 @@ static void riscv_pmu_cycle_update_priv(CPURISCVState *env,
+>       counter_arr[env->priv] += delta;
+>   }
+>   
+> +static bool riscv_pmu_htable_lookup(RISCVCPU *cpu, uint32_t key,
+> +                                    uint32_t *value)
+> +{
+> +    GHashTable *table = cpu->pmu_event_ctr_map;
+> +    gpointer val_ptr;
+> +
+> +    val_ptr = g_hash_table_lookup(table, GUINT_TO_POINTER(key));
+> +    if (!val_ptr) {
+> +        return false;
+> +    }
+> +
+> +    *value = GPOINTER_TO_UINT(val_ptr);
+> +    return true;
+> +}
+> +
+>   void riscv_pmu_update_fixed_ctrs(CPURISCVState *env, target_ulong newpriv,
+>                                    bool new_virt)
+>   {
+> @@ -277,18 +292,15 @@ int riscv_pmu_incr_ctr(RISCVCPU *cpu, enum riscv_pmu_event_idx event_idx)
+>       uint32_t ctr_idx;
+>       int ret;
+>       CPURISCVState *env = &cpu->env;
+> -    gpointer value;
+>   
+>       if (!cpu->cfg.pmu_mask) {
+>           return 0;
+>       }
+> -    value = g_hash_table_lookup(cpu->pmu_event_ctr_map,
+> -                                GUINT_TO_POINTER(event_idx));
+> -    if (!value) {
+> +
+> +    if (!riscv_pmu_htable_lookup(cpu, event_idx, &ctr_idx)) {
+>           return -1;
+>       }
+>   
+> -    ctr_idx = GPOINTER_TO_UINT(value);
+>       if (!riscv_pmu_counter_enabled(cpu, ctr_idx)) {
+>           return -1;
+>       }
+> @@ -306,7 +318,6 @@ bool riscv_pmu_ctr_monitor_instructions(CPURISCVState *env,
+>                                           uint32_t target_ctr)
+Not sure about this kind of functions, this hardcoded dublication aren't 
+scalable, check it in my patch.
+>   {
+>       RISCVCPU *cpu;
+> -    uint32_t event_idx;
+>       uint32_t ctr_idx;
+>   
+>       /* Fixed instret counter */
+> @@ -315,14 +326,8 @@ bool riscv_pmu_ctr_monitor_instructions(CPURISCVState *env,
+>       }
+>   
+>       cpu = env_archcpu(env);
+> -    if (!cpu->pmu_event_ctr_map) {
+> -        return false;
+> -    }
+> -
+> -    event_idx = RISCV_PMU_EVENT_HW_INSTRUCTIONS;
+> -    ctr_idx = GPOINTER_TO_UINT(g_hash_table_lookup(cpu->pmu_event_ctr_map,
+> -                               GUINT_TO_POINTER(event_idx)));
+> -    if (!ctr_idx) {
+> +    if (!riscv_pmu_htable_lookup(cpu, RISCV_PMU_EVENT_HW_INSTRUCTIONS,
+> +                                 &ctr_idx)) {
+>           return false;
+>       }
+>   
+> @@ -332,7 +337,6 @@ bool riscv_pmu_ctr_monitor_instructions(CPURISCVState *env,
+>   bool riscv_pmu_ctr_monitor_cycles(CPURISCVState *env, uint32_t target_ctr)
+>   {
+>       RISCVCPU *cpu;
+> -    uint32_t event_idx;
+>       uint32_t ctr_idx;
+>   
+>       /* Fixed mcycle counter */
+> @@ -341,16 +345,8 @@ bool riscv_pmu_ctr_monitor_cycles(CPURISCVState *env, uint32_t target_ctr)
+>       }
+>   
+>       cpu = env_archcpu(env);
+> -    if (!cpu->pmu_event_ctr_map) {
+> -        return false;
+> -    }
+> -
+> -    event_idx = RISCV_PMU_EVENT_HW_CPU_CYCLES;
+> -    ctr_idx = GPOINTER_TO_UINT(g_hash_table_lookup(cpu->pmu_event_ctr_map,
+> -                               GUINT_TO_POINTER(event_idx)));
+> -
+> -    /* Counter zero is not used for event_ctr_map */
+> -    if (!ctr_idx) {
+> +    if (!riscv_pmu_htable_lookup(cpu, RISCV_PMU_EVENT_HW_CPU_CYCLES,
+> +                                &ctr_idx)) {
+>           return false;
+>       }
+>   
+> @@ -381,6 +377,7 @@ int riscv_pmu_update_event_map(CPURISCVState *env, uint64_t value,
+>   {
+>       uint32_t event_idx;
+>       RISCVCPU *cpu = env_archcpu(env);
+> +    uint32_t mapped_ctr_idx;
+>   
+>       if (!riscv_pmu_counter_valid(cpu, ctr_idx) || !cpu->pmu_event_ctr_map) {
+>           return -1;
+> @@ -398,8 +395,7 @@ int riscv_pmu_update_event_map(CPURISCVState *env, uint64_t value,
+>       }
+>   
+>       event_idx = value & MHPMEVENT_IDX_MASK;
+> -    if (g_hash_table_lookup(cpu->pmu_event_ctr_map,
+> -                            GUINT_TO_POINTER(event_idx))) {
+> +    if (riscv_pmu_htable_lookup(cpu, event_idx, &mapped_ctr_idx)) {
+>           return 0;
+>       }
+>   
+> @@ -472,8 +468,10 @@ static void pmu_timer_trigger_irq(RISCVCPU *cpu,
+>           return;
+>       }
+>   
+> -    ctr_idx = GPOINTER_TO_UINT(g_hash_table_lookup(cpu->pmu_event_ctr_map,
+> -                               GUINT_TO_POINTER(evt_idx)));
+> +    if (!riscv_pmu_htable_lookup(cpu, evt_idx, &ctr_idx)) {
+> +        return;
+> +    }
+> +
+>       if (!riscv_pmu_counter_enabled(cpu, ctr_idx)) {
+>           return;
+>       }
 > 
-> I happen to work on a similar implementation as well. Apologies for
-> not seeing this patch earlier.
-> Here is the link to the series that I have been working on to
-> implement a similar feature.
-> https://github.com/atishp04/qemu/tree/b4/pmu_event_machine
-> I will send it to the mailing list tomorrow after some checkpatch fixes.
-> 
-> Regarding the motivation, RISC-V ISA doesn't  define any standard
-> event encodings.
-> The virt machine implemented event encodings defined in the SBI PMU
-> extension because
-> there was nothing else available. There is an active performance
-> events TG who is working on defining
-> the standard events for RISC-V but not the encodings. The goal is
-> provide flexibility for the platforms while
-> allowing a minimum set of events that would work across platforms.
-> 
-> However, any platform would define their own event encodings and want
-> to support those in their Qemu
-> machine implementation. That's why, we should disassociate the event
-> encodings in the pmu.c to make it
-> more generic and usable across machines.
-> 
->> The callbacks should also have some documentation in the code base so
->> others can implement the functionality.
->>
->> It might also be helpful to split this patch up a little bit more. A
->> quick read through and it seems like the patches could be a little
->> smaller, making it easier to review.
->>
->> Finally, for the next version CC @Atish Patra  who has ended up being
->> the PMU person :)
->>
-> 
-> Thanks for Ccing me. I completely missed this patch earlier. Few
-> thoughts by looking at this series.
-> 
-> @Alexei:
-> 1. Event encoding needs to be widened to 64 bits. That's what I tried
-Hi, Atish, thanks for the review. Does we really need to wide up? Can 
-you please share why?
-> to achieve with my implementation
-> along with a bunch of other cleanups.
-> 
-> 2. Why do we need machine specific counter write/read functions ? If
-> we really need it, we should definitely have that
-> as a separate patch as my implementation only focussed on
-> disassociating the events and pmu implementation.
-Ok, I saw your path and I think we should have this. Just because it's 
-more scalable solution. Any event could count differently, but every 1 
-of those must count something, as described in their own specs. This 
-will make life of perf folks much easier, cz they will be able to debug 
-perf on qemu. Same to sbi folks i guess.
-> 
-> Please take a look at the patches shared above or the mailing list
-> (should land tomorrow) and let me know your thoughts.
-> I am happy to collaborate on your patches so that we have more than
-> just a virt machine that we can test with this series.
-Thanks for your series, I have some thoughts about it, I'll describe 
-them on your patchset.
-> 
->> Alistair
->>
->>>
->>> == Test scenarios ==
->>>
->>> So, I tested this patches on current Linux master with perf.
->>> something like `perf stat -e branch-misses perf bench mem memcpy` works
->>> just fine, also 'perf record -e branch-misses perf bench mem memcpy'
->>> collect samples just fine and `perf report` works.
->>>
->>> == ToDos / Limitations ==
->>>
->>> Second patch is only inital sifive_u's HPM support, without any
->>> filtering, events combining features or differrent counting
->>> algorithm for different events. There are also no tests, but if you
->>> have any suggestions about where I need to look to implement them, please
->>> point me to.
->>>
->>> == Changes since original patch ==
->>>
->>> - Rebased to current master
->>>
->>> [1] https://lore.kernel.org/all/20240625144643.34733-1-alexei.filippov@syntacore.com/
->>>
->>> Alexei Filippov (2):
->>>    target/riscv: Add support for machine specific pmu's events
->>>    hw/riscv/sifive_u.c: Add initial HPM support
->>>
->>>   hw/misc/meson.build            |   1 +
->>>   hw/misc/sifive_u_pmu.c         | 384 +++++++++++++++++++++++++++++++++
->>>   hw/riscv/sifive_u.c            |  14 ++
->>>   include/hw/misc/sifive_u_pmu.h |  24 +++
->>>   target/riscv/cpu.c             |  20 +-
->>>   target/riscv/cpu.h             |   9 +
->>>   target/riscv/csr.c             |  93 +++++---
->>>   target/riscv/pmu.c             | 138 ++++++------
->>>   target/riscv/pmu.h             |  19 +-
->>>   9 files changed, 599 insertions(+), 103 deletions(-)
->>>   create mode 100644 hw/misc/sifive_u_pmu.c
->>>   create mode 100644 include/hw/misc/sifive_u_pmu.h
->>>
->>> --
->>> 2.34.1
->>>
->>>
 
