@@ -4,76 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 38074CFC5F8
-	for <qemu-riscv@archiver.kernel.org>; Thu, 10 Oct 2024 19:05:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 07714CFC5F7
+	for <qemu-riscv@archiver.kernel.org>; Thu, 10 Oct 2024 19:06:07 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1syyS1-00061p-Vb; Thu, 10 Oct 2024 15:03:53 -0400
+	id 1syySu-0006Q4-RZ; Thu, 10 Oct 2024 15:04:48 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1syyS0-00060a-Ez
- for qemu-riscv@nongnu.org; Thu, 10 Oct 2024 15:03:52 -0400
-Received: from mail-pf1-x430.google.com ([2607:f8b0:4864:20::430])
+ id 1syySK-00069T-GZ
+ for qemu-riscv@nongnu.org; Thu, 10 Oct 2024 15:04:13 -0400
+Received: from mail-pf1-x431.google.com ([2607:f8b0:4864:20::431])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1syyRy-0004iV-Vj
- for qemu-riscv@nongnu.org; Thu, 10 Oct 2024 15:03:52 -0400
-Received: by mail-pf1-x430.google.com with SMTP id
- d2e1a72fcca58-71df67c6881so1156072b3a.3
- for <qemu-riscv@nongnu.org>; Thu, 10 Oct 2024 12:03:50 -0700 (PDT)
+ id 1syySI-0004kx-8T
+ for qemu-riscv@nongnu.org; Thu, 10 Oct 2024 15:04:11 -0400
+Received: by mail-pf1-x431.google.com with SMTP id
+ d2e1a72fcca58-71e053cf1f3so1245011b3a.2
+ for <qemu-riscv@nongnu.org>; Thu, 10 Oct 2024 12:04:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1728587029; x=1729191829; darn=nongnu.org;
+ d=ventanamicro.com; s=google; t=1728587049; x=1729191849; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=ufMG5AryEKYzOO3Km5eLPU0tnyg9cuTgKk08ESQiSrk=;
- b=dbcDyVhy51ognIYL1+mpRXFe54BAEni2A9776QGpItlXPnuCSxy7qvwxLZiW0nh7Ab
- 1I/23RlsgHIQTIwrMEyiiFXF6mJ4oWUNNpocIS/4BS17/YJZ4Arml7TaBAifkL8pbsCP
- D8kFYbkxTu4VXDTS93TKNho1atG8iS2akTygdbB6Vqb/3nQL0OC+1nOFd94Wo1Tq3ex+
- T05TFzhEgSVRp7Hnm585lTfGaILbNPFJnhHO+eitOpxbAmQEKlF6ygqPb+8NxpFEqxJe
- RUaMZZTrVv56xWSZ612PWlT7qgVnM/Hv+p2F5FOxicCH6d9fMoY2v0FF4RWTJej3JXI2
- wz2A==
+ bh=PUee2NQrvjsGKbH1dpkkylkOYkQbKE2imhmGuff3t2o=;
+ b=OEf2wg2VBusX/nstOBrYk19Zh9FCv8ZNsXn3w1PA01iCQPmTDc3P+LObB/YhtOW4vu
+ jXymc/EwUACslIiLjCnH3z4wjiR6+0gCGl5EiKbjV9TcZATkoCuP3dqMIjDDBLRAZewr
+ sALDjGl5kp94WjqPZH2BnTzUxS4ColU41wO0WZH82La8k1mLVfQSKcqSLg+qJXnlpAFQ
+ eu9JlsV8aPvV5Bb2ap0Qbu0im6cH1t7+gyzVyH5n6UcYwBK3bvMjKoKIPrFR6ogVolM7
+ ImDh/C5XazUf5nDiqv0Zw4tdTVOi6GGf52mGNrX4y+/8T1TPkgCkHJPEQuR5n2PqoqTX
+ 7fOg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728587029; x=1729191829;
+ d=1e100.net; s=20230601; t=1728587049; x=1729191849;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=ufMG5AryEKYzOO3Km5eLPU0tnyg9cuTgKk08ESQiSrk=;
- b=dGn9h2XJ3KN586iobenHJYu+OQdNteemaTlnREIzj1onDmvTbhrc4RiLeuiBlz34qN
- j0Pbm58eHHuWjcD4T9WD1qhJFBaMRpAq4ewl069mtTo/r4Bx/MxjmQGTUumcNlvlQVkV
- +mGTnLmjWjWMtun/vy07NaRdxl8hZj8UAVxkZyfNLDJvZiTZ/u57C5d5jneVUInOZXDM
- ScWxbFJbE/z9tKMpOTdwMYJqvBPcVshF8b7Q62xpsGR4O7W5P44i+/DmmmmHxFFFq+pY
- W3Luq+J9thcFUC41vl4vqCbUOo0dicffBfUvQ/JzhGWuK+60WVNfCz+zanyLX10hyfrc
- /Nng==
-X-Gm-Message-State: AOJu0Yz+Noa9pLX++noTsyItT4Lo7CexdSuqEKGphOT5pcfSjcq+X/mc
- oWPMKb+LbY1Fxl+dSsdPcPNK6txb5/y5fwTRKwiFWVZ+zJnwM6594jtQcoUPlwE=
-X-Google-Smtp-Source: AGHT+IFhGyQ9W9YcSmlCXMp3KuCr7lrYcg387ctaAmgKstqQNyVIcHZR59AmI90Ta0RAGTsH3Qhbmw==
-X-Received: by 2002:a05:6a00:2da7:b0:71d:f0dc:ce94 with SMTP id
- d2e1a72fcca58-71e37f5e498mr75416b3a.20.1728587029407; 
- Thu, 10 Oct 2024 12:03:49 -0700 (PDT)
+ bh=PUee2NQrvjsGKbH1dpkkylkOYkQbKE2imhmGuff3t2o=;
+ b=cDM/Antq037T4NSXvQiXgrRyzhlAOdqt2q+VrUFQ/dqvisgLavP/8wx8jVW8H2PiBC
+ 8mKcft5jZocyMy2P7SyCx17HLHJkMhZb6E4823iBa2r/HuNR40PE01yH+sCqVmhIJKay
+ p0Z+HGQmao+2J/8MOSwxbrEfl2aDFvFITdXSh16IzL8HrYT7N8zt0V9dWVVMtrnjimJG
+ Rwc+/4yyZAmb5h+9Gt9mDYpTKZcw2siAonHqHePHKqM7zHZXwigfLy1bSlM1FVmetJrd
+ vh7TkI5Wn9cDPGK3gBMUKlCQNyThC0/uFGXmATdWHrq+309uUdT2orBwW5yd8bWS4gB8
+ zr5A==
+X-Gm-Message-State: AOJu0Yymt5rERZ5Y1aaFrNqRRT9eNCPTzVtJfqB/hc4iPHk9zj1bvZne
+ SuzO5FOj3g7vEQvbmDnEyGapYTkIRLDvWrbgaAqFR9PCewC/POaDbsbsx44LdJg=
+X-Google-Smtp-Source: AGHT+IF4Xei35zUQ8hRY/TdCvyvNusWYc9A56aQqDUKJ0WFf+/iEbc04bycPwJj13+5mzuCCiG2+/Q==
+X-Received: by 2002:a05:6a00:2d9b:b0:714:1ca1:7134 with SMTP id
+ d2e1a72fcca58-71e37f4eefdmr74136b3a.18.1728587048971; 
+ Thu, 10 Oct 2024 12:04:08 -0700 (PDT)
 Received: from grind.. (201-68-240-198.dsl.telesp.net.br. [201.68.240.198])
  by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-71e2a9f5263sm1354532b3a.62.2024.10.10.12.03.46
+ d2e1a72fcca58-71e2a9f5263sm1354532b3a.62.2024.10.10.12.04.05
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 10 Oct 2024 12:03:49 -0700 (PDT)
+ Thu, 10 Oct 2024 12:04:08 -0700 (PDT)
 From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
  liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
  ajones@ventanamicro.com,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Subject: [PATCH 2/8] hw/riscv/virt.c: reduce virt_use_kvm_aia() usage
-Date: Thu, 10 Oct 2024 16:03:31 -0300
-Message-ID: <20241010190337.376987-3-dbarboza@ventanamicro.com>
+Subject: [PATCH 8/8] docs: update riscv/virt.rst with kernel-irqchip=split
+ support
+Date: Thu, 10 Oct 2024 16:03:37 -0300
+Message-ID: <20241010190337.376987-9-dbarboza@ventanamicro.com>
 X-Mailer: git-send-email 2.45.2
 In-Reply-To: <20241010190337.376987-1-dbarboza@ventanamicro.com>
 References: <20241010190337.376987-1-dbarboza@ventanamicro.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::430;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pf1-x430.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::431;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pf1-x431.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -96,56 +97,134 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-In create_fdt_sockets() we have the following pattern:
-
-    if (kvm_enabled() && virt_use_kvm_aia(s)) {
-        (... do stuff ...)
-    } else {
-        (... do other stuff ...)
-    }
-    if (kvm_enabled() && virt_use_kvm_aia(s)) {
-        (... do more stuff ...)
-    } else {
-        (... do more other stuff)
-    }
-
-Do everything in a single if/else clause to reduce the usage of
-virt_use_kvm_aia() helper and to make the code a bit less repetitive.
+Also add a new page, docs/specs/riscv-aia.rst, where we're documenting
+the state of AIA support in QEMU w.r.t the controllers being emulated or
+not depending on the AIA and accelerator settings.
 
 Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 ---
- hw/riscv/virt.c | 10 ++++------
- 1 file changed, 4 insertions(+), 6 deletions(-)
+ docs/specs/index.rst       |  1 +
+ docs/specs/riscv-aia.rst   | 83 ++++++++++++++++++++++++++++++++++++++
+ docs/system/riscv/virt.rst |  7 ++++
+ 3 files changed, 91 insertions(+)
+ create mode 100644 docs/specs/riscv-aia.rst
 
-diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-index ee3129f3b3..b5bdbb34e0 100644
---- a/hw/riscv/virt.c
-+++ b/hw/riscv/virt.c
-@@ -780,6 +780,10 @@ static void create_fdt_sockets(RISCVVirtState *s, const MemMapEntry *memmap,
-                                 msi_m_phandle, msi_s_phandle, phandle,
-                                 &intc_phandles[0], xplic_phandles,
-                                 ms->smp.cpus);
+diff --git a/docs/specs/index.rst b/docs/specs/index.rst
+index 6495ed5ed9..9a7d61161f 100644
+--- a/docs/specs/index.rst
++++ b/docs/specs/index.rst
+@@ -36,3 +36,4 @@ guest hardware that is specific to QEMU.
+    vmgenid
+    rapl-msr
+    rocker
++   riscv-aia
+diff --git a/docs/specs/riscv-aia.rst b/docs/specs/riscv-aia.rst
+new file mode 100644
+index 0000000000..8097e2f897
+--- /dev/null
++++ b/docs/specs/riscv-aia.rst
+@@ -0,0 +1,83 @@
++.. _riscv-aia:
 +
-+        *irq_mmio_phandle = xplic_phandles[0];
-+        *irq_virtio_phandle = xplic_phandles[0];
-+        *irq_pcie_phandle = xplic_phandles[0];
-     } else {
-         phandle_pos = ms->smp.cpus;
-         for (socket = (socket_count - 1); socket >= 0; socket--) {
-@@ -797,13 +801,7 @@ static void create_fdt_sockets(RISCVVirtState *s, const MemMapEntry *memmap,
-                                         s->soc[socket].num_harts);
-             }
-         }
--    }
++RISC-V AIA support for RISC-V machines
++======================================
++
++AIA (Advanced Interrupt Architecture) support is implemented in the ``virt``
++RISC-V machine for TCG and KVM accelerators.
++
++The support consists of two main modes:
++
++- "aia=aplic": adds one or more APLIC (Advanced Platform Level Interrupt Controller)
++  devices
++- "aia=aplic-imsic": adds one or more APLIC device and an IMSIC (Incoming MSI
++   Controller) device for each CPU
++
++From an user standpoint, these modes will behave the same regardless of the accelerator
++used.  From a developer standpoint the accelerator settings will change what it being
++emulated in userspace versus what is being emulated by an in-kernel irqchip.
++
++When running TCG, all controllers are emulated in userspace, including machine mode
++(m-mode) APLIC and IMSIC (when applicable).
++
++When running KVM:
++
++- no m-mode is provided, so there is no m-mode APLIC or IMSIC emulation regardless of
++  the AIA mode chosen
++- with "aia=aplic", s-mode APLIC will be emulated by userspace
++- with "aia=aplic-imsic" there are two possibilities.  If no additional KVM option
++  is provided there will be no APLIC or IMSIC emulation in userspace, and the virtual
++  machine will use the provided in-kernel APLIC and IMSIC controllers.  If the user
++  chooses to use the irqchip in split mode via "-accel kvm,kernel-irqchip=split",
++  s-mode APLIC will be emulated while using the s-mode IMSIC from the irqchip
++
++The following table summarizes how the AIA and accelerator options defines what
++we will emulate in userspace:
++
++
++.. list-table:: How AIA and accel options changes controller emulation
++   :widths: 25 25 25 25 25 25 25
++   :header-rows: 1
++
++   * - Accel
++     - Accel props
++     - AIA type
++     - APLIC m-mode
++     - IMSIC m-mode
++     - APLIC s-mode
++     - IMSIC s-mode
++   * - tcg
++     - ---
++     - aplic
++     - emul
++     - n/a
++     - emul
++     - n/a
++   * - tcg
++     - ---
++     - aplic-imsic
++     - emul
++     - emul
++     - emul
++     - emul
++   * - kvm
++     - ---
++     - aplic
++     - n/a
++     - n/a
++     - emul
++     - n/a
++   * - kvm
++     - none
++     - aplic-imsic
++     - n/a
++     - n/a
++     - in-kernel
++     - in-kernel
++   * - kvm
++     - irqchip=split
++     - aplic-imsic
++     - n/a
++     - n/a
++     - emul
++     - in-kernel
+diff --git a/docs/system/riscv/virt.rst b/docs/system/riscv/virt.rst
+index 9a06f95a34..8cbedf73ef 100644
+--- a/docs/system/riscv/virt.rst
++++ b/docs/system/riscv/virt.rst
+@@ -110,6 +110,13 @@ The following machine-specific options are supported:
+   MSIs. When not specified, this option is assumed to be "none" which selects
+   SiFive PLIC to handle wired interrupts.
  
--    if (kvm_enabled() && virt_use_kvm_aia(s)) {
--        *irq_mmio_phandle = xplic_phandles[0];
--        *irq_virtio_phandle = xplic_phandles[0];
--        *irq_pcie_phandle = xplic_phandles[0];
--    } else {
-         for (socket = 0; socket < socket_count; socket++) {
-             if (socket == 0) {
-                 *irq_mmio_phandle = xplic_phandles[socket];
++  This option also interacts with '-accel kvm'.  When using "aia=aplic-imsic"
++  with KVM, it is possible to set the use of the kernel irqchip in split mode
++  by using "-accel kvm,kernel-irqchip=split".  In this case the ``virt`` machine
++  will emulate the APLIC controller instead of using the APLIC controller from
++  the irqchip.  See :ref:`riscv-aia` for more details on all available AIA
++  modes.
++
+ - aia-guests=nnn
+ 
+   The number of per-HART VS-level AIA IMSIC pages to be emulated for a guest
 -- 
 2.45.2
 
