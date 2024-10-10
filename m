@@ -4,67 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 80977CF11E6
-	for <qemu-riscv@archiver.kernel.org>; Thu, 10 Oct 2024 12:51:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F2284CFC5F7
+	for <qemu-riscv@archiver.kernel.org>; Thu, 10 Oct 2024 19:04:07 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sysdU-00038h-5L; Thu, 10 Oct 2024 08:51:20 -0400
+	id 1syyRz-00060M-RU; Thu, 10 Oct 2024 15:03:51 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alexei.filippov@syntacore.com>)
- id 1sysdS-00038K-07; Thu, 10 Oct 2024 08:51:18 -0400
-Received: from mta-03.yadro.com ([89.207.88.253])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alexei.filippov@syntacore.com>)
- id 1sysdQ-0005KY-43; Thu, 10 Oct 2024 08:51:17 -0400
-DKIM-Filter: OpenDKIM Filter v2.11.0 mta-03.yadro.com 002D3E000B
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yadro.com; s=mta-04;
- t=1728564672; bh=iY+sMuUPhCif/8x2KC/os6bw0J2Aj+bQQOCTd+WEx4k=;
- h=Message-ID:Date:MIME-Version:Subject:To:From:Content-Type:From;
- b=zACgJVZezNg77MbGuTBs401fcTR7ssNcJRM/AMNshy/UzuYUXilwU5+j5Dye4Yl6u
- Rw8be1JyZ+kwgCA6h2gVwxWoPpV+MLsogLCtkmrq5jq5MlGZPgqTN4RqwYx/QO1q/C
- L0s0uus5ZK6JrniuyTLZizDyGRs1DJPo0k2oHoxw+U08+mRulhF5S8rHJfp6GWtcYp
- dtPpYVtROLg1JPKbSZ/qoQdv+i5fgmJMuBi9xbJOKTlU9sfRvFTMBBv4txPDqUypaf
- OAQAo6plE7AgcsNZBGx0BXxLN5sI5KXJDuMBEGa0XYdip6KbqYfQ03smUV2tNNkX+m
- tU4ObImP15NIA==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yadro.com; s=mta-03;
- t=1728564672; bh=iY+sMuUPhCif/8x2KC/os6bw0J2Aj+bQQOCTd+WEx4k=;
- h=Message-ID:Date:MIME-Version:Subject:To:From:Content-Type:From;
- b=gwApwUzz2JjZRNYbiZwH1yB6vbMrgGwNLyK9PWGfueeCpqG3bzrQ0ze9OpLKMdULP
- k97fWVOr/unF58x6YIuCLvzAJJcVe9iTqk15hOY1vKLRyMaHjKu+tfpB/3WblZsEka
- vyCydeXrxxwXMsFQcIHT0xVk9ruD92YK8Hs2Ep3L6cwPFfzF+QeB6We3WTxHrAnkV7
- Rlrf0yGeLrU74Kwj9mLCz6AhDDMY2iBiD403zVIlFHMyGy3hoL1gj5wU+GBbio04iN
- i4eeFxs9nScEPZ9bqLHUHq5W3OwBCGO7rUlgYYeBaUWFbzuHU/fisGmb0w9Io0vTKr
- KMgRMFBWkr6Ow==
-Message-ID: <43613048-ba0b-4fc0-9ee2-b987a6dc86e4@yadro.com>
-Date: Thu, 10 Oct 2024 15:51:09 +0300
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1syyRy-0005zx-1M
+ for qemu-riscv@nongnu.org; Thu, 10 Oct 2024 15:03:50 -0400
+Received: from mail-pf1-x431.google.com ([2607:f8b0:4864:20::431])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1syyRv-0004i5-Py
+ for qemu-riscv@nongnu.org; Thu, 10 Oct 2024 15:03:49 -0400
+Received: by mail-pf1-x431.google.com with SMTP id
+ d2e1a72fcca58-718e9c8bd83so1520656b3a.1
+ for <qemu-riscv@nongnu.org>; Thu, 10 Oct 2024 12:03:47 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=ventanamicro.com; s=google; t=1728587026; x=1729191826; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=kYV54R/BWSeQo+PImwTWN+iYLjqQw2lOGsyCKuolLjM=;
+ b=ZwieFGyBcHpShKoQUhpViIWdC0qkpDiNOT5ha4swRTBhWUbus3XCpIoX/DEX1UF5zR
+ BeNkf2CrBLgPTPeRprm+yw3TqYu2gnbokdDbMW9WRQHXSJWtSGKHqOP5hbWBn6hAnIGB
+ 8Xxx8JUs/yQuaxOAoakKzBWtjllLdVq96SKU+AqXbS7LnvRV6hysmqtdLghrBbYcQZe2
+ XpR2nA01JVtl+qNnM63FDJMemgAsB95sBHlMGjD111iPWmHMNeRgKM63oVCfhWhGEPIF
+ ZGocB75rIaTzGNbtwT4cFhtWgh64bEJwCiv4Df2G8TT5a1wx/lhRIQL4cjcr+ozUmtIb
+ DiUQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1728587026; x=1729191826;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=kYV54R/BWSeQo+PImwTWN+iYLjqQw2lOGsyCKuolLjM=;
+ b=IIGOds921zojp+dchaycKV3xhESTxI8TT4uMbmFhdAk0oFdcyovPtBcC48+q0En0QU
+ 01aRq37ExLpFqZSrWEOoh/gzVnk+5dBjT1MYXc/9IlDryrnBZsakqMngRohesFW8loVz
+ S70cKegIwWHHKUSxAiL9u8Fct6+UuP5y2/8SfmlbNECEOdqiJMJcSvRlwEZAjZZECbBg
+ iku4Ml5M44KY2FkTCvhoojyTB95vsoXK4iJNrPbWemIwAhowd7GUcKEd9dIH7bS3NSac
+ vyrAp/hJTNVMBSoAcYvpRWt5g7yhtsG/Iq+bGg5OEPmdxa7MK+RIwvNeQPum7y4Wc1vq
+ axcA==
+X-Gm-Message-State: AOJu0YwWwYG+vLwv8c1VdXILKfGGunmdQMdl3j+WSC/hd2TlLyrCjHlD
+ XKPl9uWqYXa8f6yds6YXOi8Pf1oWhsEdNQIte4JZDJomp0hnbp4CyTOhYqAni9Y=
+X-Google-Smtp-Source: AGHT+IFe7kEQ6lQo3H3809DUzKA3DTiH1uv/PA+/BII/GunzoKdUuLo8qg210ZqyIQ2RjL/j0mNHSw==
+X-Received: by 2002:a05:6a21:1796:b0:1d2:fad2:a537 with SMTP id
+ adf61e73a8af0-1d8bc95b4b0mr202164637.18.1728587026341; 
+ Thu, 10 Oct 2024 12:03:46 -0700 (PDT)
+Received: from grind.. (201-68-240-198.dsl.telesp.net.br. [201.68.240.198])
+ by smtp.gmail.com with ESMTPSA id
+ d2e1a72fcca58-71e2a9f5263sm1354532b3a.62.2024.10.10.12.03.43
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 10 Oct 2024 12:03:46 -0700 (PDT)
+From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+To: qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
+ liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
+ ajones@ventanamicro.com,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Subject: [PATCH 1/8] hw/intc/riscv_aplic: rename is_kvm_aia()
+Date: Thu, 10 Oct 2024 16:03:30 -0300
+Message-ID: <20241010190337.376987-2-dbarboza@ventanamicro.com>
+X-Mailer: git-send-email 2.45.2
+In-Reply-To: <20241010190337.376987-1-dbarboza@ventanamicro.com>
+References: <20241010190337.376987-1-dbarboza@ventanamicro.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH RFC 00/10] Allow platform specific PMU event encoding
-To: Atish Patra <atishp@rivosinc.com>, <qemu-riscv@nongnu.org>,
- <qemu-devel@nongnu.org>
-CC: <alexei.filippov@syntacore.com>, <palmer@dabbelt.com>,
- <liwei1518@gmail.com>, <zhiwei_liu@linux.alibaba.com>,
- <bin.meng@windriver.com>, <dbarboza@ventanamicro.com>,
- <alistair.francis@wdc.com>
-References: <20241009-pmu_event_machine-v1-0-dcbd7a60e3ba@rivosinc.com>
-Content-Language: en-US
-From: Alexei Filippov <alexei.filippov@yadro.com>
-In-Reply-To: <20241009-pmu_event_machine-v1-0-dcbd7a60e3ba@rivosinc.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: T-EXCH-09.corp.yadro.com (172.17.11.59) To
- T-EXCH-12.corp.yadro.com (172.17.11.143)
-Received-SPF: permerror client-ip=89.207.88.253;
- envelope-from=alexei.filippov@syntacore.com; helo=mta-03.yadro.com
-X-Spam_score_int: -16
-X-Spam_score: -1.7
-X-Spam_bar: -
-X-Spam_report: (-1.7 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, HEADER_FROM_DIFFERENT_DOMAINS=0.25,
- RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001, RCVD_IN_VALIDITY_SAFE_BLOCKED=0.001,
- SPF_HELO_NONE=0.001, T_SPF_PERMERROR=0.01 autolearn=no autolearn_force=no
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::431;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pf1-x431.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -80,81 +96,74 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
+The helper is_kvm_aia() is checking not only for AIA, but for
+aplic-imsic (i.e. "aia=aplic-imsic" in 'virt' RISC-V machine) with an
+in-kernel chip present.
 
+Rename it to be a bit clear what the helper is doing since we'll add
+more AIA helpers in the next patches.
 
-On 10.10.2024 02:08, Atish Patra wrote:
-> Currently, the pmu implementation is virt machine specific that
-> implements the SBI PMU encodings. In the future, individual machines
-> would want to implement their own custom event encodings as there
-> is no standard event encoding defined by the ISA. There is a performance
-> events TG which is working on defining standard set of events but not
-> encodings. That allows flexibility for platforms to choose whatever
-> encoding scheme they want. However, that means the generic pmu code
-> should be flexible enough to allow that in Qemu as well.
-> 
-> This series aims to solve that problem by first disassociating the
-> common pmu implementation and event encoding. The event encoding is
-> specific to a platform and should be defined in the platform specific
-> machine or cpu implementation. The newly defined callbacks can be invoked
-> from machine specific cpu implementation or machine code itself depending
-> on the requirement.
-> 
-> The first 5 patches in the series are generic improvements and cleanups
-> where as the last 5 actually implements the disassociation for the virt
-> machine. The current series can also be found at[2].
-> 
-> I recently found that Alexei has done a similar effort for SiFive FU740[1]
-> but the implementation differs from this one based on how the cpu callbacks
-> are invoked. For example, Alexei's series implements a single callback for
-> all the events and has defined machine specific counter read/write callbacks.
-> However, it just defaults to get_ticks() for every event. IMO, that is
-> confusing to the users unless we can actually emulate more generic events or
-> machine specific events.
-> 
-> I have separate callbacks for each type of events that we currently support
-> in Qemu (cycle, instruction, TLB events). Separate callbacks seems a better
-> approach to avoid ambiguity as we have very limited event capability in qemu.
-> I am open to converging them to one callback as well if we think we will
-> be extending set of events in the future.
-> 
-> Once we converge on the approaches, we can consolidate the patches
-> so that both SiFive FU740 and virt machine can use the same abstraction.
-> 
-> Cc: alexei.filippov@syntacore.com
->
-Thanks for CCing me and your patch. Your done a great work, but still I 
-do not think this approach with per event callback are scalable enough. 
-I'll suggest to collaborate to work your and mine solution to unite them 
-to one patch set. Let me know what do you think.
-> [1] https://lore.kernel.org/all/20240910174747.148141-1-alexei.filippov@syntacore.com/T/
-> [2] https://github.com/atishp04/qemu/tree/b4/pmu_event_machine
-> 
-> Signed-off-by: Atish Patra <atishp@rivosinc.com>
-> ---
-> Atish Patra (10):
->        target/riscv: Fix the hpmevent mask
->        target/riscv: Introduce helper functions for pmu hashtable lookup
->        target/riscv: Protect the hashtable modifications with a lock
->        target/riscv: Use uint64 instead of uint as key
->        target/riscv: Rename the PMU events
->        target/riscv: Define PMU event related structures
->        hw/riscv/virt.c : Disassociate virt PMU events
->        target/riscv: Update event mapping hashtable for invalid events
->        target/riscv : Use the new tlb fill event functions
->        hw/riscv/virt.c: Generate the PMU node from the machine
-> 
->   hw/riscv/virt.c           | 102 +++++++++++++++++++++++-
->   target/riscv/cpu.h        |  52 ++++++++++--
->   target/riscv/cpu_bits.h   |   4 +-
->   target/riscv/cpu_helper.c |  21 ++---
->   target/riscv/pmu.c        | 198 +++++++++++++++++++++-------------------------
->   target/riscv/pmu.h        |   3 +-
->   6 files changed, 246 insertions(+), 134 deletions(-)
-> ---
-> base-commit: 19a9809808a51291008f72d051d0f9b3499fc223
-> change-id: 20241008-pmu_event_machine-b87c58104e61
-> --
-> Regards,
-> Atish patra
-> 
+Make the helper public because the 'virt' machine will use it as well.
+
+Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+---
+ hw/intc/riscv_aplic.c         | 8 ++++----
+ include/hw/intc/riscv_aplic.h | 1 +
+ 2 files changed, 5 insertions(+), 4 deletions(-)
+
+diff --git a/hw/intc/riscv_aplic.c b/hw/intc/riscv_aplic.c
+index 4a262c82f0..20de8c63a2 100644
+--- a/hw/intc/riscv_aplic.c
++++ b/hw/intc/riscv_aplic.c
+@@ -154,7 +154,7 @@
+  * KVM AIA only supports APLIC MSI, fallback to QEMU emulation if we want to use
+  * APLIC Wired.
+  */
+-static bool is_kvm_aia(bool msimode)
++bool riscv_is_kvm_aia_aplic_imsic(bool msimode)
+ {
+     return kvm_irqchip_in_kernel() && msimode;
+ }
+@@ -853,7 +853,7 @@ static void riscv_aplic_realize(DeviceState *dev, Error **errp)
+     uint32_t i;
+     RISCVAPLICState *aplic = RISCV_APLIC(dev);
+ 
+-    if (!is_kvm_aia(aplic->msimode)) {
++    if (!riscv_is_kvm_aia_aplic_imsic(aplic->msimode)) {
+         aplic->bitfield_words = (aplic->num_irqs + 31) >> 5;
+         aplic->sourcecfg = g_new0(uint32_t, aplic->num_irqs);
+         aplic->state = g_new0(uint32_t, aplic->num_irqs);
+@@ -877,7 +877,7 @@ static void riscv_aplic_realize(DeviceState *dev, Error **errp)
+      * have IRQ lines delegated by their parent APLIC.
+      */
+     if (!aplic->parent) {
+-        if (kvm_enabled() && is_kvm_aia(aplic->msimode)) {
++        if (kvm_enabled() && riscv_is_kvm_aia_aplic_imsic(aplic->msimode)) {
+             qdev_init_gpio_in(dev, riscv_kvm_aplic_request, aplic->num_irqs);
+         } else {
+             qdev_init_gpio_in(dev, riscv_aplic_request, aplic->num_irqs);
+@@ -1021,7 +1021,7 @@ DeviceState *riscv_aplic_create(hwaddr addr, hwaddr size,
+ 
+     sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
+ 
+-    if (!is_kvm_aia(msimode)) {
++    if (!riscv_is_kvm_aia_aplic_imsic(msimode)) {
+         sysbus_mmio_map(SYS_BUS_DEVICE(dev), 0, addr);
+     }
+ 
+diff --git a/include/hw/intc/riscv_aplic.h b/include/hw/intc/riscv_aplic.h
+index de8532fbc3..fd0e6427d9 100644
+--- a/include/hw/intc/riscv_aplic.h
++++ b/include/hw/intc/riscv_aplic.h
+@@ -71,6 +71,7 @@ struct RISCVAPLICState {
+ };
+ 
+ void riscv_aplic_add_child(DeviceState *parent, DeviceState *child);
++bool riscv_is_kvm_aia_aplic_imsic(bool msimode);
+ 
+ DeviceState *riscv_aplic_create(hwaddr addr, hwaddr size,
+     uint32_t hartid_base, uint32_t num_harts, uint32_t num_sources,
+-- 
+2.45.2
+
 
