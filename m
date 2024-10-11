@@ -4,89 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0F2B4CFC60F
-	for <qemu-riscv@archiver.kernel.org>; Fri, 11 Oct 2024 07:41:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D19CCD0EE12
+	for <qemu-riscv@archiver.kernel.org>; Fri, 11 Oct 2024 17:23:19 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1szAGm-0003xi-E3; Fri, 11 Oct 2024 03:41:04 -0400
+	id 1szJIl-0001Nz-0g; Fri, 11 Oct 2024 13:19:43 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <cleger@rivosinc.com>)
- id 1szAGi-0003wf-Nk
- for qemu-riscv@nongnu.org; Fri, 11 Oct 2024 03:41:01 -0400
-Received: from mail-wr1-x436.google.com ([2a00:1450:4864:20::436])
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1szJ8U-0003ly-7C
+ for qemu-riscv@nongnu.org; Fri, 11 Oct 2024 13:09:07 -0400
+Received: from mail-pg1-x530.google.com ([2607:f8b0:4864:20::530])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <cleger@rivosinc.com>)
- id 1szAGf-0007mJ-PD
- for qemu-riscv@nongnu.org; Fri, 11 Oct 2024 03:40:59 -0400
-Received: by mail-wr1-x436.google.com with SMTP id
- ffacd0b85a97d-37d41894a32so1103471f8f.1
- for <qemu-riscv@nongnu.org>; Fri, 11 Oct 2024 00:40:56 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1szDfw-0007rh-8C
+ for qemu-riscv@nongnu.org; Fri, 11 Oct 2024 07:19:18 -0400
+Received: by mail-pg1-x530.google.com with SMTP id
+ 41be03b00d2f7-7e9f955cb97so1086177a12.3
+ for <qemu-riscv@nongnu.org>; Fri, 11 Oct 2024 04:19:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1728632455; x=1729237255;
- darn=nongnu.org; 
+ d=ventanamicro.com; s=google; t=1728645554; x=1729250354; darn=nongnu.org;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=8mDip/0ow4XhgssxP8kgnUXoLAwS2RmrmHC/lIU88cg=;
- b=Hcdiam+Uq5wObpnSYquq9l9L5cLIlxwL0t1LoqAIp8t6YqXVqwOsEJaFu7fpXWRn7a
- 14KTa/8la7x+gI46Dn20DFWMrRi54lzJSFlJyvTPfO+zd8kuaM0vTurHylBrKpGORlul
- AUzywDUR+jH5ThopCwyYe+h3vNhQ3KpWqe8XcWgjgoiEUejpLSDoMVpBeVoKalloV60M
- UBApx4aJgIqTkWaOfTJzijhr2pWjtgVsfXEpOd8D2L2/end+j1y0UsdjqPM9XeweldCS
- LHcDA6Wu79R//ldgNmr6C26e12qDeTex8z/lmv2GXSV6b6o88y9xHXUAWJICn/Xi6c3p
- 2smg==
+ bh=t97p9zZl9/jmYPyVqbjQ4fbIa0dYpZbhd5CdMHNe5A0=;
+ b=IA4jtYvvC2DtYvgldY0Cd+xNX9p3UfoMz+GNkP2pek9Z0GHBVcc31IX5tMSdHINBac
+ 9ovKsBv7wRfE/pshngVxxueqybPw8+cDaMfyp1QdpEeNFi5+/Ggvf8dSX6b+sxUePtUY
+ nFBszZF3vBf60XR03w7rP3vSwrUTzy29Sy5pgVxpZn9hFcykrPbyHmNqpB25wTJIELPj
+ lfO9hJDDdNYIroIuXDRl1S2TpeZMlcgLRwhoLzbi7ZzGjefGhA6+4Gcn1aCaAzWwMkJF
+ QbRxdXKwS2JRYoKJt44EsJgjzGsPDJJsrhWcnlCeN43n+fJ2N/u9BwjNVsHy9QAkMHEt
+ 9H+A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728632455; x=1729237255;
+ d=1e100.net; s=20230601; t=1728645554; x=1729250354;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=8mDip/0ow4XhgssxP8kgnUXoLAwS2RmrmHC/lIU88cg=;
- b=g7YUBeq88chIzvcMDG/sXlrrkHu4ctsFpLbyn/tMD73iU4Lezk/WPVmJJTISxNRCF/
- mL3AfHQlcB5HSIvQjTuvDPyVZPGvq5ixRInXDqurWJ2mqnyMirdqFTPwhbYIS8CiVBDj
- ct6XmY0J5sifek5LAuMkVIElsl6Sm8kwVkFSCtSrVWtQnwXXT6a8WWED2ZS6TVrjvgSx
- uF4MbHsFV1Tz0CMs+lEf5LHjmzLPrJJuXkom+PIprDNRL48WeDkhDK5SzDVVIG7dm/hp
- kJUmNDkleN7UV5v6DIBMdVhlj+H/g8AZZEik2btAUU1/i9jA8yX4ckV/4OUS7B/fChat
- RtgA==
-X-Gm-Message-State: AOJu0Yx/YHh74mlf9oGY3gybjDVd3evkPV7NRXP+0yhBoLdJeLiKFAlv
- tIA7yl1LLg/CiY6bTY4YESk3BfNG2NlPpK3pNAy/m+XtLglCtP4mQt3PPDTAh5I=
-X-Google-Smtp-Source: AGHT+IGWo1yhhAqe+RwYPK8XY5kaHbyd0yk1WgppbPsNNXFObopaTKoNvzbdK4bKcuizfY3L7XSImw==
-X-Received: by 2002:a05:6000:128f:b0:37d:364c:b410 with SMTP id
- ffacd0b85a97d-37d55304616mr1272751f8f.33.1728632455264; 
- Fri, 11 Oct 2024 00:40:55 -0700 (PDT)
-Received: from ?IPV6:2a01:e0a:e17:9700:16d2:7456:6634:9626?
- ([2a01:e0a:e17:9700:16d2:7456:6634:9626])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-37d4b6bcf04sm3260388f8f.33.2024.10.11.00.40.54
+ bh=t97p9zZl9/jmYPyVqbjQ4fbIa0dYpZbhd5CdMHNe5A0=;
+ b=j+gs6qCEgKGJmTUu4XEVQ4389eTtAzo/jU2jy4n5A3S4i2eRjPe46YrSL/su4zfzGV
+ 6b0Lglp1tbAFEWJ77YPTQBRWh7Cpr+80GplPhV+0pP1JO12aRppmzxD9nicBZeYt2hQS
+ HqqpnL3nj21G61AycACObDmRAnN3PTOD98m4xmeLLdzf+0bPKhMraDPN9xeywoOrYPTl
+ iu3b1RXMR5qW/ECC4MGFxD1xWrC5yGk/eZpxGY3KfLpI5cSB0PiLShYTFVEsiWh97fJM
+ SoiWblz1MxJdH+NSQuqsJgszB1VldUnTKBEcpPFbesQpFs4GBb+qhe8udMmGprdtu16B
+ pIsQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCV6cEfdCv9EKJW5vz8W57IQqSGqEkSJ7X+bWCkVU7IHzFyWSKCochjTwxlz7Jov7HY/h7RbhzXbeLAn@nongnu.org
+X-Gm-Message-State: AOJu0Yx2rAfsCOlFaA+ngQbuJRxNFdJHoMRUQJuIgwH2CaDVdupkOUrH
+ 3YO0K11VoTRFno90F3rgCwZazJT7VR4yAjYSFC1P0NHdggGn6pqBwE+Q1ebu4Jau1261KTq/XSc
+ l
+X-Google-Smtp-Source: AGHT+IHKNDheTB7yfXWt13ICE59DdO3XHt7Sg4EeFgg22+YZahJIwkR+l0rB1hbQ18VB/TpKpKyIZQ==
+X-Received: by 2002:a05:6a21:1796:b0:1d7:2249:67a with SMTP id
+ adf61e73a8af0-1d8bcf9f071mr3477871637.36.1728645554319; 
+ Fri, 11 Oct 2024 04:19:14 -0700 (PDT)
+Received: from [192.168.68.110] (201-68-240-198.dsl.telesp.net.br.
+ [201.68.240.198]) by smtp.gmail.com with ESMTPSA id
+ d2e1a72fcca58-71e2aa938aesm2381903b3a.133.2024.10.11.04.19.11
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 11 Oct 2024 00:40:54 -0700 (PDT)
-Message-ID: <1c90b0b6-b8c7-48bd-b31b-961080210231@rivosinc.com>
-Date: Fri, 11 Oct 2024 09:40:53 +0200
+ Fri, 11 Oct 2024 04:19:13 -0700 (PDT)
+Message-ID: <b7271701-195a-461d-ba64-e2a02c634177@ventanamicro.com>
+Date: Fri, 11 Oct 2024 08:19:09 -0300
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 5/8] target/riscv: Add Smdbltrp CSRs handling
+Subject: Re: [PATCH 3/4] target/riscv/kvm: add kvm-aia bools props
 To: Alistair Francis <alistair23@gmail.com>
-Cc: qemu-riscv@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>, Weiwei Li <liwei1518@gmail.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, Ved Shanbhogue
- <ved@rivosinc.com>, Atish Patra <atishp@rivosinc.com>, qemu-devel@nongnu.org
-References: <20240925115808.77874-1-cleger@rivosinc.com>
- <20240925115808.77874-6-cleger@rivosinc.com>
- <CAKmqyKP0ZX7C+grozW2y=YGeQAJZ0Thm5L7Q=GwiCQ=4-Dz2=A@mail.gmail.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com,
+ bmeng@tinylab.org, liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com,
+ palmer@rivosinc.com, ajones@ventanamicro.com
+References: <20240924124407.766495-1-dbarboza@ventanamicro.com>
+ <20240924124407.766495-4-dbarboza@ventanamicro.com>
+ <CAKmqyKMMRCFvWYa1GjwkbJsBh8q_OgtA2UVdaNEJsr=N66hvkQ@mail.gmail.com>
 Content-Language: en-US
-From: =?UTF-8?B?Q2zDqW1lbnQgTMOpZ2Vy?= <cleger@rivosinc.com>
-In-Reply-To: <CAKmqyKP0ZX7C+grozW2y=YGeQAJZ0Thm5L7Q=GwiCQ=4-Dz2=A@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8
+From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+In-Reply-To: <CAKmqyKMMRCFvWYa1GjwkbJsBh8q_OgtA2UVdaNEJsr=N66hvkQ@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::436;
- envelope-from=cleger@rivosinc.com; helo=mail-wr1-x436.google.com
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+Received-SPF: pass client-ip=2607:f8b0:4864:20::530;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pg1-x530.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -105,87 +104,158 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 
 
-On 11/10/2024 05:30, Alistair Francis wrote:
-> On Wed, Sep 25, 2024 at 10:02 PM Clément Léger <cleger@rivosinc.com> wrote:
+On 10/10/24 10:57 PM, Alistair Francis wrote:
+> On Tue, Sep 24, 2024 at 10:46 PM Daniel Henrique Barboza
+> <dbarboza@ventanamicro.com> wrote:
 >>
->> Add `ext_smdbltrp`in RISCVCPUConfig and implement MSTATUS.MDT behavior.
+>> Boolean properties are preferrable in comparision to string properties
+>> since they don't require a string parsing.
 >>
->> Signed-off-by: Clément Léger <cleger@rivosinc.com>
+>> Add three bools that represents the available kvm-aia mode:
+>> riscv-aia-emul, riscv-aia-hwaccel, riscv-aia-auto. They work like the
+>> existing riscv-aia string property, i.e. if no bool is set we'll default
+>> to riscv-aia-auto, if the host supports it.
+>>
+>> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 >> ---
->>  target/riscv/cpu_bits.h |  1 +
->>  target/riscv/cpu_cfg.h  |  1 +
->>  target/riscv/csr.c      | 15 +++++++++++++++
->>  3 files changed, 17 insertions(+)
+>>   target/riscv/kvm/kvm-cpu.c | 77 ++++++++++++++++++++++++++++++++++++++
+>>   1 file changed, 77 insertions(+)
 >>
->> diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
->> index 5557a86348..62bab1bf55 100644
->> --- a/target/riscv/cpu_bits.h
->> +++ b/target/riscv/cpu_bits.h
->> @@ -561,6 +561,7 @@
->>  #define MSTATUS_SDT         0x01000000
->>  #define MSTATUS_GVA         0x4000000000ULL
->>  #define MSTATUS_MPV         0x8000000000ULL
->> +#define MSTATUS_MDT         0x40000000000ULL /* Smdbltrp extension */
+>> diff --git a/target/riscv/kvm/kvm-cpu.c b/target/riscv/kvm/kvm-cpu.c
+>> index 32f3dd6a43..e256e3fc48 100644
+>> --- a/target/riscv/kvm/kvm-cpu.c
+>> +++ b/target/riscv/kvm/kvm-cpu.c
+>> @@ -1671,6 +1671,62 @@ static void riscv_set_kvm_aia(Object *obj, const char *val, Error **errp)
+>>       }
+>>   }
 >>
->>  #define MSTATUS64_UXL       0x0000000300000000ULL
->>  #define MSTATUS64_SXL       0x0000000C00000000ULL
->> diff --git a/target/riscv/cpu_cfg.h b/target/riscv/cpu_cfg.h
->> index dd804f95d4..4c4caa2b39 100644
->> --- a/target/riscv/cpu_cfg.h
->> +++ b/target/riscv/cpu_cfg.h
->> @@ -78,6 +78,7 @@ struct RISCVCPUConfig {
->>      bool ext_sstc;
->>      bool ext_smcntrpmf;
->>      bool ext_ssdbltrp;
->> +    bool ext_smdbltrp;
->>      bool ext_svadu;
->>      bool ext_svinval;
->>      bool ext_svnapot;
->> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
->> index d8280ec956..cc1940447a 100644
->> --- a/target/riscv/csr.c
->> +++ b/target/riscv/csr.c
->> @@ -1617,6 +1617,14 @@ static RISCVException write_mstatus(CPURISCVState *env, int csrno,
->>          }
->>      }
->>
->> +    if (riscv_cpu_cfg(env)->ext_smdbltrp) {
->> +        mask |= MSTATUS_MDT;
->> +        if ((val & MSTATUS_MDT) != 0) {
->> +            mstatus &= ~MSTATUS_MIE;
->> +            val &= ~MSTATUS_MIE;
->> +        }
+>> +static void riscv_set_kvm_aia_bool(uint32_t aia_bool, bool val)
+>> +{
+>> +    bool default_aia_mode = KVM_DEV_RISCV_AIA_MODE_AUTO;
+>> +
+>> +    g_assert(aia_bool <= KVM_DEV_RISCV_AIA_MODE_AUTO);
+>> +
+>> +    if (val) {
+>> +        aia_mode = aia_bool;
+>> +        return;
 >> +    }
+>> +
+>> +    /*
+>> +     * Setting an aia_bool to 'false' does nothing if
+>> +     * aia_mode isn't set to aia_bool.
+>> +     */
+>> +    if (aia_mode != aia_bool) {
+>> +        return;
+>> +    }
+>> +
+>> +    /*
+>> +     * Return to default value if we're disabling the
+>> +     * current set aia_mode.
+>> +     */
+>> +    aia_mode = default_aia_mode;
+>> +}
+>> +
+>> +static bool riscv_get_kvm_aia_emul(Object *obj, Error **errp)
+>> +{
+>> +    return aia_mode == KVM_DEV_RISCV_AIA_MODE_EMUL;
+>> +}
+>> +
+>> +static void riscv_set_kvm_aia_emul(Object *obj,  bool val, Error **errp)
+>> +{
+>> +    riscv_set_kvm_aia_bool(KVM_DEV_RISCV_AIA_MODE_EMUL, val);
+>> +}
+>> +
+>> +static bool riscv_get_kvm_aia_hwaccel(Object *obj, Error **errp)
+>> +{
+>> +    return aia_mode == KVM_DEV_RISCV_AIA_MODE_HWACCEL;
+>> +}
+>> +
+>> +static void riscv_set_kvm_aia_hwaccel(Object *obj,  bool val, Error **errp)
+>> +{
+>> +    riscv_set_kvm_aia_bool(KVM_DEV_RISCV_AIA_MODE_HWACCEL, val);
+>> +}
+>> +
+>> +static bool riscv_get_kvm_aia_auto(Object *obj, Error **errp)
+>> +{
+>> +    return aia_mode == KVM_DEV_RISCV_AIA_MODE_AUTO;
+>> +}
+>> +
+>> +static void riscv_set_kvm_aia_auto(Object *obj,  bool val, Error **errp)
+>> +{
+>> +    riscv_set_kvm_aia_bool(KVM_DEV_RISCV_AIA_MODE_AUTO, val);
+>> +}
+>> +
+>>   void kvm_arch_accel_class_init(ObjectClass *oc)
+>>   {
+>>       object_class_property_add_str(oc, "riscv-aia", riscv_get_kvm_aia,
+>> @@ -1681,6 +1737,27 @@ void kvm_arch_accel_class_init(ObjectClass *oc)
+>>           "if the host supports it");
+>>       object_property_set_default_str(object_class_property_find(oc, "riscv-aia"),
+>>                                       "auto");
+>> +
+>> +    object_class_property_add_bool(oc, "riscv-aia-emul",
+>> +                                   riscv_get_kvm_aia_emul,
+>> +                                   riscv_set_kvm_aia_emul);
+>> +    object_class_property_set_description(oc, "riscv-aia-emul",
+>> +        "Set KVM AIA mode to 'emul'. Changing KVM AIA modes relies on host "
+>> +        "support. Default mode is 'auto' if the host supports it");
+>> +
+>> +    object_class_property_add_bool(oc, "riscv-aia-hwaccel",
+>> +                                   riscv_get_kvm_aia_hwaccel,
+>> +                                   riscv_set_kvm_aia_hwaccel);
+>> +    object_class_property_set_description(oc, "riscv-aia-hwaccel",
+>> +        "Set KVM AIA mode to 'hwaccel'. Changing KVM AIA modes relies on host "
+>> +        "support. Default mode is 'auto' if the host supports it");
+>> +
+>> +    object_class_property_add_bool(oc, "riscv-aia-auto",
+>> +                                   riscv_get_kvm_aia_auto,
+>> +                                   riscv_set_kvm_aia_auto);
+>> +    object_class_property_set_description(oc, "riscv-aia-auto",
+>> +        "Set KVM AIA mode to 'auto'. Changing KVM AIA modes "
+>> +        "relies on host support");
 > 
-> This should also be set to 1 on reset
+> This seems more confusing. What should happen if a user sets multiple to true?
 
-Yes, this is actually done in patch 7/8. I'll squash this change in this
-commit
+It'll work like most options in QEMU: the last setting will overwrite the previous
+ones. "-accel kvm,riscv-aia-hwaccel=true,riscv-aia-emul=true" will set the mode
+to 'emul'. This is the same behavior that we have with the existing 'riscv-aia'
+string option.
+
+In case someone tries it out with multiple -accel options, this doesn't work. Only
+the first '-accel <type>' are parsed. This happens due to a known command line
+parsing/accel globals issue that I tried to fix in [1] and [2].
+
+For now, using the existing 'riscv-aia' string option:
+
+-accel kvm,riscv-aia=emul -accel kvm,riscv-aia=hwaccel -accel kvm,riscv-aia=auto
+
+This will set riscv-aia to "emul" because all other "-accel kvm" options aren't
+being parsed. You can do silly stuff like:
+
+-accel kvm,riscv-aia=emul -accel kvm,riscv-aia=this_is_not_an_option
+
+And the guest will boot normally, setting riscv-aia to 'emul'.
+
+
+Thanks,
+
+Daniel
+
+
+[1] "[PATCH 0/2] system/vl.c: parse all '-accel' opts"
+     https://lore.kernel.org/qemu-devel/20240701133038.1489043-1-dbarboza@ventanamicro.com/
+[2] "[PATCH v2 0/2] object,accel-system: allow Accel type globals"
+     https://lore.kernel.org/qemu-devel/20240703204149.1957136-1-dbarboza@ventanamicro.com/
+
 
 > 
 > Alistair
 > 
->> +
->>      if (xl != MXL_RV32 || env->debugger) {
->>          if (riscv_has_ext(env, RVH)) {
->>              mask |= MSTATUS_MPV | MSTATUS_GVA;
->> @@ -1655,6 +1663,13 @@ static RISCVException write_mstatush(CPURISCVState *env, int csrno,
->>      uint64_t valh = (uint64_t)val << 32;
->>      uint64_t mask = riscv_has_ext(env, RVH) ? MSTATUS_MPV | MSTATUS_GVA : 0;
+>>   }
 >>
->> +    if (riscv_cpu_cfg(env)->ext_smdbltrp) {
->> +        mask |= MSTATUS_MDT;
->> +        if ((val & MSTATUS_MDT) != 0) {
->> +            env->mstatus &= ~MSTATUS_MIE;
->> +            val &= ~MSTATUS_MIE;
->> +        }
->> +    }
->>      env->mstatus = (env->mstatus & ~mask) | (valh & mask);
->>
->>      return RISCV_EXCP_NONE;
+>>   void kvm_riscv_aia_create(MachineState *machine, uint64_t group_shift,
 >> --
 >> 2.45.2
 >>
 >>
-
 
