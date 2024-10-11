@@ -4,80 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D58A7D24468
-	for <qemu-riscv@archiver.kernel.org>; Fri, 11 Oct 2024 04:01:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0F2B4CFC60F
+	for <qemu-riscv@archiver.kernel.org>; Fri, 11 Oct 2024 07:41:18 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1sz6pw-0005I0-HC; Fri, 11 Oct 2024 00:01:08 -0400
+	id 1szAGm-0003xi-E3; Fri, 11 Oct 2024 03:41:04 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1sz6pu-0005Hl-Sg; Fri, 11 Oct 2024 00:01:06 -0400
-Received: from mail-vs1-xe2d.google.com ([2607:f8b0:4864:20::e2d])
+ (Exim 4.90_1) (envelope-from <cleger@rivosinc.com>)
+ id 1szAGi-0003wf-Nk
+ for qemu-riscv@nongnu.org; Fri, 11 Oct 2024 03:41:01 -0400
+Received: from mail-wr1-x436.google.com ([2a00:1450:4864:20::436])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1sz6pt-0006ii-9h; Fri, 11 Oct 2024 00:01:06 -0400
-Received: by mail-vs1-xe2d.google.com with SMTP id
- ada2fe7eead31-4a46222afb3so194920137.2; 
- Thu, 10 Oct 2024 21:01:04 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <cleger@rivosinc.com>)
+ id 1szAGf-0007mJ-PD
+ for qemu-riscv@nongnu.org; Fri, 11 Oct 2024 03:40:59 -0400
+Received: by mail-wr1-x436.google.com with SMTP id
+ ffacd0b85a97d-37d41894a32so1103471f8f.1
+ for <qemu-riscv@nongnu.org>; Fri, 11 Oct 2024 00:40:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1728619264; x=1729224064; darn=nongnu.org;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=wPvvkgjBLr1noDzXbQsDqPccMDQTOtvaFtnxWjTDJG0=;
- b=hx0PY8FPOhBkgPqO9wPpsbK3hlhK/W9hwfZHX1gtDuxGdsnLRXLv3xHa5m0c8zBGtW
- D+luYEXlP47JOaoNMI/Zim0DkEicZU0zcM91zq/imuwq3yobNwtAn0cHDVOL3fALT6QZ
- A07J+PWbt2XXCW+52rzZwlyBX9IojP89GY4sGszcPiVpKQxKq97K/AWvlL+ht7aUSJ2U
- AlYXkNbEBfzlcQCUKTZESqAzjupvwXLDD1/cUsa/DSL/qyP2Q7LAUJ/M7UFOW6fxm+/E
- C+N0CycJuwWeCwVjVp0RzU00oHgEgAgGRXCrdnQBw2qu6psP0i4wiS0gZ0NZR2QiIR2I
- /iNg==
+ d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1728632455; x=1729237255;
+ darn=nongnu.org; 
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=8mDip/0ow4XhgssxP8kgnUXoLAwS2RmrmHC/lIU88cg=;
+ b=Hcdiam+Uq5wObpnSYquq9l9L5cLIlxwL0t1LoqAIp8t6YqXVqwOsEJaFu7fpXWRn7a
+ 14KTa/8la7x+gI46Dn20DFWMrRi54lzJSFlJyvTPfO+zd8kuaM0vTurHylBrKpGORlul
+ AUzywDUR+jH5ThopCwyYe+h3vNhQ3KpWqe8XcWgjgoiEUejpLSDoMVpBeVoKalloV60M
+ UBApx4aJgIqTkWaOfTJzijhr2pWjtgVsfXEpOd8D2L2/end+j1y0UsdjqPM9XeweldCS
+ LHcDA6Wu79R//ldgNmr6C26e12qDeTex8z/lmv2GXSV6b6o88y9xHXUAWJICn/Xi6c3p
+ 2smg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728619264; x=1729224064;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=wPvvkgjBLr1noDzXbQsDqPccMDQTOtvaFtnxWjTDJG0=;
- b=Y0vmx3+QF5mx5+fUpx8lPYwCxxSIBoqyncctmwCOblMsk2o86oYp+kXxXbCuI3bflF
- s7MdaLb1uUCsH2iBk38G4vhtpnQeMFobdNysv7MYHsdWma47pg31AJyCnKSafzjWf7Z7
- gbrzzxSFfACCeA3aLBbeq2Vo9SNiYSUNsRudYBSQWMINvBlV0lcRu/6nw8/RLwwrYIL9
- PP/1WCKjj3zRoySPMPEeYcgLW0igf/yBfJHzg9NwnIpBBkGOMjGl/ZO8V4CclpJwRtgw
- 6RVDzdLQKh5VmSldNmnkqkLEACV5YtPcEfr3tdLJeIsblGf7vGYsePxsDMFB/PdJ2pxg
- q+Zg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVwLSDWUBs4yKjzIcE38xUY6pUUB3mKO6M5DEU/64tkoi+wwf7Gy8Pj5wL38NEBOKRnnbISKY6+6zsz@nongnu.org
-X-Gm-Message-State: AOJu0Yz8NGyauQvJT+aDm/8B387c4YVBb84V2cyHMEFx44XJUkRWsv+E
- gRDx0UNB6MNnQzJ/NPlvJAehOQgQbr8LKlHL/JrvXT30m9VKDRnoe1dI1V3eysH/y87VlNdEQ3k
- Enu98Ll8FqiToRHD1sSYsafTXLuo=
-X-Google-Smtp-Source: AGHT+IFXSyQl4ajuMsvwxh7A+cDtOkhfj7n43WvQ73+poDG1GBrKqDbgkS28osaBApeiwxoNICkkyOXME9QTwrOVylU=
-X-Received: by 2002:a05:6102:3754:b0:49b:dffb:dd41 with SMTP id
- ada2fe7eead31-4a4659b00c2mr900844137.16.1728619263808; Thu, 10 Oct 2024
- 21:01:03 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1728632455; x=1729237255;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=8mDip/0ow4XhgssxP8kgnUXoLAwS2RmrmHC/lIU88cg=;
+ b=g7YUBeq88chIzvcMDG/sXlrrkHu4ctsFpLbyn/tMD73iU4Lezk/WPVmJJTISxNRCF/
+ mL3AfHQlcB5HSIvQjTuvDPyVZPGvq5ixRInXDqurWJ2mqnyMirdqFTPwhbYIS8CiVBDj
+ ct6XmY0J5sifek5LAuMkVIElsl6Sm8kwVkFSCtSrVWtQnwXXT6a8WWED2ZS6TVrjvgSx
+ uF4MbHsFV1Tz0CMs+lEf5LHjmzLPrJJuXkom+PIprDNRL48WeDkhDK5SzDVVIG7dm/hp
+ kJUmNDkleN7UV5v6DIBMdVhlj+H/g8AZZEik2btAUU1/i9jA8yX4ckV/4OUS7B/fChat
+ RtgA==
+X-Gm-Message-State: AOJu0Yx/YHh74mlf9oGY3gybjDVd3evkPV7NRXP+0yhBoLdJeLiKFAlv
+ tIA7yl1LLg/CiY6bTY4YESk3BfNG2NlPpK3pNAy/m+XtLglCtP4mQt3PPDTAh5I=
+X-Google-Smtp-Source: AGHT+IGWo1yhhAqe+RwYPK8XY5kaHbyd0yk1WgppbPsNNXFObopaTKoNvzbdK4bKcuizfY3L7XSImw==
+X-Received: by 2002:a05:6000:128f:b0:37d:364c:b410 with SMTP id
+ ffacd0b85a97d-37d55304616mr1272751f8f.33.1728632455264; 
+ Fri, 11 Oct 2024 00:40:55 -0700 (PDT)
+Received: from ?IPV6:2a01:e0a:e17:9700:16d2:7456:6634:9626?
+ ([2a01:e0a:e17:9700:16d2:7456:6634:9626])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-37d4b6bcf04sm3260388f8f.33.2024.10.11.00.40.54
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 11 Oct 2024 00:40:54 -0700 (PDT)
+Message-ID: <1c90b0b6-b8c7-48bd-b31b-961080210231@rivosinc.com>
+Date: Fri, 11 Oct 2024 09:40:53 +0200
 MIME-Version: 1.0
-References: <20241007033400.50163-1-zhiwei_liu@linux.alibaba.com>
- <20241007033400.50163-6-zhiwei_liu@linux.alibaba.com>
-In-Reply-To: <20241007033400.50163-6-zhiwei_liu@linux.alibaba.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Fri, 11 Oct 2024 14:00:37 +1000
-Message-ID: <CAKmqyKNtySaO4o5NSVF0wFJBo0SYSEG+ZEQP7f0bujyN7DU0uA@mail.gmail.com>
-Subject: Re: [PATCH v1 5/7] target/riscv: Enable 32-bit only registers for
- RV64 with sxl32
-To: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, palmer@dabbelt.com, 
- alistair.francis@wdc.com, dbarboza@ventanamicro.com, liwei1518@gmail.com, 
- bmeng.cn@gmail.com, TANG Tiancheng <tangtiancheng.ttc@alibaba-inc.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::e2d;
- envelope-from=alistair23@gmail.com; helo=mail-vs1-xe2d.google.com
-X-Spam_score_int: -17
-X-Spam_score: -1.8
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 5/8] target/riscv: Add Smdbltrp CSRs handling
+To: Alistair Francis <alistair23@gmail.com>
+Cc: qemu-riscv@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Bin Meng <bin.meng@windriver.com>, Weiwei Li <liwei1518@gmail.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, Ved Shanbhogue
+ <ved@rivosinc.com>, Atish Patra <atishp@rivosinc.com>, qemu-devel@nongnu.org
+References: <20240925115808.77874-1-cleger@rivosinc.com>
+ <20240925115808.77874-6-cleger@rivosinc.com>
+ <CAKmqyKP0ZX7C+grozW2y=YGeQAJZ0Thm5L7Q=GwiCQ=4-Dz2=A@mail.gmail.com>
+Content-Language: en-US
+From: =?UTF-8?B?Q2zDqW1lbnQgTMOpZ2Vy?= <cleger@rivosinc.com>
+In-Reply-To: <CAKmqyKP0ZX7C+grozW2y=YGeQAJZ0Thm5L7Q=GwiCQ=4-Dz2=A@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::436;
+ envelope-from=cleger@rivosinc.com; helo=mail-wr1-x436.google.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
 X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -94,31 +103,89 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Mon, Oct 7, 2024 at 1:52=E2=80=AFPM LIU Zhiwei <zhiwei_liu@linux.alibaba=
-.com> wrote:
->
-> From: TANG Tiancheng <tangtiancheng.ttc@alibaba-inc.com>
->
-> Allow reading 32-bit only registers like timeh and stimecmph when
-> booting a 32-bit Linux kernel on RV64 when sxl32 is true.
->
-> Signed-off-by: TANG Tiancheng <tangtiancheng.ttc@alibaba-inc.com>
-> ---
->  target/riscv/csr.c | 4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
->
-> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-> index 93a5cf87ed..c412ac8e31 100644
-> --- a/target/riscv/csr.c
-> +++ b/target/riscv/csr.c
-> @@ -161,7 +161,7 @@ skip_ext_pmu_check:
->
->  static RISCVException ctr32(CPURISCVState *env, int csrno)
->  {
-> -    if (riscv_cpu_mxl(env) !=3D MXL_RV32) {
-> +    if (env->xl !=3D MXL_RV32) {
 
-Why not riscv_cpu_sxl()?
 
-Alistair
+On 11/10/2024 05:30, Alistair Francis wrote:
+> On Wed, Sep 25, 2024 at 10:02 PM Clément Léger <cleger@rivosinc.com> wrote:
+>>
+>> Add `ext_smdbltrp`in RISCVCPUConfig and implement MSTATUS.MDT behavior.
+>>
+>> Signed-off-by: Clément Léger <cleger@rivosinc.com>
+>> ---
+>>  target/riscv/cpu_bits.h |  1 +
+>>  target/riscv/cpu_cfg.h  |  1 +
+>>  target/riscv/csr.c      | 15 +++++++++++++++
+>>  3 files changed, 17 insertions(+)
+>>
+>> diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
+>> index 5557a86348..62bab1bf55 100644
+>> --- a/target/riscv/cpu_bits.h
+>> +++ b/target/riscv/cpu_bits.h
+>> @@ -561,6 +561,7 @@
+>>  #define MSTATUS_SDT         0x01000000
+>>  #define MSTATUS_GVA         0x4000000000ULL
+>>  #define MSTATUS_MPV         0x8000000000ULL
+>> +#define MSTATUS_MDT         0x40000000000ULL /* Smdbltrp extension */
+>>
+>>  #define MSTATUS64_UXL       0x0000000300000000ULL
+>>  #define MSTATUS64_SXL       0x0000000C00000000ULL
+>> diff --git a/target/riscv/cpu_cfg.h b/target/riscv/cpu_cfg.h
+>> index dd804f95d4..4c4caa2b39 100644
+>> --- a/target/riscv/cpu_cfg.h
+>> +++ b/target/riscv/cpu_cfg.h
+>> @@ -78,6 +78,7 @@ struct RISCVCPUConfig {
+>>      bool ext_sstc;
+>>      bool ext_smcntrpmf;
+>>      bool ext_ssdbltrp;
+>> +    bool ext_smdbltrp;
+>>      bool ext_svadu;
+>>      bool ext_svinval;
+>>      bool ext_svnapot;
+>> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+>> index d8280ec956..cc1940447a 100644
+>> --- a/target/riscv/csr.c
+>> +++ b/target/riscv/csr.c
+>> @@ -1617,6 +1617,14 @@ static RISCVException write_mstatus(CPURISCVState *env, int csrno,
+>>          }
+>>      }
+>>
+>> +    if (riscv_cpu_cfg(env)->ext_smdbltrp) {
+>> +        mask |= MSTATUS_MDT;
+>> +        if ((val & MSTATUS_MDT) != 0) {
+>> +            mstatus &= ~MSTATUS_MIE;
+>> +            val &= ~MSTATUS_MIE;
+>> +        }
+>> +    }
+> 
+> This should also be set to 1 on reset
+
+Yes, this is actually done in patch 7/8. I'll squash this change in this
+commit
+
+> 
+> Alistair
+> 
+>> +
+>>      if (xl != MXL_RV32 || env->debugger) {
+>>          if (riscv_has_ext(env, RVH)) {
+>>              mask |= MSTATUS_MPV | MSTATUS_GVA;
+>> @@ -1655,6 +1663,13 @@ static RISCVException write_mstatush(CPURISCVState *env, int csrno,
+>>      uint64_t valh = (uint64_t)val << 32;
+>>      uint64_t mask = riscv_has_ext(env, RVH) ? MSTATUS_MPV | MSTATUS_GVA : 0;
+>>
+>> +    if (riscv_cpu_cfg(env)->ext_smdbltrp) {
+>> +        mask |= MSTATUS_MDT;
+>> +        if ((val & MSTATUS_MDT) != 0) {
+>> +            env->mstatus &= ~MSTATUS_MIE;
+>> +            val &= ~MSTATUS_MIE;
+>> +        }
+>> +    }
+>>      env->mstatus = (env->mstatus & ~mask) | (valh & mask);
+>>
+>>      return RISCV_EXCP_NONE;
+>> --
+>> 2.45.2
+>>
+>>
+
 
