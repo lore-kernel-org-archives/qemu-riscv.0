@@ -4,87 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B6294D0EE20
-	for <qemu-riscv@archiver.kernel.org>; Fri, 11 Oct 2024 18:53:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 33A8DD0EE38
+	for <qemu-riscv@archiver.kernel.org>; Fri, 11 Oct 2024 20:42:00 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1szKkm-0005T4-Qs; Fri, 11 Oct 2024 14:52:44 -0400
+	id 1szMS5-0002K7-5W; Fri, 11 Oct 2024 16:41:33 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <ved@rivosinc.com>) id 1szKkl-0005SY-2g
- for qemu-riscv@nongnu.org; Fri, 11 Oct 2024 14:52:43 -0400
-Received: from mail-oi1-x229.google.com ([2607:f8b0:4864:20::229])
+ (Exim 4.90_1) (envelope-from <atishp@rivosinc.com>)
+ id 1szMS3-0002JY-RU
+ for qemu-riscv@nongnu.org; Fri, 11 Oct 2024 16:41:31 -0400
+Received: from mail-pf1-x434.google.com ([2607:f8b0:4864:20::434])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <ved@rivosinc.com>) id 1szKkj-0007n9-AG
- for qemu-riscv@nongnu.org; Fri, 11 Oct 2024 14:52:42 -0400
-Received: by mail-oi1-x229.google.com with SMTP id
- 5614622812f47-3e3e0a8aaabso854498b6e.3
- for <qemu-riscv@nongnu.org>; Fri, 11 Oct 2024 11:52:35 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <atishp@rivosinc.com>)
+ id 1szMS1-00024L-BP
+ for qemu-riscv@nongnu.org; Fri, 11 Oct 2024 16:41:31 -0400
+Received: by mail-pf1-x434.google.com with SMTP id
+ d2e1a72fcca58-71dff3b3c66so1601584b3a.0
+ for <qemu-riscv@nongnu.org>; Fri, 11 Oct 2024 13:41:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1728672755; x=1729277555;
+ d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1728679287; x=1729284087;
  darn=nongnu.org; 
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=irZVYvpZUapOC37LWmJjffcjitIBdllmEIpXJj/9rWM=;
- b=OtFntmD24CB6dClkAf8h7gaVmDENcQkIrpxacTRd7GqyPmKPCFCqKwOQ00D7oSxYTl
- nUMTRxLBKVNAtVVKKl3n5uM/jfKcozp4sbkk/pL1C4F2K83ier27damO8pKQDFhrhk7o
- 3Gmj8Ff9KTMhFMacZfGl0ssF6I95/AOn+FPnULnCAfoV+wbikvKT+jh4D3yTVQNQyV0T
- 461E4oYWhh+tjhhtI60gj8Ppq5/SRfOyQCLe741ESWgh/EBeMKF6LDFAm5c+iZn2+y1g
- PaIyd5dAPXUv0565MVE3+qED1jETiTooVqAHaMfudLc9psJpmqnIY62rsdiaEx3McezM
- AHvw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728672755; x=1729277555;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=irZVYvpZUapOC37LWmJjffcjitIBdllmEIpXJj/9rWM=;
- b=Z65GrCaGMszUVhR04YoukCooashBFp7nQqe7Tj9zVue3tbMdcfG833X2Ltg6w4OS+s
- ING2brt1FmLpNEULZ111MJu+1qcTcGbLd34Nb/NmAQc6iniH8jN1z/YtyW0P8x3wgQ6x
- bLuq4CRSwTxF3RE9uwD1elB4CEYXtT/sFK0uiWXp+fqIu7XEOQ5tnBnpEYGX2/919uW6
- a+mZ5yAzlpjxsJdhoqH90GJ6lldb/Cio66bkcBePf3r91N4J1T0TjcuOT+fqtVAO4R0D
- jWOtXs4Gpiwo4QXTVnKAjScjgIvSXlGUvghkeyhehBcz/Qgbu2gYLBwv5TDjez0HscAW
- jvpg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXyAXh6GzLdtk1+NCvZt76q/OR1RB+nNf/cfVwIuOu9Q7OnaUnlxz/m/rr9totqrjAxyKi+FiEXXeYK@nongnu.org
-X-Gm-Message-State: AOJu0YzAlK3LMM1He3RzLHyh355Oku/JEI0L8zEheyREr59v9YnPfkig
- WRUR5mlcB7DS+FYPmQkHJgx+wGRYamzhPK8Pe+S+WndD8VwMBtCKrSz5LO7J5bk=
-X-Google-Smtp-Source: AGHT+IECw5NFO5rwjtf8P5oZTJReMIKRETN8h/oXqXHvqtr4p2g1e7yRDwwXrjwQv1BaUoPRQTJskg==
-X-Received: by 2002:a05:6808:1528:b0:3e3:ae35:f418 with SMTP id
- 5614622812f47-3e5d2343610mr361779b6e.47.1728672754554; 
- Fri, 11 Oct 2024 11:52:34 -0700 (PDT)
-Received: from ved-XPS-8940 ([12.0.166.162]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-5eb11a894acsm514430eaf.40.2024.10.11.11.52.33
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 11 Oct 2024 11:52:34 -0700 (PDT)
-Date: Fri, 11 Oct 2024 13:52:32 -0500
-From: Ved Shanbhogue <ved@rivosinc.com>
-To: Alistair Francis <alistair23@gmail.com>
-Cc: =?iso-8859-1?Q?Cl=E9ment_L=E9ger?= <cleger@rivosinc.com>,
- qemu-riscv@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>, Weiwei Li <liwei1518@gmail.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Atish Patra <atishp@rivosinc.com>, qemu-devel@nongnu.org
-Subject: Re: [PATCH v2 2/8] target/riscv: Implement Ssdbltrp sret, mret and
- mnret behavior
-Message-ID: <Zwlz8LUEGB4Fa611@ved-XPS-8940>
-References: <20240925115808.77874-1-cleger@rivosinc.com>
- <20240925115808.77874-3-cleger@rivosinc.com>
- <CAKmqyKPrHtsjAnc8kX__BeHvxoMvm+MmYLWSgh5TKdx0FE8o9A@mail.gmail.com>
+ bh=cxj0Knne6+hTXBL6ihxyBgKQA/lLh6ykI711hYQZgr8=;
+ b=kLYdBPoVv1LGBu+H1OAEdz0430id69HKPOQanrlhZabXDsMpJzI+mkFKxFidtF7Mch
+ BVssgQfrM6la6vefnfQoDApzoRdadIOqWcZosm8B1Pnl7vpJmYHUddsy++yRxHxaXgft
+ Kpq1z6SNbwUqKttOS7jR6sARnCtsayNrN8wO0u5V8+B0+CQC50TtH/MSNwr2F7NsA1gh
+ uivi6ue7pDGLcZ7jnK2naLGjFzc3RGeAoELxPNzYHc3CpNTuWGF9cwNEFi9dsU7ciPts
+ uQ/XW82o49+srCxROkk5e5WyHtkY2CyJaHn4K+gAyl68zl/GuieYrYlV62goXfzyb1B/
+ kOdQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1728679287; x=1729284087;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=cxj0Knne6+hTXBL6ihxyBgKQA/lLh6ykI711hYQZgr8=;
+ b=NAK3xgb+6pbtWO0NNwmukwq73/E1/UG47EIx2uaGZKogMY8xC2gNBH7wUEaRCRXbpr
+ scgL3qlUwO6ofzHYQIpXK1VOh3dRyshVwgNJcCuHC253L3/0P7L9kshE+zSGdNyVrGaL
+ OSP9CYsWoTPyPzzgDkf6nKaWnYdEQcKKmdiFc6fdCNfA0i478rHAQltqxfWhoNQumoST
+ AiNDw0kIZOuzBoK0z2bekkMY7zcc0+u5veuGF3Nmc6MhWexoNw7YJbYvW1VlwpoEGyxc
+ i9RNq2+odfHaz+8S+YNkYQJ+1jAg6ViRm5g90xcZJmHL9kZWtij0GLMf53+arIn+D9Pn
+ z8vw==
+X-Gm-Message-State: AOJu0YwI83a9/wpyBB7kvtR0ndwoliCiXH3E+XtNftniOa1LUyteF+Xd
+ b5/iTgllv7VK/SH6Cdo19xY1LTJadQ++OnobZf9YIeO+F5Kjpfw2S7rQUSqrjp+lfJe1C4pHgxs
+ SmGMXnuK+aXCsEs1GRscBU1lM5CMcMH56OJDmrA==
+X-Google-Smtp-Source: AGHT+IGKmtaL4TNwJd3xVPi2Ud5h0yYcIT5rV6CGbf0dgnTAjuXCZcnED3/2Gm4ClvOuzieOvvWFj6+cALiqWTNpnDw=
+X-Received: by 2002:a05:6a00:4b53:b0:71e:44f6:6900 with SMTP id
+ d2e1a72fcca58-71e44f66bc4mr3191132b3a.16.1728679286716; Fri, 11 Oct 2024
+ 13:41:26 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii; format=flowed
-Content-Disposition: inline
-In-Reply-To: <CAKmqyKPrHtsjAnc8kX__BeHvxoMvm+MmYLWSgh5TKdx0FE8o9A@mail.gmail.com>
-Received-SPF: pass client-ip=2607:f8b0:4864:20::229;
- envelope-from=ved@rivosinc.com; helo=mail-oi1-x229.google.com
+References: <20241009-pmu_event_machine-v1-0-dcbd7a60e3ba@rivosinc.com>
+ <20241009-pmu_event_machine-v1-5-dcbd7a60e3ba@rivosinc.com>
+ <3746b775-0fa1-4eca-a25c-b961cf083451@yadro.com>
+In-Reply-To: <3746b775-0fa1-4eca-a25c-b961cf083451@yadro.com>
+From: Atish Kumar Patra <atishp@rivosinc.com>
+Date: Fri, 11 Oct 2024 13:41:15 -0700
+Message-ID: <CAHBxVyHOVRmAi9rXZn-M8sW_ezrY529Wfdb8ttPr9WVjVzU=mQ@mail.gmail.com>
+Subject: Re: [PATCH RFC 05/10] target/riscv: Rename the PMU events
+To: Alexei Filippov <alexei.filippov@yadro.com>
+Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, 
+ alexei.filippov@syntacore.com, palmer@dabbelt.com, liwei1518@gmail.com, 
+ zhiwei_liu@linux.alibaba.com, bin.meng@windriver.com, 
+ dbarboza@ventanamicro.com, alistair.francis@wdc.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2607:f8b0:4864:20::434;
+ envelope-from=atishp@rivosinc.com; helo=mail-pf1-x434.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
 X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -100,37 +94,292 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Alistair Francis wrote:
->> When the Ssdbltrp extension is enabled, SSTATUS.SDT field is cleared
->> when executing sret. When executing mret/mnret, SSTATUS.SDT is cleared
->> when returning to U, VS or VU and VSSTATUS.SDT is cleared when returning
->> to VU from HS.
+On Thu, Oct 10, 2024 at 5:10=E2=80=AFAM Alexei Filippov
+<alexei.filippov@yadro.com> wrote:
 >
->I don't see mret being mentioned in the spec. Where do you see that
->V/SSTATUS.SDT should be cleared?
 >
+>
+> On 10.10.2024 02:09, Atish Patra wrote:
+> > The current PMU events are defined by SBI PMU
+> > specification.  As there is no standard event encoding
+> > scheme, Virt machine chooses to use the SBI PMU encoding.
+> > A platform may choose to implement a different event
+> > encoding scheme completely.
+> >
+> > Rename the event names to reflect the reality.
+> >
+> > No functional changes introduced.
+> >
+> > Signed-off-by: Atish Patra <atishp@rivosinc.com>
+> > ---
+> >   target/riscv/cpu.h        | 26 +++++++++++++++-----
+> >   target/riscv/cpu_helper.c |  8 +++---
+> >   target/riscv/pmu.c        | 62 ++++++++++++++++++--------------------=
+---------
+> >   target/riscv/pmu.h        |  2 +-
+> >   4 files changed, 48 insertions(+), 50 deletions(-)
+> >
+> > diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+> > index 97e408b91219..2ac391a7cf74 100644
+> > --- a/target/riscv/cpu.h
+> > +++ b/target/riscv/cpu.h
+> > @@ -820,14 +820,28 @@ enum {
+> >   /*
+> >    * The event id are encoded based on the encoding specified in the
+> >    * SBI specification v0.3
+> > + *
+> > + * The event encoding is specified in the SBI specification
+> > + * Event idx is a 20bits wide number encoded as follows:
+> > + * event_idx[19:16] =3D type
+> > + * event_idx[15:0] =3D code
+> > + * The code field in cache events are encoded as follows:
+> > + * event_idx.code[15:3] =3D cache_id
+> > + * event_idx.code[2:1] =3D op_id
+> > + * event_idx.code[0:0] =3D result_id
+> >    */
+> >
+> > -enum riscv_pmu_event_idx {
+> > -    RISCV_PMU_EVENT_HW_CPU_CYCLES =3D 0x01,
+> > -    RISCV_PMU_EVENT_HW_INSTRUCTIONS =3D 0x02,
+> > -    RISCV_PMU_EVENT_CACHE_DTLB_READ_MISS =3D 0x10019,
+> > -    RISCV_PMU_EVENT_CACHE_DTLB_WRITE_MISS =3D 0x1001B,
+> > -    RISCV_PMU_EVENT_CACHE_ITLB_PREFETCH_MISS =3D 0x10021,
+> > +enum virt_pmu_event_idx {
+> > +    /* SBI_PMU_HW_CPU_CYCLES: 0x01 : type(0x00) */
+> > +    VIRT_PMU_EVENT_HW_CPU_CYCLES =3D 0x01,
+> > +    /* SBI_PMU_HW_INSTRUCTIONS: 0x02 : type(0x00) */
+> > +    VIRT_PMU_EVENT_HW_INSTRUCTIONS =3D 0x02,
+> > +    /* SBI_PMU_HW_CACHE_DTLB : 0x03 READ : 0x00 MISS : 0x00 type(0x01)=
+ */
+> > +    VIRT_PMU_EVENT_CACHE_DTLB_READ_MISS =3D 0x10019,
+> > +    /* SBI_PMU_HW_CACHE_DTLB : 0x03 WRITE : 0x01 MISS : 0x00 type(0x01=
+) */
+> > +    VIRT_PMU_EVENT_CACHE_DTLB_WRITE_MISS =3D 0x1001B,
+> > +    /* SBI_PMU_HW_CACHE_ITLB : 0x04 READ : 0x00 MISS : 0x00 type(0x01)=
+ */
+> > +    VIRT_PMU_EVENT_CACHE_ITLB_PREFETCH_MISS =3D 0x10021,
+> Pretty sure, this is not a good idea to rename them since the generic
+> event even do not include TLB_* events as far as I know. It's acctually
+> better to just leave generic naming as is and let the machine handle
+> machine specific events separatly.
 
-Ssdbltrp specifies:
-    In S-mode, the SRET instruction sets sstatus.SDT to 0,
-    and if the new privilege mode is VU, it also sets
-    vsstatus.SDT to 0. However, in VS-mode, only vsstatus.SDT
-    is set to to 0.
+These event names are defined in SBI specification which virt machine
+implements.
+https://github.com/riscv-non-isa/riscv-sbi-doc/blob/master/src/ext-pmu.adoc=
+#event-hardware-cache-events-type-1
 
-    The MRET instructions sets sstatus.SDT to 0, if the new
-    privilege mode is U, VS, or VU. Additionally, if it is
-    VU, then vsstatus.SDT is also set to 0.
+These are not RISC-V standard events. As I mentioned in the cover
+letter, there are no standard RISC-V event names.
+Adding the RISCV_PMU prefix is confusing as there is a performance
+event TG which is trying to define standard events.
 
-Smdbltrp specifies:
-    The MRET and SRET instructions, when executed in M-mode,
-    set the MDT bit to 0. If the new privilege mode is U, VS,
-    or VU, then sstatus.SDT is also set to 0. Additionally,
-    if it is VU, then vsstatus.SDT is also set to 0.
+> >   };
+> >
+> >   /* used by tcg/tcg-cpu.c*/
+> > diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+> > index 203c0a92ab75..0f1655a221bd 100644
+> > --- a/target/riscv/cpu_helper.c
+> > +++ b/target/riscv/cpu_helper.c
+> > @@ -1295,17 +1295,17 @@ void riscv_cpu_do_unaligned_access(CPUState *cs=
+, vaddr addr,
+> >
+> >   static void pmu_tlb_fill_incr_ctr(RISCVCPU *cpu, MMUAccessType access=
+_type)
+> >   {
+> > -    enum riscv_pmu_event_idx pmu_event_type;
+> > +    enum virt_pmu_event_idx pmu_event_type;
+> >
+> >       switch (access_type) {
+> >       case MMU_INST_FETCH:
+> > -        pmu_event_type =3D RISCV_PMU_EVENT_CACHE_ITLB_PREFETCH_MISS;
+> > +        pmu_event_type =3D VIRT_PMU_EVENT_CACHE_ITLB_PREFETCH_MISS;
+> >           break;
+> >       case MMU_DATA_LOAD:
+> > -        pmu_event_type =3D RISCV_PMU_EVENT_CACHE_DTLB_READ_MISS;
+> > +        pmu_event_type =3D VIRT_PMU_EVENT_CACHE_DTLB_READ_MISS;
+> >           break;
+> >       case MMU_DATA_STORE:
+> > -        pmu_event_type =3D RISCV_PMU_EVENT_CACHE_DTLB_WRITE_MISS;
+> > +        pmu_event_type =3D VIRT_PMU_EVENT_CACHE_DTLB_WRITE_MISS;
+> >           break;
+> >       default:
+> >           return;
+> > diff --git a/target/riscv/pmu.c b/target/riscv/pmu.c
+> > index 2531d4f1a9c1..c436b08d1043 100644
+> > --- a/target/riscv/pmu.c
+> > +++ b/target/riscv/pmu.c
+> > @@ -38,40 +38,24 @@ void riscv_pmu_generate_fdt_node(void *fdt, uint32_=
+t cmask, char *pmu_name)
+> >   {
+> >       uint32_t fdt_event_ctr_map[15] =3D {};
+> >
+> > -   /*
+> > -    * The event encoding is specified in the SBI specification
+> > -    * Event idx is a 20bits wide number encoded as follows:
+> > -    * event_idx[19:16] =3D type
+> > -    * event_idx[15:0] =3D code
+> > -    * The code field in cache events are encoded as follows:
+> > -    * event_idx.code[15:3] =3D cache_id
+> > -    * event_idx.code[2:1] =3D op_id
+> > -    * event_idx.code[0:0] =3D result_id
+> > -    */
+> > -
+> > -   /* SBI_PMU_HW_CPU_CYCLES: 0x01 : type(0x00) */
+> > -   fdt_event_ctr_map[0] =3D cpu_to_be32(0x00000001);
+> > -   fdt_event_ctr_map[1] =3D cpu_to_be32(0x00000001);
+> > +   fdt_event_ctr_map[0] =3D cpu_to_be32(VIRT_PMU_EVENT_HW_CPU_CYCLES);
+> > +   fdt_event_ctr_map[1] =3D cpu_to_be32(VIRT_PMU_EVENT_HW_CPU_CYCLES);
+> >      fdt_event_ctr_map[2] =3D cpu_to_be32(cmask | 1 << 0);
+> >
+> > -   /* SBI_PMU_HW_INSTRUCTIONS: 0x02 : type(0x00) */
+> > -   fdt_event_ctr_map[3] =3D cpu_to_be32(0x00000002);
+> > -   fdt_event_ctr_map[4] =3D cpu_to_be32(0x00000002);
+> > +   fdt_event_ctr_map[3] =3D cpu_to_be32(VIRT_PMU_EVENT_HW_INSTRUCTIONS=
+);
+> > +   fdt_event_ctr_map[4] =3D cpu_to_be32(VIRT_PMU_EVENT_HW_INSTRUCTIONS=
+);
+> >      fdt_event_ctr_map[5] =3D cpu_to_be32(cmask | 1 << 2);
+> >
+> > -   /* SBI_PMU_HW_CACHE_DTLB : 0x03 READ : 0x00 MISS : 0x00 type(0x01) =
+*/
+> > -   fdt_event_ctr_map[6] =3D cpu_to_be32(0x00010019);
+> > -   fdt_event_ctr_map[7] =3D cpu_to_be32(0x00010019);
+> > +   fdt_event_ctr_map[6] =3D cpu_to_be32(VIRT_PMU_EVENT_CACHE_DTLB_READ=
+_MISS);
+> > +   fdt_event_ctr_map[7] =3D cpu_to_be32(VIRT_PMU_EVENT_CACHE_DTLB_READ=
+_MISS);
+> >      fdt_event_ctr_map[8] =3D cpu_to_be32(cmask);
+> >
+> > -   /* SBI_PMU_HW_CACHE_DTLB : 0x03 WRITE : 0x01 MISS : 0x00 type(0x01)=
+ */
+> > -   fdt_event_ctr_map[9] =3D cpu_to_be32(0x0001001B);
+> > -   fdt_event_ctr_map[10] =3D cpu_to_be32(0x0001001B);
+> > +   fdt_event_ctr_map[9] =3D cpu_to_be32(VIRT_PMU_EVENT_CACHE_DTLB_WRIT=
+E_MISS);
+> > +   fdt_event_ctr_map[10] =3D cpu_to_be32(VIRT_PMU_EVENT_CACHE_DTLB_WRI=
+TE_MISS);
+> >      fdt_event_ctr_map[11] =3D cpu_to_be32(cmask);
+> >
+> > -   /* SBI_PMU_HW_CACHE_ITLB : 0x04 READ : 0x00 MISS : 0x00 type(0x01) =
+*/
+> > -   fdt_event_ctr_map[12] =3D cpu_to_be32(0x00010021);
+> > -   fdt_event_ctr_map[13] =3D cpu_to_be32(0x00010021);
+> > +   fdt_event_ctr_map[12] =3D cpu_to_be32(VIRT_PMU_EVENT_CACHE_ITLB_PRE=
+FETCH_MISS);
+> > +   fdt_event_ctr_map[13] =3D cpu_to_be32(VIRT_PMU_EVENT_CACHE_ITLB_PRE=
+FETCH_MISS);
+> >      fdt_event_ctr_map[14] =3D cpu_to_be32(cmask);
+> Ok, I guess it's time to do smthng generic to this function, cz if
+> number of supported machines will go up it's going to be a problem I gues=
+s.
+> >
 
-    The MNRET instruction sets the MDT bit to 0 if the new
-    privilege mode is not M. If it is U, VS, or VU, then
-    sstatus.SDT is also set to 0. Additionally, if it is VU,
-    then vsstatus.SDT is also set to 0.
+We can define a generic helper function in the pmu.c. Keep in mind
+this is only required for the machines
+without counter delegation extensions. In a few years, every new
+platform will probably implement counter delegation
+which voids the requirement of SBI PMU DT node.
 
-regards
-ved
+> >      /* This a OpenSBI specific DT property documented in OpenSBI docs =
+*/
+> > @@ -290,7 +274,7 @@ void riscv_pmu_update_fixed_ctrs(CPURISCVState *env=
+, target_ulong newpriv,
+> >       riscv_pmu_icount_update_priv(env, newpriv, new_virt);
+> >   }
+> >
+> > -int riscv_pmu_incr_ctr(RISCVCPU *cpu, enum riscv_pmu_event_idx event_i=
+dx)
+> > +int riscv_pmu_incr_ctr(RISCVCPU *cpu, enum virt_pmu_event_idx event_id=
+x)
+> >   {
+> >       uint32_t ctr_idx;
+> >       int ret;
+> > @@ -329,7 +313,7 @@ bool riscv_pmu_ctr_monitor_instructions(CPURISCVSta=
+te *env,
+> >       }
+> >
+> >       cpu =3D env_archcpu(env);
+> > -    if (!riscv_pmu_htable_lookup(cpu, RISCV_PMU_EVENT_HW_INSTRUCTIONS,
+> > +    if (!riscv_pmu_htable_lookup(cpu, VIRT_PMU_EVENT_HW_INSTRUCTIONS,
+> >                                    &ctr_idx)) {
+> >           return false;
+> >       }
+> > @@ -348,7 +332,7 @@ bool riscv_pmu_ctr_monitor_cycles(CPURISCVState *en=
+v, uint32_t target_ctr)
+> >       }
+> >
+> >       cpu =3D env_archcpu(env);
+> > -    if (!riscv_pmu_htable_lookup(cpu, RISCV_PMU_EVENT_HW_CPU_CYCLES,
+> > +    if (!riscv_pmu_htable_lookup(cpu, VIRT_PMU_EVENT_HW_CPU_CYCLES,
+> >                                   &ctr_idx)) {
+> >           return false;
+> >       }
+> > @@ -406,11 +390,11 @@ int riscv_pmu_update_event_map(CPURISCVState *env=
+, uint64_t value,
+> >       }
+> >
+> >       switch (event_idx) {
+> > -    case RISCV_PMU_EVENT_HW_CPU_CYCLES:
+> > -    case RISCV_PMU_EVENT_HW_INSTRUCTIONS:
+> > -    case RISCV_PMU_EVENT_CACHE_DTLB_READ_MISS:
+> > -    case RISCV_PMU_EVENT_CACHE_DTLB_WRITE_MISS:
+> > -    case RISCV_PMU_EVENT_CACHE_ITLB_PREFETCH_MISS:
+> > +    case VIRT_PMU_EVENT_HW_CPU_CYCLES:
+> > +    case VIRT_PMU_EVENT_HW_INSTRUCTIONS:
+> > +    case VIRT_PMU_EVENT_CACHE_DTLB_READ_MISS:
+> > +    case VIRT_PMU_EVENT_CACHE_DTLB_WRITE_MISS:
+> > +    case VIRT_PMU_EVENT_CACHE_ITLB_PREFETCH_MISS:
+> >           break;
+> >       default:
+> >           /* We don't support any raw events right now */
+> > @@ -464,7 +448,7 @@ static bool pmu_hpmevent_set_of_if_clear(CPURISCVSt=
+ate *env, uint32_t ctr_idx)
+> >   }
+> >
+> >   static void pmu_timer_trigger_irq(RISCVCPU *cpu,
+> > -                                  enum riscv_pmu_event_idx evt_idx)
+> > +                                  enum virt_pmu_event_idx evt_idx)
+> >   {
+> >       uint32_t ctr_idx;
+> >       CPURISCVState *env =3D &cpu->env;
+> > @@ -473,8 +457,8 @@ static void pmu_timer_trigger_irq(RISCVCPU *cpu,
+> >       uint64_t curr_ctr_val, curr_ctrh_val;
+> >       uint64_t ctr_val;
+> >
+> > -    if (evt_idx !=3D RISCV_PMU_EVENT_HW_CPU_CYCLES &&
+> > -        evt_idx !=3D RISCV_PMU_EVENT_HW_INSTRUCTIONS) {
+> > +    if (evt_idx !=3D VIRT_PMU_EVENT_HW_CPU_CYCLES &&
+> > +        evt_idx !=3D VIRT_PMU_EVENT_HW_INSTRUCTIONS) {
+> >           return;
+> >       }
+> >
+> > @@ -533,8 +517,8 @@ void riscv_pmu_timer_cb(void *priv)
+> >       RISCVCPU *cpu =3D priv;
+> >
+> >       /* Timer event was triggered only for these events */
+> > -    pmu_timer_trigger_irq(cpu, RISCV_PMU_EVENT_HW_CPU_CYCLES);
+> > -    pmu_timer_trigger_irq(cpu, RISCV_PMU_EVENT_HW_INSTRUCTIONS);
+> > +    pmu_timer_trigger_irq(cpu, VIRT_PMU_EVENT_HW_CPU_CYCLES);
+> > +    pmu_timer_trigger_irq(cpu, VIRT_PMU_EVENT_HW_INSTRUCTIONS);
+> >   }
+> >
+> >   int riscv_pmu_setup_timer(CPURISCVState *env, uint64_t value, uint32_=
+t ctr_idx)
+> > diff --git a/target/riscv/pmu.h b/target/riscv/pmu.h
+> > index 3853d0e2629e..75a22d596b69 100644
+> > --- a/target/riscv/pmu.h
+> > +++ b/target/riscv/pmu.h
+> > @@ -30,7 +30,7 @@ void riscv_pmu_timer_cb(void *priv);
+> >   void riscv_pmu_init(RISCVCPU *cpu, Error **errp);
+> >   int riscv_pmu_update_event_map(CPURISCVState *env, uint64_t value,
+> >                                  uint32_t ctr_idx);
+> > -int riscv_pmu_incr_ctr(RISCVCPU *cpu, enum riscv_pmu_event_idx event_i=
+dx);
+> > +int riscv_pmu_incr_ctr(RISCVCPU *cpu, enum virt_pmu_event_idx event_id=
+x);
+> >   void riscv_pmu_generate_fdt_node(void *fdt, uint32_t cmask, char *pmu=
+_name);
+> >   int riscv_pmu_setup_timer(CPURISCVState *env, uint64_t value,
+> >                             uint32_t ctr_idx);
+> >
 
