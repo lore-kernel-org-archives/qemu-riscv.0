@@ -4,79 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C225DD0EE3F
-	for <qemu-riscv@archiver.kernel.org>; Fri, 11 Oct 2024 21:08:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DAD2BCF2560
+	for <qemu-riscv@archiver.kernel.org>; Sat, 12 Oct 2024 10:29:11 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1szMrb-00082l-Iq; Fri, 11 Oct 2024 17:07:55 -0400
+	id 1szZMk-0003rA-Ko; Sat, 12 Oct 2024 06:28:54 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <atishp@rivosinc.com>)
- id 1szMrX-00082R-P4
- for qemu-riscv@nongnu.org; Fri, 11 Oct 2024 17:07:51 -0400
-Received: from mail-pf1-x42c.google.com ([2607:f8b0:4864:20::42c])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <atishp@rivosinc.com>)
- id 1szMrV-0004xx-Id
- for qemu-riscv@nongnu.org; Fri, 11 Oct 2024 17:07:51 -0400
-Received: by mail-pf1-x42c.google.com with SMTP id
- d2e1a72fcca58-71dfc78d6ddso2217177b3a.0
- for <qemu-riscv@nongnu.org>; Fri, 11 Oct 2024 14:07:48 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1728680867; x=1729285667;
- darn=nongnu.org; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=IcaPMSEikXRLKNfvJPIZ/QakjhFegjjA1ZgrzfrkIMQ=;
- b=rkNzSPY3yG0LixZN9m1ASjzQC+esD9NBLeWmewrQ/Gwij+uP+6Zj/6nME0DZQqcQpP
- zB1zJAcspTzHoaxEFJdx7Ec/OsoGvoDkCoJBBjNeCMA5hTOgiXoOB5H2ldPDrSOT6OD0
- 7ruS122AEhMkCEOXOcblvBpN4Slysnpgpy9swo5kJUX9PzkNeUCBWhRBRjYthrhI2DJ+
- s6a7q3nwDqYRV7C/11DsARmowNGoxqnVgcXW9ING1anmxhZVHBpZI/ENzhLXRAuPSUkk
- eX9LD7dbd7sX1oUFoR5rjhrDo5Euq7PwdTJrqy3VawzV2zi99D3LBa1KB0WHZi7oVAM+
- ysvg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728680867; x=1729285667;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=IcaPMSEikXRLKNfvJPIZ/QakjhFegjjA1ZgrzfrkIMQ=;
- b=O8L2Iaujh1ekas+acJG/CEAAqxcwudPjFOF0cXoscRTrX+vFBhUS28PR/7n+qK7hEH
- 6oTep9I302xccwIuQLen1w0z/HffIn+ZLPbfNxuGsfQ3EZ6bJeVM8kxIREL4A4/UABwt
- EQJBIPGtCi0KsqvVXquZew8VXy+4Yzxum1Hn4fR9AytNEwjHgzq+Tp49hVqX9AoefdrX
- wnxVfRjppkV1kCdUEqmVFvKBC4L9i6qxOd6MZ8i3qSMDoE77pQlBElmCByVspie7Mamk
- BoFBfgOSEn31QiCzEe0t5Guc8nCzdysx92EaSkKxEC6L95CmtOvMyvn1Y4LnHQ9DDVqZ
- rgew==
-X-Gm-Message-State: AOJu0YyABkPCUbngCZ+nBCesu7opVv2jVzzmhj5ggc8TUBRYjp28/MQT
- qS67/tvhc03PGVfxQDHmY4UZfUe6gNFgCPXneFRrsMuOHuAWHHJjHuhpud5Ao/a4QPNKJMX1jo/
- TI/VwXG30BpuFMkPFt9BsfgZN/LqeciDf5HBmzw==
-X-Google-Smtp-Source: AGHT+IHYzLKacqiJnI47D6YzxoDIErbvG0tTLbpBoCoxYzt3LaaO3raukXOSh+6jko1o2Lx73mchUJT5InuproLZjA4=
-X-Received: by 2002:a05:6a00:189a:b0:71e:4655:59ce with SMTP id
- d2e1a72fcca58-71e4c03044cmr1630827b3a.0.1728680867214; Fri, 11 Oct 2024
- 14:07:47 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <zhao1.liu@intel.com>)
+ id 1szZMh-0003pi-In; Sat, 12 Oct 2024 06:28:51 -0400
+Received: from mgamail.intel.com ([192.198.163.8])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <zhao1.liu@intel.com>)
+ id 1szZMf-0007EI-Qq; Sat, 12 Oct 2024 06:28:51 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+ d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+ t=1728728930; x=1760264930;
+ h=from:to:cc:subject:date:message-id:in-reply-to:
+ references:mime-version:content-transfer-encoding;
+ bh=J9p7Tdz/CDqM2wDqm/4H38Zb2VvdiGGpmWwRSF8KKYc=;
+ b=TJCg3mzyIFTA4jWOwvoHeh/ToeW3OAJ6edCeWc94IDadbQRu3wH+DL1g
+ XvNq/XSOubbNSUouTQGvEt14PznecV4YrV53t1Jp8YAiwj02AtxqWj1Vr
+ 0QycBvAC4j5hyCD+lqhcSlXLRIQ0vithM0dOiqr0FyRjD3GrXPhbYVkP6
+ 6Cy/eZGI+ZBi+zReKs7Wj3YtNhcKWu7VdSb8u9Ehqr9/cCsy1PEJDQlV5
+ etljNtOsYKjxdu0CvU0StJF7XRUAzDScy7Bs2qqqn8g/WT0dkJWCrBp1s
+ Bu/6Jo2wQcxTn6TgNf6W2kPdM4SEZXX/kQ9s7ATQyFuMQwqsCDFVCRAgp g==;
+X-CSE-ConnectionGUID: UvxqGWOYSXKFUbFwkvWufQ==
+X-CSE-MsgGUID: 9cSbaW7kRKagSVyr0rE//Q==
+X-IronPort-AV: E=McAfee;i="6700,10204,11222"; a="45634880"
+X-IronPort-AV: E=Sophos;i="6.11,198,1725346800"; d="scan'208";a="45634880"
+Received: from orviesa010.jf.intel.com ([10.64.159.150])
+ by fmvoesa102.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 12 Oct 2024 03:28:48 -0700
+X-CSE-ConnectionGUID: 8jua+y5vSJuF4yaj4EUEng==
+X-CSE-MsgGUID: 7F/JJOcZQjWrB5yLRjPEeQ==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.11,198,1725346800"; d="scan'208";a="77050845"
+Received: from liuzhao-optiplex-7080.sh.intel.com ([10.239.160.36])
+ by orviesa010.jf.intel.com with ESMTP; 12 Oct 2024 03:28:43 -0700
+From: Zhao Liu <zhao1.liu@intel.com>
+To: =?UTF-8?q?Daniel=20P=20=2E=20Berrang=C3=A9?= <berrange@redhat.com>,
+ Igor Mammedov <imammedo@redhat.com>, Eduardo Habkost <eduardo@habkost.net>,
+ Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
+ Yanan Wang <wangyanan55@huawei.com>,
+ "Michael S . Tsirkin" <mst@redhat.com>,
+ Paolo Bonzini <pbonzini@redhat.com>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Eric Blake <eblake@redhat.com>, Markus Armbruster <armbru@redhat.com>,
+ Marcelo Tosatti <mtosatti@redhat.com>,
+ =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
+ Peter Maydell <peter.maydell@linaro.org>,
+ Jonathan Cameron <Jonathan.Cameron@huawei.com>,
+ Sia Jee Heng <jeeheng.sia@starfivetech.com>,
+ Alireza Sanaee <alireza.sanaee@huawei.com>
+Cc: qemu-devel@nongnu.org, kvm@vger.kernel.org, qemu-riscv@nongnu.org,
+ qemu-arm@nongnu.org, Zhenyu Wang <zhenyu.z.wang@intel.com>,
+ Dapeng Mi <dapeng1.mi@linux.intel.com>, Zhao Liu <zhao1.liu@intel.com>,
+ Yongwei Ma <yongwei.ma@intel.com>
+Subject: [PATCH v3 3/7] hw/core: Check smp cache topology support for machine
+Date: Sat, 12 Oct 2024 18:44:25 +0800
+Message-Id: <20241012104429.1048908-4-zhao1.liu@intel.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20241012104429.1048908-1-zhao1.liu@intel.com>
+References: <20241012104429.1048908-1-zhao1.liu@intel.com>
 MIME-Version: 1.0
-References: <20241009-pmu_event_machine-v1-0-dcbd7a60e3ba@rivosinc.com>
- <43613048-ba0b-4fc0-9ee2-b987a6dc86e4@yadro.com>
-In-Reply-To: <43613048-ba0b-4fc0-9ee2-b987a6dc86e4@yadro.com>
-From: Atish Kumar Patra <atishp@rivosinc.com>
-Date: Fri, 11 Oct 2024 14:07:36 -0700
-Message-ID: <CAHBxVyG7mNWU+r0dd-R2oL4SftOhWsTpLzcmDMAOKALvjh8qHg@mail.gmail.com>
-Subject: Re: [PATCH RFC 00/10] Allow platform specific PMU event encoding
-To: Alexei Filippov <alexei.filippov@yadro.com>
-Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, 
- alexei.filippov@syntacore.com, palmer@dabbelt.com, liwei1518@gmail.com, 
- zhiwei_liu@linux.alibaba.com, bin.meng@windriver.com, 
- dbarboza@ventanamicro.com, alistair.francis@wdc.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::42c;
- envelope-from=atishp@rivosinc.com; helo=mail-pf1-x42c.google.com
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=192.198.163.8; envelope-from=zhao1.liu@intel.com;
+ helo=mgamail.intel.com
+X-Spam_score_int: -44
+X-Spam_score: -4.5
+X-Spam_bar: ----
+X-Spam_report: (-4.5 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.15,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_MED=-2.3, RCVD_IN_VALIDITY_CERTIFIED_BLOCKED=0.001,
+ RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -93,112 +96,153 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Thu, Oct 10, 2024 at 5:51=E2=80=AFAM Alexei Filippov
-<alexei.filippov@yadro.com> wrote:
->
->
->
-> On 10.10.2024 02:08, Atish Patra wrote:
-> > Currently, the pmu implementation is virt machine specific that
-> > implements the SBI PMU encodings. In the future, individual machines
-> > would want to implement their own custom event encodings as there
-> > is no standard event encoding defined by the ISA. There is a performanc=
-e
-> > events TG which is working on defining standard set of events but not
-> > encodings. That allows flexibility for platforms to choose whatever
-> > encoding scheme they want. However, that means the generic pmu code
-> > should be flexible enough to allow that in Qemu as well.
-> >
-> > This series aims to solve that problem by first disassociating the
-> > common pmu implementation and event encoding. The event encoding is
-> > specific to a platform and should be defined in the platform specific
-> > machine or cpu implementation. The newly defined callbacks can be invok=
-ed
-> > from machine specific cpu implementation or machine code itself dependi=
-ng
-> > on the requirement.
-> >
-> > The first 5 patches in the series are generic improvements and cleanups
-> > where as the last 5 actually implements the disassociation for the virt
-> > machine. The current series can also be found at[2].
-> >
-> > I recently found that Alexei has done a similar effort for SiFive FU740=
-[1]
-> > but the implementation differs from this one based on how the cpu callb=
-acks
-> > are invoked. For example, Alexei's series implements a single callback =
-for
-> > all the events and has defined machine specific counter read/write call=
-backs.
-> > However, it just defaults to get_ticks() for every event. IMO, that is
-> > confusing to the users unless we can actually emulate more generic even=
-ts or
-> > machine specific events.
-> >
-> > I have separate callbacks for each type of events that we currently sup=
-port
-> > in Qemu (cycle, instruction, TLB events). Separate callbacks seems a be=
-tter
-> > approach to avoid ambiguity as we have very limited event capability in=
- qemu.
-> > I am open to converging them to one callback as well if we think we wil=
-l
-> > be extending set of events in the future.
-> >
-> > Once we converge on the approaches, we can consolidate the patches
-> > so that both SiFive FU740 and virt machine can use the same abstraction=
-.
-> >
-> > Cc: alexei.filippov@syntacore.com
-> >
-> Thanks for CCing me and your patch. Your done a great work, but still I
-> do not think this approach with per event callback are scalable enough.
-> I'll suggest to collaborate to work your and mine solution to unite them
-> to one patch set. Let me know what do you think.
+Add cache_supported flags in SMPCompatProps to allow machines to
+configure various caches support.
 
-Yes. We should definitely collaborate and send a single series to support b=
-oth
-virt and sifive machines. You had a question about widening the
-hpmevent in your series.
+And check the compatibility of the cache properties with the
+machine support in machine_parse_smp_cache().
 
-(Answering here to keep the discussion in 1 place)
+Signed-off-by: Zhao Liu <zhao1.liu@intel.com>
+Tested-by: Yongwei Ma <yongwei.ma@intel.com>
+Reviewed-by: Jonathan Cameron <Jonathan.Cameron@huawei.com>
+---
+Changes since Patch v2:
+ * Polished the comment of "default" level check. (Jonathan)
+ * Reduced short line wrap. (Jonathan)
 
-As per the section 18.1. Count Overflow Control, only top 8 bits are reserv=
-ed.
-Thus, a platform can implement their event encoding to upto 56 bit wide.
+Changes since Patch v1:
+ * Dropped machine_check_smp_cache_support() and did the check when
+   -machine parses smp-cache in machine_parse_smp_cache().
 
-> > [1] https://lore.kernel.org/all/20240910174747.148141-1-alexei.filippov=
-@syntacore.com/T/
-> > [2] https://github.com/atishp04/qemu/tree/b4/pmu_event_machine
-> >
-> > Signed-off-by: Atish Patra <atishp@rivosinc.com>
-> > ---
-> > Atish Patra (10):
-> >        target/riscv: Fix the hpmevent mask
-> >        target/riscv: Introduce helper functions for pmu hashtable looku=
-p
-> >        target/riscv: Protect the hashtable modifications with a lock
-> >        target/riscv: Use uint64 instead of uint as key
-> >        target/riscv: Rename the PMU events
-> >        target/riscv: Define PMU event related structures
-> >        hw/riscv/virt.c : Disassociate virt PMU events
-> >        target/riscv: Update event mapping hashtable for invalid events
-> >        target/riscv : Use the new tlb fill event functions
-> >        hw/riscv/virt.c: Generate the PMU node from the machine
-> >
-> >   hw/riscv/virt.c           | 102 +++++++++++++++++++++++-
-> >   target/riscv/cpu.h        |  52 ++++++++++--
-> >   target/riscv/cpu_bits.h   |   4 +-
-> >   target/riscv/cpu_helper.c |  21 ++---
-> >   target/riscv/pmu.c        | 198 +++++++++++++++++++++----------------=
----------
-> >   target/riscv/pmu.h        |   3 +-
-> >   6 files changed, 246 insertions(+), 134 deletions(-)
-> > ---
-> > base-commit: 19a9809808a51291008f72d051d0f9b3499fc223
-> > change-id: 20241008-pmu_event_machine-b87c58104e61
-> > --
-> > Regards,
-> > Atish patra
-> >
+Changes since RFC v2:
+ * Split as a separate commit to just include compatibility checking and
+   topology checking.
+ * Allow setting "default" topology level even though the cache
+   isn't supported by machine. (Daniel)
+---
+ hw/core/machine-smp.c | 75 +++++++++++++++++++++++++++++++++++++++++++
+ include/hw/boards.h   |  3 ++
+ 2 files changed, 78 insertions(+)
+
+diff --git a/hw/core/machine-smp.c b/hw/core/machine-smp.c
+index 1ce7be902e6e..f3edbded2e7b 100644
+--- a/hw/core/machine-smp.c
++++ b/hw/core/machine-smp.c
+@@ -261,10 +261,47 @@ void machine_parse_smp_config(MachineState *ms,
+     }
+ }
+ 
++static bool machine_check_topo_support(MachineState *ms,
++                                       CpuTopologyLevel topo,
++                                       Error **errp)
++{
++    MachineClass *mc = MACHINE_GET_CLASS(ms);
++
++    if ((topo == CPU_TOPOLOGY_LEVEL_MODULE && !mc->smp_props.modules_supported) ||
++        (topo == CPU_TOPOLOGY_LEVEL_CLUSTER && !mc->smp_props.clusters_supported) ||
++        (topo == CPU_TOPOLOGY_LEVEL_DIE && !mc->smp_props.dies_supported) ||
++        (topo == CPU_TOPOLOGY_LEVEL_BOOK && !mc->smp_props.books_supported) ||
++        (topo == CPU_TOPOLOGY_LEVEL_DRAWER && !mc->smp_props.drawers_supported)) {
++        error_setg(errp,
++                   "Invalid topology level: %s. "
++                   "The topology level is not supported by this machine",
++                   CpuTopologyLevel_str(topo));
++        return false;
++    }
++
++    return true;
++}
++
++/*
++ * When both cache1 and cache2 are configured with specific topology levels
++ * (not default level), is cache1's topology level higher than cache2?
++ */
++static bool smp_cache_topo_cmp(const SmpCache *smp_cache,
++                               CacheLevelAndType cache1,
++                               CacheLevelAndType cache2)
++{
++    if (smp_cache->props[cache1].topology != CPU_TOPOLOGY_LEVEL_DEFAULT &&
++        smp_cache->props[cache1].topology > smp_cache->props[cache2].topology) {
++        return true;
++    }
++    return false;
++}
++
+ bool machine_parse_smp_cache(MachineState *ms,
+                              const SmpCachePropertiesList *caches,
+                              Error **errp)
+ {
++    MachineClass *mc = MACHINE_GET_CLASS(ms);
+     const SmpCachePropertiesList *node;
+     DECLARE_BITMAP(caches_bitmap, CACHE_LEVEL_AND_TYPE__MAX);
+ 
+@@ -292,6 +329,44 @@ bool machine_parse_smp_cache(MachineState *ms,
+         set_bit(node->value->cache, caches_bitmap);
+     }
+ 
++    for (int i = 0; i < CACHE_LEVEL_AND_TYPE__MAX; i++) {
++        const SmpCacheProperties *props = &ms->smp_cache.props[i];
++
++        /*
++         * Reject non "default" topology level if the cache isn't
++         * supported by the machine.
++         */
++        if (props->topology != CPU_TOPOLOGY_LEVEL_DEFAULT &&
++            !mc->smp_props.cache_supported[props->cache]) {
++            error_setg(errp,
++                       "%s cache topology not supported by this machine",
++                       CacheLevelAndType_str(node->value->cache));
++            return false;
++        }
++
++        if (!machine_check_topo_support(ms, props->topology, errp)) {
++            return false;
++        }
++    }
++
++    if (smp_cache_topo_cmp(&ms->smp_cache, CACHE_LEVEL_AND_TYPE_L1D,
++                           CACHE_LEVEL_AND_TYPE_L2) ||
++        smp_cache_topo_cmp(&ms->smp_cache, CACHE_LEVEL_AND_TYPE_L1I,
++                           CACHE_LEVEL_AND_TYPE_L2)) {
++        error_setg(errp,
++                   "Invalid smp cache topology. "
++                   "L2 cache topology level shouldn't be lower than L1 cache");
++        return false;
++    }
++
++    if (smp_cache_topo_cmp(&ms->smp_cache, CACHE_LEVEL_AND_TYPE_L2,
++                           CACHE_LEVEL_AND_TYPE_L3)) {
++        error_setg(errp,
++                   "Invalid smp cache topology. "
++                   "L3 cache topology level shouldn't be lower than L2 cache");
++        return false;
++    }
++
+     return true;
+ }
+ 
+diff --git a/include/hw/boards.h b/include/hw/boards.h
+index 0729066e353a..e4a1035e3fa1 100644
+--- a/include/hw/boards.h
++++ b/include/hw/boards.h
+@@ -151,6 +151,8 @@ typedef struct {
+  * @books_supported - whether books are supported by the machine
+  * @drawers_supported - whether drawers are supported by the machine
+  * @modules_supported - whether modules are supported by the machine
++ * @cache_supported - whether cache (l1d, l1i, l2 and l3) configuration are
++ *                    supported by the machine
+  */
+ typedef struct {
+     bool prefer_sockets;
+@@ -160,6 +162,7 @@ typedef struct {
+     bool books_supported;
+     bool drawers_supported;
+     bool modules_supported;
++    bool cache_supported[CACHE_LEVEL_AND_TYPE__MAX];
+ } SMPCompatProps;
+ 
+ /**
+-- 
+2.34.1
+
 
