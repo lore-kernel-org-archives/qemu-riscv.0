@@ -4,100 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0E587CF2564
-	for <qemu-riscv@archiver.kernel.org>; Sat, 12 Oct 2024 10:41:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6844ACF2591
+	for <qemu-riscv@archiver.kernel.org>; Mon, 14 Oct 2024 01:54:50 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1szZYL-0003Fc-JA; Sat, 12 Oct 2024 06:40:53 -0400
+	id 1t0AHu-0006FH-H8; Sun, 13 Oct 2024 21:54:22 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <akihiko.odaki@daynix.com>)
- id 1szZYK-0003FI-Vr
- for qemu-riscv@nongnu.org; Sat, 12 Oct 2024 06:40:53 -0400
-Received: from mail-pg1-x52f.google.com ([2607:f8b0:4864:20::52f])
+ (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
+ id 1t0AHs-0006Ec-FD
+ for qemu-riscv@nongnu.org; Sun, 13 Oct 2024 21:54:20 -0400
+Received: from mail-ed1-x534.google.com ([2a00:1450:4864:20::534])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <akihiko.odaki@daynix.com>)
- id 1szZYH-0000ZG-8Q
- for qemu-riscv@nongnu.org; Sat, 12 Oct 2024 06:40:51 -0400
-Received: by mail-pg1-x52f.google.com with SMTP id
- 41be03b00d2f7-7cd8803fe0aso2038337a12.0
- for <qemu-riscv@nongnu.org>; Sat, 12 Oct 2024 03:40:48 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
+ id 1t0AHp-0004KS-GN
+ for qemu-riscv@nongnu.org; Sun, 13 Oct 2024 21:54:20 -0400
+Received: by mail-ed1-x534.google.com with SMTP id
+ 4fb4d7f45d1cf-5c9388a00cfso4488922a12.3
+ for <qemu-riscv@nongnu.org>; Sun, 13 Oct 2024 18:54:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=daynix-com.20230601.gappssmtp.com; s=20230601; t=1728729648; x=1729334448;
- darn=nongnu.org; 
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=+1wRVLzP/BWQ3abWNRBeNRiaAAagshGdk2fzPyvuUe8=;
- b=TNygrXLJB3244t8+ssRBhq91KHb5QzpmvH502c/jBCF9ToELdRzO5VgyAMjWubzMNY
- 8BeGq5yQeGJ+CS6GC4fuxLEdZeAzDm/ZMEdq5/Gvhk1WYeN2OxPYeJ2tcGeJgstEn7j5
- MQDwNT2ummu6HUah2r5XatUQ1b09+zXvLJb//qxEHYC/q+Nq0Wyp5J4ABpE6mOrWCJGh
- 1sigAkIX8oofyogxVUhBM3IgPMqv2oUot5NLBj13sRNeweekj8kRGREFqZtEr1yzG56J
- krIgBc9DvGwVFWjZtetdb40h1R4l0nfCJKsMU4EfS3EnuWdNoP+n6GcfT9viHhQ1VQ+R
- NphA==
+ d=sifive.com; s=google; t=1728870855; x=1729475655; darn=nongnu.org;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=/uobKTfd/+4sGkaXIvlOUn5THPJD3/eOOSk4nFsH6es=;
+ b=Yn8w1LuSTvY75UOcIDkiVNAOq+InRijez7bbatAtTRsCQEj9Mx/9vZ+2O8J/K6fZ70
+ YaTJlC9276CxgosQN4PZvRxddqAF3XqwUMaKG5nQjZROtPJFHrfn2cdU8hE8qZx0fjFf
+ QJuQXS1xFZ87SX5/kTde0BwWfSpOxNRI37cQHfbJIPgabXoP7YHaynyfp2ME/FKuS2fu
+ WqbVhXjK5B3/PNaLPGwuuAS3Rat0Fma8ttkDV9qC/o4siUdL4Em7UMUzNEjjOxoEvya9
+ x578mOF2AiISgkddMioMvvrTjGsei4BFnDrR4VHnygSuIXxG/uQkwhr/eFTs+ECcEIz0
+ 42Ow==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728729648; x=1729334448;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=+1wRVLzP/BWQ3abWNRBeNRiaAAagshGdk2fzPyvuUe8=;
- b=RrBsXEWAKhO1L+E4J9cqTvra6Nvt6yvnV4R/ORaTmQj1KdAAIp08kFYxFqg9OouRDl
- 25/ylTIXoA++TXX9l0izh0IIgnqhiRbxox8dZuh5gO7J3aoLm/orfnRysmUHo7JRkyal
- DZ3RQq2nea+QbKQEvGHjuXkTm01sB5srIWYkz1UVytTk6Rig85seO3W7byiyyDQbvBi3
- 0OywIiaLGsNeEbIGNvW3Bfc4rb0BIzo66YhjZguuF+kEq7H7dfPU/dodFAG5wLnb/qFr
- 3FmwqT76BGqLNK7p0WFcQ8oIOCxRvSNsncEvn41iR0zudUdNC7wukfvUUBZl9QC+kZnZ
- Zjpw==
+ d=1e100.net; s=20230601; t=1728870855; x=1729475655;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=/uobKTfd/+4sGkaXIvlOUn5THPJD3/eOOSk4nFsH6es=;
+ b=wFH2Q+bovrdVgxiVCsb0IH0EcHzY4nG1kTecmls1Ypb1UJP23RS1Cq8EjXoApw+ts3
+ PoRniPe6SsPfwl70gbY+wFgd8ffB83xKSd237NLmFEWGqfmnPx6OOp7LP7MYiD37qZqp
+ fT5uUMd1Trpr8zTQiQZoQDgyhXfEhNYGuAVZt5+vsScIFxG9yi+dDQHKyQJ1DLYNkh/T
+ O7Dq/NhSpB5FtlF/VJkh1WMwjPtdEZUcBiAWLnJNP7ykdwIVwhUqT0tMTfZR70GA41jZ
+ FZOi2FttF1L4sfnkZuOv3MXCPj6sUNHMvWs67/Q8Ui6mrsV8H88lboidGa2LlimDc6Tz
+ Grrg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVMonLLxaitB3Fr9sl2YCqg1IS1bUqPzKwkv8K3iPSwoJrmIePw1d+P/axtOjQfoitfmgpjpyFccxLa@nongnu.org
-X-Gm-Message-State: AOJu0YxMLqtPK9KBn+XsIgOL2fLYe9mDrj+4bckGnaNh9bGa0XCba+Cz
- Cy9JmntPpH95EesBx2q40p2h5sDe+I9pzFKtUiOVb4HFzAPe6qadIkHp7pkX0I0=
-X-Google-Smtp-Source: AGHT+IEsnHdVp8towjKZ9qup0sHRA2aIMKC6cub2b9WkUFuHHSLxtsGCkM08QWxQSiy5gMraUVFltQ==
-X-Received: by 2002:a17:90a:f494:b0:2d8:e3f3:fd66 with SMTP id
- 98e67ed59e1d1-2e2f0d9a4cfmr5931754a91.34.1728729647655; 
- Sat, 12 Oct 2024 03:40:47 -0700 (PDT)
-Received: from [157.82.207.107] ([157.82.207.107])
- by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-2e2d5f0a2b7sm4784450a91.27.2024.10.12.03.40.41
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sat, 12 Oct 2024 03:40:47 -0700 (PDT)
-Message-ID: <ccaddf26-b8ee-4ce8-b674-a8c16b97cffe@daynix.com>
-Date: Sat, 12 Oct 2024 19:40:40 +0900
+ AJvYcCWhzvWrCxZ8aWfclNOF1eI31nPBo4uAYL3cFWNaeE7nToVnmUjQTlVO35EuYtk5CbmXB21X6CgH7i2s@nongnu.org
+X-Gm-Message-State: AOJu0YwAfzgt9984ZzAlK8KEQK4J0Z7jqg7Xicf1vUNfHGLwUdxYDkiO
+ AKDw+3R4fd7P451YufH6xWp7hiJIwGywosUXAZAwPQvseICah6FZ7B3BV7oft2zJ5X5GJSBMn1I
+ iR4Qeh9MVL0510dEijgo0xcCMU1BO+SKgj+Xb4A==
+X-Google-Smtp-Source: AGHT+IFnHbmHtsX/uX1pGe9tqvf2g3OtcJL8cN8thQszPGHLzMLzXc8uccXvo48c79vlevWAJwA8zTbJilQhaq6hcOU=
+X-Received: by 2002:a05:6402:4414:b0:5c9:48e0:66d1 with SMTP id
+ 4fb4d7f45d1cf-5c948e06798mr8276598a12.35.1728870854881; Sun, 13 Oct 2024
+ 18:54:14 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 12/14] hw/vmapple/cfg: Introduce vmapple cfg region
-To: Phil Dennis-Jordan <phil@philjordan.eu>
-Cc: qemu-devel@nongnu.org, agraf@csgraf.de, peter.maydell@linaro.org,
- pbonzini@redhat.com, rad@semihalf.com, quic_llindhol@quicinc.com,
- marcin.juszkiewicz@linaro.org, stefanha@redhat.com, mst@redhat.com,
- slp@redhat.com, richard.henderson@linaro.org, eduardo@habkost.net,
- marcel.apfelbaum@gmail.com, gaosong@loongson.cn, jiaxun.yang@flygoat.com,
- chenhuacai@kernel.org, kwolf@redhat.com, hreitz@redhat.com,
- philmd@linaro.org, shorne@gmail.com, palmer@dabbelt.com,
- alistair.francis@wdc.com, bmeng.cn@gmail.com, liwei1518@gmail.com,
- dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com, jcmvbkbc@gmail.com,
- marcandre.lureau@redhat.com, berrange@redhat.com, qemu-arm@nongnu.org,
- qemu-block@nongnu.org, qemu-riscv@nongnu.org,
- Alexander Graf <graf@amazon.com>
-References: <20240928085727.56883-1-phil@philjordan.eu>
- <20240928085727.56883-13-phil@philjordan.eu>
- <08fb08f5-b0ca-4334-8896-b0941cea614a@daynix.com>
- <CAAibmn0S6Qe4gLirAA9eU+M_PbSUUqcJs1-eZmwGge+CXg4p1A@mail.gmail.com>
- <60753df2-c1da-400f-a9d4-36077ab0c1f7@daynix.com>
- <CAAibmn1j2db4yH1TVQ+e+6bSuGGaQtbQaf+joPkWWnD-z6rEqA@mail.gmail.com>
-Content-Language: en-US
-From: Akihiko Odaki <akihiko.odaki@daynix.com>
-In-Reply-To: <CAAibmn1j2db4yH1TVQ+e+6bSuGGaQtbQaf+joPkWWnD-z6rEqA@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Received-SPF: none client-ip=2607:f8b0:4864:20::52f;
- envelope-from=akihiko.odaki@daynix.com; helo=mail-pg1-x52f.google.com
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_NONE=0.001 autolearn=ham autolearn_force=no
+References: <20240902071358.1061693-1-tommy.wu@sifive.com>
+ <6e7a184f-3b47-480d-bd56-fef2e89beda6@ventanamicro.com>
+In-Reply-To: <6e7a184f-3b47-480d-bd56-fef2e89beda6@ventanamicro.com>
+From: Frank Chang <frank.chang@sifive.com>
+Date: Mon, 14 Oct 2024 09:54:03 +0800
+Message-ID: <CAE_xrPhW=EcaXVL5AOegRcSHj5jsA+6HL2wVxrmERUreL0wFZg@mail.gmail.com>
+Subject: Re: [PATCH v6 0/5] target/riscv: Add Smrnmi support.
+To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Cc: Tommy Wu <tommy.wu@sifive.com>, qemu-devel@nongnu.org,
+ qemu-riscv@nongnu.org, 
+ palmer@dabbelt.com, alistair.francis@wdc.com, alistair23@gmail.com, 
+ bin.meng@windriver.com, liweiwei@iscas.ac.cn, ajones@ventanamicro.com, 
+ =?UTF-8?B?Q2zDqW1lbnQgTMOpZ2Vy?= <cleger@rivosinc.com>
+Content-Type: multipart/alternative; boundary="0000000000002b09cc0624661d13"
+Received-SPF: pass client-ip=2a00:1450:4864:20::534;
+ envelope-from=frank.chang@sifive.com; helo=mail-ed1-x534.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, HTML_MESSAGE=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -113,363 +94,335 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 2024/10/09 22:08, Phil Dennis-Jordan wrote:
-> 
-> 
-> On Mon, 7 Oct 2024 at 20:04, Akihiko Odaki <akihiko.odaki@daynix.com 
-> <mailto:akihiko.odaki@daynix.com>> wrote:
-> 
->     On 2024/10/07 23:10, Phil Dennis-Jordan wrote:
->      >
->      >
->      > On Sat, 5 Oct 2024 at 07:35, Akihiko Odaki
->     <akihiko.odaki@daynix.com <mailto:akihiko.odaki@daynix.com>
->      > <mailto:akihiko.odaki@daynix.com
->     <mailto:akihiko.odaki@daynix.com>>> wrote:
->      >
->      >     On 2024/09/28 17:57, Phil Dennis-Jordan wrote:
->      >      > From: Alexander Graf <graf@amazon.com
->     <mailto:graf@amazon.com> <mailto:graf@amazon.com
->     <mailto:graf@amazon.com>>>
->      >      >
->      >      > Instead of device tree or other more standardized means,
->     VMApple
->      >     passes
->      >      > platform configuration to the first stage boot loader in a
->     binary
->      >     encoded
->      >      > format that resides at a dedicated RAM region in physical
->     address
->      >     space.
->      >      >
->      >      > This patch models this configuration space as a qdev
->     device which
->      >     we can
->      >      > then map at the fixed location in the address space. That
->     way, we can
->      >      > influence and annotate all configuration fields easily.
->      >      >
->      >      > Signed-off-by: Alexander Graf <graf@amazon.com
->     <mailto:graf@amazon.com>
->      >     <mailto:graf@amazon.com <mailto:graf@amazon.com>>>
->      >      > Signed-off-by: Phil Dennis-Jordan <phil@philjordan.eu
->     <mailto:phil@philjordan.eu>
->      >     <mailto:phil@philjordan.eu <mailto:phil@philjordan.eu>>>
->      >      >
->      >      > ---
->      >      > v3:
->      >      >
->      >      >   * Replaced legacy device reset method with Resettable method
->      >      >
->      >      >   hw/vmapple/Kconfig       |   3 ++
->      >      >   hw/vmapple/cfg.c         | 106 +++++++++++++++++++++++++
->     +++++++
->      >     +++++++
->      >      >   hw/vmapple/meson.build   |   1 +
->      >      >   include/hw/vmapple/cfg.h |  68 +++++++++++++++++++++++++
->      >      >   4 files changed, 178 insertions(+)
->      >      >   create mode 100644 hw/vmapple/cfg.c
->      >      >   create mode 100644 include/hw/vmapple/cfg.h
->      >      >
->      >      > diff --git a/hw/vmapple/Kconfig b/hw/vmapple/Kconfig
->      >      > index 68f88876eb9..8bbeb9a9237 100644
->      >      > --- a/hw/vmapple/Kconfig
->      >      > +++ b/hw/vmapple/Kconfig
->      >      > @@ -4,3 +4,6 @@ config VMAPPLE_AES
->      >      >   config VMAPPLE_BDIF
->      >      >       bool
->      >      >
->      >      > +config VMAPPLE_CFG
->      >      > +    bool
->      >      > +
->      >      > diff --git a/hw/vmapple/cfg.c b/hw/vmapple/cfg.c
->      >      > new file mode 100644
->      >      > index 00000000000..a5e5c62f59f
->      >      > --- /dev/null
->      >      > +++ b/hw/vmapple/cfg.c
->      >      > @@ -0,0 +1,106 @@
->      >      > +/*
->      >      > + * VMApple Configuration Region
->      >      > + *
->      >      > + * Copyright © 2023 Amazon.com, Inc. or its affiliates. All
->      >     Rights Reserved.
->      >      > + *
->      >      > + * This work is licensed under the terms of the GNU GPL,
->     version
->      >     2 or later.
->      >      > + * See the COPYING file in the top-level directory.
->      >      > + */
->      >      > +
->      >      > +#include "qemu/osdep.h"
->      >      > +#include "hw/vmapple/cfg.h"
->      >      > +#include "qemu/log.h"
->      >      > +#include "qemu/module.h"
->      >      > +#include "qapi/error.h"
->      >      > +
->      >      > +static void vmapple_cfg_reset(Object *obj, ResetType type)
->      >      > +{
->      >      > +    VMAppleCfgState *s = VMAPPLE_CFG(obj);
->      >      > +    VMAppleCfg *cfg;
->      >      > +
->      >      > +    cfg = memory_region_get_ram_ptr(&s->mem);
->      >      > +    memset((void *)cfg, 0, VMAPPLE_CFG_SIZE);
->      >      > +    *cfg = s->cfg;
->      >       > +}> +
->      >      > +static void vmapple_cfg_realize(DeviceState *dev, Error
->     **errp)
->      >      > +{
->      >      > +    VMAppleCfgState *s = VMAPPLE_CFG(dev);
->      >      > +    uint32_t i;
->      >      > +
->      >      > +    strncpy(s->cfg.serial, s->serial, sizeof(s->cfg.serial));
->      >      > +    strncpy(s->cfg.model, s->model, sizeof(s->cfg.model));
->      >      > +    strncpy(s->cfg.soc_name, s->soc_name, sizeof(s-
->      >cfg.soc_name));
->      >      > +    strncpy(s->cfg.unk8, "D/A", sizeof(s->cfg.soc_name));
->      >
->      >     Use qemu_strnlen() to report an error for too long strings.
->      >
->      >
->      > Hmm, I don't see any existing instances of such a pattern. I do
->     however
->      > see a couple of uses of g_strlcpy in the Qemu codebase - that
->     would be a
->      > better candidate for error checked string copying, though it still
->      > involves some awkward return value checks. I'm going to wrap that
->     in a
->      > helper function and macro to replace all 4 strncpy instances
->     here. If
->      > the same thing is useful elsewhere later, it can be promoted to
->     cutils
->      > or similar.
-> 
->     g_strlcpy() internally performs strlen(), which is worse than
->     qemu_strnlen().
-> 
-> 
-> Worse in what sense? It really depends what you're defending against. 
-> Sure, strlcpy blows up if the source string isn't nul-terminated. All 
-> the source strings here are expected to be nul-terminated here though.
-> 
->     It is nice to have a helper function. Linux also has something similar
->     called strscpy():
->     https://www.kernel.org/doc/html/latest/core-api/kernel-
->     api.html#c.strscpy <https://www.kernel.org/doc/html/latest/core-api/
->     kernel-api.html#c.strscpy>
-> 
-> 
-> I'm not convinced this is the right patch set to be reinventing Qemu's 
-> string copying functions. Instances abound of the even less safe 
-> strcpy() (and sprintf, etc.) being used in Qemu. Some of those are 
-> likely even problematic, but it seems that should be subject to a more 
-> holistic investigation into what kinds of usage patterns there are, and 
-> then a handful of safe solutions can be found that would work for 99% of 
-> string copying in the code base. Not by adding yet another strcpy 
-> variant in a device backend and machine type patch set where one of the 
-> existing variants works just fine.
+--0000000000002b09cc0624661d13
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-My suggestion were for the case you were going to write one to avoid 
-cumbersome return value checks as you told in the earlier email. It is 
-fine if your helper function is to be specific to this device to add 
-device-specific error reporting code, for example.
+Hi Daniel,
 
-> 
->      >
->      > (Also, I notice that last strncpy actually uses the wrong
->     destination
->      > size; my wrapper macro uses ARRAY_SIZE to avoid this mistake
->     altogether.)
->      >
->      >      > +    s->cfg.ecid = cpu_to_be64(s->cfg.ecid);
->      >      > +    s->cfg.version = 2;
->      >      > +    s->cfg.unk1 = 1;
->      >      > +    s->cfg.unk2 = 1;
->      >      > +    s->cfg.unk3 = 0x20;
->      >      > +    s->cfg.unk4 = 0;
->      >      > +    s->cfg.unk5 = 1;
->      >      > +    s->cfg.unk6 = 1;
->      >      > +    s->cfg.unk7 = 0;
->      >      > +    s->cfg.unk10 = 1;
->      >      > +
->      >      > +    g_assert(s->cfg.nr_cpus < ARRAY_SIZE(s->cfg.cpu_ids));
->      >
->      >     Report an error instead of asserting.
->      >
->      >      > +    for (i = 0; i < s->cfg.nr_cpus; i++) {
->      >      > +        s->cfg.cpu_ids[i] = i;
->      >      > +    }
->      >       > +}> +
->      >      > +static void vmapple_cfg_init(Object *obj)
->      >      > +{
->      >      > +    VMAppleCfgState *s = VMAPPLE_CFG(obj);
->      >      > +
->      >      > +    memory_region_init_ram(&s->mem, obj, "VMApple Config",
->      >     VMAPPLE_CFG_SIZE,
->      >      > +                           &error_fatal);
->      >      > +    sysbus_init_mmio(SYS_BUS_DEVICE(obj), &s->mem);
->      >      > +
->      >      > +    s->serial = (char *)"1234";
->      >      > +    s->model = (char *)"VM0001";
->      >      > +    s->soc_name = (char *)"Apple M1 (Virtual)";
->      >
->      >     These casts are unsafe; these pointers will be freed when this
->      >     device is
->      >     freed.
->      >
->      >
->      > Good catch! The more usual pattern for default string property
->     values
->      > seems to be to fill them in _realize() (using g_strdup()) if no
->     other
->      > value was previously set, so I've applied that here for the next
->     version
->      > of the patch.
->      >
->      >
->      >      > +}
->      >      > +
->      >      > +static Property vmapple_cfg_properties[] = {
->      >      > +    DEFINE_PROP_UINT32("nr-cpus", VMAppleCfgState,
->     cfg.nr_cpus, 1),
->      >      > +    DEFINE_PROP_UINT64("ecid", VMAppleCfgState, cfg.ecid, 0),
->      >      > +    DEFINE_PROP_UINT64("ram-size", VMAppleCfgState,
->      >     cfg.ram_size, 0),
->      >      > +    DEFINE_PROP_UINT32("run_installer1", VMAppleCfgState,
->      >     cfg.run_installer1, 0),
->      >      > +    DEFINE_PROP_UINT32("run_installer2", VMAppleCfgState,
->      >     cfg.run_installer2, 0),
->      >      > +    DEFINE_PROP_UINT32("rnd", VMAppleCfgState, cfg.rnd, 0),
->      >      > +    DEFINE_PROP_MACADDR("mac-en0", VMAppleCfgState,
->     cfg.mac_en0),
->      >      > +    DEFINE_PROP_MACADDR("mac-en1", VMAppleCfgState,
->     cfg.mac_en1),
->      >      > +    DEFINE_PROP_MACADDR("mac-wifi0", VMAppleCfgState,
->      >     cfg.mac_wifi0),
->      >      > +    DEFINE_PROP_MACADDR("mac-bt0", VMAppleCfgState,
->     cfg.mac_bt0),
->      >      > +    DEFINE_PROP_STRING("serial", VMAppleCfgState, serial),
->      >      > +    DEFINE_PROP_STRING("model", VMAppleCfgState, model),
->      >      > +    DEFINE_PROP_STRING("soc_name", VMAppleCfgState,
->     soc_name),
->      >      > +    DEFINE_PROP_END_OF_LIST(),
->      >      > +};
->      >      > +
->      >      > +static void vmapple_cfg_class_init(ObjectClass *klass,
->     void *data)
->      >      > +{
->      >      > +    DeviceClass *dc = DEVICE_CLASS(klass);
->      >      > +    ResettableClass *rc = RESETTABLE_CLASS(klass);
->      >      > +
->      >      > +    dc->realize = vmapple_cfg_realize;
->      >      > +    dc->desc = "VMApple Configuration Region";
->      >      > +    device_class_set_props(dc, vmapple_cfg_properties);
->      >      > +    rc->phases.hold = vmapple_cfg_reset;
->      >      > +}
->      >      > +
->      >      > +static const TypeInfo vmapple_cfg_info = {
->      >      > +    .name          = TYPE_VMAPPLE_CFG,
->      >      > +    .parent        = TYPE_SYS_BUS_DEVICE,
->      >      > +    .instance_size = sizeof(VMAppleCfgState),
->      >      > +    .instance_init = vmapple_cfg_init,
->      >      > +    .class_init    = vmapple_cfg_class_init,
->      >      > +};
->      >      > +
->      >      > +static void vmapple_cfg_register_types(void)
->      >      > +{
->      >      > +    type_register_static(&vmapple_cfg_info);
->      >      > +}
->      >      > +
->      >      > +type_init(vmapple_cfg_register_types)
->      >      > diff --git a/hw/vmapple/meson.build b/hw/vmapple/meson.build
->      >      > index d4624713deb..64b78693a31 100644
->      >      > --- a/hw/vmapple/meson.build
->      >      > +++ b/hw/vmapple/meson.build
->      >      > @@ -1,2 +1,3 @@
->      >      >   system_ss.add(when: 'CONFIG_VMAPPLE_AES',  if_true:
->     files('aes.c'))
->      >      >   system_ss.add(when: 'CONFIG_VMAPPLE_BDIF', if_true:
->      >     files('bdif.c'))
->      >      > +system_ss.add(when: 'CONFIG_VMAPPLE_CFG',  if_true:
->     files('cfg.c'))
->      >      > diff --git a/include/hw/vmapple/cfg.h b/include/hw/
->     vmapple/cfg.h
->      >      > new file mode 100644
->      >      > index 00000000000..3337064e447
->      >      > --- /dev/null
->      >      > +++ b/include/hw/vmapple/cfg.h
->      >      > @@ -0,0 +1,68 @@
->      >      > +/*
->      >      > + * VMApple Configuration Region
->      >      > + *
->      >      > + * Copyright © 2023 Amazon.com, Inc. or its affiliates. All
->      >     Rights Reserved.
->      >      > + *
->      >      > + * This work is licensed under the terms of the GNU GPL,
->     version
->      >     2 or later.
->      >      > + * See the COPYING file in the top-level directory.
->      >      > + */
->      >      > +
->      >      > +#ifndef HW_VMAPPLE_CFG_H
->      >      > +#define HW_VMAPPLE_CFG_H
->      >      > +
->      >      > +#include "hw/sysbus.h"
->      >      > +#include "qom/object.h"
->      >      > +#include "net/net.h"
->      >      > +
->      >      > +typedef struct VMAppleCfg {
->      >      > +    uint32_t version;         /* 0x000 */
->      >      > +    uint32_t nr_cpus;         /* 0x004 */
->      >      > +    uint32_t unk1;            /* 0x008 */
->      >      > +    uint32_t unk2;            /* 0x00c */
->      >      > +    uint32_t unk3;            /* 0x010 */
->      >      > +    uint32_t unk4;            /* 0x014 */
->      >      > +    uint64_t ecid;            /* 0x018 */
->      >      > +    uint64_t ram_size;        /* 0x020 */
->      >      > +    uint32_t run_installer1;  /* 0x028 */
->      >      > +    uint32_t unk5;            /* 0x02c */
->      >      > +    uint32_t unk6;            /* 0x030 */
->      >      > +    uint32_t run_installer2;  /* 0x034 */
->      >      > +    uint32_t rnd;             /* 0x038 */
->      >      > +    uint32_t unk7;            /* 0x03c */
->      >      > +    MACAddr mac_en0;          /* 0x040 */
->      >      > +    uint8_t pad1[2];
->      >      > +    MACAddr mac_en1;          /* 0x048 */
->      >      > +    uint8_t pad2[2];
->      >      > +    MACAddr mac_wifi0;        /* 0x050 */
->      >      > +    uint8_t pad3[2];
->      >      > +    MACAddr mac_bt0;          /* 0x058 */
->      >      > +    uint8_t pad4[2];
->      >      > +    uint8_t reserved[0xa0];   /* 0x060 */
->      >      > +    uint32_t cpu_ids[0x80];   /* 0x100 */
->      >      > +    uint8_t scratch[0x200];   /* 0x180 */
->      >      > +    char serial[32];          /* 0x380 */
->      >      > +    char unk8[32];            /* 0x3a0 */
->      >      > +    char model[32];           /* 0x3c0 */
->      >      > +    uint8_t unk9[32];         /* 0x3e0 */
->      >      > +    uint32_t unk10;           /* 0x400 */
->      >      > +    char soc_name[32];        /* 0x404 */
->      >      > +} VMAppleCfg;
->      >      > +
->      >      > +#define TYPE_VMAPPLE_CFG "vmapple-cfg"
->      >      > +OBJECT_DECLARE_SIMPLE_TYPE(VMAppleCfgState, VMAPPLE_CFG)
->      >      > +
->      >      > +struct VMAppleCfgState {
->      >      > +    /* <private> */
->      >      > +    SysBusDevice parent_obj;
->      >      > +    VMAppleCfg cfg;
->      >      > +
->      >      > +    /* <public> */
->      >      > +    MemoryRegion mem;
->      >      > +    char *serial;
->      >      > +    char *model;
->      >      > +    char *soc_name;
->      >      > +};
->      >      > +
->      >      > +#define VMAPPLE_CFG_SIZE 0x00010000
->      >      > +
->      >      > +#endif /* HW_VMAPPLE_CFG_H */
->      >
-> 
+Thanks for the reminder.
+I'll take over Tommy's work to send out the v7 patchset later this week.
 
+Regards,
+Frank Chang
+
+On Fri, Oct 11, 2024 at 7:38=E2=80=AFPM Daniel Henrique Barboza <
+dbarboza@ventanamicro.com> wrote:
+
+> Hi Tommy,
+>
+>
+> Do you plan to send a new version of this work soon? This series is a
+> prerequisite
+> of "target/riscv: Add support for Smdbltrp and Ssdbltrp extensions" and w=
+e
+> need
+> this series merged first. We have minor comments from Cl=C3=A9ment and Al=
+istair
+> so
+> hopefully it shouldn't be too much work.
+>
+> The code freeze for 9.2 will happen in the first/second week of November,
+> so if you
+> could send a new version to be merged in the next PR that would be great.
+>
+>
+> Thanks,
+>
+> Daniel
+>
+>
+>
+> On 9/2/24 4:13 AM, Tommy Wu wrote:
+> > This patchset added support for Smrnmi Extension in RISC-V.
+> >
+> > There are four new CSRs and one new instruction added to allow NMI to b=
+e
+> > resumable in RISC-V, which are:
+> >
+> > =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> >    * mnscratch (0x740)
+> >    * mnepc     (0x741)
+> >    * mncause   (0x742)
+> >    * mnstatus  (0x744)
+> > =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> >    * mnret: To return from RNMI interrupt/exception handler.
+> > =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> >
+> > RNMI also has higher priority than any other interrupts or exceptions
+> > and cannot be disabled by software.
+> >
+> > RNMI may be used to route to other devices such as Bus Error Unit or
+> > Watchdog Timer in the future.
+> >
+> > The interrupt/exception trap handler addresses of RNMI are
+> > implementation defined.
+> >
+> > If anyone wants to test the patches, we can use the customized
+> OpenSBI[1],
+> > and the customized QEMU[2].
+> >
+> > We implemented a PoC RNMI trap handler in the customized OpenSBI.
+> > In the customized QEMU, we use the Smrnmi patches and the patch from
+> > Damien Hedde[3]. The patch from Damien Hedde can be used to inject
+> > the RNMI signal with the qmp command.
+> >
+> > [1] https://github.com/TommyWu-fdgkhdkgh/opensbi/tree/dev/twu/master
+> > [2] https://github.com/TommyWu-fdgkhdkgh/qemu/tree/dev/twu/master
+> > [3] https://lists.gnu.org/archive/html/qemu-devel/2019-06/msg06232.html
+> >
+> > Test commands :
+> > $ ./build/qemu-system-riscv64 -M virt -cpu rv64,smrnmi=3Dtrue,
+> > rnmi-interrupt-vector=3D{Offset of the RNMI handler in the customized
+> > OpenSBI.} -m 4G -smp 2 -serial mon:stdio -serial null -nographic
+> > -bios fw_jump.elf -kernel Image -initrd rootfs.cpio
+> > -qmp unix:/tmp/qmp-sock,server,wait=3Doff
+> >
+> > Use qmp command to inject the RNMI interrupt.
+> > $ ./scripts/qmp/qmp-shell /tmp/qmp-sock
+> > (QEMU)  gpio-set path=3D/machine/soc0/harts[0] gpio=3Driscv.cpu.rnmi
+> > number=3D0 value=3Dtrue
+> >
+> > (QEMU)  gpio-set path=3D/machine/soc0/harts[0] gpio=3Driscv.cpu.rnmi
+> > number=3D0 value=3Dfalse
+> >
+> > Changelog:
+> >
+> > v6
+> >    * Delete the redundant code in `riscv_cpu_do_interrupt`.
+> >    ( Thank Alvin for the suggestion. )
+> >    * Split the shared code in `helper_mret` and `helper_mnret` into a
+> >      helper function `check_ret_from_m_mode`.
+> >    ( Thank Alistair for the suggestion. )
+> >
+> > v5
+> >    * Move the patch that adds the Smrnmi extension to the last patch.
+> >    ( Thank Alistair for the suggestion. )
+> >    * Implement an M-mode software PoC for this with implemented handler=
+s.
+> >    ( Thank Andrew Jones for the suggestion. )
+> >    * Add a commit message to all patches of the series.
+> >    ( Thank Andrew Jones for the suggestion. )
+> >
+> > v4
+> >    * Fix some coding style issues.
+> >    ( Thank Daniel for the suggestions. )
+> >
+> > v3
+> >    * Update to the newest version of Smrnmi extension specification.
+> >
+> > v2
+> >    * split up the series into more commits for convenience of review.
+> >    * add missing rnmi_irqvec and rnmi_excpvec properties to riscv_harts=
+.
+> >
+> > Tommy Wu (5):
+> >    target/riscv: Add `ext_smrnmi` in the RISCVCPUConfig.
+> >    target/riscv: Handle Smrnmi interrupt and exception.
+> >    target/riscv: Add Smrnmi CSRs.
+> >    target/riscv: Add Smrnmi mnret instruction.
+> >    target/riscv: Add Smrnmi cpu extension.
+> >
+> >   hw/riscv/riscv_hart.c                         | 18 ++++
+> >   include/hw/riscv/riscv_hart.h                 |  4 +
+> >   target/riscv/cpu.c                            | 18 ++++
+> >   target/riscv/cpu.h                            | 10 +++
+> >   target/riscv/cpu_bits.h                       | 23 ++++++
+> >   target/riscv/cpu_cfg.h                        |  1 +
+> >   target/riscv/cpu_helper.c                     | 80 ++++++++++++++++--
+> >   target/riscv/csr.c                            | 82 ++++++++++++++++++=
++
+> >   target/riscv/helper.h                         |  1 +
+> >   target/riscv/insn32.decode                    |  3 +
+> >   .../riscv/insn_trans/trans_privileged.c.inc   | 12 +++
+> >   target/riscv/op_helper.c                      | 49 +++++++++--
+> >   12 files changed, 291 insertions(+), 10 deletions(-)
+> >
+>
+
+--0000000000002b09cc0624661d13
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr">Hi Daniel,<div><br></div><div>Thanks for the reminder.</di=
+v><div>I&#39;ll take over Tommy&#39;s work to send out the v7 patchset late=
+r this week.</div><div><br></div><div>Regards,</div><div>Frank Chang</div><=
+/div><br><div class=3D"gmail_quote"><div dir=3D"ltr" class=3D"gmail_attr">O=
+n Fri, Oct 11, 2024 at 7:38=E2=80=AFPM Daniel Henrique Barboza &lt;<a href=
+=3D"mailto:dbarboza@ventanamicro.com">dbarboza@ventanamicro.com</a>&gt; wro=
+te:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px =
+0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">Hi Tommy,<br=
+>
+<br>
+<br>
+Do you plan to send a new version of this work soon? This series is a prere=
+quisite<br>
+of &quot;target/riscv: Add support for Smdbltrp and Ssdbltrp extensions&quo=
+t; and we need<br>
+this series merged first. We have minor comments from Cl=C3=A9ment and Alis=
+tair so<br>
+hopefully it shouldn&#39;t be too much work.<br>
+<br>
+The code freeze for 9.2 will happen in the first/second week of November, s=
+o if you<br>
+could send a new version to be merged in the next PR that would be great.<b=
+r>
+<br>
+<br>
+Thanks,<br>
+<br>
+Daniel<br>
+<br>
+<br>
+<br>
+On 9/2/24 4:13 AM, Tommy Wu wrote:<br>
+&gt; This patchset added support for Smrnmi Extension in RISC-V.<br>
+&gt; <br>
+&gt; There are four new CSRs and one new instruction added to allow NMI to =
+be<br>
+&gt; resumable in RISC-V, which are:<br>
+&gt; <br>
+&gt; =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D<br>
+&gt;=C2=A0 =C2=A0 * mnscratch (0x740)<br>
+&gt;=C2=A0 =C2=A0 * mnepc=C2=A0 =C2=A0 =C2=A0(0x741)<br>
+&gt;=C2=A0 =C2=A0 * mncause=C2=A0 =C2=A0(0x742)<br>
+&gt;=C2=A0 =C2=A0 * mnstatus=C2=A0 (0x744)<br>
+&gt; =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D<br>
+&gt;=C2=A0 =C2=A0 * mnret: To return from RNMI interrupt/exception handler.=
+<br>
+&gt; =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D<br>
+&gt; <br>
+&gt; RNMI also has higher priority than any other interrupts or exceptions<=
+br>
+&gt; and cannot be disabled by software.<br>
+&gt; <br>
+&gt; RNMI may be used to route to other devices such as Bus Error Unit or<b=
+r>
+&gt; Watchdog Timer in the future.<br>
+&gt; <br>
+&gt; The interrupt/exception trap handler addresses of RNMI are<br>
+&gt; implementation defined.<br>
+&gt; <br>
+&gt; If anyone wants to test the patches, we can use the customized OpenSBI=
+[1],<br>
+&gt; and the customized QEMU[2].<br>
+&gt; <br>
+&gt; We implemented a PoC RNMI trap handler in the customized OpenSBI.<br>
+&gt; In the customized QEMU, we use the Smrnmi patches and the patch from<b=
+r>
+&gt; Damien Hedde[3]. The patch from Damien Hedde can be used to inject<br>
+&gt; the RNMI signal with the qmp command.<br>
+&gt; <br>
+&gt; [1] <a href=3D"https://github.com/TommyWu-fdgkhdkgh/opensbi/tree/dev/t=
+wu/master" rel=3D"noreferrer" target=3D"_blank">https://github.com/TommyWu-=
+fdgkhdkgh/opensbi/tree/dev/twu/master</a><br>
+&gt; [2] <a href=3D"https://github.com/TommyWu-fdgkhdkgh/qemu/tree/dev/twu/=
+master" rel=3D"noreferrer" target=3D"_blank">https://github.com/TommyWu-fdg=
+khdkgh/qemu/tree/dev/twu/master</a><br>
+&gt; [3] <a href=3D"https://lists.gnu.org/archive/html/qemu-devel/2019-06/m=
+sg06232.html" rel=3D"noreferrer" target=3D"_blank">https://lists.gnu.org/ar=
+chive/html/qemu-devel/2019-06/msg06232.html</a><br>
+&gt; <br>
+&gt; Test commands :<br>
+&gt; $ ./build/qemu-system-riscv64 -M virt -cpu rv64,smrnmi=3Dtrue,<br>
+&gt; rnmi-interrupt-vector=3D{Offset of the RNMI handler in the customized<=
+br>
+&gt; OpenSBI.} -m 4G -smp 2 -serial mon:stdio -serial null -nographic<br>
+&gt; -bios fw_jump.elf -kernel Image -initrd rootfs.cpio<br>
+&gt; -qmp unix:/tmp/qmp-sock,server,wait=3Doff<br>
+&gt; <br>
+&gt; Use qmp command to inject the RNMI interrupt.<br>
+&gt; $ ./scripts/qmp/qmp-shell /tmp/qmp-sock<br>
+&gt; (QEMU)=C2=A0 gpio-set path=3D/machine/soc0/harts[0] gpio=3Driscv.cpu.r=
+nmi<br>
+&gt; number=3D0 value=3Dtrue<br>
+&gt; <br>
+&gt; (QEMU)=C2=A0 gpio-set path=3D/machine/soc0/harts[0] gpio=3Driscv.cpu.r=
+nmi<br>
+&gt; number=3D0 value=3Dfalse<br>
+&gt; <br>
+&gt; Changelog:<br>
+&gt; <br>
+&gt; v6<br>
+&gt;=C2=A0 =C2=A0 * Delete the redundant code in `riscv_cpu_do_interrupt`.<=
+br>
+&gt;=C2=A0 =C2=A0 ( Thank Alvin for the suggestion. )<br>
+&gt;=C2=A0 =C2=A0 * Split the shared code in `helper_mret` and `helper_mnre=
+t` into a<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 helper function `check_ret_from_m_mode`.<br>
+&gt;=C2=A0 =C2=A0 ( Thank Alistair for the suggestion. )<br>
+&gt; <br>
+&gt; v5<br>
+&gt;=C2=A0 =C2=A0 * Move the patch that adds the Smrnmi extension to the la=
+st patch.<br>
+&gt;=C2=A0 =C2=A0 ( Thank Alistair for the suggestion. )<br>
+&gt;=C2=A0 =C2=A0 * Implement an M-mode software PoC for this with implemen=
+ted handlers.<br>
+&gt;=C2=A0 =C2=A0 ( Thank Andrew Jones for the suggestion. )<br>
+&gt;=C2=A0 =C2=A0 * Add a commit message to all patches of the series.<br>
+&gt;=C2=A0 =C2=A0 ( Thank Andrew Jones for the suggestion. )<br>
+&gt; <br>
+&gt; v4<br>
+&gt;=C2=A0 =C2=A0 * Fix some coding style issues.<br>
+&gt;=C2=A0 =C2=A0 ( Thank Daniel for the suggestions. )<br>
+&gt; <br>
+&gt; v3<br>
+&gt;=C2=A0 =C2=A0 * Update to the newest version of Smrnmi extension specif=
+ication.<br>
+&gt; <br>
+&gt; v2<br>
+&gt;=C2=A0 =C2=A0 * split up the series into more commits for convenience o=
+f review.<br>
+&gt;=C2=A0 =C2=A0 * add missing rnmi_irqvec and rnmi_excpvec properties to =
+riscv_harts.<br>
+&gt; <br>
+&gt; Tommy Wu (5):<br>
+&gt;=C2=A0 =C2=A0 target/riscv: Add `ext_smrnmi` in the RISCVCPUConfig.<br>
+&gt;=C2=A0 =C2=A0 target/riscv: Handle Smrnmi interrupt and exception.<br>
+&gt;=C2=A0 =C2=A0 target/riscv: Add Smrnmi CSRs.<br>
+&gt;=C2=A0 =C2=A0 target/riscv: Add Smrnmi mnret instruction.<br>
+&gt;=C2=A0 =C2=A0 target/riscv: Add Smrnmi cpu extension.<br>
+&gt; <br>
+&gt;=C2=A0 =C2=A0hw/riscv/riscv_hart.c=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0| 18 ++++<br>
+&gt;=C2=A0 =C2=A0include/hw/riscv/riscv_hart.h=C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0|=C2=A0 4 +<br>
+&gt;=C2=A0 =C2=A0target/riscv/cpu.c=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 | 18 ++++<br>
+&gt;=C2=A0 =C2=A0target/riscv/cpu.h=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 | 10 +++<br>
+&gt;=C2=A0 =C2=A0target/riscv/cpu_bits.h=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0| 23 ++++++<br>
+&gt;=C2=A0 =C2=A0target/riscv/cpu_cfg.h=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 |=C2=A0 1 +<br>
+&gt;=C2=A0 =C2=A0target/riscv/cpu_helper.c=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0| 80 ++++++++++++++++--<br>
+&gt;=C2=A0 =C2=A0target/riscv/csr.c=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 | 82 ++++++++++=
++++++++++<br>
+&gt;=C2=A0 =C2=A0target/riscv/helper.h=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0|=C2=A0 1 +<br>
+&gt;=C2=A0 =C2=A0target/riscv/insn32.decode=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 |=C2=A0 3 +<br>
+&gt;=C2=A0 =C2=A0.../riscv/insn_trans/trans_privileged.c.inc=C2=A0 =C2=A0| =
+12 +++<br>
+&gt;=C2=A0 =C2=A0target/riscv/op_helper.c=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
+ =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 | 49 +++++++++--<br>
+&gt;=C2=A0 =C2=A012 files changed, 291 insertions(+), 10 deletions(-)<br>
+&gt; <br>
+</blockquote></div>
+
+--0000000000002b09cc0624661d13--
 
