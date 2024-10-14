@@ -4,58 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 19208D16260
-	for <qemu-riscv@archiver.kernel.org>; Mon, 14 Oct 2024 13:20:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E4798D1812A
+	for <qemu-riscv@archiver.kernel.org>; Mon, 14 Oct 2024 16:15:52 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1t0Kzf-0001q6-5G; Mon, 14 Oct 2024 09:20:15 -0400
+	id 1t0NjD-00060Y-Ua; Mon, 14 Oct 2024 12:15:27 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <yanmingzhu@iscas.ac.cn>)
- id 1t0I0a-0003sS-EN; Mon, 14 Oct 2024 06:09:00 -0400
-Received: from smtp83.cstnet.cn ([159.226.251.83] helo=cstnet.cn)
- by eggs.gnu.org with esmtps (TLS1.2:DHE_RSA_AES_256_CBC_SHA1:256)
- (Exim 4.90_1) (envelope-from <yanmingzhu@iscas.ac.cn>)
- id 1t0I0X-0001pG-Be; Mon, 14 Oct 2024 06:09:00 -0400
-Received: from yanmingzhu$iscas.ac.cn ( [124.16.141.247] ) by
- ajax-webmail-APP-09 (Coremail) ; Mon, 14 Oct 2024 18:08:40 +0800
- (GMT+08:00)
-X-Originating-IP: [124.16.141.247]
-Date: Mon, 14 Oct 2024 18:08:40 +0800 (GMT+08:00)
-X-CM-HeaderCharset: UTF-8
-From: =?UTF-8?B?6ZiO5piO6ZO4?= <yanmingzhu@iscas.ac.cn>
-To: "Alistair Francis" <alistair23@gmail.com>
-Cc: "MingZhu Yan" <trdthg47@gmail.com>, qemu-riscv@nongnu.org, 
- qemu-devel@nongnu.org
-Subject: Re: Re: [PATCH] hw/char/riscv_htif: Fix htif_mm_write that causes
- infinite loop in ACT.
-X-Priority: 3
-X-Mailer: Coremail Webmail Server Version 2024.1-cmXT5 build
- 20240627(e6c6db66) Copyright (c) 2002-2024 www.mailtech.cn cnic.cn
-In-Reply-To: <CAKmqyKMobSzu-q8jdPhAU9PMG2GsGG1eOsemSS-Ny2vrX+wSbQ@mail.gmail.com>
-References: <20240927083508.59483-1-yanmingzhu@iscas.ac.cn>
- <CAKmqyKMobSzu-q8jdPhAU9PMG2GsGG1eOsemSS-Ny2vrX+wSbQ@mail.gmail.com>
-Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset=UTF-8
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1t0NjB-000605-Kw
+ for qemu-riscv@nongnu.org; Mon, 14 Oct 2024 12:15:25 -0400
+Received: from mail-pl1-x62a.google.com ([2607:f8b0:4864:20::62a])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1t0Nj9-0007HN-MH
+ for qemu-riscv@nongnu.org; Mon, 14 Oct 2024 12:15:25 -0400
+Received: by mail-pl1-x62a.google.com with SMTP id
+ d9443c01a7336-20ca7fc4484so18883335ad.3
+ for <qemu-riscv@nongnu.org>; Mon, 14 Oct 2024 09:15:22 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=ventanamicro.com; s=google; t=1728922522; x=1729527322; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=wACl76/5XgIB4bIPgMIPhr/z09cgEYsiNIVkLTYVkm4=;
+ b=Td0SagJ0KvRjT7bDdFuBR+LWUgPmkaP2JVvOfA9narv/ytw3xZYV6K35Hhwa4ASEoG
+ MyhEU+GgTeJB+Y+lYZ2JikIJkEHrD4RLKadTHQ35rHYDPU7eDRTbpW+Mrv7Wp/Bt6n73
+ V60Uaem9oJNapLlQNi8ped6x2UmQH0Pd2G8DOglxFyHE4MK/4TdO786mVTWNpaayoHUb
+ hpPKwe8jgfGW7+IaO/KlqyLTpBGXUV0Sn84PBz39ExjSKyIW2T/0JoVoEPbvmo6xEhQ/
+ gV6ua7zMPwIaCMvMhXytuY+hDtQ3H9Des/OGAarT0fBZEtprcZZrNTH8dYHvPY+Yn7x5
+ 50Jg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1728922522; x=1729527322;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=wACl76/5XgIB4bIPgMIPhr/z09cgEYsiNIVkLTYVkm4=;
+ b=tH99ojtc7aizVNRs88Vrh/CZhltR907m9jUy8vdVecJBb7bhlrpDsxZ66lwgMP3HOe
+ xZf87AB+oJ03/GWHHZcPIUQPHVnScY3xak/cKn/qvsmL5A2H0sK9txRhkSaAMbfAeECv
+ SzB9+yZ6enZYRtRkf4hvzm20+0YddISRQmmgDl2Hg8xjq6ibHbPBRBxklbuLAjFq/WfZ
+ VlrQ8NZjtKXDDa0iDaHtlNM3YltAybbejQPBqpSEggO8mc6mt36nA5papp2Y7vPPMEeE
+ /a5FyOITaKB+yMDuV3KgrigN0jOZXmmcsMsKo2kyJeAiATBAElugb7n98vIMMCdJQN9z
+ ottQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXVqWQ1IPK0jLv/1K5n0ZgD77rkyHDDFkFEBU2n1GPZomZ7jDoElnYm27PfbrYP3VI/ReTF1q6az5pc@nongnu.org
+X-Gm-Message-State: AOJu0YxpT5vKIyuS+iRVgySdzz1Vy7gtdsxDGOrT1T2wWS69VUQqcK9J
+ sefQiwAJVf4YeuGdYjwexzdTa9aHCPmR3fOiGbtyNHBasTMKLKkC3PuspDRraI0=
+X-Google-Smtp-Source: AGHT+IG3FDrPnhyisWMLlsnF4crSsJmBpsAEc2DzdH1dvXjG4xIl84I8NRrMI2ZrbDj4Yupp3SNpTg==
+X-Received: by 2002:a17:902:ebc5:b0:20b:5351:f690 with SMTP id
+ d9443c01a7336-20cbb195f19mr118522875ad.16.1728922521723; 
+ Mon, 14 Oct 2024 09:15:21 -0700 (PDT)
+Received: from [192.168.68.110] (201-68-240-198.dsl.telesp.net.br.
+ [201.68.240.198]) by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-20c8c33ff19sm67684055ad.272.2024.10.14.09.15.18
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 14 Oct 2024 09:15:21 -0700 (PDT)
+Message-ID: <c43d0cd2-e1e8-46a4-971e-e96214192228@ventanamicro.com>
+Date: Mon, 14 Oct 2024 13:15:16 -0300
 MIME-Version: 1.0
-Message-ID: <52abee8d.225ee.1928a805a21.Coremail.yanmingzhu@iscas.ac.cn>
-X-Coremail-Locale: zh_CN
-X-CM-TRANSID: swCowAAHXASo7Qxn0KEEAA--.51619W
-X-CM-SenderInfo: 51dqzxxqj2x346lvutnvoduhdfq/1tbiBwsKBGcMbrpMcwACsA
-X-Coremail-Antispam: 1Ur529EdanIXcx71UUUUU7IcSsGvfJ3iIAIbVAYjsxI4VWxJw
- CS07vEb4IE77IF4wCS07vE1I0E4x80FVAKz4kxMIAIbVAFxVCaYxvI4VCIwcAKzIAtYxBI
- daVFxhVjvjDU=
-Received-SPF: pass client-ip=159.226.251.83;
- envelope-from=yanmingzhu@iscas.ac.cn; helo=cstnet.cn
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_NONE=-0.0001,
- RCVD_IN_VALIDITY_CERTIFIED_BLOCKED=0.001, RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001,
- SPF_HELO_PASS=-0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v6 0/5] target/riscv: Add Smrnmi support.
+To: Frank Chang <frank.chang@sifive.com>, =?UTF-8?B?Q2zDqW1lbnQgTMOpZ2Vy?=
+ <cleger@rivosinc.com>
+Cc: Tommy Wu <tommy.wu@sifive.com>, qemu-devel@nongnu.org,
+ qemu-riscv@nongnu.org, palmer@dabbelt.com, alistair.francis@wdc.com,
+ alistair23@gmail.com, bin.meng@windriver.com, liweiwei@iscas.ac.cn,
+ ajones@ventanamicro.com
+References: <20240902071358.1061693-1-tommy.wu@sifive.com>
+ <6e7a184f-3b47-480d-bd56-fef2e89beda6@ventanamicro.com>
+ <c8460f0c-d82f-414b-b55f-d9f227244a9f@rivosinc.com>
+ <CANzO1D2BaPA8gxxKxdk59nYseV9uKZzNR9GiHS+nAict+WSPsA@mail.gmail.com>
+Content-Language: en-US
+From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+In-Reply-To: <CANzO1D2BaPA8gxxKxdk59nYseV9uKZzNR9GiHS+nAict+WSPsA@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::62a;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pl1-x62a.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
-X-Mailman-Approved-At: Mon, 14 Oct 2024 09:20:14 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -70,90 +104,163 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-VGhhbmsgeW91IGZvciB5b3VyIHJlcGx5IGFuZCBJJ20gc29ycnkgdGhhdCBJIGRpZG4ndCBleHBs
-YWluIGl0IGNsZWFybHkuCgotIEFDVCBpcyBhbiBvZmZpY2lhbCByaXNjdiB0ZXN0IHN1aXRlIHRv
-IGNoZWNrIHRoZSByaXNjdiBzdXBwb3J0IG9mIHRoZSBEVVQoZGV2aWNlIHVuZGVyIHRlc3QpLgot
-IEN1cnJlbnRseSBBQ1Qgc3VwcG9ydCB1c2luZyBbc2FpbC1yaXNjdl0oaHR0cHM6Ly9naXRodWIu
-Y29tL3Jpc2N2L3NhaWwtcmlzY3YpKGRlZmF1bHQpIG9yIFtzcGlrZV0oaHR0cHM6Ly9naXRodWIu
-Y29tL3Jpc2N2LXNvZnR3YXJlLXNyYy9yaXNjdi1pc2Etc2ltKSAKLSBRRU1VIGlzIG5vdCBzdXBw
-b3J0ZWQgeWV077yMYnV0IHNvbWVvbmUgbWFkZSBhIGNvbW1pdDogW2NvbW1pdF0oaHR0cHM6Ly9n
-aXRodWIuY29tL3FlbXUvcWVtdS9jb21taXQvNjYyNDdlZGM4YjZmYjM2ZDZiOTA1YmFiY2Q3OTUw
-NjhlYTk4OWFkNSkKCkJ1dCB0aGVyZSBhcmUgc3RpbGwgcHJvYmxlbXMsIHNvIEknbSB0cnlpbmcg
-dG8gZml4IGl0LiBBZnRlciBkZWJ1Z2dpbmcsIEkgZm91bmQgdGhhdCBpdCdzIGEgaHRpZiBwcm9i
-bGVtLCBhbmQgdGhlIGlkZWEgb2YgZml4aW5nIGl0IGlzIHJlZmVyZW5jZWQgZnJvbSB0aGUgc2Fp
-bC1yaXNjdiBpbXBsZW1lbnRhdGlvbgoKIkFsaXN0YWlyIEZyYW5jaXMiICZsdDthbGlzdGFpcjIz
-QGdtYWlsLmNvbSZndDvlhpnpgZPvvJoKJmd0OyBPbiBGcmksIFNlcCAyNywgMjAyNCBhdCAxMToy
-NuKAr1BNIE1pbmdaaHUgWWFuIDx0cmR0aGc0N0BnbWFpbC5jb20+IHdyb3RlOgomZ3Q7ICZndDsK
-Jmd0OyAmZ3Q7IEFwcGxpY2F0aW9ucyBzb21ldGltZXMgb25seSB3cml0ZSB0aGUgbG93ZXIgMzIt
-Yml0IHBheWxvYWQgYnl0ZXMsIHRoaXMgaXMgdXNlZAomZ3Q7ICZndDsgaW4gQUNUIHRlc3RzLiBB
-cyBhIHdvcmthcm91bmQsIHRoaXMgcmVmZXJzIHRvIHRoZSBzb2x1dGlvbiBvZiBzYWlsLXJpc2N2
-LgomZ3Q7IAomZ3Q7IEknbSBub3Qgc3VyZSB3aGF0IEFDVCBpcywgYnV0IHRoaXMgZmVlbHMgbGlr
-ZSBhIGd1ZXN0IGJ1Zywgbm90IGEgUUVNVSBpc3N1ZS4KJmd0OyAKJmd0OyBBbGlzdGFpcgomZ3Q7
-IAomZ3Q7ICZndDsgaWYgdGhlIHBheWxvYWQgaXMgd3JpdHRlbiBhIGZldyB0aW1lcyB3aXRoIHRo
-ZSBzYW1lIHZhbHVlLCB3ZSBwcm9jZXNzIHRoZSB3aG9sZQomZ3Q7ICZndDsgaHRpZiBjb21tYW5k
-IGFueXdheS4KJmd0OyAmZ3Q7CiZndDsgJmd0OyBTaWduZWQtb2ZmLWJ5OiBNaW5nWmh1IFlhbiA8
-eWFubWluZ3podUBpc2Nhcy5hYy5jbj4KJmd0OyAmZ3Q7IC0tLQomZ3Q7ICZndDsgIGh3L2NoYXIv
-cmlzY3ZfaHRpZi5jIHwgMzUgKysrKysrKysrKysrKysrKysrKy0tLS0tLS0tLS0tLS0tLS0KJmd0
-OyAmZ3Q7ICAxIGZpbGUgY2hhbmdlZCwgMTkgaW5zZXJ0aW9ucygrKSwgMTYgZGVsZXRpb25zKC0p
-CiZndDsgJmd0OwomZ3Q7ICZndDsgZGlmZiAtLWdpdCBhL2h3L2NoYXIvcmlzY3ZfaHRpZi5jIGIv
-aHcvY2hhci9yaXNjdl9odGlmLmMKJmd0OyAmZ3Q7IGluZGV4IDliZWY2MGRlZjEuLmQ3NGNjZTNi
-ZWYgMTAwNjQ0CiZndDsgJmd0OyAtLS0gYS9ody9jaGFyL3Jpc2N2X2h0aWYuYwomZ3Q7ICZndDsg
-KysrIGIvaHcvY2hhci9yaXNjdl9odGlmLmMKJmd0OyAmZ3Q7IEBAIC02NSwxNiArNjUsOCBAQCB2
-b2lkIGh0aWZfc3ltYm9sX2NhbGxiYWNrKGNvbnN0IGNoYXIgKnN0X25hbWUsIGludCBzdF9pbmZv
-LCB1aW50NjRfdCBzdF92YWx1ZSwKJmd0OyAmZ3Q7ICB7CiZndDsgJmd0OyAgICAgIGlmIChzdHJj
-bXAoImZyb21ob3N0Iiwgc3RfbmFtZSkgPT0gMCkgewomZ3Q7ICZndDsgICAgICAgICAgZnJvbWhv
-c3RfYWRkciA9IHN0X3ZhbHVlOwomZ3Q7ICZndDsgLSAgICAgICAgaWYgKHN0X3NpemUgIT0gOCkg
-ewomZ3Q7ICZndDsgLSAgICAgICAgICAgIGVycm9yX3JlcG9ydCgiSFRJRiBmcm9taG9zdCBtdXN0
-IGJlIDggYnl0ZXMiKTsKJmd0OyAmZ3Q7IC0gICAgICAgICAgICBleGl0KDEpOwomZ3Q7ICZndDsg
-LSAgICAgICAgfQomZ3Q7ICZndDsgICAgICB9IGVsc2UgaWYgKHN0cmNtcCgidG9ob3N0Iiwgc3Rf
-bmFtZSkgPT0gMCkgewomZ3Q7ICZndDsgICAgICAgICAgdG9ob3N0X2FkZHIgPSBzdF92YWx1ZTsK
-Jmd0OyAmZ3Q7IC0gICAgICAgIGlmIChzdF9zaXplICE9IDgpIHsKJmd0OyAmZ3Q7IC0gICAgICAg
-ICAgICBlcnJvcl9yZXBvcnQoIkhUSUYgdG9ob3N0IG11c3QgYmUgOCBieXRlcyIpOwomZ3Q7ICZn
-dDsgLSAgICAgICAgICAgIGV4aXQoMSk7CiZndDsgJmd0OyAtICAgICAgICB9CiZndDsgJmd0OyAg
-ICAgIH0gZWxzZSBpZiAoc3RyY21wKCJiZWdpbl9zaWduYXR1cmUiLCBzdF9uYW1lKSA9PSAwKSB7
-CiZndDsgJmd0OyAgICAgICAgICBiZWdpbl9zaWdfYWRkciA9IHN0X3ZhbHVlOwomZ3Q7ICZndDsg
-ICAgICB9IGVsc2UgaWYgKHN0cmNtcCgiZW5kX3NpZ25hdHVyZSIsIHN0X25hbWUpID09IDApIHsK
-Jmd0OyAmZ3Q7IEBAIC0yOTAsMTggKzI4MiwyNiBAQCBzdGF0aWMgdm9pZCBodGlmX21tX3dyaXRl
-KHZvaWQgKm9wYXF1ZSwgaHdhZGRyIGFkZHIsCiZndDsgJmd0OyAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICB1aW50NjRfdCB2YWx1ZSwgdW5zaWduZWQgc2l6ZSkKJmd0OyAmZ3Q7ICB7CiZndDsg
-Jmd0OyAgICAgIEhUSUZTdGF0ZSAqcyA9IG9wYXF1ZTsKJmd0OyAmZ3Q7IC0gICAgaWYgKGFkZHIg
-PT0gVE9IT1NUX09GRlNFVDEpIHsKJmd0OyAmZ3Q7IC0gICAgICAgIGlmIChzLSZndDt0b2hvc3Qg
-PT0gMHgwKSB7CiZndDsgJmd0OyAtICAgICAgICAgICAgcy0mZ3Q7YWxsb3dfdG9ob3N0ID0gMTsK
-Jmd0OyAmZ3Q7IC0gICAgICAgICAgICBzLSZndDt0b2hvc3QgPSB2YWx1ZSAmYW1wOyAweEZGRkZG
-RkZGOwomZ3Q7ICZndDsgKyAgICBpbnQgaHRpZl9jbWRfd3JpdGUgPSAwOwomZ3Q7ICZndDsgKyAg
-ICBpZiAoc2l6ZSA9PSA4ICZhbXA7JmFtcDsgYWRkciA9PSBUT0hPU1RfT0ZGU0VUMSkgewomZ3Q7
-ICZndDsgKyAgICAgICAgaHRpZl9jbWRfd3JpdGUgPSAxOwomZ3Q7ICZndDsgKyAgICAgICAgcy0m
-Z3Q7dG9ob3N0ID0gdmFsdWU7CiZndDsgJmd0OyArICAgICAgICBodGlmX2hhbmRsZV90b2hvc3Rf
-d3JpdGUocywgcy0mZ3Q7dG9ob3N0KTsKJmd0OyAmZ3Q7ICsgICAgfSBlbHNlIGlmIChzaXplID09
-IDQgJmFtcDsmYW1wOyBhZGRyID09IFRPSE9TVF9PRkZTRVQxKSB7CiZndDsgJmd0OyArICAgICAg
-ICBpZiAoKHZhbHVlKSA9PSAocy0mZ3Q7dG9ob3N0ICZhbXA7IDB4RkZGRikpIHsKJmd0OyAmZ3Q7
-ICsgICAgICAgICAgICBzLSZndDthbGxvd190b2hvc3QgPSBzLSZndDthbGxvd190b2hvc3QgKyAx
-OwomZ3Q7ICZndDsgICAgICAgICAgfSBlbHNlIHsKJmd0OyAmZ3Q7ICAgICAgICAgICAgICBzLSZn
-dDthbGxvd190b2hvc3QgPSAwOwomZ3Q7ICZndDsgICAgICAgICAgfQomZ3Q7ICZndDsgLSAgICB9
-IGVsc2UgaWYgKGFkZHIgPT0gVE9IT1NUX09GRlNFVDIpIHsKJmd0OyAmZ3Q7IC0gICAgICAgIGlm
-IChzLSZndDthbGxvd190b2hvc3QpIHsKJmd0OyAmZ3Q7IC0gICAgICAgICAgICBzLSZndDt0b2hv
-c3QgfD0gdmFsdWUgJmx0OyZsdDsgMzI7CiZndDsgJmd0OyAtICAgICAgICAgICAgaHRpZl9oYW5k
-bGVfdG9ob3N0X3dyaXRlKHMsIHMtJmd0O3RvaG9zdCk7CiZndDsgJmd0OyArICAgICAgICBzLSZn
-dDt0b2hvc3QgPSBkZXBvc2l0NjQocy0mZ3Q7dG9ob3N0LCAwLCAzMiwgdmFsdWUpOwomZ3Q7ICZn
-dDsgKyAgICB9IGVsc2UgaWYgKHNpemUgPT0gNCAmYW1wOyZhbXA7IGFkZHIgPT0gVE9IT1NUX09G
-RlNFVDIpIHsKJmd0OyAmZ3Q7ICsgICAgICAgIGlmICgodmFsdWUgJmFtcDsgMHhGRikgPT0gKHMt
-Jmd0O3RvaG9zdCAmYW1wOyAweEZGMDApKSB7CiZndDsgJmd0OyArICAgICAgICAgICAgcy0mZ3Q7
-YWxsb3dfdG9ob3N0ID0gcy0mZ3Q7YWxsb3dfdG9ob3N0ICsgMTsKJmd0OyAmZ3Q7ICsgICAgICAg
-IH0gZWxzZSB7CiZndDsgJmd0OyArICAgICAgICAgICAgcy0mZ3Q7YWxsb3dfdG9ob3N0ID0gMTsK
-Jmd0OyAmZ3Q7ICAgICAgICAgIH0KJmd0OyAmZ3Q7ICsgICAgICAgIGh0aWZfY21kX3dyaXRlID0g
-MTsKJmd0OyAmZ3Q7ICsgICAgICAgIHMtJmd0O3RvaG9zdCA9IGRlcG9zaXQ2NChzLSZndDt0b2hv
-c3QsIDMyLCAzMiwgdmFsdWUpOwomZ3Q7ICZndDsgICAgICB9IGVsc2UgaWYgKGFkZHIgPT0gRlJP
-TUhPU1RfT0ZGU0VUMSkgewomZ3Q7ICZndDsgICAgICAgICAgcy0mZ3Q7ZnJvbWhvc3RfaW5wcm9n
-cmVzcyA9IDE7CiZndDsgJmd0OyAgICAgICAgICBzLSZndDtmcm9taG9zdCA9IHZhbHVlICZhbXA7
-IDB4RkZGRkZGRkY7CiZndDsgJmd0OyBAQCAtMzEyLDYgKzMxMiw5IEBAIHN0YXRpYyB2b2lkIGh0
-aWZfbW1fd3JpdGUodm9pZCAqb3BhcXVlLCBod2FkZHIgYWRkciwKJmd0OyAmZ3Q7ICAgICAgICAg
-IHFlbXVfbG9nKCJJbnZhbGlkIGh0aWYgd3JpdGU6IGFkZHJlc3MgJTAxNiIgUFJJeDY0ICJcbiIs
-CiZndDsgJmd0OyAgICAgICAgICAgICAgKHVpbnQ2NF90KWFkZHIpOwomZ3Q7ICZndDsgICAgICB9
-CiZndDsgJmd0OyArICAgIGlmICgocy0mZ3Q7dG9ob3N0ID09IDEgJmFtcDsmYW1wOyBodGlmX2Nt
-ZF93cml0ZSkgfHwgcy0mZ3Q7YWxsb3dfdG9ob3N0ICZndDsgMikgewomZ3Q7ICZndDsgKyAgICAg
-ICAgaHRpZl9oYW5kbGVfdG9ob3N0X3dyaXRlKHMsIHMtJmd0O3RvaG9zdCk7CiZndDsgJmd0OyAr
-ICAgIH0KJmd0OyAmZ3Q7ICB9CiZndDsgJmd0OwomZ3Q7ICZndDsgIHN0YXRpYyBjb25zdCBNZW1v
-cnlSZWdpb25PcHMgaHRpZl9tbV9vcHMgPSB7CiZndDsgJmd0OyAtLQomZ3Q7ICZndDsgMi4zNC4x
-CiZndDsgJmd0OwomZ3Q7ICZndDsKPC95YW5taW5nemh1QGlzY2FzLmFjLmNuPjwvdHJkdGhnNDdA
-Z21haWwuY29tPg==
+
+
+On 10/14/24 6:04 AM, Frank Chang wrote:
+> Clément Léger <cleger@rivosinc.com> 於 2024年10月14日 週一 下午3:36寫道：
+>>
+>>
+>>
+>> On 11/10/2024 13:38, Daniel Henrique Barboza wrote:
+>>> Hi Tommy,
+>>>
+>>>
+>>> Do you plan to send a new version of this work soon? This series is a
+>>> prerequisite
+>>> of "target/riscv: Add support for Smdbltrp and Ssdbltrp extensions" and
+>>> we need
+>>> this series merged first. We have minor comments from Clément and
+>>
+>> Hi Henrique,
+>>
+>> If that's easier, I can still remove the dependency on Smrnmi and add
+>> support for that later.
+>>
+>> Clément
+> 
+> Hi Clément,
+> 
+> Sorry for keeping you waiting. I've reviewed the comments from you and Alistair.
+> The comments should be straightforward to fix.
+> I will fix them and send out the patchset later today.
+> Hope that it makes things easier.
+
+Thanks for taking care of this series Frank!
+
+
+Daniel
+
+> 
+> 
+> Regards,
+> Frank Chang
+> 
+>>
+>>> Alistair so
+>>> hopefully it shouldn't be too much work.
+>>>
+>>> The code freeze for 9.2 will happen in the first/second week of
+>>> November, so if you
+>>> could send a new version to be merged in the next PR that would be great.
+>>>
+>>>
+>>> Thanks,
+>>>
+>>> Daniel
+>>>
+>>>
+>>>
+>>> On 9/2/24 4:13 AM, Tommy Wu wrote:
+>>>> This patchset added support for Smrnmi Extension in RISC-V.
+>>>>
+>>>> There are four new CSRs and one new instruction added to allow NMI to be
+>>>> resumable in RISC-V, which are:
+>>>>
+>>>> =============================================================
+>>>>     * mnscratch (0x740)
+>>>>     * mnepc     (0x741)
+>>>>     * mncause   (0x742)
+>>>>     * mnstatus  (0x744)
+>>>> =============================================================
+>>>>     * mnret: To return from RNMI interrupt/exception handler.
+>>>> =============================================================
+>>>>
+>>>> RNMI also has higher priority than any other interrupts or exceptions
+>>>> and cannot be disabled by software.
+>>>>
+>>>> RNMI may be used to route to other devices such as Bus Error Unit or
+>>>> Watchdog Timer in the future.
+>>>>
+>>>> The interrupt/exception trap handler addresses of RNMI are
+>>>> implementation defined.
+>>>>
+>>>> If anyone wants to test the patches, we can use the customized
+>>>> OpenSBI[1],
+>>>> and the customized QEMU[2].
+>>>>
+>>>> We implemented a PoC RNMI trap handler in the customized OpenSBI.
+>>>> In the customized QEMU, we use the Smrnmi patches and the patch from
+>>>> Damien Hedde[3]. The patch from Damien Hedde can be used to inject
+>>>> the RNMI signal with the qmp command.
+>>>>
+>>>> [1] https://github.com/TommyWu-fdgkhdkgh/opensbi/tree/dev/twu/master
+>>>> [2] https://github.com/TommyWu-fdgkhdkgh/qemu/tree/dev/twu/master
+>>>> [3] https://lists.gnu.org/archive/html/qemu-devel/2019-06/msg06232.html
+>>>>
+>>>> Test commands :
+>>>> $ ./build/qemu-system-riscv64 -M virt -cpu rv64,smrnmi=true,
+>>>> rnmi-interrupt-vector={Offset of the RNMI handler in the customized
+>>>> OpenSBI.} -m 4G -smp 2 -serial mon:stdio -serial null -nographic
+>>>> -bios fw_jump.elf -kernel Image -initrd rootfs.cpio
+>>>> -qmp unix:/tmp/qmp-sock,server,wait=off
+>>>>
+>>>> Use qmp command to inject the RNMI interrupt.
+>>>> $ ./scripts/qmp/qmp-shell /tmp/qmp-sock
+>>>> (QEMU)  gpio-set path=/machine/soc0/harts[0] gpio=riscv.cpu.rnmi
+>>>> number=0 value=true
+>>>>
+>>>> (QEMU)  gpio-set path=/machine/soc0/harts[0] gpio=riscv.cpu.rnmi
+>>>> number=0 value=false
+>>>>
+>>>> Changelog:
+>>>>
+>>>> v6
+>>>>     * Delete the redundant code in `riscv_cpu_do_interrupt`.
+>>>>     ( Thank Alvin for the suggestion. )
+>>>>     * Split the shared code in `helper_mret` and `helper_mnret` into a
+>>>>       helper function `check_ret_from_m_mode`.
+>>>>     ( Thank Alistair for the suggestion. )
+>>>>
+>>>> v5
+>>>>     * Move the patch that adds the Smrnmi extension to the last patch.
+>>>>     ( Thank Alistair for the suggestion. )
+>>>>     * Implement an M-mode software PoC for this with implemented handlers.
+>>>>     ( Thank Andrew Jones for the suggestion. )
+>>>>     * Add a commit message to all patches of the series.
+>>>>     ( Thank Andrew Jones for the suggestion. )
+>>>>
+>>>> v4
+>>>>     * Fix some coding style issues.
+>>>>     ( Thank Daniel for the suggestions. )
+>>>>
+>>>> v3
+>>>>     * Update to the newest version of Smrnmi extension specification.
+>>>>
+>>>> v2
+>>>>     * split up the series into more commits for convenience of review.
+>>>>     * add missing rnmi_irqvec and rnmi_excpvec properties to riscv_harts.
+>>>>
+>>>> Tommy Wu (5):
+>>>>     target/riscv: Add `ext_smrnmi` in the RISCVCPUConfig.
+>>>>     target/riscv: Handle Smrnmi interrupt and exception.
+>>>>     target/riscv: Add Smrnmi CSRs.
+>>>>     target/riscv: Add Smrnmi mnret instruction.
+>>>>     target/riscv: Add Smrnmi cpu extension.
+>>>>
+>>>>    hw/riscv/riscv_hart.c                         | 18 ++++
+>>>>    include/hw/riscv/riscv_hart.h                 |  4 +
+>>>>    target/riscv/cpu.c                            | 18 ++++
+>>>>    target/riscv/cpu.h                            | 10 +++
+>>>>    target/riscv/cpu_bits.h                       | 23 ++++++
+>>>>    target/riscv/cpu_cfg.h                        |  1 +
+>>>>    target/riscv/cpu_helper.c                     | 80 ++++++++++++++++--
+>>>>    target/riscv/csr.c                            | 82 +++++++++++++++++++
+>>>>    target/riscv/helper.h                         |  1 +
+>>>>    target/riscv/insn32.decode                    |  3 +
+>>>>    .../riscv/insn_trans/trans_privileged.c.inc   | 12 +++
+>>>>    target/riscv/op_helper.c                      | 49 +++++++++--
+>>>>    12 files changed, 291 insertions(+), 10 deletions(-)
+>>>>
+>>
+>>
 
