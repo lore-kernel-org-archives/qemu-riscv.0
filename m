@@ -4,83 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 90BA2CFC501
-	for <qemu-riscv@archiver.kernel.org>; Mon, 14 Oct 2024 07:35:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 085EDCFC501
+	for <qemu-riscv@archiver.kernel.org>; Mon, 14 Oct 2024 07:43:59 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1t0Fc6-0001Ai-OB; Mon, 14 Oct 2024 03:35:34 -0400
+	id 1t0Fji-0002V5-00; Mon, 14 Oct 2024 03:43:26 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <cleger@rivosinc.com>)
- id 1t0Fbw-00019h-94
- for qemu-riscv@nongnu.org; Mon, 14 Oct 2024 03:35:24 -0400
-Received: from mail-wm1-x334.google.com ([2a00:1450:4864:20::334])
+ id 1t0Fjd-0002UB-Ot
+ for qemu-riscv@nongnu.org; Mon, 14 Oct 2024 03:43:22 -0400
+Received: from mail-lf1-x131.google.com ([2a00:1450:4864:20::131])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <cleger@rivosinc.com>)
- id 1t0Fbt-0007vV-Ec
- for qemu-riscv@nongnu.org; Mon, 14 Oct 2024 03:35:23 -0400
-Received: by mail-wm1-x334.google.com with SMTP id
- 5b1f17b1804b1-4311c575172so28312255e9.2
- for <qemu-riscv@nongnu.org>; Mon, 14 Oct 2024 00:35:19 -0700 (PDT)
+ id 1t0Fjb-0000Q6-7k
+ for qemu-riscv@nongnu.org; Mon, 14 Oct 2024 03:43:21 -0400
+Received: by mail-lf1-x131.google.com with SMTP id
+ 2adb3069b0e04-539f0f9ee49so921628e87.1
+ for <qemu-riscv@nongnu.org>; Mon, 14 Oct 2024 00:43:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1728891318; x=1729496118;
+ d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1728891797; x=1729496597;
  darn=nongnu.org; 
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=FMZNn7K2BoCZyaqKh3tfGkloTDN0hQwbHWX0WFQoxuw=;
- b=ibAKG81TeHGDZrM9nnZpR2BMRzROJPCtySNuI/5o078Ud3EY+UVuYETtwhKJHpvzFz
- +8bFpjv8XEBq5L3SnP9J8Mk+LxIst/+WVuk0ojFJfftT3Er5jlZc+T4cdkfTX0ATz2Rx
- W7cSjDeOJRWUCh/BzJxM0DA9Ke81rNNpUW2PSBm869KNPdQmnbJtnkLYaq89Y3uZen9I
- z1wfpr9yAD5Wa/PuEfSVWeMbS37Ewtueo623+hWgQA/2YKc9Jya06S5tonOTpzEi+smA
- WJZgc+9oNPbFo7MQx/1GvqIGGMiitCJF9IjvaAE+JsTuaD60mUJLIW4IGtBSjqZYpJrj
- 3zYQ==
+ bh=s3i3Xk7l0Jo7YGniRT7vjQA26Gcljvw+BcTLb1raQMo=;
+ b=ZW7OXCyykJG9+LfL9WNXtR13+l8Zobc/HGw4zUdZrBSDdD5LugkEEHty+rbVBY/4gD
+ YIa56LNz4hwOonQwqXlZHkP6BEwSNKAQNKy6f5VD2HkRrkcCvIRUFObjt0VPFMjAV1nI
+ 7aG0O3vZ5x7QjnoON1DFFR2C5zM8Ub2B4pCAtuTBrENhvdjIKwM/UX31g4ucX702Btpp
+ 2nBwhqNloCtMe3C9nhL8wkLOVHvY6wmA9iZOjA9Lwccl9r4VmTQMgROSYckRNR6veQNS
+ fWRO+H4u/uew+PY1mPk35GrkLutCPTnXyIncX2Z84tEpWI02tvnKN8dzpcykae5FEIqC
+ 2tqg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728891318; x=1729496118;
+ d=1e100.net; s=20230601; t=1728891797; x=1729496597;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=FMZNn7K2BoCZyaqKh3tfGkloTDN0hQwbHWX0WFQoxuw=;
- b=FHsBChT/ULJgX6dbku94On+UlgD0BPQRss0WJjBkWWh9+gPxGgsna2r3N7DEmrPoiX
- WKOAWxZAKG5WYXMHG6NHdR9I5MlvaT+DJsneBwAbeiyXaykl0I+8F8Sou0t5uW1TKfhA
- 6N5zdb8zqNcMpie4y7p/07+XQJ0kXkLoucoTazXNeSvQ3GrXBZgzVM90fmZb297Hsrue
- 2Cqri6CDELNdZheJILPS5MDdKFj3e2ULM9cKZ+2BkJselZtO3asaqlrL4MRajzTbwtHH
- PMPx/W9R4kWctVhual5wMpahGw9V2LPHnAs4yrs+a6hi664eSgz4+aMFVubRDucm9L3r
- 8VrQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUlvoYi7VaSO1JfBDaJ3Q/KPJ8YhlkelskM3gHgxLHVZ0IrwuUTuIY/GUmwulF4wUlMglLaDJiRLupP@nongnu.org
-X-Gm-Message-State: AOJu0YxS8p1D0iuwmMTSko2jJYKS6ZAWBOr/6tvMWfwylaOWsZkBC00W
- CYuq8f/zlR+xu0E/Ep/U/aLJ1CdaxyU2p/TW9nyldhurTLyPzT0Ayagp12IHJHI=
-X-Google-Smtp-Source: AGHT+IFp0k1bPM+VMEN0GNMIqWNwHKbLmSJo/3d/55t/fU9gWm4f0GNTqJR8NRsLR8lPxS+CkpNPJw==
-X-Received: by 2002:adf:e9c1:0:b0:37d:4f1b:35a with SMTP id
- ffacd0b85a97d-37d551988c2mr7568129f8f.3.1728891318074; 
- Mon, 14 Oct 2024 00:35:18 -0700 (PDT)
+ bh=s3i3Xk7l0Jo7YGniRT7vjQA26Gcljvw+BcTLb1raQMo=;
+ b=WGAoCRVSxATFIC9OdiXkQFBmm14sbpsv3nJGDQxuQc1665oNr5uUvkvjJj9M7Z3XJR
+ SO2v17wuEn0gVDEBgtfsaoP9jL8pzRhJXZsuoe4Y1e3FALQtkFKf614aXIwcyWlGw+bo
+ h2w8/VDML+UJMIoFmduOBEb90WpN5Pae0L60hXaReKPP/PRhttNnKZ0E3Qod/QngdP9e
+ HDBOdKeG4Y52t/csCOBZHqKrPH1Y04wRZ/N/Z6/iz2ox+rWPHhjT3VNiJd/FzRhhj0ct
+ spzNNbPW9GY155XKTGBRCiYVmDiIhfDH0gywznYB3zwlPiXM3ZpAoCxOuteBJDj7ds2j
+ deiQ==
+X-Gm-Message-State: AOJu0YylSzyB6RmpmWjXfNevcnLCgWJvwU2QkCMSiSlaqDkwirvzGb+A
+ DSOMvaHc/6MtmI8NBN6jiJGq8JKp26nQUeePVBDLsPcWl02a5nPCVvC5NEb+acQ=
+X-Google-Smtp-Source: AGHT+IGIQpBBQqH5AcDJePgrQteGEzkcdXHW4692kU7IyG+QQd2TgXTW3d3wBQ5ZVKyj1SHVe3FacQ==
+X-Received: by 2002:a05:6512:3c95:b0:533:44e7:1b2a with SMTP id
+ 2adb3069b0e04-539da54792amr5038615e87.40.1728891796957; 
+ Mon, 14 Oct 2024 00:43:16 -0700 (PDT)
 Received: from ?IPV6:2a01:e0a:e17:9700:16d2:7456:6634:9626?
  ([2a01:e0a:e17:9700:16d2:7456:6634:9626])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-37d4b6a87desm10659848f8f.5.2024.10.14.00.35.16
+ 5b1f17b1804b1-431183568dfsm112737435e9.36.2024.10.14.00.43.15
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 14 Oct 2024 00:35:17 -0700 (PDT)
-Message-ID: <c8460f0c-d82f-414b-b55f-d9f227244a9f@rivosinc.com>
-Date: Mon, 14 Oct 2024 09:35:16 +0200
+ Mon, 14 Oct 2024 00:43:16 -0700 (PDT)
+Message-ID: <109e3df4-416a-48a3-ae0b-b2a92f11c893@rivosinc.com>
+Date: Mon, 14 Oct 2024 09:43:14 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v6 0/5] target/riscv: Add Smrnmi support.
-To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Tommy Wu <tommy.wu@sifive.com>, qemu-devel@nongnu.org, qemu-riscv@nongnu.org
-Cc: frank.chang@sifive.com, palmer@dabbelt.com, alistair.francis@wdc.com,
- alistair23@gmail.com, bin.meng@windriver.com, liweiwei@iscas.ac.cn,
- ajones@ventanamicro.com
-References: <20240902071358.1061693-1-tommy.wu@sifive.com>
- <6e7a184f-3b47-480d-bd56-fef2e89beda6@ventanamicro.com>
+Subject: Re: [PATCH v2 3/8] target/riscv: Implement Ssdbltrp exception handling
+To: Alistair Francis <alistair23@gmail.com>
+Cc: qemu-riscv@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Bin Meng <bin.meng@windriver.com>, Weiwei Li <liwei1518@gmail.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, Ved Shanbhogue
+ <ved@rivosinc.com>, Atish Patra <atishp@rivosinc.com>, qemu-devel@nongnu.org
+References: <20240925115808.77874-1-cleger@rivosinc.com>
+ <20240925115808.77874-4-cleger@rivosinc.com>
+ <CAKmqyKNYJjudgxA6z4dF5AP31NFn3ZOePMadjiVumja29oti5w@mail.gmail.com>
 Content-Language: en-US
 From: =?UTF-8?B?Q2zDqW1lbnQgTMOpZ2Vy?= <cleger@rivosinc.com>
-In-Reply-To: <6e7a184f-3b47-480d-bd56-fef2e89beda6@ventanamicro.com>
+In-Reply-To: <CAKmqyKNYJjudgxA6z4dF5AP31NFn3ZOePMadjiVumja29oti5w@mail.gmail.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::334;
- envelope-from=cleger@rivosinc.com; helo=mail-wm1-x334.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::131;
+ envelope-from=cleger@rivosinc.com; helo=mail-lf1-x131.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -104,137 +105,113 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 
 
-On 11/10/2024 13:38, Daniel Henrique Barboza wrote:
-> Hi Tommy,
+On 11/10/2024 05:22, Alistair Francis wrote:
+> On Wed, Sep 25, 2024 at 9:59 PM Clément Léger <cleger@rivosinc.com> wrote:
+>>
+>> When the Ssdbltrp ISA extension is enabled, if a trap happens in S-mode
+>> while SSTATUS.SDT isn't cleared, generate a double trap exception to
+>> M-mode.
+>>
+>> Signed-off-by: Clément Léger <cleger@rivosinc.com>
+>> ---
+>>  target/riscv/cpu.c        |  2 +-
+>>  target/riscv/cpu_bits.h   |  1 +
+>>  target/riscv/cpu_helper.c | 47 ++++++++++++++++++++++++++++++++++-----
+>>  3 files changed, 43 insertions(+), 7 deletions(-)
+>>
+>> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+>> index cf06cd741a..65347ccd5a 100644
+>> --- a/target/riscv/cpu.c
+>> +++ b/target/riscv/cpu.c
+>> @@ -284,7 +284,7 @@ static const char * const riscv_excp_names[] = {
+>>      "load_page_fault",
+>>      "reserved",
+>>      "store_page_fault",
+>> -    "reserved",
+>> +    "double_trap",
+>>      "reserved",
+>>      "reserved",
+>>      "reserved",
+>> diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
+>> index 3a5588d4df..5557a86348 100644
+>> --- a/target/riscv/cpu_bits.h
+>> +++ b/target/riscv/cpu_bits.h
+>> @@ -699,6 +699,7 @@ typedef enum RISCVException {
+>>      RISCV_EXCP_INST_PAGE_FAULT = 0xc, /* since: priv-1.10.0 */
+>>      RISCV_EXCP_LOAD_PAGE_FAULT = 0xd, /* since: priv-1.10.0 */
+>>      RISCV_EXCP_STORE_PAGE_FAULT = 0xf, /* since: priv-1.10.0 */
+>> +    RISCV_EXCP_DOUBLE_TRAP = 0x10,
+>>      RISCV_EXCP_SW_CHECK = 0x12, /* since: priv-1.13.0 */
+>>      RISCV_EXCP_HW_ERR = 0x13, /* since: priv-1.13.0 */
+>>      RISCV_EXCP_INST_GUEST_PAGE_FAULT = 0x14,
+>> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+>> index 395d8235ce..69da3c3384 100644
+>> --- a/target/riscv/cpu_helper.c
+>> +++ b/target/riscv/cpu_helper.c
+>> @@ -575,7 +575,9 @@ void riscv_cpu_swap_hypervisor_regs(CPURISCVState *env)
+>>          mstatus_mask |= MSTATUS_FS;
+>>      }
+>>      bool current_virt = env->virt_enabled;
+>> -
+>> +    if (riscv_env_smode_dbltrp_enabled(env, current_virt)) {
+>> +        mstatus_mask |= MSTATUS_SDT;
+>> +    }
+>>      g_assert(riscv_has_ext(env, RVH));
+>>
+>>      if (current_virt) {
+>> @@ -1707,6 +1709,7 @@ void riscv_cpu_do_interrupt(CPUState *cs)
+>>      CPURISCVState *env = &cpu->env;
+>>      bool virt = env->virt_enabled;
+>>      bool write_gva = false;
+>> +    bool vsmode_exc;
+>>      uint64_t s;
+>>      int mode;
+>>
+>> @@ -1721,6 +1724,8 @@ void riscv_cpu_do_interrupt(CPUState *cs)
+>>          !(env->mip & (1 << cause));
+>>      bool vs_injected = env->hvip & (1 << cause) & env->hvien &&
+>>          !(env->mip & (1 << cause));
+>> +    bool smode_double_trap = false;
+>> +    uint64_t hdeleg = async ? env->hideleg : env->hedeleg;
+>>      target_ulong tval = 0;
+>>      target_ulong tinst = 0;
+>>      target_ulong htval = 0;
+>> @@ -1837,13 +1842,35 @@ void riscv_cpu_do_interrupt(CPUState *cs)
+>>                  !async &&
+>>                  mode == PRV_M;
+>>
+>> +    vsmode_exc = env->virt_enabled && (((hdeleg >> cause) & 1) || vs_injected);
+>> +    /*
+>> +     * Check double trap condition only if already in S-mode and targeting
+>> +     * S-mode
+>> +     */
+>> +    if (cpu->cfg.ext_ssdbltrp && env->priv == PRV_S && mode == PRV_S) {
+>> +        bool dte = (env->menvcfg & MENVCFG_DTE) != 0;
+>> +        bool sdt = (env->mstatus & MSTATUS_SDT) != 0;
+>> +        /* In VS or HS */
+>> +        if (riscv_has_ext(env, RVH)) {
+>> +            if (vsmode_exc) {
+>> +                /* VS -> VS */
+>> +                /* Stay in VS mode, use henvcfg instead of menvcfg*/
+>> +                dte = (env->henvcfg & HENVCFG_DTE) != 0;
+>> +            } else if (env->virt_enabled) {
+>> +                /* VS -> HS */
+>> +                dte = false;
 > 
-> 
-> Do you plan to send a new version of this work soon? This series is a
-> prerequisite
-> of "target/riscv: Add support for Smdbltrp and Ssdbltrp extensions" and
-> we need
-> this series merged first. We have minor comments from Clément and
+> I don't follow why this is false
 
-Hi Henrique,
+Hi Alistair,
 
-If that's easier, I can still remove the dependency on Smrnmi and add
-support for that later.
+It's indeed probably lacking some comments here. The rationale is that
+if you are trapping from VS to HS, then at some point, you returned to
+VS using a sret/mret and thus cleared DTE, so rather than checking the
+value of mstatus_hs, just assume it is false.
+
+Thanks,
 
 Clément
 
-> Alistair so
-> hopefully it shouldn't be too much work.
 > 
-> The code freeze for 9.2 will happen in the first/second week of
-> November, so if you
-> could send a new version to be merged in the next PR that would be great.
-> 
-> 
-> Thanks,
-> 
-> Daniel
-> 
-> 
-> 
-> On 9/2/24 4:13 AM, Tommy Wu wrote:
->> This patchset added support for Smrnmi Extension in RISC-V.
->>
->> There are four new CSRs and one new instruction added to allow NMI to be
->> resumable in RISC-V, which are:
->>
->> =============================================================
->>    * mnscratch (0x740)
->>    * mnepc     (0x741)
->>    * mncause   (0x742)
->>    * mnstatus  (0x744)
->> =============================================================
->>    * mnret: To return from RNMI interrupt/exception handler.
->> =============================================================
->>
->> RNMI also has higher priority than any other interrupts or exceptions
->> and cannot be disabled by software.
->>
->> RNMI may be used to route to other devices such as Bus Error Unit or
->> Watchdog Timer in the future.
->>
->> The interrupt/exception trap handler addresses of RNMI are
->> implementation defined.
->>
->> If anyone wants to test the patches, we can use the customized
->> OpenSBI[1],
->> and the customized QEMU[2].
->>
->> We implemented a PoC RNMI trap handler in the customized OpenSBI.
->> In the customized QEMU, we use the Smrnmi patches and the patch from
->> Damien Hedde[3]. The patch from Damien Hedde can be used to inject
->> the RNMI signal with the qmp command.
->>
->> [1] https://github.com/TommyWu-fdgkhdkgh/opensbi/tree/dev/twu/master
->> [2] https://github.com/TommyWu-fdgkhdkgh/qemu/tree/dev/twu/master
->> [3] https://lists.gnu.org/archive/html/qemu-devel/2019-06/msg06232.html
->>
->> Test commands :
->> $ ./build/qemu-system-riscv64 -M virt -cpu rv64,smrnmi=true,
->> rnmi-interrupt-vector={Offset of the RNMI handler in the customized
->> OpenSBI.} -m 4G -smp 2 -serial mon:stdio -serial null -nographic
->> -bios fw_jump.elf -kernel Image -initrd rootfs.cpio
->> -qmp unix:/tmp/qmp-sock,server,wait=off
->>
->> Use qmp command to inject the RNMI interrupt.
->> $ ./scripts/qmp/qmp-shell /tmp/qmp-sock
->> (QEMU)  gpio-set path=/machine/soc0/harts[0] gpio=riscv.cpu.rnmi
->> number=0 value=true
->>
->> (QEMU)  gpio-set path=/machine/soc0/harts[0] gpio=riscv.cpu.rnmi
->> number=0 value=false
->>
->> Changelog:
->>
->> v6
->>    * Delete the redundant code in `riscv_cpu_do_interrupt`.
->>    ( Thank Alvin for the suggestion. )
->>    * Split the shared code in `helper_mret` and `helper_mnret` into a
->>      helper function `check_ret_from_m_mode`.
->>    ( Thank Alistair for the suggestion. )
->>
->> v5
->>    * Move the patch that adds the Smrnmi extension to the last patch.
->>    ( Thank Alistair for the suggestion. )
->>    * Implement an M-mode software PoC for this with implemented handlers.
->>    ( Thank Andrew Jones for the suggestion. )
->>    * Add a commit message to all patches of the series.
->>    ( Thank Andrew Jones for the suggestion. )
->>
->> v4
->>    * Fix some coding style issues.
->>    ( Thank Daniel for the suggestions. )
->>
->> v3
->>    * Update to the newest version of Smrnmi extension specification.
->>
->> v2
->>    * split up the series into more commits for convenience of review.
->>    * add missing rnmi_irqvec and rnmi_excpvec properties to riscv_harts.
->>
->> Tommy Wu (5):
->>    target/riscv: Add `ext_smrnmi` in the RISCVCPUConfig.
->>    target/riscv: Handle Smrnmi interrupt and exception.
->>    target/riscv: Add Smrnmi CSRs.
->>    target/riscv: Add Smrnmi mnret instruction.
->>    target/riscv: Add Smrnmi cpu extension.
->>
->>   hw/riscv/riscv_hart.c                         | 18 ++++
->>   include/hw/riscv/riscv_hart.h                 |  4 +
->>   target/riscv/cpu.c                            | 18 ++++
->>   target/riscv/cpu.h                            | 10 +++
->>   target/riscv/cpu_bits.h                       | 23 ++++++
->>   target/riscv/cpu_cfg.h                        |  1 +
->>   target/riscv/cpu_helper.c                     | 80 ++++++++++++++++--
->>   target/riscv/csr.c                            | 82 +++++++++++++++++++
->>   target/riscv/helper.h                         |  1 +
->>   target/riscv/insn32.decode                    |  3 +
->>   .../riscv/insn_trans/trans_privileged.c.inc   | 12 +++
->>   target/riscv/op_helper.c                      | 49 +++++++++--
->>   12 files changed, 291 insertions(+), 10 deletions(-)
->>
+> Alistair
 
 
