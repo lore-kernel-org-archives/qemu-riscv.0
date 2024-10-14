@@ -4,61 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BC7FAD18153
-	for <qemu-riscv@archiver.kernel.org>; Mon, 14 Oct 2024 22:02:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3F68AD18151
+	for <qemu-riscv@archiver.kernel.org>; Mon, 14 Oct 2024 22:03:10 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1t0T8j-0003jd-RJ; Mon, 14 Oct 2024 18:02:09 -0400
+	id 1t0T8j-0003j9-44; Mon, 14 Oct 2024 18:02:09 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <paolo.savini@embecosm.com>)
- id 1t0T8g-0003iR-LH
- for qemu-riscv@nongnu.org; Mon, 14 Oct 2024 18:02:07 -0400
-Received: from mail-wr1-x429.google.com ([2a00:1450:4864:20::429])
+ id 1t0T8i-0003iT-55
+ for qemu-riscv@nongnu.org; Mon, 14 Oct 2024 18:02:08 -0400
+Received: from mail-wm1-x329.google.com ([2a00:1450:4864:20::329])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <paolo.savini@embecosm.com>)
- id 1t0T8c-0006Tx-79
+ id 1t0T8d-0006Uf-OM
  for qemu-riscv@nongnu.org; Mon, 14 Oct 2024 18:02:06 -0400
-Received: by mail-wr1-x429.google.com with SMTP id
- ffacd0b85a97d-37d4c1b1455so3522525f8f.3
- for <qemu-riscv@nongnu.org>; Mon, 14 Oct 2024 15:01:57 -0700 (PDT)
+Received: by mail-wm1-x329.google.com with SMTP id
+ 5b1f17b1804b1-430ee5c9570so55697345e9.3
+ for <qemu-riscv@nongnu.org>; Mon, 14 Oct 2024 15:02:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=embecosm.com; s=google; t=1728943317; x=1729548117; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=KX+TeoqTj4F6vMuRUJ01fObu2ASRAunxY4faVD0HXGE=;
- b=FWhuySjf1KyrXiHnmKHiSgKm9pil1IACunbmP7BrsRQU79Fl1rmeWbCDiu3T57mXZ9
- R9mbjyIoSTKWl3m4Xfqdn803jhpeCHGHbAOdSt5loYm5jv1sk/rXjdfMmtS7vawV+nxm
- XlG6dhc33ZpDTOkp8o8EH9dmRTAzK7qpQ/6x4imuF3eviWBzBnam8ncFdPHofW7+NEi/
- OHLfgeDLHZLcNTCLxuwN+rzJdqo5icF7N/gQdODzNDtDfMRdr1ENI1ojqN74VFg5GB9R
- LUwMCEaiT0+IuXE+11v5MSYwHkdknV/cMjwZQXpVmUMtjWkruNI+l4Edk7iARETHRvwi
- BWgA==
+ d=embecosm.com; s=google; t=1728943321; x=1729548121; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=mser6RZhK+UJgovuFS53xmD+fZjgdUZFZOhfivY7xVc=;
+ b=LX/+24ix0D4W3oocD5fG2olF7XSbMboNQ5yVXPjjMOPsYIEoy1J8AMVYoqwPhlldrA
+ /xwSBQ8BBZ6I+Kirq5s1vdTcUZqrxLm0pMGaHUL7o5hqAyDm5Y/kQx0kiHCu4T+FK+ON
+ xAftkilkF77mu0oK6Sb29jC+R4dpJOM2LpL5xwXiZZx5Smuu9uXvWuvkiCotaBKgbJS+
+ u25YpXQOEQp7gEboerEZzQrxmhPHFCNwXf2En40J036jIjFbD4C5Atl51Q/k0GDZnWs4
+ zFF6sccgeblkyMCK0Ec5X9DFf8VCguMjm4o1vYqMd6cJW+19jyR0MstofX4HmOUIHDL+
+ F1JA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1728943317; x=1729548117;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=KX+TeoqTj4F6vMuRUJ01fObu2ASRAunxY4faVD0HXGE=;
- b=mi/XO4adeWlwbeStMmKuNAV1/mHcyj0/K2+fKnU5S3+tcfAbDpUZtePum0lLDwUxTS
- 7tzrYIcD+SxzbggFkF5jYkDiyi/kynmkmOs8qnyOjguYe+Ors6MInLDnVzI05cDU6MXP
- bkyTbi5Y6wULs329+jQNw40MolmLOHD7xmG280TxqeP/5jySy2bvIGtySC1sideT8MJA
- X596jJrJFpliby0ojrlNxj3xO3GN2xdBksaAmP0qtKaMry49Gk42Hx+r7raiRjiKI8CM
- zj9HFQafgYEHZbO0aqwAfvE+1OER7GaWv/faiuXoDMJZRytWk5msWkKbWS8q/w52HKqx
- NCTg==
+ d=1e100.net; s=20230601; t=1728943321; x=1729548121;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=mser6RZhK+UJgovuFS53xmD+fZjgdUZFZOhfivY7xVc=;
+ b=Cr3/1VhxJP0EhQyuE+RJl3sVrhTOy+U8a+dWP4ksEX817vlewQq1eGr084r3DWhO+m
+ UjS0FmJc2r9p2XNNkuRkI7+n/Vz6UNuD49PPWEeAflYSse2U7erCfqYz/RSgWQ/r0tbh
+ AgbPFTQtjZq6l5kh+UG5nNGdrRFy8dsPDIZZ/ElS39qXcvNwpGh4edqGg35ZLotNJmeo
+ CbUeuycd/oRn+B+DknP+U4D6DHUdrh0Oitw+wUIL7Sx/bwuOi7D6NxFcOhT3f6wgsoZL
+ B3cmF+XOW1rwUczsx+yJk8udG7VwiYyZO5UoqawQIcZcIPFo4PpVJy1NR0dxb+AzkMn1
+ +y3w==
 X-Forwarded-Encrypted: i=1;
- AJvYcCW9RdTGdATvB9CDfuYH/q8k2lojeRVVNIERUD8i0SZ7bE5Ch75U4Tl4GM1gIS75Adbth5Y6nIOPebnK@nongnu.org
-X-Gm-Message-State: AOJu0Yzvcxv2PZY1iwxDyYdyaV15qs4lmE25aiy0JjBN1WZmMBj9l2Mw
- ga0hIKFXbqkjf7HzjYuALAP3mZXkKrVzBPP14nMbeICUqHaJBDiUlOYjRcTE/E8=
-X-Google-Smtp-Source: AGHT+IHHZV2QbkNq/QkxO3XXo5PgdlgpYtNOTqcP7Ua7C5fuji3kloWUhah7lBlNFYA2WKwy2JTU3Q==
-X-Received: by 2002:a5d:530a:0:b0:37d:377d:c7b0 with SMTP id
- ffacd0b85a97d-37d5519d618mr9325291f8f.18.1728943316554; 
- Mon, 14 Oct 2024 15:01:56 -0700 (PDT)
+ AJvYcCVoJ+GR9buPpqdKtgL8FVvxU5w41hInhXdBkNXFExBGOLLlmznICZVyDRHYTs/A1HWT7F+pb8SuHElY@nongnu.org
+X-Gm-Message-State: AOJu0YyBCbBA3OoLD1sdpvOvVBKSZxpMV5HYDDGOH6VajGcqst6lImvq
+ +m6TSdsWcy25wkKAekANqZ0h8h1WAmTrTXKHKOF1QUn6nKRemhOeucb0dwVtees=
+X-Google-Smtp-Source: AGHT+IF5GaZsCA3nlIKyhWDHMvHB7PEWXyCbgCGS+DjwxoXCR1wCmaZZeIia4R7MH3F4p6dcIDUgiQ==
+X-Received: by 2002:a05:600c:1d0b:b0:42b:ac3d:3abc with SMTP id
+ 5b1f17b1804b1-43125607986mr121583225e9.24.1728943321196; 
+ Mon, 14 Oct 2024 15:02:01 -0700 (PDT)
 Received: from paolo-laptop-amd.. ([2a0e:cb01:d3:f100:8971:afed:16dc:a06f])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-37d7fa7a09dsm22769f8f.23.2024.10.14.15.01.55
+ ffacd0b85a97d-37d7fa7a09dsm22769f8f.23.2024.10.14.15.02.00
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 14 Oct 2024 15:01:55 -0700 (PDT)
+ Mon, 14 Oct 2024 15:02:00 -0700 (PDT)
 From: Paolo Savini <paolo.savini@embecosm.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
@@ -71,22 +72,24 @@ Cc: Paolo Savini <paolo.savini@embecosm.com>,
  Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
  Helene Chelin <helene.chelin@embecosm.com>, Nathan Egge <negge@google.com>,
  Max Chou <max.chou@sifive.com>
-Subject: [RFC v3 0/2] target/riscv: add endianness checks and atomicity
- guarantees.
-Date: Mon, 14 Oct 2024 23:01:51 +0100
-Message-ID: <20241014220153.196183-1-paolo.savini@embecosm.com>
+Subject: [RFC v3 2/2] target/riscv: rvv: improve performance of RISC-V vector
+ loads and stores on large amounts of data.
+Date: Mon, 14 Oct 2024 23:01:53 +0100
+Message-ID: <20241014220153.196183-3-paolo.savini@embecosm.com>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20241014220153.196183-1-paolo.savini@embecosm.com>
+References: <20241014220153.196183-1-paolo.savini@embecosm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::429;
- envelope-from=paolo.savini@embecosm.com; helo=mail-wr1-x429.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::329;
+ envelope-from=paolo.savini@embecosm.com; helo=mail-wm1-x329.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -102,42 +105,46 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-This version 3 of the patch adds endianness safety to both the optimizations
-brought by the patch set.
-It also adds some conditions that allow the __builtin_memcpy to be executed
-on chunks of 16 bytes with guarantee of atomicity.
+This patch optimizes the emulation of unit-stride load/store RVV instructions
+when the data being loaded/stored per iteration amounts to 64 bytes or more.
+The optimization consists of calling __builtin_memcpy on chunks of data of 128
+bytes between the memory address of the simulated vector register and the
+destination memory address and vice versa.
+This is done only if we have direct access to the RAM of the host machine,
+if the host is little endiand and if it supports atomic 128 bit memory
+operations.
 
-Changes from V2:
-- patch 1:
-  - add condition for the host not to be big endian.
-- patch 2:
-  - add condition for the host not to be big endian.
-  - add condition for the host to support 16-byte atomic memory operations.
-  - limit the large loads and stores to 16 byte chunks in order to guarantee
-    atomicity on a larger range of processors.
+Signed-off-by: Paolo Savini <paolo.savini@embecosm.com>
+---
+ target/riscv/vector_helper.c | 14 +++++++++++++-
+ 1 file changed, 13 insertions(+), 1 deletion(-)
 
-Cc: Richard Handerson <richard.henderson@linaro.org>
-Cc: Palmer Dabbelt <palmer@dabbelt.com>
-Cc: Alistair Francis <alistair.francis@wdc.com>
-Cc: Bin Meng <bmeng.cn@gmail.com>
-Cc: Weiwei Li <liwei1518@gmail.com>
-Cc: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Cc: Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
-Cc: Helene Chelin <helene.chelin@embecosm.com>
-Cc: Nathan Egge <negge@google.com>
-Cc: Max Chou <max.chou@sifive.com>
-
-Helene CHELIN (1):
-  target/riscv: rvv: reduce the overhead for simple RISC-V vector
-    unit-stride loads and stores
-
-Paolo Savini (1):
-  target/riscv: rvv: improve performance of RISC-V vector loads and
-    stores on large amounts of data.
-
- target/riscv/vector_helper.c | 61 +++++++++++++++++++++++++++++++++++-
- 1 file changed, 60 insertions(+), 1 deletion(-)
-
+diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
+index 75c24653f0..b3d0be8e39 100644
+--- a/target/riscv/vector_helper.c
++++ b/target/riscv/vector_helper.c
+@@ -488,7 +488,19 @@ vext_group_ldst_host(CPURISCVState *env, void *vd, uint32_t byte_end,
+     }
+ 
+     fn = fns[is_load][group_size];
+-    fn(vd, byte_offset, host + byte_offset);
++
++    /* x86 and AMD processors provide strong guarantees of atomicity for
++     * 16-byte memory operations if the memory operands are 16-byte aligned */
++    if (!HOST_BIG_ENDIAN && (byte_offset + 16 < byte_end) && ((byte_offset % 16) == 0) &&
++        ((cpuinfo & (CPUINFO_ATOMIC_VMOVDQA | CPUINFO_ATOMIC_VMOVDQU)) != 0)) {
++      group_size = MO_128;
++      if (is_load)
++        __builtin_memcpy((uint8_t *)(vd + byte_offset), (uint8_t *)(host + byte_offset), 16);
++      else
++        __builtin_memcpy((uint8_t *)(host + byte_offset), (uint8_t *)(vd + byte_offset), 16);
++    } else {
++      fn(vd, byte_offset, host + byte_offset);
++    }
+ 
+     return 1 << group_size;
+ }
 -- 
 2.34.1
+
 
