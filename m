@@ -4,60 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 08BAAD1AD3A
-	for <qemu-riscv@archiver.kernel.org>; Wed, 16 Oct 2024 09:40:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 399C0D1AD43
+	for <qemu-riscv@archiver.kernel.org>; Wed, 16 Oct 2024 10:33:07 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1t10WJ-0008ID-Cx; Wed, 16 Oct 2024 05:40:43 -0400
+	id 1t11Kd-0000lO-G6; Wed, 16 Oct 2024 06:32:43 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
- id 1t10WE-0008GW-Uq; Wed, 16 Oct 2024 05:40:39 -0400
-Received: from out30-100.freemail.mail.aliyun.com ([115.124.30.100])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
- id 1t10WB-0003qF-Gy; Wed, 16 Oct 2024 05:40:38 -0400
+ (Exim 4.90_1) (envelope-from <trdthg47@gmail.com>)
+ id 1t11Kb-0000kt-ES; Wed, 16 Oct 2024 06:32:41 -0400
+Received: from mail-yb1-xb34.google.com ([2607:f8b0:4864:20::b34])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <trdthg47@gmail.com>)
+ id 1t11KZ-0004tT-G4; Wed, 16 Oct 2024 06:32:41 -0400
+Received: by mail-yb1-xb34.google.com with SMTP id
+ 3f1490d57ef6-e290200a560so5666520276.1; 
+ Wed, 16 Oct 2024 03:32:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linux.alibaba.com; s=default;
- t=1729071622; h=Message-ID:Date:MIME-Version:Subject:To:From:Content-Type;
- bh=L/9BepXgg8FK+oaCHRxAAyovIr3rd5a4/hNairMCdZI=;
- b=lvNwHSQqMjoO6Y2Ax5fhC1CmmeJQqbtiOut00LUScuWRvJTSc+WBoeRQwQ07ifheXwXEUp0ryl7mNkc7lp/MFH382pncyM/161oBRusqROn9NSULU332L5M3g2C763Aps7QsiJjzQhZwlBhPo2u8c6fgGZtaB7OyDE+a1I5R4yA=
-Received: from 30.166.64.81(mailfrom:zhiwei_liu@linux.alibaba.com
- fp:SMTPD_---0WHGyT-N_1729071618 cluster:ay36) by smtp.aliyun-inc.com;
- Wed, 16 Oct 2024 17:40:19 +0800
-Message-ID: <f4ae3ad2-bd3e-4b9e-9013-b890e561df0a@linux.alibaba.com>
-Date: Wed, 16 Oct 2024 17:40:17 +0800
+ d=gmail.com; s=20230601; t=1729074758; x=1729679558; darn=nongnu.org;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=6cF+emqqZwA8vU2jqnm2vx8kuQeFg0waOSmcB6zO3L8=;
+ b=l28/w4qMJyd7HF/iaweRVAbVhit0EfVVVxHkE4/e3C+91jgKxBMvy/rn1GtrqfxCGd
+ AvX8l4P7Jm37x/uJffPx1HZ2O2VhjCukWW4j4Y8hl8Fa2gd3iLs059aUNg+lBYgUKUdh
+ VqQPnSVDklDDAbIpBkQElogSK1AuLPAMj+xT1LtZnDpC3Wi8gTivAO4NJyi7yLcge0SQ
+ AyO8t+q6SNWn/qVJ2KeOvv6HaVi/+FbmrwBGm7QQ2DL5a+akDkhbU9cvdhs2OW3Ff5Dm
+ G1X24mnucmRME/wxPZ3i4xfNrY3taDUSNw82l0ukTnYg/jmH7WF03cM6Xy40nolm9aWK
+ Qydg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1729074758; x=1729679558;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=6cF+emqqZwA8vU2jqnm2vx8kuQeFg0waOSmcB6zO3L8=;
+ b=cN/qShiwLc4oxeTvypqhzeLtnZ+OthyQDGOiel/7w581ZkkRaRsse464OmMUA8yoLB
+ 8D0Gl8l3nP/TBq6iAsjwOsvGMfZTeVgf05fml4zQZ9KTqaZ5XfxrppJWvaEXhgFHLgdS
+ vuXHeWsPK51rguFek56ageGjtM4V0udQ5jRjaFCt+2BMy3ShjnmXlfix0LvvVJFAdHky
+ eoAE0P37rRv6oIW7BIOvTImPTOnATHqO1/Rhg7N2DzFl9EV2AUvl0Q8lxLjQAU0LZENX
+ yTB7c6NHcQkOMlKoHdZsJ5TbTLU42rpsBs1tHbEYt5BlRvkoOcH+4/fXZ0kSVL4SbjoQ
+ pEpA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCX8tyl6jsopbdxoiwc2iqaBcu6w0gSXOs9RLs/XrvP1lB05clHatjnCOZBjlQ1P6WYebYoWtFYkWqik@nongnu.org
+X-Gm-Message-State: AOJu0YxTURwJxL65RdGOpR55R/2Cvcu6EutyhEjSzZe1bBFsbB+Xqict
+ N8SqgmPAhh2YYr302Pnkmrpj493gDJOvuw2/iBPqCpUnVwb94gM0bI2wB55x7EYdj0hnJxjpZCl
+ GJRSDSLOLNbx6iN/8I5flaEo7lkk=
+X-Google-Smtp-Source: AGHT+IERYO1ZRkxjCcNXy/GwxjeUikhzP7sOm7RS9fqpI8aJjRDZuPIagpIt/j1i+oOhErMUtfaqvxBd8RXh5Km1xPA=
+X-Received: by 2002:a05:6902:1105:b0:e28:f8e6:f74c with SMTP id
+ 3f1490d57ef6-e2931b53f8fmr9428350276.29.1729074757628; Wed, 16 Oct 2024
+ 03:32:37 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 1/8] target/riscv: Add Ssdbltrp CSRs handling
-To: =?UTF-8?B?Q2zDqW1lbnQgTMOpZ2Vy?= <cleger@rivosinc.com>,
- qemu-riscv@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>
-Cc: Weiwei Li <liwei1518@gmail.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Ved Shanbhogue <ved@rivosinc.com>, Atish Patra <atishp@rivosinc.com>,
- qemu-devel@nongnu.org
-References: <20241014112225.90297-1-cleger@rivosinc.com>
- <20241014112225.90297-2-cleger@rivosinc.com>
-Content-Language: en-US
-From: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
-In-Reply-To: <20241014112225.90297-2-cleger@rivosinc.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=115.124.30.100;
- envelope-from=zhiwei_liu@linux.alibaba.com;
- helo=out30-100.freemail.mail.aliyun.com
-X-Spam_score_int: -174
-X-Spam_score: -17.5
-X-Spam_bar: -----------------
-X-Spam_report: (-17.5 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, ENV_AND_HDR_SPF_MATCH=-0.5,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_VALIDITY_CERTIFIED_BLOCKED=0.001,
- RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- UNPARSEABLE_RELAY=0.001, USER_IN_DEF_DKIM_WL=-7.5,
- USER_IN_DEF_SPF_WL=-7.5 autolearn=ham autolearn_force=no
+References: <20240927083508.59483-1-yanmingzhu@iscas.ac.cn>
+ <CAKmqyKMobSzu-q8jdPhAU9PMG2GsGG1eOsemSS-Ny2vrX+wSbQ@mail.gmail.com>
+ <52abee8d.225ee.1928a805a21.Coremail.yanmingzhu@iscas.ac.cn>
+ <CAKmqyKOvgXKg+WioV2P1+Pe_DfgY1uUYs3cmMFQ8UtefPdDYKw@mail.gmail.com>
+ <CAPVrrNLf449o57ZsC-T5qZeWJcQvvfOBVd+U+m60dwzvf3RBxg@mail.gmail.com>
+In-Reply-To: <CAPVrrNLf449o57ZsC-T5qZeWJcQvvfOBVd+U+m60dwzvf3RBxg@mail.gmail.com>
+From: Trd thg <trdthg47@gmail.com>
+Date: Wed, 16 Oct 2024 18:32:27 +0800
+Message-ID: <CAPVrrNJTasrpMxbWFacFGQkvgf1LRyZoJpn1Z-9E-_iXmGfuyA@mail.gmail.com>
+Subject: Fwd: Re: [PATCH] hw/char/riscv_htif: Fix htif_mm_write that causes
+ infinite loop in ACT.
+To: Alistair Francis <alistair23@gmail.com>
+Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, 
+ MingZhu Yan <yanmingzhu@iscas.ac.cn>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2607:f8b0:4864:20::b34;
+ envelope-from=trdthg47@gmail.com; helo=mail-yb1-xb34.google.com
+X-Spam_score_int: -7
+X-Spam_score: -0.8
+X-Spam_bar: /
+X-Spam_report: (-0.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001, FREEMAIL_REPLY=1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -73,274 +96,206 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
+Sorry about the email style, I'm not familiar with it yet
 
-On 2024/10/14 19:22, Clément Léger wrote:
-> Add ext_ssdbltrp in RISCVCPUConfig and implement MSTATUS.SDT,
-> {H|M}ENVCFG.DTE and modify the availability of MTVAL2 based on the
-> presence of the Ssdbltrp ISA extension.
+> It's probably worth including this in the commit message.
+Agree, I'll do it.
+
+> It would be good to reference the sail implementation and the
+justification for the change there
+
+Sail implementation is probably here:
+https://github.com/riscv/sail-riscv/blob/master/model/riscv_platform.sail#L=
+340
+- related commit:
+https://github.com/riscv/sail-riscv/commit/848312ce7c59fa08c304cab4b4e8060c=
+67d5dfc9
+
+The following is the "infinite loop" part is exported by objdump from
+the test ELF of the add instruction generated from ACT
+```txt
+00000000800082a0 <write_tohost>:
+    800082a0:   00001f17                auipc   t5,0x1
+    800082a4:   d61f2023                sw      ra,-672(t5) # 80009000 <toh=
+ost>
+    800082a8:   ff9ff06f                j       800082a0 <write_tohost>
+```
+QEMU cannot respond to the above `sw` behavior, It makes no
+distinction regarding the size written,
+I guess that currently qemu will only respond to the writing to the
+high 32 bits and low 32 bits of tohost twice in succession.
+I think the behavior here is very strange, and you can find
+aswaterman's description of HTIF(include RV32) at:
+https://github.com/riscv-software-src/riscv-isa-sim/issues/364#issuecomment=
+-607657754
+So this patch try to distinguish these cases based on size and addr.
+
+About the sail impl, there are some related discussions at:
+https://github.com/riscv/sail-riscv/issues/218
+I made some summaries:
+- The implementation of sail as a workaround is not very ideal; we
+should follow the experience of spike
+  I checked the impl of spike. Although spike handles tohost in a
+syscall manner, I don't think this means that spike is better.
+  Compared to sail, it does not distinguish whether the write to
+tohost is 4 bytes or 8 bytes, but at least in act, it always works
+properly.
+  - spike code:
+https://github.com/riscv-software-src/riscv-isa-sim/blob/master/fesvr/htif.=
+cc#L265
+- HTIF has been deprecated
+  I don't know if this is true or not, because I haven't found any
+official comment.
+  However, since ACT is still using htif and is not expected to change
+for quite a long time, and no new solutions have emerged, we should go
+ahead and implement it
+- What are the advantages of QEMU supporting ACT
+  - do cross validation with sail/spike, and contributors can use ACT
+to verify the correctness when adding new instructions to QEMU. (we do
+have this need.)
+  > If you think that the benefits of supporting ACT are not obvious,
+then I think we can remove all the code related to supporting ACT
+(should be the commit mentioned above)
+
+What do you think about this? Thank you!
+
+Alistair Francis <alistair23@gmail.com> =E4=BA=8E2024=E5=B9=B410=E6=9C=8816=
+=E6=97=A5=E5=91=A8=E4=B8=89 13:27=E5=86=99=E9=81=93=EF=BC=9A
 >
-> Signed-off-by: Clément Léger <cleger@rivosinc.com>
-> Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
-> ---
->   target/riscv/cpu.h        |  1 +
->   target/riscv/cpu_bits.h   |  6 ++++++
->   target/riscv/cpu_cfg.h    |  1 +
->   target/riscv/cpu_helper.c | 20 +++++++++++++++++
->   target/riscv/csr.c        | 45 ++++++++++++++++++++++++++++++---------
->   5 files changed, 63 insertions(+), 10 deletions(-)
+> On Mon, Oct 14, 2024 at 8:08=E2=80=AFPM =E9=98=8E=E6=98=8E=E9=93=B8 <yanm=
+ingzhu@iscas.ac.cn> wrote:
+> >
+> > Thank you for your reply and I'm sorry that I didn't explain it clearly=
+.
+> >
+> > - ACT is an official riscv test suite to check the riscv support of the=
+ DUT(device under test).
 >
-> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> index a84e719d3f..ee984bf270 100644
-> --- a/target/riscv/cpu.h
-> +++ b/target/riscv/cpu.h
-> @@ -553,6 +553,7 @@ void riscv_cpu_set_geilen(CPURISCVState *env, target_ulong geilen);
->   bool riscv_cpu_vector_enabled(CPURISCVState *env);
->   void riscv_cpu_set_virt_enabled(CPURISCVState *env, bool enable);
->   int riscv_env_mmu_index(CPURISCVState *env, bool ifetch);
-> +bool riscv_env_smode_dbltrp_enabled(CPURISCVState *env, bool virt);
->   G_NORETURN void  riscv_cpu_do_unaligned_access(CPUState *cs, vaddr addr,
->                                                  MMUAccessType access_type,
->                                                  int mmu_idx, uintptr_t retaddr);
-> diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
-> index da1723496c..3a5588d4df 100644
-> --- a/target/riscv/cpu_bits.h
-> +++ b/target/riscv/cpu_bits.h
-> @@ -558,6 +558,7 @@
->   #define MSTATUS_TVM         0x00100000 /* since: priv-1.10 */
->   #define MSTATUS_TW          0x00200000 /* since: priv-1.10 */
->   #define MSTATUS_TSR         0x00400000 /* since: priv-1.10 */
-> +#define MSTATUS_SDT         0x01000000
->   #define MSTATUS_GVA         0x4000000000ULL
->   #define MSTATUS_MPV         0x8000000000ULL
->   
-> @@ -588,6 +589,7 @@ typedef enum {
->   #define SSTATUS_XS          0x00018000
->   #define SSTATUS_SUM         0x00040000 /* since: priv-1.10 */
->   #define SSTATUS_MXR         0x00080000
-> +#define SSTATUS_SDT         0x01000000
->   
->   #define SSTATUS64_UXL       0x0000000300000000ULL
->   
-> @@ -777,11 +779,13 @@ typedef enum RISCVException {
->   #define MENVCFG_CBIE                       (3UL << 4)
->   #define MENVCFG_CBCFE                      BIT(6)
->   #define MENVCFG_CBZE                       BIT(7)
-> +#define MENVCFG_DTE                        (1ULL << 59)
->   #define MENVCFG_ADUE                       (1ULL << 61)
->   #define MENVCFG_PBMTE                      (1ULL << 62)
->   #define MENVCFG_STCE                       (1ULL << 63)
->   
->   /* For RV32 */
-> +#define MENVCFGH_DTE                       BIT(27)
->   #define MENVCFGH_ADUE                      BIT(29)
->   #define MENVCFGH_PBMTE                     BIT(30)
->   #define MENVCFGH_STCE                      BIT(31)
-> @@ -795,11 +799,13 @@ typedef enum RISCVException {
->   #define HENVCFG_CBIE                       MENVCFG_CBIE
->   #define HENVCFG_CBCFE                      MENVCFG_CBCFE
->   #define HENVCFG_CBZE                       MENVCFG_CBZE
-> +#define HENVCFG_DTE                        MENVCFG_DTE
->   #define HENVCFG_ADUE                       MENVCFG_ADUE
->   #define HENVCFG_PBMTE                      MENVCFG_PBMTE
->   #define HENVCFG_STCE                       MENVCFG_STCE
->   
->   /* For RV32 */
-> +#define HENVCFGH_DTE                        MENVCFGH_DTE
->   #define HENVCFGH_ADUE                       MENVCFGH_ADUE
->   #define HENVCFGH_PBMTE                      MENVCFGH_PBMTE
->   #define HENVCFGH_STCE                       MENVCFGH_STCE
-> diff --git a/target/riscv/cpu_cfg.h b/target/riscv/cpu_cfg.h
-> index ae2a945b5f..dd804f95d4 100644
-> --- a/target/riscv/cpu_cfg.h
-> +++ b/target/riscv/cpu_cfg.h
-> @@ -77,6 +77,7 @@ struct RISCVCPUConfig {
->       bool ext_smstateen;
->       bool ext_sstc;
->       bool ext_smcntrpmf;
-> +    bool ext_ssdbltrp;
->       bool ext_svadu;
->       bool ext_svinval;
->       bool ext_svnapot;
-> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-> index 9d0400035f..77e7736d8a 100644
-> --- a/target/riscv/cpu_helper.c
-> +++ b/target/riscv/cpu_helper.c
-> @@ -63,6 +63,22 @@ int riscv_env_mmu_index(CPURISCVState *env, bool ifetch)
->   #endif
->   }
->   
-> +bool riscv_env_smode_dbltrp_enabled(CPURISCVState *env, bool virt)
-> +{
-> +#ifdef CONFIG_USER_ONLY
-> +    return false;
-> +#else
-> +    if (!riscv_cpu_cfg(env)->ext_ssdbltrp) {
-> +        return false;
-> +    }
-
-As we have guard the write to henvcfg and menvcfg by ext_ssdbltrp, I 
-think it is enough only check henvcfg or menvcfg.
-
-The only miss is we don't guard the writhe to henvcfgh. I think we can 
-add the guard there.
-
-> +    if (virt) {
-> +        return (env->henvcfg & HENVCFG_DTE) != 0;
-> +    } else {
-> +        return (env->menvcfg & MENVCFG_DTE) != 0;
-> +    }
-> +#endif
-> +}
-> +
->   void cpu_get_tb_cpu_state(CPURISCVState *env, vaddr *pc,
->                             uint64_t *cs_base, uint32_t *pflags)
->   {
-> @@ -562,6 +578,10 @@ void riscv_cpu_swap_hypervisor_regs(CPURISCVState *env)
->   
->       g_assert(riscv_has_ext(env, RVH));
->   
-> +    if (riscv_env_smode_dbltrp_enabled(env, current_virt)) {
-> +        mstatus_mask |= MSTATUS_SDT;
-> +    }
-> +
->       if (current_virt) {
->           /* Current V=1 and we are about to change to V=0 */
->           env->vsstatus = env->mstatus & mstatus_mask;
-> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-> index e5de72453c..d8280ec956 100644
-> --- a/target/riscv/csr.c
-> +++ b/target/riscv/csr.c
-> @@ -540,6 +540,15 @@ static RISCVException aia_hmode32(CPURISCVState *env, int csrno)
->       return hmode32(env, csrno);
->   }
->   
-> +static RISCVException dbltrp_hmode(CPURISCVState *env, int csrno)
-> +{
-> +    if (riscv_cpu_cfg(env)->ext_ssdbltrp) {
-> +        return RISCV_EXCP_NONE;
-> +    }
-> +
-> +    return hmode(env, csrno);
-> +}
-> +
->   static RISCVException pmp(CPURISCVState *env, int csrno)
->   {
->       if (riscv_cpu_cfg(env)->pmp) {
-> @@ -1402,7 +1411,7 @@ static const target_ulong vs_delegable_excps = DELEGABLE_EXCPS &
->         (1ULL << (RISCV_EXCP_STORE_GUEST_AMO_ACCESS_FAULT)));
->   static const target_ulong sstatus_v1_10_mask = SSTATUS_SIE | SSTATUS_SPIE |
->       SSTATUS_UIE | SSTATUS_UPIE | SSTATUS_SPP | SSTATUS_FS | SSTATUS_XS |
-> -    SSTATUS_SUM | SSTATUS_MXR | SSTATUS_VS;
-> +    SSTATUS_SUM | SSTATUS_MXR | SSTATUS_VS | SSTATUS_SDT;
-This breaks  the v_1_10 constraint, as it is not part of 1.10 specification.
->   
->   /*
->    * Spec allows for bits 13:63 to be either read-only or writable.
-> @@ -1600,6 +1609,14 @@ static RISCVException write_mstatus(CPURISCVState *env, int csrno,
->           mask |= MSTATUS_VS;
->       }
->   
-> +    if (riscv_env_smode_dbltrp_enabled(env, env->virt_enabled)) {
-> +        mask |= MSTATUS_SDT;
-> +        if ((val & MSTATUS_SDT) != 0) {
-> +            mstatus &= ~MSTATUS_SIE;
-No need to clean it, if MSTATUS_SIE will be cleaned in val.
-> +            val &= ~MSTATUS_SIE;
-> +        }
-> +    }
-> +
-I think we should also consider vsstatus for SIE field, as 
-write_vsstatus doesn't fall through to write_mstatus.
->       if (xl != MXL_RV32 || env->debugger) {
->           if (riscv_has_ext(env, RVH)) {
->               mask |= MSTATUS_MPV | MSTATUS_GVA;
-> @@ -2354,7 +2371,8 @@ static RISCVException write_menvcfg(CPURISCVState *env, int csrno,
->       if (riscv_cpu_mxl(env) == MXL_RV64) {
->           mask |= (cfg->ext_svpbmt ? MENVCFG_PBMTE : 0) |
->                   (cfg->ext_sstc ? MENVCFG_STCE : 0) |
-> -                (cfg->ext_svadu ? MENVCFG_ADUE : 0);
-> +                (cfg->ext_svadu ? MENVCFG_ADUE : 0) |
-> +                (cfg->ext_ssdbltrp ? MENVCFG_DTE : 0);
->       }
->       env->menvcfg = (env->menvcfg & ~mask) | (val & mask);
->   
-> @@ -2374,7 +2392,8 @@ static RISCVException write_menvcfgh(CPURISCVState *env, int csrno,
->       const RISCVCPUConfig *cfg = riscv_cpu_cfg(env);
->       uint64_t mask = (cfg->ext_svpbmt ? MENVCFG_PBMTE : 0) |
->                       (cfg->ext_sstc ? MENVCFG_STCE : 0) |
-> -                    (cfg->ext_svadu ? MENVCFG_ADUE : 0);
-> +                    (cfg->ext_svadu ? MENVCFG_ADUE : 0) |
-> +                    (cfg->ext_ssdbltrp ? MENVCFG_DTE : 0);
->       uint64_t valh = (uint64_t)val << 32;
->   
->       env->menvcfg = (env->menvcfg & ~mask) | (valh & mask);
-> @@ -2425,9 +2444,10 @@ static RISCVException read_henvcfg(CPURISCVState *env, int csrno,
->        * henvcfg.pbmte is read_only 0 when menvcfg.pbmte = 0
->        * henvcfg.stce is read_only 0 when menvcfg.stce = 0
->        * henvcfg.adue is read_only 0 when menvcfg.adue = 0
-> +     * henvcfg.dte is read_only 0 when menvcfg.dte = 0
->        */
-> -    *val = env->henvcfg & (~(HENVCFG_PBMTE | HENVCFG_STCE | HENVCFG_ADUE) |
-> -                           env->menvcfg);
-> +    *val = env->henvcfg & (~(HENVCFG_PBMTE | HENVCFG_STCE | HENVCFG_ADUE |
-> +                             HENVCFG_DTE) | env->menvcfg);
->       return RISCV_EXCP_NONE;
->   }
->   
-> @@ -2435,6 +2455,7 @@ static RISCVException write_henvcfg(CPURISCVState *env, int csrno,
->                                       target_ulong val)
->   {
->       uint64_t mask = HENVCFG_FIOM | HENVCFG_CBIE | HENVCFG_CBCFE | HENVCFG_CBZE;
-> +    uint64_t menvcfg_mask;
->       RISCVException ret;
->   
->       ret = smstateen_acc_ok(env, 0, SMSTATEEN0_HSENVCFG);
-> @@ -2443,7 +2464,11 @@ static RISCVException write_henvcfg(CPURISCVState *env, int csrno,
->       }
->   
->       if (riscv_cpu_mxl(env) == MXL_RV64) {
-> -        mask |= env->menvcfg & (HENVCFG_PBMTE | HENVCFG_STCE | HENVCFG_ADUE);
-> +        menvcfg_mask = HENVCFG_PBMTE | HENVCFG_STCE | HENVCFG_ADUE;
-> +        if (riscv_cpu_cfg(env)->ext_ssdbltrp) {
-> +            menvcfg_mask |= HENVCFG_DTE;
-> +        }
-> +        mask |= env->menvcfg & menvcfg_mask;
->       }
->   
->       env->henvcfg = (env->henvcfg & ~mask) | (val & mask);
-> @@ -2461,8 +2486,8 @@ static RISCVException read_henvcfgh(CPURISCVState *env, int csrno,
->           return ret;
->       }
->   
-> -    *val = (env->henvcfg & (~(HENVCFG_PBMTE | HENVCFG_STCE | HENVCFG_ADUE) |
-> -                            env->menvcfg)) >> 32;
-> +    *val = (env->henvcfg & (~(HENVCFG_PBMTE | HENVCFG_STCE | HENVCFG_ADUE |
-> +                              HENVCFG_DTE) | env->menvcfg)) >> 32;
->       return RISCV_EXCP_NONE;
->   }
->   
-> @@ -2470,7 +2495,7 @@ static RISCVException write_henvcfgh(CPURISCVState *env, int csrno,
->                                        target_ulong val)
->   {
->       uint64_t mask = env->menvcfg & (HENVCFG_PBMTE | HENVCFG_STCE |
-> -                                    HENVCFG_ADUE);
-> +                                    HENVCFG_ADUE | HENVCFG_DTE);
-
-Add the ssdbltrp guard here.
-
-Thanks,
-Zhiwei
-
->       uint64_t valh = (uint64_t)val << 32;
->       RISCVException ret;
->   
-> @@ -5246,7 +5271,7 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] = {
->       [CSR_VSATP]       = { "vsatp",       hmode,   read_vsatp,    write_vsatp,
->                             .min_priv_ver = PRIV_VERSION_1_12_0                },
->   
-> -    [CSR_MTVAL2]      = { "mtval2",      hmode,   read_mtval2,   write_mtval2,
-> +    [CSR_MTVAL2]      = { "mtval2", dbltrp_hmode, read_mtval2, write_mtval2,
->                             .min_priv_ver = PRIV_VERSION_1_12_0                },
->       [CSR_MTINST]      = { "mtinst",      hmode,   read_mtinst,   write_mtinst,
->                             .min_priv_ver = PRIV_VERSION_1_12_0                },
+> It's probably worth including this in the commit message.
+>
+> > - Currently ACT support using [sail-riscv](https://github.com/riscv/sai=
+l-riscv)(default) or [spike](https://github.com/riscv-software-src/riscv-is=
+a-sim)
+> > - QEMU is not supported yet=EF=BC=8Cbut someone made a commit: [commit]=
+(https://github.com/qemu/qemu/commit/66247edc8b6fb36d6b905babcd795068ea989a=
+d5)
+> >
+> > But there are still problems, so I'm trying to fix it. After debugging,=
+ I found that it's a htif problem, and the idea of fixing it is referenced =
+from the sail-riscv implementation
+>
+> It would be good to reference the sail implementation and the
+> justification for the change there
+>
+> Alistair
+>
+> >
+> > "Alistair Francis" &lt;alistair23@gmail.com&gt;=E5=86=99=E9=81=93=EF=BC=
+=9A
+> > &gt; On Fri, Sep 27, 2024 at 11:26=E2=80=AFPM MingZhu Yan <trdthg47@gma=
+il.com> wrote:
+> > &gt; &gt;
+> > &gt; &gt; Applications sometimes only write the lower 32-bit payload by=
+tes, this is used
+> > &gt; &gt; in ACT tests. As a workaround, this refers to the solution of=
+ sail-riscv.
+> > &gt;
+> > &gt; I'm not sure what ACT is, but this feels like a guest bug, not a Q=
+EMU issue.
+> > &gt;
+> > &gt; Alistair
+> > &gt;
+> > &gt; &gt; if the payload is written a few times with the same value, we=
+ process the whole
+> > &gt; &gt; htif command anyway.
+> > &gt; &gt;
+> > &gt; &gt; Signed-off-by: MingZhu Yan <yanmingzhu@iscas.ac.cn>
+> > &gt; &gt; ---
+> > &gt; &gt;  hw/char/riscv_htif.c | 35 +++++++++++++++++++---------------=
+-
+> > &gt; &gt;  1 file changed, 19 insertions(+), 16 deletions(-)
+> > &gt; &gt;
+> > &gt; &gt; diff --git a/hw/char/riscv_htif.c b/hw/char/riscv_htif.c
+> > &gt; &gt; index 9bef60def1..d74cce3bef 100644
+> > &gt; &gt; --- a/hw/char/riscv_htif.c
+> > &gt; &gt; +++ b/hw/char/riscv_htif.c
+> > &gt; &gt; @@ -65,16 +65,8 @@ void htif_symbol_callback(const char *st_n=
+ame, int st_info, uint64_t st_value,
+> > &gt; &gt;  {
+> > &gt; &gt;      if (strcmp("fromhost", st_name) =3D=3D 0) {
+> > &gt; &gt;          fromhost_addr =3D st_value;
+> > &gt; &gt; -        if (st_size !=3D 8) {
+> > &gt; &gt; -            error_report("HTIF fromhost must be 8 bytes");
+> > &gt; &gt; -            exit(1);
+> > &gt; &gt; -        }
+> > &gt; &gt;      } else if (strcmp("tohost", st_name) =3D=3D 0) {
+> > &gt; &gt;          tohost_addr =3D st_value;
+> > &gt; &gt; -        if (st_size !=3D 8) {
+> > &gt; &gt; -            error_report("HTIF tohost must be 8 bytes");
+> > &gt; &gt; -            exit(1);
+> > &gt; &gt; -        }
+> > &gt; &gt;      } else if (strcmp("begin_signature", st_name) =3D=3D 0) =
+{
+> > &gt; &gt;          begin_sig_addr =3D st_value;
+> > &gt; &gt;      } else if (strcmp("end_signature", st_name) =3D=3D 0) {
+> > &gt; &gt; @@ -290,18 +282,26 @@ static void htif_mm_write(void *opaque,=
+ hwaddr addr,
+> > &gt; &gt;                            uint64_t value, unsigned size)
+> > &gt; &gt;  {
+> > &gt; &gt;      HTIFState *s =3D opaque;
+> > &gt; &gt; -    if (addr =3D=3D TOHOST_OFFSET1) {
+> > &gt; &gt; -        if (s-&gt;tohost =3D=3D 0x0) {
+> > &gt; &gt; -            s-&gt;allow_tohost =3D 1;
+> > &gt; &gt; -            s-&gt;tohost =3D value &amp; 0xFFFFFFFF;
+> > &gt; &gt; +    int htif_cmd_write =3D 0;
+> > &gt; &gt; +    if (size =3D=3D 8 &amp;&amp; addr =3D=3D TOHOST_OFFSET1)=
+ {
+> > &gt; &gt; +        htif_cmd_write =3D 1;
+> > &gt; &gt; +        s-&gt;tohost =3D value;
+> > &gt; &gt; +        htif_handle_tohost_write(s, s-&gt;tohost);
+> > &gt; &gt; +    } else if (size =3D=3D 4 &amp;&amp; addr =3D=3D TOHOST_O=
+FFSET1) {
+> > &gt; &gt; +        if ((value) =3D=3D (s-&gt;tohost &amp; 0xFFFF)) {
+> > &gt; &gt; +            s-&gt;allow_tohost =3D s-&gt;allow_tohost + 1;
+> > &gt; &gt;          } else {
+> > &gt; &gt;              s-&gt;allow_tohost =3D 0;
+> > &gt; &gt;          }
+> > &gt; &gt; -    } else if (addr =3D=3D TOHOST_OFFSET2) {
+> > &gt; &gt; -        if (s-&gt;allow_tohost) {
+> > &gt; &gt; -            s-&gt;tohost |=3D value &lt;&lt; 32;
+> > &gt; &gt; -            htif_handle_tohost_write(s, s-&gt;tohost);
+> > &gt; &gt; +        s-&gt;tohost =3D deposit64(s-&gt;tohost, 0, 32, valu=
+e);
+> > &gt; &gt; +    } else if (size =3D=3D 4 &amp;&amp; addr =3D=3D TOHOST_O=
+FFSET2) {
+> > &gt; &gt; +        if ((value &amp; 0xFF) =3D=3D (s-&gt;tohost &amp; 0x=
+FF00)) {
+> > &gt; &gt; +            s-&gt;allow_tohost =3D s-&gt;allow_tohost + 1;
+> > &gt; &gt; +        } else {
+> > &gt; &gt; +            s-&gt;allow_tohost =3D 1;
+> > &gt; &gt;          }
+> > &gt; &gt; +        htif_cmd_write =3D 1;
+> > &gt; &gt; +        s-&gt;tohost =3D deposit64(s-&gt;tohost, 32, 32, val=
+ue);
+> > &gt; &gt;      } else if (addr =3D=3D FROMHOST_OFFSET1) {
+> > &gt; &gt;          s-&gt;fromhost_inprogress =3D 1;
+> > &gt; &gt;          s-&gt;fromhost =3D value &amp; 0xFFFFFFFF;
+> > &gt; &gt; @@ -312,6 +312,9 @@ static void htif_mm_write(void *opaque, h=
+waddr addr,
+> > &gt; &gt;          qemu_log("Invalid htif write: address %016" PRIx64 "=
+\n",
+> > &gt; &gt;              (uint64_t)addr);
+> > &gt; &gt;      }
+> > &gt; &gt; +    if ((s-&gt;tohost =3D=3D 1 &amp;&amp; htif_cmd_write) ||=
+ s-&gt;allow_tohost &gt; 2) {
+> > &gt; &gt; +        htif_handle_tohost_write(s, s-&gt;tohost);
+> > &gt; &gt; +    }
+> > &gt; &gt;  }
+> > &gt; &gt;
+> > &gt; &gt;  static const MemoryRegionOps htif_mm_ops =3D {
+> > &gt; &gt; --
+> > &gt; &gt; 2.34.1
+> > &gt; &gt;
+> > &gt; &gt;
+> > </yanmingzhu@iscas.ac.cn></trdthg47@gmail.com>
 
