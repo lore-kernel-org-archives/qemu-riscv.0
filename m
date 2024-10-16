@@ -4,54 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DAB5AD2A541
-	for <qemu-riscv@archiver.kernel.org>; Wed, 16 Oct 2024 19:31:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DC5B7D2A543
+	for <qemu-riscv@archiver.kernel.org>; Wed, 16 Oct 2024 19:32:58 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1t19kJ-0002d6-GD; Wed, 16 Oct 2024 15:31:47 -0400
+	id 1t19kM-0002fX-4n; Wed, 16 Oct 2024 15:31:50 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1t19kH-0002c2-5B
- for qemu-riscv@nongnu.org; Wed, 16 Oct 2024 15:31:45 -0400
-Received: from mail-pl1-x62f.google.com ([2607:f8b0:4864:20::62f])
+ id 1t19kI-0002cb-PL
+ for qemu-riscv@nongnu.org; Wed, 16 Oct 2024 15:31:47 -0400
+Received: from mail-pl1-x634.google.com ([2607:f8b0:4864:20::634])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1t19kF-0003nB-36
- for qemu-riscv@nongnu.org; Wed, 16 Oct 2024 15:31:44 -0400
-Received: by mail-pl1-x62f.google.com with SMTP id
- d9443c01a7336-20caea61132so1382405ad.2
- for <qemu-riscv@nongnu.org>; Wed, 16 Oct 2024 12:31:42 -0700 (PDT)
+ id 1t19kF-0003nH-PP
+ for qemu-riscv@nongnu.org; Wed, 16 Oct 2024 15:31:46 -0400
+Received: by mail-pl1-x634.google.com with SMTP id
+ d9443c01a7336-20c8b557f91so1800435ad.2
+ for <qemu-riscv@nongnu.org>; Wed, 16 Oct 2024 12:31:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1729107101; x=1729711901; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=jvIR58QCYBZMdE3s9ffnpI9HyypOXKW1og1THMmS8H4=;
- b=sczu2XQRktIWGXsR/C41ysMqwPqaagx3wrv7+2w5+xNhUeBEvUc/n7anFEhnQrmtBu
- 49mUvtf3sDVcYBSlZGR2IkpPgyWu+e/hVzUT1L8qiXAHcfZj4CzmAgbzPrZT2wiepVd8
- A1w4hbt/vLtUMPxHREdPLDQSb7tMztB3PmfTSssRfbdR28nk/p0Gcxu5PQ97wFbJIyYB
- /Na/78JT0CNPyHckDJoBgA8jN77/dD2kE2m04BD4APQ6raLMLbjO/hopsgY52tFDUw1c
- plt5ZpQ2Fdfpwsh8NGJhmqqXMcnkeezXnpKNMJd2lRR17uHS/H8DqRT/1Je5n6YVcksL
- V+uA==
+ d=linaro.org; s=google; t=1729107102; x=1729711902; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=pAS56LpJLEvFceTFCBsO+yMHFwJ+VtaFv7L9YjE7ffs=;
+ b=OSvF6fMopQgsmWmUSA1xiO/3gUZlMxSse5XxAPZAbgtx4sOFZHk5H97BEPKWyKShSS
+ 71tTJIzSEn8cIuDvk+gKqdOCrYDCXGDzvfhc7siB8EaeoJ0naaAAcDRxEAwYPwPUeGpe
+ B34FAsMFA+QyXXNHlx3Tyhj6xTRX99/YisLQT5wo836Q8QfpjP1eIIwarr3sOHz8VWNz
+ Vv1/zcWifzEw3ROTqUFX1Moi23qAGtyZqauSZBN48hODn+NEuZfYPktrpX+tqL881fPt
+ SLQKezYzN7vxMjV8hltQPh438vsPyuOi9EiXaADJgCRQvIAbVzPP++ce+c/gaqqOps0v
+ vWtg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729107101; x=1729711901;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=jvIR58QCYBZMdE3s9ffnpI9HyypOXKW1og1THMmS8H4=;
- b=sJo1RqkIrVwImv3ZdiV2sgppFPhtXo0WcI7MV3tUA7iJeQZr0cCqMqmgR5Kq/8PFJM
- oFg9SystC5mypdmwR/1yQ7xmsPltshO9NxPGeNSF0eYSZZLQKmjQIRIwA+7iRiqmnMYm
- Krjl0XlpIevOnmnsNcsdlYTpOkCC9y6JPciPAxCt1E9AoznlHCpEx4LcosoUgWtXIkhU
- +42sBUn/40YMpdEPVnsUSydDP1ZvJb4pNXG+31rM8jk5aSGn5fcYfo4Hq1mdVp6Y49Wa
- qYVZvHMtNtT0c9TqNW3WCulWyuHk1RaExf7moxsHPZfYMws/Dg8ADQfHCiQMBKe9Gc2w
- pcAQ==
-X-Gm-Message-State: AOJu0YyMGI2JTYuS6SrwZ4Z0pMnXwanDJbHq3nLmQLu3eqQmmtnrpy0w
- uBhg6n7C8RFgxS14FxIVPc71KZc33usC5qXen9lHOavQoDcn6eQYIzc7dd3HHjA=
-X-Google-Smtp-Source: AGHT+IEa9223NNXktfkxq0Z5eqB9S6GT6hutGy0qNFA+BErBbqacWWwUDuYtv32o8zvGxYNjyj6DCw==
-X-Received: by 2002:a17:903:22c7:b0:20c:9062:fb88 with SMTP id
- d9443c01a7336-20cbb1a983dmr235631805ad.1.1729107101463; 
- Wed, 16 Oct 2024 12:31:41 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1729107102; x=1729711902;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=pAS56LpJLEvFceTFCBsO+yMHFwJ+VtaFv7L9YjE7ffs=;
+ b=EfsfD09VvyMudqdgz1zPGVgctDnM7KJM2EqEXCabgxrW6bZR6MA7sQSbS1vaNGasd0
+ tKBJIrjNPxDuS2bTcmDyzLMGwvjo0RIh3ChQG4yu3cq2w1t+kLhfVkRuGizp/s4+IlLa
+ dxhkWMaxIpsK/Qn9fULjQi7yeCnXhHBDFInXVlaqZDcPgxw+VKDASydqX4RCMXh03sbc
+ 0fynG7wvxd1DClojNkGtoYads6UFoMN0DYb25cKq8EG1G76AF/mZFbCTlgIuO2K9jXYe
+ IQgZO0r6pA64VqkXbbvXRHybp93nGMqDfQeUErC2oNTWBqAY5juYBuBmQthzFD4q7E7J
+ CgDQ==
+X-Gm-Message-State: AOJu0YwTMw0kYz9Te3G6VeNm/0fldvgM3Nl8TqM95UR7ct6XAHQa4QYL
+ HXxssdZreoBNXjMvegpmrimiWAoM93ptRFQ0GTKWEenU5LG2s4M4xqpDum7SeEaUfjEpb3iQval
+ Z
+X-Google-Smtp-Source: AGHT+IFkOIpE7mOZzAuqHtZeBcp/PoRhA6Hzul0zrj2kcEBUIYN6D8Et+bkkoALvnwUMfW3KVQbzyA==
+X-Received: by 2002:a17:903:1c9:b0:20c:9d8d:1f65 with SMTP id
+ d9443c01a7336-20d27ef315dmr71489035ad.30.1729107102081; 
+ Wed, 16 Oct 2024 12:31:42 -0700 (PDT)
 Received: from stoup.. (174-21-81-121.tukw.qwest.net. [174.21.81.121])
  by smtp.gmail.com with ESMTPSA id
  d9443c01a7336-20d1804b6b1sm32323945ad.189.2024.10.16.12.31.41
@@ -60,15 +62,17 @@ Received: from stoup.. (174-21-81-121.tukw.qwest.net. [174.21.81.121])
 From: Richard Henderson <richard.henderson@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com,
- zhiwei_liu@linux.alibaba.com
-Subject: [PATCH v6 00/14] tcg/riscv: Add support for vector
-Date: Wed, 16 Oct 2024 12:31:26 -0700
-Message-ID: <20241016193140.2206352-1-richard.henderson@linaro.org>
+ zhiwei_liu@linux.alibaba.com, qemu-stable@nongnu.org
+Subject: [PATCH v6 01/14] tcg: Reset data_gen_ptr correctly
+Date: Wed, 16 Oct 2024 12:31:27 -0700
+Message-ID: <20241016193140.2206352-2-richard.henderson@linaro.org>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20241016193140.2206352-1-richard.henderson@linaro.org>
+References: <20241016193140.2206352-1-richard.henderson@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::62f;
- envelope-from=richard.henderson@linaro.org; helo=mail-pl1-x62f.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::634;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pl1-x634.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -91,66 +95,36 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Introduce support for the RISC-V vector extension in the TCG backend.
+This pointer needs to be reset after overflow just like
+code_buf and code_ptr.
 
-v5: https://lore.kernel.org/qemu-devel/20241007025700.47259-1-zhiwei_liu@linux.alibaba.com/
+Cc: qemu-stable@nongnu.org
+Fixes: 57a269469db ("tcg: Infrastructure for managing constant pools")
+Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
+---
+ tcg/tcg.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Changes for v6:
-  - Fix problem with TB overflow restart wrt the constant pool.
-  - Fix vsetivli disassembly.
-  - Change set_vtype to precompute all instructions.
-  - Extract one element before comparison in tcg_out_dupi_vec.
-  - Extract one element before comparison in tcg_target_const_match.
-  - Drop 'vm' parameter from most tcg_out_opc_* functions.
-  - Add tcg_out_opc_vv_vi and accept K constants for operations
-    which have .v.i instructions.
-  - Do not expand cmp_vec early.
-  - Fix expansion of rotls_vec.
-
-I've tested this on cfarm95, a banana pi bpi-f3 with 256-bit rvv-1.0,
-with qemu-aarch64 and some vectorized test cases.
-
-Barring further comment, I plan to include this in a PR at the
-end of the week.
-
-
-r~
-
-
-Huang Shiyuan (1):
-  tcg/riscv: Add basic support for vector
-
-Richard Henderson (3):
-  tcg: Reset data_gen_ptr correctly
-  disas/riscv: Fix vsetivli disassembly
-  tcg/riscv: Accept constant first argument to sub_vec
-
-TANG Tiancheng (10):
-  util: Add RISC-V vector extension probe in cpuinfo
-  tcg/riscv: Implement vector mov/dup{m/i}
-  tcg/riscv: Add support for basic vector opcodes
-  tcg/riscv: Implement vector cmp/cmpsel ops
-  tcg/riscv: Implement vector neg ops
-  tcg/riscv: Implement vector sat/mul ops
-  tcg/riscv: Implement vector min/max ops
-  tcg/riscv: Implement vector shi/s/v ops
-  tcg/riscv: Implement vector roti/v/x ops
-  tcg/riscv: Enable native vector support for TCG host
-
- disas/riscv.h                     |   2 +-
- host/include/riscv/host/cpuinfo.h |   2 +
- include/tcg/tcg.h                 |   6 +
- tcg/riscv/tcg-target-con-set.h    |   9 +
- tcg/riscv/tcg-target-con-str.h    |   3 +
- tcg/riscv/tcg-target.h            |  78 ++-
- tcg/riscv/tcg-target.opc.h        |  12 +
- disas/riscv.c                     |   2 +-
- tcg/tcg.c                         |   2 +-
- util/cpuinfo-riscv.c              |  24 +-
- tcg/riscv/tcg-target.c.inc        | 994 +++++++++++++++++++++++++++---
- 11 files changed, 1011 insertions(+), 123 deletions(-)
- create mode 100644 tcg/riscv/tcg-target.opc.h
-
+diff --git a/tcg/tcg.c b/tcg/tcg.c
+index 5decd83cf4..0babae1b88 100644
+--- a/tcg/tcg.c
++++ b/tcg/tcg.c
+@@ -1399,7 +1399,6 @@ TranslationBlock *tcg_tb_alloc(TCGContext *s)
+         goto retry;
+     }
+     qatomic_set(&s->code_gen_ptr, next);
+-    s->data_gen_ptr = NULL;
+     return tb;
+ }
+ 
+@@ -6172,6 +6171,7 @@ int tcg_gen_code(TCGContext *s, TranslationBlock *tb, uint64_t pc_start)
+      */
+     s->code_buf = tcg_splitwx_to_rw(tb->tc.ptr);
+     s->code_ptr = s->code_buf;
++    s->data_gen_ptr = NULL;
+ 
+ #ifdef TCG_TARGET_NEED_LDST_LABELS
+     QSIMPLEQ_INIT(&s->ldst_labels);
 -- 
 2.43.0
 
