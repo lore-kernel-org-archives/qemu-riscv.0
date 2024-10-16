@@ -4,83 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0F1ECD2A541
-	for <qemu-riscv@archiver.kernel.org>; Wed, 16 Oct 2024 19:33:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7545BD2A545
+	for <qemu-riscv@archiver.kernel.org>; Wed, 16 Oct 2024 19:34:09 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1t19kR-0002ji-BU; Wed, 16 Oct 2024 15:31:55 -0400
+	id 1t19kX-0002qO-Kl; Wed, 16 Oct 2024 15:32:01 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1t19kN-0002g7-5T
- for qemu-riscv@nongnu.org; Wed, 16 Oct 2024 15:31:51 -0400
-Received: from mail-pl1-x62d.google.com ([2607:f8b0:4864:20::62d])
+ id 1t19kQ-0002jD-BA
+ for qemu-riscv@nongnu.org; Wed, 16 Oct 2024 15:31:54 -0400
+Received: from mail-pl1-x62b.google.com ([2607:f8b0:4864:20::62b])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1t19kK-0003pL-FA
- for qemu-riscv@nongnu.org; Wed, 16 Oct 2024 15:31:50 -0400
-Received: by mail-pl1-x62d.google.com with SMTP id
- d9443c01a7336-20c6f492d2dso2155165ad.0
- for <qemu-riscv@nongnu.org>; Wed, 16 Oct 2024 12:31:48 -0700 (PDT)
+ id 1t19kN-0003qw-Pq
+ for qemu-riscv@nongnu.org; Wed, 16 Oct 2024 15:31:54 -0400
+Received: by mail-pl1-x62b.google.com with SMTP id
+ d9443c01a7336-20c77459558so1574635ad.0
+ for <qemu-riscv@nongnu.org>; Wed, 16 Oct 2024 12:31:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1729107107; x=1729711907; darn=nongnu.org;
+ d=linaro.org; s=google; t=1729107110; x=1729711910; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=F16mOGOCEtDulhf7gkD6+zfYNl/76OFFUvZQ0M86ofc=;
- b=RUu26uCxYoDiJPFrG5Zj14mJC5PvjKLGbAoNJDRXVLB3GdnRBJoq2kxVNu5lJTBTf8
- H6ltWkr3Fk0oWYHhjFrzvK+f89lgfS7xYu/wPszZl9C3bwi2F1u6Ubv73wK/dut9OSCq
- zIcpxvKDl6dtSXFgRb3Ppw1TDirzkY54B+ZrhaUBEOcRPoQjNuUTXvVvNz9KYYxCNOGK
- SLvt4bqDWY8PKpDMLQSGo4DemuQOnK5W1CMF7P/XNcb2suqj9HoT4UGPXv0rU5BDBQFw
- D9y7pWXDCWzyOeTQ1Pg4Yds9GtBUFUpzpdQETtzwDx/J+4/je0XsEEsV3x/nuwh1qa80
- iUhQ==
+ bh=6H4o7TRLnsRJPcQeLHBRIU6aVhm6+5BjLCNGhX0wWuw=;
+ b=L/o/rlEyhNAgVGjyorwnpU9hcJ1k5Bt6wx4/7ml0DJR0EOVQ8HEejeYCEriUGYTT96
+ TyTWkeqp6T2VVx9uuDY/W89WGgFFZqZbiNpB9iSMcAY4AUQhvNAkxrL3GJXpwx5Lqn57
+ XhkX88AdHrzcKD0lb7+Vyq41jP7eMVra04bR9CksqzP7DE8+KNbBsG/WxH+DCh7Kr2cZ
+ qlu92xaA7FG9TcJ0y8P2lDXnjGC8ABvx/1OX5wkVyT+0Im7TpB8QU6fey3XLvNR0g0br
+ vZz05+CZsV3sLgrUsuc8g7udE8yMLi0vHgCl+8zZHTCEZIeU1Cdag/656096jI10w9lr
+ E9wQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729107107; x=1729711907;
+ d=1e100.net; s=20230601; t=1729107110; x=1729711910;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=F16mOGOCEtDulhf7gkD6+zfYNl/76OFFUvZQ0M86ofc=;
- b=pZtZrRp0uULXutcGIDAfqBL5txOd61mPgpN3eE+dID7gtk/FxIpG2ekWJYAyJF49VU
- Ue6L5GVBvvqe0CIC6+K0A26VU+AY0P2TuLjRjDQtrXSAWX9KJihV9hnE5UWzMYFfwT/5
- FUVCvK7zLbWmIm1oK9Bh+QLFvK4V4D/eSyQoCS1aa5NLRJS4r4vLSuT4C3sJ7KQ2Mezn
- jcT+vBGA2JypycAgHoAgNNVg+UBhGh0Do/Lf6oJtCbtia/V3O9NX0GtYd3KzlM7H0WTW
- 7d8KH2PbVKD92hcjCq0RcioSDB196xNWnTNEyzC5elm3qSOtvnl3cDDZaroDxi1aB391
- l5Eg==
-X-Gm-Message-State: AOJu0YxG2TIxy0i1DnV5qMLia4YNOVPjJm+4ThC3Pud0yahcvOCu8/Fx
- 1u3Gh9iP8ctsaY7b1hmt7ycduikrrW4L4nzYzJdXwH7Lryv2UJYQ/fmKff55hqA5eLtHUO4EaDo
- l
-X-Google-Smtp-Source: AGHT+IFNO62pnbgm/+kO5qpm//dJySrOK66//oEZCv4qV05G3qrnuUXbmYyVrYCSj63O9uGac7+ykg==
-X-Received: by 2002:a17:902:f54d:b0:20c:ecd8:d092 with SMTP id
- d9443c01a7336-20cecd8d2edmr147712825ad.30.1729107106895; 
- Wed, 16 Oct 2024 12:31:46 -0700 (PDT)
+ bh=6H4o7TRLnsRJPcQeLHBRIU6aVhm6+5BjLCNGhX0wWuw=;
+ b=ZRNZdV5T3ofRs5O1tl2V6XH2LYK9cLRbrKfyi83RR8U+SUjaEXF/euzrFyMpwlb1qA
+ wOBuVEJjSd7WoQSrB44nbFvR2fiANEakbQYZeH9IIj7qJMutrvs3z2LhyPaAuIAfHlmD
+ HEbjgF/AmAEzFrxpSXwemTZssgt7ozZTFBg9sFZVKpHw3n0VCuqpw3uuO7OkKJnLdoMa
+ 5oJNLkzjOWcsMxs0fCUW318WUXs/mWuUxKR4t4/EpYcsAQ87K2d833pGnTGpANlip3fb
+ Pg9cmA4lRy5d0cORtRlm6xG0knSz47yCe9qFXSdqc/6/r520i6nTrKsrIqTWMqjmeunb
+ 21iA==
+X-Gm-Message-State: AOJu0Yzq3ctV+d0/N4ZGQrPkT1wsPQozQef1Df9p2OlRGIW33+VDdsoE
+ pzt7RD7hN/Kn3lU4Lkh0TQPjgAdkO7Cn0xLPucfpE773xtaY7eY8S9FOxWDhxfE=
+X-Google-Smtp-Source: AGHT+IHyef5gU8YF/LrckS5jVNe2zwe/pXEjPQ570wUQj+Pxz1g5LQeVFafF6agG7k9ZB/PCljkXEA==
+X-Received: by 2002:a17:902:ce09:b0:20d:2e83:6995 with SMTP id
+ d9443c01a7336-20d2e836aa1mr57558115ad.47.1729107110253; 
+ Wed, 16 Oct 2024 12:31:50 -0700 (PDT)
 Received: from stoup.. (174-21-81-121.tukw.qwest.net. [174.21.81.121])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-20d1804b6b1sm32323945ad.189.2024.10.16.12.31.46
+ d9443c01a7336-20d1804b6b1sm32323945ad.189.2024.10.16.12.31.49
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 16 Oct 2024 12:31:46 -0700 (PDT)
+ Wed, 16 Oct 2024 12:31:49 -0700 (PDT)
 From: Richard Henderson <richard.henderson@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com,
  zhiwei_liu@linux.alibaba.com,
  TANG Tiancheng <tangtiancheng.ttc@alibaba-inc.com>
-Subject: [PATCH v6 08/14] tcg/riscv: Implement vector neg ops
-Date: Wed, 16 Oct 2024 12:31:34 -0700
-Message-ID: <20241016193140.2206352-9-richard.henderson@linaro.org>
+Subject: [PATCH v6 13/14] tcg/riscv: Implement vector roti/v/x ops
+Date: Wed, 16 Oct 2024 12:31:39 -0700
+Message-ID: <20241016193140.2206352-14-richard.henderson@linaro.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20241016193140.2206352-1-richard.henderson@linaro.org>
 References: <20241016193140.2206352-1-richard.henderson@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::62d;
- envelope-from=richard.henderson@linaro.org; helo=mail-pl1-x62d.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::62b;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pl1-x62b.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -100,66 +99,102 @@ From: TANG Tiancheng <tangtiancheng.ttc@alibaba-inc.com>
 
 Signed-off-by: TANG Tiancheng <tangtiancheng.ttc@alibaba-inc.com>
 Reviewed-by: Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
-Message-ID: <20241007025700.47259-8-zhiwei_liu@linux.alibaba.com>
+Message-ID: <20241007025700.47259-12-zhiwei_liu@linux.alibaba.com>
 Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
 ---
- tcg/riscv/tcg-target.h     | 2 +-
- tcg/riscv/tcg-target.c.inc | 7 +++++++
- 2 files changed, 8 insertions(+), 1 deletion(-)
+ tcg/riscv/tcg-target.h     |  6 +++---
+ tcg/riscv/tcg-target.c.inc | 36 ++++++++++++++++++++++++++++++++++++
+ 2 files changed, 39 insertions(+), 3 deletions(-)
 
 diff --git a/tcg/riscv/tcg-target.h b/tcg/riscv/tcg-target.h
-index 94034504b2..ae10381e02 100644
+index 76d30e789b..e6d66cd1b9 100644
 --- a/tcg/riscv/tcg-target.h
 +++ b/tcg/riscv/tcg-target.h
-@@ -152,7 +152,7 @@ typedef enum {
- #define TCG_TARGET_HAS_nor_vec          0
- #define TCG_TARGET_HAS_eqv_vec          0
+@@ -154,9 +154,9 @@ typedef enum {
  #define TCG_TARGET_HAS_not_vec          1
--#define TCG_TARGET_HAS_neg_vec          0
-+#define TCG_TARGET_HAS_neg_vec          1
+ #define TCG_TARGET_HAS_neg_vec          1
  #define TCG_TARGET_HAS_abs_vec          0
- #define TCG_TARGET_HAS_roti_vec         0
- #define TCG_TARGET_HAS_rots_vec         0
+-#define TCG_TARGET_HAS_roti_vec         0
+-#define TCG_TARGET_HAS_rots_vec         0
+-#define TCG_TARGET_HAS_rotv_vec         0
++#define TCG_TARGET_HAS_roti_vec         1
++#define TCG_TARGET_HAS_rots_vec         1
++#define TCG_TARGET_HAS_rotv_vec         1
+ #define TCG_TARGET_HAS_shi_vec          1
+ #define TCG_TARGET_HAS_shs_vec          1
+ #define TCG_TARGET_HAS_shv_vec          1
 diff --git a/tcg/riscv/tcg-target.c.inc b/tcg/riscv/tcg-target.c.inc
-index 1893c419c6..ce8d6d0293 100644
+index 2c78ea6507..f8331e4688 100644
 --- a/tcg/riscv/tcg-target.c.inc
 +++ b/tcg/riscv/tcg-target.c.inc
-@@ -276,6 +276,7 @@ typedef enum {
-     OPC_VADD_VV = 0x57 | V_OPIVV,
-     OPC_VADD_VI = 0x57 | V_OPIVI,
-     OPC_VSUB_VV = 0x8000057 | V_OPIVV,
-+    OPC_VRSUB_VI = 0xc000057 | V_OPIVI,
-     OPC_VAND_VV = 0x24000057 | V_OPIVV,
-     OPC_VAND_VI = 0x24000057 | V_OPIVI,
-     OPC_VOR_VV = 0x28000057 | V_OPIVV,
-@@ -2367,6 +2368,10 @@ static void tcg_out_vec_op(TCGContext *s, TCGOpcode opc,
-         set_vtype_len(s, type);
-         tcg_out_opc_vi(s, OPC_VXOR_VI, a0, a1, -1);
+@@ -2488,6 +2488,34 @@ static void tcg_out_vec_op(TCGContext *s, TCGOpcode opc,
+         set_vtype_len_sew(s, type, vece);
+         tcg_out_vshifti(s, OPC_VSRA_VI, OPC_VSRA_VX, a0, a1, a2);
          break;
-+    case INDEX_op_neg_vec:
++    case INDEX_op_rotli_vec:
 +        set_vtype_len_sew(s, type, vece);
-+        tcg_out_opc_vi(s, OPC_VRSUB_VI, a0, a1, 0);
++        tcg_out_vshifti(s, OPC_VSLL_VI, OPC_VSLL_VX, TCG_REG_V0, a1, a2);
++        tcg_out_vshifti(s, OPC_VSRL_VI, OPC_VSRL_VX, a0, a1,
++                        -a2 & ((8 << vece) - 1));
++        tcg_out_opc_vv(s, OPC_VOR_VV, a0, a0, TCG_REG_V0);
++        break;
++    case INDEX_op_rotls_vec:
++        set_vtype_len_sew(s, type, vece);
++        tcg_out_opc_vx(s, OPC_VSLL_VX, TCG_REG_V0, a1, a2);
++        tcg_out_opc_reg(s, OPC_SUBW, TCG_REG_TMP0, TCG_REG_ZERO, a2);
++        tcg_out_opc_vx(s, OPC_VSRL_VX, a0, a1, TCG_REG_TMP0);
++        tcg_out_opc_vv(s, OPC_VOR_VV, a0, a0, TCG_REG_V0);
++        break;
++    case INDEX_op_rotlv_vec:
++        set_vtype_len_sew(s, type, vece);
++        tcg_out_opc_vi(s, OPC_VRSUB_VI, TCG_REG_V0, a2, 0);
++        tcg_out_opc_vv(s, OPC_VSRL_VV, TCG_REG_V0, a1, TCG_REG_V0);
++        tcg_out_opc_vv(s, OPC_VSLL_VV, a0, a1, a2);
++        tcg_out_opc_vv(s, OPC_VOR_VV, a0, a0, TCG_REG_V0);
++        break;
++    case INDEX_op_rotrv_vec:
++        set_vtype_len_sew(s, type, vece);
++        tcg_out_opc_vi(s, OPC_VRSUB_VI, TCG_REG_V0, a2, 0);
++        tcg_out_opc_vv(s, OPC_VSLL_VV, TCG_REG_V0, a1, TCG_REG_V0);
++        tcg_out_opc_vv(s, OPC_VSRL_VV, a0, a1, a2);
++        tcg_out_opc_vv(s, OPC_VOR_VV, a0, a0, TCG_REG_V0);
 +        break;
      case INDEX_op_cmp_vec:
          tcg_out_cmpsel(s, type, vece, args[3], a0, a1, a2, c2,
                         -1, true, 0, true);
-@@ -2397,6 +2402,7 @@ int tcg_can_emit_vec_op(TCGOpcode opc, TCGType type, unsigned vece)
-     case INDEX_op_or_vec:
-     case INDEX_op_xor_vec:
-     case INDEX_op_not_vec:
-+    case INDEX_op_neg_vec:
+@@ -2537,6 +2565,10 @@ int tcg_can_emit_vec_op(TCGOpcode opc, TCGType type, unsigned vece)
+     case INDEX_op_shri_vec:
+     case INDEX_op_shli_vec:
+     case INDEX_op_sari_vec:
++    case INDEX_op_rotls_vec:
++    case INDEX_op_rotlv_vec:
++    case INDEX_op_rotrv_vec:
++    case INDEX_op_rotli_vec:
      case INDEX_op_cmp_vec:
      case INDEX_op_cmpsel_vec:
          return 1;
-@@ -2550,6 +2556,7 @@ static TCGConstraintSetIndex tcg_target_op_def(TCGOpcode op)
-     case INDEX_op_dupm_vec:
-     case INDEX_op_ld_vec:
-         return C_O1_I1(v, r);
-+    case INDEX_op_neg_vec:
-     case INDEX_op_not_vec:
+@@ -2695,6 +2727,7 @@ static TCGConstraintSetIndex tcg_target_op_def(TCGOpcode op)
+     case INDEX_op_shli_vec:
+     case INDEX_op_shri_vec:
+     case INDEX_op_sari_vec:
++    case INDEX_op_rotli_vec:
          return C_O1_I1(v, v);
      case INDEX_op_add_vec:
+     case INDEX_op_and_vec:
+@@ -2715,10 +2748,13 @@ static TCGConstraintSetIndex tcg_target_op_def(TCGOpcode op)
+     case INDEX_op_shlv_vec:
+     case INDEX_op_shrv_vec:
+     case INDEX_op_sarv_vec:
++    case INDEX_op_rotlv_vec:
++    case INDEX_op_rotrv_vec:
+         return C_O1_I2(v, v, v);
+     case INDEX_op_shls_vec:
+     case INDEX_op_shrs_vec:
+     case INDEX_op_sars_vec:
++    case INDEX_op_rotls_vec:
+         return C_O1_I2(v, v, r);
+     case INDEX_op_cmp_vec:
+         return C_O1_I2(v, v, vL);
 -- 
 2.43.0
 
