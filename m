@@ -4,75 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D9726D2A54B
-	for <qemu-riscv@archiver.kernel.org>; Wed, 16 Oct 2024 19:35:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7ADCCD1AD44
+	for <qemu-riscv@archiver.kernel.org>; Wed, 16 Oct 2024 20:41:06 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1t19kV-0002nx-9A; Wed, 16 Oct 2024 15:31:59 -0400
+	id 1t1ApB-0004AE-RM; Wed, 16 Oct 2024 16:40:53 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1t19kO-0002hb-Of
- for qemu-riscv@nongnu.org; Wed, 16 Oct 2024 15:31:52 -0400
-Received: from mail-pl1-x636.google.com ([2607:f8b0:4864:20::636])
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1t1Ap8-00048u-V3
+ for qemu-riscv@nongnu.org; Wed, 16 Oct 2024 16:40:50 -0400
+Received: from mail-pg1-x52c.google.com ([2607:f8b0:4864:20::52c])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1t19kL-0003pv-K7
- for qemu-riscv@nongnu.org; Wed, 16 Oct 2024 15:31:52 -0400
-Received: by mail-pl1-x636.google.com with SMTP id
- d9443c01a7336-20caea61132so1383365ad.2
- for <qemu-riscv@nongnu.org>; Wed, 16 Oct 2024 12:31:49 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1t1Ap5-0004bc-EA
+ for qemu-riscv@nongnu.org; Wed, 16 Oct 2024 16:40:49 -0400
+Received: by mail-pg1-x52c.google.com with SMTP id
+ 41be03b00d2f7-7db637d1e4eso243384a12.2
+ for <qemu-riscv@nongnu.org>; Wed, 16 Oct 2024 13:40:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1729107108; x=1729711908; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=dluUCaEndjBCunQfjOsd/2zhh5fJAnoMBhZPYS0jDTY=;
- b=s7GsZPaxxkxY9mrAShlFoEkdDaGA1fSqSQsCnG55hHPlVJHxhJV9kRBdu0QmG4jvcc
- c0pGWoeNEcBwR7xrmcUhe+mMpHaU+Q2eQAqvbl3rVmfJ1L6RbZuKPwUQxVSm6QysqLjw
- I632etlBZi/UQOgpLoXDFApfNz/MD94VwSaxQmzGy3/5Dtl9CwZJZQ5HyWniinaMjqrX
- e5iT7vEeL4bLLGVm7UNE69zWUP7H53mMgN6+EFz9gRHWdqqJQRCJoPmfnXBBuDmg4Dqj
- dLe4hB7+RC2EL/dFz+R+wZGma2LaDIQhyra3zgy3DbKW2daZ6jmG0gux/VjE1yhQkr96
- ECYA==
+ d=ventanamicro.com; s=google; t=1729111245; x=1729716045; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=igh5mCCa45zVdSMgTR9Sg53Z9Gk2P3nQElo7HTvMwp8=;
+ b=Blowfvub8TAtUH/624pYvL5I/7dUH10fmeL6GRgzYw1MjcAr6oJ8mkBknwDkS08le8
+ To+HiECBlkj9aXFFEGfBlYeolvNHY6hk54+av54KXn8Q+UUwM0AS/TlhhbAx3KKbMHm/
+ T1mIKTDBcOroCpYR/g4o2dX8oqQFfc/mhG2WVBTXIRr5XHmuOoCxJF0VckIkYjpFxbT8
+ lJkpT1jGo6Ze6j37I1uBoiFBHml0DfWhovbnFI+9u2FZIOI6W8BtqFAl0StTNwjxQqyn
+ I2IlCqE7dH5RiMHSENuevYZFg1eEym29T5bqm0MI5BeEB7t4+hVq+UMeTBQvuMjG1p3e
+ GgsA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729107108; x=1729711908;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=dluUCaEndjBCunQfjOsd/2zhh5fJAnoMBhZPYS0jDTY=;
- b=jYx0RNFwB5IDdLx6M6ranJ1hdEUiI8xK5tnt+v1cnjfbGu+fWCGvZrsPdSesPaDfdc
- J2lTr+z1KE+TF9YGISn7qivwCWa3m/SaWSchy6nR/L11Y2UA0UcGCdfFmLZlAIHtiZya
- H6h0ov9wqcy5Ibu7ZbwhFPR4tCTbG+DjCCIL7snq5K5Lg6iq5icmk7u7PqoG0EhZN8rJ
- NoE8YkO6KWBPi7KZwdB9Ooi1HAPcx/4Etjoy9hXBs/u9PeG5Ai7DwryYNqzs8tcYPKrN
- l0YzgCqqLbNHy48iCOsPbMpjSCfAKpSulrcTQQaaM0SWZCuF3Rv72witn/8QRjU7Lgom
- tyUA==
-X-Gm-Message-State: AOJu0YxMuSqZHcoNmO9MJHYxHng3hfLVaG/B0S11jicP4xKYMoRZh9JX
- Ya1nZp2vS9duLWL4IiV6ZR5KlGppgsfuGBYXAxfxYQeieLpjY1+Yw2+Bn9vNfR4=
-X-Google-Smtp-Source: AGHT+IGd+q4ycDu4KKuJgYwmSHWw3qn3CzqvgF7/8wUEtvZWDIfAJDtkFOw8ft6NmU0+E2zuuXeHmg==
-X-Received: by 2002:a17:902:e951:b0:20b:59be:77b with SMTP id
- d9443c01a7336-20cbb1a9654mr260092385ad.6.1729107108225; 
- Wed, 16 Oct 2024 12:31:48 -0700 (PDT)
-Received: from stoup.. (174-21-81-121.tukw.qwest.net. [174.21.81.121])
+ d=1e100.net; s=20230601; t=1729111245; x=1729716045;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=igh5mCCa45zVdSMgTR9Sg53Z9Gk2P3nQElo7HTvMwp8=;
+ b=mfDvQNT+GqZxbqblJ8LfkBfe9QnPZ6y+HemZkJzfF0Q1XfqlIk4EeOyz2PrSJZEyWR
+ 2RDVv1BGmvz9ReU45jkczbe13b0vcUH6sD8oCBHUqovU9225qgrqrQ3eafDj156qrQ4Z
+ 37+o2lm6CKMC+waGuomBEueIg8W1U8vy+7beKtrW6vbXDbP3KV6QlUs/dY49qCjktyng
+ /9q+ZGA7F6VgyA3336vUCyo3o/RgsoiOQBuIlqAJQ79mqgmUCiIy1vDwcbhnRrG1OI3b
+ bNTqz4QmgWWrp4phCBwBQa90mnE+iAGYcvQhHyiN1NdAj4qoUIcZUaidB3/5IFAwlDIQ
+ fs5A==
+X-Gm-Message-State: AOJu0YyFjkKzfX4fLGV/e4/8qza1m960r9hba2UhJGiIokvUFVTbdJkX
+ lPizF5hAe0lfNgjO7uaWECgcHDDIXaxqH3RJprHJ8FL3O5nhl8aRCxK/Dmb0v7vgG5IK4UzhEsH
+ D
+X-Google-Smtp-Source: AGHT+IEvjxU3S/vg1O9J6hb7WndUw9xEA9M9uBovBR971LFudAfTOnTrtGaKmL65/6fPOlGCGc9/sg==
+X-Received: by 2002:a17:90a:f184:b0:2e2:e82d:48cf with SMTP id
+ 98e67ed59e1d1-2e3ab7fc85fmr6211847a91.16.1729111245276; 
+ Wed, 16 Oct 2024 13:40:45 -0700 (PDT)
+Received: from grind.dc1.ventanamicro.com ([177.188.133.9])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-20d1804b6b1sm32323945ad.189.2024.10.16.12.31.47
+ 98e67ed59e1d1-2e3e09085cfsm242158a91.54.2024.10.16.13.40.42
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 16 Oct 2024 12:31:47 -0700 (PDT)
-From: Richard Henderson <richard.henderson@linaro.org>
+ Wed, 16 Oct 2024 13:40:44 -0700 (PDT)
+From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 To: qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com,
- zhiwei_liu@linux.alibaba.com,
- TANG Tiancheng <tangtiancheng.ttc@alibaba-inc.com>
-Subject: [PATCH v6 10/14] tcg/riscv: Implement vector sat/mul ops
-Date: Wed, 16 Oct 2024 12:31:36 -0700
-Message-ID: <20241016193140.2206352-11-richard.henderson@linaro.org>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20241016193140.2206352-1-richard.henderson@linaro.org>
-References: <20241016193140.2206352-1-richard.henderson@linaro.org>
+Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
+ liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Subject: [PATCH v10 00/12] riscv: QEMU RISC-V IOMMU support
+Date: Wed, 16 Oct 2024 17:40:24 -0300
+Message-ID: <20241016204038.649340-1-dbarboza@ventanamicro.com>
+X-Mailer: git-send-email 2.45.2
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::636;
- envelope-from=richard.henderson@linaro.org; helo=mail-pl1-x636.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::52c;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pg1-x52c.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -95,110 +93,75 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: TANG Tiancheng <tangtiancheng.ttc@alibaba-inc.com>
+Hi,
 
-Signed-off-by: TANG Tiancheng <tangtiancheng.ttc@alibaba-inc.com>
-Reviewed-by: Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
-Message-ID: <20241007025700.47259-9-zhiwei_liu@linux.alibaba.com>
-Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
----
- tcg/riscv/tcg-target.h     |  4 ++--
- tcg/riscv/tcg-target.c.inc | 41 ++++++++++++++++++++++++++++++++++++++
- 2 files changed, 43 insertions(+), 2 deletions(-)
+In this new version we fixed address alignment issues in some command
+queue commands, pointed out by Jason in v9.
 
-diff --git a/tcg/riscv/tcg-target.h b/tcg/riscv/tcg-target.h
-index ae10381e02..1d4d8878ce 100644
---- a/tcg/riscv/tcg-target.h
-+++ b/tcg/riscv/tcg-target.h
-@@ -160,8 +160,8 @@ typedef enum {
- #define TCG_TARGET_HAS_shi_vec          0
- #define TCG_TARGET_HAS_shs_vec          0
- #define TCG_TARGET_HAS_shv_vec          0
--#define TCG_TARGET_HAS_mul_vec          0
--#define TCG_TARGET_HAS_sat_vec          0
-+#define TCG_TARGET_HAS_mul_vec          1
-+#define TCG_TARGET_HAS_sat_vec          1
- #define TCG_TARGET_HAS_minmax_vec       0
- #define TCG_TARGET_HAS_bitsel_vec       0
- #define TCG_TARGET_HAS_cmpsel_vec       1
-diff --git a/tcg/riscv/tcg-target.c.inc b/tcg/riscv/tcg-target.c.inc
-index 1ce2f291d3..4758555565 100644
---- a/tcg/riscv/tcg-target.c.inc
-+++ b/tcg/riscv/tcg-target.c.inc
-@@ -284,6 +284,16 @@ typedef enum {
-     OPC_VXOR_VV = 0x2c000057 | V_OPIVV,
-     OPC_VXOR_VI = 0x2c000057 | V_OPIVI,
- 
-+    OPC_VMUL_VV = 0x94000057 | V_OPMVV,
-+    OPC_VSADD_VV = 0x84000057 | V_OPIVV,
-+    OPC_VSADD_VI = 0x84000057 | V_OPIVI,
-+    OPC_VSSUB_VV = 0x8c000057 | V_OPIVV,
-+    OPC_VSSUB_VI = 0x8c000057 | V_OPIVI,
-+    OPC_VSADDU_VV = 0x80000057 | V_OPIVV,
-+    OPC_VSADDU_VI = 0x80000057 | V_OPIVI,
-+    OPC_VSSUBU_VV = 0x88000057 | V_OPIVV,
-+    OPC_VSSUBU_VI = 0x88000057 | V_OPIVI,
-+
-     OPC_VMSEQ_VV = 0x60000057 | V_OPIVV,
-     OPC_VMSEQ_VI = 0x60000057 | V_OPIVI,
-     OPC_VMSEQ_VX = 0x60000057 | V_OPIVX,
-@@ -2376,6 +2386,26 @@ static void tcg_out_vec_op(TCGContext *s, TCGOpcode opc,
-         set_vtype_len_sew(s, type, vece);
-         tcg_out_opc_vi(s, OPC_VRSUB_VI, a0, a1, 0);
-         break;
-+    case INDEX_op_mul_vec:
-+        set_vtype_len_sew(s, type, vece);
-+        tcg_out_opc_vv(s, OPC_VMUL_VV, a0, a1, a2);
-+        break;
-+    case INDEX_op_ssadd_vec:
-+        set_vtype_len_sew(s, type, vece);
-+        tcg_out_opc_vv_vi(s, OPC_VSADD_VV, OPC_VSADD_VI, a0, a1, a2, c2);
-+        break;
-+    case INDEX_op_sssub_vec:
-+        set_vtype_len_sew(s, type, vece);
-+        tcg_out_opc_vv_vi(s, OPC_VSSUB_VV, OPC_VSSUB_VI, a0, a1, a2, c2);
-+        break;
-+    case INDEX_op_usadd_vec:
-+        set_vtype_len_sew(s, type, vece);
-+        tcg_out_opc_vv_vi(s, OPC_VSADDU_VV, OPC_VSADDU_VI, a0, a1, a2, c2);
-+        break;
-+    case INDEX_op_ussub_vec:
-+        set_vtype_len_sew(s, type, vece);
-+        tcg_out_opc_vv_vi(s, OPC_VSSUBU_VV, OPC_VSSUBU_VI, a0, a1, a2, c2);
-+        break;
-     case INDEX_op_cmp_vec:
-         tcg_out_cmpsel(s, type, vece, args[3], a0, a1, a2, c2,
-                        -1, true, 0, true);
-@@ -2407,6 +2437,11 @@ int tcg_can_emit_vec_op(TCGOpcode opc, TCGType type, unsigned vece)
-     case INDEX_op_xor_vec:
-     case INDEX_op_not_vec:
-     case INDEX_op_neg_vec:
-+    case INDEX_op_mul_vec:
-+    case INDEX_op_ssadd_vec:
-+    case INDEX_op_sssub_vec:
-+    case INDEX_op_usadd_vec:
-+    case INDEX_op_ussub_vec:
-     case INDEX_op_cmp_vec:
-     case INDEX_op_cmpsel_vec:
-         return 1;
-@@ -2567,9 +2602,15 @@ static TCGConstraintSetIndex tcg_target_op_def(TCGOpcode op)
-     case INDEX_op_and_vec:
-     case INDEX_op_or_vec:
-     case INDEX_op_xor_vec:
-+    case INDEX_op_ssadd_vec:
-+    case INDEX_op_sssub_vec:
-+    case INDEX_op_usadd_vec:
-+    case INDEX_op_ussub_vec:
-         return C_O1_I2(v, v, vK);
-     case INDEX_op_sub_vec:
-         return C_O1_I2(v, vK, v);
-+    case INDEX_op_mul_vec:
-+        return C_O1_I2(v, v, v);
-     case INDEX_op_cmp_vec:
-         return C_O1_I2(v, v, vL);
-     case INDEX_op_cmpsel_vec:
+No other changes made. Series based on alistair/riscv-to-apply.next.
+
+All patches reviewed.
+
+Changes from v9:
+- patch 3:
+  - fixed cmd.dword1 alignment in riscv_iommu_process_cq_tail()
+- patch 8:
+  - fixed cmd.dword1 alignment in riscv_iommu_process_cq_tail()
+- v9 link: https://lore.kernel.org/qemu-riscv/20241004155721.2154626-1-dbarboza@ventanamicro.com/
+
+
+Daniel Henrique Barboza (4):
+  pci-ids.rst: add Red Hat pci-id for RISC-V IOMMU device
+  test/qtest: add riscv-iommu-pci tests
+  qtest/riscv-iommu-test: add init queues test
+  docs/specs: add riscv-iommu
+
+Tomasz Jeznach (8):
+  exec/memtxattr: add process identifier to the transaction attributes
+  hw/riscv: add riscv-iommu-bits.h
+  hw/riscv: add RISC-V IOMMU base emulation
+  hw/riscv: add riscv-iommu-pci reference device
+  hw/riscv/virt.c: support for RISC-V IOMMU PCIDevice hotplug
+  hw/riscv/riscv-iommu: add Address Translation Cache (IOATC)
+  hw/riscv/riscv-iommu: add ATS support
+  hw/riscv/riscv-iommu: add DBG support
+
+ docs/specs/index.rst             |    1 +
+ docs/specs/pci-ids.rst           |    2 +
+ docs/specs/riscv-iommu.rst       |   90 ++
+ docs/system/riscv/virt.rst       |   13 +
+ hw/riscv/Kconfig                 |    4 +
+ hw/riscv/meson.build             |    1 +
+ hw/riscv/riscv-iommu-bits.h      |  421 ++++++
+ hw/riscv/riscv-iommu-pci.c       |  202 +++
+ hw/riscv/riscv-iommu.c           | 2399 ++++++++++++++++++++++++++++++
+ hw/riscv/riscv-iommu.h           |  130 ++
+ hw/riscv/trace-events            |   17 +
+ hw/riscv/trace.h                 |    1 +
+ hw/riscv/virt.c                  |   33 +-
+ include/exec/memattrs.h          |    5 +
+ include/hw/pci/pci.h             |    1 +
+ include/hw/riscv/iommu.h         |   36 +
+ meson.build                      |    1 +
+ tests/qtest/libqos/meson.build   |    4 +
+ tests/qtest/libqos/riscv-iommu.c |   76 +
+ tests/qtest/libqos/riscv-iommu.h |  101 ++
+ tests/qtest/meson.build          |    1 +
+ tests/qtest/riscv-iommu-test.c   |  210 +++
+ 22 files changed, 3748 insertions(+), 1 deletion(-)
+ create mode 100644 docs/specs/riscv-iommu.rst
+ create mode 100644 hw/riscv/riscv-iommu-bits.h
+ create mode 100644 hw/riscv/riscv-iommu-pci.c
+ create mode 100644 hw/riscv/riscv-iommu.c
+ create mode 100644 hw/riscv/riscv-iommu.h
+ create mode 100644 hw/riscv/trace-events
+ create mode 100644 hw/riscv/trace.h
+ create mode 100644 include/hw/riscv/iommu.h
+ create mode 100644 tests/qtest/libqos/riscv-iommu.c
+ create mode 100644 tests/qtest/libqos/riscv-iommu.h
+ create mode 100644 tests/qtest/riscv-iommu-test.c
+
 -- 
-2.43.0
+2.45.2
 
 
