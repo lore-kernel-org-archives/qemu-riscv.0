@@ -4,87 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A0BB0D1AD2E
-	for <qemu-riscv@archiver.kernel.org>; Wed, 16 Oct 2024 08:48:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 08BAAD1AD3A
+	for <qemu-riscv@archiver.kernel.org>; Wed, 16 Oct 2024 09:40:51 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1t0zhf-0004sO-Vp; Wed, 16 Oct 2024 04:48:24 -0400
+	id 1t10WJ-0008ID-Cx; Wed, 16 Oct 2024 05:40:43 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <jason.chien@sifive.com>)
- id 1t0zhe-0004rx-2N
- for qemu-riscv@nongnu.org; Wed, 16 Oct 2024 04:48:22 -0400
-Received: from mail-pj1-x1035.google.com ([2607:f8b0:4864:20::1035])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <jason.chien@sifive.com>)
- id 1t0zhb-0006N0-RV
- for qemu-riscv@nongnu.org; Wed, 16 Oct 2024 04:48:21 -0400
-Received: by mail-pj1-x1035.google.com with SMTP id
- 98e67ed59e1d1-2e31af47681so3020471a91.2
- for <qemu-riscv@nongnu.org>; Wed, 16 Oct 2024 01:48:19 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
+ id 1t10WE-0008GW-Uq; Wed, 16 Oct 2024 05:40:39 -0400
+Received: from out30-100.freemail.mail.aliyun.com ([115.124.30.100])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
+ id 1t10WB-0003qF-Gy; Wed, 16 Oct 2024 05:40:38 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1729068498; x=1729673298; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=4QtI/UUjdsogtNmT+vN0TwmE736oFbMmChiuFZp29d8=;
- b=BF0RZ12GhWgK01dV9uim3BcQg3sLp+lKAe6Gdi0s7/+GdPPWNL8x4sqKiBge6S6ETn
- DYX261LIMldv6EazUCgBrIn3hD1x+BlCqOS2vfd8hRBKsYrJYGys2EqVv6+WBt7sR7KQ
- KmgK4Jk4VWPqsq37fXPfD7wP/QdNZ1WFhTlN2QOQxUMeGQ3PgdObMQazPixa95b4cV7G
- lRfqkU8qB+Hmu5n7FJKcd6Hnmf/Yu3X1PvhJm/x+MpBMRZ4PsmcVgCQG1wkrUXxSWwI5
- Gh6tNco1w+E4vGixTcYH2SCJHElZC3/75iKmPWMiss6w/C70PrPYVFqbvB/pCIQqbz5m
- giyQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729068498; x=1729673298;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=4QtI/UUjdsogtNmT+vN0TwmE736oFbMmChiuFZp29d8=;
- b=lAX/vPOqIixL5IsXyBI36UtlILCJwQs1IC8vrOdVZ7U/5UUEZtzqnVJjNWdy5w4pLv
- rBPg9WWH81Dgx+R8a5S2A0G1u/Nzq5sJFjAOw6azgWcpV9cfLWWgnVljjq1j/1OdDhaQ
- nM3rAlI/DYPc9Mmynt3xnj/+s46nHb5sMNhlwPeQ/Tipa7gZ7IWWHiSbVocQIzRYRPei
- rmUQ7FvV7qrxFXDe4Ptm7WmPLBFNJolq0oZTXl9bW44QlIPDdiGbPQeMUjJrFDasrU5F
- v8qwenQcReQNjbmaDaTD9pZ7Patr0l5/dnLeZrmS3WFGF9FKEZdAhFtPtx/9AzkV8iwn
- OU0Q==
-X-Gm-Message-State: AOJu0Yz8d7YM+EG9MdGq/NiOj8nWEYo3aPBLTBEeykxhUgcQ3WOu3Zan
- 7LqSRfyAbrfqgJFCfqfl6hJgWOJf8yq2UqeXlNEliGkn9MXh0IX2hUjMHLlZ/aQ=
-X-Google-Smtp-Source: AGHT+IGubD1DLo2Gei/fs/sIvnNQLEIuKybnBYH/GYiratoV5int4v+xKg0PEyx9TSnXTJ5ec7kpTQ==
-X-Received: by 2002:a17:90b:1dc1:b0:2e2:ca4d:9164 with SMTP id
- 98e67ed59e1d1-2e2f0add17dmr18827030a91.12.1729068498145; 
- Wed, 16 Oct 2024 01:48:18 -0700 (PDT)
-Received: from [192.168.100.202] ([136.226.240.171])
- by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-2e392e8ecbfsm3526004a91.3.2024.10.16.01.48.15
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 16 Oct 2024 01:48:17 -0700 (PDT)
-Message-ID: <7d6f6ed3-4a3d-41d4-876c-1806db93326b@sifive.com>
-Date: Wed, 16 Oct 2024 16:48:14 +0800
+ d=linux.alibaba.com; s=default;
+ t=1729071622; h=Message-ID:Date:MIME-Version:Subject:To:From:Content-Type;
+ bh=L/9BepXgg8FK+oaCHRxAAyovIr3rd5a4/hNairMCdZI=;
+ b=lvNwHSQqMjoO6Y2Ax5fhC1CmmeJQqbtiOut00LUScuWRvJTSc+WBoeRQwQ07ifheXwXEUp0ryl7mNkc7lp/MFH382pncyM/161oBRusqROn9NSULU332L5M3g2C763Aps7QsiJjzQhZwlBhPo2u8c6fgGZtaB7OyDE+a1I5R4yA=
+Received: from 30.166.64.81(mailfrom:zhiwei_liu@linux.alibaba.com
+ fp:SMTPD_---0WHGyT-N_1729071618 cluster:ay36) by smtp.aliyun-inc.com;
+ Wed, 16 Oct 2024 17:40:19 +0800
+Message-ID: <f4ae3ad2-bd3e-4b9e-9013-b890e561df0a@linux.alibaba.com>
+Date: Wed, 16 Oct 2024 17:40:17 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v9 08/12] hw/riscv/riscv-iommu: add Address Translation
- Cache (IOATC)
-To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>, qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
- liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
- ajones@ventanamicro.com, Tomasz Jeznach <tjeznach@rivosinc.com>,
- Frank Chang <frank.chang@sifive.com>
-References: <20241004155721.2154626-1-dbarboza@ventanamicro.com>
- <20241004155721.2154626-9-dbarboza@ventanamicro.com>
+Subject: Re: [PATCH v3 1/8] target/riscv: Add Ssdbltrp CSRs handling
+To: =?UTF-8?B?Q2zDqW1lbnQgTMOpZ2Vy?= <cleger@rivosinc.com>,
+ qemu-riscv@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Bin Meng <bin.meng@windriver.com>
+Cc: Weiwei Li <liwei1518@gmail.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Ved Shanbhogue <ved@rivosinc.com>, Atish Patra <atishp@rivosinc.com>,
+ qemu-devel@nongnu.org
+References: <20241014112225.90297-1-cleger@rivosinc.com>
+ <20241014112225.90297-2-cleger@rivosinc.com>
 Content-Language: en-US
-From: Jason Chien <jason.chien@sifive.com>
-In-Reply-To: <20241004155721.2154626-9-dbarboza@ventanamicro.com>
+From: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
+In-Reply-To: <20241014112225.90297-2-cleger@rivosinc.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1035;
- envelope-from=jason.chien@sifive.com; helo=mail-pj1-x1035.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+Received-SPF: pass client-ip=115.124.30.100;
+ envelope-from=zhiwei_liu@linux.alibaba.com;
+ helo=out30-100.freemail.mail.aliyun.com
+X-Spam_score_int: -174
+X-Spam_score: -17.5
+X-Spam_bar: -----------------
+X-Spam_report: (-17.5 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, ENV_AND_HDR_SPF_MATCH=-0.5,
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_VALIDITY_CERTIFIED_BLOCKED=0.001,
+ RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ UNPARSEABLE_RELAY=0.001, USER_IN_DEF_DKIM_WL=-7.5,
+ USER_IN_DEF_SPF_WL=-7.5 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -100,320 +73,274 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Hi Daniel,
 
-On 2024/10/4 下午 11:57, Daniel Henrique Barboza wrote:
-> From: Tomasz Jeznach <tjeznach@rivosinc.com>
+On 2024/10/14 19:22, Clément Léger wrote:
+> Add ext_ssdbltrp in RISCVCPUConfig and implement MSTATUS.SDT,
+> {H|M}ENVCFG.DTE and modify the availability of MTVAL2 based on the
+> presence of the Ssdbltrp ISA extension.
 >
-> The RISC-V IOMMU spec predicts that the IOMMU can use translation caches
-> to hold entries from the DDT. This includes implementation for all cache
-> commands that are marked as 'not implemented'.
->
-> There are some artifacts included in the cache that predicts s-stage and
-> g-stage elements, although we don't support it yet. We'll introduce them
-> next.
->
-> Signed-off-by: Tomasz Jeznach <tjeznach@rivosinc.com>
-> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-> Reviewed-by: Frank Chang <frank.chang@sifive.com>
-> Acked-by: Alistair Francis <alistair.francis@wdc.com>
+> Signed-off-by: Clément Léger <cleger@rivosinc.com>
+> Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 > ---
->   hw/riscv/riscv-iommu.c | 204 ++++++++++++++++++++++++++++++++++++++++-
->   hw/riscv/riscv-iommu.h |   3 +
->   2 files changed, 203 insertions(+), 4 deletions(-)
+>   target/riscv/cpu.h        |  1 +
+>   target/riscv/cpu_bits.h   |  6 ++++++
+>   target/riscv/cpu_cfg.h    |  1 +
+>   target/riscv/cpu_helper.c | 20 +++++++++++++++++
+>   target/riscv/csr.c        | 45 ++++++++++++++++++++++++++++++---------
+>   5 files changed, 63 insertions(+), 10 deletions(-)
 >
-> diff --git a/hw/riscv/riscv-iommu.c b/hw/riscv/riscv-iommu.c
-> index f2679f3740..cef54b56ba 100644
-> --- a/hw/riscv/riscv-iommu.c
-> +++ b/hw/riscv/riscv-iommu.c
-> @@ -64,6 +64,15 @@ struct RISCVIOMMUContext {
->       uint64_t msiptp;            /* MSI redirection page table pointer */
->   };
+> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+> index a84e719d3f..ee984bf270 100644
+> --- a/target/riscv/cpu.h
+> +++ b/target/riscv/cpu.h
+> @@ -553,6 +553,7 @@ void riscv_cpu_set_geilen(CPURISCVState *env, target_ulong geilen);
+>   bool riscv_cpu_vector_enabled(CPURISCVState *env);
+>   void riscv_cpu_set_virt_enabled(CPURISCVState *env, bool enable);
+>   int riscv_env_mmu_index(CPURISCVState *env, bool ifetch);
+> +bool riscv_env_smode_dbltrp_enabled(CPURISCVState *env, bool virt);
+>   G_NORETURN void  riscv_cpu_do_unaligned_access(CPUState *cs, vaddr addr,
+>                                                  MMUAccessType access_type,
+>                                                  int mmu_idx, uintptr_t retaddr);
+> diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
+> index da1723496c..3a5588d4df 100644
+> --- a/target/riscv/cpu_bits.h
+> +++ b/target/riscv/cpu_bits.h
+> @@ -558,6 +558,7 @@
+>   #define MSTATUS_TVM         0x00100000 /* since: priv-1.10 */
+>   #define MSTATUS_TW          0x00200000 /* since: priv-1.10 */
+>   #define MSTATUS_TSR         0x00400000 /* since: priv-1.10 */
+> +#define MSTATUS_SDT         0x01000000
+>   #define MSTATUS_GVA         0x4000000000ULL
+>   #define MSTATUS_MPV         0x8000000000ULL
 >   
-> +/* Address translation cache entry */
-> +struct RISCVIOMMUEntry {
-> +    uint64_t iova:44;           /* IOVA Page Number */
-> +    uint64_t pscid:20;          /* Process Soft-Context identifier */
-> +    uint64_t phys:44;           /* Physical Page Number */
-> +    uint64_t gscid:16;          /* Guest Soft-Context identifier */
-> +    uint64_t perm:2;            /* IOMMU_RW flags */
-> +};
-> +
->   /* IOMMU index for transactions without process_id specified. */
->   #define RISCV_IOMMU_NOPROCID 0
+> @@ -588,6 +589,7 @@ typedef enum {
+>   #define SSTATUS_XS          0x00018000
+>   #define SSTATUS_SUM         0x00040000 /* since: priv-1.10 */
+>   #define SSTATUS_MXR         0x00080000
+> +#define SSTATUS_SDT         0x01000000
 >   
-> @@ -1154,13 +1163,132 @@ static AddressSpace *riscv_iommu_space(RISCVIOMMUState *s, uint32_t devid)
->       return &as->iova_as;
+>   #define SSTATUS64_UXL       0x0000000300000000ULL
+>   
+> @@ -777,11 +779,13 @@ typedef enum RISCVException {
+>   #define MENVCFG_CBIE                       (3UL << 4)
+>   #define MENVCFG_CBCFE                      BIT(6)
+>   #define MENVCFG_CBZE                       BIT(7)
+> +#define MENVCFG_DTE                        (1ULL << 59)
+>   #define MENVCFG_ADUE                       (1ULL << 61)
+>   #define MENVCFG_PBMTE                      (1ULL << 62)
+>   #define MENVCFG_STCE                       (1ULL << 63)
+>   
+>   /* For RV32 */
+> +#define MENVCFGH_DTE                       BIT(27)
+>   #define MENVCFGH_ADUE                      BIT(29)
+>   #define MENVCFGH_PBMTE                     BIT(30)
+>   #define MENVCFGH_STCE                      BIT(31)
+> @@ -795,11 +799,13 @@ typedef enum RISCVException {
+>   #define HENVCFG_CBIE                       MENVCFG_CBIE
+>   #define HENVCFG_CBCFE                      MENVCFG_CBCFE
+>   #define HENVCFG_CBZE                       MENVCFG_CBZE
+> +#define HENVCFG_DTE                        MENVCFG_DTE
+>   #define HENVCFG_ADUE                       MENVCFG_ADUE
+>   #define HENVCFG_PBMTE                      MENVCFG_PBMTE
+>   #define HENVCFG_STCE                       MENVCFG_STCE
+>   
+>   /* For RV32 */
+> +#define HENVCFGH_DTE                        MENVCFGH_DTE
+>   #define HENVCFGH_ADUE                       MENVCFGH_ADUE
+>   #define HENVCFGH_PBMTE                      MENVCFGH_PBMTE
+>   #define HENVCFGH_STCE                       MENVCFGH_STCE
+> diff --git a/target/riscv/cpu_cfg.h b/target/riscv/cpu_cfg.h
+> index ae2a945b5f..dd804f95d4 100644
+> --- a/target/riscv/cpu_cfg.h
+> +++ b/target/riscv/cpu_cfg.h
+> @@ -77,6 +77,7 @@ struct RISCVCPUConfig {
+>       bool ext_smstateen;
+>       bool ext_sstc;
+>       bool ext_smcntrpmf;
+> +    bool ext_ssdbltrp;
+>       bool ext_svadu;
+>       bool ext_svinval;
+>       bool ext_svnapot;
+> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+> index 9d0400035f..77e7736d8a 100644
+> --- a/target/riscv/cpu_helper.c
+> +++ b/target/riscv/cpu_helper.c
+> @@ -63,6 +63,22 @@ int riscv_env_mmu_index(CPURISCVState *env, bool ifetch)
+>   #endif
 >   }
 >   
-> +/* Translation Object cache support */
-> +static gboolean riscv_iommu_iot_equal(gconstpointer v1, gconstpointer v2)
+> +bool riscv_env_smode_dbltrp_enabled(CPURISCVState *env, bool virt)
 > +{
-> +    RISCVIOMMUEntry *t1 = (RISCVIOMMUEntry *) v1;
-> +    RISCVIOMMUEntry *t2 = (RISCVIOMMUEntry *) v2;
-> +    return t1->gscid == t2->gscid && t1->pscid == t2->pscid &&
-> +           t1->iova == t2->iova;
-> +}
-> +
-> +static guint riscv_iommu_iot_hash(gconstpointer v)
-> +{
-> +    RISCVIOMMUEntry *t = (RISCVIOMMUEntry *) v;
-> +    return (guint)t->iova;
-> +}
-> +
-> +/* GV: 1 PSCV: 1 AV: 1 */
-> +static void riscv_iommu_iot_inval_pscid_iova(gpointer key, gpointer value,
-> +                                             gpointer data)
-> +{
-> +    RISCVIOMMUEntry *iot = (RISCVIOMMUEntry *) value;
-> +    RISCVIOMMUEntry *arg = (RISCVIOMMUEntry *) data;
-> +    if (iot->gscid == arg->gscid &&
-> +        iot->pscid == arg->pscid &&
-> +        iot->iova == arg->iova) {
-> +        iot->perm = IOMMU_NONE;
+> +#ifdef CONFIG_USER_ONLY
+> +    return false;
+> +#else
+> +    if (!riscv_cpu_cfg(env)->ext_ssdbltrp) {
+> +        return false;
 > +    }
-> +}
-> +
-> +/* GV: 1 PSCV: 1 AV: 0 */
-> +static void riscv_iommu_iot_inval_pscid(gpointer key, gpointer value,
-> +                                        gpointer data)
-> +{
-> +    RISCVIOMMUEntry *iot = (RISCVIOMMUEntry *) value;
-> +    RISCVIOMMUEntry *arg = (RISCVIOMMUEntry *) data;
-> +    if (iot->gscid == arg->gscid &&
-> +        iot->pscid == arg->pscid) {
-> +        iot->perm = IOMMU_NONE;
+
+As we have guard the write to henvcfg and menvcfg by ext_ssdbltrp, I 
+think it is enough only check henvcfg or menvcfg.
+
+The only miss is we don't guard the writhe to henvcfgh. I think we can 
+add the guard there.
+
+> +    if (virt) {
+> +        return (env->henvcfg & HENVCFG_DTE) != 0;
+> +    } else {
+> +        return (env->menvcfg & MENVCFG_DTE) != 0;
 > +    }
+> +#endif
 > +}
 > +
-> +/* GV: 1 GVMA: 1 */
-> +static void riscv_iommu_iot_inval_gscid_gpa(gpointer key, gpointer value,
-> +                                            gpointer data)
-> +{
-> +    RISCVIOMMUEntry *iot = (RISCVIOMMUEntry *) value;
-> +    RISCVIOMMUEntry *arg = (RISCVIOMMUEntry *) data;
-> +    if (iot->gscid == arg->gscid) {
-> +        /* simplified cache, no GPA matching */
-> +        iot->perm = IOMMU_NONE;
-> +    }
-> +}
-> +
-> +/* GV: 1 GVMA: 0 */
-> +static void riscv_iommu_iot_inval_gscid(gpointer key, gpointer value,
-> +                                        gpointer data)
-> +{
-> +    RISCVIOMMUEntry *iot = (RISCVIOMMUEntry *) value;
-> +    RISCVIOMMUEntry *arg = (RISCVIOMMUEntry *) data;
-> +    if (iot->gscid == arg->gscid) {
-> +        iot->perm = IOMMU_NONE;
-> +    }
-> +}
-> +
-> +/* GV: 0 */
-> +static void riscv_iommu_iot_inval_all(gpointer key, gpointer value,
-> +                                      gpointer data)
-> +{
-> +    RISCVIOMMUEntry *iot = (RISCVIOMMUEntry *) value;
-> +    iot->perm = IOMMU_NONE;
-> +}
-> +
-> +/* caller should keep ref-count for iot_cache object */
-> +static RISCVIOMMUEntry *riscv_iommu_iot_lookup(RISCVIOMMUContext *ctx,
-> +    GHashTable *iot_cache, hwaddr iova)
-> +{
-> +    RISCVIOMMUEntry key = {
-> +        .gscid = get_field(ctx->gatp, RISCV_IOMMU_DC_IOHGATP_GSCID),
-> +        .pscid = get_field(ctx->ta, RISCV_IOMMU_DC_TA_PSCID),
-> +        .iova  = PPN_DOWN(iova),
-> +    };
-> +    return g_hash_table_lookup(iot_cache, &key);
-> +}
-> +
-> +/* caller should keep ref-count for iot_cache object */
-> +static void riscv_iommu_iot_update(RISCVIOMMUState *s,
-> +    GHashTable *iot_cache, RISCVIOMMUEntry *iot)
-> +{
-> +    if (!s->iot_limit) {
-> +        return;
-> +    }
-> +
-> +    if (g_hash_table_size(s->iot_cache) >= s->iot_limit) {
-> +        iot_cache = g_hash_table_new_full(riscv_iommu_iot_hash,
-> +                                          riscv_iommu_iot_equal,
-> +                                          g_free, NULL);
-> +        g_hash_table_unref(qatomic_xchg(&s->iot_cache, iot_cache));
-> +    }
-> +    g_hash_table_add(iot_cache, iot);
-> +}
-> +
-> +static void riscv_iommu_iot_inval(RISCVIOMMUState *s, GHFunc func,
-> +    uint32_t gscid, uint32_t pscid, hwaddr iova)
-> +{
-> +    GHashTable *iot_cache;
-> +    RISCVIOMMUEntry key = {
-> +        .gscid = gscid,
-> +        .pscid = pscid,
-> +        .iova  = PPN_DOWN(iova),
-> +    };
-> +
-> +    iot_cache = g_hash_table_ref(s->iot_cache);
-> +    g_hash_table_foreach(iot_cache, func, &key);
-> +    g_hash_table_unref(iot_cache);
-> +}
-> +
->   static int riscv_iommu_translate(RISCVIOMMUState *s, RISCVIOMMUContext *ctx,
-> -    IOMMUTLBEntry *iotlb)
-> +    IOMMUTLBEntry *iotlb, bool enable_cache)
+>   void cpu_get_tb_cpu_state(CPURISCVState *env, vaddr *pc,
+>                             uint64_t *cs_base, uint32_t *pflags)
 >   {
-> +    RISCVIOMMUEntry *iot;
-> +    IOMMUAccessFlags perm;
->       bool enable_pid;
->       bool enable_pri;
-> +    GHashTable *iot_cache;
->       int fault;
+> @@ -562,6 +578,10 @@ void riscv_cpu_swap_hypervisor_regs(CPURISCVState *env)
 >   
-> +    iot_cache = g_hash_table_ref(s->iot_cache);
->       /*
->        * TC[32] is reserved for custom extensions, used here to temporarily
->        * enable automatic page-request generation for ATS queries.
-> @@ -1168,9 +1296,43 @@ static int riscv_iommu_translate(RISCVIOMMUState *s, RISCVIOMMUContext *ctx,
->       enable_pri = (iotlb->perm == IOMMU_NONE) && (ctx->tc & BIT_ULL(32));
->       enable_pid = (ctx->tc & RISCV_IOMMU_DC_TC_PDTV);
+>       g_assert(riscv_has_ext(env, RVH));
 >   
-> +    iot = riscv_iommu_iot_lookup(ctx, iot_cache, iotlb->iova);
-> +    perm = iot ? iot->perm : IOMMU_NONE;
-> +    if (perm != IOMMU_NONE) {
-> +        iotlb->translated_addr = PPN_PHYS(iot->phys);
-> +        iotlb->addr_mask = ~TARGET_PAGE_MASK;
-> +        iotlb->perm = perm;
-> +        fault = 0;
-> +        goto done;
+> +    if (riscv_env_smode_dbltrp_enabled(env, current_virt)) {
+> +        mstatus_mask |= MSTATUS_SDT;
 > +    }
 > +
->       /* Translate using device directory / page table information. */
->       fault = riscv_iommu_spa_fetch(s, ctx, iotlb);
->   
-> +    if (!fault && iotlb->target_as == &s->trap_as) {
-> +        /* Do not cache trapped MSI translations */
-> +        goto done;
-> +    }
-> +
-> +    /*
-> +     * We made an implementation choice to not cache identity-mapped
-> +     * translations, as allowed by the specification, to avoid
-> +     * translation cache evictions for other devices sharing the
-> +     * IOMMU hardware model.
-> +     */
-> +    if (!fault && iotlb->translated_addr != iotlb->iova && enable_cache) {
-> +        iot = g_new0(RISCVIOMMUEntry, 1);
-> +        iot->iova = PPN_DOWN(iotlb->iova);
-> +        iot->phys = PPN_DOWN(iotlb->translated_addr);
-> +        iot->gscid = get_field(ctx->gatp, RISCV_IOMMU_DC_IOHGATP_GSCID);
-> +        iot->pscid = get_field(ctx->ta, RISCV_IOMMU_DC_TA_PSCID);
-> +        iot->perm = iotlb->perm;
-> +        riscv_iommu_iot_update(s, iot_cache, iot);
-> +    }
-> +
-> +done:
-> +    g_hash_table_unref(iot_cache);
-> +
->       if (enable_pri && fault) {
->           struct riscv_iommu_pq_record pr = {0};
->           if (enable_pid) {
-> @@ -1310,13 +1472,40 @@ static void riscv_iommu_process_cq_tail(RISCVIOMMUState *s)
->               if (cmd.dword0 & RISCV_IOMMU_CMD_IOTINVAL_PSCV) {
->                   /* illegal command arguments IOTINVAL.GVMA & PSCV == 1 */
->                   goto cmd_ill;
-> +            } else if (!(cmd.dword0 & RISCV_IOMMU_CMD_IOTINVAL_GV)) {
-> +                /* invalidate all cache mappings */
-> +                func = riscv_iommu_iot_inval_all;
-> +            } else if (!(cmd.dword0 & RISCV_IOMMU_CMD_IOTINVAL_AV)) {
-> +                /* invalidate cache matching GSCID */
-> +                func = riscv_iommu_iot_inval_gscid;
-> +            } else {
-> +                /* invalidate cache matching GSCID and ADDR (GPA) */
-> +                func = riscv_iommu_iot_inval_gscid_gpa;
->               }
-> -            /* translation cache not implemented yet */
-> +            riscv_iommu_iot_inval(s, func,
-> +                get_field(cmd.dword0, RISCV_IOMMU_CMD_IOTINVAL_GSCID), 0,
-> +                cmd.dword1 & TARGET_PAGE_MASK);
-We need to do cmd.dword1 << 2.
->               break;
->   
->           case RISCV_IOMMU_CMD(RISCV_IOMMU_CMD_IOTINVAL_FUNC_VMA,
->                                RISCV_IOMMU_CMD_IOTINVAL_OPCODE):
-> -            /* translation cache not implemented yet */
-> +            if (!(cmd.dword0 & RISCV_IOMMU_CMD_IOTINVAL_GV)) {
-> +                /* invalidate all cache mappings, simplified model */
-> +                func = riscv_iommu_iot_inval_all;
-> +            } else if (!(cmd.dword0 & RISCV_IOMMU_CMD_IOTINVAL_PSCV)) {
-> +                /* invalidate cache matching GSCID, simplified model */
-> +                func = riscv_iommu_iot_inval_gscid;
-> +            } else if (!(cmd.dword0 & RISCV_IOMMU_CMD_IOTINVAL_AV)) {
-> +                /* invalidate cache matching GSCID and PSCID */
-> +                func = riscv_iommu_iot_inval_pscid;
-> +            } else {
-> +                /* invalidate cache matching GSCID and PSCID and ADDR (IOVA) */
-> +                func = riscv_iommu_iot_inval_pscid_iova;
-> +            }
-> +            riscv_iommu_iot_inval(s, func,
-> +                get_field(cmd.dword0, RISCV_IOMMU_CMD_IOTINVAL_GSCID),
-> +                get_field(cmd.dword0, RISCV_IOMMU_CMD_IOTINVAL_PSCID),
-> +                cmd.dword1 & TARGET_PAGE_MASK);
-We need to do cmd.dword1 << 2.
->               break;
->   
->           case RISCV_IOMMU_CMD(RISCV_IOMMU_CMD_IODIR_FUNC_INVAL_DDT,
-> @@ -1831,6 +2020,10 @@ static void riscv_iommu_realize(DeviceState *dev, Error **errp)
->                                            riscv_iommu_ctx_equal,
->                                            g_free, NULL);
->   
-> +    s->iot_cache = g_hash_table_new_full(riscv_iommu_iot_hash,
-> +                                         riscv_iommu_iot_equal,
-> +                                         g_free, NULL);
-> +
->       s->iommus.le_next = NULL;
->       s->iommus.le_prev = NULL;
->       QLIST_INIT(&s->spaces);
-> @@ -1840,6 +2033,7 @@ static void riscv_iommu_unrealize(DeviceState *dev)
->   {
->       RISCVIOMMUState *s = RISCV_IOMMU(dev);
->   
-> +    g_hash_table_unref(s->iot_cache);
->       g_hash_table_unref(s->ctx_cache);
+>       if (current_virt) {
+>           /* Current V=1 and we are about to change to V=0 */
+>           env->vsstatus = env->mstatus & mstatus_mask;
+> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+> index e5de72453c..d8280ec956 100644
+> --- a/target/riscv/csr.c
+> +++ b/target/riscv/csr.c
+> @@ -540,6 +540,15 @@ static RISCVException aia_hmode32(CPURISCVState *env, int csrno)
+>       return hmode32(env, csrno);
 >   }
 >   
-> @@ -1847,6 +2041,8 @@ static Property riscv_iommu_properties[] = {
->       DEFINE_PROP_UINT32("version", RISCVIOMMUState, version,
->           RISCV_IOMMU_SPEC_DOT_VER),
->       DEFINE_PROP_UINT32("bus", RISCVIOMMUState, bus, 0x0),
-> +    DEFINE_PROP_UINT32("ioatc-limit", RISCVIOMMUState, iot_limit,
-> +        LIMIT_CACHE_IOT),
->       DEFINE_PROP_BOOL("intremap", RISCVIOMMUState, enable_msi, TRUE),
->       DEFINE_PROP_BOOL("off", RISCVIOMMUState, enable_off, TRUE),
->       DEFINE_PROP_BOOL("s-stage", RISCVIOMMUState, enable_s_stage, TRUE),
-> @@ -1901,7 +2097,7 @@ static IOMMUTLBEntry riscv_iommu_memory_region_translate(
->           /* Translation disabled or invalid. */
->           iotlb.addr_mask = 0;
->           iotlb.perm = IOMMU_NONE;
-> -    } else if (riscv_iommu_translate(as->iommu, ctx, &iotlb)) {
-> +    } else if (riscv_iommu_translate(as->iommu, ctx, &iotlb, true)) {
->           /* Translation disabled or fault reported. */
->           iotlb.addr_mask = 0;
->           iotlb.perm = IOMMU_NONE;
-> diff --git a/hw/riscv/riscv-iommu.h b/hw/riscv/riscv-iommu.h
-> index af3fcafc19..9f15f3b27f 100644
-> --- a/hw/riscv/riscv-iommu.h
-> +++ b/hw/riscv/riscv-iommu.h
-> @@ -69,6 +69,9 @@ struct RISCVIOMMUState {
->   
->       GHashTable *ctx_cache;          /* Device translation Context Cache */
->   
-> +    GHashTable *iot_cache;          /* IO Translated Address Cache */
-> +    unsigned iot_limit;             /* IO Translation Cache size limit */
+> +static RISCVException dbltrp_hmode(CPURISCVState *env, int csrno)
+> +{
+> +    if (riscv_cpu_cfg(env)->ext_ssdbltrp) {
+> +        return RISCV_EXCP_NONE;
+> +    }
 > +
->       /* MMIO Hardware Interface */
->       MemoryRegion regs_mr;
->       uint8_t *regs_rw;  /* register state (user write) */
+> +    return hmode(env, csrno);
+> +}
+> +
+>   static RISCVException pmp(CPURISCVState *env, int csrno)
+>   {
+>       if (riscv_cpu_cfg(env)->pmp) {
+> @@ -1402,7 +1411,7 @@ static const target_ulong vs_delegable_excps = DELEGABLE_EXCPS &
+>         (1ULL << (RISCV_EXCP_STORE_GUEST_AMO_ACCESS_FAULT)));
+>   static const target_ulong sstatus_v1_10_mask = SSTATUS_SIE | SSTATUS_SPIE |
+>       SSTATUS_UIE | SSTATUS_UPIE | SSTATUS_SPP | SSTATUS_FS | SSTATUS_XS |
+> -    SSTATUS_SUM | SSTATUS_MXR | SSTATUS_VS;
+> +    SSTATUS_SUM | SSTATUS_MXR | SSTATUS_VS | SSTATUS_SDT;
+This breaks  the v_1_10 constraint, as it is not part of 1.10 specification.
+>   
+>   /*
+>    * Spec allows for bits 13:63 to be either read-only or writable.
+> @@ -1600,6 +1609,14 @@ static RISCVException write_mstatus(CPURISCVState *env, int csrno,
+>           mask |= MSTATUS_VS;
+>       }
+>   
+> +    if (riscv_env_smode_dbltrp_enabled(env, env->virt_enabled)) {
+> +        mask |= MSTATUS_SDT;
+> +        if ((val & MSTATUS_SDT) != 0) {
+> +            mstatus &= ~MSTATUS_SIE;
+No need to clean it, if MSTATUS_SIE will be cleaned in val.
+> +            val &= ~MSTATUS_SIE;
+> +        }
+> +    }
+> +
+I think we should also consider vsstatus for SIE field, as 
+write_vsstatus doesn't fall through to write_mstatus.
+>       if (xl != MXL_RV32 || env->debugger) {
+>           if (riscv_has_ext(env, RVH)) {
+>               mask |= MSTATUS_MPV | MSTATUS_GVA;
+> @@ -2354,7 +2371,8 @@ static RISCVException write_menvcfg(CPURISCVState *env, int csrno,
+>       if (riscv_cpu_mxl(env) == MXL_RV64) {
+>           mask |= (cfg->ext_svpbmt ? MENVCFG_PBMTE : 0) |
+>                   (cfg->ext_sstc ? MENVCFG_STCE : 0) |
+> -                (cfg->ext_svadu ? MENVCFG_ADUE : 0);
+> +                (cfg->ext_svadu ? MENVCFG_ADUE : 0) |
+> +                (cfg->ext_ssdbltrp ? MENVCFG_DTE : 0);
+>       }
+>       env->menvcfg = (env->menvcfg & ~mask) | (val & mask);
+>   
+> @@ -2374,7 +2392,8 @@ static RISCVException write_menvcfgh(CPURISCVState *env, int csrno,
+>       const RISCVCPUConfig *cfg = riscv_cpu_cfg(env);
+>       uint64_t mask = (cfg->ext_svpbmt ? MENVCFG_PBMTE : 0) |
+>                       (cfg->ext_sstc ? MENVCFG_STCE : 0) |
+> -                    (cfg->ext_svadu ? MENVCFG_ADUE : 0);
+> +                    (cfg->ext_svadu ? MENVCFG_ADUE : 0) |
+> +                    (cfg->ext_ssdbltrp ? MENVCFG_DTE : 0);
+>       uint64_t valh = (uint64_t)val << 32;
+>   
+>       env->menvcfg = (env->menvcfg & ~mask) | (valh & mask);
+> @@ -2425,9 +2444,10 @@ static RISCVException read_henvcfg(CPURISCVState *env, int csrno,
+>        * henvcfg.pbmte is read_only 0 when menvcfg.pbmte = 0
+>        * henvcfg.stce is read_only 0 when menvcfg.stce = 0
+>        * henvcfg.adue is read_only 0 when menvcfg.adue = 0
+> +     * henvcfg.dte is read_only 0 when menvcfg.dte = 0
+>        */
+> -    *val = env->henvcfg & (~(HENVCFG_PBMTE | HENVCFG_STCE | HENVCFG_ADUE) |
+> -                           env->menvcfg);
+> +    *val = env->henvcfg & (~(HENVCFG_PBMTE | HENVCFG_STCE | HENVCFG_ADUE |
+> +                             HENVCFG_DTE) | env->menvcfg);
+>       return RISCV_EXCP_NONE;
+>   }
+>   
+> @@ -2435,6 +2455,7 @@ static RISCVException write_henvcfg(CPURISCVState *env, int csrno,
+>                                       target_ulong val)
+>   {
+>       uint64_t mask = HENVCFG_FIOM | HENVCFG_CBIE | HENVCFG_CBCFE | HENVCFG_CBZE;
+> +    uint64_t menvcfg_mask;
+>       RISCVException ret;
+>   
+>       ret = smstateen_acc_ok(env, 0, SMSTATEEN0_HSENVCFG);
+> @@ -2443,7 +2464,11 @@ static RISCVException write_henvcfg(CPURISCVState *env, int csrno,
+>       }
+>   
+>       if (riscv_cpu_mxl(env) == MXL_RV64) {
+> -        mask |= env->menvcfg & (HENVCFG_PBMTE | HENVCFG_STCE | HENVCFG_ADUE);
+> +        menvcfg_mask = HENVCFG_PBMTE | HENVCFG_STCE | HENVCFG_ADUE;
+> +        if (riscv_cpu_cfg(env)->ext_ssdbltrp) {
+> +            menvcfg_mask |= HENVCFG_DTE;
+> +        }
+> +        mask |= env->menvcfg & menvcfg_mask;
+>       }
+>   
+>       env->henvcfg = (env->henvcfg & ~mask) | (val & mask);
+> @@ -2461,8 +2486,8 @@ static RISCVException read_henvcfgh(CPURISCVState *env, int csrno,
+>           return ret;
+>       }
+>   
+> -    *val = (env->henvcfg & (~(HENVCFG_PBMTE | HENVCFG_STCE | HENVCFG_ADUE) |
+> -                            env->menvcfg)) >> 32;
+> +    *val = (env->henvcfg & (~(HENVCFG_PBMTE | HENVCFG_STCE | HENVCFG_ADUE |
+> +                              HENVCFG_DTE) | env->menvcfg)) >> 32;
+>       return RISCV_EXCP_NONE;
+>   }
+>   
+> @@ -2470,7 +2495,7 @@ static RISCVException write_henvcfgh(CPURISCVState *env, int csrno,
+>                                        target_ulong val)
+>   {
+>       uint64_t mask = env->menvcfg & (HENVCFG_PBMTE | HENVCFG_STCE |
+> -                                    HENVCFG_ADUE);
+> +                                    HENVCFG_ADUE | HENVCFG_DTE);
+
+Add the ssdbltrp guard here.
+
+Thanks,
+Zhiwei
+
+>       uint64_t valh = (uint64_t)val << 32;
+>       RISCVException ret;
+>   
+> @@ -5246,7 +5271,7 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] = {
+>       [CSR_VSATP]       = { "vsatp",       hmode,   read_vsatp,    write_vsatp,
+>                             .min_priv_ver = PRIV_VERSION_1_12_0                },
+>   
+> -    [CSR_MTVAL2]      = { "mtval2",      hmode,   read_mtval2,   write_mtval2,
+> +    [CSR_MTVAL2]      = { "mtval2", dbltrp_hmode, read_mtval2, write_mtval2,
+>                             .min_priv_ver = PRIV_VERSION_1_12_0                },
+>       [CSR_MTINST]      = { "mtinst",      hmode,   read_mtinst,   write_mtinst,
+>                             .min_priv_ver = PRIV_VERSION_1_12_0                },
 
