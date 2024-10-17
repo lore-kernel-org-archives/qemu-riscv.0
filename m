@@ -4,83 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 50751D2127C
-	for <qemu-riscv@archiver.kernel.org>; Thu, 17 Oct 2024 11:19:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6903DD37485
+	for <qemu-riscv@archiver.kernel.org>; Thu, 17 Oct 2024 13:17:05 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1t1OWz-0000E6-EM; Thu, 17 Oct 2024 07:19:01 -0400
+	id 1t1QMa-00037k-Gt; Thu, 17 Oct 2024 09:16:24 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <rkanwal@rivosinc.com>)
- id 1t1OWx-0000DE-3n
- for qemu-riscv@nongnu.org; Thu, 17 Oct 2024 07:18:59 -0400
-Received: from mail-wr1-x42c.google.com ([2a00:1450:4864:20::42c])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <rkanwal@rivosinc.com>)
- id 1t1OWu-0003s0-Ha
- for qemu-riscv@nongnu.org; Thu, 17 Oct 2024 07:18:58 -0400
-Received: by mail-wr1-x42c.google.com with SMTP id
- ffacd0b85a97d-37d4a5ecc44so602514f8f.2
- for <qemu-riscv@nongnu.org>; Thu, 17 Oct 2024 04:18:55 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1729163934; x=1729768734;
- darn=nongnu.org; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=nwQGeKGdc9B5gHSGirsmxRp2PmCgVDi1PT7o+t/SJz0=;
- b=pMXOcWA0yjShuajdk4u7Jz05rB6MPLgVXco+CmFl1j6bDG65KRWajiei6ZjMEbTexZ
- NB13amuwXHwV4Vx+szp4VvvaGXBWDo5XYZXgC+V28HCUYz0C+yIRjiM2ruVN1y7cx9mK
- 3/0apnnFljhRNvJNiYpZlCjBDBHjiFI0g/qs/XawKcrclkNogpYhwJ5btwsZcJ5s7GQx
- Zb8BbFZq7hYVMZF74bJ4OD0ezwREsOpVuEyDnJ6lKoJvjnufD8mUzQHznwBTyQJCNlam
- PuReXyUzDDlCDkndm8J9ZEEnGVbWFVKJN5uzV/Qlx709TyzTRpuPsm2IpDTw6PGrjSPH
- wuhw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729163934; x=1729768734;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=nwQGeKGdc9B5gHSGirsmxRp2PmCgVDi1PT7o+t/SJz0=;
- b=pf9/bWJBMmALQL9dbwmF6uOUygjWpjrktQnXimvw2YUD0Lc+CWNQxrFhyCEEgsBYS/
- i7+SzJbgZ2BrWXsgMr96avyBaEpNuyJXTLgMRKX8KUmFEnCR99+Wg0+V071HMZ1vfv2G
- oTx+az9hBOPirCwLZnFF8DwqtgcDY40V21FRPqiK/R9ympVG34wYA0npW3NIE8bf9uVm
- WIM6vO0+EY7vr8TeCNbYKPgbI+ke8Q/uWhEamRi+PkORop0GIF/eGeHmiAR8ATPUjtig
- rdhWJ1QtBwzmD2l0pPACa2tFFKpAsA/bXD6gxHiUGlxb+IxAeo/zLY8Dr2xV7G4yqqQP
- svcg==
-X-Gm-Message-State: AOJu0YxivyJEYrcBZvmmd5zvLFet9tBC191o30yDCcTDCxV3+OfT7Ao+
- Oi4LvJsRsxadkK+BNes2vLP2auZHJ1TNjD/yvTX3lgeR6dQ4SRjDquklBVuAio0M1iI10AibAK8
- Rb4Mr+8+ta8BGJPvI7/57bhqgzcXJALzfokTYMA==
-X-Google-Smtp-Source: AGHT+IEwWY4RDJobWM7wH8c8/cBqZTzfGOrjf1XRhgOhd/C8ngat2KJaU0bmhojWWyOqGYeocWW8FLdPV/nKJdqdC9w=
-X-Received: by 2002:a5d:5590:0:b0:37d:4cef:538b with SMTP id
- ffacd0b85a97d-37d86c02a86mr4601798f8f.26.1729163933985; Thu, 17 Oct 2024
- 04:18:53 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <jonathan.cameron@huawei.com>)
+ id 1t1QMY-000372-5z; Thu, 17 Oct 2024 09:16:22 -0400
+Received: from frasgout.his.huawei.com ([185.176.79.56])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <jonathan.cameron@huawei.com>)
+ id 1t1QMW-0003AR-DX; Thu, 17 Oct 2024 09:16:21 -0400
+Received: from mail.maildlp.com (unknown [172.18.186.31])
+ by frasgout.his.huawei.com (SkyGuard) with ESMTP id 4XTpBl0XCzz6LDG1;
+ Thu, 17 Oct 2024 21:11:43 +0800 (CST)
+Received: from frapeml500008.china.huawei.com (unknown [7.182.85.71])
+ by mail.maildlp.com (Postfix) with ESMTPS id A46701400C9;
+ Thu, 17 Oct 2024 21:16:14 +0800 (CST)
+Received: from localhost (10.126.174.164) by frapeml500008.china.huawei.com
+ (7.182.85.71) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.1.2507.39; Thu, 17 Oct
+ 2024 15:16:13 +0200
+Date: Thu, 17 Oct 2024 14:16:11 +0100
+To: Zhao Liu <zhao1.liu@intel.com>
+CC: "Daniel P =?ISO-8859-1?Q?Berrang=E9?=" <berrange@redhat.com>, "Igor
+ Mammedov" <imammedo@redhat.com>, Eduardo Habkost <eduardo@habkost.net>,
+ Marcel Apfelbaum <marcel.apfelbaum@gmail.com>, Philippe =?ISO-8859-1?Q?Ma?=
+ =?ISO-8859-1?Q?thieu-Daud=E9?= <philmd@linaro.org>, Yanan Wang
+ <wangyanan55@huawei.com>, "Michael S.Tsirkin " <mst@redhat.com>, "Paolo
+ Bonzini" <pbonzini@redhat.com>, Richard Henderson
+ <richard.henderson@linaro.org>, Eric Blake <eblake@redhat.com>, "Markus
+ Armbruster" <armbru@redhat.com>, Marcelo Tosatti <mtosatti@redhat.com>, Alex
+ =?ISO-8859-1?Q?Benn=E9e?= <alex.bennee@linaro.org>, Peter Maydell
+ <peter.maydell@linaro.org>, Sia Jee Heng <jeeheng.sia@starfivetech.com>,
+ Alireza Sanaee <alireza.sanaee@huawei.com>, <qemu-devel@nongnu.org>,
+ <kvm@vger.kernel.org>, <qemu-riscv@nongnu.org>, <qemu-arm@nongnu.org>,
+ "Zhenyu Wang" <zhenyu.z.wang@intel.com>, Dapeng Mi
+ <dapeng1.mi@linux.intel.com>
+Subject: Re: [PATCH v3 7/7] i386/cpu: add has_caches flag to check smp_cache
+ configuration
+Message-ID: <20241017141611.00007566@Huawei.com>
+In-Reply-To: <20241012104429.1048908-8-zhao1.liu@intel.com>
+References: <20241012104429.1048908-1-zhao1.liu@intel.com>
+ <20241012104429.1048908-8-zhao1.liu@intel.com>
+Organization: Huawei Technologies Research and Development (UK) Ltd.
+X-Mailer: Claws Mail 4.1.0 (GTK 3.24.33; x86_64-w64-mingw32)
 MIME-Version: 1.0
-References: <20240619152708.135991-1-rkanwal@rivosinc.com>
- <20240619152708.135991-4-rkanwal@rivosinc.com>
- <CANzO1D33XPxXAJ8kxBz0oa1R8pb5et3BQV5EELiEvdhSjj3S1Q@mail.gmail.com>
-In-Reply-To: <CANzO1D33XPxXAJ8kxBz0oa1R8pb5et3BQV5EELiEvdhSjj3S1Q@mail.gmail.com>
-From: Rajnesh Kanwal <rkanwal@rivosinc.com>
-Date: Thu, 17 Oct 2024 12:18:43 +0100
-Message-ID: <CAECbVCuQ-tWFrskOZ3FcG+nziamTb8fHV8iA5VOUfhFa4AvAMA@mail.gmail.com>
-Subject: Re: [PATCH v2 3/6] target/riscv: Add support for Control Transfer
- Records extension CSRs.
-To: Frank Chang <frank.chang@sifive.com>
-Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, alistair.francis@wdc.com, 
- bin.meng@windriver.com, liweiwei@iscas.ac.cn, dbarboza@ventanamicro.com, 
- zhiwei_liu@linux.alibaba.com, atishp@rivosinc.com, apatel@ventanamicro.com, 
- beeman@rivosinc.com, tech-control-transfer-records@lists.riscv.org, 
- jason.chien@sifive.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2a00:1450:4864:20::42c;
- envelope-from=rkanwal@rivosinc.com; helo=mail-wr1-x42c.google.com
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+Content-Type: text/plain; charset="US-ASCII"
+Content-Transfer-Encoding: 7bit
+X-Originating-IP: [10.126.174.164]
+X-ClientProxiedBy: lhrpeml500002.china.huawei.com (7.191.160.78) To
+ frapeml500008.china.huawei.com (7.182.85.71)
+Received-SPF: pass client-ip=185.176.79.56;
+ envelope-from=jonathan.cameron@huawei.com; helo=frasgout.his.huawei.com
+X-Spam_score_int: -41
+X-Spam_score: -4.2
+X-Spam_bar: ----
+X-Spam_report: (-4.2 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_MED=-2.3,
+ RCVD_IN_MSPIKE_H3=0.001, RCVD_IN_MSPIKE_WL=0.001,
+ RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001, RCVD_IN_VALIDITY_SAFE_BLOCKED=0.001,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -93,248 +79,96 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
+Reply-to:  Jonathan Cameron <Jonathan.Cameron@Huawei.com>
+From:  Jonathan Cameron via <qemu-riscv@nongnu.org>
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Tue, Aug 27, 2024 at 10:28=E2=80=AFAM Frank Chang <frank.chang@sifive.co=
-m> wrote:
->
-> Rajnesh Kanwal <rkanwal@rivosinc.com> =E6=96=BC 2024=E5=B9=B46=E6=9C=8819=
-=E6=97=A5 =E9=80=B1=E4=B8=89 =E4=B8=8B=E5=8D=8811:27=E5=AF=AB=E9=81=93=EF=
-=BC=9A
-> >
-> > This commit adds support for [m|s|vs]ctrcontrol, sctrstatus and
-> > sctrdepth CSRs handling.
-> >
-> > Signed-off-by: Rajnesh Kanwal <rkanwal@rivosinc.com>
-> > ---
-> >  target/riscv/cpu.h     |   5 ++
-> >  target/riscv/cpu_cfg.h |   2 +
-> >  target/riscv/csr.c     | 128 +++++++++++++++++++++++++++++++++++++++++
-> >  3 files changed, 135 insertions(+)
-> >
-> > diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> > index a185e2d494..3d4d5172b8 100644
-> > --- a/target/riscv/cpu.h
-> > +++ b/target/riscv/cpu.h
-> > @@ -263,6 +263,11 @@ struct CPUArchState {
-> >      target_ulong mcause;
-> >      target_ulong mtval;  /* since: priv-1.10.0 */
-> >
-> > +    uint64_t mctrctl;
-> > +    uint32_t sctrdepth;
-> > +    uint32_t sctrstatus;
-> > +    uint64_t vsctrctl;
-> > +
-> >      /* Machine and Supervisor interrupt priorities */
-> >      uint8_t miprio[64];
-> >      uint8_t siprio[64];
-> > diff --git a/target/riscv/cpu_cfg.h b/target/riscv/cpu_cfg.h
-> > index d9354dc80a..d329a65811 100644
-> > --- a/target/riscv/cpu_cfg.h
-> > +++ b/target/riscv/cpu_cfg.h
-> > @@ -123,6 +123,8 @@ struct RISCVCPUConfig {
-> >      bool ext_zvfhmin;
-> >      bool ext_smaia;
-> >      bool ext_ssaia;
-> > +    bool ext_smctr;
-> > +    bool ext_ssctr;
->
-> Base on: https://github.com/riscv/riscv-control-transfer-records/pull/29
-> Smctr and Ssctr depend on both S-mode and Sscsrind.
-> We should add the implied rules for Smctr and Ssctr.
->
-> Regards,
-> Frank Chang
+RESEND as rejected by server (header issue, hopefully fixed)
 
-Hi Frank,
+On Sat, 12 Oct 2024 18:44:29 +0800
+Zhao Liu <zhao1.liu@intel.com> wrote:
 
-Are you referring to the checks in riscv_cpu_validate_set_extensions()?
-These checks are already present in the last patch.
+> From: Alireza Sanaee <alireza.sanaee@huawei.com>
+> 
+> Add has_caches flag to SMPCompatProps, which helps in avoiding
+> extra checks for every single layer of caches in x86 (and ARM in
+> future).
+> 
+> Signed-off-by: Alireza Sanaee <alireza.sanaee@huawei.com>
+> Signed-off-by: Zhao Liu <zhao1.liu@intel.com>
+LGTM
+Reviewed-by: Jonathan Cameron <Jonathan.Cameron@huawei.com>
 
-https://lore.kernel.org/qemu-riscv/20240619152708.135991-7-rkanwal@rivosinc=
-.com/
+> ---
+> Note: Picked from Alireza's series with the changes:
+>  * Moved the flag to SMPCompatProps with a new name "has_caches".
+>    This way, it remains consistent with the function and style of
+>    "has_clusters" in SMPCompatProps.
+>  * Dropped my previous TODO with the new flag.
+> ---
+> Changes since Patch v2:
+>  * Picked a new patch frome Alireza's ARM smp-cache series.
+> ---
+>  hw/core/machine-smp.c | 2 ++
+>  include/hw/boards.h   | 3 +++
+>  target/i386/cpu.c     | 9 ++++-----
+>  3 files changed, 9 insertions(+), 5 deletions(-)
+> 
+> diff --git a/hw/core/machine-smp.c b/hw/core/machine-smp.c
+> index f3edbded2e7b..16e456678cb6 100644
+> --- a/hw/core/machine-smp.c
+> +++ b/hw/core/machine-smp.c
+> @@ -367,6 +367,8 @@ bool machine_parse_smp_cache(MachineState *ms,
+>          return false;
+>      }
+>  
+> +    mc->smp_props.has_caches = true;
+> +
+>      return true;
+>  }
+>  
+> diff --git a/include/hw/boards.h b/include/hw/boards.h
+> index e4a1035e3fa1..af62b09c89d1 100644
+> --- a/include/hw/boards.h
+> +++ b/include/hw/boards.h
+> @@ -153,6 +153,8 @@ typedef struct {
+>   * @modules_supported - whether modules are supported by the machine
+>   * @cache_supported - whether cache (l1d, l1i, l2 and l3) configuration are
+>   *                    supported by the machine
+> + * @has_caches - whether cache properties are explicitly specified in the
+> + *               user provided smp-cache configuration
+>   */
+>  typedef struct {
+>      bool prefer_sockets;
+> @@ -163,6 +165,7 @@ typedef struct {
+>      bool drawers_supported;
+>      bool modules_supported;
+>      bool cache_supported[CACHE_LEVEL_AND_TYPE__MAX];
+> +    bool has_caches;
+>  } SMPCompatProps;
+>  
+>  /**
+> diff --git a/target/i386/cpu.c b/target/i386/cpu.c
+> index c8a04faf3764..6f711e98b527 100644
+> --- a/target/i386/cpu.c
+> +++ b/target/i386/cpu.c
+> @@ -7853,12 +7853,11 @@ static void x86_cpu_realizefn(DeviceState *dev, Error **errp)
+>  
+>  #ifndef CONFIG_USER_ONLY
+>      MachineState *ms = MACHINE(qdev_get_machine());
+> +    MachineClass *mc = MACHINE_GET_CLASS(ms);
+>  
+> -    /*
+> -     * TODO: Add a SMPCompatProps.has_caches flag to avoid useless Updates
+> -     * if user didn't set smp_cache.
+> -     */
+> -    x86_cpu_update_smp_cache_topo(ms, cpu);
+> +    if (mc->smp_props.has_caches) {
+> +        x86_cpu_update_smp_cache_topo(ms, cpu);
+> +    }
+>  
+>      qemu_register_reset(x86_cpu_machine_reset_cb, cpu);
+>  
 
-
->
->
-> >      bool ext_sscofpmf;
-> >      bool ext_smepmp;
-> >      bool rvv_ta_all_1s;
-> > diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-> > index 2f92e4b717..0b5bf4d050 100644
-> > --- a/target/riscv/csr.c
-> > +++ b/target/riscv/csr.c
-> > @@ -621,6 +621,48 @@ static RISCVException pointer_masking(CPURISCVStat=
-e *env, int csrno)
-> >      return RISCV_EXCP_ILLEGAL_INST;
-> >  }
-> >
-> > +/*
-> > + * M-mode:
-> > + * Without ext_smctr raise illegal inst excep.
-> > + * Otherwise everything is accessible to m-mode.
-> > + *
-> > + * S-mode:
-> > + * Without ext_ssctr or mstateen.ctr raise illegal inst excep.
-> > + * Otherwise everything other than mctrctl is accessible.
-> > + *
-> > + * VS-mode:
-> > + * Without ext_ssctr or mstateen.ctr raise illegal inst excep.
-> > + * Without hstateen.ctr raise virtual illegal inst excep.
-> > + * Otherwise allow sctrctl (vsctrctl), sctrstatus, 0x200-0x2ff entry r=
-ange.
-> > + * Always raise illegal instruction exception for sctrdepth.
-> > + */
-> > +static RISCVException ctr_mmode(CPURISCVState *env, int csrno)
-> > +{
-> > +    /* Check if smctr-ext is present */
-> > +    if (riscv_cpu_cfg(env)->ext_smctr) {
-> > +        return RISCV_EXCP_NONE;
-> > +    }
-> > +
-> > +    return RISCV_EXCP_ILLEGAL_INST;
-> > +}
-> > +
-> > +static RISCVException ctr_smode(CPURISCVState *env, int csrno)
-> > +{
-> > +    const RISCVCPUConfig *cfg =3D riscv_cpu_cfg(env);
-> > +
-> > +    if (!cfg->ext_smctr && !cfg->ext_ssctr) {
-> > +        return RISCV_EXCP_ILLEGAL_INST;
-> > +    }
-> > +
-> > +    RISCVException ret =3D smstateen_acc_ok(env, 0, SMSTATEEN0_CTR);
-> > +    if (ret =3D=3D RISCV_EXCP_NONE && csrno =3D=3D CSR_SCTRDEPTH &&
-> > +        env->virt_enabled) {
-> > +        return RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
-> > +    }
-> > +
-> > +    return ret;
-> > +}
-> > +
-> >  static RISCVException aia_hmode(CPURISCVState *env, int csrno)
-> >  {
-> >      int ret;
-> > @@ -3835,6 +3877,86 @@ static RISCVException write_satp(CPURISCVState *=
-env, int csrno,
-> >      return RISCV_EXCP_NONE;
-> >  }
-> >
-> > +static RISCVException rmw_sctrdepth(CPURISCVState *env, int csrno,
-> > +                                    target_ulong *ret_val,
-> > +                                    target_ulong new_val, target_ulong=
- wr_mask)
-> > +{
-> > +    uint64_t mask =3D wr_mask & SCTRDEPTH_MASK;
-> > +
-> > +    if (ret_val) {
-> > +        *ret_val =3D env->sctrdepth;
-> > +    }
-> > +
-> > +    env->sctrdepth =3D (env->sctrdepth & ~mask) | (new_val & mask);
-> > +
-> > +    /* Correct depth. */
-> > +    if (wr_mask & SCTRDEPTH_MASK) {
-> > +        uint64_t depth =3D get_field(env->sctrdepth, SCTRDEPTH_MASK);
-> > +
-> > +        if (depth > SCTRDEPTH_MAX) {
-> > +            depth =3D SCTRDEPTH_MAX;
-> > +            env->sctrdepth =3D set_field(env->sctrdepth, SCTRDEPTH_MAS=
-K, depth);
-> > +        }
-> > +
-> > +        /* Update sctrstatus.WRPTR with a legal value */
-> > +        depth =3D 16 << depth;
-> > +        env->sctrstatus =3D
-> > +            env->sctrstatus & (~SCTRSTATUS_WRPTR_MASK | (depth - 1));
-> > +    }
-> > +
-> > +    return RISCV_EXCP_NONE;
-> > +}
-> > +
-> > +static RISCVException rmw_sctrstatus(CPURISCVState *env, int csrno,
-> > +                                     target_ulong *ret_val,
-> > +                                     target_ulong new_val, target_ulon=
-g wr_mask)
-> > +{
-> > +    uint32_t depth =3D 16 << get_field(env->sctrdepth, SCTRDEPTH_MASK)=
-;
-> > +    uint32_t mask =3D wr_mask & SCTRSTATUS_MASK;
-> > +
-> > +    if (ret_val) {
-> > +        *ret_val =3D env->sctrstatus;
-> > +    }
-> > +
-> > +    env->sctrstatus =3D (env->sctrstatus & ~mask) | (new_val & mask);
-> > +
-> > +    /* Update sctrstatus.WRPTR with a legal value */
-> > +    env->sctrstatus =3D env->sctrstatus & (~SCTRSTATUS_WRPTR_MASK | (d=
-epth - 1));
-> > +
-> > +    return RISCV_EXCP_NONE;
-> > +}
-> > +
-> > +static RISCVException rmw_xctrctl(CPURISCVState *env, int csrno,
-> > +                                    target_ulong *ret_val,
-> > +                                    target_ulong new_val, target_ulong=
- wr_mask)
-> > +{
-> > +    uint64_t csr_mask, mask =3D wr_mask;
-> > +    uint64_t *ctl_ptr =3D &env->mctrctl;
-> > +
-> > +    if (csrno =3D=3D CSR_MCTRCTL) {
-> > +        csr_mask =3D MCTRCTL_MASK;
-> > +    } else if (csrno =3D=3D CSR_SCTRCTL && !env->virt_enabled) {
-> > +        csr_mask =3D SCTRCTL_MASK;
-> > +    } else {
-> > +        /*
-> > +         * This is for csrno =3D=3D CSR_SCTRCTL and env->virt_enabled =
-=3D=3D true
-> > +         * or csrno =3D=3D CSR_VSCTRCTL.
-> > +         */
-> > +        csr_mask =3D VSCTRCTL_MASK;
-> > +        ctl_ptr =3D &env->vsctrctl;
-> > +    }
-> > +
-> > +    mask &=3D csr_mask;
-> > +
-> > +    if (ret_val) {
-> > +        *ret_val =3D *ctl_ptr & csr_mask;
-> > +    }
-> > +
-> > +    *ctl_ptr =3D (*ctl_ptr & ~mask) | (new_val & mask);
-> > +
-> > +    return RISCV_EXCP_NONE;
-> > +}
-> > +
-> >  static RISCVException read_vstopi(CPURISCVState *env, int csrno,
-> >                                    target_ulong *val)
-> >  {
-> > @@ -5771,6 +5893,12 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] =3D=
- {
-> >      [CSR_SPMBASE] =3D    { "spmbase", pointer_masking, read_spmbase,
-> >                           write_spmbase                                =
-      },
-> >
-> > +    [CSR_MCTRCTL]    =3D { "mctrctl",    ctr_mmode,  NULL, NULL, rmw_x=
-ctrctl },
-> > +    [CSR_SCTRCTL]    =3D { "sctrctl",    ctr_smode,  NULL, NULL, rmw_x=
-ctrctl },
-> > +    [CSR_VSCTRCTL]   =3D { "vsctrctl",   ctr_smode,  NULL, NULL, rmw_x=
-ctrctl },
-> > +    [CSR_SCTRDEPTH]  =3D { "sctrdepth",  ctr_smode,  NULL, NULL, rmw_s=
-ctrdepth },
-> > +    [CSR_SCTRSTATUS] =3D { "sctrstatus", ctr_smode,  NULL, NULL, rmw_s=
-ctrstatus },
-> > +
-> >      /* Performance Counters */
-> >      [CSR_HPMCOUNTER3]    =3D { "hpmcounter3",    ctr,    read_hpmcount=
-er },
-> >      [CSR_HPMCOUNTER4]    =3D { "hpmcounter4",    ctr,    read_hpmcount=
-er },
-> > --
-> > 2.34.1
-> >
-> >
 
