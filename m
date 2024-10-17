@@ -4,89 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3A540D2F7E5
-	for <qemu-riscv@archiver.kernel.org>; Thu, 17 Oct 2024 03:53:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9E6B8D2F7EA
+	for <qemu-riscv@archiver.kernel.org>; Thu, 17 Oct 2024 04:20:20 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1t1HYd-00086w-G2; Wed, 16 Oct 2024 23:52:15 -0400
+	id 1t1Hzb-0005XQ-2e; Thu, 17 Oct 2024 00:20:07 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1t1HYb-00086a-Qf
- for qemu-riscv@nongnu.org; Wed, 16 Oct 2024 23:52:14 -0400
-Received: from mail-pj1-x102b.google.com ([2607:f8b0:4864:20::102b])
+ (Exim 4.90_1) (envelope-from <tang2417236213@gmail.com>)
+ id 1t1GPV-00079n-09; Wed, 16 Oct 2024 22:38:45 -0400
+Received: from mail-pl1-x62d.google.com ([2607:f8b0:4864:20::62d])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1t1HYZ-00007v-2O
- for qemu-riscv@nongnu.org; Wed, 16 Oct 2024 23:52:13 -0400
-Received: by mail-pj1-x102b.google.com with SMTP id
- 98e67ed59e1d1-2e2dc61bc41so356173a91.1
- for <qemu-riscv@nongnu.org>; Wed, 16 Oct 2024 20:52:09 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <tang2417236213@gmail.com>)
+ id 1t1GPT-0000kc-Es; Wed, 16 Oct 2024 22:38:44 -0400
+Received: by mail-pl1-x62d.google.com with SMTP id
+ d9443c01a7336-20c70abba48so3847265ad.0; 
+ Wed, 16 Oct 2024 19:38:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1729137128; x=1729741928; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:to:subject:user-agent:mime-version:date:message-id:from
- :to:cc:subject:date:message-id:reply-to;
- bh=Dvj9UMnouCqd3RtyWrvRc5S18+3bafL37elaq+xd6Yg=;
- b=kTFsfPYus8D4znO7J4Mmg9fMkySG4lOwmrQJizVEy8HC5UK79DaPne859ByNl8PhA6
- ZBdjiSFpR0Hae0SmD1ZcA8d/B4tCJ5TVXwlpFrQx0GxlchgkNl67YrxjQJABIMzg/H/y
- mp0ZSVEh55z4dEmC76I4pF4ybBae/E6Wo6d6mWgmgENYCrWU0IY5keN6ts7MG0e29t1k
- I7+OiH1gXp4ANS85yLCVbzHYc9WqcHs8yQqj0og8IuQj8lxvo7Mj2GIcw8Jqc3BwbmXd
- +zxFPDKinXFOcKsCNa5bQrpF/A8LwlNPLHQcwNi1pNwsaUgCpIkP4IjwkLBTdcgXNa4e
- VW/A==
+ d=gmail.com; s=20230601; t=1729132720; x=1729737520; darn=nongnu.org;
+ h=to:subject:cc:from:content-language:user-agent:mime-version:date
+ :message-id:from:to:cc:subject:date:message-id:reply-to;
+ bh=BKK1yRnVj3Xv2iIO9Vp3JgKTH6IM4sEsmC9UA5DGA5I=;
+ b=DSlU7pOFcsH4+3BiCiZ9KiTKHZUgZsjKO70z0N/cQnn2MS3YD4MrxdK/QOiipWP/ZK
+ CkL6fwJZJD9EDgL8Awp+Wzc/M6B2dVDQCCO5Q7Xecs3c8r53CNKqnpZXPH8CbcEthrdG
+ vlVFnIfGlCM7hW169NBm61887P6p9h1uSqQJZNYQE6+g2pG1MmxZoRZp6DLQ+AQcSUl5
+ Qi96mWebG41Jbn3rhMT1QBWk+Z6Vx879ph9YDZ4c7qjnJ+iGm0Gd4a5+Cv6Q24bqbYo5
+ DC5CJsbK3RsH54OB9Y5sEr+38NLDh1GqROWYnqB+Py6k7/pTQsqxJJIzbQe7WJhTLjK3
+ CrrQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729137128; x=1729741928;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=Dvj9UMnouCqd3RtyWrvRc5S18+3bafL37elaq+xd6Yg=;
- b=qwvZtekI1Ykt2MDGgB7/TI7l/1+940HfeqOlNyh1v6OZkv/8jUQQwk2LfMREMq56xp
- J7ZcvhEZHnrq9KtxpCSEyiRjTv5M2fhMxvsMyj/NMSXCr27Z2yOKOB1inRqUa2PYHYGs
- llCqkU3M8t9C8Eo9lQS8q1S6Ut9KeecnQ+SZxoqdPisjHYzOn9g+HicV6L71lkaGBSlZ
- 3feZpFO1AO3MImc/JrrfhlvxUMWrbbKKsWuzWO3zXTK5mcXsHQ0eW/hwqpPK1CRCIaRH
- A9TBi6b4ksw2a8X9ag7onch6sWaNFS4RJc+xTSi+8rilx8wRVpvH+345MgiElWW/EI/7
- Zo/A==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXYwQLm1mBSunfGYLqNPmL8Q0g5gpDPWW+WUEcLoXKMIPR4sWEuuCpp+XnIlQVwp0JD+yqN8nLsdOK1@nongnu.org
-X-Gm-Message-State: AOJu0Yys5yQl9XSHiE5PvPjWnWjZBFf/iz9Iu1PrYYFGAj0Ulmb/MWe+
- JwTKYii28I5wk8t4ljbGPDeEIxPLhzNzWTRYGRNf0c4VdR5ns304Jgm8VNmp10I=
-X-Google-Smtp-Source: AGHT+IHV2DDLQNeN2FwfDQqrbCh8m9ogWs4kVMkFKdTfKWkby6W+FbPJRozolZJaQiRPxOsvJdMBWg==
-X-Received: by 2002:a17:90a:8a92:b0:2e2:e660:96d5 with SMTP id
- 98e67ed59e1d1-2e3152f4b3bmr21750251a91.24.1729137128537; 
- Wed, 16 Oct 2024 20:52:08 -0700 (PDT)
-Received: from [192.168.0.4] (174-21-81-121.tukw.qwest.net. [174.21.81.121])
+ d=1e100.net; s=20230601; t=1729132720; x=1729737520;
+ h=to:subject:cc:from:content-language:user-agent:mime-version:date
+ :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=BKK1yRnVj3Xv2iIO9Vp3JgKTH6IM4sEsmC9UA5DGA5I=;
+ b=t9UXL0NNNZAyqosqjCY4PHmAKxTwHkKzSoW50mjsRoLFrDvEiHZXY9nlD7iRpL66Z/
+ IDy1KanFlur/r4V5Rn2aa+bGZkbZMOesaBI8vI4Wo9e6PMWA/H4HSUvLxGULKWjLZ2oh
+ o+hrX9iaraRGGvuFFT75z3igIPhIbkpgMqCKOJR59BhlaONMGI2rcrSlEUJ5KRxay7xi
+ fnRyX6dsGOzzEk/7avqTH2yCPfHvwntsQK86tZrS0l1LDAYiw5LoBkn6kkmarxLUg/Gu
+ HVQxC8NrzlKZ1C7pfVQ7tskgYSA9ysMjFhxbWxGtzWTpnnopSxqnvjNf2fu3fyhPpJlm
+ fk+A==
+X-Gm-Message-State: AOJu0YwXylhNbiHVAw7Wdo7A+eG8pU0cRDqj380WpmAsuwOY7K+uRGHo
+ R+BCsa/04eB1o3K1xTgxmuEOZBmbu19PnMNgh5E33tUvQdIxREhyy8sLe+vi7hPpTw==
+X-Google-Smtp-Source: AGHT+IEii9TNDva324ol/F4nWjEfe7Pvf1WqYX7y6o+IJcxxEXE2zofQfEQ2+3o7tvHGjV002Ya/qA==
+X-Received: by 2002:a17:902:e742:b0:205:8275:768 with SMTP id
+ d9443c01a7336-20cbb1a91a3mr201636295ad.21.1729132719594; 
+ Wed, 16 Oct 2024 19:38:39 -0700 (PDT)
+Received: from [198.18.0.1] ([104.28.246.205])
  by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-2e3e08c18a6sm705777a91.21.2024.10.16.20.52.07
+ d9443c01a7336-20d17f87e04sm35266515ad.24.2024.10.16.19.38.33
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 16 Oct 2024 20:52:08 -0700 (PDT)
-Message-ID: <8b1e3b44-1cd6-45a2-933c-a7a599598758@linaro.org>
-Date: Wed, 16 Oct 2024 20:52:05 -0700
+ Wed, 16 Oct 2024 19:38:39 -0700 (PDT)
+Content-Type: multipart/alternative;
+ boundary="------------PHQH20DW7c6nxfU7V32sKYA3"
+Message-ID: <7fa54ce9-ce9c-447b-a537-0b4abd63f51d@gmail.com>
+Date: Thu, 17 Oct 2024 10:38:29 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: Host riscv disas is broken
-To: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>,
- qemu-devel <qemu-devel@nongnu.org>,
- "qemu-riscv@nongnu.org" <qemu-riscv@nongnu.org>,
- Alistair Francis <Alistair.Francis@wdc.com>, liweiwei
- <liweiwei@iscas.ac.cn>, Christoph Muellner <christoph.muellner@vrull.eu>
-References: <95383723-cc27-4986-8dc3-827962120f8f@linaro.org>
- <da7690ea-a02c-4402-b798-fc29bd07451b@linux.alibaba.com>
 Content-Language: en-US
-From: Richard Henderson <richard.henderson@linaro.org>
-In-Reply-To: <da7690ea-a02c-4402-b798-fc29bd07451b@linux.alibaba.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::102b;
- envelope-from=richard.henderson@linaro.org; helo=mail-pj1-x102b.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+From: TangTianCheng <tang2417236213@gmail.com>
+Cc: qemu-riscv@nongnu.org, palmer@dabbelt.com, alistair.francis@wdc.com,
+ dbarboza@ventanamicro.com, liwei1518@gmail.com, bmeng.cn@gmail.com,
+ richard.henderson@linaro.org
+Subject: Re: [PATCH v6 00/14] tcg/riscv: Add support for vector
+To: qemu-devel@nongnu.org
+Received-SPF: pass client-ip=2607:f8b0:4864:20::62d;
+ envelope-from=tang2417236213@gmail.com; helo=mail-pl1-x62d.google.com
+X-Spam_score_int: -17
+X-Spam_score: -1.8
+X-Spam_bar: -
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001, HTML_MESSAGE=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
+X-Mailman-Approved-At: Thu, 17 Oct 2024 00:20:06 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -101,40 +94,57 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 10/16/24 19:57, LIU Zhiwei wrote:
-> Hi Richard,
-> 
-> On 2024/10/17 02:38, Richard Henderson wrote:
->> 2595: if (dec->cfg->ext_zcmop) {
->> 2690:                if (dec->cfg->ext_zcmp && ((inst >> 12) & 0b01)) {
->> 2716:                        if (!dec->cfg->ext_zcmt) {
->> 2726:                        if (!dec->cfg->ext_zcmp) {
->> 4028:                if (dec->cfg->ext_zimop) {
->> 5044:            if (dec->cfg->ext_zfinx) {
->> 5051:            if (dec->cfg->ext_zfinx) {
->> 5058:            if (dec->cfg->ext_zfinx) {
->> 5065:            if (dec->cfg->ext_zfinx) {
->> 5371:        if (guard_func(cfg)) {
->>
->> This structure comes from RISCVCPU, a target structure.
-> Oops. We missed this.
->> There is no such structure for the host, causing null pointer dereferences.
->>
->> The zfinx references can be changed to
->>
->>     dec->cfg && dec->cfg->ext_zfinx
->>
->> but some of them can simply be removed, e.g. zcmop and zimop, which are otherwise 
->> reserved encodings.
-> 
-> Should we probe the host feature like what we do in tcg backend support and then do the 
-> right disassemble according to the probe result?
+This is a multi-part message in MIME format.
+--------------PHQH20DW7c6nxfU7V32sKYA3
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-I don't think there's anything that is currently checked in disas/riscv.c that needs to 
-know about the host.  And, as I say above, some of those checks can be eliminated.
+> Signed-off-by: Huang Shiyuan<swung0x48@outlook.com>
+> Co-authored-by: TANG Tiancheng<tangtiancheng.ttc@alibaba-inc.com>
+> Signed-off-by: TANG Tiancheng<tangtiancheng.ttc@alibaba-inc.com>
+> Reviewed-by: Liu Zhiwei<zhiwei_liu@linux.alibaba.com>
+> Reviewed-by: Richard Henderson<richard.henderson@linaro.org>
+> Signed-off-by: Swung0x48<swung0x48@outlook.com>
+Hi,
 
-Host disassembly needs are limited to what tcg/riscv/ emits.
+We should remove the tag "Signed-off-by: Swung0x48swung0x48@outlook.com" since the author's real name, Huang Shiyuan, is already correctly included as "Signed-off-by: Huang Shiyuanswung0x48@outlook.com".
 
+Thanks,
+TianCheng.
+> Message-ID: <20241007025700.47259-3-zhiwei_liu@linux.alibaba.com <https://lists.gnu.org/archive/html/qemu-riscv/2024-10/msg00141.html>>
+> Signed-off-by: Richard Henderson<richard.henderson@linaro.org>
 
-r~
+--------------PHQH20DW7c6nxfU7V32sKYA3
+Content-Type: text/html; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+<!DOCTYPE html>
+<html>
+  <head>
+
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  </head>
+  <body>
+    <pre><blockquote type="cite"><pre
+style="color: rgb(0, 0, 0); font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;">Signed-off-by: Huang Shiyuan <a class="moz-txt-link-rfc2396E" href="mailto:swung0x48@outlook.com">&lt;swung0x48@outlook.com&gt;</a>
+Co-authored-by: TANG Tiancheng <a class="moz-txt-link-rfc2396E" href="mailto:tangtiancheng.ttc@alibaba-inc.com">&lt;tangtiancheng.ttc@alibaba-inc.com&gt;</a>
+Signed-off-by: TANG Tiancheng <a class="moz-txt-link-rfc2396E" href="mailto:tangtiancheng.ttc@alibaba-inc.com">&lt;tangtiancheng.ttc@alibaba-inc.com&gt;</a>
+Reviewed-by: Liu Zhiwei <a class="moz-txt-link-rfc2396E" href="mailto:zhiwei_liu@linux.alibaba.com">&lt;zhiwei_liu@linux.alibaba.com&gt;</a>
+Reviewed-by: Richard Henderson <a class="moz-txt-link-rfc2396E" href="mailto:richard.henderson@linaro.org">&lt;richard.henderson@linaro.org&gt;</a>
+Signed-off-by: Swung0x48 <a class="moz-txt-link-rfc2396E" href="mailto:swung0x48@outlook.com">&lt;swung0x48@outlook.com&gt;</a></pre></blockquote>Hi,
+
+We should remove the tag "Signed-off-by: Swung0x48 <a class="moz-txt-link-abbreviated" href="mailto:swung0x48@outlook.com">swung0x48@outlook.com</a>" since the author's real name, Huang Shiyuan, is already correctly included as "Signed-off-by: Huang Shiyuan <a class="moz-txt-link-abbreviated" href="mailto:swung0x48@outlook.com">swung0x48@outlook.com</a>".
+
+Thanks,
+TianCheng.
+<blockquote type="cite"><pre
+style="color: rgb(0, 0, 0); font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;">
+Message-ID: &lt;<a
+href="https://lists.gnu.org/archive/html/qemu-riscv/2024-10/msg00141.html">20241007025700.47259-3-zhiwei_liu@linux.alibaba.com</a>&gt;
+Signed-off-by: Richard Henderson <a class="moz-txt-link-rfc2396E" href="mailto:richard.henderson@linaro.org">&lt;richard.henderson@linaro.org&gt;</a></pre></blockquote></pre>
+    <p></p>
+  </body>
+</html>
+
+--------------PHQH20DW7c6nxfU7V32sKYA3--
 
