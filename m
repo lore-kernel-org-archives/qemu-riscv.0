@@ -4,88 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0B267D2127B
-	for <qemu-riscv@archiver.kernel.org>; Fri, 18 Oct 2024 08:47:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2E72CD2FFE0
+	for <qemu-riscv@archiver.kernel.org>; Fri, 18 Oct 2024 10:24:55 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1t1ieC-0000qa-L7; Fri, 18 Oct 2024 04:47:48 -0400
+	id 1t1k9s-0007TL-7b; Fri, 18 Oct 2024 06:24:36 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <zhao1.liu@intel.com>)
- id 1t1ieA-0000q6-3k; Fri, 18 Oct 2024 04:47:46 -0400
-Received: from mgamail.intel.com ([198.175.65.11])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <zhao1.liu@intel.com>)
- id 1t1ie8-0003nP-Dn; Fri, 18 Oct 2024 04:47:45 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1729241264; x=1760777264;
- h=date:from:to:cc:subject:message-id:references:
- mime-version:content-transfer-encoding:in-reply-to;
- bh=plBfgMHQMuI+dLmqLkuBbIQUiwBm4swhKQlf4bzVhk8=;
- b=eAg8CLRIPrlXDWG+NytNYuzSvu8a1cRnY9PbU3eAGqdWeinL7iLiGlj3
- oiLZmD4u6SrpavJWbycD/osaoVaOIRomIZ9nuwFQ5e+7AXYbzGUrBAyE8
- xZv37BnKxdRfsilj5QyLGr21yCwmzGlq8XarvuH4e0546fwYFliMNCnT6
- CEnHRDxmRQxN7bNob4mYaVSM+0i4KcTDnfuElT1g8JLKn19RX9KGzwij1
- 4B023z7/RjvyT7fElPLjcBR4lwc74arl7GXyJtHk8bnFvyBFG6DgUEIt8
- tl23/ZWJALAPlcgmkaPcWwFzFvGdQPYmPKS1sNXuB8LlH9md3dl4Rkahj g==;
-X-CSE-ConnectionGUID: 2aoj5lNvSiCnV8N35vdfww==
-X-CSE-MsgGUID: Yjg6M8D8Qn2f/XOVEEo2fw==
-X-IronPort-AV: E=McAfee;i="6700,10204,11222"; a="39306052"
-X-IronPort-AV: E=Sophos;i="6.11,199,1725346800"; d="scan'208";a="39306052"
-Received: from fmviesa002.fm.intel.com ([10.60.135.142])
- by orvoesa103.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 18 Oct 2024 01:47:40 -0700
-X-CSE-ConnectionGUID: 1X6bbWVLRPKGDBLVB3+qyQ==
-X-CSE-MsgGUID: 0qGpU8v8T3qusDQ6TdvBUg==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.11,213,1725346800"; d="scan'208";a="102105838"
-Received: from liuzhao-optiplex-7080.sh.intel.com (HELO localhost)
- ([10.239.160.36])
- by fmviesa002.fm.intel.com with ESMTP; 18 Oct 2024 01:47:35 -0700
-Date: Fri, 18 Oct 2024 17:03:51 +0800
-From: Zhao Liu <zhao1.liu@intel.com>
-To: Daniel =?iso-8859-1?Q?P=2E_Berrang=E9?= <berrange@redhat.com>
-Cc: Igor Mammedov <imammedo@redhat.com>, Eduardo Habkost <eduardo@habkost.net>,
- Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
- Philippe =?iso-8859-1?Q?Mathieu-Daud=E9?= <philmd@linaro.org>,
- Yanan Wang <wangyanan55@huawei.com>,
- "Michael S . Tsirkin" <mst@redhat.com>,
- Paolo Bonzini <pbonzini@redhat.com>,
- Richard Henderson <richard.henderson@linaro.org>,
- Eric Blake <eblake@redhat.com>, Markus Armbruster <armbru@redhat.com>,
- Marcelo Tosatti <mtosatti@redhat.com>,
- Alex =?iso-8859-1?Q?Benn=E9e?= <alex.bennee@linaro.org>,
- Peter Maydell <peter.maydell@linaro.org>,
- Jonathan Cameron <Jonathan.Cameron@huawei.com>,
- Sia Jee Heng <jeeheng.sia@starfivetech.com>,
- Alireza Sanaee <alireza.sanaee@huawei.com>, qemu-devel@nongnu.org,
- kvm@vger.kernel.org, qemu-riscv@nongnu.org, qemu-arm@nongnu.org,
- Zhenyu Wang <zhenyu.z.wang@intel.com>,
- Dapeng Mi <dapeng1.mi@linux.intel.com>, Zhao Liu <zhao1.liu@intel.com>
-Subject: Re: [PATCH v3 6/7] i386/pc: Support cache topology in -machine for
- PC machine
-Message-ID: <ZxIkdyJ2ysibi74R@intel.com>
-References: <20241012104429.1048908-1-zhao1.liu@intel.com>
- <20241012104429.1048908-7-zhao1.liu@intel.com>
- <ZxEs3DGGgCqGT5yK@redhat.com> <ZxHcsPyqT6MLJ9hG@intel.com>
- <ZxIVC-XQaMqOy6Fw@redhat.com>
+ (Exim 4.90_1) (envelope-from <rkanwal@rivosinc.com>)
+ id 1t1k9p-0007GV-1S
+ for qemu-riscv@nongnu.org; Fri, 18 Oct 2024 06:24:33 -0400
+Received: from mail-wm1-x330.google.com ([2a00:1450:4864:20::330])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <rkanwal@rivosinc.com>)
+ id 1t1k9m-00064Z-Fw
+ for qemu-riscv@nongnu.org; Fri, 18 Oct 2024 06:24:32 -0400
+Received: by mail-wm1-x330.google.com with SMTP id
+ 5b1f17b1804b1-4314b316495so18513265e9.2
+ for <qemu-riscv@nongnu.org>; Fri, 18 Oct 2024 03:24:30 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1729247069; x=1729851869;
+ darn=nongnu.org; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=8mHZtMVpC60YOK/ppUErod4BT/A1Tsbsf8DDdgE6x7c=;
+ b=raP3OlbpvspKVSlZCL0qgQwuUG1OvqaZadnsed652kFoIyHgxyAJ9b55eZmXwizNk8
+ uWQ9q3pj1kw2FObjOqKwo6AOwSm+yg6TmfwtKLhJwpsifoR37yPqVnBOOCtP7YoxUSDI
+ RxIwAprpUXpUu11eJDkF+qE8lQnUnQCX3tJQEdywNjX4MVm9LG55bm4p6U8VHmB/oin/
+ Sxl3MlrYC7INiu+kE6jbDLEydjz0ZOe2szLzRod8yb/SS7KKMsPdMecrUwEyM7oFV/Qx
+ Tcgdl9IqJy62sVN4DdGWfcsw0I3nPEq7L8LnP7eva7oVNdk7YVLwKu/tpM+GMjMi2b4X
+ Zfdg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1729247069; x=1729851869;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=8mHZtMVpC60YOK/ppUErod4BT/A1Tsbsf8DDdgE6x7c=;
+ b=a3zO2JNV0oF+9Ag8pfAmTfZOSo4kJX3/MUCIxh7IQnRGfM/16Zm5StFvSnNYAfu9xq
+ OJr/2ymoIlMKwMFWuKrViwhzLUqEmNFAVDgjtzxtTARCBppVkOahsr2ezX4mJurz7YHH
+ pjgDmBDeNEskgn2hvj0PQDuYxVcIAIEq70rFFcHeVB1zF3jfUbXGJ735Ig6se3RWgRlp
+ hCYXiTEV8aH1XiZZvDNk8fcWLV61SLbk3Sphxp76KUhETz2TLZSkYT88t8Jl8WrHMYwU
+ WOol1hkqflRDALooijxiSQyOT8kRD4RKz6kpS4YoE/xidK8Xe9Pwm9+Gzy77Ia+Q7wVG
+ n9nQ==
+X-Gm-Message-State: AOJu0YwNpb1LPSHZ+UtoZLLrdnhhFp78Hfag0zoh2uImesB6acPSJ6O7
+ UMgUqfkpGOtxwpLxdh6Etz/ceRBOMVYNlxnre7wm2FbZbI3TmFUht5IMme2gny5W0GLm1oxdcRt
+ 5iEzETmop3nyGZYf5QsN5rt6kvcWPFpWCkxHCuQ==
+X-Google-Smtp-Source: AGHT+IGrzOGXgNbGbyqGIUcvvVnS8koMPm111Kse7j7DN00scloQjUO02yBh8+UKOvoA766wZ1maliU6oTT90VzudyE=
+X-Received: by 2002:adf:edcd:0:b0:37c:cee0:96e6 with SMTP id
+ ffacd0b85a97d-37ea2197f2fmr1359677f8f.27.1729247068660; Fri, 18 Oct 2024
+ 03:24:28 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <ZxIVC-XQaMqOy6Fw@redhat.com>
-Received-SPF: pass client-ip=198.175.65.11; envelope-from=zhao1.liu@intel.com;
- helo=mgamail.intel.com
-X-Spam_score_int: -44
-X-Spam_score: -4.5
-X-Spam_bar: ----
-X-Spam_report: (-4.5 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.068,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_MED=-2.3, RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001,
- RCVD_IN_VALIDITY_SAFE_BLOCKED=0.001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+References: <20240619152708.135991-1-rkanwal@rivosinc.com>
+ <20240619152708.135991-4-rkanwal@rivosinc.com>
+ <CANzO1D33XPxXAJ8kxBz0oa1R8pb5et3BQV5EELiEvdhSjj3S1Q@mail.gmail.com>
+ <CAECbVCuQ-tWFrskOZ3FcG+nziamTb8fHV8iA5VOUfhFa4AvAMA@mail.gmail.com>
+ <CAE_xrPiRtiO+2-PazQSZJkfKfWwZ1=0UoMOkQ82Z7vAUFJ4+wA@mail.gmail.com>
+In-Reply-To: <CAE_xrPiRtiO+2-PazQSZJkfKfWwZ1=0UoMOkQ82Z7vAUFJ4+wA@mail.gmail.com>
+From: Rajnesh Kanwal <rkanwal@rivosinc.com>
+Date: Fri, 18 Oct 2024 11:24:17 +0100
+Message-ID: <CAECbVCtN7xK1S0COfejSzoY=+oSX1RQFYCoiBWd2oD+qhaVDfg@mail.gmail.com>
+Subject: Re: [PATCH v2 3/6] target/riscv: Add support for Control Transfer
+ Records extension CSRs.
+To: Frank Chang <frank.chang@sifive.com>
+Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, alistair.francis@wdc.com, 
+ bin.meng@windriver.com, liweiwei@iscas.ac.cn, dbarboza@ventanamicro.com, 
+ zhiwei_liu@linux.alibaba.com, atishp@rivosinc.com, apatel@ventanamicro.com, 
+ beeman@rivosinc.com, tech-control-transfer-records@lists.riscv.org, 
+ jason.chien@sifive.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2a00:1450:4864:20::330;
+ envelope-from=rkanwal@rivosinc.com; helo=mail-wm1-x330.google.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -101,106 +98,287 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Fri, Oct 18, 2024 at 08:58:03AM +0100, Daniel P. Berrangé wrote:
-> Date: Fri, 18 Oct 2024 08:58:03 +0100
-> From: "Daniel P. Berrangé" <berrange@redhat.com>
-> Subject: Re: [PATCH v3 6/7] i386/pc: Support cache topology in -machine for
->  PC machine
-> 
-> On Fri, Oct 18, 2024 at 11:57:36AM +0800, Zhao Liu wrote:
-> > Hi Daniel,
-> > 
-> > > > +    ``smp-cache.0.cache=cachename,smp-cache.0.topology=topologylevel``
-> > > > +        Define cache properties for SMP system.
-> > > > +
-> > > > +        ``cache=cachename`` specifies the cache that the properties will be
-> > > > +        applied on. This field is the combination of cache level and cache
-> > > > +        type. It supports ``l1d`` (L1 data cache), ``l1i`` (L1 instruction
-> > > > +        cache), ``l2`` (L2 unified cache) and ``l3`` (L3 unified cache).
-> > > > +
-> > > > +        ``topology=topologylevel`` sets the cache topology level. It accepts
-> > > > +        CPU topology levels including ``thread``, ``core``, ``module``,
-> > > > +        ``cluster``, ``die``, ``socket``, ``book``, ``drawer`` and a special
-> > > > +        value ``default``. If ``default`` is set, then the cache topology will
-> > > > +        follow the architecture's default cache topology model. If another
-> > > > +        topology level is set, the cache will be shared at corresponding CPU
-> > > > +        topology level. For example, ``topology=core`` makes the cache shared
-> > > > +        by all threads within a core.
-> > > > +
-> > > > +        Example:
-> > > > +
-> > > > +        ::
-> > > > +
-> > > > +            -machine smp-cache.0.cache=l1d,smp-cache.0.topology=core,smp-cache.1.cache=l1i,smp-cache.1.topology=core
-> > > 
-> > > There are 4 cache types, l1d, l1i, l2, l3.
-> > > 
-> > > In this example you've only set properties for l1d, l1i caches.
-> > > 
-> > > What does this mean for l2 / l3 caches ?
-> > 
-> > Omitting "cache" will default to using the "default" level.
-> > 
-> > I think I should add the above description to the documentation.
-> > 
-> > > Are they reported as not existing, or are they to be reported at
-> > > some built-in default topology level.
-> > 
-> > It's the latter.
-> > 
-> > If a machine doesn't support l2/l3, then QEMU will also report the error
-> > like:
-> > 
-> > qemu-system-*: l2 cache topology not supported by this machine
-> 
-> Ok, that's good.
-> 
-> > > If the latter, how does the user know what that built-in default is, 
-> > 
-> > Currently, the default cache model for x86 is L1 per core, L2 per core,
-> > and L3 per die. Similar to the topology levels, there is still no way to
-> > expose this to users. I can descript default cache model in doc.
-> > 
-> > But I feel like we're back to the situation we discussed earlier:
-> > "default" CPU topology support should be related to the CPU model, but
-> > in practice, QEMU supports it at the machine level. The cache topology
-> > depends on CPU topology support and can only continue to be added on top
-> > of the machine.
-> > 
-> > So do you think we can add topology and cache information in CpuModelInfo
-> > so that query-cpu-model-expansion can expose default CPU/cache topology
-> > information to users?
-> > 
-> > This way, users can customize CPU/cache topology in -smp and
-> > -machine smp-cache. Although the QMP command is targeted at the CPU model
-> > while our CLI is at the machine level, at least we can expose the
-> > information to users.
-> > 
-> > If you agree to expose the default topology/cache info in
-> > query-cpu-model-expansion, can I work on this in a separate series? :)
-> 
-> Yeah, lets worry about that another day.
-> 
-> It it sufficient to just encourage users to always specify
-> the full set of caches.
+On Thu, Oct 17, 2024 at 4:05=E2=80=AFPM Frank Chang <frank.chang@sifive.com=
+> wrote:
+>
+> On Thu, Oct 17, 2024 at 7:18=E2=80=AFPM Rajnesh Kanwal <rkanwal@rivosinc.=
+com> wrote:
+>>
+>> On Tue, Aug 27, 2024 at 10:28=E2=80=AFAM Frank Chang <frank.chang@sifive=
+.com> wrote:
+>> >
+>> > Rajnesh Kanwal <rkanwal@rivosinc.com> =E6=96=BC 2024=E5=B9=B46=E6=9C=
+=8819=E6=97=A5 =E9=80=B1=E4=B8=89 =E4=B8=8B=E5=8D=8811:27=E5=AF=AB=E9=81=93=
+=EF=BC=9A
+>> > >
+>> > > This commit adds support for [m|s|vs]ctrcontrol, sctrstatus and
+>> > > sctrdepth CSRs handling.
+>> > >
+>> > > Signed-off-by: Rajnesh Kanwal <rkanwal@rivosinc.com>
+>> > > ---
+>> > >  target/riscv/cpu.h     |   5 ++
+>> > >  target/riscv/cpu_cfg.h |   2 +
+>> > >  target/riscv/csr.c     | 128 ++++++++++++++++++++++++++++++++++++++=
++++
+>> > >  3 files changed, 135 insertions(+)
+>> > >
+>> > > diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+>> > > index a185e2d494..3d4d5172b8 100644
+>> > > --- a/target/riscv/cpu.h
+>> > > +++ b/target/riscv/cpu.h
+>> > > @@ -263,6 +263,11 @@ struct CPUArchState {
+>> > >      target_ulong mcause;
+>> > >      target_ulong mtval;  /* since: priv-1.10.0 */
+>> > >
+>> > > +    uint64_t mctrctl;
+>> > > +    uint32_t sctrdepth;
+>> > > +    uint32_t sctrstatus;
+>> > > +    uint64_t vsctrctl;
+>> > > +
+>> > >      /* Machine and Supervisor interrupt priorities */
+>> > >      uint8_t miprio[64];
+>> > >      uint8_t siprio[64];
+>> > > diff --git a/target/riscv/cpu_cfg.h b/target/riscv/cpu_cfg.h
+>> > > index d9354dc80a..d329a65811 100644
+>> > > --- a/target/riscv/cpu_cfg.h
+>> > > +++ b/target/riscv/cpu_cfg.h
+>> > > @@ -123,6 +123,8 @@ struct RISCVCPUConfig {
+>> > >      bool ext_zvfhmin;
+>> > >      bool ext_smaia;
+>> > >      bool ext_ssaia;
+>> > > +    bool ext_smctr;
+>> > > +    bool ext_ssctr;
+>> >
+>> > Base on: https://github.com/riscv/riscv-control-transfer-records/pull/=
+29
+>> > Smctr and Ssctr depend on both S-mode and Sscsrind.
+>> > We should add the implied rules for Smctr and Ssctr.
+>> >
+>> > Regards,
+>> > Frank Chang
+>>
+>> Hi Frank,
+>>
+>> Are you referring to the checks in riscv_cpu_validate_set_extensions()?
+>> These checks are already present in the last patch.
+>>
+>> https://lore.kernel.org/qemu-riscv/20240619152708.135991-7-rkanwal@rivos=
+inc.com/
+>>
+>
+> Hi Rajnesh,
+>
+> No, I was referring to the implied rules defined in:
+> https://github.com/qemu/qemu/blob/master/target/riscv/cpu.c#L2630
+>
+> The implied rules will enable the implied extensions when the "parent" ex=
+tension is enabled.
+> Unless user turns them off explicitly from the command line,
+> which is an error and will be caught by the check rules you mentioned abo=
+ve.
+>
+> The spec defines that:
+> "Smctr and Ssctr depend on both the implementation of S-mode and the Sscs=
+rind extension"
+> which means that we should add RVS and Sscsrind extensions as the implied=
+ rules for Smctr and Ssctr respectively.
+>
+> The use of the word "depends" in the spec is quite ambiguous.
+> But I once had a chance to ask Andrew Waterman about it,
+> and he replied that we should treat =E2=80=9Cdepends on=E2=80=9D or =E2=
+=80=9Crequires=E2=80=9D as a synonym for =E2=80=9Cimplies=E2=80=9D.
+>
+>
+> Regards,
+> Frank Chang
+>
 
-Thanks!
+Thanks for the explanation Frank. I will fix this in the next version.
 
-> > > Can we explicitly disable a l2/l3 cache, or must it always exists ?
-> > 
-> > Now we can't disable it through -machine smp-cache (while x86 CPU support
-> > l3-cache=off), but as you mentioned, I can try using "invalid" to support
-> > this scenario, which would be more general. Similarly, if you agree, I
-> > can also add this support in a separate series.
-> 
-> If we decide to offer a way to disable caches, probably better to have
-> a name like 'disabled' for such a setting, and yes, we don't need todo
-> that now.
-
-Yes, "disabled" is better.
-
-Regards,
-Zhao
-
- 
+>> >
+>> >
+>> > >      bool ext_sscofpmf;
+>> > >      bool ext_smepmp;
+>> > >      bool rvv_ta_all_1s;
+>> > > diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+>> > > index 2f92e4b717..0b5bf4d050 100644
+>> > > --- a/target/riscv/csr.c
+>> > > +++ b/target/riscv/csr.c
+>> > > @@ -621,6 +621,48 @@ static RISCVException pointer_masking(CPURISCVS=
+tate *env, int csrno)
+>> > >      return RISCV_EXCP_ILLEGAL_INST;
+>> > >  }
+>> > >
+>> > > +/*
+>> > > + * M-mode:
+>> > > + * Without ext_smctr raise illegal inst excep.
+>> > > + * Otherwise everything is accessible to m-mode.
+>> > > + *
+>> > > + * S-mode:
+>> > > + * Without ext_ssctr or mstateen.ctr raise illegal inst excep.
+>> > > + * Otherwise everything other than mctrctl is accessible.
+>> > > + *
+>> > > + * VS-mode:
+>> > > + * Without ext_ssctr or mstateen.ctr raise illegal inst excep.
+>> > > + * Without hstateen.ctr raise virtual illegal inst excep.
+>> > > + * Otherwise allow sctrctl (vsctrctl), sctrstatus, 0x200-0x2ff entr=
+y range.
+>> > > + * Always raise illegal instruction exception for sctrdepth.
+>> > > + */
+>> > > +static RISCVException ctr_mmode(CPURISCVState *env, int csrno)
+>> > > +{
+>> > > +    /* Check if smctr-ext is present */
+>> > > +    if (riscv_cpu_cfg(env)->ext_smctr) {
+>> > > +        return RISCV_EXCP_NONE;
+>> > > +    }
+>> > > +
+>> > > +    return RISCV_EXCP_ILLEGAL_INST;
+>> > > +}
+>> > > +
+>> > > +static RISCVException ctr_smode(CPURISCVState *env, int csrno)
+>> > > +{
+>> > > +    const RISCVCPUConfig *cfg =3D riscv_cpu_cfg(env);
+>> > > +
+>> > > +    if (!cfg->ext_smctr && !cfg->ext_ssctr) {
+>> > > +        return RISCV_EXCP_ILLEGAL_INST;
+>> > > +    }
+>> > > +
+>> > > +    RISCVException ret =3D smstateen_acc_ok(env, 0, SMSTATEEN0_CTR)=
+;
+>> > > +    if (ret =3D=3D RISCV_EXCP_NONE && csrno =3D=3D CSR_SCTRDEPTH &&
+>> > > +        env->virt_enabled) {
+>> > > +        return RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
+>> > > +    }
+>> > > +
+>> > > +    return ret;
+>> > > +}
+>> > > +
+>> > >  static RISCVException aia_hmode(CPURISCVState *env, int csrno)
+>> > >  {
+>> > >      int ret;
+>> > > @@ -3835,6 +3877,86 @@ static RISCVException write_satp(CPURISCVStat=
+e *env, int csrno,
+>> > >      return RISCV_EXCP_NONE;
+>> > >  }
+>> > >
+>> > > +static RISCVException rmw_sctrdepth(CPURISCVState *env, int csrno,
+>> > > +                                    target_ulong *ret_val,
+>> > > +                                    target_ulong new_val, target_ul=
+ong wr_mask)
+>> > > +{
+>> > > +    uint64_t mask =3D wr_mask & SCTRDEPTH_MASK;
+>> > > +
+>> > > +    if (ret_val) {
+>> > > +        *ret_val =3D env->sctrdepth;
+>> > > +    }
+>> > > +
+>> > > +    env->sctrdepth =3D (env->sctrdepth & ~mask) | (new_val & mask);
+>> > > +
+>> > > +    /* Correct depth. */
+>> > > +    if (wr_mask & SCTRDEPTH_MASK) {
+>> > > +        uint64_t depth =3D get_field(env->sctrdepth, SCTRDEPTH_MASK=
+);
+>> > > +
+>> > > +        if (depth > SCTRDEPTH_MAX) {
+>> > > +            depth =3D SCTRDEPTH_MAX;
+>> > > +            env->sctrdepth =3D set_field(env->sctrdepth, SCTRDEPTH_=
+MASK, depth);
+>> > > +        }
+>> > > +
+>> > > +        /* Update sctrstatus.WRPTR with a legal value */
+>> > > +        depth =3D 16 << depth;
+>> > > +        env->sctrstatus =3D
+>> > > +            env->sctrstatus & (~SCTRSTATUS_WRPTR_MASK | (depth - 1)=
+);
+>> > > +    }
+>> > > +
+>> > > +    return RISCV_EXCP_NONE;
+>> > > +}
+>> > > +
+>> > > +static RISCVException rmw_sctrstatus(CPURISCVState *env, int csrno,
+>> > > +                                     target_ulong *ret_val,
+>> > > +                                     target_ulong new_val, target_u=
+long wr_mask)
+>> > > +{
+>> > > +    uint32_t depth =3D 16 << get_field(env->sctrdepth, SCTRDEPTH_MA=
+SK);
+>> > > +    uint32_t mask =3D wr_mask & SCTRSTATUS_MASK;
+>> > > +
+>> > > +    if (ret_val) {
+>> > > +        *ret_val =3D env->sctrstatus;
+>> > > +    }
+>> > > +
+>> > > +    env->sctrstatus =3D (env->sctrstatus & ~mask) | (new_val & mask=
+);
+>> > > +
+>> > > +    /* Update sctrstatus.WRPTR with a legal value */
+>> > > +    env->sctrstatus =3D env->sctrstatus & (~SCTRSTATUS_WRPTR_MASK |=
+ (depth - 1));
+>> > > +
+>> > > +    return RISCV_EXCP_NONE;
+>> > > +}
+>> > > +
+>> > > +static RISCVException rmw_xctrctl(CPURISCVState *env, int csrno,
+>> > > +                                    target_ulong *ret_val,
+>> > > +                                    target_ulong new_val, target_ul=
+ong wr_mask)
+>> > > +{
+>> > > +    uint64_t csr_mask, mask =3D wr_mask;
+>> > > +    uint64_t *ctl_ptr =3D &env->mctrctl;
+>> > > +
+>> > > +    if (csrno =3D=3D CSR_MCTRCTL) {
+>> > > +        csr_mask =3D MCTRCTL_MASK;
+>> > > +    } else if (csrno =3D=3D CSR_SCTRCTL && !env->virt_enabled) {
+>> > > +        csr_mask =3D SCTRCTL_MASK;
+>> > > +    } else {
+>> > > +        /*
+>> > > +         * This is for csrno =3D=3D CSR_SCTRCTL and env->virt_enabl=
+ed =3D=3D true
+>> > > +         * or csrno =3D=3D CSR_VSCTRCTL.
+>> > > +         */
+>> > > +        csr_mask =3D VSCTRCTL_MASK;
+>> > > +        ctl_ptr =3D &env->vsctrctl;
+>> > > +    }
+>> > > +
+>> > > +    mask &=3D csr_mask;
+>> > > +
+>> > > +    if (ret_val) {
+>> > > +        *ret_val =3D *ctl_ptr & csr_mask;
+>> > > +    }
+>> > > +
+>> > > +    *ctl_ptr =3D (*ctl_ptr & ~mask) | (new_val & mask);
+>> > > +
+>> > > +    return RISCV_EXCP_NONE;
+>> > > +}
+>> > > +
+>> > >  static RISCVException read_vstopi(CPURISCVState *env, int csrno,
+>> > >                                    target_ulong *val)
+>> > >  {
+>> > > @@ -5771,6 +5893,12 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] =
+=3D {
+>> > >      [CSR_SPMBASE] =3D    { "spmbase", pointer_masking, read_spmbase=
+,
+>> > >                           write_spmbase                             =
+         },
+>> > >
+>> > > +    [CSR_MCTRCTL]    =3D { "mctrctl",    ctr_mmode,  NULL, NULL, rm=
+w_xctrctl },
+>> > > +    [CSR_SCTRCTL]    =3D { "sctrctl",    ctr_smode,  NULL, NULL, rm=
+w_xctrctl },
+>> > > +    [CSR_VSCTRCTL]   =3D { "vsctrctl",   ctr_smode,  NULL, NULL, rm=
+w_xctrctl },
+>> > > +    [CSR_SCTRDEPTH]  =3D { "sctrdepth",  ctr_smode,  NULL, NULL, rm=
+w_sctrdepth },
+>> > > +    [CSR_SCTRSTATUS] =3D { "sctrstatus", ctr_smode,  NULL, NULL, rm=
+w_sctrstatus },
+>> > > +
+>> > >      /* Performance Counters */
+>> > >      [CSR_HPMCOUNTER3]    =3D { "hpmcounter3",    ctr,    read_hpmco=
+unter },
+>> > >      [CSR_HPMCOUNTER4]    =3D { "hpmcounter4",    ctr,    read_hpmco=
+unter },
+>> > > --
+>> > > 2.34.1
+>> > >
+>> > >
 
