@@ -4,72 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D4D37D15D93
-	for <qemu-riscv@archiver.kernel.org>; Mon, 21 Oct 2024 13:45:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C5990D3C935
+	for <qemu-riscv@archiver.kernel.org>; Mon, 21 Oct 2024 17:32:10 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1t2siw-0007YM-NX; Mon, 21 Oct 2024 09:45:30 -0400
+	id 1t2wFr-0000a5-5v; Mon, 21 Oct 2024 13:31:43 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alexei.filippov@syntacore.com>)
- id 1t2sin-0007X0-CE; Mon, 21 Oct 2024 09:45:22 -0400
-Received: from mta-03.yadro.com ([89.207.88.253])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alexei.filippov@syntacore.com>)
- id 1t2sid-0002xp-PS; Mon, 21 Oct 2024 09:45:19 -0400
-DKIM-Filter: OpenDKIM Filter v2.11.0 mta-03.yadro.com DF35BE001C
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=syntacore.com;
- s=mta-04; t=1729518301;
- bh=tBX5ec73e5MHzQfX6Yy9HVxhOwBUdy1VGBTCJcOxUA0=;
- h=Content-Type:MIME-Version:Subject:From:Date:Message-ID:To:From;
- b=VFzq/MHPVTb29jwSQ2maxO5keKrCxEEKi5vDz5H+JEYepSlzqbwRyLN3zsPSKuvqV
- kigvIWsa0g4/xhA5NdV8fuEShyRORJqDfKClVYpKVbJkl5lzxmvZOMKoLTuB14VI5d
- 0FIBdHiT6DWVuolBvrj7uW5rJN0+m6v54YAfowSuoVOoRdeaZg8kNWSrE5pkz5603F
- w7SI2fKxt5uA0od61rNNH7j6Hy1qRqGmGGTQRXUphjx/JGC6/o+INOVylmIfAOlsU8
- IzykKySHG66CzazS8GqF7w2diBR2Lu7jxfNPlgIgFdTq0PuF6dcfCHCLHxyw+e1vns
- 7WQvza1nQ9zLg==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=syntacore.com;
- s=mta-03; t=1729518301;
- bh=tBX5ec73e5MHzQfX6Yy9HVxhOwBUdy1VGBTCJcOxUA0=;
- h=Content-Type:MIME-Version:Subject:From:Date:Message-ID:To:From;
- b=qGTOqDuBzB1i6gP0E1mcsomSv3dJqgzRxWsxtj0Yd2S0eQ1wrQlHfYIavAfQFPzk+
- MutOBx8K1ocb2cj3djqYMten+QiPSVZwpsgDcNXuCBzGPlPP+dY7XF0J7IDt1zs6wB
- D3bnU9lzeZ2q59FNfpOip5OAz5dHuYv24UGhP73/S2EZRRj+12HQwJQcmjy+n2CBkN
- +qtuZv/G5PNrsPH7wmrobiEeRbQOCT1rDWiwb6ek4mGC0pgfDlZiWYlkHN/DZRP47b
- r+SBVMUc8+I1/v2/v5js5O5iOOh6HmJj+gSTUzF9APqTcnFecJUAIQd+T9N9AdOJC6
- NJKdOJ2gvo9sg==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0 (Mac OS X Mail 16.0 \(3774.500.171.1.1\))
-Subject: Re: [PATCH RFC 06/10] target/riscv: Define PMU event related
- structures
-From: Aleksei Filippov <alexei.filippov@syntacore.com>
-In-Reply-To: <CAHBxVyE2C3sRJNbLOwhOZCnXAUTsEdh-mCewVAEJDDAURL10ug@mail.gmail.com>
-Date: Mon, 21 Oct 2024 16:44:39 +0300
-CC: Aleksei Filippov <alexei.filippov@syntacore.com>, Alexei Filippov
- <alexei.filippov@yadro.com>, <qemu-riscv@nongnu.org>,
- <qemu-devel@nongnu.org>, <palmer@dabbelt.com>, <liwei1518@gmail.com>,
- <zhiwei_liu@linux.alibaba.com>, <bin.meng@windriver.com>,
- <dbarboza@ventanamicro.com>, <alistair.francis@wdc.com>
-Content-Transfer-Encoding: quoted-printable
-Message-ID: <3B504AA0-06F9-4316-9B10-ED46B1B271A4@syntacore.com>
-References: <20241009-pmu_event_machine-v1-0-dcbd7a60e3ba@rivosinc.com>
- <20241009-pmu_event_machine-v1-6-dcbd7a60e3ba@rivosinc.com>
- <fd89dafa-279d-436c-9569-f2fdc289bac9@yadro.com>
- <CAHBxVyE2C3sRJNbLOwhOZCnXAUTsEdh-mCewVAEJDDAURL10ug@mail.gmail.com>
-To: Atish Kumar Patra <atishp@rivosinc.com>
-X-Mailer: Apple Mail (2.3774.500.171.1.1)
-X-ClientProxiedBy: T-EXCH-08.corp.yadro.com (172.17.11.58) To
- T-EXCH-12.corp.yadro.com (172.17.11.143)
-Received-SPF: permerror client-ip=89.207.88.253;
- envelope-from=alexei.filippov@syntacore.com; helo=mta-03.yadro.com
+ (Exim 4.90_1) (envelope-from <pierrick.bouvier@linaro.org>)
+ id 1t2wFp-0000ZG-4P
+ for qemu-riscv@nongnu.org; Mon, 21 Oct 2024 13:31:41 -0400
+Received: from mail-pg1-x533.google.com ([2607:f8b0:4864:20::533])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <pierrick.bouvier@linaro.org>)
+ id 1t2wFm-0004Gl-Mw
+ for qemu-riscv@nongnu.org; Mon, 21 Oct 2024 13:31:40 -0400
+Received: by mail-pg1-x533.google.com with SMTP id
+ 41be03b00d2f7-7ae3d7222d4so3527185a12.3
+ for <qemu-riscv@nongnu.org>; Mon, 21 Oct 2024 10:31:38 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1729531897; x=1730136697; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=htmhe3uW6BEe0N2w6YHfI1YKOHTFcSo6L6OVyV6OVk8=;
+ b=VEgyGPasKAUiB9b/ckgnBS4jDadXvkl+v2PK6Z2DcM4iWmdR1Xk4RXuGTbxuKB9Od3
+ JGADZjJ0hQxz2xqszlGXbBdlfsNLAMywrRLZ+zAsCc69VQ1A9xlZuHjkTQQEhPboIxdG
+ PNcPc9zsmSDyGZglvc3+/8iVHBx88pqvYoNf3grKitBMDvEeExal48qUqgsdqgWTnq+Z
+ DY5tSbrT/veBy4efJG+03sd2DZSCH/QDxc4D4dlSrEcAyq+VQTqm66EQ7T0OgCrCSRRY
+ VvOkuAk/fBD5kKKikFlyN1xsRfXl7hB1WFKB1wlqKnYhYTYphLpQsBc2DzjZD10hzdOu
+ jNpA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1729531897; x=1730136697;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=htmhe3uW6BEe0N2w6YHfI1YKOHTFcSo6L6OVyV6OVk8=;
+ b=KM0hSSOiw/aKOw+4tXphADZ+KeK148yDpcq4sALFY+pngAyfax/UekCIHM/0v+Pza1
+ mET2g/TbcG0l1Il6sbMyrh+YE54B1WgE+NOsZ7Bp9p9PFeqblDVxFSqcupCh/lNnSFJU
+ 6pH4aFJFFXkmKan3iFGGLJ+warqdaZYq5UJipDC0LwGte66mD7bBPnJNnmSaQM/0H+Cy
+ 1wstP35W1rzj04UtmXavFMmACU2GqCFM40WPZPXiQxKCPDtE2YeA8XYkFJ6RmoaNS5Ae
+ ZCJPXT3Ujl3iY+NRDMnbH8BzfeY7Q6YXpcH740EgUchxHgNYSYOqFIwK+9qawjZVdlwf
+ XmYA==
+X-Gm-Message-State: AOJu0Yx3GQIH3bVHlxbf+aB3wC3yfSLFjlXbBWXeEoWCt8iBaFPWC4uf
+ kRvMe9tuDwD89gouGyxKuGwY+QItje2ktaHEEXfdhxF8XzmK+um/EuMmrs8L/TQ=
+X-Google-Smtp-Source: AGHT+IHVC+AjOFUj/gd3ZIyMFNaAkyJ4gq/NxZrOhgrhoxUreMZuHQiRMgchDb7zcsd6khHzrwB4YQ==
+X-Received: by 2002:a05:6a21:3182:b0:1d9:3ed:28c0 with SMTP id
+ adf61e73a8af0-1d92c49b151mr18355068637.2.1729531897151; 
+ Mon, 21 Oct 2024 10:31:37 -0700 (PDT)
+Received: from [192.168.1.67] (216-180-64-156.dyn.novuscom.net.
+ [216.180.64.156]) by smtp.gmail.com with ESMTPSA id
+ 41be03b00d2f7-7eaeabb91b5sm2904012a12.73.2024.10.21.10.31.36
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 21 Oct 2024 10:31:36 -0700 (PDT)
+Message-ID: <80ef4f57-e461-4bbc-8130-ba2cea14e88e@linaro.org>
+Date: Mon, 21 Oct 2024 10:31:35 -0700
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v6 01/14] tcg: Reset data_gen_ptr correctly
+Content-Language: en-US
+To: Richard Henderson <richard.henderson@linaro.org>, qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com,
+ zhiwei_liu@linux.alibaba.com, qemu-stable@nongnu.org
+References: <20241016193140.2206352-1-richard.henderson@linaro.org>
+ <20241016193140.2206352-2-richard.henderson@linaro.org>
+From: Pierrick Bouvier <pierrick.bouvier@linaro.org>
+In-Reply-To: <20241016193140.2206352-2-richard.henderson@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::533;
+ envelope-from=pierrick.bouvier@linaro.org; helo=mail-pg1-x533.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_VALIDITY_CERTIFIED_BLOCKED=0.001, RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001,
- SPF_HELO_NONE=0.001, T_SPF_PERMERROR=0.01 autolearn=ham autolearn_force=no
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -87,106 +99,37 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 
 
-> On 11 Oct 2024, at 23:45, Atish Kumar Patra <atishp@rivosinc.com> =
-wrote:
->=20
-> On Thu, Oct 10, 2024 at 5:44=E2=80=AFAM Alexei Filippov
-> <alexei.filippov@yadro.com> wrote:
->>=20
->>=20
->>=20
->> On 10.10.2024 02:09, Atish Patra wrote:
->>> Signed-off-by: Atish Patra <atishp@rivosinc.com>
->>> ---
->>>  target/riscv/cpu.h | 25 +++++++++++++++++++++++++
->>>  1 file changed, 25 insertions(+)
->>>=20
->>> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
->>> index 2ac391a7cf74..53426710f73e 100644
->>> --- a/target/riscv/cpu.h
->>> +++ b/target/riscv/cpu.h
->>> @@ -189,6 +189,28 @@ typedef struct PMUFixedCtrState {
->>>          uint64_t counter_virt_prev[2];
->>>  } PMUFixedCtrState;
->>>=20
->>> +typedef uint64_t (*PMU_EVENT_CYCLE_FUNC)(RISCVCPU *);
->>> +typedef uint64_t (*PMU_EVENT_INSTRET_FUNC)(RISCVCPU *);
->>> +typedef uint64_t (*PMU_EVENT_TLB_FUNC)(RISCVCPU *, MMUAccessType =
-access_type);
->>> +
->>> +typedef struct PMUEventInfo {
->>> +    /* Event ID (BIT [0:55] valid) */
->>> +    uint64_t event_id;
->>> +    /* Supported hpmcounters for this event */
->>> +    uint32_t counter_mask;
->>> +    /* Bitmask of valid event bits */
->>> +    uint64_t event_mask;
->>> +} PMUEventInfo;
->>> +
->>> +typedef struct PMUEventFunc {
->>> +    /* Get the ID of the event that can monitor cycles */
->>> +    PMU_EVENT_CYCLE_FUNC get_cycle_id;
->>> +    /* Get the ID of the event that can monitor cycles */
->>> +    PMU_EVENT_INSTRET_FUNC get_intstret_id;
->>> +    /* Get the ID of the event that can monitor TLB events*/
->>> +    PMU_EVENT_TLB_FUNC get_tlb_access_id;
->> Ok, this is kinda interesting decision, but it's not scalable. AFAIU
->=20
-> Yes it is not scalable if there is a need to scale as mentioned =
-earlier.
-> Do you have any other events that can be emulated in Qemu ?
->=20
-> Having said that, I am okay with single call back though but not too =
-sure
-> about read/write callback unless there is a use case to support those.
->=20
->> none spec provide us full enum of existing events. So anytime when
->> somebody will try to implement their own pmu events they would have =
-to
->> add additional callbacks, and this structure never will be fulled
->> properly. And then we ended up with structure 1000+ callback with =
-only 5
->> machines wich supports pmu events. I suggest my approach with only
->> read/write callbacks, where machine can decide by itself how to =
-handle
->> any of machine specific events.
->=20
-> Lot of these events are microarchitectural events which can't be
-> supported in Qemu.
-> I don't think it's a good idea at all to add dummy values for all the
-> events defined in a platform
-> which is harder to debug for a user.
+On 10/16/24 12:31, Richard Henderson wrote:
+> This pointer needs to be reset after overflow just like
+> code_buf and code_ptr.
+> 
+> Cc: qemu-stable@nongnu.org
+> Fixes: 57a269469db ("tcg: Infrastructure for managing constant pools")
+> Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
+> ---
+>   tcg/tcg.c | 2 +-
+>   1 file changed, 1 insertion(+), 1 deletion(-)
+> 
+> diff --git a/tcg/tcg.c b/tcg/tcg.c
+> index 5decd83cf4..0babae1b88 100644
+> --- a/tcg/tcg.c
+> +++ b/tcg/tcg.c
+> @@ -1399,7 +1399,6 @@ TranslationBlock *tcg_tb_alloc(TCGContext *s)
+>           goto retry;
+>       }
+>       qatomic_set(&s->code_gen_ptr, next);
+> -    s->data_gen_ptr = NULL;
+>       return tb;
+>   }
+>   
+> @@ -6172,6 +6171,7 @@ int tcg_gen_code(TCGContext *s, TranslationBlock *tb, uint64_t pc_start)
+>        */
+>       s->code_buf = tcg_splitwx_to_rw(tb->tc.ptr);
+>       s->code_ptr = s->code_buf;
+> +    s->data_gen_ptr = NULL;
+>   
+>   #ifdef TCG_TARGET_NEED_LDST_LABELS
+>       QSIMPLEQ_INIT(&s->ldst_labels);
 
-Yes, you're right that the rest of the events are microarchitectural and =
-that they can't be properly simulated in QEMU at the moment, but it =
-seems to me that's not really the point here. The point is how elastic =
-this solution can be - that is, whether to do any events or not and how =
-exactly they should be counted should be decided by the vendor of a =
-particular machine, and not by the simulator in general. Plus, I have a =
-very real use case where it will come in handy - debugging perf. Support =
-the possibility of simulating events on QEMU side will make the life of =
-t perf folks much easier. I do not insist specifically on my =
-implementation of this solution, but I think that the solution with the =
-creation of a callback for each of the events will significantly =
-complicate the porting of the PMU for machine vendors.
->=20
->=20
->>> +} PMUEventFunc;
->>> +
->>>  struct CPUArchState {
->>>      target_ulong gpr[32];
->>>      target_ulong gprh[32]; /* 64 top bits of the 128-bit registers =
-*/
->>> @@ -386,6 +408,9 @@ struct CPUArchState {
->>>      target_ulong mhpmeventh_val[RV_MAX_MHPMEVENTS];
->>>=20
->>>      PMUFixedCtrState pmu_fixed_ctrs[2];
->>> +    PMUEventInfo *pmu_events;
->>> +    PMUEventFunc pmu_efuncs;
->>> +    int num_pmu_events;
->>>=20
->>>      target_ulong sscratch;
->>>      target_ulong mscratch;
-
-
+Reviewed-by: Pierrick Bouvier <pierrick.bouvier@linaro.org>
 
