@@ -4,81 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0E09AD17124
-	for <qemu-riscv@archiver.kernel.org>; Mon, 21 Oct 2024 18:52:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CB1D9D17129
+	for <qemu-riscv@archiver.kernel.org>; Mon, 21 Oct 2024 19:17:00 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1t2xWB-0005ij-Om; Mon, 21 Oct 2024 14:52:39 -0400
+	id 1t2xtH-0002GW-TA; Mon, 21 Oct 2024 15:16:31 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1t2xW9-0005iF-QJ
- for qemu-riscv@nongnu.org; Mon, 21 Oct 2024 14:52:38 -0400
-Received: from mail-pl1-x632.google.com ([2607:f8b0:4864:20::632])
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1t2xtG-0002GG-T4
+ for qemu-riscv@nongnu.org; Mon, 21 Oct 2024 15:16:30 -0400
+Received: from mail-pf1-x435.google.com ([2607:f8b0:4864:20::435])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1t2xW6-0004wP-4x
- for qemu-riscv@nongnu.org; Mon, 21 Oct 2024 14:52:37 -0400
-Received: by mail-pl1-x632.google.com with SMTP id
- d9443c01a7336-20bb39d97d1so44533235ad.2
- for <qemu-riscv@nongnu.org>; Mon, 21 Oct 2024 11:52:33 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1t2xtD-00076P-IW
+ for qemu-riscv@nongnu.org; Mon, 21 Oct 2024 15:16:30 -0400
+Received: by mail-pf1-x435.google.com with SMTP id
+ d2e1a72fcca58-71e5ae69880so3754288b3a.2
+ for <qemu-riscv@nongnu.org>; Mon, 21 Oct 2024 12:16:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1729536752; x=1730141552; darn=nongnu.org;
+ d=ventanamicro.com; s=google; t=1729538185; x=1730142985; darn=nongnu.org;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=StT/ssZw8sY1sk4zgyyCfWDYREgz7bPuwN3Z874PxqY=;
- b=nvfDdXl8aZps3qwcS7BUpxev6rUJiXJARvfWGK93z60WVf4dTfe7UIAt3oQC82/D7q
- dFtZN7LNyU5+V4l1Xih/d38TkI7u35tlWFiZwVbOTm4SC5fYYWUtkCOn+HQ8KhPPBfTH
- IaES7E/3BDkw0uqxG7SHkV5/YdGM5/IKoNnMgdhq6bZoMJVxwbwDP71mahnSlqwdl55B
- 9s4UknyJdBgN/+Gmb4Kfi4E/fHoteT/lo3wZlc6iBOSMyVNGg5IS45nGGa0u+uqJd5TB
- Iyf470xOto6oo5Ww2sw5pF1giQyNzgoiwU959nn+UMnV6GDNcxwfxk5i5KpJ16xq1tU8
- /1Cw==
+ bh=XJlshyed/Hm9obK4873RTSaIjUnI3fci1pdF5H4p5hw=;
+ b=aAqlMYAl7Z01YP6fKWbXGvP08tBS66s7/O9BLJNb9wEFFydUkBGgMf528i5slLAubR
+ raeaZVyJjChOJg13H4s5JKP3KZodmoCKyKSpAtXWUbw8B9OMjAbCVlkIAmRyu5Nss1w2
+ gCMC0njRfOzVQhC/KLEXC5qYrbiS/raZRT8hGxM2H1sowIRYLdUMqOHDAz7b+Kuufzp/
+ tt0RFFEqfpqRWCBz24ydAD4ZKUV7e0A20A9FHysZM/2X3kkf+BGLTwOobtyECNx5r03D
+ ukI/DQxKsobHcNHM61f5BgffxurYUt/0htfINHYwjhWG5Fd7u/FOia11tX14BAl4P88P
+ QDVA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729536752; x=1730141552;
+ d=1e100.net; s=20230601; t=1729538185; x=1730142985;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=StT/ssZw8sY1sk4zgyyCfWDYREgz7bPuwN3Z874PxqY=;
- b=pKo6L9LjIP+dtLVUY7XAUJjBZF4kqxNqtNMbaE2I99/P/ELDB638pKzSEx96YeikUO
- L2QalVR+bN4Vq3zJKU+r0XC95e/L6eKtw4Qlf0iUdgL8pKGYuQ19ApkqnzKhVtG+7hD6
- SqhZqUDJu+DU0Bq23CgV686KYQzYAMaODo/NXsTCg2ehWT7nFGAp7ShQPXBBLfMQ468q
- aFaWP+YIkIIVBeegPk8H7Zv2IX/CEW2dDVLfVeAj7wybf7sFO+RQ+jiFN/azIdNLrzYv
- 98AaM5+9hTb7jhl7BwAS82ZSZZ/8rPLxTe5SQpWsvIQIEHsIWomLqNH/geETkKaTE1uF
- BdAA==
-X-Gm-Message-State: AOJu0YwAwtqlRP/Kvz9vKeskRVeCCqZMAYUlsabxrOkRSmsCOVhdCGzP
- HqDghqJZzSheG9iYy1ugAsPfZ+8yftjnzF6y6N9TQnKHzXoki+ZpQue27PRla7uMd+6e+RXq4Hd
- V
-X-Google-Smtp-Source: AGHT+IGIdhXI5t9USzob0MKFsABrxsmB7qByHHKx3T7fTTzW3BzAyTl/JOlq2wrkrW+BMzbehWBJOA==
-X-Received: by 2002:a17:902:ecd2:b0:20c:9da6:65af with SMTP id
- d9443c01a7336-20e94b5b5a6mr9263845ad.57.1729536750744; 
- Mon, 21 Oct 2024 11:52:30 -0700 (PDT)
-Received: from [192.168.0.4] (174-21-81-121.tukw.qwest.net. [174.21.81.121])
+ bh=XJlshyed/Hm9obK4873RTSaIjUnI3fci1pdF5H4p5hw=;
+ b=H43bymjjOghVTJe5UjmIoGQ1aW8yWohn8fDtF2Q9WxEW6wYA3f8IIsQhGLKWlgMVnA
+ gjUCiYJL5POiOV1XgUpzdha4n9qmc5msbgEcgP/FBlTYqN7x+/oEaaah5WOUrbH3Gk2F
+ 28/gY5h59p3qg3av+vp8x9izVrLDp0YhPRdNXCoTnDhPyMoloxYqm4uS07msRi4lLkpc
+ bad9nEcE0QpoKGlLRXP2Fh9uoMwJlrYVOxbGhknod47Af/6SpA76FJtiqs3MqHDhcREm
+ fTRTTtcwL3iuOiJTr7DueLEenGVr+jOPf5S0yGtXVSs6KLgD4GWC+HrTtyesPs4f1D+Z
+ RKrA==
+X-Gm-Message-State: AOJu0YyF3STYd7MUg3epQmiiYJ8aISOfRv3c13eFVCpm/pSbG2vIsJZ8
+ QiLuBaqHl9xeiD9/n8KqXLuTzEu1hgP+9LpMfMh8/8U8b3rUfvnM6/v79C1HGCE=
+X-Google-Smtp-Source: AGHT+IEy60EL8w7pUX9H9+TkBDZM3X1gGf6nuspztzh/w+qP8YIsenLLMsZGl6VtgpHhuWpyq5GSIg==
+X-Received: by 2002:a05:6a00:929d:b0:71e:7a56:3eaf with SMTP id
+ d2e1a72fcca58-71ee5afa3b1mr279228b3a.24.1729538184070; 
+ Mon, 21 Oct 2024 12:16:24 -0700 (PDT)
+Received: from ?IPV6:2804:7f0:bcc0:242b:63dc:6000:cdfb:8dda?
+ ([2804:7f0:bcc0:242b:63dc:6000:cdfb:8dda])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-20e7f0bd48fsm29206155ad.129.2024.10.21.11.52.30
+ d2e1a72fcca58-71ec1312d05sm3244505b3a.35.2024.10.21.12.16.21
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 21 Oct 2024 11:52:30 -0700 (PDT)
-Message-ID: <0e589c57-0b37-400f-ade7-0d35027559b3@linaro.org>
-Date: Mon, 21 Oct 2024 11:52:28 -0700
+ Mon, 21 Oct 2024 12:16:23 -0700 (PDT)
+Message-ID: <95b15e0e-41da-4ca0-8ff8-c38de43c3ff8@ventanamicro.com>
+Date: Mon, 21 Oct 2024 16:16:20 -0300
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 Subject: Re: [PATCH v6 03/14] util: Add RISC-V vector extension probe in
  cpuinfo
-To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>, qemu-devel@nongnu.org
+To: Richard Henderson <richard.henderson@linaro.org>, qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com,
  zhiwei_liu@linux.alibaba.com,
  TANG Tiancheng <tangtiancheng.ttc@alibaba-inc.com>
 References: <20241016193140.2206352-1-richard.henderson@linaro.org>
  <20241016193140.2206352-4-richard.henderson@linaro.org>
  <f9a4f4ac-fb69-438d-aff9-b333408c80f3@ventanamicro.com>
+ <0e589c57-0b37-400f-ade7-0d35027559b3@linaro.org>
 Content-Language: en-US
-From: Richard Henderson <richard.henderson@linaro.org>
-In-Reply-To: <f9a4f4ac-fb69-438d-aff9-b333408c80f3@ventanamicro.com>
+From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+In-Reply-To: <0e589c57-0b37-400f-ade7-0d35027559b3@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::632;
- envelope-from=richard.henderson@linaro.org; helo=mail-pl1-x632.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::435;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pf1-x435.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -101,237 +102,244 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 10/21/24 11:25, Daniel Henrique Barboza wrote:
-> Hi,
-> 
-> This patch is breaking a KVM guest that runs  with '-cpu host' in an emulated
-> Risc-V host. The break happens regardless of the RVV support in the emulated
-> host:
-> 
-> 
-> $ qemu-system-riscv64 \
->      -machine virt,accel=kvm -m 2G -smp 1 \
->      -cpu host \
->      -nographic -snapshot \
->      -kernel ./guest_imgs/Image \
->      -initrd ./guest_imgs/rootfs_kvm_riscv64.img \
->      -append "root=/dev/ram rw console=ttyS0 earlycon=sbi"
-> 
-> qemu-system-riscv64: ../util/cpuinfo-riscv.c:119: cpuinfo_init: Assertion `left == 0' failed.
-> Aborted
-> 
-> 
-> In a quick debug:
-> 
-> 
-> On 10/16/24 4:31 PM, Richard Henderson wrote:
->> From: TANG Tiancheng <tangtiancheng.ttc@alibaba-inc.com>
+
+
+On 10/21/24 3:52 PM, Richard Henderson wrote:
+> On 10/21/24 11:25, Daniel Henrique Barboza wrote:
+>> Hi,
 >>
->> Add support for probing RISC-V vector extension availability in
->> the backend. This information will be used when deciding whether
->> to use vector instructions in code generation.
+>> This patch is breaking a KVM guest that runs  with '-cpu host' in an emulated
+>> Risc-V host. The break happens regardless of the RVV support in the emulated
+>> host:
 >>
->> Cache lg2(vlenb) for the backend. The storing of lg2(vlenb) means
->> we can convert all of the division into subtraction.
 >>
->> While the compiler doesn't support RISCV_HWPROBE_EXT_ZVE64X,
->> we use RISCV_HWPROBE_IMA_V instead. RISCV_HWPROBE_IMA_V is more
->> strictly constrainted than RISCV_HWPROBE_EXT_ZVE64X. At least in
->> current QEMU implemenation, the V vector extension depends on the
->> zve64d extension.
+>> $ qemu-system-riscv64 \
+>>      -machine virt,accel=kvm -m 2G -smp 1 \
+>>      -cpu host \
+>>      -nographic -snapshot \
+>>      -kernel ./guest_imgs/Image \
+>>      -initrd ./guest_imgs/rootfs_kvm_riscv64.img \
+>>      -append "root=/dev/ram rw console=ttyS0 earlycon=sbi"
 >>
->> Signed-off-by: TANG Tiancheng <tangtiancheng.ttc@alibaba-inc.com>
->> Reviewed-by: Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
->> Message-ID: <20241007025700.47259-2-zhiwei_liu@linux.alibaba.com>
->> Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
->> ---
->>   host/include/riscv/host/cpuinfo.h |  2 ++
->>   util/cpuinfo-riscv.c              | 24 ++++++++++++++++++++++--
->>   2 files changed, 24 insertions(+), 2 deletions(-)
+>> qemu-system-riscv64: ../util/cpuinfo-riscv.c:119: cpuinfo_init: Assertion `left == 0' failed.
+>> Aborted
 >>
->> diff --git a/host/include/riscv/host/cpuinfo.h b/host/include/riscv/host/cpuinfo.h
->> index 2b00660e36..cdc784e7b6 100644
->> --- a/host/include/riscv/host/cpuinfo.h
->> +++ b/host/include/riscv/host/cpuinfo.h
->> @@ -10,9 +10,11 @@
->>   #define CPUINFO_ZBA             (1u << 1)
->>   #define CPUINFO_ZBB             (1u << 2)
->>   #define CPUINFO_ZICOND          (1u << 3)
->> +#define CPUINFO_ZVE64X          (1u << 4)
->>   /* Initialized with a constructor. */
->>   extern unsigned cpuinfo;
->> +extern unsigned riscv_lg2_vlenb;
->>   /*
->>    * We cannot rely on constructor ordering, so other constructors must
+>>
+>> In a quick debug:
+>>
+>>
+>> On 10/16/24 4:31 PM, Richard Henderson wrote:
+>>> From: TANG Tiancheng <tangtiancheng.ttc@alibaba-inc.com>
+>>>
+>>> Add support for probing RISC-V vector extension availability in
+>>> the backend. This information will be used when deciding whether
+>>> to use vector instructions in code generation.
+>>>
+>>> Cache lg2(vlenb) for the backend. The storing of lg2(vlenb) means
+>>> we can convert all of the division into subtraction.
+>>>
+>>> While the compiler doesn't support RISCV_HWPROBE_EXT_ZVE64X,
+>>> we use RISCV_HWPROBE_IMA_V instead. RISCV_HWPROBE_IMA_V is more
+>>> strictly constrainted than RISCV_HWPROBE_EXT_ZVE64X. At least in
+>>> current QEMU implemenation, the V vector extension depends on the
+>>> zve64d extension.
+>>>
+>>> Signed-off-by: TANG Tiancheng <tangtiancheng.ttc@alibaba-inc.com>
+>>> Reviewed-by: Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
+>>> Message-ID: <20241007025700.47259-2-zhiwei_liu@linux.alibaba.com>
+>>> Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
+>>> ---
+>>>   host/include/riscv/host/cpuinfo.h |  2 ++
+>>>   util/cpuinfo-riscv.c              | 24 ++++++++++++++++++++++--
+>>>   2 files changed, 24 insertions(+), 2 deletions(-)
+>>>
+>>> diff --git a/host/include/riscv/host/cpuinfo.h b/host/include/riscv/host/cpuinfo.h
+>>> index 2b00660e36..cdc784e7b6 100644
+>>> --- a/host/include/riscv/host/cpuinfo.h
+>>> +++ b/host/include/riscv/host/cpuinfo.h
+>>> @@ -10,9 +10,11 @@
+>>>   #define CPUINFO_ZBA             (1u << 1)
+>>>   #define CPUINFO_ZBB             (1u << 2)
+>>>   #define CPUINFO_ZICOND          (1u << 3)
+>>> +#define CPUINFO_ZVE64X          (1u << 4)
+>>>   /* Initialized with a constructor. */
+>>>   extern unsigned cpuinfo;
+>>> +extern unsigned riscv_lg2_vlenb;
+>>>   /*
+>>>    * We cannot rely on constructor ordering, so other constructors must
+>>> diff --git a/util/cpuinfo-riscv.c b/util/cpuinfo-riscv.c
+>>> index 8cacc67645..16114ffd32 100644
+>>> --- a/util/cpuinfo-riscv.c
+>>> +++ b/util/cpuinfo-riscv.c
+>>> @@ -4,6 +4,7 @@
+>>>    */
+>>>   #include "qemu/osdep.h"
+>>> +#include "qemu/host-utils.h"
+>>>   #include "host/cpuinfo.h"
+>>>   #ifdef CONFIG_ASM_HWPROBE_H
+>>> @@ -13,6 +14,7 @@
+>>>   #endif
+>>>   unsigned cpuinfo;
+>>> +unsigned riscv_lg2_vlenb;
+>>>   static volatile sig_atomic_t got_sigill;
+>>>   static void sigill_handler(int signo, siginfo_t *si, void *data)
+>>> @@ -34,7 +36,7 @@ static void sigill_handler(int signo, siginfo_t *si, void *data)
+>>>   /* Called both as constructor and (possibly) via other constructors. */
+>>>   unsigned __attribute__((constructor)) cpuinfo_init(void)
+>>>   {
+>>> -    unsigned left = CPUINFO_ZBA | CPUINFO_ZBB | CPUINFO_ZICOND;
+>>> +    unsigned left = CPUINFO_ZBA | CPUINFO_ZBB | CPUINFO_ZICOND | CPUINFO_ZVE64X;
+>>
+>>
+>> This will init 'left' with 30 (2 + 4 + 8 + 16)
+>>
+>>
+>>>       unsigned info = cpuinfo;
+>>>       if (info) {
+>>> @@ -50,6 +52,9 @@ unsigned __attribute__((constructor)) cpuinfo_init(void)
+>>>   #endif
+>>>   #if defined(__riscv_arch_test) && defined(__riscv_zicond)
+>>>       info |= CPUINFO_ZICOND;
+>>> +#endif
+>>> +#if defined(__riscv_arch_test) && defined(__riscv_zve64x)
+>>> +    info |= CPUINFO_ZVE64X;
+>>>   #endif
+>>>       left &= ~info;
+>>> @@ -65,7 +70,8 @@ unsigned __attribute__((constructor)) cpuinfo_init(void)
+>>>               && pair.key >= 0) {
+>>>               info |= pair.value & RISCV_HWPROBE_EXT_ZBA ? CPUINFO_ZBA : 0;
+>>>               info |= pair.value & RISCV_HWPROBE_EXT_ZBB ? CPUINFO_ZBB : 0;
+>>> -            left &= ~(CPUINFO_ZBA | CPUINFO_ZBB);
+>>> +            info |= pair.value & RISCV_HWPROBE_IMA_V ? CPUINFO_ZVE64X : 0;
+>>> +            left &= ~(CPUINFO_ZBA | CPUINFO_ZBB | CPUINFO_ZVE64X);
+>>>   #ifdef RISCV_HWPROBE_EXT_ZICOND
+>>>               info |= pair.value & RISCV_HWPROBE_EXT_ZICOND ? CPUINFO_ZICOND : 0;
+>>>               left &= ~CPUINFO_ZICOND;
+>>> @@ -113,6 +119,20 @@ unsigned __attribute__((constructor)) cpuinfo_init(void)
+>>>           assert(left == 0);
+>>
+>> To better understand, this is the 'if' block that contains this assert:
+>>
+>>      if (left) {
+>>          struct sigaction sa_old, sa_new;
+>>
+>>          memset(&sa_new, 0, sizeof(sa_new));
+>>          sa_new.sa_flags = SA_SIGINFO;
+>>          sa_new.sa_sigaction = sigill_handler;
+>>          sigaction(SIGILL, &sa_new, &sa_old);
+>>
+>>          if (left & CPUINFO_ZBA) {
+>>              /* Probe for Zba: add.uw zero,zero,zero. */
+>>              got_sigill = 0;
+>>              asm volatile(".insn r 0x3b, 0, 0x04, zero, zero, zero"
+>>                           : : : "memory");
+>>              info |= got_sigill ? 0 : CPUINFO_ZBA;
+>>              left &= ~CPUINFO_ZBA;
+>>          }
+>>
+>>          if (left & CPUINFO_ZBB) {
+>>              /* Probe for Zbb: andn zero,zero,zero. */
+>>              got_sigill = 0;
+>>              asm volatile(".insn r 0x33, 7, 0x20, zero, zero, zero"
+>>                           : : : "memory");
+>>              info |= got_sigill ? 0 : CPUINFO_ZBB;
+>>              left &= ~CPUINFO_ZBB;
+>>          }
+>>
+>>          if (left & CPUINFO_ZICOND) {
+>>              /* Probe for Zicond: czero.eqz zero,zero,zero. */
+>>              got_sigill = 0;
+>>              asm volatile(".insn r 0x33, 5, 0x07, zero, zero, zero"
+>>                           : : : "memory");
+>>              info |= got_sigill ? 0 : CPUINFO_ZICOND;
+>>              left &= ~CPUINFO_ZICOND;
+>>          }
+>>
+>>          sigaction(SIGILL, &sa_old, NULL);
+>>          assert(left == 0);
+>>      }
+>>
+>>
+>> The 'assert' is hit at this point because left is 16, i.e. left = CPUINFO_ZVE64X.
+>>
+>> I did a fix based on what seems to be the usual flow of how 'left' is being calculated:
+>>
+>>
+>> $ git diff
 >> diff --git a/util/cpuinfo-riscv.c b/util/cpuinfo-riscv.c
->> index 8cacc67645..16114ffd32 100644
+>> index 16114ffd32..25a98a75ad 100644
 >> --- a/util/cpuinfo-riscv.c
 >> +++ b/util/cpuinfo-riscv.c
->> @@ -4,6 +4,7 @@
->>    */
->>   #include "qemu/osdep.h"
->> +#include "qemu/host-utils.h"
->>   #include "host/cpuinfo.h"
->>   #ifdef CONFIG_ASM_HWPROBE_H
->> @@ -13,6 +14,7 @@
->>   #endif
->>   unsigned cpuinfo;
->> +unsigned riscv_lg2_vlenb;
->>   static volatile sig_atomic_t got_sigill;
->>   static void sigill_handler(int signo, siginfo_t *si, void *data)
->> @@ -34,7 +36,7 @@ static void sigill_handler(int signo, siginfo_t *si, void *data)
->>   /* Called both as constructor and (possibly) via other constructors. */
->>   unsigned __attribute__((constructor)) cpuinfo_init(void)
->>   {
->> -    unsigned left = CPUINFO_ZBA | CPUINFO_ZBB | CPUINFO_ZICOND;
->> +    unsigned left = CPUINFO_ZBA | CPUINFO_ZBB | CPUINFO_ZICOND | CPUINFO_ZVE64X;
-> 
-> 
-> This will init 'left' with 30 (2 + 4 + 8 + 16)
-> 
-> 
->>       unsigned info = cpuinfo;
->>       if (info) {
->> @@ -50,6 +52,9 @@ unsigned __attribute__((constructor)) cpuinfo_init(void)
->>   #endif
->>   #if defined(__riscv_arch_test) && defined(__riscv_zicond)
->>       info |= CPUINFO_ZICOND;
->> +#endif
->> +#if defined(__riscv_arch_test) && defined(__riscv_zve64x)
->> +    info |= CPUINFO_ZVE64X;
->>   #endif
->>       left &= ~info;
->> @@ -65,7 +70,8 @@ unsigned __attribute__((constructor)) cpuinfo_init(void)
->>               && pair.key >= 0) {
->>               info |= pair.value & RISCV_HWPROBE_EXT_ZBA ? CPUINFO_ZBA : 0;
->>               info |= pair.value & RISCV_HWPROBE_EXT_ZBB ? CPUINFO_ZBB : 0;
->> -            left &= ~(CPUINFO_ZBA | CPUINFO_ZBB);
->> +            info |= pair.value & RISCV_HWPROBE_IMA_V ? CPUINFO_ZVE64X : 0;
->> +            left &= ~(CPUINFO_ZBA | CPUINFO_ZBB | CPUINFO_ZVE64X);
->>   #ifdef RISCV_HWPROBE_EXT_ZICOND
->>               info |= pair.value & RISCV_HWPROBE_EXT_ZICOND ? CPUINFO_ZICOND : 0;
+>> @@ -115,24 +115,27 @@ unsigned __attribute__((constructor)) cpuinfo_init(void)
 >>               left &= ~CPUINFO_ZICOND;
->> @@ -113,6 +119,20 @@ unsigned __attribute__((constructor)) cpuinfo_init(void)
+>>           }
+>>
+>> +        if (left & CPUINFO_ZVE64X) {
+>> +            /*
+>> +             * We are guaranteed by RVV-1.0 that VLEN is a power of 2.
+>> +             * We are guaranteed by Zve64x that VLEN >= 64, and that
+>> +             * EEW of {8,16,32,64} are supported.
+>> +             *
+>> +             * Cache VLEN in a convenient form.
+>> +             */
+>> +            unsigned long vlenb;
+>> +            got_sigill = 0;
+>> +            /* Read csr "vlenb" with "csrr %0, vlenb" : "=r"(vlenb) */
+>> +            asm volatile(".insn i 0x73, 0x2, %0, zero, -990" : "=r"(vlenb));
+>> +            info |= got_sigill ? 0 : CPUINFO_ZVE64X;
+>> +            left &= ~CPUINFO_ZVE64X;
+>> +            riscv_lg2_vlenb = ctz32(vlenb);
+>> +        }
+>> +
+>>           sigaction(SIGILL, &sa_old, NULL);
 >>           assert(left == 0);
+>>       }
+>>
+>> -    if (info & CPUINFO_ZVE64X) {
+>> -        /*
+>> -         * We are guaranteed by RVV-1.0 that VLEN is a power of 2.
+>> -         * We are guaranteed by Zve64x that VLEN >= 64, and that
+>> -         * EEW of {8,16,32,64} are supported.
+>> -         *
+>> -         * Cache VLEN in a convenient form.
+>> -         */
+>> -        unsigned long vlenb;
+>> -        /* Read csr "vlenb" with "csrr %0, vlenb" : "=r"(vlenb) */
+>> -        asm volatile(".insn i 0x73, 0x2, %0, zero, -990" : "=r"(vlenb));
+>> -        riscv_lg2_vlenb = ctz32(vlenb);
+>> -    }
+>> -
+>>       info |= CPUINFO_ALWAYS;
+>>       cpuinfo = info;
+>>       return info;
+>>
+>>
+>>
+>> i.e. I moved the CPUINFO_ZVE64X inside the 'if (left)' block, then update both 'info' and
+>> 'left' depending on if we found the vlenb CSR.
+>>
+>> Note that this fixes the issue I'm seeing (KVM guest boot), but I can't say if the original
+>> intent of the patch is preserved. If this is a good fix feel free to squash this diff into
+>> the patch.
 > 
-> To better understand, this is the 'if' block that contains this assert:
+> This is not a good fix.  The vlenb probe must happen whenever vector support is detected -- it is not for detection itself.
 > 
->      if (left) {
->          struct sigaction sa_old, sa_new;
+> It is my understanding that kernel support for riscv_hwprobe pre-dates kernel support for vectors in userspace.  I believe that we really don't care about old kernel header installs.
 > 
->          memset(&sa_new, 0, sizeof(sa_new));
->          sa_new.sa_flags = SA_SIGINFO;
->          sa_new.sa_sigaction = sigill_handler;
->          sigaction(SIGILL, &sa_new, &sa_old);
+> Therefore we should simply
 > 
->          if (left & CPUINFO_ZBA) {
->              /* Probe for Zba: add.uw zero,zero,zero. */
->              got_sigill = 0;
->              asm volatile(".insn r 0x3b, 0, 0x04, zero, zero, zero"
->                           : : : "memory");
->              info |= got_sigill ? 0 : CPUINFO_ZBA;
->              left &= ~CPUINFO_ZBA;
->          }
+>      left &= ~CPUINFO_ZVE64X;
 > 
->          if (left & CPUINFO_ZBB) {
->              /* Probe for Zbb: andn zero,zero,zero. */
->              got_sigill = 0;
->              asm volatile(".insn r 0x33, 7, 0x20, zero, zero, zero"
->                           : : : "memory");
->              info |= got_sigill ? 0 : CPUINFO_ZBB;
->              left &= ~CPUINFO_ZBB;
->          }
+> with a comment after the CONFIG_ASM_HWPROBE_H block.
 > 
->          if (left & CPUINFO_ZICOND) {
->              /* Probe for Zicond: czero.eqz zero,zero,zero. */
->              got_sigill = 0;
->              asm volatile(".insn r 0x33, 5, 0x07, zero, zero, zero"
->                           : : : "memory");
->              info |= got_sigill ? 0 : CPUINFO_ZICOND;
->              left &= ~CPUINFO_ZICOND;
->          }
-> 
->          sigaction(SIGILL, &sa_old, NULL);
->          assert(left == 0);
->      }
-> 
-> 
-> The 'assert' is hit at this point because left is 16, i.e. left = CPUINFO_ZVE64X.
-> 
-> I did a fix based on what seems to be the usual flow of how 'left' is being calculated:
-> 
-> 
-> $ git diff
-> diff --git a/util/cpuinfo-riscv.c b/util/cpuinfo-riscv.c
-> index 16114ffd32..25a98a75ad 100644
-> --- a/util/cpuinfo-riscv.c
-> +++ b/util/cpuinfo-riscv.c
-> @@ -115,24 +115,27 @@ unsigned __attribute__((constructor)) cpuinfo_init(void)
->               left &= ~CPUINFO_ZICOND;
->           }
-> 
-> +        if (left & CPUINFO_ZVE64X) {
-> +            /*
-> +             * We are guaranteed by RVV-1.0 that VLEN is a power of 2.
-> +             * We are guaranteed by Zve64x that VLEN >= 64, and that
-> +             * EEW of {8,16,32,64} are supported.
-> +             *
-> +             * Cache VLEN in a convenient form.
-> +             */
-> +            unsigned long vlenb;
-> +            got_sigill = 0;
-> +            /* Read csr "vlenb" with "csrr %0, vlenb" : "=r"(vlenb) */
-> +            asm volatile(".insn i 0x73, 0x2, %0, zero, -990" : "=r"(vlenb));
-> +            info |= got_sigill ? 0 : CPUINFO_ZVE64X;
-> +            left &= ~CPUINFO_ZVE64X;
-> +            riscv_lg2_vlenb = ctz32(vlenb);
-> +        }
-> +
->           sigaction(SIGILL, &sa_old, NULL);
->           assert(left == 0);
->       }
-> 
-> -    if (info & CPUINFO_ZVE64X) {
-> -        /*
-> -         * We are guaranteed by RVV-1.0 that VLEN is a power of 2.
-> -         * We are guaranteed by Zve64x that VLEN >= 64, and that
-> -         * EEW of {8,16,32,64} are supported.
-> -         *
-> -         * Cache VLEN in a convenient form.
-> -         */
-> -        unsigned long vlenb;
-> -        /* Read csr "vlenb" with "csrr %0, vlenb" : "=r"(vlenb) */
-> -        asm volatile(".insn i 0x73, 0x2, %0, zero, -990" : "=r"(vlenb));
-> -        riscv_lg2_vlenb = ctz32(vlenb);
-> -    }
-> -
->       info |= CPUINFO_ALWAYS;
->       cpuinfo = info;
->       return info;
-> 
-> 
-> 
-> i.e. I moved the CPUINFO_ZVE64X inside the 'if (left)' block, then update both 'info' and
-> 'left' depending on if we found the vlenb CSR.
-> 
-> Note that this fixes the issue I'm seeing (KVM guest boot), but I can't say if the original
-> intent of the patch is preserved. If this is a good fix feel free to squash this diff into
-> the patch.
+> I'll post a v7 for testing.
 
-This is not a good fix.  The vlenb probe must happen whenever vector support is detected 
--- it is not for detection itself.
+Put me in Cc for v7 and I'll give it a go. Thanks,
 
-It is my understanding that kernel support for riscv_hwprobe pre-dates kernel support for 
-vectors in userspace.  I believe that we really don't care about old kernel header installs.
-
-Therefore we should simply
-
-     left &= ~CPUINFO_ZVE64X;
-
-with a comment after the CONFIG_ASM_HWPROBE_H block.
-
-I'll post a v7 for testing.
+Daniel
 
 
-r~
+> 
+> 
+> r~
 
