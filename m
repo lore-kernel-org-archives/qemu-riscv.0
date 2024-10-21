@@ -4,91 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D68AFD0E6D5
-	for <qemu-riscv@archiver.kernel.org>; Mon, 21 Oct 2024 09:31:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BF1F4D15D90
+	for <qemu-riscv@archiver.kernel.org>; Mon, 21 Oct 2024 13:42:19 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1t2ok0-0002kY-1B; Mon, 21 Oct 2024 05:30:20 -0400
+	id 1t2sfn-0006GZ-Oc; Mon, 21 Oct 2024 09:42:15 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <cleger@rivosinc.com>)
- id 1t2ojx-0002iG-0X
- for qemu-riscv@nongnu.org; Mon, 21 Oct 2024 05:30:17 -0400
-Received: from mail-wm1-x330.google.com ([2a00:1450:4864:20::330])
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1t2sfh-0006E3-0N
+ for qemu-riscv@nongnu.org; Mon, 21 Oct 2024 09:42:09 -0400
+Received: from mail-pf1-x42c.google.com ([2607:f8b0:4864:20::42c])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <cleger@rivosinc.com>)
- id 1t2oju-0002tp-UW
- for qemu-riscv@nongnu.org; Mon, 21 Oct 2024 05:30:16 -0400
-Received: by mail-wm1-x330.google.com with SMTP id
- 5b1f17b1804b1-4315f24a6bbso33974685e9.1
- for <qemu-riscv@nongnu.org>; Mon, 21 Oct 2024 02:30:13 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1t2sfd-0002kC-39
+ for qemu-riscv@nongnu.org; Mon, 21 Oct 2024 09:42:08 -0400
+Received: by mail-pf1-x42c.google.com with SMTP id
+ d2e1a72fcca58-71ec997ad06so679662b3a.3
+ for <qemu-riscv@nongnu.org>; Mon, 21 Oct 2024 06:42:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1729503012; x=1730107812;
- darn=nongnu.org; 
+ d=ventanamicro.com; s=google; t=1729518123; x=1730122923; darn=nongnu.org;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=fJntZQCYsOZrjM6sQQyf1l/l1wTamwv5EpsWw5+4ddc=;
- b=DRup6eWSrIFA9s4uEF/AV5VDmCKa8Cfd7+dK29jUr1h1bQazNGxq9D/5GB/h+QZC8v
- AOX1Uy38Ozd7RWxu7VgNACbWGAMkSRH6jSqVuqNvm5a/tyUGHEejJ5/NbPsH5reM5PK8
- QU8mccAcqqc9/PKQ19koMM6GgdOWkRkiCsLvMf8Yi7XpqfIjlGLu9B3U5rLOvIEmRnZT
- S+ZQWOl7JJh3241oRzAMCAYwfuoUeWiVBne8EQSsSVCPyhegwklDg46I0w9AFShcNTUA
- gSKRzUBjzLw2HL7OZ0U0NjyB578vIqaOKhUnFMKxWOOzKRwV/pAFMpxKg114E0fW1ilz
- LCgQ==
+ bh=DQt4qyVQvBkSME2w7VgIQoWKRMuV3EQlOAIMaqHFXRQ=;
+ b=Rm/GEoDqR7JRXr4S3RQdHYzInkFUjcLvbcxgrJbJru2nSr3Av3QwKtTx/v/f+DnSGk
+ ZB2dsQjFjlCYepYFq36/xvN+HwmaZHQ01tHmRSxHa7WNynThmzlfa53xzXyO0HiK7UmW
+ ZiGl1V1qJgSYGqPbdqwG0lgPsdCVtre1FZq75yjhtbXzlZp3RXrW/MeqXlGdks2xzWHh
+ j1HJRuQGTlQkF/CfEPMozlWj6J4bsCcW4RdEcDWzFXStEYu7bLiKHyBAYX5rFw/kGdOl
+ OMF/D5JAU6fl/MjMN3aqyWUjL9FNjOxMBZz7Wp6tMzPOnk8MeNvuuhqqeIZo7xJ1VY1c
+ xjfQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729503012; x=1730107812;
+ d=1e100.net; s=20230601; t=1729518123; x=1730122923;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=fJntZQCYsOZrjM6sQQyf1l/l1wTamwv5EpsWw5+4ddc=;
- b=WALYd7Lct1ocEKWISGMLSX/hJGD8eehf5wrcXu+Su6DvicDMAv+OkCrmFsbef1sYKX
- +oAH4Rqw+PKr/XhJ4Guov9ay6j+E8Siaj/HtkJYRk5rAbX+NgViiOK6XES51/YidYt/N
- ah50BFxRNP14VqljQSYo9y/QTcTwm/AmTKauzKUziv5WSBf5woT9EN0cx+N/0U3dUaGx
- hfRp5SKLeWlsQ3GIhGkVROIqd2CLeYmpHyDEOKY7odYcQWaA7mGhCl5KjanCXw+R3YB8
- YL8ROhYj3U1Sz2CEfLwwlYXgmkvjTU+os008K1XmVaRAwo7jGWArUilcOE4Qa5c4Z3+O
- GQ6A==
-X-Gm-Message-State: AOJu0Yx5nC0cEbp4bjtV7BDOpnWkGHDOxuNXdzgSJ10oIZnGXMmr1GUs
- zV6Xa7kDcMTBl4Sj4KJSnCITcdk5IebEnd/gxF5lHiLJ6yIWrCvPfy4b8fv1l3s=
-X-Google-Smtp-Source: AGHT+IG51D7W3Vv3w006D63kHoe/YQF9awg4I92QB+mMvy/L8EmPdMve0Stv1LCDwpTWX3myEfVyXQ==
-X-Received: by 2002:a05:600c:45c5:b0:427:ff3b:7a20 with SMTP id
- 5b1f17b1804b1-4316168993emr73156655e9.27.1729503012202; 
- Mon, 21 Oct 2024 02:30:12 -0700 (PDT)
-Received: from ?IPV6:2a01:e0a:e17:9700:16d2:7456:6634:9626?
- ([2a01:e0a:e17:9700:16d2:7456:6634:9626])
+ bh=DQt4qyVQvBkSME2w7VgIQoWKRMuV3EQlOAIMaqHFXRQ=;
+ b=A5nBYRbjiA4Nok3YVabfOzv1ZvAy41+eYtPaFUp86MrCkyl68v1xa9h7WX8GIyitFC
+ D+Upx4ZjdnKTg4CvLdh3OUc0/wqs+NMspSj92kXhLMLxNs5TUJYUu8B9KCJp5Q5vtY92
+ 2lpmlUbU8b1HlopCsEl/acxUFY8d9+x9Gpw6kbmMNDV5RiY8to8gj9ziNQZnXUDM4qLR
+ 7aKdSOU/DcMPJGzBuZXNX2BYYfF9GQX/leO5kZCDVEN6Bj4I7jTH0rjWlPf7MRtVqIG4
+ RHQOl5xaDJmJ92xLUGO3sPBbZ7TBsnOXT//ILzr/r8No4TJf90r2ZNx3SCgo5hcCImyW
+ NMmw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUvLVndQMkNLOyTERua8y3K+jLSOlG7AYV3wga+PrQ9w+xE9k3H/f2gY+wyf1PbJFAWvSrVJmONd2sO@nongnu.org
+X-Gm-Message-State: AOJu0YzqD+juovB0M82QlB/xjSGqosmIA4RjET0QxWZ2KluWl/ZtEhz0
+ veuYPZubZ31pQeZDhAAa2ZWdhI+mz0ULBTr6F1notkQHt5t2TfBtKOFcLXEW2p8=
+X-Google-Smtp-Source: AGHT+IGBkxsr4y7j7ew2DBoldju0CNnZxFNcnbVNwzBf5AaMYSsrq5Zx/tQhvllmF9rNqU/rldslIQ==
+X-Received: by 2002:a05:6a00:3917:b0:71e:55e2:2c58 with SMTP id
+ d2e1a72fcca58-71ea325b53emr15167300b3a.15.1729518123170; 
+ Mon, 21 Oct 2024 06:42:03 -0700 (PDT)
+Received: from [192.168.68.110] ([177.188.133.9])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-37ee0b9413fsm3856394f8f.74.2024.10.21.02.30.11
+ d2e1a72fcca58-71ec13eaae6sm2932045b3a.144.2024.10.21.06.42.00
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 21 Oct 2024 02:30:11 -0700 (PDT)
-Message-ID: <f99c19eb-2986-49a7-a334-b086e19ad4c4@rivosinc.com>
-Date: Mon, 21 Oct 2024 11:30:10 +0200
+ Mon, 21 Oct 2024 06:42:02 -0700 (PDT)
+Message-ID: <7a631349-accf-49b0-a679-f62b1cfb4b1c@ventanamicro.com>
+Date: Mon, 21 Oct 2024 10:41:58 -0300
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 1/9] target/riscv: fix henvcfg potentially containing
- stale bits
-To: Alistair Francis <alistair23@gmail.com>
-Cc: qemu-riscv@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>, Weiwei Li <liwei1518@gmail.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, Ved Shanbhogue
- <ved@rivosinc.com>, Atish Patra <atishp@rivosinc.com>, qemu-devel@nongnu.org
-References: <20241017145226.365825-1-cleger@rivosinc.com>
- <20241017145226.365825-2-cleger@rivosinc.com>
- <CAKmqyKMoDSFaJz7LhX4GMV9AhOQUDLOt79Fctw_k97SazpSjjQ@mail.gmail.com>
+Subject: Re: [PATCH 1/2] hw/riscv: Support to load DTB after 3GB memory on
+ 64-bit system.
+To: Jim Shu <jim.shu@sifive.com>, qemu-devel@nongnu.org, qemu-riscv@nongnu.org
+Cc: Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bmeng.cn@gmail.com>,
+ Weiwei Li <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
+References: <20241021040942.400-1-jim.shu@sifive.com>
+ <20241021040942.400-2-jim.shu@sifive.com>
 Content-Language: en-US
-From: =?UTF-8?B?Q2zDqW1lbnQgTMOpZ2Vy?= <cleger@rivosinc.com>
-In-Reply-To: <CAKmqyKMoDSFaJz7LhX4GMV9AhOQUDLOt79Fctw_k97SazpSjjQ@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::330;
- envelope-from=cleger@rivosinc.com; helo=mail-wm1-x330.google.com
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+In-Reply-To: <20241021040942.400-2-jim.shu@sifive.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::42c;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pf1-x42c.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -106,121 +103,189 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 
 
-On 21/10/2024 02:46, Alistair Francis wrote:
-> On Fri, Oct 18, 2024 at 12:55 AM Clément Léger <cleger@rivosinc.com> wrote:
->>
->> With the current implementation, if we had the current scenario:
->> - set bit x in menvcfg
->> - set bit x in henvcfg
->> - clear bit x in menvcfg
->> then, the internal variable env->henvcfg would still contain bit x due
->> to both a wrong menvcfg mask used in write_henvcfg() as well as a
->> missing update of henvcfg upon menvcfg update.
->> This can lead to some wrong interpretation of the context. In order to
->> update henvcfg upon menvcfg writing, call write_henvcfg() after writing
->> menvcfg and fix the mask computation used in write_henvcfg() that is
->> used to mesk env->menvcfg value (which could still lead to some stale
->> bits). The same mechanism is also applied for henvcfgh writing.
->>
->> Signed-off-by: Clément Léger <cleger@rivosinc.com>
->> ---
->>  target/riscv/csr.c | 17 +++++++++++++----
->>  1 file changed, 13 insertions(+), 4 deletions(-)
->>
->> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
->> index b84b436151..9e832e0b39 100644
->> --- a/target/riscv/csr.c
->> +++ b/target/riscv/csr.c
->> @@ -2345,6 +2345,8 @@ static RISCVException read_menvcfg(CPURISCVState *env, int csrno,
->>      return RISCV_EXCP_NONE;
->>  }
->>
->> +static RISCVException write_henvcfg(CPURISCVState *env, int csrno,
->> +                                    target_ulong val);
->>  static RISCVException write_menvcfg(CPURISCVState *env, int csrno,
->>                                      target_ulong val)
->>  {
->> @@ -2357,6 +2359,7 @@ static RISCVException write_menvcfg(CPURISCVState *env, int csrno,
->>                  (cfg->ext_svadu ? MENVCFG_ADUE : 0);
->>      }
->>      env->menvcfg = (env->menvcfg & ~mask) | (val & mask);
->> +    write_henvcfg(env, CSR_HENVCFG, env->henvcfg);
->>
->>      return RISCV_EXCP_NONE;
->>  }
->> @@ -2368,6 +2371,8 @@ static RISCVException read_menvcfgh(CPURISCVState *env, int csrno,
->>      return RISCV_EXCP_NONE;
->>  }
->>
->> +static RISCVException write_henvcfgh(CPURISCVState *env, int csrno,
->> +                                    target_ulong val);
->>  static RISCVException write_menvcfgh(CPURISCVState *env, int csrno,
->>                                       target_ulong val)
->>  {
->> @@ -2378,6 +2383,7 @@ static RISCVException write_menvcfgh(CPURISCVState *env, int csrno,
->>      uint64_t valh = (uint64_t)val << 32;
->>
->>      env->menvcfg = (env->menvcfg & ~mask) | (valh & mask);
->> +    write_henvcfgh(env, CSR_HENVCFGH, env->henvcfg >> 32);
->>
->>      return RISCV_EXCP_NONE;
->>  }
->> @@ -2435,6 +2441,7 @@ static RISCVException write_henvcfg(CPURISCVState *env, int csrno,
->>                                      target_ulong val)
->>  {
->>      uint64_t mask = HENVCFG_FIOM | HENVCFG_CBIE | HENVCFG_CBCFE | HENVCFG_CBZE;
->> +    uint64_t menvcfg_mask = 0;
->>      RISCVException ret;
->>
->>      ret = smstateen_acc_ok(env, 0, SMSTATEEN0_HSENVCFG);
->> @@ -2443,10 +2450,11 @@ static RISCVException write_henvcfg(CPURISCVState *env, int csrno,
->>      }
->>
->>      if (riscv_cpu_mxl(env) == MXL_RV64) {
->> -        mask |= env->menvcfg & (HENVCFG_PBMTE | HENVCFG_STCE | HENVCFG_ADUE);
->> +        menvcfg_mask = HENVCFG_PBMTE | HENVCFG_STCE | HENVCFG_ADUE;
->> +        mask |= env->menvcfg & menvcfg_mask;
+On 10/21/24 1:09 AM, Jim Shu wrote:
+> Larger initrd image will overlap the DTB at 3GB address. Since 64-bit
+> system doesn't have 32-bit addressable issue, we just load DTB to the end
+> of dram in 64-bit system.
 > 
-> This doesn't seem right.
+> Signed-off-by: Jim Shu <jim.shu@sifive.com>
+> ---
+>   hw/riscv/boot.c            | 8 ++++++--
+>   hw/riscv/microchip_pfsoc.c | 4 ++--
+>   hw/riscv/sifive_u.c        | 4 ++--
+>   hw/riscv/spike.c           | 4 ++--
+>   hw/riscv/virt.c            | 2 +-
+>   include/hw/riscv/boot.h    | 2 +-
+>   6 files changed, 14 insertions(+), 10 deletions(-)
 > 
-> Should it be something like
+> diff --git a/hw/riscv/boot.c b/hw/riscv/boot.c
+> index 9115ecd91f..ad45bd7a6a 100644
+> --- a/hw/riscv/boot.c
+> +++ b/hw/riscv/boot.c
+> @@ -293,7 +293,7 @@ out:
+>    * The FDT is fdt_packed() during the calculation.
+>    */
+>   uint64_t riscv_compute_fdt_addr(hwaddr dram_base, hwaddr dram_size,
+> -                                MachineState *ms)
+> +                                MachineState *ms, RISCVHartArrayState *harts)
+>   {
+>       int ret = fdt_pack(ms->fdt);
+>       hwaddr dram_end, temp;
+> @@ -321,7 +321,11 @@ uint64_t riscv_compute_fdt_addr(hwaddr dram_base, hwaddr dram_size,
+>        * Thus, put it at an 2MB aligned address that less than fdt size from the
+>        * end of dram or 3GB whichever is lesser.
+>        */
+> -    temp = (dram_base < 3072 * MiB) ? MIN(dram_end, 3072 * MiB) : dram_end;
+> +    if (!riscv_is_32bit(harts)) {
+> +        temp = dram_end;
+> +    } else {
+> +        temp = (dram_base < 3072 * MiB) ? MIN(dram_end, 3072 * MiB) : dram_end;
+> +    }
 
-That is what I did before but that didn't work, henvcfg still contained
-some stale bits.
+I think it's a fine idea to do a different computation if we're running a 64 bit
+CPU but this alone won't fix the issue you're reporting.
 
-> 
->     if (riscv_cpu_mxl(env) == MXL_RV64) {
->         mask |= env->menvcfg & (HENVCFG_PBMTE | HENVCFG_STCE | HENVCFG_ADUE);
->     }
-> 
->     mask = env->menvcfg & mask;
-> 
->>      }
->>
->> -    env->henvcfg = (env->henvcfg & ~mask) | (val & mask);
->> +    env->henvcfg = (env->henvcfg & ~menvcfg_mask) | (val & mask);
-> 
-> Using both menvcfg_mask and mask seems wrong here
+Running a 64-bit CPU does not guarantee that 'dram_end' will be enough to fit
+kernel+initrd and the fdt. There's no correlation between running 64 bits and having
+enough RAM to fit everything, i.e. you can run a 64-bit CPU with short RAM and end
+up with the same problem. There's also the board mem topology to account for: the
+Microchip board will always use a 1GB ram bank ('dram_end' will be always 1Gb max)
+running 32 or 64 bit CPUs.
 
-The problem is that if you use:
+It seems that we also need to consider the end of kernel+initrd to properly tune
+where to put the fdt, erroring out if we don't have enough size for everything.
+This would make the logic work regardless of the word size of the CPU.
 
-mask |= env->menvcfg & (HENVCFG_PBMTE | HENVCFG_STCE | HENVCFG_ADUE)
+This information is calculated in riscv_load_kernel(), which is currently
+returning only the kernel start addr.  We have the information we need written in
+the FDT as "/chosen/linux,initrd-end" but that isn't enough because this attribute
+is written only if we have an initrd. We would hit the same problem again if we
+have a big enough kernel in an low enough RAM env.
 
-Then, if a bit was cleared in menvcfg before writing henvcfg (let's say
-HENVCFG_ADUE), then env->henvcfg will be masked with mask =
-HENVCFG_PBMTE | HENVCFG_STCE, leaving the HENVCFG_ADUE stale bit in
-env->henvcfg which is wrong for the internal state.
+First thing that comes to mind is to use an abstraction like
 
-The idea here is to actually clear any menvcfg related bit (the 1:1
-bits) using the raw mask (HENVCFG_PBMTE | HENVCFG_STCE | HENVCFG_ADUE)
-to clear everything and then OR it with the value to be written (which
-is masked with raw bits + menvcfg content) to avoid any stale bits.
+typedef struct RISCVBootProps {
+     uint64_t kernel_start;
+     uint64_t kernel_end;
+     bool is_64bit;
+} RISCVKernelProps;
+
+And use it to allow riscv_load_kernel() to write both kernel_start (the current
+return value) and kernel_end (that can be either kernel_start + kernel_size or,
+if we have an initrd, the value written in linux,initrd-end). riscv_compute_fdt_addr()
+would then use this as an extra arg and then we have the 'kernel_end' value to
+calculate the fdt_addr too.
+
+
+
+In fact, I think this can be further extended to fully encapsulate the boot process
+of all boards, that are kind of doing the same thing with all these helpers, into a
+single 'super function' that would receive a struct like the one from above (with
+more properties), setting all the boot parameters the board needs, pass it to a single
+function that does everything and just use the result as each board wants. This
+is something that we might play around with but it'll be something for the next
+release.
+
 
 Thanks,
 
-Clément
+Daniel
+   
+  
 
-> 
-> Alistair
-
+>   
+>       return QEMU_ALIGN_DOWN(temp - fdtsize, 2 * MiB);
+>   }
+> diff --git a/hw/riscv/microchip_pfsoc.c b/hw/riscv/microchip_pfsoc.c
+> index f9a3b43d2e..ba8b0a2c26 100644
+> --- a/hw/riscv/microchip_pfsoc.c
+> +++ b/hw/riscv/microchip_pfsoc.c
+> @@ -519,7 +519,7 @@ static void microchip_icicle_kit_machine_init(MachineState *machine)
+>       bool kernel_as_payload = false;
+>       target_ulong firmware_end_addr, kernel_start_addr;
+>       uint64_t kernel_entry;
+> -    uint32_t fdt_load_addr;
+> +    uint64_t fdt_load_addr;
+>       DriveInfo *dinfo = drive_get(IF_SD, 0, 0);
+>   
+>       /* Sanity check on RAM size */
+> @@ -625,7 +625,7 @@ static void microchip_icicle_kit_machine_init(MachineState *machine)
+>           /* Compute the fdt load address in dram */
+>           fdt_load_addr = riscv_compute_fdt_addr(memmap[MICROCHIP_PFSOC_DRAM_LO].base,
+>                                                  memmap[MICROCHIP_PFSOC_DRAM_LO].size,
+> -                                               machine);
+> +                                               machine, &s->soc.u_cpus);
+>           riscv_load_fdt(fdt_load_addr, machine->fdt);
+>   
+>           /* Load the reset vector */
+> diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
+> index 9b3dcf3a7a..fd974f2357 100644
+> --- a/hw/riscv/sifive_u.c
+> +++ b/hw/riscv/sifive_u.c
+> @@ -519,7 +519,7 @@ static void sifive_u_machine_init(MachineState *machine)
+>       const char *firmware_name;
+>       uint32_t start_addr_hi32 = 0x00000000;
+>       int i;
+> -    uint32_t fdt_load_addr;
+> +    uint64_t fdt_load_addr;
+>       uint64_t kernel_entry;
+>       DriveInfo *dinfo;
+>       BlockBackend *blk;
+> @@ -606,7 +606,7 @@ static void sifive_u_machine_init(MachineState *machine)
+>   
+>       fdt_load_addr = riscv_compute_fdt_addr(memmap[SIFIVE_U_DEV_DRAM].base,
+>                                              memmap[SIFIVE_U_DEV_DRAM].size,
+> -                                           machine);
+> +                                           machine, &s->soc.u_cpus);
+>       riscv_load_fdt(fdt_load_addr, machine->fdt);
+>   
+>       if (!riscv_is_32bit(&s->soc.u_cpus)) {
+> diff --git a/hw/riscv/spike.c b/hw/riscv/spike.c
+> index fceb91d946..acd7ab1ae1 100644
+> --- a/hw/riscv/spike.c
+> +++ b/hw/riscv/spike.c
+> @@ -201,7 +201,7 @@ static void spike_board_init(MachineState *machine)
+>       hwaddr firmware_load_addr = memmap[SPIKE_DRAM].base;
+>       target_ulong kernel_start_addr;
+>       char *firmware_name;
+> -    uint32_t fdt_load_addr;
+> +    uint64_t fdt_load_addr;
+>       uint64_t kernel_entry;
+>       char *soc_name;
+>       int i, base_hartid, hart_count;
+> @@ -317,7 +317,7 @@ static void spike_board_init(MachineState *machine)
+>   
+>       fdt_load_addr = riscv_compute_fdt_addr(memmap[SPIKE_DRAM].base,
+>                                              memmap[SPIKE_DRAM].size,
+> -                                           machine);
+> +                                           machine, &s->soc[0]);
+>       riscv_load_fdt(fdt_load_addr, machine->fdt);
+>   
+>       /* load the reset vector */
+> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+> index ee3129f3b3..cfbeeaf7d5 100644
+> --- a/hw/riscv/virt.c
+> +++ b/hw/riscv/virt.c
+> @@ -1399,7 +1399,7 @@ static void virt_machine_done(Notifier *notifier, void *data)
+>   
+>       fdt_load_addr = riscv_compute_fdt_addr(memmap[VIRT_DRAM].base,
+>                                              memmap[VIRT_DRAM].size,
+> -                                           machine);
+> +                                           machine, &s->soc[0]);
+>       riscv_load_fdt(fdt_load_addr, machine->fdt);
+>   
+>       /* load the reset vector */
+> diff --git a/include/hw/riscv/boot.h b/include/hw/riscv/boot.h
+> index 18bfe9f7bf..7ccbe5f62a 100644
+> --- a/include/hw/riscv/boot.h
+> +++ b/include/hw/riscv/boot.h
+> @@ -49,7 +49,7 @@ target_ulong riscv_load_kernel(MachineState *machine,
+>                                  bool load_initrd,
+>                                  symbol_fn_t sym_cb);
+>   uint64_t riscv_compute_fdt_addr(hwaddr dram_start, uint64_t dram_size,
+> -                                MachineState *ms);
+> +                                MachineState *ms, RISCVHartArrayState *harts);
+>   void riscv_load_fdt(hwaddr fdt_addr, void *fdt);
+>   void riscv_setup_rom_reset_vec(MachineState *machine, RISCVHartArrayState *harts,
+>                                  hwaddr saddr,
 
