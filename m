@@ -4,82 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 75138D3C93D
-	for <qemu-riscv@archiver.kernel.org>; Mon, 21 Oct 2024 04:11:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D68AFD0E6D5
+	for <qemu-riscv@archiver.kernel.org>; Mon, 21 Oct 2024 09:31:03 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1t2jkF-0007OF-E4; Mon, 21 Oct 2024 00:10:15 -0400
+	id 1t2ok0-0002kY-1B; Mon, 21 Oct 2024 05:30:20 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <jim.shu@sifive.com>)
- id 1t2jjr-0007LH-PP
- for qemu-riscv@nongnu.org; Mon, 21 Oct 2024 00:09:54 -0400
-Received: from mail-pg1-x533.google.com ([2607:f8b0:4864:20::533])
+ (Exim 4.90_1) (envelope-from <cleger@rivosinc.com>)
+ id 1t2ojx-0002iG-0X
+ for qemu-riscv@nongnu.org; Mon, 21 Oct 2024 05:30:17 -0400
+Received: from mail-wm1-x330.google.com ([2a00:1450:4864:20::330])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <jim.shu@sifive.com>)
- id 1t2jjq-0004Dm-79
- for qemu-riscv@nongnu.org; Mon, 21 Oct 2024 00:09:51 -0400
-Received: by mail-pg1-x533.google.com with SMTP id
- 41be03b00d2f7-7e6cbf6cd1dso2563863a12.3
- for <qemu-riscv@nongnu.org>; Sun, 20 Oct 2024 21:09:49 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <cleger@rivosinc.com>)
+ id 1t2oju-0002tp-UW
+ for qemu-riscv@nongnu.org; Mon, 21 Oct 2024 05:30:16 -0400
+Received: by mail-wm1-x330.google.com with SMTP id
+ 5b1f17b1804b1-4315f24a6bbso33974685e9.1
+ for <qemu-riscv@nongnu.org>; Mon, 21 Oct 2024 02:30:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1729483788; x=1730088588; darn=nongnu.org;
- h=message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=3YlQHmBIK0CFx8xbyfabzPzKVy4Q79eT8X8400qWpJc=;
- b=OSjhxs6zPpJudz0tHu+u8VEd4wAeL9dmZ5ry/s4qfY/Bk8GeEcU9rOSpRqQ7UQBL9U
- pPJY10Cn5zRUa/TGjqVJ1/zGKuCQ+6NJSxii/z/xYKDnV5CG2qQx8DFYpseAOp2y/dHd
- JjnPOpAZeEcp6nAkJs2xhAv7xlxzXawk5WiHsWWjcuf4TaxD/jYgxqUcafaZzsiXuub6
- ri4i1uoVPRxVcHYR46a9ONBuJTMJiMf637xeMjcFSCR8Nb3djsA5A44qmvWVnwU/LHPV
- wdOoQB2jReZJlP7ZcuRqpD5s/UL8opycx4QoFGtxWXs+ao9Y16k3fN3vdDww2rMV2hc+
- qqkQ==
+ d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1729503012; x=1730107812;
+ darn=nongnu.org; 
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=fJntZQCYsOZrjM6sQQyf1l/l1wTamwv5EpsWw5+4ddc=;
+ b=DRup6eWSrIFA9s4uEF/AV5VDmCKa8Cfd7+dK29jUr1h1bQazNGxq9D/5GB/h+QZC8v
+ AOX1Uy38Ozd7RWxu7VgNACbWGAMkSRH6jSqVuqNvm5a/tyUGHEejJ5/NbPsH5reM5PK8
+ QU8mccAcqqc9/PKQ19koMM6GgdOWkRkiCsLvMf8Yi7XpqfIjlGLu9B3U5rLOvIEmRnZT
+ S+ZQWOl7JJh3241oRzAMCAYwfuoUeWiVBne8EQSsSVCPyhegwklDg46I0w9AFShcNTUA
+ gSKRzUBjzLw2HL7OZ0U0NjyB578vIqaOKhUnFMKxWOOzKRwV/pAFMpxKg114E0fW1ilz
+ LCgQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729483788; x=1730088588;
- h=message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=3YlQHmBIK0CFx8xbyfabzPzKVy4Q79eT8X8400qWpJc=;
- b=NzcBp/hR0WigrtgJxTgpLSCOfYeDPjvn1VMx0kup2qbNWxcayl+WItLpms03uCGdn3
- +5Nr+1gE0tPo7GPpaHbyApKpTfx/ncLZNz2NLK4dBkcbOivfv7odqkg8Kl+Sz5mVUo7O
- Z41nldKi6g2S4tEQCO5J05J7rG84r5smgL1sBohn+RaBbKFAq/aIahDO6aX/lefsteI7
- 8Kqr3I5Bt3TdvwoGGiOlc4cYii9ePPHtl6he4LNFWFno00cxeg5gpXXzshuLbUgZ0/O3
- yG4UGjoaHgSCGWl7wJ3KRSeQWsbIRjQfbQm4Cq56vx06AB7NY446WnYOa1bHkJX1ebD/
- nTFQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXaMvozDLR2TldfV3G3J+IjrjC+aXAzR6RWyAPTwdhN2vMkpjz3k9rbpy2ziAzQ9NvOMNjyYcziJH3/@nongnu.org
-X-Gm-Message-State: AOJu0Yyc5zTQS6wi4WHDOvet05sdgLeTHKZnbLrzd0lk9+el/sBcdk5C
- /MtFiPFP1OGArRehbMR/q+jhIEpFLpdd6SyvG53fCJT0JdUOlcC4AhHyV7pbzS1s2tlesTQlw2U
- i
-X-Google-Smtp-Source: AGHT+IG7/9B1tS8FSYEhKoZ5UaV5Jnx0bg7gwRZX5y6e+wN2aKS1MBB15NIo9kCq7pEo5e5EfboBRA==
-X-Received: by 2002:a05:6a21:9d91:b0:1d9:d04:586d with SMTP id
- adf61e73a8af0-1d92c578728mr15039551637.38.1729483787864; 
- Sun, 20 Oct 2024 21:09:47 -0700 (PDT)
-Received: from hsinchu26.internal.sifive.com
- (59-124-168-89.hinet-ip.hinet.net. [59.124.168.89])
+ d=1e100.net; s=20230601; t=1729503012; x=1730107812;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=fJntZQCYsOZrjM6sQQyf1l/l1wTamwv5EpsWw5+4ddc=;
+ b=WALYd7Lct1ocEKWISGMLSX/hJGD8eehf5wrcXu+Su6DvicDMAv+OkCrmFsbef1sYKX
+ +oAH4Rqw+PKr/XhJ4Guov9ay6j+E8Siaj/HtkJYRk5rAbX+NgViiOK6XES51/YidYt/N
+ ah50BFxRNP14VqljQSYo9y/QTcTwm/AmTKauzKUziv5WSBf5woT9EN0cx+N/0U3dUaGx
+ hfRp5SKLeWlsQ3GIhGkVROIqd2CLeYmpHyDEOKY7odYcQWaA7mGhCl5KjanCXw+R3YB8
+ YL8ROhYj3U1Sz2CEfLwwlYXgmkvjTU+os008K1XmVaRAwo7jGWArUilcOE4Qa5c4Z3+O
+ GQ6A==
+X-Gm-Message-State: AOJu0Yx5nC0cEbp4bjtV7BDOpnWkGHDOxuNXdzgSJ10oIZnGXMmr1GUs
+ zV6Xa7kDcMTBl4Sj4KJSnCITcdk5IebEnd/gxF5lHiLJ6yIWrCvPfy4b8fv1l3s=
+X-Google-Smtp-Source: AGHT+IG51D7W3Vv3w006D63kHoe/YQF9awg4I92QB+mMvy/L8EmPdMve0Stv1LCDwpTWX3myEfVyXQ==
+X-Received: by 2002:a05:600c:45c5:b0:427:ff3b:7a20 with SMTP id
+ 5b1f17b1804b1-4316168993emr73156655e9.27.1729503012202; 
+ Mon, 21 Oct 2024 02:30:12 -0700 (PDT)
+Received: from ?IPV6:2a01:e0a:e17:9700:16d2:7456:6634:9626?
+ ([2a01:e0a:e17:9700:16d2:7456:6634:9626])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-20e7f0dfc09sm16863485ad.236.2024.10.20.21.09.45
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 20 Oct 2024 21:09:47 -0700 (PDT)
-From: Jim Shu <jim.shu@sifive.com>
-To: qemu-devel@nongnu.org,
-	qemu-riscv@nongnu.org
-Cc: Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bmeng.cn@gmail.com>,
- Weiwei Li <liwei1518@gmail.com>,
+ ffacd0b85a97d-37ee0b9413fsm3856394f8f.74.2024.10.21.02.30.11
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 21 Oct 2024 02:30:11 -0700 (PDT)
+Message-ID: <f99c19eb-2986-49a7-a334-b086e19ad4c4@rivosinc.com>
+Date: Mon, 21 Oct 2024 11:30:10 +0200
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v4 1/9] target/riscv: fix henvcfg potentially containing
+ stale bits
+To: Alistair Francis <alistair23@gmail.com>
+Cc: qemu-riscv@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Bin Meng <bin.meng@windriver.com>, Weiwei Li <liwei1518@gmail.com>,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, Jim Shu <jim.shu@sifive.com>
-Subject: [PATCH 0/2] Support 64-bit address of initrd 
-Date: Mon, 21 Oct 2024 12:09:40 +0800
-Message-Id: <20241021040942.400-1-jim.shu@sifive.com>
-X-Mailer: git-send-email 2.17.1
-Received-SPF: pass client-ip=2607:f8b0:4864:20::533;
- envelope-from=jim.shu@sifive.com; helo=mail-pg1-x533.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, Ved Shanbhogue
+ <ved@rivosinc.com>, Atish Patra <atishp@rivosinc.com>, qemu-devel@nongnu.org
+References: <20241017145226.365825-1-cleger@rivosinc.com>
+ <20241017145226.365825-2-cleger@rivosinc.com>
+ <CAKmqyKMoDSFaJz7LhX4GMV9AhOQUDLOt79Fctw_k97SazpSjjQ@mail.gmail.com>
+Content-Language: en-US
+From: =?UTF-8?B?Q2zDqW1lbnQgTMOpZ2Vy?= <cleger@rivosinc.com>
+In-Reply-To: <CAKmqyKMoDSFaJz7LhX4GMV9AhOQUDLOt79Fctw_k97SazpSjjQ@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::330;
+ envelope-from=cleger@rivosinc.com; helo=mail-wm1-x330.google.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -96,25 +104,123 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Support to load DTB after 3GB on RV64 system, so that larger initrd
-doesn't be overlapped to DTB. Update initrd DT to support different
-"#address-cells".
 
-Verify the patch via running 4GB initramfs on the virt machine.
 
-Jim Shu (2):
-  hw/riscv: Support to load DTB after 3GB memory on 64-bit system.
-  hw/riscv: Support different address-cells for initrd
+On 21/10/2024 02:46, Alistair Francis wrote:
+> On Fri, Oct 18, 2024 at 12:55 AM Clément Léger <cleger@rivosinc.com> wrote:
+>>
+>> With the current implementation, if we had the current scenario:
+>> - set bit x in menvcfg
+>> - set bit x in henvcfg
+>> - clear bit x in menvcfg
+>> then, the internal variable env->henvcfg would still contain bit x due
+>> to both a wrong menvcfg mask used in write_henvcfg() as well as a
+>> missing update of henvcfg upon menvcfg update.
+>> This can lead to some wrong interpretation of the context. In order to
+>> update henvcfg upon menvcfg writing, call write_henvcfg() after writing
+>> menvcfg and fix the mask computation used in write_henvcfg() that is
+>> used to mesk env->menvcfg value (which could still lead to some stale
+>> bits). The same mechanism is also applied for henvcfgh writing.
+>>
+>> Signed-off-by: Clément Léger <cleger@rivosinc.com>
+>> ---
+>>  target/riscv/csr.c | 17 +++++++++++++----
+>>  1 file changed, 13 insertions(+), 4 deletions(-)
+>>
+>> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+>> index b84b436151..9e832e0b39 100644
+>> --- a/target/riscv/csr.c
+>> +++ b/target/riscv/csr.c
+>> @@ -2345,6 +2345,8 @@ static RISCVException read_menvcfg(CPURISCVState *env, int csrno,
+>>      return RISCV_EXCP_NONE;
+>>  }
+>>
+>> +static RISCVException write_henvcfg(CPURISCVState *env, int csrno,
+>> +                                    target_ulong val);
+>>  static RISCVException write_menvcfg(CPURISCVState *env, int csrno,
+>>                                      target_ulong val)
+>>  {
+>> @@ -2357,6 +2359,7 @@ static RISCVException write_menvcfg(CPURISCVState *env, int csrno,
+>>                  (cfg->ext_svadu ? MENVCFG_ADUE : 0);
+>>      }
+>>      env->menvcfg = (env->menvcfg & ~mask) | (val & mask);
+>> +    write_henvcfg(env, CSR_HENVCFG, env->henvcfg);
+>>
+>>      return RISCV_EXCP_NONE;
+>>  }
+>> @@ -2368,6 +2371,8 @@ static RISCVException read_menvcfgh(CPURISCVState *env, int csrno,
+>>      return RISCV_EXCP_NONE;
+>>  }
+>>
+>> +static RISCVException write_henvcfgh(CPURISCVState *env, int csrno,
+>> +                                    target_ulong val);
+>>  static RISCVException write_menvcfgh(CPURISCVState *env, int csrno,
+>>                                       target_ulong val)
+>>  {
+>> @@ -2378,6 +2383,7 @@ static RISCVException write_menvcfgh(CPURISCVState *env, int csrno,
+>>      uint64_t valh = (uint64_t)val << 32;
+>>
+>>      env->menvcfg = (env->menvcfg & ~mask) | (valh & mask);
+>> +    write_henvcfgh(env, CSR_HENVCFGH, env->henvcfg >> 32);
+>>
+>>      return RISCV_EXCP_NONE;
+>>  }
+>> @@ -2435,6 +2441,7 @@ static RISCVException write_henvcfg(CPURISCVState *env, int csrno,
+>>                                      target_ulong val)
+>>  {
+>>      uint64_t mask = HENVCFG_FIOM | HENVCFG_CBIE | HENVCFG_CBCFE | HENVCFG_CBZE;
+>> +    uint64_t menvcfg_mask = 0;
+>>      RISCVException ret;
+>>
+>>      ret = smstateen_acc_ok(env, 0, SMSTATEEN0_HSENVCFG);
+>> @@ -2443,10 +2450,11 @@ static RISCVException write_henvcfg(CPURISCVState *env, int csrno,
+>>      }
+>>
+>>      if (riscv_cpu_mxl(env) == MXL_RV64) {
+>> -        mask |= env->menvcfg & (HENVCFG_PBMTE | HENVCFG_STCE | HENVCFG_ADUE);
+>> +        menvcfg_mask = HENVCFG_PBMTE | HENVCFG_STCE | HENVCFG_ADUE;
+>> +        mask |= env->menvcfg & menvcfg_mask;
+> 
+> This doesn't seem right.
+> 
+> Should it be something like
 
- hw/riscv/boot.c            | 22 ++++++++++++++++++----
- hw/riscv/microchip_pfsoc.c |  4 ++--
- hw/riscv/sifive_u.c        |  4 ++--
- hw/riscv/spike.c           |  4 ++--
- hw/riscv/virt.c            |  2 +-
- include/hw/riscv/boot.h    |  2 +-
- 6 files changed, 26 insertions(+), 12 deletions(-)
+That is what I did before but that didn't work, henvcfg still contained
+some stale bits.
 
--- 
-2.17.1
+> 
+>     if (riscv_cpu_mxl(env) == MXL_RV64) {
+>         mask |= env->menvcfg & (HENVCFG_PBMTE | HENVCFG_STCE | HENVCFG_ADUE);
+>     }
+> 
+>     mask = env->menvcfg & mask;
+> 
+>>      }
+>>
+>> -    env->henvcfg = (env->henvcfg & ~mask) | (val & mask);
+>> +    env->henvcfg = (env->henvcfg & ~menvcfg_mask) | (val & mask);
+> 
+> Using both menvcfg_mask and mask seems wrong here
+
+The problem is that if you use:
+
+mask |= env->menvcfg & (HENVCFG_PBMTE | HENVCFG_STCE | HENVCFG_ADUE)
+
+Then, if a bit was cleared in menvcfg before writing henvcfg (let's say
+HENVCFG_ADUE), then env->henvcfg will be masked with mask =
+HENVCFG_PBMTE | HENVCFG_STCE, leaving the HENVCFG_ADUE stale bit in
+env->henvcfg which is wrong for the internal state.
+
+The idea here is to actually clear any menvcfg related bit (the 1:1
+bits) using the raw mask (HENVCFG_PBMTE | HENVCFG_STCE | HENVCFG_ADUE)
+to clear everything and then OR it with the value to be written (which
+is masked with raw bits + menvcfg content) to avoid any stale bits.
+
+Thanks,
+
+Clément
+
+> 
+> Alistair
 
 
