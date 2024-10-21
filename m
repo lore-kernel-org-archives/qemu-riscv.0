@@ -4,87 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 214C0D3C92F
-	for <qemu-riscv@archiver.kernel.org>; Mon, 21 Oct 2024 03:06:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9382FD3C93C
+	for <qemu-riscv@archiver.kernel.org>; Mon, 21 Oct 2024 03:45:42 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1t2iiP-00051Q-Qr; Sun, 20 Oct 2024 23:04:17 -0400
+	id 1t2jM9-0005Aj-My; Sun, 20 Oct 2024 23:45:21 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1t2iiO-00050o-5p
- for qemu-riscv@nongnu.org; Sun, 20 Oct 2024 23:04:16 -0400
-Received: from mail-pj1-x1034.google.com ([2607:f8b0:4864:20::1034])
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1t2jM7-0005AK-QJ; Sun, 20 Oct 2024 23:45:19 -0400
+Received: from mail-vs1-xe2f.google.com ([2607:f8b0:4864:20::e2f])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1t2iiM-00075f-Cx
- for qemu-riscv@nongnu.org; Sun, 20 Oct 2024 23:04:15 -0400
-Received: by mail-pj1-x1034.google.com with SMTP id
- 98e67ed59e1d1-2e2a97c2681so2892614a91.2
- for <qemu-riscv@nongnu.org>; Sun, 20 Oct 2024 20:04:14 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1t2jM6-0002Ke-BN; Sun, 20 Oct 2024 23:45:19 -0400
+Received: by mail-vs1-xe2f.google.com with SMTP id
+ ada2fe7eead31-4a492f73befso1056991137.2; 
+ Sun, 20 Oct 2024 20:45:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1729479853; x=1730084653; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ d=gmail.com; s=20230601; t=1729482317; x=1730087117; darn=nongnu.org;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=KWU/3HvbiuQXxAimlZ1VWI57uUkGUzFGIFx/JvTQ+9I=;
- b=Y1JobNPpu+29+CfSG6kzBz8xq5h0tcg14C6TwTCiYLKX/N2oJKw9LBo+WTAGFMc+SH
- yF7ZiiF/dTOCA1ne8aNZAAH1T9dqQV2QHYv/KeSYdPLzpjciZCyVdpU6aBDRcfFHimcf
- 43g4c/pGgN5vCEQ3ypWyh0QSlAulIONFQKZcVJxXahvs5Czqr97FcwwPRkv0KKpMlKNA
- BgIPFLDm7sp8HA2gmghCTe0pqTxTGNcDEvugrXfKeJE95RucBISBpehTyU9VswY1Rgdf
- JHMUrFfyfEIEiJdPR20K7A4348TnJIgdTyg8EsxDYaX/tyDAobDcIlMVNWLla08yEljV
- OS1Q==
+ bh=Ji23ZJD5Z0v9qFSN8xOpbbcFvETbXKjj2Lz0GxzlBxY=;
+ b=hJEUtRyEb7GTogme6AeZCicsRK6sv+QfEUdc0ii0XrIRn5DpxjKVBnVDJ38VJHM6X4
+ kFzUQyk5I4ZRAfM75M5VHxMHDldDqeLvT9shAw54ARDyMO/PWNcEpAGauzlqkB06bong
+ GPa/epqi8Kb0ehAvjT8IP6uWo3l0ROvjuj26+/LQ+M/AOnKVCnlgSh0bIpvzG2sZ+3rS
+ zEhLuxr1QmAh3Ey/od9ibpBo+UtdFvThA1cGalSE8SIkwlfBOvfjzUB1hFmCFB9cctae
+ x3EYSQe2A+OZI/CTAdP9+VCfj13mCSREIEV+Bwbp2Ddad2KITKXLbq+k0fS0vmDJ+Q+r
+ eFnQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729479853; x=1730084653;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ d=1e100.net; s=20230601; t=1729482317; x=1730087117;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=KWU/3HvbiuQXxAimlZ1VWI57uUkGUzFGIFx/JvTQ+9I=;
- b=bAGbZKoSg9/saRJnXMunvYjE5bR1r7IdQQJgtt8Z3vopOlzB013S01dVn4r7O1Ka+N
- kKprtl1kO8yn5PNT8ISFvpnL++VNTqqi2J2NZP7idRLPxVL759jQQJDo0SLTLcNrIQPz
- w4P7f6i6AZRhvOtlpF4GNMdC5Ii5Tm6SM0LQaRCBfDVR/sp0xdOxvTR4oPKiINOsluBu
- K0At0wq9HFpdkR/eHIb+bqGY74PiQl+r7kox7HI4p1jIT1cVWZZdXyZVWiF4ztjW8DmM
- bj2zQgHYjqkWLlpdRUwD7VOXr0++0T2arH5FfnjmJgoupCmkvf1lanfrmADiYKuogE7u
- j3FQ==
+ bh=Ji23ZJD5Z0v9qFSN8xOpbbcFvETbXKjj2Lz0GxzlBxY=;
+ b=BF07S/60Jbmjl1mBPc6NcyMoszJjeBGkIHY/XmgRfik4J9J1zGurwh+7oiRsXx/Jru
+ rimFyTm9oBXDoRVpZYH+rYawfSTKSoqywaJz+3vXjqxG9x9hxKHDaz4gaJt6+4552m/N
+ smMChvbd9EuH0tesIIzdJlODzarKEjXsktSuw9GZ+b0FggC5IuBXZDQhlcjT26nviJ7m
+ V8UOzyXwlVlkUHK4ldvOsnh4t7u5L0jOuNmPPST4YwmZALNAaCVUoKdJwTh8nBmz72UK
+ 6oC4PsoKWA+F/axPmA8ZJBesksALnwJEdNJ5Lhgf3rrkvWgvwCD24rY+yLPJ15nVafdE
+ cEmw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXDvcP4GxLskuexKh3Hw6KtRK2sAPwa1A1Kc7TIh+WlfVyRL4296RJx0+n6Rhp4qynI70+XX042HNOd@nongnu.org
-X-Gm-Message-State: AOJu0Yw9v33F4pVgJcVCta/fZdH5HaEfEdlyVJBuj5+z4kB1ADa+2zdj
- p+RpQCnenf4B3/v2T93DP1uNffgLzykD61P8F6Ol0pE2ix5zhFtuYk976zPw+bU=
-X-Google-Smtp-Source: AGHT+IFQfood6RU515V/uljOiR7lPkvKQdGMkQbvKa2Ad1cITdchlq1QU5OkhfebASGh0LC76WZJgw==
-X-Received: by 2002:a17:90b:1d85:b0:2e2:b937:eeae with SMTP id
- 98e67ed59e1d1-2e5616db601mr12976323a91.5.1729479853079; 
- Sun, 20 Oct 2024 20:04:13 -0700 (PDT)
-Received: from hsinchu16.internal.sifive.com
- (59-124-168-89.hinet-ip.hinet.net. [59.124.168.89])
- by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-2e5ad368b25sm2348846a91.24.2024.10.20.20.04.10
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 20 Oct 2024 20:04:12 -0700 (PDT)
-From: frank.chang@sifive.com
-To: qemu-devel@nongnu.org
-Cc: Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bmeng.cn@gmail.com>,
- Weiwei Li <liwei1518@gmail.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- qemu-riscv@nongnu.org (open list:RISC-V TCG CPUs),
- Tommy Wu <tommy.wu@sifive.com>, Frank Chang <frank.chang@sifive.com>
-Subject: [PATCH v8 3/5] target/riscv: Add Smrnmi CSRs
-Date: Mon, 21 Oct 2024 11:03:56 +0800
-Message-ID: <20241021030358.12454-4-frank.chang@sifive.com>
-X-Mailer: git-send-email 2.43.2
-In-Reply-To: <20241021030358.12454-1-frank.chang@sifive.com>
-References: <20241021030358.12454-1-frank.chang@sifive.com>
+ AJvYcCU3lPQdKQyqo2LXE0NykM4STC3gzKFJMaydMYoR96FULisu7/VYXzs3r+I94rlzP+MmN/Wl7PcSh9Bu@nongnu.org
+X-Gm-Message-State: AOJu0Ywt0MS8t9ZhLz1MFNcn1we+SXK/QzE+hcOcXr/cdBPeYrkqOOli
+ +sfrN/aDA6vzWAoxFIGVDCQXP0IT6h71d7qIMgQwZhr4hT1LHCAPxaoLc8x4CvBb1mFnKiGyvyn
+ 9VcjeWPVk925w71ZNvCB0cJpmQTw=
+X-Google-Smtp-Source: AGHT+IHZ6jDzckV6WsLjgwDzz3wWhFFp/2ESz7RrLuNpxz1yNXBhZR65HNnOKvUPtzOVrutgD0eyYOq+bEBkMosSM0c=
+X-Received: by 2002:a05:6102:442a:b0:4a3:f4b3:d07e with SMTP id
+ ada2fe7eead31-4a5d6a8dfc2mr8748537137.8.1729482316822; Sun, 20 Oct 2024
+ 20:45:16 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1034;
- envelope-from=frank.chang@sifive.com; helo=mail-pj1-x1034.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+References: <20240910045419.1252277-1-alistair.francis@wdc.com>
+ <2ef501ab-df75-418b-9c94-df47b9389723@redhat.com>
+In-Reply-To: <2ef501ab-df75-418b-9c94-df47b9389723@redhat.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Mon, 21 Oct 2024 13:44:50 +1000
+Message-ID: <CAKmqyKOJ8NridjUwD60WBj4sWzPQbWBQuLPNQ+32NWpN_242Fg@mail.gmail.com>
+Subject: Re: [PATCH v4 0/2] riscv: char: Avoid dropped charecters
+To: Thomas Huth <thuth@redhat.com>
+Cc: qemu-devel@nongnu.org, alex.bennee@linaro.org, peter.maydell@linaro.org, 
+ Bin Meng <bmeng.cn@gmail.com>, palmer@dabbelt.com, liwei1518@gmail.com, 
+ zhiwei_liu@linux.alibaba.com, qemu-riscv@nongnu.org, 
+ Alistair Francis <Alistair.Francis@wdc.com>,
+ Paolo Bonzini <pbonzini@redhat.com>, 
+ =?UTF-8?B?TWFyYy1BbmRyw6kgTHVyZWF1?= <marcandre.lureau@redhat.com>, 
+ atishp@rivosinc.com, dbarboza@ventanamicro.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2607:f8b0:4864:20::e2f;
+ envelope-from=alistair23@gmail.com; helo=mail-vs1-xe2f.google.com
+X-Spam_score_int: -17
+X-Spam_score: -1.8
+X-Spam_bar: -
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -102,189 +97,46 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Tommy Wu <tommy.wu@sifive.com>
+On Thu, Oct 17, 2024 at 11:22=E2=80=AFPM Thomas Huth <thuth@redhat.com> wro=
+te:
+>
+> On 10/09/2024 06.54, Alistair Francis wrote:
+> > This series fixes: https://gitlab.com/qemu-project/qemu/-/issues/2114
+> >
+> > This converts the RISC-V charecter device callers of qemu_chr_fe_write(=
+)
+> > to either use qemu_chr_fe_write_all() or to call qemu_chr_fe_write() as=
+ync
+> > and act on the return value.
+> >
+> > v4:
+> >   - Drop the unused char_tx_time
+> >   - Update the migration in vmstate_sifive_uart
+> > v3:
+> >   - Fixup spelling
+> > v2:
+> >   - Use Fifo8 for the Sifive UART instead of a custom FIFO
+> >
+> > Alistair Francis (2):
+> >    hw/char: riscv_htif: Use blocking qemu_chr_fe_write_all
+> >    hw/char: sifive_uart: Print uart characters async
+>
+>   Hi!
+>
+> What's the status of these patches? Are they good to go, or do they still
+> need more work? (I'm asking because I'd like to convert
+> tests/avocado/riscv_opensbi.py to the functional test framework, but it
+> would be good to have the problem with the dropped characters fixed first=
+)
 
-The Smrnmi extension adds the 'mnscratch', 'mnepc', 'mncause',
-'mnstatus' CSRs.
+I think they are good to go
 
-Signed-off-by: Frank Chang <frank.chang@sifive.com>
-Signed-off-by: Tommy Wu <tommy.wu@sifive.com>
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
----
- target/riscv/cpu.c      |  5 +++
- target/riscv/cpu.h      |  4 ++
- target/riscv/cpu_bits.h | 11 ++++++
- target/riscv/csr.c      | 82 +++++++++++++++++++++++++++++++++++++++++
- 4 files changed, 102 insertions(+)
+Applied to riscv-to-apply.next
 
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 5ce6ed31ec..b3195da512 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -1017,6 +1017,11 @@ static void riscv_cpu_reset_hold(Object *obj, ResetType type)
-         riscv_trigger_reset_hold(env);
-     }
- 
-+    if (cpu->cfg.ext_smrnmi) {
-+        env->rnmip = 0;
-+        env->mnstatus = set_field(env->mnstatus, MNSTATUS_NMIE, false);
-+    }
-+
-     if (kvm_enabled()) {
-         kvm_riscv_reset_vcpu(cpu);
-     }
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index 8b2a863c50..832556cc34 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -474,6 +474,10 @@ struct CPUArchState {
- #endif /* CONFIG_KVM */
- 
-     /* RNMI */
-+    target_ulong mnscratch;
-+    target_ulong mnepc;
-+    target_ulong mncause; /* mncause without bit XLEN-1 set to 1 */
-+    target_ulong mnstatus;
-     target_ulong rnmip;
-     uint64_t rnmi_irqvec;
-     uint64_t rnmi_excpvec;
-diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
-index 6df2cbc2be..1a5200d1d5 100644
---- a/target/riscv/cpu_bits.h
-+++ b/target/riscv/cpu_bits.h
-@@ -350,6 +350,12 @@
- #define CSR_PMPADDR14       0x3be
- #define CSR_PMPADDR15       0x3bf
- 
-+/* RNMI */
-+#define CSR_MNSCRATCH       0x740
-+#define CSR_MNEPC           0x741
-+#define CSR_MNCAUSE         0x742
-+#define CSR_MNSTATUS        0x744
-+
- /* Debug/Trace Registers (shared with Debug Mode) */
- #define CSR_TSELECT         0x7a0
- #define CSR_TDATA1          0x7a1
-@@ -627,6 +633,11 @@ typedef enum {
- #define SATP64_ASID         0x0FFFF00000000000ULL
- #define SATP64_PPN          0x00000FFFFFFFFFFFULL
- 
-+/* RNMI mnstatus CSR mask */
-+#define MNSTATUS_NMIE       0x00000008
-+#define MNSTATUS_MNPV       0x00000080
-+#define MNSTATUS_MNPP       0x00001800
-+
- /* VM modes (satp.mode) privileged ISA 1.10 */
- #define VM_1_10_MBARE       0
- #define VM_1_10_SV32        1
-diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-index c88ee1265e..b84b436151 100644
---- a/target/riscv/csr.c
-+++ b/target/riscv/csr.c
-@@ -578,6 +578,17 @@ static RISCVException debug(CPURISCVState *env, int csrno)
- 
-     return RISCV_EXCP_ILLEGAL_INST;
- }
-+
-+static RISCVException rnmi(CPURISCVState *env, int csrno)
-+{
-+    RISCVCPU *cpu = env_archcpu(env);
-+
-+    if (cpu->cfg.ext_smrnmi) {
-+        return RISCV_EXCP_NONE;
-+    }
-+
-+    return RISCV_EXCP_ILLEGAL_INST;
-+}
- #endif
- 
- static RISCVException seed(CPURISCVState *env, int csrno)
-@@ -4566,6 +4577,67 @@ static RISCVException write_upmbase(CPURISCVState *env, int csrno,
-     return RISCV_EXCP_NONE;
- }
- 
-+static RISCVException read_mnscratch(CPURISCVState *env, int csrno,
-+                                     target_ulong *val)
-+{
-+    *val = env->mnscratch;
-+    return RISCV_EXCP_NONE;
-+}
-+
-+static int write_mnscratch(CPURISCVState *env, int csrno, target_ulong val)
-+{
-+    env->mnscratch = val;
-+    return RISCV_EXCP_NONE;
-+}
-+
-+static int read_mnepc(CPURISCVState *env, int csrno, target_ulong *val)
-+{
-+    *val = env->mnepc;
-+    return RISCV_EXCP_NONE;
-+}
-+
-+static int write_mnepc(CPURISCVState *env, int csrno, target_ulong val)
-+{
-+    env->mnepc = val;
-+    return RISCV_EXCP_NONE;
-+}
-+
-+static int read_mncause(CPURISCVState *env, int csrno, target_ulong *val)
-+{
-+    *val = env->mncause;
-+    return RISCV_EXCP_NONE;
-+}
-+
-+static int write_mncause(CPURISCVState *env, int csrno, target_ulong val)
-+{
-+    env->mncause = val;
-+    return RISCV_EXCP_NONE;
-+}
-+
-+static int read_mnstatus(CPURISCVState *env, int csrno, target_ulong *val)
-+{
-+    *val = env->mnstatus;
-+    return RISCV_EXCP_NONE;
-+}
-+
-+static int write_mnstatus(CPURISCVState *env, int csrno, target_ulong val)
-+{
-+    target_ulong mask = (MNSTATUS_NMIE | MNSTATUS_MNPP);
-+
-+    if (riscv_has_ext(env, RVH)) {
-+        /* Flush tlb on mnstatus fields that affect VM. */
-+        if ((val ^ env->mnstatus) & MNSTATUS_MNPV) {
-+            tlb_flush(env_cpu(env));
-+        }
-+
-+        mask |= MNSTATUS_MNPV;
-+    }
-+
-+    /* mnstatus.mnie can only be cleared by hardware. */
-+    env->mnstatus = (env->mnstatus & MNSTATUS_NMIE) | (val & mask);
-+    return RISCV_EXCP_NONE;
-+}
-+
- #endif
- 
- /* Crypto Extension */
-@@ -5070,6 +5142,16 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] = {
-                         write_sstateen_1_3,
-                         .min_priv_ver = PRIV_VERSION_1_12_0 },
- 
-+    /* RNMI */
-+    [CSR_MNSCRATCH] = { "mnscratch", rnmi, read_mnscratch, write_mnscratch,
-+                        .min_priv_ver = PRIV_VERSION_1_12_0               },
-+    [CSR_MNEPC]     = { "mnepc",     rnmi, read_mnepc,     write_mnepc,
-+                        .min_priv_ver = PRIV_VERSION_1_12_0               },
-+    [CSR_MNCAUSE]   = { "mncause",   rnmi, read_mncause,   write_mncause,
-+                        .min_priv_ver = PRIV_VERSION_1_12_0               },
-+    [CSR_MNSTATUS]  = { "mnstatus",  rnmi, read_mnstatus,  write_mnstatus,
-+                        .min_priv_ver = PRIV_VERSION_1_12_0               },
-+
-     /* Supervisor Trap Setup */
-     [CSR_SSTATUS]    = { "sstatus",    smode, read_sstatus,    write_sstatus,
-                          NULL,                read_sstatus_i128              },
--- 
-2.43.2
+Alistair
 
+>
+>   Thanks,
+>    Thomas
+>
 
