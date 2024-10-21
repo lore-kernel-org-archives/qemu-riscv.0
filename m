@@ -4,85 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B8B2DD3C92D
-	for <qemu-riscv@archiver.kernel.org>; Sun, 20 Oct 2024 21:21:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 61A39D3C935
+	for <qemu-riscv@archiver.kernel.org>; Mon, 21 Oct 2024 00:47:35 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1t2dMD-0000rx-5L; Sun, 20 Oct 2024 17:21:01 -0400
+	id 1t2gZz-0004GP-T9; Sun, 20 Oct 2024 20:47:27 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <groeck7@gmail.com>)
- id 1t2dMA-0000r1-Rb; Sun, 20 Oct 2024 17:20:58 -0400
-Received: from mail-pg1-x531.google.com ([2607:f8b0:4864:20::531])
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1t2gZy-0004GD-Mi; Sun, 20 Oct 2024 20:47:26 -0400
+Received: from mail-ua1-x92b.google.com ([2607:f8b0:4864:20::92b])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <groeck7@gmail.com>)
- id 1t2dM8-0002Sq-Lk; Sun, 20 Oct 2024 17:20:58 -0400
-Received: by mail-pg1-x531.google.com with SMTP id
- 41be03b00d2f7-656d8b346d2so2453405a12.2; 
- Sun, 20 Oct 2024 14:20:54 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1t2gZx-00027Z-7R; Sun, 20 Oct 2024 20:47:26 -0400
+Received: by mail-ua1-x92b.google.com with SMTP id
+ a1e0cc1a2514c-84fed1ff217so2531574241.1; 
+ Sun, 20 Oct 2024 17:47:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1729459254; x=1730064054; darn=nongnu.org;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:sender:from:to:cc:subject:date:message-id
- :reply-to; bh=IAEcDPZ3CQ9oAuIMRzDL1U+GIthteurNbBFokihTWZE=;
- b=IERlEOoDck8SILRLRRHnMsvwOZtwWsv9stXiVcdk/5fUP4TRrVnoPeQ8Vv23q59uQ8
- pq5KwJXWioKlYkL5LPv2AymgB0QzipXaM6L8kPKJ17BpEJvqHjOKNTIs/wFScEXCPeaY
- YZQfc986yIE5n8NoLr0JLDRKcKkHEggQvOD0vc2irFiJH8R1Lqm/wawsyjN9jbiC31/F
- 2NN3rL9S1qRJG+GiASLLYIzUSqGavr0hR3MihT5DlnjXgJcKqFqwx2rlqQIyo7OfG/oV
- YwE27XDPK/Nop2BUm44BqgKAopdMxJW+83d9gascyo+swVct1w7xy4LY7+12G7wVZaM2
- 1LLg==
+ d=gmail.com; s=20230601; t=1729471643; x=1730076443; darn=nongnu.org;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=zXXnRSgtLkMQFiVQfg7CVOOS/maIR2NpIjhvHp6OS10=;
+ b=mdsr0mR6zeDoLQEpzvac5SA+D50L+MGJnjbFkI6fou4/HbbfxLmH4zj5XoDiLPjO6P
+ e+CMQ7UUmnep+uhGpUvRy0+s7Yo+N+nQnHPYK70KempGs6svH51oqG59ohVuMxS1s8rc
+ gJGxzcuiZcpUGH15uMoOjtx0reEEYtBAmLLxnKsqYFM3cRpDGmWR3PcG7eIxhZ633Q6j
+ qy4InDCxQarwnlghHl2Bp6oCuouj1oemanVB4b7iFV2m0aQduc3hoI8MokR+hqkpAMj0
+ Fhw6y0n8vE+vnaCYCk6b/ZTvmcsO96W071s0v1xOu93YPA1v3KytyJgvLVOFkxesfsjd
+ yVGA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729459254; x=1730064054;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:sender:x-gm-message-state:from:to:cc
+ d=1e100.net; s=20230601; t=1729471643; x=1730076443;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=IAEcDPZ3CQ9oAuIMRzDL1U+GIthteurNbBFokihTWZE=;
- b=T8zcnbG0jPDK+nzS0cbTR1Yyi6L0QB+PREynyKBOI4SnlMmgWp+Y6071YQljKjzYq8
- hbEcq3xCQZz2PblscMjmSKPkLyaexB25/K7ySaql009Jvlqh8epLUyJlfs12NTepvntm
- 4xbsWBbW1U2AxXNImI78DmPPVets/pvHapxoAi5Fv0V0c3viknlxQclMF+5COxXLLs+u
- vOVxQKWsEsk+ALd7BA/r+j8WYKLINF3nmx9WDcZ9hPO5rW8OXRFqe6uzWgI7Ii4r4W9I
- rcUdZcDeQBQjztE2y+dIzEX/EFx50UbF3qdyVVf3QRtEPxiGDDRlMM3+vZTe+drVFcHx
- 2PxQ==
+ bh=zXXnRSgtLkMQFiVQfg7CVOOS/maIR2NpIjhvHp6OS10=;
+ b=kWmABGGieIHXvUYaG2nKoQgc+tlR6bSqVMSvgvIm1AG41GAg9Lbs5x5OowPxun4ONo
+ aBvXLteTAoT43rSYYR/nL+I8/RLktiOyLqZnuu4qvv4KG3Xuhyyl1ZwgpDRat648e3YL
+ QzDv/sI6UPVrc6ZDKLR6vRZnx4nu22Tnf/caX/sbxKwse3N2YZTDEDUqnt6CbkP2PHTp
+ G30+D5kd3CWwIDzmT7u3D9RyBfKj2X3xEWTGR9J/N/vodnDsIbVGDP3q4QoYp0nQx5qL
+ 3qykUKqtsSt6MupQ6PIxZn+q+gkIeIh+p9OD3LGMPirmpnzIb8uTW7wac/0s6hQS3q8D
+ kvRw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVXMFTrBiGP8v0MK/a3svaJDzh47d37kVxeVATXslkTOHyX7suXOXyHI52PaxtvCDeixT3mljtbD/s/iA==@nongnu.org,
- AJvYcCWFEBXUUJQ3m+TPRrBjfSxR1AMYzYp3aMeP0DnHd4p8LAhnetMsWPwg4OvTEKxiwSj2F1SBqh58Hw==@nongnu.org,
- AJvYcCWz5nh7TLwnI5tr3FmoV9wyTmCZDpZttUMu8mIA+F5vchPHWX91Ba8Zl5qZr3Seo/5yuV2xZmATPbUSyA==@nongnu.org
-X-Gm-Message-State: AOJu0Yy/5p4n6LgftiK7biC28jPLkw/ec1IDaZcg4AhNaLAK3Yyg77Cx
- LvXCnGeOAz710+m0BP3X3LU/t68jekV7nbVn25n/JWPMeQ3QwcGt
-X-Google-Smtp-Source: AGHT+IH+w3v9jDLBViI7gIIB5D7zG7WOaOKHX5CqTARFtl34hSuitIMIwxt1ZUXgQda6iN1HXD0Lhg==
-X-Received: by 2002:a17:90a:e392:b0:2e2:cd5e:7eef with SMTP id
- 98e67ed59e1d1-2e5618d9edamr10877559a91.27.1729459253544; 
- Sun, 20 Oct 2024 14:20:53 -0700 (PDT)
-Received: from server.roeck-us.net ([2600:1700:e321:62f0:329c:23ff:fee3:9d7c])
- by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-2e5ad4ed73fsm2000148a91.44.2024.10.20.14.20.51
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 20 Oct 2024 14:20:52 -0700 (PDT)
-Date: Sun, 20 Oct 2024 14:20:50 -0700
-From: Guenter Roeck <linux@roeck-us.net>
-To: Richard Henderson <richard.henderson@linaro.org>
-Cc: qemu-devel@nongnu.org, qemu-arm@nongnu.org, qemu-ppc@nongu.org,
- qemu-s390x@nongnu.org, qemu-riscv@nongnu.org,
- Nicholas Piggin <npiggin@gmail.com>, BALATON Zoltan <balaton@eik.bme.hu>
-Subject: Re: [PATCH v3 06/12] target/ppc: Split out helper_dbczl for 970
-Message-ID: <2ecab2a6-649b-4c24-a287-58b74c39b412@roeck-us.net>
-References: <20240719010707.1319675-1-richard.henderson@linaro.org>
- <20240719010707.1319675-7-richard.henderson@linaro.org>
+ AJvYcCXZK4V49iaoMgVMhZ0RFHaAwHKHNWSJ9JeAfpZVLPjr9nnIwVWv4OtnSkfpMmoylcuoJdipB+Av/6G1@nongnu.org
+X-Gm-Message-State: AOJu0YwUF6OtwTqdBBZjBkHCkK8GGX9GScLguzwnVbhuu1Uc1mCvuYbA
+ WzbfC9LX1tzOYzNLgh3qr7MGvFsvFJDiJ8f8GU2nsMDjZ4L0N1XLeoed9Q/w1cWBqyjRRTqr1gw
+ 1Bpuq4fzj4hQCPvhjbaxBH6cf5+kXf1w9Fhw=
+X-Google-Smtp-Source: AGHT+IGXh3sFnT/cnT4+kZSFjrmZR8T6hqq1w+V5pJ8+w1nfT/BoJxHy7u7I8Ew4cASc/U/cmMq/5AUHTSFm8yXbwXo=
+X-Received: by 2002:a05:6102:c8b:b0:4a4:7e84:d654 with SMTP id
+ ada2fe7eead31-4a5c49eb5bbmr9196638137.14.1729471643596; Sun, 20 Oct 2024
+ 17:47:23 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20240719010707.1319675-7-richard.henderson@linaro.org>
-Received-SPF: pass client-ip=2607:f8b0:4864:20::531;
- envelope-from=groeck7@gmail.com; helo=mail-pg1-x531.google.com
-X-Spam_score_int: -15
-X-Spam_score: -1.6
+References: <20241017145226.365825-1-cleger@rivosinc.com>
+ <20241017145226.365825-2-cleger@rivosinc.com>
+In-Reply-To: <20241017145226.365825-2-cleger@rivosinc.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Mon, 21 Oct 2024 10:46:57 +1000
+Message-ID: <CAKmqyKMoDSFaJz7LhX4GMV9AhOQUDLOt79Fctw_k97SazpSjjQ@mail.gmail.com>
+Subject: Re: [PATCH v4 1/9] target/riscv: fix henvcfg potentially containing
+ stale bits
+To: =?UTF-8?B?Q2zDqW1lbnQgTMOpZ2Vy?= <cleger@rivosinc.com>
+Cc: qemu-riscv@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>, 
+ Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bin.meng@windriver.com>,
+ Weiwei Li <liwei1518@gmail.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>, 
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, Ved Shanbhogue <ved@rivosinc.com>, 
+ Atish Patra <atishp@rivosinc.com>, qemu-devel@nongnu.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2607:f8b0:4864:20::92b;
+ envelope-from=alistair23@gmail.com; helo=mail-ua1-x92b.google.com
+X-Spam_score_int: -17
+X-Spam_score: -1.8
 X-Spam_bar: -
-X-Spam_report: (-1.6 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_ENVFROM_END_DIGIT=0.25,
- FREEMAIL_FORGED_FROMDOMAIN=0.001, FREEMAIL_FROM=0.001,
- HEADER_FROM_DIFFERENT_DOMAINS=0.17, RCVD_IN_DNSWL_NONE=-0.0001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=no autolearn_force=no
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -98,102 +97,106 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Hi,
+On Fri, Oct 18, 2024 at 12:55=E2=80=AFAM Cl=C3=A9ment L=C3=A9ger <cleger@ri=
+vosinc.com> wrote:
+>
+> With the current implementation, if we had the current scenario:
+> - set bit x in menvcfg
+> - set bit x in henvcfg
+> - clear bit x in menvcfg
+> then, the internal variable env->henvcfg would still contain bit x due
+> to both a wrong menvcfg mask used in write_henvcfg() as well as a
+> missing update of henvcfg upon menvcfg update.
+> This can lead to some wrong interpretation of the context. In order to
+> update henvcfg upon menvcfg writing, call write_henvcfg() after writing
+> menvcfg and fix the mask computation used in write_henvcfg() that is
+> used to mesk env->menvcfg value (which could still lead to some stale
+> bits). The same mechanism is also applied for henvcfgh writing.
+>
+> Signed-off-by: Cl=C3=A9ment L=C3=A9ger <cleger@rivosinc.com>
+> ---
+>  target/riscv/csr.c | 17 +++++++++++++----
+>  1 file changed, 13 insertions(+), 4 deletions(-)
+>
+> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+> index b84b436151..9e832e0b39 100644
+> --- a/target/riscv/csr.c
+> +++ b/target/riscv/csr.c
+> @@ -2345,6 +2345,8 @@ static RISCVException read_menvcfg(CPURISCVState *e=
+nv, int csrno,
+>      return RISCV_EXCP_NONE;
+>  }
+>
+> +static RISCVException write_henvcfg(CPURISCVState *env, int csrno,
+> +                                    target_ulong val);
+>  static RISCVException write_menvcfg(CPURISCVState *env, int csrno,
+>                                      target_ulong val)
+>  {
+> @@ -2357,6 +2359,7 @@ static RISCVException write_menvcfg(CPURISCVState *=
+env, int csrno,
+>                  (cfg->ext_svadu ? MENVCFG_ADUE : 0);
+>      }
+>      env->menvcfg =3D (env->menvcfg & ~mask) | (val & mask);
+> +    write_henvcfg(env, CSR_HENVCFG, env->henvcfg);
+>
+>      return RISCV_EXCP_NONE;
+>  }
+> @@ -2368,6 +2371,8 @@ static RISCVException read_menvcfgh(CPURISCVState *=
+env, int csrno,
+>      return RISCV_EXCP_NONE;
+>  }
+>
+> +static RISCVException write_henvcfgh(CPURISCVState *env, int csrno,
+> +                                    target_ulong val);
+>  static RISCVException write_menvcfgh(CPURISCVState *env, int csrno,
+>                                       target_ulong val)
+>  {
+> @@ -2378,6 +2383,7 @@ static RISCVException write_menvcfgh(CPURISCVState =
+*env, int csrno,
+>      uint64_t valh =3D (uint64_t)val << 32;
+>
+>      env->menvcfg =3D (env->menvcfg & ~mask) | (valh & mask);
+> +    write_henvcfgh(env, CSR_HENVCFGH, env->henvcfg >> 32);
+>
+>      return RISCV_EXCP_NONE;
+>  }
+> @@ -2435,6 +2441,7 @@ static RISCVException write_henvcfg(CPURISCVState *=
+env, int csrno,
+>                                      target_ulong val)
+>  {
+>      uint64_t mask =3D HENVCFG_FIOM | HENVCFG_CBIE | HENVCFG_CBCFE | HENV=
+CFG_CBZE;
+> +    uint64_t menvcfg_mask =3D 0;
+>      RISCVException ret;
+>
+>      ret =3D smstateen_acc_ok(env, 0, SMSTATEEN0_HSENVCFG);
+> @@ -2443,10 +2450,11 @@ static RISCVException write_henvcfg(CPURISCVState=
+ *env, int csrno,
+>      }
+>
+>      if (riscv_cpu_mxl(env) =3D=3D MXL_RV64) {
+> -        mask |=3D env->menvcfg & (HENVCFG_PBMTE | HENVCFG_STCE | HENVCFG=
+_ADUE);
+> +        menvcfg_mask =3D HENVCFG_PBMTE | HENVCFG_STCE | HENVCFG_ADUE;
+> +        mask |=3D env->menvcfg & menvcfg_mask;
 
-On Fri, Jul 19, 2024 at 11:07:01AM +1000, Richard Henderson wrote:
-> We can determine at translation time whether the insn is or
-> is not dbczl.  We must retain a runtime check against the
-> HID5 register, but we can move that to a separate function
-> that never affects other ppc models.
-> 
-> Reviewed-by: Nicholas Piggin <npiggin@gmail.com>
-> Reviewed-by: BALATON Zoltan <balaton@eik.bme.hu>
-> Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
+This doesn't seem right.
 
-I see an odd failure when trying to boot ppc64 images in qemu v9.1.0 and
-v9.1.1.
+Should it be something like
 
-Starting network: udhcpc: started, v1.36.1
-malloc(): corrupted top size
-Aborted
-/usr/share/udhcpc/default.script: line 41: can't create : nonexistent directory
+    if (riscv_cpu_mxl(env) =3D=3D MXL_RV64) {
+        mask |=3D env->menvcfg & (HENVCFG_PBMTE | HENVCFG_STCE | HENVCFG_AD=
+UE);
+    }
 
-I bisected the problem to this patch; bisect log is attached.
-I also found that the problem has been fixed in mainline qemu. Bisect
-points to commit: f168808d7d10 ("accel/tcg: Add TCGCPUOps.tlb_fill_align")
-as the fix. I attached this bisect log as well.
+    mask =3D env->menvcfg & mask;
 
-Reverting this patch isn't easy due to several follow-up commits. Applying
-commit f168808d7d10 plus several preceding commits on top of v9.1.1 seems
-to fix the problem. The commits I applied are
+>      }
+>
+> -    env->henvcfg =3D (env->henvcfg & ~mask) | (val & mask);
+> +    env->henvcfg =3D (env->henvcfg & ~menvcfg_mask) | (val & mask);
 
-da335fe12a5d include/exec/memop: Move get_alignment_bits from tcg.h
-c5809eee452b include/exec/memop: Rename get_alignment_bits
-e5b063e81fd2 include/exec/memop: Introduce memop_atomicity_bits
-f168808d7d10 accel/tcg: Add TCGCPUOps.tlb_fill_align
+Using both menvcfg_mask and mask seems wrong here
 
-Obviously I have no idea if this is even remotely correct, so please take
-this report as purely informational in case someone else observes a similar
-problem.
-
-Thanks,
-Guenter
-
----
-Bug introduced:
-
-# bad: [fd1952d814da738ed107e05583b3e02ac11e88ff] Update version for v9.1.0 release
-# good: [c25df57ae8f9fe1c72eee2dab37d76d904ac382e] Update version for 9.0.0 release
-git bisect start 'v9.1.0' 'v9.0.0'
-# good: [2529ea2d561ea9fe359fb19ebdcfeb8b6cddd219] hw/acpi/ich9: Remove dead code related to 'acpi_memory_hotplug'
-git bisect good 2529ea2d561ea9fe359fb19ebdcfeb8b6cddd219
-# good: [76e375fc3c538bd6e4232314f693b56536a50b73] docs/qapidoc: add QMP highlighting to annotated qmp-example blocks
-git bisect good 76e375fc3c538bd6e4232314f693b56536a50b73
-# bad: [60d30cff8472c0bf05a40b0f55221fb4efb768e2] target/ppc: Move SPR indirect registers into PnvCore
-git bisect bad 60d30cff8472c0bf05a40b0f55221fb4efb768e2
-# bad: [6c635326425091e164b563a7ce96408ef74ff2ec] vfio/{iommufd,container}: Remove caps::aw_bits
-git bisect bad 6c635326425091e164b563a7ce96408ef74ff2ec
-# good: [23fa74974d8c96bc95cbecc0d4e2d90f984939f6] Merge tag 'pull-target-arm-20240718' of https://git.linaro.org/people/pmaydell/qemu-arm into staging
-git bisect good 23fa74974d8c96bc95cbecc0d4e2d90f984939f6
-# good: [c135d5eaafe7aa2533da663d8e5a34a424b71eb9] tests/tcg/aarch64: Fix test-mte.py
-git bisect good c135d5eaafe7aa2533da663d8e5a34a424b71eb9
-# good: [6af69d02706c821797802cfd56acdac13a7c9422] Merge tag 'nvme-next-pull-request' of https://gitlab.com/birkelund/qemu into staging
-git bisect good 6af69d02706c821797802cfd56acdac13a7c9422
-# bad: [71bce0e1fb1a866dde4a4b6016fc18b09f317338] Merge tag 'pull-tcg-20240723' of https://gitlab.com/rth7680/qemu into staging
-git bisect bad 71bce0e1fb1a866dde4a4b6016fc18b09f317338
-# bad: [62fe57c6d23fe8136d281f0e37ec8a9fab08b60a] target/ppc: Split out helper_dbczl for 970
-git bisect bad 62fe57c6d23fe8136d281f0e37ec8a9fab08b60a
-# good: [3b9991e35c08be7fd6b84090b2114ff1bfd44d3f] target/arm: Use set/clear_helper_retaddr in SVE and SME helpers
-git bisect good 3b9991e35c08be7fd6b84090b2114ff1bfd44d3f
-# good: [521a80d895ec8ef0200dcac9b9b19e60b0cc1d1a] target/ppc: Hoist dcbz_size out of dcbz_common
-git bisect good 521a80d895ec8ef0200dcac9b9b19e60b0cc1d1a
-# first bad commit: [62fe57c6d23fe8136d281f0e37ec8a9fab08b60a] target/ppc: Split out helper_dbczl for 970
-
----
-Bug fixed:
-
-# pass: [72b0b80714066a435502b67cdb55a7868ba0487d] Merge tag 'for-upstream' of https://gitlab.com/bonzini/qemu into staging
-# fail: [fd1952d814da738ed107e05583b3e02ac11e88ff] Update version for v9.1.0 release
-git bisect start '--term-bad=pass' '--term-good=fail' 'HEAD' 'v9.1.0'
-# fail: [4ae7d11b70a840eec7aa27269093b15d04ebc84e] Merge tag 'pull-tcg-20240922' of https://gitlab.com/rth7680/qemu into staging
-git bisect fail 4ae7d11b70a840eec7aa27269093b15d04ebc84e
-# fail: [b5ab62b3c0050612c7f9b0b4baeb44ebab42775a] Merge tag 'for-upstream' of https://gitlab.com/bonzini/qemu into staging
-git bisect fail b5ab62b3c0050612c7f9b0b4baeb44ebab42775a
-# pass: [1bfb726112ea4fda07c988f08df32d1eebb9abec] ui/pixman: generalize shared_image_destroy
-git bisect pass 1bfb726112ea4fda07c988f08df32d1eebb9abec
-# fail: [7e3b6d8063f245d27eecce5aabe624b5785f2a77] Merge tag 'crypto-fixes-pull-request' of https://gitlab.com/berrange/qemu into staging
-git bisect fail 7e3b6d8063f245d27eecce5aabe624b5785f2a77
-# pass: [e530581ee06573fcf48c7f7a6c3f8ec6e5809243] target/arm: Fix alignment fault priority in get_phys_addr_lpae
-git bisect pass e530581ee06573fcf48c7f7a6c3f8ec6e5809243
-# pass: [795592fef7d5d66a67b95a7f45cc1a84883db6a8] accel/tcg: Use the alignment test in tlb_fill_align
-git bisect pass 795592fef7d5d66a67b95a7f45cc1a84883db6a8
-# fail: [9d08a70ddc08e9b6ecf870fd232531c78fe0b208] tests/tcg: Run test-proc-mappings.py on i386
-git bisect fail 9d08a70ddc08e9b6ecf870fd232531c78fe0b208
-# fail: [da335fe12a5da71a33d7afc2075a341f26213f53] include/exec/memop: Move get_alignment_bits from tcg.h
-git bisect fail da335fe12a5da71a33d7afc2075a341f26213f53
-# fail: [e5b063e81fd2b30aad1e9128238871c71b62a666] include/exec/memop: Introduce memop_atomicity_bits
-git bisect fail e5b063e81fd2b30aad1e9128238871c71b62a666
-# pass: [f168808d7d100ed96c52c4438c4ddb557bd086bf] accel/tcg: Add TCGCPUOps.tlb_fill_align
-git bisect pass f168808d7d100ed96c52c4438c4ddb557bd086bf
-# first pass commit: [f168808d7d100ed96c52c4438c4ddb557bd086bf] accel/tcg: Add TCGCPUOps.tlb_fill_align
+Alistair
 
