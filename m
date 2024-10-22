@@ -4,85 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ED3CCD1713D
-	for <qemu-riscv@archiver.kernel.org>; Tue, 22 Oct 2024 11:34:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6A448D2C548
+	for <qemu-riscv@archiver.kernel.org>; Tue, 22 Oct 2024 12:58:54 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1t3D9V-0000aT-6m; Tue, 22 Oct 2024 07:34:27 -0400
+	id 1t3ETB-0004Bp-KW; Tue, 22 Oct 2024 08:58:41 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1t3D9Q-0000Vk-Tc
- for qemu-riscv@nongnu.org; Tue, 22 Oct 2024 07:34:13 -0400
-Received: from mail-pj1-x1035.google.com ([2607:f8b0:4864:20::1035])
+ (Exim 4.90_1) (envelope-from <atishp@rivosinc.com>)
+ id 1t3ET3-0004BJ-Kd
+ for qemu-riscv@nongnu.org; Tue, 22 Oct 2024 08:58:35 -0400
+Received: from mail-pf1-x42a.google.com ([2607:f8b0:4864:20::42a])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1t3D9O-0008G1-UA
- for qemu-riscv@nongnu.org; Tue, 22 Oct 2024 07:34:12 -0400
-Received: by mail-pj1-x1035.google.com with SMTP id
- 98e67ed59e1d1-2e2e23f2931so4373974a91.0
- for <qemu-riscv@nongnu.org>; Tue, 22 Oct 2024 04:34:10 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <atishp@rivosinc.com>)
+ id 1t3ESz-0004A1-48
+ for qemu-riscv@nongnu.org; Tue, 22 Oct 2024 08:58:31 -0400
+Received: by mail-pf1-x42a.google.com with SMTP id
+ d2e1a72fcca58-71e3fce4a60so3748725b3a.0
+ for <qemu-riscv@nongnu.org>; Tue, 22 Oct 2024 05:58:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1729596849; x=1730201649; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=uatBwRbZdUuRH9JbxOfOc5YcVZt42QS2AMZQu5Q7kOg=;
- b=IZJR/i9IS34Am6j6MPuvjcBwNqgnvqLJ69Dx88n5dySe+L0kXfNiTG95tXpZaj08wl
- JQ9fP1yZRpVVZXDHSixECY4HZ5V8Pw1jU7k+OK0WHitFk7Xt+jUjAlm2MskZbgWhGUxu
- vLpIZgyOnb87OWqv9zFDvDi5YJKqJLpwDrttG8fdQGU57hF42r+haMikrFwqwOsB7oW1
- EWkn9LrjMcVLOR9r5lr/IXZIrLd1kP4wY5jLIj9TrSMDO4JZGJaJe/F+eisNfXf3WBlx
- bPsL4+EOqxgyuZOl69evRJKzfMZI5j0qIPmId4Hg5Yl+QjbZFn1/KuzXoMIjl+t05LBs
- xZEw==
+ d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1729601907; x=1730206707;
+ darn=nongnu.org; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=hbii7gfZoWiiW2ourDll7zlEm01lJXQYh9cR0oOFQ0k=;
+ b=DMNaCU/aOR4kEAJOTDShbzaCuagIwcdowCp+pk2No5I7ULpZipgfmSG0ygHGxdXBfc
+ G2/i1I/8DqF54LT/MxxOaSH7NI/qKjhDmKnB21RqJOn4J8pdK+GKaBhcxuiPy5OMJRKr
+ 2o3rlRe562TssfHFmKzlVIKEws28qDSm7y74V72jEJuWtiX5R2FrL8euFCh2Isy+bdDl
+ 3r057ILKqtZ6hazW1AgXg1x+Om+LAbNmmtU+kW3h8w97K5eQ8E2JQqmUhW9VzfPld8f9
+ itPQTXbbH6JYR4bI3dKTAHqG/xlknaXUN2IFObMIdRm+STIVo+OKO+A03PVyj0yAkrzx
+ xrMQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729596849; x=1730201649;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=uatBwRbZdUuRH9JbxOfOc5YcVZt42QS2AMZQu5Q7kOg=;
- b=g2jlkN6MKQpz4uk26BOT7qREuhKuEw1w/oFx5xakYUk/stSaUwKL7pSYDzOdPDrmWi
- PNHSSkkSkQjbz4HcL+kPNY3nqbriez0SEEuOD5wYG3jwcTX1IX66uIn6NHyUWv2fNfnn
- RkaE3UuAudL0/hwxk0+vN9RQfEE2md9gElK9snrHbMD8cykW67H+1lcYkl4SnACmYCdL
- UsCP6Ydfp0xK22UwgHbEDPxCSx6EyGapsFH9f5fkkgE/0Mw4x7ZCEZEDTEywN+JDa+ZB
- kVE3W9nfuleRbKUz3crQbzl6yFznhYSGbGSQl8b9ZJIlgGRHpFDTWZGch3Dpyv745Pkw
- afHA==
-X-Gm-Message-State: AOJu0YwYS8whqmz9K2RHARnNjiZ6JAfB5VhDr68fHmP163OwS58L96Y0
- LxCytM26O5T1ocqzpEWXlJBUdMMQ20TTD4GDU4c9XkDbfCp7ngOEcvx7eAh8g50=
-X-Google-Smtp-Source: AGHT+IGSsYhaExA4FWSgMzywDZ5OLf6M4lMBkZMdkVijY+l4tdp0C+1HIbBzArOH0ZMdwSBpy6/YHA==
-X-Received: by 2002:a17:90b:1650:b0:2e3:191e:7ef7 with SMTP id
- 98e67ed59e1d1-2e5616e8b0amr17044339a91.12.1729596848936; 
- Tue, 22 Oct 2024 04:34:08 -0700 (PDT)
-Received: from [192.168.68.110] ([177.188.133.9])
- by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-2e5e2691e4csm1385304a91.23.2024.10.22.04.34.06
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 22 Oct 2024 04:34:08 -0700 (PDT)
-Message-ID: <4a7075e0-f6a6-42bf-b0ce-5f217f98423e@ventanamicro.com>
-Date: Tue, 22 Oct 2024 08:34:03 -0300
+ d=1e100.net; s=20230601; t=1729601907; x=1730206707;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=hbii7gfZoWiiW2ourDll7zlEm01lJXQYh9cR0oOFQ0k=;
+ b=ILONFjwhHh4p3T+t9kNEHD8lcDVKQBY76HeWT+1vtszy4nthsJoG/soUKvLdFoncqC
+ jS/xmvWep8W8j6Mcovws9e4UnkAGd7VHzSNWJLuatdj7XlMkeoi/QeOaR1zsK/9kOUSQ
+ 239xveXg9lJFPRNMT3jScYoYieUfgDNpSL6SYif2IAzBp+R0QZtYAFGkQF4wcSer7DRH
+ xzZxz6FvVmFnIq43IDJZF7hqFJodfDHLwGsZnfcBg3D1mfMXdIHOXykkH8MirLeE+FDS
+ 2zhQZDVV7hIrBjPYh5/Kzst7SLP3reFU8wBtPua4cuyOiNCnvO6jS2c7OD3hOVoqUcTH
+ O4Cw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCU6CzctQJYA144QZvY1zuHzGqMFdBS+bkFmuccXYaxeH1FvnefpLnzB2UvI5K0VzTacU8isnB2RewgR@nongnu.org
+X-Gm-Message-State: AOJu0Yxhm+Mmyufk1ykgun0R+R5LSD0HRIhjpkouk5/n6Z92scSRWk7g
+ OKtRqGOLyPxX4MPW1pt3gTBI+Q6ZdeqPPfADUSWVNXxOnKJLm5kkGne6aZqRih0SKsE+TQZXtEp
+ /mCIql6iZTTmvXSu5kAwKP/pq8vZhBMF8QtrZ9w==
+X-Google-Smtp-Source: AGHT+IHY1nSqzn4QRvqRvsXTsrEcE9dQxJFpSD3Q+3tgOqTnP2VJ29fn9XFNzCzmqzjq2Iamzt8qN2rdHGbXnIbU5lE=
+X-Received: by 2002:a05:6a00:190f:b0:71e:4196:ddb2 with SMTP id
+ d2e1a72fcca58-71ea3298a1bmr18143987b3a.9.1729601906694; Tue, 22 Oct 2024
+ 05:58:26 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v7 03/14] util: Add RISC-V vector extension probe in
- cpuinfo
-To: Richard Henderson <richard.henderson@linaro.org>, qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, alistair23@gmail.com,
- TANG Tiancheng <tangtiancheng.ttc@alibaba-inc.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
-References: <20241022001134.828724-1-richard.henderson@linaro.org>
- <20241022001134.828724-4-richard.henderson@linaro.org>
-Content-Language: en-US
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <20241022001134.828724-4-richard.henderson@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1035;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pj1-x1035.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+References: <20241009-pmu_event_machine-v1-0-dcbd7a60e3ba@rivosinc.com>
+ <20241009-pmu_event_machine-v1-6-dcbd7a60e3ba@rivosinc.com>
+ <fd89dafa-279d-436c-9569-f2fdc289bac9@yadro.com>
+ <CAHBxVyE2C3sRJNbLOwhOZCnXAUTsEdh-mCewVAEJDDAURL10ug@mail.gmail.com>
+ <3B504AA0-06F9-4316-9B10-ED46B1B271A4@syntacore.com>
+In-Reply-To: <3B504AA0-06F9-4316-9B10-ED46B1B271A4@syntacore.com>
+From: Atish Kumar Patra <atishp@rivosinc.com>
+Date: Tue, 22 Oct 2024 05:58:14 -0700
+Message-ID: <CAHBxVyER0Lxp0uwed7ANW6d6pD1gvSVQ8b245scd+tm7HpT9ag@mail.gmail.com>
+Subject: Re: [PATCH RFC 06/10] target/riscv: Define PMU event related
+ structures
+To: Aleksei Filippov <alexei.filippov@syntacore.com>
+Cc: Alexei Filippov <alexei.filippov@yadro.com>, qemu-riscv@nongnu.org,
+ qemu-devel@nongnu.org, 
+ palmer@dabbelt.com, liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, 
+ bin.meng@windriver.com, dbarboza@ventanamicro.com, alistair.francis@wdc.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2607:f8b0:4864:20::42a;
+ envelope-from=atishp@rivosinc.com; helo=mail-pf1-x42a.google.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -99,138 +99,118 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
+On Mon, Oct 21, 2024 at 6:45=E2=80=AFAM Aleksei Filippov
+<alexei.filippov@syntacore.com> wrote:
+>
+>
+>
+> > On 11 Oct 2024, at 23:45, Atish Kumar Patra <atishp@rivosinc.com> wrote=
+:
+> >
+> > On Thu, Oct 10, 2024 at 5:44=E2=80=AFAM Alexei Filippov
+> > <alexei.filippov@yadro.com> wrote:
+> >>
+> >>
+> >>
+> >> On 10.10.2024 02:09, Atish Patra wrote:
+> >>> Signed-off-by: Atish Patra <atishp@rivosinc.com>
+> >>> ---
+> >>>  target/riscv/cpu.h | 25 +++++++++++++++++++++++++
+> >>>  1 file changed, 25 insertions(+)
+> >>>
+> >>> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+> >>> index 2ac391a7cf74..53426710f73e 100644
+> >>> --- a/target/riscv/cpu.h
+> >>> +++ b/target/riscv/cpu.h
+> >>> @@ -189,6 +189,28 @@ typedef struct PMUFixedCtrState {
+> >>>          uint64_t counter_virt_prev[2];
+> >>>  } PMUFixedCtrState;
+> >>>
+> >>> +typedef uint64_t (*PMU_EVENT_CYCLE_FUNC)(RISCVCPU *);
+> >>> +typedef uint64_t (*PMU_EVENT_INSTRET_FUNC)(RISCVCPU *);
+> >>> +typedef uint64_t (*PMU_EVENT_TLB_FUNC)(RISCVCPU *, MMUAccessType acc=
+ess_type);
+> >>> +
+> >>> +typedef struct PMUEventInfo {
+> >>> +    /* Event ID (BIT [0:55] valid) */
+> >>> +    uint64_t event_id;
+> >>> +    /* Supported hpmcounters for this event */
+> >>> +    uint32_t counter_mask;
+> >>> +    /* Bitmask of valid event bits */
+> >>> +    uint64_t event_mask;
+> >>> +} PMUEventInfo;
+> >>> +
+> >>> +typedef struct PMUEventFunc {
+> >>> +    /* Get the ID of the event that can monitor cycles */
+> >>> +    PMU_EVENT_CYCLE_FUNC get_cycle_id;
+> >>> +    /* Get the ID of the event that can monitor cycles */
+> >>> +    PMU_EVENT_INSTRET_FUNC get_intstret_id;
+> >>> +    /* Get the ID of the event that can monitor TLB events*/
+> >>> +    PMU_EVENT_TLB_FUNC get_tlb_access_id;
+> >> Ok, this is kinda interesting decision, but it's not scalable. AFAIU
+> >
+> > Yes it is not scalable if there is a need to scale as mentioned earlier=
+.
+> > Do you have any other events that can be emulated in Qemu ?
+> >
+> > Having said that, I am okay with single call back though but not too su=
+re
+> > about read/write callback unless there is a use case to support those.
+> >
+> >> none spec provide us full enum of existing events. So anytime when
+> >> somebody will try to implement their own pmu events they would have to
+> >> add additional callbacks, and this structure never will be fulled
+> >> properly. And then we ended up with structure 1000+ callback with only=
+ 5
+> >> machines wich supports pmu events. I suggest my approach with only
+> >> read/write callbacks, where machine can decide by itself how to handle
+> >> any of machine specific events.
+> >
+> > Lot of these events are microarchitectural events which can't be
+> > supported in Qemu.
+> > I don't think it's a good idea at all to add dummy values for all the
+> > events defined in a platform
+> > which is harder to debug for a user.
+>
+> Yes, you're right that the rest of the events are microarchitectural and =
+that they can't be properly simulated in QEMU at the moment, but it seems t=
+o me that's not really the point here. The point is how elastic this soluti=
+on can be - that is, whether to do any events or not and how exactly they s=
+hould be counted should be decided by the vendor of a particular machine, a=
+nd not by the simulator in general. Plus, I have a very real use case where=
+ it will come in handy - debugging perf. Support the possibility of simulat=
+ing events on QEMU side will make the life of t perf folks much easier. I d=
+o not insist specifically on my implementation of this solution, but I thin=
+k that the solution with the creation of a callback for each of the events =
+will significantly complicate the porting of the PMU for machine vendors.
+> >
 
+As I mentioned in other threads, I am absolutely okay with single call
+backs. So Let's do that. However, I am not in favor of adding
+microarchitectural events that we can't support in Qemu with
+completely bogus data. Debugging perf in Qemu can be easily done with
+the current set of events supported. Those are not the most accurate
+but it's a representation of what Qemu is running. Do you foresee any
+debugging issue if we don't support all the events a platform
+advertises ?
 
-On 10/21/24 9:11 PM, Richard Henderson wrote:
-> From: TANG Tiancheng <tangtiancheng.ttc@alibaba-inc.com>
-> 
-> Add support for probing RISC-V vector extension availability in
-> the backend. This information will be used when deciding whether
-> to use vector instructions in code generation.
-> 
-> Cache lg2(vlenb) for the backend. The storing of lg2(vlenb) means
-> we can convert all of the division into subtraction.
-> 
-> While the compiler doesn't support RISCV_HWPROBE_EXT_ZVE64X,
-> we use RISCV_HWPROBE_IMA_V instead. RISCV_HWPROBE_IMA_V is more
-> strictly constrainted than RISCV_HWPROBE_EXT_ZVE64X. At least in
-> current QEMU implemenation, the V vector extension depends on the
-> zve64d extension.
-> 
-> Signed-off-by: TANG Tiancheng <tangtiancheng.ttc@alibaba-inc.com>
-> Reviewed-by: Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
-> Message-ID: <20241007025700.47259-2-zhiwei_liu@linux.alibaba.com>
-> Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
-> ---
-
-Tested with a KVM guest running in an emulated RV host.
-
-
-Tested-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-
->   host/include/riscv/host/cpuinfo.h |  2 ++
->   util/cpuinfo-riscv.c              | 34 ++++++++++++++++++++++++++++++-
->   2 files changed, 35 insertions(+), 1 deletion(-)
-> 
-> diff --git a/host/include/riscv/host/cpuinfo.h b/host/include/riscv/host/cpuinfo.h
-> index 2b00660e36..cdc784e7b6 100644
-> --- a/host/include/riscv/host/cpuinfo.h
-> +++ b/host/include/riscv/host/cpuinfo.h
-> @@ -10,9 +10,11 @@
->   #define CPUINFO_ZBA             (1u << 1)
->   #define CPUINFO_ZBB             (1u << 2)
->   #define CPUINFO_ZICOND          (1u << 3)
-> +#define CPUINFO_ZVE64X          (1u << 4)
->   
->   /* Initialized with a constructor. */
->   extern unsigned cpuinfo;
-> +extern unsigned riscv_lg2_vlenb;
->   
->   /*
->    * We cannot rely on constructor ordering, so other constructors must
-> diff --git a/util/cpuinfo-riscv.c b/util/cpuinfo-riscv.c
-> index 8cacc67645..971c924012 100644
-> --- a/util/cpuinfo-riscv.c
-> +++ b/util/cpuinfo-riscv.c
-> @@ -4,6 +4,7 @@
->    */
->   
->   #include "qemu/osdep.h"
-> +#include "qemu/host-utils.h"
->   #include "host/cpuinfo.h"
->   
->   #ifdef CONFIG_ASM_HWPROBE_H
-> @@ -13,6 +14,7 @@
->   #endif
->   
->   unsigned cpuinfo;
-> +unsigned riscv_lg2_vlenb;
->   static volatile sig_atomic_t got_sigill;
->   
->   static void sigill_handler(int signo, siginfo_t *si, void *data)
-> @@ -34,7 +36,7 @@ static void sigill_handler(int signo, siginfo_t *si, void *data)
->   /* Called both as constructor and (possibly) via other constructors. */
->   unsigned __attribute__((constructor)) cpuinfo_init(void)
->   {
-> -    unsigned left = CPUINFO_ZBA | CPUINFO_ZBB | CPUINFO_ZICOND;
-> +    unsigned left = CPUINFO_ZBA | CPUINFO_ZBB | CPUINFO_ZICOND | CPUINFO_ZVE64X;
->       unsigned info = cpuinfo;
->   
->       if (info) {
-> @@ -50,6 +52,10 @@ unsigned __attribute__((constructor)) cpuinfo_init(void)
->   #endif
->   #if defined(__riscv_arch_test) && defined(__riscv_zicond)
->       info |= CPUINFO_ZICOND;
-> +#endif
-> +#if defined(__riscv_arch_test) && \
-> +    (defined(__riscv_vector) || defined(__riscv_zve64x))
-> +    info |= CPUINFO_ZVE64X;
->   #endif
->       left &= ~info;
->   
-> @@ -69,11 +75,22 @@ unsigned __attribute__((constructor)) cpuinfo_init(void)
->   #ifdef RISCV_HWPROBE_EXT_ZICOND
->               info |= pair.value & RISCV_HWPROBE_EXT_ZICOND ? CPUINFO_ZICOND : 0;
->               left &= ~CPUINFO_ZICOND;
-> +#endif
-> +            /* For rv64, V is Zve64d, a superset of Zve64x. */
-> +            info |= pair.value & RISCV_HWPROBE_IMA_V ? CPUINFO_ZVE64X : 0;
-> +#ifdef RISCV_HWPROBE_EXT_ZVE64X
-> +            info |= pair.value & RISCV_HWPROBE_EXT_ZVE64X ? CPUINFO_ZVE64X : 0;
->   #endif
->           }
->       }
->   #endif /* CONFIG_ASM_HWPROBE_H */
->   
-> +    /*
-> +     * We only detect support for vectors with hwprobe.  All kernels with
-> +     * support for vectors in userspace also support the hwprobe syscall.
-> +     */
-> +    left &= ~CPUINFO_ZVE64X;
-> +
->       if (left) {
->           struct sigaction sa_old, sa_new;
->   
-> @@ -113,6 +130,21 @@ unsigned __attribute__((constructor)) cpuinfo_init(void)
->           assert(left == 0);
->       }
->   
-> +    if (info & CPUINFO_ZVE64X) {
-> +        /*
-> +         * We are guaranteed by RVV-1.0 that VLEN is a power of 2.
-> +         * We are guaranteed by Zve64x that VLEN >= 64, and that
-> +         * EEW of {8,16,32,64} are supported.
-> +         */
-> +        unsigned long vlenb;
-> +        /* csrr %0, vlenb */
-> +        asm volatile(".insn i 0x73, 0x2, %0, zero, -990" : "=r"(vlenb));
-> +        assert(vlenb >= 8);
-> +        assert(is_power_of_2(vlenb));
-> +        /* Cache VLEN in a convenient form. */
-> +        riscv_lg2_vlenb = ctz32(vlenb);
-> +    }
-> +
->       info |= CPUINFO_ALWAYS;
->       cpuinfo = info;
->       return info;
+> >
+> >>> +} PMUEventFunc;
+> >>> +
+> >>>  struct CPUArchState {
+> >>>      target_ulong gpr[32];
+> >>>      target_ulong gprh[32]; /* 64 top bits of the 128-bit registers *=
+/
+> >>> @@ -386,6 +408,9 @@ struct CPUArchState {
+> >>>      target_ulong mhpmeventh_val[RV_MAX_MHPMEVENTS];
+> >>>
+> >>>      PMUFixedCtrState pmu_fixed_ctrs[2];
+> >>> +    PMUEventInfo *pmu_events;
+> >>> +    PMUEventFunc pmu_efuncs;
+> >>> +    int num_pmu_events;
+> >>>
+> >>>      target_ulong sscratch;
+> >>>      target_ulong mscratch;
+>
+>
 
