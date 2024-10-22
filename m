@@ -4,45 +4,45 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1EEC2D17157
-	for <qemu-riscv@archiver.kernel.org>; Tue, 22 Oct 2024 02:48:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E85BED1715C
+	for <qemu-riscv@archiver.kernel.org>; Tue, 22 Oct 2024 03:12:45 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1t34wa-0007Um-U7; Mon, 21 Oct 2024 22:48:24 -0400
+	id 1t35Jz-0002hl-VM; Mon, 21 Oct 2024 23:12:36 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
- id 1t34wY-0007UE-2r; Mon, 21 Oct 2024 22:48:23 -0400
-Received: from out30-100.freemail.mail.aliyun.com ([115.124.30.100])
+ id 1t35Jt-0002hH-2a; Mon, 21 Oct 2024 23:12:29 -0400
+Received: from out30-132.freemail.mail.aliyun.com ([115.124.30.132])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
- id 1t34wV-0004ef-Mo; Mon, 21 Oct 2024 22:48:21 -0400
+ id 1t35Jp-0006jV-Py; Mon, 21 Oct 2024 23:12:28 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=linux.alibaba.com; s=default;
- t=1729565289; h=Message-ID:Date:MIME-Version:Subject:To:From:Content-Type;
- bh=pwjK1CLOh6KAeT03TXuBevborJcYlZBoOMKj9NF9dHU=;
- b=vLQQV23JT8bXaceloBuaQIlm5rs1+JY2rLACB5jNhMJNpxcqYBRVGGDpINknBNtn2ukwuOZHKgh47kBxBMfAWhGCwuSOfb/2IgjyY8mb4lkaeMzYhPCOuAuMJkKOMP0QX7fvYeLAMwiEkKoJkoSBxoyRniFGK9LdS2O80BneAj0=
+ t=1729566734; h=Message-ID:Date:MIME-Version:Subject:To:From:Content-Type;
+ bh=O1YF3MhKvfa4h2+MKp0zvG1Kc+33Z+47MJ8GL8rySwk=;
+ b=xgxG40e5T5Bmmp6hDA8SpprLJ4YxO2HttdywhFIWDjLqeEKH6nqhHMaV2HnJuNJmrQuAx4CSB2k08WAzlUQPGpRVqZMRW4+MUr+8sZzxc0u9SidhX45ktkvyP5FPGgDjyGudbtAGYe/kyEHcSj9kLUwM4Jh+T5sv8c/XOP6VNgk=
 Received: from 30.166.64.99(mailfrom:zhiwei_liu@linux.alibaba.com
- fp:SMTPD_---0WHgJT.1_1729565288 cluster:ay36) by smtp.aliyun-inc.com;
- Tue, 22 Oct 2024 10:48:08 +0800
-Message-ID: <1de83c56-fae4-4082-b55d-f48f04313ee0@linux.alibaba.com>
-Date: Tue, 22 Oct 2024 10:48:06 +0800
+ fp:SMTPD_---0WHgKM.S_1729566732 cluster:ay36) by smtp.aliyun-inc.com;
+ Tue, 22 Oct 2024 11:12:12 +0800
+Message-ID: <b82a2350-9115-4bb3-9aa4-46f7c5087927@linux.alibaba.com>
+Date: Tue, 22 Oct 2024 11:12:11 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v6 01/14] tcg: Reset data_gen_ptr correctly
+Subject: Re: [PATCH v6 02/14] disas/riscv: Fix vsetivli disassembly
 To: Richard Henderson <richard.henderson@linaro.org>, qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, qemu-stable@nongnu.org
+Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com
 References: <20241016193140.2206352-1-richard.henderson@linaro.org>
- <20241016193140.2206352-2-richard.henderson@linaro.org>
+ <20241016193140.2206352-3-richard.henderson@linaro.org>
 Content-Language: en-US
 From: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
-In-Reply-To: <20241016193140.2206352-2-richard.henderson@linaro.org>
+In-Reply-To: <20241016193140.2206352-3-richard.henderson@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=115.124.30.100;
+Received-SPF: pass client-ip=115.124.30.132;
  envelope-from=zhiwei_liu@linux.alibaba.com;
- helo=out30-100.freemail.mail.aliyun.com
+ helo=out30-132.freemail.mail.aliyun.com
 X-Spam_score_int: -174
 X-Spam_score: -17.5
 X-Spam_bar: -----------------
@@ -69,39 +69,46 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 
 On 2024/10/17 03:31, Richard Henderson wrote:
-> This pointer needs to be reset after overflow just like
-> code_buf and code_ptr.
+> The first immediate field is unsigned, whereas operand_vimm
+> extracts a signed value.  There is no need to mask the result
+> with 'u'; just print the immediate with 'i'.
 >
-> Cc: qemu-stable@nongnu.org
-> Fixes: 57a269469db ("tcg: Infrastructure for managing constant pools")
+> Fixes: 07f4964d178 ("disas/riscv.c: rvv: Add disas support for vector instructions")
 > Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
 > ---
->   tcg/tcg.c | 2 +-
->   1 file changed, 1 insertion(+), 1 deletion(-)
+>   disas/riscv.h | 2 +-
+>   disas/riscv.c | 2 +-
+>   2 files changed, 2 insertions(+), 2 deletions(-)
 >
-> diff --git a/tcg/tcg.c b/tcg/tcg.c
-> index 5decd83cf4..0babae1b88 100644
-> --- a/tcg/tcg.c
-> +++ b/tcg/tcg.c
-> @@ -1399,7 +1399,6 @@ TranslationBlock *tcg_tb_alloc(TCGContext *s)
->           goto retry;
->       }
->       qatomic_set(&s->code_gen_ptr, next);
-> -    s->data_gen_ptr = NULL;
->       return tb;
->   }
->   
-> @@ -6172,6 +6171,7 @@ int tcg_gen_code(TCGContext *s, TranslationBlock *tb, uint64_t pc_start)
->        */
->       s->code_buf = tcg_splitwx_to_rw(tb->tc.ptr);
->       s->code_ptr = s->code_buf;
-> +    s->data_gen_ptr = NULL;
->   
->   #ifdef TCG_TARGET_NEED_LDST_LABELS
->       QSIMPLEQ_INIT(&s->ldst_labels);
+> diff --git a/disas/riscv.h b/disas/riscv.h
+> index 16a08e4895..0d1f89ce8a 100644
+> --- a/disas/riscv.h
+> +++ b/disas/riscv.h
+> @@ -290,7 +290,7 @@ enum {
+>   #define rv_fmt_fd_vs2                 "O\t3,F"
+>   #define rv_fmt_vd_vm                  "O\tDm"
+>   #define rv_fmt_vsetvli                "O\t0,1,v"
+> -#define rv_fmt_vsetivli               "O\t0,u,v"
+> +#define rv_fmt_vsetivli               "O\t0,i,v"
+>   #define rv_fmt_rs1_rs2_zce_ldst       "O\t2,i(1)"
+>   #define rv_fmt_push_rlist             "O\tx,-i"
+>   #define rv_fmt_pop_rlist              "O\tx,i"
+> diff --git a/disas/riscv.c b/disas/riscv.c
+> index 5965574d87..fc0331b90b 100644
+> --- a/disas/riscv.c
+> +++ b/disas/riscv.c
+> @@ -4808,7 +4808,7 @@ static void decode_inst_operands(rv_decode *dec, rv_isa isa)
+>           break;
+>       case rv_codec_vsetivli:
+>           dec->rd = operand_rd(inst);
+> -        dec->imm = operand_vimm(inst);
+> +        dec->imm = extract32(inst, 15, 5);
 
 Reviewed-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
 
 Zhiwei
 
+>           dec->vzimm = operand_vzimm10(inst);
+>           break;
+>       case rv_codec_zcb_lb:
 
