@@ -4,45 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E85BED1715C
-	for <qemu-riscv@archiver.kernel.org>; Tue, 22 Oct 2024 03:12:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 92F05D1CDA1
+	for <qemu-riscv@archiver.kernel.org>; Tue, 22 Oct 2024 06:32:53 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1t35Jz-0002hl-VM; Mon, 21 Oct 2024 23:12:36 -0400
+	id 1t38RP-0004CP-2l; Tue, 22 Oct 2024 02:32:27 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
- id 1t35Jt-0002hH-2a; Mon, 21 Oct 2024 23:12:29 -0400
-Received: from out30-132.freemail.mail.aliyun.com ([115.124.30.132])
+ id 1t38RF-0004BP-DS; Tue, 22 Oct 2024 02:32:17 -0400
+Received: from out30-124.freemail.mail.aliyun.com ([115.124.30.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
- id 1t35Jp-0006jV-Py; Mon, 21 Oct 2024 23:12:28 -0400
+ id 1t38RB-0004BA-MN; Tue, 22 Oct 2024 02:32:16 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=linux.alibaba.com; s=default;
- t=1729566734; h=Message-ID:Date:MIME-Version:Subject:To:From:Content-Type;
- bh=O1YF3MhKvfa4h2+MKp0zvG1Kc+33Z+47MJ8GL8rySwk=;
- b=xgxG40e5T5Bmmp6hDA8SpprLJ4YxO2HttdywhFIWDjLqeEKH6nqhHMaV2HnJuNJmrQuAx4CSB2k08WAzlUQPGpRVqZMRW4+MUr+8sZzxc0u9SidhX45ktkvyP5FPGgDjyGudbtAGYe/kyEHcSj9kLUwM4Jh+T5sv8c/XOP6VNgk=
+ t=1729578721; h=Message-ID:Date:MIME-Version:Subject:To:From:Content-Type;
+ bh=xFTHWmABz7tTVY3vzZrSJi7pXmKj27C/4N/K+UFrAoo=;
+ b=TFkjoL3ccZX2BM8/WjmBOMXz8dFDnTgAhW9uXhfrfsWuQFnyaSYZHjVbDyDfsPYLMzhsXcTgKHGy8kR2T1fidA6G0CRpWH/FlW7PRUuVKikzeOMop9uMLJiI8LaWp+W9q74h0BT31vsvlQ/1OFzFP1GiJzhrsBoR6qWR+kSm8qQ=
 Received: from 30.166.64.99(mailfrom:zhiwei_liu@linux.alibaba.com
- fp:SMTPD_---0WHgKM.S_1729566732 cluster:ay36) by smtp.aliyun-inc.com;
- Tue, 22 Oct 2024 11:12:12 +0800
-Message-ID: <b82a2350-9115-4bb3-9aa4-46f7c5087927@linux.alibaba.com>
-Date: Tue, 22 Oct 2024 11:12:11 +0800
+ fp:SMTPD_---0WHgxZCG_1729578719 cluster:ay36) by smtp.aliyun-inc.com;
+ Tue, 22 Oct 2024 14:32:00 +0800
+Message-ID: <2fb117f7-55ca-4b07-838e-3ba629605e2b@linux.alibaba.com>
+Date: Tue, 22 Oct 2024 14:31:59 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v6 02/14] disas/riscv: Fix vsetivli disassembly
+Subject: Re: [PATCH v6 09/14] tcg/riscv: Accept constant first argument to
+ sub_vec
 To: Richard Henderson <richard.henderson@linaro.org>, qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com
 References: <20241016193140.2206352-1-richard.henderson@linaro.org>
- <20241016193140.2206352-3-richard.henderson@linaro.org>
+ <20241016193140.2206352-10-richard.henderson@linaro.org>
 Content-Language: en-US
 From: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
-In-Reply-To: <20241016193140.2206352-3-richard.henderson@linaro.org>
+In-Reply-To: <20241016193140.2206352-10-richard.henderson@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=115.124.30.132;
+Received-SPF: pass client-ip=115.124.30.124;
  envelope-from=zhiwei_liu@linux.alibaba.com;
- helo=out30-132.freemail.mail.aliyun.com
+ helo=out30-124.freemail.mail.aliyun.com
 X-Spam_score_int: -174
 X-Spam_score: -17.5
 X-Spam_bar: -----------------
@@ -69,46 +70,55 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 
 On 2024/10/17 03:31, Richard Henderson wrote:
-> The first immediate field is unsigned, whereas operand_vimm
-> extracts a signed value.  There is no need to mask the result
-> with 'u'; just print the immediate with 'i'.
+> Use vrsub.vi to subtract from a constant.
 >
-> Fixes: 07f4964d178 ("disas/riscv.c: rvv: Add disas support for vector instructions")
 > Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
 > ---
->   disas/riscv.h | 2 +-
->   disas/riscv.c | 2 +-
->   2 files changed, 2 insertions(+), 2 deletions(-)
+>   tcg/riscv/tcg-target-con-set.h | 1 +
+>   tcg/riscv/tcg-target.c.inc     | 8 ++++++--
+>   2 files changed, 7 insertions(+), 2 deletions(-)
 >
-> diff --git a/disas/riscv.h b/disas/riscv.h
-> index 16a08e4895..0d1f89ce8a 100644
-> --- a/disas/riscv.h
-> +++ b/disas/riscv.h
-> @@ -290,7 +290,7 @@ enum {
->   #define rv_fmt_fd_vs2                 "O\t3,F"
->   #define rv_fmt_vd_vm                  "O\tDm"
->   #define rv_fmt_vsetvli                "O\t0,1,v"
-> -#define rv_fmt_vsetivli               "O\t0,u,v"
-> +#define rv_fmt_vsetivli               "O\t0,i,v"
->   #define rv_fmt_rs1_rs2_zce_ldst       "O\t2,i(1)"
->   #define rv_fmt_push_rlist             "O\tx,-i"
->   #define rv_fmt_pop_rlist              "O\tx,i"
-> diff --git a/disas/riscv.c b/disas/riscv.c
-> index 5965574d87..fc0331b90b 100644
-> --- a/disas/riscv.c
-> +++ b/disas/riscv.c
-> @@ -4808,7 +4808,7 @@ static void decode_inst_operands(rv_decode *dec, rv_isa isa)
+> diff --git a/tcg/riscv/tcg-target-con-set.h b/tcg/riscv/tcg-target-con-set.h
+> index 97e6ecdb0f..d8ce5414f5 100644
+> --- a/tcg/riscv/tcg-target-con-set.h
+> +++ b/tcg/riscv/tcg-target-con-set.h
+> @@ -25,6 +25,7 @@ C_O0_I2(v, r)
+>   C_O1_I1(v, r)
+>   C_O1_I1(v, v)
+>   C_O1_I2(v, v, v)
+> +C_O1_I2(v, vK, v)
+>   C_O1_I2(v, v, vK)
+>   C_O1_I2(v, v, vL)
+>   C_O1_I4(v, v, vL, vK, vK)
+> diff --git a/tcg/riscv/tcg-target.c.inc b/tcg/riscv/tcg-target.c.inc
+> index ce8d6d0293..1ce2f291d3 100644
+> --- a/tcg/riscv/tcg-target.c.inc
+> +++ b/tcg/riscv/tcg-target.c.inc
+> @@ -2350,7 +2350,11 @@ static void tcg_out_vec_op(TCGContext *s, TCGOpcode opc,
 >           break;
->       case rv_codec_vsetivli:
->           dec->rd = operand_rd(inst);
-> -        dec->imm = operand_vimm(inst);
-> +        dec->imm = extract32(inst, 15, 5);
+>       case INDEX_op_sub_vec:
+>           set_vtype_len_sew(s, type, vece);
+> -        tcg_out_opc_vv(s, OPC_VSUB_VV, a0, a1, a2);
+> +        if (const_args[1]) {
+> +            tcg_out_opc_vi(s, OPC_VRSUB_VI, a0, a2, a1);
+> +        } else {
+> +            tcg_out_opc_vv(s, OPC_VSUB_VV, a0, a1, a2);
+> +        }
+>           break;
+>       case INDEX_op_and_vec:
+>           set_vtype_len(s, type);
+> @@ -2565,7 +2569,7 @@ static TCGConstraintSetIndex tcg_target_op_def(TCGOpcode op)
+>       case INDEX_op_xor_vec:
+>           return C_O1_I2(v, v, vK);
+>       case INDEX_op_sub_vec:
+> -        return C_O1_I2(v, v, v);
+> +        return C_O1_I2(v, vK, v);
 
 Reviewed-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
 
 Zhiwei
 
->           dec->vzimm = operand_vzimm10(inst);
->           break;
->       case rv_codec_zcb_lb:
+>       case INDEX_op_cmp_vec:
+>           return C_O1_I2(v, v, vL);
+>       case INDEX_op_cmpsel_vec:
 
