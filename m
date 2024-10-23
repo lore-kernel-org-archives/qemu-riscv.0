@@ -4,78 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 73DBACDDE5B
-	for <qemu-riscv@archiver.kernel.org>; Wed, 23 Oct 2024 10:19:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1E395CDDE60
+	for <qemu-riscv@archiver.kernel.org>; Wed, 23 Oct 2024 10:45:08 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1t3YSs-0006Z0-Gr; Wed, 23 Oct 2024 06:19:42 -0400
+	id 1t3Yr6-00044O-EY; Wed, 23 Oct 2024 06:44:44 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <jim.shu@sifive.com>)
- id 1t3YSp-0006YZ-Qo
- for qemu-riscv@nongnu.org; Wed, 23 Oct 2024 06:19:39 -0400
-Received: from mail-lf1-x12e.google.com ([2a00:1450:4864:20::12e])
+ id 1t3Yr0-00043v-Kj
+ for qemu-riscv@nongnu.org; Wed, 23 Oct 2024 06:44:39 -0400
+Received: from mail-ed1-x52a.google.com ([2a00:1450:4864:20::52a])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <jim.shu@sifive.com>)
- id 1t3YSn-00013K-NN
- for qemu-riscv@nongnu.org; Wed, 23 Oct 2024 06:19:39 -0400
-Received: by mail-lf1-x12e.google.com with SMTP id
- 2adb3069b0e04-53a007743e7so8049435e87.1
- for <qemu-riscv@nongnu.org>; Wed, 23 Oct 2024 03:19:36 -0700 (PDT)
+ id 1t3Yqz-0003sv-1H
+ for qemu-riscv@nongnu.org; Wed, 23 Oct 2024 06:44:38 -0400
+Received: by mail-ed1-x52a.google.com with SMTP id
+ 4fb4d7f45d1cf-5cb6ca2a776so3704360a12.0
+ for <qemu-riscv@nongnu.org>; Wed, 23 Oct 2024 03:44:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1729678775; x=1730283575; darn=nongnu.org;
+ d=sifive.com; s=google; t=1729680275; x=1730285075; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=WRLEGApwpGdGi+H55ZQdwD4cV1bsdddx0DAwJ56BiGI=;
- b=SyyKlV5vXiBts0qgzvhMNUy+133MHajkgeCeGcHAU17YjH3TlgIYhtecZuAxTKHK7Y
- ywdSbtXBR5+oHtPxwSIhds/nXaybyLtzYiHO+LyLKw8uD++1xWB0rtkiGDhNta3dU6DH
- aDp1h8gm0BMzyBLRyj4vXklqTtv5FJhc82JQuje9vsfsqvcDZt+WGJsdXclh2KXG915N
- 60yFv7f1yPA6T1a+GG2YNhQ1mczvU0FIXDUCrv1QB2J+q2adW7r5uMTh8lfcOqsWCbp5
- c0HXnzXjWVLmoPzU6f6/bN2HqiLWyVkORa/tpCF4lc1LnOBjdGFnTRFI6YwDgu56+tvX
- HUyA==
+ bh=6voQqeBGqGRn2k0+8ETvq4vqsdlUli5wFPu2mtBUFgw=;
+ b=RvcaIkl+cDfJnwB87k/CBRSovWOF4JNVoD4qvSrNDMgQOQzqK9fJBH4myyxCqSRDD7
+ 7swlLRzz1iFrNCcs54WyKi/gmurDexUszzz1eJZR0wWq0RFKetNygQISDMy35wrGrXgP
+ BlsGPVo91AahDcl9nnwIbCeV+l/CEEQmktahxxgzgSb4JbYM4pT/zLvJttfv13fVTFpB
+ zhyQ0kWpOySskEI9jm9t0fRVD0iRxZUJgSiwOEw2qYqFg0HfEF/c6E2zaKCRtBwVuej2
+ 1Jn0CgNtMIgn4cYET2xuSkEPM5gSq8KX1oG1V2FGr8ZJkHTSyq9O4vkJKKBRDMH4RSlB
+ r6rQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729678775; x=1730283575;
+ d=1e100.net; s=20230601; t=1729680275; x=1730285075;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=WRLEGApwpGdGi+H55ZQdwD4cV1bsdddx0DAwJ56BiGI=;
- b=tiDGJL6iznv67da9/HuOtwEaIHolalpdyklEDJNcanXOj/w1SD2npm+oyMRl8xUNBN
- 32MnCLgiKpf17A+tgwr7S/1jXD+MsDsMdncYcOLpPG/dxWiWpXxzr3Hq8Be1n2Z4JeYh
- TiVpGx8De5d3ZjrcaJKtBzOi2U4+5OXZeCLpoYDxkztDnmFNBQj7WIyNhyfT4ebIOqgV
- OcyoDjsmx2z1N7MDEFzQmingSLRd8BsBn0VBj+UhZ1adfyQmvFkKmsCzGJIdY5zkSeXs
- NayyB7MZvyEculbPpTHGlBEUYOD37OOgttMkMiUoB0YJculPUDjOuvy538t63nxl/+AD
- 9t2g==
+ bh=6voQqeBGqGRn2k0+8ETvq4vqsdlUli5wFPu2mtBUFgw=;
+ b=jFXXrUpZX00TaEf1SAlMomOhDkwb2S3WreqSFKjMP93jQG68fXexHv5IvaYhCOaRx1
+ guBBMejGfZ6oM/9X0qRTds+P7A9f1LfaIlTHpLgcpHeqK/24M8g9jJx0dRJ7ef3S7DyQ
+ u9gzVJfuxv8RYEQsWbl/EhkdEl4f6eHg2Z2ionybotmETfGxitAqzDuX9CRV8XS2FJQU
+ Lkm+Hc2SPapohNXY00VDHYM7/c7K5edjHvUjYnicKAPqnrhwNZdyVY/fc8SyTkInIg7E
+ uAq/1WakeUsCLYOcaIryTd9rvwkDtJIGx1lZB9ZlZUAFaSheQIglDNIdSd+p+F1K+6KG
+ uGiw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXs4QTDyvVTvHJuJ36Xy3lGCzhU0CI+PcPr7Op6FewjAOrAZJ4yrhvGYxy2HpljCCjg4VLoF+6SJ5O7@nongnu.org
-X-Gm-Message-State: AOJu0YxKv/Eo+esAbOezqz5IpcaBdIvH1XfNcR4A5PjeCM4EP6+CxBxR
- OZXi8VxDHk+cFtbnHVTahVtNloxSgqy4bDoJ6S8E2x9oWj2MGCNfl6S4ZVLyoNM32JyjduTI9Cv
- kWkHokw7NpmhOhpN61uWkbxbUdz9coVOfDneP1w==
-X-Google-Smtp-Source: AGHT+IED6r7UVuT3+KM99rLXtSm9Vypcu90WjhQ9PherDVmGgj5QiVl7ynXSrsAY6nTEpiSYVBw5y/qz8QmUdVrWKT8=
-X-Received: by 2002:a05:6512:401a:b0:539:f953:2da7 with SMTP id
- 2adb3069b0e04-53b1a3a70a5mr1000871e87.50.1729678775209; Wed, 23 Oct 2024
- 03:19:35 -0700 (PDT)
+ AJvYcCXUwx8OE6Q3LxmbFoI+J3m/lWZMTEx74XLP36EL2UimTZn0xRJE9XVn3eOFisg1UUUDC/a8o/cSW4+8@nongnu.org
+X-Gm-Message-State: AOJu0YxEkmICuHl9oFlQXfFqJKOiwtfcMllvchMVpCOZGX9Hbe7v5Oq+
+ lpR/J1dPhx9K3xOdZ7AGIlnKr8lXkm0oZCUQ+N5FQMgs+3KtKsGGPcQZplu8oCGdrdkNKIbKPxq
+ 0+arnhs2AwEIEelrM8TxDDBCBqofJYiBf36VAgA==
+X-Google-Smtp-Source: AGHT+IEFtI3KZawPe1QOK/LIxXDNRizKsJRpBAcr2lza9v3Oc+5bXi3CRjbkjZJUNSf+u9MEWI+OcTHR9X4YKFJ3P5k=
+X-Received: by 2002:a05:6402:e0f:b0:5cb:85f6:3d31 with SMTP id
+ 4fb4d7f45d1cf-5cb8ad04b23mr1719531a12.20.1729680274979; Wed, 23 Oct 2024
+ 03:44:34 -0700 (PDT)
 MIME-Version: 1.0
 References: <20241021040942.400-1-jim.shu@sifive.com>
- <20241021040942.400-2-jim.shu@sifive.com>
- <7a631349-accf-49b0-a679-f62b1cfb4b1c@ventanamicro.com>
-In-Reply-To: <7a631349-accf-49b0-a679-f62b1cfb4b1c@ventanamicro.com>
+ <20241021040942.400-3-jim.shu@sifive.com>
+ <25ae806f-38de-425f-8590-1c605d93197d@ventanamicro.com>
+In-Reply-To: <25ae806f-38de-425f-8590-1c605d93197d@ventanamicro.com>
 From: Jim Shu <jim.shu@sifive.com>
-Date: Wed, 23 Oct 2024 18:19:19 +0800
-Message-ID: <CALw707qX6XzHPyL3uj2AHBxNvQ7_-yaRhVcNoCcwPgtM7mP74A@mail.gmail.com>
-Subject: Re: [PATCH 1/2] hw/riscv: Support to load DTB after 3GB memory on
- 64-bit system.
+Date: Wed, 23 Oct 2024 18:44:19 +0800
+Message-ID: <CALw707phA0mqXiOFsWj-Ci8y5pZQa5EaeopssiVJ93i_QZKGHQ@mail.gmail.com>
+Subject: Re: [PATCH 2/2] hw/riscv: Support different address-cells for initrd
 To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, 
  Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <alistair.francis@wdc.com>, 
  Bin Meng <bmeng.cn@gmail.com>, Weiwei Li <liwei1518@gmail.com>, 
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, Conor Dooley <conor@kernel.org>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2a00:1450:4864:20::12e;
- envelope-from=jim.shu@sifive.com; helo=mail-lf1-x12e.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::52a;
+ envelope-from=jim.shu@sifive.com; helo=mail-ed1-x52a.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -98,248 +97,88 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Mon, Oct 21, 2024 at 9:42=E2=80=AFPM Daniel Henrique Barboza
+Compare Linux code to handle "linux,initrd-start" [1] and
+"linux,usable-memory-range" [2], I think the initrd code doesn't check
+root #address-cells.
+Using the origin code of "u64" is okay. I can remove this commit in
+the next version.
+
+[1] https://elixir.bootlin.com/linux/v6.11.4/source/drivers/of/fdt.c#L785
+[2] https://elixir.bootlin.com/linux/v6.11.4/source/drivers/of/fdt.c#L857
+
+Thanks,
+Jim Shu
+
+On Tue, Oct 22, 2024 at 3:30=E2=80=AFAM Daniel Henrique Barboza
 <dbarboza@ventanamicro.com> wrote:
 >
 >
 >
 > On 10/21/24 1:09 AM, Jim Shu wrote:
-> > Larger initrd image will overlap the DTB at 3GB address. Since 64-bit
-> > system doesn't have 32-bit addressable issue, we just load DTB to the e=
-nd
-> > of dram in 64-bit system.
+> > The cells of 'initrd-start/end' should follow the '#address-cell'.
+> > QEMU API could support 1 and 2 cells.
 > >
 > > Signed-off-by: Jim Shu <jim.shu@sifive.com>
 > > ---
-> >   hw/riscv/boot.c            | 8 ++++++--
-> >   hw/riscv/microchip_pfsoc.c | 4 ++--
-> >   hw/riscv/sifive_u.c        | 4 ++--
-> >   hw/riscv/spike.c           | 4 ++--
-> >   hw/riscv/virt.c            | 2 +-
-> >   include/hw/riscv/boot.h    | 2 +-
-> >   6 files changed, 14 insertions(+), 10 deletions(-)
+> >   hw/riscv/boot.c | 14 ++++++++++++--
+> >   1 file changed, 12 insertions(+), 2 deletions(-)
 > >
 > > diff --git a/hw/riscv/boot.c b/hw/riscv/boot.c
-> > index 9115ecd91f..ad45bd7a6a 100644
+> > index ad45bd7a6a..76b099c696 100644
 > > --- a/hw/riscv/boot.c
 > > +++ b/hw/riscv/boot.c
-> > @@ -293,7 +293,7 @@ out:
-> >    * The FDT is fdt_packed() during the calculation.
-> >    */
-> >   uint64_t riscv_compute_fdt_addr(hwaddr dram_base, hwaddr dram_size,
-> > -                                MachineState *ms)
-> > +                                MachineState *ms, RISCVHartArrayState =
-*harts)
-> >   {
-> >       int ret =3D fdt_pack(ms->fdt);
-> >       hwaddr dram_end, temp;
-> > @@ -321,7 +321,11 @@ uint64_t riscv_compute_fdt_addr(hwaddr dram_base, =
-hwaddr dram_size,
-> >        * Thus, put it at an 2MB aligned address that less than fdt size=
- from the
-> >        * end of dram or 3GB whichever is lesser.
-> >        */
-> > -    temp =3D (dram_base < 3072 * MiB) ? MIN(dram_end, 3072 * MiB) : dr=
-am_end;
-> > +    if (!riscv_is_32bit(harts)) {
-> > +        temp =3D dram_end;
-> > +    } else {
-> > +        temp =3D (dram_base < 3072 * MiB) ? MIN(dram_end, 3072 * MiB) =
-: dram_end;
-> > +    }
+> > @@ -182,6 +182,7 @@ static void riscv_load_initrd(MachineState *machine=
+, uint64_t kernel_entry)
+> >       void *fdt =3D machine->fdt;
+> >       hwaddr start, end;
+> >       ssize_t size;
+> > +    uint32_t acells;
+> >
+> >       g_assert(filename !=3D NULL);
+> >
+> > @@ -209,9 +210,18 @@ static void riscv_load_initrd(MachineState *machin=
+e, uint64_t kernel_entry)
+> >
+> >       /* Some RISC-V machines (e.g. opentitan) don't have a fdt. */
+> >       if (fdt) {
+> > +        acells =3D qemu_fdt_getprop_cell(fdt, "/", "#address-cells",
+> > +                                       NULL, NULL);
+> > +        if (acells =3D=3D 0) {
+> > +            error_report("dtb file invalid (#address-cells 0)");
+> > +            exit(1);
+> > +        }
+> > +
+> >           end =3D start + size;
+> > -        qemu_fdt_setprop_u64(fdt, "/chosen", "linux,initrd-start", sta=
+rt);
+> > -        qemu_fdt_setprop_u64(fdt, "/chosen", "linux,initrd-end", end);
+> > +        qemu_fdt_setprop_sized_cells(fdt, "/chosen", "linux,initrd-sta=
+rt",
+> > +                                     acells, start);
+> > +        qemu_fdt_setprop_sized_cells(fdt, "/chosen", "linux,initrd-end=
+",
+> > +                                     acells, end);
+> >       }
 >
-> I think it's a fine idea to do a different computation if we're running a=
- 64 bit
-> CPU but this alone won't fix the issue you're reporting.
+> Is this a legal format for linux,initrd-start and linux,initrd-end?
 >
-> Running a 64-bit CPU does not guarantee that 'dram_end' will be enough to=
- fit
-> kernel+initrd and the fdt. There's no correlation between running 64 bits=
- and having
-> enough RAM to fit everything, i.e. you can run a 64-bit CPU with short RA=
-M and end
-> up with the same problem. There's also the board mem topology to account =
-for: the
-> Microchip board will always use a 1GB ram bank ('dram_end' will be always=
- 1Gb max)
-> running 32 or 64 bit CPUs.
+> This link:
 >
-> It seems that we also need to consider the end of kernel+initrd to proper=
-ly tune
-> where to put the fdt, erroring out if we don't have enough size for every=
-thing.
-> This would make the logic work regardless of the word size of the CPU.
+> https://www.kernel.org/doc/Documentation/devicetree/bindings/chosen.txt
 >
-> This information is calculated in riscv_load_kernel(), which is currently
-> returning only the kernel start addr.  We have the information we need wr=
-itten in
-> the FDT as "/chosen/linux,initrd-end" but that isn't enough because this =
-attribute
-> is written only if we have an initrd. We would hit the same problem again=
- if we
-> have a big enough kernel in an low enough RAM env.
+> Defines both attributes as:
 >
-> First thing that comes to mind is to use an abstraction like
+> "These properties hold the physical start and end address of an initrd th=
+at's
+> loaded by the bootloader."
 >
-> typedef struct RISCVBootProps {
->      uint64_t kernel_start;
->      uint64_t kernel_end;
->      bool is_64bit;
-> } RISCVKernelProps;
->
-> And use it to allow riscv_load_kernel() to write both kernel_start (the c=
-urrent
-> return value) and kernel_end (that can be either kernel_start + kernel_si=
-ze or,
-> if we have an initrd, the value written in linux,initrd-end). riscv_compu=
-te_fdt_addr()
-> would then use this as an extra arg and then we have the 'kernel_end' val=
-ue to
-> calculate the fdt_addr too.
+> So I'm not sure if this format you're using here is valid.
 >
 >
->
-> In fact, I think this can be further extended to fully encapsulate the bo=
-ot process
-> of all boards, that are kind of doing the same thing with all these helpe=
-rs, into a
-> single 'super function' that would receive a struct like the one from abo=
-ve (with
-> more properties), setting all the boot parameters the board needs, pass i=
-t to a single
-> function that does everything and just use the result as each board wants=
-. This
-> is something that we might play around with but it'll be something for th=
-e next
-> release.
->
->
-> Thanks,
+> Conor, care to weight in? Thanks,
 >
 > Daniel
-
-Thanks for the feedback. I can try to add the checking of overlapping
-between initrd and dtb in the V2 patch.
-I think it may change some boot APIs in "hw/riscv/boot.c"
-
-ARM has an abstraction of the most info in `struct arm_boot_info`, so
-it can add checkings in the functions like
-`arm_setup_direct_kernel_boot()`.
-We may do the similar work but be simpler at first.
-
-
-Thanks,
-Jim Shu
-
 >
->
->
-> >
-> >       return QEMU_ALIGN_DOWN(temp - fdtsize, 2 * MiB);
 > >   }
-> > diff --git a/hw/riscv/microchip_pfsoc.c b/hw/riscv/microchip_pfsoc.c
-> > index f9a3b43d2e..ba8b0a2c26 100644
-> > --- a/hw/riscv/microchip_pfsoc.c
-> > +++ b/hw/riscv/microchip_pfsoc.c
-> > @@ -519,7 +519,7 @@ static void microchip_icicle_kit_machine_init(Machi=
-neState *machine)
-> >       bool kernel_as_payload =3D false;
-> >       target_ulong firmware_end_addr, kernel_start_addr;
-> >       uint64_t kernel_entry;
-> > -    uint32_t fdt_load_addr;
-> > +    uint64_t fdt_load_addr;
-> >       DriveInfo *dinfo =3D drive_get(IF_SD, 0, 0);
 > >
-> >       /* Sanity check on RAM size */
-> > @@ -625,7 +625,7 @@ static void microchip_icicle_kit_machine_init(Machi=
-neState *machine)
-> >           /* Compute the fdt load address in dram */
-> >           fdt_load_addr =3D riscv_compute_fdt_addr(memmap[MICROCHIP_PFS=
-OC_DRAM_LO].base,
-> >                                                  memmap[MICROCHIP_PFSOC=
-_DRAM_LO].size,
-> > -                                               machine);
-> > +                                               machine, &s->soc.u_cpus=
-);
-> >           riscv_load_fdt(fdt_load_addr, machine->fdt);
-> >
-> >           /* Load the reset vector */
-> > diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
-> > index 9b3dcf3a7a..fd974f2357 100644
-> > --- a/hw/riscv/sifive_u.c
-> > +++ b/hw/riscv/sifive_u.c
-> > @@ -519,7 +519,7 @@ static void sifive_u_machine_init(MachineState *mac=
-hine)
-> >       const char *firmware_name;
-> >       uint32_t start_addr_hi32 =3D 0x00000000;
-> >       int i;
-> > -    uint32_t fdt_load_addr;
-> > +    uint64_t fdt_load_addr;
-> >       uint64_t kernel_entry;
-> >       DriveInfo *dinfo;
-> >       BlockBackend *blk;
-> > @@ -606,7 +606,7 @@ static void sifive_u_machine_init(MachineState *mac=
-hine)
-> >
-> >       fdt_load_addr =3D riscv_compute_fdt_addr(memmap[SIFIVE_U_DEV_DRAM=
-].base,
-> >                                              memmap[SIFIVE_U_DEV_DRAM].=
-size,
-> > -                                           machine);
-> > +                                           machine, &s->soc.u_cpus);
-> >       riscv_load_fdt(fdt_load_addr, machine->fdt);
-> >
-> >       if (!riscv_is_32bit(&s->soc.u_cpus)) {
-> > diff --git a/hw/riscv/spike.c b/hw/riscv/spike.c
-> > index fceb91d946..acd7ab1ae1 100644
-> > --- a/hw/riscv/spike.c
-> > +++ b/hw/riscv/spike.c
-> > @@ -201,7 +201,7 @@ static void spike_board_init(MachineState *machine)
-> >       hwaddr firmware_load_addr =3D memmap[SPIKE_DRAM].base;
-> >       target_ulong kernel_start_addr;
-> >       char *firmware_name;
-> > -    uint32_t fdt_load_addr;
-> > +    uint64_t fdt_load_addr;
-> >       uint64_t kernel_entry;
-> >       char *soc_name;
-> >       int i, base_hartid, hart_count;
-> > @@ -317,7 +317,7 @@ static void spike_board_init(MachineState *machine)
-> >
-> >       fdt_load_addr =3D riscv_compute_fdt_addr(memmap[SPIKE_DRAM].base,
-> >                                              memmap[SPIKE_DRAM].size,
-> > -                                           machine);
-> > +                                           machine, &s->soc[0]);
-> >       riscv_load_fdt(fdt_load_addr, machine->fdt);
-> >
-> >       /* load the reset vector */
-> > diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-> > index ee3129f3b3..cfbeeaf7d5 100644
-> > --- a/hw/riscv/virt.c
-> > +++ b/hw/riscv/virt.c
-> > @@ -1399,7 +1399,7 @@ static void virt_machine_done(Notifier *notifier,=
- void *data)
-> >
-> >       fdt_load_addr =3D riscv_compute_fdt_addr(memmap[VIRT_DRAM].base,
-> >                                              memmap[VIRT_DRAM].size,
-> > -                                           machine);
-> > +                                           machine, &s->soc[0]);
-> >       riscv_load_fdt(fdt_load_addr, machine->fdt);
-> >
-> >       /* load the reset vector */
-> > diff --git a/include/hw/riscv/boot.h b/include/hw/riscv/boot.h
-> > index 18bfe9f7bf..7ccbe5f62a 100644
-> > --- a/include/hw/riscv/boot.h
-> > +++ b/include/hw/riscv/boot.h
-> > @@ -49,7 +49,7 @@ target_ulong riscv_load_kernel(MachineState *machine,
-> >                                  bool load_initrd,
-> >                                  symbol_fn_t sym_cb);
-> >   uint64_t riscv_compute_fdt_addr(hwaddr dram_start, uint64_t dram_size=
-,
-> > -                                MachineState *ms);
-> > +                                MachineState *ms, RISCVHartArrayState =
-*harts);
-> >   void riscv_load_fdt(hwaddr fdt_addr, void *fdt);
-> >   void riscv_setup_rom_reset_vec(MachineState *machine, RISCVHartArrayS=
-tate *harts,
-> >                                  hwaddr saddr,
 
