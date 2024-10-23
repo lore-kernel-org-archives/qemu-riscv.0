@@ -4,69 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AF505D2C560
-	for <qemu-riscv@archiver.kernel.org>; Tue, 22 Oct 2024 14:45:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9F0D9D2E008
+	for <qemu-riscv@archiver.kernel.org>; Wed, 23 Oct 2024 02:37:07 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1t3G7s-0005rA-As; Tue, 22 Oct 2024 10:44:48 -0400
+	id 1t3RDT-000552-QV; Tue, 22 Oct 2024 22:35:20 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <jonathan.cameron@huawei.com>)
- id 1t3G7o-0005kf-1H; Tue, 22 Oct 2024 10:44:44 -0400
-Received: from frasgout.his.huawei.com ([185.176.79.56])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <jonathan.cameron@huawei.com>)
- id 1t3G7m-0000U9-Jb; Tue, 22 Oct 2024 10:44:43 -0400
-Received: from mail.maildlp.com (unknown [172.18.186.231])
- by frasgout.his.huawei.com (SkyGuard) with ESMTP id 4XXw0b2ftvz6JBBn;
- Tue, 22 Oct 2024 22:43:43 +0800 (CST)
-Received: from frapeml500008.china.huawei.com (unknown [7.182.85.71])
- by mail.maildlp.com (Postfix) with ESMTPS id BD65B1400DB;
- Tue, 22 Oct 2024 22:44:38 +0800 (CST)
-Received: from localhost (10.203.177.66) by frapeml500008.china.huawei.com
- (7.182.85.71) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.1.2507.39; Tue, 22 Oct
- 2024 16:44:37 +0200
-Date: Tue, 22 Oct 2024 15:44:36 +0100
-To: Zhao Liu <zhao1.liu@intel.com>
-CC: "Daniel P . =?ISO-8859-1?Q?Berrang=E9?=" <berrange@redhat.com>, "Igor
- Mammedov" <imammedo@redhat.com>, Eduardo Habkost <eduardo@habkost.net>,
- Marcel Apfelbaum <marcel.apfelbaum@gmail.com>, Philippe =?ISO-8859-1?Q?Ma?=
- =?ISO-8859-1?Q?thieu-Daud=E9?= <philmd@linaro.org>, Yanan Wang
- <wangyanan55@huawei.com>, "Michael S.Tsirkin " <mst@redhat.com>, "Paolo
- Bonzini" <pbonzini@redhat.com>, Richard Henderson
- <richard.henderson@linaro.org>, Eric Blake <eblake@redhat.com>, "Markus
- Armbruster" <armbru@redhat.com>, Marcelo Tosatti <mtosatti@redhat.com>, Alex
- =?ISO-8859-1?Q?Benn=E9e?= <alex.bennee@linaro.org>, Peter Maydell
- <peter.maydell@linaro.org>, Sia Jee Heng <jeeheng.sia@starfivetech.com>,
- Alireza Sanaee <alireza.sanaee@huawei.com>, <qemu-devel@nongnu.org>,
- <kvm@vger.kernel.org>, <qemu-riscv@nongnu.org>, <qemu-arm@nongnu.org>,
- "Zhenyu Wang" <zhenyu.z.wang@intel.com>, Dapeng Mi
- <dapeng1.mi@linux.intel.com>
-Subject: Re: [PATCH v4 5/9] hw/core: Add a helper to check the cache
- topology level
-Message-ID: <20241022154436.000028af@Huawei.com>
-In-Reply-To: <20241022135151.2052198-6-zhao1.liu@intel.com>
-References: <20241022135151.2052198-1-zhao1.liu@intel.com>
- <20241022135151.2052198-6-zhao1.liu@intel.com>
-Organization: Huawei Technologies Research and Development (UK) Ltd.
-X-Mailer: Claws Mail 4.1.0 (GTK 3.24.33; x86_64-w64-mingw32)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1t3RDE-00050v-CS; Tue, 22 Oct 2024 22:35:04 -0400
+Received: from mail-vk1-xa2a.google.com ([2607:f8b0:4864:20::a2a])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1t3RDC-0001qE-4e; Tue, 22 Oct 2024 22:35:04 -0400
+Received: by mail-vk1-xa2a.google.com with SMTP id
+ 71dfb90a1353d-50d431b0ae2so237389e0c.1; 
+ Tue, 22 Oct 2024 19:35:00 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1729650899; x=1730255699; darn=nongnu.org;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=VJLZu3wfzWsMU2KyeCkcJ12E76myWXaAn0vOgGxkH10=;
+ b=gJgimGyZ3xTOVwa3b+XGsitIxHF7wVK9ZBNcy6WcMWsY69hDRscnRtc8CuGyFo2G48
+ 2lV8wnvE1fTZOi+M+/lxI7VOFiS7Yc1ypPUKRe9GN73SEn/5yFauONiUaCN3ovG4QJ2V
+ kiK0pVmE6k8Nevlsr/ReAesOCqGyKxzqGOTOtY2IQ8SQid/YRV1i+Ei3p3RQzwM+g4ls
+ ydCdHN432pvFQArzMHzzFPZmxIlxDSwZ0OVKOqYFenIXXBRJJpBFitRHBOcvO7XdJ0lT
+ tI1kmn/Av9UkwOPaJ+GVX75Zfdi3sLna0vskR42joWbiT+lVUSkBq+dQ84N9nasNkorA
+ 1cNQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1729650899; x=1730255699;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=VJLZu3wfzWsMU2KyeCkcJ12E76myWXaAn0vOgGxkH10=;
+ b=S0nxiYNsqViinlY5ZDQJYVhrxwuu8p7UblrzXtP9kmaLrfICkRFbvEOGlk01z3BiWa
+ v13AYH0H76MQueVISKZ/y0ZmTDlFP4/yzLDaEEnH6LSL6r5LATCkKFeYInFoHRT6ISXc
+ 5UELWHYtgX9tkdDKuNN2JslDI6y72Xig3fpQlI08UhRs/OasAMA1MdKThQx5R0b+We1f
+ r0/ITx+dZh7QfQMmkiVhINxLjXLSbnb4K5eT5Pd3lzMGsyj5end72xciUFC06gSQ1AxL
+ okHE5ewOnWOWJO80SSSs0TKPQNCDk9MbVU7eogWYoiX3D07xokTbg+pNG8l1jqdk64VK
+ ToUA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWq4/mCi/pus/orrxPTj5US0fssWJXy23kSi76xVurJ12eeXEDYk21nEe25EmED3aIc/+0DV0xzVskL@nongnu.org
+X-Gm-Message-State: AOJu0YxWJRimVSI6KUIrlEgmiQ3AAnaovUKpUJ64jU8/ctIZLo05s3iv
+ LnbWaxgWlJbNIqq8Fx/NVshXRn91tQh93+p67zGxfe/+K5Yf50aqSiiiIjrXOG0BnPhrlCUOvAG
+ ulyu/4OPo5vG47j4gIP9LNHmmuZs=
+X-Google-Smtp-Source: AGHT+IHf2vyEuQdzcJnt8LRAiH7NqF7MfE9waoSMNDg1s5spV7NK+SQ5ILEgXmMKNtyVsJ3F9kYZ3YVlDTILBfK/hvA=
+X-Received: by 2002:a05:6122:3221:b0:50d:45e1:f32c with SMTP id
+ 71dfb90a1353d-50fb2ef568amr5152540e0c.2.1729650899259; Tue, 22 Oct 2024
+ 19:34:59 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="US-ASCII"
-Content-Transfer-Encoding: 7bit
-X-Originating-IP: [10.203.177.66]
-X-ClientProxiedBy: lhrpeml100004.china.huawei.com (7.191.162.219) To
- frapeml500008.china.huawei.com (7.182.85.71)
-Received-SPF: pass client-ip=185.176.79.56;
- envelope-from=jonathan.cameron@huawei.com; helo=frasgout.his.huawei.com
-X-Spam_score_int: -41
-X-Spam_score: -4.2
-X-Spam_bar: ----
-X-Spam_report: (-4.2 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_MED=-2.3,
- RCVD_IN_MSPIKE_H3=0.001, RCVD_IN_MSPIKE_WL=0.001,
- RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001, RCVD_IN_VALIDITY_SAFE_BLOCKED=0.001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+References: <20241022001134.828724-1-richard.henderson@linaro.org>
+ <20241022001134.828724-10-richard.henderson@linaro.org>
+In-Reply-To: <20241022001134.828724-10-richard.henderson@linaro.org>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Wed, 23 Oct 2024 12:34:33 +1000
+Message-ID: <CAKmqyKOMZQsy333uGYquoBA9SHep8yHaCFmxHH_3n42OrxHDtg@mail.gmail.com>
+Subject: Re: [PATCH v7 09/14] tcg/riscv: Accept constant first argument to
+ sub_vec
+To: Richard Henderson <richard.henderson@linaro.org>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, dbarboza@ventanamicro.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2607:f8b0:4864:20::a2a;
+ envelope-from=alistair23@gmail.com; helo=mail-vk1-xa2a.google.com
+X-Spam_score_int: -17
+X-Spam_score: -1.8
+X-Spam_bar: -
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -79,34 +89,67 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-Reply-to:  Jonathan Cameron <Jonathan.Cameron@Huawei.com>
-From:  Jonathan Cameron via <qemu-riscv@nongnu.org>
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Resend. Claws-mail is still chewing up the to list for unknown reasons
-and I forgot to fix it by hand.
+On Tue, Oct 22, 2024 at 10:11=E2=80=AFAM Richard Henderson
+<richard.henderson@linaro.org> wrote:
+>
+> Use vrsub.vi to subtract from a constant.
+>
+> Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
 
-On Tue, 22 Oct 2024 21:51:47 +0800
-Zhao Liu <zhao1.liu@intel.com> wrote:
+Acked-by: Alistair Francis <alistair.francis@wdc.com>
 
-> Currently, we have no way to expose the arch-specific default cache
-> model because the cache model is sometimes related to the CPU model
-> (e.g., i386).
-> 
-> Since the user might configure "default" level, any comparison with
-> "default" is meaningless before the machine knows the specific level
-> that "default" refers to.
-> 
-> We can only check the correctness of the cache topology after the arch
-> loads the user-configured cache model from MachineState.smp_cache and
-> consumes the special "default" level by replacing it with the specific
-> level.
-> 
-> Signed-off-by: Zhao Liu <zhao1.liu@intel.com>
-Looks like useful sanity check code to me.
-Reviewed-by: Jonathan Cameron <Jonathan.Cameron@huawei.com>
+Alistair
 
-
-
+> ---
+>  tcg/riscv/tcg-target-con-set.h | 1 +
+>  tcg/riscv/tcg-target.c.inc     | 8 ++++++--
+>  2 files changed, 7 insertions(+), 2 deletions(-)
+>
+> diff --git a/tcg/riscv/tcg-target-con-set.h b/tcg/riscv/tcg-target-con-se=
+t.h
+> index 97e6ecdb0f..d8ce5414f5 100644
+> --- a/tcg/riscv/tcg-target-con-set.h
+> +++ b/tcg/riscv/tcg-target-con-set.h
+> @@ -25,6 +25,7 @@ C_O0_I2(v, r)
+>  C_O1_I1(v, r)
+>  C_O1_I1(v, v)
+>  C_O1_I2(v, v, v)
+> +C_O1_I2(v, vK, v)
+>  C_O1_I2(v, v, vK)
+>  C_O1_I2(v, v, vL)
+>  C_O1_I4(v, v, vL, vK, vK)
+> diff --git a/tcg/riscv/tcg-target.c.inc b/tcg/riscv/tcg-target.c.inc
+> index ce8d6d0293..1ce2f291d3 100644
+> --- a/tcg/riscv/tcg-target.c.inc
+> +++ b/tcg/riscv/tcg-target.c.inc
+> @@ -2350,7 +2350,11 @@ static void tcg_out_vec_op(TCGContext *s, TCGOpcod=
+e opc,
+>          break;
+>      case INDEX_op_sub_vec:
+>          set_vtype_len_sew(s, type, vece);
+> -        tcg_out_opc_vv(s, OPC_VSUB_VV, a0, a1, a2);
+> +        if (const_args[1]) {
+> +            tcg_out_opc_vi(s, OPC_VRSUB_VI, a0, a2, a1);
+> +        } else {
+> +            tcg_out_opc_vv(s, OPC_VSUB_VV, a0, a1, a2);
+> +        }
+>          break;
+>      case INDEX_op_and_vec:
+>          set_vtype_len(s, type);
+> @@ -2565,7 +2569,7 @@ static TCGConstraintSetIndex tcg_target_op_def(TCGO=
+pcode op)
+>      case INDEX_op_xor_vec:
+>          return C_O1_I2(v, v, vK);
+>      case INDEX_op_sub_vec:
+> -        return C_O1_I2(v, v, v);
+> +        return C_O1_I2(v, vK, v);
+>      case INDEX_op_cmp_vec:
+>          return C_O1_I2(v, v, vL);
+>      case INDEX_op_cmpsel_vec:
+> --
+> 2.43.0
+>
 
