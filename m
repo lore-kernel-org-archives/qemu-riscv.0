@@ -4,63 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 96B94CFA478
-	for <qemu-riscv@archiver.kernel.org>; Thu, 24 Oct 2024 10:30:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0876ACFA457
+	for <qemu-riscv@archiver.kernel.org>; Thu, 24 Oct 2024 10:30:45 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1t3v5W-0001PO-NU; Thu, 24 Oct 2024 06:29:06 -0400
+	id 1t3v57-0000ps-Mp; Thu, 24 Oct 2024 06:28:41 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <phil@philjordan.eu>)
- id 1t3v5U-0001Mh-GH
- for qemu-riscv@nongnu.org; Thu, 24 Oct 2024 06:29:04 -0400
-Received: from mail-ej1-x632.google.com ([2a00:1450:4864:20::632])
+ id 1t3v54-0000nt-Jn
+ for qemu-riscv@nongnu.org; Thu, 24 Oct 2024 06:28:38 -0400
+Received: from mail-ej1-x631.google.com ([2a00:1450:4864:20::631])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <phil@philjordan.eu>)
- id 1t3v5P-0008LQ-Ll
- for qemu-riscv@nongnu.org; Thu, 24 Oct 2024 06:29:04 -0400
-Received: by mail-ej1-x632.google.com with SMTP id
- a640c23a62f3a-a9a0f198d38so94864866b.1
- for <qemu-riscv@nongnu.org>; Thu, 24 Oct 2024 03:28:59 -0700 (PDT)
+ id 1t3v4t-00087w-CW
+ for qemu-riscv@nongnu.org; Thu, 24 Oct 2024 06:28:38 -0400
+Received: by mail-ej1-x631.google.com with SMTP id
+ a640c23a62f3a-a9acafdb745so153004266b.0
+ for <qemu-riscv@nongnu.org>; Thu, 24 Oct 2024 03:28:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=philjordan-eu.20230601.gappssmtp.com; s=20230601; t=1729765738; x=1730370538;
+ d=philjordan-eu.20230601.gappssmtp.com; s=20230601; t=1729765704; x=1730370504;
  darn=nongnu.org; 
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=S6Db/cvMMYo0kjOvyKFTXFs2E1xARh8XKyK0zLYpqeA=;
- b=qbaEvt39sMcWV17chPLqvAiSP4hDNvAm6zv6GnlifbZHg9VhJFzKAOPmb2LayQ/z21
- /uRXkmoTlP3cQ5nVpdUt0oEPpCZsu6fVSTYCKoJ+/f6sCMgoYIqYJYCcWWGbTRN+A3Lm
- 5OX+T2WqWpAhvFjdOUjDbbRM28LOo4S/Eyg6Ev8dmYqDdn0wbG3beb4Qoq26gVK46uPU
- Gpgvs9Atw/DzwRvniM7d919CfEq7RVeDLuPjo1jZhIYDmQsfkz8QVs810j5JhPV+/9UQ
- Sutaz/YhJmS0HCNjfJZJ34jQUaoYqJ0Ge9pa8fLIP9cRM06vJh14AEhmPbru/PxF8bo3
- xsXA==
+ bh=awe07NOksR1ao1OasiHRde1JNGh5DYeYO6Ef7uq8wQo=;
+ b=ZYV8QUT5q08k8i5tRsTYl6HAPszXN+ZSN5Unq32+SbrWmwyayAKBfA0+rnd4KHL57u
+ np5bb4nZY+s2BlFFIhU6y/JH5n/lDwlmjHydt9c6ccqwyAl8nbwrxgD+CmLZdN/P5exS
+ YbQFTDZj+mBagwQo/AqR6bSnJi+IgxB6x11sE4sTU8sQurhHU3hGCuiLLqrUetlU3Rrj
+ OVzqJTDnk4RapWcCG+vyMGXRR0FIUjRvZ6liDHuoHK4sGTuEH6NxQrrDa6IMh9sCO76F
+ 2d0Ebif7Sbt30G54YnfGvcJGW87panKfGFGEeGT/h/i1DiSRXthEhwdXzoFTZk+CnDws
+ lU7A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729765738; x=1730370538;
+ d=1e100.net; s=20230601; t=1729765704; x=1730370504;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=S6Db/cvMMYo0kjOvyKFTXFs2E1xARh8XKyK0zLYpqeA=;
- b=w2HHHsJKntj/H5kOZAp1+WSG7LgXkBIXjamFVusnXxFnl66mqau1rHve5JdW4pZQuJ
- mK98I4iRwYp033v7Vp8O37OT75J+VdRogYoIe0MxDG1mPenKt8EuT7NK28ZmG6/WdRJx
- UeeFkgnM+0n+ccyGB1vshG7PRzj8Iri9Vtx6CnKqTjxE2ugzH2AgfXWhvYqtnmPfDmtH
- zVtci9ud0XmDXd+uUyUswEyHkBCWGvBz63YhbgIZDMMHA7kxRj23dVKVT4fpTdr+VPLK
- lQiKYjZj6/Dod5HLOSyNZPyyXHxsulFLpP2StWlzo80uNyz0C6ppWZ4zKA0HKVcMpkS2
- B3Qg==
+ bh=awe07NOksR1ao1OasiHRde1JNGh5DYeYO6Ef7uq8wQo=;
+ b=QD3nQ94LdA6GEzDhpLrz+Bg6wXuehWZ0kvgRDXidEy045XXrM0pmfUSV4swENm1+Fc
+ B3pZ2pPMv4+w0IkkXZVuyEbqBpB0MPQ7WI9bvdDJGUKsHYwH3SI7TLS9vIODqeZ2OmY+
+ CmB/gpjED3V/+bQ4IB30dhOCzflnqLZc8haCX2LrqlxFx54fCSI1Ip6I2/XGr2ED4utc
+ Rt5YjdyC45qLmVsoz5U1X+1a1K0xhuAf9xFjUCiUWCi4ucsugs7sRoDup45tLHzZMoiZ
+ XpHrizNHwh9QMm8V7o87me35zkybZfgqqso/HhD7FjiP/EA+X5Iir7o0R9grqbOWVXjm
+ HHFg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVWvfxbSI5dDYLbmHUTxwffPSJJs2cRcX/diuUnXOPuQUKZ50t8SUfnW6xFILuJ0Ty1pNBC81jO6Fbe@nongnu.org
-X-Gm-Message-State: AOJu0YxsjhouaPvIC/AsvhFFJcXhT4rTQfhNMPxYNtLF0RV7UYtU79ZQ
- F5+c/+A9uQ34cghBAL7K0J3XJAJKJbSdSFbi/XWMeGY/Z+21OO0ayojDAHNjmw==
-X-Google-Smtp-Source: AGHT+IGv+8qakHOLzAIT08ZVKR6o3fJogwztS56JwtXYRcddcYRFinzlO6Ea7odPJlAW1KK9GQuOOA==
-X-Received: by 2002:a17:907:9813:b0:a9a:a7fd:d840 with SMTP id
- a640c23a62f3a-a9abf84d168mr541868966b.1.1729765737800; 
- Thu, 24 Oct 2024 03:28:57 -0700 (PDT)
+ AJvYcCV1Qrj8oOXruDN4xmxyUHsNYhGhQ9H0RUc39gJlDPSLGP04CawnTdlfQmQJfuMDUShG5aiw8WEzn8Sn@nongnu.org
+X-Gm-Message-State: AOJu0YxgG9lj2tJ5Hpa71WC4NbSWh6wZUwQ8GXfFsv8C379He04MaHVw
+ P/A/JbAXvUBTV2DL9WyvgEDn56GYUviidlWKVOqcr3IGhLtt3EiGI4IOTxToHw==
+X-Google-Smtp-Source: AGHT+IFnwOlVGXvu5vMdnRrj88KCizIA04RU/tOWWBoYvFgXUz86j957W1cQi3V/VPCBA1bIERXcYA==
+X-Received: by 2002:a17:907:7211:b0:a9a:ca:4436 with SMTP id
+ a640c23a62f3a-a9ad19a8b5amr159060266b.13.1729765704224; 
+ Thu, 24 Oct 2024 03:28:24 -0700 (PDT)
 Received: from localhost.localdomain (h082218084190.host.wavenet.at.
  [82.218.84.190]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a9a913706d3sm601019066b.134.2024.10.24.03.28.56
+ a640c23a62f3a-a9a913706d3sm601019066b.134.2024.10.24.03.28.22
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Thu, 24 Oct 2024 03:28:57 -0700 (PDT)
+ Thu, 24 Oct 2024 03:28:23 -0700 (PDT)
 From: Phil Dennis-Jordan <phil@philjordan.eu>
 To: qemu-devel@nongnu.org
 Cc: agraf@csgraf.de, phil@philjordan.eu, peter.maydell@linaro.org,
@@ -74,18 +74,18 @@ Cc: agraf@csgraf.de, phil@philjordan.eu, peter.maydell@linaro.org,
  dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com,
  jcmvbkbc@gmail.com, marcandre.lureau@redhat.com, berrange@redhat.com,
  akihiko.odaki@daynix.com, qemu-arm@nongnu.org, qemu-block@nongnu.org,
- qemu-riscv@nongnu.org, Alexander Graf <graf@amazon.com>
-Subject: [PATCH v4 15/15] hw/vmapple/vmapple: Add vmapple machine type
-Date: Thu, 24 Oct 2024 12:28:13 +0200
-Message-Id: <20241024102813.9855-16-phil@philjordan.eu>
+ qemu-riscv@nongnu.org
+Subject: [PATCH v4 01/15] ui & main loop: Redesign of system-specific main
+ thread event handling
+Date: Thu, 24 Oct 2024 12:27:59 +0200
+Message-Id: <20241024102813.9855-2-phil@philjordan.eu>
 X-Mailer: git-send-email 2.39.3 (Apple Git-145)
 In-Reply-To: <20241024102813.9855-1-phil@philjordan.eu>
 References: <20241024102813.9855-1-phil@philjordan.eu>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: neutral client-ip=2a00:1450:4864:20::632;
- envelope-from=phil@philjordan.eu; helo=mail-ej1-x632.google.com
+Received-SPF: neutral client-ip=2a00:1450:4864:20::631;
+ envelope-from=phil@philjordan.eu; helo=mail-ej1-x631.google.com
 X-Spam_score_int: -10
 X-Spam_score: -1.1
 X-Spam_bar: -
@@ -107,858 +107,462 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Alexander Graf <graf@amazon.com>
+macOS's Cocoa event handling must be done on the initial (main) thread
+of the process. Furthermore, if library or application code uses
+libdispatch, the main dispatch queue must be handling events on the main
+thread as well.
 
-Apple defines a new "vmapple" machine type as part of its proprietary
-macOS Virtualization.Framework vmm. This machine type is similar to the
-virt one, but with subtle differences in base devices, a few special
-vmapple device additions and a vastly different boot chain.
+So far, this has affected Qemu in both the Cocoa and SDL UIs, although
+in different ways: the Cocoa UI replaces the default qemu_main function
+with one that spins Qemu's internal main event loop off onto a
+background thread. SDL (which uses Cocoa internally) on the other hand
+uses a polling approach within Qemu's main event loop. Events are
+polled during the SDL UI's dpy_refresh callback, which happens to run
+on the main thread by default.
 
-This patch reimplements this machine type in QEMU. To use it, you
-have to have a readily installed version of macOS for VMApple,
-run on macOS with -accel hvf, pass the Virtualization.Framework
-boot rom (AVPBooter) in via -bios, pass the aux and root volume as pflash
-and pass aux and root volume as virtio drives. In addition, you also
-need to find the machine UUID and pass that as -M vmapple,uuid= parameter:
+As UIs are mutually exclusive, this works OK as long as nothing else
+needs platform-native event handling. In the next patch, a new device is
+introduced based on the ParavirtualizedGraphics.framework in macOS.
+This uses libdispatch internally, and only works when events are being
+handled on the main runloop. With the current system, it works when
+using either the Cocoa or the SDL UI. However, it does not when running
+headless. Moreover, any attempt to install a similar scheme to the
+Cocoa UI's main thread replacement fails when combined with the SDL
+UI.
 
-$ qemu-system-aarch64 -accel hvf -M vmapple,uuid=0x1234 -m 4G \
-    -bios /System/Library/Frameworks/Virtualization.framework/Versions/A/Resources/AVPBooter.vmapple2.bin
-    -drive file=aux,if=pflash,format=raw \
-    -drive file=root,if=pflash,format=raw \
-    -drive file=aux,if=none,id=aux,format=raw \
-    -device vmapple-virtio-aux,drive=aux \
-    -drive file=root,if=none,id=root,format=raw \
-    -device vmapple-virtio-root,drive=root
+This change formalises main thread handling. UI (Display) and OS
+platform implementations can declare requirements or preferences:
 
-With all these in place, you should be able to see macOS booting
-successfully.
+ * The Cocoa UI specifies that Qemu's main loop must run on a
+   background thread and provides a function to run on the main thread
+   which runs the NSApplication event handling runloop.
+ * The SDL UI specifies that Qemu's main loop must run on the main
+   thread.
+ * For other UIs, or in the absence of UIs, the platform's default
+   behaviour is followed.
+ * The Darwin platform provides a default function to run on the
+   main thread, which runs the main CFRunLoop.
+ * Other OSes do not provide their own default main function and thus
+   fall back to running Qemu's main loop on the main thread, as usual.
 
-Known issues:
- - Keyboard and mouse/tablet input is laggy. The reason for this is
-   either that macOS's XHCI driver is broken when the device/platform
-   does not support MSI/MSI-X, or there's some unfortunate interplay
-   with Qemu's XHCI implementation in this scenario.
- - Currently only macOS 12 guests are supported. The boot process for
-   13+ will need further investigation and adjustment.
+This means that on macOS, the platform's runloop events are always
+handled, regardless of chosen UI. The new PV graphics device will
+thus work in all configurations.
 
-Signed-off-by: Alexander Graf <graf@amazon.com>
-Co-authored-by: Phil Dennis-Jordan <phil@philjordan.eu>
 Signed-off-by: Phil Dennis-Jordan <phil@philjordan.eu>
 ---
-v3:
- * Rebased on latest upstream, updated affinity and NIC creation
-API usage
- * Included Apple-variant virtio-blk in build dependency
- * Updated API usage for setting 'redist-region-count' array-typed property on GIC.
- * Switched from virtio HID devices (for which macOS 12 does not contain drivers) to an XHCI USB controller and USB HID devices.
+ include/qemu-main.h       |  3 +--
+ include/qemu/typedefs.h   |  1 +
+ include/sysemu/os-posix.h |  2 ++
+ include/sysemu/os-win32.h |  2 ++
+ include/ui/console.h      | 12 +++++++++
+ os-posix.c                | 20 ++++++++++++++
+ system/main.c             | 45 +++++++++++++++++++++++++++-----
+ system/vl.c               |  2 ++
+ ui/cocoa.m                | 55 +++++++++------------------------------
+ ui/console.c              | 32 +++++++++++++++++++++--
+ ui/sdl2.c                 |  2 ++
+ ui/trace-events           |  1 +
+ 12 files changed, 123 insertions(+), 54 deletions(-)
 
-v4:
- * Fixups for v4 changes to the other patches in the set.
- * Corrected the assert macro to use
- * Removed superfluous endian conversions corresponding to cfg's.
- * Init error handling improvement.
- * No need to select CPU type on TCG, as only HVF is supported.
- * Machine type version bumped to 9.2
- * #include order improved
-
- MAINTAINERS                 |   1 +
- docs/system/arm/vmapple.rst |  63 ++++
- docs/system/target-arm.rst  |   1 +
- hw/vmapple/Kconfig          |  20 ++
- hw/vmapple/meson.build      |   1 +
- hw/vmapple/vmapple.c        | 652 ++++++++++++++++++++++++++++++++++++
- 6 files changed, 738 insertions(+)
- create mode 100644 docs/system/arm/vmapple.rst
- create mode 100644 hw/vmapple/vmapple.c
-
-diff --git a/MAINTAINERS b/MAINTAINERS
-index 104813ed85f..f44418b4a95 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -2739,6 +2739,7 @@ R: Phil Dennis-Jordan <phil@philjordan.eu>
- S: Maintained
- F: hw/vmapple/*
- F: include/hw/vmapple/*
-+F: docs/system/arm/vmapple.rst
+diff --git a/include/qemu-main.h b/include/qemu-main.h
+index 940960a7dbc..4bd0d667edc 100644
+--- a/include/qemu-main.h
++++ b/include/qemu-main.h
+@@ -5,7 +5,6 @@
+ #ifndef QEMU_MAIN_H
+ #define QEMU_MAIN_H
  
- Subsystems
- ----------
-diff --git a/docs/system/arm/vmapple.rst b/docs/system/arm/vmapple.rst
-new file mode 100644
-index 00000000000..acb921ffb35
---- /dev/null
-+++ b/docs/system/arm/vmapple.rst
-@@ -0,0 +1,63 @@
-+VMApple machine emulation
-+========================================================================================
-+
-+VMApple is the device model that the macOS built-in hypervisor called "Virtualization.framework"
-+exposes to Apple Silicon macOS guests. The "vmapple" machine model in QEMU implements the same
-+device model, but does not use any code from Virtualization.Framework.
-+
-+Prerequisites
-+-------------
-+
-+To run the vmapple machine model, you need to
-+
-+ * Run on Apple Silicon
-+ * Run on macOS 12.0 or above
-+ * Have an already installed copy of a Virtualization.Framework macOS 12 virtual machine. I will
-+   assume that you installed it using the macosvm CLI.
-+
-+First, we need to extract the UUID from the virtual machine that you installed. You can do this
-+by running the following shell script:
-+
-+.. code-block:: bash
-+  :caption: uuid.sh script to extract the UUID from a macosvm.json file
-+
-+  #!/bin/bash
-+
-+  MID=$(cat "$1" | python3 -c 'import json,sys;obj=json.load(sys.stdin);print(obj["machineId"]);')
-+  echo "$MID" | base64 -d | plutil -extract ECID raw -
-+
-+Now we also need to trim the aux partition. It contains metadata that we can just discard:
-+
-+.. code-block:: bash
-+  :caption: Command to trim the aux file
-+
-+  $ dd if="aux.img" of="aux.img.trimmed" bs=$(( 0x4000 )) skip=1
-+
-+How to run
-+----------
-+
-+Then, we can launch QEMU with the Virtualization.Framework pre-boot environment and the readily
-+installed target disk images. I recommend to port forward the VM's ssh and vnc ports to the host
-+to get better interactive access into the target system:
-+
-+.. code-block:: bash
-+  :caption: Example execution command line
-+
-+  $ UUID=$(uuid.sh macosvm.json)
-+  $ AVPBOOTER=/System/Library/Frameworks/Virtualization.framework/Resources/AVPBooter.vmapple2.bin
-+  $ AUX=aux.img.trimmed
-+  $ DISK=disk.img
-+  $ qemu-system-aarch64 \
-+       -serial mon:stdio \
-+       -m 4G \
-+       -accel hvf \
-+       -M vmapple,uuid=$UUID \
-+       -bios $AVPBOOTER \
-+        -drive file="$AUX",if=pflash,format=raw \
-+        -drive file="$DISK",if=pflash,format=raw \
-+       -drive file="$AUX",if=none,id=aux,format=raw \
-+       -drive file="$DISK",if=none,id=root,format=raw \
-+       -device vmapple-virtio-aux,drive=aux \
-+       -device vmapple-virtio-root,drive=root \
-+       -net user,ipv6=off,hostfwd=tcp::2222-:22,hostfwd=tcp::5901-:5900 \
-+       -net nic,model=virtio-net-pci \
-diff --git a/docs/system/target-arm.rst b/docs/system/target-arm.rst
-index 3c0a5848453..f2e0ac99537 100644
---- a/docs/system/target-arm.rst
-+++ b/docs/system/target-arm.rst
-@@ -102,6 +102,7 @@ undocumented; you can get a complete list by running
-    arm/stellaris
-    arm/stm32
-    arm/virt
-+   arm/vmapple
-    arm/xenpvh
-    arm/xlnx-versal-virt
-    arm/xlnx-zynq
-diff --git a/hw/vmapple/Kconfig b/hw/vmapple/Kconfig
-index bcd1be63e3c..6a4c4a7fa2e 100644
---- a/hw/vmapple/Kconfig
-+++ b/hw/vmapple/Kconfig
-@@ -10,3 +10,23 @@ config VMAPPLE_CFG
- config VMAPPLE_VIRTIO_BLK
-     bool
+-int qemu_default_main(void);
+-extern int (*qemu_main)(void);
++extern qemu_main_fn qemu_main;
  
-+config VMAPPLE
-+    bool
-+    depends on ARM
-+    depends on HVF
-+    default y if ARM
-+    imply PCI_DEVICES
-+    select ARM_GIC
-+    select PLATFORM_BUS
-+    select PCI_EXPRESS
-+    select PCI_EXPRESS_GENERIC_BRIDGE
-+    select PL011 # UART
-+    select PL031 # RTC
-+    select PL061 # GPIO
-+    select GPIO_PWR
-+    select PVPANIC_MMIO
-+    select VMAPPLE_AES
-+    select VMAPPLE_BDIF
-+    select VMAPPLE_CFG
-+    select MAC_PVG_MMIO
-+    select VMAPPLE_VIRTIO_BLK
-diff --git a/hw/vmapple/meson.build b/hw/vmapple/meson.build
-index bf17cf906c9..e572f7d5602 100644
---- a/hw/vmapple/meson.build
-+++ b/hw/vmapple/meson.build
-@@ -2,3 +2,4 @@ system_ss.add(when: 'CONFIG_VMAPPLE_AES',  if_true: files('aes.c'))
- system_ss.add(when: 'CONFIG_VMAPPLE_BDIF', if_true: files('bdif.c'))
- system_ss.add(when: 'CONFIG_VMAPPLE_CFG',  if_true: files('cfg.c'))
- system_ss.add(when: 'CONFIG_VMAPPLE_VIRTIO_BLK',  if_true: files('virtio-blk.c'))
-+specific_ss.add(when: 'CONFIG_VMAPPLE',     if_true: files('vmapple.c'))
-diff --git a/hw/vmapple/vmapple.c b/hw/vmapple/vmapple.c
-new file mode 100644
-index 00000000000..b9454c07eee
---- /dev/null
-+++ b/hw/vmapple/vmapple.c
-@@ -0,0 +1,652 @@
+ #endif /* QEMU_MAIN_H */
+diff --git a/include/qemu/typedefs.h b/include/qemu/typedefs.h
+index 3d84efcac47..b02cfe1f328 100644
+--- a/include/qemu/typedefs.h
++++ b/include/qemu/typedefs.h
+@@ -131,5 +131,6 @@ typedef struct IRQState *qemu_irq;
+  * Function types
+  */
+ typedef void (*qemu_irq_handler)(void *opaque, int n, int level);
++typedef int (*qemu_main_fn)(void);
+ 
+ #endif /* QEMU_TYPEDEFS_H */
+diff --git a/include/sysemu/os-posix.h b/include/sysemu/os-posix.h
+index b881ac6c6f7..51bbb5370e0 100644
+--- a/include/sysemu/os-posix.h
++++ b/include/sysemu/os-posix.h
+@@ -26,6 +26,7 @@
+ #ifndef QEMU_OS_POSIX_H
+ #define QEMU_OS_POSIX_H
+ 
++#include "qemu/typedefs.h"
+ #include <sys/mman.h>
+ #include <sys/socket.h>
+ #include <netinet/in.h>
+@@ -54,6 +55,7 @@ void os_set_chroot(const char *path);
+ void os_setup_limits(void);
+ void os_setup_post(void);
+ int os_mlock(void);
++qemu_main_fn os_non_loop_main_thread_fn(void);
+ 
+ /**
+  * qemu_alloc_stack:
+diff --git a/include/sysemu/os-win32.h b/include/sysemu/os-win32.h
+index b82a5d3ad93..db0daba9a52 100644
+--- a/include/sysemu/os-win32.h
++++ b/include/sysemu/os-win32.h
+@@ -26,6 +26,7 @@
+ #ifndef QEMU_OS_WIN32_H
+ #define QEMU_OS_WIN32_H
+ 
++#include "qemu/typedefs.h"
+ #include <winsock2.h>
+ #include <windows.h>
+ #include <ws2tcpip.h>
+@@ -105,6 +106,7 @@ void os_set_line_buffering(void);
+ void os_setup_early_signal_handling(void);
+ 
+ int getpagesize(void);
++static inline qemu_main_fn os_non_loop_main_thread_fn(void) { return NULL; }
+ 
+ #if !defined(EPROTONOSUPPORT)
+ # define EPROTONOSUPPORT EINVAL
+diff --git a/include/ui/console.h b/include/ui/console.h
+index 5832d52a8a6..4e3dc7da146 100644
+--- a/include/ui/console.h
++++ b/include/ui/console.h
+@@ -440,6 +440,18 @@ typedef struct QemuDisplay QemuDisplay;
+ 
+ struct QemuDisplay {
+     DisplayType type;
++    /*
++     * Some UIs have special requirements, for the qemu_main event loop running
++     * on either the process's initial (main) thread ('Off'), or on an
++     * explicitly created background thread ('On') because of platform-specific
++     * event handling.
++     * The default, 'Auto', indicates the display will work with both setups.
++     * If 'On', either a qemu_main_thread_fn must be supplied, or it must be
++     * ensured that all applicable host OS platforms supply a default main.
++     * (via os_non_loop_main_thread_fn())
++     */
++    OnOffAuto qemu_main_on_bg_thread;
++    qemu_main_fn qemu_main_thread_fn;
+     void (*early_init)(DisplayOptions *opts);
+     void (*init)(DisplayState *ds, DisplayOptions *opts);
+     const char *vc;
+diff --git a/os-posix.c b/os-posix.c
+index 43f9a43f3fe..a173c026f6c 100644
+--- a/os-posix.c
++++ b/os-posix.c
+@@ -37,6 +37,8 @@
+ 
+ #ifdef CONFIG_LINUX
+ #include <sys/prctl.h>
++#elif defined(CONFIG_DARWIN)
++#include <CoreFoundation/CoreFoundation.h>
+ #endif
+ 
+ 
+@@ -342,3 +344,21 @@ int os_mlock(void)
+     return -ENOSYS;
+ #endif
+ }
++
++#ifdef CONFIG_DARWIN
++static int os_darwin_cfrunloop_main(void)
++{
++    CFRunLoopRun();
++    abort();
++}
++#endif
++
++qemu_main_fn os_non_loop_main_thread_fn(void)
++{
++#ifdef CONFIG_DARWIN
++    /* By default, run the OS's event runloop on the main thread. */
++    return os_darwin_cfrunloop_main;
++#else
++    return NULL;
++#endif
++}
+diff --git a/system/main.c b/system/main.c
+index 9b91d21ea8c..358eab281b0 100644
+--- a/system/main.c
++++ b/system/main.c
+@@ -24,13 +24,10 @@
+ 
+ #include "qemu/osdep.h"
+ #include "qemu-main.h"
++#include "qemu/main-loop.h"
+ #include "sysemu/sysemu.h"
+ 
+-#ifdef CONFIG_SDL
+-#include <SDL.h>
+-#endif
+-
+-int qemu_default_main(void)
++static int qemu_default_main(void)
+ {
+     int status;
+ 
+@@ -40,10 +37,44 @@ int qemu_default_main(void)
+     return status;
+ }
+ 
+-int (*qemu_main)(void) = qemu_default_main;
 +/*
-+ * VMApple machine emulation
-+ *
-+ * Copyright © 2023 Amazon.com, Inc. or its affiliates. All Rights Reserved.
-+ *
-+ * This work is licensed under the terms of the GNU GPL, version 2 or later.
-+ * See the COPYING file in the top-level directory.
-+ *
-+ * VMApple is the device model that the macOS built-in hypervisor called
-+ * "Virtualization.framework" exposes to Apple Silicon macOS guests. The
-+ * machine model in this file implements the same device model in QEMU, but
-+ * does not use any code from Virtualization.Framework.
++ * Various macOS system libraries, including the Cocoa UI and anything using
++ * libdispatch, such as ParavirtualizedGraphics.framework, requires that the
++ * main runloop, on the main (initial) thread be running or at least regularly
++ * polled for events. A special mode is therefore supported, where the QEMU
++ * main loop runs on a separate thread and the main thread handles the
++ * CF/Cocoa runloop.
 + */
 +
-+#include "qemu/osdep.h"
-+#include "qemu/bitops.h"
-+#include "qemu/datadir.h"
-+#include "qemu/error-report.h"
-+#include "qemu/guest-random.h"
-+#include "qemu/help-texts.h"
-+#include "qemu/log.h"
-+#include "qemu/module.h"
-+#include "qemu/option.h"
-+#include "qemu/units.h"
-+#include "monitor/qdev.h"
-+#include "hw/boards.h"
-+#include "hw/irq.h"
-+#include "hw/loader.h"
-+#include "hw/qdev-properties.h"
-+#include "hw/sysbus.h"
-+#include "hw/usb.h"
-+#include "hw/arm/boot.h"
-+#include "hw/arm/primecell.h"
-+#include "hw/char/pl011.h"
-+#include "hw/intc/arm_gic.h"
-+#include "hw/intc/arm_gicv3_common.h"
-+#include "hw/misc/pvpanic.h"
-+#include "hw/pci-host/gpex.h"
-+#include "hw/usb/xhci.h"
-+#include "hw/virtio/virtio-pci.h"
-+#include "hw/vmapple/vmapple.h"
-+#include "net/net.h"
-+#include "qapi/error.h"
-+#include "qapi/qmp/qlist.h"
-+#include "qapi/visitor.h"
-+#include "qapi/qapi-visit-common.h"
-+#include "standard-headers/linux/input.h"
-+#include "sysemu/hvf.h"
-+#include "sysemu/kvm.h"
-+#include "sysemu/reset.h"
-+#include "sysemu/runstate.h"
-+#include "sysemu/sysemu.h"
-+#include "target/arm/internals.h"
-+#include "target/arm/kvm_arm.h"
-+
-+struct VMAppleMachineClass {
-+    MachineClass parent;
-+};
-+
-+struct VMAppleMachineState {
-+    MachineState parent;
-+
-+    Notifier machine_done;
-+    struct arm_boot_info bootinfo;
-+    MemMapEntry *memmap;
-+    const int *irqmap;
-+    DeviceState *gic;
-+    DeviceState *cfg;
-+    Notifier powerdown_notifier;
-+    PCIBus *bus;
-+    MemoryRegion fw_mr;
-+    uint64_t uuid;
-+};
-+
-+#define DEFINE_VMAPPLE_MACHINE_LATEST(major, minor, latest) \
-+    static void vmapple##major##_##minor##_class_init(ObjectClass *oc, \
-+                                                    void *data) \
-+    { \
-+        MachineClass *mc = MACHINE_CLASS(oc); \
-+        vmapple_machine_##major##_##minor##_options(mc); \
-+        mc->desc = "QEMU " # major "." # minor " Apple Virtual Machine"; \
-+        if (latest) { \
-+            mc->alias = "vmapple"; \
-+        } \
-+    } \
-+    static const TypeInfo machvmapple##major##_##minor##_info = { \
-+        .name = MACHINE_TYPE_NAME("vmapple-" # major "." # minor), \
-+        .parent = TYPE_VMAPPLE_MACHINE, \
-+        .class_init = vmapple##major##_##minor##_class_init, \
-+    }; \
-+    static void machvmapple_machine_##major##_##minor##_init(void) \
-+    { \
-+        type_register_static(&machvmapple##major##_##minor##_info); \
-+    } \
-+    type_init(machvmapple_machine_##major##_##minor##_init);
-+
-+#define DEFINE_VMAPPLE_MACHINE_AS_LATEST(major, minor) \
-+    DEFINE_VMAPPLE_MACHINE_LATEST(major, minor, true)
-+#define DEFINE_VMAPPLE_MACHINE(major, minor) \
-+    DEFINE_VMAPPLE_MACHINE_LATEST(major, minor, false)
-+
-+#define TYPE_VMAPPLE_MACHINE   MACHINE_TYPE_NAME("vmapple")
-+OBJECT_DECLARE_TYPE(VMAppleMachineState, VMAppleMachineClass, VMAPPLE_MACHINE)
-+
-+/* Number of external interrupt lines to configure the GIC with */
-+#define NUM_IRQS 256
-+
-+enum {
-+    VMAPPLE_FIRMWARE,
-+    VMAPPLE_CONFIG,
-+    VMAPPLE_MEM,
-+    VMAPPLE_GIC_DIST,
-+    VMAPPLE_GIC_REDIST,
-+    VMAPPLE_UART,
-+    VMAPPLE_RTC,
-+    VMAPPLE_PCIE,
-+    VMAPPLE_PCIE_MMIO,
-+    VMAPPLE_PCIE_ECAM,
-+    VMAPPLE_GPIO,
-+    VMAPPLE_PVPANIC,
-+    VMAPPLE_APV_GFX,
-+    VMAPPLE_APV_IOSFC,
-+    VMAPPLE_AES_1,
-+    VMAPPLE_AES_2,
-+    VMAPPLE_BDOOR,
-+    VMAPPLE_MEMMAP_LAST,
-+};
-+
-+static MemMapEntry memmap[] = {
-+    [VMAPPLE_FIRMWARE] =           { 0x00100000, 0x00100000 },
-+    [VMAPPLE_CONFIG] =             { 0x00400000, 0x00010000 },
-+
-+    [VMAPPLE_GIC_DIST] =           { 0x10000000, 0x00010000 },
-+    [VMAPPLE_GIC_REDIST] =         { 0x10010000, 0x00400000 },
-+
-+    [VMAPPLE_UART] =               { 0x20010000, 0x00010000 },
-+    [VMAPPLE_RTC] =                { 0x20050000, 0x00001000 },
-+    [VMAPPLE_GPIO] =               { 0x20060000, 0x00001000 },
-+    [VMAPPLE_PVPANIC] =            { 0x20070000, 0x00000002 },
-+    [VMAPPLE_BDOOR] =              { 0x30000000, 0x00200000 },
-+    [VMAPPLE_APV_GFX] =            { 0x30200000, 0x00010000 },
-+    [VMAPPLE_APV_IOSFC] =          { 0x30210000, 0x00010000 },
-+    [VMAPPLE_AES_1] =              { 0x30220000, 0x00004000 },
-+    [VMAPPLE_AES_2] =              { 0x30230000, 0x00004000 },
-+    [VMAPPLE_PCIE_ECAM] =          { 0x40000000, 0x10000000 },
-+    [VMAPPLE_PCIE_MMIO] =          { 0x50000000, 0x1fff0000 },
-+
-+    /* Actual RAM size depends on configuration */
-+    [VMAPPLE_MEM] =                { 0x70000000ULL, GiB},
-+};
-+
-+static const int irqmap[] = {
-+    [VMAPPLE_UART] = 1,
-+    [VMAPPLE_RTC] = 2,
-+    [VMAPPLE_GPIO] = 0x5,
-+    [VMAPPLE_APV_IOSFC] = 0x10,
-+    [VMAPPLE_APV_GFX] = 0x11,
-+    [VMAPPLE_AES_1] = 0x12,
-+    [VMAPPLE_PCIE] = 0x20,
-+};
-+
-+#define GPEX_NUM_IRQS 16
-+
-+static void create_bdif(VMAppleMachineState *vms, MemoryRegion *mem)
++static void *call_qemu_default_main(void *opaque)
 +{
-+    DeviceState *bdif;
-+    SysBusDevice *bdif_sb;
-+    DriveInfo *di_aux = drive_get(IF_PFLASH, 0, 0);
-+    DriveInfo *di_root = drive_get(IF_PFLASH, 0, 1);
++    int status;
 +
-+    if (!di_aux) {
-+        error_report("No AUX device. Please specify one as pflash drive.");
-+        exit(1);
++    bql_lock();
++    status = qemu_default_main();
++    bql_unlock();
++
++    exit(status);
++}
++
++static void qemu_run_default_main_on_new_thread(void)
++{
++    QemuThread thread;
++
++    qemu_thread_create(&thread, "qemu_main", call_qemu_default_main,
++                       NULL, QEMU_THREAD_DETACHED);
++}
++
++qemu_main_fn qemu_main;
+ 
+ int main(int argc, char **argv)
+ {
+     qemu_init(argc, argv);
+-    return qemu_main();
++    if (qemu_main) {
++        qemu_run_default_main_on_new_thread();
++        bql_unlock();
++        return qemu_main();
++    } else {
++        qemu_default_main();
++    }
+ }
+diff --git a/system/vl.c b/system/vl.c
+index e83b3b2608b..c1db20dbee9 100644
+--- a/system/vl.c
++++ b/system/vl.c
+@@ -134,6 +134,7 @@
+ #include "sysemu/iothread.h"
+ #include "qemu/guest-random.h"
+ #include "qemu/keyval.h"
++#include "qemu-main.h"
+ 
+ #define MAX_VIRTIO_CONSOLES 1
+ 
+@@ -3667,6 +3668,7 @@ void qemu_init(int argc, char **argv)
+     trace_init_file();
+ 
+     qemu_init_main_loop(&error_fatal);
++    qemu_main = os_non_loop_main_thread_fn();
+     cpu_timers_init();
+ 
+     user_register_global_props();
+diff --git a/ui/cocoa.m b/ui/cocoa.m
+index 4c2dd335323..393b3800491 100644
+--- a/ui/cocoa.m
++++ b/ui/cocoa.m
+@@ -73,6 +73,8 @@
+     int height;
+ } QEMUScreen;
+ 
++@class QemuCocoaPasteboardTypeOwner;
++
+ static void cocoa_update(DisplayChangeListener *dcl,
+                          int x, int y, int w, int h);
+ 
+@@ -107,6 +109,7 @@ static void cocoa_switch(DisplayChangeListener *dcl,
+ static NSInteger cbchangecount = -1;
+ static QemuClipboardInfo *cbinfo;
+ static QemuEvent cbevent;
++static QemuCocoaPasteboardTypeOwner *cbowner;
+ 
+ // Utility functions to run specified code block with the BQL held
+ typedef void (^CodeBlock)(void);
+@@ -1321,8 +1324,10 @@ - (void) dealloc
+ {
+     COCOA_DEBUG("QemuCocoaAppController: dealloc\n");
+ 
+-    if (cocoaView)
+-        [cocoaView release];
++    [cocoaView release];
++    [cbowner release];
++    cbowner = nil;
++
+     [super dealloc];
+ }
+ 
+@@ -1938,8 +1943,6 @@ - (void)pasteboard:(NSPasteboard *)sender provideDataForType:(NSPasteboardType)t
+ 
+ @end
+ 
+-static QemuCocoaPasteboardTypeOwner *cbowner;
+-
+ static void cocoa_clipboard_notify(Notifier *notifier, void *data);
+ static void cocoa_clipboard_request(QemuClipboardInfo *info,
+                                     QemuClipboardType type);
+@@ -2002,43 +2005,8 @@ static void cocoa_clipboard_request(QemuClipboardInfo *info,
+     }
+ }
+ 
+-/*
+- * The startup process for the OSX/Cocoa UI is complicated, because
+- * OSX insists that the UI runs on the initial main thread, and so we
+- * need to start a second thread which runs the qemu_default_main():
+- * in main():
+- *  in cocoa_display_init():
+- *   assign cocoa_main to qemu_main
+- *   create application, menus, etc
+- *  in cocoa_main():
+- *   create qemu-main thread
+- *   enter OSX run loop
+- */
+-
+-static void *call_qemu_main(void *opaque)
+-{
+-    int status;
+-
+-    COCOA_DEBUG("Second thread: calling qemu_default_main()\n");
+-    bql_lock();
+-    status = qemu_default_main();
+-    bql_unlock();
+-    COCOA_DEBUG("Second thread: qemu_default_main() returned, exiting\n");
+-    [cbowner release];
+-    exit(status);
+-}
+-
+ static int cocoa_main(void)
+ {
+-    QemuThread thread;
+-
+-    COCOA_DEBUG("Entered %s()\n", __func__);
+-
+-    bql_unlock();
+-    qemu_thread_create(&thread, "qemu_main", call_qemu_main,
+-                       NULL, QEMU_THREAD_DETACHED);
+-
+-    // Start the main event loop
+     COCOA_DEBUG("Main thread: entering OSX run loop\n");
+     [NSApp run];
+     COCOA_DEBUG("Main thread: left OSX run loop, which should never happen\n");
+@@ -2120,8 +2088,6 @@ static void cocoa_display_init(DisplayState *ds, DisplayOptions *opts)
+ 
+     COCOA_DEBUG("qemu_cocoa: cocoa_display_init\n");
+ 
+-    qemu_main = cocoa_main;
+-
+     // Pull this console process up to being a fully-fledged graphical
+     // app with a menubar and Dock icon
+     ProcessSerialNumber psn = { 0, kCurrentProcess };
+@@ -2188,8 +2154,11 @@ static void cocoa_display_init(DisplayState *ds, DisplayOptions *opts)
+ }
+ 
+ static QemuDisplay qemu_display_cocoa = {
+-    .type       = DISPLAY_TYPE_COCOA,
+-    .init       = cocoa_display_init,
++    .type                   = DISPLAY_TYPE_COCOA,
++    .init                   = cocoa_display_init,
++    /* The Cocoa UI will run the NSApplication runloop on the main thread.*/
++    .qemu_main_on_bg_thread = ON_OFF_AUTO_ON,
++    .qemu_main_thread_fn    = cocoa_main,
+ };
+ 
+ static void register_cocoa(void)
+diff --git a/ui/console.c b/ui/console.c
+index 5165f171257..1599d8b7095 100644
+--- a/ui/console.c
++++ b/ui/console.c
+@@ -33,6 +33,7 @@
+ #include "qemu/main-loop.h"
+ #include "qemu/module.h"
+ #include "qemu/option.h"
++#include "qemu-main.h"
+ #include "chardev/char.h"
+ #include "trace.h"
+ #include "exec/memory.h"
+@@ -1569,12 +1570,39 @@ void qemu_display_early_init(DisplayOptions *opts)
+ 
+ void qemu_display_init(DisplayState *ds, DisplayOptions *opts)
+ {
++    QemuDisplay *display;
++    bool bg_main_loop;
++
+     assert(opts->type < DISPLAY_TYPE__MAX);
+     if (opts->type == DISPLAY_TYPE_NONE) {
+         return;
+     }
+-    assert(dpys[opts->type] != NULL);
+-    dpys[opts->type]->init(ds, opts);
++    display = dpys[opts->type];
++    assert(display != NULL);
++    display->init(ds, opts);
++
++    switch (display->qemu_main_on_bg_thread) {
++    case ON_OFF_AUTO_OFF:
++        bg_main_loop = false;
++        qemu_main = NULL;
++        break;
++    case ON_OFF_AUTO_ON:
++        bg_main_loop = true;
++        break;
++    case ON_OFF_AUTO_AUTO:
++    default:
++        bg_main_loop = qemu_main;
++        break;
 +    }
 +
-+    if (!di_root) {
-+        /* Fall back to the first IF_VIRTIO device as root device */
-+        di_root = drive_get(IF_VIRTIO, 0, 0);
++    trace_qemu_display_init_main_thread(
++        DisplayType_str(display->type), display->qemu_main_thread_fn, qemu_main,
++        OnOffAuto_lookup.array[display->qemu_main_on_bg_thread],
++        display->qemu_main_on_bg_thread, bg_main_loop);
++    if (bg_main_loop && display->qemu_main_thread_fn) {
++        qemu_main = display->qemu_main_thread_fn;
 +    }
-+
-+    if (!di_root) {
-+        error_report("No root device. Please specify one as virtio drive.");
-+        exit(1);
-+    }
-+
-+    /* PV backdoor device */
-+    bdif = qdev_new(TYPE_VMAPPLE_BDIF);
-+    bdif_sb = SYS_BUS_DEVICE(bdif);
-+    sysbus_mmio_map(bdif_sb, 0, vms->memmap[VMAPPLE_BDOOR].base);
-+
-+    qdev_prop_set_drive(DEVICE(bdif), "aux", blk_by_legacy_dinfo(di_aux));
-+    qdev_prop_set_drive(DEVICE(bdif), "root", blk_by_legacy_dinfo(di_root));
-+
-+    sysbus_realize_and_unref(bdif_sb, &error_fatal);
-+}
-+
-+static void create_pvpanic(VMAppleMachineState *vms, MemoryRegion *mem)
-+{
-+    SysBusDevice *cfg;
-+
-+    vms->cfg = qdev_new(TYPE_PVPANIC_MMIO_DEVICE);
-+    cfg = SYS_BUS_DEVICE(vms->cfg);
-+    sysbus_mmio_map(cfg, 0, vms->memmap[VMAPPLE_PVPANIC].base);
-+
-+    sysbus_realize_and_unref(cfg, &error_fatal);
-+}
-+
-+static void create_cfg(VMAppleMachineState *vms, MemoryRegion *mem)
-+{
-+    SysBusDevice *cfg;
-+    MachineState *machine = MACHINE(vms);
-+    uint32_t rnd = 1;
-+
-+    vms->cfg = qdev_new(TYPE_VMAPPLE_CFG);
-+    cfg = SYS_BUS_DEVICE(vms->cfg);
-+    sysbus_mmio_map(cfg, 0, vms->memmap[VMAPPLE_CONFIG].base);
-+
-+    qemu_guest_getrandom_nofail(&rnd, sizeof(rnd));
-+
-+    qdev_prop_set_uint32(vms->cfg, "nr-cpus", machine->smp.cpus);
-+    qdev_prop_set_uint64(vms->cfg, "ecid", vms->uuid);
-+    qdev_prop_set_uint64(vms->cfg, "ram-size", machine->ram_size);
-+    qdev_prop_set_uint32(vms->cfg, "rnd", rnd);
-+
-+    sysbus_realize_and_unref(cfg, &error_fatal);
-+}
-+
-+static void create_gfx(VMAppleMachineState *vms, MemoryRegion *mem)
-+{
-+    int irq_gfx = vms->irqmap[VMAPPLE_APV_GFX];
-+    int irq_iosfc = vms->irqmap[VMAPPLE_APV_IOSFC];
-+    SysBusDevice *aes;
-+
-+    aes = SYS_BUS_DEVICE(qdev_new("apple-gfx-mmio"));
-+    sysbus_mmio_map(aes, 0, vms->memmap[VMAPPLE_APV_GFX].base);
-+    sysbus_mmio_map(aes, 1, vms->memmap[VMAPPLE_APV_IOSFC].base);
-+    sysbus_connect_irq(aes, 0, qdev_get_gpio_in(vms->gic, irq_gfx));
-+    sysbus_connect_irq(aes, 1, qdev_get_gpio_in(vms->gic, irq_iosfc));
-+    sysbus_realize_and_unref(aes, &error_fatal);
-+}
-+
-+static void create_aes(VMAppleMachineState *vms, MemoryRegion *mem)
-+{
-+    int irq = vms->irqmap[VMAPPLE_AES_1];
-+    SysBusDevice *aes;
-+
-+    aes = SYS_BUS_DEVICE(qdev_new("apple-aes"));
-+    sysbus_mmio_map(aes, 0, vms->memmap[VMAPPLE_AES_1].base);
-+    sysbus_mmio_map(aes, 1, vms->memmap[VMAPPLE_AES_2].base);
-+    sysbus_connect_irq(aes, 0, qdev_get_gpio_in(vms->gic, irq));
-+    sysbus_realize_and_unref(aes, &error_fatal);
-+}
-+
-+static inline int arm_gic_ppi_index(int cpu_nr, int ppi_index)
-+{
-+    return NUM_IRQS + cpu_nr * GIC_INTERNAL + ppi_index;
-+}
-+
-+static void create_gic(VMAppleMachineState *vms, MemoryRegion *mem)
-+{
-+    MachineState *ms = MACHINE(vms);
-+    /* We create a standalone GIC */
-+    SysBusDevice *gicbusdev;
-+    QList *redist_region_count;
-+    int i;
-+    unsigned int smp_cpus = ms->smp.cpus;
-+
-+    vms->gic = qdev_new(gicv3_class_name());
-+    qdev_prop_set_uint32(vms->gic, "revision", 3);
-+    qdev_prop_set_uint32(vms->gic, "num-cpu", smp_cpus);
-+    /*
-+     * Note that the num-irq property counts both internal and external
-+     * interrupts; there are always 32 of the former (mandated by GIC spec).
-+     */
-+    qdev_prop_set_uint32(vms->gic, "num-irq", NUM_IRQS + 32);
-+
-+    uint32_t redist0_capacity =
-+                vms->memmap[VMAPPLE_GIC_REDIST].size / GICV3_REDIST_SIZE;
-+    uint32_t redist0_count = MIN(smp_cpus, redist0_capacity);
-+
-+    redist_region_count = qlist_new();
-+    qlist_append_int(redist_region_count, redist0_count);
-+    qdev_prop_set_array(vms->gic, "redist-region-count", redist_region_count);
-+
-+    gicbusdev = SYS_BUS_DEVICE(vms->gic);
-+    sysbus_realize_and_unref(gicbusdev, &error_fatal);
-+    sysbus_mmio_map(gicbusdev, 0, vms->memmap[VMAPPLE_GIC_DIST].base);
-+    sysbus_mmio_map(gicbusdev, 1, vms->memmap[VMAPPLE_GIC_REDIST].base);
-+
-+    /*
-+     * Wire the outputs from each CPU's generic timer and the GICv3
-+     * maintenance interrupt signal to the appropriate GIC PPI inputs,
-+     * and the GIC's IRQ/FIQ/VIRQ/VFIQ interrupt outputs to the CPU's inputs.
-+     */
-+    for (i = 0; i < smp_cpus; i++) {
-+        DeviceState *cpudev = DEVICE(qemu_get_cpu(i));
-+
-+        /* Map the virt timer to PPI 27 */
-+        qdev_connect_gpio_out(cpudev, GTIMER_VIRT,
-+                              qdev_get_gpio_in(vms->gic,
-+                                               arm_gic_ppi_index(i, 27)));
-+
-+        /* Map the GIC IRQ and FIQ lines to CPU */
-+        sysbus_connect_irq(gicbusdev, i, qdev_get_gpio_in(cpudev, ARM_CPU_IRQ));
-+        sysbus_connect_irq(gicbusdev, i + smp_cpus,
-+                           qdev_get_gpio_in(cpudev, ARM_CPU_FIQ));
-+    }
-+}
-+
-+static void create_uart(const VMAppleMachineState *vms, int uart,
-+                        MemoryRegion *mem, Chardev *chr)
-+{
-+    hwaddr base = vms->memmap[uart].base;
-+    int irq = vms->irqmap[uart];
-+    DeviceState *dev = qdev_new(TYPE_PL011);
-+    SysBusDevice *s = SYS_BUS_DEVICE(dev);
-+
-+    qdev_prop_set_chr(dev, "chardev", chr);
-+    sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
-+    memory_region_add_subregion(mem, base,
-+                                sysbus_mmio_get_region(s, 0));
-+    sysbus_connect_irq(s, 0, qdev_get_gpio_in(vms->gic, irq));
-+}
-+
-+static void create_rtc(const VMAppleMachineState *vms)
-+{
-+    hwaddr base = vms->memmap[VMAPPLE_RTC].base;
-+    int irq = vms->irqmap[VMAPPLE_RTC];
-+
-+    sysbus_create_simple("pl031", base, qdev_get_gpio_in(vms->gic, irq));
-+}
-+
-+static DeviceState *gpio_key_dev;
-+static void vmapple_powerdown_req(Notifier *n, void *opaque)
-+{
-+    /* use gpio Pin 3 for power button event */
-+    qemu_set_irq(qdev_get_gpio_in(gpio_key_dev, 0), 1);
-+}
-+
-+static void create_gpio_devices(const VMAppleMachineState *vms, int gpio,
-+                                MemoryRegion *mem)
-+{
-+    DeviceState *pl061_dev;
-+    hwaddr base = vms->memmap[gpio].base;
-+    int irq = vms->irqmap[gpio];
-+    SysBusDevice *s;
-+
-+    pl061_dev = qdev_new("pl061");
-+    /* Pull lines down to 0 if not driven by the PL061 */
-+    qdev_prop_set_uint32(pl061_dev, "pullups", 0);
-+    qdev_prop_set_uint32(pl061_dev, "pulldowns", 0xff);
-+    s = SYS_BUS_DEVICE(pl061_dev);
-+    sysbus_realize_and_unref(s, &error_fatal);
-+    memory_region_add_subregion(mem, base, sysbus_mmio_get_region(s, 0));
-+    sysbus_connect_irq(s, 0, qdev_get_gpio_in(vms->gic, irq));
-+    gpio_key_dev = sysbus_create_simple("gpio-key", -1,
-+                                        qdev_get_gpio_in(pl061_dev, 3));
-+}
-+
-+static void vmapple_firmware_init(VMAppleMachineState *vms,
-+                                  MemoryRegion *sysmem)
-+{
-+    hwaddr size = vms->memmap[VMAPPLE_FIRMWARE].size;
-+    hwaddr base = vms->memmap[VMAPPLE_FIRMWARE].base;
-+    const char *bios_name;
-+    int image_size;
-+    char *fname;
-+
-+    bios_name = MACHINE(vms)->firmware;
-+    if (!bios_name) {
-+        error_report("No firmware specified");
-+        exit(1);
-+    }
-+
-+    fname = qemu_find_file(QEMU_FILE_TYPE_BIOS, bios_name);
-+    if (!fname) {
-+        error_report("Could not find ROM image '%s'", bios_name);
-+        exit(1);
-+    }
-+
-+    memory_region_init_ram(&vms->fw_mr, NULL, "firmware", size, &error_fatal);
-+    image_size = load_image_mr(fname, &vms->fw_mr);
-+
-+    g_free(fname);
-+    if (image_size < 0) {
-+        error_report("Could not load ROM image '%s'", bios_name);
-+        exit(1);
-+    }
-+
-+    memory_region_add_subregion(get_system_memory(), base, &vms->fw_mr);
-+}
-+
-+static void create_pcie(VMAppleMachineState *vms)
-+{
-+    hwaddr base_mmio = vms->memmap[VMAPPLE_PCIE_MMIO].base;
-+    hwaddr size_mmio = vms->memmap[VMAPPLE_PCIE_MMIO].size;
-+    hwaddr base_ecam = vms->memmap[VMAPPLE_PCIE_ECAM].base;
-+    hwaddr size_ecam = vms->memmap[VMAPPLE_PCIE_ECAM].size;
-+    int irq = vms->irqmap[VMAPPLE_PCIE];
-+    MemoryRegion *mmio_alias;
-+    MemoryRegion *mmio_reg;
-+    MemoryRegion *ecam_alias;
-+    MemoryRegion *ecam_reg;
-+    DeviceState *dev;
-+    int i;
-+    PCIHostState *pci;
-+    DeviceState *usb_controller;
-+    USBBus *usb_bus;
-+
-+    dev = qdev_new(TYPE_GPEX_HOST);
-+    qdev_prop_set_uint32(dev, "num-irqs", GPEX_NUM_IRQS);
-+    sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
-+
-+    /* Map only the first size_ecam bytes of ECAM space */
-+    ecam_alias = g_new0(MemoryRegion, 1);
-+    ecam_reg = sysbus_mmio_get_region(SYS_BUS_DEVICE(dev), 0);
-+    memory_region_init_alias(ecam_alias, OBJECT(dev), "pcie-ecam",
-+                             ecam_reg, 0, size_ecam);
-+    memory_region_add_subregion(get_system_memory(), base_ecam, ecam_alias);
-+
-+    /*
-+     * Map the MMIO window from [0x50000000-0x7fff0000] in PCI space into
-+     * system address space at [0x50000000-0x7fff0000].
-+     */
-+    mmio_alias = g_new0(MemoryRegion, 1);
-+    mmio_reg = sysbus_mmio_get_region(SYS_BUS_DEVICE(dev), 1);
-+    memory_region_init_alias(mmio_alias, OBJECT(dev), "pcie-mmio",
-+                             mmio_reg, base_mmio, size_mmio);
-+    memory_region_add_subregion(get_system_memory(), base_mmio, mmio_alias);
-+
-+    for (i = 0; i < GPEX_NUM_IRQS; i++) {
-+        sysbus_connect_irq(SYS_BUS_DEVICE(dev), i,
-+                           qdev_get_gpio_in(vms->gic, irq + i));
-+        gpex_set_irq_num(GPEX_HOST(dev), i, irq + i);
-+    }
-+
-+    pci = PCI_HOST_BRIDGE(dev);
-+    vms->bus = pci->bus;
-+    g_assert(vms->bus);
-+
-+    while ((dev = qemu_create_nic_device("virtio-net-pci", true, NULL))) {
-+        qdev_realize_and_unref(dev, BUS(vms->bus), &error_fatal);
-+    }
-+
-+    usb_controller = qdev_new(TYPE_QEMU_XHCI);
-+    qdev_realize_and_unref(usb_controller, BUS(pci->bus), &error_fatal);
-+
-+    usb_bus = USB_BUS(object_resolve_type_unambiguous(TYPE_USB_BUS,
-+                                                      &error_fatal));
-+    usb_create_simple(usb_bus, "usb-kbd");
-+    usb_create_simple(usb_bus, "usb-tablet");
-+}
-+
-+static void vmapple_reset(void *opaque)
-+{
-+    VMAppleMachineState *vms = opaque;
-+    hwaddr base = vms->memmap[VMAPPLE_FIRMWARE].base;
-+
-+    cpu_set_pc(first_cpu, base);
-+}
-+
-+static void mach_vmapple_init(MachineState *machine)
-+{
-+    VMAppleMachineState *vms = VMAPPLE_MACHINE(machine);
-+    MachineClass *mc = MACHINE_GET_CLASS(machine);
-+    const CPUArchIdList *possible_cpus;
-+    MemoryRegion *sysmem = get_system_memory();
-+    int n;
-+    unsigned int smp_cpus = machine->smp.cpus;
-+    unsigned int max_cpus = machine->smp.max_cpus;
-+
-+    vms->memmap = memmap;
-+    machine->usb = true;
-+
-+    possible_cpus = mc->possible_cpu_arch_ids(machine);
-+    assert(possible_cpus->len == max_cpus);
-+    for (n = 0; n < possible_cpus->len; n++) {
-+        Object *cpu;
-+        CPUState *cs;
-+
-+        if (n >= smp_cpus) {
-+            break;
-+        }
-+
-+        cpu = object_new(possible_cpus->cpus[n].type);
-+        object_property_set_int(cpu, "mp-affinity",
-+                                possible_cpus->cpus[n].arch_id, NULL);
-+
-+        cs = CPU(cpu);
-+        cs->cpu_index = n;
-+
-+        numa_cpu_pre_plug(&possible_cpus->cpus[cs->cpu_index], DEVICE(cpu),
-+                          &error_fatal);
-+
-+        object_property_set_bool(cpu, "has_el3", false, NULL);
-+        object_property_set_bool(cpu, "has_el2", false, NULL);
-+        object_property_set_int(cpu, "psci-conduit", QEMU_PSCI_CONDUIT_HVC,
-+                                NULL);
-+
-+        /* Secondary CPUs start in PSCI powered-down state */
-+        if (n > 0) {
-+            object_property_set_bool(cpu, "start-powered-off", true, NULL);
-+        }
-+
-+        object_property_set_link(cpu, "memory", OBJECT(sysmem), &error_abort);
-+        qdev_realize(DEVICE(cpu), NULL, &error_fatal);
-+        object_unref(cpu);
-+    }
-+
-+    memory_region_add_subregion(sysmem, vms->memmap[VMAPPLE_MEM].base,
-+                                machine->ram);
-+
-+    create_gic(vms, sysmem);
-+    create_bdif(vms, sysmem);
-+    create_pvpanic(vms, sysmem);
-+    create_aes(vms, sysmem);
-+    create_gfx(vms, sysmem);
-+    create_uart(vms, VMAPPLE_UART, sysmem, serial_hd(0));
-+    create_rtc(vms);
-+    create_pcie(vms);
-+
-+    create_gpio_devices(vms, VMAPPLE_GPIO, sysmem);
-+
-+    vmapple_firmware_init(vms, sysmem);
-+    create_cfg(vms, sysmem);
-+
-+    /* connect powerdown request */
-+    vms->powerdown_notifier.notify = vmapple_powerdown_req;
-+    qemu_register_powerdown_notifier(&vms->powerdown_notifier);
-+
-+    vms->bootinfo.ram_size = machine->ram_size;
-+    vms->bootinfo.board_id = -1;
-+    vms->bootinfo.loader_start = vms->memmap[VMAPPLE_MEM].base;
-+    vms->bootinfo.skip_dtb_autoload = true;
-+    vms->bootinfo.firmware_loaded = true;
-+    arm_load_kernel(ARM_CPU(first_cpu), machine, &vms->bootinfo);
-+
-+    qemu_register_reset(vmapple_reset, vms);
-+}
-+
-+static CpuInstanceProperties
-+vmapple_cpu_index_to_props(MachineState *ms, unsigned cpu_index)
-+{
-+    MachineClass *mc = MACHINE_GET_CLASS(ms);
-+    const CPUArchIdList *possible_cpus = mc->possible_cpu_arch_ids(ms);
-+
-+    assert(cpu_index < possible_cpus->len);
-+    return possible_cpus->cpus[cpu_index].props;
-+}
-+
-+
-+static int64_t vmapple_get_default_cpu_node_id(const MachineState *ms, int idx)
-+{
-+    return idx % ms->numa_state->num_nodes;
-+}
-+
-+static const CPUArchIdList *vmapple_possible_cpu_arch_ids(MachineState *ms)
-+{
-+    int n;
-+    unsigned int max_cpus = ms->smp.max_cpus;
-+
-+    if (ms->possible_cpus) {
-+        assert(ms->possible_cpus->len == max_cpus);
-+        return ms->possible_cpus;
-+    }
-+
-+    ms->possible_cpus = g_malloc0(sizeof(CPUArchIdList) +
-+                                  sizeof(CPUArchId) * max_cpus);
-+    ms->possible_cpus->len = max_cpus;
-+    for (n = 0; n < ms->possible_cpus->len; n++) {
-+        ms->possible_cpus->cpus[n].type = ms->cpu_type;
-+        ms->possible_cpus->cpus[n].arch_id =
-+            arm_build_mp_affinity(n, GICV3_TARGETLIST_BITS);
-+        ms->possible_cpus->cpus[n].props.has_thread_id = true;
-+        ms->possible_cpus->cpus[n].props.thread_id = n;
-+    }
-+    return ms->possible_cpus;
-+}
-+
-+static void vmapple_get_uuid(Object *obj, Visitor *v, const char *name,
-+                             void *opaque, Error **errp)
-+{
-+    VMAppleMachineState *vms = VMAPPLE_MACHINE(obj);
-+
-+    visit_type_uint64(v, name, &vms->uuid, errp);
-+}
-+
-+static void vmapple_set_uuid(Object *obj, Visitor *v, const char *name,
-+                             void *opaque, Error **errp)
-+{
-+    VMAppleMachineState *vms = VMAPPLE_MACHINE(obj);
-+    Error *error = NULL;
-+
-+    visit_type_uint64(v, name, &vms->uuid, &error);
-+    if (error) {
-+        error_propagate(errp, error);
-+        return;
-+    }
-+}
-+
-+static void vmapple_machine_class_init(ObjectClass *oc, void *data)
-+{
-+    MachineClass *mc = MACHINE_CLASS(oc);
-+
-+    mc->init = mach_vmapple_init;
-+    mc->max_cpus = 32;
-+    mc->block_default_type = IF_VIRTIO;
-+    mc->no_cdrom = 1;
-+    mc->pci_allow_0_address = true;
-+    mc->minimum_page_bits = 12;
-+    mc->possible_cpu_arch_ids = vmapple_possible_cpu_arch_ids;
-+    mc->cpu_index_to_instance_props = vmapple_cpu_index_to_props;
-+    mc->default_cpu_type = ARM_CPU_TYPE_NAME("host");
-+    mc->get_default_cpu_node_id = vmapple_get_default_cpu_node_id;
-+    mc->default_ram_id = "mach-vmapple.ram";
-+
-+    object_register_sugar_prop(TYPE_VIRTIO_PCI, "disable-legacy",
-+                               "on", true);
-+
-+    object_class_property_add(oc, "uuid", "uint64", vmapple_get_uuid,
-+                              vmapple_set_uuid, NULL, NULL);
-+    object_class_property_set_description(oc, "uuid", "Machine UUID (SDOM)");
-+}
-+
-+static void vmapple_instance_init(Object *obj)
-+{
-+    VMAppleMachineState *vms = VMAPPLE_MACHINE(obj);
-+
-+    vms->irqmap = irqmap;
-+}
-+
-+static const TypeInfo vmapple_machine_info = {
-+    .name          = TYPE_VMAPPLE_MACHINE,
-+    .parent        = TYPE_MACHINE,
-+    .abstract      = true,
-+    .instance_size = sizeof(VMAppleMachineState),
-+    .class_size    = sizeof(VMAppleMachineClass),
-+    .class_init    = vmapple_machine_class_init,
-+    .instance_init = vmapple_instance_init,
-+};
-+
-+static void machvmapple_machine_init(void)
-+{
-+    type_register_static(&vmapple_machine_info);
-+}
-+type_init(machvmapple_machine_init);
-+
-+static void vmapple_machine_9_2_options(MachineClass *mc)
-+{
-+}
-+DEFINE_VMAPPLE_MACHINE_AS_LATEST(9, 2)
-+
++    assert(!bg_main_loop || qemu_main);
+ }
+ 
+ const char *qemu_display_get_vc(DisplayOptions *opts)
+diff --git a/ui/sdl2.c b/ui/sdl2.c
+index bd4f5a9da14..35e22785119 100644
+--- a/ui/sdl2.c
++++ b/ui/sdl2.c
+@@ -971,6 +971,8 @@ static QemuDisplay qemu_display_sdl2 = {
+     .type       = DISPLAY_TYPE_SDL,
+     .early_init = sdl2_display_early_init,
+     .init       = sdl2_display_init,
++    /* SDL must poll for events (via dpy_refresh) on main thread */
++    .qemu_main_on_bg_thread = ON_OFF_AUTO_OFF,
+ };
+ 
+ static void register_sdl1(void)
+diff --git a/ui/trace-events b/ui/trace-events
+index 3da0d5e2800..1e72c967399 100644
+--- a/ui/trace-events
++++ b/ui/trace-events
+@@ -16,6 +16,7 @@ displaysurface_free(void *display_surface) "surface=%p"
+ displaychangelistener_register(void *dcl, const char *name) "%p [ %s ]"
+ displaychangelistener_unregister(void *dcl, const char *name) "%p [ %s ]"
+ ppm_save(int fd, void *image) "fd=%d image=%p"
++qemu_display_init_main_thread(const char *display_name, bool qemu_display_sets_main_fn, bool qemu_main_is_set, const char *display_bg_main_loop_preference, int preference, bool bg_main_loop) "display '%s': sets main thread function: %d, platform provides main function: %d, display background main loop preference: %s (%d); main loop will run on background thread: %d"
+ 
+ # gtk-egl.c
+ # gtk-gl-area.c
 -- 
 2.39.3 (Apple Git-145)
 
