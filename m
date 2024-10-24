@@ -4,93 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BB375CFA47F
-	for <qemu-riscv@archiver.kernel.org>; Thu, 24 Oct 2024 10:34:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 48A5ACE8E6D
+	for <qemu-riscv@archiver.kernel.org>; Thu, 24 Oct 2024 12:41:16 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1t3v5E-0000w9-3H; Thu, 24 Oct 2024 06:28:48 -0400
+	id 1t3x9M-0001nz-6E; Thu, 24 Oct 2024 08:41:12 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <phil@philjordan.eu>)
- id 1t3v58-0000r7-W0
- for qemu-riscv@nongnu.org; Thu, 24 Oct 2024 06:28:43 -0400
-Received: from mail-ej1-x634.google.com ([2a00:1450:4864:20::634])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <phil@philjordan.eu>)
- id 1t3v53-0008By-Tk
- for qemu-riscv@nongnu.org; Thu, 24 Oct 2024 06:28:42 -0400
-Received: by mail-ej1-x634.google.com with SMTP id
- a640c23a62f3a-a9a26a5d6bfso93376866b.1
- for <qemu-riscv@nongnu.org>; Thu, 24 Oct 2024 03:28:37 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=philjordan-eu.20230601.gappssmtp.com; s=20230601; t=1729765716; x=1730370516;
- darn=nongnu.org; 
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=LJg2jLf8wSXvkoyvWjUaBSgx6aYJG6tUf7XK38zkYt0=;
- b=phFtpTXE99JNtaCDU1EevdoRUg+f+s8JiwmMbQxbx2a/RFQAv1zdCmM/9ASxgiGYwg
- JOX4HUIT8oiulyTS9y/w60RsI+y96d+xoPzDH5E9u7/Z6w4n78Z7/BLWXbbtDnxBi7n9
- FmLKBQYCPdSVGJQUytV2vMKD4Sl2d098Nak4Hp/UCw5LoRtOjc1u1c5y5GGsu8nR5CEc
- UYe76BPONExMQxSybGTUqs2See8bNGvC2Xhx2/j61NI5g3xyO+FHI9OwTtwGV0bHS3Py
- XWzpJZTq9kKEFTH0kp92JzZW9ykgLEXbrVJkPXV3IaP50Ap/JO5ChHUPfuZ1YI/04gA7
- zXdQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729765716; x=1730370516;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=LJg2jLf8wSXvkoyvWjUaBSgx6aYJG6tUf7XK38zkYt0=;
- b=wFb+MAWzSAUwwCdizF61RzMwGUuFgyVwi54DZguJ+bYssxilGMxxWSY6YiY8WTeGoh
- 6n9upMU2mCzTFk5VfzbtMM9KQo+POOAubvv+Kh1bdIlUuoEvo4dfboXCYqHyUeOker8R
- rdy0oQ/iD15VaLBQxkmXHyVixmV11fMOztkl13Su5543sp4ecWn9K9RusdAlaUSz37jY
- LkaIeA5F4E4LMyOC4U2Bkra1DjTy4HH6FmvdrN4boPpgQnZ3TjFxeUPzzFpmfO7cUZp0
- Ccpgd+8am95jBC7lEBUXvfWBLsRuiejYwxxgTdfS61XIVTZaINYYt4SvKibrfwIYfJuT
- f3ww==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVcUxhArTx3rlh5iYyTc9aYmNMix3gp1XE1ydoe8mEz0RE/l5IjuF7dZ3yyu9iE9ms+0oIGDBxu74K5@nongnu.org
-X-Gm-Message-State: AOJu0YwmA8zTLLw59IoQJHS+oaDuQkJbD52ZfX/NMyvD70GhvMwJgg52
- 33/hNsw2KLkxuyCh9T1PDeucJSSI0xxaFWHBhnU4e9zcnOHfEiqSeohf9jyxBA==
-X-Google-Smtp-Source: AGHT+IGGc8k77KYt7XI/6rjNyUO758rOXTVH9wOOzPTwFSoCNpqO3c2UiusmAhlkg10jB5l0EJkSlQ==
-X-Received: by 2002:a17:907:3187:b0:a99:f945:8776 with SMTP id
- a640c23a62f3a-a9abf88a58bmr477218466b.24.1729765716343; 
- Thu, 24 Oct 2024 03:28:36 -0700 (PDT)
-Received: from localhost.localdomain (h082218084190.host.wavenet.at.
- [82.218.84.190]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a9a913706d3sm601019066b.134.2024.10.24.03.28.34
- (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Thu, 24 Oct 2024 03:28:36 -0700 (PDT)
-From: Phil Dennis-Jordan <phil@philjordan.eu>
-To: qemu-devel@nongnu.org
-Cc: agraf@csgraf.de, phil@philjordan.eu, peter.maydell@linaro.org,
- pbonzini@redhat.com, rad@semihalf.com, quic_llindhol@quicinc.com,
- marcin.juszkiewicz@linaro.org, stefanha@redhat.com, mst@redhat.com,
- slp@redhat.com, richard.henderson@linaro.org, eduardo@habkost.net,
- marcel.apfelbaum@gmail.com, gaosong@loongson.cn, jiaxun.yang@flygoat.com,
- chenhuacai@kernel.org, kwolf@redhat.com, hreitz@redhat.com,
- philmd@linaro.org, shorne@gmail.com, palmer@dabbelt.com,
- alistair.francis@wdc.com, bmeng.cn@gmail.com, liwei1518@gmail.com,
- dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com,
- jcmvbkbc@gmail.com, marcandre.lureau@redhat.com, berrange@redhat.com,
- akihiko.odaki@daynix.com, qemu-arm@nongnu.org, qemu-block@nongnu.org,
- qemu-riscv@nongnu.org, Alexander Graf <graf@amazon.com>
-Subject: [PATCH v4 06/15] hw: Add vmapple subdir
-Date: Thu, 24 Oct 2024 12:28:04 +0200
-Message-Id: <20241024102813.9855-7-phil@philjordan.eu>
-X-Mailer: git-send-email 2.39.3 (Apple Git-145)
-In-Reply-To: <20241024102813.9855-1-phil@philjordan.eu>
-References: <20241024102813.9855-1-phil@philjordan.eu>
+ (Exim 4.90_1) (envelope-from <maobibo@loongson.cn>)
+ id 1t3x9B-0001nd-OT; Thu, 24 Oct 2024 08:41:01 -0400
+Received: from mail.loongson.cn ([114.242.206.163])
+ by eggs.gnu.org with esmtp (Exim 4.90_1)
+ (envelope-from <maobibo@loongson.cn>)
+ id 1t3x97-0000z5-JW; Thu, 24 Oct 2024 08:41:00 -0400
+Received: from loongson.cn (unknown [10.20.42.62])
+ by gateway (Coremail) with SMTP id _____8Axjq9QQBpn08AKAA--.1119S3;
+ Thu, 24 Oct 2024 20:40:48 +0800 (CST)
+Received: from [10.20.42.62] (unknown [10.20.42.62])
+ by front1 (Coremail) with SMTP id qMiowMAx7uBKQBpnLJgPAA--.20295S3;
+ Thu, 24 Oct 2024 20:40:45 +0800 (CST)
+Subject: Re: [PATCH v5 2/3] hw/acpi: Upgrade ACPI SPCR table to support SPCR
+ table revision 4 format
+To: Sia Jee Heng <jeeheng.sia@starfivetech.com>, qemu-arm@nongnu.org,
+ qemu-devel@nongnu.org, qemu-riscv@nongnu.org
+Cc: mst@redhat.com, imammedo@redhat.com, anisinha@redhat.com,
+ peter.maydell@linaro.org, shannon.zhaosl@gmail.com,
+ sunilvl@ventanamicro.com, palmer@dabbelt.com, alistair.francis@wdc.com,
+ bin.meng@windriver.com, liwei1518@gmail.com, dbarboza@ventanamicro.com,
+ zhiwei_liu@linux.alibaba.com
+References: <20240829015920.95778-1-jeeheng.sia@starfivetech.com>
+ <20240829015920.95778-3-jeeheng.sia@starfivetech.com>
+From: maobibo <maobibo@loongson.cn>
+Message-ID: <449f736a-dadf-cb6e-9564-8622d6d5bcb3@loongson.cn>
+Date: Thu, 24 Oct 2024 20:40:20 +0800
+User-Agent: Mozilla/5.0 (X11; Linux loongarch64; rv:68.0) Gecko/20100101
+ Thunderbird/68.7.0
 MIME-Version: 1.0
+In-Reply-To: <20240829015920.95778-3-jeeheng.sia@starfivetech.com>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-US
 Content-Transfer-Encoding: 8bit
-Received-SPF: neutral client-ip=2a00:1450:4864:20::634;
- envelope-from=phil@philjordan.eu; helo=mail-ej1-x634.google.com
-X-Spam_score_int: -10
-X-Spam_score: -1.1
-X-Spam_bar: -
-X-Spam_report: (-1.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_NEUTRAL=0.779 autolearn=no autolearn_force=no
+X-CM-TRANSID: qMiowMAx7uBKQBpnLJgPAA--.20295S3
+X-CM-SenderInfo: xpdruxter6z05rqj20fqof0/
+X-Coremail-Antispam: 1Uk129KBj93XoW3XrWfCw47XFWxGrWDWw17Arc_yoW7tF4DpF
+ 4qv3y3tr9xXryfZ3ZIyrnFkF1rWr4kGa4jk3y09r18Jay2g340yF15Ka1aka4ayw1kGF95
+ CF12qF48Wa1xZFcCm3ZEXasCq-sJn29KB7ZKAUJUUUU5529EdanIXcx71UUUUU7KY7ZEXa
+ sCq-sGcSsGvfJ3Ic02F40EFcxC0VAKzVAqx4xG6I80ebIjqfuFe4nvWSU5nxnvy29KBjDU
+ 0xBIdaVrnRJUUUv2b4IE77IF4wAFF20E14v26r1j6r4UM7CY07I20VC2zVCF04k26cxKx2
+ IYs7xG6rWj6s0DM7CIcVAFz4kK6r1Y6r17M28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48v
+ e4kI8wA2z4x0Y4vE2Ix0cI8IcVAFwI0_Jr0_JF4l84ACjcxK6xIIjxv20xvEc7CjxVAFwI
+ 0_Jr0_Gr1l84ACjcxK6I8E87Iv67AKxVW8Jr0_Cr1UM28EF7xvwVC2z280aVCY1x0267AK
+ xVW8Jr0_Cr1UM2AIxVAIcxkEcVAq07x20xvEncxIr21l57IF6xkI12xvs2x26I8E6xACxx
+ 1l5I8CrVACY4xI64kE6c02F40Ex7xfMcIj6xIIjxv20xvE14v26r1Y6r17McIj6I8E87Iv
+ 67AKxVWUJVW8JwAm72CE4IkC6x0Yz7v_Jr0_Gr1lF7xvr2IY64vIr41lc7I2V7IY0VAS07
+ AlzVAYIcxG8wCF04k20xvY0x0EwIxGrwCFx2IqxVCFs4IE7xkEbVWUJVW8JwC20s026c02
+ F40E14v26r1j6r18MI8I3I0E7480Y4vE14v26r106r1rMI8E67AF67kF1VAFwI0_GFv_Wr
+ ylIxkGc2Ij64vIr41lIxAIcVC0I7IYx2IY67AKxVWUJVWUCwCI42IY6xIIjxv20xvEc7Cj
+ xVAFwI0_Jr0_Gr1lIxAIcVCF04k26cxKx2IYs7xG6r1j6r1xMIIF0xvEx4A2jsIE14v26r
+ 1j6r4UMIIF0xvEx4A2jsIEc7CjxVAFwI0_Jr0_GrUvcSsGvfC2KfnxnUUI43ZEXa7IU8zw
+ Z7UUUUU==
+Received-SPF: pass client-ip=114.242.206.163; envelope-from=maobibo@loongson.cn;
+ helo=mail.loongson.cn
+X-Spam_score_int: -23
+X-Spam_score: -2.4
+X-Spam_bar: --
+X-Spam_report: (-2.4 / 5.0 requ) BAYES_00=-1.9, NICE_REPLY_A=-0.5,
+ RCVD_IN_VALIDITY_CERTIFIED_BLOCKED=0.001, RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -106,110 +87,163 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Alexander Graf <graf@amazon.com>
 
-We will introduce a number of devices that are specific to the vmapple
-target machine. To keep them all tidily together, let's put them into
-a single target directory.
 
-Signed-off-by: Alexander Graf <graf@amazon.com>
-Signed-off-by: Phil Dennis-Jordan <phil@philjordan.eu>
-Reviewed-by: Akihiko Odaki <akihiko.odaki@daynix.com>
----
- MAINTAINERS             | 7 +++++++
- hw/Kconfig              | 1 +
- hw/meson.build          | 1 +
- hw/vmapple/Kconfig      | 1 +
- hw/vmapple/meson.build  | 0
- hw/vmapple/trace-events | 2 ++
- hw/vmapple/trace.h      | 1 +
- meson.build             | 1 +
- 8 files changed, 14 insertions(+)
- create mode 100644 hw/vmapple/Kconfig
- create mode 100644 hw/vmapple/meson.build
- create mode 100644 hw/vmapple/trace-events
- create mode 100644 hw/vmapple/trace.h
+On 2024/8/29 上午9:59, Sia Jee Heng wrote:
+> Update the SPCR table to accommodate the SPCR Table revision 4 [1].
+> The SPCR table has been modified to adhere to the revision 4 format [2].
+> 
+> [1]: https://learn.microsoft.com/en-us/windows-hardware/drivers/serports/serial-port-console-redirection-table
+> [2]: https://github.com/acpica/acpica/pull/931
+> 
+> Signed-off-by: Sia Jee Heng <jeeheng.sia@starfivetech.com>
+> Reviewed-by: Sunil V L <sunilvl@ventanamicro.com>
+> Acked-by: Alistair Francis <alistair.francis@wdc.com>
+> ---
+>   hw/acpi/aml-build.c         | 20 ++++++++++++++++----
+>   hw/arm/virt-acpi-build.c    |  8 ++++++--
+>   hw/riscv/virt-acpi-build.c  | 12 +++++++++---
+>   include/hw/acpi/acpi-defs.h |  7 +++++--
+>   include/hw/acpi/aml-build.h |  2 +-
+>   5 files changed, 37 insertions(+), 12 deletions(-)
+> 
+> diff --git a/hw/acpi/aml-build.c b/hw/acpi/aml-build.c
+> index 6d4517cfbe..99a1b403e2 100644
+> --- a/hw/acpi/aml-build.c
+> +++ b/hw/acpi/aml-build.c
+> @@ -1996,7 +1996,7 @@ static void build_processor_hierarchy_node(GArray *tbl, uint32_t flags,
+>   
+>   void build_spcr(GArray *table_data, BIOSLinker *linker,
+>                   const AcpiSpcrData *f, const uint8_t rev,
+> -                const char *oem_id, const char *oem_table_id)
+> +                const char *oem_id, const char *oem_table_id, const char *name)
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index 16ea47a5e6d..104813ed85f 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -2733,6 +2733,13 @@ F: hw/hyperv/hv-balloon*.h
- F: include/hw/hyperv/dynmem-proto.h
- F: include/hw/hyperv/hv-balloon.h
- 
-+VMapple
-+M: Alexander Graf <agraf@csgraf.de>
-+R: Phil Dennis-Jordan <phil@philjordan.eu>
-+S: Maintained
-+F: hw/vmapple/*
-+F: include/hw/vmapple/*
-+
- Subsystems
- ----------
- Overall Audio backends
-diff --git a/hw/Kconfig b/hw/Kconfig
-index 1b4e9bb07f7..2871784cfdc 100644
---- a/hw/Kconfig
-+++ b/hw/Kconfig
-@@ -41,6 +41,7 @@ source ufs/Kconfig
- source usb/Kconfig
- source virtio/Kconfig
- source vfio/Kconfig
-+source vmapple/Kconfig
- source xen/Kconfig
- source watchdog/Kconfig
- 
-diff --git a/hw/meson.build b/hw/meson.build
-index b827c82c5d7..9c4f6d0d636 100644
---- a/hw/meson.build
-+++ b/hw/meson.build
-@@ -39,6 +39,7 @@ subdir('ufs')
- subdir('usb')
- subdir('vfio')
- subdir('virtio')
-+subdir('vmapple')
- subdir('watchdog')
- subdir('xen')
- subdir('xenpv')
-diff --git a/hw/vmapple/Kconfig b/hw/vmapple/Kconfig
-new file mode 100644
-index 00000000000..8b137891791
---- /dev/null
-+++ b/hw/vmapple/Kconfig
-@@ -0,0 +1 @@
-+
-diff --git a/hw/vmapple/meson.build b/hw/vmapple/meson.build
-new file mode 100644
-index 00000000000..e69de29bb2d
-diff --git a/hw/vmapple/trace-events b/hw/vmapple/trace-events
-new file mode 100644
-index 00000000000..9ccc5790487
---- /dev/null
-+++ b/hw/vmapple/trace-events
-@@ -0,0 +1,2 @@
-+# See docs/devel/tracing.rst for syntax documentation.
-+
-diff --git a/hw/vmapple/trace.h b/hw/vmapple/trace.h
-new file mode 100644
-index 00000000000..572adbefe04
---- /dev/null
-+++ b/hw/vmapple/trace.h
-@@ -0,0 +1 @@
-+#include "trace/trace-hw_vmapple.h"
-diff --git a/meson.build b/meson.build
-index 0e124eff13f..dd07a425f0e 100644
---- a/meson.build
-+++ b/meson.build
-@@ -3478,6 +3478,7 @@ if have_system
-     'hw/usb',
-     'hw/vfio',
-     'hw/virtio',
-+    'hw/vmapple',
-     'hw/watchdog',
-     'hw/xen',
-     'hw/gpio',
--- 
-2.39.3 (Apple Git-145)
+Sorry for late response. LoongArch virt-machine uses function 
+build_spcr() also. Maybe there need small modification on it.
+
+Regards
+Bibo Mao
+>   {
+>       AcpiTable table = { .sig = "SPCR", .rev = rev, .oem_id = oem_id,
+>                           .oem_table_id = oem_table_id };
+> @@ -2042,9 +2042,21 @@ void build_spcr(GArray *table_data, BIOSLinker *linker,
+>       build_append_int_noprefix(table_data, f->pci_flags, 4);
+>       /* PCI Segment */
+>       build_append_int_noprefix(table_data, f->pci_segment, 1);
+> -    /* Reserved */
+> -    build_append_int_noprefix(table_data, 0, 4);
+> -
+> +    if (rev < 4) {
+> +        /* Reserved */
+> +        build_append_int_noprefix(table_data, 0, 4);
+> +    } else {
+> +        /* UartClkFreq */
+> +        build_append_int_noprefix(table_data, f->uart_clk_freq, 4);
+> +        /* PreciseBaudrate */
+> +        build_append_int_noprefix(table_data, f->precise_baudrate, 4);
+> +        /* NameSpaceStringLength */
+> +        build_append_int_noprefix(table_data, f->namespace_string_length, 2);
+> +        /* NameSpaceStringOffset */
+> +        build_append_int_noprefix(table_data, f->namespace_string_offset, 2);
+> +        /* NamespaceString[] */
+> +        g_array_append_vals(table_data, name, f->namespace_string_length);
+> +    }
+>       acpi_table_end(linker, &table);
+>   }
+>   /*
+> diff --git a/hw/arm/virt-acpi-build.c b/hw/arm/virt-acpi-build.c
+> index f76fb117ad..0b6f5f8d8d 100644
+> --- a/hw/arm/virt-acpi-build.c
+> +++ b/hw/arm/virt-acpi-build.c
+> @@ -464,8 +464,12 @@ spcr_setup(GArray *table_data, BIOSLinker *linker, VirtMachineState *vms)
+>           .pci_flags = 0,
+>           .pci_segment = 0,
+>       };
+> -
+> -    build_spcr(table_data, linker, &serial, 2, vms->oem_id, vms->oem_table_id);
+> +    /*
+> +     * Passing NULL as the SPCR Table for Revision 2 doesn't support
+> +     * NameSpaceString.
+> +     */
+> +    build_spcr(table_data, linker, &serial, 2, vms->oem_id, vms->oem_table_id,
+> +               NULL);
+>   }
+>   
+>   /*
+> diff --git a/hw/riscv/virt-acpi-build.c b/hw/riscv/virt-acpi-build.c
+> index 36d6a3a412..68ef15acac 100644
+> --- a/hw/riscv/virt-acpi-build.c
+> +++ b/hw/riscv/virt-acpi-build.c
+> @@ -200,14 +200,15 @@ acpi_dsdt_add_uart(Aml *scope, const MemMapEntry *uart_memmap,
+>   
+>   /*
+>    * Serial Port Console Redirection Table (SPCR)
+> - * Rev: 1.07
+> + * Rev: 1.10
+>    */
+>   
+>   static void
+>   spcr_setup(GArray *table_data, BIOSLinker *linker, RISCVVirtState *s)
+>   {
+> +    const char name[] = ".";
+>       AcpiSpcrData serial = {
+> -        .interface_type = 0,       /* 16550 compatible */
+> +        .interface_type = 0x12,       /* 16550 compatible */
+>           .base_addr.id = AML_AS_SYSTEM_MEMORY,
+>           .base_addr.width = 32,
+>           .base_addr.offset = 0,
+> @@ -229,9 +230,14 @@ spcr_setup(GArray *table_data, BIOSLinker *linker, RISCVVirtState *s)
+>           .pci_function = 0,
+>           .pci_flags = 0,
+>           .pci_segment = 0,
+> +        .uart_clk_freq = 0,
+> +        .precise_baudrate = 0,
+> +        .namespace_string_length = sizeof(name),
+> +        .namespace_string_offset = 88,
+>       };
+>   
+> -    build_spcr(table_data, linker, &serial, 2, s->oem_id, s->oem_table_id);
+> +    build_spcr(table_data, linker, &serial, 4, s->oem_id, s->oem_table_id,
+> +               name);
+>   }
+>   
+>   /* RHCT Node[N] starts at offset 56 */
+> diff --git a/include/hw/acpi/acpi-defs.h b/include/hw/acpi/acpi-defs.h
+> index 0e6e82b339..2e6e341998 100644
+> --- a/include/hw/acpi/acpi-defs.h
+> +++ b/include/hw/acpi/acpi-defs.h
+> @@ -112,7 +112,6 @@ typedef struct AcpiSpcrData {
+>       uint8_t flow_control;
+>       uint8_t terminal_type;
+>       uint8_t language;
+> -    uint8_t reserved1;
+>       uint16_t pci_device_id;    /* Must be 0xffff if not PCI device */
+>       uint16_t pci_vendor_id;    /* Must be 0xffff if not PCI device */
+>       uint8_t pci_bus;
+> @@ -120,7 +119,11 @@ typedef struct AcpiSpcrData {
+>       uint8_t pci_function;
+>       uint32_t pci_flags;
+>       uint8_t pci_segment;
+> -    uint32_t reserved2;
+> +    uint32_t uart_clk_freq;
+> +    uint32_t precise_baudrate;
+> +    uint32_t namespace_string_length;
+> +    uint32_t namespace_string_offset;
+> +    char namespace_string[];
+>   } AcpiSpcrData;
+>   
+>   #define ACPI_FADT_ARM_PSCI_COMPLIANT  (1 << 0)
+> diff --git a/include/hw/acpi/aml-build.h b/include/hw/acpi/aml-build.h
+> index a3784155cb..68c0f2dbee 100644
+> --- a/include/hw/acpi/aml-build.h
+> +++ b/include/hw/acpi/aml-build.h
+> @@ -500,5 +500,5 @@ void build_tpm2(GArray *table_data, BIOSLinker *linker, GArray *tcpalog,
+>   
+>   void build_spcr(GArray *table_data, BIOSLinker *linker,
+>                   const AcpiSpcrData *f, const uint8_t rev,
+> -                const char *oem_id, const char *oem_table_id);
+> +                const char *oem_id, const char *oem_table_id, const char *name);
+>   #endif
+> 
 
 
