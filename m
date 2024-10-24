@@ -4,74 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 48A5ACE8E6D
-	for <qemu-riscv@archiver.kernel.org>; Thu, 24 Oct 2024 12:41:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D7D03CE8E7A
+	for <qemu-riscv@archiver.kernel.org>; Thu, 24 Oct 2024 14:24:05 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1t3x9M-0001nz-6E; Thu, 24 Oct 2024 08:41:12 -0400
+	id 1t3yks-0001ai-Th; Thu, 24 Oct 2024 10:24:02 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <maobibo@loongson.cn>)
- id 1t3x9B-0001nd-OT; Thu, 24 Oct 2024 08:41:01 -0400
-Received: from mail.loongson.cn ([114.242.206.163])
- by eggs.gnu.org with esmtp (Exim 4.90_1)
- (envelope-from <maobibo@loongson.cn>)
- id 1t3x97-0000z5-JW; Thu, 24 Oct 2024 08:41:00 -0400
-Received: from loongson.cn (unknown [10.20.42.62])
- by gateway (Coremail) with SMTP id _____8Axjq9QQBpn08AKAA--.1119S3;
- Thu, 24 Oct 2024 20:40:48 +0800 (CST)
-Received: from [10.20.42.62] (unknown [10.20.42.62])
- by front1 (Coremail) with SMTP id qMiowMAx7uBKQBpnLJgPAA--.20295S3;
- Thu, 24 Oct 2024 20:40:45 +0800 (CST)
-Subject: Re: [PATCH v5 2/3] hw/acpi: Upgrade ACPI SPCR table to support SPCR
- table revision 4 format
-To: Sia Jee Heng <jeeheng.sia@starfivetech.com>, qemu-arm@nongnu.org,
- qemu-devel@nongnu.org, qemu-riscv@nongnu.org
-Cc: mst@redhat.com, imammedo@redhat.com, anisinha@redhat.com,
- peter.maydell@linaro.org, shannon.zhaosl@gmail.com,
- sunilvl@ventanamicro.com, palmer@dabbelt.com, alistair.francis@wdc.com,
- bin.meng@windriver.com, liwei1518@gmail.com, dbarboza@ventanamicro.com,
- zhiwei_liu@linux.alibaba.com
-References: <20240829015920.95778-1-jeeheng.sia@starfivetech.com>
- <20240829015920.95778-3-jeeheng.sia@starfivetech.com>
-From: maobibo <maobibo@loongson.cn>
-Message-ID: <449f736a-dadf-cb6e-9564-8622d6d5bcb3@loongson.cn>
-Date: Thu, 24 Oct 2024 20:40:20 +0800
-User-Agent: Mozilla/5.0 (X11; Linux loongarch64; rv:68.0) Gecko/20100101
- Thunderbird/68.7.0
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1t3ykr-0001aP-8q
+ for qemu-riscv@nongnu.org; Thu, 24 Oct 2024 10:24:01 -0400
+Received: from mail-pl1-x62a.google.com ([2607:f8b0:4864:20::62a])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1t3yko-0006eQ-Hl
+ for qemu-riscv@nongnu.org; Thu, 24 Oct 2024 10:24:00 -0400
+Received: by mail-pl1-x62a.google.com with SMTP id
+ d9443c01a7336-20b5affde14so6619025ad.3
+ for <qemu-riscv@nongnu.org>; Thu, 24 Oct 2024 07:23:57 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=ventanamicro.com; s=google; t=1729779836; x=1730384636; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=mMMe/OEr9rKJjT2/QxcDCGlVTnZK11p+ZkbnsxXVylY=;
+ b=UAHy5RqpM9tlZ4Nfa2vzvrbY7CUq8PftajkGBlE+svdOCXYtkCDVQMIBllq7VYTxsr
+ ON4Zm/4UWQSl9x6qyt15ImrSZCPZd/f0wUpHzP1liRsjmQKpP1xWcinoYpcZ1GNO+MtL
+ mZ7Psi2ZzJ2Kciq8e1cdZ2QjyBRgxZYUIffnWMMqwFDUDY8jbV9V2f60ppUTYXf/1PpZ
+ olqfFJG8GS7yXzu6DCbNFmpM6CVCOAkY5MBWE78B9gbn2foCczMh8u9VPGqMDsI/NdwC
+ TlnzFLNymUr8KG70ynKbMtdKlexct05Lvwps+ADc/dwAuPnZ/inm/Vc3XLNYjWkez94D
+ ogPA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1729779836; x=1730384636;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=mMMe/OEr9rKJjT2/QxcDCGlVTnZK11p+ZkbnsxXVylY=;
+ b=sUKbZ7zpLn4WZF7vz3HuUF+tHv0jIu2sEOYJJ4IEAkMLJw4EiGdQRpSbZrOAWDfjWF
+ +Sir3tU/16klnLrVXoIxlHa/V8CN56Rt/+HnnMfVw5zQ575YkpbSTSCY6tgNhg+CTYRQ
+ nqx+lRToSxyMToJPxTsCZS2B1CGlq5zo+uIiR3lK9cTs+2I3e/XUQTNRvEjLtxVb1egk
+ uaQ1FnoP+GLNI7cXd0beWlSzHEZkduCpOE89zI2PFlkeqjtkkp5cronsnHHxwwW9K+Ha
+ b8weyW55AUYiqLk4GBBSTLMK94P/37VBOdQmOTtObtONIyKwZZ21MiuI41/QHJtcTcbV
+ EN4Q==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVFjzT6sg7277+oxBl31cMaCn62LI21bdJfT3y6ApIFpyxmBMS7uN68K4MlSePUx1su3tIrJaf42Mwo@nongnu.org
+X-Gm-Message-State: AOJu0YwgzrDnOcmZ7GBgMYtRsKU0IrG358O+bjzOGGCywVG0EdkgOUpv
+ Sqw42rYBpTYJMneHkzkL94ukGgKcOCGYANEIClsacAl5O1C8LookWe4l/J+jAYk=
+X-Google-Smtp-Source: AGHT+IFS5pivdIKyseWFLckcXKLuVhKQQ5Ln9gaJu8E/VDiZrH+aRF3nm1KfI1Wn5Une8jTuYjK1dg==
+X-Received: by 2002:a17:902:f549:b0:20c:7509:d948 with SMTP id
+ d9443c01a7336-20fb9985ddemr23251655ad.17.1729779835519; 
+ Thu, 24 Oct 2024 07:23:55 -0700 (PDT)
+Received: from [192.168.68.110] ([177.197.107.149])
+ by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-20e7eeecc4csm72744395ad.54.2024.10.24.07.23.52
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 24 Oct 2024 07:23:54 -0700 (PDT)
+Message-ID: <6781beac-d707-4a93-8fa0-8c610c00bbd9@ventanamicro.com>
+Date: Thu, 24 Oct 2024 11:23:51 -0300
 MIME-Version: 1.0
-In-Reply-To: <20240829015920.95778-3-jeeheng.sia@starfivetech.com>
-Content-Type: text/plain; charset=utf-8; format=flowed
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/2] hw/riscv: Support to load DTB after 3GB memory on
+ 64-bit system.
+To: Jim Shu <jim.shu@sifive.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bmeng.cn@gmail.com>,
+ Weiwei Li <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
+References: <20241021040942.400-1-jim.shu@sifive.com>
+ <20241021040942.400-2-jim.shu@sifive.com>
+ <7a631349-accf-49b0-a679-f62b1cfb4b1c@ventanamicro.com>
+ <CALw707qX6XzHPyL3uj2AHBxNvQ7_-yaRhVcNoCcwPgtM7mP74A@mail.gmail.com>
 Content-Language: en-US
+From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+In-Reply-To: <CALw707qX6XzHPyL3uj2AHBxNvQ7_-yaRhVcNoCcwPgtM7mP74A@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-CM-TRANSID: qMiowMAx7uBKQBpnLJgPAA--.20295S3
-X-CM-SenderInfo: xpdruxter6z05rqj20fqof0/
-X-Coremail-Antispam: 1Uk129KBj93XoW3XrWfCw47XFWxGrWDWw17Arc_yoW7tF4DpF
- 4qv3y3tr9xXryfZ3ZIyrnFkF1rWr4kGa4jk3y09r18Jay2g340yF15Ka1aka4ayw1kGF95
- CF12qF48Wa1xZFcCm3ZEXasCq-sJn29KB7ZKAUJUUUU5529EdanIXcx71UUUUU7KY7ZEXa
- sCq-sGcSsGvfJ3Ic02F40EFcxC0VAKzVAqx4xG6I80ebIjqfuFe4nvWSU5nxnvy29KBjDU
- 0xBIdaVrnRJUUUv2b4IE77IF4wAFF20E14v26r1j6r4UM7CY07I20VC2zVCF04k26cxKx2
- IYs7xG6rWj6s0DM7CIcVAFz4kK6r1Y6r17M28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48v
- e4kI8wA2z4x0Y4vE2Ix0cI8IcVAFwI0_Jr0_JF4l84ACjcxK6xIIjxv20xvEc7CjxVAFwI
- 0_Jr0_Gr1l84ACjcxK6I8E87Iv67AKxVW8Jr0_Cr1UM28EF7xvwVC2z280aVCY1x0267AK
- xVW8Jr0_Cr1UM2AIxVAIcxkEcVAq07x20xvEncxIr21l57IF6xkI12xvs2x26I8E6xACxx
- 1l5I8CrVACY4xI64kE6c02F40Ex7xfMcIj6xIIjxv20xvE14v26r1Y6r17McIj6I8E87Iv
- 67AKxVWUJVW8JwAm72CE4IkC6x0Yz7v_Jr0_Gr1lF7xvr2IY64vIr41lc7I2V7IY0VAS07
- AlzVAYIcxG8wCF04k20xvY0x0EwIxGrwCFx2IqxVCFs4IE7xkEbVWUJVW8JwC20s026c02
- F40E14v26r1j6r18MI8I3I0E7480Y4vE14v26r106r1rMI8E67AF67kF1VAFwI0_GFv_Wr
- ylIxkGc2Ij64vIr41lIxAIcVC0I7IYx2IY67AKxVWUJVWUCwCI42IY6xIIjxv20xvEc7Cj
- xVAFwI0_Jr0_Gr1lIxAIcVCF04k26cxKx2IYs7xG6r1j6r1xMIIF0xvEx4A2jsIE14v26r
- 1j6r4UMIIF0xvEx4A2jsIEc7CjxVAFwI0_Jr0_GrUvcSsGvfC2KfnxnUUI43ZEXa7IU8zw
- Z7UUUUU==
-Received-SPF: pass client-ip=114.242.206.163; envelope-from=maobibo@loongson.cn;
- helo=mail.loongson.cn
-X-Spam_score_int: -23
-X-Spam_score: -2.4
+Received-SPF: pass client-ip=2607:f8b0:4864:20::62a;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pl1-x62a.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
 X-Spam_bar: --
-X-Spam_report: (-2.4 / 5.0 requ) BAYES_00=-1.9, NICE_REPLY_A=-0.5,
- RCVD_IN_VALIDITY_CERTIFIED_BLOCKED=0.001, RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -89,161 +106,227 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 
 
-On 2024/8/29 上午9:59, Sia Jee Heng wrote:
-> Update the SPCR table to accommodate the SPCR Table revision 4 [1].
-> The SPCR table has been modified to adhere to the revision 4 format [2].
+On 10/23/24 7:19 AM, Jim Shu wrote:
+> On Mon, Oct 21, 2024 at 9:42 PM Daniel Henrique Barboza
+> <dbarboza@ventanamicro.com> wrote:
+>>
+>>
+>>
+>> On 10/21/24 1:09 AM, Jim Shu wrote:
+>>> Larger initrd image will overlap the DTB at 3GB address. Since 64-bit
+>>> system doesn't have 32-bit addressable issue, we just load DTB to the end
+>>> of dram in 64-bit system.
+>>>
+>>> Signed-off-by: Jim Shu <jim.shu@sifive.com>
+>>> ---
+>>>    hw/riscv/boot.c            | 8 ++++++--
+>>>    hw/riscv/microchip_pfsoc.c | 4 ++--
+>>>    hw/riscv/sifive_u.c        | 4 ++--
+>>>    hw/riscv/spike.c           | 4 ++--
+>>>    hw/riscv/virt.c            | 2 +-
+>>>    include/hw/riscv/boot.h    | 2 +-
+>>>    6 files changed, 14 insertions(+), 10 deletions(-)
+>>>
+>>> diff --git a/hw/riscv/boot.c b/hw/riscv/boot.c
+>>> index 9115ecd91f..ad45bd7a6a 100644
+>>> --- a/hw/riscv/boot.c
+>>> +++ b/hw/riscv/boot.c
+>>> @@ -293,7 +293,7 @@ out:
+>>>     * The FDT is fdt_packed() during the calculation.
+>>>     */
+>>>    uint64_t riscv_compute_fdt_addr(hwaddr dram_base, hwaddr dram_size,
+>>> -                                MachineState *ms)
+>>> +                                MachineState *ms, RISCVHartArrayState *harts)
+>>>    {
+>>>        int ret = fdt_pack(ms->fdt);
+>>>        hwaddr dram_end, temp;
+>>> @@ -321,7 +321,11 @@ uint64_t riscv_compute_fdt_addr(hwaddr dram_base, hwaddr dram_size,
+>>>         * Thus, put it at an 2MB aligned address that less than fdt size from the
+>>>         * end of dram or 3GB whichever is lesser.
+>>>         */
+>>> -    temp = (dram_base < 3072 * MiB) ? MIN(dram_end, 3072 * MiB) : dram_end;
+>>> +    if (!riscv_is_32bit(harts)) {
+>>> +        temp = dram_end;
+>>> +    } else {
+>>> +        temp = (dram_base < 3072 * MiB) ? MIN(dram_end, 3072 * MiB) : dram_end;
+>>> +    }
+>>
+>> I think it's a fine idea to do a different computation if we're running a 64 bit
+>> CPU but this alone won't fix the issue you're reporting.
+>>
+>> Running a 64-bit CPU does not guarantee that 'dram_end' will be enough to fit
+>> kernel+initrd and the fdt. There's no correlation between running 64 bits and having
+>> enough RAM to fit everything, i.e. you can run a 64-bit CPU with short RAM and end
+>> up with the same problem. There's also the board mem topology to account for: the
+>> Microchip board will always use a 1GB ram bank ('dram_end' will be always 1Gb max)
+>> running 32 or 64 bit CPUs.
+>>
+>> It seems that we also need to consider the end of kernel+initrd to properly tune
+>> where to put the fdt, erroring out if we don't have enough size for everything.
+>> This would make the logic work regardless of the word size of the CPU.
+>>
+>> This information is calculated in riscv_load_kernel(), which is currently
+>> returning only the kernel start addr.  We have the information we need written in
+>> the FDT as "/chosen/linux,initrd-end" but that isn't enough because this attribute
+>> is written only if we have an initrd. We would hit the same problem again if we
+>> have a big enough kernel in an low enough RAM env.
+>>
+>> First thing that comes to mind is to use an abstraction like
+>>
+>> typedef struct RISCVBootProps {
+>>       uint64_t kernel_start;
+>>       uint64_t kernel_end;
+>>       bool is_64bit;
+>> } RISCVKernelProps;
+>>
+>> And use it to allow riscv_load_kernel() to write both kernel_start (the current
+>> return value) and kernel_end (that can be either kernel_start + kernel_size or,
+>> if we have an initrd, the value written in linux,initrd-end). riscv_compute_fdt_addr()
+>> would then use this as an extra arg and then we have the 'kernel_end' value to
+>> calculate the fdt_addr too.
+>>
+>>
+>>
+>> In fact, I think this can be further extended to fully encapsulate the boot process
+>> of all boards, that are kind of doing the same thing with all these helpers, into a
+>> single 'super function' that would receive a struct like the one from above (with
+>> more properties), setting all the boot parameters the board needs, pass it to a single
+>> function that does everything and just use the result as each board wants. This
+>> is something that we might play around with but it'll be something for the next
+>> release.
+>>
+>>
+>> Thanks,
+>>
+>> Daniel
 > 
-> [1]: https://learn.microsoft.com/en-us/windows-hardware/drivers/serports/serial-port-console-redirection-table
-> [2]: https://github.com/acpica/acpica/pull/931
+> Thanks for the feedback. I can try to add the checking of overlapping
+> between initrd and dtb in the V2 patch.
+> I think it may change some boot APIs in "hw/riscv/boot.c"
 > 
-> Signed-off-by: Sia Jee Heng <jeeheng.sia@starfivetech.com>
-> Reviewed-by: Sunil V L <sunilvl@ventanamicro.com>
-> Acked-by: Alistair Francis <alistair.francis@wdc.com>
-> ---
->   hw/acpi/aml-build.c         | 20 ++++++++++++++++----
->   hw/arm/virt-acpi-build.c    |  8 ++++++--
->   hw/riscv/virt-acpi-build.c  | 12 +++++++++---
->   include/hw/acpi/acpi-defs.h |  7 +++++--
->   include/hw/acpi/aml-build.h |  2 +-
->   5 files changed, 37 insertions(+), 12 deletions(-)
-> 
-> diff --git a/hw/acpi/aml-build.c b/hw/acpi/aml-build.c
-> index 6d4517cfbe..99a1b403e2 100644
-> --- a/hw/acpi/aml-build.c
-> +++ b/hw/acpi/aml-build.c
-> @@ -1996,7 +1996,7 @@ static void build_processor_hierarchy_node(GArray *tbl, uint32_t flags,
->   
->   void build_spcr(GArray *table_data, BIOSLinker *linker,
->                   const AcpiSpcrData *f, const uint8_t rev,
-> -                const char *oem_id, const char *oem_table_id)
-> +                const char *oem_id, const char *oem_table_id, const char *name)
+> ARM has an abstraction of the most info in `struct arm_boot_info`, so
+> it can add checkings in the functions like
+> `arm_setup_direct_kernel_boot()`.
+> We may do the similar work but be simpler at first.
 
-Sorry for late response. LoongArch virt-machine uses function 
-build_spcr() also. Maybe there need small modification on it.
+Don't need to go too deep right now. You can focus on fixing the problem you
+have at hand first, adding a 'struct riscv_boot_info' if you want to take an
+inspiration from ARM, and passing just the kernel_start and kernel_end attrs
+around. In a second step we can use the same struct, extend it and refactor
+hw/riscv/boot.c (and its callers) accordingly.
 
-Regards
-Bibo Mao
->   {
->       AcpiTable table = { .sig = "SPCR", .rev = rev, .oem_id = oem_id,
->                           .oem_table_id = oem_table_id };
-> @@ -2042,9 +2042,21 @@ void build_spcr(GArray *table_data, BIOSLinker *linker,
->       build_append_int_noprefix(table_data, f->pci_flags, 4);
->       /* PCI Segment */
->       build_append_int_noprefix(table_data, f->pci_segment, 1);
-> -    /* Reserved */
-> -    build_append_int_noprefix(table_data, 0, 4);
-> -
-> +    if (rev < 4) {
-> +        /* Reserved */
-> +        build_append_int_noprefix(table_data, 0, 4);
-> +    } else {
-> +        /* UartClkFreq */
-> +        build_append_int_noprefix(table_data, f->uart_clk_freq, 4);
-> +        /* PreciseBaudrate */
-> +        build_append_int_noprefix(table_data, f->precise_baudrate, 4);
-> +        /* NameSpaceStringLength */
-> +        build_append_int_noprefix(table_data, f->namespace_string_length, 2);
-> +        /* NameSpaceStringOffset */
-> +        build_append_int_noprefix(table_data, f->namespace_string_offset, 2);
-> +        /* NamespaceString[] */
-> +        g_array_append_vals(table_data, name, f->namespace_string_length);
-> +    }
->       acpi_table_end(linker, &table);
->   }
->   /*
-> diff --git a/hw/arm/virt-acpi-build.c b/hw/arm/virt-acpi-build.c
-> index f76fb117ad..0b6f5f8d8d 100644
-> --- a/hw/arm/virt-acpi-build.c
-> +++ b/hw/arm/virt-acpi-build.c
-> @@ -464,8 +464,12 @@ spcr_setup(GArray *table_data, BIOSLinker *linker, VirtMachineState *vms)
->           .pci_flags = 0,
->           .pci_segment = 0,
->       };
-> -
-> -    build_spcr(table_data, linker, &serial, 2, vms->oem_id, vms->oem_table_id);
-> +    /*
-> +     * Passing NULL as the SPCR Table for Revision 2 doesn't support
-> +     * NameSpaceString.
-> +     */
-> +    build_spcr(table_data, linker, &serial, 2, vms->oem_id, vms->oem_table_id,
-> +               NULL);
->   }
->   
->   /*
-> diff --git a/hw/riscv/virt-acpi-build.c b/hw/riscv/virt-acpi-build.c
-> index 36d6a3a412..68ef15acac 100644
-> --- a/hw/riscv/virt-acpi-build.c
-> +++ b/hw/riscv/virt-acpi-build.c
-> @@ -200,14 +200,15 @@ acpi_dsdt_add_uart(Aml *scope, const MemMapEntry *uart_memmap,
->   
->   /*
->    * Serial Port Console Redirection Table (SPCR)
-> - * Rev: 1.07
-> + * Rev: 1.10
->    */
->   
->   static void
->   spcr_setup(GArray *table_data, BIOSLinker *linker, RISCVVirtState *s)
->   {
-> +    const char name[] = ".";
->       AcpiSpcrData serial = {
-> -        .interface_type = 0,       /* 16550 compatible */
-> +        .interface_type = 0x12,       /* 16550 compatible */
->           .base_addr.id = AML_AS_SYSTEM_MEMORY,
->           .base_addr.width = 32,
->           .base_addr.offset = 0,
-> @@ -229,9 +230,14 @@ spcr_setup(GArray *table_data, BIOSLinker *linker, RISCVVirtState *s)
->           .pci_function = 0,
->           .pci_flags = 0,
->           .pci_segment = 0,
-> +        .uart_clk_freq = 0,
-> +        .precise_baudrate = 0,
-> +        .namespace_string_length = sizeof(name),
-> +        .namespace_string_offset = 88,
->       };
->   
-> -    build_spcr(table_data, linker, &serial, 2, s->oem_id, s->oem_table_id);
-> +    build_spcr(table_data, linker, &serial, 4, s->oem_id, s->oem_table_id,
-> +               name);
->   }
->   
->   /* RHCT Node[N] starts at offset 56 */
-> diff --git a/include/hw/acpi/acpi-defs.h b/include/hw/acpi/acpi-defs.h
-> index 0e6e82b339..2e6e341998 100644
-> --- a/include/hw/acpi/acpi-defs.h
-> +++ b/include/hw/acpi/acpi-defs.h
-> @@ -112,7 +112,6 @@ typedef struct AcpiSpcrData {
->       uint8_t flow_control;
->       uint8_t terminal_type;
->       uint8_t language;
-> -    uint8_t reserved1;
->       uint16_t pci_device_id;    /* Must be 0xffff if not PCI device */
->       uint16_t pci_vendor_id;    /* Must be 0xffff if not PCI device */
->       uint8_t pci_bus;
-> @@ -120,7 +119,11 @@ typedef struct AcpiSpcrData {
->       uint8_t pci_function;
->       uint32_t pci_flags;
->       uint8_t pci_segment;
-> -    uint32_t reserved2;
-> +    uint32_t uart_clk_freq;
-> +    uint32_t precise_baudrate;
-> +    uint32_t namespace_string_length;
-> +    uint32_t namespace_string_offset;
-> +    char namespace_string[];
->   } AcpiSpcrData;
->   
->   #define ACPI_FADT_ARM_PSCI_COMPLIANT  (1 << 0)
-> diff --git a/include/hw/acpi/aml-build.h b/include/hw/acpi/aml-build.h
-> index a3784155cb..68c0f2dbee 100644
-> --- a/include/hw/acpi/aml-build.h
-> +++ b/include/hw/acpi/aml-build.h
-> @@ -500,5 +500,5 @@ void build_tpm2(GArray *table_data, BIOSLinker *linker, GArray *tcpalog,
->   
->   void build_spcr(GArray *table_data, BIOSLinker *linker,
->                   const AcpiSpcrData *f, const uint8_t rev,
-> -                const char *oem_id, const char *oem_table_id);
-> +                const char *oem_id, const char *oem_table_id, const char *name);
->   #endif
+If we could make the board populate a riscv_boot_info struct and then just do
+a single call to a riscv_machine_boot() function that would do everything,
+returning the updated struct to the board, that would be great.
+
+
+ps: all function names I'm using up there are tentative. Feel free to name the
+functions whatever you think fits best. Thanks,
+
+
+Daniel
+
 > 
-
+> 
+> Thanks,
+> Jim Shu
+> 
+>>
+>>
+>>
+>>>
+>>>        return QEMU_ALIGN_DOWN(temp - fdtsize, 2 * MiB);
+>>>    }
+>>> diff --git a/hw/riscv/microchip_pfsoc.c b/hw/riscv/microchip_pfsoc.c
+>>> index f9a3b43d2e..ba8b0a2c26 100644
+>>> --- a/hw/riscv/microchip_pfsoc.c
+>>> +++ b/hw/riscv/microchip_pfsoc.c
+>>> @@ -519,7 +519,7 @@ static void microchip_icicle_kit_machine_init(MachineState *machine)
+>>>        bool kernel_as_payload = false;
+>>>        target_ulong firmware_end_addr, kernel_start_addr;
+>>>        uint64_t kernel_entry;
+>>> -    uint32_t fdt_load_addr;
+>>> +    uint64_t fdt_load_addr;
+>>>        DriveInfo *dinfo = drive_get(IF_SD, 0, 0);
+>>>
+>>>        /* Sanity check on RAM size */
+>>> @@ -625,7 +625,7 @@ static void microchip_icicle_kit_machine_init(MachineState *machine)
+>>>            /* Compute the fdt load address in dram */
+>>>            fdt_load_addr = riscv_compute_fdt_addr(memmap[MICROCHIP_PFSOC_DRAM_LO].base,
+>>>                                                   memmap[MICROCHIP_PFSOC_DRAM_LO].size,
+>>> -                                               machine);
+>>> +                                               machine, &s->soc.u_cpus);
+>>>            riscv_load_fdt(fdt_load_addr, machine->fdt);
+>>>
+>>>            /* Load the reset vector */
+>>> diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
+>>> index 9b3dcf3a7a..fd974f2357 100644
+>>> --- a/hw/riscv/sifive_u.c
+>>> +++ b/hw/riscv/sifive_u.c
+>>> @@ -519,7 +519,7 @@ static void sifive_u_machine_init(MachineState *machine)
+>>>        const char *firmware_name;
+>>>        uint32_t start_addr_hi32 = 0x00000000;
+>>>        int i;
+>>> -    uint32_t fdt_load_addr;
+>>> +    uint64_t fdt_load_addr;
+>>>        uint64_t kernel_entry;
+>>>        DriveInfo *dinfo;
+>>>        BlockBackend *blk;
+>>> @@ -606,7 +606,7 @@ static void sifive_u_machine_init(MachineState *machine)
+>>>
+>>>        fdt_load_addr = riscv_compute_fdt_addr(memmap[SIFIVE_U_DEV_DRAM].base,
+>>>                                               memmap[SIFIVE_U_DEV_DRAM].size,
+>>> -                                           machine);
+>>> +                                           machine, &s->soc.u_cpus);
+>>>        riscv_load_fdt(fdt_load_addr, machine->fdt);
+>>>
+>>>        if (!riscv_is_32bit(&s->soc.u_cpus)) {
+>>> diff --git a/hw/riscv/spike.c b/hw/riscv/spike.c
+>>> index fceb91d946..acd7ab1ae1 100644
+>>> --- a/hw/riscv/spike.c
+>>> +++ b/hw/riscv/spike.c
+>>> @@ -201,7 +201,7 @@ static void spike_board_init(MachineState *machine)
+>>>        hwaddr firmware_load_addr = memmap[SPIKE_DRAM].base;
+>>>        target_ulong kernel_start_addr;
+>>>        char *firmware_name;
+>>> -    uint32_t fdt_load_addr;
+>>> +    uint64_t fdt_load_addr;
+>>>        uint64_t kernel_entry;
+>>>        char *soc_name;
+>>>        int i, base_hartid, hart_count;
+>>> @@ -317,7 +317,7 @@ static void spike_board_init(MachineState *machine)
+>>>
+>>>        fdt_load_addr = riscv_compute_fdt_addr(memmap[SPIKE_DRAM].base,
+>>>                                               memmap[SPIKE_DRAM].size,
+>>> -                                           machine);
+>>> +                                           machine, &s->soc[0]);
+>>>        riscv_load_fdt(fdt_load_addr, machine->fdt);
+>>>
+>>>        /* load the reset vector */
+>>> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+>>> index ee3129f3b3..cfbeeaf7d5 100644
+>>> --- a/hw/riscv/virt.c
+>>> +++ b/hw/riscv/virt.c
+>>> @@ -1399,7 +1399,7 @@ static void virt_machine_done(Notifier *notifier, void *data)
+>>>
+>>>        fdt_load_addr = riscv_compute_fdt_addr(memmap[VIRT_DRAM].base,
+>>>                                               memmap[VIRT_DRAM].size,
+>>> -                                           machine);
+>>> +                                           machine, &s->soc[0]);
+>>>        riscv_load_fdt(fdt_load_addr, machine->fdt);
+>>>
+>>>        /* load the reset vector */
+>>> diff --git a/include/hw/riscv/boot.h b/include/hw/riscv/boot.h
+>>> index 18bfe9f7bf..7ccbe5f62a 100644
+>>> --- a/include/hw/riscv/boot.h
+>>> +++ b/include/hw/riscv/boot.h
+>>> @@ -49,7 +49,7 @@ target_ulong riscv_load_kernel(MachineState *machine,
+>>>                                   bool load_initrd,
+>>>                                   symbol_fn_t sym_cb);
+>>>    uint64_t riscv_compute_fdt_addr(hwaddr dram_start, uint64_t dram_size,
+>>> -                                MachineState *ms);
+>>> +                                MachineState *ms, RISCVHartArrayState *harts);
+>>>    void riscv_load_fdt(hwaddr fdt_addr, void *fdt);
+>>>    void riscv_setup_rom_reset_vec(MachineState *machine, RISCVHartArrayState *harts,
+>>>                                   hwaddr saddr,
 
