@@ -4,63 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C865FCFA457
-	for <qemu-riscv@archiver.kernel.org>; Thu, 24 Oct 2024 10:33:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6A77CD2C542
+	for <qemu-riscv@archiver.kernel.org>; Thu, 24 Oct 2024 10:33:13 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1t3v58-0000qc-N1; Thu, 24 Oct 2024 06:28:42 -0400
+	id 1t3v5Q-00018Q-4V; Thu, 24 Oct 2024 06:29:00 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <phil@philjordan.eu>)
- id 1t3v56-0000p8-CX
- for qemu-riscv@nongnu.org; Thu, 24 Oct 2024 06:28:40 -0400
-Received: from mail-lf1-x132.google.com ([2a00:1450:4864:20::132])
+ id 1t3v5L-00012O-DO
+ for qemu-riscv@nongnu.org; Thu, 24 Oct 2024 06:28:55 -0400
+Received: from mail-ej1-x634.google.com ([2a00:1450:4864:20::634])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <phil@philjordan.eu>)
- id 1t3v51-0008Ab-2V
- for qemu-riscv@nongnu.org; Thu, 24 Oct 2024 06:28:40 -0400
-Received: by mail-lf1-x132.google.com with SMTP id
- 2adb3069b0e04-539f7606199so942409e87.0
- for <qemu-riscv@nongnu.org>; Thu, 24 Oct 2024 03:28:34 -0700 (PDT)
+ id 1t3v5J-0008Ia-EF
+ for qemu-riscv@nongnu.org; Thu, 24 Oct 2024 06:28:55 -0400
+Received: by mail-ej1-x634.google.com with SMTP id
+ a640c23a62f3a-a99ebb390a5so341347266b.1
+ for <qemu-riscv@nongnu.org>; Thu, 24 Oct 2024 03:28:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=philjordan-eu.20230601.gappssmtp.com; s=20230601; t=1729765713; x=1730370513;
+ d=philjordan-eu.20230601.gappssmtp.com; s=20230601; t=1729765732; x=1730370532;
  darn=nongnu.org; 
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=IeeiN2yn/TS4rJUlED7bKC2li59eUCEaUtMqhMT8sOo=;
- b=QZfm7Tj8AcwHXggf5Z/mcyGAACm4ZOlUe2YUKQhM77EUf3A3Ox5CPfohWKR7yFRsvA
- CH08lATlQRzZDNoBzMCUcs8R+Ju++6wpoY7nXyOZmIHD3//yABPfoO5/xteMDlUvH30x
- ZlAfWcOvRlCYHJWJNI5zaDDpM8YjrJQws39jyM13S/3fthAUCXpVnGifMqKDvd9K1QBL
- d1BBMeSpOW1olkuNHKbJdwT6kux0/EEeUSF5yoh82kewOa7DUQYwONhNDc1v/ucXQX+m
- acRlzT4OuCZXrgk9B/1sBrH2JoCkbsyLN1mAltObKPEU8Lgc4PNbJr5XDU6k/U/PX0vw
- Beaw==
+ bh=0nReO9r9RrbUk1hvaDfJ9iU/fN5yRbIfPdkL/UxhNLg=;
+ b=Xlt5OIUrLFQbm13tXIROyivFsqYkH7W4bNZS8Vr3o+bNSBFJC1CKJw0j7G+3eTDMqD
+ WeXgzEM4dpPjXAjyzwmxcI50bDsEhfqO8c6hodaiTCLGU/0qv0EuHzXcebElysEq03LE
+ ANFukznq35YS3cVcu2jUHBiwfxjXeGyIdxabOIkk/+kO3TUXJUf0+jjMTZtVmDzs9Srn
+ U/Wn517umiV4vldFcC1w2H5IY+QeUat3FMy7De+c7V1a2sS/BxzSYUhRh9ufb6SVblst
+ 4HvAQfimFOl0oBVJ3UC7/KKPNEArDAgSyTVUlFJOUXinGPVPsUx2qkOaVqODR8/G8t7p
+ J/aQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729765713; x=1730370513;
+ d=1e100.net; s=20230601; t=1729765732; x=1730370532;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=IeeiN2yn/TS4rJUlED7bKC2li59eUCEaUtMqhMT8sOo=;
- b=kJp4pM5Ogf1/YZuu8ItpvAnddlxbrgDT7Dks89E7SJuMWdwiyQWWIy0pvdldEEX+eA
- h9ridCKicEeIlFSXaPnfsN8Nm+WUcKSDOGO1yKEAWY738OteDDfgjVd5nMatPLu2BTjI
- gHsXv9XE8qD8NKuYWq/BSXQBgW/UasLkaRN9z6qvocyqwYnJPloM1PmJFH20fPImzwpa
- oWPLXxZTN8bt/t+PVn4H2JSIRrrWwtTPhb6fNvU8f320beS8XUYqi1UITigf3uJqbtcz
- GtVq5lx4rIplt4nbg/HAxO3CZHTjxsJHBuR4UAw1GcLWz51aj5YRseuy/oHMHVAtvIXt
- 6tpA==
+ bh=0nReO9r9RrbUk1hvaDfJ9iU/fN5yRbIfPdkL/UxhNLg=;
+ b=Utwr717ayRrW06qnb9oADGgxaNEtZ7D7rCY4YPBJTyXv2VqZINPGnJItuXKc3pV6+y
+ nyYOUYgnHWL+MC8+LaUTZGxwYzFOFmJE7skEQIzd8/HUrI/U8Mf6QJzr3tc3FYEa1GWI
+ S96+gd0cja9UbQcSi0guhNvj0C4eo11K3rdze/FLl4CAXQ+v1GFvQc2IpZHJNwzKiKhA
+ cXT5pA6GksKm6OFwUD5qWNdXupffmK10r4jB7y7ewu82k92p+OzuMv6jYk95UW4K82H5
+ HuF4HkLiqMya6JlHToQ+N6e8C46GhDCIcBAWZZ2T8DYlM2Khb2Pw8DvbmcBwsTri0zuK
+ v+Cg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCW+DkEaL4maK1OwjF7jTwEG+wCbQ8nb94Q32H+8obyYxlkfP6QVc6pTqV/SR2YVgx+oVImWOBf7awad@nongnu.org
-X-Gm-Message-State: AOJu0YxGY1c+KR3iTJxs0OkIBibU2oFwq2QT3XYJ6YtxDVUzUSKvvkJN
- ZXfNEdyPlJ95+VYEvYOaLfmM1KCclLRTMCADXsdxTI4hxdFAxV7XD22mkeTKGw==
-X-Google-Smtp-Source: AGHT+IFxh4yci0JDwmIDjNzFulP0W6W66ohWPCHFfjtnBs6L+lHNzJAKEi1Cxydt0p1hQZe54xqXWA==
-X-Received: by 2002:a05:6512:398a:b0:539:f2f6:c70f with SMTP id
- 2adb3069b0e04-53b1a2fed80mr2917958e87.8.1729765712713; 
- Thu, 24 Oct 2024 03:28:32 -0700 (PDT)
+ AJvYcCUGT+4O5Z9yihGm7bxZR/NF12pB0zUfEZPJILnmPJ8KRyrTSwr2kQX9wlbvNcg0TdDYsbWw6sq8rMgW@nongnu.org
+X-Gm-Message-State: AOJu0Yx0LAjB8wp4kszjmmu/ZHSE9j/Asj0HksC34KY3gSh0hTAGR/we
+ e9YbLLyP1Gj4i8zTv5ic0xXnIm1T3boa7Sq8szAobmmS66pkJx9GKdGgKnsFYQ==
+X-Google-Smtp-Source: AGHT+IGHpK9VgCKrLDKOqmStQzxC8yg4Uc6VdrJTE5SlWfLSJW35I2wQF2EzsXfU7Ev0vNMBJfkytg==
+X-Received: by 2002:a17:907:7f0e:b0:a9a:cf0:8fd4 with SMTP id
+ a640c23a62f3a-a9ad19d4c3dmr168980766b.18.1729765731784; 
+ Thu, 24 Oct 2024 03:28:51 -0700 (PDT)
 Received: from localhost.localdomain (h082218084190.host.wavenet.at.
  [82.218.84.190]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a9a913706d3sm601019066b.134.2024.10.24.03.28.29
+ a640c23a62f3a-a9a913706d3sm601019066b.134.2024.10.24.03.28.49
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Thu, 24 Oct 2024 03:28:32 -0700 (PDT)
+ Thu, 24 Oct 2024 03:28:51 -0700 (PDT)
 From: Phil Dennis-Jordan <phil@philjordan.eu>
 To: qemu-devel@nongnu.org
 Cc: agraf@csgraf.de, phil@philjordan.eu, peter.maydell@linaro.org,
@@ -74,17 +74,18 @@ Cc: agraf@csgraf.de, phil@philjordan.eu, peter.maydell@linaro.org,
  dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com,
  jcmvbkbc@gmail.com, marcandre.lureau@redhat.com, berrange@redhat.com,
  akihiko.odaki@daynix.com, qemu-arm@nongnu.org, qemu-block@nongnu.org,
- qemu-riscv@nongnu.org
-Subject: [PATCH v4 04/15] hw/display/apple-gfx: Adds configurable mode list
-Date: Thu, 24 Oct 2024 12:28:02 +0200
-Message-Id: <20241024102813.9855-5-phil@philjordan.eu>
+ qemu-riscv@nongnu.org, Alexander Graf <graf@amazon.com>
+Subject: [PATCH v4 12/15] hw/vmapple/cfg: Introduce vmapple cfg region
+Date: Thu, 24 Oct 2024 12:28:10 +0200
+Message-Id: <20241024102813.9855-13-phil@philjordan.eu>
 X-Mailer: git-send-email 2.39.3 (Apple Git-145)
 In-Reply-To: <20241024102813.9855-1-phil@philjordan.eu>
 References: <20241024102813.9855-1-phil@philjordan.eu>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: neutral client-ip=2a00:1450:4864:20::132;
- envelope-from=phil@philjordan.eu; helo=mail-lf1-x132.google.com
+Received-SPF: neutral client-ip=2a00:1450:4864:20::634;
+ envelope-from=phil@philjordan.eu; helo=mail-ej1-x634.google.com
 X-Spam_score_int: -10
 X-Spam_score: -1.1
 X-Spam_bar: -
@@ -106,324 +107,269 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-This change adds a property 'display_modes' on the graphics device
-which permits specifying a list of display modes. (screen resolution
-and refresh rate)
+From: Alexander Graf <graf@amazon.com>
 
-The property is an array of a custom type to make the syntax slightly
-less awkward to use, for example:
+Instead of device tree or other more standardized means, VMApple passes
+platform configuration to the first stage boot loader in a binary encoded
+format that resides at a dedicated RAM region in physical address space.
 
--device '{"driver":"apple-gfx-pci", "display-modes":["1920x1080@60", "3840x2160@60"]}'
+This patch models this configuration space as a qdev device which we can
+then map at the fixed location in the address space. That way, we can
+influence and annotate all configuration fields easily.
 
+Signed-off-by: Alexander Graf <graf@amazon.com>
 Signed-off-by: Phil Dennis-Jordan <phil@philjordan.eu>
 ---
+v3:
+
+ * Replaced legacy device reset method with Resettable method
 
 v4:
 
- * Switched to the native array property type, which recently gained
-	 command line support.
- * The property has also been added to the -mmio variant.
- * Tidied up the code a little.
+ * Fixed initialisation of default values for properties
+ * Dropped superfluous endianness conversions
+ * Moved most header code to .c, device name #define goes in vmapple.h
 
- hw/display/apple-gfx-mmio.m |   8 +++
- hw/display/apple-gfx-pci.m  |   9 ++-
- hw/display/apple-gfx.h      |  12 ++++
- hw/display/apple-gfx.m      | 127 ++++++++++++++++++++++++++++++++----
- hw/display/trace-events     |   2 +
- 5 files changed, 145 insertions(+), 13 deletions(-)
+ hw/vmapple/Kconfig           |   3 +
+ hw/vmapple/cfg.c             | 197 +++++++++++++++++++++++++++++++++++
+ hw/vmapple/meson.build       |   1 +
+ include/hw/vmapple/vmapple.h |   2 +
+ 4 files changed, 203 insertions(+)
+ create mode 100644 hw/vmapple/cfg.c
 
-diff --git a/hw/display/apple-gfx-mmio.m b/hw/display/apple-gfx-mmio.m
-index 06131bc23f1..5d427c7005e 100644
---- a/hw/display/apple-gfx-mmio.m
-+++ b/hw/display/apple-gfx-mmio.m
-@@ -261,6 +261,12 @@ static void apple_gfx_mmio_reset(Object *obj, ResetType type)
-     [s->common.pgdev reset];
- }
+diff --git a/hw/vmapple/Kconfig b/hw/vmapple/Kconfig
+index 68f88876eb9..8bbeb9a9237 100644
+--- a/hw/vmapple/Kconfig
++++ b/hw/vmapple/Kconfig
+@@ -4,3 +4,6 @@ config VMAPPLE_AES
+ config VMAPPLE_BDIF
+     bool
  
-+static Property apple_gfx_mmio_properties[] = {
-+    DEFINE_PROP_ARRAY("display-modes", AppleGFXMMIOState,
-+                      common.num_display_modes, common.display_modes,
-+                      qdev_prop_display_mode, AppleGFXDisplayMode),
-+    DEFINE_PROP_END_OF_LIST(),
++config VMAPPLE_CFG
++    bool
++
+diff --git a/hw/vmapple/cfg.c b/hw/vmapple/cfg.c
+new file mode 100644
+index 00000000000..aeb76ba363c
+--- /dev/null
++++ b/hw/vmapple/cfg.c
+@@ -0,0 +1,197 @@
++/*
++ * VMApple Configuration Region
++ *
++ * Copyright © 2023 Amazon.com, Inc. or its affiliates. All Rights Reserved.
++ *
++ * This work is licensed under the terms of the GNU GPL, version 2 or later.
++ * See the COPYING file in the top-level directory.
++ */
++
++#include "qemu/osdep.h"
++#include "hw/vmapple/vmapple.h"
++#include "hw/sysbus.h"
++#include "qemu/log.h"
++#include "qemu/module.h"
++#include "qapi/error.h"
++#include "net/net.h"
++
++OBJECT_DECLARE_SIMPLE_TYPE(VMAppleCfgState, VMAPPLE_CFG)
++
++#define VMAPPLE_CFG_SIZE 0x00010000
++
++typedef struct VMAppleCfg {
++    uint32_t version;         /* 0x000 */
++    uint32_t nr_cpus;         /* 0x004 */
++    uint32_t unk1;            /* 0x008 */
++    uint32_t unk2;            /* 0x00c */
++    uint32_t unk3;            /* 0x010 */
++    uint32_t unk4;            /* 0x014 */
++    uint64_t ecid;            /* 0x018 */
++    uint64_t ram_size;        /* 0x020 */
++    uint32_t run_installer1;  /* 0x028 */
++    uint32_t unk5;            /* 0x02c */
++    uint32_t unk6;            /* 0x030 */
++    uint32_t run_installer2;  /* 0x034 */
++    uint32_t rnd;             /* 0x038 */
++    uint32_t unk7;            /* 0x03c */
++    MACAddr mac_en0;          /* 0x040 */
++    uint8_t pad1[2];
++    MACAddr mac_en1;          /* 0x048 */
++    uint8_t pad2[2];
++    MACAddr mac_wifi0;        /* 0x050 */
++    uint8_t pad3[2];
++    MACAddr mac_bt0;          /* 0x058 */
++    uint8_t pad4[2];
++    uint8_t reserved[0xa0];   /* 0x060 */
++    uint32_t cpu_ids[0x80];   /* 0x100 */
++    uint8_t scratch[0x200];   /* 0x180 */
++    char serial[32];          /* 0x380 */
++    char unk8[32];            /* 0x3a0 */
++    char model[32];           /* 0x3c0 */
++    uint8_t unk9[32];         /* 0x3e0 */
++    uint32_t unk10;           /* 0x400 */
++    char soc_name[32];        /* 0x404 */
++} VMAppleCfg;
++
++struct VMAppleCfgState {
++    SysBusDevice parent_obj;
++    VMAppleCfg cfg;
++
++    MemoryRegion mem;
++    char *serial;
++    char *model;
++    char *soc_name;
 +};
- 
- static void apple_gfx_mmio_class_init(ObjectClass *klass, void *data)
- {
-@@ -270,6 +276,8 @@ static void apple_gfx_mmio_class_init(ObjectClass *klass, void *data)
-     rc->phases.hold = apple_gfx_mmio_reset;
-     dc->hotpluggable = false;
-     dc->realize = apple_gfx_mmio_realize;
 +
-+    device_class_set_props(dc, apple_gfx_mmio_properties);
- }
- 
- static TypeInfo apple_gfx_mmio_types[] = {
-diff --git a/hw/display/apple-gfx-pci.m b/hw/display/apple-gfx-pci.m
-index 4ee26dde422..32e81bbef8b 100644
---- a/hw/display/apple-gfx-pci.m
-+++ b/hw/display/apple-gfx-pci.m
-@@ -115,6 +115,13 @@ static void apple_gfx_pci_reset(Object *obj, ResetType type)
-     [s->common.pgdev reset];
- }
- 
-+static Property apple_gfx_pci_properties[] = {
-+    DEFINE_PROP_ARRAY("display-modes", AppleGFXPCIState,
-+                      common.num_display_modes, common.display_modes,
-+                      qdev_prop_display_mode, AppleGFXDisplayMode),
-+    DEFINE_PROP_END_OF_LIST(),
-+};
-+
- static void apple_gfx_pci_class_init(ObjectClass *klass, void *data)
- {
-     DeviceClass *dc = DEVICE_CLASS(klass);
-@@ -132,7 +139,7 @@ static void apple_gfx_pci_class_init(ObjectClass *klass, void *data)
-     pci->class_id = PCI_CLASS_DISPLAY_OTHER;
-     pci->realize = apple_gfx_pci_realize;
- 
--    // TODO: Property for setting mode list
-+    device_class_set_props(dc, apple_gfx_pci_properties);
- }
- 
- static TypeInfo apple_gfx_pci_types[] = {
-diff --git a/hw/display/apple-gfx.h b/hw/display/apple-gfx.h
-index 39931fba65a..d2c6a14229a 100644
---- a/hw/display/apple-gfx.h
-+++ b/hw/display/apple-gfx.h
-@@ -9,6 +9,7 @@
- #import <ParavirtualizedGraphics/ParavirtualizedGraphics.h>
- #include "qemu/typedefs.h"
- #include "exec/memory.h"
-+#include "hw/qdev-properties.h"
- #include "ui/surface.h"
- 
- @class PGDeviceDescriptor;
-@@ -20,6 +21,7 @@
- 
- typedef QTAILQ_HEAD(, PGTask_s) PGTaskList;
- 
-+struct AppleGFXDisplayMode;
- struct AppleGFXMapMemoryJob;
- typedef struct AppleGFXState {
-     MemoryRegion iomem_gfx;
-@@ -31,6 +33,8 @@ typedef struct AppleGFXState {
-     id<MTLCommandQueue> mtl_queue;
-     bool cursor_show;
-     QEMUCursor *cursor;
-+    struct AppleGFXDisplayMode *display_modes;
-+    uint32_t num_display_modes;
- 
-     /* For running PVG memory-mapping requests in the AIO context */
-     QemuCond job_cond;
-@@ -47,6 +51,12 @@ typedef struct AppleGFXState {
-     id<MTLTexture> texture;
- } AppleGFXState;
- 
-+typedef struct AppleGFXDisplayMode {
-+    uint16_t width_px;
-+    uint16_t height_px;
-+    uint16_t refresh_rate_hz;
-+} AppleGFXDisplayMode;
-+
- void apple_gfx_common_init(Object *obj, AppleGFXState *s, const char* obj_name);
- void apple_gfx_common_realize(AppleGFXState *s, PGDeviceDescriptor *desc,
-                               Error **errp);
-@@ -54,5 +64,7 @@ uintptr_t apple_gfx_host_address_for_gpa_range(uint64_t guest_physical,
-                                                uint64_t length, bool read_only);
- void apple_gfx_await_bh_job(AppleGFXState *s, bool *job_done_flag);
- 
-+extern const PropertyInfo qdev_prop_display_mode;
-+
- #endif
- 
-diff --git a/hw/display/apple-gfx.m b/hw/display/apple-gfx.m
-index 46be9957f69..42b601329fb 100644
---- a/hw/display/apple-gfx.m
-+++ b/hw/display/apple-gfx.m
-@@ -28,9 +28,10 @@
- #include "qapi/error.h"
- #include "ui/console.h"
- 
--static const PGDisplayCoord_t apple_gfx_modes[] = {
--    { .x = 1440, .y = 1080 },
--    { .x = 1280, .y = 1024 },
-+static const AppleGFXDisplayMode apple_gfx_default_modes[] = {
-+    { 1920, 1080, 60 },
-+    { 1440, 1080, 60 },
-+    { 1280, 1024, 60 },
- };
- 
- /* This implements a type defined in <ParavirtualizedGraphics/PGDevice.h>
-@@ -303,7 +304,6 @@ static void set_mode(AppleGFXState *s, uint32_t width, uint32_t height)
- static void create_fb(AppleGFXState *s)
- {
-     s->con = graphic_console_init(NULL, 0, &apple_gfx_fb_ops, s);
--    set_mode(s, 1440, 1080);
- 
-     s->cursor_show = true;
- }
-@@ -628,20 +628,25 @@ static void apple_gfx_register_task_mapping_handlers(AppleGFXState *s,
-     return disp_desc;
- }
- 
--static NSArray<PGDisplayMode*>* apple_gfx_prepare_display_mode_array(void)
-+static NSArray<PGDisplayMode*>* apple_gfx_create_display_mode_array(
-+    const AppleGFXDisplayMode display_modes[], uint32_t display_mode_count)
- {
--    PGDisplayMode *modes[ARRAY_SIZE(apple_gfx_modes)];
-+    PGDisplayMode **modes = alloca(sizeof(modes[0]) * display_mode_count);
-     NSArray<PGDisplayMode*>* mode_array = nil;
--    int i;
-+    uint32_t i;
- 
--    for (i = 0; i < ARRAY_SIZE(apple_gfx_modes); i++) {
-+    for (i = 0; i < display_mode_count; i++) {
-+        const AppleGFXDisplayMode *mode = &display_modes[i];
-+        trace_apple_gfx_display_mode(i, mode->width_px, mode->height_px);
-+        PGDisplayCoord_t mode_size = { mode->width_px, mode->height_px };
-         modes[i] =
--            [[PGDisplayMode alloc] initWithSizeInPixels:apple_gfx_modes[i] refreshRateInHz:60.];
-+            [[PGDisplayMode alloc] initWithSizeInPixels:mode_size
-+                                        refreshRateInHz:mode->refresh_rate_hz];
-     }
- 
--    mode_array = [NSArray arrayWithObjects:modes count:ARRAY_SIZE(apple_gfx_modes)];
-+    mode_array = [NSArray arrayWithObjects:modes count:display_mode_count];
- 
--    for (i = 0; i < ARRAY_SIZE(apple_gfx_modes); i++) {
-+    for (i = 0; i < display_mode_count; i++) {
-         [modes[i] release];
-         modes[i] = nil;
-     }
-@@ -679,6 +684,8 @@ void apple_gfx_common_realize(AppleGFXState *s, PGDeviceDescriptor *desc,
-                               Error **errp)
- {
-     PGDisplayDescriptor *disp_desc = nil;
-+    const AppleGFXDisplayMode *display_modes = apple_gfx_default_modes;
-+    int num_display_modes = ARRAY_SIZE(apple_gfx_default_modes);
- 
-     if (apple_gfx_mig_blocker == NULL) {
-         error_setg(&apple_gfx_mig_blocker,
-@@ -704,10 +711,106 @@ void apple_gfx_common_realize(AppleGFXState *s, PGDeviceDescriptor *desc,
-     s->pgdisp = [s->pgdev newDisplayWithDescriptor:disp_desc
-                                               port:0 serialNum:1234];
-     [disp_desc release];
--    s->pgdisp.modeList = apple_gfx_prepare_display_mode_array();
-+
-+    if (s->display_modes != NULL && s->num_display_modes > 0) {
-+        trace_apple_gfx_common_realize_modes_property(s->num_display_modes);
-+        display_modes = s->display_modes;
-+        num_display_modes = s->num_display_modes;
-+    }
-+    s->pgdisp.modeList =
-+        apple_gfx_create_display_mode_array(display_modes, num_display_modes);
- 
-     create_fb(s);
- 
-     qemu_mutex_init(&s->job_mutex);
-     qemu_cond_init(&s->job_cond);
- }
-+
-+static void apple_gfx_get_display_mode(Object *obj, Visitor *v,
-+                                       const char *name, void *opaque,
-+                                       Error **errp)
++static void vmapple_cfg_reset(Object *obj, ResetType type)
 +{
-+    Property *prop = opaque;
-+    AppleGFXDisplayMode *mode = object_field_prop_ptr(obj, prop);
-+    /* 3 uint16s (max 5 digits) and 2 separator characters + nul. */
-+    static const size_t buffer_size = 5 * 3 + 2 + 1;
++    VMAppleCfgState *s = VMAPPLE_CFG(obj);
++    VMAppleCfg *cfg;
 +
-+    char buffer[buffer_size];
-+    char *pos = buffer;
-+
-+    int rc = snprintf(buffer, buffer_size,
-+                      "%"PRIu16"x%"PRIu16"@%"PRIu16,
-+                      mode->width_px, mode->height_px,
-+                      mode->refresh_rate_hz);
-+    assert(rc < buffer_size);
-+
-+    visit_type_str(v, name, &pos, errp);
++    cfg = memory_region_get_ram_ptr(&s->mem);
++    memset((void *)cfg, 0, VMAPPLE_CFG_SIZE);
++    *cfg = s->cfg;
 +}
 +
-+static void apple_gfx_set_display_mode(Object *obj, Visitor *v,
-+                                       const char *name, void *opaque,
-+                                       Error **errp)
++static bool strlcpy_set_error(char *restrict dst, const char *restrict src,
++                              size_t dst_size, Error **errp,
++                              const char *parent_func, const char *location,
++                              const char *buffer_name)
 +{
-+    Property *prop = opaque;
-+    AppleGFXDisplayMode *mode = object_field_prop_ptr(obj, prop);
-+    Error *local_err = NULL;
-+    const char *endptr;
-+    char *str;
-+    int ret;
-+    unsigned int val;
++    size_t len;
 +
-+    visit_type_str(v, name, &str, &local_err);
-+    if (local_err) {
-+        error_propagate(errp, local_err);
++    len = g_strlcpy(dst, src, dst_size);
++    if (len < dst_size) { /* len does not count nul terminator */
++        return true;
++    }
++
++    error_setg(errp,
++               "strlcpy_set_error: %s (%s): Destination buffer %s too small "
++               "(need %zu, have %zu)",
++               parent_func, location, buffer_name, len + 1, dst_size);
++    return false;
++}
++
++/*
++ * String copying wrapper that returns and reports a runtime error in
++ * case of truncation due to insufficient destination buffer space.
++ */
++#define strlcpy_array_return_error(dst_array, src, errp) \
++    do { \
++        if (!strlcpy_set_error((dst_array), (src), ARRAY_SIZE(dst_array), (errp),\
++                               __func__, stringify(__LINE__), # dst_array)) { \
++            return; \
++        } \
++    } while (0)
++
++static void vmapple_cfg_realize(DeviceState *dev, Error **errp)
++{
++    VMAppleCfgState *s = VMAPPLE_CFG(dev);
++    uint32_t i;
++
++    if (!s->serial) {
++        s->serial = g_strdup("1234");
++    }
++    if (!s->model) {
++        s->model = g_strdup("VM0001");
++    }
++    if (!s->soc_name) {
++        s->soc_name = g_strdup("Apple M1 (Virtual)");
++    }
++
++    strlcpy_array_return_error(s->cfg.serial, s->serial, errp);
++    strlcpy_array_return_error(s->cfg.model, s->model, errp);
++    strlcpy_array_return_error(s->cfg.soc_name, s->soc_name, errp);
++    strlcpy_array_return_error(s->cfg.unk8, "D/A", errp);
++    s->cfg.version = 2;
++    s->cfg.unk1 = 1;
++    s->cfg.unk2 = 1;
++    s->cfg.unk3 = 0x20;
++    s->cfg.unk4 = 0;
++    s->cfg.unk5 = 1;
++    s->cfg.unk6 = 1;
++    s->cfg.unk7 = 0;
++    s->cfg.unk10 = 1;
++
++    if (s->cfg.nr_cpus > ARRAY_SIZE(s->cfg.cpu_ids)) {
++        error_setg(errp,
++                   "Failed to create %u CPUs, vmapple machine supports %zu max",
++                   s->cfg.nr_cpus, ARRAY_SIZE(s->cfg.cpu_ids));
 +        return;
 +    }
-+
-+    endptr = str;
-+
-+    ret = qemu_strtoui(endptr, &endptr, 10, &val);
-+    if (ret || val > UINT16_MAX || val == 0) {
-+        error_setg(errp, "width in '%s' must be a decimal integer number "
-+                   "of pixels in the range 1..65535", name);
-+        goto out;
++    for (i = 0; i < s->cfg.nr_cpus; i++) {
++        s->cfg.cpu_ids[i] = i;
 +    }
-+    mode->width_px = val;
-+    if (*endptr != 'x') {
-+        goto separator_error;
-+    }
-+
-+    ret = qemu_strtoui(endptr + 1, &endptr, 10, &val);
-+    if (ret || val > UINT16_MAX || val == 0) {
-+        error_setg(errp, "height in '%s' must be a decimal integer number "
-+                   "of pixels in the range 1..65535", name);
-+        goto out;
-+    }
-+    mode->height_px = val;
-+    if (*endptr != '@') {
-+        goto separator_error;
-+    }
-+
-+    ret = qemu_strtoui(endptr + 1, &endptr, 10, &val);
-+    if (ret) {
-+        error_setg(errp, "refresh rate in '%s'"
-+                   " must be a non-negative decimal integer (Hertz)", name);
-+    }
-+    mode->refresh_rate_hz = val;
-+
-+    goto out;
-+
-+separator_error:
-+    error_setg(errp, "Each display mode takes the format "
-+               "'<width>x<height>@<rate>'");
-+out:
-+    g_free(str);
-+    return;
 +}
 +
-+const PropertyInfo qdev_prop_display_mode = {
-+    .name  = "display_mode",
-+    .description =
-+        "Display mode in pixels and Hertz, as <width>x<height>@<refresh-rate> "
-+        "Example: 3840x2160@60",
-+    .get   = apple_gfx_get_display_mode,
-+    .set   = apple_gfx_set_display_mode,
++static void vmapple_cfg_init(Object *obj)
++{
++    VMAppleCfgState *s = VMAPPLE_CFG(obj);
++
++    memory_region_init_ram(&s->mem, obj, "VMApple Config", VMAPPLE_CFG_SIZE,
++                           &error_fatal);
++    sysbus_init_mmio(SYS_BUS_DEVICE(obj), &s->mem);
++}
++
++static Property vmapple_cfg_properties[] = {
++    DEFINE_PROP_UINT32("nr-cpus", VMAppleCfgState, cfg.nr_cpus, 1),
++    DEFINE_PROP_UINT64("ecid", VMAppleCfgState, cfg.ecid, 0),
++    DEFINE_PROP_UINT64("ram-size", VMAppleCfgState, cfg.ram_size, 0),
++    DEFINE_PROP_UINT32("run_installer1", VMAppleCfgState, cfg.run_installer1, 0),
++    DEFINE_PROP_UINT32("run_installer2", VMAppleCfgState, cfg.run_installer2, 0),
++    DEFINE_PROP_UINT32("rnd", VMAppleCfgState, cfg.rnd, 0),
++    DEFINE_PROP_MACADDR("mac-en0", VMAppleCfgState, cfg.mac_en0),
++    DEFINE_PROP_MACADDR("mac-en1", VMAppleCfgState, cfg.mac_en1),
++    DEFINE_PROP_MACADDR("mac-wifi0", VMAppleCfgState, cfg.mac_wifi0),
++    DEFINE_PROP_MACADDR("mac-bt0", VMAppleCfgState, cfg.mac_bt0),
++    DEFINE_PROP_STRING("serial", VMAppleCfgState, serial),
++    DEFINE_PROP_STRING("model", VMAppleCfgState, model),
++    DEFINE_PROP_STRING("soc_name", VMAppleCfgState, soc_name),
++    DEFINE_PROP_END_OF_LIST(),
 +};
-diff --git a/hw/display/trace-events b/hw/display/trace-events
-index 214998312b9..2780239dbde 100644
---- a/hw/display/trace-events
-+++ b/hw/display/trace-events
-@@ -209,6 +209,8 @@ apple_gfx_cursor_set(uint32_t bpp, uint64_t width, uint64_t height) "bpp=%d widt
- apple_gfx_cursor_show(uint32_t show) "show=%d"
- apple_gfx_cursor_move(void) ""
- apple_gfx_common_init(const char *device_name, size_t mmio_size) "device: %s; MMIO size: %zu bytes"
-+apple_gfx_common_realize_modes_property(uint32_t num_modes) "using %u modes supplied by 'display-modes' device property"
-+apple_gfx_display_mode(uint32_t mode_idx, uint16_t width_px, uint16_t height_px) "mode %2"PRIu32": %4"PRIu16"x%4"PRIu16
++
++static void vmapple_cfg_class_init(ObjectClass *klass, void *data)
++{
++    DeviceClass *dc = DEVICE_CLASS(klass);
++    ResettableClass *rc = RESETTABLE_CLASS(klass);
++
++    dc->realize = vmapple_cfg_realize;
++    dc->desc = "VMApple Configuration Region";
++    device_class_set_props(dc, vmapple_cfg_properties);
++    rc->phases.hold = vmapple_cfg_reset;
++}
++
++static const TypeInfo vmapple_cfg_info = {
++    .name          = TYPE_VMAPPLE_CFG,
++    .parent        = TYPE_SYS_BUS_DEVICE,
++    .instance_size = sizeof(VMAppleCfgState),
++    .instance_init = vmapple_cfg_init,
++    .class_init    = vmapple_cfg_class_init,
++};
++
++static void vmapple_cfg_register_types(void)
++{
++    type_register_static(&vmapple_cfg_info);
++}
++
++type_init(vmapple_cfg_register_types)
+diff --git a/hw/vmapple/meson.build b/hw/vmapple/meson.build
+index d4624713deb..64b78693a31 100644
+--- a/hw/vmapple/meson.build
++++ b/hw/vmapple/meson.build
+@@ -1,2 +1,3 @@
+ system_ss.add(when: 'CONFIG_VMAPPLE_AES',  if_true: files('aes.c'))
+ system_ss.add(when: 'CONFIG_VMAPPLE_BDIF', if_true: files('bdif.c'))
++system_ss.add(when: 'CONFIG_VMAPPLE_CFG',  if_true: files('cfg.c'))
+diff --git a/include/hw/vmapple/vmapple.h b/include/hw/vmapple/vmapple.h
+index a4c87b166d5..984281b6a67 100644
+--- a/include/hw/vmapple/vmapple.h
++++ b/include/hw/vmapple/vmapple.h
+@@ -12,4 +12,6 @@
  
- # apple-gfx-mmio.m
- apple_gfx_mmio_iosfc_read(uint64_t offset, uint64_t res) "offset=0x%"PRIx64" res=0x%"PRIx64
+ #define TYPE_VMAPPLE_BDIF "vmapple-bdif"
+ 
++#define TYPE_VMAPPLE_CFG "vmapple-cfg"
++
+ #endif /* HW_VMAPPLE_VMAPPLE_H */
 -- 
 2.39.3 (Apple Git-145)
 
