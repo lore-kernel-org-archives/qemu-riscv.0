@@ -4,68 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AF4AFD0E3E3
-	for <qemu-riscv@archiver.kernel.org>; Thu, 24 Oct 2024 19:13:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 395E3D10380
+	for <qemu-riscv@archiver.kernel.org>; Thu, 24 Oct 2024 21:07:03 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1t43Gn-0007Ok-7O; Thu, 24 Oct 2024 15:13:17 -0400
+	id 1t452k-0000H0-OD; Thu, 24 Oct 2024 17:06:54 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <groeck7@gmail.com>)
- id 1t43Gi-0007OA-1Q; Thu, 24 Oct 2024 15:13:12 -0400
-Received: from mail-pf1-x432.google.com ([2607:f8b0:4864:20::432])
+ id 1t452i-0008Tj-Bg; Thu, 24 Oct 2024 17:06:52 -0400
+Received: from mail-pl1-x633.google.com ([2607:f8b0:4864:20::633])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <groeck7@gmail.com>)
- id 1t43Gb-0003nU-V3; Thu, 24 Oct 2024 15:13:11 -0400
-Received: by mail-pf1-x432.google.com with SMTP id
- d2e1a72fcca58-71e467c3996so958665b3a.2; 
- Thu, 24 Oct 2024 12:13:05 -0700 (PDT)
+ id 1t452f-0002aj-Oz; Thu, 24 Oct 2024 17:06:51 -0400
+Received: by mail-pl1-x633.google.com with SMTP id
+ d9443c01a7336-20cbcd71012so13178865ad.3; 
+ Thu, 24 Oct 2024 14:06:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1729797184; x=1730401984; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:autocrypt:from
- :content-language:references:cc:to:subject:user-agent:mime-version
- :date:message-id:sender:from:to:cc:subject:date:message-id:reply-to;
- bh=ifazz3zPIYNuMbEWA0QLQXrfw5cz9ytx3aguC2Vot0k=;
- b=NpCyKkgt6ykHJJ1Ew9FaBFp2VjFqBzX0w05Y8M2UJkoBbtsuNi9hL2pn2tBjY4fWy0
- S4ku8+tJDyhIXLxSxmg6L6ex7xhUAd6WLrK/nAFWG+ZQGNgktpDp8rMManBVKBpDufOe
- kbwMTtn78Vqw0H4j7J+oCYLk3v3AQJ5u02mQqEv/68Z8gjjiX2H/kq8OfDQ0cwYA6s//
- HWdL7qQDz7T1WoeNrKhvNAlSTz/u2N+kQ7g/hXIrQTvfr51O4HtMtebycKoWWsH0tvUl
- jcw97o57i8Q/vMCSNKWcy2CffkHKN924M0R6zUsLfPwaCjbASYA/ptqMCuQL9MgNaQNG
- 0f+w==
+ d=gmail.com; s=20230601; t=1729804007; x=1730408807; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:autocrypt:content-language
+ :references:cc:to:from:subject:user-agent:mime-version:date
+ :message-id:sender:from:to:cc:subject:date:message-id:reply-to;
+ bh=SOOuFUWFIdW8xlo2txpDsfLpi4K7+F4EuNySjK6+HHY=;
+ b=m6gUMl33Ege4I42OK2cwIGiU4ZyXuzr2K9PVNGovysPR7h/Chb8KyUUGKvdXo47NtA
+ Wqey33x1NaWSHpuPwBAWkbVY0tJhB7CZsBy+J7p926V5lPtJKc6U2WAHP7vTM59UxAsF
+ BtPi7q+1WjIxvkxxqdbW17pti62/55QN7jNKgkREm1lNLdkAKGHtvW9gAO7h+pHiV4E6
+ wIVHmGmqmVQixKqbCkkdsPEe6kAFlYCD92NfC3EBwx9z+2/zeUGVwcFUUg7CXdvRYdfr
+ /OpLVS4MuCmHgsREwimlvXuJ5DYaNfCcX+65UlLypNpUj5PgdbZUKG2Gx4VoRYhQ1t5q
+ X2bw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1729797184; x=1730401984;
- h=content-transfer-encoding:in-reply-to:autocrypt:from
- :content-language:references:cc:to:subject:user-agent:mime-version
- :date:message-id:sender:x-gm-message-state:from:to:cc:subject:date
+ d=1e100.net; s=20230601; t=1729804007; x=1730408807;
+ h=content-transfer-encoding:in-reply-to:autocrypt:content-language
+ :references:cc:to:from:subject:user-agent:mime-version:date
+ :message-id:sender:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=ifazz3zPIYNuMbEWA0QLQXrfw5cz9ytx3aguC2Vot0k=;
- b=GFzdWkr8avvh2U60Zj7mznJWislFuHxdW+F+GgulZ85nw0Y4EgiY3k5UgHSm5CDfzU
- svD5Xt/qgK3QzYPBftBlCf+awIt2JxzPfWxTO+EzV9VBlqgMM0JjfIl/NEPsxsXqgM2N
- H7sKfqH4M+h/yNXdaKoM039WPIM7MfYVJMcLZPCrKdEuBp6gxBx9mxgbHzM+cDIAutT3
- CjIIw5VQUZYmZ4tVGzEijUSUl2hdT2mFT/dULmPdp8FZu4zSZtShFIt4s4uZfiN2emNr
- E7+ZfnAG7uvqGiW8qTelJqCcTWhg+XepdsoVOHYJzYu1jkjuAfoscGtCYtAQi8sTD+8z
- aSzw==
+ bh=SOOuFUWFIdW8xlo2txpDsfLpi4K7+F4EuNySjK6+HHY=;
+ b=LMaQG4iOINUAIRsx8RBDElyMI5sxJVd6alxLE8Tw6jtdv454eskgLR02Q/nkYbszdJ
+ 5R8w1KwViJDDI1H9CYJaTqfF02fyNsFGGDm5jM7bvEQXqBs2TUTf+WiP7dYnWsPbCEwk
+ 5kB+11qhSyfGG76A2VW6GFy38avH45egSDxiEU6N1YVjaF93RY75o727mnmycBPxowlw
+ hQVix7BTPtGkmw8y1rV7RDSWrsXJ2C58uMmqkOlN6yd4u9Hxhbfz8oy7/hK/p4IrZfYg
+ ing+i3o1DojaGEM/OPUXjWe9yC1P5nLZFcscJC0lUHYlG/V7q8h+R9dnU9Y3YsHQ7fJ4
+ xLsg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCV6xFvbG8mU1RFglL5y/KZHPLG3ri8Z91poXW/dfp5NCRdSsDkgVTHd6324WWO2Gn1qba/64c6OyQux@nongnu.org
-X-Gm-Message-State: AOJu0Yzys0eKPUyqdCK2ukynz0tpLMV3qQIAVhKACxgpsceVXwfHBW46
- jbbnSNo24INqruuNNggKKsMuHpUeVJ3a7VIPaT0f//CGqKcWI9rd
-X-Google-Smtp-Source: AGHT+IGEHzU5H37GRuMZk30sXzFPGNfXGbT6VOH14Uxl/1kBm+7LcYP8LxmwPgQYayC8+CVTrmr/jQ==
-X-Received: by 2002:a05:6a00:190b:b0:71e:77e6:ad89 with SMTP id
- d2e1a72fcca58-72045e758dcmr4181331b3a.13.1729797183809; 
- Thu, 24 Oct 2024 12:13:03 -0700 (PDT)
+ AJvYcCWzynDBqphjnT91mVqROIh5AcKR7lTr3gE09sOycgS2GOomCPEpemDTOTY0XjwNlzHVDH56OUTtEKIm@nongnu.org
+X-Gm-Message-State: AOJu0YwUxiJoMSyveQFgz57nLl7tLRa9fhEMqEghkVZ2rqlpyGhyJppu
+ dypdV1FIwTz43AxCiukfPXaJHCjQD0S3tsWbAWwWl2JeqPdLly5u
+X-Google-Smtp-Source: AGHT+IGQukhadCtMoJuYR83EdD0QHzOtBSN5U5/RHwAgqpD9jPQLCbYSTGiAvn6XnM6m3VKa0OgwXA==
+X-Received: by 2002:a17:903:2284:b0:20c:6f55:2195 with SMTP id
+ d9443c01a7336-20fa9eb54eemr104311555ad.47.1729804007417; 
+ Thu, 24 Oct 2024 14:06:47 -0700 (PDT)
 Received: from ?IPV6:2600:1700:e321:62f0:329c:23ff:fee3:9d7c?
  ([2600:1700:e321:62f0:329c:23ff:fee3:9d7c])
  by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-71ec13338efsm8295451b3a.83.2024.10.24.12.13.02
+ d9443c01a7336-20e7f0f58eesm75905975ad.283.2024.10.24.14.06.45
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 24 Oct 2024 12:13:02 -0700 (PDT)
-Message-ID: <e6e35e59-db18-42d4-a8b2-4099fe42e24d@roeck-us.net>
-Date: Thu, 24 Oct 2024 12:13:01 -0700
+ Thu, 24 Oct 2024 14:06:46 -0700 (PDT)
+Message-ID: <e627f773-7332-4439-9611-7184a8bc35f3@roeck-us.net>
+Date: Thu, 24 Oct 2024 14:06:45 -0700
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 Subject: Re: [PATCH v42 51/98] hw/sd/sdcard: Add spi_cmd_SEND_CSD/CID handlers
  (CMD9 & CMD10)
+From: Guenter Roeck <linux@roeck-us.net>
 To: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 Cc: qemu-devel@nongnu.org, =?UTF-8?Q?C=C3=A9dric_Le_Goater?= <clg@kaod.org>,
  qemu-riscv <qemu-riscv@nongnu.org>
@@ -75,8 +76,8 @@ References: <20240628070216.92609-1-philmd@linaro.org>
  <7965f970-cdbd-4e3e-bc4c-62fb496a9e24@linaro.org>
  <a49719b7-e3fb-46ca-b884-cb7019a0b09f@roeck-us.net>
  <e52b231d-f23e-4772-bfb2-08ddcc3e7ad0@linaro.org>
+ <e6e35e59-db18-42d4-a8b2-4099fe42e24d@roeck-us.net>
 Content-Language: en-US
-From: Guenter Roeck <linux@roeck-us.net>
 Autocrypt: addr=linux@roeck-us.net; keydata=
  xsFNBE6H1WcBEACu6jIcw5kZ5dGeJ7E7B2uweQR/4FGxH10/H1O1+ApmcQ9i87XdZQiB9cpN
  RYHA7RCEK2dh6dDccykQk3bC90xXMPg+O3R+C/SkwcnUak1UZaeK/SwQbq/t0tkMzYDRxfJ7
@@ -120,11 +121,11 @@ Autocrypt: addr=linux@roeck-us.net; keydata=
  WkRwrSuCn7UG+qVWZeKEsFKFOkynOs3pVbcbq1pxbhk3TRWCGRU5JolI4ohy/7JV1TVbjiDI
  HP/aVnm6NC8of26P40Pg8EdAhajZnHHjA7FrJXsy3cyIGqvg9os4rNkUWmrCfLLsZDHD8FnU
  mDW4+i+XlNFUPUYMrIKi9joBhu18ssf5i5Q=
-In-Reply-To: <e52b231d-f23e-4772-bfb2-08ddcc3e7ad0@linaro.org>
+In-Reply-To: <e6e35e59-db18-42d4-a8b2-4099fe42e24d@roeck-us.net>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::432;
- envelope-from=groeck7@gmail.com; helo=mail-pf1-x432.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::633;
+ envelope-from=groeck7@gmail.com; helo=mail-pl1-x633.google.com
 X-Spam_score_int: -15
 X-Spam_score: -1.6
 X-Spam_bar: -
@@ -132,7 +133,7 @@ X-Spam_report: (-1.6 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_ENVFROM_END_DIGIT=0.25,
  FREEMAIL_FORGED_FROMDOMAIN=0.001, FREEMAIL_FROM=0.001,
  HEADER_FROM_DIFFERENT_DOMAINS=0.17, RCVD_IN_DNSWL_NONE=-0.0001,
- SPF_HELO_NONE=0.001, T_SPF_TEMPERROR=0.01 autolearn=no autolearn_force=no
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -148,122 +149,106 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 10/24/24 10:53, Philippe Mathieu-Daudé wrote:
-> Hi Guenter,
-> 
-> On 24/10/24 01:04, Guenter Roeck wrote:
->> On 10/23/24 20:27, Philippe Mathieu-Daudé wrote:
->>> Hi Guenter,
->>>
->>> On 23/10/24 19:24, Guenter Roeck wrote:
->>>> Hi,
->>>>
->>>> On Fri, Jun 28, 2024 at 09:01:27AM +0200, Philippe Mathieu-Daudé wrote:
->>>>> Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
->>>>> Reviewed-by: Cédric Le Goater <clg@redhat.com>
->>>>> ---
->>>>
->>>> This patch results in:
->>>>
->>>> [    5.976133] Waiting for root device /dev/mmcblk0...
->>>> [    6.501462] mmc0: error -38 whilst initialising SD card
->>>> [    7.557473] mmc0: error -38 whilst initialising SD card
->>>>
->>>> ... (repeated until session is aborted)
->>>>
->>>> when trying to boot Linux for sifive_u from sd card.
->>>> The command used to boot the image is
->>>>
->>>> qemu-system-riscv64 -M sifive_u -m 512M -no-reboot \
->>>>      -kernel arch/riscv/boot/Image \
->>>>      -snapshot -drive file=rootfs.ext2,format=raw,if=sd \
->>>>      -bios default \
->>>>      -append "root=/dev/mmcblk0 rootwait console=ttySIF0,115200 earlycon" \
->>>>      -nographic -monitor none
-> 
-> 
->>>> # first bad commit: [da954d0e32444f122a41c24948d4d1c718bf66d4] hw/sd/sdcard: Add spi_cmd_SEND_CSD/CID handlers (CMD9 & CMD10)
->>>
->>> I don't have access to my workstation, but looking at the patch,
->>> maybe the fix is simply:
->>>
->>> ---
->>> diff --git a/hw/sd/sd.c b/hw/sd/sd.c
->>> index a5d2d929a8a..1594d340a6e 100644
->>> --- a/hw/sd/sd.c
->>> +++ b/hw/sd/sd.c
->>> @@ -1567,7 +1567,7 @@ static sd_rsp_type_t emmc_cmd_SEND_EXT_CSD(SDState *sd, SDRequest req)
->>>   /* CMD9 */
->>>   static sd_rsp_type_t spi_cmd_SEND_CSD(SDState *sd, SDRequest req)
->>>   {
->>> -    if (sd->state != sd_standby_state) {
->>> +    if (sd->state != sd_transfer_state) {
->>>           return sd_invalid_state_for_cmd(sd, req);
->>>       }
->>>       return sd_cmd_to_sendingdata(sd, req, sd_req_get_address(sd, req),
->>> @@ -1586,7 +1586,7 @@ static sd_rsp_type_t sd_cmd_SEND_CSD(SDState *sd, SDRequest req)
->>>   /* CMD10 */
->>>   static sd_rsp_type_t spi_cmd_SEND_CID(SDState *sd, SDRequest req)
->>>   {
->>> -    if (sd->state != sd_standby_state) {
->>> +    if (sd->state != sd_transfer_state) {
->>>           return sd_invalid_state_for_cmd(sd, req);
->>>       }
->>>       return sd_cmd_to_sendingdata(sd, req, sd_req_get_address(sd, req),
->>> ---
->>>
->>> Is it possible for you to test this snippet?
->>>
+On 10/24/24 12:13, Guenter Roeck wrote:
+> On 10/24/24 10:53, Philippe Mathieu-Daudé wrote:
+>> Hi Guenter,
 >>
->> It must be related, but something else must be wrong. With the above, I get
+>> On 24/10/24 01:04, Guenter Roeck wrote:
+>>> On 10/23/24 20:27, Philippe Mathieu-Daudé wrote:
+>>>> Hi Guenter,
+>>>>
+>>>> On 23/10/24 19:24, Guenter Roeck wrote:
+>>>>> Hi,
+>>>>>
+>>>>> On Fri, Jun 28, 2024 at 09:01:27AM +0200, Philippe Mathieu-Daudé wrote:
+>>>>>> Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+>>>>>> Reviewed-by: Cédric Le Goater <clg@redhat.com>
+>>>>>> ---
+>>>>>
+>>>>> This patch results in:
+>>>>>
+>>>>> [    5.976133] Waiting for root device /dev/mmcblk0...
+>>>>> [    6.501462] mmc0: error -38 whilst initialising SD card
+>>>>> [    7.557473] mmc0: error -38 whilst initialising SD card
+>>>>>
+>>>>> ... (repeated until session is aborted)
+>>>>>
+>>>>> when trying to boot Linux for sifive_u from sd card.
+>>>>> The command used to boot the image is
+>>>>>
+>>>>> qemu-system-riscv64 -M sifive_u -m 512M -no-reboot \
+>>>>>      -kernel arch/riscv/boot/Image \
+>>>>>      -snapshot -drive file=rootfs.ext2,format=raw,if=sd \
+>>>>>      -bios default \
+>>>>>      -append "root=/dev/mmcblk0 rootwait console=ttySIF0,115200 earlycon" \
+>>>>>      -nographic -monitor none
 >>
->> [    4.355063] Run /sbin/init as init process
->> ssi_sd: error: Unexpected response to cmd 13
->> [    4.780139] mmc0: SPI card removed
->> [    4.785194] EXT4-fs (mmcblk0): shut down requested (2)
->> [    4.812689] Starting init: /sbin/init exists but couldn't execute it (error -5)
->> [    4.813248] Run /etc/init as init process
->> [    4.825799] init: attempt to access beyond end of device
 >>
->> The state is always 4 when spi_cmd_SEND_CSD() and spi_cmd_SEND_CID()
->> are called. With more debugging added:
+>>>>> # first bad commit: [da954d0e32444f122a41c24948d4d1c718bf66d4] hw/sd/sdcard: Add spi_cmd_SEND_CSD/CID handlers (CMD9 & CMD10)
+>>>>
+>>>> I don't have access to my workstation, but looking at the patch,
+>>>> maybe the fix is simply:
+>>>>
+>>>> ---
+>>>> diff --git a/hw/sd/sd.c b/hw/sd/sd.c
+>>>> index a5d2d929a8a..1594d340a6e 100644
+>>>> --- a/hw/sd/sd.c
+>>>> +++ b/hw/sd/sd.c
+>>>> @@ -1567,7 +1567,7 @@ static sd_rsp_type_t emmc_cmd_SEND_EXT_CSD(SDState *sd, SDRequest req)
+>>>>   /* CMD9 */
+>>>>   static sd_rsp_type_t spi_cmd_SEND_CSD(SDState *sd, SDRequest req)
+>>>>   {
+>>>> -    if (sd->state != sd_standby_state) {
+>>>> +    if (sd->state != sd_transfer_state) {
+>>>>           return sd_invalid_state_for_cmd(sd, req);
+>>>>       }
+>>>>       return sd_cmd_to_sendingdata(sd, req, sd_req_get_address(sd, req),
+>>>> @@ -1586,7 +1586,7 @@ static sd_rsp_type_t sd_cmd_SEND_CSD(SDState *sd, SDRequest req)
+>>>>   /* CMD10 */
+>>>>   static sd_rsp_type_t spi_cmd_SEND_CID(SDState *sd, SDRequest req)
+>>>>   {
+>>>> -    if (sd->state != sd_standby_state) {
+>>>> +    if (sd->state != sd_transfer_state) {
+>>>>           return sd_invalid_state_for_cmd(sd, req);
+>>>>       }
+>>>>       return sd_cmd_to_sendingdata(sd, req, sd_req_get_address(sd, req),
+>>>> ---
+>>>>
+>>>> Is it possible for you to test this snippet?
+>>>>
+>>>
+>>> It must be related, but something else must be wrong. With the above, I get
+>>>
+>>> [    4.355063] Run /sbin/init as init process
+>>> ssi_sd: error: Unexpected response to cmd 13
+>>> [    4.780139] mmc0: SPI card removed
+>>> [    4.785194] EXT4-fs (mmcblk0): shut down requested (2)
+>>> [    4.812689] Starting init: /sbin/init exists but couldn't execute it (error -5)
+>>> [    4.813248] Run /etc/init as init process
+>>> [    4.825799] init: attempt to access beyond end of device
+>>>
+>>> The state is always 4 when spi_cmd_SEND_CSD() and spi_cmd_SEND_CID()
+>>> are called. With more debugging added:
+>>>
+>>> ssi_sd: error: Unexpected response to cmd 13 (arglen expected 4, got 16)
+>>>
+>>> Changing only one of the functions to check against sd_transfer_state
+>>> doesn't help either; that brings back the repeated error -38.
 >>
->> ssi_sd: error: Unexpected response to cmd 13 (arglen expected 4, got 16)
+>> Looking at commit 807f6adac37 ("hw/sd/sdcard: Add sd_cmd_SEND_STATUS
+>> handler (CMD13)"), this should fix:
 >>
->> Changing only one of the functions to check against sd_transfer_state
->> doesn't help either; that brings back the repeated error -38.
 > 
-> Looking at commit 807f6adac37 ("hw/sd/sdcard: Add sd_cmd_SEND_STATUS
-> handler (CMD13)"), this should fix:
+> Yes, it does fix the problem, together with the sd_transfer_state changes above.
 > 
+> I noticed that sd_cmd_SEND_CSD() and sd_cmd_SEND_CID() also check against
+> sd_standby_state. Is that wrong as well ?
+> 
+Never mind; those are correct.
 
-Yes, it does fix the problem, together with the sd_transfer_state changes above.
-
-I noticed that sd_cmd_SEND_CSD() and sd_cmd_SEND_CID() also check against
-sd_standby_state. Is that wrong as well ?
-
-> -- >8 --
-> @@ -1639,7 +1639,7 @@ static sd_rsp_type_t sd_cmd_SEND_STATUS(SDState *sd, SDRequest req)
->       }
-> 
->       if (sd_is_spi(sd)) {
-> -        return sd_r2_s;
-> +        return sd_r1;
->       }
-> 
->       return sd_req_rca_same(sd, req) ? sd_r1 : sd_r0;
-> ---
-> 
-> But -- why the commit msg didn't mention the spec fix -- the commit
-> looks correct to me. We might be missing smth from the spec. I'll
-> have a look during soft freeze. Having a test such the one recently
-> added in https://lore.kernel.org/qemu-devel/20241024082735.42324-3-thuth@redhat.com/
-> would help me ;)
-> 
-
-I'll see if I can add one to git@github.com:groeck/linux-test-downloads.git.
-
-Thanks,
 Guenter
+
+
+
 
 
