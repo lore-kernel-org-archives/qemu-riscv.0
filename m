@@ -4,63 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 44A01CE8E8A
-	for <qemu-riscv@archiver.kernel.org>; Thu, 24 Oct 2024 15:20:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5057CCE8E9A
+	for <qemu-riscv@archiver.kernel.org>; Thu, 24 Oct 2024 17:54:02 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1t3zdV-0004DY-9d; Thu, 24 Oct 2024 11:20:29 -0400
+	id 1t421p-00054W-5x; Thu, 24 Oct 2024 13:53:45 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <conor@kernel.org>)
- id 1t3zdL-0004CQ-Ho; Thu, 24 Oct 2024 11:20:20 -0400
-Received: from dfw.source.kernel.org ([139.178.84.217])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <conor@kernel.org>)
- id 1t3zdI-000738-Ss; Thu, 24 Oct 2024 11:20:19 -0400
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 5A48F5C2B7F;
- Thu, 24 Oct 2024 15:20:02 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id C19EEC4CEC7;
- Thu, 24 Oct 2024 15:20:04 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1729783206;
- bh=3TbR8lpUWwJBVJiIt/FKFgQHFi9qU9nIesmEKsA/KOg=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=FPYwyKQNVOtCiBCkwRHb/2+qxK3E8TR119n68QGgubfZGX4w2bOwnNnr+SvZdOhLw
- lX9k2sfN75s7g9OTxLDALSpns7o+Czk7uVGPqKp6zTcU6TJAPHebWydF43cY+7COLc
- idFLAxAWsuZuA5UK3kTpc65+fa8lbkwNI0uAL+vC4qVJmMMkHOCBqCh33LW/d4HU66
- i93a2n/jMcHhrMaNuObhMksKreEIiZ2H152JDA1dQI1ecOxh928/lNq0zfyzMC6ojH
- pdsuh0RMPJJONGAJDsjD8+iRV4d3rUy9xI47mxh0uxAYORR6XzOEebadfME4SS7pdU
- QrMVaRsypHmPQ==
-Date: Thu, 24 Oct 2024 16:20:02 +0100
-From: Conor Dooley <conor@kernel.org>
-To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Cc: Jim Shu <jim.shu@sifive.com>, qemu-devel@nongnu.org,
- qemu-riscv@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bmeng.cn@gmail.com>, Weiwei Li <liwei1518@gmail.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
-Subject: Re: [PATCH 2/2] hw/riscv: Support different address-cells for initrd
-Message-ID: <20241024-prism-hermit-ce5876051ade@spud>
-References: <20241021040942.400-1-jim.shu@sifive.com>
- <20241021040942.400-3-jim.shu@sifive.com>
- <25ae806f-38de-425f-8590-1c605d93197d@ventanamicro.com>
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1t421l-00053y-8G
+ for qemu-riscv@nongnu.org; Thu, 24 Oct 2024 13:53:41 -0400
+Received: from mail-pg1-x531.google.com ([2607:f8b0:4864:20::531])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1t421j-0002Jv-Dh
+ for qemu-riscv@nongnu.org; Thu, 24 Oct 2024 13:53:41 -0400
+Received: by mail-pg1-x531.google.com with SMTP id
+ 41be03b00d2f7-7ea7e250c54so852567a12.0
+ for <qemu-riscv@nongnu.org>; Thu, 24 Oct 2024 10:53:38 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1729792417; x=1730397217; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=S5yCjJSTtpBCKuL6oAxXQ3icP8CLu07VEDpomx/5oNM=;
+ b=q1YdYguijVa/tz4BaVTx3JvKcOFtqP9sEVgZlgeB2WQGOzbrm5UX/NjRyMRoITFP2m
+ +E5nlArTAzWgLKUnwm9KPRSsxcibfWB39z1VFI2Ss7mt6zIEP/KTfw+1K0M5vi64qnNR
+ i6pJYcOFkOlpvVSNbMt0HwLlkxLI9mOOLEOl/d0ZdauoA4DKvE1NPyXPolrLF5Zau2yk
+ sOG2LX6QM4qbhhBeUI1lotIg6PVdkzml8i7QivrljKzf711Wh712AqrsAx2zE0nXUGct
+ eg+3SVPguxC/+qT856LqqO/+ItnLXto6s8LIM+sH0uR5gbbjG/N2gOWXUXSCoSuXaLNG
+ eC3A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1729792417; x=1730397217;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=S5yCjJSTtpBCKuL6oAxXQ3icP8CLu07VEDpomx/5oNM=;
+ b=X3BVOVyfSQdBAk3PW57z1ORCEW85sLkhdNS8fmYVi3tr5Ddil3rq8hLgHlYP9Mtwtf
+ ijse7BpDrMNk/aqd1/e50W3+UaxXHiQ+TxjS/qQ6JD2nItbp0VmHhgyQwtqH9BuyIq0W
+ H1ac85HlkAZXW07wJPSTm9Hq2ZF3vlTbfSHYq02MGucpmB2ulkqibZJ6MDxxaC7EaycR
+ 6+J4cenGP/AYyBGhx4Vq9OKlodthP7vysbENN3GNWTPwLYXuc1WGFRUeXbRdgqChvoC5
+ gV3R9QwUIqDsX0c4je9il8UkeL0dHkYpDm/foG3d5bj/pOB3988jMMF7hY6NqaPUZg9+
+ elMg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWql9UCRNuyh0Do7l1LnPexb7ki/bmt6nPiyKSJOU+toDaFFxNGc4R9sdb+kMwPn1vg7lvBBDyQU1QR@nongnu.org
+X-Gm-Message-State: AOJu0YwQjLVrrUvyl5up0yGBo1uYUCXtGmGMxaozgNbq1XbJ/xj7l+jL
+ wydwLAtvFRUtpn06js4atuijEDcItB0/NMFy/7vogTBshdJjhde2b3cb9n0j9pAhRmGDKqccAhl
+ N
+X-Google-Smtp-Source: AGHT+IFSSFUz4+OFDZZ7eu/hNQp6TY3zb6SYaBY/1EPqB8Kx1YB527ztlep+/ftJZmM+JIc53BZTxg==
+X-Received: by 2002:a05:6a21:2986:b0:1d9:20bb:4afe with SMTP id
+ adf61e73a8af0-1d978bb45b5mr7278003637.50.1729792417045; 
+ Thu, 24 Oct 2024 10:53:37 -0700 (PDT)
+Received: from [192.168.100.49] ([45.176.88.171])
+ by smtp.gmail.com with ESMTPSA id
+ 41be03b00d2f7-7eaeab638c5sm8939847a12.55.2024.10.24.10.53.35
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 24 Oct 2024 10:53:36 -0700 (PDT)
+Message-ID: <e52b231d-f23e-4772-bfb2-08ddcc3e7ad0@linaro.org>
+Date: Thu, 24 Oct 2024 14:53:33 -0300
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature"; boundary="NigxtOl6hvhv0Un6"
-Content-Disposition: inline
-In-Reply-To: <25ae806f-38de-425f-8590-1c605d93197d@ventanamicro.com>
-Received-SPF: pass client-ip=139.178.84.217; envelope-from=conor@kernel.org;
- helo=dfw.source.kernel.org
-X-Spam_score_int: -73
-X-Spam_score: -7.4
-X-Spam_bar: -------
-X-Spam_report: (-7.4 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.263,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_HI=-5, RCVD_IN_VALIDITY_CERTIFIED_BLOCKED=0.001,
- RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v42 51/98] hw/sd/sdcard: Add spi_cmd_SEND_CSD/CID handlers
+ (CMD9 & CMD10)
+To: Guenter Roeck <linux@roeck-us.net>
+Cc: qemu-devel@nongnu.org, =?UTF-8?Q?C=C3=A9dric_Le_Goater?= <clg@kaod.org>,
+ qemu-riscv <qemu-riscv@nongnu.org>
+References: <20240628070216.92609-1-philmd@linaro.org>
+ <20240628070216.92609-52-philmd@linaro.org>
+ <94b2c5bf-53d0-4c74-8264-f3021916f38c@roeck-us.net>
+ <7965f970-cdbd-4e3e-bc4c-62fb496a9e24@linaro.org>
+ <a49719b7-e3fb-46ca-b884-cb7019a0b09f@roeck-us.net>
+Content-Language: en-US
+From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+In-Reply-To: <a49719b7-e3fb-46ca-b884-cb7019a0b09f@roeck-us.net>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::531;
+ envelope-from=philmd@linaro.org; helo=mail-pg1-x531.google.com
+X-Spam_score_int: 12
+X-Spam_score: 1.2
+X-Spam_bar: +
+X-Spam_report: (1.2 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
+ DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, RCVD_IN_DNSWL_NONE=-0.0001,
+ RCVD_IN_SBL_CSS=3.335, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -76,86 +102,120 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
+Hi Guenter,
 
---NigxtOl6hvhv0Un6
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On 24/10/24 01:04, Guenter Roeck wrote:
+> On 10/23/24 20:27, Philippe Mathieu-Daudé wrote:
+>> Hi Guenter,
+>>
+>> On 23/10/24 19:24, Guenter Roeck wrote:
+>>> Hi,
+>>>
+>>> On Fri, Jun 28, 2024 at 09:01:27AM +0200, Philippe Mathieu-Daudé wrote:
+>>>> Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+>>>> Reviewed-by: Cédric Le Goater <clg@redhat.com>
+>>>> ---
+>>>
+>>> This patch results in:
+>>>
+>>> [    5.976133] Waiting for root device /dev/mmcblk0...
+>>> [    6.501462] mmc0: error -38 whilst initialising SD card
+>>> [    7.557473] mmc0: error -38 whilst initialising SD card
+>>>
+>>> ... (repeated until session is aborted)
+>>>
+>>> when trying to boot Linux for sifive_u from sd card.
+>>> The command used to boot the image is
+>>>
+>>> qemu-system-riscv64 -M sifive_u -m 512M -no-reboot \
+>>>      -kernel arch/riscv/boot/Image \
+>>>      -snapshot -drive file=rootfs.ext2,format=raw,if=sd \
+>>>      -bios default \
+>>>      -append "root=/dev/mmcblk0 rootwait console=ttySIF0,115200 
+>>> earlycon" \
+>>>      -nographic -monitor none
 
-On Mon, Oct 21, 2024 at 04:30:11PM -0300, Daniel Henrique Barboza wrote:
->=20
->=20
-> On 10/21/24 1:09 AM, Jim Shu wrote:
-> > The cells of 'initrd-start/end' should follow the '#address-cell'.
-> > QEMU API could support 1 and 2 cells.
-> >=20
-> > Signed-off-by: Jim Shu <jim.shu@sifive.com>
-> > ---
-> >   hw/riscv/boot.c | 14 ++++++++++++--
-> >   1 file changed, 12 insertions(+), 2 deletions(-)
-> >=20
-> > diff --git a/hw/riscv/boot.c b/hw/riscv/boot.c
-> > index ad45bd7a6a..76b099c696 100644
-> > --- a/hw/riscv/boot.c
-> > +++ b/hw/riscv/boot.c
-> > @@ -182,6 +182,7 @@ static void riscv_load_initrd(MachineState *machine=
-, uint64_t kernel_entry)
-> >       void *fdt =3D machine->fdt;
-> >       hwaddr start, end;
-> >       ssize_t size;
-> > +    uint32_t acells;
-> >       g_assert(filename !=3D NULL);
-> > @@ -209,9 +210,18 @@ static void riscv_load_initrd(MachineState *machin=
-e, uint64_t kernel_entry)
-> >       /* Some RISC-V machines (e.g. opentitan) don't have a fdt. */
-> >       if (fdt) {
-> > +        acells =3D qemu_fdt_getprop_cell(fdt, "/", "#address-cells",
-> > +                                       NULL, NULL);
-> > +        if (acells =3D=3D 0) {
-> > +            error_report("dtb file invalid (#address-cells 0)");
-> > +            exit(1);
-> > +        }
-> > +
-> >           end =3D start + size;
-> > -        qemu_fdt_setprop_u64(fdt, "/chosen", "linux,initrd-start", sta=
-rt);
-> > -        qemu_fdt_setprop_u64(fdt, "/chosen", "linux,initrd-end", end);
-> > +        qemu_fdt_setprop_sized_cells(fdt, "/chosen", "linux,initrd-sta=
-rt",
-> > +                                     acells, start);
-> > +        qemu_fdt_setprop_sized_cells(fdt, "/chosen", "linux,initrd-end=
-",
-> > +                                     acells, end);
-> >       }
->=20
-> Is this a legal format for linux,initrd-start and linux,initrd-end?
->=20
-> This link:
->=20
-> https://www.kernel.org/doc/Documentation/devicetree/bindings/chosen.txt
->=20
-> Defines both attributes as:
->=20
-> "These properties hold the physical start and end address of an initrd th=
-at's
-> loaded by the bootloader."
->=20
-> So I'm not sure if this format you're using here is valid.
 
-Looks like my input isn't really required here anymore, but I think
-these two are actually identical in how they appear in the blob. Don't
-see much reason to change it.
+>>> # first bad commit: [da954d0e32444f122a41c24948d4d1c718bf66d4] 
+>>> hw/sd/sdcard: Add spi_cmd_SEND_CSD/CID handlers (CMD9 & CMD10)
+>>
+>> I don't have access to my workstation, but looking at the patch,
+>> maybe the fix is simply:
+>>
+>> ---
+>> diff --git a/hw/sd/sd.c b/hw/sd/sd.c
+>> index a5d2d929a8a..1594d340a6e 100644
+>> --- a/hw/sd/sd.c
+>> +++ b/hw/sd/sd.c
+>> @@ -1567,7 +1567,7 @@ static sd_rsp_type_t 
+>> emmc_cmd_SEND_EXT_CSD(SDState *sd, SDRequest req)
+>>   /* CMD9 */
+>>   static sd_rsp_type_t spi_cmd_SEND_CSD(SDState *sd, SDRequest req)
+>>   {
+>> -    if (sd->state != sd_standby_state) {
+>> +    if (sd->state != sd_transfer_state) {
+>>           return sd_invalid_state_for_cmd(sd, req);
+>>       }
+>>       return sd_cmd_to_sendingdata(sd, req, sd_req_get_address(sd, req),
+>> @@ -1586,7 +1586,7 @@ static sd_rsp_type_t sd_cmd_SEND_CSD(SDState 
+>> *sd, SDRequest req)
+>>   /* CMD10 */
+>>   static sd_rsp_type_t spi_cmd_SEND_CID(SDState *sd, SDRequest req)
+>>   {
+>> -    if (sd->state != sd_standby_state) {
+>> +    if (sd->state != sd_transfer_state) {
+>>           return sd_invalid_state_for_cmd(sd, req);
+>>       }
+>>       return sd_cmd_to_sendingdata(sd, req, sd_req_get_address(sd, req),
+>> ---
+>>
+>> Is it possible for you to test this snippet?
+>>
+> 
+> It must be related, but something else must be wrong. With the above, I get
+> 
+> [    4.355063] Run /sbin/init as init process
+> ssi_sd: error: Unexpected response to cmd 13
+> [    4.780139] mmc0: SPI card removed
+> [    4.785194] EXT4-fs (mmcblk0): shut down requested (2)
+> [    4.812689] Starting init: /sbin/init exists but couldn't execute it 
+> (error -5)
+> [    4.813248] Run /etc/init as init process
+> [    4.825799] init: attempt to access beyond end of device
+> 
+> The state is always 4 when spi_cmd_SEND_CSD() and spi_cmd_SEND_CID()
+> are called. With more debugging added:
+> 
+> ssi_sd: error: Unexpected response to cmd 13 (arglen expected 4, got 16)
+> 
+> Changing only one of the functions to check against sd_transfer_state
+> doesn't help either; that brings back the repeated error -38.
 
---NigxtOl6hvhv0Un6
-Content-Type: application/pgp-signature; name="signature.asc"
+Looking at commit 807f6adac37 ("hw/sd/sdcard: Add sd_cmd_SEND_STATUS
+handler (CMD13)"), this should fix:
 
------BEGIN PGP SIGNATURE-----
+-- >8 --
+@@ -1639,7 +1639,7 @@ static sd_rsp_type_t sd_cmd_SEND_STATUS(SDState 
+*sd, SDRequest req)
+      }
 
-iHUEABYIAB0WIQRh246EGq/8RLhDjO14tDGHoIJi0gUCZxplkgAKCRB4tDGHoIJi
-0vRjAQD99ywMkzfiIdAvTFpr1wkNtbJajH3543+aO6KVThSbMwEA75flZuoq1BUX
-JXzVaowZhMdUZmfsHyGHFzdDddSB6Q4=
-=IT9X
------END PGP SIGNATURE-----
+      if (sd_is_spi(sd)) {
+-        return sd_r2_s;
++        return sd_r1;
+      }
 
---NigxtOl6hvhv0Un6--
+      return sd_req_rca_same(sd, req) ? sd_r1 : sd_r0;
+---
+
+But -- why the commit msg didn't mention the spec fix -- the commit
+looks correct to me. We might be missing smth from the spec. I'll
+have a look during soft freeze. Having a test such the one recently
+added in 
+https://lore.kernel.org/qemu-devel/20241024082735.42324-3-thuth@redhat.com/
+would help me ;)
+
+Regards,
+
+Phil.
+
 
