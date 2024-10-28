@@ -4,107 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2A20CD33998
-	for <qemu-riscv@archiver.kernel.org>; Mon, 28 Oct 2024 16:07:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 94E19D339AF
+	for <qemu-riscv@archiver.kernel.org>; Mon, 28 Oct 2024 18:01:00 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1t5SGm-0003rB-CJ; Mon, 28 Oct 2024 12:07:04 -0400
+	id 1t5U2f-0003Oa-35; Mon, 28 Oct 2024 14:00:37 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <akihiko.odaki@daynix.com>)
- id 1t5SGK-0003by-2r
- for qemu-riscv@nongnu.org; Mon, 28 Oct 2024 12:06:37 -0400
-Received: from mail-pf1-x430.google.com ([2607:f8b0:4864:20::430])
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1t5U2c-0003OE-Ac
+ for qemu-riscv@nongnu.org; Mon, 28 Oct 2024 14:00:34 -0400
+Received: from mail-pl1-x62f.google.com ([2607:f8b0:4864:20::62f])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <akihiko.odaki@daynix.com>)
- id 1t5SGF-0005q0-Va
- for qemu-riscv@nongnu.org; Mon, 28 Oct 2024 12:06:35 -0400
-Received: by mail-pf1-x430.google.com with SMTP id
- d2e1a72fcca58-7203c431f93so3533890b3a.1
- for <qemu-riscv@nongnu.org>; Mon, 28 Oct 2024 09:06:28 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1t5U2Z-0001Hu-Rn
+ for qemu-riscv@nongnu.org; Mon, 28 Oct 2024 14:00:33 -0400
+Received: by mail-pl1-x62f.google.com with SMTP id
+ d9443c01a7336-210e5369b7dso7095795ad.3
+ for <qemu-riscv@nongnu.org>; Mon, 28 Oct 2024 11:00:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=daynix-com.20230601.gappssmtp.com; s=20230601; t=1730131587; x=1730736387;
- darn=nongnu.org; 
- h=content-transfer-encoding:in-reply-to:content-language:references
- :cc:to:subject:from:user-agent:mime-version:date:message-id:from:to
- :cc:subject:date:message-id:reply-to;
- bh=rsS8mQxKeZhOGBSkMTChVuCtbwvG+Jwr+mFK42BwE2g=;
- b=Ou4b0G4A1myPBNa1G9y70pL6SdVTShcJV7aa90pJUG9HaB90RbYbHSRGeRXOyY1r9A
- a7oht9XDQgbVp2VqoPiam5rbjkluUJpTfFj/QGl4jj/dzYnt0UXVSzRAzPFnPXIOHggR
- hYxcFAx/BPuz28ukHTEG9RmaZHRJmL/QYwsDtz5ZJOOfQZ4/a9/Ih7dBVKqgPDpkjL6D
- xA37FH6MWUvm9XFBlcKPHuihtFMt1T7m3cXZGpMYNYzhGwEDkXmlVY0zecsV6KaiAl2J
- fMLJV99IhKSohrYQcLwOtuOQR0742eIxYnSKR6B418tt2M1vlchY7NgTDP873xWGKwG9
- tNKA==
+ d=ventanamicro.com; s=google; t=1730138428; x=1730743228; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=b0rW5l2XZ6Nw2fu/nZcpUdxNW/V8lTRBDsOwCDhO4vM=;
+ b=OKZjCbpWKlrMXxNhohWQh8C+nPQcrKLGhu5m5jD5ajbe+aSM1vcyBxtZNik1BBA/e7
+ jv5OGr4lCM0usIh2wE1qBzsHA7u9eOCGGh8veP+pCy++44uoYpcr4Czt8Z4DcsG0g/O9
+ 3ndPxs5Xt0H5CCLRP87d6KOabmUFVgBZjVcf9TlUz/KRD2Xg2K2qR2Zv/t8rcbyUvvmZ
+ WpEQebcdniFq8u3BYyvn+7SAe1WXgJ8y5aHqlBI+yMN5HfrlLQWea73tgmhB/6Y3mVwW
+ Quwu+KKzo1Hs5m56o5jfkuPQk3lyr2itw8RKQV9h5CSs3rW4OzRtC3EIl/KFpOEUCJTW
+ qCUQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1730131587; x=1730736387;
- h=content-transfer-encoding:in-reply-to:content-language:references
- :cc:to:subject:from:user-agent:mime-version:date:message-id
+ d=1e100.net; s=20230601; t=1730138428; x=1730743228;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=rsS8mQxKeZhOGBSkMTChVuCtbwvG+Jwr+mFK42BwE2g=;
- b=Ajis/6lpqCyoktsljLn3JNUsgZgrvJ5/HdLZwo2YAz8Ghrg2Tyd1YJjXd01HPLEUgq
- qr2H1lqMt/pWFGLlIFvDMddvGTSyNHXN9fY2F7u/NSf0i9tWtDS7hrSAhntw/yOM2otW
- xNOdETCUzj/NSyhlWrLqBoAXe9ac+qTV9U6IT25fYwrlct2l02RYFTlXIuT4bmeiEgNs
- 5jI3KXbsD3fh2CmzZD7ZnWjN8BNAVkRjKb7RbnOmWKbr6125If9ahFlzIzQja44abt6d
- i9XV944wR8V6N8F4sedGQQOQtRUfQncUML+CfuUDzr3RiZ5p53mN8zyfDEg+n7skfoJg
- 76YA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWWNCY+bzU5floVxMtVV2jVPuPTF4vV6Ncl6exoOmnAdaNaOyKgX6iHUESiZ2MxaKqEdcvZW9LRE4X0@nongnu.org
-X-Gm-Message-State: AOJu0Yzwhcs3P6heEIGoHla19x/xfDu8Kp9Es6b2WsgemrYEUCadyl6G
- 28CLN+FlWE2tmU01u2QecD7KaGFqO1W16IBlnPqu81bItsFmQWao2FNcBDOvw1E=
-X-Google-Smtp-Source: AGHT+IF2wbIa9dMfNv0XonyLdwY1eNGBFmryOUE1sM7hTkkjHoZyMmZ6PFddnmxUZdlcLuGWQSfTdQ==
-X-Received: by 2002:a62:f24d:0:b0:71e:8049:474e with SMTP id
- d2e1a72fcca58-72063098067mr9804467b3a.26.1730131586858; 
- Mon, 28 Oct 2024 09:06:26 -0700 (PDT)
-Received: from ?IPV6:2400:4050:a840:1e00:32ed:25ae:21b1:72d6?
- ([2400:4050:a840:1e00:32ed:25ae:21b1:72d6])
+ bh=b0rW5l2XZ6Nw2fu/nZcpUdxNW/V8lTRBDsOwCDhO4vM=;
+ b=N7RvCzWLGQPmzYMrx28HI3Z70rSOfpc9i0T/AsDNAswRF0qdAUlo8a5XwNgjLwc5xX
+ jMJZ/rMYvPeFJjZt0+lDyQpqsptoKNG+mFMrTJfIBnOGTpnXwP3bELsM0etUCh5lO6gG
+ AUD7BfTgL7kLwot0O7TpoIQuLsmX5xfBGL+rmQ00/sUO0Zeqz6IMF1bk3dUkCT0X30Xi
+ 5Kx/PdP+lUZz2+mqV/yVayfwMxAweueHpfhA/n9ieF7J4XLEfaEP+9zpMJIkqZbPZHSL
+ 1Lj/pX4WCimxrE9j5fyFnYC2LT3SmPNjO98q+p0WBbdAk8ISuL5YDZWRmsPyk81+sKFh
+ Ineg==
+X-Gm-Message-State: AOJu0Yy60sKH8qMDjTZ6aeCyjHxsmwChG99NRN6S2UfsYIC0iVahdPGY
+ YpXAVvgJjTMeYpzJkRKb6UiufdaTZLR9tw1osCkZad640r/2WZtIkMrnYiHwi5w=
+X-Google-Smtp-Source: AGHT+IFnATb/+FAwNaLpgWCyPgmeYbk/TYlvB5aqkNF3AVjctXP6rHbInR+JvR4bHPTigH5jRykjnQ==
+X-Received: by 2002:a17:902:e842:b0:20b:920e:8fd3 with SMTP id
+ d9443c01a7336-210c6c30b32mr128560115ad.35.1730138426895; 
+ Mon, 28 Oct 2024 11:00:26 -0700 (PDT)
+Received: from [192.168.68.110] ([191.8.109.222])
  by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-72057939950sm5959797b3a.85.2024.10.28.09.06.20
+ d9443c01a7336-210bc02ebcdsm52977805ad.223.2024.10.28.11.00.24
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 28 Oct 2024 09:06:26 -0700 (PDT)
-Message-ID: <dbb394d4-f8fe-484d-974c-c84275f7a1c7@daynix.com>
-Date: Tue, 29 Oct 2024 01:06:18 +0900
+ Mon, 28 Oct 2024 11:00:26 -0700 (PDT)
+Message-ID: <f6d26471-9137-498f-b295-2bd6fad7241f@ventanamicro.com>
+Date: Mon, 28 Oct 2024 15:00:22 -0300
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-From: Akihiko Odaki <akihiko.odaki@daynix.com>
-Subject: Re: [PATCH v4 02/15] hw/display/apple-gfx: Introduce
- ParavirtualizedGraphics.Framework support
-To: Phil Dennis-Jordan <phil@philjordan.eu>
-Cc: qemu-devel@nongnu.org, agraf@csgraf.de, peter.maydell@linaro.org,
- pbonzini@redhat.com, rad@semihalf.com, quic_llindhol@quicinc.com,
- marcin.juszkiewicz@linaro.org, stefanha@redhat.com, mst@redhat.com,
- slp@redhat.com, richard.henderson@linaro.org, eduardo@habkost.net,
- marcel.apfelbaum@gmail.com, gaosong@loongson.cn, jiaxun.yang@flygoat.com,
- chenhuacai@kernel.org, kwolf@redhat.com, hreitz@redhat.com,
- philmd@linaro.org, shorne@gmail.com, palmer@dabbelt.com,
- alistair.francis@wdc.com, bmeng.cn@gmail.com, liwei1518@gmail.com,
- dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com, jcmvbkbc@gmail.com,
- marcandre.lureau@redhat.com, berrange@redhat.com, qemu-arm@nongnu.org,
- qemu-block@nongnu.org, qemu-riscv@nongnu.org,
- Alexander Graf <graf@amazon.com>
-References: <20241024102813.9855-1-phil@philjordan.eu>
- <20241024102813.9855-3-phil@philjordan.eu>
- <9e310d5e-ab73-47b9-b9ed-5a16d4db3fb9@daynix.com>
- <CAAibmn0NA+K63OvrsBpN1HivndyZo-fgeLwzY8AVE4hPrQR26w@mail.gmail.com>
- <dd2aae75-348d-44ad-bbd9-5d45aad15bc6@daynix.com>
- <CAAibmn1z+7yizwH8DogfcCWOWzA8Ox6e=p+Hc1pu-CS4SjAirg@mail.gmail.com>
- <6a989d04-6416-4bd9-98ac-e1230a1095a9@daynix.com>
- <CAAibmn3YEOT0O55-bwJkpi_oEGkA1WwvhC0w3jGbgXOZLTVa0w@mail.gmail.com>
- <CAAibmn3HZeDeK8FrYhHa1GGwc+N8rBuB2VvMRm7LCt0mUGmsYQ@mail.gmail.com>
- <27ced2db-472d-47ae-9047-9efc0b589a1e@daynix.com>
- <CAAibmn17=iTaEW0Q_E_n6gsS7vd-d8-w36yee9f2eZ+SR-d-ng@mail.gmail.com>
+Subject: Re: [PATCH 0/4] target/riscv/kvm: add riscv-aia bool props
+To: qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
+ liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
+ ajones@ventanamicro.com
+References: <20240924124407.766495-1-dbarboza@ventanamicro.com>
 Content-Language: en-US
-In-Reply-To: <CAAibmn17=iTaEW0Q_E_n6gsS7vd-d8-w36yee9f2eZ+SR-d-ng@mail.gmail.com>
+From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+In-Reply-To: <20240924124407.766495-1-dbarboza@ventanamicro.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Received-SPF: none client-ip=2607:f8b0:4864:20::430;
- envelope-from=akihiko.odaki@daynix.com; helo=mail-pf1-x430.google.com
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_NONE=0.001 autolearn=unavailable autolearn_force=no
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::62f;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pl1-x62f.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -120,214 +97,57 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 2024/10/28 23:13, Phil Dennis-Jordan wrote:
-> 
-> 
-> On Mon, 28 Oct 2024 at 15:02, Akihiko Odaki <akihiko.odaki@daynix.com 
-> <mailto:akihiko.odaki@daynix.com>> wrote:
-> 
->     On 2024/10/28 22:31, Phil Dennis-Jordan wrote:
->      >
->      >
->      > On Mon, 28 Oct 2024 at 10:00, Phil Dennis-Jordan
->     <phil@philjordan.eu <mailto:phil@philjordan.eu>
->      > <mailto:phil@philjordan.eu <mailto:phil@philjordan.eu>>> wrote:
->      >
->      >
->      >          >      >
->      >          >      > Hmm. I think if we were to use that, we would
->     need to
->      >         create a new
->      >          >      > QemuEvent for every job and destroy it afterward,
->      >         which seems
->      >          >     expensive.
->      >          >      > We can't rule out multiple concurrent jobs being
->      >         submitted, and the
->      >          >      > QemuEvent system only supports a single producer as
->      >         far as I can
->      >          >     tell.
->      >          >      >
->      >          >      > You can probably sort of hack around it with
->     just one
->      >         QemuEvent by
->      >          >      > putting the qemu_event_wait into a loop and turning
->      >         the job.done
->      >          >     flag
->      >          >      > into an atomic (because it would now need to be
->      >         checked outside the
->      >          >      > lock) but this all seems unnecessarily complicated
->      >         considering the
->      >          >      > QemuEvent uses the same mechanism QemuCond/
->     QemuMutex
->      >         internally
->      >          >     on macOS
->      >          >      > (the only platform relevant here), except we
->     can use it as
->      >          >     intended with
->      >          >      > QemuCond/QemuMutex rather than having to work
->     against the
->      >          >     abstraction.
->      >          >
->      >          >     I don't think it's going to be used concurrently. It
->      >         would be difficult
->      >          >     to reason even for the framework if it performs memory
->      >          >     unmapping/mapping/reading operations concurrently.
->      >          >
->      >          >
->      >          > I've just performed a very quick test by wrapping the job
->      >         submission/
->      >          > wait in the 2 mapMemory callbacks and the 1 readMemory
->      >         callback with
->      >          > atomic counters and logging whenever a counter went
->     above 1.
->      >          >
->      >          >   * Overall, concurrent callbacks across all types were
->      >         common (many per
->      >          > second when the VM is busy). It's not exactly a
->     "thundering
->      >         herd" (I
->      >          > never saw >2) but it's probably not a bad idea to use
->     a separate
->      >          > condition variable for each job type. (task map,
->     surface map,
->      >         memory read)
->      >          >   * While I did not observe any concurrent memory mapping
->      >         operations
->      >          > *within* a type of memory map (2 task mappings or 2
->     surface
->      >         mappings) I
->      >          > did see very occasional concurrent memory *read*
->     callbacks.
->      >         These would,
->      >          > as far as I can tell, not be safe with QemuEvents,
->     unless we
->      >         placed the
->      >          > event inside the job struct and init/destroyed it on every
->      >         callback
->      >          > (which seems like excessive overhead).
->      >
->      >         I think we can tolerate that overhead. init/destroy
->     essentially
->      >         sets the
->      >         fields in the data structure and I estimate its total size is
->      >         about 100
->      >         bytes. It is probably better than waking an irrelevant thread
->      >         up. I also
->      >         hope that keeps the code simple; it's not worthwhile
->     adding code to
->      >         optimize this.
->      >
->      >
->      >     At least pthread_cond_{init,destroy} and
->      >     pthread_mutex_{init,destroy} don't make any syscalls, so yeah
->     it's
->      >     probably an acceptable overhead.
->      >
->      >
->      > I've just experimented with QemuEvents created on-demand and ran
->     into
->      > some weird deadlocks, which then made me sit down and think about it
->      > some more. I've come to the conclusion that creating (and crucially,
->      > destroying) QemuEvents on demand in this way is not safe.
->      >
->      > Specifically, you must not call qemu_event_destroy() - which
->      > transitively destroys the mutex and condition variable - unless
->     you can
->      > guarantee that the qemu_event_set() call on that event object has
->     completed.
->      >
->      > In qemu_event_set, the event object's value is atomically set to
->     EV_SET.
->      > If the previous value was EV_BUSY, qemu_futex_wake() is called.
->     All of
->      > this is outside any mutex, however, so apart from memory coherence
->      > (there are barriers) this can race with the waiting thread.
->      > qemu_event_wait() reads the event's value. If EV_FREE, it's
->     atomically
->      > set to EV_BUSY. Then the mutex is locked, the value is checked
->     again,
->      > and if it's still EV_BUSY, it waits for the condition variable,
->      > otherwise the mutex is immediately unlocked again. If the trigger
->      > thread's qemu_event_set() flip to EV_SET occurs between the waiting
->      > thread's two atomic reads of the value, the waiting thread will
->     never
->      > wait for the condition variable, but the trigger thread WILL try to
->      > acquire the mutex and signal the condition variable in
->      > qemu_futex_wake(), by which  time the waiting thread may have
->     advanced
->      > outside of qemu_event_wait().
-> 
->     Sorry if I'm making a mistake again, but the waiting thread won't
->     set to
->     EV_BUSY unless the value is EV_FREE on the second read so the trigger
->     thread will not call qemu_futex_wake() if it manages to set to EV_SET
->     before the second read, will it?
-> 
-> 
-> This sequence of events will cause the problem:
-> 
-> WAITER (in qemu_event_wait):
-> value = qatomic_load_acquire(&ev->value);
-> -> EV_FREE
-> 
-> TRIGGER (in qemu_event_set):
-> qatomic_read(&ev->value) != EV_SET
-> -> EV_FREE (condition is false)
-> 
-> WAITER:
-> qatomic_cmpxchg(&ev->value, EV_FREE, EV_BUSY) == EV_SET
-> -> cmpxchg returns EV_FREE, condition false.
-> ev->value =  EV_BUSY.
-> > TRIGGER:
->          int old = qatomic_xchg(&ev->value, EV_SET);
->          smp_mb__after_rmw();
->          if (old == EV_BUSY) {
-> -> old = EV_BUSY, condition true.
-> ev->value = EV_SET
-> 
-> WAITER (in qemu_futex_wait(ev, EV_BUSY)):
->      pthread_mutex_lock(&ev->lock);
->      if (ev->value == val) {
-> -> false, because value is EV_SET
-> 
-> WAITER:
->      pthread_mutex_unlock(&ev->lock);
->      …
->      qemu_event_destroy(&job->done_event);
-> 
-> TRIGGER (in qemu_futex_wake(ev, INT_MAX)):
->      pthread_mutex_lock(&ev->lock);
-> -> hangs, because mutex has been destroyed
+Hi,
 
-Thanks for clarification. This is very insightful.
+I had a change of heart w.r.t this work. I still believe that the boolean properties
+are better to deal with since we don't have to deal with string parsing, and that we
+should avoid creating new string props in the future.
+
+But as far as the user API goes it doesn't matter that much. Having to do
+
+-accel kvm,riscv-aia=emul
+
+or
+
+-accel kvm,riscv-aia-emul=on
+
+is basically the same thing. Deprecate properties always creates some form of hassle
+for existing scripts and whatnot and we should avoid it.
+
+String properties aren't that great to report to APIs though, so what we can do is to
+create internal bools to track the string value and then use it for QMP.
 
 
-> 
->      >
->      > This is all fine usually, BUT if you destroy the QemuEvent
->     immediately
->      > after the qemu_event_wait() call, qemu_futex_wake() may try to
->     lock a
->      > mutex that has been destroyed, or signal a condition variable
->     which has
->      > been destroyed. I don't see a reasonable way of making this safe
->     other
->      > than using long-lived mutexes and condition variables. And
->     anyway, we
->      > have much, MUCH bigger contention/performance issues coming from
->     almost
->      > everything being covered by the BQL. (If waking these callbacks
->     can even
->      > be considered an issue: I haven't seen it show up in profiling,
->     whereas
->      > BQL contention very much does.)
->      >
->      > I'll submit v5 of this patch set with separate condition
->     variables for
->      > each job type. This should make the occurrence of waking the wrong
->      > thread quite rare, while reasoning about correctness is pretty
->      > straightforward. I think that's good enough.
+Long story short, I'll re-send this series with only patches 1 and 2. Thanks,
 
-What about using QemuSemaphore then? It does not seem to have the 
-problem same with QemuEvent.
+
+Daniel
+
+
+
+On 9/24/24 9:44 AM, Daniel Henrique Barboza wrote:
+> Hi,
+> 
+> Boolean properties are easier to deal with in the protocol side (e.g.
+> QMP) since they don't require string parsing. We should always use them
+> when applicable.
+> 
+> This series adds 3 new riscv-aia bool options for the KVM accel driver,
+> each one representing the possible values (emul, hwaccel and auto).
+> We're also deprecating the existing 'riscv-aia' string option.
+> 
+> The idea is to use the new properties to enable AIA support in libvirt.
+> 
+> Patches based on riscv-to-apply.next.
+> 
+> Daniel Henrique Barboza (4):
+>    target/riscv/kvm: set 'aia_mode' to default in error path
+>    target/riscv/kvm: clarify how 'riscv-aia' default works
+>    target/riscv/kvm: add kvm-aia bools props
+>    target/riscv/kvm: deprecate riscv-aia string prop
+> 
+>   docs/about/deprecated.rst  |   8 +++
+>   target/riscv/kvm/kvm-cpu.c | 100 +++++++++++++++++++++++++++++++++----
+>   2 files changed, 98 insertions(+), 10 deletions(-)
+> 
 
