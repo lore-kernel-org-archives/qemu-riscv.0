@@ -4,89 +4,98 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 88F3AD3A697
-	for <qemu-riscv@archiver.kernel.org>; Tue, 29 Oct 2024 19:45:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DC2EED3A697
+	for <qemu-riscv@archiver.kernel.org>; Tue, 29 Oct 2024 20:12:01 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1t5s8K-0002D2-6A; Tue, 29 Oct 2024 15:44:04 -0400
+	id 1t5sYf-0001Re-0V; Tue, 29 Oct 2024 16:11:17 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <paolo.savini@embecosm.com>)
- id 1t5s8F-0002BV-4P
- for qemu-riscv@nongnu.org; Tue, 29 Oct 2024 15:44:00 -0400
-Received: from mail-wm1-x332.google.com ([2a00:1450:4864:20::332])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1t5sYc-0001Qv-MI
+ for qemu-riscv@nongnu.org; Tue, 29 Oct 2024 16:11:14 -0400
+Received: from mail-lf1-x131.google.com ([2a00:1450:4864:20::131])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <paolo.savini@embecosm.com>)
- id 1t5s8A-0006Bv-Sj
- for qemu-riscv@nongnu.org; Tue, 29 Oct 2024 15:43:57 -0400
-Received: by mail-wm1-x332.google.com with SMTP id
- 5b1f17b1804b1-43162cf1eaaso76070915e9.0
- for <qemu-riscv@nongnu.org>; Tue, 29 Oct 2024 12:43:53 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1t5sYa-0000UK-OX
+ for qemu-riscv@nongnu.org; Tue, 29 Oct 2024 16:11:14 -0400
+Received: by mail-lf1-x131.google.com with SMTP id
+ 2adb3069b0e04-539fe76e802so7103735e87.1
+ for <qemu-riscv@nongnu.org>; Tue, 29 Oct 2024 13:11:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=embecosm.com; s=google; t=1730231032; x=1730835832; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=lFEXZxJ0YG5w2mjcHdnNumpjQ1Pxoj+3fOS8dRlYHaw=;
- b=aUwRI3DsIVXr9vB5aupUdFePGuyBtsA0maY5Bnc4ZMw3kJq0N1x8+Yxeyh1iQW193A
- QukO+V31uGgsXuSo7YMg5tZug31O4SBrMr392cEXkK9cMiQB/mpPQLOhiTjq8dAlQQeY
- 4RC9Nh/f85PlyZbQZxYnW0Wvyf8hs944SSSNYfgVOo3P/LS8bSELSOpe2Xr5eGJHd79D
- DkqkGMitNkrNU4M0zcrTnpcHjy7rs1vt3rNZNJbaijVKVaWOMcRXJxTJwkXC21u1+das
- k6q2b/VSUzQ1ODxzKq7XlUjudlBcChGmbM04E7lZITVWwNAkoKeKI9C4lIOpA+BN2wHr
- QdIg==
+ d=linaro.org; s=google; t=1730232668; x=1730837468; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=mVffrm7ORWtwr/oTU7Spuj4YBIi+VLsXfNiPlPYNk9Q=;
+ b=pYlMVtrgkWt/fXrWr6xRpa0xd22PSjid7b52NOBbTxLn8HuzWA0J8+a2PAIrW1iolG
+ OEwKpcaN2Ig+tH4jU02xi/ulEAaG7cVjlBo2x8nklB5+fYlS+4s9E4kAWOA68TvyRvL2
+ LdPgd8kCnSj+ZR41F7SKCncUpIuETG+AvN5Frrxc3QX2yAjYPxCFT9VRswoXeVo+Gjt4
+ AhwoLrrUiKb7STt0WbuTGDRrsrJTPKwYNH35tzKLT7DaLbQ5xXxjTBTxd3m3Y6O+9tbi
+ r5P5ElOiG4ewnP2QVvI1x2fEV+dl/t4NXQJjUl7Hl82AXAGFo3Dyb2uOIboOef9U30Rm
+ FIvQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1730231032; x=1730835832;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=lFEXZxJ0YG5w2mjcHdnNumpjQ1Pxoj+3fOS8dRlYHaw=;
- b=EQmpPQu8IeUefYv7xn+yLyADbkawlPDNQCdAqhW5dbxCZSESaxi1B3H1wtP0BvAbVN
- JDL0g/yM0oiHL0rJdWqbVpUDuOQoDbvlechNR+nwAwgh6758t5g41VKOD7o4aritRUXq
- OiP2ylSz1ED7y+hFbHznq0weUfMybXQi/kDBXrbon21TZwmiSS3Bi2+3/Vn7lJ7bdkkD
- iZMiVgkfnYUluhP0eJTda6C8Hw2KOQaMjj0iN+DVaBggPFxnNfvi1sSyzDGkCmTmyvim
- GJHhCYymwtXKqe6PZnRp9gso2kZ52RMXVAE527vhkDncSS/dD0R+JzEhI7WEGoVtRSfG
- 6WLw==
+ d=1e100.net; s=20230601; t=1730232668; x=1730837468;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=mVffrm7ORWtwr/oTU7Spuj4YBIi+VLsXfNiPlPYNk9Q=;
+ b=F8kzxqaga4ALOZf5jQHlrfgbg/IOwGRi2vSAjavfrivfei119vDvInMgRUowAVhCXI
+ ZJddbmWh9HxYkTcWV/EgfC4tt13FTQwVLh0nvRT0AUyDtpf9Mc9GE+paBp1mZUb7x0nY
+ nXN2QbWo7Ytc25Qzd/PuNmDk1eOEKOmT6KDhljZ1QfkRkeuJNIzBF1F/AU7+fcU/N92J
+ b/oIsom2z/UsDF0o3riRsuP4A9uwr8/iinR2s3rJmszIDiaz/Tq9gJJl0LwjpHyxrdT3
+ 6L3jDYrKNp9VB5/68CsMjFKQ6RF/QcSTVruYA6fjYYZbO+dlAU3jZxs4nJYt4M+zPQ8v
+ 3Qjg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWBM+U7jCSCvGMHLuaIG9Wu75QmMZ1zmMgQPcs9rSM6tntiXQc4pJVS8LUCHDK5Z8GDIsCRSHqEldJl@nongnu.org
-X-Gm-Message-State: AOJu0Yzv6SljeKQq3w0tn++gVhZ37KiONX8PvbURUD2GZqKherYkmgRb
- hri+uf2f/QgYFmqIacgSlamd9Hi9QwATb8mTQAVIQvDNufVOJQ+B9Z5qOLOBzsc=
-X-Google-Smtp-Source: AGHT+IG3E7I0lWRjUurZwtb9W7tKyKITyXMa7/G8hOHwatFJqtSyCKkU/X2kljjFhivH7RILQkCnLQ==
-X-Received: by 2002:a05:600c:5248:b0:431:557e:b40c with SMTP id
- 5b1f17b1804b1-4319ad065b6mr114297985e9.27.1730231032438; 
- Tue, 29 Oct 2024 12:43:52 -0700 (PDT)
-Received: from paolo-laptop-amd.. ([2a0e:cb01:d3:f100:2972:f115:541a:90f8])
+ AJvYcCXAwJcFxR+U0J4V/NNozbAcYGaYI7gKi+S2f+jCw7U/uh/iDoGbsg3hctHCfcsYF776zNNzkuaTeHzt@nongnu.org
+X-Gm-Message-State: AOJu0YzPzSJVH9fpjaHVqygZiYVNJImoPMqx3zGUNBF/Fxj/OyTX8956
+ EnU5S65vkkb8RshqK5xTVNMN+8XMX/QI/jhBRgTLTB5OXv4vwbZONS6VCASmidQ=
+X-Google-Smtp-Source: AGHT+IEQm7S7HhrAefu6bB3WsI9sjvU1NibhMhK2h3mgqHzs6Ac3q/ixT/MrrVYq2nNiKqsosFqETQ==
+X-Received: by 2002:a05:6512:1285:b0:539:e513:1f66 with SMTP id
+ 2adb3069b0e04-53b3491e086mr6508337e87.37.1730232667785; 
+ Tue, 29 Oct 2024 13:11:07 -0700 (PDT)
+Received: from [192.168.156.226] ([91.223.100.133])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-43193573551sm154348445e9.6.2024.10.29.12.43.51
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 29 Oct 2024 12:43:52 -0700 (PDT)
-From: Paolo Savini <paolo.savini@embecosm.com>
-To: qemu-devel@nongnu.org,
-	qemu-riscv@nongnu.org
-Cc: Paolo Savini <paolo.savini@embecosm.com>,
- Richard Handerson <richard.henderson@linaro.org>,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bmeng.cn@gmail.com>,
- Weiwei Li <liwei1518@gmail.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Helene Chelin <helene.chelin@embecosm.com>, Nathan Egge <negge@google.com>,
- Max Chou <max.chou@sifive.com>
-Subject: [RFC v4 0/2] target/riscv: add wrapper for target specific macros in
- atomicity check.
-Date: Tue, 29 Oct 2024 19:43:46 +0000
-Message-ID: <20241029194348.59574-1-paolo.savini@embecosm.com>
-X-Mailer: git-send-email 2.43.0
+ 2adb3069b0e04-53bc0d5f161sm40364e87.213.2024.10.29.13.10.57
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 29 Oct 2024 13:11:07 -0700 (PDT)
+Message-ID: <31e8dc51-f70f-44eb-a768-61cfa50eed5b@linaro.org>
+Date: Tue, 29 Oct 2024 17:10:52 -0300
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v4 2/9] hw/core: Make CPU topology enumeration
+ arch-agnostic
+To: Zhao Liu <zhao1.liu@intel.com>, =?UTF-8?Q?Daniel_P_=2E_Berrang=C3=A9?=
+ <berrange@redhat.com>, Igor Mammedov <imammedo@redhat.com>,
+ Eduardo Habkost <eduardo@habkost.net>,
+ Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
+ Yanan Wang <wangyanan55@huawei.com>, "Michael S . Tsirkin" <mst@redhat.com>,
+ Paolo Bonzini <pbonzini@redhat.com>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Eric Blake <eblake@redhat.com>, Markus Armbruster <armbru@redhat.com>,
+ Marcelo Tosatti <mtosatti@redhat.com>, =?UTF-8?Q?Alex_Benn=C3=A9e?=
+ <alex.bennee@linaro.org>, Peter Maydell <peter.maydell@linaro.org>,
+ Jonathan Cameron <Jonathan.Cameron@huawei.com>,
+ Sia Jee Heng <jeeheng.sia@starfivetech.com>,
+ Alireza Sanaee <alireza.sanaee@huawei.com>
+Cc: qemu-devel@nongnu.org, kvm@vger.kernel.org, qemu-riscv@nongnu.org,
+ qemu-arm@nongnu.org, Zhenyu Wang <zhenyu.z.wang@intel.com>,
+ Dapeng Mi <dapeng1.mi@linux.intel.com>, Yongwei Ma <yongwei.ma@intel.com>
+References: <20241022135151.2052198-1-zhao1.liu@intel.com>
+ <20241022135151.2052198-3-zhao1.liu@intel.com>
+Content-Language: en-US
+From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+In-Reply-To: <20241022135151.2052198-3-zhao1.liu@intel.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::332;
- envelope-from=paolo.savini@embecosm.com; helo=mail-wm1-x332.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::131;
+ envelope-from=philmd@linaro.org; helo=mail-lf1-x131.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -102,46 +111,125 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-The version 4 of the patch wraps the host specific macros used to check
-the support for atomic 128 bit memory operations into generic macros.
-The patch also adjusts the indentation of the if/else clauses and the comment
-about the above mentioned check for atomic 128b load/store to reflect better the
-code.
+On 22/10/24 10:51, Zhao Liu wrote:
+> Cache topology needs to be defined based on CPU topology levels. Thus,
+> define CPU topology enumeration in qapi/machine.json to make it generic
+> for all architectures.
+> 
+> To match the general topology naming style, rename CPU_TOPO_LEVEL_* to
+> CPU_TOPOLOGY_LEVEL_*, and rename SMT and package levels to thread and
+> socket.
+> 
+> Also, enumerate additional topology levels for non-i386 arches, and add
+> a CPU_TOPOLOGY_LEVEL_DEFAULT to help future smp-cache object to work
+> with compatibility requirement of arch-specific cache topology models.
+> 
+> Signed-off-by: Zhao Liu <zhao1.liu@intel.com>
+> Tested-by: Yongwei Ma <yongwei.ma@intel.com>
+> Reviewed-by: Jonathan Cameron <Jonathan.Cameron@huawei.com>
+> ---
+> Changes since Patch v3:
+>   * Dropped "invalid" level to avoid an unsettable option. (Daniel)
+> ---
+>   hw/i386/x86-common.c       |   4 +-
+>   include/hw/i386/topology.h |  23 ++----
+>   qapi/machine-common.json   |  44 +++++++++++-
+>   target/i386/cpu.c          | 144 ++++++++++++++++++-------------------
+>   target/i386/cpu.h          |   4 +-
+>   5 files changed, 123 insertions(+), 96 deletions(-)
+> 
+> diff --git a/hw/i386/x86-common.c b/hw/i386/x86-common.c
+> index b86c38212eab..bc360a9ea44b 100644
+> --- a/hw/i386/x86-common.c
+> +++ b/hw/i386/x86-common.c
+> @@ -273,12 +273,12 @@ void x86_cpu_pre_plug(HotplugHandler *hotplug_dev,
+>   
+>       if (ms->smp.modules > 1) {
+>           env->nr_modules = ms->smp.modules;
+> -        set_bit(CPU_TOPO_LEVEL_MODULE, env->avail_cpu_topo);
+> +        set_bit(CPU_TOPOLOGY_LEVEL_MODULE, env->avail_cpu_topo);
+>       }
+>   
+>       if (ms->smp.dies > 1) {
+>           env->nr_dies = ms->smp.dies;
+> -        set_bit(CPU_TOPO_LEVEL_DIE, env->avail_cpu_topo);
+> +        set_bit(CPU_TOPOLOGY_LEVEL_DIE, env->avail_cpu_topo);
+>       }
+>   
+>       /*
+> diff --git a/include/hw/i386/topology.h b/include/hw/i386/topology.h
+> index 48b43edc5a90..b2c8bf2de158 100644
+> --- a/include/hw/i386/topology.h
+> +++ b/include/hw/i386/topology.h
+> @@ -39,7 +39,7 @@
+>    *  CPUID Fn8000_0008_ECX[ApicIdCoreIdSize[3:0]] is set to apicid_core_width().
+>    */
+>   
+> -
+> +#include "qapi/qapi-types-machine-common.h"
+>   #include "qemu/bitops.h"
+>   
+>   /*
+> @@ -62,22 +62,7 @@ typedef struct X86CPUTopoInfo {
+>       unsigned threads_per_core;
+>   } X86CPUTopoInfo;
+>   
+> -#define CPU_TOPO_LEVEL_INVALID CPU_TOPO_LEVEL_MAX
+> -
+> -/*
+> - * CPUTopoLevel is the general i386 topology hierarchical representation,
+> - * ordered by increasing hierarchical relationship.
+> - * Its enumeration value is not bound to the type value of Intel (CPUID[0x1F])
+> - * or AMD (CPUID[0x80000026]).
+> - */
+> -enum CPUTopoLevel {
+> -    CPU_TOPO_LEVEL_SMT,
+> -    CPU_TOPO_LEVEL_CORE,
+> -    CPU_TOPO_LEVEL_MODULE,
+> -    CPU_TOPO_LEVEL_DIE,
+> -    CPU_TOPO_LEVEL_PACKAGE,
+> -    CPU_TOPO_LEVEL_MAX,
+> -};
+> +#define CPU_TOPOLOGY_LEVEL_INVALID CPU_TOPOLOGY_LEVEL__MAX
 
-Changes from V3:
-- patch 2:
-  - add generic wrapper macro to flag host 128b atomic mem op support.
-  - fix if-else indentation.
-  - improve comment about the checks for host atomic 128b mem op support.
 
-Previous versions:
-- v1: https://lore.kernel.org/all/20240717153040.11073-1-paolo.savini@embecosm.com/
-- v2: https://lore.kernel.org/all/20241002135708.99146-1-paolo.savini@embecosm.com/
-- v3: https://lore.kernel.org/all/20241014220153.196183-1-paolo.savini@embecosm.com/
+> @@ -341,18 +341,18 @@ static uint32_t apicid_offset_by_topo_level(X86CPUTopoInfo *topo_info,
+>       return 0;
+>   }
+>   
+> -static uint32_t cpuid1f_topo_type(enum CPUTopoLevel topo_level)
+> +static uint32_t cpuid1f_topo_type(enum CpuTopologyLevel topo_level)
+>   {
+>       switch (topo_level) {
+> -    case CPU_TOPO_LEVEL_INVALID:
+> +    case CPU_TOPOLOGY_LEVEL_INVALID:
 
-Cc: Richard Handerson <richard.henderson@linaro.org>
-Cc: Palmer Dabbelt <palmer@dabbelt.com>
-Cc: Alistair Francis <alistair.francis@wdc.com>
-Cc: Bin Meng <bmeng.cn@gmail.com>
-Cc: Weiwei Li <liwei1518@gmail.com>
-Cc: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Cc: Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
-Cc: Helene Chelin <helene.chelin@embecosm.com>
-Cc: Nathan Egge <negge@google.com>
-Cc: Max Chou <max.chou@sifive.com>
+Since we use an enum, I'd rather directly use CPU_TOPOLOGY_LEVEL__MAX.
 
-Helene CHELIN (1):
-  target/riscv: rvv: reduce the overhead for simple RISC-V vector
-    unit-stride loads and stores
+Or maybe in this case ...
 
-Paolo Savini (1):
-  target/riscv: rvv: improve performance of RISC-V vector loads and
-    stores on large amounts of data.
+>           return CPUID_1F_ECX_TOPO_LEVEL_INVALID;
+> -    case CPU_TOPO_LEVEL_SMT:
+> +    case CPU_TOPOLOGY_LEVEL_THREAD:
+>           return CPUID_1F_ECX_TOPO_LEVEL_SMT;
+> -    case CPU_TOPO_LEVEL_CORE:
+> +    case CPU_TOPOLOGY_LEVEL_CORE:
+>           return CPUID_1F_ECX_TOPO_LEVEL_CORE;
+> -    case CPU_TOPO_LEVEL_MODULE:
+> +    case CPU_TOPOLOGY_LEVEL_MODULE:
+>           return CPUID_1F_ECX_TOPO_LEVEL_MODULE;
+> -    case CPU_TOPO_LEVEL_DIE:
+> +    case CPU_TOPOLOGY_LEVEL_DIE:
+>           return CPUID_1F_ECX_TOPO_LEVEL_DIE;
+>       default:
+            /* Other types are not supported in QEMU. */
+            g_assert_not_reached();
 
- target/riscv/vector_helper.c    | 64 ++++++++++++++++++++++++++++++++-
- target/riscv/vector_internals.h | 12 +++++++
- 2 files changed, 75 insertions(+), 1 deletion(-)
+... return CPUID_1F_ECX_TOPO_LEVEL_INVALID as default.
 
--- 
-2.34.1
+Can be cleaned on top, so:
+
+Acked-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+
+
 
