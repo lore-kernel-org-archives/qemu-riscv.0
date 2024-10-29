@@ -4,63 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D7019D2AB15
-	for <qemu-riscv@archiver.kernel.org>; Tue, 29 Oct 2024 21:01:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4E5D3D2AB2C
+	for <qemu-riscv@archiver.kernel.org>; Tue, 29 Oct 2024 21:01:38 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1t5tIk-0003Zv-1g; Tue, 29 Oct 2024 16:58:54 -0400
+	id 1t5tJk-0004Ng-6l; Tue, 29 Oct 2024 16:59:56 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <phil@philjordan.eu>)
- id 1t5tId-0003VW-Rn
- for qemu-riscv@nongnu.org; Tue, 29 Oct 2024 16:58:48 -0400
-Received: from mail-ed1-x52b.google.com ([2a00:1450:4864:20::52b])
+ id 1t5tJT-000438-6g
+ for qemu-riscv@nongnu.org; Tue, 29 Oct 2024 16:59:39 -0400
+Received: from mail-ed1-x536.google.com ([2a00:1450:4864:20::536])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <phil@philjordan.eu>)
- id 1t5tIa-0005VJ-Jd
- for qemu-riscv@nongnu.org; Tue, 29 Oct 2024 16:58:47 -0400
-Received: by mail-ed1-x52b.google.com with SMTP id
- 4fb4d7f45d1cf-5c903f5bd0eso11663018a12.3
- for <qemu-riscv@nongnu.org>; Tue, 29 Oct 2024 13:58:42 -0700 (PDT)
+ id 1t5tJQ-0005fz-86
+ for qemu-riscv@nongnu.org; Tue, 29 Oct 2024 16:59:38 -0400
+Received: by mail-ed1-x536.google.com with SMTP id
+ 4fb4d7f45d1cf-5cbb6166c06so5608570a12.0
+ for <qemu-riscv@nongnu.org>; Tue, 29 Oct 2024 13:59:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=philjordan-eu.20230601.gappssmtp.com; s=20230601; t=1730235521; x=1730840321;
+ d=philjordan-eu.20230601.gappssmtp.com; s=20230601; t=1730235575; x=1730840375;
  darn=nongnu.org; 
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=DIlD8JQY/vN66ECFc+hFRoeat83zALD/cz4xBRBc2Ws=;
- b=xTrBtgOB61ZyXPCk0JAzyJTbVmRCAEpcATaBY3oVyeeUhwTnAiz04X3qnbs2TM69k6
- Jw0bZXB3VRSuLLmGLf1Rf7LD01fFxn+IPuzdgLm8ivtSHwRiTqdsjU8wjc7B24R3PSSR
- s02gZ34pbFa3WNX/NruDhYYcceV5RMv8PdR7tRteffKRO7vT5quDB/9H6gd6qiqZHBAl
- UsbtXtdP0VqB9l/p9yfkRAy6gNxhmcurIGiYqnn1dIHKd0mgv7gMz2KkyYod6BNeUZKk
- BnD9DlkSUuNBIpT50S+1QnUed2jGALq482O2FDZrJ7+UbwRwFF6i/ujOUqq5NrCdZx/f
- V6AA==
+ bh=ijAewjRBURoFdp5bzkLZ63F+nbsTOOkYMV9t/qC9vNc=;
+ b=uwovqJ9HJGRNCwy2C7IaGM2CYMEacAGDRAydH6AfUuPHeOjo5Br1TLuRKT1nTxPuir
+ pDCuU6ksLbaCYqc5jXexVxgeQszaSeINSx5bNnLkL2hQtuCI4A3BB6ZV8VDR+Gf+vf+R
+ rDrJVQHxf8eVyyajlX0NfKoZAZryrWbQgsdpNBpTB2H1JXLIYXcZN5UXqhjV4i4fOw+1
+ t/VgQUyWN7QrRs27QuUs3gPBbqj7baihBcvsD5uq7ZhOpi3nZMXxA8KpPtliFGEy+1x9
+ ywyz/J2J2D25HrXO8rSGOjlUqCDBkw/rhfpLw8irwXeAo5S9gZ/UV2AUJvmYdmDehr/f
+ 7Q0Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1730235521; x=1730840321;
+ d=1e100.net; s=20230601; t=1730235575; x=1730840375;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=DIlD8JQY/vN66ECFc+hFRoeat83zALD/cz4xBRBc2Ws=;
- b=jQ47in4mrbYqNuxOltVTE26YdeLNPbtLeBZgogsCThiqGpPsk6W6MlI5/DQTootboH
- WYrGpm6KoGHajBgmG/LsNMntpVsskBOBlKs+l4Qb3St9h47PfsADBp823BxL6rtF1xqq
- ZzoJ0uiipVESjjSaecJCSktaMmon8+Ql7Zw9him4B7vseLUwuix9nCSzaftGTmma06qU
- HFJeqfMGdqLwIsw5vDmF4m9EOp+lyFr7TrGgFbj7Rcv5jToeihgFrjT+YNrSmVuv2WK2
- qxY7Ekhm8NazLkn6703zqTiMxJyFihRye1fFVVoXWTfy40fJQExh9Fehrbr1stzAiMwG
- J4lg==
+ bh=ijAewjRBURoFdp5bzkLZ63F+nbsTOOkYMV9t/qC9vNc=;
+ b=q65U24YvERhYSU4sL8U7/94rKuD7kPrh5ebRmRCKau9yLZpDxIE4z3SpIG7IHRoKPW
+ MFqhsrW71lfz57IYV8hv0MkoCCn95PIlurgj9GRuMYTkGWhgXeNxf/iah7gd8bw+b9Pu
+ MpRixijNp6X7q54/5lwVJKSljSqTV4qeiVMhCZDrrdPExykgXntswLnniOSQJBP6Rjt4
+ py16s/ALp57SF3DMBwQuCBBM6PzHYKTRA9jEGMQ54V8N7c+kTHfd6P9Ye1gj0xYjEnSQ
+ 2z5dm5k6FHrr/ZwazMewOsVkM8PuJuKzIkBPmL8kDI0AXJLxGICmy7bRb8BT7QblpjVL
+ ElXg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWZy7/RIft41mkxdPDom6cknpjnNejSqlumbOlQ1LrLKDSTQb27r1KhzpZ74UVCyTT+K/l/KECOdilZ@nongnu.org
-X-Gm-Message-State: AOJu0Yz0v+K+M16HdGx9IbAHzQ9KM3CYS5cfNwz14CgmH7b0VMavkWCd
- aTSjIIgd5fXbzLClid6NNtlChlf/l2mlQ5z+lsEXDeqHHJwN+aiwFP7JHpHtZA==
-X-Google-Smtp-Source: AGHT+IH7pSNGLH5+MmuBx+5IAkE3v0z5HJaL2giPaEqg5J8QMkyLTyLU0/94YINBjOS71ymlGNvYLA==
-X-Received: by 2002:a05:6402:35c2:b0:5cb:6869:24b4 with SMTP id
- 4fb4d7f45d1cf-5cbbf747355mr10007581a12.0.1730235520776; 
- Tue, 29 Oct 2024 13:58:40 -0700 (PDT)
+ AJvYcCV4eKI93oJL5NO20RZecuYU68EImuZfShhniYvi6mMoMthLTifX9oI89eKLRyynh7Uj9ASIjakXbQqn@nongnu.org
+X-Gm-Message-State: AOJu0YxV8Gex1SlU87tNDDrZ3joVQptqFWsgCpjk4qe+VJTERrv8S4aA
+ CI6sp7hW4jmqMislRVA+K+p8rVaf2bEtSfF1GbPxmpNfWmo3IroDmVsGfcbC+A==
+X-Google-Smtp-Source: AGHT+IFZlM48rTvYY+1WL4olOrvqCoHT38Cxuv3bhJgqxjnjZR0G2xPo2fnQxVlo7jioIjajFvd8+g==
+X-Received: by 2002:a05:6402:254e:b0:5ca:da2:b2ca with SMTP id
+ 4fb4d7f45d1cf-5cbbf8dc477mr9888063a12.19.1730235574769; 
+ Tue, 29 Oct 2024 13:59:34 -0700 (PDT)
 Received: from localhost.localdomain (h082218084190.host.wavenet.at.
  [82.218.84.190]) by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5cbb629d5besm4217341a12.33.2024.10.29.13.58.38
+ 4fb4d7f45d1cf-5cbb629d5besm4217341a12.33.2024.10.29.13.59.33
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Tue, 29 Oct 2024 13:58:40 -0700 (PDT)
+ Tue, 29 Oct 2024 13:59:34 -0700 (PDT)
 From: Phil Dennis-Jordan <phil@philjordan.eu>
 To: qemu-devel@nongnu.org
 Cc: agraf@csgraf.de, phil@philjordan.eu, peter.maydell@linaro.org,
@@ -74,18 +74,18 @@ Cc: agraf@csgraf.de, phil@philjordan.eu, peter.maydell@linaro.org,
  dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com,
  jcmvbkbc@gmail.com, marcandre.lureau@redhat.com, berrange@redhat.com,
  akihiko.odaki@daynix.com, qemu-arm@nongnu.org, qemu-block@nongnu.org,
- qemu-riscv@nongnu.org
-Subject: [PATCH v5 01/15] ui & main loop: Redesign of system-specific main
- thread event handling
-Date: Tue, 29 Oct 2024 21:58:05 +0100
-Message-Id: <20241029205819.69888-2-phil@philjordan.eu>
+ qemu-riscv@nongnu.org, Alexander Graf <graf@amazon.com>
+Subject: [PATCH v5 12/15] hw/vmapple/cfg: Introduce vmapple cfg region
+Date: Tue, 29 Oct 2024 21:58:16 +0100
+Message-Id: <20241029205819.69888-13-phil@philjordan.eu>
 X-Mailer: git-send-email 2.39.3 (Apple Git-145)
 In-Reply-To: <20241029205819.69888-1-phil@philjordan.eu>
 References: <20241029205819.69888-1-phil@philjordan.eu>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: neutral client-ip=2a00:1450:4864:20::52b;
- envelope-from=phil@philjordan.eu; helo=mail-ed1-x52b.google.com
+Received-SPF: neutral client-ip=2a00:1450:4864:20::536;
+ envelope-from=phil@philjordan.eu; helo=mail-ed1-x536.google.com
 X-Spam_score_int: -10
 X-Spam_score: -1.1
 X-Spam_bar: -
@@ -107,309 +107,279 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-macOS's Cocoa event handling must be done on the initial (main) thread
-of the process. Furthermore, if library or application code uses
-libdispatch, the main dispatch queue must be handling events on the main
-thread as well.
+From: Alexander Graf <graf@amazon.com>
 
-So far, this has affected Qemu in both the Cocoa and SDL UIs, although
-in different ways: the Cocoa UI replaces the default qemu_main function
-with one that spins Qemu's internal main event loop off onto a
-background thread. SDL (which uses Cocoa internally) on the other hand
-uses a polling approach within Qemu's main event loop. Events are
-polled during the SDL UI's dpy_refresh callback, which happens to run
-on the main thread by default.
+Instead of device tree or other more standardized means, VMApple passes
+platform configuration to the first stage boot loader in a binary encoded
+format that resides at a dedicated RAM region in physical address space.
 
-As UIs are mutually exclusive, this works OK as long as nothing else
-needs platform-native event handling. In the next patch, a new device is
-introduced based on the ParavirtualizedGraphics.framework in macOS.
-This uses libdispatch internally, and only works when events are being
-handled on the main runloop. With the current system, it works when
-using either the Cocoa or the SDL UI. However, it does not when running
-headless. Moreover, any attempt to install a similar scheme to the
-Cocoa UI's main thread replacement fails when combined with the SDL
-UI.
+This patch models this configuration space as a qdev device which we can
+then map at the fixed location in the address space. That way, we can
+influence and annotate all configuration fields easily.
 
-This change tidies up main thread management to be more flexible.
-
- * The qemu_main global function pointer is a custom function for the
-   main thread, and it may now be NULL. When it is, the main thread
-   runs the main Qemu loop. This represents the traditional setup.
- * When non-null, spawning the main Qemu event loop on a separate
-   thread is now done centrally rather than inside the Cocoa UI code.
- * For most platforms, qemu_main is indeed NULL by default, but on
-   Darwin, it defaults to a function that runs the CFRunLoop.
- * The Cocoa UI sets qemu_main to a function which runs the
-   NSApplication event handling runloop, as is usual for a Cocoa app.
- * The SDL UI overrides the qemu_main function to NULL, thus
-   specifying that Qemu's main loop must run on the main
-   thread.
- * For other UIs, or in the absence of UIs, the platform's default
-   behaviour is followed.
-
-This means that on macOS, the platform's runloop events are always
-handled, regardless of chosen UI. The new PV graphics device will
-thus work in all configurations. There is no functional change on other
-operating systems.
-
+Signed-off-by: Alexander Graf <graf@amazon.com>
 Signed-off-by: Phil Dennis-Jordan <phil@philjordan.eu>
 ---
+v3:
+
+ * Replaced legacy device reset method with Resettable method
+
+v4:
+
+ * Fixed initialisation of default values for properties
+ * Dropped superfluous endianness conversions
+ * Moved most header code to .c, device name #define goes in vmapple.h
 
 v5:
 
- * Simplified the way of setting/clearing the main loop by going back
-   to setting qemu_main directly, but narrowing the scope of what it
-   needs to do, and it can now be NULL.
+ * Improved error reporting in case of string property buffer overflow.
 
- include/qemu-main.h     |  3 +--
- include/qemu/typedefs.h |  1 +
- system/main.c           | 56 +++++++++++++++++++++++++++++++++++----
- ui/cocoa.m              | 58 +++++++++++------------------------------
- ui/sdl2.c               |  4 +++
- 5 files changed, 72 insertions(+), 50 deletions(-)
+ hw/vmapple/Kconfig           |   3 +
+ hw/vmapple/cfg.c             | 203 +++++++++++++++++++++++++++++++++++
+ hw/vmapple/meson.build       |   1 +
+ include/hw/vmapple/vmapple.h |   2 +
+ 4 files changed, 209 insertions(+)
+ create mode 100644 hw/vmapple/cfg.c
 
-diff --git a/include/qemu-main.h b/include/qemu-main.h
-index 940960a7dbc..4bd0d667edc 100644
---- a/include/qemu-main.h
-+++ b/include/qemu-main.h
-@@ -5,7 +5,6 @@
- #ifndef QEMU_MAIN_H
- #define QEMU_MAIN_H
+diff --git a/hw/vmapple/Kconfig b/hw/vmapple/Kconfig
+index 68f88876eb9..8bbeb9a9237 100644
+--- a/hw/vmapple/Kconfig
++++ b/hw/vmapple/Kconfig
+@@ -4,3 +4,6 @@ config VMAPPLE_AES
+ config VMAPPLE_BDIF
+     bool
  
--int qemu_default_main(void);
--extern int (*qemu_main)(void);
-+extern qemu_main_fn qemu_main;
- 
- #endif /* QEMU_MAIN_H */
-diff --git a/include/qemu/typedefs.h b/include/qemu/typedefs.h
-index 3d84efcac47..b02cfe1f328 100644
---- a/include/qemu/typedefs.h
-+++ b/include/qemu/typedefs.h
-@@ -131,5 +131,6 @@ typedef struct IRQState *qemu_irq;
-  * Function types
-  */
- typedef void (*qemu_irq_handler)(void *opaque, int n, int level);
-+typedef int (*qemu_main_fn)(void);
- 
- #endif /* QEMU_TYPEDEFS_H */
-diff --git a/system/main.c b/system/main.c
-index 9b91d21ea8c..8c90b8d2ddf 100644
---- a/system/main.c
-+++ b/system/main.c
-@@ -24,13 +24,14 @@
- 
- #include "qemu/osdep.h"
- #include "qemu-main.h"
-+#include "qemu/main-loop.h"
- #include "sysemu/sysemu.h"
- 
--#ifdef CONFIG_SDL
--#include <SDL.h>
-+#ifdef CONFIG_DARWIN
-+#include <CoreFoundation/CoreFoundation.h>
- #endif
- 
--int qemu_default_main(void)
-+static int qemu_default_main(void)
- {
-     int status;
- 
-@@ -40,10 +41,55 @@ int qemu_default_main(void)
-     return status;
- }
- 
--int (*qemu_main)(void) = qemu_default_main;
++config VMAPPLE_CFG
++    bool
++
+diff --git a/hw/vmapple/cfg.c b/hw/vmapple/cfg.c
+new file mode 100644
+index 00000000000..91c57239f86
+--- /dev/null
++++ b/hw/vmapple/cfg.c
+@@ -0,0 +1,203 @@
 +/*
-+ * Various macOS system libraries, including the Cocoa UI and anything using
-+ * libdispatch, such as ParavirtualizedGraphics.framework, requires that the
-+ * main runloop, on the main (initial) thread be running or at least regularly
-+ * polled for events. A special mode is therefore supported, where the QEMU
-+ * main loop runs on a separate thread and the main thread handles the
-+ * CF/Cocoa runloop.
++ * VMApple Configuration Region
++ *
++ * Copyright © 2023 Amazon.com, Inc. or its affiliates. All Rights Reserved.
++ *
++ * SPDX-License-Identifier: GPL-2.0-or-later
++ *
++ * This work is licensed under the terms of the GNU GPL, version 2 or later.
++ * See the COPYING file in the top-level directory.
 + */
 +
-+static void *call_qemu_default_main(void *opaque)
++#include "qemu/osdep.h"
++#include "hw/vmapple/vmapple.h"
++#include "hw/sysbus.h"
++#include "qemu/log.h"
++#include "qemu/module.h"
++#include "qapi/error.h"
++#include "net/net.h"
++
++OBJECT_DECLARE_SIMPLE_TYPE(VMAppleCfgState, VMAPPLE_CFG)
++
++#define VMAPPLE_CFG_SIZE 0x00010000
++
++typedef struct VMAppleCfg {
++    uint32_t version;         /* 0x000 */
++    uint32_t nr_cpus;         /* 0x004 */
++    uint32_t unk1;            /* 0x008 */
++    uint32_t unk2;            /* 0x00c */
++    uint32_t unk3;            /* 0x010 */
++    uint32_t unk4;            /* 0x014 */
++    uint64_t ecid;            /* 0x018 */
++    uint64_t ram_size;        /* 0x020 */
++    uint32_t run_installer1;  /* 0x028 */
++    uint32_t unk5;            /* 0x02c */
++    uint32_t unk6;            /* 0x030 */
++    uint32_t run_installer2;  /* 0x034 */
++    uint32_t rnd;             /* 0x038 */
++    uint32_t unk7;            /* 0x03c */
++    MACAddr mac_en0;          /* 0x040 */
++    uint8_t pad1[2];
++    MACAddr mac_en1;          /* 0x048 */
++    uint8_t pad2[2];
++    MACAddr mac_wifi0;        /* 0x050 */
++    uint8_t pad3[2];
++    MACAddr mac_bt0;          /* 0x058 */
++    uint8_t pad4[2];
++    uint8_t reserved[0xa0];   /* 0x060 */
++    uint32_t cpu_ids[0x80];   /* 0x100 */
++    uint8_t scratch[0x200];   /* 0x180 */
++    char serial[32];          /* 0x380 */
++    char unk8[32];            /* 0x3a0 */
++    char model[32];           /* 0x3c0 */
++    uint8_t unk9[32];         /* 0x3e0 */
++    uint32_t unk10;           /* 0x400 */
++    char soc_name[32];        /* 0x404 */
++} VMAppleCfg;
++
++struct VMAppleCfgState {
++    SysBusDevice parent_obj;
++    VMAppleCfg cfg;
++
++    MemoryRegion mem;
++    char *serial;
++    char *model;
++    char *soc_name;
++};
++
++static void vmapple_cfg_reset(Object *obj, ResetType type)
 +{
-+    int status;
++    VMAppleCfgState *s = VMAPPLE_CFG(obj);
++    VMAppleCfg *cfg;
 +
-+    bql_lock();
-+    status = qemu_default_main();
-+    bql_unlock();
-+
-+    exit(status);
++    cfg = memory_region_get_ram_ptr(&s->mem);
++    memset(cfg, 0, VMAPPLE_CFG_SIZE);
++    *cfg = s->cfg;
 +}
 +
-+static void qemu_run_default_main_on_new_thread(void)
++static bool strlcpy_set_error(char *restrict dst, const char *restrict src,
++                              size_t dst_size, Error **errp,
++                              const char *parent_func, const char *location,
++                              const char *buffer_name, const char *extra_info)
 +{
-+    QemuThread thread;
++    size_t len;
 +
-+    qemu_thread_create(&thread, "qemu_main", call_qemu_default_main,
-+                       NULL, QEMU_THREAD_DETACHED);
-+}
-+
-+
-+#ifdef CONFIG_DARWIN
-+static int os_darwin_cfrunloop_main(void)
-+{
-+    CFRunLoopRun();
-+    abort();
-+}
-+
-+qemu_main_fn qemu_main = os_darwin_cfrunloop_main;
-+#else
-+qemu_main_fn qemu_main;
-+#endif
- 
- int main(int argc, char **argv)
- {
-     qemu_init(argc, argv);
--    return qemu_main();
-+    if (qemu_main) {
-+        qemu_run_default_main_on_new_thread();
-+        bql_unlock();
-+        return qemu_main();
-+    } else {
-+        qemu_default_main();
++    len = g_strlcpy(dst, src, dst_size);
++    if (len < dst_size) { /* len does not count nul terminator */
++        return true;
 +    }
- }
-diff --git a/ui/cocoa.m b/ui/cocoa.m
-index 4c2dd335323..a1474d473a6 100644
---- a/ui/cocoa.m
-+++ b/ui/cocoa.m
-@@ -73,6 +73,8 @@
-     int height;
- } QEMUScreen;
- 
-+@class QemuCocoaPasteboardTypeOwner;
 +
- static void cocoa_update(DisplayChangeListener *dcl,
-                          int x, int y, int w, int h);
- 
-@@ -107,6 +109,7 @@ static void cocoa_switch(DisplayChangeListener *dcl,
- static NSInteger cbchangecount = -1;
- static QemuClipboardInfo *cbinfo;
- static QemuEvent cbevent;
-+static QemuCocoaPasteboardTypeOwner *cbowner;
- 
- // Utility functions to run specified code block with the BQL held
- typedef void (^CodeBlock)(void);
-@@ -1321,8 +1324,10 @@ - (void) dealloc
- {
-     COCOA_DEBUG("QemuCocoaAppController: dealloc\n");
- 
--    if (cocoaView)
--        [cocoaView release];
-+    [cocoaView release];
-+    [cbowner release];
-+    cbowner = nil;
++    error_setg(errp,
++               "%s (%s) strlcpy error: Destination buffer %s too small "
++               "(need %zu, have %zu) %s",
++               parent_func, location, buffer_name, len + 1, dst_size, extra_info);
++    return false;
++}
 +
-     [super dealloc];
- }
- 
-@@ -1938,8 +1943,6 @@ - (void)pasteboard:(NSPasteboard *)sender provideDataForType:(NSPasteboardType)t
- 
- @end
- 
--static QemuCocoaPasteboardTypeOwner *cbowner;
--
- static void cocoa_clipboard_notify(Notifier *notifier, void *data);
- static void cocoa_clipboard_request(QemuClipboardInfo *info,
-                                     QemuClipboardType type);
-@@ -2002,43 +2005,8 @@ static void cocoa_clipboard_request(QemuClipboardInfo *info,
-     }
- }
- 
--/*
-- * The startup process for the OSX/Cocoa UI is complicated, because
-- * OSX insists that the UI runs on the initial main thread, and so we
-- * need to start a second thread which runs the qemu_default_main():
-- * in main():
-- *  in cocoa_display_init():
-- *   assign cocoa_main to qemu_main
-- *   create application, menus, etc
-- *  in cocoa_main():
-- *   create qemu-main thread
-- *   enter OSX run loop
-- */
--
--static void *call_qemu_main(void *opaque)
--{
--    int status;
--
--    COCOA_DEBUG("Second thread: calling qemu_default_main()\n");
--    bql_lock();
--    status = qemu_default_main();
--    bql_unlock();
--    COCOA_DEBUG("Second thread: qemu_default_main() returned, exiting\n");
--    [cbowner release];
--    exit(status);
--}
--
- static int cocoa_main(void)
- {
--    QemuThread thread;
--
--    COCOA_DEBUG("Entered %s()\n", __func__);
--
--    bql_unlock();
--    qemu_thread_create(&thread, "qemu_main", call_qemu_main,
--                       NULL, QEMU_THREAD_DETACHED);
--
--    // Start the main event loop
-     COCOA_DEBUG("Main thread: entering OSX run loop\n");
-     [NSApp run];
-     COCOA_DEBUG("Main thread: left OSX run loop, which should never happen\n");
-@@ -2120,8 +2088,6 @@ static void cocoa_display_init(DisplayState *ds, DisplayOptions *opts)
- 
-     COCOA_DEBUG("qemu_cocoa: cocoa_display_init\n");
- 
--    qemu_main = cocoa_main;
--
-     // Pull this console process up to being a fully-fledged graphical
-     // app with a menubar and Dock icon
-     ProcessSerialNumber psn = { 0, kCurrentProcess };
-@@ -2185,11 +2151,17 @@ static void cocoa_display_init(DisplayState *ds, DisplayOptions *opts)
-     qemu_clipboard_peer_register(&cbpeer);
- 
-     [pool release];
++/*
++ * String copying wrapper that returns and reports a runtime error in
++ * case of truncation due to insufficient destination buffer space.
++ */
++#define strlcpy_array_return_error(dst_array, src, errp, extra_info) \
++    do { \
++        if (!strlcpy_set_error((dst_array), (src), ARRAY_SIZE(dst_array), \
++                               (errp), __func__, stringify(__LINE__), \
++                               # dst_array, extra_info)) { \
++            return; \
++        } \
++    } while (0)
 +
-+    /*
-+     * The Cocoa UI will run the NSApplication runloop on the main thread
-+     * rather than the default Core Foundation one.
-+     */
-+    qemu_main = cocoa_main;
- }
- 
- static QemuDisplay qemu_display_cocoa = {
--    .type       = DISPLAY_TYPE_COCOA,
--    .init       = cocoa_display_init,
-+    .type                   = DISPLAY_TYPE_COCOA,
-+    .init                   = cocoa_display_init,
- };
- 
- static void register_cocoa(void)
-diff --git a/ui/sdl2.c b/ui/sdl2.c
-index bd4f5a9da14..44ab2762262 100644
---- a/ui/sdl2.c
-+++ b/ui/sdl2.c
-@@ -34,6 +34,7 @@
- #include "sysemu/sysemu.h"
- #include "ui/win32-kbd-hook.h"
- #include "qemu/log.h"
-+#include "qemu-main.h"
- 
- static int sdl2_num_outputs;
- static struct sdl2_console *sdl2_console;
-@@ -965,6 +966,9 @@ static void sdl2_display_init(DisplayState *ds, DisplayOptions *o)
-     }
- 
-     atexit(sdl_cleanup);
++static void vmapple_cfg_realize(DeviceState *dev, Error **errp)
++{
++    VMAppleCfgState *s = VMAPPLE_CFG(dev);
++    uint32_t i;
 +
-+    /* SDL's event polling (in dpy_refresh) must happen on the main thread. */
-+    qemu_main = NULL;
- }
++    if (!s->serial) {
++        s->serial = g_strdup("1234");
++    }
++    if (!s->model) {
++        s->model = g_strdup("VM0001");
++    }
++    if (!s->soc_name) {
++        s->soc_name = g_strdup("Apple M1 (Virtual)");
++    }
++
++    strlcpy_array_return_error(s->cfg.serial, s->serial, errp,
++                               "setting 'serial' property on VMApple cfg device");
++    strlcpy_array_return_error(s->cfg.model, s->model, errp,
++                               "setting 'model' property on VMApple cfg device");
++    strlcpy_array_return_error(s->cfg.soc_name, s->soc_name, errp,
++                               "setting 'soc_name' property on VMApple cfg device");
++    strlcpy_array_return_error(s->cfg.unk8, "D/A", errp, "");
++    s->cfg.version = 2;
++    s->cfg.unk1 = 1;
++    s->cfg.unk2 = 1;
++    s->cfg.unk3 = 0x20;
++    s->cfg.unk4 = 0;
++    s->cfg.unk5 = 1;
++    s->cfg.unk6 = 1;
++    s->cfg.unk7 = 0;
++    s->cfg.unk10 = 1;
++
++    if (s->cfg.nr_cpus > ARRAY_SIZE(s->cfg.cpu_ids)) {
++        error_setg(errp,
++                   "Failed to create %u CPUs, vmapple machine supports %zu max",
++                   s->cfg.nr_cpus, ARRAY_SIZE(s->cfg.cpu_ids));
++        return;
++    }
++    for (i = 0; i < s->cfg.nr_cpus; i++) {
++        s->cfg.cpu_ids[i] = i;
++    }
++}
++
++static void vmapple_cfg_init(Object *obj)
++{
++    VMAppleCfgState *s = VMAPPLE_CFG(obj);
++
++    memory_region_init_ram(&s->mem, obj, "VMApple Config", VMAPPLE_CFG_SIZE,
++                           &error_fatal);
++    sysbus_init_mmio(SYS_BUS_DEVICE(obj), &s->mem);
++}
++
++static Property vmapple_cfg_properties[] = {
++    DEFINE_PROP_UINT32("nr-cpus", VMAppleCfgState, cfg.nr_cpus, 1),
++    DEFINE_PROP_UINT64("ecid", VMAppleCfgState, cfg.ecid, 0),
++    DEFINE_PROP_UINT64("ram-size", VMAppleCfgState, cfg.ram_size, 0),
++    DEFINE_PROP_UINT32("run_installer1", VMAppleCfgState, cfg.run_installer1, 0),
++    DEFINE_PROP_UINT32("run_installer2", VMAppleCfgState, cfg.run_installer2, 0),
++    DEFINE_PROP_UINT32("rnd", VMAppleCfgState, cfg.rnd, 0),
++    DEFINE_PROP_MACADDR("mac-en0", VMAppleCfgState, cfg.mac_en0),
++    DEFINE_PROP_MACADDR("mac-en1", VMAppleCfgState, cfg.mac_en1),
++    DEFINE_PROP_MACADDR("mac-wifi0", VMAppleCfgState, cfg.mac_wifi0),
++    DEFINE_PROP_MACADDR("mac-bt0", VMAppleCfgState, cfg.mac_bt0),
++    DEFINE_PROP_STRING("serial", VMAppleCfgState, serial),
++    DEFINE_PROP_STRING("model", VMAppleCfgState, model),
++    DEFINE_PROP_STRING("soc_name", VMAppleCfgState, soc_name),
++    DEFINE_PROP_END_OF_LIST(),
++};
++
++static void vmapple_cfg_class_init(ObjectClass *klass, void *data)
++{
++    DeviceClass *dc = DEVICE_CLASS(klass);
++    ResettableClass *rc = RESETTABLE_CLASS(klass);
++
++    dc->realize = vmapple_cfg_realize;
++    dc->desc = "VMApple Configuration Region";
++    device_class_set_props(dc, vmapple_cfg_properties);
++    rc->phases.hold = vmapple_cfg_reset;
++}
++
++static const TypeInfo vmapple_cfg_info = {
++    .name          = TYPE_VMAPPLE_CFG,
++    .parent        = TYPE_SYS_BUS_DEVICE,
++    .instance_size = sizeof(VMAppleCfgState),
++    .instance_init = vmapple_cfg_init,
++    .class_init    = vmapple_cfg_class_init,
++};
++
++static void vmapple_cfg_register_types(void)
++{
++    type_register_static(&vmapple_cfg_info);
++}
++
++type_init(vmapple_cfg_register_types)
+diff --git a/hw/vmapple/meson.build b/hw/vmapple/meson.build
+index d4624713deb..64b78693a31 100644
+--- a/hw/vmapple/meson.build
++++ b/hw/vmapple/meson.build
+@@ -1,2 +1,3 @@
+ system_ss.add(when: 'CONFIG_VMAPPLE_AES',  if_true: files('aes.c'))
+ system_ss.add(when: 'CONFIG_VMAPPLE_BDIF', if_true: files('bdif.c'))
++system_ss.add(when: 'CONFIG_VMAPPLE_CFG',  if_true: files('cfg.c'))
+diff --git a/include/hw/vmapple/vmapple.h b/include/hw/vmapple/vmapple.h
+index 9090e9c5ac8..3bba59f5ec7 100644
+--- a/include/hw/vmapple/vmapple.h
++++ b/include/hw/vmapple/vmapple.h
+@@ -16,4 +16,6 @@
  
- static QemuDisplay qemu_display_sdl2 = {
+ #define TYPE_VMAPPLE_BDIF "vmapple-bdif"
+ 
++#define TYPE_VMAPPLE_CFG "vmapple-cfg"
++
+ #endif /* HW_VMAPPLE_VMAPPLE_H */
 -- 
 2.39.3 (Apple Git-145)
 
