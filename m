@@ -4,88 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7436CD3A66B
-	for <qemu-riscv@archiver.kernel.org>; Tue, 29 Oct 2024 15:45:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E56B9D3A679
+	for <qemu-riscv@archiver.kernel.org>; Tue, 29 Oct 2024 17:41:07 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1t5oOj-0002Co-Lk; Tue, 29 Oct 2024 11:44:45 -0400
+	id 1t5qD9-0000RK-Ng; Tue, 29 Oct 2024 13:40:55 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <frasse.iglesias@gmail.com>)
- id 1t5oOg-00029F-Q0; Tue, 29 Oct 2024 11:44:42 -0400
-Received: from mail-lj1-x232.google.com ([2a00:1450:4864:20::232])
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1t5qD7-0000Qb-VP
+ for qemu-riscv@nongnu.org; Tue, 29 Oct 2024 13:40:53 -0400
+Received: from mail-pg1-x52e.google.com ([2607:f8b0:4864:20::52e])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <frasse.iglesias@gmail.com>)
- id 1t5oOd-0003T5-7C; Tue, 29 Oct 2024 11:44:42 -0400
-Received: by mail-lj1-x232.google.com with SMTP id
- 38308e7fff4ca-2fb470a8b27so59619121fa.1; 
- Tue, 29 Oct 2024 08:44:37 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1t5qD6-0000fD-4H
+ for qemu-riscv@nongnu.org; Tue, 29 Oct 2024 13:40:53 -0400
+Received: by mail-pg1-x52e.google.com with SMTP id
+ 41be03b00d2f7-7ea8de14848so3228430a12.2
+ for <qemu-riscv@nongnu.org>; Tue, 29 Oct 2024 10:40:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1730216676; x=1730821476; darn=nongnu.org;
- h=in-reply-to:content-transfer-encoding:content-disposition
- :mime-version:references:message-id:subject:cc:to:from:date:from:to
- :cc:subject:date:message-id:reply-to;
- bh=GUuXeBwtRSCi/wB1l3gh3uVbCAyJYgngbocT4ORaf5w=;
- b=G5UWjKlSoPaYHNtlZn++jvU1CRNAo/FlMLyyCuemAlYC+zjcfzgdM/3uKyzPqbrBir
- vnN4vNA7UcILHozSTaZ2PbK4Ps4k9GHmD/3hQ3yFMSi5586kjJjkucR9HUSqcBSX5dBU
- xbylr1sCgsD8bhIbzl0KOMcwCVyyv14dkQ8tMFAzzr1b4QPrjFTvhCAb87vFnAKctqlI
- uu7X4FvE8Hd39H5Smc2FpJQAX4y0N5kJ7DPFH7ypafAJPG/oxk4VGlgGy5d0q1FDyfwh
- A1lDYUOiTtAfPBCHQZ9l+unx9+q8Vs2F+BlvucxUVTW9fWpPDvfufgiX7E6cq8lx84z7
- OnWA==
+ d=ventanamicro.com; s=google; t=1730223650; x=1730828450; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=3l/sk+sczWQ7dPR93U3sBbdgCRxQZhE4N3jHNvaS4E8=;
+ b=oVO6fxNY7g+wKxB4knV8CkuB1DRuvA0VWYR8/BFwp7coAZLp/w/0LsM6Uqrtr5IUzj
+ yTFBXHki0QO/LusUVmHPe9NjmpzJ42NflTdPTVvSBgBnN+BmWG1MRhvyBFYiGMstSAv1
+ wEEid+LYvE3+7LnSqt5sVHkkJQ/8HR9St3LYo5QdU/afaOwHlxMEoZ949jNREAjQ1DF4
+ mMZ76pVCx/C8jUnGrxzQh39S4klbMO91z3KHfVsIQSfn/zyrviLK9Oa99Hp5ovO3yyqv
+ Y+Q8fmMMcoZDXBJQ5hcyLBo/FZGsPddvM7/cOCgYvTDDfUriD7CosFK0KhyTl/m+T792
+ fGxQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1730216676; x=1730821476;
- h=in-reply-to:content-transfer-encoding:content-disposition
- :mime-version:references:message-id:subject:cc:to:from:date
+ d=1e100.net; s=20230601; t=1730223650; x=1730828450;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=GUuXeBwtRSCi/wB1l3gh3uVbCAyJYgngbocT4ORaf5w=;
- b=W9T01DQmBppubFgeE/cnMGyRC6qAiSmkF3RZy6lrFUtKarZLJ6TGJfiFU1FBYCE3L6
- tDvLTEioNMQ1emhRB4w/Gmo+VfcLZgKhLw94P0ZdA5GMAiWLllh8+eZN5bEc5Tc7xgGI
- AcdgU85+lsKjLkk1rxcT6HofG1x+R0sYu92kyxp6f7e2qUAR6Fgt7yyXS/HmOBszqboH
- H17GLfjl39VvAEuiI/+XEj5yMDXdQwOCal8Grb3RS7Nj7kclT1CCCgm2DMjgnl52Ac82
- pT4aD06rBOWR6eLwlDpyA/1JfIIrDUBARoYyKNWV9g3Gc7wFSdMoBBcwK6/9/NKX3aEl
- Vp3g==
+ bh=3l/sk+sczWQ7dPR93U3sBbdgCRxQZhE4N3jHNvaS4E8=;
+ b=hYD8+OHj8OhC2ZZeiZ5+F3o/5tsG1LQt6/o5h2o7pq4CxJv/f0dVyXAwdGWPm5qItB
+ lCITcmFh3bZpA49L3EP/FWzm+CMtxnN1GHKZdnRrOh4Vb0rsxGaieKVWABPi27Y1DbcX
+ q02Pzvmkdoqzrkg8+t6TXuPLscjXbVkzWBUUYC905fHvlMNvX4jM/TAJdPBHmFQtf6eI
+ A1PiuER2xUQso5kykXv0Au4ehZsYQ+kyti8pVPCD8kEYEVjcOJlcTT+ElmOAD79n/nql
+ WAYzbY04wZHP+fqoeinKmMnXYIERqP3unDg/dngVOyXIMhqBMGvHgGBDXOV4qSMal8zQ
+ BBTw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCW9+nkCcnk7u6zUvNWCWK3/grMOcOH9H2fVFwb7oMTMGdyXwripmszw+Ap+9tnq2rdmbyJTtcWQiSJa@nongnu.org
-X-Gm-Message-State: AOJu0Ywe3uRM/OCRKypHvzWY5buT3Jr1Hwp611zoYxhD/neKsbcQgPWh
- 9Nxyil66w9C6XJwUK6G5aZXD+2sQHKC4hg7T3a+W/N9y44Rv1qWx
-X-Google-Smtp-Source: AGHT+IHIc4lAop81hSpE2zNgFTVYgb/MnB7sfm7vAK9BNpreHxFsigPzzLPY3PUXeM8PGPFAvAO/Nw==
-X-Received: by 2002:a05:651c:1504:b0:2fb:579a:fff with SMTP id
- 38308e7fff4ca-2fcdc7891e4mr6832181fa.8.1730216675483; 
- Tue, 29 Oct 2024 08:44:35 -0700 (PDT)
-Received: from fralle-dell (217-76-87-122.cust.bredband2.com. [217.76.87.122])
+ AJvYcCWo/nEojjAaCJM7TExdZfO+G16EaIWiWpLuzq/Frtmo8edJNT62brE1Edu7Cb27GSLS+h1fJQlV1/Wk@nongnu.org
+X-Gm-Message-State: AOJu0Ywdlr5h27I0h1+l9aEh3+vAp7dr4qVbhJpwOmKsIQ23lIPjyDxA
+ hUMwhnQhA7VESBBsOXdjHLcK6+qVsqJGMmAhh97PHZIfpNy3tgy/1uWHHyNSibs=
+X-Google-Smtp-Source: AGHT+IHsTgf4p3hjomCyh1jHarXr/Ef8GNv284PUxNAFiktBJku64l+CQqEaa/xMmFGoCbWO+v6aKg==
+X-Received: by 2002:a05:6a20:b40b:b0:1d9:a1c:7086 with SMTP id
+ adf61e73a8af0-1d9a8516a2dmr15979106637.44.1730223650345; 
+ Tue, 29 Oct 2024 10:40:50 -0700 (PDT)
+Received: from [192.168.68.110] ([191.8.109.222])
  by smtp.gmail.com with ESMTPSA id
- 38308e7fff4ca-2fcb45d1adfsm15578721fa.88.2024.10.29.08.44.31
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 29 Oct 2024 08:44:33 -0700 (PDT)
-Date: Tue, 29 Oct 2024 15:44:30 +0000
-From: Francisco Iglesias <frasse.iglesias@gmail.com>
-To: Sai Pavan Boddu <sai.pavan.boddu@amd.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org,
- Paolo Bonzini <pbonzini@redhat.com>, Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bmeng.cn@gmail.com>, Weiwei Li <liwei1518@gmail.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Michal Simek <michal.simek@amd.com>
-Subject: Re: [PATCH v2] hw/riscv: Add Microblaze V 32bit virt board
-Message-ID: <ZyEC3qFBcbMF4vDH@fralle-dell>
-References: <20241017072507.4033413-1-sai.pavan.boddu@amd.com>
+ d2e1a72fcca58-720579360f5sm7829340b3a.88.2024.10.29.10.40.47
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 29 Oct 2024 10:40:49 -0700 (PDT)
+Message-ID: <d4241c7b-ae97-4dc1-bc60-5f0eed58d3a5@ventanamicro.com>
+Date: Tue, 29 Oct 2024 14:40:45 -0300
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <20241017072507.4033413-1-sai.pavan.boddu@amd.com>
-Received-SPF: pass client-ip=2a00:1450:4864:20::232;
- envelope-from=frasse.iglesias@gmail.com; helo=mail-lj1-x232.google.com
-X-Spam_score_int: -1020
-X-Spam_score: -102.1
-X-Spam_bar: ---------------------------------------------------
-X-Spam_report: (-102.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- USER_IN_WELCOMELIST=-0.01, USER_IN_WHITELIST=-100,
- WEIRD_QUOTING=0.001 autolearn=ham autolearn_force=no
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v9 0/6] Pointer Masking update for Zjpm v1.0
+To: Alexey Baturo <baturo.alexey@gmail.com>
+Cc: richard.henderson@linaro.org, space.monkey.delivers@gmail.com,
+ palmer@dabbelt.com, Alistair.Francis@wdc.com, sagark@eecs.berkeley.edu,
+ kbastian@mail.uni-paderborn.de, qemu-devel@nongnu.org, qemu-riscv@nongnu.org
+References: <20240511101053.1875596-1-me@deliversmonkey.space>
+Content-Language: en-US
+From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+In-Reply-To: <20240511101053.1875596-1-me@deliversmonkey.space>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::52e;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pg1-x52e.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -101,348 +99,97 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On [2024 Oct 17] Thu 12:55:07, Sai Pavan Boddu wrote:
-> Add a basic board with interrupt controller (intc), timer, serial
-> (uartlite), small memory called LMB@0 (128kB) and DDR@0x80000000
-> (configured via command line eg. -m 2g).
-> This is basic configuration which matches HW generated out of AMD Vivado
-> (design tools). But initial configuration is going beyond what it is
-> configured by default because validation should be done on other
-> configurations too. That's why wire also additional uart16500, axi
-> ethernet(with axi dma).
-> GPIOs, i2c and qspi is also listed for completeness.
-> 
-> IRQ map is: (addr)
-> 0 - timer (0x41c00000)
-> 1 - uartlite (0x40600000)
-> 2 - i2c (0x40800000)
-> 3 - qspi (0x44a00000)
-> 4 - uart16550 (0x44a10000)
-> 5 - emaclite (0x40e00000)
-> 6 - timer2 (0x41c10000)
-> 7 - axi emac (0x40c00000)
-> 8 - axi dma (0x41e00000)
-> 9 - axi dma
-> 10 - gpio (0x40000000)
-> 11 - gpio2 (0x40010000)
-> 12 - gpio3 (0x40020000)
-> 
-> Signed-off-by: Sai Pavan Boddu <sai.pavan.boddu@amd.com>
-> Signed-off-by: Michal Simek <michal.simek@amd.com>
-
-Reviewed-by: Francisco Iglesias <francisco.iglesias@amd.com>
+Hi Alexey,
 
 
-> ---
-> Changes for V2:
->     Make changes to support -cpu switch
->     Remove setting of default board
->     Include doc to toctree
->     Remove setting of 'imac' extensions as they are available by default.
+Do you have plans to post a new version of this series? Aside from a few comments
+it seems like this was almost there.
+
+We might not be able to get it merged in time for this current release (code freeze
+is Nov 5th) but we can get it in Alistair's tree for the next release.
+
+
+Thanks,
+
+Daniel
+
+On 5/11/24 7:10 AM, Alexey Baturo wrote:
+> From: Alexey Baturo <baturo.alexey@gmail.com>
 > 
->  MAINTAINERS                             |   6 +
->  docs/system/riscv/microblaze-v-virt.rst |  39 +++++
->  docs/system/target-riscv.rst            |   1 +
->  hw/riscv/microblaze-v-virt.c            | 181 ++++++++++++++++++++++++
->  hw/riscv/Kconfig                        |   8 ++
->  hw/riscv/meson.build                    |   1 +
->  6 files changed, 236 insertions(+)
->  create mode 100644 docs/system/riscv/microblaze-v-virt.rst
->  create mode 100644 hw/riscv/microblaze-v-virt.c
+> Hi,
 > 
-> diff --git a/MAINTAINERS b/MAINTAINERS
-> index d7a11fe6017..b104b6d0f7f 100644
-> --- a/MAINTAINERS
-> +++ b/MAINTAINERS
-> @@ -1274,6 +1274,12 @@ M: Edgar E. Iglesias <edgar.iglesias@gmail.com>
->  S: Maintained
->  F: hw/microblaze/petalogix_ml605_mmu.c
->  
-> +amd-microblaze-v-virt
-> +M: Sai Pavan Boddu <sai.pavan.boddu@amd.com>
-> +S: Maintained
-> +F: hw/riscv/microblaze-v-virt.c
-> +F: docs/system/riscv/microblaze-v-virt.rst
-> +
->  MIPS Machines
->  -------------
->  Overall MIPS Machines
-> diff --git a/docs/system/riscv/microblaze-v-virt.rst b/docs/system/riscv/microblaze-v-virt.rst
-> new file mode 100644
-> index 00000000000..d2ad6a60266
-> --- /dev/null
-> +++ b/docs/system/riscv/microblaze-v-virt.rst
-> @@ -0,0 +1,39 @@
-> +Microblaze-V virt board (``amd-microblaze-v-virt``)
-> +===================================================
-> +The AMD MicroBlaze™ V processor is a soft-core RISC-V processor IP for AMD adaptive SoCs and FPGAs.
-> +The MicroBlaze V processor is based on a 32-bit RISC-V instruction set architecture (ISA).
-> +
-> +More details here:
-> +https://docs.amd.com/r/en-US/ug1629-microblaze-v-user-guide/MicroBlaze-V-Architecture
-> +
-> +The microblaze-v virt board in QEMU is a virtual board with
-> +following supported devices
-> +
-> +Implemented CPU cores:
-> +
-> +1 RISCV32 core
-> +
-> +Implemented devices:
-> +
-> +    - timer
-> +    - uartlite
-> +    - uart16550
-> +    - emaclite
-> +    - timer2
-> +    - axi emac
-> +    - axi dma
-> +
-> +Running
-> +"""""""
-> +Running U-boot
-> +
-> +.. code-block:: bash
-> +
-> +
-> +   $ qemu-system-riscv32 -M amd-microblaze-v-virt \
-> +     -display none \
-> +     -device loader,addr=0x80000000,file=u-boot-spl.bin,cpu-num=0 \
-> +     -device loader,addr=0x80200000,file=u-boot.img \
-> +     -serial mon:stdio \
-> +     -device loader,addr=0x83000000,file=system.dtb \
-> +     -m 2g
-> diff --git a/docs/system/target-riscv.rst b/docs/system/target-riscv.rst
-> index ba195f1518a..cd5c5ce1883 100644
-> --- a/docs/system/target-riscv.rst
-> +++ b/docs/system/target-riscv.rst
-> @@ -66,6 +66,7 @@ undocumented; you can get a complete list by running
->  .. toctree::
->     :maxdepth: 1
->  
-> +   riscv/microblaze-v-virt
->     riscv/microchip-icicle-kit
->     riscv/shakti-c
->     riscv/sifive_u
-> diff --git a/hw/riscv/microblaze-v-virt.c b/hw/riscv/microblaze-v-virt.c
-> new file mode 100644
-> index 00000000000..6603e6d6b06
-> --- /dev/null
-> +++ b/hw/riscv/microblaze-v-virt.c
-> @@ -0,0 +1,181 @@
-> +/*
-> + * QEMU model of Microblaze V (32bit version)
-> + *
-> + * based on hw/microblaze/petalogix_ml605_mmu.c
-> + *
-> + * Copyright (c) 2011 Michal Simek <monstr@monstr.eu>
-> + * Copyright (c) 2011 PetaLogix
-> + * Copyright (c) 2009 Edgar E. Iglesias.
-> + * Copyright (C) 2024, Advanced Micro Devices, Inc.
-> + * SPDX-License-Identifier: GPL-2.0-or-later
-> + * Written by Sai Pavan Boddu <sai.pavan.boddu@amd.com>
-> + *     and by Michal Simek <michal.simek@amd.com>.
-> + */
-> +
-> +#include "qemu/osdep.h"
-> +#include "qemu/units.h"
-> +#include "qapi/error.h"
-> +#include "cpu.h"
-> +#include "hw/sysbus.h"
-> +#include "sysemu/sysemu.h"
-> +#include "net/net.h"
-> +#include "hw/boards.h"
-> +#include "hw/char/serial-mm.h"
-> +#include "exec/address-spaces.h"
-> +#include "hw/char/xilinx_uartlite.h"
-> +#include "hw/misc/unimp.h"
-> +
-> +#define LMB_BRAM_SIZE (128 * KiB)
-> +#define MEMORY_BASEADDR 0x80000000
-> +#define INTC_BASEADDR 0x41200000
-> +#define TIMER_BASEADDR 0x41c00000
-> +#define TIMER_BASEADDR2 0x41c10000
-> +#define UARTLITE_BASEADDR 0x40600000
-> +#define ETHLITE_BASEADDR 0x40e00000
-> +#define UART16550_BASEADDR 0x44a10000
-> +#define AXIENET_BASEADDR 0x40c00000
-> +#define AXIDMA_BASEADDR 0x41e00000
-> +#define GPIO_BASEADDR 0x40000000
-> +#define GPIO_BASEADDR2 0x40010000
-> +#define GPIO_BASEADDR3 0x40020000
-> +#define I2C_BASEADDR 0x40800000
-> +#define QSPI_BASEADDR 0x44a00000
-> +
-> +#define TIMER_IRQ           0
-> +#define UARTLITE_IRQ        1
-> +#define UART16550_IRQ       4
-> +#define ETHLITE_IRQ         5
-> +#define TIMER_IRQ2          6
-> +#define AXIENET_IRQ         7
-> +#define AXIDMA_IRQ1         8
-> +#define AXIDMA_IRQ0         9
-> +
-> +static void mb_v_virt_init(MachineState *machine)
-> +{
-> +    ram_addr_t ram_size = machine->ram_size;
-> +    DeviceState *dev, *dma, *eth0;
-> +    Object *ds, *cs;
-> +    int i;
-> +    RISCVCPU *cpu;
-> +    hwaddr ddr_base = MEMORY_BASEADDR;
-> +    MemoryRegion *phys_lmb_bram = g_new(MemoryRegion, 1);
-> +    MemoryRegion *phys_ram = g_new(MemoryRegion, 1);
-> +    qemu_irq irq[32];
-> +    MemoryRegion *sysmem = get_system_memory();
-> +
-> +    cpu = RISCV_CPU(object_new(machine->cpu_type));
-> +    qdev_realize(DEVICE(cpu), NULL, &error_abort);
-> +    /* Attach emulated BRAM through the LMB.  */
-> +    memory_region_init_ram(phys_lmb_bram, NULL,
-> +                           "mb_v.lmb_bram", LMB_BRAM_SIZE,
-> +                           &error_fatal);
-> +    memory_region_add_subregion(sysmem, 0x00000000, phys_lmb_bram);
-> +
-> +    memory_region_init_ram(phys_ram, NULL, "mb_v.ram",
-> +                           ram_size, &error_fatal);
-> +    memory_region_add_subregion(sysmem, ddr_base, phys_ram);
-> +
-> +    dev = qdev_new("xlnx.xps-intc");
-> +    qdev_prop_set_uint32(dev, "kind-of-intr",
-> +                         1 << UARTLITE_IRQ);
-> +    sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
-> +    sysbus_mmio_map(SYS_BUS_DEVICE(dev), 0, INTC_BASEADDR);
-> +    sysbus_connect_irq(SYS_BUS_DEVICE(dev), 0,
-> +                       qdev_get_gpio_in(DEVICE(cpu), 11));
-> +    for (i = 0; i < 32; i++) {
-> +        irq[i] = qdev_get_gpio_in(dev, i);
-> +    }
-> +
-> +    /* Uartlite */
-> +    dev = qdev_new(TYPE_XILINX_UARTLITE);
-> +    qdev_prop_set_chr(dev, "chardev", serial_hd(0));
-> +    sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
-> +    sysbus_mmio_map(SYS_BUS_DEVICE(dev), 0, UARTLITE_BASEADDR);
-> +    sysbus_connect_irq(SYS_BUS_DEVICE(dev), 0, irq[UARTLITE_IRQ]);
-> +
-> +    /* Full uart */
-> +    serial_mm_init(sysmem, UART16550_BASEADDR + 0x1000, 2,
-> +                   irq[UART16550_IRQ], 115200, serial_hd(1),
-> +                   DEVICE_LITTLE_ENDIAN);
-> +
-> +    /* 2 timers at irq 0 @ 100 Mhz.  */
-> +    dev = qdev_new("xlnx.xps-timer");
-> +    qdev_prop_set_uint32(dev, "one-timer-only", 0);
-> +    qdev_prop_set_uint32(dev, "clock-frequency", 100000000);
-> +    sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
-> +    sysbus_mmio_map(SYS_BUS_DEVICE(dev), 0, TIMER_BASEADDR);
-> +    sysbus_connect_irq(SYS_BUS_DEVICE(dev), 0, irq[TIMER_IRQ]);
-> +
-> +    /* 2 timers at irq 3 @ 100 Mhz.  */
-> +    dev = qdev_new("xlnx.xps-timer");
-> +    qdev_prop_set_uint32(dev, "one-timer-only", 0);
-> +    qdev_prop_set_uint32(dev, "clock-frequency", 100000000);
-> +    sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
-> +    sysbus_mmio_map(SYS_BUS_DEVICE(dev), 0, TIMER_BASEADDR2);
-> +    sysbus_connect_irq(SYS_BUS_DEVICE(dev), 0, irq[TIMER_IRQ2]);
-> +
-> +    /* Emaclite */
-> +    dev = qdev_new("xlnx.xps-ethernetlite");
-> +    qemu_configure_nic_device(dev, true, NULL);
-> +    qdev_prop_set_uint32(dev, "tx-ping-pong", 0);
-> +    qdev_prop_set_uint32(dev, "rx-ping-pong", 0);
-> +    sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
-> +    sysbus_mmio_map(SYS_BUS_DEVICE(dev), 0, ETHLITE_BASEADDR);
-> +    sysbus_connect_irq(SYS_BUS_DEVICE(dev), 0, irq[ETHLITE_IRQ]);
-> +
-> +    /* axi ethernet and dma initialization. */
-> +    eth0 = qdev_new("xlnx.axi-ethernet");
-> +    dma = qdev_new("xlnx.axi-dma");
-> +
-> +    /* FIXME: attach to the sysbus instead */
-> +    object_property_add_child(qdev_get_machine(), "xilinx-eth", OBJECT(eth0));
-> +    object_property_add_child(qdev_get_machine(), "xilinx-dma", OBJECT(dma));
-> +
-> +    ds = object_property_get_link(OBJECT(dma),
-> +                                  "axistream-connected-target", NULL);
-> +    cs = object_property_get_link(OBJECT(dma),
-> +                                  "axistream-control-connected-target", NULL);
-> +    qemu_configure_nic_device(eth0, true, NULL);
-> +    qdev_prop_set_uint32(eth0, "rxmem", 0x1000);
-> +    qdev_prop_set_uint32(eth0, "txmem", 0x1000);
-> +    object_property_set_link(OBJECT(eth0), "axistream-connected", ds,
-> +                             &error_abort);
-> +    object_property_set_link(OBJECT(eth0), "axistream-control-connected", cs,
-> +                             &error_abort);
-> +    sysbus_realize_and_unref(SYS_BUS_DEVICE(eth0), &error_fatal);
-> +    sysbus_mmio_map(SYS_BUS_DEVICE(eth0), 0, AXIENET_BASEADDR);
-> +    sysbus_connect_irq(SYS_BUS_DEVICE(eth0), 0, irq[AXIENET_IRQ]);
-> +
-> +    ds = object_property_get_link(OBJECT(eth0),
-> +                                  "axistream-connected-target", NULL);
-> +    cs = object_property_get_link(OBJECT(eth0),
-> +                                  "axistream-control-connected-target", NULL);
-> +    qdev_prop_set_uint32(dma, "freqhz", 100000000);
-> +    object_property_set_link(OBJECT(dma), "axistream-connected", ds,
-> +                             &error_abort);
-> +    object_property_set_link(OBJECT(dma), "axistream-control-connected", cs,
-> +                             &error_abort);
-> +    sysbus_realize_and_unref(SYS_BUS_DEVICE(dma), &error_fatal);
-> +    sysbus_mmio_map(SYS_BUS_DEVICE(dma), 0, AXIDMA_BASEADDR);
-> +    sysbus_connect_irq(SYS_BUS_DEVICE(dma), 0, irq[AXIDMA_IRQ0]);
-> +    sysbus_connect_irq(SYS_BUS_DEVICE(dma), 1, irq[AXIDMA_IRQ1]);
-> +
-> +    /* unimplemented devices */
-> +    create_unimplemented_device("gpio", GPIO_BASEADDR, 0x10000);
-> +    create_unimplemented_device("gpio2", GPIO_BASEADDR2, 0x10000);
-> +    create_unimplemented_device("gpio3", GPIO_BASEADDR3, 0x10000);
-> +    create_unimplemented_device("i2c", I2C_BASEADDR, 0x10000);
-> +    create_unimplemented_device("qspi", QSPI_BASEADDR, 0x10000);
-> +}
-> +
-> +static void mb_v_virt_machine_init(MachineClass *mc)
-> +{
-> +    mc->desc = "AMD Microblaze-V Virt platform";
-> +    mc->init = mb_v_virt_init;
-> +    mc->min_cpus = 1;
-> +    mc->max_cpus = 1;
-> +    mc->default_cpu_type = TYPE_RISCV_CPU_BASE32;
-> +    mc->default_cpus = 1;
-> +}
-> +
-> +DEFINE_MACHINE("amd-microblaze-v-virt", mb_v_virt_machine_init)
-> diff --git a/hw/riscv/Kconfig b/hw/riscv/Kconfig
-> index 44695ff9f2c..5424803a82e 100644
-> --- a/hw/riscv/Kconfig
-> +++ b/hw/riscv/Kconfig
-> @@ -22,6 +22,14 @@ config MICROCHIP_PFSOC
->      select SIFIVE_PLIC
->      select UNIMP
->  
-> +config MICROBLAZE_V
-> +    bool
-> +    default y
-> +    depends on RISCV32
-> +    select XILINX
-> +    select XILINX_AXI
-> +    select XILINX_ETHLITE
-> +
->  config OPENTITAN
->      bool
->      default y
-> diff --git a/hw/riscv/meson.build b/hw/riscv/meson.build
-> index f872674093a..8ea0412a376 100644
-> --- a/hw/riscv/meson.build
-> +++ b/hw/riscv/meson.build
-> @@ -10,5 +10,6 @@ riscv_ss.add(when: 'CONFIG_SIFIVE_U', if_true: files('sifive_u.c'))
->  riscv_ss.add(when: 'CONFIG_SPIKE', if_true: files('spike.c'))
->  riscv_ss.add(when: 'CONFIG_MICROCHIP_PFSOC', if_true: files('microchip_pfsoc.c'))
->  riscv_ss.add(when: 'CONFIG_ACPI', if_true: files('virt-acpi-build.c'))
-> +riscv_ss.add(when: 'CONFIG_MICROBLAZE_V', if_true: files('microblaze-v-virt.c'))
->  
->  hw_arch += {'riscv': riscv_ss}
-> -- 
-> 2.34.1
+> It looks like Pointer Masking spec has reached v1.0 and been frozen,
+> rebasing on riscv-to-apply.next branch and resubmitting patches.
 > 
+> Thanks.
+> 
+> [v8]:
+> Rebasing patches on current qemu branch and resubmitting them.
+> 
+> 
+> [v7]:
+> I'm terribly sorry, but previous rebase went wrong and somehow I missed it.
+> This time I double-checked rebased version.
+> This patch series is properly rebased on https://github.com/alistair23/qemu/tree/riscv-to-apply.next
+> 
+> [v6]:
+> This patch series is rebased on https://github.com/alistair23/qemu/tree/riscv-to-apply.next
+> 
+> [v5]:
+> This patch series targets Zjpm v0.8 extension.
+> The spec itself could be found here: https://github.com/riscv/riscv-j-extension/blob/8088461d8d66a7676872b61c908cbeb7cf5c5d1d/zjpm-spec.pdf
+> This patch series is updated after the suggested comments:
+> - add "x-" to the extension names to indicate experimental
+> 
+> [v4]:
+> Patch series updated after the suggested comments:
+> - removed J-letter extension as it's unused
+> - renamed and fixed function to detect if address should be sign-extended
+> - zeroed unused context variables and moved computation logic to another patch
+> - bumped pointer masking version_id and minimum_version_id by 1
+> 
+> [v3]:
+> There patches are updated after Richard's comments:
+> - moved new tb flags to the end
+> - used tcg_gen_(s)extract to get the final address
+> - properly handle CONFIG_USER_ONLY
+> 
+> [v2]:
+> As per Richard's suggestion I made pmm field part of tb_flags.
+> It allowed to get rid of global variable to store pmlen.
+> Also it allowed to simplify all the machinery around it.
+> 
+> [v1]:
+> It looks like Zjpm v0.8 is almost frozen and we don't expect it change drastically anymore.
+> Compared to the original implementation with explicit base and mask CSRs, we now only have
+> several fixed options for number of masked bits which are set using existing CSRs.
+> The changes have been tested with handwritten assembly tests and LLVM HWASAN
+> test suite.
+> 
+> Alexey Baturo (6):
+>    target/riscv: Remove obsolete pointer masking  extension code.
+>    target/riscv: Add new CSR fields for S{sn,mn,m}pm extensions as part
+>      of Zjpm v0.8
+>    target/riscv: Add helper functions to calculate current number of
+>      masked bits for pointer masking
+>    target/riscv: Add pointer masking tb flags
+>    target/riscv: Update address modify functions to take into account
+>      pointer masking
+>    target/riscv: Enable updates for pointer masking variables and thus
+>      enable pointer masking extension
+> 
+>   target/riscv/cpu.c           |  21 +--
+>   target/riscv/cpu.h           |  46 +++--
+>   target/riscv/cpu_bits.h      |  90 +---------
+>   target/riscv/cpu_cfg.h       |   3 +
+>   target/riscv/cpu_helper.c    |  97 +++++-----
+>   target/riscv/csr.c           | 337 ++---------------------------------
+>   target/riscv/machine.c       |  20 +--
+>   target/riscv/pmp.c           |  13 +-
+>   target/riscv/pmp.h           |  11 +-
+>   target/riscv/tcg/tcg-cpu.c   |   5 +-
+>   target/riscv/translate.c     |  46 ++---
+>   target/riscv/vector_helper.c |  15 +-
+>   12 files changed, 158 insertions(+), 546 deletions(-)
 > 
 
