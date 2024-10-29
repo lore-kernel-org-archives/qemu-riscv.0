@@ -4,79 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E56B9D3A679
-	for <qemu-riscv@archiver.kernel.org>; Tue, 29 Oct 2024 17:41:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6A897D3A67F
+	for <qemu-riscv@archiver.kernel.org>; Tue, 29 Oct 2024 18:59:42 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1t5qD9-0000RK-Ng; Tue, 29 Oct 2024 13:40:55 -0400
+	id 1t5rR4-0008Md-4L; Tue, 29 Oct 2024 14:59:22 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1t5qD7-0000Qb-VP
- for qemu-riscv@nongnu.org; Tue, 29 Oct 2024 13:40:53 -0400
-Received: from mail-pg1-x52e.google.com ([2607:f8b0:4864:20::52e])
+ id 1t5rQy-0008M2-U0
+ for qemu-riscv@nongnu.org; Tue, 29 Oct 2024 14:59:16 -0400
+Received: from mail-pl1-x632.google.com ([2607:f8b0:4864:20::632])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1t5qD6-0000fD-4H
- for qemu-riscv@nongnu.org; Tue, 29 Oct 2024 13:40:53 -0400
-Received: by mail-pg1-x52e.google.com with SMTP id
- 41be03b00d2f7-7ea8de14848so3228430a12.2
- for <qemu-riscv@nongnu.org>; Tue, 29 Oct 2024 10:40:51 -0700 (PDT)
+ id 1t5rQw-0001K2-Mw
+ for qemu-riscv@nongnu.org; Tue, 29 Oct 2024 14:59:16 -0400
+Received: by mail-pl1-x632.google.com with SMTP id
+ d9443c01a7336-20c693b68f5so63226475ad.1
+ for <qemu-riscv@nongnu.org>; Tue, 29 Oct 2024 11:59:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1730223650; x=1730828450; darn=nongnu.org;
+ d=ventanamicro.com; s=google; t=1730228353; x=1730833153; darn=nongnu.org;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=3l/sk+sczWQ7dPR93U3sBbdgCRxQZhE4N3jHNvaS4E8=;
- b=oVO6fxNY7g+wKxB4knV8CkuB1DRuvA0VWYR8/BFwp7coAZLp/w/0LsM6Uqrtr5IUzj
- yTFBXHki0QO/LusUVmHPe9NjmpzJ42NflTdPTVvSBgBnN+BmWG1MRhvyBFYiGMstSAv1
- wEEid+LYvE3+7LnSqt5sVHkkJQ/8HR9St3LYo5QdU/afaOwHlxMEoZ949jNREAjQ1DF4
- mMZ76pVCx/C8jUnGrxzQh39S4klbMO91z3KHfVsIQSfn/zyrviLK9Oa99Hp5ovO3yyqv
- Y+Q8fmMMcoZDXBJQ5hcyLBo/FZGsPddvM7/cOCgYvTDDfUriD7CosFK0KhyTl/m+T792
- fGxQ==
+ bh=SCqDGgkVhv9SEwqIERUFigt4Y/PjkVNti2HwnBeNZw4=;
+ b=O/DZyqkM2aywGBxBZ2fk9x4qW8X+UcL+Ett3GSpgWdFKdXQDnWhe0JyNeBljP7DJWh
+ pHQ9QCAqX+6sw5Vii+KwR7SeyiMUZ6haHCl4pXJW1KNdXCIzJo2HoYfqst+j0r9fJCgo
+ E339L7UeAdXXff0DIj1aGtIpH0HI+GlqePN8xVlQ/KciDTtH3G1EioNA/T4RlAPOkNKq
+ +umJ8ebhD2AI3MC5acEBVzYwYSkleYPq6tXT6MlNKS5rV/T9oFlbgvp60pCj+qTRtJUO
+ AruA8V+xr8YpuukrvaSvgivuJglBaf369vkvklLHWiZdIjKRznma332IM+MRYHBZl23c
+ 95Hw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1730223650; x=1730828450;
+ d=1e100.net; s=20230601; t=1730228353; x=1730833153;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=3l/sk+sczWQ7dPR93U3sBbdgCRxQZhE4N3jHNvaS4E8=;
- b=hYD8+OHj8OhC2ZZeiZ5+F3o/5tsG1LQt6/o5h2o7pq4CxJv/f0dVyXAwdGWPm5qItB
- lCITcmFh3bZpA49L3EP/FWzm+CMtxnN1GHKZdnRrOh4Vb0rsxGaieKVWABPi27Y1DbcX
- q02Pzvmkdoqzrkg8+t6TXuPLscjXbVkzWBUUYC905fHvlMNvX4jM/TAJdPBHmFQtf6eI
- A1PiuER2xUQso5kykXv0Au4ehZsYQ+kyti8pVPCD8kEYEVjcOJlcTT+ElmOAD79n/nql
- WAYzbY04wZHP+fqoeinKmMnXYIERqP3unDg/dngVOyXIMhqBMGvHgGBDXOV4qSMal8zQ
- BBTw==
+ bh=SCqDGgkVhv9SEwqIERUFigt4Y/PjkVNti2HwnBeNZw4=;
+ b=mrFkjTgbCUy/mfPP5Ole4oVDKClv0rHSeSgPOv1gjRT1Xhw8PbARgXy/M6XNDKie1l
+ moOPPWJw/zz84SW4Gqkw2CEvCQ/xqm3cRIoF9r9pxoBwLJ7grMsWZOkoxhZeJVgQecFn
+ PQh+iC90NqdKlNugMnih0O0ZxGxL/WotiCwMVP+CfTiDrowtcQeTV4x/wEeMbXIlLTgz
+ MlRqK6GTfSK+BtTKv8rl1uuTg4M9duLFv6HmehuKEBj6ACxswNr9HKhfQrIvA+tJy1Px
+ cRf8bKg/svE/K2HVO7CJwt+mM/B4flD9omYvBRKVWo/ChD8taNAvJkQnXXhU/wuW3r7n
+ IfvA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWo/nEojjAaCJM7TExdZfO+G16EaIWiWpLuzq/Frtmo8edJNT62brE1Edu7Cb27GSLS+h1fJQlV1/Wk@nongnu.org
-X-Gm-Message-State: AOJu0Ywdlr5h27I0h1+l9aEh3+vAp7dr4qVbhJpwOmKsIQ23lIPjyDxA
- hUMwhnQhA7VESBBsOXdjHLcK6+qVsqJGMmAhh97PHZIfpNy3tgy/1uWHHyNSibs=
-X-Google-Smtp-Source: AGHT+IHsTgf4p3hjomCyh1jHarXr/Ef8GNv284PUxNAFiktBJku64l+CQqEaa/xMmFGoCbWO+v6aKg==
-X-Received: by 2002:a05:6a20:b40b:b0:1d9:a1c:7086 with SMTP id
- adf61e73a8af0-1d9a8516a2dmr15979106637.44.1730223650345; 
- Tue, 29 Oct 2024 10:40:50 -0700 (PDT)
+ AJvYcCX5zY4jgqeJTDvd7Qd+Pjxo56P8afu2Cy7HaFXV7a7bMH6ElkEC6sgDCY46ieJAEOsVWjBm3m/jYcow@nongnu.org
+X-Gm-Message-State: AOJu0Yxo5tL3h7K0iMDGGpeAP0pw7YkorgjEEgHGk8uavCqhM3AVzk1u
+ 94Q2IqsSUvz43pNj/tCRKAbMFxWqokj+bMnKrsq/Usb/9ybsxuvIPqbJvy/FlA4=
+X-Google-Smtp-Source: AGHT+IGQQYnru3XJ2+7YhZsuTFJxRHrP93t/xW4wioeIQrOuJ/oxYIXSLqRQnbwQ8E8IDlMayg6QTA==
+X-Received: by 2002:a17:902:ce82:b0:20c:bca5:12a8 with SMTP id
+ d9443c01a7336-210c6ce4f68mr151690715ad.60.1730228352699; 
+ Tue, 29 Oct 2024 11:59:12 -0700 (PDT)
 Received: from [192.168.68.110] ([191.8.109.222])
  by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-720579360f5sm7829340b3a.88.2024.10.29.10.40.47
+ d9443c01a7336-210bc04ae0esm68860115ad.271.2024.10.29.11.59.09
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 29 Oct 2024 10:40:49 -0700 (PDT)
-Message-ID: <d4241c7b-ae97-4dc1-bc60-5f0eed58d3a5@ventanamicro.com>
-Date: Tue, 29 Oct 2024 14:40:45 -0300
+ Tue, 29 Oct 2024 11:59:12 -0700 (PDT)
+Message-ID: <aad4c62e-6e4f-442c-a837-f84a4bcd32d4@ventanamicro.com>
+Date: Tue, 29 Oct 2024 15:59:08 -0300
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v9 0/6] Pointer Masking update for Zjpm v1.0
-To: Alexey Baturo <baturo.alexey@gmail.com>
-Cc: richard.henderson@linaro.org, space.monkey.delivers@gmail.com,
- palmer@dabbelt.com, Alistair.Francis@wdc.com, sagark@eecs.berkeley.edu,
- kbastian@mail.uni-paderborn.de, qemu-devel@nongnu.org, qemu-riscv@nongnu.org
-References: <20240511101053.1875596-1-me@deliversmonkey.space>
+Subject: Re: [PATCH v6 2/7] target/riscv: rvv: Replace VSTART_CHECK_EARLY_EXIT
+ in vext_ldst_us
+To: Max Chou <max.chou@sifive.com>, qemu-devel@nongnu.org,
+ qemu-riscv@nongnu.org
+Cc: Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bmeng.cn@gmail.com>,
+ Weiwei Li <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ richard.henderson@linaro.org, negge@google.com
+References: <20240918171412.150107-1-max.chou@sifive.com>
+ <20240918171412.150107-3-max.chou@sifive.com>
 Content-Language: en-US
 From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <20240511101053.1875596-1-me@deliversmonkey.space>
+In-Reply-To: <20240918171412.150107-3-max.chou@sifive.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::52e;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pg1-x52e.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::632;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pl1-x632.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -99,97 +103,35 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Hi Alexey,
 
 
-Do you have plans to post a new version of this series? Aside from a few comments
-it seems like this was almost there.
+On 9/18/24 2:14 PM, Max Chou wrote:
+> Because the real vl (evl) of vext_ldst_us may be different (e.g.
+> vlm.v/vsm.v/etc.), so the VSTART_CHECK_EARLY_EXIT checking function
+> should be replaced by checking evl in vext_ldst_us.
+> 
+> Signed-off-by: Max Chou <max.chou@sifive.com>
+> ---
 
-We might not be able to get it merged in time for this current release (code freeze
-is Nov 5th) but we can get it in Alistair's tree for the next release.
+Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 
-
-Thanks,
-
-Daniel
-
-On 5/11/24 7:10 AM, Alexey Baturo wrote:
-> From: Alexey Baturo <baturo.alexey@gmail.com>
+>   target/riscv/vector_helper.c | 5 ++++-
+>   1 file changed, 4 insertions(+), 1 deletion(-)
 > 
-> Hi,
-> 
-> It looks like Pointer Masking spec has reached v1.0 and been frozen,
-> rebasing on riscv-to-apply.next branch and resubmitting patches.
-> 
-> Thanks.
-> 
-> [v8]:
-> Rebasing patches on current qemu branch and resubmitting them.
-> 
-> 
-> [v7]:
-> I'm terribly sorry, but previous rebase went wrong and somehow I missed it.
-> This time I double-checked rebased version.
-> This patch series is properly rebased on https://github.com/alistair23/qemu/tree/riscv-to-apply.next
-> 
-> [v6]:
-> This patch series is rebased on https://github.com/alistair23/qemu/tree/riscv-to-apply.next
-> 
-> [v5]:
-> This patch series targets Zjpm v0.8 extension.
-> The spec itself could be found here: https://github.com/riscv/riscv-j-extension/blob/8088461d8d66a7676872b61c908cbeb7cf5c5d1d/zjpm-spec.pdf
-> This patch series is updated after the suggested comments:
-> - add "x-" to the extension names to indicate experimental
-> 
-> [v4]:
-> Patch series updated after the suggested comments:
-> - removed J-letter extension as it's unused
-> - renamed and fixed function to detect if address should be sign-extended
-> - zeroed unused context variables and moved computation logic to another patch
-> - bumped pointer masking version_id and minimum_version_id by 1
-> 
-> [v3]:
-> There patches are updated after Richard's comments:
-> - moved new tb flags to the end
-> - used tcg_gen_(s)extract to get the final address
-> - properly handle CONFIG_USER_ONLY
-> 
-> [v2]:
-> As per Richard's suggestion I made pmm field part of tb_flags.
-> It allowed to get rid of global variable to store pmlen.
-> Also it allowed to simplify all the machinery around it.
-> 
-> [v1]:
-> It looks like Zjpm v0.8 is almost frozen and we don't expect it change drastically anymore.
-> Compared to the original implementation with explicit base and mask CSRs, we now only have
-> several fixed options for number of masked bits which are set using existing CSRs.
-> The changes have been tested with handwritten assembly tests and LLVM HWASAN
-> test suite.
-> 
-> Alexey Baturo (6):
->    target/riscv: Remove obsolete pointer masking  extension code.
->    target/riscv: Add new CSR fields for S{sn,mn,m}pm extensions as part
->      of Zjpm v0.8
->    target/riscv: Add helper functions to calculate current number of
->      masked bits for pointer masking
->    target/riscv: Add pointer masking tb flags
->    target/riscv: Update address modify functions to take into account
->      pointer masking
->    target/riscv: Enable updates for pointer masking variables and thus
->      enable pointer masking extension
-> 
->   target/riscv/cpu.c           |  21 +--
->   target/riscv/cpu.h           |  46 +++--
->   target/riscv/cpu_bits.h      |  90 +---------
->   target/riscv/cpu_cfg.h       |   3 +
->   target/riscv/cpu_helper.c    |  97 +++++-----
->   target/riscv/csr.c           | 337 ++---------------------------------
->   target/riscv/machine.c       |  20 +--
->   target/riscv/pmp.c           |  13 +-
->   target/riscv/pmp.h           |  11 +-
->   target/riscv/tcg/tcg-cpu.c   |   5 +-
->   target/riscv/translate.c     |  46 ++---
->   target/riscv/vector_helper.c |  15 +-
->   12 files changed, 158 insertions(+), 546 deletions(-)
-> 
+> diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
+> index 87d2399c7e3..967bb2687ae 100644
+> --- a/target/riscv/vector_helper.c
+> +++ b/target/riscv/vector_helper.c
+> @@ -276,7 +276,10 @@ vext_ldst_us(void *vd, target_ulong base, CPURISCVState *env, uint32_t desc,
+>       uint32_t max_elems = vext_max_elems(desc, log2_esz);
+>       uint32_t esz = 1 << log2_esz;
+>   
+> -    VSTART_CHECK_EARLY_EXIT(env);
+> +    if (env->vstart >= evl) {
+> +        env->vstart = 0;
+> +        return;
+> +    }
+>   
+>       /* load bytes from guest memory */
+>       for (i = env->vstart; i < evl; env->vstart = ++i) {
 
