@@ -4,98 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E3FC9D5B14E
-	for <qemu-riscv@archiver.kernel.org>; Mon, 28 Oct 2024 21:08:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A6538D5B865
+	for <qemu-riscv@archiver.kernel.org>; Tue, 29 Oct 2024 03:26:04 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1t5Wwj-0001Ie-Rx; Mon, 28 Oct 2024 17:06:41 -0400
+	id 1t5cra-0001wi-OH; Mon, 28 Oct 2024 23:25:46 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <phil@philjordan.eu>)
- id 1t5Wwd-0001HU-Oy
- for qemu-riscv@nongnu.org; Mon, 28 Oct 2024 17:06:35 -0400
-Received: from mail-vk1-xa34.google.com ([2607:f8b0:4864:20::a34])
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1t5crZ-0001wB-CP; Mon, 28 Oct 2024 23:25:45 -0400
+Received: from mail-ua1-x92d.google.com ([2607:f8b0:4864:20::92d])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <phil@philjordan.eu>)
- id 1t5WwZ-0003dQ-Jb
- for qemu-riscv@nongnu.org; Mon, 28 Oct 2024 17:06:35 -0400
-Received: by mail-vk1-xa34.google.com with SMTP id
- 71dfb90a1353d-50d4a333a87so1212742e0c.1
- for <qemu-riscv@nongnu.org>; Mon, 28 Oct 2024 14:06:29 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1t5crX-0000Iu-Jq; Mon, 28 Oct 2024 23:25:45 -0400
+Received: by mail-ua1-x92d.google.com with SMTP id
+ a1e0cc1a2514c-84fb1225a89so1405612241.2; 
+ Mon, 28 Oct 2024 20:25:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=philjordan-eu.20230601.gappssmtp.com; s=20230601; t=1730149589; x=1730754389;
- darn=nongnu.org; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Yj5+M6E4HrsSXZW2J02GB6OTLvWc1Umx2GfEKflB6xI=;
- b=0EsabL8PVJZBR0F7fX8z6Tmh4ynjF9s38jyiCfEuIEkIG5EV3Xyh6CU/4eOhS5YH/Y
- f9ew1OrEOP3nqmYMy10npDgVeMFwbJZFIh/z96YnM8/CEPurgBKaTDnl+2sz/WhrnFRA
- CyfYG/j3n9CBxVa15nspoHWAf2609mv2uq/lGjU3d/Rkdo2m7bIMVCwDsw60pieWS+kf
- DDyqvY6zQSmlIxnAq4/NdO5L6SMOj/388rtnzFFfhzM15Dvxdz2flf1OKF1iZrwcut5t
- /m1uInNONy7HjxN64A9zD9sS3ygXbc/juhNKREeFPwwWNvhfjl+EuxGHYLDFxih82n1N
- Oi9A==
+ d=gmail.com; s=20230601; t=1730172341; x=1730777141; darn=nongnu.org;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=ceLh86KrRAgpxR5vy7NRhx6WwXROcvyhrZ19hka8Hjo=;
+ b=kZQ2rhfZ86YYVQ4FAQksA79tediPhqFCSlZHPh2sFoxlT/SLoVZVDleH+6dz4uBYMX
+ /mzuZhreWhptYhKZZVaiygici81cjExekgu6jLca24liE3LUc5rqLZHGu4PncDVqTDMW
+ XiRaQjJ54Rp5VovO9t3IrJ3OiZwoyQP/jIEsbfxl6LaNOnaYfQJVy2C7nzMsinzlYpWM
+ x40+0FwfZwNzZkLIt1QMb/V/d6c9WKhDJf5ISXAb4snOBEzbM1uM7l+oPAKfmt2GX+ue
+ ciJW3Q5JEZyZHZWIz/bhV6IHUPtSm+dSrcCzsm2FhJgbRDiqDcpi2sQyzi2LEh9N+idN
+ +Zpg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1730149589; x=1730754389;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=Yj5+M6E4HrsSXZW2J02GB6OTLvWc1Umx2GfEKflB6xI=;
- b=vOIvkT0hjHwK2oWHUXW8at8MkVzA6UcVybMIX1mq2j2Y+dYjmcdFwhjeDZCsHbTeeu
- ojYIu0+SJC9JvphkUXYsEN8sLai4PT27YKx4jboyS/wntpIZ6miqkgc04/0FvneqOzDH
- gUqUVI4b1Z1jIHO48+uq+XE/KUThz8ueGrrF7XfK2J5UAxVzm7CTqP2R3KP39FQNFIur
- IhRpdLxKuxKC3WfiYuu89FpsttLnJQefbLxudowUZLP2/ZS8Bpsl7ZoucgseabP6/JMt
- 86PwgpTNh93bGa8+GXAKPp2qlMDqEX3s9QH3ubKNnO5Vph77YSfjgmIaTBs6UruZeSyY
- ReHw==
+ d=1e100.net; s=20230601; t=1730172341; x=1730777141;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=ceLh86KrRAgpxR5vy7NRhx6WwXROcvyhrZ19hka8Hjo=;
+ b=JtED3xz0Gemqp9pNZGV1nOfIR50LWwnoYoivbHoHS3BfwKXx7yXVL+ZWAc/mQrnLHl
+ ySSaUIFFm5wsVK8p3w2NIjm1EvO3bAQygiN7czHVcaaj1+52Q+/PNr318fSNUlxam3sb
+ LVoxZGalhmeuTrLlUzSssZ0G63vYKnYxQBLcZLjUoCV6QSb9FUOUsy6mqWW2Zz7S+anm
+ QqGPz74AH+5dF8S+v8E7TUs6MpmnpcL3S7XSRJgqJPCbN4epWnShxKCpZIxN0b2H70A0
+ So40fG6MJxCofwazYgwkY3lFMops9apNc4yVuRUY0y+bWhPYCWmv3U7WhgrQlLRhDAgV
+ y85Q==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXnlO1C5GWufPVfnG3SSzkydxsfswngMtsmBomw7TDAHK07jELo3GEegImjWqIQkoIqcpu7GehbxC4p@nongnu.org
-X-Gm-Message-State: AOJu0YwzDqoXHLDp9sfRS8FRltdX2O9+TURvGR4eQF9Fy3QDwMcy3Q2J
- 2pBbCooAXJvi+qxrrjoBInKZnVTWPKi1RN6PSYebyhHLg/3TZu8NJs/AdptPloHElFil5rLcSa2
- oyHOzLeqGyGaEQfT/Q585h2hXaQfmEN6IWlZd
-X-Google-Smtp-Source: AGHT+IFfGPEKpdS9lEhh0EbVwP9c1lLjtfWfTKYfRN8CnjEZl0IAEqc+yl8+/ZrcTHJmWpcB4BpU9Wvc176WIC4aO+Q=
-X-Received: by 2002:a05:6122:21a9:b0:507:9165:209 with SMTP id
- 71dfb90a1353d-5101504f211mr6071857e0c.7.1730149589278; Mon, 28 Oct 2024
- 14:06:29 -0700 (PDT)
+ AJvYcCUj+5oHvbF42XdH2iOLfv5f4GsLoSD/EkgyC+17SRyISQpILsZ71WqDGpla3N+Dwl7yLzA9z9JAHE7J@nongnu.org
+X-Gm-Message-State: AOJu0YxdA0qyqoW9zsKaV/vsB8zs+KGhIlhqhe0kb+Zlb7xpPPsrHkIn
+ WlBucu3huST4U0j7GXfzflw2LD7kwVbzQEcXhplPPQf3HcrweEGztP3bZ/nAUYJkG54zjIpAf/j
+ NRh2bm8ttj/erWhUAdI9ECSmFAys=
+X-Google-Smtp-Source: AGHT+IHpcLedNA8yD2pNMd0adI6136xpFt38Wn8EqZV+oR9h20jalTqXfP/SzKPYhn4+7LjaJGUtoTtBMRZbhCtVAbo=
+X-Received: by 2002:a05:6122:a11:b0:509:e80:3ed2 with SMTP id
+ 71dfb90a1353d-51015055cf8mr7421564e0c.7.1730172341500; Mon, 28 Oct 2024
+ 20:25:41 -0700 (PDT)
 MIME-Version: 1.0
-References: <20241024102813.9855-1-phil@philjordan.eu>
- <20241024102813.9855-3-phil@philjordan.eu>
- <9e310d5e-ab73-47b9-b9ed-5a16d4db3fb9@daynix.com>
- <CAAibmn0NA+K63OvrsBpN1HivndyZo-fgeLwzY8AVE4hPrQR26w@mail.gmail.com>
- <dd2aae75-348d-44ad-bbd9-5d45aad15bc6@daynix.com>
- <CAAibmn1z+7yizwH8DogfcCWOWzA8Ox6e=p+Hc1pu-CS4SjAirg@mail.gmail.com>
- <6a989d04-6416-4bd9-98ac-e1230a1095a9@daynix.com>
- <CAAibmn3YEOT0O55-bwJkpi_oEGkA1WwvhC0w3jGbgXOZLTVa0w@mail.gmail.com>
- <CAAibmn3HZeDeK8FrYhHa1GGwc+N8rBuB2VvMRm7LCt0mUGmsYQ@mail.gmail.com>
- <27ced2db-472d-47ae-9047-9efc0b589a1e@daynix.com>
- <CAAibmn17=iTaEW0Q_E_n6gsS7vd-d8-w36yee9f2eZ+SR-d-ng@mail.gmail.com>
- <dbb394d4-f8fe-484d-974c-c84275f7a1c7@daynix.com>
-In-Reply-To: <dbb394d4-f8fe-484d-974c-c84275f7a1c7@daynix.com>
-From: Phil Dennis-Jordan <phil@philjordan.eu>
-Date: Mon, 28 Oct 2024 22:06:18 +0100
-Message-ID: <CAAibmn1Th6w6JJcxgD7HA62qo-Lk0yV-Cg4XK9OYEtDvvQbhrg@mail.gmail.com>
-Subject: Re: [PATCH v4 02/15] hw/display/apple-gfx: Introduce
- ParavirtualizedGraphics.Framework support
-To: Akihiko Odaki <akihiko.odaki@daynix.com>
-Cc: qemu-devel@nongnu.org, agraf@csgraf.de, peter.maydell@linaro.org, 
- pbonzini@redhat.com, rad@semihalf.com, quic_llindhol@quicinc.com, 
- marcin.juszkiewicz@linaro.org, stefanha@redhat.com, mst@redhat.com, 
- slp@redhat.com, richard.henderson@linaro.org, eduardo@habkost.net, 
- marcel.apfelbaum@gmail.com, gaosong@loongson.cn, jiaxun.yang@flygoat.com, 
- chenhuacai@kernel.org, kwolf@redhat.com, hreitz@redhat.com, philmd@linaro.org, 
- shorne@gmail.com, palmer@dabbelt.com, alistair.francis@wdc.com, 
- bmeng.cn@gmail.com, liwei1518@gmail.com, dbarboza@ventanamicro.com, 
- zhiwei_liu@linux.alibaba.com, jcmvbkbc@gmail.com, marcandre.lureau@redhat.com, 
- berrange@redhat.com, qemu-arm@nongnu.org, qemu-block@nongnu.org, 
- qemu-riscv@nongnu.org, Alexander Graf <graf@amazon.com>
-Content-Type: multipart/alternative; boundary="000000000000ad82a306258fd765"
-Received-SPF: neutral client-ip=2607:f8b0:4864:20::a34;
- envelope-from=phil@philjordan.eu; helo=mail-vk1-xa34.google.com
-X-Spam_score_int: -10
-X-Spam_score: -1.1
+References: <20241008225010.1861630-1-debug@rivosinc.com>
+ <20241008225010.1861630-5-debug@rivosinc.com>
+In-Reply-To: <20241008225010.1861630-5-debug@rivosinc.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Tue, 29 Oct 2024 13:25:15 +1000
+Message-ID: <CAKmqyKPX2nyxyfRDAmfDd0HCO+gFr9bnNY_3ewgrcAY+Zd+hvA@mail.gmail.com>
+Subject: Re: [PATCH v16 04/20] target/riscv: save and restore elp state on
+ priv transitions
+To: Deepak Gupta <debug@rivosinc.com>
+Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, palmer@dabbelt.com, 
+ Alistair.Francis@wdc.com, bmeng.cn@gmail.com, liwei1518@gmail.com, 
+ dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com, jim.shu@sifive.com, 
+ kito.cheng@sifive.com, Andy Chiu <andy.chiu@sifive.com>, 
+ Richard Henderson <richard.henderson@linaro.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2607:f8b0:4864:20::92d;
+ envelope-from=alistair23@gmail.com; helo=mail-ua1-x92d.google.com
+X-Spam_score_int: -17
+X-Spam_score: -1.8
 X-Spam_bar: -
-X-Spam_report: (-1.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, HTML_MESSAGE=0.001, RCVD_IN_DNSWL_NONE=-0.0001,
- SPF_HELO_NONE=0.001, SPF_NEUTRAL=0.779 autolearn=no autolearn_force=no
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -111,613 +96,192 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
---000000000000ad82a306258fd765
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+On Wed, Oct 9, 2024 at 8:52=E2=80=AFAM Deepak Gupta <debug@rivosinc.com> wr=
+ote:
+>
+> elp state is recorded in *status on trap entry (less privilege to higher
+> privilege) and restored in elp from *status on trap exit (higher to less
+> privilege).
+>
+> Additionally this patch introduces a forward cfi helper function to
+> determine if current privilege has forward cfi is enabled or not based on
+> *envcfg (for U, VU, S, VU, HS) or mseccfg csr (for M).
+>
+> Signed-off-by: Deepak Gupta <debug@rivosinc.com>
+> Co-developed-by: Jim Shu <jim.shu@sifive.com>
+> Co-developed-by: Andy Chiu <andy.chiu@sifive.com>
+> Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 
-On Mon, 28 Oct 2024 at 17:06, Akihiko Odaki <akihiko.odaki@daynix.com>
-wrote:
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
-> On 2024/10/28 23:13, Phil Dennis-Jordan wrote:
-> >
-> >
-> > On Mon, 28 Oct 2024 at 15:02, Akihiko Odaki <akihiko.odaki@daynix.com
-> > <mailto:akihiko.odaki@daynix.com>> wrote:
-> >
-> >     On 2024/10/28 22:31, Phil Dennis-Jordan wrote:
-> >      >
-> >      >
-> >      > On Mon, 28 Oct 2024 at 10:00, Phil Dennis-Jordan
-> >     <phil@philjordan.eu <mailto:phil@philjordan.eu>
-> >      > <mailto:phil@philjordan.eu <mailto:phil@philjordan.eu>>> wrote:
-> >      >
-> >      >
-> >      >          >      >
-> >      >          >      > Hmm. I think if we were to use that, we would
-> >     need to
-> >      >         create a new
-> >      >          >      > QemuEvent for every job and destroy it
-> afterward,
-> >      >         which seems
-> >      >          >     expensive.
-> >      >          >      > We can't rule out multiple concurrent jobs bei=
-ng
-> >      >         submitted, and the
-> >      >          >      > QemuEvent system only supports a single
-> producer as
-> >      >         far as I can
-> >      >          >     tell.
-> >      >          >      >
-> >      >          >      > You can probably sort of hack around it with
-> >     just one
-> >      >         QemuEvent by
-> >      >          >      > putting the qemu_event_wait into a loop and
-> turning
-> >      >         the job.done
-> >      >          >     flag
-> >      >          >      > into an atomic (because it would now need to b=
-e
-> >      >         checked outside the
-> >      >          >      > lock) but this all seems unnecessarily
-> complicated
-> >      >         considering the
-> >      >          >      > QemuEvent uses the same mechanism QemuCond/
-> >     QemuMutex
-> >      >         internally
-> >      >          >     on macOS
-> >      >          >      > (the only platform relevant here), except we
-> >     can use it as
-> >      >          >     intended with
-> >      >          >      > QemuCond/QemuMutex rather than having to work
-> >     against the
-> >      >          >     abstraction.
-> >      >          >
-> >      >          >     I don't think it's going to be used concurrently.
-> It
-> >      >         would be difficult
-> >      >          >     to reason even for the framework if it performs
-> memory
-> >      >          >     unmapping/mapping/reading operations concurrently=
-.
-> >      >          >
-> >      >          >
-> >      >          > I've just performed a very quick test by wrapping the
-> job
-> >      >         submission/
-> >      >          > wait in the 2 mapMemory callbacks and the 1 readMemor=
-y
-> >      >         callback with
-> >      >          > atomic counters and logging whenever a counter went
-> >     above 1.
-> >      >          >
-> >      >          >   * Overall, concurrent callbacks across all types we=
-re
-> >      >         common (many per
-> >      >          > second when the VM is busy). It's not exactly a
-> >     "thundering
-> >      >         herd" (I
-> >      >          > never saw >2) but it's probably not a bad idea to use
-> >     a separate
-> >      >          > condition variable for each job type. (task map,
-> >     surface map,
-> >      >         memory read)
-> >      >          >   * While I did not observe any concurrent memory
-> mapping
-> >      >         operations
-> >      >          > *within* a type of memory map (2 task mappings or 2
-> >     surface
-> >      >         mappings) I
-> >      >          > did see very occasional concurrent memory *read*
-> >     callbacks.
-> >      >         These would,
-> >      >          > as far as I can tell, not be safe with QemuEvents,
-> >     unless we
-> >      >         placed the
-> >      >          > event inside the job struct and init/destroyed it on
-> every
-> >      >         callback
-> >      >          > (which seems like excessive overhead).
-> >      >
-> >      >         I think we can tolerate that overhead. init/destroy
-> >     essentially
-> >      >         sets the
-> >      >         fields in the data structure and I estimate its total
-> size is
-> >      >         about 100
-> >      >         bytes. It is probably better than waking an irrelevant
-> thread
-> >      >         up. I also
-> >      >         hope that keeps the code simple; it's not worthwhile
-> >     adding code to
-> >      >         optimize this.
-> >      >
-> >      >
-> >      >     At least pthread_cond_{init,destroy} and
-> >      >     pthread_mutex_{init,destroy} don't make any syscalls, so yea=
-h
-> >     it's
-> >      >     probably an acceptable overhead.
-> >      >
-> >      >
-> >      > I've just experimented with QemuEvents created on-demand and ran
-> >     into
-> >      > some weird deadlocks, which then made me sit down and think abou=
-t
-> it
-> >      > some more. I've come to the conclusion that creating (and
-> crucially,
-> >      > destroying) QemuEvents on demand in this way is not safe.
-> >      >
-> >      > Specifically, you must not call qemu_event_destroy() - which
-> >      > transitively destroys the mutex and condition variable - unless
-> >     you can
-> >      > guarantee that the qemu_event_set() call on that event object ha=
-s
-> >     completed.
-> >      >
-> >      > In qemu_event_set, the event object's value is atomically set to
-> >     EV_SET.
-> >      > If the previous value was EV_BUSY, qemu_futex_wake() is called.
-> >     All of
-> >      > this is outside any mutex, however, so apart from memory coheren=
-ce
-> >      > (there are barriers) this can race with the waiting thread.
-> >      > qemu_event_wait() reads the event's value. If EV_FREE, it's
-> >     atomically
-> >      > set to EV_BUSY. Then the mutex is locked, the value is checked
-> >     again,
-> >      > and if it's still EV_BUSY, it waits for the condition variable,
-> >      > otherwise the mutex is immediately unlocked again. If the trigge=
+Alistair
+
+> ---
+>  target/riscv/cpu.h        |  1 +
+>  target/riscv/cpu_helper.c | 54 +++++++++++++++++++++++++++++++++++++++
+>  target/riscv/op_helper.c  | 17 ++++++++++++
+>  3 files changed, 72 insertions(+)
+>
+> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+> index e9f26b5121..6c5e199e72 100644
+> --- a/target/riscv/cpu.h
+> +++ b/target/riscv/cpu.h
+> @@ -547,6 +547,7 @@ void riscv_cpu_set_geilen(CPURISCVState *env, target_=
+ulong geilen);
+>  bool riscv_cpu_vector_enabled(CPURISCVState *env);
+>  void riscv_cpu_set_virt_enabled(CPURISCVState *env, bool enable);
+>  int riscv_env_mmu_index(CPURISCVState *env, bool ifetch);
+> +bool cpu_get_fcfien(CPURISCVState *env);
+>  G_NORETURN void  riscv_cpu_do_unaligned_access(CPUState *cs, vaddr addr,
+>                                                 MMUAccessType access_type=
+,
+>                                                 int mmu_idx, uintptr_t re=
+taddr);
+> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+> index a935377b4a..d7b776c556 100644
+> --- a/target/riscv/cpu_helper.c
+> +++ b/target/riscv/cpu_helper.c
+> @@ -33,6 +33,7 @@
+>  #include "cpu_bits.h"
+>  #include "debug.h"
+>  #include "tcg/oversized-guest.h"
+> +#include "pmp.h"
+>
+>  int riscv_env_mmu_index(CPURISCVState *env, bool ifetch)
+>  {
+> @@ -63,6 +64,33 @@ int riscv_env_mmu_index(CPURISCVState *env, bool ifetc=
+h)
+>  #endif
+>  }
+>
+> +bool cpu_get_fcfien(CPURISCVState *env)
+> +{
+> +    /* no cfi extension, return false */
+> +    if (!env_archcpu(env)->cfg.ext_zicfilp) {
+> +        return false;
+> +    }
+> +
+> +    switch (env->priv) {
+> +    case PRV_U:
+> +        if (riscv_has_ext(env, RVS)) {
+> +            return env->senvcfg & SENVCFG_LPE;
+> +        }
+> +        return env->menvcfg & MENVCFG_LPE;
+> +#ifndef CONFIG_USER_ONLY
+> +    case PRV_S:
+> +        if (env->virt_enabled) {
+> +            return env->henvcfg & HENVCFG_LPE;
+> +        }
+> +        return env->menvcfg & MENVCFG_LPE;
+> +    case PRV_M:
+> +        return env->mseccfg & MSECCFG_MLPE;
+> +#endif
+> +    default:
+> +        g_assert_not_reached();
+> +    }
+> +}
+> +
+>  void cpu_get_tb_cpu_state(CPURISCVState *env, vaddr *pc,
+>                            uint64_t *cs_base, uint32_t *pflags)
+>  {
+> @@ -546,6 +574,15 @@ void riscv_cpu_swap_hypervisor_regs(CPURISCVState *e=
+nv)
+>      }
+>      bool current_virt =3D env->virt_enabled;
+>
+> +    /*
+> +     * If zicfilp extension available and henvcfg.LPE =3D 1,
+> +     * then apply SPELP mask on mstatus
+> +     */
+> +    if (env_archcpu(env)->cfg.ext_zicfilp &&
+> +        get_field(env->henvcfg, HENVCFG_LPE)) {
+> +        mstatus_mask |=3D SSTATUS_SPELP;
+> +    }
+> +
+>      g_assert(riscv_has_ext(env, RVH));
+>
+>      if (current_virt) {
+> @@ -1760,6 +1797,11 @@ void riscv_cpu_do_interrupt(CPUState *cs)
+>      if (env->priv <=3D PRV_S && cause < 64 &&
+>          (((deleg >> cause) & 1) || s_injected || vs_injected)) {
+>          /* handle the trap in S-mode */
+> +        /* save elp status */
+> +        if (cpu_get_fcfien(env)) {
+> +            env->mstatus =3D set_field(env->mstatus, MSTATUS_SPELP, env-=
+>elp);
+> +        }
+> +
+>          if (riscv_has_ext(env, RVH)) {
+>              uint64_t hdeleg =3D async ? env->hideleg : env->hedeleg;
+>
+> @@ -1808,6 +1850,11 @@ void riscv_cpu_do_interrupt(CPUState *cs)
+>          riscv_cpu_set_mode(env, PRV_S, virt);
+>      } else {
+>          /* handle the trap in M-mode */
+> +        /* save elp status */
+> +        if (cpu_get_fcfien(env)) {
+> +            env->mstatus =3D set_field(env->mstatus, MSTATUS_MPELP, env-=
+>elp);
+> +        }
+> +
+>          if (riscv_has_ext(env, RVH)) {
+>              if (env->virt_enabled) {
+>                  riscv_cpu_swap_hypervisor_regs(env);
+> @@ -1839,6 +1886,13 @@ void riscv_cpu_do_interrupt(CPUState *cs)
+>          riscv_cpu_set_mode(env, PRV_M, virt);
+>      }
+>
+> +    /*
+> +     * Interrupt/exception/trap delivery is asynchronous event and as pe=
 r
-> >      > thread's qemu_event_set() flip to EV_SET occurs between the
-> waiting
-> >      > thread's two atomic reads of the value, the waiting thread will
-> >     never
-> >      > wait for the condition variable, but the trigger thread WILL try
-> to
-> >      > acquire the mutex and signal the condition variable in
-> >      > qemu_futex_wake(), by which  time the waiting thread may have
-> >     advanced
-> >      > outside of qemu_event_wait().
-> >
-> >     Sorry if I'm making a mistake again, but the waiting thread won't
-> >     set to
-> >     EV_BUSY unless the value is EV_FREE on the second read so the trigg=
-er
-> >     thread will not call qemu_futex_wake() if it manages to set to EV_S=
-ET
-> >     before the second read, will it?
-> >
-> >
-> > This sequence of events will cause the problem:
-> >
-> > WAITER (in qemu_event_wait):
-> > value =3D qatomic_load_acquire(&ev->value);
-> > -> EV_FREE
-> >
-> > TRIGGER (in qemu_event_set):
-> > qatomic_read(&ev->value) !=3D EV_SET
-> > -> EV_FREE (condition is false)
-> >
-> > WAITER:
-> > qatomic_cmpxchg(&ev->value, EV_FREE, EV_BUSY) =3D=3D EV_SET
-> > -> cmpxchg returns EV_FREE, condition false.
-> > ev->value =3D  EV_BUSY.
-> > > TRIGGER:
-> >          int old =3D qatomic_xchg(&ev->value, EV_SET);
-> >          smp_mb__after_rmw();
-> >          if (old =3D=3D EV_BUSY) {
-> > -> old =3D EV_BUSY, condition true.
-> > ev->value =3D EV_SET
-> >
-> > WAITER (in qemu_futex_wait(ev, EV_BUSY)):
-> >      pthread_mutex_lock(&ev->lock);
-> >      if (ev->value =3D=3D val) {
-> > -> false, because value is EV_SET
-> >
-> > WAITER:
-> >      pthread_mutex_unlock(&ev->lock);
-> >      =E2=80=A6
-> >      qemu_event_destroy(&job->done_event);
-> >
-> > TRIGGER (in qemu_futex_wake(ev, INT_MAX)):
-> >      pthread_mutex_lock(&ev->lock);
-> > -> hangs, because mutex has been destroyed
->
-> Thanks for clarification. This is very insightful.
->
->
-> >
-> >      >
-> >      > This is all fine usually, BUT if you destroy the QemuEvent
-> >     immediately
-> >      > after the qemu_event_wait() call, qemu_futex_wake() may try to
-> >     lock a
-> >      > mutex that has been destroyed, or signal a condition variable
-> >     which has
-> >      > been destroyed. I don't see a reasonable way of making this safe
-> >     other
-> >      > than using long-lived mutexes and condition variables. And
-> >     anyway, we
-> >      > have much, MUCH bigger contention/performance issues coming from
-> >     almost
-> >      > everything being covered by the BQL. (If waking these callbacks
-> >     can even
-> >      > be considered an issue: I haven't seen it show up in profiling,
-> >     whereas
-> >      > BQL contention very much does.)
-> >      >
-> >      > I'll submit v5 of this patch set with separate condition
-> >     variables for
-> >      > each job type. This should make the occurrence of waking the wro=
+> +     * zicfilp spec CPU should clear up the ELP state. No harm in cleari=
 ng
-> >      > thread quite rare, while reasoning about correctness is pretty
-> >      > straightforward. I think that's good enough.
+> +     * unconditionally.
+> +     */
+> +    env->elp =3D false;
+> +
+>      /*
+>       * NOTE: it is not necessary to yield load reservations here. It is =
+only
+>       * necessary for an SC from "another hart" to cause a load reservati=
+on
+> diff --git a/target/riscv/op_helper.c b/target/riscv/op_helper.c
+> index 25a5263573..eddedacf4b 100644
+> --- a/target/riscv/op_helper.c
+> +++ b/target/riscv/op_helper.c
+> @@ -309,6 +309,15 @@ target_ulong helper_sret(CPURISCVState *env)
 >
-> What about using QemuSemaphore then? It does not seem to have the
-> problem same with QemuEvent.
+>      riscv_cpu_set_mode(env, prev_priv, prev_virt);
 >
-
-Nowhere else in the code base uses short-lived semaphores, and while I
-can't immediately see a risk (the mutex is held during both post and wait)
-there might be some non-obvious problem with the approach. Internally, the
-semaphores use condition variables. The solution using condition variables
-directly already works, is safe, relatively easy to reason about, and does
-not cause any performance issues. There is a tiny inefficiency about waking
-up a thread unnecessarily in the rare case when two callbacks of the same
-kind occur concurrently. In practice, it's irrelevant. Thanks to the
-awkward mismatch of the PVGraphics.framework's libdispatch based approach
-and Qemu's BQL/AIO/BH approach, we are already sending messages to other
-threads very frequently. This isn't ideal, but not fixable without
-drastically reducing the need to acquire the BQL across Qemu.
-
-I do not think it is worth spending even more time trying to fix this part
-of the code which isn't broken in the first place.
-
---000000000000ad82a306258fd765
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><div dir=3D"ltr"><br></div><br><div class=3D"gmail_quote">=
-<div dir=3D"ltr" class=3D"gmail_attr">On Mon, 28 Oct 2024 at 17:06, Akihiko=
- Odaki &lt;<a href=3D"mailto:akihiko.odaki@daynix.com">akihiko.odaki@daynix=
-.com</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"mar=
-gin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1=
-ex">On 2024/10/28 23:13, Phil Dennis-Jordan wrote:<br>
-&gt; <br>
-&gt; <br>
-&gt; On Mon, 28 Oct 2024 at 15:02, Akihiko Odaki &lt;<a href=3D"mailto:akih=
-iko.odaki@daynix.com" target=3D"_blank">akihiko.odaki@daynix.com</a> <br>
-&gt; &lt;mailto:<a href=3D"mailto:akihiko.odaki@daynix.com" target=3D"_blan=
-k">akihiko.odaki@daynix.com</a>&gt;&gt; wrote:<br>
-&gt; <br>
-&gt;=C2=A0 =C2=A0 =C2=A0On 2024/10/28 22:31, Phil Dennis-Jordan wrote:<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt; On Mon, 28 Oct 2024 at 10:00, Phil Dennis-Jor=
-dan<br>
-&gt;=C2=A0 =C2=A0 =C2=A0&lt;<a href=3D"mailto:phil@philjordan.eu" target=3D=
-"_blank">phil@philjordan.eu</a> &lt;mailto:<a href=3D"mailto:phil@philjorda=
-n.eu" target=3D"_blank">phil@philjordan.eu</a>&gt;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt; &lt;mailto:<a href=3D"mailto:phil@philjordan.=
-eu" target=3D"_blank">phil@philjordan.eu</a> &lt;mailto:<a href=3D"mailto:p=
-hil@philjordan.eu" target=3D"_blank">phil@philjordan.eu</a>&gt;&gt;&gt; wro=
-te:<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &gt;=C2=A0 =
-=C2=A0 =C2=A0 &gt;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &gt;=C2=A0 =
-=C2=A0 =C2=A0 &gt; Hmm. I think if we were to use that, we would<br>
-&gt;=C2=A0 =C2=A0 =C2=A0need to<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0create a new=
-<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &gt;=C2=A0 =
-=C2=A0 =C2=A0 &gt; QemuEvent for every job and destroy it afterward,<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0which seems<=
-br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &gt;=C2=A0 =
-=C2=A0 =C2=A0expensive.<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &gt;=C2=A0 =
-=C2=A0 =C2=A0 &gt; We can&#39;t rule out multiple concurrent jobs being<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0submitted, a=
-nd the<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &gt;=C2=A0 =
-=C2=A0 =C2=A0 &gt; QemuEvent system only supports a single producer as<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0far as I can=
-<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &gt;=C2=A0 =
-=C2=A0 =C2=A0tell.<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &gt;=C2=A0 =
-=C2=A0 =C2=A0 &gt;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &gt;=C2=A0 =
-=C2=A0 =C2=A0 &gt; You can probably sort of hack around it with<br>
-&gt;=C2=A0 =C2=A0 =C2=A0just one<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0QemuEvent by=
-<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &gt;=C2=A0 =
-=C2=A0 =C2=A0 &gt; putting the qemu_event_wait into a loop and turning<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0the job.done=
-<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &gt;=C2=A0 =
-=C2=A0 =C2=A0flag<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &gt;=C2=A0 =
-=C2=A0 =C2=A0 &gt; into an atomic (because it would now need to be<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0checked outs=
-ide the<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &gt;=C2=A0 =
-=C2=A0 =C2=A0 &gt; lock) but this all seems unnecessarily complicated<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0considering =
-the<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &gt;=C2=A0 =
-=C2=A0 =C2=A0 &gt; QemuEvent uses the same mechanism QemuCond/<br>
-&gt;=C2=A0 =C2=A0 =C2=A0QemuMutex<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0internally<b=
-r>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &gt;=C2=A0 =
-=C2=A0 =C2=A0on macOS<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &gt;=C2=A0 =
-=C2=A0 =C2=A0 &gt; (the only platform relevant here), except we<br>
-&gt;=C2=A0 =C2=A0 =C2=A0can use it as<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &gt;=C2=A0 =
-=C2=A0 =C2=A0intended with<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &gt;=C2=A0 =
-=C2=A0 =C2=A0 &gt; QemuCond/QemuMutex rather than having to work<br>
-&gt;=C2=A0 =C2=A0 =C2=A0against the<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &gt;=C2=A0 =
-=C2=A0 =C2=A0abstraction.<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &gt;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &gt;=C2=A0 =
-=C2=A0 =C2=A0I don&#39;t think it&#39;s going to be used concurrently. It<b=
-r>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0would be dif=
-ficult<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &gt;=C2=A0 =
-=C2=A0 =C2=A0to reason even for the framework if it performs memory<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &gt;=C2=A0 =
-=C2=A0 =C2=A0unmapping/mapping/reading operations concurrently.<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &gt;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &gt;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &gt; I&#39;=
-ve just performed a very quick test by wrapping the job<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0submission/<=
-br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &gt; wait i=
-n the 2 mapMemory callbacks and the 1 readMemory<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0callback wit=
-h<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &gt; atomic=
- counters and logging whenever a counter went<br>
-&gt;=C2=A0 =C2=A0 =C2=A0above 1.<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &gt;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &gt;=C2=A0 =
-=C2=A0* Overall, concurrent callbacks across all types were<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0common (many=
- per<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &gt; second=
- when the VM is busy). It&#39;s not exactly a<br>
-&gt;=C2=A0 =C2=A0 =C2=A0&quot;thundering<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0herd&quot; (=
-I<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &gt; never =
-saw &gt;2) but it&#39;s probably not a bad idea to use<br>
-&gt;=C2=A0 =C2=A0 =C2=A0a separate<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &gt; condit=
-ion variable for each job type. (task map,<br>
-&gt;=C2=A0 =C2=A0 =C2=A0surface map,<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0memory read)=
-<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &gt;=C2=A0 =
-=C2=A0* While I did not observe any concurrent memory mapping<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0operations<b=
-r>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &gt; *withi=
-n* a type of memory map (2 task mappings or 2<br>
-&gt;=C2=A0 =C2=A0 =C2=A0surface<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0mappings) I<=
-br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &gt; did se=
-e very occasional concurrent memory *read*<br>
-&gt;=C2=A0 =C2=A0 =C2=A0callbacks.<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0These would,=
-<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &gt; as far=
- as I can tell, not be safe with QemuEvents,<br>
-&gt;=C2=A0 =C2=A0 =C2=A0unless we<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0placed the<b=
-r>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &gt; event =
-inside the job struct and init/destroyed it on every<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0callback<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 &gt; (which=
- seems like excessive overhead).<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0I think we c=
-an tolerate that overhead. init/destroy<br>
-&gt;=C2=A0 =C2=A0 =C2=A0essentially<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0sets the<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0fields in th=
-e data structure and I estimate its total size is<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0about 100<br=
+> +    /*
+> +     * If forward cfi enabled for new priv, restore elp status
+> +     * and clear spelp in mstatus
+> +     */
+> +    if (cpu_get_fcfien(env)) {
+> +        env->elp =3D get_field(env->mstatus, MSTATUS_SPELP);
+> +    }
+> +    env->mstatus =3D set_field(env->mstatus, MSTATUS_SPELP, 0);
+> +
+>      return retpc;
+>  }
 >
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0bytes. It is=
- probably better than waking an irrelevant thread<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0up. I also<b=
-r>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0hope that ke=
-eps the code simple; it&#39;s not worthwhile<br>
-&gt;=C2=A0 =C2=A0 =C2=A0adding code to<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0optimize thi=
-s.<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt;=C2=A0 =C2=A0 =C2=A0At least pthread_cond_{ini=
-t,destroy} and<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt;=C2=A0 =C2=A0 =C2=A0pthread_mutex_{init,destro=
-y} don&#39;t make any syscalls, so yeah<br>
-&gt;=C2=A0 =C2=A0 =C2=A0it&#39;s<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt;=C2=A0 =C2=A0 =C2=A0probably an acceptable ove=
-rhead.<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt; I&#39;ve just experimented with QemuEvents cr=
-eated on-demand and ran<br>
-&gt;=C2=A0 =C2=A0 =C2=A0into<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt; some weird deadlocks, which then made me sit =
-down and think about it<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt; some more. I&#39;ve come to the conclusion th=
-at creating (and crucially,<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt; destroying) QemuEvents on demand in this way =
-is not safe.<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt; Specifically, you must not call qemu_event_de=
-stroy() - which<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt; transitively destroys the mutex and condition=
- variable - unless<br>
-&gt;=C2=A0 =C2=A0 =C2=A0you can<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt; guarantee that the qemu_event_set() call on t=
-hat event object has<br>
-&gt;=C2=A0 =C2=A0 =C2=A0completed.<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt; In qemu_event_set, the event object&#39;s val=
-ue is atomically set to<br>
-&gt;=C2=A0 =C2=A0 =C2=A0EV_SET.<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt; If the previous value was EV_BUSY, qemu_futex=
-_wake() is called.<br>
-&gt;=C2=A0 =C2=A0 =C2=A0All of<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt; this is outside any mutex, however, so apart =
-from memory coherence<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt; (there are barriers) this can race with the w=
-aiting thread.<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt; qemu_event_wait() reads the event&#39;s value=
-. If EV_FREE, it&#39;s<br>
-&gt;=C2=A0 =C2=A0 =C2=A0atomically<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt; set to EV_BUSY. Then the mutex is locked, the=
- value is checked<br>
-&gt;=C2=A0 =C2=A0 =C2=A0again,<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt; and if it&#39;s still EV_BUSY, it waits for t=
-he condition variable,<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt; otherwise the mutex is immediately unlocked a=
-gain. If the trigger<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt; thread&#39;s qemu_event_set() flip to EV_SET =
-occurs between the waiting<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt; thread&#39;s two atomic reads of the value, t=
-he waiting thread will<br>
-&gt;=C2=A0 =C2=A0 =C2=A0never<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt; wait for the condition variable, but the trig=
-ger thread WILL try to<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt; acquire the mutex and signal the condition va=
-riable in<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt; qemu_futex_wake(), by which=C2=A0 time the wa=
-iting thread may have<br>
-&gt;=C2=A0 =C2=A0 =C2=A0advanced<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt; outside of qemu_event_wait().<br>
-&gt; <br>
-&gt;=C2=A0 =C2=A0 =C2=A0Sorry if I&#39;m making a mistake again, but the wa=
-iting thread won&#39;t<br>
-&gt;=C2=A0 =C2=A0 =C2=A0set to<br>
-&gt;=C2=A0 =C2=A0 =C2=A0EV_BUSY unless the value is EV_FREE on the second r=
-ead so the trigger<br>
-&gt;=C2=A0 =C2=A0 =C2=A0thread will not call qemu_futex_wake() if it manage=
-s to set to EV_SET<br>
-&gt;=C2=A0 =C2=A0 =C2=A0before the second read, will it?<br>
-&gt; <br>
-&gt; <br>
-&gt; This sequence of events will cause the problem:<br>
-&gt; <br>
-&gt; WAITER (in qemu_event_wait):<br>
-&gt; value =3D qatomic_load_acquire(&amp;ev-&gt;value);<br>
-&gt; -&gt; EV_FREE<br>
-&gt; <br>
-&gt; TRIGGER (in qemu_event_set):<br>
-&gt; qatomic_read(&amp;ev-&gt;value) !=3D EV_SET<br>
-&gt; -&gt; EV_FREE (condition is false)<br>
-&gt; <br>
-&gt; WAITER:<br>
-&gt; qatomic_cmpxchg(&amp;ev-&gt;value, EV_FREE, EV_BUSY) =3D=3D EV_SET<br>
-&gt; -&gt; cmpxchg returns EV_FREE, condition false.<br>
-&gt; ev-&gt;value =3D=C2=A0 EV_BUSY.<br>
-&gt; &gt; TRIGGER:<br>
-&gt;=C2=A0 =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 int old =3D qatomic_x=
-chg(&amp;ev-&gt;value, EV_SET);<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 smp_mb__after_rmw();<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 if (old =3D=3D EV_BUSY) {<br>
-&gt; -&gt; old =3D EV_BUSY, condition true.<br>
-&gt; ev-&gt;value =3D EV_SET<br>
-&gt; <br>
-&gt; WAITER (in qemu_futex_wait(ev, EV_BUSY)):<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 pthread_mutex_lock(&amp;ev-&gt;lock);<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 if (ev-&gt;value =3D=3D val) {<br>
-&gt; -&gt; false, because value is EV_SET<br>
-&gt; <br>
-&gt; WAITER:<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 pthread_mutex_unlock(&amp;ev-&gt;lock);<br>
-&gt;=C2=A0 =C2=A0=C2=A0=C2=A0 =E2=80=A6<br>
-&gt;=C2=A0 =C2=A0=C2=A0=C2=A0 qemu_event_destroy(&amp;job-&gt;done_event);<=
-br>
-&gt; <br>
-&gt; TRIGGER (in qemu_futex_wake(ev, INT_MAX)):<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 pthread_mutex_lock(&amp;ev-&gt;lock);<br>
-&gt; -&gt; hangs, because mutex has been destroyed<br>
-<br>
-Thanks for clarification. This is very insightful.<br>
-<br>
-<br>
-&gt; <br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt; This is all fine usually, BUT if you destroy =
-the QemuEvent<br>
-&gt;=C2=A0 =C2=A0 =C2=A0immediately<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt; after the qemu_event_wait() call, qemu_futex_=
-wake() may try to<br>
-&gt;=C2=A0 =C2=A0 =C2=A0lock a<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt; mutex that has been destroyed, or signal a co=
-ndition variable<br>
-&gt;=C2=A0 =C2=A0 =C2=A0which has<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt; been destroyed. I don&#39;t see a reasonable =
-way of making this safe<br>
-&gt;=C2=A0 =C2=A0 =C2=A0other<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt; than using long-lived mutexes and condition v=
-ariables. And<br>
-&gt;=C2=A0 =C2=A0 =C2=A0anyway, we<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt; have much, MUCH bigger contention/performance=
- issues coming from<br>
-&gt;=C2=A0 =C2=A0 =C2=A0almost<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt; everything being covered by the BQL. (If waki=
-ng these callbacks<br>
-&gt;=C2=A0 =C2=A0 =C2=A0can even<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt; be considered an issue: I haven&#39;t seen it=
- show up in profiling,<br>
-&gt;=C2=A0 =C2=A0 =C2=A0whereas<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt; BQL contention very much does.)<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt; I&#39;ll submit v5 of this patch set with sep=
-arate condition<br>
-&gt;=C2=A0 =C2=A0 =C2=A0variables for<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt; each job type. This should make the occurrenc=
-e of waking the wrong<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt; thread quite rare, while reasoning about corr=
-ectness is pretty<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt; straightforward. I think that&#39;s good enou=
-gh.<br>
-<br>
-What about using QemuSemaphore then? It does not seem to have the <br>
-problem same with QemuEvent.<br></blockquote><div><br></div><div>Nowhere el=
-se in the code base uses short-lived semaphores, and while I can&#39;t imme=
-diately see a risk (the mutex is held during both post and wait) there migh=
-t be some non-obvious problem with the approach. Internally, the semaphores=
- use condition variables. The solution using condition variables directly a=
-lready works, is safe, relatively easy to reason about, and does not cause =
-any performance issues. There is a tiny inefficiency about waking up a thre=
-ad unnecessarily in the rare case when two callbacks of the same kind occur=
- concurrently. In practice, it&#39;s irrelevant. Thanks to the awkward mism=
-atch of the PVGraphics.framework&#39;s libdispatch based approach and Qemu&=
-#39;s BQL/AIO/BH approach, we are already sending messages to other threads=
- very frequently. This isn&#39;t ideal, but not fixable without drastically=
- reducing the need to acquire the BQL across Qemu.</div><div><br></div><div=
->I do not think it is worth spending even more time trying to fix this part=
- of the code which isn&#39;t broken in the first place.<br></div></div></di=
-v>
-
---000000000000ad82a306258fd765--
+> @@ -349,6 +358,14 @@ target_ulong helper_mret(CPURISCVState *env)
+>      }
+>
+>      riscv_cpu_set_mode(env, prev_priv, prev_virt);
+> +    /*
+> +     * If forward cfi enabled for new priv, restore elp status
+> +     * and clear mpelp in mstatus
+> +     */
+> +    if (cpu_get_fcfien(env)) {
+> +        env->elp =3D get_field(env->mstatus, MSTATUS_MPELP);
+> +    }
+> +    env->mstatus =3D set_field(env->mstatus, MSTATUS_MPELP, 0);
+>
+>      return retpc;
+>  }
+> --
+> 2.45.0
+>
+>
 
