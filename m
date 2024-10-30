@@ -4,82 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 304BDD74954
-	for <qemu-riscv@archiver.kernel.org>; Wed, 30 Oct 2024 03:39:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 91B6FD7495C
+	for <qemu-riscv@archiver.kernel.org>; Wed, 30 Oct 2024 04:10:21 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1t5zY5-0004gD-Qb; Tue, 29 Oct 2024 23:39:09 -0400
+	id 1t601k-0000eK-RS; Wed, 30 Oct 2024 00:09:48 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1t5zY4-0004fr-Tq; Tue, 29 Oct 2024 23:39:08 -0400
-Received: from mail-vk1-xa32.google.com ([2607:f8b0:4864:20::a32])
+ (Exim 4.90_1) (envelope-from <antonb@tenstorrent.com>)
+ id 1t601j-0000do-Kz
+ for qemu-riscv@nongnu.org; Wed, 30 Oct 2024 00:09:47 -0400
+Received: from mail-yb1-xb2b.google.com ([2607:f8b0:4864:20::b2b])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1t5zY3-0003U1-J2; Tue, 29 Oct 2024 23:39:08 -0400
-Received: by mail-vk1-xa32.google.com with SMTP id
- 71dfb90a1353d-50d4797098dso1993920e0c.3; 
- Tue, 29 Oct 2024 20:39:06 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <antonb@tenstorrent.com>)
+ id 1t601f-00079W-U1
+ for qemu-riscv@nongnu.org; Wed, 30 Oct 2024 00:09:46 -0400
+Received: by mail-yb1-xb2b.google.com with SMTP id
+ 3f1490d57ef6-e28fea0f5b8so5823482276.1
+ for <qemu-riscv@nongnu.org>; Tue, 29 Oct 2024 21:09:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1730259546; x=1730864346; darn=nongnu.org;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=t/lV+XwUWAMJSFFLGFaLaELYuAfJgk45jt5oIh0XI7s=;
- b=TYJzXK3fcX1WR7Y4JRsrHuhZB+vj/fbKDmK1H2gn+qKDl55btlZNCcF5Qe2BjDL4ds
- iV7crN1B9Hm8Bk689TOKlXDJ8xMQO/AaDX0I4U4LF2yifp90hqiuq5CwTbhUPphRnJns
- oY68dq/nph0voNSbTcykKAiR46Ha1i4Ak/yHsxMV3H9dACwkZJ34Tot+Q4L2OoEzTeH0
- 6L8meA3O6hzyv/5+iwcsbddkH0aR798EhrVgqhvaSD3pULxAMvXFVD/6D18CKPqXK+gu
- eAQ+crvWdeeE+WuXBRxLT+m0e1TLlsYODTc/c6TN1ZEthigddO+i1EjIbmVvkfjPw0t9
- sPlg==
+ d=tenstorrent.com; s=google; t=1730261382; x=1730866182; darn=nongnu.org;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=dJ/GjVSWNbRUptloZAHxrikX/GBfIaeieJXMVBylzCc=;
+ b=gnyDvFRNHI+HxXTRWj7EFgLNF5gqbg6+mTxUpg+9qXeObFk3GIM0A/arNSEAnwbVA8
+ OKUbpZikbT91Ml7hyiputRiPjFXS22TiDLpGRycvyDo4VYgljJF2aNNOOzKJ4zYDLoQ0
+ XuY2td9GceZSrmYEBeKzVCM0pQsmFdq7YGX7YkTA3ZgxhJQQrHA5DVqjqGN0GuHp3vYs
+ qBAFUxmmERRH0Fe20DDI3IsxDeEPSHH0nok/DUcrorWvyfMs+p/hk1scdoKPUcjKW2Z/
+ BJ/it/dZLFYdp9h+3H2zH5suuVe7K0Phk31T1XiQezpWl0WSIghV2rB77FYTU4BTzy0y
+ OzVg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1730259546; x=1730864346;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=t/lV+XwUWAMJSFFLGFaLaELYuAfJgk45jt5oIh0XI7s=;
- b=Ol2Dw0hcpq2U2ck5UJHHM7axCyQyw0UDXbTvLISRBHfC4nSeFqqrQmx2ar7xN5BONC
- C9tj5ozg9+pZwl6kpjQZkskKjS22jXekoMINsMHSD5Qf7cO6tjsRcoWuAEQ1UCtP4qd6
- 0UvEzl+7f0qQMX5qiDWvbGTL6TFVuNcz1zhuas8IjJ+vuc+wW55DTQaOlInukKbYhNZR
- Eq7Y+SGXpx0+KecyaSJHz8ekjsQXdZMjKzP1w9vHySC8PD918vlMEFuXZg/ap+heePOR
- dRYJfLCpaZhplqhQowaH+QEEr+QxO9Ry+96mSrA4aOsxakqigUMOM9JCAM++bR6qH8MK
- Zz9Q==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVCVXTq5wAkD4taUkbU1eqNJ4/5rheZ91ceSrrFseqEpsqtxGqsT9QYcOtGsva0kBkMBk7uWfHged7U@nongnu.org
-X-Gm-Message-State: AOJu0YywRaLAHQEyD22nUPvQYB+TmPBbSRR9FArUrRlVZ6Inx6y5POBx
- yix563Ld2iEb/znRpx324i46bJmSzoaqi8v79F+jNsqglI1wxsZziF87ZAwklELmWedvn9rH2Z8
- yMs4cecOtdTipeIKin2qk+W+9j14=
-X-Google-Smtp-Source: AGHT+IEvloXoEHO0S4QFLeAVtsh1d3lWOd8ndf15CUyRoVRI5T0tmC3Jitmy4GsHtuAwk/RvIdDGv98qqdC1d9h7tC0=
-X-Received: by 2002:a05:6122:78f:b0:50c:e37a:97e3 with SMTP id
- 71dfb90a1353d-510153410b0mr12761651e0c.11.1730259544805; Tue, 29 Oct 2024
- 20:39:04 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1730261382; x=1730866182;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=dJ/GjVSWNbRUptloZAHxrikX/GBfIaeieJXMVBylzCc=;
+ b=r80SW2q5+3FozTN0gJQLZd1TUwq0w+UHL6zy4q1vGGNKvXWECbXVxL2UFMeTHvxPlx
+ jSN3qq4KlvxTpb6ZM3FtM9TBl2SavW7bS6OhZKAocrDenko879/YW3JVyd2S8InLvuNx
+ UbyukhwpSpyhE0O+KKtaY2fOtp/qCw5OoI2bkRTW9r7yMXyznRRTSrifb6F9gXVdhUTD
+ bWLThylDY+9CfBpSODqa/aRsOWX3bkwHtxChyWTRvLOcSrPa7L47+CAg3Rn/Z6yfQceS
+ fZPURnV99ypl6NWFOvsa2AFdOMuAsYazeLxiS/Uw26JAAzaOjvWGFKHnrlRLScjOa5p5
+ ltQw==
+X-Gm-Message-State: AOJu0YynPVwOe59UMvif9dUQZWr1POt8AyKSkLoNJEQALeNTQIUmxtLQ
+ f6PulzugFwpgslQx4vp/Sbn3dWs92AvJ1aIJ2Etu0w8vrt/Ya0g7OeNzI9AiR9qM0nGIYi2ODXS
+ GgcQ7DLpnDoOJFNP6bX/WbbTikSP5ptsVTrLszw==
+X-Google-Smtp-Source: AGHT+IEII9QJYdl6gvDmZPw0pRVeLT9mhSJdMPVDhstKtW5FXKQjkU58oDGlJ/265sAQ1SPkOsuNhD/0OoiT/z4/X1U=
+X-Received: by 2002:a05:6902:1204:b0:e30:cb01:be0d with SMTP id
+ 3f1490d57ef6-e30cb01bf22mr2934584276.55.1730261382522; Tue, 29 Oct 2024
+ 21:09:42 -0700 (PDT)
 MIME-Version: 1.0
 References: <20241030004146.935656-1-antonb@tenstorrent.com>
-In-Reply-To: <20241030004146.935656-1-antonb@tenstorrent.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Wed, 30 Oct 2024 13:38:38 +1000
-Message-ID: <CAKmqyKMJ0Lu7Jvh2KM7yGjq00uHnAmav9sV7cmWnzrkchQR2xQ@mail.gmail.com>
-Subject: Re: [PATCH] target/riscv: Fix vcompress with rvv_ta_all_1s
-To: Anton Blanchard <antonb@tenstorrent.com>
+ <CAKmqyKMJ0Lu7Jvh2KM7yGjq00uHnAmav9sV7cmWnzrkchQR2xQ@mail.gmail.com>
+In-Reply-To: <CAKmqyKMJ0Lu7Jvh2KM7yGjq00uHnAmav9sV7cmWnzrkchQR2xQ@mail.gmail.com>
+From: Anton Blanchard <antonb@tenstorrent.com>
+Date: Wed, 30 Oct 2024 15:09:31 +1100
+Message-ID: <CAN7m+mCyx78jaMgJDHwdy8ZhxrsP-9jDhjmNrJnn_cffePqJhw@mail.gmail.com>
+Subject: Re: [CAUTION - External Sender] Re: [PATCH] target/riscv: Fix
+ vcompress with rvv_ta_all_1s
+To: Alistair Francis <alistair23@gmail.com>
 Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, 
  Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <alistair.francis@wdc.com>, 
  Bin Meng <bmeng.cn@gmail.com>, Weiwei Li <liwei1518@gmail.com>, 
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
  Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::a32;
- envelope-from=alistair23@gmail.com; helo=mail-vk1-xa32.google.com
-X-Spam_score_int: -17
-X-Spam_score: -1.8
-X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+Content-Type: multipart/alternative; boundary="0000000000001308fd0625a9df88"
+Received-SPF: pass client-ip=2607:f8b0:4864:20::b2b;
+ envelope-from=antonb@tenstorrent.com; helo=mail-yb1-xb2b.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, HTML_MESSAGE=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -95,16 +94,57 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Wed, Oct 30, 2024 at 11:13=E2=80=AFAM Anton Blanchard <antonb@tenstorren=
-t.com> wrote:
+--0000000000001308fd0625a9df88
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+Hi Alistair,
+
+On Wed, Oct 30, 2024 at 2:39=E2=80=AFPM Alistair Francis <alistair23@gmail.=
+com>
+wrote:
+> > vcompress packs vl or less fields into vd, so the tail starts after the
+> > last packed field.
 >
-> vcompress packs vl or less fields into vd, so the tail starts after the
-> last packed field.
+> Is that right?
+>
+> It's different from every other vector command. Although the wording
+> in the spec is very confusing
 
-Is that right?
+It is confusing. This thread has some clarification, and we should probably
+follow up on the suggestion to improve the ISA wording:
 
-It's different from every other vector command. Although the wording
-in the spec is very confusing
+https://github.com/riscv/riscv-v-spec/issues/796
 
-Alistair
+Thanks,
+Anton
+
+--0000000000001308fd0625a9df88
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr">Hi Alistair,<div><br>On Wed, Oct 30, 2024 at 2:39=E2=80=AF=
+PM Alistair Francis &lt;<a href=3D"mailto:alistair23@gmail.com">alistair23@=
+gmail.com</a>&gt; wrote:<br>&gt; &gt; vcompress packs vl or less fields int=
+o vd, so the tail starts after the<br>&gt; &gt; last packed field.<br>&gt;<=
+br>&gt; Is that right?<br>&gt;<br>&gt; It&#39;s different from every other =
+vector command. Although the wording<br>&gt; in the spec is very confusing<=
+br><br></div><div><div class=3D"gmail-gs" style=3D"margin:0px;min-width:0px=
+;padding:0px 0px 20px;width:initial;font-family:&quot;Google Sans&quot;,Rob=
+oto,RobotoDraft,Helvetica,Arial,sans-serif;font-size:medium"><div class=3D"=
+gmail-"><div id=3D"gmail-:3ji" class=3D"gmail-ii gmail-gt" style=3D"directi=
+on:ltr;margin:8px 0px 0px;padding:0px;font-size:0.875rem;overflow-x:hidden"=
+><div id=3D"gmail-:3io" class=3D"gmail-a3s gmail-aiL" style=3D"direction:lt=
+r;font-variant-numeric:normal;font-variant-east-asian:normal;font-variant-a=
+lternates:normal;font-size-adjust:none;font-kerning:auto;font-feature-setti=
+ngs:normal;font-stretch:normal;font-size:small;line-height:1.5;font-family:=
+Arial,Helvetica,sans-serif;overflow:auto hidden"><div dir=3D"ltr"><div>It i=
+s confusing. This thread has some clarification, and we should probably</di=
+v><div>follow up on the suggestion to improve the ISA wording:</div><div><b=
+r></div><div><a href=3D"https://github.com/riscv/riscv-v-spec/issues/796" t=
+arget=3D"_blank">https://github.com/riscv/riscv-v-spec/issues/796</a></div>=
+<font color=3D"#888888"><div><br></div><div>Thanks,</div><div>Anton</div></=
+font></div></div></div></div></div></div></div>
+
+--0000000000001308fd0625a9df88--
 
