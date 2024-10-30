@@ -4,83 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 47D88D6B6AE
-	for <qemu-riscv@archiver.kernel.org>; Wed, 30 Oct 2024 16:38:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C2FBCD6B6B3
+	for <qemu-riscv@archiver.kernel.org>; Wed, 30 Oct 2024 16:55:04 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1t6BhQ-0008Gu-Od; Wed, 30 Oct 2024 12:37:36 -0400
+	id 1t6ByG-0004hI-0M; Wed, 30 Oct 2024 12:55:00 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1t6Bh8-0008Dx-4G
- for qemu-riscv@nongnu.org; Wed, 30 Oct 2024 12:37:21 -0400
-Received: from mail-pl1-x630.google.com ([2607:f8b0:4864:20::630])
+ id 1t6By9-0004gn-8a
+ for qemu-riscv@nongnu.org; Wed, 30 Oct 2024 12:54:53 -0400
+Received: from mail-pg1-x52c.google.com ([2607:f8b0:4864:20::52c])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1t6Bh6-0005a7-EJ
- for qemu-riscv@nongnu.org; Wed, 30 Oct 2024 12:37:17 -0400
-Received: by mail-pl1-x630.google.com with SMTP id
- d9443c01a7336-20caea61132so214685ad.2
- for <qemu-riscv@nongnu.org>; Wed, 30 Oct 2024 09:37:16 -0700 (PDT)
+ id 1t6By7-0007im-4p
+ for qemu-riscv@nongnu.org; Wed, 30 Oct 2024 12:54:53 -0400
+Received: by mail-pg1-x52c.google.com with SMTP id
+ 41be03b00d2f7-7edb3f93369so86725a12.1
+ for <qemu-riscv@nongnu.org>; Wed, 30 Oct 2024 09:54:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1730306235; x=1730911035; darn=nongnu.org;
+ d=ventanamicro.com; s=google; t=1730307288; x=1730912088; darn=nongnu.org;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=hMiLNWIGV7NSnAU7TASNWBFCWHlLdkbPLiy10xQAdAI=;
- b=Dsl8rKtYdHGdwy6ideCcAYwcwXBIyJTqao8rFPOLUNc5hZFIx+F1DUyVNXEhw3YcoB
- 3iAot+6rVXpM3h3S/Cj8tz//pJUMTOgb9lUpNaBTJ0979zA/64pH2ls4zvd9SZhOz+Em
- xGuEsscBPC9L7ACNLfESeY8aVdmrg7H6jwHtqDLb4EqFcvM5Q/UJY+/kBqTQqYMBer8y
- nab/Obk1AvI2xxz4Oc9CwNuBtWhXDS0Yi989YhHH3N5no4np3DY/foPeBnzLFVn49AEj
- M39DDG4CjqqXQEAFsMkHKI52aCUUAdYT2+KGyke/yIXpVeeRfmVNt0HvxVedY8Iqhb+z
- Isqg==
+ bh=5l1HC9wXAoGEGTsKKtyor2plsqSVFcG8AcwK6ep5Bwo=;
+ b=i535LRAqSIbzodOX0x6SeKBzgqTw5OB5/V3l1vwN/om01kzNH1EZX5ujPSq5ilUYy0
+ ObRN8koG1n/NQr+HTo0EcIaQwktJEjjVln90+n4VxpQn8eovATWrpCgx6BrCTX9wN43v
+ Lwg7Q5+S6IiAmM+Tqvk99L/+fKPGPenOqvaB60dZjygIJ/LW+hTBa8o5mJwWJXs856NA
+ 3ylgmzBQN+f5s65cOOOXIul+eXLUGhhJqnuGwnZu+Ocw/N54k8+0w4IBFokvPVSKCoFS
+ sE/lF8xF8eXeRENgIBxM2Vc7drhxRv/N3a3qYbhCZgLWzVOKBLKcPIJiPE+roxWUEIID
+ m4mA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1730306235; x=1730911035;
+ d=1e100.net; s=20230601; t=1730307288; x=1730912088;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=hMiLNWIGV7NSnAU7TASNWBFCWHlLdkbPLiy10xQAdAI=;
- b=Ji7fBh65GLc3ELEE1BqP9R9I/zwSxS4hfX9zhCN4+Jfgn/KGIyn+sCoJ5rmrs3Dzec
- tYALt4wjqnB1kD9gmszimcO4vhItoMHWpztZvGMXHvqmV/abCbmlmF5EyqOevYSSD5Ic
- ne0Hb7bpgZNgAjMM6N/+dwLIAvB1RJ2FUWaCE6CODwOYkvzAS90sSMwR2RAMCjb77+1I
- XTdtqvkXw4462zFwXyX1bdqB3zs6QOlrCUf9ZVko7uHrN/CvgKytv1eyqyKQIiuasygi
- UKPLHKsOR6mCdsbNge57WD7waQeD3krSdfc8zaXnLmZu2LS3y+hSp8teeBlF+vHKu0lq
- GaNw==
+ bh=5l1HC9wXAoGEGTsKKtyor2plsqSVFcG8AcwK6ep5Bwo=;
+ b=P7e0ybn1aeZPXEk+RwAh/aCJCTV2Ya1OZx2He1NzRpQB54FNY3YVa0JNGBsx8WqNH/
+ F1OfWjE4YC+rMOOxaB27KyML6OTh1Gi4ZsK46hWXjeDTTbx/47n8T76Fj7wuDEUQzq00
+ Vu601j+n8ujgfeCPWXz/kv5bkPDkRhk5NprBGjvWzxcH9A/LTDxZkIfkh38aNORPVGKG
+ 8whFAxoVkGLXWlLjwL2r0wwxWMhqumd+uAazQtnn79eo/0AeUKz8GeO0oM4AeDcv5lah
+ g8vo8s9Ohb6gVwtKNe6nOb7qNhFWEW7AT/PmMSbhagPg8jfseWcIQu2MtbMfK1+6MK+O
+ Lvvg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUtgBtgGS8Lzhlp34kQYPmNYGRjdB4NfuvSA6p2GMI8VZqlf9EPFRI6c94um5g4/AuTINNkNI9dXLal@nongnu.org
-X-Gm-Message-State: AOJu0YykrqAhPqLi2o6fuMN8QrNdfnlzlREmyR4Gs2GjBHrXqfZJ5Sdp
- z2312epjUGn+yzl1r8/xo/8TciRJQ/d5JhEDEmt6mQiQE6pn6gk71lZzM6HPcOk=
-X-Google-Smtp-Source: AGHT+IGT+bk8x385PUKg5L/+PH/MUZqFRLFP4LP0v0+IW5qWzBjN47w8b0vqfuAH06jEjSHR9LybIw==
-X-Received: by 2002:a17:903:2343:b0:20c:716c:5c2 with SMTP id
- d9443c01a7336-210c68995d7mr220835845ad.13.1730306234672; 
- Wed, 30 Oct 2024 09:37:14 -0700 (PDT)
+ AJvYcCXO5LRcOWjFkFxAljpdhV/0155+RW0xUPXYsZULLxbeDMmbMWIc9yFzQ4nLd7aLK8x/S5fwQ/Tuzexc@nongnu.org
+X-Gm-Message-State: AOJu0YypCipRGOf6dv/ncxr2fA2vHeSmZb98A06RUGNBTzROtssb8PWG
+ yd5YQkbDxoc6acDG1i78t4t+Aqki0O+dyZVSfE6Tf5amdjIMbrm9q7W5dqZEEWI=
+X-Google-Smtp-Source: AGHT+IHInl5n/zNM9gOW7Ge3NxNY67VpGckdhwDeLii3gFbB7E0J8Mh+SkAwCuEspR6fqJ21KdwNBg==
+X-Received: by 2002:a05:6a21:e92:b0:1d9:1ceb:a4de with SMTP id
+ adf61e73a8af0-1d9a8402f18mr20955321637.27.1730307288098; 
+ Wed, 30 Oct 2024 09:54:48 -0700 (PDT)
 Received: from [192.168.68.110] ([191.8.109.222])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-210f691eda1sm16658815ad.196.2024.10.30.09.37.10
+ 41be03b00d2f7-7edc8660ddesm9294980a12.16.2024.10.30.09.54.44
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 30 Oct 2024 09:37:14 -0700 (PDT)
-Message-ID: <25b14d26-0951-4079-af3f-251a9a821af9@ventanamicro.com>
-Date: Wed, 30 Oct 2024 13:37:09 -0300
+ Wed, 30 Oct 2024 09:54:47 -0700 (PDT)
+Message-ID: <e1924094-f3b4-493e-afae-ac635a32d28e@ventanamicro.com>
+Date: Wed, 30 Oct 2024 13:54:42 -0300
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v6 7/7] target/riscv: Inline unit-stride ld/st and
- corresponding functions for performance
-To: Max Chou <max.chou@sifive.com>, qemu-devel@nongnu.org,
- qemu-riscv@nongnu.org
-Cc: Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bmeng.cn@gmail.com>,
- Weiwei Li <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- richard.henderson@linaro.org, negge@google.com
-References: <20240918171412.150107-1-max.chou@sifive.com>
- <20240918171412.150107-8-max.chou@sifive.com>
+Subject: Re: [PATCH v9 0/6] Pointer Masking update for Zjpm v1.0
+To: Alexey Baturo <baturo.alexey@gmail.com>
+Cc: richard.henderson@linaro.org, space.monkey.delivers@gmail.com,
+ palmer@dabbelt.com, Alistair.Francis@wdc.com, sagark@eecs.berkeley.edu,
+ kbastian@mail.uni-paderborn.de, qemu-devel@nongnu.org, qemu-riscv@nongnu.org
+References: <20240511101053.1875596-1-me@deliversmonkey.space>
+ <d4241c7b-ae97-4dc1-bc60-5f0eed58d3a5@ventanamicro.com>
+ <CAFukJ-D081Jta287S5XKtEch3CyzgFxJ-SQGF-VyU4j165DdBw@mail.gmail.com>
 Content-Language: en-US
 From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <20240918171412.150107-8-max.chou@sifive.com>
+In-Reply-To: <CAFukJ-D081Jta287S5XKtEch3CyzgFxJ-SQGF-VyU4j165DdBw@mail.gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::630;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pl1-x630.google.com
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::52c;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pg1-x52c.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -105,88 +103,116 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 
 
-On 9/18/24 2:14 PM, Max Chou wrote:
-> In the vector unit-stride load/store helper functions. the vext_ldst_us
-> & vext_ldst_whole functions corresponding most of the execution time.
-> Inline the functions can avoid the function call overhead to improve the
-> helper function performance.
+On 10/30/24 11:17 AM, Alexey Baturo wrote:
+> Hi Daniel,
 > 
-> Signed-off-by: Max Chou <max.chou@sifive.com>
-> Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
-> ---
+> Let's try to push it before EOY.
+> I'm planning to start working on it in the first half of November.
+> Does that work for you?
 
-Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Fine by me. We can add it to Alistair's tree for 10.0 to be upstreamed in January 2025.
 
->   target/riscv/vector_helper.c | 18 +++++++++++-------
->   1 file changed, 11 insertions(+), 7 deletions(-)
+Thanks,
+
+Daniel
+
 > 
-> diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
-> index 654d5e111f3..0d5ed950486 100644
-> --- a/target/riscv/vector_helper.c
-> +++ b/target/riscv/vector_helper.c
-> @@ -152,14 +152,16 @@ typedef void vext_ldst_elem_fn_tlb(CPURISCVState *env, abi_ptr addr,
->   typedef void vext_ldst_elem_fn_host(void *vd, uint32_t idx, void *host);
->   
->   #define GEN_VEXT_LD_ELEM(NAME, ETYPE, H, LDSUF)             \
-> -static void NAME##_tlb(CPURISCVState *env, abi_ptr addr,    \
-> +static inline QEMU_ALWAYS_INLINE                            \
-> +void NAME##_tlb(CPURISCVState *env, abi_ptr addr,           \
->                   uint32_t idx, void *vd, uintptr_t retaddr)  \
->   {                                                           \
->       ETYPE *cur = ((ETYPE *)vd + H(idx));                    \
->       *cur = cpu_##LDSUF##_data_ra(env, addr, retaddr);       \
->   }                                                           \
->                                                               \
-> -static void NAME##_host(void *vd, uint32_t idx, void *host) \
-> +static inline QEMU_ALWAYS_INLINE                            \
-> +void NAME##_host(void *vd, uint32_t idx, void *host)        \
->   {                                                           \
->       ETYPE *cur = ((ETYPE *)vd + H(idx));                    \
->       *cur = (ETYPE)LDSUF##_p(host);                          \
-> @@ -171,14 +173,16 @@ GEN_VEXT_LD_ELEM(lde_w, uint32_t, H4, ldl)
->   GEN_VEXT_LD_ELEM(lde_d, uint64_t, H8, ldq)
->   
->   #define GEN_VEXT_ST_ELEM(NAME, ETYPE, H, STSUF)             \
-> -static void NAME##_tlb(CPURISCVState *env, abi_ptr addr,    \
-> +static inline QEMU_ALWAYS_INLINE                            \
-> +void NAME##_tlb(CPURISCVState *env, abi_ptr addr,           \
->                   uint32_t idx, void *vd, uintptr_t retaddr)  \
->   {                                                           \
->       ETYPE data = *((ETYPE *)vd + H(idx));                   \
->       cpu_##STSUF##_data_ra(env, addr, data, retaddr);        \
->   }                                                           \
->                                                               \
-> -static void NAME##_host(void *vd, uint32_t idx, void *host) \
-> +static inline QEMU_ALWAYS_INLINE                            \
-> +void NAME##_host(void *vd, uint32_t idx, void *host)        \
->   {                                                           \
->       ETYPE data = *((ETYPE *)vd + H(idx));                   \
->       STSUF##_p(host, data);                                  \
-> @@ -317,7 +321,7 @@ GEN_VEXT_ST_STRIDE(vsse64_v, int64_t, ste_d_tlb)
->    */
->   
->   /* unmasked unit-stride load and store operation */
-> -static void
-> +static inline QEMU_ALWAYS_INLINE void
->   vext_page_ldst_us(CPURISCVState *env, void *vd, target_ulong addr,
->                     uint32_t elems, uint32_t nf, uint32_t max_elems,
->                     uint32_t log2_esz, bool is_load, int mmu_index,
-> @@ -369,7 +373,7 @@ vext_page_ldst_us(CPURISCVState *env, void *vd, target_ulong addr,
->       }
->   }
->   
-> -static void
-> +static inline QEMU_ALWAYS_INLINE void
->   vext_ldst_us(void *vd, target_ulong base, CPURISCVState *env, uint32_t desc,
->                vext_ldst_elem_fn_tlb *ldst_tlb,
->                vext_ldst_elem_fn_host *ldst_host, uint32_t log2_esz,
-> @@ -756,7 +760,7 @@ GEN_VEXT_LDFF(vle64ff_v, int64_t, lde_d_tlb, lde_d_host)
->   /*
->    * load and store whole register instructions
->    */
-> -static void
-> +static inline QEMU_ALWAYS_INLINE void
->   vext_ldst_whole(void *vd, target_ulong base, CPURISCVState *env, uint32_t desc,
->                   vext_ldst_elem_fn_tlb *ldst_tlb,
->                   vext_ldst_elem_fn_host *ldst_host, uint32_t log2_esz,
+> Thanks
+> 
+> вт, 29 окт. 2024 г. в 20:40, Daniel Henrique Barboza <dbarboza@ventanamicro.com <mailto:dbarboza@ventanamicro.com>>:
+> 
+>     Hi Alexey,
+> 
+> 
+>     Do you have plans to post a new version of this series? Aside from a few comments
+>     it seems like this was almost there.
+> 
+>     We might not be able to get it merged in time for this current release (code freeze
+>     is Nov 5th) but we can get it in Alistair's tree for the next release.
+> 
+> 
+>     Thanks,
+> 
+>     Daniel
+> 
+>     On 5/11/24 7:10 AM, Alexey Baturo wrote:
+>      > From: Alexey Baturo <baturo.alexey@gmail.com <mailto:baturo.alexey@gmail.com>>
+>      >
+>      > Hi,
+>      >
+>      > It looks like Pointer Masking spec has reached v1.0 and been frozen,
+>      > rebasing on riscv-to-apply.next branch and resubmitting patches.
+>      >
+>      > Thanks.
+>      >
+>      > [v8]:
+>      > Rebasing patches on current qemu branch and resubmitting them.
+>      >
+>      >
+>      > [v7]:
+>      > I'm terribly sorry, but previous rebase went wrong and somehow I missed it.
+>      > This time I double-checked rebased version.
+>      > This patch series is properly rebased on https://github.com/alistair23/qemu/tree/riscv-to-apply.next <https://github.com/alistair23/qemu/tree/riscv-to-apply.next>
+>      >
+>      > [v6]:
+>      > This patch series is rebased on https://github.com/alistair23/qemu/tree/riscv-to-apply.next <https://github.com/alistair23/qemu/tree/riscv-to-apply.next>
+>      >
+>      > [v5]:
+>      > This patch series targets Zjpm v0.8 extension.
+>      > The spec itself could be found here: https://github.com/riscv/riscv-j-extension/blob/8088461d8d66a7676872b61c908cbeb7cf5c5d1d/zjpm-spec.pdf <https://github.com/riscv/riscv-j-extension/blob/8088461d8d66a7676872b61c908cbeb7cf5c5d1d/zjpm-spec.pdf>
+>      > This patch series is updated after the suggested comments:
+>      > - add "x-" to the extension names to indicate experimental
+>      >
+>      > [v4]:
+>      > Patch series updated after the suggested comments:
+>      > - removed J-letter extension as it's unused
+>      > - renamed and fixed function to detect if address should be sign-extended
+>      > - zeroed unused context variables and moved computation logic to another patch
+>      > - bumped pointer masking version_id and minimum_version_id by 1
+>      >
+>      > [v3]:
+>      > There patches are updated after Richard's comments:
+>      > - moved new tb flags to the end
+>      > - used tcg_gen_(s)extract to get the final address
+>      > - properly handle CONFIG_USER_ONLY
+>      >
+>      > [v2]:
+>      > As per Richard's suggestion I made pmm field part of tb_flags.
+>      > It allowed to get rid of global variable to store pmlen.
+>      > Also it allowed to simplify all the machinery around it.
+>      >
+>      > [v1]:
+>      > It looks like Zjpm v0.8 is almost frozen and we don't expect it change drastically anymore.
+>      > Compared to the original implementation with explicit base and mask CSRs, we now only have
+>      > several fixed options for number of masked bits which are set using existing CSRs.
+>      > The changes have been tested with handwritten assembly tests and LLVM HWASAN
+>      > test suite.
+>      >
+>      > Alexey Baturo (6):
+>      >    target/riscv: Remove obsolete pointer masking  extension code.
+>      >    target/riscv: Add new CSR fields for S{sn,mn,m}pm extensions as part
+>      >      of Zjpm v0.8
+>      >    target/riscv: Add helper functions to calculate current number of
+>      >      masked bits for pointer masking
+>      >    target/riscv: Add pointer masking tb flags
+>      >    target/riscv: Update address modify functions to take into account
+>      >      pointer masking
+>      >    target/riscv: Enable updates for pointer masking variables and thus
+>      >      enable pointer masking extension
+>      >
+>      >   target/riscv/cpu.c           |  21 +--
+>      >   target/riscv/cpu.h           |  46 +++--
+>      >   target/riscv/cpu_bits.h      |  90 +---------
+>      >   target/riscv/cpu_cfg.h       |   3 +
+>      >   target/riscv/cpu_helper.c    |  97 +++++-----
+>      >   target/riscv/csr.c           | 337 ++---------------------------------
+>      >   target/riscv/machine.c       |  20 +--
+>      >   target/riscv/pmp.c           |  13 +-
+>      >   target/riscv/pmp.h           |  11 +-
+>      >   target/riscv/tcg/tcg-cpu.c   |   5 +-
+>      >   target/riscv/translate.c     |  46 ++---
+>      >   target/riscv/vector_helper.c |  15 +-
+>      >   12 files changed, 158 insertions(+), 546 deletions(-)
+>      >
+> 
 
