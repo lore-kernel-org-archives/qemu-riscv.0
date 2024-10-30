@@ -4,88 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C2FBCD6B6B3
-	for <qemu-riscv@archiver.kernel.org>; Wed, 30 Oct 2024 16:55:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A1BC2D6B6B7
+	for <qemu-riscv@archiver.kernel.org>; Wed, 30 Oct 2024 17:55:02 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1t6ByG-0004hI-0M; Wed, 30 Oct 2024 12:55:00 -0400
+	id 1t6Cu4-0007Bj-BG; Wed, 30 Oct 2024 13:54:44 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1t6By9-0004gn-8a
- for qemu-riscv@nongnu.org; Wed, 30 Oct 2024 12:54:53 -0400
-Received: from mail-pg1-x52c.google.com ([2607:f8b0:4864:20::52c])
+ id 1t6Cu2-0007BU-Ns
+ for qemu-riscv@nongnu.org; Wed, 30 Oct 2024 13:54:42 -0400
+Received: from mail-pj1-x1029.google.com ([2607:f8b0:4864:20::1029])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1t6By7-0007im-4p
- for qemu-riscv@nongnu.org; Wed, 30 Oct 2024 12:54:53 -0400
-Received: by mail-pg1-x52c.google.com with SMTP id
- 41be03b00d2f7-7edb3f93369so86725a12.1
- for <qemu-riscv@nongnu.org>; Wed, 30 Oct 2024 09:54:49 -0700 (PDT)
+ id 1t6Cu0-0006fV-Ty
+ for qemu-riscv@nongnu.org; Wed, 30 Oct 2024 13:54:42 -0400
+Received: by mail-pj1-x1029.google.com with SMTP id
+ 98e67ed59e1d1-2e2cc47f1d7so116653a91.0
+ for <qemu-riscv@nongnu.org>; Wed, 30 Oct 2024 10:54:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1730307288; x=1730912088; darn=nongnu.org;
+ d=ventanamicro.com; s=google; t=1730310878; x=1730915678; darn=nongnu.org;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=5l1HC9wXAoGEGTsKKtyor2plsqSVFcG8AcwK6ep5Bwo=;
- b=i535LRAqSIbzodOX0x6SeKBzgqTw5OB5/V3l1vwN/om01kzNH1EZX5ujPSq5ilUYy0
- ObRN8koG1n/NQr+HTo0EcIaQwktJEjjVln90+n4VxpQn8eovATWrpCgx6BrCTX9wN43v
- Lwg7Q5+S6IiAmM+Tqvk99L/+fKPGPenOqvaB60dZjygIJ/LW+hTBa8o5mJwWJXs856NA
- 3ylgmzBQN+f5s65cOOOXIul+eXLUGhhJqnuGwnZu+Ocw/N54k8+0w4IBFokvPVSKCoFS
- sE/lF8xF8eXeRENgIBxM2Vc7drhxRv/N3a3qYbhCZgLWzVOKBLKcPIJiPE+roxWUEIID
- m4mA==
+ bh=Q0/AP20vmL68Bvii795PVUGfoyosM6ikp5RYWOpNf6c=;
+ b=ZUn77vVqQMfwQG2NsWdU1tGbL7sKC9+bBUwqN0MV9GF7TaaRy1FZhYxJNVC+rMX1Rs
+ 3pbSJiChEKn/aPHMfJ4pMzKP6AyaxWzeL8wym0k6crhEiG1HWOCq/X6QTp1QLz1UJpyo
+ MQNUV3lzll2ccHCitKGdC1yMupRn3qxIDkZuoROwrAnTehmidIb73mSHRkKoBb0rlORz
+ UMFQm8LARsWUD5hozINRvaT4c9DI5L8v90OoSXAnUChKA+qfXorqLRuy01J0giAQMm/r
+ mSRum/mAfgo0Za35acZeGvVycgJ3JTI8+kyDZpmCxVd5BC5sNdSfpirDHX8+TzE0hPMw
+ QwkQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1730307288; x=1730912088;
+ d=1e100.net; s=20230601; t=1730310878; x=1730915678;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=5l1HC9wXAoGEGTsKKtyor2plsqSVFcG8AcwK6ep5Bwo=;
- b=P7e0ybn1aeZPXEk+RwAh/aCJCTV2Ya1OZx2He1NzRpQB54FNY3YVa0JNGBsx8WqNH/
- F1OfWjE4YC+rMOOxaB27KyML6OTh1Gi4ZsK46hWXjeDTTbx/47n8T76Fj7wuDEUQzq00
- Vu601j+n8ujgfeCPWXz/kv5bkPDkRhk5NprBGjvWzxcH9A/LTDxZkIfkh38aNORPVGKG
- 8whFAxoVkGLXWlLjwL2r0wwxWMhqumd+uAazQtnn79eo/0AeUKz8GeO0oM4AeDcv5lah
- g8vo8s9Ohb6gVwtKNe6nOb7qNhFWEW7AT/PmMSbhagPg8jfseWcIQu2MtbMfK1+6MK+O
- Lvvg==
+ bh=Q0/AP20vmL68Bvii795PVUGfoyosM6ikp5RYWOpNf6c=;
+ b=BxnETq8RFuulT/Z9Y1dUaNzU+umV2bQ4CH0VfnLe49dnfJo/UZo+H8H3yq73q1av8g
+ uSQM3y5TfRwBA7OiaTksX1+vn02Ojy/x/v8xumUmbt4tUzdvX06aAx264LFnzmv8zGLI
+ VumYesiG4CrUtOydmbn35WGWll/WwMDVM42heUZmwHN4ra7eIv1ftQW0gnhvXvevs15G
+ khiY+mjwKqMPv5/mrVHRAYRBItheWVhVlwU138d8T4xhzch1kysfj3y5yMtnGbNYsD/S
+ MhmRQ+BEyzWmAyRIzHZsC2AApilMqBZanHmJ0r38E74iZq0BMv0QhwIW/3sAviM5tS6q
+ KsDw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXO5LRcOWjFkFxAljpdhV/0155+RW0xUPXYsZULLxbeDMmbMWIc9yFzQ4nLd7aLK8x/S5fwQ/Tuzexc@nongnu.org
-X-Gm-Message-State: AOJu0YypCipRGOf6dv/ncxr2fA2vHeSmZb98A06RUGNBTzROtssb8PWG
- yd5YQkbDxoc6acDG1i78t4t+Aqki0O+dyZVSfE6Tf5amdjIMbrm9q7W5dqZEEWI=
-X-Google-Smtp-Source: AGHT+IHInl5n/zNM9gOW7Ge3NxNY67VpGckdhwDeLii3gFbB7E0J8Mh+SkAwCuEspR6fqJ21KdwNBg==
-X-Received: by 2002:a05:6a21:e92:b0:1d9:1ceb:a4de with SMTP id
- adf61e73a8af0-1d9a8402f18mr20955321637.27.1730307288098; 
- Wed, 30 Oct 2024 09:54:48 -0700 (PDT)
+ AJvYcCUGdMDny532MsD5dNlVdtOJkkWgDWRLp+yfej/PElLYbY6G5Jwk+OZz7XcgjKxyHSobTQq9PbDGKOOG@nongnu.org
+X-Gm-Message-State: AOJu0YzuNyFXWeHe8LWjruA8t8FKVM6NJseyRx92mSylgKgivP15J2GB
+ H5RbHODKZbHpdn2Ez/u7RVuev1mfvfwvpDf6/HTBkmnki9F+QQuI+P1LDoGBRkU=
+X-Google-Smtp-Source: AGHT+IFJHPbyk9ode4EwAEDiOqeVY6+4w1Lmcz3JsxVk6B1slBGlWAYiBrP1dPNdDmqDlcQusokpzw==
+X-Received: by 2002:a17:90b:2703:b0:2e2:b94c:d6a2 with SMTP id
+ 98e67ed59e1d1-2e9221928e3mr10609293a91.0.1730310878442; 
+ Wed, 30 Oct 2024 10:54:38 -0700 (PDT)
 Received: from [192.168.68.110] ([191.8.109.222])
  by smtp.gmail.com with ESMTPSA id
- 41be03b00d2f7-7edc8660ddesm9294980a12.16.2024.10.30.09.54.44
+ 98e67ed59e1d1-2e92fa634b3sm2096213a91.27.2024.10.30.10.54.35
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 30 Oct 2024 09:54:47 -0700 (PDT)
-Message-ID: <e1924094-f3b4-493e-afae-ac635a32d28e@ventanamicro.com>
-Date: Wed, 30 Oct 2024 13:54:42 -0300
+ Wed, 30 Oct 2024 10:54:38 -0700 (PDT)
+Message-ID: <7a1640d3-e738-4044-b37b-ba05fbbf4111@ventanamicro.com>
+Date: Wed, 30 Oct 2024 14:54:34 -0300
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v9 0/6] Pointer Masking update for Zjpm v1.0
-To: Alexey Baturo <baturo.alexey@gmail.com>
-Cc: richard.henderson@linaro.org, space.monkey.delivers@gmail.com,
- palmer@dabbelt.com, Alistair.Francis@wdc.com, sagark@eecs.berkeley.edu,
- kbastian@mail.uni-paderborn.de, qemu-devel@nongnu.org, qemu-riscv@nongnu.org
-References: <20240511101053.1875596-1-me@deliversmonkey.space>
- <d4241c7b-ae97-4dc1-bc60-5f0eed58d3a5@ventanamicro.com>
- <CAFukJ-D081Jta287S5XKtEch3CyzgFxJ-SQGF-VyU4j165DdBw@mail.gmail.com>
+Subject: Re: [PATCH v2] target/riscv: Fix vcompress with rvv_ta_all_1s
+To: Anton Blanchard <antonb@tenstorrent.com>, qemu-riscv@nongnu.org,
+ qemu-devel@nongnu.org
+Cc: Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bmeng.cn@gmail.com>,
+ Weiwei Li <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
+References: <20241030043538.939712-1-antonb@tenstorrent.com>
 Content-Language: en-US
 From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <CAFukJ-D081Jta287S5XKtEch3CyzgFxJ-SQGF-VyU4j165DdBw@mail.gmail.com>
+In-Reply-To: <20241030043538.939712-1-antonb@tenstorrent.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::52c;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pg1-x52c.google.com
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1029;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pj1-x1029.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -103,116 +102,32 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 
 
-On 10/30/24 11:17 AM, Alexey Baturo wrote:
-> Hi Daniel,
+On 10/30/24 1:35 AM, Anton Blanchard wrote:
+> vcompress packs vl or less fields into vd, so the tail starts after the
+> last packed field. This could be more clearly expressed in the ISA,
+> but for now this thread helps to explain it:
 > 
-> Let's try to push it before EOY.
-> I'm planning to start working on it in the first half of November.
-> Does that work for you?
+> https://github.com/riscv/riscv-v-spec/issues/796
+> 
+> Signed-off-by: Anton Blanchard <antonb@tenstorrent.com>
+> ---
 
-Fine by me. We can add it to Alistair's tree for 10.0 to be upstreamed in January 2025.
+Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 
-Thanks,
-
-Daniel
-
+>   target/riscv/vector_helper.c | 2 +-
+>   1 file changed, 1 insertion(+), 1 deletion(-)
 > 
-> Thanks
-> 
-> вт, 29 окт. 2024 г. в 20:40, Daniel Henrique Barboza <dbarboza@ventanamicro.com <mailto:dbarboza@ventanamicro.com>>:
-> 
->     Hi Alexey,
-> 
-> 
->     Do you have plans to post a new version of this series? Aside from a few comments
->     it seems like this was almost there.
-> 
->     We might not be able to get it merged in time for this current release (code freeze
->     is Nov 5th) but we can get it in Alistair's tree for the next release.
-> 
-> 
->     Thanks,
-> 
->     Daniel
-> 
->     On 5/11/24 7:10 AM, Alexey Baturo wrote:
->      > From: Alexey Baturo <baturo.alexey@gmail.com <mailto:baturo.alexey@gmail.com>>
->      >
->      > Hi,
->      >
->      > It looks like Pointer Masking spec has reached v1.0 and been frozen,
->      > rebasing on riscv-to-apply.next branch and resubmitting patches.
->      >
->      > Thanks.
->      >
->      > [v8]:
->      > Rebasing patches on current qemu branch and resubmitting them.
->      >
->      >
->      > [v7]:
->      > I'm terribly sorry, but previous rebase went wrong and somehow I missed it.
->      > This time I double-checked rebased version.
->      > This patch series is properly rebased on https://github.com/alistair23/qemu/tree/riscv-to-apply.next <https://github.com/alistair23/qemu/tree/riscv-to-apply.next>
->      >
->      > [v6]:
->      > This patch series is rebased on https://github.com/alistair23/qemu/tree/riscv-to-apply.next <https://github.com/alistair23/qemu/tree/riscv-to-apply.next>
->      >
->      > [v5]:
->      > This patch series targets Zjpm v0.8 extension.
->      > The spec itself could be found here: https://github.com/riscv/riscv-j-extension/blob/8088461d8d66a7676872b61c908cbeb7cf5c5d1d/zjpm-spec.pdf <https://github.com/riscv/riscv-j-extension/blob/8088461d8d66a7676872b61c908cbeb7cf5c5d1d/zjpm-spec.pdf>
->      > This patch series is updated after the suggested comments:
->      > - add "x-" to the extension names to indicate experimental
->      >
->      > [v4]:
->      > Patch series updated after the suggested comments:
->      > - removed J-letter extension as it's unused
->      > - renamed and fixed function to detect if address should be sign-extended
->      > - zeroed unused context variables and moved computation logic to another patch
->      > - bumped pointer masking version_id and minimum_version_id by 1
->      >
->      > [v3]:
->      > There patches are updated after Richard's comments:
->      > - moved new tb flags to the end
->      > - used tcg_gen_(s)extract to get the final address
->      > - properly handle CONFIG_USER_ONLY
->      >
->      > [v2]:
->      > As per Richard's suggestion I made pmm field part of tb_flags.
->      > It allowed to get rid of global variable to store pmlen.
->      > Also it allowed to simplify all the machinery around it.
->      >
->      > [v1]:
->      > It looks like Zjpm v0.8 is almost frozen and we don't expect it change drastically anymore.
->      > Compared to the original implementation with explicit base and mask CSRs, we now only have
->      > several fixed options for number of masked bits which are set using existing CSRs.
->      > The changes have been tested with handwritten assembly tests and LLVM HWASAN
->      > test suite.
->      >
->      > Alexey Baturo (6):
->      >    target/riscv: Remove obsolete pointer masking  extension code.
->      >    target/riscv: Add new CSR fields for S{sn,mn,m}pm extensions as part
->      >      of Zjpm v0.8
->      >    target/riscv: Add helper functions to calculate current number of
->      >      masked bits for pointer masking
->      >    target/riscv: Add pointer masking tb flags
->      >    target/riscv: Update address modify functions to take into account
->      >      pointer masking
->      >    target/riscv: Enable updates for pointer masking variables and thus
->      >      enable pointer masking extension
->      >
->      >   target/riscv/cpu.c           |  21 +--
->      >   target/riscv/cpu.h           |  46 +++--
->      >   target/riscv/cpu_bits.h      |  90 +---------
->      >   target/riscv/cpu_cfg.h       |   3 +
->      >   target/riscv/cpu_helper.c    |  97 +++++-----
->      >   target/riscv/csr.c           | 337 ++---------------------------------
->      >   target/riscv/machine.c       |  20 +--
->      >   target/riscv/pmp.c           |  13 +-
->      >   target/riscv/pmp.h           |  11 +-
->      >   target/riscv/tcg/tcg-cpu.c   |   5 +-
->      >   target/riscv/translate.c     |  46 ++---
->      >   target/riscv/vector_helper.c |  15 +-
->      >   12 files changed, 158 insertions(+), 546 deletions(-)
->      >
-> 
+> diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
+> index 072bd444b1..ccb32e6122 100644
+> --- a/target/riscv/vector_helper.c
+> +++ b/target/riscv/vector_helper.c
+> @@ -5132,7 +5132,7 @@ void HELPER(NAME)(void *vd, void *v0, void *vs1, void *vs2,               \
+>       }                                                                     \
+>       env->vstart = 0;                                                      \
+>       /* set tail elements to 1s */                                         \
+> -    vext_set_elems_1s(vd, vta, vl * esz, total_elems * esz);              \
+> +    vext_set_elems_1s(vd, vta, num * esz, total_elems * esz);             \
+>   }
+>   
+>   /* Compress into vd elements of vs2 where vs1 is enabled */
 
