@@ -4,83 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D836DD7495D
-	for <qemu-riscv@archiver.kernel.org>; Wed, 30 Oct 2024 04:19:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ED7E8D74961
+	for <qemu-riscv@archiver.kernel.org>; Wed, 30 Oct 2024 04:37:05 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1t60Ap-00022S-C2; Wed, 30 Oct 2024 00:19:11 -0400
+	id 1t60Re-0003x5-9B; Wed, 30 Oct 2024 00:36:34 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1t60Al-000226-Gw; Wed, 30 Oct 2024 00:19:07 -0400
-Received: from mail-ua1-x92e.google.com ([2607:f8b0:4864:20::92e])
+ (Exim 4.90_1) (envelope-from <antonb@tenstorrent.com>)
+ id 1t60Rc-0003wl-Bp
+ for qemu-riscv@nongnu.org; Wed, 30 Oct 2024 00:36:32 -0400
+Received: from mail-yb1-xb2d.google.com ([2607:f8b0:4864:20::b2d])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1t60Ak-00085X-54; Wed, 30 Oct 2024 00:19:07 -0400
-Received: by mail-ua1-x92e.google.com with SMTP id
- a1e0cc1a2514c-84fe06fbdc6so1758398241.0; 
- Tue, 29 Oct 2024 21:19:05 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <antonb@tenstorrent.com>)
+ id 1t60Ra-0001JM-N0
+ for qemu-riscv@nongnu.org; Wed, 30 Oct 2024 00:36:32 -0400
+Received: by mail-yb1-xb2d.google.com with SMTP id
+ 3f1490d57ef6-e28fd8cdfb8so6267458276.3
+ for <qemu-riscv@nongnu.org>; Tue, 29 Oct 2024 21:36:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1730261945; x=1730866745; darn=nongnu.org;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=pRM2fGSuQvUbJHZ7XCUvT5yb5w2/zfFa/aVDWWWo/lA=;
- b=f4DjwzrP049SR0qrBRXZr/rwJ+UhmLesTZvlW2BnccTefDoPmoWwoyPlF+bz4u9DkY
- 1uDzkF79MmBeqI5X4kv0WeJ9KKLtZTRSYyaAksyNxxt2J/8BAmWjzMkMBDdSYNYkKsxh
- HokXejTe5fv2xvmxpU/g+Bvq3oFKezqDeH1xRND/EyUoivSuy8+Pej0qzdPqCOscpTWu
- dHWrRDPOibqpd/kaad9Be1pWhSxdS9c0JOs+lBIkN5osuW61OvloJsiIC0hTK1l0iynY
- /RgGNHAnQoffQBIzVC1VzVpu86n8xrk06/LQU/GPYrHYSiAEC+VawIu9MjL7tIkBXUMj
- R00Q==
+ d=tenstorrent.com; s=google; t=1730262989; x=1730867789; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=H85AbNTysqI7cuJO3FcIVkkH22m9A/gdkrfO0/GMUOw=;
+ b=Z0KtnYLqWfQl/3kdYzT8lDibNWqWjrWU+ZYZlxOurfKtVluwWypFcU5KMfvVQhIrU4
+ wNXb/WZK0sTwosDCRih2fWCLsLZKkEzXnKRS4eClehy1tzKPnOpD/MjOYYW7Tk1fW30f
+ SgWKJ9Rg9cvg+5g6uAk63G9POZsOBYhFjAbBspScAMfnPZRkAMzUT/TPL1N+5zfQ9GXm
+ vmJDosZTtyippKh1QENH8Ri322STVqJpK5tSgwCd9sTu8NBYDrsOqmE+kXbTW4Mf02Fi
+ RRDqJ+gDFxEMR5bScDwzpdHm3AYk31Pzma5eLtzVCd1vkCCT5yb/kAJZpud7XJdax862
+ y2DQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1730261945; x=1730866745;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=pRM2fGSuQvUbJHZ7XCUvT5yb5w2/zfFa/aVDWWWo/lA=;
- b=I0eu/Cjw0jrQg9ohfSgHjP2BSDbBV0qun13pxvjcl8vpEGgdd7hZLg8D92ZNZFtg/9
- Vmz3qZ301wgc1LxerkD8iHRcNottiYMYh/QhjQXKGu3teZo70RunnXSss6frZO0jfNL1
- xMODsyhVu+6TOKi90vLNUlk7Ey8np9C7i9N5xyOnoC9K8hL2Ap5hsMH4geIcrN0tU11C
- vzhjt8XYEe2FBFmvUb8Yo41XAiJnAV0EA0wdl2NtSpZXwNYQYKGZN8X9o+CS77sckHmW
- VSsynVWSiVXY++oG3ImntHLTlzfP88uo+fxWof9Soai84FrkKXUYffmHRmNIlRfwcaP5
- oMkw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUdleXTl8nSUaFCeUHuViItfHULRzGKIbQ1kP/EM3vLu0lASMyZV9RYeYqNBqWwexa8MQ5Gjut0sEcc@nongnu.org
-X-Gm-Message-State: AOJu0YwMrI0gA7z6zYldQY1IH02Qrd9LStm3NcUMMbzUCJ6W3Bmm+aPw
- gvu3eDeljZnB5GnDI4eI4fLQYIBgVoO+H4Agz6WZtzBtHJ4u+xnre4yIWKYPVKEuTpt87o4qI/e
- bWm2cnzE93ueGdM0YXJv5ZzloSvA=
-X-Google-Smtp-Source: AGHT+IFmbx/fR/DZCN6Isvdf/9r/qFsHQtVoFHEk9giAeRped8UcGnVxPom5S1RIP9dhcr/eov04ncSExJxmw/vlMyk=
-X-Received: by 2002:a05:6102:5125:b0:498:e935:ddb8 with SMTP id
- ada2fe7eead31-4a8cfb44d3amr14494404137.1.1730261944759; Tue, 29 Oct 2024
- 21:19:04 -0700 (PDT)
-MIME-Version: 1.0
-References: <20241030004146.935656-1-antonb@tenstorrent.com>
- <CAKmqyKMJ0Lu7Jvh2KM7yGjq00uHnAmav9sV7cmWnzrkchQR2xQ@mail.gmail.com>
- <CAN7m+mCyx78jaMgJDHwdy8ZhxrsP-9jDhjmNrJnn_cffePqJhw@mail.gmail.com>
-In-Reply-To: <CAN7m+mCyx78jaMgJDHwdy8ZhxrsP-9jDhjmNrJnn_cffePqJhw@mail.gmail.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Wed, 30 Oct 2024 14:18:38 +1000
-Message-ID: <CAKmqyKMtWdS2KYq3e1MOTAn_JNAOkr64A-SruJKCdO8=zVjVcw@mail.gmail.com>
-Subject: Re: [CAUTION - External Sender] Re: [PATCH] target/riscv: Fix
- vcompress with rvv_ta_all_1s
-To: Anton Blanchard <antonb@tenstorrent.com>
-Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, 
+ d=1e100.net; s=20230601; t=1730262989; x=1730867789;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=H85AbNTysqI7cuJO3FcIVkkH22m9A/gdkrfO0/GMUOw=;
+ b=P7Tun8nYsbgiBPACMXPtr1Y21nmQEmCQS41DDImE081kzLX3QtylmJ6Z73fUeI5ARI
+ S0NKwfBnZ1Fd0CxLvMTw9mwcPYgXuufadWfK6zDGBxaxyLnn39qu/9/s24iyGBKtBPEO
+ WN8imiDgqy+ZHSyoEVlYNv7mkeAVB2EfaebNa1rRZOwQIz/asxYnpgN/iu3XfztYMJ7/
+ T4ORKgaF20DV3m1oyIq/XFkIk0LZO0vDTJlsAHfNvFv+u1bN0rZ926xqpLofEI2DI/H4
+ c8FIgf3T5iVaBZwLvPMeTJnNn9AQrL+aXWm76c1pjKmVUsrbInD9bnczdSKG7VwP89D8
+ bxhQ==
+X-Gm-Message-State: AOJu0Yz+jAQ+5PUVOtFNMBemSwX5jh5R/bKnwdahpDONcLBiak0PnNJx
+ Iq/REN5nzcU/pfi/WJCfW8gWJSF8/RyPU8VttFTDpJGZlTPz0y1uo6GhKTt5Jjjfre27Uo7RHDO
+ yGfQ=
+X-Google-Smtp-Source: AGHT+IEWU64858/fh+MqXBbPbZH/T7ePu8ZYyzchbNkowm8JNBn6bPtmGl5Kx8jEsCnutD1QWU1+NA==
+X-Received: by 2002:a05:6902:1021:b0:e2b:a8b3:d650 with SMTP id
+ 3f1490d57ef6-e3087a6b53cmr11823420276.24.1730262988862; 
+ Tue, 29 Oct 2024 21:36:28 -0700 (PDT)
+Received: from ausc-rvsw-c-01-anton.tail89d63.ts.net ([38.104.49.66])
+ by smtp.gmail.com with ESMTPSA id
+ 3f1490d57ef6-e308fbc3e26sm1633860276.27.2024.10.29.21.36.28
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 29 Oct 2024 21:36:28 -0700 (PDT)
+From: Anton Blanchard <antonb@tenstorrent.com>
+To: qemu-riscv@nongnu.org,
+	qemu-devel@nongnu.org
+Cc: Anton Blanchard <antonb@tenstorrent.com>,
  Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, 
- Bin Meng <bmeng.cn@gmail.com>, Weiwei Li <liwei1518@gmail.com>, 
+ Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bmeng.cn@gmail.com>,
+ Weiwei Li <liwei1518@gmail.com>,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
  Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::92e;
- envelope-from=alistair23@gmail.com; helo=mail-ua1-x92e.google.com
-X-Spam_score_int: -17
-X-Spam_score: -1.8
-X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+Subject: [PATCH v2] target/riscv: Fix vcompress with rvv_ta_all_1s
+Date: Wed, 30 Oct 2024 15:35:38 +1100
+Message-Id: <20241030043538.939712-1-antonb@tenstorrent.com>
+X-Mailer: git-send-email 2.34.1
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::b2d;
+ envelope-from=antonb@tenstorrent.com; helo=mail-yb1-xb2d.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -98,36 +97,31 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Wed, Oct 30, 2024 at 2:09=E2=80=AFPM Anton Blanchard <antonb@tenstorrent=
-.com> wrote:
->
-> Hi Alistair,
->
-> On Wed, Oct 30, 2024 at 2:39=E2=80=AFPM Alistair Francis <alistair23@gmai=
-l.com> wrote:
-> > > vcompress packs vl or less fields into vd, so the tail starts after t=
-he
-> > > last packed field.
-> >
-> > Is that right?
-> >
-> > It's different from every other vector command. Although the wording
-> > in the spec is very confusing
->
-> It is confusing. This thread has some clarification, and we should probab=
-ly
-> follow up on the suggestion to improve the ISA wording:
->
-> https://github.com/riscv/riscv-v-spec/issues/796
+vcompress packs vl or less fields into vd, so the tail starts after the
+last packed field. This could be more clearly expressed in the ISA,
+but for now this thread helps to explain it:
 
-Ah, at least it isn't just me.
+https://github.com/riscv/riscv-v-spec/issues/796
 
-It's worth pointing to that in the commit message, as the spec is not
-clear about this
+Signed-off-by: Anton Blanchard <antonb@tenstorrent.com>
+---
+ target/riscv/vector_helper.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Alistair
+diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
+index 072bd444b1..ccb32e6122 100644
+--- a/target/riscv/vector_helper.c
++++ b/target/riscv/vector_helper.c
+@@ -5132,7 +5132,7 @@ void HELPER(NAME)(void *vd, void *v0, void *vs1, void *vs2,               \
+     }                                                                     \
+     env->vstart = 0;                                                      \
+     /* set tail elements to 1s */                                         \
+-    vext_set_elems_1s(vd, vta, vl * esz, total_elems * esz);              \
++    vext_set_elems_1s(vd, vta, num * esz, total_elems * esz);             \
+ }
+ 
+ /* Compress into vd elements of vs2 where vs1 is enabled */
+-- 
+2.34.1
 
->
-> Thanks,
-> Anton
 
