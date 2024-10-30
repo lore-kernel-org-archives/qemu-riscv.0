@@ -4,88 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D0F13D74941
-	for <qemu-riscv@archiver.kernel.org>; Tue, 29 Oct 2024 21:21:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 36146D7494F
+	for <qemu-riscv@archiver.kernel.org>; Wed, 30 Oct 2024 01:13:29 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1t5teJ-0007vn-Tf; Tue, 29 Oct 2024 17:21:11 -0400
+	id 1t5xGa-0001vt-7O; Tue, 29 Oct 2024 21:12:56 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <phil@philjordan.eu>)
- id 1t5teG-0007vS-TO
- for qemu-riscv@nongnu.org; Tue, 29 Oct 2024 17:21:09 -0400
-Received: from mail-ua1-x92c.google.com ([2607:f8b0:4864:20::92c])
+ (Exim 4.90_1) (envelope-from <antonb@tenstorrent.com>)
+ id 1t5wnM-0006vc-TF
+ for qemu-riscv@nongnu.org; Tue, 29 Oct 2024 20:42:44 -0400
+Received: from mail-qv1-xf29.google.com ([2607:f8b0:4864:20::f29])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <phil@philjordan.eu>)
- id 1t5teE-0008Bn-Pg
- for qemu-riscv@nongnu.org; Tue, 29 Oct 2024 17:21:08 -0400
-Received: by mail-ua1-x92c.google.com with SMTP id
- a1e0cc1a2514c-84fe454176bso1823938241.1
- for <qemu-riscv@nongnu.org>; Tue, 29 Oct 2024 14:21:06 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <antonb@tenstorrent.com>)
+ id 1t5wnL-0004TM-79
+ for qemu-riscv@nongnu.org; Tue, 29 Oct 2024 20:42:44 -0400
+Received: by mail-qv1-xf29.google.com with SMTP id
+ 6a1803df08f44-6cb97afcec9so37071526d6.2
+ for <qemu-riscv@nongnu.org>; Tue, 29 Oct 2024 17:42:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=philjordan-eu.20230601.gappssmtp.com; s=20230601; t=1730236865; x=1730841665;
- darn=nongnu.org; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=vM4TwgSByAwjE/8uPmOkWGdQzOQ04DQhkwgOetgVghY=;
- b=uHdCXItDEJtAx3UWcaiDiAzh6jNgSh4Gk8F9c5TFr3a1O+jhN9sz4tylbV76Wv+ycZ
- +6xyAb9Q8MUzptQUu/YMx8qnBaFRdIdwlQUpWLbGAAWmcfCr40mMXefSo76LdMyM9DIe
- 0qDQJxzWGBC5zOw/V7ZKDrCj8zgpMKpznSkKms9Cm1vCyCo6t62guMDJmGvnV0dfFOyf
- fzpBnayW/vXFB2AVSrtzk/o6c8aVPPlnQsA950uyj5uqQp152hKyyfYQNmsZf3C/M3//
- gOM+K/4X1l9NsQaot925fKSodjHUn6AQCZc3R0EPpJ1VVho04Tyte/qBaQUW8cxoF/74
- zCQw==
+ d=tenstorrent.com; s=google; t=1730248961; x=1730853761; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=OGHSgD0bWZ2CwX6+wQIzrPZkFRl7arycJnyFtsH9h/U=;
+ b=C+DY8X83DvG4PwL1lBDHFSf8DHGD0/shfbFG2gV3VJh+n0WiVxJJbmQZHDW0h4EL2o
+ TqgqEDSkc1zxJ00HMp7kO3jFLrNaj2P0Yx34dtwVMdB8luZ7F+zexBzPTvSLs8uVDCSA
+ 2svA52IGrum4UlZVg3OrZWOjnqNW7RcyJdqX1+84k1g5wN6apLmcIJLBlD5hi7Pqg71x
+ 1vCI6uX+LvRGOTIfoSeyO5e0VSD4Voyi0hGXAluQGxhLmo1xxs+zWPgYgycU22Jwh3LK
+ TbArsO0A/PkiVjdEV9/QF6ajU6XEsFznq7EnQfnfS1I239p9FcZjyPaie/CNCZbBqogf
+ bsXw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1730236865; x=1730841665;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1730248961; x=1730853761;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=vM4TwgSByAwjE/8uPmOkWGdQzOQ04DQhkwgOetgVghY=;
- b=hQ2ej6TjLGSZbYKhBlvHThTb9iOjWF3nGheHa5aa91Ts33rPmNuh+Vjv33+jfHRwzF
- Yqv9/TQScG821bpVGit+FV2U7nKMwpD2cA7MCaV3wFTfEa+aiAyQwbuUWtSAY/X6x6yE
- pf5vx0XoVSAEiBj0c1bhgAKk2diyvJhVsyB3Z60kpsxjjIoU3avq/QWMhJXUfNKEWM2Q
- 2ZJjLGYXn+xA0ix0RlYUqdtodVJlmpEy/cg/WBTl8icFDe8GOKpdp0aXOho+VmZXDjui
- weuEW7BkW9LXZLl0hO9qaAAV/eN9qQfg+SqyPb+fcUNU9IDehMA0xesWhmKBqSG8ZSx5
- DTbA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUQOCImubYQwLS1mnWVWzmWsViZEDqLZQNU1STX5T58xPXHfIbAhux23e/Lcm4jqElzGrV1UjYL/rwG@nongnu.org
-X-Gm-Message-State: AOJu0YyNjTr3QrlNofJPf3gJzEKTMlY7DUUZ10hevZqL/VOMtr0Vpmaw
- h8EhKRTnxGkJ2z1JXnp72jdjRHFlXJTPRQ++wTedWgfyIkmGYF2v8P+a4L/M/5UU6u+eTPbMMZW
- HrGZo4ZxDG4Ade11xXrSFeGU0HHi4Fdpish0Q
-X-Google-Smtp-Source: AGHT+IFCZUDVtQPvXMT+DM7TUBuVOxKbphCii00tVwzsU2yHo08+YD7nTKeDPcXYYXsva8aRFM6sBzrlzGHvK2Njfoo=
-X-Received: by 2002:a05:6102:f13:b0:4a4:9194:d2c1 with SMTP id
- ada2fe7eead31-4a8cfd72365mr11581446137.27.1730236864115; Tue, 29 Oct 2024
- 14:21:04 -0700 (PDT)
+ bh=OGHSgD0bWZ2CwX6+wQIzrPZkFRl7arycJnyFtsH9h/U=;
+ b=ib0uPUtH0dAo3hdVeWyuQ0H4CVElxKlD0q/lFIFNkSPG3WirJCA6vEXMGG5c4mp4Pf
+ Cva3m+VY4aj6SnBRDgBdqEMVcD2Zoj3Jkm9VKwhZ4xPPiiklW6C2gtcKhrV3EoKcR+Ck
+ Q7Xh9YJ9wwvFifIFdGVSLs6wMS54ksFDf2z3hxnHs2sstUywXG2mOvwUygap/YXb8wwk
+ NjBu9ckJQsDLtztcf861N/2XiIno/Ad9qfDBF153VBpvCK72VqBzUlD6ATWQihU+bo3T
+ RV6lmbjCQ6zQ6OSzbqaW0j/f0D4fKlFM8VWraczF/JVzhrSH/UjZl6SXdBQB7HvhGJag
+ EnfQ==
+X-Gm-Message-State: AOJu0YwM/zc9r054kwrQf2lrjoIZu/NK+jUiP8tbp7eFJOaWTSK7snUF
+ veoXkcGh3ZOG6sg6gV+4bFLhBZU5Xsd2pY6QINd7w+79xo5nR2sLno74OrFhxt3b26KQuaIjaKi
+ tqM6+Yg==
+X-Google-Smtp-Source: AGHT+IGVt05PIvx4sETp0O1OCG59tllx8GNB+zEngcqAGZAtK6rH70c55EXE4Zm2Q5wrO1t84ZYw+Q==
+X-Received: by 2002:a05:6214:3d0e:b0:6cb:eea5:69e0 with SMTP id
+ 6a1803df08f44-6d1856f3c9bmr274369066d6.27.1730248961060; 
+ Tue, 29 Oct 2024 17:42:41 -0700 (PDT)
+Received: from ausc-rvsw-c-01-anton.tail89d63.ts.net ([38.104.49.66])
+ by smtp.gmail.com with ESMTPSA id
+ 6a1803df08f44-6d179a0abf5sm46944986d6.98.2024.10.29.17.42.40
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 29 Oct 2024 17:42:40 -0700 (PDT)
+From: Anton Blanchard <antonb@tenstorrent.com>
+To: qemu-riscv@nongnu.org,
+	qemu-devel@nongnu.org
+Cc: Anton Blanchard <antonb@tenstorrent.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bmeng.cn@gmail.com>,
+ Weiwei Li <liwei1518@gmail.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
+Subject: [PATCH] target/riscv: Fix vcompress with rvv_ta_all_1s
+Date: Wed, 30 Oct 2024 11:41:46 +1100
+Message-Id: <20241030004146.935656-1-antonb@tenstorrent.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-References: <20240928085727.56883-1-phil@philjordan.eu>
- <871q0xmwzb.fsf@draig.linaro.org>
-In-Reply-To: <871q0xmwzb.fsf@draig.linaro.org>
-From: Phil Dennis-Jordan <phil@philjordan.eu>
-Date: Tue, 29 Oct 2024 22:20:53 +0100
-Message-ID: <CAAibmn0wc6a-BM+kC6MJDTAFJoaAR4cVnVd6dr1G6eC8Lt_QBw@mail.gmail.com>
-Subject: Re: [PATCH v3 00/14] macOS PV Graphics and new vmapple machine type
-To: =?UTF-8?B?QWxleCBCZW5uw6ll?= <alex.bennee@linaro.org>
-Cc: qemu-devel@nongnu.org, agraf@csgraf.de, peter.maydell@linaro.org, 
- pbonzini@redhat.com, rad@semihalf.com, quic_llindhol@quicinc.com, 
- marcin.juszkiewicz@linaro.org, stefanha@redhat.com, mst@redhat.com, 
- slp@redhat.com, richard.henderson@linaro.org, eduardo@habkost.net, 
- marcel.apfelbaum@gmail.com, gaosong@loongson.cn, jiaxun.yang@flygoat.com, 
- chenhuacai@kernel.org, kwolf@redhat.com, hreitz@redhat.com, philmd@linaro.org, 
- shorne@gmail.com, palmer@dabbelt.com, alistair.francis@wdc.com, 
- bmeng.cn@gmail.com, liwei1518@gmail.com, dbarboza@ventanamicro.com, 
- zhiwei_liu@linux.alibaba.com, jcmvbkbc@gmail.com, marcandre.lureau@redhat.com, 
- berrange@redhat.com, akihiko.odaki@daynix.com, qemu-arm@nongnu.org, 
- qemu-block@nongnu.org, qemu-riscv@nongnu.org
-Content-Type: multipart/alternative; boundary="000000000000a9d1580625a42988"
-Received-SPF: neutral client-ip=2607:f8b0:4864:20::92c;
- envelope-from=phil@philjordan.eu; helo=mail-ua1-x92c.google.com
-X-Spam_score_int: -10
-X-Spam_score: -1.1
-X-Spam_bar: -
-X-Spam_report: (-1.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, HTML_MESSAGE=0.001, RCVD_IN_DNSWL_NONE=-0.0001,
- SPF_HELO_NONE=0.001, SPF_NEUTRAL=0.779 autolearn=no autolearn_force=no
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::f29;
+ envelope-from=antonb@tenstorrent.com; helo=mail-qv1-xf29.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
+X-Mailman-Approved-At: Tue, 29 Oct 2024 21:12:54 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -100,79 +98,28 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
---000000000000a9d1580625a42988
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+vcompress packs vl or less fields into vd, so the tail starts after the
+last packed field.
 
-On Thu, 3 Oct 2024 at 10:06, Alex Benn=C3=A9e <alex.bennee@linaro.org> wrot=
-e:
+Signed-off-by: Anton Blanchard <antonb@tenstorrent.com>
+---
+ target/riscv/vector_helper.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
->
-> > There are currently a few limitations to this which aren't intrinsic,
-> > just imperfect emulation of the VZF, but it's good enough to be just
-> > about usable for some purposes:
-> >
-> >  * macOS 12 guests only. Versions 13+ currently fail during early boot.
-> >  * macOS 11+ arm64 hosts only, with hvf accel. (Perhaps some difference=
-s
-> >    between Apple M series CPUs and TCG's aarch64 implementation? macOS
-> >    hosts only because ParavirtualizedGraphics.framework is a black box
-> >    implementing most of the logic behind the apple-gfx device.)
->
-> We don't currently have TCG CPU models for the Apple Silicon processors.
-> They are not too hard to add (basically setting the correct ID register
-> bits, c.f. aarch64_neoverse_n1_initfn for an example). However that
-> would only cover Aarch64 architectural features. We do no modelling of
-> the extra instructions that Apple added (although in theory that should
-> only be run in Apples own ML libraries).
->
+diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
+index 072bd444b1..ccb32e6122 100644
+--- a/target/riscv/vector_helper.c
++++ b/target/riscv/vector_helper.c
+@@ -5132,7 +5132,7 @@ void HELPER(NAME)(void *vd, void *v0, void *vs1, void *vs2,               \
+     }                                                                     \
+     env->vstart = 0;                                                      \
+     /* set tail elements to 1s */                                         \
+-    vext_set_elems_1s(vd, vta, vl * esz, total_elems * esz);              \
++    vext_set_elems_1s(vd, vta, num * esz, total_elems * esz);             \
+ }
+ 
+ /* Compress into vd elements of vs2 where vs1 is enabled */
+-- 
+2.34.1
 
-This really isn't my area of expertise, and I don't see myself attempting
-to make it work with TCG. Given that the OS only boots with the PV graphics
-device, you can only really use this machine type on a macOS host, so there
-aren't many reasons to use TCG over HVF. I suppose it might make debugging
-the myriad other rough edges easier!
-
---000000000000a9d1580625a42988
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><div dir=3D"ltr"><br></div><br><div class=3D"gmail_quote">=
-<div dir=3D"ltr" class=3D"gmail_attr">On Thu, 3 Oct 2024 at 10:06, Alex Ben=
-n=C3=A9e &lt;<a href=3D"mailto:alex.bennee@linaro.org">alex.bennee@linaro.o=
-rg</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"margi=
-n:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex=
-"><br>
-&gt; There are currently a few limitations to this which aren&#39;t intrins=
-ic,<br>
-&gt; just imperfect emulation of the VZF, but it&#39;s good enough to be ju=
-st<br>
-&gt; about usable for some purposes:<br>
-&gt;<br>
-&gt;=C2=A0 * macOS 12 guests only. Versions 13+ currently fail during early=
- boot.<br>
-&gt;=C2=A0 * macOS 11+ arm64 hosts only, with hvf accel. (Perhaps some diff=
-erences<br>
-&gt;=C2=A0 =C2=A0 between Apple M series CPUs and TCG&#39;s aarch64 impleme=
-ntation? macOS<br>
-&gt;=C2=A0 =C2=A0 hosts only because ParavirtualizedGraphics.framework is a=
- black box<br>
-&gt;=C2=A0 =C2=A0 implementing most of the logic behind the apple-gfx devic=
-e.)<br>
-<br>
-We don&#39;t currently have TCG CPU models for the Apple Silicon processors=
-.<br>
-They are not too hard to add (basically setting the correct ID register<br>
-bits, c.f. aarch64_neoverse_n1_initfn for an example). However that<br>
-would only cover Aarch64 architectural features. We do no modelling of<br>
-the extra instructions that Apple added (although in theory that should<br>
-only be run in Apples own ML libraries).<br></blockquote><div><br></div><di=
-v>This really isn&#39;t my area of expertise, and I don&#39;t see myself at=
-tempting to make it work with TCG. Given that the OS only boots with the PV=
- graphics device, you can only really use this machine type on a macOS host=
-, so there aren&#39;t many reasons to use TCG over HVF. I suppose it might =
-make debugging the myriad other rough edges easier!</div><div><br></div><di=
-v><br></div></div></div>
-
---000000000000a9d1580625a42988--
 
