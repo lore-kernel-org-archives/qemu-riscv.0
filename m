@@ -4,212 +4,97 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 15C72E6895F
-	for <qemu-riscv@archiver.kernel.org>; Thu, 31 Oct 2024 08:44:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6F2EEE68960
+	for <qemu-riscv@archiver.kernel.org>; Thu, 31 Oct 2024 09:33:15 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1t6Qmx-0005Wx-8U; Thu, 31 Oct 2024 04:44:19 -0400
+	id 1t6RXg-0001Vb-Si; Thu, 31 Oct 2024 05:32:36 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <michal.simek@amd.com>)
- id 1t6Qmv-0005W7-6e; Thu, 31 Oct 2024 04:44:17 -0400
-Received: from mail-co1nam11on20621.outbound.protection.outlook.com
- ([2a01:111:f403:2416::621]
- helo=NAM11-CO1-obe.outbound.protection.outlook.com)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <michal.simek@amd.com>)
- id 1t6Qms-0001gE-H3; Thu, 31 Oct 2024 04:44:17 -0400
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=i+kc3/F++T35gjTP990NP/tXu2TFBXLct2yLZStQbnejYUzFyxZbHQfMVsFndSqZ5ZS4Q19gWSbFBQMASVO31TOIhnK4QvvDfxJlGGxoBjFJrfMfM5kJP8+YMJkozQg0YNlrUmxcxEuvaU5qxkGS5B1owXDEUDYLW5o1QvnHcSJx4jDDDuv3d5fJvDLK1TGSiysTkH7K67dPBKOSDOdaYOMjIpt8i/gjZd1IR55GNyQ1xdmSg7hot6Wa4KOh4lKwpAWqxTorQUYy7zoW6xcwhhaWTcmLM+lBS3Oqv1NxhCzuBDj4LlwsZrkFHJ9uQc+s6eddvUhLh9aIBsqSdnoTQA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=PRF7E6uSOraU5QhF8Mu08PTLmPhviVyZ7Yt1r2Niz08=;
- b=TgXkw1uuAUmn/gxpNCqATSwCBAM7x4xVCCaVrVH3p+Y4N8LoN4dpwTX5piL1gYUB3eGbVWB7TlHAqAZTNRtzSyNabrA5rW3jKjNeyLQADUPjxp78stOqAMqJ1/AZbALZkO+1WVaRkegWdE6fU19gPnhLLc1Skqm5TBfWHgd+YxUIMhIXmkcP3mcLk3xvrKBnt3lEPl37EG1p9B3DeQm78VD3ogpitB8r2NGXoLPvL+qWNEMMFNn5XS5eFt9OwEIlMmH/kFu4LB1WzZRWKD0X88C5QLENZ+irtmj5RqA7IAav3cxbdgkOQGtxHJlOZA7z7OjSbY+uoucqSqIjMw7ufA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
- header.d=amd.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=PRF7E6uSOraU5QhF8Mu08PTLmPhviVyZ7Yt1r2Niz08=;
- b=ihRyFrYT4VOsB9lr32ITQcgFsQ0/9m6l+x2SyuQ6VkwbMkXWQs8HUWJWIp6lV2gIKXN+LFxCh9qhAbvVWkJEBuHXRz1EE//ziAKJe04dw1f5c93j7B8h/9ECdXScLpodlbyIXpeW9sUYW1aa0b8jc51iiaUCf4pIO6S7mqU0Ev0=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=amd.com;
-Received: from SJ2PR12MB8109.namprd12.prod.outlook.com (2603:10b6:a03:4f5::8)
- by MN0PR12MB5812.namprd12.prod.outlook.com (2603:10b6:208:378::11)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8093.32; Thu, 31 Oct
- 2024 08:44:07 +0000
-Received: from SJ2PR12MB8109.namprd12.prod.outlook.com
- ([fe80::7f35:efe7:5e82:5e30]) by SJ2PR12MB8109.namprd12.prod.outlook.com
- ([fe80::7f35:efe7:5e82:5e30%6]) with mapi id 15.20.8093.027; Thu, 31 Oct 2024
- 08:44:07 +0000
-Message-ID: <47b60bf0-e43e-43a6-b9d7-0d072cd8d4ad@amd.com>
-Date: Thu, 31 Oct 2024 09:43:52 +0100
+ (Exim 4.90_1) (envelope-from <akihiko.odaki@daynix.com>)
+ id 1t6RXf-0001V2-Gt
+ for qemu-riscv@nongnu.org; Thu, 31 Oct 2024 05:32:35 -0400
+Received: from mail-pf1-x42a.google.com ([2607:f8b0:4864:20::42a])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <akihiko.odaki@daynix.com>)
+ id 1t6RXa-0006cS-W5
+ for qemu-riscv@nongnu.org; Thu, 31 Oct 2024 05:32:35 -0400
+Received: by mail-pf1-x42a.google.com with SMTP id
+ d2e1a72fcca58-71e681bc315so511262b3a.0
+ for <qemu-riscv@nongnu.org>; Thu, 31 Oct 2024 02:32:30 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=daynix-com.20230601.gappssmtp.com; s=20230601; t=1730367149; x=1730971949;
+ darn=nongnu.org; 
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=1sHIAsMGh4TYPWVHlSBcPmPmm+C38NVYskiD3XdrQEw=;
+ b=MfnMazDgTbUwHWvi9a5zNb6yHuG+ByY5eTRtulW+oSG6E+orpW1/+wSM0WK3CpZDse
+ 1CTi3yRaEAE/2I1Al6kf3LNxceF5+zjyfpYWKF1op4t9Knyf/mug3L7d5al3AN5NwQMU
+ mFrTQLgUAkU47kykNVv5Jb9JkZ4fnKlyu/rOmw8IcJkiJrxFfkC0ZPAJmuH1jLnTKwUE
+ OyXKJuB+vB37QvrtDkkXqPzJnnYhweEE55NK92g+Z5UFh88bQKISSUCJzGTFZlij11b9
+ ++1578Yi3ue244MBypGnDoq5N1OOkvEH31kOzUObwSWIWKidJepGObJsBoe6l0gZCGSL
+ 6DLQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1730367149; x=1730971949;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=1sHIAsMGh4TYPWVHlSBcPmPmm+C38NVYskiD3XdrQEw=;
+ b=SgEhcrsE0ckyZFD20Y0bXpcZbIYiR0ZMqVOC1dLjc0tfAakfuT7HskcEvcEzHOsbTX
+ c9KndGIoRLfLE0mvtC7Hn5q6IiWa0hN0gzpby2hKrX3F0qkbw0Myq98hEpOVpzK4ckUs
+ nxS1/JpGwHx+1Rtk8kWyjJOSfCI+Q0rTrh/5t9EDOhHQOb0dI3xli/CGqU0VjHhltSVj
+ 4TLtewjZ/+H2S5WxzfPEQL33P0l7PTdfw7ADjZPVIjI8U3jUXTg1dT71w08AHqrRDC7t
+ YRPtGfBOmmGi4uq/pNdkZMMZQDHok5SBFwXJyfEGiE5RI+EqmgPd0vF8fa1w4aWiCt4l
+ F8zg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUBzv8QxrJZH9vc/VhqXyWh5Z32p08a2iXvsokLvyrpsjtHIlHYLl+x5GuWv/UDksFoORoj2Sc13tH1@nongnu.org
+X-Gm-Message-State: AOJu0YxOBRb7RJJWTx1C2SCiTUXoUXNzzgUbCYAVIThoujhdYJpG3YxL
+ MUGXZDmF4kjXogwKhMsT0vLTWMYZcKqy7vF3r7pgJfdxLKly1ns+Ek3Qwal71hI=
+X-Google-Smtp-Source: AGHT+IH5+qsBglBiejLFnBUrGMgaazccUI3oGln+JCkTdnpSgUG0w/xjDMu81mW+0JSMq+M43bm3ow==
+X-Received: by 2002:a05:6a00:91a1:b0:71e:5709:2330 with SMTP id
+ d2e1a72fcca58-720bcd53a3fmr2781556b3a.7.1730367148889; 
+ Thu, 31 Oct 2024 02:32:28 -0700 (PDT)
+Received: from [157.82.207.167] ([157.82.207.167])
+ by smtp.gmail.com with ESMTPSA id
+ d2e1a72fcca58-720bc1b8d3asm822168b3a.3.2024.10.31.02.32.22
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 31 Oct 2024 02:32:28 -0700 (PDT)
+Message-ID: <56e6f39d-9db1-4ee2-bcd4-b50a5096cbf8@daynix.com>
+Date: Thu, 31 Oct 2024 18:32:20 +0900
+MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] hw/riscv: Add Microblaze V 32bit virt board
-To: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Alistair Francis <alistair23@gmail.com>,
- Sai Pavan Boddu <sai.pavan.boddu@amd.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org,
- Paolo Bonzini <pbonzini@redhat.com>, Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bmeng.cn@gmail.com>,
- Weiwei Li <liwei1518@gmail.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
-References: <20241017072507.4033413-1-sai.pavan.boddu@amd.com>
- <CAKmqyKNfoakaJ66PCN49x5+=gVkAnQVV1UWTdPe7ARr3RA8ouA@mail.gmail.com>
- <7dbcb2de-89f9-445b-a096-2a3d03a2dfe7@amd.com>
- <34d6acf1-2106-481e-a016-375e697f31cf@linaro.org>
+Subject: Re: [PATCH v5 02/15] hw/display/apple-gfx: Introduce
+ ParavirtualizedGraphics.Framework support
 Content-Language: en-US
-From: Michal Simek <michal.simek@amd.com>
-Autocrypt: addr=michal.simek@amd.com; keydata=
- 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
- 3i3l5DA=
-In-Reply-To: <34d6acf1-2106-481e-a016-375e697f31cf@linaro.org>
+To: Phil Dennis-Jordan <phil@philjordan.eu>, qemu-devel@nongnu.org
+Cc: agraf@csgraf.de, peter.maydell@linaro.org, pbonzini@redhat.com,
+ rad@semihalf.com, quic_llindhol@quicinc.com, marcin.juszkiewicz@linaro.org,
+ stefanha@redhat.com, mst@redhat.com, slp@redhat.com,
+ richard.henderson@linaro.org, eduardo@habkost.net,
+ marcel.apfelbaum@gmail.com, gaosong@loongson.cn, jiaxun.yang@flygoat.com,
+ chenhuacai@kernel.org, kwolf@redhat.com, hreitz@redhat.com,
+ philmd@linaro.org, shorne@gmail.com, palmer@dabbelt.com,
+ alistair.francis@wdc.com, bmeng.cn@gmail.com, liwei1518@gmail.com,
+ dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com, jcmvbkbc@gmail.com,
+ marcandre.lureau@redhat.com, berrange@redhat.com, qemu-arm@nongnu.org,
+ qemu-block@nongnu.org, qemu-riscv@nongnu.org,
+ Alexander Graf <graf@amazon.com>
+References: <20241029205819.69888-1-phil@philjordan.eu>
+ <20241029205819.69888-3-phil@philjordan.eu>
+From: Akihiko Odaki <akihiko.odaki@daynix.com>
+In-Reply-To: <20241029205819.69888-3-phil@philjordan.eu>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: VI1P190CA0013.EURP190.PROD.OUTLOOK.COM
- (2603:10a6:802:2b::26) To SJ2PR12MB8109.namprd12.prod.outlook.com
- (2603:10b6:a03:4f5::8)
-MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SJ2PR12MB8109:EE_|MN0PR12MB5812:EE_
-X-MS-Office365-Filtering-Correlation-Id: 5eec2318-4cb1-4bad-a965-08dcf9882e74
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|376014|7416014|366016|1800799024;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?NXk5WTBjS25IbnBwQkZnOENwZzhTL1ZjakR3WnpnRmJocjJRVzhaN2tkYkRj?=
- =?utf-8?B?N2FxT2xVYVEvdTRSVWN0Q3g2VWNaUTRNZUhaR2hCMjQwVkFka1lZM2FpMldO?=
- =?utf-8?B?VC9xVHVCQ2xRbFU3K0NsUzhMOVhtUTVsRzRaZkFXS3Y1Q25zRitYRE40MzA1?=
- =?utf-8?B?K09KSkt5cnNUT1A0RUxObkk4UENUTnI0b1RzS0RycWRpVHgyRlhZSzBVNHBP?=
- =?utf-8?B?c0RJU1dIbjhUVnFYVTJlemdaNWh6eU9UWnB3QVFCT3RRbjZaWWhDbVdCV3Nl?=
- =?utf-8?B?UFJqdHNmMVJpcFh2SUc0eGVpNGtTdCtqRnBVUzN5SGJtSEJTeWRJYVhSYytV?=
- =?utf-8?B?OWVXb1pvTlJvbmNPdkU4OHE3QWlmYlhxL0Nvc2ZqditzYStGbm8vRzc5NjlN?=
- =?utf-8?B?eEtTekx3ZEVqY0NhN2dDRktOVlRsb1JKRnlJZnA0SEU5YU45OUJyZGg4MW1k?=
- =?utf-8?B?bjlpeitTREhsUjFvcnhTQS9yeURKV21qSUM2RWtrUFphNXlCOEhsR3o1VVdN?=
- =?utf-8?B?bTY0THUySnNCbkJvNkpUVFhxM3VqdTBTSUM0dWFVRzQxQUpMRXFqN1BwRnBP?=
- =?utf-8?B?K05oNVVCZDJqWTRiUktjQXRhNGNnTFFQQWk2TklKVDg0TmRZbEIzSDJ2MnhS?=
- =?utf-8?B?S08xUktTM1FVb3pSejhBYXV5YnN3d1pubTg1ZXF3SGFGWUlkK2dQRWVuNkVB?=
- =?utf-8?B?YVQwT2RscmV5NlU2NkxickN0Q0xiRTY2a3NWaDA1aGxQY2tOWVJRb3MrMGQ3?=
- =?utf-8?B?SXVicGl5aVZnVUNQbWhpQS8yUzBVZlMwT0Exd1FMQTY1WHovYm51UXpMbVZq?=
- =?utf-8?B?K1BKNWdWNXdLTzBOeVNIY1l1RFRMMXdSc2Q1ZWM0ejFtSlZQZnpPbU4vTmZj?=
- =?utf-8?B?RVNERmJOSVVjOUhUSDBjdXF0ZXdnUThKS2NuV2FuaGZ6NVRYNTJqeGxyU21Z?=
- =?utf-8?B?MHJRQnVKN0xvcC9kdGJLOUd3dDB1OHFCSWdpbEg0UzA0dG9iTlYvd1Jxd09w?=
- =?utf-8?B?OXQwOSsvUE1jYUJraHZBS045SEo3eU1LQ2VxVGJHTWFNVVF4MC9UOGxUQ1VI?=
- =?utf-8?B?NjhRRFFLMExSVFVBcnJ6QkxGN1VWbUxhNXB4QS9wNDRaaHVLV01Sd0dCa3pz?=
- =?utf-8?B?c0cwckJ6RS9FcXpOWjlzSVFPL280ZTNseUsrT1BIK3Vwc3QreVRTRnJLWVV2?=
- =?utf-8?B?VmtVZWlnR1lvc1lrOGVweWFwMU5La1FNeUtIL21ITXFtU0ZMOGtFRG1ZUnVq?=
- =?utf-8?B?Z3ZGKzRycGRsSEk3Z2YxSTlFTFNHTUc5YzArSGdzb2o4MlBRczFtYzFhd1ho?=
- =?utf-8?B?WTJJT1QrZlpyY08zbW04aWYyUU00QVpzcm1qUDZzYnBIZEFPYlVUOWgrL0xr?=
- =?utf-8?B?OVdhU1JzQkFtWG0xNFArYWZWVXlVNmlMZWpEMDBCQSswek1KcHVSL0JtbHI4?=
- =?utf-8?B?WEpYTUhiN2xyMEM1QVhhODhzMnYzMXNWbXVwdTNwRnpLUFZwd3NBYmN1U0Ju?=
- =?utf-8?B?QmdKd2RGNDJJWmZsdi84Nk1DSldUdkF1MjZmQ3k1dW9EWjFCTHhCKzluYWl5?=
- =?utf-8?B?ODZrT3hoSzYxWjBnVFNReXpJV1Bpb1NLQ0xwSlRaVmJQZ0hmREtYUms0b0Yx?=
- =?utf-8?B?VFBjZHRuR2ZqQ2ZQZjU2Zi9YRkt5QnYrdzdxU1UrRGdnSXc3a1RzRHVGOTN1?=
- =?utf-8?B?MWVvbWRhalJaS2pYMUJSeTg5Y2F3bElnVThPRmZMckVnb0l2OEFvaWlXQkx6?=
- =?utf-8?Q?0jsy1CpaYrWNc3EbG/5txeRekM5yJjqGAaE0Dge?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:SJ2PR12MB8109.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(376014)(7416014)(366016)(1800799024); DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?NlNnV25KNlZQZ0VWeWFkbWlkeE5lOE41blE2SGRsRHBYaWxyanFlL2tja1ZJ?=
- =?utf-8?B?Vm9yZ0J6RjR0WjFJYXBFQVZPcysrdFR3bExuamRsa3VmaFlGS1FXdXB5STJi?=
- =?utf-8?B?Wk1EWXY3TVd0bmZjbUNNcWJKbnAwVXhxV0d1MEwwbURaa0JmVmNCRC95dmpV?=
- =?utf-8?B?ckYzL0libjA5c0FGQ2lEOWN5ZFkxb3grNzV6Z240K0NxUGFybnBRKzhiUkNs?=
- =?utf-8?B?SFNic3J2YkM3NzAyRzVlTHVBTW1Hb2x4L3F3RDc4dzhYaUtzNWNOTWdVRjU1?=
- =?utf-8?B?QUlWQzV1dHhDUGUxK2tqNC8veDhoaVhYcDZpdjVkVGMxSVJERUlIN05hR2RD?=
- =?utf-8?B?ZVFyRllDUEl5RUQvaUNWY0t4WnhKRTB0UVo4cHRLMm4wQVNQWXArUXlSeEth?=
- =?utf-8?B?OFc1VVI0TjJMRjRJUUFRS3ZLRzZpZjJGNWlqanJPOWU2dzRCWmExa0VwVkJM?=
- =?utf-8?B?S0EyVmVORlJycWl2KytOckQyOE81VGhnL2FxdHJxcU1wL1hmQ0NyZlVRMXFa?=
- =?utf-8?B?Z0N3YmZLL2dtUmFkK09YaXU4KzZOeW05YkxiOE94SXExWUNRb1dNRGNwWUZQ?=
- =?utf-8?B?RzZzV1Vyd2NuVzF3ajZkMlZZQmswK3FrbVhzd1R5MHB0Zk9vTmFMU0habFR0?=
- =?utf-8?B?L1BuaDNVZTQxSndjaG1GUFBJdGwwRGJxQkZDZ3EwN2ttV1dmSk96UUNabjlj?=
- =?utf-8?B?L043NUMvTlA1OGNCcmRFS3ZUZFVZUWZvS1RKWWJxZXgwVWJuN01lYmtLMEFr?=
- =?utf-8?B?TUxMdjVSUVN2amJObWVPV1pZWGVCN3BsUHVzcmNlSGxKamlUV1pKMGJpZCsr?=
- =?utf-8?B?azB4QUJSS20rWGRzaklYd3E5R2J5RjJabkpnK1ZBck10ZmJ2MnQwRlZ3bkVQ?=
- =?utf-8?B?eWtWbWZLQU16WjZVb0d4VVRBWE5WNE5SWVFyZXBmamdWeXF4MllIdUh6cE9M?=
- =?utf-8?B?OGd6QkRyTEZhR3lrZE1OcC9sY1pBMHJZU1ZGaFlEMWNQd2FiYUUyU0xHZUFl?=
- =?utf-8?B?N3NZSmdzSW9tWE5iQzFhRVBOeldGRWptcjBQWVVHdnRPR2kvUHhpWXZFZkdw?=
- =?utf-8?B?cDhwU0plckZqVElMT0EyQWE3NzRYWk90bDY1Nkw4dk1mRURtMzk2VXJqMXBR?=
- =?utf-8?B?TFdSckFyOXJNT2xtQUJKSnppUVUwb0w5N2Q2RnhsMTJ3amU5VndqMU5oNnBC?=
- =?utf-8?B?eXljWE0wRk1PWTlCV2ZEYXlUNmwwV2RnU2NBeERMenFDcmQ2SVh5VytHSnNH?=
- =?utf-8?B?YXk5NXRBek5nb0RmRGNsYzczUU9nQVlWcGpNOTh2V2UyMW5LSkRROHBZNXE1?=
- =?utf-8?B?aGZHc1JnUXM2eEo5dytwVEhNZU50bTBDNjQvOEl2clUrVlF0VUhkSXZ2cmpq?=
- =?utf-8?B?STc1TGtDQzJMcGFHdk5wdnNzLzNPa21tOXZHM3EwN3k1dWxVTGdyR3p1b3Fa?=
- =?utf-8?B?ZlRqRTY5K05zQUxheURDNUNLMjhZdFkvRmNLVHBHSDhzNkdzS2YrR2FaU1Zq?=
- =?utf-8?B?ZmJndmNkR0dsUzBGSlFYQks1NjF3S2JML1BlVWNQMG1Sb0toWmhkTGF5YlJK?=
- =?utf-8?B?ay8ya3FLampTV05OdzVZVk5CTXlKSDF5WXBMeDJHU3ZvZUY0cjJCZXdIazFL?=
- =?utf-8?B?eU5aTjRYUGZQYkJYUlhaN0xwZGlldUlJcHRIRXBRVldVckxTSTNwbVByLyt0?=
- =?utf-8?B?UlpQYjlaamdIemREMGtQdi93U2gwUU50RWNONDVtOW9kMmU0RHlkOGFWWndi?=
- =?utf-8?B?akppSGF4UzhSR3pNMzlaY3d2WENaUVYzajBkV21ZVkM5VXk1WGl5RytwYUVq?=
- =?utf-8?B?aXlPZHpJdEhmSDJRQVFDOXdxaVlSL1JtcTM5MmNKVDRONmZmN3NMbkJwTytK?=
- =?utf-8?B?TUVpeFd3clBtMXloanJTUnUzRWVQdHNBSDhnYno3TmQvMjh5N1F2MzU1RHQ3?=
- =?utf-8?B?RlhWY2tCYllFeEpyQ1dQWlE4dnVLK3RVd0pxS2FYN0hHK3NRVCs5bjBvbzlN?=
- =?utf-8?B?eTNYMTY3ekh6aytRVWJ3SXFZNVlYZG5xeHkwNFp4TFhwenZVKzBsbnQwbEFp?=
- =?utf-8?B?bG5ieTZ4Zm5zbmN4TUF0cnlveEhvaTRJY1VMU3BiRmVrMjRRd2hMQWt6eDIw?=
- =?utf-8?Q?X78tf5pTGkblSao+Jyn1h8hr/?=
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 5eec2318-4cb1-4bad-a965-08dcf9882e74
-X-MS-Exchange-CrossTenant-AuthSource: SJ2PR12MB8109.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 31 Oct 2024 08:44:07.2654 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: GARenO7Q/nLnW49g0zxYyS0YfBOu5sM4FQKnjS0eDidlkyq90WhAAP2bZ2vGQnND
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN0PR12MB5812
-Received-SPF: permerror client-ip=2a01:111:f403:2416::621;
- envelope-from=michal.simek@amd.com;
- helo=NAM11-CO1-obe.outbound.protection.outlook.com
-X-Spam_score_int: -24
-X-Spam_score: -2.5
-X-Spam_bar: --
-X-Spam_report: (-2.5 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.366,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- SPF_HELO_PASS=-0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+Received-SPF: none client-ip=2607:f8b0:4864:20::42a;
+ envelope-from=akihiko.odaki@daynix.com; helo=mail-pf1-x42a.google.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_NONE=0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -225,43 +110,1473 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Hi,
-
-On 10/31/24 05:06, Philippe Mathieu-Daudé wrote:
-> Hi Michal,
+On 2024/10/30 5:58, Phil Dennis-Jordan wrote:
+> MacOS provides a framework (library) that allows any vmm to implement a
+> paravirtualized 3d graphics passthrough to the host metal stack called
+> ParavirtualizedGraphics.Framework (PVG). The library abstracts away
+> almost every aspect of the paravirtualized device model and only provides
+> and receives callbacks on MMIO access as well as to share memory address
+> space between the VM and PVG.
 > 
-> On 30/10/24 02:53, Michal Simek wrote:
->> Hi Alistair,
->>
->> On 10/30/24 03:54, Alistair Francis wrote:
->>> On Thu, Oct 17, 2024 at 5:26 PM Sai Pavan Boddu <sai.pavan.boddu@amd.com> wrote:
->>
->>>> diff --git a/hw/riscv/microblaze-v-virt.c b/hw/riscv/microblaze-v-virt.c
->>>> new file mode 100644
->>>> index 00000000000..6603e6d6b06
->>>> --- /dev/null
->>>> +++ b/hw/riscv/microblaze-v-virt.c
->>>> @@ -0,0 +1,181 @@
->>>> +/*
->>>> + * QEMU model of Microblaze V (32bit version)
+> This patch implements a QEMU device that drives PVG for the VMApple
+> variant of it.
 > 
-> Is there a 64-bit model planned?
+> Signed-off-by: Alexander Graf <graf@amazon.com>
+> Co-authored-by: Alexander Graf <graf@amazon.com>
+> 
+> Subsequent changes:
+> 
+>   * Cherry-pick/rebase conflict fixes, API use updates.
+>   * Moved from hw/vmapple/ (useful outside that machine type)
+>   * Overhaul of threading model, many thread safety improvements.
+>   * Asynchronous rendering.
+>   * Memory and object lifetime fixes.
+>   * Refactoring to split generic and (vmapple) MMIO variant specific
+>     code.
+> 
+> Signed-off-by: Phil Dennis-Jordan <phil@philjordan.eu>
+> ---
+> v2:
+> 
+>   * Cherry-pick/rebase conflict fixes
+>   * BQL function renaming
+>   * Moved from hw/vmapple/ (useful outside that machine type)
+>   * Code review comments: Switched to DEFINE_TYPES macro & little endian
+>     MMIO.
+>   * Removed some dead/superfluous code
+>   * Mad set_mode thread & memory safe
+>   * Added migration blocker due to lack of (de-)serialisation.
+>   * Fixes to ObjC refcounting and autorelease pool usage.
+>   * Fixed ObjC new/init misuse
+>   * Switched to ObjC category extension for private property.
+>   * Simplified task memory mapping and made it thread safe.
+>   * Refactoring to split generic and vmapple MMIO variant specific
+>     code.
+>   * Switched to asynchronous MMIO writes on x86-64
+>   * Rendering and graphics update are now done asynchronously
+>   * Fixed cursor handling
+>   * Coding convention fixes
+>   * Removed software cursor compositing
+> 
+> v3:
+> 
+>   * Rebased on latest upstream, fixed breakages including switching to Resettable methods.
+>   * Squashed patches dealing with dGPUs, MMIO area size, and GPU picking.
+>   * Allow re-entrant MMIO; this simplifies the code and solves the divergence
+>     between x86-64 and arm64 variants.
+> 
+> v4:
+> 
+>   * Renamed '-vmapple' device variant to '-mmio'
+>   * MMIO device type now requires aarch64 host and guest
+>   * Complete overhaul of the glue code for making Qemu's and
+>     ParavirtualizedGraphics.framework's threading and synchronisation models
+>     work together. Calls into PVG are from dispatch queues while the
+>     BQL-holding initiating thread processes AIO context events; callbacks from
+>     PVG are scheduled as BHs on the BQL/main AIO context, awaiting completion
+>     where necessary.
+>   * Guest frame rendering state is covered by the BQL, with only the PVG calls
+>     outside the lock, and serialised on the named render_queue.
+>   * Simplified logic for dropping frames in-flight during mode changes, fixed
+>     bug in pending frames logic.
+>   * Addressed smaller code review notes such as: function naming, object type
+>     declarations, type names/declarations/casts, code formatting, #include
+>     order, over-cautious ObjC retain/release, what goes in init vs realize,
+>     etc.
+> 
+> v5:
+> 
+>   * Smaller non-functional fixes in response to review comments, such as using
+>     NULL for the AIO_WAIT_WHILE context argument, type name formatting,
+>     deleting leftover debug code, logging improvements, state struct field
+>     order and documentation improvements, etc.
+>   * Instead of a single condition variable for all synchronous BH job types,
+>     there is now one for each callback block. This reduces the number
+>     of threads being awoken unnecessarily to near zero.
+>   * MMIO device variant: Unified the BH job for raising interrupts.
+>   * Use DMA APIs for PVG framework's guest memory read requests.
+>   * Thread safety improvements: ensure mutable AppleGFXState fields are not
+>     accessed outside the appropriate lock. Added dedicated mutex for the task
+>     list.
+>   * Retain references to MemoryRegions for which there exist mappings in each
+>     PGTask, and for IOSurface mappings.
+> 
+>   hw/display/Kconfig          |   9 +
+>   hw/display/apple-gfx-mmio.m | 387 ++++++++++++++++++
+>   hw/display/apple-gfx.h      |  79 ++++
+>   hw/display/apple-gfx.m      | 773 ++++++++++++++++++++++++++++++++++++
+>   hw/display/meson.build      |   4 +
+>   hw/display/trace-events     |  28 ++
+>   meson.build                 |   4 +
+>   7 files changed, 1284 insertions(+)
+>   create mode 100644 hw/display/apple-gfx-mmio.m
+>   create mode 100644 hw/display/apple-gfx.h
+>   create mode 100644 hw/display/apple-gfx.m
+> 
+> diff --git a/hw/display/Kconfig b/hw/display/Kconfig
+> index 2250c740078..6a9b7b19ada 100644
+> --- a/hw/display/Kconfig
+> +++ b/hw/display/Kconfig
+> @@ -140,3 +140,12 @@ config XLNX_DISPLAYPORT
+>   
+>   config DM163
+>       bool
+> +
+> +config MAC_PVG
+> +    bool
+> +    default y
+> +
+> +config MAC_PVG_MMIO
+> +    bool
+> +    depends on MAC_PVG && AARCH64
+> +
+> diff --git a/hw/display/apple-gfx-mmio.m b/hw/display/apple-gfx-mmio.m
+> new file mode 100644
+> index 00000000000..b0c5669a344
+> --- /dev/null
+> +++ b/hw/display/apple-gfx-mmio.m
+> @@ -0,0 +1,387 @@
+> +/*
+> + * QEMU Apple ParavirtualizedGraphics.framework device, MMIO (arm64) variant
+> + *
+> + * Copyright © 2023 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+> + *
+> + * This work is licensed under the terms of the GNU GPL, version 2 or later.
+> + * See the COPYING file in the top-level directory.
+> + *
+> + * SPDX-License-Identifier: GPL-2.0-or-later
+> + *
+> + * ParavirtualizedGraphics.framework is a set of libraries that macOS provides
+> + * which implements 3d graphics passthrough to the host as well as a
+> + * proprietary guest communication channel to drive it. This device model
+> + * implements support to drive that library from within QEMU as an MMIO-based
+> + * system device for macOS on arm64 VMs.
+> + */
+> +
+> +#include "qemu/osdep.h"
+> +#import <ParavirtualizedGraphics/ParavirtualizedGraphics.h>
+> +#include "apple-gfx.h"
+> +#include "monitor/monitor.h"
+> +#include "hw/sysbus.h"
+> +#include "hw/irq.h"
+> +#include "trace.h"
+> +#include "qemu/log.h"
+> +
+> +OBJECT_DECLARE_SIMPLE_TYPE(AppleGFXMMIOState, APPLE_GFX_MMIO)
+> +
+> +/*
+> + * ParavirtualizedGraphics.Framework only ships header files for the PCI
+> + * variant which does not include IOSFC descriptors and host devices. We add
+> + * their definitions here so that we can also work with the ARM version.
+> + */
+> +typedef bool(^IOSFCRaiseInterrupt)(uint32_t vector);
+> +typedef bool(^IOSFCUnmapMemory)(
+> +    void *, void *, void *, void *, void *, void *);
+> +typedef bool(^IOSFCMapMemory)(
+> +    uint64_t phys, uint64_t len, bool ro, void **va, void *, void *);
+> +
+> +@interface PGDeviceDescriptor (IOSurfaceMapper)
+> +@property (readwrite, nonatomic) bool usingIOSurfaceMapper;
+> +@end
+> +
+> +@interface PGIOSurfaceHostDeviceDescriptor : NSObject
+> +-(PGIOSurfaceHostDeviceDescriptor *)init;
+> +@property (readwrite, nonatomic, copy, nullable) IOSFCMapMemory mapMemory;
+> +@property (readwrite, nonatomic, copy, nullable) IOSFCUnmapMemory unmapMemory;
+> +@property (readwrite, nonatomic, copy, nullable) IOSFCRaiseInterrupt raiseInterrupt;
+> +@end
+> +
+> +@interface PGIOSurfaceHostDevice : NSObject
+> +-(instancetype)initWithDescriptor:(PGIOSurfaceHostDeviceDescriptor *)desc;
+> +-(uint32_t)mmioReadAtOffset:(size_t)offset;
+> +-(void)mmioWriteAtOffset:(size_t)offset value:(uint32_t)value;
+> +@end
+> +
+> +struct AppleGFXMapSurfaceMemoryJob;
+> +struct AppleGFXMMIOState {
+> +    SysBusDevice parent_obj;
+> +
+> +    AppleGFXState common;
+> +
+> +    QemuCond iosfc_map_job_cond;
+> +    QemuCond iosfc_unmap_job_cond;
+> +    qemu_irq irq_gfx;
+> +    qemu_irq irq_iosfc;
+> +    MemoryRegion iomem_iosfc;
+> +    PGIOSurfaceHostDevice *pgiosfc;
+> +
+> +    GArray *iosfc_mapped_regions; /* array of AppleGFXMMIOMappedRegion */
 
-This guide is talking about 64bit too
-https://docs.amd.com/r/en-US/ug1629-microblaze-v-user-guide
+We don't need to have an array but we can get the memory region with 
+address_space_translate() when mapping or with memory_region_from_host() 
+when unmapping.
 
-It means answer is yes. And pretty much this generic model with the same layout 
-should be possible to use with generic 64bit version too.
+> +};
+> +
+> +typedef struct AppleGFXMMIOJob {
+> +    AppleGFXMMIOState *state;
+> +    uint64_t offset;
+> +    uint64_t value;
+> +    bool completed;
+> +} AppleGFXMMIOJob;
+> +
+> +static void iosfc_do_read(void *opaque)
+> +{
+> +    AppleGFXMMIOJob *job = opaque;
+> +    job->value = [job->state->pgiosfc mmioReadAtOffset:job->offset];
+> +    qatomic_set(&job->completed, true);
+> +    aio_wait_kick();
+> +}
+> +
+> +static uint64_t iosfc_read(void *opaque, hwaddr offset, unsigned size)
+> +{
+> +    AppleGFXMMIOJob job = {
+> +        .state = opaque,
+> +        .offset = offset,
+> +        .completed = false,
+> +    };
+> +    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+> +
+> +    dispatch_async_f(queue, &job, iosfc_do_read);
+> +    AIO_WAIT_WHILE(NULL, !qatomic_read(&job.completed));
+> +
+> +    trace_apple_gfx_mmio_iosfc_read(offset, job.value);
+> +    return job.value;
+> +}
+> +
+> +static void iosfc_do_write(void *opaque)
+> +{
+> +    AppleGFXMMIOJob *job = opaque;
+> +    [job->state->pgiosfc mmioWriteAtOffset:job->offset value:job->value];
+> +    qatomic_set(&job->completed, true);
+> +    aio_wait_kick();
+> +}
+> +
+> +static void iosfc_write(void *opaque, hwaddr offset, uint64_t val,
+> +                        unsigned size)
+> +{
+> +    AppleGFXMMIOJob job = {
+> +        .state = opaque,
+> +        .offset = offset,
+> +        .value = val,
+> +        .completed = false,
+> +    };
+> +    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+> +
+> +    dispatch_async_f(queue, &job, iosfc_do_write);
+> +    AIO_WAIT_WHILE(NULL, !qatomic_read(&job.completed));
+> +
+> +    trace_apple_gfx_mmio_iosfc_write(offset, val);
+> +}
+> +
+> +static const MemoryRegionOps apple_iosfc_ops = {
+> +    .read = iosfc_read,
+> +    .write = iosfc_write,
+> +    .endianness = DEVICE_LITTLE_ENDIAN,
+> +    .valid = {
+> +        .min_access_size = 4,
+> +        .max_access_size = 8,
+> +    },
+> +    .impl = {
+> +        .min_access_size = 4,
+> +        .max_access_size = 8,
+> +    },
+> +};
+> +
+> +static void raise_irq(void *opaque)
+> +{
+> +    qemu_irq *irq = opaque;
+> +
+> +    qemu_irq_pulse(*irq);
+> +}
+> +
+> +typedef struct AppleGFXMapSurfaceMemoryJob {
+> +    uint64_t guest_physical_address;
+> +    uint64_t guest_physical_length;
+> +    void *result_mem;
+> +    AppleGFXMMIOState *state;
+> +    bool read_only;
+> +    bool success;
+> +    bool done;
+> +} AppleGFXMapSurfaceMemoryJob;
+> +
+> +typedef struct AppleGFXMMIOMappedRegion {
+> +    MemoryRegion *region;
+> +    uint64_t map_count;
+> +    uintptr_t host_virtual_start;
+> +    uintptr_t host_virtual_end;
+> +} AppleGFXMMIOMappedRegion;
+> +
+> +static void apple_gfx_mmio_map_surface_memory(void *opaque)
+> +{
+> +    AppleGFXMapSurfaceMemoryJob *job = opaque;
+> +    AppleGFXMMIOState *s = job->state;
+> +    mach_vm_address_t mem;
+> +    MemoryRegion *region = NULL;
+> +    GArray *regions = s->iosfc_mapped_regions;
+> +    AppleGFXMMIOMappedRegion *mapped_region;
+> +    size_t i;
+> +
+> +    mem = apple_gfx_host_address_for_gpa_range(job->guest_physical_address,
+> +                                               job->guest_physical_length,
+> +                                               job->read_only, &region);
+> +
+> +    if (mem != 0) {
+> +        for (i = 0; i < regions->len; ++i) {
+> +            mapped_region = &g_array_index(regions, AppleGFXMMIOMappedRegion, i);
+> +            if (region == mapped_region->region) {
+> +                ++mapped_region->map_count;
+> +                break;
+> +            }
+> +        }
+> +
+> +        if (i >= regions->len) {
+> +            /* No existing mapping to this region found, keep a reference and save
+> +             */
+> +            uintptr_t start = (uintptr_t)memory_region_get_ram_ptr(region);
+> +            AppleGFXMMIOMappedRegion new_region = {
+> +                region, 1,
+> +                start,
+> +                start + memory_region_size(region)
+> +            };
+> +            memory_region_ref(region);
+> +            g_array_append_val(regions, new_region);
+> +            trace_apple_gfx_iosfc_map_memory_new_region(
+> +                i, region, start, new_region.host_virtual_end);
+> +        }
+> +    }
+> +
+> +    qemu_mutex_lock(&s->common.job_mutex);
+> +    job->result_mem = (void *)mem;
+> +    job->success = mem != 0;
+> +    job->done = true;
+> +    qemu_cond_broadcast(&s->iosfc_map_job_cond);
+> +    qemu_mutex_unlock(&s->common.job_mutex);
+> +}
+> +
+> +typedef struct AppleGFXUnmapSurfaceMemoryJob {
+> +    void *virtual_address;
+> +    AppleGFXMMIOState *state;
+> +    bool done;
+> +} AppleGFXUnmapSurfaceMemoryJob;
+> +
+> +static AppleGFXMMIOMappedRegion *find_mapped_region_containing(GArray *regions,
+> +                                                               uintptr_t va,
+> +                                                               size_t *index)
+> +{
+> +    size_t i;
+> +    AppleGFXMMIOMappedRegion *mapped_region;
+> +
+> +    for (i = 0; i < regions->len; ++i) {
+> +        mapped_region = &g_array_index(regions, AppleGFXMMIOMappedRegion, i);
+> +        if (va >= mapped_region->host_virtual_start &&
+> +            va < mapped_region->host_virtual_end) {
+ > +            *index = i;> +            return mapped_region;
+> +        }
+> +    }
+> +    return NULL;
+> +}
+> +
+> +static void apple_gfx_mmio_unmap_surface_memory(void *opaque)
+> +{
+> +    AppleGFXUnmapSurfaceMemoryJob *job = opaque;
+> +    AppleGFXMMIOState *s = job->state;
+> +    uintptr_t mem = (uintptr_t)job->virtual_address;
+> +    GArray *regions = s->iosfc_mapped_regions;
+> +    size_t region_index;
+> +    AppleGFXMMIOMappedRegion *mapped_region =
+> +        find_mapped_region_containing(regions, mem, &region_index);
+> +
+> +    if (mapped_region) {
+> +        trace_apple_gfx_iosfc_unmap_memory_region(mem, region_index, mapped_region->map_count, mapped_region->region);
+> +        if (--mapped_region->map_count == 0) {
+> +            memory_region_unref(mapped_region->region);
+> +            g_array_remove_index_fast(regions, region_index);
+> +        }
+> +    } else {
+> +        qemu_log_mask(LOG_GUEST_ERROR, "%s: memory at %p to be unmapped not "
+> +                      "found in any of %u mapped regions.\n",
+> +                      __func__,
+> +                      job->virtual_address, regions->len);
+> +    }
+> +
+> +    qemu_mutex_lock(&s->common.job_mutex);
+> +    job->done = true;
+> +    qemu_cond_broadcast(&s->iosfc_unmap_job_cond);
+> +    qemu_mutex_unlock(&s->common.job_mutex);
+> +}
+> +
+> +static PGIOSurfaceHostDevice *apple_gfx_prepare_iosurface_host_device(
+> +    AppleGFXMMIOState *s)
+> +{
+> +    PGIOSurfaceHostDeviceDescriptor *iosfc_desc =
+> +        [PGIOSurfaceHostDeviceDescriptor new];
+> +    PGIOSurfaceHostDevice *iosfc_host_dev = nil;
+> +
+> +    iosfc_desc.mapMemory =
+> +        ^bool(uint64_t phys, uint64_t len, bool ro, void **va, void *e, void *f) {
+> +            AppleGFXMapSurfaceMemoryJob job = {
+> +                .guest_physical_address = phys, .guest_physical_length = len,
+> +                .read_only = ro, .state = s,
+> +            };
+> +
+> +            aio_bh_schedule_oneshot(qemu_get_aio_context(),
+> +                                    apple_gfx_mmio_map_surface_memory, &job);
+> +            apple_gfx_await_bh_job(&s->common, &s->iosfc_map_job_cond, &job.done);
+> +
+> +            *va = job.result_mem;
+> +
+> +            trace_apple_gfx_iosfc_map_memory(phys, len, ro, va, e, f, *va,
+> +                                             job.success);
+> +
+> +            return job.success;
+> +        };
+> +
+> +    iosfc_desc.unmapMemory =
+> +        ^bool(void *va, void *b, void *c, void *d, void *e, void *f) {
+> +            AppleGFXUnmapSurfaceMemoryJob job = { va, s };
+> +            trace_apple_gfx_iosfc_unmap_memory(va, b, c, d, e, f);
+> +
+> +            aio_bh_schedule_oneshot(qemu_get_aio_context(),
+> +                                    apple_gfx_mmio_unmap_surface_memory, &job);
+> +            apple_gfx_await_bh_job(&s->common, &s->iosfc_unmap_job_cond, &job.done);
+> +
+> +            return true;
+> +        };
+> +
+> +    iosfc_desc.raiseInterrupt = ^bool(uint32_t vector) {
+> +        trace_apple_gfx_iosfc_raise_irq(vector);
+> +        aio_bh_schedule_oneshot(qemu_get_aio_context(),
+> +                                raise_irq, &s->irq_iosfc);
+> +        return true;
+> +    };
+> +
+> +    iosfc_host_dev =
+> +        [[PGIOSurfaceHostDevice alloc] initWithDescriptor:iosfc_desc];
+> +    [iosfc_desc release];
+> +    return iosfc_host_dev;
+> +}
+> +
+> +static void apple_gfx_mmio_realize(DeviceState *dev, Error **errp)
+> +{
+> +    @autoreleasepool {
+> +        AppleGFXMMIOState *s = APPLE_GFX_MMIO(dev);
+> +        PGDeviceDescriptor *desc = [PGDeviceDescriptor new];
+> +
+> +        desc.raiseInterrupt = ^(uint32_t vector) {
+> +            trace_apple_gfx_raise_irq(vector);
+> +            aio_bh_schedule_oneshot(qemu_get_aio_context(),
+> +                                    raise_irq, &s->irq_gfx);
+> +        };
+> +
+> +        desc.usingIOSurfaceMapper = true;
+> +        s->pgiosfc = apple_gfx_prepare_iosurface_host_device(s);
+> +
+> +        s->iosfc_mapped_regions =
+> +            g_array_sized_new(false /* no termination */, true /* clear */,
+> +                              sizeof(AppleGFXMMIOMappedRegion),
+> +                              2 /* Usually no more RAM regions*/);
+> +
+> +        apple_gfx_common_realize(&s->common, desc, errp);
+> +        qemu_cond_init(&s->iosfc_map_job_cond);
+> +        qemu_cond_init(&s->iosfc_unmap_job_cond);
+> +
+> +        [desc release];
+> +        desc = nil;
+> +    }
+> +}
+> +
+> +static void apple_gfx_mmio_init(Object *obj)
+> +{
+> +    AppleGFXMMIOState *s = APPLE_GFX_MMIO(obj);
+> +
+> +    apple_gfx_common_init(obj, &s->common, TYPE_APPLE_GFX_MMIO);
+> +
+> +    sysbus_init_mmio(SYS_BUS_DEVICE(s), &s->common.iomem_gfx);
+> +    memory_region_init_io(&s->iomem_iosfc, obj, &apple_iosfc_ops, s,
+> +                          TYPE_APPLE_GFX_MMIO, 0x10000);
+> +    sysbus_init_mmio(SYS_BUS_DEVICE(s), &s->iomem_iosfc);
+> +    sysbus_init_irq(SYS_BUS_DEVICE(s), &s->irq_gfx);
+> +    sysbus_init_irq(SYS_BUS_DEVICE(s), &s->irq_iosfc);
+> +}
+> +
+> +static void apple_gfx_mmio_reset(Object *obj, ResetType type)
+> +{
+> +    AppleGFXMMIOState *s = APPLE_GFX_MMIO(obj);
+> +    [s->common.pgdev reset];
+> +}
+> +
+> +
+> +static void apple_gfx_mmio_class_init(ObjectClass *klass, void *data)
+> +{
+> +    DeviceClass *dc = DEVICE_CLASS(klass);
+> +    ResettableClass *rc = RESETTABLE_CLASS(klass);
+> +
+> +    rc->phases.hold = apple_gfx_mmio_reset;
+> +    dc->hotpluggable = false;
+> +    dc->realize = apple_gfx_mmio_realize;
+> +}
+> +
+> +static TypeInfo apple_gfx_mmio_types[] = {
+> +    {
+> +        .name          = TYPE_APPLE_GFX_MMIO,
+> +        .parent        = TYPE_SYS_BUS_DEVICE,
+> +        .instance_size = sizeof(AppleGFXMMIOState),
+> +        .class_init    = apple_gfx_mmio_class_init,
+> +        .instance_init = apple_gfx_mmio_init,
+> +    }
+> +};
+> +DEFINE_TYPES(apple_gfx_mmio_types)
+> diff --git a/hw/display/apple-gfx.h b/hw/display/apple-gfx.h
+> new file mode 100644
+> index 00000000000..ef34e8160c8
+> --- /dev/null
+> +++ b/hw/display/apple-gfx.h
+> @@ -0,0 +1,79 @@
+> +/*
+> + * Data structures and functions shared between variants of the macOS
+> + * ParavirtualizedGraphics.framework based apple-gfx display adapter.
+> + *
+> + * SPDX-License-Identifier: GPL-2.0-or-later
+> + */
+> +
+> +#ifndef QEMU_APPLE_GFX_H
+> +#define QEMU_APPLE_GFX_H
+> +
+> +#define TYPE_APPLE_GFX_MMIO         "apple-gfx-mmio"
+> +#define TYPE_APPLE_GFX_PCI          "apple-gfx-pci"
+> +
+> +#include "qemu/osdep.h"
+> +#include <dispatch/dispatch.h>
+> +#import <ParavirtualizedGraphics/ParavirtualizedGraphics.h>
+> +#include "qemu/typedefs.h"
+> +#include "exec/memory.h"
+> +#include "ui/surface.h"
+> +
+> +@class PGDeviceDescriptor;
+> +@protocol PGDevice;
+> +@protocol PGDisplay;
+> +@protocol MTLDevice;
+> +@protocol MTLTexture;
+> +@protocol MTLCommandQueue;
+> +
+> +typedef QTAILQ_HEAD(, PGTask_s) PGTaskList;
+> +
+> +typedef struct AppleGFXState {
+> +    /* Initialised on init/realize() */
+> +    MemoryRegion iomem_gfx;
+> +    id<PGDevice> pgdev;
+> +    id<PGDisplay> pgdisp;
+> +    QemuConsole *con;
+> +    id<MTLDevice> mtl;
+> +    id<MTLCommandQueue> mtl_queue;
+> +    dispatch_queue_t render_queue;
+> +    /*
+> +     * QemuMutex & QemuConds for awaiting completion of PVG memory-mapping and
+> +     * reading requests after submitting them to run in the AIO context.
+> +     * QemuCond (rather than QemuEvent) are used so multiple concurrent jobs
+> +     * can be handled safely.
+> +     * The state associated with each job is tracked in a AppleGFX*Job struct
+> +     * for each kind of job; instances are allocated on the caller's stack.
+> +     * This struct also contains the completion flag which is used in
+> +     * conjunction with the condition variable.
+> +     */
+> +    QemuMutex job_mutex;
+> +    QemuCond task_map_job_cond;
+> +    QemuCond mem_read_job_cond;
+> +
+> +    /* tasks is protected by task_mutex */
+> +    QemuMutex task_mutex;
+> +    PGTaskList tasks;
+> +
+> +    /* Mutable state (BQL) */
+> +    QEMUCursor *cursor;
+> +    bool cursor_show;
+> +    bool gfx_update_requested;
+> +    bool new_frame_ready;
+> +    bool using_managed_texture_storage;
+> +    int32_t pending_frames;
+> +    void *vram;
+> +    DisplaySurface *surface;
+> +    id<MTLTexture> texture;
+> +} AppleGFXState;
+> +
+> +void apple_gfx_common_init(Object *obj, AppleGFXState *s, const char* obj_name);
+> +void apple_gfx_common_realize(AppleGFXState *s, PGDeviceDescriptor *desc,
+> +                              Error **errp);
+> +uintptr_t apple_gfx_host_address_for_gpa_range(uint64_t guest_physical,
+> +                                               uint64_t length, bool read_only,
+> +                                               MemoryRegion **mapping_in_region);
+> +void apple_gfx_await_bh_job(AppleGFXState *s, QemuCond *job_cond,
+> +                            bool *job_done_flag);
+> +
+> +#endif
+> +
+> diff --git a/hw/display/apple-gfx.m b/hw/display/apple-gfx.m
+> new file mode 100644
+> index 00000000000..101b38e8a6e
+> --- /dev/null
+> +++ b/hw/display/apple-gfx.m
+> @@ -0,0 +1,773 @@
+> +/*
+> + * QEMU Apple ParavirtualizedGraphics.framework device
+> + *
+> + * Copyright © 2023 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+> + *
+> + * This work is licensed under the terms of the GNU GPL, version 2 or later.
+> + * See the COPYING file in the top-level directory.
+> + *
+> + * SPDX-License-Identifier: GPL-2.0-or-later
+> + *
+> + * ParavirtualizedGraphics.framework is a set of libraries that macOS provides
+> + * which implements 3d graphics passthrough to the host as well as a
+> + * proprietary guest communication channel to drive it. This device model
+> + * implements support to drive that library from within QEMU.
+> + */
+> +
+> +#include "qemu/osdep.h"
+> +#import <ParavirtualizedGraphics/ParavirtualizedGraphics.h>
+> +#include <mach/mach_vm.h>
+> +#include "apple-gfx.h"
+> +#include "trace.h"
+> +#include "qemu-main.h"
+> +#include "exec/address-spaces.h"
+> +#include "migration/blocker.h"
+> +#include "monitor/monitor.h"
+> +#include "qemu/main-loop.h"
+> +#include "qemu/cutils.h"
+> +#include "qemu/log.h"
+> +#include "qapi/visitor.h"
+> +#include "qapi/error.h"
+> +#include "sysemu/dma.h"
+> +#include "ui/console.h"
+> +
+> +static const PGDisplayCoord_t apple_gfx_modes[] = {
+> +    { .x = 1440, .y = 1080 },
+> +    { .x = 1280, .y = 1024 },
+> +};
+> +
+> +/* This implements a type defined in <ParavirtualizedGraphics/PGDevice.h>
+> + * which is opaque from the framework's point of view. Typedef PGTask_t already
+> + * exists in the framework headers. */
+> +struct PGTask_s {
+> +    QTAILQ_ENTRY(PGTask_s) node;
+> +    AppleGFXState *s;
+> +    mach_vm_address_t address;
+> +    uint64_t len;
+> +    /*
+> +     * All unique MemoryRegions for which a mapping has been created in in this
+> +     * task, and on which we have thus called memory_region_ref(). There are
+> +     * usually very few regions of system RAM in total, so we expect this array
+> +     * to be very short. Therefore, no need for sorting or fancy search
+> +     * algorithms, linear search will do. */
+> +    GArray *mapped_regions;
 
-I expect that means that default_cpu_type should be TYPE_RISCV_CPU_BASE.
-and Kconfig should be extended
-+    depends on RISCV32 || RISCV64
+Use GPtrArray.
 
-Also some small updates in documentation to cover it.
+> +};
+> +
+> +static Error *apple_gfx_mig_blocker;
+> +
+> +static void apple_gfx_render_frame_completed(AppleGFXState *s,
+> +                                             uint32_t width, uint32_t height);
+> +
+> +static dispatch_queue_t get_background_queue(void)
+> +{
+> +    return dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+> +}
+> +
+> +static PGTask_t *apple_gfx_new_task(AppleGFXState *s, uint64_t len)
+> +{
+> +    mach_vm_address_t task_mem;
+> +    PGTask_t *task;
+> +    kern_return_t r;
+> +
+> +    r = mach_vm_allocate(mach_task_self(), &task_mem, len, VM_FLAGS_ANYWHERE);
+> +    if (r != KERN_SUCCESS) {
+> +        return NULL;
+> +    }
+> +
+> +    task = g_new0(PGTask_t, 1);
+> +    task->s = s;
+> +    task->address = task_mem;
+> +    task->len = len;
+> +    task->mapped_regions = g_array_sized_new(false /* no termination */,
+> +                                             true /* clear */,
+> +                                             sizeof(MemoryRegion *),
+> +                                             2 /* Usually no more RAM regions*/);
+> +
+> +    QEMU_LOCK_GUARD(&s->task_mutex);
+> +    QTAILQ_INSERT_TAIL(&s->tasks, task, node);
+> +
+> +    return task;
+> +}
+> +
+> +typedef struct AppleGFXIOJob {
+> +    AppleGFXState *state;
+> +    uint64_t offset;
+> +    uint64_t value;
+> +    bool completed;
+> +} AppleGFXIOJob;
+> +
+> +static void apple_gfx_do_read(void *opaque)
+> +{
+> +    AppleGFXIOJob *job = opaque;
+> +    job->value = [job->state->pgdev mmioReadAtOffset:job->offset];
+> +    qatomic_set(&job->completed, true);
+> +    aio_wait_kick();
+> +}
+> +
+> +static uint64_t apple_gfx_read(void *opaque, hwaddr offset, unsigned size)
+> +{
+> +    AppleGFXIOJob job = {
+> +        .state = opaque,
+> +        .offset = offset,
+> +        .completed = false,
+> +    };
+> +    dispatch_queue_t queue = get_background_queue();
+> +
+> +    dispatch_async_f(queue, &job, apple_gfx_do_read);
+> +    AIO_WAIT_WHILE(NULL, !qatomic_read(&job.completed));
+> +
+> +    trace_apple_gfx_read(offset, job.value);
+> +    return job.value;
+> +}
+> +
+> +static void apple_gfx_do_write(void *opaque)
+> +{
+> +    AppleGFXIOJob *job = opaque;
+> +    [job->state->pgdev mmioWriteAtOffset:job->offset value:job->value];
+> +    qatomic_set(&job->completed, true);
+> +    aio_wait_kick();
+> +}
+> +
+> +static void apple_gfx_write(void *opaque, hwaddr offset, uint64_t val,
+> +                            unsigned size)
+> +{
+> +    /* The methods mmioReadAtOffset: and especially mmioWriteAtOffset: can
+> +     * trigger and block on operations on other dispatch queues, which in turn
+> +     * may call back out on one or more of the callback blocks. For this reason,
+> +     * and as we are holding the BQL, we invoke the I/O methods on a pool
+> +     * thread and handle AIO tasks while we wait. Any work in the callbacks
+> +     * requiring the BQL will in turn schedule BHs which this thread will
+> +     * process while waiting. */
+> +    AppleGFXIOJob job = {
+> +        .state = opaque,
+> +        .offset = offset,
+> +        .value = val,
+> +        .completed = false,
+> +    };
+> +    dispatch_queue_t queue = get_background_queue();
+> +
+> +    dispatch_async_f(queue, &job, apple_gfx_do_write);
+> +    AIO_WAIT_WHILE(NULL, !qatomic_read(&job.completed));
+> +
+> +    trace_apple_gfx_write(offset, val);
+> +}
+> +
+> +static const MemoryRegionOps apple_gfx_ops = {
+> +    .read = apple_gfx_read,
+> +    .write = apple_gfx_write,
+> +    .endianness = DEVICE_LITTLE_ENDIAN,
+> +    .valid = {
+> +        .min_access_size = 4,
+> +        .max_access_size = 8,
+> +    },
+> +    .impl = {
+> +        .min_access_size = 4,
+> +        .max_access_size = 4,
+> +    },
+> +};
+> +
+> +static void apple_gfx_render_new_frame_bql_unlock(AppleGFXState *s)
+> +{
+> +    BOOL r;
+> +    bool managed_texture = s->using_managed_texture_storage;
+> +    uint32_t width = surface_width(s->surface);
+> +    uint32_t height = surface_height(s->surface);
+> +    MTLRegion region = MTLRegionMake2D(0, 0, width, height);
+> +    id<MTLCommandBuffer> command_buffer = [s->mtl_queue commandBuffer];
+> +    id<MTLTexture> texture = s->texture;
+> +
+> +    assert(bql_locked());
+> +    [texture retain];
+> +
+> +    bql_unlock();
+> +
+> +    /* This is not safe to call from the BQL due to PVG-internal locks causing
+> +     * deadlocks. */
+> +    r = [s->pgdisp encodeCurrentFrameToCommandBuffer:command_buffer
+> +                                             texture:texture
+> +                                              region:region];
+> +    if (!r) {
+> +        [texture release];
+> +        bql_lock();
+> +        --s->pending_frames;
+> +        bql_unlock();
+> +        qemu_log_mask(LOG_GUEST_ERROR,
+> +                      "%s: encodeCurrentFrameToCommandBuffer:texture:region: "
+> +                      "failed\n", __func__);
+> +        return;
+> +    }
+> +
+> +    if (managed_texture) {
+> +        /* "Managed" textures exist in both VRAM and RAM and must be synced. */
+> +        id<MTLBlitCommandEncoder> blit = [command_buffer blitCommandEncoder];
+> +        [blit synchronizeResource:texture];
+> +        [blit endEncoding];
+> +    }
+> +    [texture release];
+> +    [command_buffer addCompletedHandler:
+> +        ^(id<MTLCommandBuffer> cb)
+> +        {
+> +            dispatch_async(s->render_queue, ^{
+> +                apple_gfx_render_frame_completed(s, width, height);
+> +            });
+> +        }];
+> +    [command_buffer commit];
+> +}
+> +
+> +static void copy_mtl_texture_to_surface_mem(id<MTLTexture> texture, void *vram)
+> +{
+> +    /* TODO: Skip this entirely on a pure Metal or headless/guest-only
+> +     * rendering path, else use a blit command encoder? Needs careful
+> +     * (double?) buffering design. */
+> +    size_t width = texture.width, height = texture.height;
+> +    MTLRegion region = MTLRegionMake2D(0, 0, width, height);
+> +    [texture getBytes:vram
+> +          bytesPerRow:(width * 4)
+> +        bytesPerImage:(width * height * 4)
+> +           fromRegion:region
+> +          mipmapLevel:0
+> +                slice:0];
+> +}
+> +
+> +static void apple_gfx_render_frame_completed(AppleGFXState *s,
+> +                                             uint32_t width, uint32_t height)
+> +{
+> +    bql_lock();
+> +    --s->pending_frames;
+> +    assert(s->pending_frames >= 0);
+> +
+> +    /* Only update display if mode hasn't changed since we started rendering. */
+> +    if (width == surface_width(s->surface) &&
+> +        height == surface_height(s->surface)) {
+> +        copy_mtl_texture_to_surface_mem(s->texture, s->vram);
+> +        if (s->gfx_update_requested) {
+> +            s->gfx_update_requested = false;
+> +            dpy_gfx_update_full(s->con);
+> +            graphic_hw_update_done(s->con);
+> +            s->new_frame_ready = false;
+> +        } else {
+> +            s->new_frame_ready = true;
+> +        }
+> +    }
+> +    if (s->pending_frames > 0) {
+> +        apple_gfx_render_new_frame_bql_unlock(s);
+> +    } else {
+> +        bql_unlock();
+> +    }
+> +}
+> +
+> +static void apple_gfx_fb_update_display(void *opaque)
+> +{
+> +    AppleGFXState *s = opaque;
+> +
+> +    assert(bql_locked());
+> +    if (s->new_frame_ready) {
+> +        dpy_gfx_update_full(s->con);
+> +        s->new_frame_ready = false;
+> +        graphic_hw_update_done(s->con);
+> +    } else if (s->pending_frames > 0) {
+> +        s->gfx_update_requested = true;
+> +    } else {
+> +        graphic_hw_update_done(s->con);
+> +    }
+> +}
+> +
+> +static const GraphicHwOps apple_gfx_fb_ops = {
+> +    .gfx_update = apple_gfx_fb_update_display,
+> +    .gfx_update_async = true,
+> +};
+> +
+> +static void update_cursor(AppleGFXState *s)
+> +{
+> +    assert(bql_locked());
+> +    dpy_mouse_set(s->con, s->pgdisp.cursorPosition.x,
+> +                  s->pgdisp.cursorPosition.y, s->cursor_show);
+> +}
+> +
+> +static void set_mode(AppleGFXState *s, uint32_t width, uint32_t height)
+> +{
+> +    MTLTextureDescriptor *textureDescriptor;
+> +
+> +    if (s->surface &&
+> +        width == surface_width(s->surface) &&
+> +        height == surface_height(s->surface)) {
+> +        return;
+> +    }
+> +
+> +    g_free(s->vram);
+> +    [s->texture release];
+> +
+> +    s->vram = g_malloc0_n(width * height, 4);
+> +    s->surface = qemu_create_displaysurface_from(width, height, PIXMAN_LE_a8r8g8b8,
+> +                                                 width * 4, s->vram);
 
-Is there something else what should be updated?
+Use qemu_create_displaysurface() and let DisplaySurface manage the 
+memory for us.
 
-Thanks,
-Michal
+> +
+> +    @autoreleasepool {
+> +        textureDescriptor =
+> +            [MTLTextureDescriptor
+> +                texture2DDescriptorWithPixelFormat:MTLPixelFormatBGRA8Unorm
+> +                                             width:width
+> +                                            height:height
+> +                                         mipmapped:NO];
+> +        textureDescriptor.usage = s->pgdisp.minimumTextureUsage;
+> +        s->texture = [s->mtl newTextureWithDescriptor:textureDescriptor];
+> +    }
+> +
+> +    s->using_managed_texture_storage =
+> +        (s->texture.storageMode == MTLStorageModeManaged);
+> +    dpy_gfx_replace_surface(s->con, s->surface);
+> +}
+> +
+> +static void create_fb(AppleGFXState *s)
+> +{
+> +    s->con = graphic_console_init(NULL, 0, &apple_gfx_fb_ops, s);
+> +    set_mode(s, 1440, 1080);
+> +
+> +    s->cursor_show = true;
+> +}
+> +
+> +static size_t apple_gfx_get_default_mmio_range_size(void)
+> +{
+> +    size_t mmio_range_size;
+> +    @autoreleasepool {
+> +        PGDeviceDescriptor *desc = [PGDeviceDescriptor new];
+> +        mmio_range_size = desc.mmioLength;
+> +        [desc release];
+> +    }
+> +    return mmio_range_size;
+> +}
+> +
+> +void apple_gfx_common_init(Object *obj, AppleGFXState *s, const char* obj_name)
+> +{
+> +    size_t mmio_range_size = apple_gfx_get_default_mmio_range_size();
+> +
+> +    trace_apple_gfx_common_init(obj_name, mmio_range_size);
+> +    memory_region_init_io(&s->iomem_gfx, obj, &apple_gfx_ops, s, obj_name,
+> +                          mmio_range_size);
+> +
+> +    /* TODO: PVG framework supports serialising device state: integrate it! */
+> +}
+> +
+> +typedef struct AppleGFXMapMemoryJob {
+> +    AppleGFXState *state;
+> +    PGTask_t *task;
+> +    uint64_t virtual_offset;
+> +    PGPhysicalMemoryRange_t *ranges;
+> +    uint32_t range_count;
+> +    bool read_only;
+> +    bool success;
+> +    bool done;
+> +} AppleGFXMapMemoryJob;
+> +
+> +uintptr_t apple_gfx_host_address_for_gpa_range(uint64_t guest_physical,
+> +                                               uint64_t length, bool read_only,
+> +                                               MemoryRegion **mapping_in_region)
+> +{
+> +    MemoryRegion *ram_region;
+> +    uintptr_t host_address;
+> +    hwaddr ram_region_offset = 0;
+> +    hwaddr ram_region_length = length;
+> +
+> +    ram_region = address_space_translate(&address_space_memory,
+> +                                         guest_physical,
+> +                                         &ram_region_offset,
+> +                                         &ram_region_length, !read_only,
+> +                                         MEMTXATTRS_UNSPECIFIED);
+> +
+> +    if (!ram_region || ram_region_length < length ||
+> +        !memory_access_is_direct(ram_region, !read_only)) {
+> +        return 0;
+> +    }
+> +
+> +    host_address = (uintptr_t)memory_region_get_ram_ptr(ram_region);
+> +    if (host_address == 0) {
+> +        return 0;
+> +    }
+> +    host_address += ram_region_offset;
+> +    *mapping_in_region = ram_region;
+> +    return host_address;
+> +}
+> +
+> +/* Returns false if the region is already in the array */
+> +static bool add_new_region(GArray *regions, MemoryRegion *region)
+> +{
+> +    MemoryRegion *existing;
+> +    size_t i;
+> +
+> +    for (i = 0; i < regions->len; ++i) {
+> +        existing = g_array_index(regions, MemoryRegion *, i);
+> +        if (existing == region) {
+> +            return false;
+> +        }
+> +    }
+> +    g_array_append_val(regions, region);
+> +    return true;
+> +}
+> +
+> +static void apple_gfx_map_memory(void *opaque)
+> +{
+> +    AppleGFXMapMemoryJob *job       = opaque;
+> +    AppleGFXState *s                = job->state;
+> +    PGTask_t *task                  = job->task;
+> +    uint32_t range_count            = job->range_count;
+> +    uint64_t virtual_offset         = job->virtual_offset;
+> +    PGPhysicalMemoryRange_t *ranges = job->ranges;
+> +    bool read_only                  = job->read_only;
+> +    kern_return_t r;
+> +    mach_vm_address_t target, source;
+> +    vm_prot_t cur_protection, max_protection;
+> +    bool success = true;
+> +    MemoryRegion *region;
+> +
+> +    g_assert(bql_locked());
+
+It seems this function only requires RCU read lock and we can avoid 
+using bottom half.
+
+> +
+> +    trace_apple_gfx_map_memory(task, range_count, virtual_offset, read_only);
+> +    for (int i = 0; i < range_count; i++) {
+> +        PGPhysicalMemoryRange_t *range = &ranges[i];
+> +
+> +        target = task->address + virtual_offset;
+> +        virtual_offset += range->physicalLength;
+> +
+> +        trace_apple_gfx_map_memory_range(i, range->physicalAddress,
+> +                                         range->physicalLength);
+> +
+> +        region = NULL;
+> +        source = apple_gfx_host_address_for_gpa_range(range->physicalAddress,
+> +                                                      range->physicalLength,
+> +                                                      read_only, &region);
+> +        if (source == 0) {
+> +            success = false;
+> +            continue;
+> +        }
+> +
+> +        if (add_new_region(task->mapped_regions, region)) {
+> +            memory_region_ref(region);
+> +        }
+> +
+> +        cur_protection = 0;
+> +        max_protection = 0;
+> +        // Map guest RAM at range->physicalAddress into PG task memory range
+> +        r = mach_vm_remap(mach_task_self(),
+> +                          &target, range->physicalLength, vm_page_size - 1,
+> +                          VM_FLAGS_FIXED | VM_FLAGS_OVERWRITE,
+> +                          mach_task_self(),
+> +                          source, false /* shared mapping, no copy */,
+> +                          &cur_protection, &max_protection,
+> +                          VM_INHERIT_COPY);
+> +        trace_apple_gfx_remap(r, source, target);
+> +        g_assert(r == KERN_SUCCESS);
+> +    }
+> +
+> +    qemu_mutex_lock(&s->job_mutex);
+> +    job->success = success;
+> +    job->done = true;
+> +    qemu_cond_broadcast(&s->task_map_job_cond);
+> +    qemu_mutex_unlock(&s->job_mutex);
+> +}
+> +
+> +void apple_gfx_await_bh_job(AppleGFXState *s, QemuCond *job_cond, bool *job_done_flag)
+> +{
+> +    qemu_mutex_lock(&s->job_mutex);
+> +    while (!*job_done_flag) {
+> +        qemu_cond_wait(job_cond, &s->job_mutex);
+> +    }
+> +    qemu_mutex_unlock(&s->job_mutex);
+> +}
+> +
+> +typedef struct AppleGFXReadMemoryJob {
+> +    AppleGFXState *s;
+> +    hwaddr physical_address;
+> +    uint64_t length;
+> +    void *dst;
+> +    bool done;
+> +    bool success;
+> +} AppleGFXReadMemoryJob;
+> +
+> +static void apple_gfx_do_read_memory(void *opaque)
+> +{
+> +    AppleGFXReadMemoryJob *job = opaque;
+> +    AppleGFXState *s = job->s;
+> +    MemTxResult r;
+> +
+> +    r = dma_memory_read(&address_space_memory, job->physical_address,
+> +                        job->dst, job->length, MEMTXATTRS_UNSPECIFIED);
+> +    job->success = r == MEMTX_OK;
+> +
+> +    qemu_mutex_lock(&s->job_mutex);
+> +    job->done = true;
+> +    qemu_cond_broadcast(&s->mem_read_job_cond);
+> +    qemu_mutex_unlock(&s->job_mutex);
+> +}
+> +
+> +static bool apple_gfx_read_memory(AppleGFXState *s, hwaddr physical_address,
+> +                                  uint64_t length, void *dst)
+> +{
+> +    AppleGFXReadMemoryJob job = {
+> +        s, physical_address, length, dst
+> +    };
+> +
+> +    trace_apple_gfx_read_memory(physical_address, length, dst);
+> +
+> +    /* Traversing the memory map requires RCU/BQL, so do it in a BH. */
+> +    aio_bh_schedule_oneshot(qemu_get_aio_context(), apple_gfx_do_read_memory,
+> +                            &job);
+> +    apple_gfx_await_bh_job(s, &s->mem_read_job_cond, &job.done);
+> +    return job.success;
+> +}
+> +
+> +static void apple_gfx_task_destroy(AppleGFXState *s, PGTask_t *task)
+> +{
+> +    GArray *regions = task->mapped_regions;
+> +    MemoryRegion *region;
+> +    size_t i;
+> +
+> +    for (i = 0; i < regions->len; ++i) {
+> +        region = g_array_index(regions, MemoryRegion *, i);
+> +        memory_region_unref(region);
+> +    }
+> +    g_array_unref(regions);
+> +
+> +    mach_vm_deallocate(mach_task_self(), task->address, task->len);
+> +
+> +    QEMU_LOCK_GUARD(&s->task_mutex);
+> +    QTAILQ_REMOVE(&s->tasks, task, node);
+> +    g_free(task);
+> +}
+> +
+> +static void apple_gfx_register_task_mapping_handlers(AppleGFXState *s,
+> +                                                     PGDeviceDescriptor *desc)
+> +{
+> +    desc.createTask = ^(uint64_t vmSize, void * _Nullable * _Nonnull baseAddress) {
+> +        PGTask_t *task = apple_gfx_new_task(s, vmSize);
+> +        *baseAddress = (void *)task->address;
+> +        trace_apple_gfx_create_task(vmSize, *baseAddress);
+> +        return task;
+> +    };
+> +
+> +    desc.destroyTask = ^(PGTask_t * _Nonnull task) {
+> +        trace_apple_gfx_destroy_task(task, task->mapped_regions->len);
+> +
+> +        apple_gfx_task_destroy(s, task);
+> +    };
+> +
+> +    desc.mapMemory = ^bool(PGTask_t * _Nonnull task, uint32_t range_count,
+> +                           uint64_t virtual_offset, bool read_only,
+> +                           PGPhysicalMemoryRange_t * _Nonnull ranges) {
+> +        AppleGFXMapMemoryJob job = {
+> +            .state = s,
+> +            .task = task, .ranges = ranges, .range_count = range_count,
+> +            .read_only = read_only, .virtual_offset = virtual_offset,
+> +            .done = false, .success = true,
+> +        };
+> +        if (range_count > 0) {
+> +            aio_bh_schedule_oneshot(qemu_get_aio_context(),
+> +                                    apple_gfx_map_memory, &job);
+> +            apple_gfx_await_bh_job(s, &s->task_map_job_cond, &job.done);
+> +        }
+> +        return job.success;
+> +    };
+> +
+> +    desc.unmapMemory = ^bool(PGTask_t * _Nonnull task, uint64_t virtualOffset,
+> +                             uint64_t length) {
+> +        kern_return_t r;
+> +        mach_vm_address_t range_address;
+> +
+> +        trace_apple_gfx_unmap_memory(task, virtualOffset, length);
+> +
+> +        /* Replace task memory range with fresh pages, undoing the mapping
+> +         * from guest RAM. */
+> +        range_address = task->address + virtualOffset;
+> +        r = mach_vm_allocate(mach_task_self(), &range_address, length,
+> +                             VM_FLAGS_FIXED | VM_FLAGS_OVERWRITE);
+ > +        g_assert(r == KERN_SUCCESS);> +
+> +        return true;
+> +    };
+> +
+> +    desc.readMemory = ^bool(uint64_t physical_address, uint64_t length,
+> +                            void * _Nonnull dst) {
+> +        return apple_gfx_read_memory(s, physical_address, length, dst);
+> +    };
+> +}
+> +
+> +static PGDisplayDescriptor *apple_gfx_prepare_display_descriptor(AppleGFXState *s)
+> +{
+> +    PGDisplayDescriptor *disp_desc = [PGDisplayDescriptor new];
+> +
+> +    disp_desc.name = @"QEMU display";
+> +    disp_desc.sizeInMillimeters = NSMakeSize(400., 300.); /* A 20" display */
+> +    disp_desc.queue = dispatch_get_main_queue();
+> +    disp_desc.newFrameEventHandler = ^(void) {
+> +        trace_apple_gfx_new_frame();
+> +        dispatch_async(s->render_queue, ^{
+> +            /* Drop frames if we get too far ahead. */
+> +            bql_lock();
+> +            if (s->pending_frames >= 2) {
+> +                bql_unlock();
+> +                return;
+> +            }
+> +            ++s->pending_frames;
+> +            if (s->pending_frames > 1) {
+> +                bql_unlock();
+> +                return;
+> +            }
+> +            @autoreleasepool {
+> +                apple_gfx_render_new_frame_bql_unlock(s);
+> +            }
+> +        });
+> +    };
+> +    disp_desc.modeChangeHandler = ^(PGDisplayCoord_t sizeInPixels,
+> +                                    OSType pixelFormat) {
+> +        trace_apple_gfx_mode_change(sizeInPixels.x, sizeInPixels.y);
+> +
+> +        BQL_LOCK_GUARD();
+> +        set_mode(s, sizeInPixels.x, sizeInPixels.y);
+> +    };
+> +    disp_desc.cursorGlyphHandler = ^(NSBitmapImageRep *glyph,
+> +                                     PGDisplayCoord_t hotSpot) {
+> +        [glyph retain];
+> +        dispatch_async(get_background_queue(), ^{
+> +            BQL_LOCK_GUARD();
+
+This would be better off using a bottom half since it is going to take 
+the BQL.
+
+> +            uint32_t bpp = glyph.bitsPerPixel;
+> +            size_t width = glyph.pixelsWide;
+> +            size_t height = glyph.pixelsHigh;
+> +            size_t padding_bytes_per_row = glyph.bytesPerRow - width * 4;
+> +            const uint8_t* px_data = glyph.bitmapData;
+> +
+> +            trace_apple_gfx_cursor_set(bpp, width, height);
+> +
+> +            if (s->cursor) {
+> +                cursor_unref(s->cursor);
+> +                s->cursor = NULL;
+> +            }
+> +
+> +            if (bpp == 32) { /* Shouldn't be anything else, but just to be safe...*/
+> +                s->cursor = cursor_alloc(width, height);
+> +                s->cursor->hot_x = hotSpot.x;
+> +                s->cursor->hot_y = hotSpot.y;
+> +
+> +                uint32_t *dest_px = s->cursor->data;
+> +
+> +                for (size_t y = 0; y < height; ++y) {
+> +                    for (size_t x = 0; x < width; ++x) {
+> +                        /* NSBitmapImageRep's red & blue channels are swapped
+> +                         * compared to QEMUCursor's. */
+> +                        *dest_px =
+> +                            (px_data[0] << 16u) |
+> +                            (px_data[1] <<  8u) |
+> +                            (px_data[2] <<  0u) |
+> +                            (px_data[3] << 24u);
+> +                        ++dest_px;
+> +                        px_data += 4;
+> +                    }
+> +                    px_data += padding_bytes_per_row;
+> +                }
+> +                dpy_cursor_define(s->con, s->cursor);
+> +                update_cursor(s);
+> +            }
+> +            [glyph release];
+> +        });
+> +    };
+> +    disp_desc.cursorShowHandler = ^(BOOL show) {
+> +        dispatch_async(get_background_queue(), ^{
+> +            BQL_LOCK_GUARD();
+> +            trace_apple_gfx_cursor_show(show);
+> +            s->cursor_show = show;
+> +            update_cursor(s);
+> +        });
+> +    };
+> +    disp_desc.cursorMoveHandler = ^(void) {
+> +        dispatch_async(get_background_queue(), ^{
+> +            BQL_LOCK_GUARD();
+> +            trace_apple_gfx_cursor_move();
+> +            update_cursor(s);
+> +        });
+> +    };
+> +
+> +    return disp_desc;
+> +}
+> +
+> +static NSArray<PGDisplayMode*>* apple_gfx_prepare_display_mode_array(void)
+> +{
+> +    PGDisplayMode *modes[ARRAY_SIZE(apple_gfx_modes)];
+> +    NSArray<PGDisplayMode*>* mode_array = nil;
+> +    int i;
+> +
+> +    for (i = 0; i < ARRAY_SIZE(apple_gfx_modes); i++) {
+> +        modes[i] =
+> +            [[PGDisplayMode alloc] initWithSizeInPixels:apple_gfx_modes[i] refreshRateInHz:60.];
+> +    }
+> +
+> +    mode_array = [NSArray arrayWithObjects:modes count:ARRAY_SIZE(apple_gfx_modes)];
+> +
+> +    for (i = 0; i < ARRAY_SIZE(apple_gfx_modes); i++) {
+> +        [modes[i] release];
+> +        modes[i] = nil;
+> +    }
+> +
+> +    return mode_array;
+> +}
+> +
+> +static id<MTLDevice> copy_suitable_metal_device(void)
+> +{
+> +    id<MTLDevice> dev = nil;
+> +    NSArray<id<MTLDevice>> *devs = MTLCopyAllDevices();
+> +
+> +    /* Prefer a unified memory GPU. Failing that, pick a non-removable GPU. */
+> +    for (size_t i = 0; i < devs.count; ++i) {
+> +        if (devs[i].hasUnifiedMemory) {
+> +            dev = devs[i];
+> +            break;
+> +        }
+> +        if (!devs[i].removable) {
+> +            dev = devs[i];
+> +        }
+> +    }
+> +
+> +    if (dev != nil) {
+> +        [dev retain];
+> +    } else {
+> +        dev = MTLCreateSystemDefaultDevice();
+> +    }
+> +    [devs release];
+> +
+> +    return dev;
+> +}
+> +
+> +void apple_gfx_common_realize(AppleGFXState *s, PGDeviceDescriptor *desc,
+> +                              Error **errp)
+> +{
+> +    PGDisplayDescriptor *disp_desc = nil;
+> +
+> +    if (apple_gfx_mig_blocker == NULL) {
+> +        error_setg(&apple_gfx_mig_blocker,
+> +                  "Migration state blocked by apple-gfx display device");
+> +        if (migrate_add_blocker(&apple_gfx_mig_blocker, errp) < 0) {
+> +            return;
+> +        }
+> +    }
+> +
+> +    qemu_mutex_init(&s->task_mutex);
+> +    QTAILQ_INIT(&s->tasks);
+> +    s->render_queue = dispatch_queue_create("apple-gfx.render",
+> +                                            DISPATCH_QUEUE_SERIAL);
+> +    s->mtl = copy_suitable_metal_device();
+> +    s->mtl_queue = [s->mtl newCommandQueue];
+> +
+> +    desc.device = s->mtl;
+> +
+> +    apple_gfx_register_task_mapping_handlers(s, desc);
+> +
+> +    s->pgdev = PGNewDeviceWithDescriptor(desc);
+> +
+> +    disp_desc = apple_gfx_prepare_display_descriptor(s);
+> +    s->pgdisp = [s->pgdev newDisplayWithDescriptor:disp_desc
+> +                                              port:0 serialNum:1234];
+> +    [disp_desc release];
+> +    s->pgdisp.modeList = apple_gfx_prepare_display_mode_array();
+> +
+> +    create_fb(s);
+> +
+> +    qemu_mutex_init(&s->job_mutex);
+> +    qemu_cond_init(&s->task_map_job_cond);
+> +    qemu_cond_init(&s->mem_read_job_cond);
+> +}
+> diff --git a/hw/display/meson.build b/hw/display/meson.build
+> index 20a94973fa2..619e642905a 100644
+> --- a/hw/display/meson.build
+> +++ b/hw/display/meson.build
+> @@ -61,6 +61,10 @@ system_ss.add(when: 'CONFIG_ARTIST', if_true: files('artist.c'))
+>   
+>   system_ss.add(when: 'CONFIG_ATI_VGA', if_true: [files('ati.c', 'ati_2d.c', 'ati_dbg.c'), pixman])
+>   
+> +system_ss.add(when: 'CONFIG_MAC_PVG',         if_true: [files('apple-gfx.m'), pvg, metal])
+> +if cpu == 'aarch64'
+> +  system_ss.add(when: 'CONFIG_MAC_PVG_MMIO',  if_true: [files('apple-gfx-mmio.m'), pvg, metal])
+> +endif
+>   
+>   if config_all_devices.has_key('CONFIG_VIRTIO_GPU')
+>     virtio_gpu_ss = ss.source_set()
+> diff --git a/hw/display/trace-events b/hw/display/trace-events
+> index 781f8a33203..d63fba6d094 100644
+> --- a/hw/display/trace-events
+> +++ b/hw/display/trace-events
+> @@ -191,3 +191,31 @@ dm163_bits_ppi(unsigned dest_width) "dest_width : %u"
+>   dm163_leds(int led, uint32_t value) "led %d: 0x%x"
+>   dm163_channels(int channel, uint8_t value) "channel %d: 0x%x"
+>   dm163_refresh_rate(uint32_t rr) "refresh rate %d"
+> +
+> +# apple-gfx.m
+> +apple_gfx_read(uint64_t offset, uint64_t res) "offset=0x%"PRIx64" res=0x%"PRIx64
+> +apple_gfx_write(uint64_t offset, uint64_t val) "offset=0x%"PRIx64" val=0x%"PRIx64
+> +apple_gfx_create_task(uint32_t vm_size, void *va) "vm_size=0x%x base_addr=%p"
+> +apple_gfx_destroy_task(void *task, unsigned int num_mapped_regions) "task=%p, task->mapped_regions->len=%u"
+> +apple_gfx_map_memory(void *task, uint32_t range_count, uint64_t virtual_offset, uint32_t read_only) "task=%p range_count=0x%x virtual_offset=0x%"PRIx64" read_only=%d"
+> +apple_gfx_map_memory_range(uint32_t i, uint64_t phys_addr, uint64_t phys_len) "[%d] phys_addr=0x%"PRIx64" phys_len=0x%"PRIx64
+> +apple_gfx_remap(uint64_t retval, uint64_t source, uint64_t target) "retval=%"PRId64" source=0x%"PRIx64" target=0x%"PRIx64
+> +apple_gfx_unmap_memory(void *task, uint64_t virtual_offset, uint64_t length) "task=%p virtual_offset=0x%"PRIx64" length=0x%"PRIx64
+> +apple_gfx_read_memory(uint64_t phys_address, uint64_t length, void *dst) "phys_addr=0x%"PRIx64" length=0x%"PRIx64" dest=%p"
+> +apple_gfx_raise_irq(uint32_t vector) "vector=0x%x"
+> +apple_gfx_new_frame(void) ""
+> +apple_gfx_mode_change(uint64_t x, uint64_t y) "x=%"PRId64" y=%"PRId64
+> +apple_gfx_cursor_set(uint32_t bpp, uint64_t width, uint64_t height) "bpp=%d width=%"PRId64" height=0x%"PRId64
+> +apple_gfx_cursor_show(uint32_t show) "show=%d"
+> +apple_gfx_cursor_move(void) ""
+> +apple_gfx_common_init(const char *device_name, size_t mmio_size) "device: %s; MMIO size: %zu bytes"
+> +
+> +# apple-gfx-mmio.m
+> +apple_gfx_mmio_iosfc_read(uint64_t offset, uint64_t res) "offset=0x%"PRIx64" res=0x%"PRIx64
+> +apple_gfx_mmio_iosfc_write(uint64_t offset, uint64_t val) "offset=0x%"PRIx64" val=0x%"PRIx64
+> +apple_gfx_iosfc_map_memory(uint64_t phys, uint64_t len, uint32_t ro, void *va, void *e, void *f, void* va_result, int success) "phys=0x%"PRIx64" len=0x%"PRIx64" ro=%d va=%p e=%p f=%p -> *va=%p, success = %d"
+> +apple_gfx_iosfc_map_memory_new_region(size_t i, void *region, uint64_t start, uint64_t end) "index=%zu, region=%p, 0x%"PRIx64"-0x%"PRIx64
+> +apple_gfx_iosfc_unmap_memory(void *a, void *b, void *c, void *d, void *e, void *f) "a=%p b=%p c=%p d=%p e=%p f=%p"
+> +apple_gfx_iosfc_unmap_memory_region(uint64_t mem, size_t region_index, uint64_t map_count, void *region) "mapping @ 0x%"PRIx64" in region %zu, map count %"PRIu64", memory region %p"
+> +apple_gfx_iosfc_raise_irq(uint32_t vector) "vector=0x%x"
+> +
+> diff --git a/meson.build b/meson.build
+> index f7d45175212..5eab46f704f 100644
+> --- a/meson.build
+> +++ b/meson.build
+> @@ -769,6 +769,8 @@ socket = []
+>   version_res = []
+>   coref = []
+>   iokit = []
+> +pvg = []
+> +metal = []
+>   emulator_link_args = []
+>   midl = not_found
+>   widl = not_found
+> @@ -790,6 +792,8 @@ elif host_os == 'darwin'
+>     coref = dependency('appleframeworks', modules: 'CoreFoundation')
+>     iokit = dependency('appleframeworks', modules: 'IOKit', required: false)
+>     host_dsosuf = '.dylib'
+> +  pvg = dependency('appleframeworks', modules: 'ParavirtualizedGraphics')
+> +  metal = dependency('appleframeworks', modules: 'Metal')
+>   elif host_os == 'sunos'
+>     socket = [cc.find_library('socket'),
+>               cc.find_library('nsl'),
 
 
