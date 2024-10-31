@@ -4,82 +4,96 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 45E56E68958
-	for <qemu-riscv@archiver.kernel.org>; Thu, 31 Oct 2024 07:34:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4D953E68958
+	for <qemu-riscv@archiver.kernel.org>; Thu, 31 Oct 2024 07:52:58 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1t6PhW-0000Sd-FV; Thu, 31 Oct 2024 03:34:38 -0400
+	id 1t6Pyo-0005Fr-SX; Thu, 31 Oct 2024 03:52:30 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <jim.shu@sifive.com>)
- id 1t6PhU-0000SI-Sp
- for qemu-riscv@nongnu.org; Thu, 31 Oct 2024 03:34:36 -0400
-Received: from mail-ed1-x52f.google.com ([2a00:1450:4864:20::52f])
+ (Exim 4.90_1) (envelope-from <akihiko.odaki@daynix.com>)
+ id 1t6Pyj-0005EK-4I
+ for qemu-riscv@nongnu.org; Thu, 31 Oct 2024 03:52:26 -0400
+Received: from mail-pf1-x429.google.com ([2607:f8b0:4864:20::429])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <jim.shu@sifive.com>)
- id 1t6PhS-0001dd-W8
- for qemu-riscv@nongnu.org; Thu, 31 Oct 2024 03:34:36 -0400
-Received: by mail-ed1-x52f.google.com with SMTP id
- 4fb4d7f45d1cf-5c9150f9ed4so881497a12.0
- for <qemu-riscv@nongnu.org>; Thu, 31 Oct 2024 00:34:34 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <akihiko.odaki@daynix.com>)
+ id 1t6PyX-0003aJ-T1
+ for qemu-riscv@nongnu.org; Thu, 31 Oct 2024 03:52:17 -0400
+Received: by mail-pf1-x429.google.com with SMTP id
+ d2e1a72fcca58-71e79f73aaeso484612b3a.3
+ for <qemu-riscv@nongnu.org>; Thu, 31 Oct 2024 00:52:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1730360073; x=1730964873; darn=nongnu.org;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=UoQN4iT4gTzwWnl09f3NqTDnzxnJgkDIG72NX5WJiWw=;
- b=l51XBP83EHSUpN2eCHJp2hw5jb5l0JZf85bIdI53MyXEpPPLBgabnKUezHAh0hJmzP
- 053ADZUw7yKK+lXe7OhWLQo5fdOQ4fzuqZyHWbQ6TyJF0du1crAPgO93AggrJewYZEm8
- xSIYE7+siMWNtGPnEgud8Vdu7HD9aZ2Gq8CzNwjPtQcGdnpZ1d5gZ6mBEmBYEKLIlz9i
- 3z4oYWs1eom7W8oqSEUPPWTVVF3FrDU8feA8FX/B4pYaCVjwJ7U2JiVeyr/ixRGrZf7N
- Tml2u6WFj0YpK3tb67tIlz+4R9FpPiOsDlkY8uuuhqgqiA5nw+z4AC2EZ1ZFN2t+1gec
- g5iw==
+ d=daynix-com.20230601.gappssmtp.com; s=20230601; t=1730361132; x=1730965932;
+ darn=nongnu.org; 
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=1gHo7DyUcPqEaAsl8oCYTM1s3Az4DtaIMXl5FebxitM=;
+ b=Zrsa0QiRXHAkQCMSURpdvozR+MiAwRxGmda/EPeU+vG+5r+cg4bsAXpamqqN8IRqJf
+ tWxQul8DszSxdwclYYpudBYhrICaQwq6JSvSBC3rlaP2ewgHTYNDghuu+TWMDvtygT0W
+ IECTFIHDl/sQ+DGlEgSsFxzjXQJpms6sDv8+ujQXXWsaHcJYWhnUDtdmnkFRJxufMgjq
+ ifqav4F8X72RerR7fusSSnIqlyBSoaOrz8VkxohNVfTudftHZiNmeRv6bu2R5wFrY4u+
+ ZpT7levVoU/4RKP7dMSn3qf9njvPSFO2Da1TDxq+LIpkStThbRcAIghFO21LEMyzXEre
+ pFCQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1730360073; x=1730964873;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=UoQN4iT4gTzwWnl09f3NqTDnzxnJgkDIG72NX5WJiWw=;
- b=mx7HT1MUyHXTJcTbySMEl/DCVTYE9Iqfy6VT0vyCMaNqCb0uwikr5RZsVreiuo9qMA
- wir1G1G5e/J49XNuH6ky+EUnA6ZqhQbyuKZXXrYzLn79CXog2fal3ool3RY7dvjoB1kp
- 9h+Q7E6j5dVugzWNnNwglXtPZh5KluVs5KHk3Wnv1Q0ZHCt8PajNqnC5Bd9Zh4mF+POe
- 6YRazusrsEVfUSdVkS+y1fJnHnygTVitEZ70nAA439lMTIAXdYr7G5rMLSENiJCQsPus
- vAhrQG2YDiVcmYDsgWPx44A+7YkkPzW6SmPGEN8EDFmqVtlygaVRUOu9bBe26d5eAuiP
- A05g==
+ d=1e100.net; s=20230601; t=1730361132; x=1730965932;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=1gHo7DyUcPqEaAsl8oCYTM1s3Az4DtaIMXl5FebxitM=;
+ b=TiHLUJ8lD/Vg9ZDZ+KJiQDEIgC7UQH9JnnJdygzcfHuE4bbfmCeLsP38tBg8ItykIX
+ 3pS35XLwkjXh4jiR2jf2bRDjNqOdNgWJc1ti5aG8rJOhrzaBFTb8GImt/k/Q2FxEqF59
+ nTu9oqIW4BoM+y/zGKYkYNJL6ybply8DZTZbWF8MSjEpgrDWxfqQC1eQS+XAJSzFZlZs
+ Z4cxwaaePz/C20gzj54R/gnGCIYRPHr0Gd57YmXkcauQhtpY1SOjqIZWyYA5lx6Vs0Tt
+ eDcBSB47LmEc3E+Hzv/lAt1ebiAvejxpWlRiYe9q4j3KvsyLqkAkLxqIi1ZoC9IGwPfR
+ kpTQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCU0M+UfprK8wYRcu6Y4cMM3PSRgoHwrBnDm5jSXoBmLgDZbkWCUTXlmn1ZocSoIrb+qwTEKzYyUpKfm@nongnu.org
-X-Gm-Message-State: AOJu0Yy4/4zsPrkEo4dRwvVp2J/NAPl2SolqrBZU7YV4TBszhomrjeC1
- Vxx6yzDLNgLW4cDE8aB5bboFpFUZj2478IIgjyeZV8JnJEaQMmZ3Kj08k/q8kwp1aEvORNtBPdw
- n5QdNTUWyl0diJ+9N6RvhO5ghomAxMx7lOXsuoA==
-X-Google-Smtp-Source: AGHT+IE6q4N5QD01vq+Snq0t7SBLtNYV+YfSLW0RsDVoV8ysIRayguChgtPC1My0jxu738mVWCXdSx1F0Si349Ci8+0=
-X-Received: by 2002:a17:907:3d90:b0:a9a:26dd:16bc with SMTP id
- a640c23a62f3a-a9de5c91003mr1953595966b.5.1730360072825; Thu, 31 Oct 2024
- 00:34:32 -0700 (PDT)
+ AJvYcCVp9Sxwl2U6WMP170PFDzq2Gb6JuPdO/zRox/ReWRwh1mhHrKzXoBXl+fKyD2BU9J4zGzPmTK+MhSw2@nongnu.org
+X-Gm-Message-State: AOJu0YxTgiINM3tlVcx1VuEtUl6OCfRAEBgHiUoBIPscJoRhOUGw8Y97
+ DTLTguMUMhdrEpDC+6aLwYGgXys1rIXErI2hC02JKyuuX/HSudd2SEcgt7qO52s=
+X-Google-Smtp-Source: AGHT+IHvYN8KCWqbRqhjWTZhrYm4k/iNw25Q0CUKIzjUuNaUB5O0zuLrmIUq4elIm86gIwX8XBWerA==
+X-Received: by 2002:a05:6a00:4610:b0:71e:4fe4:282e with SMTP id
+ d2e1a72fcca58-72063096385mr25652600b3a.28.1730361132071; 
+ Thu, 31 Oct 2024 00:52:12 -0700 (PDT)
+Received: from [157.82.207.167] ([157.82.207.167])
+ by smtp.gmail.com with ESMTPSA id
+ d2e1a72fcca58-720bc2eb6c9sm680875b3a.162.2024.10.31.00.52.05
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 31 Oct 2024 00:52:11 -0700 (PDT)
+Message-ID: <115d6281-65c9-4487-9dfa-26677f9563ec@daynix.com>
+Date: Thu, 31 Oct 2024 16:52:04 +0900
 MIME-Version: 1.0
-References: <cover.1727164986.git.zhouquan@iscas.ac.cn>
- <ada40759a79c0728652ace59579aa843cb7bf53f.1727164986.git.zhouquan@iscas.ac.cn>
- <20240924-4ed57d7311448f6bc23f7cdf@orel>
-In-Reply-To: <20240924-4ed57d7311448f6bc23f7cdf@orel>
-From: Jim Shu <jim.shu@sifive.com>
-Date: Thu, 31 Oct 2024 15:34:21 +0800
-Message-ID: <CALw707qjrRm9RMWCb+CdEeoU5XxDp4rci_ueM4dRNihCn0H3SQ@mail.gmail.com>
-Subject: Re: [PATCH 2/2] target/riscv/kvm: Update kvm exts to Linux v6.11
-To: Andrew Jones <ajones@ventanamicro.com>
-Cc: zhouquan@iscas.ac.cn, qemu-devel@nongnu.org, qemu-riscv@nongnu.org, 
- alistair.francis@wdc.com, bmeng@tinylab.org, liwei1518@gmail.com, 
- zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com, dbarboza@ventanamicro.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2a00:1450:4864:20::52f;
- envelope-from=jim.shu@sifive.com; helo=mail-ed1-x52f.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v5 01/15] ui & main loop: Redesign of system-specific main
+ thread event handling
+To: Phil Dennis-Jordan <phil@philjordan.eu>, qemu-devel@nongnu.org
+Cc: agraf@csgraf.de, peter.maydell@linaro.org, pbonzini@redhat.com,
+ rad@semihalf.com, quic_llindhol@quicinc.com, marcin.juszkiewicz@linaro.org,
+ stefanha@redhat.com, mst@redhat.com, slp@redhat.com,
+ richard.henderson@linaro.org, eduardo@habkost.net,
+ marcel.apfelbaum@gmail.com, gaosong@loongson.cn, jiaxun.yang@flygoat.com,
+ chenhuacai@kernel.org, kwolf@redhat.com, hreitz@redhat.com,
+ philmd@linaro.org, shorne@gmail.com, palmer@dabbelt.com,
+ alistair.francis@wdc.com, bmeng.cn@gmail.com, liwei1518@gmail.com,
+ dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com, jcmvbkbc@gmail.com,
+ marcandre.lureau@redhat.com, berrange@redhat.com, qemu-arm@nongnu.org,
+ qemu-block@nongnu.org, qemu-riscv@nongnu.org
+References: <20241029205819.69888-1-phil@philjordan.eu>
+ <20241029205819.69888-2-phil@philjordan.eu>
+Content-Language: en-US
+From: Akihiko Odaki <akihiko.odaki@daynix.com>
+In-Reply-To: <20241029205819.69888-2-phil@philjordan.eu>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Received-SPF: none client-ip=2607:f8b0:4864:20::429;
+ envelope-from=akihiko.odaki@daynix.com; helo=mail-pf1-x429.google.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_NONE=0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -95,53 +109,316 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Reviewed-by: Jim Shu <jim.shu@sifive.com>
+On 2024/10/30 5:58, Phil Dennis-Jordan wrote:
+> macOS's Cocoa event handling must be done on the initial (main) thread
+> of the process. Furthermore, if library or application code uses
+> libdispatch, the main dispatch queue must be handling events on the main
+> thread as well.
+> 
+> So far, this has affected Qemu in both the Cocoa and SDL UIs, although
+> in different ways: the Cocoa UI replaces the default qemu_main function
+> with one that spins Qemu's internal main event loop off onto a
+> background thread. SDL (which uses Cocoa internally) on the other hand
+> uses a polling approach within Qemu's main event loop. Events are
+> polled during the SDL UI's dpy_refresh callback, which happens to run
+> on the main thread by default.
+> 
+> As UIs are mutually exclusive, this works OK as long as nothing else
+> needs platform-native event handling. In the next patch, a new device is
+> introduced based on the ParavirtualizedGraphics.framework in macOS.
+> This uses libdispatch internally, and only works when events are being
+> handled on the main runloop. With the current system, it works when
+> using either the Cocoa or the SDL UI. However, it does not when running
+> headless. Moreover, any attempt to install a similar scheme to the
+> Cocoa UI's main thread replacement fails when combined with the SDL
+> UI.
+> 
+> This change tidies up main thread management to be more flexible.
+> 
+>   * The qemu_main global function pointer is a custom function for the
+>     main thread, and it may now be NULL. When it is, the main thread
+>     runs the main Qemu loop. This represents the traditional setup.
+>   * When non-null, spawning the main Qemu event loop on a separate
+>     thread is now done centrally rather than inside the Cocoa UI code.
+>   * For most platforms, qemu_main is indeed NULL by default, but on
+>     Darwin, it defaults to a function that runs the CFRunLoop.
+>   * The Cocoa UI sets qemu_main to a function which runs the
+>     NSApplication event handling runloop, as is usual for a Cocoa app.
+>   * The SDL UI overrides the qemu_main function to NULL, thus
+>     specifying that Qemu's main loop must run on the main
+>     thread.
+>   * For other UIs, or in the absence of UIs, the platform's default
+>     behaviour is followed.
+> 
+> This means that on macOS, the platform's runloop events are always
+> handled, regardless of chosen UI. The new PV graphics device will
+> thus work in all configurations. There is no functional change on other
+> operating systems.
+> 
+> Signed-off-by: Phil Dennis-Jordan <phil@philjordan.eu>
+> ---
+> 
+> v5:
+> 
+>   * Simplified the way of setting/clearing the main loop by going back
+>     to setting qemu_main directly, but narrowing the scope of what it
+>     needs to do, and it can now be NULL.
+> 
+>   include/qemu-main.h     |  3 +--
+>   include/qemu/typedefs.h |  1 +
+>   system/main.c           | 56 +++++++++++++++++++++++++++++++++++----
+>   ui/cocoa.m              | 58 +++++++++++------------------------------
+>   ui/sdl2.c               |  4 +++
+>   5 files changed, 72 insertions(+), 50 deletions(-)
+> 
+> diff --git a/include/qemu-main.h b/include/qemu-main.h
+> index 940960a7dbc..4bd0d667edc 100644
+> --- a/include/qemu-main.h
+> +++ b/include/qemu-main.h
+> @@ -5,7 +5,6 @@
+>   #ifndef QEMU_MAIN_H
+>   #define QEMU_MAIN_H
+>   
+> -int qemu_default_main(void);
+> -extern int (*qemu_main)(void);
+> +extern qemu_main_fn qemu_main;
+>   
+>   #endif /* QEMU_MAIN_H */
+> diff --git a/include/qemu/typedefs.h b/include/qemu/typedefs.h
+> index 3d84efcac47..b02cfe1f328 100644
+> --- a/include/qemu/typedefs.h
+> +++ b/include/qemu/typedefs.h
+> @@ -131,5 +131,6 @@ typedef struct IRQState *qemu_irq;
+>    * Function types
+>    */
+>   typedef void (*qemu_irq_handler)(void *opaque, int n, int level);
+> +typedef int (*qemu_main_fn)(void);
+>   
+>   #endif /* QEMU_TYPEDEFS_H */
+> diff --git a/system/main.c b/system/main.c
+> index 9b91d21ea8c..8c90b8d2ddf 100644
+> --- a/system/main.c
+> +++ b/system/main.c
+> @@ -24,13 +24,14 @@
+>   
+>   #include "qemu/osdep.h"
+>   #include "qemu-main.h"
+> +#include "qemu/main-loop.h"
+>   #include "sysemu/sysemu.h"
+>   
+> -#ifdef CONFIG_SDL
+> -#include <SDL.h>
+> +#ifdef CONFIG_DARWIN
+> +#include <CoreFoundation/CoreFoundation.h>
+>   #endif
+>   
+> -int qemu_default_main(void)
+> +static int qemu_default_main(void)
+>   {
+>       int status;
+>   
+> @@ -40,10 +41,55 @@ int qemu_default_main(void)
+>       return status;
+>   }
+>   
+> -int (*qemu_main)(void) = qemu_default_main;
+> +/*
+> + * Various macOS system libraries, including the Cocoa UI and anything using
+> + * libdispatch, such as ParavirtualizedGraphics.framework, requires that the
+> + * main runloop, on the main (initial) thread be running or at least regularly
+> + * polled for events. A special mode is therefore supported, where the QEMU
+> + * main loop runs on a separate thread and the main thread handles the
+> + * CF/Cocoa runloop.
+> + */
+> +
+> +static void *call_qemu_default_main(void *opaque)
+> +{
+> +    int status;
+> +
+> +    bql_lock();
+> +    status = qemu_default_main();
+> +    bql_unlock();
+> +
+> +    exit(status);
+> +}
+> +
+> +static void qemu_run_default_main_on_new_thread(void)
+> +{
+> +    QemuThread thread;
+> +
+> +    qemu_thread_create(&thread, "qemu_main", call_qemu_default_main,
+> +                       NULL, QEMU_THREAD_DETACHED);
 
-On Tue, Sep 24, 2024 at 9:24=E2=80=AFPM Andrew Jones <ajones@ventanamicro.c=
-om> wrote:
->
-> On Tue, Sep 24, 2024 at 04:30:01PM GMT, zhouquan@iscas.ac.cn wrote:
-> > From: Quan Zhou <zhouquan@iscas.ac.cn>
-> >
-> > Add support for a few Zc* extensions, Zimop, Zcmop and Zawrs.
-> >
-> > Signed-off-by: Quan Zhou <zhouquan@iscas.ac.cn>
-> > ---
-> >  target/riscv/kvm/kvm-cpu.c | 7 +++++++
-> >  1 file changed, 7 insertions(+)
-> >
-> > diff --git a/target/riscv/kvm/kvm-cpu.c b/target/riscv/kvm/kvm-cpu.c
-> > index f6e3156b8d..428aaee552 100644
-> > --- a/target/riscv/kvm/kvm-cpu.c
-> > +++ b/target/riscv/kvm/kvm-cpu.c
-> > @@ -281,7 +281,10 @@ static KVMCPUConfig kvm_multi_ext_cfgs[] =3D {
-> >      KVM_EXT_CFG("zihintntl", ext_zihintntl, KVM_RISCV_ISA_EXT_ZIHINTNT=
-L),
-> >      KVM_EXT_CFG("zihintpause", ext_zihintpause, KVM_RISCV_ISA_EXT_ZIHI=
-NTPAUSE),
-> >      KVM_EXT_CFG("zihpm", ext_zihpm, KVM_RISCV_ISA_EXT_ZIHPM),
-> > +    KVM_EXT_CFG("zimop", ext_zimop, KVM_RISCV_ISA_EXT_ZIMOP),
-> > +    KVM_EXT_CFG("zcmop", ext_zcmop, KVM_RISCV_ISA_EXT_ZCMOP),
-> >      KVM_EXT_CFG("zacas", ext_zacas, KVM_RISCV_ISA_EXT_ZACAS),
-> > +    KVM_EXT_CFG("zawrs", ext_zawrs, KVM_RISCV_ISA_EXT_ZAWRS),
-> >      KVM_EXT_CFG("zfa", ext_zfa, KVM_RISCV_ISA_EXT_ZFA),
-> >      KVM_EXT_CFG("zfh", ext_zfh, KVM_RISCV_ISA_EXT_ZFH),
-> >      KVM_EXT_CFG("zfhmin", ext_zfhmin, KVM_RISCV_ISA_EXT_ZFHMIN),
-> > @@ -292,6 +295,10 @@ static KVMCPUConfig kvm_multi_ext_cfgs[] =3D {
-> >      KVM_EXT_CFG("zbkc", ext_zbkc, KVM_RISCV_ISA_EXT_ZBKC),
-> >      KVM_EXT_CFG("zbkx", ext_zbkx, KVM_RISCV_ISA_EXT_ZBKX),
-> >      KVM_EXT_CFG("zbs", ext_zbs, KVM_RISCV_ISA_EXT_ZBS),
-> > +    KVM_EXT_CFG("zca", ext_zca, KVM_RISCV_ISA_EXT_ZCA),
-> > +    KVM_EXT_CFG("zcb", ext_zcb, KVM_RISCV_ISA_EXT_ZCB),
-> > +    KVM_EXT_CFG("zcd", ext_zcd, KVM_RISCV_ISA_EXT_ZCD),
-> > +    KVM_EXT_CFG("zcf", ext_zcf, KVM_RISCV_ISA_EXT_ZCF),
-> >      KVM_EXT_CFG("zknd", ext_zknd, KVM_RISCV_ISA_EXT_ZKND),
-> >      KVM_EXT_CFG("zkne", ext_zkne, KVM_RISCV_ISA_EXT_ZKNE),
-> >      KVM_EXT_CFG("zknh", ext_zknh, KVM_RISCV_ISA_EXT_ZKNH),
-> > --
-> > 2.34.1
-> >
->
-> Reviewed-by: Andrew Jones <ajones@ventanamicro.com>
->
+This function only contains two statements and I think is better to be 
+merged into main().
+
+> +}
+> +
+> +
+> +#ifdef CONFIG_DARWIN
+> +static int os_darwin_cfrunloop_main(void)
+> +{
+> +    CFRunLoopRun();
+> +    abort();
+> +}
+> +
+> +qemu_main_fn qemu_main = os_darwin_cfrunloop_main;
+> +#else
+> +qemu_main_fn qemu_main;
+> +#endif
+>   
+>   int main(int argc, char **argv)
+>   {
+>       qemu_init(argc, argv);
+> -    return qemu_main();
+> +    if (qemu_main) {
+> +        qemu_run_default_main_on_new_thread();
+> +        bql_unlock();
+> +        return qemu_main();
+> +    } else {
+> +        qemu_default_main();
+> +    }
+>   }
+> diff --git a/ui/cocoa.m b/ui/cocoa.m
+> index 4c2dd335323..a1474d473a6 100644
+> --- a/ui/cocoa.m
+> +++ b/ui/cocoa.m
+> @@ -73,6 +73,8 @@
+>       int height;
+>   } QEMUScreen;
+>   
+> +@class QemuCocoaPasteboardTypeOwner;
+> +
+>   static void cocoa_update(DisplayChangeListener *dcl,
+>                            int x, int y, int w, int h);
+>   
+> @@ -107,6 +109,7 @@ static void cocoa_switch(DisplayChangeListener *dcl,
+>   static NSInteger cbchangecount = -1;
+>   static QemuClipboardInfo *cbinfo;
+>   static QemuEvent cbevent;
+> +static QemuCocoaPasteboardTypeOwner *cbowner;
+>   
+>   // Utility functions to run specified code block with the BQL held
+>   typedef void (^CodeBlock)(void);
+> @@ -1321,8 +1324,10 @@ - (void) dealloc
+>   {
+>       COCOA_DEBUG("QemuCocoaAppController: dealloc\n");
+>   
+> -    if (cocoaView)
+> -        [cocoaView release];
+> +    [cocoaView release];
+> +    [cbowner release];
+> +    cbowner = nil;
+> +
+>       [super dealloc];
+>   }
+>   
+> @@ -1938,8 +1943,6 @@ - (void)pasteboard:(NSPasteboard *)sender provideDataForType:(NSPasteboardType)t
+>   
+>   @end
+>   
+> -static QemuCocoaPasteboardTypeOwner *cbowner;
+> -
+>   static void cocoa_clipboard_notify(Notifier *notifier, void *data);
+>   static void cocoa_clipboard_request(QemuClipboardInfo *info,
+>                                       QemuClipboardType type);
+> @@ -2002,43 +2005,8 @@ static void cocoa_clipboard_request(QemuClipboardInfo *info,
+>       }
+>   }
+>   
+> -/*
+> - * The startup process for the OSX/Cocoa UI is complicated, because
+> - * OSX insists that the UI runs on the initial main thread, and so we
+> - * need to start a second thread which runs the qemu_default_main():
+> - * in main():
+> - *  in cocoa_display_init():
+> - *   assign cocoa_main to qemu_main
+> - *   create application, menus, etc
+> - *  in cocoa_main():
+> - *   create qemu-main thread
+> - *   enter OSX run loop
+> - */
+> -
+> -static void *call_qemu_main(void *opaque)
+> -{
+> -    int status;
+> -
+> -    COCOA_DEBUG("Second thread: calling qemu_default_main()\n");
+> -    bql_lock();
+> -    status = qemu_default_main();
+> -    bql_unlock();
+> -    COCOA_DEBUG("Second thread: qemu_default_main() returned, exiting\n");
+> -    [cbowner release];
+> -    exit(status);
+> -}
+> -
+>   static int cocoa_main(void)
+>   {
+> -    QemuThread thread;
+> -
+> -    COCOA_DEBUG("Entered %s()\n", __func__);
+> -
+> -    bql_unlock();
+> -    qemu_thread_create(&thread, "qemu_main", call_qemu_main,
+> -                       NULL, QEMU_THREAD_DETACHED);
+> -
+> -    // Start the main event loop
+>       COCOA_DEBUG("Main thread: entering OSX run loop\n");
+>       [NSApp run];
+>       COCOA_DEBUG("Main thread: left OSX run loop, which should never happen\n");
+> @@ -2120,8 +2088,6 @@ static void cocoa_display_init(DisplayState *ds, DisplayOptions *opts)
+>   
+>       COCOA_DEBUG("qemu_cocoa: cocoa_display_init\n");
+>   
+> -    qemu_main = cocoa_main;
+> -
+>       // Pull this console process up to being a fully-fledged graphical
+>       // app with a menubar and Dock icon
+>       ProcessSerialNumber psn = { 0, kCurrentProcess };
+> @@ -2185,11 +2151,17 @@ static void cocoa_display_init(DisplayState *ds, DisplayOptions *opts)
+>       qemu_clipboard_peer_register(&cbpeer);
+>   
+>       [pool release];
+> +
+> +    /*
+> +     * The Cocoa UI will run the NSApplication runloop on the main thread
+> +     * rather than the default Core Foundation one.
+> +     */
+> +    qemu_main = cocoa_main;
+>   }
+>   
+>   static QemuDisplay qemu_display_cocoa = {
+> -    .type       = DISPLAY_TYPE_COCOA,
+> -    .init       = cocoa_display_init,
+> +    .type                   = DISPLAY_TYPE_COCOA,
+> +    .init                   = cocoa_display_init,
+
+This change seems irrelevant.
+
+>   };
+>   
+>   static void register_cocoa(void)
+> diff --git a/ui/sdl2.c b/ui/sdl2.c
+> index bd4f5a9da14..44ab2762262 100644
+> --- a/ui/sdl2.c
+> +++ b/ui/sdl2.c
+> @@ -34,6 +34,7 @@
+>   #include "sysemu/sysemu.h"
+>   #include "ui/win32-kbd-hook.h"
+>   #include "qemu/log.h"
+> +#include "qemu-main.h"
+>   
+>   static int sdl2_num_outputs;
+>   static struct sdl2_console *sdl2_console;
+> @@ -965,6 +966,9 @@ static void sdl2_display_init(DisplayState *ds, DisplayOptions *o)
+>       }
+>   
+>       atexit(sdl_cleanup);
+> +
+> +    /* SDL's event polling (in dpy_refresh) must happen on the main thread. */
+> +    qemu_main = NULL;
+>   }
+>   
+>   static QemuDisplay qemu_display_sdl2 = {
+
 
