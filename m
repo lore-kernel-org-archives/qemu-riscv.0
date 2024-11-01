@@ -4,83 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D3417E6B244
-	for <qemu-riscv@archiver.kernel.org>; Fri,  1 Nov 2024 11:45:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 05294E6F066
+	for <qemu-riscv@archiver.kernel.org>; Fri,  1 Nov 2024 15:09:54 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1t6q5l-0004Hh-9D; Fri, 01 Nov 2024 07:45:25 -0400
+	id 1t6tHU-0002ko-2t; Fri, 01 Nov 2024 11:09:44 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1t6q5i-0004GD-F9
- for qemu-riscv@nongnu.org; Fri, 01 Nov 2024 07:45:22 -0400
-Received: from mail-pf1-x434.google.com ([2607:f8b0:4864:20::434])
+ (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
+ id 1t6tHR-0002ji-JT
+ for qemu-riscv@nongnu.org; Fri, 01 Nov 2024 11:09:41 -0400
+Received: from mail-lf1-x12a.google.com ([2a00:1450:4864:20::12a])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1t6q5g-0008Pr-MF
- for qemu-riscv@nongnu.org; Fri, 01 Nov 2024 07:45:22 -0400
-Received: by mail-pf1-x434.google.com with SMTP id
- d2e1a72fcca58-720c2db824eso1347054b3a.0
- for <qemu-riscv@nongnu.org>; Fri, 01 Nov 2024 04:45:19 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
+ id 1t6tHP-00016F-0G
+ for qemu-riscv@nongnu.org; Fri, 01 Nov 2024 11:09:41 -0400
+Received: by mail-lf1-x12a.google.com with SMTP id
+ 2adb3069b0e04-539d9fffea1so2187244e87.2
+ for <qemu-riscv@nongnu.org>; Fri, 01 Nov 2024 08:09:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1730461519; x=1731066319; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=E0a+XLtNlJ3S11rchV6Of5MW8vyVRGyYOCdBEmauSOY=;
- b=LytgbUxhqm90FB9u/oSJNpzXAyQIWzkZ8ux2WgSUpeY+MK6VFi5ZBoNM7mICRnYYDl
- 68bpsKyl2g8fnTQmZxRJ2kEtXVJHAbzQOrINfgHHYUgFYlHYLfXaPRMpmR7cVGBuI1SQ
- rM437KkZOLIPgnDceyD4ENOHORAjt9yLUvz5ep8Dlx3KeBX86XoKF1xh8kHGNwV4Bjz9
- EDxOfS5Fd2EVFPfJVyG75RAj+Cl9d7YNvW9Ipkl+yDAJbWP9RNzE0bs2xMkfa6J2xMN0
- OjvRUKh3RQb82zbETMzdimcznBJ6Gep5lFw7/qmZlH2FGW+q3/yJ7xbaNJLd/YhteU2w
- cnLA==
+ d=ventanamicro.com; s=google; t=1730473776; x=1731078576; darn=nongnu.org;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=46znDBoqQGBD0O089ftXep6apf53Vr677UxWL8i4ym0=;
+ b=DP64GyLuXE0nNshTWx3j3eAMSQWAFs5HEaQB/vHCHyI02frUrRDFb7Ikqc2ZLziRgz
+ dMC2H2PGgh0Y1ZG+wPcjjmrTOtChLXtShENhIywUmNUIINns7ntnswqNk5dokLklsi+X
+ +OJkBfmcXob6FOTfrpRenjR3JwEUpL4B/G0eCry3XVIIaXjIRZ6uQHZEUOXaZJ+gQbii
+ WiIHVAVH/Ur7iBNqQ8TQ0e2pOR/CIsZvTf8tAqH4lu1LCMuMInU/w2APvSKEJi2p5xg8
+ tJmx1M44YSrQMR8E5vssWymwfbAFALcMFJlaLsBcfWJ06n1/UKJJyHT9lIqYUSEKkaxs
+ skKw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1730461519; x=1731066319;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=E0a+XLtNlJ3S11rchV6Of5MW8vyVRGyYOCdBEmauSOY=;
- b=gPFApOTQGLWFoShLh/OdAfWa36uwzLVJ9vOvT2urrG+AbjD3MK9bVAOntQR3hqg2Mf
- DB10AsPthBjAn/fbTYHU9WYEw1lV9Qgl69ia9XE5L5H68T75PH3LUX9/qojUvY5IDkeJ
- Up3x1zxcUJWCeHt7lj3XX2fZ39tqb42p1tm8aQdpLX9hGnKnEgLqTmbOuKnSvvjxKtku
- +p9r2I6T+PPk18mIeCxiBI0b33U+xbqLe1nFdCnD3bPx5zgD8UjeE9WI3bDh8ukn3Jsk
- zx/mQ6oNnOvqVl4RoCLjeqitK8+x8a9/rg9SkjqGSbsXJ9kdI4g6SDC0k8c3YcCnVeeW
- b9kA==
+ d=1e100.net; s=20230601; t=1730473776; x=1731078576;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=46znDBoqQGBD0O089ftXep6apf53Vr677UxWL8i4ym0=;
+ b=bT+YQ3pDC7wKtGAQJOr1qZFAaRZDpunxXGWt20VXxffUdptYjMF4aGAXmucSglWy+8
+ wJmfCb40/TyNe8J/U6GrH9adZVFzB1uofWSOsz5ktAW3jPxsDAkzmSmbCrUW+02OEZmW
+ aPlnOKfrvfFGBFOpCKRwM4NFbrmDFtTzOO9Kaw9s3a53xHHlOlVTMxpX6dSDyKeuMwu+
+ Zl4k6+ZUtmimlhi4crAWkyS4fIM8jdKtrm0JPfB0/0rHoCMOd0seuRT43giOWY7eb7qY
+ JAmmxlfA77gnOlFLavyBEdNn6yrcdpL/5IhOJ3EtNQD+U1XU/qy21z45SbLBzxAPH85P
+ B60Q==
 X-Forwarded-Encrypted: i=1;
- AJvYcCV1cT9oxEACZg07VcuBnpgnatJJOOcXFs0UvTEgGokETqDO3P63T2RAIn70SHfINKF3GLWXMPzCBnmi@nongnu.org
-X-Gm-Message-State: AOJu0YxTJFAmEbR6TYLULxBdFBrbushbiR/MVxFKSyjonO5BTUQKBL1L
- 1RTUqL6Tiph6DSdC24HnOCFcCO5FQLTf0bEJhiUfMCL3GLMJu6mt62n4OUTTmHs=
-X-Google-Smtp-Source: AGHT+IFX9NnP9uaqquDCDVSEk7Uy8obp5Pug98D2mwk93e7dPbNPkKPWEqNa52HhTU1JdHYJqCcQOQ==
-X-Received: by 2002:a05:6a00:2384:b0:71e:68ae:aaed with SMTP id
- d2e1a72fcca58-72062f81e6dmr29558711b3a.1.1730461518735; 
- Fri, 01 Nov 2024 04:45:18 -0700 (PDT)
-Received: from [192.168.68.110] ([191.8.109.222])
+ AJvYcCUtNmJOv02FeDxJbpltA6o9fck8ruWPNk8xvPPup/kewH+UWMq8tK6AsNPoVaIWjCCvEAXeW5D85PXL@nongnu.org
+X-Gm-Message-State: AOJu0YxTwjJ9rXgqr6mo+aqT29L0Gd5S17ru5x+ZrsLLQKIxEI5tkCQg
+ vK0t3dx5Z+b/hZStWXWH1ZazqEhMVJWv8ngw73TBVKTe5FHe8DHUJ4JzhVmMGB4=
+X-Google-Smtp-Source: AGHT+IGA+mikfca3RaUZfxn3BMPw7SJFVbuQMfjRZYjJ1sP8aDas+68G/VMV/Ut9pHA49hNzlAX7Wg==
+X-Received: by 2002:a05:6512:104d:b0:539:d10b:e389 with SMTP id
+ 2adb3069b0e04-53b348f9681mr12381209e87.13.1730473776287; 
+ Fri, 01 Nov 2024 08:09:36 -0700 (PDT)
+Received: from localhost (2001-1ae9-1c2-4c00-20f-c6b4-1e57-7965.ip6.tmcz.cz.
+ [2001:1ae9:1c2:4c00:20f:c6b4:1e57:7965])
  by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-720bc2c3e08sm2447394b3a.105.2024.11.01.04.45.15
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 01 Nov 2024 04:45:18 -0700 (PDT)
-Message-ID: <8ec6e960-8305-456c-b8f9-4c0dd14e51ff@ventanamicro.com>
-Date: Fri, 1 Nov 2024 08:45:13 -0300
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
+ ffacd0b85a97d-381c116abc0sm5427011f8f.94.2024.11.01.08.09.35
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 01 Nov 2024 08:09:35 -0700 (PDT)
+Date: Fri, 1 Nov 2024 16:09:34 +0100
+From: Andrew Jones <ajones@ventanamicro.com>
+To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Cc: Yong-Xuan Wang <yongxuan.wang@sifive.com>, qemu-devel@nongnu.org, 
+ qemu-riscv@nongnu.org, greentime.hu@sifive.com, vincent.chen@sifive.com, 
+ frank.chang@sifive.com, jim.shu@sifive.com, Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bmeng.cn@gmail.com>,
+ Weiwei Li <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
 Subject: Re: [PATCH 1/1] hw/riscv: virt: prevent to use AIA MSI when host
  doesn't support it
-To: Yong-Xuan Wang <yongxuan.wang@sifive.com>, qemu-devel@nongnu.org,
- qemu-riscv@nongnu.org
-Cc: greentime.hu@sifive.com, vincent.chen@sifive.com, frank.chang@sifive.com, 
- jim.shu@sifive.com, Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bmeng.cn@gmail.com>,
- Weiwei Li <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Andrew Jones <ajones@ventanamicro.com>
+Message-ID: <20241101-6ada91d63644e8d715b1cf35@orel>
 References: <20241101083606.5122-1-yongxuan.wang@sifive.com>
-Content-Language: en-US
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <20241101083606.5122-1-yongxuan.wang@sifive.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::434;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pf1-x434.google.com
+ <8ec6e960-8305-456c-b8f9-4c0dd14e51ff@ventanamicro.com>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <8ec6e960-8305-456c-b8f9-4c0dd14e51ff@ventanamicro.com>
+Received-SPF: pass client-ip=2a00:1450:4864:20::12a;
+ envelope-from=ajones@ventanamicro.com; helo=mail-lf1-x12a.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -103,63 +101,68 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-
-
-On 11/1/24 5:36 AM, Yong-Xuan Wang wrote:
-> Currently QEMU will continue to emulate the AIA MSI devices and enable the
-> AIA extension for guest OS when the host kernel doesn't support the
-> in-kernel AIA irqchip. This will cause an illegal instruction exception
-> when the guest OS uses the IMSIC devices. Add additional checks to ensure
-> the guest OS only uses the AIA MSI device when the host kernel supports
-> the in-kernel AIA chip.
+On Fri, Nov 01, 2024 at 08:45:13AM -0300, Daniel Henrique Barboza wrote:
 > 
-> Signed-off-by: Yong-Xuan Wang <yongxuan.wang@sifive.com>
-> Reviewed-by: Jim Shu <jim.shu@sifive.com>
-> ---
->   hw/riscv/virt.c | 19 +++++++++++++------
->   1 file changed, 13 insertions(+), 6 deletions(-)
 > 
-> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-> index 45a8c4f8190d..0d8e047844a6 100644
-> --- a/hw/riscv/virt.c
-> +++ b/hw/riscv/virt.c
-> @@ -1567,12 +1567,19 @@ static void virt_machine_init(MachineState *machine)
->           }
->       }
->   
-> -    if (kvm_enabled() && virt_use_kvm_aia(s)) {
-> -        kvm_riscv_aia_create(machine, IMSIC_MMIO_GROUP_MIN_SHIFT,
-> -                             VIRT_IRQCHIP_NUM_SOURCES, VIRT_IRQCHIP_NUM_MSIS,
-> -                             memmap[VIRT_APLIC_S].base,
-> -                             memmap[VIRT_IMSIC_S].base,
-> -                             s->aia_guests);
-> +    if (kvm_enabled() && s->aia_type == VIRT_AIA_TYPE_APLIC_IMSIC) {
-> +        if (virt_use_kvm_aia(s)) {
-> +            kvm_riscv_aia_create(machine, IMSIC_MMIO_GROUP_MIN_SHIFT,
-> +                                 VIRT_IRQCHIP_NUM_SOURCES,
-> +                                 VIRT_IRQCHIP_NUM_MSIS,
-> +                                 memmap[VIRT_APLIC_S].base,
-> +                                 memmap[VIRT_IMSIC_S].base,
-> +                                 s->aia_guests);
-> +        } else {
-> +            error_report("Host machine doesn't support in-kernel APLIC MSI, "
-> +                         "please use aia=none or aia=aplic");
-> +            exit(1);
-> +        }
+> On 11/1/24 5:36 AM, Yong-Xuan Wang wrote:
+> > Currently QEMU will continue to emulate the AIA MSI devices and enable the
+> > AIA extension for guest OS when the host kernel doesn't support the
+> > in-kernel AIA irqchip. This will cause an illegal instruction exception
+> > when the guest OS uses the IMSIC devices. Add additional checks to ensure
+> > the guest OS only uses the AIA MSI device when the host kernel supports
+> > the in-kernel AIA chip.
+> > 
+> > Signed-off-by: Yong-Xuan Wang <yongxuan.wang@sifive.com>
+> > Reviewed-by: Jim Shu <jim.shu@sifive.com>
+> > ---
+> >   hw/riscv/virt.c | 19 +++++++++++++------
+> >   1 file changed, 13 insertions(+), 6 deletions(-)
+> > 
+> > diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+> > index 45a8c4f8190d..0d8e047844a6 100644
+> > --- a/hw/riscv/virt.c
+> > +++ b/hw/riscv/virt.c
+> > @@ -1567,12 +1567,19 @@ static void virt_machine_init(MachineState *machine)
+> >           }
+> >       }
+> > -    if (kvm_enabled() && virt_use_kvm_aia(s)) {
+> > -        kvm_riscv_aia_create(machine, IMSIC_MMIO_GROUP_MIN_SHIFT,
+> > -                             VIRT_IRQCHIP_NUM_SOURCES, VIRT_IRQCHIP_NUM_MSIS,
+> > -                             memmap[VIRT_APLIC_S].base,
+> > -                             memmap[VIRT_IMSIC_S].base,
+> > -                             s->aia_guests);
+> > +    if (kvm_enabled() && s->aia_type == VIRT_AIA_TYPE_APLIC_IMSIC) {
+> > +        if (virt_use_kvm_aia(s)) {
+> > +            kvm_riscv_aia_create(machine, IMSIC_MMIO_GROUP_MIN_SHIFT,
+> > +                                 VIRT_IRQCHIP_NUM_SOURCES,
+> > +                                 VIRT_IRQCHIP_NUM_MSIS,
+> > +                                 memmap[VIRT_APLIC_S].base,
+> > +                                 memmap[VIRT_IMSIC_S].base,
+> > +                                 s->aia_guests);
+> > +        } else {
+> > +            error_report("Host machine doesn't support in-kernel APLIC MSI, "
+> > +                         "please use aia=none or aia=aplic");
+> > +            exit(1);
+> > +        }
+> 
+> As you said in the commit msg it looks like we have a bug in this particular path: kvm accel,
+> aia=aplic-imsic, no irqchip present. Erroring out is one possible solution but I wonder why we
+> couldn't just emulate the APLIC and IMSIC controllers in this case. We have code that does
+> that in TCG, so it would be a matter of adding the needed plumbing to treat KVM AIA without
+> irqchip == TCG AIA.
+> 
+> Drew, care to weight in? Thanks,
+>
 
-As you said in the commit msg it looks like we have a bug in this particular path: kvm accel,
-aia=aplic-imsic, no irqchip present. Erroring out is one possible solution but I wonder why we
-couldn't just emulate the APLIC and IMSIC controllers in this case. We have code that does
-that in TCG, so it would be a matter of adding the needed plumbing to treat KVM AIA without
-irqchip == TCG AIA.
+If I understand the motivation for this patch correctly, then we'll always
+need something like it anyway. With the proposal of supporting KVM with
+usermode-imsic, then KVM would ultimately have three possible states:
+inkernel-irqchip, usermode-imsic, nothing. usermode-imsic will need KVM
+support for forwarding imsic accesses to QEMU, but when that support isn't
+present (and the inkernel-irqchip isn't selected either), then we should
+still want to error out before allowing the guest to try accesses that
+can't work.
 
-Drew, care to weight in? Thanks,
-
-
-Daniel
-
-
->       }
->   
->       if (riscv_is_32bit(&s->soc[0])) {
+Thanks,
+drew
 
