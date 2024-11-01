@@ -4,82 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9DBF9E674B5
-	for <qemu-riscv@archiver.kernel.org>; Fri,  1 Nov 2024 08:20:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8FA7DE674BA
+	for <qemu-riscv@archiver.kernel.org>; Fri,  1 Nov 2024 08:36:51 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1t6mq7-0005PB-CL; Fri, 01 Nov 2024 04:17:03 -0400
+	id 1t6n8k-00071Y-15; Fri, 01 Nov 2024 04:36:18 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <zhao1.liu@intel.com>)
- id 1t6mpx-0005ES-SW; Fri, 01 Nov 2024 04:16:55 -0400
-Received: from mgamail.intel.com ([192.198.163.16])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <zhao1.liu@intel.com>)
- id 1t6mpv-0001QQ-Cd; Fri, 01 Nov 2024 04:16:53 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1730449012; x=1761985012;
- h=from:to:subject:date:message-id:in-reply-to:references:
- mime-version:content-transfer-encoding;
- bh=se3A3A+kRvSwSAobc6tYFr7xeZZ8F/aVOqRAc4gXB10=;
- b=Oa73xaNgroSTh1S7dtucn+tBrDrlq2Remih3sbObqveh0bRThRnCcOL7
- V5MWsxv36ngUVGOT9KCiA/ywzqXyhQtptXCSCYhKRfaKN5AWCH02ANGBA
- LC/NBORbMOpHg/lAkAb+MxCC4TFT/V4jJR3ibLlbo0ZCEPBtl9aF2RHzB
- csxR57jfqBK9MOmjOtNjAuZWt8HvKeELlsiVK6Lx0BUqjB3G4iV17/YXh
- DD4ASPkvZEGlYOtFyy8mx7hx4g8U5zoOIj5DecaCAsfQ0JIh8JAz5EAzd
- msYcTkcnmMWP4N0bJfofmhZ7Zczd+gqhqJXivgy8CG1IrVAWQErnIo/Aq A==;
-X-CSE-ConnectionGUID: vzOm0RRcTf2ZBncbIotCYw==
-X-CSE-MsgGUID: W5ac+AcgQ3iLv0JmK5AF/A==
-X-IronPort-AV: E=McAfee;i="6700,10204,11242"; a="17846103"
-X-IronPort-AV: E=Sophos;i="6.11,249,1725346800"; d="scan'208";a="17846103"
-Received: from fmviesa003.fm.intel.com ([10.60.135.143])
- by fmvoesa110.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 01 Nov 2024 01:16:50 -0700
-X-CSE-ConnectionGUID: MfnoaelzSjKKq1CkEaOG1g==
-X-CSE-MsgGUID: DHNWzy+0SfuGlV9pH5NKow==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.11,249,1725346800"; d="scan'208";a="86834736"
-Received: from liuzhao-optiplex-7080.sh.intel.com ([10.239.160.36])
- by fmviesa003.fm.intel.com with ESMTP; 01 Nov 2024 01:16:44 -0700
-From: Zhao Liu <zhao1.liu@intel.com>
-To: =?UTF-8?q?Daniel=20P=20=2E=20Berrang=C3=A9?= <berrange@redhat.com>,
- Igor Mammedov <imammedo@redhat.com>, Eduardo Habkost <eduardo@habkost.net>,
- Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
- =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Yanan Wang <wangyanan55@huawei.com>,
- "Michael S . Tsirkin" <mst@redhat.com>,
- Paolo Bonzini <pbonzini@redhat.com>,
- Richard Henderson <richard.henderson@linaro.org>,
- Eric Blake <eblake@redhat.com>, Markus Armbruster <armbru@redhat.com>,
- Marcelo Tosatti <mtosatti@redhat.com>,
- =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
- Peter Maydell <peter.maydell@linaro.org>,
- Jonathan Cameron <Jonathan.Cameron@huawei.com>,
- Sia Jee Heng <jeeheng.sia@starfivetech.com>,
- Alireza Sanaee <alireza.sanaee@huawei.com>, qemu-devel@nongnu.org,
- kvm@vger.kernel.org, qemu-riscv@nongnu.org, qemu-arm@nongnu.org,
- Zhenyu Wang <zhenyu.z.wang@intel.com>,
- Dapeng Mi <dapeng1.mi@linux.intel.com>, Zhao Liu <zhao1.liu@intel.com>
-Subject: [PATCH v5 9/9] i386/cpu: add has_caches flag to check smp_cache
- configuration
-Date: Fri,  1 Nov 2024 16:33:31 +0800
-Message-Id: <20241101083331.340178-10-zhao1.liu@intel.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20241101083331.340178-1-zhao1.liu@intel.com>
-References: <20241101083331.340178-1-zhao1.liu@intel.com>
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=192.198.163.16; envelope-from=zhao1.liu@intel.com;
- helo=mgamail.intel.com
-X-Spam_score_int: -47
-X-Spam_score: -4.8
-X-Spam_bar: ----
-X-Spam_report: (-4.8 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.366,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_MED=-2.3, RCVD_IN_VALIDITY_CERTIFIED_BLOCKED=0.001,
- RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001, SPF_HELO_NONE=0.001,
+ (Exim 4.90_1) (envelope-from <yongxuan.wang@sifive.com>)
+ id 1t6n8h-00070w-G7
+ for qemu-riscv@nongnu.org; Fri, 01 Nov 2024 04:36:15 -0400
+Received: from mail-pl1-x633.google.com ([2607:f8b0:4864:20::633])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <yongxuan.wang@sifive.com>)
+ id 1t6n8f-0003lT-Os
+ for qemu-riscv@nongnu.org; Fri, 01 Nov 2024 04:36:15 -0400
+Received: by mail-pl1-x633.google.com with SMTP id
+ d9443c01a7336-20c8b557f91so17969605ad.2
+ for <qemu-riscv@nongnu.org>; Fri, 01 Nov 2024 01:36:13 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=sifive.com; s=google; t=1730450172; x=1731054972; darn=nongnu.org;
+ h=message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=przCaPYxJ9fQC4VZIfRe5OYFhMQ8p8d0s9yPNLObsDs=;
+ b=FFWaIdTUIFkzy3QMKQsgog0ljQq5CWf52a/150IV2TZez8j/inR0XZCK6ngFUmmi73
+ iz/KYtz2ng1Nt2xcflG9IXYwBZ97R7wYTw+YuokPbsxSwSwgCkIol0I0ZZBMrKR4QdHr
+ vguZhOyjuWjdtY8YVB4bIvrAvqT/PJC93ELEQe59XP95xi2kJzNMod5Mt4YxUPkjF5/C
+ kRVOpT6HKvoAPP6iJQaNPFQ5TeMF+8jcKgOpe8JIE0FWV2pXhIeQD0UTnAKFEaJE/1Ta
+ zQ9A1jLFvyucjifiD4OXEtf8yrrvPeYw8TS5Q75bnp/XTOTsVh7UUi1FbKINaBCgffoF
+ vPXQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1730450172; x=1731054972;
+ h=message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=przCaPYxJ9fQC4VZIfRe5OYFhMQ8p8d0s9yPNLObsDs=;
+ b=ekUMeoIa7otuou77fcsxWXLi6fLc3Kpdu5AQN0yfIgmRALOYinPt+y6nudOl/sQzIN
+ JvbZbSSo4kXFyoboIdbkV36iUw2wUlXTEXbr8HWHz4COkzkmLbomet4jfkCwj/zBxRfk
+ ekkYNkx/KHz9Rig8/5ZTP2C5Y+lXghJJWR82rnpK5KH3/E6ps7hcGfWOdfAG4nvM/lkj
+ sbTIZD68MSQY3c6z6fSUum/ox3Kk21mNSPDfaXgstZWOKFCXOBufZFTMTpk2oYNcQiJS
+ jznyJKRHWOfMVu295I502SzorGveod0u9lKTvEeE2Ig6BYysyta62f19jagYJGNtCt/+
+ vyfw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUYONqPhVOBlProfHrRCrC2fNF5oBZ5K14qEqkklnP7tliLU+JVNLhZNdS97RgCP/KzU0mPEorP1zI6@nongnu.org
+X-Gm-Message-State: AOJu0Ywy6F9bmPHrXvfzXEs6WzW/+Uf/KDavl76Ry2H/vP6hYLJbpxM1
+ d3Vl/ZW6rhegw/+dW+29rNoycLPeus8kVjbdKXUJy2p3S20Y3sRvEoxjbnF/97hIMF1AEaI1Zop
+ YgeI=
+X-Google-Smtp-Source: AGHT+IGen5LEFIdk1+nLYaucNa/tBFck8QOee6s8JLjVWjEI9Lw4v07eb0qZrDlws3zYr1HTbI+4XQ==
+X-Received: by 2002:a17:90b:20b:b0:2e2:b46f:d92c with SMTP id
+ 98e67ed59e1d1-2e8f105e9a3mr22750368a91.14.1730450171908; 
+ Fri, 01 Nov 2024 01:36:11 -0700 (PDT)
+Received: from hsinchu26.internal.sifive.com
+ (59-124-168-89.hinet-ip.hinet.net. [59.124.168.89])
+ by smtp.gmail.com with ESMTPSA id
+ 98e67ed59e1d1-2e92fbfb04asm4558451a91.50.2024.11.01.01.36.09
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 01 Nov 2024 01:36:11 -0700 (PDT)
+From: Yong-Xuan Wang <yongxuan.wang@sifive.com>
+To: qemu-devel@nongnu.org,
+	qemu-riscv@nongnu.org
+Cc: greentime.hu@sifive.com, vincent.chen@sifive.com, frank.chang@sifive.com,
+ jim.shu@sifive.com, Yong-Xuan Wang <yongxuan.wang@sifive.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bmeng.cn@gmail.com>,
+ Weiwei Li <liwei1518@gmail.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
+Subject: [PATCH 1/1] hw/riscv: virt: prevent to use AIA MSI when host doesn't
+ support it
+Date: Fri,  1 Nov 2024 16:36:05 +0800
+Message-Id: <20241101083606.5122-1-yongxuan.wang@sifive.com>
+X-Mailer: git-send-email 2.17.1
+Received-SPF: pass client-ip=2607:f8b0:4864:20::633;
+ envelope-from=yongxuan.wang@sifive.com; helo=mail-pl1-x633.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -96,88 +99,50 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Alireza Sanaee <alireza.sanaee@huawei.com>
+Currently QEMU will continue to emulate the AIA MSI devices and enable the
+AIA extension for guest OS when the host kernel doesn't support the
+in-kernel AIA irqchip. This will cause an illegal instruction exception
+when the guest OS uses the IMSIC devices. Add additional checks to ensure
+the guest OS only uses the AIA MSI device when the host kernel supports
+the in-kernel AIA chip.
 
-Add has_caches flag to SMPCompatProps, which helps in avoiding
-extra checks for every single layer of caches in x86 (and ARM in
-future).
+Signed-off-by: Yong-Xuan Wang <yongxuan.wang@sifive.com>
+Reviewed-by: Jim Shu <jim.shu@sifive.com>
+---
+ hw/riscv/virt.c | 19 +++++++++++++------
+ 1 file changed, 13 insertions(+), 6 deletions(-)
 
-Signed-off-by: Alireza Sanaee <alireza.sanaee@huawei.com>
-Signed-off-by: Zhao Liu <zhao1.liu@intel.com>
-Reviewed-by: Jonathan Cameron <Jonathan.Cameron@huawei.com>
----
-Note: Picked from Alireza's series with the changes:
- * Moved the flag to SMPCompatProps with a new name "has_caches".
-   This way, it remains consistent with the function and style of
-   "has_clusters" in SMPCompatProps.
- * Dropped my previous TODO with the new flag.
----
-Changes since Patch v2:
- * Picked a new patch frome Alireza's ARM smp-cache series.
----
- hw/core/machine-smp.c |  2 ++
- include/hw/boards.h   |  3 +++
- target/i386/cpu.c     | 11 +++++------
- 3 files changed, 10 insertions(+), 6 deletions(-)
-
-diff --git a/hw/core/machine-smp.c b/hw/core/machine-smp.c
-index 640b2114b429..6ae7c4765402 100644
---- a/hw/core/machine-smp.c
-+++ b/hw/core/machine-smp.c
-@@ -324,6 +324,8 @@ bool machine_parse_smp_cache(MachineState *ms,
-             return false;
+diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+index 45a8c4f8190d..0d8e047844a6 100644
+--- a/hw/riscv/virt.c
++++ b/hw/riscv/virt.c
+@@ -1567,12 +1567,19 @@ static void virt_machine_init(MachineState *machine)
          }
      }
-+
-+    mc->smp_props.has_caches = true;
-     return true;
- }
  
-diff --git a/include/hw/boards.h b/include/hw/boards.h
-index e07fcf0983e1..2d650bbf13c4 100644
---- a/include/hw/boards.h
-+++ b/include/hw/boards.h
-@@ -156,6 +156,8 @@ typedef struct {
-  * @modules_supported - whether modules are supported by the machine
-  * @cache_supported - whether cache (l1d, l1i, l2 and l3) configuration are
-  *                    supported by the machine
-+ * @has_caches - whether cache properties are explicitly specified in the
-+ *               user provided smp-cache configuration
-  */
- typedef struct {
-     bool prefer_sockets;
-@@ -166,6 +168,7 @@ typedef struct {
-     bool drawers_supported;
-     bool modules_supported;
-     bool cache_supported[CACHE_LEVEL_AND_TYPE__MAX];
-+    bool has_caches;
- } SMPCompatProps;
- 
- /**
-diff --git a/target/i386/cpu.c b/target/i386/cpu.c
-index 1cf4cda1e647..49f19f896197 100644
---- a/target/i386/cpu.c
-+++ b/target/i386/cpu.c
-@@ -8035,13 +8035,12 @@ static void x86_cpu_realizefn(DeviceState *dev, Error **errp)
- 
- #ifndef CONFIG_USER_ONLY
-     MachineState *ms = MACHINE(qdev_get_machine());
-+    MachineClass *mc = MACHINE_GET_CLASS(ms);
- 
--    /*
--     * TODO: Add a SMPCompatProps.has_caches flag to avoid useless updates
--     * if user didn't set smp_cache.
--     */
--    if (!x86_cpu_update_smp_cache_topo(ms, cpu, errp)) {
--        return;
-+    if (mc->smp_props.has_caches) {
-+        if (!x86_cpu_update_smp_cache_topo(ms, cpu, errp)) {
-+            return;
+-    if (kvm_enabled() && virt_use_kvm_aia(s)) {
+-        kvm_riscv_aia_create(machine, IMSIC_MMIO_GROUP_MIN_SHIFT,
+-                             VIRT_IRQCHIP_NUM_SOURCES, VIRT_IRQCHIP_NUM_MSIS,
+-                             memmap[VIRT_APLIC_S].base,
+-                             memmap[VIRT_IMSIC_S].base,
+-                             s->aia_guests);
++    if (kvm_enabled() && s->aia_type == VIRT_AIA_TYPE_APLIC_IMSIC) {
++        if (virt_use_kvm_aia(s)) {
++            kvm_riscv_aia_create(machine, IMSIC_MMIO_GROUP_MIN_SHIFT,
++                                 VIRT_IRQCHIP_NUM_SOURCES,
++                                 VIRT_IRQCHIP_NUM_MSIS,
++                                 memmap[VIRT_APLIC_S].base,
++                                 memmap[VIRT_IMSIC_S].base,
++                                 s->aia_guests);
++        } else {
++            error_report("Host machine doesn't support in-kernel APLIC MSI, "
++                         "please use aia=none or aia=aplic");
++            exit(1);
 +        }
      }
  
-     qemu_register_reset(x86_cpu_machine_reset_cb, cpu);
+     if (riscv_is_32bit(&s->soc[0])) {
 -- 
-2.34.1
+2.17.1
 
 
