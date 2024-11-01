@@ -4,97 +4,103 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E1DA6E6F084
-	for <qemu-riscv@archiver.kernel.org>; Fri,  1 Nov 2024 19:24:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D7C94E6F08C
+	for <qemu-riscv@archiver.kernel.org>; Fri,  1 Nov 2024 20:46:53 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1t6xF0-0007tR-Pf; Fri, 01 Nov 2024 15:23:26 -0400
+	id 1t6yXW-0007k4-IP; Fri, 01 Nov 2024 16:46:38 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <tjeznach@rivosinc.com>)
- id 1t6xEz-0007t8-BN
- for qemu-riscv@nongnu.org; Fri, 01 Nov 2024 15:23:25 -0400
-Received: from mail-il1-x12a.google.com ([2607:f8b0:4864:20::12a])
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1t6yXU-0007jA-BH
+ for qemu-riscv@nongnu.org; Fri, 01 Nov 2024 16:46:36 -0400
+Received: from mail-pj1-x102d.google.com ([2607:f8b0:4864:20::102d])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <tjeznach@rivosinc.com>)
- id 1t6xEx-0003Cz-88
- for qemu-riscv@nongnu.org; Fri, 01 Nov 2024 15:23:25 -0400
-Received: by mail-il1-x12a.google.com with SMTP id
- e9e14a558f8ab-3a4e5a7b026so8079665ab.3
- for <qemu-riscv@nongnu.org>; Fri, 01 Nov 2024 12:23:21 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1t6yXS-0003LU-B6
+ for qemu-riscv@nongnu.org; Fri, 01 Nov 2024 16:46:36 -0400
+Received: by mail-pj1-x102d.google.com with SMTP id
+ 98e67ed59e1d1-2e3010478e6so1788706a91.1
+ for <qemu-riscv@nongnu.org>; Fri, 01 Nov 2024 13:46:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1730489001; x=1731093801;
- darn=nongnu.org; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=q4l5/w9xruay6xyDjzJDQyNntrDGmfORLFmyBuWicy4=;
- b=TWyGZoHSz4NuJsJmrfsqsKYnNZuF9QeE8hAiHcK55on/0WwjO9yNsIs1rC2VxdxJSR
- pN/GBFr6bWEOts0DPtccvgl/o8YYQQrBu8Kl6I0rPYHn0wxQv8xcql04/7g+3pZQq1Gu
- +avzb3Bnwe0kiHSYuM8EXbzxo1S23HX9AkWH/3Jv0nE8bk2K1TVIge6quLVJotAd89g0
- 9BlrIuVsPrGwi84nM/4Kkk0Py8yWvDtYBKsBK/s41Q79r7IPFFnOWbIkMZwgPQClq9TH
- Ikqp2V1ixr3jU6pdT8XnswMujbzLqZ1tiKPn5nrrdF8Y13R9d7zuRZ0zqtRDxxJ0409f
- axdg==
+ d=ventanamicro.com; s=google; t=1730493992; x=1731098792; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=WiMHInHZO3dGDguQrhtZ6hSTe8/x5FLMH5baEmYalNQ=;
+ b=HJvTv7T5jHE/Ow0BjOVbPr7f82DUJ9FGjdR2zaQqjCWaGsSbGD73xhohi6Ab5ZJV3h
+ uYE/94KjeRrmybRP9yQ0NPZqgE5FCFMdePdvnN222hfqH/urih8KdRzn4L1OVYy/jgqE
+ 18R+pBHOENLkkMBXQ/wW6V9AVhqAViGgghrsSJh3GdvNpfEWHH/QO2rAYcenaWGRapMM
+ 5PcGJNcpA1SOEAGX231xtKK6uVGiMZQQ1+gzfXpfihRwv22+KuGWvOtEYo80/WDDoJAV
+ 7ciNz2iM/bK0D3ctCzUEI1yC1Tg31ZAEBe2HWcw19JcEoA34Abx/efbiFczJ6IRMOJHJ
+ 54pg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1730489001; x=1731093801;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=q4l5/w9xruay6xyDjzJDQyNntrDGmfORLFmyBuWicy4=;
- b=UXaiSeEPzBunMmpjFf63loGy+HAP6Hu11rbg7g3ZJrcgfTAPULVZSFR04Oqn8W2Jk3
- KaCWv9YBqQD0RqiukUYnn15PeUmuCl+V8Mw57IGYO3P4cog5Zlfj2zgC3GXkyUsKThwb
- 9PlwKYjK0/R4SBFly+uFIiJLYvcnyMQ2RpykpvhRgEV5n8bFLl7aJZpTxlRKvLLrReuk
- zs/cqULF/HqKjqA0AaYO7BBMWDkr55XXP3/FRPds1+3256anMButUP3Khi1XzuFg1DUH
- mlaDkxBLoj2PAcvEoBhaotWdhDhpLOcv+kjxuHCokfFYFUg26xB/cheH1cPpBzG3rvyI
- Qo4w==
+ d=1e100.net; s=20230601; t=1730493992; x=1731098792;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=WiMHInHZO3dGDguQrhtZ6hSTe8/x5FLMH5baEmYalNQ=;
+ b=GlOysm9Ud6aooJH1CK6uuzYWzfGyJhrN4p2lEW6EzN3TzvZz85niwgaPHixIaK3bDs
+ G9k0y6kHnqoluUq39PHglaCxiGORNXVMc4NdNK7IYotp15Q7W/nFopUtVYVsjUertv+r
+ dNvKGUHWENVbtxxX341HuaiRzjtepSlqLLJNDRBZzjIse1EdtdnQTLg+2hQnlVk847yo
+ RD6+yrLzOoGArx3sInsBJ5Qc/rSSxfuWHJrhkNSeLyxfQ6ANzTNqLeQAyySEWxyWTDE0
+ j4eRcZn8wYVBF00wywmgSqUldMH7wmEaw6XFzWr2v/qAqaJzVahrhUIPqmuUAlZ6Sg16
+ Hp/A==
 X-Forwarded-Encrypted: i=1;
- AJvYcCW1Qvp4Xe/Yz3grRwwwofnmTr0RwBEl//DOhlZEgL3wVNv8/g9aKtAHbPEB7m2r7AOpAGkPze1jd3aw@nongnu.org
-X-Gm-Message-State: AOJu0YwWh2+ZRHzVugiQCVkTNb1t8Ux5jh2Nn9WCviQK+JOg2Fj/OwG7
- Mcd2PR19P+H4mTq7EI6fkKTMuUFOBkGSD0qQRdSIbnuBg9fiI8wewmIfHlIh5nONIAzgSo/tVCn
- T6TPNoRJHgKyVmUzkVg5wrL2HJqbJpD0ZahcOoQ==
-X-Google-Smtp-Source: AGHT+IEusD1gY9zRh75mUIBlR2ZdLia9dlg6q+P3Sk+lXkvxhsjboo2P8vzNiho9BZMX0vlix2pWbkWs2FgS/QMTmPA=
-X-Received: by 2002:a92:c26b:0:b0:3a4:ecdb:d615 with SMTP id
- e9e14a558f8ab-3a60f1fd51amr86738265ab.8.1730488999721; Fri, 01 Nov 2024
- 12:23:19 -0700 (PDT)
+ AJvYcCVFglDIE8HOS9uItut2dH4vxVkU21/yj2+foTgrqeq23GbxxiYjYPP4+Ag0X19DlznCJds0bM5shJ3s@nongnu.org
+X-Gm-Message-State: AOJu0YzLX1unP8JDwIz9rYEzjkH6t8xtIuz79ZwL0+ti53mLSGu+ZvXE
+ FWzMPRrrTkkSzFijIxULXkyrJ0Sq1sWNUO0Boc3EU2dSBpGmKPD8fIIUrGBW9UY=
+X-Google-Smtp-Source: AGHT+IHCU9R4Lv9BuN1bUV21JUCtjNjOs5TJNPpGpGyXIyuDDnAqGpEGoangreh/XB9NA6uyCv4rvQ==
+X-Received: by 2002:a17:90b:28c4:b0:2e2:c7f8:8ba8 with SMTP id
+ 98e67ed59e1d1-2e94c53c34cmr5398766a91.40.1730493992500; 
+ Fri, 01 Nov 2024 13:46:32 -0700 (PDT)
+Received: from [192.168.68.110] ([191.8.109.222])
+ by smtp.gmail.com with ESMTPSA id
+ 98e67ed59e1d1-2e93dab27a8sm3169018a91.22.2024.11.01.13.46.26
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 01 Nov 2024 13:46:32 -0700 (PDT)
+Message-ID: <e23a19e8-3755-4fc3-8789-eca2af97104f@ventanamicro.com>
+Date: Fri, 1 Nov 2024 17:46:25 -0300
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] hw/riscv: fix build error with clang
+To: Tomasz Jeznach <tjeznach@rivosinc.com>,
+ Peter Maydell <peter.maydell@linaro.org>
+Cc: Pierrick Bouvier <pierrick.bouvier@linaro.org>, qemu-devel@nongnu.org,
+ Cleber Rosa <crosa@redhat.com>, qemu-riscv@nongnu.org,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Mahmoud Mandour <ma.mandourr@gmail.com>,
+ Alistair Francis <alistair.francis@wdc.com>, John Snow <jsnow@redhat.com>,
+ Stefano Garzarella <sgarzare@redhat.com>, Thomas Huth <thuth@redhat.com>,
+ =?UTF-8?Q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>,
+ "Michael S. Tsirkin" <mst@redhat.com>, Weiwei Li <liwei1518@gmail.com>,
+ =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
+ Konstantin Kostiuk <kkostiuk@redhat.com>, Bin Meng <bmeng.cn@gmail.com>,
+ Paolo Bonzini <pbonzini@redhat.com>, Alexandre Iooss <erdnaxe@crans.org>,
+ Michael Roth <michael.roth@amd.com>, =?UTF-8?Q?Alex_Benn=C3=A9e?=
+ <alex.bennee@linaro.org>, =?UTF-8?Q?Daniel_P=2E_Berrang=C3=A9?=
+ <berrange@redhat.com>, Palmer Dabbelt <palmer@dabbelt.com>
 References: <20241101170833.1074954-1-pierrick.bouvier@linaro.org>
  <2e1af830-a90a-447f-ab47-1c3d49463134@ventanamicro.com>
  <CAFEAcA92CuvGUJQk5LFE1X3a8dH21ksE_QXETjVPnU3v1bVSzw@mail.gmail.com>
  <fd9ee34a-24e1-43fb-950b-aba585473085@ventanamicro.com>
  <CAFEAcA_SYAC_UsEs+xy7aZEHsA1bC0umnsAF5ZmtjmZKEVSA+Q@mail.gmail.com>
-In-Reply-To: <CAFEAcA_SYAC_UsEs+xy7aZEHsA1bC0umnsAF5ZmtjmZKEVSA+Q@mail.gmail.com>
-From: Tomasz Jeznach <tjeznach@rivosinc.com>
-Date: Fri, 1 Nov 2024 12:23:08 -0700
-Message-ID: <CAH2o1u4ZAkH-bWN8SRkNj8-n9i3NtJpodopUpQyE=pwO5mKkDw@mail.gmail.com>
-Subject: Re: [PATCH] hw/riscv: fix build error with clang
-To: Peter Maydell <peter.maydell@linaro.org>
-Cc: Daniel Henrique Barboza <dbarboza@ventanamicro.com>, 
- Pierrick Bouvier <pierrick.bouvier@linaro.org>, qemu-devel@nongnu.org, 
- Cleber Rosa <crosa@redhat.com>, qemu-riscv@nongnu.org, 
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Mahmoud Mandour <ma.mandourr@gmail.com>, 
- Alistair Francis <alistair.francis@wdc.com>, John Snow <jsnow@redhat.com>, 
- Stefano Garzarella <sgarzare@redhat.com>, Thomas Huth <thuth@redhat.com>, 
- =?UTF-8?B?TWFyYy1BbmRyw6kgTHVyZWF1?= <marcandre.lureau@redhat.com>, 
- "Michael S. Tsirkin" <mst@redhat.com>, Weiwei Li <liwei1518@gmail.com>, 
- =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@linaro.org>, 
- Konstantin Kostiuk <kkostiuk@redhat.com>, Bin Meng <bmeng.cn@gmail.com>, 
- Paolo Bonzini <pbonzini@redhat.com>, Alexandre Iooss <erdnaxe@crans.org>, 
- Michael Roth <michael.roth@amd.com>,
- =?UTF-8?B?QWxleCBCZW5uw6ll?= <alex.bennee@linaro.org>, 
- =?UTF-8?Q?Daniel_P=2E_Berrang=C3=A9?= <berrange@redhat.com>, 
- Palmer Dabbelt <palmer@dabbelt.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::12a;
- envelope-from=tjeznach@rivosinc.com; helo=mail-il1-x12a.google.com
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ <CAH2o1u4ZAkH-bWN8SRkNj8-n9i3NtJpodopUpQyE=pwO5mKkDw@mail.gmail.com>
+Content-Language: en-US
+From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+In-Reply-To: <CAH2o1u4ZAkH-bWN8SRkNj8-n9i3NtJpodopUpQyE=pwO5mKkDw@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::102d;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pj1-x102d.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -110,137 +116,183 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Fri, Nov 1, 2024 at 11:49=E2=80=AFAM Peter Maydell <peter.maydell@linaro=
-.org> wrote:
->
-> On Fri, 1 Nov 2024 at 18:13, Daniel Henrique Barboza
-> <dbarboza@ventanamicro.com> wrote:
-> >
-> > (Ccing Tomasz)
-> >
-> > On 11/1/24 2:48 PM, Peter Maydell wrote:
-> > > On Fri, 1 Nov 2024 at 17:36, Daniel Henrique Barboza
-> > > <dbarboza@ventanamicro.com> wrote:
-> > >>
-> > >>
-> > >>
-> > >> On 11/1/24 2:08 PM, Pierrick Bouvier wrote:
-> > >>> Introduced in 0c54ac, "hw/riscv: add RISC-V IOMMU base emulation"
-> > >>>
-> > >>> ../hw/riscv/riscv-iommu.c:187:17: error: redefinition of '_pext_u64=
-'
-> > >>>
-> > >>>     187 | static uint64_t _pext_u64(uint64_t val, uint64_t ext)
-> > >>>
-> > >>>         |                 ^
-> > >>>
-> > >>> D:/a/_temp/msys64/clang64/lib/clang/18/include/bmi2intrin.h:217:1: =
-note: previous definition is here
-> > >>>
-> > >>>     217 | _pext_u64(unsigned long long __X, unsigned long long __Y)
-> > >>>
-> > >>>         | ^
-> > >>>
-> > >>> Signed-off-by: Pierrick Bouvier <pierrick.bouvier@linaro.org>
-> > >>> ---
-> > >>>    hw/riscv/riscv-iommu.c | 4 ++--
-> > >>>    1 file changed, 2 insertions(+), 2 deletions(-)
-> > >>>
-> > >>> diff --git a/hw/riscv/riscv-iommu.c b/hw/riscv/riscv-iommu.c
-> > >>> index feb650549ac..f738570bac2 100644
-> > >>> --- a/hw/riscv/riscv-iommu.c
-> > >>> +++ b/hw/riscv/riscv-iommu.c
-> > >>> @@ -184,7 +184,7 @@ static void riscv_iommu_pri(RISCVIOMMUState *s,
-> > >>>    }
-> > >>>
-> > >>>    /* Portable implementation of pext_u64, bit-mask extraction. */
-> > >>> -static uint64_t _pext_u64(uint64_t val, uint64_t ext)
-> > >>> +static uint64_t pext_u64(uint64_t val, uint64_t ext)
-> > >>
-> > >> I suggest name it 'riscv_iommu_pext_u64' to be clear that this is a =
-local scope function,
-> > >> not to be mistaken with anything available in clang or any other com=
-piler.
-> > >
-> > > More generally, we should avoid using leading '_' in QEMU function
-> > > names; those are reserved for the system.
-> > >
-> > > Also, what does this function do? The comment assumes that
-> > > the reader knows what a "pext_u64" function does, but if you
-> > > don't then it's fairly inscrutable bit-twiddling.
-> > > "bit-mask extraction" suggests maybe we should be using
-> > > the bitops.h extract functions instead ?
-> >
-> > This is the function:
-> >
-> >
-> > /* Portable implementation of pext_u64, bit-mask extraction. */
-> > static uint64_t _pext_u64(uint64_t val, uint64_t ext)
-> > {
-> >      uint64_t ret =3D 0;
-> >      uint64_t rot =3D 1;
-> >
-> >      while (ext) {
-> >          if (ext & 1) {
-> >              if (val & 1) {
-> >                  ret |=3D rot;
-> >              }
-> >              rot <<=3D 1;
-> >          }
-> >          val >>=3D 1;
-> >          ext >>=3D 1;
-> >      }
-> >
-> >      return ret;
-> > }
->
-> Yes, but what does it actually *do* ? :-)  Presumably
-> it extracts some subpart of 'val' based on 'ext', but
-> what is the format it expects 'ext' to be in, and what
-> kinds of input are valid?
->
-> For comparison, our extract64 function says:
->
->  * extract64:
->  * @value: the value to extract the bit field from
->  * @start: the lowest bit in the bit field (numbered from 0)
->  * @length: the length of the bit field
->  *
->  * Extract from the 64 bit input @value the bit field specified by the
->  * @start and @length parameters, and return it. The bit field must
->  * lie entirely within the 64 bit word. It is valid to request that
->  * all 64 bits are returned (ie @length 64 and @start 0).
->
-> so even if you haven't come across it before you can see
-> what the function is intended to do, what inputs are valid
-> and what are not, and so on, and you don't need to try to
-> reverse-engineer those from the bit operations.
->
-> I'm not necessarily opposed to having separate implementations
-> of these things if it means the code follows the architectural
-> specifications more closely, but if we do have them can
-> we have documentation comments that describe the behaviour?
->
-
-Hey,
-
-Thank you for the fix. Using a common name and underscore was not a good id=
-ea ;)
-The function is an implementation of the bit extraction function as
-documented in RISC-V IOMMU Spec [1], section '2.3.3. Process to
-translate addresses of MSIs'.
-
-It is also known as PEXT instruction in x86/AVX2 architecture, for
-non-contiguous bits extraction, that's why I've used this name, as it
-might be more familiar to the readers, and to avoid confusion with
-existing extract64() function in bitops.h.
 
 
-[1] link: https://github.com/riscv-non-isa/riscv-iommu/releases/tag/v1.0.0
+On 11/1/24 4:23 PM, Tomasz Jeznach wrote:
+> On Fri, Nov 1, 2024 at 11:49 AM Peter Maydell <peter.maydell@linaro.org> wrote:
+>>
+>> On Fri, 1 Nov 2024 at 18:13, Daniel Henrique Barboza
+>> <dbarboza@ventanamicro.com> wrote:
+>>>
+>>> (Ccing Tomasz)
+>>>
+>>> On 11/1/24 2:48 PM, Peter Maydell wrote:
+>>>> On Fri, 1 Nov 2024 at 17:36, Daniel Henrique Barboza
+>>>> <dbarboza@ventanamicro.com> wrote:
+>>>>>
+>>>>>
+>>>>>
+>>>>> On 11/1/24 2:08 PM, Pierrick Bouvier wrote:
+>>>>>> Introduced in 0c54ac, "hw/riscv: add RISC-V IOMMU base emulation"
+>>>>>>
+>>>>>> ../hw/riscv/riscv-iommu.c:187:17: error: redefinition of '_pext_u64'
+>>>>>>
+>>>>>>      187 | static uint64_t _pext_u64(uint64_t val, uint64_t ext)
+>>>>>>
+>>>>>>          |                 ^
+>>>>>>
+>>>>>> D:/a/_temp/msys64/clang64/lib/clang/18/include/bmi2intrin.h:217:1: note: previous definition is here
+>>>>>>
+>>>>>>      217 | _pext_u64(unsigned long long __X, unsigned long long __Y)
+>>>>>>
+>>>>>>          | ^
+>>>>>>
+>>>>>> Signed-off-by: Pierrick Bouvier <pierrick.bouvier@linaro.org>
+>>>>>> ---
+>>>>>>     hw/riscv/riscv-iommu.c | 4 ++--
+>>>>>>     1 file changed, 2 insertions(+), 2 deletions(-)
+>>>>>>
+>>>>>> diff --git a/hw/riscv/riscv-iommu.c b/hw/riscv/riscv-iommu.c
+>>>>>> index feb650549ac..f738570bac2 100644
+>>>>>> --- a/hw/riscv/riscv-iommu.c
+>>>>>> +++ b/hw/riscv/riscv-iommu.c
+>>>>>> @@ -184,7 +184,7 @@ static void riscv_iommu_pri(RISCVIOMMUState *s,
+>>>>>>     }
+>>>>>>
+>>>>>>     /* Portable implementation of pext_u64, bit-mask extraction. */
+>>>>>> -static uint64_t _pext_u64(uint64_t val, uint64_t ext)
+>>>>>> +static uint64_t pext_u64(uint64_t val, uint64_t ext)
+>>>>>
+>>>>> I suggest name it 'riscv_iommu_pext_u64' to be clear that this is a local scope function,
+>>>>> not to be mistaken with anything available in clang or any other compiler.
+>>>>
+>>>> More generally, we should avoid using leading '_' in QEMU function
+>>>> names; those are reserved for the system.
+>>>>
+>>>> Also, what does this function do? The comment assumes that
+>>>> the reader knows what a "pext_u64" function does, but if you
+>>>> don't then it's fairly inscrutable bit-twiddling.
+>>>> "bit-mask extraction" suggests maybe we should be using
+>>>> the bitops.h extract functions instead ?
+>>>
+>>> This is the function:
+>>>
+>>>
+>>> /* Portable implementation of pext_u64, bit-mask extraction. */
+>>> static uint64_t _pext_u64(uint64_t val, uint64_t ext)
+>>> {
+>>>       uint64_t ret = 0;
+>>>       uint64_t rot = 1;
+>>>
+>>>       while (ext) {
+>>>           if (ext & 1) {
+>>>               if (val & 1) {
+>>>                   ret |= rot;
+>>>               }
+>>>               rot <<= 1;
+>>>           }
+>>>           val >>= 1;
+>>>           ext >>= 1;
+>>>       }
+>>>
+>>>       return ret;
+>>> }
+>>
+>> Yes, but what does it actually *do* ? :-)  Presumably
+>> it extracts some subpart of 'val' based on 'ext', but
+>> what is the format it expects 'ext' to be in, and what
+>> kinds of input are valid?
+>>
+>> For comparison, our extract64 function says:
+>>
+>>   * extract64:
+>>   * @value: the value to extract the bit field from
+>>   * @start: the lowest bit in the bit field (numbered from 0)
+>>   * @length: the length of the bit field
+>>   *
+>>   * Extract from the 64 bit input @value the bit field specified by the
+>>   * @start and @length parameters, and return it. The bit field must
+>>   * lie entirely within the 64 bit word. It is valid to request that
+>>   * all 64 bits are returned (ie @length 64 and @start 0).
+>>
+>> so even if you haven't come across it before you can see
+>> what the function is intended to do, what inputs are valid
+>> and what are not, and so on, and you don't need to try to
+>> reverse-engineer those from the bit operations.
+>>
+>> I'm not necessarily opposed to having separate implementations
+>> of these things if it means the code follows the architectural
+>> specifications more closely, but if we do have them can
+>> we have documentation comments that describe the behaviour?
+>>
+> 
+> Hey,
+> 
+> Thank you for the fix. Using a common name and underscore was not a good idea ;)
+> The function is an implementation of the bit extraction function as
+> documented in RISC-V IOMMU Spec [1], section '2.3.3. Process to
+> translate addresses of MSIs'.
+> 
+> It is also known as PEXT instruction in x86/AVX2 architecture, for
+> non-contiguous bits extraction, that's why I've used this name, as it
+> might be more familiar to the readers, and to avoid confusion with
+> existing extract64() function in bitops.h.
+> 
+> 
+> [1] link: https://github.com/riscv-non-isa/riscv-iommu/releases/tag/v1.0.0
 
-Hope this helps,
-- Tomasz
+Thanks for clarifying!
 
-> thanks
-> -- PMM
+
+Pierrick, I copied the description of this function from the riscv-isa spec
+and put in a comment. This is how it would look like:
+
+$ git diff
+diff --git a/hw/riscv/riscv-iommu.c b/hw/riscv/riscv-iommu.c
+index feb650549a..969eb56c53 100644
+--- a/hw/riscv/riscv-iommu.c
++++ b/hw/riscv/riscv-iommu.c
+@@ -183,8 +183,25 @@ static void riscv_iommu_pri(RISCVIOMMUState *s,
+      }
+  }
+  
+-/* Portable implementation of pext_u64, bit-mask extraction. */
+-static uint64_t _pext_u64(uint64_t val, uint64_t ext)
++/*
++ * Discards all bits from 'val' whose matching bits in the same
++ * positions in the mask 'ext' are zeros, and packs the remaining
++ * bits from 'val' contiguously at the least-significant end of the
++ * result, keeping the same bit order as 'val' and filling any
++ * other bits at the most-significant end of the result with zeros.
++ *
++ * For example, for the following 'val' and 'ext', the return 'ret'
++ * will be:
++ *
++ * val = a b c d e f g h
++ * ext = 1 0 1 0 0 1 1 0
++ * ret = 0 0 0 0 a c f g
++ *
++ * This function, taken from the riscv-iommu 1.0 spec, section 2.3.3
++ * "Process to translate addresses of MSIs", is similar to bit manip
++ * function PEXT (Parallel bits extract) from x86.
++ */
++static uint64_t riscv_iommu_pext_u64(uint64_t val, uint64_t ext)
+
+
+
+Feel free to take this diff and squash it in your v2. This way we'll fix the clang
+issue and put some docs in the function, a 2 for 1.
+
+
+Thanks,
+
+Daniel
+
+
+> 
+> Hope this helps,
+> - Tomasz
+> 
+>> thanks
+>> -- PMM
 
