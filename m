@@ -4,63 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6D2D9D11100
-	for <qemu-riscv@archiver.kernel.org>; Sun,  3 Nov 2024 15:04:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AC5E1D11100
+	for <qemu-riscv@archiver.kernel.org>; Sun,  3 Nov 2024 15:05:58 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1t7c7a-0001Xk-17; Sun, 03 Nov 2024 10:02:36 -0500
+	id 1t7c6o-0000Lq-LJ; Sun, 03 Nov 2024 10:01:42 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <phil@philjordan.eu>)
- id 1t7c6J-0008Ng-UP
- for qemu-riscv@nongnu.org; Sun, 03 Nov 2024 10:01:15 -0500
-Received: from mail-ej1-x629.google.com ([2a00:1450:4864:20::629])
+ id 1t7c6D-0008Gx-VN
+ for qemu-riscv@nongnu.org; Sun, 03 Nov 2024 10:01:06 -0500
+Received: from mail-ej1-x636.google.com ([2a00:1450:4864:20::636])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <phil@philjordan.eu>)
- id 1t7c6F-0006cb-Aq
- for qemu-riscv@nongnu.org; Sun, 03 Nov 2024 10:01:11 -0500
-Received: by mail-ej1-x629.google.com with SMTP id
- a640c23a62f3a-a9a2cdc6f0cso505966766b.2
- for <qemu-riscv@nongnu.org>; Sun, 03 Nov 2024 07:01:06 -0800 (PST)
+ id 1t7c66-0006WS-LN
+ for qemu-riscv@nongnu.org; Sun, 03 Nov 2024 10:01:05 -0500
+Received: by mail-ej1-x636.google.com with SMTP id
+ a640c23a62f3a-a99eb8b607aso428858966b.2
+ for <qemu-riscv@nongnu.org>; Sun, 03 Nov 2024 07:00:57 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=philjordan-eu.20230601.gappssmtp.com; s=20230601; t=1730646066; x=1731250866;
+ d=philjordan-eu.20230601.gappssmtp.com; s=20230601; t=1730646057; x=1731250857;
  darn=nongnu.org; 
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=lk6DmwR1trCObzc5QE+RdchuXUh7gssyok3qWRKKP8I=;
- b=bjJYW8IvmRi8FEPsFhNtzTRPTSG8UeyPDr2sosAHhR3j0szAdDY32kqBYpX4hB8/hZ
- IPHD8+Cag7tce9yTndNMdsx2Gy+fXt2P1wQVmad9LIX0eFWHSCxviPekbEYhS8UugNO+
- SUiXMCfg53VO5GgiAqgBi6H4nNyjgwwin7w7mQZDDxfzqBEwuHrmsd4BMhCvQzuA7ayJ
- AlbmUb3D7LQIw8+OCc0w9Gs7b/qnJG8CuIGUhwRBjwXJoQlm1byw2s007yClr0brIHZb
- DnvKA1XZIZzzdtccW/iF2a0lfzrO51uIX+FFxC3MS1/q1npaz6sDrabRgNXhShnqTTda
- iWTQ==
+ bh=Idi4ZgqPiImMTVGzBnxl6Gz/HwFISpd6i6AcXI2jDvo=;
+ b=cRd0J8xxnQYF4oqitxuV9rrBPmZ3ux0C4t6aN191vncAElm5g4Owdw9aaDrCdwXjoR
+ MwOPT7vm1pa1Fpl7y7vfAuXGWkkFUQ+A64T6pY/mcqMnR8W72xEb4UcbBvNDdgy4TNO+
+ foLINvBGmGp3YuBx/olqPEQx7bDSdXx8uSzD9gbGbZZF8lW/C3JA5+AfbuaIjmX4Yulg
+ sCw8B/EgdHhtXNhxeuMGGo9Cx6sl/+RV78CwDHw2PnqrbCWbyk8NFVGmj+pmhZtfziCs
+ 26EkoZbBksLowwoXpA2VeLRi+yIJigNleQIv+Yxtuda9vkkrj8m8kVrknFpQ9mJKywV5
+ ELQg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1730646066; x=1731250866;
+ d=1e100.net; s=20230601; t=1730646057; x=1731250857;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=lk6DmwR1trCObzc5QE+RdchuXUh7gssyok3qWRKKP8I=;
- b=tOKi5EmYMlwgrY38eePt51L6crnPVCZLXTFkMmqK1o4SKYxRuiD1Nqv5aufKE0z8KV
- kdmV7L2/A1iJ4NR4VnpnV8OEYMaI3rximK9uu+dIH0J0dV5lLS76dN9Xg6wLHmgimViT
- wIO2faxatarhLGfe3VfzFNvkqiTp47sjScBVAkIuEQ+6vUxBp3IYwnfzotXLbKSmpwea
- blgMFngtwB6iasohK5SctiClR1SeL8OW1Dp+r82GNCC1IWB5Z6EeEP3yG0Kkf6mco0tq
- sxNIArZP8RQEKaGhnEe1PWcuJoiqZxnLS+Ta4sI8M3EbXLXKgKepV0tDhc4c0kPRV/5j
- 8Iew==
+ bh=Idi4ZgqPiImMTVGzBnxl6Gz/HwFISpd6i6AcXI2jDvo=;
+ b=XAgDFLeuADkwlMiZyB1zKBIcostqU+AjNhbBxmmEr0zHiyXRmMVVA6+G67cl3+jhvu
+ u4RwNg/a6P74PwBaGQM9ZWwsWcF5cneFk6h3ffopMhRQLFPrHdl8O9YoiGQSd8X0Pv+u
+ 6u/mRIz+QmC3rbk5h/FhTEt+U1oTJ1ubiT15xL99F7RFrl5CWRZ8kYY73b9IuGk6NxfP
+ 6+qTRxKzYOYjsn/uihhqe/rY/ukRx4iIrP8hoDL5TFN0VgGXFpXsud6tTHLZOZ6OS7aN
+ ueWQmMwVGK8BaYf4VndFThklWJO9J0BOKa7Cq519XV4XdZifRrI6MAh4mCpXptHQBSkD
+ k+7g==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUYTtFW2pioLfSZjyQvbDGwNrfqA6V3j7yNTi6Kkg/zRgHm7HU+O95PlK6pScA1iyNOPWgjAyTFF/x2@nongnu.org
-X-Gm-Message-State: AOJu0YyxdOXQTfaE2eMI8KBxiBkHnKJscyhnf6kzSu6GtqCcUkRp6ZMq
- RdkCDQ8m+uhLce1W1sjVcI6Z67zfCsp6/T7LAhtp4dK39ZsIPGYDqjrSe6ALIA==
-X-Google-Smtp-Source: AGHT+IHZvRys8gnqOqVgDiIX0JC4CQYymBBjiO90UVBWokt4PeR8JwQjFRmN02scNq5nmNLLwEa0IQ==
-X-Received: by 2002:a17:907:6d17:b0:a99:fd2c:4f06 with SMTP id
- a640c23a62f3a-a9e50ca30f3mr1426911666b.65.1730646065650; 
- Sun, 03 Nov 2024 07:01:05 -0800 (PST)
+ AJvYcCWaQTlIXsN4jlaLKIMQ4LXDeXUefPb4rn5bRglJQy0NQo2Lde/AXHFi7l37SsOzqj8HUG5qn/bVXOej@nongnu.org
+X-Gm-Message-State: AOJu0YxDCiC5PjUAUNgWvqOwDQy0U41dSRtWYPGC4Gf9g9xDJC0owuid
+ 9lC7/twcQey+Wx7+var1ylEDy7FWnCqnHADs3vn+XNiXng0q1rO6i1ngOqZWjQ==
+X-Google-Smtp-Source: AGHT+IGU5jIqMojf5ty2zJuK+Cxl8cTC9Cv5wL7dXSHInGS5h9ImBtQHeZxDWFsEvAWYP0j4Hjggpg==
+X-Received: by 2002:a17:906:f59b:b0:a99:4780:1af with SMTP id
+ a640c23a62f3a-a9de5f6e2eemr2969596866b.31.1730646056563; 
+ Sun, 03 Nov 2024 07:00:56 -0800 (PST)
 Received: from localhost.localdomain (h082218084190.host.wavenet.at.
  [82.218.84.190]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a9e5664350esm431536666b.159.2024.11.03.07.01.03
+ a640c23a62f3a-a9e5664350esm431536666b.159.2024.11.03.07.00.54
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Sun, 03 Nov 2024 07:01:05 -0800 (PST)
+ Sun, 03 Nov 2024 07:00:55 -0800 (PST)
 From: Phil Dennis-Jordan <phil@philjordan.eu>
 To: qemu-devel@nongnu.org
 Cc: agraf@csgraf.de, phil@philjordan.eu, peter.maydell@linaro.org,
@@ -74,17 +74,17 @@ Cc: agraf@csgraf.de, phil@philjordan.eu, peter.maydell@linaro.org,
  dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com,
  jcmvbkbc@gmail.com, marcandre.lureau@redhat.com, berrange@redhat.com,
  akihiko.odaki@daynix.com, qemu-arm@nongnu.org, qemu-block@nongnu.org,
- qemu-riscv@nongnu.org, Alexander Graf <graf@amazon.com>
-Subject: [PATCH v6 09/15] gpex: Allow more than 4 legacy IRQs
-Date: Sun,  3 Nov 2024 16:00:31 +0100
-Message-Id: <20241103150037.48194-10-phil@philjordan.eu>
+ qemu-riscv@nongnu.org
+Subject: [PATCH v6 04/15] hw/display/apple-gfx: Adds configurable mode list
+Date: Sun,  3 Nov 2024 16:00:26 +0100
+Message-Id: <20241103150037.48194-5-phil@philjordan.eu>
 X-Mailer: git-send-email 2.39.3 (Apple Git-145)
 In-Reply-To: <20241103150037.48194-1-phil@philjordan.eu>
 References: <20241103150037.48194-1-phil@philjordan.eu>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: neutral client-ip=2a00:1450:4864:20::629;
- envelope-from=phil@philjordan.eu; helo=mail-ej1-x629.google.com
+Received-SPF: neutral client-ip=2a00:1450:4864:20::636;
+ envelope-from=phil@philjordan.eu; helo=mail-ej1-x636.google.com
 X-Spam_score_int: -10
 X-Spam_score: -1.1
 X-Spam_bar: -
@@ -106,360 +106,330 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Alexander Graf <graf@amazon.com>
+This change adds a property 'display_modes' on the graphics device
+which permits specifying a list of display modes. (screen resolution
+and refresh rate)
 
-Some boards such as vmapple don't do real legacy PCI IRQ swizzling.
-Instead, they just keep allocating more board IRQ lines for each new
-legacy IRQ. Let's support that mode by giving instantiators a new
-"nr_irqs" property they can use to support more than 4 legacy IRQ lines.
-In this mode, GPEX will export more IRQ lines, one for each device.
+The property is an array of a custom type to make the syntax slightly
+less awkward to use, for example:
 
-Signed-off-by: Alexander Graf <graf@amazon.com>
+-device '{"driver":"apple-gfx-pci", "display-modes":["1920x1080@60", "3840x2160@60"]}'
+
 Signed-off-by: Phil Dennis-Jordan <phil@philjordan.eu>
-Reviewed-by: Akihiko Odaki <akihiko.odaki@daynix.com>
 ---
 
 v4:
 
- * Turned pair of IRQ arrays into array of structs.
- * Simplified swizzling logic selection.
+ * Switched to the native array property type, which recently gained
+	 command line support.
+ * The property has also been added to the -mmio variant.
+ * Tidied up the code a little.
 
- hw/arm/sbsa-ref.c          |  2 +-
- hw/arm/virt.c              |  2 +-
- hw/i386/microvm.c          |  2 +-
- hw/loongarch/virt.c        |  2 +-
- hw/mips/loongson3_virt.c   |  2 +-
- hw/openrisc/virt.c         | 12 +++++------
- hw/pci-host/gpex.c         | 43 ++++++++++++++++++++++++++++++--------
- hw/riscv/virt.c            | 12 +++++------
- hw/xtensa/virt.c           |  2 +-
- include/hw/pci-host/gpex.h |  7 +++----
- 10 files changed, 55 insertions(+), 31 deletions(-)
+v5:
 
-diff --git a/hw/arm/sbsa-ref.c b/hw/arm/sbsa-ref.c
-index e3195d54497..7e7322486c2 100644
---- a/hw/arm/sbsa-ref.c
-+++ b/hw/arm/sbsa-ref.c
-@@ -673,7 +673,7 @@ static void create_pcie(SBSAMachineState *sms)
-     /* Map IO port space */
-     sysbus_mmio_map(SYS_BUS_DEVICE(dev), 2, base_pio);
+ * Better error handling and buffer management in property parsing and
+   output.
+
+v6:
+
+ * Switched to using NSMutableArray for the mode list to avoid need for
+   allocating a temporary array - previously done with alloca.
+
+ hw/display/apple-gfx-mmio.m |   8 +++
+ hw/display/apple-gfx-pci.m  |   9 ++-
+ hw/display/apple-gfx.h      |  12 ++++
+ hw/display/apple-gfx.m      | 137 +++++++++++++++++++++++++++++++-----
+ hw/display/trace-events     |   2 +
+ 5 files changed, 148 insertions(+), 20 deletions(-)
+
+diff --git a/hw/display/apple-gfx-mmio.m b/hw/display/apple-gfx-mmio.m
+index 66d81d38326..ddc8a2fc4f3 100644
+--- a/hw/display/apple-gfx-mmio.m
++++ b/hw/display/apple-gfx-mmio.m
+@@ -258,6 +258,12 @@ static void apple_gfx_mmio_reset(Object *obj, ResetType type)
+     [s->common.pgdev reset];
+ }
  
--    for (i = 0; i < GPEX_NUM_IRQS; i++) {
-+    for (i = 0; i < PCI_NUM_PINS; i++) {
-         sysbus_connect_irq(SYS_BUS_DEVICE(dev), i,
-                            qdev_get_gpio_in(sms->gic, irq + i));
-         gpex_set_irq_num(GPEX_HOST(dev), i, irq + i);
-diff --git a/hw/arm/virt.c b/hw/arm/virt.c
-index 1a381e9a2bd..8aa22ea3155 100644
---- a/hw/arm/virt.c
-+++ b/hw/arm/virt.c
-@@ -1547,7 +1547,7 @@ static void create_pcie(VirtMachineState *vms)
-     /* Map IO port space */
-     sysbus_mmio_map(SYS_BUS_DEVICE(dev), 2, base_pio);
++static Property apple_gfx_mmio_properties[] = {
++    DEFINE_PROP_ARRAY("display-modes", AppleGFXMMIOState,
++                      common.num_display_modes, common.display_modes,
++                      qdev_prop_display_mode, AppleGFXDisplayMode),
++    DEFINE_PROP_END_OF_LIST(),
++};
  
--    for (i = 0; i < GPEX_NUM_IRQS; i++) {
-+    for (i = 0; i < PCI_NUM_PINS; i++) {
-         sysbus_connect_irq(SYS_BUS_DEVICE(dev), i,
-                            qdev_get_gpio_in(vms->gic, irq + i));
-         gpex_set_irq_num(GPEX_HOST(dev), i, irq + i);
-diff --git a/hw/i386/microvm.c b/hw/i386/microvm.c
-index 693099f2256..b3a348bee09 100644
---- a/hw/i386/microvm.c
-+++ b/hw/i386/microvm.c
-@@ -139,7 +139,7 @@ static void create_gpex(MicrovmMachineState *mms)
-                                     mms->gpex.mmio64.base, mmio64_alias);
-     }
- 
--    for (i = 0; i < GPEX_NUM_IRQS; i++) {
-+    for (i = 0; i < PCI_NUM_PINS; i++) {
-         sysbus_connect_irq(SYS_BUS_DEVICE(dev), i,
-                            x86ms->gsi[mms->gpex.irq + i]);
-     }
-diff --git a/hw/loongarch/virt.c b/hw/loongarch/virt.c
-index 9a635d1d3d3..50056384994 100644
---- a/hw/loongarch/virt.c
-+++ b/hw/loongarch/virt.c
-@@ -741,7 +741,7 @@ static void virt_devices_init(DeviceState *pch_pic,
-     memory_region_add_subregion(get_system_memory(), VIRT_PCI_IO_BASE,
-                                 pio_alias);
- 
--    for (i = 0; i < GPEX_NUM_IRQS; i++) {
-+    for (i = 0; i < PCI_NUM_PINS; i++) {
-         sysbus_connect_irq(d, i,
-                            qdev_get_gpio_in(pch_pic, 16 + i));
-         gpex_set_irq_num(GPEX_HOST(gpex_dev), i, 16 + i);
-diff --git a/hw/mips/loongson3_virt.c b/hw/mips/loongson3_virt.c
-index f3b6326cc59..884b5f23a99 100644
---- a/hw/mips/loongson3_virt.c
-+++ b/hw/mips/loongson3_virt.c
-@@ -458,7 +458,7 @@ static inline void loongson3_virt_devices_init(MachineState *machine,
-                                 virt_memmap[VIRT_PCIE_PIO].base, s->pio_alias);
-     sysbus_mmio_map(SYS_BUS_DEVICE(dev), 2, virt_memmap[VIRT_PCIE_PIO].base);
- 
--    for (i = 0; i < GPEX_NUM_IRQS; i++) {
-+    for (i = 0; i < PCI_NUM_PINS; i++) {
-         irq = qdev_get_gpio_in(pic, PCIE_IRQ_BASE + i);
-         sysbus_connect_irq(SYS_BUS_DEVICE(dev), i, irq);
-         gpex_set_irq_num(GPEX_HOST(dev), i, PCIE_IRQ_BASE + i);
-diff --git a/hw/openrisc/virt.c b/hw/openrisc/virt.c
-index 47d2c9bd3c7..6f053bf48e0 100644
---- a/hw/openrisc/virt.c
-+++ b/hw/openrisc/virt.c
-@@ -318,7 +318,7 @@ static void create_pcie_irq_map(void *fdt, char *nodename, int irq_base,
+ static void apple_gfx_mmio_class_init(ObjectClass *klass, void *data)
  {
-     int pin, dev;
-     uint32_t irq_map_stride = 0;
--    uint32_t full_irq_map[GPEX_NUM_IRQS * GPEX_NUM_IRQS * 6] = {};
-+    uint32_t full_irq_map[PCI_NUM_PINS * PCI_NUM_PINS * 6] = {};
-     uint32_t *irq_map = full_irq_map;
+@@ -267,6 +273,8 @@ static void apple_gfx_mmio_class_init(ObjectClass *klass, void *data)
+     rc->phases.hold = apple_gfx_mmio_reset;
+     dc->hotpluggable = false;
+     dc->realize = apple_gfx_mmio_realize;
++
++    device_class_set_props(dc, apple_gfx_mmio_properties);
+ }
  
-     /*
-@@ -330,11 +330,11 @@ static void create_pcie_irq_map(void *fdt, char *nodename, int irq_base,
-      * possible slot) seeing the interrupt-map-mask will allow the table
-      * to wrap to any number of devices.
-      */
--    for (dev = 0; dev < GPEX_NUM_IRQS; dev++) {
-+    for (dev = 0; dev < PCI_NUM_PINS; dev++) {
-         int devfn = dev << 3;
+ static TypeInfo apple_gfx_mmio_types[] = {
+diff --git a/hw/display/apple-gfx-pci.m b/hw/display/apple-gfx-pci.m
+index 870d0c41e66..e2fa2567c99 100644
+--- a/hw/display/apple-gfx-pci.m
++++ b/hw/display/apple-gfx-pci.m
+@@ -113,6 +113,13 @@ static void apple_gfx_pci_reset(Object *obj, ResetType type)
+     [s->common.pgdev reset];
+ }
  
--        for (pin = 0; pin < GPEX_NUM_IRQS; pin++) {
--            int irq_nr = irq_base + ((pin + PCI_SLOT(devfn)) % GPEX_NUM_IRQS);
-+        for (pin = 0; pin < PCI_NUM_PINS; pin++) {
-+            int irq_nr = irq_base + ((pin + PCI_SLOT(devfn)) % PCI_NUM_PINS);
-             int i = 0;
- 
-             /* Fill PCI address cells */
-@@ -357,7 +357,7 @@ static void create_pcie_irq_map(void *fdt, char *nodename, int irq_base,
-     }
- 
-     qemu_fdt_setprop(fdt, nodename, "interrupt-map", full_irq_map,
--                     GPEX_NUM_IRQS * GPEX_NUM_IRQS *
-+                     PCI_NUM_PINS * PCI_NUM_PINS *
-                      irq_map_stride * sizeof(uint32_t));
- 
-     qemu_fdt_setprop_cells(fdt, nodename, "interrupt-map-mask",
-@@ -409,7 +409,7 @@ static void openrisc_virt_pcie_init(OR1KVirtState *state,
-     memory_region_add_subregion(get_system_memory(), pio_base, alias);
- 
-     /* Connect IRQ lines. */
--    for (i = 0; i < GPEX_NUM_IRQS; i++) {
-+    for (i = 0; i < PCI_NUM_PINS; i++) {
-         pcie_irq = get_per_cpu_irq(cpus, num_cpus, irq_base + i);
- 
-         sysbus_connect_irq(SYS_BUS_DEVICE(dev), i, pcie_irq);
-diff --git a/hw/pci-host/gpex.c b/hw/pci-host/gpex.c
-index e9cf455bf52..cd63aa2d3cf 100644
---- a/hw/pci-host/gpex.c
-+++ b/hw/pci-host/gpex.c
-@@ -32,6 +32,7 @@
- #include "qemu/osdep.h"
- #include "qapi/error.h"
- #include "hw/irq.h"
-+#include "hw/pci/pci_bus.h"
- #include "hw/pci-host/gpex.h"
- #include "hw/qdev-properties.h"
- #include "migration/vmstate.h"
-@@ -41,20 +42,25 @@
-  * GPEX host
-  */
- 
-+struct GPEXIrq {
-+    qemu_irq irq;
-+    int irq_num;
++static Property apple_gfx_pci_properties[] = {
++    DEFINE_PROP_ARRAY("display-modes", AppleGFXPCIState,
++                      common.num_display_modes, common.display_modes,
++                      qdev_prop_display_mode, AppleGFXDisplayMode),
++    DEFINE_PROP_END_OF_LIST(),
 +};
 +
- static void gpex_set_irq(void *opaque, int irq_num, int level)
+ static void apple_gfx_pci_class_init(ObjectClass *klass, void *data)
  {
-     GPEXHost *s = opaque;
+     DeviceClass *dc = DEVICE_CLASS(klass);
+@@ -129,7 +136,7 @@ static void apple_gfx_pci_class_init(ObjectClass *klass, void *data)
+     pci->class_id = PCI_CLASS_DISPLAY_OTHER;
+     pci->realize = apple_gfx_pci_realize;
  
--    qemu_set_irq(s->irq[irq_num], level);
-+    qemu_set_irq(s->irq[irq_num].irq, level);
+-    // TODO: Property for setting mode list
++    device_class_set_props(dc, apple_gfx_pci_properties);
  }
  
- int gpex_set_irq_num(GPEXHost *s, int index, int gsi)
- {
--    if (index >= GPEX_NUM_IRQS) {
-+    if (index >= s->num_irqs) {
-         return -EINVAL;
-     }
+ static TypeInfo apple_gfx_pci_types[] = {
+diff --git a/hw/display/apple-gfx.h b/hw/display/apple-gfx.h
+index 91b55299338..3868ea87391 100644
+--- a/hw/display/apple-gfx.h
++++ b/hw/display/apple-gfx.h
+@@ -16,6 +16,7 @@
+ #import <ParavirtualizedGraphics/ParavirtualizedGraphics.h>
+ #include "qemu/typedefs.h"
+ #include "exec/memory.h"
++#include "hw/qdev-properties.h"
+ #include "ui/surface.h"
  
--    s->irq_num[index] = gsi;
-+    s->irq[index].irq_num = gsi;
-     return 0;
- }
+ @class PGDeviceDescriptor;
+@@ -27,6 +28,7 @@
  
-@@ -62,7 +68,7 @@ static PCIINTxRoute gpex_route_intx_pin_to_irq(void *opaque, int pin)
- {
-     PCIINTxRoute route;
-     GPEXHost *s = opaque;
--    int gsi = s->irq_num[pin];
-+    int gsi = s->irq[pin].irq_num;
+ typedef QTAILQ_HEAD(, PGTask_s) PGTaskList;
  
-     route.irq = gsi;
-     if (gsi < 0) {
-@@ -74,6 +80,13 @@ static PCIINTxRoute gpex_route_intx_pin_to_irq(void *opaque, int pin)
-     return route;
- }
++struct AppleGFXDisplayMode;
+ typedef struct AppleGFXState {
+     /* Initialised on init/realize() */
+     MemoryRegion iomem_gfx;
+@@ -36,6 +38,8 @@ typedef struct AppleGFXState {
+     id<MTLDevice> mtl;
+     id<MTLCommandQueue> mtl_queue;
+     dispatch_queue_t render_queue;
++    struct AppleGFXDisplayMode *display_modes;
++    uint32_t num_display_modes;
  
-+static int gpex_swizzle_map_irq_fn(PCIDevice *pci_dev, int pin)
-+{
-+    PCIBus *bus = pci_device_root_bus(pci_dev);
+     /* List `tasks` is protected by task_mutex */
+     QemuMutex task_mutex;
+@@ -54,6 +58,12 @@ typedef struct AppleGFXState {
+     bool cursor_show;
+ } AppleGFXState;
+ 
++typedef struct AppleGFXDisplayMode {
++    uint16_t width_px;
++    uint16_t height_px;
++    uint16_t refresh_rate_hz;
++} AppleGFXDisplayMode;
 +
-+    return (PCI_SLOT(pci_dev->devfn) + pin) % bus->nirq;
-+}
+ void apple_gfx_common_init(Object *obj, AppleGFXState *s, const char* obj_name);
+ void apple_gfx_common_realize(AppleGFXState *s, PGDeviceDescriptor *desc,
+                               Error **errp);
+@@ -61,5 +71,7 @@ uintptr_t apple_gfx_host_address_for_gpa_range(uint64_t guest_physical,
+                                                uint64_t length, bool read_only,
+                                                MemoryRegion **mapping_in_region);
+ 
++extern const PropertyInfo qdev_prop_display_mode;
 +
- static void gpex_host_realize(DeviceState *dev, Error **errp)
- {
-     PCIHostState *pci = PCI_HOST_BRIDGE(dev);
-@@ -82,6 +95,8 @@ static void gpex_host_realize(DeviceState *dev, Error **errp)
-     PCIExpressHost *pex = PCIE_HOST_BRIDGE(dev);
-     int i;
+ #endif
  
-+    s->irq = g_malloc0_n(s->num_irqs, sizeof(*s->irq));
-+
-     pcie_host_mmcfg_init(pex, PCIE_MMCFG_SIZE_MAX);
-     sysbus_init_mmio(sbd, &pex->mmio);
+diff --git a/hw/display/apple-gfx.m b/hw/display/apple-gfx.m
+index bce08e57c3f..c4acefccee8 100644
+--- a/hw/display/apple-gfx.m
++++ b/hw/display/apple-gfx.m
+@@ -31,9 +31,10 @@
+ #include "sysemu/dma.h"
+ #include "ui/console.h"
  
-@@ -128,19 +143,27 @@ static void gpex_host_realize(DeviceState *dev, Error **errp)
-         sysbus_init_mmio(sbd, &s->io_ioport);
-     }
- 
--    for (i = 0; i < GPEX_NUM_IRQS; i++) {
--        sysbus_init_irq(sbd, &s->irq[i]);
--        s->irq_num[i] = -1;
-+    for (i = 0; i < s->num_irqs; i++) {
-+        sysbus_init_irq(sbd, &s->irq[i].irq);
-+        s->irq[i].irq_num = -1;
-     }
- 
-     pci->bus = pci_register_root_bus(dev, "pcie.0", gpex_set_irq,
--                                     pci_swizzle_map_irq_fn, s, &s->io_mmio,
--                                     &s->io_ioport, 0, 4, TYPE_PCIE_BUS);
-+                                     gpex_swizzle_map_irq_fn,
-+                                     s, &s->io_mmio, &s->io_ioport, 0,
-+                                     s->num_irqs, TYPE_PCIE_BUS);
- 
-     pci_bus_set_route_irq_fn(pci->bus, gpex_route_intx_pin_to_irq);
-     qdev_realize(DEVICE(&s->gpex_root), BUS(pci->bus), &error_fatal);
- }
- 
-+static void gpex_host_unrealize(DeviceState *dev)
-+{
-+    GPEXHost *s = GPEX_HOST(dev);
-+
-+    g_free(s->irq);
-+}
-+
- static const char *gpex_host_root_bus_path(PCIHostState *host_bridge,
-                                           PCIBus *rootbus)
- {
-@@ -166,6 +189,7 @@ static Property gpex_host_properties[] = {
-                        gpex_cfg.mmio64.base, 0),
-     DEFINE_PROP_SIZE(PCI_HOST_ABOVE_4G_MMIO_SIZE, GPEXHost,
-                      gpex_cfg.mmio64.size, 0),
-+    DEFINE_PROP_UINT8("num-irqs", GPEXHost, num_irqs, PCI_NUM_PINS),
-     DEFINE_PROP_END_OF_LIST(),
+-static const PGDisplayCoord_t apple_gfx_modes[] = {
+-    { .x = 1440, .y = 1080 },
+-    { .x = 1280, .y = 1024 },
++static const AppleGFXDisplayMode apple_gfx_default_modes[] = {
++    { 1920, 1080, 60 },
++    { 1440, 1080, 60 },
++    { 1280, 1024, 60 },
  };
  
-@@ -176,6 +200,7 @@ static void gpex_host_class_init(ObjectClass *klass, void *data)
+ /* ------ PGTask and task operations: new/destroy/map/unmap ------ */
+@@ -688,22 +689,24 @@ static void apple_gfx_register_task_mapping_handlers(AppleGFXState *s,
+     return disp_desc;
+ }
  
-     hc->root_bus_path = gpex_host_root_bus_path;
-     dc->realize = gpex_host_realize;
-+    dc->unrealize = gpex_host_unrealize;
-     set_bit(DEVICE_CATEGORY_BRIDGE, dc->categories);
-     dc->fw_name = "pci";
-     device_class_set_props(dc, gpex_host_properties);
-diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-index 45a8c4f8190..567fe92a136 100644
---- a/hw/riscv/virt.c
-+++ b/hw/riscv/virt.c
-@@ -168,7 +168,7 @@ static void create_pcie_irq_map(RISCVVirtState *s, void *fdt, char *nodename,
+-static NSArray<PGDisplayMode*>* apple_gfx_prepare_display_mode_array(void)
++static NSArray<PGDisplayMode *> *apple_gfx_create_display_mode_array(
++    const AppleGFXDisplayMode display_modes[], uint32_t display_mode_count)
  {
-     int pin, dev;
-     uint32_t irq_map_stride = 0;
--    uint32_t full_irq_map[GPEX_NUM_IRQS * GPEX_NUM_IRQS *
-+    uint32_t full_irq_map[PCI_NUM_PINS * PCI_NUM_PINS *
-                           FDT_MAX_INT_MAP_WIDTH] = {};
-     uint32_t *irq_map = full_irq_map;
- 
-@@ -180,11 +180,11 @@ static void create_pcie_irq_map(RISCVVirtState *s, void *fdt, char *nodename,
-      * possible slot) seeing the interrupt-map-mask will allow the table
-      * to wrap to any number of devices.
-      */
--    for (dev = 0; dev < GPEX_NUM_IRQS; dev++) {
-+    for (dev = 0; dev < PCI_NUM_PINS; dev++) {
-         int devfn = dev * 0x8;
- 
--        for (pin = 0; pin < GPEX_NUM_IRQS; pin++) {
--            int irq_nr = PCIE_IRQ + ((pin + PCI_SLOT(devfn)) % GPEX_NUM_IRQS);
-+        for (pin = 0; pin < PCI_NUM_PINS; pin++) {
-+            int irq_nr = PCIE_IRQ + ((pin + PCI_SLOT(devfn)) % PCI_NUM_PINS);
-             int i = 0;
- 
-             /* Fill PCI address cells */
-@@ -210,7 +210,7 @@ static void create_pcie_irq_map(RISCVVirtState *s, void *fdt, char *nodename,
-     }
- 
-     qemu_fdt_setprop(fdt, nodename, "interrupt-map", full_irq_map,
--                     GPEX_NUM_IRQS * GPEX_NUM_IRQS *
-+                     PCI_NUM_PINS * PCI_NUM_PINS *
-                      irq_map_stride * sizeof(uint32_t));
- 
-     qemu_fdt_setprop_cells(fdt, nodename, "interrupt-map-mask",
-@@ -1182,7 +1182,7 @@ static inline DeviceState *gpex_pcie_init(MemoryRegion *sys_mem,
- 
-     sysbus_mmio_map(SYS_BUS_DEVICE(dev), 2, pio_base);
- 
--    for (i = 0; i < GPEX_NUM_IRQS; i++) {
-+    for (i = 0; i < PCI_NUM_PINS; i++) {
-         irq = qdev_get_gpio_in(irqchip, PCIE_IRQ + i);
- 
-         sysbus_connect_irq(SYS_BUS_DEVICE(dev), i, irq);
-diff --git a/hw/xtensa/virt.c b/hw/xtensa/virt.c
-index 5310a888613..8f5c2009d29 100644
---- a/hw/xtensa/virt.c
-+++ b/hw/xtensa/virt.c
-@@ -93,7 +93,7 @@ static void create_pcie(MachineState *ms, CPUXtensaState *env, int irq_base,
-     /* Connect IRQ lines. */
-     extints = xtensa_get_extints(env);
- 
--    for (i = 0; i < GPEX_NUM_IRQS; i++) {
-+    for (i = 0; i < PCI_NUM_PINS; i++) {
-         void *q = extints[irq_base + i];
- 
-         sysbus_connect_irq(SYS_BUS_DEVICE(dev), i, q);
-diff --git a/include/hw/pci-host/gpex.h b/include/hw/pci-host/gpex.h
-index dce883573ba..84471533af0 100644
---- a/include/hw/pci-host/gpex.h
-+++ b/include/hw/pci-host/gpex.h
-@@ -32,8 +32,6 @@ OBJECT_DECLARE_SIMPLE_TYPE(GPEXHost, GPEX_HOST)
- #define TYPE_GPEX_ROOT_DEVICE "gpex-root"
- OBJECT_DECLARE_SIMPLE_TYPE(GPEXRootState, GPEX_ROOT_DEVICE)
- 
--#define GPEX_NUM_IRQS 4
+-    PGDisplayMode *modes[ARRAY_SIZE(apple_gfx_modes)];
+-    NSArray<PGDisplayMode*>* mode_array = nil;
+-    int i;
 -
- struct GPEXRootState {
-     /*< private >*/
-     PCIDevice parent_obj;
-@@ -49,6 +47,7 @@ struct GPEXConfig {
-     PCIBus      *bus;
- };
+-    for (i = 0; i < ARRAY_SIZE(apple_gfx_modes); i++) {
+-        modes[i] =
+-            [[PGDisplayMode alloc] initWithSizeInPixels:apple_gfx_modes[i] refreshRateInHz:60.];
+-    }
+-
+-    mode_array = [NSArray arrayWithObjects:modes count:ARRAY_SIZE(apple_gfx_modes)];
+-
+-    for (i = 0; i < ARRAY_SIZE(apple_gfx_modes); i++) {
+-        [modes[i] release];
+-        modes[i] = nil;
++    uint32_t i;
++    PGDisplayMode *mode_obj;
++    NSMutableArray<PGDisplayMode *> *mode_array =
++        [[NSMutableArray alloc] initWithCapacity:display_mode_count];
++
++    for (i = 0; i < display_mode_count; i++) {
++        const AppleGFXDisplayMode *mode = &display_modes[i];
++        trace_apple_gfx_display_mode(i, mode->width_px, mode->height_px);
++        PGDisplayCoord_t mode_size = { mode->width_px, mode->height_px };
++
++        mode_obj =
++            [[PGDisplayMode alloc] initWithSizeInPixels:mode_size
++                                        refreshRateInHz:mode->refresh_rate_hz];
++        [mode_array addObject:mode_obj];
++        [mode_obj release];
+     }
  
-+typedef struct GPEXIrq GPEXIrq;
- struct GPEXHost {
-     /*< private >*/
-     PCIExpressHost parent_obj;
-@@ -60,8 +59,8 @@ struct GPEXHost {
-     MemoryRegion io_mmio;
-     MemoryRegion io_ioport_window;
-     MemoryRegion io_mmio_window;
--    qemu_irq irq[GPEX_NUM_IRQS];
--    int irq_num[GPEX_NUM_IRQS];
-+    GPEXIrq *irq;
-+    uint8_t num_irqs;
+     return mode_array;
+@@ -739,6 +742,9 @@ void apple_gfx_common_realize(AppleGFXState *s, PGDeviceDescriptor *desc,
+                               Error **errp)
+ {
+     PGDisplayDescriptor *disp_desc = nil;
++    const AppleGFXDisplayMode *display_modes = apple_gfx_default_modes;
++    int num_display_modes = ARRAY_SIZE(apple_gfx_default_modes);
++    NSArray<PGDisplayMode *> *mode_array;
  
-     bool allow_unmapped_accesses;
+     if (apple_gfx_mig_blocker == NULL) {
+         error_setg(&apple_gfx_mig_blocker,
+@@ -765,9 +771,102 @@ void apple_gfx_common_realize(AppleGFXState *s, PGDeviceDescriptor *desc,
+     s->pgdisp = [s->pgdev newDisplayWithDescriptor:disp_desc
+                                               port:0 serialNum:1234];
+     [disp_desc release];
+-    s->pgdisp.modeList = apple_gfx_prepare_display_mode_array();
++
++    if (s->display_modes != NULL && s->num_display_modes > 0) {
++        trace_apple_gfx_common_realize_modes_property(s->num_display_modes);
++        display_modes = s->display_modes;
++        num_display_modes = s->num_display_modes;
++    }
++    s->pgdisp.modeList = mode_array =
++        apple_gfx_create_display_mode_array(display_modes, num_display_modes);
++    [mode_array release];
  
+     s->con = graphic_console_init(NULL, 0, &apple_gfx_fb_ops, s);
+ 
+     qatomic_set(&s->cursor_show, true);
+ }
++
++/* ------ Display mode list device property ------ */
++
++static void apple_gfx_get_display_mode(Object *obj, Visitor *v,
++                                       const char *name, void *opaque,
++                                       Error **errp)
++{
++    Property *prop = opaque;
++    AppleGFXDisplayMode *mode = object_field_prop_ptr(obj, prop);
++    /* 3 uint16s (max 5 digits) + 2 separator characters + nul. */
++    char buffer[5 * 3 + 2 + 1];
++    char *pos = buffer;
++
++    int rc = snprintf(buffer, sizeof(buffer),
++                      "%"PRIu16"x%"PRIu16"@%"PRIu16,
++                      mode->width_px, mode->height_px,
++                      mode->refresh_rate_hz);
++    assert(rc < sizeof(buffer));
++
++    visit_type_str(v, name, &pos, errp);
++}
++
++static void apple_gfx_set_display_mode(Object *obj, Visitor *v,
++                                       const char *name, void *opaque,
++                                       Error **errp)
++{
++    Property *prop = opaque;
++    AppleGFXDisplayMode *mode = object_field_prop_ptr(obj, prop);
++    Error *local_err = NULL;
++    const char *endptr;
++    g_autofree char *str = NULL;
++    int ret;
++    int val;
++
++    visit_type_str(v, name, &str, &local_err);
++    if (local_err) {
++        error_propagate(errp, local_err);
++        return;
++    }
++
++    endptr = str;
++
++    ret = qemu_strtoi(endptr, &endptr, 10, &val);
++    if (ret || val > UINT16_MAX || val <= 0) {
++        error_setg(errp, "width in '%s' must be a decimal integer number "
++                   "of pixels in the range 1..65535", name);
++        return;
++    }
++    mode->width_px = val;
++    if (*endptr != 'x') {
++        goto separator_error;
++    }
++
++    ret = qemu_strtoi(endptr + 1, &endptr, 10, &val);
++    if (ret || val > UINT16_MAX || val <= 0) {
++        error_setg(errp, "height in '%s' must be a decimal integer number "
++                   "of pixels in the range 1..65535", name);
++        return;
++    }
++    mode->height_px = val;
++    if (*endptr != '@') {
++        goto separator_error;
++    }
++
++    ret = qemu_strtoi(endptr + 1, &endptr, 10, &val);
++    if (ret || val > UINT16_MAX || val <= 0) {
++        error_setg(errp, "refresh rate in '%s'"
++                   " must be a positive decimal integer (Hertz)", name);
++    }
++    mode->refresh_rate_hz = val;
++    return;
++
++separator_error:
++    error_setg(errp, "Each display mode takes the format "
++               "'<width>x<height>@<rate>'");
++}
++
++const PropertyInfo qdev_prop_display_mode = {
++    .name  = "display_mode",
++    .description =
++        "Display mode in pixels and Hertz, as <width>x<height>@<refresh-rate> "
++        "Example: 3840x2160@60",
++    .get   = apple_gfx_get_display_mode,
++    .set   = apple_gfx_set_display_mode,
++};
+diff --git a/hw/display/trace-events b/hw/display/trace-events
+index 260eab9146d..4987cc2d357 100644
+--- a/hw/display/trace-events
++++ b/hw/display/trace-events
+@@ -212,6 +212,8 @@ apple_gfx_cursor_set(uint32_t bpp, uint64_t width, uint64_t height) "bpp=%d widt
+ apple_gfx_cursor_show(uint32_t show) "show=%d"
+ apple_gfx_cursor_move(void) ""
+ apple_gfx_common_init(const char *device_name, size_t mmio_size) "device: %s; MMIO size: %zu bytes"
++apple_gfx_common_realize_modes_property(uint32_t num_modes) "using %u modes supplied by 'display-modes' device property"
++apple_gfx_display_mode(uint32_t mode_idx, uint16_t width_px, uint16_t height_px) "mode %2"PRIu32": %4"PRIu16"x%4"PRIu16
+ 
+ # apple-gfx-mmio.m
+ apple_gfx_mmio_iosfc_read(uint64_t offset, uint64_t res) "offset=0x%"PRIx64" res=0x%"PRIx64
 -- 
 2.39.3 (Apple Git-145)
 
