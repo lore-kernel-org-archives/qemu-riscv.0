@@ -4,62 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 313ABD11100
-	for <qemu-riscv@archiver.kernel.org>; Sun,  3 Nov 2024 15:01:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E0127D11101
+	for <qemu-riscv@archiver.kernel.org>; Sun,  3 Nov 2024 15:02:28 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1t7c6i-00009Z-Hg; Sun, 03 Nov 2024 10:01:36 -0500
+	id 1t7c79-0000wm-0x; Sun, 03 Nov 2024 10:02:03 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <phil@philjordan.eu>)
- id 1t7c64-0008Ai-QD
- for qemu-riscv@nongnu.org; Sun, 03 Nov 2024 10:01:01 -0500
-Received: from mail-ej1-x62e.google.com ([2a00:1450:4864:20::62e])
+ id 1t7c6P-0008QW-9g
+ for qemu-riscv@nongnu.org; Sun, 03 Nov 2024 10:01:18 -0500
+Received: from mail-ed1-x532.google.com ([2a00:1450:4864:20::532])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <phil@philjordan.eu>)
- id 1t7c61-0006Ty-KU
- for qemu-riscv@nongnu.org; Sun, 03 Nov 2024 10:00:55 -0500
-Received: by mail-ej1-x62e.google.com with SMTP id
- a640c23a62f3a-a9a2cdc6f0cso505930666b.2
- for <qemu-riscv@nongnu.org>; Sun, 03 Nov 2024 07:00:50 -0800 (PST)
+ id 1t7c6L-0006fi-H8
+ for qemu-riscv@nongnu.org; Sun, 03 Nov 2024 10:01:16 -0500
+Received: by mail-ed1-x532.google.com with SMTP id
+ 4fb4d7f45d1cf-5c9362c26d8so6817737a12.1
+ for <qemu-riscv@nongnu.org>; Sun, 03 Nov 2024 07:01:12 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=philjordan-eu.20230601.gappssmtp.com; s=20230601; t=1730646049; x=1731250849;
+ d=philjordan-eu.20230601.gappssmtp.com; s=20230601; t=1730646071; x=1731250871;
  darn=nongnu.org; 
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=fFdNxhrULhwDyGhBdIcyvmQl4Sl2d/4QopV1f61pQXY=;
- b=MUseiFj+Hlx+ti6X0sRr62mIKGMQx0aiRhhnHnoKp40ni693zzvdHSIB2pDVJBPnKG
- SrWl1me7pdShjz6diOsa3fZke0LVB5MfHSAU91TNSsNeBBD9iAYVQrcJk1sPgDor5NX+
- IHaIaEjtHBj/r2iPh7jSm/JbyZc7hgNQMACBy0/MrO0lvxU9v+P8GyLvOj0s+Ph7IQG5
- pziQ/cOxcXbmYnwNKGQNwMjovWZExgkFRuMB656ZAIgWogoY2YRMSD8+Xa0dnU/Eh7q9
- qmAxtb5Be4UEhXzy4P5OLK/C06qzlIXDcLyiOGwGd7zyoEgTMevcJFnXNZct27Tx+jL2
- 8WrA==
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=ewGNlwJwxmp4VhDoUazzL5iPVJshz4klqtFoniVvFt4=;
+ b=O1ci+CS/aKDGvnxjvOV61WdwBPua24oezLyyNk0OVN/Y7U6GpDYvVlG3ySvpefK1Yt
+ U6tvCzQAIRsgB8nuX154IGq/6j9qPUMIIioOp0ZiK6rgkwRYTWw+gy22MamgMwNjipOq
+ NWA8aEHo/4TCyxeL8I9LKMFvqdMl0LmWTSVbBRhOg1tbJquywV4QjHfndHhTxj2WU34y
+ HBf2MZJjdBhkYJ0Ix58HMrRAKM0atZu6/buu/ux9pm0K7gyjM/drSv0d5buV9Is/nTOo
+ b+ctz8wKEjl0bdUTTy/m8EwIMNI/95zGu2gA93byupk4rMDC67u3ufhOfaqPJzCDIxUb
+ IkPg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1730646049; x=1731250849;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=fFdNxhrULhwDyGhBdIcyvmQl4Sl2d/4QopV1f61pQXY=;
- b=LRmD7uEUzYcCA5kU+Bu2XKEaIcHT1tdJ/CXGS2YR5gjRs3EYthTEIhFZRKmZVkIEkp
- 2t9Qb/ZASpEnzJX7wKtjlIlDV7d4YBSd3XGm8ymCe6JWVp4Zvp6ho49p1wGYhj6QNGFR
- sxTMtxKObWBXxR0NH4S2Tqzrs3wb1tnC27uULEXezqugB6qWricO2P0DDwWRsO0hMi0i
- vUenX0UXX9uBm/suNSDNSubq7EJOByAEcj/EnEqQWVGWXJ9BiqaqLpChQ+O0wGv/j+JE
- wfQCW7svttJDQTObyJhjkqmGUAg+fX0ocaJDexPl1s6XDUt0rCEZr1FROVXsGTVYY5ns
- oiDw==
+ d=1e100.net; s=20230601; t=1730646071; x=1731250871;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=ewGNlwJwxmp4VhDoUazzL5iPVJshz4klqtFoniVvFt4=;
+ b=LwE3ljxpUWaXPJrPTltD93y8teGFE8uSO6o5LOTpjHAt+vO7MLfJWJj7d51e0R073P
+ SFf61WtxncL6NVoDIEuTTN2Dj6/D3YSp/ROl3Tj/qzRVUcYkQIJmFWOMiPtrXv6iOg6A
+ cpOZwpHWGks6lyaGY819dOhC9Y1LfSN7WmH14gR00NQBfJNVwT/ZMcDtU00ZAaC+hIsk
+ mHmHBFis0npGKuYMzF0ElJaTKEOTspHejw8oaGo95LeHFICA28tEnD0tnPo3kec+jmas
+ nx72MUEpSeZr00PanTE9djsIpAxqYDn/zNHx6S7Qaso7d/bcnri+a3og9MtFCVlPiPIp
+ nQ6w==
 X-Forwarded-Encrypted: i=1;
- AJvYcCW+bBu8TbihHU5Hc9QYlEeGne6LgAEt02HRKZmOu5cRfKgq0iPzdNRPqUqd6z9SObv++jZB3ZMpGhVX@nongnu.org
-X-Gm-Message-State: AOJu0YxAz4R25o2q3wxTvlF71J1Inr7Azjc0ZV3fvN7hObpnIv2RDMn8
- JbyiSkzCg2/y3IYcrUeXTttmpSGUUTphC2kQ2xEPp586nGhdFeXVmHFKdMOz1A==
-X-Google-Smtp-Source: AGHT+IERaDSLIDm1o7PsqC30QgIcd6krGelIb1K511iS5kAY2qEqZOYQ1LNkaxmDy7PLlH0rI3fisA==
-X-Received: by 2002:a17:907:97c9:b0:a9a:eca:f7c4 with SMTP id
- a640c23a62f3a-a9e50b9e2a8mr1199643566b.54.1730646048482; 
- Sun, 03 Nov 2024 07:00:48 -0800 (PST)
+ AJvYcCV+0ZR6Oi5ZE4eOJGGR2J5L5Z6lGL+HS7dg0scZ2QhNbNwaLF6MpJuTRW7xwePqQ78N3RkdbJZ8zSNc@nongnu.org
+X-Gm-Message-State: AOJu0YzQtsZQZl9AVKkBPcccfBY6rxKClsekU7jVfOFPqsbrmfX2enYJ
+ GJGDrbyTOjAiaemLW/rFy1QD/eYtqSeqPmh0SzfExRkwpO9xf1l6zBHhiy9ZPw==
+X-Google-Smtp-Source: AGHT+IHfs2RYW6fm0yfWjAzN7j0v0ApD8raNsDAdpO6loUtv/XaN9iHYcGPEf1rBpQiCa7Kcc63QeQ==
+X-Received: by 2002:a17:906:c116:b0:a91:1699:f8eb with SMTP id
+ a640c23a62f3a-a9e55ae8748mr1180692666b.28.1730646071158; 
+ Sun, 03 Nov 2024 07:01:11 -0800 (PST)
 Received: from localhost.localdomain (h082218084190.host.wavenet.at.
  [82.218.84.190]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a9e5664350esm431536666b.159.2024.11.03.07.00.46
+ a640c23a62f3a-a9e5664350esm431536666b.159.2024.11.03.07.01.09
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Sun, 03 Nov 2024 07:00:47 -0800 (PST)
+ Sun, 03 Nov 2024 07:01:10 -0800 (PST)
 From: Phil Dennis-Jordan <phil@philjordan.eu>
 To: qemu-devel@nongnu.org
 Cc: agraf@csgraf.de, phil@philjordan.eu, peter.maydell@linaro.org,
@@ -73,16 +74,18 @@ Cc: agraf@csgraf.de, phil@philjordan.eu, peter.maydell@linaro.org,
  dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com,
  jcmvbkbc@gmail.com, marcandre.lureau@redhat.com, berrange@redhat.com,
  akihiko.odaki@daynix.com, qemu-arm@nongnu.org, qemu-block@nongnu.org,
- qemu-riscv@nongnu.org
-Subject: [PATCH v6 00/15] macOS PV Graphics and new vmapple machine type
-Date: Sun,  3 Nov 2024 16:00:22 +0100
-Message-Id: <20241103150037.48194-1-phil@philjordan.eu>
+ qemu-riscv@nongnu.org, Alexander Graf <graf@amazon.com>
+Subject: [PATCH v6 12/15] hw/vmapple/cfg: Introduce vmapple cfg region
+Date: Sun,  3 Nov 2024 16:00:34 +0100
+Message-Id: <20241103150037.48194-13-phil@philjordan.eu>
 X-Mailer: git-send-email 2.39.3 (Apple Git-145)
+In-Reply-To: <20241103150037.48194-1-phil@philjordan.eu>
+References: <20241103150037.48194-1-phil@philjordan.eu>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: neutral client-ip=2a00:1450:4864:20::62e;
- envelope-from=phil@philjordan.eu; helo=mail-ej1-x62e.google.com
+Received-SPF: neutral client-ip=2a00:1450:4864:20::532;
+ envelope-from=phil@philjordan.eu; helo=mail-ed1-x532.google.com
 X-Spam_score_int: -10
 X-Spam_score: -1.1
 X-Spam_bar: -
@@ -104,244 +107,280 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-This patch set introduces a new ARM and macOS HVF specific machine type
-called "vmapple", as well as a family of display devices based on the
-ParavirtualizedGraphics.framework in macOS. One of the display adapter
-variants, apple-gfx-mmio, is required for the new machine type, while
-apple-gfx-pci can be used to enable 3D graphics acceleration with x86-64
-macOS guest OSes.
+From: Alexander Graf <graf@amazon.com>
 
-Previous versions of this patch set were submitted semi-separately:
-the original vmapple patch set by Alexander Graf included a monolithic
-implementation of apple-gfx-mmio. I subsequently reviewed and reworked
-the latter to support the PCI variant of the device as well and submitted
-the result in isolation. As requested in subsequent review, I have now
-recombined this with the original vmapple patch set, which I have updated
-and improved in a few ways as well.
+Instead of device tree or other more standardized means, VMApple passes
+platform configuration to the first stage boot loader in a binary encoded
+format that resides at a dedicated RAM region in physical address space.
 
-The vmapple machine type approximates the configuration in macOS's own
-Virtualization.framework when running arm64 macOS guests. In addition to
-generic components such as a GICv3 and an XHCI USB controller, it
-includes nonstandard extensions to the virtio block device, a special
-"hardware" aes engine, a configuration device, a pvpanic variant, a
-"backdoor" interface, and of course the apple-gfx paravirtualised display
-adapter.
+This patch models this configuration space as a qdev device which we can
+then map at the fixed location in the address space. That way, we can
+influence and annotate all configuration fields easily.
 
-There are currently a few limitations to this which aren't intrinsic,
-just imperfect emulation of the VZF, but it's good enough to be just
-about usable for some purposes:
-
- * macOS 12 guests only. Versions 13+ currently fail during early boot.
- * macOS 11+ arm64 hosts only, with hvf accel. (Perhaps some differences
-   between Apple M series CPUs and TCG's aarch64 implementation? macOS
-   hosts only because ParavirtualizedGraphics.framework is a black box
-   implementing most of the logic behind the apple-gfx device.)
- * PCI devices use legacy IRQs, not MSI/MSI-X. As far as I can tell,
-   we'd need to include the GICv3 ITS, but it's unclear to me what
-   exactly needs wiring up.
- * Due to lack of MSI(-X), event delivery from USB devices to the guest
-   macOS isn't working correctly. My current conclusion is that the
-   OS's XHCI driver simply was never designed to work with legacy IRQs.
-   The upshot is that keyboard and mouse/tablet input is very laggy.
-   The solution would be to implement MSI(-X) support or figure out how
-   to make hcd-xhci-sysbus work with the macOS guest, if at all possible.
-   (EHCI and UHCI/OHCI controllers are not an option as the VMAPPLE
-   guest kernel does not include drivers for these.)
- * The guest OS must first be provisioned using Virtualization.framework;
-   the disk images can subsequently be used in Qemu. (See docs.)
-
-The apple-gfx device can be used independently from the vmapple machine
-type, at least in the PCI variant. It mainly targets x86-64 macOS guests
-from version 11 on, but also includes a UEFI bootrom for basic
-framebuffer mode. macOS 11 is also required on the host side, as well
-as a GPU that supports the Metal API. On the guest side, this provides
-3D acceleration/GPGPU support with a baseline Metal feature set,
-irrespective of the host GPU's feature set. A few limitations in the
-current integration:
-
- * Although it works fine with TCG, it does not work correctly
-   cross-architecture: x86-64 guests on arm64 hosts appear to make
-   some boot progress, but rendering is corrupted. I suspect
-   incompatible texture memory layouts; I have no idea if this is
-   fixable.
- * ParavirtualizedGraphics.framework and the guest driver support
-   multi-headed configurations. The current Qemu integration always
-   connects precisely 1 display.
- * State serialisation and deserialisation is currently not
-   implemented, though supported in principle by the framework.
-   Both apple-gfx variants thus set up a migration blocker.
- * Rendering efficiency could be better. The GPU-rendered guest
-   framebuffer is copied to system memory and uses Qemu's usual
-   CPU-based drawing. For maximum efficiency, the Metal texture
-   containing the guest framebuffer could be drawn directly to
-   a Metal view in the host window, staying on the GPU. (Similar
-   to the OpenGL/virgl render path on other platforms.)
-
-My part of this work has been sponsored by Sauce Labs Inc.
-
+Signed-off-by: Alexander Graf <graf@amazon.com>
+Signed-off-by: Phil Dennis-Jordan <phil@philjordan.eu>
 ---
 
-v2 -> v3:
+v3:
 
- * Merged the apple-gfx and vmapple patchsets.
- * Squashed a bunch of later apple-gfx patches into the main one.
-   (dGPU support, queried MMIO area size, host GPU picking logic.)
- * Rebased on latest upstream, fixing any breakages due to internal
-   Qemu API changes.
- * apple-gfx: Switched to re-entrant MMIO. This is supported by the
-   underlying framework and simplifies the MMIO forwarding code which
-   was previously different on x86-64 vs aarch64.
- * vmapple: Fixes for minor bugs and comments from the last round of
-   review.
- * vmapple aes, conf, apple-gfx: Switched reset methods to implement
-   the ResettableClass base's interface.
- * vmapple: switched from virtio-hid to an XHCI USB controller and
-   USB mouse and tablet devices. macOS does not provide drivers for
-   virtio HID devices, at least not in version 12's vmapple kernel.
-   So input now sort of works (interrupt issues) rather than not
-   at all. Use network-based remote access to the guest OS as a
-   work-around.
+ * Replaced legacy device reset method with Resettable method
 
-v3 -> v4:
+v4:
 
- * Complete rework of the mechanism for handling runloop/libdispatch
-   events on the main thread. PV graphics now work with the SDL UI.
- * Renamed 'apple-gfx-vmapple' device to 'apple-gfx-mmio'
- * hw/display/apple-gfx: threading model overhaul to be more consistent,
-   safer, and more QEMU-idiomatic.
- * display-modes property on the apple-gfx devices now uses the
-   native array property mechanism and works on both device variants.
- * hw/vmapple/aes: Improvements to logging and error handling.
- * hw/vmapple/cfg: Bug fixes around device property default values.
- * hw/vmapple/{aes,cfg,virtio-blk/vmapple}: Most header code moved into
-   .c files, only a single vmapple.h now contains the #defines for the
-   vmapple machine model-specific device type names.
- * hw/block/virtio-blk: New patch for replacing virtio_blk_free_request
-   with g_free. (Optional)
- * Various smaller changes following comments in v3 code review in
-   apple-gfx, aes, cfg, bdif, virtio-blk-vmapple, and the vmapple
-   machine type itself. See patch-specific v4 change notes for details.
+ * Fixed initialisation of default values for properties
+ * Dropped superfluous endianness conversions
+ * Moved most header code to .c, device name #define goes in vmapple.h
 
-v4 -> v5:
+v5:
 
- * Simplified the main thread runloop mechanism. Back to setting
-	 qemu_main directly, but narrowing the scope of what it needs to do,
-	 and it can now be NULL. (Meaning run the QEMU main event loop on
-	 the main thread as is traditional.)
- * hw/display/apple-gfx: Further improvements to the BH based job code bridging
-   the libdispatch & QEMU thread synchronisation impedance mismatch.
- * hw/display/apple-gfx: Thread safety and object lifetime improvements.
- * hw/display/apple-gfx-*: Better buffer and error handling in display mode
-   property setters and getters.
- * hw/vmapple/aes: More consistent and safer logging/tracing
- * hw/vmapple/cfg: Better error reporting on overlong property strings.
- * hw/vmapple/virtio-blk: Fixed theoretically-unaligned write to config buffer.
- * vmapple machine type: Moved ecam region into machine state, improved device
-   property setting error handling, improved ECID/UUID extraction script and
-   docs.
- * Various smaller fixes in apple-gfx/-mmio, apple-gfx-pci, vmapple/aes,
-   vmapple/cfg, vmapple/virtio-blk, and vmapple machine type.
- * Added SPDX license identifiers where they were missing.
+ * Improved error reporting in case of string property buffer overflow.
 
-v5 -> v6
-
- * 01/15 (main/Cocoa/runloop): Combined functions, fixed whitespace
- * 02/15 (apple-gfx): Further refinement of PVG threading: reduced some callback
-   tasks from BHs to merely acquiring RCU read lock; replaced some libdispatch
-   tasks with BHs; last remaining synchronous BH now uses emphemeral
-   QemuSemaphore.
- * 02/15 (apple-gfx): Readability improvements and other smaller tweaks
-   (see patch change notes for details)
- * 04/15 (display modes): Replaced use of alloca() with NSMutableArray.
-
-Alexander Graf (9):
-  hw: Add vmapple subdir
-  hw/misc/pvpanic: Add MMIO interface
-  hvf: arm: Ignore writes to CNTP_CTL_EL0
-  gpex: Allow more than 4 legacy IRQs
-  hw/vmapple/aes: Introduce aes engine
-  hw/vmapple/bdif: Introduce vmapple backdoor interface
-  hw/vmapple/cfg: Introduce vmapple cfg region
-  hw/vmapple/virtio-blk: Add support for apple virtio-blk
-  hw/vmapple/vmapple: Add vmapple machine type
-
-Phil Dennis-Jordan (6):
-  ui & main loop: Redesign of system-specific main thread event handling
-  hw/display/apple-gfx: Introduce ParavirtualizedGraphics.Framework
-    support
-  hw/display/apple-gfx: Adds PCI implementation
-  hw/display/apple-gfx: Adds configurable mode list
-  MAINTAINERS: Add myself as maintainer for apple-gfx, reviewer for HVF
-  hw/block/virtio-blk: Replaces request free function with g_free
-
- MAINTAINERS                    |  15 +
- contrib/vmapple/uuid.sh        |   9 +
- docs/system/arm/vmapple.rst    |  60 +++
- docs/system/target-arm.rst     |   1 +
- hw/Kconfig                     |   1 +
- hw/arm/sbsa-ref.c              |   2 +-
- hw/arm/virt.c                  |   2 +-
- hw/block/virtio-blk.c          |  58 ++-
- hw/display/Kconfig             |  13 +
- hw/display/apple-gfx-mmio.m    | 289 +++++++++++
- hw/display/apple-gfx-pci.m     | 156 ++++++
- hw/display/apple-gfx.h         |  77 +++
- hw/display/apple-gfx.m         | 872 +++++++++++++++++++++++++++++++++
- hw/display/meson.build         |   5 +
- hw/display/trace-events        |  30 ++
- hw/i386/microvm.c              |   2 +-
- hw/loongarch/virt.c            |   2 +-
- hw/meson.build                 |   1 +
- hw/mips/loongson3_virt.c       |   2 +-
- hw/misc/Kconfig                |   4 +
- hw/misc/meson.build            |   1 +
- hw/misc/pvpanic-mmio.c         |  61 +++
- hw/openrisc/virt.c             |  12 +-
- hw/pci-host/gpex.c             |  43 +-
- hw/riscv/virt.c                |  12 +-
- hw/vmapple/Kconfig             |  32 ++
- hw/vmapple/aes.c               | 578 ++++++++++++++++++++++
- hw/vmapple/bdif.c              | 261 ++++++++++
- hw/vmapple/cfg.c               | 203 ++++++++
- hw/vmapple/meson.build         |   5 +
- hw/vmapple/trace-events        |  21 +
- hw/vmapple/trace.h             |   1 +
- hw/vmapple/virtio-blk.c        | 226 +++++++++
- hw/vmapple/vmapple.c           | 659 +++++++++++++++++++++++++
- hw/xtensa/virt.c               |   2 +-
- include/hw/misc/pvpanic.h      |   1 +
- include/hw/pci-host/gpex.h     |   7 +-
- include/hw/pci/pci_ids.h       |   1 +
- include/hw/virtio/virtio-blk.h |  11 +-
- include/hw/vmapple/vmapple.h   |  25 +
- include/qemu-main.h            |   3 +-
- include/qemu/cutils.h          |  15 +
- include/qemu/typedefs.h        |   1 +
- meson.build                    |   5 +
- system/main.c                  |  50 +-
- target/arm/hvf/hvf.c           |   9 +
- ui/cocoa.m                     |  54 +-
- ui/sdl2.c                      |   4 +
- util/hexdump.c                 |  18 +
- 49 files changed, 3816 insertions(+), 106 deletions(-)
- create mode 100755 contrib/vmapple/uuid.sh
- create mode 100644 docs/system/arm/vmapple.rst
- create mode 100644 hw/display/apple-gfx-mmio.m
- create mode 100644 hw/display/apple-gfx-pci.m
- create mode 100644 hw/display/apple-gfx.h
- create mode 100644 hw/display/apple-gfx.m
- create mode 100644 hw/misc/pvpanic-mmio.c
- create mode 100644 hw/vmapple/Kconfig
- create mode 100644 hw/vmapple/aes.c
- create mode 100644 hw/vmapple/bdif.c
+ hw/vmapple/Kconfig           |   3 +
+ hw/vmapple/cfg.c             | 203 +++++++++++++++++++++++++++++++++++
+ hw/vmapple/meson.build       |   1 +
+ include/hw/vmapple/vmapple.h |   2 +
+ 4 files changed, 209 insertions(+)
  create mode 100644 hw/vmapple/cfg.c
- create mode 100644 hw/vmapple/meson.build
- create mode 100644 hw/vmapple/trace-events
- create mode 100644 hw/vmapple/trace.h
- create mode 100644 hw/vmapple/virtio-blk.c
- create mode 100644 hw/vmapple/vmapple.c
- create mode 100644 include/hw/vmapple/vmapple.h
 
+diff --git a/hw/vmapple/Kconfig b/hw/vmapple/Kconfig
+index 68f88876eb9..8bbeb9a9237 100644
+--- a/hw/vmapple/Kconfig
++++ b/hw/vmapple/Kconfig
+@@ -4,3 +4,6 @@ config VMAPPLE_AES
+ config VMAPPLE_BDIF
+     bool
+ 
++config VMAPPLE_CFG
++    bool
++
+diff --git a/hw/vmapple/cfg.c b/hw/vmapple/cfg.c
+new file mode 100644
+index 00000000000..91c57239f86
+--- /dev/null
++++ b/hw/vmapple/cfg.c
+@@ -0,0 +1,203 @@
++/*
++ * VMApple Configuration Region
++ *
++ * Copyright © 2023 Amazon.com, Inc. or its affiliates. All Rights Reserved.
++ *
++ * SPDX-License-Identifier: GPL-2.0-or-later
++ *
++ * This work is licensed under the terms of the GNU GPL, version 2 or later.
++ * See the COPYING file in the top-level directory.
++ */
++
++#include "qemu/osdep.h"
++#include "hw/vmapple/vmapple.h"
++#include "hw/sysbus.h"
++#include "qemu/log.h"
++#include "qemu/module.h"
++#include "qapi/error.h"
++#include "net/net.h"
++
++OBJECT_DECLARE_SIMPLE_TYPE(VMAppleCfgState, VMAPPLE_CFG)
++
++#define VMAPPLE_CFG_SIZE 0x00010000
++
++typedef struct VMAppleCfg {
++    uint32_t version;         /* 0x000 */
++    uint32_t nr_cpus;         /* 0x004 */
++    uint32_t unk1;            /* 0x008 */
++    uint32_t unk2;            /* 0x00c */
++    uint32_t unk3;            /* 0x010 */
++    uint32_t unk4;            /* 0x014 */
++    uint64_t ecid;            /* 0x018 */
++    uint64_t ram_size;        /* 0x020 */
++    uint32_t run_installer1;  /* 0x028 */
++    uint32_t unk5;            /* 0x02c */
++    uint32_t unk6;            /* 0x030 */
++    uint32_t run_installer2;  /* 0x034 */
++    uint32_t rnd;             /* 0x038 */
++    uint32_t unk7;            /* 0x03c */
++    MACAddr mac_en0;          /* 0x040 */
++    uint8_t pad1[2];
++    MACAddr mac_en1;          /* 0x048 */
++    uint8_t pad2[2];
++    MACAddr mac_wifi0;        /* 0x050 */
++    uint8_t pad3[2];
++    MACAddr mac_bt0;          /* 0x058 */
++    uint8_t pad4[2];
++    uint8_t reserved[0xa0];   /* 0x060 */
++    uint32_t cpu_ids[0x80];   /* 0x100 */
++    uint8_t scratch[0x200];   /* 0x180 */
++    char serial[32];          /* 0x380 */
++    char unk8[32];            /* 0x3a0 */
++    char model[32];           /* 0x3c0 */
++    uint8_t unk9[32];         /* 0x3e0 */
++    uint32_t unk10;           /* 0x400 */
++    char soc_name[32];        /* 0x404 */
++} VMAppleCfg;
++
++struct VMAppleCfgState {
++    SysBusDevice parent_obj;
++    VMAppleCfg cfg;
++
++    MemoryRegion mem;
++    char *serial;
++    char *model;
++    char *soc_name;
++};
++
++static void vmapple_cfg_reset(Object *obj, ResetType type)
++{
++    VMAppleCfgState *s = VMAPPLE_CFG(obj);
++    VMAppleCfg *cfg;
++
++    cfg = memory_region_get_ram_ptr(&s->mem);
++    memset(cfg, 0, VMAPPLE_CFG_SIZE);
++    *cfg = s->cfg;
++}
++
++static bool strlcpy_set_error(char *restrict dst, const char *restrict src,
++                              size_t dst_size, Error **errp,
++                              const char *parent_func, const char *location,
++                              const char *buffer_name, const char *extra_info)
++{
++    size_t len;
++
++    len = g_strlcpy(dst, src, dst_size);
++    if (len < dst_size) { /* len does not count nul terminator */
++        return true;
++    }
++
++    error_setg(errp,
++               "%s (%s) strlcpy error: Destination buffer %s too small "
++               "(need %zu, have %zu) %s",
++               parent_func, location, buffer_name, len + 1, dst_size, extra_info);
++    return false;
++}
++
++/*
++ * String copying wrapper that returns and reports a runtime error in
++ * case of truncation due to insufficient destination buffer space.
++ */
++#define strlcpy_array_return_error(dst_array, src, errp, extra_info) \
++    do { \
++        if (!strlcpy_set_error((dst_array), (src), ARRAY_SIZE(dst_array), \
++                               (errp), __func__, stringify(__LINE__), \
++                               # dst_array, extra_info)) { \
++            return; \
++        } \
++    } while (0)
++
++static void vmapple_cfg_realize(DeviceState *dev, Error **errp)
++{
++    VMAppleCfgState *s = VMAPPLE_CFG(dev);
++    uint32_t i;
++
++    if (!s->serial) {
++        s->serial = g_strdup("1234");
++    }
++    if (!s->model) {
++        s->model = g_strdup("VM0001");
++    }
++    if (!s->soc_name) {
++        s->soc_name = g_strdup("Apple M1 (Virtual)");
++    }
++
++    strlcpy_array_return_error(s->cfg.serial, s->serial, errp,
++                               "setting 'serial' property on VMApple cfg device");
++    strlcpy_array_return_error(s->cfg.model, s->model, errp,
++                               "setting 'model' property on VMApple cfg device");
++    strlcpy_array_return_error(s->cfg.soc_name, s->soc_name, errp,
++                               "setting 'soc_name' property on VMApple cfg device");
++    strlcpy_array_return_error(s->cfg.unk8, "D/A", errp, "");
++    s->cfg.version = 2;
++    s->cfg.unk1 = 1;
++    s->cfg.unk2 = 1;
++    s->cfg.unk3 = 0x20;
++    s->cfg.unk4 = 0;
++    s->cfg.unk5 = 1;
++    s->cfg.unk6 = 1;
++    s->cfg.unk7 = 0;
++    s->cfg.unk10 = 1;
++
++    if (s->cfg.nr_cpus > ARRAY_SIZE(s->cfg.cpu_ids)) {
++        error_setg(errp,
++                   "Failed to create %u CPUs, vmapple machine supports %zu max",
++                   s->cfg.nr_cpus, ARRAY_SIZE(s->cfg.cpu_ids));
++        return;
++    }
++    for (i = 0; i < s->cfg.nr_cpus; i++) {
++        s->cfg.cpu_ids[i] = i;
++    }
++}
++
++static void vmapple_cfg_init(Object *obj)
++{
++    VMAppleCfgState *s = VMAPPLE_CFG(obj);
++
++    memory_region_init_ram(&s->mem, obj, "VMApple Config", VMAPPLE_CFG_SIZE,
++                           &error_fatal);
++    sysbus_init_mmio(SYS_BUS_DEVICE(obj), &s->mem);
++}
++
++static Property vmapple_cfg_properties[] = {
++    DEFINE_PROP_UINT32("nr-cpus", VMAppleCfgState, cfg.nr_cpus, 1),
++    DEFINE_PROP_UINT64("ecid", VMAppleCfgState, cfg.ecid, 0),
++    DEFINE_PROP_UINT64("ram-size", VMAppleCfgState, cfg.ram_size, 0),
++    DEFINE_PROP_UINT32("run_installer1", VMAppleCfgState, cfg.run_installer1, 0),
++    DEFINE_PROP_UINT32("run_installer2", VMAppleCfgState, cfg.run_installer2, 0),
++    DEFINE_PROP_UINT32("rnd", VMAppleCfgState, cfg.rnd, 0),
++    DEFINE_PROP_MACADDR("mac-en0", VMAppleCfgState, cfg.mac_en0),
++    DEFINE_PROP_MACADDR("mac-en1", VMAppleCfgState, cfg.mac_en1),
++    DEFINE_PROP_MACADDR("mac-wifi0", VMAppleCfgState, cfg.mac_wifi0),
++    DEFINE_PROP_MACADDR("mac-bt0", VMAppleCfgState, cfg.mac_bt0),
++    DEFINE_PROP_STRING("serial", VMAppleCfgState, serial),
++    DEFINE_PROP_STRING("model", VMAppleCfgState, model),
++    DEFINE_PROP_STRING("soc_name", VMAppleCfgState, soc_name),
++    DEFINE_PROP_END_OF_LIST(),
++};
++
++static void vmapple_cfg_class_init(ObjectClass *klass, void *data)
++{
++    DeviceClass *dc = DEVICE_CLASS(klass);
++    ResettableClass *rc = RESETTABLE_CLASS(klass);
++
++    dc->realize = vmapple_cfg_realize;
++    dc->desc = "VMApple Configuration Region";
++    device_class_set_props(dc, vmapple_cfg_properties);
++    rc->phases.hold = vmapple_cfg_reset;
++}
++
++static const TypeInfo vmapple_cfg_info = {
++    .name          = TYPE_VMAPPLE_CFG,
++    .parent        = TYPE_SYS_BUS_DEVICE,
++    .instance_size = sizeof(VMAppleCfgState),
++    .instance_init = vmapple_cfg_init,
++    .class_init    = vmapple_cfg_class_init,
++};
++
++static void vmapple_cfg_register_types(void)
++{
++    type_register_static(&vmapple_cfg_info);
++}
++
++type_init(vmapple_cfg_register_types)
+diff --git a/hw/vmapple/meson.build b/hw/vmapple/meson.build
+index d4624713deb..64b78693a31 100644
+--- a/hw/vmapple/meson.build
++++ b/hw/vmapple/meson.build
+@@ -1,2 +1,3 @@
+ system_ss.add(when: 'CONFIG_VMAPPLE_AES',  if_true: files('aes.c'))
+ system_ss.add(when: 'CONFIG_VMAPPLE_BDIF', if_true: files('bdif.c'))
++system_ss.add(when: 'CONFIG_VMAPPLE_CFG',  if_true: files('cfg.c'))
+diff --git a/include/hw/vmapple/vmapple.h b/include/hw/vmapple/vmapple.h
+index 9090e9c5ac8..3bba59f5ec7 100644
+--- a/include/hw/vmapple/vmapple.h
++++ b/include/hw/vmapple/vmapple.h
+@@ -16,4 +16,6 @@
+ 
+ #define TYPE_VMAPPLE_BDIF "vmapple-bdif"
+ 
++#define TYPE_VMAPPLE_CFG "vmapple-cfg"
++
+ #endif /* HW_VMAPPLE_VMAPPLE_H */
 -- 
 2.39.3 (Apple Git-145)
 
