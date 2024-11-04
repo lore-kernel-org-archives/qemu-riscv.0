@@ -4,95 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BEAD4D1CA05
-	for <qemu-riscv@archiver.kernel.org>; Mon,  4 Nov 2024 22:24:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DB132D1CA07
+	for <qemu-riscv@archiver.kernel.org>; Mon,  4 Nov 2024 23:00:29 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1t85UP-0006iQ-Vt; Mon, 04 Nov 2024 17:24:02 -0500
+	id 1t8636-0002vz-Ez; Mon, 04 Nov 2024 17:59:52 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <pierrick.bouvier@linaro.org>)
- id 1t85UN-0006gx-VE
- for qemu-riscv@nongnu.org; Mon, 04 Nov 2024 17:24:00 -0500
-Received: from mail-pl1-x636.google.com ([2607:f8b0:4864:20::636])
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1t8635-0002vl-Hz; Mon, 04 Nov 2024 17:59:51 -0500
+Received: from mail-ua1-x92f.google.com ([2607:f8b0:4864:20::92f])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <pierrick.bouvier@linaro.org>)
- id 1t85UM-0003vk-Aq
- for qemu-riscv@nongnu.org; Mon, 04 Nov 2024 17:23:59 -0500
-Received: by mail-pl1-x636.google.com with SMTP id
- d9443c01a7336-20c805a0753so44335735ad.0
- for <qemu-riscv@nongnu.org>; Mon, 04 Nov 2024 14:23:57 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1t8634-0007av-6m; Mon, 04 Nov 2024 17:59:51 -0500
+Received: by mail-ua1-x92f.google.com with SMTP id
+ a1e0cc1a2514c-84fc9005dccso1442212241.3; 
+ Mon, 04 Nov 2024 14:59:49 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1730759037; x=1731363837; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=Fv7ajOqr02bT7rtx36Z4XydDDNO450yOywlk/R82D2A=;
- b=G31+2HzUuh+ZuZycHL/YCr0VJvtlsQkPR/DcJpsi+/FKSVfbZZ6XbUCBVi5ysjUHky
- gHXunYcI4A9KevhhxuM5oNQVsvU8EjHLIFlUSKKb58kheG7/ZZJS08GCRPuxX0pBxxzd
- gBE0sxPRC5QnlOet2KPw+pKcSnCcK63kSKV500QmTXafVxMfKu42qO2ueesuo5KaqeTI
- hkPZR46EEp9PBw5T95CmuBqPqmNTbKUUs/39l9kiSOT4AOzWcuysYT/aUfxdkrOeRiYs
- uwJSxjGF11ZXpNN3DnW8KpUieetQvSU8KapoxYNpUTLHMONqUrH4QkcxrZSL5F4H8VeH
- Zckg==
+ d=gmail.com; s=20230601; t=1730761188; x=1731365988; darn=nongnu.org;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=Zvd9wShwo7OQ5/3OA47T4DwiJoGFqiTKeuO/fhc4yoE=;
+ b=KZWDjck4Xuro+6NJf2QyYqz8MhzMKbxxrcvMxvbst33So0Y1r7WwRgF3Ca7ams7UXQ
+ SFyCSXk70fLbwLy9YjDCIAJcOqf+YqAu3DGpoo/JI7jHbsrM1iuT6n+nGzy09MpQF1mi
+ vqlbtAJ8Nesujxv7xJwYmCxCvWAhwMqL/PUMXBvH6i4vP0kRmxGIEie5Rutngj3HJywb
+ n/0fBKx82/i/9J/wg2uCiDpejbIVvjby+OHUQj+Xb5VXsBEJp2zMN4+IEU/R9lZRbJxw
+ 9S+sCDc4rXTpmwquruHZPKkbFt0Oo0QuC23WkfhEDa3UHuEFi+22z804ROI+gR2eacFM
+ Sg9w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1730759037; x=1731363837;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=Fv7ajOqr02bT7rtx36Z4XydDDNO450yOywlk/R82D2A=;
- b=kBo/vxjMiur35DjS1+EH/iZ6mtCKggKchrje9pLmwwFnRS6MI5SS17BZr6GOizEqHh
- 3KLv84zlUm9Zl2PimKqTb1shKHg0oEmoxoMjEkiXdTWrOI0QbQIZtyBzetDM0WWR//SY
- zPI4wWxYH9iv6YtbgSGgdle9hN8VVZQqw3/iYCVBZyqr5qaqyPsUjK0ZXhelv5rR+lzW
- rVX3M4Y8gkJAtQkDYxsa8/ePx5wEVnuh/zthBraR1VCMOenC0WSs3BdSuEX23TYaS56i
- H4PnmuYu7+Jk4CtiQ+Oy7+eYmBGQ59IZ2LD2WCYoiPbLqVamF3v9fidfFLxQSCkJICg1
- Bmaw==
+ d=1e100.net; s=20230601; t=1730761188; x=1731365988;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=Zvd9wShwo7OQ5/3OA47T4DwiJoGFqiTKeuO/fhc4yoE=;
+ b=J39zrZaiI1r3PThR7Es8k/L+W2lccTEnugqlqz9Bhg53TinxI4TBm24fHVkwnGYObF
+ MMG27fR0Nv2ebpWeyrTr4XECKSKwo0yNjqLq/GhhqqLZTMgmDZfRHyzWp5jQtoJ2Yf90
+ zvU0OiX8Y20HaJ5lH75Bu8CxEALtvhQJsThoFE0EJSS5Vqn3NWLuDbmmN0ak5dzpZePj
+ uiZ70ul8TRYCBiT5Lh4KL1gJF+8taEqX9Q7OBNuS6GHJi6Ofkm2OUScWzBhgYTEsOXlY
+ bk2KbzMub7rBgOKQ5ZDLVmk5F05yPaFBXeiY5JNLfWvtKZJsJCtvAWMWlC9aMqlNUiQg
+ qQhw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWdrCC2/P6AW1VHzJPnQMENuYHKYbd5mywxEEzPRrgU+Vo5+RGKVGww1Pz2nySI4DBgqTVrypq7slKQ@nongnu.org
-X-Gm-Message-State: AOJu0Yyze3sYYkYu+S+k5Dn3J73ewoZlmh+c3AYO0rItokRMu1a5+Ma3
- eWgfVOQ12A7RLQtUt2xLjZS7gu7QtoDgJMgrethb9/6FN5lvAO0/ftTY4aw+ygY=
-X-Google-Smtp-Source: AGHT+IHpC4XjssXJxGi9hRcQVfu3LMyHiCxDlBNzMBjQBiAPyU+sqb3yjnwja4aWI1DKQxTHXTkpfg==
-X-Received: by 2002:a17:902:d543:b0:20c:7661:dcbf with SMTP id
- d9443c01a7336-210c6c95170mr389929905ad.55.1730759036886; 
- Mon, 04 Nov 2024 14:23:56 -0800 (PST)
-Received: from [192.168.1.67] (216-180-64-156.dyn.novuscom.net.
- [216.180.64.156]) by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-21105706891sm66442295ad.69.2024.11.04.14.23.55
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 04 Nov 2024 14:23:56 -0800 (PST)
-Message-ID: <508f34c0-c5fd-4f41-9aba-4c2735b12f5e@linaro.org>
-Date: Mon, 4 Nov 2024 14:23:55 -0800
+ AJvYcCU61TDXwenjgMY2M5EG2wB7AJ/jlShSeV9aiwZhVGNghl06IVNijFr0ZnWcmCyuOt7GLifstWjCwX1o@nongnu.org,
+ AJvYcCWnNSAtdtZbVNfDdl85iALkZUpWeRA37Th+XMcMhVe2+WijnT2L88dzrLoZ5JgRhZQXn4wpPVTlquaH2GS+@nongnu.org,
+ AJvYcCXdyAOdGcF3RYipsLNuzxPeuG+/UcU5ZL4fILpZ22Smr5Dn5vCUl5rhmoDJjT+9ZzPp6EyulEtWrB7KLw==@nongnu.org
+X-Gm-Message-State: AOJu0YzOjIJah9T7/NnhSE4XgmbLAD/hqbBh7J18EKPBUxY8dT1OO12V
+ KVQ+nCDiV9MtucTIcWDszVloKboD78urSWnbSg/2q4BLc6uwqfva7Vq9F0i4735jW74EjcwQam5
+ XuyfQE3JvHVPGDbzQVP5YbTUq0yg=
+X-Google-Smtp-Source: AGHT+IFQ8X6U6m5Y/1OuUVZ+kDiGisJbrxbBtyKG3y/ZDBPGQdBP9gUWyFRRvCZ3AUQ8JhR2nBzQU8MZ/KXxZhLHPEg=
+X-Received: by 2002:a05:6102:3595:b0:4a4:841f:bb98 with SMTP id
+ ada2fe7eead31-4a9543a418bmr15786318137.24.1730761188628; Mon, 04 Nov 2024
+ 14:59:48 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] hw/riscv: fix build error with clang
-Content-Language: en-US
-To: qemu-devel@nongnu.org
-Cc: Cleber Rosa <crosa@redhat.com>, qemu-riscv@nongnu.org,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Mahmoud Mandour <ma.mandourr@gmail.com>,
- Alistair Francis <alistair.francis@wdc.com>, John Snow <jsnow@redhat.com>,
- Stefano Garzarella <sgarzare@redhat.com>, Thomas Huth <thuth@redhat.com>,
- =?UTF-8?Q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>,
- "Michael S. Tsirkin" <mst@redhat.com>, Weiwei Li <liwei1518@gmail.com>,
- =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Konstantin Kostiuk <kkostiuk@redhat.com>, Bin Meng <bmeng.cn@gmail.com>,
- Paolo Bonzini <pbonzini@redhat.com>, Alexandre Iooss <erdnaxe@crans.org>,
- Michael Roth <michael.roth@amd.com>, =?UTF-8?Q?Alex_Benn=C3=A9e?=
- <alex.bennee@linaro.org>, =?UTF-8?Q?Daniel_P=2E_Berrang=C3=A9?=
- <berrange@redhat.com>, Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Palmer Dabbelt <palmer@dabbelt.com>
-References: <20241101170833.1074954-1-pierrick.bouvier@linaro.org>
-From: Pierrick Bouvier <pierrick.bouvier@linaro.org>
-In-Reply-To: <20241101170833.1074954-1-pierrick.bouvier@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::636;
- envelope-from=pierrick.bouvier@linaro.org; helo=mail-pl1-x636.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+References: <20241104163504.305955-1-thuth@redhat.com>
+In-Reply-To: <20241104163504.305955-1-thuth@redhat.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Tue, 5 Nov 2024 08:59:22 +1000
+Message-ID: <CAKmqyKMR0yJph-iF0WKzqFu6rGZy9CPjhBOKCdkG7JnF2ONWHQ@mail.gmail.com>
+Subject: Re: [PATCH] hw/char/sifive_uart: Fix broken UART on big endian hosts
+To: Thomas Huth <thuth@redhat.com>
+Cc: Alistair Francis <Alistair.Francis@wdc.com>, Bin Meng <bmeng.cn@gmail.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>, qemu-riscv@nongnu.org, 
+ =?UTF-8?B?TWFyYy1BbmRyw6kgTHVyZWF1?= <marcandre.lureau@redhat.com>, 
+ Paolo Bonzini <pbonzini@redhat.com>, qemu-devel@nongnu.org,
+ qemu-trivial@nongnu.org, 
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@linaro.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2607:f8b0:4864:20::92f;
+ envelope-from=alistair23@gmail.com; helo=mail-ua1-x92f.google.com
+X-Spam_score_int: -17
+X-Spam_score: -1.8
+X-Spam_bar: -
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -110,48 +98,47 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 11/1/24 10:08, Pierrick Bouvier wrote:
-> Introduced in 0c54ac, "hw/riscv: add RISC-V IOMMU base emulation"
-> 
-> ../hw/riscv/riscv-iommu.c:187:17: error: redefinition of '_pext_u64'
-> 
->    187 | static uint64_t _pext_u64(uint64_t val, uint64_t ext)
-> 
->        |                 ^
-> 
-> D:/a/_temp/msys64/clang64/lib/clang/18/include/bmi2intrin.h:217:1: note: previous definition is here
-> 
->    217 | _pext_u64(unsigned long long __X, unsigned long long __Y)
-> 
->        | ^
-> 
-> Signed-off-by: Pierrick Bouvier <pierrick.bouvier@linaro.org>
-> ---
->   hw/riscv/riscv-iommu.c | 4 ++--
->   1 file changed, 2 insertions(+), 2 deletions(-)
-> 
-> diff --git a/hw/riscv/riscv-iommu.c b/hw/riscv/riscv-iommu.c
-> index feb650549ac..f738570bac2 100644
-> --- a/hw/riscv/riscv-iommu.c
-> +++ b/hw/riscv/riscv-iommu.c
-> @@ -184,7 +184,7 @@ static void riscv_iommu_pri(RISCVIOMMUState *s,
->   }
->   
->   /* Portable implementation of pext_u64, bit-mask extraction. */
-> -static uint64_t _pext_u64(uint64_t val, uint64_t ext)
-> +static uint64_t pext_u64(uint64_t val, uint64_t ext)
->   {
->       uint64_t ret = 0;
->       uint64_t rot = 1;
-> @@ -528,7 +528,7 @@ static MemTxResult riscv_iommu_msi_write(RISCVIOMMUState *s,
->       int cause;
->   
->       /* Interrupt File Number */
-> -    intn = _pext_u64(PPN_DOWN(gpa), ctx->msi_addr_mask);
-> +    intn = pext_u64(PPN_DOWN(gpa), ctx->msi_addr_mask);
->       if (intn >= 256) {
->           /* Interrupt file number out of range */
->           res = MEMTX_ACCESS_ERROR;
+On Tue, Nov 5, 2024 at 2:35=E2=80=AFAM Thomas Huth <thuth@redhat.com> wrote=
+:
+>
+> Casting a "uint32_t *" to a "uint8_t *" to get to the lowest 8-bit
+> part of the value does not work on big endian hosts. We've got to
+> take the proper detour through an 8-bit variable.
+>
+> Fixes: 53c1557b23 ("hw/char: sifive_uart: Print uart characters async")
+> Signed-off-by: Thomas Huth <thuth@redhat.com>
 
-Sent v2 with changes asked in this thread.
+Urgh!
+
+Thanks for the fix
+
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+
+Alistair
+
+> ---
+>  hw/char/sifive_uart.c | 3 ++-
+>  1 file changed, 2 insertions(+), 1 deletion(-)
+>
+> diff --git a/hw/char/sifive_uart.c b/hw/char/sifive_uart.c
+> index aeb45d3601..5ae2a29ed6 100644
+> --- a/hw/char/sifive_uart.c
+> +++ b/hw/char/sifive_uart.c
+> @@ -174,10 +174,11 @@ sifive_uart_write(void *opaque, hwaddr addr,
+>  {
+>      SiFiveUARTState *s =3D opaque;
+>      uint32_t value =3D val64;
+> +    uint8_t ch =3D value;
+>
+>      switch (addr) {
+>      case SIFIVE_UART_TXFIFO:
+> -        sifive_uart_write_tx_fifo(s, (uint8_t *) &value, 1);
+> +        sifive_uart_write_tx_fifo(s, &ch, 1);
+>          return;
+>      case SIFIVE_UART_IE:
+>          s->ie =3D val64;
+> --
+> 2.47.0
+>
+>
 
