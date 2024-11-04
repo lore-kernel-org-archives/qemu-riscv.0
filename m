@@ -4,137 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 66551D132BF
-	for <qemu-riscv@archiver.kernel.org>; Mon,  4 Nov 2024 13:15:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BC0C5D1BDC3
+	for <qemu-riscv@archiver.kernel.org>; Mon,  4 Nov 2024 16:36:01 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1t7wv7-0005ax-Ua; Mon, 04 Nov 2024 08:15:02 -0500
+	id 1t8036-0007qk-96; Mon, 04 Nov 2024 11:35:28 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1t7wv4-0005aG-Mq
- for qemu-riscv@nongnu.org; Mon, 04 Nov 2024 08:14:58 -0500
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
+ (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1t8033-0007q3-TP
+ for qemu-riscv@nongnu.org; Mon, 04 Nov 2024 11:35:25 -0500
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1t7wv2-0007Wx-CJ
- for qemu-riscv@nongnu.org; Mon, 04 Nov 2024 08:14:58 -0500
+ (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1t8032-0002zu-5q
+ for qemu-riscv@nongnu.org; Mon, 04 Nov 2024 11:35:25 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1730726094;
+ s=mimecast20190719; t=1730738121;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
- bh=zBdLxOtct1jI3R7L4hg7Uj0l2W/4sY/QbfjGDemHWiQ=;
- b=VQp6q611IW9lUHteem52mfBxOJEXSB+NiYABqgCOu9r3o8xnp4w//scDe3oXgfWYz2qFOd
- sBIzfYMB3z4k34CEqG8titSHMIq3vNVPxZruOyu3xYWSfioq3zZhr/kYxGqcJusVAa62CZ
- +79x0qK+r3YAzUFXlVyy9pNRnta/5mA=
-Received: from mail-wm1-f70.google.com (mail-wm1-f70.google.com
- [209.85.128.70]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-664-r8-yJ0p8OAeyflXas5gkXA-1; Mon, 04 Nov 2024 08:14:53 -0500
-X-MC-Unique: r8-yJ0p8OAeyflXas5gkXA-1
-Received: by mail-wm1-f70.google.com with SMTP id
- 5b1f17b1804b1-4316300bb15so26576705e9.2
- for <qemu-riscv@nongnu.org>; Mon, 04 Nov 2024 05:14:52 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1730726092; x=1731330892;
- h=content-transfer-encoding:in-reply-to:autocrypt:content-language
- :from:references:cc:to:subject:user-agent:mime-version:date
- :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=zBdLxOtct1jI3R7L4hg7Uj0l2W/4sY/QbfjGDemHWiQ=;
- b=lzCTA4PukC+oxfAyGvWaT76DSEFFBRLcdv/OE5q7xY09lAAQZrsXbyvaLzfE34y9U+
- o2/vGndAEtfOIeCeDJ47TMFtNJhBmzUuVU5gV3kKjR3b56IL+1XWXitQPRJPA6J0MRBo
- cN3DKPsaxuu8OfVovAElrsWf7iA4Ko8muAbFUPdlFXncwDv60MhE7MglQjcPkb4OZplV
- xbFmlmgKteUvpN01lu1edalHQyl48TcJ6FDI6xBSF94dSNizgqKMcrgn9ql6JbD84sv8
- uYEOiL3jZIX1g6K7cHXGAKzKra5Q249ZjjclB+Klvc4RhB/yiy+F6HmKhKWV7VGsqzyc
- T/FA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXOL9qSGDfyzMU+Krenh2U6sv0y26PtSohipYv+CpC17UgLfMhxZN+gD97AxFZ6hev/ZOQrWZSYjhGE@nongnu.org
-X-Gm-Message-State: AOJu0Yw+Z+A9CUhJO57CPJguwGj1m2yljMv9B2ZAo0xqbZKrOPNubIsw
- E6GIkib/Samsolo7afAg1Y5kjIyBHSfghqptsX4pUMLw990Qj5ieLv2Ijqw/e+r5rD3bYpqKy0y
- AGzw3ufhLUDTiNHEhXsfaeDoOdvyCxmNPFOQC9BXSc8Fhuj9oCKrY
-X-Received: by 2002:a05:600c:4e91:b0:431:4f29:4a98 with SMTP id
- 5b1f17b1804b1-4319acbaac3mr264290855e9.20.1730726091912; 
- Mon, 04 Nov 2024 05:14:51 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IEBaeoTLFQSUi583/dx9H7DbfoUCUJkMdj+5SXU2yGP+5NvZ9viN1pZOc2Q6S4OrgrmY2JHMg==
-X-Received: by 2002:a05:600c:4e91:b0:431:4f29:4a98 with SMTP id
- 5b1f17b1804b1-4319acbaac3mr264290655e9.20.1730726091516; 
- Mon, 04 Nov 2024 05:14:51 -0800 (PST)
-Received: from [10.33.192.239] (nat-pool-str-t.redhat.com. [149.14.88.106])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-381c10e7392sm13160029f8f.55.2024.11.04.05.14.50
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 04 Nov 2024 05:14:51 -0800 (PST)
-Message-ID: <0d10b58c-25c2-4f3d-be25-51d9b650cc6d@redhat.com>
-Date: Mon, 4 Nov 2024 14:14:50 +0100
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PULL 00/14] Misc patches (functional tests, next-cube machine,
- ...)
-To: Peter Maydell <peter.maydell@linaro.org>
-Cc: qemu-devel@nongnu.org, QEMU RISC-V <qemu-riscv@nongnu.org>
-References: <20241031174832.6574-1-thuth@redhat.com>
- <CAFEAcA90nvvYoK52Yv4kdgRwJ+WyFRP9sW_U0gKdD4reaUGCFg@mail.gmail.com>
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=/48wIK5DE80qGmqw0yIE/LG8E3OVVASTxKv9PepSHdI=;
+ b=S9lgqh1/IdDcDcnVfi609RzeubCXdIDjOkC/XBJLPCBfTVcqNgdD+vOGXFQbgIBwkF1WGR
+ 9rQLVFkOHk6WF7SskXMBDoirPZ3WsuPSmWekh7v50ZMg/FLDRJZ+b5sUJhGATbfkJMzRB7
+ erml+E4EyuL07jqvWw1Oe2UxsL7WNcE=
+Received: from mx-prod-mc-03.mail-002.prod.us-west-2.aws.redhat.com
+ (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
+ relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-587-L2dr0qugPVmv6S8XjEBABg-1; Mon,
+ 04 Nov 2024 11:35:17 -0500
+X-MC-Unique: L2dr0qugPVmv6S8XjEBABg-1
+Received: from mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com
+ (mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.12])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mx-prod-mc-03.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id 4B2011956064; Mon,  4 Nov 2024 16:35:16 +0000 (UTC)
+Received: from thuth-p1g4.redhat.com (unknown [10.39.193.126])
+ by mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
+ id D6ADB19560A2; Mon,  4 Nov 2024 16:35:10 +0000 (UTC)
 From: Thomas Huth <thuth@redhat.com>
-Autocrypt: addr=thuth@redhat.com; keydata=
- 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
-In-Reply-To: <CAFEAcA90nvvYoK52Yv4kdgRwJ+WyFRP9sW_U0gKdD4reaUGCFg@mail.gmail.com>
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Language: en-US
-Content-Type: text/plain; charset=UTF-8; format=flowed
+To: Alistair Francis <Alistair.Francis@wdc.com>, Bin Meng <bmeng.cn@gmail.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>, qemu-riscv@nongnu.org
+Cc: =?UTF-8?q?Marc-Andr=C3=A9=20Lureau?= <marcandre.lureau@redhat.com>,
+ Paolo Bonzini <pbonzini@redhat.com>, qemu-devel@nongnu.org,
+ qemu-trivial@nongnu.org,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
+ Thomas Huth <thuth@redhat.com>
+Subject: [PATCH] hw/char/sifive_uart: Fix broken UART on big endian hosts
+Date: Mon,  4 Nov 2024 17:35:04 +0100
+Message-ID: <20241104163504.305955-1-thuth@redhat.com>
+MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=170.10.133.124; envelope-from=thuth@redhat.com;
+X-Scanned-By: MIMEDefang 3.0 on 10.30.177.12
+Received-SPF: pass client-ip=170.10.129.124; envelope-from=thuth@redhat.com;
  helo=us-smtp-delivery-124.mimecast.com
 X-Spam_score_int: -23
 X-Spam_score: -2.4
 X-Spam_bar: --
 X-Spam_report: (-2.4 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.34,
  DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H3=0.001, RCVD_IN_MSPIKE_WL=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H2=-0.001,
  RCVD_IN_VALIDITY_CERTIFIED_BLOCKED=0.001, RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -150,68 +83,34 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 04/11/2024 13.31, Peter Maydell wrote:
-> On Thu, 31 Oct 2024 at 17:48, Thomas Huth <thuth@redhat.com> wrote:
->>
->> The following changes since commit 58d49b5895f2e0b5cfe4b2901bf24f3320b74f29:
->>
->>    Merge tag 'net-pull-request' of https://github.com/jasowang/qemu into staging (2024-10-29 14:00:43 +0000)
->>
->> are available in the Git repository at:
->>
->>    https://gitlab.com/thuth/qemu.git tags/pull-request-2024-10-31
->>
->> for you to fetch changes up to d73ad1b1c0e62976d4790606ee29725a0d8a8906:
->>
->>    tests/functional: Convert the riscv_opensbi avocado test into a standalone test (2024-10-31 07:57:47 +0100)
->>
->> ----------------------------------------------------------------
->> * Remove the redundant macOS-15 CI job
->> * Various fixes, improvements and additions for the functional test suite
->> * Restore the sh4eb target
->> * Fix the OpenBSD VM test
->> * Re-enable the pci-bridge device on s390x
->> * Minor clean-ups / fixes for the next-cube machine
->>
->> ----------------------------------------------------------------
->> Daniel P. Berrangé (2):
->>        tests/functional: make tuxrun disk images writable
->>        tests/functional: make cached asset files read-only
->>
->> Mark Cave-Ayland (2):
->>        next-cube: fix up compilation when DEBUG_NEXT is enabled
->>        next-cube: remove cpu parameter from next_scsi_init()
->>
->> Thomas Huth (10):
->>        .gitlab-ci.d/cirrus: Remove the macos-15 job
->>        Revert "Remove the unused sh4eb target"
->>        tests/functional: Add a test for sh4eb
->>        tests/vm/openbsd: Remove the "Time appears wrong" workaround
->>        tests/functional: Fix the s390x and ppc64 tuxrun tests
->>        hw/s390x: Re-enable the pci-bridge device on s390x
->>        tests/functional: Convert the tcg_plugins test
->>        tests/functional: Convert BananaPi tests to the functional framework
->>        tests/functional: Convert the OrangePi tests to the functional framework
->>        tests/functional: Convert the riscv_opensbi avocado test into a standalone test
-> 
-> Hi; the opensbi test seems to consistently time out on the s390 CI job:
-> 
-> https://gitlab.com/qemu-project/qemu/-/jobs/8260596592
-> https://gitlab.com/qemu-project/qemu/-/jobs/8260043983
-> 
-> 789/972 qemu:func-quick+func-riscv32 / func-riscv32-riscv_opensbi
-> TIMEOUT 60.04s killed by signal 15 SIGTERM
-> 791/972 qemu:func-quick+func-riscv64 / func-riscv64-riscv_opensbi
-> TIMEOUT 60.04s killed by signal 15 SIGTERM
+Casting a "uint32_t *" to a "uint8_t *" to get to the lowest 8-bit
+part of the value does not work on big endian hosts. We've got to
+take the proper detour through an 8-bit variable.
 
-Oh, interesting, that looks like a recent regression - running riscv on 
-s390x hosts used to work last week, but with the current master it seems to 
-be broken.
+Fixes: 53c1557b23 ("hw/char: sifive_uart: Print uart characters async")
+Signed-off-by: Thomas Huth <thuth@redhat.com>
+---
+ hw/char/sifive_uart.c | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-I'll respin the pull request without this patch (so that the other fixes are 
-not blocked by this), while trying to find out where riscv breaks on big 
-endian hosts...
-
-  Thomas
+diff --git a/hw/char/sifive_uart.c b/hw/char/sifive_uart.c
+index aeb45d3601..5ae2a29ed6 100644
+--- a/hw/char/sifive_uart.c
++++ b/hw/char/sifive_uart.c
+@@ -174,10 +174,11 @@ sifive_uart_write(void *opaque, hwaddr addr,
+ {
+     SiFiveUARTState *s = opaque;
+     uint32_t value = val64;
++    uint8_t ch = value;
+ 
+     switch (addr) {
+     case SIFIVE_UART_TXFIFO:
+-        sifive_uart_write_tx_fifo(s, (uint8_t *) &value, 1);
++        sifive_uart_write_tx_fifo(s, &ch, 1);
+         return;
+     case SIFIVE_UART_IE:
+         s->ie = val64;
+-- 
+2.47.0
 
 
