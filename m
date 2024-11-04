@@ -4,95 +4,137 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BBA66D132BD
-	for <qemu-riscv@archiver.kernel.org>; Mon,  4 Nov 2024 12:48:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 66551D132BF
+	for <qemu-riscv@archiver.kernel.org>; Mon,  4 Nov 2024 13:15:46 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1t7wVn-00025X-Ge; Mon, 04 Nov 2024 07:48:52 -0500
+	id 1t7wv7-0005ax-Ua; Mon, 04 Nov 2024 08:15:02 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1t7wVX-0001sp-IU
- for qemu-riscv@nongnu.org; Mon, 04 Nov 2024 07:48:40 -0500
-Received: from mail-wm1-x32a.google.com ([2a00:1450:4864:20::32a])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1t7wVU-0003At-B4
- for qemu-riscv@nongnu.org; Mon, 04 Nov 2024 07:48:35 -0500
-Received: by mail-wm1-x32a.google.com with SMTP id
- 5b1f17b1804b1-43155abaf0bso36134145e9.0
- for <qemu-riscv@nongnu.org>; Mon, 04 Nov 2024 04:48:31 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1730724510; x=1731329310; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=LcEn+jhI8R3XvrV9KMQ/q343gWawxnMW6rdC6JsA3Ek=;
- b=qBNp6J0X76BRX2N6UbXgLzGgU58PsGdWx9q3vcWG3fGjtVXZD8AjL9Vy6lyOSmCJ5g
- qwIu9fHHPEFT/49aCnX/aQbMNR7lGHzCOc6QL4RqKCLysP2rTtVJ6t8Za1cDvTw0Pp4I
- 3vddeaWB072SS0blhUmZxqaXU3VkqiRLOVgKxWve18OgHoP9TGzxXe8PZd77xFzRQQk7
- TEREzfjZM6Prd1AAJFDnu59JQ86zsiMw43uGaHMum3FYvnsnLmH3dm33DIyIrapK/m7Z
- 61p634AULwwwM6JFCl2KF4UP/if19N0LyUTbirKarpJdpJ0H0weFou1j8vc9BoX0It1p
- Hz/A==
+ (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1t7wv4-0005aG-Mq
+ for qemu-riscv@nongnu.org; Mon, 04 Nov 2024 08:14:58 -0500
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1t7wv2-0007Wx-CJ
+ for qemu-riscv@nongnu.org; Mon, 04 Nov 2024 08:14:58 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1730726094;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
+ bh=zBdLxOtct1jI3R7L4hg7Uj0l2W/4sY/QbfjGDemHWiQ=;
+ b=VQp6q611IW9lUHteem52mfBxOJEXSB+NiYABqgCOu9r3o8xnp4w//scDe3oXgfWYz2qFOd
+ sBIzfYMB3z4k34CEqG8titSHMIq3vNVPxZruOyu3xYWSfioq3zZhr/kYxGqcJusVAa62CZ
+ +79x0qK+r3YAzUFXlVyy9pNRnta/5mA=
+Received: from mail-wm1-f70.google.com (mail-wm1-f70.google.com
+ [209.85.128.70]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-664-r8-yJ0p8OAeyflXas5gkXA-1; Mon, 04 Nov 2024 08:14:53 -0500
+X-MC-Unique: r8-yJ0p8OAeyflXas5gkXA-1
+Received: by mail-wm1-f70.google.com with SMTP id
+ 5b1f17b1804b1-4316300bb15so26576705e9.2
+ for <qemu-riscv@nongnu.org>; Mon, 04 Nov 2024 05:14:52 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1730724510; x=1731329310;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=LcEn+jhI8R3XvrV9KMQ/q343gWawxnMW6rdC6JsA3Ek=;
- b=r0ftjGY18e/phNGliQrhG0sO/60hGhdF+iO4TNc2SRwige7A0WAhrXBG2bw4L05fwV
- fi+/6EsfQJrzZ9xCLEqHYmSbEPExWN9XlF3/3muusKws5a28S2aO7Wu4t8ZrWzffCPyb
- ETTeHyjSTNd+ogLpIUu9SB05wxoEUac0pe027CozoNojb4EC9DCiDVkwF2fiitHDonUv
- w2uqHIKL517dpKvjzNxXMTS8hL9/y/BIZyQiMs+Phr9EVDtWG8oiclDABnEStjLZV5td
- Vtg+DZqQNTDNotIqQr9EyHuPBGSzerGYAw8CdS0YveuhSQ2JObvVRuSwyYaci5LWta3D
- 4jWg==
+ d=1e100.net; s=20230601; t=1730726092; x=1731330892;
+ h=content-transfer-encoding:in-reply-to:autocrypt:content-language
+ :from:references:cc:to:subject:user-agent:mime-version:date
+ :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=zBdLxOtct1jI3R7L4hg7Uj0l2W/4sY/QbfjGDemHWiQ=;
+ b=lzCTA4PukC+oxfAyGvWaT76DSEFFBRLcdv/OE5q7xY09lAAQZrsXbyvaLzfE34y9U+
+ o2/vGndAEtfOIeCeDJ47TMFtNJhBmzUuVU5gV3kKjR3b56IL+1XWXitQPRJPA6J0MRBo
+ cN3DKPsaxuu8OfVovAElrsWf7iA4Ko8muAbFUPdlFXncwDv60MhE7MglQjcPkb4OZplV
+ xbFmlmgKteUvpN01lu1edalHQyl48TcJ6FDI6xBSF94dSNizgqKMcrgn9ql6JbD84sv8
+ uYEOiL3jZIX1g6K7cHXGAKzKra5Q249ZjjclB+Klvc4RhB/yiy+F6HmKhKWV7VGsqzyc
+ T/FA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCU7/N7xTj6F/2wp4mE4zAl+/k4QoHYX9WeiP7THW949Rhs+GXsc4ju6fyMkNLD0SPnjU+JErgTdQXSP@nongnu.org
-X-Gm-Message-State: AOJu0YxvuiuRPWpGe9a7ullYH0rxmV4xd51tnJn/2sctoDDpZsEErsdW
- 4uuuIS7x2uOVxPfuL3HAVvDHrl3wiScwAuIi0LdvSm5x0fe7pvZ4SObNQFzbXSI=
-X-Google-Smtp-Source: AGHT+IFRCDSe5LTZ/HQFfImnXc1ZX0AVl1iZ1i5RkXcnr432FgVMB2EK8W5vJ58jB16/kRcCu4/h6A==
-X-Received: by 2002:a05:6000:78a:b0:37c:d299:b5f0 with SMTP id
- ffacd0b85a97d-381c7ae0a06mr7782431f8f.59.1730724509628; 
- Mon, 04 Nov 2024 04:48:29 -0800 (PST)
-Received: from [192.168.21.227] ([154.14.63.34])
+ AJvYcCXOL9qSGDfyzMU+Krenh2U6sv0y26PtSohipYv+CpC17UgLfMhxZN+gD97AxFZ6hev/ZOQrWZSYjhGE@nongnu.org
+X-Gm-Message-State: AOJu0Yw+Z+A9CUhJO57CPJguwGj1m2yljMv9B2ZAo0xqbZKrOPNubIsw
+ E6GIkib/Samsolo7afAg1Y5kjIyBHSfghqptsX4pUMLw990Qj5ieLv2Ijqw/e+r5rD3bYpqKy0y
+ AGzw3ufhLUDTiNHEhXsfaeDoOdvyCxmNPFOQC9BXSc8Fhuj9oCKrY
+X-Received: by 2002:a05:600c:4e91:b0:431:4f29:4a98 with SMTP id
+ 5b1f17b1804b1-4319acbaac3mr264290855e9.20.1730726091912; 
+ Mon, 04 Nov 2024 05:14:51 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IEBaeoTLFQSUi583/dx9H7DbfoUCUJkMdj+5SXU2yGP+5NvZ9viN1pZOc2Q6S4OrgrmY2JHMg==
+X-Received: by 2002:a05:600c:4e91:b0:431:4f29:4a98 with SMTP id
+ 5b1f17b1804b1-4319acbaac3mr264290655e9.20.1730726091516; 
+ Mon, 04 Nov 2024 05:14:51 -0800 (PST)
+Received: from [10.33.192.239] (nat-pool-str-t.redhat.com. [149.14.88.106])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-381c10e747csm13145345f8f.64.2024.11.04.04.48.28
+ ffacd0b85a97d-381c10e7392sm13160029f8f.55.2024.11.04.05.14.50
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 04 Nov 2024 04:48:29 -0800 (PST)
-Message-ID: <54c99505-21ef-422c-a7fe-a2d7dabc3d6c@linaro.org>
-Date: Mon, 4 Nov 2024 12:48:26 +0000
+ Mon, 04 Nov 2024 05:14:51 -0800 (PST)
+Message-ID: <0d10b58c-25c2-4f3d-be25-51d9b650cc6d@redhat.com>
+Date: Mon, 4 Nov 2024 14:14:50 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [RFC v4 2/2] target/riscv: rvv: improve performance of RISC-V
- vector loads and stores on large amounts of data.
-To: Paolo Savini <paolo.savini@embecosm.com>, qemu-devel@nongnu.org,
- qemu-riscv@nongnu.org
-Cc: Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bmeng.cn@gmail.com>,
- Weiwei Li <liwei1518@gmail.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Helene Chelin <helene.chelin@embecosm.com>, Nathan Egge <negge@google.com>,
- Max Chou <max.chou@sifive.com>
-References: <20241029194348.59574-1-paolo.savini@embecosm.com>
- <20241029194348.59574-3-paolo.savini@embecosm.com>
- <7a046c99-c4e7-4395-8dc9-9139e9bfba06@linaro.org>
- <96e7601d-14aa-4741-8f6a-ae4a1c397a44@embecosm.com>
+Subject: Re: [PULL 00/14] Misc patches (functional tests, next-cube machine,
+ ...)
+To: Peter Maydell <peter.maydell@linaro.org>
+Cc: qemu-devel@nongnu.org, QEMU RISC-V <qemu-riscv@nongnu.org>
+References: <20241031174832.6574-1-thuth@redhat.com>
+ <CAFEAcA90nvvYoK52Yv4kdgRwJ+WyFRP9sW_U0gKdD4reaUGCFg@mail.gmail.com>
+From: Thomas Huth <thuth@redhat.com>
+Autocrypt: addr=thuth@redhat.com; keydata=
+ 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
+In-Reply-To: <CAFEAcA90nvvYoK52Yv4kdgRwJ+WyFRP9sW_U0gKdD4reaUGCFg@mail.gmail.com>
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
 Content-Language: en-US
-From: Richard Henderson <richard.henderson@linaro.org>
-In-Reply-To: <96e7601d-14aa-4741-8f6a-ae4a1c397a44@embecosm.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::32a;
- envelope-from=richard.henderson@linaro.org; helo=mail-wm1-x32a.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
+Received-SPF: pass client-ip=170.10.133.124; envelope-from=thuth@redhat.com;
+ helo=us-smtp-delivery-124.mimecast.com
+X-Spam_score_int: -23
+X-Spam_score: -2.4
 X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+X-Spam_report: (-2.4 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.34,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H3=0.001, RCVD_IN_MSPIKE_WL=0.001,
+ RCVD_IN_VALIDITY_CERTIFIED_BLOCKED=0.001, RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -108,66 +150,68 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 10/30/24 15:25, Paolo Savini wrote:
-> Thanks for the review Richard.
+On 04/11/2024 13.31, Peter Maydell wrote:
+> On Thu, 31 Oct 2024 at 17:48, Thomas Huth <thuth@redhat.com> wrote:
+>>
+>> The following changes since commit 58d49b5895f2e0b5cfe4b2901bf24f3320b74f29:
+>>
+>>    Merge tag 'net-pull-request' of https://github.com/jasowang/qemu into staging (2024-10-29 14:00:43 +0000)
+>>
+>> are available in the Git repository at:
+>>
+>>    https://gitlab.com/thuth/qemu.git tags/pull-request-2024-10-31
+>>
+>> for you to fetch changes up to d73ad1b1c0e62976d4790606ee29725a0d8a8906:
+>>
+>>    tests/functional: Convert the riscv_opensbi avocado test into a standalone test (2024-10-31 07:57:47 +0100)
+>>
+>> ----------------------------------------------------------------
+>> * Remove the redundant macOS-15 CI job
+>> * Various fixes, improvements and additions for the functional test suite
+>> * Restore the sh4eb target
+>> * Fix the OpenBSD VM test
+>> * Re-enable the pci-bridge device on s390x
+>> * Minor clean-ups / fixes for the next-cube machine
+>>
+>> ----------------------------------------------------------------
+>> Daniel P. Berrangé (2):
+>>        tests/functional: make tuxrun disk images writable
+>>        tests/functional: make cached asset files read-only
+>>
+>> Mark Cave-Ayland (2):
+>>        next-cube: fix up compilation when DEBUG_NEXT is enabled
+>>        next-cube: remove cpu parameter from next_scsi_init()
+>>
+>> Thomas Huth (10):
+>>        .gitlab-ci.d/cirrus: Remove the macos-15 job
+>>        Revert "Remove the unused sh4eb target"
+>>        tests/functional: Add a test for sh4eb
+>>        tests/vm/openbsd: Remove the "Time appears wrong" workaround
+>>        tests/functional: Fix the s390x and ppc64 tuxrun tests
+>>        hw/s390x: Re-enable the pci-bridge device on s390x
+>>        tests/functional: Convert the tcg_plugins test
+>>        tests/functional: Convert BananaPi tests to the functional framework
+>>        tests/functional: Convert the OrangePi tests to the functional framework
+>>        tests/functional: Convert the riscv_opensbi avocado test into a standalone test
 > 
-> On 10/30/24 11:40, Richard Henderson wrote:
->> On 10/29/24 19:43, Paolo Savini wrote:
->>> This patch optimizes the emulation of unit-stride load/store RVV instructions
->>> when the data being loaded/stored per iteration amounts to 16 bytes or more.
->>> The optimization consists of calling __builtin_memcpy on chunks of data of 16
->>> bytes between the memory address of the simulated vector register and the
->>> destination memory address and vice versa.
->>> This is done only if we have direct access to the RAM of the host machine,
->>> if the host is little endiand and if it supports atomic 128 bit memory
->>> operations.
->>>
->>> Signed-off-by: Paolo Savini <paolo.savini@embecosm.com>
->>> ---
->>>   target/riscv/vector_helper.c    | 17 ++++++++++++++++-
->>>   target/riscv/vector_internals.h | 12 ++++++++++++
->>>   2 files changed, 28 insertions(+), 1 deletion(-)
->>>
->>> diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
->>> index 75c24653f0..e1c100e907 100644
->>> --- a/target/riscv/vector_helper.c
->>> +++ b/target/riscv/vector_helper.c
->>> @@ -488,7 +488,22 @@ vext_group_ldst_host(CPURISCVState *env, void *vd, uint32_t byte_end,
->>>       }
->>>         fn = fns[is_load][group_size];
->>> -    fn(vd, byte_offset, host + byte_offset);
->>> +
->>> +    /* __builtin_memcpy uses host 16 bytes vector loads and stores if supported.
->>> +     * We need to make sure that these instructions have guarantees of atomicity.
->>> +     * E.g. x86 processors provide strong guarantees of atomicity for 16-byte
->>> +     * memory operations if the memory operands are 16-byte aligned */
->>> +    if (!HOST_BIG_ENDIAN && (byte_offset + 16 < byte_end) &&
->>> +            ((byte_offset % 16) == 0) && HOST_128_ATOMIC_MEM_OP) {
->>> +      group_size = MO_128;
->>> +      if (is_load) {
->>> +        __builtin_memcpy((uint8_t *)(vd + byte_offset), (uint8_t *)(host + 
->>> byte_offset), 16);
->>> +      } else {
->>> +        __builtin_memcpy((uint8_t *)(host + byte_offset), (uint8_t *)(vd + 
->>> byte_offset), 16);
->>> +      }
->>
->> I said this last time and I'll say it again:
->>
->>     __builtin_memcpy DOES NOT equal VMOVDQA
-> I am aware of this. I took __builtin_memcpy as a generic enough way to emulate loads and 
-> stores that should allow several hosts to generate the widest load/store instructions they 
-> can and on x86 I see this generates instructions vmovdpu/movdqu that are not always 
-> guaranteed to be atomic. x86 though guarantees them to be atomic if the memory address is 
-> aligned to 16 bytes.
+> Hi; the opensbi test seems to consistently time out on the s390 CI job:
+> 
+> https://gitlab.com/qemu-project/qemu/-/jobs/8260596592
+> https://gitlab.com/qemu-project/qemu/-/jobs/8260043983
+> 
+> 789/972 qemu:func-quick+func-riscv32 / func-riscv32-riscv_opensbi
+> TIMEOUT 60.04s killed by signal 15 SIGTERM
+> 791/972 qemu:func-quick+func-riscv64 / func-riscv64-riscv_opensbi
+> TIMEOUT 60.04s killed by signal 15 SIGTERM
 
-No, AMD guarantees MOVDQU is atomic if aligned, Intel does not.
-See the comment in util/cpuinfo-i386.c, and the two CPUINFO_ATOMIC_VMOVDQ[AU] bits.
+Oh, interesting, that looks like a recent regression - running riscv on 
+s390x hosts used to work last week, but with the current master it seems to 
+be broken.
 
-See also host/include/*/host/atomic128-ldst.h, HAVE_ATOMIC128_RO, and atomic16_read_ro.
-Not that I think you should use that here; it's complicated, and I think you're better off 
-relying on the code in accel/tcg/ when more than byte atomicity is required.
+I'll respin the pull request without this patch (so that the other fixes are 
+not blocked by this), while trying to find out where riscv breaks on big 
+endian hosts...
 
+  Thomas
 
-r~
 
