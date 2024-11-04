@@ -4,174 +4,148 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4EC40D1BDD0
-	for <qemu-riscv@archiver.kernel.org>; Mon,  4 Nov 2024 17:39:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 92FABD1BDD4
+	for <qemu-riscv@archiver.kernel.org>; Mon,  4 Nov 2024 17:44:43 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1t8133-00076F-MZ; Mon, 04 Nov 2024 12:39:29 -0500
+	id 1t817T-0001qQ-Vn; Mon, 04 Nov 2024 12:44:04 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <sai.pavan.boddu@amd.com>)
- id 1t812s-0006xt-BO; Mon, 04 Nov 2024 12:39:18 -0500
-Received: from mail-mw2nam12on2062d.outbound.protection.outlook.com
- ([2a01:111:f403:200a::62d]
- helo=NAM12-MW2-obe.outbound.protection.outlook.com)
+ id 1t817L-0001nW-Dm; Mon, 04 Nov 2024 12:43:55 -0500
+Received: from mail-bn8nam11on20600.outbound.protection.outlook.com
+ ([2a01:111:f403:2414::600]
+ helo=NAM11-BN8-obe.outbound.protection.outlook.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <sai.pavan.boddu@amd.com>)
- id 1t812p-0001WI-Ms; Mon, 04 Nov 2024 12:39:17 -0500
+ id 1t817F-00023y-Fb; Mon, 04 Nov 2024 12:43:54 -0500
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=qhqMyDg4q5R92V5qmdHtDNzkhYX9qtXgIJ16bnVBgVcIWknzUDsMx4Ba9ThMMXsHOsfjrPs8D+ZQ8EejGwSZP3JGWeg/QcW+swq3FnkmSa+E2VhAZcTVcEbyXK6ocPwWIRDyaoPlx0ToyBHemaWT6ZoyW//sqApFE2sLa+pKbivhu7paTnlc71Jr0u1MPntHxaQ4TfJTxWRWXZvH10yU9/K6/Kwxx9A1CxMPiafSJnt7GyxOk4ZViNrcRU6nCWdubsXdXKc1A3hKjViQWJF1lyVloXdLOjkgy6aPLQA7gFrZ90YnKYz2P6BXUuOBAtOinPu31RqKtAkRKJ6HO21qHg==
+ b=N9t+1DoviSBDM8YuRbFrb6zfpyx6ul5uaIDCYQZsTA7Zd5u4gcTFkDkJuO42rsU6o0DQyQxJS1//tkHwXKQjoEkFAXNEbZzo2HwSq1M94wGCrb6I0s0NKlCkJv01dwS1ihGZ0IPQ4rnGOKK1fYM8uY6p4Xz1RecV0DU8ph4ol2+6bjDKVdigdHG05KY7/SsulniRCmaIZThHVH/AVTl2F7c1Tuc3oSG+TXm2ykDM8leIyqSF14G4t8IZuTrtKI+bRhf98OKn2Oh+AvK7+6MeKyr5RQagzeb2zwt5jdQ2SM6IVT8VBJ5o0s5dnCw0Ft/M6i0vIE0laCaHkzPorls2CQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=VbyofWxhCBJlETPPL2ByeP/+ryxwdOrfjlItNRF0ukQ=;
- b=ZNChusKbtbENcZRmwM0SSUbpietNZwpRjKdheBVkSaWjzpc6oMiqhagGIrjPRWF20eVccam/VXPz2wHfpJ7rkrZhid4N0B56qmeVRNJMQlAaMflA2L4dfna1GDxW7NgQ3SBlLTiQi1/KRgeyzzQYdfx4DnpHdpyRIRc5USos5yBTryFwK8dXHb8PUq4qQ29WCQPq2Tsddh7nAxt+avmSBmD+873xNaV6CXgv7KVvx+8iMGTqvXOPlsNwTBMBUsauhyIieV3Zsa7dw/shy0KqTpPKo6HioA3qS8E6AV2nFLvM4egROAOoFmBDukHq/h/O/WOMwWWfR6Ox+eZlVs/3yw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
- header.d=amd.com; arc=none
+ bh=7A5+Lixj9i7SFrER35DhdXytg2mNt4Wj/UytJydJyVI=;
+ b=CaABpUAlgFoslK8TtIidhHbPI1gQKlZf9SNwqnFJcmLEGo2IGsf8J1wTLb/rSyjvIeBomraG9jfmF0L9bd2b0MiMl49YJVMUSIhlKw+Q68nMv6/+KmRsnHPt03tMqLYeMge8MEErQ+s6d5nTnlYR3U5RRLK2IkaYtP32ab7Dc6dOCAKGB61OT4Iao5pRUG7UXRIr0JR3ZZhTJTwHvbwqcAJxw/Ugf/btjfn6hpuECHLUB+oFG0PYpJKAdp97ffwdVdF+uj11EX00rQxQT2s9V/GgxolPqrXvl+ZxGyLe70h3yNazl0XvMYUvgeHOPjJu3iT/Fbli634COwGADUNGjw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=nongnu.org smtp.mailfrom=amd.com; dmarc=pass
+ (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
+ dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=VbyofWxhCBJlETPPL2ByeP/+ryxwdOrfjlItNRF0ukQ=;
- b=ESGAIKVBW1WtbXxrfzjQKcx+w/nlRhf4rJ9bDasxNi/AJEGYwqByZJzJ5oGP3tSshiPvzGEbq+ASSvY9YgL5j9nPysmWeXCKufqSX0FCy0V85EHXhnQCFN/DAtxWNYikgqPzd7fgRceLBI4lPAxNW0r+CFciMEhW+YA+Itcf0ds=
-Received: from DS7PR12MB5741.namprd12.prod.outlook.com (2603:10b6:8:70::7) by
- DS7PR12MB6144.namprd12.prod.outlook.com (2603:10b6:8:98::8) with
+ bh=7A5+Lixj9i7SFrER35DhdXytg2mNt4Wj/UytJydJyVI=;
+ b=g4Dfs/31oST+8LsFyhVADPb43kZqvKxCzNkewd4qq9MdRHoj3fuLIf879A1GgSmJwgx7E17cfW3mHrQSs9E7ClBUnxFjGhwjJgVuegRxfbCdyMEm4j7OE4p+XMzYzQg57sgMlWWfMCZXTYpvCNVpwv/E82QtyJTGKVkI4O+js+s=
+Received: from BY1P220CA0003.NAMP220.PROD.OUTLOOK.COM (2603:10b6:a03:59d::10)
+ by DM4PR12MB6232.namprd12.prod.outlook.com (2603:10b6:8:a5::7) with
  Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.8114.30; Mon, 4 Nov 2024 17:39:06 +0000
-Received: from DS7PR12MB5741.namprd12.prod.outlook.com
- ([fe80::4a06:1053:ead5:ef39]) by DS7PR12MB5741.namprd12.prod.outlook.com
- ([fe80::4a06:1053:ead5:ef39%7]) with mapi id 15.20.8114.028; Mon, 4 Nov 2024
- 17:39:05 +0000
-From: "Boddu, Sai Pavan" <sai.pavan.boddu@amd.com>
-To: =?utf-8?B?UGhpbGlwcGUgTWF0aGlldS1EYXVkw6k=?= <philmd@linaro.org>, "Simek, 
- Michal" <michal.simek@amd.com>, Alistair Francis <alistair23@gmail.com>
-CC: "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>, "qemu-riscv@nongnu.org"
- <qemu-riscv@nongnu.org>, Paolo Bonzini <pbonzini@redhat.com>, Palmer Dabbelt
- <palmer@dabbelt.com>, Alistair Francis <alistair.francis@wdc.com>, Bin Meng
- <bmeng.cn@gmail.com>, Weiwei Li <liwei1518@gmail.com>, Daniel Henrique
- Barboza <dbarboza@ventanamicro.com>, Liu Zhiwei
- <zhiwei_liu@linux.alibaba.com>
-Subject: RE: [PATCH v2] hw/riscv: Add Microblaze V 32bit virt board
-Thread-Topic: [PATCH v2] hw/riscv: Add Microblaze V 32bit virt board
-Thread-Index: AQHbIGXDNaihtEdEIUuajgv+UhTD87KerV2AgAAyA4CAAXRDAIAATZcAgAB52ACABmTDEA==
-Date: Mon, 4 Nov 2024 17:39:05 +0000
-Message-ID: <DS7PR12MB57414558FB13B67741091313B6512@DS7PR12MB5741.namprd12.prod.outlook.com>
-References: <20241017072507.4033413-1-sai.pavan.boddu@amd.com>
- <CAKmqyKNfoakaJ66PCN49x5+=gVkAnQVV1UWTdPe7ARr3RA8ouA@mail.gmail.com>
- <7dbcb2de-89f9-445b-a096-2a3d03a2dfe7@amd.com>
- <34d6acf1-2106-481e-a016-375e697f31cf@linaro.org>
- <47b60bf0-e43e-43a6-b9d7-0d072cd8d4ad@amd.com>
- <8caf45e4-0be8-46aa-923b-402c80f74060@linaro.org>
-In-Reply-To: <8caf45e4-0be8-46aa-923b-402c80f74060@linaro.org>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=amd.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: DS7PR12MB5741:EE_|DS7PR12MB6144:EE_
-x-ms-office365-filtering-correlation-id: 5ae86b22-d869-4445-a3fe-08dcfcf79488
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;
- ARA:13230040|7416014|376014|366016|1800799024|38070700018; 
-x-microsoft-antispam-message-info: =?utf-8?B?ZW5FVXR6MGZYV0tvNlBlWmltQ2RXenlNZWFhWXZuTmd6RVdjMUZLV0NLY3N1?=
- =?utf-8?B?S1VVOEdJZXpaL1NXYU9wTWJ5VWJuWXY0T0hzV2pBWUhjbzRCSWNucCthQ0FS?=
- =?utf-8?B?aHJmNEtkMEtTenV2d0NpZ0NjbHJTaDIyWGxDWEMzMkUxMHQ5LysveVhJWWdV?=
- =?utf-8?B?bWVxRkpQbUxhYjhScW5NMW1MNmRvSzF4UmtwZVlWaU1Ob1FEa09wVlZkSGx0?=
- =?utf-8?B?eDZEMU5OdXFrVU1NdUFxSHBPVFl4TVg2Vzl3TGU0aDI4L0xwZzBRNXNDY0lY?=
- =?utf-8?B?ZWQrSTlYWDdxMVlodEEyclN3WS9PVUdLUTcvN0tZS3Z6S1FxVUhCOVBrMjFj?=
- =?utf-8?B?blc3RzNaNEZaN2ZvMXQwd056OWI2a2dRWk5rcWxhdGJBSHRHemxEdEJ1WkVP?=
- =?utf-8?B?UDlNb0FVOUdwVzVPelpMaVBvUlRBQnNlK3B0NXFYdThnUGQ1VmVzZFlxYWxV?=
- =?utf-8?B?ZHVFT1N4TndCYmNNM2hqRjhEQUZkMGtjbWk5ZENEWEI1ZGkwL2lJVGdYQVpY?=
- =?utf-8?B?S2tzc2JBdWZSVi9PMjVHMUEvTEpSaFlLTE51TjRZaFkycVM3d3M5TWIrdWdR?=
- =?utf-8?B?Nll1R016WGx3cy9aS2ZHdFdpZ1RLd1Z3NHdXNDduOTlvMm1Tek5MbnV3VlF4?=
- =?utf-8?B?K3ZxMmV3ZjdpMXRiRVBVcFFsSm5tZEIybk1oMzRsTnRDeXFKNXNYRG5yOEhn?=
- =?utf-8?B?empnMjNqZkxWbTR0M1FQeXdzUWhQYkVaZ2p5TUp4eHdzUWVuSDdmUk9EZy90?=
- =?utf-8?B?Rldtd2FuVlBUZjVZTXVyZlVEWFlJRUVwRFdtSzRVZlI4ZnVvK3V0enN1Y2c5?=
- =?utf-8?B?TlJPT3QvYnJPcWt6aUp1aVJwK1JtNzhTSHFqb1ZiSHl5R3RQTnpjRXZ4aHlw?=
- =?utf-8?B?TXNDSHIrUUxSczE0QWhHWmJ4cnVWL2dNQldKdlY5UnNoSzB0ZGtzRnhISUh4?=
- =?utf-8?B?OTJhSmZlYjNCcjUzMytvdlcvbkpmdjdkNlhGbGxuTmQwOFpWaUhhZVZmdDhT?=
- =?utf-8?B?UThaVW5PMjQ2WTNNVDEwVlp6R3ArZ241T1dxZG5iOVBpQ3ZEVDFhMmI0NXoz?=
- =?utf-8?B?WkhYUm5EbHJhQjJmYmI2dDBxekVUbnhObGJrc0tuV3UvZGRHb2l5cVlXMndK?=
- =?utf-8?B?STBEMDgvTlFNaWt4OC9kcUJ0R3pCcGxkVG95SDhnbWFIbHl1b0ZwNkxVMG9N?=
- =?utf-8?B?TnFta21MOEdOZzdWMXRnY2pGaTlIS2dNcndNSE8xTmNTZHZGQzVNNHc5OUtB?=
- =?utf-8?B?a1JtWjdGSzVEdjJEYnBLMmxsUEhndlptTU1sSERFaHo5dHd3UUNxQW5acS9s?=
- =?utf-8?B?MzRnNVJHVnBaRDBnUFArVlVKUldpUnlpVjgwYStPblZVU0srZFQxanBmclB4?=
- =?utf-8?B?WDJIdGlJelAzdEtHZzVUSzFSdnIzQzdORXpXOHhNZThxNDhEUEhtbjF1N045?=
- =?utf-8?B?UXc1WGg0Y1R2dDVUaUhSM1p4VWE2TmhZRjF2WXEwWkxXbE5EdWhXTW5GTzVp?=
- =?utf-8?B?WUJmUFVBVHJCQnl0WEZHL2owQThYYmhGWStaMWRObHRjT0tNQ3lIZGxDTmx5?=
- =?utf-8?B?WGpxQ3NPWlA4UWNCS0ozeGRGTjVTQWxtNVlNT0k4cnNZRjBCbldRZnZZRGRl?=
- =?utf-8?B?QWVRYm90bU4xbW04cklQMTZ0UkQ1V2xvY0JKa05CK0VnUndOSDVyMWxUZWtR?=
- =?utf-8?B?N2hId2hINzRDT3Zwb2U4WHhrRzFsR0U4dXpzck96V3h0ZTVpZy9Ec1VHemh1?=
- =?utf-8?B?aXkyWEthTjgxV3BVdXlDT2JNWWtXaHJSaE5rYXkzWi94VFZuL1NoZkxoaGlP?=
- =?utf-8?B?ZTlrU1EyMklDK1JoNEU4V2cwWmFXNnI5QUoyOUhMVTAxZHBWOVZYNTM4VVBT?=
- =?utf-8?Q?afBKVnAOkESVs?=
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:DS7PR12MB5741.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(7416014)(376014)(366016)(1800799024)(38070700018); DIR:OUT;
- SFP:1101; 
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?utf-8?B?N2lkZjU4c2Jhd0wrU0NlOGQxclM1R3oxaXVjMlNUYXpLVys1Sy9sYUZVYWpJ?=
- =?utf-8?B?UWxFWFpmSGlObXlMbUpHRnJuMmJjZlFqRkhwN2JJOFhoRjBsZi9Uc0kyN3By?=
- =?utf-8?B?VUYvQWZTeEpEZ2VFaDgvSmpjTklZNDd2NlhnTzYwVXUzaDFUaldiYXl0eUM4?=
- =?utf-8?B?TmxBd2lVZ1pGL0pwSDdTcVJJSUxwNTIyZTdHK2lPdlZaYm9jczloMjFOa0lx?=
- =?utf-8?B?c0laUGhrcnk0bmJIUDVXczJ6cFZBYVJvSEUzQmJjVjdpWmhpRE5aNlBKbWk3?=
- =?utf-8?B?aTBZbDBBdTdCRmNqNGF2bUVNVkZXNStYRlk4OVE4NVRuL0lXWHJMbnA5V1My?=
- =?utf-8?B?RWM2RkROK01WT3dQQ3lPTzRESVRuNk9rUStwUVN6WGFnVjRtUVBkQnBGZmxX?=
- =?utf-8?B?T2VNTkRaZEUzd3hqb1Q0VmdYdmtaWFFzY2RVSWs1RytqTjFKaWxuUzRMSWN6?=
- =?utf-8?B?NlhOVndBZEIwR09Mc28xVzNJb244eVNGMGVYSjBHU0FuaGtlOFk1bDVQdjZr?=
- =?utf-8?B?a3Rxdnl4U0svMU82Z3hJUzdLbndSL0RQVFlHMW9OSzdrVzJ1NzJjMnllUEhs?=
- =?utf-8?B?b2xrUDAvUnM1QVluTDB1ZWdtUUxlYm53ZHo0YWxQU0FGbVVHUW9jRFl1NlV2?=
- =?utf-8?B?L0pOTjZZRm1TNHI5Z1FUelY4cFRZeUJqZ2wwVU5FTS9VTVNlZk94cDJON29Z?=
- =?utf-8?B?RzRuQm80K1NLb1BSTkN3MzlhbVQ1SzZOcDRwU0h6Zkdyano4dHQ1SkRYemxF?=
- =?utf-8?B?dHkzSzlMZVc2RnR2YzgvelpxMTkxWkdrR25YOEpJbEFhVW81aUdpVStZZVMz?=
- =?utf-8?B?Mkw1ajFGRWFEbzNUcTFyeWZteGNYeHpFOER4OHZvK2c4TEI0ZWlkRnZBcmh2?=
- =?utf-8?B?NXBHaGNOTTdFZncrd1VtRWpZaGN5SnNtTnhNQml1ZWV3TmJkUkp2dTBwc0dC?=
- =?utf-8?B?Wmx5dWlCV2hMc0t6QldNa2RZNWVhWHRtS0duR0RoTTFjZlB1VnNSTWZ1SzVp?=
- =?utf-8?B?TTdubVlVT3lHdUFScklZODBYTjh2UHhYQlM5WU8rREVhTUt5NllPZjZ2bUNq?=
- =?utf-8?B?Q3ZMRTFmRjR0UHZyaGVCTS9KSGNCM0tkT1BiNDM3NkgrQWZHZzNieVhWb2RX?=
- =?utf-8?B?aFRaQVJPU050NDJLQ2ttajRqTno3QlV0aDFGaE9JdUxtcDVoN2h0MUpoelQz?=
- =?utf-8?B?bzdYRGI4Ui81TkFtSHE1dFFJUlplTXJQdjd1VjdqRXY5czNBQzRGM2VlaFNX?=
- =?utf-8?B?OGV5WmZXakxibVM2ZmE3aGpVNWRSakpUbG1FOFJId0d0MTRON0dqUzBjSUkr?=
- =?utf-8?B?bCtJWjVJQS9wVzVSQzRjNCsrK1ZiVTBTZXJ5R3dFVkdobmhSV2MyNlV2bHQ4?=
- =?utf-8?B?ZlRiek1aUXMzT05weWdVemRYUGl3ZzVUSldCYmZHVUhIWXgrSEo3eDJ1Njlo?=
- =?utf-8?B?OVgvcXdJcE5sNktuMHFqOHcxN1RwYUwxMlpzMWU4dFIrVGlUYWpZbmszOTBp?=
- =?utf-8?B?RWo2eGVpakczNVZMSStiMk9vdzVKQ0UrY2xyc3RkWUlDZ283b0tRVXBvdmVY?=
- =?utf-8?B?bFREakZxaDNTeE9LVWg1QTdxSGU4UGx4ZzZqdnZUNjhSM0pIWXBjRnhLWjlO?=
- =?utf-8?B?VlUyM0FJNW92bWdLU04weWhJNXlGNkxhbXc5cFpyMDZQM1hYWUlPWXI1VzFa?=
- =?utf-8?B?b0dxSWpJQVRWTE9kWURNVjBNVFlKenR5bDRaUm9FVkYycUh2RndEWmVzdHBy?=
- =?utf-8?B?MG1LSmI2RG1PRjFrWjhSTE15cWxDYTF0Y0JOZnVVL2lIWllHL2xnRGgwV2Vw?=
- =?utf-8?B?VVh2emZJVktJY1pTZkhsV1ljK3dYVGlGRGFOSGZPMWp3NDViWHd4NjIwRVc0?=
- =?utf-8?B?Z21jNnRSZllhYU02Uit1TjNpTG5NbXl3SzFlZFN5NXR3K0Y3VVErbXFMZVht?=
- =?utf-8?B?a0hwVy84OTBURGhDS3o1b2lnNDVQU2VKZlpXRE9UTHZEK0RrRllnWURMYXA1?=
- =?utf-8?B?WFRvMGQwWVI2QUpyUWNWNVZHUnpSbFZKYXFTWVQyTjZOSUVKcitsOU1HZU5U?=
- =?utf-8?B?WG5aRWhuSGlCRFdjUVF4TGlZaUFoaHM0dmpOSmFpNFBOZHZOeXJoeW5pK1Fs?=
- =?utf-8?Q?VMDU=3D?=
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+ 15.20.8114.30; Mon, 4 Nov 2024 17:43:39 +0000
+Received: from SJ5PEPF000001D7.namprd05.prod.outlook.com
+ (2603:10b6:a03:59d:cafe::25) by BY1P220CA0003.outlook.office365.com
+ (2603:10b6:a03:59d::10) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8114.30 via Frontend
+ Transport; Mon, 4 Nov 2024 17:43:38 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
+Received: from SATLEXMB04.amd.com (165.204.84.17) by
+ SJ5PEPF000001D7.mail.protection.outlook.com (10.167.242.59) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.8137.17 via Frontend Transport; Mon, 4 Nov 2024 17:43:38 +0000
+Received: from SATLEXMB06.amd.com (10.181.40.147) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Mon, 4 Nov
+ 2024 11:43:37 -0600
+Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB06.amd.com
+ (10.181.40.147) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Mon, 4 Nov
+ 2024 11:43:37 -0600
+Received: from xhdsaipava41.xilinx.com (10.180.168.240) by SATLEXMB03.amd.com
+ (10.181.40.144) with Microsoft SMTP Server id 15.1.2507.39 via
+ Frontend Transport; Mon, 4 Nov 2024 11:43:33 -0600
+From: Sai Pavan Boddu <sai.pavan.boddu@amd.com>
+To: <qemu-devel@nongnu.org>, <qemu-riscv@nongnu.org>
+CC: Paolo Bonzini <pbonzini@redhat.com>, Palmer Dabbelt <palmer@dabbelt.com>, 
+ Bin Meng <bmeng.cn@gmail.com>, Weiwei Li <liwei1518@gmail.com>, "Daniel
+ Henrique Barboza" <dbarboza@ventanamicro.com>, Liu Zhiwei
+ <zhiwei_liu@linux.alibaba.com>, Michal Simek <michal.simek@amd.com>,
+ <sai.pavan.boddu@amd.com>, =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?=
+ <philmd@linaro.org>, Alistair Francis <alistair23@gmail.com>, "Francisco
+ Iglesias" <francisco.iglesias@amd.com>
+Subject: [PATCH v3] hw/riscv: Add Microblaze V generic board
+Date: Mon, 4 Nov 2024 23:13:28 +0530
+Message-ID: <20241104174328.383212-1-sai.pavan.boddu@amd.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SJ5PEPF000001D7:EE_|DM4PR12MB6232:EE_
+X-MS-Office365-Filtering-Correlation-Id: 910ab598-80cb-4124-244e-08dcfcf8370a
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|82310400026|1800799024|376014|7416014|36860700013; 
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?NFNIbW1mcE5hNFFtbmE0SE5SY2dHZ1JMWHhrcE1ycUdJQXdzb21MeHpGeVJU?=
+ =?utf-8?B?dUJyYzNRL1pIUWI4YnhHeVY4QXM2NEhjRlg1MkdJTDdlaUVVTzF5RjY0YWZ6?=
+ =?utf-8?B?RCtXaU05ODdDSFB0aFFNcHA4TDN0V1JONmw3bUhaUUExWDJiaE1HYkt3SVc2?=
+ =?utf-8?B?d1lGa1lTOWMxam9nMU1WUnJUbTRTNjhhUFQyT1FONFQ0VFN4MHNrUXVDNmVr?=
+ =?utf-8?B?YzJha01md3FacUJBenhEakYzU0dwM1lZTytWdjlGd2RZbkZUbEdMYStibTQ5?=
+ =?utf-8?B?a2lnZmVVcHVlL0t3TjV2WDJYNGZkeEMzVVhIVHdaczh0SmFDcmVwa1AxOElL?=
+ =?utf-8?B?VEVJc0IrVy9IclNBc1dzZzdvUmJYL3lLNENkZzA4Yk5KY2NydUU5UUw4ZVZQ?=
+ =?utf-8?B?dnhlZWN4TW5oZFhaUmlFZG9tQ1JEdHFOTHFZZi9HV2ZnVUw1ZG1XendHbVdu?=
+ =?utf-8?B?bTF2a0hQYVlBWnRSbHc2OUloM3lMNUt0T1V4RmFTa0RTektsbkcyUEM4dEpZ?=
+ =?utf-8?B?QzBUalJHY01hci96NlVhOHZYY0xsYVl4NmtXaFlIcW5aNzZRMnRGTHpaTmZ5?=
+ =?utf-8?B?eXE1WjRVbTRxb1hUaHAzSTJaY1huRXR1aE53UkJ3UjQyUnpxdENrY2tFNTJj?=
+ =?utf-8?B?a0V4M1BqaWFjU0h6eHFqcDE4UUZiUjdrT2JUS3RYWTZGWE9LU09lRE1hNXVw?=
+ =?utf-8?B?TUh5RDRsUTZwQ011eTQ3eHRnVStrVE5YQXk5bldSOWUrSC9xS0tsREVvakxT?=
+ =?utf-8?B?cGJ2bW5EK0I1S2NrZDRZdy9YN3J1UjNJWGlVanpoZWE2TUR5QXQ4U2lEWmlD?=
+ =?utf-8?B?a0tQaFVGdVVFbkNFdU5mN0k4QXdJUDdtVkFaaTBJWlNGbERCWXJZWkFKYXZj?=
+ =?utf-8?B?dnRYOFlEdUpZS1NST1F2bm40T1FiVnFQWDFJbUxYbURycm5kMG9wQ0ZZTEVv?=
+ =?utf-8?B?NXNtUnJhc01XNXJtOU1ycGd1aVdKZGJKZTNsSGZadzBPV1A5ZGFYV1hwUnRX?=
+ =?utf-8?B?NURNVm1lR2pXSEZxaEEvWkRIbVNWbU9zSzVON21lc3ZLTVY0YTRlekVVaUZa?=
+ =?utf-8?B?dVorUFJVdkNWOVVnZmRudUxaU0RHd2RWNVVPSjZwdCszMGcyQm5DQkQ1S25F?=
+ =?utf-8?B?Sm1IbUhOakorRzZjdGp3QTNQc0xCTlR3UWMwMk5EZXE0YU83STVBdysya2Iv?=
+ =?utf-8?B?Wjk5M3dJc3pkeTZwZEtyWkVxVDN3V3M4SUlEVDZJQlVPMlp5cnBYdHdNOC9H?=
+ =?utf-8?B?dzF3K2ZWZ2JrcEhhRE9pTnVkQmYyUkRFTlhuLzdiSnpxVHRaSkZoVExzKytt?=
+ =?utf-8?B?NlNoOUVtb2VmbnpaOFRRNi82TDkwVzErTlZHNTJzNU1SZ3VVN1VidGJNRk9I?=
+ =?utf-8?B?RWNvaGJxamVLOFNrekNSZm5MV21sM1ZwUDduYTl3ckNVVWF6cmIwbXU2L3px?=
+ =?utf-8?B?WnlrNmNOa3RRUXFEUlRtbHZOZGU3Qk4waE9wNUZLREJoYUFHY0VZRkM5OUQx?=
+ =?utf-8?B?bEVDand2U1pKY2tQMFdYYkVDMjk4eEIxeFkrajFkYnZETjdtQXhRVk5WeEZV?=
+ =?utf-8?B?NDVWVXZOWVJxajNrRHhSOWdNQ2RhaTVDbFhpY0I2Z09saEo1TGJQT3hoT0lI?=
+ =?utf-8?B?dlNsYVRxdmY1VVI1aXhhdndEalhacm1NcFlPQmxOY1VUMUNQZWpSMWZhWGFx?=
+ =?utf-8?B?dzVyNXdqc0JYTmJuYlQzZkNUbGcvV21zd2FOL0NiNk1ScjJZVXFLUTdueTQ2?=
+ =?utf-8?B?NGNKWU9Qc0JQL3RmZERvOERLaEhUS2QwN0ZVd1htNXg3Qm8rNGtXL1BuRjQr?=
+ =?utf-8?B?dktNdCtWK1ozNkZlZmJZQjVzTXRnQmtENVVCbUh2aGozWkdnTlVuQXZ5WGd1?=
+ =?utf-8?B?b094OWliL2lLRWh2R0o4SjNyTm9EeUhBRU5Zd2Jkdm1yeHc9PQ==?=
+X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(82310400026)(1800799024)(376014)(7416014)(36860700013); DIR:OUT;
+ SFP:1101; 
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: DS7PR12MB5741.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 5ae86b22-d869-4445-a3fe-08dcfcf79488
-X-MS-Exchange-CrossTenant-originalarrivaltime: 04 Nov 2024 17:39:05.8465 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: 42f1W923KfxB5ptoT9CYJpgBgcDkUgqsA+N8J0x9FnUvKwFLPDdNdkKyvltOBUKs
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS7PR12MB6144
-Received-SPF: permerror client-ip=2a01:111:f403:200a::62d;
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Nov 2024 17:43:38.4329 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 910ab598-80cb-4124-244e-08dcfcf8370a
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
+ Helo=[SATLEXMB04.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: SJ5PEPF000001D7.namprd05.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM4PR12MB6232
+Received-SPF: permerror client-ip=2a01:111:f403:2414::600;
  envelope-from=sai.pavan.boddu@amd.com;
- helo=NAM12-MW2-obe.outbound.protection.outlook.com
-X-Spam_score_int: -23
-X-Spam_score: -2.4
-X-Spam_bar: --
-X-Spam_report: (-2.4 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.34,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- SPF_HELO_PASS=-0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ helo=NAM11-BN8-obe.outbound.protection.outlook.com
+X-Spam_score_int: 1
+X-Spam_score: 0.1
+X-Spam_bar: /
+X-Spam_report: (0.1 / 5.0 requ) AC_FROM_MANY_DOTS=2.499, BAYES_00=-1.9,
+ DKIMWL_WL_HIGH=-0.34, DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1,
+ DKIM_VALID_EF=-0.1, SPF_HELO_PASS=-0.001, SPF_PASS=-0.001,
+ WEIRD_QUOTING=0.001 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -187,41 +161,356 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-VGhhbmtzIFBoaWwsIEkgd2lsbCBzZW5kIGEgdjMgZm9yIGZvbGxvdy11cC4NCg0KUmVnYXJkcywN
-ClNhaSBQYXZhbg0KDQo+LS0tLS1PcmlnaW5hbCBNZXNzYWdlLS0tLS0NCj5Gcm9tOiBQaGlsaXBw
-ZSBNYXRoaWV1LURhdWTDqSA8cGhpbG1kQGxpbmFyby5vcmc+DQo+U2VudDogVGh1cnNkYXksIE9j
-dG9iZXIgMzEsIDIwMjQgOTozMCBQTQ0KPlRvOiBTaW1laywgTWljaGFsIDxtaWNoYWwuc2ltZWtA
-YW1kLmNvbT47IEFsaXN0YWlyIEZyYW5jaXMNCj48YWxpc3RhaXIyM0BnbWFpbC5jb20+OyBCb2Rk
-dSwgU2FpIFBhdmFuIDxzYWkucGF2YW4uYm9kZHVAYW1kLmNvbT4NCj5DYzogcWVtdS1kZXZlbEBu
-b25nbnUub3JnOyBxZW11LXJpc2N2QG5vbmdudS5vcmc7IFBhb2xvIEJvbnppbmkNCj48cGJvbnpp
-bmlAcmVkaGF0LmNvbT47IFBhbG1lciBEYWJiZWx0IDxwYWxtZXJAZGFiYmVsdC5jb20+OyBBbGlz
-dGFpciBGcmFuY2lzDQo+PGFsaXN0YWlyLmZyYW5jaXNAd2RjLmNvbT47IEJpbiBNZW5nIDxibWVu
-Zy5jbkBnbWFpbC5jb20+OyBXZWl3ZWkgTGkNCj48bGl3ZWkxNTE4QGdtYWlsLmNvbT47IERhbmll
-bCBIZW5yaXF1ZSBCYXJib3phIDxkYmFyYm96YUB2ZW50YW5hbWljcm8uY29tPjsNCj5MaXUgWmhp
-d2VpIDx6aGl3ZWlfbGl1QGxpbnV4LmFsaWJhYmEuY29tPg0KPlN1YmplY3Q6IFJlOiBbUEFUQ0gg
-djJdIGh3L3Jpc2N2OiBBZGQgTWljcm9ibGF6ZSBWIDMyYml0IHZpcnQgYm9hcmQNCj4NCj5PbiAz
-MS8xMC8yNCAwNTo0MywgTWljaGFsIFNpbWVrIHdyb3RlOg0KPj4gSGksDQo+Pg0KPj4gT24gMTAv
-MzEvMjQgMDU6MDYsIFBoaWxpcHBlIE1hdGhpZXUtRGF1ZMOpIHdyb3RlOg0KPj4+IEhpIE1pY2hh
-bCwNCj4+Pg0KPj4+IE9uIDMwLzEwLzI0IDAyOjUzLCBNaWNoYWwgU2ltZWsgd3JvdGU6DQo+Pj4+
-IEhpIEFsaXN0YWlyLA0KPj4+Pg0KPj4+PiBPbiAxMC8zMC8yNCAwMzo1NCwgQWxpc3RhaXIgRnJh
-bmNpcyB3cm90ZToNCj4+Pj4+IE9uIFRodSwgT2N0IDE3LCAyMDI0IGF0IDU6MjbigK9QTSBTYWkg
-UGF2YW4gQm9kZHUNCj4+Pj4+IDxzYWkucGF2YW4uYm9kZHVAYW1kLmNvbT4gd3JvdGU6DQo+Pj4+
-DQo+Pj4+Pj4gZGlmZiAtLWdpdCBhL2h3L3Jpc2N2L21pY3JvYmxhemUtdi12aXJ0LmMNCj4+Pj4+
-PiBiL2h3L3Jpc2N2L21pY3JvYmxhemUtdi12aXJ0LmMgbmV3IGZpbGUgbW9kZSAxMDA2NDQgaW5k
-ZXgNCj4+Pj4+PiAwMDAwMDAwMDAwMC4uNjYwM2U2ZDZiMDYNCj4+Pj4+PiAtLS0gL2Rldi9udWxs
-DQo+Pj4+Pj4gKysrIGIvaHcvcmlzY3YvbWljcm9ibGF6ZS12LXZpcnQuYw0KPj4+Pj4+IEBAIC0w
-LDAgKzEsMTgxIEBADQo+Pj4+Pj4gKy8qDQo+Pj4+Pj4gKyAqIFFFTVUgbW9kZWwgb2YgTWljcm9i
-bGF6ZSBWICgzMmJpdCB2ZXJzaW9uKQ0KPj4+DQo+Pj4gSXMgdGhlcmUgYSA2NC1iaXQgbW9kZWwg
-cGxhbm5lZD8NCj4+DQo+PiBUaGlzIGd1aWRlIGlzIHRhbGtpbmcgYWJvdXQgNjRiaXQgdG9vDQo+
-PiBodHRwczovL2RvY3MuYW1kLmNvbS9yL2VuLVVTL3VnMTYyOS1taWNyb2JsYXplLXYtdXNlci1n
-dWlkZQ0KPg0KPlNhbWUgYm9hcmQsIGRpZmZlcmVudCBjb3JlIChzeW50aGVzaXplZCB3aXRoIENf
-REFUQV9TSVpFID0gNjQpLg0KPg0KPj4gSXQgbWVhbnMgYW5zd2VyIGlzIHllcy4gQW5kIHByZXR0
-eSBtdWNoIHRoaXMgZ2VuZXJpYyBtb2RlbCB3aXRoIHRoZQ0KPj4gc2FtZSBsYXlvdXQgc2hvdWxk
-IGJlIHBvc3NpYmxlIHRvIHVzZSB3aXRoIGdlbmVyaWMgNjRiaXQgdmVyc2lvbiB0b28uDQo+Pg0K
-Pj4gSSBleHBlY3QgdGhhdCBtZWFucyB0aGF0IGRlZmF1bHRfY3B1X3R5cGUgc2hvdWxkIGJlIFRZ
-UEVfUklTQ1ZfQ1BVX0JBU0UuDQo+PiBhbmQgS2NvbmZpZyBzaG91bGQgYmUgZXh0ZW5kZWQNCj4+
-ICvCoMKgwqAgZGVwZW5kcyBvbiBSSVNDVjMyIHx8IFJJU0NWNjQNCj4+DQo+PiBBbHNvIHNvbWUg
-c21hbGwgdXBkYXRlcyBpbiBkb2N1bWVudGF0aW9uIHRvIGNvdmVyIGl0Lg0KPj4NCj4+IElzIHRo
-ZXJlIHNvbWV0aGluZyBlbHNlIHdoYXQgc2hvdWxkIGJlIHVwZGF0ZWQ/DQo+DQo+Tm8gaXNzdWUs
-IEkgd2FzIGp1c3QgY2hlY2tpbmcuDQo+DQo+UmVnYXJkcywNCj4NCj5QaGlsLg0K
+Add a basic board with interrupt controller (intc), timer, serial
+(uartlite), small memory called LMB@0 (128kB) and DDR@0x80000000
+(configured via command line eg. -m 2g).
+This is basic configuration which matches HW generated out of AMD Vivado
+(design tools). But initial configuration is going beyond what it is
+configured by default because validation should be done on other
+configurations too. That's why wire also additional uart16500, axi
+ethernet(with axi dma).
+GPIOs, i2c and qspi is also listed for completeness.
+
+IRQ map is: (addr)
+0 - timer (0x41c00000)
+1 - uartlite (0x40600000)
+2 - i2c (0x40800000)
+3 - qspi (0x44a00000)
+4 - uart16550 (0x44a10000)
+5 - emaclite (0x40e00000)
+6 - timer2 (0x41c10000)
+7 - axi emac (0x40c00000)
+8 - axi dma (0x41e00000)
+9 - axi dma
+10 - gpio (0x40000000)
+11 - gpio2 (0x40010000)
+12 - gpio3 (0x40020000)
+
+Signed-off-by: Sai Pavan Boddu <sai.pavan.boddu@amd.com>
+Signed-off-by: Michal Simek <michal.simek@amd.com>
+Reviewed-by: Francisco Iglesias <francisco.iglesias@amd.com>
+---
+Changes for V2:
+    Make changes to support -cpu switch
+    Remove setting of default board
+    Include doc to toctree
+    Remove setting of 'imac' extensions as they are available by
+    default.
+Chages for V3:
+    Replace virt with generic
+    Update doc with supported riscv extensions
+    Change base CPU to TYPE_RISCV_CPU_BASE
+
+
+ MAINTAINERS                                |   6 +
+ docs/system/riscv/microblaze-v-generic.rst |  45 +++++
+ docs/system/target-riscv.rst               |   1 +
+ hw/riscv/microblaze-v-generic.c            | 182 +++++++++++++++++++++
+ hw/riscv/Kconfig                           |   8 +
+ hw/riscv/meson.build                       |   1 +
+ 6 files changed, 243 insertions(+)
+ create mode 100644 docs/system/riscv/microblaze-v-generic.rst
+ create mode 100644 hw/riscv/microblaze-v-generic.c
+
+diff --git a/MAINTAINERS b/MAINTAINERS
+index 03741d41e58..9830a46d819 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -1290,6 +1290,12 @@ M: Edgar E. Iglesias <edgar.iglesias@gmail.com>
+ S: Maintained
+ F: hw/microblaze/petalogix_ml605_mmu.c
+ 
++AMD Microblaze-V Generic Board
++M: Sai Pavan Boddu <sai.pavan.boddu@amd.com>
++S: Maintained
++F: hw/riscv/microblaze-v-generic.c
++F: docs/system/riscv/microblaze-v-generic.rst
++
+ MIPS Machines
+ -------------
+ Overall MIPS Machines
+diff --git a/docs/system/riscv/microblaze-v-generic.rst b/docs/system/riscv/microblaze-v-generic.rst
+new file mode 100644
+index 00000000000..71e9e655f66
+--- /dev/null
++++ b/docs/system/riscv/microblaze-v-generic.rst
+@@ -0,0 +1,45 @@
++Microblaze-V generic board (``amd-microblaze-v-generic``)
++=========================================================
++The AMD MicroBlaze™ V processor is a soft-core RISC-V processor IP for AMD adaptive SoCs and FPGAs.
++The MicroBlaze V processor is based on a 32-bit / 64-bit RISC-V instruction set architecture (ISA)
++and its fully hardware compatible with the classic MicroBlaze processor.
++
++More details here:
++https://docs.amd.com/r/en-US/ug1629-microblaze-v-user-guide/MicroBlaze-V-Architecture
++
++The microblaze-v generic board in QEMU has following supported devices
++
++Implemented CPU cores:
++
++1 RISCV core
++    * RV32I base integer instruction set
++    * "Zicsr" Control and Status register instructions
++    * "Zifencei" instruction-fetch
++    * Configurable features:
++      - RV64I Base Integer Instruction Set
++      - Extensions supported: M, A, C, F, Zba, Zbb, Zbc, Zbs
++
++Implemented devices:
++
++    - timer
++    - uartlite
++    - uart16550
++    - emaclite
++    - timer2
++    - axi emac
++    - axi dma
++
++Running
++"""""""
++Running U-boot
++
++.. code-block:: bash
++
++
++   $ qemu-system-riscv32 -M amd-microblaze-v-generic \
++     -display none \
++     -device loader,addr=0x80000000,file=u-boot-spl.bin,cpu-num=0 \
++     -device loader,addr=0x80200000,file=u-boot.img \
++     -serial mon:stdio \
++     -device loader,addr=0x83000000,file=system.dtb \
++     -m 2g
+diff --git a/docs/system/target-riscv.rst b/docs/system/target-riscv.rst
+index ba195f1518a..95457af130b 100644
+--- a/docs/system/target-riscv.rst
++++ b/docs/system/target-riscv.rst
+@@ -66,6 +66,7 @@ undocumented; you can get a complete list by running
+ .. toctree::
+    :maxdepth: 1
+ 
++   riscv/microblaze-v-generic
+    riscv/microchip-icicle-kit
+    riscv/shakti-c
+    riscv/sifive_u
+diff --git a/hw/riscv/microblaze-v-generic.c b/hw/riscv/microblaze-v-generic.c
+new file mode 100644
+index 00000000000..93d648f902b
+--- /dev/null
++++ b/hw/riscv/microblaze-v-generic.c
+@@ -0,0 +1,182 @@
++/*
++ * QEMU model of Microblaze V generic board.
++ *
++ * based on hw/microblaze/petalogix_ml605_mmu.c
++ *
++ * Copyright (c) 2011 Michal Simek <monstr@monstr.eu>
++ * Copyright (c) 2011 PetaLogix
++ * Copyright (c) 2009 Edgar E. Iglesias.
++ * Copyright (C) 2024, Advanced Micro Devices, Inc.
++ * SPDX-License-Identifier: GPL-2.0-or-later
++ *
++ * Written by Sai Pavan Boddu <sai.pavan.boddu@amd.com
++ *     and by Michal Simek <michal.simek@amd.com>.
++ */
++
++#include "qemu/osdep.h"
++#include "qemu/units.h"
++#include "qapi/error.h"
++#include "cpu.h"
++#include "hw/sysbus.h"
++#include "sysemu/sysemu.h"
++#include "net/net.h"
++#include "hw/boards.h"
++#include "hw/char/serial-mm.h"
++#include "exec/address-spaces.h"
++#include "hw/char/xilinx_uartlite.h"
++#include "hw/misc/unimp.h"
++
++#define LMB_BRAM_SIZE (128 * KiB)
++#define MEMORY_BASEADDR 0x80000000
++#define INTC_BASEADDR 0x41200000
++#define TIMER_BASEADDR 0x41c00000
++#define TIMER_BASEADDR2 0x41c10000
++#define UARTLITE_BASEADDR 0x40600000
++#define ETHLITE_BASEADDR 0x40e00000
++#define UART16550_BASEADDR 0x44a10000
++#define AXIENET_BASEADDR 0x40c00000
++#define AXIDMA_BASEADDR 0x41e00000
++#define GPIO_BASEADDR 0x40000000
++#define GPIO_BASEADDR2 0x40010000
++#define GPIO_BASEADDR3 0x40020000
++#define I2C_BASEADDR 0x40800000
++#define QSPI_BASEADDR 0x44a00000
++
++#define TIMER_IRQ           0
++#define UARTLITE_IRQ        1
++#define UART16550_IRQ       4
++#define ETHLITE_IRQ         5
++#define TIMER_IRQ2          6
++#define AXIENET_IRQ         7
++#define AXIDMA_IRQ1         8
++#define AXIDMA_IRQ0         9
++
++static void mb_v_generic_init(MachineState *machine)
++{
++    ram_addr_t ram_size = machine->ram_size;
++    DeviceState *dev, *dma, *eth0;
++    Object *ds, *cs;
++    int i;
++    RISCVCPU *cpu;
++    hwaddr ddr_base = MEMORY_BASEADDR;
++    MemoryRegion *phys_lmb_bram = g_new(MemoryRegion, 1);
++    MemoryRegion *phys_ram = g_new(MemoryRegion, 1);
++    qemu_irq irq[32];
++    MemoryRegion *sysmem = get_system_memory();
++
++    cpu = RISCV_CPU(object_new(machine->cpu_type));
++    qdev_realize(DEVICE(cpu), NULL, &error_abort);
++    /* Attach emulated BRAM through the LMB.  */
++    memory_region_init_ram(phys_lmb_bram, NULL,
++                           "mb_v.lmb_bram", LMB_BRAM_SIZE,
++                           &error_fatal);
++    memory_region_add_subregion(sysmem, 0x00000000, phys_lmb_bram);
++
++    memory_region_init_ram(phys_ram, NULL, "mb_v.ram",
++                           ram_size, &error_fatal);
++    memory_region_add_subregion(sysmem, ddr_base, phys_ram);
++
++    dev = qdev_new("xlnx.xps-intc");
++    qdev_prop_set_uint32(dev, "kind-of-intr",
++                         1 << UARTLITE_IRQ);
++    sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
++    sysbus_mmio_map(SYS_BUS_DEVICE(dev), 0, INTC_BASEADDR);
++    sysbus_connect_irq(SYS_BUS_DEVICE(dev), 0,
++                       qdev_get_gpio_in(DEVICE(cpu), 11));
++    for (i = 0; i < 32; i++) {
++        irq[i] = qdev_get_gpio_in(dev, i);
++    }
++
++    /* Uartlite */
++    dev = qdev_new(TYPE_XILINX_UARTLITE);
++    qdev_prop_set_chr(dev, "chardev", serial_hd(0));
++    sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
++    sysbus_mmio_map(SYS_BUS_DEVICE(dev), 0, UARTLITE_BASEADDR);
++    sysbus_connect_irq(SYS_BUS_DEVICE(dev), 0, irq[UARTLITE_IRQ]);
++
++    /* Full uart */
++    serial_mm_init(sysmem, UART16550_BASEADDR + 0x1000, 2,
++                   irq[UART16550_IRQ], 115200, serial_hd(1),
++                   DEVICE_LITTLE_ENDIAN);
++
++    /* 2 timers at irq 0 @ 100 Mhz.  */
++    dev = qdev_new("xlnx.xps-timer");
++    qdev_prop_set_uint32(dev, "one-timer-only", 0);
++    qdev_prop_set_uint32(dev, "clock-frequency", 100000000);
++    sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
++    sysbus_mmio_map(SYS_BUS_DEVICE(dev), 0, TIMER_BASEADDR);
++    sysbus_connect_irq(SYS_BUS_DEVICE(dev), 0, irq[TIMER_IRQ]);
++
++    /* 2 timers at irq 3 @ 100 Mhz.  */
++    dev = qdev_new("xlnx.xps-timer");
++    qdev_prop_set_uint32(dev, "one-timer-only", 0);
++    qdev_prop_set_uint32(dev, "clock-frequency", 100000000);
++    sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
++    sysbus_mmio_map(SYS_BUS_DEVICE(dev), 0, TIMER_BASEADDR2);
++    sysbus_connect_irq(SYS_BUS_DEVICE(dev), 0, irq[TIMER_IRQ2]);
++
++    /* Emaclite */
++    dev = qdev_new("xlnx.xps-ethernetlite");
++    qemu_configure_nic_device(dev, true, NULL);
++    qdev_prop_set_uint32(dev, "tx-ping-pong", 0);
++    qdev_prop_set_uint32(dev, "rx-ping-pong", 0);
++    sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
++    sysbus_mmio_map(SYS_BUS_DEVICE(dev), 0, ETHLITE_BASEADDR);
++    sysbus_connect_irq(SYS_BUS_DEVICE(dev), 0, irq[ETHLITE_IRQ]);
++
++    /* axi ethernet and dma initialization. */
++    eth0 = qdev_new("xlnx.axi-ethernet");
++    dma = qdev_new("xlnx.axi-dma");
++
++    /* FIXME: attach to the sysbus instead */
++    object_property_add_child(qdev_get_machine(), "xilinx-eth", OBJECT(eth0));
++    object_property_add_child(qdev_get_machine(), "xilinx-dma", OBJECT(dma));
++
++    ds = object_property_get_link(OBJECT(dma),
++                                  "axistream-connected-target", NULL);
++    cs = object_property_get_link(OBJECT(dma),
++                                  "axistream-control-connected-target", NULL);
++    qemu_configure_nic_device(eth0, true, NULL);
++    qdev_prop_set_uint32(eth0, "rxmem", 0x1000);
++    qdev_prop_set_uint32(eth0, "txmem", 0x1000);
++    object_property_set_link(OBJECT(eth0), "axistream-connected", ds,
++                             &error_abort);
++    object_property_set_link(OBJECT(eth0), "axistream-control-connected", cs,
++                             &error_abort);
++    sysbus_realize_and_unref(SYS_BUS_DEVICE(eth0), &error_fatal);
++    sysbus_mmio_map(SYS_BUS_DEVICE(eth0), 0, AXIENET_BASEADDR);
++    sysbus_connect_irq(SYS_BUS_DEVICE(eth0), 0, irq[AXIENET_IRQ]);
++
++    ds = object_property_get_link(OBJECT(eth0),
++                                  "axistream-connected-target", NULL);
++    cs = object_property_get_link(OBJECT(eth0),
++                                  "axistream-control-connected-target", NULL);
++    qdev_prop_set_uint32(dma, "freqhz", 100000000);
++    object_property_set_link(OBJECT(dma), "axistream-connected", ds,
++                             &error_abort);
++    object_property_set_link(OBJECT(dma), "axistream-control-connected", cs,
++                             &error_abort);
++    sysbus_realize_and_unref(SYS_BUS_DEVICE(dma), &error_fatal);
++    sysbus_mmio_map(SYS_BUS_DEVICE(dma), 0, AXIDMA_BASEADDR);
++    sysbus_connect_irq(SYS_BUS_DEVICE(dma), 0, irq[AXIDMA_IRQ0]);
++    sysbus_connect_irq(SYS_BUS_DEVICE(dma), 1, irq[AXIDMA_IRQ1]);
++
++    /* unimplemented devices */
++    create_unimplemented_device("gpio", GPIO_BASEADDR, 0x10000);
++    create_unimplemented_device("gpio2", GPIO_BASEADDR2, 0x10000);
++    create_unimplemented_device("gpio3", GPIO_BASEADDR3, 0x10000);
++    create_unimplemented_device("i2c", I2C_BASEADDR, 0x10000);
++    create_unimplemented_device("qspi", QSPI_BASEADDR, 0x10000);
++}
++
++static void mb_v_generic_machine_init(MachineClass *mc)
++{
++    mc->desc = "AMD Microblaze-V generic platform";
++    mc->init = mb_v_generic_init;
++    mc->min_cpus = 1;
++    mc->max_cpus = 1;
++    mc->default_cpu_type = TYPE_RISCV_CPU_BASE;
++    mc->default_cpus = 1;
++}
++
++DEFINE_MACHINE("amd-microblaze-v-generic", mb_v_generic_machine_init)
+diff --git a/hw/riscv/Kconfig b/hw/riscv/Kconfig
+index 2e88467c4ab..e6a0ac1fa1d 100644
+--- a/hw/riscv/Kconfig
++++ b/hw/riscv/Kconfig
+@@ -25,6 +25,14 @@ config MICROCHIP_PFSOC
+     select SIFIVE_PLIC
+     select UNIMP
+ 
++config MICROBLAZE_V
++    bool
++    default y
++    depends on RISCV32 || RISCV64
++    select XILINX
++    select XILINX_AXI
++    select XILINX_ETHLITE
++
+ config OPENTITAN
+     bool
+     default y
+diff --git a/hw/riscv/meson.build b/hw/riscv/meson.build
+index adbef8a9b2d..140bcb55d64 100644
+--- a/hw/riscv/meson.build
++++ b/hw/riscv/meson.build
+@@ -11,5 +11,6 @@ riscv_ss.add(when: 'CONFIG_SPIKE', if_true: files('spike.c'))
+ riscv_ss.add(when: 'CONFIG_MICROCHIP_PFSOC', if_true: files('microchip_pfsoc.c'))
+ riscv_ss.add(when: 'CONFIG_ACPI', if_true: files('virt-acpi-build.c'))
+ riscv_ss.add(when: 'CONFIG_RISCV_IOMMU', if_true: files('riscv-iommu.c', 'riscv-iommu-pci.c'))
++riscv_ss.add(when: 'CONFIG_MICROBLAZE_V', if_true: files('microblaze-v-generic.c'))
+ 
+ hw_arch += {'riscv': riscv_ss}
+-- 
+2.34.1
+
 
