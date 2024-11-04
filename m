@@ -4,70 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BC0C5D1BDC3
-	for <qemu-riscv@archiver.kernel.org>; Mon,  4 Nov 2024 16:36:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4FA03D1BDC5
+	for <qemu-riscv@archiver.kernel.org>; Mon,  4 Nov 2024 16:39:36 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1t8036-0007qk-96; Mon, 04 Nov 2024 11:35:28 -0500
+	id 1t806W-0000kV-8P; Mon, 04 Nov 2024 11:39:00 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1t8033-0007q3-TP
- for qemu-riscv@nongnu.org; Mon, 04 Nov 2024 11:35:25 -0500
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1t8032-0002zu-5q
- for qemu-riscv@nongnu.org; Mon, 04 Nov 2024 11:35:25 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1730738121;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=/48wIK5DE80qGmqw0yIE/LG8E3OVVASTxKv9PepSHdI=;
- b=S9lgqh1/IdDcDcnVfi609RzeubCXdIDjOkC/XBJLPCBfTVcqNgdD+vOGXFQbgIBwkF1WGR
- 9rQLVFkOHk6WF7SskXMBDoirPZ3WsuPSmWekh7v50ZMg/FLDRJZ+b5sUJhGATbfkJMzRB7
- erml+E4EyuL07jqvWw1Oe2UxsL7WNcE=
-Received: from mx-prod-mc-03.mail-002.prod.us-west-2.aws.redhat.com
- (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
- relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-587-L2dr0qugPVmv6S8XjEBABg-1; Mon,
- 04 Nov 2024 11:35:17 -0500
-X-MC-Unique: L2dr0qugPVmv6S8XjEBABg-1
-Received: from mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com
- (mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.12])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by mx-prod-mc-03.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id 4B2011956064; Mon,  4 Nov 2024 16:35:16 +0000 (UTC)
-Received: from thuth-p1g4.redhat.com (unknown [10.39.193.126])
- by mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
- id D6ADB19560A2; Mon,  4 Nov 2024 16:35:10 +0000 (UTC)
-From: Thomas Huth <thuth@redhat.com>
-To: Alistair Francis <Alistair.Francis@wdc.com>, Bin Meng <bmeng.cn@gmail.com>,
- Palmer Dabbelt <palmer@dabbelt.com>, qemu-riscv@nongnu.org
-Cc: =?UTF-8?q?Marc-Andr=C3=A9=20Lureau?= <marcandre.lureau@redhat.com>,
- Paolo Bonzini <pbonzini@redhat.com>, qemu-devel@nongnu.org,
- qemu-trivial@nongnu.org,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Thomas Huth <thuth@redhat.com>
-Subject: [PATCH] hw/char/sifive_uart: Fix broken UART on big endian hosts
-Date: Mon,  4 Nov 2024 17:35:04 +0100
-Message-ID: <20241104163504.305955-1-thuth@redhat.com>
+ (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
+ id 1t806P-0000jp-Qz
+ for qemu-riscv@nongnu.org; Mon, 04 Nov 2024 11:38:55 -0500
+Received: from mail-wr1-x434.google.com ([2a00:1450:4864:20::434])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
+ id 1t806N-0003C1-9U
+ for qemu-riscv@nongnu.org; Mon, 04 Nov 2024 11:38:53 -0500
+Received: by mail-wr1-x434.google.com with SMTP id
+ ffacd0b85a97d-37d447de11dso3525068f8f.1
+ for <qemu-riscv@nongnu.org>; Mon, 04 Nov 2024 08:38:50 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1730738329; x=1731343129; darn=nongnu.org;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=fXdY23zSMIOxlisonKVew/D+w5UQnBSolsTL3tXLl+o=;
+ b=Xw7SgvD6Bj5ovIy51e73/fCB52dYDxUgD6arPn8dMerminCNUx0vfox5syuuar5ROy
+ B0SNrnt9/ExgwzVLPDl0GplM+T7tuhjRPBI3DAeI9xjZZe7o7zzLloUTZ0j9aV3WNPaC
+ MlVaUsG5zTcssIlacmyXi/pb440U9VhhdVJZhYOQ1D2xnRZnBayG+rd6W31AOloCpONo
+ FDT6SrnxHux8hjnWt+xjcjkDX7wv04vLzrsg5zNQ4XNld/qOBrqbGFE/ZBOfFyJesYpg
+ xPY6igYZGcUr8p0zpqH8dmZpabQL30T7uHEHbYJ28KhhwvdhmPqYQ5ljOxB63ieUuVj5
+ f8Lg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1730738329; x=1731343129;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=fXdY23zSMIOxlisonKVew/D+w5UQnBSolsTL3tXLl+o=;
+ b=SAu9setOvjwE3YYwXFUk20WDV7rQPbG5Hqe9ug+HX9VBgn6/KhUPM/yuzJ69ufdXm9
+ X1UD7IBMzZOBF36138g4WY57czjKsqX6/wb2LlkroHzVXHNLK/Vb8xUIjSa8F+QOY5iH
+ g3TbnKGVkF/qvHHhFFB0u9QpJZIrbqRi0/Dl/pygzmfUch6hFWL/GiEcLE4YXh6kQJoa
+ EShVWEWihVaV8JVOPC87eYn+VJ8JzpgHEp2hDuWoNII+CZDSrzG8LoKQo1u3tRKa+6ts
+ 93JG7XdPwacOWt+qbNZBbkr6DY8NfygVcbKmC9XVBk7Va2lyKmWbIVMAG7nL6aUfFbI8
+ IvSA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCU2SUSF+iwfSt+M9s/Zv3ISXBbI1nCr48k3XfCZp4pvIHY0MzOW11bJnloeeIshRmItu/DCgU3hHEN6@nongnu.org
+X-Gm-Message-State: AOJu0YwhkUptuH7EZ9lwZp19hjQ/6yLJ7JH4a2NNP/jLmE5Xbg92c2wk
+ LQy/Fg0ULmzECIQrIt1k119ogj3syBFqenKx74YdAz9RGLB1GrUaWKfEXBqILrYKArTdtAC7o1y
+ F2DbeikNbX2nfM+3EbUOxty97TZIv1R/i/U6rtw==
+X-Google-Smtp-Source: AGHT+IGsR7nnVO5svFFhdHh94HtSd/pkYdD8et1+URk6CDOu917YA6x1iDZVy5BMf96keIQQ1JD2/ZlSoPTrP3NQim4=
+X-Received: by 2002:a05:6000:1446:b0:37d:52db:a0a7 with SMTP id
+ ffacd0b85a97d-381be7adcf9mr12674763f8f.2.1730738328924; Mon, 04 Nov 2024
+ 08:38:48 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Scanned-By: MIMEDefang 3.0 on 10.30.177.12
-Received-SPF: pass client-ip=170.10.129.124; envelope-from=thuth@redhat.com;
- helo=us-smtp-delivery-124.mimecast.com
-X-Spam_score_int: -23
-X-Spam_score: -2.4
+References: <20241104163504.305955-1-thuth@redhat.com>
+In-Reply-To: <20241104163504.305955-1-thuth@redhat.com>
+From: Peter Maydell <peter.maydell@linaro.org>
+Date: Mon, 4 Nov 2024 16:38:37 +0000
+Message-ID: <CAFEAcA9RjN+bZ4PWMBwrF7GosKpWg=oVyHb7kfK0anW2a4Ww3g@mail.gmail.com>
+Subject: Re: [PATCH] hw/char/sifive_uart: Fix broken UART on big endian hosts
+To: Thomas Huth <thuth@redhat.com>
+Cc: Alistair Francis <Alistair.Francis@wdc.com>, Bin Meng <bmeng.cn@gmail.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>, qemu-riscv@nongnu.org, 
+ =?UTF-8?B?TWFyYy1BbmRyw6kgTHVyZWF1?= <marcandre.lureau@redhat.com>, 
+ Paolo Bonzini <pbonzini@redhat.com>, qemu-devel@nongnu.org,
+ qemu-trivial@nongnu.org, 
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@linaro.org>
+Content-Type: text/plain; charset="UTF-8"
+Received-SPF: pass client-ip=2a00:1450:4864:20::434;
+ envelope-from=peter.maydell@linaro.org; helo=mail-wr1-x434.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
 X-Spam_bar: --
-X-Spam_report: (-2.4 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.34,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H2=-0.001,
- RCVD_IN_VALIDITY_CERTIFIED_BLOCKED=0.001, RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -83,34 +95,21 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Casting a "uint32_t *" to a "uint8_t *" to get to the lowest 8-bit
-part of the value does not work on big endian hosts. We've got to
-take the proper detour through an 8-bit variable.
+On Mon, 4 Nov 2024 at 16:35, Thomas Huth <thuth@redhat.com> wrote:
+>
+> Casting a "uint32_t *" to a "uint8_t *" to get to the lowest 8-bit
+> part of the value does not work on big endian hosts. We've got to
+> take the proper detour through an 8-bit variable.
+>
+> Fixes: 53c1557b23 ("hw/char: sifive_uart: Print uart characters async")
+> Signed-off-by: Thomas Huth <thuth@redhat.com>
+> ---
+>  hw/char/sifive_uart.c | 3 ++-
+>  1 file changed, 2 insertions(+), 1 deletion(-)
+>
 
-Fixes: 53c1557b23 ("hw/char: sifive_uart: Print uart characters async")
-Signed-off-by: Thomas Huth <thuth@redhat.com>
----
- hw/char/sifive_uart.c | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+Reviewed-by: Peter Maydell <peter.maydell@linaro.org>
 
-diff --git a/hw/char/sifive_uart.c b/hw/char/sifive_uart.c
-index aeb45d3601..5ae2a29ed6 100644
---- a/hw/char/sifive_uart.c
-+++ b/hw/char/sifive_uart.c
-@@ -174,10 +174,11 @@ sifive_uart_write(void *opaque, hwaddr addr,
- {
-     SiFiveUARTState *s = opaque;
-     uint32_t value = val64;
-+    uint8_t ch = value;
- 
-     switch (addr) {
-     case SIFIVE_UART_TXFIFO:
--        sifive_uart_write_tx_fifo(s, (uint8_t *) &value, 1);
-+        sifive_uart_write_tx_fifo(s, &ch, 1);
-         return;
-     case SIFIVE_UART_IE:
-         s->ie = val64;
--- 
-2.47.0
-
+thanks
+-- PMM
 
