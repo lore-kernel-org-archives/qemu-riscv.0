@@ -4,94 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BCCD3D11100
-	for <qemu-riscv@archiver.kernel.org>; Sun,  3 Nov 2024 15:11:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EF512D132AF
+	for <qemu-riscv@archiver.kernel.org>; Mon,  4 Nov 2024 11:15:28 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1t7c6u-0000aX-13; Sun, 03 Nov 2024 10:01:48 -0500
+	id 1t7v3A-0000e3-Vb; Mon, 04 Nov 2024 06:15:17 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <phil@philjordan.eu>)
- id 1t7c6G-0008Ly-Vc
- for qemu-riscv@nongnu.org; Sun, 03 Nov 2024 10:01:09 -0500
-Received: from mail-ej1-x62f.google.com ([2a00:1450:4864:20::62f])
+ (Exim 4.90_1) (envelope-from <yongxuan.wang@sifive.com>)
+ id 1t7v2v-0000dO-3a
+ for qemu-riscv@nongnu.org; Mon, 04 Nov 2024 06:14:57 -0500
+Received: from mail-oi1-x231.google.com ([2607:f8b0:4864:20::231])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <phil@philjordan.eu>)
- id 1t7c6D-0006Zl-Eb
- for qemu-riscv@nongnu.org; Sun, 03 Nov 2024 10:01:08 -0500
-Received: by mail-ej1-x62f.google.com with SMTP id
- a640c23a62f3a-a9932aa108cso553371666b.2
- for <qemu-riscv@nongnu.org>; Sun, 03 Nov 2024 07:01:04 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <yongxuan.wang@sifive.com>)
+ id 1t7v2t-0006FR-4x
+ for qemu-riscv@nongnu.org; Mon, 04 Nov 2024 06:14:56 -0500
+Received: by mail-oi1-x231.google.com with SMTP id
+ 5614622812f47-3e5f9712991so1843782b6e.2
+ for <qemu-riscv@nongnu.org>; Mon, 04 Nov 2024 03:14:53 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=philjordan-eu.20230601.gappssmtp.com; s=20230601; t=1730646063; x=1731250863;
- darn=nongnu.org; 
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ d=sifive.com; s=google; t=1730718893; x=1731323693; darn=nongnu.org;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=oRS+0IKfHz5Oswaa/GcDCGPOKlj/D3aQAGpgmUVuXww=;
- b=f9JcbskxuKCpPTMkGlbW+MpgllNBl4qnuEXMYJ1Z8jWctFPrqZVWuxubbEVjm3R2kK
- 6Xfddy5Sc2i4B4fe1/qKxx80HWNanE/vOoLx3RkTp4yQix+5s4QAaSlt1247rR6eAr4T
- lXm64GGtxQdzr+AUoKizgxZxULH9lZ6m/OVpVOLk0ls9lcdwkeDLBYq7jAYKz0yFktm+
- Qnp5Uz58d/qjTmc+NK1hucxI/HoVoDfpNt986HcZl9RJv+lUFdDl5EiiWdJ0/KAs3KV0
- tH0F005YGHp+QBcQp8Ix22jYGR3wGa8B2o9x8PAM5EJ+JYY1TLoftSSW39rX1lYtfgsg
- zN+Q==
+ bh=mtozNNuiFFFi4w1Zy1O7+ZhWvqKX2dDJF9x7QvW1LtQ=;
+ b=Fwmzv4Y6jxfBG1crQxKtmnxPT5h25fqeGPbJzTbCPePIdTd0qSNvS1dLjYNEZIdiOz
+ B/2vOtaRUO/SUXm1wqjiCg+7NOUSUkkWTeBNkgr+523AepQiY2acGnopm9Y9VUGG3Bqp
+ V1ndf2Zq90DiY7uaw8hS81GUV8I/ELQg/LuNgYcShzymFvviB+fdEa0zJ26mp8bbGpVS
+ betbV/3QLIScSlQOM5KJQwYEjX4uUd0vTGx7k8b3veIe6fb9cLpiJdjDXim7YyvFZMxv
+ Dyno0X21PjRs90qSYTqJSgEYT05ZlD/tuDPTV2bH0h3JYUAO4H/IyHMn0QL487pMNhcu
+ HxBw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1730646063; x=1731250863;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ d=1e100.net; s=20230601; t=1730718893; x=1731323693;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=oRS+0IKfHz5Oswaa/GcDCGPOKlj/D3aQAGpgmUVuXww=;
- b=iL1bp/0wjqi0G43sgcQuKJGzl4ALHpZxAI2vNdwaB2n5+1XidHmhRfNJMNVGws5HYt
- 9n0Ef49QTBPZ3kmgEA/pqPprIaurwHfA6fVLfM/rSAB+JLmc6HsT9fdxIl7Xe7zD4mQf
- iTLz22VrEYvRIzMumZIobEqE1a9K4WB3n4bn1FFV8Jd8K5sCd6NcRiMTDrTkvbpkn/+m
- xtqqBPTL2dltU+f+mkCESfh9caLDuU6LPpdxy2WTRam/Biha8GzmMtRcfmpZM4QuCvoI
- 73jzU4oV4+CN7R4O0/xkwDv5BVY+kJiTNmIDje5cc0eM1J7b5WKi6NqMHkcLm/CLnowB
- rAUA==
+ bh=mtozNNuiFFFi4w1Zy1O7+ZhWvqKX2dDJF9x7QvW1LtQ=;
+ b=JvKlz/LCuFQYC4iYM6O55PKtzpUzszjfFsu/yIfT5FtDAc72McXm9svQYqSSCrSHaD
+ uX1DEgbZWxks3guJffZ8S2MeRYlzhJwrd5Hh/qyy6tGOhn7WnEYBOVFdNd4o2DKIB38q
+ hGppglIKskbU7rG38nOVEwuHdnnSPlzwFyGcqWhT6KX3FCvv0Org6q34DvQUZmPU3lyP
+ 2TzR+mLKcFiciu74+ZWOY+TC8/AHrV+AiWkvwnpCpDiyClznhoe801qRs8lslmYbXXLx
+ MP3PjMsqGUcC87QYK1xqWJFNcTuaN4o5/4LErFiuGe9mpVRBYcPgBfUUFB14Y+ANB6N3
+ jOLg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVHkx3Rp5kEbCJE/bPH3yD50DcK7QwrCyEpGhtPkjvWg/Ralmm9/a/oiyk3pi6ueSbGdqDVtIgg4+NX@nongnu.org
-X-Gm-Message-State: AOJu0YxTXkUEN0FUR9Ottmr8OJKL4QDgF04mcBdP4c+/V9IXYdqhFWQo
- cGmDBbG+0wQeDQtthr+51taDky3dhDSNzPXN/SgGMjqZWpZnE9e2APslrDuQyg==
-X-Google-Smtp-Source: AGHT+IEA77YTmspSPvaZXaWsKtggXQiIKNUxgFCduqYtzRsz+SS4LIxOe1gmYlEH2RwDRfp3l7mfFQ==
-X-Received: by 2002:a17:907:7214:b0:a9a:10c9:f4b8 with SMTP id
- a640c23a62f3a-a9e50cb736fmr1191317366b.61.1730646061853; 
- Sun, 03 Nov 2024 07:01:01 -0800 (PST)
-Received: from localhost.localdomain (h082218084190.host.wavenet.at.
- [82.218.84.190]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a9e5664350esm431536666b.159.2024.11.03.07.01.00
- (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Sun, 03 Nov 2024 07:01:01 -0800 (PST)
-From: Phil Dennis-Jordan <phil@philjordan.eu>
-To: qemu-devel@nongnu.org
-Cc: agraf@csgraf.de, phil@philjordan.eu, peter.maydell@linaro.org,
- pbonzini@redhat.com, rad@semihalf.com, quic_llindhol@quicinc.com,
- marcin.juszkiewicz@linaro.org, stefanha@redhat.com, mst@redhat.com,
- slp@redhat.com, richard.henderson@linaro.org, eduardo@habkost.net,
- marcel.apfelbaum@gmail.com, gaosong@loongson.cn, jiaxun.yang@flygoat.com,
- chenhuacai@kernel.org, kwolf@redhat.com, hreitz@redhat.com,
- philmd@linaro.org, shorne@gmail.com, palmer@dabbelt.com,
- alistair.francis@wdc.com, bmeng.cn@gmail.com, liwei1518@gmail.com,
- dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com,
- jcmvbkbc@gmail.com, marcandre.lureau@redhat.com, berrange@redhat.com,
- akihiko.odaki@daynix.com, qemu-arm@nongnu.org, qemu-block@nongnu.org,
- qemu-riscv@nongnu.org, Alexander Graf <graf@amazon.com>
-Subject: [PATCH v6 07/15] hw/misc/pvpanic: Add MMIO interface
-Date: Sun,  3 Nov 2024 16:00:29 +0100
-Message-Id: <20241103150037.48194-8-phil@philjordan.eu>
-X-Mailer: git-send-email 2.39.3 (Apple Git-145)
-In-Reply-To: <20241103150037.48194-1-phil@philjordan.eu>
-References: <20241103150037.48194-1-phil@philjordan.eu>
+ AJvYcCWcZ7rDiSnfdImE8bjqepT16t/gRWuwMnRiStjBpQEqRnaV/7nqVYdgP0f9EXjeC4honylqD0c99MRf@nongnu.org
+X-Gm-Message-State: AOJu0YxCRbSv54cXgNBSJzQF+gtyy3AO7BsGIDqsC7DDWSkFPtUS3nEV
+ 20oLcDmMfA+bt+BnV4PqgfCSUFr+cwC55ho2D7eYtR7T6BecU+sXBmZj2Ef8KP6VdQvjJ4/WnpA
+ kulWl5BOFs+owt+3CzytAGfitdJVm6aFr+2ttHA==
+X-Google-Smtp-Source: AGHT+IGE02lxffNu2taMIzdnd0qEj5C04JjiZgKoi0zh6SWwXPFQ2MbFQp30MvFDf/by+cfjtROl9MSEouhwE6hVXU8=
+X-Received: by 2002:a05:6871:283:b0:288:2b43:e0e3 with SMTP id
+ 586e51a60fabf-2949efafdaemr9274980fac.35.1730718893049; Mon, 04 Nov 2024
+ 03:14:53 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-Received-SPF: neutral client-ip=2a00:1450:4864:20::62f;
- envelope-from=phil@philjordan.eu; helo=mail-ej1-x62f.google.com
-X-Spam_score_int: -10
-X-Spam_score: -1.1
-X-Spam_bar: -
-X-Spam_report: (-1.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_NEUTRAL=0.779 autolearn=no autolearn_force=no
+References: <20241101083606.5122-1-yongxuan.wang@sifive.com>
+ <8ec6e960-8305-456c-b8f9-4c0dd14e51ff@ventanamicro.com>
+ <20241101-6ada91d63644e8d715b1cf35@orel>
+In-Reply-To: <20241101-6ada91d63644e8d715b1cf35@orel>
+From: Yong-Xuan Wang <yongxuan.wang@sifive.com>
+Date: Mon, 4 Nov 2024 19:14:42 +0800
+Message-ID: <CAMWQL2hwDZdB9TmHF4=krzrUa1_=P78aBYt6nJddGZxMjk702A@mail.gmail.com>
+Subject: Re: [PATCH 1/1] hw/riscv: virt: prevent to use AIA MSI when host
+ doesn't support it
+To: Andrew Jones <ajones@ventanamicro.com>
+Cc: Daniel Henrique Barboza <dbarboza@ventanamicro.com>, qemu-devel@nongnu.org,
+ qemu-riscv@nongnu.org, 
+ greentime.hu@sifive.com, vincent.chen@sifive.com, frank.chang@sifive.com, 
+ jim.shu@sifive.com, Palmer Dabbelt <palmer@dabbelt.com>, 
+ Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bmeng.cn@gmail.com>, 
+ Weiwei Li <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2607:f8b0:4864:20::231;
+ envelope-from=yongxuan.wang@sifive.com; helo=mail-oi1-x231.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -107,134 +99,105 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Alexander Graf <graf@amazon.com>
+Hi Daniel and Andrew,
 
-In addition to the ISA and PCI variants of pvpanic, let's add an MMIO
-platform device that we can use in embedded arm environments.
+When handling an external interrupt via IMSIC, we need to use the stopei CS=
+R
+to claim the top interrupt. Even though the QEMU can emulate the IMSIC devi=
+ces
+without the in-kernel irqchip, we still need to trap and emulate the stopei
+CSR. But since the host machine doesn't support the AIA extension, the gues=
+t OS
+will hit the illegal instruction exception instead of the virutal instructi=
+on
+exception when it accesses the stopei CSR. We can't have a chance to redire=
+ct
+this instruction to QEMU. So I think we can directly report errors when the
+user wants to use KVM AIA(MSI) without in-kernel AIA irqchip support.
 
-Signed-off-by: Alexander Graf <graf@amazon.com>
-Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
-Tested-by: Philippe Mathieu-Daudé <philmd@linaro.org>
-Signed-off-by: Phil Dennis-Jordan <phil@philjordan.eu>
-Reviewed-by: Akihiko Odaki <akihiko.odaki@daynix.com>
----
-v3:
+Regards,
+Yong-Xuan
 
- * Rebased on upstream, updated a header path
- hw/misc/Kconfig           |  4 +++
- hw/misc/meson.build       |  1 +
- hw/misc/pvpanic-mmio.c    | 61 +++++++++++++++++++++++++++++++++++++++
- include/hw/misc/pvpanic.h |  1 +
- 4 files changed, 67 insertions(+)
- create mode 100644 hw/misc/pvpanic-mmio.c
-
-diff --git a/hw/misc/Kconfig b/hw/misc/Kconfig
-index 1f1baa5dde9..5a6c1603b60 100644
---- a/hw/misc/Kconfig
-+++ b/hw/misc/Kconfig
-@@ -145,6 +145,10 @@ config PVPANIC_ISA
-     depends on ISA_BUS
-     select PVPANIC_COMMON
- 
-+config PVPANIC_MMIO
-+    bool
-+    select PVPANIC_COMMON
-+
- config AUX
-     bool
-     select I2C
-diff --git a/hw/misc/meson.build b/hw/misc/meson.build
-index d02d96e403b..4de4db0a600 100644
---- a/hw/misc/meson.build
-+++ b/hw/misc/meson.build
-@@ -122,6 +122,7 @@ system_ss.add(when: 'CONFIG_ARMSSE_MHU', if_true: files('armsse-mhu.c'))
- 
- system_ss.add(when: 'CONFIG_PVPANIC_ISA', if_true: files('pvpanic-isa.c'))
- system_ss.add(when: 'CONFIG_PVPANIC_PCI', if_true: files('pvpanic-pci.c'))
-+system_ss.add(when: 'CONFIG_PVPANIC_MMIO', if_true: files('pvpanic-mmio.c'))
- system_ss.add(when: 'CONFIG_AUX', if_true: files('auxbus.c'))
- system_ss.add(when: 'CONFIG_ASPEED_SOC', if_true: files(
-   'aspeed_hace.c',
-diff --git a/hw/misc/pvpanic-mmio.c b/hw/misc/pvpanic-mmio.c
-new file mode 100644
-index 00000000000..56738efee53
---- /dev/null
-+++ b/hw/misc/pvpanic-mmio.c
-@@ -0,0 +1,61 @@
-+/*
-+ * QEMU simulated pvpanic device (MMIO frontend)
-+ *
-+ * Copyright © 2023 Amazon.com, Inc. or its affiliates. All Rights Reserved.
-+ *
-+ * SPDX-License-Identifier: GPL-2.0-or-later
-+ */
-+
-+#include "qemu/osdep.h"
-+
-+#include "hw/qdev-properties.h"
-+#include "hw/misc/pvpanic.h"
-+#include "hw/sysbus.h"
-+#include "standard-headers/misc/pvpanic.h"
-+
-+OBJECT_DECLARE_SIMPLE_TYPE(PVPanicMMIOState, PVPANIC_MMIO_DEVICE)
-+
-+#define PVPANIC_MMIO_SIZE 0x2
-+
-+struct PVPanicMMIOState {
-+    SysBusDevice parent_obj;
-+
-+    PVPanicState pvpanic;
-+};
-+
-+static void pvpanic_mmio_initfn(Object *obj)
-+{
-+    PVPanicMMIOState *s = PVPANIC_MMIO_DEVICE(obj);
-+
-+    pvpanic_setup_io(&s->pvpanic, DEVICE(s), PVPANIC_MMIO_SIZE);
-+    sysbus_init_mmio(SYS_BUS_DEVICE(obj), &s->pvpanic.mr);
-+}
-+
-+static Property pvpanic_mmio_properties[] = {
-+    DEFINE_PROP_UINT8("events", PVPanicMMIOState, pvpanic.events,
-+                      PVPANIC_PANICKED | PVPANIC_CRASH_LOADED),
-+    DEFINE_PROP_END_OF_LIST(),
-+};
-+
-+static void pvpanic_mmio_class_init(ObjectClass *klass, void *data)
-+{
-+    DeviceClass *dc = DEVICE_CLASS(klass);
-+
-+    device_class_set_props(dc, pvpanic_mmio_properties);
-+    set_bit(DEVICE_CATEGORY_MISC, dc->categories);
-+}
-+
-+static const TypeInfo pvpanic_mmio_info = {
-+    .name          = TYPE_PVPANIC_MMIO_DEVICE,
-+    .parent        = TYPE_SYS_BUS_DEVICE,
-+    .instance_size = sizeof(PVPanicMMIOState),
-+    .instance_init = pvpanic_mmio_initfn,
-+    .class_init    = pvpanic_mmio_class_init,
-+};
-+
-+static void pvpanic_register_types(void)
-+{
-+    type_register_static(&pvpanic_mmio_info);
-+}
-+
-+type_init(pvpanic_register_types)
-diff --git a/include/hw/misc/pvpanic.h b/include/hw/misc/pvpanic.h
-index 9a71a5ad0d7..049a94c1125 100644
---- a/include/hw/misc/pvpanic.h
-+++ b/include/hw/misc/pvpanic.h
-@@ -26,6 +26,7 @@
- 
- #define TYPE_PVPANIC_ISA_DEVICE "pvpanic"
- #define TYPE_PVPANIC_PCI_DEVICE "pvpanic-pci"
-+#define TYPE_PVPANIC_MMIO_DEVICE "pvpanic-mmio"
- 
- #define PVPANIC_IOPORT_PROP "ioport"
- 
--- 
-2.39.3 (Apple Git-145)
-
+On Fri, Nov 1, 2024 at 11:09=E2=80=AFPM Andrew Jones <ajones@ventanamicro.c=
+om> wrote:
+>
+> On Fri, Nov 01, 2024 at 08:45:13AM -0300, Daniel Henrique Barboza wrote:
+> >
+> >
+> > On 11/1/24 5:36 AM, Yong-Xuan Wang wrote:
+> > > Currently QEMU will continue to emulate the AIA MSI devices and enabl=
+e the
+> > > AIA extension for guest OS when the host kernel doesn't support the
+> > > in-kernel AIA irqchip. This will cause an illegal instruction excepti=
+on
+> > > when the guest OS uses the IMSIC devices. Add additional checks to en=
+sure
+> > > the guest OS only uses the AIA MSI device when the host kernel suppor=
+ts
+> > > the in-kernel AIA chip.
+> > >
+> > > Signed-off-by: Yong-Xuan Wang <yongxuan.wang@sifive.com>
+> > > Reviewed-by: Jim Shu <jim.shu@sifive.com>
+> > > ---
+> > >   hw/riscv/virt.c | 19 +++++++++++++------
+> > >   1 file changed, 13 insertions(+), 6 deletions(-)
+> > >
+> > > diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+> > > index 45a8c4f8190d..0d8e047844a6 100644
+> > > --- a/hw/riscv/virt.c
+> > > +++ b/hw/riscv/virt.c
+> > > @@ -1567,12 +1567,19 @@ static void virt_machine_init(MachineState *m=
+achine)
+> > >           }
+> > >       }
+> > > -    if (kvm_enabled() && virt_use_kvm_aia(s)) {
+> > > -        kvm_riscv_aia_create(machine, IMSIC_MMIO_GROUP_MIN_SHIFT,
+> > > -                             VIRT_IRQCHIP_NUM_SOURCES, VIRT_IRQCHIP_=
+NUM_MSIS,
+> > > -                             memmap[VIRT_APLIC_S].base,
+> > > -                             memmap[VIRT_IMSIC_S].base,
+> > > -                             s->aia_guests);
+> > > +    if (kvm_enabled() && s->aia_type =3D=3D VIRT_AIA_TYPE_APLIC_IMSI=
+C) {
+> > > +        if (virt_use_kvm_aia(s)) {
+> > > +            kvm_riscv_aia_create(machine, IMSIC_MMIO_GROUP_MIN_SHIFT=
+,
+> > > +                                 VIRT_IRQCHIP_NUM_SOURCES,
+> > > +                                 VIRT_IRQCHIP_NUM_MSIS,
+> > > +                                 memmap[VIRT_APLIC_S].base,
+> > > +                                 memmap[VIRT_IMSIC_S].base,
+> > > +                                 s->aia_guests);
+> > > +        } else {
+> > > +            error_report("Host machine doesn't support in-kernel APL=
+IC MSI, "
+> > > +                         "please use aia=3Dnone or aia=3Daplic");
+> > > +            exit(1);
+> > > +        }
+> >
+> > As you said in the commit msg it looks like we have a bug in this parti=
+cular path: kvm accel,
+> > aia=3Daplic-imsic, no irqchip present. Erroring out is one possible sol=
+ution but I wonder why we
+> > couldn't just emulate the APLIC and IMSIC controllers in this case. We =
+have code that does
+> > that in TCG, so it would be a matter of adding the needed plumbing to t=
+reat KVM AIA without
+> > irqchip =3D=3D TCG AIA.
+> >
+> > Drew, care to weight in? Thanks,
+> >
+>
+> If I understand the motivation for this patch correctly, then we'll alway=
+s
+> need something like it anyway. With the proposal of supporting KVM with
+> usermode-imsic, then KVM would ultimately have three possible states:
+> inkernel-irqchip, usermode-imsic, nothing. usermode-imsic will need KVM
+> support for forwarding imsic accesses to QEMU, but when that support isn'=
+t
+> present (and the inkernel-irqchip isn't selected either), then we should
+> still want to error out before allowing the guest to try accesses that
+> can't work.
+>
+> Thanks,
+> drew
 
