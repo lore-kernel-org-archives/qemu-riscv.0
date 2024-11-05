@@ -4,63 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4FED0D2C122
-	for <qemu-riscv@archiver.kernel.org>; Tue,  5 Nov 2024 15:34:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E9A67D2C139
+	for <qemu-riscv@archiver.kernel.org>; Tue,  5 Nov 2024 15:35:28 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1t8LWH-0005aL-K7; Tue, 05 Nov 2024 10:31:01 -0500
+	id 1t8LXu-0006kY-Qj; Tue, 05 Nov 2024 10:32:42 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <phil@philjordan.eu>)
- id 1t8LWC-0005Yw-Qf
- for qemu-riscv@nongnu.org; Tue, 05 Nov 2024 10:30:56 -0500
-Received: from mail-ed1-x52a.google.com ([2a00:1450:4864:20::52a])
+ id 1t8LWd-0005ou-DA
+ for qemu-riscv@nongnu.org; Tue, 05 Nov 2024 10:31:26 -0500
+Received: from mail-ej1-x633.google.com ([2a00:1450:4864:20::633])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <phil@philjordan.eu>)
- id 1t8LWB-00042o-2k
- for qemu-riscv@nongnu.org; Tue, 05 Nov 2024 10:30:56 -0500
-Received: by mail-ed1-x52a.google.com with SMTP id
- 4fb4d7f45d1cf-5c9693dc739so7488634a12.3
- for <qemu-riscv@nongnu.org>; Tue, 05 Nov 2024 07:30:54 -0800 (PST)
+ id 1t8LWa-00049e-Nc
+ for qemu-riscv@nongnu.org; Tue, 05 Nov 2024 10:31:22 -0500
+Received: by mail-ej1-x633.google.com with SMTP id
+ a640c23a62f3a-a9a977d6cc7so416238666b.3
+ for <qemu-riscv@nongnu.org>; Tue, 05 Nov 2024 07:31:19 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=philjordan-eu.20230601.gappssmtp.com; s=20230601; t=1730820654; x=1731425454;
+ d=philjordan-eu.20230601.gappssmtp.com; s=20230601; t=1730820678; x=1731425478;
  darn=nongnu.org; 
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=aOPBNKYGGxA1zXsRwcjvRB/Hc7v1RvZEzYV74UA0S34=;
- b=nOsiLQmK1TBVnw0MI7ri+mDGwYVbXr4/+nsnzQ8yf93PJzggsgU+fIxvQoPtmzw5Th
- Z+BcTrC+DlntYA2b/6aBrixBnGCyulCOC7cDODswu2fPspXPjIy0Y6PTAHfO+x7tocW+
- CHhmJvVdMpCzfEy44LYoMgJto9eZWDo231clYz2e5j9SsIS4r6ANiK0UUS2UmT53lxdU
- FStLoZUajxsuBO4/qnNcfR0TRkLy+wBA7Vu5eYRjOm54pUJd6WeoZbRosNjzIJKMU7xX
- 3tjCNXoBmtVmaRju6AHjdp+aNRUAuFv6tkRw1rLT7370yEZhko/uGf4wBIUgqce5dYmJ
- V+qA==
+ bh=/7At35sOPcE3GUUaFg/vHYoUFWhiVUqXzP1FpK3MLlI=;
+ b=JGuA4XC4p3+hIm/1B2Wg+t1jPHyFPTAX5JTgsZyPbjRZLCx1ov3qAbzzmpHqUNHCzz
+ bG0mpGBzB+QB3KaZMS0bN80sRIq8BVYEg+eBfE2RFiqwy5VdIer9wFRg6Aqnn+FLCUfj
+ AR3wgJvtroZ0SIH+AEhj+16FQzk3LxTFRdMsX2RYK/r9bCfHlpHhjI9OYkqojcz43Xoj
+ 3M2DJxW8ci41jiTkCkkb0X3jukIPwmSE2l/+5xxJ8BaRs39b4p048NunQ3Njdp89fu6i
+ ACsVZ4DaDKqbSqTMsItPPFhWsQWFO9lF0IxAlWKJSiYh6xpACKH7GqQvAE8GTOivi/i1
+ 89Tg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1730820654; x=1731425454;
+ d=1e100.net; s=20230601; t=1730820678; x=1731425478;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=aOPBNKYGGxA1zXsRwcjvRB/Hc7v1RvZEzYV74UA0S34=;
- b=WwZnQVrUtYWerZ6oSzvOv/wwfc5cvFcgKOYT8qfTPhW8JaOB2jaZhQCFSbpbvKgPFS
- MG3J5m0mcxgjbX8HNNAFX1QrZHyYI23FBw8i3PZGWwx0UFM9CA1/8Cgd2Mx4fDV93PGr
- /x4shSi/wDc/0MFRmkCXAOeAlMKGbKDWc3U0H+Lw6dV1Y/WxLwDy9zoEYKm9CqszVneA
- WMMbHY6IdP+tBTdCiWS5k3aplBglLDB5H9jtO+Sasp3O4c+5F4to4oeeY1lgfn0c7ZeU
- JbH9o2SC48sNzA0MXH80gAbF0NZqmMowppPPr/wfCNbEq7t1hc9eDb9MC/pAYYmA5hEe
- fZmg==
+ bh=/7At35sOPcE3GUUaFg/vHYoUFWhiVUqXzP1FpK3MLlI=;
+ b=W+lP4+CTSAwmSBhcDwv05fi1UPgsrFEMDKCd3g4L4JV6HvKt/N1TgBHeZrSaBOZhod
+ Fg00Ldi2YExxREpWM/fxxLXxARvSzGRFdvKylwpTMNOyDyLkiearMrr6w8Joe8eznpUP
+ bWHFVYA7Bs6RbJLjdAxXwgTth8raDMcQAWSdRTY1J++isUQeNvZRWMTcbQ6Ag0HcUhl5
+ ps5AvWG4fHAGZIeb3jkrPK+RN0F0Uwh/dQxQuITQsZ8KnKPR1LPgh7RfHAIBMEaRU/yV
+ W12YROfgr072n6Ph/3PP14/JPcUP0OXC3/XSooGn0QrVHyt0Bph6yIjQ3gERkDfZS/Ok
+ jhlQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUDPzfhtLnioYpP34j26K4fzRiELVDHFaYzpONPAoUmBwtCcIBexwoXLwDUqMxTP81NSxw+cfyIvzIf@nongnu.org
-X-Gm-Message-State: AOJu0YwDFhgIXK3PWmPeoj8jFhxiJ565HAsXMTcKR/EtV8cGEjRi2luv
- VfT7UQXzGPi/5KH4Lovyt+9xQlDoFcrH5X3iakwtSpLCkFv4fH8Z7LvmfNuLuA==
-X-Google-Smtp-Source: AGHT+IGdr6XY03peUfNE2Nvx3bVnmMQ39ASK58FHHH9AsTlI4pk8GxBteGcHRJum7568X81uGtBWEw==
-X-Received: by 2002:a05:6402:27c8:b0:5ce:dec1:9aa9 with SMTP id
- 4fb4d7f45d1cf-5cedec19addmr4022241a12.7.1730820653604; 
- Tue, 05 Nov 2024 07:30:53 -0800 (PST)
+ AJvYcCUDOSSit/O6POEkcvarBIPj1FnKlsYT4ovB3TNGHYQdJw3avXqyDhdY5alMJbsejwX9e1w4QYFexwx9@nongnu.org
+X-Gm-Message-State: AOJu0YyRLpXKjGWxPdsYZbXoePeHQFChcPtGUxA7CpsWvo83YMv6bVeM
+ yqrDWpDcIv+HZdTrAnrCco74KGhyU8gr93O/U1P1zKCTxOpHzir3np3HnNNHSg==
+X-Google-Smtp-Source: AGHT+IER2xp7sOhCml2Pv91MZ7vTfDcM7DquMowKp8tVtk5SCdEVmJB/hZb29mU/XINVMUgo3IPImg==
+X-Received: by 2002:a05:6402:3135:b0:5cb:adc5:de15 with SMTP id
+ 4fb4d7f45d1cf-5ceb93835b3mr13845832a12.31.1730820678391; 
+ Tue, 05 Nov 2024 07:31:18 -0800 (PST)
 Received: from localhost.localdomain (h082218084190.host.wavenet.at.
  [82.218.84.190]) by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5cee6aae3fcsm1419415a12.21.2024.11.05.07.30.51
+ 4fb4d7f45d1cf-5cee6aae3fcsm1419415a12.21.2024.11.05.07.31.16
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Tue, 05 Nov 2024 07:30:52 -0800 (PST)
+ Tue, 05 Nov 2024 07:31:17 -0800 (PST)
 From: Phil Dennis-Jordan <phil@philjordan.eu>
 To: qemu-devel@nongnu.org
 Cc: agraf@csgraf.de, phil@philjordan.eu, peter.maydell@linaro.org,
@@ -74,17 +74,18 @@ Cc: agraf@csgraf.de, phil@philjordan.eu, peter.maydell@linaro.org,
  dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com,
  jcmvbkbc@gmail.com, marcandre.lureau@redhat.com, berrange@redhat.com,
  akihiko.odaki@daynix.com, qemu-arm@nongnu.org, qemu-block@nongnu.org,
- qemu-riscv@nongnu.org, Alexander Graf <graf@amazon.com>
-Subject: [PATCH v7 06/15] hw: Add vmapple subdir
-Date: Tue,  5 Nov 2024 16:30:13 +0100
-Message-Id: <20241105153022.91101-7-phil@philjordan.eu>
+ qemu-riscv@nongnu.org
+Subject: [PATCH v7 14/15] hw/block/virtio-blk: Replaces request free function
+ with g_free
+Date: Tue,  5 Nov 2024 16:30:21 +0100
+Message-Id: <20241105153022.91101-15-phil@philjordan.eu>
 X-Mailer: git-send-email 2.39.3 (Apple Git-145)
 In-Reply-To: <20241105153022.91101-1-phil@philjordan.eu>
 References: <20241105153022.91101-1-phil@philjordan.eu>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: neutral client-ip=2a00:1450:4864:20::52a;
- envelope-from=phil@philjordan.eu; helo=mail-ed1-x52a.google.com
+Received-SPF: neutral client-ip=2a00:1450:4864:20::633;
+ envelope-from=phil@philjordan.eu; helo=mail-ej1-x633.google.com
 X-Spam_score_int: -10
 X-Spam_score: -1.1
 X-Spam_bar: -
@@ -106,109 +107,230 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Alexander Graf <graf@amazon.com>
+The virtio_blk_free_request() function has been a 1-liner forwarding
+to g_free() for a while now. We may as well call g_free on the request
+pointer directly.
 
-We will introduce a number of devices that are specific to the vmapple
-target machine. To keep them all tidily together, let's put them into
-a single target directory.
-
-Signed-off-by: Alexander Graf <graf@amazon.com>
 Signed-off-by: Phil Dennis-Jordan <phil@philjordan.eu>
 Reviewed-by: Akihiko Odaki <akihiko.odaki@daynix.com>
 ---
- MAINTAINERS             | 7 +++++++
- hw/Kconfig              | 1 +
- hw/meson.build          | 1 +
- hw/vmapple/Kconfig      | 1 +
- hw/vmapple/meson.build  | 0
- hw/vmapple/trace-events | 2 ++
- hw/vmapple/trace.h      | 1 +
- meson.build             | 1 +
- 8 files changed, 14 insertions(+)
- create mode 100644 hw/vmapple/Kconfig
- create mode 100644 hw/vmapple/meson.build
- create mode 100644 hw/vmapple/trace-events
- create mode 100644 hw/vmapple/trace.h
+ hw/block/virtio-blk.c          | 43 +++++++++++++++-------------------
+ hw/vmapple/virtio-blk.c        |  2 +-
+ include/hw/virtio/virtio-blk.h |  1 -
+ 3 files changed, 20 insertions(+), 26 deletions(-)
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index c7964ab784b..9d0d26cb65f 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -2761,6 +2761,13 @@ F: hw/hyperv/hv-balloon*.h
- F: include/hw/hyperv/dynmem-proto.h
- F: include/hw/hyperv/hv-balloon.h
+diff --git a/hw/block/virtio-blk.c b/hw/block/virtio-blk.c
+index 9e8337bb639..40d2c9bc591 100644
+--- a/hw/block/virtio-blk.c
++++ b/hw/block/virtio-blk.c
+@@ -50,11 +50,6 @@ static void virtio_blk_init_request(VirtIOBlock *s, VirtQueue *vq,
+     req->mr_next = NULL;
+ }
  
-+VMapple
-+M: Alexander Graf <agraf@csgraf.de>
-+R: Phil Dennis-Jordan <phil@philjordan.eu>
-+S: Maintained
-+F: hw/vmapple/*
-+F: include/hw/vmapple/*
-+
- Subsystems
- ----------
- Overall Audio backends
-diff --git a/hw/Kconfig b/hw/Kconfig
-index 1b4e9bb07f7..2871784cfdc 100644
---- a/hw/Kconfig
-+++ b/hw/Kconfig
-@@ -41,6 +41,7 @@ source ufs/Kconfig
- source usb/Kconfig
- source virtio/Kconfig
- source vfio/Kconfig
-+source vmapple/Kconfig
- source xen/Kconfig
- source watchdog/Kconfig
+-void virtio_blk_free_request(VirtIOBlockReq *req)
+-{
+-    g_free(req);
+-}
+-
+ void virtio_blk_req_complete(VirtIOBlockReq *req, unsigned char status)
+ {
+     VirtIOBlock *s = req->dev;
+@@ -93,7 +88,7 @@ static int virtio_blk_handle_rw_error(VirtIOBlockReq *req, int error,
+         if (acct_failed) {
+             block_acct_failed(blk_get_stats(s->blk), &req->acct);
+         }
+-        virtio_blk_free_request(req);
++        g_free(req);
+     }
  
-diff --git a/hw/meson.build b/hw/meson.build
-index b827c82c5d7..9c4f6d0d636 100644
---- a/hw/meson.build
-+++ b/hw/meson.build
-@@ -39,6 +39,7 @@ subdir('ufs')
- subdir('usb')
- subdir('vfio')
- subdir('virtio')
-+subdir('vmapple')
- subdir('watchdog')
- subdir('xen')
- subdir('xenpv')
-diff --git a/hw/vmapple/Kconfig b/hw/vmapple/Kconfig
-new file mode 100644
-index 00000000000..8b137891791
---- /dev/null
-+++ b/hw/vmapple/Kconfig
-@@ -0,0 +1 @@
-+
-diff --git a/hw/vmapple/meson.build b/hw/vmapple/meson.build
-new file mode 100644
-index 00000000000..e69de29bb2d
-diff --git a/hw/vmapple/trace-events b/hw/vmapple/trace-events
-new file mode 100644
-index 00000000000..9ccc5790487
---- /dev/null
-+++ b/hw/vmapple/trace-events
-@@ -0,0 +1,2 @@
-+# See docs/devel/tracing.rst for syntax documentation.
-+
-diff --git a/hw/vmapple/trace.h b/hw/vmapple/trace.h
-new file mode 100644
-index 00000000000..572adbefe04
---- /dev/null
-+++ b/hw/vmapple/trace.h
-@@ -0,0 +1 @@
-+#include "trace/trace-hw_vmapple.h"
-diff --git a/meson.build b/meson.build
-index b1770ee39ff..7c631ea2e8c 100644
---- a/meson.build
-+++ b/meson.build
-@@ -3498,6 +3498,7 @@ if have_system
-     'hw/usb',
-     'hw/vfio',
-     'hw/virtio',
-+    'hw/vmapple',
-     'hw/watchdog',
-     'hw/xen',
-     'hw/gpio',
+     blk_error_action(s->blk, action, is_read, error);
+@@ -136,7 +131,7 @@ static void virtio_blk_rw_complete(void *opaque, int ret)
+ 
+         virtio_blk_req_complete(req, VIRTIO_BLK_S_OK);
+         block_acct_done(blk_get_stats(s->blk), &req->acct);
+-        virtio_blk_free_request(req);
++        g_free(req);
+     }
+ }
+ 
+@@ -151,7 +146,7 @@ static void virtio_blk_flush_complete(void *opaque, int ret)
+ 
+     virtio_blk_req_complete(req, VIRTIO_BLK_S_OK);
+     block_acct_done(blk_get_stats(s->blk), &req->acct);
+-    virtio_blk_free_request(req);
++    g_free(req);
+ }
+ 
+ static void virtio_blk_discard_write_zeroes_complete(void *opaque, int ret)
+@@ -169,7 +164,7 @@ static void virtio_blk_discard_write_zeroes_complete(void *opaque, int ret)
+     if (is_write_zeroes) {
+         block_acct_done(blk_get_stats(s->blk), &req->acct);
+     }
+-    virtio_blk_free_request(req);
++    g_free(req);
+ }
+ 
+ static VirtIOBlockReq *virtio_blk_get_request(VirtIOBlock *s, VirtQueue *vq)
+@@ -214,7 +209,7 @@ static void virtio_blk_handle_scsi(VirtIOBlockReq *req)
+ 
+ fail:
+     virtio_blk_req_complete(req, status);
+-    virtio_blk_free_request(req);
++    g_free(req);
+ }
+ 
+ static inline void submit_requests(VirtIOBlock *s, MultiReqBuffer *mrb,
+@@ -612,7 +607,7 @@ static void virtio_blk_zone_report_complete(void *opaque, int ret)
+ 
+ out:
+     virtio_blk_req_complete(req, err_status);
+-    virtio_blk_free_request(req);
++    g_free(req);
+     g_free(data->zone_report_data.zones);
+     g_free(data);
+ }
+@@ -661,7 +656,7 @@ static void virtio_blk_handle_zone_report(VirtIOBlockReq *req,
+     return;
+ out:
+     virtio_blk_req_complete(req, err_status);
+-    virtio_blk_free_request(req);
++    g_free(req);
+ }
+ 
+ static void virtio_blk_zone_mgmt_complete(void *opaque, int ret)
+@@ -677,7 +672,7 @@ static void virtio_blk_zone_mgmt_complete(void *opaque, int ret)
+     }
+ 
+     virtio_blk_req_complete(req, err_status);
+-    virtio_blk_free_request(req);
++    g_free(req);
+ }
+ 
+ static int virtio_blk_handle_zone_mgmt(VirtIOBlockReq *req, BlockZoneOp op)
+@@ -719,7 +714,7 @@ static int virtio_blk_handle_zone_mgmt(VirtIOBlockReq *req, BlockZoneOp op)
+     return 0;
+ out:
+     virtio_blk_req_complete(req, err_status);
+-    virtio_blk_free_request(req);
++    g_free(req);
+     return err_status;
+ }
+ 
+@@ -750,7 +745,7 @@ static void virtio_blk_zone_append_complete(void *opaque, int ret)
+ 
+ out:
+     virtio_blk_req_complete(req, err_status);
+-    virtio_blk_free_request(req);
++    g_free(req);
+     g_free(data);
+ }
+ 
+@@ -788,7 +783,7 @@ static int virtio_blk_handle_zone_append(VirtIOBlockReq *req,
+ 
+ out:
+     virtio_blk_req_complete(req, err_status);
+-    virtio_blk_free_request(req);
++    g_free(req);
+     return err_status;
+ }
+ 
+@@ -855,7 +850,7 @@ static int virtio_blk_handle_request(VirtIOBlockReq *req, MultiReqBuffer *mrb)
+             virtio_blk_req_complete(req, VIRTIO_BLK_S_IOERR);
+             block_acct_invalid(blk_get_stats(s->blk),
+                                is_write ? BLOCK_ACCT_WRITE : BLOCK_ACCT_READ);
+-            virtio_blk_free_request(req);
++            g_free(req);
+             return 0;
+         }
+ 
+@@ -911,7 +906,7 @@ static int virtio_blk_handle_request(VirtIOBlockReq *req, MultiReqBuffer *mrb)
+                               VIRTIO_BLK_ID_BYTES));
+         iov_from_buf(in_iov, in_num, 0, serial, size);
+         virtio_blk_req_complete(req, VIRTIO_BLK_S_OK);
+-        virtio_blk_free_request(req);
++        g_free(req);
+         break;
+     }
+     case VIRTIO_BLK_T_ZONE_APPEND & ~VIRTIO_BLK_T_OUT:
+@@ -943,7 +938,7 @@ static int virtio_blk_handle_request(VirtIOBlockReq *req, MultiReqBuffer *mrb)
+         if (unlikely(!(type & VIRTIO_BLK_T_OUT) ||
+                      out_len > sizeof(dwz_hdr))) {
+             virtio_blk_req_complete(req, VIRTIO_BLK_S_UNSUPP);
+-            virtio_blk_free_request(req);
++            g_free(req);
+             return 0;
+         }
+ 
+@@ -960,7 +955,7 @@ static int virtio_blk_handle_request(VirtIOBlockReq *req, MultiReqBuffer *mrb)
+                                                             is_write_zeroes);
+         if (err_status != VIRTIO_BLK_S_OK) {
+             virtio_blk_req_complete(req, err_status);
+-            virtio_blk_free_request(req);
++            g_free(req);
+         }
+ 
+         break;
+@@ -975,7 +970,7 @@ static int virtio_blk_handle_request(VirtIOBlockReq *req, MultiReqBuffer *mrb)
+         if (!vbk->handle_unknown_request ||
+             !vbk->handle_unknown_request(req, mrb, type)) {
+             virtio_blk_req_complete(req, VIRTIO_BLK_S_UNSUPP);
+-            virtio_blk_free_request(req);
++            g_free(req);
+         }
+     }
+     }
+@@ -998,7 +993,7 @@ void virtio_blk_handle_vq(VirtIOBlock *s, VirtQueue *vq)
+         while ((req = virtio_blk_get_request(s, vq))) {
+             if (virtio_blk_handle_request(req, &mrb)) {
+                 virtqueue_detach_element(req->vq, &req->elem, 0);
+-                virtio_blk_free_request(req);
++                g_free(req);
+                 break;
+             }
+         }
+@@ -1048,7 +1043,7 @@ static void virtio_blk_dma_restart_bh(void *opaque)
+             while (req) {
+                 next = req->next;
+                 virtqueue_detach_element(req->vq, &req->elem, 0);
+-                virtio_blk_free_request(req);
++                g_free(req);
+                 req = next;
+             }
+             break;
+@@ -1131,7 +1126,7 @@ static void virtio_blk_reset(VirtIODevice *vdev)
+             /* No other threads can access req->vq here */
+             virtqueue_detach_element(req->vq, &req->elem, 0);
+ 
+-            virtio_blk_free_request(req);
++            g_free(req);
+         }
+     }
+ 
+diff --git a/hw/vmapple/virtio-blk.c b/hw/vmapple/virtio-blk.c
+index 1652151ec9c..fee1cf0ecaf 100644
+--- a/hw/vmapple/virtio-blk.c
++++ b/hw/vmapple/virtio-blk.c
+@@ -58,7 +58,7 @@ static bool vmapple_virtio_blk_handle_unknown_request(VirtIOBlockReq *req,
+         qemu_log_mask(LOG_UNIMP, "%s: Barrier requests are currently no-ops\n",
+                       __func__);
+         virtio_blk_req_complete(req, VIRTIO_BLK_S_OK);
+-        virtio_blk_free_request(req);
++        g_free(req);
+         return true;
+     default:
+         return false;
+diff --git a/include/hw/virtio/virtio-blk.h b/include/hw/virtio/virtio-blk.h
+index 28d5046ea6c..dcb2c89aed5 100644
+--- a/include/hw/virtio/virtio-blk.h
++++ b/include/hw/virtio/virtio-blk.h
+@@ -109,7 +109,6 @@ typedef struct VirtIOBlkClass {
+ } VirtIOBlkClass;
+ 
+ void virtio_blk_handle_vq(VirtIOBlock *s, VirtQueue *vq);
+-void virtio_blk_free_request(VirtIOBlockReq *req);
+ void virtio_blk_req_complete(VirtIOBlockReq *req, unsigned char status);
+ 
+ #endif
 -- 
 2.39.3 (Apple Git-145)
 
