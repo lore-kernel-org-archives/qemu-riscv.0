@@ -4,67 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 51082D1267F
-	for <qemu-riscv@archiver.kernel.org>; Tue,  5 Nov 2024 10:51:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8EE1BD12680
+	for <qemu-riscv@archiver.kernel.org>; Tue,  5 Nov 2024 10:58:57 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1t8H96-0000i7-FM; Tue, 05 Nov 2024 05:50:48 -0500
+	id 1t8HGh-0004E0-G8; Tue, 05 Nov 2024 05:58:39 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1t8H92-0000hR-UU
- for qemu-riscv@nongnu.org; Tue, 05 Nov 2024 05:50:45 -0500
-Received: from mail-wr1-x434.google.com ([2a00:1450:4864:20::434])
+ id 1t8HGf-0004DU-9z
+ for qemu-riscv@nongnu.org; Tue, 05 Nov 2024 05:58:37 -0500
+Received: from mail-ed1-x52c.google.com ([2a00:1450:4864:20::52c])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1t8H91-00045i-31
- for qemu-riscv@nongnu.org; Tue, 05 Nov 2024 05:50:44 -0500
-Received: by mail-wr1-x434.google.com with SMTP id
- ffacd0b85a97d-37d4b0943c7so3351005f8f.1
- for <qemu-riscv@nongnu.org>; Tue, 05 Nov 2024 02:50:42 -0800 (PST)
+ id 1t8HGd-0004kN-Ey
+ for qemu-riscv@nongnu.org; Tue, 05 Nov 2024 05:58:36 -0500
+Received: by mail-ed1-x52c.google.com with SMTP id
+ 4fb4d7f45d1cf-5cb6ca2a776so7931612a12.0
+ for <qemu-riscv@nongnu.org>; Tue, 05 Nov 2024 02:58:34 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1730803841; x=1731408641; darn=nongnu.org;
+ d=linaro.org; s=google; t=1730804313; x=1731409113; darn=nongnu.org;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=6riB8icHr31bYt7Ypso97Po0mJrHmUtnF5OMisGLVTs=;
- b=YfGZZg+zL7CeN1SWt+SOlu9h65Yc38cpc7ETnPcBBg0tYJyciMk/AM+aUOfF8NNz59
- WA9CiLYZmVtaY9q+VuZBogGVnEao5Kl0QX0l9YS3XtY83AlMwRwnTsg771P6VUbecJzH
- zvRwd6Nc89G0VcSAzX6FXT2meG6xUe0EGV2XEamOyTlDaK5mlrW+L8fdHm8TMdy6rjv+
- 66laqc6gQl0/zIDFWSwDYDoFl5i9OjpGSLhS4LyEWJSPrpMPvU3GC5Gxiy0NCT5Obg+K
- 0LXxXrfMHjUrRtxXOCop1mTNMPoLb3R6zGhWsCikZAYq9Z4prI/X6KAtZp/+ucHTQqlE
- flRw==
+ bh=J9GnUD19XuJDeQQIfLrDDAiu6StgkP/Y+HkPPKYKdjU=;
+ b=GuEb6lXgvdZ1SMvoMVZOxCyWkGAPGb+65TeSWlCo9ydsvuHDPPkqq8B9ZAHyD6e7KT
+ PYaIFSinOvazuuPTIMCXQc2Sx9ikTuKwOS0RMtck3Oh9PZxTUee/H9gVirnaqj6T7R5n
+ MODw8SOHozevh7vHQb5garklFKL8kWOgXESeP4OumwKZ/3olAn2Seohnh9tmkObNtIka
+ Gj9uYMorScQCBQY6qvMIX9nL0uROEhz7gvR8aOFzQyfDBo2Z+/vzV+8OYtJW/CrPDcms
+ HHz/dReCVG/TB4DdFp/qeFLms497Nejuwyf9nF7i2MInIhgFQr+Avmi+OUGU+iKBkhBI
+ 6H/w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1730803841; x=1731408641;
+ d=1e100.net; s=20230601; t=1730804313; x=1731409113;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=6riB8icHr31bYt7Ypso97Po0mJrHmUtnF5OMisGLVTs=;
- b=aSPa8w+/BFaQuxjmb1VQPLiEmDM8Xh4KHUAMb6ottIgGkwAQUvIAFhKRo2VVANqhA+
- pGqvPT7xlZWSbqQ5GKY2iGfYbW47Fj9mn6mbEgR50bhTYzGfNXyVrdPIp8bsbgH9YoqY
- mdk7C1r/xKDQahmUYS0jY8SE/cyhT0ugD30KcLXDVDKE1uDB0rZK0+muQsxeSMsqQNx3
- I1r0pvNXkP+YrPUbKs1O6rirMaLzdHp88urlXcfXiidR7NoqgnwYF/edY+lQaq+Rkfpk
- hGTyRm2RWzSBA40qzfTBoP3310jAxY8/qN/5yXsphy7QChAbpBcXWMT/HmhoF52gYH+K
- yS6g==
+ bh=J9GnUD19XuJDeQQIfLrDDAiu6StgkP/Y+HkPPKYKdjU=;
+ b=AJc+KSyHYS3WCfq0DCWIlvBFhuGQM/tJJMDsiXC122h744ZcIyM5EYqGfbo57j4oY5
+ PxRKk4TIshmb2qnUoC4Qdot/ezB7GIbAd0xg8h6eim5SXbADACh3QBWlAq6gaFXsfc06
+ WUSfxpCUxNFf7AzZ6AgHMO8G0aTUvVddlGi4ZNwsFjcSeuPzW1DCdrzL24nFlxqrd9Rt
+ zJ/BVMDc5aUMAET+nfTDSTbgIadAcelw2Zat5THaXe0k0Aryt0X5dbKRwUdsgGGb1KwK
+ vJsyyDs5hO7bL+90K3QPvxIxpuCMcAyfjyIZ2D0/6dQQeHDEKpYeGnFHoouKGsZHo98F
+ frKQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCURkwaWP9s8V4RZIGESzhW7WJf7YGaiKV6jbfd3jOidn7lr6411iU212+ypLNVjXulx5bVFmH92ksfy@nongnu.org
-X-Gm-Message-State: AOJu0YwXp5cV00JgjEnLTF8BiBPRfb+dkJ0rVYy0ZWnco+vBaFd0ovby
- qSR/9+Tso5CCDrygMtMQJnM7Y8IsLFMqbASWbIgG8BHEFe9u0lSS+JRT44DA168=
-X-Google-Smtp-Source: AGHT+IFJbOlO+3+PpO34nBv4DriG0NXeylMyeIE6CqGeeeBZMuMkDbz7fAO2Lnx2GYpQS7KVgbwf1g==
-X-Received: by 2002:a5d:6601:0:b0:37d:4db3:af36 with SMTP id
- ffacd0b85a97d-380610f2cd4mr24054517f8f.12.1730803841367; 
- Tue, 05 Nov 2024 02:50:41 -0800 (PST)
+ AJvYcCVru6IkOu1ZTrNrRCnXHJx4BOMEv8D3nITokB2ndw9mmAZxACL+G00LKCvt1Jrhtm3Wb7jjbaJPIUEW@nongnu.org
+X-Gm-Message-State: AOJu0YxLWtaW/ak65WoFXONBsTx+HZFO/073hsOHaPM6kDkXDf19HjXt
+ 8CzTAcoRPZljr7ceDak33Iv/s4vCUCGCtv2i9+p7kfGNcofqduaMdZtMKYfpYqZuCRDfFf+GQGi
+ S0q4=
+X-Google-Smtp-Source: AGHT+IG4u5jLuQo/JFxrOgpTL9mob9GX8RXpRItSc2yE90kzuCAzEUG6YxMsEH/uzuTDtVvBbVjsVQ==
+X-Received: by 2002:a17:906:6a12:b0:a99:f746:385 with SMTP id
+ a640c23a62f3a-a9e3a573d11mr2472258666b.1.1730804313009; 
+ Tue, 05 Nov 2024 02:58:33 -0800 (PST)
 Received: from [192.168.21.227] ([154.14.63.34])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-381c10b7c38sm15785659f8f.24.2024.11.05.02.50.39
+ a640c23a62f3a-a9eb171550esm116909266b.88.2024.11.05.02.58.31
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 05 Nov 2024 02:50:40 -0800 (PST)
-Message-ID: <26a36129-67b7-49f7-a14c-28db0234aab5@linaro.org>
-Date: Tue, 5 Nov 2024 10:50:35 +0000
+ Tue, 05 Nov 2024 02:58:32 -0800 (PST)
+Message-ID: <12e5b415-a80a-49b3-b98a-33a398ebf56d@linaro.org>
+Date: Tue, 5 Nov 2024 10:58:30 +0000
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 4/6] target/riscv: Add support to record CTR entries.
+Subject: Re: [PATCH v3 0/6] target/riscv: Add support for Control Transfer
+ Records Ext.
 To: Rajnesh Kanwal <rkanwal@rivosinc.com>, qemu-riscv@nongnu.org,
  qemu-devel@nongnu.org
 Cc: alistair.francis@wdc.com, bin.meng@windriver.com, liweiwei@iscas.ac.cn,
@@ -73,14 +75,13 @@ Cc: alistair.francis@wdc.com, bin.meng@windriver.com, liweiwei@iscas.ac.cn,
  tech-control-transfer-records@lists.riscv.org, jason.chien@sifive.com,
  frank.chang@sifive.com
 References: <20241104-b4-ctr_upstream_v3-v3-0-32fd3c48205f@rivosinc.com>
- <20241104-b4-ctr_upstream_v3-v3-4-32fd3c48205f@rivosinc.com>
 Content-Language: en-US
 From: Richard Henderson <richard.henderson@linaro.org>
-In-Reply-To: <20241104-b4-ctr_upstream_v3-v3-4-32fd3c48205f@rivosinc.com>
+In-Reply-To: <20241104-b4-ctr_upstream_v3-v3-0-32fd3c48205f@rivosinc.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::434;
- envelope-from=richard.henderson@linaro.org; helo=mail-wr1-x434.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::52c;
+ envelope-from=richard.henderson@linaro.org; helo=mail-ed1-x52c.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -104,100 +105,24 @@ Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 On 11/4/24 21:51, Rajnesh Kanwal wrote:
-> +/*
-> + * Indirect calls
-> + * - jalr x1, rs where rs != x5;
-> + * - jalr x5, rs where rs != x1;
-> + * - c.jalr rs1 where rs1 != x5;
-> + *
-> + * Indirect jumps
-> + * - jalr x0, rs where rs != x1 and rs != x5;
-> + * - c.jr rs1 where rs1 != x1 and rs1 != x5.
-> + *
-> + * Returns
-> + * - jalr rd, rs where (rs == x1 or rs == x5) and rd != x1 and rd != x5;
-> + * - c.jr rs1 where rs1 == x1 or rs1 == x5.
-> + *
-> + * Co-routine swap
-> + * - jalr x1, x5;
-> + * - jalr x5, x1;
-> + * - c.jalr x5.
-> + *
-> + * Other indirect jumps
-> + * - jalr rd, rs where rs != x1, rs != x5, rd != x0, rd != x1 and rd != x5.
-> + */
-> +void helper_ctr_jalr(CPURISCVState *env, target_ulong src, target_ulong dest,
-> +                     target_ulong rd, target_ulong rs1)
-> +{
-> +    target_ulong curr_priv = env->priv;
-> +    bool curr_virt = env->virt_enabled;
-> +
-> +    if ((rd == 1 && rs1 != 5) || (rd == 5 && rs1 != 1)) {
-> +        riscv_ctr_add_entry(env, src, dest, CTRDATA_TYPE_INDIRECT_CALL,
-> +                            curr_priv, curr_virt);
-> +    } else if (rd == 0 && rs1 != 1 && rs1 != 5) {
-> +        riscv_ctr_add_entry(env, src, dest, CTRDATA_TYPE_INDIRECT_JUMP,
-> +                            curr_priv, curr_virt);
-> +    } else if ((rs1 == 1 || rs1 == 5) && (rd != 1 && rd != 5)) {
-> +        riscv_ctr_add_entry(env, src, dest, CTRDATA_TYPE_RETURN,
-> +                            curr_priv, curr_virt);
-> +    } else if ((rs1 == 1 && rd == 5) || (rs1 == 5 && rd == 1)) {
-> +        riscv_ctr_add_entry(env, src, dest, CTRDATA_TYPE_CO_ROUTINE_SWAP,
-> +                            curr_priv, curr_virt);
-> +    } else {
-> +        riscv_ctr_add_entry(env, src, dest,
-> +                            CTRDATA_TYPE_OTHER_INDIRECT_JUMP, curr_priv,
-> +                            curr_virt);
-> +    }
-> +}
+>   target/riscv/cpu.c                             |  26 ++-
+>   target/riscv/cpu.h                             |  13 ++
+>   target/riscv/cpu_bits.h                        |  94 ++++++++
+>   target/riscv/cpu_cfg.h                         |   2 +
+>   target/riscv/cpu_helper.c                      | 266 ++++++++++++++++++++++
+>   target/riscv/csr.c                             | 294 ++++++++++++++++++++++++-
+>   target/riscv/helper.h                          |   9 +-
+>   target/riscv/insn32.decode                     |   2 +-
+>   target/riscv/insn_trans/trans_privileged.c.inc |  22 +-
+>   target/riscv/insn_trans/trans_rvi.c.inc        |  31 +++
+>   target/riscv/insn_trans/trans_rvzce.c.inc      |  20 ++
+>   target/riscv/op_helper.c                       | 155 ++++++++++++-
+>   target/riscv/tcg/tcg-cpu.c                     |  11 +
+>   target/riscv/translate.c                       |  10 +
+>   14 files changed, 941 insertions(+), 14 deletions(-)
 
-All of these if's are constant at translation time.
-You should move this decision tree...
-
-> --- a/target/riscv/translate.c
-> +++ b/target/riscv/translate.c
-> @@ -569,6 +569,16 @@ static void gen_jal(DisasContext *ctx, int rd, target_ulong imm)
->          }
->      }
->  
-> +#ifndef CONFIG_USER_ONLY
-> +    if (ctx->cfg_ptr->ext_smctr || ctx->cfg_ptr->ext_ssctr) {
-> +        TCGv dest = tcg_constant_tl(ctx->base.pc_next + imm);
-> +        TCGv src = tcg_constant_tl(ctx->base.pc_next);
-> +        TCGv tcg_rd = tcg_constant_tl((target_ulong)rd);
-> +
-> +        gen_helper_ctr_jal(tcg_env, src, dest, tcg_rd);
-> +    }
-> +#endif
-
-... here.  All you need is to expose helper_ctr_add_entry().
-
-With that,
-
-> +void helper_ctr_popret(CPURISCVState *env, target_ulong src, target_ulong dest)
-> +{
-> +    riscv_ctr_add_entry(env, src, dest, CTRDATA_TYPE_RETURN,
-> +                            env->priv, env->virt_enabled);
-> +}
-> +
-> +void helper_ctr_branch(CPURISCVState *env, target_ulong src, target_ulong dest,
-> +                       target_ulong branch_taken)
-> +{
-> +    target_ulong curr_priv = env->priv;
-> +    bool curr_virt = env->virt_enabled;
-> +
-> +    if (branch_taken) {
-> +        riscv_ctr_add_entry(env, src, dest, CTRDATA_TYPE_TAKEN_BRANCH,
-> +                            curr_priv, curr_virt);
-> +    } else {
-> +        riscv_ctr_add_entry(env, src, dest, CTRDATA_TYPE_NONTAKEN_BRANCH,
-> +                            curr_priv, curr_virt);
-> +    }
-> +}
-
-these can go away, simply passing the correct CTRDATA_* constant at the right place.
+You're missing code in machine.c to migrate the new state.
 
 
 r~
-
 
