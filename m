@@ -4,73 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5B6FAD1CA09
-	for <qemu-riscv@archiver.kernel.org>; Mon,  4 Nov 2024 23:10:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4087DD1CA0E
+	for <qemu-riscv@archiver.kernel.org>; Tue,  5 Nov 2024 02:38:39 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1t86DG-0007KO-FO; Mon, 04 Nov 2024 18:10:22 -0500
+	id 1t89SP-0006E5-8V; Mon, 04 Nov 2024 21:38:13 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1t86DD-0007JY-8b; Mon, 04 Nov 2024 18:10:19 -0500
-Received: from mail-ua1-x92e.google.com ([2607:f8b0:4864:20::92e])
+ id 1t89SN-0006Dq-O7; Mon, 04 Nov 2024 21:38:11 -0500
+Received: from mail-ua1-x930.google.com ([2607:f8b0:4864:20::930])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1t86D8-0000YS-0s; Mon, 04 Nov 2024 18:10:19 -0500
-Received: by mail-ua1-x92e.google.com with SMTP id
- a1e0cc1a2514c-84fe1bc5284so1657547241.0; 
- Mon, 04 Nov 2024 15:10:13 -0800 (PST)
+ id 1t89SL-0003Ay-RF; Mon, 04 Nov 2024 21:38:11 -0500
+Received: by mail-ua1-x930.google.com with SMTP id
+ a1e0cc1a2514c-855eeff6448so1194281241.0; 
+ Mon, 04 Nov 2024 18:38:09 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1730761812; x=1731366612; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1730774288; x=1731379088; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=K4zwPEK5X5oFh4CQ14cbiT4FLOr3hw9OaMGbpgUQOYA=;
- b=H8Xpq/qQOuXHkqlutN0xW4gsX6LlOMP2GZu4pMcp4R0nbIIyjWk7R3ASbPA1ko0ll1
- SAMzzrN8zC5y8AtSHmdJ22S+s7NKwcSx6pZiS6ReeAKCCNzdlBezEjZHkIJ1szvQ4B5H
- obMEFNZRh0D65/n68QXiDYAcUu1TdsYfcEzaN6ko2S1AzpojNbiQj2XuLhaQ7AH2hoAc
- N+nMPqChrW/+y0C0UhUD5cZ6cK8lyfKf1tOjUGb4UuGebdmC3x3DjSAICaHP8ZnJtwZx
- ywVIkvGlCymAuL8HYnqPhUkfe+/d3jaV/0IidxZIl8tjJWRhyouBLEWcVNs6mdEfrFDv
- fJLA==
+ bh=+AgKkBAYEllDHZ4fEdXNHHFGNktGlV7Q4fIKqD1YtRs=;
+ b=k38cxPBq84zhzqPhgqfZp19H2H3n3cmvtd41+cbvEfRqZx5I/HIi1oxse02cTulkA3
+ o8YyJrEVPfYmZ2GRfPyJbVzbQ7w8OTVMgZSnqMkAialHUEzD4Txnm7101xBHDitc6VZR
+ Y4vgwE4wMKC3WlUmoKiAZ/G/UfwmDu8FiQROqN6O3cJFV0agdtlj3wyCt/DTZ/3kvFJy
+ E8LAZahy4gnc8DOsWPiPl2JnSfSD+9r310faKrXYVmdzqMgHz+eAJk60+zguTlcYZaqg
+ ex+QAFRVB+Zpfs5by2xzxSZOfmquvEm6XiAhtI1wyLkAbA8u+gOuLp5CyUxBwOIz8sRM
+ LZEg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1730761812; x=1731366612;
+ d=1e100.net; s=20230601; t=1730774288; x=1731379088;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=K4zwPEK5X5oFh4CQ14cbiT4FLOr3hw9OaMGbpgUQOYA=;
- b=Ba1M4UauJhcGCzHummm+uABO+1IcPfCv34U0bT5Oimnyv/qdkpoAYrD4sn88N098Z+
- QJpm5CZQMLEgKpPZr783gfn0DQQrAVL0f/2iW4q5QIJmbBAUAspUBa6VQwHZLgfInblN
- YnetmgVyN3XaUx1WFYvROpxY9mpGuT+hzMj7BgGPHxp0x0wMsFMy/w6nMATL6wbT3/17
- ZiCfI+uY5lPBatCTRKEjABpYyjgCFPzwZ1pSXFYfbaKXUolZnFOQ2ct721L6nvxZvI+e
- Ia9R18K9xYtShJ2FnbCrKuhnBH4f4zvMVos6tcg7YAj6Ct+ucJbS32zk+sw68d7cumCi
- jeXg==
+ bh=+AgKkBAYEllDHZ4fEdXNHHFGNktGlV7Q4fIKqD1YtRs=;
+ b=ra+bDZjUTNgxn97eHJ9ar+SoU5N6bGCSHgjF9e3G4yJuW99PIlojdfntLZ7X4ySme5
+ YUTBBmWPI7HN+T4vgCSv3luVhqP1q0t5e3wGGgJZz3w1vxNAenWjgPW8qrD2NV68o9Y7
+ MU0HvuzurfzvjJO7+Pa+BBdYEr5GnpiL2unDD7/fdozeEAls6xRySX0urfPhz9mAFOVp
+ yvGa+x1olf0FKuA4kI4dIwrrcZLv7sDOI6GMUsPJKXrcIqmQ/PhmS2uYzHMcjmeqDjRp
+ JKhtXSwIBkUqnTDUvLPetuq0EI8T+QEiayt+KimQrf8xlBp5E3MAfqruhtZqpdEOFhIg
+ wIYw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUjoN9dMfLPmM87sPmnrBjUvCia5m9mQLBdbvsTKu55P3Uh8MXt/HKOIeAxFQMGr88BuVUZ0Jt5rAOz@nongnu.org
-X-Gm-Message-State: AOJu0YwguBqz3F3LYUfIWjMHnxdvMU07VmM4t7I9ztDIb02vqAVBOpjX
- cUHQ4XME2YNbQfTOGDM71m18bJ2Cc3UVcgWzaTTuTZs0RChuq6owngC0USZp4lVPs8KS+gYUMoU
- N0LK948bLfmPWZa4xx6Lnne+e5zk=
-X-Google-Smtp-Source: AGHT+IFbWJV8hCRHdrECcrdzM4FT4Vjny4A8hhoi0WkSXC2BiEDCWDlZ2dS3qbO4iZqMbvxkLaIfYhOKUUtCY0tWc0Y=
-X-Received: by 2002:a05:6102:3590:b0:4a7:49ca:4ba4 with SMTP id
- ada2fe7eead31-4a962f7e1f3mr10110145137.27.1730761812497; Mon, 04 Nov 2024
- 15:10:12 -0800 (PST)
+ AJvYcCVVf2XwQmb/vLp66atlxa48ES7uXxh7k1qxfCn3s4E8UL1CuFDTgJMEQT4q8F4hGIE0eXAqRXLFV5Aw@nongnu.org
+X-Gm-Message-State: AOJu0YwsOZhsfYNHy7Ky+toS1LlK6DEo4mKbZvU2/SXYnpNSYxHpblVF
+ Ye9EkPBcyLykg+eUcQ7Ltr5FXBE7JV5zu3Vo/mE+yTCMCSYjj/9OU62eK/qhbZnTaWWyjhShhHi
+ HEKocoYIMW278T7tVvp94fQKTwtQ=
+X-Google-Smtp-Source: AGHT+IHsGazR7xi0Xlxf6yoQag0WzQRTnOdzCzqDse+eOtB3ojHPuay7Y7UtQniFrjkncIG6lUgGiNsTit29erL/htU=
+X-Received: by 2002:a05:6102:440e:b0:4a3:a014:38aa with SMTP id
+ ada2fe7eead31-4a962de10b0mr12463029137.11.1730774288350; Mon, 04 Nov 2024
+ 18:38:08 -0800 (PST)
 MIME-Version: 1.0
-References: <20241104123839.533442-1-dbarboza@ventanamicro.com>
- <20241104123839.533442-3-dbarboza@ventanamicro.com>
-In-Reply-To: <20241104123839.533442-3-dbarboza@ventanamicro.com>
+References: <20241104222225.1523751-1-pierrick.bouvier@linaro.org>
+In-Reply-To: <20241104222225.1523751-1-pierrick.bouvier@linaro.org>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Tue, 5 Nov 2024 09:09:46 +1000
-Message-ID: <CAKmqyKOQKw54zFWpAGWowR8i=7yR7avjdToy3ikNNEP8evsfhg@mail.gmail.com>
-Subject: Re: [PATCH 2/2] hw/riscv/riscv-iommu: fix
- riscv_iommu_validate_process_ctx() check
-To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
- bmeng@tinylab.org, liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, 
- palmer@rivosinc.com, peter.maydell@linaro.org
+Date: Tue, 5 Nov 2024 12:37:42 +1000
+Message-ID: <CAKmqyKN+mYMRqA7=Tb+-qNr_b7TQ8rapaB_YDPqjgKWAggeygA@mail.gmail.com>
+Subject: Re: [PATCH v2] hw/riscv: fix build error with clang
+To: Pierrick Bouvier <pierrick.bouvier@linaro.org>
+Cc: qemu-devel@nongnu.org, Roman Bolshakov <rbolshakov@ddn.com>, 
+ Bin Meng <bmeng.cn@gmail.com>, tjeznach@rivosinc.com, qemu-riscv@nongnu.org, 
+ Alistair Francis <alistair.francis@wdc.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>, pbonzini@redhat.com, 
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>, peter.maydell@linaro.org, 
+ Cameron Esfahani <dirty@apple.com>, Weiwei Li <liwei1518@gmail.com>, 
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::92e;
- envelope-from=alistair23@gmail.com; helo=mail-ua1-x92e.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::930;
+ envelope-from=alistair23@gmail.com; helo=mail-ua1-x930.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -94,44 +96,81 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Mon, Nov 4, 2024 at 10:40=E2=80=AFPM Daniel Henrique Barboza
-<dbarboza@ventanamicro.com> wrote:
+On Tue, Nov 5, 2024 at 8:23=E2=80=AFAM Pierrick Bouvier
+<pierrick.bouvier@linaro.org> wrote:
 >
-> 'mode' will never be RISCV_IOMMU_CAP_SV32. We are erroring out in the
-> 'switch' right before it if 'mode' isn't 0, 8, 9 or 10.
+> Introduced in 0c54ac, "hw/riscv: add RISC-V IOMMU base emulation"
 >
-> 'mode' should be check with RISCV_IOMMU_DC_FSC_IOSATP_MODE_SV32.
+> ../hw/riscv/riscv-iommu.c:187:17: error: redefinition of '_pext_u64'
 >
-> Reported by Coverity via a "DEADCODE" ticket.
+>   187 | static uint64_t _pext_u64(uint64_t val, uint64_t ext)
 >
-> Resolves: Coverity CID 1564781
-> Fixes: 0c54acb8243 ("hw/riscv: add RISC-V IOMMU base emulation")
-> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+>       |                 ^
+>
+> D:/a/_temp/msys64/clang64/lib/clang/18/include/bmi2intrin.h:217:1: note: =
+previous definition is here
+>
+>   217 | _pext_u64(unsigned long long __X, unsigned long long __Y)
+>
+>       | ^
+>
+> After a conversation on the mailing list, it was decided to rename and
+> add a comment for this function.
+>
+> Signed-off-by: Pierrick Bouvier <pierrick.bouvier@linaro.org>
 
 Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
 > ---
->  hw/riscv/riscv-iommu.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
+>  hw/riscv/riscv-iommu.c | 23 ++++++++++++++++++++---
+>  1 file changed, 20 insertions(+), 3 deletions(-)
 >
 > diff --git a/hw/riscv/riscv-iommu.c b/hw/riscv/riscv-iommu.c
-> index 05341ad20b..dd102b3c70 100644
+> index feb650549ac..12f01a75f5d 100644
 > --- a/hw/riscv/riscv-iommu.c
 > +++ b/hw/riscv/riscv-iommu.c
-> @@ -803,7 +803,7 @@ static bool riscv_iommu_validate_process_ctx(RISCVIOM=
-MUState *s,
+> @@ -183,8 +183,25 @@ static void riscv_iommu_pri(RISCVIOMMUState *s,
 >      }
+>  }
 >
->      if (ctx->tc & RISCV_IOMMU_DC_TC_SXL) {
-> -        if (mode =3D=3D RISCV_IOMMU_CAP_SV32 &&
-> +        if (mode =3D=3D RISCV_IOMMU_DC_FSC_IOSATP_MODE_SV32 &&
->              !(s->cap & RISCV_IOMMU_CAP_SV32)) {
->                  return false;
->          }
+> -/* Portable implementation of pext_u64, bit-mask extraction. */
+> -static uint64_t _pext_u64(uint64_t val, uint64_t ext)
+> +/*
+> + * Discards all bits from 'val' whose matching bits in the same
+> + * positions in the mask 'ext' are zeros, and packs the remaining
+> + * bits from 'val' contiguously at the least-significant end of the
+> + * result, keeping the same bit order as 'val' and filling any
+> + * other bits at the most-significant end of the result with zeros.
+> + *
+> + * For example, for the following 'val' and 'ext', the return 'ret'
+> + * will be:
+> + *
+> + * val =3D a b c d e f g h
+> + * ext =3D 1 0 1 0 0 1 1 0
+> + * ret =3D 0 0 0 0 a c f g
+> + *
+> + * This function, taken from the riscv-iommu 1.0 spec, section 2.3.3
+> + * "Process to translate addresses of MSIs", is similar to bit manip
+> + * function PEXT (Parallel bits extract) from x86.
+> + */
+> +static uint64_t riscv_iommu_pext_u64(uint64_t val, uint64_t ext)
+>  {
+>      uint64_t ret =3D 0;
+>      uint64_t rot =3D 1;
+> @@ -528,7 +545,7 @@ static MemTxResult riscv_iommu_msi_write(RISCVIOMMUSt=
+ate *s,
+>      int cause;
+>
+>      /* Interrupt File Number */
+> -    intn =3D _pext_u64(PPN_DOWN(gpa), ctx->msi_addr_mask);
+> +    intn =3D riscv_iommu_pext_u64(PPN_DOWN(gpa), ctx->msi_addr_mask);
+>      if (intn >=3D 256) {
+>          /* Interrupt file number out of range */
+>          res =3D MEMTX_ACCESS_ERROR;
 > --
-> 2.45.2
+> 2.39.5
 >
 >
 
