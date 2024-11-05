@@ -4,59 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D5B08D1CA0E
-	for <qemu-riscv@archiver.kernel.org>; Tue,  5 Nov 2024 02:57:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9B3DCD1CA19
+	for <qemu-riscv@archiver.kernel.org>; Tue,  5 Nov 2024 03:38:32 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1t89l2-0001MP-Uw; Mon, 04 Nov 2024 21:57:28 -0500
+	id 1t8AOj-0001Bg-Mq; Mon, 04 Nov 2024 22:38:29 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
- id 1t89kz-0001Lx-UF; Mon, 04 Nov 2024 21:57:27 -0500
-Received: from out30-130.freemail.mail.aliyun.com ([115.124.30.130])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
- id 1t89kw-0004x7-JD; Mon, 04 Nov 2024 21:57:25 -0500
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1t8AOh-0001Ay-VL; Mon, 04 Nov 2024 22:38:28 -0500
+Received: from mail-vk1-xa31.google.com ([2607:f8b0:4864:20::a31])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1t8AOg-0000Ut-DF; Mon, 04 Nov 2024 22:38:27 -0500
+Received: by mail-vk1-xa31.google.com with SMTP id
+ 71dfb90a1353d-50d32d82bd8so1543891e0c.1; 
+ Mon, 04 Nov 2024 19:38:25 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linux.alibaba.com; s=default;
- t=1730775425; h=Message-ID:Date:MIME-Version:Subject:To:From:Content-Type;
- bh=TLkZRXZJ0N7alAVwEloPFb4/OYZquJnSb4GDE7GWofk=;
- b=qaaMOqZsE7PFq025BrFVA1JVDfKuRVzBYEH8kRCnkYXXSwfd2AOgfkJINPu2w2sshaioqQEz8Enn6RyY4M9tWagO6EKjiuw03pklyzgqNQIirU7/ct2wOYFtha+vs6IMrw0+LmKNJFajP2qGz2X5RhJl2NwXbvPPd7N6IhdlszE=
-Received: from 30.166.64.101(mailfrom:zhiwei_liu@linux.alibaba.com
- fp:SMTPD_---0WIlKOFR_1730775423 cluster:ay36) by smtp.aliyun-inc.com;
- Tue, 05 Nov 2024 10:57:04 +0800
-Message-ID: <b2de2778-df6f-4f5e-a4c8-bf8b721f64ab@linux.alibaba.com>
-Date: Tue, 5 Nov 2024 10:57:03 +0800
+ d=gmail.com; s=20230601; t=1730777905; x=1731382705; darn=nongnu.org;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=PZSgRnzBOZa/Qscj4ZeSqmsdXbQm+WfJ6DPvRjrBho4=;
+ b=TSbzQOG80rxBrmqmS+OkaJUvNZGVsgNNNtOTQylp9ij6IfSbGW+oq+cG/bB3FxsDnl
+ wvuWzY+cvKWS5Qq3GV2NaySI28Elhup6LNCVvfk44NS+Q5asRyN4G+QffZ4R8TojDkjL
+ Nswe70NUC8QC+Yj+spJ3u+upxEi3bI9nxkssRZ+LGS9XsJc3aSA2KCOugREs6TqH2fgo
+ fUpF0stZFTqlsfjx2FZnHFLbVjFYd46Cn5snTTgMJPKAkhwXnuQjKgn7cRmh/ZhTfcFt
+ W0TRkT0sAooGNJ69VN73KUir23Nze0d53LI7dsjQ+Z0rK7DaEMXLfvTlAlSVxVtmLXfO
+ idOg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1730777905; x=1731382705;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=PZSgRnzBOZa/Qscj4ZeSqmsdXbQm+WfJ6DPvRjrBho4=;
+ b=u4JfkVAZExwaBbuHNYrXsJ3f2G1mWjqdxMJRj58U7ve6WluzVXSxubCpA8OXSatSeT
+ sbzc72+MXVR9+HpfAxJl7zvQ5nQDN9WM+6OXByNitkvsJbqQriQ9Nxvi9gk3vSvG91hG
+ 7XzOjqJDR46NF5sklmLoHx+MwDQiKId3zdDZjEyw+kmSFaKOFy/OixkfO2Dgs5IO5otJ
+ dRi7bJFZtONI4+bQPkff7louInzJNtfeN3jGvwPXBKc9iRTD4u0dIhWBX7/gzbXFZ91x
+ dKDnYj+Rov9Wn8lL1TFcKEhiI88VFmTLKODJ8iSqHz9M3op10Jwk5ppxzDBPb1U/yMfa
+ solw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUoVzP0dJTRNGY4fdsDl1rrzyOViyBut1JRjTXTw1Sx5KpOK2zTKeqbHnqULCWWFpNAxvp6e/QWxcWP@nongnu.org
+X-Gm-Message-State: AOJu0YzSu3JA9lgj33ZETcR95jeB/MliaZVyXJDqDc/xk92Xv3iyV2R4
+ 5zz07HAWo1VQ/9j+XtIPmBo6eXrCT5Vv4xgGJfbxMqe5PeXF3M+KdUW6q4/DYLrI6CISnZNYhGm
+ /zsuOdovGxtqorykIqvK108YW/Z8=
+X-Google-Smtp-Source: AGHT+IGgIcMLF/qjTuCKISpFFleDGiCMEy/TyP1D4SE0rUWfeBRx07/SLEgkvspsz60dY6eTNa1UmvqAU/fmyqBLJ0Y=
+X-Received: by 2002:a05:6122:1d4c:b0:50d:a31c:678c with SMTP id
+ 71dfb90a1353d-5106ae6d944mr17639708e0c.2.1730777904530; Mon, 04 Nov 2024
+ 19:38:24 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] hw/riscv: fix build error with clang
-To: Pierrick Bouvier <pierrick.bouvier@linaro.org>, qemu-devel@nongnu.org
-Cc: Roman Bolshakov <rbolshakov@ddn.com>, Bin Meng <bmeng.cn@gmail.com>,
- tjeznach@rivosinc.com, qemu-riscv@nongnu.org,
- Alistair Francis <alistair.francis@wdc.com>,
- Palmer Dabbelt <palmer@dabbelt.com>, pbonzini@redhat.com,
+References: <20240918171412.150107-1-max.chou@sifive.com>
+In-Reply-To: <20240918171412.150107-1-max.chou@sifive.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Tue, 5 Nov 2024 13:37:58 +1000
+Message-ID: <CAKmqyKML3BnmcNXNRmxAbwFzbTeC+4x+kwqtOhQCzVRcnDqytw@mail.gmail.com>
+Subject: Re: [PATCH v6 0/7] Improve the performance of RISC-V vector
+ unit-stride/whole register ld/st instructions
+To: Max Chou <max.chou@sifive.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, 
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Bin Meng <bmeng.cn@gmail.com>, Weiwei Li <liwei1518@gmail.com>, 
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- peter.maydell@linaro.org, Cameron Esfahani <dirty@apple.com>,
- Weiwei Li <liwei1518@gmail.com>
-References: <20241104222225.1523751-1-pierrick.bouvier@linaro.org>
-Content-Language: en-US
-From: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
-In-Reply-To: <20241104222225.1523751-1-pierrick.bouvier@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=115.124.30.130;
- envelope-from=zhiwei_liu@linux.alibaba.com;
- helo=out30-130.freemail.mail.aliyun.com
-X-Spam_score_int: -174
-X-Spam_score: -17.5
-X-Spam_bar: -----------------
-X-Spam_report: (-17.5 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, ENV_AND_HDR_SPF_MATCH=-0.5,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_VALIDITY_CERTIFIED_BLOCKED=0.001,
- RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- UNPARSEABLE_RELAY=0.001, USER_IN_DEF_DKIM_WL=-7.5,
- USER_IN_DEF_SPF_WL=-7.5 autolearn=ham autolearn_force=no
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
+ richard.henderson@linaro.org, negge@google.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2607:f8b0:4864:20::a31;
+ envelope-from=alistair23@gmail.com; helo=mail-vk1-xa31.google.com
+X-Spam_score_int: -17
+X-Spam_score: -1.8
+X-Spam_bar: -
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -72,74 +97,109 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
+On Thu, Sep 19, 2024 at 3:15=E2=80=AFAM Max Chou <max.chou@sifive.com> wrot=
+e:
+>
+> Hi,
+>
+> This version fixes several issues in v5
+> - The cross page bound checking issue
+> - The mismatch vl comparison in the early exit checking of vext_ldst_us
+> - The endian issue when host is big endian
+>
+> Thank for Richard Henderson's suggestions that this version unrolled the
+> loop in helper functions of unmasked vector unit-stride load/store
+> instructions, etc.
+>
+> And this version also extends the optimizations to the unmasked vector
+> fault-only-first load instruction.
+>
+> Some performance result of this version
+> 1. Test case provided in
+>     https://gitlab.com/qemu-project/qemu/-/issues/2137#note_1757501369
+>     - QEMU user mode (vlen=3D128):
+>         - Original:   ~11.8 sec
+>         - v5:          ~1.3 sec
+>         - v6:          ~1.2 sec
+>     - QEMU system mode (vlen=3D128):
+>         - Original:   ~29.4 sec
+>         - v5:          ~1.6 sec
+>         - v6:          ~1.6 sec
+> 2. SPEC CPU2006 INT (test input)
+>     - QEMU user mode (vlen=3D128)
+>         - Original:  ~459.1 sec
+>         - v5:        ~300.0 sec
+>         - v6:        ~280.6 sec
+> 3. SPEC CPU2017 intspeed (test input)
+>     - QEMU user mode (vlen=3D128)
+>         - Original: ~2475.9 sec
+>         - v5:       ~1702.6 sec
+>         - v6:       ~1663.4 sec
+>
+>
+> This version is based on the riscv-to-apply.next branch(commit 90d5d3c).
+>
+> Changes from v5:
+> - patch 2
+>     - Replace the VSTART_CHECK_EARLY_EXIT function by checking the
+>       correct evl in vext_ldst_us.
+> - patch 3
+>     - Unroll the memory load/store loop
+>     - Fix the bound checking issue in cross page elements
+>     - Fix the endian issue in GEN_VEXT_LD_ELEM/GEN_VEXT_ST_ELEM
+>     - Pass in mmu_index for vext_page_ldst_us
+>     - Reduce the flag & host checking
+> - patch 4
+>     - Unroll the memory load/store loop
+>     - Fix the bound checking issue in cross page elements
+> - patch 5
+>     - Extend optimizations to unmasked vector fault-only-first load
+>       instruction
+> - patch 6
+>     - Switch to memcpy only when doing byte load/store
+> - patch 7
+>     - Inline the vext_page_ldst_us function
+>
+> Previous versions:
+> - v1: https://lore.kernel.org/all/20240215192823.729209-1-max.chou@sifive=
+.com/
+> - v2: https://lore.kernel.org/all/20240531174504.281461-1-max.chou@sifive=
+.com/
+> - v3: https://lore.kernel.org/all/20240613141906.1276105-1-max.chou@sifiv=
+e.com/
+> - v4: https://lore.kernel.org/all/20240613175122.1299212-1-max.chou@sifiv=
+e.com/
+> - v5: https://lore.kernel.org/all/20240717133936.713642-1-max.chou@sifive=
+.com/
+>
+> Max Chou (7):
+>   target/riscv: Set vdata.vm field for vector load/store whole register
+>     instructions
+>   target/riscv: rvv: Replace VSTART_CHECK_EARLY_EXIT in vext_ldst_us
+>   target/riscv: rvv: Provide a fast path using direct access to host ram
+>     for unmasked unit-stride load/store
+>   target/riscv: rvv: Provide a fast path using direct access to host ram
+>     for unit-stride whole register load/store
+>   target/riscv: rvv: Provide a fast path using direct access to host ram
+>     for unit-stride load-only-first load instructions
+>   target/riscv: rvv: Provide group continuous ld/st flow for unit-stride
+>     ld/st instructions
+>   target/riscv: Inline unit-stride ld/st and corresponding functions for
+>     performance
 
-On 2024/11/5 06:22, Pierrick Bouvier wrote:
-> Introduced in 0c54ac, "hw/riscv: add RISC-V IOMMU base emulation"
->
-> ../hw/riscv/riscv-iommu.c:187:17: error: redefinition of '_pext_u64'
->
->    187 | static uint64_t _pext_u64(uint64_t val, uint64_t ext)
->
->        |                 ^
->
-> D:/a/_temp/msys64/clang64/lib/clang/18/include/bmi2intrin.h:217:1: note: previous definition is here
->
->    217 | _pext_u64(unsigned long long __X, unsigned long long __Y)
->
->        | ^
->
-> After a conversation on the mailing list, it was decided to rename and
-> add a comment for this function.
->
-> Signed-off-by: Pierrick Bouvier <pierrick.bouvier@linaro.org>
+Thanks!
 
-Reviewed-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
+Applied to riscv-to-apply.next
 
-Zhiwei
+Alistair
 
-> ---
->   hw/riscv/riscv-iommu.c | 23 ++++++++++++++++++++---
->   1 file changed, 20 insertions(+), 3 deletions(-)
 >
-> diff --git a/hw/riscv/riscv-iommu.c b/hw/riscv/riscv-iommu.c
-> index feb650549ac..12f01a75f5d 100644
-> --- a/hw/riscv/riscv-iommu.c
-> +++ b/hw/riscv/riscv-iommu.c
-> @@ -183,8 +183,25 @@ static void riscv_iommu_pri(RISCVIOMMUState *s,
->       }
->   }
->   
-> -/* Portable implementation of pext_u64, bit-mask extraction. */
-> -static uint64_t _pext_u64(uint64_t val, uint64_t ext)
-> +/*
-> + * Discards all bits from 'val' whose matching bits in the same
-> + * positions in the mask 'ext' are zeros, and packs the remaining
-> + * bits from 'val' contiguously at the least-significant end of the
-> + * result, keeping the same bit order as 'val' and filling any
-> + * other bits at the most-significant end of the result with zeros.
-> + *
-> + * For example, for the following 'val' and 'ext', the return 'ret'
-> + * will be:
-> + *
-> + * val = a b c d e f g h
-> + * ext = 1 0 1 0 0 1 1 0
-> + * ret = 0 0 0 0 a c f g
-> + *
-> + * This function, taken from the riscv-iommu 1.0 spec, section 2.3.3
-> + * "Process to translate addresses of MSIs", is similar to bit manip
-> + * function PEXT (Parallel bits extract) from x86.
-> + */
-> +static uint64_t riscv_iommu_pext_u64(uint64_t val, uint64_t ext)
->   {
->       uint64_t ret = 0;
->       uint64_t rot = 1;
-> @@ -528,7 +545,7 @@ static MemTxResult riscv_iommu_msi_write(RISCVIOMMUState *s,
->       int cause;
->   
->       /* Interrupt File Number */
-> -    intn = _pext_u64(PPN_DOWN(gpa), ctx->msi_addr_mask);
-> +    intn = riscv_iommu_pext_u64(PPN_DOWN(gpa), ctx->msi_addr_mask);
->       if (intn >= 256) {
->           /* Interrupt file number out of range */
->           res = MEMTX_ACCESS_ERROR;
+>  target/riscv/insn_trans/trans_rvv.c.inc |   3 +
+>  target/riscv/vector_helper.c            | 598 ++++++++++++++++--------
+>  2 files changed, 400 insertions(+), 201 deletions(-)
+>
+> --
+> 2.34.1
+>
+>
 
