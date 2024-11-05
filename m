@@ -4,91 +4,96 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 90CC8D1CA02
-	for <qemu-riscv@archiver.kernel.org>; Tue,  5 Nov 2024 04:30:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 363C0D1BDFF
+	for <qemu-riscv@archiver.kernel.org>; Tue,  5 Nov 2024 07:45:28 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1t8BCZ-00027a-LA; Mon, 04 Nov 2024 23:29:59 -0500
+	id 1t8EFL-0005J9-CB; Tue, 05 Nov 2024 02:45:03 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <pierrick.bouvier@linaro.org>)
- id 1t8BCU-00021a-2Q
- for qemu-riscv@nongnu.org; Mon, 04 Nov 2024 23:29:56 -0500
-Received: from mail-pl1-x62a.google.com ([2607:f8b0:4864:20::62a])
+ (Exim 4.90_1) (envelope-from <akihiko.odaki@daynix.com>)
+ id 1t8EFJ-0005IK-47
+ for qemu-riscv@nongnu.org; Tue, 05 Nov 2024 02:45:01 -0500
+Received: from mail-pl1-x62b.google.com ([2607:f8b0:4864:20::62b])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <pierrick.bouvier@linaro.org>)
- id 1t8BCR-00051V-OY
- for qemu-riscv@nongnu.org; Mon, 04 Nov 2024 23:29:53 -0500
-Received: by mail-pl1-x62a.google.com with SMTP id
- d9443c01a7336-20ca1b6a80aso51062945ad.2
- for <qemu-riscv@nongnu.org>; Mon, 04 Nov 2024 20:29:50 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <akihiko.odaki@daynix.com>)
+ id 1t8EFG-0000pa-Ry
+ for qemu-riscv@nongnu.org; Tue, 05 Nov 2024 02:45:00 -0500
+Received: by mail-pl1-x62b.google.com with SMTP id
+ d9443c01a7336-21116b187c4so35007875ad.3
+ for <qemu-riscv@nongnu.org>; Mon, 04 Nov 2024 23:44:58 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1730780990; x=1731385790; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
+ d=daynix-com.20230601.gappssmtp.com; s=20230601; t=1730792697; x=1731397497;
+ darn=nongnu.org; 
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=vJYmKWG/oFRir5g0YXPZ2GA21Bbx1I5FbyafMC0WtSo=;
- b=I0geFUFKtb1buVh/WAcltfokvABqjReZSIOKWOzQ4LpzGuePDAS9wsD6LHgqpPuH/Y
- ro8w2zWH+prWNzpIQs3oL5/7Jc69bYhBl+UpdtActGFk7iyNHIc0SFU7sJBfhTt5gT0k
- AMLoLsT0WEJ0Qn5rg05gRsquWOrc8iaSf4Bs25knsUncWj2GRr8Um5ZhzGo9gmMkd4Vf
- Rj+s+wYiWS3kkdQLxuodywnQQdD1PMF6XB4QjZ0aLyjQN2fiCadp6c3Kpfo3593ig98Z
- m6MQ3Gif6PqOjjPGWmIxdNx1VusQXBpdpPmrUuSBJsutIvab7+EVyXg7Mk6ufJA3CvFk
- 7wCg==
+ bh=RMKlRRvn82mT8R/GjyiywQBWv99O2uNSf7ONsN0FFAc=;
+ b=2O61IH7cJtPGrUlfNr6dsQf+R3bbKHZ7rkMyV/oIRCTWqtRkfWXYGoihMPSzuKCVX3
+ mVrz2mnQPDbSnaChT2vnOry2/LjtBrA1twmdxItJnE2g81M78GOuQJbUG9JE9nqBupPw
+ u1TS4vF3T5+Su5std54p4aWduAQaCqdb5bRLfWSngpcF6n6rVtX4qIsGT87TwNYxA9l8
+ /pbgi8vzhcwlb9moTLSDNGso1mOWca8LEoyGgacdK1m2GDKSz2UoHLJ8QIuKtiN8faB4
+ e4SnctQnm+8X9adoVQLA20qzmFc99BJJ8Lmhrsguael3sm9sEFAiB1wUN2Q+LfX2DUyq
+ O55g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1730780990; x=1731385790;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
+ d=1e100.net; s=20230601; t=1730792697; x=1731397497;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=vJYmKWG/oFRir5g0YXPZ2GA21Bbx1I5FbyafMC0WtSo=;
- b=pSIfPnuiqQspKRjPdnsPLdK6B47kY4oStYYABy4tFl7OEUTJ94o0GQgEc+x1AzNNco
- WzQ+YJJrGK9c3nCreqQf5XBtTk2Nhlh/KxLQQh1w63SDs9g8MdQirEwvN74lHeaL07JH
- 1aNA+Oks2BvRHeMTU9oL188wUX41t63LuRCvNGNbB3D7i/iSH8sdECyK3PlIJAzOXHQs
- U4fM2awwsW9FZHxXksLNiD0oKo9WoO15JKfwSsn/RGFULIcL94qXiweGgQd5XbKNQfDR
- OaB6vDFJzXlf+ZhgUvgaGEA2uVlZNWQwxn4IHem2GWRoDoBiq08fRSJ2bVCYJo3BjAA/
- PI1A==
+ bh=RMKlRRvn82mT8R/GjyiywQBWv99O2uNSf7ONsN0FFAc=;
+ b=n+fbyqwzYqcLJvOmEI2KOyVv4E9NkO55bLrtsqQtwGYJ3Ddd73Nc+mw2ndNrRNANbB
+ 3XAUklO2XPv6OfOHDgmlOq/HuEXS7kxKCQkAOV5yOjBJP432oBW61YJ5kqAowqZr/pcp
+ MpXxwrXQjYWQyNBdTY3AAyPoDkmvEEdLamOY0yyKEod+BCRfq87hLYEs4iXbJ0HJPTec
+ /tOIAN31Ksx2aver5atIBNHqsNcO1XpuxG4N+pzFrZ7aVmmsOH3mdR0veC3E6NX3KjDg
+ KC4ylGDOjFFuR5FwH+0D8qV2eqyOBbGXZrbw35QglT6Mj0wxhsQXl4OeVXt57ElxQulz
+ 7lyQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCV7euh4c1fe4cXKQGV2SSL9Xf4PayQuL8Wz6FQlnW2sqp/slkw7L2D7dTLkUO22O2bTRStVd7hUizq6@nongnu.org
-X-Gm-Message-State: AOJu0YzRXbB4BZ/h4qWpYcd5i+xI6sWhiFpdHsS1XYlLsRzesbCgWwfD
- dk6Xv735WVC7yb43gl/CZ5e+ub0HHn96kVJi+iCwHzFfPPCA+rsL11qsbVOFkME=
-X-Google-Smtp-Source: AGHT+IFc7Afc2WVwCZ0iIAuudzdu23gzN+uO+0GWcnCs5sFEKjXvOouu1GqqrrO+JMlq5a/dfPkQ/A==
-X-Received: by 2002:a17:903:22c8:b0:20b:920e:8fd3 with SMTP id
- d9443c01a7336-2111af7b2f8mr236806595ad.35.1730780989681; 
- Mon, 04 Nov 2024 20:29:49 -0800 (PST)
-Received: from [192.168.1.67] (216-180-64-156.dyn.novuscom.net.
- [216.180.64.156]) by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-21105706891sm69479195ad.69.2024.11.04.20.29.48
+ AJvYcCUGmNS3+zsmut6bmsqB4m+7higp/u6O0/FvE6XMg6dQSi/Q3G9KE+VmVYvtIUvtwGjoKGcXUvupzL8Q@nongnu.org
+X-Gm-Message-State: AOJu0YyuUJyx8FRGWLsrQoddX32QZ30yB8EaEadA7hRZQ/YgFSleBM9m
+ q78iFZR3ToZZRc/HNr8bRv7bp2ylAIEr4J6EJw2ffXeGkXx7vJ0rJmymqZ7xqi0=
+X-Google-Smtp-Source: AGHT+IEVpXu8ZAwV3hzl+eplxudwHqntFaNXHSVGbq04xNdETQoXkVD0WcYirRLY0wkoM0KbvVrjlQ==
+X-Received: by 2002:a17:902:dac4:b0:20b:a9f3:796d with SMTP id
+ d9443c01a7336-2111afd6c25mr175705165ad.44.1730792697401; 
+ Mon, 04 Nov 2024 23:44:57 -0800 (PST)
+Received: from [157.82.207.107] ([157.82.207.107])
+ by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-211057d44cesm73005705ad.255.2024.11.04.23.44.51
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 04 Nov 2024 20:29:49 -0800 (PST)
-Message-ID: <a9c03f45-13d5-49ef-9c26-f3ab81c5932f@linaro.org>
-Date: Mon, 4 Nov 2024 20:29:48 -0800
+ Mon, 04 Nov 2024 23:44:57 -0800 (PST)
+Message-ID: <fe00d848-e775-4df7-9a0f-dfbeca9118a3@daynix.com>
+Date: Tue, 5 Nov 2024 16:44:49 +0900
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] hw/riscv: fix build error with clang
+Subject: Re: [PATCH v6 01/15] ui & main loop: Redesign of system-specific main
+ thread event handling
+To: Phil Dennis-Jordan <phil@philjordan.eu>, qemu-devel@nongnu.org
+Cc: agraf@csgraf.de, peter.maydell@linaro.org, pbonzini@redhat.com,
+ rad@semihalf.com, quic_llindhol@quicinc.com, marcin.juszkiewicz@linaro.org,
+ stefanha@redhat.com, mst@redhat.com, slp@redhat.com,
+ richard.henderson@linaro.org, eduardo@habkost.net,
+ marcel.apfelbaum@gmail.com, gaosong@loongson.cn, jiaxun.yang@flygoat.com,
+ chenhuacai@kernel.org, kwolf@redhat.com, hreitz@redhat.com,
+ philmd@linaro.org, shorne@gmail.com, palmer@dabbelt.com,
+ alistair.francis@wdc.com, bmeng.cn@gmail.com, liwei1518@gmail.com,
+ dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com, jcmvbkbc@gmail.com,
+ marcandre.lureau@redhat.com, berrange@redhat.com, qemu-arm@nongnu.org,
+ qemu-block@nongnu.org, qemu-riscv@nongnu.org
+References: <20241103150037.48194-1-phil@philjordan.eu>
+ <20241103150037.48194-2-phil@philjordan.eu>
 Content-Language: en-US
-To: Alistair Francis <alistair23@gmail.com>
-Cc: qemu-devel@nongnu.org, Roman Bolshakov <rbolshakov@ddn.com>,
- Bin Meng <bmeng.cn@gmail.com>, tjeznach@rivosinc.com, qemu-riscv@nongnu.org,
- Alistair Francis <alistair.francis@wdc.com>,
- Palmer Dabbelt <palmer@dabbelt.com>, pbonzini@redhat.com,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- peter.maydell@linaro.org, Cameron Esfahani <dirty@apple.com>,
- Weiwei Li <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
-References: <20241104222225.1523751-1-pierrick.bouvier@linaro.org>
- <CAKmqyKN+mYMRqA7=Tb+-qNr_b7TQ8rapaB_YDPqjgKWAggeygA@mail.gmail.com>
-From: Pierrick Bouvier <pierrick.bouvier@linaro.org>
-In-Reply-To: <CAKmqyKN+mYMRqA7=Tb+-qNr_b7TQ8rapaB_YDPqjgKWAggeygA@mail.gmail.com>
+From: Akihiko Odaki <akihiko.odaki@daynix.com>
+In-Reply-To: <20241103150037.48194-2-phil@philjordan.eu>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: base64
-Received-SPF: pass client-ip=2607:f8b0:4864:20::62a;
- envelope-from=pierrick.bouvier@linaro.org; helo=mail-pl1-x62a.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+Content-Transfer-Encoding: 7bit
+Received-SPF: none client-ip=2607:f8b0:4864:20::62b;
+ envelope-from=akihiko.odaki@daynix.com; helo=mail-pl1-x62b.google.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_NONE=0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -104,58 +109,53 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-VGhhbmtzIGZvciB0aGUgcmV2aWV3Lg0KRmVlbCBmcmVlIHRvIHB1bGwgdGhlIHBhdGNoIGlu
-IHlvdXIgbmV4dCBQUiwgc28gaXQgY2FuIGJlIGF2YWlsYWJsZSBmb3IgDQpyZWxlYXNlIDku
-Mi4NCg0KUmVnYXJkcywNClBpZXJyaWNrDQoNCk9uIDExLzQvMjQgMTg6MzcsIEFsaXN0YWly
-IEZyYW5jaXMgd3JvdGU6DQo+IE9uIFR1ZSwgTm92IDUsIDIwMjQgYXQgODoyM+KAr0FNIFBp
-ZXJyaWNrIEJvdXZpZXINCj4gPHBpZXJyaWNrLmJvdXZpZXJAbGluYXJvLm9yZz4gd3JvdGU6
-DQo+Pg0KPj4gSW50cm9kdWNlZCBpbiAwYzU0YWMsICJody9yaXNjdjogYWRkIFJJU0MtViBJ
-T01NVSBiYXNlIGVtdWxhdGlvbiINCj4+DQo+PiAuLi9ody9yaXNjdi9yaXNjdi1pb21tdS5j
-OjE4NzoxNzogZXJyb3I6IHJlZGVmaW5pdGlvbiBvZiAnX3BleHRfdTY0Jw0KPj4NCj4+ICAg
-IDE4NyB8IHN0YXRpYyB1aW50NjRfdCBfcGV4dF91NjQodWludDY0X3QgdmFsLCB1aW50NjRf
-dCBleHQpDQo+Pg0KPj4gICAgICAgIHwgICAgICAgICAgICAgICAgIF4NCj4+DQo+PiBEOi9h
-L190ZW1wL21zeXM2NC9jbGFuZzY0L2xpYi9jbGFuZy8xOC9pbmNsdWRlL2JtaTJpbnRyaW4u
-aDoyMTc6MTogbm90ZTogcHJldmlvdXMgZGVmaW5pdGlvbiBpcyBoZXJlDQo+Pg0KPj4gICAg
-MjE3IHwgX3BleHRfdTY0KHVuc2lnbmVkIGxvbmcgbG9uZyBfX1gsIHVuc2lnbmVkIGxvbmcg
-bG9uZyBfX1kpDQo+Pg0KPj4gICAgICAgIHwgXg0KPj4NCj4+IEFmdGVyIGEgY29udmVyc2F0
-aW9uIG9uIHRoZSBtYWlsaW5nIGxpc3QsIGl0IHdhcyBkZWNpZGVkIHRvIHJlbmFtZSBhbmQN
-Cj4+IGFkZCBhIGNvbW1lbnQgZm9yIHRoaXMgZnVuY3Rpb24uDQo+Pg0KPj4gU2lnbmVkLW9m
-Zi1ieTogUGllcnJpY2sgQm91dmllciA8cGllcnJpY2suYm91dmllckBsaW5hcm8ub3JnPg0K
-PiANCj4gUmV2aWV3ZWQtYnk6IEFsaXN0YWlyIEZyYW5jaXMgPGFsaXN0YWlyLmZyYW5jaXNA
-d2RjLmNvbT4NCj4gDQo+IEFsaXN0YWlyDQo+IA0KPj4gLS0tDQo+PiAgIGh3L3Jpc2N2L3Jp
-c2N2LWlvbW11LmMgfCAyMyArKysrKysrKysrKysrKysrKysrKy0tLQ0KPj4gICAxIGZpbGUg
-Y2hhbmdlZCwgMjAgaW5zZXJ0aW9ucygrKSwgMyBkZWxldGlvbnMoLSkNCj4+DQo+PiBkaWZm
-IC0tZ2l0IGEvaHcvcmlzY3YvcmlzY3YtaW9tbXUuYyBiL2h3L3Jpc2N2L3Jpc2N2LWlvbW11
-LmMNCj4+IGluZGV4IGZlYjY1MDU0OWFjLi4xMmYwMWE3NWY1ZCAxMDA2NDQNCj4+IC0tLSBh
-L2h3L3Jpc2N2L3Jpc2N2LWlvbW11LmMNCj4+ICsrKyBiL2h3L3Jpc2N2L3Jpc2N2LWlvbW11
-LmMNCj4+IEBAIC0xODMsOCArMTgzLDI1IEBAIHN0YXRpYyB2b2lkIHJpc2N2X2lvbW11X3By
-aShSSVNDVklPTU1VU3RhdGUgKnMsDQo+PiAgICAgICB9DQo+PiAgIH0NCj4+DQo+PiAtLyog
-UG9ydGFibGUgaW1wbGVtZW50YXRpb24gb2YgcGV4dF91NjQsIGJpdC1tYXNrIGV4dHJhY3Rp
-b24uICovDQo+PiAtc3RhdGljIHVpbnQ2NF90IF9wZXh0X3U2NCh1aW50NjRfdCB2YWwsIHVp
-bnQ2NF90IGV4dCkNCj4+ICsvKg0KPj4gKyAqIERpc2NhcmRzIGFsbCBiaXRzIGZyb20gJ3Zh
-bCcgd2hvc2UgbWF0Y2hpbmcgYml0cyBpbiB0aGUgc2FtZQ0KPj4gKyAqIHBvc2l0aW9ucyBp
-biB0aGUgbWFzayAnZXh0JyBhcmUgemVyb3MsIGFuZCBwYWNrcyB0aGUgcmVtYWluaW5nDQo+
-PiArICogYml0cyBmcm9tICd2YWwnIGNvbnRpZ3VvdXNseSBhdCB0aGUgbGVhc3Qtc2lnbmlm
-aWNhbnQgZW5kIG9mIHRoZQ0KPj4gKyAqIHJlc3VsdCwga2VlcGluZyB0aGUgc2FtZSBiaXQg
-b3JkZXIgYXMgJ3ZhbCcgYW5kIGZpbGxpbmcgYW55DQo+PiArICogb3RoZXIgYml0cyBhdCB0
-aGUgbW9zdC1zaWduaWZpY2FudCBlbmQgb2YgdGhlIHJlc3VsdCB3aXRoIHplcm9zLg0KPj4g
-KyAqDQo+PiArICogRm9yIGV4YW1wbGUsIGZvciB0aGUgZm9sbG93aW5nICd2YWwnIGFuZCAn
-ZXh0JywgdGhlIHJldHVybiAncmV0Jw0KPj4gKyAqIHdpbGwgYmU6DQo+PiArICoNCj4+ICsg
-KiB2YWwgPSBhIGIgYyBkIGUgZiBnIGgNCj4+ICsgKiBleHQgPSAxIDAgMSAwIDAgMSAxIDAN
-Cj4+ICsgKiByZXQgPSAwIDAgMCAwIGEgYyBmIGcNCj4+ICsgKg0KPj4gKyAqIFRoaXMgZnVu
-Y3Rpb24sIHRha2VuIGZyb20gdGhlIHJpc2N2LWlvbW11IDEuMCBzcGVjLCBzZWN0aW9uIDIu
-My4zDQo+PiArICogIlByb2Nlc3MgdG8gdHJhbnNsYXRlIGFkZHJlc3NlcyBvZiBNU0lzIiwg
-aXMgc2ltaWxhciB0byBiaXQgbWFuaXANCj4+ICsgKiBmdW5jdGlvbiBQRVhUIChQYXJhbGxl
-bCBiaXRzIGV4dHJhY3QpIGZyb20geDg2Lg0KPj4gKyAqLw0KPj4gK3N0YXRpYyB1aW50NjRf
-dCByaXNjdl9pb21tdV9wZXh0X3U2NCh1aW50NjRfdCB2YWwsIHVpbnQ2NF90IGV4dCkNCj4+
-ICAgew0KPj4gICAgICAgdWludDY0X3QgcmV0ID0gMDsNCj4+ICAgICAgIHVpbnQ2NF90IHJv
-dCA9IDE7DQo+PiBAQCAtNTI4LDcgKzU0NSw3IEBAIHN0YXRpYyBNZW1UeFJlc3VsdCByaXNj
-dl9pb21tdV9tc2lfd3JpdGUoUklTQ1ZJT01NVVN0YXRlICpzLA0KPj4gICAgICAgaW50IGNh
-dXNlOw0KPj4NCj4+ICAgICAgIC8qIEludGVycnVwdCBGaWxlIE51bWJlciAqLw0KPj4gLSAg
-ICBpbnRuID0gX3BleHRfdTY0KFBQTl9ET1dOKGdwYSksIGN0eC0+bXNpX2FkZHJfbWFzayk7
-DQo+PiArICAgIGludG4gPSByaXNjdl9pb21tdV9wZXh0X3U2NChQUE5fRE9XTihncGEpLCBj
-dHgtPm1zaV9hZGRyX21hc2spOw0KPj4gICAgICAgaWYgKGludG4gPj0gMjU2KSB7DQo+PiAg
-ICAgICAgICAgLyogSW50ZXJydXB0IGZpbGUgbnVtYmVyIG91dCBvZiByYW5nZSAqLw0KPj4g
-ICAgICAgICAgIHJlcyA9IE1FTVRYX0FDQ0VTU19FUlJPUjsNCj4+IC0tDQo+PiAyLjM5LjUN
-Cj4+DQo+Pg0K
+On 2024/11/04 0:00, Phil Dennis-Jordan wrote:
+> macOS's Cocoa event handling must be done on the initial (main) thread
+> of the process. Furthermore, if library or application code uses
+> libdispatch, the main dispatch queue must be handling events on the main
+> thread as well.
+> 
+> So far, this has affected Qemu in both the Cocoa and SDL UIs, although
+> in different ways: the Cocoa UI replaces the default qemu_main function
+> with one that spins Qemu's internal main event loop off onto a
+> background thread. SDL (which uses Cocoa internally) on the other hand
+> uses a polling approach within Qemu's main event loop. Events are
+> polled during the SDL UI's dpy_refresh callback, which happens to run
+> on the main thread by default.
+> 
+> As UIs are mutually exclusive, this works OK as long as nothing else
+> needs platform-native event handling. In the next patch, a new device is
+> introduced based on the ParavirtualizedGraphics.framework in macOS.
+> This uses libdispatch internally, and only works when events are being
+> handled on the main runloop. With the current system, it works when
+> using either the Cocoa or the SDL UI. However, it does not when running
+> headless. Moreover, any attempt to install a similar scheme to the
+> Cocoa UI's main thread replacement fails when combined with the SDL
+> UI.
+> 
+> This change tidies up main thread management to be more flexible.
+> 
+>   * The qemu_main global function pointer is a custom function for the
+>     main thread, and it may now be NULL. When it is, the main thread
+>     runs the main Qemu loop. This represents the traditional setup.
+>   * When non-null, spawning the main Qemu event loop on a separate
+>     thread is now done centrally rather than inside the Cocoa UI code.
+>   * For most platforms, qemu_main is indeed NULL by default, but on
+>     Darwin, it defaults to a function that runs the CFRunLoop.
+>   * The Cocoa UI sets qemu_main to a function which runs the
+>     NSApplication event handling runloop, as is usual for a Cocoa app.
+>   * The SDL UI overrides the qemu_main function to NULL, thus
+>     specifying that Qemu's main loop must run on the main
+>     thread.
+>   * For other UIs, or in the absence of UIs, the platform's default
+>     behaviour is followed.
+> 
+> This means that on macOS, the platform's runloop events are always
+> handled, regardless of chosen UI. The new PV graphics device will
+> thus work in all configurations. There is no functional change on other
+> operating systems.
+> 
+> Signed-off-by: Phil Dennis-Jordan <phil@philjordan.eu>
+
+Reviewed-by: Akihiko Odaki <akihiko.odaki@daynix.com>
 
