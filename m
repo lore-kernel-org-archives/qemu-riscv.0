@@ -4,70 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8D5A7D1267E
-	for <qemu-riscv@archiver.kernel.org>; Tue,  5 Nov 2024 10:35:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 51082D1267F
+	for <qemu-riscv@archiver.kernel.org>; Tue,  5 Nov 2024 10:51:18 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1t8Gub-00084v-Qw; Tue, 05 Nov 2024 05:35:49 -0500
+	id 1t8H96-0000i7-FM; Tue, 05 Nov 2024 05:50:48 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1t8GuR-00082n-IS
- for qemu-riscv@nongnu.org; Tue, 05 Nov 2024 05:35:40 -0500
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1t8GuO-0002iR-Cg
- for qemu-riscv@nongnu.org; Tue, 05 Nov 2024 05:35:38 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1730802934;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=3IjeZHhgrukS63bYFX7rOh2OPgHJRvVOn6pFVT1F1jY=;
- b=TS7OefyCJ/1ALyxeKqo5SSx9jy/WeMNkhQZA8CrhVwP2XFNf6rT7wNjddfFVfo4iPSLCYy
- 8TAcH6KQNsgHdUz9709G+wdGYY2wc0QmkHznTVOk8+EslryzUSOq34w8O9iTWdUUaxKHmA
- Ou6lOUYbHuxq9ByzZ1jaeic2dCwVATs=
-Received: from mx-prod-mc-05.mail-002.prod.us-west-2.aws.redhat.com
- (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
- relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-649-usqQ-EoTOiOuLN6PFGJarA-1; Tue,
- 05 Nov 2024 05:35:29 -0500
-X-MC-Unique: usqQ-EoTOiOuLN6PFGJarA-1
-Received: from mx-prod-int-02.mail-002.prod.us-west-2.aws.redhat.com
- (mx-prod-int-02.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.15])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by mx-prod-mc-05.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id 5D28919560A2; Tue,  5 Nov 2024 10:35:26 +0000 (UTC)
-Received: from thuth-p1g4.redhat.com (unknown [10.39.194.117])
- by mx-prod-int-02.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
- id D78FD195607C; Tue,  5 Nov 2024 10:35:21 +0000 (UTC)
-From: Thomas Huth <thuth@redhat.com>
-To: qemu-devel@nongnu.org,
-	Alistair Francis <alistair.francis@wdc.com>
-Cc: qemu-riscv@nongnu.org, Bin Meng <bmeng.cn@gmail.com>,
- Weiwei Li <liwei1518@gmail.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Palmer Dabbelt <palmer@dabbelt.com>
-Subject: [PATCH] tests/functional: Convert the RV32-on-RV64 riscv test
-Date: Tue,  5 Nov 2024 11:35:19 +0100
-Message-ID: <20241105103519.341304-1-thuth@redhat.com>
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1t8H92-0000hR-UU
+ for qemu-riscv@nongnu.org; Tue, 05 Nov 2024 05:50:45 -0500
+Received: from mail-wr1-x434.google.com ([2a00:1450:4864:20::434])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1t8H91-00045i-31
+ for qemu-riscv@nongnu.org; Tue, 05 Nov 2024 05:50:44 -0500
+Received: by mail-wr1-x434.google.com with SMTP id
+ ffacd0b85a97d-37d4b0943c7so3351005f8f.1
+ for <qemu-riscv@nongnu.org>; Tue, 05 Nov 2024 02:50:42 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1730803841; x=1731408641; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=6riB8icHr31bYt7Ypso97Po0mJrHmUtnF5OMisGLVTs=;
+ b=YfGZZg+zL7CeN1SWt+SOlu9h65Yc38cpc7ETnPcBBg0tYJyciMk/AM+aUOfF8NNz59
+ WA9CiLYZmVtaY9q+VuZBogGVnEao5Kl0QX0l9YS3XtY83AlMwRwnTsg771P6VUbecJzH
+ zvRwd6Nc89G0VcSAzX6FXT2meG6xUe0EGV2XEamOyTlDaK5mlrW+L8fdHm8TMdy6rjv+
+ 66laqc6gQl0/zIDFWSwDYDoFl5i9OjpGSLhS4LyEWJSPrpMPvU3GC5Gxiy0NCT5Obg+K
+ 0LXxXrfMHjUrRtxXOCop1mTNMPoLb3R6zGhWsCikZAYq9Z4prI/X6KAtZp/+ucHTQqlE
+ flRw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1730803841; x=1731408641;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=6riB8icHr31bYt7Ypso97Po0mJrHmUtnF5OMisGLVTs=;
+ b=aSPa8w+/BFaQuxjmb1VQPLiEmDM8Xh4KHUAMb6ottIgGkwAQUvIAFhKRo2VVANqhA+
+ pGqvPT7xlZWSbqQ5GKY2iGfYbW47Fj9mn6mbEgR50bhTYzGfNXyVrdPIp8bsbgH9YoqY
+ mdk7C1r/xKDQahmUYS0jY8SE/cyhT0ugD30KcLXDVDKE1uDB0rZK0+muQsxeSMsqQNx3
+ I1r0pvNXkP+YrPUbKs1O6rirMaLzdHp88urlXcfXiidR7NoqgnwYF/edY+lQaq+Rkfpk
+ hGTyRm2RWzSBA40qzfTBoP3310jAxY8/qN/5yXsphy7QChAbpBcXWMT/HmhoF52gYH+K
+ yS6g==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCURkwaWP9s8V4RZIGESzhW7WJf7YGaiKV6jbfd3jOidn7lr6411iU212+ypLNVjXulx5bVFmH92ksfy@nongnu.org
+X-Gm-Message-State: AOJu0YwXp5cV00JgjEnLTF8BiBPRfb+dkJ0rVYy0ZWnco+vBaFd0ovby
+ qSR/9+Tso5CCDrygMtMQJnM7Y8IsLFMqbASWbIgG8BHEFe9u0lSS+JRT44DA168=
+X-Google-Smtp-Source: AGHT+IFJbOlO+3+PpO34nBv4DriG0NXeylMyeIE6CqGeeeBZMuMkDbz7fAO2Lnx2GYpQS7KVgbwf1g==
+X-Received: by 2002:a5d:6601:0:b0:37d:4db3:af36 with SMTP id
+ ffacd0b85a97d-380610f2cd4mr24054517f8f.12.1730803841367; 
+ Tue, 05 Nov 2024 02:50:41 -0800 (PST)
+Received: from [192.168.21.227] ([154.14.63.34])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-381c10b7c38sm15785659f8f.24.2024.11.05.02.50.39
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 05 Nov 2024 02:50:40 -0800 (PST)
+Message-ID: <26a36129-67b7-49f7-a14c-28db0234aab5@linaro.org>
+Date: Tue, 5 Nov 2024 10:50:35 +0000
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Scanned-By: MIMEDefang 3.0 on 10.30.177.15
-Received-SPF: pass client-ip=170.10.129.124; envelope-from=thuth@redhat.com;
- helo=us-smtp-delivery-124.mimecast.com
-X-Spam_score_int: -23
-X-Spam_score: -2.4
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 4/6] target/riscv: Add support to record CTR entries.
+To: Rajnesh Kanwal <rkanwal@rivosinc.com>, qemu-riscv@nongnu.org,
+ qemu-devel@nongnu.org
+Cc: alistair.francis@wdc.com, bin.meng@windriver.com, liweiwei@iscas.ac.cn,
+ dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com,
+ atishp@rivosinc.com, apatel@ventanamicro.com, beeman@rivosinc.com,
+ tech-control-transfer-records@lists.riscv.org, jason.chien@sifive.com,
+ frank.chang@sifive.com
+References: <20241104-b4-ctr_upstream_v3-v3-0-32fd3c48205f@rivosinc.com>
+ <20241104-b4-ctr_upstream_v3-v3-4-32fd3c48205f@rivosinc.com>
+Content-Language: en-US
+From: Richard Henderson <richard.henderson@linaro.org>
+In-Reply-To: <20241104-b4-ctr_upstream_v3-v3-4-32fd3c48205f@rivosinc.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::434;
+ envelope-from=richard.henderson@linaro.org; helo=mail-wr1-x434.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
 X-Spam_bar: --
-X-Spam_report: (-2.4 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.34,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H2=-0.001,
- RCVD_IN_VALIDITY_CERTIFIED_BLOCKED=0.001, RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -83,71 +103,101 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-A straggler that has been added to the Avocado framework while the
-conversion to the functional framework was already in progress...
-Move it over now, too!
+On 11/4/24 21:51, Rajnesh Kanwal wrote:
+> +/*
+> + * Indirect calls
+> + * - jalr x1, rs where rs != x5;
+> + * - jalr x5, rs where rs != x1;
+> + * - c.jalr rs1 where rs1 != x5;
+> + *
+> + * Indirect jumps
+> + * - jalr x0, rs where rs != x1 and rs != x5;
+> + * - c.jr rs1 where rs1 != x1 and rs1 != x5.
+> + *
+> + * Returns
+> + * - jalr rd, rs where (rs == x1 or rs == x5) and rd != x1 and rd != x5;
+> + * - c.jr rs1 where rs1 == x1 or rs1 == x5.
+> + *
+> + * Co-routine swap
+> + * - jalr x1, x5;
+> + * - jalr x5, x1;
+> + * - c.jalr x5.
+> + *
+> + * Other indirect jumps
+> + * - jalr rd, rs where rs != x1, rs != x5, rd != x0, rd != x1 and rd != x5.
+> + */
+> +void helper_ctr_jalr(CPURISCVState *env, target_ulong src, target_ulong dest,
+> +                     target_ulong rd, target_ulong rs1)
+> +{
+> +    target_ulong curr_priv = env->priv;
+> +    bool curr_virt = env->virt_enabled;
+> +
+> +    if ((rd == 1 && rs1 != 5) || (rd == 5 && rs1 != 1)) {
+> +        riscv_ctr_add_entry(env, src, dest, CTRDATA_TYPE_INDIRECT_CALL,
+> +                            curr_priv, curr_virt);
+> +    } else if (rd == 0 && rs1 != 1 && rs1 != 5) {
+> +        riscv_ctr_add_entry(env, src, dest, CTRDATA_TYPE_INDIRECT_JUMP,
+> +                            curr_priv, curr_virt);
+> +    } else if ((rs1 == 1 || rs1 == 5) && (rd != 1 && rd != 5)) {
+> +        riscv_ctr_add_entry(env, src, dest, CTRDATA_TYPE_RETURN,
+> +                            curr_priv, curr_virt);
+> +    } else if ((rs1 == 1 && rd == 5) || (rs1 == 5 && rd == 1)) {
+> +        riscv_ctr_add_entry(env, src, dest, CTRDATA_TYPE_CO_ROUTINE_SWAP,
+> +                            curr_priv, curr_virt);
+> +    } else {
+> +        riscv_ctr_add_entry(env, src, dest,
+> +                            CTRDATA_TYPE_OTHER_INDIRECT_JUMP, curr_priv,
+> +                            curr_virt);
+> +    }
+> +}
 
-Signed-off-by: Thomas Huth <thuth@redhat.com>
----
- tests/avocado/tuxrun_baselines.py       | 16 ----------------
- tests/functional/test_riscv64_tuxrun.py | 13 +++++++++++++
- 2 files changed, 13 insertions(+), 16 deletions(-)
+All of these if's are constant at translation time.
+You should move this decision tree...
 
-diff --git a/tests/avocado/tuxrun_baselines.py b/tests/avocado/tuxrun_baselines.py
-index 366c262e32..38064840da 100644
---- a/tests/avocado/tuxrun_baselines.py
-+++ b/tests/avocado/tuxrun_baselines.py
-@@ -222,19 +222,3 @@ def test_arm64be(self):
-                  "rootfs.ext4.zst" :
-                  "e6ffd8813c8a335bc15728f2835f90539c84be7f8f5f691a8b01451b47fb4bd7"}
-         self.common_tuxrun(csums=sums)
--
--    def test_riscv64_rv32(self):
--        """
--        :avocado: tags=arch:riscv64
--        :avocado: tags=machine:virt
--        :avocado: tags=tuxboot:riscv32
--        :avocado: tags=cpu:rv32
--        """
--        sums = { "Image" :
--                 "89599407d7334de629a40e7ad6503c73670359eb5f5ae9d686353a3d6deccbd5",
--                 "fw_jump.elf" :
--                 "f2ef28a0b77826f79d085d3e4aa686f1159b315eff9099a37046b18936676985",
--                 "rootfs.ext4.zst" :
--                 "7168d296d0283238ea73cd5a775b3dd608e55e04c7b92b76ecce31bb13108cba" }
--
--        self.common_tuxrun(csums=sums)
-diff --git a/tests/functional/test_riscv64_tuxrun.py b/tests/functional/test_riscv64_tuxrun.py
-index 13501628f9..4e2449539c 100755
---- a/tests/functional/test_riscv64_tuxrun.py
-+++ b/tests/functional/test_riscv64_tuxrun.py
-@@ -23,6 +23,13 @@ class TuxRunRiscV64Test(TuxRunBaselineTest):
-         'https://storage.tuxboot.com/20230331/riscv64/rootfs.ext4.zst',
-         'b18e3a3bdf27be03da0b285e84cb71bf09eca071c3a087b42884b6982ed679eb')
- 
-+    ASSET_RISCV32_KERNEL = Asset(
-+        'https://storage.tuxboot.com/20230331/riscv32/Image',
-+        '89599407d7334de629a40e7ad6503c73670359eb5f5ae9d686353a3d6deccbd5')
-+    ASSET_RISCV32_ROOTFS = Asset(
-+        'https://storage.tuxboot.com/20230331/riscv32/rootfs.ext4.zst',
-+        '7168d296d0283238ea73cd5a775b3dd608e55e04c7b92b76ecce31bb13108cba')
-+
-     def test_riscv64(self):
-         self.set_machine('virt')
-         self.common_tuxrun(kernel_asset=self.ASSET_RISCV64_KERNEL,
-@@ -34,5 +41,11 @@ def test_riscv64_maxcpu(self):
-         self.common_tuxrun(kernel_asset=self.ASSET_RISCV64_KERNEL,
-                            rootfs_asset=self.ASSET_RISCV64_ROOTFS)
- 
-+    def test_riscv64_rv32(self):
-+        self.set_machine('virt')
-+        self.cpu='rv32'
-+        self.common_tuxrun(kernel_asset=self.ASSET_RISCV32_KERNEL,
-+                           rootfs_asset=self.ASSET_RISCV32_ROOTFS)
-+
- if __name__ == '__main__':
-     TuxRunBaselineTest.main()
--- 
-2.47.0
+> --- a/target/riscv/translate.c
+> +++ b/target/riscv/translate.c
+> @@ -569,6 +569,16 @@ static void gen_jal(DisasContext *ctx, int rd, target_ulong imm)
+>          }
+>      }
+>  
+> +#ifndef CONFIG_USER_ONLY
+> +    if (ctx->cfg_ptr->ext_smctr || ctx->cfg_ptr->ext_ssctr) {
+> +        TCGv dest = tcg_constant_tl(ctx->base.pc_next + imm);
+> +        TCGv src = tcg_constant_tl(ctx->base.pc_next);
+> +        TCGv tcg_rd = tcg_constant_tl((target_ulong)rd);
+> +
+> +        gen_helper_ctr_jal(tcg_env, src, dest, tcg_rd);
+> +    }
+> +#endif
+
+... here.  All you need is to expose helper_ctr_add_entry().
+
+With that,
+
+> +void helper_ctr_popret(CPURISCVState *env, target_ulong src, target_ulong dest)
+> +{
+> +    riscv_ctr_add_entry(env, src, dest, CTRDATA_TYPE_RETURN,
+> +                            env->priv, env->virt_enabled);
+> +}
+> +
+> +void helper_ctr_branch(CPURISCVState *env, target_ulong src, target_ulong dest,
+> +                       target_ulong branch_taken)
+> +{
+> +    target_ulong curr_priv = env->priv;
+> +    bool curr_virt = env->virt_enabled;
+> +
+> +    if (branch_taken) {
+> +        riscv_ctr_add_entry(env, src, dest, CTRDATA_TYPE_TAKEN_BRANCH,
+> +                            curr_priv, curr_virt);
+> +    } else {
+> +        riscv_ctr_add_entry(env, src, dest, CTRDATA_TYPE_NONTAKEN_BRANCH,
+> +                            curr_priv, curr_virt);
+> +    }
+> +}
+
+these can go away, simply passing the correct CTRDATA_* constant at the right place.
+
+
+r~
 
 
