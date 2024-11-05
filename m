@@ -4,63 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7431AD2C122
-	for <qemu-riscv@archiver.kernel.org>; Tue,  5 Nov 2024 15:37:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 04121D2C139
+	for <qemu-riscv@archiver.kernel.org>; Tue,  5 Nov 2024 15:38:02 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1t8LWD-0005Z9-18; Tue, 05 Nov 2024 10:30:57 -0500
+	id 1t8LWM-0005fa-T0; Tue, 05 Nov 2024 10:31:06 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <phil@philjordan.eu>)
- id 1t8LWA-0005Wf-69
- for qemu-riscv@nongnu.org; Tue, 05 Nov 2024 10:30:54 -0500
-Received: from mail-ed1-x529.google.com ([2a00:1450:4864:20::529])
+ id 1t8LWH-0005ae-P9
+ for qemu-riscv@nongnu.org; Tue, 05 Nov 2024 10:31:01 -0500
+Received: from mail-lf1-x12e.google.com ([2a00:1450:4864:20::12e])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <phil@philjordan.eu>)
- id 1t8LW8-00041o-IJ
- for qemu-riscv@nongnu.org; Tue, 05 Nov 2024 10:30:53 -0500
-Received: by mail-ed1-x529.google.com with SMTP id
- 4fb4d7f45d1cf-5c9c28c1e63so6713234a12.0
- for <qemu-riscv@nongnu.org>; Tue, 05 Nov 2024 07:30:52 -0800 (PST)
+ id 1t8LWE-00043S-1Q
+ for qemu-riscv@nongnu.org; Tue, 05 Nov 2024 10:31:01 -0500
+Received: by mail-lf1-x12e.google.com with SMTP id
+ 2adb3069b0e04-539f72c8fc1so5547601e87.1
+ for <qemu-riscv@nongnu.org>; Tue, 05 Nov 2024 07:30:57 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=philjordan-eu.20230601.gappssmtp.com; s=20230601; t=1730820651; x=1731425451;
+ d=philjordan-eu.20230601.gappssmtp.com; s=20230601; t=1730820656; x=1731425456;
  darn=nongnu.org; 
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=w/+Dw+aYt6NbuWkFBOKFczpVcmoeYxuOifXoZQ9eKwo=;
- b=ekj3rA5x7MOLG0krhrECqLm00lL8+uKGFgOrnS/nKdcSgcpfKBSeqJVlw7oMoauf4x
- tEw/HP/yp5UwQfKZmT00xqMQ7TQbSOl5gzpA+Je/e9FiXRKRdTFMXwlKyCo+9SYMjxdi
- ON55kgCcHqBCge2Q4L9NFzkWqUWkcqAsjMPcesnK4BQbkvtIDF0+sqq2ko2qBFAb4fe/
- MxEETxxCEcQgdUPu2/Pqspmd23UkfDYyT2BL6RkkuQTFjTWRySoQX1Nm8bd8+0tPbJi7
- 8/ngzFoBleqBjR9CyIlTX8i4wK1USBAVNvtMSuI7XkFX67IEDlBueGttQ1ry9ICkHxII
- Swbg==
+ bh=HcuMAuxPQk2Q5bxoaPmhXT9ZvPq6wqNgneX3rODU6Dc=;
+ b=mbLqEdECzxhM4RZZuhFFzpfp/36EkuHSiHGEugua3uyFV1CceeqQOlibapvzKHKF/H
+ Kt6QWaeOdQxrhWxSnlKXpXfPaIc5tg0aeL9GQb70uhiqOceXGkrleOEunUObT4VTmen+
+ i7ylebrSSnQefBXRlCWofW/xgfN6EowFAAUQgwo4NtN5qeqZy7sW17WF/C8yEAAFXhOj
+ timlkWE7ISivCQAuCR9k39MYZvv0rYudHVZnJGW1ea9uZpxLPH4r6ZUCau5GjQ0CfJDY
+ R6XhmYXcuwn5dhPWbcfXNTEm0zCqgvH6j4P0bWOz0NGewB0ZhlftUbF4efeb9r6kz9uo
+ PjOg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1730820651; x=1731425451;
+ d=1e100.net; s=20230601; t=1730820656; x=1731425456;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=w/+Dw+aYt6NbuWkFBOKFczpVcmoeYxuOifXoZQ9eKwo=;
- b=oP7fdH5YL6BPSiJr4WbXMw30hbFJ30kKfLaaMbeSafnSHw8jxvr748IdQX3mTUlbwH
- XEkf6uqoMQ/Ow5H1QOlv0sYB0DJmwdTayMqlmdT0U+nr3C2ajbKnHzKnxGEC9zZWYJ2y
- fZbBfs4VpoxUFmeyJ+oX1FjkLjzYcFzYLJi4KC0LBlXFXdCZqPYZyQT4+49TW+qm97LN
- +a8ISHZD2LWFSNyCeVHftTdwkFf8/p0w0NrkkcaSyyHBKpYjcviC/bK0XYKLOKavXltH
- tyCbR39fiZHq1Npls9bC5gA2Vs1lERLGUz6O8ZtDQBFQp4192AfxT3A1LdCJXOOW7vQI
- DV8A==
+ bh=HcuMAuxPQk2Q5bxoaPmhXT9ZvPq6wqNgneX3rODU6Dc=;
+ b=dEN5d4nVsYfaSBJcX+CMX/ajgGyZoIZQPqIQLVfPhPJTjlj5+0cHRgIxD8ihf73kID
+ 7k1HQx/osvLBghaFcn/VcmmyfowbOpTc/ndsA+oO+PF/oaaFo98pyzPY12RZ2MIiQvHy
+ lcEYXt4ieidoOPi1Ja/buQdwKDT7Le9jiOMuURGPc1vwKRp0RkRpHGYbgIDtd5G5hER9
+ /FQl86Cpetm9yPOYkTU9Q0dBMCA7ucsfpcZO7egkmNsHJoOPEJuLgdiLIoATRpeRqI1O
+ jdQESTOxoecOM6MqucBH1NFtRhi+gSFHHTHbShWJR3YE+tfsC5g5ARRvio8bBr37zN7Q
+ 5IwQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUCIP2ORt40nTrbcQvcvwZ8jaIHyT123sBokx6zZhLEx+DV5m1hA2WFBAATM+WvEVIJuCH8IeNJqA/W@nongnu.org
-X-Gm-Message-State: AOJu0YzNIXOjP0WQCL4RrP144nrbO0k988iUyFpAhvC+rWDzauCL0VJb
- wM2UiUhNK7w2iL8ILtZUMlhrFHBwbb+fEjBv5uR1hXUGH1JarplWzTixIiiKvg==
-X-Google-Smtp-Source: AGHT+IHzyV84ALVakfza508qgByGVmVkQyv9egnNz+DuJg/dAXDiwRZrfOPETSSkMFSBE2JbiFzLKg==
-X-Received: by 2002:a05:6402:2687:b0:5c9:7f41:eb19 with SMTP id
- 4fb4d7f45d1cf-5cea966bceemr14580439a12.4.1730820651081; 
- Tue, 05 Nov 2024 07:30:51 -0800 (PST)
+ AJvYcCU2gccOvMXkxHB4v5fxgNrB7qkAJfjHTf5BFDXibHjxMYye4mA7x3Bo67cuntA98Xy/GQvQRlmmAucs@nongnu.org
+X-Gm-Message-State: AOJu0YwDz3dj0fQRSPQuiBdKozJHqeEF0mw9kx4mn4A1NCpOOxSv5bpq
+ lYYX4gp5DO+k5649OXuCAoN3FKxX4zw+l8w+Z+UjjJSFoUVWC2jt3n/U3/y/Fg==
+X-Google-Smtp-Source: AGHT+IEjmEolNhrVTELaQZKIAM9LcdJoBwa+cYAw3b7/0vIotak8XF6U32bbjY+pLz3vzzVaHqDN9Q==
+X-Received: by 2002:a05:6512:308a:b0:539:8d67:1b1b with SMTP id
+ 2adb3069b0e04-53b7ecf1ff6mr13196373e87.26.1730820656015; 
+ Tue, 05 Nov 2024 07:30:56 -0800 (PST)
 Received: from localhost.localdomain (h082218084190.host.wavenet.at.
  [82.218.84.190]) by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5cee6aae3fcsm1419415a12.21.2024.11.05.07.30.48
+ 4fb4d7f45d1cf-5cee6aae3fcsm1419415a12.21.2024.11.05.07.30.53
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Tue, 05 Nov 2024 07:30:49 -0800 (PST)
+ Tue, 05 Nov 2024 07:30:55 -0800 (PST)
 From: Phil Dennis-Jordan <phil@philjordan.eu>
 To: qemu-devel@nongnu.org
 Cc: agraf@csgraf.de, phil@philjordan.eu, peter.maydell@linaro.org,
@@ -74,19 +74,18 @@ Cc: agraf@csgraf.de, phil@philjordan.eu, peter.maydell@linaro.org,
  dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com,
  jcmvbkbc@gmail.com, marcandre.lureau@redhat.com, berrange@redhat.com,
  akihiko.odaki@daynix.com, qemu-arm@nongnu.org, qemu-block@nongnu.org,
- qemu-riscv@nongnu.org
-Subject: [PATCH v7 05/15] MAINTAINERS: Add myself as maintainer for apple-gfx,
- reviewer for HVF
-Date: Tue,  5 Nov 2024 16:30:12 +0100
-Message-Id: <20241105153022.91101-6-phil@philjordan.eu>
+ qemu-riscv@nongnu.org, Alexander Graf <graf@amazon.com>
+Subject: [PATCH v7 07/15] hw/misc/pvpanic: Add MMIO interface
+Date: Tue,  5 Nov 2024 16:30:14 +0100
+Message-Id: <20241105153022.91101-8-phil@philjordan.eu>
 X-Mailer: git-send-email 2.39.3 (Apple Git-145)
 In-Reply-To: <20241105153022.91101-1-phil@philjordan.eu>
 References: <20241105153022.91101-1-phil@philjordan.eu>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: neutral client-ip=2a00:1450:4864:20::529;
- envelope-from=phil@philjordan.eu; helo=mail-ed1-x529.google.com
+Received-SPF: neutral client-ip=2a00:1450:4864:20::12e;
+ envelope-from=phil@philjordan.eu; helo=mail-lf1-x12e.google.com
 X-Spam_score_int: -10
 X-Spam_score: -1.1
 X-Spam_bar: -
@@ -108,55 +107,134 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-I'm happy to take responsibility for the macOS PV graphics code. As
-HVF patches don't seem to get much attention at the moment, I'm also
-adding myself as designated reviewer for HVF and x86 HVF to try and
-improve that.
+From: Alexander Graf <graf@amazon.com>
 
-I anticipate that the resulting workload should be covered by the
-funding I'm receiving for improving Qemu in combination with macOS. As
-of right now this runs out at the end of 2024; I expect the workload on
-apple-gfx should be relatively minor and manageable in my spare time
-beyond that. I may have to remove myself from more general HVF duties
-once the contract runs out if it's more than I can manage.
+In addition to the ISA and PCI variants of pvpanic, let's add an MMIO
+platform device that we can use in embedded arm environments.
 
+Signed-off-by: Alexander Graf <graf@amazon.com>
+Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+Tested-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 Signed-off-by: Phil Dennis-Jordan <phil@philjordan.eu>
+Reviewed-by: Akihiko Odaki <akihiko.odaki@daynix.com>
 ---
- MAINTAINERS | 7 +++++++
- 1 file changed, 7 insertions(+)
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index 0844f5da196..c7964ab784b 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -506,6 +506,7 @@ F: target/arm/hvf/
- X86 HVF CPUs
- M: Cameron Esfahani <dirty@apple.com>
- M: Roman Bolshakov <rbolshakov@ddn.com>
-+R: Phil Dennis-Jordan <phil@philjordan.eu>
- W: https://wiki.qemu.org/Features/HVF
- S: Maintained
- F: target/i386/hvf/
-@@ -513,6 +514,7 @@ F: target/i386/hvf/
- HVF
- M: Cameron Esfahani <dirty@apple.com>
- M: Roman Bolshakov <rbolshakov@ddn.com>
-+R: Phil Dennis-Jordan <phil@philjordan.eu>
- W: https://wiki.qemu.org/Features/HVF
- S: Maintained
- F: accel/hvf/
-@@ -2608,6 +2610,11 @@ F: hw/display/edid*
- F: include/hw/display/edid.h
- F: qemu-edid.c
+v3:
+ * Rebased on upstream, updated a header path
+
+ hw/misc/Kconfig           |  4 +++
+ hw/misc/meson.build       |  1 +
+ hw/misc/pvpanic-mmio.c    | 61 +++++++++++++++++++++++++++++++++++++++
+ include/hw/misc/pvpanic.h |  1 +
+ 4 files changed, 67 insertions(+)
+ create mode 100644 hw/misc/pvpanic-mmio.c
+
+diff --git a/hw/misc/Kconfig b/hw/misc/Kconfig
+index 1f1baa5dde9..5a6c1603b60 100644
+--- a/hw/misc/Kconfig
++++ b/hw/misc/Kconfig
+@@ -145,6 +145,10 @@ config PVPANIC_ISA
+     depends on ISA_BUS
+     select PVPANIC_COMMON
  
-+macOS PV Graphics (apple-gfx)
-+M: Phil Dennis-Jordan <phil@philjordan.eu>
-+S: Maintained
-+F: hw/display/apple-gfx*
++config PVPANIC_MMIO
++    bool
++    select PVPANIC_COMMON
 +
- PIIX4 South Bridge (i82371AB)
- M: Hervé Poussineau <hpoussin@reactos.org>
- M: Philippe Mathieu-Daudé <philmd@linaro.org>
+ config AUX
+     bool
+     select I2C
+diff --git a/hw/misc/meson.build b/hw/misc/meson.build
+index d02d96e403b..4de4db0a600 100644
+--- a/hw/misc/meson.build
++++ b/hw/misc/meson.build
+@@ -122,6 +122,7 @@ system_ss.add(when: 'CONFIG_ARMSSE_MHU', if_true: files('armsse-mhu.c'))
+ 
+ system_ss.add(when: 'CONFIG_PVPANIC_ISA', if_true: files('pvpanic-isa.c'))
+ system_ss.add(when: 'CONFIG_PVPANIC_PCI', if_true: files('pvpanic-pci.c'))
++system_ss.add(when: 'CONFIG_PVPANIC_MMIO', if_true: files('pvpanic-mmio.c'))
+ system_ss.add(when: 'CONFIG_AUX', if_true: files('auxbus.c'))
+ system_ss.add(when: 'CONFIG_ASPEED_SOC', if_true: files(
+   'aspeed_hace.c',
+diff --git a/hw/misc/pvpanic-mmio.c b/hw/misc/pvpanic-mmio.c
+new file mode 100644
+index 00000000000..56738efee53
+--- /dev/null
++++ b/hw/misc/pvpanic-mmio.c
+@@ -0,0 +1,61 @@
++/*
++ * QEMU simulated pvpanic device (MMIO frontend)
++ *
++ * Copyright © 2023 Amazon.com, Inc. or its affiliates. All Rights Reserved.
++ *
++ * SPDX-License-Identifier: GPL-2.0-or-later
++ */
++
++#include "qemu/osdep.h"
++
++#include "hw/qdev-properties.h"
++#include "hw/misc/pvpanic.h"
++#include "hw/sysbus.h"
++#include "standard-headers/misc/pvpanic.h"
++
++OBJECT_DECLARE_SIMPLE_TYPE(PVPanicMMIOState, PVPANIC_MMIO_DEVICE)
++
++#define PVPANIC_MMIO_SIZE 0x2
++
++struct PVPanicMMIOState {
++    SysBusDevice parent_obj;
++
++    PVPanicState pvpanic;
++};
++
++static void pvpanic_mmio_initfn(Object *obj)
++{
++    PVPanicMMIOState *s = PVPANIC_MMIO_DEVICE(obj);
++
++    pvpanic_setup_io(&s->pvpanic, DEVICE(s), PVPANIC_MMIO_SIZE);
++    sysbus_init_mmio(SYS_BUS_DEVICE(obj), &s->pvpanic.mr);
++}
++
++static Property pvpanic_mmio_properties[] = {
++    DEFINE_PROP_UINT8("events", PVPanicMMIOState, pvpanic.events,
++                      PVPANIC_PANICKED | PVPANIC_CRASH_LOADED),
++    DEFINE_PROP_END_OF_LIST(),
++};
++
++static void pvpanic_mmio_class_init(ObjectClass *klass, void *data)
++{
++    DeviceClass *dc = DEVICE_CLASS(klass);
++
++    device_class_set_props(dc, pvpanic_mmio_properties);
++    set_bit(DEVICE_CATEGORY_MISC, dc->categories);
++}
++
++static const TypeInfo pvpanic_mmio_info = {
++    .name          = TYPE_PVPANIC_MMIO_DEVICE,
++    .parent        = TYPE_SYS_BUS_DEVICE,
++    .instance_size = sizeof(PVPanicMMIOState),
++    .instance_init = pvpanic_mmio_initfn,
++    .class_init    = pvpanic_mmio_class_init,
++};
++
++static void pvpanic_register_types(void)
++{
++    type_register_static(&pvpanic_mmio_info);
++}
++
++type_init(pvpanic_register_types)
+diff --git a/include/hw/misc/pvpanic.h b/include/hw/misc/pvpanic.h
+index 9a71a5ad0d7..049a94c1125 100644
+--- a/include/hw/misc/pvpanic.h
++++ b/include/hw/misc/pvpanic.h
+@@ -26,6 +26,7 @@
+ 
+ #define TYPE_PVPANIC_ISA_DEVICE "pvpanic"
+ #define TYPE_PVPANIC_PCI_DEVICE "pvpanic-pci"
++#define TYPE_PVPANIC_MMIO_DEVICE "pvpanic-mmio"
+ 
+ #define PVPANIC_IOPORT_PROP "ioport"
+ 
 -- 
 2.39.3 (Apple Git-145)
 
