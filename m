@@ -4,85 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3AF84D59F52
-	for <qemu-riscv@archiver.kernel.org>; Wed,  6 Nov 2024 16:09:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 311FAD59F5A
+	for <qemu-riscv@archiver.kernel.org>; Wed,  6 Nov 2024 17:58:46 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1t8iZr-0004LR-9p; Wed, 06 Nov 2024 11:08:15 -0500
+	id 1t8kIR-0006Uf-1k; Wed, 06 Nov 2024 12:58:23 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1t8iZn-0004Ku-KD
- for qemu-riscv@nongnu.org; Wed, 06 Nov 2024 11:08:11 -0500
-Received: from mail-pl1-x62a.google.com ([2607:f8b0:4864:20::62a])
+ (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
+ id 1t8kIP-0006UK-55
+ for qemu-riscv@nongnu.org; Wed, 06 Nov 2024 12:58:21 -0500
+Received: from mail-wm1-x333.google.com ([2a00:1450:4864:20::333])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1t8iZl-0004bV-IU
- for qemu-riscv@nongnu.org; Wed, 06 Nov 2024 11:08:10 -0500
-Received: by mail-pl1-x62a.google.com with SMTP id
- d9443c01a7336-20c70abba48so62523815ad.0
- for <qemu-riscv@nongnu.org>; Wed, 06 Nov 2024 08:08:08 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
+ id 1t8kIN-0003V2-FX
+ for qemu-riscv@nongnu.org; Wed, 06 Nov 2024 12:58:20 -0500
+Received: by mail-wm1-x333.google.com with SMTP id
+ 5b1f17b1804b1-43163667f0eso877485e9.0
+ for <qemu-riscv@nongnu.org>; Wed, 06 Nov 2024 09:58:18 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1730909288; x=1731514088; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=N6XlZQVf/v2kKTiezSZSw/jwpw5t1LN8EjNtZ987N28=;
- b=E12fxLtNb3Yd87oqemSL4wFyertpqvXwETIgotBwFxczETWCxK87xWNoqLQ2/NKXPy
- 06uylopg3NTYOeMYuTeXUxWtfT/XZBkRA5w9SAntt87s3hU8JsfBYm9KhHiFhsyYzhY1
- tx2UOUzFYevz/7GH0KThUe2kCCTXuDDbRB/P6CtKe34i+OyWGW/qXsr1VNo/vZaR3jIX
- JX7LXI97KEPrsw6V6qmBSJye8H+66iVCZzjk+z+j/rGAAyAqvd4ZQHj8X1y3WT/kuULT
- jLnqdwIHMGH1HtfSYF3PylNOw5+JFsNCeoXL9M47IhCEC0FYONnmtBfIpyKmdl5BB16U
- +Z1A==
+ d=ventanamicro.com; s=google; t=1730915897; x=1731520697; darn=nongnu.org;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=WAA4yL7DFxjSOgzfU7Ib8/m40rXSxLAhO7gNKSuiIV0=;
+ b=HEQO4zjaa6ngNNYLPk7FBuEy8f/FIn17Ivyik7/t9hjX0P8juDrJ1zjFF2pQW+LNnt
+ HEQWkchmM3Z2ZotxB/hK6sUlIdT3C+NhMPiLBLg8x7sG3S0UiofC/T/R+6LLc3tZ93+L
+ qUecZsZQdqGq9WuruAAJV5W32TrdPxEeUUQldY+litBbdcPFV8a7W8rnLB5qS4b9XE5c
+ /b5rbjlhfNImxb0EyBWmXQH/jELCsem1HciEkNM1GkzYFirnZczsmPY+r7XyGdK8fq4p
+ uPJPBSogleXGdAh/J/MWCM93oo7QCTSu4aKyr8CZYWph/vI6fJWwV31Hx3YDvuQLE4bW
+ qr9Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1730909288; x=1731514088;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=N6XlZQVf/v2kKTiezSZSw/jwpw5t1LN8EjNtZ987N28=;
- b=g04pUPT1W97QpiX/myTeL2Bw1TIeoUJIZfd05Gp/vofkSpLN4/3gTjNw15R6uNIrzf
- ctLjsn/7ZtIs5Kip2gKdHeIJ/DliabCsg+RnWE3SRafjQJB9rwMekTlGwygVaU+61I2r
- U2bjSd49DAU2QMDh/mFf/QFVRxllodRtWaIdXShO1ic13N3JtfgqzYFHPo6fbCHK0+qu
- vsRXu827mq5ON/9CU8gj3FsOyhMI6Evr2bwMDD+NAo0+4raQxrgtsvIgS8cIU226bALc
- w886QP4RcnZR/w9wmRm+X6QoxIYTVJ5frFwaeQ7LXHtQYW8cZCiSNwkLx4KUDsAWCobs
- mOew==
+ d=1e100.net; s=20230601; t=1730915897; x=1731520697;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=WAA4yL7DFxjSOgzfU7Ib8/m40rXSxLAhO7gNKSuiIV0=;
+ b=Q+9oLWBXGV0B3qK+0CV0nNhkgac6rr4V6750hAx+HiuF+PBs+0JU1XeWotXLfowFrA
+ XqcoRA3RvztQX8gkMqr/9F7gugT3pzEmgJJB2GmWdVr5MVEQVqP5eYyfY5YzXl4+O5kw
+ jw0poktA4tORdevJ7maBvy19wmKtAj/06B01ZbTU2hjM1StCmPW5YH2ACwRMez/ShSQa
+ zcTEnn0oEhfI3PkVOUGtuJ7ZqncJY5qHjmhYKfgTQ17wBQmP7adWClIXtVb5pnfL6WBs
+ PZwgkLuWMVhGcZQu5m5chzC7zKFnMBg9oejRwIxl1IRW9zYJtzvFkKtyqy8OqMZjlnRc
+ RrnQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWp3BEnZerRPWVTP+DpscDHmS0xj/v8+Ort0K4gAf1LOYfCDDHcG39QQv4TgDYp90tqwNB6GrZ5shMG@nongnu.org
-X-Gm-Message-State: AOJu0YwKvSiGFRIicOxKcKXUAQEMK3i3KRYnmNv3F3ahVSfBvFRPd4sL
- Yccs8MaGHFOnrgQhUkWWq3Zqlzf3F9+zR6IKYLWcXesS7qBj5z8jUqFd8iBcwps=
-X-Google-Smtp-Source: AGHT+IG9ISHVLDeXhR8dbi5zUCwSay2UqUeWmCLBDohmkM6pHvyXYnWf+0E8sl8P4McsnsjNqaYBYQ==
-X-Received: by 2002:a17:902:e805:b0:202:cbf:2d6f with SMTP id
- d9443c01a7336-2111b0181b5mr276240135ad.57.1730909286235; 
- Wed, 06 Nov 2024 08:08:06 -0800 (PST)
-Received: from [192.168.68.110] ([189.79.22.174])
+ AJvYcCWLlYgK4KhzNPL7pDoMDX2oM1dxcBbz5R1pVbcToBgI51BucLcbeNs7I7b6niZu6aobkhIFBW9L5GVV@nongnu.org
+X-Gm-Message-State: AOJu0Yzliny3J3AGvxn0oS85v5/D70BJrVKH/MoKDV6ZQXAkbRPYlYZ+
+ qyw5cG3d/hqX5KnK+3wCm+C0AM/synxjztA5lN9tksKst8bMJndmAtyXXZkiCB4=
+X-Google-Smtp-Source: AGHT+IEHLoWcR/ylhRv5o308ocQAYTCN5fnh1qdDtM+DfvHpXyDDILKiSooeqUM6++8/+JhzSk6Efw==
+X-Received: by 2002:a05:600c:1c14:b0:431:57e5:b245 with SMTP id
+ 5b1f17b1804b1-4328328492amr166288255e9.23.1730915897522; 
+ Wed, 06 Nov 2024 09:58:17 -0800 (PST)
+Received: from localhost (2001-1ae9-1c2-4c00-20f-c6b4-1e57-7965.ip6.tmcz.cz.
+ [2001:1ae9:1c2:4c00:20f:c6b4:1e57:7965])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-211057063f9sm96567335ad.65.2024.11.06.08.08.02
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 06 Nov 2024 08:08:05 -0800 (PST)
-Message-ID: <b415b395-bdba-43a5-8cd2-d147b59f1e78@ventanamicro.com>
-Date: Wed, 6 Nov 2024 13:08:01 -0300
+ 5b1f17b1804b1-432aa6c62b3sm33750445e9.20.2024.11.06.09.58.16
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 06 Nov 2024 09:58:16 -0800 (PST)
+Date: Wed, 6 Nov 2024 18:58:15 +0100
+From: Andrew Jones <ajones@ventanamicro.com>
+To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
+ bmeng@tinylab.org, liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, 
+ palmer@rivosinc.com
+Subject: Re: [PATCH for-10.0 0/7] hw/riscv: riscv-iommu-sys device
+Message-ID: <20241106-45c7291760031b7896f9f668@orel>
+References: <20241106133407.604587-1-dbarboza@ventanamicro.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [RFC v4 1/2] target/riscv: rvv: reduce the overhead for simple
- RISC-V vector unit-stride loads and stores
-To: Paolo Savini <paolo.savini@embecosm.com>, qemu-devel@nongnu.org,
- qemu-riscv@nongnu.org
-Cc: Richard Handerson <richard.henderson@linaro.org>,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bmeng.cn@gmail.com>,
- Weiwei Li <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Helene Chelin <helene.chelin@embecosm.com>, Nathan Egge <negge@google.com>,
- Max Chou <max.chou@sifive.com>
-References: <20241029194348.59574-1-paolo.savini@embecosm.com>
- <20241029194348.59574-2-paolo.savini@embecosm.com>
-Content-Language: en-US
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <20241029194348.59574-2-paolo.savini@embecosm.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::62a;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pl1-x62a.google.com
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20241106133407.604587-1-dbarboza@ventanamicro.com>
+Received-SPF: pass client-ip=2a00:1450:4864:20::333;
+ envelope-from=ajones@ventanamicro.com; helo=mail-wm1-x333.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -105,96 +97,59 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-
-
-On 10/29/24 4:43 PM, Paolo Savini wrote:
-> This patch improves the performance of the emulation of the RVV unit-stride
-> loads and stores in the following cases:
+On Wed, Nov 06, 2024 at 10:34:00AM -0300, Daniel Henrique Barboza wrote:
+> Hi,
 > 
-> - when the data being loaded/stored per iteration amounts to 8 bytes or less.
-> - when the vector length is 16 bytes (VLEN=128) and there's no grouping of the
->    vector registers (LMUL=1).
+> Now that we have merged the base IOMMU support we can re-introduce
+> the riscv-iommu-sys platform device that was taken away from the initial
+> posting.
 > 
-> The optimization consists of avoiding the overhead of probing the RAM of the
-> host machine and doing a loop load/store on the input data grouped in chunks
-> of as many bytes as possible (8,4,2,1 bytes).
+> Aside from adding support for the device in the 'virt' machine we're
+> also adding MSI support for it, something that we weren't doing before.
+> The Linux driver is then free to choose either MSI or WSI to use the
+> device.
+
+The driver (still only in linux-next) only knows how to use WSI, but with
+a series I just posted[1] MSI is also possible.
+
+[1] https://lore.kernel.org/all/20241106175102.219923-4-ajones@ventanamicro.com/
+
+Thanks,
+drew
+
 > 
-> Co-authored-by: Helene CHELIN <helene.chelin@embecosm.com>
-> Co-authored-by: Paolo Savini <paolo.savini@embecosm.com>
+> Patches based on master.
 > 
-> Signed-off-by: Helene CHELIN <helene.chelin@embecosm.com>
-> ---
-
-Paolo,
-
-To merge this patch we need you Signed-off-by tag since you're marked as the
-author.
-
-When sending a new version please add your Signed-off-by as well, and also add
-a:
-
-Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-
-
->   target/riscv/vector_helper.c | 47 ++++++++++++++++++++++++++++++++++++
->   1 file changed, 47 insertions(+)
+> Daniel Henrique Barboza (5):
+>   hw/riscv/riscv-iommu.c: add riscv_iommu_instance_init()
+>   hw/riscv/riscv-iommu: parametrize CAP.IGS
+>   hw/riscv/virt.c, riscv-iommu-sys.c: add MSIx support
+>   hw/riscv/riscv-iommu: implement reset protocol
+>   docs/specs: add riscv-iommu-sys information
 > 
-> diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
-> index 4479726acf..75c24653f0 100644
-> --- a/target/riscv/vector_helper.c
-> +++ b/target/riscv/vector_helper.c
-> @@ -635,6 +635,53 @@ vext_ldst_us(void *vd, target_ulong base, CPURISCVState *env, uint32_t desc,
->   
->       VSTART_CHECK_EARLY_EXIT(env);
->   
-> +#if defined(CONFIG_USER_ONLY) && !HOST_BIG_ENDIAN
-> +    /* For data sizes <= 64 bits and for LMUL=1 with VLEN=128 bits we get a
-> +     * better performance by doing a simple simulation of the load/store
-> +     * without the overhead of prodding the host RAM */
-> +    if ((nf == 1) && ((evl << log2_esz) <= 8 ||
-> +	((vext_lmul(desc) == 0) && (simd_maxsz(desc) == 16)))) {
-> +
-> +	uint32_t evl_b = evl << log2_esz;
-> +
-> +        for (uint32_t j = env->vstart; j < evl_b;) {
-> +	    addr = base + j;
-> +            if ((evl_b - j) >= 8) {
-> +                if (is_load)
-> +                    lde_d_tlb(env, adjust_addr(env, addr), j, vd, ra);
-> +                else
-> +                    ste_d_tlb(env, adjust_addr(env, addr), j, vd, ra);
-> +                j += 8;
-> +            }
-> +            else if ((evl_b - j) >= 4) {
-> +                if (is_load)
-> +                    lde_w_tlb(env, adjust_addr(env, addr), j, vd, ra);
-> +                else
-> +                    ste_w_tlb(env, adjust_addr(env, addr), j, vd, ra);
-> +                j += 4;
-> +            }
-> +            else if ((evl_b - j) >= 2) {
-> +                if (is_load)
-> +                    lde_h_tlb(env, adjust_addr(env, addr), j, vd, ra);
-> +                else
-> +                    ste_h_tlb(env, adjust_addr(env, addr), j, vd, ra);
-> +                j += 2;
-> +            }
-> +            else {
-> +                if (is_load)
-> +                    lde_b_tlb(env, adjust_addr(env, addr), j, vd, ra);
-> +                else
-> +                    ste_b_tlb(env, adjust_addr(env, addr), j, vd, ra);
-> +                j += 1;
-> +            }
-> +        }
-> +
-> +        env->vstart = 0;
-> +        vext_set_tail_elems_1s(evl, vd, desc, nf, esz, max_elems);
-> +        return;
-> +    }
-> +#endif
-> +
->       vext_cont_ldst_elements(&info, base, env->vreg, env->vstart, evl, desc,
->                               log2_esz, false);
->       /* Probe the page(s).  Exit with exception for any invalid page. */
+> Sunil V L (1):
+>   hw/riscv/virt: Add IOMMU as platform device if the option is set
+> 
+> Tomasz Jeznach (1):
+>   hw/riscv: add riscv-iommu-sys platform device
+> 
+>  docs/specs/riscv-iommu.rst  |  30 ++++-
+>  docs/system/riscv/virt.rst  |  10 ++
+>  hw/riscv/meson.build        |   2 +-
+>  hw/riscv/riscv-iommu-bits.h |   6 +
+>  hw/riscv/riscv-iommu-pci.c  |  21 +++
+>  hw/riscv/riscv-iommu-sys.c  | 256 ++++++++++++++++++++++++++++++++++++
+>  hw/riscv/riscv-iommu.c      | 114 +++++++++++-----
+>  hw/riscv/riscv-iommu.h      |   5 +
+>  hw/riscv/trace-events       |   4 +
+>  hw/riscv/virt.c             | 108 ++++++++++++++-
+>  include/hw/riscv/iommu.h    |  10 +-
+>  include/hw/riscv/virt.h     |   6 +-
+>  12 files changed, 530 insertions(+), 42 deletions(-)
+>  create mode 100644 hw/riscv/riscv-iommu-sys.c
+> 
+> -- 
+> 2.45.2
+> 
+> 
 
