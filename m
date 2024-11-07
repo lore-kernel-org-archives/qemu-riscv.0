@@ -4,94 +4,95 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 01A2AD5AE72
-	for <qemu-riscv@archiver.kernel.org>; Thu,  7 Nov 2024 08:21:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B56D7D43352
+	for <qemu-riscv@archiver.kernel.org>; Thu,  7 Nov 2024 12:59:13 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1t8xli-00050k-9r; Thu, 07 Nov 2024 03:21:30 -0500
+	id 1t926A-0004Fw-Kt; Thu, 07 Nov 2024 07:58:54 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <cleger@rivosinc.com>)
- id 1t8xlg-0004zs-H2
- for qemu-riscv@nongnu.org; Thu, 07 Nov 2024 03:21:28 -0500
-Received: from mail-wr1-x436.google.com ([2a00:1450:4864:20::436])
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1t9268-0004FN-0y
+ for qemu-riscv@nongnu.org; Thu, 07 Nov 2024 07:58:52 -0500
+Received: from mail-pg1-x52c.google.com ([2607:f8b0:4864:20::52c])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <cleger@rivosinc.com>)
- id 1t8xld-0004Wr-U3
- for qemu-riscv@nongnu.org; Thu, 07 Nov 2024 03:21:27 -0500
-Received: by mail-wr1-x436.google.com with SMTP id
- ffacd0b85a97d-37d6ff1cbe1so488309f8f.3
- for <qemu-riscv@nongnu.org>; Thu, 07 Nov 2024 00:21:24 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1t9265-0006RE-MM
+ for qemu-riscv@nongnu.org; Thu, 07 Nov 2024 07:58:51 -0500
+Received: by mail-pg1-x52c.google.com with SMTP id
+ 41be03b00d2f7-656d8b346d2so676235a12.2
+ for <qemu-riscv@nongnu.org>; Thu, 07 Nov 2024 04:58:48 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1730967682; x=1731572482;
- darn=nongnu.org; 
+ d=ventanamicro.com; s=google; t=1730984327; x=1731589127; darn=nongnu.org;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=WEw/9XxeS5YEirlBDgC7t/9zy7Z5J54PO4ZSzVoR0GQ=;
- b=YwwkrfMqBhbvy5u+pY/Roruee1AgOmTrcM74cWJ+MtxVpoIVznkzWcMuML6GLYud2a
- qNTwtGJ8eo0t6+bQjD2DdLfyFs5TVXcKSMl72TY+YW3jNuPnCDGw/o32V+Rjg+DPrfev
- 2me1UJdc+HebXqCU7ZRJmnul0IoV8X9tWk/6OMU4KuDi2nvxMsE5s6Y5IHa71aYvjadj
- SNo8wS09KH3aHCMR06+H39PSbMdCT7XWDka9tQyP6Gtv7xTSJiP1bHWADGVkWS35kjRM
- YtZHstBChZWOglTqCURqD+Rgu2xjdLWxTm0czHfRXVvyBzjxuttiHlhMqUrjCnzPXwDg
- yPVA==
+ bh=KGuVbS5asxDoJXbzOIuOfKfflFy5lpVmMa6aCe6HTyc=;
+ b=SvPr8YlbKM13xrz17F0gczMr8H85eP364ZC3nRwDYY+9xT59ZAw8fBUXGUVExt7DJZ
+ +gZa8YkhauPmsjGqzHXhcy38/moUoULRctNAaZ4+Lza4Y19EAGueBklQ0EaNZTl7huhg
+ 71+43lHt5BPbe4YELCyRYJ5CuwNpo29sv16M4PZBlpuawlowqzDJo4vnDsbKyaKQAYLw
+ 9+Zu7okTdcRlX12tKNGK/UX4lSvykzmRMnusoJHn8D37MNBP0xDg8MSn0ftdEzZ0//ov
+ t63COOSHf3qikatdAf6to5dipEu25vFJCxwKURB7lPEpWSB4kSJ2+xan6Y+cR73dLL+Q
+ 295g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1730967682; x=1731572482;
+ d=1e100.net; s=20230601; t=1730984327; x=1731589127;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=WEw/9XxeS5YEirlBDgC7t/9zy7Z5J54PO4ZSzVoR0GQ=;
- b=OtsEcN9a2n670eKcpqCzO/p7nOaBONGbJSpRcteFcCnTXa0mZ3phZKi6SiHikB2H6U
- rfnN2bmgCAHMiD4mV6WmjwFFYpfnM/IkPbXrW5K0pSL9ck3E2iIK1gI8Ks9knlkMdwvq
- p8YvMf02cwy3U8+s2z9w4lIWbeGKYf+nAL6x21JJH9j9u5Ovks34Bg26udemxnclEN9V
- bWiA0XQEoRH1DuFJ5NZekwhQ73t8jQPYzIafEYEK9uHxJCVxdTQvOfXQTFbaKQ6VKBPx
- 7qk8tUy4eYweOsW/eNyKvnONPxLO45MTky3Kjz2wn09+hbv38E3sy++LEx/w6JTQ6HqD
- RxDw==
-X-Gm-Message-State: AOJu0YxAn77/n1G1JXXtxCu8xY6iwHkbbDxLi3/EK5PUaB7nEe9lH6iK
- K+jHkeLdf7zdbqW6w73JQJx0LRARw2hpmHstWpkT6DGBD4TD+jkNwISImJA8QWg=
-X-Google-Smtp-Source: AGHT+IEbaZMxvsZBt1QrPK65Uii2Q3BGgSg4hVhQom3mlCqtviuoWtSswwWR0E4dwglbjdevVeo6Ig==
-X-Received: by 2002:a5d:64e7:0:b0:37d:47b3:7b82 with SMTP id
- ffacd0b85a97d-381ef73132emr170185f8f.57.1730967682370; 
- Thu, 07 Nov 2024 00:21:22 -0800 (PST)
-Received: from ?IPV6:2a01:e0a:e17:9700:16d2:7456:6634:9626?
- ([2a01:e0a:e17:9700:16d2:7456:6634:9626])
+ bh=KGuVbS5asxDoJXbzOIuOfKfflFy5lpVmMa6aCe6HTyc=;
+ b=iEoG75T+V0PAClooSPhfkdKADN1OjWZbE3/yu2gz0x8rCgA/5AtmmI2NmWAw+aLH30
+ JTRjAzzsiNRbQkFzn5tWOWKb1yd2NFljihQCKD91YVQVzLYlFxDMW6Vlud8BJIpefPWP
+ mTxD1QS8GYjEMnc9VKQ7eA44c604nmJNAcqq3gItH/TCJ1GZvNdsQOIkWWtJ9+qlTbIQ
+ Aoc9nzNVO6MrAVSljJHE5EX3g1Br5Izs+VfpcbBtpNyNOadMlU+uEZjna8U/1DLyc1WY
+ kQ1YLz00pwiGbnURoK2WkWnQi96QGCSpTCWF/rH3AmrV6JOlroPrLeRQEoB73qOyeCoX
+ lekQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUcZHcLvFlOq36UxTAWioeZiEa8YS+z+hT+v44dnxnaYglU9Pt+J+VCvCdPJl2G/q9fmksTKo7Z8FgJ@nongnu.org
+X-Gm-Message-State: AOJu0YymPgNAPd4PaoFJbOXIhcmOFkWJ1u1Pvu77GzqZ/M3WQNhFR+k3
+ toWsfMR9+dcS67crvICFyIIXTkI/2GhEZXh0BsgTllH2QrGsteprwLgMa5adRyU=
+X-Google-Smtp-Source: AGHT+IEp4tTI+YWthjDBPzFUQb7I5UVgQ8+dlr3ic3YbsYW7k6IiRigh/HZ0qqVNih28QaTqsgJcbg==
+X-Received: by 2002:a05:6a20:2d13:b0:1d4:fc66:30e8 with SMTP id
+ adf61e73a8af0-1dba521914amr31018010637.10.1730984327161; 
+ Thu, 07 Nov 2024 04:58:47 -0800 (PST)
+Received: from ?IPV6:2804:7f0:bdcd:fb00:6501:2693:db52:c621?
+ ([2804:7f0:bdcd:fb00:6501:2693:db52:c621])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-381ed97db31sm1014085f8f.34.2024.11.07.00.21.21
+ d2e1a72fcca58-724079aa8efsm1473483b3a.124.2024.11.07.04.58.43
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 07 Nov 2024 00:21:21 -0800 (PST)
-Message-ID: <844c8c1b-1b79-468c-9932-8276a8a316b6@rivosinc.com>
-Date: Thu, 7 Nov 2024 09:21:21 +0100
+ Thu, 07 Nov 2024 04:58:46 -0800 (PST)
+Message-ID: <6b06b532-c53f-4b5b-b65d-d54d7c746ffc@ventanamicro.com>
+Date: Thu, 7 Nov 2024 09:58:42 -0300
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 1/9] target/riscv: fix henvcfg potentially containing
- stale bits
-To: Alistair Francis <alistair23@gmail.com>
-Cc: qemu-riscv@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>, Weiwei Li <liwei1518@gmail.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, Ved Shanbhogue
- <ved@rivosinc.com>, Atish Patra <atishp@rivosinc.com>, qemu-devel@nongnu.org
-References: <20241017145226.365825-1-cleger@rivosinc.com>
- <20241017145226.365825-2-cleger@rivosinc.com>
- <CAKmqyKMoDSFaJz7LhX4GMV9AhOQUDLOt79Fctw_k97SazpSjjQ@mail.gmail.com>
- <f99c19eb-2986-49a7-a334-b086e19ad4c4@rivosinc.com>
- <CAKmqyKM2dsjF4YaVbvemqA73=xmgVFsUd64v7k0qjBzT_n=JDw@mail.gmail.com>
- <99d02504-92c4-4e8c-8f28-113dcdfb951b@rivosinc.com>
- <CAKmqyKNX4RdndcSCRHbSWZbpZ0wx85iUMECvbmu7VCTBYw7TSA@mail.gmail.com>
+Subject: Re: [RFC v4 2/2] target/riscv: rvv: improve performance of RISC-V
+ vector loads and stores on large amounts of data.
+To: Richard Henderson <richard.henderson@linaro.org>,
+ Paolo Savini <paolo.savini@embecosm.com>, qemu-devel@nongnu.org,
+ qemu-riscv@nongnu.org
+Cc: Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bmeng.cn@gmail.com>,
+ Weiwei Li <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Helene Chelin <helene.chelin@embecosm.com>, Nathan Egge <negge@google.com>,
+ Max Chou <max.chou@sifive.com>
+References: <20241029194348.59574-1-paolo.savini@embecosm.com>
+ <20241029194348.59574-3-paolo.savini@embecosm.com>
+ <7a046c99-c4e7-4395-8dc9-9139e9bfba06@linaro.org>
+ <96e7601d-14aa-4741-8f6a-ae4a1c397a44@embecosm.com>
+ <54c99505-21ef-422c-a7fe-a2d7dabc3d6c@linaro.org>
 Content-Language: en-US
-From: =?UTF-8?B?Q2zDqW1lbnQgTMOpZ2Vy?= <cleger@rivosinc.com>
-In-Reply-To: <CAKmqyKNX4RdndcSCRHbSWZbpZ0wx85iUMECvbmu7VCTBYw7TSA@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8
+From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+In-Reply-To: <54c99505-21ef-422c-a7fe-a2d7dabc3d6c@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::436;
- envelope-from=cleger@rivosinc.com; helo=mail-wr1-x436.google.com
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+Received-SPF: pass client-ip=2607:f8b0:4864:20::52c;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pg1-x52c.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -110,149 +111,91 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 
 
-On 06/11/2024 01:16, Alistair Francis wrote:
-> On Wed, Oct 30, 2024 at 6:57 PM Clément Léger <cleger@rivosinc.com> wrote:
+On 11/4/24 9:48 AM, Richard Henderson wrote:
+> On 10/30/24 15:25, Paolo Savini wrote:
+>> Thanks for the review Richard.
 >>
->>
->>
->> On 23/10/2024 04:51, Alistair Francis wrote:
->>> On Mon, Oct 21, 2024 at 7:30 PM Clément Léger <cleger@rivosinc.com> wrote:
+>> On 10/30/24 11:40, Richard Henderson wrote:
+>>> On 10/29/24 19:43, Paolo Savini wrote:
+>>>> This patch optimizes the emulation of unit-stride load/store RVV instructions
+>>>> when the data being loaded/stored per iteration amounts to 16 bytes or more.
+>>>> The optimization consists of calling __builtin_memcpy on chunks of data of 16
+>>>> bytes between the memory address of the simulated vector register and the
+>>>> destination memory address and vice versa.
+>>>> This is done only if we have direct access to the RAM of the host machine,
+>>>> if the host is little endiand and if it supports atomic 128 bit memory
+>>>> operations.
 >>>>
+>>>> Signed-off-by: Paolo Savini <paolo.savini@embecosm.com>
+>>>> ---
+>>>>   target/riscv/vector_helper.c    | 17 ++++++++++++++++-
+>>>>   target/riscv/vector_internals.h | 12 ++++++++++++
+>>>>   2 files changed, 28 insertions(+), 1 deletion(-)
 >>>>
->>>>
->>>> On 21/10/2024 02:46, Alistair Francis wrote:
->>>>> On Fri, Oct 18, 2024 at 12:55 AM Clément Léger <cleger@rivosinc.com> wrote:
->>>>>>
->>>>>> With the current implementation, if we had the current scenario:
->>>>>> - set bit x in menvcfg
->>>>>> - set bit x in henvcfg
->>>>>> - clear bit x in menvcfg
->>>>>> then, the internal variable env->henvcfg would still contain bit x due
->>>>>> to both a wrong menvcfg mask used in write_henvcfg() as well as a
->>>>>> missing update of henvcfg upon menvcfg update.
->>>>>> This can lead to some wrong interpretation of the context. In order to
->>>>>> update henvcfg upon menvcfg writing, call write_henvcfg() after writing
->>>>>> menvcfg and fix the mask computation used in write_henvcfg() that is
->>>>>> used to mesk env->menvcfg value (which could still lead to some stale
->>>>>> bits). The same mechanism is also applied for henvcfgh writing.
->>>>>>
->>>>>> Signed-off-by: Clément Léger <cleger@rivosinc.com>
->>>>>> ---
->>>>>>  target/riscv/csr.c | 17 +++++++++++++----
->>>>>>  1 file changed, 13 insertions(+), 4 deletions(-)
->>>>>>
->>>>>> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
->>>>>> index b84b436151..9e832e0b39 100644
->>>>>> --- a/target/riscv/csr.c
->>>>>> +++ b/target/riscv/csr.c
->>>>>> @@ -2345,6 +2345,8 @@ static RISCVException read_menvcfg(CPURISCVState *env, int csrno,
->>>>>>      return RISCV_EXCP_NONE;
->>>>>>  }
->>>>>>
->>>>>> +static RISCVException write_henvcfg(CPURISCVState *env, int csrno,
->>>>>> +                                    target_ulong val);
->>>>>>  static RISCVException write_menvcfg(CPURISCVState *env, int csrno,
->>>>>>                                      target_ulong val)
->>>>>>  {
->>>>>> @@ -2357,6 +2359,7 @@ static RISCVException write_menvcfg(CPURISCVState *env, int csrno,
->>>>>>                  (cfg->ext_svadu ? MENVCFG_ADUE : 0);
->>>>>>      }
->>>>>>      env->menvcfg = (env->menvcfg & ~mask) | (val & mask);
->>>>>> +    write_henvcfg(env, CSR_HENVCFG, env->henvcfg);
->>>>>>
->>>>>>      return RISCV_EXCP_NONE;
->>>>>>  }
->>>>>> @@ -2368,6 +2371,8 @@ static RISCVException read_menvcfgh(CPURISCVState *env, int csrno,
->>>>>>      return RISCV_EXCP_NONE;
->>>>>>  }
->>>>>>
->>>>>> +static RISCVException write_henvcfgh(CPURISCVState *env, int csrno,
->>>>>> +                                    target_ulong val);
->>>>>>  static RISCVException write_menvcfgh(CPURISCVState *env, int csrno,
->>>>>>                                       target_ulong val)
->>>>>>  {
->>>>>> @@ -2378,6 +2383,7 @@ static RISCVException write_menvcfgh(CPURISCVState *env, int csrno,
->>>>>>      uint64_t valh = (uint64_t)val << 32;
->>>>>>
->>>>>>      env->menvcfg = (env->menvcfg & ~mask) | (valh & mask);
->>>>>> +    write_henvcfgh(env, CSR_HENVCFGH, env->henvcfg >> 32);
->>>>>>
->>>>>>      return RISCV_EXCP_NONE;
->>>>>>  }
->>>>>> @@ -2435,6 +2441,7 @@ static RISCVException write_henvcfg(CPURISCVState *env, int csrno,
->>>>>>                                      target_ulong val)
->>>>>>  {
->>>>>>      uint64_t mask = HENVCFG_FIOM | HENVCFG_CBIE | HENVCFG_CBCFE | HENVCFG_CBZE;
->>>>>> +    uint64_t menvcfg_mask = 0;
->>>>>>      RISCVException ret;
->>>>>>
->>>>>>      ret = smstateen_acc_ok(env, 0, SMSTATEEN0_HSENVCFG);
->>>>>> @@ -2443,10 +2450,11 @@ static RISCVException write_henvcfg(CPURISCVState *env, int csrno,
->>>>>>      }
->>>>>>
->>>>>>      if (riscv_cpu_mxl(env) == MXL_RV64) {
->>>>>> -        mask |= env->menvcfg & (HENVCFG_PBMTE | HENVCFG_STCE | HENVCFG_ADUE);
->>>>>> +        menvcfg_mask = HENVCFG_PBMTE | HENVCFG_STCE | HENVCFG_ADUE;
->>>>>> +        mask |= env->menvcfg & menvcfg_mask;
->>>>>
->>>>> This doesn't seem right.
->>>>>
->>>>> Should it be something like
->>>>
->>>> That is what I did before but that didn't work, henvcfg still contained
->>>> some stale bits.
->>>>
->>>>>
->>>>>     if (riscv_cpu_mxl(env) == MXL_RV64) {
->>>>>         mask |= env->menvcfg & (HENVCFG_PBMTE | HENVCFG_STCE | HENVCFG_ADUE);
->>>>>     }
->>>>>
->>>>>     mask = env->menvcfg & mask;
->>>>>
->>>>>>      }
->>>>>>
->>>>>> -    env->henvcfg = (env->henvcfg & ~mask) | (val & mask);
->>>>>> +    env->henvcfg = (env->henvcfg & ~menvcfg_mask) | (val & mask);
->>>>>
->>>>> Using both menvcfg_mask and mask seems wrong here
->>>>
->>>> The problem is that if you use:
->>>>
->>>> mask |= env->menvcfg & (HENVCFG_PBMTE | HENVCFG_STCE | HENVCFG_ADUE)
->>>>
->>>> Then, if a bit was cleared in menvcfg before writing henvcfg (let's say
->>>> HENVCFG_ADUE), then env->henvcfg will be masked with mask =
->>>> HENVCFG_PBMTE | HENVCFG_STCE, leaving the HENVCFG_ADUE stale bit in
->>>> env->henvcfg which is wrong for the internal state.
->>>>
->>>> The idea here is to actually clear any menvcfg related bit (the 1:1
->>>> bits) using the raw mask (HENVCFG_PBMTE | HENVCFG_STCE | HENVCFG_ADUE)
->>>> to clear everything and then OR it with the value to be written (which
->>>> is masked with raw bits + menvcfg content) to avoid any stale bits.
+>>>> diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
+>>>> index 75c24653f0..e1c100e907 100644
+>>>> --- a/target/riscv/vector_helper.c
+>>>> +++ b/target/riscv/vector_helper.c
+>>>> @@ -488,7 +488,22 @@ vext_group_ldst_host(CPURISCVState *env, void *vd, uint32_t byte_end,
+>>>>       }
+>>>>         fn = fns[is_load][group_size];
+>>>> -    fn(vd, byte_offset, host + byte_offset);
+>>>> +
+>>>> +    /* __builtin_memcpy uses host 16 bytes vector loads and stores if supported.
+>>>> +     * We need to make sure that these instructions have guarantees of atomicity.
+>>>> +     * E.g. x86 processors provide strong guarantees of atomicity for 16-byte
+>>>> +     * memory operations if the memory operands are 16-byte aligned */
+>>>> +    if (!HOST_BIG_ENDIAN && (byte_offset + 16 < byte_end) &&
+>>>> +            ((byte_offset % 16) == 0) && HOST_128_ATOMIC_MEM_OP) {
+>>>> +      group_size = MO_128;
+>>>> +      if (is_load) {
+>>>> +        __builtin_memcpy((uint8_t *)(vd + byte_offset), (uint8_t *)(host + byte_offset), 16);
+>>>> +      } else {
+>>>> +        __builtin_memcpy((uint8_t *)(host + byte_offset), (uint8_t *)(vd + byte_offset), 16);
+>>>> +      }
 >>>
->>> When calling write_henvcfg() can't you just do:
+>>> I said this last time and I'll say it again:
 >>>
->>> write_henvcfg(env, CSR_HENVCFG, env->henvcfg & env->menvcfg)
->>
->> Yeah it's clearer and I thought of that but you'll end up with the same
->> result since the problem does not come from the value you supply but
->> rather by the old masked henvcfg value used at the end of
->> write_henvcg()(and the mask is computed independently of the new value),
->> ie this line:
->>
->> env->henvcfg = (env->henvcfg & ~mask) | (val & mask);
+>>>     __builtin_memcpy DOES NOT equal VMOVDQA
+>> I am aware of this. I took __builtin_memcpy as a generic enough way to emulate loads and stores that should allow several hosts to generate the widest load/store instructions they can and on x86 I see this generates instructions vmovdpu/movdqu that are not always guaranteed to be atomic. x86 though guarantees them to be atomic if the memory address is aligned to 16 bytes.
 > 
-> Yeah ok.
+> No, AMD guarantees MOVDQU is atomic if aligned, Intel does not.
+> See the comment in util/cpuinfo-i386.c, and the two CPUINFO_ATOMIC_VMOVDQ[AU] bits.
 > 
-> Maybe a comment or two to describe what is going on would be enough
-> then, or even splitting the single line ops into multiple lines would
-> be clearer
+> See also host/include/*/host/atomic128-ldst.h, HAVE_ATOMIC128_RO, and atomic16_read_ro.
+> Not that I think you should use that here; it's complicated, and I think you're better off relying on the code in accel/tcg/ when more than byte atomicity is required.
+>
 
-Yep, that could be enough. I'll do that,
+Not sure if that's what you meant but I didn't find any clear example of
+multi-byte atomicity using qatomic_read() and friends that would be closer
+to what memcpy() is doing here. I found one example in bdrv_graph_co_rdlock()
+that seems to use a mem barrier via smp_mb() and qatomic_read() inside a
+loop, but I don't understand that code enough to say.
 
-Thanks !
+I'm also wondering if a common pthread_lock() wrapping up these memcpy() calls
+would suffice in this case. Even if we can't guarantee that __builtin_memcpy()
+will use arch specific vector insns in the host it would already be a faster
+path than falling back to fn(...).
 
+In a quick detour, I'm not sure if we really considered how ARM SVE implements these
+helpers. E.g gen_sve_str():
+
+https://gitlab.com/qemu-project/qemu/-/blob/master/target/arm/tcg/translate-sve.c#L4182
+
+I'm curious to see if this form of front end optimization, use TCG ops
+instead of a for() loop with ldst_elem() like we're doing today,  would yield more
+performance with less complication with backend specifics, atomicity and whatnot.
+In fact I have a feeling this is not the first time we talk about using ideas from
+SVE too.
+
+
+Thanks,
+
+Daniel
+
+
+
+  
 > 
-> Alistair
-
+> r~
 
