@@ -4,60 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B2444D5E13F
-	for <qemu-riscv@archiver.kernel.org>; Fri,  8 Nov 2024 06:01:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E159FD5E13F
+	for <qemu-riscv@archiver.kernel.org>; Fri,  8 Nov 2024 06:02:24 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1t9I3k-0003kr-4a; Fri, 08 Nov 2024 01:01:28 -0500
+	id 1t9I3x-0003qX-1S; Fri, 08 Nov 2024 01:01:41 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <baturo.alexey@gmail.com>)
- id 1t9I3h-0003jx-Rv; Fri, 08 Nov 2024 01:01:25 -0500
-Received: from mail-lf1-x136.google.com ([2a00:1450:4864:20::136])
+ id 1t9I3v-0003q7-0b; Fri, 08 Nov 2024 01:01:39 -0500
+Received: from mail-lj1-x232.google.com ([2a00:1450:4864:20::232])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <baturo.alexey@gmail.com>)
- id 1t9I3g-00081x-4N; Fri, 08 Nov 2024 01:01:25 -0500
-Received: by mail-lf1-x136.google.com with SMTP id
- 2adb3069b0e04-53c779ef19cso1969087e87.3; 
- Thu, 07 Nov 2024 22:01:22 -0800 (PST)
+ id 1t9I3t-00084m-D8; Fri, 08 Nov 2024 01:01:38 -0500
+Received: by mail-lj1-x232.google.com with SMTP id
+ 38308e7fff4ca-2fb3ce15172so27411501fa.0; 
+ Thu, 07 Nov 2024 22:01:36 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1731045681; x=1731650481; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=ZjrStNyS6zrjylJelBgtgwnRK/JQa7gmfXHEF62fzZ0=;
- b=M0G6for0AdNwa9NCLOd/si2xBH4uCr+1mhqLYnQgicL4GdgGAYhhZwzBUU37gStftS
- 0zXiRO/HGr07LkVbWdGVsPa8eR0BrV4kub2WHBFabueFHzU/Yhy9Nq7Yd/5uhQj/Ej3Q
- 4ZijaUz/rfFod+EfoBctNLkzn1scIDJDXk4G/u3Zv0Z12xhAsLxE9Oc9C/wTXDHk2g6Q
- MjL6Tao7sYDyqRfMWUCK2ic++vb6kP6zb8quYunCKohvVfzyf/Qt6aXbsLWVbz2aaQpA
- X3PcoBG9kur1/xbVO/HpSQkpHDGQmb46TmYYEtShMv5Pb2HsHfs5T5Xi5/hWFMTxiB0Q
- ozyQ==
+ d=gmail.com; s=20230601; t=1731045695; x=1731650495; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=dd0VDD1HZh5UbKFP/cfgtDIoe/mhfV0hpPqnnnrq4pA=;
+ b=iOM99mU0Mjs5EYg0JzLFC7AcZ9rzF7CSBTGW6T+NExtq5yhZw7WNLOGVpAxj2jb5g6
+ uJbOd35T8dpwVsbI66WS8jMUYtD1/sAokH3cygTMFMgQTZcGO2Qcq0UyQt/+RfAA0z1f
+ 95npINx9sPESWiKnxv6EQ9YGwhOTGolU4vEsJjT81cV7TUIsmKlurmUW9B7GD+SxzTG5
+ pB72mqVXcPBurs+VUDe0g8f0Za+j24MJTxx21Ehz2c0nn5CFLwE1oBVqSEKncKDEny67
+ pt5ojBR/L5qUMpTbMe4bJQrEcBxMHMrZMFm8E22klOwrmyCoRr/ULsuEgYSFfVrrhHJa
+ VevA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731045681; x=1731650481;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=ZjrStNyS6zrjylJelBgtgwnRK/JQa7gmfXHEF62fzZ0=;
- b=tZGyaMK9tC8yliV5IJ5kdmYO8TeAoqov2MYXVO7z4hcCMVB7gfak8ZOEnTqZ2jdx3y
- 7h9FnyDSiLLsCZ8dpedZ6GHUjUOYYUrIi0nHQOV5nQFNAERsjyIyvfdsSsE7GusRBspz
- RTTe7gZ3/J0h3N/M6WGFddlPgK9gJtg1Kj8zsHDn/tyyTX73mL3VLPZpVHUBIQzb76v3
- W0zNLn1PNh1+wT4G/6Q7gNdMrS+uiGIbuAzCTkJj8AMva7dzlqLZRK0S97wB/ua7yhvq
- 6BXp4oSHl5Sr9ICLNpsld6vp/1OsDNyYJ2kak7Hm1IYTovqSs2l6Sler2N1lOgSiL5Q7
- Al3w==
+ d=1e100.net; s=20230601; t=1731045695; x=1731650495;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=dd0VDD1HZh5UbKFP/cfgtDIoe/mhfV0hpPqnnnrq4pA=;
+ b=ZbDVfhJvYs66IZY8cmw5SZQCS7SrLo2RGpjKq9xFf60I7bWhP7up12HdPx2zxP93zj
+ k1vWjW3KSXnSFr6q09iBCMxtlXX/Lom91pitn+Jnj/lq/K+S9PTVGnWXG8IJQWiQZi5p
+ Oz/4RVPUCO61/Rz+ETp9/qwAGL0ugcXch0XvuNcSbAruiL/vt+8VYhxlsZYl8C9Gqn1p
+ otcMWW1freo7bXv2qFsR3qeGnaP1EhJv06yRkLQBAALAia68TFDS9AxLlqNEnE3/3Sza
+ wkeC9ifsuutNMNiZCEWYTA8PwnSQ2DyiX+Txzx/uVuWrsA4a+Pb/pDmrFbiWcHewqa+E
+ 6yYw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCW6/p67gQt07DEsYF2UvI+zvAlbDWTSdnI4fd1xZxUWIcXXkiJiJEOtAaAdO6IXKn8yLs9mz0lFtXME@nongnu.org,
- AJvYcCWquHrLAm3F4Iky/NyDzqACPVZ4tHwYyqjU1kl0mrs0JJyR4nqXMJ+ZwWudoOLR6bN9r5wSGtEeBKmiiw==@nongnu.org
-X-Gm-Message-State: AOJu0YxkqwSDF9sBKOhzv9+QwfhEBo29iAofq9aE7j/4Btu0p/CTdMtl
- p5xHGqNcv3injQ7Wyf/GDj8ntOnxMUvEs6ikigHyYLvU8MRIIx8h
-X-Google-Smtp-Source: AGHT+IFFFBIZ5Xns4X6nCFbYYyvW1dUlzUwAetFGsMmbF49DL9Oy95rVHXHNvT0SMdlQIM/TsbvJsw==
-X-Received: by 2002:a05:651c:19ab:b0:2fa:c59d:1af3 with SMTP id
- 38308e7fff4ca-2ff202774bdmr7147541fa.20.1731045680886; 
- Thu, 07 Nov 2024 22:01:20 -0800 (PST)
+ AJvYcCULp4bXVkDhoYDn65tcqWciArBhLR4AwXRgtlAxPDbWAcSzvDdI3+hmr0wMXcFhMzL8QfIbg4dgB2uMrQ==@nongnu.org,
+ AJvYcCWxEZxiBtG80iWFZcUgC/O51rl988W33LceraIZK8KXx8W5/1izbFQG2GG/9xScyFR1zp/LIV32/lAp@nongnu.org
+X-Gm-Message-State: AOJu0YyrWGh0naAkjlgqIQEOUPu+/+L2JTU//wzjwpxW47GjA/FiPRFj
+ KIDyHdJ3NvkRUpwJz0uGvZCTfE4TqqA3JGEUlG6RpkP/vAl5TcRY
+X-Google-Smtp-Source: AGHT+IE2vSsHMA8B6CqSov/t+6QFwZBr7LqoYJOMCGqMJtQRjeTAVfBmmA6rOsS1xguCviG6Eu+XPQ==
+X-Received: by 2002:a05:651c:1553:b0:2fb:55b0:82b8 with SMTP id
+ 38308e7fff4ca-2ff1f4187f3mr6537821fa.4.1731045695232; 
+ Thu, 07 Nov 2024 22:01:35 -0800 (PST)
 Received: from hades.midgard (broadband-188-255-126-251.ip.moscow.rt.ru.
  [188.255.126.251]) by smtp.gmail.com with ESMTPSA id
- 38308e7fff4ca-2ff178ee325sm5159001fa.27.2024.11.07.22.01.18
+ 38308e7fff4ca-2ff178ee325sm5159001fa.27.2024.11.07.22.01.33
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Thu, 07 Nov 2024 22:01:19 -0800 (PST)
+ Thu, 07 Nov 2024 22:01:34 -0800 (PST)
 From: baturo.alexey@gmail.com
 To: 
 Cc: baturo.alexey@gmail.com, richard.henderson@linaro.org,
@@ -66,14 +67,17 @@ Cc: baturo.alexey@gmail.com, richard.henderson@linaro.org,
  palmer@dabbelt.com, Alistair.Francis@wdc.com, sagark@eecs.berkeley.edu,
  kbastian@mail.uni-paderborn.de, qemu-devel@nongnu.org,
  qemu-riscv@nongnu.org
-Subject: [PATCH 0/7] Pointer Masking update for Zjpm v1.0
-Date: Fri,  8 Nov 2024 09:01:09 +0300
-Message-Id: <20241108060116.37397-1-baturo.alexey@gmail.com>
+Subject: [PATCH 7/7] target/riscv: Enable updates for pointer masking
+ variables and thus enable pointer masking extension
+Date: Fri,  8 Nov 2024 09:01:16 +0300
+Message-Id: <20241108060116.37397-8-baturo.alexey@gmail.com>
 X-Mailer: git-send-email 2.39.5 (Apple Git-154)
+In-Reply-To: <20241108060116.37397-1-baturo.alexey@gmail.com>
+References: <20241108060116.37397-1-baturo.alexey@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::136;
- envelope-from=baturo.alexey@gmail.com; helo=mail-lf1-x136.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::232;
+ envelope-from=baturo.alexey@gmail.com; helo=mail-lj1-x232.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -98,40 +102,38 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 From: Alexey Baturo <baturo.alexey@gmail.com>
 
-Hi,
+Signed-off-by: Alexey Baturo <baturo.alexey@gmail.com>
+---
+ target/riscv/cpu.c | 6 ++++++
+ 1 file changed, 6 insertions(+)
 
-As Pointer Masking is finally ratified, these patches intend to update the existing code to the final version.
-These patches have been submitted previously and I tried to address all the suggestions, but I'd suggest to review them from the clean slate and then finally push them to the repo.
-Thanks.
-
-Alexey Baturo (7):
-  target/riscv: Remove obsolete pointer masking extension code.
-  target/riscv: Add new CSR fields for S{sn,mn,m}pm extensions as part
-    of Zjpm v1.0
-  target/riscv: Add helper functions to calculate current number of
-    masked bits for pointer masking
-  target/riscv: Add pointer masking tb flags
-  target/riscv: Update address modify functions to take into account
-    pointer masking
-  target/riscv: Apply pointer masking for virtualized memory accesses
-  target/riscv: Enable updates for pointer masking variables and thus
-    enable pointer masking extension
-
- target/riscv/cpu.c                      |  19 +-
- target/riscv/cpu.h                      |  51 ++--
- target/riscv/cpu_bits.h                 |  91 +-----
- target/riscv/cpu_cfg.h                  |   3 +
- target/riscv/cpu_helper.c               | 124 ++++++---
- target/riscv/csr.c                      | 356 ++----------------------
- target/riscv/insn_trans/trans_rvh.c.inc |  11 +
- target/riscv/machine.c                  |  17 +-
- target/riscv/pmp.c                      |  14 +-
- target/riscv/pmp.h                      |   1 +
- target/riscv/tcg/tcg-cpu.c              |   5 +-
- target/riscv/translate.c                |  51 ++--
- target/riscv/vector_helper.c            |  18 +-
- 13 files changed, 224 insertions(+), 537 deletions(-)
-
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index 4e80dcd2e6..13b2c56a72 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -200,6 +200,9 @@ const RISCVIsaExtData isa_edata_arr[] = {
+     ISA_EXT_DATA_ENTRY(svnapot, PRIV_VERSION_1_12_0, ext_svnapot),
+     ISA_EXT_DATA_ENTRY(svpbmt, PRIV_VERSION_1_12_0, ext_svpbmt),
+     ISA_EXT_DATA_ENTRY(svvptc, PRIV_VERSION_1_13_0, ext_svvptc),
++    ISA_EXT_DATA_ENTRY(ssnpm, PRIV_VERSION_1_13_0, ext_ssnpm),
++    ISA_EXT_DATA_ENTRY(smnpm, PRIV_VERSION_1_13_0, ext_smnpm),
++    ISA_EXT_DATA_ENTRY(smmpm, PRIV_VERSION_1_13_0, ext_smmpm),
+     ISA_EXT_DATA_ENTRY(xtheadba, PRIV_VERSION_1_11_0, ext_xtheadba),
+     ISA_EXT_DATA_ENTRY(xtheadbb, PRIV_VERSION_1_11_0, ext_xtheadbb),
+     ISA_EXT_DATA_ENTRY(xtheadbs, PRIV_VERSION_1_11_0, ext_xtheadbs),
+@@ -1490,9 +1493,12 @@ const RISCVCPUMultiExtConfig riscv_cpu_extensions[] = {
+     MULTI_EXT_CFG_BOOL("zvfh", ext_zvfh, false),
+     MULTI_EXT_CFG_BOOL("zvfhmin", ext_zvfhmin, false),
+     MULTI_EXT_CFG_BOOL("sstc", ext_sstc, true),
++    MULTI_EXT_CFG_BOOL("ssnpm", ext_ssnpm, false),
+ 
+     MULTI_EXT_CFG_BOOL("smaia", ext_smaia, false),
+     MULTI_EXT_CFG_BOOL("smepmp", ext_smepmp, false),
++    MULTI_EXT_CFG_BOOL("smmpm", ext_smmpm, false),
++    MULTI_EXT_CFG_BOOL("smnpm", ext_smnpm, false),
+     MULTI_EXT_CFG_BOOL("smstateen", ext_smstateen, false),
+     MULTI_EXT_CFG_BOOL("ssaia", ext_ssaia, false),
+     MULTI_EXT_CFG_BOOL("svade", ext_svade, false),
 -- 
 2.39.5
 
