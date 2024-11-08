@@ -4,84 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 77400D5D695
-	for <qemu-riscv@archiver.kernel.org>; Fri,  8 Nov 2024 01:17:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 23A23D5D695
+	for <qemu-riscv@archiver.kernel.org>; Fri,  8 Nov 2024 01:47:58 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1t9Dcg-0005Bu-FD; Thu, 07 Nov 2024 20:17:14 -0500
+	id 1t9E6E-0001uP-0e; Thu, 07 Nov 2024 20:47:46 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1t9Dce-0005Ba-FI; Thu, 07 Nov 2024 20:17:12 -0500
-Received: from mail-vk1-xa34.google.com ([2607:f8b0:4864:20::a34])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1t9Dcc-0007IQ-RF; Thu, 07 Nov 2024 20:17:12 -0500
-Received: by mail-vk1-xa34.google.com with SMTP id
- 71dfb90a1353d-5139cd01814so573777e0c.0; 
- Thu, 07 Nov 2024 17:17:09 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1731028629; x=1731633429; darn=nongnu.org;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=2GY4X7Jukfu73JXdcTDfHYASVuVcZyb/zo+u/lRG5tE=;
- b=AuHPODUcs+SLT0rtcyJPfu729XkcSWVTc+SmKSjDCHF7M4shdJZfOboLYeeNahv8yc
- /rY1boWhz5umXAxcPdoMfIH7eeDMk46N7I89cF+Rz98xi4FHbI+/YjEGo5vvwm/L1YV1
- N7TWSjfmszT27DPQyrIlqR3fUgVSbTHfYXb8DZ0tHbpw4HwYLjvsNGE/E+SMiBNwJnXv
- 1PGBYKhhxASmg/xUJB6OdZVq6gxj4YSbgXOgdKTav5SRiQBNTCPL86HRhb13xdwYUto7
- 6vnE4EZ8I5CIOWd2OJ0siL2QSGX3RYgxW6QNvzCZHWbKmQqfSkY5hdNI5YGzLEiVcdwZ
- PvsQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731028629; x=1731633429;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=2GY4X7Jukfu73JXdcTDfHYASVuVcZyb/zo+u/lRG5tE=;
- b=afzTVEI/51LzOn7G9qa5lU2fsQYfMddnMW15bHEwic/iuCShZ90fjbA4twTtpl4m77
- SpCedNBP5JJVUHLJ1jKPLQSroqm0fLPrzefGPhnNp8fF2LRQUneb8dfNsxYa+PHSTErs
- 8RdvtJFcQGIlQVayDrfokLVAGoN9TaDm6XEEvXOaHulRgYCOQLiSrYAHc6uV9LzP/LXM
- SG0sDdkdf11UwQdRktzvmDhrhlhB8FplTjPWwg/MuJjw18bofRjtglC9Ma5i56m+n7wx
- tf81BarKNRonbHBAnh9kr4x824J83042y5Spz0yptV8+Lu0e0ZpxLr6ywV2dRpUZ6ifO
- 6XWA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWK32akVpLvP0m1f9fkV8Sh5ykI1YdGAdDGxHESG65Cziev39hYtVLUK46Q0/3PVgZQlIu7laF0G8aO@nongnu.org
-X-Gm-Message-State: AOJu0YwY1IC0MibgpON/cv4IBsImkmD4X8EW3bNB+PNgr0mURY0OvHA0
- dXVQ5liIYSvKqzpi7EjPZWhMmf+O07ARl3/pWL1s5KHKJe04fSrUzxjXIKgeBQtJQZdXtX/XmCa
- yiZRet9DCd9bLVvpfrQBm+S8bHIY=
-X-Google-Smtp-Source: AGHT+IGukBPkGBM+2PLY2YUvlY/vLDz3hz6R9wN7tfz9i+yMl8notVakeaUJSnbnbg/7A9GV1YP7Jqja8IFhDJYgbZg=
-X-Received: by 2002:a05:6122:2a4f:b0:50d:85d7:d94b with SMTP id
- 71dfb90a1353d-51401ebcea6mr1215752e0c.11.1731028629187; Thu, 07 Nov 2024
- 17:17:09 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <ethan84@andestech.com>)
+ id 1t9E6B-0001se-T3; Thu, 07 Nov 2024 20:47:44 -0500
+Received: from 60-248-80-70.hinet-ip.hinet.net ([60.248.80.70]
+ helo=Atcsqr.andestech.com)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <ethan84@andestech.com>)
+ id 1t9E68-0003R9-U9; Thu, 07 Nov 2024 20:47:43 -0500
+Received: from Atcsqr.andestech.com (localhost [127.0.0.2] (may be forged))
+ by Atcsqr.andestech.com with ESMTP id 4A81GtZ6064481;
+ Fri, 8 Nov 2024 09:16:55 +0800 (+08)
+ (envelope-from ethan84@andestech.com)
+Received: from mail.andestech.com (ATCPCS31.andestech.com [10.0.1.89])
+ by Atcsqr.andestech.com with ESMTPS id 4A81GV5i064385
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Fri, 8 Nov 2024 09:16:31 +0800 (+08)
+ (envelope-from ethan84@andestech.com)
+Received: from ethan84-VirtualBox (10.0.12.12) by ATCPCS31.andestech.com
+ (10.0.1.89) with Microsoft SMTP Server (TLS) id 14.3.498.0; Fri, 8 Nov 2024
+ 09:16:31 +0800
+Date: Fri, 8 Nov 2024 09:16:23 +0800
+To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+CC: <qemu-devel@nongnu.org>, <richard.henderson@linaro.org>,
+ <pbonzini@redhat.com>, <peterx@redhat.com>, <david@redhat.com>,
+ <philmd@linaro.org>, <palmer@dabbelt.com>, <alistair.francis@wdc.com>,
+ <bmeng.cn@gmail.com>, <liwei1518@gmail.com>,
+ <zhiwei_liu@linux.alibaba.com>, <qemu-riscv@nongnu.org>
+Subject: Re: [PATCH v8 0/8] Support RISC-V IOPMP
+Message-ID: <Zy1mZ+yc+3j9keP3@ethan84-VirtualBox>
+References: <20240715095702.1222213-1-ethan84@andestech.com>
+ <b8e239d2-e0d5-4cac-a074-cb1ed277a08a@ventanamicro.com>
 MIME-Version: 1.0
-References: <20241107063133.28339-1-jim.shu@sifive.com>
- <20241107063133.28339-2-jim.shu@sifive.com>
-In-Reply-To: <20241107063133.28339-2-jim.shu@sifive.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Fri, 8 Nov 2024 11:16:43 +1000
-Message-ID: <CAKmqyKNdpSHCzsMZKpfe+xSupbRxz58jJXYV_RwH2SFeze0DBw@mail.gmail.com>
-Subject: Re: [PATCH v2 1/3] hw/riscv: Support to load DTB after 3GB memory on
- 64-bit system.
-To: Jim Shu <jim.shu@sifive.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, 
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, 
- Bin Meng <bmeng.cn@gmail.com>, Weiwei Li <liwei1518@gmail.com>, 
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::a34;
- envelope-from=alistair23@gmail.com; helo=mail-vk1-xa34.google.com
-X-Spam_score_int: -17
-X-Spam_score: -1.8
-X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
+In-Reply-To: <b8e239d2-e0d5-4cac-a074-cb1ed277a08a@ventanamicro.com>
+User-Agent: Mutt/2.1.4 (2021-12-11)
+X-Originating-IP: [10.0.12.12]
+X-DNSRBL: 
+X-MAIL: Atcsqr.andestech.com 4A81GtZ6064481
+Received-SPF: pass client-ip=60.248.80.70; envelope-from=ethan84@andestech.com;
+ helo=Atcsqr.andestech.com
+X-Spam_score_int: -8
+X-Spam_score: -0.9
+X-Spam_bar: /
+X-Spam_report: (-0.9 / 5.0 requ) BAYES_00=-1.9,
+ RCVD_IN_VALIDITY_CERTIFIED_BLOCKED=0.001, RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001,
+ RDNS_DYNAMIC=0.982, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ TVD_RCVD_IP=0.001 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -94,171 +71,96 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
+Reply-to:  Ethan Chen <ethan84@andestech.com>
+From:  Ethan Chen via <qemu-riscv@nongnu.org>
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Thu, Nov 7, 2024 at 4:32=E2=80=AFPM Jim Shu <jim.shu@sifive.com> wrote:
->
-> Larger initrd image will overlap the DTB at 3GB address. Since 64-bit
-> system doesn't have 32-bit addressable issue, we just load DTB to the end
-> of dram in 64-bit system.
->
-> Signed-off-by: Jim Shu <jim.shu@sifive.com>
-> ---
->  hw/riscv/boot.c            | 8 ++++++--
->  hw/riscv/microchip_pfsoc.c | 4 ++--
->  hw/riscv/sifive_u.c        | 4 ++--
->  hw/riscv/spike.c           | 4 ++--
->  hw/riscv/virt.c            | 2 +-
->  include/hw/riscv/boot.h    | 2 +-
->  6 files changed, 14 insertions(+), 10 deletions(-)
->
-> diff --git a/hw/riscv/boot.c b/hw/riscv/boot.c
-> index 2e319168db..4e4e106a2b 100644
-> --- a/hw/riscv/boot.c
-> +++ b/hw/riscv/boot.c
-> @@ -293,7 +293,7 @@ out:
->   * The FDT is fdt_packed() during the calculation.
->   */
->  uint64_t riscv_compute_fdt_addr(hwaddr dram_base, hwaddr dram_size,
-> -                                MachineState *ms)
-> +                                MachineState *ms, RISCVHartArrayState *h=
-arts)
->  {
->      int ret =3D fdt_pack(ms->fdt);
->      hwaddr dram_end, temp;
-> @@ -321,7 +321,11 @@ uint64_t riscv_compute_fdt_addr(hwaddr dram_base, hw=
-addr dram_size,
->       * Thus, put it at an 2MB aligned address that less than fdt size fr=
-om the
->       * end of dram or 3GB whichever is lesser.
->       */
+On Tue, Nov 05, 2024 at 03:36:07PM -0300, Daniel Henrique Barboza wrote:
+> [EXTERNAL MAIL]
+> 
+> Hi Ethan,
+> 
+> 
+> Do you plan to send a new version of this work? It seems to me that we're
+> a couple of reviews away from getting it merged.
+> 
 
-We should probably update this comment to describe what happens for
-64-bit systems.
+Hi Daniel,
 
-Otherwise:
+Thanks for checking in! I do plan to send an updated version, but it may take a 
+bit more time.
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Best regards,
+Ethan
 
-Alistair
-
-> -    temp =3D (dram_base < 3072 * MiB) ? MIN(dram_end, 3072 * MiB) : dram=
-_end;
-> +    if (!riscv_is_32bit(harts)) {
-> +        temp =3D dram_end;
-> +    } else {
-> +        temp =3D (dram_base < 3072 * MiB) ? MIN(dram_end, 3072 * MiB) : =
-dram_end;
-> +    }
->
->      return QEMU_ALIGN_DOWN(temp - fdtsize, 2 * MiB);
->  }
-> diff --git a/hw/riscv/microchip_pfsoc.c b/hw/riscv/microchip_pfsoc.c
-> index f9a3b43d2e..ba8b0a2c26 100644
-> --- a/hw/riscv/microchip_pfsoc.c
-> +++ b/hw/riscv/microchip_pfsoc.c
-> @@ -519,7 +519,7 @@ static void microchip_icicle_kit_machine_init(Machine=
-State *machine)
->      bool kernel_as_payload =3D false;
->      target_ulong firmware_end_addr, kernel_start_addr;
->      uint64_t kernel_entry;
-> -    uint32_t fdt_load_addr;
-> +    uint64_t fdt_load_addr;
->      DriveInfo *dinfo =3D drive_get(IF_SD, 0, 0);
->
->      /* Sanity check on RAM size */
-> @@ -625,7 +625,7 @@ static void microchip_icicle_kit_machine_init(Machine=
-State *machine)
->          /* Compute the fdt load address in dram */
->          fdt_load_addr =3D riscv_compute_fdt_addr(memmap[MICROCHIP_PFSOC_=
-DRAM_LO].base,
->                                                 memmap[MICROCHIP_PFSOC_DR=
-AM_LO].size,
-> -                                               machine);
-> +                                               machine, &s->soc.u_cpus);
->          riscv_load_fdt(fdt_load_addr, machine->fdt);
->
->          /* Load the reset vector */
-> diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
-> index c5e74126b1..05467e833a 100644
-> --- a/hw/riscv/sifive_u.c
-> +++ b/hw/riscv/sifive_u.c
-> @@ -519,7 +519,7 @@ static void sifive_u_machine_init(MachineState *machi=
-ne)
->      const char *firmware_name;
->      uint32_t start_addr_hi32 =3D 0x00000000;
->      int i;
-> -    uint32_t fdt_load_addr;
-> +    uint64_t fdt_load_addr;
->      uint64_t kernel_entry;
->      DriveInfo *dinfo;
->      BlockBackend *blk;
-> @@ -606,7 +606,7 @@ static void sifive_u_machine_init(MachineState *machi=
-ne)
->
->      fdt_load_addr =3D riscv_compute_fdt_addr(memmap[SIFIVE_U_DEV_DRAM].b=
-ase,
->                                             memmap[SIFIVE_U_DEV_DRAM].siz=
-e,
-> -                                           machine);
-> +                                           machine, &s->soc.u_cpus);
->      riscv_load_fdt(fdt_load_addr, machine->fdt);
->
->      if (!riscv_is_32bit(&s->soc.u_cpus)) {
-> diff --git a/hw/riscv/spike.c b/hw/riscv/spike.c
-> index fceb91d946..acd7ab1ae1 100644
-> --- a/hw/riscv/spike.c
-> +++ b/hw/riscv/spike.c
-> @@ -201,7 +201,7 @@ static void spike_board_init(MachineState *machine)
->      hwaddr firmware_load_addr =3D memmap[SPIKE_DRAM].base;
->      target_ulong kernel_start_addr;
->      char *firmware_name;
-> -    uint32_t fdt_load_addr;
-> +    uint64_t fdt_load_addr;
->      uint64_t kernel_entry;
->      char *soc_name;
->      int i, base_hartid, hart_count;
-> @@ -317,7 +317,7 @@ static void spike_board_init(MachineState *machine)
->
->      fdt_load_addr =3D riscv_compute_fdt_addr(memmap[SPIKE_DRAM].base,
->                                             memmap[SPIKE_DRAM].size,
-> -                                           machine);
-> +                                           machine, &s->soc[0]);
->      riscv_load_fdt(fdt_load_addr, machine->fdt);
->
->      /* load the reset vector */
-> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-> index 45a8c4f819..761bce3304 100644
-> --- a/hw/riscv/virt.c
-> +++ b/hw/riscv/virt.c
-> @@ -1424,7 +1424,7 @@ static void virt_machine_done(Notifier *notifier, v=
-oid *data)
->
->      fdt_load_addr =3D riscv_compute_fdt_addr(memmap[VIRT_DRAM].base,
->                                             memmap[VIRT_DRAM].size,
-> -                                           machine);
-> +                                           machine, &s->soc[0]);
->      riscv_load_fdt(fdt_load_addr, machine->fdt);
->
->      /* load the reset vector */
-> diff --git a/include/hw/riscv/boot.h b/include/hw/riscv/boot.h
-> index f778b560de..34a80c5ff4 100644
-> --- a/include/hw/riscv/boot.h
-> +++ b/include/hw/riscv/boot.h
-> @@ -49,7 +49,7 @@ target_ulong riscv_load_kernel(MachineState *machine,
->                                 bool load_initrd,
->                                 symbol_fn_t sym_cb);
->  uint64_t riscv_compute_fdt_addr(hwaddr dram_start, uint64_t dram_size,
-> -                                MachineState *ms);
-> +                                MachineState *ms, RISCVHartArrayState *h=
-arts);
->  void riscv_load_fdt(hwaddr fdt_addr, void *fdt);
->  void riscv_setup_rom_reset_vec(MachineState *machine, RISCVHartArrayStat=
-e *harts,
->                                 hwaddr saddr,
-> --
-> 2.17.1
->
->
+> 
+> On 7/15/24 6:56 AM, Ethan Chen wrote:
+> > This series implements basic functions of IOPMP specification v0.9.1 rapid-k
+> > model.
+> > The specification url:
+> > https://github.com/riscv-non-isa/iopmp-spec/releases/tag/v0.9.1
+> > 
+> > When IOPMP is enabled, memory access to system memory from devices and
+> > the CPU will be checked by the IOPMP.
+> > 
+> > The issue of CPU access to non-CPU address space via IOMMU was previously
+> > mentioned by Jim Shu, who provided a patch[1] to fix it. IOPMP also requires
+> > this patch.
+> > 
+> > [1] accel/tcg: Store section pointer in CPUTLBEntryFull
+> >      https://patchew.org/QEMU/20240612081416.29704-1-jim.shu@sifive.com/20240612081416.29704-2-jim.shu@sifive.com/
+> > 
+> > 
+> > Changes for v8:
+> > 
+> >    - Support transactions from CPU
+> >    - Add an API to set up IOPMP protection for system memory
+> >    - Add an API to configure the RISCV CPU to support IOPMP and specify the
+> >      CPU's RRID
+> >    - Add an API for DMA operation with IOPMP support
+> >    - Add SPDX license identifiers to new files (Stefan W.)
+> >    - Remove IOPMP PCI interface(pci_setup_iommu) (Zhiwei)
+> > 
+> > Changes for v7:
+> > 
+> >    - Change the specification version to v0.9.1
+> >    - Remove the sps extension
+> >    - Remove stall support, transaction information which need requestor device
+> >      support.
+> >    - Remove iopmp_cascade option for virt machine
+> >    - Refine 'addr' range checks switch case (Daniel)
+> > 
+> > Ethan Chen (8):
+> >    memory: Introduce memory region fetch operation
+> >    system/physmem: Support IOMMU granularity smaller than TARGET_PAGE
+> >      size
+> >    target/riscv: Add support for IOPMP
+> >    hw/misc/riscv_iopmp: Add RISC-V IOPMP device
+> >    hw/misc/riscv_iopmp: Add API to set up IOPMP protection for system
+> >      memory
+> >    hw/misc/riscv_iopmp: Add API to configure RISCV CPU IOPMP support
+> >    hw/misc/riscv_iopmp:  Add DMA operation with IOPMP support API
+> >    hw/riscv/virt: Add IOPMP support
+> > 
+> >   accel/tcg/cputlb.c            |   29 +-
+> >   docs/system/riscv/virt.rst    |    5 +
+> >   hw/misc/Kconfig               |    3 +
+> >   hw/misc/meson.build           |    1 +
+> >   hw/misc/riscv_iopmp.c         | 1289 +++++++++++++++++++++++++++++++++
+> >   hw/misc/trace-events          |    3 +
+> >   hw/riscv/Kconfig              |    1 +
+> >   hw/riscv/virt.c               |   63 ++
+> >   include/exec/memory.h         |   30 +
+> >   include/hw/misc/riscv_iopmp.h |  173 +++++
+> >   include/hw/riscv/virt.h       |    5 +-
+> >   system/memory.c               |  104 +++
+> >   system/physmem.c              |    4 +
+> >   system/trace-events           |    2 +
+> >   target/riscv/cpu_cfg.h        |    2 +
+> >   target/riscv/cpu_helper.c     |   18 +-
+> >   16 files changed, 1722 insertions(+), 10 deletions(-)
+> >   create mode 100644 hw/misc/riscv_iopmp.c
+> >   create mode 100644 include/hw/misc/riscv_iopmp.h
+> > 
 
