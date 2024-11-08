@@ -4,93 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 89775D5C0D8
-	for <qemu-riscv@archiver.kernel.org>; Fri,  8 Nov 2024 14:55:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9331AD6409A
+	for <qemu-riscv@archiver.kernel.org>; Fri,  8 Nov 2024 23:10:22 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1t9QHo-00061W-46; Fri, 08 Nov 2024 09:48:32 -0500
+	id 1t9Y71-0007yj-EH; Fri, 08 Nov 2024 18:09:55 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <phil@philjordan.eu>)
- id 1t9QGw-0004OT-6P
- for qemu-riscv@nongnu.org; Fri, 08 Nov 2024 09:47:39 -0500
-Received: from mail-ej1-x633.google.com ([2a00:1450:4864:20::633])
+ (Exim 4.90_1) (envelope-from <antonb@tenstorrent.com>)
+ id 1t9Y6z-0007um-I5
+ for qemu-riscv@nongnu.org; Fri, 08 Nov 2024 18:09:53 -0500
+Received: from mail-qk1-x72e.google.com ([2607:f8b0:4864:20::72e])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <phil@philjordan.eu>)
- id 1t9QGt-0005KX-FH
- for qemu-riscv@nongnu.org; Fri, 08 Nov 2024 09:47:37 -0500
-Received: by mail-ej1-x633.google.com with SMTP id
- a640c23a62f3a-a9acafdb745so456420266b.0
- for <qemu-riscv@nongnu.org>; Fri, 08 Nov 2024 06:47:34 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <antonb@tenstorrent.com>)
+ id 1t9Y6x-0006TT-UR
+ for qemu-riscv@nongnu.org; Fri, 08 Nov 2024 18:09:53 -0500
+Received: by mail-qk1-x72e.google.com with SMTP id
+ af79cd13be357-7b152a923a3so151404485a.3
+ for <qemu-riscv@nongnu.org>; Fri, 08 Nov 2024 15:09:51 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=philjordan-eu.20230601.gappssmtp.com; s=20230601; t=1731077253; x=1731682053;
- darn=nongnu.org; 
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=cN1N8+w+rAWUcXauV3YKaXAkbjCSApA0Y+r3osG/bl8=;
- b=coszQL2lHTfzQiALEmUcxTh2PqsLTpsFwOV++71E8utHe3Pdt2Qdm79QRTlgBQaK0u
- w7CSZbn+Hw/1b6rGOcfSnl2YhUwsE3Yfgg1hpostSHBY1WBMXlhUYWokIjmadAm/oR0D
- a2VM3MYnZN1WvbEYkjnF5KIAXYAihf9wlAvnthS7dCkRL+oCd/SKS3flVIsc/dsfEir7
- jy/vOc8rNTLPteB2bCSLn78KHf3EQ+2XeS/WLBH1TAYCIzRYy9RhzWL3oqTWDqRk1YZR
- imS4pBQGtj25/g5yGVX5V0mk+q1TM29+XlAmx6J8Fkctz49FN7AHxuXmHwg35d3Af8Zp
- Px+g==
+ d=tenstorrent.com; s=google; t=1731107390; x=1731712190; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=bCQCaIcBOvaIRYuz/3oJtVxsAaAVLM6GboWIOAAn8u4=;
+ b=bfXn3gprWfDlUPe81Gtn3TgIP+b28tE0P7JqxCkr64PqE8221xUtBNv47L0epbBszl
+ 8J5wAWAevNqk/GvJSCDqU9emr026Xct7/IWNtC/nLP/rjH/5JS9UHCDjDnusgUCykkbY
+ wG63+BaKDPucw7YtgFcobbkAwMTQPkOE77pDlIjTDcBMibomrGp6DsigRJ+XFQzTruKR
+ tuzAeRVTd3qkm1Xwyo6n2bvSs0eOGfWxKaGy17DdkRKAeSuCWYVen8R8LlJPj3rvokDX
+ TYplwBEK3im47fNwQFIPHOFQDXtK4z0P2OJy2HL/nAY+24jJiLv5TTt3ZVIEd0aHZGPf
+ LFng==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731077253; x=1731682053;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=cN1N8+w+rAWUcXauV3YKaXAkbjCSApA0Y+r3osG/bl8=;
- b=JF+we76HrbKUYnXIP4QZaSZjz/9z8XBjMi0apXAwsEoEcHYNw+tF8qWAC1q8+kNeY2
- 3I3WFA3Sxyyw5JLph7gHE9nuFcZDLKQ2bramtvYSgNqO2g4NNDrrzjo8MZbFuRAOa2Ox
- EZ0O8E5GbJUNfjvq+VuDun0MkUsSyiBRADR8wLVJGfH1kXfLXIpSl/mWyWzQTcPJ7j3S
- ZrJoobzJzbuGYKan1pVuG5UiKCjP89kX2/8lobCUcqw+HSQRGSXCMeV5ArcRnKsROidC
- GoNfp2iw0+6YRnPFLpy/Y7lRchdmNC8LIEDddQ448XleSJi9+P0YX2DJuDyTfMNfdeLz
- Evew==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUtRYcKtRKf/GuFmOI7SVToeZRPR3b6FkP10g5lnJjYfzNuI/9kfI6OI7NKvyAbQdevzBlVVx9I7B85@nongnu.org
-X-Gm-Message-State: AOJu0YyDJygQ1NUuOOStFfrbjYGHI1QlLa2olkST5tdanAYpNNArdVWE
- rqzgWqjL9sN+7BG2J1xRwclWChb98AGUNOLS80YJUHdjVJyyXETDzE5SqAYCfw==
-X-Google-Smtp-Source: AGHT+IHGNDhAaLUjyM7HAjS/NclDmN+OKKXv3cjxt1L1t23dWejeHbrU3tzus4fxZyh07V6QlYUVdA==
-X-Received: by 2002:a17:907:728a:b0:a9d:e1db:de8b with SMTP id
- a640c23a62f3a-a9eefeeca1amr287722466b.16.1731077252841; 
- Fri, 08 Nov 2024 06:47:32 -0800 (PST)
-Received: from localhost.localdomain (h082218084190.host.wavenet.at.
- [82.218.84.190]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a9ee0a4a9b1sm240534066b.52.2024.11.08.06.47.31
- (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Fri, 08 Nov 2024 06:47:32 -0800 (PST)
-From: Phil Dennis-Jordan <phil@philjordan.eu>
-To: qemu-devel@nongnu.org
-Cc: agraf@csgraf.de, phil@philjordan.eu, peter.maydell@linaro.org,
- pbonzini@redhat.com, rad@semihalf.com, quic_llindhol@quicinc.com,
- stefanha@redhat.com, mst@redhat.com, slp@redhat.com,
- richard.henderson@linaro.org, eduardo@habkost.net,
- marcel.apfelbaum@gmail.com, gaosong@loongson.cn, jiaxun.yang@flygoat.com,
- chenhuacai@kernel.org, kwolf@redhat.com, hreitz@redhat.com,
- philmd@linaro.org, shorne@gmail.com, palmer@dabbelt.com,
- alistair.francis@wdc.com, bmeng.cn@gmail.com, liwei1518@gmail.com,
- dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com,
- jcmvbkbc@gmail.com, marcandre.lureau@redhat.com, berrange@redhat.com,
- akihiko.odaki@daynix.com, qemu-arm@nongnu.org, qemu-block@nongnu.org,
- qemu-riscv@nongnu.org, Alexander Graf <graf@amazon.com>
-Subject: [PATCH v8 09/15] gpex: Allow more than 4 legacy IRQs
-Date: Fri,  8 Nov 2024 15:47:03 +0100
-Message-Id: <20241108144709.95498-10-phil@philjordan.eu>
-X-Mailer: git-send-email 2.39.3 (Apple Git-145)
-In-Reply-To: <20241108144709.95498-1-phil@philjordan.eu>
-References: <20241108144709.95498-1-phil@philjordan.eu>
+ d=1e100.net; s=20230601; t=1731107390; x=1731712190;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=bCQCaIcBOvaIRYuz/3oJtVxsAaAVLM6GboWIOAAn8u4=;
+ b=VEn+Ta1x9pyY9hhidARJkM4JT5hxt0CAKMv2IbmB/VmD1+pfUwfJTSMs+ny1JWavey
+ ngIHYYaj0DyF935GhjPakQbtPgWGs6VIeWmQyxxWmfq9VT+GL5eiF7j3bpxefiaqZeXB
+ zRQ8umpqGZZ/mxkWCSgbcIy+09t6D+UKlQ6fibfxvbWj/bAa4ptf918QpqKkvsEmkL0H
+ JOzhTNYR5bTiKSHZbQFJ660lVPqTILPtD6+w3npCoJIY0FT1PlQFekpllovwWRO0ueKY
+ Et0H4NUFmeGhl1oCphKS1aT2jA7Lm6aE8J4HpGYj4Eq2tVAxdPDHpxooiO4KXCDICaY5
+ Vbhw==
+X-Gm-Message-State: AOJu0YwgoHgl5HxNLcUJwtXOm5Y8LSi4RHB7wCoE+D/CXfXk4ihH2SS3
+ YISJ8/XoHemzAtFyIduOMUbL0N42a2MfIikFd0CdrI9gnr1kURe30JbearuMeZVZ3XKnnGfZGye
+ 64txV2g==
+X-Google-Smtp-Source: AGHT+IG3VJ+G+1ob45vgQKVdEU3hQOTecKjrYpdPgSIpNRvfAni9EYgf3KDAuOKN0pPk/5avT+iC6w==
+X-Received: by 2002:a05:620a:28c3:b0:7b1:48ff:6b63 with SMTP id
+ af79cd13be357-7b331dc5484mr564371885a.22.1731107390252; 
+ Fri, 08 Nov 2024 15:09:50 -0800 (PST)
+Received: from ausc-rvsw-c-01-anton.tail89d63.ts.net ([38.104.49.66])
+ by smtp.gmail.com with ESMTPSA id
+ af79cd13be357-7b32ac2dbedsm203784985a.9.2024.11.08.15.09.49
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 08 Nov 2024 15:09:49 -0800 (PST)
+From: Anton Blanchard <antonb@tenstorrent.com>
+To: qemu-riscv@nongnu.org,
+	qemu-devel@nongnu.org
+Cc: Anton Blanchard <antonb@tenstorrent.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bmeng.cn@gmail.com>,
+ Weiwei Li <liwei1518@gmail.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
+Subject: [PATCH] target/riscv: Add Tenstorrent Ascalon CPU
+Date: Sat,  9 Nov 2024 10:07:09 +1100
+Message-Id: <20241108230709.1466634-1-antonb@tenstorrent.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: neutral client-ip=2a00:1450:4864:20::633;
- envelope-from=phil@philjordan.eu; helo=mail-ej1-x633.google.com
-X-Spam_score_int: -10
-X-Spam_score: -1.1
-X-Spam_bar: -
-X-Spam_report: (-1.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_NEUTRAL=0.779 autolearn=no autolearn_force=no
+Received-SPF: pass client-ip=2607:f8b0:4864:20::72e;
+ envelope-from=antonb@tenstorrent.com; helo=mail-qk1-x72e.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -106,361 +97,113 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Alexander Graf <graf@amazon.com>
+Add a CPU entry for the Tenstorrent Ascalon CPU, a series of 2 wide to
+8 wide RV64 cores.
 
-Some boards such as vmapple don't do real legacy PCI IRQ swizzling.
-Instead, they just keep allocating more board IRQ lines for each new
-legacy IRQ. Let's support that mode by giving instantiators a new
-"nr_irqs" property they can use to support more than 4 legacy IRQ lines.
-In this mode, GPEX will export more IRQ lines, one for each device.
-
-Signed-off-by: Alexander Graf <graf@amazon.com>
-Signed-off-by: Phil Dennis-Jordan <phil@philjordan.eu>
-Reviewed-by: Akihiko Odaki <akihiko.odaki@daynix.com>
+Signed-off-by: Anton Blanchard <antonb@tenstorrent.com>
 ---
+ target/riscv/cpu-qom.h |  1 +
+ target/riscv/cpu.c     | 67 ++++++++++++++++++++++++++++++++++++++++++
+ 2 files changed, 68 insertions(+)
 
-v4:
-
- * Turned pair of IRQ arrays into array of structs.
- * Simplified swizzling logic selection.
-
- hw/arm/sbsa-ref.c          |  2 +-
- hw/arm/virt.c              |  2 +-
- hw/i386/microvm.c          |  2 +-
- hw/loongarch/virt.c        |  2 +-
- hw/mips/loongson3_virt.c   |  2 +-
- hw/openrisc/virt.c         | 12 +++++------
- hw/pci-host/gpex.c         | 43 ++++++++++++++++++++++++++++++--------
- hw/riscv/virt.c            | 12 +++++------
- hw/xtensa/virt.c           |  2 +-
- include/hw/pci-host/gpex.h |  7 +++----
- 10 files changed, 55 insertions(+), 31 deletions(-)
-
-diff --git a/hw/arm/sbsa-ref.c b/hw/arm/sbsa-ref.c
-index e3195d54497..7e7322486c2 100644
---- a/hw/arm/sbsa-ref.c
-+++ b/hw/arm/sbsa-ref.c
-@@ -673,7 +673,7 @@ static void create_pcie(SBSAMachineState *sms)
-     /* Map IO port space */
-     sysbus_mmio_map(SYS_BUS_DEVICE(dev), 2, base_pio);
+diff --git a/target/riscv/cpu-qom.h b/target/riscv/cpu-qom.h
+index 62115375cd..6547642287 100644
+--- a/target/riscv/cpu-qom.h
++++ b/target/riscv/cpu-qom.h
+@@ -49,6 +49,7 @@
+ #define TYPE_RISCV_CPU_SIFIVE_U54       RISCV_CPU_TYPE_NAME("sifive-u54")
+ #define TYPE_RISCV_CPU_THEAD_C906       RISCV_CPU_TYPE_NAME("thead-c906")
+ #define TYPE_RISCV_CPU_VEYRON_V1        RISCV_CPU_TYPE_NAME("veyron-v1")
++#define TYPE_RISCV_CPU_TT_ASCALON       RISCV_CPU_TYPE_NAME("tt-ascalon")
+ #define TYPE_RISCV_CPU_HOST             RISCV_CPU_TYPE_NAME("host")
  
--    for (i = 0; i < GPEX_NUM_IRQS; i++) {
-+    for (i = 0; i < PCI_NUM_PINS; i++) {
-         sysbus_connect_irq(SYS_BUS_DEVICE(dev), i,
-                            qdev_get_gpio_in(sms->gic, irq + i));
-         gpex_set_irq_num(GPEX_HOST(dev), i, irq + i);
-diff --git a/hw/arm/virt.c b/hw/arm/virt.c
-index 1a381e9a2bd..8aa22ea3155 100644
---- a/hw/arm/virt.c
-+++ b/hw/arm/virt.c
-@@ -1547,7 +1547,7 @@ static void create_pcie(VirtMachineState *vms)
-     /* Map IO port space */
-     sysbus_mmio_map(SYS_BUS_DEVICE(dev), 2, base_pio);
- 
--    for (i = 0; i < GPEX_NUM_IRQS; i++) {
-+    for (i = 0; i < PCI_NUM_PINS; i++) {
-         sysbus_connect_irq(SYS_BUS_DEVICE(dev), i,
-                            qdev_get_gpio_in(vms->gic, irq + i));
-         gpex_set_irq_num(GPEX_HOST(dev), i, irq + i);
-diff --git a/hw/i386/microvm.c b/hw/i386/microvm.c
-index 86637afa0f3..ce80596c239 100644
---- a/hw/i386/microvm.c
-+++ b/hw/i386/microvm.c
-@@ -139,7 +139,7 @@ static void create_gpex(MicrovmMachineState *mms)
-                                     mms->gpex.mmio64.base, mmio64_alias);
-     }
- 
--    for (i = 0; i < GPEX_NUM_IRQS; i++) {
-+    for (i = 0; i < PCI_NUM_PINS; i++) {
-         sysbus_connect_irq(SYS_BUS_DEVICE(dev), i,
-                            x86ms->gsi[mms->gpex.irq + i]);
-     }
-diff --git a/hw/loongarch/virt.c b/hw/loongarch/virt.c
-index 9a635d1d3d3..50056384994 100644
---- a/hw/loongarch/virt.c
-+++ b/hw/loongarch/virt.c
-@@ -741,7 +741,7 @@ static void virt_devices_init(DeviceState *pch_pic,
-     memory_region_add_subregion(get_system_memory(), VIRT_PCI_IO_BASE,
-                                 pio_alias);
- 
--    for (i = 0; i < GPEX_NUM_IRQS; i++) {
-+    for (i = 0; i < PCI_NUM_PINS; i++) {
-         sysbus_connect_irq(d, i,
-                            qdev_get_gpio_in(pch_pic, 16 + i));
-         gpex_set_irq_num(GPEX_HOST(gpex_dev), i, 16 + i);
-diff --git a/hw/mips/loongson3_virt.c b/hw/mips/loongson3_virt.c
-index f3b6326cc59..884b5f23a99 100644
---- a/hw/mips/loongson3_virt.c
-+++ b/hw/mips/loongson3_virt.c
-@@ -458,7 +458,7 @@ static inline void loongson3_virt_devices_init(MachineState *machine,
-                                 virt_memmap[VIRT_PCIE_PIO].base, s->pio_alias);
-     sysbus_mmio_map(SYS_BUS_DEVICE(dev), 2, virt_memmap[VIRT_PCIE_PIO].base);
- 
--    for (i = 0; i < GPEX_NUM_IRQS; i++) {
-+    for (i = 0; i < PCI_NUM_PINS; i++) {
-         irq = qdev_get_gpio_in(pic, PCIE_IRQ_BASE + i);
-         sysbus_connect_irq(SYS_BUS_DEVICE(dev), i, irq);
-         gpex_set_irq_num(GPEX_HOST(dev), i, PCIE_IRQ_BASE + i);
-diff --git a/hw/openrisc/virt.c b/hw/openrisc/virt.c
-index 47d2c9bd3c7..6f053bf48e0 100644
---- a/hw/openrisc/virt.c
-+++ b/hw/openrisc/virt.c
-@@ -318,7 +318,7 @@ static void create_pcie_irq_map(void *fdt, char *nodename, int irq_base,
- {
-     int pin, dev;
-     uint32_t irq_map_stride = 0;
--    uint32_t full_irq_map[GPEX_NUM_IRQS * GPEX_NUM_IRQS * 6] = {};
-+    uint32_t full_irq_map[PCI_NUM_PINS * PCI_NUM_PINS * 6] = {};
-     uint32_t *irq_map = full_irq_map;
- 
-     /*
-@@ -330,11 +330,11 @@ static void create_pcie_irq_map(void *fdt, char *nodename, int irq_base,
-      * possible slot) seeing the interrupt-map-mask will allow the table
-      * to wrap to any number of devices.
-      */
--    for (dev = 0; dev < GPEX_NUM_IRQS; dev++) {
-+    for (dev = 0; dev < PCI_NUM_PINS; dev++) {
-         int devfn = dev << 3;
- 
--        for (pin = 0; pin < GPEX_NUM_IRQS; pin++) {
--            int irq_nr = irq_base + ((pin + PCI_SLOT(devfn)) % GPEX_NUM_IRQS);
-+        for (pin = 0; pin < PCI_NUM_PINS; pin++) {
-+            int irq_nr = irq_base + ((pin + PCI_SLOT(devfn)) % PCI_NUM_PINS);
-             int i = 0;
- 
-             /* Fill PCI address cells */
-@@ -357,7 +357,7 @@ static void create_pcie_irq_map(void *fdt, char *nodename, int irq_base,
-     }
- 
-     qemu_fdt_setprop(fdt, nodename, "interrupt-map", full_irq_map,
--                     GPEX_NUM_IRQS * GPEX_NUM_IRQS *
-+                     PCI_NUM_PINS * PCI_NUM_PINS *
-                      irq_map_stride * sizeof(uint32_t));
- 
-     qemu_fdt_setprop_cells(fdt, nodename, "interrupt-map-mask",
-@@ -409,7 +409,7 @@ static void openrisc_virt_pcie_init(OR1KVirtState *state,
-     memory_region_add_subregion(get_system_memory(), pio_base, alias);
- 
-     /* Connect IRQ lines. */
--    for (i = 0; i < GPEX_NUM_IRQS; i++) {
-+    for (i = 0; i < PCI_NUM_PINS; i++) {
-         pcie_irq = get_per_cpu_irq(cpus, num_cpus, irq_base + i);
- 
-         sysbus_connect_irq(SYS_BUS_DEVICE(dev), i, pcie_irq);
-diff --git a/hw/pci-host/gpex.c b/hw/pci-host/gpex.c
-index e9cf455bf52..cd63aa2d3cf 100644
---- a/hw/pci-host/gpex.c
-+++ b/hw/pci-host/gpex.c
-@@ -32,6 +32,7 @@
- #include "qemu/osdep.h"
- #include "qapi/error.h"
- #include "hw/irq.h"
-+#include "hw/pci/pci_bus.h"
- #include "hw/pci-host/gpex.h"
- #include "hw/qdev-properties.h"
- #include "migration/vmstate.h"
-@@ -41,20 +42,25 @@
-  * GPEX host
-  */
- 
-+struct GPEXIrq {
-+    qemu_irq irq;
-+    int irq_num;
-+};
-+
- static void gpex_set_irq(void *opaque, int irq_num, int level)
- {
-     GPEXHost *s = opaque;
- 
--    qemu_set_irq(s->irq[irq_num], level);
-+    qemu_set_irq(s->irq[irq_num].irq, level);
+ OBJECT_DECLARE_CPU_TYPE(RISCVCPU, RISCVCPUClass, RISCV_CPU)
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index f219f0c3b5..8447ad0dfb 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -579,6 +579,72 @@ static void rv64_veyron_v1_cpu_init(Object *obj)
+ #endif
  }
  
- int gpex_set_irq_num(GPEXHost *s, int index, int gsi)
- {
--    if (index >= GPEX_NUM_IRQS) {
-+    if (index >= s->num_irqs) {
-         return -EINVAL;
-     }
- 
--    s->irq_num[index] = gsi;
-+    s->irq[index].irq_num = gsi;
-     return 0;
- }
- 
-@@ -62,7 +68,7 @@ static PCIINTxRoute gpex_route_intx_pin_to_irq(void *opaque, int pin)
- {
-     PCIINTxRoute route;
-     GPEXHost *s = opaque;
--    int gsi = s->irq_num[pin];
-+    int gsi = s->irq[pin].irq_num;
- 
-     route.irq = gsi;
-     if (gsi < 0) {
-@@ -74,6 +80,13 @@ static PCIINTxRoute gpex_route_intx_pin_to_irq(void *opaque, int pin)
-     return route;
- }
- 
-+static int gpex_swizzle_map_irq_fn(PCIDevice *pci_dev, int pin)
++/* Tenstorrent Ascalon */
++static void rv64_tt_ascalon_cpu_init(Object *obj)
 +{
-+    PCIBus *bus = pci_device_root_bus(pci_dev);
++    CPURISCVState *env = &RISCV_CPU(obj)->env;
++    RISCVCPU *cpu = RISCV_CPU(obj);
 +
-+    return (PCI_SLOT(pci_dev->devfn) + pin) % bus->nirq;
++    riscv_cpu_set_misa_ext(env, RVG | RVC | RVS | RVU | RVH | RVV);
++    env->priv_ver = PRIV_VERSION_1_13_0;
++
++    /* Enable ISA extensions */
++    cpu->cfg.mmu = true;
++    cpu->cfg.vlenb = 256 >> 3;
++    cpu->cfg.elen = 64;
++    cpu->env.vext_ver = VEXT_VERSION_1_00_0;
++    cpu->cfg.rvv_ma_all_1s = true;
++    cpu->cfg.rvv_ta_all_1s = true;
++    cpu->cfg.misa_w = true;
++    cpu->cfg.pmp = true;
++    cpu->cfg.cbom_blocksize = 64;
++    cpu->cfg.cbop_blocksize = 64;
++    cpu->cfg.cboz_blocksize = 64;
++    cpu->cfg.ext_zic64b = true;
++    cpu->cfg.ext_zicbom = true;
++    cpu->cfg.ext_zicbop = true;
++    cpu->cfg.ext_zicboz = true;
++    cpu->cfg.ext_zicntr = true;
++    cpu->cfg.ext_zicond = true;
++    cpu->cfg.ext_zicsr = true;
++    cpu->cfg.ext_zifencei = true;
++    cpu->cfg.ext_zihintntl = true;
++    cpu->cfg.ext_zihintpause = true;
++    cpu->cfg.ext_zihpm = true;
++    cpu->cfg.ext_zimop = true;
++    cpu->cfg.ext_zawrs = true;
++    cpu->cfg.ext_zfa = true;
++    cpu->cfg.ext_zfbfmin = true;
++    cpu->cfg.ext_zfh = true;
++    cpu->cfg.ext_zfhmin = true;
++    cpu->cfg.ext_zcb = true;
++    cpu->cfg.ext_zcmop = true;
++    cpu->cfg.ext_zba = true;
++    cpu->cfg.ext_zbb = true;
++    cpu->cfg.ext_zbs = true;
++    cpu->cfg.ext_zkt = true;
++    cpu->cfg.ext_zvbb = true;
++    cpu->cfg.ext_zvbc = true;
++    cpu->cfg.ext_zvfbfmin = true;
++    cpu->cfg.ext_zvfbfwma = true;
++    cpu->cfg.ext_zvfh = true;
++    cpu->cfg.ext_zvfhmin = true;
++    cpu->cfg.ext_zvkng = true;
++    cpu->cfg.ext_smaia = true;
++    cpu->cfg.ext_smstateen = true;
++    cpu->cfg.ext_ssaia = true;
++    cpu->cfg.ext_sscofpmf = true;
++    cpu->cfg.ext_sstc = true;
++    cpu->cfg.ext_svade = true;
++    cpu->cfg.ext_svinval = true;
++    cpu->cfg.ext_svnapot = true;
++    cpu->cfg.ext_svpbmt = true;
++
++#ifndef CONFIG_USER_ONLY
++    set_satp_mode_max_supported(cpu, VM_1_10_SV57);
++#endif
 +}
 +
- static void gpex_host_realize(DeviceState *dev, Error **errp)
+ #ifdef CONFIG_TCG
+ static void rv128_base_cpu_init(Object *obj)
  {
-     PCIHostState *pci = PCI_HOST_BRIDGE(dev);
-@@ -82,6 +95,8 @@ static void gpex_host_realize(DeviceState *dev, Error **errp)
-     PCIExpressHost *pex = PCIE_HOST_BRIDGE(dev);
-     int i;
- 
-+    s->irq = g_malloc0_n(s->num_irqs, sizeof(*s->irq));
-+
-     pcie_host_mmcfg_init(pex, PCIE_MMCFG_SIZE_MAX);
-     sysbus_init_mmio(sbd, &pex->mmio);
- 
-@@ -128,19 +143,27 @@ static void gpex_host_realize(DeviceState *dev, Error **errp)
-         sysbus_init_mmio(sbd, &s->io_ioport);
-     }
- 
--    for (i = 0; i < GPEX_NUM_IRQS; i++) {
--        sysbus_init_irq(sbd, &s->irq[i]);
--        s->irq_num[i] = -1;
-+    for (i = 0; i < s->num_irqs; i++) {
-+        sysbus_init_irq(sbd, &s->irq[i].irq);
-+        s->irq[i].irq_num = -1;
-     }
- 
-     pci->bus = pci_register_root_bus(dev, "pcie.0", gpex_set_irq,
--                                     pci_swizzle_map_irq_fn, s, &s->io_mmio,
--                                     &s->io_ioport, 0, 4, TYPE_PCIE_BUS);
-+                                     gpex_swizzle_map_irq_fn,
-+                                     s, &s->io_mmio, &s->io_ioport, 0,
-+                                     s->num_irqs, TYPE_PCIE_BUS);
- 
-     pci_bus_set_route_irq_fn(pci->bus, gpex_route_intx_pin_to_irq);
-     qdev_realize(DEVICE(&s->gpex_root), BUS(pci->bus), &error_fatal);
- }
- 
-+static void gpex_host_unrealize(DeviceState *dev)
-+{
-+    GPEXHost *s = GPEX_HOST(dev);
-+
-+    g_free(s->irq);
-+}
-+
- static const char *gpex_host_root_bus_path(PCIHostState *host_bridge,
-                                           PCIBus *rootbus)
- {
-@@ -166,6 +189,7 @@ static Property gpex_host_properties[] = {
-                        gpex_cfg.mmio64.base, 0),
-     DEFINE_PROP_SIZE(PCI_HOST_ABOVE_4G_MMIO_SIZE, GPEXHost,
-                      gpex_cfg.mmio64.size, 0),
-+    DEFINE_PROP_UINT8("num-irqs", GPEXHost, num_irqs, PCI_NUM_PINS),
-     DEFINE_PROP_END_OF_LIST(),
- };
- 
-@@ -176,6 +200,7 @@ static void gpex_host_class_init(ObjectClass *klass, void *data)
- 
-     hc->root_bus_path = gpex_host_root_bus_path;
-     dc->realize = gpex_host_realize;
-+    dc->unrealize = gpex_host_unrealize;
-     set_bit(DEVICE_CATEGORY_BRIDGE, dc->categories);
-     dc->fw_name = "pci";
-     device_class_set_props(dc, gpex_host_properties);
-diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-index 45a8c4f8190..567fe92a136 100644
---- a/hw/riscv/virt.c
-+++ b/hw/riscv/virt.c
-@@ -168,7 +168,7 @@ static void create_pcie_irq_map(RISCVVirtState *s, void *fdt, char *nodename,
- {
-     int pin, dev;
-     uint32_t irq_map_stride = 0;
--    uint32_t full_irq_map[GPEX_NUM_IRQS * GPEX_NUM_IRQS *
-+    uint32_t full_irq_map[PCI_NUM_PINS * PCI_NUM_PINS *
-                           FDT_MAX_INT_MAP_WIDTH] = {};
-     uint32_t *irq_map = full_irq_map;
- 
-@@ -180,11 +180,11 @@ static void create_pcie_irq_map(RISCVVirtState *s, void *fdt, char *nodename,
-      * possible slot) seeing the interrupt-map-mask will allow the table
-      * to wrap to any number of devices.
-      */
--    for (dev = 0; dev < GPEX_NUM_IRQS; dev++) {
-+    for (dev = 0; dev < PCI_NUM_PINS; dev++) {
-         int devfn = dev * 0x8;
- 
--        for (pin = 0; pin < GPEX_NUM_IRQS; pin++) {
--            int irq_nr = PCIE_IRQ + ((pin + PCI_SLOT(devfn)) % GPEX_NUM_IRQS);
-+        for (pin = 0; pin < PCI_NUM_PINS; pin++) {
-+            int irq_nr = PCIE_IRQ + ((pin + PCI_SLOT(devfn)) % PCI_NUM_PINS);
-             int i = 0;
- 
-             /* Fill PCI address cells */
-@@ -210,7 +210,7 @@ static void create_pcie_irq_map(RISCVVirtState *s, void *fdt, char *nodename,
-     }
- 
-     qemu_fdt_setprop(fdt, nodename, "interrupt-map", full_irq_map,
--                     GPEX_NUM_IRQS * GPEX_NUM_IRQS *
-+                     PCI_NUM_PINS * PCI_NUM_PINS *
-                      irq_map_stride * sizeof(uint32_t));
- 
-     qemu_fdt_setprop_cells(fdt, nodename, "interrupt-map-mask",
-@@ -1182,7 +1182,7 @@ static inline DeviceState *gpex_pcie_init(MemoryRegion *sys_mem,
- 
-     sysbus_mmio_map(SYS_BUS_DEVICE(dev), 2, pio_base);
- 
--    for (i = 0; i < GPEX_NUM_IRQS; i++) {
-+    for (i = 0; i < PCI_NUM_PINS; i++) {
-         irq = qdev_get_gpio_in(irqchip, PCIE_IRQ + i);
- 
-         sysbus_connect_irq(SYS_BUS_DEVICE(dev), i, irq);
-diff --git a/hw/xtensa/virt.c b/hw/xtensa/virt.c
-index 5310a888613..8f5c2009d29 100644
---- a/hw/xtensa/virt.c
-+++ b/hw/xtensa/virt.c
-@@ -93,7 +93,7 @@ static void create_pcie(MachineState *ms, CPUXtensaState *env, int irq_base,
-     /* Connect IRQ lines. */
-     extints = xtensa_get_extints(env);
- 
--    for (i = 0; i < GPEX_NUM_IRQS; i++) {
-+    for (i = 0; i < PCI_NUM_PINS; i++) {
-         void *q = extints[irq_base + i];
- 
-         sysbus_connect_irq(SYS_BUS_DEVICE(dev), i, q);
-diff --git a/include/hw/pci-host/gpex.h b/include/hw/pci-host/gpex.h
-index dce883573ba..84471533af0 100644
---- a/include/hw/pci-host/gpex.h
-+++ b/include/hw/pci-host/gpex.h
-@@ -32,8 +32,6 @@ OBJECT_DECLARE_SIMPLE_TYPE(GPEXHost, GPEX_HOST)
- #define TYPE_GPEX_ROOT_DEVICE "gpex-root"
- OBJECT_DECLARE_SIMPLE_TYPE(GPEXRootState, GPEX_ROOT_DEVICE)
- 
--#define GPEX_NUM_IRQS 4
--
- struct GPEXRootState {
-     /*< private >*/
-     PCIDevice parent_obj;
-@@ -49,6 +47,7 @@ struct GPEXConfig {
-     PCIBus      *bus;
- };
- 
-+typedef struct GPEXIrq GPEXIrq;
- struct GPEXHost {
-     /*< private >*/
-     PCIExpressHost parent_obj;
-@@ -60,8 +59,8 @@ struct GPEXHost {
-     MemoryRegion io_mmio;
-     MemoryRegion io_ioport_window;
-     MemoryRegion io_mmio_window;
--    qemu_irq irq[GPEX_NUM_IRQS];
--    int irq_num[GPEX_NUM_IRQS];
-+    GPEXIrq *irq;
-+    uint8_t num_irqs;
- 
-     bool allow_unmapped_accesses;
- 
+@@ -2982,6 +3048,7 @@ static const TypeInfo riscv_cpu_type_infos[] = {
+     DEFINE_VENDOR_CPU(TYPE_RISCV_CPU_SIFIVE_U54, MXL_RV64,  rv64_sifive_u_cpu_init),
+     DEFINE_VENDOR_CPU(TYPE_RISCV_CPU_SHAKTI_C,   MXL_RV64,  rv64_sifive_u_cpu_init),
+     DEFINE_VENDOR_CPU(TYPE_RISCV_CPU_THEAD_C906, MXL_RV64,  rv64_thead_c906_cpu_init),
++    DEFINE_VENDOR_CPU(TYPE_RISCV_CPU_TT_ASCALON, MXL_RV64,  rv64_tt_ascalon_cpu_init),
+     DEFINE_VENDOR_CPU(TYPE_RISCV_CPU_VEYRON_V1,  MXL_RV64,  rv64_veyron_v1_cpu_init),
+ #ifdef CONFIG_TCG
+     DEFINE_DYNAMIC_CPU(TYPE_RISCV_CPU_BASE128,   MXL_RV128, rv128_base_cpu_init),
 -- 
-2.39.3 (Apple Git-145)
+2.34.1
 
 
