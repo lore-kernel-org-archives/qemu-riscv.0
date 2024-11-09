@@ -4,84 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9331AD6409A
-	for <qemu-riscv@archiver.kernel.org>; Fri,  8 Nov 2024 23:10:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9C048D5E37A
+	for <qemu-riscv@archiver.kernel.org>; Sat,  9 Nov 2024 18:22:36 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1t9Y71-0007yj-EH; Fri, 08 Nov 2024 18:09:55 -0500
+	id 1t9q5v-0000kF-BS; Sat, 09 Nov 2024 13:21:59 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <antonb@tenstorrent.com>)
- id 1t9Y6z-0007um-I5
- for qemu-riscv@nongnu.org; Fri, 08 Nov 2024 18:09:53 -0500
-Received: from mail-qk1-x72e.google.com ([2607:f8b0:4864:20::72e])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1t9q5t-0000ju-KU
+ for qemu-riscv@nongnu.org; Sat, 09 Nov 2024 13:21:57 -0500
+Received: from mail-wr1-x429.google.com ([2a00:1450:4864:20::429])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <antonb@tenstorrent.com>)
- id 1t9Y6x-0006TT-UR
- for qemu-riscv@nongnu.org; Fri, 08 Nov 2024 18:09:53 -0500
-Received: by mail-qk1-x72e.google.com with SMTP id
- af79cd13be357-7b152a923a3so151404485a.3
- for <qemu-riscv@nongnu.org>; Fri, 08 Nov 2024 15:09:51 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1t9q5r-0002R6-P9
+ for qemu-riscv@nongnu.org; Sat, 09 Nov 2024 13:21:57 -0500
+Received: by mail-wr1-x429.google.com with SMTP id
+ ffacd0b85a97d-37d4d1b48f3so2016824f8f.1
+ for <qemu-riscv@nongnu.org>; Sat, 09 Nov 2024 10:21:55 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=tenstorrent.com; s=google; t=1731107390; x=1731712190; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=bCQCaIcBOvaIRYuz/3oJtVxsAaAVLM6GboWIOAAn8u4=;
- b=bfXn3gprWfDlUPe81Gtn3TgIP+b28tE0P7JqxCkr64PqE8221xUtBNv47L0epbBszl
- 8J5wAWAevNqk/GvJSCDqU9emr026Xct7/IWNtC/nLP/rjH/5JS9UHCDjDnusgUCykkbY
- wG63+BaKDPucw7YtgFcobbkAwMTQPkOE77pDlIjTDcBMibomrGp6DsigRJ+XFQzTruKR
- tuzAeRVTd3qkm1Xwyo6n2bvSs0eOGfWxKaGy17DdkRKAeSuCWYVen8R8LlJPj3rvokDX
- TYplwBEK3im47fNwQFIPHOFQDXtK4z0P2OJy2HL/nAY+24jJiLv5TTt3ZVIEd0aHZGPf
- LFng==
+ d=linaro.org; s=google; t=1731176514; x=1731781314; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=InqUnUAWeJHzGIKaSq7v/7iIS+0A6RH5uHcwzs6TvBs=;
+ b=IaWi9jtIiFF6nhOv1Ri+DZ/TL1NKKJ6O119LYE0xGWHzOxGZM7qKsAKzYsRauiock1
+ AyrSNDipD6rvD+jZOEAn+B5Few0cW0vaMHgR1xUbK04ZBdbpbrpPl00ELQ1PcYTShY3w
+ 5ELJ7co91Zt6a4wINpB204hCVqvuLxLHJ7abFpbS1J6Fy/8AG4pUQKjOujDzN4ZmpL3r
+ c/fZAy2HHJX8v1xQqPhPYq/p1r+EVy/BBd3HQp+adBFMzU3ui1H90Ss6H2ReiWgQ0NP5
+ 7L+YHFzhITRm9o9mWnanhdyv0loMhJAS4e932uAIVnnAtdKIyYRs8C+409zglvIlMLgU
+ VoJw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731107390; x=1731712190;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=bCQCaIcBOvaIRYuz/3oJtVxsAaAVLM6GboWIOAAn8u4=;
- b=VEn+Ta1x9pyY9hhidARJkM4JT5hxt0CAKMv2IbmB/VmD1+pfUwfJTSMs+ny1JWavey
- ngIHYYaj0DyF935GhjPakQbtPgWGs6VIeWmQyxxWmfq9VT+GL5eiF7j3bpxefiaqZeXB
- zRQ8umpqGZZ/mxkWCSgbcIy+09t6D+UKlQ6fibfxvbWj/bAa4ptf918QpqKkvsEmkL0H
- JOzhTNYR5bTiKSHZbQFJ660lVPqTILPtD6+w3npCoJIY0FT1PlQFekpllovwWRO0ueKY
- Et0H4NUFmeGhl1oCphKS1aT2jA7Lm6aE8J4HpGYj4Eq2tVAxdPDHpxooiO4KXCDICaY5
- Vbhw==
-X-Gm-Message-State: AOJu0YwgoHgl5HxNLcUJwtXOm5Y8LSi4RHB7wCoE+D/CXfXk4ihH2SS3
- YISJ8/XoHemzAtFyIduOMUbL0N42a2MfIikFd0CdrI9gnr1kURe30JbearuMeZVZ3XKnnGfZGye
- 64txV2g==
-X-Google-Smtp-Source: AGHT+IG3VJ+G+1ob45vgQKVdEU3hQOTecKjrYpdPgSIpNRvfAni9EYgf3KDAuOKN0pPk/5avT+iC6w==
-X-Received: by 2002:a05:620a:28c3:b0:7b1:48ff:6b63 with SMTP id
- af79cd13be357-7b331dc5484mr564371885a.22.1731107390252; 
- Fri, 08 Nov 2024 15:09:50 -0800 (PST)
-Received: from ausc-rvsw-c-01-anton.tail89d63.ts.net ([38.104.49.66])
- by smtp.gmail.com with ESMTPSA id
- af79cd13be357-7b32ac2dbedsm203784985a.9.2024.11.08.15.09.49
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 08 Nov 2024 15:09:49 -0800 (PST)
-From: Anton Blanchard <antonb@tenstorrent.com>
-To: qemu-riscv@nongnu.org,
-	qemu-devel@nongnu.org
-Cc: Anton Blanchard <antonb@tenstorrent.com>,
- Palmer Dabbelt <palmer@dabbelt.com>,
+ d=1e100.net; s=20230601; t=1731176514; x=1731781314;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=InqUnUAWeJHzGIKaSq7v/7iIS+0A6RH5uHcwzs6TvBs=;
+ b=u3kF0ilZEBSBIH5NyMctjO0xDbNvk0VCQkN/YluVlzgK1VS1wh/W+481smzbLsFoWc
+ tz9EBEuD56jLLCHWU+i3tmOh8D0N6dL7AvnL1VHzga0AJz/tzXwO/Jw5NDtr8xpqAap2
+ 6B5Unfow5Sqfc18E3FcOs+vUcjz7k2Vy7C8TPRm2P4sBAuVyhYm+Za9zfJdDmTFvIuqH
+ PPRItsxuSk+B0CIPGllt6JC2TGpyjc+T71bgVLtCF2meBx9UyB9bx2WegrdZcB5c8xkc
+ xYu8mPZlmiI/Hxi19l991FfcJDqx9sDYGZOwiVsVr/D79k85V4jG5zfRBX9M36jfBnB8
+ bAQA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXQ+MF3EjSwzQKVaehQsXQ2qtyLPVYCnL7XriOBUVPaSIedwGTdvfXSVF6W2vTxdyYlDfDXcAWtcQsO@nongnu.org
+X-Gm-Message-State: AOJu0Yz7uoUU6wahTT+0UX4mDaJRE2j+/j7bKeDR/cLFgWX0pKWaWZJO
+ 9Gg2Yc+xHHa6LH4w0FtDzhpeqGiA+bvtuUxMi8LpFEciSxrNqCdgQ8YQcDDbv9g=
+X-Google-Smtp-Source: AGHT+IGrJbWSHadDoYEJrRrAhFHyN/2+ciPRzs+T9JeEladnLWAOhYrz0ckZ7RqLtlFErMLPR+UZVw==
+X-Received: by 2002:a05:6000:2c5:b0:381:f08b:71a4 with SMTP id
+ ffacd0b85a97d-381f184ca9dmr6658176f8f.45.1731176513801; 
+ Sat, 09 Nov 2024 10:21:53 -0800 (PST)
+Received: from [192.168.3.213] (73.red-95-127-47.staticip.rima-tde.net.
+ [95.127.47.73]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-432b3de8710sm97963895e9.17.2024.11.09.10.21.52
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Sat, 09 Nov 2024 10:21:53 -0800 (PST)
+Message-ID: <4e7a4a10-bea3-4f43-b091-6a30c400b8bd@linaro.org>
+Date: Sat, 9 Nov 2024 19:21:50 +0100
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] target/riscv: Add Tenstorrent Ascalon CPU
+To: Anton Blanchard <antonb@tenstorrent.com>, qemu-riscv@nongnu.org,
+ qemu-devel@nongnu.org
+Cc: Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bmeng.cn@gmail.com>,
  Weiwei Li <liwei1518@gmail.com>,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
  Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
-Subject: [PATCH] target/riscv: Add Tenstorrent Ascalon CPU
-Date: Sat,  9 Nov 2024 10:07:09 +1100
-Message-Id: <20241108230709.1466634-1-antonb@tenstorrent.com>
-X-Mailer: git-send-email 2.34.1
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::72e;
- envelope-from=antonb@tenstorrent.com; helo=mail-qk1-x72e.google.com
+References: <20241108230709.1466634-1-antonb@tenstorrent.com>
+Content-Language: en-US
+From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+In-Reply-To: <20241108230709.1466634-1-antonb@tenstorrent.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::429;
+ envelope-from=philmd@linaro.org; helo=mail-wr1-x429.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -97,113 +100,124 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Add a CPU entry for the Tenstorrent Ascalon CPU, a series of 2 wide to
-8 wide RV64 cores.
+Hi,
 
-Signed-off-by: Anton Blanchard <antonb@tenstorrent.com>
----
- target/riscv/cpu-qom.h |  1 +
- target/riscv/cpu.c     | 67 ++++++++++++++++++++++++++++++++++++++++++
- 2 files changed, 68 insertions(+)
+On 8/11/24 23:07, Anton Blanchard wrote:
+> Add a CPU entry for the Tenstorrent Ascalon CPU, a series of 2 wide to
+> 8 wide RV64 cores.
+> 
+> Signed-off-by: Anton Blanchard <antonb@tenstorrent.com>
+> ---
+>   target/riscv/cpu-qom.h |  1 +
+>   target/riscv/cpu.c     | 67 ++++++++++++++++++++++++++++++++++++++++++
+>   2 files changed, 68 insertions(+)
+> 
+> diff --git a/target/riscv/cpu-qom.h b/target/riscv/cpu-qom.h
+> index 62115375cd..6547642287 100644
+> --- a/target/riscv/cpu-qom.h
+> +++ b/target/riscv/cpu-qom.h
+> @@ -49,6 +49,7 @@
+>   #define TYPE_RISCV_CPU_SIFIVE_U54       RISCV_CPU_TYPE_NAME("sifive-u54")
+>   #define TYPE_RISCV_CPU_THEAD_C906       RISCV_CPU_TYPE_NAME("thead-c906")
+>   #define TYPE_RISCV_CPU_VEYRON_V1        RISCV_CPU_TYPE_NAME("veyron-v1")
+> +#define TYPE_RISCV_CPU_TT_ASCALON       RISCV_CPU_TYPE_NAME("tt-ascalon")
+>   #define TYPE_RISCV_CPU_HOST             RISCV_CPU_TYPE_NAME("host")
+>   
+>   OBJECT_DECLARE_CPU_TYPE(RISCVCPU, RISCVCPUClass, RISCV_CPU)
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index f219f0c3b5..8447ad0dfb 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -579,6 +579,72 @@ static void rv64_veyron_v1_cpu_init(Object *obj)
+>   #endif
+>   }
+>   
+> +/* Tenstorrent Ascalon */
+> +static void rv64_tt_ascalon_cpu_init(Object *obj)
+> +{
+> +    CPURISCVState *env = &RISCV_CPU(obj)->env;
+> +    RISCVCPU *cpu = RISCV_CPU(obj);
+> +
+> +    riscv_cpu_set_misa_ext(env, RVG | RVC | RVS | RVU | RVH | RVV);
+> +    env->priv_ver = PRIV_VERSION_1_13_0;
+> +
+> +    /* Enable ISA extensions */
+> +    cpu->cfg.mmu = true;
+> +    cpu->cfg.vlenb = 256 >> 3;
+> +    cpu->cfg.elen = 64;
+> +    cpu->env.vext_ver = VEXT_VERSION_1_00_0;
+> +    cpu->cfg.rvv_ma_all_1s = true;
+> +    cpu->cfg.rvv_ta_all_1s = true;
+> +    cpu->cfg.misa_w = true;
+> +    cpu->cfg.pmp = true;
+> +    cpu->cfg.cbom_blocksize = 64;
+> +    cpu->cfg.cbop_blocksize = 64;
+> +    cpu->cfg.cboz_blocksize = 64;
+> +    cpu->cfg.ext_zic64b = true;
+> +    cpu->cfg.ext_zicbom = true;
+> +    cpu->cfg.ext_zicbop = true;
+> +    cpu->cfg.ext_zicboz = true;
+> +    cpu->cfg.ext_zicntr = true;
+> +    cpu->cfg.ext_zicond = true;
+> +    cpu->cfg.ext_zicsr = true;
+> +    cpu->cfg.ext_zifencei = true;
+> +    cpu->cfg.ext_zihintntl = true;
+> +    cpu->cfg.ext_zihintpause = true;
+> +    cpu->cfg.ext_zihpm = true;
+> +    cpu->cfg.ext_zimop = true;
+> +    cpu->cfg.ext_zawrs = true;
+> +    cpu->cfg.ext_zfa = true;
+> +    cpu->cfg.ext_zfbfmin = true;
+> +    cpu->cfg.ext_zfh = true;
+> +    cpu->cfg.ext_zfhmin = true;
+> +    cpu->cfg.ext_zcb = true;
+> +    cpu->cfg.ext_zcmop = true;
+> +    cpu->cfg.ext_zba = true;
+> +    cpu->cfg.ext_zbb = true;
+> +    cpu->cfg.ext_zbs = true;
+> +    cpu->cfg.ext_zkt = true;
+> +    cpu->cfg.ext_zvbb = true;
+> +    cpu->cfg.ext_zvbc = true;
+> +    cpu->cfg.ext_zvfbfmin = true;
+> +    cpu->cfg.ext_zvfbfwma = true;
+> +    cpu->cfg.ext_zvfh = true;
+> +    cpu->cfg.ext_zvfhmin = true;
+> +    cpu->cfg.ext_zvkng = true;
+> +    cpu->cfg.ext_smaia = true;
+> +    cpu->cfg.ext_smstateen = true;
+> +    cpu->cfg.ext_ssaia = true;
+> +    cpu->cfg.ext_sscofpmf = true;
+> +    cpu->cfg.ext_sstc = true;
+> +    cpu->cfg.ext_svade = true;
+> +    cpu->cfg.ext_svinval = true;
+> +    cpu->cfg.ext_svnapot = true;
+> +    cpu->cfg.ext_svpbmt = true;
+> +
+> +#ifndef CONFIG_USER_ONLY
+> +    set_satp_mode_max_supported(cpu, VM_1_10_SV57);
+> +#endif
+> +}
+> +
+>   #ifdef CONFIG_TCG
+>   static void rv128_base_cpu_init(Object *obj)
+>   {
+> @@ -2982,6 +3048,7 @@ static const TypeInfo riscv_cpu_type_infos[] = {
+>       DEFINE_VENDOR_CPU(TYPE_RISCV_CPU_SIFIVE_U54, MXL_RV64,  rv64_sifive_u_cpu_init),
+>       DEFINE_VENDOR_CPU(TYPE_RISCV_CPU_SHAKTI_C,   MXL_RV64,  rv64_sifive_u_cpu_init),
+>       DEFINE_VENDOR_CPU(TYPE_RISCV_CPU_THEAD_C906, MXL_RV64,  rv64_thead_c906_cpu_init),
+> +    DEFINE_VENDOR_CPU(TYPE_RISCV_CPU_TT_ASCALON, MXL_RV64,  rv64_tt_ascalon_cpu_init),
+>       DEFINE_VENDOR_CPU(TYPE_RISCV_CPU_VEYRON_V1,  MXL_RV64,  rv64_veyron_v1_cpu_init),
 
-diff --git a/target/riscv/cpu-qom.h b/target/riscv/cpu-qom.h
-index 62115375cd..6547642287 100644
---- a/target/riscv/cpu-qom.h
-+++ b/target/riscv/cpu-qom.h
-@@ -49,6 +49,7 @@
- #define TYPE_RISCV_CPU_SIFIVE_U54       RISCV_CPU_TYPE_NAME("sifive-u54")
- #define TYPE_RISCV_CPU_THEAD_C906       RISCV_CPU_TYPE_NAME("thead-c906")
- #define TYPE_RISCV_CPU_VEYRON_V1        RISCV_CPU_TYPE_NAME("veyron-v1")
-+#define TYPE_RISCV_CPU_TT_ASCALON       RISCV_CPU_TYPE_NAME("tt-ascalon")
- #define TYPE_RISCV_CPU_HOST             RISCV_CPU_TYPE_NAME("host")
- 
- OBJECT_DECLARE_CPU_TYPE(RISCVCPU, RISCVCPUClass, RISCV_CPU)
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index f219f0c3b5..8447ad0dfb 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -579,6 +579,72 @@ static void rv64_veyron_v1_cpu_init(Object *obj)
- #endif
- }
- 
-+/* Tenstorrent Ascalon */
-+static void rv64_tt_ascalon_cpu_init(Object *obj)
-+{
-+    CPURISCVState *env = &RISCV_CPU(obj)->env;
-+    RISCVCPU *cpu = RISCV_CPU(obj);
-+
-+    riscv_cpu_set_misa_ext(env, RVG | RVC | RVS | RVU | RVH | RVV);
-+    env->priv_ver = PRIV_VERSION_1_13_0;
-+
-+    /* Enable ISA extensions */
-+    cpu->cfg.mmu = true;
-+    cpu->cfg.vlenb = 256 >> 3;
-+    cpu->cfg.elen = 64;
-+    cpu->env.vext_ver = VEXT_VERSION_1_00_0;
-+    cpu->cfg.rvv_ma_all_1s = true;
-+    cpu->cfg.rvv_ta_all_1s = true;
-+    cpu->cfg.misa_w = true;
-+    cpu->cfg.pmp = true;
-+    cpu->cfg.cbom_blocksize = 64;
-+    cpu->cfg.cbop_blocksize = 64;
-+    cpu->cfg.cboz_blocksize = 64;
-+    cpu->cfg.ext_zic64b = true;
-+    cpu->cfg.ext_zicbom = true;
-+    cpu->cfg.ext_zicbop = true;
-+    cpu->cfg.ext_zicboz = true;
-+    cpu->cfg.ext_zicntr = true;
-+    cpu->cfg.ext_zicond = true;
-+    cpu->cfg.ext_zicsr = true;
-+    cpu->cfg.ext_zifencei = true;
-+    cpu->cfg.ext_zihintntl = true;
-+    cpu->cfg.ext_zihintpause = true;
-+    cpu->cfg.ext_zihpm = true;
-+    cpu->cfg.ext_zimop = true;
-+    cpu->cfg.ext_zawrs = true;
-+    cpu->cfg.ext_zfa = true;
-+    cpu->cfg.ext_zfbfmin = true;
-+    cpu->cfg.ext_zfh = true;
-+    cpu->cfg.ext_zfhmin = true;
-+    cpu->cfg.ext_zcb = true;
-+    cpu->cfg.ext_zcmop = true;
-+    cpu->cfg.ext_zba = true;
-+    cpu->cfg.ext_zbb = true;
-+    cpu->cfg.ext_zbs = true;
-+    cpu->cfg.ext_zkt = true;
-+    cpu->cfg.ext_zvbb = true;
-+    cpu->cfg.ext_zvbc = true;
-+    cpu->cfg.ext_zvfbfmin = true;
-+    cpu->cfg.ext_zvfbfwma = true;
-+    cpu->cfg.ext_zvfh = true;
-+    cpu->cfg.ext_zvfhmin = true;
-+    cpu->cfg.ext_zvkng = true;
-+    cpu->cfg.ext_smaia = true;
-+    cpu->cfg.ext_smstateen = true;
-+    cpu->cfg.ext_ssaia = true;
-+    cpu->cfg.ext_sscofpmf = true;
-+    cpu->cfg.ext_sstc = true;
-+    cpu->cfg.ext_svade = true;
-+    cpu->cfg.ext_svinval = true;
-+    cpu->cfg.ext_svnapot = true;
-+    cpu->cfg.ext_svpbmt = true;
-+
-+#ifndef CONFIG_USER_ONLY
-+    set_satp_mode_max_supported(cpu, VM_1_10_SV57);
-+#endif
-+}
-+
- #ifdef CONFIG_TCG
- static void rv128_base_cpu_init(Object *obj)
- {
-@@ -2982,6 +3048,7 @@ static const TypeInfo riscv_cpu_type_infos[] = {
-     DEFINE_VENDOR_CPU(TYPE_RISCV_CPU_SIFIVE_U54, MXL_RV64,  rv64_sifive_u_cpu_init),
-     DEFINE_VENDOR_CPU(TYPE_RISCV_CPU_SHAKTI_C,   MXL_RV64,  rv64_sifive_u_cpu_init),
-     DEFINE_VENDOR_CPU(TYPE_RISCV_CPU_THEAD_C906, MXL_RV64,  rv64_thead_c906_cpu_init),
-+    DEFINE_VENDOR_CPU(TYPE_RISCV_CPU_TT_ASCALON, MXL_RV64,  rv64_tt_ascalon_cpu_init),
-     DEFINE_VENDOR_CPU(TYPE_RISCV_CPU_VEYRON_V1,  MXL_RV64,  rv64_veyron_v1_cpu_init),
- #ifdef CONFIG_TCG
-     DEFINE_DYNAMIC_CPU(TYPE_RISCV_CPU_BASE128,   MXL_RV128, rv128_base_cpu_init),
--- 
-2.34.1
+Generally speaking (I'm not objecting to this patch as is), for
+DEFINE_VENDOR_CPU() it would be nice to have reference to some
+documentation -- at least to review whether the cpu features
+announced make sense or not --.
 
+For this particular IP I'm not finding anything on the company
+website...:
+https://docs.tenstorrent.com/search.html?q=Ascalon
+
+My 2 cents.
+
+Phil.
 
