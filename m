@@ -4,80 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9C048D5E37A
-	for <qemu-riscv@archiver.kernel.org>; Sat,  9 Nov 2024 18:22:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 52388D5E386
+	for <qemu-riscv@archiver.kernel.org>; Sat,  9 Nov 2024 22:46:44 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1t9q5v-0000kF-BS; Sat, 09 Nov 2024 13:21:59 -0500
+	id 1t9uDj-0004LB-ND; Sat, 09 Nov 2024 17:46:19 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1t9q5t-0000ju-KU
- for qemu-riscv@nongnu.org; Sat, 09 Nov 2024 13:21:57 -0500
-Received: from mail-wr1-x429.google.com ([2a00:1450:4864:20::429])
+ (Exim 4.90_1) (envelope-from <antonb@tenstorrent.com>)
+ id 1t9uDh-0004KH-PT
+ for qemu-riscv@nongnu.org; Sat, 09 Nov 2024 17:46:17 -0500
+Received: from mail-yb1-xb2f.google.com ([2607:f8b0:4864:20::b2f])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1t9q5r-0002R6-P9
- for qemu-riscv@nongnu.org; Sat, 09 Nov 2024 13:21:57 -0500
-Received: by mail-wr1-x429.google.com with SMTP id
- ffacd0b85a97d-37d4d1b48f3so2016824f8f.1
- for <qemu-riscv@nongnu.org>; Sat, 09 Nov 2024 10:21:55 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <antonb@tenstorrent.com>)
+ id 1t9uDf-0005SZ-Ni
+ for qemu-riscv@nongnu.org; Sat, 09 Nov 2024 17:46:17 -0500
+Received: by mail-yb1-xb2f.google.com with SMTP id
+ 3f1490d57ef6-e29687f4cc6so3137137276.2
+ for <qemu-riscv@nongnu.org>; Sat, 09 Nov 2024 14:46:15 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1731176514; x=1731781314; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=InqUnUAWeJHzGIKaSq7v/7iIS+0A6RH5uHcwzs6TvBs=;
- b=IaWi9jtIiFF6nhOv1Ri+DZ/TL1NKKJ6O119LYE0xGWHzOxGZM7qKsAKzYsRauiock1
- AyrSNDipD6rvD+jZOEAn+B5Few0cW0vaMHgR1xUbK04ZBdbpbrpPl00ELQ1PcYTShY3w
- 5ELJ7co91Zt6a4wINpB204hCVqvuLxLHJ7abFpbS1J6Fy/8AG4pUQKjOujDzN4ZmpL3r
- c/fZAy2HHJX8v1xQqPhPYq/p1r+EVy/BBd3HQp+adBFMzU3ui1H90Ss6H2ReiWgQ0NP5
- 7L+YHFzhITRm9o9mWnanhdyv0loMhJAS4e932uAIVnnAtdKIyYRs8C+409zglvIlMLgU
- VoJw==
+ d=tenstorrent.com; s=google; t=1731192374; x=1731797174; darn=nongnu.org;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=on65vZ9eyegTreiHezAgauYBQCExFVG4sEO5EQG3PPQ=;
+ b=Hhj3WJaQSAEmMvNPk7VPYdugwR45OR/h/GkKdE56l7kalCfhl+lTWMumZiJugxIxAb
+ UMaKuUIx7K0Py2mPqnKRyHHRx/V9QATA/TD//Q++RnS0Q22DCeCi2cTrRdrtKqZfpLdG
+ Am/mBcFt59yf3DhuDoQxuhQskDd48YEjNZTzsKJ+kir+Z/DYL6vnngW4bbmNmnfrIbS5
+ oK8wPHxrxZYnOXuhTezfmnxtgXWQxbK15Oc+RUvF44Yx2XWnk4dO4Q8ZpOhFZU4sFdM9
+ 7u0xbSlyWzR2K2Y+EJbUP7c8G8K1p8Lkzlqxw5OGmYLfixe+4fLp6d5jYL+JUUfWF+pj
+ eO4Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731176514; x=1731781314;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=InqUnUAWeJHzGIKaSq7v/7iIS+0A6RH5uHcwzs6TvBs=;
- b=u3kF0ilZEBSBIH5NyMctjO0xDbNvk0VCQkN/YluVlzgK1VS1wh/W+481smzbLsFoWc
- tz9EBEuD56jLLCHWU+i3tmOh8D0N6dL7AvnL1VHzga0AJz/tzXwO/Jw5NDtr8xpqAap2
- 6B5Unfow5Sqfc18E3FcOs+vUcjz7k2Vy7C8TPRm2P4sBAuVyhYm+Za9zfJdDmTFvIuqH
- PPRItsxuSk+B0CIPGllt6JC2TGpyjc+T71bgVLtCF2meBx9UyB9bx2WegrdZcB5c8xkc
- xYu8mPZlmiI/Hxi19l991FfcJDqx9sDYGZOwiVsVr/D79k85V4jG5zfRBX9M36jfBnB8
- bAQA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXQ+MF3EjSwzQKVaehQsXQ2qtyLPVYCnL7XriOBUVPaSIedwGTdvfXSVF6W2vTxdyYlDfDXcAWtcQsO@nongnu.org
-X-Gm-Message-State: AOJu0Yz7uoUU6wahTT+0UX4mDaJRE2j+/j7bKeDR/cLFgWX0pKWaWZJO
- 9Gg2Yc+xHHa6LH4w0FtDzhpeqGiA+bvtuUxMi8LpFEciSxrNqCdgQ8YQcDDbv9g=
-X-Google-Smtp-Source: AGHT+IGrJbWSHadDoYEJrRrAhFHyN/2+ciPRzs+T9JeEladnLWAOhYrz0ckZ7RqLtlFErMLPR+UZVw==
-X-Received: by 2002:a05:6000:2c5:b0:381:f08b:71a4 with SMTP id
- ffacd0b85a97d-381f184ca9dmr6658176f8f.45.1731176513801; 
- Sat, 09 Nov 2024 10:21:53 -0800 (PST)
-Received: from [192.168.3.213] (73.red-95-127-47.staticip.rima-tde.net.
- [95.127.47.73]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-432b3de8710sm97963895e9.17.2024.11.09.10.21.52
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sat, 09 Nov 2024 10:21:53 -0800 (PST)
-Message-ID: <4e7a4a10-bea3-4f43-b091-6a30c400b8bd@linaro.org>
-Date: Sat, 9 Nov 2024 19:21:50 +0100
+ d=1e100.net; s=20230601; t=1731192374; x=1731797174;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=on65vZ9eyegTreiHezAgauYBQCExFVG4sEO5EQG3PPQ=;
+ b=TxA6ahAUsXpx7tKbQkMk2J/fW60YkhLfNfqYQFX4Ec0uQOMcqaNa52rhCkn1fXbFar
+ eTkw4x1W4Bk+MrAwJ02TXV6eqVylpK8qhmt/CuXMQ+Y+wwTa5hVc8LlGeZCRNz7cKbmc
+ wNy4sBY/iC6JOXPAwq5iB7c65FwTKRSzF4g0khnFPUjR1CfDOfdVdw+603PrLfF4rRDD
+ MFxoI8zwtuu26DpzJHxRDZzOfkkB6yBybUo7sH1/XtWxoI4p0zrwg0+F3HCJFPP2G5O+
+ itTrCwYzNtPYkGGG5Ctocr2T7ppSqdt2rft63XtFsVaEDk4O3OmYDQda722hwFoUSa9O
+ mokQ==
+X-Gm-Message-State: AOJu0YyvH8izKLqX/nY9B7DUr/8kzByyxfRb9QY8CA9eFL42x3eCNKQR
+ 7pO2Yj5EGpZoYdlrGPeXg8TUro/zyI+kRNatsMkBJj6NG62pN73eRSJNl04nvVrj2U9JHy72d95
+ Z2gH9WKyeGQ8/fOr0nfalvRNc3jIve1zU8s4lNw==
+X-Google-Smtp-Source: AGHT+IFZRrq3f7IX9SJCz0lSa6rpUg3e094vNoRxmd6/2ju9cDrqZYx9cmUXWpXV9AWAJW3Z7G8Bw6N/6rgYIZllRIQ=
+X-Received: by 2002:a05:6902:2a4a:b0:e30:c4b2:7c62 with SMTP id
+ 3f1490d57ef6-e337f8e458emr7418200276.46.1731192374350; Sat, 09 Nov 2024
+ 14:46:14 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] target/riscv: Add Tenstorrent Ascalon CPU
-To: Anton Blanchard <antonb@tenstorrent.com>, qemu-riscv@nongnu.org,
- qemu-devel@nongnu.org
-Cc: Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bmeng.cn@gmail.com>,
- Weiwei Li <liwei1518@gmail.com>,
+References: <20241108230709.1466634-1-antonb@tenstorrent.com>
+ <4e7a4a10-bea3-4f43-b091-6a30c400b8bd@linaro.org>
+In-Reply-To: <4e7a4a10-bea3-4f43-b091-6a30c400b8bd@linaro.org>
+From: Anton Blanchard <antonb@tenstorrent.com>
+Date: Sun, 10 Nov 2024 09:46:03 +1100
+Message-ID: <CAN7m+mCqXz1YaBZpA-TFWz_TX0HiRorzXbaadn+L3fnigWBR1g@mail.gmail.com>
+Subject: Re: [CAUTION - External Sender] Re: [PATCH] target/riscv: Add
+ Tenstorrent Ascalon CPU
+To: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@linaro.org>
+Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, 
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Bin Meng <bmeng.cn@gmail.com>, Weiwei Li <liwei1518@gmail.com>, 
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
  Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
-References: <20241108230709.1466634-1-antonb@tenstorrent.com>
-Content-Language: en-US
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-In-Reply-To: <20241108230709.1466634-1-antonb@tenstorrent.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::429;
- envelope-from=philmd@linaro.org; helo=mail-wr1-x429.google.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2607:f8b0:4864:20::b2f;
+ envelope-from=antonb@tenstorrent.com; helo=mail-yb1-xb2f.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -100,124 +96,24 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Hi,
+Hi Philippe,
 
-On 8/11/24 23:07, Anton Blanchard wrote:
-> Add a CPU entry for the Tenstorrent Ascalon CPU, a series of 2 wide to
-> 8 wide RV64 cores.
-> 
-> Signed-off-by: Anton Blanchard <antonb@tenstorrent.com>
-> ---
->   target/riscv/cpu-qom.h |  1 +
->   target/riscv/cpu.c     | 67 ++++++++++++++++++++++++++++++++++++++++++
->   2 files changed, 68 insertions(+)
-> 
-> diff --git a/target/riscv/cpu-qom.h b/target/riscv/cpu-qom.h
-> index 62115375cd..6547642287 100644
-> --- a/target/riscv/cpu-qom.h
-> +++ b/target/riscv/cpu-qom.h
-> @@ -49,6 +49,7 @@
->   #define TYPE_RISCV_CPU_SIFIVE_U54       RISCV_CPU_TYPE_NAME("sifive-u54")
->   #define TYPE_RISCV_CPU_THEAD_C906       RISCV_CPU_TYPE_NAME("thead-c906")
->   #define TYPE_RISCV_CPU_VEYRON_V1        RISCV_CPU_TYPE_NAME("veyron-v1")
-> +#define TYPE_RISCV_CPU_TT_ASCALON       RISCV_CPU_TYPE_NAME("tt-ascalon")
->   #define TYPE_RISCV_CPU_HOST             RISCV_CPU_TYPE_NAME("host")
->   
->   OBJECT_DECLARE_CPU_TYPE(RISCVCPU, RISCVCPUClass, RISCV_CPU)
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index f219f0c3b5..8447ad0dfb 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -579,6 +579,72 @@ static void rv64_veyron_v1_cpu_init(Object *obj)
->   #endif
->   }
->   
-> +/* Tenstorrent Ascalon */
-> +static void rv64_tt_ascalon_cpu_init(Object *obj)
-> +{
-> +    CPURISCVState *env = &RISCV_CPU(obj)->env;
-> +    RISCVCPU *cpu = RISCV_CPU(obj);
-> +
-> +    riscv_cpu_set_misa_ext(env, RVG | RVC | RVS | RVU | RVH | RVV);
-> +    env->priv_ver = PRIV_VERSION_1_13_0;
-> +
-> +    /* Enable ISA extensions */
-> +    cpu->cfg.mmu = true;
-> +    cpu->cfg.vlenb = 256 >> 3;
-> +    cpu->cfg.elen = 64;
-> +    cpu->env.vext_ver = VEXT_VERSION_1_00_0;
-> +    cpu->cfg.rvv_ma_all_1s = true;
-> +    cpu->cfg.rvv_ta_all_1s = true;
-> +    cpu->cfg.misa_w = true;
-> +    cpu->cfg.pmp = true;
-> +    cpu->cfg.cbom_blocksize = 64;
-> +    cpu->cfg.cbop_blocksize = 64;
-> +    cpu->cfg.cboz_blocksize = 64;
-> +    cpu->cfg.ext_zic64b = true;
-> +    cpu->cfg.ext_zicbom = true;
-> +    cpu->cfg.ext_zicbop = true;
-> +    cpu->cfg.ext_zicboz = true;
-> +    cpu->cfg.ext_zicntr = true;
-> +    cpu->cfg.ext_zicond = true;
-> +    cpu->cfg.ext_zicsr = true;
-> +    cpu->cfg.ext_zifencei = true;
-> +    cpu->cfg.ext_zihintntl = true;
-> +    cpu->cfg.ext_zihintpause = true;
-> +    cpu->cfg.ext_zihpm = true;
-> +    cpu->cfg.ext_zimop = true;
-> +    cpu->cfg.ext_zawrs = true;
-> +    cpu->cfg.ext_zfa = true;
-> +    cpu->cfg.ext_zfbfmin = true;
-> +    cpu->cfg.ext_zfh = true;
-> +    cpu->cfg.ext_zfhmin = true;
-> +    cpu->cfg.ext_zcb = true;
-> +    cpu->cfg.ext_zcmop = true;
-> +    cpu->cfg.ext_zba = true;
-> +    cpu->cfg.ext_zbb = true;
-> +    cpu->cfg.ext_zbs = true;
-> +    cpu->cfg.ext_zkt = true;
-> +    cpu->cfg.ext_zvbb = true;
-> +    cpu->cfg.ext_zvbc = true;
-> +    cpu->cfg.ext_zvfbfmin = true;
-> +    cpu->cfg.ext_zvfbfwma = true;
-> +    cpu->cfg.ext_zvfh = true;
-> +    cpu->cfg.ext_zvfhmin = true;
-> +    cpu->cfg.ext_zvkng = true;
-> +    cpu->cfg.ext_smaia = true;
-> +    cpu->cfg.ext_smstateen = true;
-> +    cpu->cfg.ext_ssaia = true;
-> +    cpu->cfg.ext_sscofpmf = true;
-> +    cpu->cfg.ext_sstc = true;
-> +    cpu->cfg.ext_svade = true;
-> +    cpu->cfg.ext_svinval = true;
-> +    cpu->cfg.ext_svnapot = true;
-> +    cpu->cfg.ext_svpbmt = true;
-> +
-> +#ifndef CONFIG_USER_ONLY
-> +    set_satp_mode_max_supported(cpu, VM_1_10_SV57);
-> +#endif
-> +}
-> +
->   #ifdef CONFIG_TCG
->   static void rv128_base_cpu_init(Object *obj)
->   {
-> @@ -2982,6 +3048,7 @@ static const TypeInfo riscv_cpu_type_infos[] = {
->       DEFINE_VENDOR_CPU(TYPE_RISCV_CPU_SIFIVE_U54, MXL_RV64,  rv64_sifive_u_cpu_init),
->       DEFINE_VENDOR_CPU(TYPE_RISCV_CPU_SHAKTI_C,   MXL_RV64,  rv64_sifive_u_cpu_init),
->       DEFINE_VENDOR_CPU(TYPE_RISCV_CPU_THEAD_C906, MXL_RV64,  rv64_thead_c906_cpu_init),
-> +    DEFINE_VENDOR_CPU(TYPE_RISCV_CPU_TT_ASCALON, MXL_RV64,  rv64_tt_ascalon_cpu_init),
->       DEFINE_VENDOR_CPU(TYPE_RISCV_CPU_VEYRON_V1,  MXL_RV64,  rv64_veyron_v1_cpu_init),
+On Sun, Nov 10, 2024 at 5:21=E2=80=AFAM Philippe Mathieu-Daud=C3=A9
+<philmd@linaro.org> wrote:
+> Generally speaking (I'm not objecting to this patch as is), for
+> DEFINE_VENDOR_CPU() it would be nice to have reference to some
+> documentation -- at least to review whether the cpu features
+> announced make sense or not --.
+>
+> For this particular IP I'm not finding anything on the company
+> website...:
+> https://docs.tenstorrent.com/search.html?q=3DAscalon
 
-Generally speaking (I'm not objecting to this patch as is), for
-DEFINE_VENDOR_CPU() it would be nice to have reference to some
-documentation -- at least to review whether the cpu features
-announced make sense or not --.
+This has some more details, including a 1 page PDF. Should I add the URL to
+the commit message?
 
-For this particular IP I'm not finding anything on the company
-website...:
-https://docs.tenstorrent.com/search.html?q=Ascalon
+https://tenstorrent.com/ip/tt-ascalon
 
-My 2 cents.
-
-Phil.
+Thanks,
+Anton
 
