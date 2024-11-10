@@ -4,67 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E02BED2E9C6
-	for <qemu-riscv@archiver.kernel.org>; Mon, 11 Nov 2024 15:04:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 54DE8D12D51
+	for <qemu-riscv@archiver.kernel.org>; Mon, 11 Nov 2024 15:04:41 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tAVxQ-0001zU-78; Mon, 11 Nov 2024 10:04:00 -0500
+	id 1tAVxM-0001rU-BZ; Mon, 11 Nov 2024 10:03:56 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <lists@philjordan.eu>)
- id 1tAEOM-0007Ok-Qc
- for qemu-riscv@nongnu.org; Sun, 10 Nov 2024 15:18:38 -0500
-Received: from mail-pj1-x102a.google.com ([2607:f8b0:4864:20::102a])
+ id 1tA6Jp-0004GW-Ue
+ for qemu-riscv@nongnu.org; Sun, 10 Nov 2024 06:41:26 -0500
+Received: from mail-pg1-x52e.google.com ([2607:f8b0:4864:20::52e])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <lists@philjordan.eu>)
- id 1tAEOH-0000JG-Of
- for qemu-riscv@nongnu.org; Sun, 10 Nov 2024 15:18:37 -0500
-Received: by mail-pj1-x102a.google.com with SMTP id
- 98e67ed59e1d1-2e2ed59a35eso3152773a91.0
- for <qemu-riscv@nongnu.org>; Sun, 10 Nov 2024 12:18:33 -0800 (PST)
+ id 1tA6Ji-0000Si-Ga
+ for qemu-riscv@nongnu.org; Sun, 10 Nov 2024 06:41:25 -0500
+Received: by mail-pg1-x52e.google.com with SMTP id
+ 41be03b00d2f7-7f3f184985bso2520126a12.1
+ for <qemu-riscv@nongnu.org>; Sun, 10 Nov 2024 03:41:17 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=philjordan-eu.20230601.gappssmtp.com; s=20230601; t=1731269912; x=1731874712;
+ d=philjordan-eu.20230601.gappssmtp.com; s=20230601; t=1731238876; x=1731843676;
  darn=nongnu.org; 
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=NBgwRoJSW+vRRhlEDMdUmTkLRl40R3C2K8kD8lvb7T0=;
- b=qG0CsvZNGKUkL+4Qyv4CS27mz/WrEDeqw2NlgT5Gn2rRHvezup07nvSFRQK7D0Fwha
- Wn9ikVCHHcPaUYsITmRgLJxCvMt26krS8dzkxnyBZlBDosahtQWtZ2IjuOVOX9xIS475
- o+Y605Yg3se+Snz06e4GDPf70Hu42Fa2oDLGrt0aXBWWSxw0TMEsUT99wx+KNwRXbUpu
- iMXBC4bap/z/uKQCaJ/DonEr5qu5hBL/sgpQ+wm7JIWnhbKiYLF2H55l1ydIIWSt4apR
- YszZRyxDQRceN/gl4NVlbCjXLc1dvJtSMLx6rC+1G7sSZigOfj5S4MFAqlBJ88Qf1Lg/
- pnPA==
+ bh=ATSIsShF3Pw9aj9IlGsnDffrk3wXmRF/tgXMoizIenI=;
+ b=gptHL/2x5yHDPGyeYvb1tCblbjdbrn+wEVXxba4VOMlOjRRQny4uyB+nxXof4hKkfA
+ ya+41dhJsSUOWQ9BpSHeybH14FDto5oQrSCc42Cr5xuZN9ohKzYzu17eS8emkRguEtRs
+ t52R32seMYjf+7Q1CHtLcWpCg3Uit+H51G9nrKCGS/mrlyGPdXu4sAJRAFh+MS7omB7M
+ HQpWygk+o4BLNx5xqimbN8dztQRG7Ov6zIS5cHQcuaIwBiGs7z1Li7uTRPPzNkJyhu+Q
+ zGgx0xsv4OrSbp/43OJk+TU/Zobv+7XZ452mHI4cvm8YBYgFmoo5sYSBHqAIU3PvJVH6
+ TClQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731269912; x=1731874712;
+ d=1e100.net; s=20230601; t=1731238876; x=1731843676;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=NBgwRoJSW+vRRhlEDMdUmTkLRl40R3C2K8kD8lvb7T0=;
- b=VzR/FKhcL9WcpIzGYJYyOc+ls5pEcAmIMI0Nb7ZScmtvU0KV6mnvgst1y99RRsm8aC
- XdZq/FHNpvUZpHSCoY+ajPLERgAtqPBj0ar24TXk2TFi48CJJpsl5HI6xGDU2D0i0fW2
- 3loQI1x8GlzRSko5kIDuZXVOaT8ofRMUl/BUyWyHJ+rWKgZ96lMjdK1cpLrheBuRFr9c
- tUa9CiqqJHz1WLPNxVg226BdtcV+7xwE8ooxc5h/VOeuXrJCaiD/auFMREAY7L+qZyof
- 8T/w1l78e2h+fvlAflthJ3d7a0VEpxw6TDfyy3SJf3IoO8SmvZhmzWN4naDrt80Rd8ay
- VUlw==
+ bh=ATSIsShF3Pw9aj9IlGsnDffrk3wXmRF/tgXMoizIenI=;
+ b=WhTI7sDIhEJ0rhmyuSlpvlF9at33oAj2/dHxNyX12jqWZNDwTqXXadl3BJEZulvumP
+ Ua59Jj8h0+1sZRucm0+AZk5FZ9O08TzfbziZ8dPS80ojgAS2e3yrVopHc+FL9Wzz144W
+ s2HfssHiCW8+t81phwCntUZJ0rCbayZu2tvcd75Rlt88C2m6uAIHkHNsmSoJvP+pTWxk
+ myV5/JcwqTdOp3SiVCVJR7BQ917OJSPdhAQQJnL5MUMVr7Qp8V0+BYTDg28sVpdRnVEG
+ qK2WGMn2nn9PXQf460SMsvsDKtR7z7ObkiBvklVP5NY/AAJjEZ4dCyjBBSz0oC7yZWd+
+ AcbQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWjW/A2NdtsL1Ib09kXy0F7yZG5YTiXTf2zLHYtJlECaxzabKw1qzkqBL4pQnyQXaxKlQ0+ywIHAoPA@nongnu.org
-X-Gm-Message-State: AOJu0Ywpbhrb4qp7vcqXbZlAxv9PGiIjxQxBHywUwZDV8lVOdrN8G5TT
- vhBwmysVcAqFbeu4sF9hshK++fVnZuKUqrEIwwttKttKTKGusbLwKCIiYHjGFfbaxfylTX91V/4
- 0LVPk/cN4Uvs+yx85F0QqrQm9Y9Hhjf1LoOAB
-X-Google-Smtp-Source: AGHT+IHgbkuFONMpUHt6vi2Y9anBKmNIvOYycJIqwIE+yCAe9XkwsG95AM9+Hr2x8r1eKv4pQfrKM9XnavRGkBNA6a4=
-X-Received: by 2002:a17:90b:1344:b0:2e9:20d8:4147 with SMTP id
- 98e67ed59e1d1-2e9b178fdb7mr14577768a91.33.1731269911555; Sun, 10 Nov 2024
- 12:18:31 -0800 (PST)
+ AJvYcCXWegg2yxH7yKvxEh6xFMDsoo2L91wbA9Lv4QezO4GpYt/5iWxHukYhqOZpM6hxpzn/67r8bGRwmWWt@nongnu.org
+X-Gm-Message-State: AOJu0YyOVArJkMLK+egCSuLAdEXaaLzcWyIvX1Se/w1jiRkUi7uDyc/G
+ jldU9qxWe5nAMy35Pl4GQqKq0TbIwKdWeMkafPfsanxoYEoff7rUPkvG5rmxRMX8zlcnsMJQbA8
+ gZrHbpPIiUULV8ySjzYN8oidpqhdIe+sylyot
+X-Google-Smtp-Source: AGHT+IGv5a7yPRZP4F3oWn64FH1OHRQFz0MJ+B+nYp5brkEc7JmNvUKDLNQnHOCLMQfWIBdQekN+eN2+L9p79bYnGNQ=
+X-Received: by 2002:a17:90b:1e4c:b0:2e2:e545:82c5 with SMTP id
+ 98e67ed59e1d1-2e9b16f0529mr11654692a91.3.1731238876146; Sun, 10 Nov 2024
+ 03:41:16 -0800 (PST)
 MIME-Version: 1.0
 References: <20241108144709.95498-1-phil@philjordan.eu>
  <20241108144709.95498-16-phil@philjordan.eu>
  <388c911e-bd7a-45ad-8188-c1321b12f80c@daynix.com>
 In-Reply-To: <388c911e-bd7a-45ad-8188-c1321b12f80c@daynix.com>
 From: Phil Dennis-Jordan <lists@philjordan.eu>
-Date: Sun, 10 Nov 2024 21:18:20 +0100
-Message-ID: <CAGCz3vsnUqeVxtgqbcDibtTzvdxYDGWMAGHDygGVdzbSis=cgQ@mail.gmail.com>
+Date: Sun, 10 Nov 2024 12:41:04 +0100
+Message-ID: <CAGCz3vuZuTeuTXdm=D1GZj=3oLvzvim+grFdWGdcLdZCWYOp_w@mail.gmail.com>
 Subject: Re: [PATCH v8 15/15] hw/vmapple/vmapple: Add vmapple machine type
 To: Akihiko Odaki <akihiko.odaki@daynix.com>
 Cc: Phil Dennis-Jordan <phil@philjordan.eu>, qemu-devel@nongnu.org,
@@ -81,8 +81,8 @@ Cc: Phil Dennis-Jordan <phil@philjordan.eu>, qemu-devel@nongnu.org,
  qemu-riscv@nongnu.org, Alexander Graf <graf@amazon.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: neutral client-ip=2607:f8b0:4864:20::102a;
- envelope-from=lists@philjordan.eu; helo=mail-pj1-x102a.google.com
+Received-SPF: neutral client-ip=2607:f8b0:4864:20::52e;
+ envelope-from=lists@philjordan.eu; helo=mail-pg1-x52e.google.com
 X-Spam_score_int: -10
 X-Spam_score: -1.1
 X-Spam_bar: -
@@ -90,7 +90,7 @@ X-Spam_report: (-1.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_NEUTRAL=0.779 autolearn=no autolearn_force=no
 X-Spam_action: no action
-X-Mailman-Approved-At: Mon, 11 Nov 2024 10:03:44 -0500
+X-Mailman-Approved-At: Mon, 11 Nov 2024 10:03:40 -0500
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -104,11 +104,6 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
-
-I've applied the majority of this feedback in the soon-to-be-posted v9
-of the patch set, thanks!
-
-Just a few extra comments/replies below:
 
 On Sun, 10 Nov 2024 at 08:38, Akihiko Odaki <akihiko.odaki@daynix.com> wrot=
 e:
@@ -287,7 +282,9 @@ we can just discard:
 >
 > Quoting is inconsistent. aux.img.trimmed is not quoted below but it is
 > quoted here.
->
+
+Quoting is fairly unusual in shell variable assignments I guess?
+
 > > +
 > > +How to run
 > > +----------
@@ -331,40 +328,7 @@ sources/AVPBooter.vmapple2.bin
 > -net is a legacy option and creates a unnecessary indirection with hub.
 > Use -netdev and -device options. Also plug virtio-net-pci into a PCIe
 > root port as suggested in: docs/pcie.txt
-
-I have not had any success with booting macOS with the block devices
-connected to PCIe root ports, and similarly the network doesn't come
-up if I attach just the virtio-net-pci device to one.
-
-As far as I can tell (ioreg), Apple's own VMapple machine type does
-not use PCIe root ports, but I'm not 100% sure. The PCIe documentation
-is generally rather focused on x86 and on running Linux in the 'virt'
-machine type.
-
-In any case, a far more pressing issue is MSI support, without which
-the XHCI driver fails to receive most kinds of notifications from the
-USB controller. (Therefore keyboard/mouse is currently very laggy.)
-The arm 'virt' machine type supposedly supports it via the GIC ITS
-device, but I've so far not managed to transfer this to 'vmapple' in a
-way that makes the guest OS detect MSI support. Anyway, in its current
-iteration, the machine type is good enough to be used for some tasks,
-and we can always refine it later. (Another major limitation is of
-course guest support for OS versions > 12 - but those issues might
-even be related.)
-
-One thing I am thinking about changing (as we've now missed the 9.2
-merge window anyway, sigh) as it would be non-backwards-compatible is
-replacing the vmapple-virtio-aux/vmapple-virtio-root pair of devices
-with just the the base type, vmapple-virtio-blk-pci, and adding a
-variant property to it. So:
-
-       -device vmapple-virtio-blk-pci,variant=3Daux,drive=3Daux \
-       -device vmapple-virtio-blk-pci,variant=3Droot,drive=3Droot \
-
-I think this would make hw/vmapple/virtio-blk.c somewhat more readable
-and also significantly shorter.
-
-
+>
 > I thought it is about time to give a try on my M2 MacBook Air, but this
 > command line did not work. The serial output said iBootStage2 finished,
 > but it went silent after that and the display gives not output. macosvm
@@ -372,7 +336,12 @@ and also significantly shorter.
 >
 > Do you have an idea what's wrong with my setup? Doesn't it work with 15.1=
 ?
->
+
+Right now it only works with macOS 12.x as guest. I guess this needs
+to be called out to be more explicit than just "Have an already
+installed copy of a Virtualization.Framework macOS 12 virtual
+machine."
+
 > > diff --git a/docs/system/target-arm.rst b/docs/system/target-arm.rst
 > > index 9aaa9c414c9..3426f79100b 100644
 > > --- a/docs/system/target-arm.rst
