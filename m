@@ -4,63 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EA96BD12D59
-	for <qemu-riscv@archiver.kernel.org>; Sun, 10 Nov 2024 21:57:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AA8A7D12D59
+	for <qemu-riscv@archiver.kernel.org>; Sun, 10 Nov 2024 21:57:19 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tAFuN-0003od-QQ; Sun, 10 Nov 2024 16:55:47 -0500
+	id 1tAFuf-00048f-Qz; Sun, 10 Nov 2024 16:56:05 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <phil@philjordan.eu>)
- id 1tAFuH-0003hC-Kx
- for qemu-riscv@nongnu.org; Sun, 10 Nov 2024 16:55:42 -0500
-Received: from mail-wm1-x32f.google.com ([2a00:1450:4864:20::32f])
+ id 1tAFuc-00043T-LC
+ for qemu-riscv@nongnu.org; Sun, 10 Nov 2024 16:56:02 -0500
+Received: from mail-wm1-x333.google.com ([2a00:1450:4864:20::333])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <phil@philjordan.eu>)
- id 1tAFuF-0003y6-2p
- for qemu-riscv@nongnu.org; Sun, 10 Nov 2024 16:55:41 -0500
-Received: by mail-wm1-x32f.google.com with SMTP id
- 5b1f17b1804b1-43162cf1eaaso50059865e9.0
- for <qemu-riscv@nongnu.org>; Sun, 10 Nov 2024 13:55:38 -0800 (PST)
+ id 1tAFuZ-00047m-Kh
+ for qemu-riscv@nongnu.org; Sun, 10 Nov 2024 16:56:02 -0500
+Received: by mail-wm1-x333.google.com with SMTP id
+ 5b1f17b1804b1-4316cce103dso49772185e9.3
+ for <qemu-riscv@nongnu.org>; Sun, 10 Nov 2024 13:55:59 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=philjordan-eu.20230601.gappssmtp.com; s=20230601; t=1731275737; x=1731880537;
+ d=philjordan-eu.20230601.gappssmtp.com; s=20230601; t=1731275758; x=1731880558;
  darn=nongnu.org; 
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=53M7q/KCCq1ggHz687B43AxmIYF0Vy+KeccRiVeYQD0=;
- b=FzUQt/ve4XikyTGcAS2ewO6UcfRQVGXaK64YEDLtWtsya32KWnTGm/v0srXw2oPuie
- LEAS0IFSB93NZ02MokIqdf2lI20Q/6mUffoscqIcQXAbunYsB437iYH5CO+HQLnZZRGX
- Aho7PHcak6qUU48wD+AdN2py2B3U4dXjgFqa7ACbxKq4YApNWWsitB+Vfm/+ZSGGohMV
- 1whvXd6EdJnjJsJyB4J2rHYbGoQScbOt99/FbXLQ2sojf5E2lg1USyRWlO9TgyK/8RQs
- PuCLtHqHWAoVz0YBxVvlvrqbO/Q4H9qhHQa7AUSFDnR2Jh9gQdWCeyXaSFZ1ZGXala3c
- QUcQ==
+ bh=lOADvMyilhJdl701XbZfD35fREWVUG8E1q7FxctgBFw=;
+ b=lxmIonQ3lcNmfp89UHOe9Enb8MUEHKEl9x0mwCNW2/G4KBMEOhJr4qv4uu02OGgh+N
+ P+sZXJkqVi+UKdLsSIIw6Q20RxoYX6hXvY7ONm7HmWjUKPmwvtatHPSPVYqWQuQ0jLxE
+ gK3x9eKlrv1SFIjRL7mTilsCJLaXEi5Qq1CeVuCwu7llF5BzZjKpTW662cZ1iJTg9pTY
+ 7cxkBc5RDZAiqZYVr8777lHebrnmq4GA9LsxkjHnuDcSZWFjIQslHtBf0t9rPoRRBNV8
+ r+gYx8rFweXLbJa3ywqlWKtVCWB7vhDQcy3Rnjew6t2Q0sWw1zGw7NLSIP8nZ+5ko4qT
+ mU0Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731275737; x=1731880537;
+ d=1e100.net; s=20230601; t=1731275758; x=1731880558;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=53M7q/KCCq1ggHz687B43AxmIYF0Vy+KeccRiVeYQD0=;
- b=M/fUkMEXA7M6cPagNeRZKMlcjthmnm8TKlRcxzuD9KSdJVfQxUTKZchAKpDZmhmFdF
- pG6Pxryqd+JTJ6FowKtVyFQ3l3DT2qyxRUhDi2t1WgZuCKpZG7bAZBTVtVGPzl2yYsX9
- FCevHZeK3MWooD8RIgAqnpP7wn57RCmbdE0PPlZJMVOM3vUPLM6lICpN7frQP23fkTIN
- AsC6oGO+sMp4ZrRFkg44YpFITCKUwFtlGhofiJ3ZF7H9IKIi5+ZTOq1JRNRzE2pPPgSk
- RB8TE9yicRhXdlG4NEy/BBp67u87RzFD7KwEmlWbDLVJBPKpYR0d3qOlf7ntqaWSJm+g
- Tb8Q==
+ bh=lOADvMyilhJdl701XbZfD35fREWVUG8E1q7FxctgBFw=;
+ b=Vve6bWIU5I0VkSVcXUJwin9ramHsYw6fcL36VrhNxd5kBSp7LdzH7hzwVUBugp8lJg
+ O1A7qFiiGs1jj/tu5PSoWAho48CJq+EYdc1tXRKOSQawbd2f/q4pCjjaxM0baF8Pxtlm
+ MeoUuQz8drTdxj2W5TStQNclfB6LTQe7QP15JNKx5F9Gjg40eS0uzjRoy05ztI1AMG/k
+ DpvW2mJdmnKHj2tfce97jUb9xgOoOpxyX5f02Mu3a4e4db/WUXJseu2+1wzHQpu+uvot
+ 40dsIOMdLv+xuvntVxVOIm5GK8cOHeYusLyJiOISMN8B0p93rM360Oal/8NQ1W5EAmzx
+ MMxQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVO1T5LkjEpLX6QfOpHAHcJofTptB4JUWHJmwVkbcmLhCJkZXaebKIYUG/lh4SZXZ5lmaL5AO3P+cjK@nongnu.org
-X-Gm-Message-State: AOJu0YwS95FvCt1VhHK/VylMg+z4+Z99k004cRXT4hf09kOII7G1NmJs
- TPZwp3gafrWVu8X/rIrGt+6QempVcqZ+jkt9CLm7dNqtF0E/vP6x7RTgftQBmg==
-X-Google-Smtp-Source: AGHT+IEc55fvFQOljhCDIrad/GDrVIpiXDDqx/ydzrFXMaDvoccITeJCgyiLzWUM8utb1R3tl3bXkg==
+ AJvYcCUY6rESrhmiHziRntelFxvjaWBqF0I5PqiO2EIcJvJnTxGy00uBdbSg7ROsz70PzAHdlz8ZUVkdFENP@nongnu.org
+X-Gm-Message-State: AOJu0YwpXRm05CZBr84U5I6tFvjD11slwMi5x4Kt1lcOqwutE80AoPW2
+ V5lySkpsmS/OpjLdWk7GysUk5BZcZULoTWS9Waeoua0igNz15SH+PzkjDZrVLw==
+X-Google-Smtp-Source: AGHT+IEFbjiiwU9zB8jMymdr+GwT/4fjVFw9eHeb3I77suCfG08PD3RNZXvd0DtQ9MK7JtI5WhgbKg==
 X-Received: by 2002:a05:6000:385:b0:37d:4a16:81d7 with SMTP id
- ffacd0b85a97d-381f1866abfmr10416599f8f.8.1731275737472; 
- Sun, 10 Nov 2024 13:55:37 -0800 (PST)
+ ffacd0b85a97d-381f1866abfmr10417155f8f.8.1731275758104; 
+ Sun, 10 Nov 2024 13:55:58 -0800 (PST)
 Received: from localhost.localdomain (h082218084190.host.wavenet.at.
  [82.218.84.190]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a9ee0e2f731sm523715566b.189.2024.11.10.13.55.35
+ a640c23a62f3a-a9ee0e2f731sm523715566b.189.2024.11.10.13.55.56
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Sun, 10 Nov 2024 13:55:37 -0800 (PST)
+ Sun, 10 Nov 2024 13:55:57 -0800 (PST)
 From: Phil Dennis-Jordan <phil@philjordan.eu>
 To: qemu-devel@nongnu.org
 Cc: agraf@csgraf.de, phil@philjordan.eu, peter.maydell@linaro.org,
@@ -74,17 +74,18 @@ Cc: agraf@csgraf.de, phil@philjordan.eu, peter.maydell@linaro.org,
  dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com,
  jcmvbkbc@gmail.com, marcandre.lureau@redhat.com, berrange@redhat.com,
  akihiko.odaki@daynix.com, qemu-arm@nongnu.org, qemu-block@nongnu.org,
- qemu-riscv@nongnu.org, Alexander Graf <graf@amazon.com>
-Subject: [PATCH v9 06/16] hw: Add vmapple subdir
-Date: Sun, 10 Nov 2024 22:55:09 +0100
-Message-Id: <20241110215519.49150-7-phil@philjordan.eu>
+ qemu-riscv@nongnu.org
+Subject: [PATCH v9 16/16] hw/vmapple/virtio-blk: Replace variant types with
+ property on base
+Date: Sun, 10 Nov 2024 22:55:19 +0100
+Message-Id: <20241110215519.49150-17-phil@philjordan.eu>
 X-Mailer: git-send-email 2.39.3 (Apple Git-145)
 In-Reply-To: <20241110215519.49150-1-phil@philjordan.eu>
 References: <20241110215519.49150-1-phil@philjordan.eu>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: neutral client-ip=2a00:1450:4864:20::32f;
- envelope-from=phil@philjordan.eu; helo=mail-wm1-x32f.google.com
+Received-SPF: neutral client-ip=2a00:1450:4864:20::333;
+ envelope-from=phil@philjordan.eu; helo=mail-wm1-x333.google.com
 X-Spam_score_int: -10
 X-Spam_score: -1.1
 X-Spam_bar: -
@@ -106,109 +107,231 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Alexander Graf <graf@amazon.com>
+This reduces the type hierarchy of the vmapple-virtio-blk-pci-base
+type and vmapple-virtio-root/vmapple-virtio-aux leaf types with a single
+vmapple-virtio-blk-pci type which exposes a 'variant' enum property
+which can be set to 'aux' or 'root'.
 
-We will introduce a number of devices that are specific to the vmapple
-target machine. To keep them all tidily together, let's put them into
-a single target directory.
+This change removes a bunch of device type boilerplate at the cost of
+defining a new qapi enum and qdev property type.
 
-Signed-off-by: Alexander Graf <graf@amazon.com>
+Documentation for the vmapple machine type is also updated.
+
 Signed-off-by: Phil Dennis-Jordan <phil@philjordan.eu>
-Reviewed-by: Akihiko Odaki <akihiko.odaki@daynix.com>
 ---
- MAINTAINERS             | 7 +++++++
- hw/Kconfig              | 1 +
- hw/meson.build          | 1 +
- hw/vmapple/Kconfig      | 1 +
- hw/vmapple/meson.build  | 0
- hw/vmapple/trace-events | 2 ++
- hw/vmapple/trace.h      | 1 +
- meson.build             | 1 +
- 8 files changed, 14 insertions(+)
- create mode 100644 hw/vmapple/Kconfig
- create mode 100644 hw/vmapple/meson.build
- create mode 100644 hw/vmapple/trace-events
- create mode 100644 hw/vmapple/trace.h
+ docs/system/arm/vmapple.rst         |  4 +--
+ hw/core/qdev-properties-system.c    |  8 +++++
+ hw/vmapple/virtio-blk.c             | 50 +++++++----------------------
+ include/hw/qdev-properties-system.h |  6 ++++
+ include/hw/vmapple/vmapple.h        |  4 +--
+ qapi/virtio.json                    | 14 ++++++++
+ 6 files changed, 43 insertions(+), 43 deletions(-)
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index b28267b6286..c6b41b983bf 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -2762,6 +2762,13 @@ F: hw/hyperv/hv-balloon*.h
- F: include/hw/hyperv/dynmem-proto.h
- F: include/hw/hyperv/hv-balloon.h
+diff --git a/docs/system/arm/vmapple.rst b/docs/system/arm/vmapple.rst
+index 67942474b93..efe39b68dc4 100644
+--- a/docs/system/arm/vmapple.rst
++++ b/docs/system/arm/vmapple.rst
+@@ -56,8 +56,8 @@ to get better interactive access into the target system:
+        -drive file="$DISK",if=pflash,format=raw \
+        -drive file="$AUX",if=none,id=aux,format=raw \
+        -drive file="$DISK",if=none,id=root,format=raw \
+-       -device vmapple-virtio-aux,drive=aux \
+-       -device vmapple-virtio-root,drive=root \
++       -device vmapple-virtio-blk-pci,variant=aux,drive=aux \
++       -device vmapple-virtio-blk-pci,variant=root,drive=root \
+        -netdev user,id=net0,ipv6=off,hostfwd=tcp::2222-:22,hostfwd=tcp::5901-:5900 \
+        -device virtio-net-pci,netdev=net0
  
-+VMapple
-+M: Alexander Graf <agraf@csgraf.de>
-+R: Phil Dennis-Jordan <phil@philjordan.eu>
-+S: Maintained
-+F: hw/vmapple/*
-+F: include/hw/vmapple/*
+diff --git a/hw/core/qdev-properties-system.c b/hw/core/qdev-properties-system.c
+index 35deef05f32..8bf8a3442d6 100644
+--- a/hw/core/qdev-properties-system.c
++++ b/hw/core/qdev-properties-system.c
+@@ -1239,3 +1239,11 @@ const PropertyInfo qdev_prop_iothread_vq_mapping_list = {
+     .set = set_iothread_vq_mapping_list,
+     .release = release_iothread_vq_mapping_list,
+ };
 +
- Subsystems
- ----------
- Overall Audio backends
-diff --git a/hw/Kconfig b/hw/Kconfig
-index 1b4e9bb07f7..2871784cfdc 100644
---- a/hw/Kconfig
-+++ b/hw/Kconfig
-@@ -41,6 +41,7 @@ source ufs/Kconfig
- source usb/Kconfig
- source virtio/Kconfig
- source vfio/Kconfig
-+source vmapple/Kconfig
- source xen/Kconfig
- source watchdog/Kconfig
++const PropertyInfo qdev_prop_vmapple_virtio_blk_variant = {
++    .name  = "VMAppleVirtioBlkVariant",
++    .enum_table  = &VMAppleVirtioBlkVariant_lookup,
++    .get   = qdev_propinfo_get_enum,
++    .set   = qdev_propinfo_set_enum,
++    .set_default_value = qdev_propinfo_set_default_value_enum,
++};
+diff --git a/hw/vmapple/virtio-blk.c b/hw/vmapple/virtio-blk.c
+index 40b33bbdac5..f883e65a5de 100644
+--- a/hw/vmapple/virtio-blk.c
++++ b/hw/vmapple/virtio-blk.c
+@@ -24,6 +24,7 @@
+ #include "qemu/module.h"
+ #include "qapi/error.h"
  
-diff --git a/hw/meson.build b/hw/meson.build
-index b827c82c5d7..9c4f6d0d636 100644
---- a/hw/meson.build
-+++ b/hw/meson.build
-@@ -39,6 +39,7 @@ subdir('ufs')
- subdir('usb')
- subdir('vfio')
- subdir('virtio')
-+subdir('vmapple')
- subdir('watchdog')
- subdir('xen')
- subdir('xenpv')
-diff --git a/hw/vmapple/Kconfig b/hw/vmapple/Kconfig
-new file mode 100644
-index 00000000000..8b137891791
---- /dev/null
-+++ b/hw/vmapple/Kconfig
-@@ -0,0 +1 @@
++#define TYPE_VMAPPLE_VIRTIO_BLK  "vmapple-virtio-blk"
+ OBJECT_DECLARE_TYPE(VMAppleVirtIOBlk, VMAppleVirtIOBlkClass, VMAPPLE_VIRTIO_BLK)
+ 
+ typedef struct VMAppleVirtIOBlkClass {
+@@ -41,14 +42,10 @@ typedef struct VMAppleVirtIOBlk {
+ /*
+  * vmapple-virtio-blk-pci: This extends VirtioPCIProxy.
+  */
+-#define TYPE_VMAPPLE_VIRTIO_BLK_PCI "vmapple-virtio-blk-pci-base"
+ OBJECT_DECLARE_SIMPLE_TYPE(VMAppleVirtIOBlkPCI, VMAPPLE_VIRTIO_BLK_PCI)
+ 
+ #define VIRTIO_BLK_T_APPLE_BARRIER     0x10000
+ 
+-#define VIRTIO_APPLE_TYPE_ROOT 1
+-#define VIRTIO_APPLE_TYPE_AUX  2
+-
+ static bool vmapple_virtio_blk_handle_unknown_request(VirtIOBlockReq *req,
+                                                       MultiReqBuffer *mrb,
+                                                       uint32_t type)
+@@ -109,7 +106,7 @@ static const TypeInfo vmapple_virtio_blk_info = {
+ struct VMAppleVirtIOBlkPCI {
+     VirtIOPCIProxy parent_obj;
+     VMAppleVirtIOBlk vdev;
+-    uint32_t apple_type;
++    VMAppleVirtioBlkVariant variant;
+ };
+ 
+ 
+@@ -119,6 +116,8 @@ static Property vmapple_virtio_blk_pci_properties[] = {
+                     VIRTIO_PCI_FLAG_USE_IOEVENTFD_BIT, true),
+     DEFINE_PROP_UINT32("vectors", VirtIOPCIProxy, nvectors,
+                        DEV_NVECTORS_UNSPECIFIED),
++    DEFINE_PROP_VMAPPLE_VIRTIO_BLK_VARIANT("variant", VMAppleVirtIOBlkPCI, variant,
++                                           VM_APPLE_VIRTIO_BLK_VARIANT_UNSPECIFIED),
+     DEFINE_PROP_END_OF_LIST(),
+ };
+ 
+@@ -128,6 +127,12 @@ static void vmapple_virtio_blk_pci_realize(VirtIOPCIProxy *vpci_dev, Error **err
+     DeviceState *vdev = DEVICE(&dev->vdev);
+     VirtIOBlkConf *conf = &dev->vdev.parent_obj.conf;
+ 
++    if (dev->variant == VM_APPLE_VIRTIO_BLK_VARIANT_UNSPECIFIED) {
++        error_setg(errp, "Device " TYPE_VMAPPLE_VIRTIO_BLK_PCI ": must specify "
++                   "a variant, 'aux' or 'root'");
++        return;
++    }
 +
-diff --git a/hw/vmapple/meson.build b/hw/vmapple/meson.build
-new file mode 100644
-index 00000000000..e69de29bb2d
-diff --git a/hw/vmapple/trace-events b/hw/vmapple/trace-events
-new file mode 100644
-index 00000000000..9ccc5790487
---- /dev/null
-+++ b/hw/vmapple/trace-events
-@@ -0,0 +1,2 @@
-+# See docs/devel/tracing.rst for syntax documentation.
+     if (conf->num_queues == VIRTIO_BLK_AUTO_NUM_QUEUES) {
+         conf->num_queues = virtio_pci_optimal_num_queues(0);
+     }
+@@ -143,7 +148,7 @@ static void vmapple_virtio_blk_pci_realize(VirtIOPCIProxy *vpci_dev, Error **err
+      */
+     virtio_add_feature(&dev->vdev.parent_obj.host_features, VIRTIO_BLK_F_ZONED);
+     /* Propagate the apple type down to the virtio-blk device */
+-    dev->vdev.apple_type = dev->apple_type;
++    dev->vdev.apple_type = dev->variant;
+     /* and spawn the virtio-blk device */
+     qdev_realize(vdev, BUS(&vpci_dev->bus), errp);
+ 
+@@ -181,47 +186,16 @@ static void vmapple_virtio_blk_pci_instance_init(Object *obj)
+ }
+ 
+ static const VirtioPCIDeviceTypeInfo vmapple_virtio_blk_pci_info = {
+-    .base_name     = TYPE_VMAPPLE_VIRTIO_BLK_PCI,
+-    .generic_name  = "vmapple-virtio-blk-pci",
++    .generic_name  = TYPE_VMAPPLE_VIRTIO_BLK_PCI,
+     .instance_size = sizeof(VMAppleVirtIOBlkPCI),
+     .instance_init = vmapple_virtio_blk_pci_instance_init,
+     .class_init    = vmapple_virtio_blk_pci_class_init,
+ };
+ 
+-static void vmapple_virtio_root_instance_init(Object *obj)
+-{
+-    VMAppleVirtIOBlkPCI *dev = VMAPPLE_VIRTIO_BLK_PCI(obj);
+-
+-    dev->apple_type = VIRTIO_APPLE_TYPE_ROOT;
+-}
+-
+-static const TypeInfo vmapple_virtio_root_info = {
+-    .name          = TYPE_VMAPPLE_VIRTIO_ROOT,
+-    .parent        = "vmapple-virtio-blk-pci",
+-    .instance_size = sizeof(VMAppleVirtIOBlkPCI),
+-    .instance_init = vmapple_virtio_root_instance_init,
+-};
+-
+-static void vmapple_virtio_aux_instance_init(Object *obj)
+-{
+-    VMAppleVirtIOBlkPCI *dev = VMAPPLE_VIRTIO_BLK_PCI(obj);
+-
+-    dev->apple_type = VIRTIO_APPLE_TYPE_AUX;
+-}
+-
+-static const TypeInfo vmapple_virtio_aux_info = {
+-    .name          = TYPE_VMAPPLE_VIRTIO_AUX,
+-    .parent        = "vmapple-virtio-blk-pci",
+-    .instance_size = sizeof(VMAppleVirtIOBlkPCI),
+-    .instance_init = vmapple_virtio_aux_instance_init,
+-};
+-
+ static void vmapple_virtio_blk_register_types(void)
+ {
+     type_register_static(&vmapple_virtio_blk_info);
+     virtio_pci_types_register(&vmapple_virtio_blk_pci_info);
+-    type_register_static(&vmapple_virtio_root_info);
+-    type_register_static(&vmapple_virtio_aux_info);
+ }
+ 
+ type_init(vmapple_virtio_blk_register_types)
+diff --git a/include/hw/qdev-properties-system.h b/include/hw/qdev-properties-system.h
+index cdcc63056e5..6e428f3fcad 100644
+--- a/include/hw/qdev-properties-system.h
++++ b/include/hw/qdev-properties-system.h
+@@ -27,6 +27,8 @@ extern const PropertyInfo qdev_prop_pcie_link_speed;
+ extern const PropertyInfo qdev_prop_pcie_link_width;
+ extern const PropertyInfo qdev_prop_cpus390entitlement;
+ extern const PropertyInfo qdev_prop_iothread_vq_mapping_list;
++extern const PropertyInfo qdev_prop_vmapple_virtio_blk_variant;
 +
-diff --git a/hw/vmapple/trace.h b/hw/vmapple/trace.h
-new file mode 100644
-index 00000000000..572adbefe04
---- /dev/null
-+++ b/hw/vmapple/trace.h
-@@ -0,0 +1 @@
-+#include "trace/trace-hw_vmapple.h"
-diff --git a/meson.build b/meson.build
-index 427e3f61190..f363771f802 100644
---- a/meson.build
-+++ b/meson.build
-@@ -3592,6 +3592,7 @@ if have_system
-     'hw/usb',
-     'hw/vfio',
-     'hw/virtio',
-+    'hw/vmapple',
-     'hw/watchdog',
-     'hw/xen',
-     'hw/gpio',
+ 
+ #define DEFINE_PROP_PCI_DEVFN(_n, _s, _f, _d)                   \
+     DEFINE_PROP_SIGNED(_n, _s, _f, _d, qdev_prop_pci_devfn, int32_t)
+@@ -94,4 +96,8 @@ extern const PropertyInfo qdev_prop_iothread_vq_mapping_list;
+     DEFINE_PROP(_name, _state, _field, qdev_prop_iothread_vq_mapping_list, \
+                 IOThreadVirtQueueMappingList *)
+ 
++#define DEFINE_PROP_VMAPPLE_VIRTIO_BLK_VARIANT(_n, _s, _f, _d) \
++    DEFINE_PROP_SIGNED(_n, _s, _f, _d, qdev_prop_vmapple_virtio_blk_variant, \
++                       VMAppleVirtioBlkVariant)
++
+ #endif
+diff --git a/include/hw/vmapple/vmapple.h b/include/hw/vmapple/vmapple.h
+index b20956e1286..9c1ad1bd8c3 100644
+--- a/include/hw/vmapple/vmapple.h
++++ b/include/hw/vmapple/vmapple.h
+@@ -18,8 +18,6 @@
+ 
+ #define TYPE_VMAPPLE_CFG "vmapple-cfg"
+ 
+-#define TYPE_VMAPPLE_VIRTIO_BLK  "vmapple-virtio-blk"
+-#define TYPE_VMAPPLE_VIRTIO_ROOT "vmapple-virtio-root"
+-#define TYPE_VMAPPLE_VIRTIO_AUX  "vmapple-virtio-aux"
++#define TYPE_VMAPPLE_VIRTIO_BLK_PCI "vmapple-virtio-blk-pci"
+ 
+ #endif /* HW_VMAPPLE_VMAPPLE_H */
+diff --git a/qapi/virtio.json b/qapi/virtio.json
+index 2529c2d8b20..d351d2166ef 100644
+--- a/qapi/virtio.json
++++ b/qapi/virtio.json
+@@ -992,3 +992,17 @@
+ ##
+ { 'enum': 'GranuleMode',
+   'data': [ '4k', '8k', '16k', '64k', 'host' ] }
++
++##
++# @VMAppleVirtioBlkVariant:
++#
++# @unspecified: The default, not a valid setting.
++#
++# @root: Block device holding the root volume
++#
++# @aux: Block device holding auxiliary data required for boot
++#
++# Since: 9.2
++##
++{ 'enum': 'VMAppleVirtioBlkVariant',
++  'data': [ 'unspecified', 'root', 'aux' ] }
 -- 
 2.39.3 (Apple Git-145)
 
