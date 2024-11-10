@@ -4,63 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D45C4D12D55
-	for <qemu-riscv@archiver.kernel.org>; Sun, 10 Nov 2024 21:57:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5E622D12D59
+	for <qemu-riscv@archiver.kernel.org>; Sun, 10 Nov 2024 21:58:19 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tAFuF-0003fw-ML; Sun, 10 Nov 2024 16:55:40 -0500
+	id 1tAFuK-0003jR-1Y; Sun, 10 Nov 2024 16:55:44 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <phil@philjordan.eu>)
- id 1tAFuA-0003dG-KN
- for qemu-riscv@nongnu.org; Sun, 10 Nov 2024 16:55:34 -0500
-Received: from mail-ej1-x636.google.com ([2a00:1450:4864:20::636])
+ id 1tAFuE-0003fQ-Bi
+ for qemu-riscv@nongnu.org; Sun, 10 Nov 2024 16:55:39 -0500
+Received: from mail-ej1-x62b.google.com ([2a00:1450:4864:20::62b])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <phil@philjordan.eu>)
- id 1tAFu4-0003uJ-Mb
- for qemu-riscv@nongnu.org; Sun, 10 Nov 2024 16:55:32 -0500
-Received: by mail-ej1-x636.google.com with SMTP id
- a640c23a62f3a-a99cc265e0aso609899666b.3
- for <qemu-riscv@nongnu.org>; Sun, 10 Nov 2024 13:55:28 -0800 (PST)
+ id 1tAFuA-0003vR-BG
+ for qemu-riscv@nongnu.org; Sun, 10 Nov 2024 16:55:38 -0500
+Received: by mail-ej1-x62b.google.com with SMTP id
+ a640c23a62f3a-a9aa8895facso740105366b.2
+ for <qemu-riscv@nongnu.org>; Sun, 10 Nov 2024 13:55:32 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=philjordan-eu.20230601.gappssmtp.com; s=20230601; t=1731275727; x=1731880527;
+ d=philjordan-eu.20230601.gappssmtp.com; s=20230601; t=1731275731; x=1731880531;
  darn=nongnu.org; 
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=p1INkIZpbaKNOml5mwV0mfpxrXqeCsNOWByLMf/8qmk=;
- b=iNglWnPy5OfvrEVPCoeHmEMDeiouLZpUm7Or6YIJEFmRoFY8AGffzCfO0fLuHsF25E
- Q2Ve5s7wwwIrpaGLIGUbktAoAwfiheD6oMsuZGmKyf9LG49Yvgjj7n/mEuHvV0vhvSgy
- l/MVLYEKEF8G/kKZhTH4X4tRRq80RbYh+jN5FBkz74Nj5Exz3L85gM2qqJvrhIrO4cXQ
- u3F50fynOcIa8rIqn1nXr5Zup0UMOxY9Q+tJ9uaeN+zpyP+42cBEmrcuCrx92kKq7wVt
- skrD+loshc953YHZiHbkgJFL6Fo/e1vSA1D+NpkiORT+Y4Ff0PmQbXJ1bDlRgB2wGaml
- RfGQ==
+ bh=iq1KFJoA98p6DtvxRQlFJBWCGBS14sPc3dak5Jh39TQ=;
+ b=nmCOovqbkpYWl0fi7lgsnGTySv5f1qWHsPoO47IDoqpDFy+9fPSnNWMcZFBhdamOPM
+ FgvAuA8jqK32P+8TQhGs9JU4HBMm8hWuvqyYBR53dMQ31Dof9ChNmRwGKOUKNtMNeMZE
+ 0wruBPmD4qHJ1ni28Fg8lfz9I7SghI9/sYDFPSzYnmQKpwZekEalls59vitnjZ6ZZPl5
+ VcJXGfPFEgTYq2t3762T+QUlGjS5BCNsIEfkJs8ilRuhe1CbNrB7PTYpp1cCVLEs7/qL
+ W5q0uqwmDAmKBsgawDubPsIRLgdH42RqnQA3SMJFWe4rAueWINlNoWr39YGwMZ2exleZ
+ uE8A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731275727; x=1731880527;
+ d=1e100.net; s=20230601; t=1731275731; x=1731880531;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=p1INkIZpbaKNOml5mwV0mfpxrXqeCsNOWByLMf/8qmk=;
- b=mCbz9epsbNIkyNiGi/emgQy7VlTbNdXTuzTY439HfaDybhyInMOLSw1k/+TiZKUyVn
- 1eQp09Pw++XuWE4IKSJKLMORSAIsV2x77Pu6xLBOwZFhEb9KVaAzo4ObF1ElzXyXUJ/D
- rnfat8PEZ9YQJYXOcv997QNo+L6cr/Tobq7ROWZBb1jOobMwtpVuTE/InRa7BQ39Jjut
- 3CajlILM/t6jP0En0rkTKdmnJ0Ykaq9pD/pbg92wVmYEcjkcg08IwYeWiBBXq/RaH0EM
- hdBRLTosyMQaMCpTxLswtuobftugx8AwgP3ubwikqqyzRIaQgVylMXKKHNI1jhLJzDki
- 5kdA==
+ bh=iq1KFJoA98p6DtvxRQlFJBWCGBS14sPc3dak5Jh39TQ=;
+ b=RoLSa9drGRFBqtWKCcPwOP65IGvUPS6BNO80mCQ3N645WpsvAyzo0XLLiBT/LdKW7O
+ Y2FnKh7eYks8yoinIbMcjjdHSJkC0aC/V9c8rfRh2AkRqZTPahDb9SLk9kXvhmqFDSr1
+ Gar1lVBFRbm57CjNNhHELu/NCk4wbDwD/xO0m+NCndbG/NWo1ncn+kP2sr3Hz1jr5fXg
+ DDziD8vI/IgfvF1QZF/Qlop1KBd7R3djVpt3wh6FMY/S18A2JAeCBVCWzGDQTrTZWQvm
+ BhqC9hR2FZUbcH1o1yNSUYstFUQx96pID3x6tf9d4WX2GPGIqlChwtnyezHAUuxXdykI
+ XDVw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCU/lL8UI+KtN22KdNFDoDPpsGP1x2L0mydkOdSpMpBRgSnKCo+kchgRuP2zSS0mmhfGvqNkvxJL0Epc@nongnu.org
-X-Gm-Message-State: AOJu0Yy+cnW3A1h5LGnk9/hTmf3XbpeODs33tw3M1S/BOjK4D4DBlB6v
- Zh1oSiJSrPQSNLSGzKnEWbpKU77Zc2KpOlv+QoQBDKoXACxtEzBe+TrnH6XTxA==
-X-Google-Smtp-Source: AGHT+IEcCr6gfqVaMWjj3km/t08Oe5n/lsUL2a3xquYb2PTwpwCfkg8+jUJZlFYMgiwwVPhtMXXs/w==
-X-Received: by 2002:a17:907:6089:b0:a9a:1fd2:f668 with SMTP id
- a640c23a62f3a-a9eeff0e57bmr955404866b.19.1731275726829; 
- Sun, 10 Nov 2024 13:55:26 -0800 (PST)
+ AJvYcCU8VQRr/Mv8QpHlaxxK4248Y9VAqFTxqbomU7ICJS2STLazvlfAmDH3aWrqzAu57YqIzZQTBy0LwZxv@nongnu.org
+X-Gm-Message-State: AOJu0YzuHzXBR+bve+gJU4+sCT0/Xnos08PiFIVhLnixX3FpwZ5Q2Z4H
+ VyHpiN99Yz9EXHutBA+5i+y0KGhilFTpbQQ/CjM/nxc6vS5Delq0RTd+Tvk3QQ==
+X-Google-Smtp-Source: AGHT+IEIRfh/7PWjIr+kr4R63FkE6nDuIm+A9FOmAhLp7Bh/Q1IJhO7Mj71ivLcLa7k4rOgJLn1Vow==
+X-Received: by 2002:a17:907:1c11:b0:a9e:4b88:e02a with SMTP id
+ a640c23a62f3a-a9eefcd1ad8mr1000988366b.0.1731275730928; 
+ Sun, 10 Nov 2024 13:55:30 -0800 (PST)
 Received: from localhost.localdomain (h082218084190.host.wavenet.at.
  [82.218.84.190]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a9ee0e2f731sm523715566b.189.2024.11.10.13.55.25
+ a640c23a62f3a-a9ee0e2f731sm523715566b.189.2024.11.10.13.55.29
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Sun, 10 Nov 2024 13:55:26 -0800 (PST)
+ Sun, 10 Nov 2024 13:55:30 -0800 (PST)
 From: Phil Dennis-Jordan <phil@philjordan.eu>
 To: qemu-devel@nongnu.org
 Cc: agraf@csgraf.de, phil@philjordan.eu, peter.maydell@linaro.org,
@@ -75,17 +75,17 @@ Cc: agraf@csgraf.de, phil@philjordan.eu, peter.maydell@linaro.org,
  jcmvbkbc@gmail.com, marcandre.lureau@redhat.com, berrange@redhat.com,
  akihiko.odaki@daynix.com, qemu-arm@nongnu.org, qemu-block@nongnu.org,
  qemu-riscv@nongnu.org
-Subject: [PATCH v9 01/16] ui & main loop: Redesign of system-specific main
- thread event handling
-Date: Sun, 10 Nov 2024 22:55:04 +0100
-Message-Id: <20241110215519.49150-2-phil@philjordan.eu>
+Subject: [PATCH v9 03/16] hw/display/apple-gfx: Adds PCI implementation
+Date: Sun, 10 Nov 2024 22:55:06 +0100
+Message-Id: <20241110215519.49150-4-phil@philjordan.eu>
 X-Mailer: git-send-email 2.39.3 (Apple Git-145)
 In-Reply-To: <20241110215519.49150-1-phil@philjordan.eu>
 References: <20241110215519.49150-1-phil@philjordan.eu>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: neutral client-ip=2a00:1450:4864:20::636;
- envelope-from=phil@philjordan.eu; helo=mail-ej1-x636.google.com
+Received-SPF: neutral client-ip=2a00:1450:4864:20::62b;
+ envelope-from=phil@philjordan.eu; helo=mail-ej1-x62b.google.com
 X-Spam_score_int: -10
 X-Spam_score: -1.1
 X-Spam_bar: -
@@ -107,330 +107,219 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-macOS's Cocoa event handling must be done on the initial (main) thread
-of the process. Furthermore, if library or application code uses
-libdispatch, the main dispatch queue must be handling events on the main
-thread as well.
-
-So far, this has affected Qemu in both the Cocoa and SDL UIs, although
-in different ways: the Cocoa UI replaces the default qemu_main function
-with one that spins Qemu's internal main event loop off onto a
-background thread. SDL (which uses Cocoa internally) on the other hand
-uses a polling approach within Qemu's main event loop. Events are
-polled during the SDL UI's dpy_refresh callback, which happens to run
-on the main thread by default.
-
-As UIs are mutually exclusive, this works OK as long as nothing else
-needs platform-native event handling. In the next patch, a new device is
-introduced based on the ParavirtualizedGraphics.framework in macOS.
-This uses libdispatch internally, and only works when events are being
-handled on the main runloop. With the current system, it works when
-using either the Cocoa or the SDL UI. However, it does not when running
-headless. Moreover, any attempt to install a similar scheme to the
-Cocoa UI's main thread replacement fails when combined with the SDL
-UI.
-
-This change tidies up main thread management to be more flexible.
-
- * The qemu_main global function pointer is a custom function for the
-   main thread, and it may now be NULL. When it is, the main thread
-   runs the main Qemu loop. This represents the traditional setup.
- * When non-null, spawning the main Qemu event loop on a separate
-   thread is now done centrally rather than inside the Cocoa UI code.
- * For most platforms, qemu_main is indeed NULL by default, but on
-   Darwin, it defaults to a function that runs the CFRunLoop.
- * The Cocoa UI sets qemu_main to a function which runs the
-   NSApplication event handling runloop, as is usual for a Cocoa app.
- * The SDL UI overrides the qemu_main function to NULL, thus
-   specifying that Qemu's main loop must run on the main
-   thread.
- * The GTK UI also overrides the qemu_main function to NULL.
- * For other UIs, or in the absence of UIs, the platform's default
-   behaviour is followed.
-
-This means that on macOS, the platform's runloop events are always
-handled, regardless of chosen UI. The new PV graphics device will
-thus work in all configurations. There is no functional change on other
-operating systems.
+This change wires up the PCI variant of the paravirtualised
+graphics device, mainly useful for x86-64 macOS guests, implemented
+by macOS's ParavirtualizedGraphics.framework. It builds on code
+shared with the vmapple/mmio variant of the PVG device.
 
 Signed-off-by: Phil Dennis-Jordan <phil@philjordan.eu>
-Reviewed-by: Akihiko Odaki <akihiko.odaki@daynix.com>
 ---
+
+v4:
+
+ * Threading improvements analogous to those in common apple-gfx code
+   and mmio device variant.
+ * Smaller code review issues addressed.
+
 v5:
 
- * Simplified the way of setting/clearing the main loop by going back
-   to setting qemu_main directly, but narrowing the scope of what it
-   needs to do, and it can now be NULL.
+ * Minor error handling improvement.
 
 v6:
 
- * Folded function qemu_run_default_main_on_new_thread's code into
-   main()
- * Removed whitespace changes left over on lines near code removed
-   between v4 and v5
+ * Removed an unused function parameter.
 
 v9:
 
- * Set qemu_main to NULL for GTK UI as well.
+ * Fixup of changed common call.
+ * Whitespace and comment formatting tweaks.
 
- include/qemu-main.h     |  3 +--
- include/qemu/typedefs.h |  1 +
- system/main.c           | 50 ++++++++++++++++++++++++++++++++++----
- ui/cocoa.m              | 54 ++++++++++-------------------------------
- ui/gtk.c                |  3 +++
- ui/sdl2.c               |  4 +++
- 6 files changed, 67 insertions(+), 48 deletions(-)
+ hw/display/Kconfig         |   4 +
+ hw/display/apple-gfx-pci.m | 150 +++++++++++++++++++++++++++++++++++++
+ hw/display/meson.build     |   1 +
+ 3 files changed, 155 insertions(+)
+ create mode 100644 hw/display/apple-gfx-pci.m
 
-diff --git a/include/qemu-main.h b/include/qemu-main.h
-index 940960a7dbc..4bd0d667edc 100644
---- a/include/qemu-main.h
-+++ b/include/qemu-main.h
-@@ -5,7 +5,6 @@
- #ifndef QEMU_MAIN_H
- #define QEMU_MAIN_H
+diff --git a/hw/display/Kconfig b/hw/display/Kconfig
+index 6a9b7b19ada..2b53dfd7d26 100644
+--- a/hw/display/Kconfig
++++ b/hw/display/Kconfig
+@@ -149,3 +149,7 @@ config MAC_PVG_MMIO
+     bool
+     depends on MAC_PVG && AARCH64
  
--int qemu_default_main(void);
--extern int (*qemu_main)(void);
-+extern qemu_main_fn qemu_main;
- 
- #endif /* QEMU_MAIN_H */
-diff --git a/include/qemu/typedefs.h b/include/qemu/typedefs.h
-index 3d84efcac47..b02cfe1f328 100644
---- a/include/qemu/typedefs.h
-+++ b/include/qemu/typedefs.h
-@@ -131,5 +131,6 @@ typedef struct IRQState *qemu_irq;
-  * Function types
-  */
- typedef void (*qemu_irq_handler)(void *opaque, int n, int level);
-+typedef int (*qemu_main_fn)(void);
- 
- #endif /* QEMU_TYPEDEFS_H */
-diff --git a/system/main.c b/system/main.c
-index 9b91d21ea8c..d9397a6d5d0 100644
---- a/system/main.c
-+++ b/system/main.c
-@@ -24,13 +24,14 @@
- 
- #include "qemu/osdep.h"
- #include "qemu-main.h"
-+#include "qemu/main-loop.h"
- #include "sysemu/sysemu.h"
- 
--#ifdef CONFIG_SDL
--#include <SDL.h>
-+#ifdef CONFIG_DARWIN
-+#include <CoreFoundation/CoreFoundation.h>
- #endif
- 
--int qemu_default_main(void)
-+static int qemu_default_main(void)
- {
-     int status;
- 
-@@ -40,10 +41,49 @@ int qemu_default_main(void)
-     return status;
- }
- 
--int (*qemu_main)(void) = qemu_default_main;
++config MAC_PVG_PCI
++    bool
++    depends on MAC_PVG && PCI
++    default y if PCI_DEVICES
+diff --git a/hw/display/apple-gfx-pci.m b/hw/display/apple-gfx-pci.m
+new file mode 100644
+index 00000000000..5a27b95ac79
+--- /dev/null
++++ b/hw/display/apple-gfx-pci.m
+@@ -0,0 +1,150 @@
 +/*
-+ * Various macOS system libraries, including the Cocoa UI and anything using
-+ * libdispatch, such as ParavirtualizedGraphics.framework, requires that the
-+ * main runloop, on the main (initial) thread be running or at least regularly
-+ * polled for events. A special mode is therefore supported, where the QEMU
-+ * main loop runs on a separate thread and the main thread handles the
-+ * CF/Cocoa runloop.
++ * QEMU Apple ParavirtualizedGraphics.framework device, PCI variant
++ *
++ * Copyright © 2023-2024 Phil Dennis-Jordan
++ *
++ * SPDX-License-Identifier: GPL-2.0-or-later
++ *
++ * ParavirtualizedGraphics.framework is a set of libraries that macOS provides
++ * which implements 3d graphics passthrough to the host as well as a
++ * proprietary guest communication channel to drive it. This device model
++ * implements support to drive that library from within QEMU as a PCI device
++ * aimed primarily at x86-64 macOS VMs.
 + */
 +
-+static void *call_qemu_default_main(void *opaque)
++#include "apple-gfx.h"
++#include "hw/pci/pci_device.h"
++#include "hw/pci/msi.h"
++#include "qapi/error.h"
++#include "trace.h"
++#import <ParavirtualizedGraphics/ParavirtualizedGraphics.h>
++
++OBJECT_DECLARE_SIMPLE_TYPE(AppleGFXPCIState, APPLE_GFX_PCI)
++
++struct AppleGFXPCIState {
++    PCIDevice parent_obj;
++
++    AppleGFXState common;
++};
++
++static const char* apple_gfx_pci_option_rom_path = NULL;
++
++static void apple_gfx_init_option_rom_path(void)
 +{
-+    int status;
-+
-+    bql_lock();
-+    status = qemu_default_main();
-+    bql_unlock();
-+
-+    exit(status);
++    NSURL *option_rom_url = PGCopyOptionROMURL();
++    const char *option_rom_path = option_rom_url.fileSystemRepresentation;
++    apple_gfx_pci_option_rom_path = g_strdup(option_rom_path);
++    [option_rom_url release];
 +}
 +
-+#ifdef CONFIG_DARWIN
-+static int os_darwin_cfrunloop_main(void)
++static void apple_gfx_pci_init(Object *obj)
 +{
-+    CFRunLoopRun();
-+    abort();
-+}
++    AppleGFXPCIState *s = APPLE_GFX_PCI(obj);
 +
-+qemu_main_fn qemu_main = os_darwin_cfrunloop_main;
-+#else
-+qemu_main_fn qemu_main;
-+#endif
- 
- int main(int argc, char **argv)
- {
-+    QemuThread main_loop_thread;
-+
-     qemu_init(argc, argv);
--    return qemu_main();
-+    if (qemu_main) {
-+        qemu_thread_create(&main_loop_thread, "qemu_main",
-+                           call_qemu_default_main, NULL, QEMU_THREAD_DETACHED);
-+        bql_unlock();
-+        return qemu_main();
-+    } else {
-+        qemu_default_main();
++    if (!apple_gfx_pci_option_rom_path) {
++        /*
++         * The following is done on device not class init to avoid running
++         * ObjC code before fork() in -daemonize mode.
++         */
++        PCIDeviceClass *pci = PCI_DEVICE_CLASS(object_get_class(obj));
++        apple_gfx_init_option_rom_path();
++        pci->romfile = apple_gfx_pci_option_rom_path;
 +    }
- }
-diff --git a/ui/cocoa.m b/ui/cocoa.m
-index 4c2dd335323..30b8920d929 100644
---- a/ui/cocoa.m
-+++ b/ui/cocoa.m
-@@ -73,6 +73,8 @@
-     int height;
- } QEMUScreen;
- 
-+@class QemuCocoaPasteboardTypeOwner;
 +
- static void cocoa_update(DisplayChangeListener *dcl,
-                          int x, int y, int w, int h);
- 
-@@ -107,6 +109,7 @@ static void cocoa_switch(DisplayChangeListener *dcl,
- static NSInteger cbchangecount = -1;
- static QemuClipboardInfo *cbinfo;
- static QemuEvent cbevent;
-+static QemuCocoaPasteboardTypeOwner *cbowner;
- 
- // Utility functions to run specified code block with the BQL held
- typedef void (^CodeBlock)(void);
-@@ -1321,8 +1324,10 @@ - (void) dealloc
- {
-     COCOA_DEBUG("QemuCocoaAppController: dealloc\n");
- 
--    if (cocoaView)
--        [cocoaView release];
-+    [cocoaView release];
-+    [cbowner release];
-+    cbowner = nil;
++    apple_gfx_common_init(obj, &s->common, TYPE_APPLE_GFX_PCI);
++}
 +
-     [super dealloc];
- }
- 
-@@ -1938,8 +1943,6 @@ - (void)pasteboard:(NSPasteboard *)sender provideDataForType:(NSPasteboardType)t
- 
- @end
- 
--static QemuCocoaPasteboardTypeOwner *cbowner;
--
- static void cocoa_clipboard_notify(Notifier *notifier, void *data);
- static void cocoa_clipboard_request(QemuClipboardInfo *info,
-                                     QemuClipboardType type);
-@@ -2002,43 +2005,8 @@ static void cocoa_clipboard_request(QemuClipboardInfo *info,
-     }
- }
- 
--/*
-- * The startup process for the OSX/Cocoa UI is complicated, because
-- * OSX insists that the UI runs on the initial main thread, and so we
-- * need to start a second thread which runs the qemu_default_main():
-- * in main():
-- *  in cocoa_display_init():
-- *   assign cocoa_main to qemu_main
-- *   create application, menus, etc
-- *  in cocoa_main():
-- *   create qemu-main thread
-- *   enter OSX run loop
-- */
--
--static void *call_qemu_main(void *opaque)
--{
--    int status;
--
--    COCOA_DEBUG("Second thread: calling qemu_default_main()\n");
--    bql_lock();
--    status = qemu_default_main();
--    bql_unlock();
--    COCOA_DEBUG("Second thread: qemu_default_main() returned, exiting\n");
--    [cbowner release];
--    exit(status);
--}
--
- static int cocoa_main(void)
- {
--    QemuThread thread;
--
--    COCOA_DEBUG("Entered %s()\n", __func__);
--
--    bql_unlock();
--    qemu_thread_create(&thread, "qemu_main", call_qemu_main,
--                       NULL, QEMU_THREAD_DETACHED);
--
--    // Start the main event loop
-     COCOA_DEBUG("Main thread: entering OSX run loop\n");
-     [NSApp run];
-     COCOA_DEBUG("Main thread: left OSX run loop, which should never happen\n");
-@@ -2120,8 +2088,6 @@ static void cocoa_display_init(DisplayState *ds, DisplayOptions *opts)
- 
-     COCOA_DEBUG("qemu_cocoa: cocoa_display_init\n");
- 
--    qemu_main = cocoa_main;
--
-     // Pull this console process up to being a fully-fledged graphical
-     // app with a menubar and Dock icon
-     ProcessSerialNumber psn = { 0, kCurrentProcess };
-@@ -2185,6 +2151,12 @@ static void cocoa_display_init(DisplayState *ds, DisplayOptions *opts)
-     qemu_clipboard_peer_register(&cbpeer);
- 
-     [pool release];
++typedef struct AppleGFXPCIInterruptJob {
++    PCIDevice *device;
++    uint32_t vector;
++} AppleGFXPCIInterruptJob;
 +
-+    /*
-+     * The Cocoa UI will run the NSApplication runloop on the main thread
-+     * rather than the default Core Foundation one.
-+     */
-+    qemu_main = cocoa_main;
- }
- 
- static QemuDisplay qemu_display_cocoa = {
-diff --git a/ui/gtk.c b/ui/gtk.c
-index bf9d3dd679a..1694146ae37 100644
---- a/ui/gtk.c
-+++ b/ui/gtk.c
-@@ -38,6 +38,7 @@
- #include "qemu/cutils.h"
- #include "qemu/error-report.h"
- #include "qemu/main-loop.h"
-+#include "qemu-main.h"
- 
- #include "ui/console.h"
- #include "ui/gtk.h"
-@@ -2485,6 +2486,8 @@ static void gtk_display_init(DisplayState *ds, DisplayOptions *opts)
- #ifdef CONFIG_GTK_CLIPBOARD
-     gd_clipboard_init(s);
- #endif /* CONFIG_GTK_CLIPBOARD */
++static void apple_gfx_pci_raise_interrupt(void *opaque)
++{
++    AppleGFXPCIInterruptJob *job = opaque;
 +
-+    qemu_main = NULL;
- }
- 
- static void early_gtk_display_init(DisplayOptions *opts)
-diff --git a/ui/sdl2.c b/ui/sdl2.c
-index bd4f5a9da14..44ab2762262 100644
---- a/ui/sdl2.c
-+++ b/ui/sdl2.c
-@@ -34,6 +34,7 @@
- #include "sysemu/sysemu.h"
- #include "ui/win32-kbd-hook.h"
- #include "qemu/log.h"
-+#include "qemu-main.h"
- 
- static int sdl2_num_outputs;
- static struct sdl2_console *sdl2_console;
-@@ -965,6 +966,9 @@ static void sdl2_display_init(DisplayState *ds, DisplayOptions *o)
-     }
- 
-     atexit(sdl_cleanup);
++    if (msi_enabled(job->device)) {
++        msi_notify(job->device, job->vector);
++    }
++    g_free(job);
++}
 +
-+    /* SDL's event polling (in dpy_refresh) must happen on the main thread. */
-+    qemu_main = NULL;
- }
++static void apple_gfx_pci_interrupt(PCIDevice *dev, uint32_t vector)
++{
++    AppleGFXPCIInterruptJob *job;
++
++    trace_apple_gfx_raise_irq(vector);
++    job = g_malloc0(sizeof(*job));
++    job->device = dev;
++    job->vector = vector;
++    aio_bh_schedule_oneshot(qemu_get_aio_context(),
++                            apple_gfx_pci_raise_interrupt, job);
++}
++
++static void apple_gfx_pci_realize(PCIDevice *dev, Error **errp)
++{
++    AppleGFXPCIState *s = APPLE_GFX_PCI(dev);
++    int ret;
++
++    pci_register_bar(dev, PG_PCI_BAR_MMIO,
++                     PCI_BASE_ADDRESS_SPACE_MEMORY, &s->common.iomem_gfx);
++
++    ret = msi_init(dev, 0x0 /* config offset; 0 = find space */,
++                   PG_PCI_MAX_MSI_VECTORS, true /* msi64bit */,
++                   false /* msi_per_vector_mask */, errp);
++    if (ret != 0) {
++        return;
++    }
++
++    @autoreleasepool {
++        PGDeviceDescriptor *desc = [PGDeviceDescriptor new];
++        desc.raiseInterrupt = ^(uint32_t vector) {
++            apple_gfx_pci_interrupt(dev, vector);
++        };
++
++        apple_gfx_common_realize(&s->common, DEVICE(dev), desc, errp);
++        [desc release];
++        desc = nil;
++    }
++}
++
++static void apple_gfx_pci_reset(Object *obj, ResetType type)
++{
++    AppleGFXPCIState *s = APPLE_GFX_PCI(obj);
++    [s->common.pgdev reset];
++}
++
++static void apple_gfx_pci_class_init(ObjectClass *klass, void *data)
++{
++    DeviceClass *dc = DEVICE_CLASS(klass);
++    PCIDeviceClass *pci = PCI_DEVICE_CLASS(klass);
++    ResettableClass *rc = RESETTABLE_CLASS(klass);
++
++    rc->phases.hold = apple_gfx_pci_reset;
++    dc->desc = "macOS Paravirtualized Graphics PCI Display Controller";
++    dc->hotpluggable = false;
++    set_bit(DEVICE_CATEGORY_DISPLAY, dc->categories);
++
++    pci->vendor_id = PG_PCI_VENDOR_ID;
++    pci->device_id = PG_PCI_DEVICE_ID;
++    pci->class_id = PCI_CLASS_DISPLAY_OTHER;
++    pci->realize = apple_gfx_pci_realize;
++
++    // TODO: Property for setting mode list
++}
++
++static TypeInfo apple_gfx_pci_types[] = {
++    {
++        .name          = TYPE_APPLE_GFX_PCI,
++        .parent        = TYPE_PCI_DEVICE,
++        .instance_size = sizeof(AppleGFXPCIState),
++        .class_init    = apple_gfx_pci_class_init,
++        .instance_init = apple_gfx_pci_init,
++        .interfaces = (InterfaceInfo[]) {
++            { INTERFACE_PCIE_DEVICE },
++            { },
++        },
++    }
++};
++DEFINE_TYPES(apple_gfx_pci_types)
++
+diff --git a/hw/display/meson.build b/hw/display/meson.build
+index 619e642905a..78e1c41ea0a 100644
+--- a/hw/display/meson.build
++++ b/hw/display/meson.build
+@@ -65,6 +65,7 @@ system_ss.add(when: 'CONFIG_MAC_PVG',         if_true: [files('apple-gfx.m'), pv
+ if cpu == 'aarch64'
+   system_ss.add(when: 'CONFIG_MAC_PVG_MMIO',  if_true: [files('apple-gfx-mmio.m'), pvg, metal])
+ endif
++system_ss.add(when: 'CONFIG_MAC_PVG_PCI',     if_true: [files('apple-gfx-pci.m'), pvg, metal])
  
- static QemuDisplay qemu_display_sdl2 = {
+ if config_all_devices.has_key('CONFIG_VIRTIO_GPU')
+   virtio_gpu_ss = ss.source_set()
 -- 
 2.39.3 (Apple Git-145)
 
