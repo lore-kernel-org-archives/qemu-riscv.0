@@ -4,63 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 058D8D12D55
-	for <qemu-riscv@archiver.kernel.org>; Sun, 10 Nov 2024 22:01:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 91AC7D12D59
+	for <qemu-riscv@archiver.kernel.org>; Sun, 10 Nov 2024 22:01:38 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tAFuN-0003nT-22; Sun, 10 Nov 2024 16:55:47 -0500
+	id 1tAFuP-0003rd-RZ; Sun, 10 Nov 2024 16:55:49 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <phil@philjordan.eu>)
- id 1tAFuH-0003gz-5J
- for qemu-riscv@nongnu.org; Sun, 10 Nov 2024 16:55:42 -0500
-Received: from mail-ej1-x630.google.com ([2a00:1450:4864:20::630])
+ id 1tAFuL-0003ld-J7
+ for qemu-riscv@nongnu.org; Sun, 10 Nov 2024 16:55:45 -0500
+Received: from mail-ej1-x62a.google.com ([2a00:1450:4864:20::62a])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <phil@philjordan.eu>)
- id 1tAFuD-0003xA-SE
- for qemu-riscv@nongnu.org; Sun, 10 Nov 2024 16:55:40 -0500
-Received: by mail-ej1-x630.google.com with SMTP id
- a640c23a62f3a-a9a6acac4c3so642765466b.0
- for <qemu-riscv@nongnu.org>; Sun, 10 Nov 2024 13:55:36 -0800 (PST)
+ id 1tAFuJ-00040V-GG
+ for qemu-riscv@nongnu.org; Sun, 10 Nov 2024 16:55:45 -0500
+Received: by mail-ej1-x62a.google.com with SMTP id
+ a640c23a62f3a-a99cc265e0aso609917566b.3
+ for <qemu-riscv@nongnu.org>; Sun, 10 Nov 2024 13:55:43 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=philjordan-eu.20230601.gappssmtp.com; s=20230601; t=1731275736; x=1731880536;
+ d=philjordan-eu.20230601.gappssmtp.com; s=20230601; t=1731275742; x=1731880542;
  darn=nongnu.org; 
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=OIhXQnoj/9ouYAI2nP3PoRv/lz28A9hOVY2Snhhf/9M=;
- b=SeHQ5o/do/7angSREGqS65fkKuSyhDB9B3AIvEPyTCuOuw1KZOgz79nc5XeTGvLikV
- 0bUGv+QPTcSRnWNCS4g83ik+b7CSifp/ccdyhZIHbtDWZSFmtk9mt85YwwI2z+2Puo9k
- YrCWIK3AL6gwAf1M4SlZARKuf74aSUSYB0gE/yu8/4dov2Vzn0pJV1xlz3Y52ZGljP7A
- yG6V5SA9XwOlBw2JQG7c2qMLLlFnopXdqFMA9TQ1hunBz9dBYWuHWFmkM00c9h9cHr+n
- pIgpvRO5Mhxv7YWIGbkkvWfnPodTRb1Gk1J7dby1J/tP6wQO89u5ecee7d2WYiamn5Pv
- 64oQ==
+ bh=IOlf/wzEJ+wM7g5BTurCACeEWddAq/2jF0kyAkwof9o=;
+ b=fkzxlQcxU547idvGrXJ+MC5R7FX+23Gbvfs39lgS5u8G5mF60FfB9R/DyqOs8hWLPq
+ 3AjZyOUYpUZZWDNNd2xt3OcDGZHEe4PhjAiplJnfcxVqFTZkifotAtZboL1zQdOBAZ3c
+ VTRJPaYukcWq6oby/OAqA3pr+4pXuP8a5q1AguONORXJvUB04A+Evb6gC94855QMc0pG
+ vibOx2GE7e4nGMce6mWnMpP1zpaY+CJC2WOm+HRbWNv8UJFyNHt4kG+th4YwXGRLqKJ8
+ D859kLuNpxafxuyRy7WrH62WECRygaOQfBF+gw5gAxv8i15c+ZhxZ+eGFLDSP0GrEGtG
+ QJQg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731275736; x=1731880536;
+ d=1e100.net; s=20230601; t=1731275742; x=1731880542;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=OIhXQnoj/9ouYAI2nP3PoRv/lz28A9hOVY2Snhhf/9M=;
- b=rGPTdIJBDJuz9bfXKlOxZGz4oU6Y9jvCKYCkavlEkn3VOJQ+0FWPY4dlKhFae4KH9i
- JeCLDQKR4SP+cATjtYU3qnXhoW7gx0JTribdCD9nGj59MTUjPXHQrkJOCl1x+p5Cca6T
- FyOQWS2ICUabdQ+2HdQoLhtTPzYYNZR9SxnM3p0X1Z/rImPCaOf88VVCD9NH4k1rBUl7
- FpDc//6G57lvEe3HuGu82TuJOINae6nVJE1tnCNEAYF/k+QU9mVZpFykxLvVYcC9qP7j
- 8vEXNBOm4E7E5wg7YYhelp36qRG3CHKSfyhmv/VPdqXVOe6zNnruEtU81sHb0ScrbXH7
- Vbig==
+ bh=IOlf/wzEJ+wM7g5BTurCACeEWddAq/2jF0kyAkwof9o=;
+ b=NvRG4a6TcZoPh4xvmN76a8y1wM3Ege19WHAWlT4K10V8ewMMHyNG5YHkvljg2V9yNK
+ xyPfxlaZ68lbdgVR1h/ZrtEcUg9Ca7xTi/X8F4qVK7rEj1opG0emKd/8R8InCkuEAJ6L
+ GU899cNDc1Sl/vsY9Lnzv2krlXa4DTs2IluOXvQev06Ll4ZHs5rc4qPUN6TLQXAYwnR7
+ GNwpX2/iFlepxTcjMmPsal/iBGwX2tGdBh13nhjobTritBYsoiJVgncakp8R25J6ib6d
+ h87azuBQl9oxL3CUFgECjwiK6DtaWsh0QLtIamf52GSeq74y1MArFNjUxBwvIbKEyTU4
+ yC4g==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUeCPEyCblgJbCNSPjR63BqKibdsx03uTr8hAw1vz+1I/Nsq3CQXSo8n0u5514yHHXIiG+JY6HWCzc2@nongnu.org
-X-Gm-Message-State: AOJu0Yzh0qzjiKQQHnyasMzUE7iWMwPcGr+crsyZbNEWw6l5A0hHQkms
- I/fXY33Of5RObhy8JHtvSbtnsWjyUmLOZvL3PicTT9J4f7JP+6bUVs0pR9wZsA==
-X-Google-Smtp-Source: AGHT+IF9f02dQgCnAPmnuJzS8tQ5X3Ck+eKkPPWQRbz1SeOhRefX2YpNfwAtB+hKn7PsFTqZb4LSoQ==
-X-Received: by 2002:a17:907:c09:b0:a9e:45e6:42cb with SMTP id
- a640c23a62f3a-a9eefee4bddmr1033790966b.18.1731275735589; 
- Sun, 10 Nov 2024 13:55:35 -0800 (PST)
+ AJvYcCXYGocz+8XvciAsxzax4oJv+SHP7PoFvlIBY/16uw8e5hnZeI+T+VkzjL1TqJqGc3KcOEMXvcaxhAww@nongnu.org
+X-Gm-Message-State: AOJu0YzQmMYQuVbupEF+gGkN7o09ezLaMj493xvUcjuBJztNWrm+/HGC
+ JoIeFLOgqp0G8aFTmaNuNY6Pp0qegjwxa1gqRP48oU9mJurJxAHXofcW5fXvYg==
+X-Google-Smtp-Source: AGHT+IFFmOXyc6ptj6nmG0SSXnGWKaTRApyRiD1sYoG+6LVBtyK7NJWvG2iS3P162et5AwdCJI1CgQ==
+X-Received: by 2002:a17:907:318e:b0:a9a:cf6:b629 with SMTP id
+ a640c23a62f3a-a9eeff4458amr1035374866b.29.1731275742123; 
+ Sun, 10 Nov 2024 13:55:42 -0800 (PST)
 Received: from localhost.localdomain (h082218084190.host.wavenet.at.
  [82.218.84.190]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-a9ee0e2f731sm523715566b.189.2024.11.10.13.55.33
+ a640c23a62f3a-a9ee0e2f731sm523715566b.189.2024.11.10.13.55.40
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Sun, 10 Nov 2024 13:55:35 -0800 (PST)
+ Sun, 10 Nov 2024 13:55:41 -0800 (PST)
 From: Phil Dennis-Jordan <phil@philjordan.eu>
 To: qemu-devel@nongnu.org
 Cc: agraf@csgraf.de, phil@philjordan.eu, peter.maydell@linaro.org,
@@ -74,19 +74,17 @@ Cc: agraf@csgraf.de, phil@philjordan.eu, peter.maydell@linaro.org,
  dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com,
  jcmvbkbc@gmail.com, marcandre.lureau@redhat.com, berrange@redhat.com,
  akihiko.odaki@daynix.com, qemu-arm@nongnu.org, qemu-block@nongnu.org,
- qemu-riscv@nongnu.org, Roman Bolshakov <rbolshakov@ddn.com>
-Subject: [PATCH v9 05/16] MAINTAINERS: Add myself as maintainer for apple-gfx,
- reviewer for HVF
-Date: Sun, 10 Nov 2024 22:55:08 +0100
-Message-Id: <20241110215519.49150-6-phil@philjordan.eu>
+ qemu-riscv@nongnu.org, Alexander Graf <graf@amazon.com>
+Subject: [PATCH v9 08/16] hvf: arm: Ignore writes to CNTP_CTL_EL0
+Date: Sun, 10 Nov 2024 22:55:11 +0100
+Message-Id: <20241110215519.49150-9-phil@philjordan.eu>
 X-Mailer: git-send-email 2.39.3 (Apple Git-145)
 In-Reply-To: <20241110215519.49150-1-phil@philjordan.eu>
 References: <20241110215519.49150-1-phil@philjordan.eu>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: neutral client-ip=2a00:1450:4864:20::630;
- envelope-from=phil@philjordan.eu; helo=mail-ej1-x630.google.com
+Received-SPF: neutral client-ip=2a00:1450:4864:20::62a;
+ envelope-from=phil@philjordan.eu; helo=mail-ej1-x62a.google.com
 X-Spam_score_int: -10
 X-Spam_score: -1.1
 X-Spam_bar: -
@@ -108,56 +106,53 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-I'm happy to take responsibility for the macOS PV graphics code. As
-HVF patches don't seem to get much attention at the moment, I'm also
-adding myself as designated reviewer for HVF and x86 HVF to try and
-improve that.
+From: Alexander Graf <graf@amazon.com>
 
-I anticipate that the resulting workload should be covered by the
-funding I'm receiving for improving Qemu in combination with macOS. As
-of right now this runs out at the end of 2024; I expect the workload on
-apple-gfx should be relatively minor and manageable in my spare time
-beyond that. I may have to remove myself from more general HVF duties
-once the contract runs out if it's more than I can manage.
+MacOS unconditionally disables interrupts of the physical timer on boot
+and then continues to use the virtual one. We don't really want to support
+a full physical timer emulation, so let's just ignore those writes.
 
+Signed-off-by: Alexander Graf <graf@amazon.com>
 Signed-off-by: Phil Dennis-Jordan <phil@philjordan.eu>
-Reviewed-by: Roman Bolshakov <rbolshakov@ddn.com>
+Reviewed-by: Akihiko Odaki <akihiko.odaki@daynix.com>
 ---
- MAINTAINERS | 7 +++++++
- 1 file changed, 7 insertions(+)
+ target/arm/hvf/hvf.c | 9 +++++++++
+ 1 file changed, 9 insertions(+)
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index 095420f8b0e..b28267b6286 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -507,6 +507,7 @@ F: target/arm/hvf/
- X86 HVF CPUs
- M: Cameron Esfahani <dirty@apple.com>
- M: Roman Bolshakov <rbolshakov@ddn.com>
-+R: Phil Dennis-Jordan <phil@philjordan.eu>
- W: https://wiki.qemu.org/Features/HVF
- S: Maintained
- F: target/i386/hvf/
-@@ -514,6 +515,7 @@ F: target/i386/hvf/
- HVF
- M: Cameron Esfahani <dirty@apple.com>
- M: Roman Bolshakov <rbolshakov@ddn.com>
-+R: Phil Dennis-Jordan <phil@philjordan.eu>
- W: https://wiki.qemu.org/Features/HVF
- S: Maintained
- F: accel/hvf/
-@@ -2609,6 +2611,11 @@ F: hw/display/edid*
- F: include/hw/display/edid.h
- F: qemu-edid.c
+diff --git a/target/arm/hvf/hvf.c b/target/arm/hvf/hvf.c
+index 6cea483d422..b45b764dfd0 100644
+--- a/target/arm/hvf/hvf.c
++++ b/target/arm/hvf/hvf.c
+@@ -11,6 +11,7 @@
  
-+macOS PV Graphics (apple-gfx)
-+M: Phil Dennis-Jordan <phil@philjordan.eu>
-+S: Maintained
-+F: hw/display/apple-gfx*
-+
- PIIX4 South Bridge (i82371AB)
- M: Hervé Poussineau <hpoussin@reactos.org>
- M: Philippe Mathieu-Daudé <philmd@linaro.org>
+ #include "qemu/osdep.h"
+ #include "qemu/error-report.h"
++#include "qemu/log.h"
+ 
+ #include "sysemu/runstate.h"
+ #include "sysemu/hvf.h"
+@@ -184,6 +185,7 @@ void hvf_arm_init_debug(void)
+ #define SYSREG_OSLSR_EL1      SYSREG(2, 0, 1, 1, 4)
+ #define SYSREG_OSDLR_EL1      SYSREG(2, 0, 1, 3, 4)
+ #define SYSREG_CNTPCT_EL0     SYSREG(3, 3, 14, 0, 1)
++#define SYSREG_CNTP_CTL_EL0   SYSREG(3, 3, 14, 2, 1)
+ #define SYSREG_PMCR_EL0       SYSREG(3, 3, 9, 12, 0)
+ #define SYSREG_PMUSERENR_EL0  SYSREG(3, 3, 9, 14, 0)
+ #define SYSREG_PMCNTENSET_EL0 SYSREG(3, 3, 9, 12, 1)
+@@ -1620,6 +1622,13 @@ static int hvf_sysreg_write(CPUState *cpu, uint32_t reg, uint64_t val)
+     case SYSREG_OSLAR_EL1:
+         env->cp15.oslsr_el1 = val & 1;
+         return 0;
++    case SYSREG_CNTP_CTL_EL0:
++        /*
++         * Guests should not rely on the physical counter, but macOS emits
++         * disable writes to it. Let it do so, but ignore the requests.
++         */
++        qemu_log_mask(LOG_UNIMP, "Unsupported write to CNTP_CTL_EL0\n");
++        return 0;
+     case SYSREG_OSDLR_EL1:
+         /* Dummy register */
+         return 0;
 -- 
 2.39.3 (Apple Git-145)
 
