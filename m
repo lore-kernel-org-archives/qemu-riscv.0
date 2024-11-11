@@ -4,96 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 25440D12D72
-	for <qemu-riscv@archiver.kernel.org>; Mon, 11 Nov 2024 05:10:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 798BAD2E9C3
+	for <qemu-riscv@archiver.kernel.org>; Mon, 11 Nov 2024 09:13:34 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tAMgj-00060X-G8; Mon, 11 Nov 2024 00:10:09 -0500
+	id 1tAQTp-00048V-Bh; Mon, 11 Nov 2024 04:13:05 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <akihiko.odaki@daynix.com>)
- id 1tAMgh-00060F-Pd
- for qemu-riscv@nongnu.org; Mon, 11 Nov 2024 00:10:07 -0500
-Received: from mail-pj1-x102d.google.com ([2607:f8b0:4864:20::102d])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <akihiko.odaki@daynix.com>)
- id 1tAMge-00081k-LP
- for qemu-riscv@nongnu.org; Mon, 11 Nov 2024 00:10:07 -0500
-Received: by mail-pj1-x102d.google.com with SMTP id
- 98e67ed59e1d1-2e2e2d09decso3840272a91.1
- for <qemu-riscv@nongnu.org>; Sun, 10 Nov 2024 21:10:04 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=daynix-com.20230601.gappssmtp.com; s=20230601; t=1731301803; x=1731906603;
- darn=nongnu.org; 
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=34m+p+g+g1ZksKJT1TgMID5xJ0qQ52/0886R0zeE3Yw=;
- b=CybUmxQsq42sr5jCf03Sz69TcQuyGlOY9qZSCqxg9pUQDB2bx5722W9TvAzvpCeh9F
- MKwPNqqGODJGDMzAX1zPIrmeyaC9/qQ3C/ct0TlEtf/xvcbuV0g74Jkz1zNKaGeXQ/C4
- sghMovFV625LV+F4IyYCvbyCgt5Ig1fDbvcv9XRVRdgNq56Z1mE7zfLF7Ury1w3eZJRi
- 7W1vJQQZeazwWMcA+ljh1hNJ5AZ3JLdRmwtb+MshAUwMuMiWUXTaWRcRqMgXRIK70Tqn
- IIpathvDzRtMQkeLusJWDyoMKe+9bXlTtt1TXn9/catn5r0KayiW7pIndGtAypexz9br
- +2rg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731301803; x=1731906603;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=34m+p+g+g1ZksKJT1TgMID5xJ0qQ52/0886R0zeE3Yw=;
- b=ZoR6g2RPRAW0iooyhkOBuXAyPfvYXe0a+SX708ULyypVZT4zyUc+7LncYmRZREd3GV
- t8AIDxqUwvayjd2bw2hEEjjtYqqZqcXvpr4YwBvLklDgNQ034S7IoCggAyTyEs6bg+BQ
- BXvDxJ69oWe0SjThSyJquNzfOmwNKeDduCeimUkjR0vUm2ZwWZyND+nGGbu58RUNpL+m
- fx1PbBNINRust9luY7xaoMfdJuJGhC/hMWH//Bjwnwk3FMJgDrw9JvFdHXkoYuICaWYr
- fSeYdwf9/9cni8rEQR2dES5keM40agevoRMoHULaboREzKNlk0MCZ8dErTEzYGWclYiP
- 9sVA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUHQ30S6EHPa3OuchWgG/TOavXdOXZ1WtabGjegOiGes6qyvrQM5pRIq2PWBZxqRT9pQ0DR3dORynAj@nongnu.org
-X-Gm-Message-State: AOJu0YwtFqveFAOya7Jb4FZ0el/snA+9PCicjvr+K9YUxU0yj/dND/7c
- KG/r45w2oZ2XdJuZckdYizMTYMdG7Y3GhidLg94rssXvYf5o2vvEy0uANbWpBN1dHpjLFoiByxY
- ilrU=
-X-Google-Smtp-Source: AGHT+IGb8/SI4YNitz1bCYMeUFvL9X8OE5f5neq4Tw8O1MYPP+tQg0Z1fVQuVO+1IA0M+IkoWJ2clA==
-X-Received: by 2002:a17:90b:1b01:b0:2e3:109:5147 with SMTP id
- 98e67ed59e1d1-2e9b0b3bef0mr16184634a91.17.1731301802888; 
- Sun, 10 Nov 2024 21:10:02 -0800 (PST)
-Received: from [157.82.207.107] ([157.82.207.107])
- by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-2e9b46bfae2sm5480120a91.19.2024.11.10.21.09.56
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sun, 10 Nov 2024 21:10:02 -0800 (PST)
-Message-ID: <9865a415-3d7a-4dd3-9140-8c417c5d3ee8@daynix.com>
-Date: Mon, 11 Nov 2024 14:09:55 +0900
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v9 16/16] hw/vmapple/virtio-blk: Replace variant types
- with property on base
-To: Phil Dennis-Jordan <phil@philjordan.eu>, qemu-devel@nongnu.org
-Cc: agraf@csgraf.de, peter.maydell@linaro.org, pbonzini@redhat.com,
+ (Exim 4.90_1) (envelope-from <berrange@redhat.com>)
+ id 1tAQPd-0002wh-IZ
+ for qemu-riscv@nongnu.org; Mon, 11 Nov 2024 04:08:45 -0500
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <berrange@redhat.com>)
+ id 1tAQPa-0006LW-LH
+ for qemu-riscv@nongnu.org; Mon, 11 Nov 2024 04:08:45 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1731316120;
+ h=from:from:reply-to:reply-to:subject:subject:date:date:
+ message-id:message-id:to:to:cc:cc:mime-version:mime-version:
+ content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=Ycpa2WQtoXFERsCdhsQn4GlsqBXBVUgQjJ2umhKNsHU=;
+ b=Mg451vxbbR5OlSl2dfUhMZZzn4Wi6WNVI/4FIlFWpGa4l5VAno1QUqglahPAcpHzkqAgyC
+ KXK3gymFaJtBNGAXB6vx13r/Vgmp+pdgYFdMERPSGc7kj6O9c5V++QvOz9QUQEo271hOn2
+ HTu7S+NfRjm6NDjDm+gPSQOT9G2HxiA=
+Received: from mx-prod-mc-01.mail-002.prod.us-west-2.aws.redhat.com
+ (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
+ relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-179-qPHxz3ksNZeGQeLN47Sxhw-1; Mon,
+ 11 Nov 2024 04:08:37 -0500
+X-MC-Unique: qPHxz3ksNZeGQeLN47Sxhw-1
+X-Mimecast-MFC-AGG-ID: qPHxz3ksNZeGQeLN47Sxhw
+Received: from mx-prod-int-04.mail-002.prod.us-west-2.aws.redhat.com
+ (mx-prod-int-04.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.40])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mx-prod-mc-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id 7DBD41955BCF; Mon, 11 Nov 2024 09:08:32 +0000 (UTC)
+Received: from redhat.com (unknown [10.42.28.111])
+ by mx-prod-int-04.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id 441C81956054; Mon, 11 Nov 2024 09:08:19 +0000 (UTC)
+Date: Mon, 11 Nov 2024 09:08:16 +0000
+From: Daniel =?utf-8?B?UC4gQmVycmFuZ8Op?= <berrange@redhat.com>
+To: Phil Dennis-Jordan <phil@philjordan.eu>
+Cc: Akihiko Odaki <akihiko.odaki@daynix.com>, qemu-devel@nongnu.org,
+ agraf@csgraf.de, peter.maydell@linaro.org, pbonzini@redhat.com,
  rad@semihalf.com, quic_llindhol@quicinc.com, stefanha@redhat.com,
  mst@redhat.com, slp@redhat.com, richard.henderson@linaro.org,
- eduardo@habkost.net, marcel.apfelbaum@gmail.com, gaosong@loongson.cn,
- jiaxun.yang@flygoat.com, chenhuacai@kernel.org, kwolf@redhat.com,
- hreitz@redhat.com, philmd@linaro.org, shorne@gmail.com, palmer@dabbelt.com,
- alistair.francis@wdc.com, bmeng.cn@gmail.com, liwei1518@gmail.com,
- dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com, jcmvbkbc@gmail.com,
- marcandre.lureau@redhat.com, berrange@redhat.com, qemu-arm@nongnu.org,
+ eduardo@habkost.net, marcel.apfelbaum@gmail.com,
+ gaosong@loongson.cn, jiaxun.yang@flygoat.com, chenhuacai@kernel.org,
+ kwolf@redhat.com, hreitz@redhat.com, philmd@linaro.org,
+ shorne@gmail.com, palmer@dabbelt.com, alistair.francis@wdc.com,
+ bmeng.cn@gmail.com, liwei1518@gmail.com, dbarboza@ventanamicro.com,
+ zhiwei_liu@linux.alibaba.com, jcmvbkbc@gmail.com,
+ marcandre.lureau@redhat.com, qemu-arm@nongnu.org,
  qemu-block@nongnu.org, qemu-riscv@nongnu.org
-References: <20241110215519.49150-1-phil@philjordan.eu>
- <20241110215519.49150-17-phil@philjordan.eu>
-Content-Language: en-US
-From: Akihiko Odaki <akihiko.odaki@daynix.com>
-In-Reply-To: <20241110215519.49150-17-phil@philjordan.eu>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::102d;
- envelope-from=akihiko.odaki@daynix.com; helo=mail-pj1-x102d.google.com
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+Subject: Re: [PATCH v8 01/15] ui & main loop: Redesign of system-specific
+ main thread event handling
+Message-ID: <ZzHJgAbBJZYrSt84@redhat.com>
+References: <20241108144709.95498-1-phil@philjordan.eu>
+ <20241108144709.95498-2-phil@philjordan.eu>
+ <9c2e0b96-2125-4041-9f66-116d54accb04@daynix.com>
+ <CAAibmn3NbtOEwWLQFOo_UmAGTehOj+dDP04A=-JGMZVK9AYMDw@mail.gmail.com>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <CAAibmn3NbtOEwWLQFOo_UmAGTehOj+dDP04A=-JGMZVK9AYMDw@mail.gmail.com>
+User-Agent: Mutt/2.2.12 (2023-09-09)
+X-Scanned-By: MIMEDefang 3.0 on 10.30.177.40
+Received-SPF: pass client-ip=170.10.129.124; envelope-from=berrange@redhat.com;
+ helo=us-smtp-delivery-124.mimecast.com
+X-Spam_score_int: -29
+X-Spam_score: -3.0
+X-Spam_bar: ---
+X-Spam_report: (-3.0 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.118,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H2=-0.743,
+ RCVD_IN_VALIDITY_CERTIFIED_BLOCKED=0.001, RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -106,241 +99,51 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
+Reply-To: Daniel =?utf-8?B?UC4gQmVycmFuZ8Op?= <berrange@redhat.com>
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 2024/11/11 6:55, Phil Dennis-Jordan wrote:
-> This reduces the type hierarchy of the vmapple-virtio-blk-pci-base
-> type and vmapple-virtio-root/vmapple-virtio-aux leaf types with a single
-> vmapple-virtio-blk-pci type which exposes a 'variant' enum property
-> which can be set to 'aux' or 'root'.
+On Sun, Nov 10, 2024 at 08:08:16AM +0100, Phil Dennis-Jordan wrote:
+> On Sun 10. Nov 2024 at 08:01, Akihiko Odaki <akihiko.odaki@daynix.com>
+> wrote:
 > 
-> This change removes a bunch of device type boilerplate at the cost of
-> defining a new qapi enum and qdev property type.
+> > On 2024/11/08 23:46, Phil Dennis-Jordan wrote:
+> > > macOS's Cocoa event handling must be done on the initial (main) thread
+> > > of the process. Furthermore, if library or application code uses
+> > > libdispatch, the main dispatch queue must be handling events on the main
+> > > thread as well.
+> > >
+> > > So far, this has affected Qemu in both the Cocoa and SDL UIs, although
+> > > in different ways: the Cocoa UI replaces the default qemu_main function
+> > > with one that spins Qemu's internal main event loop off onto a
+> > > background thread. SDL (which uses Cocoa internally) on the other hand
+> > > uses a polling approach within Qemu's main event loop. Events are
+> > > polled during the SDL UI's dpy_refresh callback, which happens to run
+> > > on the main thread by default.
+> >
+> > GTK should also do the same as SDL and requires treatment; I forgot to
+> > note that in previous reviews.
 > 
-> Documentation for the vmapple machine type is also updated.
-
-Please merge this change into "[PATCH v9 13/16] hw/vmapple/virtio-blk: 
-Add support for apple virtio-blk".
-
 > 
-> Signed-off-by: Phil Dennis-Jordan <phil@philjordan.eu>
-> ---
->   docs/system/arm/vmapple.rst         |  4 +--
->   hw/core/qdev-properties-system.c    |  8 +++++
->   hw/vmapple/virtio-blk.c             | 50 +++++++----------------------
->   include/hw/qdev-properties-system.h |  6 ++++
->   include/hw/vmapple/vmapple.h        |  4 +--
->   qapi/virtio.json                    | 14 ++++++++
->   6 files changed, 43 insertions(+), 43 deletions(-)
+> Although it‘s possible to build Qemu with GTK support enabled on macOS,
+> that UI doesn’t actually work on macOS at all, and apparently hasn’t been
+> supported since 2018, see:
+> https://stackoverflow.com/a/51474795
 > 
-> diff --git a/docs/system/arm/vmapple.rst b/docs/system/arm/vmapple.rst
-> index 67942474b93..efe39b68dc4 100644
-> --- a/docs/system/arm/vmapple.rst
-> +++ b/docs/system/arm/vmapple.rst
-> @@ -56,8 +56,8 @@ to get better interactive access into the target system:
->          -drive file="$DISK",if=pflash,format=raw \
->          -drive file="$AUX",if=none,id=aux,format=raw \
->          -drive file="$DISK",if=none,id=root,format=raw \
-> -       -device vmapple-virtio-aux,drive=aux \
-> -       -device vmapple-virtio-root,drive=root \
-> +       -device vmapple-virtio-blk-pci,variant=aux,drive=aux \
-> +       -device vmapple-virtio-blk-pci,variant=root,drive=root \
->          -netdev user,id=net0,ipv6=off,hostfwd=tcp::2222-:22,hostfwd=tcp::5901-:5900 \
->          -device virtio-net-pci,netdev=net0
->   
-> diff --git a/hw/core/qdev-properties-system.c b/hw/core/qdev-properties-system.c
-> index 35deef05f32..8bf8a3442d6 100644
-> --- a/hw/core/qdev-properties-system.c
-> +++ b/hw/core/qdev-properties-system.c
-> @@ -1239,3 +1239,11 @@ const PropertyInfo qdev_prop_iothread_vq_mapping_list = {
->       .set = set_iothread_vq_mapping_list,
->       .release = release_iothread_vq_mapping_list,
->   };
-> +
-> +const PropertyInfo qdev_prop_vmapple_virtio_blk_variant = {
-> +    .name  = "VMAppleVirtioBlkVariant",
-> +    .enum_table  = &VMAppleVirtioBlkVariant_lookup,
-> +    .get   = qdev_propinfo_get_enum,
-> +    .set   = qdev_propinfo_set_enum,
-> +    .set_default_value = qdev_propinfo_set_default_value_enum,
-> +};
-> diff --git a/hw/vmapple/virtio-blk.c b/hw/vmapple/virtio-blk.c
-> index 40b33bbdac5..f883e65a5de 100644
-> --- a/hw/vmapple/virtio-blk.c
-> +++ b/hw/vmapple/virtio-blk.c
-> @@ -24,6 +24,7 @@
->   #include "qemu/module.h"
->   #include "qapi/error.h"
->   
-> +#define TYPE_VMAPPLE_VIRTIO_BLK  "vmapple-virtio-blk"
->   OBJECT_DECLARE_TYPE(VMAppleVirtIOBlk, VMAppleVirtIOBlkClass, VMAPPLE_VIRTIO_BLK)
->   
->   typedef struct VMAppleVirtIOBlkClass {
-> @@ -41,14 +42,10 @@ typedef struct VMAppleVirtIOBlk {
->   /*
->    * vmapple-virtio-blk-pci: This extends VirtioPCIProxy.
->    */
-> -#define TYPE_VMAPPLE_VIRTIO_BLK_PCI "vmapple-virtio-blk-pci-base"
->   OBJECT_DECLARE_SIMPLE_TYPE(VMAppleVirtIOBlkPCI, VMAPPLE_VIRTIO_BLK_PCI)
->   
->   #define VIRTIO_BLK_T_APPLE_BARRIER     0x10000
->   
-> -#define VIRTIO_APPLE_TYPE_ROOT 1
-> -#define VIRTIO_APPLE_TYPE_AUX  2
-> -
->   static bool vmapple_virtio_blk_handle_unknown_request(VirtIOBlockReq *req,
->                                                         MultiReqBuffer *mrb,
->                                                         uint32_t type)
-> @@ -109,7 +106,7 @@ static const TypeInfo vmapple_virtio_blk_info = {
->   struct VMAppleVirtIOBlkPCI {
->       VirtIOPCIProxy parent_obj;
->       VMAppleVirtIOBlk vdev;
-> -    uint32_t apple_type;
-> +    VMAppleVirtioBlkVariant variant;
->   };
->   
->   
-> @@ -119,6 +116,8 @@ static Property vmapple_virtio_blk_pci_properties[] = {
->                       VIRTIO_PCI_FLAG_USE_IOEVENTFD_BIT, true),
->       DEFINE_PROP_UINT32("vectors", VirtIOPCIProxy, nvectors,
->                          DEV_NVECTORS_UNSPECIFIED),
-> +    DEFINE_PROP_VMAPPLE_VIRTIO_BLK_VARIANT("variant", VMAppleVirtIOBlkPCI, variant,
-> +                                           VM_APPLE_VIRTIO_BLK_VARIANT_UNSPECIFIED),
->       DEFINE_PROP_END_OF_LIST(),
->   };
->   
-> @@ -128,6 +127,12 @@ static void vmapple_virtio_blk_pci_realize(VirtIOPCIProxy *vpci_dev, Error **err
->       DeviceState *vdev = DEVICE(&dev->vdev);
->       VirtIOBlkConf *conf = &dev->vdev.parent_obj.conf;
->   
-> +    if (dev->variant == VM_APPLE_VIRTIO_BLK_VARIANT_UNSPECIFIED) {
-> +        error_setg(errp, "Device " TYPE_VMAPPLE_VIRTIO_BLK_PCI ": must specify "
-> +                   "a variant, 'aux' or 'root'");
-> +        return;
-> +    }
-> +
->       if (conf->num_queues == VIRTIO_BLK_AUTO_NUM_QUEUES) {
->           conf->num_queues = virtio_pci_optimal_num_queues(0);
->       }
-> @@ -143,7 +148,7 @@ static void vmapple_virtio_blk_pci_realize(VirtIOPCIProxy *vpci_dev, Error **err
->        */
->       virtio_add_feature(&dev->vdev.parent_obj.host_features, VIRTIO_BLK_F_ZONED);
->       /* Propagate the apple type down to the virtio-blk device */
-> -    dev->vdev.apple_type = dev->apple_type;
-> +    dev->vdev.apple_type = dev->variant;
->       /* and spawn the virtio-blk device */
->       qdev_realize(vdev, BUS(&vpci_dev->bus), errp);
->   
-> @@ -181,47 +186,16 @@ static void vmapple_virtio_blk_pci_instance_init(Object *obj)
->   }
->   
->   static const VirtioPCIDeviceTypeInfo vmapple_virtio_blk_pci_info = {
-> -    .base_name     = TYPE_VMAPPLE_VIRTIO_BLK_PCI,
-> -    .generic_name  = "vmapple-virtio-blk-pci",
-> +    .generic_name  = TYPE_VMAPPLE_VIRTIO_BLK_PCI,
->       .instance_size = sizeof(VMAppleVirtIOBlkPCI),
->       .instance_init = vmapple_virtio_blk_pci_instance_init,
->       .class_init    = vmapple_virtio_blk_pci_class_init,
->   };
->   
-> -static void vmapple_virtio_root_instance_init(Object *obj)
-> -{
-> -    VMAppleVirtIOBlkPCI *dev = VMAPPLE_VIRTIO_BLK_PCI(obj);
-> -
-> -    dev->apple_type = VIRTIO_APPLE_TYPE_ROOT;
-> -}
-> -
-> -static const TypeInfo vmapple_virtio_root_info = {
-> -    .name          = TYPE_VMAPPLE_VIRTIO_ROOT,
-> -    .parent        = "vmapple-virtio-blk-pci",
-> -    .instance_size = sizeof(VMAppleVirtIOBlkPCI),
-> -    .instance_init = vmapple_virtio_root_instance_init,
-> -};
-> -
-> -static void vmapple_virtio_aux_instance_init(Object *obj)
-> -{
-> -    VMAppleVirtIOBlkPCI *dev = VMAPPLE_VIRTIO_BLK_PCI(obj);
-> -
-> -    dev->apple_type = VIRTIO_APPLE_TYPE_AUX;
-> -}
-> -
-> -static const TypeInfo vmapple_virtio_aux_info = {
-> -    .name          = TYPE_VMAPPLE_VIRTIO_AUX,
-> -    .parent        = "vmapple-virtio-blk-pci",
-> -    .instance_size = sizeof(VMAppleVirtIOBlkPCI),
-> -    .instance_init = vmapple_virtio_aux_instance_init,
-> -};
-> -
->   static void vmapple_virtio_blk_register_types(void)
->   {
->       type_register_static(&vmapple_virtio_blk_info);
->       virtio_pci_types_register(&vmapple_virtio_blk_pci_info);
-> -    type_register_static(&vmapple_virtio_root_info);
-> -    type_register_static(&vmapple_virtio_aux_info);
->   }
->   
->   type_init(vmapple_virtio_blk_register_types)
-> diff --git a/include/hw/qdev-properties-system.h b/include/hw/qdev-properties-system.h
-> index cdcc63056e5..6e428f3fcad 100644
-> --- a/include/hw/qdev-properties-system.h
-> +++ b/include/hw/qdev-properties-system.h
-> @@ -27,6 +27,8 @@ extern const PropertyInfo qdev_prop_pcie_link_speed;
->   extern const PropertyInfo qdev_prop_pcie_link_width;
->   extern const PropertyInfo qdev_prop_cpus390entitlement;
->   extern const PropertyInfo qdev_prop_iothread_vq_mapping_list;
-> +extern const PropertyInfo qdev_prop_vmapple_virtio_blk_variant;
-> +
+> I don’t think there’s any point making adjustments to the GTK code by
+> guessing what might be needed if someone did fix that to work with macOS at
+> some point.
 
-Here is an extra line.
+If we don't support GTK on macOS, then we should update meson.build
+to actively prevent users enabling GTK on macOS builds, rather than
+letting them suffer random runtime crashes.
 
->   
->   #define DEFINE_PROP_PCI_DEVFN(_n, _s, _f, _d)                   \
->       DEFINE_PROP_SIGNED(_n, _s, _f, _d, qdev_prop_pci_devfn, int32_t)
-> @@ -94,4 +96,8 @@ extern const PropertyInfo qdev_prop_iothread_vq_mapping_list;
->       DEFINE_PROP(_name, _state, _field, qdev_prop_iothread_vq_mapping_list, \
->                   IOThreadVirtQueueMappingList *)
->   
-> +#define DEFINE_PROP_VMAPPLE_VIRTIO_BLK_VARIANT(_n, _s, _f, _d) \
-> +    DEFINE_PROP_SIGNED(_n, _s, _f, _d, qdev_prop_vmapple_virtio_blk_variant, \
-> +                       VMAppleVirtioBlkVariant)
-> +
->   #endif
-> diff --git a/include/hw/vmapple/vmapple.h b/include/hw/vmapple/vmapple.h
-> index b20956e1286..9c1ad1bd8c3 100644
-> --- a/include/hw/vmapple/vmapple.h
-> +++ b/include/hw/vmapple/vmapple.h
-> @@ -18,8 +18,6 @@
->   
->   #define TYPE_VMAPPLE_CFG "vmapple-cfg"
->   
-> -#define TYPE_VMAPPLE_VIRTIO_BLK  "vmapple-virtio-blk"
-> -#define TYPE_VMAPPLE_VIRTIO_ROOT "vmapple-virtio-root"
-> -#define TYPE_VMAPPLE_VIRTIO_AUX  "vmapple-virtio-aux"
-> +#define TYPE_VMAPPLE_VIRTIO_BLK_PCI "vmapple-virtio-blk-pci"
->   
->   #endif /* HW_VMAPPLE_VMAPPLE_H */
-> diff --git a/qapi/virtio.json b/qapi/virtio.json
-> index 2529c2d8b20..d351d2166ef 100644
-> --- a/qapi/virtio.json
-> +++ b/qapi/virtio.json
-> @@ -992,3 +992,17 @@
->   ##
->   { 'enum': 'GranuleMode',
->     'data': [ '4k', '8k', '16k', '64k', 'host' ] }
-> +
-> +##
-> +# @VMAppleVirtioBlkVariant:
-> +#
-> +# @unspecified: The default, not a valid setting.
-> +#
-> +# @root: Block device holding the root volume
-> +#
-> +# @aux: Block device holding auxiliary data required for boot
-> +#
-> +# Since: 9.2
-> +##
-> +{ 'enum': 'VMAppleVirtioBlkVariant',
-> +  'data': [ 'unspecified', 'root', 'aux' ] }
+
+With regards,
+Daniel
+-- 
+|: https://berrange.com      -o-    https://www.flickr.com/photos/dberrange :|
+|: https://libvirt.org         -o-            https://fstop138.berrange.com :|
+|: https://entangle-photo.org    -o-    https://www.instagram.com/dberrange :|
 
 
