@@ -4,89 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BE2F1D3ABEB
-	for <qemu-riscv@archiver.kernel.org>; Mon, 11 Nov 2024 18:34:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E065DD3ABFB
+	for <qemu-riscv@archiver.kernel.org>; Mon, 11 Nov 2024 21:53:25 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tAZEn-0006hE-1p; Mon, 11 Nov 2024 13:34:09 -0500
+	id 1tAcLM-00033c-6C; Mon, 11 Nov 2024 16:53:08 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1tAZEk-0006WO-W7
- for qemu-riscv@nongnu.org; Mon, 11 Nov 2024 13:34:07 -0500
-Received: from mail-pf1-x435.google.com ([2607:f8b0:4864:20::435])
+ id 1tAcLL-00033U-8H
+ for qemu-riscv@nongnu.org; Mon, 11 Nov 2024 16:53:07 -0500
+Received: from mail-pf1-x434.google.com ([2607:f8b0:4864:20::434])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1tAZEe-00081Y-E4
- for qemu-riscv@nongnu.org; Mon, 11 Nov 2024 13:34:02 -0500
-Received: by mail-pf1-x435.google.com with SMTP id
- d2e1a72fcca58-7242f559a9fso1941096b3a.1
- for <qemu-riscv@nongnu.org>; Mon, 11 Nov 2024 10:33:59 -0800 (PST)
+ id 1tAcLJ-0002xQ-CD
+ for qemu-riscv@nongnu.org; Mon, 11 Nov 2024 16:53:07 -0500
+Received: by mail-pf1-x434.google.com with SMTP id
+ d2e1a72fcca58-720be27db27so4058831b3a.2
+ for <qemu-riscv@nongnu.org>; Mon, 11 Nov 2024 13:53:04 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1731350038; x=1731954838; darn=nongnu.org;
+ d=ventanamicro.com; s=google; t=1731361984; x=1731966784; darn=nongnu.org;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=Ps+aUhNHNtcwV3mHatejeZgAw1aj439mI5fZQMw/vq4=;
- b=M6Zv0vAlWh+kMS2dF71N9XMutPXrJv475GbWiDcg94L3mafYuM37QINeKGBBn5Fzsr
- lzl5p+WtrpUIKVVDFGSpzm5TPG1JWncyNe2zXq6cvtDCc9DUwCAjo2tw4sTNkgTToM7T
- NKYXtZ/1wS5TTtGoEUBXh6Ce9CijEXKYUQ3PxnWTTCXYY/IobCrbKQDWlVHRiCDPVe71
- hlaOAksLbjN2o39fQ75cui4y1tlmhLZeXO/V41YjIrWhw9iLyJCWFqJBoF++albNpOfX
- OewoAXWZ6fPkvE5emGtpba+jVjIBGqKH7ULGMFcWD6ra8NcKruTwCWHSaSnK1GgMQEBD
- BgTA==
+ bh=9oS8SQgfl29181tXJY3a64I+ZdgAM/IWV0LN3rBYrz0=;
+ b=Fw/B+fILCEFhQ9aKqrHw7yWxvw7wSvOJzx3RKpBWv9RRB2DD/wsoXaDwf6ya1M6g2D
+ UXL34GdCvlSEul7d/QEsRbevJxZxYAt0QXyGbNI6koaHucElBj4p9NHOURyXojK0r0Nj
+ d1EjlwMRdMzve8OqWbIUVtBZSvOukDwOPzmEkG5LPBD2pXLqnFBQtpPL8Ivn8lCN1D+3
+ 7jGB9NxFFT4go+mCCVLDJCbK27li0R9sbBBo7H5tIE2h9OFNU90YiqXYm4rX0kpQ8uP/
+ 4AC/kDnQ4zBS4kE0dTpnVX5G+jK5n8g8mOdoMbELU1X/pL433BWYcixommoLf3qxv22b
+ 64fg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731350038; x=1731954838;
+ d=1e100.net; s=20230601; t=1731361984; x=1731966784;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=Ps+aUhNHNtcwV3mHatejeZgAw1aj439mI5fZQMw/vq4=;
- b=vB38aeVNEB1l/LWd7F71X5T55xUaStGqCTxTp6UmgPLv1FIFlOPOJwQYvgIvC8lURA
- Z8P/TaWG4e0AN0Fw2o7bfQl6ZIzrdtXre27Ni5tLRmTwmb1LUnZtCyF7FjtbIVHnFbwS
- uT/SysGWP9zGv6+/LNjspy2b36NB/rQ23PLbiZnpNsvp/lwyphsZ/LM17I7G0oYRwKNG
- b7zNZhjh8aTHqZXuJJkHIxYTbCrl8rrILsysxyIQvMvu6yJJZnEaiCd9fOuul4nNhyQA
- +5AZB+lu0pbbCzWJIjAvTt4bt0+h0EPJnrshmsm9XqyTsozj7rnEyWphxdnXjIrILcmO
- wMSQ==
+ bh=9oS8SQgfl29181tXJY3a64I+ZdgAM/IWV0LN3rBYrz0=;
+ b=dsceJAgiRjuFtayCG2eVsx8FLAbaCzsj53Exb67IUszC8h5kov8Ayof9lAPcYxMYPB
+ 2Yfk6PDFqUmiJ9jZ3hbBDvMTl3qjJfRWkERwH4WFhxq/NXlLVKfb92dYVfpNGasbkjFy
+ b2lLozhsxYNpOULXzl4J67+QtDxjgPE8dBsQPzc63gi5AgwvYvE4oq0J/1Bmimj+2ArM
+ r2r6QS75wDGxQ73CGDnwN3GT7EMsxYV9yYwb1QBFUQ2Tv6hr3uQK/la+vtOX/xQMeYiM
+ q7T3oVMcnZssfTLL5USeij0k0CskSAANiAq3zXSyGNZ/TMDf4fZfgeQAIqesup0FNkJz
+ Jg7g==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXhv9CtLYtRpYHAJHNn+SLu53JQ4DLiAL9B8uNRDni6qke1LlDb3LwfjmHpJ9gs4Q6KH6h/3I/zNfv8@nongnu.org
-X-Gm-Message-State: AOJu0YyMfbgtB/P5OSv8lFVw3RCJSOfDmB0q1AiBvWJCWNPB93IpM6ob
- BRMINuFCCZchNc5VvrcR8n6XAfUrvP+t3jtgmx+cJBO9BFg6ugusVJkZ2LspCo0=
-X-Google-Smtp-Source: AGHT+IESv4nR+U9fWiaYiZ6Tv83b2RhRO0wRJGYkeqvfxb5X10sqreKedvDRddqtNe+Wro3apX0i/A==
-X-Received: by 2002:a05:6a00:80c:b0:71e:68ae:aaed with SMTP id
- d2e1a72fcca58-7241325f63fmr17337342b3a.1.1731350038594; 
- Mon, 11 Nov 2024 10:33:58 -0800 (PST)
+ AJvYcCWIVZDmVsTYTfLxvFrivzQDkNAt+/eP0DNfkfk92HnxVpFQM+X0tcfXjtXKqYrGQT/SP3rUNr4eMIRg@nongnu.org
+X-Gm-Message-State: AOJu0YyQ5P24gX5uS45bkZ93zYwoP2ESTz8cNcP3KzWjW2nL8l4lhS25
+ E57OacJL21fCeFE5JO4TVSPaV4YncLYW6mIt4GJC7r9iO1Jpctu/Zq06p00imMU=
+X-Google-Smtp-Source: AGHT+IGomwAB47QO8F8+edf9Gn2IMmtfsNnMZd8Npt64vFrxrLQW6Nw4KpBIbKpQ67kw5CITNoJP6g==
+X-Received: by 2002:a05:6a00:a0f:b0:71e:658f:c43b with SMTP id
+ d2e1a72fcca58-7244a4fde8emr734668b3a.2.1731361983754; 
+ Mon, 11 Nov 2024 13:53:03 -0800 (PST)
 Received: from [192.168.68.110] ([189.79.22.174])
  by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-724079aa862sm9420218b3a.115.2024.11.11.10.33.55
+ d2e1a72fcca58-7240785ffaasm9718051b3a.4.2024.11.11.13.53.00
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 11 Nov 2024 10:33:58 -0800 (PST)
-Message-ID: <39b5cf42-4b35-4c69-825c-e813c55577f3@ventanamicro.com>
-Date: Mon, 11 Nov 2024 15:33:54 -0300
+ Mon, 11 Nov 2024 13:53:03 -0800 (PST)
+Message-ID: <484d7570-7425-4bb1-adcd-c59c233c6893@ventanamicro.com>
+Date: Mon, 11 Nov 2024 18:52:59 -0300
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 5/5] target/riscv: Expose svukte ISA extension
-To: "Fea.Wang" <fea.wang@sifive.com>, qemu-devel@nongnu.org,
- qemu-riscv@nongnu.org
+Subject: Re: [PATCH v3 1/3] hw/riscv: Support to load DTB after 3GB memory on
+ 64-bit system.
+To: Jim Shu <jim.shu@sifive.com>, qemu-devel@nongnu.org, qemu-riscv@nongnu.org
 Cc: Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bmeng.cn@gmail.com>,
- Weiwei Li <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Frank Chang <frank.chang@sifive.com>, Jim Shu <jim.shu@sifive.com>
-References: <20241108085239.2927152-1-fea.wang@sifive.com>
- <20241108085239.2927152-6-fea.wang@sifive.com>
+ Weiwei Li <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
+References: <20241108070454.12699-1-jim.shu@sifive.com>
+ <20241108070454.12699-2-jim.shu@sifive.com>
 Content-Language: en-US
 From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <20241108085239.2927152-6-fea.wang@sifive.com>
+In-Reply-To: <20241108070454.12699-2-jim.shu@sifive.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::435;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pf1-x435.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::434;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pf1-x434.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -104,51 +103,144 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 
 
-On 11/8/24 5:52 AM, Fea.Wang wrote:
-> Add "svukte" in the ISA string when svukte extension is enabled.
+On 11/8/24 4:04 AM, Jim Shu wrote:
+> Larger initrd image will overlap the DTB at 3GB address. Since 64-bit
+> system doesn't have 32-bit addressable issue, we just load DTB to the end
+> of dram in 64-bit system.
 > 
-> Signed-off-by: Fea.Wang <fea.wang@sifive.com>
-> Reviewed-by: Frank Chang <frank.chang@sifive.com>
-> Reviewed-by: Jim Shu <jim.shu@sifive.com>
+> Signed-off-by: Jim Shu <jim.shu@sifive.com>
 > ---
->   target/riscv/cpu.c | 2 ++
->   1 file changed, 2 insertions(+)
+>   hw/riscv/boot.c            | 8 ++++++--
+>   hw/riscv/microchip_pfsoc.c | 4 ++--
+>   hw/riscv/sifive_u.c        | 4 ++--
+>   hw/riscv/spike.c           | 4 ++--
+>   hw/riscv/virt.c            | 2 +-
+>   include/hw/riscv/boot.h    | 2 +-
+>   6 files changed, 14 insertions(+), 10 deletions(-)
 > 
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index f219f0c3b5..69187c9aa1 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -200,6 +200,7 @@ const RISCVIsaExtData isa_edata_arr[] = {
->       ISA_EXT_DATA_ENTRY(svnapot, PRIV_VERSION_1_12_0, ext_svnapot),
->       ISA_EXT_DATA_ENTRY(svpbmt, PRIV_VERSION_1_12_0, ext_svpbmt),
->       ISA_EXT_DATA_ENTRY(svvptc, PRIV_VERSION_1_13_0, ext_svvptc),
-> +    ISA_EXT_DATA_ENTRY(svukte, PRIV_VERSION_1_13_0, ext_svukte),
+> diff --git a/hw/riscv/boot.c b/hw/riscv/boot.c
+> index 2e319168db..4e4e106a2b 100644
+> --- a/hw/riscv/boot.c
+> +++ b/hw/riscv/boot.c
+> @@ -293,7 +293,7 @@ out:
+>    * The FDT is fdt_packed() during the calculation.
+>    */
+>   uint64_t riscv_compute_fdt_addr(hwaddr dram_base, hwaddr dram_size,
+> -                                MachineState *ms)
+> +                                MachineState *ms, RISCVHartArrayState *harts)
+>   {
+>       int ret = fdt_pack(ms->fdt);
+>       hwaddr dram_end, temp;
+> @@ -321,7 +321,11 @@ uint64_t riscv_compute_fdt_addr(hwaddr dram_base, hwaddr dram_size,
+>        * Thus, put it at an 2MB aligned address that less than fdt size from the
+>        * end of dram or 3GB whichever is lesser.
+>        */
+> -    temp = (dram_base < 3072 * MiB) ? MIN(dram_end, 3072 * MiB) : dram_end;
+> +    if (!riscv_is_32bit(harts)) {
+> +        temp = dram_end;
+> +    } else {
+> +        temp = (dram_base < 3072 * MiB) ? MIN(dram_end, 3072 * MiB) : dram_end;
+> +    }
 
-We need to stick with the riscv,isa order, i.e. svukte must go before
-svvptc:
+We'll need to update the comment right before this code given that we're
+changing the logic for 64 bit CPUs. Thanks,
 
-
->       ISA_EXT_DATA_ENTRY(svnapot, PRIV_VERSION_1_12_0, ext_svnapot),
->       ISA_EXT_DATA_ENTRY(svpbmt, PRIV_VERSION_1_12_0, ext_svpbmt),
-> +    ISA_EXT_DATA_ENTRY(svukte, PRIV_VERSION_1_13_0, ext_svukte),
->       ISA_EXT_DATA_ENTRY(svvptc, PRIV_VERSION_1_13_0, ext_svvptc),
-
-
-
-Thanks,
 
 Daniel
 
-
->       ISA_EXT_DATA_ENTRY(xtheadba, PRIV_VERSION_1_11_0, ext_xtheadba),
->       ISA_EXT_DATA_ENTRY(xtheadbb, PRIV_VERSION_1_11_0, ext_xtheadbb),
->       ISA_EXT_DATA_ENTRY(xtheadbs, PRIV_VERSION_1_11_0, ext_xtheadbs),
-> @@ -1595,6 +1596,7 @@ const RISCVCPUMultiExtConfig riscv_cpu_vendor_exts[] = {
 >   
->   /* These are experimental so mark with 'x-' */
->   const RISCVCPUMultiExtConfig riscv_cpu_experimental_exts[] = {
-> +    MULTI_EXT_CFG_BOOL("x-svukte", ext_svukte, false),
->       DEFINE_PROP_END_OF_LIST(),
->   };
+>       return QEMU_ALIGN_DOWN(temp - fdtsize, 2 * MiB);
+>   }
+> diff --git a/hw/riscv/microchip_pfsoc.c b/hw/riscv/microchip_pfsoc.c
+> index f9a3b43d2e..ba8b0a2c26 100644
+> --- a/hw/riscv/microchip_pfsoc.c
+> +++ b/hw/riscv/microchip_pfsoc.c
+> @@ -519,7 +519,7 @@ static void microchip_icicle_kit_machine_init(MachineState *machine)
+>       bool kernel_as_payload = false;
+>       target_ulong firmware_end_addr, kernel_start_addr;
+>       uint64_t kernel_entry;
+> -    uint32_t fdt_load_addr;
+> +    uint64_t fdt_load_addr;
+>       DriveInfo *dinfo = drive_get(IF_SD, 0, 0);
 >   
+>       /* Sanity check on RAM size */
+> @@ -625,7 +625,7 @@ static void microchip_icicle_kit_machine_init(MachineState *machine)
+>           /* Compute the fdt load address in dram */
+>           fdt_load_addr = riscv_compute_fdt_addr(memmap[MICROCHIP_PFSOC_DRAM_LO].base,
+>                                                  memmap[MICROCHIP_PFSOC_DRAM_LO].size,
+> -                                               machine);
+> +                                               machine, &s->soc.u_cpus);
+>           riscv_load_fdt(fdt_load_addr, machine->fdt);
+>   
+>           /* Load the reset vector */
+> diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
+> index c5e74126b1..05467e833a 100644
+> --- a/hw/riscv/sifive_u.c
+> +++ b/hw/riscv/sifive_u.c
+> @@ -519,7 +519,7 @@ static void sifive_u_machine_init(MachineState *machine)
+>       const char *firmware_name;
+>       uint32_t start_addr_hi32 = 0x00000000;
+>       int i;
+> -    uint32_t fdt_load_addr;
+> +    uint64_t fdt_load_addr;
+>       uint64_t kernel_entry;
+>       DriveInfo *dinfo;
+>       BlockBackend *blk;
+> @@ -606,7 +606,7 @@ static void sifive_u_machine_init(MachineState *machine)
+>   
+>       fdt_load_addr = riscv_compute_fdt_addr(memmap[SIFIVE_U_DEV_DRAM].base,
+>                                              memmap[SIFIVE_U_DEV_DRAM].size,
+> -                                           machine);
+> +                                           machine, &s->soc.u_cpus);
+>       riscv_load_fdt(fdt_load_addr, machine->fdt);
+>   
+>       if (!riscv_is_32bit(&s->soc.u_cpus)) {
+> diff --git a/hw/riscv/spike.c b/hw/riscv/spike.c
+> index fceb91d946..acd7ab1ae1 100644
+> --- a/hw/riscv/spike.c
+> +++ b/hw/riscv/spike.c
+> @@ -201,7 +201,7 @@ static void spike_board_init(MachineState *machine)
+>       hwaddr firmware_load_addr = memmap[SPIKE_DRAM].base;
+>       target_ulong kernel_start_addr;
+>       char *firmware_name;
+> -    uint32_t fdt_load_addr;
+> +    uint64_t fdt_load_addr;
+>       uint64_t kernel_entry;
+>       char *soc_name;
+>       int i, base_hartid, hart_count;
+> @@ -317,7 +317,7 @@ static void spike_board_init(MachineState *machine)
+>   
+>       fdt_load_addr = riscv_compute_fdt_addr(memmap[SPIKE_DRAM].base,
+>                                              memmap[SPIKE_DRAM].size,
+> -                                           machine);
+> +                                           machine, &s->soc[0]);
+>       riscv_load_fdt(fdt_load_addr, machine->fdt);
+>   
+>       /* load the reset vector */
+> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+> index 45a8c4f819..761bce3304 100644
+> --- a/hw/riscv/virt.c
+> +++ b/hw/riscv/virt.c
+> @@ -1424,7 +1424,7 @@ static void virt_machine_done(Notifier *notifier, void *data)
+>   
+>       fdt_load_addr = riscv_compute_fdt_addr(memmap[VIRT_DRAM].base,
+>                                              memmap[VIRT_DRAM].size,
+> -                                           machine);
+> +                                           machine, &s->soc[0]);
+>       riscv_load_fdt(fdt_load_addr, machine->fdt);
+>   
+>       /* load the reset vector */
+> diff --git a/include/hw/riscv/boot.h b/include/hw/riscv/boot.h
+> index f778b560de..34a80c5ff4 100644
+> --- a/include/hw/riscv/boot.h
+> +++ b/include/hw/riscv/boot.h
+> @@ -49,7 +49,7 @@ target_ulong riscv_load_kernel(MachineState *machine,
+>                                  bool load_initrd,
+>                                  symbol_fn_t sym_cb);
+>   uint64_t riscv_compute_fdt_addr(hwaddr dram_start, uint64_t dram_size,
+> -                                MachineState *ms);
+> +                                MachineState *ms, RISCVHartArrayState *harts);
+>   void riscv_load_fdt(hwaddr fdt_addr, void *fdt);
+>   void riscv_setup_rom_reset_vec(MachineState *machine, RISCVHartArrayState *harts,
+>                                  hwaddr saddr,
 
