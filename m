@@ -4,90 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E19B6D32D9A
-	for <qemu-riscv@archiver.kernel.org>; Tue, 12 Nov 2024 12:53:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 59615D42B8C
+	for <qemu-riscv@archiver.kernel.org>; Tue, 12 Nov 2024 14:39:19 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tAqO6-0002LV-8F; Tue, 12 Nov 2024 07:52:54 -0500
+	id 1tAs2c-0001BV-SV; Tue, 12 Nov 2024 09:38:50 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1tAqO3-0002Ke-Dv
- for qemu-riscv@nongnu.org; Tue, 12 Nov 2024 07:52:51 -0500
-Received: from mail-pl1-x632.google.com ([2607:f8b0:4864:20::632])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1tAqO0-0001QB-Jb
- for qemu-riscv@nongnu.org; Tue, 12 Nov 2024 07:52:51 -0500
-Received: by mail-pl1-x632.google.com with SMTP id
- d9443c01a7336-20c767a9c50so54245855ad.1
- for <qemu-riscv@nongnu.org>; Tue, 12 Nov 2024 04:52:47 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1731415966; x=1732020766; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=7MptEZjcrsnaEHxB1AuaEJOiLzKYeAZFOPQUUaBDxNM=;
- b=N4t5CZNhd82qr80aK4KahtS06vxG7z7Te7HqjQRBiSnD95iLyFC/ZxM5Ej9c6Ohaxq
- jMq6Q47V1kQaduvxgoCzR64zBr68vyXdZ9nvxEh5NGUOJJdNFripHPcWGA1YlG+7FYmW
- y6G/FcTk0W1oGXFvCML75gxpuMo5rLEK/TJZXAFxgpa13aAZv98pigCLXFEfm3E1xicH
- 2aGLhUM7FjqDAoHnE4A4Oxr0zBhvrgu7Vxyc5uwz6W9UVNS5B+VrXQslD92+itm27Zbm
- qXv4MnOz33UBT+27KHYrLMTfdQJrJRYSDwB6rLudlVDyJfKJVgMrNr8NO9smUht/K03m
- C7nw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731415966; x=1732020766;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=7MptEZjcrsnaEHxB1AuaEJOiLzKYeAZFOPQUUaBDxNM=;
- b=fuxXG+aK8SM4OClJmvBQoISiXFgmngWNyK2J1ML5DBk/aVKUooBanPia1NNZ1GrBIC
- FEcJVtIMufKllCBTCF6xr1q1i55xSM97xLfjK1/OEvx75g3p8lufPJESLhz1ck14GRzP
- rH26GdLzC1GeP5ub7YFtKF8QwqKYzMcuHqO8jBVkpHDgTntnN8rlNsvXAbf+2itx4Ztt
- +zPhVoYNuSkXUznQMevIKc5BzD3AcYwNdjDnCjuYIOFhbxCI7B59tCKMcLvmMLFhwthm
- 2zYvOCRj8lPsioi3IrpKrcikEJvNhiX+eSkJMR0qAQVEQDtU4ljQ8uE0e/+AFNEqsEeh
- zxQg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXTw95mv1X/vAxsKkO/Vzopn5ZtT8e2YYiDjgMGBz1C3tjTvifC60njp9GRoCCzFCS++MwziIhLSG3w@nongnu.org
-X-Gm-Message-State: AOJu0Yxqpx7yGaRmVnLIkx1XinyGgDM+Y0mZfnPU6V+VDofGsVNu/ozK
- jyUXNXWtX3ezG9/vQCCtnOTvdb6nkn3iYX05VOrnZwl4c6u1EGpx+jns9Hm/me0=
-X-Google-Smtp-Source: AGHT+IHu3m9oXggas9+wwdfNZSMwKcKIkLkSUZII90siDNVmGJneHWKTySTqij0B4POevZNmpJluCA==
-X-Received: by 2002:a17:902:cec1:b0:20c:8763:b3f7 with SMTP id
- d9443c01a7336-21183ca7259mr235748305ad.17.1731415966502; 
- Tue, 12 Nov 2024 04:52:46 -0800 (PST)
-Received: from [192.168.68.110] ([187.101.65.72])
- by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-21177e85419sm92129215ad.273.2024.11.12.04.52.43
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 12 Nov 2024 04:52:46 -0800 (PST)
-Message-ID: <980f6830-8fa1-41d2-997f-ed16fdfb7557@ventanamicro.com>
-Date: Tue, 12 Nov 2024 09:52:41 -0300
+ (Exim 4.90_1) (envelope-from <ivan.klokov@syntacore.com>)
+ id 1tAs2Y-00019E-D8; Tue, 12 Nov 2024 09:38:46 -0500
+Received: from mta-03.yadro.com ([89.207.88.253])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <ivan.klokov@syntacore.com>)
+ id 1tAs2V-0000OL-FN; Tue, 12 Nov 2024 09:38:45 -0500
+DKIM-Filter: OpenDKIM Filter v2.11.0 mta-03.yadro.com A1D9FE0002
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=syntacore.com;
+ s=mta-04; t=1731422317;
+ bh=D2oeDNi+IPRrlNDIyqj63bFRcYYcJD6T4w+fEFO7ZTc=;
+ h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type:From;
+ b=p8e+K0w0RKqEp3bKY2KjqkQqcOe5+mVlF9e+CPE7dbOiIUpg6AhDcivIzkg8ZwMDT
+ cjxPfcX6cZrEMFqQQxz3V5CaSQ8fakeW8NM7Ypo5HW60axRS39o37HcoEfWGIDwEMC
+ aJpWorgXe1VvgRdOmWInmNzwdSGihncPnntAbFlRru5KlLlAkhw1YryzHxv4FDSD6k
+ c2vxvuBMyuxLIHy1AN8mSD2r7tUAxFVv80SHDXAbJVLr+zxSPA6rrRooQ5wHLBmxEQ
+ uJFsU1djk2RSAWRrg7fijkXLAuzBoUH6sPR1R28dkNxqBPN2EAMb2yoBx5baFgNaUA
+ afIJgIj10DcIg==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=syntacore.com;
+ s=mta-03; t=1731422317;
+ bh=D2oeDNi+IPRrlNDIyqj63bFRcYYcJD6T4w+fEFO7ZTc=;
+ h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type:From;
+ b=qnvdXE5BIhAh+XZG2x4JH9QQyiK73Ih0DwJvT7ju8zMQZ1jFC8HMJe21y7ZCMB51b
+ v6pgIaO4nEmx0O28EQ1qrNOaFfamPkMvtVoILq6hwY4uBx4VJmukhNdrGV3EWeAcJr
+ mZ/5iuU4BZKeNrDTPyFqLzpHErwRjmZm62+n4EAj+Aa8qxKGjJnfHuN101dqk6Iod9
+ eXn+ucuTxH645TA0spl2r7uDx4h9/PXAwN8Jc4hMEsNr+qHd2sig6Glu4GnRGy2qR5
+ d+Itk5gBEK/8vm7YaPXmUHcOVwwgJuafAuRovjiH9KsTFVxaZISJF/WKEKhZOp7hX5
+ 41xQtc16Y9EVw==
+From: Ivan Klokov <ivan.klokov@syntacore.com>
+To: <qemu-devel@nongnu.org>
+CC: <qemu-riscv@nongnu.org>, <palmer@dabbelt.com>, <alistair.francis@wdc.com>, 
+ <bmeng.cn@gmail.com>, <liwei1518@gmail.com>, <dbarboza@ventanamicro.com>, 
+ <zhiwei_liu@linux.alibaba.com>, <farosas@suse.de>, <lvivier@redhat.com>,
+ <pbonzini@redhat.com>, Ivan Klokov <ivan.klokov@syntacore.com>
+Subject: [RFC PATCH v6 2/2] tests/qtest: QTest example for RISC-V CSR register
+Date: Tue, 12 Nov 2024 17:38:26 +0300
+Message-ID: <20241112143826.88130-3-ivan.klokov@syntacore.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20241112143826.88130-1-ivan.klokov@syntacore.com>
+References: <20241112143826.88130-1-ivan.klokov@syntacore.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 4/5] target/riscv: Check memory access to meet svukte
- rule
-To: "Fea.Wang" <fea.wang@sifive.com>, qemu-devel@nongnu.org,
- qemu-riscv@nongnu.org
-Cc: Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bmeng.cn@gmail.com>,
- Weiwei Li <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Frank Chang <frank.chang@sifive.com>, Jim Shu <jim.shu@sifive.com>
-References: <20241112091423.2529583-1-fea.wang@sifive.com>
- <20241112091423.2529583-5-fea.wang@sifive.com>
-Content-Language: en-US
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <20241112091423.2529583-5-fea.wang@sifive.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::632;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pl1-x632.google.com
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: T-Exch-05.corp.yadro.com (172.17.10.109) To
+ S-Exch-01.corp.yadro.com (10.78.5.241)
+Received-SPF: permerror client-ip=89.207.88.253;
+ envelope-from=ivan.klokov@syntacore.com; helo=mta-03.yadro.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001, RCVD_IN_VALIDITY_SAFE_BLOCKED=0.001,
+ SPF_HELO_NONE=0.001, T_SPF_PERMERROR=0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -103,117 +80,91 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
+Added demo for reading CSR register from qtest environment.
 
+Signed-off-by: Ivan Klokov <ivan.klokov@syntacore.com>
+---
+ tests/qtest/meson.build      |  2 +-
+ tests/qtest/riscv-csr-test.c | 56 ++++++++++++++++++++++++++++++++++++
+ 2 files changed, 57 insertions(+), 1 deletion(-)
+ create mode 100644 tests/qtest/riscv-csr-test.c
 
-On 11/12/24 6:14 AM, Fea.Wang wrote:
-> Follow the Svukte spec, do the memory access address checking
-> 
-> 1. Include instruction fetches or explicit memory accesses
-> 2. System run in effective privilege U or VU
-> 3. Check senvcfg[UKTE] being set, or hstatus[HUKTE] being set if
-> instruction is HLV, HLVX, HSV and execute from U mode to VU mode
-> 4. Depend on Sv39 and check virtual addresses bit[SXLEN-1]
-> 5. Raises a page-fault exception corresponding to the original access
-> type.
-> 
-> Ref: https://github.com/riscv/riscv-isa-manual/pull/1564/files
-> 
-> Signed-off-by: Frank Chang <frank.chang@sifive.com>
-> Signed-off-by: Fea.Wang <fea.wang@sifive.com>
-> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-> Reviewed-by: Jim Shu <jim.shu@sifive.com>
-
-Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-
-> ---
->   target/riscv/cpu_helper.c | 61 +++++++++++++++++++++++++++++++++++++++
->   1 file changed, 61 insertions(+)
-> 
-> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-> index 0a3ead69ea..5b29344c4f 100644
-> --- a/target/riscv/cpu_helper.c
-> +++ b/target/riscv/cpu_helper.c
-> @@ -857,6 +857,61 @@ static int get_physical_address_pmp(CPURISCVState *env, int *prot, hwaddr addr,
->       return TRANSLATE_SUCCESS;
->   }
->   
-> +/* Returns 'true' if a svukte address check is needed */
-> +static bool do_svukte_check(CPURISCVState *env, bool first_stage,
-> +                             int mode, bool virt)
-> +{
-> +    bool ukte;
-> +
-> +    /* Svukte extension depends on Sv39. */
-> +    if (!(env_archcpu(env)->cfg.ext_svukte ||
-> +        !first_stage ||
-> +        VM_1_10_SV39 != get_field(env->satp, SATP64_MODE))) {
-> +        return false;
-> +    }
-> +
-> +    /*
-> +     * Check hstatus.HUKTE if the effective mode is switched to VU-mode by
-> +     * executing HLV/HLVX/HSV in U-mode.
-> +     * For other cases, check senvcfg.UKTE.
-> +     */
-> +    if (env->priv == PRV_U && !env->virt_enabled && virt) {
-> +        ukte = !!(env->hstatus & HSTATUS_HUKTE);
-> +    } else {
-> +        ukte = !!(env->senvcfg & SENVCFG_UKTE);
-> +    }
-> +
-> +    if (!ukte) {
-> +        return false;
-> +    }
-> +
-> +    /*
-> +     * Svukte extension is qualified only in U or VU-mode.
-> +     *
-> +     * Effective mode can be switched to U or VU-mode by:
-> +     *   - M-mode + mstatus.MPRV=1 + mstatus.MPP=U-mode.
-> +     *   - Execute HLV/HLVX/HSV from HS-mode + hstatus.SPVP=0.
-> +     *   - U-mode.
-> +     *   - VU-mode.
-> +     *   - Execute HLV/HLVX/HSV from U-mode + hstatus.HU=1.
-> +     */
-> +    if (mode != PRV_U) {
-> +        return false;
-> +    }
-> +
-> +    return true;
-> +}
-> +
-> +static bool check_svukte_addr(CPURISCVState *env, vaddr addr)
-> +{
-> +    uint32_t sxl = riscv_cpu_sxl(env);
-> +    sxl = (sxl == 0) ? MXL_RV32 : sxl;
-> +    uint32_t sxlen = 32 * sxl;
-> +    uint64_t high_bit = addr & (1UL << (sxlen - 1));
-> +
-> +    return !high_bit;
-> +}
-> +
->   /*
->    * get_physical_address - get the physical address for this virtual address
->    *
-> @@ -894,6 +949,7 @@ static int get_physical_address(CPURISCVState *env, hwaddr *physical,
->       MemTxResult res;
->       MemTxAttrs attrs = MEMTXATTRS_UNSPECIFIED;
->       int mode = mmuidx_priv(mmu_idx);
-> +    bool virt = mmuidx_2stage(mmu_idx);
->       bool use_background = false;
->       hwaddr ppn;
->       int napot_bits = 0;
-> @@ -901,6 +957,11 @@ static int get_physical_address(CPURISCVState *env, hwaddr *physical,
->       bool is_sstack_idx = ((mmu_idx & MMU_IDX_SS_WRITE) == MMU_IDX_SS_WRITE);
->       bool sstack_page = false;
->   
-> +    if (do_svukte_check(env, first_stage, mode, virt) &&
-> +        !check_svukte_addr(env, addr)) {
-> +        return TRANSLATE_FAIL;
-> +    }
-> +
->       /*
->        * Check if we should use the background registers for the two
->        * stage translation. We don't need to check if we actually need
+diff --git a/tests/qtest/meson.build b/tests/qtest/meson.build
+index aa93e98418..4ec5b0afbb 100644
+--- a/tests/qtest/meson.build
++++ b/tests/qtest/meson.build
+@@ -271,7 +271,7 @@ qtests_s390x = \
+ qtests_riscv32 = \
+   (config_all_devices.has_key('CONFIG_SIFIVE_E_AON') ? ['sifive-e-aon-watchdog-test'] : [])
+ 
+-qtests_riscv64 = \
++qtests_riscv64 = ['riscv-csr-test'] + \
+   (unpack_edk2_blobs ? ['bios-tables-test'] : [])
+ 
+ qos_test_ss = ss.source_set()
+diff --git a/tests/qtest/riscv-csr-test.c b/tests/qtest/riscv-csr-test.c
+new file mode 100644
+index 0000000000..ff5c29e6c6
+--- /dev/null
++++ b/tests/qtest/riscv-csr-test.c
+@@ -0,0 +1,56 @@
++/*
++ * QTest testcase for RISC-V CSRs
++ *
++ * Copyright (c) 2024 Syntacore.
++ *
++ * This program is free software; you can redistribute it and/or modify it
++ * under the terms of the GNU General Public License as published by the
++ * Free Software Foundation; either version 2 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful, but WITHOUT
++ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
++ * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License
++ * for more details.
++ */
++
++#include "qemu/osdep.h"
++#include "libqtest.h"
++
++#define CSR_MVENDORID       0xf11
++#define CSR_MISELECT        0x350
++
++static void run_test_csr(void)
++{
++    uint64_t res;
++    uint64_t val = 0;
++
++    QTestState *qts = qtest_init("-machine virt -cpu veyron-v1");
++
++    res = qtest_csr_call(qts, "get_csr", 0, CSR_MVENDORID, &val);
++
++    g_assert_cmpint(res, ==, 0);
++    g_assert_cmpint(val, ==, 0x61f);
++
++    val = 0xff;
++    res = qtest_csr_call(qts, "set_csr", 0, CSR_MISELECT, &val);
++
++    g_assert_cmpint(res, ==, 0);
++
++    val = 0;
++    res = qtest_csr_call(qts, "get_csr", 0, CSR_MISELECT, &val);
++
++    g_assert_cmpint(res, ==, 0);
++    g_assert_cmpint(val, ==, 0xff);
++
++    qtest_quit(qts);
++}
++
++int main(int argc, char **argv)
++{
++    g_test_init(&argc, &argv, NULL);
++
++    qtest_add_func("/cpu/csr", run_test_csr);
++
++    return g_test_run();
++}
+-- 
+2.34.1
 
 
