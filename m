@@ -4,93 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DF764D462A5
-	for <qemu-riscv@archiver.kernel.org>; Wed, 13 Nov 2024 14:04:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A82D2D462AA
+	for <qemu-riscv@archiver.kernel.org>; Wed, 13 Nov 2024 14:24:53 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tBDz4-0000Oc-Uu; Wed, 13 Nov 2024 09:04:38 -0500
+	id 1tBEI9-000420-K5; Wed, 13 Nov 2024 09:24:22 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <ppandit@redhat.com>)
- id 1tBCdt-0001yh-27
- for qemu-riscv@nongnu.org; Wed, 13 Nov 2024 07:38:41 -0500
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <ppandit@redhat.com>)
- id 1tBCdp-00031i-1C
- for qemu-riscv@nongnu.org; Wed, 13 Nov 2024 07:38:40 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1731501514;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=UOTlncNEO9Kx84sp4x+4qsgShYgzgpOfBmXzjv0lRKA=;
- b=D6NOgsBXyDPrSC7w1z0oyPk2Ealdbmo6QxvyRrHXroVAJn5KWYNfUyy1B7JoeshO7pMXk1
- kJzbD0qTUnqM6ibJrmyD3p+LAWyYUVWBZr5B4YbjG+ODz31x7qTRlmV+Fal7NTqCUr/uhs
- NcrZArw7HiNgDfi95kIh+JQA/87i9uw=
-Received: from mail-lf1-f69.google.com (mail-lf1-f69.google.com
- [209.85.167.69]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-256-a6egGPGXOCGWQV40FAEZrg-1; Wed, 13 Nov 2024 07:38:33 -0500
-X-MC-Unique: a6egGPGXOCGWQV40FAEZrg-1
-X-Mimecast-MFC-AGG-ID: a6egGPGXOCGWQV40FAEZrg
-Received: by mail-lf1-f69.google.com with SMTP id
- 2adb3069b0e04-53da203141bso594940e87.1
- for <qemu-riscv@nongnu.org>; Wed, 13 Nov 2024 04:38:32 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <phil@philjordan.eu>)
+ id 1tBEI3-00040e-KN
+ for qemu-riscv@nongnu.org; Wed, 13 Nov 2024 09:24:15 -0500
+Received: from mail-ed1-x52a.google.com ([2a00:1450:4864:20::52a])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <phil@philjordan.eu>)
+ id 1tBEI1-00004u-0N
+ for qemu-riscv@nongnu.org; Wed, 13 Nov 2024 09:24:15 -0500
+Received: by mail-ed1-x52a.google.com with SMTP id
+ 4fb4d7f45d1cf-5cf6f804233so702924a12.2
+ for <qemu-riscv@nongnu.org>; Wed, 13 Nov 2024 06:24:12 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=philjordan-eu.20230601.gappssmtp.com; s=20230601; t=1731507851; x=1732112651;
+ darn=nongnu.org; 
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=IOlf/wzEJ+wM7g5BTurCACeEWddAq/2jF0kyAkwof9o=;
+ b=qI4mnx5wt9zg0YPalM3JcQIkfwSjETWg3IZS62VQcAtf6xKLYOKLOPBliGoDq9iXQB
+ ya5r5RkkQwpoaXe2wYk9I7Zf3b62muA6Bj2TD9+SHnh0zkc1xIgYEj3pS8kdWAXLnn2b
+ al/0ezR03tN5V145yifgVtGvtQyjgP8lr35ddyDyUFJmyk/1tzvL4/nDgC2AwZETAYpR
+ 9vvLMKP3gIYKF/FB2Ohap+zOSLVE3rh6s2ncSac4b+Y+VcviJrrR4P0jG6icCtNcqMif
+ fm678amo4QguLD1RBzActNb0KQxHHsrY47t2E5qphcQPJnZAvXnRHpUw3yDS8VAnU1ZZ
+ Ugng==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731501511; x=1732106311;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=UOTlncNEO9Kx84sp4x+4qsgShYgzgpOfBmXzjv0lRKA=;
- b=IRNZ9tBuvIlJs0b1IGbPGa6cavnXPb6w7k4fLJxedAfvnZHr2xBdqWTb3Cy/J9Lnmo
- ++hrulUfiqfaRCElsLCBsFanNDtg6vWYX8JWCIqK97bJYUGrGKNKLGNosZmmZzqixQWr
- pjwmBgHOWl91AEuU5b1kvkXGI8HqI+ZTuBmXKmjDrJiCOwFokpGN6Io0rthzHqSIhLUU
- My09cnRNMMXWR0mTHCvDbtpscDr911fn1oxQxfi71yEHGzp6hiVAlqlqepAqCEeu5o6s
- 12jr1DNe94IrP/srNX9Pr60BzZNerSK98+VcP1LR0cR7fXx+c7z74H/k7/r3J04eLegf
- OUvg==
-X-Gm-Message-State: AOJu0Yw9WhkgkvUawtmFfrZrDozHqC7XmmkZ2l3v9Y48P76j9rpcm3HJ
- nni0Zm/yo5GImVskqLimGYUwNMvUN0mC4Q2uSzpBqp2FjHdo8L6EEFgCH7gRIEEtvgc0ZpVOy2a
- peUitXRqR2qQCOFHxYFKzJX3VBxu17QobKMmlpBY9up/GvVX7soyQX6yD0PeguUeGfZ5fIgY7Z5
- bhVlCHlvmBajZKZeJecEx3pu/gvT0=
-X-Received: by 2002:a05:6512:3e29:b0:539:df2f:e115 with SMTP id
- 2adb3069b0e04-53d862c5dcfmr10623320e87.23.1731501511503; 
- Wed, 13 Nov 2024 04:38:31 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IFqZNb+SSpHtxQT/Sn5rLJY9l44cJvbLZf7izRPXsvk3NwqkzeGkwHKaUfQUDFiQiCWZ2Mi+6fFvMa0UlZoD+g=
-X-Received: by 2002:a05:6512:3e29:b0:539:df2f:e115 with SMTP id
- 2adb3069b0e04-53d862c5dcfmr10623303e87.23.1731501511054; Wed, 13 Nov 2024
- 04:38:31 -0800 (PST)
+ d=1e100.net; s=20230601; t=1731507851; x=1732112651;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=IOlf/wzEJ+wM7g5BTurCACeEWddAq/2jF0kyAkwof9o=;
+ b=M5mGWyN7AJGtmQ8H+06bXP7YivZwFGaUPicKWK26i9sYrHS1Gjg+Mna/fZhtpxR+De
+ sykJPB5caYWxUsvkJiqixrPX6v8KEiobumfslhGcNpRI3osZFYpCnRok/KP8bihN3COI
+ 3JFJw/YbJMIxpVUKeLgMt9cxX2liMZihPWUJ+a+3w7wK/F6NIpqTO9y0UZ85b877f3dO
+ O7SALJV2gsG3tSIq7EWfbFZ/ac+027ixMvsXEkzLzp0/lDqg2OcOQT64wVSr5H+c8X+0
+ yV2E7PdsvbKH1qAHNm/TwXSNR2n1I/6ENDrqVMgp2aauGTJZQ2+YUy7G4pjFopEakP4P
+ BIXA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWRMcKFAWQUC2RulF+knybHdBIVhqwWhMkZ0nE94IjYgca6oYjBVQi3PNNSeT5IPCPyk8x68QZg2TP+@nongnu.org
+X-Gm-Message-State: AOJu0YyeJ4ehdCZSnFNGjGIYzYr5eArVAoSpwhaNugAIyXkEdUg26Rv6
+ PAJKzmPGXw+HWL3kFgpigQqF65xrZMVlogqY0urjsU5UQcS7E06ui+IrQQWKkw==
+X-Google-Smtp-Source: AGHT+IFtaK8WKKef3suwzP3L5ElmzYG6o61H88aKzNPzdHWotOa1pF8pByVPREE1cU6slczAT7sM2w==
+X-Received: by 2002:a05:6402:35d6:b0:5c9:7dd9:3eda with SMTP id
+ 4fb4d7f45d1cf-5cf630a7d06mr2811573a12.5.1731507851435; 
+ Wed, 13 Nov 2024 06:24:11 -0800 (PST)
+Received: from localhost.localdomain (h082218084190.host.wavenet.at.
+ [82.218.84.190]) by smtp.gmail.com with ESMTPSA id
+ 4fb4d7f45d1cf-5cf03b5d76esm7134612a12.9.2024.11.13.06.24.09
+ (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
+ Wed, 13 Nov 2024 06:24:10 -0800 (PST)
+From: Phil Dennis-Jordan <phil@philjordan.eu>
+To: qemu-devel@nongnu.org
+Cc: agraf@csgraf.de, phil@philjordan.eu, peter.maydell@linaro.org,
+ pbonzini@redhat.com, rad@semihalf.com, quic_llindhol@quicinc.com,
+ stefanha@redhat.com, mst@redhat.com, slp@redhat.com,
+ richard.henderson@linaro.org, eduardo@habkost.net,
+ marcel.apfelbaum@gmail.com, gaosong@loongson.cn, jiaxun.yang@flygoat.com,
+ chenhuacai@kernel.org, kwolf@redhat.com, hreitz@redhat.com,
+ philmd@linaro.org, shorne@gmail.com, palmer@dabbelt.com,
+ alistair.francis@wdc.com, bmeng.cn@gmail.com, liwei1518@gmail.com,
+ dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com,
+ jcmvbkbc@gmail.com, marcandre.lureau@redhat.com, berrange@redhat.com,
+ akihiko.odaki@daynix.com, qemu-arm@nongnu.org, qemu-block@nongnu.org,
+ qemu-riscv@nongnu.org, balaton@eik.bme.hu, Alexander Graf <graf@amazon.com>
+Subject: [PATCH v10 08/15] hvf: arm: Ignore writes to CNTP_CTL_EL0
+Date: Wed, 13 Nov 2024 15:23:36 +0100
+Message-Id: <20241113142343.40832-9-phil@philjordan.eu>
+X-Mailer: git-send-email 2.39.3 (Apple Git-145)
+In-Reply-To: <20241113142343.40832-1-phil@philjordan.eu>
+References: <20241113142343.40832-1-phil@philjordan.eu>
 MIME-Version: 1.0
-References: <20241113110459.1607299-1-antonb@tenstorrent.com>
-In-Reply-To: <20241113110459.1607299-1-antonb@tenstorrent.com>
-From: Prasad Pandit <ppandit@redhat.com>
-Date: Wed, 13 Nov 2024 18:08:14 +0530
-Message-ID: <CAE8KmOyCGwG36C+9eSGfcRWfEiqL1Uk-tQc2Kex2P9OHVP3vTA@mail.gmail.com>
-Subject: Re: [PATCH v2] target/riscv: Add Tenstorrent Ascalon CPU
-To: Anton Blanchard <antonb@tenstorrent.com>
-Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, 
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, 
- Bin Meng <bmeng.cn@gmail.com>, Weiwei Li <liwei1518@gmail.com>, 
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
-X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: o1exuoNmu8Y2j4kEtTVmS-JMVElbwkluGSUh-o_BR0Y_1731501512
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=170.10.133.124; envelope-from=ppandit@redhat.com;
- helo=us-smtp-delivery-124.mimecast.com
-X-Spam_score_int: -21
-X-Spam_score: -2.2
-X-Spam_bar: --
-X-Spam_report: (-2.2 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.119,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H3=0.001, RCVD_IN_MSPIKE_WL=0.001,
- RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001, RCVD_IN_VALIDITY_SAFE_BLOCKED=0.001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+Content-Transfer-Encoding: 8bit
+Received-SPF: neutral client-ip=2a00:1450:4864:20::52a;
+ envelope-from=phil@philjordan.eu; helo=mail-ed1-x52a.google.com
+X-Spam_score_int: -10
+X-Spam_score: -1.1
+X-Spam_bar: -
+X-Spam_report: (-1.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_NEUTRAL=0.779 autolearn=no autolearn_force=no
 X-Spam_action: no action
-X-Mailman-Approved-At: Wed, 13 Nov 2024 09:04:38 -0500
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -105,127 +106,54 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Wed, 13 Nov 2024 at 16:36, Anton Blanchard <antonb@tenstorrent.com> wrote:
-> Add a CPU entry for the Tenstorrent Ascalon CPU, a series of 2 wide to
-> 8 wide RV64 cores. More details can be found at
-> https://tenstorrent.com/ip/tt-ascalon
->
-> Signed-off-by: Anton Blanchard <antonb@tenstorrent.com>
-> ---
->  target/riscv/cpu-qom.h |  1 +
->  target/riscv/cpu.c     | 67 ++++++++++++++++++++++++++++++++++++++++++
->  2 files changed, 68 insertions(+)
+From: Alexander Graf <graf@amazon.com>
 
-v1: https://lore.kernel.org/qemu-devel/20241108230709.1466634-1-antonb@tenstorrent.com/T/#u
+MacOS unconditionally disables interrupts of the physical timer on boot
+and then continues to use the virtual one. We don't really want to support
+a full physical timer emulation, so let's just ignore those writes.
 
-* We need to share a link to an earlier discussion/version of the patch. ^^
-
-> diff --git a/target/riscv/cpu-qom.h b/target/riscv/cpu-qom.h
-> index 62115375cd..6547642287 100644
-> --- a/target/riscv/cpu-qom.h
-> +++ b/target/riscv/cpu-qom.h
-> @@ -49,6 +49,7 @@
->  #define TYPE_RISCV_CPU_SIFIVE_U54       RISCV_CPU_TYPE_NAME("sifive-u54")
->  #define TYPE_RISCV_CPU_THEAD_C906       RISCV_CPU_TYPE_NAME("thead-c906")
->  #define TYPE_RISCV_CPU_VEYRON_V1        RISCV_CPU_TYPE_NAME("veyron-v1")
-> +#define TYPE_RISCV_CPU_TT_ASCALON       RISCV_CPU_TYPE_NAME("tt-ascalon")
->  #define TYPE_RISCV_CPU_HOST             RISCV_CPU_TYPE_NAME("host")
->
->  OBJECT_DECLARE_CPU_TYPE(RISCVCPU, RISCVCPUClass, RISCV_CPU)
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index f219f0c3b5..8447ad0dfb 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -579,6 +579,72 @@ static void rv64_veyron_v1_cpu_init(Object *obj)
->  #endif
->  }
->
-> +/* Tenstorrent Ascalon */
-
-* This comment looks redundant, does not help much.
-
-> +static void rv64_tt_ascalon_cpu_init(Object *obj)
-> +{
-> +    CPURISCVState *env = &RISCV_CPU(obj)->env;
-> +    RISCVCPU *cpu = RISCV_CPU(obj);
-> +
-> +    riscv_cpu_set_misa_ext(env, RVG | RVC | RVS | RVU | RVH | RVV);
-> +    env->priv_ver = PRIV_VERSION_1_13_0;
-> +
-> +    /* Enable ISA extensions */
-> +    cpu->cfg.mmu = true;
-> +    cpu->cfg.vlenb = 256 >> 3;
-> +    cpu->cfg.elen = 64;
-> +    cpu->env.vext_ver = VEXT_VERSION_1_00_0;
-> +    cpu->cfg.rvv_ma_all_1s = true;
-> +    cpu->cfg.rvv_ta_all_1s = true;
-> +    cpu->cfg.misa_w = true;
-> +    cpu->cfg.pmp = true;
-> +    cpu->cfg.cbom_blocksize = 64;
-> +    cpu->cfg.cbop_blocksize = 64;
-> +    cpu->cfg.cboz_blocksize = 64;
-> +    cpu->cfg.ext_zic64b = true;
-> +    cpu->cfg.ext_zicbom = true;
-> +    cpu->cfg.ext_zicbop = true;
-> +    cpu->cfg.ext_zicboz = true;
-> +    cpu->cfg.ext_zicntr = true;
-> +    cpu->cfg.ext_zicond = true;
-> +    cpu->cfg.ext_zicsr = true;
-> +    cpu->cfg.ext_zifencei = true;
-> +    cpu->cfg.ext_zihintntl = true;
-> +    cpu->cfg.ext_zihintpause = true;
-> +    cpu->cfg.ext_zihpm = true;
-> +    cpu->cfg.ext_zimop = true;
-> +    cpu->cfg.ext_zawrs = true;
-> +    cpu->cfg.ext_zfa = true;
-> +    cpu->cfg.ext_zfbfmin = true;
-> +    cpu->cfg.ext_zfh = true;
-> +    cpu->cfg.ext_zfhmin = true;
-> +    cpu->cfg.ext_zcb = true;
-> +    cpu->cfg.ext_zcmop = true;
-> +    cpu->cfg.ext_zba = true;
-> +    cpu->cfg.ext_zbb = true;
-> +    cpu->cfg.ext_zbs = true;
-> +    cpu->cfg.ext_zkt = true;
-> +    cpu->cfg.ext_zvbb = true;
-> +    cpu->cfg.ext_zvbc = true;
-> +    cpu->cfg.ext_zvfbfmin = true;
-> +    cpu->cfg.ext_zvfbfwma = true;
-> +    cpu->cfg.ext_zvfh = true;
-> +    cpu->cfg.ext_zvfhmin = true;
-> +    cpu->cfg.ext_zvkng = true;
-> +    cpu->cfg.ext_smaia = true;
-> +    cpu->cfg.ext_smstateen = true;
-> +    cpu->cfg.ext_ssaia = true;
-> +    cpu->cfg.ext_sscofpmf = true;
-> +    cpu->cfg.ext_sstc = true;
-> +    cpu->cfg.ext_svade = true;
-> +    cpu->cfg.ext_svinval = true;
-> +    cpu->cfg.ext_svnapot = true;
-> +    cpu->cfg.ext_svpbmt = true;
-> +
-> +#ifndef CONFIG_USER_ONLY
-> +    set_satp_mode_max_supported(cpu, VM_1_10_SV57);
-> +#endif
-> +}
-> +
->  #ifdef CONFIG_TCG
->  static void rv128_base_cpu_init(Object *obj)
->  {
-> @@ -2982,6 +3048,7 @@ static const TypeInfo riscv_cpu_type_infos[] = {
->      DEFINE_VENDOR_CPU(TYPE_RISCV_CPU_SIFIVE_U54, MXL_RV64,  rv64_sifive_u_cpu_init),
->      DEFINE_VENDOR_CPU(TYPE_RISCV_CPU_SHAKTI_C,   MXL_RV64,  rv64_sifive_u_cpu_init),
->      DEFINE_VENDOR_CPU(TYPE_RISCV_CPU_THEAD_C906, MXL_RV64,  rv64_thead_c906_cpu_init),
-> +    DEFINE_VENDOR_CPU(TYPE_RISCV_CPU_TT_ASCALON, MXL_RV64,  rv64_tt_ascalon_cpu_init),
->      DEFINE_VENDOR_CPU(TYPE_RISCV_CPU_VEYRON_V1,  MXL_RV64,  rv64_veyron_v1_cpu_init),
->  #ifdef CONFIG_TCG
->      DEFINE_DYNAMIC_CPU(TYPE_RISCV_CPU_BASE128,   MXL_RV128, rv128_base_cpu_init),
-> --
-
-Rest looks okay.
-
-Thank you.
+Signed-off-by: Alexander Graf <graf@amazon.com>
+Signed-off-by: Phil Dennis-Jordan <phil@philjordan.eu>
+Reviewed-by: Akihiko Odaki <akihiko.odaki@daynix.com>
 ---
-  - Prasad
+ target/arm/hvf/hvf.c | 9 +++++++++
+ 1 file changed, 9 insertions(+)
+
+diff --git a/target/arm/hvf/hvf.c b/target/arm/hvf/hvf.c
+index 6cea483d422..b45b764dfd0 100644
+--- a/target/arm/hvf/hvf.c
++++ b/target/arm/hvf/hvf.c
+@@ -11,6 +11,7 @@
+ 
+ #include "qemu/osdep.h"
+ #include "qemu/error-report.h"
++#include "qemu/log.h"
+ 
+ #include "sysemu/runstate.h"
+ #include "sysemu/hvf.h"
+@@ -184,6 +185,7 @@ void hvf_arm_init_debug(void)
+ #define SYSREG_OSLSR_EL1      SYSREG(2, 0, 1, 1, 4)
+ #define SYSREG_OSDLR_EL1      SYSREG(2, 0, 1, 3, 4)
+ #define SYSREG_CNTPCT_EL0     SYSREG(3, 3, 14, 0, 1)
++#define SYSREG_CNTP_CTL_EL0   SYSREG(3, 3, 14, 2, 1)
+ #define SYSREG_PMCR_EL0       SYSREG(3, 3, 9, 12, 0)
+ #define SYSREG_PMUSERENR_EL0  SYSREG(3, 3, 9, 14, 0)
+ #define SYSREG_PMCNTENSET_EL0 SYSREG(3, 3, 9, 12, 1)
+@@ -1620,6 +1622,13 @@ static int hvf_sysreg_write(CPUState *cpu, uint32_t reg, uint64_t val)
+     case SYSREG_OSLAR_EL1:
+         env->cp15.oslsr_el1 = val & 1;
+         return 0;
++    case SYSREG_CNTP_CTL_EL0:
++        /*
++         * Guests should not rely on the physical counter, but macOS emits
++         * disable writes to it. Let it do so, but ignore the requests.
++         */
++        qemu_log_mask(LOG_UNIMP, "Unsupported write to CNTP_CTL_EL0\n");
++        return 0;
+     case SYSREG_OSDLR_EL1:
+         /* Dummy register */
+         return 0;
+-- 
+2.39.3 (Apple Git-145)
 
 
