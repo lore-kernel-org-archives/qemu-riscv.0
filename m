@@ -4,74 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4289AD637A1
-	for <qemu-riscv@archiver.kernel.org>; Wed, 13 Nov 2024 17:19:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7F9A2D637A1
+	for <qemu-riscv@archiver.kernel.org>; Wed, 13 Nov 2024 17:19:33 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tBH0p-0000Im-IR; Wed, 13 Nov 2024 12:18:39 -0500
+	id 1tBH0q-0000JJ-7k; Wed, 13 Nov 2024 12:18:40 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1tBH0j-0000FZ-Tg
- for qemu-riscv@nongnu.org; Wed, 13 Nov 2024 12:18:34 -0500
-Received: from mail-pl1-x62b.google.com ([2607:f8b0:4864:20::62b])
+ id 1tBH0h-0000FJ-ME
+ for qemu-riscv@nongnu.org; Wed, 13 Nov 2024 12:18:33 -0500
+Received: from mail-pl1-x62f.google.com ([2607:f8b0:4864:20::62f])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1tBH0i-0003nk-Dc
- for qemu-riscv@nongnu.org; Wed, 13 Nov 2024 12:18:33 -0500
-Received: by mail-pl1-x62b.google.com with SMTP id
- d9443c01a7336-20ca388d242so76067835ad.2
- for <qemu-riscv@nongnu.org>; Wed, 13 Nov 2024 09:18:32 -0800 (PST)
+ id 1tBH0g-0003nG-BG
+ for qemu-riscv@nongnu.org; Wed, 13 Nov 2024 12:18:31 -0500
+Received: by mail-pl1-x62f.google.com with SMTP id
+ d9443c01a7336-20c8b557f91so76354995ad.2
+ for <qemu-riscv@nongnu.org>; Wed, 13 Nov 2024 09:18:28 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1731518311; x=1732123111; darn=nongnu.org;
+ d=ventanamicro.com; s=google; t=1731518308; x=1732123108; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=vIAieBmW047uDIhnx+/2hQRCiiVtdno4nQvJZeYlWlw=;
- b=BT0qVAJR6WGH6IWofvXlAz4cjIcXmi8nwZOhJ6b8xdt7DUnYaj0udXzl3EeTR5yfEi
- sH90Frvlib1vvVcqGaBOHnEgRZsbTZkd9kgIwTxn9AurinPx188GsbdxI1x0VDHuv2WW
- dmMS88M7QSMEC9+Oo0EIkmKoW6vLhpI08iq10R1S4TgXYdgP+NFjqhJv3iYKjdst4Yhr
- veXJagLco3ddR01YJBiD6KoXWNJs3GzdH5cEteS5f2K5Ml63mzw5aoBW7gL8/GUupvCH
- I0SMhm8ZF2fAYw676kfK0UGZlVamWcLDMknWrdeWd32xCgoKY2c0e80zfHvn274oCTCj
- /N9Q==
+ bh=/LTsgycx238NK4SFPWzXaAV3vV2r5w2wkO+45OR4ay4=;
+ b=MR1kcmN/aU9MSI16Fsr2YxjhkGwGRVcuJsUbEnA8p80yuuW9GbFbi1XJEuFb5HeqsH
+ VRmUZF4zPPyhZd1On+djI+wxU+5O/y6e4he8BTk8CT348veTKCVUiGdD+y7uUjTq7KhG
+ qzQgGXfBKil5vPmKad604UE5H1G1PHjQwR2uIZUsrXZ46WC8F8XYBVbDN59w1VbPutM0
+ NDDZOUSuEHOKr23yBIvLRsWb7FjSBQlwH7CuPw12X/ijJZQsKtkyjy1e3pFjk4yorjmo
+ ydG+2SxzBNkDvY3r1nEM284VRQW9myTPd8MxqIdZ+Zq0KUbsUjmzRMX1zZ0xJHb9kZ1q
+ mTAQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731518311; x=1732123111;
+ d=1e100.net; s=20230601; t=1731518308; x=1732123108;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=vIAieBmW047uDIhnx+/2hQRCiiVtdno4nQvJZeYlWlw=;
- b=PaL4nDvGiudzJbhQ9uF+klumW8IgOk3ihXztuv5UreDlk+m9c+eiSYf+CIlTkKJwsH
- X3cieSTJ0VDvf7W2CBFHKvcMKgiog/VptOiWJwCnCX3nsrt8/89/9vN+zQRFxDSfonl3
- oNJFpUKT6AOVRvc4RLaVfTcjifh58eWkOBi3S98sp7c652Xxbozidxem314h3033A5ln
- RnbhqZqzLev4cF5pHQzi57yIelwKG3rHBsfzQAsUPFIkrNkGtSPfwerm9cSYg0a5D+Q8
- UVPWAKiqs7EwpGjOuWvmDEykiuIfb6XtqhEaTsJW1Kdtbp960kDj2oP9h6Wd9ib95qm3
- Fq7g==
-X-Gm-Message-State: AOJu0Yy0TFZbfVtUpJGvn5p2VmIxHZwRQG0fQBlR5MeBzNPNYLfVA2DZ
- VygSy6P2ol714HJOt/D8WSlPjjeQsffXyScJ99oFCIA81/oBf1IdyyvMEc7sX8I=
-X-Google-Smtp-Source: AGHT+IFe/3SzphQ+oIR09CWG8x7/OksudLrg4yNImhZ6X0SaI7rUytK+j3hL0ZxpDohmpU8948q6PA==
-X-Received: by 2002:a17:902:cf02:b0:211:6b68:ae89 with SMTP id
- d9443c01a7336-21183e6e6f8mr245130165ad.54.1731518310842; 
- Wed, 13 Nov 2024 09:18:30 -0800 (PST)
+ bh=/LTsgycx238NK4SFPWzXaAV3vV2r5w2wkO+45OR4ay4=;
+ b=KVuCbRMk9Q/LJO/MgmKJIxIaFjM9McJ1DdFNf72ue7QmU/EdFiCfSw6KJK9wT6bh9p
+ smAE7uzvKa0Sx3fO1w6lfy8iostxkYo6KspDgZebLQ9G4KvrrtZjLIScAk+LWVtNcO7f
+ giCH56xTNyx3DuxTXBbyOPItyce/S6E3C8wKgtcwquso8DdU5/HdIJ7HXri7NrQ0LiFw
+ h61dh4xf0CIhUm//3wnY8rgJdyVGXzdqSkTtFz3PPDnlExmjRgFTkQXW5j0ZqCZfGaUg
+ +VgXjLTax2EqoTwe4YQ4gJXqjgpkS7PjKC72dCgvM4TjtD89NdMK9X3J8Ld6HrTMbY5X
+ aHKg==
+X-Gm-Message-State: AOJu0Yy/XdmR8LxicXxHZ0Ul88hGqKaqmuCRFPej3M5f18DHVygRkxLs
+ NtNJMmjWUQGtZORZw6iF0CbR7dzVqBFlQeE5aivnXsWBbiwKv7DhCSsAvKYIUnstifckkwHtcrE
+ 2
+X-Google-Smtp-Source: AGHT+IE46CKv1B78UNZ1wO7vYUtMANQLWLDQsMfCdeOccvO9k0FH0UO3K8gH6qHUApStNTUWLmzu9w==
+X-Received: by 2002:a17:903:2448:b0:20c:f27f:fbf with SMTP id
+ d9443c01a7336-21183ceaa93mr302841835ad.25.1731518308018; 
+ Wed, 13 Nov 2024 09:18:28 -0800 (PST)
 Received: from grind.. ([187.101.65.72]) by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-724078a9063sm13392889b3a.75.2024.11.13.09.18.28
+ d2e1a72fcca58-724078a9063sm13392889b3a.75.2024.11.13.09.18.25
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 13 Nov 2024 09:18:30 -0800 (PST)
+ Wed, 13 Nov 2024 09:18:27 -0800 (PST)
 From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
  liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Subject: [PATCH for-10.0 9/9] target/riscv/tcg: add sha
-Date: Wed, 13 Nov 2024 14:17:55 -0300
-Message-ID: <20241113171755.978109-10-dbarboza@ventanamicro.com>
+Subject: [PATCH for-10.0 8/9] target/riscv: add shgatpa
+Date: Wed, 13 Nov 2024 14:17:54 -0300
+Message-ID: <20241113171755.978109-9-dbarboza@ventanamicro.com>
 X-Mailer: git-send-email 2.47.0
 In-Reply-To: <20241113171755.978109-1-dbarboza@ventanamicro.com>
 References: <20241113171755.978109-1-dbarboza@ventanamicro.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::62b;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pl1-x62b.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::62f;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pl1-x62f.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -94,85 +95,31 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-'sha' is the augmented hypervisor extension, defined in RVA22 as a set of
-the following extensions:
+shgatpa is defined in RVA22 as:
 
-- RVH
-- Ssstateen
-- Shcounterenw (always present)
-- Shvstvala (always present)
-- Shtvala (always present)
-- Shvstvecd (always present)
-- Shvsatpa (always present)
-- Shgatpa (always present)
+"For each supported virtual memory scheme SvNN supported in satp, the
+corresponding hgatp SvNNx4 mode must be supported. The hgatp mode Bare
+must also be supported."
 
-We can claim support for 'sha' by checking if we have RVH and ssstateen.
+Claim support for shgatpa since this is always true for TCG.
 
 Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 ---
- target/riscv/cpu.c         | 2 ++
- target/riscv/cpu_cfg.h     | 1 +
- target/riscv/tcg/tcg-cpu.c | 8 ++++++++
- 3 files changed, 11 insertions(+)
+ target/riscv/cpu.c | 1 +
+ 1 file changed, 1 insertion(+)
 
 diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index fff7010647..a8b8c9e775 100644
+index 068b019564..fff7010647 100644
 --- a/target/riscv/cpu.c
 +++ b/target/riscv/cpu.c
 @@ -184,6 +184,7 @@ const RISCVIsaExtData isa_edata_arr[] = {
      ISA_EXT_DATA_ENTRY(zhinx, PRIV_VERSION_1_12_0, ext_zhinx),
      ISA_EXT_DATA_ENTRY(zhinxmin, PRIV_VERSION_1_12_0, ext_zhinxmin),
      ISA_EXT_DATA_ENTRY(shcounterenw, PRIV_VERSION_1_12_0, has_priv_1_12),
-+    ISA_EXT_DATA_ENTRY(sha, PRIV_VERSION_1_12_0, ext_sha),
-     ISA_EXT_DATA_ENTRY(shgatpa, PRIV_VERSION_1_12_0, has_priv_1_12),
++    ISA_EXT_DATA_ENTRY(shgatpa, PRIV_VERSION_1_12_0, has_priv_1_12),
      ISA_EXT_DATA_ENTRY(shtvala, PRIV_VERSION_1_12_0, has_priv_1_12),
      ISA_EXT_DATA_ENTRY(shvsatpa, PRIV_VERSION_1_12_0, has_priv_1_12),
-@@ -1615,6 +1616,7 @@ const RISCVCPUMultiExtConfig riscv_cpu_experimental_exts[] = {
- const RISCVCPUMultiExtConfig riscv_cpu_named_features[] = {
-     MULTI_EXT_CFG_BOOL("zic64b", ext_zic64b, true),
-     MULTI_EXT_CFG_BOOL("ssstateen", ext_ssstateen, true),
-+    MULTI_EXT_CFG_BOOL("sha", ext_sha, true),
- 
-     DEFINE_PROP_END_OF_LIST(),
- };
-diff --git a/target/riscv/cpu_cfg.h b/target/riscv/cpu_cfg.h
-index c7bf455614..7c60a5becb 100644
---- a/target/riscv/cpu_cfg.h
-+++ b/target/riscv/cpu_cfg.h
-@@ -140,6 +140,7 @@ struct RISCVCPUConfig {
-     bool ext_svade;
-     bool ext_zic64b;
-     bool ext_ssstateen;
-+    bool ext_sha;
- 
-     /*
-      * Always 'true' booleans for named features
-diff --git a/target/riscv/tcg/tcg-cpu.c b/target/riscv/tcg/tcg-cpu.c
-index 0b9be2b0d3..b06638cca4 100644
---- a/target/riscv/tcg/tcg-cpu.c
-+++ b/target/riscv/tcg/tcg-cpu.c
-@@ -210,6 +210,11 @@ static void riscv_cpu_enable_named_feat(RISCVCPU *cpu, uint32_t feat_offset)
-         cpu->cfg.cbop_blocksize = 64;
-         cpu->cfg.cboz_blocksize = 64;
-         break;
-+    case CPU_CFG_OFFSET(ext_sha):
-+        if (!cpu_misa_ext_is_user_set(RVH)) {
-+            riscv_cpu_write_misa_bit(cpu, RVH, true);
-+        }
-+        /* fallthrough */
-     case CPU_CFG_OFFSET(ext_ssstateen):
-         cpu->cfg.ext_smstateen = true;
-         break;
-@@ -350,6 +355,9 @@ static void riscv_cpu_update_named_features(RISCVCPU *cpu)
-                           cpu->cfg.cboz_blocksize == 64;
- 
-     cpu->cfg.ext_ssstateen = cpu->cfg.ext_smstateen;
-+
-+    cpu->cfg.ext_sha = riscv_has_ext(&cpu->env, RVH) &&
-+                       cpu->cfg.ext_ssstateen;
- }
- 
- static void riscv_cpu_validate_g(RISCVCPU *cpu)
+     ISA_EXT_DATA_ENTRY(shvstvala, PRIV_VERSION_1_12_0, has_priv_1_12),
 -- 
 2.47.0
 
