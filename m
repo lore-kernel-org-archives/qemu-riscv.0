@@ -4,63 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 29F51D462B0
-	for <qemu-riscv@archiver.kernel.org>; Wed, 13 Nov 2024 14:27:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8A122D462AF
+	for <qemu-riscv@archiver.kernel.org>; Wed, 13 Nov 2024 14:27:42 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tBEIP-0004Gl-GB; Wed, 13 Nov 2024 09:24:37 -0500
+	id 1tBEHn-0003nJ-Mg; Wed, 13 Nov 2024 09:23:59 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <phil@philjordan.eu>)
- id 1tBEID-00043F-IB
- for qemu-riscv@nongnu.org; Wed, 13 Nov 2024 09:24:31 -0500
-Received: from mail-ed1-x529.google.com ([2a00:1450:4864:20::529])
+ id 1tBEHm-0003n2-I7
+ for qemu-riscv@nongnu.org; Wed, 13 Nov 2024 09:23:58 -0500
+Received: from mail-ed1-x535.google.com ([2a00:1450:4864:20::535])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <phil@philjordan.eu>)
- id 1tBEI8-00007Y-Eh
- for qemu-riscv@nongnu.org; Wed, 13 Nov 2024 09:24:24 -0500
-Received: by mail-ed1-x529.google.com with SMTP id
- 4fb4d7f45d1cf-5cf6f7ee970so746129a12.3
- for <qemu-riscv@nongnu.org>; Wed, 13 Nov 2024 06:24:18 -0800 (PST)
+ id 1tBEHj-0008R0-Dd
+ for qemu-riscv@nongnu.org; Wed, 13 Nov 2024 09:23:58 -0500
+Received: by mail-ed1-x535.google.com with SMTP id
+ 4fb4d7f45d1cf-5c9c28c1ecbso8548050a12.0
+ for <qemu-riscv@nongnu.org>; Wed, 13 Nov 2024 06:23:54 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=philjordan-eu.20230601.gappssmtp.com; s=20230601; t=1731507857; x=1732112657;
+ d=philjordan-eu.20230601.gappssmtp.com; s=20230601; t=1731507833; x=1732112633;
  darn=nongnu.org; 
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Uq9aUx9tZElPjFh7Mp/ptdt/p7fU1lcD2R2kJFsLiAE=;
- b=y+qBhXqlghy9OwGZuJSUz3nx6W55cLosI05W29JUKMe9ehS5Aw7bmiy8oKXm+Kxb8z
- 9cOuWL0BIlUGHsUVXdXVxwJvKkTNPuUcLBh0iAJ8BQZI1O0MvXY0WBPssgg/nvHV6udA
- qI4XMHOvmyLfV/+CRhdy4foeP1237hz1nXlvPvmXoLWwWB7+GkLb4Rl3tk0UdMRGugoc
- nEXmxRojJM6WmZ7zShSeKc0oc1Rr//xW9Dv4yNufc3pEJqcR7ud1JtqZ5GR+uYqtNcxV
- MYBFSumPew5QEXoq0n7uAj+3kOLJNM6FiScc6qsmAn9vnAqL31jghOrT2JT/y33s621k
- HgVQ==
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=m6UBkUsYHw5dtVcgl860DY5WYMjaOb4eDUME3ssG3/U=;
+ b=D3Wg1JqPXBg90xA2N83Y3W2KHL+xLY4a+YlO3qB/nwxMSvEG6PEg9236K1yC7WqcF+
+ Bi/WAdppJJkA+WfBnF3N+SP9lefttP9ZBTyXyzxFKaSAknWdDS2+4aCNENW+wg6j+JOT
+ U2atSNxOuQuCNs+5St5GOKSbr5otbzMlDFy/FQrNhZJzP8cYL1xdapW2/Y+OLfSh/wWB
+ uMBoqJSyv2Nk5NJwmg5b0IFdydQl7Za1WrVRiK3R/CnRaMY1p/jlvdijVFpxAZjXQtH0
+ LgkMGFmVjehmeZ72h+qN3eNsQcudfDkh9/iis43rBGUOoQahtZFuwYJtbMa3uq+5PgKq
+ 4H0A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731507857; x=1732112657;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=Uq9aUx9tZElPjFh7Mp/ptdt/p7fU1lcD2R2kJFsLiAE=;
- b=TPobjw7fBTHqrXUa8yd9G72aDfIDg/PHN1jiOD0uhQ0wcvF8EqnnALJD4qs4fvpNK8
- o/i+Cz87dsfA97H/tnzdcRhHhbXEDWmuWMOSd1DmVsbX8NSJHvY9vMs6zl/iJKREho5g
- ebWTwrp5P9e26i6RZg38Qjkn0ZoKzWsJckDVfkCIAb3Wi/vTcDfgQsskISb5R+OIaccb
- ID1lzk2IBao0pKBureuhezCemoUNkiN524ASXti5UH6Lihb+1QiM6p38ZF2ja2yttLfY
- qS/0/lfML7qVvNCEyKiSG2oe8SjQCebIj02eI7ZUdA3SH8spZPzvBuQyOle4xxDzTtjh
- URpg==
+ d=1e100.net; s=20230601; t=1731507833; x=1732112633;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=m6UBkUsYHw5dtVcgl860DY5WYMjaOb4eDUME3ssG3/U=;
+ b=ljtJGUOoq4IEjA4EIKIOAg8yO4Y1BKbMNHwZBs987O4IKhejROx6k//lV57X5ZXKd0
+ Ow+y6a89gWhOiZ9PxwirNKFEjr3SwOSP61nPneHz1kYCoMizUO2XWngU7CYjFwr+N3wE
+ pUJm1KMw1D1V5qUSdwJvBdFfiuyVLhRXeRugxhr8Qj4sHkEy2I1KFJkJixXT6VJ/Mu7x
+ LQqBs1MkehSSObtRADi2g+TN8QPMOsW4fAyC+FA0LNFNKjh24SHdxleTnHKTk2gc8/Q2
+ II5QQACU0AIaPru6suAjiTvnSo4ZdciyoLEx43s/8kK0MWH89z0bhE/a/rPUTJUsR1e6
+ ysuA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVgItPy9Su/kJ5I81B09GE5rqtaawusKrEPAX/ctCKOkFrYl/xk/wm08t8gL63ksH8HRBH7ftnap5EV@nongnu.org
-X-Gm-Message-State: AOJu0YwkCWFRx0B6MvsBiIDZnkH2gaUiMWjbLEp3tvohVLh2fCMU9FeW
- AIz6nF6Og5gBryoFZJYBq6XVvwEkB7Vkd0WverRC0fuAffdfA1PC0QzBUXA+dw==
-X-Google-Smtp-Source: AGHT+IFJ4mOeSVAeQwWG3OwXDwWa9YynKK+2q2qx5w7t1B4PJJRHIOAfVXRmCB7xr9OFH4a3Wzif9g==
-X-Received: by 2002:a05:6402:42c6:b0:5cf:1b44:6c3c with SMTP id
- 4fb4d7f45d1cf-5cf4f336d96mr5384232a12.2.1731507857216; 
- Wed, 13 Nov 2024 06:24:17 -0800 (PST)
+ AJvYcCVDTA2ygZRgcaadQOa2kOFo/wY/bqrWOHHNBOBzNQiYtr5fuXmEli+x1cUVskXijShfh/bBHNT0yuxy@nongnu.org
+X-Gm-Message-State: AOJu0Yxqogm9Eze2uLOTHYUl0CMcO4suJ2HhXLOdyHoA2BXjjv7La3DL
+ X6XyzPFcbAWXJbahu+imjtNOu0j2ItnmSPxGVB9iV9uIlpivle6aTrUg5QetKQ==
+X-Google-Smtp-Source: AGHT+IHUNf2cwdSSK7kxRIbmTVBeUKDbaI9B55dUPPemyu9/a6WVE0DnEMTDncuwIDwZRg0a+P2vtg==
+X-Received: by 2002:a05:6402:1d4d:b0:5cf:5fe5:9988 with SMTP id
+ 4fb4d7f45d1cf-5cf5fe59aa1mr3390219a12.30.1731507832442; 
+ Wed, 13 Nov 2024 06:23:52 -0800 (PST)
 Received: from localhost.localdomain (h082218084190.host.wavenet.at.
  [82.218.84.190]) by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5cf03b5d76esm7134612a12.9.2024.11.13.06.24.15
+ 4fb4d7f45d1cf-5cf03b5d76esm7134612a12.9.2024.11.13.06.23.50
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Wed, 13 Nov 2024 06:24:16 -0800 (PST)
+ Wed, 13 Nov 2024 06:23:51 -0800 (PST)
 From: Phil Dennis-Jordan <phil@philjordan.eu>
 To: qemu-devel@nongnu.org
 Cc: agraf@csgraf.de, phil@philjordan.eu, peter.maydell@linaro.org,
@@ -74,19 +73,16 @@ Cc: agraf@csgraf.de, phil@philjordan.eu, peter.maydell@linaro.org,
  dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com,
  jcmvbkbc@gmail.com, marcandre.lureau@redhat.com, berrange@redhat.com,
  akihiko.odaki@daynix.com, qemu-arm@nongnu.org, qemu-block@nongnu.org,
- qemu-riscv@nongnu.org, balaton@eik.bme.hu, Alexander Graf <graf@amazon.com>
-Subject: [PATCH v10 11/15] hw/vmapple/bdif: Introduce vmapple backdoor
- interface
-Date: Wed, 13 Nov 2024 15:23:39 +0100
-Message-Id: <20241113142343.40832-12-phil@philjordan.eu>
+ qemu-riscv@nongnu.org, balaton@eik.bme.hu
+Subject: [PATCH v10 00/15] macOS PV Graphics and new vmapple machine type
+Date: Wed, 13 Nov 2024 15:23:28 +0100
+Message-Id: <20241113142343.40832-1-phil@philjordan.eu>
 X-Mailer: git-send-email 2.39.3 (Apple Git-145)
-In-Reply-To: <20241113142343.40832-1-phil@philjordan.eu>
-References: <20241113142343.40832-1-phil@philjordan.eu>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: neutral client-ip=2a00:1450:4864:20::529;
- envelope-from=phil@philjordan.eu; helo=mail-ed1-x529.google.com
+Received-SPF: neutral client-ip=2a00:1450:4864:20::535;
+ envelope-from=phil@philjordan.eu; helo=mail-ed1-x535.google.com
 X-Spam_score_int: -10
 X-Spam_score: -1.1
 X-Spam_bar: -
@@ -108,366 +104,311 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Alexander Graf <graf@amazon.com>
+This patch set introduces a new ARM and macOS HVF specific machine type
+called "vmapple", as well as a family of display devices based on the
+ParavirtualizedGraphics.framework in macOS. One of the display adapter
+variants, apple-gfx-mmio, is required for the new machine type, while
+apple-gfx-pci can be used to enable 3D graphics acceleration with x86-64
+macOS guest OSes.
 
-The VMApple machine exposes AUX and ROOT block devices (as well as USB OTG
-emulation) via virtio-pci as well as a special, simple backdoor platform
-device.
+Previous versions of this patch set were submitted semi-separately:
+the original vmapple patch set by Alexander Graf included a monolithic
+implementation of apple-gfx-mmio. I subsequently reviewed and reworked
+the latter to support the PCI variant of the device as well and submitted
+the result in isolation. As requested in subsequent review, I have now
+recombined this with the original vmapple patch set, which I have updated
+and improved in a few ways as well.
 
-This patch implements this backdoor platform device to the best of my
-understanding. I left out any USB OTG parts; they're only needed for
-guest recovery and I don't understand the protocol yet.
+The vmapple machine type approximates the configuration in macOS's own
+Virtualization.framework when running arm64 macOS guests. In addition to
+generic components such as a GICv3 and an XHCI USB controller, it
+includes nonstandard extensions to the virtio block device, a special
+"hardware" aes engine, a configuration device, a pvpanic variant, a
+"backdoor" interface, and of course the apple-gfx paravirtualised display
+adapter.
 
-Signed-off-by: Alexander Graf <graf@amazon.com>
-Signed-off-by: Phil Dennis-Jordan <phil@philjordan.eu>
-Reviewed-by: Akihiko Odaki <akihiko.odaki@daynix.com>
+There are currently a few limitations to this which aren't intrinsic,
+just imperfect emulation of the VZF, but it's good enough to be just
+about usable for some purposes:
+
+ * macOS 12 guests only. Versions 13+ currently fail during early boot.
+ * macOS 11+ arm64 hosts only, with hvf accel. (Perhaps some differences
+   between Apple M series CPUs and TCG's aarch64 implementation? macOS
+   hosts only because ParavirtualizedGraphics.framework is a black box
+   implementing most of the logic behind the apple-gfx device.)
+ * PCI devices use legacy IRQs, not MSI/MSI-X. As far as I can tell,
+   we'd need to include the GICv3 ITS, but it's unclear to me what
+   exactly needs wiring up.
+ * Due to lack of MSI(-X), event delivery from USB devices to the guest
+   macOS isn't working correctly. My current conclusion is that the
+   OS's XHCI driver simply was never designed to work with legacy IRQs.
+   The upshot is that keyboard and mouse/tablet input is very laggy.
+   The solution would be to implement MSI(-X) support or figure out how
+   to make hcd-xhci-sysbus work with the macOS guest, if at all possible.
+   (EHCI and UHCI/OHCI controllers are not an option as the VMAPPLE
+   guest kernel does not include drivers for these.)
+ * The guest OS must first be provisioned using Virtualization.framework;
+   the disk images can subsequently be used in Qemu. (See docs.)
+
+The apple-gfx device can be used independently from the vmapple machine
+type, at least in the PCI variant. It mainly targets x86-64 macOS guests
+from version 11 on, but also includes a UEFI bootrom for basic
+framebuffer mode. macOS 11 is also required on the host side, as well
+as a GPU that supports the Metal API. On the guest side, this provides
+3D acceleration/GPGPU support with a baseline Metal feature set,
+irrespective of the host GPU's feature set. A few limitations in the
+current integration:
+
+ * Although it works fine with TCG, it does not work correctly
+   cross-architecture: x86-64 guests on arm64 hosts appear to make
+   some boot progress, but rendering is corrupted. I suspect
+   incompatible texture memory layouts; I have no idea if this is
+   fixable.
+ * ParavirtualizedGraphics.framework and the guest driver support
+   multi-headed configurations. The current Qemu integration always
+   connects precisely 1 display.
+ * State serialisation and deserialisation is currently not
+   implemented, though supported in principle by the framework.
+   Both apple-gfx variants thus set up a migration blocker.
+ * Rendering efficiency could be better. The GPU-rendered guest
+   framebuffer is copied to system memory and uses Qemu's usual
+   CPU-based drawing. For maximum efficiency, the Metal texture
+   containing the guest framebuffer could be drawn directly to
+   a Metal view in the host window, staying on the GPU. (Similar
+   to the OpenGL/virgl render path on other platforms.)
+
+Some of my part of this work has been sponsored by Sauce Labs Inc.
+
 ---
 
-v4:
+v2 -> v3:
 
- * Moved most header code to .c, rest to vmapple.h
- * Better compliance with coding, naming, and formatting conventions.
+ * Merged the apple-gfx and vmapple patchsets.
+ * Squashed a bunch of later apple-gfx patches into the main one.
+   (dGPU support, queried MMIO area size, host GPU picking logic.)
+ * Rebased on latest upstream, fixing any breakages due to internal
+   Qemu API changes.
+ * apple-gfx: Switched to re-entrant MMIO. This is supported by the
+   underlying framework and simplifies the MMIO forwarding code which
+   was previously different on x86-64 vs aarch64.
+ * vmapple: Fixes for minor bugs and comments from the last round of
+   review.
+ * vmapple aes, conf, apple-gfx: Switched reset methods to implement
+   the ResettableClass base's interface.
+ * vmapple: switched from virtio-hid to an XHCI USB controller and
+   USB mouse and tablet devices. macOS does not provide drivers for
+   virtio HID devices, at least not in version 12's vmapple kernel.
+   So input now sort of works (interrupt issues) rather than not
+   at all. Use network-based remote access to the guest OS as a
+   work-around.
 
-v8:
+v3 -> v4:
 
- * Replaced uses of cpu_physical_memory_read with dma_memory_read.
- * Replaced an instance of g_free with g_autofree.
+ * Complete rework of the mechanism for handling runloop/libdispatch
+   events on the main thread. PV graphics now work with the SDL UI.
+ * Renamed 'apple-gfx-vmapple' device to 'apple-gfx-mmio'
+ * hw/display/apple-gfx: threading model overhaul to be more consistent,
+   safer, and more QEMU-idiomatic.
+ * display-modes property on the apple-gfx devices now uses the
+   native array property mechanism and works on both device variants.
+ * hw/vmapple/aes: Improvements to logging and error handling.
+ * hw/vmapple/cfg: Bug fixes around device property default values.
+ * hw/vmapple/{aes,cfg,virtio-blk/vmapple}: Most header code moved into
+   .c files, only a single vmapple.h now contains the #defines for the
+   vmapple machine model-specific device type names.
+ * hw/block/virtio-blk: New patch for replacing virtio_blk_free_request
+   with g_free. (Optional)
+ * Various smaller changes following comments in v3 code review in
+   apple-gfx, aes, cfg, bdif, virtio-blk-vmapple, and the vmapple
+   machine type itself. See patch-specific v4 change notes for details.
 
-v9:
+v4 -> v5:
 
- * Replaced uses of cpu_physical_memory_write with dma_memory_write.
- 
- hw/vmapple/Kconfig           |   3 +
- hw/vmapple/bdif.c            | 275 +++++++++++++++++++++++++++++++++++
- hw/vmapple/meson.build       |   1 +
- hw/vmapple/trace-events      |   5 +
- include/hw/vmapple/vmapple.h |   2 +
- 5 files changed, 286 insertions(+)
+ * Simplified the main thread runloop mechanism. Back to setting
+	 qemu_main directly, but narrowing the scope of what it needs to do,
+	 and it can now be NULL. (Meaning run the QEMU main event loop on
+	 the main thread as is traditional.)
+ * hw/display/apple-gfx: Further improvements to the BH based job code bridging
+   the libdispatch & QEMU thread synchronisation impedance mismatch.
+ * hw/display/apple-gfx: Thread safety and object lifetime improvements.
+ * hw/display/apple-gfx-*: Better buffer and error handling in display mode
+   property setters and getters.
+ * hw/vmapple/aes: More consistent and safer logging/tracing
+ * hw/vmapple/cfg: Better error reporting on overlong property strings.
+ * hw/vmapple/virtio-blk: Fixed theoretically-unaligned write to config buffer.
+ * vmapple machine type: Moved ecam region into machine state, improved device
+   property setting error handling, improved ECID/UUID extraction script and
+   docs.
+ * Various smaller fixes in apple-gfx/-mmio, apple-gfx-pci, vmapple/aes,
+   vmapple/cfg, vmapple/virtio-blk, and vmapple machine type.
+ * Added SPDX license identifiers where they were missing.
+
+v5 -> v6:
+
+ * 01/15 (main/Cocoa/runloop): Combined functions, fixed whitespace
+ * 02/15 (apple-gfx): Further refinement of PVG threading: reduced some callback
+   tasks from BHs to merely acquiring RCU read lock; replaced some libdispatch
+   tasks with BHs; last remaining synchronous BH now uses emphemeral
+   QemuSemaphore.
+ * 02/15 (apple-gfx): Readability improvements and other smaller tweaks
+   (see patch change notes for details)
+ * 04/15 (display modes): Replaced use of alloca() with NSMutableArray.
+
+v6 -> v7:
+
+ * 02/15 (apple-gfx): Use g_ptr_array_find() helper function, coding style tweak
+ * 03/15 (apple-gfx-pci): Removed an unused function parameter
+ * 04/15 (apple-gfx display mode property): Simplified error handling in
+   property parsing.
+ * 10/15 (vmapple/aes): Coding style tweaks.
+ * 12/15 (vmapple/cfg): Changed error messages for overrun of properties with
+   fixed-length strings to be more useful to users than developers.
+ * 15/15 (vmapple machine type): Tiny error handling fix, un-inlined function
+
+v7 -> v8:
+
+ * 02/15 (apple-gfx): Naming and type use improvements, fixes for a bug and a
+   leak.
+ * 04/15 (apple-gfx display mode property): Type use improvement
+ * 10/15 (vmapple/aes): Guest error logging tweaks.
+ * 11/15 (vmapple/bdif): Replaced uses of cpu_physical_memory_read with
+   dma_memory_read, and a g_free call with g_autofree.
+ * 12/15 (vmapple/cfg): Macro hygiene fix: consistently enclosing arguments in
+   parens.
+ * 15/15 (vmapple machine type): Use less verbose pattern for defining uuid
+   property.
+
+v8 -> v9:
+
+ * 01/16 (ui & main loop): Set qemu_main to NULL for GTK UI as well.
+ * 02/16 (apple-gfx): Pass device pointer to graphic_console_init(), various
+	 non-functional changes.
+ * 03/16 (apple-gfx-pci): Fixup of changed common call, whitespace and comment
+   formatting tweaks.
+ * 04/16 (apple-gfx display modes): Re-ordered type definitions so we can drop
+   a 'struct' keyword.
+ * 10/16 (vmapple/aes): Replaced a use of cpu_physical_memory_write with
+   dma_memory_write, minor style tweak.
+ * 11/16 (vmapple/bdif): Replaced uses of cpu_physical_memory_write with
+   dma_memory_write.
+ * 13/16 (vmapple/virtio-blk): Correctly specify class_size for
+   VMAppleVirtIOBlkClass.
+ * 15/16 (vmapple machine type): Documentation improvements, fixed variable
+   name and struct field used during pvpanic device creation.
+ * 16/16 (NEW/RFC vmapple/virtio-blk): Proposed change to replace type hierarchy
+   with a variant property. This seems cleaner and less confusing than the
+   original approach to me, but I'm not sure if it warrants creation of a new
+   QAPI enum and property type definition.
+
+v9 -> v10:
+
+ * 01/15 (ui & main loop): Added comments to qemu_main declaration and GTK.
+ * 02/15 (apple-gfx): Reworked the way frame rendering code is threaded to use
+   BHs for sections requiring BQL.
+ * 02/15 (apple-gfx): Fixed ./configure error on non-macOS platforms.
+ * 10/15 (vmapple/aes): Code style and comment improvements.
+ * 12/15 (vmapple/cfg): Slightly tidier error reporting for overlong property
+   values.
+ * 13/15 (vmapple/virtio-blk): Folded v9 patch 16/16 into this one, changing
+   the device type design to provide a single device type with a variant
+	 property instead of 2 different subtypes for aux and root volumes.
+ * 15/15 (vmapple machine type): Documentation fixup for changed virtio-blk
+   device type; small improvements to shell commands in documentation;
+   improved propagation of errors during cfg device instantiation.
+
+
+Alexander Graf (9):
+  hw: Add vmapple subdir
+  hw/misc/pvpanic: Add MMIO interface
+  hvf: arm: Ignore writes to CNTP_CTL_EL0
+  gpex: Allow more than 4 legacy IRQs
+  hw/vmapple/aes: Introduce aes engine
+  hw/vmapple/bdif: Introduce vmapple backdoor interface
+  hw/vmapple/cfg: Introduce vmapple cfg region
+  hw/vmapple/virtio-blk: Add support for apple virtio-blk
+  hw/vmapple/vmapple: Add vmapple machine type
+
+Phil Dennis-Jordan (6):
+  ui & main loop: Redesign of system-specific main thread event handling
+  hw/display/apple-gfx: Introduce ParavirtualizedGraphics.Framework
+    support
+  hw/display/apple-gfx: Adds PCI implementation
+  hw/display/apple-gfx: Adds configurable mode list
+  MAINTAINERS: Add myself as maintainer for apple-gfx, reviewer for HVF
+  hw/block/virtio-blk: Replaces request free function with g_free
+
+ MAINTAINERS                         |  15 +
+ contrib/vmapple/uuid.sh             |   9 +
+ docs/system/arm/vmapple.rst         |  63 ++
+ docs/system/target-arm.rst          |   1 +
+ hw/Kconfig                          |   1 +
+ hw/arm/sbsa-ref.c                   |   2 +-
+ hw/arm/virt.c                       |   2 +-
+ hw/block/virtio-blk.c               |  58 +-
+ hw/core/qdev-properties-system.c    |   8 +
+ hw/display/Kconfig                  |  13 +
+ hw/display/apple-gfx-mmio.m         | 289 ++++++++++
+ hw/display/apple-gfx-pci.m          | 157 +++++
+ hw/display/apple-gfx.h              |  78 +++
+ hw/display/apple-gfx.m              | 862 ++++++++++++++++++++++++++++
+ hw/display/meson.build              |   7 +
+ hw/display/trace-events             |  30 +
+ hw/i386/microvm.c                   |   2 +-
+ hw/loongarch/virt.c                 |   2 +-
+ hw/meson.build                      |   1 +
+ hw/mips/loongson3_virt.c            |   2 +-
+ hw/misc/Kconfig                     |   4 +
+ hw/misc/meson.build                 |   1 +
+ hw/misc/pvpanic-mmio.c              |  61 ++
+ hw/openrisc/virt.c                  |  12 +-
+ hw/pci-host/gpex.c                  |  43 +-
+ hw/riscv/virt.c                     |  12 +-
+ hw/vmapple/Kconfig                  |  32 ++
+ hw/vmapple/aes.c                    | 581 +++++++++++++++++++
+ hw/vmapple/bdif.c                   | 275 +++++++++
+ hw/vmapple/cfg.c                    | 196 +++++++
+ hw/vmapple/meson.build              |   5 +
+ hw/vmapple/trace-events             |  21 +
+ hw/vmapple/trace.h                  |   1 +
+ hw/vmapple/virtio-blk.c             | 205 +++++++
+ hw/vmapple/vmapple.c                | 646 +++++++++++++++++++++
+ hw/xtensa/virt.c                    |   2 +-
+ include/hw/misc/pvpanic.h           |   1 +
+ include/hw/pci-host/gpex.h          |   7 +-
+ include/hw/pci/pci_ids.h            |   1 +
+ include/hw/qdev-properties-system.h |   5 +
+ include/hw/virtio/virtio-blk.h      |  11 +-
+ include/hw/vmapple/vmapple.h        |  23 +
+ include/qemu-main.h                 |  21 +-
+ include/qemu/cutils.h               |  15 +
+ include/qemu/typedefs.h             |   1 +
+ meson.build                         |   5 +
+ qapi/virtio.json                    |  14 +
+ system/main.c                       |  50 +-
+ target/arm/hvf/hvf.c                |   9 +
+ ui/cocoa.m                          |  54 +-
+ ui/gtk.c                            |   8 +
+ ui/sdl2.c                           |   4 +
+ util/hexdump.c                      |  18 +
+ 53 files changed, 3840 insertions(+), 106 deletions(-)
+ create mode 100755 contrib/vmapple/uuid.sh
+ create mode 100644 docs/system/arm/vmapple.rst
+ create mode 100644 hw/display/apple-gfx-mmio.m
+ create mode 100644 hw/display/apple-gfx-pci.m
+ create mode 100644 hw/display/apple-gfx.h
+ create mode 100644 hw/display/apple-gfx.m
+ create mode 100644 hw/misc/pvpanic-mmio.c
+ create mode 100644 hw/vmapple/Kconfig
+ create mode 100644 hw/vmapple/aes.c
  create mode 100644 hw/vmapple/bdif.c
+ create mode 100644 hw/vmapple/cfg.c
+ create mode 100644 hw/vmapple/meson.build
+ create mode 100644 hw/vmapple/trace-events
+ create mode 100644 hw/vmapple/trace.h
+ create mode 100644 hw/vmapple/virtio-blk.c
+ create mode 100644 hw/vmapple/vmapple.c
+ create mode 100644 include/hw/vmapple/vmapple.h
 
-diff --git a/hw/vmapple/Kconfig b/hw/vmapple/Kconfig
-index a73504d5999..68f88876eb9 100644
---- a/hw/vmapple/Kconfig
-+++ b/hw/vmapple/Kconfig
-@@ -1,3 +1,6 @@
- config VMAPPLE_AES
-     bool
- 
-+config VMAPPLE_BDIF
-+    bool
-+
-diff --git a/hw/vmapple/bdif.c b/hw/vmapple/bdif.c
-new file mode 100644
-index 00000000000..d7b6b7a25a4
---- /dev/null
-+++ b/hw/vmapple/bdif.c
-@@ -0,0 +1,275 @@
-+/*
-+ * VMApple Backdoor Interface
-+ *
-+ * Copyright © 2023 Amazon.com, Inc. or its affiliates. All Rights Reserved.
-+ *
-+ * This work is licensed under the terms of the GNU GPL, version 2 or later.
-+ * See the COPYING file in the top-level directory.
-+ *
-+ * SPDX-License-Identifier: GPL-2.0-or-later
-+ */
-+
-+#include "qemu/osdep.h"
-+#include "qemu/units.h"
-+#include "qemu/log.h"
-+#include "qemu/module.h"
-+#include "trace.h"
-+#include "hw/vmapple/vmapple.h"
-+#include "hw/sysbus.h"
-+#include "hw/block/block.h"
-+#include "qapi/error.h"
-+#include "sysemu/block-backend.h"
-+#include "sysemu/dma.h"
-+
-+OBJECT_DECLARE_SIMPLE_TYPE(VMAppleBdifState, VMAPPLE_BDIF)
-+
-+struct VMAppleBdifState {
-+    SysBusDevice parent_obj;
-+
-+    BlockBackend *aux;
-+    BlockBackend *root;
-+    MemoryRegion mmio;
-+};
-+
-+#define VMAPPLE_BDIF_SIZE   0x00200000
-+
-+#define REG_DEVID_MASK      0xffff0000
-+#define DEVID_ROOT          0x00000000
-+#define DEVID_AUX           0x00010000
-+#define DEVID_USB           0x00100000
-+
-+#define REG_STATUS          0x0
-+#define REG_STATUS_ACTIVE     BIT(0)
-+#define REG_CFG             0x4
-+#define REG_CFG_ACTIVE        BIT(1)
-+#define REG_UNK1            0x8
-+#define REG_BUSY            0x10
-+#define REG_BUSY_READY        BIT(0)
-+#define REG_UNK2            0x400
-+#define REG_CMD             0x408
-+#define REG_NEXT_DEVICE     0x420
-+#define REG_UNK3            0x434
-+
-+typedef struct VblkSector {
-+    uint32_t pad;
-+    uint32_t pad2;
-+    uint32_t sector;
-+    uint32_t pad3;
-+} VblkSector;
-+
-+typedef struct VblkReqCmd {
-+    uint64_t addr;
-+    uint32_t len;
-+    uint32_t flags;
-+} VblkReqCmd;
-+
-+typedef struct VblkReq {
-+    VblkReqCmd sector;
-+    VblkReqCmd data;
-+    VblkReqCmd retval;
-+} VblkReq;
-+
-+#define VBLK_DATA_FLAGS_READ  0x00030001
-+#define VBLK_DATA_FLAGS_WRITE 0x00010001
-+
-+#define VBLK_RET_SUCCESS  0
-+#define VBLK_RET_FAILED   1
-+
-+static uint64_t bdif_read(void *opaque, hwaddr offset, unsigned size)
-+{
-+    uint64_t ret = -1;
-+    uint64_t devid = offset & REG_DEVID_MASK;
-+
-+    switch (offset & ~REG_DEVID_MASK) {
-+    case REG_STATUS:
-+        ret = REG_STATUS_ACTIVE;
-+        break;
-+    case REG_CFG:
-+        ret = REG_CFG_ACTIVE;
-+        break;
-+    case REG_UNK1:
-+        ret = 0x420;
-+        break;
-+    case REG_BUSY:
-+        ret = REG_BUSY_READY;
-+        break;
-+    case REG_UNK2:
-+        ret = 0x1;
-+        break;
-+    case REG_UNK3:
-+        ret = 0x0;
-+        break;
-+    case REG_NEXT_DEVICE:
-+        switch (devid) {
-+        case DEVID_ROOT:
-+            ret = 0x8000000;
-+            break;
-+        case DEVID_AUX:
-+            ret = 0x10000;
-+            break;
-+        }
-+        break;
-+    }
-+
-+    trace_bdif_read(offset, size, ret);
-+    return ret;
-+}
-+
-+static void le2cpu_sector(VblkSector *sector)
-+{
-+    sector->sector = le32_to_cpu(sector->sector);
-+}
-+
-+static void le2cpu_reqcmd(VblkReqCmd *cmd)
-+{
-+    cmd->addr = le64_to_cpu(cmd->addr);
-+    cmd->len = le32_to_cpu(cmd->len);
-+    cmd->flags = le32_to_cpu(cmd->flags);
-+}
-+
-+static void le2cpu_req(VblkReq *req)
-+{
-+    le2cpu_reqcmd(&req->sector);
-+    le2cpu_reqcmd(&req->data);
-+    le2cpu_reqcmd(&req->retval);
-+}
-+
-+static void vblk_cmd(uint64_t devid, BlockBackend *blk, uint64_t gp_addr,
-+                     uint64_t static_off)
-+{
-+    VblkReq req;
-+    VblkSector sector;
-+    uint64_t off = 0;
-+    g_autofree char *buf = NULL;
-+    uint8_t ret = VBLK_RET_FAILED;
-+    int r;
-+    MemTxResult dma_result;
-+
-+    dma_result = dma_memory_read(&address_space_memory, gp_addr,
-+                                 &req, sizeof(req), MEMTXATTRS_UNSPECIFIED);
-+    if (dma_result != MEMTX_OK) {
-+        goto out;
-+    }
-+
-+    le2cpu_req(&req);
-+
-+    if (req.sector.len != sizeof(sector)) {
-+        goto out;
-+    }
-+
-+    /* Read the vblk command */
-+    dma_result = dma_memory_read(&address_space_memory, req.sector.addr,
-+                                 &sector, sizeof(sector),
-+                                 MEMTXATTRS_UNSPECIFIED);
-+    if (dma_result != MEMTX_OK) {
-+        goto out;
-+    }
-+    le2cpu_sector(&sector);
-+
-+    off = sector.sector * 512ULL + static_off;
-+
-+    /* Sanity check that we're not allocating bogus sizes */
-+    if (req.data.len > 128 * MiB) {
-+        goto out;
-+    }
-+
-+    buf = g_malloc0(req.data.len);
-+    switch (req.data.flags) {
-+    case VBLK_DATA_FLAGS_READ:
-+        r = blk_pread(blk, off, req.data.len, buf, 0);
-+        trace_bdif_vblk_read(devid == DEVID_AUX ? "aux" : "root",
-+                             req.data.addr, off, req.data.len, r);
-+        if (r < 0) {
-+            goto out;
-+        }
-+        dma_result = dma_memory_write(&address_space_memory, req.data.addr, buf,
-+                                      req.data.len, MEMTXATTRS_UNSPECIFIED);
-+        if (dma_result == MEMTX_OK) {
-+            ret = VBLK_RET_SUCCESS;
-+        }
-+        break;
-+    case VBLK_DATA_FLAGS_WRITE:
-+        /* Not needed, iBoot only reads */
-+        break;
-+    default:
-+        break;
-+    }
-+
-+out:
-+    dma_memory_write(&address_space_memory, req.retval.addr, &ret, 1,
-+                     MEMTXATTRS_UNSPECIFIED);
-+}
-+
-+static void bdif_write(void *opaque, hwaddr offset,
-+                       uint64_t value, unsigned size)
-+{
-+    VMAppleBdifState *s = opaque;
-+    uint64_t devid = (offset & REG_DEVID_MASK);
-+
-+    trace_bdif_write(offset, size, value);
-+
-+    switch (offset & ~REG_DEVID_MASK) {
-+    case REG_CMD:
-+        switch (devid) {
-+        case DEVID_ROOT:
-+            vblk_cmd(devid, s->root, value, 0x0);
-+            break;
-+        case DEVID_AUX:
-+            vblk_cmd(devid, s->aux, value, 0x0);
-+            break;
-+        }
-+        break;
-+    }
-+}
-+
-+static const MemoryRegionOps bdif_ops = {
-+    .read = bdif_read,
-+    .write = bdif_write,
-+    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .valid = {
-+        .min_access_size = 1,
-+        .max_access_size = 8,
-+    },
-+    .impl = {
-+        .min_access_size = 1,
-+        .max_access_size = 8,
-+    },
-+};
-+
-+static void bdif_init(Object *obj)
-+{
-+    VMAppleBdifState *s = VMAPPLE_BDIF(obj);
-+
-+    memory_region_init_io(&s->mmio, obj, &bdif_ops, obj,
-+                         "VMApple Backdoor Interface", VMAPPLE_BDIF_SIZE);
-+    sysbus_init_mmio(SYS_BUS_DEVICE(obj), &s->mmio);
-+}
-+
-+static Property bdif_properties[] = {
-+    DEFINE_PROP_DRIVE("aux", VMAppleBdifState, aux),
-+    DEFINE_PROP_DRIVE("root", VMAppleBdifState, root),
-+    DEFINE_PROP_END_OF_LIST(),
-+};
-+
-+static void bdif_class_init(ObjectClass *klass, void *data)
-+{
-+    DeviceClass *dc = DEVICE_CLASS(klass);
-+
-+    dc->desc = "VMApple Backdoor Interface";
-+    device_class_set_props(dc, bdif_properties);
-+}
-+
-+static const TypeInfo bdif_info = {
-+    .name          = TYPE_VMAPPLE_BDIF,
-+    .parent        = TYPE_SYS_BUS_DEVICE,
-+    .instance_size = sizeof(VMAppleBdifState),
-+    .instance_init = bdif_init,
-+    .class_init    = bdif_class_init,
-+};
-+
-+static void bdif_register_types(void)
-+{
-+    type_register_static(&bdif_info);
-+}
-+
-+type_init(bdif_register_types)
-diff --git a/hw/vmapple/meson.build b/hw/vmapple/meson.build
-index bcd4dcb28d2..d4624713deb 100644
---- a/hw/vmapple/meson.build
-+++ b/hw/vmapple/meson.build
-@@ -1 +1,2 @@
- system_ss.add(when: 'CONFIG_VMAPPLE_AES',  if_true: files('aes.c'))
-+system_ss.add(when: 'CONFIG_VMAPPLE_BDIF', if_true: files('bdif.c'))
-diff --git a/hw/vmapple/trace-events b/hw/vmapple/trace-events
-index 0d4a73d7d1c..d86f64d50fe 100644
---- a/hw/vmapple/trace-events
-+++ b/hw/vmapple/trace-events
-@@ -14,3 +14,8 @@ aes_2_read(uint64_t offset, uint64_t res) "offset=0x%"PRIx64" res=0x%"PRIx64
- aes_2_write(uint64_t offset, uint64_t val) "offset=0x%"PRIx64" val=0x%"PRIx64
- aes_dump_data(const char *desc, const char *hex) "%s%s"
- 
-+# bdif.c
-+bdif_read(uint64_t offset, uint32_t size, uint64_t value) "offset=0x%"PRIx64" size=0x%x value=0x%"PRIx64
-+bdif_write(uint64_t offset, uint32_t size, uint64_t value) "offset=0x%"PRIx64" size=0x%x value=0x%"PRIx64
-+bdif_vblk_read(const char *dev, uint64_t addr, uint64_t offset, uint32_t len, int r) "dev=%s addr=0x%"PRIx64" off=0x%"PRIx64" size=0x%x r=%d"
-+
-diff --git a/include/hw/vmapple/vmapple.h b/include/hw/vmapple/vmapple.h
-index 6762b6c869f..9090e9c5ac8 100644
---- a/include/hw/vmapple/vmapple.h
-+++ b/include/hw/vmapple/vmapple.h
-@@ -14,4 +14,6 @@
- 
- #define TYPE_APPLE_AES "apple-aes"
- 
-+#define TYPE_VMAPPLE_BDIF "vmapple-bdif"
-+
- #endif /* HW_VMAPPLE_VMAPPLE_H */
 -- 
 2.39.3 (Apple Git-145)
 
