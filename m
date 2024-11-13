@@ -4,144 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C479ED462D7
-	for <qemu-riscv@archiver.kernel.org>; Wed, 13 Nov 2024 16:37:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AAE36D637A1
+	for <qemu-riscv@archiver.kernel.org>; Wed, 13 Nov 2024 17:18:26 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tBGMS-0003VA-3D; Wed, 13 Nov 2024 11:36:56 -0500
+	id 1tBH0K-00007X-2q; Wed, 13 Nov 2024 12:18:08 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <pbonzini@redhat.com>)
- id 1tBGMP-0003TJ-JB
- for qemu-riscv@nongnu.org; Wed, 13 Nov 2024 11:36:53 -0500
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <pbonzini@redhat.com>)
- id 1tBGMM-0007Cq-M2
- for qemu-riscv@nongnu.org; Wed, 13 Nov 2024 11:36:53 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1731515809;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
- bh=ZoB7bHEPr2ZQyJwgbQsINSE79T6gtdN6t7gS/CsnTtc=;
- b=UdJIYitQr+O4Czo/gFsFrYOSP2sKrhvKa13jPzDM3frroKPtoLBgYxkW2PqwyHg38Oq9fV
- sy1+8y9JXOFTMucBkQvG1/xGGwokjHRlhl3zzsFxHW/xbj8/TVQJw25TYhABJuEXwu9XQ5
- HcTlBsHRC7HT9hmQJcp8VZhASxTyKXQ=
-Received: from mail-wr1-f70.google.com (mail-wr1-f70.google.com
- [209.85.221.70]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-595-GTMv4_7EOIqSBmFi6rxdsw-1; Wed, 13 Nov 2024 11:36:46 -0500
-X-MC-Unique: GTMv4_7EOIqSBmFi6rxdsw-1
-X-Mimecast-MFC-AGG-ID: GTMv4_7EOIqSBmFi6rxdsw
-Received: by mail-wr1-f70.google.com with SMTP id
- ffacd0b85a97d-381d0582ad3so5515913f8f.0
- for <qemu-riscv@nongnu.org>; Wed, 13 Nov 2024 08:36:45 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1tBH0I-000078-Cx
+ for qemu-riscv@nongnu.org; Wed, 13 Nov 2024 12:18:06 -0500
+Received: from mail-pl1-x633.google.com ([2607:f8b0:4864:20::633])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1tBH0G-0003j8-Sx
+ for qemu-riscv@nongnu.org; Wed, 13 Nov 2024 12:18:06 -0500
+Received: by mail-pl1-x633.google.com with SMTP id
+ d9443c01a7336-21116b187c4so58042355ad.3
+ for <qemu-riscv@nongnu.org>; Wed, 13 Nov 2024 09:18:04 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=ventanamicro.com; s=google; t=1731518283; x=1732123083; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=UHVe9CY4lpulvqbim1lRpytAm970j/RmzHBlLdorJnY=;
+ b=Z49xI/dEzLG1J+G+VI6p6xPseqEcjMpZpq7i4AIdd/l7OOS7IcOiQOpZoILlApWhNU
+ nI3H4DEyPNyXmEQ/B6B7CGq2/8Kyxfj7l+E/qzVcjLCRf38jIO2Vx1+6KF1I2+8/tdkN
+ Ec8AxMjoOpxes6RFD/VNQPMQ+apY2aG2SW8bfbU+IWga6gRPInnRfv/f1LX/fqfj1lBe
+ NSIB3s+dH8fEzP+kQP0GTuLdN6LwCCCKPDxCD7yTnh31M+mD5BJzzYNRHCaUrfYc4vMU
+ TiJZlf9l85saDL3HiA5+kHK1kkce0akIlDrDjJRX218KORLHF8rWYiMH99376VCqyN9F
+ WAqQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731515805; x=1732120605;
- h=content-transfer-encoding:in-reply-to:autocrypt:content-language
- :from:references:cc:to:subject:user-agent:mime-version:date
- :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1731518283; x=1732123083;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=ZoB7bHEPr2ZQyJwgbQsINSE79T6gtdN6t7gS/CsnTtc=;
- b=n+efJ4V2dsJkBJYf5SrzFkeaX+or3mV3Yo6kNkb8nm3HM0BMB81p/ULC3YL1tf39Dn
- 76efJQ/nxuvHW3KUgXJ4cti1CYF6b+mfMOZ4cq0vFTDWQeN6DfZwniiNF48Zg8VgCIDl
- oH79UoSTsPKeq25WDa9I1lYYkF3WGfQ7npKfqtD/O1GSsdo85PbyeqjWjkO6v2Fh13O1
- KutdQbhnOj8NKQoJv8+MW9lBThbvqE6V/MZhkA5tzyeGIO+eAJdgUmKOQQ9zG4Sqb0KR
- heQW9FKo4I8qz8OI2yxyOs9/8K1b7Wg5o1+lNLuHIrzsEql7OFdIWCcId1q5vArlHX/s
- fpBg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWjN9rNfVj6D1CoEIjhoUgVQUIymd6912z5XieN9afpG5NQoRK1ISVvVpWyFIVGawaQwmzytwJnWKMs@nongnu.org
-X-Gm-Message-State: AOJu0YyuVrrYvJe/MnhKXZvp68ejd+t4kGUcGN0BJOHDMSPfT44ynDLR
- 96Opwb3gP957M3c1+9Z7OZTI9jMmLbQqfDbp/mgSsyAahStO5cd9TFIzOEKmvXYa343566KRgiD
- UO5fA9UCfc3K2ctp1tytxqf9qiARHLtm5W+fk3NgM7PUIq5uNIuZF
-X-Received: by 2002:a05:6000:1865:b0:37d:7e71:67a0 with SMTP id
- ffacd0b85a97d-381f1866b1amr24546584f8f.9.1731515804865; 
- Wed, 13 Nov 2024 08:36:44 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IEPTSqbPPPLI53qChEyqKm6CWjyixEnke43e3OFPiEn+3ZuoB4mTH3x4CUkG/153Un2x6Ou7Q==
-X-Received: by 2002:a05:6000:1865:b0:37d:7e71:67a0 with SMTP id
- ffacd0b85a97d-381f1866b1amr24546545f8f.9.1731515804409; 
- Wed, 13 Nov 2024 08:36:44 -0800 (PST)
-Received: from [192.168.10.47] ([151.49.84.243])
- by smtp.googlemail.com with ESMTPSA id
- ffacd0b85a97d-381ed97d658sm18710851f8f.39.2024.11.13.08.36.42
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 13 Nov 2024 08:36:43 -0800 (PST)
-Message-ID: <c0983059-ab11-4bc5-ab60-c5b23d1c290e@redhat.com>
-Date: Wed, 13 Nov 2024 17:36:41 +0100
+ bh=UHVe9CY4lpulvqbim1lRpytAm970j/RmzHBlLdorJnY=;
+ b=vBzPyohsHVP8Fc2+qIBdJazXPU1w/Fai8W/5WQahV0vGlxKNbRdgf7+mqiMXCE25Jy
+ MvxLqeF5+CF6Sh5R4GJ2xLbZXA06S+0xhBmhDx4cJTxJ7I+heaTL9Wu3dBZj9AYGG7yX
+ kUG7oxtD5i/wvdlZhAt9eQ72eztFwVeHwGosLRTdvCp+J4Cr5C/4AWBi8kifHCbmjQkM
+ i05QWlhDwR0atPpx5+EMtcd6njPBpIQwcNXV2bpes6Dx67m6yO3dGF10l+eUhOMkVvdc
+ UibNSeeV8AZCqhp+Hxz6ziF0vaqCC2PWk3Xq4jeS48/U9Fj69glE2S3IkKtBAmr4EZx3
+ F3aw==
+X-Gm-Message-State: AOJu0YwN8LX1nxnws6kC+ZlB7sLp43A1g8IC8+Ccc1UCo4FTKTAn167e
+ C8F9SHZfIhqb1stLluaUr7//s3q5wtZL7LaeD1j8TotgUUcIUoOYGchnsWYL0DDCQsKHP636pCQ
+ Q
+X-Google-Smtp-Source: AGHT+IG0mN+hz2Gg84ojNR+hBWeZDwlQmQmVDDzIdAy8QmB/bBciIOSV/wiPQXTE4rwlpbBNOaiXUg==
+X-Received: by 2002:a17:902:d54e:b0:20b:6d82:acb with SMTP id
+ d9443c01a7336-21183d56cf7mr268638065ad.23.1731518283244; 
+ Wed, 13 Nov 2024 09:18:03 -0800 (PST)
+Received: from grind.. ([187.101.65.72]) by smtp.gmail.com with ESMTPSA id
+ d2e1a72fcca58-724078a9063sm13392889b3a.75.2024.11.13.09.18.00
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 13 Nov 2024 09:18:02 -0800 (PST)
+From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+To: qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
+ liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Subject: [PATCH for-10.0 0/9] target/riscv: add 'sha' support
+Date: Wed, 13 Nov 2024 14:17:46 -0300
+Message-ID: <20241113171755.978109-1-dbarboza@ventanamicro.com>
+X-Mailer: git-send-email 2.47.0
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v10 01/15] ui & main loop: Redesign of system-specific
- main thread event handling
-To: Phil Dennis-Jordan <phil@philjordan.eu>, qemu-devel@nongnu.org
-Cc: agraf@csgraf.de, peter.maydell@linaro.org, rad@semihalf.com,
- quic_llindhol@quicinc.com, stefanha@redhat.com, mst@redhat.com,
- slp@redhat.com, richard.henderson@linaro.org, eduardo@habkost.net,
- marcel.apfelbaum@gmail.com, gaosong@loongson.cn, jiaxun.yang@flygoat.com,
- chenhuacai@kernel.org, kwolf@redhat.com, hreitz@redhat.com,
- philmd@linaro.org, shorne@gmail.com, palmer@dabbelt.com,
- alistair.francis@wdc.com, bmeng.cn@gmail.com, liwei1518@gmail.com,
- dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com, jcmvbkbc@gmail.com,
- marcandre.lureau@redhat.com, berrange@redhat.com, akihiko.odaki@daynix.com,
- qemu-arm@nongnu.org, qemu-block@nongnu.org, qemu-riscv@nongnu.org,
- balaton@eik.bme.hu
-References: <20241113142343.40832-1-phil@philjordan.eu>
- <20241113142343.40832-2-phil@philjordan.eu>
-From: Paolo Bonzini <pbonzini@redhat.com>
-Autocrypt: addr=pbonzini@redhat.com; keydata=
- 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
-In-Reply-To: <20241113142343.40832-2-phil@philjordan.eu>
-X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: 2sYGSNvAMa5qFr__XgyelgOekRd7r0kFh82W_Dn-GdU_1731515805
-X-Mimecast-Originator: redhat.com
-Content-Language: en-US
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=170.10.129.124; envelope-from=pbonzini@redhat.com;
- helo=us-smtp-delivery-124.mimecast.com
-X-Spam_score_int: -29
-X-Spam_score: -3.0
-X-Spam_bar: ---
-X-Spam_report: (-3.0 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.119,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H2=-0.738,
- RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001, RCVD_IN_VALIDITY_SAFE_BLOCKED=0.001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::633;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pl1-x633.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -157,68 +92,36 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 11/13/24 15:23, Phil Dennis-Jordan wrote:
-> macOS's Cocoa event handling must be done on the initial (main) thread
-> of the process. Furthermore, if library or application code uses
-> libdispatch, the main dispatch queue must be handling events on the main
-> thread as well.
-> 
-> So far, this has affected Qemu in both the Cocoa and SDL UIs, although
-> in different ways: the Cocoa UI replaces the default qemu_main function
-> with one that spins Qemu's internal main event loop off onto a
-> background thread. SDL (which uses Cocoa internally) on the other hand
-> uses a polling approach within Qemu's main event loop. Events are
-> polled during the SDL UI's dpy_refresh callback, which happens to run
-> on the main thread by default.
-> 
-> As UIs are mutually exclusive, this works OK as long as nothing else
-> needs platform-native event handling. In the next patch, a new device is
-> introduced based on the ParavirtualizedGraphics.framework in macOS.
-> This uses libdispatch internally, and only works when events are being
-> handled on the main runloop. With the current system, it works when
-> using either the Cocoa or the SDL UI. However, it does not when running
-> headless. Moreover, any attempt to install a similar scheme to the
-> Cocoa UI's main thread replacement fails when combined with the SDL
-> UI.
-> 
-> This change tidies up main thread management to be more flexible.
-> 
->   * The qemu_main global function pointer is a custom function for the
->     main thread, and it may now be NULL. When it is, the main thread
->     runs the main Qemu loop. This represents the traditional setup.
->   * When non-null, spawning the main Qemu event loop on a separate
->     thread is now done centrally rather than inside the Cocoa UI code.
->   * For most platforms, qemu_main is indeed NULL by default, but on
->     Darwin, it defaults to a function that runs the CFRunLoop.
->   * The Cocoa UI sets qemu_main to a function which runs the
->     NSApplication event handling runloop, as is usual for a Cocoa app.
->   * The SDL UI overrides the qemu_main function to NULL, thus
->     specifying that Qemu's main loop must run on the main
->     thread.
->   * The GTK UI also overrides the qemu_main function to NULL.
->   * For other UIs, or in the absence of UIs, the platform's default
->     behaviour is followed.
-> 
-> This means that on macOS, the platform's runloop events are always
-> handled, regardless of chosen UI. The new PV graphics device will
-> thus work in all configurations. There is no functional change on other
-> operating systems.
-> 
-> Signed-off-by: Phil Dennis-Jordan <phil@philjordan.eu>
-> Reviewed-by: Akihiko Odaki <akihiko.odaki@daynix.com>
+Hi,
 
-I checked what GTK+ does and, either way, you have to create another 
-thread: timers are handled with a CFRunLoopTimer, but file descriptors 
-are polled in a separate thread and sent to the main thread with a 
-single CFRunLoopSource.  It's a bit nicer that the main thread is in 
-charge, but it's more complex and probably slower too.
+'sha' is defined in RVA22 as "augmented hypervisor extension" and
+consists of a set of named features that must be enabled.
 
-As long as it's clear that any handlers that go through the CFRunLoop 
-run outside the BQL, as is already the case for the Cocoa UI, I see no 
-problem with this approach.
+RVA23 makes 'sha' mandatory, so let's add official support for it in
+preparation to support RVA23 later. 
 
-Acked-by: Paolo Bonzini <pbonzini@redhat.com>
+Most of the named features added here are always implemented by TCG.
+Only 'ssstateen' has a runtime dependency. 
 
-Paolo
+
+Daniel Henrique Barboza (9):
+  target/riscv/tcg: hide warn for named feats when disabling via
+    priv_ver
+  target/riscv: add ssstateen
+  target/riscv: add shcounterenw
+  target/riscv: add shvstvala
+  target/riscv: add shtvala
+  target/riscv: add shvstvecd
+  target/riscv: add shvsatpa
+  target/riscv: add shgatpa
+  target/riscv/tcg: add sha
+
+ target/riscv/cpu.c         | 10 ++++++++++
+ target/riscv/cpu_cfg.h     |  2 ++
+ target/riscv/tcg/tcg-cpu.c | 30 ++++++++++++++++++++++++++----
+ 3 files changed, 38 insertions(+), 4 deletions(-)
+
+-- 
+2.47.0
 
 
