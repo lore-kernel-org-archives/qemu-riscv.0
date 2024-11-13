@@ -4,88 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 08103D41C3E
-	for <qemu-riscv@archiver.kernel.org>; Wed, 13 Nov 2024 13:08:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DF764D462A5
+	for <qemu-riscv@archiver.kernel.org>; Wed, 13 Nov 2024 14:04:51 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tBD5p-0001Fo-4F; Wed, 13 Nov 2024 08:07:33 -0500
+	id 1tBDz4-0000Oc-Uu; Wed, 13 Nov 2024 09:04:38 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1tBD5h-0001EJ-5e
- for qemu-riscv@nongnu.org; Wed, 13 Nov 2024 08:07:26 -0500
-Received: from mail-pl1-x62d.google.com ([2607:f8b0:4864:20::62d])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1tBD5f-0007tZ-4C
- for qemu-riscv@nongnu.org; Wed, 13 Nov 2024 08:07:24 -0500
-Received: by mail-pl1-x62d.google.com with SMTP id
- d9443c01a7336-20c7ee8fe6bso66963255ad.2
- for <qemu-riscv@nongnu.org>; Wed, 13 Nov 2024 05:07:20 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1731503240; x=1732108040; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=VwoT6KZSYbbMX+LfLh9Fk9l1HaNJ+aLMGQqiZlgwPKY=;
- b=my80tVNesEJtqRRU7g0CA1hOGlK7pK2samR7XQIOKr3OF9z3763jCkp7DZT+NNGz7p
- CYYkwvELEDkSzJz5gCD2zqukktQwy96KLnw1nYTGdg1KzvJ741kCz2DYbzv69pTEqbUE
- jqVZ8hA0+aSEG+KuoF2Yc3/M8mbgXpXl516Gjas/ziWiM36WhS95t/Tdfdfab84fo+PM
- 2Ihzbnk9X1YdUEFfTo1o2Y7lnbii3F9x36wnV8pVZVNjRCeTXhUiaB7SMw/aPMfnAkUO
- y6/EoQhp1r+Ui+E92eSMhNIi5vW3GoUJCkOeU6xWG+BPkGHbcNeB5n7vlIzM8XeoVISX
- 3zxg==
+ (Exim 4.90_1) (envelope-from <ppandit@redhat.com>)
+ id 1tBCdt-0001yh-27
+ for qemu-riscv@nongnu.org; Wed, 13 Nov 2024 07:38:41 -0500
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <ppandit@redhat.com>)
+ id 1tBCdp-00031i-1C
+ for qemu-riscv@nongnu.org; Wed, 13 Nov 2024 07:38:40 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1731501514;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=UOTlncNEO9Kx84sp4x+4qsgShYgzgpOfBmXzjv0lRKA=;
+ b=D6NOgsBXyDPrSC7w1z0oyPk2Ealdbmo6QxvyRrHXroVAJn5KWYNfUyy1B7JoeshO7pMXk1
+ kJzbD0qTUnqM6ibJrmyD3p+LAWyYUVWBZr5B4YbjG+ODz31x7qTRlmV+Fal7NTqCUr/uhs
+ NcrZArw7HiNgDfi95kIh+JQA/87i9uw=
+Received: from mail-lf1-f69.google.com (mail-lf1-f69.google.com
+ [209.85.167.69]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-256-a6egGPGXOCGWQV40FAEZrg-1; Wed, 13 Nov 2024 07:38:33 -0500
+X-MC-Unique: a6egGPGXOCGWQV40FAEZrg-1
+X-Mimecast-MFC-AGG-ID: a6egGPGXOCGWQV40FAEZrg
+Received: by mail-lf1-f69.google.com with SMTP id
+ 2adb3069b0e04-53da203141bso594940e87.1
+ for <qemu-riscv@nongnu.org>; Wed, 13 Nov 2024 04:38:32 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731503240; x=1732108040;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=VwoT6KZSYbbMX+LfLh9Fk9l1HaNJ+aLMGQqiZlgwPKY=;
- b=PhLraJyg6GSuMOI1bAdl2GDYFf4L2fbQ23IYJoQOkBcZ+vMlD/WLeBv/xyBdIrOiJY
- nBewgBufLskgP/qwfzGkpazbgTTUx6E2l/vMBhvTpoWuoAj+0+7bGrzRCG2cmSuiNP+n
- tXypafyXGdxqMith/hlfyyMGve/di/hgJSDZe+dzCp6iqhmSDhi45Xvlls8KnS0ahbIW
- sIVVEqrzS9HtCuaGwiSsjumk1+qpC0M175kYnIrIL3VDUpELeAqlBCxA9WNDPw8YEMcm
- Y75K3iazpBAW1PCdMMEK8NIECKVZ30ZH4FIeZRdmNCyC2fG57DAMK2oBbAuLPzGGVW5q
- ZWQQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXWl+6XfcHff1KYQpzHIEHe0ROOGTePmOfpqPpJwEiTi08s8XwFtybu2W1gMyYp2qJUk6xX0VM9QriB@nongnu.org
-X-Gm-Message-State: AOJu0YymXHdXH3axzd4/aoN2gsebdewlnQcTniZACsBjYk2agXMhc8ev
- mSqXWVL6NsjG0nEoAos/l+WPG7I3d9e4y9h/FVp69g1yqqhbRs0MoXRFC4reVqo=
-X-Google-Smtp-Source: AGHT+IHM0+VmU4DTujno+dwjf8wUlX1woCnh4hKXuI8kzHlIkhquvRaknYPEVc1D69mIHfQhKPHfgw==
-X-Received: by 2002:a17:902:f541:b0:20d:1866:ed6f with SMTP id
- d9443c01a7336-21183ccf11bmr271520905ad.4.1731503238175; 
- Wed, 13 Nov 2024 05:07:18 -0800 (PST)
-Received: from [192.168.68.110] ([187.101.65.72])
- by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-21177dde2d5sm108632065ad.70.2024.11.13.05.07.15
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 13 Nov 2024 05:07:17 -0800 (PST)
-Message-ID: <fb79d615-3f19-4f8e-952d-747b81f957bb@ventanamicro.com>
-Date: Wed, 13 Nov 2024 10:07:13 -0300
+ d=1e100.net; s=20230601; t=1731501511; x=1732106311;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=UOTlncNEO9Kx84sp4x+4qsgShYgzgpOfBmXzjv0lRKA=;
+ b=IRNZ9tBuvIlJs0b1IGbPGa6cavnXPb6w7k4fLJxedAfvnZHr2xBdqWTb3Cy/J9Lnmo
+ ++hrulUfiqfaRCElsLCBsFanNDtg6vWYX8JWCIqK97bJYUGrGKNKLGNosZmmZzqixQWr
+ pjwmBgHOWl91AEuU5b1kvkXGI8HqI+ZTuBmXKmjDrJiCOwFokpGN6Io0rthzHqSIhLUU
+ My09cnRNMMXWR0mTHCvDbtpscDr911fn1oxQxfi71yEHGzp6hiVAlqlqepAqCEeu5o6s
+ 12jr1DNe94IrP/srNX9Pr60BzZNerSK98+VcP1LR0cR7fXx+c7z74H/k7/r3J04eLegf
+ OUvg==
+X-Gm-Message-State: AOJu0Yw9WhkgkvUawtmFfrZrDozHqC7XmmkZ2l3v9Y48P76j9rpcm3HJ
+ nni0Zm/yo5GImVskqLimGYUwNMvUN0mC4Q2uSzpBqp2FjHdo8L6EEFgCH7gRIEEtvgc0ZpVOy2a
+ peUitXRqR2qQCOFHxYFKzJX3VBxu17QobKMmlpBY9up/GvVX7soyQX6yD0PeguUeGfZ5fIgY7Z5
+ bhVlCHlvmBajZKZeJecEx3pu/gvT0=
+X-Received: by 2002:a05:6512:3e29:b0:539:df2f:e115 with SMTP id
+ 2adb3069b0e04-53d862c5dcfmr10623320e87.23.1731501511503; 
+ Wed, 13 Nov 2024 04:38:31 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IFqZNb+SSpHtxQT/Sn5rLJY9l44cJvbLZf7izRPXsvk3NwqkzeGkwHKaUfQUDFiQiCWZ2Mi+6fFvMa0UlZoD+g=
+X-Received: by 2002:a05:6512:3e29:b0:539:df2f:e115 with SMTP id
+ 2adb3069b0e04-53d862c5dcfmr10623303e87.23.1731501511054; Wed, 13 Nov 2024
+ 04:38:31 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] target/riscv: Add Tenstorrent Ascalon CPU
-To: Anton Blanchard <antonb@tenstorrent.com>, qemu-riscv@nongnu.org,
- qemu-devel@nongnu.org
-Cc: Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bmeng.cn@gmail.com>,
- Weiwei Li <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
 References: <20241113110459.1607299-1-antonb@tenstorrent.com>
-Content-Language: en-US
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 In-Reply-To: <20241113110459.1607299-1-antonb@tenstorrent.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::62d;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pl1-x62d.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
+From: Prasad Pandit <ppandit@redhat.com>
+Date: Wed, 13 Nov 2024 18:08:14 +0530
+Message-ID: <CAE8KmOyCGwG36C+9eSGfcRWfEiqL1Uk-tQc2Kex2P9OHVP3vTA@mail.gmail.com>
+Subject: Re: [PATCH v2] target/riscv: Add Tenstorrent Ascalon CPU
+To: Anton Blanchard <antonb@tenstorrent.com>
+Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, 
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Bin Meng <bmeng.cn@gmail.com>, Weiwei Li <liwei1518@gmail.com>, 
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
+X-Mimecast-Spam-Score: 0
+X-Mimecast-MFC-PROC-ID: o1exuoNmu8Y2j4kEtTVmS-JMVElbwkluGSUh-o_BR0Y_1731501512
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset="UTF-8"
+Received-SPF: pass client-ip=170.10.133.124; envelope-from=ppandit@redhat.com;
+ helo=us-smtp-delivery-124.mimecast.com
+X-Spam_score_int: -21
+X-Spam_score: -2.2
 X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+X-Spam_report: (-2.2 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.119,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H3=0.001, RCVD_IN_MSPIKE_WL=0.001,
+ RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001, RCVD_IN_VALIDITY_SAFE_BLOCKED=0.001,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
+X-Mailman-Approved-At: Wed, 13 Nov 2024 09:04:38 -0500
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -100,44 +105,45 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-
-
-On 11/13/24 8:04 AM, Anton Blanchard wrote:
+On Wed, 13 Nov 2024 at 16:36, Anton Blanchard <antonb@tenstorrent.com> wrote:
 > Add a CPU entry for the Tenstorrent Ascalon CPU, a series of 2 wide to
 > 8 wide RV64 cores. More details can be found at
 > https://tenstorrent.com/ip/tt-ascalon
-> 
+>
 > Signed-off-by: Anton Blanchard <antonb@tenstorrent.com>
 > ---
+>  target/riscv/cpu-qom.h |  1 +
+>  target/riscv/cpu.c     | 67 ++++++++++++++++++++++++++++++++++++++++++
+>  2 files changed, 68 insertions(+)
 
+v1: https://lore.kernel.org/qemu-devel/20241108230709.1466634-1-antonb@tenstorrent.com/T/#u
 
-Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+* We need to share a link to an earlier discussion/version of the patch. ^^
 
->   target/riscv/cpu-qom.h |  1 +
->   target/riscv/cpu.c     | 67 ++++++++++++++++++++++++++++++++++++++++++
->   2 files changed, 68 insertions(+)
-> 
 > diff --git a/target/riscv/cpu-qom.h b/target/riscv/cpu-qom.h
 > index 62115375cd..6547642287 100644
 > --- a/target/riscv/cpu-qom.h
 > +++ b/target/riscv/cpu-qom.h
 > @@ -49,6 +49,7 @@
->   #define TYPE_RISCV_CPU_SIFIVE_U54       RISCV_CPU_TYPE_NAME("sifive-u54")
->   #define TYPE_RISCV_CPU_THEAD_C906       RISCV_CPU_TYPE_NAME("thead-c906")
->   #define TYPE_RISCV_CPU_VEYRON_V1        RISCV_CPU_TYPE_NAME("veyron-v1")
+>  #define TYPE_RISCV_CPU_SIFIVE_U54       RISCV_CPU_TYPE_NAME("sifive-u54")
+>  #define TYPE_RISCV_CPU_THEAD_C906       RISCV_CPU_TYPE_NAME("thead-c906")
+>  #define TYPE_RISCV_CPU_VEYRON_V1        RISCV_CPU_TYPE_NAME("veyron-v1")
 > +#define TYPE_RISCV_CPU_TT_ASCALON       RISCV_CPU_TYPE_NAME("tt-ascalon")
->   #define TYPE_RISCV_CPU_HOST             RISCV_CPU_TYPE_NAME("host")
->   
->   OBJECT_DECLARE_CPU_TYPE(RISCVCPU, RISCVCPUClass, RISCV_CPU)
+>  #define TYPE_RISCV_CPU_HOST             RISCV_CPU_TYPE_NAME("host")
+>
+>  OBJECT_DECLARE_CPU_TYPE(RISCVCPU, RISCVCPUClass, RISCV_CPU)
 > diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
 > index f219f0c3b5..8447ad0dfb 100644
 > --- a/target/riscv/cpu.c
 > +++ b/target/riscv/cpu.c
 > @@ -579,6 +579,72 @@ static void rv64_veyron_v1_cpu_init(Object *obj)
->   #endif
->   }
->   
+>  #endif
+>  }
+>
 > +/* Tenstorrent Ascalon */
+
+* This comment looks redundant, does not help much.
+
 > +static void rv64_tt_ascalon_cpu_init(Object *obj)
 > +{
 > +    CPURISCVState *env = &RISCV_CPU(obj)->env;
@@ -203,16 +209,23 @@ Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 > +#endif
 > +}
 > +
->   #ifdef CONFIG_TCG
->   static void rv128_base_cpu_init(Object *obj)
->   {
+>  #ifdef CONFIG_TCG
+>  static void rv128_base_cpu_init(Object *obj)
+>  {
 > @@ -2982,6 +3048,7 @@ static const TypeInfo riscv_cpu_type_infos[] = {
->       DEFINE_VENDOR_CPU(TYPE_RISCV_CPU_SIFIVE_U54, MXL_RV64,  rv64_sifive_u_cpu_init),
->       DEFINE_VENDOR_CPU(TYPE_RISCV_CPU_SHAKTI_C,   MXL_RV64,  rv64_sifive_u_cpu_init),
->       DEFINE_VENDOR_CPU(TYPE_RISCV_CPU_THEAD_C906, MXL_RV64,  rv64_thead_c906_cpu_init),
+>      DEFINE_VENDOR_CPU(TYPE_RISCV_CPU_SIFIVE_U54, MXL_RV64,  rv64_sifive_u_cpu_init),
+>      DEFINE_VENDOR_CPU(TYPE_RISCV_CPU_SHAKTI_C,   MXL_RV64,  rv64_sifive_u_cpu_init),
+>      DEFINE_VENDOR_CPU(TYPE_RISCV_CPU_THEAD_C906, MXL_RV64,  rv64_thead_c906_cpu_init),
 > +    DEFINE_VENDOR_CPU(TYPE_RISCV_CPU_TT_ASCALON, MXL_RV64,  rv64_tt_ascalon_cpu_init),
->       DEFINE_VENDOR_CPU(TYPE_RISCV_CPU_VEYRON_V1,  MXL_RV64,  rv64_veyron_v1_cpu_init),
->   #ifdef CONFIG_TCG
->       DEFINE_DYNAMIC_CPU(TYPE_RISCV_CPU_BASE128,   MXL_RV128, rv128_base_cpu_init),
+>      DEFINE_VENDOR_CPU(TYPE_RISCV_CPU_VEYRON_V1,  MXL_RV64,  rv64_veyron_v1_cpu_init),
+>  #ifdef CONFIG_TCG
+>      DEFINE_DYNAMIC_CPU(TYPE_RISCV_CPU_BASE128,   MXL_RV128, rv128_base_cpu_init),
+> --
+
+Rest looks okay.
+
+Thank you.
+---
+  - Prasad
 
 
