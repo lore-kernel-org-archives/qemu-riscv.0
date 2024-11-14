@@ -4,62 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A1CBAD65C60
-	for <qemu-riscv@archiver.kernel.org>; Thu, 14 Nov 2024 09:14:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A5843D65C61
+	for <qemu-riscv@archiver.kernel.org>; Thu, 14 Nov 2024 09:14:46 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tBVvJ-0008Jy-VT; Thu, 14 Nov 2024 04:13:58 -0500
+	id 1tBVw1-0000PN-Op; Thu, 14 Nov 2024 04:14:41 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <cleger@rivosinc.com>)
- id 1tBVvD-0008I7-Kg
- for qemu-riscv@nongnu.org; Thu, 14 Nov 2024 04:13:52 -0500
-Received: from mail-wm1-x334.google.com ([2a00:1450:4864:20::334])
+ id 1tBVvI-0008Jv-QQ
+ for qemu-riscv@nongnu.org; Thu, 14 Nov 2024 04:13:57 -0500
+Received: from mail-wm1-x32f.google.com ([2a00:1450:4864:20::32f])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <cleger@rivosinc.com>)
- id 1tBVv8-0007g0-MN
- for qemu-riscv@nongnu.org; Thu, 14 Nov 2024 04:13:49 -0500
-Received: by mail-wm1-x334.google.com with SMTP id
- 5b1f17b1804b1-4315e9e9642so3677405e9.0
- for <qemu-riscv@nongnu.org>; Thu, 14 Nov 2024 01:13:46 -0800 (PST)
+ id 1tBVvE-0007hW-LY
+ for qemu-riscv@nongnu.org; Thu, 14 Nov 2024 04:13:55 -0500
+Received: by mail-wm1-x32f.google.com with SMTP id
+ 5b1f17b1804b1-4314c4cb752so3434055e9.2
+ for <qemu-riscv@nongnu.org>; Thu, 14 Nov 2024 01:13:51 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1731575625; x=1732180425;
+ d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1731575630; x=1732180430;
  darn=nongnu.org; 
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=ZuY5Yx+SDWSOTgPbmJ+N/i87adllxTARIGZlZIogOfA=;
- b=hZxqoGTypHP/ie0UMcE5++sECxT1ih3gugnbYYYCCY1834LlOEHYQ3KB9+cnfeIpTa
- dRp9brxzwHX9gcI40DxJJl9lf9Bdblq4lfOMOSznk7HG4SIMbEDzw6/14NN9x0i5Derh
- jMIWZfdE/6xCIe9ekqc32QzJE5LMFMIsOy085nfrbn3qyVcs4YoOX6PTR44WRq5QXRar
- ZLsb48CHobN9uST6iYWVvPXhLp1173b+0Zlq3mBWrTILNkS1zEr7tjE5I92Ffzd16T7J
- YunEWQ9Yasw9oZYfWCU3HPddro8V1bLbxWRq0iQTidnckb99fHk3WVexzvnrjwPrDMAU
- Lihw==
+ bh=/WxMvHkEFShTB/KP6SbLDpruZLu+ZNC+8yWnih7w6xQ=;
+ b=k21UX+FMQLeeXO/IYEF7pbgcSckAkUiM0IWCPeYO2MrGlzwRiuQ9bgCLWor3yAn1La
+ M6g5k2rywzo1iuDmTFs9O0jD6cXGWk9X75P3Fzb7tMgQQQxsy7bMeCZCNdH6Yc1CwwNI
+ P+xRQHToZ3QVq3lrekPnAmPIyfWMWVf4ktMpZ0CZPnxusyqkkvKhnd2JRKjIH5i6DZrs
+ 9SBInX7DaMqsOIuL3nkf98behTr6iwtz2/nMExkGQ1XfeV95WaRqmlSusfHb5oEp3HAH
+ p3XNJtgpfcwTsXsAPWKtUl3N6eoQfHpFBv0TWEUA4+ZzIUa/2QvODmS7ei7o9jxH6Q0t
+ BxSg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731575625; x=1732180425;
+ d=1e100.net; s=20230601; t=1731575630; x=1732180430;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=ZuY5Yx+SDWSOTgPbmJ+N/i87adllxTARIGZlZIogOfA=;
- b=GOp6CVi+5XBDqchHnYqRehOr4msiRfiT/3bqi6LmClws+0IXjGP3rGBEfVDL0mBfAU
- mOIey0+G8QxJ3qmAFjRbkUTde35RfjinAqjLc3NeFHT7vkdaZuyepTEHQCBund6FFkZy
- ioU7+AdvHoH4PwCy5LpnQR2hAZLVxHE8TOKbytGK7C4wDYEbAkPVrdzerm/FKyjub/S4
- 5/8bu8LSkI5w/ZAp9jQmdyt3BDz/l+cIftyYTCHjPhJkG2M59E1QkpU6+GLChFvfUeBQ
- MEfJmmvbuM+qqXOQzw8DkrUjkFpz4cncc42UuaZzoALS0G6gLDh8LdTsQ1y9XF+6AFSQ
- vDfw==
-X-Gm-Message-State: AOJu0Yyx/KsRcKfgMvHOlAYMIkI9lkt/8uVJzfqBvfE+/J5ma3EXFrmu
- NHJd2rYsbxiXt8FpcfH9mj+fnc3rkNsKGDDDbRUUpZQYSxEJhhFHT86gZPABSIbWuHtVeiKCaIo
- B
-X-Google-Smtp-Source: AGHT+IGWlkG+i1Di5LFaY3zZaQx5bJaRfuTnvv9w58/kgpBKwXbj5UGdBnVKcFgGGtZfqUUpjURo7w==
-X-Received: by 2002:a05:6000:178d:b0:37c:cfeb:e612 with SMTP id
- ffacd0b85a97d-3820df5bd38mr4840900f8f.1.1731575624714; 
- Thu, 14 Nov 2024 01:13:44 -0800 (PST)
+ bh=/WxMvHkEFShTB/KP6SbLDpruZLu+ZNC+8yWnih7w6xQ=;
+ b=HSlkeGnGtLRWvzxNmrvmnkaW9qunVJ1MuxfotLL3pHTbKG6RjKXo+gJaEX44QVofCW
+ CC63bQnkeTqhJfGijWpZ0+TAuJsbC3PF32YXF/NHiAsSMSNiQp0vhU30a41Quzct3sMk
+ YRBMGPiv6wVx0LUOCpKJseWGn+3g9JRs9uTsCvWX0jbGGo4EGEcASTvKoZNVjR22+b2D
+ kGQRSwLgTq/fcMiCvLJJ+smBX7BH7rBe0+L8r0r6CmKWOLV/lNi+eiSVRCu4uHGsIAUj
+ tfxCfDlZ8eY89c5Bt+45q0S6o6hHv3EjNcTeBaylLeOey7rQjl3smaHFqrl2254/ZEPn
+ IsDA==
+X-Gm-Message-State: AOJu0YxN8iYBSDyMu+p8UxZZfVy1K39caf5GF7T+XTj9FH+hr81tVfVa
+ b6dSWKo0yx9PVrxs4QmZl2O7xd1b4+Mp+Ru54DmM4djzmyeTyuvanrMsdsyyjHm6+ffgRQlZ6fg
+ a
+X-Google-Smtp-Source: AGHT+IG8EGC9kzhwVnju/Dw0QWh3j2+EFMCeXpE1qe0U8y1wqdn7A4TAutIRujqEZdoNC1uyzUPf2A==
+X-Received: by 2002:a05:6000:42c2:b0:382:1478:1a04 with SMTP id
+ ffacd0b85a97d-38214781a12mr1468626f8f.35.1731575630322; 
+ Thu, 14 Nov 2024 01:13:50 -0800 (PST)
 Received: from carbon-x1.. ([2a01:e0a:e17:9700:16d2:7456:6634:9626])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3821ae313e3sm899050f8f.94.2024.11.14.01.13.43
+ ffacd0b85a97d-3821ae313e3sm899050f8f.94.2024.11.14.01.13.49
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 14 Nov 2024 01:13:44 -0800 (PST)
+ Thu, 14 Nov 2024 01:13:49 -0800 (PST)
 From: =?UTF-8?q?Cl=C3=A9ment=20L=C3=A9ger?= <cleger@rivosinc.com>
 To: qemu-riscv@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <alistair.francis@wdc.com>,
@@ -70,18 +70,17 @@ Cc: =?UTF-8?q?Cl=C3=A9ment=20L=C3=A9ger?= <cleger@rivosinc.com>,
  Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
  Ved Shanbhogue <ved@rivosinc.com>, Atish Patra <atishp@rivosinc.com>,
  qemu-devel@nongnu.org
-Subject: [PATCH v5 1/9] target/riscv: fix henvcfg potentially containing stale
- bits
-Date: Thu, 14 Nov 2024 10:13:22 +0100
-Message-ID: <20241114091332.108811-2-cleger@rivosinc.com>
+Subject: [PATCH v5 6/9] target/riscv: Add Smdbltrp CSRs handling
+Date: Thu, 14 Nov 2024 10:13:27 +0100
+Message-ID: <20241114091332.108811-7-cleger@rivosinc.com>
 X-Mailer: git-send-email 2.45.2
 In-Reply-To: <20241114091332.108811-1-cleger@rivosinc.com>
 References: <20241114091332.108811-1-cleger@rivosinc.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::334;
- envelope-from=cleger@rivosinc.com; helo=mail-wm1-x334.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::32f;
+ envelope-from=cleger@rivosinc.com; helo=mail-wm1-x32f.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -103,126 +102,87 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-With the current implementation, if we had the current scenario:
-- set bit x in menvcfg
-- set bit x in henvcfg
-- clear bit x in menvcfg
-then, the internal variable env->henvcfg would still contain bit x due
-to both a wrong menvcfg mask used in write_henvcfg() as well as a
-missing update of henvcfg upon menvcfg update.
-This can lead to some wrong interpretation of the context. In order to
-update henvcfg upon menvcfg writing, call write_henvcfg() after writing
-menvcfg and fix the mask computation used in write_henvcfg() that is
-used to mesk env->menvcfg value (which could still lead to some stale
-bits). The same mechanism is also applied for henvcfgh writing.
+Add `ext_smdbltrp`in RISCVCPUConfig and implement MSTATUS.MDT behavior.
+Also set MDT to 1 at reset according to the specification.
 
 Signed-off-by: Clément Léger <cleger@rivosinc.com>
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 ---
- target/riscv/csr.c | 40 +++++++++++++++++++++++++++++++++++-----
- 1 file changed, 35 insertions(+), 5 deletions(-)
+ target/riscv/cpu.c      |  3 +++
+ target/riscv/cpu_bits.h |  1 +
+ target/riscv/cpu_cfg.h  |  1 +
+ target/riscv/csr.c      | 13 +++++++++++++
+ 4 files changed, 18 insertions(+)
 
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index 39555364bf..15b21e4f7d 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -959,6 +959,9 @@ static void riscv_cpu_reset_hold(Object *obj, ResetType type)
+             env->mstatus_hs = set_field(env->mstatus_hs,
+                                         MSTATUS64_UXL, env->misa_mxl);
+         }
++        if (riscv_cpu_cfg(env)->ext_smdbltrp) {
++            env->mstatus = set_field(env->mstatus, MSTATUS_MDT, 1);
++        }
+     }
+     env->mcause = 0;
+     env->miclaim = MIP_SGEIP;
+diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
+index 0d0f253fcb..b368e27ca0 100644
+--- a/target/riscv/cpu_bits.h
++++ b/target/riscv/cpu_bits.h
+@@ -561,6 +561,7 @@
+ #define MSTATUS_SDT         0x01000000
+ #define MSTATUS_GVA         0x4000000000ULL
+ #define MSTATUS_MPV         0x8000000000ULL
++#define MSTATUS_MDT         0x40000000000ULL /* Smdbltrp extension */
+ 
+ #define MSTATUS64_UXL       0x0000000300000000ULL
+ #define MSTATUS64_SXL       0x0000000C00000000ULL
+diff --git a/target/riscv/cpu_cfg.h b/target/riscv/cpu_cfg.h
+index 518102d748..8ac1e7fce3 100644
+--- a/target/riscv/cpu_cfg.h
++++ b/target/riscv/cpu_cfg.h
+@@ -78,6 +78,7 @@ struct RISCVCPUConfig {
+     bool ext_sstc;
+     bool ext_smcntrpmf;
+     bool ext_ssdbltrp;
++    bool ext_smdbltrp;
+     bool ext_svadu;
+     bool ext_svinval;
+     bool ext_svnapot;
 diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-index b84b436151..73ac4d5449 100644
+index 054418ff54..1ac5731d32 100644
 --- a/target/riscv/csr.c
 +++ b/target/riscv/csr.c
-@@ -2345,6 +2345,8 @@ static RISCVException read_menvcfg(CPURISCVState *env, int csrno,
-     return RISCV_EXCP_NONE;
- }
- 
-+static RISCVException write_henvcfg(CPURISCVState *env, int csrno,
-+                                    target_ulong val);
- static RISCVException write_menvcfg(CPURISCVState *env, int csrno,
-                                     target_ulong val)
- {
-@@ -2357,6 +2359,7 @@ static RISCVException write_menvcfg(CPURISCVState *env, int csrno,
-                 (cfg->ext_svadu ? MENVCFG_ADUE : 0);
+@@ -1616,6 +1616,13 @@ static RISCVException write_mstatus(CPURISCVState *env, int csrno,
+         }
      }
-     env->menvcfg = (env->menvcfg & ~mask) | (val & mask);
-+    write_henvcfg(env, CSR_HENVCFG, env->henvcfg);
  
-     return RISCV_EXCP_NONE;
- }
-@@ -2368,6 +2371,8 @@ static RISCVException read_menvcfgh(CPURISCVState *env, int csrno,
-     return RISCV_EXCP_NONE;
- }
- 
-+static RISCVException write_henvcfgh(CPURISCVState *env, int csrno,
-+                                    target_ulong val);
- static RISCVException write_menvcfgh(CPURISCVState *env, int csrno,
-                                      target_ulong val)
- {
-@@ -2378,6 +2383,7 @@ static RISCVException write_menvcfgh(CPURISCVState *env, int csrno,
++    if (riscv_cpu_cfg(env)->ext_smdbltrp) {
++        mask |= MSTATUS_MDT;
++        if ((val & MSTATUS_MDT) != 0) {
++            val &= ~MSTATUS_MIE;
++        }
++    }
++
+     if (xl != MXL_RV32 || env->debugger) {
+         if (riscv_has_ext(env, RVH)) {
+             mask |= MSTATUS_MPV | MSTATUS_GVA;
+@@ -1654,6 +1661,12 @@ static RISCVException write_mstatush(CPURISCVState *env, int csrno,
      uint64_t valh = (uint64_t)val << 32;
+     uint64_t mask = riscv_has_ext(env, RVH) ? MSTATUS_MPV | MSTATUS_GVA : 0;
  
-     env->menvcfg = (env->menvcfg & ~mask) | (valh & mask);
-+    write_henvcfgh(env, CSR_HENVCFGH, env->henvcfg >> 32);
- 
-     return RISCV_EXCP_NONE;
- }
-@@ -2435,6 +2441,7 @@ static RISCVException write_henvcfg(CPURISCVState *env, int csrno,
-                                     target_ulong val)
- {
-     uint64_t mask = HENVCFG_FIOM | HENVCFG_CBIE | HENVCFG_CBCFE | HENVCFG_CBZE;
-+    uint64_t henvcfg_mask = mask, menvcfg_mask;
-     RISCVException ret;
- 
-     ret = smstateen_acc_ok(env, 0, SMSTATEEN0_HSENVCFG);
-@@ -2443,10 +2450,24 @@ static RISCVException write_henvcfg(CPURISCVState *env, int csrno,
-     }
- 
-     if (riscv_cpu_mxl(env) == MXL_RV64) {
--        mask |= env->menvcfg & (HENVCFG_PBMTE | HENVCFG_STCE | HENVCFG_ADUE);
-+        /*
-+         * Since henvcfg depends on a menvcfg subset, we want to clear all the
-+         * menvcfg supported feature (whatever their state is) before enabling
-+         * some new one using the provided value. Not doing so would result in
-+         * keeping stale menvcfg bits in henvcfg value if a bit was enabled in
-+         * menvcfg and then disabled before updating henvcfg for instance.
-+         */
-+        menvcfg_mask = HENVCFG_PBMTE | HENVCFG_STCE | HENVCFG_ADUE;
-+        mask |= env->menvcfg & menvcfg_mask;
-+        henvcfg_mask |= menvcfg_mask;
-     }
- 
--    env->henvcfg = (env->henvcfg & ~mask) | (val & mask);
-+    /*
-+     * 'henvcfg_mask' contains all supported bits (both in henvcfg and menvcfg
-+     * common bits) and 'mask' contains henvcfg exclusive bits as well as
-+     * menvcfg enabled bits only.
-+     */
-+    env->henvcfg = (env->henvcfg & ~henvcfg_mask) | (val & mask);
++    if (riscv_cpu_cfg(env)->ext_smdbltrp) {
++        mask |= MSTATUS_MDT;
++        if ((valh & MSTATUS_MDT) != 0) {
++            mask |= MSTATUS_MIE;
++        }
++    }
+     env->mstatus = (env->mstatus & ~mask) | (valh & mask);
  
      return RISCV_EXCP_NONE;
- }
-@@ -2469,8 +2490,13 @@ static RISCVException read_henvcfgh(CPURISCVState *env, int csrno,
- static RISCVException write_henvcfgh(CPURISCVState *env, int csrno,
-                                      target_ulong val)
- {
--    uint64_t mask = env->menvcfg & (HENVCFG_PBMTE | HENVCFG_STCE |
--                                    HENVCFG_ADUE);
-+    /*
-+     * Same comment than the one in write_henvcfg() applies here, we want to
-+     * clear all previous menvcfg bits before enabling some new one to avoid
-+     * stale menvcfg bits in henvcfg.
-+     */
-+    uint64_t henvcfg_mask = (HENVCFG_PBMTE | HENVCFG_STCE | HENVCFG_ADUE);
-+    uint64_t mask = env->menvcfg & henvcfg_mask;
-     uint64_t valh = (uint64_t)val << 32;
-     RISCVException ret;
- 
-@@ -2479,7 +2505,11 @@ static RISCVException write_henvcfgh(CPURISCVState *env, int csrno,
-         return ret;
-     }
- 
--    env->henvcfg = (env->henvcfg & ~mask) | (valh & mask);
-+    /*
-+     * 'henvcfg_mask' contains all menvcfg supported bits and 'mask' contains
-+     * menvcfg enabled bits only.
-+     */
-+    env->henvcfg = (env->henvcfg & ~henvcfg_mask) | (valh & mask);
-     return RISCV_EXCP_NONE;
- }
- 
 -- 
 2.45.2
 
