@@ -4,88 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AD99AD68B3F
-	for <qemu-riscv@archiver.kernel.org>; Thu, 14 Nov 2024 17:14:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A7A86D6A221
+	for <qemu-riscv@archiver.kernel.org>; Thu, 14 Nov 2024 18:12:10 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tBdPO-0006qJ-EK; Thu, 14 Nov 2024 12:13:30 -0500
+	id 1tBeK3-00023p-U0; Thu, 14 Nov 2024 13:12:04 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <pierrick.bouvier@linaro.org>)
- id 1tBdPM-0006ll-1n
- for qemu-riscv@nongnu.org; Thu, 14 Nov 2024 12:13:28 -0500
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1tBeK1-0001vd-U8
+ for qemu-riscv@nongnu.org; Thu, 14 Nov 2024 13:12:02 -0500
 Received: from mail-pl1-x62e.google.com ([2607:f8b0:4864:20::62e])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <pierrick.bouvier@linaro.org>)
- id 1tBdPI-0005bR-Re
- for qemu-riscv@nongnu.org; Thu, 14 Nov 2024 12:13:27 -0500
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1tBeJz-0004LF-D8
+ for qemu-riscv@nongnu.org; Thu, 14 Nov 2024 13:12:01 -0500
 Received: by mail-pl1-x62e.google.com with SMTP id
- d9443c01a7336-2114214c63eso8273295ad.3
- for <qemu-riscv@nongnu.org>; Thu, 14 Nov 2024 09:13:24 -0800 (PST)
+ d9443c01a7336-20ca1b6a80aso10513705ad.2
+ for <qemu-riscv@nongnu.org>; Thu, 14 Nov 2024 10:11:58 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1731604403; x=1732209203; darn=nongnu.org;
+ d=linaro.org; s=google; t=1731607917; x=1732212717; darn=nongnu.org;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=1S4kl0Wc7DondKyIIA0GBxvrpljQ86jixVzu7yYNSIk=;
- b=cOUqUFsxE4sb/XmY2UR+711cuN7JeBumXDHRfmGE7TyD3hlcJhkAOo7/HBYGoGfLKg
- 8gFRj0KmEy7xN0wQlF1YlHkDWeNKjly4V46Sh9p/ck9fb5c6JLx5YizqX7cOe2ly3vSs
- 1ojulBksv9vZ3xzSIKM+yhHqn+POtu2jaKguZh9Xuu5UjjNIIdBvNn2sJSE/6pPT3aq+
- nxH1DLj3r/NvKjmyvsQ/5VDWqnl1cukO7qcJdLPdphrmAlUnKfQc4yezNU5YfYBlbJhT
- IdBolrpNuGf2m+5w3RUg1gu9sZ6g+WdC4gudt/YulLlA9sS95xe3f9KoS31vMe26skXD
- SfVw==
+ bh=kyrNIdWJL/Zjb3SHq6P1iz2SKOYW7mBnEocbSBbuRAw=;
+ b=W9kg1U0skZ2WnhSDA0CpdkXl5Xd6BsjrKvN+geli2Kxc9kU1iAY/71gX3q3ol77eUJ
+ 3alXOtDWmOXtLwP2RUaeH60NAbd5k4bHc5t/ZsNJPvmno9WMFUjgE+yCSB/zS3Si9h7V
+ CWlmryUkQ6eFVNHUEMBeKKWFX1hhapz+z6m9z+TekUJvuZAC6J4CjozzNAeDSXNcsObK
+ qwxbFiPZKlMcgpgoyMOyJrKTtAUFypn4GCKyJ5u840U2fupWODVQZwRvCvW5H6F5vqs1
+ gr3q2LZ1gmxrLY2Vqr3K0PS2DhmYoTKcALLJ5SpkIZFOFuoO7ll+ku5qaRse65x7I2ab
+ Ll1g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731604403; x=1732209203;
+ d=1e100.net; s=20230601; t=1731607917; x=1732212717;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=1S4kl0Wc7DondKyIIA0GBxvrpljQ86jixVzu7yYNSIk=;
- b=czx+iBVZ8H6xURs5ZRBByomdH5+bXKk+/dfbLOI7wC4DkXrwWOiLCp0NI0kUkNirfz
- 2LCZy7Eob2wcTMIrWtjJ93asmlJ1IMP1gtzSesHZ+MJAYUqMBwVMKi3Qw4IyfdwzsGaA
- xO0fDisLdcpackPqdi0vyT9qcs1SmPaU9H7E691Msyr/ilsdqmxTDkEAbbZtb/3R/Jc1
- hsMh1O+sVWb+ovpwssilE4MpJ3momRyx78gMZDZu/AoAnzvcgviW5dMFTbSlWDhmd60f
- i+t34FCkoVH2nmnck8RYLVT6pmvHO3CFGc+F/jygUS+j71Pq2x0MuUd1l+S6NDN89kv7
- 9qgQ==
+ bh=kyrNIdWJL/Zjb3SHq6P1iz2SKOYW7mBnEocbSBbuRAw=;
+ b=nQVzQrBd4c/bcddXmJj6+NeDcEhQThbsBkN5AIilQYO8d4P3xgRo8e14KCY3SYZEpl
+ trJH4YCAkRi3hXMygx0ttyHY7E3SjHIKBZ8/9xRPT3Mao2dDe/kZk4TbNMPhYjFIP8At
+ J+pkRYOR5RLRjkzqBsYm/XhCTtSzBirsccXQNZUW6AnpgoAbBz9mClL5QLGMgDgcLBO5
+ 0QG8i3UBu3zyls28JEVV4exidLw81Q24+ejjA+aRIg7esFf+SDPmD6X7tR5TM3g7c6uh
+ 1w37KrkEcLnpp3aqsFqNNHC+C3QUx+pGIhSyxg0IcvCbF3B83N2Gj3SXCd/N6nWnznjJ
+ nr4g==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWy1GO48oj06nPLNQafA2HHVGyYS89h+FnMc94v3+C3axi8tuAj6pMdJkUdpt2dL4CXnZcj19l7j24b@nongnu.org
-X-Gm-Message-State: AOJu0YyCKcEMpj2smSyxQ+dNGCxoMeux9YGuu0KyVwbtlAPXwxI7t+Au
- zVfCSto3pa4l50c8UwA2EN4D7EJvaU6BK+jHUoymxwBviUgSm5iIREWm7b35uu8=
-X-Google-Smtp-Source: AGHT+IHFEx+3uNH+loQ5sdWRXNzX/DUBg7iLKPz2X2MyhTvyYrflvy+P05asaSgwQyFwFNDhunF4yA==
-X-Received: by 2002:a17:903:4306:b0:20c:f0dd:c408 with SMTP id
- d9443c01a7336-21183521d2bmr211430885ad.20.1731604403141; 
- Thu, 14 Nov 2024 09:13:23 -0800 (PST)
-Received: from [192.168.1.67] (216-180-64-156.dyn.novuscom.net.
- [216.180.64.156]) by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-211c7d37fb7sm13045565ad.262.2024.11.14.09.13.22
+ AJvYcCVx0AMnrtwCMjNXFhaL64ghIPCPNg+hQvILnzqQGPsTnicsA7zHkQ4o1njJgq16yge7C51oXK30a3pL@nongnu.org
+X-Gm-Message-State: AOJu0YyASaY5fNB4Xo93V5r9uL7Tc2hRXlm9QA1O31g8hBZIsDeF9bxQ
+ 7v5yetHajjYOaIeyjRkjyafTDA93IBERH44jlQRlwZjRCXEk5Aw+clrtJli1GdI=
+X-Google-Smtp-Source: AGHT+IEJYufHI6CW5xyN+OQhyBGmvWfAanx/gAKBQ75R0c/F2iZIJWPFeQLo1lKp9wpiyDP139zpYQ==
+X-Received: by 2002:a17:903:1788:b0:20c:ce9c:bbb0 with SMTP id
+ d9443c01a7336-211c43a6624mr42529485ad.0.1731607917647; 
+ Thu, 14 Nov 2024 10:11:57 -0800 (PST)
+Received: from [192.168.0.4] ([71.212.136.242])
+ by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-211c7d1dfa1sm13614185ad.215.2024.11.14.10.11.57
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 14 Nov 2024 09:13:22 -0800 (PST)
-Message-ID: <a5d8253f-b25f-4c1c-bccf-3a6185f21dc2@linaro.org>
-Date: Thu, 14 Nov 2024 09:13:21 -0800
+ Thu, 14 Nov 2024 10:11:57 -0800 (PST)
+Message-ID: <85ecf123-0d3a-4d00-a961-afd6f8681608@linaro.org>
+Date: Thu, 14 Nov 2024 10:11:55 -0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 03/24] exec/translation-block: Include missing
- 'exec/vaddr.h' header
-To: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Paolo Bonzini <pbonzini@redhat.com>,
- Richard Henderson <richard.henderson@linaro.org>,
+Subject: Re: [PATCH 01/24] exec/cpu-all: Include missing 'exec/cpu-defs.h'
+ header
+To: Thomas Huth <thuth@redhat.com>, =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?=
+ <philmd@linaro.org>, Paolo Bonzini <pbonzini@redhat.com>,
  Anton Johansson <anjo@rev.ng>, qemu-devel@nongnu.org
-Cc: qemu-ppc@nongnu.org, Thomas Huth <thuth@redhat.com>, qemu-arm@nongnu.org, 
- Peter Xu <peterx@redhat.com>, qemu-riscv@nongnu.org,
+Cc: qemu-ppc@nongnu.org, qemu-arm@nongnu.org, Peter Xu <peterx@redhat.com>,
+ Pierrick Bouvier <pierrick.bouvier@linaro.org>, qemu-riscv@nongnu.org,
  David Hildenbrand <david@redhat.com>,
  Peter Maydell <peter.maydell@linaro.org>,
  =?UTF-8?Q?Alex_Benn=C3=A9e?= <alex.bennee@linaro.org>, qemu-s390x@nongnu.org
 References: <20241114011310.3615-1-philmd@linaro.org>
- <20241114011310.3615-4-philmd@linaro.org>
- <8406e329-5b09-4960-b5b7-baca62d3747c@linaro.org>
- <50fac36d-86af-48ce-890a-033887da05e1@linaro.org>
+ <20241114011310.3615-2-philmd@linaro.org>
+ <e2792708-d2d1-4d13-8b43-103cabdb279e@redhat.com>
 Content-Language: en-US
-From: Pierrick Bouvier <pierrick.bouvier@linaro.org>
-In-Reply-To: <50fac36d-86af-48ce-890a-033887da05e1@linaro.org>
+From: Richard Henderson <richard.henderson@linaro.org>
+In-Reply-To: <e2792708-d2d1-4d13-8b43-103cabdb279e@redhat.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: base64
+Content-Transfer-Encoding: 8bit
 Received-SPF: pass client-ip=2607:f8b0:4864:20::62e;
- envelope-from=pierrick.bouvier@linaro.org; helo=mail-pl1-x62e.google.com
+ envelope-from=richard.henderson@linaro.org; helo=mail-pl1-x62e.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -108,43 +106,18 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-T24gMTEvMTQvMjQgMDc6MjMsIFBoaWxpcHBlIE1hdGhpZXUtRGF1ZMOpIHdyb3RlOg0KPiBP
-biAxNC8xMS8yNCAwNDoxMCwgUGllcnJpY2sgQm91dmllciB3cm90ZToNCj4+IE9uIDExLzEz
-LzI0IDE3OjEyLCBQaGlsaXBwZSBNYXRoaWV1LURhdWTDqSB3cm90ZToNCj4+PiAndmFkZHIn
-IGlzIGRlY2xhcmVkIGluICJleGVjL3ZhZGRyLmgiLg0KPj4+IEluY2x1ZGUgaXQgaW4gb3Jk
-ZXIgdG8gYXZvaWQgd2hlbiByZWZhY3RvcmluZzoNCj4+Pg0KPj4+ICDCoMKgIGluY2x1ZGUv
-ZXhlYy90cmFuc2xhdGlvbi1ibG9jay5oOjU2OjU6IGVycm9yOiB1bmtub3duIHR5cGUgbmFt
-ZQ0KPj4+ICd2YWRkcicNCj4+PiAgwqDCoMKgwqDCoCA1NiB8wqDCoMKgwqAgdmFkZHIgcGM7
-DQo+Pj4gIMKgwqDCoMKgwqDCoMKgwqAgfMKgwqDCoMKgIF4NCj4+Pg0KPj4+IFNpZ25lZC1v
-ZmYtYnk6IFBoaWxpcHBlIE1hdGhpZXUtRGF1ZMOpIDxwaGlsbWRAbGluYXJvLm9yZz4NCj4+
-PiAtLS0NCj4+PiAgwqAgaW5jbHVkZS9leGVjL3RyYW5zbGF0aW9uLWJsb2NrLmggfCAxICsN
-Cj4+PiAgwqAgMSBmaWxlIGNoYW5nZWQsIDEgaW5zZXJ0aW9uKCspDQo+Pj4NCj4+PiBkaWZm
-IC0tZ2l0IGEvaW5jbHVkZS9leGVjL3RyYW5zbGF0aW9uLWJsb2NrLmgNCj4+PiBiL2luY2x1
-ZGUvZXhlYy90cmFuc2xhdGlvbi1ibG9jay5oDQo+Pj4gaW5kZXggYTZkMWFmNmU5Yi4uYjk5
-YWZiMDA3NyAxMDA2NDQNCj4+PiAtLS0gYS9pbmNsdWRlL2V4ZWMvdHJhbnNsYXRpb24tYmxv
-Y2suaA0KPj4+ICsrKyBiL2luY2x1ZGUvZXhlYy90cmFuc2xhdGlvbi1ibG9jay5oDQo+Pj4g
-QEAgLTksNiArOSw3IEBADQo+Pj4gIMKgICNpbmNsdWRlICJxZW11L3RocmVhZC5oIg0KPj4+
-ICDCoCAjaW5jbHVkZSAiZXhlYy9jcHUtY29tbW9uLmgiDQo+Pj4gKyNpbmNsdWRlICJleGVj
-L3ZhZGRyLmgiDQo+Pj4gIMKgICNpZmRlZiBDT05GSUdfVVNFUl9PTkxZDQo+Pj4gIMKgICNp
-bmNsdWRlICJxZW11L2ludGVydmFsLXRyZWUuaCINCj4+PiAgwqAgI2VuZGlmDQo+Pg0KPj4g
-SSdtIGEgYml0IGNvbmZ1c2VkIGJ5IGNvbW1pdCBtZXNzYWdlLCBidXQgaXQgc2VlbXMgdGhh
-dCB0aGlzIHNlcmllcyBoYXMNCj4+IHNvbWUgY29tbWl0cyB0aGF0IHdpbGwgbm90IGNvbXBp
-bGUuIElzIHRoYXQgc29tZXRoaW5nIGFjY2VwdGFibGU/DQo+IA0KPiBCZWNhdXNlIGNvbW1p
-dHMgbXVzdCBiZSBiaXNlY3QtYWJsZSwgdGhhdCBpcyBub3QgYWNjZXB0YWJsZS4NCj4gDQo+
-IEkgdG9vayBhIGxvdCBvZiBjYXJlIHRvIG1ha2UgdGhpcyBzZXJpZXMgYnVpbGFibGUgb24g
-ZWFjaCBzdGVwLA0KPiBidXQgbWlnaHQgaGF2ZSBtaXNzZWQgc29tZXRoaW5nLiBDYW4geW91
-IHBvaW50IG1lIGF0IHRoZQ0KPiBjb25maWd1cmF0aW9uIHVzZWQgYW5kIGJyb2tlbiBwYXRj
-aD8NCj4gDQo+IEknbGwgcmV3b3JkIHRoZSBjb21taXQgZGVzY3JpcHRpb24gYXM6DQo+IA0K
-PiAtLS0NCj4gJ3ZhZGRyJyB0eXBlIGlzIGRlY2xhcmVkIGluICJleGVjL3ZhZGRyLmgiLg0K
-PiAiZXhlYy90cmFuc2xhdGlvbi1ibG9jay5oIiB1c2VzIHRoaXMgdHlwZSB3aXRob3V0IGlu
-Y2x1ZGluZw0KPiB0aGUgY29ycmVzcG9uZGluZyBoZWFkZXIuIEl0IHdvcmtzIGJlY2F1c2Ug
-dGhpcyBoZWFkZXIgaXMNCj4gaW5kaXJlY3RseSBpbmNsdWRlZCwgYnV0IHdvbid0IHdvcmsg
-d2hlbiB0aGUgb3RoZXIgaGVhZGVycw0KPiBhcmUgcmVmYWN0b3JlZDoNCj4gDQo+ICAgICBb
-ZXJyb3JdDQo+IA0KPiBFeHBsaXRseSBpbmNsdWRlICJleGVjL3ZhZGRyLmgiIHRvIGF2b2lk
-IHN1Y2ggcHJvYmxlbSBpbiBhDQo+IGZldyBjb21taXRzLg0KPiAtLS0NCj4gDQo+IERvZXMg
-aXQgY2xhcmlmeT8NCj4gDQoNClllcyBpdCdzIG1vcmUgY2xlYXIgbGlrZSB0aGF0LiBUaGUg
-Y29tbWl0IG1lc3NhZ2Ugc2VlbWVkIHRvIGltcGx5IHRoYXQgDQp5b3Ugd2VyZSBmaXhpbmcg
-YnVpbGQgb25lIHN0ZXAgYXQgYSB0aW1lLg0KDQo+PiBJZiBpdCdzIG9rLA0KPj4gUmV2aWV3
-ZWQtYnk6IFBpZXJyaWNrIEJvdXZpZXIgPHBpZXJyaWNrLmJvdXZpZXJAbGluYXJvLm9yZz4N
-Cj4+DQo+IA0KDQpUaGFua3MsDQpQaWVycmljaw0K
+On 11/14/24 00:29, Thomas Huth wrote:
+> On 14/11/2024 02.12, Philippe Mathieu-Daudé wrote:
+>> TARGET_PAGE_BITS is defined in "exec/cpu-defs.h".
+> 
+> Actually, it's rather defined in cpu-param.h, but that header gets included from cpu- 
+> defs.h, so the patch is fine. But maybe adjust the commit message to avoid confusion?
+
++1.
+
+With that,
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+
+
+r~
 
