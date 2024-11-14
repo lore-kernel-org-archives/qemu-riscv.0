@@ -4,86 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A7A86D6A221
-	for <qemu-riscv@archiver.kernel.org>; Thu, 14 Nov 2024 18:12:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6ACE3D6A221
+	for <qemu-riscv@archiver.kernel.org>; Thu, 14 Nov 2024 18:15:46 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tBeK3-00023p-U0; Thu, 14 Nov 2024 13:12:04 -0500
+	id 1tBeNE-0005IJ-D5; Thu, 14 Nov 2024 13:15:20 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1tBeK1-0001vd-U8
- for qemu-riscv@nongnu.org; Thu, 14 Nov 2024 13:12:02 -0500
-Received: from mail-pl1-x62e.google.com ([2607:f8b0:4864:20::62e])
+ id 1tBeNC-0005H6-Uz
+ for qemu-riscv@nongnu.org; Thu, 14 Nov 2024 13:15:18 -0500
+Received: from mail-pl1-x62c.google.com ([2607:f8b0:4864:20::62c])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1tBeJz-0004LF-D8
- for qemu-riscv@nongnu.org; Thu, 14 Nov 2024 13:12:01 -0500
-Received: by mail-pl1-x62e.google.com with SMTP id
- d9443c01a7336-20ca1b6a80aso10513705ad.2
- for <qemu-riscv@nongnu.org>; Thu, 14 Nov 2024 10:11:58 -0800 (PST)
+ id 1tBeNA-0005Y9-6L
+ for qemu-riscv@nongnu.org; Thu, 14 Nov 2024 13:15:18 -0500
+Received: by mail-pl1-x62c.google.com with SMTP id
+ d9443c01a7336-20c70abba48so10487635ad.0
+ for <qemu-riscv@nongnu.org>; Thu, 14 Nov 2024 10:15:15 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1731607917; x=1732212717; darn=nongnu.org;
+ d=linaro.org; s=google; t=1731608115; x=1732212915; darn=nongnu.org;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=kyrNIdWJL/Zjb3SHq6P1iz2SKOYW7mBnEocbSBbuRAw=;
- b=W9kg1U0skZ2WnhSDA0CpdkXl5Xd6BsjrKvN+geli2Kxc9kU1iAY/71gX3q3ol77eUJ
- 3alXOtDWmOXtLwP2RUaeH60NAbd5k4bHc5t/ZsNJPvmno9WMFUjgE+yCSB/zS3Si9h7V
- CWlmryUkQ6eFVNHUEMBeKKWFX1hhapz+z6m9z+TekUJvuZAC6J4CjozzNAeDSXNcsObK
- qwxbFiPZKlMcgpgoyMOyJrKTtAUFypn4GCKyJ5u840U2fupWODVQZwRvCvW5H6F5vqs1
- gr3q2LZ1gmxrLY2Vqr3K0PS2DhmYoTKcALLJ5SpkIZFOFuoO7ll+ku5qaRse65x7I2ab
- Ll1g==
+ bh=oK0qe6rZPZL+Jl4h4TVfnW307/hc1Lf6CUUL31FU6Ys=;
+ b=bMVQbXGjZvMAp7xoGXTk8Ch3g7CcarcJsaVink5eIIa30zKIRmSlQsMVzU/tLqlzbP
+ OulZ8LYGrHrZ0Je1eqofxeNDl66carFa7ckgEUluDEd+dgVZr4j6qc+0uUwh6LBMMTyy
+ D125WdERAr/qYdF2t2BpZbBPWr/GlZK1saowrwQCl0tPGy756iQgkL583xa3zgKN47zG
+ 9OMgmy5XFHhRo3cIli1CEquM5jrGWsZEokw8JAYl9pGMtKtQMgf3BcLL+kA15qf15eU8
+ mU9yi0guXxa/9NNK16ivVXsA/mmnh4ofAxhPSYOtJHbRWuhhTmGnXCcDsC/tQ4uub7SN
+ sC1w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731607917; x=1732212717;
+ d=1e100.net; s=20230601; t=1731608115; x=1732212915;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=kyrNIdWJL/Zjb3SHq6P1iz2SKOYW7mBnEocbSBbuRAw=;
- b=nQVzQrBd4c/bcddXmJj6+NeDcEhQThbsBkN5AIilQYO8d4P3xgRo8e14KCY3SYZEpl
- trJH4YCAkRi3hXMygx0ttyHY7E3SjHIKBZ8/9xRPT3Mao2dDe/kZk4TbNMPhYjFIP8At
- J+pkRYOR5RLRjkzqBsYm/XhCTtSzBirsccXQNZUW6AnpgoAbBz9mClL5QLGMgDgcLBO5
- 0QG8i3UBu3zyls28JEVV4exidLw81Q24+ejjA+aRIg7esFf+SDPmD6X7tR5TM3g7c6uh
- 1w37KrkEcLnpp3aqsFqNNHC+C3QUx+pGIhSyxg0IcvCbF3B83N2Gj3SXCd/N6nWnznjJ
- nr4g==
+ bh=oK0qe6rZPZL+Jl4h4TVfnW307/hc1Lf6CUUL31FU6Ys=;
+ b=M1Jze5FAx5xQWJYRUxsHdniwXuyMD96LfBFmOS8SJV4oKsllCoI1xettBKDwzma58/
+ vj9hTPMOOncHE24W3GW2Yu3Et9SlR5Dca7DMBkBoAmWinmOnnP5XCsmTTs5RaL4CBxEN
+ sDn0/gylP7VpZjgbuq0uo+zgIsi+G4skEjG4dfj+0XAU2Ck+adJTwd4T97tER0tA05G+
+ 0KCIeoO+kP+V0YCAmjDKTB3CuE93wnE9LOBdTfa79vAzdBwAE8MbZsfoEU4nJZ3L2FkC
+ NyRuINAIre/xAU0jbTeu2h8Y7zCT/tohbP626DRjJWftzRjiJ9yfwcnIBP5ADdKYQuJZ
+ tTgA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVx0AMnrtwCMjNXFhaL64ghIPCPNg+hQvILnzqQGPsTnicsA7zHkQ4o1njJgq16yge7C51oXK30a3pL@nongnu.org
-X-Gm-Message-State: AOJu0YyASaY5fNB4Xo93V5r9uL7Tc2hRXlm9QA1O31g8hBZIsDeF9bxQ
- 7v5yetHajjYOaIeyjRkjyafTDA93IBERH44jlQRlwZjRCXEk5Aw+clrtJli1GdI=
-X-Google-Smtp-Source: AGHT+IEJYufHI6CW5xyN+OQhyBGmvWfAanx/gAKBQ75R0c/F2iZIJWPFeQLo1lKp9wpiyDP139zpYQ==
-X-Received: by 2002:a17:903:1788:b0:20c:ce9c:bbb0 with SMTP id
- d9443c01a7336-211c43a6624mr42529485ad.0.1731607917647; 
- Thu, 14 Nov 2024 10:11:57 -0800 (PST)
+ AJvYcCWOqI/RP6qbzLLrJVJ7nHKOSLTzlu+jnIrtIBqnRUZ4KDCQKthM0L8+Spah1mjAI9fLQyqRUwXXyVL5@nongnu.org
+X-Gm-Message-State: AOJu0Yw3NUiVseBjHk5zK+9OOCaMa55ppiJG0yQcOztWx/EE+7dPhFpC
+ YtxnvWFmL2kBeNSkdm/Gsxt8iuU3EH0Q7Kyl8Pzuqtjs6pdsj6ZAUXu/vNhDDLs=
+X-Google-Smtp-Source: AGHT+IGYnEjY0o4TCcklA07mwo3xxf2BLkscITbz+V4Hfs/t8tZqpH7EiiLxZgSdQVoyPwXASI38oA==
+X-Received: by 2002:a17:903:1788:b0:20c:e4c3:27a3 with SMTP id
+ d9443c01a7336-211c50c0c0amr37845065ad.43.1731608114713; 
+ Thu, 14 Nov 2024 10:15:14 -0800 (PST)
 Received: from [192.168.0.4] ([71.212.136.242])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-211c7d1dfa1sm13614185ad.215.2024.11.14.10.11.57
+ d9443c01a7336-211c7ce96fdsm13591905ad.160.2024.11.14.10.15.13
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 14 Nov 2024 10:11:57 -0800 (PST)
-Message-ID: <85ecf123-0d3a-4d00-a961-afd6f8681608@linaro.org>
-Date: Thu, 14 Nov 2024 10:11:55 -0800
+ Thu, 14 Nov 2024 10:15:14 -0800 (PST)
+Message-ID: <bb19efcf-654d-4476-b34d-72900df877f9@linaro.org>
+Date: Thu, 14 Nov 2024 10:15:12 -0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 01/24] exec/cpu-all: Include missing 'exec/cpu-defs.h'
- header
-To: Thomas Huth <thuth@redhat.com>, =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?=
- <philmd@linaro.org>, Paolo Bonzini <pbonzini@redhat.com>,
- Anton Johansson <anjo@rev.ng>, qemu-devel@nongnu.org
-Cc: qemu-ppc@nongnu.org, qemu-arm@nongnu.org, Peter Xu <peterx@redhat.com>,
- Pierrick Bouvier <pierrick.bouvier@linaro.org>, qemu-riscv@nongnu.org,
+Subject: Re: [PATCH 02/24] exec/cpu-defs: Remove unnecessary headers
+To: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
+ Paolo Bonzini <pbonzini@redhat.com>, Anton Johansson <anjo@rev.ng>,
+ qemu-devel@nongnu.org
+Cc: qemu-ppc@nongnu.org, Thomas Huth <thuth@redhat.com>, qemu-arm@nongnu.org, 
+ Peter Xu <peterx@redhat.com>, Pierrick Bouvier
+ <pierrick.bouvier@linaro.org>, qemu-riscv@nongnu.org,
  David Hildenbrand <david@redhat.com>,
  Peter Maydell <peter.maydell@linaro.org>,
  =?UTF-8?Q?Alex_Benn=C3=A9e?= <alex.bennee@linaro.org>, qemu-s390x@nongnu.org
 References: <20241114011310.3615-1-philmd@linaro.org>
- <20241114011310.3615-2-philmd@linaro.org>
- <e2792708-d2d1-4d13-8b43-103cabdb279e@redhat.com>
+ <20241114011310.3615-3-philmd@linaro.org>
 Content-Language: en-US
 From: Richard Henderson <richard.henderson@linaro.org>
-In-Reply-To: <e2792708-d2d1-4d13-8b43-103cabdb279e@redhat.com>
+In-Reply-To: <20241114011310.3615-3-philmd@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::62e;
- envelope-from=richard.henderson@linaro.org; helo=mail-pl1-x62e.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::62c;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pl1-x62c.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -106,18 +105,18 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 11/14/24 00:29, Thomas Huth wrote:
-> On 14/11/2024 02.12, Philippe Mathieu-Daudé wrote:
->> TARGET_PAGE_BITS is defined in "exec/cpu-defs.h".
+On 11/13/24 17:12, Philippe Mathieu-Daudé wrote:
+> "exec/cpu-defs.h" should be kept as minimal as possible;
+> besides these includes don't seem necessay. Remove them.
 > 
-> Actually, it's rather defined in cpu-param.h, but that header gets included from cpu- 
-> defs.h, so the patch is fine. But maybe adjust the commit message to avoid confusion?
+> Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+> ---
+>   include/exec/cpu-defs.h | 8 --------
+>   1 file changed, 8 deletions(-)
 
-+1.
-
-With that,
 Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 
 
 r~
+
 
