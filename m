@@ -4,68 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 96F00D6A228
-	for <qemu-riscv@archiver.kernel.org>; Thu, 14 Nov 2024 18:59:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9D2F9D6A221
+	for <qemu-riscv@archiver.kernel.org>; Thu, 14 Nov 2024 19:01:49 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tBf48-0002U1-ED; Thu, 14 Nov 2024 13:59:40 -0500
+	id 1tBf5M-0005iU-PB; Thu, 14 Nov 2024 14:00:57 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1tBf3u-0001P3-TN
- for qemu-riscv@nongnu.org; Thu, 14 Nov 2024 13:59:27 -0500
-Received: from mail-pg1-x535.google.com ([2607:f8b0:4864:20::535])
+ id 1tBf5H-0005NK-0c
+ for qemu-riscv@nongnu.org; Thu, 14 Nov 2024 14:00:52 -0500
+Received: from mail-pl1-x630.google.com ([2607:f8b0:4864:20::630])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1tBf3r-0000t5-VY
- for qemu-riscv@nongnu.org; Thu, 14 Nov 2024 13:59:26 -0500
-Received: by mail-pg1-x535.google.com with SMTP id
- 41be03b00d2f7-7f12ba78072so802264a12.2
- for <qemu-riscv@nongnu.org>; Thu, 14 Nov 2024 10:59:23 -0800 (PST)
+ id 1tBf5E-0001Kn-Dh
+ for qemu-riscv@nongnu.org; Thu, 14 Nov 2024 14:00:50 -0500
+Received: by mail-pl1-x630.google.com with SMTP id
+ d9443c01a7336-20c70abba48so10956135ad.0
+ for <qemu-riscv@nongnu.org>; Thu, 14 Nov 2024 11:00:48 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1731610762; x=1732215562; darn=nongnu.org;
+ d=linaro.org; s=google; t=1731610847; x=1732215647; darn=nongnu.org;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=URIf27BMDWz/zZ/r2hCSZpn4yj54Db/MC3Z3NDMOMzo=;
- b=gafzol5jCLNuh5VsAHGKUxfBMpBRFC1DoPVOARv+Gk3h5PGCx9gd99aEGnemPnuUTt
- XcW+AQEiYy64tBV7It0/WUHVWpY4+tdmvqEup97h2qtCuFDUcfhzNDMBuLRWTaD7voBJ
- zZDzraVYLy0YG1r0CWGdZNnoFK9SF5I27L5GmLqhaRiH8iiFXhVUz6we4Vtbn/4EifXQ
- ccqYh31pHo5/jHu4j9BvSgaMtW3YYxwix9Hoeqqycr09ZEk1iOWbYhfWZygqGdlduzsu
- qu28AZbKijz75nRZlEmXcy716lgr5T5/DK/fRSvrsP7J8Jvt3a5GIX+ZTZ+kr54Udy2S
- Vx3w==
+ bh=WCF10UJl5PG27w8WAO2jHWY7UVY497UxuwsdECCW7mU=;
+ b=WykTOAUSTLYPuiaLbQU9fBu/l23OL28YSd9eSkVGikOXZcHs2QYQB4V5w6JX+UMdbs
+ SEqV5oaLfSHq4PbfpoHOmn0MpCGAcnAXDq005W5iizpIUvKLY4knAX0Ht0s6mo9T6x6X
+ hv6he3Yl+wVqLvf2pWwxLJ79i2+3vmCpncG0Hw/5iNfAnSGGX1wcELjFujwjbAqhq13P
+ pu/NR6IGmK4jnTtxGQc3JdXEPzRBB4P9OLCbTe+gHiYTV9mjEWRkDRvqBxokF3AUMkHz
+ acr6GlDkx8AEryLVRm5hPs4iStoQnHsaTNcanfEFhBLT5ekfbhIppBLp0HbUJTnuiE/g
+ tyoA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731610762; x=1732215562;
+ d=1e100.net; s=20230601; t=1731610847; x=1732215647;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=URIf27BMDWz/zZ/r2hCSZpn4yj54Db/MC3Z3NDMOMzo=;
- b=bJMSJW6I4yettkygphOh9IqrKOg7JqCOKBIxfsLrZzhzMF3WwJM4mRAXv+ygaSSZ03
- A6mrYzqHVe3ToquvHwMu4LbTHo7NtQnb7EEBjKPMcpJLpk7DXjires/EbNI7/DEBhk4w
- PgZ+HPEtmfy/8T+LecIS3JqCZTUE2TWz2jeJy2QZxt+h0ozXxrT4FeQ7RHgnZQWO12Re
- op8sKxhHZJTBDo+3ot3i2xYVbVEmBmKnTM57tisZ5UzNGpYJbRUQGFd2MrPfH4xFolYM
- +4HfDWb9aH+GrSbrZUrYBAnu7EWFvHvpzS4YtvCy6ypvTMBb2cPy3L9nNpcd+17e5S8e
- Zt/w==
+ bh=WCF10UJl5PG27w8WAO2jHWY7UVY497UxuwsdECCW7mU=;
+ b=amC83/lA/nQmu3vqA3/05/+RFv3mKk2KqxJB/KgclOK1oOpx8P7pXhi3E7m1VXpGkg
+ uKYqmC93vxxXEq0ZdwqNPgIKYcdz5yss1Lr9i0Wq17ArcpHD9eAZHH9sqtebdxq9FyB3
+ JdUAtXXhQCUXSJLsrKxOtwpnZv1J6K7pnQNuMmYn8OhEgDf8w1n/rwV/bkSYcnAZHxY6
+ Y8zgQJw9QyuPTuMIoGFU7fn0Rl+cO6/E6ytFnATd3oBjuJoG3lIqBVr5Mr94jOfndDI0
+ sTanFn7vLdMHHK8TzVs4lOTIXkbgtS9beehYz/vC2/gofgyTVOsKxjFSfoUpwTYDbGZj
+ /Xzg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUf8aScK+HABBlSMqN9Ztw/84nnupnd1xsKjRMIKDgsLAuj+HV+LYhh9b/wwWUVVXPI3Ns66tz2f5nA@nongnu.org
-X-Gm-Message-State: AOJu0YyRVwUSORDHxopyAxCy8+tKfI+9NykhOW9n1QZAeooEZxrMZ3d0
- 3jk5kx62AU2TQCPT1OT9E9zd2nG6p/U1E6cQ9VkfF8geXGjqbmcGW544C2aawvE=
-X-Google-Smtp-Source: AGHT+IGw4aiMg4SBCO50N4PjhLOiaZtixPRJtiTqAdcZnNeXjDwiLkCbsQ6JXSp4cgZfdwGsfMO1Cg==
-X-Received: by 2002:a05:6a20:8421:b0:1d9:c6e8:60fc with SMTP id
- adf61e73a8af0-1dc228931b2mr36495412637.6.1731610762399; 
- Thu, 14 Nov 2024 10:59:22 -0800 (PST)
+ AJvYcCUtDqBq+VyEKUdPAqvc+BWCKMBVW2/LD8S2OGeungV7IttTDfCgi2Lsmo/Zrc+pgB1s7m6eKNaA2IY1@nongnu.org
+X-Gm-Message-State: AOJu0Yyg+7Ph8+auMpeVuwpD1ZcA7HJtHMwMi12SDITBjhHfVBOW5L52
+ LVz7sXn7zUgezLyhaDGNdvG7YzM1bev/wYHUNoq0MQV9qN86YVVqupD2a53o2UA=
+X-Google-Smtp-Source: AGHT+IGnHzzYqk+q7/Yv5JN7lqD83FpYqSx/4shcVG1QfnTZYGSwgaOyl2SBchN7ed/snrWOVkfC9A==
+X-Received: by 2002:a17:902:ce90:b0:20c:a175:1942 with SMTP id
+ d9443c01a7336-211c5011492mr45572645ad.24.1731610846935; 
+ Thu, 14 Nov 2024 11:00:46 -0800 (PST)
 Received: from [192.168.0.4] ([71.212.136.242])
  by smtp.gmail.com with ESMTPSA id
- 41be03b00d2f7-7f8b37f8640sm1423538a12.49.2024.11.14.10.59.21
+ d9443c01a7336-211c7d05dcfsm13642015ad.201.2024.11.14.11.00.46
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 14 Nov 2024 10:59:22 -0800 (PST)
-Message-ID: <3de882ce-a6cf-476b-94e4-210b2dd6173c@linaro.org>
-Date: Thu, 14 Nov 2024 10:59:20 -0800
+ Thu, 14 Nov 2024 11:00:46 -0800 (PST)
+Message-ID: <6db9d01c-4d1b-4102-b5e9-d8b613234bff@linaro.org>
+Date: Thu, 14 Nov 2024 11:00:44 -0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 08/24] linux-user/aarch64/mte: Include missing
- 'user/abitypes.h' header
+Subject: Re: [PATCH 09/24] target/arm/mte: Restrict 'exec/ram_addr.h' to
+ system emulation
 To: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
  Paolo Bonzini <pbonzini@redhat.com>, Anton Johansson <anjo@rev.ng>,
  qemu-devel@nongnu.org
@@ -76,14 +76,14 @@ Cc: qemu-ppc@nongnu.org, Thomas Huth <thuth@redhat.com>, qemu-arm@nongnu.org,
  Peter Maydell <peter.maydell@linaro.org>,
  =?UTF-8?Q?Alex_Benn=C3=A9e?= <alex.bennee@linaro.org>, qemu-s390x@nongnu.org
 References: <20241114011310.3615-1-philmd@linaro.org>
- <20241114011310.3615-9-philmd@linaro.org>
+ <20241114011310.3615-10-philmd@linaro.org>
 Content-Language: en-US
 From: Richard Henderson <richard.henderson@linaro.org>
-In-Reply-To: <20241114011310.3615-9-philmd@linaro.org>
+In-Reply-To: <20241114011310.3615-10-philmd@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::535;
- envelope-from=richard.henderson@linaro.org; helo=mail-pg1-x535.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::630;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pl1-x630.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -107,36 +107,16 @@ Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 On 11/13/24 17:12, Philippe Mathieu-Daudé wrote:
-> abi_long type is defined in "user/abitypes.h".
-> Include it in order to avoid when refactoring:
+> "exec/ram_addr.h" contains system specific declarations.
+> Restrict its inclusion to sysemu to avoid build errors
+> when refactoring.
 > 
->    linux-user/aarch64/mte_user_helper.h:30:42: error: unknown type name ‘abi_long’; did you mean ‘u_long’?
->       30 | void arm_set_mte_tcf0(CPUArchState *env, abi_long value);
->          |                                          ^~~~~~~~
->          |                                          u_long
-> 
-> Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+> Signed-off-by: Philippe Mathieu-Daudé<philmd@linaro.org>
 > ---
->   linux-user/aarch64/mte_user_helper.h | 2 ++
+>   target/arm/tcg/mte_helper.c | 2 ++
 >   1 file changed, 2 insertions(+)
-> 
-> diff --git a/linux-user/aarch64/mte_user_helper.h b/linux-user/aarch64/mte_user_helper.h
-> index 8685e5175a..0c53abda22 100644
-> --- a/linux-user/aarch64/mte_user_helper.h
-> +++ b/linux-user/aarch64/mte_user_helper.h
-> @@ -9,6 +9,8 @@
->   #ifndef AARCH64_MTE_USER_HELPER_H
->   #define AARCH64_MTE USER_HELPER_H
->   
-> +#include "user/abitypes.h"
-> +
->   #ifndef PR_MTE_TCF_SHIFT
->   # define PR_MTE_TCF_SHIFT       1
->   # define PR_MTE_TCF_NONE        (0UL << PR_MTE_TCF_SHIFT)
 
-Or maybe just switch to uint64_t.
-This is aarch64, so it's always going to be 64 bits.
-This is private between the prctl syscall and gdbstub.
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 
 r~
 
