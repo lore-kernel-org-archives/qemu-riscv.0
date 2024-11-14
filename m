@@ -4,60 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9F292D637D5
-	for <qemu-riscv@archiver.kernel.org>; Thu, 14 Nov 2024 01:20:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C9650D637CF
+	for <qemu-riscv@archiver.kernel.org>; Thu, 14 Nov 2024 01:20:39 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tBOSP-0001m6-3l; Wed, 13 Nov 2024 20:15:37 -0500
+	id 1tBORs-0008Va-KC; Wed, 13 Nov 2024 20:15:04 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tBOSL-0001jy-Qy
- for qemu-riscv@nongnu.org; Wed, 13 Nov 2024 20:15:33 -0500
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tBORR-00082W-EV
+ for qemu-riscv@nongnu.org; Wed, 13 Nov 2024 20:14:37 -0500
 Received: from mail-wm1-x335.google.com ([2a00:1450:4864:20::335])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tBOSK-0002OG-3b
- for qemu-riscv@nongnu.org; Wed, 13 Nov 2024 20:15:33 -0500
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tBORO-00027A-LX
+ for qemu-riscv@nongnu.org; Wed, 13 Nov 2024 20:14:35 -0500
 Received: by mail-wm1-x335.google.com with SMTP id
- 5b1f17b1804b1-43162cf1eaaso1380805e9.0
- for <qemu-riscv@nongnu.org>; Wed, 13 Nov 2024 17:15:31 -0800 (PST)
+ 5b1f17b1804b1-432d86a3085so944925e9.2
+ for <qemu-riscv@nongnu.org>; Wed, 13 Nov 2024 17:14:34 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1731546902; x=1732151702; darn=nongnu.org;
+ d=linaro.org; s=google; t=1731546873; x=1732151673; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=2hAfsLa5F/wTHTnThKWfes1iOEyMXfbHgC1xYE0xNjQ=;
- b=iMVlTWVyKpfHAhvxo6HbvZo3XEa73a1aJlyby1RrKCRzdX1ycvtezXP7MJ1dtUgsan
- Zc1X9hMhIjJPTUvmvizoRq4A/gStjmkZH68ZoCknj1QpZOUqysBn4DPxQR/PNVFCv0PC
- Qhx/MZ0TgblILs7CyE6qaw2t3maTCO5cY4hUu5+9Sq9VuWFAY8792e6PgQqICwDJvV3J
- OaNDdjxmDxjfmCI9QQJrSZxOBXFP3VBqT3P6MvT2kc6RNFacaAIyPtYrWuPG7O2XJvcv
- kx97TfOm1cky46dsCWHgvbopsS8EH0xTun6tqwP5gi4MjXa4NJeDNDbdkVxT2tjopord
- 4Irw==
+ bh=WwdhRXN0joprmzKwfGffR3OdfbOtF5yrdb8wFJrdlRk=;
+ b=rTYxEk/qxNbE/AyiTlJfOQ88rnK0CdC7ZmU9ZgXVb8m0CRJjyGhM/KwtPgKbNz9klU
+ HpNkbCXOK1E07G74Cx2ZnNEqAEGlj4bx6IVKAAdKX/NpSR/8Ghj2E/+JLpzxE4ACXQIu
+ O/Co+04xnhlDNeQr6oUS4VXOERo9UbArcoR7Fs1dLLbF49K/ZW4yMLxUI2/lnN52cr4w
+ zsSerUIEXRtDofoSxX+7i7CAVSvZixwxioH8reTp/R1z60X8X+2o4ZV0lWlW9gRuJC1u
+ OoUyUBoJuLA0eum5VeCsywbwSkQWANYZTY/DEd8auRtVBeZciupVd19+7wjA4LVsVfQU
+ HVmw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731546902; x=1732151702;
+ d=1e100.net; s=20230601; t=1731546873; x=1732151673;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=2hAfsLa5F/wTHTnThKWfes1iOEyMXfbHgC1xYE0xNjQ=;
- b=p3oWsUsO8N35gWOrqMO3drwss/ORlQ7/1c9y1gSngDSeuuMkbhH15c2+RQ0U8kFQqv
- jCle0gVdd64kmaO3TP3ICUFZ9JpMYYv2u6VJtP6V0n6/+OS/4dNEsTDNSNxu+BuMArpi
- GeZ9XQP/EIfOiCccOCmPQfk7Nf3wyZQ994d94ZHRFuo0afd8LAzHAd2lTu+Slj10R5T8
- 4wWSZLfkeC+gspeCx6bBf/zEGUob47RriNg6KmXX1bJ93cLELdnH1YTuy/zgUDhJa81l
- fS258dElsYdXTpFLvguznsUpjMauFmwwyOhhL1KE5SjtEoqnvPhWFuCK2maKx4RGhzKV
- wUSQ==
+ bh=WwdhRXN0joprmzKwfGffR3OdfbOtF5yrdb8wFJrdlRk=;
+ b=e2qD6gV/No5ifwn4k5/5g2Qys0srsZH/Q7kK06MjUGV6i6W3CpicSrY5dg2VzxzPRI
+ 0qMCzate2phxTwPDrUml3EQh6UN4dQFIXxV5ksLPqYRHal8VsQ5I8fc8BsFezBIq2qFf
+ FGSGeYShSqQglcPJ96OapPwFqU3m7NXIn9kvBenx1nELcAwiGbfzoNkMUNrgQO0iOwIh
+ rcD2QDYTo6ukWU998b11STu7SapipXXeJQUMhkEni3j7DpM3T4qJHBffS0XeZyFg7qEP
+ yDkGynIZWf8J5Z8dFC3oEWZHIGkwWlY9hexhRjHCotY0D/c11NSMGMOT+BNtM9eYPb3F
+ gR8Q==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUW8onPPHIyLE/qrwejVC56San0r8o4cVFHs2FS0OVvwBndocYr1V3w3uqECMGfQiPrCzbOdPCm+tyh@nongnu.org
-X-Gm-Message-State: AOJu0Yz43Z/kgdpyB23uAKE8RaYAiw+ByHiUN7mfas7ce5W6L09y8WCT
- iCMJ3cGsQKxLD8laavDjorw7qaOzzq+pE3BKaTpP0wyiYFtjsR4qGDlq7OPnxU0=
-X-Google-Smtp-Source: AGHT+IH7RFWsMnakRg5GJlnl5zZr5zJQPCLqZOnOCy/xPwCBs6cxFICDeA4XzSDQuRyqlWzDDXypCA==
-X-Received: by 2002:a05:600c:444e:b0:431:52a3:d9d5 with SMTP id
- 5b1f17b1804b1-432da6d6676mr3323435e9.0.1731546902007; 
- Wed, 13 Nov 2024 17:15:02 -0800 (PST)
+ AJvYcCUs379FUECgrdRAg3nweCuIKMlMiKfGXEYS7AukMBIa88RKm4UAOMS5Sg185K/vGSiZ1pNXu50NhLiX@nongnu.org
+X-Gm-Message-State: AOJu0YxRbl3u1ihB7+llthndsFRKx6bbGcI3lx+wsjbzurLJ4OcwG83M
+ lIdw5TmOxM+w5blt0WobuZ9UPd397Iw6lyx+y1Vk09/k+GP/h+H0d/lMlmtnSVI=
+X-Google-Smtp-Source: AGHT+IE3ms5xpjQHGWXmVlg3v8W+KzlHKEnbriHG+Xzyq9cJJh/6mR5hbnlsDRfww5BsPv6tn+pTYQ==
+X-Received: by 2002:a05:600c:1d1c:b0:426:6308:e2f0 with SMTP id
+ 5b1f17b1804b1-432da7cbcefmr2174995e9.26.1731546872750; 
+ Wed, 13 Nov 2024 17:14:32 -0800 (PST)
 Received: from localhost.localdomain ([176.187.209.238])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-432dac1fbf9sm1377125e9.41.2024.11.13.17.14.59
+ 5b1f17b1804b1-432d48baa42sm33170825e9.1.2024.11.13.17.14.30
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Wed, 13 Nov 2024 17:15:00 -0800 (PST)
+ Wed, 13 Nov 2024 17:14:31 -0800 (PST)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: Paolo Bonzini <pbonzini@redhat.com>,
  Richard Henderson <richard.henderson@linaro.org>,
@@ -70,9 +70,10 @@ Cc: qemu-ppc@nongnu.org, Thomas Huth <thuth@redhat.com>, qemu-arm@nongnu.org,
  =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
  qemu-s390x@nongnu.org,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-Subject: [PATCH 13/24] exec: Declare tlb_reset_dirty*() in 'exec/cputlb.h'
-Date: Thu, 14 Nov 2024 02:12:58 +0100
-Message-ID: <20241114011310.3615-14-philmd@linaro.org>
+Subject: [PATCH 09/24] target/arm/mte: Restrict 'exec/ram_addr.h' to system
+ emulation
+Date: Thu, 14 Nov 2024 02:12:54 +0100
+Message-ID: <20241114011310.3615-10-philmd@linaro.org>
 X-Mailer: git-send-email 2.45.2
 In-Reply-To: <20241114011310.3615-1-philmd@linaro.org>
 References: <20241114011310.3615-1-philmd@linaro.org>
@@ -103,70 +104,29 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Move CPU TLB related methods to "exec/cputlb.h".
+"exec/ram_addr.h" contains system specific declarations.
+Restrict its inclusion to sysemu to avoid build errors
+when refactoring.
 
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 ---
- include/exec/cputlb.h   | 7 +++++++
- include/exec/exec-all.h | 3 ---
- include/exec/ram_addr.h | 1 +
- system/physmem.c        | 1 +
- 4 files changed, 9 insertions(+), 3 deletions(-)
+ target/arm/tcg/mte_helper.c | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/include/exec/cputlb.h b/include/exec/cputlb.h
-index ef18642a32..6cac7d530f 100644
---- a/include/exec/cputlb.h
-+++ b/include/exec/cputlb.h
-@@ -32,4 +32,11 @@ void tlb_unprotect_code(ram_addr_t ram_addr);
- 
- #endif /* CONFIG_TCG */
- 
-+#ifndef CONFIG_USER_ONLY
-+
-+void tlb_reset_dirty(CPUState *cpu, ram_addr_t start1, ram_addr_t length);
-+void tlb_reset_dirty_range_all(ram_addr_t start, ram_addr_t length);
-+
-+#endif
-+
- #endif
-diff --git a/include/exec/exec-all.h b/include/exec/exec-all.h
-index 2e4c4cc4b4..2c06e54387 100644
---- a/include/exec/exec-all.h
-+++ b/include/exec/exec-all.h
-@@ -589,9 +589,6 @@ static inline void mmap_lock(void) {}
- static inline void mmap_unlock(void) {}
- #define WITH_MMAP_LOCK_GUARD()
- 
--void tlb_reset_dirty(CPUState *cpu, ram_addr_t start1, ram_addr_t length);
--void tlb_reset_dirty_range_all(ram_addr_t start, ram_addr_t length);
--
- MemoryRegionSection *
- address_space_translate_for_iotlb(CPUState *cpu, int asidx, hwaddr addr,
-                                   hwaddr *xlat, hwaddr *plen,
-diff --git a/include/exec/ram_addr.h b/include/exec/ram_addr.h
-index 891c44cf2d..b6d5551549 100644
---- a/include/exec/ram_addr.h
-+++ b/include/exec/ram_addr.h
-@@ -23,6 +23,7 @@
- #include "cpu.h"
- #include "sysemu/xen.h"
- #include "sysemu/tcg.h"
-+#include "exec/cputlb.h"
- #include "exec/ramlist.h"
- #include "exec/ramblock.h"
+diff --git a/target/arm/tcg/mte_helper.c b/target/arm/tcg/mte_helper.c
+index 9d2ba287ee..b017b26d07 100644
+--- a/target/arm/tcg/mte_helper.c
++++ b/target/arm/tcg/mte_helper.c
+@@ -23,7 +23,9 @@
+ #include "internals.h"
  #include "exec/exec-all.h"
-diff --git a/system/physmem.c b/system/physmem.c
-index dc1db3a384..3f937a5e58 100644
---- a/system/physmem.c
-+++ b/system/physmem.c
-@@ -32,6 +32,7 @@
- #endif /* CONFIG_TCG */
- 
- #include "exec/exec-all.h"
-+#include "exec/cputlb.h"
  #include "exec/page-protection.h"
- #include "exec/target_page.h"
- #include "hw/qdev-core.h"
++#ifndef CONFIG_USER_ONLY
+ #include "exec/ram_addr.h"
++#endif
+ #include "exec/cpu_ldst.h"
+ #include "exec/helper-proto.h"
+ #include "hw/core/tcg-cpu-ops.h"
 -- 
 2.45.2
 
