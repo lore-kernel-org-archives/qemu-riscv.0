@@ -4,68 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CD606D6A226
-	for <qemu-riscv@archiver.kernel.org>; Thu, 14 Nov 2024 18:55:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 96F00D6A228
+	for <qemu-riscv@archiver.kernel.org>; Thu, 14 Nov 2024 18:59:50 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tBeyF-0007ut-E0; Thu, 14 Nov 2024 13:53:35 -0500
+	id 1tBf48-0002U1-ED; Thu, 14 Nov 2024 13:59:40 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1tBeyE-0007u2-5T
- for qemu-riscv@nongnu.org; Thu, 14 Nov 2024 13:53:34 -0500
-Received: from mail-pl1-x630.google.com ([2607:f8b0:4864:20::630])
+ id 1tBf3u-0001P3-TN
+ for qemu-riscv@nongnu.org; Thu, 14 Nov 2024 13:59:27 -0500
+Received: from mail-pg1-x535.google.com ([2607:f8b0:4864:20::535])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1tBeyC-0007SQ-5a
- for qemu-riscv@nongnu.org; Thu, 14 Nov 2024 13:53:33 -0500
-Received: by mail-pl1-x630.google.com with SMTP id
- d9443c01a7336-2118dfe6042so8313225ad.2
- for <qemu-riscv@nongnu.org>; Thu, 14 Nov 2024 10:53:31 -0800 (PST)
+ id 1tBf3r-0000t5-VY
+ for qemu-riscv@nongnu.org; Thu, 14 Nov 2024 13:59:26 -0500
+Received: by mail-pg1-x535.google.com with SMTP id
+ 41be03b00d2f7-7f12ba78072so802264a12.2
+ for <qemu-riscv@nongnu.org>; Thu, 14 Nov 2024 10:59:23 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1731610411; x=1732215211; darn=nongnu.org;
+ d=linaro.org; s=google; t=1731610762; x=1732215562; darn=nongnu.org;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=qWe8wdCJtJEE+3wcEIJF57D3KcM68wdsfhWCbx0SLkI=;
- b=RLgRYbuLrRViJtaHvPOhHaEwAdxEnCmba5ZfXB+adb8j01ZOU9HCa8NUHK3bvreInz
- aMeLFuDSuLFOT8Rvhk4qi9xrYIhNE4HtN69/5PLrZWsc17Nx24/X0pjsqa8Q5K7quoqk
- FydsG3BfigGtPEJH++rNgDewl5IQoT9G+PokKvlEzjoWd7FycesX/kjxhW07uWi1rjul
- MzMXcycxrrbtNcqvDbitmNTbiG3QmIIZ5yTDzCFxY0vIfBtC+h5Yr04k2AGIQB5EbpGO
- 59HRd6vmbG+0eeUyhS+eEVtAw4ZKV6c8OjbvSXnhtCbiu8w9W9Xceqg3BALksaWmZh5t
- NQ5A==
+ bh=URIf27BMDWz/zZ/r2hCSZpn4yj54Db/MC3Z3NDMOMzo=;
+ b=gafzol5jCLNuh5VsAHGKUxfBMpBRFC1DoPVOARv+Gk3h5PGCx9gd99aEGnemPnuUTt
+ XcW+AQEiYy64tBV7It0/WUHVWpY4+tdmvqEup97h2qtCuFDUcfhzNDMBuLRWTaD7voBJ
+ zZDzraVYLy0YG1r0CWGdZNnoFK9SF5I27L5GmLqhaRiH8iiFXhVUz6we4Vtbn/4EifXQ
+ ccqYh31pHo5/jHu4j9BvSgaMtW3YYxwix9Hoeqqycr09ZEk1iOWbYhfWZygqGdlduzsu
+ qu28AZbKijz75nRZlEmXcy716lgr5T5/DK/fRSvrsP7J8Jvt3a5GIX+ZTZ+kr54Udy2S
+ Vx3w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731610411; x=1732215211;
+ d=1e100.net; s=20230601; t=1731610762; x=1732215562;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=qWe8wdCJtJEE+3wcEIJF57D3KcM68wdsfhWCbx0SLkI=;
- b=w4DE+l3vvCJ6Zipj8E0/I6GK05qoWJkVUd9i5E/8jq5wEZuGz8rgu7NvEpUUibyJ/E
- 4AN4Bf5RanxFIZ6wz2+9LdkABZMEk3ldsUt3fbWOky+Hzj85qGNp7vi8k+xsJab0WTo2
- Jed4R5jbS/Kl2aTiVn85XRUtQ99GJ5tMYMc2e4Qv6yTFRdpnvihmUW5xjZ+6fKOJ+oeE
- g3O8Dsk95AcKywHIJ+xSxBBWw7zW4s787SST1iENFnjiWK6iE3H8gJjrTelqEkjD8SKa
- YG/Bhg3ziBMiQM0dilLS55W1nTM09ub8UvNravzW+LsWltK9R2qxFe1rY6j6CmDwZi8e
- O89Q==
+ bh=URIf27BMDWz/zZ/r2hCSZpn4yj54Db/MC3Z3NDMOMzo=;
+ b=bJMSJW6I4yettkygphOh9IqrKOg7JqCOKBIxfsLrZzhzMF3WwJM4mRAXv+ygaSSZ03
+ A6mrYzqHVe3ToquvHwMu4LbTHo7NtQnb7EEBjKPMcpJLpk7DXjires/EbNI7/DEBhk4w
+ PgZ+HPEtmfy/8T+LecIS3JqCZTUE2TWz2jeJy2QZxt+h0ozXxrT4FeQ7RHgnZQWO12Re
+ op8sKxhHZJTBDo+3ot3i2xYVbVEmBmKnTM57tisZ5UzNGpYJbRUQGFd2MrPfH4xFolYM
+ +4HfDWb9aH+GrSbrZUrYBAnu7EWFvHvpzS4YtvCy6ypvTMBb2cPy3L9nNpcd+17e5S8e
+ Zt/w==
 X-Forwarded-Encrypted: i=1;
- AJvYcCX4OHPq6REzTy/KJLm1cnPo4YrhTWd+aQYn4oyJb09+ScYgR6fH4uVrzvopjQ3w5lJGQCi5MCS0JxXS@nongnu.org
-X-Gm-Message-State: AOJu0YzUEof6MqOX7UWwuHsCGFJsUMnBO7UIkyx2koBjA4H5XjKM6Kmy
- Nb8xZTaNQqjvXA+ulooeuKYgF0BQKpXydmVzD15U6NbEyuDDAMY/Cwq9Y2XeatE=
-X-Google-Smtp-Source: AGHT+IFYc+lZ9JR/jOjaOqDgH8QC4Q2CAiEQjpD4OMPTEFNMRZB11/CpHkBA0H2vMWiq2CYxKNepQA==
-X-Received: by 2002:a17:902:e802:b0:211:152:e1e6 with SMTP id
- d9443c01a7336-211aba03797mr159419865ad.48.1731610410876; 
- Thu, 14 Nov 2024 10:53:30 -0800 (PST)
+ AJvYcCUf8aScK+HABBlSMqN9Ztw/84nnupnd1xsKjRMIKDgsLAuj+HV+LYhh9b/wwWUVVXPI3Ns66tz2f5nA@nongnu.org
+X-Gm-Message-State: AOJu0YyRVwUSORDHxopyAxCy8+tKfI+9NykhOW9n1QZAeooEZxrMZ3d0
+ 3jk5kx62AU2TQCPT1OT9E9zd2nG6p/U1E6cQ9VkfF8geXGjqbmcGW544C2aawvE=
+X-Google-Smtp-Source: AGHT+IGw4aiMg4SBCO50N4PjhLOiaZtixPRJtiTqAdcZnNeXjDwiLkCbsQ6JXSp4cgZfdwGsfMO1Cg==
+X-Received: by 2002:a05:6a20:8421:b0:1d9:c6e8:60fc with SMTP id
+ adf61e73a8af0-1dc228931b2mr36495412637.6.1731610762399; 
+ Thu, 14 Nov 2024 10:59:22 -0800 (PST)
 Received: from [192.168.0.4] ([71.212.136.242])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-211c7d219besm13909595ad.225.2024.11.14.10.53.30
+ 41be03b00d2f7-7f8b37f8640sm1423538a12.49.2024.11.14.10.59.21
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 14 Nov 2024 10:53:30 -0800 (PST)
-Message-ID: <a49b2d9b-e8d7-4409-a001-af81d722b536@linaro.org>
-Date: Thu, 14 Nov 2024 10:53:28 -0800
+ Thu, 14 Nov 2024 10:59:22 -0800 (PST)
+Message-ID: <3de882ce-a6cf-476b-94e4-210b2dd6173c@linaro.org>
+Date: Thu, 14 Nov 2024 10:59:20 -0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 07/24] system/watchpoint: Include missing 'exec/cpu-all.h'
- header
+Subject: Re: [PATCH 08/24] linux-user/aarch64/mte: Include missing
+ 'user/abitypes.h' header
 To: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
  Paolo Bonzini <pbonzini@redhat.com>, Anton Johansson <anjo@rev.ng>,
  qemu-devel@nongnu.org
@@ -76,14 +76,14 @@ Cc: qemu-ppc@nongnu.org, Thomas Huth <thuth@redhat.com>, qemu-arm@nongnu.org,
  Peter Maydell <peter.maydell@linaro.org>,
  =?UTF-8?Q?Alex_Benn=C3=A9e?= <alex.bennee@linaro.org>, qemu-s390x@nongnu.org
 References: <20241114011310.3615-1-philmd@linaro.org>
- <20241114011310.3615-8-philmd@linaro.org>
+ <20241114011310.3615-9-philmd@linaro.org>
 Content-Language: en-US
 From: Richard Henderson <richard.henderson@linaro.org>
-In-Reply-To: <20241114011310.3615-8-philmd@linaro.org>
+In-Reply-To: <20241114011310.3615-9-philmd@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::630;
- envelope-from=richard.henderson@linaro.org; helo=mail-pl1-x630.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::535;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pg1-x535.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -107,35 +107,36 @@ Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 On 11/13/24 17:12, Philippe Mathieu-Daudé wrote:
-> TARGET_PAGE_MASK is defined in "exec/cpu-all.h".
+> abi_long type is defined in "user/abitypes.h".
 > Include it in order to avoid when refactoring:
 > 
->    system/watchpoint.c:52:24: error: use of undeclared identifier 'TARGET_PAGE_MASK'
->       52 |     in_page = -(addr | TARGET_PAGE_MASK);
->          |                        ^
+>    linux-user/aarch64/mte_user_helper.h:30:42: error: unknown type name ‘abi_long’; did you mean ‘u_long’?
+>       30 | void arm_set_mte_tcf0(CPUArchState *env, abi_long value);
+>          |                                          ^~~~~~~~
+>          |                                          u_long
 > 
 > Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 > ---
->   system/watchpoint.c | 1 +
->   1 file changed, 1 insertion(+)
+>   linux-user/aarch64/mte_user_helper.h | 2 ++
+>   1 file changed, 2 insertions(+)
 > 
-> diff --git a/system/watchpoint.c b/system/watchpoint.c
-> index 2aa2a9ea63..f7366574a3 100644
-> --- a/system/watchpoint.c
-> +++ b/system/watchpoint.c
-> @@ -20,6 +20,7 @@
->   #include "qemu/osdep.h"
->   #include "qemu/error-report.h"
->   #include "exec/exec-all.h"
-> +#include "exec/cpu-all.h"
+> diff --git a/linux-user/aarch64/mte_user_helper.h b/linux-user/aarch64/mte_user_helper.h
+> index 8685e5175a..0c53abda22 100644
+> --- a/linux-user/aarch64/mte_user_helper.h
+> +++ b/linux-user/aarch64/mte_user_helper.h
+> @@ -9,6 +9,8 @@
+>   #ifndef AARCH64_MTE_USER_HELPER_H
+>   #define AARCH64_MTE USER_HELPER_H
+>   
+> +#include "user/abitypes.h"
+> +
+>   #ifndef PR_MTE_TCF_SHIFT
+>   # define PR_MTE_TCF_SHIFT       1
+>   # define PR_MTE_TCF_NONE        (0UL << PR_MTE_TCF_SHIFT)
 
-This uses TARGET_PAGE_MASK to choose between flushing one page or the entire tlb.  Better 
-would be to use tlb_flush_range_by_mmuidx(..., ALL_MMUIDX_BITS) to flush exactly one or 
-two pages.
-
-That said, I've just noticed that tlb_flush_range_by_mmuidx does not properly handle 
-addr+len that are not already page aligned.  That can be fixed fairly easily.
-
+Or maybe just switch to uint64_t.
+This is aarch64, so it's always going to be 64 bits.
+This is private between the prctl syscall and gdbstub.
 
 r~
 
