@@ -4,60 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 86BDFD637D5
-	for <qemu-riscv@archiver.kernel.org>; Thu, 14 Nov 2024 01:18:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D94F6D637D6
+	for <qemu-riscv@archiver.kernel.org>; Thu, 14 Nov 2024 01:18:56 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tBOR6-0007iK-6Z; Wed, 13 Nov 2024 20:14:18 -0500
+	id 1tBOTW-0004bx-JB; Wed, 13 Nov 2024 20:16:46 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tBOR2-0007gT-A0
- for qemu-riscv@nongnu.org; Wed, 13 Nov 2024 20:14:12 -0500
-Received: from mail-wr1-x42f.google.com ([2a00:1450:4864:20::42f])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tBOTB-0002lq-Cu
+ for qemu-riscv@nongnu.org; Wed, 13 Nov 2024 20:16:27 -0500
+Received: from mail-wr1-x433.google.com ([2a00:1450:4864:20::433])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tBOQw-00021L-Jq
- for qemu-riscv@nongnu.org; Wed, 13 Nov 2024 20:14:09 -0500
-Received: by mail-wr1-x42f.google.com with SMTP id
- ffacd0b85a97d-38207c86695so90422f8f.2
- for <qemu-riscv@nongnu.org>; Wed, 13 Nov 2024 17:14:06 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tBOT6-00033j-PV
+ for qemu-riscv@nongnu.org; Wed, 13 Nov 2024 20:16:22 -0500
+Received: by mail-wr1-x433.google.com with SMTP id
+ ffacd0b85a97d-37d4fd00574so21852f8f.0
+ for <qemu-riscv@nongnu.org>; Wed, 13 Nov 2024 17:16:18 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1731546844; x=1732151644; darn=nongnu.org;
+ d=linaro.org; s=google; t=1731546976; x=1732151776; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=hctc3S/tg6amAjvlXZaTioZ5Yr338cGDDSPzRbh8Ywo=;
- b=vdmf4X3RwQzuywq2vM1eg7M7uUvpjcBujgcE0tO8OY4/uqEjWIICIc2+7OtRn9PL09
- E4sXWIMeQAdOH9ClLSukEYTj8pjP0FfEA947E/fw9hMcB7scBa88ldt3Pd/RxjcdCRtl
- u13YutO51RF3tVTG2fUdgCrOX4GPijgcPU4bf9G1vZoRPtlRWNRdtXcCrW0T4q+7vlWG
- uv+J459WW4mi4r02ej+vi/ob4uLX9pj+0hHcdMAsRZhwCIoOLGDOIhpIjXO7hkpod61G
- UQFKDT5OIa9rveybUQ/L5Pg8GF0OBS41cWiP8U+OAkZdI7kp0mQSfM9TVeZo6z3CHUdl
- 900A==
+ bh=ziBtbUpyHfOZqiArsxZ9RJYwzJ+JBpYBES4OJcXpO28=;
+ b=b9V29geIA63RWvK70AshU6nqkTu5Aao0j9jkH0Anqjh6sXLct2VVw2a6v9twfyywvd
+ aoHLgmBkFK772VmW8Q4mtufQ7ZCnAom42IBTUc6ZpNt6hv39C7gfgt8/j/VltrxsquKK
+ 1cstdhG9/s7CK64RWmieqA7H1hVCoqk0IVZQggvLqpKXS40YNxHzZcajQV+9i1+0vI9/
+ lcHNU5DI77Bz/7urLYpntH49vXCoHbulev5AcI5pa0vhVPRoZH6Iy5TxhRR+lV4H9AX8
+ 2Y5izbohH6JdJieVj+onA5KRolW5dktWhQnTNllJ9Z3+Nk0oHSA+rxoozGadXrwapS9g
+ 0Oew==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731546844; x=1732151644;
+ d=1e100.net; s=20230601; t=1731546976; x=1732151776;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=hctc3S/tg6amAjvlXZaTioZ5Yr338cGDDSPzRbh8Ywo=;
- b=rugo4UJ+xICHdik8RKweYZdZZ5wgF0maZl5X57gZlSO7K34Twwrr6+Fi702Cfv83y9
- thtGquY195Ori4kHtRYIPBHra3yKAmGchB1QyoKHEO7LbSJfR01hHUMo3ePKmoOWyM+U
- glq4rp/4V5buXTab28qAVuh7EaMrvQEaWgztpvaWUCHP//JQ6MkHDWOVdkmcboL7+6s1
- 73anV3/mrPp4JgtK4gjrbdsEQc/25nSXlMG8Agrsl7tg0CklbWVmwxvDFyOHB3fRIc0J
- 4h/38UoEw3sCDzDqK9IVphiixxtFrWuvSmOufKq3IZSKkkFJz1yZFMLhtJRoKXBI8UuN
- m9dg==
+ bh=ziBtbUpyHfOZqiArsxZ9RJYwzJ+JBpYBES4OJcXpO28=;
+ b=qPvtPdqG09nr16/4QraLRH220mpJ07Pc/vLW0CiV/QRFhJQK96bvdPiOlPbfb0Kjym
+ snshftRW1psxqmiKJB9ZJLbYOpYCYNS0PPAQ91Y9pGi8DJvzVtJ1d/qckoSFo69qdAVG
+ OJLuseqZbuPGHKWupwZgtjtZtqB0Wkb8gb4LEaKZxQKQe6Z2EWSI7Ivu7nSrOhX+VjYN
+ wE6Hv2fzrLHP0iqWgQkuoCTY1wPvF5ZId6VAQjRzg60BsYNitw2M3WnVMdTz/sUmjHp3
+ f5NH9X4P9Hm0zALIdTVTqs0whmnr04W0YR/1d9GuRBQcQk57TUEMKN9XxszZ8Ir0FqzM
+ xJfw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCX006fPN2HQUAi0Cj139LkvRM4X+Vm6MfWQn/3JP2RQ38QvOI40moykAWbhmauCqoSm85E3QPjetGsD@nongnu.org
-X-Gm-Message-State: AOJu0YziGq543p3+ipPxpzYdeVH8ST9gmOzW1oKahUe2UEA7ZPKIYtGB
- KhhAfuZuyyUWOjef7+B4pfuz3Go5/VnMOmtLVa1iOigVxDeR5jJmJgwg/Lb1fF8=
-X-Google-Smtp-Source: AGHT+IEn2so/ixH18AvrpdZMy3nJh7glbi+y5QwToKvNKI1CwZqSHbNiU7EXqtTNTTpXjuGdZdx7cQ==
-X-Received: by 2002:a5d:648b:0:b0:37d:47ee:10d9 with SMTP id
- ffacd0b85a97d-381f1873485mr19654057f8f.34.1731546844586; 
- Wed, 13 Nov 2024 17:14:04 -0800 (PST)
+ AJvYcCWClZRGDS0fxby2QuNZVgShJ9UBsN5rU/csaFfPAILgpIsZv8Bloc6wYd4TKpTmbkp/KempG3dM6DEb@nongnu.org
+X-Gm-Message-State: AOJu0YxGLIhthSZ5mnHiurqV1dInV51WSSkeR1IIBN+hDIa9ccb8w8UK
+ PpVaFxWQYW41Wc7EBkoay3QhBUPBwTuI96f1srDP2T7l/WDpAxXyWwfCTaO0q/8=
+X-Google-Smtp-Source: AGHT+IFG/ZF691knJltVBevXFTBqGvTEtAKOLukeJC55OBRtxqlY2UQOjoHdG6QCpoUL0VTdcMqiXw==
+X-Received: by 2002:a5d:47a8:0:b0:381:f443:21c6 with SMTP id
+ ffacd0b85a97d-38213f80149mr1345659f8f.0.1731546976466; 
+ Wed, 13 Nov 2024 17:16:16 -0800 (PST)
 Received: from localhost.localdomain ([176.187.209.238])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-381ed97e46bsm19427592f8f.30.2024.11.13.17.14.01
+ ffacd0b85a97d-381ed97db25sm19856743f8f.41.2024.11.13.17.16.13
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Wed, 13 Nov 2024 17:14:03 -0800 (PST)
+ Wed, 13 Nov 2024 17:16:15 -0800 (PST)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: Paolo Bonzini <pbonzini@redhat.com>,
  Richard Henderson <richard.henderson@linaro.org>,
@@ -70,18 +70,18 @@ Cc: qemu-ppc@nongnu.org, Thomas Huth <thuth@redhat.com>, qemu-arm@nongnu.org,
  =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
  qemu-s390x@nongnu.org,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-Subject: [PATCH 05/24] target/i386/helper: Include missing
- 'exec/translation-block.h' header
-Date: Thu, 14 Nov 2024 02:12:50 +0100
-Message-ID: <20241114011310.3615-6-philmd@linaro.org>
+Subject: [PATCH 23/24] exec/memory: Move qemu_map_ram_ptr() declaration to
+ 'exec/ram_addr.h'
+Date: Thu, 14 Nov 2024 02:13:08 +0100
+Message-ID: <20241114011310.3615-24-philmd@linaro.org>
 X-Mailer: git-send-email 2.45.2
 In-Reply-To: <20241114011310.3615-1-philmd@linaro.org>
 References: <20241114011310.3615-1-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::42f;
- envelope-from=philmd@linaro.org; helo=mail-wr1-x42f.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::433;
+ envelope-from=philmd@linaro.org; helo=mail-wr1-x433.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -104,30 +104,44 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-TB compile flags are defined in "exec/translation-block.h".
-Include it in order to avoid when refactoring:
-
-  target/i386/helper.c:536:28: error: use of undeclared identifier 'CF_PCREL'
-    536 |     if (tcg_cflags_has(cs, CF_PCREL)) {
-        |                            ^
-
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 ---
- target/i386/helper.c | 1 +
- 1 file changed, 1 insertion(+)
+ include/exec/memory.h   | 2 +-
+ include/exec/ram_addr.h | 1 +
+ 2 files changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/target/i386/helper.c b/target/i386/helper.c
-index 01a268a30b..75c52e2143 100644
---- a/target/i386/helper.c
-+++ b/target/i386/helper.c
-@@ -21,6 +21,7 @@
- #include "qapi/qapi-events-run-state.h"
- #include "cpu.h"
- #include "exec/exec-all.h"
-+#include "exec/translation-block.h"
- #include "sysemu/runstate.h"
- #ifndef CONFIG_USER_ONLY
- #include "sysemu/hw_accel.h"
+diff --git a/include/exec/memory.h b/include/exec/memory.h
+index 9458e2801d..58faa3eb08 100644
+--- a/include/exec/memory.h
++++ b/include/exec/memory.h
+@@ -28,6 +28,7 @@
+ #include "qemu/notify.h"
+ #include "qom/object.h"
+ #include "qemu/rcu.h"
++#include "exec/ram_addr.h"
+ 
+ #define RAM_ADDR_INVALID (~(ram_addr_t)0)
+ 
+@@ -2973,7 +2974,6 @@ MemTxResult flatview_read_continue(FlatView *fv, hwaddr addr,
+                                    MemTxAttrs attrs, void *buf,
+                                    hwaddr len, hwaddr addr1, hwaddr l,
+                                    MemoryRegion *mr);
+-void *qemu_map_ram_ptr(RAMBlock *ram_block, ram_addr_t addr);
+ 
+ /* Internal functions, part of the implementation of address_space_read_cached
+  * and address_space_write_cached.  */
+diff --git a/include/exec/ram_addr.h b/include/exec/ram_addr.h
+index e0620ddb03..c4f220ae93 100644
+--- a/include/exec/ram_addr.h
++++ b/include/exec/ram_addr.h
+@@ -73,6 +73,7 @@ void qemu_ram_set_migratable(RAMBlock *rb);
+ void qemu_ram_unset_migratable(RAMBlock *rb);
+ bool qemu_ram_is_named_file(RAMBlock *rb);
+ int qemu_ram_get_fd(RAMBlock *rb);
++void *qemu_map_ram_ptr(RAMBlock *ram_block, ram_addr_t addr);
+ 
+ size_t qemu_ram_pagesize(RAMBlock *block);
+ size_t qemu_ram_pagesize_largest(void);
 -- 
 2.45.2
 
