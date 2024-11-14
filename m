@@ -4,60 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E796FD637D5
-	for <qemu-riscv@archiver.kernel.org>; Thu, 14 Nov 2024 01:18:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 73921D637D5
+	for <qemu-riscv@archiver.kernel.org>; Thu, 14 Nov 2024 01:18:09 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tBORJ-0007yB-Fv; Wed, 13 Nov 2024 20:14:29 -0500
+	id 1tBOTR-000424-Td; Wed, 13 Nov 2024 20:16:41 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tBORG-0007sj-GM
- for qemu-riscv@nongnu.org; Wed, 13 Nov 2024 20:14:26 -0500
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tBOSz-0002UC-MB
+ for qemu-riscv@nongnu.org; Wed, 13 Nov 2024 20:16:16 -0500
 Received: from mail-wm1-x32e.google.com ([2a00:1450:4864:20::32e])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tBORD-000244-Pq
- for qemu-riscv@nongnu.org; Wed, 13 Nov 2024 20:14:26 -0500
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tBOSx-00031z-DM
+ for qemu-riscv@nongnu.org; Wed, 13 Nov 2024 20:16:13 -0500
 Received: by mail-wm1-x32e.google.com with SMTP id
- 5b1f17b1804b1-4315f24a6bbso946305e9.1
- for <qemu-riscv@nongnu.org>; Wed, 13 Nov 2024 17:14:21 -0800 (PST)
+ 5b1f17b1804b1-4315eac969aso155015e9.1
+ for <qemu-riscv@nongnu.org>; Wed, 13 Nov 2024 17:16:10 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1731546859; x=1732151659; darn=nongnu.org;
+ d=linaro.org; s=google; t=1731546969; x=1732151769; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=IkMAKYtUsFK+2kHSHv5+o6ejmYyvsynMitsyE7ErdJE=;
- b=nMTLgNZuUNokikg1kST+CcEwOA9jPPKQev18C1iXymHiQo4wI+f+duzowWZTOG2/Lo
- jMdsxKkDYi/yYqyIbjzxlIyeQ4tY3mgmgXjolTw1gI2ZPwkVstBEaLGmzowFNjLGtIuP
- 4WXRbWqz8G9UdRpc5TdnVD48c9JBowxuwbpfGL0MKLAQHBPRIGU7rR3nCjlx7kZ8zgiL
- xAWaKSZ64ZqymV/IOxdo/m2xY78fbxtlk6rRBhuLhFfhttSWgHuRc2D5VaZsOIdUMUaE
- VXxzzj7QqwaWhgtVm0p+oxEaK01/BXXbyI+3FHo5duwM+auSM5S8bdveHTA/SgLn8X8U
- zMaA==
+ bh=dJnPLBXDUWt9APABFP9RtiuQUlaLpT6eHtJy+a+Whyg=;
+ b=qSC2iR3FZXQ9xvcsI53Cva0/uYAFxHj+GyOAmpyHInvli7a3m+TRmBsokfSUeheQD6
+ 5pBBDLn+iRIGWrq4mHs24modnt7mMF8QtnlDY1ALgRaHcgt3z2EFGBYDOvpD+NEXgqZ8
+ v9fxuS1RSgwfz6k4y6wzk5Aq/iiFZ5OuopnyrGOxuItaqa/Gd7agNItE9Xgdv3sKOi9s
+ GGuZZUCNG40cuOSKjVsw4GOKU4zpQ+KcOhL47kr7MQaE/JR0rA4GuXIPfRxhoQgptGm4
+ 4R3pA07Pw8BoPwOQc5cejTOwPkvZpeqxqP+R/N59rNViHh+Z+JNlbAMrJiqmv9kjh+oy
+ 5hkg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731546859; x=1732151659;
+ d=1e100.net; s=20230601; t=1731546969; x=1732151769;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=IkMAKYtUsFK+2kHSHv5+o6ejmYyvsynMitsyE7ErdJE=;
- b=E1XZ3pVF8mNpB5u9hZWdrWy88InLSNI+1TMh+p7qKfEFWRhCfffN/MORfz/YRaH/OR
- 0zy3bMG5Y/ao8Ka+ZwP+9IUxEnyCjskyWpzKcopGFN7RkE6Q+tx0NCjugg/djJxkDR0V
- mZbjrp65u/L7GWUu+W+ppTF6AvLgOcO4TGiLESf1xjeN90NUS+lDbYeiWySHloPC4Hm+
- 3aQi0wEh5HSjwzx+qL3PJxK1QcIfMKgPCZhNm50crzIrP/fwDtl1MOY+AQrHAWfSm4sH
- J6UzaD40m2rFgsEqUQzAaO5AbSneINyOXEvl3A7xRp5oZhCzB6KkhbPKSILmd+xq3PwO
- pYyw==
+ bh=dJnPLBXDUWt9APABFP9RtiuQUlaLpT6eHtJy+a+Whyg=;
+ b=mzNXF3EVvYxhNKDUS7l9cyuNgxNUf/LHId0z8GHtWcOn09XGDL+gWre7bx+5nUfkmf
+ LAens7OsLfIIqO+fndBDLW2IAYusqwz35gb6CyQ4/lbFrstNFIsOt4bzqS7Vrqh3hD5I
+ Rh5N/NxYMwaBVuQ1XvriflTsULQemsPpbLEEcjpP8TFMW+b+VNl5qqORKXiGODYmP/XN
+ kEj6r/Gm7hGr1T/sG2raoI8GLgxhZfTQpADnVVWrhi9K1mDL/4gCh2wrTbdrcCEAEAt+
+ EACmoq3GPdO+/GFDStpUQSyzxYKT4l0IYhb/K0xtwlO2pd+c+/fT058Jgn1yNOGeKVF+
+ d1aA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXKU8LjB5CdyCk2DBtelU45UZqWP8tQYf2/19uVcK3LTgy6cikANcu12fIVxhJSysEd/qlToM+hUEHn@nongnu.org
-X-Gm-Message-State: AOJu0Yy2w8sY4GulH7dCcifYZ2atxYIPnfI7tA/7Y81IkN0Bp9eVVOVZ
- Dz9Q91z7jpZGqvDPw9xrhxBX4D9v/UCgxFniwZa5IIal16P9CqpbzhDaG0yyMZA=
-X-Google-Smtp-Source: AGHT+IGq7l4w9ev6D28X1Yepm7vUOOMFRow8CZfJhEURSVFhxjg71fxbtKf1kANyx9ZamVx3FRm1Lg==
-X-Received: by 2002:a05:600c:1d20:b0:426:5e91:3920 with SMTP id
- 5b1f17b1804b1-432b751dec4mr186860785e9.29.1731546859011; 
- Wed, 13 Nov 2024 17:14:19 -0800 (PST)
+ AJvYcCU43llvogWpEkZFO7K19hwpu/r87jxNRz0yHK5WQ93GJrKY7DPgvT+KiRdRCgllxGsoe5GzjhmxQS1T@nongnu.org
+X-Gm-Message-State: AOJu0YwninJoW0eS8TuYBEFnKayf2c/xhUfXFxWPMtSXulPtiHFEacua
+ IFddJAnoj8vCCxMKKzBC0NOH8jLuP5UqWGh9NLNuCNYecSjSieci3kCGEsBMmgU=
+X-Google-Smtp-Source: AGHT+IFNRYI+6+k6hzZD/Oqm3sK6NGybQN7v5rJRv2V4XIRC72YBhh+g6R+IRQke+T79tc6rz4+9zg==
+X-Received: by 2002:a05:600c:4fc5:b0:431:55f3:d34e with SMTP id
+ 5b1f17b1804b1-432d9761bdcmr12005115e9.15.1731546969598; 
+ Wed, 13 Nov 2024 17:16:09 -0800 (PST)
 Received: from localhost.localdomain ([176.187.209.238])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-432da27f4f8sm4766295e9.18.2024.11.13.17.14.16
+ 5b1f17b1804b1-432da280018sm4774385e9.26.2024.11.13.17.16.07
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Wed, 13 Nov 2024 17:14:18 -0800 (PST)
+ Wed, 13 Nov 2024 17:16:09 -0800 (PST)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: Paolo Bonzini <pbonzini@redhat.com>,
  Richard Henderson <richard.henderson@linaro.org>,
@@ -70,10 +70,10 @@ Cc: qemu-ppc@nongnu.org, Thomas Huth <thuth@redhat.com>, qemu-arm@nongnu.org,
  =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
  qemu-s390x@nongnu.org,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-Subject: [PATCH 07/24] system/watchpoint: Include missing 'exec/cpu-all.h'
- header
-Date: Thu, 14 Nov 2024 02:12:52 +0100
-Message-ID: <20241114011310.3615-8-philmd@linaro.org>
+Subject: [PATCH 22/24] exec/cpu-common: Move ram_addr_t related methods to
+ 'exec/ram_addr.h'
+Date: Thu, 14 Nov 2024 02:13:07 +0100
+Message-ID: <20241114011310.3615-23-philmd@linaro.org>
 X-Mailer: git-send-email 2.45.2
 In-Reply-To: <20241114011310.3615-1-philmd@linaro.org>
 References: <20241114011310.3615-1-philmd@linaro.org>
@@ -88,7 +88,7 @@ X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -104,30 +104,163 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-TARGET_PAGE_MASK is defined in "exec/cpu-all.h".
-Include it in order to avoid when refactoring:
-
-  system/watchpoint.c:52:24: error: use of undeclared identifier 'TARGET_PAGE_MASK'
-     52 |     in_page = -(addr | TARGET_PAGE_MASK);
-        |                        ^
+Move methods related to the ram_addr_t type to
+the specific "exec/ram_addr.h" header.
 
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 ---
- system/watchpoint.c | 1 +
- 1 file changed, 1 insertion(+)
+ include/exec/cpu-common.h        | 56 +-------------------------------
+ include/exec/ram_addr.h          | 56 ++++++++++++++++++++++++++++++++
+ include/exec/translation-block.h |  2 +-
+ 3 files changed, 58 insertions(+), 56 deletions(-)
 
-diff --git a/system/watchpoint.c b/system/watchpoint.c
-index 2aa2a9ea63..f7366574a3 100644
---- a/system/watchpoint.c
-+++ b/system/watchpoint.c
-@@ -20,6 +20,7 @@
- #include "qemu/osdep.h"
- #include "qemu/error-report.h"
- #include "exec/exec-all.h"
-+#include "exec/cpu-all.h"
- #include "hw/core/cpu.h"
+diff --git a/include/exec/cpu-common.h b/include/exec/cpu-common.h
+index 638dc806a5..b790202c56 100644
+--- a/include/exec/cpu-common.h
++++ b/include/exec/cpu-common.h
+@@ -54,61 +54,7 @@ enum device_endian {
+ #define DEVICE_HOST_ENDIAN DEVICE_LITTLE_ENDIAN
+ #endif
  
- /* Add a watchpoint.  */
+-/* address in the RAM (different from a physical address) */
+-#if defined(CONFIG_XEN_BACKEND)
+-typedef uint64_t ram_addr_t;
+-#  define RAM_ADDR_MAX UINT64_MAX
+-#  define RAM_ADDR_FMT "%" PRIx64
+-#else
+-typedef uintptr_t ram_addr_t;
+-#  define RAM_ADDR_MAX UINTPTR_MAX
+-#  define RAM_ADDR_FMT "%" PRIxPTR
+-#endif
+-
+-/* memory API */
+-
+-void qemu_ram_remap(ram_addr_t addr, ram_addr_t length);
+-/* This should not be used by devices.  */
+-ram_addr_t qemu_ram_addr_from_host(void *ptr);
+-ram_addr_t qemu_ram_addr_from_host_nofail(void *ptr);
+-RAMBlock *qemu_ram_block_by_name(const char *name);
+-
+-/*
+- * Translates a host ptr back to a RAMBlock and an offset in that RAMBlock.
+- *
+- * @ptr: The host pointer to translate.
+- * @round_offset: Whether to round the result offset down to a target page
+- * @offset: Will be set to the offset within the returned RAMBlock.
+- *
+- * Returns: RAMBlock (or NULL if not found)
+- *
+- * By the time this function returns, the returned pointer is not protected
+- * by RCU anymore.  If the caller is not within an RCU critical section and
+- * does not hold the BQL, it must have other means of protecting the
+- * pointer, such as a reference to the memory region that owns the RAMBlock.
+- */
+-RAMBlock *qemu_ram_block_from_host(void *ptr, bool round_offset,
+-                                   ram_addr_t *offset);
+-ram_addr_t qemu_ram_block_host_offset(RAMBlock *rb, void *host);
+-void qemu_ram_set_idstr(RAMBlock *block, const char *name, DeviceState *dev);
+-void qemu_ram_unset_idstr(RAMBlock *block);
+-const char *qemu_ram_get_idstr(RAMBlock *rb);
+-void *qemu_ram_get_host_addr(RAMBlock *rb);
+-ram_addr_t qemu_ram_get_offset(RAMBlock *rb);
+-ram_addr_t qemu_ram_get_used_length(RAMBlock *rb);
+-ram_addr_t qemu_ram_get_max_length(RAMBlock *rb);
+-bool qemu_ram_is_shared(RAMBlock *rb);
+-bool qemu_ram_is_noreserve(RAMBlock *rb);
+-bool qemu_ram_is_uf_zeroable(RAMBlock *rb);
+-void qemu_ram_set_uf_zeroable(RAMBlock *rb);
+-bool qemu_ram_is_migratable(RAMBlock *rb);
+-void qemu_ram_set_migratable(RAMBlock *rb);
+-void qemu_ram_unset_migratable(RAMBlock *rb);
+-bool qemu_ram_is_named_file(RAMBlock *rb);
+-int qemu_ram_get_fd(RAMBlock *rb);
+-
+-size_t qemu_ram_pagesize(RAMBlock *block);
+-size_t qemu_ram_pagesize_largest(void);
++#include "exec/ram_addr.h"
+ 
+ /**
+  * cpu_address_space_init:
+diff --git a/include/exec/ram_addr.h b/include/exec/ram_addr.h
+index 80f6dc7564..e0620ddb03 100644
+--- a/include/exec/ram_addr.h
++++ b/include/exec/ram_addr.h
+@@ -21,6 +21,62 @@
+ 
+ #ifndef CONFIG_USER_ONLY
+ 
++/* address in the RAM (different from a physical address) */
++#if defined(CONFIG_XEN_BACKEND)
++typedef uint64_t ram_addr_t;
++#  define RAM_ADDR_MAX UINT64_MAX
++#  define RAM_ADDR_FMT "%" PRIx64
++#else
++typedef uintptr_t ram_addr_t;
++#  define RAM_ADDR_MAX UINTPTR_MAX
++#  define RAM_ADDR_FMT "%" PRIxPTR
++#endif
++
++/* memory API */
++
++void qemu_ram_remap(ram_addr_t addr, ram_addr_t length);
++/* This should not be used by devices.  */
++ram_addr_t qemu_ram_addr_from_host(void *ptr);
++ram_addr_t qemu_ram_addr_from_host_nofail(void *ptr);
++RAMBlock *qemu_ram_block_by_name(const char *name);
++
++/*
++ * Translates a host ptr back to a RAMBlock and an offset in that RAMBlock.
++ *
++ * @ptr: The host pointer to translate.
++ * @round_offset: Whether to round the result offset down to a target page
++ * @offset: Will be set to the offset within the returned RAMBlock.
++ *
++ * Returns: RAMBlock (or NULL if not found)
++ *
++ * By the time this function returns, the returned pointer is not protected
++ * by RCU anymore.  If the caller is not within an RCU critical section and
++ * does not hold the BQL, it must have other means of protecting the
++ * pointer, such as a reference to the memory region that owns the RAMBlock.
++ */
++RAMBlock *qemu_ram_block_from_host(void *ptr, bool round_offset,
++                                   ram_addr_t *offset);
++ram_addr_t qemu_ram_block_host_offset(RAMBlock *rb, void *host);
++void qemu_ram_set_idstr(RAMBlock *block, const char *name, DeviceState *dev);
++void qemu_ram_unset_idstr(RAMBlock *block);
++const char *qemu_ram_get_idstr(RAMBlock *rb);
++void *qemu_ram_get_host_addr(RAMBlock *rb);
++ram_addr_t qemu_ram_get_offset(RAMBlock *rb);
++ram_addr_t qemu_ram_get_used_length(RAMBlock *rb);
++ram_addr_t qemu_ram_get_max_length(RAMBlock *rb);
++bool qemu_ram_is_shared(RAMBlock *rb);
++bool qemu_ram_is_noreserve(RAMBlock *rb);
++bool qemu_ram_is_uf_zeroable(RAMBlock *rb);
++void qemu_ram_set_uf_zeroable(RAMBlock *rb);
++bool qemu_ram_is_migratable(RAMBlock *rb);
++void qemu_ram_set_migratable(RAMBlock *rb);
++void qemu_ram_unset_migratable(RAMBlock *rb);
++bool qemu_ram_is_named_file(RAMBlock *rb);
++int qemu_ram_get_fd(RAMBlock *rb);
++
++size_t qemu_ram_pagesize(RAMBlock *block);
++size_t qemu_ram_pagesize_largest(void);
++
+ bool ramblock_is_pmem(RAMBlock *rb);
+ 
+ long qemu_minrampagesize(void);
+diff --git a/include/exec/translation-block.h b/include/exec/translation-block.h
+index b99afb0077..9c4757882c 100644
+--- a/include/exec/translation-block.h
++++ b/include/exec/translation-block.h
+@@ -8,7 +8,7 @@
+ #define EXEC_TRANSLATION_BLOCK_H
+ 
+ #include "qemu/thread.h"
+-#include "exec/cpu-common.h"
++#include "exec/ram_addr.h"
+ #include "exec/vaddr.h"
+ #ifdef CONFIG_USER_ONLY
+ #include "qemu/interval-tree.h"
 -- 
 2.45.2
 
