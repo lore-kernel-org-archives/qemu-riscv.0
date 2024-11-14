@@ -4,92 +4,98 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 31FB1D68B31
-	for <qemu-riscv@archiver.kernel.org>; Thu, 14 Nov 2024 15:24:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2BBAAD68B34
+	for <qemu-riscv@archiver.kernel.org>; Thu, 14 Nov 2024 16:13:41 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tBbhT-0005si-FK; Thu, 14 Nov 2024 10:24:03 -0500
+	id 1tBcQB-0003vI-54; Thu, 14 Nov 2024 11:10:17 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tBbhR-0005r7-3c
- for qemu-riscv@nongnu.org; Thu, 14 Nov 2024 10:24:01 -0500
-Received: from mail-ed1-x535.google.com ([2a00:1450:4864:20::535])
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1tBcQ0-0003T1-Mx
+ for qemu-riscv@nongnu.org; Thu, 14 Nov 2024 11:10:06 -0500
+Received: from mail-pj1-x102e.google.com ([2607:f8b0:4864:20::102e])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tBbhO-0001hL-Cs
- for qemu-riscv@nongnu.org; Thu, 14 Nov 2024 10:24:00 -0500
-Received: by mail-ed1-x535.google.com with SMTP id
- 4fb4d7f45d1cf-5c9c28c1ecbso1069081a12.0
- for <qemu-riscv@nongnu.org>; Thu, 14 Nov 2024 07:23:57 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1tBcPy-0004IV-W2
+ for qemu-riscv@nongnu.org; Thu, 14 Nov 2024 11:10:04 -0500
+Received: by mail-pj1-x102e.google.com with SMTP id
+ 98e67ed59e1d1-2e31af47681so660157a91.2
+ for <qemu-riscv@nongnu.org>; Thu, 14 Nov 2024 08:10:02 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1731597837; x=1732202637; darn=nongnu.org;
+ d=linaro.org; s=google; t=1731600601; x=1732205401; darn=nongnu.org;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=Psa2/rvf8Lbi+UL8r1q4T33qhcyAOZrvng/4IgPHqco=;
- b=L7Ng1oIYkKIJ6FCV+cocmg819VWxq0vj/nqxM4O2n8NSivTHqVkUmrByPjZXLDy+qg
- syWKPQJWwibMl/XQZd33F/88HBIiVMnvzj/P6k3fbKAT/3u+GCO1Bw0te+MUE7xbLfeU
- TlSDDE40ESrSDMoVxyhkfb21Ny525HTmmk+cteZif3vMv6y+LugCTeG7Jy0NanaiJ5W0
- L05bw2+ywf8pLCDQrMzzWKpE838vcSQ7EkFMCQV9iRmMSEs/jYJca+lGyhzLI2ty7+OK
- Q7CpdOwHX3AMpaVk/vso/es0A60PrTsb8OFq8AG/c31x8g9yb6RpObNakdUwuzABYFRt
- 0vaw==
+ bh=AWAtYvj47Ix5qNW4Emo3QWM6YHTQcss4zfN1Zjyrw/Y=;
+ b=qD3CRLj0jGADxbiOrKZUjwZ+T9pH1EUMJcwdnS8Db0+a6QHCfKfh9YN3G+w7L0PQNg
+ wF9oLNftWlxM8TPhxbWAoIyy5tc9SWLwtcX58y6yueZtucjV/uijtfpU1rhIYSMN6H95
+ RJkZM65i9r+sq2HnFtvsh1cLiBtSCb49kIwort45OTWKagjYSGw0rXZubMgIAElVbr4l
+ Fgw0gJSiWo3AYB2PGKbbWXRfoKNrQ/tp5ogPwoimTB6jai+eKaVpYApn6OpGKGGVGo0w
+ i2NGhqOYeo1/4wxrJ8tiWiLxlb7ZztQVKm/2V9n7rmP0j9JvvRzmiCezj51ntTdGF1Xt
+ rt2Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731597837; x=1732202637;
+ d=1e100.net; s=20230601; t=1731600601; x=1732205401;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=Psa2/rvf8Lbi+UL8r1q4T33qhcyAOZrvng/4IgPHqco=;
- b=XOa+5g/s5HWo3siIatR7m5+swEurxdC1agFuHZmq8SkY6hM3E8dPZxf2Opji/IjRCq
- sagztvsDbg6u4lk/FgalpODOkPw2NVdmP/tyfbhyue6qivkFrZpqIkltTQdu6p5ilMDS
- 3e2KUFdiFBdHEl/QRVHPWfrkwzKhZi325TZVvoBpy69RD45yJXrmTfO68qtSVeAQsjsv
- FRBJtNDLXK5RM/SLJNpa/5EUN9mRhs9vQwkFOvJj/2zdfCJxIItds8b2j5jPrlt7b67H
- zRl2I/9ygVMbEy2pw2dT3n8F+6L0lBkz2Z2BFt+o4LouitGalMtH4rntLx0E6sCiYMYl
- vPCg==
+ bh=AWAtYvj47Ix5qNW4Emo3QWM6YHTQcss4zfN1Zjyrw/Y=;
+ b=mgKtnLCPRaflSTfHQgo2EJej9q76MBPeyOafCtA+cke0NZDIxFXNPtifnjTCvA9sY/
+ 8imGjUIWxUgLigNzT3fmV5uPfiR/9hYjqYm9ZfCcUPPA97zzEXELD0Yi00TMXGfFr7Mv
+ evB3g0O0Reyd3HVg/AL9j/5aN6xrs24jBrr4VdHncaxrB1ntO7ygPAeO0suWqBl+m4DT
+ 5gVeyoSsa9p98tq4GnnN6NLu6jxEVWCzf1c3SfImSoahOx4Wh5xF2pt8NB4M4N9ZNCHy
+ P+A7BdaHATmDEgudL8KvqnB+3BbRe0MmbH2rgd6W5hNzbRaArm33Mz3u9TVZrhZXerva
+ h0qA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWcP5Vu+r/AI4iMASy49ZtIUpdUgBTZc800gp5XzPykOiCzevWEWnwGA+bya13L3iy8naZDZ2vVnFs/@nongnu.org
-X-Gm-Message-State: AOJu0Ywn/6V9Ai4nPtECuQYJPs2g/hXbQ1tXlMlTTJqOVX1kkSQshkRj
- /esu9bnxLQ+8uAIG9fiyHfU7yXXnHshEs8j5DKJP2SDvxJVBs7Z3+PHX0l+M0pY=
-X-Google-Smtp-Source: AGHT+IFFKT+995jjict75ZuqspeB+Rm5nBD/Y9eqEryE1HRq0+Uwt5QGvTOl0uTxZY81UYqEzAsalg==
-X-Received: by 2002:a05:6402:354f:b0:5cf:3d22:6dd9 with SMTP id
- 4fb4d7f45d1cf-5cf3d226e2emr13033518a12.0.1731597836713; 
- Thu, 14 Nov 2024 07:23:56 -0800 (PST)
-Received: from [192.168.69.126] ([176.187.209.228])
+ AJvYcCVADO64PdUob1gxLlN/xTS9JPl71KpRoEJdvSptEEzMxMeP4yPIl1tJ7xQSA8F9zdLjBVa2h0/W15Cj@nongnu.org
+X-Gm-Message-State: AOJu0Yye6OHVkg5d02Y9H2zWjam/yQUZ8KVJamoyZaAUJ6KAP4hr4uMP
+ jQ7Ix3nt26tA95LPfbcG4Wh4dbgn6Y5v+0+Jn7pwV58MtIe/wFs6l8ZgQP5d2Xs=
+X-Google-Smtp-Source: AGHT+IHB9SPUKGaSd0XdWLK4+NjQXRX+88CX4E8NZGxkiAEFobpzf2gaA1L0QO121XQ0zhB5eWOkYQ==
+X-Received: by 2002:a17:90b:4c49:b0:2e2:9522:278f with SMTP id
+ 98e67ed59e1d1-2e9f2d793b8mr7844483a91.32.1731600601110; 
+ Thu, 14 Nov 2024 08:10:01 -0800 (PST)
+Received: from [192.168.0.4] ([71.212.136.242])
  by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5cf79b89d67sm660333a12.11.2024.11.14.07.23.54
+ 98e67ed59e1d1-2ea02495969sm1483293a91.19.2024.11.14.08.10.00
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 14 Nov 2024 07:23:56 -0800 (PST)
-Message-ID: <50fac36d-86af-48ce-890a-033887da05e1@linaro.org>
-Date: Thu, 14 Nov 2024 16:23:54 +0100
+ Thu, 14 Nov 2024 08:10:00 -0800 (PST)
+Message-ID: <bee4999b-902b-43b8-ad12-c8394712b91b@linaro.org>
+Date: Thu, 14 Nov 2024 08:09:59 -0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 03/24] exec/translation-block: Include missing
- 'exec/vaddr.h' header
-To: Pierrick Bouvier <pierrick.bouvier@linaro.org>,
- Paolo Bonzini <pbonzini@redhat.com>,
- Richard Henderson <richard.henderson@linaro.org>,
- Anton Johansson <anjo@rev.ng>, qemu-devel@nongnu.org
-Cc: qemu-ppc@nongnu.org, Thomas Huth <thuth@redhat.com>, qemu-arm@nongnu.org, 
- Peter Xu <peterx@redhat.com>, qemu-riscv@nongnu.org,
- David Hildenbrand <david@redhat.com>,
- Peter Maydell <peter.maydell@linaro.org>,
- =?UTF-8?Q?Alex_Benn=C3=A9e?= <alex.bennee@linaro.org>, qemu-s390x@nongnu.org
-References: <20241114011310.3615-1-philmd@linaro.org>
- <20241114011310.3615-4-philmd@linaro.org>
- <8406e329-5b09-4960-b5b7-baca62d3747c@linaro.org>
+Subject: Re: [RFC v4 2/2] target/riscv: rvv: improve performance of RISC-V
+ vector loads and stores on large amounts of data.
+To: Paolo Savini <paolo.savini@embecosm.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>, qemu-devel@nongnu.org,
+ qemu-riscv@nongnu.org
+Cc: Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bmeng.cn@gmail.com>,
+ Weiwei Li <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Helene Chelin <helene.chelin@embecosm.com>, Nathan Egge <negge@google.com>,
+ Max Chou <max.chou@sifive.com>
+References: <20241029194348.59574-1-paolo.savini@embecosm.com>
+ <20241029194348.59574-3-paolo.savini@embecosm.com>
+ <7a046c99-c4e7-4395-8dc9-9139e9bfba06@linaro.org>
+ <96e7601d-14aa-4741-8f6a-ae4a1c397a44@embecosm.com>
+ <54c99505-21ef-422c-a7fe-a2d7dabc3d6c@linaro.org>
+ <6b06b532-c53f-4b5b-b65d-d54d7c746ffc@ventanamicro.com>
+ <230f448b-07f4-413c-9be6-e10a8e55be73@linaro.org>
+ <a9f51b76-1cd7-405f-b4a7-384c7447ff88@embecosm.com>
 Content-Language: en-US
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-In-Reply-To: <8406e329-5b09-4960-b5b7-baca62d3747c@linaro.org>
+From: Richard Henderson <richard.henderson@linaro.org>
+In-Reply-To: <a9f51b76-1cd7-405f-b4a7-384c7447ff88@embecosm.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::535;
- envelope-from=philmd@linaro.org; helo=mail-ed1-x535.google.com
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::102e;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pj1-x102e.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -105,62 +111,32 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 14/11/24 04:10, Pierrick Bouvier wrote:
-> On 11/13/24 17:12, Philippe Mathieu-Daudé wrote:
->> 'vaddr' is declared in "exec/vaddr.h".
->> Include it in order to avoid when refactoring:
->>
->>    include/exec/translation-block.h:56:5: error: unknown type name 
->> 'vaddr'
->>       56 |     vaddr pc;
->>          |     ^
->>
->> Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
->> ---
->>   include/exec/translation-block.h | 1 +
->>   1 file changed, 1 insertion(+)
->>
->> diff --git a/include/exec/translation-block.h 
->> b/include/exec/translation-block.h
->> index a6d1af6e9b..b99afb0077 100644
->> --- a/include/exec/translation-block.h
->> +++ b/include/exec/translation-block.h
->> @@ -9,6 +9,7 @@
->>   #include "qemu/thread.h"
->>   #include "exec/cpu-common.h"
->> +#include "exec/vaddr.h"
->>   #ifdef CONFIG_USER_ONLY
->>   #include "qemu/interval-tree.h"
->>   #endif
+On 11/11/24 08:04, Paolo Savini wrote:
+> Hi Richard, Daniel,
 > 
-> I'm a bit confused by commit message, but it seems that this series has 
-> some commits that will not compile. Is that something acceptable?
+> This might be a silly question, but why do we need to ensure atomicity when emulating 
+> these guest instructions? I might be wrong but I didn't see an explicit requirement for 
+> the vector instructions to be atomic in the documentation of the RISC-V V extension.
 
-Because commits must be bisect-able, that is not acceptable.
+So that it works with threads?
 
-I took a lot of care to make this series builable on each step,
-but might have missed something. Can you point me at the
-configuration used and broken patch?
+The rvv extension talks about loads and stores to individual elements.  The risc-v integer 
+spec talks about the atomicity of loads and stores.  The rvv extension does not talk about 
+*lowering* atomicity requirements.
 
-I'll reword the commit description as:
 
----
-'vaddr' type is declared in "exec/vaddr.h".
-"exec/translation-block.h" uses this type without including
-the corresponding header. It works because this header is
-indirectly included, but won't work when the other headers
-are refactored:
-
-   [error]
-
-Explitly include "exec/vaddr.h" to avoid such problem in a
-few commits.
----
-
-Does it clarify?
-
-> If it's ok,
-> Reviewed-by: Pierrick Bouvier <pierrick.bouvier@linaro.org>
+> Anyway the patches from Max have landed and since one of them already uses memcpy() where 
+> this patch does and achieves a similar performance improvement we should probably drop 
+> this particular patch. I'm wondering whether we should be concerned about atomicity there 
+> too?
 > 
+> https://github.com/qemu/qemu/blob/134b443512825bed401b6e141447b8cdc22d2efe/target/riscv/ 
+> vector_helper.c#L224
+
+It *did* go through review for exactly this. You'll notice that the memcpy path is 
+restricted to esz == 1, i.e. bytes.
+
+
+r~
 
 
