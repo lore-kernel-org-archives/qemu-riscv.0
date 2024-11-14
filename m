@@ -4,59 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CC114D637D5
-	for <qemu-riscv@archiver.kernel.org>; Thu, 14 Nov 2024 01:16:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DD85BD637D5
+	for <qemu-riscv@archiver.kernel.org>; Thu, 14 Nov 2024 01:16:35 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tBOQU-0007Qz-9z; Wed, 13 Nov 2024 20:13:38 -0500
+	id 1tBOQt-0007dZ-9d; Wed, 13 Nov 2024 20:14:03 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tBOQS-0007QI-Kz
- for qemu-riscv@nongnu.org; Wed, 13 Nov 2024 20:13:36 -0500
-Received: from mail-wm1-x32d.google.com ([2a00:1450:4864:20::32d])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tBOQr-0007ci-Mf
+ for qemu-riscv@nongnu.org; Wed, 13 Nov 2024 20:14:01 -0500
+Received: from mail-wm1-x32c.google.com ([2a00:1450:4864:20::32c])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tBOQP-0001t6-66
- for qemu-riscv@nongnu.org; Wed, 13 Nov 2024 20:13:36 -0500
-Received: by mail-wm1-x32d.google.com with SMTP id
- 5b1f17b1804b1-431695fa98bso873675e9.3
- for <qemu-riscv@nongnu.org>; Wed, 13 Nov 2024 17:13:31 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tBOQp-0001zP-FL
+ for qemu-riscv@nongnu.org; Wed, 13 Nov 2024 20:14:01 -0500
+Received: by mail-wm1-x32c.google.com with SMTP id
+ 5b1f17b1804b1-4315e62afe0so1013335e9.1
+ for <qemu-riscv@nongnu.org>; Wed, 13 Nov 2024 17:13:59 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1731546809; x=1732151609; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=1EwqjnIRPctj4Nq1APqJi9S66/euonofsINQc3qIQuI=;
- b=CMYWPodBUiuAkKDJphMyENCBE+S04FzAN6K4E8EUifPUl5QAX6gTn1ZYU6Wmlw+G/X
- lTmQaoPCPWNiMNxrYiGUDw93rhLmazQaGUAQaF9DUURyghguM5IZ92FTXr5e0a4GpIoR
- PRaQdP4PJQItJc4wLYkj6lbsWsnKrFTI39AVduumu2WtXBzo32YiGGYsiTXCBk757lx6
- e7o1OS2uuobZ1vYiBUCEckl1yJcK/5Qydzqh39ZbuzfRkSwdk63YN816hv7o7GI4dnTd
- uIKtZEQ4LlfEdKDAMyx2dTSyg2jeecbxun2MJ6jPtVAOezh0rnCYKDM028A9gKdTsthO
- DWYw==
+ d=linaro.org; s=google; t=1731546837; x=1732151637; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=X3oqMeHT71R3KdP9eZWoYcjlbOfOwEShX9l191wOq00=;
+ b=n4+c/Fvo2dTX3JgaWSwTpv64eiLSaVvaJWy5x1ch0LlFGH6lVN/T2LLpSPUEHm2vd3
+ KULM1pv/8+TtEa4mheq2m/+QcoUPy78jZr3Gxg65p1UcwwKaEluP/yha0GtC8hdTRped
+ +34trvYpmLM6Lrei/Zz9+D42M/xcKAkxTM72CnVg6ZC8FKBGmDTfyjp6iRAlUho1aSMC
+ LB4GsQvr9NPKK2Qmsjt3HAM1Z9pnjgdFaGlcq77pWBqYrzcqoeuQ3xlDaTTTzaVjQUVx
+ ue4o0hjUNgB23SOmv4Z0yR1LBt9AfmNm1vQtnuIASaIzOKuuDxc6BjGnByPHgKebmxny
+ wLTw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731546809; x=1732151609;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=1EwqjnIRPctj4Nq1APqJi9S66/euonofsINQc3qIQuI=;
- b=ZYwg0XvvfjH1q1Dg+5l6OTrRM6YtpXFZFlbgQ1Pt04ZmCvC3oho/oBaXGjAKP+hhmj
- 1eo94wpaFV16UY9xdXUMAFFQ30OV5TKqMMJBrhdzh7EaMmvFHA9pzvsQeicKrV+VLVpX
- BGv+rKMRff6BrX9Xx/Pd2k7H5dHqcifx6tKyTEGF0t2q71YHawFrLl7OOLTa73V0Ke3P
- EMUORA4hOZawktAc3u70WloV9QUXhH8/9YwxRo9CX2WqlyPmbK3JyJLRvkNO5YmxrZy4
- Zqk+Q8YTPgkzAfc3dlj2EqYzEk1pIh7fbbIE9a7K+UFAosvCDMOaez6u3jIJ/M1on92d
- RxDQ==
+ d=1e100.net; s=20230601; t=1731546837; x=1732151637;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=X3oqMeHT71R3KdP9eZWoYcjlbOfOwEShX9l191wOq00=;
+ b=T7YoWffNMiEDD3HTU4zDz8+QcI1LDs1SK2JlV8KWO2EjCk2VyDCUVG1g4afnEYOxWd
+ GAEsI9nqaM3CdmXnBziZMK0i8glsk/mEAbt97I2u6/GDu+uo6XN9AeOg5eB9PtPi6Ka4
+ eRsklnHz/bdBaDgL5ARL2PEJ2DEJBBA2WJWbJIiJxoDbxXp7+W0fY9XJaYEl+KG/kh9U
+ vvRVF0vMZ65j7Lg/7l+iRF9sjmoUcwESUem6fn4tIubwT/6DskU3sjCyj9wkoXfelI7N
+ mAKnkdfX09TwFu2BT6KPKF8xP9nAXWNZ0M1eRNeQeyhxWH8LgrFsMTSP7TQ1K9eSPfZP
+ lxMQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWcT0X4ZsBvt9Xeiz9aNJxcMDcbAzT+KEG76Av4wJ0jE4793DvP/+E7YFvSA75ysmzxkyWW8PuWBvfE@nongnu.org
-X-Gm-Message-State: AOJu0Yx7s7WfLoboEQeyU9JPRbwvEtF6uzy3RE8Lul/Ip3GAzWgrsTcY
- Si0LePFDrR26AyncZGHpl1fUjDGvj+iSDGTjUKAk5Mlyk09g02eqVFR9r7dlP1M=
-X-Google-Smtp-Source: AGHT+IGZ4mtQztDulS9O9dxe4sHklabKWPOdh+RwHBXIF1ImFkUSMTktTv3L7h4tm6Iw0lzhApxUAQ==
-X-Received: by 2002:a05:6000:70d:b0:37d:3e6d:3c2f with SMTP id
- ffacd0b85a97d-381f1883bc1mr18783646f8f.47.1731546809627; 
- Wed, 13 Nov 2024 17:13:29 -0800 (PST)
+ AJvYcCVVgsxhPXj8kAvPq54bq1CGxA7+Eg89gfrvOXQC3QPSKAZSuP+Vwgd6qkjzJ/utDvkCvDb5PZDvJzPE@nongnu.org
+X-Gm-Message-State: AOJu0Yz5+4jRwtBpJSdNMXrEUrbFWcUK3/NHcLQLg5EC9DZBMsidKJmV
+ P7rGs2ggvGPIS6xvLGfy1ALGxwHd1D7vy3CnU5gZuBv/zoQ7jRSbRUttHbmK7P4=
+X-Google-Smtp-Source: AGHT+IFH/9CySRShC94nFw9UunKX2sRCoFuNlkS4DCoQU46r6V+s7M3YfRcJ8MxE5SjH5yjXwvy3Zg==
+X-Received: by 2002:a05:600c:a384:b0:431:1868:417f with SMTP id
+ 5b1f17b1804b1-432d2730ce1mr69929325e9.17.1731546837008; 
+ Wed, 13 Nov 2024 17:13:57 -0800 (PST)
 Received: from localhost.localdomain ([176.187.209.238])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-381eda13780sm19409085f8f.109.2024.11.13.17.13.26
+ 5b1f17b1804b1-432dac0aea8sm1385325e9.31.2024.11.13.17.13.54
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Wed, 13 Nov 2024 17:13:28 -0800 (PST)
+ Wed, 13 Nov 2024 17:13:56 -0800 (PST)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: Paolo Bonzini <pbonzini@redhat.com>,
  Richard Henderson <richard.henderson@linaro.org>,
@@ -69,15 +70,18 @@ Cc: qemu-ppc@nongnu.org, Thomas Huth <thuth@redhat.com>, qemu-arm@nongnu.org,
  =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
  qemu-s390x@nongnu.org,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-Subject: [PATCH 00/24] exec: Build up 'cputlb.h' and 'ram_addr.h' headers
-Date: Thu, 14 Nov 2024 02:12:45 +0100
-Message-ID: <20241114011310.3615-1-philmd@linaro.org>
+Subject: [PATCH 04/24] accel/tcg: Include missing 'exec/translation-block.h'
+ header
+Date: Thu, 14 Nov 2024 02:12:49 +0100
+Message-ID: <20241114011310.3615-5-philmd@linaro.org>
 X-Mailer: git-send-email 2.45.2
+In-Reply-To: <20241114011310.3615-1-philmd@linaro.org>
+References: <20241114011310.3615-1-philmd@linaro.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::32d;
- envelope-from=philmd@linaro.org; helo=mail-wm1-x32d.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::32c;
+ envelope-from=philmd@linaro.org; helo=mail-wm1-x32c.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -100,157 +104,36 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Hi,
+TB compile flags are defined in "exec/translation-block.h".
+Include it in order to avoid when refactoring:
 
-"exec/exec-all.h" and "exec/cpu-all.h" both contains a mess
-of unrelated APIs. More importantly, they contain target
-specific declarations, making any file including them to
-become target specific, thus not buildable in common meson
-sets.
+  accel/tcg/tcg-accel-ops.c:62:36: error: use of undeclared identifier 'CF_CLUSTER_SHIFT'
+     62 |     cflags = cpu->cluster_index << CF_CLUSTER_SHIFT;
+        |                                    ^
+  accel/tcg/tcg-accel-ops.c:64:26: error: use of undeclared identifier 'CF_PARALLEL'
+     64 |     cflags |= parallel ? CF_PARALLEL : 0;
+        |                          ^
+  accel/tcg/tcg-accel-ops.c:65:34: error: use of undeclared identifier 'CF_USE_ICOUNT'
+     65 |     cflags |= icount_enabled() ? CF_USE_ICOUNT : 0;
+        |                                  ^
 
-This series first extract the CPU TLB API scattered in various
-headers, then similarly strengthen the ram_addr_t API. Doing
-so we figured extracting "user/guest-host.h" was necessary.
+Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+---
+ accel/tcg/tcg-accel-ops.c | 1 +
+ 1 file changed, 1 insertion(+)
 
-Before we have to include various missing headers to avoid
-compilation breakage when refactoring.
-
-The relevant part of the diff-stat is:
-
- include/exec/cpu-all.h        |  59 +-------------------
- include/exec/cpu-common.h     |  56 +------------------
- include/exec/cpu_ldst.h       |  73 +------------------------
- include/exec/exec-all.h       | 259 ------------------------------------------
- include/exec/ram_addr.h       | 56 ++-----------------
- include/sysemu/ram_addr.h     | 129 ++++++++++++++++++++++++++++++++++++++
- include/exec/cputlb.h         | 310 ++++++++++++++++++++++++++++++++++++++++++
- include/user/guest-host.h     |  87 +++++++++++++++++++++++++++++
-
-Hoping it makes sense!
-
-Please review,
-
-Phil.
-
-Philippe Mathieu-Daudé (24):
-  exec/cpu-all: Include missing 'exec/cpu-defs.h' header
-  exec/cpu-defs: Remove unnecessary headers
-  exec/translation-block: Include missing 'exec/vaddr.h' header
-  accel/tcg: Include missing 'exec/translation-block.h' header
-  target/i386/helper: Include missing 'exec/translation-block.h' header
-  target/rx/cpu: Include missing 'exec/translation-block.h' header
-  system/watchpoint: Include missing 'exec/cpu-all.h' header
-  linux-user/aarch64/mte: Include missing 'user/abitypes.h' header
-  target/arm/mte: Restrict 'exec/ram_addr.h' to system emulation
-  target/arm/cpu: Restrict cpu_untagged_addr() to user emulation
-  exec: Introduce 'user/guest-host.h' header
-  accel/tcg: Have tlb_vaddr_to_host() use vaddr type
-  exec: Declare tlb_reset_dirty*() in 'exec/cputlb.h'
-  exec: Declare tlb_init/destroy() in 'exec/cputlb.h'
-  exec: Declare tlb_set_page_full() in 'exec/cputlb.h'
-  exec: Declare tlb_set_page_with_attrs() in 'exec/cputlb.h'
-  exec: Declare tlb_set_page() in 'exec/cputlb.h'
-  exec: Declare tlb_flush*() in 'exec/cputlb.h'
-  exec: Declare tlb_hit*() in 'exec/cputlb.h'
-  exec: Declare tlb_vaddr_to_host() in 'exec/cputlb.h'
-  exec: Extract CPU physical memory API to 'sysemu/physmem-target.h'
-  exec/cpu-common: Move ram_addr_t related methods to 'exec/ram_addr.h'
-  exec/memory: Move qemu_map_ram_ptr() declaration to 'exec/ram_addr.h'
-  exec: Move 'ram_addr.h' header under sysemu/ namespace
-
- MAINTAINERS                                   |   3 +-
- include/exec/cpu-all.h                        |  59 +---
- include/exec/cpu-common.h                     |  56 +---
- include/exec/cpu-defs.h                       |   8 -
- include/exec/cpu_ldst.h                       |  73 +----
- include/exec/cputlb.h                         | 310 +++++++++++++++++-
- include/exec/exec-all.h                       | 259 ---------------
- include/exec/memory.h                         |   2 +-
- include/exec/translation-block.h              |   3 +-
- .../ram_addr.h => sysemu/physmem-target.h}    |  56 +---
- include/sysemu/ram_addr.h                     | 129 ++++++++
- include/user/guest-host.h                     |  87 +++++
- linux-user/aarch64/mte_user_helper.h          |   2 +
- target/arm/cpu.h                              |   5 +-
- accel/kvm/kvm-all.c                           |   3 +-
- accel/tcg/cpu-exec.c                          |   1 +
- accel/tcg/cputlb.c                            |  28 +-
- accel/tcg/tcg-accel-ops.c                     |   2 +
- accel/tcg/translate-all.c                     |   3 +-
- cpu-target.c                                  |   1 +
- hw/intc/armv7m_nvic.c                         |   2 +-
- hw/ppc/spapr.c                                |   3 +-
- hw/ppc/spapr_caps.c                           |   3 +-
- hw/ppc/spapr_nested.c                         |   1 +
- hw/ppc/spapr_pci.c                            |   3 +-
- hw/remote/memory.c                            |   3 +-
- hw/remote/proxy-memory-listener.c             |   3 +-
- hw/s390x/s390-stattrib-kvm.c                  |   3 +-
- hw/s390x/s390-stattrib.c                      |   3 +-
- hw/s390x/s390-virtio-ccw.c                    |   3 +-
- hw/sh4/sh7750.c                               |   1 +
- hw/vfio/common.c                              |   3 +-
- hw/vfio/container.c                           |   3 +-
- hw/vfio/iommufd.c                             |   3 +-
- hw/vfio/migration.c                           |   3 +-
- hw/vfio/spapr.c                               |   3 +-
- hw/virtio/virtio-mem.c                        |   3 +-
- migration/ram.c                               |   3 +-
- plugins/api.c                                 |   3 +-
- system/memory.c                               |   3 +-
- system/physmem.c                              |   4 +-
- system/watchpoint.c                           |   3 +-
- target/alpha/helper.c                         |   2 +-
- target/alpha/sys_helper.c                     |   2 +-
- target/arm/helper.c                           |   1 +
- target/arm/tcg/helper-a64.c                   |   1 +
- target/arm/tcg/mte_helper.c                   |   5 +-
- target/avr/helper.c                           |   2 +-
- target/hppa/mem_helper.c                      |   1 +
- target/i386/helper.c                          |   2 +
- target/i386/machine.c                         |   2 +-
- target/i386/tcg/fpu_helper.c                  |   2 +-
- target/i386/tcg/misc_helper.c                 |   2 +-
- target/i386/tcg/sysemu/excp_helper.c          |   2 +-
- target/i386/tcg/sysemu/misc_helper.c          |   2 +-
- target/i386/tcg/sysemu/svm_helper.c           |   2 +-
- target/loongarch/tcg/csr_helper.c             |   2 +-
- target/loongarch/tcg/tlb_helper.c             |   2 +-
- target/m68k/helper.c                          |   2 +-
- target/microblaze/helper.c                    |   2 +-
- target/microblaze/mmu.c                       |   2 +-
- target/mips/sysemu/cp0.c                      |   2 +-
- target/mips/tcg/sysemu/cp0_helper.c           |   2 +-
- target/mips/tcg/sysemu/tlb_helper.c           |   2 +-
- target/openrisc/mmu.c                         |   2 +-
- target/openrisc/sys_helper.c                  |   1 +
- target/ppc/helper_regs.c                      |   2 +-
- target/ppc/kvm.c                              |   3 +-
- target/ppc/mem_helper.c                       |   1 +
- target/ppc/misc_helper.c                      |   1 +
- target/ppc/mmu_helper.c                       |   1 +
- target/riscv/cpu_helper.c                     |   2 +-
- target/riscv/csr.c                            |   1 +
- target/riscv/op_helper.c                      |   1 +
- target/riscv/pmp.c                            |   2 +-
- target/rx/cpu.c                               |   3 +-
- target/s390x/gdbstub.c                        |   2 +-
- target/s390x/kvm/kvm.c                        |   3 +-
- target/s390x/sigp.c                           |   2 +-
- target/s390x/tcg/excp_helper.c                |   1 +
- target/s390x/tcg/mem_helper.c                 |   1 +
- target/s390x/tcg/misc_helper.c                |   1 +
- target/sh4/helper.c                           |   2 +-
- target/sparc/ldst_helper.c                    |   1 +
- target/sparc/mmu_helper.c                     |   2 +-
- target/tricore/helper.c                       |   2 +-
- target/xtensa/helper.c                        |   2 +-
- target/xtensa/mmu_helper.c                    |   1 +
- 88 files changed, 670 insertions(+), 566 deletions(-)
- rename include/{exec/ram_addr.h => sysemu/physmem-target.h} (88%)
- create mode 100644 include/sysemu/ram_addr.h
- create mode 100644 include/user/guest-host.h
-
+diff --git a/accel/tcg/tcg-accel-ops.c b/accel/tcg/tcg-accel-ops.c
+index 3c19e68a79..22486c5dff 100644
+--- a/accel/tcg/tcg-accel-ops.c
++++ b/accel/tcg/tcg-accel-ops.c
+@@ -35,6 +35,7 @@
+ #include "exec/exec-all.h"
+ #include "exec/hwaddr.h"
+ #include "exec/tb-flush.h"
++#include "exec/translation-block.h"
+ #include "gdbstub/enums.h"
+ 
+ #include "hw/core/cpu.h"
 -- 
 2.45.2
 
