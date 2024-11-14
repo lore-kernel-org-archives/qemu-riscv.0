@@ -4,68 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 95D20D6A22D
-	for <qemu-riscv@archiver.kernel.org>; Thu, 14 Nov 2024 20:49:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2E405D6A22F
+	for <qemu-riscv@archiver.kernel.org>; Thu, 14 Nov 2024 20:50:25 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tBgmE-0003zZ-Ip; Thu, 14 Nov 2024 15:49:18 -0500
+	id 1tBgmn-000515-Fw; Thu, 14 Nov 2024 15:49:53 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1tBgm3-0003sN-T4
- for qemu-riscv@nongnu.org; Thu, 14 Nov 2024 15:49:10 -0500
-Received: from mail-pj1-x1030.google.com ([2607:f8b0:4864:20::1030])
+ id 1tBgmk-0004ze-B2
+ for qemu-riscv@nongnu.org; Thu, 14 Nov 2024 15:49:51 -0500
+Received: from mail-pg1-x52f.google.com ([2607:f8b0:4864:20::52f])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1tBglz-000514-Pi
- for qemu-riscv@nongnu.org; Thu, 14 Nov 2024 15:49:06 -0500
-Received: by mail-pj1-x1030.google.com with SMTP id
- 98e67ed59e1d1-2ea0500a300so906505a91.0
- for <qemu-riscv@nongnu.org>; Thu, 14 Nov 2024 12:48:59 -0800 (PST)
+ id 1tBgmh-00053x-LM
+ for qemu-riscv@nongnu.org; Thu, 14 Nov 2024 15:49:50 -0500
+Received: by mail-pg1-x52f.google.com with SMTP id
+ 41be03b00d2f7-7e6d04f74faso781351a12.1
+ for <qemu-riscv@nongnu.org>; Thu, 14 Nov 2024 12:49:47 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1731617338; x=1732222138; darn=nongnu.org;
+ d=linaro.org; s=google; t=1731617386; x=1732222186; darn=nongnu.org;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=NvT91xuPxiPPi83Z5rvcALQMp9g2aGeDYw5FZ2UVvgA=;
- b=DWofB5B4e5W8YGFS810ui+So0aH6i6PgqglJWOvaM1noOQs7YY7IsTAb2WEj5MeITE
- zBBHO2jaKeXetBHbY6uTH5r/35Xr77vR9S8WAkC6in2+3MwoOSxXsxbhITUiDjmzMik6
- fMBcmrVltQasBLwPI5vOMFQ82qAMjhj5jRrwD71KWO6E5IM2TH3yDQvb7+EKh2ApJXRb
- INYMzdfA2TEdu5XdvaIKwo5ptjtB0v4tq2RHTph9WQuD0wD3bIGium3LydEBl2EYkkAY
- tPwben//yNKdjR41UKIAzhHQBWfV4EFPI8CweqUZXPrff8McQ1Cq0RA2euofvVec0g2T
- v4Hg==
+ bh=lJUD9uM5PxKptuVyfms2yHOSK2OiJKniu5sJIcGJ8Bs=;
+ b=A0j7sDYItP8UgnG6mxdw+aGyxQmBTJxptPJIiGCHv68X2o7TtEhXDUQbOmqdo/W08k
+ YRM+PwmOGBOzM2qJzmuer3p8mOx/0EpUDdWIfRvhNuOYjoiXA1RQj/TTl5WyTilgko1k
+ aCmD2Pp99anMs+56+GCqawC2MOPEEPvSVHaesSpHMGoA8HwggApzoC5Z3EsEII1wSq6E
+ LN5gRDqyUveggqPbqjbpe6xb/rvtlqEm9KT6BPCzaZdSvbJyGZvuEcsApTpJ3kHDvLLO
+ eMxem7G+gZTV0xhaXIsv4f5IpJrUkmArf6o81DrUr1RLc3Zpo520IQU7ymy9ULZdGl3l
+ kUxQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731617338; x=1732222138;
+ d=1e100.net; s=20230601; t=1731617386; x=1732222186;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=NvT91xuPxiPPi83Z5rvcALQMp9g2aGeDYw5FZ2UVvgA=;
- b=hCxlhl2NiDf1+oSZp2br7i3V24kitYBLB/uY+pcw/C+2wRc5K/u7Kvcn7eeKkFBJBu
- Yj+3kyGqmmfb91PqwAw4kGO4T73bDAUkjbENrlZFXFzpSAXcdgxYavxTrwPNdHG1aBFQ
- Slc8PKVLepuV8sqwxcemuzsLkZvY6825oSDOKi4ISGF2Vb6UkXjPemoqPKDzRAwqgsg6
- 95FD3NckkMOM+u+mTYez9+r/vF1ZLfrHNgmDJFKr2QsNxDwuD7pqEoDChAGZ6w6mRP7z
- B1j4UIqy2gFALoa1mJepIfnTYiuNuJE4p/Ymr8PABoN5whhAjeU+N/oc8pqQu5c7Jfq9
- eDyA==
+ bh=lJUD9uM5PxKptuVyfms2yHOSK2OiJKniu5sJIcGJ8Bs=;
+ b=WE82zHdi7eYFzTU9Jy5d7r2bBaiN1xtZhOMhYr31meugKUL5CDp2IUuYG6ywWZNp/H
+ qxrg1tnpUNq8VdCVd+SJ6xGnI4F0CjiZS+16an+I7EFS0mdx1MfKGjIiZoTJLIpmcg9e
+ JGVdXd7zZJwpZBkdmY99XSARbcSz0HzcSy+RS0H/ScwrdpQLnU+5JpFobxZwwwUOc+sX
+ X8Sr7Nl+gaIa7gazakM6jXCcVsecpFae2+dNJqrEQSIMwVogIO+si/zIWrsc12t3MTiS
+ cRjmf4CdBKrYP52w/HO31LZ0Si0q1rOhgzbjpnWVp9EXqDFDNcxZBd3ZJGX9qgvhQG6z
+ 3rYw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWhU3WTiLdsI3fHVMndaBC0WPPaJAvs+GjhDzedAeeuQGwoy7dTBgHJlq/ddLPD6ZkpsxIoqwQstXrQ@nongnu.org
-X-Gm-Message-State: AOJu0YyALBW6uTQP/RizyVJ5Uc2MS54hnW5nhRnMhAiEigX4OTxSBztc
- DdhE2ceXyod44GngUi1huxcmAIgUAvQq9+ZytmMbx3WExGnLC820skZiaVxfeJc=
-X-Google-Smtp-Source: AGHT+IE91X7Fcv7dxFSDLh9EGDMQ7wgTgogGy4GFohsdJZGpjj6piuiO4JPRxltr2nHCoXNPK4VLlg==
-X-Received: by 2002:a17:90b:1c0c:b0:2e2:e2f1:aee with SMTP id
- 98e67ed59e1d1-2ea154fc4a5mr343688a91.22.1731617337991; 
- Thu, 14 Nov 2024 12:48:57 -0800 (PST)
+ AJvYcCV0itzFBhucM4dHTJFKFXf7SMVNM1/8nSEByQvymLD+artN+OO0sMYehdqQtcjUODFtraY2E9Ap1uck@nongnu.org
+X-Gm-Message-State: AOJu0YycvBk3nZWvZjigmiLVs8HJf/gq/lQezKuHS8S9cpvD7aDtLE5P
+ aFbFyXmDk9z0wXJhy7wndw8V+fm5Ztm74p0HB10lQnCT9btG741bYZY/kLNrSmA=
+X-Google-Smtp-Source: AGHT+IH2rDc3YgY30ffUov9J2rcLzG333Y6x/mq7BzZ40lFfXo/a+HwYk+K6wda8MTcdzp3r4dC6ag==
+X-Received: by 2002:a17:90b:5292:b0:2e2:bdaa:baad with SMTP id
+ 98e67ed59e1d1-2ea14e1c2d6mr867046a91.7.1731617386107; 
+ Thu, 14 Nov 2024 12:49:46 -0800 (PST)
 Received: from [192.168.0.4] ([71.212.136.242])
  by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-2ea024ee428sm1731777a91.50.2024.11.14.12.48.57
+ 98e67ed59e1d1-2ea06f4b191sm1595087a91.27.2024.11.14.12.49.45
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 14 Nov 2024 12:48:57 -0800 (PST)
-Message-ID: <a1db36ca-47db-41c2-a60f-59514b33b757@linaro.org>
-Date: Thu, 14 Nov 2024 12:48:55 -0800
+ Thu, 14 Nov 2024 12:49:45 -0800 (PST)
+Message-ID: <6dfe7a0c-af7f-4de6-a8e5-a6b9a0d8edc7@linaro.org>
+Date: Thu, 14 Nov 2024 12:49:43 -0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 23/24] exec/memory: Move qemu_map_ram_ptr() declaration to
- 'exec/ram_addr.h'
+Subject: Re: [PATCH 24/24] exec: Move 'ram_addr.h' header under sysemu/
+ namespace
 To: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
  Paolo Bonzini <pbonzini@redhat.com>, Anton Johansson <anjo@rev.ng>,
  qemu-devel@nongnu.org
@@ -76,14 +76,14 @@ Cc: qemu-ppc@nongnu.org, Thomas Huth <thuth@redhat.com>, qemu-arm@nongnu.org,
  Peter Maydell <peter.maydell@linaro.org>,
  =?UTF-8?Q?Alex_Benn=C3=A9e?= <alex.bennee@linaro.org>, qemu-s390x@nongnu.org
 References: <20241114011310.3615-1-philmd@linaro.org>
- <20241114011310.3615-24-philmd@linaro.org>
+ <20241114011310.3615-25-philmd@linaro.org>
 Content-Language: en-US
 From: Richard Henderson <richard.henderson@linaro.org>
-In-Reply-To: <20241114011310.3615-24-philmd@linaro.org>
+In-Reply-To: <20241114011310.3615-25-philmd@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1030;
- envelope-from=richard.henderson@linaro.org; helo=mail-pj1-x1030.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::52f;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pg1-x52f.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -107,49 +107,45 @@ Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 On 11/13/24 17:13, Philippe Mathieu-Daudé wrote:
-> Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+> "ram_addr.h" contains declarations specific to system emulation,
+> move it under the sysemu/ directory to clarify the API namespace.
+> 
+> Signed-off-by: Philippe Mathieu-Daudé<philmd@linaro.org>
 > ---
->   include/exec/memory.h   | 2 +-
->   include/exec/ram_addr.h | 1 +
->   2 files changed, 2 insertions(+), 1 deletion(-)
+>   MAINTAINERS                         | 2 +-
+>   include/exec/cpu-common.h           | 2 +-
+>   include/exec/memory.h               | 2 +-
+>   include/exec/translation-block.h    | 2 +-
+>   include/sysemu/physmem-target.h     | 2 +-
+>   include/{exec => sysemu}/ram_addr.h | 0
+>   accel/kvm/kvm-all.c                 | 2 +-
+>   accel/tcg/cputlb.c                  | 2 +-
+>   accel/tcg/translate-all.c           | 2 +-
+>   hw/ppc/spapr.c                      | 2 +-
+>   hw/ppc/spapr_caps.c                 | 2 +-
+>   hw/ppc/spapr_pci.c                  | 2 +-
+>   hw/remote/memory.c                  | 2 +-
+>   hw/remote/proxy-memory-listener.c   | 2 +-
+>   hw/s390x/s390-stattrib-kvm.c        | 2 +-
+>   hw/s390x/s390-stattrib.c            | 2 +-
+>   hw/s390x/s390-virtio-ccw.c          | 2 +-
+>   hw/vfio/common.c                    | 2 +-
+>   hw/vfio/container.c                 | 2 +-
+>   hw/vfio/iommufd.c                   | 2 +-
+>   hw/vfio/migration.c                 | 2 +-
+>   hw/vfio/spapr.c                     | 2 +-
+>   hw/virtio/virtio-mem.c              | 2 +-
+>   migration/ram.c                     | 2 +-
+>   plugins/api.c                       | 2 +-
+>   system/memory.c                     | 2 +-
+>   system/physmem.c                    | 2 +-
+>   target/arm/tcg/mte_helper.c         | 2 +-
+>   target/ppc/kvm.c                    | 2 +-
+>   target/s390x/kvm/kvm.c              | 2 +-
+>   30 files changed, 29 insertions(+), 29 deletions(-)
+>   rename include/{exec => sysemu}/ram_addr.h (100%)
 
 Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 
-
 r~
-
-> 
-> diff --git a/include/exec/memory.h b/include/exec/memory.h
-> index 9458e2801d..58faa3eb08 100644
-> --- a/include/exec/memory.h
-> +++ b/include/exec/memory.h
-> @@ -28,6 +28,7 @@
->   #include "qemu/notify.h"
->   #include "qom/object.h"
->   #include "qemu/rcu.h"
-> +#include "exec/ram_addr.h"
->   
->   #define RAM_ADDR_INVALID (~(ram_addr_t)0)
->   
-> @@ -2973,7 +2974,6 @@ MemTxResult flatview_read_continue(FlatView *fv, hwaddr addr,
->                                      MemTxAttrs attrs, void *buf,
->                                      hwaddr len, hwaddr addr1, hwaddr l,
->                                      MemoryRegion *mr);
-> -void *qemu_map_ram_ptr(RAMBlock *ram_block, ram_addr_t addr);
->   
->   /* Internal functions, part of the implementation of address_space_read_cached
->    * and address_space_write_cached.  */
-> diff --git a/include/exec/ram_addr.h b/include/exec/ram_addr.h
-> index e0620ddb03..c4f220ae93 100644
-> --- a/include/exec/ram_addr.h
-> +++ b/include/exec/ram_addr.h
-> @@ -73,6 +73,7 @@ void qemu_ram_set_migratable(RAMBlock *rb);
->   void qemu_ram_unset_migratable(RAMBlock *rb);
->   bool qemu_ram_is_named_file(RAMBlock *rb);
->   int qemu_ram_get_fd(RAMBlock *rb);
-> +void *qemu_map_ram_ptr(RAMBlock *ram_block, ram_addr_t addr);
->   
->   size_t qemu_ram_pagesize(RAMBlock *block);
->   size_t qemu_ram_pagesize_largest(void);
-
 
