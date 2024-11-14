@@ -4,75 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1CE0ED65C57
-	for <qemu-riscv@archiver.kernel.org>; Thu, 14 Nov 2024 08:29:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 09A53D65C57
+	for <qemu-riscv@archiver.kernel.org>; Thu, 14 Nov 2024 08:34:20 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tBVE5-0003Cv-Sg; Thu, 14 Nov 2024 03:29:17 -0500
+	id 1tBVIO-0005e8-Ip; Thu, 14 Nov 2024 03:33:44 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1tBVE1-0003B2-4v
- for qemu-riscv@nongnu.org; Thu, 14 Nov 2024 03:29:13 -0500
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
+ (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1tBVIM-0005cu-3p
+ for qemu-riscv@nongnu.org; Thu, 14 Nov 2024 03:33:42 -0500
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1tBVDz-0001jB-DH
- for qemu-riscv@nongnu.org; Thu, 14 Nov 2024 03:29:12 -0500
+ (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1tBVIK-0004Sl-DL
+ for qemu-riscv@nongnu.org; Thu, 14 Nov 2024 03:33:41 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1731572949;
+ s=mimecast20190719; t=1731573219;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
- bh=K/Tu8mWGJ8cTc6lgQaWkyV6i5KYU6zfwlS+5jmko0W8=;
- b=QGgyQLJVEwBVuvR++4gSk8xm9Wjnrh9/qp5YanduqA5Ohkp8S+1aedrzBRu5skAB3W25xj
- o7JWOuTRzYb1s5A8+WnQJ/7wd/h7OtXAMIzN71+vYJbOCIgqDVewQxkQ0s3/iATO+MSK7Y
- dzdLipgiIhpop32ff9rqvVlHHBkduUo=
-Received: from mail-qv1-f70.google.com (mail-qv1-f70.google.com
- [209.85.219.70]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=z2JUGD1FdISLg8yGUupnvIgAzOhJ6vDUlvcn82eWaA4=;
+ b=TZqPV+hKwovE4ZQQnEwGC0bYF6izb6fg9YGOugnEb2LwRRexQD62Q3z21KOeFM0rOpMLDi
+ mgSW/Yv4qXFinsISOAa1leuGxkAwMiBjh7jT/MNr7JjL6q6pzBsWg/EJx4OOcRFlSTJR4G
+ 8jm9fHWYI4iEe2p9Bq2K8CXQnLEhnwM=
+Received: from mail-qk1-f200.google.com (mail-qk1-f200.google.com
+ [209.85.222.200]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-97-uUDpjzvONv-2rzprspVXeQ-1; Thu, 14 Nov 2024 03:29:08 -0500
-X-MC-Unique: uUDpjzvONv-2rzprspVXeQ-1
-X-Mimecast-MFC-AGG-ID: uUDpjzvONv-2rzprspVXeQ
-Received: by mail-qv1-f70.google.com with SMTP id
- 6a1803df08f44-6cbf76b01deso4358706d6.2
- for <qemu-riscv@nongnu.org>; Thu, 14 Nov 2024 00:29:08 -0800 (PST)
+ us-mta-670-eXm6QpMNNJ2oXOwe1nD81Q-1; Thu, 14 Nov 2024 03:33:37 -0500
+X-MC-Unique: eXm6QpMNNJ2oXOwe1nD81Q-1
+X-Mimecast-MFC-AGG-ID: eXm6QpMNNJ2oXOwe1nD81Q
+Received: by mail-qk1-f200.google.com with SMTP id
+ af79cd13be357-7b163e0a5ecso50518785a.1
+ for <qemu-riscv@nongnu.org>; Thu, 14 Nov 2024 00:33:37 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731572948; x=1732177748;
+ d=1e100.net; s=20230601; t=1731573217; x=1732178017;
  h=content-transfer-encoding:in-reply-to:autocrypt:content-language
  :from:references:cc:to:subject:user-agent:mime-version:date
  :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=K/Tu8mWGJ8cTc6lgQaWkyV6i5KYU6zfwlS+5jmko0W8=;
- b=U/tKQOYGeULywLrnxRj9DR27lfAKXk6RisNKZfsOEuGuu11xSJAvCcqxeYZkiVXm67
- XWJkmx+oL5SWL1w8NWcQg8ysSLJ1E5er0OJqp3/H4Zv/sXhUcz0zlCchBX0KFU0FRljY
- tZc1QJxLPyr4qxvKxd6ujAjOYdApmn4k60xfkYFSDYj/QA4saeeXDMNs5suuvnpnSnat
- o8duwCHKdMcR2Ey8lTDGx3e1dzqtihmiFHAdbCskfPzjPhnTtdVDT6pZABvyN19hyoYx
- a7zoHB/2twtGHjVdYlJKG9G2Wa4aE/ZxzEYFi0IdQoLixFI1Y/9LFyc0lZ1Wum8a8X0/
- iJzA==
+ bh=z2JUGD1FdISLg8yGUupnvIgAzOhJ6vDUlvcn82eWaA4=;
+ b=b6eDLRldrtbJIjWjZff4okks8vaj9rPvDcxvXbUrAv09MFmQBKIHZmmcAAy8JeYiZr
+ xuCadb7c74H3vFV9EdRiysuteBLQ1j7+oWGtvyzcEmuVoFZwtWi+A90o9Ck40aChvCUu
+ 4VyH5YFELYBa8s0sPS3NgWGqEFl6sVnQWitdToEuiEziGYHZt1BX1GBqmqbpENmjW1EF
+ ci8Jq6LLCApbOEBc6NlRb9cT0Br66mUNnOahL+N50advbUdGvcf5WAj3G1DlwHeWNS/Y
+ MOTj1gpeXoWrEbyTGZgdcxo0TLoa5omAovpY7gLvbCPRJ9vwqrjVp7VV5U2QUdl4PYEM
+ ubdQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXxT0yme1KLAgkmNNeoTq7Yi5WLTRvby3sxr/TgvUKOzdvymhVFr/YhYTcOvkYDwlK2979C1OlXTcMn@nongnu.org
-X-Gm-Message-State: AOJu0Yzxov2wbPUV4ldDE+YVIpb7V4bfuyx4E18Nmg97ZPdoAduaSe4m
- YbGTzTxRJFVBrvLIX9lZujRHf5kzlmfhosFl3Zn09F7f8y+jr1MPkwDbXoR5136KyLRANMgSFlU
- DZ09T/V9R7XxQwlbH15OVYrh1sFT+Zap55FaA4pUVaK4MgwzJ47ob
-X-Received: by 2002:a05:6214:5c09:b0:6c3:5b9e:699d with SMTP id
- 6a1803df08f44-6d3edd1f74cmr13821306d6.2.1731572948020; 
- Thu, 14 Nov 2024 00:29:08 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IHX4OXCs2+JHAI9/IIu9eUIAlke4K6lR3FDWl9pO7ngoCyIwZ5wApGFV0DjFOr1Xxfiajp76Q==
-X-Received: by 2002:a05:6214:5c09:b0:6c3:5b9e:699d with SMTP id
- 6a1803df08f44-6d3edd1f74cmr13821126d6.2.1731572947795; 
- Thu, 14 Nov 2024 00:29:07 -0800 (PST)
+ AJvYcCVrtWWDtjTQE/2bYsz21ffufAqbbjlaOhURfI7IKQvpVGep/3keHN78gnKiXXnKjubXsUG65ZxkBkre@nongnu.org
+X-Gm-Message-State: AOJu0YxU2L7TDj3NMGjFGZyVFNoHrjMiR7JmnX1PK+sNp6fZd00xNupD
+ hdsZr+3qHdcc+ObkxMhpoh5g5wjuEPuQEvtuQc+dukeop6VreZ5m0SizuM7zLZe+dE77wlXgjh5
+ rnsFEfZ5DyMaFijOeL7+IgEsJyCL1YI4Oh89aoVpEOPgZzxEXyu/R
+X-Received: by 2002:a05:620a:178b:b0:7a9:b8dd:eb96 with SMTP id
+ af79cd13be357-7b331ebff74mr2703926185a.30.1731573217104; 
+ Thu, 14 Nov 2024 00:33:37 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IGfoemy/jsRwPXha/CfL/GUotgSk6H4wVkJ70EZq0A+yrdSkJTvlE4UeD5037V0uH1kYXAu+A==
+X-Received: by 2002:a05:620a:178b:b0:7a9:b8dd:eb96 with SMTP id
+ af79cd13be357-7b331ebff74mr2703923885a.30.1731573216816; 
+ Thu, 14 Nov 2024 00:33:36 -0800 (PST)
 Received: from [192.168.0.7] (ip-109-42-49-115.web.vodafone.de.
  [109.42.49.115]) by smtp.gmail.com with ESMTPSA id
- af79cd13be357-7b35ca3059asm25437385a.84.2024.11.14.00.29.04
+ af79cd13be357-7b35ca30ea8sm25994585a.90.2024.11.14.00.33.32
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 14 Nov 2024 00:29:07 -0800 (PST)
-Message-ID: <e2792708-d2d1-4d13-8b43-103cabdb279e@redhat.com>
-Date: Thu, 14 Nov 2024 09:29:01 +0100
+ Thu, 14 Nov 2024 00:33:36 -0800 (PST)
+Message-ID: <7bf93a20-a134-4bb7-a572-e74ca357e602@redhat.com>
+Date: Thu, 14 Nov 2024 09:33:30 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 01/24] exec/cpu-all: Include missing 'exec/cpu-defs.h'
- header
+Subject: Re: [PATCH 02/24] exec/cpu-defs: Remove unnecessary headers
 To: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
  Paolo Bonzini <pbonzini@redhat.com>,
  Richard Henderson <richard.henderson@linaro.org>,
@@ -83,7 +82,7 @@ Cc: qemu-ppc@nongnu.org, qemu-arm@nongnu.org, Peter Xu <peterx@redhat.com>,
  Peter Maydell <peter.maydell@linaro.org>,
  =?UTF-8?Q?Alex_Benn=C3=A9e?= <alex.bennee@linaro.org>, qemu-s390x@nongnu.org
 References: <20241114011310.3615-1-philmd@linaro.org>
- <20241114011310.3615-2-philmd@linaro.org>
+ <20241114011310.3615-3-philmd@linaro.org>
 From: Thomas Huth <thuth@redhat.com>
 Autocrypt: addr=thuth@redhat.com; keydata=
  xsFNBFH7eUwBEACzyOXKU+5Pcs6wNpKzrlJwzRl3VGZt95VCdb+FgoU9g11m7FWcOafrVRwU
@@ -127,23 +126,23 @@ Autocrypt: addr=thuth@redhat.com; keydata=
  oiT+z+/E59qj/EKfyce3sbC9XLjXv3mHMrq1tKX4G7IJGnS989E/fg6crv6NHae9Ckm7+lSs
  IQu4bBP2GxiRQ+NV3iV/KU3ebMRzqIC//DCOxzQNFNJAKldPe/bKZMCxEqtVoRkuJtNdp/5a
  yXFZ6TfE1hGKrDBYAm4vrnZ4CXFSBDllL59cFFOJCkn4Xboj/aVxxJxF30bn
-In-Reply-To: <20241114011310.3615-2-philmd@linaro.org>
+In-Reply-To: <20241114011310.3615-3-philmd@linaro.org>
 X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: w-IemKWzkWGs4L8bxl9D96foDn1d92I_PqKqDobxjDU_1731572948
+X-Mimecast-MFC-PROC-ID: _taGXnDdS0Ercq7_x4DRQWoEz5JW47aTmfav9uKrVek_1731573217
 X-Mimecast-Originator: redhat.com
 Content-Language: en-US
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=170.10.129.124; envelope-from=thuth@redhat.com;
+Received-SPF: pass client-ip=170.10.133.124; envelope-from=thuth@redhat.com;
  helo=us-smtp-delivery-124.mimecast.com
-X-Spam_score_int: -29
-X-Spam_score: -3.0
-X-Spam_bar: ---
-X-Spam_report: (-3.0 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.119,
+X-Spam_score_int: -21
+X-Spam_score: -2.2
+X-Spam_bar: --
+X-Spam_report: (-2.2 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.119,
  DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H2=-0.738,
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H3=0.001, RCVD_IN_MSPIKE_WL=0.001,
  RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001, RCVD_IN_VALIDITY_SAFE_BLOCKED=0.001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -160,12 +159,28 @@ Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 On 14/11/2024 02.12, Philippe Mathieu-Daudé wrote:
-> TARGET_PAGE_BITS is defined in "exec/cpu-defs.h".
+> "exec/cpu-defs.h" should be kept as minimal as possible;
+> besides these includes don't seem necessay. Remove them.
 
-Actually, it's rather defined in cpu-param.h, but that header gets included 
-from cpu-defs.h, so the patch is fine. But maybe adjust the commit message 
-to avoid confusion?
+s/necessay/necessary/
 
-  Thomas
+> diff --git a/include/exec/cpu-defs.h b/include/exec/cpu-defs.h
+> --- a/include/exec/cpu-defs.h
+> +++ b/include/exec/cpu-defs.h
+> @@ -23,14 +23,6 @@
+>   #error cpu.h included from common code
+>   #endif
+>   
+> -#include "qemu/host-utils.h"
+> -#include "qemu/thread.h"
+> -#ifndef CONFIG_USER_ONLY
+> -#include "exec/hwaddr.h"
+> -#endif
+> -#include "exec/memattrs.h"
+> -#include "hw/core/cpu.h"
+
+Seems to work. Good catch!
+
+Tested-by: Thomas Huth <thuth@redhat.com>
 
 
