@@ -4,87 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 92990D65C60
-	for <qemu-riscv@archiver.kernel.org>; Thu, 14 Nov 2024 09:17:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 19306D65C6D
+	for <qemu-riscv@archiver.kernel.org>; Thu, 14 Nov 2024 10:33:41 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tBVvu-0000Cd-RV; Thu, 14 Nov 2024 04:14:35 -0500
+	id 1tBX9l-0003UX-2j; Thu, 14 Nov 2024 05:32:57 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <cleger@rivosinc.com>)
- id 1tBVvE-0008IU-Tf
- for qemu-riscv@nongnu.org; Thu, 14 Nov 2024 04:13:53 -0500
-Received: from mail-lf1-x12b.google.com ([2a00:1450:4864:20::12b])
+ (Exim 4.90_1) (envelope-from <lists@philjordan.eu>)
+ id 1tBX9j-0003Tz-Ie
+ for qemu-riscv@nongnu.org; Thu, 14 Nov 2024 05:32:55 -0500
+Received: from mail-pl1-x633.google.com ([2607:f8b0:4864:20::633])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <cleger@rivosinc.com>)
- id 1tBVv8-0007fu-7p
- for qemu-riscv@nongnu.org; Thu, 14 Nov 2024 04:13:50 -0500
-Received: by mail-lf1-x12b.google.com with SMTP id
- 2adb3069b0e04-53c779ef19cso366250e87.3
- for <qemu-riscv@nongnu.org>; Thu, 14 Nov 2024 01:13:45 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <lists@philjordan.eu>)
+ id 1tBX9W-0005te-0v
+ for qemu-riscv@nongnu.org; Thu, 14 Nov 2024 05:32:45 -0500
+Received: by mail-pl1-x633.google.com with SMTP id
+ d9443c01a7336-20c805a0753so4010145ad.0
+ for <qemu-riscv@nongnu.org>; Thu, 14 Nov 2024 02:32:39 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1731575624; x=1732180424;
+ d=philjordan-eu.20230601.gappssmtp.com; s=20230601; t=1731580359; x=1732185159;
  darn=nongnu.org; 
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=4X9GILCETkqzxose88E+msWvMEv5P8DgclS9o6F4vro=;
- b=YKm745pb6jmzR521se1nSWPlCCo/2XsCW7mU7tdNZvfTAz8AC75QtjXgAufwk89x2D
- sxmzC56bJHDV/gydcnZCiQJam3qwnw9CZAfOWYa/02TOLPXUc2bqczLTW4b16Nscyd2l
- 7PJ3cJpiH3NV+uiiiOAjubWlEehKO193gNgvFhz2loR4Si0C50feOTZUMdHQQ0vCK2KQ
- 7VLN0WCf4Qf6HNZFQ6UqZ9vdL7jSVYcB6XCPvV8q6zbKtMcG9Fy5ZY22ppb+YwjRg6gz
- n4n82y3HlOzyHhutUAr/MxDRU/gIZI7WCdHrGbon6FVs9Y0Qwurbje6ZPvRwUOnaDlfl
- X7yQ==
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=eUcS7xHNS/AIdEVeGwDv8iR0VwSii73wpmKr9mrhXzw=;
+ b=bo+3iveuIgIK3JYZl0s7903i9jRjCCE++R6l64OeEU7mKIeDuaNz3b5VMWLjvr6nzI
+ ggKZ9e2QP2Wjp5zwXp0IORPwzmi5vrhZqiK8DSfUxZWQ+bp7O2eZ5tPgadC6WMfFxM9L
+ SAOgaa3WebZ0fiI+OGYbTOt1u49iQiWPfaLoxy9ktLeQSWUH316K9JaQ2LHEk/O9iNht
+ ysycV4bXFaJ8G88DWL5Yu11VuG6QS0sBJz1uwVz5eg/za8eWsKuFQa5T3UuFWjzpKRfL
+ uYY4CPjDfvowPF/cxxqk/jmNXw6/zrBMy8KVFY6wUT0NmtZo3tyRfnEXMqdHsqaiAKp5
+ xntA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731575624; x=1732180424;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1731580359; x=1732185159;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=4X9GILCETkqzxose88E+msWvMEv5P8DgclS9o6F4vro=;
- b=PN6Qq66QOWm+iEFcbFg/PY8tpH2+kHqPgarrYRx2n62v0Pd0qbWFfeYusfvYTOOM5v
- nL+rZhbbe4QgmRwvrcZajxp3NlEB1LBZjmmjTojlhIooCabazw28UtWmn/I5bkAc4mpP
- mTqw9Ofj2I2GnvxYJeMdFBq0dQXp4wGa1bM7L0aAhsArORzgpAIdO2So4SlhjUiU6NKr
- IVeS0JKY6ty26DJlGPLBDvRxjoKZxKneWkK+LCwZcCpMzvc6t6j08pgJN8Kf6xyJFFZQ
- 4e6jgRW+tvCQtu+Lf7Si8VZJi1v1oi40tQcMusoFfcAg6NrlaaqLS/5FTdTAtpyznO/0
- bFqg==
-X-Gm-Message-State: AOJu0Yx3iyqNYnbfBOJ8wl5tMWuVSzzMRPW4JCBSc//PnnQdR8lN0IsM
- N8cTH693GDL2/i01h019RHmHCL4lNwv9NASPZHVK+5Fr5wX3EaZuskqEWhzpwi6mfun+Vq055oX
- N
-X-Google-Smtp-Source: AGHT+IFUXenJPm5D4EFqN8cx2OHuNjDlWm6yK8o8og66AjOraSN5UebgSKoHcPU/MumyNRqxRTQc2Q==
-X-Received: by 2002:ac2:4c53:0:b0:539:9f52:9e4 with SMTP id
- 2adb3069b0e04-53d9fef25e3mr3091263e87.48.1731575623579; 
- Thu, 14 Nov 2024 01:13:43 -0800 (PST)
-Received: from carbon-x1.. ([2a01:e0a:e17:9700:16d2:7456:6634:9626])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3821ae313e3sm899050f8f.94.2024.11.14.01.13.42
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 14 Nov 2024 01:13:42 -0800 (PST)
-From: =?UTF-8?q?Cl=C3=A9ment=20L=C3=A9ger?= <cleger@rivosinc.com>
-To: qemu-riscv@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>
-Cc: =?UTF-8?q?Cl=C3=A9ment=20L=C3=A9ger?= <cleger@rivosinc.com>,
- Weiwei Li <liwei1518@gmail.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Ved Shanbhogue <ved@rivosinc.com>, Atish Patra <atishp@rivosinc.com>,
- qemu-devel@nongnu.org
-Subject: [PATCH v5 0/9] target/riscv: Add support for Smdbltrp and Ssdbltrp
- extensions
-Date: Thu, 14 Nov 2024 10:13:21 +0100
-Message-ID: <20241114091332.108811-1-cleger@rivosinc.com>
-X-Mailer: git-send-email 2.45.2
+ bh=eUcS7xHNS/AIdEVeGwDv8iR0VwSii73wpmKr9mrhXzw=;
+ b=Fm0bMJr7rD/0EPnv7tJPMGWAZMHX4tIVXTdtasm2hRydP5FZ/viJSbqIlLwMHfJJTO
+ uG8FdkTYK7NTx5XcnjvayJMQPRm9PDI269pRFTWTLWmad2SW4oI9d/7oVFsYJJJJsz16
+ FnfjS9Q8dHet0zy+hI0zmjZeARG+AmRYDEKuTVQHjgYcDqeFF0QYdXbEc6oQ7Owiqud/
+ hMCOuz2dUvmT9vPBDSvMByNT1OuXODkI6CcxhGqs0AcURDj5Uyb8n0abQ3TtA+hYtsDs
+ k1lbRE/tcB4GySKohlPBLRyBphlKBsasHkq5Vuns1QsyYUbTOUK6JBkhshel06Fgdbsv
+ fYEg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUjLiUcbtp1inpCDaoEWmgM8kodTiUbxqjLcbbOOGMqt3BMkgPHa4A/PNh5x+TfJUl0hcSc2JlOMnYv@nongnu.org
+X-Gm-Message-State: AOJu0YxCqJtqQOtXbXxAHXv9l+0j8DSrQkGaODv2RK9o+pUQW6HDAwSy
+ An2ZMPD69vW0tWSmqeV8Lke0XhgHravXtYcqnd7f5+FODe3dkQ1D9ilp08bqjXRN6BOvQJs+0x4
+ 5NjLmdoI0qPyuvPCz9qwnpL7JFjN3yxjnRvlA
+X-Google-Smtp-Source: AGHT+IEwf6daURU98PoTrjFvkbBGYAbnaMv2GJadseNyBobVdUk3nS1BzeHl20PfUw9JQ6QaByk/cWCL+/lY3rXU1NA=
+X-Received: by 2002:a17:902:facf:b0:210:e75f:e6b0 with SMTP id
+ d9443c01a7336-21183e0dd11mr238339635ad.40.1731580358775; Thu, 14 Nov 2024
+ 02:32:38 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::12b;
- envelope-from=cleger@rivosinc.com; helo=mail-lf1-x12b.google.com
-X-Spam_score_int: -18
-X-Spam_score: -1.9
+References: <20241113142343.40832-1-phil@philjordan.eu>
+ <20241113142343.40832-2-phil@philjordan.eu>
+ <c0983059-ab11-4bc5-ab60-c5b23d1c290e@redhat.com>
+In-Reply-To: <c0983059-ab11-4bc5-ab60-c5b23d1c290e@redhat.com>
+From: Phil Dennis-Jordan <lists@philjordan.eu>
+Date: Thu, 14 Nov 2024 11:32:27 +0100
+Message-ID: <CAGCz3vv+5y=YGqZaXnGkVj0zA9fX-n3BOZyuPQC+dRMKN8VJZw@mail.gmail.com>
+Subject: Re: [PATCH v10 01/15] ui & main loop: Redesign of system-specific
+ main thread event handling
+To: Paolo Bonzini <pbonzini@redhat.com>
+Cc: Phil Dennis-Jordan <phil@philjordan.eu>, qemu-devel@nongnu.org,
+ agraf@csgraf.de, 
+ peter.maydell@linaro.org, rad@semihalf.com, quic_llindhol@quicinc.com, 
+ stefanha@redhat.com, mst@redhat.com, slp@redhat.com, 
+ richard.henderson@linaro.org, eduardo@habkost.net, marcel.apfelbaum@gmail.com, 
+ gaosong@loongson.cn, jiaxun.yang@flygoat.com, chenhuacai@kernel.org, 
+ kwolf@redhat.com, hreitz@redhat.com, philmd@linaro.org, shorne@gmail.com, 
+ palmer@dabbelt.com, alistair.francis@wdc.com, bmeng.cn@gmail.com, 
+ liwei1518@gmail.com, dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com, 
+ jcmvbkbc@gmail.com, marcandre.lureau@redhat.com, berrange@redhat.com, 
+ akihiko.odaki@daynix.com, qemu-arm@nongnu.org, qemu-block@nongnu.org, 
+ qemu-riscv@nongnu.org, balaton@eik.bme.hu
+Content-Type: multipart/alternative; boundary="0000000000002f73e90626dcf89e"
+Received-SPF: neutral client-ip=2607:f8b0:4864:20::633;
+ envelope-from=lists@philjordan.eu; helo=mail-pl1-x633.google.com
+X-Spam_score_int: -10
+X-Spam_score: -1.1
 X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+X-Spam_report: (-1.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, HTML_MESSAGE=0.001, RCVD_IN_DNSWL_NONE=-0.0001,
+ SPF_HELO_NONE=0.001, SPF_NEUTRAL=0.779 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -100,202 +103,268 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-A double trap typically arises during a sensitive phase in trap handling
-operations — when an exception or interrupt occurs while the trap
-handler (the component responsible for managing these events) is in a
-non-reentrant state. This non-reentrancy usually occurs in the early
-phase of trap handling, wherein the trap handler has not yet preserved
-the necessary state to handle and resume from the trap. The occurrence
-of such event is unlikely but can happen when dealing with hardware
-errors.
+--0000000000002f73e90626dcf89e
+Content-Type: text/plain; charset="UTF-8"
 
-This series adds support for Ssdbltrp and Smdbltrp ratified ISA
-extensions [1]. It is based on the Smrnmi series [6].
+On Wed, 13 Nov 2024 at 17:38, Paolo Bonzini <pbonzini@redhat.com> wrote:
 
-Ssdbltrp can be tested using qemu[2], opensbi[3], linux[4] and
-kvm-unit-tests[5]. Assuming you have a riscv environment available and
-configured (CROSS_COMPILE), it can be built for riscv64 using the
-following instructions:
+> On 11/13/24 15:23, Phil Dennis-Jordan wrote:
+> > macOS's Cocoa event handling must be done on the initial (main) thread
+> > of the process. Furthermore, if library or application code uses
+> > libdispatch, the main dispatch queue must be handling events on the main
+> > thread as well.
+> >
+> > So far, this has affected Qemu in both the Cocoa and SDL UIs, although
+> > in different ways: the Cocoa UI replaces the default qemu_main function
+> > with one that spins Qemu's internal main event loop off onto a
+> > background thread. SDL (which uses Cocoa internally) on the other hand
+> > uses a polling approach within Qemu's main event loop. Events are
+> > polled during the SDL UI's dpy_refresh callback, which happens to run
+> > on the main thread by default.
+> >
+> > As UIs are mutually exclusive, this works OK as long as nothing else
+> > needs platform-native event handling. In the next patch, a new device is
+> > introduced based on the ParavirtualizedGraphics.framework in macOS.
+> > This uses libdispatch internally, and only works when events are being
+> > handled on the main runloop. With the current system, it works when
+> > using either the Cocoa or the SDL UI. However, it does not when running
+> > headless. Moreover, any attempt to install a similar scheme to the
+> > Cocoa UI's main thread replacement fails when combined with the SDL
+> > UI.
+> >
+> > This change tidies up main thread management to be more flexible.
+> >
+> >   * The qemu_main global function pointer is a custom function for the
+> >     main thread, and it may now be NULL. When it is, the main thread
+> >     runs the main Qemu loop. This represents the traditional setup.
+> >   * When non-null, spawning the main Qemu event loop on a separate
+> >     thread is now done centrally rather than inside the Cocoa UI code.
+> >   * For most platforms, qemu_main is indeed NULL by default, but on
+> >     Darwin, it defaults to a function that runs the CFRunLoop.
+> >   * The Cocoa UI sets qemu_main to a function which runs the
+> >     NSApplication event handling runloop, as is usual for a Cocoa app.
+> >   * The SDL UI overrides the qemu_main function to NULL, thus
+> >     specifying that Qemu's main loop must run on the main
+> >     thread.
+> >   * The GTK UI also overrides the qemu_main function to NULL.
+> >   * For other UIs, or in the absence of UIs, the platform's default
+> >     behaviour is followed.
+> >
+> > This means that on macOS, the platform's runloop events are always
+> > handled, regardless of chosen UI. The new PV graphics device will
+> > thus work in all configurations. There is no functional change on other
+> > operating systems.
+> >
+> > Signed-off-by: Phil Dennis-Jordan <phil@philjordan.eu>
+> > Reviewed-by: Akihiko Odaki <akihiko.odaki@daynix.com>
+>
+> I checked what GTK+ does and, either way, you have to create another
+> thread: timers are handled with a CFRunLoopTimer, but file descriptors
+> are polled in a separate thread and sent to the main thread with a
+> single CFRunLoopSource.  It's a bit nicer that the main thread is in
+> charge, but it's more complex and probably slower too.
+>
 
-Qemu:
-  $ git clone https://github.com/rivosinc/qemu.git
-  $ cd qemu
-  $ git switch -C dbltrp_v5 dev/cleger/dbltrp_v5
-  $ mkdir build && cd build
-  $ ../configure --target-list=riscv64-softmmu
-  $ make
+Just to clarify: is this supposed to be happening inside the GTK+ library
+itself? i.e. GTK should spawn its own thread to poll file descriptors that
+are owned by GTK? (As opposed to the file descriptors used by QEMU's own
+event loop - what on Linux are eventfds, but on macOS I think are just
+pipes*.)
 
-OpenSBI:
-  $ git clone https://github.com/rivosinc/opensbi.git
-  $ cd opensbi
-  $ git switch -C dbltrp_v3 dev/cleger/dbltrp_v3
-  $ make O=build PLATFORM_RISCV_XLEN=64 PLATFORM=generic
+This doesn't describe what I'm seeing when I run with -display gtk on
+macOS. There's no extra thread created. There's a dock icon, but it's
+non-interactive ("Application not responding"), there aren't any menus, and
+there's no window. QEMU's own simulation is running in the background - I
+can reach a guest via the network. So I guess there's some function in GTK
+we're supposed to be calling that will make it crank the native event loop
+on macOS, but this isn't being done?
 
-Linux:
-  $ git clone https://github.com/rivosinc/linux.git
-  $ cd linux
-  $ git switch -C dbltrp_v1 dev/cleger/dbltrp_v1
-  $ export ARCH=riscv
-  $ make O=build defconfig
-  $ ./script/config --file build/.config --enable RISCV_DBLTRP
-  $ make O=build
+Or do you mean there exists a global "block here forever" function in GTK
+we can call from the main thread and which will make everything spring into
+life, but that brings with it the same requirement as with the Cocoa UI:
+moving everything that was originally on the main thread onto a background
+thread. (I've done some searching for GTK docs and other background info
+but anything I've found has been rather thin on this topic. The ui/gtk*.c
+source is also not particularly enlightening - it seems to imply that
+something in the background ought to be handling events somewhere.)
 
-kvm-unit-tests:
-  $ git clone https://github.com/clementleger/kvm-unit-tests.git
-  $ cd kvm-unit-tests
-  $ git switch -C dbltrp_v1 dev/cleger/dbltrp_v1
-  $ ./configure --arch=riscv64 --cross-prefix=$CROSS_COMPILE
-  $ make
+[* The event loop in QEMU on macOS probably ought to use a kqueue, with
+EVFILT_USER where eventfds are used on Linux, except the rough equivalent
+of ioeventfds are Mach ports which can be handled via EVFILT_MACHPORT, but
+I digress.]
 
-You will also need kvmtool in your rootfs.
+As long as it's clear that any handlers that go through the CFRunLoop
+> run outside the BQL, as is already the case for the Cocoa UI, I see no
+> problem with this approach.
+>
 
-Run with kvm-unit-test test as kernel:
-  $ qemu-system-riscv64 \
-    -M virt \
-    -cpu rv64,ssdbltrp=true,smdbltrp=true \
-    -nographic \
-    -serial mon:stdio \
-    -bios opensbi/build/platform/generic/firmware/fw_jump.bin \
-    -kernel kvm-unit-tests-dbltrp/riscv/sbi_dbltrp.flat
-  ...
-  [OpenSBI boot partially elided]
-  Boot HART ISA Extensions  : sscofpmf,sstc,zicntr,zihpm,zicboz,zicbom,sdtrig,svadu,ssdbltrp
-  ...
-  ##########################################################################
-  #    kvm-unit-tests
-  ##########################################################################
+I'm not entirely sure what you're getting at here, to be honest. The UI
+thread can definitely not assume to be holding the BQL all the time; we'd
+have to treat it more like an AIOContext. It could pave the way towards
+putting the display and UI subsystems on their own AIOContext or
+AIOContext-like-thing, rather than hogging the BQL for expensive image
+operations.
 
-  PASS: sbi: fwft: FWFT extension probing no error
-  PASS: sbi: fwft: FWFT extension is present
-  PASS: sbi: fwft: dbltrp: Get double trap enable feature value
-  PASS: sbi: fwft: dbltrp: Set double trap enable feature value == 0
-  PASS: sbi: fwft: dbltrp: Get double trap enable feature value == 0
-  PASS: sbi: fwft: dbltrp: Double trap disabled, trap first time ok
-  PASS: sbi: fwft: dbltrp: Set double trap enable feature value == 1
-  PASS: sbi: fwft: dbltrp: Get double trap enable feature value == 1
-  PASS: sbi: fwft: dbltrp: Trapped twice allowed ok
-  INFO: sbi: fwft: dbltrp: Should generate a double trap and crash !
+(*By the sound of it, Win32 has an all-UI-calls-on-one-thread requirement
+as well which we may be violating to some degree via the GTK and/or SDL
+backends as well; my adventures with Win32 are almost 20 years back now so
+I'm a bit out of the loop there.)
 
-  sbi_trap_error: hart0: trap0: double trap handler failed (error -10)
 
-  sbi_trap_error: hart0: trap0: mcause=0x0000000000000010 mtval=0x0000000000000000
-  sbi_trap_error: hart0: trap0: mtval2=0x0000000000000003 mtinst=0x0000000000000000
-  sbi_trap_error: hart0: trap0: mepc=0x00000000802000d8 mstatus=0x8000000a01006900
-  sbi_trap_error: hart0: trap0: ra=0x00000000802001fc sp=0x0000000080213e70
-  sbi_trap_error: hart0: trap0: gp=0x0000000000000000 tp=0x0000000080088000
-  sbi_trap_error: hart0: trap0: s0=0x0000000080213e80 s1=0x0000000000000001
-  sbi_trap_error: hart0: trap0: a0=0x0000000080213e80 a1=0x0000000080208193
-  sbi_trap_error: hart0: trap0: a2=0x000000008020dc20 a3=0x000000000000000f
-  sbi_trap_error: hart0: trap0: a4=0x0000000080210cd8 a5=0x00000000802110d0
-  sbi_trap_error: hart0: trap0: a6=0x00000000802136e4 a7=0x0000000046574654
-  sbi_trap_error: hart0: trap0: s2=0x0000000080210cd9 s3=0x0000000000000000
-  sbi_trap_error: hart0: trap0: s4=0x0000000000000000 s5=0x0000000000000000
-  sbi_trap_error: hart0: trap0: s6=0x0000000000000000 s7=0x0000000000000001
-  sbi_trap_error: hart0: trap0: s8=0x0000000000002000 s9=0x0000000080083700
-  sbi_trap_error: hart0: trap0: s10=0x0000000000000000 s11=0x0000000000000000
-  sbi_trap_error: hart0: trap0: t0=0x0000000000000000 t1=0x0000000080213ed8
-  sbi_trap_error: hart0: trap0: t2=0x0000000000001000 t3=0x0000000080213ee0
-  sbi_trap_error: hart0: trap0: t4=0x0000000000000000 t5=0x000000008020f8d0
-  sbi_trap_error: hart0: trap0: t6=0x0000000000000000
+> Acked-by: Paolo Bonzini <pbonzini@redhat.com>
+>
+> Paolo
+>
+>
+>
 
-Run with linux and kvm-unit-test test in kvm (testing VS-mode):
-  $ qemu-system-riscv64 \
-    -M virt \
-    -cpu rv64,ssdbltrp=true,smdbltrp=true \
-    -nographic \
-    -serial mon:stdio \
-    -bios opensbi/build/platform/generic/firmware/fw_jump.bin \
-    -kernel linux/build/arch/riscv/boot/Image
-  ...
-  [Linux boot partially elided]
-  [    0.735079] riscv-dbltrp: Double trap handling registered
-  ...
+--0000000000002f73e90626dcf89e
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-  $ lkvm run -k sbi_dbltrp.flat -m 128 -c 2
-  ##########################################################################
-  #    kvm-unit-tests
-  ##########################################################################
+<div dir=3D"ltr"><div dir=3D"ltr"><div dir=3D"ltr"><br></div><br><div class=
+=3D"gmail_quote"><div dir=3D"ltr" class=3D"gmail_attr">On Wed, 13 Nov 2024 =
+at 17:38, Paolo Bonzini &lt;<a href=3D"mailto:pbonzini@redhat.com" target=
+=3D"_blank">pbonzini@redhat.com</a>&gt; wrote:<br></div><blockquote class=
+=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rg=
+b(204,204,204);padding-left:1ex">On 11/13/24 15:23, Phil Dennis-Jordan wrot=
+e:<br>
+&gt; macOS&#39;s Cocoa event handling must be done on the initial (main) th=
+read<br>
+&gt; of the process. Furthermore, if library or application code uses<br>
+&gt; libdispatch, the main dispatch queue must be handling events on the ma=
+in<br>
+&gt; thread as well.<br>
+&gt; <br>
+&gt; So far, this has affected Qemu in both the Cocoa and SDL UIs, although=
+<br>
+&gt; in different ways: the Cocoa UI replaces the default qemu_main functio=
+n<br>
+&gt; with one that spins Qemu&#39;s internal main event loop off onto a<br>
+&gt; background thread. SDL (which uses Cocoa internally) on the other hand=
+<br>
+&gt; uses a polling approach within Qemu&#39;s main event loop. Events are<=
+br>
+&gt; polled during the SDL UI&#39;s dpy_refresh callback, which happens to =
+run<br>
+&gt; on the main thread by default.<br>
+&gt; <br>
+&gt; As UIs are mutually exclusive, this works OK as long as nothing else<b=
+r>
+&gt; needs platform-native event handling. In the next patch, a new device =
+is<br>
+&gt; introduced based on the ParavirtualizedGraphics.framework in macOS.<br=
+>
+&gt; This uses libdispatch internally, and only works when events are being=
+<br>
+&gt; handled on the main runloop. With the current system, it works when<br=
+>
+&gt; using either the Cocoa or the SDL UI. However, it does not when runnin=
+g<br>
+&gt; headless. Moreover, any attempt to install a similar scheme to the<br>
+&gt; Cocoa UI&#39;s main thread replacement fails when combined with the SD=
+L<br>
+&gt; UI.<br>
+&gt; <br>
+&gt; This change tidies up main thread management to be more flexible.<br>
+&gt; <br>
+&gt;=C2=A0 =C2=A0* The qemu_main global function pointer is a custom functi=
+on for the<br>
+&gt;=C2=A0 =C2=A0 =C2=A0main thread, and it may now be NULL. When it is, th=
+e main thread<br>
+&gt;=C2=A0 =C2=A0 =C2=A0runs the main Qemu loop. This represents the tradit=
+ional setup.<br>
+&gt;=C2=A0 =C2=A0* When non-null, spawning the main Qemu event loop on a se=
+parate<br>
+&gt;=C2=A0 =C2=A0 =C2=A0thread is now done centrally rather than inside the=
+ Cocoa UI code.<br>
+&gt;=C2=A0 =C2=A0* For most platforms, qemu_main is indeed NULL by default,=
+ but on<br>
+&gt;=C2=A0 =C2=A0 =C2=A0Darwin, it defaults to a function that runs the CFR=
+unLoop.<br>
+&gt;=C2=A0 =C2=A0* The Cocoa UI sets qemu_main to a function which runs the=
+<br>
+&gt;=C2=A0 =C2=A0 =C2=A0NSApplication event handling runloop, as is usual f=
+or a Cocoa app.<br>
+&gt;=C2=A0 =C2=A0* The SDL UI overrides the qemu_main function to NULL, thu=
+s<br>
+&gt;=C2=A0 =C2=A0 =C2=A0specifying that Qemu&#39;s main loop must run on th=
+e main<br>
+&gt;=C2=A0 =C2=A0 =C2=A0thread.<br>
+&gt;=C2=A0 =C2=A0* The GTK UI also overrides the qemu_main function to NULL=
+.<br>
+&gt;=C2=A0 =C2=A0* For other UIs, or in the absence of UIs, the platform&#3=
+9;s default<br>
+&gt;=C2=A0 =C2=A0 =C2=A0behaviour is followed.<br>
+&gt; <br>
+&gt; This means that on macOS, the platform&#39;s runloop events are always=
+<br>
+&gt; handled, regardless of chosen UI. The new PV graphics device will<br>
+&gt; thus work in all configurations. There is no functional change on othe=
+r<br>
+&gt; operating systems.<br>
+&gt; <br>
+&gt; Signed-off-by: Phil Dennis-Jordan &lt;<a href=3D"mailto:phil@philjorda=
+n.eu" target=3D"_blank">phil@philjordan.eu</a>&gt;<br>
+&gt; Reviewed-by: Akihiko Odaki &lt;<a href=3D"mailto:akihiko.odaki@daynix.=
+com" target=3D"_blank">akihiko.odaki@daynix.com</a>&gt;<br>
+<br>
+I checked what GTK+ does and, either way, you have to create another <br>
+thread: timers are handled with a CFRunLoopTimer, but file descriptors <br>
+are polled in a separate thread and sent to the main thread with a <br>
+single CFRunLoopSource.=C2=A0 It&#39;s a bit nicer that the main thread is =
+in <br>
+charge, but it&#39;s more complex and probably slower too.<br></blockquote>=
+<div><br></div><div>Just to clarify: is this supposed to be happening insid=
+e the GTK+ library itself? i.e. GTK should spawn its own thread to poll fil=
+e descriptors that are owned by GTK? (As opposed to the file descriptors us=
+ed by QEMU&#39;s own event loop - what on Linux are eventfds, but on macOS =
+I think are just pipes*.)</div><div><br></div>This doesn&#39;t describe wha=
+t I&#39;m seeing when I run with -display gtk on macOS. There&#39;s no extr=
+a thread created. There&#39;s a dock icon, but it&#39;s non-interactive (&q=
+uot;Application not responding&quot;), there aren&#39;t any menus, and ther=
+e&#39;s no window. QEMU&#39;s own simulation is running in the background -=
+ I can reach a guest via the network. So I guess there&#39;s some function =
+in GTK we&#39;re supposed to be calling that will make it crank the native =
+event loop on macOS, but this isn&#39;t being done?</div><div class=3D"gmai=
+l_quote"><br></div><div class=3D"gmail_quote">Or do you mean there exists a=
+ global &quot;block here forever&quot; function in GTK we can call from the=
+ main thread and which will make everything spring into life, but that brin=
+gs with it the same requirement as with the Cocoa UI: moving everything tha=
+t was originally on the main thread onto a background thread. (I&#39;ve don=
+e some searching for GTK docs and other background info but anything I&#39;=
+ve found has been rather thin on this topic. The ui/gtk*.c source is also n=
+ot particularly enlightening - it seems to imply that something in the back=
+ground ought to be handling events somewhere.)<br></div><div class=3D"gmail=
+_quote"><div><br></div><div>[* The event loop in QEMU on macOS probably oug=
+ht to use a kqueue, with EVFILT_USER where eventfds are used on Linux, exce=
+pt the rough equivalent of ioeventfds are Mach ports which can be handled v=
+ia EVFILT_MACHPORT, but I digress.]</div><div><br></div><blockquote class=
+=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rg=
+b(204,204,204);padding-left:1ex">
+As long as it&#39;s clear that any handlers that go through the CFRunLoop <=
+br>
+run outside the BQL, as is already the case for the Cocoa UI, I see no <br>
+problem with this approach.<br></blockquote><div>=C2=A0</div><div>I&#39;m n=
+ot entirely sure what you&#39;re getting at here, to be honest. The UI thre=
+ad can definitely not assume to be holding the BQL all the time; we&#39;d h=
+ave to treat it more like an AIOContext. It could pave the way towards putt=
+ing the display and UI subsystems on their own AIOContext or AIOContext-lik=
+e-thing, rather than hogging the BQL for expensive image operations.<br></d=
+iv><div><br></div><div>(*By the sound of it, Win32 has an all-UI-calls-on-o=
+ne-thread requirement as well which we may be violating to some degree via =
+the GTK and/or SDL backends as well; my adventures with Win32 are almost 20=
+ years back now so I&#39;m a bit out of the loop there.)<br></div><div>=C2=
+=A0</div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8e=
+x;border-left:1px solid rgb(204,204,204);padding-left:1ex">
+Acked-by: Paolo Bonzini &lt;<a href=3D"mailto:pbonzini@redhat.com" target=
+=3D"_blank">pbonzini@redhat.com</a>&gt;<br>
+<br>
+Paolo<br>
+<br>
+<br>
+</blockquote></div></div>
+</div>
 
-  PASS: sbi: fwft: FWFT extension probing no error
-  PASS: sbi: fwft: FWFT extension is present
-  PASS: sbi: fwft: dbltrp: Get double trap enable feature value
-  PASS: sbi: fwft: dbltrp: Set double trap enable feature value == 0
-  PASS: sbi: fwft: dbltrp: Get double trap enable feature value == 0
-  PASS: sbi: fwft: dbltrp: Double trap disabled, trap first time ok
-  PASS: sbi: fwft: dbltrp: Set double trap enable feature value == 1
-  PASS: sbi: fwft: dbltrp: Get double trap enable feature value == 1
-  PASS: sbi: fwft: dbltrp: Trapped twice allowed ok
-  INFO: sbi: fwft: dbltrp: Should generate a double trap and crash !
-  [   51.939077] Guest double trap
-  [   51.939323] kvm [93]: VCPU exit error -95
-  [   51.939683] kvm [93]: SEPC=0x802000d8 SSTATUS=0x200004520 HSTATUS=0x200200180
-  [   51.939947] kvm [93]: SCAUSE=0x10 STVAL=0x0 HTVAL=0x3 HTINST=0x0
-  KVM_RUN failed: Operation not supported
-  $
-
-Testing Smbdbltrp can be done using gdb and trigger some trap. For
-instance, interrupt M-mode firmware at some point, set mstatus.mdt = 1
-and corrupt some register to generate a NULL pointer exception.
-
-Link: https://github.com/riscv/riscv-isa-manual/commit/52a5742d5ab5a0792019033631b2035a493ad981 [1]
-Link: https://github.com/rivosinc/qemu/tree/dev/cleger/dbltrp_v5 [2]
-Link: https://github.com/rivosinc/opensbi/tree/dev/cleger/dbltrp_v3 [3]
-Link: https://github.com/rivosinc/linux/tree/dev/cleger/dbltrp_v1 [4]
-Link: https://github.com/clementleger/kvm-unit-tests/tree/dev/cleger/dbltrp_v1 [5]
-Link: https://lore.kernel.org/all/20240902071358.1061693-1-tommy.wu@sifive.com/ [6]
-
----
-
-V5:
- - Use 0 instead of false to set MSTATUS_MDT in helper_mnret()
- - Added explicit comments about henvcfg write mask being tricky.
- - Fixed a invalid menvcfg_mask in write_henvcfgh
-
-V4:
- - Remove DTE from sstatus_v1_10_mask variable and add specific if for
-   DTE masking where it's used.
- - Use mstatus_hs.sdt field rather than setting DTE to 0 in
-   riscv_do_cpu_interrupt().
- - Add a fix for henvcfg value which was incorrectly set after changing
-   menvcfg
- - Remove useless ext_ssdbltrp check in
-   riscv_env_smode_dbltrp_enabled().
- - Remove useless mstatus clear in write_mstatus().
- - Add proper handling of SDT writing to vsstatus.
- - Add clearing of vsstatus//mstatus SDT field when DTE is disabled.
- - Fix wrong value being written for MDT/MIE in write_mstatush().
- - Rebased on Frank Snrnmi v7
-
-V3:
- - Fix spec version from 1.12 to 1.13 for Smdbltrp and Ssdbltrp
- - Add better comments for dte/sdt computation in
-   riscv_cpu_do_interrupt().
- - Move some CSR related changes to the CSRs related commits.
-
-V2:
- - Squashed commits that added ext_s{s|m}dbltrp as suggested by Daniel
-
-Clément Léger (9):
-  target/riscv: fix henvcfg potentially containing stale bits
-  target/riscv: Add Ssdbltrp CSRs handling
-  target/riscv: Implement Ssdbltrp sret, mret and mnret behavior
-  target/riscv: Implement Ssdbltrp exception handling
-  target/riscv: Add Ssdbltrp ISA extension enable switch
-  target/riscv: Add Smdbltrp CSRs handling
-  target/riscv: Implement Smdbltrp sret, mret and mnret behavior
-  target/riscv: Implement Smdbltrp behavior
-  target/riscv: Add Smdbltrp ISA extension enable switch
-
- target/riscv/cpu.c        |   9 ++-
- target/riscv/cpu.h        |   1 +
- target/riscv/cpu_bits.h   |   8 +++
- target/riscv/cpu_cfg.h    |   2 +
- target/riscv/cpu_helper.c | 111 ++++++++++++++++++++++++++++--------
- target/riscv/csr.c        | 117 ++++++++++++++++++++++++++++++++++----
- target/riscv/op_helper.c  |  47 ++++++++++++++-
- 7 files changed, 258 insertions(+), 37 deletions(-)
-
--- 
-2.45.2
-
+--0000000000002f73e90626dcf89e--
 
