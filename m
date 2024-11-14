@@ -4,67 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 20494D6A22C
-	for <qemu-riscv@archiver.kernel.org>; Thu, 14 Nov 2024 20:00:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E4813D6A22F
+	for <qemu-riscv@archiver.kernel.org>; Thu, 14 Nov 2024 20:48:42 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tBg0A-0006OA-A9; Thu, 14 Nov 2024 14:59:38 -0500
+	id 1tBgkx-0002eZ-Rr; Thu, 14 Nov 2024 15:48:00 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1tBg08-0006N3-AU
- for qemu-riscv@nongnu.org; Thu, 14 Nov 2024 14:59:36 -0500
-Received: from mail-pf1-x432.google.com ([2607:f8b0:4864:20::432])
+ id 1tBgkp-0002d5-7Y
+ for qemu-riscv@nongnu.org; Thu, 14 Nov 2024 15:47:52 -0500
+Received: from mail-pl1-x635.google.com ([2607:f8b0:4864:20::635])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1tBg06-00019q-RU
- for qemu-riscv@nongnu.org; Thu, 14 Nov 2024 14:59:36 -0500
-Received: by mail-pf1-x432.google.com with SMTP id
- d2e1a72fcca58-723db2798caso960904b3a.0
- for <qemu-riscv@nongnu.org>; Thu, 14 Nov 2024 11:59:34 -0800 (PST)
+ id 1tBgkm-0004wh-HG
+ for qemu-riscv@nongnu.org; Thu, 14 Nov 2024 15:47:50 -0500
+Received: by mail-pl1-x635.google.com with SMTP id
+ d9443c01a7336-20cf6eea3c0so12609555ad.0
+ for <qemu-riscv@nongnu.org>; Thu, 14 Nov 2024 12:47:45 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1731614373; x=1732219173; darn=nongnu.org;
+ d=linaro.org; s=google; t=1731617264; x=1732222064; darn=nongnu.org;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=+qYw/5xHcyUvaWdcr+DqLAPRs3FLnKC1DNON73mpwic=;
- b=k6+55huU73fCEmRCJABbni2mru2ZPZ5vPDwwKJszNfwaQMO7DEpCtMBiX3h+W3zOfy
- jezBtgxOgjyNItQ98JvaU1OOgVRRd0Pc3RWKM0i+bbhx+wwk1QQLDmQiDdmfu/sTdiZu
- GpHGDIzxvfiCj7WVyPNlBj6zpqSuv6PX3q4V6PdtRYo7ut87Ly11CxTmsHXB79ykjN+P
- T4k1EHRrl/Y4uM2Kmmp8DzGoPEkx2Z4z3AiT/3Fa6/Clh7RUuq/uRXzJcw6jvptqU68q
- GLvs2GtvzAk0kGZOOCUukDIjsRa1xPIRE5h5DZrGTPcw1KwviDOmZHnd+Hhzu/RPk/Rk
- cykQ==
+ bh=TQAffY6Jbc3yb4+aNdQcKrEa6FnLgG8CT4LXibiEXls=;
+ b=E9/bUWSryAofzs8kAjJFBqKizENO+7GJE9mHE6hMT0741rQbNi3MLETeWrmjFmuLyz
+ FMCvTXkC+ijQyiRmWGRhWdXKQB2iuJaVIaNy4MVzNH2s9+NRon3SivghAVgyiurCAwzm
+ ryKVS7cnGn7UOZnDdPL/de2pWuXU93lAr7fmBGvnj7h/PgjhjYA7SOXQMh1pa/WC0P7q
+ Bup809msB9EwRk5x+peWZfM4167569L3FFnLH1nisJz5OsCV/PP99FoLiuunW3nIv2DW
+ fZKQ7LvQAb7PvTPbjGfQozEhqGxkGBN//8aPhf+r1My8VT1ZNW2T9iyTaeH0NLmFcCOQ
+ iOKQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731614373; x=1732219173;
+ d=1e100.net; s=20230601; t=1731617264; x=1732222064;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=+qYw/5xHcyUvaWdcr+DqLAPRs3FLnKC1DNON73mpwic=;
- b=Li/ZfEHIwPnWHyn6BkbrmhMQIfD/ZvDQ6IDF2wSi0iv0QQ/XZ/5kHnWF+cf2m7oeIB
- zDws6z1w8/prL0edIr9R8Zldbc/zNb2WjrIih8wLK9DIv0ltJA9ovYJKM61WUdRi+98q
- vAk8IcBbzyre7mnFS1ecnda1GVuf7GGymj13LJIWfFSst5x8V5kmMHf2iCIW3EsXL8F4
- xftUqFkRiHstKa+rv/O4BtxFALHIHYUWGYxQlwB6Mdu8GGIOC/o6LsqFLFf0mApcTU3b
- UEQyNmx//ftmOIC5ANxOKRcARcdltjNo3yH8jKgB8p6ARjG2bgXMJD+CimlHBP3ybVSf
- FewQ==
+ bh=TQAffY6Jbc3yb4+aNdQcKrEa6FnLgG8CT4LXibiEXls=;
+ b=XLColRpblfZANJ+sOT/2VDrh+xMPVu0uo/pSRlaoqMDUeJwZR1hfropTKmNDtIz0mF
+ B5GaEBidRoA52Ph8WxkWDxWIa+4qjhSNoKlKpD0pif+XCiRgkZArwysLlJEM1JSJgACA
+ AT0zJVOpNnLq5DXvi4EYxm9GMgIKtyTAPcS8ujmlukyx2laG04QGLM7DQ7o7dzEvsTJo
+ /vv5tEX/DGPa43O+U8nmv+g1wNhOr1VV1JNVI2ZpJ3xtM8T8dacYMn6+o5jx4V6vDC8k
+ xZWFm3zq/zozkSNQq4LhHVd2nWlCkovGAU1Tu3amcSENMRh+tnw5ple/87FgC2PjwWIM
+ vTLA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUsWQuoj3pEIiUMkGqDwsgufmfe24VXVWuoeP3EEOHTmND6Mbt6PRHRVtapvWv9DL+cXXKEpsIlHQaf@nongnu.org
-X-Gm-Message-State: AOJu0YwNTW3tkK9slgpDxiFQ2tc35wjHvj7XoqyZxHXt+aFL16YIfLEC
- WD0Ls7n5WfqEeZ+qhVF9VBYXrJNHtnK0VI8e2yGDm+fsbqzKJd8UgYTc3yu4Yzc=
-X-Google-Smtp-Source: AGHT+IEYzbBrbb1mIOIOhkjINXYRzGCcstpoZvWUAGnXtLwwV7z16KBMuTJFWDLsUOYRMPaTANfx7A==
-X-Received: by 2002:a05:6a00:a18:b0:71e:6bf1:158f with SMTP id
- d2e1a72fcca58-72476d26c8dmr89396b3a.21.1731614373041; 
- Thu, 14 Nov 2024 11:59:33 -0800 (PST)
+ AJvYcCU9CF2G7C/XeG+AERunJvd7CceUdzNunO1qV2PtSk9ogpOWl6I/ylAo8ld5TNhg41ES0wVPBtno775B@nongnu.org
+X-Gm-Message-State: AOJu0YwRi3pVdcDWFXgsl8YilVIsJMy2tJ8Jmfvy3ghx7CANdOlmgfOV
+ yrbTB1efcH9d6QEAPCVq00dzRg59IKRNLfguCiS8dNzIlcEwDqOUZYLLdi21kSo=
+X-Google-Smtp-Source: AGHT+IHFS/Bm4/pxG4GRtDM6hsm+A2K8VwDnl7hMoSxJRFz1VyyGEhA0kRuDPq8Vmn7VYqOggaB2eQ==
+X-Received: by 2002:a17:902:c950:b0:20b:b93f:300a with SMTP id
+ d9443c01a7336-211d0d62833mr2748365ad.7.1731617264508; 
+ Thu, 14 Nov 2024 12:47:44 -0800 (PST)
 Received: from [192.168.0.4] ([71.212.136.242])
  by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-724771e1c7bsm15261b3a.146.2024.11.14.11.59.32
+ d9443c01a7336-211d0f46843sm463015ad.186.2024.11.14.12.47.43
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 14 Nov 2024 11:59:32 -0800 (PST)
-Message-ID: <e39d524d-ba9b-46eb-8d2d-739d001ca59e@linaro.org>
-Date: Thu, 14 Nov 2024 11:59:30 -0800
+ Thu, 14 Nov 2024 12:47:44 -0800 (PST)
+Message-ID: <00fa4af8-e9a7-4e9f-8c93-86582739fff0@linaro.org>
+Date: Thu, 14 Nov 2024 12:47:42 -0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 20/24] exec: Declare tlb_vaddr_to_host() in 'exec/cputlb.h'
+Subject: Re: [PATCH 22/24] exec/cpu-common: Move ram_addr_t related methods to
+ 'exec/ram_addr.h'
 To: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
  Paolo Bonzini <pbonzini@redhat.com>, Anton Johansson <anjo@rev.ng>,
  qemu-devel@nongnu.org
@@ -75,21 +76,21 @@ Cc: qemu-ppc@nongnu.org, Thomas Huth <thuth@redhat.com>, qemu-arm@nongnu.org,
  Peter Maydell <peter.maydell@linaro.org>,
  =?UTF-8?Q?Alex_Benn=C3=A9e?= <alex.bennee@linaro.org>, qemu-s390x@nongnu.org
 References: <20241114011310.3615-1-philmd@linaro.org>
- <20241114011310.3615-21-philmd@linaro.org>
+ <20241114011310.3615-23-philmd@linaro.org>
 Content-Language: en-US
 From: Richard Henderson <richard.henderson@linaro.org>
-In-Reply-To: <20241114011310.3615-21-philmd@linaro.org>
+In-Reply-To: <20241114011310.3615-23-philmd@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::432;
- envelope-from=richard.henderson@linaro.org; helo=mail-pf1-x432.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::635;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pl1-x635.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -106,25 +107,17 @@ Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 On 11/13/24 17:13, Philippe Mathieu-Daudé wrote:
-> Move CPU TLB related methods to "exec/cputlb.h".
+> Move methods related to the ram_addr_t type to
+> the specific "exec/ram_addr.h" header.
 > 
-> Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+> Signed-off-by: Philippe Mathieu-Daudé<philmd@linaro.org>
 > ---
->   include/exec/cpu_ldst.h     | 25 -------------------------
->   include/exec/cputlb.h       | 26 ++++++++++++++++++++++++++
->   target/arm/tcg/helper-a64.c |  1 +
->   target/ppc/mem_helper.c     |  1 +
->   4 files changed, 28 insertions(+), 25 deletions(-)
+>   include/exec/cpu-common.h        | 56 +-------------------------------
+>   include/exec/ram_addr.h          | 56 ++++++++++++++++++++++++++++++++
+>   include/exec/translation-block.h |  2 +-
+>   3 files changed, 58 insertions(+), 56 deletions(-)
 
-Hmm.  I'm not sure about using cputlb.h here.
-
-This is general-purpose guest->host translation, with or without a tlb.
-It's more similar to user/guest-host.h, but obviously not user specific.
-
-I think cpu_ldst.h itself is ok, because that's guest->host translation combined with a 
-memory operation.  But I'm also fine if you want to create a completely new header. 
-Perhaps probe-access.h?  This is the oldest of the family of probing functions after all.
-
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 
 r~
 
