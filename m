@@ -4,60 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DD85BD637D5
-	for <qemu-riscv@archiver.kernel.org>; Thu, 14 Nov 2024 01:16:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F0EAFD637D5
+	for <qemu-riscv@archiver.kernel.org>; Thu, 14 Nov 2024 01:16:45 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tBOQt-0007dZ-9d; Wed, 13 Nov 2024 20:14:03 -0500
+	id 1tBOSC-0001Ij-AE; Wed, 13 Nov 2024 20:15:24 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tBOQr-0007ci-Mf
- for qemu-riscv@nongnu.org; Wed, 13 Nov 2024 20:14:01 -0500
-Received: from mail-wm1-x32c.google.com ([2a00:1450:4864:20::32c])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tBOSA-00016h-6u
+ for qemu-riscv@nongnu.org; Wed, 13 Nov 2024 20:15:22 -0500
+Received: from mail-wr1-x436.google.com ([2a00:1450:4864:20::436])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tBOQp-0001zP-FL
- for qemu-riscv@nongnu.org; Wed, 13 Nov 2024 20:14:01 -0500
-Received: by mail-wm1-x32c.google.com with SMTP id
- 5b1f17b1804b1-4315e62afe0so1013335e9.1
- for <qemu-riscv@nongnu.org>; Wed, 13 Nov 2024 17:13:59 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tBOS7-0002QM-Ur
+ for qemu-riscv@nongnu.org; Wed, 13 Nov 2024 20:15:21 -0500
+Received: by mail-wr1-x436.google.com with SMTP id
+ ffacd0b85a97d-37d518f9abcso61037f8f.2
+ for <qemu-riscv@nongnu.org>; Wed, 13 Nov 2024 17:15:19 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1731546837; x=1732151637; darn=nongnu.org;
+ d=linaro.org; s=google; t=1731546917; x=1732151717; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=X3oqMeHT71R3KdP9eZWoYcjlbOfOwEShX9l191wOq00=;
- b=n4+c/Fvo2dTX3JgaWSwTpv64eiLSaVvaJWy5x1ch0LlFGH6lVN/T2LLpSPUEHm2vd3
- KULM1pv/8+TtEa4mheq2m/+QcoUPy78jZr3Gxg65p1UcwwKaEluP/yha0GtC8hdTRped
- +34trvYpmLM6Lrei/Zz9+D42M/xcKAkxTM72CnVg6ZC8FKBGmDTfyjp6iRAlUho1aSMC
- LB4GsQvr9NPKK2Qmsjt3HAM1Z9pnjgdFaGlcq77pWBqYrzcqoeuQ3xlDaTTTzaVjQUVx
- ue4o0hjUNgB23SOmv4Z0yR1LBt9AfmNm1vQtnuIASaIzOKuuDxc6BjGnByPHgKebmxny
- wLTw==
+ bh=ijxub0J6LSuaPkun5QktYbNZDFSQDSukz+hms+c1Ih0=;
+ b=j8Wy1IKpWhbSGsE+4uzRK5uSblCZD17L68agSr7tqfki3RzMgzQ/9LlyDdsbViyXxI
+ foFXN5L3kI1hfN50MEHH1uuJxXBDvdmmH954OyqQmiwaRQwzUFwLJz3Rq5bGpdv9k0dD
+ 2axyG+I38ZHsONIuxVH9GxpdN7t7BrlA0I5IsnfioEGInOsmraycuIXymuB94pZF25lJ
+ NacY8T4RUxJhpzZHwcbXVZ7uj8WjgeJEC4Q5I9qXZLEeYAaB5sv43S2wFR+zcQOw2xz2
+ eqd8/hhOk9ClRbzym+RHICjkl4J38EpVEV5ymfqRCkNyJfjDAIjGl8IiJR+dhMG8n6gU
+ /cRw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731546837; x=1732151637;
+ d=1e100.net; s=20230601; t=1731546917; x=1732151717;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=X3oqMeHT71R3KdP9eZWoYcjlbOfOwEShX9l191wOq00=;
- b=T7YoWffNMiEDD3HTU4zDz8+QcI1LDs1SK2JlV8KWO2EjCk2VyDCUVG1g4afnEYOxWd
- GAEsI9nqaM3CdmXnBziZMK0i8glsk/mEAbt97I2u6/GDu+uo6XN9AeOg5eB9PtPi6Ka4
- eRsklnHz/bdBaDgL5ARL2PEJ2DEJBBA2WJWbJIiJxoDbxXp7+W0fY9XJaYEl+KG/kh9U
- vvRVF0vMZ65j7Lg/7l+iRF9sjmoUcwESUem6fn4tIubwT/6DskU3sjCyj9wkoXfelI7N
- mAKnkdfX09TwFu2BT6KPKF8xP9nAXWNZ0M1eRNeQeyhxWH8LgrFsMTSP7TQ1K9eSPfZP
- lxMQ==
+ bh=ijxub0J6LSuaPkun5QktYbNZDFSQDSukz+hms+c1Ih0=;
+ b=QY7NZDSjnS2786FgCHcMcBeEC8HQt8BEViQHG99cdQ2P56p6oLUcrHaBovhjOB3uz3
+ 1ERD2KJPtfxfnEG47R5jCUhwkg2OMMgfgBn3ZV2G5zVHUIIQdlnaY+oK/nmwmf+lVMkm
+ PdQR81iYSoqk5uNn7OKy+Lq+5S6vOCsJ5b89tQ9mpxu8nEhf46+WK1K3FpfQQK59cQZc
+ xmJ17z8vy5yM/bj9OutfT5USAIeIDlaiu/xKoBwvFsPwRYRYV+KjND2qBdzVAuJNUNIO
+ M4YapcwiUOU25UyDX/c1CEOa8aY23VPtiabulE9gImXU3kXzUlGBPd9R0mno41Jnl8QY
+ XLQw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVVgsxhPXj8kAvPq54bq1CGxA7+Eg89gfrvOXQC3QPSKAZSuP+Vwgd6qkjzJ/utDvkCvDb5PZDvJzPE@nongnu.org
-X-Gm-Message-State: AOJu0Yz5+4jRwtBpJSdNMXrEUrbFWcUK3/NHcLQLg5EC9DZBMsidKJmV
- P7rGs2ggvGPIS6xvLGfy1ALGxwHd1D7vy3CnU5gZuBv/zoQ7jRSbRUttHbmK7P4=
-X-Google-Smtp-Source: AGHT+IFH/9CySRShC94nFw9UunKX2sRCoFuNlkS4DCoQU46r6V+s7M3YfRcJ8MxE5SjH5yjXwvy3Zg==
-X-Received: by 2002:a05:600c:a384:b0:431:1868:417f with SMTP id
- 5b1f17b1804b1-432d2730ce1mr69929325e9.17.1731546837008; 
- Wed, 13 Nov 2024 17:13:57 -0800 (PST)
+ AJvYcCVJw3dUKzeTqKhaxLRnM8sNmFZZM3NCsFNIhQiLJ2IBUhjF83rI70nSJMAY97AYZ4eF9JgNe3UD6YhQ@nongnu.org
+X-Gm-Message-State: AOJu0Yys4bLLkf+Xg+yvcRS1UXPU1qDR8Rx/Bi6b7Av3hwt8M4rP4ui6
+ 8oqoiaFJpFrgbqmLdvCnxbYrtFzqGGQxiTQeqtpDyOsZaKkq/kZtYYJWohI7E98=
+X-Google-Smtp-Source: AGHT+IFREe/JrPjo0y0t9M2Yxcx4JMxB17tQX6TF3pVR/3qVRL4KfJoVIRyzbtQL0IXAATDBdsI/jg==
+X-Received: by 2002:a5d:6d83:0:b0:37d:49a1:40c7 with SMTP id
+ ffacd0b85a97d-381f1872717mr19221825f8f.28.1731546916093; 
+ Wed, 13 Nov 2024 17:15:16 -0800 (PST)
 Received: from localhost.localdomain ([176.187.209.238])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-432dac0aea8sm1385325e9.31.2024.11.13.17.13.54
+ ffacd0b85a97d-381ed97c6b6sm19475690f8f.24.2024.11.13.17.15.13
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Wed, 13 Nov 2024 17:13:56 -0800 (PST)
+ Wed, 13 Nov 2024 17:15:14 -0800 (PST)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: Paolo Bonzini <pbonzini@redhat.com>,
  Richard Henderson <richard.henderson@linaro.org>,
@@ -70,18 +70,17 @@ Cc: qemu-ppc@nongnu.org, Thomas Huth <thuth@redhat.com>, qemu-arm@nongnu.org,
  =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
  qemu-s390x@nongnu.org,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-Subject: [PATCH 04/24] accel/tcg: Include missing 'exec/translation-block.h'
- header
-Date: Thu, 14 Nov 2024 02:12:49 +0100
-Message-ID: <20241114011310.3615-5-philmd@linaro.org>
+Subject: [PATCH 15/24] exec: Declare tlb_set_page_full() in 'exec/cputlb.h'
+Date: Thu, 14 Nov 2024 02:13:00 +0100
+Message-ID: <20241114011310.3615-16-philmd@linaro.org>
 X-Mailer: git-send-email 2.45.2
 In-Reply-To: <20241114011310.3615-1-philmd@linaro.org>
 References: <20241114011310.3615-1-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::32c;
- envelope-from=philmd@linaro.org; helo=mail-wm1-x32c.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::436;
+ envelope-from=philmd@linaro.org; helo=mail-wr1-x436.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -104,36 +103,100 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-TB compile flags are defined in "exec/translation-block.h".
-Include it in order to avoid when refactoring:
-
-  accel/tcg/tcg-accel-ops.c:62:36: error: use of undeclared identifier 'CF_CLUSTER_SHIFT'
-     62 |     cflags = cpu->cluster_index << CF_CLUSTER_SHIFT;
-        |                                    ^
-  accel/tcg/tcg-accel-ops.c:64:26: error: use of undeclared identifier 'CF_PARALLEL'
-     64 |     cflags |= parallel ? CF_PARALLEL : 0;
-        |                          ^
-  accel/tcg/tcg-accel-ops.c:65:34: error: use of undeclared identifier 'CF_USE_ICOUNT'
-     65 |     cflags |= icount_enabled() ? CF_USE_ICOUNT : 0;
-        |                                  ^
+Move CPU TLB related methods to "exec/cputlb.h".
 
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 ---
- accel/tcg/tcg-accel-ops.c | 1 +
- 1 file changed, 1 insertion(+)
+ include/exec/cputlb.h     | 23 +++++++++++++++++++++++
+ include/exec/exec-all.h   | 22 ----------------------
+ target/sparc/mmu_helper.c |  2 +-
+ 3 files changed, 24 insertions(+), 23 deletions(-)
 
-diff --git a/accel/tcg/tcg-accel-ops.c b/accel/tcg/tcg-accel-ops.c
-index 3c19e68a79..22486c5dff 100644
---- a/accel/tcg/tcg-accel-ops.c
-+++ b/accel/tcg/tcg-accel-ops.c
-@@ -35,6 +35,7 @@
- #include "exec/exec-all.h"
- #include "exec/hwaddr.h"
- #include "exec/tb-flush.h"
-+#include "exec/translation-block.h"
- #include "gdbstub/enums.h"
+diff --git a/include/exec/cputlb.h b/include/exec/cputlb.h
+index 5386e53806..f6205d5306 100644
+--- a/include/exec/cputlb.h
++++ b/include/exec/cputlb.h
+@@ -21,6 +21,7 @@
+ #define CPUTLB_H
  
- #include "hw/core/cpu.h"
+ #include "exec/cpu-common.h"
++#include "exec/vaddr.h"
+ 
+ #if defined(CONFIG_TCG) && !defined(CONFIG_USER_ONLY)
+ 
+@@ -57,4 +58,26 @@ void tlb_reset_dirty_range_all(ram_addr_t start, ram_addr_t length);
+ 
+ #endif
+ 
++/**
++ * tlb_set_page_full:
++ * @cpu: CPU context
++ * @mmu_idx: mmu index of the tlb to modify
++ * @addr: virtual address of the entry to add
++ * @full: the details of the tlb entry
++ *
++ * Add an entry to @cpu tlb index @mmu_idx.  All of the fields of
++ * @full must be filled, except for xlat_section, and constitute
++ * the complete description of the translated page.
++ *
++ * This is generally called by the target tlb_fill function after
++ * having performed a successful page table walk to find the physical
++ * address and attributes for the translation.
++ *
++ * At most one entry for a given virtual address is permitted. Only a
++ * single TARGET_PAGE_SIZE region is mapped; @full->lg_page_size is only
++ * used by tlb_flush_page.
++ */
++void tlb_set_page_full(CPUState *cpu, int mmu_idx, vaddr addr,
++                       CPUTLBEntryFull *full);
++
+ #endif
+diff --git a/include/exec/exec-all.h b/include/exec/exec-all.h
+index d792203773..79649537b0 100644
+--- a/include/exec/exec-all.h
++++ b/include/exec/exec-all.h
+@@ -174,28 +174,6 @@ void tlb_flush_range_by_mmuidx_all_cpus_synced(CPUState *cpu,
+                                                uint16_t idxmap,
+                                                unsigned bits);
+ 
+-/**
+- * tlb_set_page_full:
+- * @cpu: CPU context
+- * @mmu_idx: mmu index of the tlb to modify
+- * @addr: virtual address of the entry to add
+- * @full: the details of the tlb entry
+- *
+- * Add an entry to @cpu tlb index @mmu_idx.  All of the fields of
+- * @full must be filled, except for xlat_section, and constitute
+- * the complete description of the translated page.
+- *
+- * This is generally called by the target tlb_fill function after
+- * having performed a successful page table walk to find the physical
+- * address and attributes for the translation.
+- *
+- * At most one entry for a given virtual address is permitted. Only a
+- * single TARGET_PAGE_SIZE region is mapped; @full->lg_page_size is only
+- * used by tlb_flush_page.
+- */
+-void tlb_set_page_full(CPUState *cpu, int mmu_idx, vaddr addr,
+-                       CPUTLBEntryFull *full);
+-
+ /**
+  * tlb_set_page_with_attrs:
+  * @cpu: CPU to add this TLB entry for
+diff --git a/target/sparc/mmu_helper.c b/target/sparc/mmu_helper.c
+index 9ff06026b8..7548d01777 100644
+--- a/target/sparc/mmu_helper.c
++++ b/target/sparc/mmu_helper.c
+@@ -20,7 +20,7 @@
+ #include "qemu/osdep.h"
+ #include "qemu/log.h"
+ #include "cpu.h"
+-#include "exec/exec-all.h"
++#include "exec/cputlb.h"
+ #include "exec/page-protection.h"
+ #include "qemu/qemu-print.h"
+ #include "trace.h"
 -- 
 2.45.2
 
