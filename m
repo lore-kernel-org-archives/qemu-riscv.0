@@ -4,115 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 91655D637CD
-	for <qemu-riscv@archiver.kernel.org>; Wed, 13 Nov 2024 22:04:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0CED2D637D5
+	for <qemu-riscv@archiver.kernel.org>; Thu, 14 Nov 2024 01:14:27 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tBLTP-0007Ou-Sz; Wed, 13 Nov 2024 17:04:28 -0500
+	id 1tBOQa-0007Te-VC; Wed, 13 Nov 2024 20:13:44 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <farosas@suse.de>)
- id 1tBLTM-0007Jy-Tb; Wed, 13 Nov 2024 17:04:24 -0500
-Received: from smtp-out1.suse.de ([195.135.223.130])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tBOQY-0007Rt-ID
+ for qemu-riscv@nongnu.org; Wed, 13 Nov 2024 20:13:42 -0500
+Received: from mail-wr1-x42d.google.com ([2a00:1450:4864:20::42d])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <farosas@suse.de>)
- id 1tBLTL-0001Tq-C7; Wed, 13 Nov 2024 17:04:24 -0500
-Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org
- [IPv6:2a07:de40:b281:104:10:150:64:97])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id CF909211A4;
- Wed, 13 Nov 2024 22:04:20 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
- t=1731535461; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=7qG/1/H/4lFGvwFI+sjpXQjgy+bh55WmCjhnVU9+VGo=;
- b=R/TcjQWl8837+Xn4PPVt7KMxpR5aNmqCj812IAnb6l8+Dze8cbkkJsZcNS7XxI2jsVo5Gl
- BI0wrlddXp6p045avFRQPe9j46Wstkz060xYNYiltm2GSPj0iLF0vVts/CT8JCTfvRumKt
- X0EjwFL9v24woaItJbrAxn/RKGqBk6Q=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
- s=susede2_ed25519; t=1731535461;
- h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=7qG/1/H/4lFGvwFI+sjpXQjgy+bh55WmCjhnVU9+VGo=;
- b=iMTzvZuygJ4mEVPKRqRxFNpiRBz1nX4XEiXolRolrtz8XSmGHDrQ+Jre+x9pdGwFJCY2tp
- uvq+t4WyW5m3OaCQ==
-Authentication-Results: smtp-out1.suse.de;
- dkim=pass header.d=suse.de header.s=susede2_rsa header.b=NWoJit3P;
- dkim=pass header.d=suse.de header.s=susede2_ed25519 header.b=2gc2J+RT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
- t=1731535460; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=7qG/1/H/4lFGvwFI+sjpXQjgy+bh55WmCjhnVU9+VGo=;
- b=NWoJit3PfxsRiGG3GO0VrUlfGYZ4PyAJMMhyYTvbqD0RKdP3+ShHE45vB/UknnOdZsGSNQ
- yFkD01zK309hR7lSs8jvSm/uoWw+FaCPlWpJT84a3UMHmEykBTiQPYJWmAf89WN9xzkrn8
- CKkldAHIIB7TvHH1T9VuARpIlHYEyTU=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
- s=susede2_ed25519; t=1731535460;
- h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=7qG/1/H/4lFGvwFI+sjpXQjgy+bh55WmCjhnVU9+VGo=;
- b=2gc2J+RTczlCoicK7B8RdCj/CHfUJYcQieCbcQZMaUviAK01TsQlRP5buhAwIH9mQvYfyO
- JuS8kKMnvBLkD3BQ==
-Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 5858D13A6E;
- Wed, 13 Nov 2024 22:04:20 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
- by imap1.dmz-prg2.suse.org with ESMTPSA id VVE1CGQiNWcKGgAAD6G6ig
- (envelope-from <farosas@suse.de>); Wed, 13 Nov 2024 22:04:20 +0000
-From: Fabiano Rosas <farosas@suse.de>
-To: Ivan Klokov <ivan.klokov@syntacore.com>, qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, palmer@dabbelt.com, alistair.francis@wdc.com,
- bmeng.cn@gmail.com, liwei1518@gmail.com, dbarboza@ventanamicro.com,
- zhiwei_liu@linux.alibaba.com, lvivier@redhat.com, pbonzini@redhat.com,
- Ivan Klokov <ivan.klokov@syntacore.com>
-Subject: Re: [RFC PATCH v6 2/2] tests/qtest: QTest example for RISC-V CSR
- register
-In-Reply-To: <20241112143826.88130-3-ivan.klokov@syntacore.com>
-References: <20241112143826.88130-1-ivan.klokov@syntacore.com>
- <20241112143826.88130-3-ivan.klokov@syntacore.com>
-Date: Wed, 13 Nov 2024 19:04:17 -0300
-Message-ID: <874j4aiye6.fsf@suse.de>
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tBOQV-0001uk-Nz
+ for qemu-riscv@nongnu.org; Wed, 13 Nov 2024 20:13:42 -0500
+Received: by mail-wr1-x42d.google.com with SMTP id
+ ffacd0b85a97d-37d5689eea8so76694f8f.1
+ for <qemu-riscv@nongnu.org>; Wed, 13 Nov 2024 17:13:39 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1731546817; x=1732151617; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=JNM7lQQia63slkmiUAhjBzskGFuKTSllmSkbwj/sT+I=;
+ b=R78ImOcxcigsPnj6v0IY4brbqmrynaGc4Vf3YMpmTC+8u6I+XVwkaC5V5HU9wq1j6N
+ goBCzBJg4oN1dAQo/d+KSIpURFerbcT3eAwPWhWqCQfGVCelG8gAbkunvyrVFI2mjc0E
+ M1KIfitx4Av34iSv4n9Xs3hYpeikWTeqJb6Y+mekef2UiBp/fgAVTkQn7V9zEsbG/GoD
+ ZFGib+twNQF2dstgc1yaWTnBg6MrHROzymF0/j0OyuvrDnYuBK1OEseML1S57NDyNII2
+ 7yMy0cfKGoE7m16FlklNkPW5gjLPkQbbTHA0nh5sxBtF0dAPBakbLifOxRqFhaFsT7y4
+ pVpw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1731546817; x=1732151617;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=JNM7lQQia63slkmiUAhjBzskGFuKTSllmSkbwj/sT+I=;
+ b=QOzL1s2mIJ/AB7KCAhqzrDqVvQjgYtc4PqO92l3ys4+IXK8pbGj3Ih37yTTIx2BT77
+ GEMb0bx7FoLKWEDfHG2D+eeDcFxvnXCHEVqJ2e37EfFLT0AE8r3QEYVl9JaX5KYOhxDE
+ ea5nY0BwpFp9k2EI/NKsRNMRIsuwFvRu+z0M9i9sdfUuCo+yu0HQUgbbvn4f4zmuV3+Y
+ 9mSWDFrBC+bJ6tfZapmSCzMMeuXf9t/4q4+133cMSByXrz31zVXyz02V+yBYpjjFlv8x
+ DFaGZb8Iz4rz8h604QZ0jLMETXslCnJv3H+U3eEAq9qU2NVT9/JffMDpve8bTuoOfuys
+ NT0A==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXdCA8PCbNUUvuHd1NH/i8PBdxouu7+LLPMlM3O4UWQX+hvaUKAuhXE20qo9H69Mv12PdhUkGPoZuX4@nongnu.org
+X-Gm-Message-State: AOJu0YyCyzcq0OOiB9Uxz8beM/YRItEZGKaf7Xu7Eut3zavBvIofUG6I
+ j0k/L4X51RGGYgBvAf1/kyrh/M3BdJYte6hx7BPUG+4+QlhMHmhdv5s9gawDZvw=
+X-Google-Smtp-Source: AGHT+IGHZCPTq1Ky+i+zPEHV6OGPnrLZhJwIFC/QHlQ6UaCQcD+MtO44ZWUI0dTARLdzbNxkS3YCfA==
+X-Received: by 2002:a05:6000:1f8c:b0:37d:4a80:c395 with SMTP id
+ ffacd0b85a97d-381f186b313mr17332647f8f.21.1731546817266; 
+ Wed, 13 Nov 2024 17:13:37 -0800 (PST)
+Received: from localhost.localdomain ([176.187.209.238])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-381eda05f89sm19611165f8f.98.2024.11.13.17.13.33
+ (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
+ Wed, 13 Nov 2024 17:13:35 -0800 (PST)
+From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+To: Paolo Bonzini <pbonzini@redhat.com>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Anton Johansson <anjo@rev.ng>, qemu-devel@nongnu.org
+Cc: qemu-ppc@nongnu.org, Thomas Huth <thuth@redhat.com>, qemu-arm@nongnu.org,
+ Peter Xu <peterx@redhat.com>,
+ Pierrick Bouvier <pierrick.bouvier@linaro.org>, qemu-riscv@nongnu.org,
+ David Hildenbrand <david@redhat.com>,
+ Peter Maydell <peter.maydell@linaro.org>,
+ =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
+ qemu-s390x@nongnu.org,
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+Subject: [PATCH 01/24] exec/cpu-all: Include missing 'exec/cpu-defs.h' header
+Date: Thu, 14 Nov 2024 02:12:46 +0100
+Message-ID: <20241114011310.3615-2-philmd@linaro.org>
+X-Mailer: git-send-email 2.45.2
+In-Reply-To: <20241114011310.3615-1-philmd@linaro.org>
+References: <20241114011310.3615-1-philmd@linaro.org>
 MIME-Version: 1.0
-Content-Type: text/plain
-X-Rspamd-Queue-Id: CF909211A4
-X-Spamd-Result: default: False [-3.01 / 50.00]; BAYES_HAM(-3.00)[99.99%];
- SUSPICIOUS_RECIPS(1.50)[]; NEURAL_HAM_LONG(-1.00)[-1.000];
- R_DKIM_ALLOW(-0.20)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
- NEURAL_HAM_SHORT(-0.20)[-1.000]; MIME_GOOD(-0.10)[text/plain];
- MX_GOOD(-0.01)[]; TO_MATCH_ENVRCPT_ALL(0.00)[];
- FUZZY_BLOCKED(0.00)[rspamd.com]; ARC_NA(0.00)[];
- DKIM_SIGNED(0.00)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
- RCPT_COUNT_TWELVE(0.00)[12]; MIME_TRACE(0.00)[0:+];
- FREEMAIL_ENVRCPT(0.00)[gmail.com]; RCVD_TLS_ALL(0.00)[];
- TO_DN_SOME(0.00)[]; RCVD_COUNT_TWO(0.00)[2];
- FROM_EQ_ENVFROM(0.00)[]; FROM_HAS_DN(0.00)[];
- FREEMAIL_CC(0.00)[nongnu.org,dabbelt.com,wdc.com,gmail.com,ventanamicro.com,linux.alibaba.com,redhat.com,syntacore.com];
- MID_RHS_MATCH_FROM(0.00)[]; RCVD_VIA_SMTP_AUTH(0.00)[];
- TAGGED_RCPT(0.00)[]; DKIM_TRACE(0.00)[suse.de:+];
- MISSING_XM_UA(0.00)[];
- DBL_BLOCKED_OPENRESOLVER(0.00)[suse.de:email,suse.de:dkim,suse.de:mid]
-X-Rspamd-Server: rspamd2.dmz-prg2.suse.org
-X-Rspamd-Action: no action
-Received-SPF: pass client-ip=195.135.223.130; envelope-from=farosas@suse.de;
- helo=smtp-out1.suse.de
-X-Spam_score_int: -43
-X-Spam_score: -4.4
-X-Spam_bar: ----
-X-Spam_report: (-4.4 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::42d;
+ envelope-from=philmd@linaro.org; helo=mail-wr1-x42d.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_MED=-2.3, RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001,
- RCVD_IN_VALIDITY_SAFE_BLOCKED=0.001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -128,13 +103,33 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Ivan Klokov <ivan.klokov@syntacore.com> writes:
+TARGET_PAGE_BITS is defined in "exec/cpu-defs.h".
+Include it in order to avoid when refactoring:
 
-> Added demo for reading CSR register from qtest environment.
->
-> Signed-off-by: Ivan Klokov <ivan.klokov@syntacore.com>
+  In file included from ../../system/watchpoint.c:23:
+  include/exec/cpu-all.h:356:19: error: use of undeclared identifier 'TARGET_PAGE_BITS'
+    356 | QEMU_BUILD_BUG_ON(TLB_FLAGS_MASK & TLB_SLOW_FLAGS_MASK);
+        |                   ^
 
-You forgot to carry my reviewed-by. Please include it when you resend:
+Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+---
+ include/exec/cpu-all.h | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Reviewed-by: Fabiano Rosas <farosas@suse.de>
+diff --git a/include/exec/cpu-all.h b/include/exec/cpu-all.h
+index 45e6676938..1c40e27672 100644
+--- a/include/exec/cpu-all.h
++++ b/include/exec/cpu-all.h
+@@ -136,7 +136,7 @@ static inline void stl_phys_notdirty(AddressSpace *as, hwaddr addr, uint32_t val
+ #endif
+ 
+ /* page related stuff */
+-
++#include "exec/cpu-defs.h"
+ #ifdef TARGET_PAGE_BITS_VARY
+ # include "exec/page-vary.h"
+ extern const TargetPageBits target_page;
+-- 
+2.45.2
+
 
