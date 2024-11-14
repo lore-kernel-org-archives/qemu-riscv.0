@@ -4,60 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0CED2D637D5
-	for <qemu-riscv@archiver.kernel.org>; Thu, 14 Nov 2024 01:14:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8089AD637D5
+	for <qemu-riscv@archiver.kernel.org>; Thu, 14 Nov 2024 01:15:19 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tBOQa-0007Te-VC; Wed, 13 Nov 2024 20:13:44 -0500
+	id 1tBOQg-0007VW-MV; Wed, 13 Nov 2024 20:13:50 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tBOQY-0007Rt-ID
- for qemu-riscv@nongnu.org; Wed, 13 Nov 2024 20:13:42 -0500
-Received: from mail-wr1-x42d.google.com ([2a00:1450:4864:20::42d])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tBOQe-0007UM-Qs
+ for qemu-riscv@nongnu.org; Wed, 13 Nov 2024 20:13:48 -0500
+Received: from mail-wm1-x32b.google.com ([2a00:1450:4864:20::32b])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tBOQV-0001uk-Nz
- for qemu-riscv@nongnu.org; Wed, 13 Nov 2024 20:13:42 -0500
-Received: by mail-wr1-x42d.google.com with SMTP id
- ffacd0b85a97d-37d5689eea8so76694f8f.1
- for <qemu-riscv@nongnu.org>; Wed, 13 Nov 2024 17:13:39 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tBOQc-0001wp-IA
+ for qemu-riscv@nongnu.org; Wed, 13 Nov 2024 20:13:48 -0500
+Received: by mail-wm1-x32b.google.com with SMTP id
+ 5b1f17b1804b1-43159c9f617so886675e9.2
+ for <qemu-riscv@nongnu.org>; Wed, 13 Nov 2024 17:13:46 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1731546817; x=1732151617; darn=nongnu.org;
+ d=linaro.org; s=google; t=1731546824; x=1732151624; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=JNM7lQQia63slkmiUAhjBzskGFuKTSllmSkbwj/sT+I=;
- b=R78ImOcxcigsPnj6v0IY4brbqmrynaGc4Vf3YMpmTC+8u6I+XVwkaC5V5HU9wq1j6N
- goBCzBJg4oN1dAQo/d+KSIpURFerbcT3eAwPWhWqCQfGVCelG8gAbkunvyrVFI2mjc0E
- M1KIfitx4Av34iSv4n9Xs3hYpeikWTeqJb6Y+mekef2UiBp/fgAVTkQn7V9zEsbG/GoD
- ZFGib+twNQF2dstgc1yaWTnBg6MrHROzymF0/j0OyuvrDnYuBK1OEseML1S57NDyNII2
- 7yMy0cfKGoE7m16FlklNkPW5gjLPkQbbTHA0nh5sxBtF0dAPBakbLifOxRqFhaFsT7y4
- pVpw==
+ bh=n4W2o+WVI2EW3XsW3lSsIks/9d2PO57Qya5v8Q7poU8=;
+ b=LitgoMJUmq+gqemI4ODNsD9dB2joc/86+4Bm4D55FpaYIq3e1DyF0VyRTlNoPlsy5I
+ qQ0v0P/SnY2dSch4f0h4YQfTZ7HVqsVyAoFY1PiUPiO5qrrF9CT0scM1L6TRsBCEgvaa
+ bSnKWelY7q7pO5Y3V10Nr/TJpT1DDAdlnFQCWKkwZUz0Ylz2LHUaA4jRfI02gq1juL1A
+ FKsb57f07L1k9Lc23Lk+5cwF9tgKFMZy3DBA2aZoL2p+0WW8GGQBFEw/rkRs8xOv/3n+
+ BG1pqZKtSQ285vHI2z+8Q1Ul7tPPCACfnz6RNuNlOgbGbbxgdIjBkBMmq+JqeOZM7r+2
+ /KkQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731546817; x=1732151617;
+ d=1e100.net; s=20230601; t=1731546824; x=1732151624;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=JNM7lQQia63slkmiUAhjBzskGFuKTSllmSkbwj/sT+I=;
- b=QOzL1s2mIJ/AB7KCAhqzrDqVvQjgYtc4PqO92l3ys4+IXK8pbGj3Ih37yTTIx2BT77
- GEMb0bx7FoLKWEDfHG2D+eeDcFxvnXCHEVqJ2e37EfFLT0AE8r3QEYVl9JaX5KYOhxDE
- ea5nY0BwpFp9k2EI/NKsRNMRIsuwFvRu+z0M9i9sdfUuCo+yu0HQUgbbvn4f4zmuV3+Y
- 9mSWDFrBC+bJ6tfZapmSCzMMeuXf9t/4q4+133cMSByXrz31zVXyz02V+yBYpjjFlv8x
- DFaGZb8Iz4rz8h604QZ0jLMETXslCnJv3H+U3eEAq9qU2NVT9/JffMDpve8bTuoOfuys
- NT0A==
+ bh=n4W2o+WVI2EW3XsW3lSsIks/9d2PO57Qya5v8Q7poU8=;
+ b=uZsYJ+pnReIXgGoyXlxmMP2+dEMBTuQcIa2ToiTpfEIojzke5jLH4wLZD7Tp1iKsAk
+ Dh6GUPab4fOeuzx/S4PsV3Q7Mkq5yqUYjPghkuvqZhWx1klrZROQJmTCIkPXQIvBTYzn
+ AFe/puAJXFfGt15h8tBs97YGCa/mUjEznm74bhkicxUlQA+U/fJ1KfkYSAksgWi/hfpP
+ IqAnoYzw2eZ8qWTBCCG58IzMP1iDvaDFURL1xMH4iRu/3FhgvwkoJfluorf5dqJaA/uM
+ plMjzRBTfxJGjiBLzNbbk1WARFM+pdCOruG9/OX89ntKSS1xC4ngNV8UFt367RuR1o2l
+ MgBQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXdCA8PCbNUUvuHd1NH/i8PBdxouu7+LLPMlM3O4UWQX+hvaUKAuhXE20qo9H69Mv12PdhUkGPoZuX4@nongnu.org
-X-Gm-Message-State: AOJu0YyCyzcq0OOiB9Uxz8beM/YRItEZGKaf7Xu7Eut3zavBvIofUG6I
- j0k/L4X51RGGYgBvAf1/kyrh/M3BdJYte6hx7BPUG+4+QlhMHmhdv5s9gawDZvw=
-X-Google-Smtp-Source: AGHT+IGHZCPTq1Ky+i+zPEHV6OGPnrLZhJwIFC/QHlQ6UaCQcD+MtO44ZWUI0dTARLdzbNxkS3YCfA==
-X-Received: by 2002:a05:6000:1f8c:b0:37d:4a80:c395 with SMTP id
- ffacd0b85a97d-381f186b313mr17332647f8f.21.1731546817266; 
- Wed, 13 Nov 2024 17:13:37 -0800 (PST)
+ AJvYcCW6QJ7ZMxwKfc2LYIwzva+rEby9j53JbSy1k/YE0GygKPb07eKhKrUjnHfrVB/dd45GFuM4XQRWhzDa@nongnu.org
+X-Gm-Message-State: AOJu0Yz0MgdqtJEAcpB+G0bd9iVxNm4Mf4dH5C0g4jtTmenB4ovCSSIy
+ 1X2aIzNs/8Kj2D7Q/ls7b/R2KFtphA0wFUsb/orznLFRNhzH8eX12IKaPycG63A=
+X-Google-Smtp-Source: AGHT+IEicPSPnx9VguO/9hRNFn0r+OGPnyAza34mmQJUkip7pZQ0zwk7xapErhg7/qyCllNdtkSLxg==
+X-Received: by 2002:a05:600c:3582:b0:428:ec2a:8c94 with SMTP id
+ 5b1f17b1804b1-432b75035camr195067265e9.10.1731546824041; 
+ Wed, 13 Nov 2024 17:13:44 -0800 (PST)
 Received: from localhost.localdomain ([176.187.209.238])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-381eda05f89sm19611165f8f.98.2024.11.13.17.13.33
+ 5b1f17b1804b1-432dab721d7sm1548395e9.9.2024.11.13.17.13.41
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Wed, 13 Nov 2024 17:13:35 -0800 (PST)
+ Wed, 13 Nov 2024 17:13:43 -0800 (PST)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: Paolo Bonzini <pbonzini@redhat.com>,
  Richard Henderson <richard.henderson@linaro.org>,
@@ -70,17 +70,17 @@ Cc: qemu-ppc@nongnu.org, Thomas Huth <thuth@redhat.com>, qemu-arm@nongnu.org,
  =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
  qemu-s390x@nongnu.org,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-Subject: [PATCH 01/24] exec/cpu-all: Include missing 'exec/cpu-defs.h' header
-Date: Thu, 14 Nov 2024 02:12:46 +0100
-Message-ID: <20241114011310.3615-2-philmd@linaro.org>
+Subject: [PATCH 02/24] exec/cpu-defs: Remove unnecessary headers
+Date: Thu, 14 Nov 2024 02:12:47 +0100
+Message-ID: <20241114011310.3615-3-philmd@linaro.org>
 X-Mailer: git-send-email 2.45.2
 In-Reply-To: <20241114011310.3615-1-philmd@linaro.org>
 References: <20241114011310.3615-1-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::42d;
- envelope-from=philmd@linaro.org; helo=mail-wr1-x42d.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::32b;
+ envelope-from=philmd@linaro.org; helo=mail-wm1-x32b.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -103,32 +103,33 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-TARGET_PAGE_BITS is defined in "exec/cpu-defs.h".
-Include it in order to avoid when refactoring:
-
-  In file included from ../../system/watchpoint.c:23:
-  include/exec/cpu-all.h:356:19: error: use of undeclared identifier 'TARGET_PAGE_BITS'
-    356 | QEMU_BUILD_BUG_ON(TLB_FLAGS_MASK & TLB_SLOW_FLAGS_MASK);
-        |                   ^
+"exec/cpu-defs.h" should be kept as minimal as possible;
+besides these includes don't seem necessay. Remove them.
 
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 ---
- include/exec/cpu-all.h | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ include/exec/cpu-defs.h | 8 --------
+ 1 file changed, 8 deletions(-)
 
-diff --git a/include/exec/cpu-all.h b/include/exec/cpu-all.h
-index 45e6676938..1c40e27672 100644
---- a/include/exec/cpu-all.h
-+++ b/include/exec/cpu-all.h
-@@ -136,7 +136,7 @@ static inline void stl_phys_notdirty(AddressSpace *as, hwaddr addr, uint32_t val
+diff --git a/include/exec/cpu-defs.h b/include/exec/cpu-defs.h
+index 0dbef3010c..ae18398fa9 100644
+--- a/include/exec/cpu-defs.h
++++ b/include/exec/cpu-defs.h
+@@ -23,14 +23,6 @@
+ #error cpu.h included from common code
  #endif
  
- /* page related stuff */
+-#include "qemu/host-utils.h"
+-#include "qemu/thread.h"
+-#ifndef CONFIG_USER_ONLY
+-#include "exec/hwaddr.h"
+-#endif
+-#include "exec/memattrs.h"
+-#include "hw/core/cpu.h"
 -
-+#include "exec/cpu-defs.h"
- #ifdef TARGET_PAGE_BITS_VARY
- # include "exec/page-vary.h"
- extern const TargetPageBits target_page;
+ #include "cpu-param.h"
+ 
+ #ifndef TARGET_LONG_BITS
 -- 
 2.45.2
 
