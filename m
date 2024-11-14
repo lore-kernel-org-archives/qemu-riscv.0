@@ -4,71 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B1BF3D68B01
-	for <qemu-riscv@archiver.kernel.org>; Thu, 14 Nov 2024 12:54:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9AAD1D68B11
+	for <qemu-riscv@archiver.kernel.org>; Thu, 14 Nov 2024 13:27:30 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tBZMW-0004R3-Pb; Thu, 14 Nov 2024 07:54:16 -0500
+	id 1tBZsK-0001kb-IG; Thu, 14 Nov 2024 08:27:08 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <phil@philjordan.eu>)
- id 1tBZMT-0004J3-MB
- for qemu-riscv@nongnu.org; Thu, 14 Nov 2024 07:54:13 -0500
-Received: from mail-ua1-x92f.google.com ([2607:f8b0:4864:20::92f])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <phil@philjordan.eu>)
- id 1tBZMQ-0006B9-6J
- for qemu-riscv@nongnu.org; Thu, 14 Nov 2024 07:54:13 -0500
-Received: by mail-ua1-x92f.google.com with SMTP id
- a1e0cc1a2514c-856d47976d9so193113241.1
- for <qemu-riscv@nongnu.org>; Thu, 14 Nov 2024 04:54:08 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=philjordan-eu.20230601.gappssmtp.com; s=20230601; t=1731588848; x=1732193648;
- darn=nongnu.org; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=ZzQmOlhVtHYq01wXZpayPTTzUs7TEDCb5AZ4owwhhT0=;
- b=J5M6TuABpb8sqsT409kiYkpKN0mCl/GCQzXUz13ok4rAtydB4wlmjQ07kV14l4pgt2
- YLIZPoOFu2vpAQeMz+GW48K+s4qB9TnrrO4BcaPRuCgr+TmYDgJD2ZR7MpF7TTd/EOHJ
- CWECrc5XbpilfcHkN1tLVhp6D2P7LIGINO2uuznW9t/ESMuiOv4WbpymuvvmXZxKVcmD
- klmlBYk0gl3nMWKnwW9lW5A9pwUX/xTWprviL1EQpZk0WMqL5xMNc17FOEpa47I01TDp
- agRctvbgEBQhAnNmCzZGE5FSEQ8Ht1u5wo0NdYm+HrHGWxmJWNlaL4LHJiIbBympkqNN
- lP+Q==
+ (Exim 4.90_1) (envelope-from <pbonzini@redhat.com>)
+ id 1tBZsJ-0001jl-2r
+ for qemu-riscv@nongnu.org; Thu, 14 Nov 2024 08:27:07 -0500
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <pbonzini@redhat.com>)
+ id 1tBZsH-0007Ot-CN
+ for qemu-riscv@nongnu.org; Thu, 14 Nov 2024 08:27:06 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1731590824;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=vKmNwUQm6N8OZ4WFnBjPn/L9WzpJEfMJhrvQsiWkang=;
+ b=DyP1OOypu80o3fUOok7pJ1U1webhGUKJj72n4jsopHbl5aQrTA4dQbVQ+B0v4LANZF+lR0
+ rUNCHHc9KNxW1Ke+9GE0v4vjaCfMMGhRNSN6gyv21xkg8rOWVyl5QefJGYACWwup70ViGZ
+ QJDX4Pdj1kbT6FCd9HZzKT/J0pl5tNQ=
+Received: from mail-wr1-f72.google.com (mail-wr1-f72.google.com
+ [209.85.221.72]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-48-bN-WIoc6NoyAjecj8M0E0g-1; Thu, 14 Nov 2024 08:27:03 -0500
+X-MC-Unique: bN-WIoc6NoyAjecj8M0E0g-1
+X-Mimecast-MFC-AGG-ID: bN-WIoc6NoyAjecj8M0E0g
+Received: by mail-wr1-f72.google.com with SMTP id
+ ffacd0b85a97d-382219f45baso73045f8f.1
+ for <qemu-riscv@nongnu.org>; Thu, 14 Nov 2024 05:27:03 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731588848; x=1732193648;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=ZzQmOlhVtHYq01wXZpayPTTzUs7TEDCb5AZ4owwhhT0=;
- b=TqYcrYMywZn0pCnYYYAQ8amtA/ZYTTOQ2ZuHlZrnrc3EKxV0vLKmuoQ3LvT5I2qZ0m
- iJuZC2Ai61JCXbiTjNYbctVhmGdT6Eb2BgFh4Sk+USNKtwmAu89eCOkjGpLvYNd41v8j
- BImq8dTO7I65VYVEeGmo8SkfDZBA42QJDu/agandcz6fVODy0VnX4sd//SrrUbNJ3DV2
- qIEhJJcmWlgbZFWiCJyIat1h/a6gsEsJ+f8nRD6yAT1ZDul2Lvrhn1fFaOuIbPpccWbH
- aPnunLDQbPfKQY/z4MxPGwfmAvOcaSyACh1pE32tMFplj2NI709Xb5xBz7H4ceeZmk8z
- vbkQ==
+ d=1e100.net; s=20230601; t=1731590822; x=1732195622;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=vKmNwUQm6N8OZ4WFnBjPn/L9WzpJEfMJhrvQsiWkang=;
+ b=u20TrcSEbPiovKBDZAPaGsmCUVrr7J1sf2hVjWFr8cufQH4u/JHXr17nxVARuUSa2Y
+ yPLS6sgRUMUuHWkrQfTPoa7mQp3HECjErH2WM0zuRCgdNAXa4UfVuGHFXmKlawS1pDJy
+ FHUJwDUfp4g/vB2qu6wbFR1CPvBD+IpBdCwAX1x/6vOS3WghRuM9NMCk1ju3joxY7cEl
+ vuO/EHdNxnbCrdABC/pL7SAw7KHd5GveVG7qCXAOABmrd+I2IOLzgmp3bGb7jdNTOK/l
+ X3oRgsO8+3t54YgsTcbZKsWUo6GixxGTr+FfgnmzvjuAzEK80SZ3vqGLRfpTMaoJGWYq
+ cr9Q==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUcaVuDmz7NBcU0R/uB6/r7LcH9hkf1A5tQ9gATZyB6efpnAfZp25uLopR3w1sRhiwFyRbEhgDaoOVq@nongnu.org
-X-Gm-Message-State: AOJu0YxU0GVDMNrmkrw/a2WfIkvMD9ZQHmBB14J4c7G/rajqk16h5GJ/
- USPioZ2MH3pCFiiK67UrN/P/AfHaN9H/HpPrVJmm5z1wTnOzgPq9mQTKop0LnlQwyYsJSr0Giu1
- tPPo/ON48ohTEsfOC5ahNcQoYJfbzi2bXToBd
-X-Google-Smtp-Source: AGHT+IEukBwTkvDALH/1x856xceds/zUDzXTnY7YVpV7H4lIy727bUO8HGdRrZc92vU6md0nPdaDlscy9oohOxJe34U=
-X-Received: by 2002:a05:6102:32cb:b0:4a4:8fc3:9c8 with SMTP id
- ada2fe7eead31-4ad468ad19emr7337057137.10.1731588847989; Thu, 14 Nov 2024
- 04:54:07 -0800 (PST)
+ AJvYcCWWJ2RTU8ZEmqf0Dm2/YgUpWpcnhhnIvja0pBtWnD0slU+m7/fPlJHD1Rz97VnMlyZOfUZISPpiHiCB@nongnu.org
+X-Gm-Message-State: AOJu0YyKONUdT2sam1Zsexsc/38jnRAcuGqlFj/rc8lK3NTuVX8fX6m2
+ vkK0OgafJoYaquUlBk8z7Fju8BKnPcaPQvvggqx2mMAbj966E0m9rHSRWdZJpBnWEGpKCkoAtoc
+ ZMB5liR4ltYMzKol2a61CqeZjl0qDHHdywqMk1E63DZeb/orE9qRS/5gXr6xpk7luYaLsw8k+oz
+ lWmT/kfqM/K0Bi+5zUeeGrPq3/JJE=
+X-Received: by 2002:a05:6000:1567:b0:374:c17a:55b5 with SMTP id
+ ffacd0b85a97d-3820810fdb5mr9327334f8f.14.1731590822074; 
+ Thu, 14 Nov 2024 05:27:02 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IF1tO9NFPBCq8KEX3IMOfL0txo+saZQ64eLCfz1SWhqaRTqA46/k/L5IMs1FYU3ex4uzBfEZoNnm4Q0DhdLEng=
+X-Received: by 2002:a05:6000:1567:b0:374:c17a:55b5 with SMTP id
+ ffacd0b85a97d-3820810fdb5mr9327293f8f.14.1731590821354; Thu, 14 Nov 2024
+ 05:27:01 -0800 (PST)
 MIME-Version: 1.0
 References: <20241113142343.40832-1-phil@philjordan.eu>
  <20241113142343.40832-2-phil@philjordan.eu>
- <9dd5c736-e1b8-a025-745a-52e9aacb4b9b@eik.bme.hu>
-In-Reply-To: <9dd5c736-e1b8-a025-745a-52e9aacb4b9b@eik.bme.hu>
-From: Phil Dennis-Jordan <phil@philjordan.eu>
-Date: Thu, 14 Nov 2024 13:53:57 +0100
-Message-ID: <CAAibmn2PJ0Q0E3KEGZqu9ogbMt+qiBLRuXa6C74ud=2S4G8DSA@mail.gmail.com>
+ <c0983059-ab11-4bc5-ab60-c5b23d1c290e@redhat.com>
+ <CAGCz3vv+5y=YGqZaXnGkVj0zA9fX-n3BOZyuPQC+dRMKN8VJZw@mail.gmail.com>
+In-Reply-To: <CAGCz3vv+5y=YGqZaXnGkVj0zA9fX-n3BOZyuPQC+dRMKN8VJZw@mail.gmail.com>
+From: Paolo Bonzini <pbonzini@redhat.com>
+Date: Thu, 14 Nov 2024 14:26:48 +0100
+Message-ID: <CABgObfat1JwiBFNKHK6wwMkW5kgaqZfKJa=rW_9VvEdMWJR75A@mail.gmail.com>
 Subject: Re: [PATCH v10 01/15] ui & main loop: Redesign of system-specific
  main thread event handling
-To: BALATON Zoltan <balaton@eik.bme.hu>
-Cc: qemu-devel@nongnu.org, agraf@csgraf.de, peter.maydell@linaro.org, 
- pbonzini@redhat.com, rad@semihalf.com, quic_llindhol@quicinc.com, 
+To: Phil Dennis-Jordan <lists@philjordan.eu>
+Cc: Phil Dennis-Jordan <phil@philjordan.eu>, qemu-devel@nongnu.org,
+ agraf@csgraf.de, 
+ peter.maydell@linaro.org, rad@semihalf.com, quic_llindhol@quicinc.com, 
  stefanha@redhat.com, mst@redhat.com, slp@redhat.com, 
  richard.henderson@linaro.org, eduardo@habkost.net, marcel.apfelbaum@gmail.com, 
  gaosong@loongson.cn, jiaxun.yang@flygoat.com, chenhuacai@kernel.org, 
@@ -77,16 +87,22 @@ Cc: qemu-devel@nongnu.org, agraf@csgraf.de, peter.maydell@linaro.org,
  liwei1518@gmail.com, dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com, 
  jcmvbkbc@gmail.com, marcandre.lureau@redhat.com, berrange@redhat.com, 
  akihiko.odaki@daynix.com, qemu-arm@nongnu.org, qemu-block@nongnu.org, 
- qemu-riscv@nongnu.org
-Content-Type: multipart/alternative; boundary="0000000000002e8b8b0626def2f4"
-Received-SPF: neutral client-ip=2607:f8b0:4864:20::92f;
- envelope-from=phil@philjordan.eu; helo=mail-ua1-x92f.google.com
-X-Spam_score_int: -10
-X-Spam_score: -1.1
-X-Spam_bar: -
-X-Spam_report: (-1.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, HTML_MESSAGE=0.001, RCVD_IN_DNSWL_NONE=-0.0001,
- SPF_HELO_NONE=0.001, SPF_NEUTRAL=0.779 autolearn=no autolearn_force=no
+ qemu-riscv@nongnu.org, balaton@eik.bme.hu
+X-Mimecast-Spam-Score: 0
+X-Mimecast-MFC-PROC-ID: NcSmzfrnFLEsUYdFO04iRWxC20Tl7d4gqh6LxHAyn4o_1731590822
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=170.10.133.124; envelope-from=pbonzini@redhat.com;
+ helo=us-smtp-delivery-124.mimecast.com
+X-Spam_score_int: -21
+X-Spam_score: -2.2
+X-Spam_bar: --
+X-Spam_report: (-2.2 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.122,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H3=0.001, RCVD_IN_MSPIKE_WL=0.001,
+ RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001, RCVD_IN_VALIDITY_SAFE_BLOCKED=0.001,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -102,690 +118,76 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
---0000000000002e8b8b0626def2f4
-Content-Type: text/plain; charset="UTF-8"
-
-On Wed, 13 Nov 2024 at 19:16, BALATON Zoltan <balaton@eik.bme.hu> wrote:
-
-> On Wed, 13 Nov 2024, Phil Dennis-Jordan wrote:
-> > macOS's Cocoa event handling must be done on the initial (main) thread
-> > of the process. Furthermore, if library or application code uses
-> > libdispatch, the main dispatch queue must be handling events on the main
-> > thread as well.
-> >
-> > So far, this has affected Qemu in both the Cocoa and SDL UIs, although
-> > in different ways: the Cocoa UI replaces the default qemu_main function
-> > with one that spins Qemu's internal main event loop off onto a
-> > background thread. SDL (which uses Cocoa internally) on the other hand
-> > uses a polling approach within Qemu's main event loop. Events are
-> > polled during the SDL UI's dpy_refresh callback, which happens to run
-> > on the main thread by default.
-> >
-> > As UIs are mutually exclusive, this works OK as long as nothing else
-> > needs platform-native event handling. In the next patch, a new device is
-> > introduced based on the ParavirtualizedGraphics.framework in macOS.
-> > This uses libdispatch internally, and only works when events are being
-> > handled on the main runloop. With the current system, it works when
-> > using either the Cocoa or the SDL UI. However, it does not when running
-> > headless. Moreover, any attempt to install a similar scheme to the
-> > Cocoa UI's main thread replacement fails when combined with the SDL
-> > UI.
-> >
-> > This change tidies up main thread management to be more flexible.
-> >
-> > * The qemu_main global function pointer is a custom function for the
-> >   main thread, and it may now be NULL. When it is, the main thread
-> >   runs the main Qemu loop. This represents the traditional setup.
-> > * When non-null, spawning the main Qemu event loop on a separate
-> >   thread is now done centrally rather than inside the Cocoa UI code.
-> > * For most platforms, qemu_main is indeed NULL by default, but on
-> >   Darwin, it defaults to a function that runs the CFRunLoop.
-> > * The Cocoa UI sets qemu_main to a function which runs the
-> >   NSApplication event handling runloop, as is usual for a Cocoa app.
-> > * The SDL UI overrides the qemu_main function to NULL, thus
-> >   specifying that Qemu's main loop must run on the main
-> >   thread.
-> > * The GTK UI also overrides the qemu_main function to NULL.
-> > * For other UIs, or in the absence of UIs, the platform's default
-> >   behaviour is followed.
-> >
-> > This means that on macOS, the platform's runloop events are always
-> > handled, regardless of chosen UI. The new PV graphics device will
-> > thus work in all configurations. There is no functional change on other
-> > operating systems.
-> >
-> > Signed-off-by: Phil Dennis-Jordan <phil@philjordan.eu>
-> > Reviewed-by: Akihiko Odaki <akihiko.odaki@daynix.com>
-> > ---
-> >
-> > v5:
-> >
-> > * Simplified the way of setting/clearing the main loop by going back
-> >   to setting qemu_main directly, but narrowing the scope of what it
-> >   needs to do, and it can now be NULL.
-> >
-> > v6:
-> >
-> > * Folded function qemu_run_default_main_on_new_thread's code into
-> >   main()
-> > * Removed whitespace changes left over on lines near code removed
-> >   between v4 and v5
-> >
-> > v9:
-> >
-> > * Set qemu_main to NULL for GTK UI as well.
-> >
-> > v10:
-> >
-> > * Added comments clarifying the functionality and purpose of qemu_main.
-> >
-> > include/qemu-main.h     | 21 ++++++++++++++--
-> > include/qemu/typedefs.h |  1 +
-> > system/main.c           | 50 ++++++++++++++++++++++++++++++++++----
-> > ui/cocoa.m              | 54 ++++++++++-------------------------------
-> > ui/gtk.c                |  8 ++++++
-> > ui/sdl2.c               |  4 +++
-> > 6 files changed, 90 insertions(+), 48 deletions(-)
-> >
-> > diff --git a/include/qemu-main.h b/include/qemu-main.h
-> > index 940960a7dbc..fc70681c8b5 100644
-> > --- a/include/qemu-main.h
-> > +++ b/include/qemu-main.h
-> > @@ -5,7 +5,24 @@
-> > #ifndef QEMU_MAIN_H
-> > #define QEMU_MAIN_H
-> >
-> > -int qemu_default_main(void);
-> > -extern int (*qemu_main)(void);
-> > +/*
-> > + * The function to run on the main (initial) thread of the process.
-> > + * NULL means QEMU's main event loop.
-> > + * When non-NULL, QEMU's main event loop will run on a purposely created
-> > + * thread, after which the provided function pointer will be invoked on
-> > + * the initial thread.
-> > + * This is useful on platforms which treat the main thread as special
-> > + * (macOS/Darwin) and/or require all UI API calls to occur from a
-> > + * specific thread.
-> > + * Implementing this via a global function pointer variable is a bit
-> > + * ugly, but it's probably worth investigating the existing UI thread
-> rule
-> > + * violations in the SDL (e.g. #2537) and GTK+ back-ends. Fixing those
-> > + * issues might precipitate requirements similar but not identical to
-> those
-> > + * of the Cocoa UI; hopefully we'll see some kind of pattern emerge,
-> which
-> > + * can then be used as a basis for an overhaul. (In fact, it may turn
-> > + * out to be simplest to split the UI/native platform event thread from
-> the
-> > + * QEMU main event loop on all platforms, with any UI or even none at
-> all.)
-> > + */
-> > +extern qemu_main_fn qemu_main;
->
-> qemu_main_fn is defined in typdefefs.h but not included here. Also coding
-> style says typedefs should be CamelCase but maybe it's just not worth to
-> define a type for this and you can just leave the existing line here only
-> removing the qemu_default_main declaration and adding the comment.
->
-> > #endif /* QEMU_MAIN_H */
-> > diff --git a/include/qemu/typedefs.h b/include/qemu/typedefs.h
-> > index 3d84efcac47..b02cfe1f328 100644
-> > --- a/include/qemu/typedefs.h
-> > +++ b/include/qemu/typedefs.h
-> > @@ -131,5 +131,6 @@ typedef struct IRQState *qemu_irq;
-> >  * Function types
-> >  */
-> > typedef void (*qemu_irq_handler)(void *opaque, int n, int level);
-> > +typedef int (*qemu_main_fn)(void);
->
-> Then drop this change...
->
-> > #endif /* QEMU_TYPEDEFS_H */
-> > diff --git a/system/main.c b/system/main.c
-> > index 9b91d21ea8c..d9397a6d5d0 100644
-> > --- a/system/main.c
-> > +++ b/system/main.c
-> > @@ -24,13 +24,14 @@
-> >
-> > #include "qemu/osdep.h"
-> > #include "qemu-main.h"
-> > +#include "qemu/main-loop.h"
-> > #include "sysemu/sysemu.h"
-> >
-> > -#ifdef CONFIG_SDL
-> > -#include <SDL.h>
-> > +#ifdef CONFIG_DARWIN
-> > +#include <CoreFoundation/CoreFoundation.h>
-> > #endif
-> >
-> > -int qemu_default_main(void)
-> > +static int qemu_default_main(void)
-> > {
-> >     int status;
-> >
-> > @@ -40,10 +41,49 @@ int qemu_default_main(void)
-> >     return status;
-> > }
-> >
-> > -int (*qemu_main)(void) = qemu_default_main;
->
-> ...and leave this line here without init to define the global variable and
-> only put assigning the init value in the #ifdef if you don't want to
-> repeat the function pointer definition twice (but that wouldn't be a
-> problem either in my opinion to do it in the #ifdef this way).
->
-> > +/*
-> > + * Various macOS system libraries, including the Cocoa UI and anything
-> using
-> > + * libdispatch, such as ParavirtualizedGraphics.framework, requires
-> that the
-> > + * main runloop, on the main (initial) thread be running or at least
-> regularly
-> > + * polled for events. A special mode is therefore supported, where the
-> QEMU
-> > + * main loop runs on a separate thread and the main thread handles the
-> > + * CF/Cocoa runloop.
-> > + */
-> > +
-> > +static void *call_qemu_default_main(void *opaque)
-> > +{
-> > +    int status;
-> > +
-> > +    bql_lock();
-> > +    status = qemu_default_main();
-> > +    bql_unlock();
-> > +
-> > +    exit(status);
-> > +}
-> > +
-> > +#ifdef CONFIG_DARWIN
-> > +static int os_darwin_cfrunloop_main(void)
-> > +{
-> > +    CFRunLoopRun();
-> > +    abort();
->
-> Is it better to use g_assert_not_reached() here?
->
-> > +}
-> > +
-> > +qemu_main_fn qemu_main = os_darwin_cfrunloop_main;
-> > +#else
-> > +qemu_main_fn qemu_main;
-> > +#endif
-> >
-> > int main(int argc, char **argv)
-> > {
-> > +    QemuThread main_loop_thread;
-> > +
-> >     qemu_init(argc, argv);
-> > -    return qemu_main();
-> > +    if (qemu_main) {
-> > +        qemu_thread_create(&main_loop_thread, "qemu_main",
-> > +                           call_qemu_default_main, NULL,
-> QEMU_THREAD_DETACHED);
-> > +        bql_unlock();
-> > +        return qemu_main();
-> > +    } else {
-> > +        qemu_default_main();
->
-> I think you need 'return qemu_default_main()' here but I'm a bit confused
-> by all this wrapping of qemu_default_main in call_qemu_default_main. I see
-> that may be needed because qemu_thread_create takes a different function
-> but now that qemu_default main is static and not replaced externally could
-> that be changed to the right type and avoid this confusion and simplify
-> this a bit?
->
-> Regards,
-> BALATON Zoltan
+On Thu, Nov 14, 2024 at 11:32=E2=80=AFAM Phil Dennis-Jordan <lists@philjord=
+an.eu> wrote:
+>> I checked what GTK+ does and, either way, you have to create another
+>> thread: timers are handled with a CFRunLoopTimer, but file descriptors
+>> are polled in a separate thread and sent to the main thread with a
+>> single CFRunLoopSource.  It's a bit nicer that the main thread is in
+>> charge, but it's more complex and probably slower too.
 >
 >
-Alright, I've gone ahead and worked through that, and it does indeed make
-things simpler. This is what I have for include/qemu-main.h and
-system/main.c now:
+> Just to clarify: is this supposed to be happening inside the GTK+ library=
+ itself? i.e. GTK should spawn its own thread to poll file descriptors that=
+ are owned by GTK? (As opposed to the file descriptors used by QEMU's own e=
+vent loop - what on Linux are eventfds, but on macOS I think are just pipes=
+*.)
 
-diff --git a/include/qemu-main.h b/include/qemu-main.h
-index 940960a7dbc..e1041fe99b4 100644
---- a/include/qemu-main.h
-+++ b/include/qemu-main.h
-@@ -5,7 +5,29 @@
- #ifndef QEMU_MAIN_H
- #define QEMU_MAIN_H
+It's what I saw in the GTK+ source code.
 
--int qemu_default_main(void);
-+/*
-+ * The function to run on the main (initial) thread of the process.
-+ * NULL means QEMU's main event loop.
-+ * When non-NULL, QEMU's main event loop will run on a purposely created
-+ * thread, after which the provided function pointer will be invoked on
-+ * the initial thread.
-+ * This is useful on platforms which treat the main thread as special
-+ * (macOS/Darwin) and/or require all UI API calls to occur from a
-+ * specific thread.
-+ * In practice, this means that on macOS, it is initialised to a function
-+ * that runs the Core Foundation runloop. The Cocoa UI "upgrades" this
-+ * to the NSApplication-specific event processing variant. Other platforms
-+ * currently leave it at NULL; the SDL and GTK UIs reset it to NULL even
-+ * on macOS as they directly poll the runloop.
-+ * Implementing this via a global function pointer variable is a bit
-+ * ugly, but it's probably worth investigating the existing UI thread rule
-+ * violations in the SDL (e.g. #2537) and GTK+ back-ends. Fixing those
-+ * issues might precipitate requirements similar but not identical to those
-+ * of the Cocoa UI; hopefully we'll see some kind of pattern emerge, which
-+ * can then be used as a basis for an overhaul. (In fact, it may turn
-+ * out to be simplest to split the UI/native platform event thread from the
-+ * QEMU main event loop on all platforms, with any UI or even none at all.)
-+ */
- extern int (*qemu_main)(void);
+https://gitlab.gnome.org/GNOME/gtk/-/blob/main/gdk/macos/gdkmacoseventsourc=
+e.c?ref_type=3Dheads
 
- #endif /* QEMU_MAIN_H */
-diff --git a/system/main.c b/system/main.c
-index 9b91d21ea8c..2d9d144ed46 100644
---- a/system/main.c
-+++ b/system/main.c
-@@ -24,26 +24,48 @@
+> This doesn't describe what I'm seeing when I run with -display gtk on mac=
+OS. There's no extra thread created. There's a dock icon, but it's non-inte=
+ractive ("Application not responding"), there aren't any menus, and there's=
+ no window. QEMU's own simulation is running in the background - I can reac=
+h a guest via the network. So I guess there's some function in GTK we're su=
+pposed to be calling that will make it crank the native event loop on macOS=
+, but this isn't being done?
 
- #include "qemu/osdep.h"
- #include "qemu-main.h"
-+#include "qemu/main-loop.h"
- #include "sysemu/sysemu.h"
+In theory it should work, with the event source added as soon as GTK+
+is started... aha!
 
--#ifdef CONFIG_SDL
--#include <SDL.h>
-+#ifdef CONFIG_DARWIN
-+#include <CoreFoundation/CoreFoundation.h>
- #endif
+We do not use the GMainContext's poll_func, we use qemu_poll_ns.
+That's the missing part: GDK replaces the poll_func with one that
+calls nextEventMatchingMask:
 
--int qemu_default_main(void)
-+static void *qemu_default_main(void *opaque)
- {
-     int status;
+https://gitlab.gnome.org/GNOME/gtk/-/blame/main/gdk/macos/gdkmacoseventsour=
+ce.c?ref_type=3Dheads#L767
 
-+    bql_lock();
-     status = qemu_main_loop();
-     qemu_cleanup(status);
-+    bql_unlock();
+There could be more issues, but I think for now it's better to block
+the GTK+ UI under macOS.
 
--    return status;
-+    exit(status);
- }
+[...]
 
--int (*qemu_main)(void) = qemu_default_main;
-+#ifdef CONFIG_DARWIN
-+static int os_darwin_cfrunloop_main(void)
-+{
-+    CFRunLoopRun();
-+    g_assert_not_reached();
-+}
-+
-+int (*qemu_main)(void) = os_darwin_cfrunloop_main;
-+#else
-+int (*qemu_main)(void);
-+#endif
-
- int main(int argc, char **argv)
- {
-+    QemuThread main_loop_thread;
-+
-     qemu_init(argc, argv);
--    return qemu_main();
-+    bql_unlock();
-+    if (qemu_main) {
-+        qemu_thread_create(&main_loop_thread, "qemu_main",
-+                           qemu_default_main, NULL, QEMU_THREAD_DETACHED);
-+        return qemu_main();
-+    } else {
-+        qemu_default_main(NULL);
-+    }
- }
-
---0000000000002e8b8b0626def2f4
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><br><div class=3D"gmail_quote"><div dir=3D"ltr" class=3D"g=
-mail_attr">On Wed, 13 Nov 2024 at 19:16, BALATON Zoltan &lt;<a href=3D"mail=
-to:balaton@eik.bme.hu">balaton@eik.bme.hu</a>&gt; wrote:<br></div><blockquo=
-te class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px =
-solid rgb(204,204,204);padding-left:1ex">On Wed, 13 Nov 2024, Phil Dennis-J=
-ordan wrote:<br>
-&gt; macOS&#39;s Cocoa event handling must be done on the initial (main) th=
-read<br>
-&gt; of the process. Furthermore, if library or application code uses<br>
-&gt; libdispatch, the main dispatch queue must be handling events on the ma=
-in<br>
-&gt; thread as well.<br>
-&gt;<br>
-&gt; So far, this has affected Qemu in both the Cocoa and SDL UIs, although=
-<br>
-&gt; in different ways: the Cocoa UI replaces the default qemu_main functio=
-n<br>
-&gt; with one that spins Qemu&#39;s internal main event loop off onto a<br>
-&gt; background thread. SDL (which uses Cocoa internally) on the other hand=
-<br>
-&gt; uses a polling approach within Qemu&#39;s main event loop. Events are<=
-br>
-&gt; polled during the SDL UI&#39;s dpy_refresh callback, which happens to =
-run<br>
-&gt; on the main thread by default.<br>
-&gt;<br>
-&gt; As UIs are mutually exclusive, this works OK as long as nothing else<b=
-r>
-&gt; needs platform-native event handling. In the next patch, a new device =
-is<br>
-&gt; introduced based on the ParavirtualizedGraphics.framework in macOS.<br=
+>> As long as it's clear that any handlers that go through the CFRunLoop
+>> run outside the BQL, as is already the case for the Cocoa UI, I see no
+>> problem with this approach.
 >
-&gt; This uses libdispatch internally, and only works when events are being=
-<br>
-&gt; handled on the main runloop. With the current system, it works when<br=
->
-&gt; using either the Cocoa or the SDL UI. However, it does not when runnin=
-g<br>
-&gt; headless. Moreover, any attempt to install a similar scheme to the<br>
-&gt; Cocoa UI&#39;s main thread replacement fails when combined with the SD=
-L<br>
-&gt; UI.<br>
-&gt;<br>
-&gt; This change tidies up main thread management to be more flexible.<br>
-&gt;<br>
-&gt; * The qemu_main global function pointer is a custom function for the<b=
-r>
-&gt;=C2=A0 =C2=A0main thread, and it may now be NULL. When it is, the main =
-thread<br>
-&gt;=C2=A0 =C2=A0runs the main Qemu loop. This represents the traditional s=
-etup.<br>
-&gt; * When non-null, spawning the main Qemu event loop on a separate<br>
-&gt;=C2=A0 =C2=A0thread is now done centrally rather than inside the Cocoa =
-UI code.<br>
-&gt; * For most platforms, qemu_main is indeed NULL by default, but on<br>
-&gt;=C2=A0 =C2=A0Darwin, it defaults to a function that runs the CFRunLoop.=
-<br>
-&gt; * The Cocoa UI sets qemu_main to a function which runs the<br>
-&gt;=C2=A0 =C2=A0NSApplication event handling runloop, as is usual for a Co=
-coa app.<br>
-&gt; * The SDL UI overrides the qemu_main function to NULL, thus<br>
-&gt;=C2=A0 =C2=A0specifying that Qemu&#39;s main loop must run on the main<=
-br>
-&gt;=C2=A0 =C2=A0thread.<br>
-&gt; * The GTK UI also overrides the qemu_main function to NULL.<br>
-&gt; * For other UIs, or in the absence of UIs, the platform&#39;s default<=
-br>
-&gt;=C2=A0 =C2=A0behaviour is followed.<br>
-&gt;<br>
-&gt; This means that on macOS, the platform&#39;s runloop events are always=
-<br>
-&gt; handled, regardless of chosen UI. The new PV graphics device will<br>
-&gt; thus work in all configurations. There is no functional change on othe=
-r<br>
-&gt; operating systems.<br>
-&gt;<br>
-&gt; Signed-off-by: Phil Dennis-Jordan &lt;<a href=3D"mailto:phil@philjorda=
-n.eu" target=3D"_blank">phil@philjordan.eu</a>&gt;<br>
-&gt; Reviewed-by: Akihiko Odaki &lt;<a href=3D"mailto:akihiko.odaki@daynix.=
-com" target=3D"_blank">akihiko.odaki@daynix.com</a>&gt;<br>
-&gt; ---<br>
-&gt;<br>
-&gt; v5:<br>
-&gt;<br>
-&gt; * Simplified the way of setting/clearing the main loop by going back<b=
-r>
-&gt;=C2=A0 =C2=A0to setting qemu_main directly, but narrowing the scope of =
-what it<br>
-&gt;=C2=A0 =C2=A0needs to do, and it can now be NULL.<br>
-&gt;<br>
-&gt; v6:<br>
-&gt;<br>
-&gt; * Folded function qemu_run_default_main_on_new_thread&#39;s code into<=
-br>
-&gt;=C2=A0 =C2=A0main()<br>
-&gt; * Removed whitespace changes left over on lines near code removed<br>
-&gt;=C2=A0 =C2=A0between v4 and v5<br>
-&gt;<br>
-&gt; v9:<br>
-&gt;<br>
-&gt; * Set qemu_main to NULL for GTK UI as well.<br>
-&gt;<br>
-&gt; v10:<br>
-&gt;<br>
-&gt; * Added comments clarifying the functionality and purpose of qemu_main=
-.<br>
-&gt;<br>
-&gt; include/qemu-main.h=C2=A0 =C2=A0 =C2=A0| 21 ++++++++++++++--<br>
-&gt; include/qemu/typedefs.h |=C2=A0 1 +<br>
-&gt; system/main.c=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0| 50 +++++++++++=
-+++++++++++++++++++++++----<br>
-&gt; ui/cocoa.m=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 | 54 ++++++=
-++++-------------------------------<br>
-&gt; ui/gtk.c=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 |=C2=
-=A0 8 ++++++<br>
-&gt; ui/sdl2.c=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0|=C2=
-=A0 4 +++<br>
-&gt; 6 files changed, 90 insertions(+), 48 deletions(-)<br>
-&gt;<br>
-&gt; diff --git a/include/qemu-main.h b/include/qemu-main.h<br>
-&gt; index 940960a7dbc..fc70681c8b5 100644<br>
-&gt; --- a/include/qemu-main.h<br>
-&gt; +++ b/include/qemu-main.h<br>
-&gt; @@ -5,7 +5,24 @@<br>
-&gt; #ifndef QEMU_MAIN_H<br>
-&gt; #define QEMU_MAIN_H<br>
-&gt;<br>
-&gt; -int qemu_default_main(void);<br>
-&gt; -extern int (*qemu_main)(void);<br>
-&gt; +/*<br>
-&gt; + * The function to run on the main (initial) thread of the process.<b=
-r>
-&gt; + * NULL means QEMU&#39;s main event loop.<br>
-&gt; + * When non-NULL, QEMU&#39;s main event loop will run on a purposely =
-created<br>
-&gt; + * thread, after which the provided function pointer will be invoked =
-on<br>
-&gt; + * the initial thread.<br>
-&gt; + * This is useful on platforms which treat the main thread as special=
-<br>
-&gt; + * (macOS/Darwin) and/or require all UI API calls to occur from a<br>
-&gt; + * specific thread.<br>
-&gt; + * Implementing this via a global function pointer variable is a bit<=
-br>
-&gt; + * ugly, but it&#39;s probably worth investigating the existing UI th=
-read rule<br>
-&gt; + * violations in the SDL (e.g. #2537) and GTK+ back-ends. Fixing thos=
-e<br>
-&gt; + * issues might precipitate requirements similar but not identical to=
- those<br>
-&gt; + * of the Cocoa UI; hopefully we&#39;ll see some kind of pattern emer=
-ge, which<br>
-&gt; + * can then be used as a basis for an overhaul. (In fact, it may turn=
-<br>
-&gt; + * out to be simplest to split the UI/native platform event thread fr=
-om the<br>
-&gt; + * QEMU main event loop on all platforms, with any UI or even none at=
- all.)<br>
-&gt; + */<br>
-&gt; +extern qemu_main_fn qemu_main;<br>
-<br>
-qemu_main_fn is defined in typdefefs.h but not included here. Also coding <=
-br>
-style says typedefs should be CamelCase but maybe it&#39;s just not worth t=
-o <br>
-define a type for this and you can just leave the existing line here only <=
-br>
-removing the qemu_default_main declaration and adding the comment.<br>
-<br>
-&gt; #endif /* QEMU_MAIN_H */<br>
-&gt; diff --git a/include/qemu/typedefs.h b/include/qemu/typedefs.h<br>
-&gt; index 3d84efcac47..b02cfe1f328 100644<br>
-&gt; --- a/include/qemu/typedefs.h<br>
-&gt; +++ b/include/qemu/typedefs.h<br>
-&gt; @@ -131,5 +131,6 @@ typedef struct IRQState *qemu_irq;<br>
-&gt;=C2=A0 * Function types<br>
-&gt;=C2=A0 */<br>
-&gt; typedef void (*qemu_irq_handler)(void *opaque, int n, int level);<br>
-&gt; +typedef int (*qemu_main_fn)(void);<br>
-<br>
-Then drop this change...<br>
-<br>
-&gt; #endif /* QEMU_TYPEDEFS_H */<br>
-&gt; diff --git a/system/main.c b/system/main.c<br>
-&gt; index 9b91d21ea8c..d9397a6d5d0 100644<br>
-&gt; --- a/system/main.c<br>
-&gt; +++ b/system/main.c<br>
-&gt; @@ -24,13 +24,14 @@<br>
-&gt;<br>
-&gt; #include &quot;qemu/osdep.h&quot;<br>
-&gt; #include &quot;qemu-main.h&quot;<br>
-&gt; +#include &quot;qemu/main-loop.h&quot;<br>
-&gt; #include &quot;sysemu/sysemu.h&quot;<br>
-&gt;<br>
-&gt; -#ifdef CONFIG_SDL<br>
-&gt; -#include &lt;SDL.h&gt;<br>
-&gt; +#ifdef CONFIG_DARWIN<br>
-&gt; +#include &lt;CoreFoundation/CoreFoundation.h&gt;<br>
-&gt; #endif<br>
-&gt;<br>
-&gt; -int qemu_default_main(void)<br>
-&gt; +static int qemu_default_main(void)<br>
-&gt; {<br>
-&gt;=C2=A0 =C2=A0 =C2=A0int status;<br>
-&gt;<br>
-&gt; @@ -40,10 +41,49 @@ int qemu_default_main(void)<br>
-&gt;=C2=A0 =C2=A0 =C2=A0return status;<br>
-&gt; }<br>
-&gt;<br>
-&gt; -int (*qemu_main)(void) =3D qemu_default_main;<br>
-<br>
-...and leave this line here without init to define the global variable and =
-<br>
-only put assigning the init value in the #ifdef if you don&#39;t want to <b=
-r>
-repeat the function pointer definition twice (but that wouldn&#39;t be a <b=
-r>
-problem either in my opinion to do it in the #ifdef this way).<br>
-<br>
-&gt; +/*<br>
-&gt; + * Various macOS system libraries, including the Cocoa UI and anythin=
-g using<br>
-&gt; + * libdispatch, such as ParavirtualizedGraphics.framework, requires t=
-hat the<br>
-&gt; + * main runloop, on the main (initial) thread be running or at least =
-regularly<br>
-&gt; + * polled for events. A special mode is therefore supported, where th=
-e QEMU<br>
-&gt; + * main loop runs on a separate thread and the main thread handles th=
-e<br>
-&gt; + * CF/Cocoa runloop.<br>
-&gt; + */<br>
-&gt; +<br>
-&gt; +static void *call_qemu_default_main(void *opaque)<br>
-&gt; +{<br>
-&gt; +=C2=A0 =C2=A0 int status;<br>
-&gt; +<br>
-&gt; +=C2=A0 =C2=A0 bql_lock();<br>
-&gt; +=C2=A0 =C2=A0 status =3D qemu_default_main();<br>
-&gt; +=C2=A0 =C2=A0 bql_unlock();<br>
-&gt; +<br>
-&gt; +=C2=A0 =C2=A0 exit(status);<br>
-&gt; +}<br>
-&gt; +<br>
-&gt; +#ifdef CONFIG_DARWIN<br>
-&gt; +static int os_darwin_cfrunloop_main(void)<br>
-&gt; +{<br>
-&gt; +=C2=A0 =C2=A0 CFRunLoopRun();<br>
-&gt; +=C2=A0 =C2=A0 abort();<br>
-<br>
-Is it better to use g_assert_not_reached() here?<br>
-<br>
-&gt; +}<br>
-&gt; +<br>
-&gt; +qemu_main_fn qemu_main =3D os_darwin_cfrunloop_main;<br>
-&gt; +#else<br>
-&gt; +qemu_main_fn qemu_main;<br>
-&gt; +#endif<br>
-&gt;<br>
-&gt; int main(int argc, char **argv)<br>
-&gt; {<br>
-&gt; +=C2=A0 =C2=A0 QemuThread main_loop_thread;<br>
-&gt; +<br>
-&gt;=C2=A0 =C2=A0 =C2=A0qemu_init(argc, argv);<br>
-&gt; -=C2=A0 =C2=A0 return qemu_main();<br>
-&gt; +=C2=A0 =C2=A0 if (qemu_main) {<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 qemu_thread_create(&amp;main_loop_thread,=
- &quot;qemu_main&quot;,<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0 =C2=A0 =C2=A0 =C2=A0call_qemu_default_main, NULL, QEMU_THREAD_DETAC=
-HED);<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 bql_unlock();<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 return qemu_main();<br>
-&gt; +=C2=A0 =C2=A0 } else {<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 qemu_default_main();<br>
-<br>
-I think you need &#39;return qemu_default_main()&#39; here but I&#39;m a bi=
-t confused <br>
-by all this wrapping of qemu_default_main in call_qemu_default_main. I see =
-<br>
-that may be needed because qemu_thread_create takes a different function <b=
-r>
-but now that qemu_default main is static and not replaced externally could =
-<br>
-that be changed to the right type and avoid this confusion and simplify <br=
->
-this a bit?<br>
-<br>
-Regards,<br>
-BALATON Zoltan<br>
-<br></blockquote><div><br></div><div>Alright, I&#39;ve gone ahead and worke=
-d through that, and it does indeed make things simpler. This is what I have=
- for include/qemu-main.h and system/main.c now:<br></div><div><br></div><di=
-v>diff --git a/include/qemu-main.h b/include/qemu-main.h<br>index 940960a7d=
-bc..e1041fe99b4 100644<br>--- a/include/qemu-main.h<br>+++ b/include/qemu-m=
-ain.h<br>@@ -5,7 +5,29 @@<br>=C2=A0#ifndef QEMU_MAIN_H<br>=C2=A0#define QEM=
-U_MAIN_H<br>=C2=A0<br>-int qemu_default_main(void);<br>+/*<br>+ * The funct=
-ion to run on the main (initial) thread of the process.<br>+ * NULL means Q=
-EMU&#39;s main event loop.<br>+ * When non-NULL, QEMU&#39;s main event loop=
- will run on a purposely created<br>+ * thread, after which the provided fu=
-nction pointer will be invoked on<br>+ * the initial thread.<br>+ * This is=
- useful on platforms which treat the main thread as special<br>+ * (macOS/D=
-arwin) and/or require all UI API calls to occur from a<br>+ * specific thre=
-ad.<br>+ * In practice, this means that on macOS, it is initialised to a fu=
-nction<br>+ * that runs the Core Foundation runloop. The Cocoa UI &quot;upg=
-rades&quot; this<br>+ * to the NSApplication-specific event processing vari=
-ant. Other platforms<br>+ * currently leave it at NULL; the SDL and GTK UIs=
- reset it to NULL even<br>+ * on macOS as they directly poll the runloop.<b=
-r>+ * Implementing this via a global function pointer variable is a bit<br>=
-+ * ugly, but it&#39;s probably worth investigating the existing UI thread =
-rule<br>+ * violations in the SDL (e.g. #2537) and GTK+ back-ends. Fixing t=
-hose<br>+ * issues might precipitate requirements similar but not identical=
- to those<br>+ * of the Cocoa UI; hopefully we&#39;ll see some kind of patt=
-ern emerge, which<br>+ * can then be used as a basis for an overhaul. (In f=
-act, it may turn<br>+ * out to be simplest to split the UI/native platform =
-event thread from the<br>+ * QEMU main event loop on all platforms, with an=
-y UI or even none at all.)<br>+ */<br>=C2=A0extern int (*qemu_main)(void);<=
-br>=C2=A0<br>=C2=A0#endif /* QEMU_MAIN_H */<br>diff --git a/system/main.c b=
-/system/main.c<br>index 9b91d21ea8c..2d9d144ed46 100644<br>--- a/system/mai=
-n.c<br>+++ b/system/main.c<br>@@ -24,26 +24,48 @@<br>=C2=A0<br>=C2=A0#inclu=
-de &quot;qemu/osdep.h&quot;<br>=C2=A0#include &quot;qemu-main.h&quot;<br>+#=
-include &quot;qemu/main-loop.h&quot;<br>=C2=A0#include &quot;sysemu/sysemu.=
-h&quot;<br>=C2=A0<br>-#ifdef CONFIG_SDL<br>-#include &lt;SDL.h&gt;<br>+#ifd=
-ef CONFIG_DARWIN<br>+#include &lt;CoreFoundation/CoreFoundation.h&gt;<br>=
-=C2=A0#endif<br>=C2=A0<br>-int qemu_default_main(void)<br>+static void *qem=
-u_default_main(void *opaque)<br>=C2=A0{<br>=C2=A0 =C2=A0 =C2=A0int status;<=
-br>=C2=A0<br>+ =C2=A0 =C2=A0bql_lock();<br>=C2=A0 =C2=A0 =C2=A0status =3D q=
-emu_main_loop();<br>=C2=A0 =C2=A0 =C2=A0qemu_cleanup(status);<br>+ =C2=A0 =
-=C2=A0bql_unlock();<br>=C2=A0<br>- =C2=A0 =C2=A0return status;<br>+ =C2=A0 =
-=C2=A0exit(status);<br>=C2=A0}<br>=C2=A0<br>-int (*qemu_main)(void) =3D qem=
-u_default_main;<br>+#ifdef CONFIG_DARWIN<br>+static int os_darwin_cfrunloop=
-_main(void)<br>+{<br>+ =C2=A0 =C2=A0CFRunLoopRun();<br>+ =C2=A0 =C2=A0g_ass=
-ert_not_reached();<br>+}<br>+<br>+int (*qemu_main)(void) =3D os_darwin_cfru=
-nloop_main;<br>+#else<br>+int (*qemu_main)(void);<br>+#endif<br>=C2=A0<br>=
-=C2=A0int main(int argc, char **argv)<br>=C2=A0{<br>+ =C2=A0 =C2=A0QemuThre=
-ad main_loop_thread;<br>+<br>=C2=A0 =C2=A0 =C2=A0qemu_init(argc, argv);<br>=
-- =C2=A0 =C2=A0return qemu_main();<br>+ =C2=A0 =C2=A0bql_unlock();<br>+ =C2=
-=A0 =C2=A0if (qemu_main) {<br>+ =C2=A0 =C2=A0 =C2=A0 =C2=A0qemu_thread_crea=
-te(&amp;main_loop_thread, &quot;qemu_main&quot;,<br>+ =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 qemu_=
-default_main, NULL, QEMU_THREAD_DETACHED);<br>+ =C2=A0 =C2=A0 =C2=A0 =C2=A0=
-return qemu_main();<br>+ =C2=A0 =C2=A0} else {<br>+ =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0qemu_default_main(NULL);<br>+ =C2=A0 =C2=A0}<br>=C2=A0}<br>=C2=A0</di=
-v></div></div>
+> I'm not entirely sure what you're getting at here, to be honest. The UI t=
+hread can definitely not assume to be holding the BQL all the time; we'd ha=
+ve to treat it more like an AIOContext. It could pave the way towards putti=
+ng the display and UI subsystems on their own AIOContext or AIOContext-like=
+-thing, rather than hogging the BQL for expensive image operations.
 
---0000000000002e8b8b0626def2f4--
+Don't worry, I was mostly talking to myself... The UI thread, and more
+specifically any handlers that are called from CFRunLoop instead of
+QEMU's main loop, will have to use mutexes or bql_lock()/bql_unlock(),
+like ui/cocoa.m already does.
+
+In other words, code that interacts with Apple's paravirtualized
+graphics needs to know if it runs from the CFRunLoop or from
+qemu_main().
+
+> (*By the sound of it, Win32 has an all-UI-calls-on-one-thread requirement=
+ as well which we may be violating to some degree via the GTK and/or SDL ba=
+ckends as well; my adventures with Win32 are almost 20 years back now so I'=
+m a bit out of the loop there.)
+
+Hmm, no I don't remember anything like that for Windows but it's also
+been many years for me.
+
+Paolo
+
 
