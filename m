@@ -4,77 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8CEF1D10F3A
-	for <qemu-riscv@archiver.kernel.org>; Mon, 18 Nov 2024 01:18:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4AEAAD10F3A
+	for <qemu-riscv@archiver.kernel.org>; Mon, 18 Nov 2024 01:18:58 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tCqO7-00017v-U7; Sun, 17 Nov 2024 20:17:11 -0500
+	id 1tCqO3-00014K-CL; Sun, 17 Nov 2024 20:17:07 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <atishp@rivosinc.com>)
- id 1tCqO0-000127-1E
- for qemu-riscv@nongnu.org; Sun, 17 Nov 2024 20:17:04 -0500
-Received: from mail-pf1-x434.google.com ([2607:f8b0:4864:20::434])
+ id 1tCqO2-00013P-86
+ for qemu-riscv@nongnu.org; Sun, 17 Nov 2024 20:17:06 -0500
+Received: from mail-pf1-x432.google.com ([2607:f8b0:4864:20::432])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <atishp@rivosinc.com>)
- id 1tCqNx-0006Py-PS
- for qemu-riscv@nongnu.org; Sun, 17 Nov 2024 20:17:03 -0500
-Received: by mail-pf1-x434.google.com with SMTP id
- d2e1a72fcca58-71e61b47c6cso3032888b3a.2
- for <qemu-riscv@nongnu.org>; Sun, 17 Nov 2024 17:16:58 -0800 (PST)
+ id 1tCqNy-0006R2-Pz
+ for qemu-riscv@nongnu.org; Sun, 17 Nov 2024 20:17:05 -0500
+Received: by mail-pf1-x432.google.com with SMTP id
+ d2e1a72fcca58-720d01caa66so2183766b3a.2
+ for <qemu-riscv@nongnu.org>; Sun, 17 Nov 2024 17:17:01 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1731892618; x=1732497418;
+ d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1731892621; x=1732497421;
  darn=nongnu.org; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=ohgDmegIpcebV+ImvHj4TXEAkaSmzoAiG2T69HxohHg=;
- b=Oih2HBo7fURU5JOyui2rzWSwgzVphJA39Fv3xcnk0o1fjudepQaiue91oNRWVw/v0t
- 0tvK3Lexg3w1NtqqBrNBlfQhLEJBVDMdv08JyJsRsAOWWj5St25vjxxil7G4wzCPO2bA
- l5uFn7xxoxVstRDR4AFMtoYGMPAyZCZYwxPMnEnEFrleb591D6B+NyiZ+Uzjjtozx4dL
- UQKQhKwgs63qKA3SsZkbp3TQlB7SoJ8I5XlyYYkpircNInLdSm5FSpd+dozLo2OhfAgb
- fla+NonYpP5FmtkA6OhRbu06rV+jFdVKk2MBQ/WiBITZCttvhL0uq96LXceeHR/cWj3o
- IPpQ==
+ :reply-to; bh=oSUPXuytVxHyXeI2aPjQi2EpXrEeGDlZSuBf96jPaMs=;
+ b=vKGyv9zMPh6OQ9jxuXZkAIXhVGhwJxTCr+KtkooHHJnssq8xGCld/u8X/l/M8uKmAo
+ kxZJYF1J7gKpYdsxYdiMojaljZHr9D0Y9i+SkH7SoIpyTQeXkJ11eOJ3lh/BBCtOersn
+ 3yw51PKtTji+Tf2G2egqBx3if0VPNT2l5SJLLPIgrL3cXxle+gbr5/8n3cIufIueh/Jn
+ lxudD0pnp7z9j6g92RzTnOK+VtH9ZdUxPdHgxKzFKZm+YiHRSHfAm9GGEbaOIpKQM27k
+ WcELi/cB6b75afRschTlwfZYHbkxhEE5z3ci4FQlyRnLuyPUs7XYMj5qmpfkGI/PMNxs
+ OC8g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731892618; x=1732497418;
+ d=1e100.net; s=20230601; t=1731892621; x=1732497421;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=ohgDmegIpcebV+ImvHj4TXEAkaSmzoAiG2T69HxohHg=;
- b=FVkQ2olmPwbfkD/jH+a1PJMe81sGPMbIhf1vNvN5jjDttnN0QJib1hTdmUM8L5jSEx
- z9yjpuSkYPMrQcc4nr8uYpfgWwHRPeKoPy21AJo8eg9Oud1J9jmadN+qZVHBvLbqYEXx
- 2/fuBflAXhf01alrWQoYAL9QsHrfp3jrDrY321x72gCos72KfOBQr4JZB9QQHwemf/7v
- 88zGchrLCQmBH7W0FWgJa6B+0UHB2AyEmumaLdp0AQsWEy7vXy21NKiCHwsdLPcLdvyj
- N9IGRTzIuvtWV5dbHScDHB1B0B8OuG/UB+2U7fqzsNeatSzG2BJUYmg3cj/fpI3vJ/Tm
- ejTg==
-X-Gm-Message-State: AOJu0YwZZS00UGR/j7scYtReLfr1LQTr9UGXi63GRlkvaYB+G2T0SXuJ
- jWDr0tegh5yTSk5oi5mGsmSqwHhAt7fjrV0RljUP+jqJWMy9emP0ebS0zPFx1Sw=
-X-Google-Smtp-Source: AGHT+IGCrdO9obb+5iWi2afFJIXS+x2sTHe156h4tameoBEGNc4qJBm1kmerOnnN+zX2APHk6d7D8g==
-X-Received: by 2002:a05:6a00:4fc8:b0:71e:5e04:be9b with SMTP id
- d2e1a72fcca58-72476bb89b3mr12660820b3a.12.1731892617737; 
- Sun, 17 Nov 2024 17:16:57 -0800 (PST)
+ bh=oSUPXuytVxHyXeI2aPjQi2EpXrEeGDlZSuBf96jPaMs=;
+ b=iy1es16LuFDrlDOXoHG7oRXiwWWWFa6xq6/250VnRLE0Vg9MBcE9a8nIcAWMFmj4gA
+ 080/M3kpG34HWgEH74LIsZK/f27jbPJ+HhKAWZJSs/pGVag9G3Flx1FR8GyjA4kLTJG3
+ WGzt0ydrN9/QPMpQlke+Oa5UG1+Y9HRhrGqGMIshpNMxmsP41sQ+bbnVwp9nvFLFV8CA
+ h94MY7kE8IyQ4bLYzOpfgRFNA/2Jg1yVtjQPDYZeM4ROKQvTZaZgBGeDI94JuTzpvWwa
+ /yIvDjUr0loasQYiu5ZXwT1gpoGFgNp2SJtRFpxVQGy58cD7b4WL3MOlB01yJd+MmYRo
+ F+ug==
+X-Gm-Message-State: AOJu0YzxF2Z7Id7o+gd0IryktMMwluDErJ9mN0mvnDdODfSkB+hGQy+d
+ ny3QQCErrAyZIlzsJndGW3Z5TajN1eeOFQvO7VLC6xUMZwT7iE35fmQl5fStvRA=
+X-Google-Smtp-Source: AGHT+IGOdGuvtbJGF7L5AEWhRBrQdxhQh6Qf195glY+Md6k8mkKbDKO94tr/0C2B3sVqpW/9G8cvQg==
+X-Received: by 2002:a05:6a00:3d07:b0:71e:4dc5:259e with SMTP id
+ d2e1a72fcca58-72476c4c22cmr14211486b3a.17.1731892620701; 
+ Sun, 17 Nov 2024 17:17:00 -0800 (PST)
 Received: from atishp.ba.rivosinc.com ([64.71.180.162])
  by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-724771e8b75sm5134024b3a.147.2024.11.17.17.16.56
+ d2e1a72fcca58-724771e8b75sm5134024b3a.147.2024.11.17.17.16.59
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 17 Nov 2024 17:16:57 -0800 (PST)
+ Sun, 17 Nov 2024 17:16:59 -0800 (PST)
 From: Atish Patra <atishp@rivosinc.com>
-Date: Sun, 17 Nov 2024 17:15:53 -0800
-Subject: [PATCH v3 05/11] target/riscv: Add properties for counter
- delegation ISA extensions
+Date: Sun, 17 Nov 2024 17:15:55 -0800
+Subject: [PATCH v3 07/11] target/riscv: Add select value range check for
+ counter delegation
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20241117-counter_delegation-v3-5-476d6f36e3c8@rivosinc.com>
+Message-Id: <20241117-counter_delegation-v3-7-476d6f36e3c8@rivosinc.com>
 References: <20241117-counter_delegation-v3-0-476d6f36e3c8@rivosinc.com>
 In-Reply-To: <20241117-counter_delegation-v3-0-476d6f36e3c8@rivosinc.com>
 To: qemu-riscv@nongnu.org, qemu-devel@nongnu.org
 Cc: kaiwenxue1@gmail.com, Atish Patra <atishp@rivosinc.com>, 
  palmer@dabbelt.com, liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, 
- bin.meng@windriver.com, dbarboza@ventanamicro.com, alistair.francis@wdc.com
+ bin.meng@windriver.com, dbarboza@ventanamicro.com, alistair.francis@wdc.com, 
+ Kaiwen Xue <kaiwenx@rivosinc.com>
 X-Mailer: b4 0.15-dev-13183
-Received-SPF: pass client-ip=2607:f8b0:4864:20::434;
- envelope-from=atishp@rivosinc.com; helo=mail-pf1-x434.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::432;
+ envelope-from=atishp@rivosinc.com; helo=mail-pf1-x432.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -96,47 +97,81 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-This adds the properties for counter delegation ISA extensions
-(Smcdeleg/Ssccfg). Definitions of new registers and and implementation
-will come in the next set of patches.
+From: Kaiwen Xue <kaiwenx@rivosinc.com>
 
+This adds checks in ops performed on xireg and xireg2-xireg6 so that the
+counter delegation function will receive a valid xiselect value with the
+proper extensions enabled.
+
+Co-developed-by: Atish Patra <atishp@rivosinc.com>
+Signed-off-by: Kaiwen Xue <kaiwenx@rivosinc.com>
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 Signed-off-by: Atish Patra <atishp@rivosinc.com>
 ---
- target/riscv/cpu.c     | 2 ++
- target/riscv/cpu_cfg.h | 2 ++
- 2 files changed, 4 insertions(+)
+ target/riscv/csr.c | 36 +++++++++++++++++++++++++++++++++++-
+ 1 file changed, 35 insertions(+), 1 deletion(-)
 
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 963f1f3af9ae..82edd28e2e1d 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -184,11 +184,13 @@ const RISCVIsaExtData isa_edata_arr[] = {
-     ISA_EXT_DATA_ENTRY(zhinx, PRIV_VERSION_1_12_0, ext_zhinx),
-     ISA_EXT_DATA_ENTRY(zhinxmin, PRIV_VERSION_1_12_0, ext_zhinxmin),
-     ISA_EXT_DATA_ENTRY(smaia, PRIV_VERSION_1_12_0, ext_smaia),
-+    ISA_EXT_DATA_ENTRY(smcdeleg, PRIV_VERSION_1_13_0, ext_smcdeleg),
-     ISA_EXT_DATA_ENTRY(smcntrpmf, PRIV_VERSION_1_12_0, ext_smcntrpmf),
-     ISA_EXT_DATA_ENTRY(smcsrind, PRIV_VERSION_1_13_0, ext_smcsrind),
-     ISA_EXT_DATA_ENTRY(smepmp, PRIV_VERSION_1_12_0, ext_smepmp),
-     ISA_EXT_DATA_ENTRY(smstateen, PRIV_VERSION_1_12_0, ext_smstateen),
-     ISA_EXT_DATA_ENTRY(ssaia, PRIV_VERSION_1_12_0, ext_ssaia),
-+    ISA_EXT_DATA_ENTRY(ssccfg, PRIV_VERSION_1_13_0, ext_ssccfg),
-     ISA_EXT_DATA_ENTRY(ssccptr, PRIV_VERSION_1_11_0, has_priv_1_11),
-     ISA_EXT_DATA_ENTRY(sscofpmf, PRIV_VERSION_1_12_0, ext_sscofpmf),
-     ISA_EXT_DATA_ENTRY(sscounterenw, PRIV_VERSION_1_12_0, has_priv_1_12),
-diff --git a/target/riscv/cpu_cfg.h b/target/riscv/cpu_cfg.h
-index 8b974255f6fb..ae2b019703fe 100644
---- a/target/riscv/cpu_cfg.h
-+++ b/target/riscv/cpu_cfg.h
-@@ -78,6 +78,8 @@ struct RISCVCPUConfig {
-     bool ext_ztso;
-     bool ext_smstateen;
-     bool ext_sstc;
-+    bool ext_smcdeleg;
-+    bool ext_ssccfg;
-     bool ext_smcntrpmf;
-     bool ext_smcsrind;
-     bool ext_sscsrind;
+diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+index 57e9c9e25f02..97cc8059ad37 100644
+--- a/target/riscv/csr.c
++++ b/target/riscv/csr.c
+@@ -2158,6 +2158,11 @@ static bool xiselect_aia_range(target_ulong isel)
+            (ISELECT_IMSIC_FIRST <= isel && isel <= ISELECT_IMSIC_LAST);
+ }
+ 
++static bool xiselect_cd_range(target_ulong isel)
++{
++    return (ISELECT_CD_FIRST <= isel && isel <= ISELECT_CD_LAST);
++}
++
+ static int rmw_iprio(target_ulong xlen,
+                      target_ulong iselect, uint8_t *iprio,
+                      target_ulong *val, target_ulong new_val,
+@@ -2283,6 +2288,17 @@ done:
+     return RISCV_EXCP_NONE;
+ }
+ 
++static int rmw_xireg_cd(CPURISCVState *env, int csrno,
++                        target_ulong isel, target_ulong *val,
++                        target_ulong new_val, target_ulong wr_mask)
++{
++    if (!riscv_cpu_cfg(env)->ext_smcdeleg) {
++        return RISCV_EXCP_ILLEGAL_INST;
++    }
++    /* TODO: Implement the functionality later */
++    return RISCV_EXCP_NONE;
++}
++
+ /*
+  * rmw_xireg_csrind: Perform indirect access to xireg and xireg2-xireg6
+  *
+@@ -2294,7 +2310,25 @@ static int rmw_xireg_csrind(CPURISCVState *env, int csrno,
+                               target_ulong isel, target_ulong *val,
+                               target_ulong new_val, target_ulong wr_mask)
+ {
+-    return -EINVAL;
++    int ret = -EINVAL;
++    bool virt = csrno == CSR_VSIREG ? true : false;
++
++    if (xiselect_cd_range(isel)) {
++        ret = rmw_xireg_cd(env, csrno, isel, val, new_val, wr_mask);
++    } else {
++        /*
++         * As per the specification, access to unimplented region is undefined
++         * but recommendation is to raise illegal instruction exception.
++         */
++        return RISCV_EXCP_ILLEGAL_INST;
++    }
++
++    if (ret) {
++        return (env->virt_enabled && virt) ?
++               RISCV_EXCP_VIRT_INSTRUCTION_FAULT : RISCV_EXCP_ILLEGAL_INST;
++    }
++
++    return RISCV_EXCP_NONE;
+ }
+ 
+ static int rmw_xiregi(CPURISCVState *env, int csrno, target_ulong *val,
 
 -- 
 2.34.1
