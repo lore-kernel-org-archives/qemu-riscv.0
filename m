@@ -4,82 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6750BD10F3A
-	for <qemu-riscv@archiver.kernel.org>; Mon, 18 Nov 2024 01:19:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0622CD10F3A
+	for <qemu-riscv@archiver.kernel.org>; Mon, 18 Nov 2024 01:32:13 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tCqOA-00019U-M7; Sun, 17 Nov 2024 20:17:14 -0500
+	id 1tCqcC-0001Oe-Lv; Sun, 17 Nov 2024 20:31:45 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <atishp@rivosinc.com>)
- id 1tCqO4-000165-Mr
- for qemu-riscv@nongnu.org; Sun, 17 Nov 2024 20:17:08 -0500
-Received: from mail-pg1-x531.google.com ([2607:f8b0:4864:20::531])
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1tCqc3-0001Na-L4; Sun, 17 Nov 2024 20:31:39 -0500
+Received: from mail-ua1-x92f.google.com ([2607:f8b0:4864:20::92f])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <atishp@rivosinc.com>)
- id 1tCqO1-0006Sy-P8
- for qemu-riscv@nongnu.org; Sun, 17 Nov 2024 20:17:08 -0500
-Received: by mail-pg1-x531.google.com with SMTP id
- 41be03b00d2f7-7eab7622b61so2771898a12.1
- for <qemu-riscv@nongnu.org>; Sun, 17 Nov 2024 17:17:05 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1tCqbz-0001CZ-WE; Sun, 17 Nov 2024 20:31:34 -0500
+Received: by mail-ua1-x92f.google.com with SMTP id
+ a1e0cc1a2514c-856e849af48so864350241.2; 
+ Sun, 17 Nov 2024 17:31:30 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1731892624; x=1732497424;
- darn=nongnu.org; 
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=yrPlHuJWuEh2kYh2wmPqEvV/twWv5OmoI09hlzoiKIo=;
- b=z0SmBjR8fbWh/uvUtxcorLiYrlFB6VrSze01w0Qo0xOTZcYQJCNijg96B9zsn5nra4
- Af5pwGtwnFm6AfiBOteAcuNJbISJNV51k7Pai0e/G3nxV4hLjGG3iFxaweV6sjGil0Uv
- hnO5SujT8FAPbpMiKc4KCJVU+Ay1HNxYYwdbR91xH61wgOi/11EEM7lvGpH5W66DmAg1
- vbdMCdTCHRU7Ni+XNW2IDoIUH9fESw2YS/IMts3JT1p/mxwKSW/7dt0ozl+y042GcQ0h
- UvOaU2ic4CkJ5XhJouAcAmM+ZSh3W61s8JuPLCaHwbKRLbwfyPPsO4BWZgqGTR/DnmTe
- OdWg==
+ d=gmail.com; s=20230601; t=1731893489; x=1732498289; darn=nongnu.org;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=UakCqRsRqARr3KWbLcl1y3V6jFG4SnbWO6ibObSLCQw=;
+ b=OWDdpdCCvva885aWOcfX9LGDBTFywCjOZHVawBi/CxUHZtBtZKaXvHA29s76gwhKYU
+ I73JxrwD2Wz3aXAWzfoHI7cmtnESYtcIVk4omd0cY6o7C9Kat13wFEVKi3/jUlfE74kE
+ ZM3kxUVPyZ5xCPDCocIeQGdFTKp3ZiDf+Mspq59lf6Ox9tqI2E+RzshBTZk6Ad0bVD9J
+ heUne54DC2aYhxF+etZacXM/3tFgXlkRX52VFgdJNl4bvcPBs0/AuTp/u6uwiOzUmHxH
+ PhhVaZAhIMQ8MJyJoHxAOTjCypA92lS8XbHon5ygnsaN3Cf+meZGTzkGeZ93zS1cevXa
+ SzzQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731892624; x=1732497424;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:x-gm-message-state:from:to:cc
+ d=1e100.net; s=20230601; t=1731893489; x=1732498289;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=yrPlHuJWuEh2kYh2wmPqEvV/twWv5OmoI09hlzoiKIo=;
- b=rcW22HZhyWsP6GPs6kJzLBlLMFkp0If6T1pSafO+EkjDC5qUkw2ehCjLGlkqCztzxH
- bKheIqSyXJFpsCOu8p/zNSO/ORbvMM3saI3xBttNrBcjQXf5vsgBhNS/tnsLKmQL2DOC
- cu+Lf3GG1hfKqTsCOfHI+FXg2ZBCWmyhk8XsExF6qf6YXuhUC34cT4hpss34b0fIqMT+
- eDLuWRWFg9jr6Bapoa1bafn17ruMLC3C2ayjOz9gxw6Gvvs/tlJ/jldl9+nEyOqxGMn8
- 2So8QALpn+nkr7gC5tRTYaXFLTQKTJ0t+fIMzY7jBwg40trZyaOJZwOR6YQyn4+viUyG
- fgKg==
-X-Gm-Message-State: AOJu0YySvAMgcdvfTE0VHZQNMduGhsdyWm7uZD7mfyWUstaoVjxu6KqB
- xdgPNewNH9RKkVRqao1OlSBACMY/xROzYkN2VxoB7mICdNxStLlEr4HtQfHP7yk=
-X-Google-Smtp-Source: AGHT+IFyERO+IUJIVSzfZa8WYRSNfEUTdjWCNkqi7kcwkLxLeu7cg9FaBIjdgNDOuKXHmKJBtp9VVA==
-X-Received: by 2002:a05:6a20:2449:b0:1d8:a29b:8f6f with SMTP id
- adf61e73a8af0-1dc90b1cc5emr14277789637.16.1731892624095; 
- Sun, 17 Nov 2024 17:17:04 -0800 (PST)
-Received: from atishp.ba.rivosinc.com ([64.71.180.162])
- by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-724771e8b75sm5134024b3a.147.2024.11.17.17.17.03
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 17 Nov 2024 17:17:03 -0800 (PST)
-From: Atish Patra <atishp@rivosinc.com>
-Date: Sun, 17 Nov 2024 17:15:58 -0800
-Subject: [PATCH v3 10/11] target/riscv: Add implied rule for counter
- delegation extensions
+ bh=UakCqRsRqARr3KWbLcl1y3V6jFG4SnbWO6ibObSLCQw=;
+ b=iWpAaUTRizF4qgJtdOHBOd17jioci4b2INSOgYyGMN4hRZkrbDHMx5WgUMLlUDhMoA
+ veNhinZZYE4hRqoWsj4eR3MpJPTc+FzDnGwyp33X47Uyg6q0TLVuXv8Dr5NlenD8Kd4j
+ lE2zrddhQfkZOXA9Kaztwk8/Uj4/+gf6IGzBGdX34h3jvZow2AvlmFgmO2gyorayktw5
+ Jm1vbB4HjDASBEXpz1CucJnHrWY6Ggicl8ELSpcyCZ/81NDOWDRkXRAVb+CFzhF1X4YI
+ Te/9yzBc9rC2E30Sj1qtMSR/S8SaRkX3FLQSQu4eEuY9WDikjNV3RTBXyx4hCLxuI+Zn
+ PGAg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVSajZy37dcs7lf8NuQIcy2241Mp1vcm98ijYKZAGcV0PPvx3F64t7P2hJgW/C2TlaI6aURfIydlfIz@nongnu.org
+X-Gm-Message-State: AOJu0Yx9HYEx8iUMA60SAALwyLhSRTGUeqtoSwgzZZ8qcjDIGeXcuM0o
+ HylYgnal5n464u8j1+HzTdlmCkH5KcmBJ/NrT823DIftocQrVBA9mwqyiX4LZcDUcY9oukANq2I
+ rBhjmpld5bsn2Y60Rr1qdOf2ZBuQ=
+X-Google-Smtp-Source: AGHT+IFL58i9sJOeP7fCRFYAUDZjrSdWvKZ5/glg9OgTT+J0geWQoybU8Ued6ToLzpgObJ7sA1hEtoKWkYU5RWBjBY8=
+X-Received: by 2002:a05:6102:c4c:b0:4a4:78a3:34f6 with SMTP id
+ ada2fe7eead31-4ad62b5af11mr8034017137.16.1731893489558; Sun, 17 Nov 2024
+ 17:31:29 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20241117-counter_delegation-v3-10-476d6f36e3c8@rivosinc.com>
-References: <20241117-counter_delegation-v3-0-476d6f36e3c8@rivosinc.com>
-In-Reply-To: <20241117-counter_delegation-v3-0-476d6f36e3c8@rivosinc.com>
-To: qemu-riscv@nongnu.org, qemu-devel@nongnu.org
-Cc: kaiwenxue1@gmail.com, Atish Patra <atishp@rivosinc.com>, 
- palmer@dabbelt.com, liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, 
- bin.meng@windriver.com, dbarboza@ventanamicro.com, alistair.francis@wdc.com
-X-Mailer: b4 0.15-dev-13183
-Received-SPF: pass client-ip=2607:f8b0:4864:20::531;
- envelope-from=atishp@rivosinc.com; helo=mail-pg1-x531.google.com
-X-Spam_score_int: -18
-X-Spam_score: -1.9
+References: <20241010190337.376987-1-dbarboza@ventanamicro.com>
+ <20241010190337.376987-2-dbarboza@ventanamicro.com>
+In-Reply-To: <20241010190337.376987-2-dbarboza@ventanamicro.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Mon, 18 Nov 2024 11:31:03 +1000
+Message-ID: <CAKmqyKPHsoJb5zZ6ro=nNMSb=Dkaz5U9rFVtQHmY3iyu1K3UYQ@mail.gmail.com>
+Subject: Re: [PATCH 1/8] hw/intc/riscv_aplic: rename is_kvm_aia()
+To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
+ bmeng@tinylab.org, liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, 
+ palmer@rivosinc.com, ajones@ventanamicro.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2607:f8b0:4864:20::92f;
+ envelope-from=alistair23@gmail.com; helo=mail-ua1-x92f.google.com
+X-Spam_score_int: -17
+X-Spam_score: -1.8
 X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -96,52 +93,91 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-The counter delegation/configuration extensions depend on the following
-extensions.
+On Fri, Oct 11, 2024 at 5:05=E2=80=AFAM Daniel Henrique Barboza
+<dbarboza@ventanamicro.com> wrote:
+>
+> The helper is_kvm_aia() is checking not only for AIA, but for
+> aplic-imsic (i.e. "aia=3Daplic-imsic" in 'virt' RISC-V machine) with an
+> in-kernel chip present.
+>
+> Rename it to be a bit clear what the helper is doing since we'll add
+> more AIA helpers in the next patches.
+>
+> Make the helper public because the 'virt' machine will use it as well.
+>
+> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 
-1. Smcdeleg - To enable counter delegation from M to S
-2. S[m|s]csrind - To enable indirect access CSRs
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
-Add an implied rule so that these extensions are enabled by default
-if the sscfg extension is enabled.
+Alistair
 
-Signed-off-by: Atish Patra <atishp@rivosinc.com>
----
- target/riscv/cpu.c | 12 +++++++++++-
- 1 file changed, 11 insertions(+), 1 deletion(-)
-
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 82edd28e2e1d..410ca2e3a666 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -2642,6 +2642,16 @@ static RISCVCPUImpliedExtsRule ZVKSG_IMPLIED = {
-     },
- };
- 
-+static RISCVCPUImpliedExtsRule SSCFG_IMPLIED = {
-+    .ext = CPU_CFG_OFFSET(ext_ssccfg),
-+    .implied_multi_exts = {
-+        CPU_CFG_OFFSET(ext_smcsrind), CPU_CFG_OFFSET(ext_sscsrind),
-+        CPU_CFG_OFFSET(ext_smcdeleg),
-+
-+        RISCV_IMPLIED_EXTS_RULE_END
-+    },
-+};
-+
- RISCVCPUImpliedExtsRule *riscv_misa_ext_implied_rules[] = {
-     &RVA_IMPLIED, &RVD_IMPLIED, &RVF_IMPLIED,
-     &RVM_IMPLIED, &RVV_IMPLIED, NULL
-@@ -2659,7 +2669,7 @@ RISCVCPUImpliedExtsRule *riscv_multi_ext_implied_rules[] = {
-     &ZVE64X_IMPLIED, &ZVFBFMIN_IMPLIED, &ZVFBFWMA_IMPLIED,
-     &ZVFH_IMPLIED, &ZVFHMIN_IMPLIED, &ZVKN_IMPLIED,
-     &ZVKNC_IMPLIED, &ZVKNG_IMPLIED, &ZVKNHB_IMPLIED,
--    &ZVKS_IMPLIED,  &ZVKSC_IMPLIED, &ZVKSG_IMPLIED,
-+    &ZVKS_IMPLIED,  &ZVKSC_IMPLIED, &ZVKSG_IMPLIED, &SSCFG_IMPLIED,
-     NULL
- };
- 
-
--- 
-2.34.1
-
+> ---
+>  hw/intc/riscv_aplic.c         | 8 ++++----
+>  include/hw/intc/riscv_aplic.h | 1 +
+>  2 files changed, 5 insertions(+), 4 deletions(-)
+>
+> diff --git a/hw/intc/riscv_aplic.c b/hw/intc/riscv_aplic.c
+> index 4a262c82f0..20de8c63a2 100644
+> --- a/hw/intc/riscv_aplic.c
+> +++ b/hw/intc/riscv_aplic.c
+> @@ -154,7 +154,7 @@
+>   * KVM AIA only supports APLIC MSI, fallback to QEMU emulation if we wan=
+t to use
+>   * APLIC Wired.
+>   */
+> -static bool is_kvm_aia(bool msimode)
+> +bool riscv_is_kvm_aia_aplic_imsic(bool msimode)
+>  {
+>      return kvm_irqchip_in_kernel() && msimode;
+>  }
+> @@ -853,7 +853,7 @@ static void riscv_aplic_realize(DeviceState *dev, Err=
+or **errp)
+>      uint32_t i;
+>      RISCVAPLICState *aplic =3D RISCV_APLIC(dev);
+>
+> -    if (!is_kvm_aia(aplic->msimode)) {
+> +    if (!riscv_is_kvm_aia_aplic_imsic(aplic->msimode)) {
+>          aplic->bitfield_words =3D (aplic->num_irqs + 31) >> 5;
+>          aplic->sourcecfg =3D g_new0(uint32_t, aplic->num_irqs);
+>          aplic->state =3D g_new0(uint32_t, aplic->num_irqs);
+> @@ -877,7 +877,7 @@ static void riscv_aplic_realize(DeviceState *dev, Err=
+or **errp)
+>       * have IRQ lines delegated by their parent APLIC.
+>       */
+>      if (!aplic->parent) {
+> -        if (kvm_enabled() && is_kvm_aia(aplic->msimode)) {
+> +        if (kvm_enabled() && riscv_is_kvm_aia_aplic_imsic(aplic->msimode=
+)) {
+>              qdev_init_gpio_in(dev, riscv_kvm_aplic_request, aplic->num_i=
+rqs);
+>          } else {
+>              qdev_init_gpio_in(dev, riscv_aplic_request, aplic->num_irqs)=
+;
+> @@ -1021,7 +1021,7 @@ DeviceState *riscv_aplic_create(hwaddr addr, hwaddr=
+ size,
+>
+>      sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
+>
+> -    if (!is_kvm_aia(msimode)) {
+> +    if (!riscv_is_kvm_aia_aplic_imsic(msimode)) {
+>          sysbus_mmio_map(SYS_BUS_DEVICE(dev), 0, addr);
+>      }
+>
+> diff --git a/include/hw/intc/riscv_aplic.h b/include/hw/intc/riscv_aplic.=
+h
+> index de8532fbc3..fd0e6427d9 100644
+> --- a/include/hw/intc/riscv_aplic.h
+> +++ b/include/hw/intc/riscv_aplic.h
+> @@ -71,6 +71,7 @@ struct RISCVAPLICState {
+>  };
+>
+>  void riscv_aplic_add_child(DeviceState *parent, DeviceState *child);
+> +bool riscv_is_kvm_aia_aplic_imsic(bool msimode);
+>
+>  DeviceState *riscv_aplic_create(hwaddr addr, hwaddr size,
+>      uint32_t hartid_base, uint32_t num_harts, uint32_t num_sources,
+> --
+> 2.45.2
+>
+>
 
