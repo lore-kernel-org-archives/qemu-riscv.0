@@ -4,88 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9003AD49209
-	for <qemu-riscv@archiver.kernel.org>; Mon, 18 Nov 2024 10:42:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C1CD1D60D00
+	for <qemu-riscv@archiver.kernel.org>; Tue, 19 Nov 2024 01:16:53 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tCzDG-0006WR-T2; Mon, 18 Nov 2024 05:42:34 -0500
+	id 1tDCql-0004Kz-Bg; Mon, 18 Nov 2024 20:16:15 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tCzDF-0006W6-9z
- for qemu-riscv@nongnu.org; Mon, 18 Nov 2024 05:42:33 -0500
-Received: from mail-ej1-x62e.google.com ([2a00:1450:4864:20::62e])
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1tDCqe-0004K2-BH; Mon, 18 Nov 2024 20:16:08 -0500
+Received: from mail-vk1-xa34.google.com ([2607:f8b0:4864:20::a34])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tCzDD-0003AR-A8
- for qemu-riscv@nongnu.org; Mon, 18 Nov 2024 05:42:33 -0500
-Received: by mail-ej1-x62e.google.com with SMTP id
- a640c23a62f3a-a9e8522c10bso645980266b.1
- for <qemu-riscv@nongnu.org>; Mon, 18 Nov 2024 02:42:30 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1tDCqc-0003W0-Nb; Mon, 18 Nov 2024 20:16:08 -0500
+Received: by mail-vk1-xa34.google.com with SMTP id
+ 71dfb90a1353d-50fc0345155so3720249e0c.1; 
+ Mon, 18 Nov 2024 17:16:05 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1731926550; x=1732531350; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=2syny+s4jJRELc7DPFjJv1xMD2q+3yY7VElrsd8GBCE=;
- b=RxzEfxIrDOxrSaPV+mx5WRhZeZ/DJWT7jGqGzk7/CJfeXaO2ztWk4+D7dCtl0yeMIE
- KuEtMr1umLK5MrboJyzL0XH43+FoaqXfomh1hmUM17WkMyC4M+b279rgpFgKCFf7MLoS
- 722L2GTAe1rWX0WwUHRqy02cNocVYMXgbiYBPNQA9GSUQVPVgWS/Xv272x5u23HZg1s2
- LZQejeCw9krGawZ03v6TF1JiyjuuxyaL5IsX4y1jxYJPUilwdHH1u6EVhp3dMpymLpk+
- ZwpvNHPvaAoeqbd+RBf9dXLa8BYvJs1CWMMc6y4Zun5XBdqxzporCKVBPm0iuXO12Lm0
- mXAA==
+ d=gmail.com; s=20230601; t=1731978964; x=1732583764; darn=nongnu.org;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=vU3XjETc+r9iseHa32XfHTVSPi3ZWP6DLLAErVQQHko=;
+ b=MaWjGzbZ4CCWi4h8ndydGm5lTMh/xobot3zlX+RnMnmn9tW+Vf02hfifKTellWRhtf
+ FTUY30v66Gn2LPz/eFCBRVhxKyEFVBsAJFzkN5v7NS9PBTEA4ZFhqCP0PdfMN9kJKPln
+ nj8Qi1izAdlUNwIYVy2UvgZ6RhUM2s4k3auWcceqE/Y71Qe62DYHpFvhAoLVpg7bBSh+
+ G5wYWmbIaKJ3UrV2eP7YjkszPHSRgNUWCTvFmUXXrVbOKlYmwGBxowNPE7FC4J5+GWtv
+ FcyrO42b6KUmMmSKFzNScPkXQXrGX6XwdOQTnM9NpMArF0Geb0Ou/L9ZjfkGZ54j3u36
+ DU8w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731926550; x=1732531350;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=2syny+s4jJRELc7DPFjJv1xMD2q+3yY7VElrsd8GBCE=;
- b=VSBaOKRm1QE8kEto0PgAbdYnbG75GvfxT4RDa47oHXQTutruk7c76behaPnDguMW8D
- MV7Gnoh74rurJHX6xHPsWGVXE0pb8qHVSM4DxxGx0XACYuCYdAcOKfwv590Av6zNBU4G
- tLAkefME/5DIxR3r+QvqsyPmSelKgepF85pKuttW+wAC8QBrbKNA0jC0wDALjgJPiGSE
- SkvTPA00kiJ8bCtA1/y4sw+6BKIassjyL2r/cjUIgWjpxsrJQSWoRJGieaYtojCiHRbv
- nCfJ+nJeIYPMKiO28ZMp+l4+nYFCW4Lo/gpy9Y88rY2wMn8gCkBGEs3BJMPPnPf2Bmid
- zDyw==
+ d=1e100.net; s=20230601; t=1731978964; x=1732583764;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=vU3XjETc+r9iseHa32XfHTVSPi3ZWP6DLLAErVQQHko=;
+ b=R90zD88PzHiAzKKShhRkM/7NjQlEm3SIWDclexO03SVZbWDbjabVkcNGqQu1bh9uKH
+ nw8nX2w+H6/KTvB499ckssXa/F/DvQp1uE2N+9aL0wnSFCVAJTmvDz+7oHFAs7S1r8CG
+ 20duZfZMyM36taIl4Ldr8bzXOao+BvrQ4noXSQ+sst96m24ZBCBEMVbiW/iVGjcaHnhO
+ TV/KTA4U2Kv89tq4C/zNS5Xb3+3gI/u52asiSynoxLOGOnfKmcgKhJ8+9uSGUbcIckVz
+ ROf7eTAUxGN+I7pEXHlcn4PeAgB8cCASqEQzz+JcVtNdhlbI6ckQqZ0+h4FlNMzTa/QC
+ K3Mg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCU4Q7ZkoX2m9s8+oKAY8ygQwa8D4m5j3Jb3WIv4iEmtXCCQz3uDBgzfoGLOAeOGaTXasIfTT3SYN0g8@nongnu.org
-X-Gm-Message-State: AOJu0Yyel4Su4mJunBAsbZAp8uWrGwYCH5KUOta3VRRjc01oSHBwySK6
- SzxHfnU0470dq6r44ZccewCRzny+v7ddmTCYLLAB6Sm5nSfDaShM+b2CaxmsETU=
-X-Google-Smtp-Source: AGHT+IEV5hARpXOF9qX/d4z1jhND9QotVMbhtUSD8AsIZ95gkfFSAiOTf/n2FbLk+IwAyW/DQ8G3jw==
-X-Received: by 2002:a17:907:7b84:b0:a99:3db2:eb00 with SMTP id
- a640c23a62f3a-aa2078168cfmr1507671266b.28.1731926549741; 
- Mon, 18 Nov 2024 02:42:29 -0800 (PST)
-Received: from [192.168.69.197] ([176.187.198.1])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-aa4b9357088sm85068666b.23.2024.11.18.02.42.27
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 18 Nov 2024 02:42:28 -0800 (PST)
-Message-ID: <b8ef1ecd-fc75-4554-862b-39436bd6d056@linaro.org>
-Date: Mon, 18 Nov 2024 11:42:26 +0100
+ AJvYcCXYq670yB/MiQHogbYl2mpt6dGmajKeVEoBdR8snwu5w3wNANf4M+DoczNjHyQft/EgCAGZNNizgEdm@nongnu.org
+X-Gm-Message-State: AOJu0Yx72r0pBqhhvF7iGGUigH8iweqmb6Oe8xN5ZLPznpeaZ5l3PAuR
+ ufTogzYq86vKDEBEwEOCrPfroQmY4ouhXSaqEulIqm7S8fohKqWtSYiy0TMeuCyxK+XawEsgfJ0
+ 9o3KvkorK1X/0Dg0pZZTkjDUmDdQ=
+X-Google-Smtp-Source: AGHT+IG3VSKmZSJsiUHjrLb2Hckx2HvdKCx11mvPpiNhOEUee2QOPxe9/+ESBDvAAwVY6itFVkuKiehrBcl7IdaURkU=
+X-Received: by 2002:a05:6122:328e:b0:510:6b24:c2ca with SMTP id
+ 71dfb90a1353d-514be0ec48fmr1751133e0c.3.1731978964287; Mon, 18 Nov 2024
+ 17:16:04 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3] hw/riscv: Add Microblaze V generic board
-To: Alistair Francis <alistair23@gmail.com>,
- Sai Pavan Boddu <sai.pavan.boddu@amd.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org,
- Paolo Bonzini <pbonzini@redhat.com>, Palmer Dabbelt <palmer@dabbelt.com>,
- Bin Meng <bmeng.cn@gmail.com>, Weiwei Li <liwei1518@gmail.com>,
+References: <20241114065617.25133-1-jason.chien@sifive.com>
+In-Reply-To: <20241114065617.25133-1-jason.chien@sifive.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Tue, 19 Nov 2024 11:15:38 +1000
+Message-ID: <CAKmqyKPejvg+22WQXpMw=q+x5WNNuA_Sz7=VOrr25JbDZkDL-w@mail.gmail.com>
+Subject: Re: [PATCH v2] hw/riscv/riscv-iommu.c: Correct the validness check of
+ iova
+To: Jason Chien <jason.chien@sifive.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, 
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Bin Meng <bmeng.cn@gmail.com>, Weiwei Li <liwei1518@gmail.com>, 
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Michal Simek <michal.simek@amd.com>,
- Francisco Iglesias <francisco.iglesias@amd.com>
-References: <20241104174328.383212-1-sai.pavan.boddu@amd.com>
- <CAKmqyKPQ8RaUe71pLftF52+Q=oHCP98rxgfF4kiOOP9bXM7XuQ@mail.gmail.com>
-Content-Language: en-US
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-In-Reply-To: <CAKmqyKPQ8RaUe71pLftF52+Q=oHCP98rxgfF4kiOOP9bXM7XuQ@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::62e;
- envelope-from=philmd@linaro.org; helo=mail-ej1-x62e.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2607:f8b0:4864:20::a34;
+ envelope-from=alistair23@gmail.com; helo=mail-vk1-xa34.google.com
+X-Spam_score_int: -17
+X-Spam_score: -1.8
+X-Spam_bar: -
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -103,99 +96,85 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 18/11/24 06:07, Alistair Francis wrote:
-> On Tue, Nov 5, 2024 at 3:43 AM Sai Pavan Boddu <sai.pavan.boddu@amd.com> wrote:
->>
->> Add a basic board with interrupt controller (intc), timer, serial
->> (uartlite), small memory called LMB@0 (128kB) and DDR@0x80000000
->> (configured via command line eg. -m 2g).
->> This is basic configuration which matches HW generated out of AMD Vivado
->> (design tools). But initial configuration is going beyond what it is
->> configured by default because validation should be done on other
->> configurations too. That's why wire also additional uart16500, axi
->> ethernet(with axi dma).
->> GPIOs, i2c and qspi is also listed for completeness.
->>
->> IRQ map is: (addr)
->> 0 - timer (0x41c00000)
->> 1 - uartlite (0x40600000)
->> 2 - i2c (0x40800000)
->> 3 - qspi (0x44a00000)
->> 4 - uart16550 (0x44a10000)
->> 5 - emaclite (0x40e00000)
->> 6 - timer2 (0x41c10000)
->> 7 - axi emac (0x40c00000)
->> 8 - axi dma (0x41e00000)
->> 9 - axi dma
->> 10 - gpio (0x40000000)
->> 11 - gpio2 (0x40010000)
->> 12 - gpio3 (0x40020000)
->>
->> Signed-off-by: Sai Pavan Boddu <sai.pavan.boddu@amd.com>
->> Signed-off-by: Michal Simek <michal.simek@amd.com>
->> Reviewed-by: Francisco Iglesias <francisco.iglesias@amd.com>
->> ---
->> Changes for V2:
->>      Make changes to support -cpu switch
->>      Remove setting of default board
->>      Include doc to toctree
->>      Remove setting of 'imac' extensions as they are available by
->>      default.
->> Chages for V3:
->>      Replace virt with generic
->>      Update doc with supported riscv extensions
->>      Change base CPU to TYPE_RISCV_CPU_BASE
->>
->>
->>   MAINTAINERS                                |   6 +
->>   docs/system/riscv/microblaze-v-generic.rst |  45 +++++
->>   docs/system/target-riscv.rst               |   1 +
->>   hw/riscv/microblaze-v-generic.c            | 182 +++++++++++++++++++++
->>   hw/riscv/Kconfig                           |   8 +
->>   hw/riscv/meson.build                       |   1 +
->>   6 files changed, 243 insertions(+)
->>   create mode 100644 docs/system/riscv/microblaze-v-generic.rst
->>   create mode 100644 hw/riscv/microblaze-v-generic.c
+On Thu, Nov 14, 2024 at 4:57=E2=80=AFPM Jason Chien <jason.chien@sifive.com=
+> wrote:
+>
+> From RISCV IOMMU spec section 2.1.3:
+> When SXL is 1, the following rules apply:
+> - If the first-stage is not Bare, then a page fault corresponding to the
+> original access type occurs if the IOVA has bits beyond bit 31 set to 1.
+> - If the second-stage is not Bare, then a guest page fault corresponding
+> to the original access type occurs if the incoming GPA has bits beyond bi=
+t
+> 33 set to 1.
+>
+> From RISCV IOMMU spec section 2.3 step 17:
+> Use the process specified in Section "Two-Stage Address Translation" of
+> the RISC-V Privileged specification to determine the GPA accessed by the
+> transaction.
+>
+> From RISCV IOMMU spec section 2.3 step 19:
+> Use the second-stage address translation process specified in Section
+> "Two-Stage Address Translation" of the RISC-V Privileged specification
+> to translate the GPA A to determine the SPA accessed by the transaction.
+>
+> This commit adds the iova check with the following rules:
+> - For Sv32, Sv32x4, Sv39x4, Sv48x4 and Sv57x4, the iova must be zero
+> extended.
+> - For Sv39, Sv48 and Sv57, the iova must be signed extended with most
+> significant bit.
+>
+> Signed-off-by: Jason Chien <jason.chien@sifive.com>
+> Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 
+Thanks!
 
->> diff --git a/docs/system/riscv/microblaze-v-generic.rst b/docs/system/riscv/microblaze-v-generic.rst
->> new file mode 100644
->> index 00000000000..71e9e655f66
->> --- /dev/null
->> +++ b/docs/system/riscv/microblaze-v-generic.rst
->> @@ -0,0 +1,45 @@
->> +Microblaze-V generic board (``amd-microblaze-v-generic``)
->> +=========================================================
->> +The AMD MicroBlaze™ V processor is a soft-core RISC-V processor IP for AMD adaptive SoCs and FPGAs.
->> +The MicroBlaze V processor is based on a 32-bit / 64-bit RISC-V instruction set architecture (ISA)
->> +and its fully hardware compatible with the classic MicroBlaze processor.
-> 
-> I'm not sure "fully hardware compatible" is the right thing to say
-> here as it's a different ISA.
+Applied to riscv-to-apply.next
 
-I'm also confused. "fully hardware compatible" seems extracted from
-a sales speech. Maybe clarify mentioning 'peripherals'?
+Alistair
 
-> Maybe just say that it works with the existing Microblaze IP
-> 
->> +
->> +More details here:
->> +https://docs.amd.com/r/en-US/ug1629-microblaze-v-user-guide/MicroBlaze-V-Architecture
->> +
->> +The microblaze-v generic board in QEMU has following supported devices
-> 
-> The supported devices should probably be listed here
-
-
->> +
->> +Implemented devices:
->> +
->> +    - timer
->> +    - uartlite
->> +    - uart16550
->> +    - emaclite
->> +    - timer2
->> +    - axi emac
->> +    - axi dma
-
+> ---
+>  hw/riscv/riscv-iommu.c | 23 ++++++++++++++++++++---
+>  1 file changed, 20 insertions(+), 3 deletions(-)
+>
+> diff --git a/hw/riscv/riscv-iommu.c b/hw/riscv/riscv-iommu.c
+> index bbc95425b3..ff9deefe37 100644
+> --- a/hw/riscv/riscv-iommu.c
+> +++ b/hw/riscv/riscv-iommu.c
+> @@ -392,9 +392,26 @@ static int riscv_iommu_spa_fetch(RISCVIOMMUState *s,=
+ RISCVIOMMUContext *ctx,
+>
+>          /* Address range check before first level lookup */
+>          if (!sc[pass].step) {
+> -            const uint64_t va_mask =3D (1ULL << (va_skip + va_bits)) - 1=
+;
+> -            if ((addr & va_mask) !=3D addr) {
+> -                return RISCV_IOMMU_FQ_CAUSE_DMA_DISABLED;
+> +            const uint64_t va_len =3D va_skip + va_bits;
+> +            const uint64_t va_mask =3D (1ULL << va_len) - 1;
+> +
+> +            if (pass =3D=3D S_STAGE && va_len > 32) {
+> +                target_ulong mask, masked_msbs;
+> +
+> +                mask =3D (1L << (TARGET_LONG_BITS - (va_len - 1))) - 1;
+> +                masked_msbs =3D (addr >> (va_len - 1)) & mask;
+> +
+> +                if (masked_msbs !=3D 0 && masked_msbs !=3D mask) {
+> +                    return (iotlb->perm & IOMMU_WO) ?
+> +                                RISCV_IOMMU_FQ_CAUSE_WR_FAULT_S :
+> +                                RISCV_IOMMU_FQ_CAUSE_RD_FAULT_S;
+> +                }
+> +            } else {
+> +                if ((addr & va_mask) !=3D addr) {
+> +                    return (iotlb->perm & IOMMU_WO) ?
+> +                                RISCV_IOMMU_FQ_CAUSE_WR_FAULT_VS :
+> +                                RISCV_IOMMU_FQ_CAUSE_RD_FAULT_VS;
+> +                }
+>              }
+>          }
+>
+> --
+> 2.43.2
+>
+>
 
