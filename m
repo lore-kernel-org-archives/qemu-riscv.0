@@ -4,76 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2FB6FD6C28B
-	for <qemu-riscv@archiver.kernel.org>; Tue, 19 Nov 2024 19:19:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C972AD6C287
+	for <qemu-riscv@archiver.kernel.org>; Tue, 19 Nov 2024 19:20:31 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tDTj6-0002jv-9m; Tue, 19 Nov 2024 14:17:28 -0500
+	id 1tDTlw-0007rV-PX; Tue, 19 Nov 2024 14:20:25 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1tDTj4-0002j2-ED
- for qemu-riscv@nongnu.org; Tue, 19 Nov 2024 14:17:26 -0500
-Received: from mail-pf1-x42e.google.com ([2607:f8b0:4864:20::42e])
+ id 1tDTld-0007W9-Uk
+ for qemu-riscv@nongnu.org; Tue, 19 Nov 2024 14:20:07 -0500
+Received: from mail-pj1-x1029.google.com ([2607:f8b0:4864:20::1029])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1tDTj2-0007do-St
- for qemu-riscv@nongnu.org; Tue, 19 Nov 2024 14:17:26 -0500
-Received: by mail-pf1-x42e.google.com with SMTP id
- d2e1a72fcca58-720aa3dbda5so4114303b3a.1
- for <qemu-riscv@nongnu.org>; Tue, 19 Nov 2024 11:17:24 -0800 (PST)
+ id 1tDTlc-0008OA-91
+ for qemu-riscv@nongnu.org; Tue, 19 Nov 2024 14:20:05 -0500
+Received: by mail-pj1-x1029.google.com with SMTP id
+ 98e67ed59e1d1-2ea752c0555so1884342a91.3
+ for <qemu-riscv@nongnu.org>; Tue, 19 Nov 2024 11:20:03 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1732043843; x=1732648643; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=bFpahzsVJtnI1jlusgbxiTRns2vx5vCUwt4fV8qKZAY=;
- b=YyqQ/fajTT8c8Wxu1kU5c9aUTdex9ApcqqpGUo9Qo3iefnJUeQ+kDA2qycZ6CBnTnZ
- l3yF18f5cqB034mjg1jmUmUCDASnvPoMryEFEVKOpXIV48bFPUCADIlnvJ4mn9I2G9sa
- +hKvYpUXFP/AvZUFZwtNj3hR9t85c/bXfF6WFH3EYVG/s5igcPMIcRQg0mIkFk9YWTOF
- +Uw9fMit1DggifCLvcugiS3NS4hTgD4TXQCXwMDfQM7D3zZ6mBkxeoFrJMJexxs9Thmt
- ScN0M+ULqQQh6NfPfxrcA/zu0kW45XlqmJ47AZAUGSAD3f1hD+i+ukeiX/T7bti86yYk
- l13w==
+ d=ventanamicro.com; s=google; t=1732044003; x=1732648803; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=wht6cpDTrUupBJ4RYKBt4caH+gqq3dPRY/S+vBK0iN4=;
+ b=gEZzugx1v3cUQo2k+A0HQVFL2Ctq470GoaQNfYvVJcku/jYjLWhMIsMBT6POx8IehM
+ kbdl1RiVrjQVETF4hFNn7SSGYUbHh6yhZ7o9fLLX6KCc27Wu54THFWYO/IbHvbHc+Xmg
+ mvhiyxkXXLJ0is6HCbb8cvtnwbw9RC9xOiRc99Lmy+pcBnyuGCKTPJfbsqb3HHMU8rXP
+ ny4EOVkqWSRFkJJHNL/7WdkZZlVRNiLvhg+vaoB8tA0Hg/7cd2R8B4vV/wCZRi/2xG4a
+ 15P7Mmj0Lw8XP5dI4Kn+mBQm6Wy/Bl8TFrxZfpCAosvUZggiC/pn7VBfSLIxsR2np3+w
+ 24ww==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732043843; x=1732648643;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=bFpahzsVJtnI1jlusgbxiTRns2vx5vCUwt4fV8qKZAY=;
- b=Z/Id3vUVCjj2a3vLd3DNvn8haVCk4NfxkwLAgJPiaC/7xQUx94sUeKjQoVE4L/SU3X
- iIA5753gx2pGQMfpE5VMS1zChtMzcvFYKMqi1Ry/1m6r9+Fmi/pz3wAvcdfOxsM4//2V
- RkmbjRGU8VJIeVfoDLEQ0q+dY8MR3wmUU/6KUjcWIpfWrNHWqGdoc9skSc1+psFXwarC
- mAhGAg05XYeQH0COvo3x45hkmFz2+8Nkr9ENBH3Gge8MoJYuxknLe0jccQLwz9cXStic
- +8XYVbu4GiSG+zUcKE3Cxa7HZugXxxB6hrM/lBivaDCT61jmA54OHgcfY6j6IpEg1hKC
- FPXQ==
-X-Gm-Message-State: AOJu0Yz+xVfR4mzQSnJbrIs9AKT/GR17c0EPVmYkAYzkdFOaf64RKlgX
- quS07awvTp1NROir8lUJKHgn92nYTx28Am2jSDmDvCl8aQLqm6dIui1xBcYOBkM=
-X-Google-Smtp-Source: AGHT+IEw2vSpxNg2KPu5e9uAY7tHDToOHkc1gwHplVYGS+E/PphGGpyPjjxfJut/TUppIXMxo9ZQyQ==
-X-Received: by 2002:a05:6a00:3d07:b0:724:67dd:2615 with SMTP id
- d2e1a72fcca58-724bed54619mr157465b3a.22.1732043843494; 
- Tue, 19 Nov 2024 11:17:23 -0800 (PST)
-Received: from grind.dc1.ventanamicro.com ([187.101.65.72])
+ d=1e100.net; s=20230601; t=1732044003; x=1732648803;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=wht6cpDTrUupBJ4RYKBt4caH+gqq3dPRY/S+vBK0iN4=;
+ b=AwwJGIBlUj8bipvdG2aGNc+uwzOni5816gOn2zxHt98wQ8/Jr/+cy/gq+sUFvnmhZC
+ yD9pP9RUXj2gUXQHkWETNPNArMfW/pngrly81Yhq4D/57kk9JtrW/8bI9h+XcS/xmQ05
+ otRBPiN4JgqRkLLo+6c7XxpaxCXNECUlcrGH0TlA3uI1kmtbg/41BATMrkTBIDvN7XXe
+ iYf/S5Kjxx5CPWon3VmYQb+qDg5KYqvQijkTzikJmPc01Dd9/dRa5Q8OoHMS0HdWWJ3z
+ jq6V+WlhtfMOcV+Xgzze5+fBy2KtwejteemTfKw+eYfj/p33gGYsFcYN/o3I/uxaNpmn
+ L8hA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVTxfUgLweDOVGQQlBS4h64F6+ZGnP5fryPn5GbbFR2PMKg2CdXY0/xPHmzlJhm05zlQ0NoABkLLOgz@nongnu.org
+X-Gm-Message-State: AOJu0YxldYkTn4D9J0Kxadh8X42hTibLvMqqdzHPKyZUpK809YGteJAj
+ QWNCaSugxiId0HaCZ7/TMKrpHOhyWZJ0/0KBQyxOL2eM/kl9Wq0IevwLDteKLXE=
+X-Google-Smtp-Source: AGHT+IHfFfoUPxau6ZG8kxB7/rfpY3g8yPa01ErWa90j2nfHIjKis6QdgKpVeIX7qQUMt9NzNfSg1g==
+X-Received: by 2002:a17:90b:3d91:b0:2ea:5c01:c1a8 with SMTP id
+ 98e67ed59e1d1-2ea5c01c429mr12261267a91.35.1732044002848; 
+ Tue, 19 Nov 2024 11:20:02 -0800 (PST)
+Received: from [192.168.68.110] ([187.101.65.72])
  by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-724beeb82f2sm24271b3a.35.2024.11.19.11.17.20
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 19 Nov 2024 11:17:23 -0800 (PST)
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-To: qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
- liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Subject: [PATCH for-10.0 v2 4/8] target/riscv/kvm: consider irqchip_split() in
- aia_create()
-Date: Tue, 19 Nov 2024 16:17:02 -0300
-Message-ID: <20241119191706.718860-5-dbarboza@ventanamicro.com>
-X-Mailer: git-send-email 2.47.0
-In-Reply-To: <20241119191706.718860-1-dbarboza@ventanamicro.com>
-References: <20241119191706.718860-1-dbarboza@ventanamicro.com>
+ 98e67ed59e1d1-2ea4a6bc0a0sm5651853a91.18.2024.11.19.11.20.00
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 19 Nov 2024 11:20:02 -0800 (PST)
+Message-ID: <84839418-2011-47fa-a5bd-f51959fc395c@ventanamicro.com>
+Date: Tue, 19 Nov 2024 16:19:58 -0300
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 0/8] riscv: AIA userspace irqchip_split support
+To: Alistair Francis <alistair23@gmail.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com,
+ bmeng@tinylab.org, liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com,
+ palmer@rivosinc.com, ajones@ventanamicro.com
+References: <20241010190337.376987-1-dbarboza@ventanamicro.com>
+ <CAKmqyKPFqwQ_H9umX17PAjZ=TmqYGPQHRFo76CkDYaF88amKzg@mail.gmail.com>
+Content-Language: en-US
+From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+In-Reply-To: <CAKmqyKPFqwQ_H9umX17PAjZ=TmqYGPQHRFo76CkDYaF88amKzg@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::42e;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pf1-x42e.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1029;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pj1-x1029.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -96,88 +100,51 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Before adding support to kernel-irqchip=split when using KVM AIA we need
-to change how we create the in-kernel AIA device.
 
-In the use case we have so far, i.e. in-kernel irqchip without split
-mode, both the s-mode APLIC and IMSIC controllers are provided by the
-irqchip. In irqchip_split() mode we'll emulate the s-mode APLIC
-controller, which will send MSIs to the in-kernel IMSIC controller. To
-do that we need to change kvm_riscv_aia_create() to not create the
-in-kernel s-mode APLIC controller.
 
-In the kernel source arch/riscv/kvm/aia_aplic.c, function
-kvm_riscv_aia_aplic_init(), we verify that the APLIC controller won't be
-instantiated by KVM if we do not set 'nr_sources', which is set via
-KVM_DEV_RISCV_AIA_CONFIG_SRCS. For QEMU this means that we should not
-set 'aia_irq_num' during kvm_riscv_aia_create() in irqchip_split() mode.
+On 11/17/24 11:05 PM, Alistair Francis wrote:
+> On Fri, Oct 11, 2024 at 5:04 AM Daniel Henrique Barboza
+> <dbarboza@ventanamicro.com> wrote:
+>>
+>> Hi,
+>>
+>> This series adds AIA irqchip_split support, effective when using AIA
+>> with aia=aplic-imsic and -accel kvm,kernel-irqchip=split.
+>>
+>> The main difference between what we currently have and irqchip_split()
+>> mode is that, when using split mode, QEMU will emulate the APLIC
+>> controller instead of using the in-kernel APLIC controller provided by
+>> KVM.
+>>
+>> After this series this is the matrix of which interrupt controllers
+>> we're emulating based on 'virt' machine configuration and accelerator
+>> properties:
+>>
+>> Accel Accel props   AIA type    APLIC-m IMSIC-m APLIC-s   IMSIC-s
+>> tcg      ----       aplic       emul    n/a     emul      n/a
+>> tcg      ----       aplic-imsic emul    emul    emul      emul
+>> kvm      ----       aplic       n/a     n/a     emul      n/a
+>> kvm      none       aplic-imsic n/a     n/a     in-kernel in-kernel
+>> kvm   irqchip=split aplic-imsic n/a     n/a     emul      in-kernel
+>>
+>>
+>> Patches based on alistair/riscv-to-apply.next.
+> 
+> Thanks!
+> 
+> Do you mind rebasing this again?
 
-In this same condition, skip KVM_DEV_RISCV_AIA_ADDR_APLIC as well since
-it is used to set the base address for the in-kernel APLIC controller.
+Thanks for the reviews!
 
-Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
----
- target/riscv/kvm/kvm-cpu.c | 38 +++++++++++++++++++++++---------------
- 1 file changed, 23 insertions(+), 15 deletions(-)
+I'm not sure which branch should I use for rebasing (it doesn't seem that your
+riscv-to-apply.next or riscv-to-apply.for-upstream branches are updated), so I rebased
+it on top of 'master', fixed a couple of conflicts.
 
-diff --git a/target/riscv/kvm/kvm-cpu.c b/target/riscv/kvm/kvm-cpu.c
-index c53ca1f76b..a9680f2447 100644
---- a/target/riscv/kvm/kvm-cpu.c
-+++ b/target/riscv/kvm/kvm-cpu.c
-@@ -1734,13 +1734,29 @@ void kvm_riscv_aia_create(MachineState *machine, uint64_t group_shift,
-         }
-     }
- 
--    ret = kvm_device_access(aia_fd, KVM_DEV_RISCV_AIA_GRP_CONFIG,
--                            KVM_DEV_RISCV_AIA_CONFIG_SRCS,
--                            &aia_irq_num, true, NULL);
--    if (ret < 0) {
--        error_report("KVM AIA: failed to set number of input irq lines");
--        exit(1);
--    }
-+    /*
-+     * Skip APLIC creation in KVM if we're running split mode.
-+     * This is done by leaving KVM_DEV_RISCV_AIA_CONFIG_SRCS
-+     * unset. We can also skip KVM_DEV_RISCV_AIA_ADDR_APLIC
-+     * since KVM won't be using it.
-+     */
-+    if (!kvm_kernel_irqchip_split()) {
-+        ret = kvm_device_access(aia_fd, KVM_DEV_RISCV_AIA_GRP_CONFIG,
-+                                KVM_DEV_RISCV_AIA_CONFIG_SRCS,
-+                                &aia_irq_num, true, NULL);
-+        if (ret < 0) {
-+            error_report("KVM AIA: failed to set number of input irq lines");
-+            exit(1);
-+        }
-+
-+        ret = kvm_device_access(aia_fd, KVM_DEV_RISCV_AIA_GRP_ADDR,
-+                                KVM_DEV_RISCV_AIA_ADDR_APLIC,
-+                                &aplic_base, true, NULL);
-+        if (ret < 0) {
-+            error_report("KVM AIA: failed to set the base address of APLIC");
-+            exit(1);
-+        }
-+     }
- 
-     ret = kvm_device_access(aia_fd, KVM_DEV_RISCV_AIA_GRP_CONFIG,
-                             KVM_DEV_RISCV_AIA_CONFIG_IDS,
-@@ -1781,14 +1797,6 @@ void kvm_riscv_aia_create(MachineState *machine, uint64_t group_shift,
-         exit(1);
-     }
- 
--    ret = kvm_device_access(aia_fd, KVM_DEV_RISCV_AIA_GRP_ADDR,
--                            KVM_DEV_RISCV_AIA_ADDR_APLIC,
--                            &aplic_base, true, NULL);
--    if (ret < 0) {
--        error_report("KVM AIA: failed to set the base address of APLIC");
--        exit(1);
--    }
--
-     for (socket = 0; socket < socket_count; socket++) {
-         socket_imsic_base = imsic_base + socket * (1U << group_shift);
-         hart_count = riscv_socket_hart_count(machine, socket);
--- 
-2.47.0
+Let me know if you want a rebase based on a different branch. Thanks,
+
+Daniel
+
+> 
+> Alistair
 
 
