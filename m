@@ -4,73 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 70001D60D0A
-	for <qemu-riscv@archiver.kernel.org>; Tue, 19 Nov 2024 01:41:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2DF64D60D09
+	for <qemu-riscv@archiver.kernel.org>; Tue, 19 Nov 2024 02:14:22 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tDDEi-00023v-V4; Mon, 18 Nov 2024 20:41:02 -0500
+	id 1tDDkT-0005un-G3; Mon, 18 Nov 2024 21:13:49 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1tDDEZ-00023C-Gf; Mon, 18 Nov 2024 20:40:52 -0500
-Received: from mail-vk1-xa2d.google.com ([2607:f8b0:4864:20::a2d])
+ id 1tDDkS-0005uW-8v; Mon, 18 Nov 2024 21:13:48 -0500
+Received: from mail-vk1-xa2a.google.com ([2607:f8b0:4864:20::a2a])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1tDDEX-0005y5-FY; Mon, 18 Nov 2024 20:40:51 -0500
-Received: by mail-vk1-xa2d.google.com with SMTP id
- 71dfb90a1353d-5101c527611so1027105e0c.3; 
- Mon, 18 Nov 2024 17:40:48 -0800 (PST)
+ id 1tDDkQ-0001XI-Aw; Mon, 18 Nov 2024 21:13:48 -0500
+Received: by mail-vk1-xa2a.google.com with SMTP id
+ 71dfb90a1353d-50d2d300718so1018494e0c.1; 
+ Mon, 18 Nov 2024 18:13:45 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1731980447; x=1732585247; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1731982425; x=1732587225; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=IQJQmnMjPYZa8E6bHKXXdof5RhZURvhEX9YsP/Elh7A=;
- b=a81CF2yEbpS/LLNQQ849bT5oTeY7e1QraZBqRdaqiyWCCPufH4v28vELcjUciqlhyi
- QgU6y9RkDyHO/be0M/+v63ION6YhvtV5s2wbNyKYSD36Km9bE+VTL3R6WMqyeQ+naT/K
- 3xU/F5xQUEf1lkH+0blB3fqVsgZHhlE4bY0DAXCd5Hqk7GfUxDKecfzAUnOzaxWiwnI6
- 2NYpAipeKImezofnWzrR8ObI7uq0h0nEhFFH/oViTmSjxWDZBd5qh9xqZcovfU2RMGPw
- co3rSdEISDK2nNm1dQI6J5JEcn7ZJIABEonDaH+xJRuUc2rP3bA4y3NL28Hfunedgq0y
- KC5A==
+ bh=jLU2k1QIIkzaxbVotBjkfsUemgQB6ng7cQ0oDZ0pPuk=;
+ b=KEJGxRHIAjlpbtQbtVt/MlQhS6YIAvPxShi2pf6Aot1NGvfAZksYas2yc34vV6FTaY
+ vodpWzZa9xKA0/UvvSkDewx0JWdqa3dDGqO08wNb2DrS6yqQjw6bAqhmcv5czII+O2g6
+ z1lfC+GTJnFxiyNr/uO5rq5ggMl2yNMCysE3Dw6sBmrJRH24zm4GgeUzlcWKjfxBFfga
+ CVn2dfmiF2bSH56ROtnbXaWIyfjaX32k5hEThJzE3A+DhbBHWTm6QfQgmfNUCp02PglV
+ IqG6GqRrBskiY3xQBlzPGU9ElftEWnKeT/owu6ftP7sBhC3QjcxKEvve44Sl3WkV3xrg
+ 7qnw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1731980447; x=1732585247;
+ d=1e100.net; s=20230601; t=1731982425; x=1732587225;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=IQJQmnMjPYZa8E6bHKXXdof5RhZURvhEX9YsP/Elh7A=;
- b=vxLyZ3tL1oG6npP3ryVjxyI1LCJwXOZ7pdP/THs8iKBkxGWtH9XpYL4JG0/ZDoOhFs
- UUTemCG+qkAwbOmVYQPYBsOlMAniHR/RPraBqla5QnoPXZ9U1j2E6CG4IIBYIs/9fO0v
- dMDQMxC2TN3tD5IANKjTsW51cwulQol4DfFJeozoK4EkcyD+dul6/oHFyWj1hvsAgQbp
- D38uGnIJBuFXBGPMuZHvdlaR9Cz2yMSY7br46fOWE2QuO8qFMI4nd8eymPxkXJ3EuGH8
- C2itZSf8ZkuXEkzKYzwBfsu/g9WDh21G2WH+UMyxszxE1frjTl5h58Xy3bed0sVwht33
- PuZA==
+ bh=jLU2k1QIIkzaxbVotBjkfsUemgQB6ng7cQ0oDZ0pPuk=;
+ b=YVk6BvLNIUB7rHTO2zOe9kLM2cf1UJwtTRYr3kUv5jHUOryVg9syNRsmZRSzOhGpQB
+ ZrNVx4HtxoB4YOcS2Y1hoOyDCrgzbcCx72X7Ca9iw5WA8FgfazS/XwNhqfoxwhit5Dp8
+ Bmvm21Aeu70Hr49NhOuZltlo8CnlTX2k7xSDpz6ymeYoDIAJoIriGD/ZZjahw6VYiQeF
+ CVJeRCpIPT9F+yWw+n2H+pbTXVANzFbHSWfY3RhmbkhgxD50WS81SmUsYEMKfjfz8HOW
+ u0cWT5zCf7oE16X1iPbw/HLOre6AVmatp1qS8VbbMUIIzpU8oxcXoOQFFBiHE7gbtgl8
+ +L2g==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUxXw1u8pRU/iY2shZDdqL83CjuF40l/wlDGKd8wZ/gyBf9qRYtZXay0uA9dVh8qinq2ue57aXXac9A@nongnu.org
-X-Gm-Message-State: AOJu0Yy26rz93B7jradg6SFdUJ84zwfnS96W/8GKSul3O1q26GuMsrcB
- aKieWBlgTPUvQC3lQA48mE2S7zAwuKrXtANzD6hn49HEr8jq0vP8+OT/S0UT3PK4bH1RK75sDN5
- vZQEiVL3nxnX40dGmiZcYlyj+2+s=
-X-Google-Smtp-Source: AGHT+IFISVn7unMaA297S8Ghz0awRCDK9/Q7/OhSOkLQFrwejDZ/HB1SE6v91bNtkkAvbxtJoJnOdoo+T8Fcqk8e6bY=
-X-Received: by 2002:a05:6102:3594:b0:4ad:4976:292 with SMTP id
- ada2fe7eead31-4ad62baede8mr10398943137.9.1731980447599; Mon, 18 Nov 2024
- 17:40:47 -0800 (PST)
+ AJvYcCV8vai+t5HeySf86ZlrUzlUMG4rB/fGuPM2GCmeHdLRIv5T6AshuLuqKe3kZFClGdIuqRYEfmTQsZr1@nongnu.org
+X-Gm-Message-State: AOJu0YyYotY88Jp0QICxIaq+bNv26MX41JVaVBNGTuhM+0MbekGTW3Wg
+ N7niBTeLCFqxfbaARzPPEP1A7uwJezE9j6UqHquI/4tsRHNf3odnl3jZPb7YOCas5lvD58Rm7D2
+ 11XHcO2Ks7C24tjYciNk4jXCirQ8=
+X-Google-Smtp-Source: AGHT+IHcpIO6F1S96pR26L+sClUITpQrrxynkOxYEcERGplRor3+Gt/PRythPoqqo2+paVZAluIMSFvCapCfUu1QMxo=
+X-Received: by 2002:a05:6102:dcb:b0:4ad:4f0b:d187 with SMTP id
+ ada2fe7eead31-4ad62bfa7dbmr12535542137.12.1731982424842; Mon, 18 Nov 2024
+ 18:13:44 -0800 (PST)
 MIME-Version: 1.0
 References: <20241106133407.604587-1-dbarboza@ventanamicro.com>
- <20241106133407.604587-5-dbarboza@ventanamicro.com>
-In-Reply-To: <20241106133407.604587-5-dbarboza@ventanamicro.com>
+ <20241106133407.604587-6-dbarboza@ventanamicro.com>
+In-Reply-To: <20241106133407.604587-6-dbarboza@ventanamicro.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Tue, 19 Nov 2024 11:40:21 +1000
-Message-ID: <CAKmqyKOhZQRYfRPtW2ej1EWWVF6+o9TxSCriXSQSacocvc3VeQ@mail.gmail.com>
-Subject: Re: [PATCH for-10.0 4/7] hw/riscv/virt: Add IOMMU as platform device
- if the option is set
+Date: Tue, 19 Nov 2024 12:13:18 +1000
+Message-ID: <CAKmqyKN+q-UxZJwzE9jhx0jizs8Q79Y9f78xTUi4Ab04=fPXpQ@mail.gmail.com>
+Subject: Re: [PATCH for-10.0 5/7] hw/riscv/virt.c,
+ riscv-iommu-sys.c: add MSIx support
 To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
  bmeng@tinylab.org, liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, 
- palmer@rivosinc.com, Sunil V L <sunilvl@ventanamicro.com>
+ palmer@rivosinc.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::a2d;
- envelope-from=alistair23@gmail.com; helo=mail-vk1-xa2d.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::a2a;
+ envelope-from=alistair23@gmail.com; helo=mail-vk1-xa2a.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -97,302 +97,270 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 On Wed, Nov 6, 2024 at 11:36=E2=80=AFPM Daniel Henrique Barboza
 <dbarboza@ventanamicro.com> wrote:
 >
-> From: Sunil V L <sunilvl@ventanamicro.com>
+> MSIx support is added in the RISC-V IOMMU platform device by including
+> the required MSIx facilities to alow software to properly setup the MSIx
+> subsystem.
 >
-> Add a new machine option called 'iommu-sys' that enables a
-> riscv-iommu-sys platform device for the 'virt' machine. The option is
-> default 'off'.
+> We took inspiration of what is being done in the riscv-iommu-pci device,
+> mainly msix_init() and msix_notify(), while keeping in mind that
+> riscv-iommu-sys isn't a true PCI device and we don't need to copy/paste
+> all the contents of these MSIx functions.
 >
-> The device will use IRQs 36 to 39.
+> Two extra MSI MemoryRegions were added: 'msix-table' and 'msix-pba'.
+> They are used to manage r/w of the MSI table and Pending Bit Array (PBA)
+> respectively. Both are subregions of the main IOMMU memory region,
+> iommu->regs_mr, initialized during riscv_iommu_realize(), and each one
+> has their own handlers for MSIx reads and writes.
 >
-> We will not support both riscv-iommu-sys and riscv-iommu-pci devices in
-> the same board in this first implementation. If a riscv-iommu-pci device
-> is added in the command line we will disable the riscv-iommu-sys device.
+> This is the expected memory map when using this device in the 'virt'
+> machine:
 >
-> Signed-off-by: Sunil V L <sunilvl@ventanamicro.com>
+>     0000000003010000-0000000003010fff (prio 0, i/o): riscv-iommu-regs
+>       0000000003010300-000000000301034f (prio 0, i/o): msix-table
+>       0000000003010400-0000000003010407 (prio 0, i/o): msix-pba
+>
+> We're now able to set IGS to RISCV_IOMMU_CAP_IGS_BOTH, and userspace is
+> free to decide which interrupt model to use.
+>
+> Enabling MSIx support for this device in the 'virt' machine requires
+> adding 'msi-parent' in the iommu-sys DT.
+>
 > Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Acked-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
 > ---
->  hw/riscv/virt.c          | 104 ++++++++++++++++++++++++++++++++++++++-
->  include/hw/riscv/iommu.h |   2 +
->  include/hw/riscv/virt.h  |   6 ++-
->  3 files changed, 109 insertions(+), 3 deletions(-)
+>  hw/riscv/riscv-iommu-sys.c | 116 +++++++++++++++++++++++++++++++++++--
+>  hw/riscv/trace-events      |   2 +
+>  hw/riscv/virt.c            |   6 +-
+>  3 files changed, 119 insertions(+), 5 deletions(-)
 >
+> diff --git a/hw/riscv/riscv-iommu-sys.c b/hw/riscv/riscv-iommu-sys.c
+> index 4b82046ce9..a0ef67a20b 100644
+> --- a/hw/riscv/riscv-iommu-sys.c
+> +++ b/hw/riscv/riscv-iommu-sys.c
+> @@ -26,11 +26,15 @@
+>  #include "qemu/host-utils.h"
+>  #include "qemu/module.h"
+>  #include "qom/object.h"
+> +#include "exec/exec-all.h"
+> +#include "trace.h"
+>
+>  #include "riscv-iommu.h"
+>
+>  #define RISCV_IOMMU_SYSDEV_ICVEC_VECTORS 0x3333
+>
+> +#define RISCV_IOMMU_PCI_MSIX_VECTORS 5
+> +
+>  /* RISC-V IOMMU System Platform Device Emulation */
+>
+>  struct RISCVIOMMUStateSys {
+> @@ -39,21 +43,123 @@ struct RISCVIOMMUStateSys {
+>      uint32_t         base_irq;
+>      DeviceState      *irqchip;
+>      RISCVIOMMUState  iommu;
+> +
+> +    /* Wired int support */
+>      qemu_irq         irqs[RISCV_IOMMU_INTR_COUNT];
+> +
+> +    /* Memory Regions for MSIX table and pending bit entries. */
+> +    MemoryRegion msix_table_mmio;
+> +    MemoryRegion msix_pba_mmio;
+> +    uint8_t *msix_table;
+> +    uint8_t *msix_pba;
+> +};
+> +
+> +static uint64_t msix_table_mmio_read(void *opaque, hwaddr addr,
+> +                                     unsigned size)
+> +{
+> +    RISCVIOMMUStateSys *s =3D opaque;
+> +
+> +    g_assert(addr + size <=3D RISCV_IOMMU_PCI_MSIX_VECTORS * PCI_MSIX_EN=
+TRY_SIZE);
+> +    return pci_get_long(s->msix_table + addr);
+> +}
+> +
+> +static void msix_table_mmio_write(void *opaque, hwaddr addr,
+> +                                  uint64_t val, unsigned size)
+> +{
+> +    RISCVIOMMUStateSys *s =3D opaque;
+> +
+> +    g_assert(addr + size <=3D RISCV_IOMMU_PCI_MSIX_VECTORS * PCI_MSIX_EN=
+TRY_SIZE);
+> +    pci_set_long(s->msix_table + addr, val);
+> +}
+> +
+> +static const MemoryRegionOps msix_table_mmio_ops =3D {
+> +    .read =3D msix_table_mmio_read,
+> +    .write =3D msix_table_mmio_write,
+> +    .endianness =3D DEVICE_LITTLE_ENDIAN,
+> +    .valid =3D {
+> +        .min_access_size =3D 4,
+> +        .max_access_size =3D 8,
+> +    },
+> +    .impl =3D {
+> +        .max_access_size =3D 4,
+> +    },
+> +};
+> +
+> +static uint64_t msix_pba_mmio_read(void *opaque, hwaddr addr,
+> +                                   unsigned size)
+> +{
+> +    RISCVIOMMUStateSys *s =3D opaque;
+> +
+> +    return pci_get_long(s->msix_pba + addr);
+> +}
+> +
+> +static void msix_pba_mmio_write(void *opaque, hwaddr addr,
+> +                                uint64_t val, unsigned size)
+> +{
+> +}
+> +
+> +static const MemoryRegionOps msix_pba_mmio_ops =3D {
+> +    .read =3D msix_pba_mmio_read,
+> +    .write =3D msix_pba_mmio_write,
+> +    .endianness =3D DEVICE_LITTLE_ENDIAN,
+> +    .valid =3D {
+> +        .min_access_size =3D 4,
+> +        .max_access_size =3D 8,
+> +    },
+> +    .impl =3D {
+> +        .max_access_size =3D 4,
+> +    },
+>  };
+>
+> +static void riscv_iommu_sysdev_init_msi(RISCVIOMMUStateSys *s,
+> +                                        uint32_t n_vectors)
+> +{
+> +    RISCVIOMMUState *iommu =3D &s->iommu;
+> +    uint32_t table_size =3D table_size =3D n_vectors * PCI_MSIX_ENTRY_SI=
+ZE;
+> +    uint32_t table_offset =3D RISCV_IOMMU_REG_MSI_CONFIG;
+> +    uint32_t pba_size =3D QEMU_ALIGN_UP(n_vectors, 64) / 8;
+> +    uint32_t pba_offset =3D RISCV_IOMMU_REG_MSI_CONFIG + 256;
+> +
+> +    s->msix_table =3D g_malloc0(table_size);
+> +    s->msix_pba =3D g_malloc0(pba_size);
+> +
+> +    memory_region_init_io(&s->msix_table_mmio, OBJECT(s), &msix_table_mm=
+io_ops,
+> +                          s, "msix-table", table_size);
+> +    memory_region_add_subregion(&iommu->regs_mr, table_offset,
+> +                                &s->msix_table_mmio);
+> +
+> +    memory_region_init_io(&s->msix_pba_mmio, OBJECT(s), &msix_pba_mmio_o=
+ps, s,
+> +                          "msix-pba", pba_size);
+> +    memory_region_add_subregion(&iommu->regs_mr, pba_offset,
+> +                                &s->msix_pba_mmio);
+> +}
+> +
+> +static void riscv_iommu_sysdev_send_MSI(RISCVIOMMUStateSys *s,
+> +                                        uint32_t vector)
+> +{
+> +    uint8_t *table_entry =3D s->msix_table + vector * PCI_MSIX_ENTRY_SIZ=
+E;
+> +    uint64_t msi_addr =3D pci_get_quad(table_entry + PCI_MSIX_ENTRY_LOWE=
+R_ADDR);
+> +    uint32_t msi_data =3D pci_get_long(table_entry + PCI_MSIX_ENTRY_DATA=
+);
+> +    MemTxResult result;
+> +
+> +    address_space_stl_le(&address_space_memory, msi_addr,
+> +                         msi_data, MEMTXATTRS_UNSPECIFIED, &result);
+> +    trace_riscv_iommu_sys_msi_sent(vector, msi_addr, msi_data, result);
+> +}
+> +
+>  static void riscv_iommu_sysdev_notify(RISCVIOMMUState *iommu,
+>                                        unsigned vector)
+>  {
+>      RISCVIOMMUStateSys *s =3D container_of(iommu, RISCVIOMMUStateSys, io=
+mmu);
+>      uint32_t fctl =3D  riscv_iommu_reg_get32(iommu, RISCV_IOMMU_REG_FCTL=
+);
+>
+> -    /* We do not support MSIs yet */
+> -    if (!(fctl & RISCV_IOMMU_FCTL_WSI)) {
+> +    if (fctl & RISCV_IOMMU_FCTL_WSI) {
+> +        qemu_irq_pulse(s->irqs[vector]);
+> +        trace_riscv_iommu_sys_irq_sent(vector);
+>          return;
+>      }
+>
+> -    qemu_irq_pulse(s->irqs[vector]);
+> +    riscv_iommu_sysdev_send_MSI(s, vector);
+>  }
+>
+>  static void riscv_iommu_sys_realize(DeviceState *dev, Error **errp)
+> @@ -82,6 +188,8 @@ static void riscv_iommu_sys_realize(DeviceState *dev, =
+Error **errp)
+>          irq =3D qdev_get_gpio_in(s->irqchip, s->base_irq + i);
+>          sysbus_connect_irq(sysdev, i, irq);
+>      }
+> +
+> +    riscv_iommu_sysdev_init_msi(s, RISCV_IOMMU_PCI_MSIX_VECTORS);
+>  }
+>
+>  static void riscv_iommu_sys_init(Object *obj)
+> @@ -93,7 +201,7 @@ static void riscv_iommu_sys_init(Object *obj)
+>      qdev_alias_all_properties(DEVICE(iommu), obj);
+>
+>      iommu->icvec_avail_vectors =3D RISCV_IOMMU_SYSDEV_ICVEC_VECTORS;
+> -    riscv_iommu_set_cap_igs(iommu, RISCV_IOMMU_CAP_IGS_WSI);
+> +    riscv_iommu_set_cap_igs(iommu, RISCV_IOMMU_CAP_IGS_BOTH);
+>  }
+>
+>  static Property riscv_iommu_sys_properties[] =3D {
+> diff --git a/hw/riscv/trace-events b/hw/riscv/trace-events
+> index 0527c56c91..94facbb8b1 100644
+> --- a/hw/riscv/trace-events
+> +++ b/hw/riscv/trace-events
+> @@ -15,3 +15,5 @@ riscv_iommu_icvec_write(uint32_t orig, uint32_t actual)=
+ "ICVEC write: incoming 0
+>  riscv_iommu_ats(const char *id, unsigned b, unsigned d, unsigned f, uint=
+64_t iova) "%s: translate request %04x:%02x.%u iova: 0x%"PRIx64
+>  riscv_iommu_ats_inval(const char *id) "%s: dev-iotlb invalidate"
+>  riscv_iommu_ats_prgr(const char *id) "%s: dev-iotlb page request group r=
+esponse"
+> +riscv_iommu_sys_irq_sent(uint32_t vector) "IRQ sent to vector %u"
+> +riscv_iommu_sys_msi_sent(uint32_t vector, uint64_t msi_addr, uint32_t ms=
+i_data, uint32_t result) "MSI sent to vector %u msi_addr 0x%lx msi_data 0x%=
+x result %u"
 > diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-> index 45a8c4f819..23d1380b86 100644
+> index 23d1380b86..281fc65cc6 100644
 > --- a/hw/riscv/virt.c
 > +++ b/hw/riscv/virt.c
-> @@ -33,6 +33,7 @@
->  #include "target/riscv/pmu.h"
->  #include "hw/riscv/riscv_hart.h"
->  #include "hw/riscv/iommu.h"
-> +#include "hw/riscv/riscv-iommu-bits.h"
->  #include "hw/riscv/virt.h"
->  #include "hw/riscv/boot.h"
->  #include "hw/riscv/numa.h"
-> @@ -76,6 +77,7 @@ static const MemMapEntry virt_memmap[] =3D {
->      [VIRT_CLINT] =3D        {  0x2000000,       0x10000 },
->      [VIRT_ACLINT_SSWI] =3D  {  0x2F00000,        0x4000 },
->      [VIRT_PCIE_PIO] =3D     {  0x3000000,       0x10000 },
-> +    [VIRT_IOMMU_SYS] =3D    {  0x3010000,        0x1000 },
->      [VIRT_PLATFORM_BUS] =3D {  0x4000000,     0x2000000 },
->      [VIRT_PLIC] =3D         {  0xc000000, VIRT_PLIC_SIZE(VIRT_CPUS_MAX *=
- 2) },
->      [VIRT_APLIC_M] =3D      {  0xc000000, APLIC_SIZE(VIRT_CPUS_MAX) },
-> @@ -853,7 +855,8 @@ static void create_fdt_virtio(RISCVVirtState *s, cons=
-t MemMapEntry *memmap,
->
->  static void create_fdt_pcie(RISCVVirtState *s, const MemMapEntry *memmap=
-,
->                              uint32_t irq_pcie_phandle,
-> -                            uint32_t msi_pcie_phandle)
-> +                            uint32_t msi_pcie_phandle,
-> +                            uint32_t iommu_sys_phandle)
->  {
->      g_autofree char *name =3D NULL;
->      MachineState *ms =3D MACHINE(s);
-> @@ -887,6 +890,12 @@ static void create_fdt_pcie(RISCVVirtState *s, const=
- MemMapEntry *memmap,
->          2, virt_high_pcie_memmap.base,
->          2, virt_high_pcie_memmap.base, 2, virt_high_pcie_memmap.size);
->
-> +    if (virt_is_iommu_sys_enabled(s)) {
-> +        qemu_fdt_setprop_cells(ms->fdt, name, "iommu-map",
-> +                               0, iommu_sys_phandle, 0, 0, 0,
-> +                               iommu_sys_phandle, 0, 0xffff);
-> +    }
-> +
->      create_pcie_irq_map(s, ms->fdt, name, irq_pcie_phandle);
+> @@ -1043,6 +1043,7 @@ static void create_fdt_virtio_iommu(RISCVVirtState =
+*s, uint16_t bdf)
 >  }
 >
-> @@ -1033,6 +1042,44 @@ static void create_fdt_virtio_iommu(RISCVVirtState=
- *s, uint16_t bdf)
->                             bdf + 1, iommu_phandle, bdf + 1, 0xffff - bdf=
-);
+>  static void create_fdt_iommu_sys(RISCVVirtState *s, uint32_t irq_chip,
+> +                                 uint32_t msi_phandle,
+>                                   uint32_t *iommu_sys_phandle)
+>  {
+>      const char comp[] =3D "riscv,iommu";
+> @@ -1077,6 +1078,8 @@ static void create_fdt_iommu_sys(RISCVVirtState *s,=
+ uint32_t irq_chip,
+>          iommu_irq_map[2], FDT_IRQ_TYPE_EDGE_LOW,
+>          iommu_irq_map[3], FDT_IRQ_TYPE_EDGE_LOW);
+>
+> +    qemu_fdt_setprop_cell(fdt, iommu_node, "msi-parent", msi_phandle);
+> +
+>      *iommu_sys_phandle =3D iommu_phandle;
 >  }
 >
-> +static void create_fdt_iommu_sys(RISCVVirtState *s, uint32_t irq_chip,
-> +                                 uint32_t *iommu_sys_phandle)
-> +{
-> +    const char comp[] =3D "riscv,iommu";
-> +    void *fdt =3D MACHINE(s)->fdt;
-> +    uint32_t iommu_phandle;
-> +    g_autofree char *iommu_node =3D NULL;
-> +    hwaddr addr =3D s->memmap[VIRT_IOMMU_SYS].base;
-> +    hwaddr size =3D s->memmap[VIRT_IOMMU_SYS].size;
-> +    uint32_t iommu_irq_map[RISCV_IOMMU_INTR_COUNT] =3D {
-> +        IOMMU_SYS_IRQ + RISCV_IOMMU_INTR_CQ,
-> +        IOMMU_SYS_IRQ + RISCV_IOMMU_INTR_FQ,
-> +        IOMMU_SYS_IRQ + RISCV_IOMMU_INTR_PM,
-> +        IOMMU_SYS_IRQ + RISCV_IOMMU_INTR_PQ,
-> +    };
-> +
-> +    iommu_node =3D g_strdup_printf("/soc/iommu@%x",
-> +                               (unsigned int) s->memmap[VIRT_IOMMU_SYS].=
-base);
-> +    iommu_phandle =3D qemu_fdt_alloc_phandle(fdt);
-> +    qemu_fdt_add_subnode(fdt, iommu_node);
-> +
-> +    qemu_fdt_setprop(fdt, iommu_node, "compatible", comp, sizeof(comp));
-> +    qemu_fdt_setprop_cell(fdt, iommu_node, "#iommu-cells", 1);
-> +    qemu_fdt_setprop_cell(fdt, iommu_node, "phandle", iommu_phandle);
-> +
-> +    qemu_fdt_setprop_cells(fdt, iommu_node, "reg",
-> +                           addr >> 32, addr, size >> 32, size);
-> +    qemu_fdt_setprop_cell(fdt, iommu_node, "interrupt-parent", irq_chip)=
-;
-> +
-> +    qemu_fdt_setprop_cells(fdt, iommu_node, "interrupts",
-> +        iommu_irq_map[0], FDT_IRQ_TYPE_EDGE_LOW,
-> +        iommu_irq_map[1], FDT_IRQ_TYPE_EDGE_LOW,
-> +        iommu_irq_map[2], FDT_IRQ_TYPE_EDGE_LOW,
-> +        iommu_irq_map[3], FDT_IRQ_TYPE_EDGE_LOW);
-> +
-> +    *iommu_sys_phandle =3D iommu_phandle;
-> +}
-> +
->  static void create_fdt_iommu(RISCVVirtState *s, uint16_t bdf)
->  {
->      const char comp[] =3D "riscv,pci-iommu";
-> @@ -1061,6 +1108,7 @@ static void finalize_fdt(RISCVVirtState *s)
->  {
->      uint32_t phandle =3D 1, irq_mmio_phandle =3D 1, msi_pcie_phandle =3D=
- 1;
->      uint32_t irq_pcie_phandle =3D 1, irq_virtio_phandle =3D 1;
-> +    uint32_t iommu_sys_phandle =3D 1;
->
->      create_fdt_sockets(s, virt_memmap, &phandle, &irq_mmio_phandle,
->                         &irq_pcie_phandle, &irq_virtio_phandle,
-> @@ -1068,7 +1116,11 @@ static void finalize_fdt(RISCVVirtState *s)
->
+> @@ -1117,7 +1120,8 @@ static void finalize_fdt(RISCVVirtState *s)
 >      create_fdt_virtio(s, virt_memmap, irq_virtio_phandle);
 >
-> -    create_fdt_pcie(s, virt_memmap, irq_pcie_phandle, msi_pcie_phandle);
-> +    if (virt_is_iommu_sys_enabled(s)) {
-> +        create_fdt_iommu_sys(s, irq_mmio_phandle, &iommu_sys_phandle);
-> +    }
-> +    create_fdt_pcie(s, virt_memmap, irq_pcie_phandle, msi_pcie_phandle,
-> +                    iommu_sys_phandle);
->
->      create_fdt_reset(s, virt_memmap, &phandle);
->
-> @@ -1650,6 +1702,22 @@ static void virt_machine_init(MachineState *machin=
-e)
->          create_fdt(s, memmap);
+>      if (virt_is_iommu_sys_enabled(s)) {
+> -        create_fdt_iommu_sys(s, irq_mmio_phandle, &iommu_sys_phandle);
+> +        create_fdt_iommu_sys(s, irq_mmio_phandle, msi_pcie_phandle,
+> +                             &iommu_sys_phandle);
 >      }
->
-> +    if (virt_is_iommu_sys_enabled(s)) {
-> +        DeviceState *iommu_sys =3D qdev_new(TYPE_RISCV_IOMMU_SYS);
-> +
-> +        object_property_set_uint(OBJECT(iommu_sys), "addr",
-> +                                 s->memmap[VIRT_IOMMU_SYS].base,
-> +                                 &error_fatal);
-> +        object_property_set_uint(OBJECT(iommu_sys), "base-irq",
-> +                                 IOMMU_SYS_IRQ,
-> +                                 &error_fatal);
-> +        object_property_set_link(OBJECT(iommu_sys), "irqchip",
-> +                                 OBJECT(mmio_irqchip),
-> +                                 &error_fatal);
-> +
-> +        sysbus_realize_and_unref(SYS_BUS_DEVICE(iommu_sys), &error_fatal=
-);
-> +    }
-> +
->      s->machine_done.notify =3D virt_machine_done;
->      qemu_add_machine_init_done_notifier(&s->machine_done);
->  }
-> @@ -1663,6 +1731,7 @@ static void virt_machine_instance_init(Object *obj)
->      s->oem_id =3D g_strndup(ACPI_BUILD_APPNAME6, 6);
->      s->oem_table_id =3D g_strndup(ACPI_BUILD_APPNAME8, 8);
->      s->acpi =3D ON_OFF_AUTO_AUTO;
-> +    s->iommu_sys =3D ON_OFF_AUTO_AUTO;
->  }
->
->  static char *virt_get_aia_guests(Object *obj, Error **errp)
-> @@ -1735,6 +1804,28 @@ static void virt_set_aclint(Object *obj, bool valu=
-e, Error **errp)
->      s->have_aclint =3D value;
->  }
->
-> +bool virt_is_iommu_sys_enabled(RISCVVirtState *s)
-> +{
-> +    return s->iommu_sys =3D=3D ON_OFF_AUTO_ON;
-> +}
-> +
-> +static void virt_get_iommu_sys(Object *obj, Visitor *v, const char *name=
-,
-> +                               void *opaque, Error **errp)
-> +{
-> +    RISCVVirtState *s =3D RISCV_VIRT_MACHINE(obj);
-> +    OnOffAuto iommu_sys =3D s->iommu_sys;
-> +
-> +    visit_type_OnOffAuto(v, name, &iommu_sys, errp);
-> +}
-> +
-> +static void virt_set_iommu_sys(Object *obj, Visitor *v, const char *name=
-,
-> +                               void *opaque, Error **errp)
-> +{
-> +    RISCVVirtState *s =3D RISCV_VIRT_MACHINE(obj);
-> +
-> +    visit_type_OnOffAuto(v, name, &s->iommu_sys, errp);
-> +}
-> +
->  bool virt_is_acpi_enabled(RISCVVirtState *s)
->  {
->      return s->acpi !=3D ON_OFF_AUTO_OFF;
-> @@ -1761,10 +1852,12 @@ static HotplugHandler *virt_machine_get_hotplug_h=
-andler(MachineState *machine,
->                                                          DeviceState *dev=
-)
->  {
->      MachineClass *mc =3D MACHINE_GET_CLASS(machine);
-> +    RISCVVirtState *s =3D RISCV_VIRT_MACHINE(machine);
->
->      if (device_is_dynamic_sysbus(mc, dev) ||
->          object_dynamic_cast(OBJECT(dev), TYPE_VIRTIO_IOMMU_PCI) ||
->          object_dynamic_cast(OBJECT(dev), TYPE_RISCV_IOMMU_PCI)) {
-> +        s->iommu_sys =3D ON_OFF_AUTO_OFF;
->          return HOTPLUG_HANDLER(machine);
->      }
->
-> @@ -1791,6 +1884,7 @@ static void virt_machine_device_plug_cb(HotplugHand=
-ler *hotplug_dev,
->
->      if (object_dynamic_cast(OBJECT(dev), TYPE_RISCV_IOMMU_PCI)) {
->          create_fdt_iommu(s, pci_get_bdf(PCI_DEVICE(dev)));
-> +        s->iommu_sys =3D ON_OFF_AUTO_OFF;
->      }
->  }
->
-> @@ -1853,6 +1947,12 @@ static void virt_machine_class_init(ObjectClass *o=
-c, void *data)
->                                NULL, NULL);
->      object_class_property_set_description(oc, "acpi",
->                                            "Enable ACPI");
-> +
-> +    object_class_property_add(oc, "iommu-sys", "OnOffAuto",
-> +                              virt_get_iommu_sys, virt_set_iommu_sys,
-> +                              NULL, NULL);
-> +    object_class_property_set_description(oc, "iommu-sys",
-> +                                          "Enable IOMMU platform device"=
-);
->  }
->
->  static const TypeInfo virt_machine_typeinfo =3D {
-> diff --git a/include/hw/riscv/iommu.h b/include/hw/riscv/iommu.h
-> index fc20808553..8a8acfc3f0 100644
-> --- a/include/hw/riscv/iommu.h
-> +++ b/include/hw/riscv/iommu.h
-> @@ -37,4 +37,6 @@ typedef struct RISCVIOMMUStatePci RISCVIOMMUStatePci;
->  OBJECT_DECLARE_SIMPLE_TYPE(RISCVIOMMUStateSys, RISCV_IOMMU_SYS)
->  typedef struct RISCVIOMMUStateSys RISCVIOMMUStateSys;
->
-> +#define FDT_IRQ_TYPE_EDGE_LOW 1
-> +
->  #endif
-> diff --git a/include/hw/riscv/virt.h b/include/hw/riscv/virt.h
-> index c0dc41ff9a..48a14bea2e 100644
-> --- a/include/hw/riscv/virt.h
-> +++ b/include/hw/riscv/virt.h
-> @@ -62,6 +62,7 @@ struct RISCVVirtState {
->      OnOffAuto acpi;
->      const MemMapEntry *memmap;
->      struct GPEXHost *gpex_host;
-> +    OnOffAuto iommu_sys;
->  };
->
->  enum {
-> @@ -84,7 +85,8 @@ enum {
->      VIRT_PCIE_MMIO,
->      VIRT_PCIE_PIO,
->      VIRT_PLATFORM_BUS,
-> -    VIRT_PCIE_ECAM
-> +    VIRT_PCIE_ECAM,
-> +    VIRT_IOMMU_SYS,
->  };
->
->  enum {
-> @@ -93,6 +95,7 @@ enum {
->      VIRTIO_IRQ =3D 1, /* 1 to 8 */
->      VIRTIO_COUNT =3D 8,
->      PCIE_IRQ =3D 0x20, /* 32 to 35 */
-> +    IOMMU_SYS_IRQ =3D 0x24, /* 36-39 */
->      VIRT_PLATFORM_BUS_IRQ =3D 64, /* 64 to 95 */
->  };
->
-> @@ -129,6 +132,7 @@ enum {
->                                   1 + FDT_APLIC_INT_CELLS)
->
->  bool virt_is_acpi_enabled(RISCVVirtState *s);
-> +bool virt_is_iommu_sys_enabled(RISCVVirtState *s);
->  void virt_acpi_setup(RISCVVirtState *vms);
->  uint32_t imsic_num_bits(uint32_t count);
->
+>      create_fdt_pcie(s, virt_memmap, irq_pcie_phandle, msi_pcie_phandle,
+>                      iommu_sys_phandle);
 > --
 > 2.45.2
 >
