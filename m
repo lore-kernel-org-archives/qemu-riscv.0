@@ -4,67 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E14EFD6E2CD
-	for <qemu-riscv@archiver.kernel.org>; Wed, 20 Nov 2024 07:29:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8B723D6E2CD
+	for <qemu-riscv@archiver.kernel.org>; Wed, 20 Nov 2024 07:42:51 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tDf7r-00021Y-VE; Wed, 20 Nov 2024 02:27:47 -0500
+	id 1tDfMH-0000tH-Jj; Wed, 20 Nov 2024 02:42:42 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <ivan.klokov@syntacore.com>)
- id 1tDf7p-00020Q-I6; Wed, 20 Nov 2024 02:27:45 -0500
-Received: from mta-03.yadro.com ([89.207.88.253])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <ivan.klokov@syntacore.com>)
- id 1tDf7m-00080p-DJ; Wed, 20 Nov 2024 02:27:45 -0500
-DKIM-Filter: OpenDKIM Filter v2.11.0 mta-03.yadro.com F16AEE0004
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=syntacore.com;
- s=mta-04; t=1732087656;
- bh=bXAXM8qRTOfOTAxsT3cQ9smxjO2LyssIB37CUGRuvKs=;
- h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type:From;
- b=psO7wffdCgpK+PLIiBA9YK5GV1gu1hkH+eY/VsG3rCz5lVX14qSdjsRVktxbbx9vW
- 9oVWWX5VxH1Cdh63MYBhRWRP3YFEoQTFJ5EFHKSKESMKnd3cxKZZOMX8Ytrn7NTxU2
- y3lU6+HZ0mWD8UtymE2ZotP2e08owXpABaaa2NcTlR99jb8gt/jzDtT2uqt6EMTP07
- JTPtWhn08Dr1n+duFXxLEGYeMTlEsPFKo2+QdENDSdBeqhnHSMnvPNOVXPn2unS+/K
- 4PBLrnDGgJFbZ/JmawAqACkHIdDVg9nEHZf7Dklq0hEvt65H4harMktonbd0yxXBnH
- HYeAVQi4DnUOg==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=syntacore.com;
- s=mta-03; t=1732087656;
- bh=bXAXM8qRTOfOTAxsT3cQ9smxjO2LyssIB37CUGRuvKs=;
- h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type:From;
- b=DNzlTj3Df4KGz3rAZXyV8kNIpbIRhTGVWyRQOrh1dFjgQhyX8YHfG+AaJGgyMiEG0
- cIxkQAKBA0aihV8UpGl5goBy0nxbs55HCb8QpVXAHnYTVS9E1/Hqd4vo3ySVdIF952
- Omb0CYbEADnIDLTPrIYET+m08STNh1na2kMRO8AoOEbEIpgcEnrAULCGF+n403h9O8
- eqPTIp40KotEwdXV79tWceDtAUjwaATgG1vGJrPxuZdn22+lvv6IOogUgIONo9T6af
- 5KwLg0ItnwyMsz4c3tLHQLCsTeZynmBdiUNJttbI2sNTsHww5815FT/JoLJxn+v9rg
- EMTL/KfLj51/A==
-From: Ivan Klokov <ivan.klokov@syntacore.com>
-To: <qemu-devel@nongnu.org>
-CC: <qemu-riscv@nongnu.org>, <palmer@dabbelt.com>, <alistair.francis@wdc.com>, 
- <bmeng.cn@gmail.com>, <liwei1518@gmail.com>, <dbarboza@ventanamicro.com>, 
- <zhiwei_liu@linux.alibaba.com>, <farosas@suse.de>, <lvivier@redhat.com>,
- <pbonzini@redhat.com>, Ivan Klokov <ivan.klokov@syntacore.com>
-Subject: [RFC PATCH v7 1/2] target/riscv: Add RISC-V CSR qtest support
-Date: Wed, 20 Nov 2024 10:27:11 +0300
-Message-ID: <20241120072712.65302-2-ivan.klokov@syntacore.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20241120072712.65302-1-ivan.klokov@syntacore.com>
-References: <20241120072712.65302-1-ivan.klokov@syntacore.com>
+ (Exim 4.90_1) (envelope-from <fea.wang@sifive.com>)
+ id 1tDfM7-0000sY-QD
+ for qemu-riscv@nongnu.org; Wed, 20 Nov 2024 02:42:32 -0500
+Received: from mail-oi1-x232.google.com ([2607:f8b0:4864:20::232])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <fea.wang@sifive.com>)
+ id 1tDfM4-0005d0-LR
+ for qemu-riscv@nongnu.org; Wed, 20 Nov 2024 02:42:31 -0500
+Received: by mail-oi1-x232.google.com with SMTP id
+ 5614622812f47-3e612437c09so3712838b6e.2
+ for <qemu-riscv@nongnu.org>; Tue, 19 Nov 2024 23:42:26 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=sifive.com; s=google; t=1732088546; x=1732693346; darn=nongnu.org;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=gThaZ5PWMmNq57F1QwDfSPO3Ml9ZXrUvQRsJQXDXuHQ=;
+ b=cWEk/eWvXd/v0z3RsIq5iZZmfNWV+tJ1bFiFDkWnVLVRsYutUK/bbP7bhWpKIwOA9+
+ XTnYi5CzcofBcNTBCDzNNtUr31Rv8Wx/8iRCrfNzgdpNBGLmxWhECtRag90WcXJ7d66z
+ TlRpLzeK7uCwfu6PTtSh1Lh8ZU9injGGcrwLYbADn5Kt+IyxEnmwzunAdHWv2D8pMREa
+ egnCKN9GjwCWg6io9QBsdKrmzuwFjQu/RfVq0ZhR5nz4pmN1rxXCXjsvJBu/02oVwrvu
+ Z0c/aCeUaDlce7U/HWdi1QFa8fPkVGr693NM0KswuWbF5gJKBByQ/jglOt9LAbcpVSvK
+ N5qg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1732088546; x=1732693346;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=gThaZ5PWMmNq57F1QwDfSPO3Ml9ZXrUvQRsJQXDXuHQ=;
+ b=Df5BICVeai/nuhmF7s5swygi+VQKohz39+J4bQfH3baE8ffTvWX8X+2fVYp7729oeF
+ D1PRel5gtnT4mIYahUNu0Q8zi94xzbJ3maRt+/k7/P9NMgLKI74dWGiK4C6Z/eIv4CmS
+ i4koI8ek4Ql5x53PhyIwy2B98jdLO0EFx5Ohtw3sNy3PsGc5GBu7q6U7jlDcHK6k4fJ8
+ AZPjurMr1FRTXmc0lmfi6O5wz63Q+jEwgJMFTJNmtLzt3sPqarn+Zj3Ijw3s41qm00cb
+ HeB91TE8ad47oEDyWq81R9BUf5QDkBa0xwDj648Yq64aLdYd70KBhAVgD+lv0e8Fhr1t
+ YCkw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCW7kBw1OpbOizqzxNM8t8yLDNvbyCsd6lW1bm9Dfegz/dib6hZr5mhNCky+JD2ssO7w/x7h9JAJnDi2@nongnu.org
+X-Gm-Message-State: AOJu0YzPMy7QdrrThU12rxFq/SYY/GzYvWHDzccUHmkQmgEDfeW2g9Ak
+ VPcyX1WDJ6HK8AJEMxsZba80jiiFrOaeWuaEI9R3Rhk+qzPNV+6OglpUKXTDriAcvQvaSYzSy/S
+ 8mfV6Tv4u2HjD9jp1Jx6mC5MkCvFycsQSDkfOuw==
+X-Google-Smtp-Source: AGHT+IEbYt9Eta2rnOGMg9nh/koEbpd2oxApMWt7rzDsU3YpvG/Zf6cDgjRNEAro0XcXaFJOBz6KOvTtf/FhG3qbkkw=
+X-Received: by 2002:a05:6808:2447:b0:3e7:be26:e38b with SMTP id
+ 5614622812f47-3e7eb7ccd58mr1871779b6e.32.1732088545926; Tue, 19 Nov 2024
+ 23:42:25 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: T-EXCH-10.corp.yadro.com (172.17.11.60) To
- S-Exch-01.corp.yadro.com (10.78.5.241)
-Received-SPF: permerror client-ip=89.207.88.253;
- envelope-from=ivan.klokov@syntacore.com; helo=mta-03.yadro.com
+References: <20241112091423.2529583-1-fea.wang@sifive.com>
+ <20241112091423.2529583-5-fea.wang@sifive.com>
+ <CAKmqyKOm1Fu28Q0mg1OM--g0wbt89J1SVzufjsYvm7u7-ALmWA@mail.gmail.com>
+In-Reply-To: <CAKmqyKOm1Fu28Q0mg1OM--g0wbt89J1SVzufjsYvm7u7-ALmWA@mail.gmail.com>
+From: Fea Wang <fea.wang@sifive.com>
+Date: Wed, 20 Nov 2024 15:42:14 +0800
+Message-ID: <CAKhCfsdzjAq_oh0v0Rwtm_FuWeD-ATZEZgiGzFNtUO2bvFy8Cw@mail.gmail.com>
+Subject: Re: [PATCH v3 4/5] target/riscv: Check memory access to meet svukte
+ rule
+To: Alistair Francis <alistair23@gmail.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, 
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Bin Meng <bmeng.cn@gmail.com>, Weiwei Li <liwei1518@gmail.com>, 
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
+ Frank Chang <frank.chang@sifive.com>, Jim Shu <jim.shu@sifive.com>
+Content-Type: multipart/alternative; boundary="000000000000800bf30627534a9b"
+Received-SPF: pass client-ip=2607:f8b0:4864:20::232;
+ envelope-from=fea.wang@sifive.com; helo=mail-oi1-x232.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_VALIDITY_CERTIFIED_BLOCKED=0.001, RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001,
- SPF_HELO_NONE=0.001, T_SPF_PERMERROR=0.01 autolearn=ham autolearn_force=no
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, HTML_MESSAGE=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -80,163 +98,327 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-The RISC-V architecture supports the creation of custom
-CSR-mapped devices. It would be convenient to test them in the same way
-as MMIO-mapped devices. To do this, a new call has been added
-to read/write CSR registers.
+--000000000000800bf30627534a9b
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Ivan Klokov <ivan.klokov@syntacore.com>
-Acked-by: Fabiano Rosas <farosas@suse.de>
----
- hw/riscv/riscv_hart.c  | 55 ++++++++++++++++++++++++++++++++++++++++++
- tests/qtest/libqtest.c | 27 +++++++++++++++++++++
- tests/qtest/libqtest.h | 14 +++++++++++
- 3 files changed, 96 insertions(+)
+Thanks for the advice.
+I will fix them in the next patch version.
 
-diff --git a/hw/riscv/riscv_hart.c b/hw/riscv/riscv_hart.c
-index 613ea2aaa0..22cc8ae31f 100644
---- a/hw/riscv/riscv_hart.c
-+++ b/hw/riscv/riscv_hart.c
-@@ -21,6 +21,8 @@
- #include "qemu/osdep.h"
- #include "qapi/error.h"
- #include "qemu/module.h"
-+#include "qemu/cutils.h"
-+#include "sysemu/qtest.h"
- #include "sysemu/reset.h"
- #include "hw/sysbus.h"
- #include "target/riscv/cpu.h"
-@@ -42,6 +44,55 @@ static void riscv_harts_cpu_reset(void *opaque)
-     cpu_reset(CPU(cpu));
- }
- 
-+#ifndef CONFIG_USER_ONLY
-+static void csr_call(char *cmd, uint64_t cpu_num, int csrno, uint64_t *val)
-+{
-+    RISCVCPU *cpu = RISCV_CPU(cpu_by_arch_id(cpu_num));
-+    CPURISCVState *env = &cpu->env;
-+
-+    int ret = RISCV_EXCP_NONE;
-+    if (strcmp(cmd, "get_csr") == 0) {
-+        ret = riscv_csrr(env, csrno, (target_ulong *)val);
-+    } else if (strcmp(cmd, "set_csr") == 0) {
-+        ret = riscv_csrrw(env, csrno, NULL, *(target_ulong *)val,
-+                MAKE_64BIT_MASK(0, TARGET_LONG_BITS));
-+    }
-+
-+    g_assert(ret == RISCV_EXCP_NONE);
-+}
-+
-+static bool csr_qtest_callback(CharBackend *chr, gchar **words)
-+{
-+    if (strcmp(words[0], "csr") == 0) {
-+
-+        uint64_t cpu;
-+        uint64_t val;
-+        int rc, csr;
-+
-+        rc = qemu_strtou64(words[2], NULL, 0, &cpu);
-+        g_assert(rc == 0);
-+        rc = qemu_strtoi(words[3], NULL, 0, &csr);
-+        g_assert(rc == 0);
-+        rc = qemu_strtou64(words[4], NULL, 0, &val);
-+        g_assert(rc == 0);
-+        csr_call(words[1], cpu, csr, &val);
-+
-+        qtest_send_prefix(chr);
-+        qtest_sendf(chr, "OK 0 "TARGET_FMT_lx"\n", (target_ulong)val);
-+
-+        return true;
-+    }
-+
-+    return false;
-+}
-+
-+static void riscv_cpu_register_csr_qtest_callback(void)
-+{
-+    static GOnce once;
-+    g_once(&once, (GThreadFunc)qtest_set_command_cb, csr_qtest_callback);
-+}
-+#endif
-+
- static bool riscv_hart_realize(RISCVHartArrayState *s, int idx,
-                                char *cpu_type, Error **errp)
- {
-@@ -59,6 +110,10 @@ static void riscv_harts_realize(DeviceState *dev, Error **errp)
- 
-     s->harts = g_new0(RISCVCPU, s->num_harts);
- 
-+#ifndef CONFIG_USER_ONLY
-+    riscv_cpu_register_csr_qtest_callback();
-+#endif
-+
-     for (n = 0; n < s->num_harts; n++) {
-         if (!riscv_hart_realize(s, n, s->cpu_type, errp)) {
-             return;
-diff --git a/tests/qtest/libqtest.c b/tests/qtest/libqtest.c
-index 817fd7aac5..43bfa496e9 100644
---- a/tests/qtest/libqtest.c
-+++ b/tests/qtest/libqtest.c
-@@ -1202,6 +1202,33 @@ uint64_t qtest_rtas_call(QTestState *s, const char *name,
-     return 0;
- }
- 
-+static void qtest_rsp_csr(QTestState *s, uint64_t *val)
-+{
-+    gchar **args;
-+    uint64_t ret;
-+    int rc;
-+
-+    args = qtest_rsp_args(s, 3);
-+
-+    rc = qemu_strtou64(args[1], NULL, 16, &ret);
-+    g_assert(rc == 0);
-+    rc = qemu_strtou64(args[2], NULL, 16, val);
-+    g_assert(rc == 0);
-+
-+    g_strfreev(args);
-+}
-+
-+uint64_t qtest_csr_call(QTestState *s, const char *name,
-+                         uint64_t cpu, int csr,
-+                         uint64_t *val)
-+{
-+    qtest_sendf(s, "csr %s 0x%"PRIx64" %d 0x%"PRIx64"\n",
-+                    name, cpu, csr, *val);
-+
-+    qtest_rsp_csr(s, val);
-+    return 0;
-+}
-+
- void qtest_add_func(const char *str, void (*fn)(void))
- {
-     gchar *path = g_strdup_printf("/%s/%s", qtest_get_arch(), str);
-diff --git a/tests/qtest/libqtest.h b/tests/qtest/libqtest.h
-index beb96b18eb..b516a16bd4 100644
---- a/tests/qtest/libqtest.h
-+++ b/tests/qtest/libqtest.h
-@@ -575,6 +575,20 @@ uint64_t qtest_rtas_call(QTestState *s, const char *name,
-                          uint32_t nargs, uint64_t args,
-                          uint32_t nret, uint64_t ret);
- 
-+/**
-+ * qtest_csr_call:
-+ * @s: #QTestState instance to operate on.
-+ * @name: name of the command to call.
-+ * @cpu: hart number.
-+ * @csr: CSR number.
-+ * @val: Value for reading/writing.
-+ *
-+ * Call an RISC-V CSR read/write function
-+ */
-+uint64_t qtest_csr_call(QTestState *s, const char *name,
-+                         uint64_t cpu, int csr,
-+                         unsigned long *val);
-+
- /**
-  * qtest_bufread:
-  * @s: #QTestState instance to operate on.
--- 
-2.34.1
+Sincerely,
+Fea
 
+On Tue, Nov 19, 2024 at 11:33=E2=80=AFAM Alistair Francis <alistair23@gmail=
+.com>
+wrote:
+
+> On Tue, Nov 12, 2024 at 7:13=E2=80=AFPM Fea.Wang <fea.wang@sifive.com> wr=
+ote:
+> >
+> > Follow the Svukte spec, do the memory access address checking
+> >
+> > 1. Include instruction fetches or explicit memory accesses
+> > 2. System run in effective privilege U or VU
+> > 3. Check senvcfg[UKTE] being set, or hstatus[HUKTE] being set if
+> > instruction is HLV, HLVX, HSV and execute from U mode to VU mode
+> > 4. Depend on Sv39 and check virtual addresses bit[SXLEN-1]
+> > 5. Raises a page-fault exception corresponding to the original access
+> > type.
+> >
+> > Ref: https://github.com/riscv/riscv-isa-manual/pull/1564/files
+> >
+> > Signed-off-by: Frank Chang <frank.chang@sifive.com>
+> > Signed-off-by: Fea.Wang <fea.wang@sifive.com>
+> > Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+> > Reviewed-by: Jim Shu <jim.shu@sifive.com>
+> > ---
+> >  target/riscv/cpu_helper.c | 61 +++++++++++++++++++++++++++++++++++++++
+> >  1 file changed, 61 insertions(+)
+> >
+> > diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+> > index 0a3ead69ea..5b29344c4f 100644
+> > --- a/target/riscv/cpu_helper.c
+> > +++ b/target/riscv/cpu_helper.c
+> > @@ -857,6 +857,61 @@ static int get_physical_address_pmp(CPURISCVState
+> *env, int *prot, hwaddr addr,
+> >      return TRANSLATE_SUCCESS;
+> >  }
+> >
+> > +/* Returns 'true' if a svukte address check is needed */
+> > +static bool do_svukte_check(CPURISCVState *env, bool first_stage,
+> > +                             int mode, bool virt)
+> > +{
+> > +    bool ukte;
+> > +
+> > +    /* Svukte extension depends on Sv39. */
+> > +    if (!(env_archcpu(env)->cfg.ext_svukte ||
+> > +        !first_stage ||
+> > +        VM_1_10_SV39 !=3D get_field(env->satp, SATP64_MODE))) {
+> > +        return false;
+> > +    }
+> > +
+> > +    /*
+> > +     * Check hstatus.HUKTE if the effective mode is switched to VU-mod=
+e
+> by
+> > +     * executing HLV/HLVX/HSV in U-mode.
+> > +     * For other cases, check senvcfg.UKTE.
+> > +     */
+> > +    if (env->priv =3D=3D PRV_U && !env->virt_enabled && virt) {
+> > +        ukte =3D !!(env->hstatus & HSTATUS_HUKTE);
+>
+> You should just be able to use get_field() here
+>
+> > +    } else {
+> > +        ukte =3D !!(env->senvcfg & SENVCFG_UKTE);
+> > +    }
+> > +
+> > +    if (!ukte) {
+> > +        return false;
+>
+> and it's probably simpler to remove the ukte variable and just return
+> based on the result of get_field()
+>
+> > +    }
+> > +
+> > +    /*
+> > +     * Svukte extension is qualified only in U or VU-mode.
+> > +     *
+> > +     * Effective mode can be switched to U or VU-mode by:
+> > +     *   - M-mode + mstatus.MPRV=3D1 + mstatus.MPP=3DU-mode.
+> > +     *   - Execute HLV/HLVX/HSV from HS-mode + hstatus.SPVP=3D0.
+> > +     *   - U-mode.
+> > +     *   - VU-mode.
+> > +     *   - Execute HLV/HLVX/HSV from U-mode + hstatus.HU=3D1.
+> > +     */
+> > +    if (mode !=3D PRV_U) {
+> > +        return false;
+> > +    }
+> > +
+> > +    return true;
+> > +}
+> > +
+> > +static bool check_svukte_addr(CPURISCVState *env, vaddr addr)
+> > +{
+> > +    uint32_t sxl =3D riscv_cpu_sxl(env);
+> > +    sxl =3D (sxl =3D=3D 0) ? MXL_RV32 : sxl;
+>
+> I don't think riscv_cpu_sxl() can return 0, do we actually need this chec=
+k?
+>
+> Also this extension isn't defined for RV32
+>
+> Alistair
+>
+> > +    uint32_t sxlen =3D 32 * sxl;
+> > +    uint64_t high_bit =3D addr & (1UL << (sxlen - 1));
+> > +
+> > +    return !high_bit;
+> > +}
+> > +
+> >  /*
+> >   * get_physical_address - get the physical address for this virtual
+> address
+> >   *
+> > @@ -894,6 +949,7 @@ static int get_physical_address(CPURISCVState *env,
+> hwaddr *physical,
+> >      MemTxResult res;
+> >      MemTxAttrs attrs =3D MEMTXATTRS_UNSPECIFIED;
+> >      int mode =3D mmuidx_priv(mmu_idx);
+> > +    bool virt =3D mmuidx_2stage(mmu_idx);
+> >      bool use_background =3D false;
+> >      hwaddr ppn;
+> >      int napot_bits =3D 0;
+> > @@ -901,6 +957,11 @@ static int get_physical_address(CPURISCVState *env=
+,
+> hwaddr *physical,
+> >      bool is_sstack_idx =3D ((mmu_idx & MMU_IDX_SS_WRITE) =3D=3D
+> MMU_IDX_SS_WRITE);
+> >      bool sstack_page =3D false;
+> >
+> > +    if (do_svukte_check(env, first_stage, mode, virt) &&
+> > +        !check_svukte_addr(env, addr)) {
+> > +        return TRANSLATE_FAIL;
+> > +    }
+> > +
+> >      /*
+> >       * Check if we should use the background registers for the two
+> >       * stage translation. We don't need to check if we actually need
+> > --
+> > 2.34.1
+> >
+> >
+>
+
+--000000000000800bf30627534a9b
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr">Thanks for the advice.<div>I will fix them in the next pat=
+ch version.</div><div><br></div><div>Sincerely,</div><div>Fea</div></div><b=
+r><div class=3D"gmail_quote"><div dir=3D"ltr" class=3D"gmail_attr">On Tue, =
+Nov 19, 2024 at 11:33=E2=80=AFAM Alistair Francis &lt;<a href=3D"mailto:ali=
+stair23@gmail.com">alistair23@gmail.com</a>&gt; wrote:<br></div><blockquote=
+ class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px so=
+lid rgb(204,204,204);padding-left:1ex">On Tue, Nov 12, 2024 at 7:13=E2=80=
+=AFPM Fea.Wang &lt;<a href=3D"mailto:fea.wang@sifive.com" target=3D"_blank"=
+>fea.wang@sifive.com</a>&gt; wrote:<br>
+&gt;<br>
+&gt; Follow the Svukte spec, do the memory access address checking<br>
+&gt;<br>
+&gt; 1. Include instruction fetches or explicit memory accesses<br>
+&gt; 2. System run in effective privilege U or VU<br>
+&gt; 3. Check senvcfg[UKTE] being set, or hstatus[HUKTE] being set if<br>
+&gt; instruction is HLV, HLVX, HSV and execute from U mode to VU mode<br>
+&gt; 4. Depend on Sv39 and check virtual addresses bit[SXLEN-1]<br>
+&gt; 5. Raises a page-fault exception corresponding to the original access<=
+br>
+&gt; type.<br>
+&gt;<br>
+&gt; Ref: <a href=3D"https://github.com/riscv/riscv-isa-manual/pull/1564/fi=
+les" rel=3D"noreferrer" target=3D"_blank">https://github.com/riscv/riscv-is=
+a-manual/pull/1564/files</a><br>
+&gt;<br>
+&gt; Signed-off-by: Frank Chang &lt;<a href=3D"mailto:frank.chang@sifive.co=
+m" target=3D"_blank">frank.chang@sifive.com</a>&gt;<br>
+&gt; Signed-off-by: Fea.Wang &lt;<a href=3D"mailto:fea.wang@sifive.com" tar=
+get=3D"_blank">fea.wang@sifive.com</a>&gt;<br>
+&gt; Signed-off-by: Daniel Henrique Barboza &lt;<a href=3D"mailto:dbarboza@=
+ventanamicro.com" target=3D"_blank">dbarboza@ventanamicro.com</a>&gt;<br>
+&gt; Reviewed-by: Jim Shu &lt;<a href=3D"mailto:jim.shu@sifive.com" target=
+=3D"_blank">jim.shu@sifive.com</a>&gt;<br>
+&gt; ---<br>
+&gt;=C2=A0 target/riscv/cpu_helper.c | 61 +++++++++++++++++++++++++++++++++=
+++++++<br>
+&gt;=C2=A0 1 file changed, 61 insertions(+)<br>
+&gt;<br>
+&gt; diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c<br>
+&gt; index 0a3ead69ea..5b29344c4f 100644<br>
+&gt; --- a/target/riscv/cpu_helper.c<br>
+&gt; +++ b/target/riscv/cpu_helper.c<br>
+&gt; @@ -857,6 +857,61 @@ static int get_physical_address_pmp(CPURISCVState=
+ *env, int *prot, hwaddr addr,<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 return TRANSLATE_SUCCESS;<br>
+&gt;=C2=A0 }<br>
+&gt;<br>
+&gt; +/* Returns &#39;true&#39; if a svukte address check is needed */<br>
+&gt; +static bool do_svukte_check(CPURISCVState *env, bool first_stage,<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
+ =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0int mode, bool virt)<br>
+&gt; +{<br>
+&gt; +=C2=A0 =C2=A0 bool ukte;<br>
+&gt; +<br>
+&gt; +=C2=A0 =C2=A0 /* Svukte extension depends on Sv39. */<br>
+&gt; +=C2=A0 =C2=A0 if (!(env_archcpu(env)-&gt;cfg.ext_svukte ||<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 !first_stage ||<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 VM_1_10_SV39 !=3D get_field(env-&gt;satp,=
+ SATP64_MODE))) {<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 return false;<br>
+&gt; +=C2=A0 =C2=A0 }<br>
+&gt; +<br>
+&gt; +=C2=A0 =C2=A0 /*<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0* Check hstatus.HUKTE if the effective mode is sw=
+itched to VU-mode by<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0* executing HLV/HLVX/HSV in U-mode.<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0* For other cases, check senvcfg.UKTE.<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0*/<br>
+&gt; +=C2=A0 =C2=A0 if (env-&gt;priv =3D=3D PRV_U &amp;&amp; !env-&gt;virt_=
+enabled &amp;&amp; virt) {<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 ukte =3D !!(env-&gt;hstatus &amp; HSTATUS=
+_HUKTE);<br>
+<br>
+You should just be able to use get_field() here<br>
+<br>
+&gt; +=C2=A0 =C2=A0 } else {<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 ukte =3D !!(env-&gt;senvcfg &amp; SENVCFG=
+_UKTE);<br>
+&gt; +=C2=A0 =C2=A0 }<br>
+&gt; +<br>
+&gt; +=C2=A0 =C2=A0 if (!ukte) {<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 return false;<br>
+<br>
+and it&#39;s probably simpler to remove the ukte variable and just return<b=
+r>
+based on the result of get_field()<br>
+<br>
+&gt; +=C2=A0 =C2=A0 }<br>
+&gt; +<br>
+&gt; +=C2=A0 =C2=A0 /*<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0* Svukte extension is qualified only in U or VU-m=
+ode.<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0*<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0* Effective mode can be switched to U or VU-mode =
+by:<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0*=C2=A0 =C2=A0- M-mode + mstatus.MPRV=3D1 + mstat=
+us.MPP=3DU-mode.<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0*=C2=A0 =C2=A0- Execute HLV/HLVX/HSV from HS-mode=
+ + hstatus.SPVP=3D0.<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0*=C2=A0 =C2=A0- U-mode.<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0*=C2=A0 =C2=A0- VU-mode.<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0*=C2=A0 =C2=A0- Execute HLV/HLVX/HSV from U-mode =
++ hstatus.HU=3D1.<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0*/<br>
+&gt; +=C2=A0 =C2=A0 if (mode !=3D PRV_U) {<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 return false;<br>
+&gt; +=C2=A0 =C2=A0 }<br>
+&gt; +<br>
+&gt; +=C2=A0 =C2=A0 return true;<br>
+&gt; +}<br>
+&gt; +<br>
+&gt; +static bool check_svukte_addr(CPURISCVState *env, vaddr addr)<br>
+&gt; +{<br>
+&gt; +=C2=A0 =C2=A0 uint32_t sxl =3D riscv_cpu_sxl(env);<br>
+&gt; +=C2=A0 =C2=A0 sxl =3D (sxl =3D=3D 0) ? MXL_RV32 : sxl;<br>
+<br>
+I don&#39;t think riscv_cpu_sxl() can return 0, do we actually need this ch=
+eck?<br>
+<br>
+Also this extension isn&#39;t defined for RV32<br>
+<br>
+Alistair<br>
+<br>
+&gt; +=C2=A0 =C2=A0 uint32_t sxlen =3D 32 * sxl;<br>
+&gt; +=C2=A0 =C2=A0 uint64_t high_bit =3D addr &amp; (1UL &lt;&lt; (sxlen -=
+ 1));<br>
+&gt; +<br>
+&gt; +=C2=A0 =C2=A0 return !high_bit;<br>
+&gt; +}<br>
+&gt; +<br>
+&gt;=C2=A0 /*<br>
+&gt;=C2=A0 =C2=A0* get_physical_address - get the physical address for this=
+ virtual address<br>
+&gt;=C2=A0 =C2=A0*<br>
+&gt; @@ -894,6 +949,7 @@ static int get_physical_address(CPURISCVState *env=
+, hwaddr *physical,<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 MemTxResult res;<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 MemTxAttrs attrs =3D MEMTXATTRS_UNSPECIFIED;<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 int mode =3D mmuidx_priv(mmu_idx);<br>
+&gt; +=C2=A0 =C2=A0 bool virt =3D mmuidx_2stage(mmu_idx);<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 bool use_background =3D false;<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 hwaddr ppn;<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 int napot_bits =3D 0;<br>
+&gt; @@ -901,6 +957,11 @@ static int get_physical_address(CPURISCVState *en=
+v, hwaddr *physical,<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 bool is_sstack_idx =3D ((mmu_idx &amp; MMU_IDX_SS_=
+WRITE) =3D=3D MMU_IDX_SS_WRITE);<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 bool sstack_page =3D false;<br>
+&gt;<br>
+&gt; +=C2=A0 =C2=A0 if (do_svukte_check(env, first_stage, mode, virt) &amp;=
+&amp;<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 !check_svukte_addr(env, addr)) {<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 return TRANSLATE_FAIL;<br>
+&gt; +=C2=A0 =C2=A0 }<br>
+&gt; +<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 /*<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0* Check if we should use the background regi=
+sters for the two<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0* stage translation. We don&#39;t need to ch=
+eck if we actually need<br>
+&gt; --<br>
+&gt; 2.34.1<br>
+&gt;<br>
+&gt;<br>
+</blockquote></div>
+
+--000000000000800bf30627534a9b--
 
