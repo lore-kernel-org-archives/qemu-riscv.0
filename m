@@ -4,73 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B126ED63954
-	for <qemu-riscv@archiver.kernel.org>; Wed, 20 Nov 2024 14:26:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1DDB4D711B1
+	for <qemu-riscv@archiver.kernel.org>; Wed, 20 Nov 2024 15:25:33 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tDleO-0003v0-64; Wed, 20 Nov 2024 09:25:48 -0500
+	id 1tDma1-0000Cd-T0; Wed, 20 Nov 2024 10:25:21 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alexei.filippov@syntacore.com>)
- id 1tDleE-0003lh-1O; Wed, 20 Nov 2024 09:25:40 -0500
-Received: from mta-03.yadro.com ([89.207.88.253])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alexei.filippov@syntacore.com>)
- id 1tDleB-0001dw-Ac; Wed, 20 Nov 2024 09:25:37 -0500
-DKIM-Filter: OpenDKIM Filter v2.11.0 mta-03.yadro.com C0F84E000C
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=syntacore.com;
- s=mta-04; t=1732112728;
- bh=rPbheIWXDQyT+cNsBvEiro8iUpek+GtZcyun9BORH18=;
- h=Content-Type:MIME-Version:Subject:From:Date:Message-ID:To:From;
- b=tjOwxN8Mx9o7Wspcw2TS0qjFrI2gfSlCN4iHtWlDdqxZqQ3/MEYR4eEPrXWDw3uuY
- +kU21zkqvAMsP1Tf+cMsTY0M7JvDOaa9+MLGHXBiPfKWAYwXqpGgMNPGY0033/0zq4
- QJujtKQP83yV6k5zttVHQxqeB5PnPi0Cy71x83/229uI9sHUCuDXY4amDV4zjhHYu0
- AmsAX7S7MHZiCJKKSJFWh9SgONUKrzhM8ERabVNQCeQe3G2iOibx6sZt4v/LXTr+iz
- T1bqyjUyU61VFWRnnBTOqTJ1Um9d85E73YxK47XbifpS6vSv4/UTODYiiKlsNbpRV+
- EYwHi1RHNq6jw==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=syntacore.com;
- s=mta-03; t=1732112728;
- bh=rPbheIWXDQyT+cNsBvEiro8iUpek+GtZcyun9BORH18=;
- h=Content-Type:MIME-Version:Subject:From:Date:Message-ID:To:From;
- b=Z2OC15UaY0UjYbQ9N9inbMbDacir9eUEvFlvaK4nT75/a9x7mUoWa8FP0h6vsTmod
- BtPptre8az/BuT9nOO7V8sAwlVsfGVgWTHKnPVtCvt135qkrteRAT/4/17Xu+fv65p
- ddxIq/3ShsZ+8mKyvZ5v3DjTK9jn1+kFBNX3GDVNRYNaJbhrDr++G4dnICWW24zi56
- e/W1fD0ynuvQTblEU6CcF3SSq5rtVRAJcK0k+5SDIGi1M6GmmSo1UJteFM4i5YH2i1
- CaiPP0IungzHVntdNQhUXMUzLI6zGNIlhqmhSqtetOIr2XdTfRtiwRMSlRxpW3c/81
- EWyy6stXb8orQ==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0 (Mac OS X Mail 16.0 \(3774.500.171.1.1\))
-Subject: Re: [PATCH RFC 06/10] target/riscv: Define PMU event related
- structures
-From: Aleksei Filippov <alexei.filippov@syntacore.com>
-In-Reply-To: <CAHBxVyER0Lxp0uwed7ANW6d6pD1gvSVQ8b245scd+tm7HpT9ag@mail.gmail.com>
-Date: Wed, 20 Nov 2024 17:25:17 +0300
-CC: Aleksei Filippov <alexei.filippov@syntacore.com>, <qemu-riscv@nongnu.org>, 
- <qemu-devel@nongnu.org>, <palmer@dabbelt.com>, <liwei1518@gmail.com>,
- <zhiwei_liu@linux.alibaba.com>, <bin.meng@windriver.com>,
- <dbarboza@ventanamicro.com>, <alistair.francis@wdc.com>
+ (Exim 4.90_1) (envelope-from <jim.shu@sifive.com>)
+ id 1tDmZz-0000C0-Nv
+ for qemu-riscv@nongnu.org; Wed, 20 Nov 2024 10:25:20 -0500
+Received: from mail-ed1-x533.google.com ([2a00:1450:4864:20::533])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <jim.shu@sifive.com>)
+ id 1tDmZx-0001Cm-Rh
+ for qemu-riscv@nongnu.org; Wed, 20 Nov 2024 10:25:19 -0500
+Received: by mail-ed1-x533.google.com with SMTP id
+ 4fb4d7f45d1cf-5cfe5da1251so2487283a12.1
+ for <qemu-riscv@nongnu.org>; Wed, 20 Nov 2024 07:25:16 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=sifive.com; s=google; t=1732116315; x=1732721115; darn=nongnu.org;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=qFmRIVRufQumXPKKytekzl5QVls5Ebz1hdgidH3BWwE=;
+ b=fvbn6XEeQyQDi2ptG4Sr76Ae7pcaCmYwniX7cv8445SP6E41qoN6txe0PtihGas/Xh
+ 7SR+KOQGSgKD/ZXF8Y4/2cUgtCFq5giFuzVf4kHHe9oSnUQGsYj9MxrWpNt+P18CnG6u
+ 5DQFEbp+xzHBt5iYPW4HNcg3x/RPQqnkZoJ8Y070BQaBJlTYdV3WgbYX7fVsLuhd4w/a
+ SodZm/K+HRWW6T1Neqb3XHAK/d8ZzPaK/zWY15sd/qobNhs5G2zPRfZY4npJNn8RZ501
+ iwW639vZfsyC4YMeI+/Xzd5avnsxdoNJfECwDry0VtzWsMUBFEyh2SOynTcBW3CJj00g
+ fzjA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1732116315; x=1732721115;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=qFmRIVRufQumXPKKytekzl5QVls5Ebz1hdgidH3BWwE=;
+ b=PCJRlDrja14WI8QXnJAmTBV0AYuvtwW302A6U0JFkgLDo8ZS0o0YEA91Asm7JoQiqj
+ EptGsXOIR3JP7OeVMDzrM4u0lVINFSf3bww0ZjEujUoRMf4vQoTe6C5qGrR6cMprSZGs
+ m3h3JT+/0IXiVmqYryJCuePED3riYTTRsNgll7MHNTk3ECPvNaYjIcq+cp4FMNOANdCh
+ GjeSfU66oFy0B5JMwYeju6UNY3y8Gg6lwHUqWplBuqSKi0ukLvDODykROZcn89A95VP6
+ N2nv+d8nNlrrWhZpLnPJKHsjnlGVUWs9xEDnQv500DWoqCY8qPAtYunE5kswf+kjkeu1
+ OJdg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCV2+I6RckGPzgofkWwyg1K6FKN+OaWfXjhekiJhHpiOzHmgHBIGwdEIbcKFhTt8X/CROKY191xpJzTH@nongnu.org
+X-Gm-Message-State: AOJu0Yz9YPbQdniPZYdfDgvho9EWxbJgOisiulZQaunbuPtxViI9CPO7
+ qO7HGsxsLbquAsaXf2K7WiB4kUAyMfdRsrVtkCuS6f555nzB6qp1pDg0cgFZ/DIB1bBYuPnWa82
+ WLzwQcI6nzPAysUOQQaEprggnaOwiJAR6pKiyLQ==
+X-Google-Smtp-Source: AGHT+IFmwSiYGwqbSbiQOL5Pm0KwmQIxqKDgL8kQSuzNjLKRROi9L7NfVQUf8coeCH3agz8e/Ku5rCUyrsuO4HXnWg0=
+X-Received: by 2002:a05:6402:270e:b0:5cf:d3b0:c498 with SMTP id
+ 4fb4d7f45d1cf-5cff4d27252mr2124665a12.26.1732116315498; Wed, 20 Nov 2024
+ 07:25:15 -0800 (PST)
+MIME-Version: 1.0
+References: <20241108070454.12699-1-jim.shu@sifive.com>
+ <20241108070454.12699-2-jim.shu@sifive.com>
+ <484d7570-7425-4bb1-adcd-c59c233c6893@ventanamicro.com>
+In-Reply-To: <484d7570-7425-4bb1-adcd-c59c233c6893@ventanamicro.com>
+From: Jim Shu <jim.shu@sifive.com>
+Date: Wed, 20 Nov 2024 23:25:00 +0800
+Message-ID: <CALw707pNV4AcrXTz3OnbZgm2f_sfP4ztV0dUG0b2i_VNEkHsPg@mail.gmail.com>
+Subject: Re: [PATCH v3 1/3] hw/riscv: Support to load DTB after 3GB memory on
+ 64-bit system.
+To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, 
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Bin Meng <bmeng.cn@gmail.com>, Weiwei Li <liwei1518@gmail.com>, 
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Message-ID: <0214DDE7-28F3-48C1-96ED-E700764D95D3@syntacore.com>
-References: <20241009-pmu_event_machine-v1-0-dcbd7a60e3ba@rivosinc.com>
- <20241009-pmu_event_machine-v1-6-dcbd7a60e3ba@rivosinc.com>
- <fd89dafa-279d-436c-9569-f2fdc289bac9@yadro.com>
- <CAHBxVyE2C3sRJNbLOwhOZCnXAUTsEdh-mCewVAEJDDAURL10ug@mail.gmail.com>
- <3B504AA0-06F9-4316-9B10-ED46B1B271A4@syntacore.com>
- <CAHBxVyER0Lxp0uwed7ANW6d6pD1gvSVQ8b245scd+tm7HpT9ag@mail.gmail.com>
-To: Atish Kumar Patra <atishp@rivosinc.com>
-X-Mailer: Apple Mail (2.3774.500.171.1.1)
-X-ClientProxiedBy: T-EXCH-06.corp.yadro.com (172.17.10.110) To
- T-EXCH-12.corp.yadro.com (172.17.11.143)
-Received-SPF: permerror client-ip=89.207.88.253;
- envelope-from=alexei.filippov@syntacore.com; helo=mta-03.yadro.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::533;
+ envelope-from=jim.shu@sifive.com; helo=mail-ed1-x533.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001, RCVD_IN_VALIDITY_SAFE_BLOCKED=0.001,
- SPF_HELO_NONE=0.001, T_SPF_PERMERROR=0.01 autolearn=ham autolearn_force=no
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -86,143 +98,176 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
+On Tue, Nov 12, 2024 at 5:53=E2=80=AFAM Daniel Henrique Barboza
+<dbarboza@ventanamicro.com> wrote:
+>
+>
+>
+> On 11/8/24 4:04 AM, Jim Shu wrote:
+> > Larger initrd image will overlap the DTB at 3GB address. Since 64-bit
+> > system doesn't have 32-bit addressable issue, we just load DTB to the e=
+nd
+> > of dram in 64-bit system.
+> >
+> > Signed-off-by: Jim Shu <jim.shu@sifive.com>
+> > ---
+> >   hw/riscv/boot.c            | 8 ++++++--
+> >   hw/riscv/microchip_pfsoc.c | 4 ++--
+> >   hw/riscv/sifive_u.c        | 4 ++--
+> >   hw/riscv/spike.c           | 4 ++--
+> >   hw/riscv/virt.c            | 2 +-
+> >   include/hw/riscv/boot.h    | 2 +-
+> >   6 files changed, 14 insertions(+), 10 deletions(-)
+> >
+> > diff --git a/hw/riscv/boot.c b/hw/riscv/boot.c
+> > index 2e319168db..4e4e106a2b 100644
+> > --- a/hw/riscv/boot.c
+> > +++ b/hw/riscv/boot.c
+> > @@ -293,7 +293,7 @@ out:
+> >    * The FDT is fdt_packed() during the calculation.
+> >    */
+> >   uint64_t riscv_compute_fdt_addr(hwaddr dram_base, hwaddr dram_size,
+> > -                                MachineState *ms)
+> > +                                MachineState *ms, RISCVHartArrayState =
+*harts)
+> >   {
+> >       int ret =3D fdt_pack(ms->fdt);
+> >       hwaddr dram_end, temp;
+> > @@ -321,7 +321,11 @@ uint64_t riscv_compute_fdt_addr(hwaddr dram_base, =
+hwaddr dram_size,
+> >        * Thus, put it at an 2MB aligned address that less than fdt size=
+ from the
+> >        * end of dram or 3GB whichever is lesser.
+> >        */
+> > -    temp =3D (dram_base < 3072 * MiB) ? MIN(dram_end, 3072 * MiB) : dr=
+am_end;
+> > +    if (!riscv_is_32bit(harts)) {
+> > +        temp =3D dram_end;
+> > +    } else {
+> > +        temp =3D (dram_base < 3072 * MiB) ? MIN(dram_end, 3072 * MiB) =
+: dram_end;
+> > +    }
+>
+> We'll need to update the comment right before this code given that we're
+> changing the logic for 64 bit CPUs. Thanks,
+
+OK, I will add it to the comments in the next version, thanks!
 
 
-> On 22 Oct 2024, at 15:58, Atish Kumar Patra <atishp@rivosinc.com> =
-wrote:
->=20
-> On Mon, Oct 21, 2024 at 6:45=E2=80=AFAM Aleksei Filippov
-> <alexei.filippov@syntacore.com> wrote:
->>=20
->>=20
->>=20
->>> On 11 Oct 2024, at 23:45, Atish Kumar Patra <atishp@rivosinc.com> =
-wrote:
->>>=20
->>> On Thu, Oct 10, 2024 at 5:44=E2=80=AFAM Alexei Filippov
->>> <alexei.filippov@yadro.com> wrote:
->>>>=20
->>>>=20
->>>>=20
->>>> On 10.10.2024 02:09, Atish Patra wrote:
->>>>> Signed-off-by: Atish Patra <atishp@rivosinc.com>
->>>>> ---
->>>>> target/riscv/cpu.h | 25 +++++++++++++++++++++++++
->>>>> 1 file changed, 25 insertions(+)
->>>>>=20
->>>>> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
->>>>> index 2ac391a7cf74..53426710f73e 100644
->>>>> --- a/target/riscv/cpu.h
->>>>> +++ b/target/riscv/cpu.h
->>>>> @@ -189,6 +189,28 @@ typedef struct PMUFixedCtrState {
->>>>>       uint64_t counter_virt_prev[2];
->>>>> } PMUFixedCtrState;
->>>>>=20
->>>>> +typedef uint64_t (*PMU_EVENT_CYCLE_FUNC)(RISCVCPU *);
->>>>> +typedef uint64_t (*PMU_EVENT_INSTRET_FUNC)(RISCVCPU *);
->>>>> +typedef uint64_t (*PMU_EVENT_TLB_FUNC)(RISCVCPU *, MMUAccessType =
-access_type);
->>>>> +
->>>>> +typedef struct PMUEventInfo {
->>>>> +    /* Event ID (BIT [0:55] valid) */
->>>>> +    uint64_t event_id;
->>>>> +    /* Supported hpmcounters for this event */
->>>>> +    uint32_t counter_mask;
->>>>> +    /* Bitmask of valid event bits */
->>>>> +    uint64_t event_mask;
->>>>> +} PMUEventInfo;
->>>>> +
->>>>> +typedef struct PMUEventFunc {
->>>>> +    /* Get the ID of the event that can monitor cycles */
->>>>> +    PMU_EVENT_CYCLE_FUNC get_cycle_id;
->>>>> +    /* Get the ID of the event that can monitor cycles */
->>>>> +    PMU_EVENT_INSTRET_FUNC get_intstret_id;
->>>>> +    /* Get the ID of the event that can monitor TLB events*/
->>>>> +    PMU_EVENT_TLB_FUNC get_tlb_access_id;
->>>> Ok, this is kinda interesting decision, but it's not scalable. =
-AFAIU
->>>=20
->>> Yes it is not scalable if there is a need to scale as mentioned =
-earlier.
->>> Do you have any other events that can be emulated in Qemu ?
->>>=20
->>> Having said that, I am okay with single call back though but not too =
-sure
->>> about read/write callback unless there is a use case to support =
-those.
->>>=20
->>>> none spec provide us full enum of existing events. So anytime when
->>>> somebody will try to implement their own pmu events they would have =
-to
->>>> add additional callbacks, and this structure never will be fulled
->>>> properly. And then we ended up with structure 1000+ callback with =
-only 5
->>>> machines wich supports pmu events. I suggest my approach with only
->>>> read/write callbacks, where machine can decide by itself how to =
-handle
->>>> any of machine specific events.
->>>=20
->>> Lot of these events are microarchitectural events which can't be
->>> supported in Qemu.
->>> I don't think it's a good idea at all to add dummy values for all =
-the
->>> events defined in a platform
->>> which is harder to debug for a user.
->>=20
->> Yes, you're right that the rest of the events are microarchitectural =
-and that they can't be properly simulated in QEMU at the moment, but it =
-seems to me that's not really the point here. The point is how elastic =
-this solution can be - that is, whether to do any events or not and how =
-exactly they should be counted should be decided by the vendor of a =
-particular machine, and not by the simulator in general. Plus, I have a =
-very real use case where it will come in handy - debugging perf. Support =
-the possibility of simulating events on QEMU side will make the life of =
-t perf folks much easier. I do not insist specifically on my =
-implementation of this solution, but I think that the solution with the =
-creation of a callback for each of the events will significantly =
-complicate the porting of the PMU for machine vendors.
->>>=20
->=20
-> As I mentioned in other threads, I am absolutely okay with single call
-> backs. So Let's do that. However, I am not in favor of adding
-> microarchitectural events that we can't support in Qemu with
-> completely bogus data. Debugging perf in Qemu can be easily done with
-> the current set of events supported. Those are not the most accurate
-> but it's a representation of what Qemu is running. Do you foresee any
-> debugging issue if we don't support all the events a platform
-> advertises ?
-In general - there is only one potential problem. When perf would try to =
-get event by the wrong id. The main algorithm indeed could be tested =
-with limited  quantities of events. But this gonna be a real pain for =
-the testers which gonna deduce and remember what particular event =
-can/can=E2=80=99t be counted in QEMU and why does he gets 0 there and =
-not 0 here. Moreover, if we would allow events with even complete bogus =
-data this would works perfectly for CI stuff for the benchmark + perf =
-ppl, and they wouldn=E2=80=99t restrict their CI to that. I really do  =
-not see any problem to let the vendor handle this situation. At least =
-vendor can decide by his own to count/not to count some types of event, =
-this gonna bring flexibility and the transparency of the solution and, =
-in general, if we=E2=80=99ll bring some rational reason why we can't add =
-such events we can always forbid to do such thing.
->=20
->>>=20
->>>>> +} PMUEventFunc;
->>>>> +
->>>>> struct CPUArchState {
->>>>>   target_ulong gpr[32];
->>>>>   target_ulong gprh[32]; /* 64 top bits of the 128-bit registers =
-*/
->>>>> @@ -386,6 +408,9 @@ struct CPUArchState {
->>>>>   target_ulong mhpmeventh_val[RV_MAX_MHPMEVENTS];
->>>>>=20
->>>>>   PMUFixedCtrState pmu_fixed_ctrs[2];
->>>>> +    PMUEventInfo *pmu_events;
->>>>> +    PMUEventFunc pmu_efuncs;
->>>>> +    int num_pmu_events;
->>>>>=20
->>>>>   target_ulong sscratch;
->>>>>   target_ulong mscratch;
->>=20
->>=20
+Jim Shu
 
+
+
+>
+>
+> Daniel
+>
+> >
+> >       return QEMU_ALIGN_DOWN(temp - fdtsize, 2 * MiB);
+> >   }
+> > diff --git a/hw/riscv/microchip_pfsoc.c b/hw/riscv/microchip_pfsoc.c
+> > index f9a3b43d2e..ba8b0a2c26 100644
+> > --- a/hw/riscv/microchip_pfsoc.c
+> > +++ b/hw/riscv/microchip_pfsoc.c
+> > @@ -519,7 +519,7 @@ static void microchip_icicle_kit_machine_init(Machi=
+neState *machine)
+> >       bool kernel_as_payload =3D false;
+> >       target_ulong firmware_end_addr, kernel_start_addr;
+> >       uint64_t kernel_entry;
+> > -    uint32_t fdt_load_addr;
+> > +    uint64_t fdt_load_addr;
+> >       DriveInfo *dinfo =3D drive_get(IF_SD, 0, 0);
+> >
+> >       /* Sanity check on RAM size */
+> > @@ -625,7 +625,7 @@ static void microchip_icicle_kit_machine_init(Machi=
+neState *machine)
+> >           /* Compute the fdt load address in dram */
+> >           fdt_load_addr =3D riscv_compute_fdt_addr(memmap[MICROCHIP_PFS=
+OC_DRAM_LO].base,
+> >                                                  memmap[MICROCHIP_PFSOC=
+_DRAM_LO].size,
+> > -                                               machine);
+> > +                                               machine, &s->soc.u_cpus=
+);
+> >           riscv_load_fdt(fdt_load_addr, machine->fdt);
+> >
+> >           /* Load the reset vector */
+> > diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
+> > index c5e74126b1..05467e833a 100644
+> > --- a/hw/riscv/sifive_u.c
+> > +++ b/hw/riscv/sifive_u.c
+> > @@ -519,7 +519,7 @@ static void sifive_u_machine_init(MachineState *mac=
+hine)
+> >       const char *firmware_name;
+> >       uint32_t start_addr_hi32 =3D 0x00000000;
+> >       int i;
+> > -    uint32_t fdt_load_addr;
+> > +    uint64_t fdt_load_addr;
+> >       uint64_t kernel_entry;
+> >       DriveInfo *dinfo;
+> >       BlockBackend *blk;
+> > @@ -606,7 +606,7 @@ static void sifive_u_machine_init(MachineState *mac=
+hine)
+> >
+> >       fdt_load_addr =3D riscv_compute_fdt_addr(memmap[SIFIVE_U_DEV_DRAM=
+].base,
+> >                                              memmap[SIFIVE_U_DEV_DRAM].=
+size,
+> > -                                           machine);
+> > +                                           machine, &s->soc.u_cpus);
+> >       riscv_load_fdt(fdt_load_addr, machine->fdt);
+> >
+> >       if (!riscv_is_32bit(&s->soc.u_cpus)) {
+> > diff --git a/hw/riscv/spike.c b/hw/riscv/spike.c
+> > index fceb91d946..acd7ab1ae1 100644
+> > --- a/hw/riscv/spike.c
+> > +++ b/hw/riscv/spike.c
+> > @@ -201,7 +201,7 @@ static void spike_board_init(MachineState *machine)
+> >       hwaddr firmware_load_addr =3D memmap[SPIKE_DRAM].base;
+> >       target_ulong kernel_start_addr;
+> >       char *firmware_name;
+> > -    uint32_t fdt_load_addr;
+> > +    uint64_t fdt_load_addr;
+> >       uint64_t kernel_entry;
+> >       char *soc_name;
+> >       int i, base_hartid, hart_count;
+> > @@ -317,7 +317,7 @@ static void spike_board_init(MachineState *machine)
+> >
+> >       fdt_load_addr =3D riscv_compute_fdt_addr(memmap[SPIKE_DRAM].base,
+> >                                              memmap[SPIKE_DRAM].size,
+> > -                                           machine);
+> > +                                           machine, &s->soc[0]);
+> >       riscv_load_fdt(fdt_load_addr, machine->fdt);
+> >
+> >       /* load the reset vector */
+> > diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+> > index 45a8c4f819..761bce3304 100644
+> > --- a/hw/riscv/virt.c
+> > +++ b/hw/riscv/virt.c
+> > @@ -1424,7 +1424,7 @@ static void virt_machine_done(Notifier *notifier,=
+ void *data)
+> >
+> >       fdt_load_addr =3D riscv_compute_fdt_addr(memmap[VIRT_DRAM].base,
+> >                                              memmap[VIRT_DRAM].size,
+> > -                                           machine);
+> > +                                           machine, &s->soc[0]);
+> >       riscv_load_fdt(fdt_load_addr, machine->fdt);
+> >
+> >       /* load the reset vector */
+> > diff --git a/include/hw/riscv/boot.h b/include/hw/riscv/boot.h
+> > index f778b560de..34a80c5ff4 100644
+> > --- a/include/hw/riscv/boot.h
+> > +++ b/include/hw/riscv/boot.h
+> > @@ -49,7 +49,7 @@ target_ulong riscv_load_kernel(MachineState *machine,
+> >                                  bool load_initrd,
+> >                                  symbol_fn_t sym_cb);
+> >   uint64_t riscv_compute_fdt_addr(hwaddr dram_start, uint64_t dram_size=
+,
+> > -                                MachineState *ms);
+> > +                                MachineState *ms, RISCVHartArrayState =
+*harts);
+> >   void riscv_load_fdt(hwaddr fdt_addr, void *fdt);
+> >   void riscv_setup_rom_reset_vec(MachineState *machine, RISCVHartArrayS=
+tate *harts,
+> >                                  hwaddr saddr,
 
