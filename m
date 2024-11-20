@@ -4,84 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2D754D6E2CD
-	for <qemu-riscv@archiver.kernel.org>; Wed, 20 Nov 2024 07:43:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 841B0D6E2CD
+	for <qemu-riscv@archiver.kernel.org>; Wed, 20 Nov 2024 07:46:55 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tDfMm-0000wN-5C; Wed, 20 Nov 2024 02:43:12 -0500
+	id 1tDfQJ-0002SF-R1; Wed, 20 Nov 2024 02:46:51 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <fea.wang@sifive.com>)
- id 1tDfMh-0000ve-Ag
- for qemu-riscv@nongnu.org; Wed, 20 Nov 2024 02:43:07 -0500
-Received: from mail-pg1-x52e.google.com ([2607:f8b0:4864:20::52e])
+ id 1tDfQH-0002QR-VU
+ for qemu-riscv@nongnu.org; Wed, 20 Nov 2024 02:46:50 -0500
+Received: from mail-pl1-x634.google.com ([2607:f8b0:4864:20::634])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <fea.wang@sifive.com>)
- id 1tDfMf-0005fJ-O0
- for qemu-riscv@nongnu.org; Wed, 20 Nov 2024 02:43:07 -0500
-Received: by mail-pg1-x52e.google.com with SMTP id
- 41be03b00d2f7-7e9e38dd5f1so1463537a12.0
- for <qemu-riscv@nongnu.org>; Tue, 19 Nov 2024 23:43:05 -0800 (PST)
+ id 1tDfQF-0006QG-9p
+ for qemu-riscv@nongnu.org; Wed, 20 Nov 2024 02:46:49 -0500
+Received: by mail-pl1-x634.google.com with SMTP id
+ d9443c01a7336-2126408cf31so8143555ad.0
+ for <qemu-riscv@nongnu.org>; Tue, 19 Nov 2024 23:46:45 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1732088584; x=1732693384; darn=nongnu.org;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=bVJZWACSwns+cB2QZpdi34uCMXdJgVwzTrF6flYqclU=;
- b=B+TtEOyZncYllh/I/IrlJCUKpciMcMh6MOZgVlpHV6NjI12e3/ql8juk5Q3Ahlrw0y
- cemOIBryyZb5OgQyXUgTcQIFdoG5vcB2avLX51BYMMN8CkCZj6yQ42TCF5VzQUvAeKB3
- hB4eN4gG3969wR0lYq00Ap4FFQkCtmC75jvPcyAVlIhEN0gbwJUc3k3Mb8FB5+n647Fa
- QP/j+1azQJBLkRK4u3VANS8lS/KBbVV2WQpEHbMV7Q2CW9r7To09m9uDhNPoyAQWi2v4
- FDBtz50QCmmYq6FxBGl/iu4uPh4wcqheJiiC8vwTu2fyrgyZAg9q63LOk/YVJsYys/8s
- /ORg==
+ d=sifive.com; s=google; t=1732088804; x=1732693604; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=hvzvoO5brrLYHxKu/Ou4AE457DWwgARUuUV3MJMIxX4=;
+ b=njoFlDXKz/0cvJozS6AeJqzzhxPRhGRGALeG6V8AZAM7xaW0TGRM/y2+ba2RuM306+
+ mmtcxzk0Vsfe34FNVopfWlo6MLajx2VMzuzzjsztYmFMCAG/+822F1dsX/Ezp2xddCr+
+ AiCKUIoxXEJf39wnVdcavpFxpRzprW4+7xLB5gtZ6NOED/lJm37QB4hho3kbIVGemEjf
+ JPRdrNG4qRm5/s8HUCgRTSOmfbtYwYHpUTmP1gtRpqHR2qUQ7oRWdpFN6SZ1wTe6C4UC
+ gWt3SZaxVXA/98hoRaAVUM9Lv7zyzB1HbFhv1P4Fh6LQ6wXe8bLPWi0glR6ToCq/VMZC
+ R1pw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732088584; x=1732693384;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=bVJZWACSwns+cB2QZpdi34uCMXdJgVwzTrF6flYqclU=;
- b=ZAeotmJB0vJj+UmZ5OFMHm9dlyinMlHrtOGUnzQtYJd9gEAbK8h/CgDYT8LNwNtzcd
- 4PAvTMmgN3HHCk+pOszNlh0MiPkXHX5giC4gPfp1QrKJd6S0DMr6KMKZojVTC63Z3Rg8
- 1pZ0SIU4CNizhv1PSU9fwyR1AnM47qbkDe69FpuUsfsx0KLnTsW8Joxg94sh/8t7gvNK
- ST3zIGl1sKxKuAZwNFRGLT8eknfm00SgrgtSVSECBohCMsL3QKOzZZkebMzO0uxB8czf
- Fv+ae2A65zU1zbBmSfPwVlJfXUSt208Wk58VbR+SxFhPkPJvSGgcuTq2nIjx2nPPjvjc
- 0vNQ==
+ d=1e100.net; s=20230601; t=1732088804; x=1732693604;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=hvzvoO5brrLYHxKu/Ou4AE457DWwgARUuUV3MJMIxX4=;
+ b=QPB++yw3qPsRfrCilFVIs/BMl4S5fzXc9JX4xspNgFocLhP9LOkql3Nm8Z5v24QlCA
+ 6M8PEttlweHpU+Q8HS0pPNi8eWeKL/EcKv8ysi9NvKkY0y2JeQF57i8e51/MaZvadjUT
+ 5GCEItIn7upjvtGiClZjn2iyr5nuX/a+H62w7jH8pdgceIeLOPk9sAkAWFle5JFPWov3
+ sm533fekFAYR3D+WhYU1UYEu9n1Fdp0nAQEgTRjdABW91YfJpWsPUcNuj/8fSKsavLfp
+ yseAYtL6r2uUhwhzT8+MKK9XN6+J+LcBZ4NDtdjmPYdkScImMIqnVdqTFfRwUK/bcnco
+ zs2A==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXaJJVtf6chX496cUZYiNpzixsWVNlrzIQql/MthTFAt5tgo6tk1BElsx8S4cfGvlwKz1/uLkYNIzxc@nongnu.org
-X-Gm-Message-State: AOJu0YyZuKhum4m/Zxwp+rKZKLYB82V/lLW8liGngwCyzfwJia5z25OM
- njJk3BxMFkn+rks5G2AFSBGlwLGrtxQcrL4MUgKUrjqKBB24jJC3thUhbYFhCyn9gkeTSKdALvC
- 6qMX94+51dY7g+rE0gigGNjtoqdrC+mkB7I2xKQ==
-X-Google-Smtp-Source: AGHT+IHKxwj6M9QPc3/9mCOQAk54bWa+HFAjJwi4V4688nG+LYGS5Rea5AFSi0MA7PAwWgOwCmLJfJaMrpKOnP13f5Q=
-X-Received: by 2002:a05:6a21:3d95:b0:1dc:2365:a114 with SMTP id
- adf61e73a8af0-1ddaebcdd0amr2118276637.24.1732088584201; Tue, 19 Nov 2024
- 23:43:04 -0800 (PST)
-MIME-Version: 1.0
-References: <20241112091423.2529583-1-fea.wang@sifive.com>
- <20241112091423.2529583-6-fea.wang@sifive.com>
- <CAKmqyKMc2rL24MfRQsU-ahQsLw=BQUQ83=+OZ8B-6YNPAA0A0A@mail.gmail.com>
-In-Reply-To: <CAKmqyKMc2rL24MfRQsU-ahQsLw=BQUQ83=+OZ8B-6YNPAA0A0A@mail.gmail.com>
-From: Fea Wang <fea.wang@sifive.com>
-Date: Wed, 20 Nov 2024 15:42:52 +0800
-Message-ID: <CAKhCfsdiGN+hSbQ1KqVo=0Rv-X_jbHRTrYPkj1wNcTxZiDBwfg@mail.gmail.com>
-Subject: Re: [PATCH v3 5/5] target/riscv: Expose svukte ISA extension
-To: Alistair Francis <alistair23@gmail.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, 
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, 
- Bin Meng <bmeng.cn@gmail.com>, Weiwei Li <liwei1518@gmail.com>, 
+ AJvYcCVZB9ttmxR5Ioqm+DAgCxP3DdbyyPmzuscl/7peq4ONSB4Ho9t/qhlDzWzUzRTiwv2AxOP/RVENf5ZB@nongnu.org
+X-Gm-Message-State: AOJu0YwrQbA04+h/aRbYHYtZ3AzLo+Q1beBdtGV3Ny/9im5fYFaJdpg6
+ wjZlltfkLilo5lEwMJIExGYIUTVNS6mjAymVgSGtXCpITafxsQoIgo8Fg70TYJo=
+X-Google-Smtp-Source: AGHT+IF6nRdpWv1AfiP3UFwmy1yuIt1r9YmXhTV7T9KQcGgymz3ZFI4RY5hGtgFwo031oOrdXHOWUA==
+X-Received: by 2002:a17:902:f652:b0:212:530:a65d with SMTP id
+ d9443c01a7336-2126fd89c9bmr13159015ad.38.1732088804697; 
+ Tue, 19 Nov 2024 23:46:44 -0800 (PST)
+Received: from hsinchu36-syssw02.internal.sifive.com
+ (59-124-168-89.hinet-ip.hinet.net. [59.124.168.89])
+ by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-211d0f51fe0sm86206255ad.233.2024.11.19.23.46.42
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 19 Nov 2024 23:46:44 -0800 (PST)
+From: "Fea.Wang" <fea.wang@sifive.com>
+To: qemu-devel@nongnu.org,
+	qemu-riscv@nongnu.org
+Cc: Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bmeng.cn@gmail.com>,
+ Weiwei Li <liwei1518@gmail.com>,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
- Frank Chang <frank.chang@sifive.com>, Jim Shu <jim.shu@sifive.com>
-Content-Type: multipart/alternative; boundary="000000000000c811c50627534cf3"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::52e;
- envelope-from=fea.wang@sifive.com; helo=mail-pg1-x52e.google.com
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ "Fea.Wang" <fea.wang@sifive.com>, Frank Chang <frank.chang@sifive.com>,
+ Jim Shu <jim.shu@sifive.com>
+Subject: [PATCH v4 3/6] target/riscv: Support hstatus[HUKTE] bit when svukte
+ extension is enabled
+Date: Wed, 20 Nov 2024 15:48:51 +0800
+Message-Id: <20241120074854.1767780-4-fea.wang@sifive.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20241120074854.1767780-1-fea.wang@sifive.com>
+References: <20241120074854.1767780-1-fea.wang@sifive.com>
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::634;
+ envelope-from=fea.wang@sifive.com; helo=mail-pl1-x634.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, HTML_MESSAGE=0.001,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -97,115 +104,49 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
---000000000000c811c50627534cf3
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Svukte extension add HUKTE bit, bit[24] in hstatus CSR. The written
+value will be masked when the svukte extension is not enabled.
 
-OK, I will add a new commit for checking the extension in RV32.
-Thank you.
+When hstatus[HUKTE] bit is set, HLV/HLVX/HSV work in the U-mode should
+do svukte check.
 
-Sincerely,
-Fea
+Signed-off-by: Fea.Wang <fea.wang@sifive.com>
+Reviewed-by: Frank Chang <frank.chang@sifive.com>
+Reviewed-by: Jim Shu <jim.shu@sifive.com>
+Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+---
+ target/riscv/cpu_bits.h | 1 +
+ target/riscv/csr.c      | 3 +++
+ 2 files changed, 4 insertions(+)
 
-On Tue, Nov 19, 2024 at 11:34=E2=80=AFAM Alistair Francis <alistair23@gmail=
-.com>
-wrote:
+diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
+index 4b9f899217..fe4e34c64a 100644
+--- a/target/riscv/cpu_bits.h
++++ b/target/riscv/cpu_bits.h
+@@ -604,6 +604,7 @@ typedef enum {
+ #define HSTATUS_VTVM         0x00100000
+ #define HSTATUS_VTW          0x00200000
+ #define HSTATUS_VTSR         0x00400000
++#define HSTATUS_HUKTE        0x01000000
+ #define HSTATUS_VSXL         0x300000000
+ 
+ #define HSTATUS32_WPRI       0xFF8FF87E
+diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+index 1936a6f32a..b6fa8ae53f 100644
+--- a/target/riscv/csr.c
++++ b/target/riscv/csr.c
+@@ -3540,6 +3540,9 @@ static RISCVException read_hstatus(CPURISCVState *env, int csrno,
+ static RISCVException write_hstatus(CPURISCVState *env, int csrno,
+                                     target_ulong val)
+ {
++    if (!env_archcpu(env)->cfg.ext_svukte) {
++        val = val & (~HSTATUS_HUKTE);
++    }
+     env->hstatus = val;
+     if (riscv_cpu_mxl(env) != MXL_RV32 && get_field(val, HSTATUS_VSXL) != 2) {
+         qemu_log_mask(LOG_UNIMP,
+-- 
+2.34.1
 
-> On Tue, Nov 12, 2024 at 7:14=E2=80=AFPM Fea.Wang <fea.wang@sifive.com> wr=
-ote:
-> >
-> > Add "svukte" in the ISA string when svukte extension is enabled.
-> >
-> > Signed-off-by: Fea.Wang <fea.wang@sifive.com>
-> > Reviewed-by: Frank Chang <frank.chang@sifive.com>
-> > Reviewed-by: Jim Shu <jim.shu@sifive.com>
-> > ---
-> >  target/riscv/cpu.c | 2 ++
-> >  1 file changed, 2 insertions(+)
-> >
-> > diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> > index f219f0c3b5..6d3e9d563d 100644
-> > --- a/target/riscv/cpu.c
-> > +++ b/target/riscv/cpu.c
-> > @@ -199,6 +199,7 @@ const RISCVIsaExtData isa_edata_arr[] =3D {
-> >      ISA_EXT_DATA_ENTRY(svinval, PRIV_VERSION_1_12_0, ext_svinval),
-> >      ISA_EXT_DATA_ENTRY(svnapot, PRIV_VERSION_1_12_0, ext_svnapot),
-> >      ISA_EXT_DATA_ENTRY(svpbmt, PRIV_VERSION_1_12_0, ext_svpbmt),
-> > +    ISA_EXT_DATA_ENTRY(svukte, PRIV_VERSION_1_13_0, ext_svukte),
-> >      ISA_EXT_DATA_ENTRY(svvptc, PRIV_VERSION_1_13_0, ext_svvptc),
-> >      ISA_EXT_DATA_ENTRY(xtheadba, PRIV_VERSION_1_11_0, ext_xtheadba),
-> >      ISA_EXT_DATA_ENTRY(xtheadbb, PRIV_VERSION_1_11_0, ext_xtheadbb),
-> > @@ -1595,6 +1596,7 @@ const RISCVCPUMultiExtConfig
-> riscv_cpu_vendor_exts[] =3D {
-> >
-> >  /* These are experimental so mark with 'x-' */
-> >  const RISCVCPUMultiExtConfig riscv_cpu_experimental_exts[] =3D {
-> > +    MULTI_EXT_CFG_BOOL("x-svukte", ext_svukte, false),
->
-> There should be a check to make sure this isn't enabled for RV32
->
-> Alistair
->
-
---000000000000c811c50627534cf3
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr">OK, I will add a new commit for checking the extension in =
-RV32.<div>Thank you.</div><div><br></div><div>Sincerely,</div><div>Fea</div=
-></div><br><div class=3D"gmail_quote"><div dir=3D"ltr" class=3D"gmail_attr"=
->On Tue, Nov 19, 2024 at 11:34=E2=80=AFAM Alistair Francis &lt;<a href=3D"m=
-ailto:alistair23@gmail.com">alistair23@gmail.com</a>&gt; wrote:<br></div><b=
-lockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-le=
-ft:1px solid rgb(204,204,204);padding-left:1ex">On Tue, Nov 12, 2024 at 7:1=
-4=E2=80=AFPM Fea.Wang &lt;<a href=3D"mailto:fea.wang@sifive.com" target=3D"=
-_blank">fea.wang@sifive.com</a>&gt; wrote:<br>
-&gt;<br>
-&gt; Add &quot;svukte&quot; in the ISA string when svukte extension is enab=
-led.<br>
-&gt;<br>
-&gt; Signed-off-by: Fea.Wang &lt;<a href=3D"mailto:fea.wang@sifive.com" tar=
-get=3D"_blank">fea.wang@sifive.com</a>&gt;<br>
-&gt; Reviewed-by: Frank Chang &lt;<a href=3D"mailto:frank.chang@sifive.com"=
- target=3D"_blank">frank.chang@sifive.com</a>&gt;<br>
-&gt; Reviewed-by: Jim Shu &lt;<a href=3D"mailto:jim.shu@sifive.com" target=
-=3D"_blank">jim.shu@sifive.com</a>&gt;<br>
-&gt; ---<br>
-&gt;=C2=A0 target/riscv/cpu.c | 2 ++<br>
-&gt;=C2=A0 1 file changed, 2 insertions(+)<br>
-&gt;<br>
-&gt; diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c<br>
-&gt; index f219f0c3b5..6d3e9d563d 100644<br>
-&gt; --- a/target/riscv/cpu.c<br>
-&gt; +++ b/target/riscv/cpu.c<br>
-&gt; @@ -199,6 +199,7 @@ const RISCVIsaExtData isa_edata_arr[] =3D {<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 ISA_EXT_DATA_ENTRY(svinval, PRIV_VERSION_1_12_0, e=
-xt_svinval),<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 ISA_EXT_DATA_ENTRY(svnapot, PRIV_VERSION_1_12_0, e=
-xt_svnapot),<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 ISA_EXT_DATA_ENTRY(svpbmt, PRIV_VERSION_1_12_0, ex=
-t_svpbmt),<br>
-&gt; +=C2=A0 =C2=A0 ISA_EXT_DATA_ENTRY(svukte, PRIV_VERSION_1_13_0, ext_svu=
-kte),<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 ISA_EXT_DATA_ENTRY(svvptc, PRIV_VERSION_1_13_0, ex=
-t_svvptc),<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 ISA_EXT_DATA_ENTRY(xtheadba, PRIV_VERSION_1_11_0, =
-ext_xtheadba),<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 ISA_EXT_DATA_ENTRY(xtheadbb, PRIV_VERSION_1_11_0, =
-ext_xtheadbb),<br>
-&gt; @@ -1595,6 +1596,7 @@ const RISCVCPUMultiExtConfig riscv_cpu_vendor_ex=
-ts[] =3D {<br>
-&gt;<br>
-&gt;=C2=A0 /* These are experimental so mark with &#39;x-&#39; */<br>
-&gt;=C2=A0 const RISCVCPUMultiExtConfig riscv_cpu_experimental_exts[] =3D {=
-<br>
-&gt; +=C2=A0 =C2=A0 MULTI_EXT_CFG_BOOL(&quot;x-svukte&quot;, ext_svukte, fa=
-lse),<br>
-<br>
-There should be a check to make sure this isn&#39;t enabled for RV32<br>
-<br>
-Alistair<br>
-</blockquote></div>
-
---000000000000c811c50627534cf3--
 
