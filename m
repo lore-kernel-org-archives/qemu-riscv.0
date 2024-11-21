@@ -4,89 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 358E7D75BBB
-	for <qemu-riscv@archiver.kernel.org>; Thu, 21 Nov 2024 06:15:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 53FEDD75BCE
+	for <qemu-riscv@archiver.kernel.org>; Thu, 21 Nov 2024 08:28:58 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tE0Rd-0004a1-WB; Thu, 21 Nov 2024 01:13:38 -0500
+	id 1tE2YQ-0006ZY-3S; Thu, 21 Nov 2024 03:28:46 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <baturo.alexey@gmail.com>)
- id 1tE0RJ-0004Wg-U6; Thu, 21 Nov 2024 01:13:19 -0500
-Received: from mail-lf1-x132.google.com ([2a00:1450:4864:20::132])
+ (Exim 4.90_1) (envelope-from <cleger@rivosinc.com>)
+ id 1tE2YM-0006Yh-Bf
+ for qemu-riscv@nongnu.org; Thu, 21 Nov 2024 03:28:43 -0500
+Received: from mail-pl1-x630.google.com ([2607:f8b0:4864:20::630])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <baturo.alexey@gmail.com>)
- id 1tE0RI-0006L3-A9; Thu, 21 Nov 2024 01:13:17 -0500
-Received: by mail-lf1-x132.google.com with SMTP id
- 2adb3069b0e04-539e63c8678so480782e87.0; 
- Wed, 20 Nov 2024 22:13:15 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <cleger@rivosinc.com>)
+ id 1tE2YH-0001ET-3m
+ for qemu-riscv@nongnu.org; Thu, 21 Nov 2024 03:28:40 -0500
+Received: by mail-pl1-x630.google.com with SMTP id
+ d9443c01a7336-212008b0d6eso4896885ad.3
+ for <qemu-riscv@nongnu.org>; Thu, 21 Nov 2024 00:28:35 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1732169594; x=1732774394; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=S6HdRUuJyp9OYDKzo9dzY5iwJdwxmVhNSExq7zJVpB8=;
- b=W2ikawEWgGkS8pbPqS8EiJv5Rie0aocfPvbj4Y8QNM0rtdxoo15w0NMgUR5QZ0uV2l
- Sa7nRF1A2kD4SSAc596oz0unowFT8EwmPlFX4uBKof3/YjWOyiM2JAYhTFYZ06Mo1Bn6
- qf1lJo/HLqezyxMteZhncNEFH4SbuOQ1wieI2f+3sqlVZeXRInpNkvCyLy4e7RZCVE1F
- BnXc8d40uPxs3gRptq/mELCbzG4mrjNpXhPcHbmq2gjlb9S7Hhl+j1FFNgk1V7Yr9Exp
- VsG8/gNFY5yCH/XOOBac3o86ZYeRlh04k2EA4FxXUAwwu6NlKb+qvXIX1oS1aMRyIljm
- bTcw==
+ d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1732177714; x=1732782514;
+ darn=nongnu.org; 
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=wEAzB5w/3OA7NF7Hqpqy/b11ctKL3OKoyBZ8iw3s+lA=;
+ b=sn97HHYF7SuDW7uQoYArxAVqKJPSisC5JVZvaoOkpAw7ivI1FMAC9X7pvETpwkdHiU
+ memMVe2ZkWH5dGF2Gr8bdOrQLNpvjD3RqO4QF/9Y5Vl5zQUZK8ALwO0QiWCAJ+cYYkb4
+ ZYllhm0Bf8ycMMY3tk4ZeX8clLSVaesOeoJnunnJYXqeSFThLCjw3DENi3rgww4LH30i
+ B+xV7oHfqSBeDks8jaYdp6qEGTB4Wxa3zlEjfVi8opgUxT/9cwtkOOrBblxazOtxEqXJ
+ V3SXiwFenFpEbWjGyhqvXWMOeZGv+qMjm55Ryz8F1mtaoRTylL144ydF++OcNqbKDIMf
+ 5pCQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732169594; x=1732774394;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=S6HdRUuJyp9OYDKzo9dzY5iwJdwxmVhNSExq7zJVpB8=;
- b=BTeoDlY0p55Wley2ORRx8aBKrvmxdpew9FaUG01Y6GVdNLlTk4krc9OqkdLVpoUSxR
- MmUNSE9ZHYQwFUpPmGZUuLJfTXBW/HH7DIp2uaih8WyaBe2YjvVFE+yPAtPKFFNydTUQ
- SYXB//4Gnk2cVlz2Z3caED6AzVPxtbwXQEmsP8kFMu7fNf6OqNmftUbp9NUUA8mkvl1d
- v4faLr0z6dFrfxXeGxsmx0ZnaUvnSykjgx7Cf/QzMwtuqfahmhjFtp/ZZKnUF2v1JeiT
- Wifi3m0Ernjlw4WeMoUwH0gowOcFeYNLtcYI9Z8imS9mtQGU2gRQhC+qBkVbnES1idGy
- pfwA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVcd7ttjGqoyEdXC7PIZ/FoxCxeozJ48WrIMgUIWW6lQcgcPHNUqGf+y89l5okakH1Sx6trya919qybRQ==@nongnu.org,
- AJvYcCW3pIO8aiF8y9UA7T7EngMhnEVZiQe+ggZ0MG32CWcVeMsmXJhbBKwlr/WhVjBLUxMQ3g1hMYwm4bmB@nongnu.org
-X-Gm-Message-State: AOJu0Yxoaz8c6l6K9DI08IGPQP6mY6ZStVsYSLbF2uNMWR8dBXSBmR5/
- gvcaKAe1FyiWNoCLgiik7HPpeWnBybLDL1D/LXEqGvdFNWZNnQ9p
-X-Gm-Gg: ASbGncvOQ+4b4snFHVjV8IKrwqyeo0XzpswDoCzZpJQIxRnncsryPx7uUW9OjrTjk68
- YHCy8BzLG+HsYdSsJllW7+NPFaWgOQag1pWMa0AjM+uIItWi5p8c7ysNn/X+kK/6S3a8un6NlMh
- RwxS+4B1PZS8qlgOi+TfwqGB5xKi2vzV8pxnePQaCBPm20FRpdgugfSjum+6sp51SWAize+F7hn
- e3/C3mC0drMpNohdJWuk+rAT5hy+voKw9y16ij9J1T7TWT+K8Kvtr8=
-X-Google-Smtp-Source: AGHT+IEi+AFFK9IFW7gPtXc1LGze8DKHyshV+/0QdB+nGrBOO8QhbZmEEFZu4r5vK+Q3UhBXOTJoUA==
-X-Received: by 2002:a05:6512:3054:b0:53d:a549:6eb7 with SMTP id
- 2adb3069b0e04-53dc13435cbmr2849546e87.30.1732169593845; 
- Wed, 20 Nov 2024 22:13:13 -0800 (PST)
-Received: from vmdev.asgard ([81.200.11.243]) by smtp.gmail.com with ESMTPSA id
- 2adb3069b0e04-53dbd4726c3sm840443e87.205.2024.11.20.22.13.12
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 20 Nov 2024 22:13:12 -0800 (PST)
-From: baturo.alexey@gmail.com
-To: 
-Cc: baturo.alexey@gmail.com, richard.henderson@linaro.org,
- zhiwei_liu@linux.alibaba.com, dbarboza@ventanamicro.com,
- liwei1518@gmail.com, alistair23@gmail.com, frank.chang@sifive.com,
- palmer@dabbelt.com, Alistair.Francis@wdc.com, sagark@eecs.berkeley.edu,
- kbastian@mail.uni-paderborn.de, qemu-devel@nongnu.org,
- qemu-riscv@nongnu.org
-Subject: [PATCH v2 7/7] target/riscv: Enable updates for pointer masking
- variables and thus enable pointer masking extension
-Date: Thu, 21 Nov 2024 09:12:59 +0300
-Message-Id: <20241121061259.4043177-8-baturo.alexey@gmail.com>
-X-Mailer: git-send-email 2.39.5
-In-Reply-To: <20241121061259.4043177-1-baturo.alexey@gmail.com>
-References: <20241121061259.4043177-1-baturo.alexey@gmail.com>
+ d=1e100.net; s=20230601; t=1732177714; x=1732782514;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=wEAzB5w/3OA7NF7Hqpqy/b11ctKL3OKoyBZ8iw3s+lA=;
+ b=vML/XzYPGUF596rf8hFQ6RviPQkq7xCkOiRQBa0SPDKC8b5N8tgjEDHgMeGF3MOFwV
+ PfSSGakXlmnHA66+WnSCktS7clOfhET19aO8cFK6RSFDshcA9qxVsiwAT1osLjhRgGdt
+ wFf40xrbzUvWB2Qnv0+pdHnpWYYnOvpDrHG6YD4/ui9Fn9pnDwvKSdcrfTP9ZBmDG97C
+ JyGN3mtOTa9uSVbKYUefnm1sArJXaIuRfI/E7URo0lAiSBVW4dfYvCsHjoCoG7biK7Kt
+ IZv+wruyclrBbNu+ypEDf4TyIBvLEJ4Ilv146c5i9BQlPj7HG+w63KfUu2veOZM4pEsq
+ AC1A==
+X-Gm-Message-State: AOJu0YzrofoNE+9O5S4sCa8pFNtBxpPhzrDg/PKJWJ1HPRUCTNFJOx2t
+ tKEIItUr9xIr+XTphJqhaJit06jrfnnObExogcQYGzYdpALKzhchiZ78FEPIZt8=
+X-Google-Smtp-Source: AGHT+IGNcVPMoFib8tYF67AGtiVS+5VAHn1PnyO7fApvR/qz71LnHJpfcp7Losc6nR9q7uKjqDqn2g==
+X-Received: by 2002:a17:902:f651:b0:212:5786:7bbe with SMTP id
+ d9443c01a7336-2126c15acd7mr81206245ad.24.1732177714004; 
+ Thu, 21 Nov 2024 00:28:34 -0800 (PST)
+Received: from ?IPV6:2a01:e0a:e17:9700:16d2:7456:6634:9626?
+ ([2a01:e0a:e17:9700:16d2:7456:6634:9626])
+ by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-212883e42aesm8204645ad.222.2024.11.21.00.28.27
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 21 Nov 2024 00:28:33 -0800 (PST)
+Message-ID: <1868e353-6c40-4cfb-a00f-4afdde68baea@rivosinc.com>
+Date: Thu, 21 Nov 2024 09:28:20 +0100
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v5 1/9] target/riscv: fix henvcfg potentially containing
+ stale bits
+To: Alistair Francis <alistair23@gmail.com>
+Cc: qemu-riscv@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Bin Meng <bin.meng@windriver.com>, Weiwei Li <liwei1518@gmail.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, Ved Shanbhogue
+ <ved@rivosinc.com>, Atish Patra <atishp@rivosinc.com>, qemu-devel@nongnu.org
+References: <20241114091332.108811-1-cleger@rivosinc.com>
+ <20241114091332.108811-2-cleger@rivosinc.com>
+ <CAKmqyKO+v0AyvTER4a3JMzEN=b+NSa=BYdULt6=cGmmj46b_Jw@mail.gmail.com>
+ <7c88eba0-c010-4aef-ad57-ede292129aff@rivosinc.com>
+ <CAKmqyKMH_YAgomy325ZmpGCNkDMrb5pwJU9GBgNicFAsAc0J6A@mail.gmail.com>
+Content-Language: en-US
+From: =?UTF-8?B?Q2zDqW1lbnQgTMOpZ2Vy?= <cleger@rivosinc.com>
+In-Reply-To: <CAKmqyKMH_YAgomy325ZmpGCNkDMrb5pwJU9GBgNicFAsAc0J6A@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::132;
- envelope-from=baturo.alexey@gmail.com; helo=mail-lf1-x132.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+Received-SPF: pass client-ip=2607:f8b0:4864:20::630;
+ envelope-from=cleger@rivosinc.com; helo=mail-pl1-x630.google.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -103,46 +106,205 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Alexey Baturo <baturo.alexey@gmail.com>
 
-Signed-off-by: Alexey Baturo <baturo.alexey@gmail.com>
----
- target/riscv/cpu.c | 6 ++++++
- 1 file changed, 6 insertions(+)
 
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 4e80dcd2e6..fd3ea9ce76 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -186,11 +186,14 @@ const RISCVIsaExtData isa_edata_arr[] = {
-     ISA_EXT_DATA_ENTRY(smaia, PRIV_VERSION_1_12_0, ext_smaia),
-     ISA_EXT_DATA_ENTRY(smcntrpmf, PRIV_VERSION_1_12_0, ext_smcntrpmf),
-     ISA_EXT_DATA_ENTRY(smepmp, PRIV_VERSION_1_12_0, ext_smepmp),
-+    ISA_EXT_DATA_ENTRY(smmpm, PRIV_VERSION_1_13_0, ext_smmpm),
-+    ISA_EXT_DATA_ENTRY(smnpm, PRIV_VERSION_1_13_0, ext_smnpm),
-     ISA_EXT_DATA_ENTRY(smstateen, PRIV_VERSION_1_12_0, ext_smstateen),
-     ISA_EXT_DATA_ENTRY(ssaia, PRIV_VERSION_1_12_0, ext_ssaia),
-     ISA_EXT_DATA_ENTRY(ssccptr, PRIV_VERSION_1_11_0, has_priv_1_11),
-     ISA_EXT_DATA_ENTRY(sscofpmf, PRIV_VERSION_1_12_0, ext_sscofpmf),
-     ISA_EXT_DATA_ENTRY(sscounterenw, PRIV_VERSION_1_12_0, has_priv_1_12),
-+    ISA_EXT_DATA_ENTRY(ssnpm, PRIV_VERSION_1_13_0, ext_ssnpm),
-     ISA_EXT_DATA_ENTRY(sstc, PRIV_VERSION_1_12_0, ext_sstc),
-     ISA_EXT_DATA_ENTRY(sstvala, PRIV_VERSION_1_12_0, has_priv_1_12),
-     ISA_EXT_DATA_ENTRY(sstvecd, PRIV_VERSION_1_12_0, has_priv_1_12),
-@@ -1490,9 +1493,12 @@ const RISCVCPUMultiExtConfig riscv_cpu_extensions[] = {
-     MULTI_EXT_CFG_BOOL("zvfh", ext_zvfh, false),
-     MULTI_EXT_CFG_BOOL("zvfhmin", ext_zvfhmin, false),
-     MULTI_EXT_CFG_BOOL("sstc", ext_sstc, true),
-+    MULTI_EXT_CFG_BOOL("ssnpm", ext_ssnpm, false),
- 
-     MULTI_EXT_CFG_BOOL("smaia", ext_smaia, false),
-     MULTI_EXT_CFG_BOOL("smepmp", ext_smepmp, false),
-+    MULTI_EXT_CFG_BOOL("smmpm", ext_smmpm, false),
-+    MULTI_EXT_CFG_BOOL("smnpm", ext_smnpm, false),
-     MULTI_EXT_CFG_BOOL("smstateen", ext_smstateen, false),
-     MULTI_EXT_CFG_BOOL("ssaia", ext_ssaia, false),
-     MULTI_EXT_CFG_BOOL("svade", ext_svade, false),
--- 
-2.39.5
+On 20/11/2024 06:02, Alistair Francis wrote:
+> On Tue, Nov 19, 2024 at 9:27 PM Clément Léger <cleger@rivosinc.com> wrote:
+>>
+>>
+>>
+>> On 19/11/2024 05:16, Alistair Francis wrote:
+>>> On Thu, Nov 14, 2024 at 7:14 PM Clément Léger <cleger@rivosinc.com> wrote:
+>>>>
+>>>> With the current implementation, if we had the current scenario:
+>>>> - set bit x in menvcfg
+>>>> - set bit x in henvcfg
+>>>> - clear bit x in menvcfg
+>>>> then, the internal variable env->henvcfg would still contain bit x due
+>>>> to both a wrong menvcfg mask used in write_henvcfg() as well as a
+>>>> missing update of henvcfg upon menvcfg update.
+>>>> This can lead to some wrong interpretation of the context. In order to
+>>>> update henvcfg upon menvcfg writing, call write_henvcfg() after writing
+>>>> menvcfg and fix the mask computation used in write_henvcfg() that is
+>>>> used to mesk env->menvcfg value (which could still lead to some stale
+>>>> bits). The same mechanism is also applied for henvcfgh writing.
+>>>>
+>>>> Signed-off-by: Clément Léger <cleger@rivosinc.com>
+>>>> ---
+>>>>  target/riscv/csr.c | 40 +++++++++++++++++++++++++++++++++++-----
+>>>>  1 file changed, 35 insertions(+), 5 deletions(-)
+>>>>
+>>>> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+>>>> index b84b436151..73ac4d5449 100644
+>>>> --- a/target/riscv/csr.c
+>>>> +++ b/target/riscv/csr.c
+>>>> @@ -2345,6 +2345,8 @@ static RISCVException read_menvcfg(CPURISCVState *env, int csrno,
+>>>>      return RISCV_EXCP_NONE;
+>>>>  }
+>>>>
+>>>> +static RISCVException write_henvcfg(CPURISCVState *env, int csrno,
+>>>> +                                    target_ulong val);
+>>>>  static RISCVException write_menvcfg(CPURISCVState *env, int csrno,
+>>>>                                      target_ulong val)
+>>>>  {
+>>>> @@ -2357,6 +2359,7 @@ static RISCVException write_menvcfg(CPURISCVState *env, int csrno,
+>>>>                  (cfg->ext_svadu ? MENVCFG_ADUE : 0);
+>>>>      }
+>>>>      env->menvcfg = (env->menvcfg & ~mask) | (val & mask);
+>>>> +    write_henvcfg(env, CSR_HENVCFG, env->henvcfg);
+>>>>
+>>>>      return RISCV_EXCP_NONE;
+>>>>  }
+>>>> @@ -2368,6 +2371,8 @@ static RISCVException read_menvcfgh(CPURISCVState *env, int csrno,
+>>>>      return RISCV_EXCP_NONE;
+>>>>  }
+>>>>
+>>>> +static RISCVException write_henvcfgh(CPURISCVState *env, int csrno,
+>>>> +                                    target_ulong val);
+>>>>  static RISCVException write_menvcfgh(CPURISCVState *env, int csrno,
+>>>>                                       target_ulong val)
+>>>>  {
+>>>> @@ -2378,6 +2383,7 @@ static RISCVException write_menvcfgh(CPURISCVState *env, int csrno,
+>>>>      uint64_t valh = (uint64_t)val << 32;
+>>>>
+>>>>      env->menvcfg = (env->menvcfg & ~mask) | (valh & mask);
+>>>> +    write_henvcfgh(env, CSR_HENVCFGH, env->henvcfg >> 32);
+>>>>
+>>>>      return RISCV_EXCP_NONE;
+>>>>  }
+>>>> @@ -2435,6 +2441,7 @@ static RISCVException write_henvcfg(CPURISCVState *env, int csrno,
+>>>>                                      target_ulong val)
+>>>>  {
+>>>>      uint64_t mask = HENVCFG_FIOM | HENVCFG_CBIE | HENVCFG_CBCFE | HENVCFG_CBZE;
+>>>> +    uint64_t henvcfg_mask = mask, menvcfg_mask;
+>>>>      RISCVException ret;
+>>>>
+>>>>      ret = smstateen_acc_ok(env, 0, SMSTATEEN0_HSENVCFG);
+>>>> @@ -2443,10 +2450,24 @@ static RISCVException write_henvcfg(CPURISCVState *env, int csrno,
+>>>>      }
+>>>>
+>>>>      if (riscv_cpu_mxl(env) == MXL_RV64) {
+>>>> -        mask |= env->menvcfg & (HENVCFG_PBMTE | HENVCFG_STCE | HENVCFG_ADUE);
+>>>> +        /*
+>>>> +         * Since henvcfg depends on a menvcfg subset, we want to clear all the
+>>>> +         * menvcfg supported feature (whatever their state is) before enabling
+>>>> +         * some new one using the provided value. Not doing so would result in
+>>>> +         * keeping stale menvcfg bits in henvcfg value if a bit was enabled in
+>>>> +         * menvcfg and then disabled before updating henvcfg for instance.
+>>>> +         */
+>>>> +        menvcfg_mask = HENVCFG_PBMTE | HENVCFG_STCE | HENVCFG_ADUE;
+>>>> +        mask |= env->menvcfg & menvcfg_mask;
+>>>> +        henvcfg_mask |= menvcfg_mask;
+>>>>      }
+>>>>
+>>>> -    env->henvcfg = (env->henvcfg & ~mask) | (val & mask);
+>>>> +    /*
+>>>> +     * 'henvcfg_mask' contains all supported bits (both in henvcfg and menvcfg
+>>>> +     * common bits) and 'mask' contains henvcfg exclusive bits as well as
+>>>> +     * menvcfg enabled bits only.
+>>>> +     */
+>>>> +    env->henvcfg = (env->henvcfg & ~henvcfg_mask) | (val & mask);
+>>>
+>>> Won't `env->henvcfg & ~henvcfg_mask` still contain the stale data?
+>>> `henvcfg_mask` isn't based on the current value of `env->menvcfg`
+>>
+>> Hey Alistair,
+>>
+>> That's the point, env->henvcfg is cleared with henvcfg_mask which
+>> contains the set of HENVCFG_* and MENVCFG_* "raw" bits so that the new
+>> value that is written does not contain any menvcfg stale bits. "mask"
+>> however is actually masked with menvcfg value to ensure the new bits
+>> that are going to be written won't contain any incoherent bits.
+> 
+> I'm not sure I follow...
+> 
+> The commit message says:
+> 
+> """
+> - set bit x in menvcfg
+> - set bit x in henvcfg
+> - clear bit x in menvcfg
+> """
+> 
+> Which to me means henvcfg should be cleared when a bit in menvcfg is
+> cleared. But env->henvcfg is instead cleared based on `henvcfg_mask`
+> which isn't affected by menvcfg.
+
+Hey Alistair,
+
+Let's take some real example (MENVCFG_PBMTE for instance.) Let's assume
+menvcfg/henvcfg are 0 and the following sequence:
+
+- Set MENVCFG_PBMTE in menvcfg (menvcfg = MENVCFG_PBMTE)
+- Set HENVCFG_PBMTE in henvcfg (henvcfg = HENVCFG_PBMTE)
+- Clear MENVCFG_PBMTE in menvcfg (menvcfg = 0)
+
+On such sequence, we should clear HENVCFG_PBMTE in henvcfg. When using
+the existing code, henvcfg_write() does so:
+
+mask = HENVCFG_FIOM | HENVCFG_CBIE | HENVCFG_CBCFE | HENVCFG_CBZE;
+mask |= env->menvcfg & (HENVCFG_PBMTE | HENVCFG_STCE | HENVCFG_ADUE);
+
+So our mask = (HENVCFG_FIOM | HENVCFG_CBIE | HENVCFG_CBCFE |
+HENVCFG_CBZE) and does not contains HENVCFG_PBMTE.
+
+Finally:
+
+env->henvcfg = (env->henvcfg & ~mask) | (val & mask);
+
+Then env->henvcfg & ~(HENVCFG_FIOM | HENVCFG_CBIE | HENVCFG_CBCFE |
+HENVCFG_CBZE | HENVCFG_STCE | HENVCFG_ADUE) will yield henvcfg =
+HENVCFG_PBMTE (which is obviously not what we want) | val & mask.
+
+> 
+> So clearing a bit in menvcfg will only not allow a bit to be set, but
+> not clear any existing bits
+
+Let's take again the current patch and what it does with the same sequence:
+
+- Set MENVCFG_PBMTE in menvcfg (menvcfg = MENVCFG_PBMTE)
+- Set HENVCFG_PBMTE in henvcfg (henvcfg = HENVCFG_PBMTE)
+- Clear MENVCFG_PBMTE in menvcfg (menvcfg = 0)
+
+henvcfg_mask = HENVCFG_FIOM | HENVCFG_CBIE | HENVCFG_CBCFE | HENVCFG_CBZE;
+mask = HENVCFG_FIOM | HENVCFG_CBIE | HENVCFG_CBCFE | HENVCFG_CBZE;
+
+henvcfg_mask |= (HENVCFG_PBMTE | HENVCFG_STCE | HENVCFG_ADUE);
+/* Only keep the enabled bits from menvcfg */
+mask |= env->menvcfg & (HENVCFG_PBMTE | HENVCFG_STCE | HENVCFG_ADUE);
+
+So mask = (HENVCFG_FIOM | HENVCFG_CBIE | HENVCFG_CBCFE | HENVCFG_CBZE)
+which rightfully does not contain HENVCFG_PBMTE so the value to be
+written will be  correctly cleared from that bit.
+
+Finally, when it comes to write the final value we'll have the following:
+
+env->henvcfg = (env->henvcfg & ~henvcfg_mask) | (val & mask);
+
+Which yield
+
+henvcfg & ~(HENVCFG_FIOM | HENVCFG_CBIE | HENVCFG_CBCFE | HENVCFG_CBZE |
+HENVCFG_PBMTE | HENVCFG_STCE | HENVCFG_ADUE) | val & (HENVCFG_FIOM |
+HENVCFG_CBIE | HENVCFG_CBCFE | HENVCFG_CBZE | HENVCFG_STCE | HENVCFG_ADUE)
+
+So henvcfg HENVCFG_PBMTE bit is correctly cleared and not allowed to be
+set by the written value. But I might be missing something.
+
+Thanks,
+
+Clément
+
+> 
+> Alistair
+> 
+>>
+>> I guess this still needs a few more explanations if that is not clear
+>> enough, sorry for that.
+>>
+>> Thanks,
+>>
+>> Clément
+>>>
+>>> Alistair
 
 
