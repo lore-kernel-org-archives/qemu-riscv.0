@@ -4,68 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D0880D7879A
-	for <qemu-riscv@archiver.kernel.org>; Thu, 21 Nov 2024 17:13:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 63EDED7879B
+	for <qemu-riscv@archiver.kernel.org>; Thu, 21 Nov 2024 17:13:16 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tEAem-0002DE-LE; Thu, 21 Nov 2024 12:07:52 -0500
+	id 1tEAVd-0004cF-VH; Thu, 21 Nov 2024 11:58:25 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1tEAdj-0000RW-43
- for qemu-riscv@nongnu.org; Thu, 21 Nov 2024 12:06:48 -0500
-Received: from mail-wr1-x430.google.com ([2a00:1450:4864:20::430])
+ id 1tEAVZ-0004Wv-PH
+ for qemu-riscv@nongnu.org; Thu, 21 Nov 2024 11:58:22 -0500
+Received: from mail-wr1-x42f.google.com ([2a00:1450:4864:20::42f])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1tEAdS-0001cL-Kq
- for qemu-riscv@nongnu.org; Thu, 21 Nov 2024 12:06:46 -0500
-Received: by mail-wr1-x430.google.com with SMTP id
- ffacd0b85a97d-3824aef833bso868300f8f.0
- for <qemu-riscv@nongnu.org>; Thu, 21 Nov 2024 09:06:29 -0800 (PST)
+ id 1tEAVQ-0007zT-Gv
+ for qemu-riscv@nongnu.org; Thu, 21 Nov 2024 11:58:21 -0500
+Received: by mail-wr1-x42f.google.com with SMTP id
+ ffacd0b85a97d-38232cebb0cso828494f8f.1
+ for <qemu-riscv@nongnu.org>; Thu, 21 Nov 2024 08:58:11 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1732208788; x=1732813588; darn=nongnu.org;
+ d=linaro.org; s=google; t=1732208291; x=1732813091; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=oX7juP8P3Dz3dam5JbBdnNQ9MZQFT/0pRbnxh9O9VZE=;
- b=AOeE2LaluN/ICVffAKIU064Nj9823lG3+p66XiA+bR6mSsZyDgzvwiRKXTH7CZoaGb
- WKSggR55H6Gf2lh6P0q8SknNqaabevu1LgKayiVTHtD6L3TKv1Jt2fTT3LcC1BoEfE+z
- B9ZOpHuU8v8t/fHFDlPuNU5UbLPVIgmJ9HEP2oYg29MXNsD1SMwoKFzCpLeS2AD0mvTi
- mOqzWODjCd/GY/hwaJKwzORFhzEe+xsxdocz+Efi4fFqVRbXnEBzlwKXJFrKEVY3dO13
- GuX/z03wNvhV1lWdYgjsMZZauyWHgo4ziUzvL7+pleGFNbIJNMw5kkjgkUqUsuPAxo6m
- DMYw==
+ bh=lPIFW+MIDvbZvhF0n5YdU4sfYa070860/v3aIWKALYk=;
+ b=SLKr4RkFcLb2obpzzxC7+3N7f1KG4Y5OwUynXwd4cCsHXAqhEUc6AirO3tHicsTn7J
+ FNmNc3OOHxyFer8PNL3kNPTNlYG4D+SnSq9UDjn3Q9Oxx0v+JE9FzDGEPlhvdmbRhcRu
+ V3Zm7+4vFnZ+TxJdU/Z6HjahlOVAZYMjiKTt7NQsxkIHyLGb6rrIgAtjaWhqFqSxg/m8
+ rq/5G8GjfzADoRZ+RLiSCMxIg9Z+mFqbVWslVSPrkzSd9o/x1D5RZQvTkNJkm6XzkoEz
+ ZQNLoeIJI1rd9oS107yRTM48CJhbSIgbNzbpOcbSfDlQaqCZ/9bEqJHrKR6Sgb/Q3GQT
+ c/rg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732208788; x=1732813588;
+ d=1e100.net; s=20230601; t=1732208291; x=1732813091;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=oX7juP8P3Dz3dam5JbBdnNQ9MZQFT/0pRbnxh9O9VZE=;
- b=t1yEw/ckarJbR+wgB+E8jD5vwpKZapTyuVj/4RPTELlN/0NiVloZPiw6RkCbu0nV9G
- aEm6k5X6g35vc+2MlMBqx0uM3bvHazzC09od6aQJKcTGaAobG90gTz6uEufsdU0fWYe5
- fcstpDE8rmu/2BIa6FN6FzKmE15bLaFzeZfhOfRZwB511bBJEqgSUG7/gk+fPoup6C5i
- o8kRQv4VvJ8MpY+VQ6ZzFrIz1bfyn5JbV320sFl7MzIE/ZMlfAth0e9q3mknStPVlnyr
- QYMOlAG/RGSGGJRDQ2NhliFzCM5XpbWxbTbkmBBpjSeJfOko3pUESLKegwAOvxL4CHlG
- /lkw==
+ bh=lPIFW+MIDvbZvhF0n5YdU4sfYa070860/v3aIWKALYk=;
+ b=ti+Akjqq06K2eRfwD+RhwdjW0d7O2TBinM4KupOdMKpH+vKSqaPM3Q4sG0feqM7Pfg
+ 2LYmoufeVH75VET57Sn+WSqN6I1wkdSv4BRe4E0kWGGknpHKDBanFZXrTEM628jux3mk
+ EDYRyYps2ftoGkJwbW9bkrsO+WVWvi1dtpY7TXlyOUPePWU/3ClcK4WZxdYyN6mFFVLI
+ yQoVdqDWNR96DQQAopzUgoxV/i4U8XpiOz0a9VNA+yBOlKCSU5LLcjkDrEZ0tHkyoW4P
+ opcs6y74ay1AmQNMiyBo/QBSfzOn0Y7f+XxduR+ynEL1VaOg8S7sKIULXhP/UXIkd/lI
+ uhdw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCX449Q0nGmw5+y7k5xdho3HMJswO18nGMrx9f5osOipihKXXHGkGAabLqusNGYI9s0TBQmKAwj/UvQV@nongnu.org
-X-Gm-Message-State: AOJu0YwaUuUeCyztSnRJ19lm17BNCSecZ0I2UGSN+zBU0g2m3/aeZ51W
- Z0Jt3m7V//BZiaCS6vSZcidKzu8nY62sFABD2K60ysCYXz+nqT9ikb6sYGSukm4=
-X-Gm-Gg: ASbGncu7UePX6FU98x62IqJxHacLQ51YHSEbPY8RvXMbqiJJ6TPRebTJQqpElumyFp9
- V3e5irtxhMbhfkxdr5J1cyYUVjUm3b/Frzlh+mvyHjXH6HpSjLD+7Fz2NzxIHNkufXVEf3GXNaU
- sQY/qsxOTYJ+f0lBCetpgqQxuzwPot2WvvQBaqorZimnnU7/ZWdKI41LxV0sueqXNjGE/JBZPNo
- u0E34FdUS4oH8+HFZwuOUarNwoxZ0BqvtOj8nVXPNTwNHJ/
-X-Google-Smtp-Source: AGHT+IGP6kebeC2LPTZKsaekqtLwTbMwJwKU++AiGWreRNT81i2UAyPKHUX6eLm0bHUzXeFOqlpubg==
-X-Received: by 2002:a5d:6c6d:0:b0:382:3afd:125d with SMTP id
- ffacd0b85a97d-38254b0422dmr5944667f8f.34.1732208787943; 
- Thu, 21 Nov 2024 09:06:27 -0800 (PST)
+ AJvYcCWIUrev0TxbtDnl01LdIo2MW0TcmJHjIdBvCLR2V9x1Deg9YqGIxXV7X1T7+Pwau+VTnhCrCbO7GYJO@nongnu.org
+X-Gm-Message-State: AOJu0YyPLn4oL58s/uHYnGtPevHUheuyejd0XYAixa11o7k3T9wlXPNP
+ 03e3N8digW4H0RvCuMXO1GscPdAfE/jyaz4gp7j3SCFOf+gek015+vh86qu8sZo=
+X-Gm-Gg: ASbGncsA4kQowNLwOmeigY0UIIl+l/MEiNGzQfcsYaQQ2aknuVyMrZvtN9Y/NMyzBPg
+ 837oNA8Sk1DCOoRa1fV7iTAYMqyDnAi9RCqZhYUbmi3lv60mpmyd1kN+jb7PyB8lWtMbvzqpzRG
+ k97G1otaQ7d8APxMcel6Vz0p+uhqbjgSHCktVcmLTTejGNAU2Hbe4Ly8QWVfx2rQGgtCiYtqNsE
+ Q3MHzfAqd4rAZz/Dhsu/mt9a2V21Njfdi904NpcNOnkUV3s
+X-Google-Smtp-Source: AGHT+IERjNcVY63Esz+m5ARC9qYMkrCrcDvhBkmECN98q+XaP8RU1AK9ROyMkEw7IhAPD3KpHAn5ZQ==
+X-Received: by 2002:a05:6000:154e:b0:382:542d:39ab with SMTP id
+ ffacd0b85a97d-38254adf714mr6452872f8f.3.1732208290915; 
+ Thu, 21 Nov 2024 08:58:10 -0800 (PST)
 Received: from draig.lan ([85.9.250.243]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3825fad627bsm56549f8f.12.2024.11.21.09.06.25
+ ffacd0b85a97d-3825fbc38afsm17867f8f.67.2024.11.21.08.58.08
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 21 Nov 2024 09:06:25 -0800 (PST)
+ Thu, 21 Nov 2024 08:58:08 -0800 (PST)
 Received: from draig.lan (localhost [IPv6:::1])
- by draig.lan (Postfix) with ESMTP id 13BE460406;
- Thu, 21 Nov 2024 16:58:08 +0000 (GMT)
+ by draig.lan (Postfix) with ESMTP id C8B1F5FA88;
+ Thu, 21 Nov 2024 16:58:06 +0000 (GMT)
 From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Peter Maydell <peter.maydell@linaro.org>,
@@ -95,18 +95,17 @@ Cc: Peter Maydell <peter.maydell@linaro.org>,
  Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
  Aurelien Jarno <aurelien@aurel32.net>, Ani Sinha <anisinha@redhat.com>,
  Alistair Francis <alistair.francis@wdc.com>
-Subject: [PATCH 18/39] tests/functional: avoid accessing log_filename on
- earlier failures
-Date: Thu, 21 Nov 2024 16:57:45 +0000
-Message-Id: <20241121165806.476008-19-alex.bennee@linaro.org>
+Subject: [PATCH 04/39] tests/functional: remove todo wrt avocado.utils.wait_for
+Date: Thu, 21 Nov 2024 16:57:31 +0000
+Message-Id: <20241121165806.476008-5-alex.bennee@linaro.org>
 X-Mailer: git-send-email 2.39.5
 In-Reply-To: <20241121165806.476008-1-alex.bennee@linaro.org>
 References: <20241121165806.476008-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::430;
- envelope-from=alex.bennee@linaro.org; helo=mail-wr1-x430.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::42f;
+ envelope-from=alex.bennee@linaro.org; helo=mail-wr1-x42f.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -131,41 +130,31 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 From: Daniel P. Berrangé <berrange@redhat.com>
 
-If a failure occurs early in the QemuBaseTest constructor, the
-'log_filename' object atttribute may not exist yet. This happens
-most notably if the QEMU_TEST_QEMU_BINARY is not set. We can't
-initialize 'log_filename' earlier as we use the binary to identify
-the architecture which is then used to build the path in which the
-logs are stored.
+We're not using avocado anymore, so while the TODO item is still
+relevant, suggesting use of avocado.utils is not.
 
+Reviewed-by: Alex Bennée <alex.bennee@linaro.org>
 Signed-off-by: Daniel P. Berrangé <berrange@redhat.com>
-Message-Id: <20241121154218.1423005-19-berrange@redhat.com>
+Message-Id: <20241121154218.1423005-5-berrange@redhat.com>
 Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
 ---
- tests/functional/qemu_test/testcase.py | 10 ++++++----
- 1 file changed, 6 insertions(+), 4 deletions(-)
+ tests/functional/test_m68k_nextcube.py | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
 
-diff --git a/tests/functional/qemu_test/testcase.py b/tests/functional/qemu_test/testcase.py
-index fceafb32b0..90ae59eb54 100644
---- a/tests/functional/qemu_test/testcase.py
-+++ b/tests/functional/qemu_test/testcase.py
-@@ -81,10 +81,12 @@ def main():
-         res = unittest.main(module = None, testRunner = tr, exit = False,
-                             argv=["__dummy__", path])
-         for (test, message) in res.result.errors + res.result.failures:
--            print('More information on ' + test.id() + ' could be found here:'
--                  '\n %s' % test.log_filename, file=sys.stderr)
--            if hasattr(test, 'console_log_name'):
--                print(' %s' % test.console_log_name, file=sys.stderr)
-+
-+            if hasattr(test, "log_filename"):
-+                print('More information on ' + test.id() + ' could be found here:'
-+                      '\n %s' % test.log_filename, file=sys.stderr)
-+                if hasattr(test, 'console_log_name'):
-+                    print(' %s' % test.console_log_name, file=sys.stderr)
-         sys.exit(not res.result.wasSuccessful())
+diff --git a/tests/functional/test_m68k_nextcube.py b/tests/functional/test_m68k_nextcube.py
+index 89385a134a..0124622c40 100755
+--- a/tests/functional/test_m68k_nextcube.py
++++ b/tests/functional/test_m68k_nextcube.py
+@@ -37,8 +37,7 @@ def check_bootrom_framebuffer(self, screenshot_path):
+         self.vm.launch()
  
+         self.log.info('VM launched, waiting for display')
+-        # TODO: Use avocado.utils.wait.wait_for to catch the
+-        #       'displaysurface_create 1120x832' trace-event.
++        # TODO: wait for the 'displaysurface_create 1120x832' trace-event.
+         time.sleep(2)
  
+         self.vm.cmd('human-monitor-command',
 -- 
 2.39.5
 
