@@ -4,80 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 835CCE64006
-	for <qemu-riscv@archiver.kernel.org>; Thu, 21 Nov 2024 19:04:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8486DE64006
+	for <qemu-riscv@archiver.kernel.org>; Thu, 21 Nov 2024 19:07:51 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tECTS-0007DD-SH; Thu, 21 Nov 2024 14:04:18 -0500
+	id 1tECWi-0001b5-Gs; Thu, 21 Nov 2024 14:07:40 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1tECTP-000708-Sg
- for qemu-riscv@nongnu.org; Thu, 21 Nov 2024 14:04:16 -0500
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
+ (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1tECWf-0001Zp-1g
+ for qemu-riscv@nongnu.org; Thu, 21 Nov 2024 14:07:37 -0500
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1tECTO-0007Lb-AO
- for qemu-riscv@nongnu.org; Thu, 21 Nov 2024 14:04:15 -0500
+ (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1tECWc-0000ln-BJ
+ for qemu-riscv@nongnu.org; Thu, 21 Nov 2024 14:07:36 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1732215852;
+ s=mimecast20190719; t=1732216052;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
- bh=bWYOm1YuZRGlW9g1Erx0N0dY58W3vi0hbMW4ZfJBLHM=;
- b=RmnqgEg+ZEPKCqgOsQPtHvkLAMHZenvwwljELjXJWhWHEQgzdTuUeZ6LjrfRW9OEqbHc08
- /Sd8/n7yTSx1zAZ6MxeeMVdS3i6VGsgJD2ojKufB4566Ovvypf/l+jRPkt4H9aWd7b6P/I
- +AeijjIgxe5qf4buSitp1g8G/pCqp3U=
-Received: from mail-ej1-f70.google.com (mail-ej1-f70.google.com
- [209.85.218.70]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=6HnTTX2x3OAGO1JYFH5rKkwCGYup3u65ReQ1R5rAqhk=;
+ b=d8iBU43MdQlggi+n6+uGql+r3ATwzPFh8El/SRv6e7AIPxjIVsLHwoVNCPCfWucXEjRU22
+ sEcaxKNda2kIdfy1j+3a8KWuWDvhaU5KhEzygVbiXr5CKPtmQpYZ5QyW0Vx0dbr8eCtQ7+
+ yCddTWj+t9jGkJuNXX0CPLGy8JPQywY=
+Received: from mail-lj1-f199.google.com (mail-lj1-f199.google.com
+ [209.85.208.199]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-259-q4vjuoTpMn67etszhGMd_w-1; Thu, 21 Nov 2024 14:04:11 -0500
-X-MC-Unique: q4vjuoTpMn67etszhGMd_w-1
-X-Mimecast-MFC-AGG-ID: q4vjuoTpMn67etszhGMd_w
-Received: by mail-ej1-f70.google.com with SMTP id
- a640c23a62f3a-a9a2ccb77ceso74226266b.2
- for <qemu-riscv@nongnu.org>; Thu, 21 Nov 2024 11:04:11 -0800 (PST)
+ us-mta-180-C-gui3wUPs6yz7RPg7oOxA-1; Thu, 21 Nov 2024 14:07:31 -0500
+X-MC-Unique: C-gui3wUPs6yz7RPg7oOxA-1
+X-Mimecast-MFC-AGG-ID: C-gui3wUPs6yz7RPg7oOxA
+Received: by mail-lj1-f199.google.com with SMTP id
+ 38308e7fff4ca-2fb5035169dso10212351fa.3
+ for <qemu-riscv@nongnu.org>; Thu, 21 Nov 2024 11:07:31 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732215850; x=1732820650;
+ d=1e100.net; s=20230601; t=1732216050; x=1732820850;
  h=content-transfer-encoding:in-reply-to:autocrypt:content-language
  :from:references:cc:to:subject:user-agent:mime-version:date
  :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=bWYOm1YuZRGlW9g1Erx0N0dY58W3vi0hbMW4ZfJBLHM=;
- b=fFXirwxJ8O7v3aq6ZjWDFfhfF2e7TSJoeDoaDK604pcU5xSNffL8cBX+Y0Bkmk48Sy
- 5aIdLvlaqZGOiMmyRkjmcshbX+xUm09uvw6SRpGJMEvpPIZATGicjvqhuRGqejUgKF8A
- pzXQJzhNHRgyWPOI61XsCGwOMtG69kRcTKcm1Yud78TdePzhNoNi/OZDXvmteX2gszK0
- cNG4pr92Uj6lvxemvRypshBcsU2YzBdWxFoBBukO1JwU9Jizin8MdccQjhU5rXyH+trZ
- ka3OrLtVKOyW11wNFyqOV5mxF8GP/gPPlWRHRuSSGOoNA6FO5PSeSw5l6rSZC01X43jK
- gevA==
+ bh=6HnTTX2x3OAGO1JYFH5rKkwCGYup3u65ReQ1R5rAqhk=;
+ b=qnxIiH7O8UIkicu0gCvCptfcfrxlq09C3AnRQTmeXagIG3Bx9i+1WI+x/fMQJyNeHS
+ yPqtH9ALFZyY5EZqQvBnFZUdTW/MOYix5U67jpFqeiKoxNjZAnmHYfHNfq78wz5nlhxp
+ 0xCwtRt6sca7eFS5h1MFp7tkm34kC1S/AYPDFmPLcMdaQLY8T1GqifdJIt9vdcPliMhF
+ +bUTdxyOiOlYEXvTMR8EN04H8S/ieHekwfaYW7zLBc5F6kwtspL665N5K/onTxTTmWQo
+ zfqMum8Fcf1Yw5hPWLpMTS1T/7FYzoh2mCCwhGsMAGnMR99vHLXK4va5iquBJrWSok/W
+ vTYA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWqX/FgAYIr/92O2mNpiZ/g/vvHnKxei5mlAeTw5ed8fDdbahFUyxG5rEgn0xti+OHA9OS69TJjZZg8@nongnu.org
-X-Gm-Message-State: AOJu0YyvyiZGr1JzrEl0I4JQCeXhMFtkD23XlbR/LeBg5PPn9TFVmDJH
- saZk8kpft8lKm5O6BCo5rdpzPgjUk1fJfdtxwkwu92dYhtLq3IOk99ZtFv6tLkymeuII0PNaziC
- AK5cdcc9HeNKCeAHfknFcZ55/Ebt/lypKJlDexhe6o9muBaOy1DSi
-X-Gm-Gg: ASbGnctTyajqwWDa3VRzigJ//RR1lb9DylXe3+l0i+GmS4bneaYkfol45Qq68PYez2H
- BItwZjpNNseO7HJpq0Mi3rpkUtRQy4xu1+aQmYwEiqo2l2/iXZPdAsR8w33zM3vs579kNMfK3Bi
- WA4kA9UdD5cpFl4u3KuSPr0ppWW+j7Wd+qog26WdE/Yu7aEpgI/CI1NEblPmj7uE8irQKO9tNdK
- G9xNNOz5L4gtfcUH555dbtz3rKdFz5/b4D+mihw+O8mpezMASqCBTeYPM+nyXtTAwQRiISY8GCq
- 2eE=
-X-Received: by 2002:a17:907:aa5:b0:a99:f167:47c7 with SMTP id
- a640c23a62f3a-aa509bca75fmr22739666b.55.1732215850098; 
- Thu, 21 Nov 2024 11:04:10 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IHdj/K15Lh23FRHIGOuvLMGI2lnY1GGg/E2LLjfKE70Jx4YrhIjVOCGVw58q4bUd9dXih167w==
-X-Received: by 2002:a17:907:aa5:b0:a99:f167:47c7 with SMTP id
- a640c23a62f3a-aa509bca75fmr22733966b.55.1732215849736; 
- Thu, 21 Nov 2024 11:04:09 -0800 (PST)
+ AJvYcCVcaew/622NtsmjCCnvvdvCfWJsUo4MWEviOJeZN8tZUWe2JymDkM4NfQsoCpxZ2VGjBgKyA0rOkCJy@nongnu.org
+X-Gm-Message-State: AOJu0Yx13nQCgux1juzcyGRIFaSMHnyEz3MD9Q/9HBX+bgy2ZgcxZtG8
+ OgiSbL9euy3J9QuadRjADG0lBv7odcoXc7W9I9TYY0N7dDXJmuv9Xk8p3BS5qQZwD8ShSD78qUw
+ 5yKWOzoQCW+qRC8pxM/KLMCdo24u9kugfoPqkJeSTcYkZ9ol368RY
+X-Gm-Gg: ASbGncvo49nlm9B2PPeDbfrubq/ccnzYB5at7JpGA68xkijo1+S4ecKc8B8ILQ3tWJL
+ bAigkR/IdJ2El5jTd88EsTVAUmA4u/6//C3L8L06ZE6QXN7/j2d/cisNi7Ehnn0Iynavh/KF3k+
+ UxWRFNxDl6ltmLAzdHIrkX8Z4cOfGUW31E+K1WGAuCj+qkNlsdHYv4nQuFIjm6fAo5uSZbrYmFa
+ 5y+rgghWWOw0t/VHuO8Exybq+UhdCZC387rDbMwhcjZCv1YApgbvx1ezEhMjxuG2FbKSBExzXWt
+ Wzo=
+X-Received: by 2002:a2e:bc02:0:b0:2fb:51a:d2a with SMTP id
+ 38308e7fff4ca-2ff8db311ccmr69166671fa.12.1732216049950; 
+ Thu, 21 Nov 2024 11:07:29 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IES0t4H6ztoKPpLnnZhL9buxpRYg+KpH3BBOSyI0qyqKSeTe+iSY4c2ArDb14jcXUMmbLFXEg==
+X-Received: by 2002:a2e:bc02:0:b0:2fb:51a:d2a with SMTP id
+ 38308e7fff4ca-2ff8db311ccmr69166311fa.12.1732216049498; 
+ Thu, 21 Nov 2024 11:07:29 -0800 (PST)
 Received: from [192.168.0.7] (ip-109-42-51-70.web.vodafone.de. [109.42.51.70])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-aa50b57beb4sm3909966b.151.2024.11.21.11.04.07
+ a640c23a62f3a-aa50b57bca2sm4186566b.143.2024.11.21.11.07.26
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 21 Nov 2024 11:04:09 -0800 (PST)
-Message-ID: <155840b0-d461-4699-aaa6-4b85e542281e@redhat.com>
-Date: Thu, 21 Nov 2024 20:04:06 +0100
+ Thu, 21 Nov 2024 11:07:29 -0800 (PST)
+Message-ID: <b2ba9b36-5971-4107-a6af-85b90ad18225@redhat.com>
+Date: Thu, 21 Nov 2024 20:07:26 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 13/39] tests/functional: don't try to wait for the empty
- string
+Subject: Re: [PATCH 23/39] tests/functional: add a m68k tuxrun tests
 To: =?UTF-8?Q?Alex_Benn=C3=A9e?= <alex.bennee@linaro.org>,
  qemu-devel@nongnu.org
 Cc: Peter Maydell <peter.maydell@linaro.org>,
@@ -104,9 +103,10 @@ Cc: Peter Maydell <peter.maydell@linaro.org>,
  Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
  Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
  Aurelien Jarno <aurelien@aurel32.net>, Ani Sinha <anisinha@redhat.com>,
- Alistair Francis <alistair.francis@wdc.com>
+ Alistair Francis <alistair.francis@wdc.com>,
+ Laurent Vivier <laurent@vivier.eu>, Anders Roxell <anders.roxell@linaro.org>
 References: <20241121165806.476008-1-alex.bennee@linaro.org>
- <20241121165806.476008-14-alex.bennee@linaro.org>
+ <20241121165806.476008-24-alex.bennee@linaro.org>
 From: Thomas Huth <thuth@redhat.com>
 Autocrypt: addr=thuth@redhat.com; keydata=
  xsFNBFH7eUwBEACzyOXKU+5Pcs6wNpKzrlJwzRl3VGZt95VCdb+FgoU9g11m7FWcOafrVRwU
@@ -150,21 +150,21 @@ Autocrypt: addr=thuth@redhat.com; keydata=
  oiT+z+/E59qj/EKfyce3sbC9XLjXv3mHMrq1tKX4G7IJGnS989E/fg6crv6NHae9Ckm7+lSs
  IQu4bBP2GxiRQ+NV3iV/KU3ebMRzqIC//DCOxzQNFNJAKldPe/bKZMCxEqtVoRkuJtNdp/5a
  yXFZ6TfE1hGKrDBYAm4vrnZ4CXFSBDllL59cFFOJCkn4Xboj/aVxxJxF30bn
-In-Reply-To: <20241121165806.476008-14-alex.bennee@linaro.org>
+In-Reply-To: <20241121165806.476008-24-alex.bennee@linaro.org>
 X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: PuaN0qKuDIrtvOYpKiSuYEFIoJ35qot3FkvtWIS-IxY_1732215850
+X-Mimecast-MFC-PROC-ID: x-d-rdkD19Q_4vlvbeFjkGpy4lYsPSYmBqoP1GqUWy0_1732216050
 X-Mimecast-Originator: redhat.com
 Content-Language: en-US
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=170.10.129.124; envelope-from=thuth@redhat.com;
+Received-SPF: pass client-ip=170.10.133.124; envelope-from=thuth@redhat.com;
  helo=us-smtp-delivery-124.mimecast.com
 X-Spam_score_int: -21
 X-Spam_score: -2.2
 X-Spam_bar: --
 X-Spam_report: (-2.2 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.14,
  DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H2=-0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H3=0.001, RCVD_IN_MSPIKE_WL=0.001,
  RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001, RCVD_IN_VALIDITY_SAFE_BLOCKED=0.001,
  SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
@@ -183,20 +183,20 @@ Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 On 21/11/2024 17.57, Alex Bennée wrote:
-> From: Daniel P. Berrangé <berrange@redhat.com>
+> We didn't have this before and as it exercises the m68k virt platform
+> it seems worth adding. We don't wait for the shutdown because QEMU
+> will auto-exit on the shutdown.
 > 
-> Telling exec_command_wand_wait_for_pattern to wait for the empty
-> string does not make any conceptual sense, as a check for empty
-> string will always succeed. It makes even less sense when followed
-> by a call to wait_for_console_pattern() with a real match.
-> 
-> Signed-off-by: Daniel P. Berrangé <berrange@redhat.com>
-> Message-Id: <20241121154218.1423005-14-berrange@redhat.com>
 > Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
+> Cc: Laurent Vivier <laurent@vivier.eu>
+> Cc: Anders Roxell <anders.roxell@linaro.org>
 > ---
->   tests/functional/test_virtio_gpu.py | 3 +--
->   1 file changed, 1 insertion(+), 2 deletions(-)
+>   tests/functional/meson.build         |  1 +
+>   tests/functional/test_m68k_tuxrun.py | 34 ++++++++++++++++++++++++++++
+>   2 files changed, 35 insertions(+)
+>   create mode 100644 tests/functional/test_m68k_tuxrun.py
 
+Nice!
 Reviewed-by: Thomas Huth <thuth@redhat.com>
 
 
