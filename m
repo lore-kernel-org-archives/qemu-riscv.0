@@ -4,88 +4,172 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3C17FE6400C
-	for <qemu-riscv@archiver.kernel.org>; Thu, 21 Nov 2024 19:54:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 28AFFE64012
+	for <qemu-riscv@archiver.kernel.org>; Thu, 21 Nov 2024 21:00:51 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tEDFp-0007xC-9j; Thu, 21 Nov 2024 14:54:17 -0500
+	id 1tEEI3-0005bl-NX; Thu, 21 Nov 2024 16:00:39 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <atishp@rivosinc.com>)
- id 1tEDFn-0007wu-Ll
- for qemu-riscv@nongnu.org; Thu, 21 Nov 2024 14:54:15 -0500
-Received: from mail-pf1-x435.google.com ([2607:f8b0:4864:20::435])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <atishp@rivosinc.com>)
- id 1tEDFl-0008Q5-H1
- for qemu-riscv@nongnu.org; Thu, 21 Nov 2024 14:54:15 -0500
-Received: by mail-pf1-x435.google.com with SMTP id
- d2e1a72fcca58-720cb6ac25aso1105440b3a.3
- for <qemu-riscv@nongnu.org>; Thu, 21 Nov 2024 11:54:12 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1732218851; x=1732823651;
- darn=nongnu.org; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=zI1mDY9U5PLx2jVo21zl0fti2fZEdZBz0xmbQGyiF8c=;
- b=oatXIjlEkT25QU2VoZt/HWbfskN8Q+hIoDdOY551Ap1eiWu6Dc3Tc3p/gL8ORCT3Ru
- CvUoYuygCoqMR0lwPD1+o+4zZadbRsnlaTfrjw+lQ3NJmhBqaixreveUjL8EUbcmYiGO
- YCAyb+lyRdI8xzxhTGl/NwjLXq4i3gncULMw3WH1gonSaFHwvYiolLqhm6v+8dy/g9UP
- ZJWcY4LUb0yG8Y8NXiUJo8rmCTs19/kAFmXukUWb3WB/mcRlc1DSkD3yCq7eeNpesRre
- qGe4Gm6JProyFk/LLT7y+aVlLk87xsBC1Z5cduaWG3ZmlgsMKPt7RIANl2hoDUsm2J/H
- FGng==
+ (Exim 4.90_1) (envelope-from <clg@redhat.com>) id 1tECSi-0005wE-V3
+ for qemu-riscv@nongnu.org; Thu, 21 Nov 2024 14:03:32 -0500
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <clg@redhat.com>) id 1tECSh-0007Bw-3r
+ for qemu-riscv@nongnu.org; Thu, 21 Nov 2024 14:03:32 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1732215810;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
+ bh=IWsjYsBnacBCJXffRg4TOMqxnT5yfzq3EAuSbjWJybI=;
+ b=S2CMvj0s8X81lgKQ6/C2SvCSeUgA8jIEeNToqh0fEbRk1f049g788QY02L1LxGZ1P8yuwa
+ AKU//oUip7/L6mPlZRmVOmXTVYqylMCGRjqoLUw+KAEABwwpUi0eRyssSTCD71EjVfoXg5
+ LRutkAIsQ9wp32Mqy0HN25bmPIt6mCM=
+Received: from mail-qk1-f198.google.com (mail-qk1-f198.google.com
+ [209.85.222.198]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-612-k-pcrlpTNgmhkDUdPgpfmA-1; Thu, 21 Nov 2024 14:03:29 -0500
+X-MC-Unique: k-pcrlpTNgmhkDUdPgpfmA-1
+X-Mimecast-MFC-AGG-ID: k-pcrlpTNgmhkDUdPgpfmA
+Received: by mail-qk1-f198.google.com with SMTP id
+ af79cd13be357-7b161d4c422so160419685a.0
+ for <qemu-riscv@nongnu.org>; Thu, 21 Nov 2024 11:03:29 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732218851; x=1732823651;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=zI1mDY9U5PLx2jVo21zl0fti2fZEdZBz0xmbQGyiF8c=;
- b=mFKE4StbYw70P01p37VrUzsF8QavGsyo+2jyB90nKXy090DH8UjEwuQncRW3eQaHin
- ZJwlLhyNu6X7W0DyQDE8/MhQf1w+VyxyVMDw6BWmEN3ACsw90B6tEJ519wEWvgeeB4Qa
- AGgpNXSxkUTLGxB/WmStVtO6p8MvoRGoi8tYbYRsMUTIWgcU1DF4A5HDY4UpGzbAuQji
- BFbOD+NArAjfFGZW8rfW7ssnec51PEs7NINsXU8zTfM58SMlBAm79yjAnlVWjWTm4dbz
- 6U6G3xXDtAaUNf2VaTWgxC4VP0/JtGsmmTXwkh4BICNV4Cx/0WghxE/s6nLrGLWYqR7h
- 8rAw==
-X-Gm-Message-State: AOJu0YxnqzruYqkTSQhgeTPa0caf0GNUym4S6JKDQKMHe/eHW5CsBVxy
- a/kCyK2Z6juLoO09T0az7XO7K/NPuV7272crgjdv69zZUg9TItM9dQAr8Ov8MKPxazG11Nmg+mC
- eEO4SGVIfdDk9uAfZkp0Lmg/Hymsb360cRDgp2w==
-X-Gm-Gg: ASbGncvBmuguqmTKumWWQnELWq2bCnWkRd67T/WC7eViKzrOiIdy6LZ0CkN83GxCVfn
- u7NhFVE6mgxg3vbPkghzm2uRgqbgm
-X-Google-Smtp-Source: AGHT+IGQB1Atgjlvrjg0mk1cr4DkB/pipTO6qelcCPJsyGhS/G/L0s/lVcSnqHDdnxzAABCPvSWAjMhR9D7aMRmTrBE=
-X-Received: by 2002:a05:6a00:3392:b0:724:6dd7:ca1d with SMTP id
- d2e1a72fcca58-724df72891bmr272732b3a.25.1732218851256; Thu, 21 Nov 2024
- 11:54:11 -0800 (PST)
+ d=1e100.net; s=20230601; t=1732215809; x=1732820609;
+ h=content-transfer-encoding:in-reply-to:autocrypt:from
+ :content-language:references:cc:to:subject:user-agent:mime-version
+ :date:message-id:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=IWsjYsBnacBCJXffRg4TOMqxnT5yfzq3EAuSbjWJybI=;
+ b=cWc08d04UGTiFtVlvIaXwYbKKzbVpjBM9AdFd3Ktp74LYuUwkNpJktc0nKWSs/428F
+ 3NOClTExuhl6ebfwmg9XQW5/XulurWseM3aor/LzTXo3H1zE2wnSbMYTIUWPbZ21jZ5t
+ 55PoPdIRVaAzUh5Z3gS6LLD0NMrGXkFw6gFDBE3OTusr4s6unUMxlXljqO4Yg6nBZRNQ
+ F9rl0VCmJopM3QQouD4O0pT9RNyG7er+s+CdCgdXFSENeupB8vkeqK/HqZxMsVencxRC
+ HqJpj13v7ZEHWRW3uoQbHmjXLa3KvV2U9DotqZprZah3wXCigCuMRaY2WZExz+3TnMyU
+ YMJA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXiits0ZF7Dsah1C75Hi9y/JIqJgU5RKy3FP3wenkYhPzU3ocmprOza8bi3bZJfxIoqv3fzJN51Ydlg@nongnu.org
+X-Gm-Message-State: AOJu0Yz8tyuRi5NkEMZDwkAFU2/r5xsH3GvdtZFhy62Yl7/Z9tS0waAw
+ s8LDQtmgGTpiM7QIco091OAZlz43JwJ4jP7HH6RZc8zULyB/9P3DwCgO6lxpOAimYdNQvncgv6R
+ Gt+/tt1Tx7QZv6sckX81d4bmWL/q0yIsfITMN8snH4vAQq0v0SBeH
+X-Gm-Gg: ASbGncv/qw00DK3Pb6xKTyHUBb1+yskYhG26erpB/kX7Smlh4UtGeJxp1vEM3dL/SxF
+ fOSGdLEDcO8qwb1O8I5a47Tr3B5U9JLjBxxFoWXAWwRVKw8C2UgtBFdxcJiXCZtuy+2rrtr3Gqa
+ XFeqnz3TQmZ45HWLB4pe4STIaiRF6gWDVfgGoN+GI9A3BGEU4jysZ8xILTgGqyFFA9ujdQBXOyz
+ INyjQd4odbh6mZgjuRN4XwEBJGngKm3KF2imMg1uRkxw7Kvm1ZQyy0QvgFaJER0RddgGHTZskRG
+ CQdkkzC70dgk
+X-Received: by 2002:a05:620a:1925:b0:7b1:ae59:47c4 with SMTP id
+ af79cd13be357-7b5144df608mr17488985a.2.1732215808814; 
+ Thu, 21 Nov 2024 11:03:28 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IFHtb9v2vjJD63fr4taaXeKiAOviSDKVTL8jg6v/Xw5SLj8/2qfvAfWXgmR+w0x3gyqzbFAmg==
+X-Received: by 2002:a05:620a:1925:b0:7b1:ae59:47c4 with SMTP id
+ af79cd13be357-7b5144df608mr17484785a.2.1732215808471; 
+ Thu, 21 Nov 2024 11:03:28 -0800 (PST)
+Received: from ?IPV6:2a01:e0a:280:24f0:9db0:474c:ff43:9f5c?
+ ([2a01:e0a:280:24f0:9db0:474c:ff43:9f5c])
+ by smtp.gmail.com with ESMTPSA id
+ af79cd13be357-7b51415286esm8565485a.101.2024.11.21.11.03.23
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 21 Nov 2024 11:03:27 -0800 (PST)
+Message-ID: <2b8f6079-f2ca-471f-8580-43352437625d@redhat.com>
+Date: Thu, 21 Nov 2024 20:03:20 +0100
 MIME-Version: 1.0
-References: <20241009-pmu_event_machine-v1-0-dcbd7a60e3ba@rivosinc.com>
- <20241009-pmu_event_machine-v1-6-dcbd7a60e3ba@rivosinc.com>
- <fd89dafa-279d-436c-9569-f2fdc289bac9@yadro.com>
- <CAHBxVyE2C3sRJNbLOwhOZCnXAUTsEdh-mCewVAEJDDAURL10ug@mail.gmail.com>
- <3B504AA0-06F9-4316-9B10-ED46B1B271A4@syntacore.com>
- <CAHBxVyER0Lxp0uwed7ANW6d6pD1gvSVQ8b245scd+tm7HpT9ag@mail.gmail.com>
- <0214DDE7-28F3-48C1-96ED-E700764D95D3@syntacore.com>
-In-Reply-To: <0214DDE7-28F3-48C1-96ED-E700764D95D3@syntacore.com>
-From: Atish Kumar Patra <atishp@rivosinc.com>
-Date: Thu, 21 Nov 2024 11:54:00 -0800
-Message-ID: <CAHBxVyGU1nbY5HC7dk4fhWNEJP8EPP-eNxhNU992usQi7Cim7w@mail.gmail.com>
-Subject: Re: [PATCH RFC 06/10] target/riscv: Define PMU event related
- structures
-To: Aleksei Filippov <alexei.filippov@syntacore.com>
-Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, palmer@dabbelt.com, 
- liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, bin.meng@windriver.com, 
- dbarboza@ventanamicro.com, alistair.francis@wdc.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::435;
- envelope-from=atishp@rivosinc.com; helo=mail-pf1-x435.google.com
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 00/39] maintainer updates for -rc2 pre-PR
+To: =?UTF-8?Q?Alex_Benn=C3=A9e?= <alex.bennee@linaro.org>,
+ qemu-devel@nongnu.org
+Cc: Peter Maydell <peter.maydell@linaro.org>,
+ =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
+ "Michael S. Tsirkin" <mst@redhat.com>,
+ Daniel Henrique Barboza <danielhb413@gmail.com>,
+ Pierrick Bouvier <pierrick.bouvier@linaro.org>,
+ Harsh Prateek Bora <harshpb@linux.ibm.com>,
+ Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
+ Jiaxun Yang <jiaxun.yang@flygoat.com>, Halil Pasic <pasic@linux.ibm.com>,
+ Christian Borntraeger <borntraeger@linux.ibm.com>, qemu-ppc@nongnu.org,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Alexandre Iooss <erdnaxe@crans.org>, qemu-riscv@nongnu.org,
+ Thomas Huth <huth@tuxfamily.org>, Bernhard Beschow <shentey@gmail.com>,
+ Thomas Huth <thuth@redhat.com>, Eric Farman <farman@linux.ibm.com>,
+ Bin Meng <bmeng.cn@gmail.com>, qemu-s390x@nongnu.org,
+ Niek Linnenbank <nieklinnenbank@gmail.com>, qemu-arm@nongnu.org,
+ John Snow <jsnow@redhat.com>,
+ Wainer dos Santos Moschetta <wainersm@redhat.com>,
+ Cleber Rosa <crosa@redhat.com>, qemu-rust@nongnu.org,
+ Nicholas Piggin <npiggin@gmail.com>, =?UTF-8?Q?Daniel_P=2E_Berrang=C3=A9?=
+ <berrange@redhat.com>, Palmer Dabbelt <palmer@dabbelt.com>,
+ Markus Armbruster <armbru@redhat.com>, Weiwei Li <liwei1518@gmail.com>,
+ Mahmoud Mandour <ma.mandourr@gmail.com>,
+ Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Aurelien Jarno <aurelien@aurel32.net>, Ani Sinha <anisinha@redhat.com>,
+ Alistair Francis <alistair.francis@wdc.com>
+References: <20241121165806.476008-1-alex.bennee@linaro.org>
+From: =?UTF-8?Q?C=C3=A9dric_Le_Goater?= <clg@redhat.com>
+Autocrypt: addr=clg@redhat.com; keydata=
+ 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
+ uVKe8BVz4atMOoktmt0GWTOC8P4=
+In-Reply-To: <20241121165806.476008-1-alex.bennee@linaro.org>
+X-Mimecast-Spam-Score: 0
+X-Mimecast-MFC-PROC-ID: y6GZB0GTxr45PYg_3OjbJFBGkW64lhnNAVz27aIjB28_1732215809
+X-Mimecast-Originator: redhat.com
+Content-Language: en-US, fr
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=170.10.133.124; envelope-from=clg@redhat.com;
+ helo=us-smtp-delivery-124.mimecast.com
+X-Spam_score_int: -21
+X-Spam_score: -2.2
+X-Spam_bar: --
+X-Spam_report: (-2.2 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.14,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H3=0.001, RCVD_IN_MSPIKE_WL=0.001,
+ RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001, RCVD_IN_VALIDITY_SAFE_BLOCKED=0.001,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
+X-Mailman-Approved-At: Thu, 21 Nov 2024 16:00:29 -0500
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -100,163 +184,48 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Wed, Nov 20, 2024 at 6:25=E2=80=AFAM Aleksei Filippov
-<alexei.filippov@syntacore.com> wrote:
->
->
->
-> > On 22 Oct 2024, at 15:58, Atish Kumar Patra <atishp@rivosinc.com> wrote=
-:
-> >
-> > On Mon, Oct 21, 2024 at 6:45=E2=80=AFAM Aleksei Filippov
-> > <alexei.filippov@syntacore.com> wrote:
-> >>
-> >>
-> >>
-> >>> On 11 Oct 2024, at 23:45, Atish Kumar Patra <atishp@rivosinc.com> wro=
-te:
-> >>>
-> >>> On Thu, Oct 10, 2024 at 5:44=E2=80=AFAM Alexei Filippov
-> >>> <alexei.filippov@yadro.com> wrote:
-> >>>>
-> >>>>
-> >>>>
-> >>>> On 10.10.2024 02:09, Atish Patra wrote:
-> >>>>> Signed-off-by: Atish Patra <atishp@rivosinc.com>
-> >>>>> ---
-> >>>>> target/riscv/cpu.h | 25 +++++++++++++++++++++++++
-> >>>>> 1 file changed, 25 insertions(+)
-> >>>>>
-> >>>>> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> >>>>> index 2ac391a7cf74..53426710f73e 100644
-> >>>>> --- a/target/riscv/cpu.h
-> >>>>> +++ b/target/riscv/cpu.h
-> >>>>> @@ -189,6 +189,28 @@ typedef struct PMUFixedCtrState {
-> >>>>>       uint64_t counter_virt_prev[2];
-> >>>>> } PMUFixedCtrState;
-> >>>>>
-> >>>>> +typedef uint64_t (*PMU_EVENT_CYCLE_FUNC)(RISCVCPU *);
-> >>>>> +typedef uint64_t (*PMU_EVENT_INSTRET_FUNC)(RISCVCPU *);
-> >>>>> +typedef uint64_t (*PMU_EVENT_TLB_FUNC)(RISCVCPU *, MMUAccessType a=
-ccess_type);
-> >>>>> +
-> >>>>> +typedef struct PMUEventInfo {
-> >>>>> +    /* Event ID (BIT [0:55] valid) */
-> >>>>> +    uint64_t event_id;
-> >>>>> +    /* Supported hpmcounters for this event */
-> >>>>> +    uint32_t counter_mask;
-> >>>>> +    /* Bitmask of valid event bits */
-> >>>>> +    uint64_t event_mask;
-> >>>>> +} PMUEventInfo;
-> >>>>> +
-> >>>>> +typedef struct PMUEventFunc {
-> >>>>> +    /* Get the ID of the event that can monitor cycles */
-> >>>>> +    PMU_EVENT_CYCLE_FUNC get_cycle_id;
-> >>>>> +    /* Get the ID of the event that can monitor cycles */
-> >>>>> +    PMU_EVENT_INSTRET_FUNC get_intstret_id;
-> >>>>> +    /* Get the ID of the event that can monitor TLB events*/
-> >>>>> +    PMU_EVENT_TLB_FUNC get_tlb_access_id;
-> >>>> Ok, this is kinda interesting decision, but it's not scalable. AFAIU
-> >>>
-> >>> Yes it is not scalable if there is a need to scale as mentioned earli=
-er.
-> >>> Do you have any other events that can be emulated in Qemu ?
-> >>>
-> >>> Having said that, I am okay with single call back though but not too =
-sure
-> >>> about read/write callback unless there is a use case to support those=
-.
-> >>>
-> >>>> none spec provide us full enum of existing events. So anytime when
-> >>>> somebody will try to implement their own pmu events they would have =
-to
-> >>>> add additional callbacks, and this structure never will be fulled
-> >>>> properly. And then we ended up with structure 1000+ callback with on=
-ly 5
-> >>>> machines wich supports pmu events. I suggest my approach with only
-> >>>> read/write callbacks, where machine can decide by itself how to hand=
-le
-> >>>> any of machine specific events.
-> >>>
-> >>> Lot of these events are microarchitectural events which can't be
-> >>> supported in Qemu.
-> >>> I don't think it's a good idea at all to add dummy values for all the
-> >>> events defined in a platform
-> >>> which is harder to debug for a user.
-> >>
-> >> Yes, you're right that the rest of the events are microarchitectural a=
-nd that they can't be properly simulated in QEMU at the moment, but it seem=
-s to me that's not really the point here. The point is how elastic this sol=
-ution can be - that is, whether to do any events or not and how exactly the=
-y should be counted should be decided by the vendor of a particular machine=
-, and not by the simulator in general. Plus, I have a very real use case wh=
-ere it will come in handy - debugging perf. Support the possibility of simu=
-lating events on QEMU side will make the life of t perf folks much easier. =
-I do not insist specifically on my implementation of this solution, but I t=
-hink that the solution with the creation of a callback for each of the even=
-ts will significantly complicate the porting of the PMU for machine vendors=
-.
-> >>>
-> >
-> > As I mentioned in other threads, I am absolutely okay with single call
-> > backs. So Let's do that. However, I am not in favor of adding
-> > microarchitectural events that we can't support in Qemu with
-> > completely bogus data. Debugging perf in Qemu can be easily done with
-> > the current set of events supported. Those are not the most accurate
-> > but it's a representation of what Qemu is running. Do you foresee any
-> > debugging issue if we don't support all the events a platform
-> > advertises ?
-> In general - there is only one potential problem. When perf would try to =
-get event by the wrong id. The main algorithm indeed could be tested with l=
-imited  quantities of events. But this
+Hello Alex,
 
-It won't get a wrong id as the Qemu platform won't support those.
-Hence, you can not run perf for those events to begin with.
+On 11/21/24 17:57, Alex Bennée wrote:
+> This is a mostly testing focused set of patches but a few bug fixes as
+> well. I plan to send the PR in on Monday. I can drop any patches that
+> are objected to but I think its pretty safe.
+> 
+> Contains:
+> 
+>    - Daniel's clean-up of functional tests
+>    - Another avocado->function conversion from Thomas
+>    - Update the tuxrun baseline images
+>    - Minor fix to the rust pl011 device
+>    - Documentation clarification on identity
+> 
+> The following could do with some review:
+> 
+>    tests/functional: update the x86_64 tuxrun tests
+>    tests/functional: update the sparc64 tuxrun tests
+>    tests/functional: update the s390x tuxrun tests
+>    tests/functional: update the riscv64 tuxrun tests
+>    tests/functional: update the riscv32 tuxrun tests
+>    tests/functional: update the ppc64 tuxrun tests
+>    tests/functional: update the ppc32 tuxrun tests
+>    tests/functional: update the mips64el tuxrun tests
+>    tests/functional: update the mips64 tuxrun tests
+>    tests/functional: update the mips32el tuxrun tests
+>    tests/functional: update the mips32 tuxrun tests
+>    tests/functional: add a m68k tuxrun tests
+>    tests/functional: update the i386 tuxrun tests
+>    tests/functional: update the aarch64 tuxrun tests
+>    tests/functional: update the arm tuxrun tests
+>    tests/functional: Convert the Avocado aarch64 tuxrun tests 
 
-> gonna be a real pain for the testers which gonna deduce and remember what=
- particular event can/can=E2=80=99t be counted in QEMU and why does he gets=
- 0 there and not 0 here. Moreover,
+Do you think we could include patches 2-4 from this series ?
 
-> perf list will show which events are supported on a particular platform. =
-So user won't be confused. We
+https://lore.kernel.org/all/20241112130246.970281-1-clg@redhat.com/
 
-> we would allow events with even complete bogus data this would works perf=
-ectly for CI stuff for the benchmark + perf ppl, and they wouldn=E2=80=99t =
-restrict their CI to that. I really do  not see
+Only patch 3 lacks a R-b.
 
-IMO, it is more confusing to show bogus data rather than restricting
-the number of events an user can run on Qemu platforms. Clearly, you
-think otherwise. I think we can agree to disagree here. Let's
-consolidate our patches to provide the infrastructure for the actual
-events. The bogus event support can be a separate series(per vendor)
-as that warrants a different discussion whether it is useful for users
-or not.
+Thanks,
 
-Sounds good ?
+C.
 
-any problem to let the vendor handle this situation. At least vendor
-can decide by his own to count/not to count some types of event, this
-gonna bring flexibility and the transparency of the solution and, in
-general, if we=E2=80=99ll bring some rational reason why we can't add such
-events we can always forbid to do such thing.
-> >
-> >>>
-> >>>>> +} PMUEventFunc;
-> >>>>> +
-> >>>>> struct CPUArchState {
-> >>>>>   target_ulong gpr[32];
-> >>>>>   target_ulong gprh[32]; /* 64 top bits of the 128-bit registers */
-> >>>>> @@ -386,6 +408,9 @@ struct CPUArchState {
-> >>>>>   target_ulong mhpmeventh_val[RV_MAX_MHPMEVENTS];
-> >>>>>
-> >>>>>   PMUFixedCtrState pmu_fixed_ctrs[2];
-> >>>>> +    PMUEventInfo *pmu_events;
-> >>>>> +    PMUEventFunc pmu_efuncs;
-> >>>>> +    int num_pmu_events;
-> >>>>>
-> >>>>>   target_ulong sscratch;
-> >>>>>   target_ulong mscratch;
-> >>
-> >>
->
 
