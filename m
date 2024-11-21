@@ -4,92 +4,115 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 53FEDD75BCE
-	for <qemu-riscv@archiver.kernel.org>; Thu, 21 Nov 2024 08:28:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3F771D78798
+	for <qemu-riscv@archiver.kernel.org>; Thu, 21 Nov 2024 16:58:37 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tE2YQ-0006ZY-3S; Thu, 21 Nov 2024 03:28:46 -0500
+	id 1tEAVU-0004TB-Lj; Thu, 21 Nov 2024 11:58:16 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <cleger@rivosinc.com>)
- id 1tE2YM-0006Yh-Bf
- for qemu-riscv@nongnu.org; Thu, 21 Nov 2024 03:28:43 -0500
-Received: from mail-pl1-x630.google.com ([2607:f8b0:4864:20::630])
+ (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
+ id 1tEAVS-0004Rc-Aq
+ for qemu-riscv@nongnu.org; Thu, 21 Nov 2024 11:58:14 -0500
+Received: from mail-wr1-x42c.google.com ([2a00:1450:4864:20::42c])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <cleger@rivosinc.com>)
- id 1tE2YH-0001ET-3m
- for qemu-riscv@nongnu.org; Thu, 21 Nov 2024 03:28:40 -0500
-Received: by mail-pl1-x630.google.com with SMTP id
- d9443c01a7336-212008b0d6eso4896885ad.3
- for <qemu-riscv@nongnu.org>; Thu, 21 Nov 2024 00:28:35 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
+ id 1tEAVO-0007yA-Rk
+ for qemu-riscv@nongnu.org; Thu, 21 Nov 2024 11:58:13 -0500
+Received: by mail-wr1-x42c.google.com with SMTP id
+ ffacd0b85a97d-38231f84dccso794463f8f.1
+ for <qemu-riscv@nongnu.org>; Thu, 21 Nov 2024 08:58:10 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1732177714; x=1732782514;
- darn=nongnu.org; 
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=wEAzB5w/3OA7NF7Hqpqy/b11ctKL3OKoyBZ8iw3s+lA=;
- b=sn97HHYF7SuDW7uQoYArxAVqKJPSisC5JVZvaoOkpAw7ivI1FMAC9X7pvETpwkdHiU
- memMVe2ZkWH5dGF2Gr8bdOrQLNpvjD3RqO4QF/9Y5Vl5zQUZK8ALwO0QiWCAJ+cYYkb4
- ZYllhm0Bf8ycMMY3tk4ZeX8clLSVaesOeoJnunnJYXqeSFThLCjw3DENi3rgww4LH30i
- B+xV7oHfqSBeDks8jaYdp6qEGTB4Wxa3zlEjfVi8opgUxT/9cwtkOOrBblxazOtxEqXJ
- V3SXiwFenFpEbWjGyhqvXWMOeZGv+qMjm55Ryz8F1mtaoRTylL144ydF++OcNqbKDIMf
- 5pCQ==
+ d=linaro.org; s=google; t=1732208289; x=1732813089; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=yY9M4nXaCJ2neB5ZRMCPvZw3DACi8uIco1VZWqAc51U=;
+ b=RVW+Sp+BhRGH1OLGo4Qvw8zhS01M8U8JnIsmK60orhZx5jryg3rXg+00/xiJTAyX3B
+ iV/cjhxcmuhI2Xefv77N/YTy7vgcMx4RKh6Ii3G1mdcEu6n9wLfcz9ZQ25sWhW6/LAMb
+ 7AAAxKRmHTD61LYr+PkHhOkLglqKfBE9/twfj60M+q+abWZnBW5VxiF1uRgFk/2BhI6H
+ ZNXSMjMsHjkqS/++j7XqRxaqkebpc32h/oN6tPW2FBHKNbfJ60Aw2RMPIUiozv3521Oa
+ LD+qNeEN1UP3E6y+RgG14Qj2mpM9PhwDt5M/rcmH9gdvlAhyNKz5iQ1agxm0ulcEqn9/
+ ec3Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732177714; x=1732782514;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=wEAzB5w/3OA7NF7Hqpqy/b11ctKL3OKoyBZ8iw3s+lA=;
- b=vML/XzYPGUF596rf8hFQ6RviPQkq7xCkOiRQBa0SPDKC8b5N8tgjEDHgMeGF3MOFwV
- PfSSGakXlmnHA66+WnSCktS7clOfhET19aO8cFK6RSFDshcA9qxVsiwAT1osLjhRgGdt
- wFf40xrbzUvWB2Qnv0+pdHnpWYYnOvpDrHG6YD4/ui9Fn9pnDwvKSdcrfTP9ZBmDG97C
- JyGN3mtOTa9uSVbKYUefnm1sArJXaIuRfI/E7URo0lAiSBVW4dfYvCsHjoCoG7biK7Kt
- IZv+wruyclrBbNu+ypEDf4TyIBvLEJ4Ilv146c5i9BQlPj7HG+w63KfUu2veOZM4pEsq
- AC1A==
-X-Gm-Message-State: AOJu0YzrofoNE+9O5S4sCa8pFNtBxpPhzrDg/PKJWJ1HPRUCTNFJOx2t
- tKEIItUr9xIr+XTphJqhaJit06jrfnnObExogcQYGzYdpALKzhchiZ78FEPIZt8=
-X-Google-Smtp-Source: AGHT+IGNcVPMoFib8tYF67AGtiVS+5VAHn1PnyO7fApvR/qz71LnHJpfcp7Losc6nR9q7uKjqDqn2g==
-X-Received: by 2002:a17:902:f651:b0:212:5786:7bbe with SMTP id
- d9443c01a7336-2126c15acd7mr81206245ad.24.1732177714004; 
- Thu, 21 Nov 2024 00:28:34 -0800 (PST)
-Received: from ?IPV6:2a01:e0a:e17:9700:16d2:7456:6634:9626?
- ([2a01:e0a:e17:9700:16d2:7456:6634:9626])
- by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-212883e42aesm8204645ad.222.2024.11.21.00.28.27
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 21 Nov 2024 00:28:33 -0800 (PST)
-Message-ID: <1868e353-6c40-4cfb-a00f-4afdde68baea@rivosinc.com>
-Date: Thu, 21 Nov 2024 09:28:20 +0100
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v5 1/9] target/riscv: fix henvcfg potentially containing
- stale bits
-To: Alistair Francis <alistair23@gmail.com>
-Cc: qemu-riscv@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>, Weiwei Li <liwei1518@gmail.com>,
+ d=1e100.net; s=20230601; t=1732208289; x=1732813089;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=yY9M4nXaCJ2neB5ZRMCPvZw3DACi8uIco1VZWqAc51U=;
+ b=Mz9ALBki7HshOtvzOx3Eh9uAA9NMCqQTQ/g0u0JTVYdH2NoLQCEXrrc1wXntnjOZI0
+ 1+bacre1k0SWZ9hsuFc8e5ycy6sqQ9e49PbpnLvq/VVn+dTLP43Q8HEAh+VoJZpY+Omg
+ 7ywU415pte1vEud+0b2dLWQDF4on9Zx/t+t+FD4mEo2sWp5YLaKMjXvfdRaq4V+hHzGP
+ ECmMthCt+f3Aqnybk7JcomvN4rqI/F+UmZYTCjFrboi1ufksxQ3iDw6R7SKKf2STeEhk
+ uGRzXIiPcT3hBkzhwVR46mp1XiPJN09XuK9dwuAOfjWarz8ddl7waw9I8aOlXIG5Q4a7
+ iIuw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCW4w8+0OyB9Y3mrf9XzfQGS4uZSmpLhpuog0zoywHDvvdFV9mWynFs6ck8yOeM+6s4c9j7TYxWFeqH7@nongnu.org
+X-Gm-Message-State: AOJu0Yx+mGE41+DbomcW0MV+qdZm2p+nlotaAxHwBamanyyY5hYAKkMI
+ n6LawPWaJD+Qj6/FpRDd5inQBdsDpivYwydfbYlqIl3J4XOhKBQZIwdNhb0zjTE=
+X-Gm-Gg: ASbGnctAtQvBxjfjnEolAaxDS1qARBXeCDU3Jsi4FghY8XPKF79UDigqxLt6FHoUn2f
+ yD8sfDdOtC1vlh3CY94yS2dYCCm4MeeVwEcKOJQG86i7x91l9s5vFTePcOWj4DER+udvQPLIcMa
+ XN4i1lZMCl5RgixK5kz9/Vl/fRB1rlDX3VaI+Zx1d1qhYnz3ImwMYHBnghhIGOsSS0y/hJCJf+S
+ KP6PosKod9nYSPDTfrQZkE1CZRL61OjLPcj88y+6u7U+Zk0
+X-Google-Smtp-Source: AGHT+IF8GSqlkmw1CWsVIpaNvgqu6+SlebdLtm04hJzKWCmEWIr+XGtZAqq/ZpdKEt5Zl9EyASIDSg==
+X-Received: by 2002:a05:6000:2c8:b0:37d:4389:e9de with SMTP id
+ ffacd0b85a97d-38254adecefmr6619313f8f.1.1732208289215; 
+ Thu, 21 Nov 2024 08:58:09 -0800 (PST)
+Received: from draig.lan ([85.9.250.243]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-3825fad5f59sm38965f8f.10.2024.11.21.08.58.07
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 21 Nov 2024 08:58:08 -0800 (PST)
+Received: from draig.lan (localhost [IPv6:::1])
+ by draig.lan (Postfix) with ESMTP id 9B2825F940;
+ Thu, 21 Nov 2024 16:58:06 +0000 (GMT)
+From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
+To: qemu-devel@nongnu.org
+Cc: Peter Maydell <peter.maydell@linaro.org>,
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
+ "Michael S. Tsirkin" <mst@redhat.com>,
+ Daniel Henrique Barboza <danielhb413@gmail.com>,
+ Pierrick Bouvier <pierrick.bouvier@linaro.org>,
+ Harsh Prateek Bora <harshpb@linux.ibm.com>,
+ Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
+ Jiaxun Yang <jiaxun.yang@flygoat.com>, Halil Pasic <pasic@linux.ibm.com>,
+ Christian Borntraeger <borntraeger@linux.ibm.com>, qemu-ppc@nongnu.org,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, Ved Shanbhogue
- <ved@rivosinc.com>, Atish Patra <atishp@rivosinc.com>, qemu-devel@nongnu.org
-References: <20241114091332.108811-1-cleger@rivosinc.com>
- <20241114091332.108811-2-cleger@rivosinc.com>
- <CAKmqyKO+v0AyvTER4a3JMzEN=b+NSa=BYdULt6=cGmmj46b_Jw@mail.gmail.com>
- <7c88eba0-c010-4aef-ad57-ede292129aff@rivosinc.com>
- <CAKmqyKMH_YAgomy325ZmpGCNkDMrb5pwJU9GBgNicFAsAc0J6A@mail.gmail.com>
-Content-Language: en-US
-From: =?UTF-8?B?Q2zDqW1lbnQgTMOpZ2Vy?= <cleger@rivosinc.com>
-In-Reply-To: <CAKmqyKMH_YAgomy325ZmpGCNkDMrb5pwJU9GBgNicFAsAc0J6A@mail.gmail.com>
+ Alexandre Iooss <erdnaxe@crans.org>, qemu-riscv@nongnu.org,
+ Thomas Huth <huth@tuxfamily.org>, Bernhard Beschow <shentey@gmail.com>,
+ Thomas Huth <thuth@redhat.com>, Eric Farman <farman@linux.ibm.com>,
+ Bin Meng <bmeng.cn@gmail.com>, qemu-s390x@nongnu.org,
+ Niek Linnenbank <nieklinnenbank@gmail.com>, qemu-arm@nongnu.org,
+ =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
+ John Snow <jsnow@redhat.com>,
+ Wainer dos Santos Moschetta <wainersm@redhat.com>,
+ Cleber Rosa <crosa@redhat.com>, qemu-rust@nongnu.org,
+ Nicholas Piggin <npiggin@gmail.com>,
+ =?UTF-8?q?Daniel=20P=2E=20Berrang=C3=A9?= <berrange@redhat.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>, Markus Armbruster <armbru@redhat.com>,
+ Weiwei Li <liwei1518@gmail.com>, Mahmoud Mandour <ma.mandourr@gmail.com>,
+ Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Aurelien Jarno <aurelien@aurel32.net>, Ani Sinha <anisinha@redhat.com>,
+ Alistair Francis <alistair.francis@wdc.com>
+Subject: [PATCH 02/39] tests/functional: automatically clean up scratch files
+ after tests
+Date: Thu, 21 Nov 2024 16:57:29 +0000
+Message-Id: <20241121165806.476008-3-alex.bennee@linaro.org>
+X-Mailer: git-send-email 2.39.5
+In-Reply-To: <20241121165806.476008-1-alex.bennee@linaro.org>
+References: <20241121165806.476008-1-alex.bennee@linaro.org>
+MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::630;
- envelope-from=cleger@rivosinc.com; helo=mail-pl1-x630.google.com
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+Received-SPF: pass client-ip=2a00:1450:4864:20::42c;
+ envelope-from=alex.bennee@linaro.org; helo=mail-wr1-x42c.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -106,205 +129,92 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
+From: Daniel P. Berrangé <berrange@redhat.com>
 
+The build/tests/functional subdirectories are consuming huge amounts
+of disk space.
 
-On 20/11/2024 06:02, Alistair Francis wrote:
-> On Tue, Nov 19, 2024 at 9:27 PM Clément Léger <cleger@rivosinc.com> wrote:
->>
->>
->>
->> On 19/11/2024 05:16, Alistair Francis wrote:
->>> On Thu, Nov 14, 2024 at 7:14 PM Clément Léger <cleger@rivosinc.com> wrote:
->>>>
->>>> With the current implementation, if we had the current scenario:
->>>> - set bit x in menvcfg
->>>> - set bit x in henvcfg
->>>> - clear bit x in menvcfg
->>>> then, the internal variable env->henvcfg would still contain bit x due
->>>> to both a wrong menvcfg mask used in write_henvcfg() as well as a
->>>> missing update of henvcfg upon menvcfg update.
->>>> This can lead to some wrong interpretation of the context. In order to
->>>> update henvcfg upon menvcfg writing, call write_henvcfg() after writing
->>>> menvcfg and fix the mask computation used in write_henvcfg() that is
->>>> used to mesk env->menvcfg value (which could still lead to some stale
->>>> bits). The same mechanism is also applied for henvcfgh writing.
->>>>
->>>> Signed-off-by: Clément Léger <cleger@rivosinc.com>
->>>> ---
->>>>  target/riscv/csr.c | 40 +++++++++++++++++++++++++++++++++++-----
->>>>  1 file changed, 35 insertions(+), 5 deletions(-)
->>>>
->>>> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
->>>> index b84b436151..73ac4d5449 100644
->>>> --- a/target/riscv/csr.c
->>>> +++ b/target/riscv/csr.c
->>>> @@ -2345,6 +2345,8 @@ static RISCVException read_menvcfg(CPURISCVState *env, int csrno,
->>>>      return RISCV_EXCP_NONE;
->>>>  }
->>>>
->>>> +static RISCVException write_henvcfg(CPURISCVState *env, int csrno,
->>>> +                                    target_ulong val);
->>>>  static RISCVException write_menvcfg(CPURISCVState *env, int csrno,
->>>>                                      target_ulong val)
->>>>  {
->>>> @@ -2357,6 +2359,7 @@ static RISCVException write_menvcfg(CPURISCVState *env, int csrno,
->>>>                  (cfg->ext_svadu ? MENVCFG_ADUE : 0);
->>>>      }
->>>>      env->menvcfg = (env->menvcfg & ~mask) | (val & mask);
->>>> +    write_henvcfg(env, CSR_HENVCFG, env->henvcfg);
->>>>
->>>>      return RISCV_EXCP_NONE;
->>>>  }
->>>> @@ -2368,6 +2371,8 @@ static RISCVException read_menvcfgh(CPURISCVState *env, int csrno,
->>>>      return RISCV_EXCP_NONE;
->>>>  }
->>>>
->>>> +static RISCVException write_henvcfgh(CPURISCVState *env, int csrno,
->>>> +                                    target_ulong val);
->>>>  static RISCVException write_menvcfgh(CPURISCVState *env, int csrno,
->>>>                                       target_ulong val)
->>>>  {
->>>> @@ -2378,6 +2383,7 @@ static RISCVException write_menvcfgh(CPURISCVState *env, int csrno,
->>>>      uint64_t valh = (uint64_t)val << 32;
->>>>
->>>>      env->menvcfg = (env->menvcfg & ~mask) | (valh & mask);
->>>> +    write_henvcfgh(env, CSR_HENVCFGH, env->henvcfg >> 32);
->>>>
->>>>      return RISCV_EXCP_NONE;
->>>>  }
->>>> @@ -2435,6 +2441,7 @@ static RISCVException write_henvcfg(CPURISCVState *env, int csrno,
->>>>                                      target_ulong val)
->>>>  {
->>>>      uint64_t mask = HENVCFG_FIOM | HENVCFG_CBIE | HENVCFG_CBCFE | HENVCFG_CBZE;
->>>> +    uint64_t henvcfg_mask = mask, menvcfg_mask;
->>>>      RISCVException ret;
->>>>
->>>>      ret = smstateen_acc_ok(env, 0, SMSTATEEN0_HSENVCFG);
->>>> @@ -2443,10 +2450,24 @@ static RISCVException write_henvcfg(CPURISCVState *env, int csrno,
->>>>      }
->>>>
->>>>      if (riscv_cpu_mxl(env) == MXL_RV64) {
->>>> -        mask |= env->menvcfg & (HENVCFG_PBMTE | HENVCFG_STCE | HENVCFG_ADUE);
->>>> +        /*
->>>> +         * Since henvcfg depends on a menvcfg subset, we want to clear all the
->>>> +         * menvcfg supported feature (whatever their state is) before enabling
->>>> +         * some new one using the provided value. Not doing so would result in
->>>> +         * keeping stale menvcfg bits in henvcfg value if a bit was enabled in
->>>> +         * menvcfg and then disabled before updating henvcfg for instance.
->>>> +         */
->>>> +        menvcfg_mask = HENVCFG_PBMTE | HENVCFG_STCE | HENVCFG_ADUE;
->>>> +        mask |= env->menvcfg & menvcfg_mask;
->>>> +        henvcfg_mask |= menvcfg_mask;
->>>>      }
->>>>
->>>> -    env->henvcfg = (env->henvcfg & ~mask) | (val & mask);
->>>> +    /*
->>>> +     * 'henvcfg_mask' contains all supported bits (both in henvcfg and menvcfg
->>>> +     * common bits) and 'mask' contains henvcfg exclusive bits as well as
->>>> +     * menvcfg enabled bits only.
->>>> +     */
->>>> +    env->henvcfg = (env->henvcfg & ~henvcfg_mask) | (val & mask);
->>>
->>> Won't `env->henvcfg & ~henvcfg_mask` still contain the stale data?
->>> `henvcfg_mask` isn't based on the current value of `env->menvcfg`
->>
->> Hey Alistair,
->>
->> That's the point, env->henvcfg is cleared with henvcfg_mask which
->> contains the set of HENVCFG_* and MENVCFG_* "raw" bits so that the new
->> value that is written does not contain any menvcfg stale bits. "mask"
->> however is actually masked with menvcfg value to ensure the new bits
->> that are going to be written won't contain any incoherent bits.
-> 
-> I'm not sure I follow...
-> 
-> The commit message says:
-> 
-> """
-> - set bit x in menvcfg
-> - set bit x in henvcfg
-> - clear bit x in menvcfg
-> """
-> 
-> Which to me means henvcfg should be cleared when a bit in menvcfg is
-> cleared. But env->henvcfg is instead cleared based on `henvcfg_mask`
-> which isn't affected by menvcfg.
+Split the location for scratch files into a 'scratch' sub-directory,
+separate from log files, and delete it upon completion of each test.
+The new env variable QEMU_TEST_KEEP_SCRATCH can be set to preserve
+this scratch dir for debugging access if required.
 
-Hey Alistair,
+Reviewed-by: Alex Bennée <alex.bennee@linaro.org>
+Signed-off-by: Daniel P. Berrangé <berrange@redhat.com>
+Message-Id: <20241121154218.1423005-3-berrange@redhat.com>
+Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
+---
+ docs/devel/testing/functional.rst      |  6 ++++++
+ tests/functional/qemu_test/testcase.py | 14 +++++++++-----
+ 2 files changed, 15 insertions(+), 5 deletions(-)
 
-Let's take some real example (MENVCFG_PBMTE for instance.) Let's assume
-menvcfg/henvcfg are 0 and the following sequence:
-
-- Set MENVCFG_PBMTE in menvcfg (menvcfg = MENVCFG_PBMTE)
-- Set HENVCFG_PBMTE in henvcfg (henvcfg = HENVCFG_PBMTE)
-- Clear MENVCFG_PBMTE in menvcfg (menvcfg = 0)
-
-On such sequence, we should clear HENVCFG_PBMTE in henvcfg. When using
-the existing code, henvcfg_write() does so:
-
-mask = HENVCFG_FIOM | HENVCFG_CBIE | HENVCFG_CBCFE | HENVCFG_CBZE;
-mask |= env->menvcfg & (HENVCFG_PBMTE | HENVCFG_STCE | HENVCFG_ADUE);
-
-So our mask = (HENVCFG_FIOM | HENVCFG_CBIE | HENVCFG_CBCFE |
-HENVCFG_CBZE) and does not contains HENVCFG_PBMTE.
-
-Finally:
-
-env->henvcfg = (env->henvcfg & ~mask) | (val & mask);
-
-Then env->henvcfg & ~(HENVCFG_FIOM | HENVCFG_CBIE | HENVCFG_CBCFE |
-HENVCFG_CBZE | HENVCFG_STCE | HENVCFG_ADUE) will yield henvcfg =
-HENVCFG_PBMTE (which is obviously not what we want) | val & mask.
-
-> 
-> So clearing a bit in menvcfg will only not allow a bit to be set, but
-> not clear any existing bits
-
-Let's take again the current patch and what it does with the same sequence:
-
-- Set MENVCFG_PBMTE in menvcfg (menvcfg = MENVCFG_PBMTE)
-- Set HENVCFG_PBMTE in henvcfg (henvcfg = HENVCFG_PBMTE)
-- Clear MENVCFG_PBMTE in menvcfg (menvcfg = 0)
-
-henvcfg_mask = HENVCFG_FIOM | HENVCFG_CBIE | HENVCFG_CBCFE | HENVCFG_CBZE;
-mask = HENVCFG_FIOM | HENVCFG_CBIE | HENVCFG_CBCFE | HENVCFG_CBZE;
-
-henvcfg_mask |= (HENVCFG_PBMTE | HENVCFG_STCE | HENVCFG_ADUE);
-/* Only keep the enabled bits from menvcfg */
-mask |= env->menvcfg & (HENVCFG_PBMTE | HENVCFG_STCE | HENVCFG_ADUE);
-
-So mask = (HENVCFG_FIOM | HENVCFG_CBIE | HENVCFG_CBCFE | HENVCFG_CBZE)
-which rightfully does not contain HENVCFG_PBMTE so the value to be
-written will be  correctly cleared from that bit.
-
-Finally, when it comes to write the final value we'll have the following:
-
-env->henvcfg = (env->henvcfg & ~henvcfg_mask) | (val & mask);
-
-Which yield
-
-henvcfg & ~(HENVCFG_FIOM | HENVCFG_CBIE | HENVCFG_CBCFE | HENVCFG_CBZE |
-HENVCFG_PBMTE | HENVCFG_STCE | HENVCFG_ADUE) | val & (HENVCFG_FIOM |
-HENVCFG_CBIE | HENVCFG_CBCFE | HENVCFG_CBZE | HENVCFG_STCE | HENVCFG_ADUE)
-
-So henvcfg HENVCFG_PBMTE bit is correctly cleared and not allowed to be
-set by the written value. But I might be missing something.
-
-Thanks,
-
-Clément
-
-> 
-> Alistair
-> 
->>
->> I guess this still needs a few more explanations if that is not clear
->> enough, sorry for that.
->>
->> Thanks,
->>
->> Clément
->>>
->>> Alistair
+diff --git a/docs/devel/testing/functional.rst b/docs/devel/testing/functional.rst
+index bf6f1bb81e..6b5d0c5b98 100644
+--- a/docs/devel/testing/functional.rst
++++ b/docs/devel/testing/functional.rst
+@@ -65,6 +65,12 @@ to the QEMU binary that should be used for the test, for example::
+   $ export QEMU_TEST_QEMU_BINARY=$PWD/qemu-system-x86_64
+   $ python3 ../tests/functional/test_file.py
+ 
++The test framework will automatically purge any scratch files created during
++the tests. If needing to debug a failed test, it is possible to keep these
++files around on disk by setting ```QEMU_TEST_KEEP_SCRATCH=1``` as an env
++variable.  Any preserved files will be deleted the next time the test is run
++without this variable set.
++
+ Overview
+ --------
+ 
+diff --git a/tests/functional/qemu_test/testcase.py b/tests/functional/qemu_test/testcase.py
+index 411978b5ef..b9418e2ac0 100644
+--- a/tests/functional/qemu_test/testcase.py
++++ b/tests/functional/qemu_test/testcase.py
+@@ -13,8 +13,9 @@
+ 
+ import logging
+ import os
+-import subprocess
+ import pycotap
++import shutil
++import subprocess
+ import sys
+ import unittest
+ import uuid
+@@ -40,11 +41,12 @@ def setUp(self, bin_prefix):
+         self.assertIsNotNone(self.qemu_bin, 'QEMU_TEST_QEMU_BINARY must be set')
+         self.arch = self.qemu_bin.split('-')[-1]
+ 
+-        self.workdir = os.path.join(BUILD_DIR, 'tests/functional', self.arch,
+-                                    self.id())
++        self.outputdir = os.path.join(BUILD_DIR, 'tests', 'functional',
++                                      self.arch, self.id())
++        self.workdir = os.path.join(self.outputdir, 'scratch')
+         os.makedirs(self.workdir, exist_ok=True)
+ 
+-        self.logdir = self.workdir
++        self.logdir = self.outputdir
+         self.log_filename = os.path.join(self.logdir, 'base.log')
+         self.log = logging.getLogger('qemu-test')
+         self.log.setLevel(logging.DEBUG)
+@@ -56,6 +58,8 @@ def setUp(self, bin_prefix):
+         self.log.addHandler(self._log_fh)
+ 
+     def tearDown(self):
++        if "QEMU_TEST_KEEP_SCRATCH" not in os.environ:
++            shutil.rmtree(self.workdir)
+         self.log.removeHandler(self._log_fh)
+ 
+     def main():
+@@ -108,7 +112,7 @@ def setUp(self):
+ 
+         console_log = logging.getLogger('console')
+         console_log.setLevel(logging.DEBUG)
+-        self.console_log_name = os.path.join(self.workdir, 'console.log')
++        self.console_log_name = os.path.join(self.logdir, 'console.log')
+         self._console_log_fh = logging.FileHandler(self.console_log_name,
+                                                    mode='w')
+         self._console_log_fh.setLevel(logging.DEBUG)
+-- 
+2.39.5
 
 
