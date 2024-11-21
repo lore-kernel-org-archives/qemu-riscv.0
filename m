@@ -4,68 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 43E89D78799
-	for <qemu-riscv@archiver.kernel.org>; Thu, 21 Nov 2024 17:01:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1C2E3D78799
+	for <qemu-riscv@archiver.kernel.org>; Thu, 21 Nov 2024 17:02:58 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tEAWT-0005mu-BP; Thu, 21 Nov 2024 11:59:17 -0500
+	id 1tEAWR-0005ex-QS; Thu, 21 Nov 2024 11:59:15 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1tEAW3-0004xe-0N
- for qemu-riscv@nongnu.org; Thu, 21 Nov 2024 11:58:52 -0500
-Received: from mail-wm1-x329.google.com ([2a00:1450:4864:20::329])
+ id 1tEAVq-0004o9-U7
+ for qemu-riscv@nongnu.org; Thu, 21 Nov 2024 11:58:39 -0500
+Received: from mail-wm1-x32e.google.com ([2a00:1450:4864:20::32e])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1tEAVa-00087v-H3
- for qemu-riscv@nongnu.org; Thu, 21 Nov 2024 11:58:47 -0500
-Received: by mail-wm1-x329.google.com with SMTP id
- 5b1f17b1804b1-43162cf1eaaso13465245e9.0
- for <qemu-riscv@nongnu.org>; Thu, 21 Nov 2024 08:58:21 -0800 (PST)
+ id 1tEAVX-00085R-6q
+ for qemu-riscv@nongnu.org; Thu, 21 Nov 2024 11:58:38 -0500
+Received: by mail-wm1-x32e.google.com with SMTP id
+ 5b1f17b1804b1-431ac30d379so9987355e9.1
+ for <qemu-riscv@nongnu.org>; Thu, 21 Nov 2024 08:58:18 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1732208300; x=1732813100; darn=nongnu.org;
+ d=linaro.org; s=google; t=1732208297; x=1732813097; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=O5sQx390WX16rPflQuG3fyG6MjkwMEEP336vMFADYxQ=;
- b=Hx3hoKQPrKAAoMuIOAFw9kY/cLrwerCMRpc/3QQMpQxRQgqV/QzWtR1qnkCOz3qOe9
- yapgCs93EnOqH4bsakisVkA2l/jS0xKQrQqZvzDvQr4gXZQt12SU+/1sssyN3i/Lg3ws
- LlEdBOAlB4yh3niXPWjskp6JCFwD1gvk46TKjjx6lw7P9IlOD+QwaskY9g9DfYcN9A4n
- GgHijXXAAyxLUfRbDtIVlTUp0+5SZItUBTU9I5B42mwuCN776vXFTnS6baIB6q9TSDPL
- sAgrRWu5aPjeVgplJ9IRuNfLwCdaLw5Ia6lNnNmxs4f2GFjMowJzXYBOW0GYSW2PKMuO
- w0zA==
+ bh=nvB0S+SuI5gT8c9EFIym95gTJAjNroOOQ4+Yq08R388=;
+ b=xo9Kdtktd9NXpw6xO/IyMs45YoVfmkzxkTq3+0KmHFOV62FEJ/XaWtM02xCvNFFBTL
+ 8Kdt7rxrW2UsfCUzJ7uUvAcAXJkAc9YKlToGVXooqnTZlVzc2hefYpNrDa3gUKU3pT7N
+ BGUNoaSsRuUQ/ONp4t6fCNlvtWSHoECFegrScaaZDxNhqRTdZKvz3I+6B0Kf7fwXbnte
+ iE3sg4OfVDAMOP0rpchUwuD1LbZzSY+mXaFagJz1mLZYtP9/Dv1/eEJdMlCrgBi9u3mI
+ ox79p4phw9Is1OLsJEx48sOu8IP9bB6PBjmtZtnbDRmRaNiEyRVgvd1aFzdSu52uZuiy
+ Iysw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732208300; x=1732813100;
+ d=1e100.net; s=20230601; t=1732208297; x=1732813097;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=O5sQx390WX16rPflQuG3fyG6MjkwMEEP336vMFADYxQ=;
- b=n9Qje5ve4PAO1v5fKVXKWYOimxHBqOtzE+nJVk/cAPt+kl32rO9JOVbk8W2vVS0e6D
- ZvPZVCBUYoa7/4ziOKoe8eYYMks+T/YcHSg4yrxZVOOvYl3tXKpYSs36YViGEczyTm5B
- AThDhi+mX137izTuvwmHu5XuWd8KTOcLslhqUHds9UYI8Z1ac/BaALjBoK3hRubEJLZ0
- mKSM1Fh5xjxDreOecRw1w2eNRjZdW8Rdz4wTlAbZMdYibYqn5hBmZTt1sGBSi3DiCUZ2
- YAZTT4ROcz5d7AQKwCv/aF8UsaoHY2eyJwbKF3PjuSeoIhLshi8qy6rLr/ZrMg1xdiBH
- EItA==
+ bh=nvB0S+SuI5gT8c9EFIym95gTJAjNroOOQ4+Yq08R388=;
+ b=hj0WrL+9PBi/uySPrai0w1MpMCDCQ60ds/5J8KgXdLpWApKFuwBjAyYVFrrbdz7o3c
+ YkadLGpK2ZY4KFJDqi08XPBjz/a1Ro0sTsOJ97fiuHWIVPhtWsY1zKi2AIOl51pTL3sb
+ IKrvX/3G+VyetgWZ3qea/YsY1+7nwqRHOUyF5J2JMdcfrUMR99NsUMsRK9RnxeHUNr75
+ CPsAmpiSSsIpKUGo4DVquHz5enddpnZgqHbnVH0q2oumPRRrxEmGI/smiZfUYKixPuvv
+ Z+T4GG1vVKISFJ55x55NqUa8YofrLdw6V1/Ubh6cY8fUhPDeEc9qxVYiUE5a2IiLqxF/
+ IVqw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCV7I/bo20hlVYIlY0ZQZZfu39+UkXoenZinX0TpiV7oZLMiGKpEbHg7nSvtr9LHYxVplchKGhwRC81h@nongnu.org
-X-Gm-Message-State: AOJu0YyIrSeKbL6Vt10mfQUO4UDPR8HHcogHAJgCqcZk+eOWk/8EZzxi
- KzKikep9MXtO1UE0y5KCcMywDHEPkWIeZGLiDTLLZvL5w8QCiwCIRrtMWN0+gIc=
-X-Gm-Gg: ASbGncuZ3tLG2R1hy8hWfX6gQyHn4tHB2P0Et0PIgN3Jf8H5txwi21LyI6zVkC+pa7x
- oR95y9PJyCiwW7T7kyjFDB74Blq8s7Esf9dIf2dMt1ZMgEmtUXhYRp78k9uB7CMuZ3jK3ryLAjl
- AbNyPPE8jgjkMFDbEs/7oXmVyw2brlKpdcGnwmFWZ0coqP3f046/vpSa/9HLSAlA5N5LiKaL+Qa
- 1ha9V6KAo7gNo8Zi2N7e4UvncnWlgBPs+WRWNd2BMTzgPQf
-X-Google-Smtp-Source: AGHT+IFfOxCiQV45h8DxYrwdRyuAkAKBudFuCE/1IvOgdFqlvwf/mDBmijE50A4pf0QU6/MMcK1u6g==
-X-Received: by 2002:a05:600c:3514:b0:431:9a26:3cf6 with SMTP id
- 5b1f17b1804b1-43348981878mr80506225e9.4.1732208298915; 
- Thu, 21 Nov 2024 08:58:18 -0800 (PST)
+ AJvYcCU7u3QURrlHiXMOnq2GqY8Oz8Mp+maaSQLukY4bv6mRaailqKafNMyl4fw/iVX1hNYEK6bGEZTXc0je@nongnu.org
+X-Gm-Message-State: AOJu0YwNYmt3c6CsiDv9vyAe6MZS7Wp6Kfy6SPCGRz+TjNUlZtS98xiC
+ yURYBa16UeQIJN1L5zsaw5eCEAo1I00RAbDwE+9CjUnAaymiuxKKKr4CnRDijnc=
+X-Gm-Gg: ASbGnctuFxi153KqhtENGneHuBKSIsb029qciX2DGGnMRRjFb0gY5bYY3BeSeB2CnlU
+ aMi/aGHwKGGdN1eW2WRhVbgpEtcU60YcxgtfJ3ZMsNJ1epmIAlHZkGADZ6xJevasMJsKlCj5B9C
+ ID9/d6WA093+uqKGJFgw7+2aIL69UCrHn8xBbJz6PvKv6RoZMqIh4MdciJCPujVvENK5l8mUMz7
+ 0C6gXxtj/ROedqMKYUTrlzX1769fMKDTmVqKzV0TuxjG/4F
+X-Google-Smtp-Source: AGHT+IHQjeBVkEQyiDQNZ18M0mfYWvrNmDsPSaNfb+Oc21EWZo3NcDg7uEMtXkjcsrBIT2YzsHGzQQ==
+X-Received: by 2002:a05:6000:178e:b0:382:424:94fe with SMTP id
+ ffacd0b85a97d-38254b15734mr6840684f8f.36.1732208297548; 
+ Thu, 21 Nov 2024 08:58:17 -0800 (PST)
 Received: from draig.lan ([85.9.250.243]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-433b45d17e3sm64258435e9.5.2024.11.21.08.58.15
+ ffacd0b85a97d-3825fbedfccsm14917f8f.101.2024.11.21.08.58.11
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 21 Nov 2024 08:58:18 -0800 (PST)
+ Thu, 21 Nov 2024 08:58:14 -0800 (PST)
 Received: from draig.lan (localhost [IPv6:::1])
- by draig.lan (Postfix) with ESMTP id B509B604F0;
- Thu, 21 Nov 2024 16:58:09 +0000 (GMT)
+ by draig.lan (Postfix) with ESMTP id B718F603D3;
+ Thu, 21 Nov 2024 16:58:07 +0000 (GMT)
 From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Peter Maydell <peter.maydell@linaro.org>,
@@ -95,24 +95,25 @@ Cc: Peter Maydell <peter.maydell@linaro.org>,
  Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
  Aurelien Jarno <aurelien@aurel32.net>, Ani Sinha <anisinha@redhat.com>,
  Alistair Francis <alistair.francis@wdc.com>
-Subject: [PATCH 36/39] plugins: detect qemu plugin API symbols from header
-Date: Thu, 21 Nov 2024 16:58:03 +0000
-Message-Id: <20241121165806.476008-37-alex.bennee@linaro.org>
+Subject: [PATCH 14/39] tests/functional: require non-NULL success_message for
+ console wait
+Date: Thu, 21 Nov 2024 16:57:41 +0000
+Message-Id: <20241121165806.476008-15-alex.bennee@linaro.org>
 X-Mailer: git-send-email 2.39.5
 In-Reply-To: <20241121165806.476008-1-alex.bennee@linaro.org>
 References: <20241121165806.476008-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::329;
- envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x329.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::32e;
+ envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x32e.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -128,126 +129,83 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Pierrick Bouvier <pierrick.bouvier@linaro.org>
+From: Daniel P. Berrangé <berrange@redhat.com>
 
-Instead of using a static file (error prone and hard to keep in sync),
-we generate it using a script.
+When waiting for expected output, the 'success_message' is a mandatory
+parameter, with 'failure_message' defaulting to None.
 
-Note: if a symbol is not exported, we'll now notice it when linking for
-Windows/MacOS platforms.
+The code has logic which indicates it was trying to cope with
+'success_message' being None and 'failure_message' being non-None but
+it does not appear able to actually do anything useful. The check for
+'success_message is None' will break out of the loop before any check
+for 'failure_message' has been performed.
 
-Signed-off-by: Pierrick Bouvier <pierrick.bouvier@linaro.org>
-Message-Id: <20241112212622.3590693-3-pierrick.bouvier@linaro.org>
+IOW, for practcal purposes 'success_message' must be non-None unless
+'send_string' is set. Assert this expectation and simplify the loop
+logic.
+
+Signed-off-by: Daniel P. Berrangé <berrange@redhat.com>
+Message-Id: <20241121154218.1423005-15-berrange@redhat.com>
 Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
 ---
- MAINTAINERS                    |  1 +
- plugins/meson.build            | 12 ++++++---
- scripts/qemu-plugin-symbols.py | 45 ++++++++++++++++++++++++++++++++++
- 3 files changed, 55 insertions(+), 3 deletions(-)
- create mode 100755 scripts/qemu-plugin-symbols.py
+ tests/functional/qemu_test/cmd.py | 9 +++++++--
+ 1 file changed, 7 insertions(+), 2 deletions(-)
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index eb7149bf1a..2b1c4abed6 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -3752,6 +3752,7 @@ F: plugins/
- F: tests/tcg/plugins/
- F: tests/functional/test_aarch64_tcg_plugins.py
- F: contrib/plugins/
-+F: scripts/qemu-plugin-symbols.py
+diff --git a/tests/functional/qemu_test/cmd.py b/tests/functional/qemu_test/cmd.py
+index 98722a9cf6..f6c4e4dda1 100644
+--- a/tests/functional/qemu_test/cmd.py
++++ b/tests/functional/qemu_test/cmd.py
+@@ -81,6 +81,8 @@ def is_readable_executable_file(path):
+ def _console_interaction(test, success_message, failure_message,
+                          send_string, keep_sending=False, vm=None):
+     assert not keep_sending or send_string
++    assert success_message or send_string
++
+     if vm is None:
+         vm = test.vm
+     console = vm.console_file
+@@ -95,7 +97,7 @@ def _console_interaction(test, success_message, failure_message,
+                 send_string = None # send only once
  
- AArch64 TCG target
- M: Richard Henderson <richard.henderson@linaro.org>
-diff --git a/plugins/meson.build b/plugins/meson.build
-index 1cc039d29b..98542e926f 100644
---- a/plugins/meson.build
-+++ b/plugins/meson.build
-@@ -2,17 +2,23 @@ if not get_option('plugins')
-   subdir_done()
- endif
+         # Only consume console output if waiting for something
+-        if success_message is None and failure_message is None:
++        if success_message is None:
+             if send_string is None:
+                 break
+             continue
+@@ -107,7 +109,7 @@ def _console_interaction(test, success_message, failure_message,
+         if not msg:
+             continue
+         console_logger.debug(msg)
+-        if success_message is None or success_message in msg:
++        if success_message in msg:
+             break
+         if failure_message and failure_message in msg:
+             console.close()
+@@ -138,6 +140,7 @@ def interrupt_interactive_console_until_pattern(test, success_message,
+     :param interrupt_string: a string to send to the console before trying
+                              to read a new line
+     """
++    assert success_message
+     _console_interaction(test, success_message, failure_message,
+                          interrupt_string, True)
  
-+qemu_plugin_symbols = configure_file(
-+  input: files('../include/qemu/qemu-plugin.h'),
-+  output: 'qemu-plugin.symbols',
-+  capture: true,
-+  command: [files('../scripts/qemu-plugin-symbols.py'), '@INPUT@'])
-+
- # Modules need more symbols than just those in plugins/qemu-plugins.symbols
- if not enable_modules
-   if host_os == 'darwin'
-     configure_file(
--      input: files('qemu-plugins.symbols'),
-+      input: qemu_plugin_symbols,
-       output: 'qemu-plugins-ld64.symbols',
-       capture: true,
-       command: ['sed', '-ne', 's/^[[:space:]]*\\(qemu_.*\\);/_\\1/p', '@INPUT@'])
-     emulator_link_args += ['-Wl,-exported_symbols_list,plugins/qemu-plugins-ld64.symbols']
-   else
--    emulator_link_args += ['-Xlinker', '--dynamic-list=' + (meson.project_source_root() / 'plugins/qemu-plugins.symbols')]
-+    emulator_link_args += ['-Xlinker', '--dynamic-list=' + qemu_plugin_symbols.full_path()]
-   endif
- endif
+@@ -152,6 +155,7 @@ def wait_for_console_pattern(test, success_message, failure_message=None,
+     :param success_message: if this message appears, test succeeds
+     :param failure_message: if this message appears, test fails
+     """
++    assert success_message
+     _console_interaction(test, success_message, failure_message, None, vm=vm)
  
-@@ -23,7 +29,7 @@ if host_os == 'windows'
-   # First, create a .def file listing all the symbols a plugin should expect to have
-   # available in qemu
-   win32_plugin_def = configure_file(
--    input: files('qemu-plugins.symbols'),
-+    input: qemu_plugin_symbols,
-     output: 'qemu_plugin_api.def',
-     capture: true,
-     command: ['sed', '-e', '0,/^/s//EXPORTS/; s/[{};]//g', '@INPUT@'])
-diff --git a/scripts/qemu-plugin-symbols.py b/scripts/qemu-plugin-symbols.py
-new file mode 100755
-index 0000000000..e285ebb8f9
---- /dev/null
-+++ b/scripts/qemu-plugin-symbols.py
-@@ -0,0 +1,45 @@
-+#!/usr/bin/env python3
-+# -*- coding: utf-8 -*-
-+#
-+# Extract QEMU Plugin API symbols from a header file
-+#
-+# Copyright 2024 Linaro Ltd
-+#
-+# Author: Pierrick Bouvier <pierrick.bouvier@linaro.org>
-+#
-+# This work is licensed under the terms of the GNU GPL, version 2 or later.
-+# See the COPYING file in the top-level directory.
-+#
-+# SPDX-License-Identifier: GPL-2.0-or-later
-+
-+import argparse
-+import re
-+
-+def extract_symbols(plugin_header):
-+    with open(plugin_header) as file:
-+        content = file.read()
-+    # Remove QEMU_PLUGIN_API macro definition.
-+    content = content.replace('#define QEMU_PLUGIN_API', '')
-+    expected = content.count('QEMU_PLUGIN_API')
-+    # Find last word between QEMU_PLUGIN_API and (, matching on several lines.
-+    # We use *? non-greedy quantifier.
-+    syms = re.findall(r'QEMU_PLUGIN_API.*?(\w+)\s*\(', content, re.DOTALL)
-+    syms.sort()
-+    # Ensure we found as many symbols as API markers.
-+    assert len(syms) == expected
-+    return syms
-+
-+def main() -> None:
-+    parser = argparse.ArgumentParser(description='Extract QEMU plugin symbols')
-+    parser.add_argument('plugin_header', help='Path to QEMU plugin header.')
-+    args = parser.parse_args()
-+
-+    syms = extract_symbols(args.plugin_header)
-+
-+    print('{')
-+    for s in syms:
-+        print("  {};".format(s))
-+    print('};')
-+
-+if __name__ == '__main__':
-+    main()
+ def exec_command(test, command):
+@@ -180,6 +184,7 @@ def exec_command_and_wait_for_pattern(test, command,
+     :param success_message: if this message appears, test succeeds
+     :param failure_message: if this message appears, test fails
+     """
++    assert success_message
+     _console_interaction(test, success_message, failure_message, command + '\r')
+ 
+ def get_qemu_img(test):
 -- 
 2.39.5
 
