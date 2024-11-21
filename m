@@ -4,68 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E44A7D7879A
-	for <qemu-riscv@archiver.kernel.org>; Thu, 21 Nov 2024 17:08:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0B8DAD7879A
+	for <qemu-riscv@archiver.kernel.org>; Thu, 21 Nov 2024 17:08:33 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tEAWa-00067Q-D8; Thu, 21 Nov 2024 11:59:24 -0500
+	id 1tEAfB-0002ec-I9; Thu, 21 Nov 2024 12:08:18 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1tEAW3-0004xt-BJ
- for qemu-riscv@nongnu.org; Thu, 21 Nov 2024 11:58:52 -0500
-Received: from mail-wm1-x32b.google.com ([2a00:1450:4864:20::32b])
+ id 1tEAdo-0000d5-Kz
+ for qemu-riscv@nongnu.org; Thu, 21 Nov 2024 12:06:54 -0500
+Received: from mail-wm1-x32a.google.com ([2a00:1450:4864:20::32a])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1tEAVk-000888-Aw
- for qemu-riscv@nongnu.org; Thu, 21 Nov 2024 11:58:49 -0500
-Received: by mail-wm1-x32b.google.com with SMTP id
- 5b1f17b1804b1-43161c0068bso9687665e9.1
- for <qemu-riscv@nongnu.org>; Thu, 21 Nov 2024 08:58:21 -0800 (PST)
+ id 1tEAdT-0001cc-0x
+ for qemu-riscv@nongnu.org; Thu, 21 Nov 2024 12:06:50 -0500
+Received: by mail-wm1-x32a.google.com with SMTP id
+ 5b1f17b1804b1-43163667f0eso9856695e9.0
+ for <qemu-riscv@nongnu.org>; Thu, 21 Nov 2024 09:06:30 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1732208300; x=1732813100; darn=nongnu.org;
+ d=linaro.org; s=google; t=1732208789; x=1732813589; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=V6SxJES80JTPviCE8J9qJp14w+aImfeVkk90weg6pzA=;
- b=sB98wbr8XoWHb3Q9WP/XmucF5xQH4iF0fmp0hi/g9eLg0tcGe+xmR40HvD4NG5jMOx
- Im/mzhfNeP7bfoeSuj5j5uupw7YB+WrdyWctDZdrBZ4VVCrToEkESKD5P8LKo7LSRkCF
- NwARN/3FEGszL5zdcCVSjslve7ScObJsuEW3BLBOQqMRFIz6DfdlSCJYGQ9w2s7PXRZt
- XytiYyo3QEgmCkRmCQwMN/LI5zhfmDQt6irbDB24EWf9rhkbU4y1noJnw5u5o2ngzfI/
- IxKTkFL1VQDAA7XfT3nEmyoJHHkx6X+WCWNJ2dDY7/9FuB+Mh6cBLjAgGbBao58u+0Wo
- UP+w==
+ bh=VAGsBPtTmpGlZjFjwkSGWhc1on1nGzftLOgY8SHHshk=;
+ b=diIj3p6bBvvxD4wu5dFjlXyphXZ7EY4EAx5vg8FwOifWkmfwPh7vVIfIvNy7CdmbdG
+ BJOApOhrWdMvOsVMX7VKHrGToMCkfDG10LIhCzHC51ofUxnh61zK81SgAvJ7DbVg7qlD
+ kusIzlScLOVnYpN9bpH+wAwnT9OsHLKigaGzns2m1wnIqE6QQEI3xx1uco5Fc6RCsf0K
+ 3d8HvnNiBYztI3Qv+Y4DeMYArlGDHidcdwrjTjw9MCkVRMxNhDpB7AuD4MvW3mgSs2Kc
+ NRM/b/0FNftMBIPVI/XCvYfoKVjz4sQr/tjv9oRLevgT6XdP4j6OkJ5xJ8Ux8vohNkbN
+ 8Hag==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732208300; x=1732813100;
+ d=1e100.net; s=20230601; t=1732208789; x=1732813589;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=V6SxJES80JTPviCE8J9qJp14w+aImfeVkk90weg6pzA=;
- b=ZanQCo69F0OIQyp9yciR13vY67BVP2BJv6WVY1p0L9zDfosAiJkEcJPnWHrkWi7Irc
- 0RXTCna8bpZItHH7zv1kl99s+uWveuM6DfVy3O+P1D9W+UinS0pmY5SFAaIeQEt8x0oV
- g4DQj/w9tVuBXqt3sg/hiG45cWWPu+u2HA1rt5mJ7jC5cPBS1ddX30JVHUTXPyc8n1os
- Wl/h9e4BCbnTecZhA2dV11bZDukgSVGj5CXrypftfAOFR8oLPFSJjUnHiwqiqHRBr615
- KcC04CpZFCZDSEYWWbCPePiRpmJUfvGN8gcpMRX0Z5YJAtQGs0bHq2YcHU1A1VZQ258c
- 7gIA==
+ bh=VAGsBPtTmpGlZjFjwkSGWhc1on1nGzftLOgY8SHHshk=;
+ b=cqo1RR02RObeg+FAat0xRNiNKT1coQ7Qi2BhdmwwW9BGMAQQAW/YiJ6BB3km7F2a3x
+ vLZIN9h6PL/0awZHEESGUxMeonLh16EYQg9YyG/iVrpSYXTLUhOFW4GZY/o0Ij+/lV1t
+ hF5CBm6PDjx1leVGcH+LPDhQ72icGbM8tBPrydLyE390Xmg+sO2KrZy2INBtp/p0bNAg
+ nsKzDpebyFeDvSsEiidPD3NfeC4eJdUGeqAwfLvWR2JkxuPtKOXZ5fp0MF8WQrBKzap2
+ gxJ6beYvm7jzJ2b1Ip3ZYDrfrtT/nxBfjvnGke0QAXNo2UaSkn9Raekxv8Wz51ONHtku
+ ud8A==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVw3uzu5SHghmWIleptigQ6H2ojK0pAPg/mad7/7J/pqSnzS1CKhU52xFTZxQORjWE2lvO+Spu3A6i7@nongnu.org
-X-Gm-Message-State: AOJu0Yy7OdLLzHV7731iGvyKy7CJiLHbkvFkwdFck7P4Tmqo36vfbHS1
- BCknxN3LqZ1LZjIpLmDpeO9hi4rH6jAcIIXR3au0BeTXdVkxi1Hgt+BmefgJrJI=
-X-Gm-Gg: ASbGncup+V5r8nFO6tEZ0FltG6WhWEZngWjET2/Pa+bKhGqWNdCS1PeGI+i2bt88EMi
- 4+zmD/6PlcxatoiMi8teMbaGI67KOycHwJrACl+vpYqBWecKBx2k+VcPIkgsaXiNFG1LyhlfWBt
- Pkztd0BrRUfIHzCtCz2sZH50kbOISmsFr/Z2cyAEFvz9Vt9EsAkhRDdB+wbTOzEj8dbk+6XU+NY
- obRjeOUNHgGzEeX1gWOHmVF5kp9+iHp5ePQ/pomyc5AfzQ0
-X-Google-Smtp-Source: AGHT+IE+LeE2Pzi++hrXGW8sI6wK67lsohMMsge1oZ0f7HhqUtkPtaw5ZKcZvhj1bU4G7Tq7YFHk6g==
-X-Received: by 2002:a5d:64c5:0:b0:382:4f6e:a57a with SMTP id
- ffacd0b85a97d-38254b18c73mr5959922f8f.54.1732208300201; 
- Thu, 21 Nov 2024 08:58:20 -0800 (PST)
+ AJvYcCV8omK4jWxDQmAxW35/n6sG3UGtaUm9xkkatOzHk8WMOnQeJcZFtv3TnA2AADm26Ko9RKXSCF3XUwAM@nongnu.org
+X-Gm-Message-State: AOJu0YyVQ+jQb1MS9Ca4/4jnO/OCFfFgYYQZUfnaIIzW/a9+L45Ee6jH
+ rbpdmo9xEFx6UrwPhJE9UdJY0tkEBFkD9DQ3BIpbr3+7yaEDYjdqkbJyBtWphXE=
+X-Gm-Gg: ASbGnctGFT+cf/chs6kRLoIns8P5xoqL/uWK18+pCgdZu5yYCwVrESUKAQ4mOpEGsBp
+ sc61bJpe6/EGVuR9X9nwI+x798RB47pcmksPf9r9xx1Nv8Ua8bEY3USy/VcZa6w5EVRguJv1xKu
+ XMLynwwOV7JnSQ0mwuXO2xXuw4lUDD3gk2S0yZnYmce+TamUl9/awzPmyXRz+oilxWqDqiamffH
+ 4IP8MwkABVNsf8WfXhGmEnMKLphu1dhYHhuXIbHAdKkl5Lk
+X-Google-Smtp-Source: AGHT+IEVnLw2xUtf0J9uvurODmXKtzkjOY30qGhQ5prc0K46NKf1TqRr8l+lGSKt4CWPqimkHrCH9Q==
+X-Received: by 2002:a05:600c:314b:b0:431:51c0:c90f with SMTP id
+ 5b1f17b1804b1-4334f0202damr60948965e9.21.1732208787559; 
+ Thu, 21 Nov 2024 09:06:27 -0800 (PST)
 Received: from draig.lan ([85.9.250.243]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3825fb27386sm32297f8f.51.2024.11.21.08.58.15
+ 5b1f17b1804b1-433b4616636sm61146695e9.19.2024.11.21.09.06.25
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 21 Nov 2024 08:58:18 -0800 (PST)
+ Thu, 21 Nov 2024 09:06:25 -0800 (PST)
 Received: from draig.lan (localhost [IPv6:::1])
- by draig.lan (Postfix) with ESMTP id 4DAFA604A9;
- Thu, 21 Nov 2024 16:58:09 +0000 (GMT)
+ by draig.lan (Postfix) with ESMTP id F412A603F4;
+ Thu, 21 Nov 2024 16:58:07 +0000 (GMT)
 From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Peter Maydell <peter.maydell@linaro.org>,
@@ -94,19 +94,19 @@ Cc: Peter Maydell <peter.maydell@linaro.org>,
  Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
  Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
  Aurelien Jarno <aurelien@aurel32.net>, Ani Sinha <anisinha@redhat.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Anders Roxell <anders.roxell@linaro.org>
-Subject: [PATCH 31/39] tests/functional: update the riscv64 tuxrun tests
-Date: Thu, 21 Nov 2024 16:57:58 +0000
-Message-Id: <20241121165806.476008-32-alex.bennee@linaro.org>
+ Alistair Francis <alistair.francis@wdc.com>
+Subject: [PATCH 17/39] tests/functional: add a QMP backdoor for debugging
+ stalled tests
+Date: Thu, 21 Nov 2024 16:57:44 +0000
+Message-Id: <20241121165806.476008-18-alex.bennee@linaro.org>
 X-Mailer: git-send-email 2.39.5
 In-Reply-To: <20241121165806.476008-1-alex.bennee@linaro.org>
 References: <20241121165806.476008-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::32b;
- envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x32b.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::32a;
+ envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x32a.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -129,46 +129,68 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Now there are new upto date images available we should update to them.
-Note we re-use the riscv32 kernel and rootfs for test_riscv64_rv32.
+From: Daniel P. Berrangé <berrange@redhat.com>
 
+Support the QEMU_TEST_QMP_BACKDOOR=backdoor.sock env variable as a
+way to get a QMP backdoor for debugging a stalled QEMU test. Most
+typically this would be used if running the tests directly:
+
+ $ QEMU_TEST_QMP_BACKDOOR=backdoor.sock \
+   QEMU_TEST_QEMU_BINARY=./build/qemu-system-arm \
+   PYTHONPATH=./python \
+   ./tests/functional/test_arm_tuxrun.py
+
+And then, when the test stalls, in a second shell run:
+
+ $ ./scripts/qmp/qmp-shell backdoor.sock
+
+Signed-off-by: Daniel P. Berrangé <berrange@redhat.com>
+Message-Id: <20241121154218.1423005-18-berrange@redhat.com>
 Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
-Cc: Anders Roxell <anders.roxell@linaro.org>
 ---
- tests/functional/test_riscv64_tuxrun.py | 16 ++++++++--------
- 1 file changed, 8 insertions(+), 8 deletions(-)
+ docs/devel/testing/functional.rst      | 10 ++++++++++
+ tests/functional/qemu_test/testcase.py |  7 +++++++
+ 2 files changed, 17 insertions(+)
 
-diff --git a/tests/functional/test_riscv64_tuxrun.py b/tests/functional/test_riscv64_tuxrun.py
-index 4e2449539c..0d8de36204 100755
---- a/tests/functional/test_riscv64_tuxrun.py
-+++ b/tests/functional/test_riscv64_tuxrun.py
-@@ -17,18 +17,18 @@
- class TuxRunRiscV64Test(TuxRunBaselineTest):
+diff --git a/docs/devel/testing/functional.rst b/docs/devel/testing/functional.rst
+index 6b5d0c5b98..b8ad7b0bf7 100644
+--- a/docs/devel/testing/functional.rst
++++ b/docs/devel/testing/functional.rst
+@@ -176,6 +176,16 @@ primarily depend on the value of the ``qemu_bin`` class attribute.
+ If it is not explicitly set by the test code, its default value will
+ be the result the QEMU_TEST_QEMU_BINARY environment variable.
  
-     ASSET_RISCV64_KERNEL = Asset(
--        'https://storage.tuxboot.com/20230331/riscv64/Image',
--        'cd634badc65e52fb63465ec99e309c0de0369f0841b7d9486f9729e119bac25e')
-+        'https://storage.tuxboot.com/buildroot/20241119/riscv64/Image',
-+        '2bd8132a3bf21570290042324fff48c987f42f2a00c08de979f43f0662ebadba')
-     ASSET_RISCV64_ROOTFS = Asset(
--        'https://storage.tuxboot.com/20230331/riscv64/rootfs.ext4.zst',
--        'b18e3a3bdf27be03da0b285e84cb71bf09eca071c3a087b42884b6982ed679eb')
-+        'https://storage.tuxboot.com/buildroot/20241119/riscv64/rootfs.ext4.zst',
-+        'aa4736a9872651dfc0d95e709465eedf1134fd19d42b8cb305bfd776f9801004')
++Debugging hung QEMU
++^^^^^^^^^^^^^^^^^^^
++
++When test cases go wrong it may be helpful to debug a stalled QEMU
++process. While the QEMUMachine class owns the primary QMP monitor
++socket, it is possible to request a second QMP monitor be created
++by setting the ``QEMU_TEST_QMP_BACKDOOR`` env variable to refer
++to a UNIX socket name. The ``qmp-shell`` command can then be
++attached to the stalled QEMU to examine its live state.
++
+ Attribute reference
+ -------------------
  
-     ASSET_RISCV32_KERNEL = Asset(
--        'https://storage.tuxboot.com/20230331/riscv32/Image',
--        '89599407d7334de629a40e7ad6503c73670359eb5f5ae9d686353a3d6deccbd5')
-+        'https://storage.tuxboot.com/buildroot/20241119/riscv32/Image',
-+        '872bc8f8e0d4661825d5f47f7bec64988e9d0a8bd5db8917d57e16f66d83b329')
-     ASSET_RISCV32_ROOTFS = Asset(
--        'https://storage.tuxboot.com/20230331/riscv32/rootfs.ext4.zst',
--        '7168d296d0283238ea73cd5a775b3dd608e55e04c7b92b76ecce31bb13108cba')
-+        'https://storage.tuxboot.com/buildroot/20241119/riscv32/rootfs.ext4.zst',
-+        '511ad34e63222db08d6c1da16fad224970de36517a784110956ba6a24a0ee5f6')
- 
-     def test_riscv64(self):
-         self.set_machine('virt')
+diff --git a/tests/functional/qemu_test/testcase.py b/tests/functional/qemu_test/testcase.py
+index e2a329c3e5..fceafb32b0 100644
+--- a/tests/functional/qemu_test/testcase.py
++++ b/tests/functional/qemu_test/testcase.py
+@@ -175,6 +175,13 @@ def _new_vm(self, name, *args):
+                          log_dir=self.logdir)
+         self.log.debug('QEMUMachine "%s" created', name)
+         self.log.debug('QEMUMachine "%s" temp_dir: %s', name, vm.temp_dir)
++
++        sockpath = os.environ.get("QEMU_TEST_QMP_BACKDOOR", None)
++        if sockpath is not None:
++            vm.add_args("-chardev",
++                        f"socket,id=backdoor,path={sockpath},server=on,wait=off",
++                        "-mon", "chardev=backdoor,mode=control")
++
+         if args:
+             vm.add_args(*args)
+         return vm
 -- 
 2.39.5
 
