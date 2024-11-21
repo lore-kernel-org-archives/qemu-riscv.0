@@ -4,83 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 57103D711B4
-	for <qemu-riscv@archiver.kernel.org>; Wed, 20 Nov 2024 15:41:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 79594D75BBE
+	for <qemu-riscv@archiver.kernel.org>; Thu, 21 Nov 2024 06:13:16 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tDmo4-0003bE-CP; Wed, 20 Nov 2024 10:39:52 -0500
+	id 1tE0RB-0004TC-HX; Thu, 21 Nov 2024 01:13:09 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <jim.shu@sifive.com>)
- id 1tDmo2-0003Z8-Ej
- for qemu-riscv@nongnu.org; Wed, 20 Nov 2024 10:39:50 -0500
-Received: from mail-pf1-x434.google.com ([2607:f8b0:4864:20::434])
+ (Exim 4.90_1) (envelope-from <baturo.alexey@gmail.com>)
+ id 1tE0R9-0004Se-Eo; Thu, 21 Nov 2024 01:13:07 -0500
+Received: from mail-lf1-x133.google.com ([2a00:1450:4864:20::133])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <jim.shu@sifive.com>)
- id 1tDmo0-0005z2-RA
- for qemu-riscv@nongnu.org; Wed, 20 Nov 2024 10:39:50 -0500
-Received: by mail-pf1-x434.google.com with SMTP id
- d2e1a72fcca58-724c50c832bso494667b3a.2
- for <qemu-riscv@nongnu.org>; Wed, 20 Nov 2024 07:39:48 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <baturo.alexey@gmail.com>)
+ id 1tE0R7-0006Ip-LD; Thu, 21 Nov 2024 01:13:07 -0500
+Received: by mail-lf1-x133.google.com with SMTP id
+ 2adb3069b0e04-539d9fffea1so386010e87.2; 
+ Wed, 20 Nov 2024 22:13:04 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1732117187; x=1732721987; darn=nongnu.org;
- h=references:in-reply-to:message-id:date:subject:cc:to:from:from:to
- :cc:subject:date:message-id:reply-to;
- bh=2KZqQE/UUmVgsvRJGOS0j9UuW1/93sgKbbyM+lCyFz4=;
- b=YAb5WnmpSxkQhZSIaty2aVQ7h3gbL9voOs17wpPW50kp1bEj1p82TIL0JOzudBCXyd
- IOVX14gjku/uslFWLk9c+NabaSfLaRjuhKGXbNZI+m5CeRd6lVIRRULb7T+ilwYQ8OPj
- WkU6Qq20hbSAZBGi2ijdKGy5pjRvxVGYYvF6ZTepX00hCsvGRXn75Jtdf+VCUpVxDRsX
- XpDLAZihiZp0i/tCgqGQtjf0pvawcFnu+zxN+yJHDuEwr0TK6yv1PXduktibXiNxzLfX
- xLu492HgSAmxojNw7ainbCbT/VhBRlB08iSgW/zo8Kxm2Al0I1hUxUys57e4Qj7enUMI
- wNQQ==
+ d=gmail.com; s=20230601; t=1732169583; x=1732774383; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=Sl6AB6NJwRVgAE3ACTftf4/Bu6s+PK6tEgrppJnHgqk=;
+ b=PsXqVlJz5m/VHTkGF2aTTMfEWeabnJvVRfWhy+uWXm5ZqTick0nK1FjAXYWnYKs+Ah
+ m0gVAPoPGeB3MzsSkczVb9dczG/sKkqdIpC8J12HYxaw1f4CpVDowWKKtJGXPuJckM1T
+ 9so8VSj4BgCtgIGpi8gGRSQB3ucBAQ8SQWy2LG+w7JQ8ZilNcGArLjfYWgb7+LdfsSY8
+ zDn2CW44gupMnfvrACrwq+qR3/eloNuaz/dNYsrLK4VyBB0vyitHRDF7a7cvKQLJvf3r
+ FWWXZkShfn+D2SC7drylnTFGbvW1Jdy5NTwPOT1MP20m1LGXbPS6CMNx7WwaBryDWUau
+ xfVQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732117187; x=1732721987;
- h=references:in-reply-to:message-id:date:subject:cc:to:from
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=2KZqQE/UUmVgsvRJGOS0j9UuW1/93sgKbbyM+lCyFz4=;
- b=q2nJSxHOtu9+bOg7i651xEjYm7pi/lzvks63cm5dE7D3RuMTGIa6ivfiOv5pa+v/uL
- P19GCYPctsvIzkaRya54M04ETjeTbwt9gw6EO3Fswb5OkuUEYEQODFb+I1Iv/ir4Fzjm
- d8mFAaJinJwtgYBc6Ypf5MKzL+4a/BBNqtgfBbAJ/SsUf0z4ysNhgD6myi/4aPXIKd11
- DJ1rQlBnnx22wCyYse31+SwtxOUbAh2jsTPxDceuOgB8tJnIOJW1zFhE8X69ofZ3lBsk
- CLtP4Zpwbfy3YhWlZoVx/UlOvFkNpVuTvcBRI5cOuOHommutnoe1Cz1N7SPhjcbib3HA
- oMxA==
+ d=1e100.net; s=20230601; t=1732169583; x=1732774383;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=Sl6AB6NJwRVgAE3ACTftf4/Bu6s+PK6tEgrppJnHgqk=;
+ b=sYSKLcKgj+8UAoaHqJUFOerrgAJZvaguPLw9LbEddVwL6Uy0jQus9ucJYWkZWfLiZL
+ WyImhaKXmL3rHOgQxIzScKEWikEOGj7+TmuBAF5sOLqqEhrtvQOnlcNJewBUyZ07JrmJ
+ LOU1P+h/AUTJDN8NgqYCqgXhhbi1zaT5dt56KtuCHHuOrz/pN09FmSjHTwzw5Eik2l/z
+ xP+9VQo2clsNP8cbbuxNKhYh2/ogEhoPERXHf6PYRgL85yzqeXV/tKj5BifwU0Bzyw/X
+ 05CakjZAzxM1QHcj9ZMhbuqy+7MA5ptjuvPt7iVaQ/NCnWeeAe9LNdRTIqIQmZN1qow6
+ 4obw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUxZQvKx8Q6YK3/wxHNF2AiBvfQZP7+3e9wu46/UDYrtZCjHq1/vq/gshm8rLTJ5/EA32cKqdzHIyBW@nongnu.org
-X-Gm-Message-State: AOJu0YwIqdHSESCdWYqvXLgvzhrz5dPYEFa6k0ttoPZJNaYT3eEkKgCD
- yx66ocYjAgpEuxyMziGHENCfLn0aSKnYVy1dve4jYj+1lU32G/D6nZWbt8mSSkU=
-X-Google-Smtp-Source: AGHT+IGF3bacYwqDii80+IvMeZTPV28U8Y7akDXQInprbO3IStychSVfUBDnR85ZGLeFPn4iQXO1Kw==
-X-Received: by 2002:aa7:88c6:0:b0:71e:e4f:3e58 with SMTP id
- d2e1a72fcca58-724bede9bbbmr4335605b3a.17.1732117187509; 
- Wed, 20 Nov 2024 07:39:47 -0800 (PST)
-Received: from hsinchu26.internal.sifive.com
- (59-124-168-89.hinet-ip.hinet.net. [59.124.168.89])
- by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-724bef8da6asm1838903b3a.123.2024.11.20.07.39.45
+ AJvYcCUZd9mCQ3K9aM0FEc1rOzRQf9ii6vw0GyCzZ67GdUux6kLLdyPOWtXgQWnJ3bLUGtuwk6+uF5k9M3YC@nongnu.org,
+ AJvYcCW5PvCyNQYet2QX6I0Jja/8zrjhZKn8ZgAbX2lSFTfLj4zDrVbR38wE3xV1mEJETtea3bd2sZ9YbUC93w==@nongnu.org
+X-Gm-Message-State: AOJu0Ywp31/CifigVTxWqwYgzr7vSNN7QBxWzhl8TEEa8sa4CB1prNbB
+ 9J8X5oIA9DaFb29FrBhZtS5CUqKcA3Emk+FGw2MRVxsFPpJmBxLw
+X-Gm-Gg: ASbGncsVmJzd6GVCjBddOsrBzP6hBK4l6TX7HmUynT1z7WTPj4MBaByCLgQe7zkJJCR
+ Ve3bEkoogfxDwI8qryzqgaJ77/Xpl6usFgycrTi0nL1NOogwqbwGfxAKtKkjT6ojPr3eISWc43D
+ NbrQhxCsWss6b8EcbjRKE+2+HyEKLknIDaRpUgrTXNBD9qyp/uAEYwO41kaZ/ZKbqzpPbeva0Fu
+ WFkB75JpLAVq3I9jZROyTdu7YlWA3wI28ov2zGoHpBkENbLmylxdYw=
+X-Google-Smtp-Source: AGHT+IGuXKK+JXtIEXdPHJ48baJYISTunEiVxu4JsrNpKLZeucxS9YR2FBb2yY0msLLML8MxeMURnw==
+X-Received: by 2002:a05:6512:b8a:b0:539:d10b:e389 with SMTP id
+ 2adb3069b0e04-53dc132f963mr2545250e87.13.1732169582522; 
+ Wed, 20 Nov 2024 22:13:02 -0800 (PST)
+Received: from vmdev.asgard ([81.200.11.243]) by smtp.gmail.com with ESMTPSA id
+ 2adb3069b0e04-53dbd4726c3sm840443e87.205.2024.11.20.22.13.00
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 20 Nov 2024 07:39:47 -0800 (PST)
-From: Jim Shu <jim.shu@sifive.com>
-To: qemu-devel@nongnu.org,
-	qemu-riscv@nongnu.org
-Cc: Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bmeng.cn@gmail.com>,
- Weiwei Li <liwei1518@gmail.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, Jim Shu <jim.shu@sifive.com>
-Subject: [PATCH v4 3/3] hw/riscv: Add the checking if DTB overlaps to kernel
- or initrd
-Date: Wed, 20 Nov 2024 23:39:35 +0800
-Message-Id: <20241120153935.24706-4-jim.shu@sifive.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20241120153935.24706-1-jim.shu@sifive.com>
-References: <20241120153935.24706-1-jim.shu@sifive.com>
-Received-SPF: pass client-ip=2607:f8b0:4864:20::434;
- envelope-from=jim.shu@sifive.com; helo=mail-pf1-x434.google.com
+ Wed, 20 Nov 2024 22:13:01 -0800 (PST)
+From: baturo.alexey@gmail.com
+To: 
+Cc: baturo.alexey@gmail.com, richard.henderson@linaro.org,
+ zhiwei_liu@linux.alibaba.com, dbarboza@ventanamicro.com,
+ liwei1518@gmail.com, alistair23@gmail.com, frank.chang@sifive.com,
+ palmer@dabbelt.com, Alistair.Francis@wdc.com, sagark@eecs.berkeley.edu,
+ kbastian@mail.uni-paderborn.de, qemu-devel@nongnu.org,
+ qemu-riscv@nongnu.org
+Subject: [PATCH v2 0/7] Pointer Masking update for Zjpm v1.0
+Date: Thu, 21 Nov 2024 09:12:52 +0300
+Message-Id: <20241121061259.4043177-1-baturo.alexey@gmail.com>
+X-Mailer: git-send-email 2.39.5
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::133;
+ envelope-from=baturo.alexey@gmail.com; helo=mail-lf1-x133.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -98,94 +99,48 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-DTB is placed to the end of memory, so we will check if the start
-address of DTB overlaps to the address of kernel/initrd.
+From: Alexey Baturo <baturo.alexey@gmail.com>
 
-Signed-off-by: Jim Shu <jim.shu@sifive.com>
----
- hw/riscv/boot.c         | 25 ++++++++++++++++++++++++-
- include/hw/riscv/boot.h |  3 +++
- 2 files changed, 27 insertions(+), 1 deletion(-)
+Hi,
 
-diff --git a/hw/riscv/boot.c b/hw/riscv/boot.c
-index 81d27f935e..bc8074fec8 100644
---- a/hw/riscv/boot.c
-+++ b/hw/riscv/boot.c
-@@ -70,6 +70,7 @@ char *riscv_plic_hart_config_string(int hart_count)
- void riscv_boot_info_init(RISCVBootInfo *info, RISCVHartArrayState *harts)
- {
-     info->kernel_size = 0;
-+    info->initrd_size = 0;
-     info->is_32bit = riscv_is_32bit(harts);
- }
- 
-@@ -213,6 +214,9 @@ static void riscv_load_initrd(MachineState *machine, RISCVBootInfo *info)
-         }
-     }
- 
-+    info->initrd_start = start;
-+    info->initrd_size = size;
-+
-     /* Some RISC-V machines (e.g. opentitan) don't have a fdt. */
-     if (fdt) {
-         end = start + size;
-@@ -309,6 +313,7 @@ uint64_t riscv_compute_fdt_addr(hwaddr dram_base, hwaddr dram_size,
-     int ret = fdt_pack(ms->fdt);
-     hwaddr dram_end, temp;
-     int fdtsize;
-+    uint64_t dtb_start, dtb_start_limit;
- 
-     /* Should only fail if we've built a corrupted tree */
-     g_assert(ret == 0);
-@@ -319,6 +324,17 @@ uint64_t riscv_compute_fdt_addr(hwaddr dram_base, hwaddr dram_size,
-         exit(1);
-     }
- 
-+    if (info->initrd_size) {
-+        /* If initrd is successfully loaded, place DTB after it. */
-+        dtb_start_limit = info->initrd_start + info->initrd_size;
-+    } else if (info->kernel_size) {
-+        /* If only kernel is successfully loaded, place DTB after it. */
-+        dtb_start_limit = info->image_high_addr;
-+    } else {
-+        /* Otherwise, do not check DTB overlapping */
-+        dtb_start_limit = 0;
-+    }
-+
-     /*
-      * A dram_size == 0, usually from a MemMapEntry[].size element,
-      * means that the DRAM block goes all the way to ms->ram_size.
-@@ -338,7 +354,14 @@ uint64_t riscv_compute_fdt_addr(hwaddr dram_base, hwaddr dram_size,
-         temp = (dram_base < 3072 * MiB) ? MIN(dram_end, 3072 * MiB) : dram_end;
-     }
- 
--    return QEMU_ALIGN_DOWN(temp - fdtsize, 2 * MiB);
-+    dtb_start = QEMU_ALIGN_DOWN(temp - fdtsize, 2 * MiB);
-+
-+    if (dtb_start_limit && (dtb_start < dtb_start_limit)) {
-+        error_report("No enough memory to place DTB after kernel/initrd");
-+        exit(1);
-+    }
-+
-+    return dtb_start;
- }
- 
- /*
-diff --git a/include/hw/riscv/boot.h b/include/hw/riscv/boot.h
-index 06b51ed086..7d59b2e6c6 100644
---- a/include/hw/riscv/boot.h
-+++ b/include/hw/riscv/boot.h
-@@ -32,6 +32,9 @@ typedef struct RISCVBootInfo {
-     hwaddr image_low_addr;
-     hwaddr image_high_addr;
- 
-+    hwaddr initrd_start;
-+    ssize_t initrd_size;
-+
-     bool is_32bit;
- } RISCVBootInfo;
- 
+I've rebased this patch series and addressed Richard's and Daniel's comments.
+Thanks
+
+*** BLURB HERE ***
+[v0]:
+As Pointer Masking is finally ratified, these patches intend to update the existing code to the final version.
+These patches have been submitted previously and I tried to address all the suggestions, but I'd suggest to review them from the clean slate and then finally push them to the repo.
+Thanks.
+
+Alexey Baturo (7):
+  target/riscv: Remove obsolete pointer masking extension code.
+  target/riscv: Add new CSR fields for S{sn,mn,m}pm extensions as part
+    of Zjpm v1.0
+  target/riscv: Add helper functions to calculate current number of
+    masked bits for pointer masking
+  target/riscv: Add pointer masking tb flags
+  target/riscv: Update address modify functions to take into account
+    pointer masking
+  target/riscv: Apply pointer masking for virtualized memory accesses
+  target/riscv: Enable updates for pointer masking variables and thus
+    enable pointer masking extension
+
+ target/riscv/cpu.c                      |  19 +-
+ target/riscv/cpu.h                      |  51 ++--
+ target/riscv/cpu_bits.h                 |  91 +-----
+ target/riscv/cpu_cfg.h                  |   3 +
+ target/riscv/cpu_helper.c               | 124 +++++---
+ target/riscv/csr.c                      | 357 ++----------------------
+ target/riscv/insn_trans/trans_rvh.c.inc |  11 +
+ target/riscv/machine.c                  |  17 +-
+ target/riscv/pmp.c                      |  14 +-
+ target/riscv/pmp.h                      |   1 +
+ target/riscv/tcg/tcg-cpu.c              |   5 +-
+ target/riscv/translate.c                |  51 ++--
+ target/riscv/vector_helper.c            |  18 +-
+ 13 files changed, 224 insertions(+), 538 deletions(-)
+
 -- 
-2.17.1
+2.39.5
 
 
