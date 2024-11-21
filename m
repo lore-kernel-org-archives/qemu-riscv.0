@@ -4,68 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B4463D7879B
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A2A02D7879A
 	for <qemu-riscv@archiver.kernel.org>; Thu, 21 Nov 2024 17:09:56 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tEAdY-00084V-7B; Thu, 21 Nov 2024 12:06:36 -0500
+	id 1tEAfU-0003TV-T7; Thu, 21 Nov 2024 12:08:38 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1tEAdV-0007za-RK
- for qemu-riscv@nongnu.org; Thu, 21 Nov 2024 12:06:34 -0500
-Received: from mail-wm1-x336.google.com ([2a00:1450:4864:20::336])
+ id 1tEAdo-0000d3-J8
+ for qemu-riscv@nongnu.org; Thu, 21 Nov 2024 12:06:54 -0500
+Received: from mail-wr1-x431.google.com ([2a00:1450:4864:20::431])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1tEAdR-0001Zj-0i
- for qemu-riscv@nongnu.org; Thu, 21 Nov 2024 12:06:33 -0500
-Received: by mail-wm1-x336.google.com with SMTP id
- 5b1f17b1804b1-43193678216so10419015e9.0
- for <qemu-riscv@nongnu.org>; Thu, 21 Nov 2024 09:06:26 -0800 (PST)
+ id 1tEAdU-0001e6-3P
+ for qemu-riscv@nongnu.org; Thu, 21 Nov 2024 12:06:51 -0500
+Received: by mail-wr1-x431.google.com with SMTP id
+ ffacd0b85a97d-382296631f1so784191f8f.3
+ for <qemu-riscv@nongnu.org>; Thu, 21 Nov 2024 09:06:31 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1732208785; x=1732813585; darn=nongnu.org;
+ d=linaro.org; s=google; t=1732208790; x=1732813590; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Wv4PNTnfk9kZ4Ys171hToXZi4xYchox2b5iY8mj5xXY=;
- b=T1bds6c3UQXEE4ldyChMLN+62NZBWiybkkRz0uOVnOH0n7hMbkodYfebo3AysWgq3g
- /4kTaiU2QFcdYr59qG1Q2gIuQaIU/ZF7yKF6dlf8SH0fPaJ9L7Ozdj3bOkMaw4iE5lX+
- pg45mcDR7UnIxKCo2X11AEZAofUKMGSveWi5TDmpJuh+x6rt/b1i69FFfcC3jII8ZApl
- IAag0UsO1YFZJvNQg/C4K/hzOJorr/OXH8f3h0lUtZU11tlhlb8lfOzRTRkOcY0fpWta
- xo/JcFWq7MYlqLQHMDJjsUN416rm/SMf3JUcNyxt7dfW2QQYSGUB7s0MOye63EFDrb8E
- ecDg==
+ bh=eUF072RWHjw5X8nluQQuYebe1FYEMSwq9TSQiXId4cw=;
+ b=RZEaBal/HgCez1sqSRKuaNDrAdBd5bYP0bDSdbj3qPg6Bm1A0NdeylB4W5LJhjmRuC
+ GXKlmL3JaJzoP79RJyNRTo2ovvrfOXt7/TGJm3Id0XGs6tPWlXNPpNhYw3wZI4EwfYb7
+ Kbu2KoXzL4MfF8lYI2FzcBgzwpG8PAnwXF4oUGJRTttIx1e18T+UIIxhj802k1X5FJG1
+ hn309b7zSDeb+8VC4oGMaCRdyEIMlkQnlndFCBZcYVqy0cjbdPpW+GuqWtvXDnHF1Tij
+ +plHVX+HQ8A2iTu8Nbdlep3fzbB6bHgkeXku5xVv8CHigeRlfgiCpdszouE/5y3pV5yl
+ COOA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732208785; x=1732813585;
+ d=1e100.net; s=20230601; t=1732208790; x=1732813590;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Wv4PNTnfk9kZ4Ys171hToXZi4xYchox2b5iY8mj5xXY=;
- b=eqe3Mr0PSfBlT4PGEmaFxHATp12pLXWaZQESSceZWJ/bXH0g93DA/mYpflb3xlGbgV
- T0czcrf5iO/1RIbct8pqXssu77Vv88SzNhBJTpb7EH4qEGmDSLv3Dw+kLUayT726EA63
- on4vCGBo8fLfSqu89baSvpxRQe4hE+lO+EJmpxijGQho/D5s1NNMdFXy8igniluGcKGL
- 5hajHPXP6WGSyyMza54XJ1HR9DZt6evng/hw1wUm9LMLECJG5hdU3XJILM9ledqIgeka
- 7D8ERBBmXcLO2zGp9G9Q2kzI7Tw+s6nZ+ZVOP5dmGt40CL91S6ZnoYMJMSb9ZNs8JJco
- gaMQ==
+ bh=eUF072RWHjw5X8nluQQuYebe1FYEMSwq9TSQiXId4cw=;
+ b=uci1UyAq7ddc/eNKkM4PxbcD9ImptWu+ULoThcapDaRp8dMQ6wdCuy9ux8w0RbevXd
+ zkD1tvXjZy16WVEkS+UpkvHJ6Ar+ArYQgPN91XBVl2hKPdJ8lSv5Qvy6dswa2n3S4EnH
+ XuKvY/NWQDA/IPUjVcHuQyKz3Z7xR0AY2Jo1Hh+34CB2D5mfXsKyaAkGZNUTob9UgB/D
+ podr/RdecXh9nZoFyl1axhvpKN65WAAHd/kOvCX5z6abIQg/e0zngJ9aNRVhvfdtn1+r
+ LWo5LNL6cF/X3Gm0WPJOLV/qtZg/Mr326ivYv/rl5beBwFE4FsrS6jY4ZjpoJXDtYCp0
+ 07dQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWesQ52xP/8e+H/fE70bylo8xqoqjuVaKr8HOt15kXA+UwGstfGw1TnbO4nN2kHzFLBVIdVk/95VKb0@nongnu.org
-X-Gm-Message-State: AOJu0YxShi7hwbDTvEzHBkblLIouNgqQOvUwlxiXL1f7t1HOfMtpwGqD
- hmiC/2tYrss74mGem43Dq6at+V0CkFJc54K7YkTrbxov7UMTRGQAj+ZPf/lescs=
-X-Gm-Gg: ASbGncuThuWtbzK4+6x/vkN0PcIixw4ofMxUMmQ0ybci0bzz96IZKgDz9v1MdlLtCD8
- a/UAxv9sR9IkCoqSOi3Z795xjisG+TeOh3/w+1VRHdS/Ny56oWyUOGwf+lVeogKI+6FqPFzG7Wc
- aleoTdgdJ4WhEQXYClESrknDW88COniTg0sFXDYawbJWawYFr4u40GobbRHmP000lN7uyfDxr0X
- bdQXjWUZBwa/XqA0uqqIWjH31dUb5tvgWXpvKXIJ8lHHlDl
-X-Google-Smtp-Source: AGHT+IEXZ91jFsQPj0ANHoQvzJK063hUeeff9wPkWor6mp90Ld69UU6SGLizgpf999m+Wdp54jpnpA==
-X-Received: by 2002:a05:600c:870f:b0:42c:b1ee:4b04 with SMTP id
- 5b1f17b1804b1-4334f021c2bmr54753795e9.28.1732208783911; 
- Thu, 21 Nov 2024 09:06:23 -0800 (PST)
+ AJvYcCVe7WLE4xwfMHUHJV5DeXrkP2ec2D0E3UvQ0RW3az4v6U6C+8BAia8f65xx+fR7ZnEpYmBI7k71u7vr@nongnu.org
+X-Gm-Message-State: AOJu0YyuiLk+gOrRXEgRelvDFSZcF9A2nGWgpNQbEe8DJK6eUILQS0gV
+ 5tK1gpDFl5g+IPe6G3DAQtc/rrB+ZKbzRG1t+kb0A+SLH8uLHPRBDF8+o6wsZdY=
+X-Gm-Gg: ASbGncuDe9hFDW5qowdrjD5l+lUmeurpYXBlu1AXXifiYvtaeR5+3Jqq5VBXaBdUnEr
+ k8BNoTpAc3jiiGh0pDNbtv4fJvYHI0ONM7UjY2/06GULdXj/1fVzbg16LMhOGbz3H0ggk14m2gL
+ c+Uj/1OfKxUOjkRMSssjgBfddk67XWXihvagOsWGl+yh5R3zoOC3l37enHv9tOMkc+UgZ+8dasb
+ aL4egmfboQ+5dEFP0TYPY07du8GnD1KN8lOvTQhIYvFwJL3
+X-Google-Smtp-Source: AGHT+IG9eDYI9v61rhFpKx5O93ckIOEQUAKMZZuXqqXI3hJSJZJmm/WgMV4q8iJbOd1I/kEwyWxryw==
+X-Received: by 2002:a05:6000:1448:b0:382:4d54:2cd9 with SMTP id
+ ffacd0b85a97d-38254ae84ccmr5912405f8f.20.1732208787183; 
+ Thu, 21 Nov 2024 09:06:27 -0800 (PST)
 Received: from draig.lan ([85.9.250.243]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-433b4616fc2sm61609455e9.22.2024.11.21.09.06.23
+ ffacd0b85a97d-3825fd0fbdcsm27306f8f.109.2024.11.21.09.06.25
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 21 Nov 2024 09:06:23 -0800 (PST)
+ Thu, 21 Nov 2024 09:06:25 -0800 (PST)
 Received: from draig.lan (localhost [IPv6:::1])
- by draig.lan (Postfix) with ESMTP id F2F4460510;
- Thu, 21 Nov 2024 16:58:09 +0000 (GMT)
+ by draig.lan (Postfix) with ESMTP id 8231260443;
+ Thu, 21 Nov 2024 16:58:08 +0000 (GMT)
 From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Peter Maydell <peter.maydell@linaro.org>,
@@ -95,27 +95,26 @@ Cc: Peter Maydell <peter.maydell@linaro.org>,
  Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
  Aurelien Jarno <aurelien@aurel32.net>, Ani Sinha <anisinha@redhat.com>,
  Alistair Francis <alistair.francis@wdc.com>,
- Stefan Hajnoczi <stefanha@redhat.com>,
- Richard Henderson <richard.henderson@linaro.org>
-Subject: [PATCH 39/39] docs: explicitly permit a "commonly known identity"
- with SoB
-Date: Thu, 21 Nov 2024 16:58:06 +0000
-Message-Id: <20241121165806.476008-40-alex.bennee@linaro.org>
+ Laurent Vivier <laurent@vivier.eu>,
+ Anders Roxell <anders.roxell@linaro.org>
+Subject: [PATCH 23/39] tests/functional: add a m68k tuxrun tests
+Date: Thu, 21 Nov 2024 16:57:50 +0000
+Message-Id: <20241121165806.476008-24-alex.bennee@linaro.org>
 X-Mailer: git-send-email 2.39.5
 In-Reply-To: <20241121165806.476008-1-alex.bennee@linaro.org>
 References: <20241121165806.476008-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::336;
- envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x336.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::431;
+ envelope-from=alex.bennee@linaro.org; helo=mail-wr1-x431.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -131,107 +130,71 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Daniel P. Berrangé <berrange@redhat.com>
+We didn't have this before and as it exercises the m68k virt platform
+it seems worth adding. We don't wait for the shutdown because QEMU
+will auto-exit on the shutdown.
 
-The docs for submitting a patch describe using your "Real Name" with
-the Signed-off-by line. Although somewhat ambiguous, this has often
-been interpreted to mean someone's legal name.
-
-In recent times, there's been a general push back[1] against the notion
-that use of Signed-off-by in a project automatically requires / implies
-the use of legal ("real") names and greater awareness of the downsides.
-
-Full discussion of the problems of such policies is beyond the scope of
-this commit message, but at a high level they are liable to marginalize,
-disadvantage, and potentially result in harm, to contributors.
-
-TL;DR: there are compelling reasons for a person to choose distinct
-identities in different contexts & a decision to override that choice
-should not be taken lightly.
-
-A number of key projects have responded to the issues raised by making
-it clear that a contributor is free to determine the identity used in
-SoB lines:
-
- * Linux has clarified[2] that they merely expect use of the
-   contributor's "known identity", removing the previous explicit
-   rejection of pseudonyms.
-
- * CNCF has clarified[3] that the real name is simply the identity
-   the contributor chooses to use in the context of the community
-   and does not have to be a legal name, nor birth name, nor appear
-   on any government ID.
-
-Since we have no intention of ever routinely checking any form of ID
-documents for contributors[4], realistically we have no way of knowing
-anything about the name they are using, except through chance, or
-through the contributor volunteering the information. IOW, we almost
-certainly already have people using pseudonyms for contributions.
-
-This proposes to accept that reality and eliminate unnecessary friction,
-by following Linux & the CNCF in merely asking that a contributors'
-commonly known identity, of their choosing, be used with the SoB line.
-
-[1] Raised in many contexts at many times, but a decent overall summary
-    can be read at https://drewdevault.com/2023/10/31/On-real-names.html
-[2] https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id=d4563201f33a022fc0353033d9dfeb1606a88330
-[3] https://github.com/cncf/foundation/blob/659fd32c86dc/dco-guidelines.md
-[4] Excluding the rare GPG key signing parties for regular maintainers
-
-Signed-off-by: Daniel P. Berrangé <berrange@redhat.com>
-Acked-by: Stefan Hajnoczi <stefanha@redhat.com>
-Acked-by: Peter Maydell <peter.maydell@linaro.org>
-Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
-Reviewed-by: Alex Bennée <alex.bennee@linaro.org>
-Acked-by: Richard Henderson <richard.henderson@linaro.org>
-Message-Id: <20241021190939.1482466-1-berrange@redhat.com>
 Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
+Cc: Laurent Vivier <laurent@vivier.eu>
+Cc: Anders Roxell <anders.roxell@linaro.org>
 ---
- docs/devel/submitting-a-patch.rst | 7 ++++++-
- .gitlab-ci.d/check-dco.py         | 5 ++++-
- 2 files changed, 10 insertions(+), 2 deletions(-)
+ tests/functional/meson.build         |  1 +
+ tests/functional/test_m68k_tuxrun.py | 34 ++++++++++++++++++++++++++++
+ 2 files changed, 35 insertions(+)
+ create mode 100644 tests/functional/test_m68k_tuxrun.py
 
-diff --git a/docs/devel/submitting-a-patch.rst b/docs/devel/submitting-a-patch.rst
-index 83e9092b8c..10b062eec2 100644
---- a/docs/devel/submitting-a-patch.rst
-+++ b/docs/devel/submitting-a-patch.rst
-@@ -18,7 +18,7 @@ one-shot fix, the bare minimum we ask is that:
+diff --git a/tests/functional/meson.build b/tests/functional/meson.build
+index 923f9e7078..3ce969066c 100644
+--- a/tests/functional/meson.build
++++ b/tests/functional/meson.build
+@@ -95,6 +95,7 @@ tests_m68k_system_thorough = [
+   'm68k_mcf5208evb',
+   'm68k_nextcube',
+   'm68k_q800',
++  'm68k_tuxrun',
+ ]
  
-    * - Check
-      - Reason
--   * - Patches contain Signed-off-by: Real Name <author@email>
-+   * - Patches contain Signed-off-by: Your Name <author@email>
-      - States you are legally able to contribute the code. See :ref:`patch_emails_must_include_a_signed_off_by_line`
-    * - Sent as patch emails to ``qemu-devel@nongnu.org``
-      - The project uses an email list based workflow. See :ref:`submitting_your_patches`
-@@ -335,6 +335,11 @@ include a "From:" line in the body of the email (different from your
- envelope From:) that will give credit to the correct author; but again,
- that author's Signed-off-by: line is mandatory, with the same spelling.
- 
-+The name used with "Signed-off-by" does not need to be your legal name,
-+nor birth name, nor appear on any government ID. It is the identity you
-+choose to be known by in the community, but should not be anonymous,
-+nor misrepresent whom you are.
+ tests_microblaze_system_thorough = [
+diff --git a/tests/functional/test_m68k_tuxrun.py b/tests/functional/test_m68k_tuxrun.py
+new file mode 100644
+index 0000000000..7eacba135f
+--- /dev/null
++++ b/tests/functional/test_m68k_tuxrun.py
+@@ -0,0 +1,34 @@
++#!/usr/bin/env python3
++#
++# Functional test that boots known good tuxboot images the same way
++# that tuxrun (www.tuxrun.org) does. This tool is used by things like
++# the LKFT project to run regression tests on kernels.
++#
++# Copyright (c) 2024 Linaro Ltd.
++#
++# Author:
++#  Alex Bennée <alex.bennee@linaro.org>
++#
++# SPDX-License-Identifier: GPL-2.0-or-later
 +
- There are various tooling options for automatically adding these tags
- include using ``git commit -s`` or ``git format-patch -s``. For more
- information see `SubmittingPatches 1.12
-diff --git a/.gitlab-ci.d/check-dco.py b/.gitlab-ci.d/check-dco.py
-index d221b16bd5..70dec7d6ee 100755
---- a/.gitlab-ci.d/check-dco.py
-+++ b/.gitlab-ci.d/check-dco.py
-@@ -78,7 +78,10 @@
- 
- To indicate acceptance of the DCO every commit must have a tag
- 
--  Signed-off-by: REAL NAME <EMAIL>
-+  Signed-off-by: YOUR NAME <EMAIL>
++from qemu_test import Asset
++from qemu_test.tuxruntest import TuxRunBaselineTest
 +
-+where "YOUR NAME" is your commonly known identity in the context
-+of the community.
- 
- This can be achieved by passing the "-s" flag to the "git commit" command.
- 
++class TuxRunM68KTest(TuxRunBaselineTest):
++
++    ASSET_M68K_KERNEL = Asset(
++        'https://storage.tuxboot.com/buildroot/20241119/m68k/vmlinux',
++        '7754e1d5cec753ccf1dc6894729a7f54c1a4965631ebf56df8e4ce1163ad19d8')
++    ASSET_M68K_ROOTFS = Asset(
++        'https://storage.tuxboot.com/buildroot/20241119/m68k/rootfs.ext4.zst',
++        '557962ffff265607912e82232cf21adbe0e4e5a88e1e1d411ce848c37f0213e9')
++
++    def test_m68k(self):
++        self.set_machine('virt')
++        self.cpu="m68040"
++        self.common_tuxrun(kernel_asset=self.ASSET_M68K_KERNEL,
++                           rootfs_asset=self.ASSET_M68K_ROOTFS,
++                           drive="virtio-blk-device")
++
++if __name__ == '__main__':
++    TuxRunBaselineTest.main()
 -- 
 2.39.5
 
