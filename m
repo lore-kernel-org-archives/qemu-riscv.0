@@ -4,169 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 32950E6400C
-	for <qemu-riscv@archiver.kernel.org>; Thu, 21 Nov 2024 19:41:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3C17FE6400C
+	for <qemu-riscv@archiver.kernel.org>; Thu, 21 Nov 2024 19:54:21 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tED3j-0001XU-Uq; Thu, 21 Nov 2024 14:41:48 -0500
+	id 1tEDFp-0007xC-9j; Thu, 21 Nov 2024 14:54:17 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1tED3d-0001Tg-5j
- for qemu-riscv@nongnu.org; Thu, 21 Nov 2024 14:41:41 -0500
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1tED3b-0006Vj-JK
- for qemu-riscv@nongnu.org; Thu, 21 Nov 2024 14:41:40 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1732218099;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
- bh=U+74IKXBfX76Hsz8vjGkl972OkUA9XQ4WAykI0zzAQw=;
- b=OcraCp/q9XCUoBaGEdTBfEM5nFoXOgEpQm5GTtOoMIO5VP49kUn2AngkEzUpZGDVL/Mn9C
- ow2lt3nQ8sjrDuMSq+FrCgmqAQPtDrzqT8rA9Q1IUjeXHHU7Opd5Cv1LviTBV3SIpExSF1
- 6W+BuM2/SL+o5E7eguDiXsdUzrh6kVs=
-Received: from mail-lf1-f71.google.com (mail-lf1-f71.google.com
- [209.85.167.71]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-278-7hsSEVQzO2OKawI2rbrC8Q-1; Thu, 21 Nov 2024 14:41:35 -0500
-X-MC-Unique: 7hsSEVQzO2OKawI2rbrC8Q-1
-X-Mimecast-MFC-AGG-ID: 7hsSEVQzO2OKawI2rbrC8Q
-Received: by mail-lf1-f71.google.com with SMTP id
- 2adb3069b0e04-539e03bfd4aso819156e87.1
- for <qemu-riscv@nongnu.org>; Thu, 21 Nov 2024 11:41:35 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <atishp@rivosinc.com>)
+ id 1tEDFn-0007wu-Ll
+ for qemu-riscv@nongnu.org; Thu, 21 Nov 2024 14:54:15 -0500
+Received: from mail-pf1-x435.google.com ([2607:f8b0:4864:20::435])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <atishp@rivosinc.com>)
+ id 1tEDFl-0008Q5-H1
+ for qemu-riscv@nongnu.org; Thu, 21 Nov 2024 14:54:15 -0500
+Received: by mail-pf1-x435.google.com with SMTP id
+ d2e1a72fcca58-720cb6ac25aso1105440b3a.3
+ for <qemu-riscv@nongnu.org>; Thu, 21 Nov 2024 11:54:12 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1732218851; x=1732823651;
+ darn=nongnu.org; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=zI1mDY9U5PLx2jVo21zl0fti2fZEdZBz0xmbQGyiF8c=;
+ b=oatXIjlEkT25QU2VoZt/HWbfskN8Q+hIoDdOY551Ap1eiWu6Dc3Tc3p/gL8ORCT3Ru
+ CvUoYuygCoqMR0lwPD1+o+4zZadbRsnlaTfrjw+lQ3NJmhBqaixreveUjL8EUbcmYiGO
+ YCAyb+lyRdI8xzxhTGl/NwjLXq4i3gncULMw3WH1gonSaFHwvYiolLqhm6v+8dy/g9UP
+ ZJWcY4LUb0yG8Y8NXiUJo8rmCTs19/kAFmXukUWb3WB/mcRlc1DSkD3yCq7eeNpesRre
+ qGe4Gm6JProyFk/LLT7y+aVlLk87xsBC1Z5cduaWG3ZmlgsMKPt7RIANl2hoDUsm2J/H
+ FGng==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732218094; x=1732822894;
- h=content-transfer-encoding:in-reply-to:autocrypt:content-language
- :from:references:cc:to:subject:user-agent:mime-version:date
- :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=U+74IKXBfX76Hsz8vjGkl972OkUA9XQ4WAykI0zzAQw=;
- b=YaVk1wMRjCio7jJrEqA6nwgml979XpB1MpV0P08JFzbUc/1wQThAm7gx0hX4loMbpm
- DhJcB6hjWsAGvWoCu3Q8oxitgLx8fci2R85KY5tlSAXsCtg2+AydqvxSCTM59CnzOBKL
- 5IN897y8La4uZzCSjpF5dGBOOB0wCxA/cuHA6HviwqEE1go3SADohtdRMdgFty99tz5A
- GcI0RbXMmX+SG59UuRq+FnVsbLUhYFVtCFvjfDGpDo4AbbK8q2BreiMcnAE3DZMvJFcR
- vVkZufWcFCSPGbwNumWIZZlkUCRZVcfsyms781kTDbHF13ABlRInyGdEY80LGC9HcUv/
- iG/Q==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUAwjuUoBlIOjKnQx4tqfs+le0hOz4SLmRuZB4oU1QxNkzsW1NXak/F9TS+ilVAlh/Lffa9n38kA2Xs@nongnu.org
-X-Gm-Message-State: AOJu0YzvdcXCi/ZikxbJLEw7HXGfei0YpZ4pDuDM2mUI+PNuw5mUlgDj
- UyN97UUrJH2xCqMQhIDZ6tgQYDkZ+k4hc9tf/FuI9b6HwrHdkF9d9lcqbItbOZmYz0x74GCj7Eq
- FqEIBGCGmaWUqQfQcG2nYmn0H35Yj6ODf594UBNhAobrdUI3dw0qhUapkjFFR
-X-Gm-Gg: ASbGncvWHMN3d7HdIBGMsmB5T5Qq1pZ6eFxjsVz9gbG1TtvyTDGN0/+jOOa7hVXf1Dy
- hQONMFLTtrdAsMyR8y3XSTZpQGndzYAl03lPJpx5kRsR4SwnS7+/ofpAcZisUBq7m53sdvlyvUy
- ZYNJMMqYvR56PQAIPWp8msXQIXgpfqfN67PpDrSYeY9v+nLWPYbhkGMxQdfujtj5jbvSEyabQP1
- hC6dZ7OEvGo1GhNMOdmfMvAvpLnmt5SVJgcAFnx8DzwAMVBuRUR/6hK70UcoYRWfJU6xyzHQ/dq
- OL0=
-X-Received: by 2002:a05:6512:3e09:b0:539:9524:92bc with SMTP id
- 2adb3069b0e04-53dc136de98mr4591515e87.55.1732218093826; 
- Thu, 21 Nov 2024 11:41:33 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IFAOv2Hbg1AVnnkEQijZMhiu4NsYBIUOxDyDjgKet5h5h526Pk9yCTnwALxfPQSanrlKmQmkA==
-X-Received: by 2002:a05:6512:3e09:b0:539:9524:92bc with SMTP id
- 2adb3069b0e04-53dc136de98mr4591490e87.55.1732218093423; 
- Thu, 21 Nov 2024 11:41:33 -0800 (PST)
-Received: from [192.168.0.7] (ip-109-42-51-70.web.vodafone.de. [109.42.51.70])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-aa50b2f5402sm7750366b.68.2024.11.21.11.41.31
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 21 Nov 2024 11:41:33 -0800 (PST)
-Message-ID: <abaf7618-96dc-416a-b0dc-2ead6c16e45b@redhat.com>
-Date: Thu, 21 Nov 2024 20:41:30 +0100
+ d=1e100.net; s=20230601; t=1732218851; x=1732823651;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=zI1mDY9U5PLx2jVo21zl0fti2fZEdZBz0xmbQGyiF8c=;
+ b=mFKE4StbYw70P01p37VrUzsF8QavGsyo+2jyB90nKXy090DH8UjEwuQncRW3eQaHin
+ ZJwlLhyNu6X7W0DyQDE8/MhQf1w+VyxyVMDw6BWmEN3ACsw90B6tEJ519wEWvgeeB4Qa
+ AGgpNXSxkUTLGxB/WmStVtO6p8MvoRGoi8tYbYRsMUTIWgcU1DF4A5HDY4UpGzbAuQji
+ BFbOD+NArAjfFGZW8rfW7ssnec51PEs7NINsXU8zTfM58SMlBAm79yjAnlVWjWTm4dbz
+ 6U6G3xXDtAaUNf2VaTWgxC4VP0/JtGsmmTXwkh4BICNV4Cx/0WghxE/s6nLrGLWYqR7h
+ 8rAw==
+X-Gm-Message-State: AOJu0YxnqzruYqkTSQhgeTPa0caf0GNUym4S6JKDQKMHe/eHW5CsBVxy
+ a/kCyK2Z6juLoO09T0az7XO7K/NPuV7272crgjdv69zZUg9TItM9dQAr8Ov8MKPxazG11Nmg+mC
+ eEO4SGVIfdDk9uAfZkp0Lmg/Hymsb360cRDgp2w==
+X-Gm-Gg: ASbGncvBmuguqmTKumWWQnELWq2bCnWkRd67T/WC7eViKzrOiIdy6LZ0CkN83GxCVfn
+ u7NhFVE6mgxg3vbPkghzm2uRgqbgm
+X-Google-Smtp-Source: AGHT+IGQB1Atgjlvrjg0mk1cr4DkB/pipTO6qelcCPJsyGhS/G/L0s/lVcSnqHDdnxzAABCPvSWAjMhR9D7aMRmTrBE=
+X-Received: by 2002:a05:6a00:3392:b0:724:6dd7:ca1d with SMTP id
+ d2e1a72fcca58-724df72891bmr272732b3a.25.1732218851256; Thu, 21 Nov 2024
+ 11:54:11 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 17/39] tests/functional: add a QMP backdoor for debugging
- stalled tests
-To: =?UTF-8?Q?Alex_Benn=C3=A9e?= <alex.bennee@linaro.org>,
- qemu-devel@nongnu.org
-Cc: Peter Maydell <peter.maydell@linaro.org>,
- =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- "Michael S. Tsirkin" <mst@redhat.com>,
- Daniel Henrique Barboza <danielhb413@gmail.com>,
- Pierrick Bouvier <pierrick.bouvier@linaro.org>,
- Harsh Prateek Bora <harshpb@linux.ibm.com>,
- Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
- Jiaxun Yang <jiaxun.yang@flygoat.com>, Halil Pasic <pasic@linux.ibm.com>,
- Christian Borntraeger <borntraeger@linux.ibm.com>, qemu-ppc@nongnu.org,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Alexandre Iooss <erdnaxe@crans.org>, qemu-riscv@nongnu.org,
- Thomas Huth <huth@tuxfamily.org>, Bernhard Beschow <shentey@gmail.com>,
- Eric Farman <farman@linux.ibm.com>, Bin Meng <bmeng.cn@gmail.com>,
- qemu-s390x@nongnu.org, Niek Linnenbank <nieklinnenbank@gmail.com>,
- qemu-arm@nongnu.org, John Snow <jsnow@redhat.com>,
- Wainer dos Santos Moschetta <wainersm@redhat.com>,
- Cleber Rosa <crosa@redhat.com>, qemu-rust@nongnu.org,
- Nicholas Piggin <npiggin@gmail.com>, =?UTF-8?Q?Daniel_P=2E_Berrang=C3=A9?=
- <berrange@redhat.com>, Palmer Dabbelt <palmer@dabbelt.com>,
- Markus Armbruster <armbru@redhat.com>, Weiwei Li <liwei1518@gmail.com>,
- Mahmoud Mandour <ma.mandourr@gmail.com>,
- Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Aurelien Jarno <aurelien@aurel32.net>, Ani Sinha <anisinha@redhat.com>,
- Alistair Francis <alistair.francis@wdc.com>
-References: <20241121165806.476008-1-alex.bennee@linaro.org>
- <20241121165806.476008-18-alex.bennee@linaro.org>
-From: Thomas Huth <thuth@redhat.com>
-Autocrypt: addr=thuth@redhat.com; keydata=
- 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
-In-Reply-To: <20241121165806.476008-18-alex.bennee@linaro.org>
-X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: pOEif-YfsSCijzCnV6JSwFcIRVl4AuZEz7OVZlzo7Xc_1732218094
-X-Mimecast-Originator: redhat.com
-Content-Language: en-US
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=170.10.133.124; envelope-from=thuth@redhat.com;
- helo=us-smtp-delivery-124.mimecast.com
-X-Spam_score_int: -21
-X-Spam_score: -2.2
-X-Spam_bar: --
-X-Spam_report: (-2.2 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.14,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H3=0.001, RCVD_IN_MSPIKE_WL=0.001,
- RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001, RCVD_IN_VALIDITY_SAFE_BLOCKED=0.001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+References: <20241009-pmu_event_machine-v1-0-dcbd7a60e3ba@rivosinc.com>
+ <20241009-pmu_event_machine-v1-6-dcbd7a60e3ba@rivosinc.com>
+ <fd89dafa-279d-436c-9569-f2fdc289bac9@yadro.com>
+ <CAHBxVyE2C3sRJNbLOwhOZCnXAUTsEdh-mCewVAEJDDAURL10ug@mail.gmail.com>
+ <3B504AA0-06F9-4316-9B10-ED46B1B271A4@syntacore.com>
+ <CAHBxVyER0Lxp0uwed7ANW6d6pD1gvSVQ8b245scd+tm7HpT9ag@mail.gmail.com>
+ <0214DDE7-28F3-48C1-96ED-E700764D95D3@syntacore.com>
+In-Reply-To: <0214DDE7-28F3-48C1-96ED-E700764D95D3@syntacore.com>
+From: Atish Kumar Patra <atishp@rivosinc.com>
+Date: Thu, 21 Nov 2024 11:54:00 -0800
+Message-ID: <CAHBxVyGU1nbY5HC7dk4fhWNEJP8EPP-eNxhNU992usQi7Cim7w@mail.gmail.com>
+Subject: Re: [PATCH RFC 06/10] target/riscv: Define PMU event related
+ structures
+To: Aleksei Filippov <alexei.filippov@syntacore.com>
+Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, palmer@dabbelt.com, 
+ liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, bin.meng@windriver.com, 
+ dbarboza@ventanamicro.com, alistair.francis@wdc.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2607:f8b0:4864:20::435;
+ envelope-from=atishp@rivosinc.com; helo=mail-pf1-x435.google.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -182,70 +100,163 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 21/11/2024 17.57, Alex Bennée wrote:
-> From: Daniel P. Berrangé <berrange@redhat.com>
-> 
-> Support the QEMU_TEST_QMP_BACKDOOR=backdoor.sock env variable as a
-> way to get a QMP backdoor for debugging a stalled QEMU test. Most
-> typically this would be used if running the tests directly:
-> 
->   $ QEMU_TEST_QMP_BACKDOOR=backdoor.sock \
->     QEMU_TEST_QEMU_BINARY=./build/qemu-system-arm \
->     PYTHONPATH=./python \
->     ./tests/functional/test_arm_tuxrun.py
-> 
-> And then, when the test stalls, in a second shell run:
-> 
->   $ ./scripts/qmp/qmp-shell backdoor.sock
-> 
-> Signed-off-by: Daniel P. Berrangé <berrange@redhat.com>
-> Message-Id: <20241121154218.1423005-18-berrange@redhat.com>
-> Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
-> ---
->   docs/devel/testing/functional.rst      | 10 ++++++++++
->   tests/functional/qemu_test/testcase.py |  7 +++++++
->   2 files changed, 17 insertions(+)
-> 
-> diff --git a/docs/devel/testing/functional.rst b/docs/devel/testing/functional.rst
-> index 6b5d0c5b98..b8ad7b0bf7 100644
-> --- a/docs/devel/testing/functional.rst
-> +++ b/docs/devel/testing/functional.rst
-> @@ -176,6 +176,16 @@ primarily depend on the value of the ``qemu_bin`` class attribute.
->   If it is not explicitly set by the test code, its default value will
->   be the result the QEMU_TEST_QEMU_BINARY environment variable.
->   
-> +Debugging hung QEMU
-> +^^^^^^^^^^^^^^^^^^^
-> +
-> +When test cases go wrong it may be helpful to debug a stalled QEMU
-> +process. While the QEMUMachine class owns the primary QMP monitor
-> +socket, it is possible to request a second QMP monitor be created
-> +by setting the ``QEMU_TEST_QMP_BACKDOOR`` env variable to refer
-> +to a UNIX socket name. The ``qmp-shell`` command can then be
-> +attached to the stalled QEMU to examine its live state.
-> +
->   Attribute reference
->   -------------------
->   
-> diff --git a/tests/functional/qemu_test/testcase.py b/tests/functional/qemu_test/testcase.py
-> index e2a329c3e5..fceafb32b0 100644
-> --- a/tests/functional/qemu_test/testcase.py
-> +++ b/tests/functional/qemu_test/testcase.py
-> @@ -175,6 +175,13 @@ def _new_vm(self, name, *args):
->                            log_dir=self.logdir)
->           self.log.debug('QEMUMachine "%s" created', name)
->           self.log.debug('QEMUMachine "%s" temp_dir: %s', name, vm.temp_dir)
-> +
-> +        sockpath = os.environ.get("QEMU_TEST_QMP_BACKDOOR", None)
-> +        if sockpath is not None:
-> +            vm.add_args("-chardev",
-> +                        f"socket,id=backdoor,path={sockpath},server=on,wait=off",
-> +                        "-mon", "chardev=backdoor,mode=control")
-> +
->           if args:
->               vm.add_args(*args)
->           return vm
+On Wed, Nov 20, 2024 at 6:25=E2=80=AFAM Aleksei Filippov
+<alexei.filippov@syntacore.com> wrote:
+>
+>
+>
+> > On 22 Oct 2024, at 15:58, Atish Kumar Patra <atishp@rivosinc.com> wrote=
+:
+> >
+> > On Mon, Oct 21, 2024 at 6:45=E2=80=AFAM Aleksei Filippov
+> > <alexei.filippov@syntacore.com> wrote:
+> >>
+> >>
+> >>
+> >>> On 11 Oct 2024, at 23:45, Atish Kumar Patra <atishp@rivosinc.com> wro=
+te:
+> >>>
+> >>> On Thu, Oct 10, 2024 at 5:44=E2=80=AFAM Alexei Filippov
+> >>> <alexei.filippov@yadro.com> wrote:
+> >>>>
+> >>>>
+> >>>>
+> >>>> On 10.10.2024 02:09, Atish Patra wrote:
+> >>>>> Signed-off-by: Atish Patra <atishp@rivosinc.com>
+> >>>>> ---
+> >>>>> target/riscv/cpu.h | 25 +++++++++++++++++++++++++
+> >>>>> 1 file changed, 25 insertions(+)
+> >>>>>
+> >>>>> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+> >>>>> index 2ac391a7cf74..53426710f73e 100644
+> >>>>> --- a/target/riscv/cpu.h
+> >>>>> +++ b/target/riscv/cpu.h
+> >>>>> @@ -189,6 +189,28 @@ typedef struct PMUFixedCtrState {
+> >>>>>       uint64_t counter_virt_prev[2];
+> >>>>> } PMUFixedCtrState;
+> >>>>>
+> >>>>> +typedef uint64_t (*PMU_EVENT_CYCLE_FUNC)(RISCVCPU *);
+> >>>>> +typedef uint64_t (*PMU_EVENT_INSTRET_FUNC)(RISCVCPU *);
+> >>>>> +typedef uint64_t (*PMU_EVENT_TLB_FUNC)(RISCVCPU *, MMUAccessType a=
+ccess_type);
+> >>>>> +
+> >>>>> +typedef struct PMUEventInfo {
+> >>>>> +    /* Event ID (BIT [0:55] valid) */
+> >>>>> +    uint64_t event_id;
+> >>>>> +    /* Supported hpmcounters for this event */
+> >>>>> +    uint32_t counter_mask;
+> >>>>> +    /* Bitmask of valid event bits */
+> >>>>> +    uint64_t event_mask;
+> >>>>> +} PMUEventInfo;
+> >>>>> +
+> >>>>> +typedef struct PMUEventFunc {
+> >>>>> +    /* Get the ID of the event that can monitor cycles */
+> >>>>> +    PMU_EVENT_CYCLE_FUNC get_cycle_id;
+> >>>>> +    /* Get the ID of the event that can monitor cycles */
+> >>>>> +    PMU_EVENT_INSTRET_FUNC get_intstret_id;
+> >>>>> +    /* Get the ID of the event that can monitor TLB events*/
+> >>>>> +    PMU_EVENT_TLB_FUNC get_tlb_access_id;
+> >>>> Ok, this is kinda interesting decision, but it's not scalable. AFAIU
+> >>>
+> >>> Yes it is not scalable if there is a need to scale as mentioned earli=
+er.
+> >>> Do you have any other events that can be emulated in Qemu ?
+> >>>
+> >>> Having said that, I am okay with single call back though but not too =
+sure
+> >>> about read/write callback unless there is a use case to support those=
+.
+> >>>
+> >>>> none spec provide us full enum of existing events. So anytime when
+> >>>> somebody will try to implement their own pmu events they would have =
+to
+> >>>> add additional callbacks, and this structure never will be fulled
+> >>>> properly. And then we ended up with structure 1000+ callback with on=
+ly 5
+> >>>> machines wich supports pmu events. I suggest my approach with only
+> >>>> read/write callbacks, where machine can decide by itself how to hand=
+le
+> >>>> any of machine specific events.
+> >>>
+> >>> Lot of these events are microarchitectural events which can't be
+> >>> supported in Qemu.
+> >>> I don't think it's a good idea at all to add dummy values for all the
+> >>> events defined in a platform
+> >>> which is harder to debug for a user.
+> >>
+> >> Yes, you're right that the rest of the events are microarchitectural a=
+nd that they can't be properly simulated in QEMU at the moment, but it seem=
+s to me that's not really the point here. The point is how elastic this sol=
+ution can be - that is, whether to do any events or not and how exactly the=
+y should be counted should be decided by the vendor of a particular machine=
+, and not by the simulator in general. Plus, I have a very real use case wh=
+ere it will come in handy - debugging perf. Support the possibility of simu=
+lating events on QEMU side will make the life of t perf folks much easier. =
+I do not insist specifically on my implementation of this solution, but I t=
+hink that the solution with the creation of a callback for each of the even=
+ts will significantly complicate the porting of the PMU for machine vendors=
+.
+> >>>
+> >
+> > As I mentioned in other threads, I am absolutely okay with single call
+> > backs. So Let's do that. However, I am not in favor of adding
+> > microarchitectural events that we can't support in Qemu with
+> > completely bogus data. Debugging perf in Qemu can be easily done with
+> > the current set of events supported. Those are not the most accurate
+> > but it's a representation of what Qemu is running. Do you foresee any
+> > debugging issue if we don't support all the events a platform
+> > advertises ?
+> In general - there is only one potential problem. When perf would try to =
+get event by the wrong id. The main algorithm indeed could be tested with l=
+imited  quantities of events. But this
 
-Reviewed-by: Thomas Huth <thuth@redhat.com>
+It won't get a wrong id as the Qemu platform won't support those.
+Hence, you can not run perf for those events to begin with.
 
+> gonna be a real pain for the testers which gonna deduce and remember what=
+ particular event can/can=E2=80=99t be counted in QEMU and why does he gets=
+ 0 there and not 0 here. Moreover,
+
+> perf list will show which events are supported on a particular platform. =
+So user won't be confused. We
+
+> we would allow events with even complete bogus data this would works perf=
+ectly for CI stuff for the benchmark + perf ppl, and they wouldn=E2=80=99t =
+restrict their CI to that. I really do  not see
+
+IMO, it is more confusing to show bogus data rather than restricting
+the number of events an user can run on Qemu platforms. Clearly, you
+think otherwise. I think we can agree to disagree here. Let's
+consolidate our patches to provide the infrastructure for the actual
+events. The bogus event support can be a separate series(per vendor)
+as that warrants a different discussion whether it is useful for users
+or not.
+
+Sounds good ?
+
+any problem to let the vendor handle this situation. At least vendor
+can decide by his own to count/not to count some types of event, this
+gonna bring flexibility and the transparency of the solution and, in
+general, if we=E2=80=99ll bring some rational reason why we can't add such
+events we can always forbid to do such thing.
+> >
+> >>>
+> >>>>> +} PMUEventFunc;
+> >>>>> +
+> >>>>> struct CPUArchState {
+> >>>>>   target_ulong gpr[32];
+> >>>>>   target_ulong gprh[32]; /* 64 top bits of the 128-bit registers */
+> >>>>> @@ -386,6 +408,9 @@ struct CPUArchState {
+> >>>>>   target_ulong mhpmeventh_val[RV_MAX_MHPMEVENTS];
+> >>>>>
+> >>>>>   PMUFixedCtrState pmu_fixed_ctrs[2];
+> >>>>> +    PMUEventInfo *pmu_events;
+> >>>>> +    PMUEventFunc pmu_efuncs;
+> >>>>> +    int num_pmu_events;
+> >>>>>
+> >>>>>   target_ulong sscratch;
+> >>>>>   target_ulong mscratch;
+> >>
+> >>
+>
 
