@@ -4,68 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C3846D7879A
-	for <qemu-riscv@archiver.kernel.org>; Thu, 21 Nov 2024 17:10:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E241FD7879A
+	for <qemu-riscv@archiver.kernel.org>; Thu, 21 Nov 2024 17:10:20 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tEAfq-0004P2-M1; Thu, 21 Nov 2024 12:08:58 -0500
+	id 1tEAg6-0005Uk-HR; Thu, 21 Nov 2024 12:09:14 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1tEAdw-0000pD-KF
- for qemu-riscv@nongnu.org; Thu, 21 Nov 2024 12:07:01 -0500
-Received: from mail-wm1-x332.google.com ([2a00:1450:4864:20::332])
+ id 1tEAe1-00013I-9Z
+ for qemu-riscv@nongnu.org; Thu, 21 Nov 2024 12:07:09 -0500
+Received: from mail-wr1-x42b.google.com ([2a00:1450:4864:20::42b])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1tEAdX-0001gi-CM
- for qemu-riscv@nongnu.org; Thu, 21 Nov 2024 12:07:00 -0500
-Received: by mail-wm1-x332.google.com with SMTP id
- 5b1f17b1804b1-4314fa33a35so9591005e9.1
- for <qemu-riscv@nongnu.org>; Thu, 21 Nov 2024 09:06:34 -0800 (PST)
+ id 1tEAdZ-0001iV-38
+ for qemu-riscv@nongnu.org; Thu, 21 Nov 2024 12:07:05 -0500
+Received: by mail-wr1-x42b.google.com with SMTP id
+ ffacd0b85a97d-382456c6597so824856f8f.2
+ for <qemu-riscv@nongnu.org>; Thu, 21 Nov 2024 09:06:36 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1732208793; x=1732813593; darn=nongnu.org;
+ d=linaro.org; s=google; t=1732208795; x=1732813595; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=hUv3cBNBzhQbXwOzZFuKXMqW5Ms3TH+C7tVVsyL8z3E=;
- b=GNwPzxiNkSGl39NCmnRT42wk/ETCQGsfAXfDoKtroHGGdjR48oXaiY54uD/QCQBL/Q
- Uxz2XV3CT7t7aQho7UGPo3hlleE+Cd7RIsMjQhuQVAb6w4LLELRML4L8Rs09XbPy6Zu7
- ppd8a7gP9J52OAezO2LAfGax2adsbM23wN6S+MMZcYtGrlJsOeBGEQ92/ULVL952bek5
- raGQFq7TUcI0BlMz5jXnVrvSm6GdCDP/LGlpn2vyrUjg5PYIksOc1k9DykciHycDcd09
- sFRRarwn0d6KIX+XvRegXcRIrLeo1vHdaKkRm34DRbna+On18zJrvasDLb/MkmLTBToK
- YLQg==
+ bh=ZYyjcmwGZcc7NttBsBYoWNTe7fj51f/J/c4PbwCrSW0=;
+ b=PejqfVPoBL4glanT7r79oYFDkwi83yLvILxohLx52bggyI+zXGpqzjtgwTjhKhpp4e
+ F/JqLn5dCkHIGKnc05ZbvulOxcj/Z6KEu7CHypxrUAyytEkoxBcHfEkpvE4Yf0vZ/vE9
+ QM18a9JuEce3i8Jr6E5QiPVxNLpI3Zrr7grkJK2Tw2HO6ia4jqOMDbG/ujGd79iEDOUQ
+ H1wHM8tj9erRBAiJvClN7nncj9uudY6UqMioSqhahUT1yci3jVScS5eAPT8nYvKsk7tL
+ 8V97O2n0mFEy+UQolA09RFwcwjCFeZGM6lXx+22qRv+cGF0InEml8WNlRRcWQm8bnfiK
+ lnQQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732208793; x=1732813593;
+ d=1e100.net; s=20230601; t=1732208795; x=1732813595;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=hUv3cBNBzhQbXwOzZFuKXMqW5Ms3TH+C7tVVsyL8z3E=;
- b=im8BllrNVSpq+jdyoTIzN3spqE8tOOGMS5MLot+AMZgqv6ct2z0UxWv2j4vuwGrM1G
- XuwDpMVb4zawOU2CfNSSv48tGavBekvAvk/YZ4z6gFqEbqtjmMZdQLxfWrjGCw8+xjX1
- 6d5TDfR7AZ3TK7XAIJvP2o2dN05yhmrcNn9GE53jNmqCWLcY7Fx19dKLFi/89WLYpoOf
- 54jzIUd/+JTaOVzddoi/6Qd26BqDC9jP+Mep3ZWHuMGsnQyJj6sN9vpkrShSWWLShUD4
- JLPwnyJWhqLhTt4urN8f6cjvxV/3RMnoF4BR4fs9T5XhTaPVeXcUpedDAuxsmK7SFmaR
- +fZA==
+ bh=ZYyjcmwGZcc7NttBsBYoWNTe7fj51f/J/c4PbwCrSW0=;
+ b=h7BW8CtxXRde9komGkr/MCUqZheFoLDR/DxiiGIZlZAxboovA9yb0mqrfVGO+gbyY0
+ 4snJnZL3TMsl4ypt2VxXrmjkNb2pDpAiauVXoXkp7njAOK70Zq/KAhw4Yn0+kFsO6HLi
+ c4MdC4SkiNG+RZnoBEsN31xaC62UsQLsC6OuuXXPj79AJ+aMLyAssteDk9bDWFitK8sS
+ Bp2tSX+5pbpy8Ldivy5WYRYBLOtB3bd7i+/TFg15X3XijxUBIXwZph764MxHj+YlSGgy
+ IdEG4DHfIsG7NadSQFA41wb07eCCeB1GcasjKenANrF0lazjsFMppFc6rwNAEA2vsFPb
+ nIPQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVKUjpxAEYFisleibiOnjmzG8YgI0PulTua9LFvo83DbnrpBuvsaAqtGyxPuSjakL91IkNCvlU+LUx1@nongnu.org
-X-Gm-Message-State: AOJu0YzsmNXgRuJ4nuuwCmSvJPKYQO+0iETd1U8XQyjq2RXuNm5LgKBR
- 7lMyM3CjY/312uEfa0QwYkvEITQqPMupldwI289l7two9WG1yQ4SX4C1xg/uAyA=
-X-Gm-Gg: ASbGncv0PyACjfmPsFYgnZ0PvOT4Xov/quUXIoM8ORJkXkc5svFePCzCyK1xF8uE5Up
- uGRxGF5F9MwYLd+hgdA01tX5jNCEMCEPdJgEqceulAmlwYg3J3uR9Y/jH7sD3i5hDSBA8zklbBu
- oy1QueY0Uo9yci2bNQzf0qwxnpmClXFFdgLY5JJuK+FxhBEbLcQy1cFZcYYXjKL3WAjoHRUeDLs
- dFOTHbSIOR1GJnq/0tjrP3+qU+O/xSbr9W1fA90Zhp8x1jY
-X-Google-Smtp-Source: AGHT+IHHK9w5ibEGzKJSTEMd78FCN2jsgy4PL6OrIOq6OeKJPCDeMmOkU9vJ2eOrihfPErrA9ANNXw==
-X-Received: by 2002:a05:600c:4e94:b0:431:60ac:9aef with SMTP id
- 5b1f17b1804b1-4334f02123bmr62233425e9.29.1732208792014; 
- Thu, 21 Nov 2024 09:06:32 -0800 (PST)
+ AJvYcCV9lhRaM/ced+piOrO3w3K0Ta12jgAy0MR7q9kqq3mamzEj2ELNoOTj9enYl+JoH7H0EczYkyh8WlwJ@nongnu.org
+X-Gm-Message-State: AOJu0YxHve75aYr20c39vk/IfUJVIQQgjrg8na1YqfZzCGoovHiBz2dZ
+ o4gjLtB6VFv+EcnOFMH/vftLnujN+J+s9CNuPIjfLW2Kk+3ZZ00msZwNIuu5x9M=
+X-Gm-Gg: ASbGncuFF2fqLif5EBjTW5BTt5mmJ6/rN1nYjz0Ui9cjlAWL1Wyq6NSE+cTjVJhe2TX
+ 2sP4WJbbsNi8i724NodYR/51AGZIu3i6Rc6RZNaBwNcw14mDfsKeh9Lc/JwAdCHfpKW0YQrLRQF
+ DgUVH7Ko7wRRRywESJ1eGGg2GELApsI1iG8XF/sYx+cnYZDKA+wJ02khS3QSVsHwklDSRXpM5aS
+ x6G26EI1vxzJw29q7b0G8lTc83MaasdsFSJ+yQRuL3QVY6E
+X-Google-Smtp-Source: AGHT+IEzMrGkl+YSMzaGV8afQzDZmynkhbb/zDv35PnZsmLYJaYum1VwMogQ8i2Vgpj+WEtSs5JrcQ==
+X-Received: by 2002:a05:6000:2a7:b0:382:4b69:9c75 with SMTP id
+ ffacd0b85a97d-38254b17f80mr6364450f8f.43.1732208793832; 
+ Thu, 21 Nov 2024 09:06:33 -0800 (PST)
 Received: from draig.lan ([85.9.250.243]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3825fbee043sm33245f8f.104.2024.11.21.09.06.28
+ ffacd0b85a97d-3825fafeceesm53837f8f.37.2024.11.21.09.06.28
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 21 Nov 2024 09:06:28 -0800 (PST)
+ Thu, 21 Nov 2024 09:06:30 -0800 (PST)
 Received: from draig.lan (localhost [IPv6:::1])
- by draig.lan (Postfix) with ESMTP id CB893603DB;
- Thu, 21 Nov 2024 16:58:07 +0000 (GMT)
+ by draig.lan (Postfix) with ESMTP id DDBC660500;
+ Thu, 21 Nov 2024 16:58:09 +0000 (GMT)
 From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Peter Maydell <peter.maydell@linaro.org>,
@@ -95,19 +95,19 @@ Cc: Peter Maydell <peter.maydell@linaro.org>,
  Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
  Aurelien Jarno <aurelien@aurel32.net>, Ani Sinha <anisinha@redhat.com>,
  Alistair Francis <alistair.francis@wdc.com>,
- =?UTF-8?q?C=C3=A9dric=20Le=20Goater?= <clg@redhat.com>
-Subject: [PATCH 15/39] tests/functional: rewrite console handling to be
- bytewise
-Date: Thu, 21 Nov 2024 16:57:42 +0000
-Message-Id: <20241121165806.476008-16-alex.bennee@linaro.org>
+ Junjie Mao <junjie.mao@hotmail.com>,
+ Manos Pitsidianakis <manos.pitsidianakis@linaro.org>
+Subject: [PATCH 38/39] rust/pl011: Fix range checks for device ID accesses
+Date: Thu, 21 Nov 2024 16:58:05 +0000
+Message-Id: <20241121165806.476008-39-alex.bennee@linaro.org>
 X-Mailer: git-send-email 2.39.5
 In-Reply-To: <20241121165806.476008-1-alex.bennee@linaro.org>
 References: <20241121165806.476008-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::332;
- envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x332.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::42b;
+ envelope-from=alex.bennee@linaro.org; helo=mail-wr1-x42b.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -130,143 +130,44 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Daniel P. Berrangé <berrange@redhat.com>
+From: Junjie Mao <junjie.mao@hotmail.com>
 
-The console interaction that waits for predicted strings uses
-readline(), and thus is only capable of waiting for strings
-that are followed by a newline.
+The peripheral and PrimeCell identification registers of pl011 are located at
+offset 0xFE0 - 0xFFC. To check if a read falls to such registers, the C
+implementation checks if the offset-shifted-by-2 (not the offset itself) is in
+the range 0x3F8 - 0x3FF.
 
-This is inconvenient when needing to match on some things,
-particularly login prompts, or shell prompts, causing tests
-to use time.sleep(...) instead, which is unreliable.
+Use the same check in the Rust implementation.
 
-Switch to reading the console 1 byte at a time, comparing
-against the success/failure messages until we see a match,
-regardless of whether a newline is encountered.
+This fixes the timeout of the following avocado tests:
 
-The success/failure comparisons are done with the python bytes
-type, rather than strings, to avoid the problem of needing to
-decode partially received multibyte utf8 characters.
+  * tests/avocado/boot_linux_console.py:BootLinuxConsole.test_arm_virt
+  * tests/avocado/replay_kernel.py:ReplayKernelNormal.test_arm_virt
+  * tests/avocado/replay_kernel.py:ReplayKernelNormal.test_arm_vexpressa9
 
-Heavily inspired by a patch proposed by Cédric, but written
-again to work in bytes, rather than strings.
-
-Co-developed-by: Cédric Le Goater <clg@redhat.com>
-Signed-off-by: Daniel P. Berrangé <berrange@redhat.com>
-Message-Id: <20241121154218.1423005-16-berrange@redhat.com>
+Reported-by: Peter Maydell <peter.maydell@linaro.org>
+Signed-off-by: Junjie Mao <junjie.mao@hotmail.com>
+Tested-by: Alex Bennée <alex.bennee@linaro.org>
+Reviewed-by: Alex Bennée <alex.bennee@linaro.org>
+Message-Id: <SY0P300MB102644C4AC34A3AAD75DC4D5955C2@SY0P300MB1026.AUSP300.PROD.OUTLOOK.COM>
 Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
 ---
- tests/functional/qemu_test/cmd.py | 79 +++++++++++++++++++++++++------
- 1 file changed, 64 insertions(+), 15 deletions(-)
+ rust/hw/char/pl011/src/device.rs | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/tests/functional/qemu_test/cmd.py b/tests/functional/qemu_test/cmd.py
-index f6c4e4dda1..11c8334a7c 100644
---- a/tests/functional/qemu_test/cmd.py
-+++ b/tests/functional/qemu_test/cmd.py
-@@ -78,6 +78,54 @@ def run_cmd(args):
- def is_readable_executable_file(path):
-     return os.path.isfile(path) and os.access(path, os.R_OK | os.X_OK)
+diff --git a/rust/hw/char/pl011/src/device.rs b/rust/hw/char/pl011/src/device.rs
+index 2a85960b81..476cacc844 100644
+--- a/rust/hw/char/pl011/src/device.rs
++++ b/rust/hw/char/pl011/src/device.rs
+@@ -182,7 +182,7 @@ pub fn read(&mut self, offset: hwaddr, _size: c_uint) -> std::ops::ControlFlow<u
+         use RegisterOffset::*;
  
-+# @test: functional test to fail if @failure is seen
-+# @vm: the VM whose console to process
-+# @success: a non-None string to look for
-+# @failure: a string to look for that triggers test failure, or None
-+#
-+# Read up to 1 line of text from @vm, looking for @success
-+# and optionally @failure.
-+#
-+# If @success or @failure are seen, immediately return True,
-+# even if end of line is not yet seen. ie remainder of the
-+# line is left unread.
-+#
-+# If end of line is seen, with neither @success or @failure
-+# return False
-+#
-+# If @failure is seen, then mark @test as failed
-+def _console_read_line_until_match(test, vm, success, failure):
-+    msg = bytes([])
-+    done = False
-+    while True:
-+        c = vm.console_socket.recv(1)
-+        if c is None:
-+            done = True
-+            test.fail(
-+                f"EOF in console, expected '{success}'")
-+            break
-+        msg += c
-+
-+        if success in msg:
-+            done = True
-+            break
-+        if failure and failure in msg:
-+            done = True
-+            vm.console_socket.close()
-+            test.fail(
-+                f"'{failure}' found in console, expected '{success}'")
-+
-+        if c == b'\n':
-+            break
-+
-+    console_logger = logging.getLogger('console')
-+    try:
-+        console_logger.debug(msg.decode().strip())
-+    except:
-+        console_logger.debug(msg)
-+
-+    return done
-+
- def _console_interaction(test, success_message, failure_message,
-                          send_string, keep_sending=False, vm=None):
-     assert not keep_sending or send_string
-@@ -85,11 +133,22 @@ def _console_interaction(test, success_message, failure_message,
- 
-     if vm is None:
-         vm = test.vm
--    console = vm.console_file
--    console_logger = logging.getLogger('console')
-+
-     test.log.debug(
-         f"Console interaction: success_msg='{success_message}' " +
-         f"failure_msg='{failure_message}' send_string='{send_string}'")
-+
-+    # We'll process console in bytes, to avoid having to
-+    # deal with unicode decode errors from receiving
-+    # partial utf8 byte sequences
-+    success_message_b = None
-+    if success_message is not None:
-+        success_message_b = success_message.encode()
-+
-+    failure_message_b = None
-+    if failure_message is not None:
-+        failure_message_b = failure_message.encode()
-+
-     while True:
-         if send_string:
-             vm.console_socket.sendall(send_string.encode())
-@@ -102,20 +161,10 @@ def _console_interaction(test, success_message, failure_message,
-                 break
-             continue
- 
--        try:
--            msg = console.readline().decode().strip()
--        except UnicodeDecodeError:
--            msg = None
--        if not msg:
--            continue
--        console_logger.debug(msg)
--        if success_message in msg:
-+        if _console_read_line_until_match(test, vm,
-+                                          success_message_b,
-+                                          failure_message_b):
-             break
--        if failure_message and failure_message in msg:
--            console.close()
--            fail = 'Failure message found in console: "%s". Expected: "%s"' % \
--                    (failure_message, success_message)
--            test.fail(fail)
- 
- def interrupt_interactive_console_until_pattern(test, success_message,
-                                                 failure_message=None,
+         std::ops::ControlFlow::Break(match RegisterOffset::try_from(offset) {
+-            Err(v) if (0x3f8..0x400).contains(&v) => {
++            Err(v) if (0x3f8..0x400).contains(&(v >> 2)) => {
+                 u64::from(self.device_id[(offset - 0xfe0) >> 2])
+             }
+             Err(_) => {
 -- 
 2.39.5
 
