@@ -4,80 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1FB3BE64006
-	for <qemu-riscv@archiver.kernel.org>; Thu, 21 Nov 2024 19:03:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 835CCE64006
+	for <qemu-riscv@archiver.kernel.org>; Thu, 21 Nov 2024 19:04:56 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tECSf-0005rK-6f; Thu, 21 Nov 2024 14:03:29 -0500
+	id 1tECTS-0007DD-SH; Thu, 21 Nov 2024 14:04:18 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1tECSa-0005ax-0T
- for qemu-riscv@nongnu.org; Thu, 21 Nov 2024 14:03:24 -0500
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
+ (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1tECTP-000708-Sg
+ for qemu-riscv@nongnu.org; Thu, 21 Nov 2024 14:04:16 -0500
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1tECSX-00074S-Qn
- for qemu-riscv@nongnu.org; Thu, 21 Nov 2024 14:03:23 -0500
+ (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1tECTO-0007Lb-AO
+ for qemu-riscv@nongnu.org; Thu, 21 Nov 2024 14:04:15 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1732215800;
+ s=mimecast20190719; t=1732215852;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
- bh=aP1v1hQXZ39XefNc3OtxF2PCA/2zFy7aoMy3EmvieKk=;
- b=CEWwDS34Cyn+93GC/jWJJZQ3fdLGysUZAXut0bqMQbqHbaeP12+hMpllxXlFtujY1zStk8
- YoRzHSkHCUYvIUurFjgkvbRPEOonF+xVfkAcElfJn1HUenuVIaMax8YCSkXJnuwyVasDlg
- IPRCl/5v4E0ob32Xw4q+4vuzo9Oj7vQ=
-Received: from mail-ed1-f70.google.com (mail-ed1-f70.google.com
- [209.85.208.70]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=bWYOm1YuZRGlW9g1Erx0N0dY58W3vi0hbMW4ZfJBLHM=;
+ b=RmnqgEg+ZEPKCqgOsQPtHvkLAMHZenvwwljELjXJWhWHEQgzdTuUeZ6LjrfRW9OEqbHc08
+ /Sd8/n7yTSx1zAZ6MxeeMVdS3i6VGsgJD2ojKufB4566Ovvypf/l+jRPkt4H9aWd7b6P/I
+ +AeijjIgxe5qf4buSitp1g8G/pCqp3U=
+Received: from mail-ej1-f70.google.com (mail-ej1-f70.google.com
+ [209.85.218.70]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-14-tsXaMK0WMUiiz9aqajmmJw-1; Thu, 21 Nov 2024 14:03:19 -0500
-X-MC-Unique: tsXaMK0WMUiiz9aqajmmJw-1
-X-Mimecast-MFC-AGG-ID: tsXaMK0WMUiiz9aqajmmJw
-Received: by mail-ed1-f70.google.com with SMTP id
- 4fb4d7f45d1cf-5cfad454c02so756379a12.1
- for <qemu-riscv@nongnu.org>; Thu, 21 Nov 2024 11:03:19 -0800 (PST)
+ us-mta-259-q4vjuoTpMn67etszhGMd_w-1; Thu, 21 Nov 2024 14:04:11 -0500
+X-MC-Unique: q4vjuoTpMn67etszhGMd_w-1
+X-Mimecast-MFC-AGG-ID: q4vjuoTpMn67etszhGMd_w
+Received: by mail-ej1-f70.google.com with SMTP id
+ a640c23a62f3a-a9a2ccb77ceso74226266b.2
+ for <qemu-riscv@nongnu.org>; Thu, 21 Nov 2024 11:04:11 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732215798; x=1732820598;
+ d=1e100.net; s=20230601; t=1732215850; x=1732820650;
  h=content-transfer-encoding:in-reply-to:autocrypt:content-language
  :from:references:cc:to:subject:user-agent:mime-version:date
  :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=aP1v1hQXZ39XefNc3OtxF2PCA/2zFy7aoMy3EmvieKk=;
- b=XOpASrWFv+KKLGmwTWAQcolzytFa7V+mvsVTlUo0N2oBn3EJjj6acHk5RH0/6iQjWR
- AWlxNdktamIpm62B9s1QElQnZZotH8OObkFzdy5oZI4HR9I2CS/+poN9xznEZYJEGagL
- T2axI/MmSSa+aew4DPpZr0F3WP5O/4wLReFNNTTR73GWQcNlq8864Q23hCegkY/PezC3
- Se9y8hXpkZxWECrS3Sr4Eq0ZqM4X6yBWQqoEaVkfTt2rzZgYRjkTH2PTOSFi2MMQKOMZ
- TqNqZZ3oGgmBX0BU7Vi776pUKBAimlofC0A7Id6XSLF22Rb69O7Pn2UdDcwgWUpoP+V1
- RS4Q==
+ bh=bWYOm1YuZRGlW9g1Erx0N0dY58W3vi0hbMW4ZfJBLHM=;
+ b=fFXirwxJ8O7v3aq6ZjWDFfhfF2e7TSJoeDoaDK604pcU5xSNffL8cBX+Y0Bkmk48Sy
+ 5aIdLvlaqZGOiMmyRkjmcshbX+xUm09uvw6SRpGJMEvpPIZATGicjvqhuRGqejUgKF8A
+ pzXQJzhNHRgyWPOI61XsCGwOMtG69kRcTKcm1Yud78TdePzhNoNi/OZDXvmteX2gszK0
+ cNG4pr92Uj6lvxemvRypshBcsU2YzBdWxFoBBukO1JwU9Jizin8MdccQjhU5rXyH+trZ
+ ka3OrLtVKOyW11wNFyqOV5mxF8GP/gPPlWRHRuSSGOoNA6FO5PSeSw5l6rSZC01X43jK
+ gevA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVxnye/TCTWURA3+jf55NhHcSLgN1hB0+wj0j4YTRFTIlFRv82Qnxr/fG6NNHfOcoFRLSM+i6v863sr@nongnu.org
-X-Gm-Message-State: AOJu0Ywq3SmuwIqWbMmkl+BSdPmofjCbI052IbzivWKMK+WB10xEV8lK
- umTBClfPBLOAEsIPVD1zALeiY+/KjoJBkAQHZYLirtCiHsxPcQCBMs5+X/sVCU39P54yQYKBDKt
- aTHRwqXMqW9Jckzrxrc9owA3Xgta8pQnJQfHR71yEHhGgVZB2m3xo
-X-Gm-Gg: ASbGnct/CKexiRDSw/lwoL0pqwCKDAKJTc8BK+H58ss39z9d7MMtN83RfhgC3zGpSa/
- 85aKM6hVywHBLo1Wi3ZkAe1uCBsULW7bK5niJmmuTjMvxBvNsH4JPz/5y/HgKaZ5ne84HISDbGf
- xQyluny12uyXNga42l/VLVUKfDbteafv4s+XZ2LADT6WFbowL/7CNm2hGSpNKiw32r1eX5qEAWo
- 2di9kqiib9dIFRihOXjkgigzqu7KTFkZPMDq9h+SJphh4q/dbbLcXeGzH/CzxtIYOSv2Q2eYGRS
- Jnw=
-X-Received: by 2002:a17:906:18b2:b0:aa5:a22:8f5b with SMTP id
- a640c23a62f3a-aa50a2291camr22540666b.38.1732215798511; 
- Thu, 21 Nov 2024 11:03:18 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IEdzCW6KHFVBFtI3X5U3LmCdF/YbaydrsFedhf9NvbbZRBubwLtI87sHuAM3SD7Oo+liFg91w==
-X-Received: by 2002:a17:906:18b2:b0:aa5:a22:8f5b with SMTP id
- a640c23a62f3a-aa50a2291camr22533966b.38.1732215798121; 
- Thu, 21 Nov 2024 11:03:18 -0800 (PST)
+ AJvYcCWqX/FgAYIr/92O2mNpiZ/g/vvHnKxei5mlAeTw5ed8fDdbahFUyxG5rEgn0xti+OHA9OS69TJjZZg8@nongnu.org
+X-Gm-Message-State: AOJu0YyvyiZGr1JzrEl0I4JQCeXhMFtkD23XlbR/LeBg5PPn9TFVmDJH
+ saZk8kpft8lKm5O6BCo5rdpzPgjUk1fJfdtxwkwu92dYhtLq3IOk99ZtFv6tLkymeuII0PNaziC
+ AK5cdcc9HeNKCeAHfknFcZ55/Ebt/lypKJlDexhe6o9muBaOy1DSi
+X-Gm-Gg: ASbGnctTyajqwWDa3VRzigJ//RR1lb9DylXe3+l0i+GmS4bneaYkfol45Qq68PYez2H
+ BItwZjpNNseO7HJpq0Mi3rpkUtRQy4xu1+aQmYwEiqo2l2/iXZPdAsR8w33zM3vs579kNMfK3Bi
+ WA4kA9UdD5cpFl4u3KuSPr0ppWW+j7Wd+qog26WdE/Yu7aEpgI/CI1NEblPmj7uE8irQKO9tNdK
+ G9xNNOz5L4gtfcUH555dbtz3rKdFz5/b4D+mihw+O8mpezMASqCBTeYPM+nyXtTAwQRiISY8GCq
+ 2eE=
+X-Received: by 2002:a17:907:aa5:b0:a99:f167:47c7 with SMTP id
+ a640c23a62f3a-aa509bca75fmr22739666b.55.1732215850098; 
+ Thu, 21 Nov 2024 11:04:10 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IHdj/K15Lh23FRHIGOuvLMGI2lnY1GGg/E2LLjfKE70Jx4YrhIjVOCGVw58q4bUd9dXih167w==
+X-Received: by 2002:a17:907:aa5:b0:a99:f167:47c7 with SMTP id
+ a640c23a62f3a-aa509bca75fmr22733966b.55.1732215849736; 
+ Thu, 21 Nov 2024 11:04:09 -0800 (PST)
 Received: from [192.168.0.7] (ip-109-42-51-70.web.vodafone.de. [109.42.51.70])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-aa50b2f4d94sm4553066b.63.2024.11.21.11.03.15
+ a640c23a62f3a-aa50b57beb4sm3909966b.151.2024.11.21.11.04.07
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 21 Nov 2024 11:03:17 -0800 (PST)
-Message-ID: <a2c76eb9-877c-4d71-a168-aa1ff82b2973@redhat.com>
-Date: Thu, 21 Nov 2024 20:03:14 +0100
+ Thu, 21 Nov 2024 11:04:09 -0800 (PST)
+Message-ID: <155840b0-d461-4699-aaa6-4b85e542281e@redhat.com>
+Date: Thu, 21 Nov 2024 20:04:06 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 12/39] tests/functional: logs details of console
- interaction operations
+Subject: Re: [PATCH 13/39] tests/functional: don't try to wait for the empty
+ string
 To: =?UTF-8?Q?Alex_Benn=C3=A9e?= <alex.bennee@linaro.org>,
  qemu-devel@nongnu.org
 Cc: Peter Maydell <peter.maydell@linaro.org>,
@@ -106,7 +106,7 @@ Cc: Peter Maydell <peter.maydell@linaro.org>,
  Aurelien Jarno <aurelien@aurel32.net>, Ani Sinha <anisinha@redhat.com>,
  Alistair Francis <alistair.francis@wdc.com>
 References: <20241121165806.476008-1-alex.bennee@linaro.org>
- <20241121165806.476008-13-alex.bennee@linaro.org>
+ <20241121165806.476008-14-alex.bennee@linaro.org>
 From: Thomas Huth <thuth@redhat.com>
 Autocrypt: addr=thuth@redhat.com; keydata=
  xsFNBFH7eUwBEACzyOXKU+5Pcs6wNpKzrlJwzRl3VGZt95VCdb+FgoU9g11m7FWcOafrVRwU
@@ -150,23 +150,23 @@ Autocrypt: addr=thuth@redhat.com; keydata=
  oiT+z+/E59qj/EKfyce3sbC9XLjXv3mHMrq1tKX4G7IJGnS989E/fg6crv6NHae9Ckm7+lSs
  IQu4bBP2GxiRQ+NV3iV/KU3ebMRzqIC//DCOxzQNFNJAKldPe/bKZMCxEqtVoRkuJtNdp/5a
  yXFZ6TfE1hGKrDBYAm4vrnZ4CXFSBDllL59cFFOJCkn4Xboj/aVxxJxF30bn
-In-Reply-To: <20241121165806.476008-13-alex.bennee@linaro.org>
+In-Reply-To: <20241121165806.476008-14-alex.bennee@linaro.org>
 X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: cb7nG2AGItiXuaUBb_TLk9Yg_GuCA42aDwjsWnHU48k_1732215798
+X-Mimecast-MFC-PROC-ID: PuaN0qKuDIrtvOYpKiSuYEFIoJ35qot3FkvtWIS-IxY_1732215850
 X-Mimecast-Originator: redhat.com
 Content-Language: en-US
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=170.10.133.124; envelope-from=thuth@redhat.com;
+Received-SPF: pass client-ip=170.10.129.124; envelope-from=thuth@redhat.com;
  helo=us-smtp-delivery-124.mimecast.com
 X-Spam_score_int: -21
 X-Spam_score: -2.2
 X-Spam_bar: --
 X-Spam_report: (-2.2 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.14,
  DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H3=0.001, RCVD_IN_MSPIKE_WL=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H2=-0.001,
  RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001, RCVD_IN_VALIDITY_SAFE_BLOCKED=0.001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -185,32 +185,17 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 On 21/11/2024 17.57, Alex Bennée wrote:
 > From: Daniel P. Berrangé <berrange@redhat.com>
 > 
-> When functional tests go wrong, it will often be related to the console
-> interaction wait state. By logging the messages that we're looking for,
-> and data we're about to be sending, it'll be easier to diagnose where
-> tests are getting stuck.
+> Telling exec_command_wand_wait_for_pattern to wait for the empty
+> string does not make any conceptual sense, as a check for empty
+> string will always succeed. It makes even less sense when followed
+> by a call to wait_for_console_pattern() with a real match.
 > 
 > Signed-off-by: Daniel P. Berrangé <berrange@redhat.com>
-> Message-Id: <20241121154218.1423005-13-berrange@redhat.com>
+> Message-Id: <20241121154218.1423005-14-berrange@redhat.com>
 > Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
 > ---
->   tests/functional/qemu_test/cmd.py | 3 +++
->   1 file changed, 3 insertions(+)
-> 
-> diff --git a/tests/functional/qemu_test/cmd.py b/tests/functional/qemu_test/cmd.py
-> index cbabb1ceed..98722a9cf6 100644
-> --- a/tests/functional/qemu_test/cmd.py
-> +++ b/tests/functional/qemu_test/cmd.py
-> @@ -85,6 +85,9 @@ def _console_interaction(test, success_message, failure_message,
->           vm = test.vm
->       console = vm.console_file
->       console_logger = logging.getLogger('console')
-> +    test.log.debug(
-> +        f"Console interaction: success_msg='{success_message}' " +
-> +        f"failure_msg='{failure_message}' send_string='{send_string}'")
->       while True:
->           if send_string:
->               vm.console_socket.sendall(send_string.encode())
+>   tests/functional/test_virtio_gpu.py | 3 +--
+>   1 file changed, 1 insertion(+), 2 deletions(-)
 
 Reviewed-by: Thomas Huth <thuth@redhat.com>
 
