@@ -4,68 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 99421D7879A
-	for <qemu-riscv@archiver.kernel.org>; Thu, 21 Nov 2024 17:12:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CBA50D7879A
+	for <qemu-riscv@archiver.kernel.org>; Thu, 21 Nov 2024 17:12:31 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tEAdb-0008HH-Be; Thu, 21 Nov 2024 12:06:39 -0500
+	id 1tEAVd-0004ac-C4; Thu, 21 Nov 2024 11:58:25 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1tEAdZ-00088q-4v
- for qemu-riscv@nongnu.org; Thu, 21 Nov 2024 12:06:37 -0500
-Received: from mail-wm1-x333.google.com ([2a00:1450:4864:20::333])
+ id 1tEAVX-0004We-5f
+ for qemu-riscv@nongnu.org; Thu, 21 Nov 2024 11:58:20 -0500
+Received: from mail-wr1-x434.google.com ([2a00:1450:4864:20::434])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1tEAdR-0001Zm-1R
- for qemu-riscv@nongnu.org; Thu, 21 Nov 2024 12:06:36 -0500
-Received: by mail-wm1-x333.google.com with SMTP id
- 5b1f17b1804b1-4314fa33a35so9589555e9.1
- for <qemu-riscv@nongnu.org>; Thu, 21 Nov 2024 09:06:26 -0800 (PST)
+ id 1tEAVP-0007z6-T9
+ for qemu-riscv@nongnu.org; Thu, 21 Nov 2024 11:58:18 -0500
+Received: by mail-wr1-x434.google.com with SMTP id
+ ffacd0b85a97d-382423e1f7aso722815f8f.2
+ for <qemu-riscv@nongnu.org>; Thu, 21 Nov 2024 08:58:11 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1732208785; x=1732813585; darn=nongnu.org;
+ d=linaro.org; s=google; t=1732208290; x=1732813090; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=idIcVKGpYjCDsx+KcIa06gkN9HyuOLEg0Ymsw5Q1ZdE=;
- b=r782XFJHMgK5HGG2p6y6i9+BHtyGGe+0ub3KPDvw46HrVpzBG4aX8lZxtGnR7e8c9M
- h6eaDAxGr+q27dnR05IqXe3M02yQHdvqvy+P7vhT+H+nFxqYQYkIQQ3xLSZa/0olIsa2
- ijwGRpDWeK4y7A6d5mC4rkw6tBDGYUlSHrgcp04v5UWyBfAQVGpnYfbLW8/irLdGjrv4
- fShYbpuPJaEA358oBB0hWwsIt4eOJGnuQEEiNYYdBczmpD/G1JzUdy43KDu6wS1C9+TW
- HQiAzSWsxwVjEgk+FD0sUwrMXUZsQCzfuhAkJKoIe2t0SyFSlqUE3TudGf7yUh7qqsZq
- JzKw==
+ bh=VMCy7EhA7nNoXN4BB2O8qdNc46ZWyWADLDGmK+DUhKU=;
+ b=mh/pMQscgda3GBpKKZrTP77SMcDtIQAa4M2gSFFXRGf3U6HW2sE9lhCkuT8Fh58kjx
+ HOCUNd+xI3MPs6RWXgUkYFv+Fw5GUOivptbIndw8f2rbzt1s3H4WrwzYWYRXgqKIO0Ez
+ nMQF2xAKTwyVLbqJMHCQH+YEwZTjOznHidTJt9JjVy4ykZjHi+gcr010Nj10/NtNDx57
+ aSKVyrNK8vTYBFxz4Q74Ytf0ZDljDPKUIp1qBQ5DKUyodS7DtAuTvFjLgHR88GFoU06P
+ Mv8NlCiLqOxq/epobvrRW3REUh2cG9JUp1hmN72Z22Dgznw29ggdiDilGmXj5j/xWcQU
+ 5bOA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732208785; x=1732813585;
+ d=1e100.net; s=20230601; t=1732208290; x=1732813090;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=idIcVKGpYjCDsx+KcIa06gkN9HyuOLEg0Ymsw5Q1ZdE=;
- b=j2cZ6FN/Ht2qcFetMUmYc/yTbl7FgtO68u5g5sYArTVSQl3rGG4mj/zK4b6WTIJTOG
- 3OQPLRW2dYyekXgJlEd5oCZVdnNG8ZYh6hTEvAVzdZUpJHR+7wIHza1k24Vylc4BW4kj
- 7ZRuvynbqxmRCE//83JREDRxtl1OeGoJ0B+NUtbWuooEYAbc4lxn9lqAYQ8vq7nEW6Xs
- wUNVgYNfFELAtFDCkwF90NJXq0WdVaZcVHFtDg4eLwPyoQmvLwBwJ7pzGJR2ZTF1bHuB
- VgbDWwtY0M+2rMKxZggfszCZGBG3NzteOJA/nvM0CyCE+96XJn4QX0xvfg2e2RaQW+HE
- njRQ==
+ bh=VMCy7EhA7nNoXN4BB2O8qdNc46ZWyWADLDGmK+DUhKU=;
+ b=RDg3rzOElbW6fXiJp10YDzHcm2obPMN8StNzaOR9wrDOzgUwJ6TFmo9zToNQydWhk2
+ pui+A/GSg1HeKrSDkIxWRl1zGtoam/fC2Ac8BMJAnPyP1iFL6cARuKXeZShbgPwFJx3J
+ JwMx6RdhUv+JHwafD3jzo7VxXQa0IMFEBJaKYT1+/dNHLX5ndBBIh9cYBXcacmJWmePC
+ PEeaM4I0/1OqqsJbXaPFo7kcfaME1YaFnEmYU91dNfokJr6y4IjY02CqIdOdGCrZyqAm
+ A+rnosqA+Q735+PmoIlRnFK9//8t53QKlmfilWu53kdbnKVzjjeXz0EDMknd8f9xX7ss
+ H7LA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUA3YsdhGlXFrR5Fx88nt8kMkHgC1RCH5bDo73YxOa4AYErsNh/8vFhtbrKPf7xnYfuOJQh1IKtaDGM@nongnu.org
-X-Gm-Message-State: AOJu0YzsnAdKRS+3ZMZSDtQ68iilBVKeWhMDvtrlJCSDCk6WclsalLJ3
- UMYT7uBfNsBecy2D2TiNXkGLur3EzKdu81opDos44JTE8Roft6BtTFOa6gkdQeA=
-X-Gm-Gg: ASbGnctnN9bkNZvnPIwHnYuZXP7cBV4fCfOx5pXCAjmsvE9a6EkJHmzBeeqReatl2GT
- xEuh5K918/GwgSLIP9crgIa+XINEpOs9At7XwJFXCOnKMvkROzZ1/JnzfhYJGoe55qLBo4a+qOJ
- AqbeKZndBxF5ODb+x8FR4xY98hiVKJlb4HgFp68F1Hp0JPBg9YTeUPDDsaKi7Xi+uNLxu+NhQi8
- 77Fhls2FjpgkKK8ah9jZUf4fB0SPX0xn7U66j9jvcE/ksyR
-X-Google-Smtp-Source: AGHT+IH6g5M3vTaVsS3CPENTsM7HsoWcPZRMPU6znIjdL1RjlqwiFqX8MvTPqIsvEGnUeu6izcb0BA==
-X-Received: by 2002:a05:600c:c84:b0:431:5ed4:7e7d with SMTP id
- 5b1f17b1804b1-433489d4d91mr68172095e9.18.1732208784265; 
- Thu, 21 Nov 2024 09:06:24 -0800 (PST)
+ AJvYcCUuDiDYPgWpy5/6AIgsUtrDeJTGS7HNrfKuFDocD11yHlTKYOJU0vhD2Z3relIT+PYlnUxmvTWF0i++@nongnu.org
+X-Gm-Message-State: AOJu0Yw1f/NdNjqe/StaWPHOs5IH0cMELzxKaR88sgrjxgk5KiV0rhVg
+ mdMAfih8XUN/l3w96vEbauqo6e6eD+vueUEqFx7GTcMaImo0KH3MGuTOkHufZiE=
+X-Gm-Gg: ASbGncvQh7h8SlC/j25gCqSlZanE6M5cOhF4DPHZjN5ApnThoiafPJfuxJu0OHcnNRX
+ fnJi0X8UITlQPPvfIEyaya7dGCKrEalPsvV6UEXJzdlofiV/IVN+gVUORSyOnDjYsgMNU47L8Iq
+ m56d95Bm0arxBf0CUMpL5TKXY6rKSmo+894SL0/201hfhRUUHSeGpbvSRT7q0MM2b8138ZPDEa0
+ 9t5/udb0wDN4p8d4vamJgL/9vgAKjFYS70PGGqvHP2jH1yB
+X-Google-Smtp-Source: AGHT+IH+MC7eCDHoQMDKArNYsaKTywvUGhZHwwjRj/MFMddUvEvD+S7p1jx61D8QzHK0h/caHtIs5w==
+X-Received: by 2002:a5d:6da9:0:b0:382:30a5:c377 with SMTP id
+ ffacd0b85a97d-38254b01509mr5296140f8f.32.1732208290382; 
+ Thu, 21 Nov 2024 08:58:10 -0800 (PST)
 Received: from draig.lan ([85.9.250.243]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-433b46172d5sm61230635e9.23.2024.11.21.09.06.23
+ 5b1f17b1804b1-43366cbcd17sm45828635e9.1.2024.11.21.08.58.07
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 21 Nov 2024 09:06:23 -0800 (PST)
+ Thu, 21 Nov 2024 08:58:08 -0800 (PST)
 Received: from draig.lan (localhost [IPv6:::1])
- by draig.lan (Postfix) with ESMTP id 9F3BD604E1;
- Thu, 21 Nov 2024 16:58:09 +0000 (GMT)
+ by draig.lan (Postfix) with ESMTP id 863075F92B;
+ Thu, 21 Nov 2024 16:58:06 +0000 (GMT)
 From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Peter Maydell <peter.maydell@linaro.org>,
@@ -95,17 +95,17 @@ Cc: Peter Maydell <peter.maydell@linaro.org>,
  Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
  Aurelien Jarno <aurelien@aurel32.net>, Ani Sinha <anisinha@redhat.com>,
  Alistair Francis <alistair.francis@wdc.com>
-Subject: [PATCH 35/39] plugins: add missing export for qemu_plugin_num_vcpus
-Date: Thu, 21 Nov 2024 16:58:02 +0000
-Message-Id: <20241121165806.476008-36-alex.bennee@linaro.org>
+Subject: [PATCH 01/39] tests/functional: fix mips64el test to honour workdir
+Date: Thu, 21 Nov 2024 16:57:28 +0000
+Message-Id: <20241121165806.476008-2-alex.bennee@linaro.org>
 X-Mailer: git-send-email 2.39.5
 In-Reply-To: <20241121165806.476008-1-alex.bennee@linaro.org>
 References: <20241121165806.476008-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::333;
- envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x333.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::434;
+ envelope-from=alex.bennee@linaro.org; helo=mail-wr1-x434.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -128,29 +128,33 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Pierrick Bouvier <pierrick.bouvier@linaro.org>
+From: Daniel P. Berrangé <berrange@redhat.com>
 
-Fixes: 4a448b148ca ("plugins: add qemu_plugin_num_vcpus function")
+The missing directory separator resulted in the kernel file being
+created 1 level higher than expected.
+
+Reviewed-by: Alex Bennée <alex.bennee@linaro.org>
 Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
-Signed-off-by: Pierrick Bouvier <pierrick.bouvier@linaro.org>
-Message-Id: <20241112212622.3590693-2-pierrick.bouvier@linaro.org>
+Signed-off-by: Daniel P. Berrangé <berrange@redhat.com>
+Message-Id: <20241121154218.1423005-2-berrange@redhat.com>
 Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
 ---
- include/qemu/qemu-plugin.h | 1 +
- 1 file changed, 1 insertion(+)
+ tests/functional/test_mips64el_malta.py | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/include/qemu/qemu-plugin.h b/include/qemu/qemu-plugin.h
-index 622c9a0232..0fba36ae02 100644
---- a/include/qemu/qemu-plugin.h
-+++ b/include/qemu/qemu-plugin.h
-@@ -803,6 +803,7 @@ void qemu_plugin_register_atexit_cb(qemu_plugin_id_t id,
-                                     qemu_plugin_udata_cb_t cb, void *userdata);
+diff --git a/tests/functional/test_mips64el_malta.py b/tests/functional/test_mips64el_malta.py
+index 6c6355b131..24ebcdb9c1 100755
+--- a/tests/functional/test_mips64el_malta.py
++++ b/tests/functional/test_mips64el_malta.py
+@@ -129,7 +129,7 @@ def do_test_i6400_framebuffer_logo(self, cpu_cores_count):
+         screendump_path = os.path.join(self.workdir, 'screendump.pbm')
  
- /* returns how many vcpus were started at this point */
-+QEMU_PLUGIN_API
- int qemu_plugin_num_vcpus(void);
+         kernel_path_gz = self.ASSET_KERNEL_4_7_0.fetch()
+-        kernel_path = self.workdir + "vmlinux"
++        kernel_path = self.workdir + "/vmlinux"
+         gzip_uncompress(kernel_path_gz, kernel_path)
  
- /**
+         tuxlogo_path = self.ASSET_TUXLOGO.fetch()
 -- 
 2.39.5
 
