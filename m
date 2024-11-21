@@ -4,67 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CCB92D7879C
-	for <qemu-riscv@archiver.kernel.org>; Thu, 21 Nov 2024 17:01:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 43E89D78799
+	for <qemu-riscv@archiver.kernel.org>; Thu, 21 Nov 2024 17:01:57 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tEAWX-00062Y-AG; Thu, 21 Nov 2024 11:59:21 -0500
+	id 1tEAWT-0005mu-BP; Thu, 21 Nov 2024 11:59:17 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1tEAW3-0004xr-Ac
+ id 1tEAW3-0004xe-0N
  for qemu-riscv@nongnu.org; Thu, 21 Nov 2024 11:58:52 -0500
-Received: from mail-wm1-x32d.google.com ([2a00:1450:4864:20::32d])
+Received: from mail-wm1-x329.google.com ([2a00:1450:4864:20::329])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1tEAVc-00089S-51
+ id 1tEAVa-00087v-H3
  for qemu-riscv@nongnu.org; Thu, 21 Nov 2024 11:58:47 -0500
-Received: by mail-wm1-x32d.google.com with SMTP id
- 5b1f17b1804b1-43162cf1eaaso13465635e9.0
- for <qemu-riscv@nongnu.org>; Thu, 21 Nov 2024 08:58:22 -0800 (PST)
+Received: by mail-wm1-x329.google.com with SMTP id
+ 5b1f17b1804b1-43162cf1eaaso13465245e9.0
+ for <qemu-riscv@nongnu.org>; Thu, 21 Nov 2024 08:58:21 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1732208301; x=1732813101; darn=nongnu.org;
+ d=linaro.org; s=google; t=1732208300; x=1732813100; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=0J8O7B8rz7327JxRDKQglna3WLH/kEnovSnEWelS8Vo=;
- b=veXnaYiWzgjzje4yAgtma0DEN7ur/8pFV4kHUPFc1nhQMQaV7YZa4n58WjCeMurym8
- zkpJv+u9bItCkhTGYtpJaV0nJDHPxqHsAjJH9d7UZc7WZvtgs7VVszWfk0G6l7JpvLJh
- /CFZ/2Yi4IjNcvUw1NwGYpEfxTc6y6pgvVHx9Ud5Cc8siNJN6aMHuTN3sZ+Dip5FVs//
- kOz9ZooKtvdBUSf3m4hGdsUPWwlcLJ4k75KZCjZGakuDuF/VOvPaiswrJPhp9xvnkglf
- RzhhB4MDEm/15bxEFQzcjVCFAPgqNrKeeVrOln90K8xb+T5FShlK36zizj6dUKValPY1
- 8hyg==
+ bh=O5sQx390WX16rPflQuG3fyG6MjkwMEEP336vMFADYxQ=;
+ b=Hx3hoKQPrKAAoMuIOAFw9kY/cLrwerCMRpc/3QQMpQxRQgqV/QzWtR1qnkCOz3qOe9
+ yapgCs93EnOqH4bsakisVkA2l/jS0xKQrQqZvzDvQr4gXZQt12SU+/1sssyN3i/Lg3ws
+ LlEdBOAlB4yh3niXPWjskp6JCFwD1gvk46TKjjx6lw7P9IlOD+QwaskY9g9DfYcN9A4n
+ GgHijXXAAyxLUfRbDtIVlTUp0+5SZItUBTU9I5B42mwuCN776vXFTnS6baIB6q9TSDPL
+ sAgrRWu5aPjeVgplJ9IRuNfLwCdaLw5Ia6lNnNmxs4f2GFjMowJzXYBOW0GYSW2PKMuO
+ w0zA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732208301; x=1732813101;
+ d=1e100.net; s=20230601; t=1732208300; x=1732813100;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=0J8O7B8rz7327JxRDKQglna3WLH/kEnovSnEWelS8Vo=;
- b=R/KDldUHVwVPURC2AYGyHzQWdDAZPLktN0SB5FBUVWgIg8fVQ8WoZHHONuKHSiwyDl
- 3es5isaB7JLgafej7T3HZXP7wRP5XNzHNMBHduTeZNfh9E5s5eWqw3DIqOQEgwO+rUH1
- bide74ByuFvTi5upZM/c0lIoGh92lHF+uWBlNA+J96B36nJaebQtWbly+7plbBQ+NA/m
- jPoOHVaSwsmrzZPVfZCXy66Q9hd+EttX10A3FNr8e2KYwumpmU8f3DQKVBuZvEazfKYg
- pC+abgo3TYzvv3d3ZB3XwjCE2kamjf4sg+LEm/2CNvLRILFstXV/n0YY9gWVrxpv/bEh
- Qmjw==
+ bh=O5sQx390WX16rPflQuG3fyG6MjkwMEEP336vMFADYxQ=;
+ b=n9Qje5ve4PAO1v5fKVXKWYOimxHBqOtzE+nJVk/cAPt+kl32rO9JOVbk8W2vVS0e6D
+ ZvPZVCBUYoa7/4ziOKoe8eYYMks+T/YcHSg4yrxZVOOvYl3tXKpYSs36YViGEczyTm5B
+ AThDhi+mX137izTuvwmHu5XuWd8KTOcLslhqUHds9UYI8Z1ac/BaALjBoK3hRubEJLZ0
+ mKSM1Fh5xjxDreOecRw1w2eNRjZdW8Rdz4wTlAbZMdYibYqn5hBmZTt1sGBSi3DiCUZ2
+ YAZTT4ROcz5d7AQKwCv/aF8UsaoHY2eyJwbKF3PjuSeoIhLshi8qy6rLr/ZrMg1xdiBH
+ EItA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXXBnJrBvdihVKZpjzMHuf3KRU2Vq0iKoJuGDbGvX+pxOBabuu1pk0CFACZe6aVdRQ2PMimZBcfagQV@nongnu.org
-X-Gm-Message-State: AOJu0YzuGj5YLs8nVkM+LQmdaBsnCqpOenCBCj+ynwyJhYDE1Xcs6uqt
- 0nf8L6bQQyi0PwNeg6zaV5JW4Tp02gNIVmA48Yu4Aacc2I5B7Hk8QDpqAmDLuAM=
-X-Gm-Gg: ASbGnctfaj+2nbLG02ZTNWUKEZdbHfz3LZEFm+ZzSbccBzHq3IS/AwYDVq00XPBg1jX
- 2KZK8wxsmE8irwrm3iaCW7ul+YVSuxy2ZJh1jsct2aDKXAk9EL4LHNqrns8RFBfIRw270di534k
- QzJU1qClTymdXmmEzSmtlAbKBX8vYYPv5znFjEml2s/XA1DZVpVor/Bj13iFxv+StCrPFvDY1zN
- 4WribCIrBXXrWxP5NRHtZfbgzLxsKRkyyKdlzC+qVt4Lx1T
-X-Google-Smtp-Source: AGHT+IHrHUSpDrsPdu3fCdaafhILv4IsH9mJhPQ37dBOQiFLK5Ur8PnW7t6NdUCqCPRkr22uuFzATg==
+ AJvYcCV7I/bo20hlVYIlY0ZQZZfu39+UkXoenZinX0TpiV7oZLMiGKpEbHg7nSvtr9LHYxVplchKGhwRC81h@nongnu.org
+X-Gm-Message-State: AOJu0YyIrSeKbL6Vt10mfQUO4UDPR8HHcogHAJgCqcZk+eOWk/8EZzxi
+ KzKikep9MXtO1UE0y5KCcMywDHEPkWIeZGLiDTLLZvL5w8QCiwCIRrtMWN0+gIc=
+X-Gm-Gg: ASbGncuZ3tLG2R1hy8hWfX6gQyHn4tHB2P0Et0PIgN3Jf8H5txwi21LyI6zVkC+pa7x
+ oR95y9PJyCiwW7T7kyjFDB74Blq8s7Esf9dIf2dMt1ZMgEmtUXhYRp78k9uB7CMuZ3jK3ryLAjl
+ AbNyPPE8jgjkMFDbEs/7oXmVyw2brlKpdcGnwmFWZ0coqP3f046/vpSa/9HLSAlA5N5LiKaL+Qa
+ 1ha9V6KAo7gNo8Zi2N7e4UvncnWlgBPs+WRWNd2BMTzgPQf
+X-Google-Smtp-Source: AGHT+IFfOxCiQV45h8DxYrwdRyuAkAKBudFuCE/1IvOgdFqlvwf/mDBmijE50A4pf0QU6/MMcK1u6g==
 X-Received: by 2002:a05:600c:3514:b0:431:9a26:3cf6 with SMTP id
- 5b1f17b1804b1-43348981878mr80507875e9.4.1732208301522; 
- Thu, 21 Nov 2024 08:58:21 -0800 (PST)
+ 5b1f17b1804b1-43348981878mr80506225e9.4.1732208298915; 
+ Thu, 21 Nov 2024 08:58:18 -0800 (PST)
 Received: from draig.lan ([85.9.250.243]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-433b45d4dd6sm65367955e9.24.2024.11.21.08.58.14
+ 5b1f17b1804b1-433b45d17e3sm64258435e9.5.2024.11.21.08.58.15
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
  Thu, 21 Nov 2024 08:58:18 -0800 (PST)
 Received: from draig.lan (localhost [IPv6:::1])
- by draig.lan (Postfix) with ESMTP id 36160604A8;
+ by draig.lan (Postfix) with ESMTP id B509B604F0;
  Thu, 21 Nov 2024 16:58:09 +0000 (GMT)
 From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
 To: qemu-devel@nongnu.org
@@ -94,26 +94,25 @@ Cc: Peter Maydell <peter.maydell@linaro.org>,
  Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
  Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
  Aurelien Jarno <aurelien@aurel32.net>, Ani Sinha <anisinha@redhat.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Anders Roxell <anders.roxell@linaro.org>
-Subject: [PATCH 30/39] tests/functional: update the riscv32 tuxrun tests
-Date: Thu, 21 Nov 2024 16:57:57 +0000
-Message-Id: <20241121165806.476008-31-alex.bennee@linaro.org>
+ Alistair Francis <alistair.francis@wdc.com>
+Subject: [PATCH 36/39] plugins: detect qemu plugin API symbols from header
+Date: Thu, 21 Nov 2024 16:58:03 +0000
+Message-Id: <20241121165806.476008-37-alex.bennee@linaro.org>
 X-Mailer: git-send-email 2.39.5
 In-Reply-To: <20241121165806.476008-1-alex.bennee@linaro.org>
 References: <20241121165806.476008-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::32d;
- envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x32d.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::329;
+ envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x329.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -129,34 +128,126 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Now there are new upto date images available we should update to them.
+From: Pierrick Bouvier <pierrick.bouvier@linaro.org>
 
+Instead of using a static file (error prone and hard to keep in sync),
+we generate it using a script.
+
+Note: if a symbol is not exported, we'll now notice it when linking for
+Windows/MacOS platforms.
+
+Signed-off-by: Pierrick Bouvier <pierrick.bouvier@linaro.org>
+Message-Id: <20241112212622.3590693-3-pierrick.bouvier@linaro.org>
 Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
-Cc: Anders Roxell <anders.roxell@linaro.org>
 ---
- tests/functional/test_riscv32_tuxrun.py | 8 ++++----
- 1 file changed, 4 insertions(+), 4 deletions(-)
+ MAINTAINERS                    |  1 +
+ plugins/meson.build            | 12 ++++++---
+ scripts/qemu-plugin-symbols.py | 45 ++++++++++++++++++++++++++++++++++
+ 3 files changed, 55 insertions(+), 3 deletions(-)
+ create mode 100755 scripts/qemu-plugin-symbols.py
 
-diff --git a/tests/functional/test_riscv32_tuxrun.py b/tests/functional/test_riscv32_tuxrun.py
-index 49b57cd428..3c570208d0 100755
---- a/tests/functional/test_riscv32_tuxrun.py
-+++ b/tests/functional/test_riscv32_tuxrun.py
-@@ -17,11 +17,11 @@
- class TuxRunRiscV32Test(TuxRunBaselineTest):
+diff --git a/MAINTAINERS b/MAINTAINERS
+index eb7149bf1a..2b1c4abed6 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -3752,6 +3752,7 @@ F: plugins/
+ F: tests/tcg/plugins/
+ F: tests/functional/test_aarch64_tcg_plugins.py
+ F: contrib/plugins/
++F: scripts/qemu-plugin-symbols.py
  
-     ASSET_RISCV32_KERNEL = Asset(
--        'https://storage.tuxboot.com/20230331/riscv32/Image',
--        '89599407d7334de629a40e7ad6503c73670359eb5f5ae9d686353a3d6deccbd5')
-+        'https://storage.tuxboot.com/buildroot/20241119/riscv32/Image',
-+        '872bc8f8e0d4661825d5f47f7bec64988e9d0a8bd5db8917d57e16f66d83b329')
-     ASSET_RISCV32_ROOTFS = Asset(
--        'https://storage.tuxboot.com/20230331/riscv32/rootfs.ext4.zst',
--        '7168d296d0283238ea73cd5a775b3dd608e55e04c7b92b76ecce31bb13108cba')
-+        'https://storage.tuxboot.com/buildroot/20241119/riscv32/rootfs.ext4.zst',
-+        '511ad34e63222db08d6c1da16fad224970de36517a784110956ba6a24a0ee5f6')
+ AArch64 TCG target
+ M: Richard Henderson <richard.henderson@linaro.org>
+diff --git a/plugins/meson.build b/plugins/meson.build
+index 1cc039d29b..98542e926f 100644
+--- a/plugins/meson.build
++++ b/plugins/meson.build
+@@ -2,17 +2,23 @@ if not get_option('plugins')
+   subdir_done()
+ endif
  
-     def test_riscv32(self):
-         self.set_machine('virt')
++qemu_plugin_symbols = configure_file(
++  input: files('../include/qemu/qemu-plugin.h'),
++  output: 'qemu-plugin.symbols',
++  capture: true,
++  command: [files('../scripts/qemu-plugin-symbols.py'), '@INPUT@'])
++
+ # Modules need more symbols than just those in plugins/qemu-plugins.symbols
+ if not enable_modules
+   if host_os == 'darwin'
+     configure_file(
+-      input: files('qemu-plugins.symbols'),
++      input: qemu_plugin_symbols,
+       output: 'qemu-plugins-ld64.symbols',
+       capture: true,
+       command: ['sed', '-ne', 's/^[[:space:]]*\\(qemu_.*\\);/_\\1/p', '@INPUT@'])
+     emulator_link_args += ['-Wl,-exported_symbols_list,plugins/qemu-plugins-ld64.symbols']
+   else
+-    emulator_link_args += ['-Xlinker', '--dynamic-list=' + (meson.project_source_root() / 'plugins/qemu-plugins.symbols')]
++    emulator_link_args += ['-Xlinker', '--dynamic-list=' + qemu_plugin_symbols.full_path()]
+   endif
+ endif
+ 
+@@ -23,7 +29,7 @@ if host_os == 'windows'
+   # First, create a .def file listing all the symbols a plugin should expect to have
+   # available in qemu
+   win32_plugin_def = configure_file(
+-    input: files('qemu-plugins.symbols'),
++    input: qemu_plugin_symbols,
+     output: 'qemu_plugin_api.def',
+     capture: true,
+     command: ['sed', '-e', '0,/^/s//EXPORTS/; s/[{};]//g', '@INPUT@'])
+diff --git a/scripts/qemu-plugin-symbols.py b/scripts/qemu-plugin-symbols.py
+new file mode 100755
+index 0000000000..e285ebb8f9
+--- /dev/null
++++ b/scripts/qemu-plugin-symbols.py
+@@ -0,0 +1,45 @@
++#!/usr/bin/env python3
++# -*- coding: utf-8 -*-
++#
++# Extract QEMU Plugin API symbols from a header file
++#
++# Copyright 2024 Linaro Ltd
++#
++# Author: Pierrick Bouvier <pierrick.bouvier@linaro.org>
++#
++# This work is licensed under the terms of the GNU GPL, version 2 or later.
++# See the COPYING file in the top-level directory.
++#
++# SPDX-License-Identifier: GPL-2.0-or-later
++
++import argparse
++import re
++
++def extract_symbols(plugin_header):
++    with open(plugin_header) as file:
++        content = file.read()
++    # Remove QEMU_PLUGIN_API macro definition.
++    content = content.replace('#define QEMU_PLUGIN_API', '')
++    expected = content.count('QEMU_PLUGIN_API')
++    # Find last word between QEMU_PLUGIN_API and (, matching on several lines.
++    # We use *? non-greedy quantifier.
++    syms = re.findall(r'QEMU_PLUGIN_API.*?(\w+)\s*\(', content, re.DOTALL)
++    syms.sort()
++    # Ensure we found as many symbols as API markers.
++    assert len(syms) == expected
++    return syms
++
++def main() -> None:
++    parser = argparse.ArgumentParser(description='Extract QEMU plugin symbols')
++    parser.add_argument('plugin_header', help='Path to QEMU plugin header.')
++    args = parser.parse_args()
++
++    syms = extract_symbols(args.plugin_header)
++
++    print('{')
++    for s in syms:
++        print("  {};".format(s))
++    print('};')
++
++if __name__ == '__main__':
++    main()
 -- 
 2.39.5
 
