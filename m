@@ -4,68 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 13AFCD78799
-	for <qemu-riscv@archiver.kernel.org>; Thu, 21 Nov 2024 17:14:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 87647D7879C
+	for <qemu-riscv@archiver.kernel.org>; Thu, 21 Nov 2024 17:14:35 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tEAWN-0005SQ-DB; Thu, 21 Nov 2024 11:59:11 -0500
+	id 1tEAfu-0004m1-VZ; Thu, 21 Nov 2024 12:09:03 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1tEAVo-0004mz-6a
- for qemu-riscv@nongnu.org; Thu, 21 Nov 2024 11:58:37 -0500
-Received: from mail-wm1-x332.google.com ([2a00:1450:4864:20::332])
+ id 1tEAdy-0000tz-C2
+ for qemu-riscv@nongnu.org; Thu, 21 Nov 2024 12:07:02 -0500
+Received: from mail-wr1-x434.google.com ([2a00:1450:4864:20::434])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1tEAVW-00084R-1I
- for qemu-riscv@nongnu.org; Thu, 21 Nov 2024 11:58:34 -0500
-Received: by mail-wm1-x332.google.com with SMTP id
- 5b1f17b1804b1-4315eac969aso6552285e9.1
- for <qemu-riscv@nongnu.org>; Thu, 21 Nov 2024 08:58:17 -0800 (PST)
+ id 1tEAdY-0001ht-3K
+ for qemu-riscv@nongnu.org; Thu, 21 Nov 2024 12:07:02 -0500
+Received: by mail-wr1-x434.google.com with SMTP id
+ ffacd0b85a97d-3825a721ae5so612856f8f.1
+ for <qemu-riscv@nongnu.org>; Thu, 21 Nov 2024 09:06:35 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1732208296; x=1732813096; darn=nongnu.org;
+ d=linaro.org; s=google; t=1732208794; x=1732813594; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=e2HZ23XNFOLk981JEHm7evbs/KcDQehVIWxXpboMiiM=;
- b=ZrMbeQ3ZJE61lgT5ynpIQkaQfqe1xdVyuEnHHbFuJj9nPfIBt+0toE4IoWWE0nfiVV
- M8IPHu9iKWjej8FWPzFtAEaBoz6+tvp5It3nrgd4sxTE9deqv/c5EJ6BkmBRvNsuKckp
- OP1jN+UDk9YrCyaFaFIPiqMJMA5pzz1LSauiE42G4UI3p6U0QkrdSL0oZDCEhHkPwpx4
- ML8NO+VBTqOGxkwItP8TuWkr8kGOrfCWAXIy5FRT4tP/eK9Cfq70FEPxQcP8hMsD6B6q
- Pk/WVT9TDtRvtJbh0pB+7tuseOI4hSfpoF1H4Fay58Fp4gL6TGMGJbvvUkIRkXPNDRZJ
- b3mg==
+ bh=bFU4el5KlCeAp3YtkOJsY4eYz2mtebMU2xCmSIZyiTw=;
+ b=VV8uIK0ODFgxYEYp915CgjkDG+byNSdd3eDEnpMx3FS/vi9J5GpODEHheZQrvpbEW2
+ C36ylmlRV8jiaIh1nRYYnkbWb9PoLSptx7kt7gNcp4bB4RsbJFSEtIN7aHKvxVFXp08g
+ r43orLgO+ee5Q/E/DgSoMZIg0hvW4c+NfcoJx4VLnGPGbrUUakrtuUMmmNEQjikICg39
+ LtpgBgNVaCojDoMovCh/pq+4hGr2tUSvqfBp3aAKHCwBbJpdiEkRy7HDfcp6BGajrzbO
+ iqzWGFZJLULyx38qBv1huUgoAQ4SarouG4m3g4+Pp2LXta/t1PZUAe6N8aMuFVgNfJgl
+ SkeA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732208296; x=1732813096;
+ d=1e100.net; s=20230601; t=1732208794; x=1732813594;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=e2HZ23XNFOLk981JEHm7evbs/KcDQehVIWxXpboMiiM=;
- b=oa2VwBSjiCzP200cjtttI+7rp3fIVD13KDbs3KepxoeFntv/LlcfCpBdLiRBJMnKtE
- k8gOTVm5mKadBtu0fIGVm7QSGLDJHJwbUfdoxSnZP7Sp+DwXOlkqq213kJqnF25te6TY
- Q9gnhRjXHuSUFC1f5kZKVbMMW7iXm1XdRKyXmCVSoFbv/pZGHEhdhGHcZahvieD+JjOc
- BbtG4Kw+SUKqNSTNxuFK5sPx4aCuXne3q7lV6HI3UlvHt/n4q7b8AYgNV/SNSslyFftf
- 2yTF7LSToE2jqg3cal5bUw8th35NdPiD0dIi28M79heJdC1N8iDeknCqikdO0a5iCe8l
- Bnyw==
+ bh=bFU4el5KlCeAp3YtkOJsY4eYz2mtebMU2xCmSIZyiTw=;
+ b=Xpyk73pfJA71eXpNGhaHWLu6UtTarxyfhG8f73DyxC0AVDRIXGhbjGXEPfIzLcmszm
+ PIJmn5prBy/3PFQRmFGbOSsct86Gfk3EEPWZulI40O+CtXye1jvPvWZWFUU9ym4gY7+f
+ sirpuqcoZgIl/qsqitTftcGjC7XTsq50ojtlPF625FbLXu2JTNDm8mhQoRhFjIkbaM2N
+ m/TmZWozwGSIsdjYortFjEVT+qI8n19tT0NWQhcCx3zHt1CTBGQ6lbd2NEr0jPdTcqc9
+ uhmuwQW6xhKkXVTt987j6D2BEhEq+U1EcrTzQWEYdJ5AD4uBMsHvXqgyDiKquXbilj7/
+ 4aVw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCW3QH3zXQrebVPUC+3jaDl1zMak4KyWpEWBqxY+RqN7L40oNJUq30/1G2ZUWBf9LxyXnjACN/NB9CF3@nongnu.org
-X-Gm-Message-State: AOJu0YzFN1upYV1huyHAHFaU3BlKG2rhBa06slt5y9w87D16uzWAUHvq
- 0/r4oAzbgguBVSWPlWu2NoLIucUZzx5J6ugIpAa8IipLPJz4Nx/iNEYcS+fgpGY=
-X-Gm-Gg: ASbGncu/dE/gK6VBiGSiqGVXa+JiIlHyD9gt30fEYSfnuKnolT7IfwtZ2JpBMMJHykw
- 7gML4sg2Rr15UlhZAZ4ejI6BpBJGUNs2exkOqAcEVF2p5SXlAkuoFz7XN/10s0D2KPHSTmVXArq
- a+9g5/ccKC7pvEedVVEGq3eog2maqLmwNugm6FD4mrj9SxM+X/sR8UhOvskqLE6KdhSVI74MM4Y
- jvJtvf7Dr62503OEl6iQveg824neUDfKNiIisBVLO+sth8m
-X-Google-Smtp-Source: AGHT+IGDHBlSamv94hqq39SE1SaufjquwOaoSGOK1WLNw6iTeG+uZEgDu2CvhBFW9NHQ5b4/zJX4fw==
-X-Received: by 2002:a05:600c:a4b:b0:42c:b166:913 with SMTP id
- 5b1f17b1804b1-433c5cb049dmr36104345e9.11.1732208296361; 
- Thu, 21 Nov 2024 08:58:16 -0800 (PST)
+ AJvYcCXCOdwR58WtOBQpj6MI+1Y8sNj533DswsZXdYITY2hdajYODc5Ylkrzc/J1D+xX0E2UIf+sCPu5CaK9@nongnu.org
+X-Gm-Message-State: AOJu0YzjNcO+40lFTcXTUBlXDwhb/e9xElOkIANZbkjrD0VK7g2g0tYu
+ kY1bzp3KQIWC8hiwjlBi4gfbPOEq6L8Y/vXDRerJv+f7wVX1BCROb07ZX1fwP0F6vwNKE0ntv9d
+ j
+X-Gm-Gg: ASbGnctwKQvN78RPBkY0bxB8fMT4kyJ3qf9St+M/RTHRyIYt+YnIlYpY5hVABM9DF4T
+ aW/0XFUve1QE0SfDZahNnzLS9JYC2i5cQCnx5m8ygoNZv09ovdXbjcMTLpLqrQjb7iYNh04J3Gn
+ zpyO9IjANWucpNuym06p43s8EWlbuMhytnMFxdvHIxxuJCGhoh0Htrw76lyLhZwuErGl02Bf5Y9
+ kxgk+SNTLyhaabL1MB26ws8xwx68KMTKOhQVTn0JMPiDFS4
+X-Google-Smtp-Source: AGHT+IGpZzsOfWKIxnHwhDiYdAIYTFTTusnUuC4Lsp7DaH54JkclD9fSEl5Lekatt8v4buYU2bsXcA==
+X-Received: by 2002:a5d:6c6a:0:b0:382:4b04:a586 with SMTP id
+ ffacd0b85a97d-38259cf1b3cmr3162856f8f.16.1732208793251; 
+ Thu, 21 Nov 2024 09:06:33 -0800 (PST)
 Received: from draig.lan ([85.9.250.243]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3825fbc44f7sm18708f8f.82.2024.11.21.08.58.10
+ ffacd0b85a97d-3825fbc3531sm37567f8f.80.2024.11.21.09.06.28
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 21 Nov 2024 08:58:14 -0800 (PST)
+ Thu, 21 Nov 2024 09:06:30 -0800 (PST)
 Received: from draig.lan (localhost [IPv6:::1])
- by draig.lan (Postfix) with ESMTP id 7AA3D60357;
- Thu, 21 Nov 2024 16:58:07 +0000 (GMT)
+ by draig.lan (Postfix) with ESMTP id CB11E6046F;
+ Thu, 21 Nov 2024 16:58:08 +0000 (GMT)
 From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Peter Maydell <peter.maydell@linaro.org>,
@@ -94,25 +95,26 @@ Cc: Peter Maydell <peter.maydell@linaro.org>,
  Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
  Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
  Aurelien Jarno <aurelien@aurel32.net>, Ani Sinha <anisinha@redhat.com>,
- Alistair Francis <alistair.francis@wdc.com>
-Subject: [PATCH 11/39] tests/functional: enable debug logging for QEMUMachine
-Date: Thu, 21 Nov 2024 16:57:38 +0000
-Message-Id: <20241121165806.476008-12-alex.bennee@linaro.org>
+ Alistair Francis <alistair.francis@wdc.com>,
+ Anders Roxell <anders.roxell@linaro.org>
+Subject: [PATCH 26/39] tests/functional: update the mips64 tuxrun tests
+Date: Thu, 21 Nov 2024 16:57:53 +0000
+Message-Id: <20241121165806.476008-27-alex.bennee@linaro.org>
 X-Mailer: git-send-email 2.39.5
 In-Reply-To: <20241121165806.476008-1-alex.bennee@linaro.org>
 References: <20241121165806.476008-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::332;
- envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x332.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::434;
+ envelope-from=alex.bennee@linaro.org; helo=mail-wr1-x434.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -128,40 +130,34 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Daniel P. Berrangé <berrange@redhat.com>
+Now there are new upto date images available we should update to them.
 
-Set the 'qemu.machine' logger to 'DEBUG' level, to ensure we see log
-messages related to the QEMUMachine class. Most importantly this
-ensures we capture the full QEMU command line args for instances we
-spawn.
-
-Signed-off-by: Daniel P. Berrangé <berrange@redhat.com>
-Message-Id: <20241121154218.1423005-12-berrange@redhat.com>
 Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
+Cc: Anders Roxell <anders.roxell@linaro.org>
 ---
- tests/functional/qemu_test/testcase.py | 6 ++++++
- 1 file changed, 6 insertions(+)
+ tests/functional/test_mips64_tuxrun.py | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/tests/functional/qemu_test/testcase.py b/tests/functional/qemu_test/testcase.py
-index f9c9de1166..e2a329c3e5 100644
---- a/tests/functional/qemu_test/testcase.py
-+++ b/tests/functional/qemu_test/testcase.py
-@@ -57,9 +57,15 @@ def setUp(self, bin_prefix):
-         self._log_fh.setFormatter(fileFormatter)
-         self.log.addHandler(self._log_fh)
+diff --git a/tests/functional/test_mips64_tuxrun.py b/tests/functional/test_mips64_tuxrun.py
+index 54af1ae794..0e4c65961d 100755
+--- a/tests/functional/test_mips64_tuxrun.py
++++ b/tests/functional/test_mips64_tuxrun.py
+@@ -17,11 +17,11 @@
+ class TuxRunMips64Test(TuxRunBaselineTest):
  
-+        # Capture QEMUMachine logging
-+        self.machinelog = logging.getLogger('qemu.machine')
-+        self.machinelog.setLevel(logging.DEBUG)
-+        self.machinelog.addHandler(self._log_fh)
-+
-     def tearDown(self):
-         if "QEMU_TEST_KEEP_SCRATCH" not in os.environ:
-             shutil.rmtree(self.workdir)
-+        self.machinelog.removeHandler(self._log_fh)
-         self.log.removeHandler(self._log_fh)
+     ASSET_MIPS64_KERNEL = Asset(
+-        'https://storage.tuxboot.com/20230331/mips64/vmlinux',
+-        '09010e51e4b8bcbbd2494786ffb48eca78f228e96e5c5438344b0eac4029dc61')
++        'https://storage.tuxboot.com/buildroot/20241119/mips64/vmlinux',
++        'fe2882d216898ba2c56b49ba59f46ad392f36871f7fe325373cd926848b9dbdc')
+     ASSET_MIPS64_ROOTFS = Asset(
+-        'https://storage.tuxboot.com/20230331/mips64/rootfs.ext4.zst',
+-        '69d91eeb04df3d8d172922c6993bb37d4deeb6496def75d8580f6f9de3e431da')
++        'https://storage.tuxboot.com/buildroot/20241119/mips64/rootfs.ext4.zst',
++        'b8c98400216b6d4fb3b3ff05e9929aa015948b596cf0b82234813c84a4f7f4d5')
  
-     def main():
+     def test_mips64(self):
+         self.set_machine('malta')
 -- 
 2.39.5
 
