@@ -4,81 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 87B0CE65D10
-	for <qemu-riscv@archiver.kernel.org>; Fri, 22 Nov 2024 01:31:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 715E8E65D19
+	for <qemu-riscv@archiver.kernel.org>; Fri, 22 Nov 2024 03:23:23 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tEIVq-0002Dw-4N; Thu, 21 Nov 2024 20:31:10 -0500
+	id 1tEKFd-0005Ug-Vn; Thu, 21 Nov 2024 22:22:34 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <palmer@rivosinc.com>)
- id 1tEIVp-0002Dg-12
- for qemu-riscv@nongnu.org; Thu, 21 Nov 2024 20:31:09 -0500
-Received: from mail-pf1-x430.google.com ([2607:f8b0:4864:20::430])
+ (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
+ id 1tEKFc-0005Ta-II
+ for qemu-riscv@nongnu.org; Thu, 21 Nov 2024 22:22:32 -0500
+Received: from mail-pl1-x635.google.com ([2607:f8b0:4864:20::635])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <palmer@rivosinc.com>)
- id 1tEIVj-00070Y-N6
- for qemu-riscv@nongnu.org; Thu, 21 Nov 2024 20:31:08 -0500
-Received: by mail-pf1-x430.google.com with SMTP id
- d2e1a72fcca58-720cb6ac25aso1288992b3a.3
- for <qemu-riscv@nongnu.org>; Thu, 21 Nov 2024 17:31:02 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
+ id 1tEKFa-0003wJ-4E
+ for qemu-riscv@nongnu.org; Thu, 21 Nov 2024 22:22:32 -0500
+Received: by mail-pl1-x635.google.com with SMTP id
+ d9443c01a7336-2128383b86eso16406135ad.2
+ for <qemu-riscv@nongnu.org>; Thu, 21 Nov 2024 19:22:29 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1732239061; x=1732843861;
- darn=nongnu.org; 
- h=to:from:cc:content-transfer-encoding:mime-version:message-id:date
- :subject:from:to:cc:subject:date:message-id:reply-to;
- bh=92YAmZw5ycp/h77RXNXa7Lv4KjKlLVQ4bfD0i3NvNdc=;
- b=qUDJ0OtxFqQdrkP8ZY+XjGY/Uw+I3GJKkE03ZeamjDIAw8+TiSNEYkhNnqe3HPzhIF
- CkWvJnQLvOTR7N1ib0FGAavTnSR05sRSXYB19DtfGIUju6uct8cBwLkonYLYSlCYZHVG
- aR7Rg59XwKKwz6uo8biEjCuKC/+IsjiAeZVPXPm/u2Wg1vgqpvMrz2QeHN3UXrUfzAAL
- pw/vpuGRHLvT3ok2QNnTs8NI3wPpN87bOxrsGtdfIBSw3wm+rfxYlrS5R2XwnbTHkeKu
- XS5r2MBhnx9mPSQ8eqmdrYO9E8NEwcolDDgYG40Rx1aoUWeIAlPzV1bnenG2EIPIdrUF
- LPRA==
+ d=sifive.com; s=google; t=1732245749; x=1732850549; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=ete+ZJB8URbofv6Sb72yOCLqH3KqEk//Slye3l6+Ywk=;
+ b=ReYY0V14yx7limW5OhkEIqMDkrcvla4NKGieLXG5C8GEphe3eTB0naP/L6HUfUuVFK
+ HMPCrxu9vkeJd3QEgqN8Z4MzXrpweGd0EGCPvEHYnBVtCeCoNkwr+tbD3l6OIV7knyu1
+ 8Ua/DT0RYocKCwhbOXKEQ9B5vlgV6Q+ysvpdypxM4FETP+OpEGr+E9mjc15zinI/LQUm
+ PxcfRNxSi9I6pEFy/Cyge7NjfTTD0h15tOUoZ8a3uROuxK01nDWZseyjJoB/+uYk9eIs
+ FTKXlm/NbqsCPe0GMEWHgg4/67dbE4QVrSGR7jIz65w3jK0Ni2Yi9vRpiTF+bavgN/4a
+ +RVg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732239061; x=1732843861;
- h=to:from:cc:content-transfer-encoding:mime-version:message-id:date
- :subject:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=92YAmZw5ycp/h77RXNXa7Lv4KjKlLVQ4bfD0i3NvNdc=;
- b=Ptcov+EsNQgddJ0V1IwVMiTgH3UrG47hf0hF6NlvcLZlBzCTTUSpxWC3gwMMGf/pP4
- OTYE0v67V7woZzu3po6C/oWdnv5yK6+2ZJrZ9ZNuJTLCFriINdAnrltYevfn8/JoWikw
- Ol6p3iFK4lunWSToY+f8pl75udqBw2PtWGjZplUyiPJ3MkOa/rkUd8/UjusoHU+7dE7l
- Bnrhz87JU4Gh9Mz0EDVNiDbprALFeeU9zIzZMwIa4zSxGK/YJyhaMvCumvQ6Cp5Q1rCP
- bVLquhQkyfk/JM9pWwz1ZkdcJ2VYF17EzScO/V3OIpc+2gucZKRGERzKjgIiiDNCk4eB
- ywuQ==
+ d=1e100.net; s=20230601; t=1732245749; x=1732850549;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=ete+ZJB8URbofv6Sb72yOCLqH3KqEk//Slye3l6+Ywk=;
+ b=esIIJ7qdEpCvEz3tLJs0xoR/Id0zOxqxnL+zSC6q29yzcItHkpuvrn/BAgaGqkYZoL
+ BT7ZS2OkBF4aLFfwgGZz2LXEX6OWjtVzqVC2dngAOQXrCAnsOJ/Z3bHYHGPh/MCpEf1I
+ m+J24lwUqt2q+TMiV2mdRjzgxLvGX5O+W0spKszLiNmcBjRUquLUBPwo+tqABuFyP7xO
+ 7Ga5HQefdUwdidtbZw7xQuB5VodZRD1wFayXiGDPAGW8CQyeMqvR4bEtmRMvgW8WN6vt
+ UvtP8bpg80s1V0o8o8A+mXu+n/Ar0i+8XcvR3nSoqMUDX7Q+Cp3Wmdfoj7kJ+7TFSkCh
+ /X6w==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVCrVyas7uYCarmN/8UE/d63Pz1LXQ2w5dlNQQ0GAVfclGsIbloojS4Q3DnY5fM6cB6BD0qmBmnYT2e@nongnu.org
-X-Gm-Message-State: AOJu0YyEjSOPn1SWe62eLrRJ/FyQXDgcpH6ni2FOZB6yGQJJDhh5YyOn
- Y9Timh+IsPWTMh2s2T4F18SBtd5WE8tudIUbOsKJclIilRTW6oW7D65WLJ7QXIA=
-X-Gm-Gg: ASbGncuO4W9Mynv7sfCGvNA5/82usMipg270Mfvi9VLlI+IlMsAwc45aAa6M9XlAwHE
- 80wmiYEVO95T+Z04Rk7KFiW1rAA0bTZ+0nAmje8+/VfOcgy2azumo9dOQ6hSlIj6HqTIq/Jlvhd
- GWdDhImvn3JZEXdKBc8HhZLUNqL5TFh6ep6GXc+LlAW7SIsCq/4Ri8pIkjipS2bi+ssiIcXbC+E
- obCUzZDTyVLqrU7OFUE/Js3HuvhqM+1hmFWOkoOBFrvoUFK
-X-Google-Smtp-Source: AGHT+IEraRndVoO1zvu8MHa7qYvE/Qugp/gtQeTysZzb9dbUuE1lJ1SvzyreBMgx5juzR/eijjl3XQ==
-X-Received: by 2002:a05:6a00:4990:b0:724:e1bc:367e with SMTP id
- d2e1a72fcca58-724e1bc36admr646588b3a.23.1732239060802; 
- Thu, 21 Nov 2024 17:31:00 -0800 (PST)
-Received: from localhost ([192.184.165.199]) by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-724de5312fdsm439681b3a.125.2024.11.21.17.31.00
+ AJvYcCVvI3vSrlkIvBQo5Ayj775eG1OFgQ07dBlqzW8mtP9aPlPoKPy4XBLRjN/ZjIX443oI8B7Dt2GdEfOn@nongnu.org
+X-Gm-Message-State: AOJu0YzK7B7Rbs1l1mIx/nsD/yXLESkLiUeetuxjlEfi7JpX9huUzuwE
+ DNmT1jrZ0qiumu0f14KqgE0Z7+ex6m7KFjQTzwssSk/QPWOHLb8V0n46hTRxyyk=
+X-Gm-Gg: ASbGncvP6BT5FWA+SPP77U/oKsldlXFipE4o5ZLgi90/1Sbz1nU7NVJ3DEVmgGELi2p
+ 2RxNPsNq+YgfN4JEMWGD6kYghTZrgNXuPGuQq8mcp+MZbJn90k2eH9AHUMC9tIzGn/UmSZIXsza
+ cBk8uiAB1lEu4Pg7gMwILHBYhy+f8cg0s6UBCQ1zoOIXvs8OoEWEOxgViLSUOvGkMJATx0Ee5Rk
+ rPONvEx03vRF7S/7nLGwn1t1hrE2TZn1dT2MzUD+HVEMPra/KmzU0IFYEOWSm+7qghpVYKoiEBw
+ dXLG3g==
+X-Google-Smtp-Source: AGHT+IHBEVnFrbzMXecQHh/nZ+GmGIm98FgEFEm1Vd5Gh6Yy+xQdDvnKgQD8iOmlfoA0OndNvUSyYQ==
+X-Received: by 2002:a17:902:e742:b0:212:4e37:204b with SMTP id
+ d9443c01a7336-2129fd74184mr13294575ad.51.1732245748842; 
+ Thu, 21 Nov 2024 19:22:28 -0800 (PST)
+Received: from fchang-1826.internal.sifive.com ([136.226.240.187])
+ by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-2129dc157f3sm5506905ad.203.2024.11.21.19.22.27
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 21 Nov 2024 17:31:00 -0800 (PST)
-Subject: [PATCH] target/riscv: Don't start user-mode with VILL
-Date: Thu, 21 Nov 2024 16:32:47 -0800
-Message-ID: <20241122003247.8955-1-palmer@rivosinc.com>
-X-Mailer: git-send-email 2.45.2
+ Thu, 21 Nov 2024 19:22:28 -0800 (PST)
+From: frank.chang@sifive.com
+To: qemu-devel@nongnu.org,
+	qemu-riscv@nongnu.org
+Cc: Tommy Wu <tommy.wu@sifive.com>, Frank Chang <frank.chang@sifive.com>,
+ Alistair Francis <alistair.francis@wdc.com>
+Subject: [PATCH v9 1/6] target/riscv: Add 'ext_smrnmi' in the RISCVCPUConfig
+Date: Fri, 22 Nov 2024 11:22:12 +0800
+Message-Id: <20241122032217.3816540-2-frank.chang@sifive.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20241122032217.3816540-1-frank.chang@sifive.com>
+References: <20241122032217.3816540-1-frank.chang@sifive.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Cc: Palmer Dabbelt <palmer@rivosinc.com>
-From: Palmer Dabbelt <palmer@rivosinc.com>
-To: qemu-devel@nongnu.org,          qemu-riscv@nongnu.org
-Received-SPF: pass client-ip=2607:f8b0:4864:20::430;
- envelope-from=palmer@rivosinc.com; helo=mail-pf1-x430.google.com
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+Received-SPF: pass client-ip=2607:f8b0:4864:20::635;
+ envelope-from=frank.chang@sifive.com; helo=mail-pl1-x635.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -95,36 +102,31 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-This is still under discussion in the psABI, but it's looking like we're
-going to forbid VILL in userspace in order to maintain compatibility
-with binaries that don't expect implementations to trap whole register
-moves under VILL (as in QEMU before 4eff52cd46 ("target/riscv: Add vill
-check for whole vector register move instructions"), for example).
+From: Tommy Wu <tommy.wu@sifive.com>
 
-Fixes: f8c1f36a2e ("target/riscv: Set vtype.vill on CPU reset")
-Link: https://github.com/riscv-non-isa/riscv-elf-psabi-doc/pull/454
-Signed-off-by: Palmer Dabbelt <palmer@rivosinc.com>
+The boolean variable 'ext_smrnmi' is used to determine whether the
+Smrnmi extension exists.
+
+Signed-off-by: Frank Chang <frank.chang@sifive.com>
+Signed-off-by: Tommy Wu <tommy.wu@sifive.com>
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 ---
- target/riscv/cpu.c | 4 ++++
- 1 file changed, 4 insertions(+)
+ target/riscv/cpu_cfg.h | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index f219f0c3b5..d19a44de99 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -1022,7 +1022,11 @@ static void riscv_cpu_reset_hold(Object *obj, ResetType type)
-     cs->exception_index = RISCV_EXCP_NONE;
-     env->load_res = -1;
-     set_default_nan_mode(1, &env->fp_status);
-+#ifdef CONFIG_USER_ONLY
-+    env->vill = false;
-+#else
-     env->vill = true;
-+#endif
- 
- #ifndef CONFIG_USER_ONLY
-     if (cpu->cfg.debug) {
+diff --git a/target/riscv/cpu_cfg.h b/target/riscv/cpu_cfg.h
+index 59d6fc445d..321f64fd72 100644
+--- a/target/riscv/cpu_cfg.h
++++ b/target/riscv/cpu_cfg.h
+@@ -128,6 +128,7 @@ struct RISCVCPUConfig {
+     bool ext_ssaia;
+     bool ext_sscofpmf;
+     bool ext_smepmp;
++    bool ext_smrnmi;
+     bool rvv_ta_all_1s;
+     bool rvv_ma_all_1s;
+     bool rvv_vl_half_avl;
 -- 
-2.45.2
+2.34.1
 
 
