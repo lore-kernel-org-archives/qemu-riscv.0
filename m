@@ -4,78 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 119FDE65D3F
-	for <qemu-riscv@archiver.kernel.org>; Fri, 22 Nov 2024 10:16:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6FE85D78768
+	for <qemu-riscv@archiver.kernel.org>; Fri, 22 Nov 2024 10:20:32 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tEQi4-0004Vp-0B; Fri, 22 Nov 2024 05:16:20 -0500
+	id 1tEQlt-0006lY-16; Fri, 22 Nov 2024 05:20:17 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1tEQi1-0004Up-Dl
- for qemu-riscv@nongnu.org; Fri, 22 Nov 2024 05:16:17 -0500
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
+ (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1tEQlr-0006kv-T1
+ for qemu-riscv@nongnu.org; Fri, 22 Nov 2024 05:20:15 -0500
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1tEQhz-0005GB-VW
- for qemu-riscv@nongnu.org; Fri, 22 Nov 2024 05:16:17 -0500
+ (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1tEQlp-0005wr-JQ
+ for qemu-riscv@nongnu.org; Fri, 22 Nov 2024 05:20:15 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1732270575;
+ s=mimecast20190719; t=1732270812;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
- bh=f8lnsQx38mwQcFWsJU9FQHM8nMFtGVXvm6OeViFzSec=;
- b=GFZ2cFbnbPrRl6WxX/PPls90rDhv9MhsRkcIP5RJWW7JTbBfT/LhpzzEtm3M7Shvr7TN2u
- FLiXp+nsVi08I7ZUzsJdNWPKKCF9JPz/X5+/biyp6xTrRZIvKIljrJ9fbcOafxb7oUILAR
- b6Lla3Ys9qrATCjcLuWnseo0MQPx0xQ=
-Received: from mail-wm1-f69.google.com (mail-wm1-f69.google.com
- [209.85.128.69]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=Vdinpbk14Hi0vdwJjM+nP1P7ckZicRqdxHQUsPZ49PI=;
+ b=e/C7y5XhKzgpu3wJzHl78ojOdbWobCVJR63lm7si5jqXsZWjxF/zgJVK0r6pj5CsswOCi3
+ cGdo34BSSZ/uDHxZkoj1mr6U0VFcuYlYgs9Nx01nZKnM5ZGlqge+75Xrxb/E0SIo8sq6i6
+ rPRsuDySBAsGSw+K5itlZ7nLrgDRnyM=
+Received: from mail-pl1-f198.google.com (mail-pl1-f198.google.com
+ [209.85.214.198]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-595-P3CHVrDxO2u_tPeMtJuXkA-1; Fri, 22 Nov 2024 05:16:14 -0500
-X-MC-Unique: P3CHVrDxO2u_tPeMtJuXkA-1
-X-Mimecast-MFC-AGG-ID: P3CHVrDxO2u_tPeMtJuXkA
-Received: by mail-wm1-f69.google.com with SMTP id
- 5b1f17b1804b1-4315a0f25afso14563855e9.3
- for <qemu-riscv@nongnu.org>; Fri, 22 Nov 2024 02:16:13 -0800 (PST)
+ us-mta-460-x136MRyoMYu7GZyy2ZFD_w-1; Fri, 22 Nov 2024 05:20:11 -0500
+X-MC-Unique: x136MRyoMYu7GZyy2ZFD_w-1
+X-Mimecast-MFC-AGG-ID: x136MRyoMYu7GZyy2ZFD_w
+Received: by mail-pl1-f198.google.com with SMTP id
+ d9443c01a7336-211f6b49476so26407775ad.3
+ for <qemu-riscv@nongnu.org>; Fri, 22 Nov 2024 02:20:11 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732270573; x=1732875373;
+ d=1e100.net; s=20230601; t=1732270810; x=1732875610;
  h=content-transfer-encoding:in-reply-to:autocrypt:content-language
  :from:references:cc:to:subject:user-agent:mime-version:date
  :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=f8lnsQx38mwQcFWsJU9FQHM8nMFtGVXvm6OeViFzSec=;
- b=LDku0ppr/VIDX7uKpSDOzKL41CFT3SJrddLbL4Tc/Pylgu8/WfkkSg9KXvRAM9vEOG
- UUY0GpdKQOJP5zQKIIxMEliApzc28gu6GQJgE6o065c7tuRD8N3YJYc7ZmEuzPFOV+Mh
- uC2mVyf8FBi2XqhtYk+LuBzjSz3DBkZATTb6lfbcjNGrzuZFHWM+zUyppqmCbRM7NlbJ
- S0eUAYHF9BHddlM4t791Jw0o49JH73PNfSdzQibJPcC7oSv+fpc5yLukb5Zg2GDA04M3
- RRZK5qVqS/WdRC8IQU3NaBuV3a+EuKrEA809a1gNy6MogEIl1JyXgDEJycVbLC5WAAS5
- e4kQ==
+ bh=Vdinpbk14Hi0vdwJjM+nP1P7ckZicRqdxHQUsPZ49PI=;
+ b=K+7U8BfqD3yPNN4/2s7YcY6o0EY4QtZsZIUU/L5Jmlv/WvuUFv3ZV6o5WNwwnikdor
+ rrZ5s3eI/hfPXrehYVVACdXBksOFLSFHq6bkK1j82bK/O7SDzBExO+S59mi8rFizgviz
+ UmUSH5KnldmoBK9/YJlRy259MvtuAgCb9DatWjtgb70HZd+axDeLLfkoxmej7gZTcLht
+ +zVE2NhijQb+dlAayUWtQs4EcuhIUB+Wne/KZE8orv8jc0/Y1ksqj5ah8dli1mpbJTvk
+ 3YhpZPG+VGzff0kaxNtbPdztVa6HVR/tuRGHVDvSYjN+6vdPQGhjHPpvkzNLAdQDb6Gp
+ CibA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVSsAmSXuvfP9saOvY3mZ1rAA5ScXwa29zrN+iOjU9mqXHnTjeDX3+IxHRjR3bMBq+feLfMKq7bcRC/@nongnu.org
-X-Gm-Message-State: AOJu0YwBTVRJQsl6GiWvJYKd/aiCnju9cPdqVWasG7oC/oAkG+WWwR6O
- P+Vkjjr1jvEmz3hz8WldkFbcjC1NqInKN/4hBGPDGZ1BAio3tOQUHWSSCv5W/g/+k3NazUZ6U2h
- Ugh2bWQZLWzeO32QN54vNbkMOs7iEvuFb2/z+cEuxBWUPX9gWQf/G
-X-Gm-Gg: ASbGnctP2ODeWxtZpBdQn4ztpMJIVnpSCD+hICrzIzBWIsRSAiU+6pbPXMM2Vn6Gb5z
- MvcGW08H+QDDx5c+QYuOvwJuLLXaKpXnjpr7ixIevf6H8SDp9ZuNGQhCG5lUqEg9UqXmYuwGqds
- 4q/pvg3RvmxWDw73gYJqWVgByZxBvh9fWqBUNT+THbgUec2oFlzM8uaVKgmuiVz54fVIdeLmhGC
- CM3j2Lbr2UbStrNhfphKfwTeW3AN2ZdoKhGlxWgdrSPcAFdH0+oJd9eilbTZrJYgACvQE7XbwQ=
-X-Received: by 2002:a05:600c:3514:b0:428:f0c2:ef4a with SMTP id
- 5b1f17b1804b1-433ce4250dbmr19335025e9.13.1732270570551; 
- Fri, 22 Nov 2024 02:16:10 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IGHo0dMMeyeTVjw7sO7qEsfCUR5pFNnWMw0MKnvrQku8cCuOIX2nHJuf7SozYhf8NOdWGk6Ew==
-X-Received: by 2002:a05:600c:3514:b0:428:f0c2:ef4a with SMTP id
- 5b1f17b1804b1-433ce4250dbmr19334755e9.13.1732270570224; 
- Fri, 22 Nov 2024 02:16:10 -0800 (PST)
+ AJvYcCVG89L0iVn5V+zu1/VyO89ohtTWugrwTzOTUtFYWfmOaV8/el+IQDuw4//wmB+gjOLyy/dYg7iZKeC0@nongnu.org
+X-Gm-Message-State: AOJu0Yz2dDLG92FQXQYy7VxigutGO4F6fURdyHIKBTXWQLF6VrkmESYJ
+ irnnMjiyZ9T21u9IlRlucBq247evDkr2rv4p3JC20Kw4gEjbY7vLdSLpLPy3tAWiM8+kxq3Xv0n
+ 0GF/HitXCTKP6PaTkDXRuv5dy84xLm1jhFLDFJd62OcA7XKV0FbSK
+X-Gm-Gg: ASbGncvMps9Nu6udvXoYO5xk0MX4OviOA2tOWp8uOW1gccNqU4ePnmictzhVSxl3We4
+ e0eC8UVoI581dY9jbSDRTMdHFRLac6CMRaz9ZHhw35z9YPgk/15tAgLwCOapYpPtXMKHSbZkuVO
+ 6m/2tegZAzgo6nzWBzVajvQDazTY/oqc3jsMyQ7RAJkMZPjiIg/EMxI/YsrI8RECOPjvTcnbGPE
+ tX1xgwXC/Frz1aYnJdRzOhV1cu0KT5Cct6C6PcCBvyHa8dBHo4F+01m/pgQIvOq2+3cc1PfCDE=
+X-Received: by 2002:a17:902:e5cb:b0:212:10e3:7671 with SMTP id
+ d9443c01a7336-2129fce2fcdmr23452685ad.4.1732270810740; 
+ Fri, 22 Nov 2024 02:20:10 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IHEhBo8Khik9aasB84X0v5dFqjQ/BsjYMmI+DbDcg5Lx7ddrmD9Z/2v7Ms7VSwpwUtz5ujC9w==
+X-Received: by 2002:a17:902:e5cb:b0:212:10e3:7671 with SMTP id
+ d9443c01a7336-2129fce2fcdmr23452155ad.4.1732270810376; 
+ Fri, 22 Nov 2024 02:20:10 -0800 (PST)
 Received: from [10.33.192.206] (nat-pool-str-t.redhat.com. [149.14.88.106])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-433cde98b70sm22148395e9.41.2024.11.22.02.16.08
+ d9443c01a7336-2129dbff5f7sm12437295ad.123.2024.11.22.02.19.50
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 22 Nov 2024 02:16:09 -0800 (PST)
-Message-ID: <42d7844f-7e12-4e7a-9bf5-fea3f913a34d@redhat.com>
-Date: Fri, 22 Nov 2024 11:16:08 +0100
+ Fri, 22 Nov 2024 02:20:10 -0800 (PST)
+Message-ID: <c4ad832e-b440-4c09-8cdc-456845085eff@redhat.com>
+Date: Fri, 22 Nov 2024 11:19:46 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 23/39] tests/functional: add a m68k tuxrun tests
+Subject: Re: [PATCH 18/39] tests/functional: avoid accessing log_filename on
+ earlier failures
 To: =?UTF-8?Q?Alex_Benn=C3=A9e?= <alex.bennee@linaro.org>,
  qemu-devel@nongnu.org
 Cc: Peter Maydell <peter.maydell@linaro.org>,
@@ -102,10 +103,9 @@ Cc: Peter Maydell <peter.maydell@linaro.org>,
  Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
  Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
  Aurelien Jarno <aurelien@aurel32.net>, Ani Sinha <anisinha@redhat.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Laurent Vivier <laurent@vivier.eu>, Anders Roxell <anders.roxell@linaro.org>
+ Alistair Francis <alistair.francis@wdc.com>
 References: <20241121165806.476008-1-alex.bennee@linaro.org>
- <20241121165806.476008-24-alex.bennee@linaro.org>
+ <20241121165806.476008-19-alex.bennee@linaro.org>
 From: Thomas Huth <thuth@redhat.com>
 Autocrypt: addr=thuth@redhat.com; keydata=
  xsFNBFH7eUwBEACzyOXKU+5Pcs6wNpKzrlJwzRl3VGZt95VCdb+FgoU9g11m7FWcOafrVRwU
@@ -149,23 +149,23 @@ Autocrypt: addr=thuth@redhat.com; keydata=
  oiT+z+/E59qj/EKfyce3sbC9XLjXv3mHMrq1tKX4G7IJGnS989E/fg6crv6NHae9Ckm7+lSs
  IQu4bBP2GxiRQ+NV3iV/KU3ebMRzqIC//DCOxzQNFNJAKldPe/bKZMCxEqtVoRkuJtNdp/5a
  yXFZ6TfE1hGKrDBYAm4vrnZ4CXFSBDllL59cFFOJCkn4Xboj/aVxxJxF30bn
-In-Reply-To: <20241121165806.476008-24-alex.bennee@linaro.org>
+In-Reply-To: <20241121165806.476008-19-alex.bennee@linaro.org>
 X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: QK6fmLllXoAxYZ2jH_mry_apytcqp4CVT0Czz4KzrkQ_1732270573
+X-Mimecast-MFC-PROC-ID: XqJqk9sagkr2rOUkkqe3yvd74gc4A-1JDddJXBNOIrU_1732270811
 X-Mimecast-Originator: redhat.com
 Content-Language: en-US
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=170.10.129.124; envelope-from=thuth@redhat.com;
+Received-SPF: pass client-ip=170.10.133.124; envelope-from=thuth@redhat.com;
  helo=us-smtp-delivery-124.mimecast.com
 X-Spam_score_int: -21
 X-Spam_score: -2.2
 X-Spam_bar: --
 X-Spam_report: (-2.2 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.14,
  DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H2=-0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H3=0.001, RCVD_IN_MSPIKE_WL=0.001,
  RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001, RCVD_IN_VALIDITY_SAFE_BLOCKED=0.001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -182,38 +182,19 @@ Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 On 21/11/2024 17.57, Alex Bennée wrote:
-> We didn't have this before and as it exercises the m68k virt platform
-> it seems worth adding. We don't wait for the shutdown because QEMU
-> will auto-exit on the shutdown.
+> From: Daniel P. Berrangé <berrange@redhat.com>
 > 
-> Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
-> Cc: Laurent Vivier <laurent@vivier.eu>
-> Cc: Anders Roxell <anders.roxell@linaro.org>
-> ---
->   tests/functional/meson.build         |  1 +
->   tests/functional/test_m68k_tuxrun.py | 34 ++++++++++++++++++++++++++++
->   2 files changed, 35 insertions(+)
->   create mode 100644 tests/functional/test_m68k_tuxrun.py
-> 
-> diff --git a/tests/functional/meson.build b/tests/functional/meson.build
-> index 923f9e7078..3ce969066c 100644
-> --- a/tests/functional/meson.build
-> +++ b/tests/functional/meson.build
-> @@ -95,6 +95,7 @@ tests_m68k_system_thorough = [
->     'm68k_mcf5208evb',
->     'm68k_nextcube',
->     'm68k_q800',
-> +  'm68k_tuxrun',
->   ]
->   
->   tests_microblaze_system_thorough = [
-> diff --git a/tests/functional/test_m68k_tuxrun.py b/tests/functional/test_m68k_tuxrun.py
-> new file mode 100644
+> If a failure occurs early in the QemuBaseTest constructor, the
+> 'log_filename' object atttribute may not exist yet. This happens
 
-Please make it executable like all other test files, so we can run it more 
-easily without the test harness, too!
+s/atttribute/attribute/
 
-  Thanks,
-   Thomas
+> most notably if the QEMU_TEST_QEMU_BINARY is not set. We can't
+> initialize 'log_filename' earlier as we use the binary to identify
+> the architecture which is then used to build the path in which the
+> logs are stored.
+
+With the typo fixed:
+Reviewed-by: Thomas Huth <thuth@redhat.com>
 
 
