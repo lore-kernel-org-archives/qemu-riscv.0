@@ -4,99 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4B3C0E65D25
-	for <qemu-riscv@archiver.kernel.org>; Fri, 22 Nov 2024 05:03:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0A3E2E65D29
+	for <qemu-riscv@archiver.kernel.org>; Fri, 22 Nov 2024 05:43:43 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tELoN-0004r7-OE; Fri, 22 Nov 2024 00:02:31 -0500
+	id 1tEMRu-0008IU-OT; Fri, 22 Nov 2024 00:43:23 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <akihiko.odaki@daynix.com>)
- id 1tELoH-0004q3-O3
- for qemu-riscv@nongnu.org; Fri, 22 Nov 2024 00:02:26 -0500
-Received: from mail-oa1-x2d.google.com ([2001:4860:4864:20::2d])
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1tEMRt-0008IC-30; Fri, 22 Nov 2024 00:43:21 -0500
+Received: from mail-ua1-x92b.google.com ([2607:f8b0:4864:20::92b])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <akihiko.odaki@daynix.com>)
- id 1tELoA-0006Ne-8g
- for qemu-riscv@nongnu.org; Fri, 22 Nov 2024 00:02:24 -0500
-Received: by mail-oa1-x2d.google.com with SMTP id
- 586e51a60fabf-27d0e994ae3so889246fac.3
- for <qemu-riscv@nongnu.org>; Thu, 21 Nov 2024 21:02:17 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1tEMRq-0005YT-Ng; Fri, 22 Nov 2024 00:43:20 -0500
+Received: by mail-ua1-x92b.google.com with SMTP id
+ a1e0cc1a2514c-856fd9237e7so458738241.2; 
+ Thu, 21 Nov 2024 21:43:18 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=daynix-com.20230601.gappssmtp.com; s=20230601; t=1732251737; x=1732856537;
- darn=nongnu.org; 
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=p8eRtnHTFdUK6JH38yoNL3qr++02oV60vh90qEZTfb4=;
- b=iGtqeZ9xiDm69MM0YfuJ5LCzCESw4w8XIRL8FSkgPVencomf9Yy6OYO8Jmbde2OTQc
- 1/rIvGxceE3BRxfgWoS/S8niL8K1+IlSnMr3t95R2BH/Vow50Sv7ra0nhK0V+iuc+53L
- UlaIzU08LwQ3TkWilJwoYIZt4eadJXJE4EXXzYwREZSoHz4ikYpbEM+Rn09EgOj5DQkE
- MCv19Rck3yA4Uili5x1cqB+OmHeg/07Cn5/KE8J1lH4ofrpm6Ofh1jvYBv9c1oK6XO9T
- 8YdOrM7Q6GdYtbzOtsujOw60MZvvn24Hryixf6zRgGohVXULHftpbiCwBy5ht5YyJ45M
- 5awA==
+ d=gmail.com; s=20230601; t=1732254197; x=1732858997; darn=nongnu.org;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=OQWcDgvvv1UdyqG2YL5z2Ya4zYzlMYkwG3KOBTS/J28=;
+ b=PCkvedB96RAYsHKEmX6ieB8R2osf9BfyPjKChC7l1lBN3SVsLEgEcLOvOmn6zGEb9t
+ L0tvWSlhA0Z5LLfDyuFBpTHGx6b8IunBux1VPiM5VgBzDN8xEIivh9v1DFwF/HI7cQLi
+ 7xae2pi13tWo/+kWbSsb8F8CFEWyhVHWuoDHbO5pn8PNiVHZfszzlnIv77GSnVFjvDOl
+ JqP6n92N4NsuMzcRjZ4Sxf/oaviCiqx/HU+MbCnpiavPECKTnO417BN09QmhWmm9zTy7
+ 3vPf3KpOwalJ3G3TZqsl3CA8rIDbMTq09FjBD5I/RI2dEFfpbB/5YD/PK0HTfZPxCRx1
+ +y2A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732251737; x=1732856537;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=p8eRtnHTFdUK6JH38yoNL3qr++02oV60vh90qEZTfb4=;
- b=V/WvQLB/W6uU364RAYaVzsKg1DvIccAmcyfxJrQ2CikXNlKUxsr42jDpNe+WVK31uU
- YwBRTUVQndiciYNu+c4tU3YzF+8if6oQmv4uBvzf7oya3fs2F4H4+YUgXhRhqTXW0gJm
- 7OHrUMuYCY1lOlCst5XtxrAqjYu6v1lmRovbUmW7qX/3biGHfQLX4E47bukeNAtvzOM0
- 3tAmjwXqEriSWot7wKssSgEr8Q5YYbHoGOjHtoQTltEQCBph6R9wET0j4rypStFbHYot
- PiQw4nH+eGCK7U4DlpKwz/rgevsfpG04b8/ucM6WW9fm8GmYBzm6Avv4/EUmoCmkqcl1
- Mavg==
+ d=1e100.net; s=20230601; t=1732254197; x=1732858997;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=OQWcDgvvv1UdyqG2YL5z2Ya4zYzlMYkwG3KOBTS/J28=;
+ b=qleor3r7oMlSGa2Ib3UIFIBlIt5nmrbel1IQSuYdnylNH2ggZE0NA9GECPvk+JeWg2
+ 9INW38VVZs8VSSuzEPIHf1JyvHNX3/R73Nw9ZPzKqD8lCECeWVURuHe7aWXqvHfKkF1O
+ zI5kzQx+8qgrJFBu+rc0BZ/HOCI9ciE4xS/EJCpubOmiVrw9287qeoVirzgzYAQ88W+M
+ fXD3heev/vVm1geLr1dg5/c5u0UL8HTQaB80bU1qR63KlCtMwEs+LJfkQOhgimN/NP/B
+ G7JQZlzZwV8PECVJSeoXecr8oHksZkOBKyDfUFkaRgiOm7ptKt3zoiJq6/p8/1vYP2gB
+ d6zw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUqTmikB09SO0b2CUphGoPbJhaAHwt8OU0dMHCcXfQyIBPkZB/Em4qBHkDIbWFMF5+4V7yn/gM59Qsm@nongnu.org
-X-Gm-Message-State: AOJu0Yxa+q5WJSfeo/IOjim0mTNoA858GKnezEZ5Gk5BXboVtglYD42i
- SMuXLPf5aWKCYiuz8BzC1LaQZpTfG/92KfFEwW4CZOl5bPwn57l9rkVftz3BOJ8=
-X-Gm-Gg: ASbGncuwvfAWI2yxHoCwDLc+02py1AK/nsYTaLwQTmOGhZ5M8jasTbOnrq+vlRi0ojH
- 1ktE7aQbEhlEerlenKaWelV0RpfZY2GemCjmtz1G44Jz/ygAlZkEw7lpNsjlQhIapdflOgQCIeC
- HviiZYEkWF09NtB3HVyIL/JAXky68935GZoRONJ42HHUhZqtgcWAq1jOZgOU4SIsUpRol145SI1
- 7TUVhBypc/OscjcCBl7m/MrO9ohbhMjH5RnY8LT+daJMDdsbgDUkmAJREqP1OY=
-X-Google-Smtp-Source: AGHT+IHHxuN/LqHH44Lnl4wMddP+/VinjycPIRu5RdvBuYy7JHsQD8BtI9NQ0sPfk2OCje8jHA4eww==
-X-Received: by 2002:a05:6870:1b18:b0:295:eb24:71cf with SMTP id
- 586e51a60fabf-29720b45f28mr1973581fac.2.1732251736877; 
- Thu, 21 Nov 2024 21:02:16 -0800 (PST)
-Received: from [157.82.207.167] ([157.82.207.167])
- by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-5f0698798e1sm262050eaf.41.2024.11.21.21.02.11
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 21 Nov 2024 21:02:16 -0800 (PST)
-Message-ID: <4ff6f75f-eece-4c78-9701-fc190e483f4e@daynix.com>
-Date: Fri, 22 Nov 2024 14:02:09 +0900
+ AJvYcCUK1pDetzOUS5a5d+sDgHM79/6Ze59ZkI3oxlYHkEiKzM7tdpJ+eygbuQGM9oxvQq8crVyDiGoa/a71@nongnu.org
+X-Gm-Message-State: AOJu0YzypEPg9O3ZFjwWlc0cT2b3ANkUCRb7+QCn+lve/lEDGp29CYYg
+ 8G736lQ6XjXiWhLQ4ZLI8A04i1w40FBDprPIWVftm9D+lnEtzWs5MWjgNLogbV9tHZT/1UAD86b
+ eVkqM8kc7sffnKNn1myAIDfT/NrA=
+X-Gm-Gg: ASbGncuOkHYVsABv6//S+llEHxzVE00E+PQMq96FYgqnDh8mZjuaRX4dwoVKSeKhzJu
+ dXevWYgAa/Yy5CwRoA8hCByoFNGzZlr+f+AQev3WBlvuZ1fN5Zbxtybn5pz99tg==
+X-Google-Smtp-Source: AGHT+IG2FG+HO4IhqUY3LjLamfJQalJLq0k6XuP5jZRdWNfQDeAoYJ5hKXIJMbCGKvkh4NS7XP2pG6owz6p0eTnhYgY=
+X-Received: by 2002:a05:6102:54a3:b0:4a4:9363:b84f with SMTP id
+ ada2fe7eead31-4addcb8b2b2mr2087316137.5.1732254197169; Thu, 21 Nov 2024
+ 21:43:17 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v10 01/15] ui & main loop: Redesign of system-specific
- main thread event handling
-To: Phil Dennis-Jordan <phil@philjordan.eu>, qemu-devel@nongnu.org
-Cc: agraf@csgraf.de, peter.maydell@linaro.org, pbonzini@redhat.com,
- rad@semihalf.com, quic_llindhol@quicinc.com, stefanha@redhat.com,
- mst@redhat.com, slp@redhat.com, richard.henderson@linaro.org,
- eduardo@habkost.net, marcel.apfelbaum@gmail.com, gaosong@loongson.cn,
- jiaxun.yang@flygoat.com, chenhuacai@kernel.org, kwolf@redhat.com,
- hreitz@redhat.com, philmd@linaro.org, shorne@gmail.com, palmer@dabbelt.com,
- alistair.francis@wdc.com, bmeng.cn@gmail.com, liwei1518@gmail.com,
- dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com, jcmvbkbc@gmail.com,
- marcandre.lureau@redhat.com, berrange@redhat.com, qemu-arm@nongnu.org,
- qemu-block@nongnu.org, qemu-riscv@nongnu.org, balaton@eik.bme.hu
-References: <20241113142343.40832-1-phil@philjordan.eu>
- <20241113142343.40832-2-phil@philjordan.eu>
-Content-Language: en-US
-From: Akihiko Odaki <akihiko.odaki@daynix.com>
-In-Reply-To: <20241113142343.40832-2-phil@philjordan.eu>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2001:4860:4864:20::2d;
- envelope-from=akihiko.odaki@daynix.com; helo=mail-oa1-x2d.google.com
-X-Spam_score_int: -18
-X-Spam_score: -1.9
+References: <20241119144956.728384-1-sai.pavan.boddu@amd.com>
+In-Reply-To: <20241119144956.728384-1-sai.pavan.boddu@amd.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Fri, 22 Nov 2024 15:42:51 +1000
+Message-ID: <CAKmqyKMcW3p914U4oH6X0K6e2owOcWF2w6vNhPVVL1ViH4Q3Tg@mail.gmail.com>
+Subject: Re: [PATCH v4] hw/riscv: Add Microblaze V generic board
+To: Sai Pavan Boddu <sai.pavan.boddu@amd.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, 
+ Paolo Bonzini <pbonzini@redhat.com>, Palmer Dabbelt <palmer@dabbelt.com>,
+ Bin Meng <bmeng.cn@gmail.com>, Weiwei Li <liwei1518@gmail.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>, 
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, Simek Michal <michal.simek@amd.com>,
+ =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@linaro.org>, 
+ Iglesias Francisco <francisco.iglesias@amd.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2607:f8b0:4864:20::92b;
+ envelope-from=alistair23@gmail.com; helo=mail-ua1-x92b.google.com
+X-Spam_score_int: -17
+X-Spam_score: -1.8
 X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ WEIRD_QUOTING=0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -112,365 +98,397 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 2024/11/13 23:23, Phil Dennis-Jordan wrote:
-> macOS's Cocoa event handling must be done on the initial (main) thread
-> of the process. Furthermore, if library or application code uses
-> libdispatch, the main dispatch queue must be handling events on the main
-> thread as well.
-> 
-> So far, this has affected Qemu in both the Cocoa and SDL UIs, although
-> in different ways: the Cocoa UI replaces the default qemu_main function
-> with one that spins Qemu's internal main event loop off onto a
-> background thread. SDL (which uses Cocoa internally) on the other hand
-> uses a polling approach within Qemu's main event loop. Events are
-> polled during the SDL UI's dpy_refresh callback, which happens to run
-> on the main thread by default.
-> 
-> As UIs are mutually exclusive, this works OK as long as nothing else
-> needs platform-native event handling. In the next patch, a new device is
-> introduced based on the ParavirtualizedGraphics.framework in macOS.
-> This uses libdispatch internally, and only works when events are being
-> handled on the main runloop. With the current system, it works when
-> using either the Cocoa or the SDL UI. However, it does not when running
-> headless. Moreover, any attempt to install a similar scheme to the
-> Cocoa UI's main thread replacement fails when combined with the SDL
-> UI.
-> 
-> This change tidies up main thread management to be more flexible.
-> 
->   * The qemu_main global function pointer is a custom function for the
->     main thread, and it may now be NULL. When it is, the main thread
->     runs the main Qemu loop. This represents the traditional setup.
->   * When non-null, spawning the main Qemu event loop on a separate
->     thread is now done centrally rather than inside the Cocoa UI code.
->   * For most platforms, qemu_main is indeed NULL by default, but on
->     Darwin, it defaults to a function that runs the CFRunLoop.
->   * The Cocoa UI sets qemu_main to a function which runs the
->     NSApplication event handling runloop, as is usual for a Cocoa app.
->   * The SDL UI overrides the qemu_main function to NULL, thus
->     specifying that Qemu's main loop must run on the main
->     thread.
->   * The GTK UI also overrides the qemu_main function to NULL.
->   * For other UIs, or in the absence of UIs, the platform's default
->     behaviour is followed.
-> 
-> This means that on macOS, the platform's runloop events are always
-> handled, regardless of chosen UI. The new PV graphics device will
-> thus work in all configurations. There is no functional change on other
-> operating systems.
-> 
-> Signed-off-by: Phil Dennis-Jordan <phil@philjordan.eu>
-> Reviewed-by: Akihiko Odaki <akihiko.odaki@daynix.com>
+On Wed, Nov 20, 2024 at 12:50=E2=80=AFAM Sai Pavan Boddu
+<sai.pavan.boddu@amd.com> wrote:
+>
+> Add a basic board with interrupt controller (intc), timer, serial
+> (uartlite), small memory called LMB@0 (128kB) and DDR@0x80000000
+> (configured via command line eg. -m 2g).
+> This is basic configuration which matches HW generated out of AMD Vivado
+> (design tools). But initial configuration is going beyond what it is
+> configured by default because validation should be done on other
+> configurations too. That's why wire also additional uart16500, axi
+> ethernet(with axi dma).
+> GPIOs, i2c and qspi is also listed for completeness.
+>
+> IRQ map is: (addr)
+> 0 - timer (0x41c00000)
+> 1 - uartlite (0x40600000)
+> 2 - i2c (0x40800000)
+> 3 - qspi (0x44a00000)
+> 4 - uart16550 (0x44a10000)
+> 5 - emaclite (0x40e00000)
+> 6 - timer2 (0x41c10000)
+> 7 - axi emac (0x40c00000)
+> 8 - axi dma (0x41e00000)
+> 9 - axi dma
+> 10 - gpio (0x40000000)
+> 11 - gpio2 (0x40010000)
+> 12 - gpio3 (0x40020000)
+>
+> Signed-off-by: Sai Pavan Boddu <sai.pavan.boddu@amd.com>
+> Signed-off-by: Michal Simek <michal.simek@amd.com>
 > ---
-> 
-> v5:
-> 
->   * Simplified the way of setting/clearing the main loop by going back
->     to setting qemu_main directly, but narrowing the scope of what it
->     needs to do, and it can now be NULL.
-> 
-> v6:
-> 
->   * Folded function qemu_run_default_main_on_new_thread's code into
->     main()
->   * Removed whitespace changes left over on lines near code removed
->     between v4 and v5
-> 
-> v9:
-> 
->   * Set qemu_main to NULL for GTK UI as well.
-> 
-> v10:
-> 
->   * Added comments clarifying the functionality and purpose of qemu_main.
-> 
->   include/qemu-main.h     | 21 ++++++++++++++--
->   include/qemu/typedefs.h |  1 +
->   system/main.c           | 50 ++++++++++++++++++++++++++++++++++----
->   ui/cocoa.m              | 54 ++++++++++-------------------------------
->   ui/gtk.c                |  8 ++++++
->   ui/sdl2.c               |  4 +++
->   6 files changed, 90 insertions(+), 48 deletions(-)
-> 
-> diff --git a/include/qemu-main.h b/include/qemu-main.h
-> index 940960a7dbc..fc70681c8b5 100644
-> --- a/include/qemu-main.h
-> +++ b/include/qemu-main.h
-> @@ -5,7 +5,24 @@
->   #ifndef QEMU_MAIN_H
->   #define QEMU_MAIN_H
->   
-> -int qemu_default_main(void);
-> -extern int (*qemu_main)(void);
+> Changes for V2:
+>     Make changes to support -cpu switch
+>     Remove setting of default board
+>     Include doc to toctree
+>     Remove setting of 'imac' extensions as they are available by
+>     default.
+> Chages for V3:
+>     Replace virt with generic
+>     Update doc with supported riscv extensions
+>     Change base CPU to TYPE_RISCV_CPU_BASE
+> Changes for V4:
+>     Improved the doc based on comments
+>     Disabled support for Double-Precision and Hypervisor extensions
+>     Updated Maintainers file at riscv machine space.
+>
+>  MAINTAINERS                                |   6 +
+>  docs/system/riscv/microblaze-v-generic.rst |  42 +++++
+>  docs/system/target-riscv.rst               |   1 +
+>  hw/riscv/microblaze-v-generic.c            | 184 +++++++++++++++++++++
+>  hw/riscv/Kconfig                           |   8 +
+>  hw/riscv/meson.build                       |   1 +
+>  6 files changed, 242 insertions(+)
+>  create mode 100644 docs/system/riscv/microblaze-v-generic.rst
+>  create mode 100644 hw/riscv/microblaze-v-generic.c
+>
+> diff --git a/MAINTAINERS b/MAINTAINERS
+> index acc7405aed2..100a138d8f2 100644
+> --- a/MAINTAINERS
+> +++ b/MAINTAINERS
+> @@ -1619,6 +1619,12 @@ F: docs/system/riscv/sifive_u.rst
+>  F: hw/*/*sifive*.c
+>  F: include/hw/*/*sifive*.h
+>
+> +AMD Microblaze-V Generic Board
+> +M: Sai Pavan Boddu <sai.pavan.boddu@amd.com>
+> +S: Maintained
+> +F: hw/riscv/microblaze-v-generic.c
+> +F: docs/system/riscv/microblaze-v-generic.rst
+> +
+>  RX Machines
+>  -----------
+>  rx-gdbsim
+> diff --git a/docs/system/riscv/microblaze-v-generic.rst b/docs/system/ris=
+cv/microblaze-v-generic.rst
+> new file mode 100644
+> index 00000000000..5606f88d570
+> --- /dev/null
+> +++ b/docs/system/riscv/microblaze-v-generic.rst
+> @@ -0,0 +1,42 @@
+> +Microblaze-V generic board (``amd-microblaze-v-generic``)
+> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D
+> +The AMD MicroBlaze=E2=84=A2 V processor is a soft-core RISC-V processor =
+IP for AMD
+> +adaptive SoCs and FPGAs. The MicroBlaze=E2=84=A2 V processor is based on=
+ the 32-bit (or
+> +64-bit) RISC-V instruction set architecture (ISA) and contains interface=
+s
+> +compatible with the classic MicroBlaze=E2=84=A2 V processor (i.e it is a=
+ drop in
+> +replacement for the classic MicroBlaze=E2=84=A2 processor in existing RT=
+L designs).
+> +More information can be found in below document.
+> +
+> +https://docs.amd.com/r/en-US/ug1629-microblaze-v-user-guide/MicroBlaze-V=
+-Architecture
+> +
+> +The MicroBlaze=E2=84=A2 V generic board in QEMU has following supported =
+devices:
+> +
+> +    - timer
+> +    - uartlite
+> +    - uart16550
+> +    - emaclite
+> +    - timer2
+> +    - axi emac
+> +    - axi dma
+> +
+> +The MicroBlaze=E2=84=A2 V core in QEMU has the following configuration:
+> +
+> +    - RV32I base integer instruction set
+> +    - "Zicsr" Control and Status register instructions
+> +    - "Zifencei" instruction-fetch
+> +    - Extensions: m, a, f, c
+> +
+> +Running
+> +"""""""
+> +Below is an example command line for launching mainline U-boot
+> +(xilinx_mbv32_defconfig) on the Microblaze-V generic board.
+> +
+> +.. code-block:: bash
+> +
+> +   $ qemu-system-riscv32 -M amd-microblaze-v-generic \
+> +     -display none \
+> +     -device loader,addr=3D0x80000000,file=3Du-boot-spl.bin,cpu-num=3D0 =
+\
+> +     -device loader,addr=3D0x80200000,file=3Du-boot.img \
+> +     -serial mon:stdio \
+> +     -device loader,addr=3D0x83000000,file=3Dsystem.dtb \
+> +     -m 2g
+> diff --git a/docs/system/target-riscv.rst b/docs/system/target-riscv.rst
+> index ba195f1518a..95457af130b 100644
+> --- a/docs/system/target-riscv.rst
+> +++ b/docs/system/target-riscv.rst
+> @@ -66,6 +66,7 @@ undocumented; you can get a complete list by running
+>  .. toctree::
+>     :maxdepth: 1
+>
+> +   riscv/microblaze-v-generic
+>     riscv/microchip-icicle-kit
+>     riscv/shakti-c
+>     riscv/sifive_u
+> diff --git a/hw/riscv/microblaze-v-generic.c b/hw/riscv/microblaze-v-gene=
+ric.c
+> new file mode 100644
+> index 00000000000..427e3baca7b
+> --- /dev/null
+> +++ b/hw/riscv/microblaze-v-generic.c
+> @@ -0,0 +1,184 @@
 > +/*
-> + * The function to run on the main (initial) thread of the process.
-> + * NULL means QEMU's main event loop.
-> + * When non-NULL, QEMU's main event loop will run on a purposely created
-> + * thread, after which the provided function pointer will be invoked on
-> + * the initial thread.
-> + * This is useful on platforms which treat the main thread as special
-> + * (macOS/Darwin) and/or require all UI API calls to occur from a
-> + * specific thread.
-> + * Implementing this via a global function pointer variable is a bit
-> + * ugly, but it's probably worth investigating the existing UI thread rule
-> + * violations in the SDL (e.g. #2537) and GTK+ back-ends. Fixing those
-> + * issues might precipitate requirements similar but not identical to those
-> + * of the Cocoa UI; hopefully we'll see some kind of pattern emerge, which
-> + * can then be used as a basis for an overhaul. (In fact, it may turn
-> + * out to be simplest to split the UI/native platform event thread from the
-> + * QEMU main event loop on all platforms, with any UI or even none at all.)
-> + */
-> +extern qemu_main_fn qemu_main;
->   
->   #endif /* QEMU_MAIN_H */
-> diff --git a/include/qemu/typedefs.h b/include/qemu/typedefs.h
-> index 3d84efcac47..b02cfe1f328 100644
-> --- a/include/qemu/typedefs.h
-> +++ b/include/qemu/typedefs.h
-> @@ -131,5 +131,6 @@ typedef struct IRQState *qemu_irq;
->    * Function types
->    */
->   typedef void (*qemu_irq_handler)(void *opaque, int n, int level);
-> +typedef int (*qemu_main_fn)(void);
->   
->   #endif /* QEMU_TYPEDEFS_H */
-> diff --git a/system/main.c b/system/main.c
-> index 9b91d21ea8c..d9397a6d5d0 100644
-> --- a/system/main.c
-> +++ b/system/main.c
-> @@ -24,13 +24,14 @@
->   
->   #include "qemu/osdep.h"
->   #include "qemu-main.h"
-> +#include "qemu/main-loop.h"
->   #include "sysemu/sysemu.h"
->   
-> -#ifdef CONFIG_SDL
-> -#include <SDL.h>
-
-I found dropping these lines prevent building for Windows. This is 
-because pkg-config of sdl2 redefines main() as SDL_main(), and GCC complains
--Wmissing-prototypes for SDL_main(). Here is a link to the relevant code 
-in SDL2:
-https://github.com/libsdl-org/SDL/blob/release-2.30.9/CMakeLists.txt#L2061
-
-> +#ifdef CONFIG_DARWIN
-> +#include <CoreFoundation/CoreFoundation.h>
->   #endif
->   
-> -int qemu_default_main(void)
-> +static int qemu_default_main(void)
->   {
->       int status;
->   
-> @@ -40,10 +41,49 @@ int qemu_default_main(void)
->       return status;
->   }
->   
-> -int (*qemu_main)(void) = qemu_default_main;
-> +/*
-> + * Various macOS system libraries, including the Cocoa UI and anything using
-> + * libdispatch, such as ParavirtualizedGraphics.framework, requires that the
-> + * main runloop, on the main (initial) thread be running or at least regularly
-> + * polled for events. A special mode is therefore supported, where the QEMU
-> + * main loop runs on a separate thread and the main thread handles the
-> + * CF/Cocoa runloop.
+> + * QEMU model of Microblaze V generic board.
+> + *
+> + * based on hw/microblaze/petalogix_ml605_mmu.c
+> + *
+> + * Copyright (c) 2011 Michal Simek <monstr@monstr.eu>
+> + * Copyright (c) 2011 PetaLogix
+> + * Copyright (c) 2009 Edgar E. Iglesias.
+> + * Copyright (C) 2024, Advanced Micro Devices, Inc.
+> + * SPDX-License-Identifier: GPL-2.0-or-later
+> + *
+> + * Written by Sai Pavan Boddu <sai.pavan.boddu@amd.com
+> + *     and by Michal Simek <michal.simek@amd.com>.
 > + */
 > +
-> +static void *call_qemu_default_main(void *opaque)
+> +#include "qemu/osdep.h"
+> +#include "qemu/units.h"
+> +#include "qapi/error.h"
+> +#include "cpu.h"
+> +#include "hw/sysbus.h"
+> +#include "sysemu/sysemu.h"
+> +#include "net/net.h"
+> +#include "hw/boards.h"
+> +#include "hw/char/serial-mm.h"
+> +#include "exec/address-spaces.h"
+> +#include "hw/char/xilinx_uartlite.h"
+> +#include "hw/misc/unimp.h"
+> +
+> +#define LMB_BRAM_SIZE (128 * KiB)
+> +#define MEMORY_BASEADDR 0x80000000
+> +#define INTC_BASEADDR 0x41200000
+> +#define TIMER_BASEADDR 0x41c00000
+> +#define TIMER_BASEADDR2 0x41c10000
+> +#define UARTLITE_BASEADDR 0x40600000
+> +#define ETHLITE_BASEADDR 0x40e00000
+> +#define UART16550_BASEADDR 0x44a10000
+> +#define AXIENET_BASEADDR 0x40c00000
+> +#define AXIDMA_BASEADDR 0x41e00000
+> +#define GPIO_BASEADDR 0x40000000
+> +#define GPIO_BASEADDR2 0x40010000
+> +#define GPIO_BASEADDR3 0x40020000
+> +#define I2C_BASEADDR 0x40800000
+> +#define QSPI_BASEADDR 0x44a00000
+> +
+> +#define TIMER_IRQ           0
+> +#define UARTLITE_IRQ        1
+> +#define UART16550_IRQ       4
+> +#define ETHLITE_IRQ         5
+> +#define TIMER_IRQ2          6
+> +#define AXIENET_IRQ         7
+> +#define AXIDMA_IRQ1         8
+> +#define AXIDMA_IRQ0         9
+> +
+> +static void mb_v_generic_init(MachineState *machine)
 > +{
-> +    int status;
+> +    ram_addr_t ram_size =3D machine->ram_size;
+> +    DeviceState *dev, *dma, *eth0;
+> +    Object *ds, *cs;
+> +    int i;
+> +    RISCVCPU *cpu;
+> +    hwaddr ddr_base =3D MEMORY_BASEADDR;
+> +    MemoryRegion *phys_lmb_bram =3D g_new(MemoryRegion, 1);
+> +    MemoryRegion *phys_ram =3D g_new(MemoryRegion, 1);
+> +    qemu_irq irq[32];
+> +    MemoryRegion *sysmem =3D get_system_memory();
 > +
-> +    bql_lock();
-> +    status = qemu_default_main();
-> +    bql_unlock();
+> +    cpu =3D RISCV_CPU(object_new(machine->cpu_type));
+> +    object_property_set_bool(OBJECT(cpu), "h", false, NULL);
+> +    object_property_set_bool(OBJECT(cpu), "d", false, NULL);
+
+Note that there are a bunch of other extensions that are enabled in
+the base CPU that you aren't disabling.
+
+See https://github.com/qemu/qemu/blob/master/target/riscv/cpu.c#L1472
+
+I don't think it matters too much, but you might want a vendor CPU or
+use the bare CPU and enable the extensions if you want to customise
+the extensions. The base CPU is a bit odd because of the way it had
+grown organically.
+
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+
+Alistair
+
+> +    qdev_realize(DEVICE(cpu), NULL, &error_abort);
+> +    /* Attach emulated BRAM through the LMB.  */
+> +    memory_region_init_ram(phys_lmb_bram, NULL,
+> +                           "mb_v.lmb_bram", LMB_BRAM_SIZE,
+> +                           &error_fatal);
+> +    memory_region_add_subregion(sysmem, 0x00000000, phys_lmb_bram);
 > +
-> +    exit(status);
-> +}
+> +    memory_region_init_ram(phys_ram, NULL, "mb_v.ram",
+> +                           ram_size, &error_fatal);
+> +    memory_region_add_subregion(sysmem, ddr_base, phys_ram);
 > +
-> +#ifdef CONFIG_DARWIN
-> +static int os_darwin_cfrunloop_main(void)
-> +{
-> +    CFRunLoopRun();
-> +    abort();
-> +}
-> +
-> +qemu_main_fn qemu_main = os_darwin_cfrunloop_main;
-> +#else
-> +qemu_main_fn qemu_main;
-> +#endif
->   
->   int main(int argc, char **argv)
->   {
-> +    QemuThread main_loop_thread;
-> +
->       qemu_init(argc, argv);
-> -    return qemu_main();
-> +    if (qemu_main) {
-> +        qemu_thread_create(&main_loop_thread, "qemu_main",
-> +                           call_qemu_default_main, NULL, QEMU_THREAD_DETACHED);
-> +        bql_unlock();
-> +        return qemu_main();
-> +    } else {
-> +        qemu_default_main();
+> +    dev =3D qdev_new("xlnx.xps-intc");
+> +    qdev_prop_set_uint32(dev, "kind-of-intr",
+> +                         1 << UARTLITE_IRQ);
+> +    sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
+> +    sysbus_mmio_map(SYS_BUS_DEVICE(dev), 0, INTC_BASEADDR);
+> +    sysbus_connect_irq(SYS_BUS_DEVICE(dev), 0,
+> +                       qdev_get_gpio_in(DEVICE(cpu), 11));
+> +    for (i =3D 0; i < 32; i++) {
+> +        irq[i] =3D qdev_get_gpio_in(dev, i);
 > +    }
->   }
-> diff --git a/ui/cocoa.m b/ui/cocoa.m
-> index 4c2dd335323..30b8920d929 100644
-> --- a/ui/cocoa.m
-> +++ b/ui/cocoa.m
-> @@ -73,6 +73,8 @@
->       int height;
->   } QEMUScreen;
->   
-> +@class QemuCocoaPasteboardTypeOwner;
 > +
->   static void cocoa_update(DisplayChangeListener *dcl,
->                            int x, int y, int w, int h);
->   
-> @@ -107,6 +109,7 @@ static void cocoa_switch(DisplayChangeListener *dcl,
->   static NSInteger cbchangecount = -1;
->   static QemuClipboardInfo *cbinfo;
->   static QemuEvent cbevent;
-> +static QemuCocoaPasteboardTypeOwner *cbowner;
->   
->   // Utility functions to run specified code block with the BQL held
->   typedef void (^CodeBlock)(void);
-> @@ -1321,8 +1324,10 @@ - (void) dealloc
->   {
->       COCOA_DEBUG("QemuCocoaAppController: dealloc\n");
->   
-> -    if (cocoaView)
-> -        [cocoaView release];
-> +    [cocoaView release];
-> +    [cbowner release];
-> +    cbowner = nil;
+> +    /* Uartlite */
+> +    dev =3D qdev_new(TYPE_XILINX_UARTLITE);
+> +    qdev_prop_set_chr(dev, "chardev", serial_hd(0));
+> +    sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
+> +    sysbus_mmio_map(SYS_BUS_DEVICE(dev), 0, UARTLITE_BASEADDR);
+> +    sysbus_connect_irq(SYS_BUS_DEVICE(dev), 0, irq[UARTLITE_IRQ]);
 > +
->       [super dealloc];
->   }
->   
-> @@ -1938,8 +1943,6 @@ - (void)pasteboard:(NSPasteboard *)sender provideDataForType:(NSPasteboardType)t
->   
->   @end
->   
-> -static QemuCocoaPasteboardTypeOwner *cbowner;
-> -
->   static void cocoa_clipboard_notify(Notifier *notifier, void *data);
->   static void cocoa_clipboard_request(QemuClipboardInfo *info,
->                                       QemuClipboardType type);
-> @@ -2002,43 +2005,8 @@ static void cocoa_clipboard_request(QemuClipboardInfo *info,
->       }
->   }
->   
-> -/*
-> - * The startup process for the OSX/Cocoa UI is complicated, because
-> - * OSX insists that the UI runs on the initial main thread, and so we
-> - * need to start a second thread which runs the qemu_default_main():
-> - * in main():
-> - *  in cocoa_display_init():
-> - *   assign cocoa_main to qemu_main
-> - *   create application, menus, etc
-> - *  in cocoa_main():
-> - *   create qemu-main thread
-> - *   enter OSX run loop
-> - */
-> -
-> -static void *call_qemu_main(void *opaque)
-> -{
-> -    int status;
-> -
-> -    COCOA_DEBUG("Second thread: calling qemu_default_main()\n");
-> -    bql_lock();
-> -    status = qemu_default_main();
-> -    bql_unlock();
-> -    COCOA_DEBUG("Second thread: qemu_default_main() returned, exiting\n");
-> -    [cbowner release];
-> -    exit(status);
-> -}
-> -
->   static int cocoa_main(void)
->   {
-> -    QemuThread thread;
-> -
-> -    COCOA_DEBUG("Entered %s()\n", __func__);
-> -
-> -    bql_unlock();
-> -    qemu_thread_create(&thread, "qemu_main", call_qemu_main,
-> -                       NULL, QEMU_THREAD_DETACHED);
-> -
-> -    // Start the main event loop
->       COCOA_DEBUG("Main thread: entering OSX run loop\n");
->       [NSApp run];
->       COCOA_DEBUG("Main thread: left OSX run loop, which should never happen\n");
-> @@ -2120,8 +2088,6 @@ static void cocoa_display_init(DisplayState *ds, DisplayOptions *opts)
->   
->       COCOA_DEBUG("qemu_cocoa: cocoa_display_init\n");
->   
-> -    qemu_main = cocoa_main;
-> -
->       // Pull this console process up to being a fully-fledged graphical
->       // app with a menubar and Dock icon
->       ProcessSerialNumber psn = { 0, kCurrentProcess };
-> @@ -2185,6 +2151,12 @@ static void cocoa_display_init(DisplayState *ds, DisplayOptions *opts)
->       qemu_clipboard_peer_register(&cbpeer);
->   
->       [pool release];
+> +    /* Full uart */
+> +    serial_mm_init(sysmem, UART16550_BASEADDR + 0x1000, 2,
+> +                   irq[UART16550_IRQ], 115200, serial_hd(1),
+> +                   DEVICE_LITTLE_ENDIAN);
 > +
-> +    /*
-> +     * The Cocoa UI will run the NSApplication runloop on the main thread
-> +     * rather than the default Core Foundation one.
-> +     */
-> +    qemu_main = cocoa_main;
->   }
->   
->   static QemuDisplay qemu_display_cocoa = {
-> diff --git a/ui/gtk.c b/ui/gtk.c
-> index bf9d3dd679a..fbf20161f36 100644
-> --- a/ui/gtk.c
-> +++ b/ui/gtk.c
-> @@ -38,6 +38,7 @@
->   #include "qemu/cutils.h"
->   #include "qemu/error-report.h"
->   #include "qemu/main-loop.h"
-> +#include "qemu-main.h"
->   
->   #include "ui/console.h"
->   #include "ui/gtk.h"
-> @@ -2485,6 +2486,13 @@ static void gtk_display_init(DisplayState *ds, DisplayOptions *opts)
->   #ifdef CONFIG_GTK_CLIPBOARD
->       gd_clipboard_init(s);
->   #endif /* CONFIG_GTK_CLIPBOARD */
+> +    /* 2 timers at irq 0 @ 100 Mhz.  */
+> +    dev =3D qdev_new("xlnx.xps-timer");
+> +    qdev_prop_set_uint32(dev, "one-timer-only", 0);
+> +    qdev_prop_set_uint32(dev, "clock-frequency", 100000000);
+> +    sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
+> +    sysbus_mmio_map(SYS_BUS_DEVICE(dev), 0, TIMER_BASEADDR);
+> +    sysbus_connect_irq(SYS_BUS_DEVICE(dev), 0, irq[TIMER_IRQ]);
 > +
-> +    /*
-> +     * GTK+ calls must happen on the main thread at least on some platforms,
-> +     * and on macOS the main runloop is polled via GTK+'s event handling.
-> +     * Don't allow QEMU's event loop to be moved off the main thread.
-> +     */
-> +    qemu_main = NULL;
->   }
->   
->   static void early_gtk_display_init(DisplayOptions *opts)
-> diff --git a/ui/sdl2.c b/ui/sdl2.c
-> index bd4f5a9da14..44ab2762262 100644
-> --- a/ui/sdl2.c
-> +++ b/ui/sdl2.c
-> @@ -34,6 +34,7 @@
->   #include "sysemu/sysemu.h"
->   #include "ui/win32-kbd-hook.h"
->   #include "qemu/log.h"
-> +#include "qemu-main.h"
->   
->   static int sdl2_num_outputs;
->   static struct sdl2_console *sdl2_console;
-> @@ -965,6 +966,9 @@ static void sdl2_display_init(DisplayState *ds, DisplayOptions *o)
->       }
->   
->       atexit(sdl_cleanup);
+> +    /* 2 timers at irq 3 @ 100 Mhz.  */
+> +    dev =3D qdev_new("xlnx.xps-timer");
+> +    qdev_prop_set_uint32(dev, "one-timer-only", 0);
+> +    qdev_prop_set_uint32(dev, "clock-frequency", 100000000);
+> +    sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
+> +    sysbus_mmio_map(SYS_BUS_DEVICE(dev), 0, TIMER_BASEADDR2);
+> +    sysbus_connect_irq(SYS_BUS_DEVICE(dev), 0, irq[TIMER_IRQ2]);
 > +
-> +    /* SDL's event polling (in dpy_refresh) must happen on the main thread. */
-> +    qemu_main = NULL;
->   }
->   
->   static QemuDisplay qemu_display_sdl2 = {
-
+> +    /* Emaclite */
+> +    dev =3D qdev_new("xlnx.xps-ethernetlite");
+> +    qemu_configure_nic_device(dev, true, NULL);
+> +    qdev_prop_set_uint32(dev, "tx-ping-pong", 0);
+> +    qdev_prop_set_uint32(dev, "rx-ping-pong", 0);
+> +    sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
+> +    sysbus_mmio_map(SYS_BUS_DEVICE(dev), 0, ETHLITE_BASEADDR);
+> +    sysbus_connect_irq(SYS_BUS_DEVICE(dev), 0, irq[ETHLITE_IRQ]);
+> +
+> +    /* axi ethernet and dma initialization. */
+> +    eth0 =3D qdev_new("xlnx.axi-ethernet");
+> +    dma =3D qdev_new("xlnx.axi-dma");
+> +
+> +    /* FIXME: attach to the sysbus instead */
+> +    object_property_add_child(qdev_get_machine(), "xilinx-eth", OBJECT(e=
+th0));
+> +    object_property_add_child(qdev_get_machine(), "xilinx-dma", OBJECT(d=
+ma));
+> +
+> +    ds =3D object_property_get_link(OBJECT(dma),
+> +                                  "axistream-connected-target", NULL);
+> +    cs =3D object_property_get_link(OBJECT(dma),
+> +                                  "axistream-control-connected-target", =
+NULL);
+> +    qemu_configure_nic_device(eth0, true, NULL);
+> +    qdev_prop_set_uint32(eth0, "rxmem", 0x1000);
+> +    qdev_prop_set_uint32(eth0, "txmem", 0x1000);
+> +    object_property_set_link(OBJECT(eth0), "axistream-connected", ds,
+> +                             &error_abort);
+> +    object_property_set_link(OBJECT(eth0), "axistream-control-connected"=
+, cs,
+> +                             &error_abort);
+> +    sysbus_realize_and_unref(SYS_BUS_DEVICE(eth0), &error_fatal);
+> +    sysbus_mmio_map(SYS_BUS_DEVICE(eth0), 0, AXIENET_BASEADDR);
+> +    sysbus_connect_irq(SYS_BUS_DEVICE(eth0), 0, irq[AXIENET_IRQ]);
+> +
+> +    ds =3D object_property_get_link(OBJECT(eth0),
+> +                                  "axistream-connected-target", NULL);
+> +    cs =3D object_property_get_link(OBJECT(eth0),
+> +                                  "axistream-control-connected-target", =
+NULL);
+> +    qdev_prop_set_uint32(dma, "freqhz", 100000000);
+> +    object_property_set_link(OBJECT(dma), "axistream-connected", ds,
+> +                             &error_abort);
+> +    object_property_set_link(OBJECT(dma), "axistream-control-connected",=
+ cs,
+> +                             &error_abort);
+> +    sysbus_realize_and_unref(SYS_BUS_DEVICE(dma), &error_fatal);
+> +    sysbus_mmio_map(SYS_BUS_DEVICE(dma), 0, AXIDMA_BASEADDR);
+> +    sysbus_connect_irq(SYS_BUS_DEVICE(dma), 0, irq[AXIDMA_IRQ0]);
+> +    sysbus_connect_irq(SYS_BUS_DEVICE(dma), 1, irq[AXIDMA_IRQ1]);
+> +
+> +    /* unimplemented devices */
+> +    create_unimplemented_device("gpio", GPIO_BASEADDR, 0x10000);
+> +    create_unimplemented_device("gpio2", GPIO_BASEADDR2, 0x10000);
+> +    create_unimplemented_device("gpio3", GPIO_BASEADDR3, 0x10000);
+> +    create_unimplemented_device("i2c", I2C_BASEADDR, 0x10000);
+> +    create_unimplemented_device("qspi", QSPI_BASEADDR, 0x10000);
+> +}
+> +
+> +static void mb_v_generic_machine_init(MachineClass *mc)
+> +{
+> +    mc->desc =3D "AMD Microblaze-V generic platform";
+> +    mc->init =3D mb_v_generic_init;
+> +    mc->min_cpus =3D 1;
+> +    mc->max_cpus =3D 1;
+> +    mc->default_cpu_type =3D TYPE_RISCV_CPU_BASE;
+> +    mc->default_cpus =3D 1;
+> +}
+> +
+> +DEFINE_MACHINE("amd-microblaze-v-generic", mb_v_generic_machine_init)
+> diff --git a/hw/riscv/Kconfig b/hw/riscv/Kconfig
+> index 2e88467c4ab..e6a0ac1fa1d 100644
+> --- a/hw/riscv/Kconfig
+> +++ b/hw/riscv/Kconfig
+> @@ -25,6 +25,14 @@ config MICROCHIP_PFSOC
+>      select SIFIVE_PLIC
+>      select UNIMP
+>
+> +config MICROBLAZE_V
+> +    bool
+> +    default y
+> +    depends on RISCV32 || RISCV64
+> +    select XILINX
+> +    select XILINX_AXI
+> +    select XILINX_ETHLITE
+> +
+>  config OPENTITAN
+>      bool
+>      default y
+> diff --git a/hw/riscv/meson.build b/hw/riscv/meson.build
+> index adbef8a9b2d..140bcb55d64 100644
+> --- a/hw/riscv/meson.build
+> +++ b/hw/riscv/meson.build
+> @@ -11,5 +11,6 @@ riscv_ss.add(when: 'CONFIG_SPIKE', if_true: files('spik=
+e.c'))
+>  riscv_ss.add(when: 'CONFIG_MICROCHIP_PFSOC', if_true: files('microchip_p=
+fsoc.c'))
+>  riscv_ss.add(when: 'CONFIG_ACPI', if_true: files('virt-acpi-build.c'))
+>  riscv_ss.add(when: 'CONFIG_RISCV_IOMMU', if_true: files('riscv-iommu.c',=
+ 'riscv-iommu-pci.c'))
+> +riscv_ss.add(when: 'CONFIG_MICROBLAZE_V', if_true: files('microblaze-v-g=
+eneric.c'))
+>
+>  hw_arch +=3D {'riscv': riscv_ss}
+> --
+> 2.34.1
+>
 
