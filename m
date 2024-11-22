@@ -4,78 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2EAC2E65D3F
-	for <qemu-riscv@archiver.kernel.org>; Fri, 22 Nov 2024 10:15:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 119FDE65D3F
+	for <qemu-riscv@archiver.kernel.org>; Fri, 22 Nov 2024 10:16:37 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tEQgk-0003UM-Ro; Fri, 22 Nov 2024 05:14:58 -0500
+	id 1tEQi4-0004Vp-0B; Fri, 22 Nov 2024 05:16:20 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1tEQgj-0003T8-At
- for qemu-riscv@nongnu.org; Fri, 22 Nov 2024 05:14:57 -0500
+ (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1tEQi1-0004Up-Dl
+ for qemu-riscv@nongnu.org; Fri, 22 Nov 2024 05:16:17 -0500
 Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1tEQgh-0004ki-9z
- for qemu-riscv@nongnu.org; Fri, 22 Nov 2024 05:14:57 -0500
+ (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1tEQhz-0005GB-VW
+ for qemu-riscv@nongnu.org; Fri, 22 Nov 2024 05:16:17 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1732270494;
+ s=mimecast20190719; t=1732270575;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
- bh=qO+AymXgSKktZpoggjauQqDlD8qJx/iHp0VYp2yFcDs=;
- b=VsZWHlsazUYyYKUvDb3jM6ZqV2iL61A6bUONm/7LKAUcFfWbT2KZw30kDprUEqCYdf8O5b
- 4XUSPDYI4RQD2MeNv59ZbUajJZL5iWPUGj4UHpi5tM1M+qn+bN3hBulRJr+VyY//W+98OO
- Cztp8lhsqjiOaU/gi0omLuMu3Bdt5gc=
+ bh=f8lnsQx38mwQcFWsJU9FQHM8nMFtGVXvm6OeViFzSec=;
+ b=GFZ2cFbnbPrRl6WxX/PPls90rDhv9MhsRkcIP5RJWW7JTbBfT/LhpzzEtm3M7Shvr7TN2u
+ FLiXp+nsVi08I7ZUzsJdNWPKKCF9JPz/X5+/biyp6xTrRZIvKIljrJ9fbcOafxb7oUILAR
+ b6Lla3Ys9qrATCjcLuWnseo0MQPx0xQ=
 Received: from mail-wm1-f69.google.com (mail-wm1-f69.google.com
  [209.85.128.69]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-587-Bt4Lk9tqPOqSTVby-1B54w-1; Fri, 22 Nov 2024 05:14:52 -0500
-X-MC-Unique: Bt4Lk9tqPOqSTVby-1B54w-1
-X-Mimecast-MFC-AGG-ID: Bt4Lk9tqPOqSTVby-1B54w
+ us-mta-595-P3CHVrDxO2u_tPeMtJuXkA-1; Fri, 22 Nov 2024 05:16:14 -0500
+X-MC-Unique: P3CHVrDxO2u_tPeMtJuXkA-1
+X-Mimecast-MFC-AGG-ID: P3CHVrDxO2u_tPeMtJuXkA
 Received: by mail-wm1-f69.google.com with SMTP id
- 5b1f17b1804b1-4315544642eso13306195e9.3
- for <qemu-riscv@nongnu.org>; Fri, 22 Nov 2024 02:14:52 -0800 (PST)
+ 5b1f17b1804b1-4315a0f25afso14563855e9.3
+ for <qemu-riscv@nongnu.org>; Fri, 22 Nov 2024 02:16:13 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732270492; x=1732875292;
+ d=1e100.net; s=20230601; t=1732270573; x=1732875373;
  h=content-transfer-encoding:in-reply-to:autocrypt:content-language
  :from:references:cc:to:subject:user-agent:mime-version:date
  :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=qO+AymXgSKktZpoggjauQqDlD8qJx/iHp0VYp2yFcDs=;
- b=bRiSVdQcb4acOh5NErQYIebmdH/3yOlOa1En3ejE8vuM29+/7MTd4A02MYJjpSlLlW
- CRzsP/8Y5l6s+ZZPKsEiXIqEOjrPwFBSNyiFgxqZZKqEBtKSUTJIovmIZqV8JlLva2aY
- aiuwW/lZB0R8fwxA6TyzkfMVPRZkax9KkMTUi2yoy/uhIJt9Xd1VIo1xvPNBSfasMfzE
- pfk5yfNjlZ8LfDdrxjvBtiaP+BOYmODJyPM7csQET+J3WF+kMOuNvkPrtjMZoPTmJBp6
- IMRTmIvhhLEckjg6rME+AnEm6U08pKNGwYm29jiwHtXemripqfwxZLJDnyIgI25Io4Hd
- czxg==
+ bh=f8lnsQx38mwQcFWsJU9FQHM8nMFtGVXvm6OeViFzSec=;
+ b=LDku0ppr/VIDX7uKpSDOzKL41CFT3SJrddLbL4Tc/Pylgu8/WfkkSg9KXvRAM9vEOG
+ UUY0GpdKQOJP5zQKIIxMEliApzc28gu6GQJgE6o065c7tuRD8N3YJYc7ZmEuzPFOV+Mh
+ uC2mVyf8FBi2XqhtYk+LuBzjSz3DBkZATTb6lfbcjNGrzuZFHWM+zUyppqmCbRM7NlbJ
+ S0eUAYHF9BHddlM4t791Jw0o49JH73PNfSdzQibJPcC7oSv+fpc5yLukb5Zg2GDA04M3
+ RRZK5qVqS/WdRC8IQU3NaBuV3a+EuKrEA809a1gNy6MogEIl1JyXgDEJycVbLC5WAAS5
+ e4kQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCV3HBUVa8mkCx0Z+FjaSWE76AdnwIRu6Bkw97xiX/p8apxyamFRR/qvmX0ITqUpHBRO+T3vNOtdYF8F@nongnu.org
-X-Gm-Message-State: AOJu0Yy0dKDhUGvSg24igxJeDPUipo/ZBBmxOa1KTdPQlDWFdiKAx8M8
- BJHmZfiJ/fXJbTZ5TYCQQXi9fnIoMegPgILDslN/Dt+CEAVaqswxXMF/wyH8ix0YGDFkrmBkGmL
- 3GQi/MPNZReDDi+dFr9AbOY2niXNM4PRGj7dBD/MOD+4mqhjoa9eD
-X-Gm-Gg: ASbGnct0D8AUoMfbjSYclNilZZDzgC0c5mVQ0RmNiVxmOLClT1wUR2rQcZ5gKsO6LbH
- Xqj7k/15D0ktysKo1YauWlonZ8X0qKv8JKBPUHb7pR1LUPDrnREombcAq4ZK8EMDhGbWgOccC3J
- /41OnaQu73v7l4SR9Y4CSh28EkpZabwPHtmG6NBrusDahWTUWfOXsoImgxkl9lHoxKi7CStNEq4
- L4P0a2P+IMvA88WZwUsY5MlUHLteOtvu4Fd5vKjIvCrfo+v5mvlYIpg4owXnqkkTxhtU9GlLmA=
-X-Received: by 2002:a05:600c:1d99:b0:432:c774:2e24 with SMTP id
- 5b1f17b1804b1-433ce420e50mr19161765e9.9.1732270491871; 
- Fri, 22 Nov 2024 02:14:51 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IG5awNrAWgOLkbsULDTUdESop1YksOOeeMwizQDJIuk6yK3VSwdv4iQo84tY3h0FJ/hr4steg==
-X-Received: by 2002:a05:600c:1d99:b0:432:c774:2e24 with SMTP id
- 5b1f17b1804b1-433ce420e50mr19161505e9.9.1732270491557; 
- Fri, 22 Nov 2024 02:14:51 -0800 (PST)
+ AJvYcCVSsAmSXuvfP9saOvY3mZ1rAA5ScXwa29zrN+iOjU9mqXHnTjeDX3+IxHRjR3bMBq+feLfMKq7bcRC/@nongnu.org
+X-Gm-Message-State: AOJu0YwBTVRJQsl6GiWvJYKd/aiCnju9cPdqVWasG7oC/oAkG+WWwR6O
+ P+Vkjjr1jvEmz3hz8WldkFbcjC1NqInKN/4hBGPDGZ1BAio3tOQUHWSSCv5W/g/+k3NazUZ6U2h
+ Ugh2bWQZLWzeO32QN54vNbkMOs7iEvuFb2/z+cEuxBWUPX9gWQf/G
+X-Gm-Gg: ASbGnctP2ODeWxtZpBdQn4ztpMJIVnpSCD+hICrzIzBWIsRSAiU+6pbPXMM2Vn6Gb5z
+ MvcGW08H+QDDx5c+QYuOvwJuLLXaKpXnjpr7ixIevf6H8SDp9ZuNGQhCG5lUqEg9UqXmYuwGqds
+ 4q/pvg3RvmxWDw73gYJqWVgByZxBvh9fWqBUNT+THbgUec2oFlzM8uaVKgmuiVz54fVIdeLmhGC
+ CM3j2Lbr2UbStrNhfphKfwTeW3AN2ZdoKhGlxWgdrSPcAFdH0+oJd9eilbTZrJYgACvQE7XbwQ=
+X-Received: by 2002:a05:600c:3514:b0:428:f0c2:ef4a with SMTP id
+ 5b1f17b1804b1-433ce4250dbmr19335025e9.13.1732270570551; 
+ Fri, 22 Nov 2024 02:16:10 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IGHo0dMMeyeTVjw7sO7qEsfCUR5pFNnWMw0MKnvrQku8cCuOIX2nHJuf7SozYhf8NOdWGk6Ew==
+X-Received: by 2002:a05:600c:3514:b0:428:f0c2:ef4a with SMTP id
+ 5b1f17b1804b1-433ce4250dbmr19334755e9.13.1732270570224; 
+ Fri, 22 Nov 2024 02:16:10 -0800 (PST)
 Received: from [10.33.192.206] (nat-pool-str-t.redhat.com. [149.14.88.106])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-433b4643100sm88946135e9.39.2024.11.22.02.14.50
+ 5b1f17b1804b1-433cde98b70sm22148395e9.41.2024.11.22.02.16.08
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 22 Nov 2024 02:14:51 -0800 (PST)
-Message-ID: <9576a13f-0408-42dc-8e1e-6781cff359e6@redhat.com>
-Date: Fri, 22 Nov 2024 11:14:49 +0100
+ Fri, 22 Nov 2024 02:16:09 -0800 (PST)
+Message-ID: <42d7844f-7e12-4e7a-9bf5-fea3f913a34d@redhat.com>
+Date: Fri, 22 Nov 2024 11:16:08 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 00/39] maintainer updates for -rc2 pre-PR
+Subject: Re: [PATCH 23/39] tests/functional: add a m68k tuxrun tests
 To: =?UTF-8?Q?Alex_Benn=C3=A9e?= <alex.bennee@linaro.org>,
  qemu-devel@nongnu.org
 Cc: Peter Maydell <peter.maydell@linaro.org>,
@@ -102,8 +102,10 @@ Cc: Peter Maydell <peter.maydell@linaro.org>,
  Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
  Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
  Aurelien Jarno <aurelien@aurel32.net>, Ani Sinha <anisinha@redhat.com>,
- Alistair Francis <alistair.francis@wdc.com>
+ Alistair Francis <alistair.francis@wdc.com>,
+ Laurent Vivier <laurent@vivier.eu>, Anders Roxell <anders.roxell@linaro.org>
 References: <20241121165806.476008-1-alex.bennee@linaro.org>
+ <20241121165806.476008-24-alex.bennee@linaro.org>
 From: Thomas Huth <thuth@redhat.com>
 Autocrypt: addr=thuth@redhat.com; keydata=
  xsFNBFH7eUwBEACzyOXKU+5Pcs6wNpKzrlJwzRl3VGZt95VCdb+FgoU9g11m7FWcOafrVRwU
@@ -147,9 +149,9 @@ Autocrypt: addr=thuth@redhat.com; keydata=
  oiT+z+/E59qj/EKfyce3sbC9XLjXv3mHMrq1tKX4G7IJGnS989E/fg6crv6NHae9Ckm7+lSs
  IQu4bBP2GxiRQ+NV3iV/KU3ebMRzqIC//DCOxzQNFNJAKldPe/bKZMCxEqtVoRkuJtNdp/5a
  yXFZ6TfE1hGKrDBYAm4vrnZ4CXFSBDllL59cFFOJCkn4Xboj/aVxxJxF30bn
-In-Reply-To: <20241121165806.476008-1-alex.bennee@linaro.org>
+In-Reply-To: <20241121165806.476008-24-alex.bennee@linaro.org>
 X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: kNNCVkhwo327Vkbf_37f8rN9TVfQysv0Z95t0fyup0M_1732270492
+X-Mimecast-MFC-PROC-ID: QK6fmLllXoAxYZ2jH_mry_apytcqp4CVT0Czz4KzrkQ_1732270573
 X-Mimecast-Originator: redhat.com
 Content-Language: en-US
 Content-Type: text/plain; charset=UTF-8; format=flowed
@@ -180,39 +182,38 @@ Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 On 21/11/2024 17.57, Alex Bennée wrote:
-> This is a mostly testing focused set of patches but a few bug fixes as
-> well. I plan to send the PR in on Monday. I can drop any patches that
-> are objected to but I think its pretty safe.
+> We didn't have this before and as it exercises the m68k virt platform
+> it seems worth adding. We don't wait for the shutdown because QEMU
+> will auto-exit on the shutdown.
 > 
-> Contains:
+> Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
+> Cc: Laurent Vivier <laurent@vivier.eu>
+> Cc: Anders Roxell <anders.roxell@linaro.org>
+> ---
+>   tests/functional/meson.build         |  1 +
+>   tests/functional/test_m68k_tuxrun.py | 34 ++++++++++++++++++++++++++++
+>   2 files changed, 35 insertions(+)
+>   create mode 100644 tests/functional/test_m68k_tuxrun.py
 > 
->    - Daniel's clean-up of functional tests
->    - Another avocado->function conversion from Thomas
->    - Update the tuxrun baseline images
->    - Minor fix to the rust pl011 device
->    - Documentation clarification on identity
-> 
-> The following could do with some review:
-> 
->    tests/functional: update the x86_64 tuxrun tests
->    tests/functional: update the sparc64 tuxrun tests
->    tests/functional: update the s390x tuxrun tests
->    tests/functional: update the riscv64 tuxrun tests
->    tests/functional: update the riscv32 tuxrun tests
->    tests/functional: update the ppc64 tuxrun tests
->    tests/functional: update the ppc32 tuxrun tests
->    tests/functional: update the mips64el tuxrun tests
->    tests/functional: update the mips64 tuxrun tests
->    tests/functional: update the mips32el tuxrun tests
->    tests/functional: update the mips32 tuxrun tests
->    tests/functional: add a m68k tuxrun tests
->    tests/functional: update the i386 tuxrun tests
->    tests/functional: update the aarch64 tuxrun tests
->    tests/functional: update the arm tuxrun tests
+> diff --git a/tests/functional/meson.build b/tests/functional/meson.build
+> index 923f9e7078..3ce969066c 100644
+> --- a/tests/functional/meson.build
+> +++ b/tests/functional/meson.build
+> @@ -95,6 +95,7 @@ tests_m68k_system_thorough = [
+>     'm68k_mcf5208evb',
+>     'm68k_nextcube',
+>     'm68k_q800',
+> +  'm68k_tuxrun',
+>   ]
+>   
+>   tests_microblaze_system_thorough = [
+> diff --git a/tests/functional/test_m68k_tuxrun.py b/tests/functional/test_m68k_tuxrun.py
+> new file mode 100644
 
-If you've got some spare time: Maybe also update the sh4 tuxrun test to see 
-whether we could drop the FLAKY marker there now?
+Please make it executable like all other test files, so we can run it more 
+easily without the test harness, too!
 
-  Thomas
+  Thanks,
+   Thomas
 
 
