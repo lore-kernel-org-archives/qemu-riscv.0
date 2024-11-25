@@ -4,117 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E3044D75E59
-	for <qemu-riscv@archiver.kernel.org>; Sat, 23 Nov 2024 15:30:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6489AD3B7CA
+	for <qemu-riscv@archiver.kernel.org>; Mon, 25 Nov 2024 03:35:49 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tEs4a-00066D-HU; Sat, 23 Nov 2024 10:29:24 -0500
+	id 1tFPsg-0000i2-86; Sun, 24 Nov 2024 22:35:22 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1tEs4X-000656-Tx
- for qemu-riscv@nongnu.org; Sat, 23 Nov 2024 10:29:21 -0500
-Received: from mail-wm1-x32f.google.com ([2a00:1450:4864:20::32f])
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1tFPsd-0000hF-PR; Sun, 24 Nov 2024 22:35:19 -0500
+Received: from mail-vs1-xe2c.google.com ([2607:f8b0:4864:20::e2c])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1tEs4V-0007nP-7H
- for qemu-riscv@nongnu.org; Sat, 23 Nov 2024 10:29:21 -0500
-Received: by mail-wm1-x32f.google.com with SMTP id
- 5b1f17b1804b1-4315eeb2601so36892095e9.2
- for <qemu-riscv@nongnu.org>; Sat, 23 Nov 2024 07:29:17 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1tFPsc-0006sc-5m; Sun, 24 Nov 2024 22:35:19 -0500
+Received: by mail-vs1-xe2c.google.com with SMTP id
+ ada2fe7eead31-4af07a8d444so374149137.1; 
+ Sun, 24 Nov 2024 19:35:17 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1732375757; x=1732980557; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:message-id:date:user-agent
- :references:in-reply-to:subject:cc:to:from:from:to:cc:subject:date
+ d=gmail.com; s=20230601; t=1732505716; x=1733110516; darn=nongnu.org;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=L83RtzyR0L4NcRtwdTXA1VSnlQBPYZvSb84HRUVcJp0=;
- b=CDjRX/jTqarkYryLd5gJN6z/DDG9e+TvLc4ja2UjtzRdEO8lLTgx4QX+XhhScuwCQa
- +Iag3MlLsbv8rPRAcV30wiL8MDbz4Cgy2e1/bq7on4x4T+ExLqMnooYhbEfTWhp5msns
- pg+LIajiM9FHp1lh0z7NbB6jo+ChStUSE84i2SK/4BJE0XMvG0b8ZNa3CyO8yHSGaRIo
- Q+xxwtWqbbmpvbHTcqowRm3yfInHXEB8lyfx0c5606jli8NQEi18B8s+crbeX8pFG4kg
- orTKhN/btcY4rjNzuIp8X92PWXL9wMQpsj/cX8XqTTVbIBCdoEN3u5igexG4r0UFzTzd
- gPzw==
+ bh=2mqVRXfF2lEyuk7g4aN6G4po242Z2AWrnlUQfn9CGDE=;
+ b=aezGFEue7DyVP0c0OHgnFKV9SS7FEfFbeinlxB7gbDA83QudA3u2/p+im8j+/wOkCi
+ czkK16D5jLDPb1399acrZE3l3bohQvROI3rwzHK2w7mD1BKKIAfTRgAz8pJeJzjwFf4y
+ wr7BdJ9mg2X9z+lhoYinK6xDmCx4ufW4IT+d4jxG9frTIky5OxPIkEpyO1O+S6uDvAtb
+ TcciCk4nT+pMqcXHl0DJlmgLlcf1yFj3JMxrvH06a22A0on1jVIX82wo9s23dh5MHf9u
+ IGn/8EBlxnDArpdZQU2lKJBRCv8qgGH54/TLtvOmB9HhGYbsKE3WAmxouWu3/UWAdnMb
+ JubQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732375757; x=1732980557;
- h=content-transfer-encoding:mime-version:message-id:date:user-agent
- :references:in-reply-to:subject:cc:to:from:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=L83RtzyR0L4NcRtwdTXA1VSnlQBPYZvSb84HRUVcJp0=;
- b=D9TDAqbEhTSRLZy8ZiYnSDHuOoKQmZBE3BttDW1m/k9c270km4TYmunHgRL+/hEhzg
- 7V4xkTlZBmMYi/RFF43Ijwmta22x2+v2/nYKolPQ0nuKRdW7eiFrBvrfAa/wFnzMfvuW
- /0fBlw4jf6tuWP+WjJfafApuVLczLQ9o6jZV8582qAjDadyc+xXvsFU46ZGqeaCRkT8u
- GUNGrANsNCUIilW0NZ29dtUhot3xyufDeFsMiQutNhzpQWOGio2hcD5/N6bsLNxmxZAX
- mNC/b6Q9oHc0i6pNLdZGfXqj7EK2JdMWQjMNDuEeKiq6SL8ZmdWWLSD3QVmkE1XekKPI
- u3/Q==
+ d=1e100.net; s=20230601; t=1732505716; x=1733110516;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=2mqVRXfF2lEyuk7g4aN6G4po242Z2AWrnlUQfn9CGDE=;
+ b=MjHze1Q/txLS3j/S81KgIBx/MxG8JugyKxwmJ5XnPDbVMDayAHpbSke6GzbiSeJDuq
+ 3TqBXrkQUwKMhWjOEQr0x6XNbEYusl7Y8djHvAkUoHsFD21UWWsfDf48PU1onOVDn+0N
+ fEp1xGsOXm0SJpZVH2+Xgnfvyr7kVZjLX4PRgHihYcl39z23Hxv4mZDQ3ayV0VYrOpVk
+ rR1LqHaB35hVWTMjlaSv8TD4Fo6S/eely/UY/iwDk1X9ELbvcMkJVinbSUgoaqjmG/O9
+ 2ic1OjPzP0iBssd9CFrLfRCkbQVghJvKJnHfZVJhxkiqnU8QvAVwkfJLNKAosxfQycqm
+ oxKQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCU+76eEG9DeU6KkUbRBOzVuXlMf+FjhurIfjgZFs8hVpoYsdjFMgq9s+hnrD7sss1Iui3sXPA7rrtkO@nongnu.org
-X-Gm-Message-State: AOJu0Yyv819JyJ1ziyevyQ/Th0cJFsa0midoRW/4gUxer0RNxAEpYhS0
- bE1x8qcfEyoYoAjCPRPlczdXWBATgZUpA6P7Z6wpaTByTjybiYtnWo2xiKL96lw=
-X-Gm-Gg: ASbGnctYUS6yHx3ruyv2T31DZnx6nKBIg4O8/s9Nk1t48gMLoEwm6n/k2q7LDKdcV0b
- Y99NpaAIHPWHYAW+mJUUM9e+nrNmIBXLFzmeqrJ1pTzksRn8HIrVdrFGy4Rtv4oH9EUX3AmRuhL
- 23jCEuQt0BRgP0pRjaNoPXzM2jvKsv6RR8lNaLGsvkJlIwhxrJsYiE2KO4h1Rxfbt6aFzEtITOp
- 4uctATSBZ2TxzaKnhwmSYuw0VZdYjHsDE8qIlePrZytGj7/
-X-Google-Smtp-Source: AGHT+IHhredJ7Kkusy+tGIE0IwuBjJ8/nZr2qMMx1RKVolxYRMe6Wz1tOxQ5etLaAplLbHpp6+sN3w==
-X-Received: by 2002:a05:600c:3ac3:b0:431:4b88:d407 with SMTP id
- 5b1f17b1804b1-433ce410255mr66227435e9.5.1732375756689; 
- Sat, 23 Nov 2024 07:29:16 -0800 (PST)
-Received: from draig.lan ([85.9.250.243]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-433cde114d5sm63238445e9.17.2024.11.23.07.29.15
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 23 Nov 2024 07:29:15 -0800 (PST)
-Received: from draig (localhost [IPv6:::1])
- by draig.lan (Postfix) with ESMTP id D93295F7DF;
- Sat, 23 Nov 2024 15:29:14 +0000 (GMT)
-From: =?utf-8?Q?Alex_Benn=C3=A9e?= <alex.bennee@linaro.org>
-To: Thomas Huth <thuth@redhat.com>
-Cc: Peter Maydell <peter.maydell@linaro.org>,  qemu-devel@nongnu.org,
- Philippe =?utf-8?Q?Mathieu-Daud=C3=A9?= <philmd@linaro.org>,  "Michael S.
- Tsirkin"
- <mst@redhat.com>,  Daniel Henrique Barboza <danielhb413@gmail.com>,
- Pierrick Bouvier <pierrick.bouvier@linaro.org>,  Harsh Prateek Bora
- <harshpb@linux.ibm.com>,  Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
- Jiaxun Yang <jiaxun.yang@flygoat.com>,  Halil Pasic
- <pasic@linux.ibm.com>,  Christian Borntraeger <borntraeger@linux.ibm.com>,
- qemu-ppc@nongnu.org,  Daniel Henrique Barboza
- <dbarboza@ventanamicro.com>,  Alexandre Iooss <erdnaxe@crans.org>,
- qemu-riscv@nongnu.org,  Thomas Huth <huth@tuxfamily.org>,  Bernhard
- Beschow <shentey@gmail.com>,  Eric Farman <farman@linux.ibm.com>,  Bin
- Meng <bmeng.cn@gmail.com>,  qemu-s390x@nongnu.org,  Niek Linnenbank
- <nieklinnenbank@gmail.com>,  qemu-arm@nongnu.org,  John Snow
- <jsnow@redhat.com>,  Wainer dos Santos Moschetta <wainersm@redhat.com>,
- Cleber Rosa <crosa@redhat.com>,  qemu-rust@nongnu.org,  Nicholas Piggin
- <npiggin@gmail.com>,  Daniel P. =?utf-8?Q?Berrang=C3=A9?=
- <berrange@redhat.com>,  Palmer
- Dabbelt <palmer@dabbelt.com>,  Markus Armbruster <armbru@redhat.com>,
- Weiwei Li <liwei1518@gmail.com>,  Mahmoud Mandour
- <ma.mandourr@gmail.com>,  Mark Cave-Ayland
- <mark.cave-ayland@ilande.co.uk>,  Liu Zhiwei
- <zhiwei_liu@linux.alibaba.com>,  Aurelien Jarno <aurelien@aurel32.net>,
- Ani Sinha <anisinha@redhat.com>,  Alistair Francis
- <alistair.francis@wdc.com>
-Subject: Re: [PATCH 00/39] maintainer updates for -rc2 pre-PR
-In-Reply-To: <eb3dd52c-b7bc-4c77-ad33-33e52d7ecef7@redhat.com> (Thomas Huth's
- message of "Fri, 22 Nov 2024 11:45:42 +0100")
-References: <20241121165806.476008-1-alex.bennee@linaro.org>
- <CAFEAcA8KD4qxY18pJakSeziTioNYDQkd3VYcxYfq9y2KAON4Wg@mail.gmail.com>
- <875xoglcin.fsf@draig.linaro.org>
- <eb3dd52c-b7bc-4c77-ad33-33e52d7ecef7@redhat.com>
-User-Agent: mu4e 1.12.7; emacs 29.4
-Date: Sat, 23 Nov 2024 15:29:14 +0000
-Message-ID: <87wmguoto5.fsf@draig.linaro.org>
+ AJvYcCU2yUHh0tZjWNc6JMCx2kMFyMTr43x7DDTLYb5VDfObHjRmx2ByoxkjHn0fp7WDT6GJn1bhtyKnS5ii@nongnu.org
+X-Gm-Message-State: AOJu0YzmybByeKIBjgbFBGep5mG9PowfBTOHB8MR2a7xA9JcKXI1PhuQ
+ a9zwtonr/oyMzhbJwMX2HsIRjjwIHJf2gXOK+jAdk8j/8g/ECqFAt+bCgXx8bnUlIvSPlzayVJk
+ m9FhICiqFyiIVsI6JCnwZ7oouti4=
+X-Gm-Gg: ASbGncsZ6yVKnmLpxUbr8I6mys9zexsmecDbNbTwNZbr1RU3wqdVKawy5o0kcuJ5K6F
+ Mh7kZZPgVb6/7LSZ5W6AP/3avM+ZdeM1AtBXvOnxToqvjUwc1f0YXOhtk1h5jGw==
+X-Google-Smtp-Source: AGHT+IFHFksXu6PBerAejXG5Slg5ms2ckK+IF09F8GZC5NXKpMkd+Yl4cT/f1eOUlMAyMNGVQO6L6n2ajq46BliegZQ=
+X-Received: by 2002:a05:6102:5091:b0:4af:1683:aeaf with SMTP id
+ ada2fe7eead31-4af1683afdfmr2050060137.9.1732505716242; Sun, 24 Nov 2024
+ 19:35:16 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
+References: <20241119144956.728384-1-sai.pavan.boddu@amd.com>
+In-Reply-To: <20241119144956.728384-1-sai.pavan.boddu@amd.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Mon, 25 Nov 2024 13:34:50 +1000
+Message-ID: <CAKmqyKNBepMhGEP7grV0Ay1=VZcRyvRujO5cSAg2JAY29eciCg@mail.gmail.com>
+Subject: Re: [PATCH v4] hw/riscv: Add Microblaze V generic board
+To: Sai Pavan Boddu <sai.pavan.boddu@amd.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, 
+ Paolo Bonzini <pbonzini@redhat.com>, Palmer Dabbelt <palmer@dabbelt.com>,
+ Bin Meng <bmeng.cn@gmail.com>, Weiwei Li <liwei1518@gmail.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>, 
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, Simek Michal <michal.simek@amd.com>,
+ =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@linaro.org>, 
+ Iglesias Francisco <francisco.iglesias@amd.com>
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2a00:1450:4864:20::32f;
- envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x32f.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+Received-SPF: pass client-ip=2607:f8b0:4864:20::e2c;
+ envelope-from=alistair23@gmail.com; helo=mail-vs1-xe2c.google.com
+X-Spam_score_int: -17
+X-Spam_score: -1.8
+X-Spam_bar: -
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -130,47 +98,62 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Thomas Huth <thuth@redhat.com> writes:
-
-> On 21/11/2024 18.31, Alex Benn=C3=A9e wrote:
->> Peter Maydell <peter.maydell@linaro.org> writes:
->>=20
->>> On Thu, 21 Nov 2024 at 16:58, Alex Benn=C3=A9e <alex.bennee@linaro.org>=
- wrote:
->>>>
->>>> This is a mostly testing focused set of patches but a few bug fixes as
->>>> well. I plan to send the PR in on Monday. I can drop any patches that
->>>> are objected to but I think its pretty safe.
->>>>
->>>> Contains:
->>>>
->>>>    - Daniel's clean-up of functional tests
->>>>    - Another avocado->function conversion from Thomas
->>>>    - Update the tuxrun baseline images
->>>>    - Minor fix to the rust pl011 device
->>>>    - Documentation clarification on identity
->>>
->>> Should we really be updating the tuxrun baseline images
->>> in the middle of a release freeze period? Unless the old images
->>> are going to go away and break the tests, I think it would
->>> be better to stick with what we're currently testing.
->> Well the arm64be fixed a real problem and while I was at it I
->> figured
->> might as well keep the rest in sync. I have tested them so they all pass
->> (although I'm waiting on the CI run now).
+On Wed, Nov 20, 2024 at 12:50=E2=80=AFAM Sai Pavan Boddu
+<sai.pavan.boddu@amd.com> wrote:
 >
-> But there could be new intermittent problems in the new images ... so
-> if we'd face such a problem, we would not know whether it is the image
-> or whether it is QEMU. Thus maybe let's better keep the old versions
-> for 9.2 (except for the arm64 patch that fixes a real problem), and
-> use the new versions for 10.0 ?
-
-Fair enough. Will drop the others for now.
-
+> Add a basic board with interrupt controller (intc), timer, serial
+> (uartlite), small memory called LMB@0 (128kB) and DDR@0x80000000
+> (configured via command line eg. -m 2g).
+> This is basic configuration which matches HW generated out of AMD Vivado
+> (design tools). But initial configuration is going beyond what it is
+> configured by default because validation should be done on other
+> configurations too. That's why wire also additional uart16500, axi
+> ethernet(with axi dma).
+> GPIOs, i2c and qspi is also listed for completeness.
 >
->  Thomas
+> IRQ map is: (addr)
+> 0 - timer (0x41c00000)
+> 1 - uartlite (0x40600000)
+> 2 - i2c (0x40800000)
+> 3 - qspi (0x44a00000)
+> 4 - uart16550 (0x44a10000)
+> 5 - emaclite (0x40e00000)
+> 6 - timer2 (0x41c10000)
+> 7 - axi emac (0x40c00000)
+> 8 - axi dma (0x41e00000)
+> 9 - axi dma
+> 10 - gpio (0x40000000)
+> 11 - gpio2 (0x40010000)
+> 12 - gpio3 (0x40020000)
+>
+> Signed-off-by: Sai Pavan Boddu <sai.pavan.boddu@amd.com>
+> Signed-off-by: Michal Simek <michal.simek@amd.com>
+> ---
+> Changes for V2:
+>     Make changes to support -cpu switch
+>     Remove setting of default board
+>     Include doc to toctree
+>     Remove setting of 'imac' extensions as they are available by
+>     default.
+> Chages for V3:
+>     Replace virt with generic
+>     Update doc with supported riscv extensions
+>     Change base CPU to TYPE_RISCV_CPU_BASE
+> Changes for V4:
+>     Improved the doc based on comments
+>     Disabled support for Double-Precision and Hypervisor extensions
+>     Updated Maintainers file at riscv machine space.
+>
+>  MAINTAINERS                                |   6 +
+>  docs/system/riscv/microblaze-v-generic.rst |  42 +++++
+>  docs/system/target-riscv.rst               |   1 +
+>  hw/riscv/microblaze-v-generic.c            | 184 +++++++++++++++++++++
+>  hw/riscv/Kconfig                           |   8 +
+>  hw/riscv/meson.build                       |   1 +
 
---=20
-Alex Benn=C3=A9e
-Virtualisation Tech Lead @ Linaro
+It looks like this needs a rebase, do you mind rebasing on
+https://github.com/alistair23/qemu/tree/riscv-to-apply.next and
+sending a new version
+
+Alistair
 
