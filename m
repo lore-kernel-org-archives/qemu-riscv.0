@@ -4,77 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6489AD3B7CA
-	for <qemu-riscv@archiver.kernel.org>; Mon, 25 Nov 2024 03:35:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C4F25D3B7D0
+	for <qemu-riscv@archiver.kernel.org>; Mon, 25 Nov 2024 04:02:04 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tFPsg-0000i2-86; Sun, 24 Nov 2024 22:35:22 -0500
+	id 1tFQIM-0007en-VB; Sun, 24 Nov 2024 23:01:54 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1tFPsd-0000hF-PR; Sun, 24 Nov 2024 22:35:19 -0500
-Received: from mail-vs1-xe2c.google.com ([2607:f8b0:4864:20::e2c])
+ id 1tFQIL-0007ea-J9; Sun, 24 Nov 2024 23:01:53 -0500
+Received: from mail-ua1-x92c.google.com ([2607:f8b0:4864:20::92c])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1tFPsc-0006sc-5m; Sun, 24 Nov 2024 22:35:19 -0500
-Received: by mail-vs1-xe2c.google.com with SMTP id
- ada2fe7eead31-4af07a8d444so374149137.1; 
- Sun, 24 Nov 2024 19:35:17 -0800 (PST)
+ id 1tFQIK-0001or-14; Sun, 24 Nov 2024 23:01:53 -0500
+Received: by mail-ua1-x92c.google.com with SMTP id
+ a1e0cc1a2514c-856e76fdf11so891010241.3; 
+ Sun, 24 Nov 2024 20:01:51 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1732505716; x=1733110516; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1732507310; x=1733112110; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=2mqVRXfF2lEyuk7g4aN6G4po242Z2AWrnlUQfn9CGDE=;
- b=aezGFEue7DyVP0c0OHgnFKV9SS7FEfFbeinlxB7gbDA83QudA3u2/p+im8j+/wOkCi
- czkK16D5jLDPb1399acrZE3l3bohQvROI3rwzHK2w7mD1BKKIAfTRgAz8pJeJzjwFf4y
- wr7BdJ9mg2X9z+lhoYinK6xDmCx4ufW4IT+d4jxG9frTIky5OxPIkEpyO1O+S6uDvAtb
- TcciCk4nT+pMqcXHl0DJlmgLlcf1yFj3JMxrvH06a22A0on1jVIX82wo9s23dh5MHf9u
- IGn/8EBlxnDArpdZQU2lKJBRCv8qgGH54/TLtvOmB9HhGYbsKE3WAmxouWu3/UWAdnMb
- JubQ==
+ bh=20z6im6nQ0/3Stjv9eBtZ94i8AdjHF2gyGmqoYlguVA=;
+ b=ahnkvSf/dc7bGeXKnVRjvMZOxeHCTLBO8c319FbsnDAPBdrFlLyRbaIGca32OuctwQ
+ QHv6r4Ao4VaN2amcvYXAC1HktHXnkaCZVh9XM22YfmAmB8I9bCXjck9xrtiOaqsE3IR1
+ IG/kjQiZiDP+QXowPVgHyQNg7/SI1xqShNfOA8ovMIC5KT3Aly+9KuGtgrWQYgoPEXYI
+ LHHBbwE3y7ecgaoiIIRJCv6k2OaEY3TLmo+8IJRFrfgcOxVV4wc8OCivevzrIdAL9bcb
+ ncegmQjSKedOXDSlgxu6CDErCvtFh09JmHAOsBhmUN/9hTKxYuZAIhlXuXwlPqhsxIzL
+ IcNQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732505716; x=1733110516;
+ d=1e100.net; s=20230601; t=1732507310; x=1733112110;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=2mqVRXfF2lEyuk7g4aN6G4po242Z2AWrnlUQfn9CGDE=;
- b=MjHze1Q/txLS3j/S81KgIBx/MxG8JugyKxwmJ5XnPDbVMDayAHpbSke6GzbiSeJDuq
- 3TqBXrkQUwKMhWjOEQr0x6XNbEYusl7Y8djHvAkUoHsFD21UWWsfDf48PU1onOVDn+0N
- fEp1xGsOXm0SJpZVH2+Xgnfvyr7kVZjLX4PRgHihYcl39z23Hxv4mZDQ3ayV0VYrOpVk
- rR1LqHaB35hVWTMjlaSv8TD4Fo6S/eely/UY/iwDk1X9ELbvcMkJVinbSUgoaqjmG/O9
- 2ic1OjPzP0iBssd9CFrLfRCkbQVghJvKJnHfZVJhxkiqnU8QvAVwkfJLNKAosxfQycqm
- oxKQ==
+ bh=20z6im6nQ0/3Stjv9eBtZ94i8AdjHF2gyGmqoYlguVA=;
+ b=Af94V60iV6pX65mPTzc8wU3M8FVgjBsCFUovXJAgOuspVYqpd4HpSzueoK4pFMjDcg
+ Gltb7IfGF0FJxWtVvyNjWdluDJ/FSDVYbpxBVy3WNsYeJR3RwnUBSYvAuSAqStVb3ckO
+ b4SYBOzD10a+UzjkF0uoObcckPPaKAJdxkFt6yI+vCR08oYL7NBFH5620Ar/ImCzhk2u
+ +kpOb3dX7CLzlCwvubJ4gcvz/oaTbLCq4v6sNY3sI3J849CnQBLsnbjBGpOgIx0wwQ6y
+ CiKDvDsipHoq3uhvsixrq/eJj6NKCo6Wj99B/SV6PI2kcq4CUF593jr7cXvR3ZcVHGgn
+ bC1g==
 X-Forwarded-Encrypted: i=1;
- AJvYcCU2yUHh0tZjWNc6JMCx2kMFyMTr43x7DDTLYb5VDfObHjRmx2ByoxkjHn0fp7WDT6GJn1bhtyKnS5ii@nongnu.org
-X-Gm-Message-State: AOJu0YzmybByeKIBjgbFBGep5mG9PowfBTOHB8MR2a7xA9JcKXI1PhuQ
- a9zwtonr/oyMzhbJwMX2HsIRjjwIHJf2gXOK+jAdk8j/8g/ECqFAt+bCgXx8bnUlIvSPlzayVJk
- m9FhICiqFyiIVsI6JCnwZ7oouti4=
-X-Gm-Gg: ASbGncsZ6yVKnmLpxUbr8I6mys9zexsmecDbNbTwNZbr1RU3wqdVKawy5o0kcuJ5K6F
- Mh7kZZPgVb6/7LSZ5W6AP/3avM+ZdeM1AtBXvOnxToqvjUwc1f0YXOhtk1h5jGw==
-X-Google-Smtp-Source: AGHT+IFHFksXu6PBerAejXG5Slg5ms2ckK+IF09F8GZC5NXKpMkd+Yl4cT/f1eOUlMAyMNGVQO6L6n2ajq46BliegZQ=
-X-Received: by 2002:a05:6102:5091:b0:4af:1683:aeaf with SMTP id
- ada2fe7eead31-4af1683afdfmr2050060137.9.1732505716242; Sun, 24 Nov 2024
- 19:35:16 -0800 (PST)
+ AJvYcCUh6h5/E7AqXb/tMXoxv0kvIqMrNfljPoY2dkk/NpFMKO7ivuzTbXnYixJGlnh3+WhulpRU3dqb2EOizA==@nongnu.org,
+ AJvYcCX8XSBjMTnnFq0mM2iBFbeEDy2Tv31s1YiR+K3pg3sjSr1X4/9noQ6dZvw7HUyzEnTb8M1CeCs1EvEM@nongnu.org
+X-Gm-Message-State: AOJu0YwQNAjfBwECnygMZa7rAvsheUBYVQTHkXDBiKN7mYszhl/B2I/a
+ PgQ4wz9G1kGacfuGdoSa7RZq3/aC38moWq/J+DK0pH12rjZQiCuWsincCvy9ztQ3NaFWQcR8917
+ PQhWjH309YPNUSBmluHYox6LDovs=
+X-Gm-Gg: ASbGncswoQYgN7MoSIlh1ylLKOS9WPjVn6ppcdoP8kwV6RA3345cSKFqP9B14Ix8FaN
+ mIXWb41V3X84BtNiFU/QCx3LF2e1J6EE/Zerr6zHKQEZ3Qap/4K5Fe/N08t5C2w==
+X-Google-Smtp-Source: AGHT+IEfEOY/cHzvXVpQKDoqa3TUzwRT9qTeVTkmcRfnK9dFpxALGhCpdLLeLBFD7blv2MWhQxg+AJV/EZMuEIj6Jsc=
+X-Received: by 2002:a05:6102:c52:b0:4a4:878a:e3b7 with SMTP id
+ ada2fe7eead31-4addcd33997mr8552423137.22.1732507310149; Sun, 24 Nov 2024
+ 20:01:50 -0800 (PST)
 MIME-Version: 1.0
-References: <20241119144956.728384-1-sai.pavan.boddu@amd.com>
-In-Reply-To: <20241119144956.728384-1-sai.pavan.boddu@amd.com>
+References: <20241121061259.4043177-1-baturo.alexey@gmail.com>
+ <20241121061259.4043177-2-baturo.alexey@gmail.com>
+In-Reply-To: <20241121061259.4043177-2-baturo.alexey@gmail.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 25 Nov 2024 13:34:50 +1000
-Message-ID: <CAKmqyKNBepMhGEP7grV0Ay1=VZcRyvRujO5cSAg2JAY29eciCg@mail.gmail.com>
-Subject: Re: [PATCH v4] hw/riscv: Add Microblaze V generic board
-To: Sai Pavan Boddu <sai.pavan.boddu@amd.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, 
- Paolo Bonzini <pbonzini@redhat.com>, Palmer Dabbelt <palmer@dabbelt.com>,
- Bin Meng <bmeng.cn@gmail.com>, Weiwei Li <liwei1518@gmail.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>, 
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, Simek Michal <michal.simek@amd.com>,
- =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@linaro.org>, 
- Iglesias Francisco <francisco.iglesias@amd.com>
+Date: Mon, 25 Nov 2024 14:01:24 +1000
+Message-ID: <CAKmqyKObuwwp7AGrUgNWO9PdzBW0f8FFTrhFBVqij8ZOy+RQAg@mail.gmail.com>
+Subject: Re: [PATCH v2 1/7] target/riscv: Remove obsolete pointer masking
+ extension code.
+To: baturo.alexey@gmail.com
+Cc: richard.henderson@linaro.org, zhiwei_liu@linux.alibaba.com, 
+ dbarboza@ventanamicro.com, liwei1518@gmail.com, frank.chang@sifive.com, 
+ palmer@dabbelt.com, Alistair.Francis@wdc.com, sagark@eecs.berkeley.edu, 
+ kbastian@mail.uni-paderborn.de, qemu-devel@nongnu.org, qemu-riscv@nongnu.org
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::e2c;
- envelope-from=alistair23@gmail.com; helo=mail-vs1-xe2c.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::92c;
+ envelope-from=alistair23@gmail.com; helo=mail-ua1-x92c.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -98,62 +98,19 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Wed, Nov 20, 2024 at 12:50=E2=80=AFAM Sai Pavan Boddu
-<sai.pavan.boddu@amd.com> wrote:
+On Thu, Nov 21, 2024 at 4:13=E2=80=AFPM <baturo.alexey@gmail.com> wrote:
 >
-> Add a basic board with interrupt controller (intc), timer, serial
-> (uartlite), small memory called LMB@0 (128kB) and DDR@0x80000000
-> (configured via command line eg. -m 2g).
-> This is basic configuration which matches HW generated out of AMD Vivado
-> (design tools). But initial configuration is going beyond what it is
-> configured by default because validation should be done on other
-> configurations too. That's why wire also additional uart16500, axi
-> ethernet(with axi dma).
-> GPIOs, i2c and qspi is also listed for completeness.
+> From: Alexey Baturo <baturo.alexey@gmail.com>
 >
-> IRQ map is: (addr)
-> 0 - timer (0x41c00000)
-> 1 - uartlite (0x40600000)
-> 2 - i2c (0x40800000)
-> 3 - qspi (0x44a00000)
-> 4 - uart16550 (0x44a10000)
-> 5 - emaclite (0x40e00000)
-> 6 - timer2 (0x41c10000)
-> 7 - axi emac (0x40c00000)
-> 8 - axi dma (0x41e00000)
-> 9 - axi dma
-> 10 - gpio (0x40000000)
-> 11 - gpio2 (0x40010000)
-> 12 - gpio3 (0x40020000)
+> Zjpm extension is finally ratified. And it's much simplier compared to th=
+e experimental one.
+> The newer version doesn't allow to specify custom mask or base for pointe=
+r masking.
+> Instead it allows only certain options for masking top bits.
 >
-> Signed-off-by: Sai Pavan Boddu <sai.pavan.boddu@amd.com>
-> Signed-off-by: Michal Simek <michal.simek@amd.com>
-> ---
-> Changes for V2:
->     Make changes to support -cpu switch
->     Remove setting of default board
->     Include doc to toctree
->     Remove setting of 'imac' extensions as they are available by
->     default.
-> Chages for V3:
->     Replace virt with generic
->     Update doc with supported riscv extensions
->     Change base CPU to TYPE_RISCV_CPU_BASE
-> Changes for V4:
->     Improved the doc based on comments
->     Disabled support for Double-Precision and Hypervisor extensions
->     Updated Maintainers file at riscv machine space.
->
->  MAINTAINERS                                |   6 +
->  docs/system/riscv/microblaze-v-generic.rst |  42 +++++
->  docs/system/target-riscv.rst               |   1 +
->  hw/riscv/microblaze-v-generic.c            | 184 +++++++++++++++++++++
->  hw/riscv/Kconfig                           |   8 +
->  hw/riscv/meson.build                       |   1 +
+> Signed-off-by: Alexey Baturo <baturo.alexey@gmail.com>
 
-It looks like this needs a rebase, do you mind rebasing on
-https://github.com/alistair23/qemu/tree/riscv-to-apply.next and
-sending a new version
+Wasn't this and part of this series previously reviewed?
 
 Alistair
 
