@@ -4,159 +4,98 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6F553D58D4F
-	for <qemu-riscv@archiver.kernel.org>; Mon, 25 Nov 2024 14:20:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 077EAD58D50
+	for <qemu-riscv@archiver.kernel.org>; Mon, 25 Nov 2024 14:35:07 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tFZx8-00056q-88; Mon, 25 Nov 2024 09:20:39 -0500
+	id 1tFaAW-0005mK-Ed; Mon, 25 Nov 2024 09:34:28 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1tFZx6-00056S-8c
- for qemu-riscv@nongnu.org; Mon, 25 Nov 2024 09:20:36 -0500
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1tFZx0-0000X9-BC
- for qemu-riscv@nongnu.org; Mon, 25 Nov 2024 09:20:34 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1732544427;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
- bh=yAVWOFUvVKskdDU+V1zn93YlTAt78Y5f+KZ/cbLa3L0=;
- b=drx8d+wVYDvtQiG4qUGV7CQ+jhPv1iO94e/8IidcA9fOYz6z/Fw6n9UweDzfg34F5q/8e1
- eCFrAop+pr1ezVEZlMTkqdDvZLpigSoanCSLjWUknKi0LeBTgpe/BP6IF/Gv58/vhXEbIL
- yCYiSnMcWsNO5ZZKGmGj4oEGaVDh+Ik=
-Received: from mail-qk1-f200.google.com (mail-qk1-f200.google.com
- [209.85.222.200]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-649-pLVl3JRlNIasEC565Q6Z8Q-1; Mon, 25 Nov 2024 09:20:25 -0500
-X-MC-Unique: pLVl3JRlNIasEC565Q6Z8Q-1
-X-Mimecast-MFC-AGG-ID: pLVl3JRlNIasEC565Q6Z8Q
-Received: by mail-qk1-f200.google.com with SMTP id
- af79cd13be357-7b66ec70846so77978585a.3
- for <qemu-riscv@nongnu.org>; Mon, 25 Nov 2024 06:20:25 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
+ id 1tFaAV-0005ly-0c
+ for qemu-riscv@nongnu.org; Mon, 25 Nov 2024 09:34:27 -0500
+Received: from mail-lj1-x236.google.com ([2a00:1450:4864:20::236])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
+ id 1tFaAP-0002XS-AY
+ for qemu-riscv@nongnu.org; Mon, 25 Nov 2024 09:34:24 -0500
+Received: by mail-lj1-x236.google.com with SMTP id
+ 38308e7fff4ca-2f75c56f16aso51451691fa.0
+ for <qemu-riscv@nongnu.org>; Mon, 25 Nov 2024 06:34:20 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1732545258; x=1733150058; darn=nongnu.org;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=L13NRCkyqi0c2bLphchlHQO/5yzR5oeo9xAOVXdqqPk=;
+ b=o2YWXFBOjm/IBxrBDpLz27I/HSV5n07zPvr/3do3IHoZcGUXHIX/0tHbqfniJ0Byf2
+ 6MGeWdY2DWjeFU14wUbgjIm9w7YZFuSxKT0/+VOegn2GE9JLuCuiJ5as1Ly/Nl6fDDRX
+ z0n1b21GesHIEkiOpgKI2dTrwPzaoAiZpgHu4AXkfsO1jMd6eRzkdmId4J7ZZu2HslHn
+ POUhbxlZz862oL8sRnMizUb3/xWMN9qpUcsKuto1KJXd0PJU8KM1fNnHE4KPwzj14ICd
+ R8wF/eVKrO09w+ozLWnRnHuqVsHvPhhYyQmSzyRv0l4z8P7dnQqZhea6GoI4+XfK3bb7
+ M5Tg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732544425; x=1733149225;
- h=content-transfer-encoding:in-reply-to:autocrypt:content-language
- :from:references:cc:to:subject:user-agent:mime-version:date
- :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=yAVWOFUvVKskdDU+V1zn93YlTAt78Y5f+KZ/cbLa3L0=;
- b=O6B+du1kvVERX/bwfSUxmsAtTE4E/PbnHYDIEoSbybuoYM/BEJkeQa3vvmDhJ6WYoX
- f8ahivD0GHCX26cSkHqE1mBmgYYt90KHSLWxfcW5YeW4hR1iEQRZ6FdPFP7RB8dbj5hY
- eK3xA6Xaw7RBFTirNh8AW2DUY//RFONTnNzC9hxI4DmTCH/+wkmPo8A3ESYxxZBsj19v
- cqF6OHrxs/ge/VZQBqIU+NF9sotKpvRmmwiteCGtTcy8fsMrGG2btCHNbjv91zRQyFvD
- +Oeg7+qLRQZBaBQxBa83nKlYGsVnqJoofziNni8e6Ogn3VnEhbhEHq61pP8JhIKeFmoX
- gLXQ==
+ d=1e100.net; s=20230601; t=1732545258; x=1733150058;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=L13NRCkyqi0c2bLphchlHQO/5yzR5oeo9xAOVXdqqPk=;
+ b=i1Y8NGqJtfEaDlGXVIl0h25w6//X5DfRiKiSjdnhWDTJbo1ULNPvNPbkjuuOxq8f/3
+ AKhsFeFulbuzdrWRbQRvGxKmoVD3ktyrch/91hlMu2JUlBA1mK646PWsTAvJMBHfAlt3
+ vMjoh4qEz+XHVhF7BHd0TQo92gC2gLNoG01n1foeIjqaxPVlBK81ZciBSleFec3hqgL9
+ cEMjGVm2iKxAjAm1qHckpraqT4pVuf4rNDMLRT7Slo+JjTAyuPNQVFXLX/nY5RAaiG0p
+ QwwchObecItjmMulXDjaSHbJHrs6Xne3vC9ZqyR6GeqXOG3Hu88kbzaioKlVe+eUt7ah
+ N5OA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUv05BejSHNaIDFTzLV+Mkr3bEfFRwHp3JHqq4SQ5QCROD9bN3TOtymiGGNxbEpfOeltqnM5p8YrUl4@nongnu.org
-X-Gm-Message-State: AOJu0YyNMTOssrnaPH8xNyhZUu5E6Z6ldA+yinVUwCAX19ZQi/rFp+I9
- jVdF4OTe8Z6Nyfk0esefIA1e2sR2w1+XzNTxHn45HW8f69zdOGefTSYlJwBjIesFHQgAxn8VSJy
- dFc26IgZtdvdNZd1nQaTz9kUdsZpg6wA8meL5UaISU7GHqUY1bcfV
-X-Gm-Gg: ASbGnctMTpj0AvQTNir1TRUut52H/tQDEgrDqCduohCtSaLfIdYhmBohBE79ScgsXCO
- tofva58hXpQRuoDpxvspGHX4GVfsiADmrVrGwGKFcsoFZyDkleAKcHk4NGsQrY4WQhyiwLIIiF3
- qmBNQ7qwJMIKT1AnPgvvU/hmfiovLNGs8/s98aevVZVmbynOi1MW4AoG3N0oftuvIEMWG7Fp1r/
- ygRC8FTY0aueiBO6PmPQruvh7yeNUyJEkBcx3xSCkUDUKoGnmy7GRmTGVGTf0ssOon7GA/clZg7
- O20=
-X-Received: by 2002:a05:620a:25c6:b0:7af:c3f4:ee45 with SMTP id
- af79cd13be357-7b51459dc5cmr2135748385a.55.1732544424917; 
- Mon, 25 Nov 2024 06:20:24 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IGpb7KbUTr3An8f6rEXKGvDFQeowHrk8wPIo2hsBDaRM3aoo4hzsED1o1zlsaQfsQCU1rYc6w==
-X-Received: by 2002:a05:620a:25c6:b0:7af:c3f4:ee45 with SMTP id
- af79cd13be357-7b51459dc5cmr2135741285a.55.1732544424331; 
- Mon, 25 Nov 2024 06:20:24 -0800 (PST)
-Received: from [192.168.0.7] (ip-109-42-51-70.web.vodafone.de. [109.42.51.70])
- by smtp.gmail.com with ESMTPSA id
- af79cd13be357-7b667f71523sm130134085a.0.2024.11.25.06.20.18
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 25 Nov 2024 06:20:23 -0800 (PST)
-Message-ID: <43924ccd-61b5-4862-ae54-6c9bfa5e8dda@redhat.com>
-Date: Mon, 25 Nov 2024 15:20:15 +0100
+ AJvYcCX+DdguYOTDgi7awAp9WnWsM/65crydJN8RFElfy0GAiZqdhikHdmLTrcOb2c+nehU0RknPryphDWVw@nongnu.org
+X-Gm-Message-State: AOJu0YxTUq5bZTlh+IH8SwjVWd+Jpiaf80KGyUgApdW0/bSZFn91NbrP
+ hhsgcJC0KQVo8ILdPYeogHq9fe1jfUk5HNuP1QVs/MKpauA3MB4eg3oF9NhQ6KxrO6okZ0bA6Dq
+ vxCLXIrI6xl/izdTo8/wL/UKGNQY7tKzQP77aFA==
+X-Gm-Gg: ASbGnctfyAZ9b617G3ZPybaeYGSDpPYGzUE297eOoLVzfXP3Nm35Bp5B51cJBumL7XF
+ MktTWCsH8Ertbm2YGb3TuS8jKTA1IHwjK
+X-Google-Smtp-Source: AGHT+IHRMdsrcynQ/wjLs4B6s4qayygZf+l418D7YqV74ot4oS3qMfFBiiYjxSyU1TgsMR9ye/mDPsqvzWFC1zTD4MM=
+X-Received: by 2002:a2e:a551:0:b0:2f6:6074:db71 with SMTP id
+ 38308e7fff4ca-2ffa712ce91mr63772451fa.17.1732545258234; Mon, 25 Nov 2024
+ 06:34:18 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH-for-10.0 6/8] hw/riscv/virt: Remove pointless GPEX_HOST()
- cast
-To: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- qemu-devel@nongnu.org, QEMU Trivial <qemu-trivial@nongnu.org>
-Cc: Daniel Henrique Barboza <danielhb413@gmail.com>,
+References: <20241125140535.4526-1-philmd@linaro.org>
+ <20241125140535.4526-4-philmd@linaro.org>
+In-Reply-To: <20241125140535.4526-4-philmd@linaro.org>
+From: Peter Maydell <peter.maydell@linaro.org>
+Date: Mon, 25 Nov 2024 14:34:07 +0000
+Message-ID: <CAFEAcA9hW6yBt9w3+2RDBovP1pNreBcvW4N7-6Kq_Gohvtv4eg@mail.gmail.com>
+Subject: Re: [PATCH-for-10.0 3/8] hw/pci-host/gpex: Allow machines to set
+ PCI_BUS_IO_ADDR0_ALLOWED flag
+To: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@linaro.org>
+Cc: qemu-devel@nongnu.org, Daniel Henrique Barboza <danielhb413@gmail.com>, 
  Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>,
- Bin Meng <bmeng.cn@gmail.com>, Alistair Francis <alistair.francis@wdc.com>,
- Harsh Prateek Bora <harshpb@linux.ibm.com>, Zhao Liu <zhao1.liu@intel.com>,
- =?UTF-8?Q?Daniel_P_=2E_Berrang=C3=A9?= <berrange@redhat.com>,
+ Bin Meng <bmeng.cn@gmail.com>, 
+ Alistair Francis <alistair.francis@wdc.com>,
+ Harsh Prateek Bora <harshpb@linux.ibm.com>, 
+ Zhao Liu <zhao1.liu@intel.com>,
+ =?UTF-8?Q?Daniel_P_=2E_Berrang=C3=A9?= <berrange@redhat.com>, 
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
  Palmer Dabbelt <palmer@dabbelt.com>,
- Marcel Apfelbaum <marcel.apfelbaum@gmail.com>, qemu-arm@nongnu.org,
- "Michael S. Tsirkin" <mst@redhat.com>, Nicholas Piggin <npiggin@gmail.com>,
- Leif Lindholm <quic_llindhol@quicinc.com>,
- Peter Maydell <peter.maydell@linaro.org>, qemu-riscv@nongnu.org,
+ Marcel Apfelbaum <marcel.apfelbaum@gmail.com>, qemu-arm@nongnu.org, 
+ "Michael S. Tsirkin" <mst@redhat.com>, Nicholas Piggin <npiggin@gmail.com>, 
+ Leif Lindholm <quic_llindhol@quicinc.com>, qemu-riscv@nongnu.org, 
  Weiwei Li <liwei1518@gmail.com>, Radoslaw Biernacki <rad@semihalf.com>,
+ Thomas Huth <thuth@redhat.com>, 
  Yanan Wang <wangyanan55@huawei.com>, Eduardo Habkost <eduardo@habkost.net>,
  qemu-ppc@nongnu.org
-References: <20241125140535.4526-1-philmd@linaro.org>
- <20241125140535.4526-7-philmd@linaro.org>
-From: Thomas Huth <thuth@redhat.com>
-Autocrypt: addr=thuth@redhat.com; keydata=
- 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
-In-Reply-To: <20241125140535.4526-7-philmd@linaro.org>
-X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: KYbsSXCPWupEF9qEWvWmznVjjPk5Xr-CgT0vRjo_xv0_1732544425
-X-Mimecast-Originator: redhat.com
-Content-Language: en-US
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=170.10.129.124; envelope-from=thuth@redhat.com;
- helo=us-smtp-delivery-124.mimecast.com
-X-Spam_score_int: -29
-X-Spam_score: -3.0
-X-Spam_bar: ---
-X-Spam_report: (-3.0 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H2=-0.93,
- RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001, RCVD_IN_VALIDITY_SAFE_BLOCKED=0.001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2a00:1450:4864:20::236;
+ envelope-from=peter.maydell@linaro.org; helo=mail-lj1-x236.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -172,61 +111,22 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 25/11/2024 15.05, Philippe Mathieu-Daudé wrote:
-> No need to QOM-cast twice, since the intermediate value
-> is not used.
-> 
-> Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+On Mon, 25 Nov 2024 at 14:06, Philippe Mathieu-Daud=C3=A9 <philmd@linaro.or=
+g> wrote:
+>
+> Expose the "allow-io-addr0-accesses" property so machines
+> using a GPEX host bridge can set this flag on the bus.
+>
+> Signed-off-by: Philippe Mathieu-Daud=C3=A9 <philmd@linaro.org>
 > ---
->   hw/riscv/virt.c | 20 +++++++++-----------
->   1 file changed, 9 insertions(+), 11 deletions(-)
-> 
-> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-> index 45a8c4f819..2feb851f15 100644
-> --- a/hw/riscv/virt.c
-> +++ b/hw/riscv/virt.c
-> @@ -1140,23 +1140,21 @@ static inline DeviceState *gpex_pcie_init(MemoryRegion *sys_mem,
->       dev = qdev_new(TYPE_GPEX_HOST);
->   
->       /* Set GPEX object properties for the virt machine */
-> -    object_property_set_uint(OBJECT(GPEX_HOST(dev)), PCI_HOST_ECAM_BASE,
-> +    object_property_set_uint(OBJECT(dev), PCI_HOST_ECAM_BASE,
->                               ecam_base, NULL);
-> -    object_property_set_int(OBJECT(GPEX_HOST(dev)), PCI_HOST_ECAM_SIZE,
-> +    object_property_set_int(OBJECT(dev), PCI_HOST_ECAM_SIZE,
->                               ecam_size, NULL);
-> -    object_property_set_uint(OBJECT(GPEX_HOST(dev)),
-> -                             PCI_HOST_BELOW_4G_MMIO_BASE,
-> +    object_property_set_uint(OBJECT(dev), PCI_HOST_BELOW_4G_MMIO_BASE,
->                                mmio_base, NULL);
-> -    object_property_set_int(OBJECT(GPEX_HOST(dev)), PCI_HOST_BELOW_4G_MMIO_SIZE,
-> +    object_property_set_int(OBJECT(dev), PCI_HOST_BELOW_4G_MMIO_SIZE,
->                               mmio_size, NULL);
-> -    object_property_set_uint(OBJECT(GPEX_HOST(dev)),
-> -                             PCI_HOST_ABOVE_4G_MMIO_BASE,
-> +    object_property_set_uint(OBJECT(dev), PCI_HOST_ABOVE_4G_MMIO_BASE,
->                                high_mmio_base, NULL);
-> -    object_property_set_int(OBJECT(GPEX_HOST(dev)), PCI_HOST_ABOVE_4G_MMIO_SIZE,
-> +    object_property_set_int(OBJECT(dev), PCI_HOST_ABOVE_4G_MMIO_SIZE,
->                               high_mmio_size, NULL);
-> -    object_property_set_uint(OBJECT(GPEX_HOST(dev)), PCI_HOST_PIO_BASE,
-> +    object_property_set_uint(OBJECT(dev), PCI_HOST_PIO_BASE,
->                               pio_base, NULL);
-> -    object_property_set_int(OBJECT(GPEX_HOST(dev)), PCI_HOST_PIO_SIZE,
-> +    object_property_set_int(OBJECT(dev), PCI_HOST_PIO_SIZE,
->                               pio_size, NULL);
->   
->       sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
-> @@ -1189,7 +1187,7 @@ static inline DeviceState *gpex_pcie_init(MemoryRegion *sys_mem,
->           gpex_set_irq_num(GPEX_HOST(dev), i, PCIE_IRQ + i);
->       }
->   
-> -    GPEX_HOST(dev)->gpex_cfg.bus = PCI_HOST_BRIDGE(GPEX_HOST(dev))->bus;
-> +    GPEX_HOST(dev)->gpex_cfg.bus = PCI_HOST_BRIDGE(dev)->bus;
->       return dev;
->   }
->   
+>  include/hw/pci-host/gpex.h | 1 +
+>  hw/pci-host/gpex.c         | 6 ++++++
+>  2 files changed, 7 insertions(+)
 
-Reviewed-by: Thomas Huth <thuth@redhat.com>
+Given the way the gpex controller handles its MMIO regions,
+I rather suspect that none of its users really need to set
+"no address 0 accesses", though of course this is a behaviour
+change for some machines so would need testing.
 
+-- PMM
 
