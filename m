@@ -4,95 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8731CD58D54
-	for <qemu-riscv@archiver.kernel.org>; Mon, 25 Nov 2024 14:50:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 95260D58D66
+	for <qemu-riscv@archiver.kernel.org>; Mon, 25 Nov 2024 16:39:43 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tFaPh-0003D0-H9; Mon, 25 Nov 2024 09:50:09 -0500
+	id 1tFc6s-0005N3-RS; Mon, 25 Nov 2024 11:38:50 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tFaPa-0003BH-6l
- for qemu-riscv@nongnu.org; Mon, 25 Nov 2024 09:50:03 -0500
-Received: from mail-wm1-x32d.google.com ([2a00:1450:4864:20::32d])
+ (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
+ id 1tFc6n-0005LO-Ny
+ for qemu-riscv@nongnu.org; Mon, 25 Nov 2024 11:38:46 -0500
+Received: from mail-ed1-x52e.google.com ([2a00:1450:4864:20::52e])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tFaPX-0004bQ-BL
- for qemu-riscv@nongnu.org; Mon, 25 Nov 2024 09:50:01 -0500
-Received: by mail-wm1-x32d.google.com with SMTP id
- 5b1f17b1804b1-43497839b80so14268415e9.2
- for <qemu-riscv@nongnu.org>; Mon, 25 Nov 2024 06:49:58 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
+ id 1tFc6k-0005ZX-2A
+ for qemu-riscv@nongnu.org; Mon, 25 Nov 2024 11:38:44 -0500
+Received: by mail-ed1-x52e.google.com with SMTP id
+ 4fb4d7f45d1cf-5cfd2978f95so6375585a12.0
+ for <qemu-riscv@nongnu.org>; Mon, 25 Nov 2024 08:38:41 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1732546197; x=1733150997; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=tc5LnuLllGpjp6P/blJEhjyQ5ysxLb95rGV+9PCZXGU=;
- b=u+mzm3FFjv7+mKhSPnVDJf5pJZblbaHTTLB+x5CYkWKYh5/tlFgJJLmhrQObtFKQlb
- WAD2OOoRBo5LynpLYJcmTLLIiWS3FUtRfz8JOo36bbN5qrLZRGUh4zPmwfhpigTL0HRG
- 5Hk9ebA0ZLPadX8NTXgXK343Nl84U9RO+oSBmlQicDw2pwSg5f0ZS1FfZurGc4nCCBdP
- e9QGsZ9dvYNnCQ0/cmzkxHKOoiFECj2sUV0zxI/CNjWbIq99O2KH26h0DVp6KU+PvpvF
- p2+zG4xG8E5K9rukj0qbOPfsZOqBR1G6pOVGmWK5MKnFPwDxPYkjmSb9uqkN6u4GLC1q
- Hr2w==
+ d=linaro.org; s=google; t=1732552720; x=1733157520; darn=nongnu.org;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=8W2PHlqzuLwSu++3qOdo0UFQcb9hDu43m0wkS5CHwmk=;
+ b=dXkyMcJZD6tEO78Q6whCbX4m1va3sfA6gaKqIh4w5pZAL7R8eNSNbLdj+obHTohlxo
+ ARGrFZXIigmuHc5dG3Oc5SAwVKsNerGepw1p154GcV8QudrapDfY03V4kzDiYD2VMuEV
+ TcGkuJg3Coo+Arfcvvzl5fsWT0iAhoYHCiRIW/KR8dbLM591bzkqYkGeJ5PFpR/bb+Ex
+ Y1TreqINN7X1B4sRqOfExMK6WxkNhexlVZ1FXgQOTqOuLu3BbHNOUbms3sNVn0hqaPmC
+ qccDvcmJ4mwXwcPJj7LhXL+BxvqGCuk2g2P17mkbaqCv+n/QSFw3eVk5a+sH5/m6ipN9
+ mifQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732546197; x=1733150997;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=tc5LnuLllGpjp6P/blJEhjyQ5ysxLb95rGV+9PCZXGU=;
- b=WJutFHbU8hskZqukY+YnswIF36TWS+oO2Q9YMC9RYGeOyhA8cKfKM830uIOqn8AFSP
- F0NeZtx9YvwYCrBfFQdZNxFPja3my8Zs35+DgvgCeUfQzp9WNY/yz2uWum9Uifs0KVUf
- AaSO52dcyBzyYdyvsfG+kDf3HCYckddDkKw2F2w943v+Z9tHY5AlkJIkW6y28QlTcoyH
- yCzwl8tnxHgvEX1OgL/EW/8qwPeCjBLf3EB98ocgX8T0gr6hqvz+C5xAB8VsOotI+GVh
- BYxSItUSu9SuDXzqVUCFVT0rSISK6J5h8GuWN9C7H8dIORKH/1IcOobPHAVl10N29F5Y
- mIsQ==
+ d=1e100.net; s=20230601; t=1732552720; x=1733157520;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=8W2PHlqzuLwSu++3qOdo0UFQcb9hDu43m0wkS5CHwmk=;
+ b=c6tDhdqLPf3P5hf0VF012/2oJQGyd1LeBeAUW/oBun6UkIbY5eK2TYPqit+/4CPwhM
+ YfnRvY/6gSYacDJV6rksF5zIwjfeVqwnQh/FkjeiJstWw+7BhSjkW2xHLFciZrR4esDX
+ HkAZbahK3vzER425rFN642p9go9LzG1NlR9FmU+mzgR1qZT1TGh/HwHw0dK9vnkvQ83g
+ wHsvzQCG15WIrjfmKQI1lut2ib1Wv9HoudHqs2RvbtwtHofctvH4AAZD/39uvnvXSyAv
+ p+XCWwlXkPEQg5YRp6Oq6tgOWhPFWJ8IgZFL/oI1LZ83eK7K2iVmd7izbxVWvLpK+S39
+ rIHg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCU6Xbq8uP1Z49GotQLSxn8hAArSGeIkbc7i2zd+0afYaK0aKQo4ajeXMNWrz7iZvTS+9ENBa/w87DXO@nongnu.org
-X-Gm-Message-State: AOJu0YwLcS4dcLQnGo+Ndq1UYOv2kaYjWVUmUgEj1zCgLdc9WZsvlbb3
- lrYnkeWH7I7sYQU/d6SqEAIEhq6uKQTlgwun+AfJxaUEDuxROufA/ODpzw4+uJ4=
-X-Gm-Gg: ASbGnctcxL6XfM7WiAdEVF9ryiGy0DuJVgZey9soOfOOHximH5doRaTmaVFuHUPJFiU
- Rx4S4vVzMD1Zx3y3Ti60qaI41xXgHOi7tXqViHlmqcHe8c2fzgvhuR+4h8kMk0L9RlYI+6EyHIv
- s887SSg/1mdxn99iKulQ6NiiKV2ESYFkxhQ5Upm+jP9MIJHPNuMBIxmVv+oV7alK5KiQMHAIvQU
- sMIJU2J6Qic5uOwwjUW6CKkRKYGhMkaB/j3PeGO2e+gSVamY3I7Bmedwao3k7UDqA==
-X-Google-Smtp-Source: AGHT+IED5k1O3nbvzkJ1DH2/mMToRCPIbNYWrryyXGaeVZLFIPfay/fk5Y9wh9Jp+29gWVcJuaS/DA==
-X-Received: by 2002:a05:600c:1d1e:b0:434:a1d3:a30f with SMTP id
- 5b1f17b1804b1-434a1d3a4ecmr14475935e9.6.1732546197259; 
- Mon, 25 Nov 2024 06:49:57 -0800 (PST)
-Received: from [192.168.69.146] ([176.176.170.239])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4349d3f4b7bsm60218105e9.6.2024.11.25.06.49.54
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 25 Nov 2024 06:49:56 -0800 (PST)
-Message-ID: <748eb21d-4b73-4d2a-8058-b3a79d4fb802@linaro.org>
-Date: Mon, 25 Nov 2024 15:49:53 +0100
+ AJvYcCVjWlT3jCdTr0jqyAI6Y+KAOeIg6NQwSxSfUGsK32lO/lfStJT5gMb4rmEiD/Y7oOcApDdiFugIClrA@nongnu.org
+X-Gm-Message-State: AOJu0YwbDl1rB6eqMuWOqFITcjohK9WFZDtmmC0yVKPVcJ6QaInCk59e
+ O0P8rEHkkZRw0HWu4jJB+f+ZEpOB3JrQCoCnGz8fBGVNNSYBHiDMjCDNjxrwDMzSkiRpLahATEe
+ FVaW4nlulBpqD3UXFfjsuWITWsbnQAg0I8y5ScQ==
+X-Gm-Gg: ASbGncuW0cwPwezLVVR84m5AlPiU3LIFhrOmQofAoJjUHKKtCII4H4r9peD1SIXXpxw
+ fWfaAUotYZ9N31zn7yCj4wPwkXvleIDpM
+X-Google-Smtp-Source: AGHT+IHpG4BNQkKwovRSHjcSSztWlba5dB3PINZvZhJcLTuNIqrxSBgvDeVJecoM+DsuSSZygBRxjfRRUePFb9VhGdw=
+X-Received: by 2002:a05:6402:1ecc:b0:5cf:c188:81b6 with SMTP id
+ 4fb4d7f45d1cf-5d0205c7491mr11920947a12.6.1732552720004; Mon, 25 Nov 2024
+ 08:38:40 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH-for-10.0 0/8] hw/boards: Remove legacy
- MachineClass::pci_allow_0_address flag
-To: Peter Maydell <peter.maydell@linaro.org>
-Cc: qemu-devel@nongnu.org, Daniel Henrique Barboza <danielhb413@gmail.com>,
- Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>,
- Bin Meng <bmeng.cn@gmail.com>, Alistair Francis <alistair.francis@wdc.com>,
- Harsh Prateek Bora <harshpb@linux.ibm.com>, Zhao Liu <zhao1.liu@intel.com>,
- =?UTF-8?Q?Daniel_P_=2E_Berrang=C3=A9?= <berrange@redhat.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Marcel Apfelbaum <marcel.apfelbaum@gmail.com>, qemu-arm@nongnu.org,
- "Michael S. Tsirkin" <mst@redhat.com>, Nicholas Piggin <npiggin@gmail.com>,
- Leif Lindholm <quic_llindhol@quicinc.com>, qemu-riscv@nongnu.org,
- Weiwei Li <liwei1518@gmail.com>, Radoslaw Biernacki <rad@semihalf.com>,
- Thomas Huth <thuth@redhat.com>, Yanan Wang <wangyanan55@huawei.com>,
- Eduardo Habkost <eduardo@habkost.net>, qemu-ppc@nongnu.org,
- Laurent Vivier <lvivier@redhat.com>, Alexander Gordeev <agordeev@redhat.com>
 References: <20241125140535.4526-1-philmd@linaro.org>
  <CAFEAcA9vS-9u282Jr+_QaGZT6vD4cpmh0wjuYPQSPLZQw30e4Q@mail.gmail.com>
-Content-Language: en-US
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-In-Reply-To: <CAFEAcA9vS-9u282Jr+_QaGZT6vD4cpmh0wjuYPQSPLZQw30e4Q@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::32d;
- envelope-from=philmd@linaro.org; helo=mail-wm1-x32d.google.com
+ <748eb21d-4b73-4d2a-8058-b3a79d4fb802@linaro.org>
+In-Reply-To: <748eb21d-4b73-4d2a-8058-b3a79d4fb802@linaro.org>
+From: Peter Maydell <peter.maydell@linaro.org>
+Date: Mon, 25 Nov 2024 16:38:29 +0000
+Message-ID: <CAFEAcA_NqH5v5Oii2dQqw_Lx66u=Fkbqq6WGnOHF_Z0jfumgSg@mail.gmail.com>
+Subject: Re: [PATCH-for-10.0 0/8] hw/boards: Remove legacy
+ MachineClass::pci_allow_0_address flag
+To: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@linaro.org>
+Cc: qemu-devel@nongnu.org, Daniel Henrique Barboza <danielhb413@gmail.com>, 
+ Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>,
+ Bin Meng <bmeng.cn@gmail.com>, 
+ Alistair Francis <alistair.francis@wdc.com>,
+ Harsh Prateek Bora <harshpb@linux.ibm.com>, 
+ Zhao Liu <zhao1.liu@intel.com>,
+ =?UTF-8?Q?Daniel_P_=2E_Berrang=C3=A9?= <berrange@redhat.com>, 
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Marcel Apfelbaum <marcel.apfelbaum@gmail.com>, qemu-arm@nongnu.org, 
+ "Michael S. Tsirkin" <mst@redhat.com>, Nicholas Piggin <npiggin@gmail.com>, 
+ Leif Lindholm <quic_llindhol@quicinc.com>, qemu-riscv@nongnu.org, 
+ Weiwei Li <liwei1518@gmail.com>, Radoslaw Biernacki <rad@semihalf.com>,
+ Thomas Huth <thuth@redhat.com>, 
+ Yanan Wang <wangyanan55@huawei.com>, Eduardo Habkost <eduardo@habkost.net>,
+ qemu-ppc@nongnu.org, 
+ Laurent Vivier <lvivier@redhat.com>, Alexander Gordeev <agordeev@redhat.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2a00:1450:4864:20::52e;
+ envelope-from=peter.maydell@linaro.org; helo=mail-ed1-x52e.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -115,50 +113,75 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 25/11/24 15:14, Peter Maydell wrote:
-> On Mon, 25 Nov 2024 at 14:06, Philippe Mathieu-Daudé <philmd@linaro.org> wrote:
->>
->> This series aims to remove a legacy field from
->> MachineClass.
->>
->> Rather than a global exposed to all machines,
->> use a pci-bus specific flag on each machine
->> requiering it.
-> 
-> Should this be a property of the PCI controller, rather
-> than on the PCI bus? Presumably on the machines that
-> don't allow a 0 PCI BAR address this happens because the
-> PCI controller refuses to map BARs at that address.
-> 
-> TBH the commit message for e402463073 suggests to me
-> that "allow address zero" should be the default and
-> either specific machines should forbid it or else we
-> should figure out what goes wrong with them, if the
-> problem is caused by some bug in QEMU. The commit message's
-> mention of "fix PCI memory priorities" suggests to me
-> that this is a QEMU bug, and that it ought to be possible
-> to have the machine set up such that you *can* map the
-> BAR at address 0, it's merely invisible to the guest because
-> some other machine devices have higher priority and are
-> visible "on top" of it instead.
+On Mon, 25 Nov 2024 at 14:49, Philippe Mathieu-Daud=C3=A9 <philmd@linaro.or=
+g> wrote:
+>
+> On 25/11/24 15:14, Peter Maydell wrote:
+> > On Mon, 25 Nov 2024 at 14:06, Philippe Mathieu-Daud=C3=A9 <philmd@linar=
+o.org> wrote:
+> >>
+> >> This series aims to remove a legacy field from
+> >> MachineClass.
+> >>
+> >> Rather than a global exposed to all machines,
+> >> use a pci-bus specific flag on each machine
+> >> requiering it.
+> >
+> > Should this be a property of the PCI controller, rather
+> > than on the PCI bus? Presumably on the machines that
+> > don't allow a 0 PCI BAR address this happens because the
+> > PCI controller refuses to map BARs at that address.
+> >
+> > TBH the commit message for e402463073 suggests to me
+> > that "allow address zero" should be the default and
+> > either specific machines should forbid it or else we
+> > should figure out what goes wrong with them, if the
+> > problem is caused by some bug in QEMU. The commit message's
+> > mention of "fix PCI memory priorities" suggests to me
+> > that this is a QEMU bug, and that it ought to be possible
+> > to have the machine set up such that you *can* map the
+> > BAR at address 0, it's merely invisible to the guest because
+> > some other machine devices have higher priority and are
+> > visible "on top" of it instead.
+>
+> You are probably right, the following comment ...:
+>
+>   pcibus_t pci_bar_address(PCIDevice *d,
+>                            int reg, uint8_t type, pcibus_t size)
+>   {
+>       ...
+>       /* NOTE: we do not support wrapping */
+>       /* XXX: as we cannot support really dynamic
+>          mappings, we handle specific values as invalid
+>          mappings. */
+>       if (last_addr <=3D new_addr || last_addr =3D=3D PCI_BAR_UNMAPPED ||
+>           (!allow_0_address && new_addr =3D=3D 0)) {
+>           return PCI_BAR_UNMAPPED;
+>       }
+>
+> ... is from 20 years ago at the beginning of PCI in QEMU, commit
+> 0ac32c8375 ("PCI interrupt support - PCI BIOS interrupt remapping
+> - more accurate memory mapping - 'info pci' monitor command") which
+> suggest the implementation is incomplete here.
 
-You are probably right, the following comment ...:
+See also this thread from 2015:
 
-  pcibus_t pci_bar_address(PCIDevice *d,
-                           int reg, uint8_t type, pcibus_t size)
-  {
-      ...
-      /* NOTE: we do not support wrapping */
-      /* XXX: as we cannot support really dynamic
-         mappings, we handle specific values as invalid
-         mappings. */
-      if (last_addr <= new_addr || last_addr == PCI_BAR_UNMAPPED ||
-          (!allow_0_address && new_addr == 0)) {
-          return PCI_BAR_UNMAPPED;
-      }
+https://lore.kernel.org/qemu-devel/1444683308-30543-1-git-send-email-agorde=
+ev@redhat.com/T/#u
 
-... is from 20 years ago at the beginning of PCI in QEMU, commit
-0ac32c8375 ("PCI interrupt support - PCI BIOS interrupt remapping
-- more accurate memory mapping - 'info pci' monitor command") which
-suggest the implementation is incomplete here.
+which includes:
+ * me asking why this isn't a property on the PCI controller device :-)
+ * MST confirming that this setting is only for buggy machine types
+   that don't get the priorities correct when the BAR is configured
+   so it overlaps something else
+ * me expressing disappointment that we made the default for this
+   flag be "this machine type is broken" rather than "this machine
+   type is not broken", because of course almost every machine added
+   since has left the flag at its default value
+ * a now out-of-date list of possibly affected machine types that
+   might actually need to mark themselves as "broken", or at least
+   be tested to see what they do
+
+thanks
+-- PMM
 
