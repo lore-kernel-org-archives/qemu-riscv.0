@@ -4,65 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 404FCD58D4D
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 35EB9D58D4C
 	for <qemu-riscv@archiver.kernel.org>; Mon, 25 Nov 2024 14:08:16 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tFZkQ-0003aT-RK; Mon, 25 Nov 2024 09:07:30 -0500
+	id 1tFZkM-0003Ow-SN; Mon, 25 Nov 2024 09:07:26 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tFZkO-0003V2-Lu
- for qemu-riscv@nongnu.org; Mon, 25 Nov 2024 09:07:28 -0500
-Received: from mail-lj1-x22d.google.com ([2a00:1450:4864:20::22d])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tFZkH-0002yk-J3
+ for qemu-riscv@nongnu.org; Mon, 25 Nov 2024 09:07:21 -0500
+Received: from mail-lf1-x12b.google.com ([2a00:1450:4864:20::12b])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tFZkM-0006p4-So
- for qemu-riscv@nongnu.org; Mon, 25 Nov 2024 09:07:28 -0500
-Received: by mail-lj1-x22d.google.com with SMTP id
- 38308e7fff4ca-2ffc7a2c5d5so6788301fa.1
- for <qemu-riscv@nongnu.org>; Mon, 25 Nov 2024 06:07:26 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tFZkG-0006nM-0P
+ for qemu-riscv@nongnu.org; Mon, 25 Nov 2024 09:07:21 -0500
+Received: by mail-lf1-x12b.google.com with SMTP id
+ 2adb3069b0e04-539eb97f26aso4946052e87.2
+ for <qemu-riscv@nongnu.org>; Mon, 25 Nov 2024 06:07:19 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1732543645; x=1733148445; darn=nongnu.org;
+ d=linaro.org; s=google; t=1732543638; x=1733148438; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=hhPIY1VBzTRWV9NVUC530URyYQIaOfJGukKvr94mbQc=;
- b=KTVO1eLkQUjYC709Nr3k+IqVD5ayywzIL0QgrkyJ/tl8nMd0z651yzXC4rTW0miucx
- NPhWW6WfINbBe9C3YyK3IPVPOdhjsldLeFl8F9w/fwu/e8xsrmfKw9maWPXH8qqkNSLc
- +xLWUe2Hq4XwwofJpLZoB+yB2wjgYmjxpjdYBZxtkWNmZ/48l62+fiLWmnQr42NU3fJx
- rGFWSJ0fbOEpDNmvCA6r6oiCy/XsNgxWh5+2YswGCy9JN/aQG+N9GoEOzxTWd3Pk3qlH
- wsxAbrra4/2Gox90Q/+p4HHgXiOW81DWeNcRI+p/xN3nA+bFYm0lqWMsA8nsQ5tcziBh
- I7yQ==
+ bh=mBLNIub1rHgG9lgkZtJGEcAkQWIxnGXQvYMrFBUCUkM=;
+ b=r49EAaORrweJ0acZ+vN1kcF0cl2h0eCeGluLRmLmKHk82Ymo7UFzC80RqJiSxfdAyW
+ WzDON1b26XTh52Ek0EFYgC1XAWQIGnubM+jWL6HU3oPGK3Pd+ZNx4kkMCH+pU4RiJxtp
+ pbqHJmOopgb3UX/1mp8Z0cUMymlM8d7K29a0gKlMIhgOf5gQ4tb8mdKyebk/I+vl5lyP
+ BsrI9sjCTc6KxS+vRO3+w0397mZd30blEN29VGAQ/1MjSIHKiTd3WKzJA1KHN5bhI6l9
+ ERwGskz3NXEnTb9shJMQHN/dKaCxGTl9EjnLCnUpzdH5U/IN8PT+l3NKgS4uOVjGXBRs
+ Dl2g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732543645; x=1733148445;
+ d=1e100.net; s=20230601; t=1732543638; x=1733148438;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=hhPIY1VBzTRWV9NVUC530URyYQIaOfJGukKvr94mbQc=;
- b=krCklVsMvIKVph79NcdwQLwHKiDLT5zf4fsmVP4PPXYf1yN96qHb5RiKqzS9DD6I4K
- m0LsEUMNz81OC6PalVCrEblPdJ4/RXfYURHZHyoa65Q/SiP7axJf4jvRX7ccxueTdwma
- DYIVZxlKRg9YPIlsN8V62stDP/cXcTf759ZTKZQV7Xd37GJiCw/8GPH9N6qT60SSVFK8
- rOnv++0n2zmaHgeuykKl18uaUwczCj+8NTafuR4EFgTthxyMZSVNtAMLzv9NP49aOgn0
- nv6ngjIzr374bxeoB/JyOKqRJuXYakPAfl7AmdfNwcvdbSLMw+x3CqtnrVhzjeFCBqWJ
- xkrw==
+ bh=mBLNIub1rHgG9lgkZtJGEcAkQWIxnGXQvYMrFBUCUkM=;
+ b=bU6casmwxd9GUH9Pd552agUOg0XmXExdCHegL8p3wxhA0FBvloZCpfqozIbS0CrrNO
+ mgIbk8Kjkm2lkt+YJwDHFNMgG+MFn+DClSM3qkq81rAoFqY07EW6Zbo04k7cuCHGOgBq
+ WT/nV0anvNxSrRgKWOEdVOqh9y+HesAdv5dAtfvHkCpus84qGeSc80J2dGclogVBsX6d
+ bDq8sUmkkkqN/TIQE7o8dSUwVEw6h+hHqadmXn/LNFX4wApDew9odm3Pb/3/cxNWd3yX
+ 2YUuWRjgWIWFSm+/VpzrXWIp3o87PX4N/hDPhnXrqDONbCMIXXgMMd3y7fp+y9HFhLib
+ W1Xw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXut/pxkA239qshXyK6A51+zhTjKAzVW/dLazRJsI3y2UBA4er2rPm/dFjILPGki6DBIY4xaqOeUhet@nongnu.org
-X-Gm-Message-State: AOJu0YyKrffftnTlk/5/rCBd2Jiap1zcrzU6f+l4z1Hg6QBW36Q1othx
- bexQ1nZHrzhQxJhr9ax7IrxLqNqV+YHAz8mqE7VtSzvAu2l/2R8LszTRYZlj8O/C1qGXyOL1tO2
- 1
-X-Gm-Gg: ASbGncskyGcvpM8HiJssdMATnY4Ccztxjn4nnfefVqvwycFRQvjk/wFTApcnAzbe5Mo
- CHFpeuCkOerefUf+5HUB4FoK9/B3lkPuHtHdAMSAq7eI6aLHhMjoogHLxTikJ3sogKSRSCxHdDR
- Dfc6O4tzigXNttsAI8ZS/d0HWvCIFcA6o3EDgkILC23oA7qqYff+2ca7xYpodo5BxdhjMD+w0Zl
- DSX84y3Tobdd84RdTn3JdREH+/wF6rCpB6Td49QyGylMUT41f/XR8Rtd7cDoxKL6LCb8DcT
-X-Google-Smtp-Source: AGHT+IEbf0beO52iSpVocxIGp0kqvDpasec8DZVORrD5VJMHU1FsQgCTWd+2Zd9KjuUFZexnRUtDug==
-X-Received: by 2002:a2e:a546:0:b0:2fb:5a19:5b9b with SMTP id
- 38308e7fff4ca-2ffa70f08a3mr71798411fa.8.1732543644987; 
- Mon, 25 Nov 2024 06:07:24 -0800 (PST)
+ AJvYcCX9y7Dp7ullJAtzFwBOqaY5z/1uMC8HKQNl9bRpSFMsrlSWzBn4VHU0mIZI4aKEKw8iW9a+IcR2fBNW@nongnu.org
+X-Gm-Message-State: AOJu0YzXxOWuM2RYXoxodMYf+ae+L3GEDs3XGFjfb5JzRv4wg1+/i/OY
+ YbTaGj6tWkUgS0e4siEEnSCtAp2Rbz5FC/YYvgclt91qBb120SkgTT+8de/+XCg=
+X-Gm-Gg: ASbGncvbMwopqJSjBy7QAXhv3zczt41W8aXe1SSRtEAr3jO9lnRALn+FE3xLe3h7Dmc
+ QgiIqZ2TscslvdhtNIa+VCLt8ICu583/7SW8PowZUBQi98Ri2Kyhw4Ja4qK2OhrWAH4+74NRIPZ
+ b04EZiZBlcV77ZjtB6aGTQEu7iqQOP6PNXePb6vvuYbYJ+e6p0ZfjdVrMSkfywoT+/J4b6iKJg1
+ PqZTS2DDUMc+OJbS4DJUlwONCYa/daFlyj4CXBO3cQn8A2D2W2YqbEV+noJ7+jpGEcRzdcv
+X-Google-Smtp-Source: AGHT+IHH/FCkk9WPtIQpVEP5wU4V68G/R4U2hl6XCtnJXDl+e9ubIMh6z10GVU3d7ELLKLqvnMh97Q==
+X-Received: by 2002:a05:6512:e87:b0:53d:ddd1:adf5 with SMTP id
+ 2adb3069b0e04-53dddd1c480mr2858013e87.12.1732543638183; 
+ Mon, 25 Nov 2024 06:07:18 -0800 (PST)
 Received: from localhost.localdomain ([176.176.170.239])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-432f642f15esm210421055e9.0.2024.11.25.06.07.22
+ ffacd0b85a97d-3825fbee043sm10499689f8f.104.2024.11.25.06.07.15
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Mon, 25 Nov 2024 06:07:24 -0800 (PST)
+ Mon, 25 Nov 2024 06:07:17 -0800 (PST)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Daniel Henrique Barboza <danielhb413@gmail.com>,
@@ -81,18 +80,18 @@ Cc: Daniel Henrique Barboza <danielhb413@gmail.com>,
  Weiwei Li <liwei1518@gmail.com>, Radoslaw Biernacki <rad@semihalf.com>,
  Thomas Huth <thuth@redhat.com>, Yanan Wang <wangyanan55@huawei.com>,
  Eduardo Habkost <eduardo@habkost.net>, qemu-ppc@nongnu.org
-Subject: [PATCH-for-10.0 8/8] hw/pci/pci: Remove legacy
- MachineClass::pci_allow_0_address flag
-Date: Mon, 25 Nov 2024 15:05:35 +0100
-Message-ID: <20241125140535.4526-9-philmd@linaro.org>
+Subject: [PATCH-for-10.0 7/8] hw/riscv/virt: Set PCI_BUS_IO_ADDR0_ALLOWED flag
+ on GPEX host bridge
+Date: Mon, 25 Nov 2024 15:05:34 +0100
+Message-ID: <20241125140535.4526-8-philmd@linaro.org>
 X-Mailer: git-send-email 2.45.2
 In-Reply-To: <20241125140535.4526-1-philmd@linaro.org>
 References: <20241125140535.4526-1-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::22d;
- envelope-from=philmd@linaro.org; helo=mail-lj1-x22d.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::12b;
+ envelope-from=philmd@linaro.org; helo=mail-lf1-x12b.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -115,52 +114,35 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-All users of this flag now set the PCI_BUS_IO_ADDR0_ALLOWED
-PCIBusFlags. Since there are no more users, remove the field
-in MachineClass.
+See commit acead54c78 ("riscv: virt: Allow PCI address 0")
+all RISCV Virt machines set this flag.
 
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 ---
- include/hw/boards.h | 1 -
- hw/pci/pci.c        | 5 +----
- 2 files changed, 1 insertion(+), 5 deletions(-)
+ hw/riscv/virt.c | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/include/hw/boards.h b/include/hw/boards.h
-index 36fbb9b59d..66fb2eddd3 100644
---- a/include/hw/boards.h
-+++ b/include/hw/boards.h
-@@ -284,7 +284,6 @@ struct MachineClass {
-         no_floppy:1,
-         no_cdrom:1,
-         no_sdcard:1,
--        pci_allow_0_address:1,
-         legacy_fw_cfg_order:1;
-     bool is_default;
-     const char *default_machine_opts;
-diff --git a/hw/pci/pci.c b/hw/pci/pci.c
-index de3f93646f..d27166dd75 100644
---- a/hw/pci/pci.c
-+++ b/hw/pci/pci.c
-@@ -45,7 +45,6 @@
- #include "hw/pci/msi.h"
- #include "hw/pci/msix.h"
- #include "hw/hotplug.h"
--#include "hw/boards.h"
- #include "qapi/error.h"
- #include "qemu/cutils.h"
- #include "pci-internal.h"
-@@ -1472,10 +1471,8 @@ pcibus_t pci_bar_address(PCIDevice *d,
- {
-     pcibus_t new_addr, last_addr;
-     uint16_t cmd = pci_get_word(d->config + PCI_COMMAND);
--    MachineClass *mc = MACHINE_GET_CLASS(qdev_get_machine());
--    bool allow_0_address = mc->pci_allow_0_address;
-+    bool allow_0_address = pci_bus_allows_io_addr0_access(pci_get_bus(d));
+diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+index 2feb851f15..4e1ce3a423 100644
+--- a/hw/riscv/virt.c
++++ b/hw/riscv/virt.c
+@@ -1156,6 +1156,8 @@ static inline DeviceState *gpex_pcie_init(MemoryRegion *sys_mem,
+                             pio_base, NULL);
+     object_property_set_int(OBJECT(dev), PCI_HOST_PIO_SIZE,
+                             pio_size, NULL);
++    object_property_set_bool(OBJECT(dev), "allow-io-addr0-accesses",
++                             true, &error_fatal);
  
--    allow_0_address |= pci_bus_allows_io_addr0_access(pci_get_bus(d));
-     if (type & PCI_BASE_ADDRESS_SPACE_IO) {
-         if (!(cmd & PCI_COMMAND_IO)) {
-             return PCI_BAR_UNMAPPED;
+     sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
+ 
+@@ -1803,7 +1805,6 @@ static void virt_machine_class_init(ObjectClass *oc, void *data)
+     mc->default_cpu_type = TYPE_RISCV_CPU_BASE;
+     mc->block_default_type = IF_VIRTIO;
+     mc->no_cdrom = 1;
+-    mc->pci_allow_0_address = true;
+     mc->possible_cpu_arch_ids = riscv_numa_possible_cpu_arch_ids;
+     mc->cpu_index_to_instance_props = riscv_numa_cpu_index_to_props;
+     mc->get_default_cpu_node_id = riscv_numa_get_default_cpu_node_id;
 -- 
 2.45.2
 
