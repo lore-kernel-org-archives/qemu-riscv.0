@@ -4,65 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 68063D3B985
-	for <qemu-riscv@archiver.kernel.org>; Tue, 26 Nov 2024 11:27:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 23647D3B985
+	for <qemu-riscv@archiver.kernel.org>; Tue, 26 Nov 2024 11:27:25 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tFtgg-0007qY-0v; Tue, 26 Nov 2024 06:24:58 -0500
+	id 1tFtgd-0007Yo-BZ; Tue, 26 Nov 2024 06:24:55 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tFtff-0004cP-MU
- for qemu-riscv@nongnu.org; Tue, 26 Nov 2024 06:23:56 -0500
-Received: from mail-wm1-x32f.google.com ([2a00:1450:4864:20::32f])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tFtfk-0004ke-EF
+ for qemu-riscv@nongnu.org; Tue, 26 Nov 2024 06:24:01 -0500
+Received: from mail-wm1-x331.google.com ([2a00:1450:4864:20::331])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tFtfc-0002zU-Vh
- for qemu-riscv@nongnu.org; Tue, 26 Nov 2024 06:23:55 -0500
-Received: by mail-wm1-x32f.google.com with SMTP id
- 5b1f17b1804b1-4316f3d3c21so48157955e9.3
- for <qemu-riscv@nongnu.org>; Tue, 26 Nov 2024 03:23:52 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tFtfh-00031K-K8
+ for qemu-riscv@nongnu.org; Tue, 26 Nov 2024 06:24:00 -0500
+Received: by mail-wm1-x331.google.com with SMTP id
+ 5b1f17b1804b1-43494a20379so23233305e9.0
+ for <qemu-riscv@nongnu.org>; Tue, 26 Nov 2024 03:23:57 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1732620230; x=1733225030; darn=nongnu.org;
+ d=linaro.org; s=google; t=1732620236; x=1733225036; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=5+ncjcv7Qm8z1k3YSKR9YOc81bQXCEn50hblae0ujWI=;
- b=mPjTnidVBAmieTlEBb3JK2OCO1rPpoTDuxdZndla7PRHQH2bsD2x6HV5LtV7Vo5T/x
- qf5pQMegmGDGMifh0OFa7xj5H2cK9pKHX3GxpGykMg7utWwOorvHjRMNHnyrxqfGrnaG
- ajDJRwJV84A+pHSGvIV3Wi82seXl3nqX0Xwmc0sBhxHrEaKageI0VR7p1gZxPTfSdJfn
- AiwY7Q6ESsiqPM+WI+K/qbmdyLDbLHNp9Bg6X+QW8APWOplHbPMAZzHFODOfekaGHShP
- B0RCJXUGjDj+XauBlYOKJkMTXWQG7SpYnx8FVBPXmrgl5OscSlp6aMWpggF7mqo4TbN8
- NEoA==
+ bh=P0iDFiy4g206+uiI3tz8kmnBegTpSA+b+66gFGs5ekU=;
+ b=xMNe6qCssTdvInzhR/rWRpAKzc4TYxKSKdMEHWwPrU2iE40rqgBcSEJlsTBc5AxlMO
+ 4Kn5qmdYpj0mbq0pbZmavVwYbreK9DWWaE26bkkCtkCJRDPx0763nz6yejg3750uxQPj
+ aHhk1FNsvMyaMgVYT3yeCIGeMmfgV5rEvceNsDJ0kSjndjJSTziqQB9jq9kCWYjIW3uw
+ 3IkU/zTylI6qmITcNzqmy9lJSbmYrSOgO4iQp05k9Um+IZOysMowECSq1jDNDg7noiSc
+ /YNrE8TykBCbWERq2fLxvWiTS19s5SdArGyiQ7JTtAZYZUOZkZvpYDDj+t5XX/I2s1Ze
+ BXow==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732620230; x=1733225030;
+ d=1e100.net; s=20230601; t=1732620236; x=1733225036;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=5+ncjcv7Qm8z1k3YSKR9YOc81bQXCEn50hblae0ujWI=;
- b=wm0B8ku6czRIvqCyjPIg/PaoCRCFuF6sgdT7ysfpES1Spxk+iHlpvsZAd51+EK+lW9
- qhTqLaAiI//7OjalKx6L2l29lifcTJTN33x6D5O71+5VYMcPCh9VwD8TpU4aJoTk3rJR
- NxbZcUNFhmgKih3wkratqIaCwaCIKbkdRHvO42YCMUADyCh9+g7zu/TAs9BwRIIFk1Sf
- w6ZMBlH6SurYKLni86PPLZZdS27DeRxF1+muaxNBZx9sn8aaZNCdl7CUJxkCkBx+cbYH
- RdSYM1DgvkrIEPNyS+Ex5iOklygrEm+d1z7q5Haxp8rvXp4BVTyNIi93Q1DJIv9KCNB+
- aFcw==
+ bh=P0iDFiy4g206+uiI3tz8kmnBegTpSA+b+66gFGs5ekU=;
+ b=CPC+IPmx09QEpbpABwBtEv9Z6C/r5aKVPQOQ6cw7M3kXBUoLMTJZ4zrUFye06EtZgd
+ 1Wh6PnIsyjETRXHBhrmJfMM94V+KRC80fIl1PqTxxax1RC3sSzy6hsATvz835l2dcAFu
+ DFTAjMzCU8oJLU+FqYmaV6Tdp4sImeIEc/5TONX4ya58outeBDkoFpChJSJbEmElZrQF
+ KSH+Z74i1j1rLfpir2/RfM89MYTudFRxMmRrQ9WLxfAMLflt+pyHBfSfcPefvKkQNQYc
+ o2D3jxDW5b4OsDvdlZj3AsfoA0HL1zDSPmxb8BBZU0D8R04KNZcqFm8mTfz9/pZ78kEI
+ IwUA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXy9WzZsG2UMFp1MimOvct3cQj062NpfZG6tWQAu9AuFAwQ+b0rAnOQYEVVbHqbOQdGLkicTZXFmft2@nongnu.org
-X-Gm-Message-State: AOJu0YwdFhtc7sNqF6oHqFbILrFunXy5cc/oXfoTju8a2kKDNnY+fQOw
- PYH0MTw1K2JnSa6zbB8YcZ0BhfOUAGXjGXnl9gMShktqVMMKFMBm2Qr/OcQmB48JTLhmaQfqFY9
- J
-X-Gm-Gg: ASbGnctMInE4CaIUheI1rs590u+XfdUUtjaMAbk1xw4eb2R57mW5KoEm9kPD2nqZR85
- rZuNiv7q6ZL4+SNhTGV+Mj0qk8fOuFicNqy4nKg36/b8tW+6W9yJk+fB+IqGzml4ApdGhn0w+/Y
- scJbXmLM0/jFdbsOmkecZQTmvO18vjPY6vqk435BO1MeTwkePYcDraWOAI5AGtlbKIp64mvXyqW
- Em8Ng5GiZTNANcxoNQKVJ+UwA9yn2STQt8h9gQFVxjHv8fxMyTUj7kUesSfPGwcchaEvVR3
-X-Google-Smtp-Source: AGHT+IEWnMepl8291UsjGt1x7FxwGMlx+dTJpW2PPVSPZnH6RlwpFeqa5cY5lPOr9MHCyA/gXIc+0g==
-X-Received: by 2002:a05:600c:3d09:b0:434:a711:ace4 with SMTP id
- 5b1f17b1804b1-434a711b1acmr16755115e9.17.1732620230484; 
- Tue, 26 Nov 2024 03:23:50 -0800 (PST)
+ AJvYcCX84BrmcF8Zbl4uOY0YBTqVXO1/vY5ZGGALqH9QlVt7U0roMhktycfkefSbpNUpneBjKwvjtWEtI6j3@nongnu.org
+X-Gm-Message-State: AOJu0YyDILoQAOGVlKo29ogiIGuZ6fWiOR6q9lfcE1SHXSllxyLF3CXW
+ c32HL1u253IzWGzgdiuX50uez9r+L6gtWPpRiCRRjdsv1/j8M/QEKprQNzSA/VY=
+X-Gm-Gg: ASbGncsuATjlwk3Q9/cqM8glRTnDfcIk5kwKTTN7MIl+iUoQt5SDonRzSmbAOtd1h6O
+ B29nEt9Lms7HgWLDVt8AyzvhQfTNj6DBv1yqdG0kY6afnOB9mU3eaYqhfcYDQpMC+kZ5VElpJOV
+ iI/EmiXaHyWEgVD41euls1pFzSggryOJ2E253V15HOpi9n802KFOnaOY5ebW6DbqwfIZ65JZhbG
+ A9h5dXC/cre3brL16T9ZS4o0eVzgpX4IhMeyg87+AEVnehZullIJGK128RI0Lx+jIvMuDzf
+X-Google-Smtp-Source: AGHT+IFg/gi+61i2OJlRicWC3cP19bowqD2mQdjF+QnLLM120B87cgN7yu5W5xYlEgHd5cop0f4Byg==
+X-Received: by 2002:a05:600c:4683:b0:42f:7e87:3438 with SMTP id
+ 5b1f17b1804b1-433ce39e773mr149650775e9.0.1732620236161; 
+ Tue, 26 Nov 2024 03:23:56 -0800 (PST)
 Received: from localhost.localdomain ([176.176.143.205])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-434a8051ddesm9540385e9.8.2024.11.26.03.23.48
+ 5b1f17b1804b1-4349eeb375fsm75702535e9.3.2024.11.26.03.23.54
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Tue, 26 Nov 2024 03:23:50 -0800 (PST)
+ Tue, 26 Nov 2024 03:23:55 -0800 (PST)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: qemu-ppc@nongnu.org, qemu-s390x@nongnu.org, Thomas Huth <thuth@redhat.com>,
@@ -71,18 +70,18 @@ Cc: qemu-ppc@nongnu.org, qemu-s390x@nongnu.org, Thomas Huth <thuth@redhat.com>,
  Peter Maydell <peter.maydell@linaro.org>, qemu-arm@nongnu.org,
  Paolo Bonzini <pbonzini@redhat.com>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-Subject: [PATCH-for-10.0 v2 11/13] hw/arm/virt: Create GPEX host bridge
+Subject: [PATCH-for-10.0 v2 12/13] hw/riscv/virt: Create GPEX host bridge
  without refuse-bar-at-addr-0
-Date: Tue, 26 Nov 2024 12:22:10 +0100
-Message-ID: <20241126112212.64524-12-philmd@linaro.org>
+Date: Tue, 26 Nov 2024 12:22:11 +0100
+Message-ID: <20241126112212.64524-13-philmd@linaro.org>
 X-Mailer: git-send-email 2.45.2
 In-Reply-To: <20241126112212.64524-1-philmd@linaro.org>
 References: <20241126112212.64524-1-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::32f;
- envelope-from=philmd@linaro.org; helo=mail-wm1-x32f.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::331;
+ envelope-from=philmd@linaro.org; helo=mail-wm1-x331.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -105,59 +104,37 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-ARM virt and sbsa-ref machines set MachineClass::pci_allow_0_address
-(see commit 74de8c3568 "hw/arm/virt: Allow zero address for PCI IO
-space"), directly create the GPEX host bridge using the default
+RISCV virt machine set MachineClass::pci_allow_0_address
+(see commit acead54c78 "riscv: virt: Allow PCI address 0"),
+directly create the GPEX host bridge using the default
 'false' value of the "refuse-bar-at-addr-0" property.
 
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 ---
- hw/arm/sbsa-ref.c | 3 ---
- hw/arm/virt.c     | 3 ---
- 2 files changed, 6 deletions(-)
+ hw/riscv/virt.c | 3 ---
+ 1 file changed, 3 deletions(-)
 
-diff --git a/hw/arm/sbsa-ref.c b/hw/arm/sbsa-ref.c
-index f6cf43cf0c9..c232b933c07 100644
---- a/hw/arm/sbsa-ref.c
-+++ b/hw/arm/sbsa-ref.c
-@@ -647,8 +647,6 @@ static void create_pcie(SBSAMachineState *sms)
-     int i;
- 
-     dev = qdev_new(TYPE_GPEX_HOST);
+diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+index 8999fc348cb..b28edb9ffd5 100644
+--- a/hw/riscv/virt.c
++++ b/hw/riscv/virt.c
+@@ -1158,8 +1158,6 @@ static inline DeviceState *gpex_pcie_init(MemoryRegion *sys_mem,
+                             pio_base, NULL);
+     object_property_set_int(OBJECT(GPEX_HOST(dev)), PCI_HOST_PIO_SIZE,
+                             pio_size, NULL);
 -    object_property_set_bool(OBJECT(dev), "refuse-bar-at-addr-0",
 -                             true, &error_fatal);
+ 
      sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
  
-     /* Map ECAM space */
-@@ -898,7 +896,6 @@ static void sbsa_ref_class_init(ObjectClass *oc, void *data)
-     mc->default_cpu_type = ARM_CPU_TYPE_NAME("neoverse-n2");
-     mc->valid_cpu_types = valid_cpu_types;
-     mc->max_cpus = 512;
--    mc->pci_allow_0_address = true;
-     mc->minimum_page_bits = 12;
-     mc->block_default_type = IF_IDE;
-     mc->no_cdrom = 1;
-diff --git a/hw/arm/virt.c b/hw/arm/virt.c
-index 06affc3638b..f9ec3c22409 100644
---- a/hw/arm/virt.c
-+++ b/hw/arm/virt.c
-@@ -1510,8 +1510,6 @@ static void create_pcie(VirtMachineState *vms)
-     MachineClass *mc = MACHINE_GET_CLASS(ms);
- 
-     dev = qdev_new(TYPE_GPEX_HOST);
--    object_property_set_bool(OBJECT(dev), "refuse-bar-at-addr-0",
--                             true, &error_fatal);
-     sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
- 
-     ecam_id = VIRT_ECAM_ID(vms->highmem_ecam);
-@@ -3126,7 +3124,6 @@ static void virt_machine_class_init(ObjectClass *oc, void *data)
- #endif
+@@ -1807,7 +1805,6 @@ static void virt_machine_class_init(ObjectClass *oc, void *data)
+     mc->default_cpu_type = TYPE_RISCV_CPU_BASE;
      mc->block_default_type = IF_VIRTIO;
      mc->no_cdrom = 1;
 -    mc->pci_allow_0_address = true;
-     /* We know we will never create a pre-ARMv7 CPU which needs 1K pages */
-     mc->minimum_page_bits = 12;
-     mc->possible_cpu_arch_ids = virt_possible_cpu_arch_ids;
+     mc->possible_cpu_arch_ids = riscv_numa_possible_cpu_arch_ids;
+     mc->cpu_index_to_instance_props = riscv_numa_cpu_index_to_props;
+     mc->get_default_cpu_node_id = riscv_numa_get_default_cpu_node_id;
 -- 
 2.45.2
 
