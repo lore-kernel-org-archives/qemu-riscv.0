@@ -4,95 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5F9FED3B980
-	for <qemu-riscv@archiver.kernel.org>; Tue, 26 Nov 2024 11:15:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 64A94D3B984
+	for <qemu-riscv@archiver.kernel.org>; Tue, 26 Nov 2024 11:23:01 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tFtWg-0002Fw-CP; Tue, 26 Nov 2024 06:14:38 -0500
+	id 1tFteE-0003iA-Nb; Tue, 26 Nov 2024 06:22:26 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1tFtWf-0002Ff-QS
- for qemu-riscv@nongnu.org; Tue, 26 Nov 2024 06:14:37 -0500
-Received: from mail-pl1-x632.google.com ([2607:f8b0:4864:20::632])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tFteC-0003h6-5g
+ for qemu-riscv@nongnu.org; Tue, 26 Nov 2024 06:22:24 -0500
+Received: from mail-wm1-x32c.google.com ([2a00:1450:4864:20::32c])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1tFtWd-0000h1-DH
- for qemu-riscv@nongnu.org; Tue, 26 Nov 2024 06:14:37 -0500
-Received: by mail-pl1-x632.google.com with SMTP id
- d9443c01a7336-21210fe8775so50208505ad.1
- for <qemu-riscv@nongnu.org>; Tue, 26 Nov 2024 03:14:34 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tFteA-0002XF-HE
+ for qemu-riscv@nongnu.org; Tue, 26 Nov 2024 06:22:23 -0500
+Received: by mail-wm1-x32c.google.com with SMTP id
+ 5b1f17b1804b1-434a0fd9778so15221445e9.0
+ for <qemu-riscv@nongnu.org>; Tue, 26 Nov 2024 03:22:22 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1732619673; x=1733224473; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:to:subject:user-agent:mime-version:date:message-id:from
- :to:cc:subject:date:message-id:reply-to;
- bh=8n9zNQNjW5lXFKwRJkPzIpvd1d97fLYtXwXsRX0/USI=;
- b=OlQ2qV+XXwY+dsi4+8gM7FnkqNGZC166sUBQLimClFfstCFjIS/fSXEKNd20YYiaIm
- 4ydzuw9bCgh0gxMnnZ7+QruZvaSQZ2BLWMjNce3631OvZRnwRtnAgt7TMt9rvwtoO1Yl
- RiTtWfzMW+8Wh7r+UlbydHthf8NQZDt9ia3MgotisSqzQWCR86diy9IpsMfahQWcuHFI
- /A/d15Nr5mvBk5Qk/bRd6CTvkqQqIMyQbIFwElK9udtYRjodT2Qv+GWQ8cJypxffR8vZ
- 43kpS9Y3jJgzniHIVEDgXJceeVyybah0eVAap2RUD7njl5284UoxfsGysCSmfT4p4NVu
- 9hZA==
+ d=linaro.org; s=google; t=1732620141; x=1733224941; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=+qPY7Uz0dqRmk2gQ1cO3DBCcFXLLvxMC18yQC1ilSgA=;
+ b=G31NQHlvGZkGawebft97sYhAhilqUvGvkbd1zMeMwhwlN14M5eRWiTdyyCvvbnxC4R
+ RP34PkS1VK4rlcCJ/lPYuUJR1oGU2dbuBxD8DbTBC/kIlCS8YWBugmj496sPikjghPQZ
+ w8jdIfgZIUwIT9xpBaE+LWrmstHQDEk573vvWcVNlOqpgEd+oKx31Ge3/EUqrg1BZ4R1
+ oQmGr1FdTou24m7GXGJtJ2gnhCVZIOQ8MyvVsLEZW6eSXAsfHn5FY6LXLW0iTGF3hnoU
+ WKGAmMMyFBQ61vrXbrC+fAX43htEOU62rrRhwji0xmbnQ83nZb9KIhRF+XXZhBwMMnqp
+ KJSw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732619673; x=1733224473;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=8n9zNQNjW5lXFKwRJkPzIpvd1d97fLYtXwXsRX0/USI=;
- b=QATL7xDszWcGfPhNaOWRaxSRo4rtPN+GL9Z/9Z0TOb7Y6EJS8FwGB0KV1Fb7Ymz/z1
- uu+9369OyYJKkzn3QF7s3Ub9BwWLxyf62V5nuR1lwgAO8i+tMwPi0cwLXi+9O/iJLTBf
- TBFsht1XAucQxeHSEkg8JMIKwPKh9z97MwOh882v9JY5kKyH2N5N257WavP+v/xu1JbO
- EbVw4ynw+oKmVt3NpUlw3hc5AR0x7OmXpoKEdXVXGrHA39mNymQJlZzN0hjlKC1XWB8p
- vCgCdpmMgp6EqKx1zh1mP5U3m1M4QGDL4/619GW7jNW/tN4yLsDNheTut3EZFKz/VGlc
- vgvQ==
+ d=1e100.net; s=20230601; t=1732620141; x=1733224941;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=+qPY7Uz0dqRmk2gQ1cO3DBCcFXLLvxMC18yQC1ilSgA=;
+ b=CsD18Y4YCVfdaefgz8iz5z4LHZuhTzy2QvY0pjYvfDsvxwhPYxkSM9+jYg/EVGX2E6
+ MrfNVBGipAXSAq2TfbTr4d21k5byeDsFGIx25zDioGdsmrJwc/xbjCvwZH/qJtqa7Ftp
+ W/rC6iU2jrfQwKKYhMzUOQi1AfZN5gH2O52cDH39v/D29s0NNJURTDKs9aQh3YYJwbLx
+ uu36hYyYrrAtixX05Q1SkdsvYacusVKpHU55mDJn+tV3JlY6GNTRc8Cb/tGSm2nJsKBq
+ uGqkZQ0y3MZkG04x8I5ftRXIzW9O4xXKkNOHqdP7/UGn+r3y4n/a70xcBz9INTvRI0H7
+ nsHA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVwbWZVWEADwvTQ2y1OyNHDJWOrr5IG/76tdmL7F6rzVoJVgTzdXnbuzx4aKPycgTFHllG7fmUA+s5b@nongnu.org
-X-Gm-Message-State: AOJu0Yygs0jb+CM+J8EO5ipdpFGZ7t3xcUkzj0tIUjyKiR7AJSPw5qUR
- VsZFXAGF6ZFGN5dy2PvUepp3HRbHb59IDDWsmdfPmkxysuR3Lzo5eXUJGnKby9w=
-X-Gm-Gg: ASbGnctxvbYYI8cm8zY8Nn4lgZy4RbXS86StBgbupR2XMoDfIQbV9Lt9xao5+lWV4xD
- 0Jk6Myi4YWsxDRQItX2WYBHOfmhtH6Btkgh5/K7ueWZo+KJsxIheTTpQIVH2t4MFvRnAqtJqWgD
- 1ikLtcJqsBuQPjvX1gqHH8iyWpURyfdsoABpHwyD5PHomfS5b/o66tLOXEJJmn8eHvmB9ZD3y58
- dmUegAYDjqjiLkegg3voDxhu5j0PJJstcDswQOgjwXqOWtDBZlpI38ockO3gMk=
-X-Google-Smtp-Source: AGHT+IEH00QDMO19fg53t76XqycXdbugWF0vZzx2cso3uHjIOr3l6AbJ7SnTq8MwQSlSHlaEicFTMA==
-X-Received: by 2002:a17:902:fc8e:b0:20d:120f:6afa with SMTP id
- d9443c01a7336-214e706376dmr43761115ad.26.1732619673618; 
- Tue, 26 Nov 2024 03:14:33 -0800 (PST)
-Received: from [192.168.68.110] ([187.101.65.72])
+ AJvYcCUOUhR8aMKRNmSOc5oJFw2tmoqTsh3ZV2JrU7JtQEbgEk+3Qojw82CnDDb8zc4of/xN//7IfOdJK6cT@nongnu.org
+X-Gm-Message-State: AOJu0YyNa1WZnaAWb4stZ+yBVGYKPScRyc3nE3dHl+eVdA4iNCOwDw/e
+ cP5/WC868zhj4KanFDRNhS5nI9PtMxpccuZT1+T8DxWBxtF8rroAKmtlb9KKFyw=
+X-Gm-Gg: ASbGncsPa2IiXLAIisHsUWTDuYFpMyRtt8ieZDYeZzVq0siay46R5qsnRgSwWOVdME6
+ jIfLFfQKAy78o8u5wcVic5/PIEEZhuJR1sdhOopkWj5BgIrUW1VvKxfNzEQZ9aWK0SaJ/o/1MIR
+ HhwtD2WkeHZcYcwTJiIyq8e/tNJCiNOky/FWC6wSrKyEZ8LNkpM5JsMF+pXKHxLtigCQBEP/LVV
+ hzSi2yxKqBnYyN46G+JOZTTy5Iey1MyZJqh+rjf4BilP9HU3IxCLi7KEErD3uokQi5WHxC9
+X-Google-Smtp-Source: AGHT+IEANCMTxsUE27Mx8fMzBEsH7EvxcIuDdUdjx5zx0IltCtoW4ouBVBLwarjkXR0wzLH5bYDn2w==
+X-Received: by 2002:a05:600c:a12:b0:434:a19a:5965 with SMTP id
+ 5b1f17b1804b1-434a19a5bf9mr43582535e9.6.1732620141039; 
+ Tue, 26 Nov 2024 03:22:21 -0800 (PST)
+Received: from localhost.localdomain ([176.176.143.205])
  by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-724eb968e65sm6936128b3a.54.2024.11.26.03.14.27
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 26 Nov 2024 03:14:32 -0800 (PST)
-Message-ID: <f0fe7192-b3a1-4969-b633-6e5221b76038@ventanamicro.com>
-Date: Tue, 26 Nov 2024 08:14:26 -0300
+ 5b1f17b1804b1-434a50613c5sm25019945e9.0.2024.11.26.03.22.19
+ (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
+ Tue, 26 Nov 2024 03:22:20 -0800 (PST)
+From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+To: qemu-devel@nongnu.org
+Cc: qemu-ppc@nongnu.org, qemu-s390x@nongnu.org, Thomas Huth <thuth@redhat.com>,
+ "Michael S. Tsirkin" <mst@redhat.com>, qemu-riscv@nongnu.org,
+ Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
+ Peter Maydell <peter.maydell@linaro.org>, qemu-arm@nongnu.org,
+ Paolo Bonzini <pbonzini@redhat.com>,
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+Subject: [PATCH-for-10.0 v2 01/13] hw/pci: Do not declare PCIBus::flags mask
+ as enum
+Date: Tue, 26 Nov 2024 12:22:00 +0100
+Message-ID: <20241126112212.64524-2-philmd@linaro.org>
+X-Mailer: git-send-email 2.45.2
+In-Reply-To: <20241126112212.64524-1-philmd@linaro.org>
+References: <20241126112212.64524-1-philmd@linaro.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [RFC v2 0/2] Add RISC-V Server Platform Reference Board
-To: Fei Wu <fei2.wu@intel.com>, pbonzini@redhat.com, palmer@dabbelt.com,
- alistair.francis@wdc.com, bin.meng@windriver.com, liwei1518@gmail.com,
- zhiwei_liu@linux.alibaba.com, qemu-devel@nongnu.org, qemu-riscv@nongnu.org,
- andrei.warkentin@intel.com, shaolin.xie@alibaba-inc.com, ved@rivosinc.com,
- sunilvl@ventanamicro.com, haibo1.xu@intel.com, evan.chai@intel.com,
- yin.wang@intel.com, tech-server-platform@lists.riscv.org,
- tech-server-soc@lists.riscv.org, atishp@rivosinc.com,
- ajones@ventanamicro.com, conor@kernel.org,
- heinrich.schuchardt@canonical.com, marcin.juszkiewicz@linaro.org
-References: <20240312135222.3187945-1-fei2.wu@intel.com>
-Content-Language: en-US
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <20240312135222.3187945-1-fei2.wu@intel.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::632;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pl1-x632.google.com
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::32c;
+ envelope-from=philmd@linaro.org; helo=mail-wm1-x32c.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -108,70 +104,39 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Hi Fei,
+We use PCIBus::flags to mask various flags. It is not
+an enum, and doing so confuses static analyzers. Rename
+the enum as singular. Use a generic unsigned type for
+the mask.
 
+Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+---
+ include/hw/pci/pci_bus.h | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-How is this work going? Are you planning to send the v3?
-
-
-Thanks,
-
-Daniel
-
-On 3/12/24 10:52 AM, Fei Wu wrote:
-> The RISC-V Server Platform specification[1] defines a standardized set
-> of hardware and software capabilities, that portable system software,
-> such as OS and hypervisors can rely on being present in a RISC-V server
-> platform. This patchset provides a RISC-V Server Platform (RVSP)
-> reference implementation on qemu which is in compliance with the spec
-> as faithful as possible.
-> 
-> The reference board can be running with tag edk2-stable202308 in
-> upstream edk2 repo[2].
-> 
-> The qemu command line used:
-> 
-> $QEMU -nographic -m 4G -smp 2 \
->      -machine rvsp-ref,pflash0=pflash0,pflash1=pflash1 \
->      -blockdev node-name=pflash0,driver=file,read-only=on,filename=RISCV_VIRT_CODE.fd \
->      -blockdev node-name=pflash1,driver=file,filename=RISCV_VIRT_VARS.fd \
->      -bios fw_dynamic.bin \
->      -drive file=$BRS_IMG,if=ide,format=raw
-> 
-> Since there is no ACPI table generated in this new machine type, a
-> corresponding EDK-II platform (WIP) is needed to provide related ACPI
-> tables.
-> 
-> For testing purposes only, we used a workaround to generate the ACPI
-> tables in Qemu with a dedicated downstream patch.
-> 
-> [1] https://github.com/riscv-non-isa/riscv-server-platform
-> [2] https://github.com/tianocore/edk2.git
-> 
-> 
-> v2:
-> - move cpu definition the 1st patch
-> - replace sifive_test with power reset syscon
-> - add versioning scheme to fdt
-> - integrate recent changes in virt.c
->    - use g_autofree
->    - create_fdt/finalize_fdt
->    - riscv_isa_write_fdt
-> - some cleanups
-> 
-> 
-> Fei Wu (2):
->    target/riscv: Add server platform reference cpu
->    hw/riscv: Add server platform reference machine
-> 
->   configs/devices/riscv64-softmmu/default.mak |    1 +
->   hw/riscv/Kconfig                            |   12 +
->   hw/riscv/meson.build                        |    1 +
->   hw/riscv/server_platform_ref.c              | 1276 +++++++++++++++++++
->   target/riscv/cpu-qom.h                      |    1 +
->   target/riscv/cpu.c                          |   61 +
->   6 files changed, 1352 insertions(+)
->   create mode 100644 hw/riscv/server_platform_ref.c
-> 
+diff --git a/include/hw/pci/pci_bus.h b/include/hw/pci/pci_bus.h
+index 22613125462..6ecfe2e06d5 100644
+--- a/include/hw/pci/pci_bus.h
++++ b/include/hw/pci/pci_bus.h
+@@ -19,7 +19,7 @@ struct PCIBusClass {
+     uint16_t (*numa_node)(PCIBus *bus);
+ };
+ 
+-enum PCIBusFlags {
++enum PCIBusFlag {
+     /* This bus is the root of a PCI domain */
+     PCI_BUS_IS_ROOT                                         = 0x0001,
+     /* PCIe extended configuration space is accessible on this bus */
+@@ -32,7 +32,7 @@ enum PCIBusFlags {
+ 
+ struct PCIBus {
+     BusState qbus;
+-    enum PCIBusFlags flags;
++    unsigned flags;
+     const PCIIOMMUOps *iommu_ops;
+     void *iommu_opaque;
+     uint8_t devfn_min;
+-- 
+2.45.2
 
 
