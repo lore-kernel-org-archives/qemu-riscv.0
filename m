@@ -4,64 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7D6D3D3B986
-	for <qemu-riscv@archiver.kernel.org>; Tue, 26 Nov 2024 11:27:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7FC4DD3B985
+	for <qemu-riscv@archiver.kernel.org>; Tue, 26 Nov 2024 11:27:54 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tFtfx-00052l-7y; Tue, 26 Nov 2024 06:24:13 -0500
+	id 1tFtfx-00052f-84; Tue, 26 Nov 2024 06:24:13 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tFtfA-00041Y-MO
- for qemu-riscv@nongnu.org; Tue, 26 Nov 2024 06:23:26 -0500
-Received: from mail-lf1-x12e.google.com ([2a00:1450:4864:20::12e])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tFten-0003wS-Ox
+ for qemu-riscv@nongnu.org; Tue, 26 Nov 2024 06:23:06 -0500
+Received: from mail-wm1-x32b.google.com ([2a00:1450:4864:20::32b])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tFtf5-0002pR-0q
- for qemu-riscv@nongnu.org; Tue, 26 Nov 2024 06:23:21 -0500
-Received: by mail-lf1-x12e.google.com with SMTP id
- 2adb3069b0e04-53dde9acbb0so3240613e87.3
- for <qemu-riscv@nongnu.org>; Tue, 26 Nov 2024 03:23:15 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tFtek-0002kU-FY
+ for qemu-riscv@nongnu.org; Tue, 26 Nov 2024 06:23:01 -0500
+Received: by mail-wm1-x32b.google.com with SMTP id
+ 5b1f17b1804b1-434a1fe2b43so12929825e9.2
+ for <qemu-riscv@nongnu.org>; Tue, 26 Nov 2024 03:22:54 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1732620194; x=1733224994; darn=nongnu.org;
+ d=linaro.org; s=google; t=1732620173; x=1733224973; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=WlPdyc/DTHUeKFvLcv8XiL1CJLw++4u5ykrc9rCsGw0=;
- b=kL3XWD4GFgeZTLHRbeakLUGuvKuZVApvnRo89G5+ETHvGhglGVFX7UAbd1CTX4wn5I
- YIi+HluaTdhjBjfZH4Nig4OoWdBb0rzgUJ2TGJrcx2XKxh9/9awkcR61QLsFIUdDuhhg
- T3YjKQVl7XNbE2sF3sjl9cRqNEhLOoRo9DuJRMzs3wN4n7k3jv2DhHvZ1WI3Z3jXiUWa
- od9nlaqu0ML5uyjo7qJ5j2rlyL9iKLi2eSCLAsMxj1m1zqiKKcbX7xZiTveiRJQfldzb
- pMLvcxftqBmfTyXoGPSSveg89Zl4qzyEwJHd3W5iplS1hKAK/29uAfxqkAlQ5LKtL/ZK
- AsGQ==
+ bh=531OAHe2E6s/gjTEfxFCkh/CSUMa49twfx2TRTu9rug=;
+ b=fu1eq2LPLYZFT1JFRqcrq/dgHJLG4aatbxi8h011QprBw2hhsCeLOZuP4mY49Yj2vo
+ G5dN0v9kl10AbhDFyveVoQaWbtJ6HDuP6d5FhR5lZAVvEQS9IdjWN8wty6q9vfBAn0HY
+ 5WV/y6/Ez293S4CuXmjrGcKPRxn2wFmoPkkqtZmVCo7wuNup6EbaWK1FsaQ9wzf2J+WJ
+ hm7/zlIcB3IMCWpNuF5DTTahZ0R2NVdnZU/e0t0IZGDFuXYiTImu3W9y7Cj3sySbVOIo
+ XQ5qP5+mvy+djvuLimbVju0cY9CSiwzbqoQq85ljoICpo5tlzAa6M4WafrrytTuqfe6i
+ c4cw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732620194; x=1733224994;
+ d=1e100.net; s=20230601; t=1732620173; x=1733224973;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=WlPdyc/DTHUeKFvLcv8XiL1CJLw++4u5ykrc9rCsGw0=;
- b=sg7L2bi+Jii2VZBeo1MD0W4JkY9FWPlMPYY+4DrFOThUN9lhgGihfcCbtuiN+yXmwR
- Ic0PBKD9jaBDY159kCihnouZxfswEAd4L6RDKHdzs1KizCkv7RWmjtrMrKHqIj6Oa0bq
- qyX5ESRZ0AdEuhBQqkjFKf0iqsPlo8zNYxVReIoVfjh12V/qemS7ht2FILz6nlZI/E2H
- mht6jJGrGmhHWdNVRET2a0NpkwsswGRg23VrQRI8+7yV8pb5VLF1mBa1uK6f6vtDxDmb
- Jiv324fvqHVRySF+J8oWzDQf/4Sd3CwMA9lm7SIbQdZ8E96eRRZxmrUlu7x2DCeSVS6j
- Tf4A==
+ bh=531OAHe2E6s/gjTEfxFCkh/CSUMa49twfx2TRTu9rug=;
+ b=bIDBD9CIFQeqqld/PkSfVuqnpVteJcqtIuJbexvri37XBl3PsXeV7cTdipKWjcI2XV
+ OP3cvjeZbwgWfAsU906vnjAscHDNcx5zEfqgl3t+fMu9f9Gy/rowo8cuK+2NokoeI6gJ
+ dZ1dbC1IWFaWsTp9H7k5YObHHEe3w6AEVybpKL5vZxB4yALRmElbbpTfaDyh7P/VolIm
+ qgSmiRNL/95oCMIyxd69cP/Ycgx+Kg6FMkE2gHHBqqoeUag59EXBO+CcMmC33ZTkq0/h
+ 8T2MI1DGqJt2Nqixz3tVTgclzKItsvdFPbe3mRI6PZaTIXKskpdgD/Kpc3XtBsbJbZf0
+ rWog==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUlgWWsppvIjGtzSjE1MZ/Oaj5TPCz3E/Y+7NvgtPtAGXeJGQPRZ7Qi8EJIqjYkN4WDiNP02uRZbQ4e@nongnu.org
-X-Gm-Message-State: AOJu0YyBS7yHb4IF9/hWfUvyAStwlWcnGoXOafnyt8HYTy6woOZWlHrc
- 0oEI+ocQY/JDxgGnXv0WO+dPEKOpwwyOe2WQS64baQTzpPi+7cdAuZfw6R2xAxo=
-X-Gm-Gg: ASbGncsgwFZcj8fgkDqCptZ7aKRlwwDFeuo237fCtnEdRtRsSPwkZXGo8fVx5U1Vbed
- QXkUrt6Qwb+8JQ6EDnrhP+RrB+YNUWbD5nC5jV3mBLpTbIwjOYuSIBj1VZ4ZY7/iUsknNuBOdkT
- H76TniEnKIuMIcOD1hILnx8c7zHJWlMdVZL19sjyY+xcJsaUB2btUBf9DVmyu/loXV9shrJvP9O
- ePkJ6s9ZbVxht7DUzPefRZpvQE8D4f93VRRws7W/6N5pujCxDNk3xn27+9FufBO5IVqRVgj
-X-Google-Smtp-Source: AGHT+IHl4P76Zn9v74qJkH7XPImD4yqbhApgnoCfXWDHkPezXOG5kjcaZJpW7cIhbBeU8MgQWJsrow==
-X-Received: by 2002:a05:6512:2209:b0:536:73b5:d971 with SMTP id
- 2adb3069b0e04-53dd39b0ddcmr7303704e87.38.1732620194134; 
- Tue, 26 Nov 2024 03:23:14 -0800 (PST)
+ AJvYcCVQFV+o1RGzVXzAtQzGQCo6/KfaNDGAXh4BIAuIVFoSBCUVt10zq11cBXcYXt5luG/mSgX9rQApIPCX@nongnu.org
+X-Gm-Message-State: AOJu0YxJDobbwbdg4co9pUkVtCYsDs9PROmM8E4/dtIalghHxh6TLJNw
+ +9Rumzu+RFCx+x/r+Et4JezDMYCqMr7wUSgdppPx+vJuC8RRnmioBzw6Zfix9zA=
+X-Gm-Gg: ASbGncvOaUtCJ10GVFPOT/z49Dr98xXhgmGgP3ragfohTZnlm5fKD7U/2M83hZr9h8X
+ Oo4S7AhAf63fbttMQzcVGPKk/ezzUqg5eUAMeGez9ijUTkRgEV1XB7Aevi9hCatx6GhBCx2xLPK
+ /h4c26hLDMuRDab3ux7ifcp7u/9y0rimtB4NuCXZ4KWbJs0KINCblNP2OqnMMl+gEGpXPKRyFTJ
+ eSpi4zFBEY+Zo7iC/fMtRGSLs02Jc5GGgnK4LR2s4NfYg0QRFe/AjFGprmQTCbgNjj/MRBQ
+X-Google-Smtp-Source: AGHT+IGlSefU/AUIv0V6tDlbe3TEFlshHBlt/NlBgyTesEOFvwph3W7BFNJsTCxNbGO+wmRFjIAk5Q==
+X-Received: by 2002:a05:600c:154d:b0:434:a815:2b57 with SMTP id
+ 5b1f17b1804b1-434a8152d9dmr7809555e9.20.1732620173600; 
+ Tue, 26 Nov 2024 03:22:53 -0800 (PST)
 Received: from localhost.localdomain ([176.176.143.205])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4349d60de86sm90041125e9.35.2024.11.26.03.23.04
+ 5b1f17b1804b1-434a4faf750sm25527775e9.10.2024.11.26.03.22.51
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Tue, 26 Nov 2024 03:23:13 -0800 (PST)
+ Tue, 26 Nov 2024 03:22:53 -0800 (PST)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: qemu-ppc@nongnu.org, qemu-s390x@nongnu.org, Thomas Huth <thuth@redhat.com>,
@@ -70,18 +70,18 @@ Cc: qemu-ppc@nongnu.org, qemu-s390x@nongnu.org, Thomas Huth <thuth@redhat.com>,
  Peter Maydell <peter.maydell@linaro.org>, qemu-arm@nongnu.org,
  Paolo Bonzini <pbonzini@redhat.com>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-Subject: [PATCH-for-10.0 v2 07/13] hw/pci: Propagate bar_at_addr_0_refused to
- pci_root_bus_new()
-Date: Tue, 26 Nov 2024 12:22:06 +0100
-Message-ID: <20241126112212.64524-8-philmd@linaro.org>
+Subject: [PATCH-for-10.0 v2 05/13] hw/pci: Propagate bar_at_addr_0_refused to
+ pci_root_bus_internal_init()
+Date: Tue, 26 Nov 2024 12:22:04 +0100
+Message-ID: <20241126112212.64524-6-philmd@linaro.org>
 X-Mailer: git-send-email 2.45.2
 In-Reply-To: <20241126112212.64524-1-philmd@linaro.org>
 References: <20241126112212.64524-1-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::12e;
- envelope-from=philmd@linaro.org; helo=mail-lf1-x12e.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::32b;
+ envelope-from=philmd@linaro.org; helo=mail-wm1-x32b.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -104,142 +104,57 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Have pci_root_bus_new() callers set the
+Have pci_root_bus_internal_init() callers set the
 'bar_at_addr_0_refused' argument. No logical change.
 
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 ---
- include/hw/pci/pci.h                | 3 ++-
- hw/pci-bridge/pci_expander_bridge.c | 9 ++++++---
- hw/pci-host/gt64120.c               | 2 +-
- hw/pci-host/i440fx.c                | 2 +-
- hw/pci-host/q35.c                   | 2 +-
- hw/pci-host/remote.c                | 2 +-
- hw/pci/pci.c                        | 7 ++++---
- 7 files changed, 16 insertions(+), 11 deletions(-)
+ hw/pci/pci.c | 11 +++++++----
+ 1 file changed, 7 insertions(+), 4 deletions(-)
 
-diff --git a/include/hw/pci/pci.h b/include/hw/pci/pci.h
-index b499846083f..f5454db0eb5 100644
---- a/include/hw/pci/pci.h
-+++ b/include/hw/pci/pci.h
-@@ -288,7 +288,8 @@ void pci_root_bus_init(PCIBus *bus, size_t bus_size, DeviceState *parent,
-                        bool bar_at_addr_0_refused);
- PCIBus *pci_root_bus_new(DeviceState *parent, const char *name,
-                          MemoryRegion *mem, MemoryRegion *io,
--                         uint8_t devfn_min, const char *typename);
-+                         uint8_t devfn_min, const char *typename,
-+                         bool bar_at_addr_0_refused);
- void pci_root_bus_cleanup(PCIBus *bus);
- void pci_bus_irqs(PCIBus *bus, pci_set_irq_fn set_irq,
-                   void *irq_opaque, int nirq);
-diff --git a/hw/pci-bridge/pci_expander_bridge.c b/hw/pci-bridge/pci_expander_bridge.c
-index bbf615f544b..d4b472a8305 100644
---- a/hw/pci-bridge/pci_expander_bridge.c
-+++ b/hw/pci-bridge/pci_expander_bridge.c
-@@ -358,15 +358,18 @@ static bool pxb_dev_realize_common(PCIDevice *dev, enum BusType type,
- 
-     ds = qdev_new(type == CXL ? TYPE_PXB_CXL_HOST : TYPE_PXB_HOST);
-     if (type == PCIE) {
--        bus = pci_root_bus_new(ds, dev_name, NULL, NULL, 0, TYPE_PXB_PCIE_BUS);
-+        bus = pci_root_bus_new(ds, dev_name, NULL, NULL, 0, TYPE_PXB_PCIE_BUS,
-+                               true);
-         bus->flags = parent_bus->flags & ~PCI_BUS_IS_ROOT;
-     } else if (type == CXL) {
--        bus = pci_root_bus_new(ds, dev_name, NULL, NULL, 0, TYPE_PXB_CXL_BUS);
-+        bus = pci_root_bus_new(ds, dev_name, NULL, NULL, 0, TYPE_PXB_CXL_BUS,
-+                               true);
-         bus->flags = parent_bus->flags & ~PCI_BUS_IS_ROOT;
-         bus->flags |= PCI_BUS_CXL;
-         PXB_CXL_DEV(dev)->cxl_host_bridge = PXB_CXL_HOST(ds);
-     } else {
--        bus = pci_root_bus_new(ds, "pxb-internal", NULL, NULL, 0, TYPE_PXB_BUS);
-+        bus = pci_root_bus_new(ds, "pxb-internal", NULL, NULL, 0, TYPE_PXB_BUS,
-+                               true);
-         bus->flags = parent_bus->flags & ~PCI_BUS_IS_ROOT;
-         bds = qdev_new("pci-bridge");
-         bds->id = g_strdup(dev_name);
-diff --git a/hw/pci-host/gt64120.c b/hw/pci-host/gt64120.c
-index 14fc803d279..3cc92e7200f 100644
---- a/hw/pci-host/gt64120.c
-+++ b/hw/pci-host/gt64120.c
-@@ -1193,7 +1193,7 @@ static void gt64120_realize(DeviceState *dev, Error **errp)
-     phb->bus = pci_root_bus_new(dev, "pci",
-                                 &s->pci0_mem,
-                                 get_system_io(),
--                                PCI_DEVFN(18, 0), TYPE_PCI_BUS);
-+                                PCI_DEVFN(18, 0), TYPE_PCI_BUS, true);
- 
-     pci_create_simple(phb->bus, PCI_DEVFN(0, 0), "gt64120_pci");
-     memory_region_init_io(&phb->conf_mem, OBJECT(phb),
-diff --git a/hw/pci-host/i440fx.c b/hw/pci-host/i440fx.c
-index 4f0a0438d77..35a54b953a7 100644
---- a/hw/pci-host/i440fx.c
-+++ b/hw/pci-host/i440fx.c
-@@ -268,7 +268,7 @@ static void i440fx_pcihost_realize(DeviceState *dev, Error **errp)
-     memory_region_add_coalescing(&phb->conf_mem, 0, 4);
- 
-     b = pci_root_bus_new(dev, NULL, s->pci_address_space,
--                         s->io_memory, 0, TYPE_PCI_BUS);
-+                         s->io_memory, 0, TYPE_PCI_BUS, true);
-     phb->bus = b;
- 
-     d = pci_create_simple(b, 0, s->pci_type);
-diff --git a/hw/pci-host/q35.c b/hw/pci-host/q35.c
-index f3e713318ed..e47ba7aa0c2 100644
---- a/hw/pci-host/q35.c
-+++ b/hw/pci-host/q35.c
-@@ -65,7 +65,7 @@ static void q35_host_realize(DeviceState *dev, Error **errp)
-     pci->bus = pci_root_bus_new(DEVICE(s), "pcie.0",
-                                 s->mch.pci_address_space,
-                                 s->mch.address_space_io,
--                                0, TYPE_PCIE_BUS);
-+                                0, TYPE_PCIE_BUS, true);
- 
-     qdev_realize(DEVICE(&s->mch), BUS(pci->bus), &error_fatal);
- }
-diff --git a/hw/pci-host/remote.c b/hw/pci-host/remote.c
-index bfb25ef6af8..646e14de4e9 100644
---- a/hw/pci-host/remote.c
-+++ b/hw/pci-host/remote.c
-@@ -43,7 +43,7 @@ static void remote_pcihost_realize(DeviceState *dev, Error **errp)
- 
-     pci->bus = pci_root_bus_new(DEVICE(s), "remote-pci",
-                                 s->mr_pci_mem, s->mr_sys_io,
--                                0, TYPE_PCIE_BUS);
-+                                0, TYPE_PCIE_BUS, true);
- }
- 
- static void remote_pcihost_class_init(ObjectClass *klass, void *data)
 diff --git a/hw/pci/pci.c b/hw/pci/pci.c
-index f7158fb9573..5fea39e4dfa 100644
+index 27b66583e54..8eacb8f82fc 100644
 --- a/hw/pci/pci.c
 +++ b/hw/pci/pci.c
-@@ -571,13 +571,14 @@ void pci_root_bus_init(PCIBus *bus, size_t bus_size, DeviceState *parent,
+@@ -529,7 +529,8 @@ static bool machine_refuses_bar_at_addr_0(void)
+ 
+ static void pci_root_bus_internal_init(PCIBus *bus, DeviceState *parent,
+                                        MemoryRegion *mem, MemoryRegion *io,
+-                                       uint8_t devfn_min)
++                                       uint8_t devfn_min,
++                                       bool bar_at_addr_0_refused)
+ {
+     assert(PCI_FUNC(devfn_min) == 0);
+     bus->devfn_min = devfn_min;
+@@ -537,7 +538,7 @@ static void pci_root_bus_internal_init(PCIBus *bus, DeviceState *parent,
+     bus->address_space_mem = mem;
+     bus->address_space_io = io;
+     bus->flags |= PCI_BUS_IS_ROOT;
+-    if (machine_refuses_bar_at_addr_0()) {
++    if (bar_at_addr_0_refused && machine_refuses_bar_at_addr_0()) {
+         bus->flags |= PCI_BUS_BAR_AT_ADDR0_REFUSED;
+     }
+ 
+@@ -563,7 +564,8 @@ void pci_root_bus_init(PCIBus *bus, size_t bus_size, DeviceState *parent,
+                        uint8_t devfn_min, const char *typename)
+ {
+     qbus_init(bus, bus_size, typename, parent, name);
+-    pci_root_bus_internal_init(bus, parent, mem, io, devfn_min);
++    pci_root_bus_internal_init(bus, parent, mem, io, devfn_min,
++                               true);
+ }
  
  PCIBus *pci_root_bus_new(DeviceState *parent, const char *name,
-                          MemoryRegion *mem, MemoryRegion *io,
--                         uint8_t devfn_min, const char *typename)
-+                         uint8_t devfn_min, const char *typename,
-+                         bool bar_at_addr_0_refused)
- {
+@@ -573,7 +575,8 @@ PCIBus *pci_root_bus_new(DeviceState *parent, const char *name,
      PCIBus *bus;
  
      bus = PCI_BUS(qbus_new(typename, parent, name));
-     pci_root_bus_internal_init(bus, parent, mem, io, devfn_min,
--                               true);
-+                               bar_at_addr_0_refused);
+-    pci_root_bus_internal_init(bus, parent, mem, io, devfn_min);
++    pci_root_bus_internal_init(bus, parent, mem, io, devfn_min,
++                               true);
      return bus;
  }
  
-@@ -622,7 +623,7 @@ PCIBus *pci_register_root_bus(DeviceState *parent, const char *name,
- {
-     PCIBus *bus;
- 
--    bus = pci_root_bus_new(parent, name, mem, io, devfn_min, typename);
-+    bus = pci_root_bus_new(parent, name, mem, io, devfn_min, typename, true);
-     pci_bus_irqs(bus, set_irq, irq_opaque, nirq);
-     pci_bus_map_irqs(bus, map_irq);
-     return bus;
 -- 
 2.45.2
 
