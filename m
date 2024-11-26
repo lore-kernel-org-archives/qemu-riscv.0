@@ -4,128 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 52AD1D5A6E2
-	for <qemu-riscv@archiver.kernel.org>; Tue, 26 Nov 2024 04:56:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C6E0ED5A6E2
+	for <qemu-riscv@archiver.kernel.org>; Tue, 26 Nov 2024 05:25:52 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tFnbt-0002KF-I1; Mon, 25 Nov 2024 23:55:37 -0500
+	id 1tFo4S-0007Tb-2z; Tue, 26 Nov 2024 00:25:08 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <anisinha@redhat.com>)
- id 1tFnbp-0002JO-8z
- for qemu-riscv@nongnu.org; Mon, 25 Nov 2024 23:55:33 -0500
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <anisinha@redhat.com>)
- id 1tFnbl-00088t-Sc
- for qemu-riscv@nongnu.org; Mon, 25 Nov 2024 23:55:33 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1732596928;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=qSaTMPbLh+/G8hvgbbGFPh/Ds4pXGkRFAz+AHaii6WY=;
- b=FPyvokHikSzsMu3WIh22vggXDu7aTthm167sPrUlsC7qHW4qhsRH3pOh3qkpQOIACKf2Dt
- YlEkyW/QXugxGAVbVDnJCasljTsESpG5S64DT9l75LXBbCBPN9plNKCSqFYi0osPrVn3KJ
- jZKy5hRSHpl3kSGQdrHY/CiV+eSA/B0=
-Received: from mail-pl1-f198.google.com (mail-pl1-f198.google.com
- [209.85.214.198]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-401-f8Iu75FAPQiGu6z_nlbdOg-1; Mon, 25 Nov 2024 23:55:26 -0500
-X-MC-Unique: f8Iu75FAPQiGu6z_nlbdOg-1
-X-Mimecast-MFC-AGG-ID: f8Iu75FAPQiGu6z_nlbdOg
-Received: by mail-pl1-f198.google.com with SMTP id
- d9443c01a7336-211fcbd2325so60318355ad.1
- for <qemu-riscv@nongnu.org>; Mon, 25 Nov 2024 20:55:26 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tFo4O-0007Qs-Tg
+ for qemu-riscv@nongnu.org; Tue, 26 Nov 2024 00:25:04 -0500
+Received: from mail-wm1-x335.google.com ([2a00:1450:4864:20::335])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tFo4N-0004ea-4S
+ for qemu-riscv@nongnu.org; Tue, 26 Nov 2024 00:25:04 -0500
+Received: by mail-wm1-x335.google.com with SMTP id
+ 5b1f17b1804b1-432d86a3085so48026655e9.2
+ for <qemu-riscv@nongnu.org>; Mon, 25 Nov 2024 21:25:02 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1732598701; x=1733203501; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=btxhf/iHeq07QYd1FQs3cogb15E7zMtIyEa6dYcM9dE=;
+ b=fG+A1pO0u+4Fo2usxKOCG8E7eY7cK01f8jTyj9U5tRuHNKnPoNoZjSBKXK5+ZMVfOJ
+ RrRrDYoUj6+a+/r74gr0Md/cUtYSVyWQcmZ30kMQEbTBriY1B+9yI6Y4LO9U/BYBEUSs
+ R/+xelEN4CQPUesoyvpNIjAFvTqODYKGYpSsxIrWKEMxnFlVn2Slx9oHsxUdyS/GamC9
+ 07xYijODz78MeWlzOqm7J05oStgHDM760oyfv1kWbbJACzro6cGWfqNBuVLgQONJklcs
+ aYoJC82TSkZ09HBOFwXSkdy/qGjmQ7DpTiGb6POhRCK9odBL9ycrhH9HsAUw9LLvvOsI
+ 5dnw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732596925; x=1733201725;
- h=to:references:message-id:content-transfer-encoding:cc:date
- :in-reply-to:from:subject:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=crgtnuFSn4RKN1oCL5EUeP8sV5iqv+TSrOEjccDNx+0=;
- b=GyeTI5UKfIzfLjZs5d7AwHJsqKmEXV40FJhuCzjqVlQf3hMvjRIG7dQr2pfzYwGKiU
- KYit2K6GvRTTEYelx1AkpCc3UPBrxy5RFNngl38fqzg9geXDMJitPub9Gl9FRNsv2hiJ
- R1++aBJ4HuUOfZg3cbgyBb/p1t3t4wJyFyRAeJSFmMjTooWS/rE3dHl17QFJoFhwxDGb
- tOQfV8Z5fZKp6Q/yGY2XDcTPemUKk8rPEjjrlXq/uxIt05Wxak5kQv0OsHMO3ZXOEobq
- cD7tihLmAZElSByDspY2AwfGqTF53e0G2k1Q4olVlSQwxENRF99tmZChQEubTLswI+IW
- 1oag==
+ d=1e100.net; s=20230601; t=1732598701; x=1733203501;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=btxhf/iHeq07QYd1FQs3cogb15E7zMtIyEa6dYcM9dE=;
+ b=itBv+Sdsimk4jzWj4RbosoLg4KD8hCT511Hdy5t3h7E6iBf4M/t4EeAEDfl/rLGuJF
+ OBKYe7cuseRasnDJMTnVtRdZeT2lVangHxhjv9fblQyLW/ONK9ymZHxs89NvPW+nIAwu
+ wQS2eVjxWicVmNJXJx0WwV1hK4qOoNKdfhfPzSxUmotLcFzDSP2y8F3gEv94jMTKM4Y6
+ pazG3cXQiMJgEb+aWGppB21ysLIXiy30UEpW3g+3CU0CWqp7gT+C0mXml5cD58xgvmkq
+ sZCS1KfaaEW8BitTHPJGlgJUwQsukUlPaY+LsQY+BZSTUVhjb3kHgwDU2O0nm1+1GDkL
+ uO+w==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVqQjrOwFrSN1tXDDkJ+0t1fKZgAV/AR3LedojzRbG/brZWeiCfXuOYjqCwyLXR8YmgarxRxi7Db1F1@nongnu.org
-X-Gm-Message-State: AOJu0Yz3l3Cmk38os19RZ2mEPTSZRLJxcum4LLBl2K/s8lNywfQm0pkq
- gUKwRBeUrzC0WHXIjp2vGdjOf8yGvSFz9yFNea0z8uSCLcgQqlcoZzpdfoEe3Yr7RRFgcKUnJjp
- 23DguhHbC/WvnKEKtzqRvBZCS2BuZsTLJa0ZjdIqKY+Iax0m0Q3re
-X-Gm-Gg: ASbGncvxujFTy2oYSzzc0A54c9bJPqmk1fUDozFA+4g1g9gqec/M2/Qz6N9XxVvrs7K
- tFxsjTHI3kOYHHhbC1rcrbkqDjtvomvd79geaMn+vmWrm7trCkkwnes4VudTrlotaJoiLIrF6Iw
- v4neXRWj7Y6TuObE29iOPzCWWoyfuynVvvmTIm+lrUhH4JOP/m1R8/De2eB85JGFNwXGvObrJ8C
- JhT0WCl5gUQt9EqqU6DBJWPEbWVKHlgB4QPRAyJ19noMz2IPgBRd//KWvUXqyVDgg==
-X-Received: by 2002:a17:902:da87:b0:211:ce94:866a with SMTP id
- d9443c01a7336-2129f27edbcmr208019695ad.40.1732596925454; 
- Mon, 25 Nov 2024 20:55:25 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IEFz2ag9yELqUG+xXuXAUYx7tAYW/83J251WZXJOl/xdoLISutqp874DfAHRzo2I1TPrHHRAQ==
-X-Received: by 2002:a17:902:da87:b0:211:ce94:866a with SMTP id
- d9443c01a7336-2129f27edbcmr208019295ad.40.1732596925091; 
- Mon, 25 Nov 2024 20:55:25 -0800 (PST)
-Received: from smtpclient.apple ([115.96.111.99])
+ AJvYcCVn8BSUlpnFa18EBTdPoKbBx9Dhyyq0LWIYeNAF17HBc+VXCD1wTKpfW8hxY9ChCROWxmkwSOHitgWg@nongnu.org
+X-Gm-Message-State: AOJu0YwoB5WLBU5LCiayaU8k6MtRYEErPBa36GKkBlGEN8b4ZU5ghxqs
+ ZqKFmA+A5ktpvF/djch9VIouuPyWda26JCRUlBEq2FXjeU5S5r2ICI1SofCt8QM=
+X-Gm-Gg: ASbGncvl8qn0FwSVxz1JNP3iryv4hFe8vxRpakFgy5wN4KhwbQXWQNCb3W6CcYlMqQ0
+ yLEYnO68yJOjwmcTzzZJEYPuAJwFreuLPhF+tdtFkLJfvydbeJvrqf5Ul3AvxWWXcnt8Hcvuewg
+ VhLYfFlZ45ZObh6PV/Oa+oBwgAcHtVLNaQ++J4+EqHfIFeRl+IHBlSAene+FQ0S616zr0ngK62j
+ gYTSrB2bRrDEdvdh9EKds0iuBIlYYcBD9tBt1OnhROQxAtx/4evWBZaKIPd6BnWpw==
+X-Google-Smtp-Source: AGHT+IFwE9VXDaSVBaL4+4Hg+zw8Cu7rxBavC+ub9E/n8fTSutGPKiRrIt1GWKIhw49II6ggJnhlBg==
+X-Received: by 2002:a7b:c04f:0:b0:434:882c:f746 with SMTP id
+ 5b1f17b1804b1-434882cf8a2mr133453215e9.17.1732598701431; 
+ Mon, 25 Nov 2024 21:25:01 -0800 (PST)
+Received: from [192.168.69.146] ([176.176.143.205])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-2129dbff4basm74873375ad.116.2024.11.25.20.55.14
- (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
- Mon, 25 Nov 2024 20:55:24 -0800 (PST)
-Mime-Version: 1.0 (Mac OS X Mail 16.0 \(3776.700.51.11.1\))
-Subject: Re: [PATCH 39/39] docs: explicitly permit a "commonly known identity"
- with SoB
-From: Ani Sinha <anisinha@redhat.com>
-In-Reply-To: <20241121165806.476008-40-alex.bennee@linaro.org>
-Date: Tue, 26 Nov 2024 10:25:01 +0530
-Cc: qemu-devel <qemu-devel@nongnu.org>,
- Peter Maydell <peter.maydell@linaro.org>,
- =?utf-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Michael Tsirkin <mst@redhat.com>,
- Daniel Henrique Barboza <danielhb413@gmail.com>,
- Pierrick Bouvier <pierrick.bouvier@linaro.org>,
- Harsh Prateek Bora <harshpb@linux.ibm.com>,
- Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
- Jiaxun Yang <jiaxun.yang@flygoat.com>, Halil Pasic <pasic@linux.ibm.com>,
- Christian Borntraeger <borntraeger@linux.ibm.com>, qemu-ppc@nongnu.org,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Alexandre Iooss <erdnaxe@crans.org>, qemu-riscv@nongnu.org,
- Thomas Huth <huth@tuxfamily.org>, Bernhard Beschow <shentey@gmail.com>,
- Thomas Huth <thuth@redhat.com>, Eric Farman <farman@linux.ibm.com>,
- Bin Meng <bmeng.cn@gmail.com>, qemu-s390x@nongnu.org,
- Niek Linnenbank <nieklinnenbank@gmail.com>, qemu-arm <qemu-arm@nongnu.org>,
- John Snow <jsnow@redhat.com>, Wainer Moschetta <wainersm@redhat.com>,
- Cleber Rosa <crosa@redhat.com>, qemu-rust@nongnu.org,
- Nicholas Piggin <npiggin@gmail.com>, Daniel Berrange <berrange@redhat.com>,
- Palmer Dabbelt <palmer@dabbelt.com>, Markus Armbruster <armbru@redhat.com>,
- Weiwei Li <liwei1518@gmail.com>, Mahmoud Mandour <ma.mandourr@gmail.com>,
- Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Aurelien Jarno <aurelien@aurel32.net>,
- Alistair Francis <alistair.francis@wdc.com>,
- Stefan Hajnoczi <stefanha@redhat.com>,
- Richard Henderson <richard.henderson@linaro.org>
-Message-Id: <FF4D6240-DB71-4111-B7A6-E95E2C5ECF7B@redhat.com>
-References: <20241121165806.476008-1-alex.bennee@linaro.org>
- <20241121165806.476008-40-alex.bennee@linaro.org>
-To: =?utf-8?Q?Alex_Benn=C3=A9e?= <alex.bennee@linaro.org>
-X-Mailer: Apple Mail (2.3776.700.51.11.1)
-X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: J4KovWwZMkhfgsswiNjaq9qbSk5P6tP7q66NkecAYiI_1732596925
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain;
-	charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=170.10.129.124; envelope-from=anisinha@redhat.com;
- helo=us-smtp-delivery-124.mimecast.com
-X-Spam_score_int: -29
-X-Spam_score: -3.0
-X-Spam_bar: ---
-X-Spam_report: (-3.0 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H2=-0.93,
- RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001, RCVD_IN_VALIDITY_SAFE_BLOCKED=0.001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ 5b1f17b1804b1-434a0c889c5sm45564475e9.2.2024.11.25.21.25.00
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 25 Nov 2024 21:25:00 -0800 (PST)
+Message-ID: <219be312-4acc-46c9-8a56-16e5cb483ae4@linaro.org>
+Date: Tue, 26 Nov 2024 06:24:59 +0100
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH-for-10.0 0/3] hw/boards: Try to make sense of
+ MachineClass::no_sdcard flag
+To: qemu-devel@nongnu.org
+Cc: Peter Maydell <peter.maydell@linaro.org>,
+ =?UTF-8?Q?Daniel_P_=2E_Berrang=C3=A9?= <berrange@redhat.com>,
+ Thomas Huth <thuth@redhat.com>, qemu-riscv@nongnu.org, qemu-ppc@nongnu.org,
+ Paolo Bonzini <pbonzini@redhat.com>, qemu-s390x@nongnu.org,
+ qemu-arm@nongnu.org
+References: <20241125181420.24424-1-philmd@linaro.org>
+Content-Language: en-US
+From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+In-Reply-To: <20241125181420.24424-1-philmd@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::335;
+ envelope-from=philmd@linaro.org; helo=mail-wm1-x335.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -141,125 +104,24 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
+On 25/11/24 19:14, Philippe Mathieu-Daudé wrote:
+> Invert MachineClass 'no_sdcard' flag logic and rename it
+> to 'create_default_sdcard_drive' to make sense of this
+> default value applied to all machines. No logical change
+> intended.
+> 
+> Philippe Mathieu-Daudé (3):
+>    hw/boards: Convert no_sdcard flag to OnOffAuto tri-state
+>    hw/boards: Explicit no_sdcard=false as ON_OFF_AUTO_OFF
+>    hw/boards: Rename no_sdcard -> create_default_sdcard_drive
 
+I expect next steps to be:
 
-> On 21 Nov 2024, at 10:28=E2=80=AFPM, Alex Benn=C3=A9e <alex.bennee@linaro=
-.org> wrote:
->=20
-> From: Daniel P. Berrang=C3=A9 <berrange@redhat.com>
->=20
-> The docs for submitting a patch describe using your "Real Name" with
-> the Signed-off-by line. Although somewhat ambiguous, this has often
-> been interpreted to mean someone's legal name.
->=20
-> In recent times, there's been a general push back[1] against the notion
-> that use of Signed-off-by in a project automatically requires / implies
-> the use of legal ("real") names and greater awareness of the downsides.
->=20
-> Full discussion of the problems of such policies is beyond the scope of
-> this commit message, but at a high level they are liable to marginalize,
-> disadvantage, and potentially result in harm, to contributors.
->=20
-> TL;DR: there are compelling reasons for a person to choose distinct
-> identities in different contexts & a decision to override that choice
-> should not be taken lightly.
->=20
-> A number of key projects have responded to the issues raised by making
-> it clear that a contributor is free to determine the identity used in
-> SoB lines:
->=20
-> * Linux has clarified[2] that they merely expect use of the
->   contributor's "known identity", removing the previous explicit
->   rejection of pseudonyms.
->=20
-> * CNCF has clarified[3] that the real name is simply the identity
->   the contributor chooses to use in the context of the community
->   and does not have to be a legal name, nor birth name, nor appear
->   on any government ID.
->=20
-> Since we have no intention of ever routinely checking any form of ID
-> documents for contributors[4], realistically we have no way of knowing
-> anything about the name they are using, except through chance, or
-> through the contributor volunteering the information. IOW, we almost
-> certainly already have people using pseudonyms for contributions.
->=20
-> This proposes to accept that reality and eliminate unnecessary friction,
-> by following Linux & the CNCF in merely asking that a contributors'
-> commonly known identity, of their choosing, be used with the SoB line.
->=20
-> [1] Raised in many contexts at many times, but a decent overall summary
->    can be read at https://drewdevault.com/2023/10/31/On-real-names.html
-> [2] https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/co=
-mmit/?id=3Dd4563201f33a022fc0353033d9dfeb1606a88330
-> [3] https://github.com/cncf/foundation/blob/659fd32c86dc/dco-guidelines.m=
-d
-> [4] Excluding the rare GPG key signing parties for regular maintainers
->=20
-> Signed-off-by: Daniel P. Berrang=C3=A9 <berrange@redhat.com>
-> Acked-by: Stefan Hajnoczi <stefanha@redhat.com>
-> Acked-by: Peter Maydell <peter.maydell@linaro.org>
-> Reviewed-by: Philippe Mathieu-Daud=C3=A9 <philmd@linaro.org>
-> Reviewed-by: Alex Benn=C3=A9e <alex.bennee@linaro.org>
-> Acked-by: Richard Henderson <richard.henderson@linaro.org>
-> Message-Id: <20241021190939.1482466-1-berrange@redhat.com>
-> Signed-off-by: Alex Benn=C3=A9e <alex.bennee@linaro.org>
-
-Acked-by: Ani Sinha <anisinha@redhat.com>
-
-
-> ---
-> docs/devel/submitting-a-patch.rst | 7 ++++++-
-> .gitlab-ci.d/check-dco.py         | 5 ++++-
-> 2 files changed, 10 insertions(+), 2 deletions(-)
->=20
-> diff --git a/docs/devel/submitting-a-patch.rst b/docs/devel/submitting-a-=
-patch.rst
-> index 83e9092b8c..10b062eec2 100644
-> --- a/docs/devel/submitting-a-patch.rst
-> +++ b/docs/devel/submitting-a-patch.rst
-> @@ -18,7 +18,7 @@ one-shot fix, the bare minimum we ask is that:
->=20
->    * - Check
->      - Reason
-> -   * - Patches contain Signed-off-by: Real Name <author@email>
-> +   * - Patches contain Signed-off-by: Your Name <author@email>
->      - States you are legally able to contribute the code. See :ref:`patc=
-h_emails_must_include_a_signed_off_by_line`
->    * - Sent as patch emails to ``qemu-devel@nongnu.org``
->      - The project uses an email list based workflow. See :ref:`submittin=
-g_your_patches`
-> @@ -335,6 +335,11 @@ include a "From:" line in the body of the email (dif=
-ferent from your
-> envelope From:) that will give credit to the correct author; but again,
-> that author's Signed-off-by: line is mandatory, with the same spelling.
->=20
-> +The name used with "Signed-off-by" does not need to be your legal name,
-> +nor birth name, nor appear on any government ID. It is the identity you
-> +choose to be known by in the community, but should not be anonymous,
-> +nor misrepresent whom you are.
-> +
-> There are various tooling options for automatically adding these tags
-> include using ``git commit -s`` or ``git format-patch -s``. For more
-> information see `SubmittingPatches 1.12
-> diff --git a/.gitlab-ci.d/check-dco.py b/.gitlab-ci.d/check-dco.py
-> index d221b16bd5..70dec7d6ee 100755
-> --- a/.gitlab-ci.d/check-dco.py
-> +++ b/.gitlab-ci.d/check-dco.py
-> @@ -78,7 +78,10 @@
->=20
-> To indicate acceptance of the DCO every commit must have a tag
->=20
-> -  Signed-off-by: REAL NAME <EMAIL>
-> +  Signed-off-by: YOUR NAME <EMAIL>
-> +
-> +where "YOUR NAME" is your commonly known identity in the context
-> +of the community.
->=20
-> This can be achieved by passing the "-s" flag to the "git commit" command=
-.
->=20
-> --=20
-> 2.39.5
->=20
-
+  - Remove nonsense create_default_sdcard_drive (where
+    machines don't have SDHCI devices)
+  - When drive uses IF_SD, assert machine expose a SDBus
+  - Explicitly create default drives for SDCards in
+    each machine_init?
+  - Remove MachineClass::create_default_sdcard_drive field
+    and code handling default in system/vl.c
 
