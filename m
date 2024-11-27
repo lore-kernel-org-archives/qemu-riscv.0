@@ -4,72 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 768A1D609A1
-	for <qemu-riscv@archiver.kernel.org>; Wed, 27 Nov 2024 06:24:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 22FB4D609A2
+	for <qemu-riscv@archiver.kernel.org>; Wed, 27 Nov 2024 06:26:21 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tGBTR-0002Le-FN; Wed, 27 Nov 2024 01:24:29 -0500
+	id 1tGBVC-0003UT-W8; Wed, 27 Nov 2024 01:26:19 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <akihiko.odaki@daynix.com>)
- id 1tGBTP-0002Kr-TG
- for qemu-riscv@nongnu.org; Wed, 27 Nov 2024 01:24:28 -0500
-Received: from mail-pg1-x532.google.com ([2607:f8b0:4864:20::532])
+ id 1tGBV8-0003So-2D
+ for qemu-riscv@nongnu.org; Wed, 27 Nov 2024 01:26:15 -0500
+Received: from mail-oi1-x236.google.com ([2607:f8b0:4864:20::236])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <akihiko.odaki@daynix.com>)
- id 1tGBTN-0001o8-5Q
- for qemu-riscv@nongnu.org; Wed, 27 Nov 2024 01:24:27 -0500
-Received: by mail-pg1-x532.google.com with SMTP id
- 41be03b00d2f7-7f46d5d1ad5so5307203a12.3
- for <qemu-riscv@nongnu.org>; Tue, 26 Nov 2024 22:24:24 -0800 (PST)
+ id 1tGBV5-0002ai-B0
+ for qemu-riscv@nongnu.org; Wed, 27 Nov 2024 01:26:13 -0500
+Received: by mail-oi1-x236.google.com with SMTP id
+ 5614622812f47-3ea78529de1so27830b6e.0
+ for <qemu-riscv@nongnu.org>; Tue, 26 Nov 2024 22:26:10 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=daynix-com.20230601.gappssmtp.com; s=20230601; t=1732688663; x=1733293463;
+ d=daynix-com.20230601.gappssmtp.com; s=20230601; t=1732688769; x=1733293569;
  darn=nongnu.org; 
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=dGGrwJiv/92AaY57YgAv1EnTt9DUIcibsCKpBBlQNr4=;
- b=Sx6gSb2u8rc/Xcw3ZUH8fGSXXDDA+G9VnCNdHi6fmQVeHihEIBk2G8F64HXpcEPHN8
- RJlxaY10B3zRIt9tt9tnv+NEyKWSWn44s3pQcg8ypJM6t5qvvtAnT8oCzIfocmILiw4p
- 5X6S6patmHsWVutbLcVIDqZxuKu6FYg+l0arOQk0U+HmKPoKlU01TRPsXOfJ1vYUe1FV
- QyGeiYJ2Ai8ZiGW5mq4AsB0DDHRYJmW1UDMtSuonNDBF+bipypG13VqJiVtS4mydCwgd
- M0lYoeV8T7BOA+lZ5wO/A832s2FaQ8ZX1vty2oM8zdAThh3W/lHVSvhrRsyLD/mQoGeA
- 3W6Q==
+ bh=/cS4h1fIAwbA8LEtB5wlviHudN0b7lmDgjqOKKV5yCk=;
+ b=SXe+3RJK31Dv0IfniWJLHA45zZzK8KQzBy2C2Qq0AGgDbFDB1L4j61D9aQfXWrmwGj
+ eRosukUXGstblAU7SDetT3fd70WduM3S2CXxmIe05RI5yAki54P6RLaeURFILVLQqGCy
+ PirfA+DOY+0+JCOlG4arHNrmyM0TYqFigYQHr2oFIe2EdNXsFBy3hNepFDTHcJOagKeF
+ Oj3uwWjTyZUF2+UCSvG2iIvVrBX6NJeIQHHxGx9eXGwdKZeevxaYqvCmEOUTSFz5x0Gv
+ ysQC0e/VtNQa+mOLWl3HL1t/U93Ks1bM+7EqYcKQ9Lz0brvJVxzuUCqDBq+V6PgEOIK1
+ h+fA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732688663; x=1733293463;
+ d=1e100.net; s=20230601; t=1732688769; x=1733293569;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=dGGrwJiv/92AaY57YgAv1EnTt9DUIcibsCKpBBlQNr4=;
- b=iyBG5Gink1xZDdNS9AZ03YN3kksHSUN0ByUbTK8NkSTh5UxmmT8u5j9xhfLRq1VITZ
- YBGkQUAKHKe0Syl9JJbtlgI5LWHmKRZyhYRcDZGOg+jhqxFE45gc269b/OJwJYx1xaCW
- J2p12DF1YcEnpGn7DiOvwosnPnLQ9FbtMpcTGt0ipFre2sFn/qf34L9Z+SrWJsHYq6L9
- 5USdsK4Nu2RmCVgaVyP9zZd8WhmfIn8ZcRvj83KGsNsaFkOhDDQBcJILDwOSHLsViSwB
- DXTVO0Kqt6D+l3ADo5Trib/PH2WWqwtHpLCfxIsdjYpFQNKDpvJeYwQuRUQkco+VORXR
- Cnyg==
+ bh=/cS4h1fIAwbA8LEtB5wlviHudN0b7lmDgjqOKKV5yCk=;
+ b=Gu8kLAtdAk1WBwuoBUX0wJmg5SqOBMIUhT2SsnhBf33IHantswhTapDwDLkEFVrNg9
+ AEsMTkslZmhtE/964MDldvQzsIPoy9lIKT8UYO3k+bC1lhMNAaydAktfUwE5f9jcTTeh
+ FgdaPGC6IqxE+Mb5SNh4FaltBmY/jdr58D8UWv4YF130DvsWRLozUFOVqRjRV7DLoOmv
+ RV1eD05/l/k3vWjYqXN+JqiX5hlo/2qUNCAwMaM/9L3CGL322DfaOUdzFhjQIGuApK5U
+ 08khW26KuFEHLVd5XfclPzIwDHyB/KiA07jnsBp/G7NoN/t7oe97SLgL7zT8npXNqFDz
+ W+Qg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXhZCmlomzaN2Z8kWwvi1IS1DZ9otl3gqUthtPsQpycy+DdzF3f5t9WMPVmrUyDe6WxRM1KDGBd1HDn@nongnu.org
-X-Gm-Message-State: AOJu0YylBMEb+uw3s267TYwqGAe3a1s2W4urHtWHanCoZPiTGy6TZF5d
- edaEsaDFNdg4CdlPUA2mjNqrStDn47neeaMl++1oBZHNoMW9Sr92uiM7fD9ZK5I=
-X-Gm-Gg: ASbGncsI3c2+9AbjkeXHUBAjKbDO93PJcE/I0LSXJLT7CtaZHeBHrNpNC0SNDoZUj6H
- 4VqUIPBRrS3nlpZRz46fmI9lTk/5gUXetNuLUU7CFa/5OR7CxTeS3oPgv1kUfgko16rPSe3Mcd2
- t6po6U0lGykB1PtzuHtMiarw7nwHtsWqhSmR8Xzw4yFbwRKFy/kpySJw3JfGRpPGrylkaBvFVIM
- 4cR9gkXAu84W3NXM+NbkguO8Fm8RkDITJLNp03Iwvf1nF5JrYw+ho6WEDYBuYQ=
-X-Google-Smtp-Source: AGHT+IG3KqNhBUscntdrUZPlwIZG4705TZbT2ws4/GWpjGUQGxm1wH46C84RcmjUqG5lyb8lpFM8Sw==
-X-Received: by 2002:a05:6a20:4388:b0:1db:ec6b:ba13 with SMTP id
- adf61e73a8af0-1e0e0ac3899mr2868389637.12.1732688663402; 
- Tue, 26 Nov 2024 22:24:23 -0800 (PST)
+ AJvYcCXQmxtUDpxqmXhoVbuuf1ScvJcHQas2+bUqM7vFdtAunmsDCEFBu9wCV9eyX9NmWeCV7VZ9O/3qZ4Em@nongnu.org
+X-Gm-Message-State: AOJu0Yw7ohXBhVtH9KnW1/oaCI3llvZePKzxSLCNl6L/YJqCz/KG0jRT
+ JmaJbVzQiuOySO3wYguVOHhNy5BoA5iTR0n+/HY7xLTN4HTjLgACu4j56k80zD0=
+X-Gm-Gg: ASbGncugfzN7a7syN9Xn43zWonjcekgKIgAiJ5wOch2NuoMLXZa+VDMp9V0Hmv3KC2a
+ TyF5uKco4VzqiLtwKez7AvVglqvDtPJn4F0hcRjZJWlijXTNy8ay498naYBxCoj7HZizIQwIjUA
+ V+GCt2/sfrMp+f03YVLAJysoBssRHd51w0AmAZI2eUNC2WPORQP8zlwFcx3XR21FM+Fse3Qt/rU
+ 2liUy1/7Mf8AtjTBVkJoWzM42vDPFz4hPQ0JSN3+LKxUY4DvhXzx1twkmjRZYo=
+X-Google-Smtp-Source: AGHT+IGsXLTd/7qFiRn8LX3UCFwKrnjsLKtXQtXsgT5kcGKTRO7fuKOZVGd148cUI4eXLLrdnqYRxw==
+X-Received: by 2002:a05:6808:22a2:b0:3e7:c7c1:e6cf with SMTP id
+ 5614622812f47-3ea6dda7194mr1805518b6e.43.1732688769611; 
+ Tue, 26 Nov 2024 22:26:09 -0800 (PST)
 Received: from [157.82.207.167] ([157.82.207.167])
  by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-2ee0fa48134sm665651a91.18.2024.11.26.22.24.17
+ 41be03b00d2f7-7fbcbfc0857sm9813500a12.10.2024.11.26.22.26.03
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 26 Nov 2024 22:24:23 -0800 (PST)
-Message-ID: <0835ea77-2002-4a68-9c06-c0158fdad3b5@daynix.com>
-Date: Wed, 27 Nov 2024 15:24:16 +0900
+ Tue, 26 Nov 2024 22:26:09 -0800 (PST)
+Message-ID: <3692551b-4203-4050-b976-04746f6db3e5@daynix.com>
+Date: Wed, 27 Nov 2024 15:26:02 +0900
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v10 10/15] hw/vmapple/aes: Introduce aes engine
+Subject: Re: [PATCH v10 12/15] hw/vmapple/cfg: Introduce vmapple cfg region
 To: Phil Dennis-Jordan <phil@philjordan.eu>, qemu-devel@nongnu.org
 Cc: agraf@csgraf.de, peter.maydell@linaro.org, pbonzini@redhat.com,
  rad@semihalf.com, quic_llindhol@quicinc.com, stefanha@redhat.com,
@@ -83,14 +83,14 @@ Cc: agraf@csgraf.de, peter.maydell@linaro.org, pbonzini@redhat.com,
  qemu-block@nongnu.org, qemu-riscv@nongnu.org, balaton@eik.bme.hu,
  Alexander Graf <graf@amazon.com>
 References: <20241113142343.40832-1-phil@philjordan.eu>
- <20241113142343.40832-11-phil@philjordan.eu>
+ <20241113142343.40832-13-phil@philjordan.eu>
 Content-Language: en-US
 From: Akihiko Odaki <akihiko.odaki@daynix.com>
-In-Reply-To: <20241113142343.40832-11-phil@philjordan.eu>
+In-Reply-To: <20241113142343.40832-13-phil@philjordan.eu>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::532;
- envelope-from=akihiko.odaki@daynix.com; helo=mail-pg1-x532.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::236;
+ envelope-from=akihiko.odaki@daynix.com; helo=mail-oi1-x236.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -115,11 +115,13 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 On 2024/11/13 23:23, Phil Dennis-Jordan wrote:
 > From: Alexander Graf <graf@amazon.com>
 > 
-> VMApple contains an "aes" engine device that it uses to encrypt and
-> decrypt its nvram. It has trivial hard coded keys it uses for that
-> purpose.
+> Instead of device tree or other more standardized means, VMApple passes
+> platform configuration to the first stage boot loader in a binary encoded
+> format that resides at a dedicated RAM region in physical address space.
 > 
-> Add device emulation for this device model.
+> This patch models this configuration space as a qdev device which we can
+> then map at the fixed location in the address space. That way, we can
+> influence and annotate all configuration fields easily.
 > 
 > Signed-off-by: Alexander Graf <graf@amazon.com>
 > Signed-off-by: Phil Dennis-Jordan <phil@philjordan.eu>
