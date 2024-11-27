@@ -4,125 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0A1D2D6555A
-	for <qemu-riscv@archiver.kernel.org>; Tue, 26 Nov 2024 21:27:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F0B8BD609A1
+	for <qemu-riscv@archiver.kernel.org>; Wed, 27 Nov 2024 05:36:13 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tG35f-00013P-Hl; Tue, 26 Nov 2024 16:27:23 -0500
+	id 1tGAiJ-0006CI-V0; Wed, 27 Nov 2024 00:35:47 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <mst@redhat.com>) id 1tG35d-00011W-Ab
- for qemu-riscv@nongnu.org; Tue, 26 Nov 2024 16:27:21 -0500
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <mst@redhat.com>) id 1tG35Z-0004It-Ne
- for qemu-riscv@nongnu.org; Tue, 26 Nov 2024 16:27:19 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1732656435;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=2bVfuVSIsMKCKvriHIIacA8lNNZ42nxSlyRz3CpsIdY=;
- b=LkKuaLb+SmCQwLYB/uG74RmTElYfNa1HZVhZ1A3q8zGDPPZN4YM+8+EpHOdJEccPDpDheo
- 2TB+P3RgJZEmVwYP/p+u+UIKEpAF1OUPb70tshIoW+/xapDMzIni5wRZTAax5Q4EA7As1C
- 8VmXmDPDMAZHjQs8tZpgudlJR/OHcgU=
-Received: from mail-wm1-f69.google.com (mail-wm1-f69.google.com
- [209.85.128.69]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-460-wDwjMDONPYOL-Ro7ddCb4w-1; Tue, 26 Nov 2024 16:27:13 -0500
-X-MC-Unique: wDwjMDONPYOL-Ro7ddCb4w-1
-X-Mimecast-MFC-AGG-ID: wDwjMDONPYOL-Ro7ddCb4w
-Received: by mail-wm1-f69.google.com with SMTP id
- 5b1f17b1804b1-4349e97bfc4so27032895e9.3
- for <qemu-riscv@nongnu.org>; Tue, 26 Nov 2024 13:27:13 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <baturo.alexey@gmail.com>)
+ id 1tGAiI-0006BD-56; Wed, 27 Nov 2024 00:35:46 -0500
+Received: from mail-lf1-x132.google.com ([2a00:1450:4864:20::132])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <baturo.alexey@gmail.com>)
+ id 1tGAiG-0000pe-CH; Wed, 27 Nov 2024 00:35:45 -0500
+Received: by mail-lf1-x132.google.com with SMTP id
+ 2adb3069b0e04-53da353eb2eso9877408e87.3; 
+ Tue, 26 Nov 2024 21:35:43 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1732685742; x=1733290542; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=gwcJT32j32KKKz/tCRrugf9yi6vjemEK7dj9TrpBfM8=;
+ b=DxqrCk78r90aE8TWu3cHUWpvl14bKkyHtNKInV3EBG48GIZ/F8BAKW3punaWRfO6e/
+ wxRERH3VRY9jPDS51IODsYzDFdq/UPF0D1kPYxqHduAOn8YQ3PrX97Tx8oPEnbDGSRqU
+ kDSB+qq/hZCgdbsiiEDq4VGCrBtW9v2ULnVceryrlFwCA7PdQLko+lFJmZe70GkcG1kx
+ KYyRxsV8Tl7HC4fbD8Liv9nmvVl5VB+evzLMpHJo2xOqo19ri1PLJvh6jGSUGr1ioISQ
+ fcRBKBpmZcE8bhe0QUjx2ojb6vplPNLS8ep6wH1cqwREJpQGVzMZ1cDtsoFOYsGifDye
+ xC1Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732656432; x=1733261232;
- h=in-reply-to:content-transfer-encoding:content-disposition
- :mime-version:references:message-id:subject:cc:to:from:date
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=2bVfuVSIsMKCKvriHIIacA8lNNZ42nxSlyRz3CpsIdY=;
- b=TNbGT1rYqnRoUUH6Gm7c4iyhWKuzH8x2xMjdtJ4cWF0oe2Ugq/0sGFVFE1ti20utUz
- z3KEDVhR0aLpJad0iA5dJ6ZJ+2c3DwRB+Hs3oir0CivVi2IRvG2ODtj+R7Wx82YaJ9S9
- coUmhvUy0Hmr5/kFHQSfxmFgjYTp8otc7DNjtHGjOca/DRn/bb7NeOuHCctoS8arfZen
- rcAnpqUUsLx0DmznoiWHvQmH2Oyz7YBnIq9n33X3JuPh68axoX/ttpekZE+TOJo2TZYO
- qTS5lq4QAqA1P5DI6dUtGrgQT7HMLLN6iIWzRBeEqDJzPxNyRTZZaXxLhy8AooU5K/X3
- /Atg==
+ d=1e100.net; s=20230601; t=1732685742; x=1733290542;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=gwcJT32j32KKKz/tCRrugf9yi6vjemEK7dj9TrpBfM8=;
+ b=YBo+qSIwW08kccu9y5sVEwIjtNvWpOjcTcsUDZHZmqwAa2JB+Srn0/ralne79x5gVO
+ QSn+t5LgjE0Te0rDkAPxjj0BuvvGDyus9nlW23R7ZbJdgyMl9k22j85r+p85ojXb7qvD
+ yktPA7au66SFj1gr6jp/QLodMDb8l35jjbu+mBr3ThaKY7UxwcyOsDHzhDh47IW1yppj
+ e3Ud2Hao0uNsNONxSeDGqgYcpgp83Pk1JCAETe5ehUQkDx+WnbuUOc7An4Wn9yp82nVk
+ 0N7s6Twop9D08aUrBiRRieLQRigFnWItT9PZBgEjYmtZQ59mBvotuzI4tWwDv1mBDiV8
+ iW3Q==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUKHcXVnvJKoVMU7ibs7WZXAY/g8s4rbk4+zTlfUGGcagGxv6aN24y0TZSUHTKYzFtLtlLlB4QJ64wh@nongnu.org
-X-Gm-Message-State: AOJu0YyU0lxTCyK4Ed8qNGg+anuznjKeLXQSPAbQoO7wiGKqScMO/ErK
- N18Dd2Vr45xqwq8hrba1D4oRHr3JDLNU7ilnMiV3kYr7QY4fwa5Osr/U8GxiOxpcgrcRFVsaWvZ
- dzMnj66k+CuFu3rV0kxbOiL/2t5QJHmy99XxEuSygX/hb/QpwJfzs
-X-Gm-Gg: ASbGncssh0hAumDeNuQWZrbFqLnjFfx05qisLv8CQnGPGwpxfc0lx42BBQqH40NuX8v
- 5No+14q+gLvj8u2Mkysejkk+kQVguvJX0brWSnKPBUSZIKS3a0mh8n3fMpxpTkeo8EvkfJjQHEr
- cTzUtXV0DYNkmubMgQYW7MRaecSLkN4nxxwrVZ1GXgm3ThB9kC7E6Sh8rg0AyfsQ7PtBagonJnF
- T/0iixlpa00p0dTho6FgSeG4guXf98r8Dv0/YRZ+g==
-X-Received: by 2002:a05:600c:2244:b0:434:a8ef:442e with SMTP id
- 5b1f17b1804b1-434a9dfbafamr7729195e9.31.1732656432490; 
- Tue, 26 Nov 2024 13:27:12 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IGjgz2FgrmcINdKkoJfxex3YuSbGP/iA9vAVXo29xmjdAJIdEMvCSbnI4EQsP07JMl9b42HoA==
-X-Received: by 2002:a05:600c:2244:b0:434:a8ef:442e with SMTP id
- 5b1f17b1804b1-434a9dfbafamr7728705e9.31.1732656432034; 
- Tue, 26 Nov 2024 13:27:12 -0800 (PST)
-Received: from redhat.com ([2a02:14f:1f0:4654:4e59:b33:d0e:9273])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4349ea54e13sm95116915e9.34.2024.11.26.13.27.02
+ AJvYcCVlOweyuKQYP+Z50X+L5vUNV4EUGIC6dNX8APBtF6RGYw8rwrz7lDsZxyFReEyN1uFRg+mhcratGe7VoA==@nongnu.org,
+ AJvYcCXwhzsJMfSxqK2pMh5wuxHZMTKHi1wrdrCP+dtTAfySKkeFc2QA9y8WYqVpg1rpnVgJphV0y+VfXIF+@nongnu.org
+X-Gm-Message-State: AOJu0YzH8EZ8DbdPa94uBiZus5j8iwlFrnQqZ/Tw4QLnm6d/Nq4ftSK+
+ mMtAo/Jzp5cfndUrrAta1tQozftrwioRhZFxdUvpzZ5Z7euuz5tF
+X-Gm-Gg: ASbGncvybGNq2RIhBxqvAaKURS8JCNsnzogunzocSKz2epp0KxjF8BH82gT+OsMiAnM
+ mvSgZqifTToLbJ/AdAL7GmFkl26NC2Y8M2jdLvdfBP+MyUiqSY45tRSCgK9mbPoowzlAIzsIByZ
+ d7HygHcgSt7nZC59I2KR2Wurq8Rr8760pqCDz6WjuBvYrkj1BvnvQpFy0Y72paqJywwmqVVeD0r
+ 2jaWM6jFd71UPL51e/Tj8y432wAS33SMlJ8BWK0MGS0Ueo5YHx8j20=
+X-Google-Smtp-Source: AGHT+IGWzM0PoRcCPsy8zz6bD2D2rd2s5iPrvXRaQO4SfmHKty6klM7+gtlhDVFMFqfHju7IOsES6Q==
+X-Received: by 2002:a05:6512:3181:b0:53d:d3f1:2f49 with SMTP id
+ 2adb3069b0e04-53df00d12a4mr1033764e87.21.1732685741955; 
+ Tue, 26 Nov 2024 21:35:41 -0800 (PST)
+Received: from vmdev.asgard ([81.200.11.243]) by smtp.gmail.com with ESMTPSA id
+ 2adb3069b0e04-53de0c3ce8bsm1211799e87.116.2024.11.26.21.35.40
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 26 Nov 2024 13:27:10 -0800 (PST)
-Date: Tue, 26 Nov 2024 16:27:00 -0500
-From: "Michael S. Tsirkin" <mst@redhat.com>
-To: Alex =?iso-8859-1?Q?Benn=E9e?= <alex.bennee@linaro.org>
-Cc: qemu-devel@nongnu.org, Peter Maydell <peter.maydell@linaro.org>,
- Philippe =?iso-8859-1?Q?Mathieu-Daud=E9?= <philmd@linaro.org>,
- Daniel Henrique Barboza <danielhb413@gmail.com>,
- Pierrick Bouvier <pierrick.bouvier@linaro.org>,
- Harsh Prateek Bora <harshpb@linux.ibm.com>,
- Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
- Jiaxun Yang <jiaxun.yang@flygoat.com>, Halil Pasic <pasic@linux.ibm.com>,
- Christian Borntraeger <borntraeger@linux.ibm.com>, qemu-ppc@nongnu.org,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Alexandre Iooss <erdnaxe@crans.org>, qemu-riscv@nongnu.org,
- Thomas Huth <huth@tuxfamily.org>, Bernhard Beschow <shentey@gmail.com>,
- Thomas Huth <thuth@redhat.com>, Eric Farman <farman@linux.ibm.com>,
- Bin Meng <bmeng.cn@gmail.com>, qemu-s390x@nongnu.org,
- Niek Linnenbank <nieklinnenbank@gmail.com>, qemu-arm@nongnu.org,
- John Snow <jsnow@redhat.com>,
- Wainer dos Santos Moschetta <wainersm@redhat.com>,
- Cleber Rosa <crosa@redhat.com>, qemu-rust@nongnu.org,
- Nicholas Piggin <npiggin@gmail.com>,
- Daniel =?iso-8859-1?Q?P=2E_Berrang=E9?= <berrange@redhat.com>,
- Palmer Dabbelt <palmer@dabbelt.com>, Markus Armbruster <armbru@redhat.com>,
- Weiwei Li <liwei1518@gmail.com>, Mahmoud Mandour <ma.mandourr@gmail.com>,
- Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Aurelien Jarno <aurelien@aurel32.net>, Ani Sinha <anisinha@redhat.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Stefan Hajnoczi <stefanha@redhat.com>,
- Richard Henderson <richard.henderson@linaro.org>
-Subject: Re: [PATCH 39/39] docs: explicitly permit a "commonly known
- identity" with SoB
-Message-ID: <20241126162651-mutt-send-email-mst@kernel.org>
-References: <20241121165806.476008-1-alex.bennee@linaro.org>
- <20241121165806.476008-40-alex.bennee@linaro.org>
+ Tue, 26 Nov 2024 21:35:40 -0800 (PST)
+From: baturo.alexey@gmail.com
+To: 
+Cc: baturo.alexey@gmail.com, richard.henderson@linaro.org,
+ zhiwei_liu@linux.alibaba.com, dbarboza@ventanamicro.com,
+ liwei1518@gmail.com, alistair23@gmail.com, frank.chang@sifive.com,
+ palmer@dabbelt.com, Alistair.Francis@wdc.com, sagark@eecs.berkeley.edu,
+ kbastian@mail.uni-paderborn.de, qemu-devel@nongnu.org,
+ qemu-riscv@nongnu.org
+Subject: [PATCH v11 6/7] target/riscv: Apply pointer masking for virtualized
+ memory accesses
+Date: Wed, 27 Nov 2024 08:35:22 +0300
+Message-Id: <20241127053523.397378-7-baturo.alexey@gmail.com>
+X-Mailer: git-send-email 2.39.5
+In-Reply-To: <20241127053523.397378-1-baturo.alexey@gmail.com>
+References: <20241127053523.397378-1-baturo.alexey@gmail.com>
 MIME-Version: 1.0
-In-Reply-To: <20241121165806.476008-40-alex.bennee@linaro.org>
-X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: WVHrvkDyb-SVRmvh6SKBDDNBnmFH6FpX7mTXueeClOs_1732656432
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=170.10.133.124; envelope-from=mst@redhat.com;
- helo=us-smtp-delivery-124.mimecast.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::132;
+ envelope-from=baturo.alexey@gmail.com; helo=mail-lf1-x132.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H3=0.001, RCVD_IN_MSPIKE_WL=0.001,
- RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001, RCVD_IN_VALIDITY_SAFE_BLOCKED=0.001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -138,113 +103,129 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Thu, Nov 21, 2024 at 04:58:06PM +0000, Alex Bennée wrote:
-> From: Daniel P. Berrangé <berrange@redhat.com>
-> 
-> The docs for submitting a patch describe using your "Real Name" with
-> the Signed-off-by line. Although somewhat ambiguous, this has often
-> been interpreted to mean someone's legal name.
-> 
-> In recent times, there's been a general push back[1] against the notion
-> that use of Signed-off-by in a project automatically requires / implies
-> the use of legal ("real") names and greater awareness of the downsides.
-> 
-> Full discussion of the problems of such policies is beyond the scope of
-> this commit message, but at a high level they are liable to marginalize,
-> disadvantage, and potentially result in harm, to contributors.
-> 
-> TL;DR: there are compelling reasons for a person to choose distinct
-> identities in different contexts & a decision to override that choice
-> should not be taken lightly.
-> 
-> A number of key projects have responded to the issues raised by making
-> it clear that a contributor is free to determine the identity used in
-> SoB lines:
-> 
->  * Linux has clarified[2] that they merely expect use of the
->    contributor's "known identity", removing the previous explicit
->    rejection of pseudonyms.
-> 
->  * CNCF has clarified[3] that the real name is simply the identity
->    the contributor chooses to use in the context of the community
->    and does not have to be a legal name, nor birth name, nor appear
->    on any government ID.
-> 
-> Since we have no intention of ever routinely checking any form of ID
-> documents for contributors[4], realistically we have no way of knowing
-> anything about the name they are using, except through chance, or
-> through the contributor volunteering the information. IOW, we almost
-> certainly already have people using pseudonyms for contributions.
-> 
-> This proposes to accept that reality and eliminate unnecessary friction,
-> by following Linux & the CNCF in merely asking that a contributors'
-> commonly known identity, of their choosing, be used with the SoB line.
-> 
-> [1] Raised in many contexts at many times, but a decent overall summary
->     can be read at https://drewdevault.com/2023/10/31/On-real-names.html
-> [2] https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id=d4563201f33a022fc0353033d9dfeb1606a88330
-> [3] https://github.com/cncf/foundation/blob/659fd32c86dc/dco-guidelines.md
-> [4] Excluding the rare GPG key signing parties for regular maintainers
-> 
-> Signed-off-by: Daniel P. Berrangé <berrange@redhat.com>
-> Acked-by: Stefan Hajnoczi <stefanha@redhat.com>
-> Acked-by: Peter Maydell <peter.maydell@linaro.org>
-> Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
-> Reviewed-by: Alex Bennée <alex.bennee@linaro.org>
-> Acked-by: Richard Henderson <richard.henderson@linaro.org>
-> Message-Id: <20241021190939.1482466-1-berrange@redhat.com>
-> Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
+From: Alexey Baturo <baturo.alexey@gmail.com>
 
+Signed-off-by: Alexey Baturo <baturo.alexey@gmail.com>
+---
+ target/riscv/cpu.h                      |  2 ++
+ target/riscv/cpu_helper.c               | 19 +++++++++++++++++++
+ target/riscv/insn_trans/trans_rvh.c.inc | 11 +++++++++++
+ target/riscv/translate.c                |  4 ++++
+ 4 files changed, 36 insertions(+)
 
-Acked-by: Michael S. Tsirkin <mst@redhat.com>
-
-> ---
->  docs/devel/submitting-a-patch.rst | 7 ++++++-
->  .gitlab-ci.d/check-dco.py         | 5 ++++-
->  2 files changed, 10 insertions(+), 2 deletions(-)
-> 
-> diff --git a/docs/devel/submitting-a-patch.rst b/docs/devel/submitting-a-patch.rst
-> index 83e9092b8c..10b062eec2 100644
-> --- a/docs/devel/submitting-a-patch.rst
-> +++ b/docs/devel/submitting-a-patch.rst
-> @@ -18,7 +18,7 @@ one-shot fix, the bare minimum we ask is that:
->  
->     * - Check
->       - Reason
-> -   * - Patches contain Signed-off-by: Real Name <author@email>
-> +   * - Patches contain Signed-off-by: Your Name <author@email>
->       - States you are legally able to contribute the code. See :ref:`patch_emails_must_include_a_signed_off_by_line`
->     * - Sent as patch emails to ``qemu-devel@nongnu.org``
->       - The project uses an email list based workflow. See :ref:`submitting_your_patches`
-> @@ -335,6 +335,11 @@ include a "From:" line in the body of the email (different from your
->  envelope From:) that will give credit to the correct author; but again,
->  that author's Signed-off-by: line is mandatory, with the same spelling.
->  
-> +The name used with "Signed-off-by" does not need to be your legal name,
-> +nor birth name, nor appear on any government ID. It is the identity you
-> +choose to be known by in the community, but should not be anonymous,
-> +nor misrepresent whom you are.
-> +
->  There are various tooling options for automatically adding these tags
->  include using ``git commit -s`` or ``git format-patch -s``. For more
->  information see `SubmittingPatches 1.12
-> diff --git a/.gitlab-ci.d/check-dco.py b/.gitlab-ci.d/check-dco.py
-> index d221b16bd5..70dec7d6ee 100755
-> --- a/.gitlab-ci.d/check-dco.py
-> +++ b/.gitlab-ci.d/check-dco.py
-> @@ -78,7 +78,10 @@
->  
->  To indicate acceptance of the DCO every commit must have a tag
->  
-> -  Signed-off-by: REAL NAME <EMAIL>
-> +  Signed-off-by: YOUR NAME <EMAIL>
-> +
-> +where "YOUR NAME" is your commonly known identity in the context
-> +of the community.
->  
->  This can be achieved by passing the "-s" flag to the "git commit" command.
->  
-> -- 
-> 2.39.5
+diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+index 11e3a6d647..6bbd9c6c25 100644
+--- a/target/riscv/cpu.h
++++ b/target/riscv/cpu.h
+@@ -634,6 +634,7 @@ FIELD(TB_FLAGS, BCFI_ENABLED, 28, 1)
+ /* If pointer masking should be applied and address sign extended */
+ FIELD(TB_FLAGS, PM_PMM, 29, 2)
+ FIELD(TB_FLAGS, PM_SIGNEXTEND, 31, 1)
++FIELD(TB_FLAGS, PM_VPMM, 32, 2)
+ 
+ #ifdef TARGET_RISCV32
+ #define riscv_cpu_mxl(env)  ((void)(env), MXL_RV32)
+@@ -773,6 +774,7 @@ bool riscv_cpu_is_32bit(RISCVCPU *cpu);
+ 
+ bool riscv_cpu_virt_mem_enabled(CPURISCVState *env);
+ RISCVPmPmm riscv_pm_get_pmm(CPURISCVState *env);
++RISCVPmPmm riscv_pm_get_virt_pmm(CPURISCVState *env);
+ int riscv_pm_get_pmlen(RISCVPmPmm pmm);
+ 
+ RISCVException riscv_csrr(CPURISCVState *env, int csrno,
+diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+index 78b461a5cf..4065809d9f 100644
+--- a/target/riscv/cpu_helper.c
++++ b/target/riscv/cpu_helper.c
+@@ -213,6 +213,7 @@ void cpu_get_tb_cpu_state(CPURISCVState *env, vaddr *pc,
+     flags = FIELD_DP32(flags, TB_FLAGS, AXL, cpu_address_xl(env));
+     flags = FIELD_DP32(flags, TB_FLAGS, PM_PMM, riscv_pm_get_pmm(env));
+     flags = FIELD_DP32(flags, TB_FLAGS, PM_SIGNEXTEND, pm_signext);
++    flags = FIELD_DP64(flags, TB_FLAGS, PM_VPMM, riscv_pm_get_virt_pmm(env));
+ 
+     *pflags = flags;
+ }
+@@ -260,6 +261,24 @@ RISCVPmPmm riscv_pm_get_pmm(CPURISCVState *env)
+     return pmm;
+ }
+ 
++RISCVPmPmm riscv_pm_get_virt_pmm(CPURISCVState *env)
++{
++    RISCVPmPmm pmm = PMM_FIELD_DISABLED;
++#ifndef CONFIG_USER_ONLY
++    int priv_mode = cpu_address_mode(env);
++    if (priv_mode == PRV_U) {
++        pmm = get_field(env->hstatus, HSTATUS_HUPMM);
++    } else {
++        if (get_field(env->hstatus, HSTATUS_SPVP)) {
++            pmm = get_field(env->henvcfg, HENVCFG_PMM);
++        } else {
++            pmm = get_field(env->senvcfg, SENVCFG_PMM);
++        }
++    }
++#endif
++    return pmm;
++}
++
+ bool riscv_cpu_virt_mem_enabled(CPURISCVState *env)
+ {
+     bool virt_mem_en = false;
+diff --git a/target/riscv/insn_trans/trans_rvh.c.inc b/target/riscv/insn_trans/trans_rvh.c.inc
+index 03c6694430..ae067789d1 100644
+--- a/target/riscv/insn_trans/trans_rvh.c.inc
++++ b/target/riscv/insn_trans/trans_rvh.c.inc
+@@ -44,6 +44,14 @@ static bool do_hlv(DisasContext *ctx, arg_r2 *a,
+     TCGv dest = dest_gpr(ctx, a->rd);
+     TCGv addr = get_gpr(ctx, a->rs1, EXT_NONE);
+ 
++    bool is_hlvx = (func == gen_helper_hyp_hlvx_hu) ||
++                   (func == gen_helper_hyp_hlvx_wu);
++
++    /* Apply Zjpm pointer masking */
++    if (!is_hlvx) {
++        tcg_gen_sextract_tl(addr, addr, 0, ctx->addr_vxl);
++    }
++
+     decode_save_opc(ctx, 0);
+     func(dest, tcg_env, addr);
+     gen_set_gpr(ctx, a->rd, dest);
+@@ -56,6 +64,9 @@ static bool do_hsv(DisasContext *ctx, arg_r2_s *a,
+     TCGv addr = get_gpr(ctx, a->rs1, EXT_NONE);
+     TCGv data = get_gpr(ctx, a->rs2, EXT_NONE);
+ 
++    /* Apply Zjpm pointer masking */
++    tcg_gen_sextract_tl(addr, addr, 0, ctx->addr_vxl);
++
+     decode_save_opc(ctx, 0);
+     func(tcg_env, addr, data);
+     return true;
+diff --git a/target/riscv/translate.c b/target/riscv/translate.c
+index 32df295123..d8f83315c6 100644
+--- a/target/riscv/translate.c
++++ b/target/riscv/translate.c
+@@ -104,6 +104,7 @@ typedef struct DisasContext {
+     TCGv zero;
+     /* actual address width */
+     uint8_t addr_xl;
++    uint8_t addr_vxl;
+     bool addr_signed;
+     /* Ztso */
+     bool ztso;
+@@ -1239,10 +1240,13 @@ static void riscv_tr_init_disas_context(DisasContextBase *dcbase, CPUState *cs)
+     ctx->cs = cs;
+     if (get_xl(ctx) == MXL_RV32) {
+         ctx->addr_xl = 32;
++        ctx->addr_vxl = 32;
+         ctx->addr_signed = false;
+     } else {
+         int pm_pmm = FIELD_EX32(tb_flags, TB_FLAGS, PM_PMM);
+         ctx->addr_xl = 64 - riscv_pm_get_pmlen(pm_pmm);
++        int pm_vpmm = FIELD_EX64(tb_flags, TB_FLAGS, PM_VPMM);
++        ctx->addr_vxl = 64 - riscv_pm_get_pmlen(pm_vpmm);
+         ctx->addr_signed = FIELD_EX32(tb_flags, TB_FLAGS, PM_SIGNEXTEND);
+     }
+     ctx->ztso = cpu->cfg.ext_ztso;
+-- 
+2.39.5
 
 
