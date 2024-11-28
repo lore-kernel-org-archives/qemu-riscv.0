@@ -4,94 +4,98 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 86289D69105
-	for <qemu-riscv@archiver.kernel.org>; Thu, 28 Nov 2024 12:59:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 08D5BD69105
+	for <qemu-riscv@archiver.kernel.org>; Thu, 28 Nov 2024 13:03:15 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tGe6p-0006Aq-NT; Thu, 28 Nov 2024 07:59:03 -0500
+	id 1tGeAr-0008Fd-Ds; Thu, 28 Nov 2024 08:03:13 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1tGe6n-0006AW-V2
- for qemu-riscv@nongnu.org; Thu, 28 Nov 2024 07:59:02 -0500
-Received: from mail-pf1-x42f.google.com ([2607:f8b0:4864:20::42f])
+ id 1tGeAU-00086r-HL
+ for qemu-riscv@nongnu.org; Thu, 28 Nov 2024 08:03:03 -0500
+Received: from mail-pj1-x102c.google.com ([2607:f8b0:4864:20::102c])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1tGe6m-000141-Bk
- for qemu-riscv@nongnu.org; Thu, 28 Nov 2024 07:59:01 -0500
-Received: by mail-pf1-x42f.google.com with SMTP id
- d2e1a72fcca58-7242f559a9fso782123b3a.1
- for <qemu-riscv@nongnu.org>; Thu, 28 Nov 2024 04:58:59 -0800 (PST)
+ id 1tGeAI-0002uw-Ab
+ for qemu-riscv@nongnu.org; Thu, 28 Nov 2024 08:02:41 -0500
+Received: by mail-pj1-x102c.google.com with SMTP id
+ 98e67ed59e1d1-2ee173d0480so600230a91.0
+ for <qemu-riscv@nongnu.org>; Thu, 28 Nov 2024 05:02:34 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1732798739; x=1733403539; darn=nongnu.org;
+ d=ventanamicro.com; s=google; t=1732798953; x=1733403753; darn=nongnu.org;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=NBB9y1QxF3FeAhPNni7HuWH6Mijkm1BWd+FZvP1ekYo=;
- b=SZtsXm6I8hGR87UMBlO2REytMQk84VkPhJ8TFyjOsTw2888fCCkfRoF1LUif2b8t41
- 1iSVV2ZM7EDaJftguPqnF0NV7m6Jv9Az+i/NisFI1NSaLbCX/b5q4G3t25XlqDehiyVP
- SpUhxwF84YYfz3oMplmXYjXDAROfUHfBom7gH27r6PqZfB4FH6baSKI6H2t/tqtB2lHy
- kzlV1EGfwBcT0HvthI6eCAdH8Rx/t2hVJjH/nFcTEL8fuv128+c4xltFUrCROOFSsJ7C
- gw69VjadLFbAD7QQZBspV5fgX0ujh7GEiWJ28NAkiyLu3oyM80vUO2uObjq8TmHQN8Nd
- ihgw==
+ bh=ChZRcupK90z3tHsfjdw/s47aIhOGMbgfXfo7ZaM8Npw=;
+ b=R+nqChRTeTD62DohmPEXySL2YcyRP75TjktsuZySnbW5K5Q7Wklk99LTKqCUWItgbG
+ +a+nyljqh2qhAXHH7rMGPiK87N7ItAvWdhWItvrdtFHuRdros5eoSNGFr0moXkyZb3Xw
+ fUBPZsXhTsX+pr5GKguZ61kEtGYheab9EXZA2+sfnIyXwFLrwjkU/Bch06mHPpUjwGdl
+ uy9Y3omHWIbHeKh5xhK8gfOOHJgPAgZmuKNmymTnv4IFQTQfHGnt0z1W7lUopceOnIKY
+ dK4V1fRkH8+ZFu2OUIDmAIV2Bnsihjm6eT9OIv/btNLjwXGtoGnkew5Lx18eK68uSpK6
+ U6vw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732798739; x=1733403539;
+ d=1e100.net; s=20230601; t=1732798953; x=1733403753;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=NBB9y1QxF3FeAhPNni7HuWH6Mijkm1BWd+FZvP1ekYo=;
- b=mQef0EFcjbV9dIsKnyerNXyPqtwzJScAepayJcJ3C42KH2SRtJQNCoBgQH3znjVkas
- ZgQ2IVdYFYCbxjioBJi2CBa9jZzvsMSp1HX0phnMUR68RkvuWeNO+X42m+5AAixX1UQC
- Md9mg7tgKlpmUA98oBd3ADWYgq9X2oPjQeHQaHM8sUCrbMsMQNBafJcEYP6+hRFSacEm
- vuh8g3m+vjS6pAVoisdAFEsoR4/Ve5IVwLMSw2+cuvhLSIjwnsCtyjXfgXu5GYXmoxJF
- bZ8ksux8GDvK17C22K3Au1ch1B2ZVSuLAIgW955VQFFgSY/j57ouw2lcdljQBM5s5+ze
- QKbQ==
+ bh=ChZRcupK90z3tHsfjdw/s47aIhOGMbgfXfo7ZaM8Npw=;
+ b=Bo326TmBfNkAaWHTU4n5VWmT/8RUakvXONzUjMY5VHrzJWndUQbeBaw66gp53jeOr4
+ /rSoAq9EzDy5GgI2gk/d3VDnBIcpPj1mY/4G9dqgGKVs93yjhjfeIiaLHXQUqgI1rdGl
+ KKsREfPwvWTK573LvEz3EBGMu9riJfGWFOMSJMrnetmfW8OsOagPJkQCMFSBp98qerZo
+ HtqB7S6y+ks/R1fEPx60EwJ7C6yqgNH89EKGcUaVvq5qr24thio5rOKCAoNfxJQtTV+C
+ fLd6JR/r/NvmCoaIPC1/qU225IBssV3vTbmtc65wKBzngcIoPkXn2aENcM1jlzzQ5x4A
+ f/gA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVggnEAibrD9h5MPvWrCX0DQgPjdt2NaGVLJ9f0EsexKPn/u/prnUBGnCcrTsuuPgv513V3cQOj4dQI@nongnu.org
-X-Gm-Message-State: AOJu0Yymx7jVHXB+XuXIVjEI+IKx7iGFxTXJ0+KPzefem+giiNm7AFbC
- jfXjA/ocxVIF/nz3Qu1jmW5hWBQoraEEtp6iRYp/vBIWKuxF288MKw3yeC3nEbJ/oWLtkMUyr84
- 7
-X-Gm-Gg: ASbGncuDO1G4VJz3kEl7MYQat3AUf0Q2uGisW5BlMdBGb1BsbNhLwXzarX1nXacllA7
- lfgBSA2vuKwnMRJUqS55Cx6jL0LkbARAy70M2LNG00wn5hNnlFpU+lfZtgNsqYNWZ5TEJxaLwc6
- aeYH6Mh6sWo8SYJ474wrNDZtLFa2oGH1/7VXvSeizYu5fY8AFISBHzMkUV3OF7FCd0R04rrgu1C
- DnaCz2Cy6kIKApd69oYBXVw9G+qWF4vR8+LLSpUFml1MhQyZ4Naj864G4jF1u8=
-X-Google-Smtp-Source: AGHT+IFFJCwiEvfdGt13JpsM89I+fjT572beMjTWhOq1jjQpSMpvXaKwWYcfPSdxXQeZRMzAwLQemA==
-X-Received: by 2002:a05:6a00:845:b0:71e:1722:d02c with SMTP id
- d2e1a72fcca58-7252ffcbf9amr9660383b3a.3.1732798738649; 
- Thu, 28 Nov 2024 04:58:58 -0800 (PST)
+ AJvYcCUw1xqdGsk1Qg+o87VPmfDwBMxDnpPxpiv/HjK2p1KrE7/JawN0o4s1RRMRcNXLmR9rGvIAbV4bDixa@nongnu.org
+X-Gm-Message-State: AOJu0YzACo8+2ehGmC11/f0bpbI0qfX2/nlxf/7O46XmGDvVVNBEpfU1
+ JNztqDi4JYBx9x3RxOH7sHNBlqD6rd9f0re/TUCgJz17RwFTp+2+4K2UqPkndFg=
+X-Gm-Gg: ASbGncsj0L+7JV8aDDPVqxKidWDmp6YYQscDuJGJHi5uEEngHrgB5CeV1dReNzPgN7e
+ yC4R3Vw62Ci3MjTBf81CchD1EfxO2jXW6fVLeHZPzaapP78c109ynvF+9/4JzIU4RLcOWXXVtNi
+ fXDXaaw8V8/UIdz3yIWgEgAGB5unW3LdnncFh18aop1KCEa3gq8rrStcBGt8+26VdCbDlsCV4aO
+ lB9totJNvUBnk4rKgglgP3sQeMnVQRo9earZI/47BPpcC0L7sqGJ79kSXjfMLo=
+X-Google-Smtp-Source: AGHT+IE3FIy/nwTcOC3MVOp8r2Nh8+b4cfqdG+aveg22eODYB7yGdZrtxwRFRRQQghM1Ipa2CQT7Aw==
+X-Received: by 2002:a17:90b:17ce:b0:2ea:3836:33de with SMTP id
+ 98e67ed59e1d1-2ee08fca651mr10207601a91.20.1732798952888; 
+ Thu, 28 Nov 2024 05:02:32 -0800 (PST)
 Received: from [192.168.68.110] ([187.101.65.72])
  by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-725417fc064sm1434698b3a.130.2024.11.28.04.58.56
+ 98e67ed59e1d1-2ee0f5b61adsm3411235a91.0.2024.11.28.05.02.30
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 28 Nov 2024 04:58:58 -0800 (PST)
-Message-ID: <fca701ec-a3b8-4db1-a14f-73d72fcb85b2@ventanamicro.com>
-Date: Thu, 28 Nov 2024 09:58:55 -0300
+ Thu, 28 Nov 2024 05:02:32 -0800 (PST)
+Message-ID: <1f2a4b6f-7a70-4f61-a073-f6c953003d32@ventanamicro.com>
+Date: Thu, 28 Nov 2024 10:02:28 -0300
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 11/11] target/riscv: Add configuration for
- S[m|s]csrind, Smcdeleg/Ssccfg
-To: Atish Patra <atishp@rivosinc.com>, qemu-riscv@nongnu.org,
- qemu-devel@nongnu.org
-Cc: kaiwenxue1@gmail.com, palmer@dabbelt.com, liwei1518@gmail.com,
- zhiwei_liu@linux.alibaba.com, bin.meng@windriver.com,
- alistair.francis@wdc.com
-References: <20241117-counter_delegation-v3-0-476d6f36e3c8@rivosinc.com>
- <20241117-counter_delegation-v3-11-476d6f36e3c8@rivosinc.com>
+Subject: Re: [PATCH] include virtualization mode as part of priv
+To: Yanfeng <yfliu2008@qq.com>, Alistair Francis <alistair23@gmail.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org,
+ Weiwei Li <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Alistair Francis <alistair.francis@wdc.com>
+References: <tencent_6FF30F7E2E640BEE260FD6523B6BA5486908@qq.com>
+ <CAKmqyKMP093GyTEHdAPzaV9+O_pFSv0svQRb-31QTvn9i4fxMA@mail.gmail.com>
+ <tencent_B97DED0E6971DEDD2F960CC63DFF414A2A05@qq.com>
+ <CAKmqyKO6Wjknoc1sXVm6d0BGzwcuF7VBqJdg_a1gh=6zz=KZNQ@mail.gmail.com>
+ <tencent_E6B51EACA466D65291C0E6BDFD34C8EADC09@qq.com>
+ <CAKmqyKNOXNpfekTPNOyHyYEuCXKOewCeTSFZAHpsxuC7gUzpGQ@mail.gmail.com>
+ <tencent_3335F7F1076629E3B507A48979413F43B207@qq.com>
+ <CAKmqyKNS3GWKpatFMchYJM31PtgjLn9YX+m_L8Nv=qXNMXhWmw@mail.gmail.com>
+ <tencent_F74852576B25481AF3647E0F647DEEEA0F08@qq.com>
 Content-Language: en-US
 From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <20241117-counter_delegation-v3-11-476d6f36e3c8@rivosinc.com>
+In-Reply-To: <tencent_F74852576B25481AF3647E0F647DEEEA0F08@qq.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::42f;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pf1-x42f.google.com
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::102c;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pj1-x102c.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -109,34 +113,74 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 
 
-On 11/17/24 10:15 PM, Atish Patra wrote:
-> Add configuration options so that they can be enabled/disabld from
-> qemu commandline.
+On 11/28/24 3:39 AM, Yanfeng wrote:
+> On Thu, 2024-11-28 at 14:46 +1000, Alistair Francis wrote:
+>> On Thu, Nov 28, 2024 at 2:27 PM Yanfeng <yfliu2008@qq.com> wrote:
+>>>
+>>> On Thu, 2024-11-28 at 14:10 +1000, Alistair Francis wrote:
+>>>> On Thu, Nov 28, 2024 at 2:05 PM Yanfeng <yfliu2008@qq.com> wrote:
+>>>>>
+>>>>> Alistair.
+>>>>>
+>>>>> My initial `git send-email" on Ubuntu 22.04 wasn't lukcy:
+>>>>>
+>>>>> ```shell
+>>>>> $ git send-email
+>>>>> git: 'send-email' is not a git command. See 'git --help'.
+>>>>> ```
+>>>>>
+>>>>> I need time to find a solution.
+>>>>
+>>>> You will need to install git-send-email (or something like that)
+>>>
+>>> Yes, now the "git send-email" exists and I will see how to use it correctly.
+>>>
+>>>>
+>>>>>
+>>>>> As for seperate `virt` thing, my concern is that though the V and P
+>>>>> status
+>>>>> looks
+>>>>> orthogonal, they are not so independent (e.g. `P=3` implies `V=0`).
+>>>>> Having
+>>>>> them
+>>>>> in one `priv` register tells user that that they should be operated
+>>>>> together
+>>>>> using one command.
+>>>>
+>>>> True, but how can a user know what bit 8 means?
+>>>
+>>> Good point. Can we mention it in the user document for `priv` register?
+>>
+>> AFAIK we don't really have a place to document that. Which is why a
+>> "virt" register would help as it's self documenting.
 > 
-> Acked-by: Alistair Francis <alistair.francis@wdc.com>
-> Signed-off-by: Atish Patra <atishp@rivosinc.com>
-> ---
+> Okay, I will try adding a `virt` virtual register in a [PATCH v2] later.
 
-Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Can you please also change the patch title/subject to:
 
->   target/riscv/cpu.c | 4 ++++
->   1 file changed, 4 insertions(+)
-> 
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index 410ca2e3a666..2a4f285a974f 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -1477,6 +1477,10 @@ const RISCVCPUMultiExtConfig riscv_cpu_extensions[] = {
->       /* Defaults for standard extensions */
->       MULTI_EXT_CFG_BOOL("sscofpmf", ext_sscofpmf, false),
->       MULTI_EXT_CFG_BOOL("smcntrpmf", ext_smcntrpmf, false),
-> +    MULTI_EXT_CFG_BOOL("smcsrind", ext_smcsrind, false),
-> +    MULTI_EXT_CFG_BOOL("smcdeleg", ext_smcdeleg, false),
-> +    MULTI_EXT_CFG_BOOL("sscsrind", ext_sscsrind, false),
-> +    MULTI_EXT_CFG_BOOL("ssccfg", ext_ssccfg, false),
->       MULTI_EXT_CFG_BOOL("zifencei", ext_zifencei, true),
->       MULTI_EXT_CFG_BOOL("zicfilp", ext_zicfilp, false),
->       MULTI_EXT_CFG_BOOL("zicfiss", ext_zicfiss, false),
+"riscv: include virtualization mode as part of priv"
+
+Adding 'riscv' at the beginning will help people from the common qemu-devel ML to
+identify which subsystem/arch this patch is aimed at.
+
+
+Thanks,
+
+Daniel
+
+
+
+>>
+>> Alistair
+>>
+>>>
+>>> I used bit(8) at my first try and it worked from GDB command line. Actually
+>>> I
+>>> also tried bit(4) but found GDB command takes that bit as part of P value so
+>>> I
+>>> withdrawed back to bit(8).
+>>>
+>>>
 > 
 
 
