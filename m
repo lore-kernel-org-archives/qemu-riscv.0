@@ -4,92 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9F018D69107
-	for <qemu-riscv@archiver.kernel.org>; Thu, 28 Nov 2024 13:10:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C9560D69113
+	for <qemu-riscv@archiver.kernel.org>; Thu, 28 Nov 2024 14:13:30 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tGeHa-00038s-7q; Thu, 28 Nov 2024 08:10:10 -0500
+	id 1tGfGa-00055r-IV; Thu, 28 Nov 2024 09:13:12 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1tGeHY-00036Y-3U
- for qemu-riscv@nongnu.org; Thu, 28 Nov 2024 08:10:08 -0500
-Received: from mail-pl1-x632.google.com ([2607:f8b0:4864:20::632])
+ (Exim 4.90_1) (envelope-from <cleger@rivosinc.com>)
+ id 1tGfGV-00053r-Sm
+ for qemu-riscv@nongnu.org; Thu, 28 Nov 2024 09:13:11 -0500
+Received: from mail-pl1-x636.google.com ([2607:f8b0:4864:20::636])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1tGeHV-0000I8-WA
- for qemu-riscv@nongnu.org; Thu, 28 Nov 2024 08:10:07 -0500
-Received: by mail-pl1-x632.google.com with SMTP id
- d9443c01a7336-21260cfc918so4869825ad.0
- for <qemu-riscv@nongnu.org>; Thu, 28 Nov 2024 05:10:05 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <cleger@rivosinc.com>)
+ id 1tGfGR-0005np-Ru
+ for qemu-riscv@nongnu.org; Thu, 28 Nov 2024 09:13:07 -0500
+Received: by mail-pl1-x636.google.com with SMTP id
+ d9443c01a7336-21263dbbbc4so8496465ad.1
+ for <qemu-riscv@nongnu.org>; Thu, 28 Nov 2024 06:13:03 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1732799404; x=1733404204; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=zUTka3/ByFwzBJ54bcJNSWNm6zfJKIYYIQy11SV94rk=;
- b=pdftz+aoVzSkHaz0UcdtEf2muozGNxwFjaM1Q+G08Uc89LopGbh+yLhBWN1gFt4JgQ
- pMBOtECMNsqke08bXukdSWptRtDs3APVZmyZz006OxXEeIEIIm/eMhukbpvQw98GMBI8
- ExeiwKai/QQO63cLMrwsqxVMFBNQrYd0x+svFrZMtOyILU4JYMihE7ZshJrDj6JYdMvK
- JbgRxdJZ4H1jo0Tl61XQFWn+y9Pfc1Nf60Y/nrutabeKcKyvdh4CbB1uF3JdEGx4t6pS
- T0melWAUtniq/vgEE9Z3eEYbyW5xmYWL9qJMeOxnNKZXfoF0Tz6+RuEw7xEkcFoh5I7R
- ap7A==
+ d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1732803182; x=1733407982;
+ darn=nongnu.org; 
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=C4JUFLTOJhJslmXjXCGh+2VEFVmYCejzSQzv/yR+Yn0=;
+ b=vIkFETEstjkOlotQ7m8WscOZeWQd0wUhXoRCJVt7MnxHfzMU4R/wuVJHnzRrNbOFs+
+ 0CZGGhD3NBlka+OxSxst3ZD0z6e/Trz8omCHXqnUYtD4rA2GZIw2kVxTwmLVajJ3g6zK
+ qnconk+tf/JhHiT3wt+Hd2mq0inrXXZ+3cbFxBEDurE9Zlxajk+krpZsV01TeIr/0GjB
+ ZmQLW6MCRip15rY2VNRW926oj+NE9/T1Is8JiX3ZG5W3bUCETarI42CbnnubBAAssfRX
+ NomHEnhl8ddJ+Ma/gveXciF0cIIX1KmkvE+7PRdPbX9BW5lk8g9ESaBWLCAZbuWmj6dF
+ yzwA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732799404; x=1733404204;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=zUTka3/ByFwzBJ54bcJNSWNm6zfJKIYYIQy11SV94rk=;
- b=dtMhHWAD/F00PHuXa4Lq/zVaBWaGUPCkNZ7GzYpyoh0Ig2xqwez0ZypqjdyvCiCR29
- QFi28sfJmJqUfMeJ5D2rWPOWPhawYrWrijynQYGTaf5WFEm4e2Lmz7/z0eBtJ/24estv
- JnBq4WHnKZCtDU5BF7zhustiWN3cEtSLsWsjVwdDIuEq62UHQ2VI9QRPaIwtxrJVfql2
- 08PVkfDPCn1Ww8J2ogrTuIY9yqyHq8KySv1FltLWC8TB2ISFIu6IJMEM4Q7fEQzdAk2p
- eFIhlirBZDyirXDB4WSafEDWK9trzpucdVuboDO0fTi9TImW4b+yTMUSSL/6wEUPSvuY
- iOtQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVBPYddgtkoYRR/tDRA08YP1r8ZyUnenWJ+pVprB2wbU/3ZXhdHskb9r27IIIsDhfzKz9hIsme8DURF@nongnu.org
-X-Gm-Message-State: AOJu0YzGxImvd2lhzy0mpDIco4lk6VQ2xEzLoAXkDeWpE6U36Lwmw209
- FcXPzGFIyxPJMYxhDTHc7QyE4y329B/6p+SHhOoQRWE3+RYt8HCN1Uazu+FGeF8=
-X-Gm-Gg: ASbGncszs3Gs/+f8klhP8WgQmdp4rem55jGbp59bMbz13lLT10rIJ4750sIvwrysk+N
- 6fDEtXiwnmnjXEB+KPc1z/ruRScZ4wMtRWfTPjXuq7ohYOPLTXkAimJjNxsyhgXgjp3iTaPv5IM
- ViU02kkZU1Jo+8DSmjbGEa0cfAW4mnCZdWyvt9hBKDvgWzRFDmkbW0oOz6kAbYCYEDawktJA6vv
- 3kd51Dzeqqp6FSB5/WsB5T1GHnw/sCejTv/0TG+DPpeVWm9xltmuRqjZ2NIHJw=
-X-Google-Smtp-Source: AGHT+IHDQ8qmmioq3JlkSAUtI1vqm+AaW79kmx3GQOY15or3uiQOTD3VPC5IWDHLoPFmBLvRp/B2hQ==
-X-Received: by 2002:a17:902:f545:b0:212:12a2:4007 with SMTP id
- d9443c01a7336-21501857891mr81615565ad.34.1732799404478; 
- Thu, 28 Nov 2024 05:10:04 -0800 (PST)
-Received: from [192.168.68.110] ([187.101.65.72])
+ d=1e100.net; s=20230601; t=1732803182; x=1733407982;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=C4JUFLTOJhJslmXjXCGh+2VEFVmYCejzSQzv/yR+Yn0=;
+ b=ClBmBOolaZhjUqHprBlPwgqPigTXPK8q9Nrx/M7DHq3pkLM0FCmaoRQBbuZn9jXmPL
+ vXbKINl3uG4f6ZcyJaMkGc+9cP9drCK2wYVUNSZjuuS7FsfsHde27VWkgLI/AC1KPR2u
+ PqUcLquvwXDENWS/RzK2bkhASWPIVwBtexmO5ex7SojRcjTxT/cvl3Cwbi4EWBmCC0/L
+ WUL6nfY9rShCjHI0yTZAzAdU6g1h6pPGJu35O8VspMvkIVWoNfrb3kfDRFDcGWIg+1b6
+ EH7JeTUFM8wZW19+F9izG2DK5XVro28GkOuKu6fl8E1ltt4p9aZ689Bq4vtnln8D5938
+ kcfA==
+X-Gm-Message-State: AOJu0Yy8OZxjsGVm06TWGABJg7YLSiE8IXxshUZ57ILWnNaf4cGuKpLQ
+ H4q3dOiO5VBwJGpCjIcjK0QnTMYMPHugBPDhPG/Ne13T8NE2Duc+kvO0WYPxrtt9rJ888xy3Yss
+ w
+X-Gm-Gg: ASbGncsxxuBmycT4nhf7+xc1yPOx7Ul9ov6yb+jmJwh9R21OZBtUkbNkDHuATww53xq
+ 8qk4PMiS4hhckF+AS6MtIWMivvCsP3PfSYEG7uGshfqmDptWMxN9nViSPiSna7+yMOQdvgXE3GM
+ 81fHJQgD9q3zOYB7fmzAOJrs8cRMs6HqQ6c8ngGFhABvWbQGNIxXLqXtumihItfBbhsGRV2H4O1
+ 2s9Hj5huFaz0SI+wZSXCG+9pbyu4Pg3s936xZJDaSWB7Rngt0w=
+X-Google-Smtp-Source: AGHT+IEBvrCQoPSVZ9VjdSgKjU7C86n9zuigE2JYsVRZBB5oQ1RemhVbYcsZR4FVdgb24Mqkqw2tiQ==
+X-Received: by 2002:a17:902:ea08:b0:212:63db:bb15 with SMTP id
+ d9443c01a7336-21501b593b5mr106675755ad.38.1732803182166; 
+ Thu, 28 Nov 2024 06:13:02 -0800 (PST)
+Received: from carbon-x1.. ([2a01:e0a:e17:9700:16d2:7456:6634:9626])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-215219851d1sm12967795ad.191.2024.11.28.05.10.01
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 28 Nov 2024 05:10:04 -0800 (PST)
-Message-ID: <4a90b96b-fd8c-426a-aae7-fccba441feb3@ventanamicro.com>
-Date: Thu, 28 Nov 2024 10:10:00 -0300
+ d9443c01a7336-215218f452csm13829005ad.48.2024.11.28.06.12.55
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 28 Nov 2024 06:13:01 -0800 (PST)
+From: =?UTF-8?q?Cl=C3=A9ment=20L=C3=A9ger?= <cleger@rivosinc.com>
+To: qemu-riscv@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Bin Meng <bin.meng@windriver.com>
+Cc: =?UTF-8?q?Cl=C3=A9ment=20L=C3=A9ger?= <cleger@rivosinc.com>,
+ Weiwei Li <liwei1518@gmail.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Ved Shanbhogue <ved@rivosinc.com>, Atish Patra <atishp@rivosinc.com>,
+ qemu-devel@nongnu.org, Frank Chang <frank.chang@sifive.com>
+Subject: [PATCH v6 1/9] target/riscv: fix henvcfg potentially containing stale
+ bits
+Date: Thu, 28 Nov 2024 15:12:21 +0100
+Message-ID: <20241128141230.284320-2-cleger@rivosinc.com>
+X-Mailer: git-send-email 2.45.2
+In-Reply-To: <20241128141230.284320-1-cleger@rivosinc.com>
+References: <20241128141230.284320-1-cleger@rivosinc.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 3/3] hw/riscv: Add the checking if DTB overlaps to
- kernel or initrd
-To: Jim Shu <jim.shu@sifive.com>, qemu-devel@nongnu.org, qemu-riscv@nongnu.org
-Cc: Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bmeng.cn@gmail.com>,
- Weiwei Li <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
-References: <20241120153935.24706-1-jim.shu@sifive.com>
- <20241120153935.24706-4-jim.shu@sifive.com>
-Content-Language: en-US
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <20241120153935.24706-4-jim.shu@sifive.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::632;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pl1-x632.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::636;
+ envelope-from=cleger@rivosinc.com; helo=mail-pl1-x636.google.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -105,98 +107,81 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
+With the current implementation, if we had the following scenario:
+- Set bit x in menvcfg
+- Set bit x in henvcfg
+- Clear bit x in menvcfg
+then, the internal variable env->henvcfg would still contain bit x due
+to both a wrong menvcfg mask used in write_henvcfg() as well as a
+missing update of henvcfg upon menvcfg update.
+This can lead to some wrong interpretation of the context. In order to
+update henvcfg upon menvcfg writing, call write_henvcfg() after writing
+menvcfg. Clearing henvcfg upon writing the new value is also needed in
+write_henvcfg() as well as clearing henvcfg upper part when writing it
+with write_henvcfgh().
 
+Signed-off-by: Clément Léger <cleger@rivosinc.com>
+---
+ target/riscv/csr.c | 10 ++++++++--
+ 1 file changed, 8 insertions(+), 2 deletions(-)
 
-On 11/20/24 12:39 PM, Jim Shu wrote:
-> DTB is placed to the end of memory, so we will check if the start
-> address of DTB overlaps to the address of kernel/initrd.
-> 
-> Signed-off-by: Jim Shu <jim.shu@sifive.com>
-> ---
-
-Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-
->   hw/riscv/boot.c         | 25 ++++++++++++++++++++++++-
->   include/hw/riscv/boot.h |  3 +++
->   2 files changed, 27 insertions(+), 1 deletion(-)
-> 
-> diff --git a/hw/riscv/boot.c b/hw/riscv/boot.c
-> index 81d27f935e..bc8074fec8 100644
-> --- a/hw/riscv/boot.c
-> +++ b/hw/riscv/boot.c
-> @@ -70,6 +70,7 @@ char *riscv_plic_hart_config_string(int hart_count)
->   void riscv_boot_info_init(RISCVBootInfo *info, RISCVHartArrayState *harts)
->   {
->       info->kernel_size = 0;
-> +    info->initrd_size = 0;
->       info->is_32bit = riscv_is_32bit(harts);
->   }
->   
-> @@ -213,6 +214,9 @@ static void riscv_load_initrd(MachineState *machine, RISCVBootInfo *info)
->           }
->       }
->   
-> +    info->initrd_start = start;
-> +    info->initrd_size = size;
-> +
->       /* Some RISC-V machines (e.g. opentitan) don't have a fdt. */
->       if (fdt) {
->           end = start + size;
-> @@ -309,6 +313,7 @@ uint64_t riscv_compute_fdt_addr(hwaddr dram_base, hwaddr dram_size,
->       int ret = fdt_pack(ms->fdt);
->       hwaddr dram_end, temp;
->       int fdtsize;
-> +    uint64_t dtb_start, dtb_start_limit;
->   
->       /* Should only fail if we've built a corrupted tree */
->       g_assert(ret == 0);
-> @@ -319,6 +324,17 @@ uint64_t riscv_compute_fdt_addr(hwaddr dram_base, hwaddr dram_size,
->           exit(1);
->       }
->   
-> +    if (info->initrd_size) {
-> +        /* If initrd is successfully loaded, place DTB after it. */
-> +        dtb_start_limit = info->initrd_start + info->initrd_size;
-> +    } else if (info->kernel_size) {
-> +        /* If only kernel is successfully loaded, place DTB after it. */
-> +        dtb_start_limit = info->image_high_addr;
-> +    } else {
-> +        /* Otherwise, do not check DTB overlapping */
-> +        dtb_start_limit = 0;
-> +    }
-> +
->       /*
->        * A dram_size == 0, usually from a MemMapEntry[].size element,
->        * means that the DRAM block goes all the way to ms->ram_size.
-> @@ -338,7 +354,14 @@ uint64_t riscv_compute_fdt_addr(hwaddr dram_base, hwaddr dram_size,
->           temp = (dram_base < 3072 * MiB) ? MIN(dram_end, 3072 * MiB) : dram_end;
->       }
->   
-> -    return QEMU_ALIGN_DOWN(temp - fdtsize, 2 * MiB);
-> +    dtb_start = QEMU_ALIGN_DOWN(temp - fdtsize, 2 * MiB);
-> +
-> +    if (dtb_start_limit && (dtb_start < dtb_start_limit)) {
-> +        error_report("No enough memory to place DTB after kernel/initrd");
-> +        exit(1);
-> +    }
-> +
-> +    return dtb_start;
->   }
->   
->   /*
-> diff --git a/include/hw/riscv/boot.h b/include/hw/riscv/boot.h
-> index 06b51ed086..7d59b2e6c6 100644
-> --- a/include/hw/riscv/boot.h
-> +++ b/include/hw/riscv/boot.h
-> @@ -32,6 +32,9 @@ typedef struct RISCVBootInfo {
->       hwaddr image_low_addr;
->       hwaddr image_high_addr;
->   
-> +    hwaddr initrd_start;
-> +    ssize_t initrd_size;
-> +
->       bool is_32bit;
->   } RISCVBootInfo;
->   
+diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+index 5d8d0d7514..98c683df60 100644
+--- a/target/riscv/csr.c
++++ b/target/riscv/csr.c
+@@ -2383,6 +2383,8 @@ static RISCVException read_menvcfg(CPURISCVState *env, int csrno,
+     return RISCV_EXCP_NONE;
+ }
+ 
++static RISCVException write_henvcfg(CPURISCVState *env, int csrno,
++                                    target_ulong val);
+ static RISCVException write_menvcfg(CPURISCVState *env, int csrno,
+                                     target_ulong val)
+ {
+@@ -2403,6 +2405,7 @@ static RISCVException write_menvcfg(CPURISCVState *env, int csrno,
+         }
+     }
+     env->menvcfg = (env->menvcfg & ~mask) | (val & mask);
++    write_henvcfg(env, CSR_HENVCFG, env->henvcfg);
+ 
+     return RISCV_EXCP_NONE;
+ }
+@@ -2414,6 +2417,8 @@ static RISCVException read_menvcfgh(CPURISCVState *env, int csrno,
+     return RISCV_EXCP_NONE;
+ }
+ 
++static RISCVException write_henvcfgh(CPURISCVState *env, int csrno,
++                                    target_ulong val);
+ static RISCVException write_menvcfgh(CPURISCVState *env, int csrno,
+                                      target_ulong val)
+ {
+@@ -2424,6 +2429,7 @@ static RISCVException write_menvcfgh(CPURISCVState *env, int csrno,
+     uint64_t valh = (uint64_t)val << 32;
+ 
+     env->menvcfg = (env->menvcfg & ~mask) | (valh & mask);
++    write_henvcfgh(env, CSR_HENVCFGH, env->henvcfg >> 32);
+ 
+     return RISCV_EXCP_NONE;
+ }
+@@ -2513,7 +2519,7 @@ static RISCVException write_henvcfg(CPURISCVState *env, int csrno,
+         }
+     }
+ 
+-    env->henvcfg = (env->henvcfg & ~mask) | (val & mask);
++    env->henvcfg = val & mask;
+ 
+     return RISCV_EXCP_NONE;
+ }
+@@ -2546,7 +2552,7 @@ static RISCVException write_henvcfgh(CPURISCVState *env, int csrno,
+         return ret;
+     }
+ 
+-    env->henvcfg = (env->henvcfg & ~mask) | (valh & mask);
++    env->henvcfg = (env->henvcfg & 0xFFFFFFFF) | (valh & mask);
+     return RISCV_EXCP_NONE;
+ }
+ 
+-- 
+2.45.2
 
 
