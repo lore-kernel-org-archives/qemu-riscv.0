@@ -4,69 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1CC61D70E03
-	for <qemu-riscv@archiver.kernel.org>; Fri, 29 Nov 2024 02:12:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 03ADAD6EBEE
+	for <qemu-riscv@archiver.kernel.org>; Fri, 29 Nov 2024 08:37:30 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tGqUV-0007PX-8x; Thu, 28 Nov 2024 21:12:19 -0500
+	id 1tGwUj-00087v-6B; Fri, 29 Nov 2024 03:36:57 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <yfliu2008@qq.com>)
- id 1tGqUR-0007PH-Sk; Thu, 28 Nov 2024 21:12:16 -0500
-Received: from xmbghk7.mail.qq.com ([43.163.128.47])
+ id 1tGwUc-00087W-Al; Fri, 29 Nov 2024 03:36:50 -0500
+Received: from xmbghk7.mail.qq.com ([43.163.128.50])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <yfliu2008@qq.com>)
- id 1tGqUA-0007kM-EW; Thu, 28 Nov 2024 21:12:15 -0500
+ id 1tGwUQ-0007hM-V1; Fri, 29 Nov 2024 03:36:50 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qq.com; s=s201512;
- t=1732846284; bh=Sft/TtXcxXncjIHXesJa1zuFB1b6mUYiiyfkKeGhOls=;
+ t=1732869384; bh=JUZ1JvO5/7NylLAVP3fUx3InPc3mDVlQsZeagbMbhYg=;
  h=Subject:From:To:Cc:Date:In-Reply-To:References;
- b=xBnGxDTwTYNZwkU7xZSqjASZOi0Tki95DKkhhSGBsvlOBhq9ausUafmXsuoOrU2s4
- l7mIi9nXG2axkvZtbsiGaBODL0RrGe8pL2M0fcFtQCNCW/cgMJUoinQrY4Tb7U8YtH
- olpaU119LojruToxEj077mOJU5Atso1oHRvZlLqo=
+ b=HDALsLiTfj3B5ivn8Z5vuADunlLKzIPeOoAX3WPZSvrfzcBxEs1/ziM6+yaL04Y4I
+ 02uomh+OFZzIG61TKoDl6kOO29XMfgylZUVJs8Mt2YIcZq4RW6MwbqOt58oAGpeY0r
+ Evqu8a0w6VroYG4Bkim72KJcjd3NUdNPGbWCIK8g=
 Received: from [192.168.1.13] ([61.139.23.214])
- by newxmesmtplogicsvrszc25-0.qq.com (NewEsmtp) with SMTP
- id 2D6BF2C7; Fri, 29 Nov 2024 10:11:22 +0800
-X-QQ-mid: xmsmtpt1732846282t9fjudsy8
-Message-ID: <tencent_CA6E4D0C897F3ED0EF988CCE5DF541442A05@qq.com>
-X-QQ-XMAILINFO: NGX5+lQVxpC+ql2AUZRL7hgY6F4pTFvJidUPfgGgbPF5oy7MStkV98P8leuG+j
- Gt+Zt219dARoXn/3re3r9S+OBx8X3nhUx/LoypX0Zj7Xblnrhbc7y72m5M/RtnyfL2O/8SMXxnRt
- gy9yoAaCpNEDK4V5lEdFIv7F0o7eOS+PQ8iblTPKSUqzOyTplOLfJJMiqJRRNYGOfGYqr3bkKLp2
- 9UGR1BWWKc8GFEKu7EmCS2GuqNzmWJTug8q1zR5+u1i29UFqtGOjauTxgx9ZSMhbqzfzwuKH4cCh
- mWCPFs6hOcGErGYIu52EgvJLGjyoj3ny7/kkcfqXXHLbOt3TA/mLfPezS3haDw9dtnQtfnEVAqSu
- LacP2hQp2wNOldu28oaDuGHO0eGBjLxrsaL9nHH79mptB1V/KrFUPC5i4J1CX/4gn6CRbMz7LsLh
- 1x++fiaHZOPm6eap3mgiUh9SXsfIRCVnDw7c+0CyxybJ24BU2CaV7AC8mS8GX+jsBg2HQt9TnYvm
- keMe9vxDCFRd/prXDON25U15h+8pv5CyNmm6WsvDQfXYmJB89QwsqqqBXxqZXeA/cWJ5nci2B88m
- PaUR6hUeCoZ8VHgvFFphlEsVbaa+XyEJrHR++ZZkAUe8HJPwsypqil3Yh1rJpBowcqqmbiglrSmD
- cpQXX2xWZES20FDpV/yCOrHKipNdFckaQYHHrvFgHIt6JmjVE7C9mdCPYxSW05F7qKOunN3ii3aF
- ODUC/R+yxNhXdmtISGsrHVSxqLeL/ZTJ3YqpM7x86Ad2EZfzyqLmVxBF3FM3uywJ/Za7Brz4hTSY
- jn78WjaIgMgaM7ikgR2WCYvxSq/iWP7hVHM3u7reCvLHXZak3tgG4UNhJSCP2c+j7EU3Xj57V2u9
- OWVgpXKK03rKGSreWZ0DCZ54qZTlZ8REG9cjO4r4w3l2iKG8iOd2FsAyCXBjxU1Q==
-X-QQ-XMRINFO: OD9hHCdaPRBwq3WW+NvGbIU=
-X-OQ-MSGID: <3449aedb1f62485ad3ee9690c1cb39a6967d3d1f.camel@qq.com>
-Subject: Re: [PATCH v2] riscv/gdb: add virt mode debug interface
+ by newxmesmtplogicsvrszb16-1.qq.com (NewEsmtp) with SMTP
+ id 902874A1; Fri, 29 Nov 2024 16:36:02 +0800
+X-QQ-mid: xmsmtpt1732869362t4o19ro26
+Message-ID: <tencent_473EB04841ACAD201DCF67FB1D917DB8130A@qq.com>
+X-QQ-XMAILINFO: MQ+wLuVvI2LQGGFClThddbRrfJh90B0V1RQbEcdddxPGiE+HjHbhKJ6HlHCdad
+ 49EQui0GF+PLmSItnOxIuYVOxL6JYyjUf15ctd5ufadHJrJbqSbcdTm+u1D82Kcjg822gBLYDDSZ
+ PbVwnvxjSFaByduV7WSklPVM1eG+otWtqqu1JmBYNsNQnKi3OkTZQcxX6VKkfSwY6fUskhYj2ipO
+ fF/8g+PgkHcx4oiwd5NHtvfpCnME6/3cKVxj2z7gXAcJQ2RxbgUoKKJ0YW2KsbKI0zCX4shPB72n
+ UhH65Qv6gcRjiRGG9jc4vm0S5umg6qfuqcsXrmT4jnJEzrXS99cvohTUrzDlC0snzREE2x5PoyBn
+ ZQQ7qkpimV4JT08L1HWdLtQS3ryRyNQOpHEDffXun4ueqNgF8Rvkel6Slr7DrK3o2O7iuSoMpYLP
+ 5/9i3l7nlhg/5u81n9EqczNZXaUqZFHq+glRAhtGu6CscjGjXYlxDI4QdQclyPY6qd6r3c7+CYkD
+ 95DDlsslKGFJrr75Uik/B2m6DBL+2hRh1zU03L5B0eKWQoT06wREp4q0BXnF+8i+JZpOFyfb5TMU
+ I7+e4d2FYfn8JSeZ+bLf5gJC378WfiDObXD2MJ39k7E2XQGCgpslbpouoalcl6bZe4GcJw1LBlQu
+ 5EFMMsBcQ28gX0dCbJNciE63XBZNDMKnsK12dhKSaTUM8R5sPQ9TfMJ8oEpWvFRQ5HrreXmx3ASu
+ tvJi5lY6OkHfTVmqMfB6HkJXoRFuiX0q8qjUg0qydDsH9uEIlFuxBpOuQbddzUPL3CYOOtTjYHvo
+ 2XVYDcTJfKj8v+bqwPJboxM6tamL0CJL5kY/aU0KCRWZpZcxBD7AqchYhFJOxKJyzOaagP9MVaWj
+ vWdfKMIenORf9y5r3/yvOY5u01bCJYNeppvZQZSOerQLuyPUlHc9dcE1JXUwiWHXB6TSYRVYFnsd
+ b8E1qk2y04DG1/Rddl6lVl8dy7ZhGu
+X-QQ-XMRINFO: NyFYKkN4Ny6FSmKK/uo/jdU=
+X-OQ-MSGID: <dcc7bf4ba24b117a966c05399ccee0eec5148c95.camel@qq.com>
+Subject: Re: [PATCH] include virtualization mode as part of priv
 From: Yanfeng <yfliu2008@qq.com>
-To: Alex =?ISO-8859-1?Q?Benn=E9e?= <alex.bennee@linaro.org>
-Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, alistair.francis@wdc.com
-Date: Fri, 29 Nov 2024 10:11:22 +0800
-In-Reply-To: <8734jbh21e.fsf@draig.linaro.org>
-References: <tencent_B52B1EB0A504D6F690B6E6F3FD3AC9BCDC09@qq.com>
- <8734jbh21e.fsf@draig.linaro.org>
+To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>, Alistair Francis
+ <alistair23@gmail.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, Weiwei Li
+ <liwei1518@gmail.com>,  Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, Alistair
+ Francis <alistair.francis@wdc.com>
+Date: Fri, 29 Nov 2024 16:36:02 +0800
+In-Reply-To: <1f2a4b6f-7a70-4f61-a073-f6c953003d32@ventanamicro.com>
+References: <tencent_6FF30F7E2E640BEE260FD6523B6BA5486908@qq.com>
+ <CAKmqyKMP093GyTEHdAPzaV9+O_pFSv0svQRb-31QTvn9i4fxMA@mail.gmail.com>
+ <tencent_B97DED0E6971DEDD2F960CC63DFF414A2A05@qq.com>
+ <CAKmqyKO6Wjknoc1sXVm6d0BGzwcuF7VBqJdg_a1gh=6zz=KZNQ@mail.gmail.com>
+ <tencent_E6B51EACA466D65291C0E6BDFD34C8EADC09@qq.com>
+ <CAKmqyKNOXNpfekTPNOyHyYEuCXKOewCeTSFZAHpsxuC7gUzpGQ@mail.gmail.com>
+ <tencent_3335F7F1076629E3B507A48979413F43B207@qq.com>
+ <CAKmqyKNS3GWKpatFMchYJM31PtgjLn9YX+m_L8Nv=qXNMXhWmw@mail.gmail.com>
+ <tencent_F74852576B25481AF3647E0F647DEEEA0F08@qq.com>
+ <1f2a4b6f-7a70-4f61-a073-f6c953003d32@ventanamicro.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 User-Agent: Evolution 3.44.4-0ubuntu2 
 MIME-Version: 1.0
-Received-SPF: pass client-ip=43.163.128.47; envelope-from=yfliu2008@qq.com;
+Received-SPF: pass client-ip=43.163.128.50; envelope-from=yfliu2008@qq.com;
  helo=xmbghk7.mail.qq.com
-X-Spam_score_int: -17
-X-Spam_score: -1.8
-X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001,
+X-Spam_score_int: 48
+X-Spam_score: 4.8
+X-Spam_bar: ++++
+X-Spam_report: (4.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
+ DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_ENVFROM_END_DIGIT=0.25,
+ FREEMAIL_FROM=0.001, RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_PBL=3.335,
+ RCVD_IN_SBL_CSS=3.335, RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001,
  RCVD_IN_VALIDITY_SAFE_BLOCKED=0.001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -82,154 +94,94 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Thu, 2024-11-28 at 14:21 +0000, Alex Benn=C3=A9e wrote:
-> Yanfeng Liu <yfliu2008@qq.com> writes:
+On Thu, 2024-11-28 at 10:02 -0300, Daniel Henrique Barboza wrote:
 >=20
-> > This adds `virt` virtual register on debug interface so that users
-> > can access current virtualization mode for debugging purposes.
+>=20
+> On 11/28/24 3:39 AM, Yanfeng wrote:
+> > On Thu, 2024-11-28 at 14:46 +1000, Alistair Francis wrote:
+> > > On Thu, Nov 28, 2024 at 2:27=E2=80=AFPM Yanfeng <yfliu2008@qq.com> wr=
+ote:
+> > > >=20
+> > > > On Thu, 2024-11-28 at 14:10 +1000, Alistair Francis wrote:
+> > > > > On Thu, Nov 28, 2024 at 2:05=E2=80=AFPM Yanfeng <yfliu2008@qq.com=
+> wrote:
+> > > > > >=20
+> > > > > > Alistair.
+> > > > > >=20
+> > > > > > My initial `git send-email" on Ubuntu 22.04 wasn't lukcy:
+> > > > > >=20
+> > > > > > ```shell
+> > > > > > $ git send-email
+> > > > > > git: 'send-email' is not a git command. See 'git --help'.
+> > > > > > ```
+> > > > > >=20
+> > > > > > I need time to find a solution.
+> > > > >=20
+> > > > > You will need to install git-send-email (or something like that)
+> > > >=20
+> > > > Yes, now the "git send-email" exists and I will see how to use it
+> > > > correctly.
+> > > >=20
+> > > > >=20
+> > > > > >=20
+> > > > > > As for seperate `virt` thing, my concern is that though the V a=
+nd P
+> > > > > > status
+> > > > > > looks
+> > > > > > orthogonal, they are not so independent (e.g. `P=3D3` implies `=
+V=3D0`).
+> > > > > > Having
+> > > > > > them
+> > > > > > in one `priv` register tells user that that they should be oper=
+ated
+> > > > > > together
+> > > > > > using one command.
+> > > > >=20
+> > > > > True, but how can a user know what bit 8 means?
+> > > >=20
+> > > > Good point. Can we mention it in the user document for `priv` regis=
+ter?
+> > >=20
+> > > AFAIK we don't really have a place to document that. Which is why a
+> > > "virt" register would help as it's self documenting.
 > >=20
-> > Signed-off-by: Yanfeng Liu <yfliu2008@qq.com>
-> > ---
-> > =C2=A0gdb-xml/riscv-32bit-virtual.xml |=C2=A0 1 +
-> > =C2=A0gdb-xml/riscv-64bit-virtual.xml |=C2=A0 1 +
-> > =C2=A0target/riscv/gdbstub.c=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0 | 18 ++++++++++++------
-> > =C2=A03 files changed, 14 insertions(+), 6 deletions(-)
+> > Okay, I will try adding a `virt` virtual register in a [PATCH v2] later=
+.
+>=20
+> Can you please also change the patch title/subject to:
+>=20
+> "riscv: include virtualization mode as part of priv"
+>=20
+> Adding 'riscv' at the beginning will help people from the common qemu-dev=
+el ML
+> to
+> identify which subsystem/arch this patch is aimed at.
+>=20
+Sure, will do in updated versions later.
+
+Thanks,
+yf
+
+>=20
+> Thanks,
+>=20
+> Daniel
+>=20
+>=20
+>=20
+> > >=20
+> > > Alistair
+> > >=20
+> > > >=20
+> > > > I used bit(8) at my first try and it worked from GDB command line.
+> > > > Actually
+> > > > I
+> > > > also tried bit(4) but found GDB command takes that bit as part of P
+> > > > value so
+> > > > I
+> > > > withdrawed back to bit(8).
+> > > >=20
+> > > >=20
 > >=20
-> > diff --git a/gdb-xml/riscv-32bit-virtual.xml b/gdb-xml/riscv-32bit-
-> > virtual.xml
-> > index 905f1c555d..d44b6ca2dc 100644
-> > --- a/gdb-xml/riscv-32bit-virtual.xml
-> > +++ b/gdb-xml/riscv-32bit-virtual.xml
-> > @@ -8,4 +8,5 @@
-> > =C2=A0<!DOCTYPE feature SYSTEM "gdb-target.dtd">
-> > =C2=A0<feature name=3D"org.gnu.gdb.riscv.virtual">
-> > =C2=A0=C2=A0 <reg name=3D"priv" bitsize=3D"32"/>
-> > +=C2=A0 <reg name=3D"virt" bitsize=3D"32"/>
-> > =C2=A0</feature>
-> > diff --git a/gdb-xml/riscv-64bit-virtual.xml b/gdb-xml/riscv-64bit-
-> > virtual.xml
-> > index 62d86c237b..7c9b63d5b6 100644
-> > --- a/gdb-xml/riscv-64bit-virtual.xml
-> > +++ b/gdb-xml/riscv-64bit-virtual.xml
-> > @@ -8,4 +8,5 @@
-> > =C2=A0<!DOCTYPE feature SYSTEM "gdb-target.dtd">
-> > =C2=A0<feature name=3D"org.gnu.gdb.riscv.virtual">
-> > =C2=A0=C2=A0 <reg name=3D"priv" bitsize=3D"64"/>
-> > +=C2=A0 <reg name=3D"virt" bitsize=3D"64"/>
-> > =C2=A0</feature>
->=20
-> I assume these are mirrored in gdb not a QEMU only extension?
-
-So far I think it is a QEMU extension and the `gdb-multiarch` doesn't treat=
- is
-specially. My tests shows it basically works:
-
-```
-(gdb) ir virt
-priv           0x3	prv:3 [Machine]
-virt           0x0	0
-(gdb) set $priv =3D 2
-(gdb) ir virt
-priv           0x1	prv:1 [Supervisor]
-virt           0x0	0
-(gdb) set $virt =3D 1
-(gdb) ir virt
-priv           0x1	prv:1 [Supervisor]
-virt           0x1	1
-(gdb) set $virt =3D 0
-(gdb) ir virt
-priv           0x1	prv:1 [Supervisor]
-virt           0x0	0
-(gdb) set $virt =3D 1
-(gdb) ir virt
-priv           0x1	prv:1 [Supervisor]
-virt           0x1	1
-(gdb) set $priv =3D 3
-(gdb) ir virt
-priv           0x3	prv:3 [Machine]
-virt           0x0	0
-```
-
-As I am rather new to QEMU, please teach how we can add it as a QEMU only
-extension.
-
->=20
-> > diff --git a/target/riscv/gdbstub.c b/target/riscv/gdbstub.c
-> > index c07df972f1..7399003e04 100644
-> > --- a/target/riscv/gdbstub.c
-> > +++ b/target/riscv/gdbstub.c
-> > @@ -206,14 +206,14 @@ static int riscv_gdb_set_csr(CPUState *cs, uint8_=
-t
-> > *mem_buf, int n)
-> > =C2=A0
-> > =C2=A0static int riscv_gdb_get_virtual(CPUState *cs, GByteArray *buf, i=
-nt n)
-> > =C2=A0{
-> > -=C2=A0=C2=A0=C2=A0 if (n =3D=3D 0) {
-> > +=C2=A0=C2=A0=C2=A0 if (n >=3D 0 && n <=3D 1) {
-> > =C2=A0#ifdef CONFIG_USER_ONLY
-> > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 return gdb_get_regl(bu=
-f, 0);
-> > =C2=A0#else
-> > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 RISCVCPU *cpu =3D RISC=
-V_CPU(cs);
-> > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 CPURISCVState *env =3D=
- &cpu->env;
-> > =C2=A0
-> > -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 return gdb_get_regl(buf, en=
-v->priv);
-> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 return gdb_get_regl(buf, n =
-? env->virt_enabled : env->priv);
->=20
-> The range checking of n and ternary op are a bit magical here. Whats
-> wrong with a good old fashioned switch/case statement?
-thanks, I can rewrite with switch statement.
->=20
-> > =C2=A0#endif
-> > =C2=A0=C2=A0=C2=A0=C2=A0 }
-> > =C2=A0=C2=A0=C2=A0=C2=A0 return 0;
-> > @@ -221,14 +221,20 @@ static int riscv_gdb_get_virtual(CPUState *cs,
-> > GByteArray *buf, int n)
-> > =C2=A0
-> > =C2=A0static int riscv_gdb_set_virtual(CPUState *cs, uint8_t *mem_buf, =
-int n)
-> > =C2=A0{
-> > -=C2=A0=C2=A0=C2=A0 if (n =3D=3D 0) {
-> > +=C2=A0=C2=A0=C2=A0 if (n >=3D 0 && n <=3D 1) {
-> > =C2=A0#ifndef CONFIG_USER_ONLY
-> > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 RISCVCPU *cpu =3D RISC=
-V_CPU(cs);
-> > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 CPURISCVState *env =3D=
- &cpu->env;
-> > =C2=A0
-> > -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 env->priv =3D ldtul_p(mem_b=
-uf) & 0x3;
-> > -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 if (env->priv =3D=3D PRV_RE=
-SERVED) {
-> > -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 env=
-->priv =3D PRV_S;
-> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 if (n =3D=3D 0) {
-> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 env=
-->priv =3D ldtul_p(mem_buf) & 0x3;
-> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 if =
-(env->priv =3D=3D PRV_RESERVED) {
-> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0 env->priv =3D PRV_S;
-> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 }
-> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 } else {
-> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 if =
-(env->priv !=3D PRV_M) {
-> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0 env->virt_enabled =3D ldtul_p(mem_buf) & 0x1;
-> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 }
->=20
-> ditto here.
->=20
-> > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 }
-> > =C2=A0#endif
-> > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 return sizeof(target_u=
-long);
->=20
 
 
