@@ -4,64 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 853F6D729E9
-	for <qemu-riscv@archiver.kernel.org>; Fri, 29 Nov 2024 15:44:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 43E37D729E7
+	for <qemu-riscv@archiver.kernel.org>; Fri, 29 Nov 2024 15:44:53 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tH39R-0005vY-RL; Fri, 29 Nov 2024 10:43:25 -0500
+	id 1tH39M-0005rJ-Gs; Fri, 29 Nov 2024 10:43:20 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tH39Q-0005uw-9G
- for qemu-riscv@nongnu.org; Fri, 29 Nov 2024 10:43:24 -0500
-Received: from mail-ej1-x635.google.com ([2a00:1450:4864:20::635])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tH39G-0005jr-6P
+ for qemu-riscv@nongnu.org; Fri, 29 Nov 2024 10:43:16 -0500
+Received: from mail-lj1-x233.google.com ([2a00:1450:4864:20::233])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tH39O-0001UL-Ni
- for qemu-riscv@nongnu.org; Fri, 29 Nov 2024 10:43:24 -0500
-Received: by mail-ej1-x635.google.com with SMTP id
- a640c23a62f3a-a9e8522445dso253491566b.1
- for <qemu-riscv@nongnu.org>; Fri, 29 Nov 2024 07:43:22 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tH39D-0001RG-MR
+ for qemu-riscv@nongnu.org; Fri, 29 Nov 2024 10:43:13 -0500
+Received: by mail-lj1-x233.google.com with SMTP id
+ 38308e7fff4ca-2ffa12ad18cso23163521fa.2
+ for <qemu-riscv@nongnu.org>; Fri, 29 Nov 2024 07:43:10 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1732895001; x=1733499801; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=S4770bBXPnBP2gTFUY4zpq0rPST/rXd6Oo6sAl27oUs=;
- b=eehNeRAYVe7KDgq1FMwWcT54lCg+MfNRqVbqn2VatPfBw+OZQcKEXNl+jSlumCS/3z
- DU1wWb828BLx0Zujtwmg3VHYhSY3a5xxjalw/b16BUnVinWvbTN+gZ9iU5bIcB5kTtpX
- rBCRCnaxlX75mISB0TKSvYX+2WObxbYMRB89yCbf2UQxvdXPuMsZIDorqyF4xN7Mt7bn
- u4s2u7kkgXldMd9IZ2WAjSelwFZDRU7JfRjYsJ58MSn4aVoajkTFu6E8tYUypjBPWZR3
- HX2OoK8L66fwL4sUparOue1NAFvQbWk+HTiVhfH8fhl0tzPETllJ3Tt23PccscmQ/Sv3
- NiEA==
+ d=linaro.org; s=google; t=1732894989; x=1733499789; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=1RLfsFXOEvBUdgrExJ9SmcrFI97co8aOxCFnt3D7XvM=;
+ b=efSD+l3JYwUlla7tCHxrhTEqpZSASgkG/S4t+nJbYMOp3yNqSeMFWghOWb39MkdZm4
+ +PM+vtEMhTmBKMo26WK8k3wM/EABNdywaE0TPbzC+JRRmjeS1tlKdMPToVN0isVZvK5M
+ vU7BzVkBi/3RmhL1qyut9ARFIVIryyHGwnaUGldnVnxcZAWUQyW36FP1ku8dzBdUiZWv
+ VyBGGetzYmmEOksZfKKqvyFOfZj/xz3/HDiUe/qLD3nCvJk/fG2rwgxNy/k72oycOoDu
+ qSqXTd/2P9ltpZRacGWZTJHrv+nFUxHMiElh6tS1X1rBnzV+fqgo08zIa9sG8fl1D6TD
+ NEFg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732895001; x=1733499801;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=S4770bBXPnBP2gTFUY4zpq0rPST/rXd6Oo6sAl27oUs=;
- b=Wlb9K8r31/4nOtqjM8G3Sgz37kBWPwgqJmCAp5j5PoddWrb0vQmYjE5k9yq+RMp1Fo
- ucnCw4Y1OzTATq8t385tmZRsIXj/gmL6IPKgP+3ho3dN+MvmJThfNwLlm81Gw9HPwu/z
- ke7XdNdc+zSn9Aj6+AP2phATqbJeeYI0fMKRBsg9oS4HyyLqGW27GGYPzUwKdaFqMZgi
- T5DKgb6v1FZ+qqbQZT9/KT748+z3jP+x3Tg07COVuQ7R3do8sVx2TXK3Zol9cIu/3gav
- 0WqPVl/4bgE1S+BhxZVrB0R9FrbPIx5H54vSpiNmp9Oz6FELkzQmdcm5XSje9tsVQzoY
- NfNg==
+ d=1e100.net; s=20230601; t=1732894989; x=1733499789;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=1RLfsFXOEvBUdgrExJ9SmcrFI97co8aOxCFnt3D7XvM=;
+ b=bVDGbREiGdi1oqPwd6c+3dpfm79cRm8lrYENY0IVSB9CIa8/JNu9t7Fd7BHBwgJYCU
+ BEDVmS56zIBzIVo1tcOw/nPI7SjTpmuneJvLoHzKC6seAVr/HUcwDsUU0VxoR5ZFkDle
+ IKqGyJH9tEhTq8nS0tLGlC+XHiq3hYOOc++W0Vtk9WozzKTi1jaYjWaYeOHf1pLy0N0i
+ NZYMbxW2XXuLqb3TvhU9UQNpe/ugPUbBZE0z/62P/ieL1vE+2stL1NsCpn9IflIGZhog
+ ga3A0ReQ8PLELGpD4mZwDeWw+mDs1J6Hw6lrTyBfb9/btu+ws2n0hN4+6bFUNq0uxAtl
+ FzQA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVnq3/fcZGbnRflQEJyKAzHbpx4d3I8CwreBzG3ZhRqN6nGs3X5+Yhj/lZ/P0zlAyfH+xQDJABr+7Pm@nongnu.org
-X-Gm-Message-State: AOJu0YxeQhTofLMcGjAwp/uienfqFP8bU3apsAHDgrFa2HxO/D5o9xf1
- aZbI4seUAYjSt7so06IBnUu1oWBngOAYeUM9Ncb1uq7dDXI82PmnU1FBTJM6TJM=
-X-Gm-Gg: ASbGncvh1Om2TwrSpzj7n1hK8A4Y7UaYS6GAxt4Wtl47sITeTBvSU4SXfyUvgc9u7RF
- cEp5XO8daPErYHh6ag+5juo+uJFIr/WTXj58IcAM61oG61yLyTIdj861A1coUr/oDqKArUTlxFD
- Npeb/LitIBweradcNYiKcgoXYh1JO9b1Ngssyrnq22DjKas8A6VBc0HkhJRdmfgbskcNP8lVwyy
- UvzZM/myCUXDK4D+TSrZEGY1x+vp9i7bJuBbM4Fd6cZeZXsMi1lrE/+FL19
-X-Google-Smtp-Source: AGHT+IHSBq5uPz4SLTPcAKlkkXT5AnHgCgKGfipswW9R8J+wh+Bo5muCoSq07sVc84HFWrgdfMX2Rw==
-X-Received: by 2002:a17:906:1baa:b0:aa5:449e:1a20 with SMTP id
- a640c23a62f3a-aa580ef33acmr768487466b.12.1732895001217; 
- Fri, 29 Nov 2024 07:43:21 -0800 (PST)
+ AJvYcCVsrZ6nXltl0qwvcgLDeQd2ib8/9EO0r6hMuzSsGbalat4YkDABP7u6SDNSz4/oNzhFWZngcFYqepJb@nongnu.org
+X-Gm-Message-State: AOJu0YwpGU0S81F8vPb9wDYjWXx6Umxw27z0C0DdajTIj6tjknGemEne
+ Iw11zvrP6u7Ogv8miMrm5P8RBQ1UezlEN0rJmivcY6ubLg/uNcc7nivTZsnHiqLudPNcJ++QPEL
+ 2
+X-Gm-Gg: ASbGncsaWtyqghqZsSwLLZz5mOh/I50jyhX7WFD6gsLwaKhRVawxghenOGc9shMlOaw
+ uqeKGmWf2EFLnsUzBDENAbHExQP2vBAHV3sf5TprZxjz+e8MXWv7Pw4yPpVJi909+LGwekQkKxi
+ rLvr95ExHayc0ZmzNogOjXQYda6hwLJz2H6z/l3/4GQXWF9T83J/jDog1Vhsoeg7PxBfRs35FMZ
+ 2T9nhooDWVltsy1FprLwhwpeJz0LgCP9QWcUkFqEvHr3Un6xhhzHZSCQMDZ
+X-Google-Smtp-Source: AGHT+IEpOnYt/eZCZsYHs2V714mgxm87yD+hi4xPO2EQGnjhmB7HBhFToVs7i2g0c1aA6Zlzvk5skA==
+X-Received: by 2002:a2e:be0d:0:b0:2ff:8e14:30a4 with SMTP id
+ 38308e7fff4ca-2ffd6007861mr65847991fa.10.1732894988967; 
+ Fri, 29 Nov 2024 07:43:08 -0800 (PST)
 Received: from m1x-phil.lan ([176.176.147.124])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-aa599973565sm183685666b.202.2024.11.29.07.43.19
+ 4fb4d7f45d1cf-5d097dd6af2sm1926150a12.48.2024.11.29.07.43.06
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Fri, 29 Nov 2024 07:43:20 -0800 (PST)
+ Fri, 29 Nov 2024 07:43:08 -0800 (PST)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Weiwei Li <liwei1518@gmail.com>,
@@ -72,18 +72,15 @@ Cc: Weiwei Li <liwei1518@gmail.com>,
  Palmer Dabbelt <palmer@dabbelt.com>, Paolo Bonzini <pbonzini@redhat.com>,
  Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-Subject: [PATCH-for-10.0 2/3] hw/char/riscv_htif: Explicit little-endian
- implementation
-Date: Fri, 29 Nov 2024 16:43:03 +0100
-Message-ID: <20241129154304.34946-3-philmd@linaro.org>
+Subject: [PATCH-for-10.0 0/3] hw/char/riscv_htif: Remove tswap64() calls
+Date: Fri, 29 Nov 2024 16:43:01 +0100
+Message-ID: <20241129154304.34946-1-philmd@linaro.org>
 X-Mailer: git-send-email 2.45.2
-In-Reply-To: <20241129154304.34946-1-philmd@linaro.org>
-References: <20241129154304.34946-1-philmd@linaro.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::635;
- envelope-from=philmd@linaro.org; helo=mail-ej1-x635.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::233;
+ envelope-from=philmd@linaro.org; helo=mail-lj1-x233.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -106,57 +103,22 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Since our RISC-V system emulation is only built for little
-endian, the HTIF device aims to interface with little endian
-memory accesses, thus we can explicit htif_mm_ops:endianness
-being DEVICE_LITTLE_ENDIAN.
+Trying to make sense of these tswap64 calls I
+figured this device could be simplified.
 
-In that case tswap64() is equivalent to le64_to_cpu(), as in
-"convert this 64-bit little-endian value into host cpu order".
-Replace to simplify.
+Tested using 'make check-{qtest,functional}'
+on both big/little endian hosts, no failure but
+I'm not sure the code path is covered.
 
-Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
----
- hw/char/riscv_htif.c | 11 ++++++-----
- 1 file changed, 6 insertions(+), 5 deletions(-)
+Philippe Mathieu-Daudé (3):
+  MAINTAINERS: Cover RISC-V HTIF interface
+  hw/char/riscv_htif: Explicit little-endian implementation
+  hw/char/riscv_htif: Clarify MemoryRegionOps expect 32-bit accesses
 
-diff --git a/hw/char/riscv_htif.c b/hw/char/riscv_htif.c
-index 0345088e8b3..3f84d8d6738 100644
---- a/hw/char/riscv_htif.c
-+++ b/hw/char/riscv_htif.c
-@@ -29,7 +29,7 @@
- #include "qemu/timer.h"
- #include "qemu/error-report.h"
- #include "exec/address-spaces.h"
--#include "exec/tswap.h"
-+#include "qemu/bswap.h"
- #include "sysemu/dma.h"
- #include "sysemu/runstate.h"
- 
-@@ -212,11 +212,11 @@ static void htif_handle_tohost_write(HTIFState *s, uint64_t val_written)
-             } else {
-                 uint64_t syscall[8];
-                 cpu_physical_memory_read(payload, syscall, sizeof(syscall));
--                if (tswap64(syscall[0]) == PK_SYS_WRITE &&
--                    tswap64(syscall[1]) == HTIF_DEV_CONSOLE &&
--                    tswap64(syscall[3]) == HTIF_CONSOLE_CMD_PUTC) {
-+                if (le64_to_cpu(syscall[0]) == PK_SYS_WRITE &&
-+                    le64_to_cpu(syscall[1]) == HTIF_DEV_CONSOLE &&
-+                    le64_to_cpu(syscall[3]) == HTIF_CONSOLE_CMD_PUTC) {
-                     uint8_t ch;
--                    cpu_physical_memory_read(tswap64(syscall[2]), &ch, 1);
-+                    cpu_physical_memory_read(le64_to_cpu(syscall[2]), &ch, 1);
-                     /*
-                      * XXX this blocks entire thread. Rewrite to use
-                      * qemu_chr_fe_write and background I/O callbacks
-@@ -324,6 +324,7 @@ static void htif_mm_write(void *opaque, hwaddr addr,
- static const MemoryRegionOps htif_mm_ops = {
-     .read = htif_mm_read,
-     .write = htif_mm_write,
-+    .endianness = DEVICE_LITTLE_ENDIAN,
- };
- 
- HTIFState *htif_mm_init(MemoryRegion *address_space, Chardev *chr,
+ MAINTAINERS          |  2 ++
+ hw/char/riscv_htif.c | 15 ++++++++++-----
+ 2 files changed, 12 insertions(+), 5 deletions(-)
+
 -- 
 2.45.2
 
