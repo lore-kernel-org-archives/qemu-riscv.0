@@ -4,72 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 66157D735F3
-	for <qemu-riscv@archiver.kernel.org>; Sat, 30 Nov 2024 06:19:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 305A9D735F3
+	for <qemu-riscv@archiver.kernel.org>; Sat, 30 Nov 2024 06:19:31 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tHGoe-0001HC-UK; Sat, 30 Nov 2024 01:18:53 -0500
+	id 1tHGox-0002Vj-HV; Sat, 30 Nov 2024 01:19:11 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <akihiko.odaki@daynix.com>)
- id 1tHGnu-00008f-2G
- for qemu-riscv@nongnu.org; Sat, 30 Nov 2024 01:18:07 -0500
-Received: from mail-pj1-x102e.google.com ([2607:f8b0:4864:20::102e])
+ id 1tHGor-00023q-KJ
+ for qemu-riscv@nongnu.org; Sat, 30 Nov 2024 01:19:07 -0500
+Received: from mail-pl1-x62a.google.com ([2607:f8b0:4864:20::62a])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <akihiko.odaki@daynix.com>)
- id 1tHGns-0003cB-Dy
- for qemu-riscv@nongnu.org; Sat, 30 Nov 2024 01:18:05 -0500
-Received: by mail-pj1-x102e.google.com with SMTP id
- 98e67ed59e1d1-2e56750bb0dso1833428a91.0
- for <qemu-riscv@nongnu.org>; Fri, 29 Nov 2024 22:18:03 -0800 (PST)
+ id 1tHGoo-0003zd-VA
+ for qemu-riscv@nongnu.org; Sat, 30 Nov 2024 01:19:05 -0500
+Received: by mail-pl1-x62a.google.com with SMTP id
+ d9443c01a7336-20cf3e36a76so23290295ad.0
+ for <qemu-riscv@nongnu.org>; Fri, 29 Nov 2024 22:19:02 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=daynix-com.20230601.gappssmtp.com; s=20230601; t=1732947483; x=1733552283;
+ d=daynix-com.20230601.gappssmtp.com; s=20230601; t=1732947541; x=1733552341;
  darn=nongnu.org; 
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=YUXcUixf2IPKMzLsXv/zPStAWQGsFjBbEFSJ51IeB38=;
- b=iGh9pM3lcHqb5lnBE2FEsLWPlD8u7CwW0jWbTDJE30iG0z6JumPSSRhjhhSYsW9tgt
- SvvtBszu26dIiHcouKqk0MebBjSGLIMuUWFx2Jt5ZXHHcQ7zD6bWS6QA4xDuZchKtRMl
- Nos1/AxhWqmdW6IEm32WRIG05Ogb6Rx7R1k+SN73/ApqGBT60kH6VI57Dk54DA1EQKV0
- xWr2lWe+lOFfcf2Hn4BZtIYrq/rIpbvtRhHJHZRzIdMf6qMpLxJHQ8HVBe3eb5qtU+BM
- rcpW2j3b/CHApeTFgS/vOYSKm8MaiCi6g2To4PEboKvZQBJzYGVPU6/lv220lRr9UvPX
- 4Udw==
+ bh=F7eEVoPnO2WKUyPFuL4ubctiQXe1HKtwH5FMNFuU+30=;
+ b=TIxnsgtVri2untZh4/5G21XY7/c7cPfWBY+XF5dyH86Zl4uunz9/cU/DPLMvXECxKq
+ PK1Q+g9XSnL7Byn3a270S2yZ0eXa/nBTY0Hv5TTbgq16lVQkCoRPcTKUYECqbkJieiH8
+ 9Z24PjOPJj0bNPa2Vsi1bqyuirard4xqsR2nZg6mL72YY85BWjMOaWNJYBkbrhgFLGQ4
+ a3Jfo5MlLMGJbQfV+ZwsTaKMdifsJpxd3Q6RxIswIEeBdiqZ7SQhyKDqcobAfaQ0g5fz
+ 4vbeXIeQPmt78oyvBgkyU8Nl/xQskYRBL3UN2Xh9PUCE8DQ95SS1BoYYJsUTU9iJqPaL
+ kqEw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732947483; x=1733552283;
+ d=1e100.net; s=20230601; t=1732947541; x=1733552341;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=YUXcUixf2IPKMzLsXv/zPStAWQGsFjBbEFSJ51IeB38=;
- b=ZZ+xcaSB9uhLYzu1lOm2IhGT8VzfZWEvbBNo+cZNDfF5Usy+Udmy/wuC0R901vW0W4
- cg3xzlgMG00EF+SV0ESSR0uGi4MbWwLUAgeo3Ee1bMDQpreBRZRjQpHzoCNnPaKQdJQR
- q6/b5L41qTCgOZIIGBfeE82bpLKCeTretU9vFDAGFgcMx4Pw1oiDJD4QWsOcb3HWEHMK
- xZHUTnCF4ehw+VgHVxSSnXhmNHiOqTmKMZXcqTOtJN1m7TsK6agoTJ47fbjxWISrj568
- m3cX1fVLrG35BE4Gsskzhcn1aRRrp7Hxbqiz7HbDpJ3PqmU3TWvIhDwjbTevuQKL+0GX
- j0AA==
+ bh=F7eEVoPnO2WKUyPFuL4ubctiQXe1HKtwH5FMNFuU+30=;
+ b=jxQeYoTxtu5/X4oTgvCH+FGhXmb/cOzKE4/emmS475M2wx6fOzqRXHq626AOMyvLyq
+ /tlOc21QNZC0tVAUQ5PSLWRR8gBKv0DAOuyLZg3Chp47jIR1NgWSjkuqCAzN3L9UStcO
+ 5d3Tj6nNlJPE9/JGE1F3R6CXmwrqh/Oej0Ws+wDP8Q00Ftql7NWGk+Fk4sEiffqgMzwx
+ K0BhmTbmwWqhCz9kKQdr9ogi1p2eV+qvrAaEg3yj78PYpq8fpmJ55ulpJytnjtqIHubT
+ wRmmNZVmPGrpu0GcYpc16dOu3xCIG8qsVjQp3Uh5ufKoAjyqDAFRB1LjDEfY9NE5uYLO
+ KjMw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWOzel3lIwoPUfZauMDynZHKQDxmVQ2uCnx++DFG4jcqFPdlJgvVizs9qgcEyUhfUoEYq7Qbo81UYfa@nongnu.org
-X-Gm-Message-State: AOJu0YyM16EWhmiw4zUEN0QT9hTdH26E0hiP0iuEu1pxn6lLs6oHLY30
- a7Q4TN6AIU61En4z0FarQDrmpL/dM4fyJNFB+CrqQn3Z45/3PRkziTZUaJ2KPPM=
-X-Gm-Gg: ASbGnct9dHO1mLQ+LDQVwD2SDw8zd2Q8RAMBOGVaNzNCcQrFp8c5ip6+hVEPkp4+Thr
- 3PfH91dORFZYsXwsgzpsihjdKbWWN74Dsje5biCiRyHlZ69ffOnlNT8WpCf9bmXjJOwNkCQ63nr
- REMyqkYmTIlrtsPoed/hkFO6dL6/BAGi0ImzWHuiyn6A2Pzrdbb1NnoTwRG7953lZhwSDmWfR5I
- wf4jwaV9OZVUQdszfFi8V8aAbytEie5XpThSil2o7DBjOZfVaBzEMHlNjZAsjg=
-X-Google-Smtp-Source: AGHT+IGsIW2KZ+Vgb5stT/Iw+LFiVKdVWN3EGjroQXdpKvhv+l+jt/uswXZAoRooOTJtM0wzDSkfoQ==
-X-Received: by 2002:a17:90b:2641:b0:2ee:693e:ed7a with SMTP id
- 98e67ed59e1d1-2ee693ef273mr5987043a91.35.1732947482916; 
- Fri, 29 Nov 2024 22:18:02 -0800 (PST)
+ AJvYcCWVsCvcwTz3nMpwi8lf7iG5nHv86O8O5YAhToEG4UUYE6VaRZ2hsSEXfnZFkm0Fp7fzzs5PDpyaQYeZ@nongnu.org
+X-Gm-Message-State: AOJu0YyGy3HEn2ykc+9MwvNn3Qu/AePe1AJU4n4Kv8b0DQZGc/5ajYev
+ LJoUAeHHyaIYKmwi6CJ9ev6jVT5HNk+OU1QBb1PBru6NS/azsAODHROvvhpwM1w=
+X-Gm-Gg: ASbGncuEe62gPrDKVzlaqFLnG7aG8fl0bPkk+7nwMyejDP49YYsIGbi8NquQLBplz0k
+ I9+9JoKQshSQI9WSi8EICE7+hWhMObW6i1CWDt4PrzPdC7OzPnVUmGH8oMG1dPAELPRli5dga1D
+ 4hTrEcMDawwWpez777sHmyiQhTrdFC2UQYUyO3h5xoK8Aj74YrVn8mSd63vk45boxo39nnCsRBH
+ V68sw96/tL1DN5OSkczhrVmN6tN33uSnxuB+OOPTnyY++hr6UG5d8tGCd+pHzA=
+X-Google-Smtp-Source: AGHT+IFLqqaBUgl6riliWebUXPUYDh35roHwCuLbYjrzZVvhqmzY0tnQgLHbDWt7XU8ZV0r1UbInPw==
+X-Received: by 2002:a17:902:f60c:b0:20b:5645:d860 with SMTP id
+ d9443c01a7336-21501d6192bmr215183985ad.36.1732947541473; 
+ Fri, 29 Nov 2024 22:19:01 -0800 (PST)
 Received: from [157.82.207.167] ([157.82.207.167])
  by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-2ee488af41dsm3077984a91.28.2024.11.29.22.17.56
+ d9443c01a7336-215341064e2sm32108515ad.137.2024.11.29.22.18.55
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 29 Nov 2024 22:18:02 -0800 (PST)
-Message-ID: <cadde1f6-57a1-4aa4-9b80-635bc86db159@daynix.com>
-Date: Sat, 30 Nov 2024 15:17:55 +0900
+ Fri, 29 Nov 2024 22:19:01 -0800 (PST)
+Message-ID: <64c65beb-f79f-482b-b239-f050960b01e0@daynix.com>
+Date: Sat, 30 Nov 2024 15:18:54 +0900
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v12 12/15] hw/vmapple/cfg: Introduce vmapple cfg region
+Subject: Re: [PATCH v12 13/15] hw/vmapple/virtio-blk: Add support for apple
+ virtio-blk
 To: Phil Dennis-Jordan <phil@philjordan.eu>, qemu-devel@nongnu.org
 Cc: agraf@csgraf.de, peter.maydell@linaro.org, pbonzini@redhat.com,
  rad@semihalf.com, quic_llindhol@quicinc.com, stefanha@redhat.com,
@@ -83,20 +84,20 @@ Cc: agraf@csgraf.de, peter.maydell@linaro.org, pbonzini@redhat.com,
  qemu-block@nongnu.org, qemu-riscv@nongnu.org, balaton@eik.bme.hu,
  Alexander Graf <graf@amazon.com>
 References: <20241129152506.59390-1-phil@philjordan.eu>
- <20241129152506.59390-13-phil@philjordan.eu>
+ <20241129152506.59390-14-phil@philjordan.eu>
 Content-Language: en-US
 From: Akihiko Odaki <akihiko.odaki@daynix.com>
-In-Reply-To: <20241129152506.59390-13-phil@philjordan.eu>
+In-Reply-To: <20241129152506.59390-14-phil@philjordan.eu>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::102e;
- envelope-from=akihiko.odaki@daynix.com; helo=mail-pj1-x102e.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::62a;
+ envelope-from=akihiko.odaki@daynix.com; helo=mail-pl1-x62a.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
 X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -115,13 +116,17 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 On 2024/11/30 0:25, Phil Dennis-Jordan wrote:
 > From: Alexander Graf <graf@amazon.com>
 > 
-> Instead of device tree or other more standardized means, VMApple passes
-> platform configuration to the first stage boot loader in a binary encoded
-> format that resides at a dedicated RAM region in physical address space.
+> Apple has its own virtio-blk PCI device ID where it deviates from the
+> official virtio-pci spec slightly: It puts a new "apple type"
+> field at a static offset in config space and introduces a new barrier
+> command.
 > 
-> This patch models this configuration space as a qdev device which we can
-> then map at the fixed location in the address space. That way, we can
-> influence and annotate all configuration fields easily.
+> This patch first creates a mechanism for virtio-blk downstream classes to
+> handle unknown commands. It then creates such a downstream class and a new
+> vmapple-virtio-blk-pci class which support the additional apple type config
+> identifier as well as the barrier command.
+> 
+> The 'aux' or 'root' device type are selected using the 'variant' property.
 > 
 > Signed-off-by: Alexander Graf <graf@amazon.com>
 > Signed-off-by: Phil Dennis-Jordan <phil@philjordan.eu>
