@@ -4,72 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 312FBD735EE
-	for <qemu-riscv@archiver.kernel.org>; Sat, 30 Nov 2024 06:15:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C8B37D735EE
+	for <qemu-riscv@archiver.kernel.org>; Sat, 30 Nov 2024 06:15:46 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tHGl7-0005g2-A2; Sat, 30 Nov 2024 01:15:13 -0500
+	id 1tHGlZ-0006gw-7s; Sat, 30 Nov 2024 01:15:44 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <akihiko.odaki@daynix.com>)
- id 1tHGl1-0005Pk-RS
- for qemu-riscv@nongnu.org; Sat, 30 Nov 2024 01:15:08 -0500
-Received: from mail-pf1-x436.google.com ([2607:f8b0:4864:20::436])
+ id 1tHGlT-0006aY-D9
+ for qemu-riscv@nongnu.org; Sat, 30 Nov 2024 01:15:35 -0500
+Received: from mail-pg1-x52f.google.com ([2607:f8b0:4864:20::52f])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <akihiko.odaki@daynix.com>)
- id 1tHGkz-0002PQ-2S
- for qemu-riscv@nongnu.org; Sat, 30 Nov 2024 01:15:07 -0500
-Received: by mail-pf1-x436.google.com with SMTP id
- d2e1a72fcca58-724d57a9f7cso2180029b3a.3
- for <qemu-riscv@nongnu.org>; Fri, 29 Nov 2024 22:15:04 -0800 (PST)
+ id 1tHGlQ-0002lO-4K
+ for qemu-riscv@nongnu.org; Sat, 30 Nov 2024 01:15:34 -0500
+Received: by mail-pg1-x52f.google.com with SMTP id
+ 41be03b00d2f7-7e6cbf6cd1dso1273653a12.3
+ for <qemu-riscv@nongnu.org>; Fri, 29 Nov 2024 22:15:31 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=daynix-com.20230601.gappssmtp.com; s=20230601; t=1732947303; x=1733552103;
+ d=daynix-com.20230601.gappssmtp.com; s=20230601; t=1732947330; x=1733552130;
  darn=nongnu.org; 
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=6v8c+4n8PNASpPmO24mcFTCtnVQLOXWkdrZBdPE8Ne0=;
- b=zSNt7BRcvNLiWe/OT0QLOHu6mzu3YD2F1paIYjYo1Tuvu/YVHEOB/T7IQ+CxZb4kyp
- iBjw8wnhMAM7/jsPLMTaqjqj0QWrbvB5Se9u05tuWbP2txP198/Gmi5yc98DUOBwrbzj
- 8383aD+C70Yts1Er3u61EZ8ytZ5u0IafBvRgMLmsDGFmJsS5NWXzUCct1bVkT5Dz5+dY
- Mh/l3cnytmQ5m+TUeSB2yqakp31+i1lqxEDTqAVNhDqGZnG1+Q1njAY9kmkjjMDxyHLB
- yts8fKrJvP+yJI8yJKIUOEGAxBIHc6TVBhe33sMaomk4YyvPLXQHL0ZNhq4O/+kOyGmg
- 9kRw==
+ bh=zsppy5mifOqwG1NxW07VQAvccK4JcXuvMoQenyGT+Gc=;
+ b=ViOOAz/6GAW4HBd3SpXLAT0eVtuaglYcucFnTWXAwnstIwKS1o0b3RJ9VfMzDxBFrS
+ henavile58fat4S0ldfcIt7bDzYwd17S6em4KxEo8PSJ0QNSp/+Z05J2y1Ler8GL7kkD
+ leRq8KUC6W0SXymD0mY5tbix6g8G9kmpb/Vcoce8TQtNULBml7CZRIGRV1odsV8gSi5Z
+ qhry41aHueA/SYFikLuWOJDB0zTOw3SrsBUnIqPTVIrsZ+M6ZCfwznmSGgLDl1dfGAVl
+ T1W7DrjJ8qgsb3QFSr5sWw4PmbSO172rVXfFvOn/UEo0qKASk7GIZeBBqrNPoM0cTURx
+ qE3A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732947303; x=1733552103;
+ d=1e100.net; s=20230601; t=1732947330; x=1733552130;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=6v8c+4n8PNASpPmO24mcFTCtnVQLOXWkdrZBdPE8Ne0=;
- b=E8PzzY368d1fAqglQQsLQ6fZxRMEnsEwtpwQvADGJE07rlmkp6l8kT5i0khJVI4r2U
- PUp5w0jg0kiKBUr2ylCjt9sFy8F7+klHgYiJpyVTv5JlXwdgtYDoZ7gnlDI8sOqeHT4l
- bH4/VhBXwArgzB45TJC7qumSIx7S7Q26zN1Qhi9902YfaVFSJXacjK8m49bsAoXgTV3x
- kILLV+HNp+f8i5WT7WPOR+2iN/nyJyuJkua3zYDRdIOAMb9EkTQ/fFMIBoTHmi5kjS+G
- mgzGg01mC21uSjQEm1CUwPn+fVRV+AhdzKrm8D9lapSlvg5Xnza+ELShBbdt/qG9nJEc
- OL1A==
+ bh=zsppy5mifOqwG1NxW07VQAvccK4JcXuvMoQenyGT+Gc=;
+ b=GLuym8Pab8pBNRZwzE6j38tFwRS4yorL2+iOLrbfa4KfU2SreHLLnVh10DWUaRN3p+
+ CpfedHXz7zq9MdcswPlAplF5Vw3ZUTcPTAHQoRjHKP6HNCynLCkzYwynj1ypnKRBmX8n
+ lBmSUjjuiE5CvfitcJWRJFB8t9etQEbY5901Gk6dCLnrbuVzQeEgkQdJEx6S/9atTu+V
+ 4V7eWUIs6zsaAOtBS0b2xJIRIq5cOKbNvePyTfh+eSXla4RrCF2cw5f4LZZEThZjCgka
+ XuYVM2BRF3jWVUmP8xgblxYS/l6cVv1RYmh5ZRj0Dvv/JgIDUJZKTYcWeLL/iZtI8NKZ
+ GuGw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUAMCaR87mCgYP9YaasJ0wQD1ci5/vPNWURxxGdYXDNweipO2rAcxhMGesirMAjKhR2NGAtAVwVr9kT@nongnu.org
-X-Gm-Message-State: AOJu0YxrAE91//GwycnoNFXfpSxaMg85haHO661P8359EU0Gendz7KeQ
- 4Hsf4mE7gKlnnFwGiCyZOUESp2V8zmuh7lo/mla2D3+J8xxcnefu9YJ60ybEDko=
-X-Gm-Gg: ASbGncvyfkZWL9mLFZMDdh4Aqes7mktiOuvUhDudGgLisARLY4WY2hXpxVBOKIHuNt+
- WtaN8ZCSVYpj9RttxEmMcw6yAdD+zgtqD6oV/Xkysg7GJ9piXCwcSvt3xELwXBVtEwg41ZmbcIU
- RlzB3kiYTb7VPUlk6/1XdpfixM6K95C/DpdWAL0BJnesxF0jCM9BEjGAzWXzHZU/5Zlh/xCkAlE
- WA4fXUiZJzwN2DqTWxzoXaj5Z1tFR7l8ErrOQo/hjrhgzvj1E0LOHDU1s7KDk8=
-X-Google-Smtp-Source: AGHT+IHMWNklXem3hK9mmjupXGtiZMZoXbiL+nMVP/Z0WhvCPpovvYTdoQfO+O5xUX7o/SOhVERSmg==
-X-Received: by 2002:a05:6a00:23cc:b0:724:e582:1a06 with SMTP id
- d2e1a72fcca58-7253003ea94mr18622709b3a.9.1732947303281; 
- Fri, 29 Nov 2024 22:15:03 -0800 (PST)
+ AJvYcCVuwui9D0hKzvobtXOOiTlaet0g5ogaKSW2TWQ8w3uQS6GTzlVih91JAQsDCURdmwm5uPlcv1gkdO0+@nongnu.org
+X-Gm-Message-State: AOJu0Yw/m4mes4dR+odFUg7Iz+i52pNWMqRV3x/tw7KYC83DmYvndvwj
+ l7150vxHAF8P4xYSCUy7wZ3lhgZnS67mea0Oi6ARRak9B7EcaipXxh5H3WmwtcQ=
+X-Gm-Gg: ASbGncsTtf6F0SILognhZqYWwjiXL4d2zuMzPeWTTsb6Wa0j7InBdESiBQQxr4zQB6q
+ EQXfWDkMaJrkykW7zMjTg4asVztC6BOS9fK6LMXFfmXXV8i0DjlLfJCdxMOo8W9EiOufNt8aeZZ
+ n4LwFAKws27cA88ghXiPe0+KK7mH2qBlYcRgE41LPTQ24hag9dZWbTvEt3EKy/Cubm9YXA1ntJv
+ NWhKr8k/I53EtJRZOVJLLI+o9WeV+GYU9JXduL/jtGoO+rocW1NqUrOs3UfoIU=
+X-Google-Smtp-Source: AGHT+IGJC/VZm0+3G5X6Gkjz6X2p6djWd/jUnysk6eBHl6ffqPLEZpZRbZIGIxHZoQs//0cCGpRaSw==
+X-Received: by 2002:a05:6a20:7349:b0:1e0:c8d9:337a with SMTP id
+ adf61e73a8af0-1e0e0b4b612mr22970054637.27.1732947330730; 
+ Fri, 29 Nov 2024 22:15:30 -0800 (PST)
 Received: from [157.82.207.167] ([157.82.207.167])
  by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-72541847925sm4461764b3a.176.2024.11.29.22.14.56
+ d2e1a72fcca58-7254182c817sm4488095b3a.170.2024.11.29.22.15.24
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 29 Nov 2024 22:15:02 -0800 (PST)
-Message-ID: <260151ca-34b9-497e-be7b-35af781a5aab@daynix.com>
-Date: Sat, 30 Nov 2024 15:14:56 +0900
+ Fri, 29 Nov 2024 22:15:30 -0800 (PST)
+Message-ID: <9930c64c-f323-41ef-a4b7-30e39fbf83bf@daynix.com>
+Date: Sat, 30 Nov 2024 15:15:22 +0900
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v12 07/15] hw/misc/pvpanic: Add MMIO interface
+Subject: Re: [PATCH v12 08/15] hvf: arm: Ignore writes to CNTP_CTL_EL0
 To: Phil Dennis-Jordan <phil@philjordan.eu>, qemu-devel@nongnu.org
 Cc: agraf@csgraf.de, peter.maydell@linaro.org, pbonzini@redhat.com,
  rad@semihalf.com, quic_llindhol@quicinc.com, stefanha@redhat.com,
@@ -83,20 +83,20 @@ Cc: agraf@csgraf.de, peter.maydell@linaro.org, pbonzini@redhat.com,
  qemu-block@nongnu.org, qemu-riscv@nongnu.org, balaton@eik.bme.hu,
  Alexander Graf <graf@amazon.com>
 References: <20241129152506.59390-1-phil@philjordan.eu>
- <20241129152506.59390-8-phil@philjordan.eu>
+ <20241129152506.59390-9-phil@philjordan.eu>
 Content-Language: en-US
 From: Akihiko Odaki <akihiko.odaki@daynix.com>
-In-Reply-To: <20241129152506.59390-8-phil@philjordan.eu>
+In-Reply-To: <20241129152506.59390-9-phil@philjordan.eu>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::436;
- envelope-from=akihiko.odaki@daynix.com; helo=mail-pf1-x436.google.com
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::52f;
+ envelope-from=akihiko.odaki@daynix.com; helo=mail-pg1-x52f.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
 X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -115,12 +115,11 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 On 2024/11/30 0:24, Phil Dennis-Jordan wrote:
 > From: Alexander Graf <graf@amazon.com>
 > 
-> In addition to the ISA and PCI variants of pvpanic, let's add an MMIO
-> platform device that we can use in embedded arm environments.
+> MacOS unconditionally disables interrupts of the physical timer on boot
+> and then continues to use the virtual one. We don't really want to support
+> a full physical timer emulation, so let's just ignore those writes.
 > 
 > Signed-off-by: Alexander Graf <graf@amazon.com>
-> Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
-> Tested-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 > Signed-off-by: Phil Dennis-Jordan <phil@philjordan.eu>
 > Reviewed-by: Akihiko Odaki <akihiko.odaki@daynix.com>
 
