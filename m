@@ -4,96 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5A799D729EC
-	for <qemu-riscv@archiver.kernel.org>; Fri, 29 Nov 2024 17:08:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 85E19D735EA
+	for <qemu-riscv@archiver.kernel.org>; Sat, 30 Nov 2024 00:15:09 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tH4U6-0006iu-Mj; Fri, 29 Nov 2024 12:08:50 -0500
+	id 1tHB8J-00079I-IL; Fri, 29 Nov 2024 19:14:47 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1tH4U0-0006i7-UK
- for qemu-riscv@nongnu.org; Fri, 29 Nov 2024 12:08:44 -0500
-Received: from mail-pl1-x632.google.com ([2607:f8b0:4864:20::632])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1tH4Tz-0008A1-GG
- for qemu-riscv@nongnu.org; Fri, 29 Nov 2024 12:08:44 -0500
-Received: by mail-pl1-x632.google.com with SMTP id
- d9443c01a7336-2142214abd2so16546685ad.0
- for <qemu-riscv@nongnu.org>; Fri, 29 Nov 2024 09:08:43 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1732900122; x=1733504922; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=t2viKvgj0wwAyRIWliYcaWM9Myznzn9A44elH3XekC0=;
- b=HayK85eSQZeP37aDCnUOJIQBERjotIENIgOoROuc4NLE4MmyGSMsck/JS+4ADwDwyz
- 8KHf2YTcLqo2t5v6/qrDZ4aBtmp4E2Lz8CeS0JH/ONSxb17Ths/M+CQgYLvjziLyvWY/
- O/C6Ot1lMQwUbXcuvhBNuNIEPlYOKXDZfJ+j/7BZfeDMoGGZ+QjgtERORk4pTLezdIz2
- V+eKiJ03wUEol39WVMV3mIGLPb/j/KMtRprR3NIXSrSjz38h/VvlUMpEb09fM6okB4r0
- EVsgMQuZwxNxTBPuJZ9FZqOETUGqm2jyJTjUPbP38QefRq2pyUW4/UCE26T2Itx2DOqj
- zIgg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732900122; x=1733504922;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=t2viKvgj0wwAyRIWliYcaWM9Myznzn9A44elH3XekC0=;
- b=cmjr80cQ+LSLQRyAGSFW0S6EjNrH7IvZeywXCon25dUwVC6gdK/qDMUsDKobUvDVQi
- vLIyaRcA301fUUGDUcfgDzossT7L8D0G6/9xNdEkMHFEEJOQTF6yRmsvO87lSIwOmo1b
- k55V+nptEUO5ZF2+oVLivYrwtVQ9djSoK4tsYTXRMMi3ixKoElqvKYKUehVy3GLbaYq0
- yTELnFbX0pTF/p5zDSPFBmKjPaN/XpXj635CpB72DHW6aDpKL7Yb88n46MmSckKfWD3u
- grE94CEQ8PlXpJUlhVLwmzkrxqeUEK+owwHJqnEKTnDHmT2ou70tvUqNkzPM8K3uIi5J
- SwjA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVfFCrSs4GnYawrrlG8Nqc8ZN6I8nO72Ydfx5B4v1nzotRCZD/TrAU5yf6w3sNehvDcKFP7k5jnXF9x@nongnu.org
-X-Gm-Message-State: AOJu0YzkShoQ/hCF27JzIIcO7jWcmPtv38yJX/Pxw+TBAZPRrMJRDjfR
- OduappVejwmHWbd/13l63V+KTN9lr6wqJLhwnDAddmvEttgm+l8AZ7MPcfnjV1s=
-X-Gm-Gg: ASbGnctodz2O7WbWE2Grzv9Ikw3PTsv+ZWIoM+8ZvTztb/I/iYwF9KPOb2Ss6411bYT
- VnwMFurmxZ4q8Gb5pjbmpCO/FvSKcEA5HK/v0VMiG0AC/2z5vp7ZcComkruHzoRV5sCs8DU0gtP
- a4pG3xzp+N4mXobjljC8K2oesZbazeiTEkrz3Lg0E5B+awMA3qPZUJYufm8wcJ+JKo1hBsD1yW9
- MZdXEAayfRcBMmztwbaHmnSwxymPGKrV1MpKGdSPcMwQXA6IgTNBDkVqOK22sc=
-X-Google-Smtp-Source: AGHT+IGhr4dmw40nMvAiTQC0CYyewCWS8cLIuUYZUTyOAdjY7jAYlPGFLaACAWwc9ubsAPykNwkrJA==
-X-Received: by 2002:a17:902:f682:b0:210:f706:dc4b with SMTP id
- d9443c01a7336-2150109af63mr152710175ad.13.1732900122016; 
- Fri, 29 Nov 2024 09:08:42 -0800 (PST)
-Received: from [192.168.68.110] ([187.101.65.72])
- by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-72541814731sm3814014b3a.143.2024.11.29.09.08.38
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 29 Nov 2024 09:08:41 -0800 (PST)
-Message-ID: <c813fcb7-8e5f-4dd2-bf58-839e76d04c28@ventanamicro.com>
-Date: Fri, 29 Nov 2024 14:08:37 -0300
+ (Exim 4.90_1) (envelope-from <yfliu2008@qq.com>)
+ id 1tHB8H-000792-BE; Fri, 29 Nov 2024 19:14:45 -0500
+Received: from out203-205-221-153.mail.qq.com ([203.205.221.153])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <yfliu2008@qq.com>)
+ id 1tHB8D-0002xU-Kq; Fri, 29 Nov 2024 19:14:45 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qq.com; s=s201512;
+ t=1732925649; bh=ER5pIegvlpZLk+d+vPNMrBTU83T1dELzHMtnQ33VELc=;
+ h=Subject:From:To:Cc:Date:In-Reply-To:References;
+ b=x8stGMlbL2osqKDiImXYVrqZNpET7ddVk6jk5tkAJQhmX5s/nbthAANmicfQoqtRX
+ DOrKSut8YuHpjIxekU5W/GNoZDQ85NTzYiMmnq3cD4PoVItWRb1gTT6rtGyaZ4QBZ+
+ cqllTzSNz1dgAFBdzbMj8UFDBqEDgmqqF7aBYhuA=
+Received: from [192.168.1.13] ([220.167.31.77])
+ by newxmesmtplogicsvrsza36-0.qq.com (NewEsmtp) with SMTP
+ id 387B90B6; Sat, 30 Nov 2024 08:14:07 +0800
+X-QQ-mid: xmsmtpt1732925647tzdse6i7p
+Message-ID: <tencent_AADD9A1292CD7CB89F16999E7BDD03895406@qq.com>
+X-QQ-XMAILINFO: NsEIGfsQmVV+LfzZuP+f31ynLVv3aiE4XmE7GUIBTNFptEIqSyEmr95KWX5hWC
+ TyCKMpE8vlDb/3sS2o7Hth7kH9hwuxvgLWUaIrQCOlMB1OKok8C3lRRaoWKuIc99Zr6/+2XvOsTf
+ 9poMYoT1vDlUsuIoFZytiRginQHZtWAgOtRR9ZJKi54Pp+120xrwy+tfrR9yKDoIkr1+yRvK3FBC
+ tdFa+a59Mg9AC37/Fof8wiwdbJZtUKBes4//yIo1k0LPh+gxPjUQbzzeWE4sDCMrCyqoGU95Kgcu
+ M9+Q+8CGEU1Ic1SGxwxE8Qe2rqvuAeuiIgbzD+HS+cJo9a3W3jo5EHZxaO3NA88bI6PXIy90SItZ
+ cc35ASnsajPqSLuV14o9x5jSlD5Wh/nEe5g8hCszXH66W4mDYLShsQxsWLjIkq2bVxZ2gsO97xvs
+ SaU1cUS0PUNKW9vZUG4TUGPHf3QvIt7CpBLsRn7c72uxDFSDCaKIxs1LUN+ZxgYNHugxTu2R+njL
+ ywWjga5cXDoroylE+U0btI68fM5KiNNrjDLJDi/2slEkGvvYfNTIyhZvYJx0zZo8GvKGGbtrWsym
+ i7LabCDszu6aw9d8OBNwTZa1kLhPqQKQR/G6bXdjQEwbU5vyUZPfb8j8lE/lbZqd+K7PQgp1pgt3
+ 1/kHecMRJ1RPF3T+zyp695kM62IPAiCBKDet47yDOZY8GjW42OWIw3826gwynLxnUZridXy0RInm
+ 4LoVksKIc2z7DPYPtKix12g76aMo7unpzfwvvIUSNbRrc+rGRfK6vZ0DjmDCLNkF8lFzdC3dKrC0
+ 40sb7T6WUJaskeHiyypxP64R9wcGB81Qog1L/4LHzWXW1NPGuksWg0+xNo/tmVAudW8s5o+5ghyT
+ hiMldqvYKYRyuwqOw1UY+39kX7Dw2lQcWdBUl5fGvQkifxA5SOoodA8tBxhp7Fr2gzjHhC7D+gO9
+ nDbhSmgoBmKQiBRAJ7iHioE41QRru/
+X-QQ-XMRINFO: MSVp+SPm3vtS1Vd6Y4Mggwc=
+X-OQ-MSGID: <f5c9906651aaf0ef084bef152651e1d556b7a9f0.camel@qq.com>
+Subject: Re: [PATCH v2] riscv/gdb: add virt mode debug interface
+From: Yanfeng Liu <yfliu2008@qq.com>
+To: Alex =?ISO-8859-1?Q?Benn=E9e?= <alex.bennee@linaro.org>
+Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, alistair.francis@wdc.com
+Date: Sat, 30 Nov 2024 08:14:07 +0800
+In-Reply-To: <87r06ufjiz.fsf@draig.linaro.org>
+References: <tencent_B52B1EB0A504D6F690B6E6F3FD3AC9BCDC09@qq.com>
+ <8734jbh21e.fsf@draig.linaro.org>
+ <tencent_CA6E4D0C897F3ED0EF988CCE5DF541442A05@qq.com>
+ <87r06ufjiz.fsf@draig.linaro.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+User-Agent: Evolution 3.44.4-0ubuntu2 
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH-for-10.0 3/3] hw/char/riscv_htif: Clarify MemoryRegionOps
- expect 32-bit accesses
-To: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- qemu-devel@nongnu.org
-Cc: Weiwei Li <liwei1518@gmail.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- =?UTF-8?Q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>,
- Bin Meng <bmeng.cn@gmail.com>, qemu-riscv@nongnu.org,
- Palmer Dabbelt <palmer@dabbelt.com>, Paolo Bonzini <pbonzini@redhat.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
-References: <20241129154304.34946-1-philmd@linaro.org>
- <20241129154304.34946-4-philmd@linaro.org>
-Content-Language: en-US
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <20241129154304.34946-4-philmd@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::632;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pl1-x632.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+Received-SPF: pass client-ip=203.205.221.153; envelope-from=yfliu2008@qq.com;
+ helo=out203-205-221-153.mail.qq.com
+X-Spam_score_int: 2
+X-Spam_score: 0.2
+X-Spam_bar: /
+X-Spam_report: (0.2 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
+ DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_ENVFROM_END_DIGIT=0.25,
+ FREEMAIL_FROM=0.001, HELO_DYNAMIC_IPADDR=1.951, RCVD_IN_DNSWL_NONE=-0.0001,
+ RCVD_IN_MSPIKE_H2=-0.93, RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001,
+ RCVD_IN_VALIDITY_SAFE_BLOCKED=0.001, RDNS_DYNAMIC=0.982, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -109,56 +85,140 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
+On Fri, 2024-11-29 at 09:59 +0000, Alex Benn=C3=A9e wrote:
+> Yanfeng <yfliu2008@qq.com> writes:
+>=20
+> > On Thu, 2024-11-28 at 14:21 +0000, Alex Benn=C3=A9e wrote:
+> > > Yanfeng Liu <yfliu2008@qq.com> writes:
+> > >=20
+> > > > This adds `virt` virtual register on debug interface so that users
+> > > > can access current virtualization mode for debugging purposes.
+> > > >=20
+> > > > Signed-off-by: Yanfeng Liu <yfliu2008@qq.com>
+> > > > ---
+> > > > =C2=A0gdb-xml/riscv-32bit-virtual.xml |=C2=A0 1 +
+> > > > =C2=A0gdb-xml/riscv-64bit-virtual.xml |=C2=A0 1 +
+> > > > =C2=A0target/riscv/gdbstub.c=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0 | 18 ++++++++++++------
+> > > > =C2=A03 files changed, 14 insertions(+), 6 deletions(-)
+> > > >=20
+> > > > diff --git a/gdb-xml/riscv-32bit-virtual.xml b/gdb-xml/riscv-32bit-
+> > > > virtual.xml
+> > > > index 905f1c555d..d44b6ca2dc 100644
+> > > > --- a/gdb-xml/riscv-32bit-virtual.xml
+> > > > +++ b/gdb-xml/riscv-32bit-virtual.xml
+> > > > @@ -8,4 +8,5 @@
+> > > > =C2=A0<!DOCTYPE feature SYSTEM "gdb-target.dtd">
+> > > > =C2=A0<feature name=3D"org.gnu.gdb.riscv.virtual">
+> > > > =C2=A0=C2=A0 <reg name=3D"priv" bitsize=3D"32"/>
+> > > > +=C2=A0 <reg name=3D"virt" bitsize=3D"32"/>
+> > > > =C2=A0</feature>
+> > > > diff --git a/gdb-xml/riscv-64bit-virtual.xml b/gdb-xml/riscv-64bit-
+> > > > virtual.xml
+> > > > index 62d86c237b..7c9b63d5b6 100644
+> > > > --- a/gdb-xml/riscv-64bit-virtual.xml
+> > > > +++ b/gdb-xml/riscv-64bit-virtual.xml
+> > > > @@ -8,4 +8,5 @@
+> > > > =C2=A0<!DOCTYPE feature SYSTEM "gdb-target.dtd">
+> > > > =C2=A0<feature name=3D"org.gnu.gdb.riscv.virtual">
+> > > > =C2=A0=C2=A0 <reg name=3D"priv" bitsize=3D"64"/>
+> > > > +=C2=A0 <reg name=3D"virt" bitsize=3D"64"/>
+> > > > =C2=A0</feature>
+> > >=20
+> > > I assume these are mirrored in gdb not a QEMU only extension?
+> >=20
+> > So far I think it is a QEMU extension and the `gdb-multiarch` doesn't t=
+reat
+> > is
+> > specially. My tests shows it basically works:
+> >=20
+> > ```
+> > (gdb) ir virt
+> > priv=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 0x3=C2=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0prv:3 [Machine]
+> > virt=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 0x0=C2=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A00
+> > (gdb) set $priv =3D 2
+> > (gdb) ir virt
+> > priv=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 0x1=C2=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0prv:1 [Supervisor]
+> > virt=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 0x0=C2=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A00
+> > (gdb) set $virt =3D 1
+> > (gdb) ir virt
+> > priv=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 0x1=C2=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0prv:1 [Supervisor]
+> > virt=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 0x1=C2=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A01
+> > (gdb) set $virt =3D 0
+> > (gdb) ir virt
+> > priv=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 0x1=C2=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0prv:1 [Supervisor]
+> > virt=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 0x0=C2=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A00
+> > (gdb) set $virt =3D 1
+> > (gdb) ir virt
+> > priv=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 0x1=C2=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0prv:1 [Supervisor]
+> > virt=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 0x1=C2=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A01
+> > (gdb) set $priv =3D 3
+> > (gdb) ir virt
+> > priv=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 0x3=C2=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0prv:3 [Machine]
+> > virt=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 0x0=C2=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A00
+> > ```
+>=20
+> A gdbstub test case would be useful for this although I don't know if
+> the RiscV check-tcg tests switch mode at all.
+>=20
+> >=20
+> > As I am rather new to QEMU, please teach how we can add it as a QEMU on=
+ly
+> > extension.
+>=20
+> You don't need to extend the XML from GDB, you can build a specific one
+> for QEMU extensions. For example:
+>=20
+> =C2=A0=C2=A0=C2=A0 gdb_feature_builder_init(&param.builder,
+> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0 &cpu->dyn_sysreg_feature.desc,
+> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0 "org.qemu.gdb.arm.sys.regs",
+> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0 "system-registers.xml",
+> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0 base_reg);
+>=20
+> This exports all the system registers QEMU knows about and GDB can
+> access generically. Note the id is org.qemu..., indicating its our
+> schema not gdbs.
+Thanks for teaching, I need time to digest. I guess more feature builder AP=
+Is
+are needed (like append_reg) and the getter/setter callbacks might be at a
+different place.
+
+BTW, compared to adding virtual register `virt`, how do you think if we sha=
+re
+the V bit as part of existing `priv` register?
+
+Or maybe we shall talk to GDB community to get their opinions? If they agre=
+e to
+add a few words about V bit here
+https://sourceware.org/gdb/current/onlinedocs/gdb.html/RISC_002dV-Features.=
+html,
+then it saves us a lot.=20
+
+>=20
 
 
-On 11/29/24 12:43 PM, Philippe Mathieu-Daudé wrote:
-> Looking at htif_mm_ops[] read/write handlers, we notice they
-> expect 32-bit values to accumulate into to the 'fromhost' and
-> 'tohost' 64-bit variables. Explicit by setting the .impl
-> min/max fields.
-> 
-> Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
-> ---
-> Notes
-> 
-> 1/ these variables belong to HTIFState but are declared statically!
-> 
->    static uint64_t fromhost_addr, tohost_addr, begin_sig_addr, end_sig_addr;
-> 
-> 2/ I believe a 64-bit implementation would simplify the logic.
 
 
-Perhaps. We would need to check with the protocol first. There might be
-a reason why we're using 64 bit read/writes internally while doing 32 bits
-r/w in the device.
 
-
-For now:
-
-Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-
-> 
-> 3/ This is a non-QOM device model!
-> 
-> Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
-> ---
->   hw/char/riscv_htif.c | 4 ++++
->   1 file changed, 4 insertions(+)
-> 
-> diff --git a/hw/char/riscv_htif.c b/hw/char/riscv_htif.c
-> index 3f84d8d6738..db69b5e3ca7 100644
-> --- a/hw/char/riscv_htif.c
-> +++ b/hw/char/riscv_htif.c
-> @@ -325,6 +325,10 @@ static const MemoryRegionOps htif_mm_ops = {
->       .read = htif_mm_read,
->       .write = htif_mm_write,
->       .endianness = DEVICE_LITTLE_ENDIAN,
-> +    .impl = {
-> +        .min_access_size = 4,
-> +        .max_access_size = 4,
-> +    },
->   };
->   
->   HTIFState *htif_mm_init(MemoryRegion *address_space, Chardev *chr,
 
 
