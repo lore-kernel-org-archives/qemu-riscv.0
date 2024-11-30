@@ -4,72 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1571FD735EE
-	for <qemu-riscv@archiver.kernel.org>; Sat, 30 Nov 2024 06:17:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 42BA8D735EE
+	for <qemu-riscv@archiver.kernel.org>; Sat, 30 Nov 2024 06:18:47 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tHGmt-0007ut-86; Sat, 30 Nov 2024 01:17:23 -0500
+	id 1tHGoF-0000Rr-IP; Sat, 30 Nov 2024 01:18:29 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <akihiko.odaki@daynix.com>)
- id 1tHGmQ-0007fh-F2
- for qemu-riscv@nongnu.org; Sat, 30 Nov 2024 01:16:35 -0500
-Received: from mail-pl1-x62a.google.com ([2607:f8b0:4864:20::62a])
+ id 1tHGnB-00084T-Ec
+ for qemu-riscv@nongnu.org; Sat, 30 Nov 2024 01:17:27 -0500
+Received: from mail-pl1-x632.google.com ([2607:f8b0:4864:20::632])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <akihiko.odaki@daynix.com>)
- id 1tHGmN-0002xL-Cn
- for qemu-riscv@nongnu.org; Sat, 30 Nov 2024 01:16:34 -0500
-Received: by mail-pl1-x62a.google.com with SMTP id
- d9443c01a7336-21271dc4084so19254335ad.2
- for <qemu-riscv@nongnu.org>; Fri, 29 Nov 2024 22:16:30 -0800 (PST)
+ id 1tHGmt-0003Ac-JH
+ for qemu-riscv@nongnu.org; Sat, 30 Nov 2024 01:17:05 -0500
+Received: by mail-pl1-x632.google.com with SMTP id
+ d9443c01a7336-2155157c58cso5582135ad.0
+ for <qemu-riscv@nongnu.org>; Fri, 29 Nov 2024 22:17:00 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=daynix-com.20230601.gappssmtp.com; s=20230601; t=1732947389; x=1733552189;
+ d=daynix-com.20230601.gappssmtp.com; s=20230601; t=1732947419; x=1733552219;
  darn=nongnu.org; 
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=iAADfka+wJ/6sNT0BcTzF7GinB4EOzBtyw1Ynff8yIo=;
- b=Pl49k1B7pvKog+SXw0l3/mK8xGj3Z+Gw5RyCPUF/V4Ts6517lZyARrLfSdssUNrD/u
- +ELOuVOivEG8kDuFuUWoA8i7G94wY0pbzocnMNwS11PnZuWJrS+ybGdMdpb9n6J0dx7v
- basYQOxYiY4PvAVMPRTUE8DOy+d8jP5I1OiGb3RcsvV+FyG/gJmi9SVHvhF1Kx7ZKDDy
- G1xypxl+J4IIxT0hPRxs5SSRJnIGn/DZW/j2g7xKaIEYMcCJacHeAEltnvL5qlEuISIg
- MpiKUcN6p2LBBbi8awUR0WO6A8PrLNIqKxwPHTTaC7FFWxtb8Llb6bK2dAKqn0h2fdQU
- jFxQ==
+ bh=SMWMQmaQNFbs3p5wPSSszQIsEvcT+kEUXSJDlAfkhFg=;
+ b=OQ9uEgERxgHrwzbNTU6aRTmtjnKIlWGtIuHjJl5Wj5bhPsYlh5iuL8h9d/toTuKWuB
+ Hq1G8kEJ+9/TtMhChBSyBGmzrTfNIFDN3Epo1Pg2kIQ2TlDWGEineusHBlK6p6XcP4QA
+ MqM4ELAkUZGe7dB2o0dblpr4Jcwo6Cgkgt5jSJUwT9rF56CHKInVPLga36RZSYVY1mQA
+ Dh9rqPvWm+UYPtVno2vdGEig2dhxJj7Pw7JWFBTnh74ny6LLYI6DABtyn4lHbJCUvTkl
+ QrJjuK5OPAtlFdg236w0tlJ9arffG/2r+hCNm6jHyIlqcbOQU5UY4b1e1lSxmm5Fqh3O
+ zYZg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732947389; x=1733552189;
+ d=1e100.net; s=20230601; t=1732947419; x=1733552219;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=iAADfka+wJ/6sNT0BcTzF7GinB4EOzBtyw1Ynff8yIo=;
- b=EV0flYf2HPqAGrkHhjU0g0si5umdbxDPx6KDypGNV9bFA19cQzpvwZ8govrkq7AzMN
- B+wBmojaZDaspLwSLNFk1ipRKTQACN81dBtNFqHuFpdW/VAMzJjfY/S9vXVzT6V+dIuT
- 1tKb/G4HZAb0Ff4KmV3RpV2BgEw3kqeiYE96dplqgCjIsb9ZXZv8q0D58nXEc/may4VF
- xHluqFqFhoODmM0/0VRBvOFBryyIi+P9l3dI/HGwFyu7LUDx7m+IDIeZCHYbMg4Cm6KK
- Xiu2t7M5kQTT9gB7+fPApnuOigdINB0Au/DlOSGe/VsRjavIWcoXtIBoSMI8FdisN4NL
- ClCw==
+ bh=SMWMQmaQNFbs3p5wPSSszQIsEvcT+kEUXSJDlAfkhFg=;
+ b=kC9CYNbPD5ny1ITpAb427CJxGBMNjbrcc3rDSCEwRsXceaxlxGdVdNFtw65LzDbwm0
+ YWUDKkAJ9bbzPKezMSOJoC+6eHbxX5ezdIHN0zTymW4o2SQDkpr2HIktavvuwNuLVOR0
+ k2zFAohYsdgM5uvsoOMksewkdLN2ZvHJyL2U0WiIc7xFNSyjyikpPSEYQtjXF8vO2UmN
+ ii24VC6FUuXOB51bCv5dQThMt777ajvNYompOpTlFrPg6AbtaIwjwC98EAIsh7kDsx3a
+ Of4tg5MOmLh3C21uiLjOabnasMYmgc+glJoJpkw/n3TU0dlLZmcs81kAJT5GgaYWFGi7
+ FQIA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVuMEUaKQ+MmiwfGwUQJ/X7L7qTlEfQkeJQqtYbSC35Uols8M5bskAz6MYCFxp0z2kV9M7kidizYyTx@nongnu.org
-X-Gm-Message-State: AOJu0YzzgcMRq1Q39ztKgeaYiNRpbdEGevO2ZUPDvSfCjQABDcKut/ye
- b0Es5DF6cRhqf1Zpyzn6u//UgQS2+0gFhArx6Fjjywp6HYApt9MoAwBRm2ju7WA=
-X-Gm-Gg: ASbGncu75z8fJ5zPCgsFJ3o+vxxdVRJJ5oBb1GOQ5rrPGCPTfSyJiLQ/tUI4ZYaNkyW
- 6O1jUxnc3BVxl9dRyzzFjCuUMSn0wRp5lqlPGg4xZ8UDeDOQ/u2bs2OwI0MQH7BwW1rEAXAO5MW
- v7sMWb/izHShGaCt9debWKcx0831iKfI6oRa7Fy8721e6GBEN8PdwvrACStk1GC8GDxL2sx7nZh
- GBNQ20Fylh/N4jKN7uB53nYVbGnb9+VLFctQhM/vlkMFWD/D1l+UvTQLpZJGe8=
-X-Google-Smtp-Source: AGHT+IGaaoWFFFzAjAjsqvjmMY9EtET2q2/bw/RllNwXGeAO7t4Hw/9L3k4/iRSduOdhpfyIlhsbGw==
-X-Received: by 2002:a17:902:cec1:b0:20b:5b1a:209 with SMTP id
- d9443c01a7336-2150108cac1mr201300605ad.9.1732947389627; 
- Fri, 29 Nov 2024 22:16:29 -0800 (PST)
+ AJvYcCWOHgH4U9ye48cnjk4YU5iYaTH/OIHQmozGMYHjwsd7lkhVzIzEu+O2jn41EH82OkdHWD//R1Ivue1+@nongnu.org
+X-Gm-Message-State: AOJu0Yzi3IPKbalcp9csxbsW6Tm5HEpi6a/PGpEb2AjFGA1vTODDBv/9
+ LiylZH6DtRJWYw9hCB6HSZ7LPRCKpfNMJZquRcgoutKhygV69pGa0215IeESaF0=
+X-Gm-Gg: ASbGncuuegAujC+YxQ622dPkx86q7Y8j0neDMedI0XHRslBU+V4xVY7BaxlYtX0ZAxt
+ ETmIfRtup0Uz2kng6UwtWuT8+kS7jY1WaxxiLm0NlWHX4r4mjWWWe/BApz/mn7Jc/jpFf8X5GRE
+ qf2mG1/xwslbzFpWtB777FqZrb2apFwOcJ2i0aITEm4/VYAxuaHPIa7oRQuzBJRsZScFhG6G+E0
+ OOxj4pGLOCyEYxN9W4ysTBmaYDeQSlCZ3iWpeH44QX/+0LTN68g6faHW7QID4Y=
+X-Google-Smtp-Source: AGHT+IHdgLpmBQWQf82JwBGq8q7QIpIow/7LNwAgRaz0kozm05KgQe9esf+MmtJnS5oK3ZpDikNylw==
+X-Received: by 2002:a17:902:e881:b0:20c:c086:4998 with SMTP id
+ d9443c01a7336-21501f622a5mr127905335ad.55.1732947419396; 
+ Fri, 29 Nov 2024 22:16:59 -0800 (PST)
 Received: from [157.82.207.167] ([157.82.207.167])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-2154be15034sm15955885ad.205.2024.11.29.22.16.23
+ d9443c01a7336-215475446e0sm19259595ad.92.2024.11.29.22.16.52
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 29 Nov 2024 22:16:29 -0800 (PST)
-Message-ID: <80bc3a21-9b0a-422e-a6dd-c58d39c7441f@daynix.com>
-Date: Sat, 30 Nov 2024 15:16:22 +0900
+ Fri, 29 Nov 2024 22:16:59 -0800 (PST)
+Message-ID: <68b1a9fc-3a73-4c6a-92df-af69d20ce59b@daynix.com>
+Date: Sat, 30 Nov 2024 15:16:51 +0900
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v12 10/15] hw/vmapple/aes: Introduce aes engine
+Subject: Re: [PATCH v12 11/15] hw/vmapple/bdif: Introduce vmapple backdoor
+ interface
 To: Phil Dennis-Jordan <phil@philjordan.eu>, qemu-devel@nongnu.org
 Cc: agraf@csgraf.de, peter.maydell@linaro.org, pbonzini@redhat.com,
  rad@semihalf.com, quic_llindhol@quicinc.com, stefanha@redhat.com,
@@ -83,14 +84,14 @@ Cc: agraf@csgraf.de, peter.maydell@linaro.org, pbonzini@redhat.com,
  qemu-block@nongnu.org, qemu-riscv@nongnu.org, balaton@eik.bme.hu,
  Alexander Graf <graf@amazon.com>
 References: <20241129152506.59390-1-phil@philjordan.eu>
- <20241129152506.59390-11-phil@philjordan.eu>
+ <20241129152506.59390-12-phil@philjordan.eu>
 Content-Language: en-US
 From: Akihiko Odaki <akihiko.odaki@daynix.com>
-In-Reply-To: <20241129152506.59390-11-phil@philjordan.eu>
+In-Reply-To: <20241129152506.59390-12-phil@philjordan.eu>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::62a;
- envelope-from=akihiko.odaki@daynix.com; helo=mail-pl1-x62a.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::632;
+ envelope-from=akihiko.odaki@daynix.com; helo=mail-pl1-x632.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -115,11 +116,13 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 On 2024/11/30 0:25, Phil Dennis-Jordan wrote:
 > From: Alexander Graf <graf@amazon.com>
 > 
-> VMApple contains an "aes" engine device that it uses to encrypt and
-> decrypt its nvram. It has trivial hard coded keys it uses for that
-> purpose.
+> The VMApple machine exposes AUX and ROOT block devices (as well as USB OTG
+> emulation) via virtio-pci as well as a special, simple backdoor platform
+> device.
 > 
-> Add device emulation for this device model.
+> This patch implements this backdoor platform device to the best of my
+> understanding. I left out any USB OTG parts; they're only needed for
+> guest recovery and I don't understand the protocol yet.
 > 
 > Signed-off-by: Alexander Graf <graf@amazon.com>
 > Signed-off-by: Phil Dennis-Jordan <phil@philjordan.eu>
