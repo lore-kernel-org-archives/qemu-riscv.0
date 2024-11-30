@@ -4,73 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E627ED735EE
-	for <qemu-riscv@archiver.kernel.org>; Sat, 30 Nov 2024 06:15:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 72AD6D735EE
+	for <qemu-riscv@archiver.kernel.org>; Sat, 30 Nov 2024 06:15:18 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tHGkW-0004Ct-4W; Sat, 30 Nov 2024 01:14:36 -0500
+	id 1tHGkj-0004nl-1w; Sat, 30 Nov 2024 01:14:49 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <akihiko.odaki@daynix.com>)
- id 1tHGkH-00042N-KW
- for qemu-riscv@nongnu.org; Sat, 30 Nov 2024 01:14:24 -0500
-Received: from mail-pg1-x533.google.com ([2607:f8b0:4864:20::533])
+ id 1tHGkh-0004i8-84
+ for qemu-riscv@nongnu.org; Sat, 30 Nov 2024 01:14:47 -0500
+Received: from mail-pl1-x631.google.com ([2607:f8b0:4864:20::631])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <akihiko.odaki@daynix.com>)
- id 1tHGkC-00028q-SX
- for qemu-riscv@nongnu.org; Sat, 30 Nov 2024 01:14:18 -0500
-Received: by mail-pg1-x533.google.com with SMTP id
- 41be03b00d2f7-7fbd76941ccso1806087a12.2
- for <qemu-riscv@nongnu.org>; Fri, 29 Nov 2024 22:14:14 -0800 (PST)
+ id 1tHGkf-0002GB-H7
+ for qemu-riscv@nongnu.org; Sat, 30 Nov 2024 01:14:46 -0500
+Received: by mail-pl1-x631.google.com with SMTP id
+ d9443c01a7336-21290973bcbso24177845ad.3
+ for <qemu-riscv@nongnu.org>; Fri, 29 Nov 2024 22:14:45 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=daynix-com.20230601.gappssmtp.com; s=20230601; t=1732947254; x=1733552054;
+ d=daynix-com.20230601.gappssmtp.com; s=20230601; t=1732947284; x=1733552084;
  darn=nongnu.org; 
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=HlKfcc4cbagcfZTiyYPu766Il1CxRL+XljhzeDMsrTw=;
- b=3KJqirg2K6AOhkVFP6pYQvgn1JtrzgqWoy3Q6K3VPPWEJqoTuBS6IPu0wpb+4ZOPAu
- k6kpPxWJ+c5oD+IJCV021nUPxGENY0qDjuS8mMPRg6HTEAw4dus9N9vrqDZEpjjJaxES
- 18C3MYqinwoN+puq65JmWKmovg75v05ighUPh9alO76CX2U3FJW7JR1ALwb9n1JUEfWD
- /yg2L2FEnlyK+e24EsvkJsb2E2Nb/z1HGuuIIYFyhObLlcaNN7x9kiz3NQbUZqhLVowQ
- nGbUXpKTaDZE9+dBhe9DdpLIARA3zVjF2/sN3KtRqKLIKBYMaTotJz+lcYlHUhhxq5eR
- rmug==
+ bh=5csVjrGoh28OAUAki4L3dqIWI/wSyCSHOlktOlqqTn0=;
+ b=ZRR2R4s4lU9xHig3M4vO1oQMj1e3PNMRWQpz2tbXY/z0jeK38YYEs9xqUvf1U4bfLd
+ XwkYZU/B6v3kIWzTP39eGQ2KbIbZKikdHpvcwQbEcs+sxZ+DL1nlYuOC6tyJjGUuG+W5
+ wdwE4nEf8yph+Z4qH+ZvkRKQn+QuSFHBAJJVVg+LTZxsTIbOmIzt87h3GQTA2IlXu5cr
+ 6a+rTRY8b/0OBNzZaWri7PuG5DrbLkLnpPsRpQrbBLSvWt7l20UV9KMUBoaYLqa92CVl
+ vDlbGndloycmBBw7NxqVW+cjB0S4BHugZ11UV+Pvd0kUGO/8LWtR17nqMpqzpwNH37VN
+ i0ug==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1732947254; x=1733552054;
+ d=1e100.net; s=20230601; t=1732947284; x=1733552084;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=HlKfcc4cbagcfZTiyYPu766Il1CxRL+XljhzeDMsrTw=;
- b=ZqAVDbhIWtz/Ltbrp9/b0unhYffQOvVsmzqv/kEbvdZ8I8LoO1UXqtDhkOlSOUCOvl
- rob1GwCn9aM1HKNMbGemfXECrt1tscukf3CHPbh3y6wP7JAkxI9UPyUHOnQ2+Ad3QrdX
- Pn6fqm653eq5bArhm/YYyZxnB0sIUtSMQFP0pc+3jGzzV5dKIhutw7RvXh4TetSrtUs8
- j+LjwDFD3rMqggv6HRtCdafyRXQ3IPTv1Y0dk1nFU3LTReRUayY0T/FljhvD7J3fBAhr
- t/W6xdA790k8nM8+GA/wuSsh0+mh/NIzCpLNt9LOJN1wXZ+IwyajK+YXF+woQOzxJmct
- tRcQ==
+ bh=5csVjrGoh28OAUAki4L3dqIWI/wSyCSHOlktOlqqTn0=;
+ b=G6wZFW0QcsrrkirGzYtQLW6v9gSFnRl7hqzBJI/lJP0IFLJlAyPbfhsNeLpgwEWyL6
+ 5yrUh4crwtOIk4xQZWQeUkCIkX93Ouo06ceZgKqSbNfK2bcue5FhQReuvDEyZaM+X3p/
+ Y1hnNePrg1KG/kIBJUoeLvQyzEfnQHmJXH4FWjW68sOgxNjRllajUdKtriO86R67/eNt
+ RPeZyKX57oBlhfwRELHdmcaKEKqrDVe1L8nG4rgGqzkmb1xDfiO2cXyWGLl5RcB5MgvM
+ b9XWJy8MeP8VSN/ULY0USR4E3m0FyJHl/M7q4KFqCO6lSMElyX3uOkleaaCROcY8lhRB
+ tAsA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWrU/uIheEvnpATMyqLJR41boV0+UNawyyrTWn4NkIhku+ssgvGJwqYttKaQYtK3QYFYX3MtOk3ukj5@nongnu.org
-X-Gm-Message-State: AOJu0Ywm4g8p7dNMlb2eoIanwxIEXLPddHOaCRv3EJ1lCMI6FW9GnqBh
- 8XKTFVVJ8jEP3u9/pu6XccabzkJ20bcx1ik9BVe9ucJNYiZPsGUZos23P5L43v8=
-X-Gm-Gg: ASbGncsuOrh2DUXDV79k+yMlGUlUbo++yS4tKR2GSJ6qSqH4dE9LwnygblTqrGxvKam
- NYJX3+HK7An2h/OumInG+M0m0wbecpjiqSZV370/Wxax7oAkWyiPCzp22D9D8k3Q4fTPw/XvM9e
- luF+sdiJw6SAD9u/9IzyTVvCo2Gc1U7qO4Y7OqDjTUiTJjdHeuWBHlXUHyIqNUIZTNIq8J54613
- LEvwDc31TeICn1uJFquRHP9m0cFiFC6J8Zy8smN28b8eP5IPslNTm6gtiznaPs=
-X-Google-Smtp-Source: AGHT+IEYIhg+UrmWSJuwEixDlrdpu1iVPERUjad/M6gcv6ANFMa4g5jtp60Ra2P7rN0WGAZ1mTyEmQ==
-X-Received: by 2002:a05:6a21:e90:b0:1db:d738:f2ff with SMTP id
- adf61e73a8af0-1e0e0ac69demr23710101637.2.1732947253903; 
- Fri, 29 Nov 2024 22:14:13 -0800 (PST)
+ AJvYcCWH37Ld5e5pzQ0RKPLto76PFmKRuBHStwAgVu6fLVv+ovfknkdyVI9pPnXxyZBgUs8KXwyz9fT8Io9s@nongnu.org
+X-Gm-Message-State: AOJu0Yx899v3g/jEIS02DhbgpCkKxjVnswIv+d546X+09Hgi9xLxs9xW
+ POmt6l/XTXVw//dfFK/5KO+HXITPv9nYBqk6skaTxclN0crQd55aN46/dj4lHU4=
+X-Gm-Gg: ASbGncux3CiZ+CuB0U2XIe8s8Daxwk/8xY0+OiCM7eAbhF9pa2f/3twBTvneVO96qDL
+ YhUdOFwD5UhJPG3EYBcRWhQZ+FLUTcr0ioAp0OoOTjJWuUR2P4QocjceStWnC55FJrt5mnJ6I1i
+ j2Yz/ud6FLtKdi4h2s0me2wdefs70NDXMBfDdc4reUs9CwcLc/W7TaHcAN8QjOdawKSg+zqJKXF
+ 7cTcKfoyy8X8aGiCPCNUA7Ujg6hfJI7cPruyaCEw48p1hMPK3rOzeWHcWFhWI8=
+X-Google-Smtp-Source: AGHT+IFum8fHMKzFU19YOFN8+uBJ5s+EfvYaWMtm4Yz5c/HPGPsVtBzudWtNiGpEBr6csMP5VKj6Kw==
+X-Received: by 2002:a17:902:da91:b0:211:aa9e:b808 with SMTP id
+ d9443c01a7336-215010854d6mr188611005ad.6.1732947284254; 
+ Fri, 29 Nov 2024 22:14:44 -0800 (PST)
 Received: from [157.82.207.167] ([157.82.207.167])
  by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-72541761523sm4487121b3a.1.2024.11.29.22.14.07
+ d9443c01a7336-21539e88cefsm26903535ad.182.2024.11.29.22.14.37
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 29 Nov 2024 22:14:13 -0800 (PST)
-Message-ID: <21f34858-0298-40d1-af75-c2d97cdd159e@daynix.com>
-Date: Sat, 30 Nov 2024 15:14:06 +0900
+ Fri, 29 Nov 2024 22:14:43 -0800 (PST)
+Message-ID: <446f2514-4ac5-4672-8be4-726379939b2e@daynix.com>
+Date: Sat, 30 Nov 2024 15:14:37 +0900
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v12 04/15] hw/display/apple-gfx: Adds configurable mode
- list
+Subject: Re: [PATCH v12 06/15] hw: Add vmapple subdir
 To: Phil Dennis-Jordan <phil@philjordan.eu>, qemu-devel@nongnu.org
 Cc: agraf@csgraf.de, peter.maydell@linaro.org, pbonzini@redhat.com,
  rad@semihalf.com, quic_llindhol@quicinc.com, stefanha@redhat.com,
@@ -81,16 +80,17 @@ Cc: agraf@csgraf.de, peter.maydell@linaro.org, pbonzini@redhat.com,
  alistair.francis@wdc.com, bmeng.cn@gmail.com, liwei1518@gmail.com,
  dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com, jcmvbkbc@gmail.com,
  marcandre.lureau@redhat.com, berrange@redhat.com, qemu-arm@nongnu.org,
- qemu-block@nongnu.org, qemu-riscv@nongnu.org, balaton@eik.bme.hu
+ qemu-block@nongnu.org, qemu-riscv@nongnu.org, balaton@eik.bme.hu,
+ Alexander Graf <graf@amazon.com>
 References: <20241129152506.59390-1-phil@philjordan.eu>
- <20241129152506.59390-5-phil@philjordan.eu>
+ <20241129152506.59390-7-phil@philjordan.eu>
 Content-Language: en-US
 From: Akihiko Odaki <akihiko.odaki@daynix.com>
-In-Reply-To: <20241129152506.59390-5-phil@philjordan.eu>
+In-Reply-To: <20241129152506.59390-7-phil@philjordan.eu>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::533;
- envelope-from=akihiko.odaki@daynix.com; helo=mail-pg1-x533.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::631;
+ envelope-from=akihiko.odaki@daynix.com; helo=mail-pl1-x631.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -113,15 +113,13 @@ Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 On 2024/11/30 0:24, Phil Dennis-Jordan wrote:
-> This change adds a property 'display_modes' on the graphics device
-> which permits specifying a list of display modes. (screen resolution
-> and refresh rate)
+> From: Alexander Graf <graf@amazon.com>
 > 
-> The property is an array of a custom type to make the syntax slightly
-> less awkward to use, for example:
+> We will introduce a number of devices that are specific to the vmapple
+> target machine. To keep them all tidily together, let's put them into
+> a single target directory.
 > 
-> -device '{"driver":"apple-gfx-pci", "display-modes":["1920x1080@60", "3840x2160@60"]}'
-> 
+> Signed-off-by: Alexander Graf <graf@amazon.com>
 > Signed-off-by: Phil Dennis-Jordan <phil@philjordan.eu>
 > Reviewed-by: Akihiko Odaki <akihiko.odaki@daynix.com>
 
