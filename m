@@ -4,94 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 93173E6C5F7
-	for <qemu-riscv@archiver.kernel.org>; Tue,  3 Dec 2024 03:40:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EEBB4E6C5FD
+	for <qemu-riscv@archiver.kernel.org>; Tue,  3 Dec 2024 04:40:21 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tIJk0-0007yA-8k; Mon, 02 Dec 2024 22:38:24 -0500
+	id 1tIKha-00019o-8z; Mon, 02 Dec 2024 23:39:58 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <fea.wang@sifive.com>)
- id 1tIJjx-0007wY-PS
- for qemu-riscv@nongnu.org; Mon, 02 Dec 2024 22:38:21 -0500
-Received: from mail-pl1-x62b.google.com ([2607:f8b0:4864:20::62b])
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1tIKhX-00019H-O5; Mon, 02 Dec 2024 23:39:55 -0500
+Received: from mail-vs1-xe32.google.com ([2607:f8b0:4864:20::e32])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <fea.wang@sifive.com>)
- id 1tIJjv-0005a0-Up
- for qemu-riscv@nongnu.org; Mon, 02 Dec 2024 22:38:21 -0500
-Received: by mail-pl1-x62b.google.com with SMTP id
- d9443c01a7336-21578cfad81so17184655ad.3
- for <qemu-riscv@nongnu.org>; Mon, 02 Dec 2024 19:38:18 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1tIKhW-0003ik-8O; Mon, 02 Dec 2024 23:39:55 -0500
+Received: by mail-vs1-xe32.google.com with SMTP id
+ ada2fe7eead31-4ae82bad101so1127360137.0; 
+ Mon, 02 Dec 2024 20:39:53 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1733197098; x=1733801898; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ d=gmail.com; s=20230601; t=1733200792; x=1733805592; darn=nongnu.org;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=zG3P8sWTJ54W6skoaY1t1xd3E7zmiL03Dx51lEImsvQ=;
- b=ENBVvGVswUdRG0iSOpaJmVkm5mKOZxJwVLTwr3MenoxxGi5Zi7QVAZdGyzI+SVRkTa
- Ys+3vbKAB5H2vFNMPupuWXJVIfiWF8/8goJPoRcIQ5AwIkRbtqL6EchACEMafaRDENJy
- 1BT6/pIVy+7L94QY621mhlhHxhMUyXd8zT6srxppH+j+lPmVNbEkX/l0JJoyBZ9jPcaZ
- JDbKKVlXld0KZeNFF+cJi964fIfM4QaTdNWnFNv476LEkTgG4WMawmh+S7Udo9jV9Kxw
- ln+CLHbCqU5/3bw9raov69F8x39MaUGvnfDo0vjftMLCi/T5sDLSRcWmrhscTSMBqmSm
- 5Oyg==
+ bh=BWp3BuvttCU+bKBvYX9KyJXE8RQPFrQDKligAi5CXwo=;
+ b=SIQ4sHbAXvwxNz0YUWMCwxVj77j5ijNPIIjt3PZXUAFtK6ftOAff6JYZJnlkBiGDEn
+ xHZ+Wt/Iv7nC3IXrjc32VyipITgxUG77OpR7Ajgr+hJgMSN4goucU6RXhaUl0XAjDhlk
+ oEgBIXOQwh+p1+GTcUIcMW+s5XUqzXPHoqt16qpx02grbZgv6VxQsu25pfsu51A5eNqx
+ 5zPv7DQzhVLydbVXd430tdcGWt5dx9J4fkDrF9m3SB8ZvnaIgkFy93EyK56NhNQnzW5h
+ oGC2hW8sUDJnnUfn1Qerd8weqGYfebBlBIH0hJk//WsW+tJ9cqw23O3osyGvlazqEXXg
+ fAYQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733197098; x=1733801898;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ d=1e100.net; s=20230601; t=1733200792; x=1733805592;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=zG3P8sWTJ54W6skoaY1t1xd3E7zmiL03Dx51lEImsvQ=;
- b=OanYh5KzDCGq2N/Chmq9kwYwitmhwMO7h1iNbiYuyhhhAa0Ddjx1hoj+zRXnnjAWRM
- NhNiQbJYCCjyQzaUpbjIXMgzUPal5beCgukRjok4bE4A1h21uhjI6S+WU5vvjWk6RkAS
- RrQAuZIhCrZqH8IyoCKXkdyyvjjJLn6U+ieu+j/ptF2ZnOUJA1EeQNWOOz9i/KU//4Kt
- NAXLB7Sn5lvV1twP/YVEP+pRm6aLpwW/3I2d8eWz1PonvB525nljC3xSk5yaTlgj4/Zi
- 3cc5+zeZOGLMR4lRP8GczCcTJTGwYvAmRS3h6Y5I7/jD+0sm9qY+poHt0i1pGpml6rFl
- 8CPg==
+ bh=BWp3BuvttCU+bKBvYX9KyJXE8RQPFrQDKligAi5CXwo=;
+ b=bIyM+0+eq8x+Im1cHDrR4uTyH5xwfmEzt9lC6IhZ2JJtYQo23h1E/Niym3IVF1Y9Wd
+ RLA0Gs5RN7r/vmuwaeGGSv+frifSrKy0rLjWUno9Zdhz4F25uSbkJ4w5CSFCAgxCW3J1
+ HyGzry1i3lDemeuwgBBO4PGkcXOKiU7V3o7C4nhOqJ2BmrT/JpGdcSTWHQ7g/0n62PUm
+ c+aiLyiETl5vQ4eqR7LnjbSszuy+/gWNkP2r4NKBVv1s0sg5RVM4VBtJxRUXl+tfNX5a
+ ey719ziRzx3rk0TPfMlj7qAWzQ+6P62T+pLYAEduJpMGwg4ruX8Fy6E8LXx/YV17tI7M
+ BPcg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCX6cQJxNG7trhvKqX0XhMoA049vg8iqS69FxPjZ0TdX43CwrGOq97Yrb8wOlq7Z00nkY+W1vCMZwYCC@nongnu.org
-X-Gm-Message-State: AOJu0YzmsO8r+IBCUeo4WjoYEehEhCToKnS007rf/RwsfzLbLTL27THb
- g4pAkDMrGArfdDGVOLCYM17Flg/hBaIbRUKjheYwU8F0skf4RmpKVFCZ4N4kYQk=
-X-Gm-Gg: ASbGncv/bI/nogQnbYforJCF3bK/eYJ6lPF8QXJWdvsFt4hP/dm9a1FuVwGbE42j2+q
- oePxfo8TY9h0N3wqjdzGJnNpl1eAL/JdGohidNUD/C7Bhu+LQXxZaCJXv1Ljw/N0Cci7ck12Yo4
- PEoEr5fGz+0iL2HMadnaco2WV9LeuQossoTEIe4B4cKQ7Z5eOhYoE75pJxoirLqZMmp3NgHKckc
- s8u1X5SDYNlsola0kIE6ATUHsZOB242ZXXY7RAr5fzhQtg7byyN8GEivrTY3U9HA/lTBHY4pqTl
- KOaFEZZc
-X-Google-Smtp-Source: AGHT+IEpV2YVstExh60DlC/JmmsYebJZFXHzs6amPgyrOb478bEiin5HHyYAmLyQOP8GqG7+TQlBVA==
-X-Received: by 2002:a17:902:db06:b0:215:7dbf:f3de with SMTP id
- d9443c01a7336-215bd2005a9mr14010545ad.28.1733197097796; 
- Mon, 02 Dec 2024 19:38:17 -0800 (PST)
-Received: from hsinchu36-syssw02.internal.sifive.com ([210.176.154.34])
- by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-21566732e1fsm47111135ad.134.2024.12.02.19.38.15
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 02 Dec 2024 19:38:17 -0800 (PST)
-From: "Fea.Wang" <fea.wang@sifive.com>
-To: qemu-devel@nongnu.org,
-	qemu-riscv@nongnu.org
-Cc: Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bmeng.cn@gmail.com>,
- Weiwei Li <liwei1518@gmail.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- "Fea.Wang" <fea.wang@sifive.com>, Frank Chang <frank.chang@sifive.com>,
- Jim Shu <jim.shu@sifive.com>
-Subject: [PATCH v5 5/6] target/riscv: Expose svukte ISA extension
-Date: Tue,  3 Dec 2024 11:49:31 +0800
-Message-Id: <20241203034932.25185-6-fea.wang@sifive.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20241203034932.25185-1-fea.wang@sifive.com>
-References: <20241203034932.25185-1-fea.wang@sifive.com>
+ AJvYcCXxKwKOfBVRXSzCzJRaFvbXuzGMuv+j0l1I0VjWT8xY28F3gALG5kXHObHjUs5JRUhyhifACA04eagK@nongnu.org
+X-Gm-Message-State: AOJu0Yy2P/fnG0fIBIMiG36HcP5Ns+gfBxVTzSCgSpkUxhmvSlE105Gc
+ VjCd6LR5Xinhu5joFl9i93baDd3GilD2EHMpOf+zrXcj2ytm0gEx5pTmyXXJPm5QKrf4taRGDtT
+ LwA5R8/F0F8GrCECmIkRIiJzHydU=
+X-Gm-Gg: ASbGncs1wmMWxJLt0XwzWQ0CiQRva5GvLXCzVB97k3X/Y7dUJNqjA245Q6eCoN+nfGP
+ sCAZl/wW78oT/gUlv8B8PeBSEPpzISME4
+X-Google-Smtp-Source: AGHT+IEysaj0rFAH+eXuCAxMksl5l1DbbPBrOC4Mb/m8fs+JTmazmkAypS1gvRmDqRIahbzycMpIo5pg88IM7s3QtGM=
+X-Received: by 2002:a05:6102:54a5:b0:4af:5f8d:65d with SMTP id
+ ada2fe7eead31-4af9727089dmr1833449137.15.1733200792405; Mon, 02 Dec 2024
+ 20:39:52 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::62b;
- envelope-from=fea.wang@sifive.com; helo=mail-pl1-x62b.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+References: <cover.1733063076.git.neither@nut.email>
+ <1f9b7a8c8bca228529957a5ca62ad778870215ff.1733063076.git.neither@nut.email>
+In-Reply-To: <1f9b7a8c8bca228529957a5ca62ad778870215ff.1733063076.git.neither@nut.email>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Tue, 3 Dec 2024 13:39:26 +0900
+Message-ID: <CAKmqyKMhdZxZ-yQkcmt8RESQbAF1GEooN_1e4O-7LseTXsJw1w@mail.gmail.com>
+Subject: Re: [RFC PATCH v3 09/11] target/riscv: call plugin trap callbacks
+To: Julian Ganz <neither@nut.email>
+Cc: qemu-devel@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>, 
+ Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bmeng.cn@gmail.com>, 
+ Weiwei Li <liwei1518@gmail.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>, 
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
+ "open list:RISC-V TCG CPUs" <qemu-riscv@nongnu.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2607:f8b0:4864:20::e32;
+ envelope-from=alistair23@gmail.com; helo=mail-vs1-xe32.google.com
+X-Spam_score_int: -17
+X-Spam_score: -1.8
+X-Spam_bar: -
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -107,37 +98,69 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Add "svukte" in the ISA string when svukte extension is enabled.
+On Tue, Dec 3, 2024 at 4:30=E2=80=AFAM Julian Ganz <neither@nut.email> wrot=
+e:
+>
+> We recently introduced API for registering callbacks for trap related
+> events as well as the corresponding hook functions. Due to differences
+> between architectures, the latter need to be called from target specific
+> code.
+>
+> This change places hooks for RISC-V targets.
 
-Signed-off-by: Fea.Wang <fea.wang@sifive.com>
-Reviewed-by: Frank Chang <frank.chang@sifive.com>
-Reviewed-by: Jim Shu <jim.shu@sifive.com>
 Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
----
- target/riscv/cpu.c | 2 ++
- 1 file changed, 2 insertions(+)
 
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 8447ad0dfb..e10240c02a 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -199,6 +199,7 @@ const RISCVIsaExtData isa_edata_arr[] = {
-     ISA_EXT_DATA_ENTRY(svinval, PRIV_VERSION_1_12_0, ext_svinval),
-     ISA_EXT_DATA_ENTRY(svnapot, PRIV_VERSION_1_12_0, ext_svnapot),
-     ISA_EXT_DATA_ENTRY(svpbmt, PRIV_VERSION_1_12_0, ext_svpbmt),
-+    ISA_EXT_DATA_ENTRY(svukte, PRIV_VERSION_1_13_0, ext_svukte),
-     ISA_EXT_DATA_ENTRY(svvptc, PRIV_VERSION_1_13_0, ext_svvptc),
-     ISA_EXT_DATA_ENTRY(xtheadba, PRIV_VERSION_1_11_0, ext_xtheadba),
-     ISA_EXT_DATA_ENTRY(xtheadbb, PRIV_VERSION_1_11_0, ext_xtheadbb),
-@@ -1661,6 +1662,7 @@ const RISCVCPUMultiExtConfig riscv_cpu_vendor_exts[] = {
- 
- /* These are experimental so mark with 'x-' */
- const RISCVCPUMultiExtConfig riscv_cpu_experimental_exts[] = {
-+    MULTI_EXT_CFG_BOOL("x-svukte", ext_svukte, false),
-     DEFINE_PROP_END_OF_LIST(),
- };
- 
--- 
-2.34.1
+Alistair
 
+> ---
+>  target/riscv/cpu_helper.c | 9 +++++++++
+>  1 file changed, 9 insertions(+)
+>
+> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+> index 0a3ead69ea..6da9bd4629 100644
+> --- a/target/riscv/cpu_helper.c
+> +++ b/target/riscv/cpu_helper.c
+> @@ -34,6 +34,7 @@
+>  #include "debug.h"
+>  #include "tcg/oversized-guest.h"
+>  #include "pmp.h"
+> +#include "qemu/plugin.h"
+>
+>  int riscv_env_mmu_index(CPURISCVState *env, bool ifetch)
+>  {
+> @@ -1806,6 +1807,7 @@ void riscv_cpu_do_interrupt(CPUState *cs)
+>          !(env->mip & (1 << cause));
+>      bool vs_injected =3D env->hvip & (1 << cause) & env->hvien &&
+>          !(env->mip & (1 << cause));
+> +    uint64_t last_pc =3D env-> pc;
+>      target_ulong tval =3D 0;
+>      target_ulong tinst =3D 0;
+>      target_ulong htval =3D 0;
+> @@ -1820,6 +1822,7 @@ void riscv_cpu_do_interrupt(CPUState *cs)
+>          case RISCV_EXCP_SEMIHOST:
+>              do_common_semihosting(cs);
+>              env->pc +=3D 4;
+> +            qemu_plugin_vcpu_hostcall_cb(cs, last_pc, env->pc);
+>              return;
+>  #endif
+>          case RISCV_EXCP_LOAD_GUEST_ACCESS_FAULT:
+> @@ -1999,6 +2002,12 @@ void riscv_cpu_do_interrupt(CPUState *cs)
+>          riscv_cpu_set_mode(env, PRV_M, virt);
+>      }
+>
+> +    if (async) {
+> +        qemu_plugin_vcpu_interrupt_cb(cs, last_pc, env->pc);
+> +    } else {
+> +        qemu_plugin_vcpu_exception_cb(cs, last_pc, env->pc);
+> +    }
+> +
+>      /*
+>       * Interrupt/exception/trap delivery is asynchronous event and as pe=
+r
+>       * zicfilp spec CPU should clear up the ELP state. No harm in cleari=
+ng
+> --
+> 2.45.2
+>
+>
 
