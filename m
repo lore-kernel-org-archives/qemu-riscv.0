@@ -4,83 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0C196E77160
-	for <qemu-riscv@archiver.kernel.org>; Tue,  3 Dec 2024 23:17:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1FE4AE77160
+	for <qemu-riscv@archiver.kernel.org>; Tue,  3 Dec 2024 23:17:45 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tIc6V-0001Fu-Rj; Tue, 03 Dec 2024 18:14:51 -0500
+	id 1tIc6d-0001Li-IG; Tue, 03 Dec 2024 18:14:59 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <atishp@rivosinc.com>)
- id 1tIc6U-0001FW-Q6
- for qemu-riscv@nongnu.org; Tue, 03 Dec 2024 18:14:50 -0500
-Received: from mail-pl1-x62a.google.com ([2607:f8b0:4864:20::62a])
+ id 1tIc6a-0001Iy-Oa
+ for qemu-riscv@nongnu.org; Tue, 03 Dec 2024 18:14:56 -0500
+Received: from mail-pf1-x430.google.com ([2607:f8b0:4864:20::430])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <atishp@rivosinc.com>)
- id 1tIc6S-0001Hx-Gi
- for qemu-riscv@nongnu.org; Tue, 03 Dec 2024 18:14:50 -0500
-Received: by mail-pl1-x62a.google.com with SMTP id
- d9443c01a7336-215b45a40d8so16394015ad.1
- for <qemu-riscv@nongnu.org>; Tue, 03 Dec 2024 15:14:47 -0800 (PST)
+ id 1tIc6Z-0001KN-13
+ for qemu-riscv@nongnu.org; Tue, 03 Dec 2024 18:14:56 -0500
+Received: by mail-pf1-x430.google.com with SMTP id
+ d2e1a72fcca58-7250906bc63so245219b3a.1
+ for <qemu-riscv@nongnu.org>; Tue, 03 Dec 2024 15:14:54 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1733267686; x=1733872486;
+ d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1733267693; x=1733872493;
  darn=nongnu.org; 
- h=cc:to:content-transfer-encoding:mime-version:message-id:date
- :subject:from:from:to:cc:subject:date:message-id:reply-to;
- bh=3sbbrb3u3w1ShGoF78/nxrI4WgGN/FndqIitCD43mSY=;
- b=G4UiumtFmZJzMmTojZOLI4e7CffsnpICDGvTRex05WicdHT4sUWLMYJU7Wv77Fp1Zf
- 3lPIct6cUAU0uZVBsHQOExaz23ufU0ydndT/XPuOGf6M7bjes6hDTE80P6jQkHZl3T/W
- HUQvQKCkNhN4T9t9F7UoG8ljAVZ9BuW80A3hCGnc0KSkxtacnH2I9NOgA5KIY3rxZ1nz
- jEGW9Ir7Gd2M0JmaUKxWPm0bDv+newLkxb3KRMkAkOCX+MIbmOXhEJr+SiIoMRgxrJSm
- J7GcY1N7I3i/Y1upj02tPHVhz9iimpSnpX+mhSb4FGcoB1TFGW7yMSav/phdeDfw8e8L
- Jfng==
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :mime-version:subject:date:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=LdFNd6tBzEDXZhXA50p/zVov//j7cpToaodVCiWJBjM=;
+ b=boTPZ/n+V+wzJC2ma9+vfISsqGUDI3VJOvnsfL7Zt3bIz1AbEufsyLA4pNVMU9d7UP
+ V8H44/7k9/0S8V96Ix3RQp6/AUc99ysk2qhBl+bQmU3vKs0yN+DMF6JWb2wZbeSWthUv
+ JWNFdJ4CCyeJ8rOeFYh3YXmy+c6tOzc2D2JxfQIBGncWtW4Wvs3/fcrMp/3Ox8qkfScI
+ HdQXtEnWhlX7ki/s1joo3dSTkt2KKW1GkHr+FavZUfJRvohT/addsF9GyPFyWubFD2Ez
+ Dnd5fo7RciGW2sA6h8XTAoasakkmoXGjmsxRccVBQ43Gxf3WUlTPzCLkkz9iNO3UmMov
+ vgEQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733267686; x=1733872486;
- h=cc:to:content-transfer-encoding:mime-version:message-id:date
- :subject:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=3sbbrb3u3w1ShGoF78/nxrI4WgGN/FndqIitCD43mSY=;
- b=QoKeLsntBfFQGRvi3F6mD/YWqAP8YxTXLyikmHc2sR7njuLlJxgEQI2ngmrbrNKQR6
- gSUpneNT/ul4XQg7ScFp/p3qiEMOdFlhnFoxFF6bR1sb5eMotsX5JEuzbfniySZFo5Zr
- linoK3/jrJkLeG2R94eh/ezcM4wZlo6nFzRGxQTRml/0ZxKR6TEOEQw5T/Bb1KEw0YEf
- eOuhuCvLAtE+JnWJdMW4nyQL3yz/mZLvNl6AUHZkZqkyP26eX1Ywmoc80JoTNG+ovznR
- jn/nyLcP/lC4CmWPkuSyV6VOADkjseS34HwWIUHR8Nh8WItHgHdSsRaAMcGowoCS79nG
- fcyA==
-X-Gm-Message-State: AOJu0Yyki9R7/mzwJHyO4Yz4fRleEmE2TM1JFQRjqSToxfRPl94ZFmLP
- BlI32yXIcb1/icqnfc4CF7ThnNdM/r0OnDlqjrUrDlIwHMKX+EzWvKESt6hZcS4=
-X-Gm-Gg: ASbGncs6CAMFcSSLOKx+iAp+aYrfijCIC/PsS3eI7Q5Cq7U2Z2RaDrfeHFegJehb+YY
- 0AkLjvt8dl2saibDh7QMIMzapGN5ac4qO5LpO4W7QlIxOyrD6Cizju3uCvdkJQLuf+h7AvNFxBf
- FR/v9Q32YsMlR0aUae19+c22EX7hug1E1YRBxpzm6USkPbr9w4KW+Xcz9tkOB2hlTFyFra+2rDb
- dMr6YM8e+tJA51uhroAmfwydDWluPDfq4d05Rtsinw76GxVfGZdDbEqqU1IiXU=
-X-Google-Smtp-Source: AGHT+IE1ywDm8+110NOOWtztl0N4xNHSVat+WdY38Pz4zltROOFs+j1UOpVk8Gl0B10084vyfCivzA==
-X-Received: by 2002:a17:902:ecc7:b0:215:7b7b:5cc9 with SMTP id
- d9443c01a7336-215bd0e035emr57597915ad.22.1733267685691; 
- Tue, 03 Dec 2024 15:14:45 -0800 (PST)
+ d=1e100.net; s=20230601; t=1733267693; x=1733872493;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :mime-version:subject:date:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=LdFNd6tBzEDXZhXA50p/zVov//j7cpToaodVCiWJBjM=;
+ b=g6mmx0+FSpBlOZ2IO7rGVBFSkhsaH8+/bgzBB+8yvKmnwenuSdgK9EMLCRpcO+0KFl
+ gd5qPgTLQZb4xp6oOee2aay6UT/4MTtKsbnCb3JVvNLfRJ1kiRnfzdon20aiZPfW7hEP
+ QWu7DtP5KbaHWjFypiisZyvFRPoFmZX7gOajE8s2hgrGo9eZ4cUoQ4h1un97w2XdrWET
+ /RX72UyQe8oFP4Mo84ZOd8oNdWVTfvfAH3dURYlq0/1H29Ht9pUFQj9oc84Pvqhu7h4t
+ fCfID4qEtI5jG63BmSs9XuCDrffIhGmmg+mW00ewGYzMiCF2bva9JITluHNB9SqQtcSn
+ 194w==
+X-Gm-Message-State: AOJu0Yw/bLljS3GtDnonFvASeHbW8zKs6XL+YG27efkZU89hKtWlOmc/
+ kBZheYzOALMX2dPf1QSiaTvFUff/aNoJTBUAvyA6yn28xqbOjKWv57U0BDDoqGQ=
+X-Gm-Gg: ASbGncsUyhoNFKRhUvMyp3tjp6TJZuK0rl1iAJH/Hqn6BbVkCBkwCc1aB61e7VGPuAe
+ oCi2Cu4LL8z591tTKHeansyNlab4kkseHOLZ+7CfCrVgX1To+KWlWV24PjF+92KU8gobDgEr7BX
+ N69z8gG8FmFBTipru+yRKVjG3B80n0V9VBSi8ZhVKtgH57XW0uzVM5ChK8CU0wdPJcIk7eE65vU
+ SmppjPmxJsbRdzK93A7gOvK0BOH7ToFaaoVU2UUZMPxSt/BPC6ezpEJxeWzj68=
+X-Google-Smtp-Source: AGHT+IHWFzPbwlRhVNYMoWlMbaUjvPXySpHxbh7pbKjgJTNcr4HOVgux2X9xxXjmEBOSG9lQwGGeOQ==
+X-Received: by 2002:a05:6a00:4651:b0:725:37a4:8827 with SMTP id
+ d2e1a72fcca58-7257f8dbeedmr7575973b3a.3.1733267693484; 
+ Tue, 03 Dec 2024 15:14:53 -0800 (PST)
 Received: from atishp.ba.rivosinc.com ([64.71.180.162])
  by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-7254180f78asm11032133b3a.133.2024.12.03.15.14.44
+ d2e1a72fcca58-7254180f78asm11032133b3a.133.2024.12.03.15.14.52
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 03 Dec 2024 15:14:45 -0800 (PST)
+ Tue, 03 Dec 2024 15:14:52 -0800 (PST)
 From: Atish Patra <atishp@rivosinc.com>
-Subject: [PATCH v4 00/11] Add RISC-V Counter delegation ISA extension support
-Date: Tue, 03 Dec 2024 15:14:38 -0800
-Message-Id: <20241203-counter_delegation-v4-0-c12a89baed86@rivosinc.com>
+Date: Tue, 03 Dec 2024 15:14:45 -0800
+Subject: [PATCH v4 07/11] target/riscv: Add select value range check for
+ counter delegation
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAN6QT2cC/23NSwrCMBCA4auUrI3k1aa48h4iEifTNqCJJDUop
- Xc3LeJCuvyHmW8mkjA6TORQTSRidskFX0LtKgKD8T1SZ0sTwYRimtcUwtOPGC8Wb9ibsaxTzsx
- VKdBWACPl8BGxc68VPZ1LDy6NIb7XH1ks0y8n5BaXBWUUFNfM1FK1YI7R5ZCchz2EO1nELH8K5
- 1xvKrIoSje26WSDEto/ZZ7nD74BaWD9AAAA
+Message-Id: <20241203-counter_delegation-v4-7-c12a89baed86@rivosinc.com>
+References: <20241203-counter_delegation-v4-0-c12a89baed86@rivosinc.com>
+In-Reply-To: <20241203-counter_delegation-v4-0-c12a89baed86@rivosinc.com>
 To: qemu-riscv@nongnu.org, qemu-devel@nongnu.org
 Cc: kaiwenxue1@gmail.com, Atish Patra <atishp@rivosinc.com>, 
  palmer@dabbelt.com, liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, 
  bin.meng@windriver.com, dbarboza@ventanamicro.com, alistair.francis@wdc.com, 
  Kaiwen Xue <kaiwenx@rivosinc.com>
 X-Mailer: b4 0.15-dev-13183
-Received-SPF: pass client-ip=2607:f8b0:4864:20::62a;
- envelope-from=atishp@rivosinc.com; helo=mail-pl1-x62a.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::430;
+ envelope-from=atishp@rivosinc.com; helo=mail-pf1-x430.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -102,106 +101,83 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-This series adds the counter delegation extension support. The counter
-delegation ISA extension(Smcdeleg/Ssccfg) actually depends on multiple ISA
-extensions.
+From: Kaiwen Xue <kaiwenx@rivosinc.com>
 
-1. S[m|s]csrind : The indirect CSR extension[1] which defines additional
-   5 ([M|S|VS]IREG2-[M|S|VS]IREG6) register to address size limitation of
-   RISC-V CSR address space.
-2. Smstateen: The stateen bit[60] controls the access to the registers
-   indirectly via the above indirect registers.
-3. Smcdeleg/Ssccfg: The counter delegation extensions[2]
+This adds checks in ops performed on xireg and xireg2-xireg6 so that the
+counter delegation function will receive a valid xiselect value with the
+proper extensions enabled.
 
-The counter delegation extension allows Supervisor mode to program the
-hpmevent and hpmcounters directly without needing the assistance from the
-M-mode via SBI calls. This results in a faster perf profiling and very
-few traps. This extension also introduces a scountinhibit CSR which allows
-to stop/start any counter directly from the S-mode. As the counter
-delegation extension potentially can have more than 100 CSRs, the specificaiton
-leverages the indirect CSR extension to save the precious CSR address range.
-
-Due to the dependancy of these extensions, the following extensions must be
-enabled to use the counter delegation feature in S-mode.
-
-"smstateen=true,sscofpmf=true,ssccfg=true,smcdeleg=true,smcsrind=true,sscsrind=true"
-
-This makes the qemu command line quite tedious. The previous version, I tried
-to introduce a preferred rule to enable all but it was decided that an user
-should opt to use max cpu if they don't want to enable all the dependant ISA
-extensions by hand. This series got rid of the preferred rule and added 2 
-patches for specifiying the mandatory ISA extensions via implied rule. 
-
-The first 2 patches decouple the indirect CSR usage from AIA implementation
-while patch3 adds stateen bits validation for AIA.
-The PATCH4 implements indirect CSR extensions while remaining patches
-implement the counter delegation extensions.
-
-The Qemu patches can be found here:
-https://github.com/atishp04/qemu/tree/b4/counter_delegation_v4
-The Linux kernel patches can be found here (WIP version due to onging upstream
-dependant patches):
-https://github.com/atishp04/linux/tree/b4/counter_delegation_v2
-
-[1] https://github.com/riscv/riscv-indirect-csr-access
-[2] https://github.com/riscv/riscv-smcdeleg-ssccfg
-
-Cc: kaiwenxue1@gmail.com
-
+Co-developed-by: Atish Patra <atishp@rivosinc.com>
+Signed-off-by: Kaiwen Xue <kaiwenx@rivosinc.com>
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 Signed-off-by: Atish Patra <atishp@rivosinc.com>
 ---
-Changes in v4:
-- Fixed the comments recieved on v3. 
-- code style comments and removed 1 redundant if else block.
-- Link to v3: https://lore.kernel.org/r/20241117-counter_delegation-v3-0-476d6f36e3c8@rivosinc.com
+ target/riscv/csr.c | 36 +++++++++++++++++++++++++++++++++++-
+ 1 file changed, 35 insertions(+), 1 deletion(-)
 
-Changes in v3:
-1. Updated the priv version in extensions
-2. Fixed minor issues pointed out in v2.
-3. Dropped preferred rule and added an implied rule for AIA and counter
-   delegation.
-- Link to v2: https://lore.kernel.org/r/20240723-counter_delegation-v2-0-c4170a5348ca@rivosinc.com
+diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+index 424e9dbbd4ff..0985dbdca76d 100644
+--- a/target/riscv/csr.c
++++ b/target/riscv/csr.c
+@@ -2156,6 +2156,11 @@ static bool xiselect_aia_range(target_ulong isel)
+            (ISELECT_IMSIC_FIRST <= isel && isel <= ISELECT_IMSIC_LAST);
+ }
+ 
++static bool xiselect_cd_range(target_ulong isel)
++{
++    return (ISELECT_CD_FIRST <= isel && isel <= ISELECT_CD_LAST);
++}
++
+ static int rmw_iprio(target_ulong xlen,
+                      target_ulong iselect, uint8_t *iprio,
+                      target_ulong *val, target_ulong new_val,
+@@ -2281,6 +2286,17 @@ done:
+     return RISCV_EXCP_NONE;
+ }
+ 
++static int rmw_xireg_cd(CPURISCVState *env, int csrno,
++                        target_ulong isel, target_ulong *val,
++                        target_ulong new_val, target_ulong wr_mask)
++{
++    if (!riscv_cpu_cfg(env)->ext_smcdeleg) {
++        return RISCV_EXCP_ILLEGAL_INST;
++    }
++    /* TODO: Implement the functionality later */
++    return RISCV_EXCP_NONE;
++}
++
+ /*
+  * rmw_xireg_csrind: Perform indirect access to xireg and xireg2-xireg6
+  *
+@@ -2292,7 +2308,25 @@ static int rmw_xireg_csrind(CPURISCVState *env, int csrno,
+                               target_ulong isel, target_ulong *val,
+                               target_ulong new_val, target_ulong wr_mask)
+ {
+-    return -EINVAL;
++    int ret = -EINVAL;
++    bool virt = csrno == CSR_VSIREG ? true : false;
++
++    if (xiselect_cd_range(isel)) {
++        ret = rmw_xireg_cd(env, csrno, isel, val, new_val, wr_mask);
++    } else {
++        /*
++         * As per the specification, access to unimplented region is undefined
++         * but recommendation is to raise illegal instruction exception.
++         */
++        return RISCV_EXCP_ILLEGAL_INST;
++    }
++
++    if (ret) {
++        return (env->virt_enabled && virt) ?
++               RISCV_EXCP_VIRT_INSTRUCTION_FAULT : RISCV_EXCP_ILLEGAL_INST;
++    }
++
++    return RISCV_EXCP_NONE;
+ }
+ 
+ static int rmw_xiregi(CPURISCVState *env, int csrno, target_ulong *val,
 
-Changes from previous RFC version:
-
-1. Renamed sxcsrind to csrind to align with other function names.
-2. Enable sscofpmf by default for virt machine.
-3. Introduced a preferred extension enabling rule strategy for generic
-mult-extension dependencies.
-4. Enables all PMU related extensions if ssccfg extension is set.
-
-RFC Link:
-https://lore.kernel.org/all/35a4d40c-9d0d-4a0a-a2c9-5d5f7def9b9c@ventanamicro.com/T/
-
----
-Atish Patra (5):
-      target/riscv: Enable S*stateen bits for AIA
-      target/riscv: Add properties for counter delegation ISA extensions
-      target/riscv: Invoke pmu init after feature enable
-      target/riscv: Add implied rule for counter delegation extensions
-      target/riscv: Add configuration for S[m|s]csrind, Smcdeleg/Ssccfg
-
-Kaiwen Xue (6):
-      target/riscv: Add properties for Indirect CSR Access extension
-      target/riscv: Decouple AIA processing from xiselect and xireg
-      target/riscv: Support generic CSR indirect access
-      target/riscv: Add counter delegation definitions
-      target/riscv: Add select value range check for counter delegation
-      target/riscv: Add counter delegation/configuration support
-
- target/riscv/cpu.c         |  20 +-
- target/riscv/cpu.h         |   1 +
- target/riscv/cpu_bits.h    |  34 ++-
- target/riscv/cpu_cfg.h     |   4 +
- target/riscv/csr.c         | 718 ++++++++++++++++++++++++++++++++++++++++++---
- target/riscv/machine.c     |   1 +
- target/riscv/tcg/tcg-cpu.c |  28 +-
- 7 files changed, 753 insertions(+), 53 deletions(-)
----
-base-commit: 27652f9ca9d831c67dd447346c6ee953669255f0
-change-id: 20240715-counter_delegation-10ab44c7d2c0
---
-Regards,
-Atish patra
+-- 
+2.34.1
 
 
