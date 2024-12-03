@@ -4,66 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 13AACE6C5FA
-	for <qemu-riscv@archiver.kernel.org>; Tue,  3 Dec 2024 03:38:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CB550E6C5F7
+	for <qemu-riscv@archiver.kernel.org>; Tue,  3 Dec 2024 03:39:11 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tIJjo-0007t2-9D; Mon, 02 Dec 2024 22:38:12 -0500
+	id 1tIJjq-0007to-A0; Mon, 02 Dec 2024 22:38:14 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <fea.wang@sifive.com>)
- id 1tIJjk-0007se-U7
- for qemu-riscv@nongnu.org; Mon, 02 Dec 2024 22:38:08 -0500
+ id 1tIJjm-0007su-Dk
+ for qemu-riscv@nongnu.org; Mon, 02 Dec 2024 22:38:10 -0500
 Received: from mail-pl1-x629.google.com ([2607:f8b0:4864:20::629])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <fea.wang@sifive.com>)
- id 1tIJjj-0005XY-8b
- for qemu-riscv@nongnu.org; Mon, 02 Dec 2024 22:38:08 -0500
+ id 1tIJjk-0005Xv-Uo
+ for qemu-riscv@nongnu.org; Mon, 02 Dec 2024 22:38:10 -0500
 Received: by mail-pl1-x629.google.com with SMTP id
- d9443c01a7336-214d1c6d724so39179105ad.3
- for <qemu-riscv@nongnu.org>; Mon, 02 Dec 2024 19:38:06 -0800 (PST)
+ d9443c01a7336-2127d4140bbso47260995ad.1
+ for <qemu-riscv@nongnu.org>; Mon, 02 Dec 2024 19:38:08 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1733197085; x=1733801885; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=/3TPIP1MGkGKOb8JzFkJI971Z6VFGcV7XVTJlNqAnrw=;
- b=VWm/wg6hzSq3dD8XxiCQO6X5uurLfyfzIhAqlj8j3rQ6KvxW/A8cS2pEa2UCKRzXOB
- uu52Nf+xUfbxuzXOsZHzJNWo2t2NjMa35AyKXme51QVM8+j+vmwRJKZ9Qa7u3U/z/Blf
- gQupzAZbP760CWVvUH08/cRwfI6/kTnYSpb+wBTAAScElW4jE3JnRmktw+coACi8on8u
- R7oD/H0ET9P4fbxRWKYntYtUAGAaQfhUOTdeiQpTfaMoJoOSOAAIs9ewCetgh1qoeABz
- IIqESe1S98TPjOf01Iyl7NEyxFVkD3iNYoWXz58Cpl4EKmlGHh26AUEUNm7dMZqm/8Ph
- dslQ==
+ d=sifive.com; s=google; t=1733197087; x=1733801887; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=HRHaR9pcBAF9H3M4At6noJSbZrF61K68F3kyhCd72IY=;
+ b=SudnvwiwK86ZulxBgB32KR9UJVThIt6MF8csleeW7RjNKbebKRWNJRUV6lyrL1gxT3
+ 9kMTpTqkstrfHDvgYeGSIDXY6zzvMd3rsgkzUVMM4FenKhVbAA6mW+evKDyFbtypuWCV
+ MHoFK+AHsZc06HJDXCIJauZXEEFGPacpfip//V65hrtjwm4U7XI9vKVOHSZEzP5lYV73
+ Rzz8bGSJ9qt6T3DVsYA2EMNBWbp8miEdzs8RJB7BbJulpmxTV9I39y5PQxjcfgjaRV4+
+ CWM5A6CnqfinNec5cWdPbUNF8daGtolaPtvYmmcUk7xIu6wigLOMcUi88WXXzu/5vOkK
+ I/XA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733197085; x=1733801885;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=/3TPIP1MGkGKOb8JzFkJI971Z6VFGcV7XVTJlNqAnrw=;
- b=rMEOgd9uiyfS7qbeNXurZfwd8VDOfkprBP101S9MzYREmAnK0mIWd5gmtVhJvjgxq5
- 8B0YzzkzH6aXnCWmVoFS3h6TvGHYDUnd2GsFxdAssrss8DgvbCeIaC1mJxK5cpmHc/Hm
- 3wFh86xXl0+sJqvojM7rFxOsyjyIJJQtsfkeMZGS4lXttEh5R9Z1apUSV6CTgqrCol8K
- +XX+5jAemv2cJVYpyrQ/ikvohgXVUsIUAzZKsM1qQE9IlGvCYgDBauNB9k4zsYcafeVb
- iZKHgnWO/gjQqATh445AqZ4DzdoOuv3drLOx5MOx2XMIEdEGGWNTSqYC45zbj0j7nyLz
- gUww==
+ d=1e100.net; s=20230601; t=1733197087; x=1733801887;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=HRHaR9pcBAF9H3M4At6noJSbZrF61K68F3kyhCd72IY=;
+ b=KbX4u/n/UXRT/sOo/RzRoLwQtH3fsLtNlO1H2dRaAxrtCEREBWWWnAIeSMPX4vYHi+
+ EuptGUzCklMYD+GZGZRCtv7I03ZO09745+xRzOt9Jqh6Qmlgw3L/diAil5NV+I5Q6aeq
+ qS3niFvhTUDlBLIWkGzkjGuM1ReRoBs8eGy8QiT2fFUgs0FtHLebB/bEgXSPbe6JQ+X8
+ ZDDdJ5hwCjTOq/qH45uGKJdfMLTQDqaXnX0QLUIq/gbT3y74jENuNVtKX+2yd2n2aacW
+ VKFjAg0WYuAPZUTqxLC2Dz4F8Nmkj9M3Cot1tLg12DKyXFuAYRz1IK0HZNORg/4BFi2T
+ YybQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXmSeP7/rLVl68tYu6rK9xjbz1X8pV7GdzHce/Rg9EAsZ9PrqVxNEVmBrRIIkvfNmPwazleEWqnINl/@nongnu.org
-X-Gm-Message-State: AOJu0YwCpqbqdSJGJMZzP43NfCuMMdC8BYGZe/+MmNUYJRk/nIaSHivU
- C/OOwwRB+vIdMNrVs1gH4EOzc+k3WGv78MGvCFfPyIbqUX0IhdAlgB0xJmIlLGk=
-X-Gm-Gg: ASbGncsvIlJK5xRZ6/k4W03jXlErE5bwYuQqWqExW+C2JBmbBAr4iU6b4TjOJWoNlIA
- YD8f1AWn6sqYuTMutxDdB719WPGdJpeDZxZzhCihPn2r/FdZHA40wvDUWwq6HGfEhK8mq0/KAC6
- sTIRN1FCMTungrC7uqpNBGDaVvu3YuUCzYyTtofpqSS5r5ZKpLOFX6thUT9+GcFfZMmSV8rnEnU
- zPBi/P7poJ3TyoG0RbUIVnlfMIevr9D3YEY27ga/+sbZPIOpJxSNW+P8/lmltAFVvPFDmMK95jW
- MxzOfRE2
-X-Google-Smtp-Source: AGHT+IELX0Ll3gFDL/7CHwx3ZBteJw3RKl5qUgKPu9SncvBkus+155PrU4EWVsHuQCoJMtQZ4vAUWg==
-X-Received: by 2002:a17:902:cec4:b0:215:6b4c:89fa with SMTP id
- d9443c01a7336-215bcfc4dc0mr11140185ad.8.1733197085175; 
- Mon, 02 Dec 2024 19:38:05 -0800 (PST)
+ AJvYcCVD76sU262WBpEaIU9cs5Y1N+OperY4JfW30DSV/qenwQ/thS58CXVqLM5De94D/rE3w2YqR0cjqAx0@nongnu.org
+X-Gm-Message-State: AOJu0YweV2y0W6yYp+yGRlzGw0jD5uiYAuLLsUmylma8JIoRpi7d22JX
+ uZXYz0SJtyq6CD6tMzqqf2Ir86fDhOI/1gaNE5r02Zk6gAQbTe7ybxcqHB3MZL4=
+X-Gm-Gg: ASbGncsor5n7zX3/QR3kuzYgZxNxLw9vCMsi1EIWJN9dgAoWQ0NnS6pRIRuBk4a7yCG
+ H6aExz73KrfeWGR+UF2W0Obnf4Uz43i82uvbkZgS3428gfGXauT2Etw08I28AIL7GxLOu8ROK/q
+ qVvH+PXKvjFynyiD7uYrRuxL/4SnDZuEP4Xu62YxD+eljHiAKwH8q1YClmKxUs09mgeqKfN1u4/
+ UGM2L3LyFsioxHTTZ3xQ4woT2j161wCyfDgxbFBWs3KyGND7Urxl5uN20aupQeV11QwSL/1eP8D
+ nKu7nwnY
+X-Google-Smtp-Source: AGHT+IEXojA/sOEDHW1MM7Nmm2rTZq6wRWPJN6Ug3GKxIkgNleZTZey3K35LdsgOa+hNLhFLHeH1Hw==
+X-Received: by 2002:a17:902:e747:b0:215:6afb:5b24 with SMTP id
+ d9443c01a7336-215bd174cabmr11952405ad.48.1733197087714; 
+ Mon, 02 Dec 2024 19:38:07 -0800 (PST)
 Received: from hsinchu36-syssw02.internal.sifive.com ([210.176.154.34])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-21566732e1fsm47111135ad.134.2024.12.02.19.38.03
+ d9443c01a7336-21566732e1fsm47111135ad.134.2024.12.02.19.38.05
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 02 Dec 2024 19:38:04 -0800 (PST)
+ Mon, 02 Dec 2024 19:38:07 -0800 (PST)
 From: "Fea.Wang" <fea.wang@sifive.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
@@ -71,11 +72,15 @@ Cc: Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bmeng.cn@gmail.com>,
  Weiwei Li <liwei1518@gmail.com>,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, "Fea.Wang" <fea.wang@sifive.com>
-Subject: [PATCH v5 0/6] Introduce svukte ISA extension
-Date: Tue,  3 Dec 2024 11:49:26 +0800
-Message-Id: <20241203034932.25185-1-fea.wang@sifive.com>
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ "Fea.Wang" <fea.wang@sifive.com>, Frank Chang <frank.chang@sifive.com>,
+ Jim Shu <jim.shu@sifive.com>
+Subject: [PATCH v5 1/6] target/riscv: Add svukte extension capability variable
+Date: Tue,  3 Dec 2024 11:49:27 +0800
+Message-Id: <20241203034932.25185-2-fea.wang@sifive.com>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20241203034932.25185-1-fea.wang@sifive.com>
+References: <20241203034932.25185-1-fea.wang@sifive.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Received-SPF: pass client-ip=2607:f8b0:4864:20::629;
@@ -102,56 +107,34 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-The Svukte ISA extension has been approved for fast-track development.
-https://lf-riscv.atlassian.net/browse/RVS-2977 
-And there are Linux patches for the Svukte that are under review.
-https://lore.kernel.org/kvm/20240920-dev-maxh-svukte-rebase-v1-0-7864a88a62bd@sifive.com/T/#mf70fcb22cd2987ad268c0efee9b8583197d3cb4f
+Refer to the draft of svukte extension from:
+https://github.com/riscv/riscv-isa-manual/pull/1564
 
 Svukte provides a means to make user-mode accesses to supervisor memory
 raise page faults in constant time, mitigating attacks that attempt to
 discover the supervisor software's address-space layout.
 
-Refer to the draft of svukte extension from:
-https://github.com/riscv/riscv-isa-manual/pull/1564
+Signed-off-by: Fea.Wang <fea.wang@sifive.com>
+Reviewed-by: Frank Chang <frank.chang@sifive.com>
+Reviewed-by: Jim Shu <jim.shu@sifive.com>
+Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+---
+ target/riscv/cpu_cfg.h | 1 +
+ 1 file changed, 1 insertion(+)
 
-base-commit: 2209cae121e5da3cfbdb9dd4b06d52d0ef66ea69
-
-[v5] 
-* Update the warning log and the commit message
-
-[v4]
-* Add a svukte extension check in RV32.
-* Refine the code.
-
-[v3]
-* Fix some typos
-* Refine code by separating a function into two dedicated functions.
-* Follow the riscv,isa order
-
-[v2]
-* Refactor the code
-
-[v1]
-* Add svukte extension
-
-Fea.Wang (6):
-  target/riscv: Add svukte extension capability variable
-  target/riscv: Support senvcfg[UKTE] bit when svukte extension is
-    enabled
-  target/riscv: Support hstatus[HUKTE] bit when svukte extension is
-    enabled
-  target/riscv: Check memory access to meet svukte rule
-  target/riscv: Expose svukte ISA extension
-  target/riscv: Check svukte is not enabled in RV32
-
- target/riscv/cpu.c         |  2 ++
- target/riscv/cpu_bits.h    |  2 ++
- target/riscv/cpu_cfg.h     |  1 +
- target/riscv/cpu_helper.c  | 55 ++++++++++++++++++++++++++++++++++++++
- target/riscv/csr.c         |  7 +++++
- target/riscv/tcg/tcg-cpu.c |  5 ++++
- 6 files changed, 72 insertions(+)
-
+diff --git a/target/riscv/cpu_cfg.h b/target/riscv/cpu_cfg.h
+index 59d6fc445d..d8771ca641 100644
+--- a/target/riscv/cpu_cfg.h
++++ b/target/riscv/cpu_cfg.h
+@@ -84,6 +84,7 @@ struct RISCVCPUConfig {
+     bool ext_svnapot;
+     bool ext_svpbmt;
+     bool ext_svvptc;
++    bool ext_svukte;
+     bool ext_zdinx;
+     bool ext_zaamo;
+     bool ext_zacas;
 -- 
 2.34.1
 
