@@ -4,76 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BC4A2E6C60C
-	for <qemu-riscv@archiver.kernel.org>; Tue,  3 Dec 2024 06:32:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 47CD4E6C60B
+	for <qemu-riscv@archiver.kernel.org>; Tue,  3 Dec 2024 06:35:52 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tIMRc-0000CP-EC; Tue, 03 Dec 2024 01:31:36 -0500
+	id 1tIMVQ-0005BS-8p; Tue, 03 Dec 2024 01:35:32 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1tIMRa-0000B1-IV; Tue, 03 Dec 2024 01:31:34 -0500
-Received: from mail-vs1-xe33.google.com ([2607:f8b0:4864:20::e33])
+ id 1tIMVL-0004zM-3l; Tue, 03 Dec 2024 01:35:27 -0500
+Received: from mail-vs1-xe32.google.com ([2607:f8b0:4864:20::e32])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1tIMRZ-0008EX-1z; Tue, 03 Dec 2024 01:31:34 -0500
-Received: by mail-vs1-xe33.google.com with SMTP id
- ada2fe7eead31-4aefdbf8134so1197414137.2; 
- Mon, 02 Dec 2024 22:31:32 -0800 (PST)
+ id 1tIMVH-0000Ul-Rt; Tue, 03 Dec 2024 01:35:26 -0500
+Received: by mail-vs1-xe32.google.com with SMTP id
+ ada2fe7eead31-4af3bfbb721so1475210137.3; 
+ Mon, 02 Dec 2024 22:35:21 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1733207491; x=1733812291; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1733207720; x=1733812520; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=51e6sQVFtPJq/fpzqreSigR1j2ToG7DiQDj/JiDYmeE=;
- b=Uns72N7K78CRNpCQS6UXlG7lPkvK3ExCErVk/vUOWiggjj8qfeGmPdh27CpSSStJHg
- cn6XY6iHNUbLF+KMcI3loDqUkG9yx+EzQEHh5UGNft9q7h4eK+XaH4ziO2uIR6ZlMip/
- 5uM7BWwQ42f7bi95RJaugGkXiY+wslEYGIGtK3PvTfUA+d8DK7LXUV567L5Ehuo9ejRR
- RhxfHo2k+b2XinNHB3H0uw0IdhCCwxLu+8hs5ZAiOvKrbkwraf0hLjSQTYyse6nCniUG
- 5NG7usNn48nb5UCBMXqyeUmmIYCorXeZ1CWe9aLsyUGE6ENB7uBliksFaTjeDIacBnFv
- YvJw==
+ bh=0yf9BrlfRqGaSlUzr1jGwQcQsL8td33Mhp6K4QzBJhI=;
+ b=Z++Fo1iULNQmDgGb+lND/whVMV0aMoOLE6z0Zt1Gd34G6VOgbf6dfIECAY+cdTmbCX
+ wFN4VTUz17/1JP7JSvysKm6FUsFXBZ0F5aaZlN8vybPj9DNKa+txmLRj/lDhCn/P1Os+
+ aPx+XiAQFvU/w7GeLMCLfsOf3dv8wmzjQKAmFfYuOqE93ONkWq4RvBrZCjbd5UZU4RuN
+ 2XObgf/AcWYXvDmFvSVs/Cq4fXOBwl7cPnmZx4PIC1yvpwbrjggHfWGHC9ZwM/AAsktk
+ VbnCWReuqnG2puzaX3UjqBUdmqDQ19BANZbMVWwvrw+52TIZT70m21+nnK8grqSddHu+
+ ifRA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733207491; x=1733812291;
+ d=1e100.net; s=20230601; t=1733207720; x=1733812520;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=51e6sQVFtPJq/fpzqreSigR1j2ToG7DiQDj/JiDYmeE=;
- b=SgYkPS8PQrdmh9RyUn547ms2lJ/dX8P3IztcE9Ps6z8kcxw+STLa2ddJeqoftyYWbG
- 1nBu4doUvFxN008VgxLH/CMjBn08GtF3JAG+btJFzy1ReLGpeOZ6/ZdTO8cBa92Kz7hG
- yd8JCCfuQbcll8rOP2eXoz7V8dLLhyAhQjz4QPZ3X1L5RHvPqVGPIILKgEIx1AeLvuxJ
- sqtHIJsgviMhUTQ9vmkwtQCsWWls5thoCVT7h+g3J3+MFc8IgZm6Xe7dXP6MxzXMLtPm
- E4xepcBhcML1rKpLXN3racODhtwLvICQ1obVxHredWYbcX1dm7GCX6SFWTQyMl2FbfFt
- /w6Q==
+ bh=0yf9BrlfRqGaSlUzr1jGwQcQsL8td33Mhp6K4QzBJhI=;
+ b=BKSL9Xpfu7VxNb1N7o/W5g3za21RmWSvYUqcoZ9phYSRe9px5Et6EPezNNP7bOWhZm
+ xma1N5GESCtnss2TVufUuQIVbuhzT8XZC8R2xNGBIGNrSKS8Hls7yuJfcKqqtSnAK+zA
+ Nbw4rWzKW/QfZzzKdZ1RcoulwFvGLhE+6mpWRHfMFe3XWIwrx9eXiplpbWrA5OMrB0nS
+ 3XsrjN9SjdNFTjoEigTY96MWFYJrF3Kg1DcLRrb4DXHcrQV2DSqT3cr0lOJInfyWpBjr
+ qHzZPa3FYyqUAE9DsM7cC9fSY0IENvn8fDwktWNAgNDgNz69lIFwI7mo0c+4jEL9h3jr
+ t05A==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWefAed4oketnSkktLkG1uEKMpjXdKP+WoUPN1HwGBl7ak+cgFRxoLwCeEwPUZIVq4dEi12SQ9Iv+rB@nongnu.org
-X-Gm-Message-State: AOJu0YzNEAzug2L3qrrX8t9lSqNIsvpv6QLn6wL1QZDRw7AO+oq641gu
- v9pQnlIdQa5pZa4+RbR+kjOy1wD0y1IeZoG3jUil72Px7qWziUqV5s7Eecsp+KoVJKkV+eIanuY
- RuC2rtujZBzf6bMCeN6Z9EzGkDUA=
-X-Gm-Gg: ASbGncvi1tHemRJcysB/E9Aj4DJcWpyRJS5LzMiJuky6nUxhcs+dI8FYiFW5fE7jWzR
- 8ZIb148vG9LTAHbceCjd7BkfwnMd/HWel
-X-Google-Smtp-Source: AGHT+IGtaq20FQ+nAGp+2AO8fkuENF7tv8k5U255kXq3on0N5HAQBvZu4Q151Hvz6z1UH6SlbOwvh0XLUudpqfHEEHU=
-X-Received: by 2002:a05:6102:a4a:b0:4a3:a014:38aa with SMTP id
- ada2fe7eead31-4af9723815fmr2407407137.11.1733207491294; Mon, 02 Dec 2024
- 22:31:31 -0800 (PST)
+ AJvYcCUMkNAW5BXsSlembRaWp+DKmAzzQ6bZX1dYkExbcwiU+/LGrrj6LBqcNiWcU1PhEhOOmhNbkja0ODy11w==@nongnu.org,
+ AJvYcCUccVSEsUpD50CUKqrwx3ikxrNbCxMAkW79sLBivcMMxDR2lsxZ/KqMobM5AZyIcfoiehqA2ood1uWg@nongnu.org
+X-Gm-Message-State: AOJu0YxZ4Aix/eMA4Qh36ApiS1C5kde6Im5r93RKxmrZp7zMe1hZn4o4
+ slcv2jv3BSlviLHPj7JD+Ln/Mem0jlhM3+Qn31LMzbfvXCOEq1ESHB/Y7zysvaBTeoUKYL2uzwb
+ /6tfqER+SNOraQQyk4VxWpu/B+aA=
+X-Gm-Gg: ASbGncs3OrV0XuXU+9Olcp7KLeiYdplGU4uatFArHfjacNMkdj4MHE95pASrKZxYMCF
+ nSeQlIX1wULpNwq8ktXfLoYcoQl4EkL8x
+X-Google-Smtp-Source: AGHT+IEVZuP7zTwpONNfk//+eNwjlEQxeqrce473tOGHxeVApdtCripUS9k2pOQq/HC6Dck3tgz3TxFxdibH5rservY=
+X-Received: by 2002:a05:6102:a4a:b0:4af:4a71:e35 with SMTP id
+ ada2fe7eead31-4af97391601mr2064585137.27.1733207720447; Mon, 02 Dec 2024
+ 22:35:20 -0800 (PST)
 MIME-Version: 1.0
-References: <20241128103831.3452572-1-peter.maydell@linaro.org>
-In-Reply-To: <20241128103831.3452572-1-peter.maydell@linaro.org>
+References: <20241028015744.624943-1-jeeheng.sia@starfivetech.com>
+In-Reply-To: <20241028015744.624943-1-jeeheng.sia@starfivetech.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Tue, 3 Dec 2024 15:31:05 +0900
-Message-ID: <CAKmqyKOYjhdp1fNSnqGdhyFJF2Ywhi16q_h3+LaATFuFFqoHpg@mail.gmail.com>
-Subject: Re: [PATCH for-9.2] target/riscv: Avoid bad shift in
- riscv_cpu_do_interrupt()
-To: Peter Maydell <peter.maydell@linaro.org>
-Cc: qemu-devel@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>, 
- Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bmeng.cn@gmail.com>, 
- Weiwei Li <liwei1518@gmail.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>, 
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, qemu-riscv@nongnu.org
+Date: Tue, 3 Dec 2024 15:34:54 +0900
+Message-ID: <CAKmqyKMdtaK30S0OkaTKTY+6q-nMkpfNQyC0LCC05EfutBoXgQ@mail.gmail.com>
+Subject: Re: [PATCH v6 0/3] Upgrade ACPI SPCR table to support SPCR table
+ revision 4 format
+To: Sia Jee Heng <jeeheng.sia@starfivetech.com>
+Cc: qemu-arm@nongnu.org, qemu-devel@nongnu.org, qemu-riscv@nongnu.org, 
+ mst@redhat.com, imammedo@redhat.com, anisinha@redhat.com, 
+ peter.maydell@linaro.org, shannon.zhaosl@gmail.com, sunilvl@ventanamicro.com, 
+ palmer@dabbelt.com, alistair.francis@wdc.com, bin.meng@windriver.com, 
+ liwei1518@gmail.com, dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com, 
+ gaosong@loongson.cn, jiaxun.yang@flygoat.com, maobibo@loongson.cn
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::e33;
- envelope-from=alistair23@gmail.com; helo=mail-vs1-xe33.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::e32;
+ envelope-from=alistair23@gmail.com; helo=mail-vs1-xe32.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -97,32 +99,48 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Thu, Nov 28, 2024 at 7:39=E2=80=AFPM Peter Maydell <peter.maydell@linaro=
-.org> wrote:
+On Mon, Oct 28, 2024 at 10:59=E2=80=AFAM Sia Jee Heng
+<jeeheng.sia@starfivetech.com> wrote:
 >
-> In riscv_cpu_do_interrupt() we use the 'cause' value we got out of
-> cs->exception as a shift value.  However this value can be larger
-> than 31, which means that "1 << cause" is undefined behaviour,
-> because we do the shift on an 'int' type.
+> Update the SPCR table to accommodate the SPCR Table revision 4 [1].
+> The SPCR table has been modified to adhere to the revision 4 format [2].
 >
-> This causes the undefined behaviour sanitizer to complain
-> on one of the check-tcg tests:
+> Meanwhile, the virt SPCR golden reference file for RISC-V have been updat=
+ed to
+> accommodate the SPCR Table revision 4.
 >
-> $ UBSAN_OPTIONS=3Dprint_stacktrace=3D1:abort_on_error=3D1:halt_on_error=
-=3D1 ./build/clang/qemu-system-riscv64 -M virt -semihosting -display none -=
-device loader,file=3Dbuild/clang/tests/tcg/riscv64-softmmu/issue1060
-> ../../target/riscv/cpu_helper.c:1805:38: runtime error: shift exponent 63=
- is too large for 32-bit type 'int'
->     #0 0x55f2dc026703 in riscv_cpu_do_interrupt /mnt/nvmedisk/linaro/qemu=
--from-laptop/qemu/build/clang/../../target/riscv/cpu_helper.c:1805:38
->     #1 0x55f2dc3d170e in cpu_handle_exception /mnt/nvmedisk/linaro/qemu-f=
-rom-laptop/qemu/build/clang/../../accel/tcg/cpu-exec.c:752:9
+> [1]: https://learn.microsoft.com/en-us/windows-hardware/drivers/serports/=
+serial-port-console-redirection-table
+> [2]: https://github.com/acpica/acpica/pull/931
 >
-> In this case cause is RISCV_EXCP_SEMIHOST, which is 0x3f.
+> Changes in v6:
+> - Added Reviewed-by: Michael S. Tsirkin <mst@redhat.com>
+> - Rebase and update the build_spcr() function for the LoongArch virt mach=
+ine.
 >
-> Use 1ULL instead to ensure that the shift is in range.
+> Changes in v5:
+> - Reverted the SPCR table revision history for the ARM architecture.
+> - Corrected the output of the SPCR Table diff.
 >
-> Signed-off-by: Peter Maydell <peter.maydell@linaro.org>
+> Changes in v4:
+> - Remove the SPCR table revision 4 update for the ARM architecture.
+>
+> Changes in v3:
+> - Rebased on the latest QEMU.
+> - Added Acked-by: Alistair Francis <alistair.francis@wdc.com>
+>
+> Changes in v2:
+> - Utilizes a three-patch approach to modify the ACPI pre-built binary
+>   files required by the Bios-Table-Test.
+> - Rebases and incorporates changes to support both ARM and RISC-V ACPI
+>   pre-built binary files.
+>
+> Sia Jee Heng (3):
+>   qtest: allow SPCR acpi table changes
+>   hw/acpi: Upgrade ACPI SPCR table to support SPCR table revision 4
+>     format
+>   tests/qtest/bios-tables-test: Update virt SPCR golden reference for
+>     RISC-V
 
 Thanks!
 
@@ -130,31 +148,20 @@ Applied to riscv-to-apply.next
 
 Alistair
 
-> ---
->  target/riscv/cpu_helper.c | 8 ++++----
->  1 file changed, 4 insertions(+), 4 deletions(-)
 >
-> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-> index 0a3ead69eab..45806f5ab0f 100644
-> --- a/target/riscv/cpu_helper.c
-> +++ b/target/riscv/cpu_helper.c
-> @@ -1802,10 +1802,10 @@ void riscv_cpu_do_interrupt(CPUState *cs)
->      bool async =3D !!(cs->exception_index & RISCV_EXCP_INT_FLAG);
->      target_ulong cause =3D cs->exception_index & RISCV_EXCP_INT_MASK;
->      uint64_t deleg =3D async ? env->mideleg : env->medeleg;
-> -    bool s_injected =3D env->mvip & (1 << cause) & env->mvien &&
-> -        !(env->mip & (1 << cause));
-> -    bool vs_injected =3D env->hvip & (1 << cause) & env->hvien &&
-> -        !(env->mip & (1 << cause));
-> +    bool s_injected =3D env->mvip & (1ULL << cause) & env->mvien &&
-> +        !(env->mip & (1ULL << cause));
-> +    bool vs_injected =3D env->hvip & (1ULL << cause) & env->hvien &&
-> +        !(env->mip & (1ULL << cause));
->      target_ulong tval =3D 0;
->      target_ulong tinst =3D 0;
->      target_ulong htval =3D 0;
+>  hw/acpi/aml-build.c               |  20 ++++++++++++++++----
+>  hw/arm/virt-acpi-build.c          |   8 ++++++--
+>  hw/loongarch/acpi-build.c         |   6 +++++-
+>  hw/riscv/virt-acpi-build.c        |  12 +++++++++---
+>  include/hw/acpi/acpi-defs.h       |   7 +++++--
+>  include/hw/acpi/aml-build.h       |   2 +-
+>  tests/data/acpi/riscv64/virt/SPCR | Bin 80 -> 90 bytes
+>  7 files changed, 42 insertions(+), 13 deletions(-)
+>
+>
+> base-commit: cea8ac78545a83e1f01c94d89d6f5a3f6b5c05d2
 > --
-> 2.34.1
+> 2.43.0
 >
 >
 
