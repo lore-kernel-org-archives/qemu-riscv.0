@@ -4,81 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A42CBE77166
-	for <qemu-riscv@archiver.kernel.org>; Tue,  3 Dec 2024 23:15:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F0059E77166
+	for <qemu-riscv@archiver.kernel.org>; Tue,  3 Dec 2024 23:16:01 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tIc6j-0001Q9-0L; Tue, 03 Dec 2024 18:15:05 -0500
+	id 1tIc6W-0001Fw-2f; Tue, 03 Dec 2024 18:14:52 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <atishp@rivosinc.com>)
- id 1tIc6d-0001Lk-HO
- for qemu-riscv@nongnu.org; Tue, 03 Dec 2024 18:14:59 -0500
-Received: from mail-pf1-x433.google.com ([2607:f8b0:4864:20::433])
+ id 1tIc6U-0001FO-Co
+ for qemu-riscv@nongnu.org; Tue, 03 Dec 2024 18:14:50 -0500
+Received: from mail-pf1-x42f.google.com ([2607:f8b0:4864:20::42f])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <atishp@rivosinc.com>)
- id 1tIc6a-0001LF-T1
- for qemu-riscv@nongnu.org; Tue, 03 Dec 2024 18:14:59 -0500
-Received: by mail-pf1-x433.google.com with SMTP id
- d2e1a72fcca58-7250906bc63so245238b3a.1
- for <qemu-riscv@nongnu.org>; Tue, 03 Dec 2024 15:14:56 -0800 (PST)
+ id 1tIc6S-0001I4-IN
+ for qemu-riscv@nongnu.org; Tue, 03 Dec 2024 18:14:50 -0500
+Received: by mail-pf1-x42f.google.com with SMTP id
+ d2e1a72fcca58-7242f559a9fso6019769b3a.1
+ for <qemu-riscv@nongnu.org>; Tue, 03 Dec 2024 15:14:47 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1733267695; x=1733872495;
+ d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1733267687; x=1733872487;
  darn=nongnu.org; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=vTwUWeOBYxedW2UpgZEtaCjLh9J+yVkl+/fWLaqQqm4=;
- b=YEIZ8g6o7hlLJY1RT7mD4mBsQ6dqoRz3SfgJeOwI64KC0M/87bfg1PWAcQh8MTKc/1
- 00GChh9XQ9pauZiCRq6JLlnVsy/j82n/6Znql9UystFh5nHeHHA/nTwXLQ6orwFTsfp4
- VVuJ1iOYjZVm5NfSPvDBfcGhv+XSzrd3fVKQGzdLPpwyUp1SQghvNXhfG1jKZrxSnPm+
- 0u1Jbim07m9lGMZzb5+5ewRXMwztlHKwQyaBk6VSUbKU1M2YEdlmp5OzdmAPUHGfAiKU
- TUsNNtgFNGQKPQsuTEDpLBDTxPUrJNA9qzu4U90l4DZUod6nUL/KSCJZrpZRWssZl6Eh
- m9xw==
+ :reply-to; bh=lXViAFlbF0a27TZCJ/bkE40evUkFiMFffaowOt3YXOA=;
+ b=gEnHvg/0yOz90+1NOCXFDOnhHr8EiCS36/DLKNaRm5MFKUJ9OCwqkzs3xjME2vBhym
+ CcCmHutSj7mD4RENPL+Jh/rWT7CAcjcXwRX5jjYQX4mvbLj28cCl7Nl6TkSLIeat1L2a
+ G4PSy2Jsgk0GfvOcRhJqteJRElalN2kbe0JbLw67bngoGF2pf2TlwPgffeGLtc/nifJg
+ vCIJRI793Bt4BZx67jAa6dbD/WeQmFPjb31R0mranu2cehomfof02RWMhCX+22piIzi5
+ AbLqxwEp4a7YFOjg7MszltGMfuc2lEbn3bFu9WHtP1uMWs4Oi+APo9yMWp0zxY843AOI
+ z/Yw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733267695; x=1733872495;
+ d=1e100.net; s=20230601; t=1733267687; x=1733872487;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=vTwUWeOBYxedW2UpgZEtaCjLh9J+yVkl+/fWLaqQqm4=;
- b=SRQ6Gp4TRxBPphV8SzHIGz38qmQmNlokNVI/C9a47Dnm9WmSDc/bZEQT4k2NDllFo2
- fJWIy3Yr8MWZz+r/7ehMHaBuk8WluhUzfRbG9Wc/Jq2Her+jjMKNYJGM97aLQBBIg/is
- sqy0gEj+B5fnmnibiXZewcQD7fAcJWKhE9eATKQkaLKgBLhOUJnV9RyfZL0OMYvoleh0
- kcZXDOiNGA7JxuosB4FFzUjzinkbsrdiBrLn0j0pZ8y/cc+nIJJiXyyM369Z3yt+IoEs
- ZCHo3FzRRfgsea6KxOpA0Z5zKSc4orw+Yjk7BvILm+jWe2gvvV7y5uqFlYAx3DKpMxPF
- xojw==
-X-Gm-Message-State: AOJu0YwdlmJ7gkJr+Xv6vw+KtUxskmGQZwZK8xqGsN1Q55So3Xzhuk4k
- 0hMYZevVO+4MnPGl1/iEqE0o2CY8ftNfgDuaotM4DkIUgHjUKYBlJyFYhm5Obso=
-X-Gm-Gg: ASbGncv1LLTlfCjbG+ZCRM/PR6Gf+CeMqD8IdaGZEvakYDsfmmzmASQJdrczpn1nKD1
- iMf5vnGIj+L0RhXGO2+Rvx4G9X1W+mW6ielzClnzAW8diO9ONC4OfAO0YZXUk9GJFSSA9vt9XwZ
- /TKhwzmF6Qw/uNSmRDwhxpE1mvyl/ecVMgdz6iR0Y4XjNY4qFk8LxZGcgtqCYGmHS3pU5Ex361c
- wBf2PAK7lBfXUbIrF4M7to+0bu9/V3C8Ooz10I/tPQWaoxbTpRvrQXnJqrG0+w=
-X-Google-Smtp-Source: AGHT+IFqH267BHlWINP68ATaiF7zZgT9wTLIZATLPYoP4ZkDZ7Ifuz3OKfBWha89aJ0denh+vPQk0g==
-X-Received: by 2002:a05:6a00:4651:b0:725:37a4:8827 with SMTP id
- d2e1a72fcca58-7257f8dbeedmr7576172b3a.3.1733267695593; 
- Tue, 03 Dec 2024 15:14:55 -0800 (PST)
+ bh=lXViAFlbF0a27TZCJ/bkE40evUkFiMFffaowOt3YXOA=;
+ b=BQrvA+JCv88SXEQLlurk4NsFEZLY7HATkBPQeVfoSjWsJbKfWEdS6UfWIULtufHVEn
+ zvmTxcxg54U/KhTD2NsMCsvk2L9vzsP0yW+N2wOoNDZ5QIUh2fTJXSbRmIM96JSXNgDg
+ /Efo+9eoup1KI9W9TqBmRaNGN/RjWCxU0vkQz0cgrE3N+fqX8bt+nG5SgF2LWFtekdIZ
+ 1Ep/kG2pGtGc08WbPQSXbGk2oIsyXjboevs7q5JG4TiK2tKCmuu1G0tagYP661gu6NG3
+ 2CaJ3d7SqAdlFwWbyC0SoaJOJgVBM67Ey7WlCbzz4SgzN+g4rYm3LthLJ3RbkeDVPE7D
+ 4Phw==
+X-Gm-Message-State: AOJu0Ywr6ALt5I3bahiAm4cVgvU+GMdpcslSk0QN0y9IajzXXrgwyHKx
+ Hd8p/SxxzdxAwROw3Saqb11RNKrxFd9XZKcmrkcgNsjGqALWseV4o/85TqWSS/A=
+X-Gm-Gg: ASbGncslyKZGx9rIJOv8YxOrGn4Sajv768LdFB9ZwO2RO/Dj6iU5pIBqjRG5by4sqQy
+ oYlEjgR1P7w7WzoL1WJy6MB8/kE+WeXHbxAyuACkSHS2htQ+Z9mfSXHwKtcxEXnPusHk0L1RTwG
+ VUTbd4sj/bc4aQWLXzftNF9DR6qkqFuZSB+7PW6o9UsRSMRg5Ca+iCrlhnPlR/6aLYoZiR3qIGr
+ 4DKGJP1EW/WfPm1WCcJUnTyHJnHd+OU5j5oBCSL6aCwwgEHlXTN2zVrHhOECoc=
+X-Google-Smtp-Source: AGHT+IHZX6xOmv6RESxSzfIKssM/VKGrdDopGu0PXBGyXwOCheTKh3QGQk4V83wimymBNC0tW+TjFw==
+X-Received: by 2002:a05:6a00:92a3:b0:71e:79a9:ec47 with SMTP id
+ d2e1a72fcca58-7257fa5708fmr5365792b3a.6.1733267686769; 
+ Tue, 03 Dec 2024 15:14:46 -0800 (PST)
 Received: from atishp.ba.rivosinc.com ([64.71.180.162])
  by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-7254180f78asm11032133b3a.133.2024.12.03.15.14.54
+ d2e1a72fcca58-7254180f78asm11032133b3a.133.2024.12.03.15.14.45
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 03 Dec 2024 15:14:55 -0800 (PST)
+ Tue, 03 Dec 2024 15:14:46 -0800 (PST)
 From: Atish Patra <atishp@rivosinc.com>
-Date: Tue, 03 Dec 2024 15:14:47 -0800
-Subject: [PATCH v4 09/11] target/riscv: Invoke pmu init after feature
- enable
+Date: Tue, 03 Dec 2024 15:14:39 -0800
+Subject: [PATCH v4 01/11] target/riscv: Add properties for Indirect CSR
+ Access extension
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20241203-counter_delegation-v4-9-c12a89baed86@rivosinc.com>
+Message-Id: <20241203-counter_delegation-v4-1-c12a89baed86@rivosinc.com>
 References: <20241203-counter_delegation-v4-0-c12a89baed86@rivosinc.com>
 In-Reply-To: <20241203-counter_delegation-v4-0-c12a89baed86@rivosinc.com>
 To: qemu-riscv@nongnu.org, qemu-devel@nongnu.org
 Cc: kaiwenxue1@gmail.com, Atish Patra <atishp@rivosinc.com>, 
  palmer@dabbelt.com, liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, 
- bin.meng@windriver.com, dbarboza@ventanamicro.com, alistair.francis@wdc.com
+ bin.meng@windriver.com, dbarboza@ventanamicro.com, alistair.francis@wdc.com, 
+ Kaiwen Xue <kaiwenx@rivosinc.com>
 X-Mailer: b4 0.15-dev-13183
-Received-SPF: pass client-ip=2607:f8b0:4864:20::433;
- envelope-from=atishp@rivosinc.com; helo=mail-pf1-x433.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::42f;
+ envelope-from=atishp@rivosinc.com; helo=mail-pf1-x42f.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -100,69 +101,51 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-The dependant ISA features are enabled at the end of cpu_realize
-in finalize_features. Thus, PMU init should be invoked after that
-only. Move the init invocation to riscv_tcg_cpu_finalize_features.
+From: Kaiwen Xue <kaiwenx@rivosinc.com>
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+This adds the properties for sxcsrind. Definitions of new registers and
+implementations will come with future patches.
+
+Signed-off-by: Kaiwen Xue <kaiwenx@rivosinc.com>
+Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 Signed-off-by: Atish Patra <atishp@rivosinc.com>
 ---
- target/riscv/tcg/tcg-cpu.c | 28 ++++++++++++++--------------
- 1 file changed, 14 insertions(+), 14 deletions(-)
+ target/riscv/cpu.c     | 2 ++
+ target/riscv/cpu_cfg.h | 2 ++
+ 2 files changed, 4 insertions(+)
 
-diff --git a/target/riscv/tcg/tcg-cpu.c b/target/riscv/tcg/tcg-cpu.c
-index c62c2216961b..2b57aa4d1704 100644
---- a/target/riscv/tcg/tcg-cpu.c
-+++ b/target/riscv/tcg/tcg-cpu.c
-@@ -934,6 +934,20 @@ void riscv_tcg_cpu_finalize_features(RISCVCPU *cpu, Error **errp)
-         error_propagate(errp, local_err);
-         return;
-     }
-+#ifndef CONFIG_USER_ONLY
-+    if (cpu->cfg.pmu_mask) {
-+        riscv_pmu_init(cpu, &local_err);
-+        if (local_err != NULL) {
-+            error_propagate(errp, local_err);
-+            return;
-+        }
-+
-+        if (cpu->cfg.ext_sscofpmf) {
-+            cpu->pmu_timer = timer_new_ns(QEMU_CLOCK_VIRTUAL,
-+                                          riscv_pmu_timer_cb, cpu);
-+        }
-+    }
-+#endif
- }
- 
- void riscv_tcg_cpu_finalize_dynamic_decoder(RISCVCPU *cpu)
-@@ -981,7 +995,6 @@ static bool riscv_tcg_cpu_realize(CPUState *cs, Error **errp)
- 
- #ifndef CONFIG_USER_ONLY
-     CPURISCVState *env = &cpu->env;
--    Error *local_err = NULL;
- 
-     tcg_cflags_set(CPU(cs), CF_PCREL);
- 
-@@ -989,19 +1002,6 @@ static bool riscv_tcg_cpu_realize(CPUState *cs, Error **errp)
-         riscv_timer_init(cpu);
-     }
- 
--    if (cpu->cfg.pmu_mask) {
--        riscv_pmu_init(cpu, &local_err);
--        if (local_err != NULL) {
--            error_propagate(errp, local_err);
--            return false;
--        }
--
--        if (cpu->cfg.ext_sscofpmf) {
--            cpu->pmu_timer = timer_new_ns(QEMU_CLOCK_VIRTUAL,
--                                          riscv_pmu_timer_cb, cpu);
--        }
--    }
--
-     /* With H-Ext, VSSIP, VSTIP, VSEIP and SGEIP are hardwired to one. */
-     if (riscv_has_ext(env, RVH)) {
-         env->mideleg = MIP_VSSIP | MIP_VSTIP | MIP_VSEIP | MIP_SGEIP;
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index f219f0c3b527..963f1f3af9ae 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -185,12 +185,14 @@ const RISCVIsaExtData isa_edata_arr[] = {
+     ISA_EXT_DATA_ENTRY(zhinxmin, PRIV_VERSION_1_12_0, ext_zhinxmin),
+     ISA_EXT_DATA_ENTRY(smaia, PRIV_VERSION_1_12_0, ext_smaia),
+     ISA_EXT_DATA_ENTRY(smcntrpmf, PRIV_VERSION_1_12_0, ext_smcntrpmf),
++    ISA_EXT_DATA_ENTRY(smcsrind, PRIV_VERSION_1_13_0, ext_smcsrind),
+     ISA_EXT_DATA_ENTRY(smepmp, PRIV_VERSION_1_12_0, ext_smepmp),
+     ISA_EXT_DATA_ENTRY(smstateen, PRIV_VERSION_1_12_0, ext_smstateen),
+     ISA_EXT_DATA_ENTRY(ssaia, PRIV_VERSION_1_12_0, ext_ssaia),
+     ISA_EXT_DATA_ENTRY(ssccptr, PRIV_VERSION_1_11_0, has_priv_1_11),
+     ISA_EXT_DATA_ENTRY(sscofpmf, PRIV_VERSION_1_12_0, ext_sscofpmf),
+     ISA_EXT_DATA_ENTRY(sscounterenw, PRIV_VERSION_1_12_0, has_priv_1_12),
++    ISA_EXT_DATA_ENTRY(sscsrind, PRIV_VERSION_1_12_0, ext_sscsrind),
+     ISA_EXT_DATA_ENTRY(sstc, PRIV_VERSION_1_12_0, ext_sstc),
+     ISA_EXT_DATA_ENTRY(sstvala, PRIV_VERSION_1_12_0, has_priv_1_12),
+     ISA_EXT_DATA_ENTRY(sstvecd, PRIV_VERSION_1_12_0, has_priv_1_12),
+diff --git a/target/riscv/cpu_cfg.h b/target/riscv/cpu_cfg.h
+index 59d6fc445d18..8b974255f6fb 100644
+--- a/target/riscv/cpu_cfg.h
++++ b/target/riscv/cpu_cfg.h
+@@ -79,6 +79,8 @@ struct RISCVCPUConfig {
+     bool ext_smstateen;
+     bool ext_sstc;
+     bool ext_smcntrpmf;
++    bool ext_smcsrind;
++    bool ext_sscsrind;
+     bool ext_svadu;
+     bool ext_svinval;
+     bool ext_svnapot;
 
 -- 
 2.34.1
