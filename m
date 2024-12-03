@@ -4,66 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5CD32E6C60B
-	for <qemu-riscv@archiver.kernel.org>; Tue,  3 Dec 2024 06:48:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 39143E6C617
+	for <qemu-riscv@archiver.kernel.org>; Tue,  3 Dec 2024 08:00:50 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tIMhi-0002dx-II; Tue, 03 Dec 2024 01:48:14 -0500
+	id 1tINpq-0001G4-GT; Tue, 03 Dec 2024 03:00:42 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1tIMhg-0002dO-MH; Tue, 03 Dec 2024 01:48:12 -0500
-Received: from mail-vs1-xe35.google.com ([2607:f8b0:4864:20::e35])
+ id 1tINpg-0001DA-4x; Tue, 03 Dec 2024 03:00:33 -0500
+Received: from mail-vk1-xa2b.google.com ([2607:f8b0:4864:20::a2b])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1tIMhf-0002Am-2y; Tue, 03 Dec 2024 01:48:12 -0500
-Received: by mail-vs1-xe35.google.com with SMTP id
- ada2fe7eead31-4af5ed9c8b4so1143509137.2; 
- Mon, 02 Dec 2024 22:48:10 -0800 (PST)
+ id 1tINpd-00070i-JM; Tue, 03 Dec 2024 03:00:31 -0500
+Received: by mail-vk1-xa2b.google.com with SMTP id
+ 71dfb90a1353d-5150f63db70so1408596e0c.3; 
+ Tue, 03 Dec 2024 00:00:27 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1733208489; x=1733813289; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1733212827; x=1733817627; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=tsE41Wm2hcZFOmELsf8nNYdr/O/I+HF0V0VgCgbozrw=;
- b=lzyUa9Bm2xfhS4AAtXMn/kpFMg50xT3wlEWg5nKvke8a4hvNLAQalXhc0s0OXdBCqi
- F0R2P0XYpHIrK9f6FWB4ZQqdqccVClo0BJaqHLVc833poBFsSApfkEtZ8SPJIj/v6i5v
- sDhP5o2p21NpdPv2oK/wQcSRuC5Gm5sS9HBBKoj6l63dyWXdX69CWpPa5QWF2FMAjp9z
- sJ6ZDmmB5UMgH1k0k2oXcMAu8nngkWdmTzX4Lumvti72ZwN0ZXVOz5EZYO/a5ru/MtmM
- WC3OswAXHO6xBkczUN9RvH6kKgH/X+Hnr92XC8dBcEBTKJWg3hS+QVsLCIdZJdPlaDmP
- 7xfQ==
+ bh=FxETQswXqcE5Qi2+tppie1f1NtEF1M+LVuf/RyGAris=;
+ b=KbvCJXI0d/v/FyzEZvzZoJffs954+f72zbJ2Rl06NrPw0Eoj9QmGzZJvTHbOPfHTVl
+ yk2807kjmB6uIGk6meANRvdAvqSIlCYCHToJYwUhHuCpuLXJE4OxlrRLigIrccZNvQzC
+ ymQSi1ykTX1u8Jwe0PT722IiA+Y/W5bKkY8t55/7x3vYboOOJnJXD+5R/wLy5Yvy7TgL
+ 8WsuKtKbspnBrYdggzPitJM5Q3963phBHRqnEZWX2TD8THswl/GvMvp5q31SyHqNj+ac
+ 4SLIc/Ikeei8bpW/1zjHZnGfDBaTHFadoHGtLSLQGJJFY/C80ml4UEPsFFOVdXK6cUW+
+ XUew==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733208489; x=1733813289;
+ d=1e100.net; s=20230601; t=1733212827; x=1733817627;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=tsE41Wm2hcZFOmELsf8nNYdr/O/I+HF0V0VgCgbozrw=;
- b=F+XAXiD89P78StZo8Kw+dnZ4aV1o8Z4Hc3HbAeDvx/f6N2WF7PIsnnOU2FYv4/TPer
- bI221cmkVSe4/kSrqT0Gy/AfE26FL0+kA4YbIuXR16utIH90tSnU3T4jKLQg/YWOMVmT
- IUXp36NrzLkczsYlkbWwaCHTz/bKyqKNgVxI9uiAATrRjn74YIJ4NZ4HZtN3cCQV8ql0
- aPVuBf2Eo/BO5gi8DEldbDtPc5cP3WrH0JJ6I2CSNRvYC+UjFTsCcgXPIX7AFq+HrVkz
- AuX7GvBCdeollwKHniviOXqTdQRHzf5Svn6wQAtW8LAfIs7WU57eFI7mPtIQrb9EJOQ2
- zcwA==
+ bh=FxETQswXqcE5Qi2+tppie1f1NtEF1M+LVuf/RyGAris=;
+ b=Lt7qtU55eAM5bhRlcFeki6MV/IiPqYGXENQhImLdUtIpacxD8MeR54tY5LTuQmxPM3
+ vll2NCijtdBqzvVZr767V/t5fdz1yMIyHIJQwajoqnV3fIuxLZ4KjtgsyFT6xbb4ce5Q
+ XJU0vgoxEy8IIjE+kqXv/95yBXl9n7wKt+u5WxyPmyfH7cUP9+lZoOB5vRijhnyLtvWD
+ WRcT9U81yc978rGfBkuo69lZ0lA0WWOncNrzijvTQ/A6kxSGaNRbRr2IhXXbs1+U1D1N
+ Vduk11YOvMP/vrsGgESmOXhYx1Y2GvWrwzA13RqJ/n7RTNgNkJ2BNOdpOzGCk7L+bS9f
+ 1bnA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCU9AcE5cE348pETW2/T4E2hviPIA6EWra3r6c8o1J82DlotH6gEAGmilymc8on4COdArymuN/gyVTHd@nongnu.org
-X-Gm-Message-State: AOJu0Yzh39huL6jhAA6NzC6bjf+vDrr5ilxRwdIWM8N+RReQQncUDqaF
- OkuIUmROx7UbVJIfbEO0XKPvR6vzjlbh3WxMhGh5kQw095rLLsJugJNoObQNTrt1LTh3vRXjI0J
- 1bOdpNwzuZwW9yQKXh46c8M25pcI=
-X-Gm-Gg: ASbGncskdbUcs/GDo4YMyWBUpcvjmHClxOSRSrL4mgSdK9TmWX8Q4p08ngBxWOW6o9Q
- gK5rc3wWkg6TQhL9oUr7+/4BKIEMvhzdD
-X-Google-Smtp-Source: AGHT+IHRY9YGyP/h5+BP+NpOi4Wed6KMaSmwXGg6xcTGLni5jkuzfoSOtL5SBpq4uHfuxWGQxFM/FLqb2ctj+kyRSaw=
-X-Received: by 2002:a05:6102:c92:b0:4af:958:97d5 with SMTP id
- ada2fe7eead31-4af9729e406mr1760742137.25.1733208489728; Mon, 02 Dec 2024
- 22:48:09 -0800 (PST)
+ AJvYcCXDqY0g/NhyBGH41Afq+c2BXZpeSLptlu1JKhx7zWCtsjlAr0gyZdYVHBnu4TQ0xGCjthYpFJsBRDJ7@nongnu.org
+X-Gm-Message-State: AOJu0Yy6balONXleqRKS2egxHA5F1nQgILqVcM2sNaAfYwtyhLCD2wpz
+ vg5UMPYHQd0mWGCXDO50YqiRkFwoDwOpzbJ/wm9Ygu4jaiS1K4vh878EI7MII5rie1TlRQpCkvf
+ dIaB3yYg82R4J8Q0D5iKvPcdKinLx18By
+X-Gm-Gg: ASbGnctM9cGHWDnDF5vGMNWmlgYiEoPDY6kB1bqgSIxIto+6DyZhhebxmVyI+ounz5V
+ oDldYL9IER74qJ4BmaGAvNRxJNVITk3IJ
+X-Google-Smtp-Source: AGHT+IFTtEJqxa/E5hJ2QtLSJBSQE/K07AKJ3trQXXFfqrW9MjVxlra+coiIFG3+QKDSPYNGCW1o7rBwyTEevwOUdC4=
+X-Received: by 2002:a05:6102:d87:b0:4af:5853:fc7a with SMTP id
+ ada2fe7eead31-4af973840dbmr2075834137.23.1733212826890; Tue, 03 Dec 2024
+ 00:00:26 -0800 (PST)
 MIME-Version: 1.0
-References: <20241120153935.24706-1-jim.shu@sifive.com>
-In-Reply-To: <20241120153935.24706-1-jim.shu@sifive.com>
+References: <20241203034932.25185-1-fea.wang@sifive.com>
+ <20241203034932.25185-7-fea.wang@sifive.com>
+In-Reply-To: <20241203034932.25185-7-fea.wang@sifive.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Tue, 3 Dec 2024 15:47:43 +0900
-Message-ID: <CAKmqyKOBVuxvKMV7ihZVQRNepnJjxwgrxLdxeCrR6Sam+gnsrA@mail.gmail.com>
-Subject: Re: [PATCH v4 0/3] Support 64-bit address of initrd
-To: Jim Shu <jim.shu@sifive.com>
+Date: Tue, 3 Dec 2024 17:00:00 +0900
+Message-ID: <CAKmqyKNsPO4=yGcV+UZ6YnFobd3Y9GgN72f+yfKeGBZYBkA6Hg@mail.gmail.com>
+Subject: Re: [PATCH v5 6/6] target/riscv: Check svukte is not enabled in RV32
+To: "Fea.Wang" <fea.wang@sifive.com>
 Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, 
  Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <alistair.francis@wdc.com>, 
@@ -72,8 +73,8 @@ Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org,
  Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::e35;
- envelope-from=alistair23@gmail.com; helo=mail-vs1-xe35.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::a2b;
+ envelope-from=alistair23@gmail.com; helo=mail-vk1-xa2b.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -97,55 +98,41 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Thu, Nov 21, 2024 at 12:40=E2=80=AFAM Jim Shu <jim.shu@sifive.com> wrote=
-:
+On Tue, Dec 3, 2024 at 12:39=E2=80=AFPM Fea.Wang <fea.wang@sifive.com> wrot=
+e:
 >
-> Support to load DTB after 3GB on RV64 system, so that larger initrd
-> doesn't be overlapped to DTB. DTB loading now will check if overlapping
-> to kernel/initrd and report this error.
+> The spec explicitly says svukte doesn't support RV32. So check that it
+> is not enabled in RV32.
 >
-> Verify the patch via running 4GB initramfs on the virt machine.
->
->
-> Changes for v4:
->
->   - Update the comments of loading DTB in 64-bit CPU
->   - Align image_[low|high]_addr's type with initrd_start (hwaddr)
->   - Fix commit 2 to avoid unnecessary change .h file of board
->
-> Changes for v3:
->
->   - Change struct RISCVBootInfo from machine state to local variables.
->
-> Changes for v2:
->
->   - Add DTB overlapping checking and struct RISCVBootInfo
->   - Remove the commit to change #address-cell of 'initrd-[start|end]'
->
-> Jim Shu (3):
->   hw/riscv: Support to load DTB after 3GB memory on 64-bit system.
->   hw/riscv: Add a new struct RISCVBootInfo
->   hw/riscv: Add the checking if DTB overlaps to kernel or initrd
+> Signed-off-by: Fea.Wang <fea.wang@sifive.com>
 
-Thanks!
-
-Applied to riscv-to-apply.next
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
+> ---
+>  target/riscv/tcg/tcg-cpu.c | 5 +++++
+>  1 file changed, 5 insertions(+)
 >
->  hw/riscv/boot.c            | 100 +++++++++++++++++++++++++------------
->  hw/riscv/microchip_pfsoc.c |  13 +++--
->  hw/riscv/opentitan.c       |   4 +-
->  hw/riscv/sifive_e.c        |   4 +-
->  hw/riscv/sifive_u.c        |  14 +++---
->  hw/riscv/spike.c           |  14 +++---
->  hw/riscv/virt.c            |  13 +++--
->  include/hw/riscv/boot.h    |  28 ++++++++---
->  8 files changed, 127 insertions(+), 63 deletions(-)
+> diff --git a/target/riscv/tcg/tcg-cpu.c b/target/riscv/tcg/tcg-cpu.c
+> index c62c221696..3b99c8c9e3 100644
+> --- a/target/riscv/tcg/tcg-cpu.c
+> +++ b/target/riscv/tcg/tcg-cpu.c
+> @@ -652,6 +652,11 @@ void riscv_cpu_validate_set_extensions(RISCVCPU *cpu=
+, Error **errp)
+>          return;
+>      }
 >
+> +    if (mcc->misa_mxl_max =3D=3D MXL_RV32 && cpu->cfg.ext_svukte) {
+> +        error_setg(errp, "svukte is not supported for RV32");
+> +        return;
+> +    }
+> +
+>      /*
+>       * Disable isa extensions based on priv spec after we
+>       * validated and set everything we need.
 > --
-> 2.17.1
+> 2.34.1
 >
 >
 
