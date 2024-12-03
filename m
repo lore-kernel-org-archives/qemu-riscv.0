@@ -4,79 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D6848E6C60B
-	for <qemu-riscv@archiver.kernel.org>; Tue,  3 Dec 2024 05:56:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BC4A2E6C60C
+	for <qemu-riscv@archiver.kernel.org>; Tue,  3 Dec 2024 06:32:29 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tILtg-0003us-7M; Tue, 03 Dec 2024 00:56:32 -0500
+	id 1tIMRc-0000CP-EC; Tue, 03 Dec 2024 01:31:36 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1tILte-0003ub-F1; Tue, 03 Dec 2024 00:56:30 -0500
-Received: from mail-vs1-xe2a.google.com ([2607:f8b0:4864:20::e2a])
+ id 1tIMRa-0000B1-IV; Tue, 03 Dec 2024 01:31:34 -0500
+Received: from mail-vs1-xe33.google.com ([2607:f8b0:4864:20::e33])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1tILtd-0002yS-4K; Tue, 03 Dec 2024 00:56:30 -0500
-Received: by mail-vs1-xe2a.google.com with SMTP id
- ada2fe7eead31-4af16d741dfso1070051137.3; 
- Mon, 02 Dec 2024 21:56:28 -0800 (PST)
+ id 1tIMRZ-0008EX-1z; Tue, 03 Dec 2024 01:31:34 -0500
+Received: by mail-vs1-xe33.google.com with SMTP id
+ ada2fe7eead31-4aefdbf8134so1197414137.2; 
+ Mon, 02 Dec 2024 22:31:32 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1733205387; x=1733810187; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1733207491; x=1733812291; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=HCinEncFBuiY4obiFoWp8FUfxul26qD2FivgdMUgdvk=;
- b=hwSmakeKPbLH9mvi1P/RIHLxfm8dH/dhNeULBdPKd5Bz48gJWXF/3akNPQ5+gXyPYo
- /s8zry5VdfJjgGRZjXsre9LGKohRXEzjO7YT+RZcmbdvikLn3XgDpCHZmQ08VgCm+yMX
- M49VTeVgW99+axjoLKUGP0dB37wzpw9YQLw2raYOAMPMqpZEWBzc6RtTCTPXZPJxdnmm
- Ed7qmvb8zJImvmgiaK+O6l+VWBiYZeBZuWPIjO3oWR1ySh5zQfH2rv2YIYaRGb9iTtS1
- KaVFrPgYIYZOZTYRx1YCZmB8GMB9R8hQbeQedQnP3dquhPzqAJWpAZo3W65Wmseyv1gP
- q2bA==
+ bh=51e6sQVFtPJq/fpzqreSigR1j2ToG7DiQDj/JiDYmeE=;
+ b=Uns72N7K78CRNpCQS6UXlG7lPkvK3ExCErVk/vUOWiggjj8qfeGmPdh27CpSSStJHg
+ cn6XY6iHNUbLF+KMcI3loDqUkG9yx+EzQEHh5UGNft9q7h4eK+XaH4ziO2uIR6ZlMip/
+ 5uM7BWwQ42f7bi95RJaugGkXiY+wslEYGIGtK3PvTfUA+d8DK7LXUV567L5Ehuo9ejRR
+ RhxfHo2k+b2XinNHB3H0uw0IdhCCwxLu+8hs5ZAiOvKrbkwraf0hLjSQTYyse6nCniUG
+ 5NG7usNn48nb5UCBMXqyeUmmIYCorXeZ1CWe9aLsyUGE6ENB7uBliksFaTjeDIacBnFv
+ YvJw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733205387; x=1733810187;
+ d=1e100.net; s=20230601; t=1733207491; x=1733812291;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=HCinEncFBuiY4obiFoWp8FUfxul26qD2FivgdMUgdvk=;
- b=eb+CXb/iKAyeWZF4sddbDmLFyuEICDyvLrKFx0zIT4WNU34UVXrpxEoCd/W171gWPB
- Gn9TqVPOrt2f/xVUJ2V2hA7yfNgejc4Y8kUytvb5Vdwwlth5PTim6C3XGrlMwUghl5gS
- pnZv0D9T+T0keAu+2uzCGoQxdhUIv5c/8NyfnMQZ9LVphj0DSB6zJCjtX+xXx2L4Rb9a
- V3yRwRKZHoInLHlz1nzx2f/Xexxx3zpO5VT6eQQC5fSWZB4sJGDnzKEfa9uKFK85sdqY
- PmTm5oQiBVZoHbSpbvCGxgpB2LguR2J72+a/Vhn7FiaJbpe3aa4ovWLMFekuY3trsSor
- 0xaQ==
+ bh=51e6sQVFtPJq/fpzqreSigR1j2ToG7DiQDj/JiDYmeE=;
+ b=SgYkPS8PQrdmh9RyUn547ms2lJ/dX8P3IztcE9Ps6z8kcxw+STLa2ddJeqoftyYWbG
+ 1nBu4doUvFxN008VgxLH/CMjBn08GtF3JAG+btJFzy1ReLGpeOZ6/ZdTO8cBa92Kz7hG
+ yd8JCCfuQbcll8rOP2eXoz7V8dLLhyAhQjz4QPZ3X1L5RHvPqVGPIILKgEIx1AeLvuxJ
+ sqtHIJsgviMhUTQ9vmkwtQCsWWls5thoCVT7h+g3J3+MFc8IgZm6Xe7dXP6MxzXMLtPm
+ E4xepcBhcML1rKpLXN3racODhtwLvICQ1obVxHredWYbcX1dm7GCX6SFWTQyMl2FbfFt
+ /w6Q==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUNCJxAXCNncie7l9TnqYYHWR15PD/z017DcmNHZ5y3hGa1iOuZgt2DR+T/gwmalWpkzAYp74fO3AgS@nongnu.org
-X-Gm-Message-State: AOJu0Yzj/nBrNNs6LE/R3vRL7+yhTCnDqTurx/Wy4nm9a7RbHKDz9E5m
- 9a85OTYwL+NoTgAf/v1e6VvITOip3SC7dGVdh5SlsIIpM0xZYzOdgqnXEL2Sj3v6LSt/UUJwdGe
- 7HwRxP8KGEAqPLXKj0Vynee43Rgc=
-X-Gm-Gg: ASbGnctqpAO80cy/vLZVC2ujJtZ6l/LjsHoYT0UIlQnkhCQD6dFqU89mDiBwL/viyZc
- EFTh+MRcN1K3KFTHXyHPlyndWuZaI6v+K
-X-Google-Smtp-Source: AGHT+IHwPnSgfLOhxzj4VRGvA1gpvPpyUg9qyOKbvNuG+svemZF39k/mUzYPCKZTQjLZPfcqBsCCWY/CkVtP5n2m4dM=
-X-Received: by 2002:a05:6102:6cc:b0:4af:56d1:5ccc with SMTP id
- ada2fe7eead31-4af971b8c56mr2232203137.14.1733205387591; Mon, 02 Dec 2024
- 21:56:27 -0800 (PST)
+ AJvYcCWefAed4oketnSkktLkG1uEKMpjXdKP+WoUPN1HwGBl7ak+cgFRxoLwCeEwPUZIVq4dEi12SQ9Iv+rB@nongnu.org
+X-Gm-Message-State: AOJu0YzNEAzug2L3qrrX8t9lSqNIsvpv6QLn6wL1QZDRw7AO+oq641gu
+ v9pQnlIdQa5pZa4+RbR+kjOy1wD0y1IeZoG3jUil72Px7qWziUqV5s7Eecsp+KoVJKkV+eIanuY
+ RuC2rtujZBzf6bMCeN6Z9EzGkDUA=
+X-Gm-Gg: ASbGncvi1tHemRJcysB/E9Aj4DJcWpyRJS5LzMiJuky6nUxhcs+dI8FYiFW5fE7jWzR
+ 8ZIb148vG9LTAHbceCjd7BkfwnMd/HWel
+X-Google-Smtp-Source: AGHT+IGtaq20FQ+nAGp+2AO8fkuENF7tv8k5U255kXq3on0N5HAQBvZu4Q151Hvz6z1UH6SlbOwvh0XLUudpqfHEEHU=
+X-Received: by 2002:a05:6102:a4a:b0:4a3:a014:38aa with SMTP id
+ ada2fe7eead31-4af9723815fmr2407407137.11.1733207491294; Mon, 02 Dec 2024
+ 22:31:31 -0800 (PST)
 MIME-Version: 1.0
-References: <20241129154304.34946-1-philmd@linaro.org>
- <20241129154304.34946-4-philmd@linaro.org>
-In-Reply-To: <20241129154304.34946-4-philmd@linaro.org>
+References: <20241128103831.3452572-1-peter.maydell@linaro.org>
+In-Reply-To: <20241128103831.3452572-1-peter.maydell@linaro.org>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Tue, 3 Dec 2024 14:56:00 +0900
-Message-ID: <CAKmqyKN8VryKSyN5040o2Q21AuxQmCRjXuiSk1JCBv_e1TotpQ@mail.gmail.com>
-Subject: Re: [PATCH-for-10.0 3/3] hw/char/riscv_htif: Clarify MemoryRegionOps
- expect 32-bit accesses
-To: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@linaro.org>
-Cc: qemu-devel@nongnu.org, Weiwei Li <liwei1518@gmail.com>, 
- Alistair Francis <alistair.francis@wdc.com>, 
- =?UTF-8?B?TWFyYy1BbmRyw6kgTHVyZWF1?= <marcandre.lureau@redhat.com>, 
- Bin Meng <bmeng.cn@gmail.com>, qemu-riscv@nongnu.org, 
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Palmer Dabbelt <palmer@dabbelt.com>, 
- Paolo Bonzini <pbonzini@redhat.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
+Date: Tue, 3 Dec 2024 15:31:05 +0900
+Message-ID: <CAKmqyKOYjhdp1fNSnqGdhyFJF2Ywhi16q_h3+LaATFuFFqoHpg@mail.gmail.com>
+Subject: Re: [PATCH for-9.2] target/riscv: Avoid bad shift in
+ riscv_cpu_do_interrupt()
+To: Peter Maydell <peter.maydell@linaro.org>
+Cc: qemu-devel@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>, 
+ Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bmeng.cn@gmail.com>, 
+ Weiwei Li <liwei1518@gmail.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>, 
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, qemu-riscv@nongnu.org
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::e2a;
- envelope-from=alistair23@gmail.com; helo=mail-vs1-xe2a.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::e33;
+ envelope-from=alistair23@gmail.com; helo=mail-vs1-xe33.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -100,54 +97,64 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Sat, Nov 30, 2024 at 12:45=E2=80=AFAM Philippe Mathieu-Daud=C3=A9
-<philmd@linaro.org> wrote:
+On Thu, Nov 28, 2024 at 7:39=E2=80=AFPM Peter Maydell <peter.maydell@linaro=
+.org> wrote:
 >
-> Looking at htif_mm_ops[] read/write handlers, we notice they
-> expect 32-bit values to accumulate into to the 'fromhost' and
-> 'tohost' 64-bit variables. Explicit by setting the .impl
-> min/max fields.
+> In riscv_cpu_do_interrupt() we use the 'cause' value we got out of
+> cs->exception as a shift value.  However this value can be larger
+> than 31, which means that "1 << cause" is undefined behaviour,
+> because we do the shift on an 'int' type.
 >
-> Signed-off-by: Philippe Mathieu-Daud=C3=A9 <philmd@linaro.org>
+> This causes the undefined behaviour sanitizer to complain
+> on one of the check-tcg tests:
+>
+> $ UBSAN_OPTIONS=3Dprint_stacktrace=3D1:abort_on_error=3D1:halt_on_error=
+=3D1 ./build/clang/qemu-system-riscv64 -M virt -semihosting -display none -=
+device loader,file=3Dbuild/clang/tests/tcg/riscv64-softmmu/issue1060
+> ../../target/riscv/cpu_helper.c:1805:38: runtime error: shift exponent 63=
+ is too large for 32-bit type 'int'
+>     #0 0x55f2dc026703 in riscv_cpu_do_interrupt /mnt/nvmedisk/linaro/qemu=
+-from-laptop/qemu/build/clang/../../target/riscv/cpu_helper.c:1805:38
+>     #1 0x55f2dc3d170e in cpu_handle_exception /mnt/nvmedisk/linaro/qemu-f=
+rom-laptop/qemu/build/clang/../../accel/tcg/cpu-exec.c:752:9
+>
+> In this case cause is RISCV_EXCP_SEMIHOST, which is 0x3f.
+>
+> Use 1ULL instead to ensure that the shift is in range.
+>
+> Signed-off-by: Peter Maydell <peter.maydell@linaro.org>
 
-Acked-by: Alistair Francis <alistair.francis@wdc.com>
+Thanks!
+
+Applied to riscv-to-apply.next
 
 Alistair
 
 > ---
-> Notes
+>  target/riscv/cpu_helper.c | 8 ++++----
+>  1 file changed, 4 insertions(+), 4 deletions(-)
 >
-> 1/ these variables belong to HTIFState but are declared statically!
->
->   static uint64_t fromhost_addr, tohost_addr, begin_sig_addr, end_sig_add=
-r;
->
-> 2/ I believe a 64-bit implementation would simplify the logic.
->
-> 3/ This is a non-QOM device model!
->
-> Signed-off-by: Philippe Mathieu-Daud=C3=A9 <philmd@linaro.org>
-> ---
->  hw/char/riscv_htif.c | 4 ++++
->  1 file changed, 4 insertions(+)
->
-> diff --git a/hw/char/riscv_htif.c b/hw/char/riscv_htif.c
-> index 3f84d8d6738..db69b5e3ca7 100644
-> --- a/hw/char/riscv_htif.c
-> +++ b/hw/char/riscv_htif.c
-> @@ -325,6 +325,10 @@ static const MemoryRegionOps htif_mm_ops =3D {
->      .read =3D htif_mm_read,
->      .write =3D htif_mm_write,
->      .endianness =3D DEVICE_LITTLE_ENDIAN,
-> +    .impl =3D {
-> +        .min_access_size =3D 4,
-> +        .max_access_size =3D 4,
-> +    },
->  };
->
->  HTIFState *htif_mm_init(MemoryRegion *address_space, Chardev *chr,
+> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+> index 0a3ead69eab..45806f5ab0f 100644
+> --- a/target/riscv/cpu_helper.c
+> +++ b/target/riscv/cpu_helper.c
+> @@ -1802,10 +1802,10 @@ void riscv_cpu_do_interrupt(CPUState *cs)
+>      bool async =3D !!(cs->exception_index & RISCV_EXCP_INT_FLAG);
+>      target_ulong cause =3D cs->exception_index & RISCV_EXCP_INT_MASK;
+>      uint64_t deleg =3D async ? env->mideleg : env->medeleg;
+> -    bool s_injected =3D env->mvip & (1 << cause) & env->mvien &&
+> -        !(env->mip & (1 << cause));
+> -    bool vs_injected =3D env->hvip & (1 << cause) & env->hvien &&
+> -        !(env->mip & (1 << cause));
+> +    bool s_injected =3D env->mvip & (1ULL << cause) & env->mvien &&
+> +        !(env->mip & (1ULL << cause));
+> +    bool vs_injected =3D env->hvip & (1ULL << cause) & env->hvien &&
+> +        !(env->mip & (1ULL << cause));
+>      target_ulong tval =3D 0;
+>      target_ulong tinst =3D 0;
+>      target_ulong htval =3D 0;
 > --
-> 2.45.2
+> 2.34.1
 >
 >
 
