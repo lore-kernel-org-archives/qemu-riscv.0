@@ -4,97 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ECC4AE64AAA
-	for <qemu-riscv@archiver.kernel.org>; Tue,  3 Dec 2024 13:57:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4ECC0E74ACF
+	for <qemu-riscv@archiver.kernel.org>; Tue,  3 Dec 2024 20:09:17 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tITP7-0004zc-Mz; Tue, 03 Dec 2024 08:57:29 -0500
+	id 1tIZCW-0006ez-1u; Tue, 03 Dec 2024 15:08:52 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1tITOz-0004yc-CO
- for qemu-riscv@nongnu.org; Tue, 03 Dec 2024 08:57:21 -0500
-Received: from mail-oi1-x22f.google.com ([2607:f8b0:4864:20::22f])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tIZCT-0006d4-Cz
+ for qemu-riscv@nongnu.org; Tue, 03 Dec 2024 15:08:49 -0500
+Received: from mail-wr1-x42a.google.com ([2a00:1450:4864:20::42a])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1tITOx-0003ol-7y
- for qemu-riscv@nongnu.org; Tue, 03 Dec 2024 08:57:20 -0500
-Received: by mail-oi1-x22f.google.com with SMTP id
- 5614622812f47-3e63e5c0c50so3036722b6e.0
- for <qemu-riscv@nongnu.org>; Tue, 03 Dec 2024 05:57:18 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tIZCQ-0003HJ-5f
+ for qemu-riscv@nongnu.org; Tue, 03 Dec 2024 15:08:47 -0500
+Received: by mail-wr1-x42a.google.com with SMTP id
+ ffacd0b85a97d-385e2c52c21so2425550f8f.2
+ for <qemu-riscv@nongnu.org>; Tue, 03 Dec 2024 12:08:45 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1733234237; x=1733839037; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=JLiChfJblwp1Jernog2B9tk/jaBR2orXqcxknU+ARjU=;
- b=Pb9VVYnVzUBQDMjqA3IHylzbhoSyBlVVEwxdiOTGhxPT6WN/CLFMxKrFGaUCQ3Hbu/
- 37shCXWA9/BNaApccgwRullpjFw27xSmI86OrSvCchp5tXuVhKBu5KipMMULrj8GY/Np
- 6uzJhiDmKA7jjN+qcKR1+nK9WmpGbrpMcjrlRNnvzXbOS6sOO1HOnAiaCFVbp64KoARC
- P4EUfASewu3CMUBVyTjNk6MMheMQ3PS4+F4RakDBCsWTAFSRhkEyHsUhk5fr+bc/Rn3r
- NICb6LNehUhGEie6XjAt45wb/WpqG12o3g2EP/J1JHr3/oHCDflnToxKM4fOKbL191Hb
- iXdg==
+ d=linaro.org; s=google; t=1733256524; x=1733861324; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=1Z+oPOY9zkW5nSvF8Evg7C1/iJ6Xb0OH2wlMJp2C/qo=;
+ b=YLV+bVm+CDkPYgz/oNo/X5B1LzpiKtLPA1L1DECw989piUmWhVt3sxoqSMGyx2rFRM
+ RhQweMZl2VCyh1o0bTzrPEsROQKHDwB7JV6RJ/I3TkYs+DPpUYfpyCxlRxbChhL6eQsg
+ yg1AXBCzA4Btk5nVtrDLkBCaCKDx7hLsdc3phpuz+3pbFc8oOD1kCtIUjB85YArxadrf
+ vMoaTljs0G0LFNBF45NaqSdxY+GXdxm84ZLNiasTtnUo14LubNyvoVSWzisgOQJ5uIPc
+ 8knvXmivopHF8pMirJmF0OkV3cs4zhlLZFxp/CzBwYWr+O1kWCuK29w9TEs/MGJSVc4P
+ mYQQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733234237; x=1733839037;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=JLiChfJblwp1Jernog2B9tk/jaBR2orXqcxknU+ARjU=;
- b=orCxZ2h5IEKUwKxUnii8Yjy5wei1z5sOhsTIoh0aY30+ZqwPnwQOQ0yUnoeZ+rhIzA
- O6ax/RuolEGl93Lhq8ygN++f1n6IrvssQOxSo8TPkLPb0pUBpTV+yplX3+hbMJy2DS7E
- iCLKMp3OJ1RUk74a4Ci5u/yGzXYldCXnvaPyb4nhM18ciDO47AlWT1zaxbFWAC4VXxlo
- PcXiC5BUKyUjTrn2qU/qiN4TdwlcX36aD34on+KO0PE9xSVoDqUEzPjmOWEddgS8d/zc
- VBHUYQ13Jn4WjFPHiW8Bs1/qWmI5nuA57EsDr9YHmUyEXBty35X4hktZwL47sqbLR/zH
- /MGQ==
+ d=1e100.net; s=20230601; t=1733256524; x=1733861324;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=1Z+oPOY9zkW5nSvF8Evg7C1/iJ6Xb0OH2wlMJp2C/qo=;
+ b=R0VK0snZj1jw9sCPUCSvajW9wQU3VpDowjaN+YI8anrwOZRKOkzBRBxoKn4Qq9BSnd
+ 5vKX1v9gzilEA04O0VrtxrExC80vijHtsOMCDIUTHPINn/16/WpUBpHpGAQEwSOQnx7Z
+ 3pgqvQpOw9LbPgnwKWNWd8NJJ4cPBTrSqGHEvNpNl7sWTDrS+N40Y+fb8hglQ2ovxwre
+ R+AeTnhKYUIO5uAI4bD6TJIE0145pfoPpKzO4m2cw+IZv3OljARMISlvOenKSARv23ee
+ 8CgcB07XFE+Oy9soydrpMZNGTMwoiwrHyPBegzEZI1OR5r5u6EUcvqCuyso5fsf/SMOS
+ V4sw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVoVid5NfJzLi8LzYvk8dW5c0plOZbYfHynwpeq7LiFzRqzzfvMCNrKkt9S8gOk4n3R3Fl7pAfFUqFC@nongnu.org
-X-Gm-Message-State: AOJu0YxH4z5fHhul1Ui/G2VpZS7wGKqdA4LFkOFfx4n32hUVbNVnXqXH
- oPHpzCrhKBKhFvAsja72PUT2oF2MCoMUiiNHuTsWXfkASuefu1U+nO3K/bUcV+M=
-X-Gm-Gg: ASbGncttkUU71tpJUXGD93XS7f5sJMtzspeqjHRNOZ8DBM+aXh1qgPIRF2VjPUEIOZU
- XRjuo5F589EJXH7s/3b48dpX8PyAYlrWnEbLpfLthp6pOIcdwRpuVpjyGjfjPDBsuWEBmlyZB1c
- GSEG7XjuXqxcygC8SfWnLMSH/75Df6V3moZh8NNMmzjqkTmCFymMXbyYjRTNNB0vtvy0+ABmMcz
- EnvbT0UQVj1xv+w8824JGfB8g8Bgx2wkLisH7slB83m39zay3CyEy/KEZTFbSNAqbneChDgTGeg
- 4TiBqVqopMS4leULzwnfcrwful9D
-X-Google-Smtp-Source: AGHT+IEVbM8PhUusv77qpoJJpeOozVDN7LWm9z8IQppVZz7euJmbwCQRW5ZDtjkB5Jkzzu2iWx/Y1Q==
-X-Received: by 2002:a05:6808:1a22:b0:3ea:4b5c:60a8 with SMTP id
- 5614622812f47-3eae4a2c931mr1388363b6e.17.1733234237640; 
- Tue, 03 Dec 2024 05:57:17 -0800 (PST)
-Received: from [192.168.4.112] (fixed-187-189-51-143.totalplay.net.
- [187.189.51.143]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-3ea86218084sm2812674b6e.37.2024.12.03.05.57.16
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 03 Dec 2024 05:57:16 -0800 (PST)
-Message-ID: <dc1b450a-f250-4b84-80bd-6f14888ce327@linaro.org>
-Date: Tue, 3 Dec 2024 07:57:14 -0600
+ AJvYcCU0dKpP73xlIZi/Isist+a81inBfbqjFFBLC5ts9k5ER5hMdHJRwX1UnsbMzj+cH5G0iXe75FMEgY9P@nongnu.org
+X-Gm-Message-State: AOJu0YxNgF3g/Slo5OqWu+3NjzcJj58GKGwa4Ixg3EN5xuWLwlIK/Suh
+ m3CDwdiqalFYztJlpEKvC4zEI/5XDGvkJDanSZa0Ql3BQc9QgVYnTTbmFgoyGK4=
+X-Gm-Gg: ASbGncuH0voxGory3yr5MEPSjaO3U479H4RRFk+h6LLNi1H8pMuZxsqflRlKuyb8M+7
+ +JmVVmqtLapulcvmQ59BC0x7T6+iyMy2Nx3ElNDuqA/+2h2hNYq380VchpxHDXrDWkf+L9XsdNX
+ p60x+JgwlEvvmlCDVCHgmRugbjFDhBptnnmYfX8owEgzTri6m2of4+xblBO4OrbuTMyhm1Pi8q/
+ 1MGnJQds0yWDEx9WsZ7prff/ZQvUJgxtXnNBApyhOAtxrYw6zguBIGULpGjphEgemL1zNRs74PH
+ Sg==
+X-Google-Smtp-Source: AGHT+IF4fQBFsW+NxSAbs2sW/fx5c+t0fCV00XJKeHtclBhrZEnCA1P0iSmfPf4+zcf1Z+IAPSERkw==
+X-Received: by 2002:a05:6000:1a88:b0:385:e9ca:4e2a with SMTP id
+ ffacd0b85a97d-385fd3f2168mr3266300f8f.4.1733256524368; 
+ Tue, 03 Dec 2024 12:08:44 -0800 (PST)
+Received: from localhost.localdomain ([176.187.209.146])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-385e3c21ba7sm10804489f8f.53.2024.12.03.12.08.42
+ (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
+ Tue, 03 Dec 2024 12:08:43 -0800 (PST)
+From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+To: qemu-devel@nongnu.org
+Cc: Weiwei Li <liwei1518@gmail.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, Bin Meng <bmeng.cn@gmail.com>,
+ qemu-riscv@nongnu.org, Alistair Francis <alistair.francis@wdc.com>,
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+Subject: [PATCH 2/2] target/riscv: Include missing headers in 'internals.h'
+Date: Tue,  3 Dec 2024 21:08:28 +0100
+Message-ID: <20241203200828.47311-3-philmd@linaro.org>
+X-Mailer: git-send-email 2.45.2
+In-Reply-To: <20241203200828.47311-1-philmd@linaro.org>
+References: <20241203200828.47311-1-philmd@linaro.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] binfmt: Don't consider riscv{32,64} part of the same
- family
-To: Peter Maydell <peter.maydell@linaro.org>,
- =?UTF-8?Q?Daniel_P=2E_Berrang=C3=A9?= <berrange@redhat.com>
-Cc: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Andrea Bolognani <abologna@redhat.com>, qemu-devel@nongnu.org,
- qemu-riscv <qemu-riscv@nongnu.org>, Laurent Vivier <laurent@vivier.eu>,
- David Abdurachmanov <davidlt@rivosinc.com>, Mark Corbin <mark@dibsco.co.uk>
-References: <20241203094702.124748-1-abologna@redhat.com>
- <cb079b65-e5fc-4667-aa63-9ff347666b6e@linaro.org>
- <Z07a_kYh4duwWKWw@redhat.com>
- <CAFEAcA8BAW4=Yk5q0CgQNL4UZpUJXiwRV6VD-52_Rw0SN=E1Cg@mail.gmail.com>
-Content-Language: en-US
-From: Richard Henderson <richard.henderson@linaro.org>
-In-Reply-To: <CAFEAcA8BAW4=Yk5q0CgQNL4UZpUJXiwRV6VD-52_Rw0SN=E1Cg@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::22f;
- envelope-from=richard.henderson@linaro.org; helo=mail-oi1-x22f.google.com
-X-Spam_score_int: -19
-X-Spam_score: -2.0
+Received-SPF: pass client-ip=2a00:1450:4864:20::42a;
+ envelope-from=philmd@linaro.org; helo=mail-wr1-x42a.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
 X-Spam_bar: --
-X-Spam_report: (-2.0 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- URIBL_SBL_A=0.1 autolearn=unavailable autolearn_force=no
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -110,30 +104,41 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 12/3/24 04:35, Peter Maydell wrote:
-> On Tue, 3 Dec 2024 at 10:19, Daniel P. Berrangé <berrange@redhat.com> wrote:
->> Separatley this from patch, we should also consider whether
->> it is time to do the same for aarch64/arm7.
->>
->> If I look at this page:
->>
->>    https://gpages.juszkiewicz.com.pl/arm-socs-table/arm-socs.html
->>
->> and sort by 'announced' to see msot recent CPUs first, then
->> almost all of them have "NO" in the "aarch32 support" column.
->>
->> IOW, on modern aarch64 CPUs, qemu-arm is the only viable way
->> to run 32-bit usermode binaries AFAICT, and suggests we ought
->> to be creating a binfmt rule for that on aarch64 hosts.
-> 
-> What happens if you have a host CPU that *does* support 32-bit
-> natively and you also register the binfmt rule? Does the
-> host kernel prefer to execute natively or does it invoke
-> QEMU? I don't think we want to roll out something that
-> silently downgrades native execution to emulation...
+Rather than relying on implicit includes, explicit them,
+in order to avoid when refactoring unrelated headers:
 
-The registered rule applies and the kernel invokes qemu.
+  target/riscv/internals.h:49:15: error: use of undeclared identifier 'PRV_S'
+     49 |         ret = PRV_S;
+        |               ^
+  target/riscv/internals.h:93:9: error: call to undeclared function 'env_archcpu'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
+     93 |     if (env_archcpu(env)->cfg.ext_zfinx) {
+        |         ^
+  target/riscv/internals.h:101:15: error: unknown type name 'float32'; did you mean 'float'?
+    101 | static inline float32 check_nanbox_s(CPURISCVState *env, uint64_t f)
+        |               ^~~~~~~
+        |               float
 
+Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+---
+ target/riscv/internals.h | 3 +++
+ 1 file changed, 3 insertions(+)
 
-r~
+diff --git a/target/riscv/internals.h b/target/riscv/internals.h
+index ddbdee885bc..76934eaa7b5 100644
+--- a/target/riscv/internals.h
++++ b/target/riscv/internals.h
+@@ -19,7 +19,10 @@
+ #ifndef RISCV_CPU_INTERNALS_H
+ #define RISCV_CPU_INTERNALS_H
+ 
++#include "exec/cpu-common.h"
+ #include "hw/registerfields.h"
++#include "fpu/softfloat-types.h"
++#include "target/riscv/cpu_bits.h"
+ 
+ /*
+  * The current MMU Modes are:
+-- 
+2.45.2
+
 
