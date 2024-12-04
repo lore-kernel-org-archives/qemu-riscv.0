@@ -4,81 +4,150 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AF77CE7716B
-	for <qemu-riscv@archiver.kernel.org>; Wed,  4 Dec 2024 04:43:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B9D8EE7716D
+	for <qemu-riscv@archiver.kernel.org>; Wed,  4 Dec 2024 06:50:19 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tIhEO-0005sZ-Hb; Tue, 03 Dec 2024 23:43:20 -0500
+	id 1tIjD6-0008Hd-Kw; Wed, 04 Dec 2024 01:50:09 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1tIhEA-0005qu-Kr; Tue, 03 Dec 2024 23:43:07 -0500
-Received: from mail-vk1-xa32.google.com ([2607:f8b0:4864:20::a32])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1tIhE9-0003UH-4z; Tue, 03 Dec 2024 23:43:06 -0500
-Received: by mail-vk1-xa32.google.com with SMTP id
- 71dfb90a1353d-51532deb8a4so1621700e0c.0; 
- Tue, 03 Dec 2024 20:42:54 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1733287374; x=1733892174; darn=nongnu.org;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=fWETwWX5HED8osVL7iEPOTA8shavm+TigW5fgB2BzTo=;
- b=c9krm8WrSDr9hRbSPcGrvqCAuLl9yDPyvttOHlFBPJdo7ggS0wJgws5c9H0CdxrdMH
- S8Dpb2DZgid+qw9uUT0AzW9155eV0WNsfaPWzAtjUUx5LycPCCpuh/G/7Rak+cBW7LrZ
- 8BqbI697TAdYzBi7QKhyKQ2g6WSbwTDwHWJ3/sc7/e7tTh1ehgYIkuU51kBlI+reIcQz
- INnUS/+QuC4am5HBv/WOwogd6x1fNe+sBmuUUZ2hJ/Wjh/Q6vcYEn33YWGVZ/YLDA0kJ
- PGZFBKrTYsacl6gwJymZsAlBa4q9eDQw7ioDtuGLFiwUYY+mgoSGkkyPpRVDrC+a2jl2
- mPSA==
+ (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1tIjD2-0008H8-Lf
+ for qemu-riscv@nongnu.org; Wed, 04 Dec 2024 01:50:04 -0500
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1tIjCz-0008MZ-3K
+ for qemu-riscv@nongnu.org; Wed, 04 Dec 2024 01:50:03 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1733294999;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
+ bh=J1E8R3dW6tV138ZRkbVrPlUAn7vvGa4J37rC1Eiqw2c=;
+ b=ClMdFs3SesxtjoUsJYrPcq+ldg3Nai2JSZod8S4uNFgm0vAkpfFNkqo3FvCKxPvcGCmsUh
+ B/6+ihr9S0ZBlp5jIcodRgkCWdJCJ1zGjyxlbIGsHSc/6nYm1x0lT8L/NrwyYfuipEaCbE
+ mk0Lug0LxVMPqCnKma0r2sJmth2eNac=
+Received: from mail-lj1-f200.google.com (mail-lj1-f200.google.com
+ [209.85.208.200]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-685-dNkC5jGiPHelrKw9lz3NYA-1; Wed, 04 Dec 2024 01:49:58 -0500
+X-MC-Unique: dNkC5jGiPHelrKw9lz3NYA-1
+X-Mimecast-MFC-AGG-ID: dNkC5jGiPHelrKw9lz3NYA
+Received: by mail-lj1-f200.google.com with SMTP id
+ 38308e7fff4ca-2ffb0921706so47390461fa.1
+ for <qemu-riscv@nongnu.org>; Tue, 03 Dec 2024 22:49:57 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733287374; x=1733892174;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=fWETwWX5HED8osVL7iEPOTA8shavm+TigW5fgB2BzTo=;
- b=eFzj/4ruIxPlWjUkyur7irYtdzZpFnETBIuIi6zaVKXJNHfp8JzmvyJq/MvgWXo3Ek
- +jTQViyoD+r7L06GvnKISdwvy1RX2nl6sJF7ZqSmussGBVSgtFZg07ER34lTlXtfEbyL
- OaueDT+Bs7l8HQkQ98Q5g0l64ias/LuBLIfqcI5FIDwR/iWOLGcHQWUL0LLJAMg0JmLD
- ArdDOpq+nT7zitXFOhFy+qBWd8D5R5C2iCgQVoNohstx4DyFEols+IGCplyS0dyXgRSN
- hRI2hFkzwJWrUe6WPNziwSIj/YpT+dONnsHIdaCjuGNATN8IadFbk0lF6mFWwesyC/v0
- +T7A==
+ d=1e100.net; s=20230601; t=1733294996; x=1733899796;
+ h=content-transfer-encoding:in-reply-to:autocrypt:content-language
+ :from:references:cc:to:subject:user-agent:mime-version:date
+ :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=J1E8R3dW6tV138ZRkbVrPlUAn7vvGa4J37rC1Eiqw2c=;
+ b=Etr0aQYpYZn0iTmvBVais+Ck9A03yNcGvJjPJ1doAtg3mr07t3XSMW6aCrdr4fZ4Zm
+ UCPzzURliYrav9fgAnn/hPyJj1ky9z5+p41wVCw76AZ0FPxP67QhGC/Mb92mLKRaOkDF
+ qEkjN+aoHc8hKUs4xtn/s7Qf2NxXPGrmWSNCyiVXqQ9+RKNu0G1ocIAQ3CAUD/QSx4vP
+ ACjG1DQVX44QilwRmnOGohZfvnlar3LMvwU57QuKjg/XTFZZMDy6zeKl7pYYx9yHdwEu
+ 5oWKSxAW+LfsK9mHQEGPBnekCNvSn989rmRmJrebeeykJZxlOA8zdogCa8oSUMXjQD+q
+ 9yfA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCW14opUbkoPbcneKvIbNbIIjhsTSGHVmgJYVGHTYOhRVT0ueTs1+v8IRzLzZDA8xELpgsGnZBLdsu49@nongnu.org
-X-Gm-Message-State: AOJu0YxG7NRRGCuBn8Ur8BZocxQXXHTSG5SedlszH2AGtqG+n46jIwGJ
- Gsq0rh3qAzltSSKExIjkLURbWAxJBOaK5c1922DwbW+38ttmyZEBi60KSL6trZX4byjDg0A4a+3
- FnFK2OJYS6x4HOY7lYD+YEQOEi0M=
-X-Gm-Gg: ASbGncvRyZMvwdEmNJ5utnJPpw54yEeKeR171LhtiBYAzQbpcBBCyzeTls3oaWYLMQK
- /CAYwS+UBnuH4d9UlfT74oF6F0A1Ot2az
-X-Google-Smtp-Source: AGHT+IH/1GqvL7QHq5Kr5WCX8AoNKuxzSQPu/RlNWX+JMxV1LOjGlHFwPvVk2JWuVGt2mMn/pPpfiwQE5dmxC2JMmho=
-X-Received: by 2002:a05:6122:da1:b0:515:5008:118c with SMTP id
- 71dfb90a1353d-515bf50a748mr7372424e0c.6.1733287373751; Tue, 03 Dec 2024
- 20:42:53 -0800 (PST)
+ AJvYcCVqcePzROiGWGZvTVEsGO6Y3MhcaZOjGbgJ00amPgtdeJQgp+XXrsmNfG4hkmTd1ir+yHB/i0KPhj98@nongnu.org
+X-Gm-Message-State: AOJu0YwPHnggK0EOGm44lclIs0NdTphnjwBPZEP1yfvKIbNhnN761+LG
+ I6FOEEsr3ZQSjdWzjwSN0XRt+Lr7e81uR8hoFPRCErbnateO7UeAHlrodcc5u0OSd/FE1vbjM3J
+ B6QsO4YaF3ahZWHaoJIf176vavfO+k1Rc1Mngb4zgWsS9nAyEysT6
+X-Gm-Gg: ASbGnctdgv5DM0e8TMTWckKM1drlRq2j8F3mlbCKGT53onVsR6QyiUKelAKrg7K/Owv
+ I7HlpkAOIuqt9TjDP3RYU9jhOHYShTn1oJrFjX9393ED+P/uQ2mKnKqudRXrsRGdmNoz1z24XVV
+ FPQ9OZAyMmZ5v0Jp1KIdD5FV1mG0vOsWxPuyAtnFSu0iygmW0z26WJDcfqWmFEZrE7wcpMcqz6i
+ gc0DyAe7p4RvhQpgYV2xt1BQTh3vvt+NRhGF2AF6fjK82nD220+mUIpHrhxmo35yEZKwvdquP37
+ GilmXw==
+X-Received: by 2002:a05:6512:1048:b0:53e:1c7b:618e with SMTP id
+ 2adb3069b0e04-53e1c7b6255mr1023188e87.10.1733294996624; 
+ Tue, 03 Dec 2024 22:49:56 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IHgPwxGY+1eC+/eLMmrtBR8WPWPFY5ticvC6HoCVYJqC8skKCzjLQRMa8RVyKWHIz7H+JjJZg==
+X-Received: by 2002:a05:6512:1048:b0:53e:1c7b:618e with SMTP id
+ 2adb3069b0e04-53e1c7b6255mr1023167e87.10.1733294996241; 
+ Tue, 03 Dec 2024 22:49:56 -0800 (PST)
+Received: from [192.168.0.7] (ip-109-42-51-199.web.vodafone.de.
+ [109.42.51.199]) by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-aa5997d5646sm697355766b.62.2024.12.03.22.49.54
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 03 Dec 2024 22:49:55 -0800 (PST)
+Message-ID: <d24c3fb5-4edd-491d-b651-a13a1f7aacec@redhat.com>
+Date: Wed, 4 Dec 2024 07:49:53 +0100
 MIME-Version: 1.0
-References: <20241113171755.978109-1-dbarboza@ventanamicro.com>
-In-Reply-To: <20241113171755.978109-1-dbarboza@ventanamicro.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Wed, 4 Dec 2024 13:42:27 +0900
-Message-ID: <CAKmqyKPnY89MFTY=R4kUydXoAGVYLnH8iX9v0-nF1Kjf21vGsQ@mail.gmail.com>
-Subject: Re: [PATCH for-10.0 0/9] target/riscv: add 'sha' support
-To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
- bmeng@tinylab.org, liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, 
- palmer@rivosinc.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::a32;
- envelope-from=alistair23@gmail.com; helo=mail-vk1-xa32.google.com
-X-Spam_score_int: -17
-X-Spam_score: -1.8
-X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH-for-10.0 v2 01/13] hw/pci: Do not declare PCIBus::flags
+ mask as enum
+To: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
+ qemu-devel@nongnu.org
+Cc: qemu-ppc@nongnu.org, qemu-s390x@nongnu.org,
+ "Michael S. Tsirkin" <mst@redhat.com>, qemu-riscv@nongnu.org,
+ Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
+ Peter Maydell <peter.maydell@linaro.org>, qemu-arm@nongnu.org,
+ Paolo Bonzini <pbonzini@redhat.com>
+References: <20241126112212.64524-1-philmd@linaro.org>
+ <20241126112212.64524-2-philmd@linaro.org>
+ <ab884d96-6648-4888-962c-35a6b1d90857@linaro.org>
+From: Thomas Huth <thuth@redhat.com>
+Autocrypt: addr=thuth@redhat.com; keydata=
+ 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
+In-Reply-To: <ab884d96-6648-4888-962c-35a6b1d90857@linaro.org>
+X-Mimecast-Spam-Score: 0
+X-Mimecast-MFC-PROC-ID: LOHnio2Y2oPNu5wiJBQQy1932-JDbKA7WH6Lwcok4ls_1733294997
+X-Mimecast-Originator: redhat.com
+Content-Language: en-US
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=170.10.129.124; envelope-from=thuth@redhat.com;
+ helo=us-smtp-delivery-124.mimecast.com
+X-Spam_score_int: -50
+X-Spam_score: -5.1
+X-Spam_bar: -----
+X-Spam_report: (-5.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-2.996,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H2=-0.001,
+ RCVD_IN_VALIDITY_CERTIFIED_BLOCKED=0.001, RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -94,47 +163,43 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Thu, Nov 14, 2024 at 2:19=E2=80=AFAM Daniel Henrique Barboza
-<dbarboza@ventanamicro.com> wrote:
->
-> Hi,
->
-> 'sha' is defined in RVA22 as "augmented hypervisor extension" and
-> consists of a set of named features that must be enabled.
->
-> RVA23 makes 'sha' mandatory, so let's add official support for it in
-> preparation to support RVA23 later.
->
-> Most of the named features added here are always implemented by TCG.
-> Only 'ssstateen' has a runtime dependency.
->
->
-> Daniel Henrique Barboza (9):
->   target/riscv/tcg: hide warn for named feats when disabling via
->     priv_ver
->   target/riscv: add ssstateen
->   target/riscv: add shcounterenw
->   target/riscv: add shvstvala
->   target/riscv: add shtvala
->   target/riscv: add shvstvecd
->   target/riscv: add shvsatpa
->   target/riscv: add shgatpa
->   target/riscv/tcg: add sha
+On 27/11/2024 10.37, Philippe Mathieu-Daudé wrote:
+> On 26/11/24 12:22, Philippe Mathieu-Daudé wrote:
+>> We use PCIBus::flags to mask various flags. It is not
+>> an enum, and doing so confuses static analyzers. Rename
+>> the enum as singular. Use a generic unsigned type for
+>> the mask.
+>>
+>> Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+>> ---
+>>   include/hw/pci/pci_bus.h | 4 ++--
+>>   1 file changed, 2 insertions(+), 2 deletions(-)
+>>
+>> diff --git a/include/hw/pci/pci_bus.h b/include/hw/pci/pci_bus.h
+>> index 22613125462..6ecfe2e06d5 100644
+>> --- a/include/hw/pci/pci_bus.h
+>> +++ b/include/hw/pci/pci_bus.h
+>> @@ -19,7 +19,7 @@ struct PCIBusClass {
+>>       uint16_t (*numa_node)(PCIBus *bus);
+>>   };
+>> -enum PCIBusFlags {
+>> +enum PCIBusFlag {
+>>       /* This bus is the root of a PCI domain */
+>>       PCI_BUS_IS_ROOT                                         = 0x0001,
+>>       /* PCIe extended configuration space is accessible on this bus */
+> 
+> (more diff context:)
+> 
+>          PCI_BUS_EXTENDED_CONFIG_SPACE                           = 0x0002,
+>         /* This is a CXL Type BUS */
+>         PCI_BUS_CXL                                          = 0x0004,
+> 
+> Enum would be the [0, 1, 2] bits. Since we define bitmask and use
+> bitmask arguments in the code, shouldn't we simply replace that
+> enum by #define?
 
-Thanks!
+Agreed, this rather sounds like #defines than an enum to me, too.
 
-Applied to riscv-to-apply.next
+  Thomas
 
-Alistair
-
->
->  target/riscv/cpu.c         | 10 ++++++++++
->  target/riscv/cpu_cfg.h     |  2 ++
->  target/riscv/tcg/tcg-cpu.c | 30 ++++++++++++++++++++++++++----
->  3 files changed, 38 insertions(+), 4 deletions(-)
->
-> --
-> 2.47.0
->
->
 
