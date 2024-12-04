@@ -4,95 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B5DF3E7716E
-	for <qemu-riscv@archiver.kernel.org>; Wed,  4 Dec 2024 14:31:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C6DE9E7716E
+	for <qemu-riscv@archiver.kernel.org>; Wed,  4 Dec 2024 16:04:13 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tIqP6-0003ts-5x; Wed, 04 Dec 2024 09:31:00 -0500
+	id 1tIrr6-0003sy-Lv; Wed, 04 Dec 2024 11:04:00 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1tIqP4-0003t4-6T
- for qemu-riscv@nongnu.org; Wed, 04 Dec 2024 09:30:58 -0500
-Received: from mail-oi1-x22b.google.com ([2607:f8b0:4864:20::22b])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1tIqP2-0007Ji-8I
- for qemu-riscv@nongnu.org; Wed, 04 Dec 2024 09:30:57 -0500
-Received: by mail-oi1-x22b.google.com with SMTP id
- 5614622812f47-3ea49cc8b88so3431685b6e.2
- for <qemu-riscv@nongnu.org>; Wed, 04 Dec 2024 06:30:55 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1733322655; x=1733927455; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=vc1vupWmoIw50sU6oPaQXGisQqNX0DnNMjmPK4ovF8s=;
- b=d0+o5TNj3WTH1206V0N4g/vYiL8AcJ0YcxjrtpWneb8SIpFvHfqPnzzBZeBnpy4ZCD
- tYLBff3wCvKhRVxn7dPF1tiFokDA5jTblNotE8TKdTkWUftV0upbpSpS4O7bQO24FCT3
- vt66+sFPgQ9gCud7y3TGrxnnJIPunFwH0GTNgH5iWt2hNXB9/ukqxu3IdpyC4UKkyh8X
- JYk8zOOsrBOW3fV54F9/Un68SiX28n7wp7Kh28+nyLROltDMAetoILhcTjEKSTc1xOlv
- VJaqSMv8xdT1LpWNOfn/AEM5/HYV0l2G3prs3ltFHl7IvsALTfl7prM/Xq49ljo5Y0B2
- Ef+A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733322655; x=1733927455;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=vc1vupWmoIw50sU6oPaQXGisQqNX0DnNMjmPK4ovF8s=;
- b=TrlGoRukS+gUmvtrag+6xo+Ea9FwiBE3iEM8JxuvdTmWqCUk6B3VAz0VlpQoW/TGjK
- vWUqmC8HeKSYXPs8cp/V95edCXdlhyjmJo/oaKNstbWWWbGNs4zlDPzIwC2wfZJDUKUO
- ZcARpjJA96L5yXlGdX7hg44mo51BKSOYwpPnH2nwlBt29zowv092vUUp/hWykhP9AI3j
- J8CHJUHNaI230i/nVtUARL6y/j8m2tUjDM2aVtX+fA5qnqXFawiRrcqvRSegCJ196ZEU
- bpiYntpoUKpheMjZ81DoqDh77lVK5WGajtCijbFWJ70nHorRDBxCeUPaGq4uVmsJCmUu
- H/rg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCX8NEbBoh6paZG5ZZgj0ocY0zYNdGajbEBTYhDv7KWNPgKYjuDgWshuCrpTFzPY2YB1qhaARN7zWbPy@nongnu.org
-X-Gm-Message-State: AOJu0YxNYv/PkPgIWjSTgh4WjxWlSlrvWWTNw7iMLENc9JsVSrsL9Iaw
- r41N93wD3veQ4HmqSHHIOUtRRhck8hjDKE/J+qd8Aar6NhxgnUsZvcuEBUvqPqI=
-X-Gm-Gg: ASbGncu075O30OGazYMEcKMWgKcoxX5OEGDnf+Nin6vSprqY3fNxxS+8uRMxWCo3sHT
- NDiAYxHHD+28QR3ArU8cgy4t/KjKiprf9BqCpSgJ58yg0Xx/WTuhcVQKZ9DhWwCm3xjrEXRzqmJ
- jenjdoGHqpvFXuzpAUInMGnZ8/tKu5gW6e074Rrof6apxs7Ui3U3gDxjNwLIOF09igZtmEAglYb
- 3fP1JOIm61FFAhUBEdYUyd2YVBbCR8waW6UOkDSehb7CuOSycUofwWa1xSpFyRRt2rkSquHyoqs
- bR7pNZRnj4K3GInHAKUotnG0/lIG
-X-Google-Smtp-Source: AGHT+IEtRt9G7CBCL9ngnj5UUYHUAl70ZgLGK6nd8ddrPji+BPhngFjbTgv8rRt5MjHtiNwXhXrN9A==
-X-Received: by 2002:a05:6808:399b:b0:3e7:eda5:6b06 with SMTP id
- 5614622812f47-3eae50c51efmr5283641b6e.35.1733322654675; 
- Wed, 04 Dec 2024 06:30:54 -0800 (PST)
-Received: from [192.168.4.112] (fixed-187-189-51-143.totalplay.net.
- [187.189.51.143]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-3eaa953fd1dsm2636951b6e.25.2024.12.04.06.30.53
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 04 Dec 2024 06:30:54 -0800 (PST)
-Message-ID: <625bbb08-aac1-42c7-84b1-572fe48093d6@linaro.org>
-Date: Wed, 4 Dec 2024 08:30:50 -0600
+ (Exim 4.90_1) (envelope-from <mario.fleischmann@lauterbach.com>)
+ id 1tIrr3-0003r4-Ur; Wed, 04 Dec 2024 11:03:57 -0500
+Received: from bm.lauterbach.com ([62.154.241.218])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <mario.fleischmann@lauterbach.com>)
+ id 1tIrr1-0007vF-9c; Wed, 04 Dec 2024 11:03:57 -0500
+Received: from [10.2.13.100] (unknown [10.2.13.100])
+ (Authenticated sender: mario.fleischmann@lauterbach.com)
+ by bm.lauterbach.com (Postfix) with ESMTPSA id 15E7940793C3;
+ Wed,  4 Dec 2024 17:03:34 +0100 (CET)
+Message-ID: <0516feb0-ba9a-4ac0-a2bd-1bf97ca9694e@lauterbach.com>
+Date: Wed, 4 Dec 2024 17:03:34 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 4/7] target/riscv: Add support to record CTR entries.
-To: Rajnesh Kanwal <rkanwal@rivosinc.com>, qemu-riscv@nongnu.org,
- qemu-devel@nongnu.org
-Cc: alistair.francis@wdc.com, bin.meng@windriver.com, liweiwei@iscas.ac.cn,
- dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com,
- atishp@rivosinc.com, apatel@ventanamicro.com, beeman@rivosinc.com,
- tech-control-transfer-records@lists.riscv.org, jason.chien@sifive.com,
- frank.chang@sifive.com
-References: <20241204-b4-ctr_upstream_v3-v4-0-d3ce6bef9432@rivosinc.com>
- <20241204-b4-ctr_upstream_v3-v4-4-d3ce6bef9432@rivosinc.com>
+Subject: Re: [PATCH v2] riscv/gdb: add virt mode debug interface
+To: Yanfeng Liu <yfliu2008@qq.com>, =?UTF-8?Q?Alex_Benn=C3=A9e?=
+ <alex.bennee@linaro.org>
+Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, alistair.francis@wdc.com
+References: <tencent_B52B1EB0A504D6F690B6E6F3FD3AC9BCDC09@qq.com>
+ <8734jbh21e.fsf@draig.linaro.org>
+ <tencent_CA6E4D0C897F3ED0EF988CCE5DF541442A05@qq.com>
+ <87r06ufjiz.fsf@draig.linaro.org>
+ <tencent_AADD9A1292CD7CB89F16999E7BDD03895406@qq.com>
 Content-Language: en-US
-From: Richard Henderson <richard.henderson@linaro.org>
-In-Reply-To: <20241204-b4-ctr_upstream_v3-v4-4-d3ce6bef9432@rivosinc.com>
+From: Mario Fleischmann <mario.fleischmann@lauterbach.com>
+In-Reply-To: <tencent_AADD9A1292CD7CB89F16999E7BDD03895406@qq.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::22b;
- envelope-from=richard.henderson@linaro.org; helo=mail-oi1-x22b.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+Content-Transfer-Encoding: 8bit
+X-Bm-Milter-Handled: 166a2dfb-2e12-4590-8fa5-72e30323519f
+X-Bm-Transport-Timestamp: 1733328214096
+Received-SPF: pass client-ip=62.154.241.218;
+ envelope-from=mario.fleischmann@lauterbach.com; helo=bm.lauterbach.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9,
+ RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001, RCVD_IN_VALIDITY_SAFE_BLOCKED=0.001,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -108,161 +65,128 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 12/4/24 06:56, Rajnesh Kanwal wrote:
-> diff --git a/target/riscv/insn_trans/trans_privileged.c.inc b/target/riscv/insn_trans/trans_privileged.c.inc
-> index 0bdfa9a0ed3313223ce9032fb24484c3887cddf9..a5c2410cfa0779b1a928e7b89bd2ee5bb24216e4 100644
-> --- a/target/riscv/insn_trans/trans_privileged.c.inc
-> +++ b/target/riscv/insn_trans/trans_privileged.c.inc
-> @@ -78,9 +78,10 @@ static bool trans_sret(DisasContext *ctx, arg_sret *a)
->   {
->   #ifndef CONFIG_USER_ONLY
->       if (has_ext(ctx, RVS)) {
-> +        TCGv src = tcg_constant_tl(ctx->base.pc_next);
+Hi everyone,
 
-This is incorrect.
-You need to use gen_pc_plus_diff(src, ctx, 0).
+I'd like to chime in here because we are sitting on a similar patch 
+which I wanted to send to the mailing list as soon as riscv-debug-spec 
+v1.0.0 becomes ratified.
 
-Alternately, for here in sret and mret, instead of adding an extra parameter, use 
-gen_update_pc(ctx, 0) to update env->pc
+For hypervisor support, `(qemu) info registers` isn't enough. We need to 
+have both read and write access to the V-bit.
 
+On 04.12.2024 14:43, Yanfeng Liu wrote:
+> On Fri, 2024-11-29 at 09:59 +0000, Alex Bennée wrote:
+>> Yanfeng <yfliu2008@qq.com> writes:
+>>
+>>> On Thu, 2024-11-28 at 14:21 +0000, Alex Bennée wrote:
+>>>> Yanfeng Liu <yfliu2008@qq.com> writes:
+>>>>
+>>>>> This adds `virt` virtual register on debug interface so that users
+>>>>> can access current virtualization mode for debugging purposes.
+>>>>>
+>>>>> Signed-off-by: Yanfeng Liu <yfliu2008@qq.com>
+>>>>> ---
+>>>>>   gdb-xml/riscv-32bit-virtual.xml |  1 +
+>>>>>   gdb-xml/riscv-64bit-virtual.xml |  1 +
+>>>>>   target/riscv/gdbstub.c          | 18 ++++++++++++------
+>>>>>   3 files changed, 14 insertions(+), 6 deletions(-)
+>>>>>
+>>>>> diff --git a/gdb-xml/riscv-32bit-virtual.xml b/gdb-xml/riscv-32bit-
+>>>>> virtual.xml
+>>>>> index 905f1c555d..d44b6ca2dc 100644
+>>>>> --- a/gdb-xml/riscv-32bit-virtual.xml
+>>>>> +++ b/gdb-xml/riscv-32bit-virtual.xml
+>>>>> @@ -8,4 +8,5 @@
+>>>>>   <!DOCTYPE feature SYSTEM "gdb-target.dtd">
+>>>>>   <feature name="org.gnu.gdb.riscv.virtual">
+>>>>>     <reg name="priv" bitsize="32"/>
+>>>>> +  <reg name="virt" bitsize="32"/>
+>>>>>   </feature>
+>>>>> diff --git a/gdb-xml/riscv-64bit-virtual.xml b/gdb-xml/riscv-64bit-
+>>>>> virtual.xml
+>>>>> index 62d86c237b..7c9b63d5b6 100644
+>>>>> --- a/gdb-xml/riscv-64bit-virtual.xml
+>>>>> +++ b/gdb-xml/riscv-64bit-virtual.xml
+>>>>> @@ -8,4 +8,5 @@
+>>>>>   <!DOCTYPE feature SYSTEM "gdb-target.dtd">
+>>>>>   <feature name="org.gnu.gdb.riscv.virtual">
+>>>>>     <reg name="priv" bitsize="64"/>
+>>>>> +  <reg name="virt" bitsize="64"/>
+>>>>>   </feature>
+>>>>
+>>>> I assume these are mirrored in gdb not a QEMU only extension?
+>>>
+>>> So far I think it is a QEMU extension and the `gdb-multiarch` doesn't treat
+>>> is
+>>> specially. My tests shows it basically works:
+>>>
+>>> ```
+>>> (gdb) ir virt
+>>> priv           0x3      prv:3 [Machine]
+>>> virt           0x0      0
+>>> (gdb) set $priv = 2
+>>> (gdb) ir virt
+>>> priv           0x1      prv:1 [Supervisor]
+>>> virt           0x0      0
+>>> (gdb) set $virt = 1
+>>> (gdb) ir virt
+>>> priv           0x1      prv:1 [Supervisor]
+>>> virt           0x1      1
+>>> (gdb) set $virt = 0
+>>> (gdb) ir virt
+>>> priv           0x1      prv:1 [Supervisor]
+>>> virt           0x0      0
+>>> (gdb) set $virt = 1
+>>> (gdb) ir virt
+>>> priv           0x1      prv:1 [Supervisor]
+>>> virt           0x1      1
+>>> (gdb) set $priv = 3
+>>> (gdb) ir virt
+>>> priv           0x3      prv:3 [Machine]
+>>> virt           0x0      0
+>>> ```
+>>
+>> A gdbstub test case would be useful for this although I don't know if
+>> the RiscV check-tcg tests switch mode at all.
+>>
+>>>
+>>> As I am rather new to QEMU, please teach how we can add it as a QEMU only
+>>> extension.
+>>
+>> You don't need to extend the XML from GDB, you can build a specific one
+>> for QEMU extensions. For example:
+>>
+>>      gdb_feature_builder_init(&param.builder,
+>>                               &cpu->dyn_sysreg_feature.desc,
+>>                               "org.qemu.gdb.arm.sys.regs",
+>>                               "system-registers.xml",
+>>                               base_reg);
+>>
+>> This exports all the system registers QEMU knows about and GDB can
+>> access generically. Note the id is org.qemu..., indicating its our
+>> schema not gdbs.
+> Thanks for teaching, I need time to digest. I guess more feature builder APIs
+> are needed (like append_reg) and the getter/setter callbacks might be at a
+> different place.
+> 
+> BTW, compared to adding virtual register `virt`, how do you think if we share
+> the V bit as part of existing `priv` register?
 
+IMHO this is a very good idea since the latest release candidate of 
+riscv-debug-spec also includes the V bit in priv:2.
 
-> @@ -95,9 +96,10 @@ static bool trans_sret(DisasContext *ctx, arg_sret *a)
->   static bool trans_mret(DisasContext *ctx, arg_mret *a)
->   {
->   #ifndef CONFIG_USER_ONLY
-> +    TCGv src = tcg_constant_tl(ctx->base.pc_next);
+> Or maybe we shall talk to GDB community to get their opinions? If they agree to
+> add a few words about V bit here
+> https://sourceware.org/gdb/current/onlinedocs/gdb.html/RISC_002dV-Features.html,
+> then it saves us a lot.
 
-Likewise.
+Except being currently not supported by GDB
 
+(gdb) info register $priv
+priv           0x5      prv:5 [INVALID]
 
-> diff --git a/target/riscv/insn_trans/trans_rvi.c.inc b/target/riscv/insn_trans/trans_rvi.c.inc
-> index 96c218a9d7875c6419287ac3aa9746251be3f442..fc182e7b18a289e13ad212f10a3233aca25fae41 100644
-> --- a/target/riscv/insn_trans/trans_rvi.c.inc
-> +++ b/target/riscv/insn_trans/trans_rvi.c.inc
-> @@ -93,6 +93,50 @@ static bool trans_jal(DisasContext *ctx, arg_jal *a)
->       return true;
->   }
->   
-> +#ifndef CONFIG_USER_ONLY
-> +/*
-> + * Indirect calls
-> + * - jalr x1, rs where rs != x5;
-> + * - jalr x5, rs where rs != x1;
-> + * - c.jalr rs1 where rs1 != x5;
-> + *
-> + * Indirect jumps
-> + * - jalr x0, rs where rs != x1 and rs != x5;
-> + * - c.jr rs1 where rs1 != x1 and rs1 != x5.
-> + *
-> + * Returns
-> + * - jalr rd, rs where (rs == x1 or rs == x5) and rd != x1 and rd != x5;
-> + * - c.jr rs1 where rs1 == x1 or rs1 == x5.
-> + *
-> + * Co-routine swap
-> + * - jalr x1, x5;
-> + * - jalr x5, x1;
-> + * - c.jalr x5.
-> + *
-> + * Other indirect jumps
-> + * - jalr rd, rs where rs != x1, rs != x5, rd != x0, rd != x1 and rd != x5.
-> + */
-> +static void helper_ctr_jalr(DisasContext *ctx, arg_jalr *a)
-
-Generally "helper_*" are out-of-line functions, whereas this is generating inline code. 
-Better as "gen_ctr_jalr".
-
-> +{
-> +    TCGv src = tcg_constant_tl(ctx->base.pc_next);
-
-gen_pc_plus_diff
-
-> @@ -219,6 +269,9 @@ static bool gen_branch(DisasContext *ctx, arg_b *a, TCGCond cond)
->       TCGv src1 = get_gpr(ctx, a->rs1, EXT_SIGN);
->       TCGv src2 = get_gpr(ctx, a->rs2, EXT_SIGN);
->       target_ulong orig_pc_save = ctx->pc_save;
-> +#ifndef CONFIG_USER_ONLY
-> +    TCGv src = tcg_constant_tl(ctx->base.pc_next);
-> +#endif
-
-gen_pc_plus_diff, though perhaps delay until used.
-
->   
->       if (get_xl(ctx) == MXL_RV128) {
->           TCGv src1h = get_gprh(ctx, a->rs1);
-> @@ -231,6 +284,15 @@ static bool gen_branch(DisasContext *ctx, arg_b *a, TCGCond cond)
->       } else {
->           tcg_gen_brcond_tl(cond, src1, src2, l);
->       }
-> +
-> +#ifndef CONFIG_USER_ONLY
-> +    if (ctx->cfg_ptr->ext_smctr || ctx->cfg_ptr->ext_ssctr) {
-> +        TCGv type = tcg_constant_tl(CTRDATA_TYPE_NONTAKEN_BRANCH);
-> +        TCGv dest = tcg_constant_tl(ctx->base.pc_next + ctx->cur_insn_len);
-
-gen_pc_plus_diff
-
-> +        gen_helper_ctr_add_entry(tcg_env, src, dest, type);
-> +    }
-> +#endif
-> +
->       gen_goto_tb(ctx, 1, ctx->cur_insn_len);
->       ctx->pc_save = orig_pc_save;
->   
-> @@ -243,6 +305,14 @@ static bool gen_branch(DisasContext *ctx, arg_b *a, TCGCond cond)
->           gen_pc_plus_diff(target_pc, ctx, a->imm);
->           gen_exception_inst_addr_mis(ctx, target_pc);
->       } else {
-> +#ifndef CONFIG_USER_ONLY
-> +        if (ctx->cfg_ptr->ext_smctr || ctx->cfg_ptr->ext_ssctr) {
-> +            TCGv type = tcg_constant_tl(CTRDATA_TYPE_TAKEN_BRANCH);
-> +            TCGv dest = tcg_constant_tl(ctx->base.pc_next + a->imm);
-
-gen_pc_plus_diff.
-
-> diff --git a/target/riscv/insn_trans/trans_rvzce.c.inc b/target/riscv/insn_trans/trans_rvzce.c.inc
-> index cd234ad960724c936b92afb6fd1f3c7c2a37cb80..07b51d9f4d847c4411165b422a843fea65c86d45 100644
-> --- a/target/riscv/insn_trans/trans_rvzce.c.inc
-> +++ b/target/riscv/insn_trans/trans_rvzce.c.inc
-> @@ -204,6 +204,13 @@ static bool gen_pop(DisasContext *ctx, arg_cmpp *a, bool ret, bool ret_val)
->       if (ret) {
->           TCGv ret_addr = get_gpr(ctx, xRA, EXT_SIGN);
->           tcg_gen_mov_tl(cpu_pc, ret_addr);
-> +#ifndef CONFIG_USER_ONLY
-> +        if (ctx->cfg_ptr->ext_smctr || ctx->cfg_ptr->ext_ssctr) {
-> +            TCGv src = tcg_constant_tl(ctx->base.pc_next);
-
-gen_pc_plus_diff, and it will need to be done *before* the assignment to cpu_pc.
-
-> @@ -309,6 +316,21 @@ static bool trans_cm_jalt(DisasContext *ctx, arg_cm_jalt *a)
->           gen_set_gpr(ctx, xRA, succ_pc);
->       }
->   
-> +#ifndef CONFIG_USER_ONLY
-> +    if (ctx->cfg_ptr->ext_smctr || ctx->cfg_ptr->ext_ssctr) {
-> +        TCGv src = tcg_constant_tl(ctx->base.pc_next);
-
-Here, we have updated cpu_pc to current (see the start of the function), so you can just 
-use that instead of src.
-
-> +void helper_ctr_add_entry(CPURISCVState *env, target_ulong src,
-> +                          target_ulong dest, target_ulong type)
-> +{
-> +    riscv_ctr_add_entry(env, src, dest, (enum CTRType)type,
-> +                            env->priv, env->virt_enabled);
-
-Indent to line up after (.
-
-> +static void helper_ctr_jal(DisasContext *ctx, int rd, target_ulong imm)
-
-gen_ctr_jal.
-
-> +{
-> +    TCGv dest = tcg_constant_tl(ctx->base.pc_next + imm);
-> +    TCGv src = tcg_constant_tl(ctx->base.pc_next);
-
-gen_pc_plus_diff.
+are there any reasons from QEMU's side that would speak against 
+including V in priv?
 
 
-r~
 
