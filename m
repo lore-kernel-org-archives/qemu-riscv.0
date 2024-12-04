@@ -4,89 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 89E17E7716E
-	for <qemu-riscv@archiver.kernel.org>; Wed,  4 Dec 2024 12:59:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4E3B3E7716E
+	for <qemu-riscv@archiver.kernel.org>; Wed,  4 Dec 2024 12:59:30 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tIoxg-0000Ao-E5; Wed, 04 Dec 2024 07:58:36 -0500
+	id 1tIoxE-0008B3-0t; Wed, 04 Dec 2024 07:58:08 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1tIoxb-0008Rq-3t
- for qemu-riscv@nongnu.org; Wed, 04 Dec 2024 07:58:31 -0500
-Received: from mail-pg1-x52d.google.com ([2607:f8b0:4864:20::52d])
+ (Exim 4.90_1) (envelope-from <rkanwal@rivosinc.com>)
+ id 1tIox4-00084W-Ef
+ for qemu-riscv@nongnu.org; Wed, 04 Dec 2024 07:57:59 -0500
+Received: from mail-wr1-x42c.google.com ([2a00:1450:4864:20::42c])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1tIoxY-0000GE-Cy
- for qemu-riscv@nongnu.org; Wed, 04 Dec 2024 07:58:30 -0500
-Received: by mail-pg1-x52d.google.com with SMTP id
- 41be03b00d2f7-7fbc65f6c72so6317824a12.1
- for <qemu-riscv@nongnu.org>; Wed, 04 Dec 2024 04:58:28 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <rkanwal@rivosinc.com>)
+ id 1tIox0-0000B7-Ay
+ for qemu-riscv@nongnu.org; Wed, 04 Dec 2024 07:57:57 -0500
+Received: by mail-wr1-x42c.google.com with SMTP id
+ ffacd0b85a97d-385e3621518so3610872f8f.1
+ for <qemu-riscv@nongnu.org>; Wed, 04 Dec 2024 04:57:52 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1733317107; x=1733921907; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=RvTBnz7ZNUA8H4NoRdWH9xyQCXotA8K3zl7nZUBj5O4=;
- b=hva8cukYpCtAAI0azwyk257ezkZm7SlWOE5JB29212wiB1wb4csCOC72iAKjGSGM+c
- w5Lvd7lzunWGEfky7+XdfqU84LQU9TCOPVGS5J3IgURl25x85+cvgguVsUfNZG7CD2dR
- bb402r0CSmWAn1py7UnzjQJ2ShNOJ8T7IDoF6ZdPHP3ryp8tVf8YLGBqeJpjgIXfot2k
- q0aFEvj1vrVbsvaR8az/089exmzZHWvgI5GYmElmMh34IxWLA1EfSJVnKu6RM6NrTkpN
- hBRxXazeC2PUJfvnBYJlYfZ0mJVdCTZpErXagiymCw9o14YBi/biWiIh5lJRm7ljOPpS
- x4AQ==
+ d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1733317071; x=1733921871;
+ darn=nongnu.org; 
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=mRwquVuCbBdC2gMEt9pTfxsQTxkyyzI8HC99Y7f0E5E=;
+ b=Hy/OTL8SAUsj40GRTmGYUN6kou0gXL6lUUUrx6JW3/AhuqxbuLDEYgtENrep+PaPr7
+ nr+r5iO5R+1WefytNCxeBMgqoiC69rR2DjvyaVFz6UtjxXT3OLlTiIBXrxZVuD/LX+UX
+ cDp7WpH96lY8/EWXrXPRV8s8KPhYIWZs1x8oLd8avk5eZVsBBMqxdp8HXBr3xj20w/8F
+ OK/IFecdx1+gBusnka0fRrWRflQ6DJSwxZj8hZ+iyVpSobERFQIMwfFF9ok6aMjdGm5L
+ lvH5uf5IJqdMgSu2l1ne/A4EGjX+PP3epjdzZRoVkI5bMgMtAJndzWMZ/wJhHVRV+Ial
+ Aotw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733317107; x=1733921907;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=RvTBnz7ZNUA8H4NoRdWH9xyQCXotA8K3zl7nZUBj5O4=;
- b=VoOD0r2PLOHg5vI4f01SHXbFiHjWsPFMmEsHvB9FhqCF64hdszyHlawqUedN41y8Ir
- Vc8ZUklIZe7a/mHt79xKkwz/naHapXiKFm6opJY9Msq4XXjYfxQv2Meke69tYZVxRGto
- hQiCO1lvn9BWmqsTjQKY9K3YWxOSaf67CH1T9H68vHrJRe8z+G7tYSLbc+oSmR/Eqgh9
- 56E1xalT4gnMRoMFwSDVfxHccEDJKqH7bBZjvT94bu8zje9EtGZAnEqyoy3r8f8pWNZu
- 78+BD7z9tM3yji5q7ibdY6dPUF24QXDvpFAcODezTQWrGv89P0K8aSDP2pnTMQ+nIuYJ
- Xptw==
-X-Gm-Message-State: AOJu0YwUubVmRIMy6jbDhaJH4GeeNMSfDqI1iPcAtGzE77rhTcs2Awz3
- Kb5Ze3sWnZWSa/RqIs2sd5sfi3g8Y+uUwbInjSi7M81LROrbItjhwcZfo9y3lKs=
-X-Gm-Gg: ASbGnctN9CHQ4ASjQ5pK7ZK2YLIVGY/YESS78hHahg4oOCTCMqPzDK+S9ftsnfQJ90N
- dwLJgW7gphZhJIZw1Hyf/29HDwkWG+8DBuPYC59jng4L7IQp4reOXqT6Rj3AWvy9SJc/Bs/kPd0
- 8Ga97THAMCd2ce9sB6sB9Pj7oqpYoSi+yuEfshTGHOfsmiyyKwga+ORNJc87cK1TiuiN1ypPOPC
- t8Upee+XdgCagGGsoZlHdl4E6s8aHGEvVORDXZrkH0iWdNS86R9JasdhTr/ReY=
-X-Google-Smtp-Source: AGHT+IG/MOJFKipQrYvwc12bg6JIj6eFzl6NstUgbMVwBtLOjNuFu85CZpcU6vLQF/JGQUNV9MvbCw==
-X-Received: by 2002:a05:6a20:43a7:b0:1e0:be48:1797 with SMTP id
- adf61e73a8af0-1e16539f33emr8937854637.3.1733317106835; 
- Wed, 04 Dec 2024 04:58:26 -0800 (PST)
-Received: from [192.168.68.110] ([187.101.65.72])
+ d=1e100.net; s=20230601; t=1733317071; x=1733921871;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=mRwquVuCbBdC2gMEt9pTfxsQTxkyyzI8HC99Y7f0E5E=;
+ b=ptJNWp/dmVz8sKzyBHejIOLZ6Sjy4c8Yl5+ixbctDbmJZDUhx+HP9jNUhJyruYYNU6
+ ZuWRXQMx0xRXS6m06VHYvz1egO2Eld8n20MmWrX98bUQXl7tKOkckEsPlImDBwvEiJdd
+ bZn91rjhScPfi5V/CLIG89LQMF2bBdx6wskWj5CmjD5e3Ba82BiR+VKxA+aY0uNV5jXK
+ DMptDE7PzO6CmOjPZ4vIRzhVGaPGbhFIN5PKuwTi+QXphU2UzKXmJtJHMwg6kyYIGVtx
+ 9XLbA2CCLh2HnluzUKqCqWHiJxNx8cdr/cBFp37gu2O2oqSRMMLFRoAoGvg66yN/k0F9
+ Qf/w==
+X-Gm-Message-State: AOJu0YzMymQZCe3D/ivwznRv6NRlR+PvBEiLhwVoi5qlMzXEBcpejqRB
+ ba+lyHZRGDy0qnheUtTVYmR/mw3UYwYXVHOunuLOrpVVH7qS1JFrykcuibOntmSUT+g0x/3wM2O
+ QlW4=
+X-Gm-Gg: ASbGncv6dW8dEDHY4Bs0K0xSXTSjWr158Inxx5iy36jdWqPCifORpwafsa9T0SAXYzy
+ Kz67bJWe9NFWKb2VCK9cLf2KkJ+bKFT8dQaaur+WSULgADAkhmMK58nEun1xRbkwSORwH7prgR7
+ 1c9VJqVRk9DjCcZvnRGyAY3onwcbgmMqPU2P7ALrP/27j8dv4Q4mmaz+bqSx11Tilg277LBxHr0
+ 4evzNF46Ze5ycYrMa7TwPu86Ni2EqOeSGhDr0f8iWKQpukaGteRq3yOEK15S7hW18febmAlP1Cd
+ JRF3nA==
+X-Google-Smtp-Source: AGHT+IHA1xY60qXbvemAL7B9DAzydnTxEROtAIWBZfCHxpookzVuBilbA3rVqr/68l04uyHFpnaWzQ==
+X-Received: by 2002:a05:6000:2a8:b0:385:fd31:ca34 with SMTP id
+ ffacd0b85a97d-385fd54df23mr5406266f8f.54.1733317071103; 
+ Wed, 04 Dec 2024 04:57:51 -0800 (PST)
+Received: from rkanwal-XPS-15-9520.ba.rivosinc.com ([137.59.223.84])
  by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-2ef2701d097sm1329199a91.13.2024.12.04.04.58.24
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 04 Dec 2024 04:58:26 -0800 (PST)
-Message-ID: <5414d5ae-0036-4b83-a14b-3ee524c4f55f@ventanamicro.com>
-Date: Wed, 4 Dec 2024 09:58:22 -0300
+ ffacd0b85a97d-385deeb6acdsm15826428f8f.81.2024.12.04.04.57.47
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 04 Dec 2024 04:57:50 -0800 (PST)
+From: Rajnesh Kanwal <rkanwal@rivosinc.com>
+To: qemu-riscv@nongnu.org, qemu-devel@nongnu.org,
+ Rajnesh Kanwal <rkanwal@rivosinc.com>
+Cc: alistair.francis@wdc.com, bin.meng@windriver.com, liweiwei@iscas.ac.cn,
+ dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com,
+ atishp@rivosinc.com, apatel@ventanamicro.com, beeman@rivosinc.com,
+ tech-control-transfer-records@lists.riscv.org, jason.chien@sifive.com,
+ frank.chang@sifive.com, richard.henderson@linaro.org
+Subject: [PATCH v4 6/7] target/riscv: Add support to access ctrsource,
+ ctrtarget, ctrdata regs.
+Date: Wed,  4 Dec 2024 17:56:44 +0500
+Message-Id: <20241204-b4-ctr_upstream_v3-v4-6-d3ce6bef9432@rivosinc.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20241204-b4-ctr_upstream_v3-v4-0-d3ce6bef9432@rivosinc.com>
+References: <20241204-b4-ctr_upstream_v3-v4-0-d3ce6bef9432@rivosinc.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH RESEND v1] target/riscv: add support for RV64 Xiangshan
- Nanhu CPU
-To: MollyChen <xiaoou@iscas.ac.cn>, Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bmeng.cn@gmail.com>,
- Weiwei Li <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
-Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org
-References: <20241204031514.34531-1-xiaoou@iscas.ac.cn>
-Content-Language: en-US
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <20241204031514.34531-1-xiaoou@iscas.ac.cn>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::52d;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pg1-x52d.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+Content-Type: text/plain; charset="utf-8"
+X-Mailer: b4 0.14.2
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::42c;
+ envelope-from=rkanwal@rivosinc.com; helo=mail-wr1-x42c.google.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -102,89 +107,294 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Hi,
+CTR entries are accessed using ctrsource, ctrtarget and ctrdata
+registers using smcsrind/sscsrind extension. This commits extends
+the csrind extension to support CTR registers.
 
-Can you please re-send the patch rebased on top of:
+ctrsource is accessible through xireg CSR, ctrtarget is accessible
+through xireg1 and ctrdata is accessible through xireg2 CSR.
 
-https://github.com/alistair23/qemu/tree/riscv-to-apply.next
+CTR supports maximum depth of 256 entries which are accessed using
+xiselect range 0x200 to 0x2ff.
 
-This is the branch we use to queue RISC-V patches that are pending upstreaming.
+This commits also adds properties to enable CTR extension. CTR can be
+enabled using smctr=true and ssctr=true now.
 
+Signed-off-by: Rajnesh Kanwal <rkanwal@rivosinc.com>
+---
+ target/riscv/cpu.c         |  26 +++++++-
+ target/riscv/csr.c         | 150 ++++++++++++++++++++++++++++++++++++++++++++-
+ target/riscv/tcg/tcg-cpu.c |  11 ++++
+ 3 files changed, 185 insertions(+), 2 deletions(-)
 
-Thanks,
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index 2a4f285a974ffc62e7f3e938691dbffe376a7e46..751029e924d4690aaa5de65456fd5a5ec25b916a 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -199,6 +199,8 @@ const RISCVIsaExtData isa_edata_arr[] = {
+     ISA_EXT_DATA_ENTRY(sstvala, PRIV_VERSION_1_12_0, has_priv_1_12),
+     ISA_EXT_DATA_ENTRY(sstvecd, PRIV_VERSION_1_12_0, has_priv_1_12),
+     ISA_EXT_DATA_ENTRY(svade, PRIV_VERSION_1_11_0, ext_svade),
++    ISA_EXT_DATA_ENTRY(smctr, PRIV_VERSION_1_12_0, ext_smctr),
++    ISA_EXT_DATA_ENTRY(ssctr, PRIV_VERSION_1_12_0, ext_ssctr),
+     ISA_EXT_DATA_ENTRY(svadu, PRIV_VERSION_1_12_0, ext_svadu),
+     ISA_EXT_DATA_ENTRY(svinval, PRIV_VERSION_1_12_0, ext_svinval),
+     ISA_EXT_DATA_ENTRY(svnapot, PRIV_VERSION_1_12_0, ext_svnapot),
+@@ -1481,6 +1483,8 @@ const RISCVCPUMultiExtConfig riscv_cpu_extensions[] = {
+     MULTI_EXT_CFG_BOOL("smcdeleg", ext_smcdeleg, false),
+     MULTI_EXT_CFG_BOOL("sscsrind", ext_sscsrind, false),
+     MULTI_EXT_CFG_BOOL("ssccfg", ext_ssccfg, false),
++    MULTI_EXT_CFG_BOOL("smctr", ext_smctr, false),
++    MULTI_EXT_CFG_BOOL("ssctr", ext_ssctr, false),
+     MULTI_EXT_CFG_BOOL("zifencei", ext_zifencei, true),
+     MULTI_EXT_CFG_BOOL("zicfilp", ext_zicfilp, false),
+     MULTI_EXT_CFG_BOOL("zicfiss", ext_zicfiss, false),
+@@ -2656,6 +2660,26 @@ static RISCVCPUImpliedExtsRule SSCFG_IMPLIED = {
+     },
+ };
+ 
++static RISCVCPUImpliedExtsRule SMCTR_IMPLIED = {
++    .ext = CPU_CFG_OFFSET(ext_smctr),
++    .implied_misa_exts = RVS,
++    .implied_multi_exts = {
++        CPU_CFG_OFFSET(ext_sscsrind),
++
++        RISCV_IMPLIED_EXTS_RULE_END
++    },
++};
++
++static RISCVCPUImpliedExtsRule SSCTR_IMPLIED = {
++    .ext = CPU_CFG_OFFSET(ext_ssctr),
++    .implied_misa_exts = RVS,
++    .implied_multi_exts = {
++        CPU_CFG_OFFSET(ext_sscsrind),
++
++        RISCV_IMPLIED_EXTS_RULE_END
++    },
++};
++
+ RISCVCPUImpliedExtsRule *riscv_misa_ext_implied_rules[] = {
+     &RVA_IMPLIED, &RVD_IMPLIED, &RVF_IMPLIED,
+     &RVM_IMPLIED, &RVV_IMPLIED, NULL
+@@ -2674,7 +2698,7 @@ RISCVCPUImpliedExtsRule *riscv_multi_ext_implied_rules[] = {
+     &ZVFH_IMPLIED, &ZVFHMIN_IMPLIED, &ZVKN_IMPLIED,
+     &ZVKNC_IMPLIED, &ZVKNG_IMPLIED, &ZVKNHB_IMPLIED,
+     &ZVKS_IMPLIED,  &ZVKSC_IMPLIED, &ZVKSG_IMPLIED, &SSCFG_IMPLIED,
+-    NULL
++    &SMCTR_IMPLIED, &SSCTR_IMPLIED, NULL
+ };
+ 
+ static Property riscv_cpu_properties[] = {
+diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+index 7e03065d3dcd8713e2cadae3017ed355c9f9bf10..d80684a708891e062393deebe880650fb4df44ab 100644
+--- a/target/riscv/csr.c
++++ b/target/riscv/csr.c
+@@ -2401,6 +2401,13 @@ static bool xiselect_cd_range(target_ulong isel)
+     return (ISELECT_CD_FIRST <= isel && isel <= ISELECT_CD_LAST);
+ }
+ 
++static bool xiselect_ctr_range(int csrno, target_ulong isel)
++{
++    /* MIREG-MIREG6 for the range 0x200-0x2ff are not used by CTR. */
++    return CTR_ENTRIES_FIRST <= isel && isel <= CTR_ENTRIES_LAST &&
++           csrno < CSR_MIREG;
++}
++
+ static int rmw_iprio(target_ulong xlen,
+                      target_ulong iselect, uint8_t *iprio,
+                      target_ulong *val, target_ulong new_val,
+@@ -2446,6 +2453,124 @@ static int rmw_iprio(target_ulong xlen,
+     return 0;
+ }
+ 
++static int rmw_ctrsource(CPURISCVState *env, int isel, target_ulong *val,
++                          target_ulong new_val, target_ulong wr_mask)
++{
++    /*
++     * CTR arrays are treated as circular buffers and TOS always points to next
++     * empty slot, keeping TOS - 1 always pointing to latest entry. Given entry
++     * 0 is always the latest one, traversal is a bit different here. See the
++     * below example.
++     *
++     * Depth = 16.
++     *
++     * idx    [0] [1] [2] [3] [4] [5] [6] [7] [8] [9] [A] [B] [C] [D] [E] [F]
++     * TOS                                 H
++     * entry   6   5   4   3   2   1   0   F   E   D   C   B   A   9   8   7
++     */
++    const uint64_t entry = isel - CTR_ENTRIES_FIRST;
++    const uint64_t depth = 16 << get_field(env->sctrdepth, SCTRDEPTH_MASK);
++    uint64_t idx;
++
++    /* Entry greater than depth-1 is read-only zero */
++    if (entry >= depth) {
++        if (val) {
++            *val = 0;
++        }
++        return 0;
++    }
++
++    idx = get_field(env->sctrstatus, SCTRSTATUS_WRPTR_MASK);
++    idx = (idx - entry - 1) & (depth - 1);
++
++    if (val) {
++        *val = env->ctr_src[idx];
++    }
++
++    env->ctr_src[idx] = (env->ctr_src[idx] & ~wr_mask) | (new_val & wr_mask);
++
++    return 0;
++}
++
++static int rmw_ctrtarget(CPURISCVState *env, int isel, target_ulong *val,
++                          target_ulong new_val, target_ulong wr_mask)
++{
++    /*
++     * CTR arrays are treated as circular buffers and TOS always points to next
++     * empty slot, keeping TOS - 1 always pointing to latest entry. Given entry
++     * 0 is always the latest one, traversal is a bit different here. See the
++     * below example.
++     *
++     * Depth = 16.
++     *
++     * idx    [0] [1] [2] [3] [4] [5] [6] [7] [8] [9] [A] [B] [C] [D] [E] [F]
++     * head                                H
++     * entry   6   5   4   3   2   1   0   F   E   D   C   B   A   9   8   7
++     */
++    const uint64_t entry = isel - CTR_ENTRIES_FIRST;
++    const uint64_t depth = 16 << get_field(env->sctrdepth, SCTRDEPTH_MASK);
++    uint64_t idx;
++
++    /* Entry greater than depth-1 is read-only zero */
++    if (entry >= depth) {
++        if (val) {
++            *val = 0;
++        }
++        return 0;
++    }
++
++    idx = get_field(env->sctrstatus, SCTRSTATUS_WRPTR_MASK);
++    idx = (idx - entry - 1) & (depth - 1);
++
++    if (val) {
++        *val = env->ctr_dst[idx];
++    }
++
++    env->ctr_dst[idx] = (env->ctr_dst[idx] & ~wr_mask) | (new_val & wr_mask);
++
++    return 0;
++}
++
++static int rmw_ctrdata(CPURISCVState *env, int isel, target_ulong *val,
++                        target_ulong new_val, target_ulong wr_mask)
++{
++    /*
++     * CTR arrays are treated as circular buffers and TOS always points to next
++     * empty slot, keeping TOS - 1 always pointing to latest entry. Given entry
++     * 0 is always the latest one, traversal is a bit different here. See the
++     * below example.
++     *
++     * Depth = 16.
++     *
++     * idx    [0] [1] [2] [3] [4] [5] [6] [7] [8] [9] [A] [B] [C] [D] [E] [F]
++     * head                                H
++     * entry   6   5   4   3   2   1   0   F   E   D   C   B   A   9   8   7
++     */
++    const uint64_t entry = isel - CTR_ENTRIES_FIRST;
++    const uint64_t mask = wr_mask & CTRDATA_MASK;
++    const uint64_t depth = 16 << get_field(env->sctrdepth, SCTRDEPTH_MASK);
++    uint64_t idx;
++
++    /* Entry greater than depth-1 is read-only zero */
++    if (entry >= depth) {
++        if (val) {
++            *val = 0;
++        }
++        return 0;
++    }
++
++    idx = get_field(env->sctrstatus, SCTRSTATUS_WRPTR_MASK);
++    idx = (idx - entry - 1) & (depth - 1);
++
++    if (val) {
++        *val = env->ctr_data[idx];
++    }
++
++    env->ctr_data[idx] = (env->ctr_data[idx] & ~mask) | (new_val & mask);
++
++    return 0;
++}
++
+ static RISCVException rmw_xireg_aia(CPURISCVState *env, int csrno,
+                          target_ulong isel, target_ulong *val,
+                          target_ulong new_val, target_ulong wr_mask)
+@@ -2596,6 +2721,27 @@ done:
+     return ret;
+ }
+ 
++static int rmw_xireg_ctr(CPURISCVState *env, int csrno,
++                        target_ulong isel, target_ulong *val,
++                        target_ulong new_val, target_ulong wr_mask)
++{
++    if (!riscv_cpu_cfg(env)->ext_smctr && !riscv_cpu_cfg(env)->ext_ssctr) {
++        return -EINVAL;
++    }
++
++    if (csrno == CSR_SIREG || csrno == CSR_VSIREG) {
++        return rmw_ctrsource(env, isel, val, new_val, wr_mask);
++    } else if (csrno == CSR_SIREG2 || csrno == CSR_VSIREG2) {
++        return rmw_ctrtarget(env, isel, val, new_val, wr_mask);
++    } else if (csrno == CSR_SIREG3 || csrno == CSR_VSIREG3) {
++        return rmw_ctrdata(env, isel, val, new_val, wr_mask);
++    } else if (val) {
++        *val = 0;
++    }
++
++    return 0;
++}
++
+ /*
+  * rmw_xireg_csrind: Perform indirect access to xireg and xireg2-xireg6
+  *
+@@ -2607,11 +2753,13 @@ static int rmw_xireg_csrind(CPURISCVState *env, int csrno,
+                               target_ulong isel, target_ulong *val,
+                               target_ulong new_val, target_ulong wr_mask)
+ {
+-    int ret = -EINVAL;
+     bool virt = csrno == CSR_VSIREG ? true : false;
++    int ret = -EINVAL;
+ 
+     if (xiselect_cd_range(isel)) {
+         ret = rmw_xireg_cd(env, csrno, isel, val, new_val, wr_mask);
++    } else if (xiselect_ctr_range(csrno, isel)) {
++        ret = rmw_xireg_ctr(env, csrno, isel, val, new_val, wr_mask);
+     } else {
+         /*
+          * As per the specification, access to unimplented region is undefined
+diff --git a/target/riscv/tcg/tcg-cpu.c b/target/riscv/tcg/tcg-cpu.c
+index 2b57aa4d1704b176f314dbe0b120cfcc943bf4f8..575b5692c7f68a5f6d37edbc17269e41f496f682 100644
+--- a/target/riscv/tcg/tcg-cpu.c
++++ b/target/riscv/tcg/tcg-cpu.c
+@@ -652,6 +652,17 @@ void riscv_cpu_validate_set_extensions(RISCVCPU *cpu, Error **errp)
+         return;
+     }
+ 
++    if ((cpu->cfg.ext_smctr || cpu->cfg.ext_ssctr) &&
++        (!riscv_has_ext(env, RVS) || !cpu->cfg.ext_sscsrind)) {
++        if (cpu_cfg_ext_is_user_set(CPU_CFG_OFFSET(ext_smctr)) ||
++            cpu_cfg_ext_is_user_set(CPU_CFG_OFFSET(ext_ssctr))) {
++            error_setg(errp, "Smctr and Ssctr require S-mode and Sscsrind");
++            return;
++        }
++        cpu->cfg.ext_smctr = false;
++        cpu->cfg.ext_ssctr = false;
++    }
++
+     /*
+      * Disable isa extensions based on priv spec after we
+      * validated and set everything we need.
 
-Daniel
-
-On 12/4/24 12:15 AM, MollyChen wrote:
-> Add a CPU entry for the RV64 XiangShan NANHU CPU which
-> supports single-core and dual-core configurations. More
-> details can be found at
-> https://docs.xiangshan.cc/zh-cn/latest/integration/overview
-> 
-> Signed-off-by: MollyChen <xiaoou@iscas.ac.cn>
-> ---
->   target/riscv/cpu-qom.h |  1 +
->   target/riscv/cpu.c     | 29 +++++++++++++++++++++++++++++
->   2 files changed, 30 insertions(+)
-> 
-> diff --git a/target/riscv/cpu-qom.h b/target/riscv/cpu-qom.h
-> index 62115375cd..8f6fac463c 100644
-> --- a/target/riscv/cpu-qom.h
-> +++ b/target/riscv/cpu-qom.h
-> @@ -49,6 +49,7 @@
->   #define TYPE_RISCV_CPU_SIFIVE_U54       RISCV_CPU_TYPE_NAME("sifive-u54")
->   #define TYPE_RISCV_CPU_THEAD_C906       RISCV_CPU_TYPE_NAME("thead-c906")
->   #define TYPE_RISCV_CPU_VEYRON_V1        RISCV_CPU_TYPE_NAME("veyron-v1")
-> +#define TYPE_RISCV_CPU_XIANGSHAN_NANHU  RISCV_CPU_TYPE_NAME("xiangshan-nanhu")
->   #define TYPE_RISCV_CPU_HOST             RISCV_CPU_TYPE_NAME("host")
->   
->   OBJECT_DECLARE_CPU_TYPE(RISCVCPU, RISCVCPUClass, RISCV_CPU)
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index f219f0c3b5..738d833115 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -579,6 +579,34 @@ static void rv64_veyron_v1_cpu_init(Object *obj)
->   #endif
->   }
->   
-> +static void rv64_xiangshan_nanhu_cpu_init(Object *obj)
-> +{
-> +    CPURISCVState *env = &RISCV_CPU(obj)->env;
-> +    RISCVCPU *cpu = RISCV_CPU(obj);
-> +
-> +    riscv_cpu_set_misa_ext(env, RVG | RVC | RVB | RVS | RVU);
-> +    env->priv_ver = PRIV_VERSION_1_12_0;
-> +
-> +    /* Enable ISA extensions */
-> +    cpu->cfg.ext_zbc = true;
-> +    cpu->cfg.ext_zbkb = true;
-> +    cpu->cfg.ext_zbkc = true;
-> +    cpu->cfg.ext_zbkx = true;
-> +    cpu->cfg.ext_zknd = true;
-> +    cpu->cfg.ext_zkne = true;
-> +    cpu->cfg.ext_zknh = true;
-> +    cpu->cfg.ext_zksed = true;
-> +    cpu->cfg.ext_zksh = true;
-> +    cpu->cfg.ext_svinval = true;
-> +
-> +    cpu->cfg.mmu = true;
-> +    cpu->cfg.pmp = true;
-> +
-> +#ifndef CONFIG_USER_ONLY
-> +    set_satp_mode_max_supported(cpu, VM_1_10_SV39);
-> +#endif
-> +}
-> +
->   #ifdef CONFIG_TCG
->   static void rv128_base_cpu_init(Object *obj)
->   {
-> @@ -2983,6 +3011,7 @@ static const TypeInfo riscv_cpu_type_infos[] = {
->       DEFINE_VENDOR_CPU(TYPE_RISCV_CPU_SHAKTI_C,   MXL_RV64,  rv64_sifive_u_cpu_init),
->       DEFINE_VENDOR_CPU(TYPE_RISCV_CPU_THEAD_C906, MXL_RV64,  rv64_thead_c906_cpu_init),
->       DEFINE_VENDOR_CPU(TYPE_RISCV_CPU_VEYRON_V1,  MXL_RV64,  rv64_veyron_v1_cpu_init),
-> +    DEFINE_VENDOR_CPU(TYPE_RISCV_CPU_XIANGSHAN_NANHU, MXL_RV64, rv64_xiangshan_nanhu_cpu_init),
->   #ifdef CONFIG_TCG
->       DEFINE_DYNAMIC_CPU(TYPE_RISCV_CPU_BASE128,   MXL_RV128, rv128_base_cpu_init),
->   #endif /* CONFIG_TCG */
+-- 
+2.34.1
 
 
