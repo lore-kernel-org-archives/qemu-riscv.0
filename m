@@ -4,65 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0244AE7716D
-	for <qemu-riscv@archiver.kernel.org>; Wed,  4 Dec 2024 20:30:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5F340E77170
+	for <qemu-riscv@archiver.kernel.org>; Wed,  4 Dec 2024 20:31:18 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tIvyx-0002wB-WD; Wed, 04 Dec 2024 15:28:24 -0500
+	id 1tIvyf-000243-6B; Wed, 04 Dec 2024 15:28:05 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tIvyq-0002QP-Eu
- for qemu-riscv@nongnu.org; Wed, 04 Dec 2024 15:28:17 -0500
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tIvyc-0001u7-RS
+ for qemu-riscv@nongnu.org; Wed, 04 Dec 2024 15:28:03 -0500
 Received: from mail-wm1-x32f.google.com ([2a00:1450:4864:20::32f])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tIvyn-0002bP-Jk
- for qemu-riscv@nongnu.org; Wed, 04 Dec 2024 15:28:16 -0500
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tIvyZ-0001sT-IT
+ for qemu-riscv@nongnu.org; Wed, 04 Dec 2024 15:28:02 -0500
 Received: by mail-wm1-x32f.google.com with SMTP id
- 5b1f17b1804b1-4349e1467fbso1393655e9.1
- for <qemu-riscv@nongnu.org>; Wed, 04 Dec 2024 12:28:10 -0800 (PST)
+ 5b1f17b1804b1-434b3e32e9dso1905055e9.2
+ for <qemu-riscv@nongnu.org>; Wed, 04 Dec 2024 12:27:59 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1733344089; x=1733948889; darn=nongnu.org;
+ d=linaro.org; s=google; t=1733344078; x=1733948878; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=GX0z7ED1fpqqEX0e3FNGIrRnTBaZqIcam5D8KFO/APw=;
- b=TRTYqHQEIK04Y6ULZP4l0E5gbUgQjjF3PfhBSTltnjGYwpC/JHV4jAcApQSmXyCJCA
- W2zIRLb4VCipt856iw/ACgg71gUSPRwWnHC1+Tx4zFDQduIl98eO4zTbUOeazaEXemCW
- 4GSC/z5Sb46hTUkXyFbux52R0A9C4G8gk3Us45PaI4kpvQGIw8QJ1aK0m2PL9AYBj1pL
- J4MnDOsCtfS+GEk+m9/D0yx8wMazQlltqJfRMXxiFxFKKczrhCbvqAUu+XsLsTrHVWRL
- V6J4tFj9LWGNYLslLXxIvGiyHk9cJDPzKJ/kQgCnJh0EJhP/Tfgn4X97F0/fpA1eGWi7
- SEaA==
+ bh=nkZKIsDoSM+ma8HKWntZmvOsZaSUYdAuJc6HKLqlim0=;
+ b=Fuc/JnqIq+P3ZFsiJXKia+YbnDZNJXx2TMWxs+P4uPXgYocFq3FaoBEzPaJoas2g0m
+ tGy165DtIyut5TOZ5373dHiLm4igInBSCTi60EgEScAQhZwfhDXvLo+z5q46hXG+2kUX
+ KXj8kejMkXQs/BUD4k2rJjnqoNsRFGuS9xcmPmP3skdrioog0UKDQ1sl4kSQaZ1FW5h0
+ tbjvvEUYXZPgY7XMmmS+EU6oZbLPrWIWaaZL2a/s4nSGGsaPY4hnR++T6KMNn2jnQ4li
+ HwM8+z4qIFH7j31UKjWFHxY8vbBGfIbDGZkvkSjbesPQXrozDi+6PUZ6lh8a9LR5IKcx
+ faIA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733344089; x=1733948889;
+ d=1e100.net; s=20230601; t=1733344078; x=1733948878;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=GX0z7ED1fpqqEX0e3FNGIrRnTBaZqIcam5D8KFO/APw=;
- b=wAviPc8IsG8J/3R30e75Fyk/kWl107clyinWF99UZkDT1P5w2ZSOWhtM2jkw/OSk7y
- DbL17Yo7LE3RLen9Xqb+HlvZ3SJaIdSm2z+6xok1D0P+k09wTURebFBzMY0CI/mh/UWm
- u581owSbRU0a1ijEj5aZA2mhGjgmXWlWoBMfCv6uk8oA7YyFqzFqsU1TOFzafn4y8YSI
- LuUrh3RUpkngH6AIdI+k6EKZmjIpYd9rYIpkAnNJmRskoDca6KNNZzG8vWc8nToHmCiP
- t67zhJXrs+Yqpe1qX2EvsA/hcIjn+sBiJTcSQZyzJMZD9t4Eg0Gla6TDPM4NK+M1uF+Q
- C5MQ==
+ bh=nkZKIsDoSM+ma8HKWntZmvOsZaSUYdAuJc6HKLqlim0=;
+ b=d3U1UDJb5C7hsq92GTOaWTa5pn23eSapjcDU1yG/LK0p6ccNdhQI0A8JWV2I5UYezi
+ rrWt60iu6LbCFXtM7204AgOTPjL0Pg9r3KWsith+dVBS1aseg3bHCiNH62qM0uGCoKtm
+ nfOMbVKYk182RgqC96UY4JEQhit/WG4CQraElDV0q+kU2dQlLM4Wuuku3EOzdApMgoS/
+ mqDhqYnL1euxh4NBh8Fj8nl66PDya2/TqWc6dCl0oq/Zxt38XwzO36F04SLaEzEIfWVb
+ RK1yRKNXVD0VBechgNQme9VmAttGhdqh5SRSv7wKT36NHW97g3D5NQywsEOTGS1TanSD
+ eNtA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXrGushLDJs09yT6HP8Yb8mQM47sJ7B6vNqYoIeD7MvLvdNHQA1Y3eOBKMNIKejH1Gf2i5ubykvLcXB@nongnu.org
-X-Gm-Message-State: AOJu0Yzya5tK3QlkIt1PuMEv0rpTc8yEyomVajZ3I2rp0q327NtYm1pY
- puqLMiuhnCK2vIFDiingf5IppixsQXYYeZyHZm/nt9rFieXOIRijJN280OlRPNY=
-X-Gm-Gg: ASbGncuWx5YQ7wdMl3Yszl4TkkT/Yo7yRN0tnwlSznIKrzynX1iEzdNBH5lZSnSgkLB
- 5GBRalUbPUAXBONz7Rvefj+SZw8Cit6NJcM6sFkvT3NcXPcTQaTP9YjBaWuah0uWTdFoohYCutp
- MyMs283gU3hTOAWrmDaAnSVbooRCEKnylC4+RbCRtoA/+N1Jj7wQYTpG0C4ipA/P73mOMvqR6s2
- 5CbjZVfaZi2H0sGGNJG9xzhBxsGSs6YrnHUrfNa/uNjLJXoyq9Gaw7WPDC1e5kGzzbTmzYU8FtR
- mJHdJrMxdaMwjk4EoIa9WD/A
-X-Google-Smtp-Source: AGHT+IFQVlgKgXzi+WHSeKykqO09/qxwXPFKjgqPF3MN1t0t3YAGqhk0OGIb3lGnnbvtjy1rKap/lg==
-X-Received: by 2002:a05:600c:19d1:b0:434:a4a9:5d54 with SMTP id
- 5b1f17b1804b1-434d09bf794mr77784015e9.10.1733344089220; 
- Wed, 04 Dec 2024 12:28:09 -0800 (PST)
+ AJvYcCVhE8lkMEFjBOyrjZnDVTGNeo6Wt89V5zALfme5IVYprh0OOyvYWuC4WYz2akUFJEwF+qZE2qXGwqIE@nongnu.org
+X-Gm-Message-State: AOJu0YyEkZLnTwTtIkRd0roJyBnSLEtchWZZASQuN01G0ShMJfpP8Ohw
+ Y82RMv0u6oRByhIrSmFc4CAFnQxar5aLjnnmgPmlQl/nZznGY6tnG2KHRgCGklQ=
+X-Gm-Gg: ASbGnctcAgERJBgYjVRyBVUqVJ5mIdRVaXKBSzBjyAtjchoLMQFeIiiErFE8Wjf4SsY
+ 4tgnDzNV+h/ndVCTSL9W+caYuaDJEnQp2Pclx7FWPVfAElELvWW85ZCMbtyPwLUjnSR+LPBPMab
+ wxUdyejI+RTdFD5Awc1R2mJbEbMAsenGcb8gRfCKP9FqU5d8cTpu6MgJKXNuKYVhn682nAq/eGZ
+ vr8KihRmZQHIT8xUdBWMuJHQcDdtP74P+FFc6RiNFMY97zLZAbDl+t3Bj/ZaG9piK8TjYGINSOt
+ JPELD1FkpwLK1a80WfUun8GF
+X-Google-Smtp-Source: AGHT+IEQZCLaeqL3NJdNlkp69TPR8VsZwfrAUk0Iu/WBp1gm2bQ8hewWSnGHoj7rlbErdVRXO1pF/A==
+X-Received: by 2002:a05:600c:4748:b0:431:59ab:15cf with SMTP id
+ 5b1f17b1804b1-434d09c37bcmr69319945e9.19.1733344078096; 
+ Wed, 04 Dec 2024 12:27:58 -0800 (PST)
 Received: from localhost.localdomain (88-187-86-199.subs.proxad.net.
  [88.187.86.199]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-434d52c0cfdsm36598115e9.33.2024.12.04.12.28.07
+ 5b1f17b1804b1-434d52cbd16sm34950775e9.41.2024.12.04.12.27.56
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Wed, 04 Dec 2024 12:28:08 -0800 (PST)
+ Wed, 04 Dec 2024 12:27:57 -0800 (PST)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
@@ -80,9 +80,10 @@ Cc: Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
  Alistair Francis <alistair@alistair23.me>, qemu-ppc@nongnu.org,
  Richard Henderson <richard.henderson@linaro.org>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-Subject: [PATCH 16/20] hw/core/cpu: Expose cpu_datapath_is_big_endian() method
-Date: Wed,  4 Dec 2024 21:25:58 +0100
-Message-ID: <20241204202602.58083-17-philmd@linaro.org>
+Subject: [PATCH 14/20] target: Implement CPUClass::datapath_is_big_endian
+ (little-endian)
+Date: Wed,  4 Dec 2024 21:25:56 +0100
+Message-ID: <20241204202602.58083-15-philmd@linaro.org>
 X-Mailer: git-send-email 2.45.2
 In-Reply-To: <20241204202602.58083-1-philmd@linaro.org>
 References: <20241204202602.58083-1-philmd@linaro.org>
@@ -113,53 +114,140 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-All target implement their CPUClass::datapath_is_big_endian()
-helper, we can expose the generic cpu_datapath_is_big_endian()
-method.
+For all targets which have endianness architecturally
+predefined as little endian (built using TARGET_BIG_ENDIAN=n),
+their datapath_is_big_endian() handler simply returns %false.
 
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 ---
- include/hw/core/cpu.h | 8 ++++++++
- hw/core/cpu-common.c  | 7 +++++++
- 2 files changed, 15 insertions(+)
+ target/alpha/cpu.c     | 6 ++++++
+ target/avr/cpu.c       | 7 ++++++-
+ target/i386/cpu.c      | 6 ++++++
+ target/loongarch/cpu.c | 6 ++++++
+ target/tricore/cpu.c   | 6 ++++++
+ 5 files changed, 30 insertions(+), 1 deletion(-)
 
-diff --git a/include/hw/core/cpu.h b/include/hw/core/cpu.h
-index 91c6581f814..5c75fe3a842 100644
---- a/include/hw/core/cpu.h
-+++ b/include/hw/core/cpu.h
-@@ -611,6 +611,14 @@ extern __thread CPUState *current_cpu;
- extern bool mttcg_enabled;
- #define qemu_tcg_mttcg_enabled() (mttcg_enabled)
+diff --git a/target/alpha/cpu.c b/target/alpha/cpu.c
+index 5d75c941f7a..ee844a4c455 100644
+--- a/target/alpha/cpu.c
++++ b/target/alpha/cpu.c
+@@ -27,6 +27,11 @@
+ #include "fpu/softfloat.h"
  
-+/**
-+ * cpu_datapath_is_big_endian:
-+ * @cpu: The CPU whose state is to be inspected.
-+ *
-+ * Returns: %true if the CPU access data in big endian order, %false otherwise.
-+ */
-+bool cpu_datapath_is_big_endian(CPUState *cpu);
-+
- /**
-  * cpu_paging_enabled:
-  * @cpu: The CPU whose state is to be inspected.
-diff --git a/hw/core/cpu-common.c b/hw/core/cpu-common.c
-index 09c79035949..92c0c4c6125 100644
---- a/hw/core/cpu-common.c
-+++ b/hw/core/cpu-common.c
-@@ -66,6 +66,13 @@ CPUState *cpu_create(const char *typename)
-     return cpu;
- }
  
-+bool cpu_datapath_is_big_endian(CPUState *cpu)
++static bool alpha_cpu_datapath_is_big_endian(CPUState *cs)
 +{
-+    CPUClass *cc = CPU_GET_CLASS(cpu);
-+
-+    return cc->datapath_is_big_endian(cpu);
++    return false;
 +}
 +
- /* Resetting the IRQ comes from across the code base so we take the
-  * BQL here if we need to.  cpu_interrupt assumes it is held.*/
- void cpu_reset_interrupt(CPUState *cpu, int mask)
+ static void alpha_cpu_set_pc(CPUState *cs, vaddr value)
+ {
+     CPUAlphaState *env = cpu_env(cs);
+@@ -247,6 +252,7 @@ static void alpha_cpu_class_init(ObjectClass *oc, void *data)
+                                     &acc->parent_realize);
+ 
+     cc->class_by_name = alpha_cpu_class_by_name;
++    cc->datapath_is_big_endian = alpha_cpu_datapath_is_big_endian;
+     cc->has_work = alpha_cpu_has_work;
+     cc->mmu_index = alpha_cpu_mmu_index;
+     cc->dump_state = alpha_cpu_dump_state;
+diff --git a/target/avr/cpu.c b/target/avr/cpu.c
+index 3132842d565..f32f1bee61f 100644
+--- a/target/avr/cpu.c
++++ b/target/avr/cpu.c
+@@ -159,6 +159,11 @@ static ObjectClass *avr_cpu_class_by_name(const char *cpu_model)
+     return object_class_by_name(cpu_model);
+ }
+ 
++static bool avr_cpu_datapath_is_big_endian(CPUState *cs)
++{
++    return false;
++}
++
+ static void avr_cpu_dump_state(CPUState *cs, FILE *f, int flags)
+ {
+     CPUAVRState *env = cpu_env(cs);
+@@ -230,7 +235,7 @@ static void avr_cpu_class_init(ObjectClass *oc, void *data)
+                                        &mcc->parent_phases);
+ 
+     cc->class_by_name = avr_cpu_class_by_name;
+-
++    cc->datapath_is_big_endian = avr_cpu_datapath_is_big_endian;
+     cc->has_work = avr_cpu_has_work;
+     cc->mmu_index = avr_cpu_mmu_index;
+     cc->dump_state = avr_cpu_dump_state;
+diff --git a/target/i386/cpu.c b/target/i386/cpu.c
+index 3725dbbc4b3..f783d311579 100644
+--- a/target/i386/cpu.c
++++ b/target/i386/cpu.c
+@@ -2008,6 +2008,11 @@ static char *x86_cpu_class_get_model_name(X86CPUClass *cc)
+     return cpu_model_from_type(class_name);
+ }
+ 
++static bool x86_cpu_datapath_is_big_endian(CPUState *cs)
++{
++    return false;
++}
++
+ typedef struct X86CPUVersionDefinition {
+     X86CPUVersion version;
+     const char *alias;
+@@ -8588,6 +8593,7 @@ static void x86_cpu_common_class_init(ObjectClass *oc, void *data)
+ 
+     cc->class_by_name = x86_cpu_class_by_name;
+     cc->parse_features = x86_cpu_parse_featurestr;
++    cc->datapath_is_big_endian = x86_cpu_datapath_is_big_endian;
+     cc->has_work = x86_cpu_has_work;
+     cc->mmu_index = x86_cpu_mmu_index;
+     cc->dump_state = x86_cpu_dump_state;
+diff --git a/target/loongarch/cpu.c b/target/loongarch/cpu.c
+index 57cc4f314bf..b9cf0091546 100644
+--- a/target/loongarch/cpu.c
++++ b/target/loongarch/cpu.c
+@@ -742,6 +742,11 @@ static ObjectClass *loongarch_cpu_class_by_name(const char *cpu_model)
+     return oc;
+ }
+ 
++static bool loongarch_cpu_datapath_is_big_endian(CPUState *cs)
++{
++    return false;
++}
++
+ void loongarch_cpu_dump_state(CPUState *cs, FILE *f, int flags)
+ {
+     CPULoongArchState *env = cpu_env(cs);
+@@ -836,6 +841,7 @@ static void loongarch_cpu_class_init(ObjectClass *c, void *data)
+                                        &lacc->parent_phases);
+ 
+     cc->class_by_name = loongarch_cpu_class_by_name;
++    cc->datapath_is_big_endian = loongarch_cpu_datapath_is_big_endian;
+     cc->has_work = loongarch_cpu_has_work;
+     cc->mmu_index = loongarch_cpu_mmu_index;
+     cc->dump_state = loongarch_cpu_dump_state;
+diff --git a/target/tricore/cpu.c b/target/tricore/cpu.c
+index 1a261715907..ba53d83f662 100644
+--- a/target/tricore/cpu.c
++++ b/target/tricore/cpu.c
+@@ -29,6 +29,11 @@ static inline void set_feature(CPUTriCoreState *env, int feature)
+     env->features |= 1ULL << feature;
+ }
+ 
++static bool tricore_cpu_datapath_is_big_endian(CPUState *cs)
++{
++    return false;
++}
++
+ static const gchar *tricore_gdb_arch_name(CPUState *cs)
+ {
+     return "tricore";
+@@ -191,6 +196,7 @@ static void tricore_cpu_class_init(ObjectClass *c, void *data)
+     resettable_class_set_parent_phases(rc, NULL, tricore_cpu_reset_hold, NULL,
+                                        &mcc->parent_phases);
+     cc->class_by_name = tricore_cpu_class_by_name;
++    cc->datapath_is_big_endian = tricore_cpu_datapath_is_big_endian;
+     cc->has_work = tricore_cpu_has_work;
+     cc->mmu_index = tricore_cpu_mmu_index;
+ 
 -- 
 2.45.2
 
