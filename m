@@ -4,52 +4,100 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C6DE9E7716E
-	for <qemu-riscv@archiver.kernel.org>; Wed,  4 Dec 2024 16:04:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1C3F0E7716D
+	for <qemu-riscv@archiver.kernel.org>; Wed,  4 Dec 2024 20:26:49 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tIrr6-0003sy-Lv; Wed, 04 Dec 2024 11:04:00 -0500
+	id 1tIvxG-0007ak-KH; Wed, 04 Dec 2024 15:26:38 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <mario.fleischmann@lauterbach.com>)
- id 1tIrr3-0003r4-Ur; Wed, 04 Dec 2024 11:03:57 -0500
-Received: from bm.lauterbach.com ([62.154.241.218])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <mario.fleischmann@lauterbach.com>)
- id 1tIrr1-0007vF-9c; Wed, 04 Dec 2024 11:03:57 -0500
-Received: from [10.2.13.100] (unknown [10.2.13.100])
- (Authenticated sender: mario.fleischmann@lauterbach.com)
- by bm.lauterbach.com (Postfix) with ESMTPSA id 15E7940793C3;
- Wed,  4 Dec 2024 17:03:34 +0100 (CET)
-Message-ID: <0516feb0-ba9a-4ac0-a2bd-1bf97ca9694e@lauterbach.com>
-Date: Wed, 4 Dec 2024 17:03:34 +0100
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tIvxF-0007Zd-3s
+ for qemu-riscv@nongnu.org; Wed, 04 Dec 2024 15:26:37 -0500
+Received: from mail-wr1-x432.google.com ([2a00:1450:4864:20::432])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tIvxC-00073o-Hg
+ for qemu-riscv@nongnu.org; Wed, 04 Dec 2024 15:26:36 -0500
+Received: by mail-wr1-x432.google.com with SMTP id
+ ffacd0b85a97d-385eaecc213so114939f8f.1
+ for <qemu-riscv@nongnu.org>; Wed, 04 Dec 2024 12:26:34 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1733343993; x=1733948793; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=WMiVeD+NvW1fa7vIzwk9nB4EqLDwXQxpVEw4CRgejIU=;
+ b=YBpmGZDfstLpjl/RN4Vx/k5ltxLmhf7FgupLyh4t7ipmqbUttxjZapBrKzGg+MMJpB
+ bmsFzmT0j7kgmhyu951vi14v+vIVhAY5+c0PsBZ8agooqEbJYuaNRm15J8bQXFB40Dv7
+ owX3vlwpkcc2arFmlSZNE8b20Ev6aNpH7KeiGC5EPqUsalc49/OKstb/lNoYDEYINAOn
+ 9nUIGphkw429GfOUwq+mJKLiqfHeiHLh0TGvKNQ2SOjip9zdSps5HWCO18ddVsI+h9yp
+ I7YXU3aEenTVbCt81QTHqmslaY8b27oA/Mdufpz+OBRsgWpnQrRNqL/FCmMIhSMYeIpy
+ UCCg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1733343993; x=1733948793;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=WMiVeD+NvW1fa7vIzwk9nB4EqLDwXQxpVEw4CRgejIU=;
+ b=RCDJhgnrQWp9YhmMRrWrViWyfDtXx9MUOxgsWohVQcWxHgOTsHvP7DwS/Lfr8uzgnv
+ dWOAwdT/ZLYRUWNkn95DLhmv0yxuykIux86pbFmXGNnQBJUx1nxXAEi31/jsktbpp/2t
+ YS4fUJiTTXrwNkHnKHUzie97zoshEYc0zWTIygx9bwNvoA+fusw5n2+kz4lwXLwqkwVm
+ osb2U+bc5C3xlEMXecbFje4EqddbLbyWf+jXTq8gYg2xTKViVqgjdPVa5aMsh6TIU/fF
+ 2NMPlv9IrTeJc8BN3iacfln1QKugaJMhr/U5+LtctAuOaEmi+N0z4g0Lp/NKJaApuTLS
+ inOg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCW76GgKQdvtN6gMKV31ExI8A+MaGbfKBIEzfWuaIwjTlKz9xcvvph4wNcRhCbiHX9s8tCnXm6PA0ViW@nongnu.org
+X-Gm-Message-State: AOJu0YxB5Yx2F8TvbNSeQUdj0dsr9r9uE3Qfzige/ltj5tnGNVUxWPag
+ ItyGjpkDlQBOIxq86gU8Jei5TqITQA0HpELuoOIXR6zZSM2U16UXYyAsHPBbYTg=
+X-Gm-Gg: ASbGnctKjZolHp+fgGEUwV93dehSWXjRhxGozyF14VjZf/PWAqmPOKo5/CqyPT6e4Ha
+ c4ZJIdsZrb7h+h1QW8ZeBR8n/rjX3vinCRFm44+f1wJd2D1wVekCMbX3PSGJ0QZtB6wyGzUyt5J
+ scE+1OyG6rwSiOQZsWpiAQvFlco/0ab/6g2FYAhrj5gTvA67q9D17zMh05C3wL16jUWriR0mLrh
+ FbHl+rORAhP1VS1ET0Jr6dF3jXpReH6317UHPLLu/NBm4Yu9kHmncv8rPACYFQElfSyuGnW9tdd
+ HF9V9wY3jJXP7Q/lhUmA7NjP
+X-Google-Smtp-Source: AGHT+IGWhwjv2J2oO67dFvzI2OUj4axL/zRmbmzFJFjahHejUxN3c+TpGi6RU4aHAiB2lykmP3GeYA==
+X-Received: by 2002:a05:6000:2cc:b0:385:e8e7:d09a with SMTP id
+ ffacd0b85a97d-3861bb5a42bmr666212f8f.2.1733343992917; 
+ Wed, 04 Dec 2024 12:26:32 -0800 (PST)
+Received: from localhost.localdomain (88-187-86-199.subs.proxad.net.
+ [88.187.86.199]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-385f10a12dbsm10075187f8f.105.2024.12.04.12.26.31
+ (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
+ Wed, 04 Dec 2024 12:26:32 -0800 (PST)
+From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+To: qemu-devel@nongnu.org
+Cc: Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ "Michael S. Tsirkin" <mst@redhat.com>,
+ Peter Maydell <peter.maydell@linaro.org>,
+ Laurent Vivier <lvivier@redhat.com>,
+ Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
+ Alistair Francis <alistair.francis@wdc.com>, Anton Johansson <anjo@rev.ng>,
+ Zhao Liu <zhao1.liu@intel.com>,
+ "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
+ David Hildenbrand <david@redhat.com>, qemu-s390x@nongnu.org,
+ Max Filippov <jcmvbkbc@gmail.com>, Paolo Bonzini <pbonzini@redhat.com>,
+ Nicholas Piggin <npiggin@gmail.com>, qemu-arm@nongnu.org,
+ Thomas Huth <thuth@redhat.com>, qemu-riscv@nongnu.org,
+ Alistair Francis <alistair@alistair23.me>, qemu-ppc@nongnu.org,
+ Richard Henderson <richard.henderson@linaro.org>,
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+Subject: [PATCH 05/20] target/rx: Implement CPUClass::datapath_is_big_endian
+Date: Wed,  4 Dec 2024 21:25:47 +0100
+Message-ID: <20241204202602.58083-6-philmd@linaro.org>
+X-Mailer: git-send-email 2.45.2
+In-Reply-To: <20241204202602.58083-1-philmd@linaro.org>
+References: <20241204202602.58083-1-philmd@linaro.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] riscv/gdb: add virt mode debug interface
-To: Yanfeng Liu <yfliu2008@qq.com>, =?UTF-8?Q?Alex_Benn=C3=A9e?=
- <alex.bennee@linaro.org>
-Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, alistair.francis@wdc.com
-References: <tencent_B52B1EB0A504D6F690B6E6F3FD3AC9BCDC09@qq.com>
- <8734jbh21e.fsf@draig.linaro.org>
- <tencent_CA6E4D0C897F3ED0EF988CCE5DF541442A05@qq.com>
- <87r06ufjiz.fsf@draig.linaro.org>
- <tencent_AADD9A1292CD7CB89F16999E7BDD03895406@qq.com>
-Content-Language: en-US
-From: Mario Fleischmann <mario.fleischmann@lauterbach.com>
-In-Reply-To: <tencent_AADD9A1292CD7CB89F16999E7BDD03895406@qq.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-Bm-Milter-Handled: 166a2dfb-2e12-4590-8fa5-72e30323519f
-X-Bm-Transport-Timestamp: 1733328214096
-Received-SPF: pass client-ip=62.154.241.218;
- envelope-from=mario.fleischmann@lauterbach.com; helo=bm.lauterbach.com
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9,
- RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001, RCVD_IN_VALIDITY_SAFE_BLOCKED=0.001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+Received-SPF: pass client-ip=2a00:1450:4864:20::432;
+ envelope-from=philmd@linaro.org; helo=mail-wr1-x432.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -65,128 +113,43 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Hi everyone,
+While on RX the endianness can be set at RESET, we
+do not implement that; only little endianness is used.
 
-I'd like to chime in here because we are sitting on a similar patch 
-which I wanted to send to the mailing list as soon as riscv-debug-spec 
-v1.0.0 becomes ratified.
+Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+---
+ target/rx/cpu.c | 10 ++++++++++
+ 1 file changed, 10 insertions(+)
 
-For hypervisor support, `(qemu) info registers` isn't enough. We need to 
-have both read and write access to the V-bit.
-
-On 04.12.2024 14:43, Yanfeng Liu wrote:
-> On Fri, 2024-11-29 at 09:59 +0000, Alex Bennée wrote:
->> Yanfeng <yfliu2008@qq.com> writes:
->>
->>> On Thu, 2024-11-28 at 14:21 +0000, Alex Bennée wrote:
->>>> Yanfeng Liu <yfliu2008@qq.com> writes:
->>>>
->>>>> This adds `virt` virtual register on debug interface so that users
->>>>> can access current virtualization mode for debugging purposes.
->>>>>
->>>>> Signed-off-by: Yanfeng Liu <yfliu2008@qq.com>
->>>>> ---
->>>>>   gdb-xml/riscv-32bit-virtual.xml |  1 +
->>>>>   gdb-xml/riscv-64bit-virtual.xml |  1 +
->>>>>   target/riscv/gdbstub.c          | 18 ++++++++++++------
->>>>>   3 files changed, 14 insertions(+), 6 deletions(-)
->>>>>
->>>>> diff --git a/gdb-xml/riscv-32bit-virtual.xml b/gdb-xml/riscv-32bit-
->>>>> virtual.xml
->>>>> index 905f1c555d..d44b6ca2dc 100644
->>>>> --- a/gdb-xml/riscv-32bit-virtual.xml
->>>>> +++ b/gdb-xml/riscv-32bit-virtual.xml
->>>>> @@ -8,4 +8,5 @@
->>>>>   <!DOCTYPE feature SYSTEM "gdb-target.dtd">
->>>>>   <feature name="org.gnu.gdb.riscv.virtual">
->>>>>     <reg name="priv" bitsize="32"/>
->>>>> +  <reg name="virt" bitsize="32"/>
->>>>>   </feature>
->>>>> diff --git a/gdb-xml/riscv-64bit-virtual.xml b/gdb-xml/riscv-64bit-
->>>>> virtual.xml
->>>>> index 62d86c237b..7c9b63d5b6 100644
->>>>> --- a/gdb-xml/riscv-64bit-virtual.xml
->>>>> +++ b/gdb-xml/riscv-64bit-virtual.xml
->>>>> @@ -8,4 +8,5 @@
->>>>>   <!DOCTYPE feature SYSTEM "gdb-target.dtd">
->>>>>   <feature name="org.gnu.gdb.riscv.virtual">
->>>>>     <reg name="priv" bitsize="64"/>
->>>>> +  <reg name="virt" bitsize="64"/>
->>>>>   </feature>
->>>>
->>>> I assume these are mirrored in gdb not a QEMU only extension?
->>>
->>> So far I think it is a QEMU extension and the `gdb-multiarch` doesn't treat
->>> is
->>> specially. My tests shows it basically works:
->>>
->>> ```
->>> (gdb) ir virt
->>> priv           0x3      prv:3 [Machine]
->>> virt           0x0      0
->>> (gdb) set $priv = 2
->>> (gdb) ir virt
->>> priv           0x1      prv:1 [Supervisor]
->>> virt           0x0      0
->>> (gdb) set $virt = 1
->>> (gdb) ir virt
->>> priv           0x1      prv:1 [Supervisor]
->>> virt           0x1      1
->>> (gdb) set $virt = 0
->>> (gdb) ir virt
->>> priv           0x1      prv:1 [Supervisor]
->>> virt           0x0      0
->>> (gdb) set $virt = 1
->>> (gdb) ir virt
->>> priv           0x1      prv:1 [Supervisor]
->>> virt           0x1      1
->>> (gdb) set $priv = 3
->>> (gdb) ir virt
->>> priv           0x3      prv:3 [Machine]
->>> virt           0x0      0
->>> ```
->>
->> A gdbstub test case would be useful for this although I don't know if
->> the RiscV check-tcg tests switch mode at all.
->>
->>>
->>> As I am rather new to QEMU, please teach how we can add it as a QEMU only
->>> extension.
->>
->> You don't need to extend the XML from GDB, you can build a specific one
->> for QEMU extensions. For example:
->>
->>      gdb_feature_builder_init(&param.builder,
->>                               &cpu->dyn_sysreg_feature.desc,
->>                               "org.qemu.gdb.arm.sys.regs",
->>                               "system-registers.xml",
->>                               base_reg);
->>
->> This exports all the system registers QEMU knows about and GDB can
->> access generically. Note the id is org.qemu..., indicating its our
->> schema not gdbs.
-> Thanks for teaching, I need time to digest. I guess more feature builder APIs
-> are needed (like append_reg) and the getter/setter callbacks might be at a
-> different place.
-> 
-> BTW, compared to adding virtual register `virt`, how do you think if we share
-> the V bit as part of existing `priv` register?
-
-IMHO this is a very good idea since the latest release candidate of 
-riscv-debug-spec also includes the V bit in priv:2.
-
-> Or maybe we shall talk to GDB community to get their opinions? If they agree to
-> add a few words about V bit here
-> https://sourceware.org/gdb/current/onlinedocs/gdb.html/RISC_002dV-Features.html,
-> then it saves us a lot.
-
-Except being currently not supported by GDB
-
-(gdb) info register $priv
-priv           0x5      prv:5 [INVALID]
-
-are there any reasons from QEMU's side that would speak against 
-including V in priv?
-
+diff --git a/target/rx/cpu.c b/target/rx/cpu.c
+index 65a74ce720f..391f3214168 100644
+--- a/target/rx/cpu.c
++++ b/target/rx/cpu.c
+@@ -27,6 +27,15 @@
+ #include "fpu/softfloat.h"
+ #include "tcg/debug-assert.h"
+ 
++static bool rx_cpu_datapath_is_big_endian(CPUState *cs)
++{
++    /*
++     * Endianness is sampled via a pin at reset,
++     * but we don't implement that yet.
++     */
++    return false;
++}
++
+ static void rx_cpu_set_pc(CPUState *cs, vaddr value)
+ {
+     RXCPU *cpu = RX_CPU(cs);
+@@ -217,6 +226,7 @@ static void rx_cpu_class_init(ObjectClass *klass, void *data)
+                                        &rcc->parent_phases);
+ 
+     cc->class_by_name = rx_cpu_class_by_name;
++    cc->datapath_is_big_endian = rx_cpu_datapath_is_big_endian;
+     cc->has_work = rx_cpu_has_work;
+     cc->mmu_index = riscv_cpu_mmu_index;
+     cc->dump_state = rx_cpu_dump_state;
+-- 
+2.45.2
 
 
