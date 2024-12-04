@@ -4,77 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E0777E7716C
-	for <qemu-riscv@archiver.kernel.org>; Wed,  4 Dec 2024 02:30:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B9072E7716B
+	for <qemu-riscv@archiver.kernel.org>; Wed,  4 Dec 2024 02:37:24 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tIf9S-0006hb-0e; Tue, 03 Dec 2024 21:30:06 -0500
+	id 1tIfG8-0008RA-Ly; Tue, 03 Dec 2024 21:37:04 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1tIf9L-0006go-8c; Tue, 03 Dec 2024 21:29:59 -0500
-Received: from mail-vk1-xa32.google.com ([2607:f8b0:4864:20::a32])
+ id 1tIfFw-0008Pv-Be; Tue, 03 Dec 2024 21:36:49 -0500
+Received: from mail-vk1-xa30.google.com ([2607:f8b0:4864:20::a30])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1tIf9I-0001ZL-DK; Tue, 03 Dec 2024 21:29:58 -0500
-Received: by mail-vk1-xa32.google.com with SMTP id
- 71dfb90a1353d-5150f63db70so1751459e0c.3; 
- Tue, 03 Dec 2024 18:29:54 -0800 (PST)
+ id 1tIfFu-0003JE-GG; Tue, 03 Dec 2024 21:36:47 -0500
+Received: by mail-vk1-xa30.google.com with SMTP id
+ 71dfb90a1353d-515c82e7251so255331e0c.1; 
+ Tue, 03 Dec 2024 18:36:45 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1733279394; x=1733884194; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1733279805; x=1733884605; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=5glZ6s3P3Jnx1EzTYUoEk7/ps6phwYVaPr+wcWOEpaY=;
- b=fWw18eNoju+Xvv61a9pfo6AdFYtUtsNmdh8reGIkNHKqf4GNDny5b0lTVvYIY1b0BU
- 107wcs/uVTftMYQGIB2MFHU5eznd0l5bAlY8Abpzkv6CGryrXXPpmnSGNH/CHtUhd5uk
- XNkwH1zUO2FfGgOY2FDrCPg17yCVYuZH6/1M59b06p0CjKCN3TzAOMhebm1UjFspiZT0
- DFE0nOHIhXrEY5W3rqsWM64GIjVUwCrAtVZKCo+mKUzlQaAF9Zq7OT4VJ9Lv1Vv6Posp
- fLj+214/nVO5Q0mA0vyPo4XC8CrOFtuQKjXCsdXbpHohYezk3WQebq1hVhGPSBJh/8UG
- h46w==
+ bh=AKx0SLWopW0nKGHvQOmuwqGYgel2gvvmvPOMk+zF/rA=;
+ b=JksjW5Pq2UoEcNoMZjfO9YPuKSC6/atMh3MZcahxpf9f331kIJqj+TwonlYCctABnJ
+ G5/NtnmI3fDllZ+ZOYEGXi4NL3DIUWPyl4jEOWHoKDME34FLqTGFmFRH0HdnzC7wAkmM
+ 9kZ+Hgb5OVsrpC7mcaQ8+rKVWS+634H5hegibwWHnSEY0aC/IzATwu0CQSqFmgMYasp3
+ 3QMmhZLc++P8bpsGhXc/qDbhRFQZn3eMvtrKosRyvR50MA2FShF5WgEvdEUuMrJAEKf8
+ YSnWqR4eYlrsvw2hmVZJ7bFiCD8OluUnLfX29DIzSxSR2bAYWGaH5vV2KkFwfmb738/z
+ FG0w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733279394; x=1733884194;
+ d=1e100.net; s=20230601; t=1733279805; x=1733884605;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=5glZ6s3P3Jnx1EzTYUoEk7/ps6phwYVaPr+wcWOEpaY=;
- b=ZDQAHTGbRIqk74XKLRzf9y/u/zZBrUqpxQjy2SKkcK91apAG8UOkSKGDm3y25GCIRr
- m5EdsjV/DS7u4w33igCLyUn+22il+ddV3ORcqHv0ipE0MyoGRCohLTJKmADjVw6+IDFz
- wRRl4YJMv1r9orAvaTn4RbDd+jF9amJpoGI8T4jeTot7WYP4iS1XH69b5mJgX/SYfpKb
- 9wU6oUs9thmBCZ1Ffrxc8fDBYOku/OeVejbK8d5hBomYKQDbk5QLfegcMHBdoNVcXkgL
- nHxQ5+V1DJP9SUlvQJTWRg6q2FMM9I+HIeEFMRPQNtLd5PphIVWWF8vPItpgA537LCB9
- IIyg==
+ bh=AKx0SLWopW0nKGHvQOmuwqGYgel2gvvmvPOMk+zF/rA=;
+ b=ZL68HiUcj0jN++E0562wPb6hNx9H/Ule4sRZrjoRsjuYpdW1mJa5uMCJ2SqpkUcw2I
+ PMun3mnVX1UCA0n9dA233vJW8KwkN+iOzzJQleiU0IL+610oWiEpHANc7zB5RDmRj7Wh
+ LlDhMcogAZbxKh/fmplxloTLcU+imKbvQqZ/dXCNbQewhU9+2S7KsqG882XXMRENEwH0
+ 4j2tIIosjyw/04SngV/Sizqxro27Nyb/QzDGjcSbfEBq/686VWfPb6Nipq4SNvcwIsyG
+ +9X1ORni4UIWPk718dRrs0li0w/L2jIq4c5W6ngsJZY0xyCV8mJHY2ohsAC33txoamAp
+ kepA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCULcWyfCIBiV8eo5b0hMON7wfX0j4mGSh9HxfZsDtYG+Qolpd9s6c00T46Nqk1wjqs9rn/50DI879Lv@nongnu.org
-X-Gm-Message-State: AOJu0YzFxxn8GIaRz7UFQVAvHRZ21rHLE/HeiQ3N46FBULeIXZK9N5ah
- ma1ybG1ieeaphsUNMJMdT4ckr/0q3LBTX8Q1HnWdpIacCCxZqW8frQlPY+tZF+eGTZw1dQ1JYXl
- pvtiKCls4oh9uBlvAZiVbN8dMxo0=
-X-Gm-Gg: ASbGnctrb25yPGdWM9UXp0OV7mTfoXPbiy0eNA8YP30Ku2GgvPygesVY/F3EdmiD1ww
- HYJYrHW8TwofZQRBibtVwnmyQVGMvU+XO
-X-Google-Smtp-Source: AGHT+IG2+RGk20OabHiMOB10KuLw++/RJRr45mtk61z7dNck7BiIpE+kD4bk6c/3WwntyLQBV9Q6w+TAaoomxkDRXso=
-X-Received: by 2002:a05:6122:16aa:b0:50d:5e21:ef39 with SMTP id
- 71dfb90a1353d-515bf2ac316mr6642253e0c.1.1733279394145; Tue, 03 Dec 2024
- 18:29:54 -0800 (PST)
+ AJvYcCUac3VqFpsCIn+wNebMewCSKJtH1YXNd9ROn5R9ZsFBiux6YWfqzMZ3kX07m99c5hPCVRUyY+C0qpFf@nongnu.org
+X-Gm-Message-State: AOJu0Yz9dpM90zQhrZnHjS8zGIAF3ZY/wUjvu6TOmJEH/G+ogKij0gAl
+ pINkFkfFu+6s8ive8xqr+V6Va+F/6iuBHmZ8vHvcYqqthO4hkVsoWOkb3jc5stt1H30POVyUICm
+ dPALQs1VsHj7MVdGuIiXbiQ92ar4=
+X-Gm-Gg: ASbGnctiItO1v9/xt5qIINdxzipq4sr0o5FTZaQhRbBgDVU6lHoLQGgt01cUfVSwhbi
+ UhlMpWOkKMvPTkJNZ+5YUXgBH/RSmxj4g
+X-Google-Smtp-Source: AGHT+IGu/hcl5CpQSJGAkc7hd5TIJZwvQt/4AeQPndBj8EyBhDQV7yhH2SxVW+uA3qLso5Cg5Glqh2We6MvwT5JCVh8=
+X-Received: by 2002:a05:6122:20a6:b0:515:3bb5:5736 with SMTP id
+ 71dfb90a1353d-515bf58461fmr6332554e0c.11.1733279804744; Tue, 03 Dec 2024
+ 18:36:44 -0800 (PST)
 MIME-Version: 1.0
-References: <20241203200828.47311-1-philmd@linaro.org>
- <20241203200828.47311-2-philmd@linaro.org>
-In-Reply-To: <20241203200828.47311-2-philmd@linaro.org>
+References: <20241203034932.25185-1-fea.wang@sifive.com>
+In-Reply-To: <20241203034932.25185-1-fea.wang@sifive.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Wed, 4 Dec 2024 11:29:27 +0900
-Message-ID: <CAKmqyKPEz_H6F_CTE6t3nwaWdmCStXa1UdQFrbVHfW0xyfhmig@mail.gmail.com>
-Subject: Re: [PATCH 1/2] target/riscv: Include missing headers in
- 'vector_internals.h'
-To: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@linaro.org>
-Cc: qemu-devel@nongnu.org, Weiwei Li <liwei1518@gmail.com>, 
+Date: Wed, 4 Dec 2024 11:36:18 +0900
+Message-ID: <CAKmqyKMu7fPLnWMia-=Un1hU041WrPOCe9BpGbM8mq7azCk8tA@mail.gmail.com>
+Subject: Re: [PATCH v5 0/6] Introduce svukte ISA extension
+To: "Fea.Wang" <fea.wang@sifive.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, 
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Bin Meng <bmeng.cn@gmail.com>, Weiwei Li <liwei1518@gmail.com>, 
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Palmer Dabbelt <palmer@dabbelt.com>, 
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, Bin Meng <bmeng.cn@gmail.com>,
- qemu-riscv@nongnu.org, Alistair Francis <alistair.francis@wdc.com>
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::a32;
- envelope-from=alistair23@gmail.com; helo=mail-vk1-xa32.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::a30;
+ envelope-from=alistair23@gmail.com; helo=mail-vk1-xa30.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -98,43 +97,69 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Wed, Dec 4, 2024 at 5:09=E2=80=AFAM Philippe Mathieu-Daud=C3=A9 <philmd@=
-linaro.org> wrote:
+On Tue, Dec 3, 2024 at 12:39=E2=80=AFPM Fea.Wang <fea.wang@sifive.com> wrot=
+e:
 >
-> Rather than relying on implicit includes, explicit them,
-> in order to avoid when refactoring unrelated headers:
+> The Svukte ISA extension has been approved for fast-track development.
+> https://lf-riscv.atlassian.net/browse/RVS-2977
+> And there are Linux patches for the Svukte that are under review.
+> https://lore.kernel.org/kvm/20240920-dev-maxh-svukte-rebase-v1-0-7864a88a=
+62bd@sifive.com/T/#mf70fcb22cd2987ad268c0efee9b8583197d3cb4f
 >
->   target/riscv/vector_internals.h:36:12: error: call to undeclared functi=
-on 'FIELD_EX32'; ISO C99 and later do not support implicit function declara=
-tions [-Wimplicit-function-declaration]
->      36 |     return FIELD_EX32(simd_data(desc), VDATA, NF);
->         |            ^
+> Svukte provides a means to make user-mode accesses to supervisor memory
+> raise page faults in constant time, mitigating attacks that attempt to
+> discover the supervisor software's address-space layout.
 >
-> Signed-off-by: Philippe Mathieu-Daud=C3=A9 <philmd@linaro.org>
+> Refer to the draft of svukte extension from:
+> https://github.com/riscv/riscv-isa-manual/pull/1564
+>
+> base-commit: 2209cae121e5da3cfbdb9dd4b06d52d0ef66ea69
+>
+> [v5]
+> * Update the warning log and the commit message
+>
+> [v4]
+> * Add a svukte extension check in RV32.
+> * Refine the code.
+>
+> [v3]
+> * Fix some typos
+> * Refine code by separating a function into two dedicated functions.
+> * Follow the riscv,isa order
+>
+> [v2]
+> * Refactor the code
+>
+> [v1]
+> * Add svukte extension
+>
+> Fea.Wang (6):
+>   target/riscv: Add svukte extension capability variable
+>   target/riscv: Support senvcfg[UKTE] bit when svukte extension is
+>     enabled
+>   target/riscv: Support hstatus[HUKTE] bit when svukte extension is
+>     enabled
+>   target/riscv: Check memory access to meet svukte rule
+>   target/riscv: Expose svukte ISA extension
+>   target/riscv: Check svukte is not enabled in RV32
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Thanks!
+
+Applied to riscv-to-apply.next
 
 Alistair
 
-> ---
->  target/riscv/vector_internals.h | 1 +
->  1 file changed, 1 insertion(+)
 >
-> diff --git a/target/riscv/vector_internals.h b/target/riscv/vector_intern=
-als.h
-> index 9e1e15b5750..a11cc8366dc 100644
-> --- a/target/riscv/vector_internals.h
-> +++ b/target/riscv/vector_internals.h
-> @@ -20,6 +20,7 @@
->  #define TARGET_RISCV_VECTOR_INTERNALS_H
+>  target/riscv/cpu.c         |  2 ++
+>  target/riscv/cpu_bits.h    |  2 ++
+>  target/riscv/cpu_cfg.h     |  1 +
+>  target/riscv/cpu_helper.c  | 55 ++++++++++++++++++++++++++++++++++++++
+>  target/riscv/csr.c         |  7 +++++
+>  target/riscv/tcg/tcg-cpu.c |  5 ++++
+>  6 files changed, 72 insertions(+)
 >
->  #include "qemu/bitops.h"
-> +#include "hw/registerfields.h"
->  #include "cpu.h"
->  #include "tcg/tcg-gvec-desc.h"
->  #include "internals.h"
 > --
-> 2.45.2
+> 2.34.1
 >
 >
 
