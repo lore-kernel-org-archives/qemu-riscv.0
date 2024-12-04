@@ -4,88 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 617D4E77170
-	for <qemu-riscv@archiver.kernel.org>; Wed,  4 Dec 2024 13:18:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8D97AE7716E
+	for <qemu-riscv@archiver.kernel.org>; Wed,  4 Dec 2024 13:45:23 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tIpGz-0001nr-RH; Wed, 04 Dec 2024 08:18:34 -0500
+	id 1tIpgJ-0004VY-O2; Wed, 04 Dec 2024 08:44:43 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <craig.blackmore@embecosm.com>)
- id 1tIoWl-0002NM-LI
- for qemu-riscv@nongnu.org; Wed, 04 Dec 2024 07:30:48 -0500
-Received: from mail-wm1-x335.google.com ([2a00:1450:4864:20::335])
+ (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
+ id 1tIpgG-0004V8-JH
+ for qemu-riscv@nongnu.org; Wed, 04 Dec 2024 08:44:40 -0500
+Received: from mail-pg1-x52c.google.com ([2607:f8b0:4864:20::52c])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <craig.blackmore@embecosm.com>)
- id 1tIoWj-0003Wd-PI
- for qemu-riscv@nongnu.org; Wed, 04 Dec 2024 07:30:47 -0500
-Received: by mail-wm1-x335.google.com with SMTP id
- 5b1f17b1804b1-4349e1467fbso59413135e9.1
- for <qemu-riscv@nongnu.org>; Wed, 04 Dec 2024 04:30:44 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
+ id 1tIpgC-0006iZ-TC
+ for qemu-riscv@nongnu.org; Wed, 04 Dec 2024 08:44:38 -0500
+Received: by mail-pg1-x52c.google.com with SMTP id
+ 41be03b00d2f7-7fcdb53d849so1950195a12.0
+ for <qemu-riscv@nongnu.org>; Wed, 04 Dec 2024 05:44:34 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=embecosm.com; s=google; t=1733315443; x=1733920243; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=FWhpyYBZDQdDYQfU/TGfuVVfj2aHCagzAjvFcry1nyQ=;
- b=ZdAczzeP2ZLUmy6oPK/feKxe8mfErMJDbRzeKpmPER13pzaQoQO3ygYjz1eGGH/85i
- CApEwyL+H8Pwcqfpk5JT+gGlIVOmbWzoBaS5EGynpemQINWzgI8FIt5hHyFsEvWh5x2F
- bNosB91Wj39EKRWcKK3/6MVZ4FbFB8AJUGyLyIHerbzvkih7PBsjHjNAGkoHdwFjNaVY
- jnbHGIH1elZCvezVlU+bppwflAuQ8SBZsQxwXH06l7YQ8PVw4U8HxTZtP7HZxNGsmulX
- +t8/jCHwhAsAGOLKnjgRk/7kIHInuW48eoVm3aSIz+bAXPe2fkwLm9eV/fibUMkpyyhE
- H2Rw==
+ d=sifive.com; s=google; t=1733319873; x=1733924673; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=aHd1MRRSafUnWBC2N8SahkGvWNXk3m2ISH8lpOFbWeg=;
+ b=FCO+tT1Fg6G08bVEKK6K59Yodm01wzDVQryeQN/bdw/ODEwv0ha5CnnYRMtUSPh3YG
+ u29QDiOHdctxxdmOlW9xVCNnENfAmAAp+qwkLRFPwcNeE/fizLC0fx2EOt9FGapD0UTL
+ Yhe/3rnaP6LnZBvtG9YIb4QalnorXIOE4iuquV8t2GlmD7Xc4CNBt7iJxLzLK1atvh5Q
+ P9Ooe39tm/+LP8p2ia6ikJ8r4qkIaAwzBpVrU+qb1PHXEdDGPOpM04ZDWpIWeY7iio2c
+ 8h3so8kSYqD2xAywcSMJw14FfCpZ8R7wYDwpPa2qoXC5LnvIqeXkNM+vSnxwHPlh2zBV
+ hNZQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733315443; x=1733920243;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=FWhpyYBZDQdDYQfU/TGfuVVfj2aHCagzAjvFcry1nyQ=;
- b=MF8GvYtIKqeo9OGwixwgcXJxnRi5hicezvvIMqz3vcLhKd2Gw++XFJ1EwqnMIlf4VU
- BrIiZREqNcyB1ePSnNR4AaWUmEeWzkefOKlsfFpG/Cq4J8atprmoBy+SfFu5db49SwwH
- wq7BD/yIpKHfvFlXTVVS6gh2omcVYaei/+C6wxLQdaY19rT5CD8AQ3MrpnTrGNFT0Utt
- Wqu/40/D5wvjskYIK3A6u5nreyo+y0P+zwTvawOH2FbXXD0G6KvfE0wem7RKdfXRAWqE
- mPFKh296pBOdGcszynuWxsQpyR0jaZiCxw64iwJh1DPqBqfL0Gzs+vIHFSoM+2UlSHbL
- NOqw==
+ d=1e100.net; s=20230601; t=1733319873; x=1733924673;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=aHd1MRRSafUnWBC2N8SahkGvWNXk3m2ISH8lpOFbWeg=;
+ b=OD3RUoAfO/BJ3HmChyRn/myzOkn/Ij3Ys2Hs7ISodBjU01kqPxyCHSpMX2zDOkYkyb
+ 5i5Qvy466Bg+/0cKy13gX2lfc566jHHOUvsfrVaXXQrxCRKlyFO7yHBWstsajMSDirZB
+ rCJjRI0cXCRjwKTbGYMzgTBCC0WWBjQSwei3waWy2DL3ww6ESx1fC+dip3jFIMwZuf8L
+ EqT4Mdcw5GIFtFSkjXgLxQtAOvPAsEqlrOz2x3vkCYmLQya4cRqmNLLK6KUPWe1xLyTo
+ Kw0IkwewFpX17IgAOXdkmkjwWR1lAuUXuSzASynrVQsSKQ8mw30vcEPewowc/kPfPQwj
+ z78w==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXurCO9xnhNT6jV9HGHdi5wV+1k76Zt14MAU4O8hngcoO2EbxVgXqoh1YUHIeCz/sH4Sbc82HgAkIfN@nongnu.org
-X-Gm-Message-State: AOJu0YwgE4hu+o9mxmkEuEgIjMEv+BDPl/N2FUaycXObGlMgaVrZZzXo
- gvKqHHS029g/Nsqi6e61jaMnDrJJmoIw2vo2fhd+v6oySE4poxlLxkj9hpMD1AM=
-X-Gm-Gg: ASbGncudbv60W8tGVYdZ1zx8LaQaqDkgaylUueRuBzvKvhcv4zN2JplcdZWb8KPm+WT
- WShoye1O2JSVgRF4IdhqDrieejVj1GDDVm/XS5tzf/cIV1wRGmSrXhF3EUc5UKSvEIf2aWEPk4H
- lbUHRIosEcu3a+vQ8OnenylyhmOOcW+LKEwkt/MXYfLl6fBaRvzpaOxP+AXTVUs3j/wISlv4tPr
- KJHIOwpDLDhC3R7uSIWAdXpDVnpLqjA336JYeALoiRDwMIebSpKFGv4Ehu63+43ThczAI4fg6S+
- 65dzIMG314mjRDtPNN08a9sBeUxLfADaIhNjjK2lsg==
-X-Google-Smtp-Source: AGHT+IGAF30q0VvJEk8hstG7gKrHsazZRBFNw6c2175UTQPzegEz80GJ8QDtxRnRRa5o/LFJwikFxw==
-X-Received: by 2002:a05:600c:45c7:b0:434:a902:97cd with SMTP id
- 5b1f17b1804b1-434d09c0675mr54829115e9.12.1733315442221; 
- Wed, 04 Dec 2024 04:30:42 -0800 (PST)
-Received: from dorian..
- (sals-04-b2-v4wan-167965-cust660.vm36.cable.virginm.net. [80.3.10.149])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-434d5206649sm23324415e9.0.2024.12.04.04.30.41
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 04 Dec 2024 04:30:41 -0800 (PST)
-From: Craig Blackmore <craig.blackmore@embecosm.com>
-To: qemu-devel@nongnu.org,
-	qemu-riscv@nongnu.org
-Cc: Craig Blackmore <craig.blackmore@embecosm.com>,
- Richard Henderson <richard.henderson@linaro.org>,
+ AJvYcCVNbydZxiBFp5z7hlyahcufVnRU+baVrdJ8Ru4KVKtviHczuJgtY9ITW2DSqAQXrB9oHN6glqa6Wu0x@nongnu.org
+X-Gm-Message-State: AOJu0Yyw8XqqQiMKcktGvHyzlTAl8jbtXbG+MhLHaSQEvwrl27QVG+wU
+ OSsHX8LovUzWB4bUaqW5Uwp7MQDbTyzOSIJPBEUKekG+nBfN/sgOdixrqEgmTfM=
+X-Gm-Gg: ASbGncsIjWMABjIjPLuq2ZvzKH9UzCOxIv0PdrKawv+5AyBcsAJvYXsDAG4VPZp7tyr
+ /rPaei9ooj2P+OOq9o7vvF4Nl/7ejW586Win2nw8AVXniV/gVBjgekNdTvyn5o7Urmt0ujPfYwF
+ ZXHX6TgThmWGLXgQXE0NBau6MEwWfnlq8KBz2B95TAYPSnTqbkOlqm+lqAMiDexga7StK912/OD
+ qtFWAc+9x8Yozh81nBqpsmm84e+SDCEEr7JURW62Qci+tVgHoUrB0kxWbJ7IjzJUdAT2W81cvu7
+ g+bn48MrhYN9M1FJn8j+8A==
+X-Google-Smtp-Source: AGHT+IGGUyuaM3j34sxPJNaZP6nLJK5iK/C0VMiyBLxEI5ZlH5vXUhKdDMNoehPbqB7sNY8fydZrEQ==
+X-Received: by 2002:a05:6a20:12d2:b0:1e0:c432:32fe with SMTP id
+ adf61e73a8af0-1e16be61a86mr6809021637.26.1733319872929; 
+ Wed, 04 Dec 2024 05:44:32 -0800 (PST)
+Received: from [100.64.0.1] (114-35-142-126.hinet-ip.hinet.net.
+ [114.35.142.126]) by smtp.gmail.com with ESMTPSA id
+ 41be03b00d2f7-7fcf81228d6sm1499661a12.65.2024.12.04.05.44.30
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 04 Dec 2024 05:44:32 -0800 (PST)
+Message-ID: <108a264a-3744-4953-ad35-eed4fa0ac47e@sifive.com>
+Date: Wed, 4 Dec 2024 21:44:28 +0800
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v6 1/1] target/riscv: rvv: reduce the overhead for simple
+ RISC-V vector unit-stride loads and stores
+To: Craig Blackmore <craig.blackmore@embecosm.com>, qemu-devel@nongnu.org,
+ qemu-riscv@nongnu.org
+Cc: Richard Henderson <richard.henderson@linaro.org>,
  Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bmeng.cn@gmail.com>,
  Weiwei Li <liwei1518@gmail.com>,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
  Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
  Helene Chelin <helene.chelin@embecosm.com>, Nathan Egge <negge@google.com>,
- Max Chou <max.chou@sifive.com>, Paolo Savini <paolo.savini@embecosm.com>
-Subject: [PATCH v6 0/1] target/riscv: rvv: reduce the overhead for simple
- RISC-V vector unit-stride loads and stores
-Date: Wed,  4 Dec 2024 12:29:51 +0000
-Message-ID: <20241204122952.53375-1-craig.blackmore@embecosm.com>
-X-Mailer: git-send-email 2.43.0
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::335;
- envelope-from=craig.blackmore@embecosm.com; helo=mail-wm1-x335.google.com
+ Paolo Savini <paolo.savini@embecosm.com>
+References: <20241204122952.53375-1-craig.blackmore@embecosm.com>
+ <20241204122952.53375-2-craig.blackmore@embecosm.com>
+Content-Language: en-US
+From: Max Chou <max.chou@sifive.com>
+In-Reply-To: <20241204122952.53375-2-craig.blackmore@embecosm.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::52c;
+ envelope-from=max.chou@sifive.com; helo=mail-pg1-x52c.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -94,7 +98,6 @@ X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
-X-Mailman-Approved-At: Wed, 04 Dec 2024 08:18:32 -0500
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -109,37 +112,106 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Changes since v5:
-- Update vstart after each access.
-- Fix formatting issues.
+Hi Craig,
 
-Previous versions:
-- v1: https://lore.kernel.org/all/20240717153040.11073-1-paolo.savini@embecosm.com/
-- v2: https://lore.kernel.org/all/20241002135708.99146-1-paolo.savini@embecosm.com/
-- v3: https://lore.kernel.org/all/20241014220153.196183-1-paolo.savini@embecosm.com/
-- v4: https://lore.kernel.org/all/20241029194348.59574-1-paolo.savini@embecosm.com/
-- v5: https://lore.kernel.org/all/20241111130324.32487-1-paolo.savini@embecosm.com/
+I think that the unexpected vstart issue persists in this patchset.
+This version is unable to update the vstart CSR to the correct index when
+grouping load/store elements.
 
-Cc: Richard Henderson <richard.henderson@linaro.org>
-Cc: Palmer Dabbelt <palmer@dabbelt.com>
-Cc: Alistair Francis <alistair.francis@wdc.com>
-Cc: Bin Meng <bmeng.cn@gmail.com>
-Cc: Weiwei Li <liwei1518@gmail.com>
-Cc: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Cc: Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
-Cc: Helene Chelin <helene.chelin@embecosm.com>
-Cc: Nathan Egge <negge@google.com>
-Cc: Max Chou <max.chou@sifive.com>
-Cc: Paolo Savini <paolo.savini@embecosm.com>
+For instance, if an exception is raised by an element following the first
+one, and the optimization attempts to group multiple elements, the vstart
+value remains the index of the first element, which is not the actual
+element index that raised the exception.
 
-Craig Blackmore (1):
-  target/riscv: rvv: reduce the overhead for simple RISC-V vector
-    unit-stride loads and stores
+Max
 
- target/riscv/vector_helper.c | 54 ++++++++++++++++++++++++++++++++++++
- 1 file changed, 54 insertions(+)
-
--- 
-2.43.0
+On 2024/12/4 8:29 PM, Craig Blackmore wrote:
+> This patch improves the performance of the emulation of the RVV unit-stride
+> loads and stores in the following cases:
+>
+> - when the data being loaded/stored per iteration amounts to 8 bytes or less.
+> - when the vector length is 16 bytes (VLEN=128) and there's no grouping of the
+>    vector registers (LMUL=1).
+>
+> The optimization consists of avoiding the overhead of probing the RAM of the
+> host machine and doing a loop load/store on the input data grouped in chunks
+> of as many bytes as possible (8,4,2,1 bytes).
+>
+> Co-authored-by: Helene CHELIN <helene.chelin@embecosm.com>
+> Co-authored-by: Paolo Savini <paolo.savini@embecosm.com>
+> Co-authored-by: Craig Blackmore <craig.blackmore@embecosm.com>
+>
+> Signed-off-by: Helene CHELIN <helene.chelin@embecosm.com>
+> Signed-off-by: Paolo Savini <paolo.savini@embecosm.com>
+> Signed-off-by: Craig Blackmore <craig.blackmore@embecosm.com>
+> ---
+>   target/riscv/vector_helper.c | 54 ++++++++++++++++++++++++++++++++++++
+>   1 file changed, 54 insertions(+)
+>
+> diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
+> index a85dd1d200..068010ccd2 100644
+> --- a/target/riscv/vector_helper.c
+> +++ b/target/riscv/vector_helper.c
+> @@ -393,6 +393,60 @@ vext_ldst_us(void *vd, target_ulong base, CPURISCVState *env, uint32_t desc,
+>           return;
+>       }
+>   
+> +#if defined(CONFIG_USER_ONLY) && !HOST_BIG_ENDIAN
+> +    /*
+> +     * For data sizes <= 64 bits and for LMUL=1 with VLEN=128 bits we get a
+> +     * better performance by doing a simple simulation of the load/store
+> +     * without the overhead of prodding the host RAM
+> +     */
+> +    if ((nf == 1) && ((evl << log2_esz) <= 8 ||
+> +        ((vext_lmul(desc) == 0) && (simd_maxsz(desc) == 16)))) {
+> +
+> +        uint32_t evl_b = evl << log2_esz;
+> +
+> +        for (uint32_t j = env->vstart; j < evl_b;) {
+> +            addr = base + j;
+> +            if ((evl_b - j) >= 8) {
+> +                if (is_load) {
+> +                    lde_d_tlb(env, adjust_addr(env, addr), j, vd, ra);
+> +                } else {
+> +                    ste_d_tlb(env, adjust_addr(env, addr), j, vd, ra);
+> +                }
+> +                env->vstart += (8 >> log2_esz);
+> +                j += 8;
+> +            } else if ((evl_b - j) >= 4) {
+> +                if (is_load) {
+> +                    lde_w_tlb(env, adjust_addr(env, addr), j, vd, ra);
+> +                } else {
+> +                    ste_w_tlb(env, adjust_addr(env, addr), j, vd, ra);
+> +                }
+> +                env->vstart += (4 >> log2_esz);
+> +                j += 4;
+> +            } else if ((evl_b - j) >= 2) {
+> +                if (is_load) {
+> +                    lde_h_tlb(env, adjust_addr(env, addr), j, vd, ra);
+> +                } else {
+> +                    ste_h_tlb(env, adjust_addr(env, addr), j, vd, ra);
+> +                }
+> +                env->vstart += (2 >> log2_esz);
+> +                j += 2;
+> +            } else {
+> +                if (is_load) {
+> +                    lde_b_tlb(env, adjust_addr(env, addr), j, vd, ra);
+> +                } else {
+> +                    ste_b_tlb(env, adjust_addr(env, addr), j, vd, ra);
+> +                }
+> +                env->vstart++;
+> +                j += 1;
+> +            }
+> +        }
+> +
+> +        env->vstart = 0;
+> +        vext_set_tail_elems_1s(evl, vd, desc, nf, esz, max_elems);
+> +        return;
+> +    }
+> +#endif
+> +
+>       /* Calculate the page range of first page */
+>       addr = base + ((env->vstart * nf) << log2_esz);
+>       page_split = -(addr | TARGET_PAGE_MASK);
 
 
