@@ -4,72 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 541A8E7716D
-	for <qemu-riscv@archiver.kernel.org>; Wed,  4 Dec 2024 23:41:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 02E06E7716D
+	for <qemu-riscv@archiver.kernel.org>; Thu,  5 Dec 2024 00:06:07 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tIyzB-0004h7-Nf; Wed, 04 Dec 2024 18:40:49 -0500
+	id 1tIzNK-00084O-40; Wed, 04 Dec 2024 19:05:46 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1tIyz8-0004ft-0H
- for qemu-riscv@nongnu.org; Wed, 04 Dec 2024 18:40:47 -0500
-Received: from mail-ot1-x32b.google.com ([2607:f8b0:4864:20::32b])
+ id 1tIzNF-00082j-Uv
+ for qemu-riscv@nongnu.org; Wed, 04 Dec 2024 19:05:42 -0500
+Received: from mail-oa1-x2e.google.com ([2001:4860:4864:20::2e])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1tIyz5-0001ml-EM
- for qemu-riscv@nongnu.org; Wed, 04 Dec 2024 18:40:45 -0500
-Received: by mail-ot1-x32b.google.com with SMTP id
- 46e09a7af769-71d40003870so73187a34.0
- for <qemu-riscv@nongnu.org>; Wed, 04 Dec 2024 15:40:43 -0800 (PST)
+ id 1tIzNC-0003Pw-Ic
+ for qemu-riscv@nongnu.org; Wed, 04 Dec 2024 19:05:41 -0500
+Received: by mail-oa1-x2e.google.com with SMTP id
+ 586e51a60fabf-29e6399b009so184909fac.1
+ for <qemu-riscv@nongnu.org>; Wed, 04 Dec 2024 16:05:35 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1733355641; x=1733960441; darn=nongnu.org;
+ d=linaro.org; s=google; t=1733357135; x=1733961935; darn=nongnu.org;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=X0uueNgZo+lnfnqqxlnsrVMa9vkhOKu0rJ260PIxZ0U=;
- b=iuYfYtCOAViwTN4w4WXZAfRVxxXqEjbhdBtujkBckEtC10pMhd2sLeEBXfci6tpDkK
- V7LUyQrUVf6c/lkeZw+n0kSkAb/D7XhdWHFsIqf3dRnBXjjmlhoVhWgh1kuDAji245zR
- JAOKvOVi/SjlYlqFQZiB3P5qU11Y8zy5GR1MQ7Wo5H8d2HL7pSWkE1h3rQD8MwiqU+wd
- kQerteiRksQYJDJEq0ItzYm+1k5FUeYaMxy85H1EWfRClC6jW1we9/sGO0shHwvMLQMR
- ZA/3463Oy0yTPSmlhw4c/piI2dSvqU5MVf+bH6R4AJCMBLvbyTkfoCxRLa+o9/DFzlBJ
- zu8A==
+ bh=wnGKNIxWhNVb5d1v6/cE6WaIjZNJE/0+BheeGVemCPs=;
+ b=hnqO4WlIral1aOPSYI+vSxqFRTDTfp9pp92c16SuNsf4Dv33RsF5nLNstUJge+NOa5
+ bYj2p/0jb2WEejgx+gKm8M/Y06vDbjeTdHmQ4Xiqc0euqCvRMnvB4FcSgigrwHrPypbn
+ EltKIg8T/9NV8cD1Y9mEiZp5QivzL6seAUXlGOdQIUhuMWAyHxH/C1f8sr0065PKMOxT
+ lnPNPeEqfl5x+SxWMmAK1djlnaCDPm6DjjxGgJCg2h3YiTgBGSHxCuBv3eP3GGGM1yLU
+ i0Npx8Z1DD4qe3dqY0kmjMQO7aFoJLDQBAIX/TXPN+QHKMaLhBVqzI4PUHrmWNVqvM6q
+ 87oQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733355641; x=1733960441;
+ d=1e100.net; s=20230601; t=1733357135; x=1733961935;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=X0uueNgZo+lnfnqqxlnsrVMa9vkhOKu0rJ260PIxZ0U=;
- b=NmFjgUAmwCxNbLFFihwm9ad6KGr+E+ALwCEsmqkH4XM2qHKFkACcJG6IwfR39viuxJ
- riWz2QKfKBaYoI9jq6exTfr38BlGmWL6Jauhn8KJiAgG6V1Gdq4lw+7tconfAVZXTqS2
- SVJXofSYbDhgtB9lSo9K2ydoS0kpFQORdKNtjhw4YmRd3N9M3+oqosTBA4T3lHg3c8PK
- z8AZN6lx3ykigrjJPkWSF6qAHuDqaN7JCVSXhTkOZ8hnH5NDslotQCcY2JqwrNUwDhaa
- aJtqNdCWxGwdlRg6ayEY9vLho7yqhS4RcWysbnm+Z5Bz04bZsqUPkZ+5gp/mAu1Jq54M
- X8VA==
+ bh=wnGKNIxWhNVb5d1v6/cE6WaIjZNJE/0+BheeGVemCPs=;
+ b=NCTpx/j4FcpYQyX3DdgDiEZvfywNlHZ2C7s9OSjE/D0oR2xIluB9IwYS9Ru9/e1D7T
+ dJNFbN8oC91/BX05NynEmGAKHYreq5MTCE49VYnksZaKB7BRUYCuLyni/z4LJTgA9Q93
+ YZfGGYpePIneNhrluaWAHJlWBkd1vNNONJtJWRvCfECOhv/WnZSsrkshVsuJlJ8vsJn8
+ dgw9I/3I0D1ECODXWCuzaGk7sm4Ph2VUpBD/AxgKx+c4b/5psQOUDvHrkrgIHVOhIidI
+ zwLfiV655a6bs9HO+pOoVAa4I1HxDY1qW7fkzqT/cHp1olbLtzXLeGqmImZtUS1GlJRl
+ 3pNA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVAbU/gnAZ93o3wEmdpKw0kiwiUDKdWyu4pnxNk5aYNF1xY1zaysw7Vj4lWnc4mDXTkUHDe0NijrCci@nongnu.org
-X-Gm-Message-State: AOJu0YzGh4NGT5A4FDVUMNStLlu6CRofGeCTMJLPjGIsiRxgFUwnvjjX
- 3S3yOhViBk3YBTf6Sa+XvsU1t5KLcc1T26ZEawH+a6Jpvu4/iF08PLA+D3JE8Y8=
-X-Gm-Gg: ASbGnct0pQgpbEtWvpubF425JQb3MOYNxFXTx0imcix3WcpFHk8Yc6bbCTv8CXA23xA
- dlx+vAbL2wbqwYidt62ilewt7xY9epstcpVNCxDmMPnKSzgjBUqqpUs8k0hbOuPYpl0173fJbzT
- 3jIkXdFTeLGUUAasBbMqhjWohCz+AmJ1GN3MY1lvkm9Mo2tigpyhJjeeqgnWkIjosIFpNzOiu0a
- 1lmI/MBw0wr3j/VV8b/q11y1ldfph5+25vQmAkbKFyEiARj88dj0PR21e28UDIhVLfowC+REK6T
- RLriGMI9tg/hgou+ksW1ShBuNPKF
-X-Google-Smtp-Source: AGHT+IFQHYOMQfa7B6HazZ0zqEJu0IPyWF6t9qfaZVLqhG6yg6b7iNWv4VNVZPVhCdgPFf81FPivOA==
-X-Received: by 2002:a05:6830:3814:b0:71d:5209:5cec with SMTP id
- 46e09a7af769-71dad606a5amr9568639a34.3.1733355641669; 
- Wed, 04 Dec 2024 15:40:41 -0800 (PST)
+ AJvYcCXaTphYBz6pZFadISBmjbnxnYUo5EhBiIGOpYCbf7cle61abVDdoSVZ+gIIv1i408oWhrYKYvkl320l@nongnu.org
+X-Gm-Message-State: AOJu0YxVti2kBH8ijipRPDOCA07gC0T0OcGQ0JWIBcSVRhhGLrmDuNy+
+ RPpVHjUZDWaSn6Vp92T5NAIzYMMhd3JSa9GBI+/Kiem6oeptm5Ko63yE0tI3YpU=
+X-Gm-Gg: ASbGnctdEpIJ7NlegPUGPZq8ztpq+pHKD75fnqVu69UjOWggh8AtlLu45u9v2vmNlK8
+ 35ECM9Avz0kdbg4S9HSymEvo2MlBaZd9Txs9KW/CTsrWRf/tuRw08Q5gOpmk5CqEaZxigFZ1cwU
+ UmrtvTLMaF0aya2hAVTUBPL4yx5FYnXV/ob2D42RyCh8CrdUzjkm2pIR54n7P0jNuA+2xR3dMkx
+ Npwh+lQLoz5GekpUyVa2X/PbZYRNDl5uhSJh46qYJfFr4KOwgrVdng7OegFhTG/aPa9yrI1Oi26
+ HkhUxeVOR2+d906XNXa36ma+c08s
+X-Google-Smtp-Source: AGHT+IH5hm0wHgeejGtzZT6GWCYchA6mZBQbQC0jLQqP0LNrYIXMGVUflpqmZN90zbXA49qyDNICYQ==
+X-Received: by 2002:a05:6871:3806:b0:297:2763:18d4 with SMTP id
+ 586e51a60fabf-29e8867576bmr6152728fac.15.1733357134747; 
+ Wed, 04 Dec 2024 16:05:34 -0800 (PST)
 Received: from [192.168.4.112] (fixed-187-189-51-143.totalplay.net.
  [187.189.51.143]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-5f279248359sm81539eaf.26.2024.12.04.15.40.39
+ 586e51a60fabf-29f566d7b73sm83857fac.13.2024.12.04.16.05.32
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 04 Dec 2024 15:40:41 -0800 (PST)
-Message-ID: <7bfc605c-e870-484c-967e-94f71e46bf33@linaro.org>
-Date: Wed, 4 Dec 2024 17:40:38 -0600
+ Wed, 04 Dec 2024 16:05:34 -0800 (PST)
+Message-ID: <5f95a4d0-5224-4b49-82e8-69079057eb16@linaro.org>
+Date: Wed, 4 Dec 2024 18:05:26 -0600
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 17/20] disas: Use cpu_datapath_is_big_endian()
+Subject: Re: [PATCH 18/20] hw/core/generic-loader: Use
+ cpu_datapath_is_big_endian()
 To: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
  qemu-devel@nongnu.org
 Cc: Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
@@ -84,14 +85,14 @@ Cc: Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
  qemu-arm@nongnu.org, Thomas Huth <thuth@redhat.com>, qemu-riscv@nongnu.org,
  Alistair Francis <alistair@alistair23.me>, qemu-ppc@nongnu.org
 References: <20241204202602.58083-1-philmd@linaro.org>
- <20241204202602.58083-18-philmd@linaro.org>
+ <20241204202602.58083-19-philmd@linaro.org>
 Content-Language: en-US
 From: Richard Henderson <richard.henderson@linaro.org>
-In-Reply-To: <20241204202602.58083-18-philmd@linaro.org>
+In-Reply-To: <20241204202602.58083-19-philmd@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::32b;
- envelope-from=richard.henderson@linaro.org; helo=mail-ot1-x32b.google.com
+Received-SPF: pass client-ip=2001:4860:4864:20::2e;
+ envelope-from=richard.henderson@linaro.org; helo=mail-oa1-x2e.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -114,37 +115,58 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 12/4/24 14:25, Philippe Mathieu-Daudé wrote:
+On 12/4/24 14:26, Philippe Mathieu-Daudé wrote:
 > Rather that using the binary endianness, use the vCPU one.
 > 
 > Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 > ---
->   disas/disas-common.c | 3 +--
->   1 file changed, 1 insertion(+), 2 deletions(-)
+>   hw/core/generic-loader.c | 7 ++-----
+>   1 file changed, 2 insertions(+), 5 deletions(-)
 > 
-> diff --git a/disas/disas-common.c b/disas/disas-common.c
-> index 7377de0715c..ef91c43449e 100644
-> --- a/disas/disas-common.c
-> +++ b/disas/disas-common.c
-> @@ -7,7 +7,6 @@
->   #include "disas/disas.h"
->   #include "disas/capstone.h"
->   #include "hw/core/cpu.h"
+> diff --git a/hw/core/generic-loader.c b/hw/core/generic-loader.c
+> index abdd4c08a38..7b3b5f06565 100644
+> --- a/hw/core/generic-loader.c
+> +++ b/hw/core/generic-loader.c
+> @@ -31,7 +31,6 @@
+>    */
+>   
+>   #include "qemu/osdep.h"
 > -#include "exec/tswap.h"
->   #include "disas-internal.h"
+>   #include "sysemu/dma.h"
+>   #include "sysemu/reset.h"
+>   #include "hw/boards.h"
+> @@ -66,7 +65,6 @@ static void generic_loader_realize(DeviceState *dev, Error **errp)
+>   {
+>       GenericLoaderState *s = GENERIC_LOADER(dev);
+>       hwaddr entry;
+> -    int big_endian;
+>       ssize_t size = 0;
 >   
+>       s->set_pc = false;
+> @@ -134,14 +132,13 @@ static void generic_loader_realize(DeviceState *dev, Error **errp)
+>           s->cpu = first_cpu;
+>       }
 >   
-> @@ -61,7 +60,7 @@ void disas_initialize_debug_target(CPUDebug *s, CPUState *cpu)
+> -    big_endian = qemu_binary_is_bigendian();
+> -
+>       if (s->file) {
+>           AddressSpace *as = s->cpu ? s->cpu->as :  NULL;
 >   
->       s->cpu = cpu;
->       s->info.print_address_func = print_address;
-> -    if (qemu_binary_is_bigendian()) {
-> +    if (cpu_datapath_is_big_endian(cpu)) {
->           s->info.endian = BFD_ENDIAN_BIG;
->       } else {
->           s->info.endian =  BFD_ENDIAN_LITTLE;
+>           if (!s->force_raw) {
+>               size = load_elf_as(s->file, NULL, NULL, NULL, &entry, NULL, NULL,
+> -                               NULL, big_endian, 0, 0, 0, as);
+> +                               NULL, cpu_datapath_is_big_endian(s->cpu),
+> +                               0, 0, 0, as);
+>   
+>               if (size < 0) {
+>                   size = load_uimage_as(s->file, &entry, NULL, NULL, NULL, NULL,
 
-I would much rather remove this if statement and force cc->disas_set_info to set this value.
+Given that we're not verifying ehdr.e_machine from the file via the generic-loader, I see 
+no point in verifying ehdr.e_ident[EI_DATA] either.
+
+I suggest changing load_elf* big_endian parameter to elf_data, then use ELFCLASSNONE to 
+skip the EI_DATA test.  This more or less mirrors the elf_machine parameter -- we use 
+EM_NONE (0) to skip the e_machine test.
 
 
 r~
