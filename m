@@ -4,87 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F079EE7716C
-	for <qemu-riscv@archiver.kernel.org>; Thu,  5 Dec 2024 13:31:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E93CEE7716C
+	for <qemu-riscv@archiver.kernel.org>; Thu,  5 Dec 2024 13:31:49 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tJBx5-0001Xf-DZ; Thu, 05 Dec 2024 08:31:33 -0500
+	id 1tJBx5-0001XK-DS; Thu, 05 Dec 2024 08:31:33 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1tJBwH-0001Av-RR
+ id 1tJBwH-0001Aj-Px
  for qemu-riscv@nongnu.org; Thu, 05 Dec 2024 08:30:42 -0500
-Received: from mail-pg1-x532.google.com ([2607:f8b0:4864:20::532])
+Received: from mail-pf1-x433.google.com ([2607:f8b0:4864:20::433])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1tJBwC-0004mM-Hp
- for qemu-riscv@nongnu.org; Thu, 05 Dec 2024 08:30:39 -0500
-Received: by mail-pg1-x532.google.com with SMTP id
- 41be03b00d2f7-7fcc00285a9so1015476a12.2
- for <qemu-riscv@nongnu.org>; Thu, 05 Dec 2024 05:30:17 -0800 (PST)
+ id 1tJBw9-0004XD-Cs
+ for qemu-riscv@nongnu.org; Thu, 05 Dec 2024 08:30:38 -0500
+Received: by mail-pf1-x433.google.com with SMTP id
+ d2e1a72fcca58-7253bc4d25eso760701b3a.0
+ for <qemu-riscv@nongnu.org>; Thu, 05 Dec 2024 05:30:11 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1733405416; x=1734010216; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=SLgtztetBuUsnaL2tJEoRsda3i+NqJYZAQKdlx7Mq50=;
- b=XD0M3efvyVdCEh7KQe+z1ylZDGpecZMG/YoU2Ut7a3TvSrVFbyTh0YDugy954TU0BX
- gqYO7/etX0W6zFLBc1C2B4Z+mV6S5vQ3jdoMZ2XoUWsTLhLEMTbuv55hCyUhCy9joGXJ
- BB53HWpncqzj6EspN32Zg8N0WjaBu3NOXIVlojGKmeFxJgIvGU0Q/ZAdHDYf9idCe7sO
- 05urGa9ILQF19DsYrcHxtsfnNSiTE9XliIXkH8fkD6PIOa4Aldc5OUvzjKfEDcX+rChz
- BjxfEA82krb7fQpbBgV2LzDPE7utcXJLYSk1ftEDeklp9v08Hhj8VmUDaPIVyApvd6Fp
- EJmg==
+ d=ventanamicro.com; s=google; t=1733405410; x=1734010210; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=La9AioGkA3IusDhLuH/rTBZX5ITtR1iR2EKKg8Y6I7E=;
+ b=R5Cepis8O6ONBsroFE+hz49VtpvdAaTK9apT5Nv+DtuP1ydDhkN66HCjcMbD/27/4G
+ mcJ36t50fkTd7hYgAraFCnnD4HdGZAzlUR53G7yQixUWt7j50AqnZDgMcXJmDUI/IhQd
+ L5sy2FnZhpMM+5FEeUIbIrs8JTbsb6GOO36k3GmS01oL/cG4E8cnLTAIO696D8fSUUXA
+ CnGA6SVamR20ocUhJkYueqzL7ST6F+r14I0ND/m4ar3S+SnKT5Gs6qBOqWef6/8u/h+K
+ vCqoaNjIYEljGxCHthkGBb5GCx+ILs/cNDESfNDfQ5b5sjINfo9p4Xs5eLbn0HFuyDMW
+ zRzg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733405416; x=1734010216;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=SLgtztetBuUsnaL2tJEoRsda3i+NqJYZAQKdlx7Mq50=;
- b=eU8U52ke8jlWH9JiumSiaZy/3lYa9YxZDTDOKbAPkxQciC1TcUBAzc/OAZPCtlOTZw
- XFiD1vDd1uJfN5gyOR0BvVq4qpRICxMm1Ijfjbuo1BRHtevEFbei0uIXuzG5eUOKuGsv
- hJ2IF0FwCdMLLM71pFwlYFwaTkpjGA8XgCxqy3ufzDLF1Fu0rIypp4hxTmJScmT2xLqe
- UjuSOuF9h0EdW1Bz4Dg8zTrmDCBD3CXHAEex89hGR4wMmP8lOUeb5+iFBcZKYr/wFXhM
- u6wNo7QSkiZ/gJZ6m6eFo8klq1Ga15fxlNrGJXcKERC4vfILPQXm3x52kUaKy4EajrKZ
- YadQ==
-X-Gm-Message-State: AOJu0YzCWRV8h+6zPd1tlw0j4QQV4NNi2psp/ReL5AB9s99cxjGVWsSh
- a0srd9FsJapQ7dDck2KLKNptnyoQFx/X9jXYGueAlGGLusrdvh6g4ZMHhVNhoa8=
-X-Gm-Gg: ASbGnctaJOoiztbsC1WhCjTl1tG+aObfEjruyTEMgRxrhFYwBx7BvBDzRPV31on7atj
- os4tEL9tw/lFLE2dmpQRRjJ4iXgi6kV27AItAanK4MiJFgsQmChgrzbfeoUgaWBQc0WUSTUB7rg
- 6V/j7OztiXPXZNftgq7lN1PD1pdePKnVrjNs9Jb9Gi8qB8+hyhOB/6juvacc/AEkX7g837HdbBF
- K7yoNbZ27UnEqCQ0kIfVtUKa+5xSLDycQ88RYr97leeDBx/xbW4GX55VF+YJXnboBkArbuK/Dvu
-X-Google-Smtp-Source: AGHT+IGHxpybGPiWy0FC/x22A+iQLOLf+Cs4TKycrW9xbSF1dOPptMFf0mGNvJ5ZizvQhs92nVcVEQ==
-X-Received: by 2002:a05:6a20:3945:b0:1e0:db67:e9f9 with SMTP id
- adf61e73a8af0-1e1653d0cc7mr15382855637.22.1733405416103; 
- Thu, 05 Dec 2024 05:30:16 -0800 (PST)
+ d=1e100.net; s=20230601; t=1733405410; x=1734010210;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=La9AioGkA3IusDhLuH/rTBZX5ITtR1iR2EKKg8Y6I7E=;
+ b=BpSvbyZM/8tERG5+iEe5SSK5pCkXWFkdSJ9HUy5OQriSnnaVkNACVrzTuE6YyPnePA
+ vENnQN3WR4kPvqqQLj1T2GX3MUaacogs88wr6xsOZTs0YlUBY0GLf/88YJMf0YcUkXlK
+ 55V8eFM9uEtQmuzt7++y8hbXCQzZoZAxIYpjZme5G6Mkn5oCbvd/2cWzSRdZ88jGkWKW
+ VyO0picLrfAGuHbOwjNvAa1nJnSI415ZN/BSXV0ZmCkFfoY5UyZkz6sTNRV+MQUa+GHo
+ qu17J7IXFFRQ/KD6TSInuUcpxnBJQ0I+D6W7eM03lQ3GVoBJ1Fy1b47jvDEyLKc/wcY7
+ ZuoA==
+X-Gm-Message-State: AOJu0YxEt2lzSvwc9r3O8u+t8kQwDgK4rIPgzByzk3pyuVnfhYVZ77PI
+ TtmVnXzvOsKr9uMbzjzGTUOSnXYANr+x6VHn2NQSXw/y6sInetz32Sn3/hoburI=
+X-Gm-Gg: ASbGnctqTAnm2c4D9k+yeJM/+wQndD0r98HYhsCuLKk1z9jbkPFIzrXUpKNeh0qGo0U
+ 96iUo+ytAJXdvXHTJqPiFgdYEisgHm+R5E3OQ9YR+oIAY4T0iVQ7xu9zxLTEgEnjSBeEJRaZvb8
+ FlQXCio95AFVPpMibzWyCyK6g42g99GLFOCC6kEcjEx53S7yJSEwz/UCNTGKmxQLVWexZb4twto
+ NFJ01Y1UdOg5GYV6u9erDCVDCEU79GCbkSO9+dfJNAQe+LScx5H8Z92BF2XFDcqWhcIB+yDAfPr
+ JJoW
+X-Google-Smtp-Source: AGHT+IF9YYzqlSAKUXfyaj4VMeZmZAOzTxHX46IijiI1A4xpHtgYf2Y39ev7oO2iREwvdyXWUgJ7pw==
+X-Received: by 2002:a05:6a00:2789:b0:725:9253:62c8 with SMTP id
+ d2e1a72fcca58-7259d5734afmr5469096b3a.2.1733405410097; 
+ Thu, 05 Dec 2024 05:30:10 -0800 (PST)
 Received: from grind.dc1.ventanamicro.com ([187.101.65.72])
  by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-725a2a8f512sm1250315b3a.126.2024.12.05.05.30.13
+ d2e1a72fcca58-725a2a8f512sm1250315b3a.126.2024.12.05.05.30.06
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 05 Dec 2024 05:30:15 -0800 (PST)
+ Thu, 05 Dec 2024 05:30:09 -0800 (PST)
 From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
  liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
- Tomasz Jeznach <tjeznach@rivosinc.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Subject: [PATCH for-10.0 02/11] hw/riscv/riscv-iommu-bits.h: HPM bits
-Date: Thu,  5 Dec 2024 10:29:54 -0300
-Message-ID: <20241205133003.184581-3-dbarboza@ventanamicro.com>
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Tomasz Jeznach <tjeznach@rivosinc.com>
+Subject: [PATCH for-10.0 00/11] riscv: IOMMU HPM support
+Date: Thu,  5 Dec 2024 10:29:52 -0300
+Message-ID: <20241205133003.184581-1-dbarboza@ventanamicro.com>
 X-Mailer: git-send-email 2.47.1
-In-Reply-To: <20241205133003.184581-1-dbarboza@ventanamicro.com>
-References: <20241205133003.184581-1-dbarboza@ventanamicro.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::532;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pg1-x532.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::433;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pf1-x433.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- UPPERCASE_50_75=0.008 autolearn=no autolearn_force=no
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -100,82 +99,70 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Tomasz Jeznach <tjeznach@rivosinc.com>
+Hi,
 
-Add the relevant HPM (High Performance Monitor) bits that we'll be using
-in the next patches.
+This is a re-submission of the original Hardware Performance Monitor
+IOMMU support sent by Tomasz back in July 2023 [1] in the first version
+of the IOMMU emulation. In the second version of that work [2] sent in
+February 2024 I said:
 
-Signed-off-by: Tomasz Jeznach <tjeznach@rivosinc.com>
-Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
----
- hw/riscv/riscv-iommu-bits.h | 47 +++++++++++++++++++++++++++++++++++++
- 1 file changed, 47 insertions(+)
+----
+- I'm not contributing the HPM support that was present in v1. It shaved
+  off 600 lines of code from the series, which is already large enough
+  as is. We'll introduce HPM in later versions or as a follow-up;
+-----
 
-diff --git a/hw/riscv/riscv-iommu-bits.h b/hw/riscv/riscv-iommu-bits.h
-index 485f36b9c9..298a060085 100644
---- a/hw/riscv/riscv-iommu-bits.h
-+++ b/hw/riscv/riscv-iommu-bits.h
-@@ -82,6 +82,7 @@ struct riscv_iommu_pq_record {
- #define RISCV_IOMMU_CAP_ATS             BIT_ULL(25)
- #define RISCV_IOMMU_CAP_T2GPA           BIT_ULL(26)
- #define RISCV_IOMMU_CAP_IGS             GENMASK_ULL(29, 28)
-+#define RISCV_IOMMU_CAP_HPM             BIT_ULL(30)
- #define RISCV_IOMMU_CAP_DBG             BIT_ULL(31)
- #define RISCV_IOMMU_CAP_PAS             GENMASK_ULL(37, 32)
- #define RISCV_IOMMU_CAP_PD8             BIT_ULL(38)
-@@ -191,6 +192,52 @@ enum {
-     RISCV_IOMMU_INTR_COUNT
- };
- 
-+#define RISCV_IOMMU_IOCOUNT_NUM         31
-+
-+/* 5.19 Performance monitoring counter overflow status (32bits) */
-+#define RISCV_IOMMU_REG_IOCOUNTOVF      0x0058
-+#define RISCV_IOMMU_IOCOUNTOVF_CY       BIT(0)
-+
-+/* 5.20 Performance monitoring counter inhibits (32bits) */
-+#define RISCV_IOMMU_REG_IOCOUNTINH      0x005C
-+#define RISCV_IOMMU_IOCOUNTINH_CY       BIT(0)
-+
-+/* 5.21 Performance monitoring cycles counter (64bits) */
-+#define RISCV_IOMMU_REG_IOHPMCYCLES     0x0060
-+#define RISCV_IOMMU_IOHPMCYCLES_COUNTER GENMASK_ULL(62, 0)
-+#define RISCV_IOMMU_IOHPMCYCLES_OVF     BIT_ULL(63)
-+
-+/* 5.22 Performance monitoring event counters (31 * 64bits) */
-+#define RISCV_IOMMU_REG_IOHPMCTR_BASE   0x0068
-+#define RISCV_IOMMU_REG_IOHPMCTR(_n)    \
-+    (RISCV_IOMMU_REG_IOHPMCTR_BASE + (_n * 0x8))
-+
-+/* 5.23 Performance monitoring event selectors (31 * 64bits) */
-+#define RISCV_IOMMU_REG_IOHPMEVT_BASE   0x0160
-+#define RISCV_IOMMU_REG_IOHPMEVT(_n)    \
-+    (RISCV_IOMMU_REG_IOHPMEVT_BASE + (_n * 0x8))
-+#define RISCV_IOMMU_IOHPMEVT_EVENT_ID   GENMASK_ULL(14, 0)
-+#define RISCV_IOMMU_IOHPMEVT_DMASK      BIT_ULL(15)
-+#define RISCV_IOMMU_IOHPMEVT_PID_PSCID  GENMASK_ULL(35, 16)
-+#define RISCV_IOMMU_IOHPMEVT_DID_GSCID  GENMASK_ULL(59, 36)
-+#define RISCV_IOMMU_IOHPMEVT_PV_PSCV    BIT_ULL(60)
-+#define RISCV_IOMMU_IOHPMEVT_DV_GSCV    BIT_ULL(61)
-+#define RISCV_IOMMU_IOHPMEVT_IDT        BIT_ULL(62)
-+#define RISCV_IOMMU_IOHPMEVT_OF         BIT_ULL(63)
-+
-+enum RISCV_IOMMU_HPMEVENT_id {
-+    RISCV_IOMMU_HPMEVENT_INVALID    = 0,
-+    RISCV_IOMMU_HPMEVENT_URQ        = 1,
-+    RISCV_IOMMU_HPMEVENT_TRQ        = 2,
-+    RISCV_IOMMU_HPMEVENT_ATS_RQ     = 3,
-+    RISCV_IOMMU_HPMEVENT_TLB_MISS   = 4,
-+    RISCV_IOMMU_HPMEVENT_DD_WALK    = 5,
-+    RISCV_IOMMU_HPMEVENT_PD_WALK    = 6,
-+    RISCV_IOMMU_HPMEVENT_S_VS_WALKS = 7,
-+    RISCV_IOMMU_HPMEVENT_G_WALKS    = 8,
-+    RISCV_IOMMU_HPMEVENT_MAX        = 9
-+};
-+
- /* 5.24 Translation request IOVA (64bits) */
- #define RISCV_IOMMU_REG_TR_REQ_IOVA     0x0258
- 
+So here I am keeping my end of the deal. The code is basically the same that
+Tomasz sent in v1 with some tweaks:
+
+- Code was split across several patches for easier review;
+- A separated file was created, riscv-iommu-hpm.c, to host all the HPM
+  related code. The base emulation will use HPM via public helpers. The
+  idea is to avoid clogging riscv-iommu.c;
+- There was a lock in use to read/write the HPM registers in the
+  original posting. Based on the current design of the merged IOMMU
+  support, a lock-less design, I also removed the locks from HPM;
+- Other minor tweaks such as not naming functions using "__name" and so
+  on.
+
+Patch 1 is a header fix required to put the helpers in riscv-iommu-hpm.
+Patches 10 and 11 are new. The original HPM code is split in patches
+2-9.
+
+Series based on alistair/riscv-to-apply.next.
+
+[1] https://lore.kernel.org/qemu-riscv/cover.1689819031.git.tjeznach@rivosinc.com/
+[2] https://lore.kernel.org/qemu-riscv/20240307160319.675044-1-dbarboza@ventanamicro.com/
+
+Cc: Tomasz Jeznach <tjeznach@rivosinc.com>
+
+Daniel Henrique Barboza (3):
+  hw/riscv/riscv-iommu.h: add missing headers
+  hw/riscv: add IOMMU HPM trace events
+  docs/specs/riscv-iommu.rst: add HPM support info
+
+Tomasz Jeznach (8):
+  hw/riscv/riscv-iommu-bits.h: HPM bits
+  hw/riscv/riscv-iommu: add riscv-iommu-hpm file
+  hw/riscv/riscv-iommu: add riscv_iommu_hpm_incr_ctr()
+  hw/riscv/riscv-iommu: instantiate hpm_timer
+  hw/riscv/riscv-iommu: add IOCOUNTINH mmio writes
+  hw/riscv/riscv-iommu: add IOHPMCYCLES mmio write
+  hw/riscv/riscv-iommu: add hpm events mmio write
+  hw/riscv/riscv-iommu.c: add RISCV_IOMMU_CAP_HPM cap
+
+ docs/specs/riscv-iommu.rst  |   2 +
+ hw/riscv/meson.build        |   3 +-
+ hw/riscv/riscv-iommu-bits.h |  47 +++++
+ hw/riscv/riscv-iommu-hpm.c  | 381 ++++++++++++++++++++++++++++++++++++
+ hw/riscv/riscv-iommu-hpm.h  |  33 ++++
+ hw/riscv/riscv-iommu.c      | 131 +++++++++++--
+ hw/riscv/riscv-iommu.h      |  27 +++
+ hw/riscv/trace-events       |   5 +
+ 8 files changed, 612 insertions(+), 17 deletions(-)
+ create mode 100644 hw/riscv/riscv-iommu-hpm.c
+ create mode 100644 hw/riscv/riscv-iommu-hpm.h
+
 -- 
 2.47.1
 
