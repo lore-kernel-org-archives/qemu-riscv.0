@@ -4,86 +4,118 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8D8B8E7716E
-	for <qemu-riscv@archiver.kernel.org>; Thu,  5 Dec 2024 16:47:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 92A41E77178
+	for <qemu-riscv@archiver.kernel.org>; Thu,  5 Dec 2024 17:16:33 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tJF10-0006Ck-Im; Thu, 05 Dec 2024 11:47:46 -0500
+	id 1tJFSj-0000AN-40; Thu, 05 Dec 2024 12:16:25 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
- id 1tJF0y-0006BQ-EY
- for qemu-riscv@nongnu.org; Thu, 05 Dec 2024 11:47:44 -0500
-Received: from mail-ed1-x52c.google.com ([2a00:1450:4864:20::52c])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
- id 1tJF0w-0001Ae-P7
- for qemu-riscv@nongnu.org; Thu, 05 Dec 2024 11:47:44 -0500
-Received: by mail-ed1-x52c.google.com with SMTP id
- 4fb4d7f45d1cf-5d0bf80972dso1348212a12.2
- for <qemu-riscv@nongnu.org>; Thu, 05 Dec 2024 08:47:42 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1733417261; x=1734022061; darn=nongnu.org;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=vKoZnZtieEW2hN260R2q1BP0rtYxvl3swlzNxzYrLeQ=;
- b=GsjuUaCGtYIZiyJpVzl/4bfuGelkA546RJGfpNpZ+gX2fBGNJ7fNAv6F4tca7Q4r5c
- Rpxt+cO06YG6RUrXqpGU7ZVlGkFjz8sfBWdl3AtWDz4ekNC4nfeQf4nq7ol81WHNj85c
- aGQcJtj0qUk/JpeRqmeBGsXj+uMpANOdUJqZH07kTpz7u83ACtK1hzbUmeUqO6zXViX7
- 42FUxz2qtiLJaXMNHCyIZkNKt3gkOqXAp3DPhGIybuhDaljPlCGudd4mSwUSwQQbBBnH
- iT7+myplFjVV9AKaKWmXSGLXpUalobW0wXJfLrJ+1Xm2S10L+t+r8yfngXBdwljL9LKv
- ESDA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733417261; x=1734022061;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=vKoZnZtieEW2hN260R2q1BP0rtYxvl3swlzNxzYrLeQ=;
- b=ha7dby5FdL/HuPpo0lj2GTgsvGHALxxAztT4T2lpW/1u7kIWdFG7Nda/tyOIsUk/2A
- c2SklaJTLnS0YPwI5cixkb+6IQjBuEWKkoLUD/n06p7SotlibsIwxYzz7Qr5i4LBlsxB
- O1D5Q1UIJJi6lfaHNTvgz4VAmk1G4pN0aI+jC/6TNylZ1zbhtZa91IwYBknjjxnvQjTd
- rt982P0wWNY3NNsT92TfMXdee4SGZJXnc35Q6leH3gdlx2sJS7Hqu3IxKHlP7UfkrSd7
- NTp/3NAvUILPdllStpgL1RFzFTrvvlTVdccEQEhAT1Jwm7W+iUR25R3j/boeqMcG19bx
- B6KA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXq76OfvcnNPenrZouE0tbVwcjlWAee1XSJKJoRkQHRJXDaM8FDP+d2k62GtcIz981puigGsBORulzk@nongnu.org
-X-Gm-Message-State: AOJu0YwtecrVKDZ9k7Nli4bF7nzsOaR3Kg4Id43fQ2/JULYnpiIypjpy
- FZaQjGQhOkKWi6ckr0KTwlrgewa1pFIMqxF3p5Yj3LrR5xlLquU9IGvKbW/FvQWHG3Rfdhxnz0G
- 82S2wYZI1RS/6vWf9rxqhzzeIfYVqsopYltDihw==
-X-Gm-Gg: ASbGncufh9MhdfpPyPLfAhrHwERwGUfU7wzOaeaAVE0rF3nJ7wXWdYWW/vE3WC39/h7
- 0RBG0k4Pwn0P20s6trEeNZeCKdUGd6VLW
-X-Google-Smtp-Source: AGHT+IHVi9+YLyz3Jeq96LN5Io7yPcSVDzHst7VdSr/46DG4MmRQfikCRh7gvhMzS+4T8xHKlWw1p/354wKr9Rxd7W4=
-X-Received: by 2002:aa7:d455:0:b0:5d0:fb56:3f with SMTP id
- 4fb4d7f45d1cf-5d10cb5649emr16758787a12.12.1733417261056; 
- Thu, 05 Dec 2024 08:47:41 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <laurent@vivier.eu>)
+ id 1tJFSM-00007q-Nt; Thu, 05 Dec 2024 12:16:12 -0500
+Received: from mout.kundenserver.de ([212.227.126.133])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <laurent@vivier.eu>)
+ id 1tJFSK-0003EC-MN; Thu, 05 Dec 2024 12:16:02 -0500
+Received: from [192.168.100.1] ([82.64.211.94]) by mrelayeu.kundenserver.de
+ (mreue010 [213.165.67.103]) with ESMTPSA (Nemesis) id
+ 1MlfGs-1u1gpG232g-00f1Ar; Thu, 05 Dec 2024 18:15:52 +0100
+Message-ID: <fd654e78-9995-4eb2-bbe5-573563cf34f7@vivier.eu>
+Date: Thu, 5 Dec 2024 18:15:51 +0100
 MIME-Version: 1.0
-References: <20241126112212.64524-1-philmd@linaro.org>
- <20241126112212.64524-11-philmd@linaro.org>
-In-Reply-To: <20241126112212.64524-11-philmd@linaro.org>
-From: Peter Maydell <peter.maydell@linaro.org>
-Date: Thu, 5 Dec 2024 16:47:30 +0000
-Message-ID: <CAFEAcA8Wm7dq--481ZJMb+fN7MsR9FJuB6hqRC4fW7ZBE5KYXw@mail.gmail.com>
-Subject: Re: [PATCH-for-10.0 v2 10/13] hw/pci-host/gpex: Expose
- 'refuse-bar-at-addr-0' property
-To: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@linaro.org>
-Cc: qemu-devel@nongnu.org, qemu-ppc@nongnu.org, qemu-s390x@nongnu.org, 
- Thomas Huth <thuth@redhat.com>, "Michael S. Tsirkin" <mst@redhat.com>,
- qemu-riscv@nongnu.org, 
- Marcel Apfelbaum <marcel.apfelbaum@gmail.com>, qemu-arm@nongnu.org, 
- Paolo Bonzini <pbonzini@redhat.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2a00:1450:4864:20::52c;
- envelope-from=peter.maydell@linaro.org; helo=mail-ed1-x52c.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] binfmt: Don't consider riscv{32,64} part of the same
+ family
+To: =?UTF-8?Q?Daniel_P=2E_Berrang=C3=A9?= <berrange@redhat.com>,
+ Richard Henderson <richard.henderson@linaro.org>
+Cc: Peter Maydell <peter.maydell@linaro.org>,
+ =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
+ Andrea Bolognani <abologna@redhat.com>, qemu-devel@nongnu.org,
+ qemu-riscv <qemu-riscv@nongnu.org>,
+ David Abdurachmanov <davidlt@rivosinc.com>, Mark Corbin <mark@dibsco.co.uk>
+References: <20241203094702.124748-1-abologna@redhat.com>
+ <cb079b65-e5fc-4667-aa63-9ff347666b6e@linaro.org>
+ <Z07a_kYh4duwWKWw@redhat.com>
+ <CAFEAcA8BAW4=Yk5q0CgQNL4UZpUJXiwRV6VD-52_Rw0SN=E1Cg@mail.gmail.com>
+ <dc1b450a-f250-4b84-80bd-6f14888ce327@linaro.org>
+ <Z1AsKNcbY2I46Tx1@redhat.com>
+Content-Language: fr, en-GB
+From: Laurent Vivier <laurent@vivier.eu>
+Autocrypt: addr=laurent@vivier.eu; keydata=
+ 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
+In-Reply-To: <Z1AsKNcbY2I46Tx1@redhat.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-Provags-ID: V03:K1:lrDjBRG04McZbtJyaYDiyXmM1886hXd/e46G7uklDurelVovQdk
+ 9QrCr1dwXVoj2wBH7FwJ8ho5GStWcY7YB3j7AOll4pv6IrGPY1y7pwibHDN5nlp2eNGkfQ+
+ cIkZa6RPIAKUu4dtrIgrRUmUFv4sEgpaxQ8j8wG8lI7rymvUYefhtg1SA4emTRBk5+mE8WL
+ R0Qcie2MEHN9qXxdxdgTg==
+UI-OutboundReport: notjunk:1;M01:P0:kE7V9Gl2Yv8=;IEEXSAzLj8OAZdA1ke9fN8pVRfy
+ CDdZlGMZKpcN7m75ef4lLGmOyikAevke2nXNv4ChTlc1WttRMx8OBzP9dbE8RtQvqm+0G13ys
+ LqTE5oYkKdk83o14d/aAZI/gbse50/wFjKeb08ABMwx327juUfMJe8kjmvE+eyuKSkjKPMoDB
+ Bxdnab+StGf21+0CgW8x8jj4qjZjvNhNLqzxr09Ja9b6dOLTZXQHlLLyw+hvhfTNZZWSRNrHX
+ qof/om21GaHQ07N+ZXswSMjeIpXUqkObKXCdcwWEd5gTLQ0tZdXv61uUqcT/ckyhC7ZJsfCw0
+ UzXaTyMo1PJbB0Fd914QefyZJx0TjvMwBSJ0Vdpp53OSXQUKvp23A9xoEhwjaudZEDI4F8CXJ
+ aFt0splLcZDF3IfXL8/foIRN2dbng1JgHFfhim8eYM2+hr9/0slQNDEhcHFLruCwqTFk9/Pac
+ 3cqKf9NtyVR+eGSTQzIf+Ig/QQK1RgVOCzLIHS0CMLINIzXM1lMoNWC7ErQ0P33DF7GL9sbKc
+ SM84cMsx8rc3tzNQaRnjcre93DqQrysCk/zYVXGZZSrdf2G/kBmGkiDn8LggO21UR21w6r4uH
+ yHtY4sc130gH7DUY9DpTw3mqT1ikccUR5DJiwz8/xtxzGfKy4hpNuYE3/H/erHEfDQonrqmFQ
+ LMl+3N2gdVyuvoB7tDEaAG74JpQo8nAl8+jGCYjV/QU4t6Bhyg3cviLgU1ttFDgiyl2ldZGks
+ 202uXzb88PRZmSsAcyLb+mYmxgkJqO4+FuTlI9tC+dnZ1nHBSVQ4P++leXhE1DtUXwyqmVYeM
+ J/fYS4kLEoeRN+zul6G8SwKsV9lrYcY3avfe8NlUMSy+Dri8A58EDC/CpXm2vfOuJwiMvRpJa
+ sTWaA1V1Jn3TvqsVbOXW846nexADnNdJJBSo6YCDzHYn4v4C0iZCW+IVb07JDH42iY794kpz+
+ rKelrrHyVuLqgnzTJ5wdWed0IqhBDmsaPJa7gjV/DyEuq/K6CdLTa9rxVOF6ALqbsuktGt9GC
+ /oZfaUKkx5qA4GE0jv8Vgwg3qW0GdbiMCS5KnAZ
+Received-SPF: pass client-ip=212.227.126.133; envelope-from=laurent@vivier.eu;
+ helo=mout.kundenserver.de
+X-Spam_score_int: -17
+X-Spam_score: -1.8
+X-Spam_bar: -
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_NONE=-0.0001,
+ RCVD_IN_MSPIKE_H2=-0.001, RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001,
+ RCVD_IN_VALIDITY_SAFE_BLOCKED=0.001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ URIBL_SBL_A=0.1 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -99,71 +131,51 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Tue, 26 Nov 2024 at 11:23, Philippe Mathieu-Daud=C3=A9 <philmd@linaro.or=
-g> wrote:
->
-> Expose the "refuse-bar-at-addr-0" property so machines
-> using a GPEX host bridge can set this flag on the bus.
-> While the default property is set to 'false', all caller
-> set it to 'true' so there is no logical change so far.
->
-> Signed-off-by: Philippe Mathieu-Daud=C3=A9 <philmd@linaro.org>
-> ---
->  include/hw/pci-host/gpex.h | 1 +
->  hw/arm/sbsa-ref.c          | 2 ++
->  hw/arm/virt.c              | 2 ++
->  hw/i386/microvm.c          | 2 ++
->  hw/loongarch/virt.c        | 2 ++
->  hw/mips/loongson3_virt.c   | 2 ++
->  hw/openrisc/virt.c         | 2 ++
->  hw/pci-host/gpex.c         | 4 +++-
->  hw/riscv/virt.c            | 2 ++
->  hw/xen/xen-pvh-common.c    | 2 ++
->  hw/xtensa/virt.c           | 2 ++
->  11 files changed, 22 insertions(+), 1 deletion(-)
->
-> diff --git a/include/hw/pci-host/gpex.h b/include/hw/pci-host/gpex.h
-> index dce883573ba..44c6463afb3 100644
-> --- a/include/hw/pci-host/gpex.h
-> +++ b/include/hw/pci-host/gpex.h
-> @@ -64,6 +64,7 @@ struct GPEXHost {
->      int irq_num[GPEX_NUM_IRQS];
->
->      bool allow_unmapped_accesses;
-> +    bool refuse_bar_at_addr_0;
->
->      struct GPEXConfig gpex_cfg;
->  };
-> diff --git a/hw/arm/sbsa-ref.c b/hw/arm/sbsa-ref.c
-> index e3195d54497..f6cf43cf0c9 100644
-> --- a/hw/arm/sbsa-ref.c
-> +++ b/hw/arm/sbsa-ref.c
-> @@ -647,6 +647,8 @@ static void create_pcie(SBSAMachineState *sms)
->      int i;
->
->      dev =3D qdev_new(TYPE_GPEX_HOST);
-> +    object_property_set_bool(OBJECT(dev), "refuse-bar-at-addr-0",
-> +                             true, &error_fatal);
->      sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
->
->      /* Map ECAM space */
-> diff --git a/hw/arm/virt.c b/hw/arm/virt.c
-> index 1a381e9a2bd..06affc3638b 100644
-> --- a/hw/arm/virt.c
-> +++ b/hw/arm/virt.c
-> @@ -1510,6 +1510,8 @@ static void create_pcie(VirtMachineState *vms)
->      MachineClass *mc =3D MACHINE_GET_CLASS(ms);
->
->      dev =3D qdev_new(TYPE_GPEX_HOST);
-> +    object_property_set_bool(OBJECT(dev), "refuse-bar-at-addr-0",
-> +                             true, &error_fatal);
->      sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
->
->      ecam_id =3D VIRT_ECAM_ID(vms->highmem_ecam);
+Le 04/12/2024 à 11:17, Daniel P. Berrangé a écrit :
+> On Tue, Dec 03, 2024 at 07:57:14AM -0600, Richard Henderson wrote:
+>> On 12/3/24 04:35, Peter Maydell wrote:
+>>> On Tue, 3 Dec 2024 at 10:19, Daniel P. Berrangé <berrange@redhat.com> wrote:
+>>>> Separatley this from patch, we should also consider whether
+>>>> it is time to do the same for aarch64/arm7.
+>>>>
+>>>> If I look at this page:
+>>>>
+>>>>     https://gpages.juszkiewicz.com.pl/arm-socs-table/arm-socs.html
+>>>>
+>>>> and sort by 'announced' to see msot recent CPUs first, then
+>>>> almost all of them have "NO" in the "aarch32 support" column.
+>>>>
+>>>> IOW, on modern aarch64 CPUs, qemu-arm is the only viable way
+>>>> to run 32-bit usermode binaries AFAICT, and suggests we ought
+>>>> to be creating a binfmt rule for that on aarch64 hosts.
+>>>
+>>> What happens if you have a host CPU that *does* support 32-bit
+>>> natively and you also register the binfmt rule? Does the
+>>> host kernel prefer to execute natively or does it invoke
+>>> QEMU? I don't think we want to roll out something that
+>>> silently downgrades native execution to emulation...
+>>
+>> The registered rule applies and the kernel invokes qemu.
+> 
+> This is all quiet difficult from a distro POV, but not QEMU's fault.
+> 
+> We want to install the binfmt rules in a way that we "do the right thing"
+> regardless of hardware out of the box.
+> 
+> The systemd logic for loading binfmt rules is unconditional, loading
+> everything from /usr/lib/binfmt.d, but we need a way to make things
+> conditional on the lack of support for aarch32 on the currently running
+> platform.
 
-These don't look right, because both virt and sbsa-ref
-set mc->pci_allow_0_address =3D true. And in the next
-patch you delete them again...
+Now, there is another alternative: binfmt_misc is now part of user namespace, so you can define a 
+binfmt rule for a given namespace:
 
--- PMM
+https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id=21ca59b365c091d583f36ac753eaa8baf947be6f
+
+I have added a new parameter to unshare to help to run a new namespace with binfmt_misc:
+
+https://github.com/util-linux/util-linux/commit/9d55de0d0d5c6298b38b58c3f4dc876c56213f85
+
+Thanks,
+Laurent
 
