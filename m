@@ -4,56 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2E882E7716F
-	for <qemu-riscv@archiver.kernel.org>; Fri,  6 Dec 2024 04:39:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6FA46E77173
+	for <qemu-riscv@archiver.kernel.org>; Fri,  6 Dec 2024 13:37:09 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tJQ7i-0008BM-Vb; Thu, 05 Dec 2024 23:39:27 -0500
+	id 1tJYVn-0002LX-Ue; Fri, 06 Dec 2024 08:36:51 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
- id 1tJQ7g-0008B0-KQ; Thu, 05 Dec 2024 23:39:24 -0500
-Received: from out30-100.freemail.mail.aliyun.com ([115.124.30.100])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
- id 1tJQ7X-00042j-S4; Thu, 05 Dec 2024 23:39:24 -0500
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1tJYVl-0002Kr-Mf
+ for qemu-riscv@nongnu.org; Fri, 06 Dec 2024 08:36:49 -0500
+Received: from mail-oa1-x2c.google.com ([2001:4860:4864:20::2c])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1tJYVj-0004QD-1o
+ for qemu-riscv@nongnu.org; Fri, 06 Dec 2024 08:36:49 -0500
+Received: by mail-oa1-x2c.google.com with SMTP id
+ 586e51a60fabf-294ec8e1d8aso2019038fac.1
+ for <qemu-riscv@nongnu.org>; Fri, 06 Dec 2024 05:36:46 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linux.alibaba.com; s=default;
- t=1733459945; h=Content-Type:Message-ID:Date:MIME-Version:Subject:To:From;
- bh=WexzTEMmtpSkRCf6g9ZxgBJnl1Ej5Zz+xUkMUl4uGsE=;
- b=VVTSnzgmhsrqNh9o01AksaXA0aQ/sC2JZLg0LzZONCqleUNZPqwfcwzgV3EAm2CGYHyjjEGBbGr2dFPkCyzsQGjkYorbBdzsVMlK3jJr17DcmkFFZbXIneVaR1p/Jgq1rBAy9bAyHsIU+ynZ/l2SfhTMLagJFm7zHxDb0rMtMwg=
-Received: from 30.166.64.70(mailfrom:zhiwei_liu@linux.alibaba.com
- fp:SMTPD_---0WKvIBcQ_1733459943 cluster:ay36) by smtp.aliyun-inc.com;
- Fri, 06 Dec 2024 12:39:04 +0800
-Content-Type: multipart/alternative;
- boundary="------------0fzTgg4J99MRJQeoQilasba0"
-Message-ID: <5536d7c4-c3df-4cac-900b-bbb3cb2a8c4d@linux.alibaba.com>
-Date: Fri, 6 Dec 2024 12:39:02 +0800
+ d=linaro.org; s=google; t=1733492205; x=1734097005; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=oSg/56edUmpzX0utB/qODeHxKkHzMREQ/w3flYHLzHs=;
+ b=fGYFwAfw58uQLi9fX+5UL1ttYqSCWUclhX8JOhLeDEEjZEAe8y3jp+HzTwnvYTr32k
+ 7EJu9lKaZQ23A1Cuq1qEFzNz0XzcpICwo6E4+mtyIXTpMCIzofDP2xKi/gtscp2loraa
+ 5oQUdLtNxYs3fUPn7YvtPGrvoa21PBXIMt3tX51SoeGEbJ3KuFW6vvs74Q+vUhF3z3ZZ
+ rYzgrs6Jo0sbyYkxbJTIwRoMinj4qUKMb8NsxXUQdANh9oR/z/ozXe5p5qxnIgCBK35m
+ gKqW6OL2KcvXhHJPFWVGWJcBoyuy5eSygbQO0GZKGz6vENKvJ7ezKUpzZgH5MeB4W5Qk
+ TV3Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1733492205; x=1734097005;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=oSg/56edUmpzX0utB/qODeHxKkHzMREQ/w3flYHLzHs=;
+ b=v9W/Bye/jsjHh1TmOXvOpXIr+ukkuv6agoVcPZ0yV6Cq2brLw3DM5Cin+oYstMCJ8k
+ v5sR0ehYZrJU1tZ2JK6Pr+sRtA5gI6ViKAKXzu/NezT6/ANVn3Eo27i45n2OBI1vKVzn
+ YCR3wejbD9IEY+bAXHy2LHlE3RxpIjjlL67oStWveQV/OjFY8ag9pBmg548wthYIVU/9
+ xawKH2M9PYN5b2liHe2E2jIoQst8OMCIa1OIWgoG7A139KeaIrMvbWtP+VHu9hzzuaQZ
+ 2mJrEo09fiT5uhyAsBfNVzeSliUpi2SwC65J1Wasl1Su+Xl8tW6ekquM+zEa60KGeEDb
+ lLLA==
+X-Gm-Message-State: AOJu0YxK9BGb1LU0fFnyxJERdGXIbBL74tGoh89B1K37IoXibZfDVSa8
+ /pR2r23QEIMrHCA33xrbWLDMrek1rRuZQbLfp8RPJ/thmyHOdOpyogOllBKc8d4=
+X-Gm-Gg: ASbGncsHjy3UVv1u/l9lTzwG+0q6/PPtkZW6Pmhe3izN8dAdRsWIwIqUFZNJkvjW0m5
+ qUODKR+PfTgTiLLutGjlmRVOANjSSthC3V6RWZbAsCYg1K7y8MFyP+S4uQWgtwIpgOS0SPK9tD/
+ 71QDIGQnG/so6LHTS2jM8ViRx50rmxnxm1J/4d9z8ETOA+pAr+i8YjbcZtjNJp8Omjow2bA3U5w
+ dI3kqz/IzoukGVcyt7JL+znZMn9UhtifHqAVPJai4JTDQtNqDOgaeqo5NnfNCn/yZmQgWezvBLX
+ GOaU/+UW9UPR79u0U+zeJXnA+sSY
+X-Google-Smtp-Source: AGHT+IHsGJ0g+wQFK7PNnVKQQp2CvvbxHhwwpcLYMH9Scwhb0JlpzjzkcYDDtJjCfnVGmd04PEke1A==
+X-Received: by 2002:a05:6870:9e86:b0:297:285e:f9f4 with SMTP id
+ 586e51a60fabf-29f7353fff0mr1213884fac.34.1733492205071; 
+ Fri, 06 Dec 2024 05:36:45 -0800 (PST)
+Received: from [192.168.4.112] (fixed-187-189-51-143.totalplay.net.
+ [187.189.51.143]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-29f567602f5sm825943fac.23.2024.12.06.05.36.43
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 06 Dec 2024 05:36:44 -0800 (PST)
+Message-ID: <bbd8f614-f967-4f7f-82c1-eafdd9fbba68@linaro.org>
+Date: Fri, 6 Dec 2024 07:36:41 -0600
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 Subject: Re: [PATCH 1/1] disas/riscv: Guard dec->cfg dereference for host
  disassemble
-To: Richard Henderson <richard.henderson@linaro.org>, qemu-devel@nongnu.org
+To: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>, qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, palmer@dabbelt.com, alistair.francis@wdc.com,
  dbarboza@ventanamicro.com, liwei1518@gmail.com, bmeng.cn@gmail.com
 References: <20241206032411.52528-1-zhiwei_liu@linux.alibaba.com>
  <79a76786-9ba7-4c04-8c11-52c92376e6df@linaro.org>
+ <5536d7c4-c3df-4cac-900b-bbb3cb2a8c4d@linux.alibaba.com>
 Content-Language: en-US
-From: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
-In-Reply-To: <79a76786-9ba7-4c04-8c11-52c92376e6df@linaro.org>
-Received-SPF: pass client-ip=115.124.30.100;
- envelope-from=zhiwei_liu@linux.alibaba.com;
- helo=out30-100.freemail.mail.aliyun.com
-X-Spam_score_int: -94
-X-Spam_score: -9.5
-X-Spam_bar: ---------
-X-Spam_report: (-9.5 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, HTML_MESSAGE=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001,
- RCVD_IN_VALIDITY_SAFE_BLOCKED=0.001, SPF_HELO_NONE=0.001, T_SPF_TEMPERROR=0.01,
- UNPARSEABLE_RELAY=0.001,
- USER_IN_DEF_DKIM_WL=-7.5 autolearn=ham autolearn_force=no
+From: Richard Henderson <richard.henderson@linaro.org>
+In-Reply-To: <5536d7c4-c3df-4cac-900b-bbb3cb2a8c4d@linux.alibaba.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2001:4860:4864:20::2c;
+ envelope-from=richard.henderson@linaro.org; helo=mail-oa1-x2c.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -69,295 +104,43 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-This is a multi-part message in MIME format.
---------------0fzTgg4J99MRJQeoQilasba0
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+On 12/5/24 22:39, LIU Zhiwei wrote:
+> 
+> Both zcmt and zcmp are not compatible with Zcd, as they reuse some encodings from c.fsdsp.
 
+Ok, fair.  A comment about conflicts at that point may help.
 
-On 2024/12/6 11:36, Richard Henderson wrote:
-> On 12/5/24 21:24, LIU Zhiwei wrote:
->> For riscv host, it will set dec->cfg to zero. Thus we shuld guard
->> the dec->cfg deference for riscv host disassemble.
+> 
+> Zimop or Zcmop also overlap with other isa extensions, as they are maybe-ops. Other extensions
+> such as zicfiss will reuse their encodings.
+> 
+> I think we had better disassemble them to zicifss if it has been implemented on the target cpu. Otherwise
+> we disassemble them to maybe-ops.
+
+My point is that they are only belong to zimop until they are assigned, like zicifss.
+At that point they *have* a defined meaning in the standard isa.
+
+So, yes, disassemble as zicifss, but always, not "if it has been implemented in the target 
+cpu".
+
+>>> +        if (((i == 0) || cfg) && guard_func(cfg)) {
 >>
->> And in general, we should only use dec->cfg for target in three cases:
->>
->> 1) For not incompatible encodings, such as zcmp/zcmt/zfinx.
->> 2) For maybe-ops encodings, they are better to be disassembled to
->>     the "real" extensions, such as zicfiss. The guard of dec->zimop
->>     and dec->zcmop is for comment and avoid check for every extension
->>     that encoded in maybe-ops area.
->> 3) For custom encodings, we have to use dec->cfg to disassemble
->>     custom encodings using the same encoding area.
->>
->> Signed-off-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
->> Suggested-by: Richard Henderson <richard.henderson@linaro.org>
->
-> ...
->
->> @@ -5112,28 +5112,28 @@ static GString *format_inst(size_t tab, 
->> rv_decode *dec)
->>               g_string_append(buf, rv_ireg_name_sym[dec->rs2]);
->>               break;
->>           case '3':
->> -            if (dec->cfg->ext_zfinx) {
->> +            if (dec->cfg && dec->cfg->ext_zfinx) {
->>                   g_string_append(buf, rv_ireg_name_sym[dec->rd]);
->>               } else {
->>                   g_string_append(buf, rv_freg_name_sym[dec->rd]);
->>               }
->>               break;
->>           case '4':
->> -            if (dec->cfg->ext_zfinx) {
->> +            if (dec->cfg && dec->cfg->ext_zfinx) {
->>                   g_string_append(buf, rv_ireg_name_sym[dec->rs1]);
->>               } else {
->>                   g_string_append(buf, rv_freg_name_sym[dec->rs1]);
->>               }
->>               break;
->>           case '5':
->> -            if (dec->cfg->ext_zfinx) {
->> +            if (dec->cfg && dec->cfg->ext_zfinx) {
->>                   g_string_append(buf, rv_ireg_name_sym[dec->rs2]);
->>               } else {
->>                   g_string_append(buf, rv_freg_name_sym[dec->rs2]);
->>               }
->>               break;
->>           case '6':
->> -            if (dec->cfg->ext_zfinx) {
->> +            if (dec->cfg && dec->cfg->ext_zfinx) {
->>                   g_string_append(buf, rv_ireg_name_sym[dec->rs3]);
->>               } else {
->>                   g_string_append(buf, rv_freg_name_sym[dec->rs3]);
->
-> These are the only tests of cfg that are required.
-> None of the other standard isa extensions overlap.
+>> This should be i == 0 || (cfg && guard_func(cfg)).
+> 
+> OK. Although I think they are both right.
 
-Both zcmt and zcmp are not compatible with Zcd, as they reuse some encodings from c.fsdsp.
+  i = 0
+  cfg = NULL
 
-Zimop or Zcmop also overlap with other isa extensions, as they are maybe-ops. Other extensions
-such as zicfiss will reuse their encodings.
+    (0 == 0 || NULL) && guard_func(NULL)
+-> (true || false) && guard_func(NULL)
+-> true && guard_func(NULL)
+-> guard_func(NULL)
+-> boom.
 
-I think we had better disassemble them to zicifss if it has been implemented on the target cpu. Otherwise
-we disassemble them to maybe-ops.
+Or are you saying it won't go boom because we happen to know the 0th guard_func only 
+returns true?  There's still no reason to call it...
 
->
->> @@ -5439,7 +5439,8 @@ static GString *disasm_inst(rv_isa isa, 
->> uint64_t pc, rv_inst inst,
->>           const rv_opcode_data *opcode_data = decoders[i].opcode_data;
->>           void (*decode_func)(rv_decode *, rv_isa) = 
->> decoders[i].decode_func;
->>   -        if (guard_func(cfg)) {
->> +        /* always_true_p don't dereference cfg */
->> +        if (((i == 0) || cfg) && guard_func(cfg)) {
->
-> This should be i == 0 || (cfg && guard_func(cfg)).
 
-OK. Although I think they are both right.
-
-Thanks,
-Zhiwei
-
->
->
-> r~
---------------0fzTgg4J99MRJQeoQilasba0
-Content-Type: text/html; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  </head>
-  <body>
-    <p><br>
-    </p>
-    <div class="moz-cite-prefix">On 2024/12/6 11:36, Richard Henderson
-      wrote:<br>
-    </div>
-    <blockquote type="cite"
-      cite="mid:79a76786-9ba7-4c04-8c11-52c92376e6df@linaro.org">On
-      12/5/24 21:24, LIU Zhiwei wrote:
-      <br>
-      <blockquote type="cite">For riscv host, it will set dec-&gt;cfg to
-        zero. Thus we shuld guard
-        <br>
-        the dec-&gt;cfg deference for riscv host disassemble.
-        <br>
-        <br>
-        And in general, we should only use dec-&gt;cfg for target in
-        three cases:
-        <br>
-        <br>
-        1) For not incompatible encodings, such as zcmp/zcmt/zfinx.
-        <br>
-        2) For maybe-ops encodings, they are better to be disassembled
-        to
-        <br>
-            the "real" extensions, such as zicfiss. The guard of
-        dec-&gt;zimop
-        <br>
-            and dec-&gt;zcmop is for comment and avoid check for every
-        extension
-        <br>
-            that encoded in maybe-ops area.
-        <br>
-        3) For custom encodings, we have to use dec-&gt;cfg to
-        disassemble
-        <br>
-            custom encodings using the same encoding area.
-        <br>
-        <br>
-        Signed-off-by: LIU Zhiwei <a class="moz-txt-link-rfc2396E" href="mailto:zhiwei_liu@linux.alibaba.com">&lt;zhiwei_liu@linux.alibaba.com&gt;</a>
-        <br>
-        Suggested-by: Richard Henderson
-        <a class="moz-txt-link-rfc2396E" href="mailto:richard.henderson@linaro.org">&lt;richard.henderson@linaro.org&gt;</a>
-        <br>
-      </blockquote>
-      <br>
-      ...
-      <br>
-      <br>
-      <blockquote type="cite">@@ -5112,28 +5112,28 @@ static GString
-        *format_inst(size_t tab, rv_decode *dec)
-        <br>
-                      g_string_append(buf,
-        rv_ireg_name_sym[dec-&gt;rs2]);
-        <br>
-                      break;
-        <br>
-                  case '3':
-        <br>
-        -            if (dec-&gt;cfg-&gt;ext_zfinx) {
-        <br>
-        +            if (dec-&gt;cfg &amp;&amp;
-        dec-&gt;cfg-&gt;ext_zfinx) {
-        <br>
-                          g_string_append(buf,
-        rv_ireg_name_sym[dec-&gt;rd]);
-        <br>
-                      } else {
-        <br>
-                          g_string_append(buf,
-        rv_freg_name_sym[dec-&gt;rd]);
-        <br>
-                      }
-        <br>
-                      break;
-        <br>
-                  case '4':
-        <br>
-        -            if (dec-&gt;cfg-&gt;ext_zfinx) {
-        <br>
-        +            if (dec-&gt;cfg &amp;&amp;
-        dec-&gt;cfg-&gt;ext_zfinx) {
-        <br>
-                          g_string_append(buf,
-        rv_ireg_name_sym[dec-&gt;rs1]);
-        <br>
-                      } else {
-        <br>
-                          g_string_append(buf,
-        rv_freg_name_sym[dec-&gt;rs1]);
-        <br>
-                      }
-        <br>
-                      break;
-        <br>
-                  case '5':
-        <br>
-        -            if (dec-&gt;cfg-&gt;ext_zfinx) {
-        <br>
-        +            if (dec-&gt;cfg &amp;&amp;
-        dec-&gt;cfg-&gt;ext_zfinx) {
-        <br>
-                          g_string_append(buf,
-        rv_ireg_name_sym[dec-&gt;rs2]);
-        <br>
-                      } else {
-        <br>
-                          g_string_append(buf,
-        rv_freg_name_sym[dec-&gt;rs2]);
-        <br>
-                      }
-        <br>
-                      break;
-        <br>
-                  case '6':
-        <br>
-        -            if (dec-&gt;cfg-&gt;ext_zfinx) {
-        <br>
-        +            if (dec-&gt;cfg &amp;&amp;
-        dec-&gt;cfg-&gt;ext_zfinx) {
-        <br>
-                          g_string_append(buf,
-        rv_ireg_name_sym[dec-&gt;rs3]);
-        <br>
-                      } else {
-        <br>
-                          g_string_append(buf,
-        rv_freg_name_sym[dec-&gt;rs3]);
-        <br>
-      </blockquote>
-      <br>
-      These are the only tests of cfg that are required.
-      <br>
-    </blockquote>
-    <blockquote type="cite"
-      cite="mid:79a76786-9ba7-4c04-8c11-52c92376e6df@linaro.org">None of
-      the other standard isa extensions overlap.
-      <br>
-    </blockquote>
-    <pre
-style="color: rgb(0, 0, 0); font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;">Both zcmt and zcmp are not compatible with Zcd, as they reuse some encodings from c.fsdsp.
-
-Zimop or Zcmop also overlap with other isa extensions, as they are maybe-ops. Other extensions
-such as zicfiss will reuse their encodings.
-
-I think we had better disassemble them to zicifss if it has been implemented on the target cpu. Otherwise
-we disassemble them to maybe-ops.
-
-</pre>
-    <blockquote type="cite"
-      cite="mid:79a76786-9ba7-4c04-8c11-52c92376e6df@linaro.org">
-      <br>
-      <blockquote type="cite">@@ -5439,7 +5439,8 @@ static GString
-        *disasm_inst(rv_isa isa, uint64_t pc, rv_inst inst,
-        <br>
-                  const rv_opcode_data *opcode_data =
-        decoders[i].opcode_data;
-        <br>
-                  void (*decode_func)(rv_decode *, rv_isa) =
-        decoders[i].decode_func;
-        <br>
-          -        if (guard_func(cfg)) {
-        <br>
-        +        /* always_true_p don't dereference cfg */
-        <br>
-        +        if (((i == 0) || cfg) &amp;&amp; guard_func(cfg)) {
-        <br>
-      </blockquote>
-      <br>
-      This should be i == 0 || (cfg &amp;&amp; guard_func(cfg)).
-      <br>
-    </blockquote>
-    <p>OK. Although I think they are both right.<br>
-    </p>
-    <pre
-style="color: rgb(0, 0, 0); font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;">
-Thanks,
-Zhiwei</pre>
-    <p></p>
-    <blockquote type="cite"
-      cite="mid:79a76786-9ba7-4c04-8c11-52c92376e6df@linaro.org">
-      <br>
-      <br>
-      r~
-      <br>
-    </blockquote>
-  </body>
-</html>
-
---------------0fzTgg4J99MRJQeoQilasba0--
+r~
 
