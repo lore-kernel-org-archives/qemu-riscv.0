@@ -4,83 +4,98 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5926BE7716E
-	for <qemu-riscv@archiver.kernel.org>; Sat,  7 Dec 2024 07:20:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DDA4DE77180
+	for <qemu-riscv@archiver.kernel.org>; Sun,  8 Dec 2024 20:23:58 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tJp7B-000803-VZ; Sat, 07 Dec 2024 02:20:33 -0500
+	id 1tKNo5-0002ND-Am; Sun, 08 Dec 2024 15:23:09 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <baturo.alexey@gmail.com>)
- id 1tJp7A-0007zq-V6; Sat, 07 Dec 2024 02:20:32 -0500
-Received: from mail-ed1-x52e.google.com ([2a00:1450:4864:20::52e])
+ (Exim 4.90_1) (envelope-from <phil@philjordan.eu>)
+ id 1tKNo2-0002LQ-Ob
+ for qemu-riscv@nongnu.org; Sun, 08 Dec 2024 15:23:06 -0500
+Received: from mail-ej1-x62a.google.com ([2a00:1450:4864:20::62a])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <baturo.alexey@gmail.com>)
- id 1tJp78-0005o0-OL; Sat, 07 Dec 2024 02:20:32 -0500
-Received: by mail-ed1-x52e.google.com with SMTP id
- 4fb4d7f45d1cf-5d3bdccba49so2399853a12.1; 
- Fri, 06 Dec 2024 23:20:25 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <phil@philjordan.eu>)
+ id 1tKNny-000872-NJ
+ for qemu-riscv@nongnu.org; Sun, 08 Dec 2024 15:23:06 -0500
+Received: by mail-ej1-x62a.google.com with SMTP id
+ a640c23a62f3a-aa679ad4265so100116166b.0
+ for <qemu-riscv@nongnu.org>; Sun, 08 Dec 2024 12:23:02 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1733556023; x=1734160823; darn=nongnu.org;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=aYQ+KnAc3H7/kkUuw8nuj1LkePNLl61hf3R7Fu5nQ6o=;
- b=jwa/dRCcvWimQ37LHwnMiMSfbi03gt6LCaCnhRtrw65hp/TBVFcg/R7egzyRf0I7Ed
- W56hyCCnxz95II/AAFcBr1EkKE320SsRsVB+rDc80+cU5GJAWfBbeSns++p8/ZMimdEF
- gaHcmln0O7dqamIbGSMs3V3jg/ebEP54elomlH/XzJXwo9khibuiT9ZtLpm4vajVWzK5
- uoFmk8s0qlrUTN1ZKVMFATpjqfsy05WTeFhlbONSgAze5Ms8YK3hAVn8ILnHFpKomfoO
- Eu/WiTO+vSIygwEQlz/A10wtVky0YQoY94p0Nklkb7VPoPY45EOerVcutpKVT+aBD1fI
- b+bQ==
+ d=philjordan-eu.20230601.gappssmtp.com; s=20230601; t=1733689381; x=1734294181;
+ darn=nongnu.org; 
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=vE4icFzbUyJwOx4II5Kw3Wy8lfUTjt60Nc/k0y/6lC8=;
+ b=xVec6KsIiPJvrATMXpKfpKqM5tlkskrUHRHrwVn2Sm1ohdjC3Nniqr9xJVBsl38S23
+ EKMv0sBiSJnVPD417VWS6qRLpAzqU21vJ4rI4cH3Hn9k9sWPBZ9Qy4+SVcNUwOXAPnC6
+ sGl4eC8oRucFmpIuuKpEyoAVj7rfp9hgKSvjGdUsaz6FVoG125FSYHWcjjIwEemnbUf8
+ JwBU0+FUHDELG9yl64S4YUgm+hYdgL8b1Ru/TlUzkPZ6CuEa3wiGvHVI3WyQlKFKP7Yr
+ lRBcOTmusq/1kqmv/UE1Wmi7PDjC5GVp0Hmxagc/U4ZBreKDA3Mk9XjqkL7Kl6/LKnZa
+ KdLg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733556023; x=1734160823;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=aYQ+KnAc3H7/kkUuw8nuj1LkePNLl61hf3R7Fu5nQ6o=;
- b=jHmy9qLOYj9EF/Kh4Rv+IB1Ylyhs+5wUwjh/SpkdSev37aVvb44UTPVTb0h77qWbv8
- bRy5O2nMfFvognU/W2v5NY4k+2laomysGCphD2L2aZvtLCE9YLe526JuKjhhFtwYl2/H
- Wev+Nlt3/vDjm9hkCyz9+q92jJW74EMbF56R28u7CuXt4EoZXvh6XylG9XQYms/EjsVo
- WJvaEbf6ziZ0apwdj7Anfu3JG+sVAl0lawhuCdnIdK9OvaprN/oQCp6pMmMjesANQpsP
- cNcjn/JE01qhd/sX/Iz5Z06h4a8hBnAtNGFK2wDwUfdZ+mFzz7wBp+dKhF0VYEJzcpdB
- j9Zg==
+ d=1e100.net; s=20230601; t=1733689381; x=1734294181;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=vE4icFzbUyJwOx4II5Kw3Wy8lfUTjt60Nc/k0y/6lC8=;
+ b=a8vGW2rJSlbyH98c29SqnuwG3dSU1ys4OPd9dNdev1mBaTZ3Q4jW/bAcCGpQIj+IDZ
+ Ax8WA89TVe2ZFHE5jEwgaYqthJaKJMCWAUx+lEtOoeBGdCeWEka05ZFAUacJ/BRKEqZx
+ AXqMvdK0Dk05MPdxFpnmMGJ6BLe+lEtpTtMOW7qCNQfn1a4TRNEIKQXFYYoOm0RFWeiQ
+ N2M+2Jm+QQBeq6PVFt+S3foAI1+rIBfpcd7WukG8hRUyLrjN8fzAoHygQxs1SJrkrJDC
+ 13Ba4XC8ChqTgaQreFZpK2iHnRMsrAy92LloupsqgyVEBlnSUn0JiWqEJ+MphrlYAfvD
+ qGTw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVdMayHfbch0df1uG9rEdvo2aowrycl/ne/00uplTWHQExDcrHY8MClk5CSj97P6Udla8P7p5XkcW//8w==@nongnu.org,
- AJvYcCWp9KdE4UWbg5lt+GLywb8hrgtg0gjBR3lI4k1hMgwy1IwJsk7VVEFtZGn67VHYXGle1RgF/ENjmouP@nongnu.org
-X-Gm-Message-State: AOJu0YyyNWbl79uuoVaSKwOayfcrqwHWAtNAuL/tffHG6zSjuy3JujJR
- 3Xhi/6jLuYXV0Dnxdp+AmAPPbedrz6oyTEbocmegauWymN+F/kxOzd/v+ESl0dJnGod5xSYWK3D
- sOUGzQcrw+E6bwPlq6MeeL99MX/pJTQ==
-X-Gm-Gg: ASbGncvIP+DukoBCtCTSCiEOxrCgH9nAKAcdlunRDZKOJCvw3cPWPWOUtcPY4NyQXG8
- nNaXjE2wTDhXvLKyLcUVIQcVCwM/0rGg=
-X-Google-Smtp-Source: AGHT+IHB+wa06ni3qhay9Jot4E7KIf+lA6pQoYH+y19NzvrPyA+qBQjQtDG8rw9NBu80z6At8B1bmM0NwpBNKCb1ZrY=
-X-Received: by 2002:a05:6402:3789:b0:5d1:23c8:f4cd with SMTP id
- 4fb4d7f45d1cf-5d3be67ffa0mr5632165a12.11.1733556021867; Fri, 06 Dec 2024
- 23:20:21 -0800 (PST)
+ AJvYcCUHThjz/K/W/RbAed8XC0fXeqqzK+z/vFIX546Ou/bnyLxqy+ZJ3UNXfl7Z2CkmJkJPdOiXh1I3VlO7@nongnu.org
+X-Gm-Message-State: AOJu0YzObP3Fqie7Skw8I4yZaJ1lKBL1JsdPUtllaqbDPzfrDJqXKG6e
+ zE8KZPxZSuqhXbWdQJtqBioQvg91pb3xIRklwFrNOI8ngeA+rFZaGYzKHwS2fA==
+X-Gm-Gg: ASbGncsRwI1ZepbwkD7DT26VAOhM4d3YpPga9oUWH73amlyXSLD0oRp4z3fJDJbpdMp
+ J+GpA2OCPXFgTcQA54dO6lfCaZjtx9EXwFFmtm09sPdDS9OzFi9GEwTiAre6lnRob6X8rytSy9L
+ lG2+VGQCRYEbfsB3K+V+xaPs+OK/EkI9+mLJ4SAbcGykLH6DcUXVHSHVsFkzrPqdodYgn8k8Wd4
+ Ohx9P2Dc9nlUMyfMOldp6FBNBsfCqF/xlCBVfo7Kbtf0JbAJmzicFEniIBfz+NX/bufiSkiHKou
+ mGm8GdLIE+zIdRoeKHy7MdUv7w==
+X-Google-Smtp-Source: AGHT+IFCkhzOxwiy38XSUQ+5O8/c8s4BeQNAoyeDhg7l+fNE4kpYGFGYN54KBmr/LWvSbgkNGDpSRQ==
+X-Received: by 2002:a17:906:1da9:b0:aa6:50ee:d44c with SMTP id
+ a640c23a62f3a-aa650eed58cmr603108966b.15.1733689380825; 
+ Sun, 08 Dec 2024 12:23:00 -0800 (PST)
+Received: from localhost.localdomain (h082218084190.host.wavenet.at.
+ [82.218.84.190]) by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-aa625e4eee4sm585759266b.26.2024.12.08.12.22.59
+ (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
+ Sun, 08 Dec 2024 12:23:00 -0800 (PST)
+From: Phil Dennis-Jordan <phil@philjordan.eu>
+To: qemu-devel@nongnu.org
+Cc: agraf@csgraf.de, phil@philjordan.eu, peter.maydell@linaro.org,
+ pbonzini@redhat.com, rad@semihalf.com, quic_llindhol@quicinc.com,
+ stefanha@redhat.com, mst@redhat.com, slp@redhat.com,
+ richard.henderson@linaro.org, eduardo@habkost.net,
+ marcel.apfelbaum@gmail.com, gaosong@loongson.cn, jiaxun.yang@flygoat.com,
+ chenhuacai@kernel.org, kwolf@redhat.com, hreitz@redhat.com,
+ philmd@linaro.org, shorne@gmail.com, palmer@dabbelt.com,
+ alistair.francis@wdc.com, bmeng.cn@gmail.com, liwei1518@gmail.com,
+ dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com,
+ jcmvbkbc@gmail.com, marcandre.lureau@redhat.com, berrange@redhat.com,
+ akihiko.odaki@daynix.com, qemu-arm@nongnu.org, qemu-block@nongnu.org,
+ qemu-riscv@nongnu.org, balaton@eik.bme.hu, Alexander Graf <graf@amazon.com>
+Subject: [PATCH v13 09/15] gpex: Allow more than 4 legacy IRQs
+Date: Sun,  8 Dec 2024 21:22:32 +0100
+Message-Id: <20241208202238.68873-10-phil@philjordan.eu>
+X-Mailer: git-send-email 2.39.5 (Apple Git-154)
+In-Reply-To: <20241208202238.68873-1-phil@philjordan.eu>
+References: <20241208202238.68873-1-phil@philjordan.eu>
 MIME-Version: 1.0
-References: <20241205112304.593204-1-baturo.alexey@gmail.com>
- <20241205112304.593204-4-baturo.alexey@gmail.com>
- <9f616eaf-11fd-4772-9e7f-2404059419bb@ventanamicro.com>
-In-Reply-To: <9f616eaf-11fd-4772-9e7f-2404059419bb@ventanamicro.com>
-From: Alexey Baturo <baturo.alexey@gmail.com>
-Date: Sat, 7 Dec 2024 10:20:10 +0300
-Message-ID: <CAFukJ-DaZ=OYEWDDBku2Ksi+9MGZWDLJbF8n5jPq3M665Gk3EQ@mail.gmail.com>
-Subject: Re: [PATCH v12 3/7] target/riscv: Add helper functions to calculate
- current number of masked bits for pointer masking
-To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Cc: richard.henderson@linaro.org, zhiwei_liu@linux.alibaba.com, 
- liwei1518@gmail.com, alistair23@gmail.com, frank.chang@sifive.com, 
- palmer@dabbelt.com, Alistair.Francis@wdc.com, sagark@eecs.berkeley.edu, 
- kbastian@mail.uni-paderborn.de, qemu-devel@nongnu.org, qemu-riscv@nongnu.org
-Content-Type: multipart/alternative; boundary="000000000000e1bcd10628a8f692"
-Received-SPF: pass client-ip=2a00:1450:4864:20::52e;
- envelope-from=baturo.alexey@gmail.com; helo=mail-ed1-x52e.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
- HTML_MESSAGE=0.001, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+Content-Transfer-Encoding: 8bit
+Received-SPF: neutral client-ip=2a00:1450:4864:20::62a;
+ envelope-from=phil@philjordan.eu; helo=mail-ej1-x62a.google.com
+X-Spam_score_int: -10
+X-Spam_score: -1.1
+X-Spam_bar: -
+X-Spam_report: (-1.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_NEUTRAL=0.779 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -96,337 +111,414 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
---000000000000e1bcd10628a8f692
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+From: Alexander Graf <graf@amazon.com>
 
-Thanks Daniel.
-Let's wait for about a week or so for other suggestions to the patches and
-then I'll send a new updated series.
+Some boards such as vmapple don't do real legacy PCI IRQ swizzling.
+Instead, they just keep allocating more board IRQ lines for each new
+legacy IRQ. Let's support that mode by giving instantiators a new
+"nr_irqs" property they can use to support more than 4 legacy IRQ lines.
+In this mode, GPEX will export more IRQ lines, one for each device.
 
-=D1=81=D0=B1, 7 =D0=B4=D0=B5=D0=BA. 2024=E2=80=AF=D0=B3. =D0=B2 00:08, Dani=
-el Henrique Barboza <
-dbarboza@ventanamicro.com>:
+Signed-off-by: Alexander Graf <graf@amazon.com>
+Signed-off-by: Phil Dennis-Jordan <phil@philjordan.eu>
+Reviewed-by: Akihiko Odaki <akihiko.odaki@daynix.com>
+Tested-by: Akihiko Odaki <akihiko.odaki@daynix.com>
+---
 
->
->
-> On 12/5/24 8:23 AM, baturo.alexey@gmail.com wrote:
-> > From: Alexey Baturo <baturo.alexey@gmail.com>
-> >
-> > Signed-off-by: Alexey Baturo <baturo.alexey@gmail.com>
-> > ---
-> >   target/riscv/cpu.h        |  5 +++
-> >   target/riscv/cpu_helper.c | 74 ++++++++++++++++++++++++++++++++++++++=
+v4:
+
+ * Turned pair of IRQ arrays into array of structs.
+ * Simplified swizzling logic selection.
+
+v12:
+
+ * Fixed uses of deleted GPEX_NUM_IRQS constant that have been
+   added to QEMU since this patch was originally written.
+
+ hw/arm/sbsa-ref.c          |  2 +-
+ hw/arm/virt.c              |  2 +-
+ hw/i386/microvm.c          |  2 +-
+ hw/loongarch/virt.c        | 12 +++++------
+ hw/mips/loongson3_virt.c   |  2 +-
+ hw/openrisc/virt.c         | 12 +++++------
+ hw/pci-host/gpex.c         | 43 ++++++++++++++++++++++++++++++--------
+ hw/riscv/virt.c            | 12 +++++------
+ hw/xen/xen-pvh-common.c    |  2 +-
+ hw/xtensa/virt.c           |  2 +-
+ include/hw/pci-host/gpex.h |  7 +++----
+ 11 files changed, 61 insertions(+), 37 deletions(-)
+
+diff --git a/hw/arm/sbsa-ref.c b/hw/arm/sbsa-ref.c
+index e3195d54497..7e7322486c2 100644
+--- a/hw/arm/sbsa-ref.c
++++ b/hw/arm/sbsa-ref.c
+@@ -673,7 +673,7 @@ static void create_pcie(SBSAMachineState *sms)
+     /* Map IO port space */
+     sysbus_mmio_map(SYS_BUS_DEVICE(dev), 2, base_pio);
+ 
+-    for (i = 0; i < GPEX_NUM_IRQS; i++) {
++    for (i = 0; i < PCI_NUM_PINS; i++) {
+         sysbus_connect_irq(SYS_BUS_DEVICE(dev), i,
+                            qdev_get_gpio_in(sms->gic, irq + i));
+         gpex_set_irq_num(GPEX_HOST(dev), i, irq + i);
+diff --git a/hw/arm/virt.c b/hw/arm/virt.c
+index 1a381e9a2bd..8aa22ea3155 100644
+--- a/hw/arm/virt.c
++++ b/hw/arm/virt.c
+@@ -1547,7 +1547,7 @@ static void create_pcie(VirtMachineState *vms)
+     /* Map IO port space */
+     sysbus_mmio_map(SYS_BUS_DEVICE(dev), 2, base_pio);
+ 
+-    for (i = 0; i < GPEX_NUM_IRQS; i++) {
++    for (i = 0; i < PCI_NUM_PINS; i++) {
+         sysbus_connect_irq(SYS_BUS_DEVICE(dev), i,
+                            qdev_get_gpio_in(vms->gic, irq + i));
+         gpex_set_irq_num(GPEX_HOST(dev), i, irq + i);
+diff --git a/hw/i386/microvm.c b/hw/i386/microvm.c
+index 86637afa0f3..ce80596c239 100644
+--- a/hw/i386/microvm.c
++++ b/hw/i386/microvm.c
+@@ -139,7 +139,7 @@ static void create_gpex(MicrovmMachineState *mms)
+                                     mms->gpex.mmio64.base, mmio64_alias);
+     }
+ 
+-    for (i = 0; i < GPEX_NUM_IRQS; i++) {
++    for (i = 0; i < PCI_NUM_PINS; i++) {
+         sysbus_connect_irq(SYS_BUS_DEVICE(dev), i,
+                            x86ms->gsi[mms->gpex.irq + i]);
+     }
+diff --git a/hw/loongarch/virt.c b/hw/loongarch/virt.c
+index 9a635d1d3d3..1d71982c722 100644
+--- a/hw/loongarch/virt.c
++++ b/hw/loongarch/virt.c
+@@ -441,7 +441,7 @@ static void fdt_add_pcie_irq_map_node(const LoongArchVirtMachineState *lvms,
+ {
+     int pin, dev;
+     uint32_t irq_map_stride = 0;
+-    uint32_t full_irq_map[GPEX_NUM_IRQS *GPEX_NUM_IRQS * 10] = {};
++    uint32_t full_irq_map[PCI_NUM_PINS * PCI_NUM_PINS * 10] = {};
+     uint32_t *irq_map = full_irq_map;
+     const MachineState *ms = MACHINE(lvms);
+ 
+@@ -454,11 +454,11 @@ static void fdt_add_pcie_irq_map_node(const LoongArchVirtMachineState *lvms,
+      * to wrap to any number of devices.
+      */
+ 
+-    for (dev = 0; dev < GPEX_NUM_IRQS; dev++) {
++    for (dev = 0; dev < PCI_NUM_PINS; dev++) {
+         int devfn = dev * 0x8;
+ 
+-        for (pin = 0; pin  < GPEX_NUM_IRQS; pin++) {
+-            int irq_nr = 16 + ((pin + PCI_SLOT(devfn)) % GPEX_NUM_IRQS);
++        for (pin = 0; pin < PCI_NUM_PINS; pin++) {
++            int irq_nr = 16 + ((pin + PCI_SLOT(devfn)) % PCI_NUM_PINS);
+             int i = 0;
+ 
+             /* Fill PCI address cells */
+@@ -482,7 +482,7 @@ static void fdt_add_pcie_irq_map_node(const LoongArchVirtMachineState *lvms,
+ 
+ 
+     qemu_fdt_setprop(ms->fdt, nodename, "interrupt-map", full_irq_map,
+-                     GPEX_NUM_IRQS * GPEX_NUM_IRQS *
++                     PCI_NUM_PINS * PCI_NUM_PINS *
+                      irq_map_stride * sizeof(uint32_t));
+     qemu_fdt_setprop_cells(ms->fdt, nodename, "interrupt-map-mask",
+                      0x1800, 0, 0, 0x7);
+@@ -741,7 +741,7 @@ static void virt_devices_init(DeviceState *pch_pic,
+     memory_region_add_subregion(get_system_memory(), VIRT_PCI_IO_BASE,
+                                 pio_alias);
+ 
+-    for (i = 0; i < GPEX_NUM_IRQS; i++) {
++    for (i = 0; i < PCI_NUM_PINS; i++) {
+         sysbus_connect_irq(d, i,
+                            qdev_get_gpio_in(pch_pic, 16 + i));
+         gpex_set_irq_num(GPEX_HOST(gpex_dev), i, 16 + i);
+diff --git a/hw/mips/loongson3_virt.c b/hw/mips/loongson3_virt.c
+index f3b6326cc59..884b5f23a99 100644
+--- a/hw/mips/loongson3_virt.c
++++ b/hw/mips/loongson3_virt.c
+@@ -458,7 +458,7 @@ static inline void loongson3_virt_devices_init(MachineState *machine,
+                                 virt_memmap[VIRT_PCIE_PIO].base, s->pio_alias);
+     sysbus_mmio_map(SYS_BUS_DEVICE(dev), 2, virt_memmap[VIRT_PCIE_PIO].base);
+ 
+-    for (i = 0; i < GPEX_NUM_IRQS; i++) {
++    for (i = 0; i < PCI_NUM_PINS; i++) {
+         irq = qdev_get_gpio_in(pic, PCIE_IRQ_BASE + i);
+         sysbus_connect_irq(SYS_BUS_DEVICE(dev), i, irq);
+         gpex_set_irq_num(GPEX_HOST(dev), i, PCIE_IRQ_BASE + i);
+diff --git a/hw/openrisc/virt.c b/hw/openrisc/virt.c
+index 47d2c9bd3c7..6f053bf48e0 100644
+--- a/hw/openrisc/virt.c
++++ b/hw/openrisc/virt.c
+@@ -318,7 +318,7 @@ static void create_pcie_irq_map(void *fdt, char *nodename, int irq_base,
+ {
+     int pin, dev;
+     uint32_t irq_map_stride = 0;
+-    uint32_t full_irq_map[GPEX_NUM_IRQS * GPEX_NUM_IRQS * 6] = {};
++    uint32_t full_irq_map[PCI_NUM_PINS * PCI_NUM_PINS * 6] = {};
+     uint32_t *irq_map = full_irq_map;
+ 
+     /*
+@@ -330,11 +330,11 @@ static void create_pcie_irq_map(void *fdt, char *nodename, int irq_base,
+      * possible slot) seeing the interrupt-map-mask will allow the table
+      * to wrap to any number of devices.
+      */
+-    for (dev = 0; dev < GPEX_NUM_IRQS; dev++) {
++    for (dev = 0; dev < PCI_NUM_PINS; dev++) {
+         int devfn = dev << 3;
+ 
+-        for (pin = 0; pin < GPEX_NUM_IRQS; pin++) {
+-            int irq_nr = irq_base + ((pin + PCI_SLOT(devfn)) % GPEX_NUM_IRQS);
++        for (pin = 0; pin < PCI_NUM_PINS; pin++) {
++            int irq_nr = irq_base + ((pin + PCI_SLOT(devfn)) % PCI_NUM_PINS);
+             int i = 0;
+ 
+             /* Fill PCI address cells */
+@@ -357,7 +357,7 @@ static void create_pcie_irq_map(void *fdt, char *nodename, int irq_base,
+     }
+ 
+     qemu_fdt_setprop(fdt, nodename, "interrupt-map", full_irq_map,
+-                     GPEX_NUM_IRQS * GPEX_NUM_IRQS *
++                     PCI_NUM_PINS * PCI_NUM_PINS *
+                      irq_map_stride * sizeof(uint32_t));
+ 
+     qemu_fdt_setprop_cells(fdt, nodename, "interrupt-map-mask",
+@@ -409,7 +409,7 @@ static void openrisc_virt_pcie_init(OR1KVirtState *state,
+     memory_region_add_subregion(get_system_memory(), pio_base, alias);
+ 
+     /* Connect IRQ lines. */
+-    for (i = 0; i < GPEX_NUM_IRQS; i++) {
++    for (i = 0; i < PCI_NUM_PINS; i++) {
+         pcie_irq = get_per_cpu_irq(cpus, num_cpus, irq_base + i);
+ 
+         sysbus_connect_irq(SYS_BUS_DEVICE(dev), i, pcie_irq);
+diff --git a/hw/pci-host/gpex.c b/hw/pci-host/gpex.c
+index e9cf455bf52..cd63aa2d3cf 100644
+--- a/hw/pci-host/gpex.c
++++ b/hw/pci-host/gpex.c
+@@ -32,6 +32,7 @@
+ #include "qemu/osdep.h"
+ #include "qapi/error.h"
+ #include "hw/irq.h"
++#include "hw/pci/pci_bus.h"
+ #include "hw/pci-host/gpex.h"
+ #include "hw/qdev-properties.h"
+ #include "migration/vmstate.h"
+@@ -41,20 +42,25 @@
+  * GPEX host
+  */
+ 
++struct GPEXIrq {
++    qemu_irq irq;
++    int irq_num;
++};
 +
-> >   2 files changed, 79 insertions(+)
-> >
-> > diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> > index 417ff45544..74d7076f5a 100644
-> > --- a/target/riscv/cpu.h
-> > +++ b/target/riscv/cpu.h
-> > @@ -768,8 +768,13 @@ void cpu_get_tb_cpu_state(CPURISCVState *env, vadd=
-r
-> *pc,
-> >
-> >   bool riscv_cpu_is_32bit(RISCVCPU *cpu);
-> >
-> > +bool riscv_cpu_virt_mem_enabled(CPURISCVState *env);
-> > +RISCVPmPmm riscv_pm_get_pmm(CPURISCVState *env);
-> > +int riscv_pm_get_pmlen(RISCVPmPmm pmm);
-> > +
-> >   RISCVException riscv_csrr(CPURISCVState *env, int csrno,
-> >                             target_ulong *ret_value);
-> > +
-> >   RISCVException riscv_csrrw(CPURISCVState *env, int csrno,
-> >                              target_ulong *ret_value,
-> >                              target_ulong new_value, target_ulong
-> write_mask);
-> > diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-> > index dba04851d5..2558f869f2 100644
-> > --- a/target/riscv/cpu_helper.c
-> > +++ b/target/riscv/cpu_helper.c
-> > @@ -214,6 +214,80 @@ void cpu_get_tb_cpu_state(CPURISCVState *env, vadd=
-r
-> *pc,
-> >       *pflags =3D flags;
-> >   }
-> >
-> > +RISCVPmPmm riscv_pm_get_pmm(CPURISCVState *env)
-> > +{
-> > +    RISCVPmPmm pmm =3D PMM_FIELD_DISABLED;
-> > +#ifndef CONFIG_USER_ONLY
-> > +    if (get_field(env->mstatus, MSTATUS_MPRV) &&
-> > +        get_field(env->mstatus, MSTATUS_MXR)) {
-> > +        return pmm;
-> > +    }
-> > +    int priv_mode =3D cpu_address_mode(env);
-> > +    /* Get current PMM field */
-> > +    switch (priv_mode) {
-> > +    case PRV_M:
-> > +        if (riscv_cpu_cfg(env)->ext_smmpm) {
-> > +            pmm =3D get_field(env->mseccfg, MSECCFG_PMM);
-> > +        }
-> > +        break;
-> > +    case PRV_S:
-> > +        if (riscv_cpu_cfg(env)->ext_smnpm) {
-> > +            if (get_field(env->mstatus, MSTATUS_MPV)) {
-> > +                pmm =3D get_field(env->henvcfg, HENVCFG_PMM);
-> > +            } else {
-> > +                pmm =3D get_field(env->menvcfg, MENVCFG_PMM);
-> > +            }
-> > +        }
-> > +        break;
-> > +    case PRV_U:
-> > +        if (riscv_has_ext(env, RVS)) {
-> > +            if (riscv_cpu_cfg(env)->ext_ssnpm) {
-> > +                pmm =3D get_field(env->senvcfg, SENVCFG_PMM);
-> > +            }
-> > +        } else {
-> > +            if (riscv_cpu_cfg(env)->ext_smnpm) {
-> > +                pmm =3D get_field(env->menvcfg, MENVCFG_PMM);
-> > +            }
-> > +        }
-> > +        break;
-> > +    default:
-> > +        g_assert_not_reached();
-> > +    }
-> > +#endif
-> > +    return pmm;
-> > +}
-> > +
-> > +bool riscv_cpu_virt_mem_enabled(CPURISCVState *env)
-> > +{
-> > +    bool virt_mem_en =3D false;
-> > +#ifndef CONFIG_USER_ONLY
-> > +    int satp_mode =3D 0;
-> > +    int priv_mode =3D cpu_address_mode(env);
-> > +    if (riscv_cpu_mxl(env) =3D=3D MXL_RV32) {
-> > +        satp_mode =3D get_field(env->satp, SATP32_MODE);
-> > +    } else {
-> > +        satp_mode =3D get_field(env->satp, SATP64_MODE);
-> > +    }
-> > +    virt_mem_en =3D ((satp_mode !=3D VM_1_10_MBARE) && (priv_mode !=3D
-> PRV_M));
-> > +#endif
-> > +    return virt_mem_en;
-> > +}
-> > +
-> > +int riscv_pm_get_pmlen(RISCVPmPmm pmm)
-> > +{
-> > +    switch (pmm) {
-> > +    case PMM_FIELD_DISABLED:
-> > +        return 0;
-> > +    case PMM_FIELD_PMLEN7:
-> > +        return 7;
-> > +    case PMM_FIELD_PMLEN16:
-> > +        return 16;
-> > +    default:
-> > +        g_assert_not_reached();
-> > +    }
-> > +    return -1;
->
-> You don't need a 'return -1' here since all possible return values are
-> already
-> covered in the 'switch' and the default label is using
-> g_assert_not_reached(),
-> i.e. you'll never return -1. The compiler will be fine with it - we use
-> this
-> kind of pattern all the time (cpu_get_fcfien() does this in this same
-> file).
->
-> You can remove the -1 return and even turn the helper to uint32_t. That w=
-ay
-> the caller knows that there's no need to handle negative values.
->
->
-> Thanks,
->
-> Daniel
->
->
-> > +}
-> > +
-> >   #ifndef CONFIG_USER_ONLY
-> >
-> >   /*
->
->
+ static void gpex_set_irq(void *opaque, int irq_num, int level)
+ {
+     GPEXHost *s = opaque;
+ 
+-    qemu_set_irq(s->irq[irq_num], level);
++    qemu_set_irq(s->irq[irq_num].irq, level);
+ }
+ 
+ int gpex_set_irq_num(GPEXHost *s, int index, int gsi)
+ {
+-    if (index >= GPEX_NUM_IRQS) {
++    if (index >= s->num_irqs) {
+         return -EINVAL;
+     }
+ 
+-    s->irq_num[index] = gsi;
++    s->irq[index].irq_num = gsi;
+     return 0;
+ }
+ 
+@@ -62,7 +68,7 @@ static PCIINTxRoute gpex_route_intx_pin_to_irq(void *opaque, int pin)
+ {
+     PCIINTxRoute route;
+     GPEXHost *s = opaque;
+-    int gsi = s->irq_num[pin];
++    int gsi = s->irq[pin].irq_num;
+ 
+     route.irq = gsi;
+     if (gsi < 0) {
+@@ -74,6 +80,13 @@ static PCIINTxRoute gpex_route_intx_pin_to_irq(void *opaque, int pin)
+     return route;
+ }
+ 
++static int gpex_swizzle_map_irq_fn(PCIDevice *pci_dev, int pin)
++{
++    PCIBus *bus = pci_device_root_bus(pci_dev);
++
++    return (PCI_SLOT(pci_dev->devfn) + pin) % bus->nirq;
++}
++
+ static void gpex_host_realize(DeviceState *dev, Error **errp)
+ {
+     PCIHostState *pci = PCI_HOST_BRIDGE(dev);
+@@ -82,6 +95,8 @@ static void gpex_host_realize(DeviceState *dev, Error **errp)
+     PCIExpressHost *pex = PCIE_HOST_BRIDGE(dev);
+     int i;
+ 
++    s->irq = g_malloc0_n(s->num_irqs, sizeof(*s->irq));
++
+     pcie_host_mmcfg_init(pex, PCIE_MMCFG_SIZE_MAX);
+     sysbus_init_mmio(sbd, &pex->mmio);
+ 
+@@ -128,19 +143,27 @@ static void gpex_host_realize(DeviceState *dev, Error **errp)
+         sysbus_init_mmio(sbd, &s->io_ioport);
+     }
+ 
+-    for (i = 0; i < GPEX_NUM_IRQS; i++) {
+-        sysbus_init_irq(sbd, &s->irq[i]);
+-        s->irq_num[i] = -1;
++    for (i = 0; i < s->num_irqs; i++) {
++        sysbus_init_irq(sbd, &s->irq[i].irq);
++        s->irq[i].irq_num = -1;
+     }
+ 
+     pci->bus = pci_register_root_bus(dev, "pcie.0", gpex_set_irq,
+-                                     pci_swizzle_map_irq_fn, s, &s->io_mmio,
+-                                     &s->io_ioport, 0, 4, TYPE_PCIE_BUS);
++                                     gpex_swizzle_map_irq_fn,
++                                     s, &s->io_mmio, &s->io_ioport, 0,
++                                     s->num_irqs, TYPE_PCIE_BUS);
+ 
+     pci_bus_set_route_irq_fn(pci->bus, gpex_route_intx_pin_to_irq);
+     qdev_realize(DEVICE(&s->gpex_root), BUS(pci->bus), &error_fatal);
+ }
+ 
++static void gpex_host_unrealize(DeviceState *dev)
++{
++    GPEXHost *s = GPEX_HOST(dev);
++
++    g_free(s->irq);
++}
++
+ static const char *gpex_host_root_bus_path(PCIHostState *host_bridge,
+                                           PCIBus *rootbus)
+ {
+@@ -166,6 +189,7 @@ static Property gpex_host_properties[] = {
+                        gpex_cfg.mmio64.base, 0),
+     DEFINE_PROP_SIZE(PCI_HOST_ABOVE_4G_MMIO_SIZE, GPEXHost,
+                      gpex_cfg.mmio64.size, 0),
++    DEFINE_PROP_UINT8("num-irqs", GPEXHost, num_irqs, PCI_NUM_PINS),
+     DEFINE_PROP_END_OF_LIST(),
+ };
+ 
+@@ -176,6 +200,7 @@ static void gpex_host_class_init(ObjectClass *klass, void *data)
+ 
+     hc->root_bus_path = gpex_host_root_bus_path;
+     dc->realize = gpex_host_realize;
++    dc->unrealize = gpex_host_unrealize;
+     set_bit(DEVICE_CATEGORY_BRIDGE, dc->categories);
+     dc->fw_name = "pci";
+     device_class_set_props(dc, gpex_host_properties);
+diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+index 45a8c4f8190..567fe92a136 100644
+--- a/hw/riscv/virt.c
++++ b/hw/riscv/virt.c
+@@ -168,7 +168,7 @@ static void create_pcie_irq_map(RISCVVirtState *s, void *fdt, char *nodename,
+ {
+     int pin, dev;
+     uint32_t irq_map_stride = 0;
+-    uint32_t full_irq_map[GPEX_NUM_IRQS * GPEX_NUM_IRQS *
++    uint32_t full_irq_map[PCI_NUM_PINS * PCI_NUM_PINS *
+                           FDT_MAX_INT_MAP_WIDTH] = {};
+     uint32_t *irq_map = full_irq_map;
+ 
+@@ -180,11 +180,11 @@ static void create_pcie_irq_map(RISCVVirtState *s, void *fdt, char *nodename,
+      * possible slot) seeing the interrupt-map-mask will allow the table
+      * to wrap to any number of devices.
+      */
+-    for (dev = 0; dev < GPEX_NUM_IRQS; dev++) {
++    for (dev = 0; dev < PCI_NUM_PINS; dev++) {
+         int devfn = dev * 0x8;
+ 
+-        for (pin = 0; pin < GPEX_NUM_IRQS; pin++) {
+-            int irq_nr = PCIE_IRQ + ((pin + PCI_SLOT(devfn)) % GPEX_NUM_IRQS);
++        for (pin = 0; pin < PCI_NUM_PINS; pin++) {
++            int irq_nr = PCIE_IRQ + ((pin + PCI_SLOT(devfn)) % PCI_NUM_PINS);
+             int i = 0;
+ 
+             /* Fill PCI address cells */
+@@ -210,7 +210,7 @@ static void create_pcie_irq_map(RISCVVirtState *s, void *fdt, char *nodename,
+     }
+ 
+     qemu_fdt_setprop(fdt, nodename, "interrupt-map", full_irq_map,
+-                     GPEX_NUM_IRQS * GPEX_NUM_IRQS *
++                     PCI_NUM_PINS * PCI_NUM_PINS *
+                      irq_map_stride * sizeof(uint32_t));
+ 
+     qemu_fdt_setprop_cells(fdt, nodename, "interrupt-map-mask",
+@@ -1182,7 +1182,7 @@ static inline DeviceState *gpex_pcie_init(MemoryRegion *sys_mem,
+ 
+     sysbus_mmio_map(SYS_BUS_DEVICE(dev), 2, pio_base);
+ 
+-    for (i = 0; i < GPEX_NUM_IRQS; i++) {
++    for (i = 0; i < PCI_NUM_PINS; i++) {
+         irq = qdev_get_gpio_in(irqchip, PCIE_IRQ + i);
+ 
+         sysbus_connect_irq(SYS_BUS_DEVICE(dev), i, irq);
+diff --git a/hw/xen/xen-pvh-common.c b/hw/xen/xen-pvh-common.c
+index 218ac851cf7..9143b54d826 100644
+--- a/hw/xen/xen-pvh-common.c
++++ b/hw/xen/xen-pvh-common.c
+@@ -169,7 +169,7 @@ static inline void xenpvh_gpex_init(XenPVHMachineState *s,
+      */
+     assert(xpc->set_pci_intx_irq);
+ 
+-    for (i = 0; i < GPEX_NUM_IRQS; i++) {
++    for (i = 0; i < PCI_NUM_PINS; i++) {
+         qemu_irq irq = qemu_allocate_irq(xpc->set_pci_intx_irq, s, i);
+ 
+         sysbus_connect_irq(SYS_BUS_DEVICE(dev), i, irq);
+diff --git a/hw/xtensa/virt.c b/hw/xtensa/virt.c
+index 5310a888613..8f5c2009d29 100644
+--- a/hw/xtensa/virt.c
++++ b/hw/xtensa/virt.c
+@@ -93,7 +93,7 @@ static void create_pcie(MachineState *ms, CPUXtensaState *env, int irq_base,
+     /* Connect IRQ lines. */
+     extints = xtensa_get_extints(env);
+ 
+-    for (i = 0; i < GPEX_NUM_IRQS; i++) {
++    for (i = 0; i < PCI_NUM_PINS; i++) {
+         void *q = extints[irq_base + i];
+ 
+         sysbus_connect_irq(SYS_BUS_DEVICE(dev), i, q);
+diff --git a/include/hw/pci-host/gpex.h b/include/hw/pci-host/gpex.h
+index dce883573ba..84471533af0 100644
+--- a/include/hw/pci-host/gpex.h
++++ b/include/hw/pci-host/gpex.h
+@@ -32,8 +32,6 @@ OBJECT_DECLARE_SIMPLE_TYPE(GPEXHost, GPEX_HOST)
+ #define TYPE_GPEX_ROOT_DEVICE "gpex-root"
+ OBJECT_DECLARE_SIMPLE_TYPE(GPEXRootState, GPEX_ROOT_DEVICE)
+ 
+-#define GPEX_NUM_IRQS 4
+-
+ struct GPEXRootState {
+     /*< private >*/
+     PCIDevice parent_obj;
+@@ -49,6 +47,7 @@ struct GPEXConfig {
+     PCIBus      *bus;
+ };
+ 
++typedef struct GPEXIrq GPEXIrq;
+ struct GPEXHost {
+     /*< private >*/
+     PCIExpressHost parent_obj;
+@@ -60,8 +59,8 @@ struct GPEXHost {
+     MemoryRegion io_mmio;
+     MemoryRegion io_ioport_window;
+     MemoryRegion io_mmio_window;
+-    qemu_irq irq[GPEX_NUM_IRQS];
+-    int irq_num[GPEX_NUM_IRQS];
++    GPEXIrq *irq;
++    uint8_t num_irqs;
+ 
+     bool allow_unmapped_accesses;
+ 
+-- 
+2.39.5 (Apple Git-154)
 
---000000000000e1bcd10628a8f692
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr">Thanks Daniel.<div>Let&#39;s wait for about a week or so f=
-or other suggestions to the patches and then I&#39;ll send a new updated se=
-ries.</div></div><br><div class=3D"gmail_quote gmail_quote_container"><div =
-dir=3D"ltr" class=3D"gmail_attr">=D1=81=D0=B1, 7 =D0=B4=D0=B5=D0=BA. 2024=
-=E2=80=AF=D0=B3. =D0=B2 00:08, Daniel Henrique Barboza &lt;<a href=3D"mailt=
-o:dbarboza@ventanamicro.com">dbarboza@ventanamicro.com</a>&gt;:<br></div><b=
-lockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-le=
-ft:1px solid rgb(204,204,204);padding-left:1ex"><br>
-<br>
-On 12/5/24 8:23 AM, <a href=3D"mailto:baturo.alexey@gmail.com" target=3D"_b=
-lank">baturo.alexey@gmail.com</a> wrote:<br>
-&gt; From: Alexey Baturo &lt;<a href=3D"mailto:baturo.alexey@gmail.com" tar=
-get=3D"_blank">baturo.alexey@gmail.com</a>&gt;<br>
-&gt; <br>
-&gt; Signed-off-by: Alexey Baturo &lt;<a href=3D"mailto:baturo.alexey@gmail=
-.com" target=3D"_blank">baturo.alexey@gmail.com</a>&gt;<br>
-&gt; ---<br>
-&gt;=C2=A0 =C2=A0target/riscv/cpu.h=C2=A0 =C2=A0 =C2=A0 =C2=A0 |=C2=A0 5 ++=
-+<br>
-&gt;=C2=A0 =C2=A0target/riscv/cpu_helper.c | 74 +++++++++++++++++++++++++++=
-++++++++++++<br>
-&gt;=C2=A0 =C2=A02 files changed, 79 insertions(+)<br>
-&gt; <br>
-&gt; diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h<br>
-&gt; index 417ff45544..74d7076f5a 100644<br>
-&gt; --- a/target/riscv/cpu.h<br>
-&gt; +++ b/target/riscv/cpu.h<br>
-&gt; @@ -768,8 +768,13 @@ void cpu_get_tb_cpu_state(CPURISCVState *env, vad=
-dr *pc,<br>
-&gt;=C2=A0 =C2=A0<br>
-&gt;=C2=A0 =C2=A0bool riscv_cpu_is_32bit(RISCVCPU *cpu);<br>
-&gt;=C2=A0 =C2=A0<br>
-&gt; +bool riscv_cpu_virt_mem_enabled(CPURISCVState *env);<br>
-&gt; +RISCVPmPmm riscv_pm_get_pmm(CPURISCVState *env);<br>
-&gt; +int riscv_pm_get_pmlen(RISCVPmPmm pmm);<br>
-&gt; +<br>
-&gt;=C2=A0 =C2=A0RISCVException riscv_csrr(CPURISCVState *env, int csrno,<b=
-r>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0target_ulong *ret_value);<br>
-&gt; +<br>
-&gt;=C2=A0 =C2=A0RISCVException riscv_csrrw(CPURISCVState *env, int csrno,<=
-br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 target_ulong *ret_value,<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 target_ulong new_value, target_ulong wri=
-te_mask);<br>
-&gt; diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c<br>
-&gt; index dba04851d5..2558f869f2 100644<br>
-&gt; --- a/target/riscv/cpu_helper.c<br>
-&gt; +++ b/target/riscv/cpu_helper.c<br>
-&gt; @@ -214,6 +214,80 @@ void cpu_get_tb_cpu_state(CPURISCVState *env, vad=
-dr *pc,<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0*pflags =3D flags;<br>
-&gt;=C2=A0 =C2=A0}<br>
-&gt;=C2=A0 =C2=A0<br>
-&gt; +RISCVPmPmm riscv_pm_get_pmm(CPURISCVState *env)<br>
-&gt; +{<br>
-&gt; +=C2=A0 =C2=A0 RISCVPmPmm pmm =3D PMM_FIELD_DISABLED;<br>
-&gt; +#ifndef CONFIG_USER_ONLY<br>
-&gt; +=C2=A0 =C2=A0 if (get_field(env-&gt;mstatus, MSTATUS_MPRV) &amp;&amp;=
-<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 get_field(env-&gt;mstatus, MSTATUS_MXR)) =
-{<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 return pmm;<br>
-&gt; +=C2=A0 =C2=A0 }<br>
-&gt; +=C2=A0 =C2=A0 int priv_mode =3D cpu_address_mode(env);<br>
-&gt; +=C2=A0 =C2=A0 /* Get current PMM field */<br>
-&gt; +=C2=A0 =C2=A0 switch (priv_mode) {<br>
-&gt; +=C2=A0 =C2=A0 case PRV_M:<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 if (riscv_cpu_cfg(env)-&gt;ext_smmpm) {<b=
-r>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 pmm =3D get_field(env-&gt;m=
-seccfg, MSECCFG_PMM);<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 break;<br>
-&gt; +=C2=A0 =C2=A0 case PRV_S:<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 if (riscv_cpu_cfg(env)-&gt;ext_smnpm) {<b=
-r>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 if (get_field(env-&gt;mstat=
-us, MSTATUS_MPV)) {<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 pmm =3D get_f=
-ield(env-&gt;henvcfg, HENVCFG_PMM);<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 } else {<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 pmm =3D get_f=
-ield(env-&gt;menvcfg, MENVCFG_PMM);<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 break;<br>
-&gt; +=C2=A0 =C2=A0 case PRV_U:<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 if (riscv_has_ext(env, RVS)) {<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 if (riscv_cpu_cfg(env)-&gt;=
-ext_ssnpm) {<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 pmm =3D get_f=
-ield(env-&gt;senvcfg, SENVCFG_PMM);<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 } else {<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 if (riscv_cpu_cfg(env)-&gt;=
-ext_smnpm) {<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 pmm =3D get_f=
-ield(env-&gt;menvcfg, MENVCFG_PMM);<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 break;<br>
-&gt; +=C2=A0 =C2=A0 default:<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 g_assert_not_reached();<br>
-&gt; +=C2=A0 =C2=A0 }<br>
-&gt; +#endif<br>
-&gt; +=C2=A0 =C2=A0 return pmm;<br>
-&gt; +}<br>
-&gt; +<br>
-&gt; +bool riscv_cpu_virt_mem_enabled(CPURISCVState *env)<br>
-&gt; +{<br>
-&gt; +=C2=A0 =C2=A0 bool virt_mem_en =3D false;<br>
-&gt; +#ifndef CONFIG_USER_ONLY<br>
-&gt; +=C2=A0 =C2=A0 int satp_mode =3D 0;<br>
-&gt; +=C2=A0 =C2=A0 int priv_mode =3D cpu_address_mode(env);<br>
-&gt; +=C2=A0 =C2=A0 if (riscv_cpu_mxl(env) =3D=3D MXL_RV32) {<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 satp_mode =3D get_field(env-&gt;satp, SAT=
-P32_MODE);<br>
-&gt; +=C2=A0 =C2=A0 } else {<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 satp_mode =3D get_field(env-&gt;satp, SAT=
-P64_MODE);<br>
-&gt; +=C2=A0 =C2=A0 }<br>
-&gt; +=C2=A0 =C2=A0 virt_mem_en =3D ((satp_mode !=3D VM_1_10_MBARE) &amp;&a=
-mp; (priv_mode !=3D PRV_M));<br>
-&gt; +#endif<br>
-&gt; +=C2=A0 =C2=A0 return virt_mem_en;<br>
-&gt; +}<br>
-&gt; +<br>
-&gt; +int riscv_pm_get_pmlen(RISCVPmPmm pmm)<br>
-&gt; +{<br>
-&gt; +=C2=A0 =C2=A0 switch (pmm) {<br>
-&gt; +=C2=A0 =C2=A0 case PMM_FIELD_DISABLED:<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 return 0;<br>
-&gt; +=C2=A0 =C2=A0 case PMM_FIELD_PMLEN7:<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 return 7;<br>
-&gt; +=C2=A0 =C2=A0 case PMM_FIELD_PMLEN16:<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 return 16;<br>
-&gt; +=C2=A0 =C2=A0 default:<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 g_assert_not_reached();<br>
-&gt; +=C2=A0 =C2=A0 }<br>
-&gt; +=C2=A0 =C2=A0 return -1;<br>
-<br>
-You don&#39;t need a &#39;return -1&#39; here since all possible return val=
-ues are already<br>
-covered in the &#39;switch&#39; and the default label is using g_assert_not=
-_reached(),<br>
-i.e. you&#39;ll never return -1. The compiler will be fine with it - we use=
- this<br>
-kind of pattern all the time (cpu_get_fcfien() does this in this same file)=
-.<br>
-<br>
-You can remove the -1 return and even turn the helper to uint32_t. That way=
-<br>
-the caller knows that there&#39;s no need to handle negative values.<br>
-<br>
-<br>
-Thanks,<br>
-<br>
-Daniel<br>
-<br>
-<br>
-&gt; +}<br>
-&gt; +<br>
-&gt;=C2=A0 =C2=A0#ifndef CONFIG_USER_ONLY<br>
-&gt;=C2=A0 =C2=A0<br>
-&gt;=C2=A0 =C2=A0/*<br>
-<br>
-</blockquote></div>
-
---000000000000e1bcd10628a8f692--
 
