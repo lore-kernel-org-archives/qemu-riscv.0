@@ -4,68 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4AE7BE7717F
-	for <qemu-riscv@archiver.kernel.org>; Sun,  8 Dec 2024 20:25:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 30501E7717F
+	for <qemu-riscv@archiver.kernel.org>; Sun,  8 Dec 2024 20:26:10 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tKNoC-0002Ue-6s; Sun, 08 Dec 2024 15:23:16 -0500
+	id 1tKNo0-0002J9-18; Sun, 08 Dec 2024 15:23:04 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <phil@philjordan.eu>)
- id 1tKNoA-0002S1-63
- for qemu-riscv@nongnu.org; Sun, 08 Dec 2024 15:23:14 -0500
-Received: from mail-ej1-x62b.google.com ([2a00:1450:4864:20::62b])
+ id 1tKNnx-0002Fx-Op
+ for qemu-riscv@nongnu.org; Sun, 08 Dec 2024 15:23:01 -0500
+Received: from mail-ej1-x62e.google.com ([2a00:1450:4864:20::62e])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <phil@philjordan.eu>)
- id 1tKNo8-0008Ae-1J
- for qemu-riscv@nongnu.org; Sun, 08 Dec 2024 15:23:13 -0500
-Received: by mail-ej1-x62b.google.com with SMTP id
- a640c23a62f3a-aa689a37dd4so37040166b.3
- for <qemu-riscv@nongnu.org>; Sun, 08 Dec 2024 12:23:11 -0800 (PST)
+ id 1tKNnw-000868-AM
+ for qemu-riscv@nongnu.org; Sun, 08 Dec 2024 15:23:01 -0500
+Received: by mail-ej1-x62e.google.com with SMTP id
+ a640c23a62f3a-aa68b513abcso27479466b.0
+ for <qemu-riscv@nongnu.org>; Sun, 08 Dec 2024 12:22:59 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=philjordan-eu.20230601.gappssmtp.com; s=20230601; t=1733689390; x=1734294190;
+ d=philjordan-eu.20230601.gappssmtp.com; s=20230601; t=1733689379; x=1734294179;
  darn=nongnu.org; 
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=wSBpg2hYj8CiNrxPOnsHHRCwOt6RUqezuji7AZqApGE=;
- b=iXaHAeQOzUjwy4NBKuJD/f06/LhUmgHmEJCuYTZoHO1fP0P/8qnQZC0+azTee1fx1N
- RJyHA0NYwilaQMp+0VEF5qITzs9PKiHnQiKQ5l06tKWzmNYO2Ugw8B9uijZXtjiDCJer
- 3xY/Kq8VeQ7EoPSHzRzS2+JUZIEyG+ih075N6lCBmUDqs0cx+Y643HF30jOYszYcRG9R
- pseMJtKZ+UyK4ZkBDvYwnRFaTHr0A+eNSbL5Kpi3kgfsY/aHsysAfqhAGscPDUQIaQH7
- qH847BMBPMA8DDv/4QPlmXGWtnaOZKK+UWz8xsCez504Nk43/l8o16zpafXgN69b6N49
- alGw==
+ bh=jbiG06Qj2eVtNM1RZ8Zpr4IJcnCvDLdL2ENhuYJnNHE=;
+ b=guKZBafbZn0TLuVeqf76YbNFwhpgNI5HUWpsKsBZcYR9RDegtqz/ModZZ5cihS5cvH
+ 23ogYT3Lf7Sz4zgFjyMS83ut1rliJi6Rd/t3yZ3N0ophHihgNBNCp60vDHjXnTW7qMpI
+ +4f0CvnQeTaxXcKR1P3EB/VH/tocmleDZFH7owwKPpxBjS4FS3StJtFKDn/oDBorNdMX
+ AvKw45oTSu6QJMElW9+/tDwNuS9jW09Y8TaDSvv/cxv3E+/twZaw888BCbLCZJM3Uq5D
+ S2dzaFoFgIiWdf19WycPAgJ7tTwNKcTuV03KjgdZM7lm9efGbjrdAgo+Q1uH5OAaFH8R
+ vUig==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733689390; x=1734294190;
+ d=1e100.net; s=20230601; t=1733689379; x=1734294179;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=wSBpg2hYj8CiNrxPOnsHHRCwOt6RUqezuji7AZqApGE=;
- b=WbII93mt6fi2ydfmgJ5qZIFK5P+wW0KQGCJdaXH7i5e9b6o6vRb4qgBCKxwRavzEsR
- iouFfHAT6lk1eYt59uG590oP5pUQ5i5DSOrXO+LX2jABxsaEn4Y4LJxY3fntYT6bSJfx
- wlHtIwGPd49MYk42aTqW/WLqL0G74gP8/pPWcHiL/dSwDdITgxoBWUWrYKXoasH8QYC8
- x9TctVAsL2rKzrYzi6u8gs5fudqq/fWurmmSANIcxE5ugrrSiPkNzhz11AaeWd/CbVYL
- hq04wRtkP3QcTVoIMXmVN0VkQCVx6n3/wcQkKzdylx0IwtziiX+q9ErzC+RA3AX/k21e
- Vfyg==
+ bh=jbiG06Qj2eVtNM1RZ8Zpr4IJcnCvDLdL2ENhuYJnNHE=;
+ b=JgybyL/yMf7Y9Q26US/keuL1Rjtati28QEueL1FtxoNMCoR2s9RBuKdwON5YBT+LbN
+ 9J47FK51ZMXFwuLzAT+kEeC6Lt4VwGiTVikFAM9REGv38L1bfXizFTqqFDIdb1KpCuNx
+ 8F9vKEKM6FZwe9TOIsIN/cWDxCmwQxPmC1GlONSKCZSPbqhJnc4XxO+ahY8dLGMn7Svq
+ MW6il8DIsN4fe8+IQFmmuulRlByLGffskui7qoC7m6oJelciPYgxRbOeaTM18FyWrQaJ
+ /zFw0YV8uvSJ1WB4IOf6ftHpOPfUL5JxOeR6CMO9Rdp1oqo1boR/IdoOptHPqCsPw1mO
+ 6TIQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXvqRH1Nm/NCak+ExVPJD7vGsnnRFAnT23PbfuXYjhWB4AHqoD5A6O5d2ufuhhWpfA9BOmK9Rh4lx83@nongnu.org
-X-Gm-Message-State: AOJu0Yz9BZ29naF6FQyGCyHfAfsh029X/0osxRAdbLn0qWcwtdaoX203
- CzTb0jGn74/fxvfa/1Qkfw5GZv6WgfNUf1CG4Rdlk8af91zyJBTOEsX7eMo81w==
-X-Gm-Gg: ASbGncuHqyhILB1n0wNH95KJ1nnen1v4vbr5QWxy2/Oqwrge/Gjf8hN4Wxpo9COzxh3
- Os3ofsJvCYznc1X+u8bMq6WeuE80Hx8WDMt2UIEGAEI1jtHqvIb09lg71bF4wmo2hZvioYu797I
- CJUmQ5qAVZnryQE0ytm3y9va+flZWqE6qjiAH6z4Nz4zWhokeaY+oE6cehyNta4U61OWtQ06cgw
- 5Jt0UdniA2dFguah4waWrmeB5ggVhob0qyIwvpkSf5p/99FvnsHvb5YzDkwMcljmfjc+F8Leyw3
- 7/LpYwouoUrk4zp5j0J4xT335w==
-X-Google-Smtp-Source: AGHT+IGgrtdSDT9B0eBqHTNO5jqJqaoAQQ1vzAOhYUNP2kHITLwkgMG8QlxodL763QgKvePBy/2XzQ==
-X-Received: by 2002:a17:906:3094:b0:aa6:18b6:310e with SMTP id
- a640c23a62f3a-aa63a2417f2mr1009887966b.38.1733689390594; 
- Sun, 08 Dec 2024 12:23:10 -0800 (PST)
+ AJvYcCXeUTpm9B8Mjbas/lfilB1P3vwo14JmUzhCNpP+jGTtevVGONGmhWM+DQkRcU208wzIQxdhhEGSIaPv@nongnu.org
+X-Gm-Message-State: AOJu0Yw6t6pCX4lJxAkEeiFaa2oDJmyVD7qAxBu/rg5fsQI9NHyIJ4XC
+ Et69Cw8pqCUTL4CmIWn29GC1Pd3E/CjKgoHEMzaVjCArELGLHwLSil3kVIMc6Q==
+X-Gm-Gg: ASbGnctz3hjX5bn5n7+AP29jrsIlJ3q7j3f2rCMW94jjldruvinFIgdQoU4DqZlnTHi
+ 35gfb0gVzk+hkV0XPb7ZcKfxZCofJUbqLyCrAgqEpQNGmSnwmuHBpDjxqfchMryma6a9CH1u+O9
+ 57xXfR1ls9q4b4zj24gs0FOpY/8Xp6QCG4vB9P44iDzPFiwem7LvpIsKsWa+r+urVNiZ9WyEOqL
+ SmYIjkicCLxIT+tZHziFaMdxIcD98zQqvv8F8tpLTymuPD+js/zCRJZtWUhdkrCaVZCumLYvi4I
+ 4TB7RcZ2eYStO6vewYS3j5HmtQ==
+X-Google-Smtp-Source: AGHT+IEd/RneVGd0XG6VOIQbVbyIrqEsn8EM4SEAG0TsrTKHyaZmxpROh4o73/aZS8BWnmCbPjE2Ug==
+X-Received: by 2002:a17:906:3cb2:b0:aa6:538e:a311 with SMTP id
+ a640c23a62f3a-aa6538ea57dmr605554866b.18.1733689379002; 
+ Sun, 08 Dec 2024 12:22:59 -0800 (PST)
 Received: from localhost.localdomain (h082218084190.host.wavenet.at.
  [82.218.84.190]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-aa625e4eee4sm585759266b.26.2024.12.08.12.23.08
+ a640c23a62f3a-aa625e4eee4sm585759266b.26.2024.12.08.12.22.57
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Sun, 08 Dec 2024 12:23:09 -0800 (PST)
+ Sun, 08 Dec 2024 12:22:58 -0800 (PST)
 From: Phil Dennis-Jordan <phil@philjordan.eu>
 To: qemu-devel@nongnu.org
 Cc: agraf@csgraf.de, phil@philjordan.eu, peter.maydell@linaro.org,
@@ -79,18 +79,17 @@ Cc: agraf@csgraf.de, phil@philjordan.eu, peter.maydell@linaro.org,
  dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com,
  jcmvbkbc@gmail.com, marcandre.lureau@redhat.com, berrange@redhat.com,
  akihiko.odaki@daynix.com, qemu-arm@nongnu.org, qemu-block@nongnu.org,
- qemu-riscv@nongnu.org, balaton@eik.bme.hu
-Subject: [PATCH v13 14/15] hw/block/virtio-blk: Replaces request free function
- with g_free
-Date: Sun,  8 Dec 2024 21:22:37 +0100
-Message-Id: <20241208202238.68873-15-phil@philjordan.eu>
+ qemu-riscv@nongnu.org, balaton@eik.bme.hu, Alexander Graf <graf@amazon.com>
+Subject: [PATCH v13 08/15] hvf: arm: Ignore writes to CNTP_CTL_EL0
+Date: Sun,  8 Dec 2024 21:22:31 +0100
+Message-Id: <20241208202238.68873-9-phil@philjordan.eu>
 X-Mailer: git-send-email 2.39.5 (Apple Git-154)
 In-Reply-To: <20241208202238.68873-1-phil@philjordan.eu>
 References: <20241208202238.68873-1-phil@philjordan.eu>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: neutral client-ip=2a00:1450:4864:20::62b;
- envelope-from=phil@philjordan.eu; helo=mail-ej1-x62b.google.com
+Received-SPF: neutral client-ip=2a00:1450:4864:20::62e;
+ envelope-from=phil@philjordan.eu; helo=mail-ej1-x62e.google.com
 X-Spam_score_int: -10
 X-Spam_score: -1.1
 X-Spam_bar: -
@@ -112,231 +111,54 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-The virtio_blk_free_request() function has been a 1-liner forwarding
-to g_free() for a while now. We may as well call g_free on the request
-pointer directly.
+From: Alexander Graf <graf@amazon.com>
 
+MacOS unconditionally disables interrupts of the physical timer on boot
+and then continues to use the virtual one. We don't really want to support
+a full physical timer emulation, so let's just ignore those writes.
+
+Signed-off-by: Alexander Graf <graf@amazon.com>
 Signed-off-by: Phil Dennis-Jordan <phil@philjordan.eu>
 Reviewed-by: Akihiko Odaki <akihiko.odaki@daynix.com>
 Tested-by: Akihiko Odaki <akihiko.odaki@daynix.com>
 ---
- hw/block/virtio-blk.c          | 43 +++++++++++++++-------------------
- hw/vmapple/virtio-blk.c        |  2 +-
- include/hw/virtio/virtio-blk.h |  1 -
- 3 files changed, 20 insertions(+), 26 deletions(-)
+ target/arm/hvf/hvf.c | 9 +++++++++
+ 1 file changed, 9 insertions(+)
 
-diff --git a/hw/block/virtio-blk.c b/hw/block/virtio-blk.c
-index 9e8337bb639..40d2c9bc591 100644
---- a/hw/block/virtio-blk.c
-+++ b/hw/block/virtio-blk.c
-@@ -50,11 +50,6 @@ static void virtio_blk_init_request(VirtIOBlock *s, VirtQueue *vq,
-     req->mr_next = NULL;
- }
+diff --git a/target/arm/hvf/hvf.c b/target/arm/hvf/hvf.c
+index ca7ea92774a..d75e504dcda 100644
+--- a/target/arm/hvf/hvf.c
++++ b/target/arm/hvf/hvf.c
+@@ -11,6 +11,7 @@
  
--void virtio_blk_free_request(VirtIOBlockReq *req)
--{
--    g_free(req);
--}
--
- void virtio_blk_req_complete(VirtIOBlockReq *req, unsigned char status)
- {
-     VirtIOBlock *s = req->dev;
-@@ -93,7 +88,7 @@ static int virtio_blk_handle_rw_error(VirtIOBlockReq *req, int error,
-         if (acct_failed) {
-             block_acct_failed(blk_get_stats(s->blk), &req->acct);
-         }
--        virtio_blk_free_request(req);
-+        g_free(req);
-     }
+ #include "qemu/osdep.h"
+ #include "qemu/error-report.h"
++#include "qemu/log.h"
  
-     blk_error_action(s->blk, action, is_read, error);
-@@ -136,7 +131,7 @@ static void virtio_blk_rw_complete(void *opaque, int ret)
- 
-         virtio_blk_req_complete(req, VIRTIO_BLK_S_OK);
-         block_acct_done(blk_get_stats(s->blk), &req->acct);
--        virtio_blk_free_request(req);
-+        g_free(req);
-     }
- }
- 
-@@ -151,7 +146,7 @@ static void virtio_blk_flush_complete(void *opaque, int ret)
- 
-     virtio_blk_req_complete(req, VIRTIO_BLK_S_OK);
-     block_acct_done(blk_get_stats(s->blk), &req->acct);
--    virtio_blk_free_request(req);
-+    g_free(req);
- }
- 
- static void virtio_blk_discard_write_zeroes_complete(void *opaque, int ret)
-@@ -169,7 +164,7 @@ static void virtio_blk_discard_write_zeroes_complete(void *opaque, int ret)
-     if (is_write_zeroes) {
-         block_acct_done(blk_get_stats(s->blk), &req->acct);
-     }
--    virtio_blk_free_request(req);
-+    g_free(req);
- }
- 
- static VirtIOBlockReq *virtio_blk_get_request(VirtIOBlock *s, VirtQueue *vq)
-@@ -214,7 +209,7 @@ static void virtio_blk_handle_scsi(VirtIOBlockReq *req)
- 
- fail:
-     virtio_blk_req_complete(req, status);
--    virtio_blk_free_request(req);
-+    g_free(req);
- }
- 
- static inline void submit_requests(VirtIOBlock *s, MultiReqBuffer *mrb,
-@@ -612,7 +607,7 @@ static void virtio_blk_zone_report_complete(void *opaque, int ret)
- 
- out:
-     virtio_blk_req_complete(req, err_status);
--    virtio_blk_free_request(req);
-+    g_free(req);
-     g_free(data->zone_report_data.zones);
-     g_free(data);
- }
-@@ -661,7 +656,7 @@ static void virtio_blk_handle_zone_report(VirtIOBlockReq *req,
-     return;
- out:
-     virtio_blk_req_complete(req, err_status);
--    virtio_blk_free_request(req);
-+    g_free(req);
- }
- 
- static void virtio_blk_zone_mgmt_complete(void *opaque, int ret)
-@@ -677,7 +672,7 @@ static void virtio_blk_zone_mgmt_complete(void *opaque, int ret)
-     }
- 
-     virtio_blk_req_complete(req, err_status);
--    virtio_blk_free_request(req);
-+    g_free(req);
- }
- 
- static int virtio_blk_handle_zone_mgmt(VirtIOBlockReq *req, BlockZoneOp op)
-@@ -719,7 +714,7 @@ static int virtio_blk_handle_zone_mgmt(VirtIOBlockReq *req, BlockZoneOp op)
-     return 0;
- out:
-     virtio_blk_req_complete(req, err_status);
--    virtio_blk_free_request(req);
-+    g_free(req);
-     return err_status;
- }
- 
-@@ -750,7 +745,7 @@ static void virtio_blk_zone_append_complete(void *opaque, int ret)
- 
- out:
-     virtio_blk_req_complete(req, err_status);
--    virtio_blk_free_request(req);
-+    g_free(req);
-     g_free(data);
- }
- 
-@@ -788,7 +783,7 @@ static int virtio_blk_handle_zone_append(VirtIOBlockReq *req,
- 
- out:
-     virtio_blk_req_complete(req, err_status);
--    virtio_blk_free_request(req);
-+    g_free(req);
-     return err_status;
- }
- 
-@@ -855,7 +850,7 @@ static int virtio_blk_handle_request(VirtIOBlockReq *req, MultiReqBuffer *mrb)
-             virtio_blk_req_complete(req, VIRTIO_BLK_S_IOERR);
-             block_acct_invalid(blk_get_stats(s->blk),
-                                is_write ? BLOCK_ACCT_WRITE : BLOCK_ACCT_READ);
--            virtio_blk_free_request(req);
-+            g_free(req);
-             return 0;
-         }
- 
-@@ -911,7 +906,7 @@ static int virtio_blk_handle_request(VirtIOBlockReq *req, MultiReqBuffer *mrb)
-                               VIRTIO_BLK_ID_BYTES));
-         iov_from_buf(in_iov, in_num, 0, serial, size);
-         virtio_blk_req_complete(req, VIRTIO_BLK_S_OK);
--        virtio_blk_free_request(req);
-+        g_free(req);
-         break;
-     }
-     case VIRTIO_BLK_T_ZONE_APPEND & ~VIRTIO_BLK_T_OUT:
-@@ -943,7 +938,7 @@ static int virtio_blk_handle_request(VirtIOBlockReq *req, MultiReqBuffer *mrb)
-         if (unlikely(!(type & VIRTIO_BLK_T_OUT) ||
-                      out_len > sizeof(dwz_hdr))) {
-             virtio_blk_req_complete(req, VIRTIO_BLK_S_UNSUPP);
--            virtio_blk_free_request(req);
-+            g_free(req);
-             return 0;
-         }
- 
-@@ -960,7 +955,7 @@ static int virtio_blk_handle_request(VirtIOBlockReq *req, MultiReqBuffer *mrb)
-                                                             is_write_zeroes);
-         if (err_status != VIRTIO_BLK_S_OK) {
-             virtio_blk_req_complete(req, err_status);
--            virtio_blk_free_request(req);
-+            g_free(req);
-         }
- 
-         break;
-@@ -975,7 +970,7 @@ static int virtio_blk_handle_request(VirtIOBlockReq *req, MultiReqBuffer *mrb)
-         if (!vbk->handle_unknown_request ||
-             !vbk->handle_unknown_request(req, mrb, type)) {
-             virtio_blk_req_complete(req, VIRTIO_BLK_S_UNSUPP);
--            virtio_blk_free_request(req);
-+            g_free(req);
-         }
-     }
-     }
-@@ -998,7 +993,7 @@ void virtio_blk_handle_vq(VirtIOBlock *s, VirtQueue *vq)
-         while ((req = virtio_blk_get_request(s, vq))) {
-             if (virtio_blk_handle_request(req, &mrb)) {
-                 virtqueue_detach_element(req->vq, &req->elem, 0);
--                virtio_blk_free_request(req);
-+                g_free(req);
-                 break;
-             }
-         }
-@@ -1048,7 +1043,7 @@ static void virtio_blk_dma_restart_bh(void *opaque)
-             while (req) {
-                 next = req->next;
-                 virtqueue_detach_element(req->vq, &req->elem, 0);
--                virtio_blk_free_request(req);
-+                g_free(req);
-                 req = next;
-             }
-             break;
-@@ -1131,7 +1126,7 @@ static void virtio_blk_reset(VirtIODevice *vdev)
-             /* No other threads can access req->vq here */
-             virtqueue_detach_element(req->vq, &req->elem, 0);
- 
--            virtio_blk_free_request(req);
-+            g_free(req);
-         }
-     }
- 
-diff --git a/hw/vmapple/virtio-blk.c b/hw/vmapple/virtio-blk.c
-index 9aeb2931922..52d857166bd 100644
---- a/hw/vmapple/virtio-blk.c
-+++ b/hw/vmapple/virtio-blk.c
-@@ -55,7 +55,7 @@ static bool vmapple_virtio_blk_handle_unknown_request(VirtIOBlockReq *req,
-         qemu_log_mask(LOG_UNIMP, "%s: Barrier requests are currently no-ops\n",
-                       __func__);
-         virtio_blk_req_complete(req, VIRTIO_BLK_S_OK);
--        virtio_blk_free_request(req);
-+        g_free(req);
-         return true;
-     default:
-         return false;
-diff --git a/include/hw/virtio/virtio-blk.h b/include/hw/virtio/virtio-blk.h
-index 28d5046ea6c..dcb2c89aed5 100644
---- a/include/hw/virtio/virtio-blk.h
-+++ b/include/hw/virtio/virtio-blk.h
-@@ -109,7 +109,6 @@ typedef struct VirtIOBlkClass {
- } VirtIOBlkClass;
- 
- void virtio_blk_handle_vq(VirtIOBlock *s, VirtQueue *vq);
--void virtio_blk_free_request(VirtIOBlockReq *req);
- void virtio_blk_req_complete(VirtIOBlockReq *req, unsigned char status);
- 
- #endif
+ #include "sysemu/runstate.h"
+ #include "sysemu/hvf.h"
+@@ -184,6 +185,7 @@ void hvf_arm_init_debug(void)
+ #define SYSREG_OSLSR_EL1      SYSREG(2, 0, 1, 1, 4)
+ #define SYSREG_OSDLR_EL1      SYSREG(2, 0, 1, 3, 4)
+ #define SYSREG_CNTPCT_EL0     SYSREG(3, 3, 14, 0, 1)
++#define SYSREG_CNTP_CTL_EL0   SYSREG(3, 3, 14, 2, 1)
+ #define SYSREG_PMCR_EL0       SYSREG(3, 3, 9, 12, 0)
+ #define SYSREG_PMUSERENR_EL0  SYSREG(3, 3, 9, 14, 0)
+ #define SYSREG_PMCNTENSET_EL0 SYSREG(3, 3, 9, 12, 1)
+@@ -1620,6 +1622,13 @@ static int hvf_sysreg_write(CPUState *cpu, uint32_t reg, uint64_t val)
+     case SYSREG_OSLAR_EL1:
+         env->cp15.oslsr_el1 = val & 1;
+         return 0;
++    case SYSREG_CNTP_CTL_EL0:
++        /*
++         * Guests should not rely on the physical counter, but macOS emits
++         * disable writes to it. Let it do so, but ignore the requests.
++         */
++        qemu_log_mask(LOG_UNIMP, "Unsupported write to CNTP_CTL_EL0\n");
++        return 0;
+     case SYSREG_OSDLR_EL1:
+         /* Dummy register */
+         return 0;
 -- 
 2.39.5 (Apple Git-154)
 
