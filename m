@@ -4,98 +4,98 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 52DA2E7717F
-	for <qemu-riscv@archiver.kernel.org>; Sun,  8 Dec 2024 20:26:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 89976E7717D
+	for <qemu-riscv@archiver.kernel.org>; Mon,  9 Dec 2024 19:34:23 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tKNny-0002I2-S0; Sun, 08 Dec 2024 15:23:02 -0500
+	id 1tKjW8-0007HI-Mj; Mon, 09 Dec 2024 14:34:04 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <phil@philjordan.eu>)
- id 1tKNnu-0002Df-VC
- for qemu-riscv@nongnu.org; Sun, 08 Dec 2024 15:22:59 -0500
-Received: from mail-ej1-x634.google.com ([2a00:1450:4864:20::634])
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1tKjW6-0007FS-Ch
+ for qemu-riscv@nongnu.org; Mon, 09 Dec 2024 14:34:02 -0500
+Received: from mail-pf1-x431.google.com ([2607:f8b0:4864:20::431])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <phil@philjordan.eu>)
- id 1tKNns-00084N-MT
- for qemu-riscv@nongnu.org; Sun, 08 Dec 2024 15:22:58 -0500
-Received: by mail-ej1-x634.google.com with SMTP id
- a640c23a62f3a-a9f1d76dab1so341149366b.0
- for <qemu-riscv@nongnu.org>; Sun, 08 Dec 2024 12:22:56 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1tKjW3-0004qi-L6
+ for qemu-riscv@nongnu.org; Mon, 09 Dec 2024 14:34:02 -0500
+Received: by mail-pf1-x431.google.com with SMTP id
+ d2e1a72fcca58-725d9f57d90so1523765b3a.1
+ for <qemu-riscv@nongnu.org>; Mon, 09 Dec 2024 11:33:58 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=philjordan-eu.20230601.gappssmtp.com; s=20230601; t=1733689375; x=1734294175;
- darn=nongnu.org; 
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=yFaB4PcpJ8M8FmLVWUEWYODg72B+6C+aetlV/ZwIxaU=;
- b=2BhaxJPT8+nsUjQ4T4wil5DeNV7H7UZCjXKcZrKKfGW2fu2wEOAdjBvIKdsTKJggLv
- qQNn7UUvLmvTEcEfMqU0JDY1a7rQ68W8Pj2X0RN2u0Aruzs44gaWnfYe3OAeSXf13Wau
- Pa/V0Vk8FfzV7I7Igy6GAm5oeJgWWxDEewaDZYnQVKyuiOGcJK+Gztrw7Xb70Wv5YWOy
- nA6YlSVbUrzxUUvwe1bgyIv6BPx0FuNKGUh3inBDM8pcGu+YdEZn62BLS5qzVPjcjfOv
- d2Za6CgzqCnxELV9WQLaz3UccHPCMennHypjChoA3nsq90Z/SxqMQcMc6SQSRo2nFZJ2
- RMgA==
+ d=ventanamicro.com; s=google; t=1733772837; x=1734377637; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=9k9Pg+8y3c3UnD4hkh++q33Ep4J6N5eaCzFv/CJ1XXQ=;
+ b=SOfXiJasxp1ZZcTfmD6Ac6p4A9dVm3RvE9zFyt78Qi6amhhHhPo1uBMtFzRcQK/0MH
+ tLV9HchwNRjsFm/75qg8gfSmxSbjUcYCqlBU+H9wvWRXtpnR5FkLfxfRWZdIxavpoyv/
+ CDjEp3TCvFNkoizxlNYs8wlS7YcYazaY2CbGRWxQzOLOftPirYlNvnxqnY/fTNJkVbPq
+ FKT7oYh0SovBzTB2SRfym3LjRsSco87QaxTK4hNhF4Jh/05QFUZPjkIxMulOfT350jsL
+ JO0Dmdkb8Cs4pRsakjU1KXyW9DBnVKicJZzpTNQScv1m7760Oc56lNgVwAuu3elYDaEi
+ 1qrg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733689375; x=1734294175;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=yFaB4PcpJ8M8FmLVWUEWYODg72B+6C+aetlV/ZwIxaU=;
- b=avluFyqgDgJ4v/+Z3+GzU83PZwQU84H3d9AfYN5kyhq1z9p7CupaAbFnqNBpF/qfBa
- tt+ZYzQ60Yatexy1R0frNQc8NcDTIAOhRT4OhqtNgI7nf7ORSDAN4sjjTb9yFSNgH2N9
- YRTg5U5OrzY9dO/PfhoYI2rznPsZih0mfoW7z/uI2Y/tDQMyLHtNTXO2LbhBH5i5Uc74
- /kyWSqSIj8eTI5z5zWdABNijyPdshXT3yihOUNJeuXyC1mmbmAd44+R3ZA7k5V4XjLCZ
- 1+btkeRD25s6KlBDMwHDZr/mST2Dlv19nw4pdmQWSCgqnoMU+pzP9R7WSSYDfa+1Xcbp
- XtJg==
+ d=1e100.net; s=20230601; t=1733772837; x=1734377637;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=9k9Pg+8y3c3UnD4hkh++q33Ep4J6N5eaCzFv/CJ1XXQ=;
+ b=v9fEtiXkhyCr3RPvW6xNIfyrjgGgXAr2K6rhzUllSAxSvYQD6Cfn5w/wBeHMj9h+en
+ kaf7YTUKPiDBvnbG/1jjFc4q06t6F0pYnjfhcO8nQwsnRYOPPGx90zBL1n+VK412JE+d
+ Bl6EgJEvZCI54h59yKpez3QiW7NhwKoVn7++XChn3B2fj+c+0/yRULl3LdKtNL+ZsRE1
+ MWDmI2cPkzoUaNqXUMlYlCAAz7OoGSlgPmxSHOG92u9fZqAGk33LwNxwvPgEQiqZA7Cp
+ Q0mX/rVO4ACpH4m8Bso+M5NiRjkAn/WzKGdKq8wVvpX8Nr/AfoqXWErJWpdXXXQ7izG7
+ QgYg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVF8SprwHqWrMUXEgIlDnBZMKFVcqMXUmX76fQ/NIoncq9hojmO5fLbNXYffKJ0ZbynwyfONWUf1W2E@nongnu.org
-X-Gm-Message-State: AOJu0YyXbdtiEC/lcxQ6GI9LNGJgKQcHqhq5M+ofjQMNL6CMFjheKgbr
- 7fqct1kgoPFHjhZFACCR32EVoy+h7HgEwirAbixr7G4ekgQaEvGT0svBiyabMg==
-X-Gm-Gg: ASbGncs6g+FKCA2rU27wfYVjiFzj1A4vo7flFTdQpFtC0BAFZL15pgJku+quohJEKrO
- C8mHIg/QNdsdDvNfrBw+p3xkPbn8bGLWhKXzufnq9TcodtzgCi1foDgXBhEfZvVJvKZ8m8BFlbm
- 8c1jz4U8CUrwiMdGtWP+kLINnfr5MsXHGCODqG1QqfSuq8gDfv7Zyfd3OEOeNeYfwDalFGHioH+
- kAVTr4tz5m2gvvZ1Dp0cM5pfbhOxYLZ4jH4ASx639wwXOcxmQK/3TQy4r2l0V0Hw/iM8Ba2IFQM
- dHNECI+p0agicaMLQMToY1bzmA==
-X-Google-Smtp-Source: AGHT+IGls4MEqFq6xqQpby551YBXNsiQcO6j24u3lPjSmIZmO9Durr/VgxkrvQV85hBAjPCd7Gq7qg==
-X-Received: by 2002:a17:907:7848:b0:aa6:7adc:718a with SMTP id
- a640c23a62f3a-aa67adc72d5mr258852266b.8.1733689375322; 
- Sun, 08 Dec 2024 12:22:55 -0800 (PST)
-Received: from localhost.localdomain (h082218084190.host.wavenet.at.
- [82.218.84.190]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-aa625e4eee4sm585759266b.26.2024.12.08.12.22.53
- (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Sun, 08 Dec 2024 12:22:55 -0800 (PST)
-From: Phil Dennis-Jordan <phil@philjordan.eu>
-To: qemu-devel@nongnu.org
-Cc: agraf@csgraf.de, phil@philjordan.eu, peter.maydell@linaro.org,
- pbonzini@redhat.com, rad@semihalf.com, quic_llindhol@quicinc.com,
- stefanha@redhat.com, mst@redhat.com, slp@redhat.com,
- richard.henderson@linaro.org, eduardo@habkost.net,
- marcel.apfelbaum@gmail.com, gaosong@loongson.cn, jiaxun.yang@flygoat.com,
- chenhuacai@kernel.org, kwolf@redhat.com, hreitz@redhat.com,
- philmd@linaro.org, shorne@gmail.com, palmer@dabbelt.com,
- alistair.francis@wdc.com, bmeng.cn@gmail.com, liwei1518@gmail.com,
- dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com,
- jcmvbkbc@gmail.com, marcandre.lureau@redhat.com, berrange@redhat.com,
- akihiko.odaki@daynix.com, qemu-arm@nongnu.org, qemu-block@nongnu.org,
- qemu-riscv@nongnu.org, balaton@eik.bme.hu, Alexander Graf <graf@amazon.com>
-Subject: [PATCH v13 06/15] hw: Add vmapple subdir
-Date: Sun,  8 Dec 2024 21:22:29 +0100
-Message-Id: <20241208202238.68873-7-phil@philjordan.eu>
-X-Mailer: git-send-email 2.39.5 (Apple Git-154)
-In-Reply-To: <20241208202238.68873-1-phil@philjordan.eu>
-References: <20241208202238.68873-1-phil@philjordan.eu>
+ AJvYcCW7PthJbAyRPBCAjTtqqI5l0dhIh3mm0FcVW0YaJWAaHicAfscqt784a6oPiMYjXtOMqBaCBC1c+mrF@nongnu.org
+X-Gm-Message-State: AOJu0YxSCV9ZZHPMLw+xzVhlznR4VSKYy976dkCDpGk+KpkcfrUC9YhR
+ Uv+yVAvNtPagzi0L8etSaA9Jyisrxn8llug9gQ7jR2Pu10tbfyyT5jJEM7r1/7s=
+X-Gm-Gg: ASbGncv6oIFujUVibJu0AshFx/kZGL1DB3NxdZBSp76tIoOvu5MUqUmsadlVaMLfZm7
+ /x+wzO+J+k4l819wG2nbdN1mx6r00NKxpSg4UoW2Yd8sByJoxTiVVnsd1I77i/85u/vGYHdACuD
+ M3++JPj2sS2xX7PjJ/YaI/W5KqrzwnKq3Z2CeaYUYcOfmwZt+aMSV1QgqmFQPgYFzGir1gYs6wG
+ SrgiugWJXwJL345XLdueN2Lu5964vXJ3s14QVB3RgdKnDavLmmd39YSpbwrouvZ1G512zn7IKwZ
+ EPtT2S7ZPWh393hFu9zQOKjS14LJ
+X-Google-Smtp-Source: AGHT+IGfL1Uh2J5eG5iR8/oZnE4ckhqCcaCENSziSfsgAYw3MN8tLn350cgtMsJ0gl+lbbXQoGQZrQ==
+X-Received: by 2002:a05:6a00:b42:b0:727:3c37:d5f9 with SMTP id
+ d2e1a72fcca58-7273c37d849mr2452909b3a.26.1733772837543; 
+ Mon, 09 Dec 2024 11:33:57 -0800 (PST)
+Received: from ?IPV6:2804:7f0:bcc0:5756:767e:ee4e:f9a8:ee18?
+ ([2804:7f0:bcc0:5756:767e:ee4e:f9a8:ee18])
+ by smtp.gmail.com with ESMTPSA id
+ d2e1a72fcca58-725e2f2d5f0sm3360965b3a.40.2024.12.09.11.33.54
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 09 Dec 2024 11:33:57 -0800 (PST)
+Message-ID: <9261868b-40a4-4ed5-a887-0b56fe0c8fed@ventanamicro.com>
+Date: Mon, 9 Dec 2024 16:33:53 -0300
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v6 1/9] target/riscv: fix henvcfg potentially containing
+ stale bits
+To: =?UTF-8?B?Q2zDqW1lbnQgTMOpZ2Vy?= <cleger@rivosinc.com>,
+ qemu-riscv@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Bin Meng <bin.meng@windriver.com>
+Cc: Weiwei Li <liwei1518@gmail.com>, Liu Zhiwei
+ <zhiwei_liu@linux.alibaba.com>, Ved Shanbhogue <ved@rivosinc.com>,
+ Atish Patra <atishp@rivosinc.com>, qemu-devel@nongnu.org,
+ Frank Chang <frank.chang@sifive.com>
+References: <20241128141230.284320-1-cleger@rivosinc.com>
+ <20241128141230.284320-2-cleger@rivosinc.com>
+Content-Language: en-US
+From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+In-Reply-To: <20241128141230.284320-2-cleger@rivosinc.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: neutral client-ip=2a00:1450:4864:20::634;
- envelope-from=phil@philjordan.eu; helo=mail-ej1-x634.google.com
-X-Spam_score_int: -10
-X-Spam_score: -1.1
-X-Spam_bar: -
-X-Spam_report: (-1.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_NEUTRAL=0.779 autolearn=no autolearn_force=no
+Received-SPF: pass client-ip=2607:f8b0:4864:20::431;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pf1-x431.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -111,111 +111,87 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Alexander Graf <graf@amazon.com>
 
-We will introduce a number of devices that are specific to the vmapple
-target machine. To keep them all tidily together, let's put them into
-a single target directory.
 
-Signed-off-by: Alexander Graf <graf@amazon.com>
-Signed-off-by: Phil Dennis-Jordan <phil@philjordan.eu>
-Reviewed-by: Akihiko Odaki <akihiko.odaki@daynix.com>
-Tested-by: Akihiko Odaki <akihiko.odaki@daynix.com>
----
- MAINTAINERS             | 7 +++++++
- hw/Kconfig              | 1 +
- hw/meson.build          | 1 +
- hw/vmapple/Kconfig      | 1 +
- hw/vmapple/meson.build  | 0
- hw/vmapple/trace-events | 2 ++
- hw/vmapple/trace.h      | 1 +
- meson.build             | 1 +
- 8 files changed, 14 insertions(+)
- create mode 100644 hw/vmapple/Kconfig
- create mode 100644 hw/vmapple/meson.build
- create mode 100644 hw/vmapple/trace-events
- create mode 100644 hw/vmapple/trace.h
+On 11/28/24 11:12 AM, Clément Léger wrote:
+> With the current implementation, if we had the following scenario:
+> - Set bit x in menvcfg
+> - Set bit x in henvcfg
+> - Clear bit x in menvcfg
+> then, the internal variable env->henvcfg would still contain bit x due
+> to both a wrong menvcfg mask used in write_henvcfg() as well as a
+> missing update of henvcfg upon menvcfg update.
+> This can lead to some wrong interpretation of the context. In order to
+> update henvcfg upon menvcfg writing, call write_henvcfg() after writing
+> menvcfg. Clearing henvcfg upon writing the new value is also needed in
+> write_henvcfg() as well as clearing henvcfg upper part when writing it
+> with write_henvcfgh().
+> 
+> Signed-off-by: Clément Léger <cleger@rivosinc.com>
+> ---
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index 09899f7407e..b6019220662 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -2765,6 +2765,13 @@ F: hw/hyperv/hv-balloon*.h
- F: include/hw/hyperv/dynmem-proto.h
- F: include/hw/hyperv/hv-balloon.h
- 
-+VMapple
-+M: Alexander Graf <agraf@csgraf.de>
-+R: Phil Dennis-Jordan <phil@philjordan.eu>
-+S: Maintained
-+F: hw/vmapple/*
-+F: include/hw/vmapple/*
-+
- Subsystems
- ----------
- Overall Audio backends
-diff --git a/hw/Kconfig b/hw/Kconfig
-index 1b4e9bb07f7..2871784cfdc 100644
---- a/hw/Kconfig
-+++ b/hw/Kconfig
-@@ -41,6 +41,7 @@ source ufs/Kconfig
- source usb/Kconfig
- source virtio/Kconfig
- source vfio/Kconfig
-+source vmapple/Kconfig
- source xen/Kconfig
- source watchdog/Kconfig
- 
-diff --git a/hw/meson.build b/hw/meson.build
-index b827c82c5d7..9c4f6d0d636 100644
---- a/hw/meson.build
-+++ b/hw/meson.build
-@@ -39,6 +39,7 @@ subdir('ufs')
- subdir('usb')
- subdir('vfio')
- subdir('virtio')
-+subdir('vmapple')
- subdir('watchdog')
- subdir('xen')
- subdir('xenpv')
-diff --git a/hw/vmapple/Kconfig b/hw/vmapple/Kconfig
-new file mode 100644
-index 00000000000..8b137891791
---- /dev/null
-+++ b/hw/vmapple/Kconfig
-@@ -0,0 +1 @@
-+
-diff --git a/hw/vmapple/meson.build b/hw/vmapple/meson.build
-new file mode 100644
-index 00000000000..e69de29bb2d
-diff --git a/hw/vmapple/trace-events b/hw/vmapple/trace-events
-new file mode 100644
-index 00000000000..9ccc5790487
---- /dev/null
-+++ b/hw/vmapple/trace-events
-@@ -0,0 +1,2 @@
-+# See docs/devel/tracing.rst for syntax documentation.
-+
-diff --git a/hw/vmapple/trace.h b/hw/vmapple/trace.h
-new file mode 100644
-index 00000000000..572adbefe04
---- /dev/null
-+++ b/hw/vmapple/trace.h
-@@ -0,0 +1 @@
-+#include "trace/trace-hw_vmapple.h"
-diff --git a/meson.build b/meson.build
-index 1303664e167..bce1d21eec1 100644
---- a/meson.build
-+++ b/meson.build
-@@ -3592,6 +3592,7 @@ if have_system
-     'hw/usb',
-     'hw/vfio',
-     'hw/virtio',
-+    'hw/vmapple',
-     'hw/watchdog',
-     'hw/xen',
-     'hw/gpio',
--- 
-2.39.5 (Apple Git-154)
+
+Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+
+
+>   target/riscv/csr.c | 10 ++++++++--
+>   1 file changed, 8 insertions(+), 2 deletions(-)
+> 
+> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+> index 5d8d0d7514..98c683df60 100644
+> --- a/target/riscv/csr.c
+> +++ b/target/riscv/csr.c
+> @@ -2383,6 +2383,8 @@ static RISCVException read_menvcfg(CPURISCVState *env, int csrno,
+>       return RISCV_EXCP_NONE;
+>   }
+>   
+> +static RISCVException write_henvcfg(CPURISCVState *env, int csrno,
+> +                                    target_ulong val);
+>   static RISCVException write_menvcfg(CPURISCVState *env, int csrno,
+>                                       target_ulong val)
+>   {
+> @@ -2403,6 +2405,7 @@ static RISCVException write_menvcfg(CPURISCVState *env, int csrno,
+>           }
+>       }
+>       env->menvcfg = (env->menvcfg & ~mask) | (val & mask);
+> +    write_henvcfg(env, CSR_HENVCFG, env->henvcfg);
+>   
+>       return RISCV_EXCP_NONE;
+>   }
+> @@ -2414,6 +2417,8 @@ static RISCVException read_menvcfgh(CPURISCVState *env, int csrno,
+>       return RISCV_EXCP_NONE;
+>   }
+>   
+> +static RISCVException write_henvcfgh(CPURISCVState *env, int csrno,
+> +                                    target_ulong val);
+>   static RISCVException write_menvcfgh(CPURISCVState *env, int csrno,
+>                                        target_ulong val)
+>   {
+> @@ -2424,6 +2429,7 @@ static RISCVException write_menvcfgh(CPURISCVState *env, int csrno,
+>       uint64_t valh = (uint64_t)val << 32;
+>   
+>       env->menvcfg = (env->menvcfg & ~mask) | (valh & mask);
+> +    write_henvcfgh(env, CSR_HENVCFGH, env->henvcfg >> 32);
+>   
+>       return RISCV_EXCP_NONE;
+>   }
+> @@ -2513,7 +2519,7 @@ static RISCVException write_henvcfg(CPURISCVState *env, int csrno,
+>           }
+>       }
+>   
+> -    env->henvcfg = (env->henvcfg & ~mask) | (val & mask);
+> +    env->henvcfg = val & mask;
+>   
+>       return RISCV_EXCP_NONE;
+>   }
+> @@ -2546,7 +2552,7 @@ static RISCVException write_henvcfgh(CPURISCVState *env, int csrno,
+>           return ret;
+>       }
+>   
+> -    env->henvcfg = (env->henvcfg & ~mask) | (valh & mask);
+> +    env->henvcfg = (env->henvcfg & 0xFFFFFFFF) | (valh & mask);
+>       return RISCV_EXCP_NONE;
+>   }
+>   
 
 
