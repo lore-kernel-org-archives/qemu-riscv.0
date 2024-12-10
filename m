@@ -4,67 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0366CE7717F
-	for <qemu-riscv@archiver.kernel.org>; Tue, 10 Dec 2024 20:51:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E221BE77182
+	for <qemu-riscv@archiver.kernel.org>; Tue, 10 Dec 2024 20:51:11 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tL7Bz-0004Rj-RP; Tue, 10 Dec 2024 15:50:51 -0500
+	id 1tL7C5-0004ep-La; Tue, 10 Dec 2024 15:50:58 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1tL7Bp-0003nz-TD
- for qemu-riscv@nongnu.org; Tue, 10 Dec 2024 15:50:42 -0500
-Received: from mail-wm1-x333.google.com ([2a00:1450:4864:20::333])
+ id 1tL7Br-0003zf-Vo
+ for qemu-riscv@nongnu.org; Tue, 10 Dec 2024 15:50:44 -0500
+Received: from mail-wm1-x329.google.com ([2a00:1450:4864:20::329])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1tL7Bm-00036n-S4
- for qemu-riscv@nongnu.org; Tue, 10 Dec 2024 15:50:41 -0500
-Received: by mail-wm1-x333.google.com with SMTP id
- 5b1f17b1804b1-434a1fe2b43so60906545e9.2
+ id 1tL7Bn-000375-D3
+ for qemu-riscv@nongnu.org; Tue, 10 Dec 2024 15:50:42 -0500
+Received: by mail-wm1-x329.google.com with SMTP id
+ 5b1f17b1804b1-4361b0ec57aso4196935e9.0
  for <qemu-riscv@nongnu.org>; Tue, 10 Dec 2024 12:50:38 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1733863837; x=1734468637; darn=nongnu.org;
+ d=linaro.org; s=google; t=1733863838; x=1734468638; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=8zpB1ID89GrvPttzETXvX6+8YD37TqJ7koaKt36/QMg=;
- b=atDuuNMGw6vq7t5gLgia0E0cUJd+hSFGhK/BKG1EroUKmOaotw6WG9uCJ5kZQTTx7N
- a+4d0w3E5H6UyMSLJBWM+kLodNVG3uTAPdXIf+avvGpx6OFoDWsnLCrzxOu41c59joGa
- jRZ1Tpge+Wql03Cun6r3bOMRCoKTZjGtdH2+4+14yqjmZJqnqnuTyst9kWV3iFWI7bsH
- 0c73oSw7S+hARwd9sgMEqfJoZJ9fnrmtFtMONuIqn1ywDUNaVyN45Z3V0Gwll5NgbAlM
- 3bcQuTfGSrCCsaa6FxNQ1Lf6Os2z6RzrDm3orZg6E31j7RdnoeF4T8XL0Szj2v6t44Zj
- L92Q==
+ bh=zmufaNphf2V1gjeMaS6HYVWY1pzqo9T3TKjafKi2Pnk=;
+ b=UVQ8n7c0L02p6WP2pRRbzfu1rajSgjYqtxRA3jRDRHSukLDlE7FVXXfqSFpWs6U+/S
+ w4IQb/pZ5zSv+DPIlbxzB5+OOKRuuTI1EvbdaMeIAb6zF5n+7/Fl1fGFyDq9JuyHhte5
+ VrZIsiAz0wzPz2PzL0YNb0xqlcByiYd20z4kcvBSj3kfV/asPvAOYvoQDSOgXGD5oIkZ
+ hlRreFVrWwLR0NdsSQQhc4GmoQuFZZOEDU9w2KB17XlgAsV9kwAFHpiMs8b1Emx9+4Uy
+ QxjUQPpEbPi59usm/4pPmbZDiCqQw1YmvK3osh5NHZieNliQbItar/CE1A/v/tjmdHfP
+ fcjg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733863837; x=1734468637;
+ d=1e100.net; s=20230601; t=1733863838; x=1734468638;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=8zpB1ID89GrvPttzETXvX6+8YD37TqJ7koaKt36/QMg=;
- b=L+Ie3j0s16Lsma0Kju7POCQVIYETkLGcua2wqJbNMAU5EQnu4x7pxlC4G/NpN2fsRF
- FOCYlhTtnpwpWsWvs8eEh4aUf6cGrt/KEwH8TeeEz20xA1lL2abIvh3qV4hBhMMUtDdT
- BhlVZwZ5j7d+p8ZV1bZdbFJBMCWnTb+P7t7FbxNoXpNjCBeXCf8iyomZFP1MPwOad7CN
- ek3N9Jzh3sp68rEOPAM0r/vAtQq9WQs8syVH03oViotAoZduqCUu5s4rwzcvS9tYaWmt
- MdrY4Qb2k9+KbdormgNoK7pefLZziI/j9546awk3Dp4Pq2XR9F2Q+FlQx+UgLSYkl6GZ
- bJkg==
+ bh=zmufaNphf2V1gjeMaS6HYVWY1pzqo9T3TKjafKi2Pnk=;
+ b=Z4NKB4d2M1d6lghXNKiIIrkTwGCmyOGeDzqyU8nPbI0lAFaOJDRWLYg5vRZDCugxk9
+ W8JWVQkT7NX7RrE8eRXne1ew0tmc3h0SYnteqBBq1/Vjxd9PBhCbvK/0LZPlrmMvT3eq
+ qSQnHqjElPtimw1tL5i+KwQHgfzOMmLFWJYw+LtHcEXTi+DP/KqYwFblZvnjWJmqva+5
+ 69StIWAWFguoWSenod6HOZJVm27ZkZu5O+nyJxd9n5kiPWQm3g0vNQWzsCNpccqq+x1E
+ DDWNOpPx063tlYnomg73j2NB+oBvBrAp2UFZB82B1QMf2PnG9AFnwfZn4taWBz0zFxeP
+ jsvA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCU2uk3qEwAHAI1ib2AXYuoVTEz1vAcLueNqBagLy/KUmXL+jrf4ESsVg1rWBSJHrMMAiZ2KQl5SQ2GU@nongnu.org
-X-Gm-Message-State: AOJu0YzivgRMgj7v0gy+vmMkD7Q9iYpvmB+DLF9XWN06wmP2kNiqoLCR
- 6jUq1eej3nomkeJH/VeRUKnLZ/1/bmovJLerAwA5Tfz4BX1tP0+jCxItwISseeM=
-X-Gm-Gg: ASbGncuVaoXPgrzc4jUqYvtgIrGzRnx4q1Zk92QaLS7pE/wVDNqekSKrRvMiHjv3dyK
- /NVXlmo9Lpac3H+HQU36UBFnuoadKuAMLCSaxCconn3nP05SPKeAhbeJ4KhkqdVpAof6VT9u2kU
- XtUPhc62aQqpuzyGCmGN2cExPtCY+yekv5g5DJq0lk3vqkvzANaSN2MMY/CJalBJQjk+54/wKxk
- XKM4A3PlFY4Lo0z0xR5bS5m0BUT+j2YWlqNWJohCEbyAdiXLOgC
-X-Google-Smtp-Source: AGHT+IEwLqWJ5FbO12N2AO5J5hliFT2FMAnni7lLNghg6dFlG3oHZgSdmMmwQaHxoewRItVbW8ROvw==
-X-Received: by 2002:a05:600c:3151:b0:435:1b:65ee with SMTP id
- 5b1f17b1804b1-4361c42c81fmr1674215e9.24.1733863837032; 
+ AJvYcCVT+6lSt8KgbKp17jz16qeOB9jTMN9/OZpGr6zymjQVyPNSrhficVg2Qwe0oF8sI2GKQr0dgjd+9ULy@nongnu.org
+X-Gm-Message-State: AOJu0Ywxq4QFW26Dbnx9qA6mBQ6FpJ+HQ4xvsNQgldmHl/1Ph0sGYHLi
+ ixMAdNmobyPosu/D6sl+eHtX1YJAlGJmRaVzRBDLrLGGEd9ll/TddK9Tjx1eKC0=
+X-Gm-Gg: ASbGnctD4GZMOFq/4ZWZ1xZd5mh8cKQKXKDCg6j5HayMXlQAN+qEEXDLSI+kCmd078I
+ Q0vt0PTe7NDOperVapo2m94EYfPuzJ+jgPmxMHU17Wddw0JgiyxA0cxQSILk1jTXK/ZZ+P7uuDj
+ JZwylJOITYgdn+R1l/9PKZ2gjFJIH3B8vzcttUUS+8jAW/QazVRtf4KuRpwoPGdy0YYHVF2Az12
+ FYF9Gh1FlimBi80v8FRLrZNnc7Ezd5uuiGaBL0mxdT6Z72IoKGw
+X-Google-Smtp-Source: AGHT+IHkAlr+6kQjaQRIxwrd2oCXtoHUNcaJR6B1xJCz9IEp0SuUjqpRHbOLvCCfEAgfyRv9mpQFvA==
+X-Received: by 2002:a05:600c:1c82:b0:434:f819:251a with SMTP id
+ 5b1f17b1804b1-4361c396f09mr1898885e9.9.1733863837644; 
  Tue, 10 Dec 2024 12:50:37 -0800 (PST)
 Received: from draig.lan ([85.9.250.243]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-434ef283e87sm127814445e9.39.2024.12.10.12.50.34
+ 5b1f17b1804b1-435ff2f46d3sm26878345e9.19.2024.12.10.12.50.34
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
  Tue, 10 Dec 2024 12:50:35 -0800 (PST)
 Received: from draig.lan (localhost [IPv6:::1])
- by draig.lan (Postfix) with ESMTP id D2146604EC;
+ by draig.lan (Postfix) with ESMTP id E4F1060B86;
  Tue, 10 Dec 2024 20:43:50 +0000 (GMT)
 From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
 To: qemu-devel@nongnu.org
@@ -98,17 +98,18 @@ Cc: Daniel Henrique Barboza <dbarboza@ventanamicro.com>, qemu-s390x@nongnu.org,
  Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
  "Michael S. Tsirkin" <mst@redhat.com>,
  Alistair Francis <alistair.francis@wdc.com>
-Subject: [PATCH 17/20] tests/qtest: move clock_steps to after checks
-Date: Tue, 10 Dec 2024 20:43:46 +0000
-Message-Id: <20241210204349.723590-18-alex.bennee@linaro.org>
+Subject: [PATCH 18/20] system/qtest: properly feedback results of
+ clock_[step|set]
+Date: Tue, 10 Dec 2024 20:43:47 +0000
+Message-Id: <20241210204349.723590-19-alex.bennee@linaro.org>
 X-Mailer: git-send-email 2.39.5
 In-Reply-To: <20241210204349.723590-1-alex.bennee@linaro.org>
 References: <20241210204349.723590-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::333;
- envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x333.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::329;
+ envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x329.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -131,65 +132,82 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-In the qtest environment time will not step forward if the system is
-paused (timers disabled) or we have no timer events to fire. As a
-result VirtIO events are responded to directly and we don't need to
-step time forward.
+Time will not advance if the system is paused or there are no timer
+events set for the future. In absence of pending timer events
+advancing time would make no difference the system state. Attempting
+to do so would be a bug and the test or device under test would need
+fixing.
 
-Potentially the clock_step calls could be removed all together but as
-we may implement async behaviour later lets just move them to after
-the principle check for now.
-
-Future qtest patches will assert that time actually changes with a
-step is requested.
+Tighten up the result reporting to `FAIL` if time was not advanced.
 
 Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
+Resolves: https://gitlab.com/qemu-project/qemu/-/issues/2687
 ---
- tests/qtest/libqos/virtio.c | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+ system/qtest.c | 23 ++++++++++++++---------
+ 1 file changed, 14 insertions(+), 9 deletions(-)
 
-diff --git a/tests/qtest/libqos/virtio.c b/tests/qtest/libqos/virtio.c
-index a21b6eee9c..64682e66b8 100644
---- a/tests/qtest/libqos/virtio.c
-+++ b/tests/qtest/libqos/virtio.c
-@@ -170,10 +170,10 @@ void qvirtio_wait_queue_isr(QTestState *qts, QVirtioDevice *d,
-     gint64 start_time = g_get_monotonic_time();
- 
-     for (;;) {
--        qtest_clock_step(qts, 100);
-         if (d->bus->get_queue_isr_status(d, vq)) {
-             return;
+diff --git a/system/qtest.c b/system/qtest.c
+index 12703a2045..d9501153a4 100644
+--- a/system/qtest.c
++++ b/system/qtest.c
+@@ -78,6 +78,11 @@ static void *qtest_server_send_opaque;
+  * let you adjust the value of the clock (monotonically).  All the commands
+  * return the current value of the clock in nanoseconds.
+  *
++ * If the commands FAIL then time wasn't advanced which is likely
++ * because the machine was in a paused state or no timer events exist
++ * in the future. This will cause qtest to abort and the test will
++ * need to check its assumptions.
++ *
+  * .. code-block:: none
+  *
+  *  > clock_step
+@@ -710,7 +715,8 @@ static void qtest_process_command(CharBackend *chr, gchar **words)
+             qtest_sendf(chr, "OK little\n");
          }
-+        qtest_clock_step(qts, 100);
-         g_assert(g_get_monotonic_time() - start_time <= timeout_us);
-     }
- }
-@@ -192,8 +192,8 @@ uint8_t qvirtio_wait_status_byte_no_isr(QTestState *qts, QVirtioDevice *d,
-     uint8_t val;
+     } else if (qtest_enabled() && strcmp(words[0], "clock_step") == 0) {
+-        int64_t ns;
++        int64_t old_ns = qemu_clock_get_ns(QEMU_CLOCK_VIRTUAL);
++        int64_t ns, new_ns;
  
-     while ((val = qtest_readb(qts, addr)) == 0xff) {
--        qtest_clock_step(qts, 100);
-         g_assert(!d->bus->get_queue_isr_status(d, vq));
-+        qtest_clock_step(qts, 100);
-         g_assert(g_get_monotonic_time() - start_time <= timeout_us);
-     }
-     return val;
-@@ -219,7 +219,6 @@ void qvirtio_wait_used_elem(QTestState *qts, QVirtioDevice *d,
-     for (;;) {
-         uint32_t got_desc_idx;
- 
--        qtest_clock_step(qts, 100);
- 
-         if (d->bus->get_queue_isr_status(d, vq) &&
-             qvirtqueue_get_buf(qts, vq, &got_desc_idx, len)) {
-@@ -227,6 +226,7 @@ void qvirtio_wait_used_elem(QTestState *qts, QVirtioDevice *d,
-             return;
+         if (words[1]) {
+             int ret = qemu_strtoi64(words[1], NULL, 0, &ns);
+@@ -719,11 +725,10 @@ static void qtest_process_command(CharBackend *chr, gchar **words)
+             ns = qemu_clock_deadline_ns_all(QEMU_CLOCK_VIRTUAL,
+                                             QEMU_TIMER_ATTR_ALL);
          }
+-        qemu_clock_advance_virtual_time(
+-            qemu_clock_get_ns(QEMU_CLOCK_VIRTUAL) + ns);
++        new_ns = qemu_clock_advance_virtual_time(old_ns + ns);
+         qtest_send_prefix(chr);
+-        qtest_sendf(chr, "OK %"PRIi64"\n",
+-                    (int64_t)qemu_clock_get_ns(QEMU_CLOCK_VIRTUAL));
++        qtest_sendf(chr, "%s %"PRIi64"\n",
++                    new_ns > old_ns ? "OK" : "FAIL", new_ns);
+     } else if (strcmp(words[0], "module_load") == 0) {
+         Error *local_err = NULL;
+         int rv;
+@@ -740,16 +745,16 @@ static void qtest_process_command(CharBackend *chr, gchar **words)
+             qtest_sendf(chr, "FAIL\n");
+         }
+     } else if (qtest_enabled() && strcmp(words[0], "clock_set") == 0) {
+-        int64_t ns;
++        int64_t ns, new_ns;
+         int ret;
  
-+        qtest_clock_step(qts, 100);
-         g_assert(g_get_monotonic_time() - start_time <= timeout_us);
-     }
- }
+         g_assert(words[1]);
+         ret = qemu_strtoi64(words[1], NULL, 0, &ns);
+         g_assert(ret == 0);
+-        qemu_clock_advance_virtual_time(ns);
++        new_ns = qemu_clock_advance_virtual_time(ns);
+         qtest_send_prefix(chr);
+-        qtest_sendf(chr, "OK %"PRIi64"\n",
+-                    (int64_t)qemu_clock_get_ns(QEMU_CLOCK_VIRTUAL));
++        qtest_sendf(chr, "%s %"PRIi64"\n",
++                    new_ns == ns ? "OK" : "FAIL", new_ns);
+     } else if (process_command_cb && process_command_cb(chr, words)) {
+         /* Command got consumed by the callback handler */
+     } else {
 -- 
 2.39.5
 
