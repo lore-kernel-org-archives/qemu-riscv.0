@@ -4,68 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2C06EE7717F
-	for <qemu-riscv@archiver.kernel.org>; Tue, 10 Dec 2024 20:45:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 25016E7717F
+	for <qemu-riscv@archiver.kernel.org>; Tue, 10 Dec 2024 20:45:37 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tL75n-0007MH-Es; Tue, 10 Dec 2024 15:44:27 -0500
+	id 1tL75S-000752-MO; Tue, 10 Dec 2024 15:44:06 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1tL75S-00074N-9U
- for qemu-riscv@nongnu.org; Tue, 10 Dec 2024 15:44:06 -0500
-Received: from mail-wm1-x335.google.com ([2a00:1450:4864:20::335])
+ id 1tL75M-0006ys-Tc
+ for qemu-riscv@nongnu.org; Tue, 10 Dec 2024 15:44:01 -0500
+Received: from mail-wm1-x32e.google.com ([2a00:1450:4864:20::32e])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1tL75I-00020p-OI
- for qemu-riscv@nongnu.org; Tue, 10 Dec 2024 15:44:06 -0500
-Received: by mail-wm1-x335.google.com with SMTP id
- 5b1f17b1804b1-434ab114753so40269965e9.0
- for <qemu-riscv@nongnu.org>; Tue, 10 Dec 2024 12:43:56 -0800 (PST)
+ id 1tL75G-0001zR-Mk
+ for qemu-riscv@nongnu.org; Tue, 10 Dec 2024 15:44:00 -0500
+Received: by mail-wm1-x32e.google.com with SMTP id
+ 5b1f17b1804b1-434fa6bf744so16242785e9.2
+ for <qemu-riscv@nongnu.org>; Tue, 10 Dec 2024 12:43:54 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1733863435; x=1734468235; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=tEl5ZxIur5QRWg63f27lDW4UGnFwRWpUXbJtYvdKy8I=;
- b=DZo2R3AiX2zuOs7SEzcX00H/VZKr6K2Nc7IH67jPi3LJirhXadWPFqPlv7vEo86ZcZ
- Vx1GG8Ov+3UB511qXrgvE+M1Fgc2Zqkae4Zr3/ev0/28RtH3PyFoUYEz7eazMMEb36kU
- uLG4VJ8ydcJuaTYXC/ALhLHiKJ3YRChbqTORcnZVRQ4/MwKxYRszFVsffpU4qp8dtCPh
- VRKp4k5UB8dOO1xGTMoqfBGXCLG/pHYZvD2xlldyRTqEA0t2lx3y3uAMJwlLcxkhr1ss
- opppSwmboO3Wj4gbQopnNynAN+Wl/GKGXKObwTaqJugCDt8huozRxTcafUMGpQbU++Ul
- UGVA==
+ d=linaro.org; s=google; t=1733863433; x=1734468233; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=XRWNv/TWApB4FZiRPy0+mcCq2y3awyCcpQtghS1vd8E=;
+ b=QKY30bZ00KgYGpHU4IrgIi/jM/Ht5Ivw35AAGI5+i5/VJuOvQ6zvjPySqDxy0F5MLm
+ DimJAuT/KgdvEwjKrybT4gH8ZmoD+YAIcdqXD3aeXVe4l8pWicZp5tCVs3pRRNOQyZDx
+ 8TsfrrpIAGo3RTyC6+nYPekmxSAGR+0wTJMLb/2nRj9IOkfq6bCafN7hdPacuRdpReen
+ IHrMPPM7CDTZzVZyUOkbjsEspNGFWaF6WsuKUQsrB4OzTZ9FUNe919nCCsMCkgr+po7w
+ HD9IkJbpVIBeHiOx4jAiTNsrN3TogNOLLGoLcom2bmwdhVWPmJpGel8mbaKf3b0FWvi3
+ /Z6Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733863435; x=1734468235;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=tEl5ZxIur5QRWg63f27lDW4UGnFwRWpUXbJtYvdKy8I=;
- b=KQjAq+dHZJIWzzWL2nFmZMyrjfOtA8BpJK9L75zlLsIgWFCEHFauKRKLLcQzZE8Xt1
- chOObTADZ4fhJZdnmDOovG3RRRlxFeSzps16Mjql1f9lqlUTI2aZQkfd2p/T9LacuQNL
- q9ynjjESNkBFnKLakuBAWtSWxwnLqdGDnrFwxBjDekDbINAWy6q1SKsfiMd8SzStwDtl
- DWEpaZLA0mc8JJf6/UaqA/6v4FV8ocexSUfxphkRZ7rJNtNl2SeuKwz7pSq/wrL+KjfX
- 1cEiCNUKfAFec/jlrz+Cuq5opTdJw/ktHycWkpE4GnHhoIWnmaT2ZBUSlnYw9oRRBpvp
- AIaw==
+ d=1e100.net; s=20230601; t=1733863433; x=1734468233;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=XRWNv/TWApB4FZiRPy0+mcCq2y3awyCcpQtghS1vd8E=;
+ b=IRnwmRxltHNsk8rwGUV3QZ520cISWc5xipsCqkZftBjtA/n4172Zm/yA5oLlUiQlTW
+ RKgJDxUbLRqbY2HPqt6YXTU6TcaO0WOxfB39mm7UfgiPECFxPw07oR6B1/ekw/ZCVUsS
+ cM/Nnkp8MUTiRf4sRbYBLHNVZY4uMJfKzBk4ykbSFKS6/A7USi4YSDNe5u5c8U9wXAqN
+ 7C/SdDzN8B1ryx+E57XxnHNSbOuUZ8V3wgkIQrCP4KsyEun7HET6S5r81C33h7ZjYNdi
+ yfpGiAvKPBTKRtxmmcmswpWv+5ErXrbs8V7AzzJgChpTc8tI2YmpjqhNEwElHS+udoHg
+ 0ipg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWhHEc7pGhJ/VqUYgBn92AK9d2WsNRkdH5E5fjdOUaItA6h+thw16UMuqqnMoIavQHXIsyyh1m/zJrQ@nongnu.org
-X-Gm-Message-State: AOJu0YwDWg3bztGnA8Ok+FOQboCaeUM7gz4FFF+hOFywiAU0MlEYRSBQ
- 8rKmpVzlP1qTIOpOVfvlyQcKgp8VWcoOQotL+BVA5qGKMoROAZjUSCJZ+relvs4=
-X-Gm-Gg: ASbGnctEHF3/P62JQ8AwXJJFEROO+uHv85SgsnhhAcjwyg87qzjaEy03YG1AptT/kEr
- KzUr6HXRXTY91h1f4y2+h0OnfoYwDBzyEqgt9z0IdUhcd49cZxrwc7lQTUhRMYpXKLjDPSx00hP
- lUa4ycyr57KhNKRszVSjSSYup4/jVJUOIPJU2CE27rQ3p9ce5k4BCaQ39wanN1qx42eCtJz5Df/
- tzSUoGlB/SHx66cixyny6ruXTX27pUmLYHGv3hIfVrH3VznzwlT
-X-Google-Smtp-Source: AGHT+IEBHhpLlOFQFbhq8X1TdDZ3+EwLyNxVW+ftlgnHPRmOGFVvkDULP1UX9X1fOMA85iXBf+BmUQ==
-X-Received: by 2002:a5d:6487:0:b0:385:f349:ffef with SMTP id
- ffacd0b85a97d-3864ce93b84mr394132f8f.41.1733863435197; 
- Tue, 10 Dec 2024 12:43:55 -0800 (PST)
-Received: from draig.lan ([85.9.250.243]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3861ecf3efasm16623919f8f.17.2024.12.10.12.43.51
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ AJvYcCW9ULwMziTOErylE/Vyh4CAyJ1WCJcGNcZh9dH4zqmD+9dGGcKXlOaqy7qYBGquZWwFp8o1NQbgF/MN@nongnu.org
+X-Gm-Message-State: AOJu0YzgcZNkaAE6ZiGsoqRVjsR6DlQzTC3jP+77IBBrLUG1JPAMN1LY
+ BGMUG5ZJSfGKZbWy/Ea/PItK6xuJ/oM3KBqRVCrj+4umothyiS4EjpltVgG9Cps=
+X-Gm-Gg: ASbGnct4h+wH/KvLmIOXBwJLADdb8/0KXXXAQfuLvT7C6DQ+TzUyAym6gc3PPFpOTUq
+ IUCiZY44/dchvb3CvL0YfSWock7apwzA8+9Ob1/M4QhjLozLBVUm//7xObWDN2vg0fj4sTsXaAU
+ Z1Jrgnzi4qa6jPfTq64Et6E9w0ODIJcY5141xdtQ7Lix3PagFZCVgHQaPBWD1vFRuFI8VETTUxL
+ TamSXdKbW1C8L0niSrQz4tvWDukdA14O8PiTZDlm+yS/fPDP0On
+X-Google-Smtp-Source: AGHT+IGkmi88FnDs8R8bYlRVGNYC7VXbqQdjkVeYKDQILouG8LBR2/FW78cUWGpF687x9ouk0NUxyA==
+X-Received: by 2002:a05:600c:5122:b0:42c:c401:6d8b with SMTP id
+ 5b1f17b1804b1-4361c38d8edmr1804255e9.7.1733863433071; 
  Tue, 10 Dec 2024 12:43:53 -0800 (PST)
+Received: from draig.lan ([85.9.250.243]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-3862f0e6ea2sm13170856f8f.79.2024.12.10.12.43.50
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 10 Dec 2024 12:43:51 -0800 (PST)
 Received: from draig.lan (localhost [IPv6:::1])
- by draig.lan (Postfix) with ESMTP id 077C05FCD8;
- Tue, 10 Dec 2024 20:43:50 +0000 (GMT)
+ by draig.lan (Postfix) with ESMTP id 6DB445F87D;
+ Tue, 10 Dec 2024 20:43:49 +0000 (GMT)
 From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Daniel Henrique Barboza <dbarboza@ventanamicro.com>, qemu-s390x@nongnu.org,
@@ -97,19 +96,16 @@ Cc: Daniel Henrique Barboza <dbarboza@ventanamicro.com>, qemu-s390x@nongnu.org,
  Nicholas Piggin <npiggin@gmail.com>,
  Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
  "Michael S. Tsirkin" <mst@redhat.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Anders Roxell <anders.roxell@linaro.org>
-Subject: [PATCH 07/20] tests/functional: update the mips64el tuxrun tests
-Date: Tue, 10 Dec 2024 20:43:36 +0000
-Message-Id: <20241210204349.723590-8-alex.bennee@linaro.org>
+ Alistair Francis <alistair.francis@wdc.com>
+Subject: [PATCH 00/20] testing/next: functional tests and qtest timers
+Date: Tue, 10 Dec 2024 20:43:29 +0000
+Message-Id: <20241210204349.723590-1-alex.bennee@linaro.org>
 X-Mailer: git-send-email 2.39.5
-In-Reply-To: <20241210204349.723590-1-alex.bennee@linaro.org>
-References: <20241210204349.723590-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::335;
- envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x335.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::32e;
+ envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x32e.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -132,37 +128,75 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Now there are new up to date images available we should update to them.
+There are two parts to this series. The first is the updated images
+for all the guests that didn't make it into 9.2. There are also some
+new functional tests for virtio-gpu along with some other clean-ups.
 
-Cc: Anders Roxell <anders.roxell@linaro.org>
-Reviewed-by: Thomas Huth <thuth@redhat.com>
-Tested-by: Thomas Huth <thuth@redhat.com>
-Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
-Message-Id: <20241121165806.476008-28-alex.bennee@linaro.org>
----
- tests/functional/test_mips64el_tuxrun.py | 8 ++++----
- 1 file changed, 4 insertions(+), 4 deletions(-)
+The qtest patches focus on ensuring things calling clock_step and
+clock_set actually pay attention to return values. Currently only the
+virtio tests needed a little re-jigging although arguably the timeout
+loops aren't needed at all.
 
-diff --git a/tests/functional/test_mips64el_tuxrun.py b/tests/functional/test_mips64el_tuxrun.py
-index 819549a27b..0a24757c51 100755
---- a/tests/functional/test_mips64el_tuxrun.py
-+++ b/tests/functional/test_mips64el_tuxrun.py
-@@ -17,11 +17,11 @@
- class TuxRunMips64ELTest(TuxRunBaselineTest):
- 
-     ASSET_MIPS64EL_KERNEL = Asset(
--        'https://storage.tuxboot.com/20230331/mips64el/vmlinux',
--        'd4e08965e2155c4cccce7c5f34d18fe34c636cda2f2c9844387d614950155266')
-+        'https://storage.tuxboot.com/buildroot/20241119/mips64el/vmlinux',
-+        '0d2829a96f005229839c4cd586d4d8a136ea4b488d29821611c8e97f2266bfa9')
-     ASSET_MIPS64EL_ROOTFS = Asset(
--        'https://storage.tuxboot.com/20230331/mips64el/rootfs.ext4.zst',
--        'fba585368f5915b1498ed081863474b2d7ec4e97cdd46d21bdcb2f9698f83de4')
-+        'https://storage.tuxboot.com/buildroot/20241119/mips64el/rootfs.ext4.zst',
-+        '69c8b69a4f1582ce4c6f01a994968f5d73bffb2fc99cbeeeb26c8b5a28eaeb84')
- 
-     def test_mips64el(self):
-         self.set_machine('malta')
+Please review:
+
+  tests/functional: extend test_aarch64_virt with vulkan test
+  tests/functional: remove hacky sleep from the tests
+  system/qtest: properly feedback results of clock_[step|set]
+  tests/qtest: move clock_steps to after checks
+  util/qemu-timer: fix indentation
+
+Alex.
+
+Alex Bennée (19):
+  tests/functional: update the arm tuxrun tests
+  tests/functional: update the i386 tuxrun tests
+  tests/functional: add a m68k tuxrun tests
+  tests/functional: update the mips32 tuxrun tests
+  tests/functional: update the mips32el tuxrun tests
+  tests/functional: update the mips64 tuxrun tests
+  tests/functional: update the mips64el tuxrun tests
+  tests/functional: update the ppc32 tuxrun tests
+  tests/functional: update the ppc64 tuxrun tests
+  tests/functional: update the riscv32 tuxrun tests
+  tests/functional: update the riscv64 tuxrun tests
+  tests/functional: update the s390x tuxrun tests
+  tests/functional: update the sparc64 tuxrun tests
+  tests/functional: update the x86_64 tuxrun tests
+  util/qemu-timer: fix indentation
+  tests/qtest: move clock_steps to after checks
+  system/qtest: properly feedback results of clock_[step|set]
+  tests/functional: remove hacky sleep from the tests
+  tests/functional: extend test_aarch64_virt with vulkan test
+
+Pierrick Bouvier (1):
+  tests/functional/aarch64: add tests for FEAT_RME
+
+ system/qtest.c                               |  23 ++--
+ tests/qtest/libqos/virtio.c                  |   6 +-
+ util/qemu-timer.c                            |   2 +-
+ tests/functional/meson.build                 |   5 +
+ tests/functional/test_aarch64_rme_sbsaref.py |  70 +++++++++++++
+ tests/functional/test_aarch64_rme_virt.py    | 100 ++++++++++++++++++
+ tests/functional/test_aarch64_virt.py        | 105 ++++++++++++++++---
+ tests/functional/test_arm_tuxrun.py          |  28 ++---
+ tests/functional/test_i386_tuxrun.py         |   8 +-
+ tests/functional/test_m68k_tuxrun.py         |  34 ++++++
+ tests/functional/test_mips64_tuxrun.py       |   8 +-
+ tests/functional/test_mips64el_tuxrun.py     |   8 +-
+ tests/functional/test_mips_tuxrun.py         |   8 +-
+ tests/functional/test_mipsel_tuxrun.py       |   8 +-
+ tests/functional/test_ppc64_tuxrun.py        |  16 +--
+ tests/functional/test_ppc_tuxrun.py          |   8 +-
+ tests/functional/test_riscv32_tuxrun.py      |   8 +-
+ tests/functional/test_riscv64_tuxrun.py      |  16 +--
+ tests/functional/test_s390x_tuxrun.py        |   8 +-
+ tests/functional/test_sparc64_tuxrun.py      |   8 +-
+ tests/functional/test_x86_64_tuxrun.py       |   8 +-
+ 21 files changed, 387 insertions(+), 98 deletions(-)
+ create mode 100755 tests/functional/test_aarch64_rme_sbsaref.py
+ create mode 100755 tests/functional/test_aarch64_rme_virt.py
+ create mode 100644 tests/functional/test_m68k_tuxrun.py
+
 -- 
 2.39.5
 
