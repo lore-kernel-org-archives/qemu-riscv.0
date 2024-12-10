@@ -4,67 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F31FBE7717F
-	for <qemu-riscv@archiver.kernel.org>; Tue, 10 Dec 2024 20:48:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2A5B6E77180
+	for <qemu-riscv@archiver.kernel.org>; Tue, 10 Dec 2024 20:49:11 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tL75l-0007LO-Lz; Tue, 10 Dec 2024 15:44:25 -0500
+	id 1tL75s-0007SJ-SZ; Tue, 10 Dec 2024 15:44:32 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1tL75U-00075d-1e
- for qemu-riscv@nongnu.org; Tue, 10 Dec 2024 15:44:08 -0500
-Received: from mail-wm1-x330.google.com ([2a00:1450:4864:20::330])
+ id 1tL75d-0007Cp-Oq
+ for qemu-riscv@nongnu.org; Tue, 10 Dec 2024 15:44:19 -0500
+Received: from mail-wm1-x32e.google.com ([2a00:1450:4864:20::32e])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1tL75K-00021h-1D
- for qemu-riscv@nongnu.org; Tue, 10 Dec 2024 15:44:07 -0500
-Received: by mail-wm1-x330.google.com with SMTP id
- 5b1f17b1804b1-434e406a547so25726145e9.3
- for <qemu-riscv@nongnu.org>; Tue, 10 Dec 2024 12:43:57 -0800 (PST)
+ id 1tL75O-000253-BX
+ for qemu-riscv@nongnu.org; Tue, 10 Dec 2024 15:44:17 -0500
+Received: by mail-wm1-x32e.google.com with SMTP id
+ 5b1f17b1804b1-434a7ee3d60so77285e9.1
+ for <qemu-riscv@nongnu.org>; Tue, 10 Dec 2024 12:44:01 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1733863436; x=1734468236; darn=nongnu.org;
+ d=linaro.org; s=google; t=1733863441; x=1734468241; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=4gnnOboOf/0hyHRkIZm1r+Edttpq+V6vfS59OPkMcZA=;
- b=fq+MvMSKkYg/GQwoLTPY+l72J2muUtlY4Zjb8ev2rVNMO7cwMPqtJ95SpuUpR2A5fb
- UhZbhsq4lvrCnO/FnckV5esBPIbtBvrc2fgDWlix6l59pnp2zi3EJ2YgO4iQzaUOoaIz
- zOmAth2NjIW4OYaXMVinHshYEPLPhElA2vj9C1723VgCxtJcVZiykNyKtT2KJzw4Epye
- sVZ0ShTvvtEfKdMjgf+CZts2y92S6majk9z509q6ZhcIx1kmeO8FUYoVtq770//Ahns7
- GhI8QcRcdWJllcPTsPMURCG3bb5dvqUmmAE2nEtomhcP3qSASUVLl5LQKMgM+PEGhq50
- pnGQ==
+ bh=gO7Rkh0kNcH52cHtxwJZh0wpmiOhoRyHZYNCvSJEn60=;
+ b=qRhFjLNA3Etj3NRC1HRzE5lodG12xSKjFoiuyKjG9xOIFqmzou/mSbHH4+jbmuxqbi
+ +IwdpK33wSgcChpS5uEYEbm0J120BtCWOfsqeZoIjQfEekS6/3Ypl9amMkJcLznE1MOs
+ g1LY6wfCdoKs6b1X7UpR7YzdB72axFWUSqGzPk/wOu15J/SqCWnvrxSwL1k7fUCgZ9xB
+ NejunDpOCIBBpfxbbM6U1KFvrYK8DQ3AsEjOsIb+4Vc2bUqWN1kNc68t8sNci15/sd1+
+ KhgIFgXBS1ZLZNAntOZIM0PkFA71K5k8RozBARrWxTgNMkBWsvhpbm+Uo83BF1PrQg8E
+ VIYw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733863436; x=1734468236;
+ d=1e100.net; s=20230601; t=1733863441; x=1734468241;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=4gnnOboOf/0hyHRkIZm1r+Edttpq+V6vfS59OPkMcZA=;
- b=vgtEaVYJIKiVbMxm4jzkE1XfRJVO0WndUcBNR2pFngXgY8zDwuLdXHibcHum0VvRCO
- OSXg91C1hGxmSkE1/v0SmPcDFFjkAqb2hQVGKTSWT8tsWhZTscuuGBDSE3p2frggjyYK
- yyqcrAozHrIbUXhKRRvfY5bey7aYoLy5s3t74A1noZyUGXOaTSZ+DX27mcpp0buUrcZ+
- fhz5TIAKD7upi4oSQ4xwdVcYjQnzRn9SgIDJ9KERz8O++xhhRqPdzJyeqi+KScEpgroO
- Ks4hcEQ0w4ZWBVLLPKw6xiNlyno2aHe2UWWrozcwT+wvgFvYDuLu198fZMzEhjIlhaDn
- uOdQ==
+ bh=gO7Rkh0kNcH52cHtxwJZh0wpmiOhoRyHZYNCvSJEn60=;
+ b=bPpHzimLUU1J4NUi5YrnPltVQXHGM0TR+ItmcCoo3bAV5vEisafDSq7xxclTtswic7
+ d04GhDIY7kjVb3Vb8+MbAAS/bA7pwSgpE4GCN8TjajupTrhWkRaLzZdd6Ks4afW3FZu2
+ uBh8B1cTxwnMWE9qOUzLot+RqaLi3Uj71jHoecDINtE/7en0lC5hoi3mMZy5KVvX72PR
+ dWWLyASzwobBvCuvoDsoOdNhUeq/kRZcYexLTcdaRKI8JnIfzIIZvr8LBH/sKykrCJv9
+ aLJNXe9I+r9dbx3xZJbeVeqoJ0bMaOZcP32idGJfmG1scvR5VnBeTU+u77fnhhawVu57
+ 2P0w==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVJvjh20RSoyC1jQvMerpqMNvKfqpkM95wjh0FJp+bWCHVwoEK/eRdyAGFjPhRn7YiAsPBTYBiA9Ne+@nongnu.org
-X-Gm-Message-State: AOJu0YxajwWLCetPLf/5E5vi1BHReFFpkW5ZmGwRydyevJ7uOAX/0lEc
- R181TQp52j140XtpKzCSlm54hxgrlbXIWwTgEie1R8ELJg8JVtJAAQ1JoPwvTCY=
-X-Gm-Gg: ASbGncs1Szpvp88C3YCOe1CKB4gzglcb3yRKx5iz6cc1i0fyHHc7bPw+oJzwYPOBNB3
- YL+/wsMV0C0K6zqytU4PTLoGj2HWsu9jyqdF5HHCPrJL3KhmkIOkXHWZFu1VFXain88Qnm1hfjz
- bv0lh+vyvWcNn4TvIYrr9KYfkJzjS0W8OwWpvuwKsezha8Fol/t8Tm+lqvTfSsfXlDCUlYZ5blv
- 1TunpWKXQZul2HHJyC9+lEO5o9Y/6gvyOrIg2KnBz2ef2WeIp1W
-X-Google-Smtp-Source: AGHT+IHcmWRNzTkqVVmlp7vI55c1y4kSQH0oB2l8XAs3h6e4W511DGLsZgs0xBzEhciVb/iL3jD6gA==
-X-Received: by 2002:a05:600c:350c:b0:434:a4a6:51f8 with SMTP id
- 5b1f17b1804b1-4361c2bbb02mr2583845e9.0.1733863436538; 
- Tue, 10 Dec 2024 12:43:56 -0800 (PST)
+ AJvYcCWyS7H5ofP5KHRgL00JGwgCORAMg+NcNuMqyspVCe7mqQ4p8eNoMO8NMZQu+2LHOnUVW6wqcGQFeEmb@nongnu.org
+X-Gm-Message-State: AOJu0Yyqhfu9w1C4Z4h/TD01fHjSINhZuUdTrtrxFHebibnlsown0oFJ
+ 6kBK9SP0l3ys+cS6ImV2+gwI3pfJsi5FCex+zjrMqiVJ+GWmnE1/MwYI4B8Md+8=
+X-Gm-Gg: ASbGncsPyA4Fww4oGRMf4peZ/wD7L4wQA85/T8WyGAi7VY4kxinyBDSg6vz22mXhEI0
+ D31JidJCJehAT17Zh6Vowtim49ROstAWdVjDp4PhWJIUU+/PJowfvsO/9mY3oIwDn13xyJ7pAZL
+ nn9fG0SFHIeeWxqVB9CLoejvXVsJJ6uS56z7dFxoUhp4X9m+O/fN5U7/jbnTov9fQN2E4WPdiYn
+ bAJ2YgvMmNYEZE9/kyHsFU4pA2nAxnQ9A8DeMzKEsHdoDZwCXjW
+X-Google-Smtp-Source: AGHT+IHB9jfiCMge6xvoMP8JLCIaen/Zs0h1oM3Kfa/6TidQkYZATwGb25cuTJifart++l6ZStAfVA==
+X-Received: by 2002:a05:6000:1843:b0:386:3262:ff70 with SMTP id
+ ffacd0b85a97d-3864de8ef4dmr122246f8f.2.1733863440579; 
+ Tue, 10 Dec 2024 12:44:00 -0800 (PST)
 Received: from draig.lan ([85.9.250.243]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3863dd5d09fsm7299689f8f.83.2024.12.10.12.43.52
+ ffacd0b85a97d-3861ecf4087sm17106689f8f.5.2024.12.10.12.43.55
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 10 Dec 2024 12:43:53 -0800 (PST)
+ Tue, 10 Dec 2024 12:43:58 -0800 (PST)
 Received: from draig.lan (localhost [IPv6:::1])
- by draig.lan (Postfix) with ESMTP id 309925FD22;
+ by draig.lan (Postfix) with ESMTP id AAFB16037E;
  Tue, 10 Dec 2024 20:43:50 +0000 (GMT)
 From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
 To: qemu-devel@nongnu.org
@@ -98,25 +98,25 @@ Cc: Daniel Henrique Barboza <dbarboza@ventanamicro.com>, qemu-s390x@nongnu.org,
  Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
  "Michael S. Tsirkin" <mst@redhat.com>,
  Alistair Francis <alistair.francis@wdc.com>,
- Anders Roxell <anders.roxell@linaro.org>
-Subject: [PATCH 09/20] tests/functional: update the ppc64 tuxrun tests
-Date: Tue, 10 Dec 2024 20:43:38 +0000
-Message-Id: <20241210204349.723590-10-alex.bennee@linaro.org>
+ Pierrick Bouvier <pierrick.bouvier@linaro.org>
+Subject: [PATCH 15/20] tests/functional/aarch64: add tests for FEAT_RME
+Date: Tue, 10 Dec 2024 20:43:44 +0000
+Message-Id: <20241210204349.723590-16-alex.bennee@linaro.org>
 X-Mailer: git-send-email 2.39.5
 In-Reply-To: <20241210204349.723590-1-alex.bennee@linaro.org>
 References: <20241210204349.723590-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::330;
- envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x330.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::32e;
+ envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x32e.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -132,53 +132,246 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Now there are new up to date images available we should update to them.
+From: Pierrick Bouvier <pierrick.bouvier@linaro.org>
 
-Cc: Anders Roxell <anders.roxell@linaro.org>
-Reviewed-by: Thomas Huth <thuth@redhat.com>
-Tested-by: Thomas Huth <thuth@redhat.com>
+This boot an OP-TEE environment, and launch a nested guest VM inside it
+using the Realms feature. We do it for virt and sbsa-ref platforms.
+
+Signed-off-by: Pierrick Bouvier <pierrick.bouvier@linaro.org>
+
+-----
+
+v2:
+- move test to its own file
+- add sbsa test
+- check output of `cca-workload-attestation report`
+
+v3:
+- build and run test with cca-v4 images
+- factorize nested guest test between both tests
+- remove accel tcg option as it is the default when running tests
+Note: It's a long test and there is a work in progress to understand why
+debug build is so slow (x12 vs optimized).
+
+v4:
+- use pauth-impdef=on to speed up build time execution (x2.5 faster)
+- increase timeout value
+
+Signed-off-by: Pierrick Bouvier <pierrick.bouvier@linaro.org>
+Message-Id: <20241203213629.2482806-1-pierrick.bouvier@linaro.org>
 Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
-Message-Id: <20241121165806.476008-30-alex.bennee@linaro.org>
 ---
- tests/functional/test_ppc64_tuxrun.py | 16 ++++++++--------
- 1 file changed, 8 insertions(+), 8 deletions(-)
+ tests/functional/meson.build                 |   4 +
+ tests/functional/test_aarch64_rme_sbsaref.py |  70 +++++++++++++
+ tests/functional/test_aarch64_rme_virt.py    | 100 +++++++++++++++++++
+ 3 files changed, 174 insertions(+)
+ create mode 100755 tests/functional/test_aarch64_rme_sbsaref.py
+ create mode 100755 tests/functional/test_aarch64_rme_virt.py
 
-diff --git a/tests/functional/test_ppc64_tuxrun.py b/tests/functional/test_ppc64_tuxrun.py
-index 03b47e07f2..aee67f5e90 100755
---- a/tests/functional/test_ppc64_tuxrun.py
-+++ b/tests/functional/test_ppc64_tuxrun.py
-@@ -82,11 +82,11 @@ def ppc64_common_tuxrun(self, kernel_asset, rootfs_asset, prefix):
-                                drive="scsi-hd")
- 
-     ASSET_PPC64_KERNEL = Asset(
--        'https://storage.tuxboot.com/20230331/ppc64/vmlinux',
--        'f22a9b9e924174a4c199f4c7e5d91a2339fcfe51c6eafd0907dc3e09b64ab728')
-+        'https://storage.tuxboot.com/buildroot/20241119/ppc64/vmlinux',
-+        '8219d5cb26e7654ad7826fe8aee6290f7c01eef44f2cd6d26c15fe8f99e1c17c')
-     ASSET_PPC64_ROOTFS = Asset(
--        'https://storage.tuxboot.com/20230331/ppc64/rootfs.ext4.zst',
--        '1d953e81a4379e537fc8e41e05a0a59d9b453eef97aa03d47866c6c45b00bdff')
-+        'https://storage.tuxboot.com/buildroot/20241119/ppc64/rootfs.ext4.zst',
-+        'b68e12314303c5dd0fef37ae98021299a206085ae591893e73557af99a02d373')
- 
-     def test_ppc64(self):
-         self.ppc64_common_tuxrun(kernel_asset=self.ASSET_PPC64_KERNEL,
-@@ -94,11 +94,11 @@ def test_ppc64(self):
-                                  prefix='tuxrun_ppc64_')
- 
-     ASSET_PPC64LE_KERNEL = Asset(
--        'https://storage.tuxboot.com/20230331/ppc64le/vmlinux',
--        '979eb61b445a010fb13e2b927126991f8ceef9c590fa2be0996c00e293e80cf2')
-+        'https://storage.tuxboot.com/buildroot/20241119/ppc64le/vmlinux',
-+        '21aea1fbc18bf6fa7d8ca4ea48d4940b2c8363c077acd564eb47d769b7495279')
-     ASSET_PPC64LE_ROOTFS = Asset(
--        'https://storage.tuxboot.com/20230331/ppc64le/rootfs.ext4.zst',
--        'b442678c93fb8abe1f7d3bfa20556488de6b475c22c8fed363f42cf81a0a3906')
-+        'https://storage.tuxboot.com/buildroot/20241119/ppc64le/rootfs.ext4.zst',
-+        '67d36a3f9597b738e8b7359bdf04500f4d9bb82fc35eaa65aa439d888b2392f4')
- 
-     def test_ppc64le(self):
-         self.ppc64_common_tuxrun(kernel_asset=self.ASSET_PPC64LE_KERNEL,
+diff --git a/tests/functional/meson.build b/tests/functional/meson.build
+index 0a76bd9954..4e207c53d5 100644
+--- a/tests/functional/meson.build
++++ b/tests/functional/meson.build
+@@ -13,6 +13,8 @@ endif
+ test_timeouts = {
+   'aarch64_aspeed' : 600,
+   'aarch64_raspi4' : 480,
++  'aarch64_rme_virt' : 1200,
++  'aarch64_rme_sbsaref' : 1200,
+   'aarch64_sbsaref_alpine' : 720,
+   'aarch64_sbsaref_freebsd' : 720,
+   'aarch64_tuxrun' : 240,
+@@ -52,6 +54,8 @@ tests_aarch64_system_thorough = [
+   'aarch64_aspeed',
+   'aarch64_raspi3',
+   'aarch64_raspi4',
++  'aarch64_rme_virt',
++  'aarch64_rme_sbsaref',
+   'aarch64_sbsaref',
+   'aarch64_sbsaref_alpine',
+   'aarch64_sbsaref_freebsd',
+diff --git a/tests/functional/test_aarch64_rme_sbsaref.py b/tests/functional/test_aarch64_rme_sbsaref.py
+new file mode 100755
+index 0000000000..c136b5ce17
+--- /dev/null
++++ b/tests/functional/test_aarch64_rme_sbsaref.py
+@@ -0,0 +1,70 @@
++#!/usr/bin/env python3
++#
++# Functional test that boots a Realms environment on sbsa-ref machine and a
++# nested guest VM using it.
++#
++# Copyright (c) 2024 Linaro Ltd.
++#
++# Author: Pierrick Bouvier <pierrick.bouvier@linaro.org>
++#
++# SPDX-License-Identifier: GPL-2.0-or-later
++
++import time
++import os
++import logging
++
++from qemu_test import QemuSystemTest, Asset
++from qemu_test import exec_command, wait_for_console_pattern
++from qemu_test import exec_command_and_wait_for_pattern
++from qemu_test.utils import archive_extract
++from test_aarch64_rme_virt import test_realms_guest
++
++class Aarch64RMESbsaRefMachine(QemuSystemTest):
++
++    # Stack is built with OP-TEE build environment from those instructions:
++    # https://linaro.atlassian.net/wiki/spaces/QEMU/pages/29051027459/
++    # https://github.com/pbo-linaro/qemu-rme-stack
++    ASSET_RME_STACK_SBSA = Asset(
++        ('https://fileserver.linaro.org/s/KJyeBxL82mz2r7F/'
++         'download/rme-stack-op-tee-4.2.0-cca-v4-sbsa.tar.gz'),
++         'dd9ab28ec869bdf3b5376116cb3689103b43433fd5c4bca0f4a8d8b3c104999e')
++
++    # This tests the FEAT_RME cpu implementation, by booting a VM supporting it,
++    # and launching a nested VM using it.
++    def test_aarch64_rme_sbsaref(self):
++        stack_path_tar_gz = self.ASSET_RME_STACK_SBSA.fetch()
++        archive_extract(stack_path_tar_gz, self.workdir)
++
++        self.set_machine('sbsa-ref')
++        self.vm.set_console()
++        self.require_accelerator('tcg')
++
++        rme_stack = os.path.join(self.workdir,
++                                 'rme-stack-op-tee-4.2.0-cca-v4-sbsa')
++        pflash0 = os.path.join(rme_stack, 'images', 'SBSA_FLASH0.fd')
++        pflash1 = os.path.join(rme_stack, 'images', 'SBSA_FLASH1.fd')
++        virtual = os.path.join(rme_stack, 'images', 'disks', 'virtual')
++        drive = os.path.join(rme_stack, 'out-br', 'images', 'rootfs.ext4')
++
++        self.vm.add_args('-cpu', 'max,x-rme=on,pauth-impdef=on')
++        self.vm.add_args('-m', '2G')
++        self.vm.add_args('-M', 'sbsa-ref')
++        self.vm.add_args('-drive', f'file={pflash0},format=raw,if=pflash')
++        self.vm.add_args('-drive', f'file={pflash1},format=raw,if=pflash')
++        self.vm.add_args('-drive', f'file=fat:rw:{virtual},format=raw')
++        self.vm.add_args('-drive', f'format=raw,if=none,file={drive},id=hd0')
++        self.vm.add_args('-device', 'virtio-blk-pci,drive=hd0')
++        self.vm.add_args('-device', 'virtio-9p-pci,fsdev=shr0,mount_tag=shr0')
++        self.vm.add_args('-fsdev', f'local,security_model=none,path={rme_stack},id=shr0')
++        self.vm.add_args('-device', 'virtio-net-pci,netdev=net0')
++        self.vm.add_args('-netdev', 'user,id=net0')
++
++        self.vm.launch()
++        # Wait for host VM boot to complete.
++        wait_for_console_pattern(self, 'Welcome to Buildroot')
++        exec_command_and_wait_for_pattern(self, 'root', '#')
++
++        test_realms_guest(self)
++
++if __name__ == '__main__':
++    QemuSystemTest.main()
+diff --git a/tests/functional/test_aarch64_rme_virt.py b/tests/functional/test_aarch64_rme_virt.py
+new file mode 100755
+index 0000000000..39e4e4adb5
+--- /dev/null
++++ b/tests/functional/test_aarch64_rme_virt.py
+@@ -0,0 +1,100 @@
++#!/usr/bin/env python3
++#
++# Functional test that boots a Realms environment on virt machine and a nested
++# guest VM using it.
++#
++# Copyright (c) 2024 Linaro Ltd.
++#
++# Author: Pierrick Bouvier <pierrick.bouvier@linaro.org>
++#
++# SPDX-License-Identifier: GPL-2.0-or-later
++
++import time
++import os
++import logging
++
++from qemu_test import QemuSystemTest, Asset
++from qemu_test import exec_command, wait_for_console_pattern
++from qemu_test import exec_command_and_wait_for_pattern
++from qemu_test.utils import archive_extract
++
++def test_realms_guest(test_rme_instance):
++
++    # Boot the (nested) guest VM
++    exec_command(test_rme_instance,
++                 'qemu-system-aarch64 -M virt,gic-version=3 '
++                 '-cpu host -enable-kvm -m 512M '
++                 '-M confidential-guest-support=rme0 '
++                 '-object rme-guest,id=rme0 '
++                 '-device virtio-net-pci,netdev=net0,romfile= '
++                 '-netdev user,id=net0 '
++                 '-kernel /mnt/out/bin/Image '
++                 '-initrd /mnt/out-br/images/rootfs.cpio '
++                 '-serial stdio')
++    # Detect Realm activation during (nested) guest boot.
++    wait_for_console_pattern(test_rme_instance,
++                             'SMC_RMI_REALM_ACTIVATE')
++    # Wait for (nested) guest boot to complete.
++    wait_for_console_pattern(test_rme_instance,
++                             'Welcome to Buildroot')
++    exec_command_and_wait_for_pattern(test_rme_instance, 'root', '#')
++    # query (nested) guest cca report
++    exec_command(test_rme_instance, 'cca-workload-attestation report')
++    wait_for_console_pattern(test_rme_instance,
++                             '"cca-platform-hash-algo-id": "sha-256"')
++    wait_for_console_pattern(test_rme_instance,
++                             '"cca-realm-hash-algo-id": "sha-512"')
++    wait_for_console_pattern(test_rme_instance,
++                             '"cca-realm-public-key-hash-algo-id": "sha-256"')
++
++class Aarch64RMEVirtMachine(QemuSystemTest):
++
++    # Stack is built with OP-TEE build environment from those instructions:
++    # https://linaro.atlassian.net/wiki/spaces/QEMU/pages/29051027459/
++    # https://github.com/pbo-linaro/qemu-rme-stack
++    ASSET_RME_STACK_VIRT = Asset(
++        ('https://fileserver.linaro.org/s/iaRsNDJp2CXHMSJ/'
++         'download/rme-stack-op-tee-4.2.0-cca-v4-qemu_v8.tar.gz'),
++         '1851adc232b094384d8b879b9a2cfff07ef3d6205032b85e9b3a4a9ae6b0b7ad')
++
++    # This tests the FEAT_RME cpu implementation, by booting a VM supporting it,
++    # and launching a nested VM using it.
++    def test_aarch64_rme_virt(self):
++        stack_path_tar_gz = self.ASSET_RME_STACK_VIRT.fetch()
++        archive_extract(stack_path_tar_gz, self.workdir)
++
++        self.set_machine('virt')
++        self.vm.set_console()
++        self.require_accelerator('tcg')
++
++        rme_stack = os.path.join(self.workdir,
++                                 'rme-stack-op-tee-4.2.0-cca-v4-qemu_v8')
++        kernel = os.path.join(rme_stack, 'out', 'bin', 'Image')
++        bios = os.path.join(rme_stack, 'out', 'bin', 'flash.bin')
++        drive = os.path.join(rme_stack, 'out-br', 'images', 'rootfs.ext4')
++
++        self.vm.add_args('-cpu', 'max,x-rme=on,pauth-impdef=on')
++        self.vm.add_args('-m', '2G')
++        self.vm.add_args('-M', 'virt,acpi=off,'
++                         'virtualization=on,'
++                         'secure=on,'
++                         'gic-version=3')
++        self.vm.add_args('-bios', bios)
++        self.vm.add_args('-kernel', kernel)
++        self.vm.add_args('-drive', f'format=raw,if=none,file={drive},id=hd0')
++        self.vm.add_args('-device', 'virtio-blk-pci,drive=hd0')
++        self.vm.add_args('-device', 'virtio-9p-device,fsdev=shr0,mount_tag=shr0')
++        self.vm.add_args('-fsdev', f'local,security_model=none,path={rme_stack},id=shr0')
++        self.vm.add_args('-device', 'virtio-net-pci,netdev=net0')
++        self.vm.add_args('-netdev', 'user,id=net0')
++        self.vm.add_args('-append', 'root=/dev/vda')
++
++        self.vm.launch()
++        # Wait for host VM boot to complete.
++        wait_for_console_pattern(self, 'Welcome to Buildroot')
++        exec_command_and_wait_for_pattern(self, 'root', '#')
++
++        test_realms_guest(self)
++
++if __name__ == '__main__':
++    QemuSystemTest.main()
 -- 
 2.39.5
 
