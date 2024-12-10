@@ -4,127 +4,120 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AEAF6E7717D
-	for <qemu-riscv@archiver.kernel.org>; Mon,  9 Dec 2024 23:17:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 536ECE7717F
+	for <qemu-riscv@archiver.kernel.org>; Tue, 10 Dec 2024 20:45:03 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tKmzx-0003lH-WC; Mon, 09 Dec 2024 18:17:06 -0500
+	id 1tL75Y-00078z-EJ; Tue, 10 Dec 2024 15:44:12 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <brian.cain@oss.qualcomm.com>)
- id 1tKkGS-0002qe-E2
- for qemu-riscv@nongnu.org; Mon, 09 Dec 2024 15:21:56 -0500
-Received: from mx0a-0031df01.pphosted.com ([205.220.168.131])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <brian.cain@oss.qualcomm.com>)
- id 1tKkGO-0001Un-KT
- for qemu-riscv@nongnu.org; Mon, 09 Dec 2024 15:21:55 -0500
-Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 4B9Hg3Hh005904
- for <qemu-riscv@nongnu.org>; Mon, 9 Dec 2024 20:21:50 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- cc:content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- DzU/888Y3udSultLPyrm+yf2mrvpaOySiovY0AzyR7U=; b=FIPz2Pgy09zaU9mt
- MQdrQHGDsUjm/xEUVMt2jpkO5EAPCXhbsTxc8tttkrAKzXCm4k+xl31u+wzss8Px
- zQdG0J4r9k46xFThnph06w3hfWLdnDERSKIdhWTPgDcehYj/JR/xxQKYdOqssYf/
- 7dUCS4h/bHnN+iBB1wv4UqNBknR/bByTFJBPzEZthTnoZzWs+7Cjyv9sXRPjh40q
- YwHIHUP7O6yz8UajYmCJO3jYKbjJU+d15xSE4miZoalTpEE1mXSlqAX0PI9w+Kae
- O/9zInB/BztN3QwkxKVf8144iAscFcyjtDWgzhpNmUYyvSeha1ufdSq43g9XKZ/v
- cCwS7g==
-Received: from mail-qt1-f200.google.com (mail-qt1-f200.google.com
- [209.85.160.200])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 43cfn8x090-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
- for <qemu-riscv@nongnu.org>; Mon, 09 Dec 2024 20:21:50 +0000 (GMT)
-Received: by mail-qt1-f200.google.com with SMTP id
- d75a77b69052e-467518d8bdaso53046661cf.2
- for <qemu-riscv@nongnu.org>; Mon, 09 Dec 2024 12:21:50 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
+ id 1tL75P-00071g-EE
+ for qemu-riscv@nongnu.org; Tue, 10 Dec 2024 15:44:03 -0500
+Received: from mail-wm1-x331.google.com ([2a00:1450:4864:20::331])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
+ id 1tL75H-0001zc-92
+ for qemu-riscv@nongnu.org; Tue, 10 Dec 2024 15:44:03 -0500
+Received: by mail-wm1-x331.google.com with SMTP id
+ 5b1f17b1804b1-435004228c0so20555235e9.0
+ for <qemu-riscv@nongnu.org>; Tue, 10 Dec 2024 12:43:54 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1733863433; x=1734468233; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=o0JqfhsmeygXn7vgTHEJChr0z2trV4kJFC93MfdFa5w=;
+ b=DR1MPlQSKTe2Fluq6ljQZ3D9i1oB6nqacEw2HxgunqP9I0TuvT9IeN6VleFiqsk6Sn
+ Rj/T8ecC3oUS++OKduAMTGg6Geu5ynvmfGLPOM7Di0/hCfbMZRp2c1NLAaDttxqI7gdj
+ 8WWjRL/u9ItRODkOdU0X8ZM2hRQmQtgHRRWJnfPt4bafdtkTMzcASdqW+nUsSPO06X64
+ 8vnr/wtaU9I+kYoPeEbRhxp3jtOfsGs4FvVtUi6tdc1g7GqNaNPFF6R88QUhGkJrkYKe
+ WSnqtj2fDgCxLtmGGGXx9usT2Zy6bRfYzl7fu2HA7wd35eFQC3dipFwbecXiH7m2GoE7
+ s1tg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733775709; x=1734380509;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=DzU/888Y3udSultLPyrm+yf2mrvpaOySiovY0AzyR7U=;
- b=tzFjObR4BTomUj7iuDDF34E0c/Qi5DkvpmIjThGnuQWGNVBRyDmcxkF252lYspyB6E
- 4gUfLQ2c1l6QYlGBrKJ4GqKOYuPuNm6d4k3XwWPjzxK6kMawoG0CeIbAB7qKgWUSpR0p
- Sl1rWp38bBTKll1ysIxkfzABPn043Y06tJBeuIALL/goFugx5UWb7JLvJHa25JD8U4Tr
- Z+BrAGZ1PCv8A4iWxh2lmcdTTeKNsxtYM6b4jUgYiqDsvAHWHuSbalPY4242cHddmMLk
- ojv2AoURIQzhuv5pJ3/0Lu6a7BwzKrTODwzpd0YvloWgQE8JbtVrlDKfkIeeJO+gLm1u
- hV2g==
+ d=1e100.net; s=20230601; t=1733863433; x=1734468233;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=o0JqfhsmeygXn7vgTHEJChr0z2trV4kJFC93MfdFa5w=;
+ b=t6Sc7dgFi+rhak6GSjDXXReGVQQdE4B3EFNWahhm5/0Tg67TlEMS2tI87iFh3ZiXvB
+ /gHCafFFafCEqZk3CBIwZHA9w2xrEuQS23fiy5PIErDTNDSsxd65k6x0fx+qO7HDeFli
+ EPETx7KtOqY3Liio4ts3xu6EhpEvgFjvvjTu06TOaB1DwpCRbP47GPy35uSEv6JDBbw6
+ FjRrj21cON5BJWf3RPl+C40b0tje31ZNFUVHx+WADYS+NWruqWMb5TWTZzm2jUdEmGk2
+ I1DxYEoKonCNAXawZ//+tSiN7EMU5kH2GExYRB7A/6qcyyRjGgqJRuVHNFHc3CwoUII/
+ +2/g==
 X-Forwarded-Encrypted: i=1;
- AJvYcCV3h1uvBj7K30EXCTEd1Zv5TUC2RlGzCV/0KcI1DMkR/tbXpfGaKpqPNsYYEoyhW16weyodT2VAe7SR@nongnu.org
-X-Gm-Message-State: AOJu0YxX/R0yNeIdNe2TPTxCA3satSN2KDor9onL9YawQA/mG1nyFFqz
- PWqCFtNUNeWP8YtmeWx/+oPZIMHax5c9cJBJAs+YcMTTFTZoFLue8BV5pYvx6WDaruJI5ccMPqz
- xG1c35M20hZzk4et4qoiaFqL1RCDJmPFV0c3FRkkSY8w5sgM0rVOUvQ==
-X-Gm-Gg: ASbGncvbZTuDmi4R/Ms+SeyoYiPnhwoAxYJkd+oUM6mXIfe+XI9rRpfJlLrD0ve1otx
- SGmfxwvlmdaXdWfLwJLmEtPGOYIEsWiCTM3YDHxPE0jrPRRXY2hYvow7GmZ+tF64rjjDWSxFTaQ
- 1PGwgRdP+ToUcsjBylhAeWJ6C98cyNzKdm2+WVs43EkF9BfHbzFuERD/Yr4NcSxbygTHWlFWoYl
- jeCV4Jo6TmwJGGO/WwdKx3odLmudKDPhSGAM/uQLWAaM0f4BQuMENDmTHmvkv9J6eGDIufY6VbQ
- oa6c1eB+P89dLRgX8AlNXdp/ojUvg31jV6QQ
-X-Received: by 2002:a05:622a:60e:b0:466:a51b:6281 with SMTP id
- d75a77b69052e-46771efb88amr26917651cf.26.1733775709070; 
- Mon, 09 Dec 2024 12:21:49 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IFySbay1kQ0chmDDUysJLDryRhcXxoFZeJBWPYj5IXssLYqn/0Z6VW+NtlLZd0vmlvOjx2hGw==
-X-Received: by 2002:a05:622a:60e:b0:466:a51b:6281 with SMTP id
- d75a77b69052e-46771efb88amr26917381cf.26.1733775708684; 
- Mon, 09 Dec 2024 12:21:48 -0800 (PST)
-Received: from [10.222.168.90] (Global_NAT1_IAD_FW.qualcomm.com.
- [129.46.232.65]) by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-46768b530f0sm11175221cf.64.2024.12.09.12.21.45
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 09 Dec 2024 12:21:48 -0800 (PST)
-Message-ID: <3fb7853c-a04e-46ba-9b69-f36012f25e26@oss.qualcomm.com>
-Date: Mon, 9 Dec 2024 14:21:45 -0600
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 15/20] target: Implement CPUClass::datapath_is_big_endian
- (big-endian)
-To: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- qemu-devel@nongnu.org
-Cc: Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ AJvYcCWdCORGF1onrOCeeX3WYZadUJS7uL2wRdC8m3Bbwbxw9u+rj+sQivkJtH+XH5z3abHymSOmm3FnvjbV@nongnu.org
+X-Gm-Message-State: AOJu0Yx618PB8snp2n8kJbYvOvdb1eWyROqKQ0bfbETR9d78Is9Klk02
+ lygKX/npJvGhl6j3aOkHBoexyQ7Sim568RIrLSV6bp1gW1yL8VSWFX+7Y5MmaJU=
+X-Gm-Gg: ASbGncsmXRvPLjiNV3zOpfwb18wC/Yrwv2BIpEYA2v38k5b8VFvMdIsNWGclM2lbBgS
+ OTCk+KZtQha2OmiOjGzyqfQ2QsuVki2H0KtftWll+BO9pNX1qGI+9xBonaM48v6VFbWSIQm0W/z
+ Vcft/zwD9u52cETOtPV9qRl5kZVHF/c+csn2SbBH0covC1GrQbYbpvni+GBr5XOrgkZvWHKLYgR
+ HD5DDX9n0nUvVQQsShvCtjUKzGmJPCr6O3sbQ3gsMDC989uRWtG
+X-Google-Smtp-Source: AGHT+IGmz6gIKelGhSC5pMle4h7b1ZBiTYAEetjr7JXMJmyGXW/AL9zXgJUUjijiO1f7mvvh/oBWkA==
+X-Received: by 2002:a05:600c:4f11:b0:428:d31:ef25 with SMTP id
+ 5b1f17b1804b1-4361c3ab1bdmr1858135e9.12.1733863433446; 
+ Tue, 10 Dec 2024 12:43:53 -0800 (PST)
+Received: from draig.lan ([85.9.250.243]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-3861f59ceb6sm16894733f8f.42.2024.12.10.12.43.50
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 10 Dec 2024 12:43:51 -0800 (PST)
+Received: from draig.lan (localhost [IPv6:::1])
+ by draig.lan (Postfix) with ESMTP id 81DD35F8D0;
+ Tue, 10 Dec 2024 20:43:49 +0000 (GMT)
+From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
+To: qemu-devel@nongnu.org
+Cc: Daniel Henrique Barboza <dbarboza@ventanamicro.com>, qemu-s390x@nongnu.org,
+ Halil Pasic <pasic@linux.ibm.com>, Jiaxun Yang <jiaxun.yang@flygoat.com>,
+ Weiwei Li <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Cleber Rosa <crosa@redhat.com>, Palmer Dabbelt <palmer@dabbelt.com>,
+ Leif Lindholm <quic_llindhol@quicinc.com>,
+ Eric Farman <farman@linux.ibm.com>,
+ =?UTF-8?q?Marc-Andr=C3=A9=20Lureau?= <marcandre.lureau@redhat.com>,
+ John Snow <jsnow@redhat.com>,
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
+ Harsh Prateek Bora <harshpb@linux.ibm.com>,
+ Aurelien Jarno <aurelien@aurel32.net>, Paolo Bonzini <pbonzini@redhat.com>,
+ Joel Stanley <joel@jms.id.au>, Bernhard Beschow <shentey@gmail.com>,
+ qemu-ppc@nongnu.org, qemu-riscv@nongnu.org,
+ Daniel Henrique Barboza <danielhb413@gmail.com>,
+ Thomas Huth <thuth@redhat.com>, Laurent Vivier <lvivier@redhat.com>,
+ qemu-arm@nongnu.org, Wainer dos Santos Moschetta <wainersm@redhat.com>,
+ Fabiano Rosas <farosas@suse.de>, Markus Armbruster <armbru@redhat.com>,
+ Bin Meng <bmeng.cn@gmail.com>, Pavel Dovgalyuk <pavel.dovgaluk@ispras.ru>,
+ Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>,
+ Christian Borntraeger <borntraeger@linux.ibm.com>,
+ Beraldo Leal <bleal@redhat.com>, Peter Maydell <peter.maydell@linaro.org>,
+ Radoslaw Biernacki <rad@semihalf.com>,
+ =?UTF-8?q?Daniel=20P=2E=20Berrang=C3=A9?= <berrange@redhat.com>,
+ =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
+ Nicholas Piggin <npiggin@gmail.com>,
+ Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
  "Michael S. Tsirkin" <mst@redhat.com>,
- Peter Maydell <peter.maydell@linaro.org>, Laurent Vivier
- <lvivier@redhat.com>, Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
  Alistair Francis <alistair.francis@wdc.com>,
- Anton Johansson <anjo@rev.ng>, Zhao Liu <zhao1.liu@intel.com>,
- "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
- David Hildenbrand <david@redhat.com>, qemu-s390x@nongnu.org,
- Max Filippov <jcmvbkbc@gmail.com>, Paolo Bonzini <pbonzini@redhat.com>,
- Nicholas Piggin <npiggin@gmail.com>, qemu-arm@nongnu.org,
- Thomas Huth <thuth@redhat.com>, qemu-riscv@nongnu.org,
- Alistair Francis <alistair@alistair23.me>, qemu-ppc@nongnu.org,
- Richard Henderson <richard.henderson@linaro.org>
-References: <20241204202602.58083-1-philmd@linaro.org>
- <20241204202602.58083-16-philmd@linaro.org>
-Content-Language: en-US
-From: Brian Cain <brian.cain@oss.qualcomm.com>
-In-Reply-To: <20241204202602.58083-16-philmd@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+ Anders Roxell <anders.roxell@linaro.org>
+Subject: [PATCH 01/20] tests/functional: update the arm tuxrun tests
+Date: Tue, 10 Dec 2024 20:43:30 +0000
+Message-Id: <20241210204349.723590-2-alex.bennee@linaro.org>
+X-Mailer: git-send-email 2.39.5
+In-Reply-To: <20241210204349.723590-1-alex.bennee@linaro.org>
+References: <20241210204349.723590-1-alex.bennee@linaro.org>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-Proofpoint-GUID: fqVegxHrO-aT18d4NrNU_8RqgWeX-Apm
-X-Proofpoint-ORIG-GUID: fqVegxHrO-aT18d4NrNU_8RqgWeX-Apm
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1039,Hydra:6.0.680,FMLib:17.12.60.29
- definitions=2024-09-06_09,2024-09-06_01,2024-09-02_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- malwarescore=0 clxscore=1011
- spamscore=0 impostorscore=0 suspectscore=0 mlxlogscore=999
- priorityscore=1501 lowpriorityscore=0 mlxscore=0 bulkscore=0 adultscore=0
- phishscore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.19.0-2411120000 definitions=main-2412090158
-Received-SPF: pass client-ip=205.220.168.131;
- envelope-from=brian.cain@oss.qualcomm.com; helo=mx0a-0031df01.pphosted.com
-X-Spam_score_int: -26
-X-Spam_score: -2.7
+Received-SPF: pass client-ip=2a00:1450:4864:20::331;
+ envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x331.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
 X-Spam_bar: --
-X-Spam_report: (-2.7 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_EF=-0.1, RCVD_IN_DNSWL_LOW=-0.7,
- RCVD_IN_VALIDITY_CERTIFIED_BLOCKED=0.001, RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
-X-Mailman-Approved-At: Mon, 09 Dec 2024 18:17:04 -0500
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -139,146 +132,75 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
+Now there are new up to date images available we should update to them.
 
-On 12/4/2024 2:25 PM, Philippe Mathieu-Daudé wrote:
-> For all targets which have endianness architecturally
-> predefined as big endian (built using TARGET_BIG_ENDIAN=y),
-> their datapath_is_big_endian() handler simply returns %true.
->
-> Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
-> ---
->   target/hexagon/cpu.c  | 6 ++++++
->   target/hppa/cpu.c     | 6 ++++++
->   target/m68k/cpu.c     | 6 ++++++
->   target/openrisc/cpu.c | 6 ++++++
->   target/s390x/cpu.c    | 6 ++++++
->   5 files changed, 30 insertions(+)
->
-> diff --git a/target/hexagon/cpu.c b/target/hexagon/cpu.c
-> index 020038fc490..6407ed80c59 100644
-> --- a/target/hexagon/cpu.c
-> +++ b/target/hexagon/cpu.c
-> @@ -245,6 +245,11 @@ void hexagon_debug(CPUHexagonState *env)
->       hexagon_dump(env, stdout, CPU_DUMP_FPU);
->   }
->   
-> +static bool hexagon_cpu_datapath_is_big_endian(CPUState *cs)
-> +{
-> +    return true;
-> +}
-> +
->   static void hexagon_cpu_set_pc(CPUState *cs, vaddr value)
->   {
->       cpu_env(cs)->gpr[HEX_REG_PC] = value;
-> @@ -342,6 +347,7 @@ static void hexagon_cpu_class_init(ObjectClass *c, void *data)
->                                          &mcc->parent_phases);
->   
->       cc->class_by_name = hexagon_cpu_class_by_name;
-> +    cc->datapath_is_big_endian = hexagon_cpu_datapath_is_big_endian;
->       cc->has_work = hexagon_cpu_has_work;
->       cc->dump_state = hexagon_dump_state;
->       cc->set_pc = hexagon_cpu_set_pc;
+Cc: Anders Roxell <anders.roxell@linaro.org>
+Reviewed-by: Thomas Huth <thuth@redhat.com>
+Tested-by: Thomas Huth <thuth@redhat.com>
+Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
+Message-Id: <20241121165806.476008-21-alex.bennee@linaro.org>
+---
+ tests/functional/test_arm_tuxrun.py | 28 ++++++++++++++--------------
+ 1 file changed, 14 insertions(+), 14 deletions(-)
 
+diff --git a/tests/functional/test_arm_tuxrun.py b/tests/functional/test_arm_tuxrun.py
+index 944f0756e1..4ac85f48ac 100755
+--- a/tests/functional/test_arm_tuxrun.py
++++ b/tests/functional/test_arm_tuxrun.py
+@@ -17,14 +17,14 @@
+ class TuxRunArmTest(TuxRunBaselineTest):
+ 
+     ASSET_ARMV5_KERNEL = Asset(
+-        'https://storage.tuxboot.com/20230331/armv5/zImage',
+-        'c95af2f27647c12265d75e9df44c22ff5228c59855f54aaa70f41ec2842e3a4d')
++        'https://storage.tuxboot.com/buildroot/20241119/armv5/zImage',
++        '3931a3908dbcf0ec0fe292d035ffc4dfed95f797dedd4a59ccfcf7a46e6f92d4')
+     ASSET_ARMV5_ROOTFS = Asset(
+-        'https://storage.tuxboot.com/20230331/armv5/rootfs.ext4.zst',
+-        '17177afa74e7294da0642861f08c88ca3c836764299a54bf6d1ce276cb9712a5')
++        'https://storage.tuxboot.com/buildroot/20241119/armv5/rootfs.ext4.zst',
++        '60ff78b68c7021df378e4fc2d66d3b016484d1acc7e07fb8920c1d8e30f4571f')
+     ASSET_ARMV5_DTB = Asset(
+-        'https://storage.tuxboot.com/20230331/armv5/versatile-pb.dtb',
+-        '0bc0c0b0858cefd3c32b385c0d66d97142ded29472a496f4f490e42fc7615b25')
++        'https://storage.tuxboot.com/buildroot/20241119/armv5/versatile-pb.dtb',
++        '50988e69ef3f3b08bfb9146e8fe414129990029e8dfbed444953b7e14809530a')
+ 
+     def test_armv5(self):
+         self.set_machine('versatilepb')
+@@ -37,11 +37,11 @@ def test_armv5(self):
+                            drive="virtio-blk-pci")
+ 
+     ASSET_ARMV7_KERNEL = Asset(
+-        'https://storage.tuxboot.com/20230331/armv7/zImage',
+-        '4c7a22e9f15875bec06bd2a29d822496571eb297d4f22694099ffcdb19077572')
++        'https://storage.tuxboot.com/buildroot/20241119/armv7/zImage',
++        '1377bc3d90de5ce57ab17cd67429fe8b15c2e9964248c775c682b67e6299b991')
+     ASSET_ARMV7_ROOTFS = Asset(
+-        'https://storage.tuxboot.com/20230331/armv7/rootfs.ext4.zst',
+-        'ab1fbbeaddda1ffdd45c9405a28cd5370c20f23a7cbc809cc90dc9f243a8eb5a')
++        'https://storage.tuxboot.com/buildroot/20241119/armv7/rootfs.ext4.zst',
++        'ed2cbc69bd6b3fbd5cafb5ee961393c7cfbe726446f14301c67d6b1f28bfdb51')
+ 
+     def test_armv7(self):
+         self.set_machine('virt')
+@@ -52,11 +52,11 @@ def test_armv7(self):
+                            rootfs_asset=self.ASSET_ARMV7_ROOTFS)
+ 
+     ASSET_ARMV7BE_KERNEL = Asset(
+-        'https://storage.tuxboot.com/20230331/armv7be/zImage',
+-        '7facc62082b57af12015b08f7fdbaf2f123ba07a478367853ae12b219afc9f2f')
++        'https://storage.tuxboot.com/buildroot/20241119/armv7be/zImage',
++        'a244e6da99f1bbd254827ec7681bd4aac9eb1aa05aaebc6b15e5d289ebb683f3')
+     ASSET_ARMV7BE_ROOTFS = Asset(
+-        'https://storage.tuxboot.com/20230331/armv7be/rootfs.ext4.zst',
+-        '42ed46dd2d59986206c5b1f6cf35eab58fe3fd20c96b41aaa16b32f3f90a9835')
++        'https://storage.tuxboot.com/buildroot/20241119/armv7be/rootfs.ext4.zst',
++        'd4f9c57860a512163f30ecc69b2174d1a1bdeb853a43dc49a09cfcfe84e428ea')
+ 
+     def test_armv7be(self):
+         self.set_machine('virt')
+-- 
+2.39.5
 
-For hexagon:
-
-Reviewed-by: Brian Cain <brian.cain@oss.qualcomm.com>
-
-
-> diff --git a/target/hppa/cpu.c b/target/hppa/cpu.c
-> index c38439c1800..8ccd224f2a4 100644
-> --- a/target/hppa/cpu.c
-> +++ b/target/hppa/cpu.c
-> @@ -203,6 +203,11 @@ static void hppa_cpu_initfn(Object *obj)
->       cpu_hppa_put_psw(env, PSW_W);
->   }
->   
-> +static bool hppa_cpu_datapath_is_big_endian(CPUState *cs)
-> +{
-> +    return true;
-> +}
-> +
->   static ObjectClass *hppa_cpu_class_by_name(const char *cpu_model)
->   {
->       g_autofree char *typename = g_strconcat(cpu_model, "-cpu", NULL);
-> @@ -245,6 +250,7 @@ static void hppa_cpu_class_init(ObjectClass *oc, void *data)
->                                       &acc->parent_realize);
->   
->       cc->class_by_name = hppa_cpu_class_by_name;
-> +    cc->datapath_is_big_endian = hppa_cpu_datapath_is_big_endian;
->       cc->has_work = hppa_cpu_has_work;
->       cc->mmu_index = hppa_cpu_mmu_index;
->       cc->dump_state = hppa_cpu_dump_state;
-> diff --git a/target/m68k/cpu.c b/target/m68k/cpu.c
-> index 5fe335558aa..52f8db41d5a 100644
-> --- a/target/m68k/cpu.c
-> +++ b/target/m68k/cpu.c
-> @@ -24,6 +24,11 @@
->   #include "migration/vmstate.h"
->   #include "fpu/softfloat.h"
->   
-> +static bool m68k_cpu_datapath_is_big_endian(CPUState *cs)
-> +{
-> +    return true;
-> +}
-> +
->   static void m68k_cpu_set_pc(CPUState *cs, vaddr value)
->   {
->       M68kCPU *cpu = M68K_CPU(cs);
-> @@ -571,6 +576,7 @@ static void m68k_cpu_class_init(ObjectClass *c, void *data)
->                                          &mcc->parent_phases);
->   
->       cc->class_by_name = m68k_cpu_class_by_name;
-> +    cc->datapath_is_big_endian = m68k_cpu_datapath_is_big_endian;
->       cc->has_work = m68k_cpu_has_work;
->       cc->mmu_index = m68k_cpu_mmu_index;
->       cc->dump_state = m68k_cpu_dump_state;
-> diff --git a/target/openrisc/cpu.c b/target/openrisc/cpu.c
-> index b96561d1f26..16e39b43ec4 100644
-> --- a/target/openrisc/cpu.c
-> +++ b/target/openrisc/cpu.c
-> @@ -25,6 +25,11 @@
->   #include "fpu/softfloat-helpers.h"
->   #include "tcg/tcg.h"
->   
-> +static bool openrisc_cpu_datapath_is_big_endian(CPUState *cs)
-> +{
-> +    return true;
-> +}
-> +
->   static void openrisc_cpu_set_pc(CPUState *cs, vaddr value)
->   {
->       OpenRISCCPU *cpu = OPENRISC_CPU(cs);
-> @@ -257,6 +262,7 @@ static void openrisc_cpu_class_init(ObjectClass *oc, void *data)
->                                          &occ->parent_phases);
->   
->       cc->class_by_name = openrisc_cpu_class_by_name;
-> +    cc->datapath_is_big_endian = openrisc_cpu_datapath_is_big_endian;
->       cc->has_work = openrisc_cpu_has_work;
->       cc->mmu_index = openrisc_cpu_mmu_index;
->       cc->dump_state = openrisc_cpu_dump_state;
-> diff --git a/target/s390x/cpu.c b/target/s390x/cpu.c
-> index 514c70f3010..eda1e3b286f 100644
-> --- a/target/s390x/cpu.c
-> +++ b/target/s390x/cpu.c
-> @@ -44,6 +44,11 @@
->   #define CR0_RESET       0xE0UL
->   #define CR14_RESET      0xC2000000UL;
->   
-> +static bool s390_cpu_datapath_is_big_endian(CPUState *cs)
-> +{
-> +    return true;
-> +}
-> +
->   #ifndef CONFIG_USER_ONLY
->   static bool is_early_exception_psw(uint64_t mask, uint64_t addr)
->   {
-> @@ -390,6 +395,7 @@ static void s390_cpu_class_init(ObjectClass *oc, void *data)
->                                          &scc->parent_phases);
->   
->       cc->class_by_name = s390_cpu_class_by_name,
-> +    cc->datapath_is_big_endian = s390_cpu_datapath_is_big_endian;
->       cc->has_work = s390_cpu_has_work;
->       cc->mmu_index = s390x_cpu_mmu_index;
->       cc->dump_state = s390_cpu_dump_state;
 
