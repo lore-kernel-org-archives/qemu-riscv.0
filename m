@@ -4,173 +4,95 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 23196E7717D
-	for <qemu-riscv@archiver.kernel.org>; Wed, 11 Dec 2024 08:05:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 28F7CE7717D
+	for <qemu-riscv@archiver.kernel.org>; Wed, 11 Dec 2024 12:52:14 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tLHiW-0005NP-Lw; Wed, 11 Dec 2024 03:05:08 -0500
+	id 1tLMCA-0003FF-NH; Wed, 11 Dec 2024 07:52:02 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1tLHiT-0005KG-Mb
- for qemu-riscv@nongnu.org; Wed, 11 Dec 2024 03:05:05 -0500
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1tLHiR-00026l-Kk
- for qemu-riscv@nongnu.org; Wed, 11 Dec 2024 03:05:05 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1733904302;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
- bh=4s+NpWa+3/3BwA8AAQyDd1povigLaAY4ojJNmt2acTM=;
- b=gfxWWXTtwTGw/jjyo6MyBtnVGVzvR4oMYrkZoz2gxyAvmwtVo+Ymb/joAaL00+pYkqJavJ
- MT9DeXijeWFIArsuOwT1O2VuAZtmkJ1WBCa90OhCpRGxL5iChBBB9DAJ7wD6L7ZHOq76ZV
- MVkIO8pGbA5qBKsX8/KnaGFCxc2AQmk=
-Received: from mail-ej1-f72.google.com (mail-ej1-f72.google.com
- [209.85.218.72]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-448-CJhnRcd9MLizWDCh-M_YKg-1; Wed, 11 Dec 2024 03:05:00 -0500
-X-MC-Unique: CJhnRcd9MLizWDCh-M_YKg-1
-X-Mimecast-MFC-AGG-ID: CJhnRcd9MLizWDCh-M_YKg
-Received: by mail-ej1-f72.google.com with SMTP id
- a640c23a62f3a-aa68952272bso26749766b.2
- for <qemu-riscv@nongnu.org>; Wed, 11 Dec 2024 00:05:00 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <craig.blackmore@embecosm.com>)
+ id 1tLMBi-000334-5n
+ for qemu-riscv@nongnu.org; Wed, 11 Dec 2024 07:51:38 -0500
+Received: from mail-wr1-x42b.google.com ([2a00:1450:4864:20::42b])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <craig.blackmore@embecosm.com>)
+ id 1tLMBg-0001rX-94
+ for qemu-riscv@nongnu.org; Wed, 11 Dec 2024 07:51:33 -0500
+Received: by mail-wr1-x42b.google.com with SMTP id
+ ffacd0b85a97d-38632b8ae71so3249624f8f.0
+ for <qemu-riscv@nongnu.org>; Wed, 11 Dec 2024 04:51:31 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=embecosm.com; s=google; t=1733921490; x=1734526290; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=7DRVhbud0qAfrBBeXAkjxxiV64CObQSqSSiJf4H0jTk=;
+ b=AgsoBpPJMcSPzacrzQuoBwk3kNoWN5w/MUgQbJ8mIH0/RcD20MKV+u9xQ+cpn839lU
+ +t/WStpur8RxuKVXw8PjP6mrMiyrttaPaZ253MHVWjUTCp4J2A0LKjjbl9KMrRVFetgR
+ 31/kc/23uaFAzYkiJgY7Uv0exhCZgIpUAj3IrIh+R45DUf50Y3e71j2xa+u9G5wxGLUF
+ abI+Z7nPzjXHvNS+2hRVumrNVEDERb2rxygujR3NGqRyEmcHI17NYASNGvy1FgjAqbkh
+ oroB4aAr9rhEK7s9bSUMIBzXfMMS+zHhTrYcm4mQaBdGg8e8JLXQysG+L/ANJj8bn94F
+ DiCA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733904299; x=1734509099;
- h=content-transfer-encoding:in-reply-to:autocrypt:content-language
- :from:references:cc:to:subject:user-agent:mime-version:date
- :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1733921490; x=1734526290;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=4s+NpWa+3/3BwA8AAQyDd1povigLaAY4ojJNmt2acTM=;
- b=C17dP3k7I43xXY9zU/DeFM8tAUJu3OL06NF90wT1j36br9DWKVD3/wHfnIsIjXOSR0
- hTqk9etq9JLskswFRiesYBIro1PJbHUI32ke5H1nqgRAZmFLZGtubpwHYNAYAmAz3xCv
- q3BmUhmJo1qGIQGYuLmBB9NaE+zLNa73rOBN6MpASqKq52HRSnKFllr5+1QzHVppMD43
- pDSOjbgwp5chZuvkJ26IgRye8jRRHRhvqqqcEa4hpBr8yb7l9BH2G0P87VVN5X7fdMt3
- 4YZbO9YW+s1Jj0RwrV9gdR45724vqb6lEt6meUZyZaPQvoJTNOw48SAnrK9DQu8DtzQu
- hRBQ==
+ bh=7DRVhbud0qAfrBBeXAkjxxiV64CObQSqSSiJf4H0jTk=;
+ b=EmSmKvq4Vh6/oacIC8vXQUZN395oVAjlG5qM17UCigGZHsWHzwwzAWqS31fuzMlL0K
+ lGBquRIzviMflHIeweb/1jgGiWRD9zSCO08jUzdx6r3+HSYrNBL9NhcrHGjakZ3RgAAD
+ oP1Vaprz0f+YB2GUVbgJaCyeX9u5O0GRmtefwC47vJ0sGSEwvJsKW3R/KBACjsx5EuY0
+ bpx8ugeNVTUIahe5aVKZLoESvaCIG/5rYgYYYd+4PWtgvn0+MNiTlOfH2D3RdOSw/Snd
+ neV7bbG54+IyM3jIdUOXBrEY9QSWjrxazfB9i/g5n2y4wk0BE2PaZ952xo0ZfsFHX+ZV
+ Gbww==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUYlP45eqgjbM/MzwuesSbA4Z1zir/P/RA27fG4KecVRhlHHdcjNjIjVl+rtYAMIO9D/phlj/iBG0mw@nongnu.org
-X-Gm-Message-State: AOJu0Yw+6wTg9V/+UXkHnJpPW6MY39bFXo1xJgZtfCRdt2ogx0YiCjJR
- zPif1k5Pkl1gmL8/U1BMjgPus+/+4R1oSqtRFjglWfqbBXoJdXjqVSK1eMdDzVgRyObFRO2OVX4
- LfqS9hT02n1KQ26HoBL9otN0Y1x0EuJ6SjdpQAWa3RTMk2ktEjIub
-X-Gm-Gg: ASbGncsTNUeNqpOVGkael9mv2Z2qxUr7wXNtYREeuHOoSFHADlzz9RJV9bSx8570ys8
- ROL4npGAih+k/MXFANjGotru6YkHuPD2pHEg8sAGE97WerVlIV+2zYVafvDxg5vjvIIB3aXIv44
- D5CXTOIHamVJwI1XoxtKVHUyLkz1ArPpJipPdZM2IMEd7f2s0sw7l4CXgNdLATCx3O5MVRxsP/V
- FThHy1EETDCr1YOZpEIAQvN8O7JflDCQJlApUq9MdmBN6g4y8Tp8XvRyKyscm7Jq/PWxnzi8A/0
- qHQOycM=
-X-Received: by 2002:a17:906:3cb1:b0:aa6:a501:9b3b with SMTP id
- a640c23a62f3a-aa6b11a33f8mr165493766b.19.1733904299535; 
- Wed, 11 Dec 2024 00:04:59 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IHx9zPyu3ZYxz+Ve0LFUNe9sWJjL4dCVSXikoawUMCtndqiV6/TKY18W3NSlLQX/3f5rahDQQ==
-X-Received: by 2002:a17:906:3cb1:b0:aa6:a501:9b3b with SMTP id
- a640c23a62f3a-aa6b11a33f8mr165489166b.19.1733904299103; 
- Wed, 11 Dec 2024 00:04:59 -0800 (PST)
-Received: from [192.168.0.6] (ip-109-42-51-17.web.vodafone.de. [109.42.51.17])
+ AJvYcCU6neu3tTwr/Y6AB3o8rywba1nsqOgxDar446j6mj9R2YSOyJmCL9gGQqqr9Ss4WTZzLxtylzlm5anK@nongnu.org
+X-Gm-Message-State: AOJu0YyA8VIDB8vXnCNSiuVM7GkHarmRlQGlRUsz72bP/I2kN71ounVP
+ 1AOBwrG9LsXL1FBzOZzAsHVE/9sWoPsgeDm0fM/SoUhwih3EzH2fNF0ExvRaNLg=
+X-Gm-Gg: ASbGncuJPvUcfGGAMjMw0Bxo4RiB9OWQDHyDelqGImSC4mYkRn3VjkvAv80gUgjImKT
+ BAVlCFsDWsYknAC44alrweNSLyDVeAsq8X6TcyqmaKwkTMuj0hr1k+ZK15tTM31b1BTYaECgZyk
+ V/ePkxuXhZFFbrdT3IBgDLWgbR8UP4Ksr/JhAyQARXNWOAEmaBhGZO7rYrVw0bbJRKVS1oFuvqh
+ sQoW7/0Ebf1WiZwciGx2z6In0OQmq5cwAcqlxgjtfLVb/1bT6nGNlV8GSJCHgrR+8bBbniDM4sx
+ RjWDjfeosvDnIJAwYKUOUGM7qZuR7+3j9K6aQ6ORGcy93w==
+X-Google-Smtp-Source: AGHT+IF9HOlfsbL1zSs+IEVhAyHVqNH5UbsPCVFBjzmDnzVfJqo1t9oVlPxTmruDuzy204sJaybVUw==
+X-Received: by 2002:a5d:59a7:0:b0:385:f44a:a3b with SMTP id
+ ffacd0b85a97d-3864cec390bmr2085285f8f.41.1733921490242; 
+ Wed, 11 Dec 2024 04:51:30 -0800 (PST)
+Received: from dorian..
+ (sals-04-b2-v4wan-167965-cust660.vm36.cable.virginm.net. [80.3.10.149])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-aa6975b1f27sm330082466b.113.2024.12.11.00.04.56
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 11 Dec 2024 00:04:58 -0800 (PST)
-Message-ID: <ba91b0da-ea60-4802-b336-f3a650d06ae4@redhat.com>
-Date: Wed, 11 Dec 2024 09:04:55 +0100
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 15/20] tests/functional/aarch64: add tests for FEAT_RME
-To: =?UTF-8?Q?Alex_Benn=C3=A9e?= <alex.bennee@linaro.org>,
- qemu-devel@nongnu.org
-Cc: Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- qemu-s390x@nongnu.org, Halil Pasic <pasic@linux.ibm.com>,
- Jiaxun Yang <jiaxun.yang@flygoat.com>, Weiwei Li <liwei1518@gmail.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, Cleber Rosa <crosa@redhat.com>,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Leif Lindholm <quic_llindhol@quicinc.com>, Eric Farman
- <farman@linux.ibm.com>, =?UTF-8?Q?Marc-Andr=C3=A9_Lureau?=
- <marcandre.lureau@redhat.com>, John Snow <jsnow@redhat.com>,
- =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Harsh Prateek Bora <harshpb@linux.ibm.com>,
- Aurelien Jarno <aurelien@aurel32.net>, Paolo Bonzini <pbonzini@redhat.com>,
- Joel Stanley <joel@jms.id.au>, Bernhard Beschow <shentey@gmail.com>,
- qemu-ppc@nongnu.org, qemu-riscv@nongnu.org,
- Daniel Henrique Barboza <danielhb413@gmail.com>,
- Laurent Vivier <lvivier@redhat.com>, qemu-arm@nongnu.org,
- Wainer dos Santos Moschetta <wainersm@redhat.com>,
- Fabiano Rosas <farosas@suse.de>, Markus Armbruster <armbru@redhat.com>,
- Bin Meng <bmeng.cn@gmail.com>, Pavel Dovgalyuk <pavel.dovgaluk@ispras.ru>,
- Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
+ 5b1f17b1804b1-434f44eaac7sm120542125e9.42.2024.12.11.04.51.29
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 11 Dec 2024 04:51:29 -0800 (PST)
+From: Craig Blackmore <craig.blackmore@embecosm.com>
+To: qemu-devel@nongnu.org,
+	qemu-riscv@nongnu.org
+Cc: Craig Blackmore <craig.blackmore@embecosm.com>,
  Richard Henderson <richard.henderson@linaro.org>,
- Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>,
- Christian Borntraeger <borntraeger@linux.ibm.com>,
- Beraldo Leal <bleal@redhat.com>, Peter Maydell <peter.maydell@linaro.org>,
- Radoslaw Biernacki <rad@semihalf.com>,
- =?UTF-8?Q?Daniel_P=2E_Berrang=C3=A9?= <berrange@redhat.com>,
- Nicholas Piggin <npiggin@gmail.com>,
- Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
- "Michael S. Tsirkin" <mst@redhat.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Pierrick Bouvier <pierrick.bouvier@linaro.org>
-References: <20241210204349.723590-1-alex.bennee@linaro.org>
- <20241210204349.723590-16-alex.bennee@linaro.org>
-From: Thomas Huth <thuth@redhat.com>
-Autocrypt: addr=thuth@redhat.com; keydata=
- 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
-In-Reply-To: <20241210204349.723590-16-alex.bennee@linaro.org>
-X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: Y8WH424DcXFmXKwj5m9CIY6Pe5HG9OuVSPBJxq1u7ps_1733904300
-X-Mimecast-Originator: redhat.com
-Content-Language: en-US
-Content-Type: text/plain; charset=UTF-8; format=flowed
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bmeng.cn@gmail.com>,
+ Weiwei Li <liwei1518@gmail.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Helene Chelin <helene.chelin@embecosm.com>, Nathan Egge <negge@google.com>,
+ Max Chou <max.chou@sifive.com>, Paolo Savini <paolo.savini@embecosm.com>
+Subject: [PATCH v7 0/2] target/riscv: rvv: reduce the overhead for simple
+ RISC-V vector unit-stride loads and stores
+Date: Wed, 11 Dec 2024 12:51:11 +0000
+Message-ID: <20241211125113.583902-1-craig.blackmore@embecosm.com>
+X-Mailer: git-send-email 2.43.0
+MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=170.10.133.124; envelope-from=thuth@redhat.com;
- helo=us-smtp-delivery-124.mimecast.com
-X-Spam_score_int: -25
-X-Spam_score: -2.6
+Received-SPF: pass client-ip=2a00:1450:4864:20::42b;
+ envelope-from=craig.blackmore@embecosm.com; helo=mail-wr1-x42b.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
 X-Spam_bar: --
-X-Spam_report: (-2.6 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.52,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H2=-0.001,
- RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001, RCVD_IN_VALIDITY_SAFE_BLOCKED=0.001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -186,76 +108,98 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 10/12/2024 21.43, Alex Bennée wrote:
-> From: Pierrick Bouvier <pierrick.bouvier@linaro.org>
-> 
-> This boot an OP-TEE environment, and launch a nested guest VM inside it
-> using the Realms feature. We do it for virt and sbsa-ref platforms.
-> 
-> Signed-off-by: Pierrick Bouvier <pierrick.bouvier@linaro.org>
-> 
-> -----
-> 
-> v2:
-> - move test to its own file
-> - add sbsa test
-> - check output of `cca-workload-attestation report`
-> 
-> v3:
-> - build and run test with cca-v4 images
-> - factorize nested guest test between both tests
-> - remove accel tcg option as it is the default when running tests
-> Note: It's a long test and there is a work in progress to understand why
-> debug build is so slow (x12 vs optimized).
-> 
-> v4:
-> - use pauth-impdef=on to speed up build time execution (x2.5 faster)
-> - increase timeout value
-> 
-> Signed-off-by: Pierrick Bouvier <pierrick.bouvier@linaro.org>
-> Message-Id: <20241203213629.2482806-1-pierrick.bouvier@linaro.org>
-> Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
-> ---
->   tests/functional/meson.build                 |   4 +
->   tests/functional/test_aarch64_rme_sbsaref.py |  70 +++++++++++++
->   tests/functional/test_aarch64_rme_virt.py    | 100 +++++++++++++++++++
->   3 files changed, 174 insertions(+)
->   create mode 100755 tests/functional/test_aarch64_rme_sbsaref.py
->   create mode 100755 tests/functional/test_aarch64_rme_virt.py
-> 
-> diff --git a/tests/functional/meson.build b/tests/functional/meson.build
-> index 0a76bd9954..4e207c53d5 100644
-> --- a/tests/functional/meson.build
-> +++ b/tests/functional/meson.build
-> @@ -13,6 +13,8 @@ endif
->   test_timeouts = {
->     'aarch64_aspeed' : 600,
->     'aarch64_raspi4' : 480,
-> +  'aarch64_rme_virt' : 1200,
-> +  'aarch64_rme_sbsaref' : 1200,
+Changes since v6:
+- Limit access size to element size to address Max Chou's review.
+- Fix a typo in the name of a function that this patch now calls.
 
-I was a little bit worried when I saw the big timeout values here, but 
-that's only for debug builds, right? I gave it a try in a standard build, 
-the tests both finished within 5 minutes, so the standard runtime still 
-seems to be ok.
+With access size limited to element size this patch still provides a
+significant speedup.  The `memcpy` benchmark from:
+    
+  https://github.com/embecosm/rise-rvv-tcg-qemu-tooling/tree/main/strmem-benchmarks
 
-Tested-by: Thomas Huth <thuth@redhat.com>
+shows up to 75% speedup with this patch:
+    
+  VLEN | Size | ns/inst (ratio)
+  -----|------|-----------------
+   128 |    1 |            1.50
+   128 |    2 |            1.42
+   128 |    3 |            1.35
+   128 |    4 |            1.29
+   128 |    5 |            1.23
+   128 |    7 |            1.18
+   128 |    8 |            1.09
+   128 |    9 |            1.06
+   128 |   11 |            1.01
+    
+  VLEN | Size | ns/inst (ratio)
+  -----|------|-----------------
+  1024 |    1 |            1.75
+  1024 |    2 |            1.62
+  1024 |    3 |            1.52
+  1024 |    4 |            1.43
+  1024 |    5 |            1.35
+  1024 |    7 |            1.31
+  1024 |    8 |            1.12
+  1024 |    9 |            1.12
+  1024 |   11 |            1.01
 
- > +    # This tests the FEAT_RME cpu implementation, by booting a VM 
-supporting it,
- > +    # and launching a nested VM using it.
- > +    def test_aarch64_rme_sbsaref(self):
- > +        stack_path_tar_gz = self.ASSET_RME_STACK_SBSA.fetch()
- > +        archive_extract(stack_path_tar_gz, self.workdir)
- > +
- > +        self.set_machine('sbsa-ref')
- > +        self.vm.set_console()
- > +        self.require_accelerator('tcg')
+It is not clear to me exactly why the patch is now helping.  At first I
+thought it was due to avoiding `vext_continuous_ldst_host` calling out
+to `memcpy` for small sizes but trying that directly in
+`vext_continuous_ldst_host` was much less beneficial:
 
-Please move the set_machine and require_accelerator to the beginning of the 
-function since they can skip the test in case the prerequisite is not 
-available. Otherwise you've extracted the asset in vain.
+  VLEN |  Size | ns/inst (ratio)
+  -----|-------|-----------------
+   128 |     1 |            1.06
+   128 |     2 |            1.14
+   128 |     3 |            1.03
+   128 |     4 |            1.04
+   128 |     5 |            1.02
+   128 |     7 |            1.02
+   128 |     8 |            0.91
+   128 |     9 |            0.92
+   128 |    11 |            1.03
+  
+  VLEN |  Size | ns/inst (ratio)
+  -----|-------|-----------------
+  1024 |     1 |            1.10
+  1024 |     2 |            1.14
+  1024 |     3 |            1.04
+  1024 |     4 |            1.05
+  1024 |     5 |            0.96
+  1024 |     7 |            1.07
+  1024 |     8 |            0.94
+  1024 |     9 |            0.93
+  1024 |    11 |            0.90
 
-  Thomas
+Previous versions:
+- v1: https://lore.kernel.org/all/20240717153040.11073-1-paolo.savini@embecosm.com/
+- v2: https://lore.kernel.org/all/20241002135708.99146-1-paolo.savini@embecosm.com/
+- v3: https://lore.kernel.org/all/20241014220153.196183-1-paolo.savini@embecosm.com/
+- v4: https://lore.kernel.org/all/20241029194348.59574-1-paolo.savini@embecosm.com/
+- v5: https://lore.kernel.org/all/20241111130324.32487-1-paolo.savini@embecosm.com/
+- v6: https://lore.kernel.org/all/20241204122952.53375-1-craig.blackmore@embecosm.com/
+
+Cc: Richard Henderson <richard.henderson@linaro.org>
+Cc: Palmer Dabbelt <palmer@dabbelt.com>
+Cc: Alistair Francis <alistair.francis@wdc.com>
+Cc: Bin Meng <bmeng.cn@gmail.com>
+Cc: Weiwei Li <liwei1518@gmail.com>
+Cc: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Cc: Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
+Cc: Helene Chelin <helene.chelin@embecosm.com>
+Cc: Nathan Egge <negge@google.com>
+Cc: Max Chou <max.chou@sifive.com>
+Cc: Paolo Savini <paolo.savini@embecosm.com>
+
+Craig Blackmore (2):
+  target/riscv: rvv: fix typo in vext continuous ldst function names
+  target/riscv: rvv: speed up small unit-stride loads and stores
+
+ target/riscv/vector_helper.c | 26 +++++++++++++++++++++-----
+ 1 file changed, 21 insertions(+), 5 deletions(-)
+
+-- 
+2.43.0
 
 
