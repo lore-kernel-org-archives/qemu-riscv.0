@@ -4,81 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 079A1E7717D
-	for <qemu-riscv@archiver.kernel.org>; Wed, 11 Dec 2024 06:41:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 47063E7717D
+	for <qemu-riscv@archiver.kernel.org>; Wed, 11 Dec 2024 06:59:02 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tLGNl-0001oO-Bw; Wed, 11 Dec 2024 01:39:37 -0500
+	id 1tLGfu-0000hy-9l; Wed, 11 Dec 2024 01:58:22 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1tLGNb-0001SH-T0
- for qemu-riscv@nongnu.org; Wed, 11 Dec 2024 01:39:29 -0500
+ (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1tLGfo-0000gR-TZ
+ for qemu-riscv@nongnu.org; Wed, 11 Dec 2024 01:58:18 -0500
 Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1tLGNV-0000fi-HX
- for qemu-riscv@nongnu.org; Wed, 11 Dec 2024 01:39:27 -0500
+ (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1tLGfi-0003D0-Ht
+ for qemu-riscv@nongnu.org; Wed, 11 Dec 2024 01:58:16 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1733899160;
+ s=mimecast20190719; t=1733900287;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
- bh=UXnWtbx06o0UTk1/qIEPiBZDQledSmt1TCdALnCN/Cc=;
- b=WeUYC4eBj1OjWR/IjK3u+ou5p7UQT5FRFuwlHMLIaLG3hgslN+NqMQrKIBourKIrnrx9ih
- iHPkp0vvIWQgv3Laf5njS66Q7LBJ1DIV/3zBcRH5070JsmXDIe6SUMgYsVD/mR6xgSvoiX
- vvwrAwzZc9mx5+iSiTvfhMVrPaiR2vw=
-Received: from mail-ej1-f71.google.com (mail-ej1-f71.google.com
- [209.85.218.71]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=Gy2n11iGTa9ZiqbyiHBxIp01HGftCyw+zIb9nN+g+e0=;
+ b=NsNkmKxFVrsLTDTSYwXpOhVk1s0ePU1ExrugMJdYaA4QShmdD0PzlZUf9jhK2q32Q7fhAd
+ kEzagl3T3eTiHq8E6DAgNOclxBYBBdqFewT0x7j76RtCeKvCrnAUs+lYTdMJoH//8UoRIj
+ 3w631WGqjtFthvuZkuTEdJjlhStdQMs=
+Received: from mail-ej1-f69.google.com (mail-ej1-f69.google.com
+ [209.85.218.69]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-680-s8LAiRBpOyq0NkebrG4euA-1; Wed, 11 Dec 2024 01:39:16 -0500
-X-MC-Unique: s8LAiRBpOyq0NkebrG4euA-1
-X-Mimecast-MFC-AGG-ID: s8LAiRBpOyq0NkebrG4euA
-Received: by mail-ej1-f71.google.com with SMTP id
- a640c23a62f3a-aa680c6aa0eso383340866b.0
- for <qemu-riscv@nongnu.org>; Tue, 10 Dec 2024 22:39:15 -0800 (PST)
+ us-mta-312-D9sdZoUyN_O1IvKCxmlUNw-1; Wed, 11 Dec 2024 01:58:05 -0500
+X-MC-Unique: D9sdZoUyN_O1IvKCxmlUNw-1
+X-Mimecast-MFC-AGG-ID: D9sdZoUyN_O1IvKCxmlUNw
+Received: by mail-ej1-f69.google.com with SMTP id
+ a640c23a62f3a-aa68203d288so286777066b.1
+ for <qemu-riscv@nongnu.org>; Tue, 10 Dec 2024 22:58:05 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733899155; x=1734503955;
+ d=1e100.net; s=20230601; t=1733900285; x=1734505085;
  h=content-transfer-encoding:in-reply-to:autocrypt:content-language
  :from:references:cc:to:subject:user-agent:mime-version:date
  :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=UXnWtbx06o0UTk1/qIEPiBZDQledSmt1TCdALnCN/Cc=;
- b=Uh0H/yfhs2ST2m0aFQXKDGPDc1WD54QHN6waBPw22Jg8aYAS73RWde6QM/bDOgvp6l
- 1txO5XYd3W7YdV2dK4yOSeGbsAqXOhOPlVlzZs2gN1kVWMQpiGFbaqWt3ZTSbOi5MsbU
- IG2Rr15pPOleGQkk//6jQt012ISDj7CWi12uE2Pf9Y5PwCUh9os2i8r/1nHlvWb97mEX
- CqfPGjIAdJ+dYKHKv44VX4/7npO7QlTOcLV32KSZ+tuMzct1AS8iXTcNnHjtCQJftkqF
- Yo3+PyZI8/ZPN79LVySb+gEOqylAgZqIXFPjnGt25qJ5ByRrqdGoiyJCOnWcz7jvkXvH
- Wc6Q==
+ bh=Gy2n11iGTa9ZiqbyiHBxIp01HGftCyw+zIb9nN+g+e0=;
+ b=iZhUp+Gi9n+7RDdbIKbhF23KNwbNCQeZBxVXTpW2VgzvUHUjNgfoqDUB5sAiKM5qHS
+ rylZMe/ys1AWjBfHwBRUIJx9S+l1pC8VjexuYGG/sHrGfecUTmJqO/vmfjqwF6my2MXd
+ 8Dmp2PFL/xgjD+5E6taznDrxFSH1W3bzULyc1jv+7Yc1cAsKgdj1yXcLOkIrkjQtoZWC
+ MdDmHw9w7Bf7sSr0Xy5jW0c7/2AhLm+PwYRJjF2Qy2AmG2jeF+1YjaR8b4Yf/Cv3W9ZM
+ 7aP4JtEkot90zhHhAXbuHOuogbKlB24NcOP3ZCVwAg2A/IUA7Ae9N2U0H+GhZMNIEay7
+ 2soA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCW2ORM1qb/cyS9IH79sQJUUJxDwXsZyAOWY0TvJcl1WQcLyUwfPkREjkmAM/Txblm/LzVBc/18j7m8P@nongnu.org
-X-Gm-Message-State: AOJu0Yy5tzk2i+Q+QaHzNpJY5dw36nWsrrRMp4Aww5sD+4eastcv7gnZ
- 0On6cxfslL1RsZgc8a3Voe/RnTVYed9HMdUh9Xwd9GcN9ZsMidv1BlAl1uSPj+Rqy8YwnhS+nHw
- Gy9Vj62zsc3uOzoKQkgc99hfMha4sLV3jLt0TX63DO/pZKA4kUU+u
-X-Gm-Gg: ASbGncuVW5v5Ho55sG12r2DktVKo5BNctBwmen6zJkaYVgYMV6wuiVC41c8I85aqnVt
- dRnApOOvpZIlN2nxOb4QtRC47vVhTbJEonA3WVTIEi05rEpgE+QVbbo/Fj5PBkJTH4X/E3jYAkE
- 8LlQZaWDHx+3HbyhRvw6XokWP3PJ2CeG98KOaEmgfRShop+ksnyg0J0enVJy7zu3OQ+UMW//jfS
- 08Up0YxLO9w6TYZQyRwswtsRRJJM2NL6qSu/OEDqQVW89kgfZppb1ZIq6jhJRK3sR/34rCmM09l
- UNUbL5w=
-X-Received: by 2002:a17:906:1ba2:b0:aa6:8bb4:503d with SMTP id
- a640c23a62f3a-aa6b115b189mr134674066b.2.1733899154738; 
- Tue, 10 Dec 2024 22:39:14 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IFEYJGViWShQTCtubw+/Lz85Tk7eHLenPcj/P2MrbiEcGNxF6Uku7jDl69Tb28p3cXsV4srkQ==
-X-Received: by 2002:a17:906:1ba2:b0:aa6:8bb4:503d with SMTP id
- a640c23a62f3a-aa6b115b189mr134670666b.2.1733899154305; 
- Tue, 10 Dec 2024 22:39:14 -0800 (PST)
+ AJvYcCW8JRatDQFI7ZG9OVMMej1aCcSBg/HdaYX++CftZfe+pErn4BbJvHh7gtEudaAuS55NWMdqFSIesJYE@nongnu.org
+X-Gm-Message-State: AOJu0YxCRnQAtlfykBdcPVPb3vvtAKZgKh2cFQgduFwFFsOkeZv3mCBr
+ +IIBQqGEukwgnP9wq1Wimlc3MXEqO/nih/DtdG0o3WZH02UYRIcZ2hKABXJrPmd39YicpERx8Xb
+ Whfnroo0XxjXrHCrbQ3Hd5G/yeL4vshzaTK0dvCbCFs9c5juzLAvr
+X-Gm-Gg: ASbGncsfhNe5OitEwtX7D6TpbO496yDkumu/TRHLrmNnnAniSP+ZSdMiKGDn0WO+jlp
+ ugCdAOK41UEMQHz6sJuA3XKXVKZRUQgMJpz5WggucJdUdFlBy5RYSvFfdgaVP7zfWKvYVexYJk+
+ rtsT+19sxiLSDQbXX/5KFu7v03/WpqEln/7QVC2KrNi4/yXWLOWrtXdzwSwGDvq2SYvrH6QWwET
+ 9ZwlQAbzKYUoybetXjV0Lw9XDcBvARghcN5MNIJUgsX6arJn8c5DwHwjZGymvfSPbZkS7LlHmO3
+ 1RZem2k=
+X-Received: by 2002:a17:906:328e:b0:aa6:7f3d:4f9b with SMTP id
+ a640c23a62f3a-aa6b11a4696mr102429966b.24.1733900284686; 
+ Tue, 10 Dec 2024 22:58:04 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IFJZ4QMul4Lj7dG40jtzocfHouPwWFqfZYWWa72KRde9Qyho4783jBmXKtvamxu8mX//eGr4A==
+X-Received: by 2002:a17:906:328e:b0:aa6:7f3d:4f9b with SMTP id
+ a640c23a62f3a-aa6b11a4696mr102427866b.24.1733900284238; 
+ Tue, 10 Dec 2024 22:58:04 -0800 (PST)
 Received: from [192.168.0.6] (ip-109-42-51-17.web.vodafone.de. [109.42.51.17])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-aa6701b08c2sm556535166b.124.2024.12.10.22.39.11
+ a640c23a62f3a-aa667925953sm597991566b.9.2024.12.10.22.58.01
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 10 Dec 2024 22:39:13 -0800 (PST)
-Message-ID: <0509c96e-46d0-45ca-a768-9d443499b648@redhat.com>
-Date: Wed, 11 Dec 2024 07:39:10 +0100
+ Tue, 10 Dec 2024 22:58:03 -0800 (PST)
+Message-ID: <d2a73820-58fa-41d0-8f38-68b0ad53fa7d@redhat.com>
+Date: Wed, 11 Dec 2024 07:58:00 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 19/20] tests/functional: remove hacky sleep from the tests
+Subject: Re: [PATCH 20/20] tests/functional: extend test_aarch64_virt with
+ vulkan test
 To: =?UTF-8?Q?Alex_Benn=C3=A9e?= <alex.bennee@linaro.org>,
- qemu-devel@nongnu.org
+ qemu-devel@nongnu.org, "Daniel P. Berrange" <berrange@redhat.com>
 Cc: Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
  qemu-s390x@nongnu.org, Halil Pasic <pasic@linux.ibm.com>,
  Jiaxun Yang <jiaxun.yang@flygoat.com>, Weiwei Li <liwei1518@gmail.com>,
@@ -109,7 +110,7 @@ Cc: Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
  "Michael S. Tsirkin" <mst@redhat.com>,
  Alistair Francis <alistair.francis@wdc.com>
 References: <20241210204349.723590-1-alex.bennee@linaro.org>
- <20241210204349.723590-20-alex.bennee@linaro.org>
+ <20241210204349.723590-21-alex.bennee@linaro.org>
 From: Thomas Huth <thuth@redhat.com>
 Autocrypt: addr=thuth@redhat.com; keydata=
  xsFNBFH7eUwBEACzyOXKU+5Pcs6wNpKzrlJwzRl3VGZt95VCdb+FgoU9g11m7FWcOafrVRwU
@@ -153,9 +154,9 @@ Autocrypt: addr=thuth@redhat.com; keydata=
  oiT+z+/E59qj/EKfyce3sbC9XLjXv3mHMrq1tKX4G7IJGnS989E/fg6crv6NHae9Ckm7+lSs
  IQu4bBP2GxiRQ+NV3iV/KU3ebMRzqIC//DCOxzQNFNJAKldPe/bKZMCxEqtVoRkuJtNdp/5a
  yXFZ6TfE1hGKrDBYAm4vrnZ4CXFSBDllL59cFFOJCkn4Xboj/aVxxJxF30bn
-In-Reply-To: <20241210204349.723590-20-alex.bennee@linaro.org>
+In-Reply-To: <20241210204349.723590-21-alex.bennee@linaro.org>
 X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: ezr8wEb07sSLJo_bwczsDp5BYXFTNeNwiWzZLgUahe8_1733899155
+X-Mimecast-MFC-PROC-ID: d_DbrgPzXjcwAUa7llegrpiTZ7PCLryFkzgkh4kzhG8_1733900285
 X-Mimecast-Originator: redhat.com
 Content-Language: en-US
 Content-Type: text/plain; charset=UTF-8; format=flowed
@@ -167,9 +168,9 @@ X-Spam_score: -2.6
 X-Spam_bar: --
 X-Spam_report: (-2.6 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.52,
  DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H2=-0.001,
- RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001, RCVD_IN_VALIDITY_SAFE_BLOCKED=0.001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001,
+ RCVD_IN_VALIDITY_SAFE_BLOCKED=0.001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -186,16 +187,127 @@ Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 On 10/12/2024 21.43, Alex Bennée wrote:
-> We have proper detection of prompts now so we don't need to guess with
-> sleep() sprinkled through the test. The extra step of calling halt is
-> just to flush the final bits of the log (although the last line is
-> still missed).
+> Now we have virtio-gpu Vulkan support lets add a test for it.
+> Currently this is using images build by buildroot:
+> 
+>    https://lists.buildroot.org/pipermail/buildroot/2024-December/768196.html
 > 
 > Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
 > ---
->   tests/functional/test_aarch64_virt.py | 22 ++++++++++------------
->   1 file changed, 10 insertions(+), 12 deletions(-)
+>   tests/functional/test_aarch64_virt.py | 83 ++++++++++++++++++++++++++-
+>   1 file changed, 80 insertions(+), 3 deletions(-)
+> 
+> diff --git a/tests/functional/test_aarch64_virt.py b/tests/functional/test_aarch64_virt.py
+> index 801300607c..25d11e2626 100755
+> --- a/tests/functional/test_aarch64_virt.py
+> +++ b/tests/functional/test_aarch64_virt.py
+> @@ -14,11 +14,12 @@
+>   import os
+>   import logging
+>   
+> +from qemu.machine.machine import VMLaunchFailure
+> +
+>   from qemu_test import BUILD_DIR
+>   from qemu_test import QemuSystemTest, Asset
+> -from qemu_test import exec_command, wait_for_console_pattern
+> -from qemu_test import get_qemu_img, run_cmd
+> -
+> +from qemu_test import exec_command, wait_for_console_pattern, exec_command_and_wait_for_pattern
+> +from qemu_test import has_cmd, get_qemu_img, run_cmd
+>   
+>   class Aarch64VirtMachine(QemuSystemTest):
+>       KERNEL_COMMON_COMMAND_LINE = 'printk.time=0 '
+> @@ -125,5 +126,81 @@ def test_aarch64_virt_gicv2(self):
+>           self.common_aarch64_virt("virt,gic-version=2")
+>   
+>   
+> +    ASSET_VIRT_GPU_KERNEL = Asset(
+> +        ('https://fileserver.linaro.org/s/ce5jXBFinPxtEdx/'
+> +         'download?path=%2F&files='
+> +         'Image'),
+> +        '89e5099d26166204cc5ca4bb6d1a11b92c217e1f82ec67e3ba363d09157462f6')
+> +
+> +    ASSET_VIRT_GPU_ROOTFS = Asset(
+> +        ('https://fileserver.linaro.org/s/ce5jXBFinPxtEdx/'
+> +         'download?path=%2F&files='
+> +         'rootfs.ext4.zstd'),
+> +        '792da7573f5dc2913ddb7c638151d4a6b2d028a4cb2afb38add513c1924bdad4')
+> +
+> +    def test_aarch64_virt_with_gpu(self):
+> +        # This tests boots with a buildroot test image that contains
+> +        # vkmark and other GPU exercising tools. We run a headless
+> +        # weston that nevertheless still exercises the virtio-gpu
+> +        # backend.
+> +
+> +        (has_zstd, msg) = has_cmd('zstd')
+> +        if has_zstd is False:
+> +            self.skipTest(msg)
 
-Reviewed-by: Thomas Huth <thuth@redhat.com>
+I'd recommend to use a decorator instead:
+
+@skipUnless(*has_cmd('zstd'))
+
+or if Daniel's patch series lands first, switch to @skipIfMissingCommands:
+
+https://lore.kernel.org/qemu-devel/20241129173120.761728-7-berrange@redhat.com/
+
+> +        self.zstd = 'zstd'
+
+You only use self.zstd once, so the detour through a variable seems 
+unnecessary here?
+
+> +        image_path_zst = self.ASSET_VIRT_GPU_ROOTFS.fetch()
+> +        kernel_path = self.ASSET_VIRT_GPU_KERNEL.fetch()
+> +
+> +        image_path = self.workdir + "/rootfs.ext4"
+> +
+> +        run_cmd([self.zstd, "-f", "-d", image_path_zst,
+> +                 "-o", image_path])
+> +
+> +        self.set_machine('virt')
+
+Please move set_machine to the top of the function. Reasoning: It can cancel 
+the test if the 'virt' machine has not been compiled into the binary. In 
+that case you'd extracted the rootfs image in vain.
+
+> +        self.vm.set_console()
+> +        kernel_command_line = (self.KERNEL_COMMON_COMMAND_LINE +
+> +                               'console=ttyAMA0 root=/dev/vda')
+> +        self.require_accelerator("tcg")
+
+Same, please move to the beginning since it can skip the test.
+
+> +        self.vm.add_args("-accel", "tcg")
+> +        self.vm.add_args("-cpu", "neoverse-v1,pauth-impdef=on")
+> +        self.vm.add_args("-machine",
+> +                         "virt,virtualization=on,"
+> +                         "gic-version=max",
+> +                         '-kernel', kernel_path,
+> +                         '-append', kernel_command_line)
+> +        self.vm.add_args("-smp", "2", "-m", "2048")
+> +        self.vm.add_args("-device", "virtio-gpu-gl-pci,hostmem=4G,blob=on,venus=on")
+> +        self.vm.add_args("-display", "egl-headless")
+> +        self.vm.add_args("-display", "dbus,gl=on")
+> +        self.vm.add_args("-device", "virtio-blk-device,drive=hd0")
+> +        self.vm.add_args("-blockdev",
+> +                         "driver=raw,file.driver=file,node-name=hd0,read-only=on,"
+> +                         f"file.filename={image_path}")
+> +        self.vm.add_args("--snapshot")
+
+Any reason for using double dashes just here and not for the other commands?
+
+> +        try:
+> +            self.vm.launch()
+> +        except VMLaunchFailure as e:
+> +            if "old virglrenderer, blob resources unsupported" in e.output:
+> +                self.skipTest("No blob support for virtio-gpu")
+> +            elif "old virglrenderer, venus unsupported" in e.output:
+> +                self.skipTest("No venus support for virtio-gpu")
+> +            else:
+> +                self.log.info(f"un-handled launch failure: {e.output}")
+
+s/un-handled/unhandled/ ?
+
+  Thomas
 
 
