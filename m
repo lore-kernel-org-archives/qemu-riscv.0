@@ -4,119 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E221BE77182
-	for <qemu-riscv@archiver.kernel.org>; Tue, 10 Dec 2024 20:51:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9FF1DE7717D
+	for <qemu-riscv@archiver.kernel.org>; Wed, 11 Dec 2024 06:04:53 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tL7C5-0004ep-La; Tue, 10 Dec 2024 15:50:58 -0500
+	id 1tLFpY-0006uv-KZ; Wed, 11 Dec 2024 01:04:16 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1tL7Br-0003zf-Vo
- for qemu-riscv@nongnu.org; Tue, 10 Dec 2024 15:50:44 -0500
-Received: from mail-wm1-x329.google.com ([2a00:1450:4864:20::329])
+ (Exim 4.90_1) (envelope-from <fea.wang@sifive.com>)
+ id 1tLFpX-0006uc-Ay
+ for qemu-riscv@nongnu.org; Wed, 11 Dec 2024 01:04:15 -0500
+Received: from mail-pg1-x531.google.com ([2607:f8b0:4864:20::531])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1tL7Bn-000375-D3
- for qemu-riscv@nongnu.org; Tue, 10 Dec 2024 15:50:42 -0500
-Received: by mail-wm1-x329.google.com with SMTP id
- 5b1f17b1804b1-4361b0ec57aso4196935e9.0
- for <qemu-riscv@nongnu.org>; Tue, 10 Dec 2024 12:50:38 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <fea.wang@sifive.com>)
+ id 1tLFpV-00057l-Jq
+ for qemu-riscv@nongnu.org; Wed, 11 Dec 2024 01:04:15 -0500
+Received: by mail-pg1-x531.google.com with SMTP id
+ 41be03b00d2f7-7fd45005a09so2248648a12.2
+ for <qemu-riscv@nongnu.org>; Tue, 10 Dec 2024 22:04:12 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1733863838; x=1734468638; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=zmufaNphf2V1gjeMaS6HYVWY1pzqo9T3TKjafKi2Pnk=;
- b=UVQ8n7c0L02p6WP2pRRbzfu1rajSgjYqtxRA3jRDRHSukLDlE7FVXXfqSFpWs6U+/S
- w4IQb/pZ5zSv+DPIlbxzB5+OOKRuuTI1EvbdaMeIAb6zF5n+7/Fl1fGFyDq9JuyHhte5
- VrZIsiAz0wzPz2PzL0YNb0xqlcByiYd20z4kcvBSj3kfV/asPvAOYvoQDSOgXGD5oIkZ
- hlRreFVrWwLR0NdsSQQhc4GmoQuFZZOEDU9w2KB17XlgAsV9kwAFHpiMs8b1Emx9+4Uy
- QxjUQPpEbPi59usm/4pPmbZDiCqQw1YmvK3osh5NHZieNliQbItar/CE1A/v/tjmdHfP
- fcjg==
+ d=sifive.com; s=google; t=1733897051; x=1734501851; darn=nongnu.org;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=too7R5d5Rjrj3yG4d82pn3b74IR7gm0FJCZ2xM/7jGo=;
+ b=kDq0DUwBCe91B6V9X+YWmqsjslEbU9ok9hcbervDbdAk+W5edm4AMy512ZGpisxzJx
+ cBxaXOfDEGNrbEaK89p0GFnk3NPZ4m/8QlkdRNBCk+GC4+wQL60F9gabC08ef1iQHtUE
+ IKpmA/zopo4kaGmLSeZALLlb9bKAX+u12DDS8rLo+ZIZpNjxh0SPTye+3ezFFsnTCRIH
+ cCDf4MK+J12zwmexcmGcaK+wKeOipLBJmFoaKPna7e080/jthqtPvx6y1weoflWpR+/7
+ yh7sXhCe8xhoSQrYaUhNxdaxkVi411BukUcnSBHKdDeNi/ArFTQOYBae9m22fV7H3wob
+ B/pA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733863838; x=1734468638;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=zmufaNphf2V1gjeMaS6HYVWY1pzqo9T3TKjafKi2Pnk=;
- b=Z4NKB4d2M1d6lghXNKiIIrkTwGCmyOGeDzqyU8nPbI0lAFaOJDRWLYg5vRZDCugxk9
- W8JWVQkT7NX7RrE8eRXne1ew0tmc3h0SYnteqBBq1/Vjxd9PBhCbvK/0LZPlrmMvT3eq
- qSQnHqjElPtimw1tL5i+KwQHgfzOMmLFWJYw+LtHcEXTi+DP/KqYwFblZvnjWJmqva+5
- 69StIWAWFguoWSenod6HOZJVm27ZkZu5O+nyJxd9n5kiPWQm3g0vNQWzsCNpccqq+x1E
- DDWNOpPx063tlYnomg73j2NB+oBvBrAp2UFZB82B1QMf2PnG9AFnwfZn4taWBz0zFxeP
- jsvA==
+ d=1e100.net; s=20230601; t=1733897051; x=1734501851;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=too7R5d5Rjrj3yG4d82pn3b74IR7gm0FJCZ2xM/7jGo=;
+ b=q9cmvSBfJQE88X7HrFUpF1SIB5vjCxuPiZiwKuR3jCvLnc0xUVYja84/dC27TQo5ci
+ zq9Ih8HsJ9gaWmxOkA/9Y+58OQigz+R+QHWAiOFCgiHZ+bm0XqylXu2z1KbtUIQHSS5b
+ QFruIx/7rSrZ41sk/Ouzy3r3PBDqYGzLySb37NLqZn/JEbcynjD1Y1G6QD5kXqHW3lGe
+ GyyMMTDTYETSrD22Ze1s2uZHtnWCKCYnqxQ258l3hwRlmWYnGcuG/yYqpo1UyGM6tE/l
+ KXrbbWs2N1FQltsrUExy5UsZ+KNDY0N0wKfG+W9to1pyRr8So989lVHTedtMPnlvUfdj
+ 7o3w==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVT+6lSt8KgbKp17jz16qeOB9jTMN9/OZpGr6zymjQVyPNSrhficVg2Qwe0oF8sI2GKQr0dgjd+9ULy@nongnu.org
-X-Gm-Message-State: AOJu0Ywxq4QFW26Dbnx9qA6mBQ6FpJ+HQ4xvsNQgldmHl/1Ph0sGYHLi
- ixMAdNmobyPosu/D6sl+eHtX1YJAlGJmRaVzRBDLrLGGEd9ll/TddK9Tjx1eKC0=
-X-Gm-Gg: ASbGnctD4GZMOFq/4ZWZ1xZd5mh8cKQKXKDCg6j5HayMXlQAN+qEEXDLSI+kCmd078I
- Q0vt0PTe7NDOperVapo2m94EYfPuzJ+jgPmxMHU17Wddw0JgiyxA0cxQSILk1jTXK/ZZ+P7uuDj
- JZwylJOITYgdn+R1l/9PKZ2gjFJIH3B8vzcttUUS+8jAW/QazVRtf4KuRpwoPGdy0YYHVF2Az12
- FYF9Gh1FlimBi80v8FRLrZNnc7Ezd5uuiGaBL0mxdT6Z72IoKGw
-X-Google-Smtp-Source: AGHT+IHkAlr+6kQjaQRIxwrd2oCXtoHUNcaJR6B1xJCz9IEp0SuUjqpRHbOLvCCfEAgfyRv9mpQFvA==
-X-Received: by 2002:a05:600c:1c82:b0:434:f819:251a with SMTP id
- 5b1f17b1804b1-4361c396f09mr1898885e9.9.1733863837644; 
- Tue, 10 Dec 2024 12:50:37 -0800 (PST)
-Received: from draig.lan ([85.9.250.243]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-435ff2f46d3sm26878345e9.19.2024.12.10.12.50.34
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 10 Dec 2024 12:50:35 -0800 (PST)
-Received: from draig.lan (localhost [IPv6:::1])
- by draig.lan (Postfix) with ESMTP id E4F1060B86;
- Tue, 10 Dec 2024 20:43:50 +0000 (GMT)
-From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
-To: qemu-devel@nongnu.org
-Cc: Daniel Henrique Barboza <dbarboza@ventanamicro.com>, qemu-s390x@nongnu.org,
- Halil Pasic <pasic@linux.ibm.com>, Jiaxun Yang <jiaxun.yang@flygoat.com>,
- Weiwei Li <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Cleber Rosa <crosa@redhat.com>, Palmer Dabbelt <palmer@dabbelt.com>,
- Leif Lindholm <quic_llindhol@quicinc.com>,
- Eric Farman <farman@linux.ibm.com>,
- =?UTF-8?q?Marc-Andr=C3=A9=20Lureau?= <marcandre.lureau@redhat.com>,
- John Snow <jsnow@redhat.com>,
- =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Harsh Prateek Bora <harshpb@linux.ibm.com>,
- Aurelien Jarno <aurelien@aurel32.net>, Paolo Bonzini <pbonzini@redhat.com>,
- Joel Stanley <joel@jms.id.au>, Bernhard Beschow <shentey@gmail.com>,
- qemu-ppc@nongnu.org, qemu-riscv@nongnu.org,
- Daniel Henrique Barboza <danielhb413@gmail.com>,
- Thomas Huth <thuth@redhat.com>, Laurent Vivier <lvivier@redhat.com>,
- qemu-arm@nongnu.org, Wainer dos Santos Moschetta <wainersm@redhat.com>,
- Fabiano Rosas <farosas@suse.de>, Markus Armbruster <armbru@redhat.com>,
- Bin Meng <bmeng.cn@gmail.com>, Pavel Dovgalyuk <pavel.dovgaluk@ispras.ru>,
- Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
- Richard Henderson <richard.henderson@linaro.org>,
- Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>,
- Christian Borntraeger <borntraeger@linux.ibm.com>,
- Beraldo Leal <bleal@redhat.com>, Peter Maydell <peter.maydell@linaro.org>,
- Radoslaw Biernacki <rad@semihalf.com>,
- =?UTF-8?q?Daniel=20P=2E=20Berrang=C3=A9?= <berrange@redhat.com>,
- =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
- Nicholas Piggin <npiggin@gmail.com>,
- Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
- "Michael S. Tsirkin" <mst@redhat.com>,
- Alistair Francis <alistair.francis@wdc.com>
-Subject: [PATCH 18/20] system/qtest: properly feedback results of
- clock_[step|set]
-Date: Tue, 10 Dec 2024 20:43:47 +0000
-Message-Id: <20241210204349.723590-19-alex.bennee@linaro.org>
-X-Mailer: git-send-email 2.39.5
-In-Reply-To: <20241210204349.723590-1-alex.bennee@linaro.org>
-References: <20241210204349.723590-1-alex.bennee@linaro.org>
+ AJvYcCUkB+6JOCEUTF4NBfVhsuI4Vlcw3vkpipCOhBvyBzYZtJv4b/p7yDyG+IAnnlMTzs86dvxDaRnaeeWW@nongnu.org
+X-Gm-Message-State: AOJu0YyFJwgWfL1AI05Gi/y40T/YDfZmOuwu3A+2Da9KtVENFWir+C/u
+ LkL6OjG07HQAnXoHV4nyYD5x+XNK6BzIqF7icwBhmpetsK56WvMgfnDdNZTfn6fl0Sx+ni8OnK4
+ T3Am9PZuL3Do8brJC/v1zTKDpftN2O9W6qc1a0A==
+X-Gm-Gg: ASbGncu8GjOGTX0gHt6BN4jgl+gQBKdQKaeotKLghtTK3Yd5YC1DXhvReclnXtMFIBQ
+ X6nJRsfl27b5b7QgnmEub5MhRd9V6Yazd+lw=
+X-Google-Smtp-Source: AGHT+IEE2LJJE3P5vAHdr7uFl+FQQeGaW81KXtGP1MrAF0R6My0CGltb2aLUhgXnGNNfWfQHpwHbuIonDpxiAHTk2A4=
+X-Received: by 2002:a17:90b:5110:b0:2ee:ab29:1a63 with SMTP id
+ 98e67ed59e1d1-2f127f8e7afmr2695817a91.3.1733897050986; Tue, 10 Dec 2024
+ 22:04:10 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::329;
- envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x329.google.com
+References: <20241115014702.1663274-1-fea.wang@sifive.com>
+In-Reply-To: <20241115014702.1663274-1-fea.wang@sifive.com>
+From: Fea Wang <fea.wang@sifive.com>
+Date: Wed, 11 Dec 2024 14:03:59 +0800
+Message-ID: <CAKhCfscy_dq_d0+RqzdLvX5wcb56T8d7qnOLO1LeCr_33BOAfg@mail.gmail.com>
+Subject: Re: [PATCH 1/1] hw/net: Support Marvell 88E1111 phy driver
+To: qemu-devel@nongnu.org, qemu-riscv@nongnu.org
+Cc: "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
+ Alistair Francis <alistair@alistair23.me>, 
+ Peter Maydell <peter.maydell@linaro.org>, Jason Wang <jasowang@redhat.com>, 
+ "open list:Xilinx Zynq" <qemu-arm@nongnu.org>
+Content-Type: multipart/alternative; boundary="000000000000cd3f0c0628f85d92"
+Received-SPF: pass client-ip=2607:f8b0:4864:20::531;
+ envelope-from=fea.wang@sifive.com; helo=mail-pg1-x531.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, HTML_MESSAGE=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -132,83 +94,94 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Time will not advance if the system is paused or there are no timer
-events set for the future. In absence of pending timer events
-advancing time would make no difference the system state. Attempting
-to do so would be a bug and the test or device under test would need
-fixing.
+--000000000000cd3f0c0628f85d92
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Tighten up the result reporting to `FAIL` if time was not advanced.
+Ping
 
-Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
-Resolves: https://gitlab.com/qemu-project/qemu/-/issues/2687
----
- system/qtest.c | 23 ++++++++++++++---------
- 1 file changed, 14 insertions(+), 9 deletions(-)
+On Fri, Nov 15, 2024 at 9:44=E2=80=AFAM Fea.Wang <fea.wang@sifive.com> wrot=
+e:
 
-diff --git a/system/qtest.c b/system/qtest.c
-index 12703a2045..d9501153a4 100644
---- a/system/qtest.c
-+++ b/system/qtest.c
-@@ -78,6 +78,11 @@ static void *qtest_server_send_opaque;
-  * let you adjust the value of the clock (monotonically).  All the commands
-  * return the current value of the clock in nanoseconds.
-  *
-+ * If the commands FAIL then time wasn't advanced which is likely
-+ * because the machine was in a paused state or no timer events exist
-+ * in the future. This will cause qtest to abort and the test will
-+ * need to check its assumptions.
-+ *
-  * .. code-block:: none
-  *
-  *  > clock_step
-@@ -710,7 +715,8 @@ static void qtest_process_command(CharBackend *chr, gchar **words)
-             qtest_sendf(chr, "OK little\n");
-         }
-     } else if (qtest_enabled() && strcmp(words[0], "clock_step") == 0) {
--        int64_t ns;
-+        int64_t old_ns = qemu_clock_get_ns(QEMU_CLOCK_VIRTUAL);
-+        int64_t ns, new_ns;
- 
-         if (words[1]) {
-             int ret = qemu_strtoi64(words[1], NULL, 0, &ns);
-@@ -719,11 +725,10 @@ static void qtest_process_command(CharBackend *chr, gchar **words)
-             ns = qemu_clock_deadline_ns_all(QEMU_CLOCK_VIRTUAL,
-                                             QEMU_TIMER_ATTR_ALL);
-         }
--        qemu_clock_advance_virtual_time(
--            qemu_clock_get_ns(QEMU_CLOCK_VIRTUAL) + ns);
-+        new_ns = qemu_clock_advance_virtual_time(old_ns + ns);
-         qtest_send_prefix(chr);
--        qtest_sendf(chr, "OK %"PRIi64"\n",
--                    (int64_t)qemu_clock_get_ns(QEMU_CLOCK_VIRTUAL));
-+        qtest_sendf(chr, "%s %"PRIi64"\n",
-+                    new_ns > old_ns ? "OK" : "FAIL", new_ns);
-     } else if (strcmp(words[0], "module_load") == 0) {
-         Error *local_err = NULL;
-         int rv;
-@@ -740,16 +745,16 @@ static void qtest_process_command(CharBackend *chr, gchar **words)
-             qtest_sendf(chr, "FAIL\n");
-         }
-     } else if (qtest_enabled() && strcmp(words[0], "clock_set") == 0) {
--        int64_t ns;
-+        int64_t ns, new_ns;
-         int ret;
- 
-         g_assert(words[1]);
-         ret = qemu_strtoi64(words[1], NULL, 0, &ns);
-         g_assert(ret == 0);
--        qemu_clock_advance_virtual_time(ns);
-+        new_ns = qemu_clock_advance_virtual_time(ns);
-         qtest_send_prefix(chr);
--        qtest_sendf(chr, "OK %"PRIi64"\n",
--                    (int64_t)qemu_clock_get_ns(QEMU_CLOCK_VIRTUAL));
-+        qtest_sendf(chr, "%s %"PRIi64"\n",
-+                    new_ns == ns ? "OK" : "FAIL", new_ns);
-     } else if (process_command_cb && process_command_cb(chr, words)) {
-         /* Command got consumed by the callback handler */
-     } else {
--- 
-2.39.5
+> When the ethernet PHY's compatible string is 'ethernet-phy-id0141.0cc2',
+> it will be matched with the Marvell driver in Linux instead of the
+> generic driver. They differ from reading the PHY register17.11 bit which
+> is for 'Speed and Duplex Resolved' and the value 0 will clear
+> phydev->link and stop the flow. To avoid getting stuck, change the
+> constant return value in QEMU for the bit to 1 to keep the driver going.
+>
+> Signed-off-by: Fea.Wang <fea.wang@sifive.com>
+> ---
+>  hw/net/xilinx_axienet.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/hw/net/xilinx_axienet.c b/hw/net/xilinx_axienet.c
+> index faf27947b0..ee4b3afe9c 100644
+> --- a/hw/net/xilinx_axienet.c
+> +++ b/hw/net/xilinx_axienet.c
+> @@ -102,7 +102,7 @@ static unsigned int tdk_read(struct PHY *phy, unsigne=
+d
+> int req)
+>              break;
+>          case 17:
+>              /* Marvell PHY on many xilinx boards.  */
+> -            r =3D 0x8000; /* 1000Mb  */
+> +            r =3D 0x8800; /* 1000Mb  */
+>              break;
+>          case 18:
+>              {
+> --
+> 2.34.1
+>
+>
 
+--000000000000cd3f0c0628f85d92
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><span style=3D"color:rgb(0,0,0);font-family:&quot;Times Ne=
+w Roman&quot;;font-size:medium">Ping</span></div><br><div class=3D"gmail_qu=
+ote gmail_quote_container"><div dir=3D"ltr" class=3D"gmail_attr">On Fri, No=
+v 15, 2024 at 9:44=E2=80=AFAM Fea.Wang &lt;<a href=3D"mailto:fea.wang@sifiv=
+e.com">fea.wang@sifive.com</a>&gt; wrote:<br></div><blockquote class=3D"gma=
+il_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,2=
+04,204);padding-left:1ex">When the ethernet PHY&#39;s compatible string is =
+&#39;ethernet-phy-id0141.0cc2&#39;,<br>
+it will be matched with the Marvell driver in Linux instead of the<br>
+generic driver. They differ from reading the PHY register17.11 bit which<br=
+>
+is for &#39;Speed and Duplex Resolved&#39; and the value 0 will clear<br>
+phydev-&gt;link and stop the flow. To avoid getting stuck, change the<br>
+constant return value in QEMU for the bit to 1 to keep the driver going.<br=
+>
+<br>
+Signed-off-by: Fea.Wang &lt;<a href=3D"mailto:fea.wang@sifive.com" target=
+=3D"_blank">fea.wang@sifive.com</a>&gt;<br>
+---<br>
+=C2=A0hw/net/xilinx_axienet.c | 2 +-<br>
+=C2=A01 file changed, 1 insertion(+), 1 deletion(-)<br>
+<br>
+diff --git a/hw/net/xilinx_axienet.c b/hw/net/xilinx_axienet.c<br>
+index faf27947b0..ee4b3afe9c 100644<br>
+--- a/hw/net/xilinx_axienet.c<br>
++++ b/hw/net/xilinx_axienet.c<br>
+@@ -102,7 +102,7 @@ static unsigned int tdk_read(struct PHY *phy, unsigned =
+int req)<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0break;<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0case 17:<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0/* Marvell PHY on many xili=
+nx boards.=C2=A0 */<br>
+-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 r =3D 0x8000; /* 1000Mb=C2=A0 */=
+<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 r =3D 0x8800; /* 1000Mb=C2=A0 */=
+<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0break;<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0case 18:<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0{<br>
+-- <br>
+2.34.1<br>
+<br>
+</blockquote></div>
+
+--000000000000cd3f0c0628f85d92--
 
