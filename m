@@ -4,22 +4,22 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 06CB6E77180
-	for <qemu-riscv@archiver.kernel.org>; Wed, 11 Dec 2024 15:49:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 25753E77180
+	for <qemu-riscv@archiver.kernel.org>; Wed, 11 Dec 2024 15:50:15 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tLOxm-0007EG-RU; Wed, 11 Dec 2024 10:49:22 -0500
+	id 1tLOxn-0007EI-BF; Wed, 11 Dec 2024 10:49:23 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <lc00631@tecorigin.com>)
- id 1tLOxk-0007Cq-8x; Wed, 11 Dec 2024 10:49:20 -0500
-Received: from out28-197.mail.aliyun.com ([115.124.28.197])
+ id 1tLOxk-0007Cv-Ds; Wed, 11 Dec 2024 10:49:20 -0500
+Received: from out28-195.mail.aliyun.com ([115.124.28.195])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <lc00631@tecorigin.com>)
- id 1tLOxg-0003FW-S9; Wed, 11 Dec 2024 10:49:20 -0500
+ id 1tLOxg-0003FZ-Va; Wed, 11 Dec 2024 10:49:20 -0500
 Received: from localhost.localdomain(mailfrom:lc00631@tecorigin.com
- fp:SMTPD_---.abUPoOe_1733932146 cluster:ay29) by smtp.aliyun-inc.com;
+ fp:SMTPD_---.abUPoNO_1733932145 cluster:ay29) by smtp.aliyun-inc.com;
  Wed, 11 Dec 2024 23:49:06 +0800
 From: Chao Liu <lc00631@tecorigin.com>
 To: bmeng.cn@gmail.com, liwei1518@gmail.com, palmer@dabbelt.com,
@@ -27,17 +27,14 @@ To: bmeng.cn@gmail.com, liwei1518@gmail.com, palmer@dabbelt.com,
 Cc: dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com,
  qemu-riscv@nongnu.org, qemu-devel@nongnu.org, zqz00548@tecorigin.com,
  Chao Liu <lc00631@tecorigin.com>
-Subject: [PATCH v2 1/1] target/riscv: add VILL field for vtype register macro
- definition
-Date: Wed, 11 Dec 2024 23:48:48 +0800
-Message-ID: <87f12c20620026268bc49cd030e6ce8f26e718c4.1733930699.git.lc00631@tecorigin.com>
+Subject: [PATCH v2 0/1] Add vtype.vill FIELD macro definition
+Date: Wed, 11 Dec 2024 23:48:47 +0800
+Message-ID: <cover.1733930699.git.lc00631@tecorigin.com>
 X-Mailer: git-send-email 2.41.0.windows.1
-In-Reply-To: <cover.1733930699.git.lc00631@tecorigin.com>
-References: <cover.1733930699.git.lc00631@tecorigin.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=115.124.28.197;
- envelope-from=lc00631@tecorigin.com; helo=out28-197.mail.aliyun.com
+Received-SPF: pass client-ip=115.124.28.195;
+ envelope-from=lc00631@tecorigin.com; helo=out28-195.mail.aliyun.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -61,25 +58,20 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Signed-off-by: Chao Liu <lc00631@tecorigin.com>
----
+Hi, all:
+
+I improve compatibility with RV32 and RV64 by adjusting the FIELD definition
+of vtype.vill.
+
+PATCH v1:
+https://lore.kernel.org/qemu-devel/cover.1733922709.git.lc00631@tecorigin.com/T
+
+Chao Liu (1):
+  target/riscv: add VILL field for vtype register macro definition
+
  target/riscv/cpu.h | 3 ++-
  1 file changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index 284b112821..0d74ee4581 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -170,7 +170,8 @@ FIELD(VTYPE, VSEW, 3, 3)
- FIELD(VTYPE, VTA, 6, 1)
- FIELD(VTYPE, VMA, 7, 1)
- FIELD(VTYPE, VEDIV, 8, 2)
--FIELD(VTYPE, RESERVED, 10, sizeof(target_ulong) * 8 - 11)
-+FIELD(VTYPE, RESERVED, 10, sizeof(target_ulong) * 8 - 12)
-+FIELD(VTYPE, VILL, sizeof(target_ulong) * 8 - 1, 1)
- 
- typedef struct PMUCTRState {
-     /* Current value of a counter */
 -- 
 2.47.0
 
