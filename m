@@ -4,79 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C8C25E7717D
-	for <qemu-riscv@archiver.kernel.org>; Wed, 11 Dec 2024 06:40:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 079A1E7717D
+	for <qemu-riscv@archiver.kernel.org>; Wed, 11 Dec 2024 06:41:24 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tLGLc-0007IX-ND; Wed, 11 Dec 2024 01:37:24 -0500
+	id 1tLGNl-0001oO-Bw; Wed, 11 Dec 2024 01:39:37 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1tLGLZ-0007At-CH
- for qemu-riscv@nongnu.org; Wed, 11 Dec 2024 01:37:23 -0500
+ (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1tLGNb-0001SH-T0
+ for qemu-riscv@nongnu.org; Wed, 11 Dec 2024 01:39:29 -0500
 Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1tLGLV-0000Zg-U3
- for qemu-riscv@nongnu.org; Wed, 11 Dec 2024 01:37:20 -0500
+ (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1tLGNV-0000fi-HX
+ for qemu-riscv@nongnu.org; Wed, 11 Dec 2024 01:39:27 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1733899037;
+ s=mimecast20190719; t=1733899160;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
- bh=UqA9i3tjJMDAjaoOUbpXYGF4QW0YsxxNvnVY6xKL2c4=;
- b=QO6q1xA7rt4TDGsqp/+anRKKPWfv/2IWhZnz/IqUHd0iMZ9H24JcAK3FBxnYiOY+GIqPmb
- bWhy2tJaizXOIfBxtRH64JRCK1UNA5wQvXDedSGG5Bw8IrGfI/pP0X6I0l1+rGbiXbBkbU
- Fv7ntCY8LSa/UqjrUDVniod7otKLloA=
+ bh=UXnWtbx06o0UTk1/qIEPiBZDQledSmt1TCdALnCN/Cc=;
+ b=WeUYC4eBj1OjWR/IjK3u+ou5p7UQT5FRFuwlHMLIaLG3hgslN+NqMQrKIBourKIrnrx9ih
+ iHPkp0vvIWQgv3Laf5njS66Q7LBJ1DIV/3zBcRH5070JsmXDIe6SUMgYsVD/mR6xgSvoiX
+ vvwrAwzZc9mx5+iSiTvfhMVrPaiR2vw=
 Received: from mail-ej1-f71.google.com (mail-ej1-f71.google.com
  [209.85.218.71]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-94-2gBUeJB5MuGzQUo82wh40A-1; Wed, 11 Dec 2024 01:37:16 -0500
-X-MC-Unique: 2gBUeJB5MuGzQUo82wh40A-1
-X-Mimecast-MFC-AGG-ID: 2gBUeJB5MuGzQUo82wh40A
+ us-mta-680-s8LAiRBpOyq0NkebrG4euA-1; Wed, 11 Dec 2024 01:39:16 -0500
+X-MC-Unique: s8LAiRBpOyq0NkebrG4euA-1
+X-Mimecast-MFC-AGG-ID: s8LAiRBpOyq0NkebrG4euA
 Received: by mail-ej1-f71.google.com with SMTP id
- a640c23a62f3a-aa68b4b957fso340141766b.3
- for <qemu-riscv@nongnu.org>; Tue, 10 Dec 2024 22:37:15 -0800 (PST)
+ a640c23a62f3a-aa680c6aa0eso383340866b.0
+ for <qemu-riscv@nongnu.org>; Tue, 10 Dec 2024 22:39:15 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733899035; x=1734503835;
+ d=1e100.net; s=20230601; t=1733899155; x=1734503955;
  h=content-transfer-encoding:in-reply-to:autocrypt:content-language
  :from:references:cc:to:subject:user-agent:mime-version:date
  :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=UqA9i3tjJMDAjaoOUbpXYGF4QW0YsxxNvnVY6xKL2c4=;
- b=O+NBgNEC5IIRv9wdoBu5bi7FT1xIESwqI+MZtF/NtWMKE3DLeLrPDSow6Lg8xugGI1
- KKWfQWWegzsLjyPYQEj02BreqrH6/l1kc10ggdRdItQNkzI6bTp9YdaXglnryi2XehMi
- B/PlyO065wAFGpAR/HBZBR7uhuIkqoSu/A9StCKqiMaN+BWxjaWuVEWCuqwaLLarI3l/
- ijgSr1V3dijSEyaNzhkQ5Fi1Kcaq0yt3uT2FvZhUAfPxPbebodfIJL6OxWVeGGOKIDV3
- 45XcOdMfBtjeO8LcvZi39LUaRHPjb7LPLOzuzmn/Dn13rGz5gJkb59AwDAsrLZL1EwuZ
- DfBg==
+ bh=UXnWtbx06o0UTk1/qIEPiBZDQledSmt1TCdALnCN/Cc=;
+ b=Uh0H/yfhs2ST2m0aFQXKDGPDc1WD54QHN6waBPw22Jg8aYAS73RWde6QM/bDOgvp6l
+ 1txO5XYd3W7YdV2dK4yOSeGbsAqXOhOPlVlzZs2gN1kVWMQpiGFbaqWt3ZTSbOi5MsbU
+ IG2Rr15pPOleGQkk//6jQt012ISDj7CWi12uE2Pf9Y5PwCUh9os2i8r/1nHlvWb97mEX
+ CqfPGjIAdJ+dYKHKv44VX4/7npO7QlTOcLV32KSZ+tuMzct1AS8iXTcNnHjtCQJftkqF
+ Yo3+PyZI8/ZPN79LVySb+gEOqylAgZqIXFPjnGt25qJ5ByRrqdGoiyJCOnWcz7jvkXvH
+ Wc6Q==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXEWNUvV+V9oBRKRYjyIbTiHFZBjWpBeRspDIEB8/kBsNMVJ2D0UVdJ8Dva64A6j1oBBpsCoE+au+Z0@nongnu.org
-X-Gm-Message-State: AOJu0YxvUIl/tJBQ6bm146ygOo2QY6WjVZ1inTPqs4GyuB6+lkpE+dLt
- 3Z8rS/go6dt/RKKa9hn/KGsQPicScfKAhzfFDiErJ++87BqR0EPOO67KojyQRncAPgnIT7sQvE9
- tSX1lcPK/ga1hKbcRz+n3dmbW9IXj8Fh1/VTOsTpNVBCDxVmk1Jdu
-X-Gm-Gg: ASbGncvywcmcqgpcOiv5GK1nBVUI78spcKPCyn9yMoB2rHp+AsGzzW+0UkpLkSqEHmT
- NS0asHVHuGY4s+CnPhHiKeZiqj9KYOd6mJzHMSotd73oEUSq2gt1Hw1+HdhMO6g62CHXDNa3dxn
- jl7jyPWE9iEeuU2SuvUcrMDD8TSY0B6g3QqSCXFjv6J6/gbmF9islw5eLOgbb7bum+/fyKi0hjl
- MqaxOvLvhkuQtq9aXVylPXINSor9JtdlaAKBi3oUcRfBhuoDi3ytCx04d4gxatCmshznQPVh9jB
- IK6p4/8=
-X-Received: by 2002:a17:906:6a0e:b0:aa6:96c4:ad58 with SMTP id
- a640c23a62f3a-aa6b151887fmr153548066b.61.1733899034094; 
- Tue, 10 Dec 2024 22:37:14 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IHKGaCobwfgqx/24UVhsxi9BCf8G3FI9rpOkyScJsGGBtZf9x4on8oJdIPPWaLN8AXMV6qR0w==
-X-Received: by 2002:a17:906:6a0e:b0:aa6:96c4:ad58 with SMTP id
- a640c23a62f3a-aa6b151887fmr153542766b.61.1733899033642; 
- Tue, 10 Dec 2024 22:37:13 -0800 (PST)
+ AJvYcCW2ORM1qb/cyS9IH79sQJUUJxDwXsZyAOWY0TvJcl1WQcLyUwfPkREjkmAM/Txblm/LzVBc/18j7m8P@nongnu.org
+X-Gm-Message-State: AOJu0Yy5tzk2i+Q+QaHzNpJY5dw36nWsrrRMp4Aww5sD+4eastcv7gnZ
+ 0On6cxfslL1RsZgc8a3Voe/RnTVYed9HMdUh9Xwd9GcN9ZsMidv1BlAl1uSPj+Rqy8YwnhS+nHw
+ Gy9Vj62zsc3uOzoKQkgc99hfMha4sLV3jLt0TX63DO/pZKA4kUU+u
+X-Gm-Gg: ASbGncuVW5v5Ho55sG12r2DktVKo5BNctBwmen6zJkaYVgYMV6wuiVC41c8I85aqnVt
+ dRnApOOvpZIlN2nxOb4QtRC47vVhTbJEonA3WVTIEi05rEpgE+QVbbo/Fj5PBkJTH4X/E3jYAkE
+ 8LlQZaWDHx+3HbyhRvw6XokWP3PJ2CeG98KOaEmgfRShop+ksnyg0J0enVJy7zu3OQ+UMW//jfS
+ 08Up0YxLO9w6TYZQyRwswtsRRJJM2NL6qSu/OEDqQVW89kgfZppb1ZIq6jhJRK3sR/34rCmM09l
+ UNUbL5w=
+X-Received: by 2002:a17:906:1ba2:b0:aa6:8bb4:503d with SMTP id
+ a640c23a62f3a-aa6b115b189mr134674066b.2.1733899154738; 
+ Tue, 10 Dec 2024 22:39:14 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IFEYJGViWShQTCtubw+/Lz85Tk7eHLenPcj/P2MrbiEcGNxF6Uku7jDl69Tb28p3cXsV4srkQ==
+X-Received: by 2002:a17:906:1ba2:b0:aa6:8bb4:503d with SMTP id
+ a640c23a62f3a-aa6b115b189mr134670666b.2.1733899154305; 
+ Tue, 10 Dec 2024 22:39:14 -0800 (PST)
 Received: from [192.168.0.6] (ip-109-42-51-17.web.vodafone.de. [109.42.51.17])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-aa682772365sm449668166b.200.2024.12.10.22.37.11
+ a640c23a62f3a-aa6701b08c2sm556535166b.124.2024.12.10.22.39.11
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 10 Dec 2024 22:37:13 -0800 (PST)
-Message-ID: <31d205c5-9261-4453-ae6d-2af0c9e62072@redhat.com>
-Date: Wed, 11 Dec 2024 07:37:10 +0100
+ Tue, 10 Dec 2024 22:39:13 -0800 (PST)
+Message-ID: <0509c96e-46d0-45ca-a768-9d443499b648@redhat.com>
+Date: Wed, 11 Dec 2024 07:39:10 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 17/20] tests/qtest: move clock_steps to after checks
+Subject: Re: [PATCH 19/20] tests/functional: remove hacky sleep from the tests
 To: =?UTF-8?Q?Alex_Benn=C3=A9e?= <alex.bennee@linaro.org>,
  qemu-devel@nongnu.org
 Cc: Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
@@ -109,7 +109,7 @@ Cc: Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
  "Michael S. Tsirkin" <mst@redhat.com>,
  Alistair Francis <alistair.francis@wdc.com>
 References: <20241210204349.723590-1-alex.bennee@linaro.org>
- <20241210204349.723590-18-alex.bennee@linaro.org>
+ <20241210204349.723590-20-alex.bennee@linaro.org>
 From: Thomas Huth <thuth@redhat.com>
 Autocrypt: addr=thuth@redhat.com; keydata=
  xsFNBFH7eUwBEACzyOXKU+5Pcs6wNpKzrlJwzRl3VGZt95VCdb+FgoU9g11m7FWcOafrVRwU
@@ -153,9 +153,9 @@ Autocrypt: addr=thuth@redhat.com; keydata=
  oiT+z+/E59qj/EKfyce3sbC9XLjXv3mHMrq1tKX4G7IJGnS989E/fg6crv6NHae9Ckm7+lSs
  IQu4bBP2GxiRQ+NV3iV/KU3ebMRzqIC//DCOxzQNFNJAKldPe/bKZMCxEqtVoRkuJtNdp/5a
  yXFZ6TfE1hGKrDBYAm4vrnZ4CXFSBDllL59cFFOJCkn4Xboj/aVxxJxF30bn
-In-Reply-To: <20241210204349.723590-18-alex.bennee@linaro.org>
+In-Reply-To: <20241210204349.723590-20-alex.bennee@linaro.org>
 X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: 5qvAf0vgjNxRwn3mVOgv8wyvTv9LXThTUKHyiWAPx1Q_1733899035
+X-Mimecast-MFC-PROC-ID: ezr8wEb07sSLJo_bwczsDp5BYXFTNeNwiWzZLgUahe8_1733899155
 X-Mimecast-Originator: redhat.com
 Content-Language: en-US
 Content-Type: text/plain; charset=UTF-8; format=flowed
@@ -186,27 +186,16 @@ Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 On 10/12/2024 21.43, Alex Bennée wrote:
-> In the qtest environment time will not step forward if the system is
-> paused (timers disabled) or we have no timer events to fire. As a
-> result VirtIO events are responded to directly and we don't need to
-> step time forward.
-> 
-> Potentially the clock_step calls could be removed all together but as
-> we may implement async behaviour later lets just move them to after
-> the principle check for now.
-> 
-> Future qtest patches will assert that time actually changes with a
-
-s/with/when/ ?
-
-> step is requested.
+> We have proper detection of prompts now so we don't need to guess with
+> sleep() sprinkled through the test. The extra step of calling halt is
+> just to flush the final bits of the log (although the last line is
+> still missed).
 > 
 > Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
 > ---
->   tests/qtest/libqos/virtio.c | 6 +++---
->   1 file changed, 3 insertions(+), 3 deletions(-)
+>   tests/functional/test_aarch64_virt.py | 22 ++++++++++------------
+>   1 file changed, 10 insertions(+), 12 deletions(-)
 
-With the description fixed:
 Reviewed-by: Thomas Huth <thuth@redhat.com>
 
 
