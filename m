@@ -4,99 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 00679E7717D
-	for <qemu-riscv@archiver.kernel.org>; Wed, 11 Dec 2024 12:52:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2C242E7717D
+	for <qemu-riscv@archiver.kernel.org>; Wed, 11 Dec 2024 14:01:27 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tLMCC-0003H6-Gx; Wed, 11 Dec 2024 07:52:04 -0500
+	id 1tLNGN-0002MG-H7; Wed, 11 Dec 2024 09:00:27 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <craig.blackmore@embecosm.com>)
- id 1tLMBq-0003BK-NC
- for qemu-riscv@nongnu.org; Wed, 11 Dec 2024 07:51:51 -0500
-Received: from mail-wm1-x336.google.com ([2a00:1450:4864:20::336])
+ (Exim 4.90_1) (envelope-from <roman.artemev.92@gmail.com>)
+ id 1tLLGR-00071O-Bu; Wed, 11 Dec 2024 06:52:23 -0500
+Received: from mail-lf1-x12a.google.com ([2a00:1450:4864:20::12a])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <craig.blackmore@embecosm.com>)
- id 1tLMBp-0001vf-5t
- for qemu-riscv@nongnu.org; Wed, 11 Dec 2024 07:51:42 -0500
-Received: by mail-wm1-x336.google.com with SMTP id
- 5b1f17b1804b1-4361b6f9faeso3902355e9.1
- for <qemu-riscv@nongnu.org>; Wed, 11 Dec 2024 04:51:40 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <roman.artemev.92@gmail.com>)
+ id 1tLLGP-0002Ox-Tt; Wed, 11 Dec 2024 06:52:23 -0500
+Received: by mail-lf1-x12a.google.com with SMTP id
+ 2adb3069b0e04-53df6322ea7so7679406e87.0; 
+ Wed, 11 Dec 2024 03:52:20 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=embecosm.com; s=google; t=1733921499; x=1734526299; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=IXOHZmlwq/2lTmsq1K3b/qfzU9CsxVuPDqF9Ym8Ynug=;
- b=A9r8tN/gGu0VlRKp1Aejd+U3xuqdL2Qj9FktB4Wb+cEEb8JoYZ+SAYewmun1YhT2TE
- NSS5U5/+fv4eywqZRyIoSP1HGOEdZH6zB1AvK/zr7GEjRMxLPjOYLbFaHJgNlymlxAg7
- jhyV9sE3pS+gJlpjVZr4+3RRFXCg2Az9bray3/iRzlb53kSnRshdmSnapkU9g8hfM2BS
- 6TKaTFpKoGl7myeFeS9XughsmLDQuynDBYUaaMbnGF7+4vTmj/tdwdj3DpQ2qRiCN2CN
- TaBed9EYJUn+6uxNh/8QGTyIrOkvuTS28IYUGqMsNMbHJS6ED0KP1hrKjITtEzmFTo5K
- UJwA==
+ d=gmail.com; s=20230601; t=1733917939; x=1734522739; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=3W8anVnzCvGr/wiDjhCflF0Q58pWbfW1fNMjI+jMCwM=;
+ b=kt0gwf1YlvdGW9VydxXEx2OJObhQVSxcdqijWdY5d1WFhc4wUhqbVDNWP4MYEVM7L8
+ fuRG6WrWBReFRYk1t3f/h0WSesB6ltTWCamBOIU0kOar5R5UBrVw9BvPKtBUwg4WmiJi
+ nFLKVcxFYgwG3kzfGgh4DVtjUMZD8AVnvZ5CMjFROck5HNvUXCUAUYrPXMQuXoz8/jJO
+ Vuxk6o/Jc8IIVYlQMP7XqQZ+XccbzzNpZLqdS1OY4nl4i/iw/Pkta6EO4bbGYcLdTd9x
+ OSlnpy/ZPse53bSKQalpAv2G1RpUkguzdkJoA+2jxiqln9rZ2Awg5OBq0kNPa/rqGkI5
+ VbFg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733921499; x=1734526299;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=IXOHZmlwq/2lTmsq1K3b/qfzU9CsxVuPDqF9Ym8Ynug=;
- b=klSocVmq4W+pGo4EHcMEt+WtizMUOYktmjGj6gz1K9BNN1KCtGLh1w+JGadxU5/c1Z
- +8rJsyJZ24/Uw7xHbZlH0/sw8lCPk4UjY4K0gMFC4AJEv299qQbNGvF5qEKE0jzUz6hv
- /NYvQb7VIu2jrkfoycxxRMKBXe4lIiwr/mrA3bKatPDpT4uV87LtkTju83npun6kmnyq
- L0txqvhxPJxt/aDxAFKeXRLI684nqLLDFmvEGLLUjmv68QsioKmZiZLjVI2si39Rq5sO
- PXOZqNn+NOtH7oHHeAkNxOLbtsBCQ7dEwjo+SYtOoAFaYrsXZqrBXfpe1NVUpSgTqV1e
- fVxg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWdKgmYBfkBb9shbZHnNd7dYeHq2/biB/hVC7jquZHKv5ktXjEojFzyhIh/IE4EhsXkSka9Hutsvz1e@nongnu.org
-X-Gm-Message-State: AOJu0YzjiJaYvwy9WUu19bzmMZb7EfJUDtd6sldCgUiTnOOv2o7mKRgw
- B3WLGfmnPW9uZhT4xlQBXh5wyMyO0uG5cIkKtWsXeV/S+hnXgidN3Sz2AOrpZk4=
-X-Gm-Gg: ASbGncu16dNrcljivcZcHZa73wqpYxESKqCzTUsaW9aGYHWHhRDibsWvKeM0HhsAOn4
- mD4I/mywocKIuTwqJTEteB3q54DBDGRv8eY9C5iZrjzFKlwYdkYomnqeaA7Z0BItoOyETszkMSo
- Hie6a0vo22W25jTQsurPqsJLqUFazigm3ctejk/D84SeZJSlK0/rzPqCAteSHoP0r0nP+jgHRnx
- GRExxbzJ7DjAMHau08pfUUi0lxtR9GkZ+sFdJ/aNM3i2eQx8capFz9bN9dN3wN4dyK/mVOVmHTI
- wRO2bISwtBisDQF8F9CgksBwHOTGMdJVGYbR/F9NlYfNkw==
-X-Google-Smtp-Source: AGHT+IEy5Y7EqcSFlZXlzw/NJliyF1afwJMjcXf8oadlGc4rvWdzLf7BMWEQ6W8FShwKsgFqaswSiQ==
-X-Received: by 2002:a7b:c8c9:0:b0:434:e963:6ad9 with SMTP id
- 5b1f17b1804b1-4361c5a309emr18173195e9.5.1733921499164; 
- Wed, 11 Dec 2024 04:51:39 -0800 (PST)
-Received: from dorian..
- (sals-04-b2-v4wan-167965-cust660.vm36.cable.virginm.net. [80.3.10.149])
+ d=1e100.net; s=20230601; t=1733917939; x=1734522739;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=3W8anVnzCvGr/wiDjhCflF0Q58pWbfW1fNMjI+jMCwM=;
+ b=aN6narujwkSi/hXhJFtuXVnfz5dV6O9fehBM7uElgJoanEeftfdT6thHZtV6Tj3TgG
+ 8EA/MvuYhfDkBAZU+F66w9dSYrrDfBFC60Mism2Mjq8GWBj6guELHeIUfyCXltkh9e8u
+ UoNVGIPfbm2TQu8/xjE/cnlQGgvjU6yb5o98TpqdskyRVbqm/v74Civ+k3uqYtwOFfCv
+ M4qWHKK9NaniUQfyZ9tbqaFm/PeaAYBKnBWqWWXdEeRzUcKAyvBqhwXJKxQCguHz6A/k
+ ODWZ7KVbwsxFkFn5Sp+dpwiJjKnEKoz1nmXgdnoPaRd89n0mi+3S7iLv1xGwSYxSps3c
+ wMNw==
+X-Gm-Message-State: AOJu0YzmiVgalpOAgLiyEo2i6rbfJq+UjV/9cOid1r59kw0CDVtQotkG
+ ZZck7zDpFICAu4vBkHrr+kyD69D9z4mg7QEYGEfXCoQ66j39e21SdZxZWcdY
+X-Gm-Gg: ASbGncvOfCpnGeKOXVO8mX5R71DiLUvLXeMK7B1I8zjXyCNhiZPQRbqpgxK7Ak6TJu2
+ 3PpojVCWA1BdrQdkLQbV1gKisKxVc/eKEeaJ2KTG6Obw2Hcnvw/QJ6ZsU/aSuPIqVT7+FmQBpWW
+ od0LH2EuCs2/kdsjF4ZmmLRC40OXgH6K0fJFSU/XXPIdwqu9qsGqbunkdIprJXnqkilKZmPCz+6
+ 0Yr6Myc7x4LNgOj7biJi/3VySAHyByliCHtLkwAdpztqa7h/OhfVxtOXN/ytZZ+WWCvHkOTUT45
+ Kg==
+X-Google-Smtp-Source: AGHT+IH56ygjg84mAc/anp6IU72DQCAKMvGpXfkyLVWPCBCObAeGpnPTqKndiwCzXQ6/QtvsMnOSBg==
+X-Received: by 2002:a05:6512:3096:b0:53e:3a01:cf4d with SMTP id
+ 2adb3069b0e04-5402a5eb68amr722551e87.31.1733917938408; 
+ Wed, 11 Dec 2024 03:52:18 -0800 (PST)
+Received: from debian.corp.yadro.com ([89.105.198.156])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-434f44eaac7sm120542125e9.42.2024.12.11.04.51.38
+ 2adb3069b0e04-53e22975264sm1997896e87.92.2024.12.11.03.52.16
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 11 Dec 2024 04:51:38 -0800 (PST)
-From: Craig Blackmore <craig.blackmore@embecosm.com>
-To: qemu-devel@nongnu.org,
-	qemu-riscv@nongnu.org
-Cc: Craig Blackmore <craig.blackmore@embecosm.com>,
- Richard Henderson <richard.henderson@linaro.org>,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bmeng.cn@gmail.com>,
- Weiwei Li <liwei1518@gmail.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Helene Chelin <helene.chelin@embecosm.com>, Nathan Egge <negge@google.com>,
- Max Chou <max.chou@sifive.com>, Paolo Savini <paolo.savini@embecosm.com>
-Subject: [PATCH v7 2/2] target/riscv: rvv: speed up small unit-stride loads
- and stores
-Date: Wed, 11 Dec 2024 12:51:13 +0000
-Message-ID: <20241211125113.583902-3-craig.blackmore@embecosm.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20241211125113.583902-1-craig.blackmore@embecosm.com>
-References: <20241211125113.583902-1-craig.blackmore@embecosm.com>
+ Wed, 11 Dec 2024 03:52:17 -0800 (PST)
+From: Roman Artemev <roman.artemev.92@gmail.com>
+X-Google-Original-From: Roman Artemev <roman.artemev@syntacore.com>
+To: qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, palmer@dabbelt.com, Alistair.Francis@wdc.com,
+ richard.henderson@linaro.org, roman.artemev.92@gmail.com,
+ Roman Artemev <roman.artemev@syntacore.com>,
+ Denis Tomashev <denis.tomashev@syntacore.com>
+Subject: [PATCH] tcg/riscv: Fix StoreStore barrier generation
+Date: Wed, 11 Dec 2024 14:52:12 +0300
+Message-Id: <20241211115212.2803407-1-roman.artemev@syntacore.com>
+X-Mailer: git-send-email 2.39.5
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::336;
- envelope-from=craig.blackmore@embecosm.com; helo=mail-wm1-x336.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+Received-SPF: pass client-ip=2a00:1450:4864:20::12a;
+ envelope-from=roman.artemev.92@gmail.com; helo=mail-lf1-x12a.google.com
+X-Spam_score_int: -17
+X-Spam_score: -1.8
+X-Spam_bar: -
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
+X-Mailman-Approved-At: Wed, 11 Dec 2024 09:00:26 -0500
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -111,48 +99,29 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Calling `vext_continuous_ldst_tlb` for load/stores smaller than 12 bytes
-significantly improves performance.
+On RISC-V to StoreStore barrier corresponds
+`fence w, w` not `fence r, r`
 
-Co-authored-by: Helene CHELIN <helene.chelin@embecosm.com>
-Co-authored-by: Paolo Savini <paolo.savini@embecosm.com>
-Co-authored-by: Craig Blackmore <craig.blackmore@embecosm.com>
-
-Signed-off-by: Helene CHELIN <helene.chelin@embecosm.com>
-Signed-off-by: Paolo Savini <paolo.savini@embecosm.com>
-Signed-off-by: Craig Blackmore <craig.blackmore@embecosm.com>
+Signed-off-by: Denis Tomashev <denis.tomashev@syntacore.com>
+Signed-off-by: Roman Artemev <roman.artemev@syntacore.com>
 ---
- target/riscv/vector_helper.c | 16 ++++++++++++++++
- 1 file changed, 16 insertions(+)
+ tcg/riscv/tcg-target.c.inc | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
-index 0f57e48cc5..529b4b261e 100644
---- a/target/riscv/vector_helper.c
-+++ b/target/riscv/vector_helper.c
-@@ -393,6 +393,22 @@ vext_ldst_us(void *vd, target_ulong base, CPURISCVState *env, uint32_t desc,
-         return;
+diff --git a/tcg/riscv/tcg-target.c.inc b/tcg/riscv/tcg-target.c.inc
+index f8331e4688..96f9a7e348 100644
+--- a/tcg/riscv/tcg-target.c.inc
++++ b/tcg/riscv/tcg-target.c.inc
+@@ -1624,7 +1624,7 @@ static void tcg_out_mb(TCGContext *s, TCGArg a0)
+         insn |= 0x02100000;
      }
- 
-+#if defined(CONFIG_USER_ONLY)
-+    /*
-+     * For data sizes < 12 bits we get better performance by simply calling
-+     * vext_continuous_ldst_tlb
-+     */
-+    if (nf == 1 && (evl << log2_esz) < 12) {
-+        addr = base + (env->vstart << log2_esz);
-+        vext_continuous_ldst_tlb(env, ldst_tlb, vd, evl, addr, env->vstart, ra,
-+                                 esz, is_load);
-+
-+        env->vstart = 0;
-+        vext_set_tail_elems_1s(evl, vd, desc, nf, esz, max_elems);
-+        return;
-+    }
-+#endif
-+
-     /* Calculate the page range of first page */
-     addr = base + ((env->vstart * nf) << log2_esz);
-     page_split = -(addr | TARGET_PAGE_MASK);
+     if (a0 & TCG_MO_ST_ST) {
+-        insn |= 0x02200000;
++        insn |= 0x01100000;
+     }
+     tcg_out32(s, insn);
+ }
 -- 
-2.43.0
+2.39.2
 
 
