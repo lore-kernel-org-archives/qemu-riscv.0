@@ -4,44 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B2E23E7717D
-	for <qemu-riscv@archiver.kernel.org>; Wed, 11 Dec 2024 14:01:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4B75BE77182
+	for <qemu-riscv@archiver.kernel.org>; Wed, 11 Dec 2024 14:01:57 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tLNGN-0002MN-PB; Wed, 11 Dec 2024 09:00:27 -0500
+	id 1tLNGP-0002Mu-2y; Wed, 11 Dec 2024 09:00:29 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <lc00631@tecorigin.com>)
- id 1tLN8g-0008AO-E9; Wed, 11 Dec 2024 08:52:30 -0500
-Received: from out28-194.mail.aliyun.com ([115.124.28.194])
+ id 1tLN8g-0008AH-7p; Wed, 11 Dec 2024 08:52:30 -0500
+Received: from out28-1.mail.aliyun.com ([115.124.28.1])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <lc00631@tecorigin.com>)
- id 1tLN8c-0001rq-To; Wed, 11 Dec 2024 08:52:30 -0500
+ id 1tLN8d-0001ry-0p; Wed, 11 Dec 2024 08:52:29 -0500
 Received: from TC-DZ-03-0020.tc.local(mailfrom:lc00631@tecorigin.com
- fp:SMTPD_---.abQNlRH_1733924825 cluster:ay29) by smtp.aliyun-inc.com;
- Wed, 11 Dec 2024 21:47:06 +0800
+ fp:SMTPD_---.abQNlSr_1733924826 cluster:ay29) by smtp.aliyun-inc.com;
+ Wed, 11 Dec 2024 21:47:07 +0800
 From: Chao Liu <lc00631@tecorigin.com>
 To: bmeng.cn@gmail.com, liwei1518@gmail.com, palmer@dabbelt.com,
  alistair.francis@wdc.com
 Cc: zhiwei_liu@linux.alibaba.com, dbarboza@ventanamicro.com,
  qemu-devel@nongnu.org, qemu-riscv@nongnu.org,
  Chao Liu <lc00631@tecorigin.com>
-Subject: [PATCH v1 0/1] Add vtype.vill FIELD macro definition
-Date: Wed, 11 Dec 2024 21:47:14 +0800
-Message-ID: <cover.1733922709.git.lc00631@tecorigin.com>
+Subject: [PATCH v1 1/1] target/riscv: add VILL field for vtype register macro
+ definition
+Date: Wed, 11 Dec 2024 21:47:15 +0800
+Message-ID: <bd2eb642a5876b4417517febc0656ec4beccb45c.1733922709.git.lc00631@tecorigin.com>
 X-Mailer: git-send-email 2.47.0.windows.2
+In-Reply-To: <cover.1733922709.git.lc00631@tecorigin.com>
+References: <cover.1733922709.git.lc00631@tecorigin.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=115.124.28.194;
- envelope-from=lc00631@tecorigin.com; helo=out28-194.mail.aliyun.com
+Received-SPF: pass client-ip=115.124.28.1; envelope-from=lc00631@tecorigin.com;
+ helo=out28-1.mail.aliyun.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
 X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_NONE=-0.0001,
- RCVD_IN_MSPIKE_H3=0.001, RCVD_IN_MSPIKE_WL=0.001,
- RCVD_IN_VALIDITY_CERTIFIED_BLOCKED=0.001, RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ RCVD_IN_MSPIKE_H2=-0.001, RCVD_IN_VALIDITY_CERTIFIED_BLOCKED=0.001,
+ RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
  UNPARSEABLE_RELAY=0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-Mailman-Approved-At: Wed, 11 Dec 2024 09:00:25 -0500
@@ -59,22 +61,25 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Hi, all:
-
-According to the "The RISC-V Instruction Set Manual Volume I: Unprivileged
-Architecture" Version 20240411, Section 31.3.4 "Vector type register, vtype",
-and Table 40 "vtype register layout", this patch adds the definition for the
-vill field of the vtype register. The bit position for vill is [63].
-
-This change ensures that our implementation remains in line with the latest
-RISC-V specifications, thereby maintaining compatibility and correctness.
-
-Chao Liu (1):
-  target/riscv: add VILL field for vtype register macro definition
-
+Signed-off-by: Chao Liu <lc00631@tecorigin.com>
+---
  target/riscv/cpu.h | 3 ++-
  1 file changed, 2 insertions(+), 1 deletion(-)
 
+diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+index 284b112821..fc286484b8 100644
+--- a/target/riscv/cpu.h
++++ b/target/riscv/cpu.h
+@@ -170,7 +170,8 @@ FIELD(VTYPE, VSEW, 3, 3)
+ FIELD(VTYPE, VTA, 6, 1)
+ FIELD(VTYPE, VMA, 7, 1)
+ FIELD(VTYPE, VEDIV, 8, 2)
+-FIELD(VTYPE, RESERVED, 10, sizeof(target_ulong) * 8 - 11)
++FIELD(VTYPE, RESERVED, 10, sizeof(target_ulong) * 8 - 12)
++FIELD(VTYPE, VILL, 63, 1)
+ 
+ typedef struct PMUCTRState {
+     /* Current value of a counter */
 -- 
 2.47.0
 
