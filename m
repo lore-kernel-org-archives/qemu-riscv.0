@@ -4,149 +4,172 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 62D4CE7717F
-	for <qemu-riscv@archiver.kernel.org>; Thu, 12 Dec 2024 12:37:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D378FE7717F
+	for <qemu-riscv@archiver.kernel.org>; Thu, 12 Dec 2024 14:04:19 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tLiQr-0007bk-LF; Thu, 12 Dec 2024 07:36:41 -0500
+	id 1tLjnP-0006QN-SY; Thu, 12 Dec 2024 09:04:06 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <farosas@suse.de>)
- id 1tLiQp-0007Z2-3G; Thu, 12 Dec 2024 07:36:39 -0500
-Received: from smtp-out2.suse.de ([2a07:de40:b251:101:10:150:64:2])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <farosas@suse.de>)
- id 1tLiQn-0006TU-HE; Thu, 12 Dec 2024 07:36:38 -0500
-Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org
- [IPv6:2a07:de40:b281:104:10:150:64:97])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-out2.suse.de (Postfix) with ESMTPS id 811A51F74A;
- Thu, 12 Dec 2024 12:36:31 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
- t=1734006992; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
+ (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1tLjmi-0006DY-O0
+ for qemu-riscv@nongnu.org; Thu, 12 Dec 2024 09:03:25 -0500
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1tLjmf-0007so-4e
+ for qemu-riscv@nongnu.org; Thu, 12 Dec 2024 09:03:20 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1734012191;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=G5rb0zuzG1zX+tx5ZdfNxy+q2cVTEdQUFsA/RUY4S08=;
- b=FFDJgShwC/teAFpyazR41IxgRH6RNEj0X965BkFbWJeWJKGiXNFMtE/lmo1TgO07dOdFZI
- +AKuWudhDtWS+YWDA53910xB6Oow0EmptboxE2Dt72GbkKDOzTbYpzst+gih6p14HB0TKu
- H0xes4dt61sTmeOr2QkXqqHOePJ39NY=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
- s=susede2_ed25519; t=1734006992;
- h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=G5rb0zuzG1zX+tx5ZdfNxy+q2cVTEdQUFsA/RUY4S08=;
- b=p2zFaBT/8vxj9gaEKRqQMgq6I7PV6st3vprsZvoTNEESrJ5mu/F9C9tMDl/bdtEgWGRkk4
- E6YR6wauK3MgY2DQ==
-Authentication-Results: smtp-out2.suse.de;
- dkim=pass header.d=suse.de header.s=susede2_rsa header.b=k8XEafpC;
- dkim=pass header.d=suse.de header.s=susede2_ed25519 header.b=129bsKRN
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
- t=1734006991; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=G5rb0zuzG1zX+tx5ZdfNxy+q2cVTEdQUFsA/RUY4S08=;
- b=k8XEafpC51n86f9MW2wJdxt1zTAxzfnfI1ivSkPwCJgDFRGMpxY5tVWNleKXMvWlkFUwbX
- Bj+QIiHsO5l+PYLm7IdSwETvs7oov9XpK7bRHaCXxY+hFqTq5Fzbux0S6ofICAfAKK2SF3
- 9EbYEqMn2DhktTli+7I6kkcHW5F7GAo=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
- s=susede2_ed25519; t=1734006991;
- h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=G5rb0zuzG1zX+tx5ZdfNxy+q2cVTEdQUFsA/RUY4S08=;
- b=129bsKRNjg8Dka6AO1SHLHzj29duiv1/Jv22WcEogeFcVYU8YasalFTYNG8hlgXA8UA2Dw
- DnuJkRukLBp5KnAQ==
-Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id BA21C13939;
- Thu, 12 Dec 2024 12:36:30 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
- by imap1.dmz-prg2.suse.org with ESMTPSA id VYdSLc7YWmdYSwAAD6G6ig
- (envelope-from <farosas@suse.de>); Thu, 12 Dec 2024 12:36:30 +0000
-From: Fabiano Rosas <farosas@suse.de>
-To: Alex =?utf-8?Q?Benn=C3=A9e?= <alex.bennee@linaro.org>,
- qemu-devel@nongnu.org
-Cc: Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- qemu-s390x@nongnu.org, Halil Pasic <pasic@linux.ibm.com>, Jiaxun Yang
- <jiaxun.yang@flygoat.com>, Weiwei Li <liwei1518@gmail.com>, Liu Zhiwei
- <zhiwei_liu@linux.alibaba.com>, Cleber Rosa <crosa@redhat.com>, Palmer
- Dabbelt <palmer@dabbelt.com>, Leif Lindholm <quic_llindhol@quicinc.com>,
- Eric Farman <farman@linux.ibm.com>, =?utf-8?Q?Marc-Andr=C3=A9?= Lureau
- <marcandre.lureau@redhat.com>, John Snow <jsnow@redhat.com>, Philippe
- =?utf-8?Q?Mathieu-Daud=C3=A9?= <philmd@linaro.org>, Harsh Prateek Bora
- <harshpb@linux.ibm.com>, Aurelien Jarno <aurelien@aurel32.net>, Paolo
- Bonzini <pbonzini@redhat.com>, Joel Stanley <joel@jms.id.au>, Bernhard
- Beschow <shentey@gmail.com>, qemu-ppc@nongnu.org, qemu-riscv@nongnu.org,
- Daniel Henrique Barboza <danielhb413@gmail.com>, Thomas Huth
- <thuth@redhat.com>, Laurent Vivier <lvivier@redhat.com>,
- qemu-arm@nongnu.org, Wainer dos Santos Moschetta <wainersm@redhat.com>,
- Markus Armbruster <armbru@redhat.com>, Bin Meng <bmeng.cn@gmail.com>,
- Pavel Dovgalyuk <pavel.dovgaluk@ispras.ru>, Marcel Apfelbaum
- <marcel.apfelbaum@gmail.com>, Richard Henderson
- <richard.henderson@linaro.org>, Marcin Juszkiewicz
- <marcin.juszkiewicz@linaro.org>, Christian Borntraeger
- <borntraeger@linux.ibm.com>, Beraldo Leal <bleal@redhat.com>, Peter
- Maydell <peter.maydell@linaro.org>, Radoslaw Biernacki <rad@semihalf.com>,
- =?utf-8?Q?Daniel_P=2E_Berrang=C3=A9?= <berrange@redhat.com>, Alex
- =?utf-8?Q?Benn=C3=A9e?=
- <alex.bennee@linaro.org>, Nicholas Piggin <npiggin@gmail.com>, Mark
- Cave-Ayland <mark.cave-ayland@ilande.co.uk>, "Michael S. Tsirkin"
- <mst@redhat.com>, Alistair Francis <alistair.francis@wdc.com>
-Subject: Re: [PATCH 18/20] system/qtest: properly feedback results of
- clock_[step|set]
-In-Reply-To: <20241210204349.723590-19-alex.bennee@linaro.org>
-References: <20241210204349.723590-1-alex.bennee@linaro.org>
- <20241210204349.723590-19-alex.bennee@linaro.org>
-Date: Thu, 12 Dec 2024 09:36:28 -0300
-Message-ID: <87jzc5f583.fsf@suse.de>
+ in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
+ bh=zQz6IYbah35Sgq0De7iKtBS2F5KDq0YOtSeGx1V5t9w=;
+ b=B34g6FRBnQYdqO/2IkkiR8/o0jU1XphqN21g0/uiCLzR5xBpQstLaANsqTfpfZXRnX1twO
+ /VFqX6RfOdlZaAQQmx5OOpHsAr/vQIviSPVzYRj8C2b8tfbfw0MoY73CkDpXiDxJC5YiKo
+ ldj8Um3uYLJ9pzP/CjkB00ER+YETzYI=
+Received: from mail-wm1-f69.google.com (mail-wm1-f69.google.com
+ [209.85.128.69]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-573-usksabFaMFuyVP7apVzdwQ-1; Thu, 12 Dec 2024 09:03:10 -0500
+X-MC-Unique: usksabFaMFuyVP7apVzdwQ-1
+X-Mimecast-MFC-AGG-ID: usksabFaMFuyVP7apVzdwQ
+Received: by mail-wm1-f69.google.com with SMTP id
+ 5b1f17b1804b1-434fa6d522bso3848445e9.1
+ for <qemu-riscv@nongnu.org>; Thu, 12 Dec 2024 06:03:09 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1734012188; x=1734616988;
+ h=content-transfer-encoding:in-reply-to:autocrypt:content-language
+ :from:references:cc:to:subject:user-agent:mime-version:date
+ :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=zQz6IYbah35Sgq0De7iKtBS2F5KDq0YOtSeGx1V5t9w=;
+ b=u3sNiaJ6P7ePZX0xvpyTqdl5FehxIvraqi1PJE7spe6gEdfTlv7PcL+FwIesZATzP/
+ TRWfJcqXn13gT3zasP/X2yFF/l4wJ7GclNZwN5EjppBnU/MpCNv4w0vsd+2dRKD0+jTp
+ UamYad3QjtbmQCSt/CECYzthIsv+S/sl/8uvrrjhq5mrLlGuRyAXp9a6Mlhv3EXHCWtG
+ Kx1CIOucDgEMZ+WqJLeIloWFef2bS/NWFEgUfJNn5/D3cIukLtc++Ztl/aUIfW2mgRxI
+ L6W4vCRFQvjkdOhPKqqw9sZvdXe0U1uWpGpBJaAAmQZtoz6O7Upj/zo9RNjjwNs+fCOW
+ brvA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVCG/+J7/RpEiO0oa6HuLIIl2Gt6//Q3GO2fhLUBH9NOQmTtSCZBURqyYN+MrBRqjQUcX5z14kmC5Pz@nongnu.org
+X-Gm-Message-State: AOJu0YxYxcDeLAK0xR6dJrYGAx7q3yPgXRNCbOh6jaZAeLtPXo3FfgEN
+ 25T8kHtTaN9WacAvZhoWxW8qOjZCjqy3ixoGYY1SJl6DA9TaP9/AWsQeI//pLpOaB/RJ3VUl+Ht
+ jlmrkFcwo8LmlZf/d3SwE6/Y/niQ+eqch18iWcPEMyCMDW5Flx34A
+X-Gm-Gg: ASbGncsiGEZwDT1hqXVf24uzWxOpMEfH7um0dJXleYNX+7Crng1aFnJP/6quVmmpSkp
+ R97V59SLsXTwB1HuwbW1IRH29USOlHB71JTGUbrJg55YAJIs3LC4O5r4If3C9rd3PqTfV2F7w4T
+ 1gbPjqdDbnD9Q4g2W2UU9iRJ15miVgm77mqu6pBpVGO4H8IrU8Z75l0/cxk/5PWLyV+76b3KQwW
+ DAUSJy8q9wdd/fDN59Q6adZWF5CNGbYC4aRREBJiyWH3FIZRoFIGpcsNZaKJD/p95H7iQ0X1UyV
+ MuxHxQ==
+X-Received: by 2002:a05:600c:501f:b0:436:1b0b:2633 with SMTP id
+ 5b1f17b1804b1-436230eafa6mr24718265e9.9.1734012188445; 
+ Thu, 12 Dec 2024 06:03:08 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IH7dqTzGCXow0385tkpX8KCorUht+ZtdE6OMEfDDPYasx20IuAMb+5ADdIvj0Ie6HdNuF3zmA==
+X-Received: by 2002:a05:600c:501f:b0:436:1b0b:2633 with SMTP id
+ 5b1f17b1804b1-436230eafa6mr24712445e9.9.1734012182717; 
+ Thu, 12 Dec 2024 06:03:02 -0800 (PST)
+Received: from [10.33.192.206] (nat-pool-str-t.redhat.com. [149.14.88.106])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-436257177c5sm17337065e9.43.2024.12.12.06.03.01
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 12 Dec 2024 06:03:02 -0800 (PST)
+Message-ID: <ec72b047-54c3-4712-aab5-e7b43e663dd9@redhat.com>
+Date: Thu, 12 Dec 2024 15:03:00 +0100
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-X-Rspamd-Queue-Id: 811A51F74A
-X-Spamd-Result: default: False [-2.81 / 50.00]; BAYES_HAM(-2.80)[99.15%];
- SUSPICIOUS_RECIPS(1.50)[]; NEURAL_HAM_LONG(-1.00)[-1.000];
- R_DKIM_ALLOW(-0.20)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
- NEURAL_HAM_SHORT(-0.20)[-1.000]; MIME_GOOD(-0.10)[text/plain];
- MX_GOOD(-0.01)[]; TO_MATCH_ENVRCPT_ALL(0.00)[];
- DKIM_SIGNED(0.00)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
- RBL_SPAMHAUS_BLOCKED_OPENRESOLVER(0.00)[2a07:de40:b281:104:10:150:64:97:from]; 
- ARC_NA(0.00)[]; RCPT_COUNT_TWELVE(0.00)[43];
- FUZZY_BLOCKED(0.00)[rspamd.com]; MIME_TRACE(0.00)[0:+];
- SPAMHAUS_XBL(0.00)[2a07:de40:b281:104:10:150:64:97:from];
- FREEMAIL_ENVRCPT(0.00)[gmail.com]; RCVD_TLS_ALL(0.00)[];
- TO_DN_SOME(0.00)[]; RCVD_COUNT_TWO(0.00)[2];
- MID_RHS_MATCH_FROM(0.00)[]; FROM_EQ_ENVFROM(0.00)[];
- FROM_HAS_DN(0.00)[];
- FREEMAIL_CC(0.00)[ventanamicro.com,nongnu.org,linux.ibm.com,flygoat.com,gmail.com,linux.alibaba.com,redhat.com,dabbelt.com,quicinc.com,linaro.org,aurel32.net,jms.id.au,ispras.ru,semihalf.com,ilande.co.uk,wdc.com];
- RECEIVED_SPAMHAUS_BLOCKED_OPENRESOLVER(0.00)[2a07:de40:b281:106:10:150:64:167:received];
- RCVD_VIA_SMTP_AUTH(0.00)[]; DKIM_TRACE(0.00)[suse.de:+];
- TAGGED_RCPT(0.00)[];
- R_RATELIMIT(0.00)[to_ip_from(RL4imt8pjjaa6sqn3s4gq691sb)];
- MISSING_XM_UA(0.00)[];
- DBL_BLOCKED_OPENRESOLVER(0.00)[imap1.dmz-prg2.suse.org:helo,
- imap1.dmz-prg2.suse.org:rdns, gitlab.com:url, suse.de:email, suse.de:dkim,
- suse.de:mid, linaro.org:email]
-X-Rspamd-Server: rspamd2.dmz-prg2.suse.org
-X-Rspamd-Action: no action
-Received-SPF: pass client-ip=2a07:de40:b251:101:10:150:64:2;
- envelope-from=farosas@suse.de; helo=smtp-out2.suse.de
-X-Spam_score_int: -27
-X-Spam_score: -2.8
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 20/20] tests/functional: extend test_aarch64_virt with
+ vulkan test
+To: =?UTF-8?Q?Alex_Benn=C3=A9e?= <alex.bennee@linaro.org>
+Cc: qemu-devel@nongnu.org, "Daniel P. Berrange" <berrange@redhat.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>, qemu-s390x@nongnu.org,
+ Halil Pasic <pasic@linux.ibm.com>, Jiaxun Yang <jiaxun.yang@flygoat.com>,
+ Weiwei Li <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Cleber Rosa <crosa@redhat.com>, Palmer Dabbelt <palmer@dabbelt.com>,
+ Leif Lindholm <quic_llindhol@quicinc.com>, Eric Farman
+ <farman@linux.ibm.com>, =?UTF-8?Q?Marc-Andr=C3=A9_Lureau?=
+ <marcandre.lureau@redhat.com>, John Snow <jsnow@redhat.com>,
+ =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
+ Harsh Prateek Bora <harshpb@linux.ibm.com>,
+ Aurelien Jarno <aurelien@aurel32.net>, Paolo Bonzini <pbonzini@redhat.com>,
+ Joel Stanley <joel@jms.id.au>, Bernhard Beschow <shentey@gmail.com>,
+ qemu-ppc@nongnu.org, qemu-riscv@nongnu.org,
+ Daniel Henrique Barboza <danielhb413@gmail.com>,
+ Laurent Vivier <lvivier@redhat.com>, qemu-arm@nongnu.org,
+ Wainer dos Santos Moschetta <wainersm@redhat.com>,
+ Fabiano Rosas <farosas@suse.de>, Markus Armbruster <armbru@redhat.com>,
+ Bin Meng <bmeng.cn@gmail.com>, Pavel Dovgalyuk <pavel.dovgaluk@ispras.ru>,
+ Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>,
+ Christian Borntraeger <borntraeger@linux.ibm.com>,
+ Beraldo Leal <bleal@redhat.com>, Peter Maydell <peter.maydell@linaro.org>,
+ Radoslaw Biernacki <rad@semihalf.com>, Nicholas Piggin <npiggin@gmail.com>,
+ Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
+ "Michael S. Tsirkin" <mst@redhat.com>,
+ Alistair Francis <alistair.francis@wdc.com>
+References: <20241210204349.723590-1-alex.bennee@linaro.org>
+ <20241210204349.723590-21-alex.bennee@linaro.org>
+ <d2a73820-58fa-41d0-8f38-68b0ad53fa7d@redhat.com>
+ <87bjxhrsjf.fsf@draig.linaro.org>
+From: Thomas Huth <thuth@redhat.com>
+Autocrypt: addr=thuth@redhat.com; keydata=
+ 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
+In-Reply-To: <87bjxhrsjf.fsf@draig.linaro.org>
+X-Mimecast-Spam-Score: 0
+X-Mimecast-MFC-PROC-ID: h_z3fEiGEs8OcB9maj4H8hKgKzajoIbVHh3fpLpqcx4_1734012189
+X-Mimecast-Originator: redhat.com
+Content-Language: en-US
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=170.10.129.124; envelope-from=thuth@redhat.com;
+ helo=us-smtp-delivery-124.mimecast.com
+X-Spam_score_int: -25
+X-Spam_score: -2.6
 X-Spam_bar: --
-X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+X-Spam_report: (-2.6 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.496,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H2=-0.001,
+ RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001, RCVD_IN_VALIDITY_SAFE_BLOCKED=0.001,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -162,18 +185,31 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Alex Benn=C3=A9e <alex.bennee@linaro.org> writes:
+On 12/12/2024 13.32, Alex Bennée wrote:
+> Thomas Huth <thuth@redhat.com> writes:
+> 
+>> On 10/12/2024 21.43, Alex Bennée wrote:
+>>> Now we have virtio-gpu Vulkan support lets add a test for it.
+>>> Currently this is using images build by buildroot:
+>>>     https://lists.buildroot.org/pipermail/buildroot/2024-December/768196.html
+>>> Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
+> <snip>
+>>> +        self.vm.set_console()
+>>> +        kernel_command_line = (self.KERNEL_COMMON_COMMAND_LINE +
+>>> +                               'console=ttyAMA0 root=/dev/vda')
+>>> +        self.require_accelerator("tcg")
+>>
+>> Same, please move to the beginning since it can skip the test.
+>>
+>>> +        self.vm.add_args("-accel", "tcg")
+> 
+> Actually this could run under KVM if we have it for Aarch64. Can we
+> represent that?
 
-> Time will not advance if the system is paused or there are no timer
-> events set for the future. In absence of pending timer events
-> advancing time would make no difference the system state. Attempting
-> to do so would be a bug and the test or device under test would need
-> fixing.
->
-> Tighten up the result reporting to `FAIL` if time was not advanced.
->
-> Signed-off-by: Alex Benn=C3=A9e <alex.bennee@linaro.org>
-> Resolves: https://gitlab.com/qemu-project/qemu/-/issues/2687
+Simply omit the line "require" line and add an additional -accel kvm here? 
+... I think nobody ever tried to run the functional tests with another 
+accelerator beside kvm and tcg on aarch64 hosts, so it should be fine.
 
-Acked-by: Fabiano Rosas <farosas@suse.de>
+  Thomas
+
 
