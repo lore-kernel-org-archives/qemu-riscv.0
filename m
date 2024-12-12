@@ -4,87 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9135AE7717D
-	for <qemu-riscv@archiver.kernel.org>; Wed, 11 Dec 2024 21:50:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 695F3E77182
+	for <qemu-riscv@archiver.kernel.org>; Thu, 12 Dec 2024 09:49:15 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tLUb8-0005mw-Le; Wed, 11 Dec 2024 16:50:22 -0500
+	id 1tLfoP-0002Rw-SK; Thu, 12 Dec 2024 04:48:49 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1tLUb4-0005lZ-8M
- for qemu-riscv@nongnu.org; Wed, 11 Dec 2024 16:50:20 -0500
-Received: from mail-oi1-x22a.google.com ([2607:f8b0:4864:20::22a])
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1tLfoN-0002R1-A8
+ for qemu-riscv@nongnu.org; Thu, 12 Dec 2024 04:48:47 -0500
+Received: from mail-pg1-x52b.google.com ([2607:f8b0:4864:20::52b])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1tLUb2-0007kz-IE
- for qemu-riscv@nongnu.org; Wed, 11 Dec 2024 16:50:17 -0500
-Received: by mail-oi1-x22a.google.com with SMTP id
- 5614622812f47-3eb8bdcac2eso227674b6e.0
- for <qemu-riscv@nongnu.org>; Wed, 11 Dec 2024 13:50:14 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1tLfoI-0002lA-GO
+ for qemu-riscv@nongnu.org; Thu, 12 Dec 2024 04:48:46 -0500
+Received: by mail-pg1-x52b.google.com with SMTP id
+ 41be03b00d2f7-7fd5248d663so360069a12.0
+ for <qemu-riscv@nongnu.org>; Thu, 12 Dec 2024 01:48:41 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1733953813; x=1734558613; darn=nongnu.org;
+ d=ventanamicro.com; s=google; t=1733996921; x=1734601721; darn=nongnu.org;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=zytopXsjfKW0YG03hiqlTIupNrqbCSYJESIoPoUDkmU=;
- b=Km2uRzup76XamzFAQHmYc8J3mmMzl6TenWIvGGyg4Cq8shv11Y9dNFA2ODAXYlyQ0U
- QLCdWBJThN/KDqoJCoW9360/qVsV14FqOYHe0UGONYpoQkNRVBXmWgQNkL5e308++5RW
- HU90Gl7Xih3Dyf3urR1JQYoRxQWgxdi7C/ZD/8F7EE0MvIJY0YJZL47ytV2Xi6gtsoHa
- 5WnBm2HZiWVDLjVC4xF1BDv6pNNnobxO7onu0FSlyJOkTYUQcBda6T/yh0SnaHB8FTs3
- vX/uwfxFCqy5dgofJ4S69OnU+DCThxo8qwgQijw7smgT546Bl9rNYBzp2ts/4zBdS0NH
- 4jvg==
+ bh=rIDz21lKrXmJBL/1OJrlbrlC5z+y28lnfGL4NFm0vSU=;
+ b=UMS9Nf+tn0WEmE6aTGrEala5RpoNpCrCH8tZEQJeJl+4/9Q3OVSkfev6EbQDasnlci
+ 2lNC0OhgnM0yCWhLjr+CUXeWZ3GKpA/9Ui4G2G7uldAgs3b+da9tOGmnq6snjXT+PWEc
+ zwPUJFGlsnU5AAIa9omieIYUEntt8SoJXtzp8jM/ne/yBoYVS9fW2oh8zb2EQqepFFBZ
+ kXjVKJ+wNEj3n0ND4aumkJrkOuxbIu6mlAFAyd/xCezbbLohMhMX7qp0OBaN2cowzA2K
+ hECWgUwJ2jpncOr4b/HC2AgV2F4koXVN5IrqAQf14UUbODTSZ4dRwUvk3E2mLpNCC7Yp
+ WgZg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733953813; x=1734558613;
+ d=1e100.net; s=20230601; t=1733996921; x=1734601721;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=zytopXsjfKW0YG03hiqlTIupNrqbCSYJESIoPoUDkmU=;
- b=N1hmEacv7iuoZMogSHHe5cYPrIwzDZpPJTyxFmMbB7Tc4xELfZ/N0DWEMrn+hnjCf/
- Mq/k68bEIsv1xNIE3unL7c7LrZBGVzkQjkr5SiP8UAZIemto0tZhCcfuKm4e+t2BN3II
- ReW8CZV684JQ/ePzCN3Lv5CoL4KdGQqtPTJsow7CaYZZk9tW33aAcJ38MjTCQ7t88Ytz
- hnaaIyJX5dAY17BKg/+mqCXhJhViRdMIXXIY6oKw0Ic5JJG3KKbdhatB6oOqakOoleAv
- t1bx4ga/IWfV+CrLJ7DpPGJD865txlsPptT+5LVTCqpitbtx5Gf6CDgmF1mhaGnkaBFu
- e74g==
+ bh=rIDz21lKrXmJBL/1OJrlbrlC5z+y28lnfGL4NFm0vSU=;
+ b=NlCXBaoFNWbdCOWYQXvV7SWtgf/jX9k4epBYsLLCchYK3W9296TP2HqXC5dv1zQgk9
+ dp0OF/oxoSJYeba9WD2weA+anwICU+ojsWVQeWJG7p8ScfbYUr2q6yCda0gNpCHXlZNF
+ hkr7EnAMwgZ4cDc9YeJVflUofAu8lnf9AGg7yc6K9e0HaZvSyC1iHKHA2F5XRrv6i5AM
+ 3Dh9lj3ReOuUVSJ5JD32bmVE/uJn/Ol1W4t19I67JcCoKZBGbTpQK5jzUKxSNN9mqvrn
+ LKWAHTbxUVkJINXzsGn5peX8qfz21OND7NeJkLY5CWwoUybUudl6sRotaNd6tTRXBxVg
+ vMRQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUhxqkCUuIft6WKWgeJVsjP+w8VkIRqON6otaooisHzX81tAaW9vyxVPBj4J1MOtSn65JH26zR8G6z8@nongnu.org
-X-Gm-Message-State: AOJu0YywxQWBsZMPYCQa6KHibnQY37Mkm6MCckabMNCFygxS8hEDLP4+
- XXdvROLMFQMKFODgfnU2Wz+jN42DQpicGwLQZGMqDaaNy6f3OKa+nJ3UPwe/SVc=
-X-Gm-Gg: ASbGncteiLWUPp78zUibrUsOStXGqUhOHb9xZKBRs4lgiNIaj0bLVHYeoFar3oCXvQX
- AQV37aRQBIWL9Dk5LXTHXelzfM7ByGCB7biwSztdvdDqVsLsjRBKOfhhc8G4IQfwlXlJ23hXZ7p
- gxWdRG2DeGp3CJsBbF3xPcW7aTZlVt8LMcMBeKJRSTjtOO429jAXtqQIvAzWCJiJS5bJamkJ5mU
- 8RTyaP0jj4+Ljdto5Ngv0Zoi6+NjK9q9mI7sTZ4hb6ZN38Sjeo0ldXCWs/kcztJgpw8zrfz+iDL
- oGpDvgjf3QEREvGFhr6/TzJawrRqXInG
-X-Google-Smtp-Source: AGHT+IG4p1MtyLJMwBx+zn7XHkMwxIVTdEB9/0WqrRKdhmqd47m5dJwl43ymxmO4h6awwNFrFH0gPQ==
-X-Received: by 2002:a05:6808:f8f:b0:3eb:5cdb:f47f with SMTP id
- 5614622812f47-3eb85b422c6mr2161229b6e.14.1733953813326; 
- Wed, 11 Dec 2024 13:50:13 -0800 (PST)
-Received: from [192.168.4.112] (fixed-187-189-51-143.totalplay.net.
- [187.189.51.143]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-3eb8184b93esm681160b6e.43.2024.12.11.13.50.11
+ AJvYcCVi8Jy0R1yoGgFCj+BR7W5JMLkz+hOW/o8cH0fWAVTtCxjkrowxBCZvMofk7oHWw/QzpspoXxXMmIi5@nongnu.org
+X-Gm-Message-State: AOJu0Yx8nH0G0B85PlW8PnFJleUwWh+u52h2PQZPvOBGDjTGMFdpM+2a
+ okZaHCfVwogX9JxtPwll43/PYiRmQ4KV5OPftKUpW0TBkgouwyji9+vnqYAREQw=
+X-Gm-Gg: ASbGncuysjfSQhYYVw0VcVFm59D8Zou9Tvl/2WLhfXkUjuDFv1EFwfSLtqiZVaEP+fY
+ ZKVso/JM/pkkLNZ+7alduLe7qn++ENs7mmEneV5ba0YeFvAZeaztRpjAr8sy2xccPNPgR6Fvz4o
+ jzJJeCklH0DHfbUkF7mvcN2znBAWeZ0sQNRS1acSaJWCkIbY1IE1mElfepVBYTJ1Axb7NpeMYch
+ od/sCxsbNVAQdI+n++GCMEaZMp/vLjmWdKLpHKOS6zxi7rBaEyO5NBejVxboBW6e4Y2ug==
+X-Google-Smtp-Source: AGHT+IG2BDTzyq3flsa9jNR4paMG0n5DCN5bB5H7mHWRFf2DqBtllmQp8D5Fq5aDrPFMuN91AoXTOg==
+X-Received: by 2002:a05:6a20:2d0a:b0:1e1:ab63:c5e8 with SMTP id
+ adf61e73a8af0-1e1ceb11828mr3765749637.26.1733996920705; 
+ Thu, 12 Dec 2024 01:48:40 -0800 (PST)
+Received: from [192.168.68.110] ([187.101.65.72])
+ by smtp.gmail.com with ESMTPSA id
+ d2e1a72fcca58-727ba09a13bsm4997043b3a.46.2024.12.12.01.48.37
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 11 Dec 2024 13:50:12 -0800 (PST)
-Message-ID: <19c34ee9-f121-4dc2-8c73-2d06333a7d27@linaro.org>
-Date: Wed, 11 Dec 2024 15:50:10 -0600
+ Thu, 12 Dec 2024 01:48:40 -0800 (PST)
+Message-ID: <69de5c69-1583-4a0f-9db6-c61e721adbe1@ventanamicro.com>
+Date: Thu, 12 Dec 2024 06:48:36 -0300
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/3] target/riscv: generate misaligned access trap for rvi
- insn
-To: Frederic Konrad <fkonrad@amd.com>, qemu-riscv@nongnu.org
-Cc: palmer@dabbelt.com, alistair.francis@wdc.com, bmeng.cn@gmail.com,
- liwei1518@gmail.com, dbarboza@ventanamicro.com,
- zhiwei_liu@linux.alibaba.com, qemu-devel@nongnu.org,
- francisco.iglesias@amd.com, Luc.Michel@amd.com
-References: <20241211211933.198792-1-fkonrad@amd.com>
- <20241211211933.198792-3-fkonrad@amd.com>
+Subject: Re: [PATCH v12 7/7] target/riscv: Enable updates for pointer masking
+ variables and thus enable pointer masking extension
+To: baturo.alexey@gmail.com
+Cc: richard.henderson@linaro.org, zhiwei_liu@linux.alibaba.com,
+ liwei1518@gmail.com, alistair23@gmail.com, frank.chang@sifive.com,
+ palmer@dabbelt.com, Alistair.Francis@wdc.com, sagark@eecs.berkeley.edu,
+ kbastian@mail.uni-paderborn.de, qemu-devel@nongnu.org, qemu-riscv@nongnu.org
+References: <20241205112304.593204-1-baturo.alexey@gmail.com>
+ <20241205112304.593204-8-baturo.alexey@gmail.com>
 Content-Language: en-US
-From: Richard Henderson <richard.henderson@linaro.org>
-In-Reply-To: <20241211211933.198792-3-fkonrad@amd.com>
+From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+In-Reply-To: <20241205112304.593204-8-baturo.alexey@gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::22a;
- envelope-from=richard.henderson@linaro.org; helo=mail-oi1-x22a.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::52b;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pg1-x52b.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -107,45 +106,69 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 12/11/24 15:19, Frederic Konrad wrote:
-> Now there is an option to enable misaligned accesses traps, check the alignment
-> during load and store for the RVI instructions.  Do not generate them if the
-> zama16b extension is there.
+
+
+On 12/5/24 8:23 AM, baturo.alexey@gmail.com wrote:
+> From: Alexey Baturo <baturo.alexey@gmail.com>
 > 
-> Signed-off-by: Frederic Konrad <fkonrad@amd.com>
+> Signed-off-by: Alexey Baturo <baturo.alexey@gmail.com>
+> 
+> Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 > ---
->   target/riscv/insn_trans/trans_rvi.c.inc | 7 +++++++
->   1 file changed, 7 insertions(+)
+>   target/riscv/cpu.c | 6 ++++++
+>   1 file changed, 6 insertions(+)
 > 
-> diff --git a/target/riscv/insn_trans/trans_rvi.c.inc b/target/riscv/insn_trans/trans_rvi.c.inc
-> index 96c218a9d7..1283207fc7 100644
-> --- a/target/riscv/insn_trans/trans_rvi.c.inc
-> +++ b/target/riscv/insn_trans/trans_rvi.c.inc
-> @@ -323,6 +323,10 @@ static bool gen_load(DisasContext *ctx, arg_lb *a, MemOp memop)
->   {
->       bool out;
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index 4e80dcd2e6..fd3ea9ce76 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -186,11 +186,14 @@ const RISCVIsaExtData isa_edata_arr[] = {
+>       ISA_EXT_DATA_ENTRY(smaia, PRIV_VERSION_1_12_0, ext_smaia),
+>       ISA_EXT_DATA_ENTRY(smcntrpmf, PRIV_VERSION_1_12_0, ext_smcntrpmf),
+>       ISA_EXT_DATA_ENTRY(smepmp, PRIV_VERSION_1_12_0, ext_smepmp),
+> +    ISA_EXT_DATA_ENTRY(smmpm, PRIV_VERSION_1_13_0, ext_smmpm),
+> +    ISA_EXT_DATA_ENTRY(smnpm, PRIV_VERSION_1_13_0, ext_smnpm),
+>       ISA_EXT_DATA_ENTRY(smstateen, PRIV_VERSION_1_12_0, ext_smstateen),
+>       ISA_EXT_DATA_ENTRY(ssaia, PRIV_VERSION_1_12_0, ext_ssaia),
+>       ISA_EXT_DATA_ENTRY(ssccptr, PRIV_VERSION_1_11_0, has_priv_1_11),
+>       ISA_EXT_DATA_ENTRY(sscofpmf, PRIV_VERSION_1_12_0, ext_sscofpmf),
+>       ISA_EXT_DATA_ENTRY(sscounterenw, PRIV_VERSION_1_12_0, has_priv_1_12),
+> +    ISA_EXT_DATA_ENTRY(ssnpm, PRIV_VERSION_1_13_0, ext_ssnpm),
+
+I just realized that we're not adding "ext_supm":
+
+"Supm Pointer masking, with the execution environment providing a means
+to select PMLEN=0 and PMLEN=7 at minimum."
+
+IIUC this is always enabled in the code so this would be a flag that would
+be always enabled, i.e. it would be a ISA_EXT_DATA_ENTRY that defaults to
+"has_priv_1_13". "sscounterenw" is an example of this kind of extension.
+
+If that's really the case I believe you can add "supm" in this patch or maybe
+a new patch right after. We need to advertise support for "supm" for RVA23
+anyway.
+
+
+Thanks,
+
+Daniel
+
+
+>       ISA_EXT_DATA_ENTRY(sstc, PRIV_VERSION_1_12_0, ext_sstc),
+>       ISA_EXT_DATA_ENTRY(sstvala, PRIV_VERSION_1_12_0, has_priv_1_12),
+>       ISA_EXT_DATA_ENTRY(sstvecd, PRIV_VERSION_1_12_0, has_priv_1_12),
+> @@ -1490,9 +1493,12 @@ const RISCVCPUMultiExtConfig riscv_cpu_extensions[] = {
+>       MULTI_EXT_CFG_BOOL("zvfh", ext_zvfh, false),
+>       MULTI_EXT_CFG_BOOL("zvfhmin", ext_zvfhmin, false),
+>       MULTI_EXT_CFG_BOOL("sstc", ext_sstc, true),
+> +    MULTI_EXT_CFG_BOOL("ssnpm", ext_ssnpm, false),
 >   
-> +    if (ctx->cfg_ptr->trap_misaligned_access && !ctx->cfg_ptr->ext_zama16b) {
-> +        memop |= MO_ALIGN;
-> +    }
-> +
->       if (ctx->cfg_ptr->ext_zama16b) {
->           memop |= MO_ATOM_WITHIN16;
->       }
-> @@ -424,6 +428,9 @@ static bool gen_store_i128(DisasContext *ctx, arg_sb *a, MemOp memop)
->   
->   static bool gen_store(DisasContext *ctx, arg_sb *a, MemOp memop)
->   {
-> +    if (ctx->cfg_ptr->trap_misaligned_access && !ctx->cfg_ptr->ext_zama16b) {
-> +        memop |= MO_ALIGN;
-> +    }
->       if (ctx->cfg_ptr->ext_zama16b) {
->           memop |= MO_ATOM_WITHIN16;
->       }
+>       MULTI_EXT_CFG_BOOL("smaia", ext_smaia, false),
+>       MULTI_EXT_CFG_BOOL("smepmp", ext_smepmp, false),
+> +    MULTI_EXT_CFG_BOOL("smmpm", ext_smmpm, false),
+> +    MULTI_EXT_CFG_BOOL("smnpm", ext_smnpm, false),
+>       MULTI_EXT_CFG_BOOL("smstateen", ext_smstateen, false),
+>       MULTI_EXT_CFG_BOOL("ssaia", ext_ssaia, false),
+>       MULTI_EXT_CFG_BOOL("svade", ext_svade, false),
 
-I would imagine that ext_zama16b would disable or conflict with trap_misaligned_access at 
-startup.
-
-
-r~
 
