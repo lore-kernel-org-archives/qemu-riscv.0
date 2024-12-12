@@ -4,86 +4,110 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 695F3E77182
-	for <qemu-riscv@archiver.kernel.org>; Thu, 12 Dec 2024 09:49:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DD5E8E7717F
+	for <qemu-riscv@archiver.kernel.org>; Thu, 12 Dec 2024 12:33:06 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tLfoP-0002Rw-SK; Thu, 12 Dec 2024 04:48:49 -0500
+	id 1tLiMr-0004Pb-8m; Thu, 12 Dec 2024 07:32:33 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1tLfoN-0002R1-A8
- for qemu-riscv@nongnu.org; Thu, 12 Dec 2024 04:48:47 -0500
-Received: from mail-pg1-x52b.google.com ([2607:f8b0:4864:20::52b])
+ (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
+ id 1tLiMX-0004M5-Qy
+ for qemu-riscv@nongnu.org; Thu, 12 Dec 2024 07:32:15 -0500
+Received: from mail-ed1-x530.google.com ([2a00:1450:4864:20::530])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1tLfoI-0002lA-GO
- for qemu-riscv@nongnu.org; Thu, 12 Dec 2024 04:48:46 -0500
-Received: by mail-pg1-x52b.google.com with SMTP id
- 41be03b00d2f7-7fd5248d663so360069a12.0
- for <qemu-riscv@nongnu.org>; Thu, 12 Dec 2024 01:48:41 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
+ id 1tLiMU-0005wl-I4
+ for qemu-riscv@nongnu.org; Thu, 12 Dec 2024 07:32:13 -0500
+Received: by mail-ed1-x530.google.com with SMTP id
+ 4fb4d7f45d1cf-5ceb03aadb1so717178a12.0
+ for <qemu-riscv@nongnu.org>; Thu, 12 Dec 2024 04:32:09 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1733996921; x=1734601721; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=rIDz21lKrXmJBL/1OJrlbrlC5z+y28lnfGL4NFm0vSU=;
- b=UMS9Nf+tn0WEmE6aTGrEala5RpoNpCrCH8tZEQJeJl+4/9Q3OVSkfev6EbQDasnlci
- 2lNC0OhgnM0yCWhLjr+CUXeWZ3GKpA/9Ui4G2G7uldAgs3b+da9tOGmnq6snjXT+PWEc
- zwPUJFGlsnU5AAIa9omieIYUEntt8SoJXtzp8jM/ne/yBoYVS9fW2oh8zb2EQqepFFBZ
- kXjVKJ+wNEj3n0ND4aumkJrkOuxbIu6mlAFAyd/xCezbbLohMhMX7qp0OBaN2cowzA2K
- hECWgUwJ2jpncOr4b/HC2AgV2F4koXVN5IrqAQf14UUbODTSZ4dRwUvk3E2mLpNCC7Yp
- WgZg==
+ d=linaro.org; s=google; t=1734006727; x=1734611527; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:message-id:date:user-agent
+ :references:in-reply-to:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=Rryo9QOGHZWk3odfntLuAGrtXKMIOLQcx/zcX4OcaDo=;
+ b=rP3TWeYawc5McMYp1D3WuYqJ4p/Sr7bk0jzT8y2zv1AUoaix87qWxuIDAcat0sHc6Q
+ H6da+EQflKTtjlatxkFJ7nBjIchCZa8lGjLOz3HEq5mfEXuQ8xjWx5YODWtYHOLEaGq4
+ uZWcA7knJebGz3qiKmBW0SLJpuPKiUMErwmR/fExwRkil/v6MrEZ25GQ6YQN+yUxdkQ6
+ UnR+dOwfwOvkrGnI15dKN3WDidspx206yeG/l79A5cpoFNcEd9SpugTuqc0LaOkpPxlF
+ wjmZvxA3cvP2PVh20iyBtV+jAuVHtxTZ7hJiVJargOjiW7zsboxv5dU24fcteXs3V9k/
+ REOg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1733996921; x=1734601721;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=rIDz21lKrXmJBL/1OJrlbrlC5z+y28lnfGL4NFm0vSU=;
- b=NlCXBaoFNWbdCOWYQXvV7SWtgf/jX9k4epBYsLLCchYK3W9296TP2HqXC5dv1zQgk9
- dp0OF/oxoSJYeba9WD2weA+anwICU+ojsWVQeWJG7p8ScfbYUr2q6yCda0gNpCHXlZNF
- hkr7EnAMwgZ4cDc9YeJVflUofAu8lnf9AGg7yc6K9e0HaZvSyC1iHKHA2F5XRrv6i5AM
- 3Dh9lj3ReOuUVSJ5JD32bmVE/uJn/Ol1W4t19I67JcCoKZBGbTpQK5jzUKxSNN9mqvrn
- LKWAHTbxUVkJINXzsGn5peX8qfz21OND7NeJkLY5CWwoUybUudl6sRotaNd6tTRXBxVg
- vMRQ==
+ d=1e100.net; s=20230601; t=1734006727; x=1734611527;
+ h=content-transfer-encoding:mime-version:message-id:date:user-agent
+ :references:in-reply-to:subject:cc:to:from:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=Rryo9QOGHZWk3odfntLuAGrtXKMIOLQcx/zcX4OcaDo=;
+ b=AIXu7WAQ61fojJz0UF+fwV27tAc5LAMdliinkoYy4kegq/bmGBhZmAWblUiATej0WL
+ ydRR+Se/BQAD4bPpfHt+JbcRUFudPJaG4bWu8q8h0WfMmf1t62DJJ5ali6pruv7sQ+FF
+ krEojC9BC9zrsfy480QSVvpFxNm7s38ZyyuNuuONYOHRLhgwvRf6Pe68EzfVdjNz2cEt
+ 0G+xYayqwLkeYy9Ay3Fh5xz4a0mT2/tUMLLDiv9z40qipgx1U1xBbRJNkSwyCSYShNy3
+ 7sNKJNjdl5FsXdrByY7WzlJYD2WXYqApkHjM/AREKkAlqt8Kzy6Yg0uxQwODs/iyM3n3
+ Xz8w==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVi8Jy0R1yoGgFCj+BR7W5JMLkz+hOW/o8cH0fWAVTtCxjkrowxBCZvMofk7oHWw/QzpspoXxXMmIi5@nongnu.org
-X-Gm-Message-State: AOJu0Yx8nH0G0B85PlW8PnFJleUwWh+u52h2PQZPvOBGDjTGMFdpM+2a
- okZaHCfVwogX9JxtPwll43/PYiRmQ4KV5OPftKUpW0TBkgouwyji9+vnqYAREQw=
-X-Gm-Gg: ASbGncuysjfSQhYYVw0VcVFm59D8Zou9Tvl/2WLhfXkUjuDFv1EFwfSLtqiZVaEP+fY
- ZKVso/JM/pkkLNZ+7alduLe7qn++ENs7mmEneV5ba0YeFvAZeaztRpjAr8sy2xccPNPgR6Fvz4o
- jzJJeCklH0DHfbUkF7mvcN2znBAWeZ0sQNRS1acSaJWCkIbY1IE1mElfepVBYTJ1Axb7NpeMYch
- od/sCxsbNVAQdI+n++GCMEaZMp/vLjmWdKLpHKOS6zxi7rBaEyO5NBejVxboBW6e4Y2ug==
-X-Google-Smtp-Source: AGHT+IG2BDTzyq3flsa9jNR4paMG0n5DCN5bB5H7mHWRFf2DqBtllmQp8D5Fq5aDrPFMuN91AoXTOg==
-X-Received: by 2002:a05:6a20:2d0a:b0:1e1:ab63:c5e8 with SMTP id
- adf61e73a8af0-1e1ceb11828mr3765749637.26.1733996920705; 
- Thu, 12 Dec 2024 01:48:40 -0800 (PST)
-Received: from [192.168.68.110] ([187.101.65.72])
- by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-727ba09a13bsm4997043b3a.46.2024.12.12.01.48.37
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 12 Dec 2024 01:48:40 -0800 (PST)
-Message-ID: <69de5c69-1583-4a0f-9db6-c61e721adbe1@ventanamicro.com>
-Date: Thu, 12 Dec 2024 06:48:36 -0300
+ AJvYcCUkrPU74SI7L5OFblD02mBBFVTd4unF/sRMsREfvfqb2jw3/xWIJoJRDzGdL/P9i3WBsypdc6QP3C+q@nongnu.org
+X-Gm-Message-State: AOJu0Yz+TuGI91G8b/ChDKNiPB2ydm00l6o3EmDLiPult9buGtXaUhio
+ oIRjcRIz/J0TwffYEI8G6KTHJnXLTwFShwbgoNwHffItCaz/nhn5xTLpH/ylqew=
+X-Gm-Gg: ASbGncuvod3TgXFmRztnJUVFL8cs05ZTrTwc0EtvruD5UCY4wPcopBudUJ3r1ZGevYy
+ qyFoeenOYIOsaBqmd6KLe3jWzRQmPR0JYEQK+i4uUwhhc4kN8eC0ZRP4NVJL8n+NFqnhHancUTu
+ L6WDLDpb+4EhxIW0mrs2xg6Ep0ZyXOqE5RWymxpZL8mw5x1y7COv0Nwn/cFp0J+bJIGAKbwP3Ey
+ wVJVf77NiOvB0Wvsl0Xp526uoIGEYhhi9EAvXXON3V9aIGQ/ldWFis=
+X-Google-Smtp-Source: AGHT+IEMNwKMF5XqilWAi/SyxKdw/LuJfcpu/iO3LoKkCQbmDUbgfuqP3Pt6HTc4gwh7tqatZYOnlg==
+X-Received: by 2002:a05:6402:35ca:b0:5d0:e877:764e with SMTP id
+ 4fb4d7f45d1cf-5d6334f69a2mr70443a12.24.1734006727130; 
+ Thu, 12 Dec 2024 04:32:07 -0800 (PST)
+Received: from draig.lan ([85.9.250.243]) by smtp.gmail.com with ESMTPSA id
+ 4fb4d7f45d1cf-5d3f1323f99sm6497588a12.34.2024.12.12.04.32.05
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 12 Dec 2024 04:32:06 -0800 (PST)
+Received: from draig (localhost [IPv6:::1])
+ by draig.lan (Postfix) with ESMTP id DD03D5F8CF;
+ Thu, 12 Dec 2024 12:32:04 +0000 (GMT)
+From: =?utf-8?Q?Alex_Benn=C3=A9e?= <alex.bennee@linaro.org>
+To: Thomas Huth <thuth@redhat.com>
+Cc: qemu-devel@nongnu.org,  "Daniel P. Berrange" <berrange@redhat.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ qemu-s390x@nongnu.org,  Halil Pasic <pasic@linux.ibm.com>,  Jiaxun Yang
+ <jiaxun.yang@flygoat.com>,  Weiwei Li <liwei1518@gmail.com>,  Liu Zhiwei
+ <zhiwei_liu@linux.alibaba.com>,  Cleber Rosa <crosa@redhat.com>,  Palmer
+ Dabbelt <palmer@dabbelt.com>,  Leif Lindholm <quic_llindhol@quicinc.com>,
+ Eric Farman <farman@linux.ibm.com>,  =?utf-8?Q?Marc-Andr=C3=A9?= Lureau
+ <marcandre.lureau@redhat.com>,  John Snow <jsnow@redhat.com>,  Philippe
+ =?utf-8?Q?Mathieu-Daud=C3=A9?= <philmd@linaro.org>,  Harsh Prateek Bora
+ <harshpb@linux.ibm.com>,  Aurelien Jarno <aurelien@aurel32.net>,  Paolo
+ Bonzini <pbonzini@redhat.com>,  Joel Stanley <joel@jms.id.au>,  Bernhard
+ Beschow <shentey@gmail.com>,  qemu-ppc@nongnu.org,  qemu-riscv@nongnu.org,
+ Daniel Henrique Barboza <danielhb413@gmail.com>,  Laurent Vivier
+ <lvivier@redhat.com>,  qemu-arm@nongnu.org,  Wainer dos Santos Moschetta
+ <wainersm@redhat.com>,  Fabiano Rosas <farosas@suse.de>,  Markus
+ Armbruster <armbru@redhat.com>,  Bin Meng <bmeng.cn@gmail.com>,  Pavel
+ Dovgalyuk <pavel.dovgaluk@ispras.ru>,  Marcel Apfelbaum
+ <marcel.apfelbaum@gmail.com>,  Richard Henderson
+ <richard.henderson@linaro.org>,  Marcin Juszkiewicz
+ <marcin.juszkiewicz@linaro.org>,  Christian Borntraeger
+ <borntraeger@linux.ibm.com>,  Beraldo Leal <bleal@redhat.com>,  Peter
+ Maydell <peter.maydell@linaro.org>,  Radoslaw Biernacki
+ <rad@semihalf.com>,  Nicholas Piggin <npiggin@gmail.com>,  Mark
+ Cave-Ayland <mark.cave-ayland@ilande.co.uk>,  "Michael S. Tsirkin"
+ <mst@redhat.com>,  Alistair Francis <alistair.francis@wdc.com>
+Subject: Re: [PATCH 20/20] tests/functional: extend test_aarch64_virt with
+ vulkan test
+In-Reply-To: <d2a73820-58fa-41d0-8f38-68b0ad53fa7d@redhat.com> (Thomas Huth's
+ message of "Wed, 11 Dec 2024 07:58:00 +0100")
+References: <20241210204349.723590-1-alex.bennee@linaro.org>
+ <20241210204349.723590-21-alex.bennee@linaro.org>
+ <d2a73820-58fa-41d0-8f38-68b0ad53fa7d@redhat.com>
+User-Agent: mu4e 1.12.7; emacs 29.4
+Date: Thu, 12 Dec 2024 12:32:04 +0000
+Message-ID: <87bjxhrsjf.fsf@draig.linaro.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v12 7/7] target/riscv: Enable updates for pointer masking
- variables and thus enable pointer masking extension
-To: baturo.alexey@gmail.com
-Cc: richard.henderson@linaro.org, zhiwei_liu@linux.alibaba.com,
- liwei1518@gmail.com, alistair23@gmail.com, frank.chang@sifive.com,
- palmer@dabbelt.com, Alistair.Francis@wdc.com, sagark@eecs.berkeley.edu,
- kbastian@mail.uni-paderborn.de, qemu-devel@nongnu.org, qemu-riscv@nongnu.org
-References: <20241205112304.593204-1-baturo.alexey@gmail.com>
- <20241205112304.593204-8-baturo.alexey@gmail.com>
-Content-Language: en-US
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <20241205112304.593204-8-baturo.alexey@gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::52b;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pg1-x52b.google.com
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2a00:1450:4864:20::530;
+ envelope-from=alex.bennee@linaro.org; helo=mail-ed1-x530.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -106,69 +130,67 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
+Thomas Huth <thuth@redhat.com> writes:
 
+> On 10/12/2024 21.43, Alex Benn=C3=A9e wrote:
+>> Now we have virtio-gpu Vulkan support lets add a test for it.
+>> Currently this is using images build by buildroot:
+>>    https://lists.buildroot.org/pipermail/buildroot/2024-December/768196.=
+html
+>> Signed-off-by: Alex Benn=C3=A9e <alex.bennee@linaro.org>
+<snip>
+>> +        self.vm.set_console()
+>> +        kernel_command_line =3D (self.KERNEL_COMMON_COMMAND_LINE +
+>> +                               'console=3DttyAMA0 root=3D/dev/vda')
+>> +        self.require_accelerator("tcg")
+>
+> Same, please move to the beginning since it can skip the test.
+>
+>> +        self.vm.add_args("-accel", "tcg")
 
-On 12/5/24 8:23 AM, baturo.alexey@gmail.com wrote:
-> From: Alexey Baturo <baturo.alexey@gmail.com>
-> 
-> Signed-off-by: Alexey Baturo <baturo.alexey@gmail.com>
-> 
-> Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
-> ---
->   target/riscv/cpu.c | 6 ++++++
->   1 file changed, 6 insertions(+)
-> 
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index 4e80dcd2e6..fd3ea9ce76 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -186,11 +186,14 @@ const RISCVIsaExtData isa_edata_arr[] = {
->       ISA_EXT_DATA_ENTRY(smaia, PRIV_VERSION_1_12_0, ext_smaia),
->       ISA_EXT_DATA_ENTRY(smcntrpmf, PRIV_VERSION_1_12_0, ext_smcntrpmf),
->       ISA_EXT_DATA_ENTRY(smepmp, PRIV_VERSION_1_12_0, ext_smepmp),
-> +    ISA_EXT_DATA_ENTRY(smmpm, PRIV_VERSION_1_13_0, ext_smmpm),
-> +    ISA_EXT_DATA_ENTRY(smnpm, PRIV_VERSION_1_13_0, ext_smnpm),
->       ISA_EXT_DATA_ENTRY(smstateen, PRIV_VERSION_1_12_0, ext_smstateen),
->       ISA_EXT_DATA_ENTRY(ssaia, PRIV_VERSION_1_12_0, ext_ssaia),
->       ISA_EXT_DATA_ENTRY(ssccptr, PRIV_VERSION_1_11_0, has_priv_1_11),
->       ISA_EXT_DATA_ENTRY(sscofpmf, PRIV_VERSION_1_12_0, ext_sscofpmf),
->       ISA_EXT_DATA_ENTRY(sscounterenw, PRIV_VERSION_1_12_0, has_priv_1_12),
-> +    ISA_EXT_DATA_ENTRY(ssnpm, PRIV_VERSION_1_13_0, ext_ssnpm),
+Actually this could run under KVM if we have it for Aarch64. Can we
+represent that?
 
-I just realized that we're not adding "ext_supm":
+>> +        self.vm.add_args("-cpu", "neoverse-v1,pauth-impdef=3Don")
 
-"Supm Pointer masking, with the execution environment providing a means
-to select PMLEN=0 and PMLEN=7 at minimum."
+I guess in that case we'd use -cpu host as well.
 
-IIUC this is always enabled in the code so this would be a flag that would
-be always enabled, i.e. it would be a ISA_EXT_DATA_ENTRY that defaults to
-"has_priv_1_13". "sscounterenw" is an example of this kind of extension.
+>> +        self.vm.add_args("-machine",
+>> +                         "virt,virtualization=3Don,"
+>> +                         "gic-version=3Dmax",
+>> +                         '-kernel', kernel_path,
+>> +                         '-append', kernel_command_line)
+>> +        self.vm.add_args("-smp", "2", "-m", "2048")
+>> +        self.vm.add_args("-device", "virtio-gpu-gl-pci,hostmem=3D4G,blo=
+b=3Don,venus=3Don")
+>> +        self.vm.add_args("-display", "egl-headless")
+>> +        self.vm.add_args("-display", "dbus,gl=3Don")
+>> +        self.vm.add_args("-device", "virtio-blk-device,drive=3Dhd0")
+>> +        self.vm.add_args("-blockdev",
+>> +                         "driver=3Draw,file.driver=3Dfile,node-name=3Dh=
+d0,read-only=3Don,"
+>> +                         f"file.filename=3D{image_path}")
+>> +        self.vm.add_args("--snapshot")
+>
+> Any reason for using double dashes just here and not for the other comman=
+ds?
+>
+>> +        try:
+>> +            self.vm.launch()
+>> +        except VMLaunchFailure as e:
+>> +            if "old virglrenderer, blob resources unsupported" in e.out=
+put:
+>> +                self.skipTest("No blob support for virtio-gpu")
+>> +            elif "old virglrenderer, venus unsupported" in e.output:
+>> +                self.skipTest("No venus support for virtio-gpu")
+>> +            else:
+>> +                self.log.info(f"un-handled launch failure: {e.output}")
+>
+> s/un-handled/unhandled/ ?
+>
+>  Thomas
 
-If that's really the case I believe you can add "supm" in this patch or maybe
-a new patch right after. We need to advertise support for "supm" for RVA23
-anyway.
-
-
-Thanks,
-
-Daniel
-
-
->       ISA_EXT_DATA_ENTRY(sstc, PRIV_VERSION_1_12_0, ext_sstc),
->       ISA_EXT_DATA_ENTRY(sstvala, PRIV_VERSION_1_12_0, has_priv_1_12),
->       ISA_EXT_DATA_ENTRY(sstvecd, PRIV_VERSION_1_12_0, has_priv_1_12),
-> @@ -1490,9 +1493,12 @@ const RISCVCPUMultiExtConfig riscv_cpu_extensions[] = {
->       MULTI_EXT_CFG_BOOL("zvfh", ext_zvfh, false),
->       MULTI_EXT_CFG_BOOL("zvfhmin", ext_zvfhmin, false),
->       MULTI_EXT_CFG_BOOL("sstc", ext_sstc, true),
-> +    MULTI_EXT_CFG_BOOL("ssnpm", ext_ssnpm, false),
->   
->       MULTI_EXT_CFG_BOOL("smaia", ext_smaia, false),
->       MULTI_EXT_CFG_BOOL("smepmp", ext_smepmp, false),
-> +    MULTI_EXT_CFG_BOOL("smmpm", ext_smmpm, false),
-> +    MULTI_EXT_CFG_BOOL("smnpm", ext_smnpm, false),
->       MULTI_EXT_CFG_BOOL("smstateen", ext_smstateen, false),
->       MULTI_EXT_CFG_BOOL("ssaia", ext_ssaia, false),
->       MULTI_EXT_CFG_BOOL("svade", ext_svade, false),
-
+--=20
+Alex Benn=C3=A9e
+Virtualisation Tech Lead @ Linaro
 
