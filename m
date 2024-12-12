@@ -4,117 +4,137 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DD5E8E7717F
-	for <qemu-riscv@archiver.kernel.org>; Thu, 12 Dec 2024 12:33:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ACA4CE7717F
+	for <qemu-riscv@archiver.kernel.org>; Thu, 12 Dec 2024 12:35:05 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tLiMr-0004Pb-8m; Thu, 12 Dec 2024 07:32:33 -0500
+	id 1tLiP3-0006Ay-QX; Thu, 12 Dec 2024 07:34:49 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1tLiMX-0004M5-Qy
- for qemu-riscv@nongnu.org; Thu, 12 Dec 2024 07:32:15 -0500
-Received: from mail-ed1-x530.google.com ([2a00:1450:4864:20::530])
+ (Exim 4.90_1) (envelope-from <farosas@suse.de>)
+ id 1tLiP1-0006A2-T7; Thu, 12 Dec 2024 07:34:47 -0500
+Received: from smtp-out1.suse.de ([195.135.223.130])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1tLiMU-0005wl-I4
- for qemu-riscv@nongnu.org; Thu, 12 Dec 2024 07:32:13 -0500
-Received: by mail-ed1-x530.google.com with SMTP id
- 4fb4d7f45d1cf-5ceb03aadb1so717178a12.0
- for <qemu-riscv@nongnu.org>; Thu, 12 Dec 2024 04:32:09 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1734006727; x=1734611527; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:message-id:date:user-agent
- :references:in-reply-to:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Rryo9QOGHZWk3odfntLuAGrtXKMIOLQcx/zcX4OcaDo=;
- b=rP3TWeYawc5McMYp1D3WuYqJ4p/Sr7bk0jzT8y2zv1AUoaix87qWxuIDAcat0sHc6Q
- H6da+EQflKTtjlatxkFJ7nBjIchCZa8lGjLOz3HEq5mfEXuQ8xjWx5YODWtYHOLEaGq4
- uZWcA7knJebGz3qiKmBW0SLJpuPKiUMErwmR/fExwRkil/v6MrEZ25GQ6YQN+yUxdkQ6
- UnR+dOwfwOvkrGnI15dKN3WDidspx206yeG/l79A5cpoFNcEd9SpugTuqc0LaOkpPxlF
- wjmZvxA3cvP2PVh20iyBtV+jAuVHtxTZ7hJiVJargOjiW7zsboxv5dU24fcteXs3V9k/
- REOg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1734006727; x=1734611527;
- h=content-transfer-encoding:mime-version:message-id:date:user-agent
- :references:in-reply-to:subject:cc:to:from:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=Rryo9QOGHZWk3odfntLuAGrtXKMIOLQcx/zcX4OcaDo=;
- b=AIXu7WAQ61fojJz0UF+fwV27tAc5LAMdliinkoYy4kegq/bmGBhZmAWblUiATej0WL
- ydRR+Se/BQAD4bPpfHt+JbcRUFudPJaG4bWu8q8h0WfMmf1t62DJJ5ali6pruv7sQ+FF
- krEojC9BC9zrsfy480QSVvpFxNm7s38ZyyuNuuONYOHRLhgwvRf6Pe68EzfVdjNz2cEt
- 0G+xYayqwLkeYy9Ay3Fh5xz4a0mT2/tUMLLDiv9z40qipgx1U1xBbRJNkSwyCSYShNy3
- 7sNKJNjdl5FsXdrByY7WzlJYD2WXYqApkHjM/AREKkAlqt8Kzy6Yg0uxQwODs/iyM3n3
- Xz8w==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUkrPU74SI7L5OFblD02mBBFVTd4unF/sRMsREfvfqb2jw3/xWIJoJRDzGdL/P9i3WBsypdc6QP3C+q@nongnu.org
-X-Gm-Message-State: AOJu0Yz+TuGI91G8b/ChDKNiPB2ydm00l6o3EmDLiPult9buGtXaUhio
- oIRjcRIz/J0TwffYEI8G6KTHJnXLTwFShwbgoNwHffItCaz/nhn5xTLpH/ylqew=
-X-Gm-Gg: ASbGncuvod3TgXFmRztnJUVFL8cs05ZTrTwc0EtvruD5UCY4wPcopBudUJ3r1ZGevYy
- qyFoeenOYIOsaBqmd6KLe3jWzRQmPR0JYEQK+i4uUwhhc4kN8eC0ZRP4NVJL8n+NFqnhHancUTu
- L6WDLDpb+4EhxIW0mrs2xg6Ep0ZyXOqE5RWymxpZL8mw5x1y7COv0Nwn/cFp0J+bJIGAKbwP3Ey
- wVJVf77NiOvB0Wvsl0Xp526uoIGEYhhi9EAvXXON3V9aIGQ/ldWFis=
-X-Google-Smtp-Source: AGHT+IEMNwKMF5XqilWAi/SyxKdw/LuJfcpu/iO3LoKkCQbmDUbgfuqP3Pt6HTc4gwh7tqatZYOnlg==
-X-Received: by 2002:a05:6402:35ca:b0:5d0:e877:764e with SMTP id
- 4fb4d7f45d1cf-5d6334f69a2mr70443a12.24.1734006727130; 
- Thu, 12 Dec 2024 04:32:07 -0800 (PST)
-Received: from draig.lan ([85.9.250.243]) by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5d3f1323f99sm6497588a12.34.2024.12.12.04.32.05
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 12 Dec 2024 04:32:06 -0800 (PST)
-Received: from draig (localhost [IPv6:::1])
- by draig.lan (Postfix) with ESMTP id DD03D5F8CF;
- Thu, 12 Dec 2024 12:32:04 +0000 (GMT)
-From: =?utf-8?Q?Alex_Benn=C3=A9e?= <alex.bennee@linaro.org>
-To: Thomas Huth <thuth@redhat.com>
-Cc: qemu-devel@nongnu.org,  "Daniel P. Berrange" <berrange@redhat.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- qemu-s390x@nongnu.org,  Halil Pasic <pasic@linux.ibm.com>,  Jiaxun Yang
- <jiaxun.yang@flygoat.com>,  Weiwei Li <liwei1518@gmail.com>,  Liu Zhiwei
- <zhiwei_liu@linux.alibaba.com>,  Cleber Rosa <crosa@redhat.com>,  Palmer
- Dabbelt <palmer@dabbelt.com>,  Leif Lindholm <quic_llindhol@quicinc.com>,
- Eric Farman <farman@linux.ibm.com>,  =?utf-8?Q?Marc-Andr=C3=A9?= Lureau
- <marcandre.lureau@redhat.com>,  John Snow <jsnow@redhat.com>,  Philippe
- =?utf-8?Q?Mathieu-Daud=C3=A9?= <philmd@linaro.org>,  Harsh Prateek Bora
- <harshpb@linux.ibm.com>,  Aurelien Jarno <aurelien@aurel32.net>,  Paolo
- Bonzini <pbonzini@redhat.com>,  Joel Stanley <joel@jms.id.au>,  Bernhard
- Beschow <shentey@gmail.com>,  qemu-ppc@nongnu.org,  qemu-riscv@nongnu.org,
- Daniel Henrique Barboza <danielhb413@gmail.com>,  Laurent Vivier
- <lvivier@redhat.com>,  qemu-arm@nongnu.org,  Wainer dos Santos Moschetta
- <wainersm@redhat.com>,  Fabiano Rosas <farosas@suse.de>,  Markus
- Armbruster <armbru@redhat.com>,  Bin Meng <bmeng.cn@gmail.com>,  Pavel
- Dovgalyuk <pavel.dovgaluk@ispras.ru>,  Marcel Apfelbaum
- <marcel.apfelbaum@gmail.com>,  Richard Henderson
- <richard.henderson@linaro.org>,  Marcin Juszkiewicz
- <marcin.juszkiewicz@linaro.org>,  Christian Borntraeger
- <borntraeger@linux.ibm.com>,  Beraldo Leal <bleal@redhat.com>,  Peter
- Maydell <peter.maydell@linaro.org>,  Radoslaw Biernacki
- <rad@semihalf.com>,  Nicholas Piggin <npiggin@gmail.com>,  Mark
- Cave-Ayland <mark.cave-ayland@ilande.co.uk>,  "Michael S. Tsirkin"
- <mst@redhat.com>,  Alistair Francis <alistair.francis@wdc.com>
-Subject: Re: [PATCH 20/20] tests/functional: extend test_aarch64_virt with
- vulkan test
-In-Reply-To: <d2a73820-58fa-41d0-8f38-68b0ad53fa7d@redhat.com> (Thomas Huth's
- message of "Wed, 11 Dec 2024 07:58:00 +0100")
+ (Exim 4.90_1) (envelope-from <farosas@suse.de>)
+ id 1tLiOz-00068c-Nu; Thu, 12 Dec 2024 07:34:47 -0500
+Received: from imap1.dmz-prg2.suse.org (unknown [10.150.64.97])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-out1.suse.de (Postfix) with ESMTPS id 31DC12118C;
+ Thu, 12 Dec 2024 12:34:42 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
+ t=1734006882; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=PTAymOVEaL8bvIneGRCaEdJ+Wyy38EPkvob6i+Vnpwg=;
+ b=bhNzNAkqn0MgJhARMTYdtNFXnqsXQyg29pN4f49cCn1ZNxN/fEXjiQu4rpVf2KdS2eVjVU
+ VZDZaHNKK2qMVHi390sAsAXzLBwKaCHrMgYgyiQFLrsk/avY3M8taoG/0E/rVoiTLUnB4v
+ ImGBrT+oIAhBqzJCQufZzCvb1knHM6I=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
+ s=susede2_ed25519; t=1734006882;
+ h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=PTAymOVEaL8bvIneGRCaEdJ+Wyy38EPkvob6i+Vnpwg=;
+ b=UI1bjYww+U3FA2WDBMfhujcRdM6OaOPAInL6o73bbE/6taUpA5cFGF8NvVzGrBNF/lNlkj
+ 4z8vSGFAQpt7pXDQ==
+Authentication-Results: smtp-out1.suse.de;
+	none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
+ t=1734006882; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=PTAymOVEaL8bvIneGRCaEdJ+Wyy38EPkvob6i+Vnpwg=;
+ b=bhNzNAkqn0MgJhARMTYdtNFXnqsXQyg29pN4f49cCn1ZNxN/fEXjiQu4rpVf2KdS2eVjVU
+ VZDZaHNKK2qMVHi390sAsAXzLBwKaCHrMgYgyiQFLrsk/avY3M8taoG/0E/rVoiTLUnB4v
+ ImGBrT+oIAhBqzJCQufZzCvb1knHM6I=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
+ s=susede2_ed25519; t=1734006882;
+ h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=PTAymOVEaL8bvIneGRCaEdJ+Wyy38EPkvob6i+Vnpwg=;
+ b=UI1bjYww+U3FA2WDBMfhujcRdM6OaOPAInL6o73bbE/6taUpA5cFGF8NvVzGrBNF/lNlkj
+ 4z8vSGFAQpt7pXDQ==
+Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 70DF013939;
+ Thu, 12 Dec 2024 12:34:41 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
+ by imap1.dmz-prg2.suse.org with ESMTPSA id wSaAG2HYWmfMSgAAD6G6ig
+ (envelope-from <farosas@suse.de>); Thu, 12 Dec 2024 12:34:41 +0000
+From: Fabiano Rosas <farosas@suse.de>
+To: Alex =?utf-8?Q?Benn=C3=A9e?= <alex.bennee@linaro.org>,
+ qemu-devel@nongnu.org
+Cc: Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ qemu-s390x@nongnu.org, Halil Pasic <pasic@linux.ibm.com>, Jiaxun Yang
+ <jiaxun.yang@flygoat.com>, Weiwei Li <liwei1518@gmail.com>, Liu Zhiwei
+ <zhiwei_liu@linux.alibaba.com>, Cleber Rosa <crosa@redhat.com>, Palmer
+ Dabbelt <palmer@dabbelt.com>, Leif Lindholm <quic_llindhol@quicinc.com>,
+ Eric Farman <farman@linux.ibm.com>, =?utf-8?Q?Marc-Andr=C3=A9?= Lureau
+ <marcandre.lureau@redhat.com>, John Snow <jsnow@redhat.com>, Philippe
+ =?utf-8?Q?Mathieu-Daud=C3=A9?= <philmd@linaro.org>, Harsh Prateek Bora
+ <harshpb@linux.ibm.com>, Aurelien Jarno <aurelien@aurel32.net>, Paolo
+ Bonzini <pbonzini@redhat.com>, Joel Stanley <joel@jms.id.au>, Bernhard
+ Beschow <shentey@gmail.com>, qemu-ppc@nongnu.org, qemu-riscv@nongnu.org,
+ Daniel Henrique Barboza <danielhb413@gmail.com>, Thomas Huth
+ <thuth@redhat.com>, Laurent Vivier <lvivier@redhat.com>,
+ qemu-arm@nongnu.org, Wainer dos Santos Moschetta <wainersm@redhat.com>,
+ Markus Armbruster <armbru@redhat.com>, Bin Meng <bmeng.cn@gmail.com>,
+ Pavel Dovgalyuk <pavel.dovgaluk@ispras.ru>, Marcel Apfelbaum
+ <marcel.apfelbaum@gmail.com>, Richard Henderson
+ <richard.henderson@linaro.org>, Marcin Juszkiewicz
+ <marcin.juszkiewicz@linaro.org>, Christian Borntraeger
+ <borntraeger@linux.ibm.com>, Beraldo Leal <bleal@redhat.com>, Peter
+ Maydell <peter.maydell@linaro.org>, Radoslaw Biernacki <rad@semihalf.com>,
+ =?utf-8?Q?Daniel_P=2E_Berrang=C3=A9?= <berrange@redhat.com>, Alex
+ =?utf-8?Q?Benn=C3=A9e?=
+ <alex.bennee@linaro.org>, Nicholas Piggin <npiggin@gmail.com>, Mark
+ Cave-Ayland <mark.cave-ayland@ilande.co.uk>, "Michael S. Tsirkin"
+ <mst@redhat.com>, Alistair Francis <alistair.francis@wdc.com>
+Subject: Re: [PATCH 17/20] tests/qtest: move clock_steps to after checks
+In-Reply-To: <20241210204349.723590-18-alex.bennee@linaro.org>
 References: <20241210204349.723590-1-alex.bennee@linaro.org>
- <20241210204349.723590-21-alex.bennee@linaro.org>
- <d2a73820-58fa-41d0-8f38-68b0ad53fa7d@redhat.com>
-User-Agent: mu4e 1.12.7; emacs 29.4
-Date: Thu, 12 Dec 2024 12:32:04 +0000
-Message-ID: <87bjxhrsjf.fsf@draig.linaro.org>
+ <20241210204349.723590-18-alex.bennee@linaro.org>
+Date: Thu, 12 Dec 2024 09:34:39 -0300
+Message-ID: <87msh1f5b4.fsf@suse.de>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2a00:1450:4864:20::530;
- envelope-from=alex.bennee@linaro.org; helo=mail-ed1-x530.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+X-Spamd-Result: default: False [-2.80 / 50.00]; BAYES_HAM(-3.00)[99.99%];
+ SUSPICIOUS_RECIPS(1.50)[]; NEURAL_HAM_LONG(-1.00)[-1.000];
+ NEURAL_HAM_SHORT(-0.20)[-1.000]; MIME_GOOD(-0.10)[text/plain];
+ ARC_NA(0.00)[]; RCVD_VIA_SMTP_AUTH(0.00)[];
+ MISSING_XM_UA(0.00)[]; FREEMAIL_ENVRCPT(0.00)[gmail.com];
+ RCPT_COUNT_TWELVE(0.00)[43]; MIME_TRACE(0.00)[0:+];
+ TO_DN_SOME(0.00)[]; TAGGED_RCPT(0.00)[];
+ MID_RHS_MATCH_FROM(0.00)[];
+ R_RATELIMIT(0.00)[to_ip_from(RL99m1pto7gi4rdu4g5kom7ddi)];
+ FROM_EQ_ENVFROM(0.00)[]; FROM_HAS_DN(0.00)[];
+ FREEMAIL_CC(0.00)[ventanamicro.com,nongnu.org,linux.ibm.com,flygoat.com,gmail.com,linux.alibaba.com,redhat.com,dabbelt.com,quicinc.com,linaro.org,aurel32.net,jms.id.au,ispras.ru,semihalf.com,ilande.co.uk,wdc.com];
+ RCVD_TLS_ALL(0.00)[]; TO_MATCH_ENVRCPT_ALL(0.00)[];
+ FUZZY_BLOCKED(0.00)[rspamd.com]; RCVD_COUNT_TWO(0.00)[2];
+ DKIM_SIGNED(0.00)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
+ DBL_BLOCKED_OPENRESOLVER(0.00)[imap1.dmz-prg2.suse.org:helo, suse.de:email,
+ suse.de:mid, linaro.org:email]
+Received-SPF: pass client-ip=195.135.223.130; envelope-from=farosas@suse.de;
+ helo=smtp-out1.suse.de
+X-Spam_score_int: -43
+X-Spam_score: -4.4
+X-Spam_bar: ----
+X-Spam_report: (-4.4 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ RCVD_IN_DNSWL_MED=-2.3, RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001,
+ RCVD_IN_VALIDITY_SAFE_BLOCKED=0.001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -130,67 +150,21 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Thomas Huth <thuth@redhat.com> writes:
+Alex Benn=C3=A9e <alex.bennee@linaro.org> writes:
 
-> On 10/12/2024 21.43, Alex Benn=C3=A9e wrote:
->> Now we have virtio-gpu Vulkan support lets add a test for it.
->> Currently this is using images build by buildroot:
->>    https://lists.buildroot.org/pipermail/buildroot/2024-December/768196.=
-html
->> Signed-off-by: Alex Benn=C3=A9e <alex.bennee@linaro.org>
-<snip>
->> +        self.vm.set_console()
->> +        kernel_command_line =3D (self.KERNEL_COMMON_COMMAND_LINE +
->> +                               'console=3DttyAMA0 root=3D/dev/vda')
->> +        self.require_accelerator("tcg")
+> In the qtest environment time will not step forward if the system is
+> paused (timers disabled) or we have no timer events to fire. As a
+> result VirtIO events are responded to directly and we don't need to
+> step time forward.
 >
-> Same, please move to the beginning since it can skip the test.
+> Potentially the clock_step calls could be removed all together but as
+> we may implement async behaviour later lets just move them to after
+> the principle check for now.
 >
->> +        self.vm.add_args("-accel", "tcg")
+> Future qtest patches will assert that time actually changes with a
+> step is requested.
+>
+> Signed-off-by: Alex Benn=C3=A9e <alex.bennee@linaro.org>
 
-Actually this could run under KVM if we have it for Aarch64. Can we
-represent that?
-
->> +        self.vm.add_args("-cpu", "neoverse-v1,pauth-impdef=3Don")
-
-I guess in that case we'd use -cpu host as well.
-
->> +        self.vm.add_args("-machine",
->> +                         "virt,virtualization=3Don,"
->> +                         "gic-version=3Dmax",
->> +                         '-kernel', kernel_path,
->> +                         '-append', kernel_command_line)
->> +        self.vm.add_args("-smp", "2", "-m", "2048")
->> +        self.vm.add_args("-device", "virtio-gpu-gl-pci,hostmem=3D4G,blo=
-b=3Don,venus=3Don")
->> +        self.vm.add_args("-display", "egl-headless")
->> +        self.vm.add_args("-display", "dbus,gl=3Don")
->> +        self.vm.add_args("-device", "virtio-blk-device,drive=3Dhd0")
->> +        self.vm.add_args("-blockdev",
->> +                         "driver=3Draw,file.driver=3Dfile,node-name=3Dh=
-d0,read-only=3Don,"
->> +                         f"file.filename=3D{image_path}")
->> +        self.vm.add_args("--snapshot")
->
-> Any reason for using double dashes just here and not for the other comman=
-ds?
->
->> +        try:
->> +            self.vm.launch()
->> +        except VMLaunchFailure as e:
->> +            if "old virglrenderer, blob resources unsupported" in e.out=
-put:
->> +                self.skipTest("No blob support for virtio-gpu")
->> +            elif "old virglrenderer, venus unsupported" in e.output:
->> +                self.skipTest("No venus support for virtio-gpu")
->> +            else:
->> +                self.log.info(f"un-handled launch failure: {e.output}")
->
-> s/un-handled/unhandled/ ?
->
->  Thomas
-
---=20
-Alex Benn=C3=A9e
-Virtualisation Tech Lead @ Linaro
+Reviewed-by: Fabiano Rosas <farosas@suse.de>
 
