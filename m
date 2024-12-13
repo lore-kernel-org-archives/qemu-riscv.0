@@ -4,67 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D3043E7717F
-	for <qemu-riscv@archiver.kernel.org>; Fri, 13 Dec 2024 15:27:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0128BE7717D
+	for <qemu-riscv@archiver.kernel.org>; Fri, 13 Dec 2024 15:27:52 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tM7RK-0004MB-Pq; Fri, 13 Dec 2024 10:18:50 -0500
+	id 1tM7SK-00055c-2C; Fri, 13 Dec 2024 10:19:52 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <phil@philjordan.eu>)
- id 1tM7RH-0004KJ-Oq
- for qemu-riscv@nongnu.org; Fri, 13 Dec 2024 10:18:47 -0500
-Received: from mail-ej1-x634.google.com ([2a00:1450:4864:20::634])
+ id 1tM7Re-0004Sk-EB
+ for qemu-riscv@nongnu.org; Fri, 13 Dec 2024 10:19:13 -0500
+Received: from mail-ej1-x631.google.com ([2a00:1450:4864:20::631])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <phil@philjordan.eu>)
- id 1tM7RB-00053R-7b
- for qemu-riscv@nongnu.org; Fri, 13 Dec 2024 10:18:47 -0500
-Received: by mail-ej1-x634.google.com with SMTP id
- a640c23a62f3a-aa6997f33e4so279130666b.3
- for <qemu-riscv@nongnu.org>; Fri, 13 Dec 2024 07:18:39 -0800 (PST)
+ id 1tM7RV-0005AZ-Bg
+ for qemu-riscv@nongnu.org; Fri, 13 Dec 2024 10:19:07 -0500
+Received: by mail-ej1-x631.google.com with SMTP id
+ a640c23a62f3a-aa6c0d1833eso317504366b.1
+ for <qemu-riscv@nongnu.org>; Fri, 13 Dec 2024 07:18:58 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=philjordan-eu.20230601.gappssmtp.com; s=20230601; t=1734103117; x=1734707917;
+ d=philjordan-eu.20230601.gappssmtp.com; s=20230601; t=1734103136; x=1734707936;
  darn=nongnu.org; 
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=4/Ec6nOtWdcwq1cHZ1x/2dKDUUOEZBhkOyPBjT0KUZI=;
- b=BNi5s+Mycmumza2p6mQ/miUYMSA6SuW0acZ5+F/p+aLZsf6hC8R20IjZMBWQbUtMdW
- f5+PpivlKmey/tMrGegLsrbBsGyLu+W93mX7WE3GXOGS+FdOti50Ecp80j8DZrWkPSJs
- dCgGCB+P9q8WfCxjhXEY+DELqHZJTSqmOLCZnT5TjT0RwR6QwqzvEOZuHZ5wiQ0WnO9u
- XiXf73Z/x3vA+Cz9VqJssz/W4PQHdqpngkQb2ljkiNGrchX8EpRcwwYP2amaYaOJ6oGi
- QkjX4vXZbEPoIfEx4HZakU7+0ylbOw4jdPvLOvErxvFoeypkzN/OVDdwO0MFGYL86Cct
- +kFA==
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=4ANpAZDxL+OlxYTkY1W/N1GGxtnwlFqD0+mbtvmm/Y4=;
+ b=A/h2joBSOMQK2K9bLwpzD1lz1dPJRg6nfa6rfMX5ONBmZAhYOSL7u1kHQHGDB4T55k
+ dQ04C6QOTEA+80W70ddpT5wCL2uXvV8gRC9ZPR1mMZZ3lrXoex+pOEec9IMH8AaGOVAH
+ 0yRcza1x4os55rWTwn2F8D+mrifX9iMUQKdq3Ntm3H6wxupuMIrdlfm+jwkDqOchOBRT
+ WNufrXHds4NDnAhKzIZZB1zOKM9mht866HBQqky4ijveSqdocp17X4xRVgiS/BfFIZ7I
+ f8+8W7duPNKxKUsNEOR2tiG6oKW/IEumjbUwgRYO9C0G0vFmq4oHtSTLVHgXZ7BEv82s
+ K/sg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1734103117; x=1734707917;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=4/Ec6nOtWdcwq1cHZ1x/2dKDUUOEZBhkOyPBjT0KUZI=;
- b=QbUtbswQWfH2TxBIQQHgTjgjF0pB6KgT+aLxyJV6adQnLJBNCtsWiO2SC/2uFoqVRC
- /N0sqLXHIMJZxOGI/mm56eBE/l9y4aVdZ/Qo98WFKnWic3Htjpteg5X8qf2MhRnWpR49
- ynzGDEPmgjr1XneZv82RpYx14IoRjSwfMdhWDKw3ZaKoYqB+zcJZoyzQ2z26hyh3cdMG
- cepZ9OYdP6KQA3EEjPWcSuBYAw6BzUpvWSpRFFD08sxjLbzVNvob2RR4lu/+HGlxg4xK
- 0jZxCI1yhADicrGcI9yt1mYXV9dud6Vlp6gvxKr81oc5BgQ5b0Hgc9vhi/g2NNCkZIA4
- EhDA==
+ d=1e100.net; s=20230601; t=1734103136; x=1734707936;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=4ANpAZDxL+OlxYTkY1W/N1GGxtnwlFqD0+mbtvmm/Y4=;
+ b=OyQwGEQ1632ZS1TdMbFwARCebR4tsIJdgGaXLOgcwqeE1ParmDy2TMez15jAvjiqd4
+ WfWkOrVYWMI7/yZ9KSy4DWJ6cq+HgAJk8FdCl8asaQ6IkVv1Ctt8TpZZgvc9/1C+L/B0
+ tERNsiIGJDZ88bt0gsqNaLvVmw8M1R8GZ4tgPZqGOLkc8Mh8+Xqv8AP/ENtwQfovtrAy
+ s4UhedQPDFphQhS0mt6cAmqq0bTNfeMGUYTvJhcSIFN+z9n5v+GoWLk51W5MHQ46YF49
+ 4xEdHMLhc1GELVylcruVKkysbtAMz7tyffpqrXwUpI0PMPI3Xg5Eh2cdwiVxXhXTKAbT
+ 08HA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCV9V00pXh4vV7m39IkDQmCnI/PO97CaHv6N8MLl7FLMxfoVAhGR8dTsDTLV8Nt1p3OuQ0ZJG19t6pVm@nongnu.org
-X-Gm-Message-State: AOJu0YxaYWGLqJRxKOV3Qh9ikjHBjHiF7yL2U9gwCuPBC8I2uJTG8PM8
- jRH9Ub1pRpe7QRGIZ+cFnRALPCCXTCZw5XllFCYFCcAGTBPhveEeeCFZBRpkOA==
-X-Gm-Gg: ASbGnct8LpDiskCSzirkNZnP+DOzNigxUfwY5DtdtOsJ9dMl6jJKKEa0oYgKmWafJFN
- ruOi84Np4PfEBFX4Wcl507bWeDmaYtvwrm/uESs3ru0NTTp7SXcXgGSfI5zopLcJOwkI1fXrAnh
- mXhNDvEazL/E/eAPGZTPSVV22w3/AWMMkVTgV1Mo9SoTQrGA9SAH6DY3SW3+iDeSQEdSEu5ro+h
- U69auVOq0HI0xuM9GqqxK+nSvxWKHSmEogWlV5w3CVKeQSUcDeVXuKFWbJj9L4M6zSII1SnXKGu
- wHXm080jrbpnrSiiKpB9C7LjuaTHM+Ne
-X-Google-Smtp-Source: AGHT+IH8+HiUroeFqwZnvwbMappkLPsMTiCDpAwVCrrVXcKj4nKdVvwv7oWMe81/uiff5Xw9mNlC9g==
-X-Received: by 2002:a17:906:31cc:b0:aa6:423c:8502 with SMTP id
- a640c23a62f3a-aab77ef7ec8mr264456366b.60.1734103117166; 
- Fri, 13 Dec 2024 07:18:37 -0800 (PST)
+ AJvYcCURUnJdF27+w9VLUP1iHTil00lvH33fo/6JMFHoCUQt7YZ2XT9Pa634wJEvMYoaDWo7DhcFuGJSB7Da@nongnu.org
+X-Gm-Message-State: AOJu0YxzxOYXN8wZ2RU585077pfRTkhnUzxdzVffFEKvjmbu/+CC6drz
+ 2Fqpl8Fgn+uXmxQdRlBKR5niqQwi4k7/Bc/d1EcfQ11FVcdKWAfLKrm2rAg3Pw==
+X-Gm-Gg: ASbGnctwUQzxtRIYN++NNIzu6KN0VDeKuo3uhyDPfWH5v9YsaLCovolMRVOSPy0/lM0
+ 3KSWelbKoOfVQSPtirpdaTdz6KfF96xDtN/mI3sKzgXgPuMldv4na+ZuwLK+FYIJaLvxfXuV3pD
+ FEZMfpC73RXZVyBoqqyOHXlcZkkB23BGvNJj7Ag+n+YlDGoNdLNldPMMEizWriq5zSI9L8SSPB/
+ 8db5QiWBeLkLtvq1k353KVeT/KvusLI3QtAaoLsQAQZ+80RG1NJLR0bUMZFdCUjwQN6+Mao2w9V
+ eQHO1hv8FB8QJ/Y5FZwOZJx6aVDsU1Rm
+X-Google-Smtp-Source: AGHT+IHeilLPfX3OLdhGNd4cdfIbrU9St10BEfg/yPigG0fzamQmdZeWZXkl7O7VLk0mbkWvZNrchQ==
+X-Received: by 2002:a17:907:3fa0:b0:aa6:832b:8d75 with SMTP id
+ a640c23a62f3a-aab7792d012mr304853966b.17.1734103136182; 
+ Fri, 13 Dec 2024 07:18:56 -0800 (PST)
 Received: from localhost.localdomain (h082218084190.host.wavenet.at.
  [82.218.84.190]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-aab8dd35b19sm29284166b.33.2024.12.13.07.18.35
+ a640c23a62f3a-aab8dd35b19sm29284166b.33.2024.12.13.07.18.54
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Fri, 13 Dec 2024 07:18:36 -0800 (PST)
+ Fri, 13 Dec 2024 07:18:55 -0800 (PST)
 From: Phil Dennis-Jordan <phil@philjordan.eu>
 To: qemu-devel@nongnu.org
 Cc: agraf@csgraf.de, phil@philjordan.eu, peter.maydell@linaro.org,
@@ -78,16 +79,18 @@ Cc: agraf@csgraf.de, phil@philjordan.eu, peter.maydell@linaro.org,
  dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com,
  jcmvbkbc@gmail.com, marcandre.lureau@redhat.com, berrange@redhat.com,
  akihiko.odaki@daynix.com, qemu-arm@nongnu.org, qemu-block@nongnu.org,
- qemu-riscv@nongnu.org, balaton@eik.bme.hu
-Subject: [PATCH v13 00/15] macOS PV Graphics and new vmapple machine type
-Date: Fri, 13 Dec 2024 16:17:50 +0100
-Message-Id: <20241213151821.65748-1-phil@philjordan.eu>
+ qemu-riscv@nongnu.org, balaton@eik.bme.hu, Alexander Graf <graf@amazon.com>
+Subject: [PATCH v13 10/15] hw/vmapple/aes: Introduce aes engine
+Date: Fri, 13 Dec 2024 16:18:00 +0100
+Message-Id: <20241213151821.65748-11-phil@philjordan.eu>
 X-Mailer: git-send-email 2.39.5 (Apple Git-154)
+In-Reply-To: <20241213151821.65748-1-phil@philjordan.eu>
+References: <20241213151821.65748-1-phil@philjordan.eu>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: neutral client-ip=2a00:1450:4864:20::634;
- envelope-from=phil@philjordan.eu; helo=mail-ej1-x634.google.com
+Received-SPF: neutral client-ip=2a00:1450:4864:20::631;
+ envelope-from=phil@philjordan.eu; helo=mail-ej1-x631.google.com
 X-Spam_score_int: -10
 X-Spam_score: -1.1
 X-Spam_bar: -
@@ -109,351 +112,766 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-<meta>
-This patch series has been through months of review and
-refinement. It now has end-to-end Reviewed-by: tags and
-all code patches but one have Tested-by: tags. No significant
-issues have been found via review for some weeks.
+From: Alexander Graf <graf@amazon.com>
 
-The patch set creates two new subsystems:
-hw/display/apple-gfx
-hw/vmapple
-so it doesn't fall within the responsibility of existing
-maintainers. How do we proceed to get this merged now that
-10.0 development is open?
-</meta>
+VMApple contains an "aes" engine device that it uses to encrypt and
+decrypt its nvram. It has trivial hard coded keys it uses for that
+purpose.
 
+Add device emulation for this device model.
 
-This patch set introduces a new ARM and macOS HVF specific machine type
-called "vmapple", as well as a family of display devices based on the
-ParavirtualizedGraphics.framework in macOS. One of the display adapter
-variants, apple-gfx-mmio, is required for the new machine type, while
-apple-gfx-pci can be used to enable 3D graphics acceleration with x86-64
-macOS guest OSes.
-
-Previous versions of this patch set were submitted semi-separately:
-the original vmapple patch set by Alexander Graf included a monolithic
-implementation of apple-gfx-mmio. I subsequently reviewed and reworked
-the latter to support the PCI variant of the device as well and submitted
-the result in isolation. As requested in subsequent review, I have now
-recombined this with the original vmapple patch set, which I have updated
-and improved in a few ways as well.
-
-The vmapple machine type approximates the configuration in macOS's own
-Virtualization.framework when running arm64 macOS guests. In addition to
-generic components such as a GICv3 and an XHCI USB controller, it
-includes nonstandard extensions to the virtio block device, a special
-"hardware" aes engine, a configuration device, a pvpanic variant, a
-"backdoor" interface, and of course the apple-gfx paravirtualised display
-adapter.
-
-There are currently a few limitations to this which aren't intrinsic,
-just imperfect emulation of the VZF, but it's good enough to be just
-about usable for some purposes:
-
- * macOS 12 guests only. Versions 13+ currently fail during early boot.
- * macOS 11+ arm64 hosts only, with hvf accel. (Perhaps some differences
-   between Apple M series CPUs and TCG's aarch64 implementation? macOS
-   hosts only because ParavirtualizedGraphics.framework is a black box
-   implementing most of the logic behind the apple-gfx device.)
- * PCI devices use legacy IRQs, not MSI/MSI-X. As far as I can tell,
-   we'd need to include the GICv3 ITS, but it's unclear to me what
-   exactly needs wiring up.
- * Due to a quirk (bug?) in the macOS XHCI driver when MSI-X is not
-   available, correct functioning of the USB controller (and thus
-   keyboard/tablet) requires a small workaround in the XHCI controller
-   device. This is part of another patch series:
-   https://patchew.org/QEMU/20241208191646.64857-1-phil@philjordan.eu/
- * The guest OS must first be provisioned using Virtualization.framework;
-   the disk images can subsequently be used in Qemu. (See docs.)
-
-The apple-gfx device can be used independently from the vmapple machine
-type, at least in the PCI variant. It mainly targets x86-64 macOS guests
-from version 11 on, but also includes a UEFI bootrom for basic
-framebuffer mode. macOS 11 is also required on the host side, as well
-as a GPU that supports the Metal API. On the guest side, this provides
-3D acceleration/GPGPU support with a baseline Metal feature set,
-irrespective of the host GPU's feature set. A few limitations in the
-current integration:
-
- * Although it works fine with TCG, it does not work correctly
-   cross-architecture: x86-64 guests on arm64 hosts appear to make
-   some boot progress, but rendering is corrupted. I suspect
-   incompatible texture memory layouts; I have no idea if this is
-   fixable.
- * ParavirtualizedGraphics.framework and the guest driver support
-   multi-headed configurations. The current Qemu integration always
-   connects precisely 1 display.
- * State serialisation and deserialisation is currently not
-   implemented, though supported in principle by the framework.
-   Both apple-gfx variants thus set up a migration blocker.
- * Rendering efficiency could be better. The GPU-rendered guest
-   framebuffer is copied to system memory and uses Qemu's usual
-   CPU-based drawing. For maximum efficiency, the Metal texture
-   containing the guest framebuffer could be drawn directly to
-   a Metal view in the host window, staying on the GPU. (Similar
-   to the OpenGL/virgl render path on other platforms.)
-
-Some of my part of this work has been sponsored by Sauce Labs Inc.
-
+Signed-off-by: Alexander Graf <graf@amazon.com>
+Signed-off-by: Phil Dennis-Jordan <phil@philjordan.eu>
+Reviewed-by: Akihiko Odaki <akihiko.odaki@daynix.com>
+Tested-by: Akihiko Odaki <akihiko.odaki@daynix.com>
 ---
 
-v2 -> v3:
+v3:
 
- * Merged the apple-gfx and vmapple patchsets.
- * Squashed a bunch of later apple-gfx patches into the main one.
-   (dGPU support, queried MMIO area size, host GPU picking logic.)
- * Rebased on latest upstream, fixing any breakages due to internal
-   Qemu API changes.
- * apple-gfx: Switched to re-entrant MMIO. This is supported by the
-   underlying framework and simplifies the MMIO forwarding code which
-   was previously different on x86-64 vs aarch64.
- * vmapple: Fixes for minor bugs and comments from the last round of
-   review.
- * vmapple aes, conf, apple-gfx: Switched reset methods to implement
-   the ResettableClass base's interface.
- * vmapple: switched from virtio-hid to an XHCI USB controller and
-   USB mouse and tablet devices. macOS does not provide drivers for
-   virtio HID devices, at least not in version 12's vmapple kernel.
-   So input now sort of works (interrupt issues) rather than not
-   at all. Use network-based remote access to the guest OS as a
-   work-around.
+ * Rebased on latest upstream and fixed minor breakages.
+ * Replaced legacy device reset method with Resettable method
 
-v3 -> v4:
+v4:
 
- * Complete rework of the mechanism for handling runloop/libdispatch
-   events on the main thread. PV graphics now work with the SDL UI.
- * Renamed 'apple-gfx-vmapple' device to 'apple-gfx-mmio'
- * hw/display/apple-gfx: threading model overhaul to be more consistent,
-   safer, and more QEMU-idiomatic.
- * display-modes property on the apple-gfx devices now uses the
-   native array property mechanism and works on both device variants.
- * hw/vmapple/aes: Improvements to logging and error handling.
- * hw/vmapple/cfg: Bug fixes around device property default values.
- * hw/vmapple/{aes,cfg,virtio-blk/vmapple}: Most header code moved into
-   .c files, only a single vmapple.h now contains the #defines for the
-   vmapple machine model-specific device type names.
- * hw/block/virtio-blk: New patch for replacing virtio_blk_free_request
-   with g_free. (Optional)
- * Various smaller changes following comments in v3 code review in
-   apple-gfx, aes, cfg, bdif, virtio-blk-vmapple, and the vmapple
-   machine type itself. See patch-specific v4 change notes for details.
+ * Improved logging of unimplemented functions and guest errors.
+ * Better adherence to naming and coding conventions.
+ * Cleaner error handling and recovery, including using g_autoptr
 
-v4 -> v5:
+v5:
 
- * Simplified the main thread runloop mechanism. Back to setting
-	 qemu_main directly, but narrowing the scope of what it needs to do,
-	 and it can now be NULL. (Meaning run the QEMU main event loop on
-	 the main thread as is traditional.)
- * hw/display/apple-gfx: Further improvements to the BH based job code bridging
-   the libdispatch & QEMU thread synchronisation impedance mismatch.
- * hw/display/apple-gfx: Thread safety and object lifetime improvements.
- * hw/display/apple-gfx-*: Better buffer and error handling in display mode
-   property setters and getters.
- * hw/vmapple/aes: More consistent and safer logging/tracing
- * hw/vmapple/cfg: Better error reporting on overlong property strings.
- * hw/vmapple/virtio-blk: Fixed theoretically-unaligned write to config buffer.
- * vmapple machine type: Moved ecam region into machine state, improved device
-   property setting error handling, improved ECID/UUID extraction script and
-   docs.
- * Various smaller fixes in apple-gfx/-mmio, apple-gfx-pci, vmapple/aes,
-   vmapple/cfg, vmapple/virtio-blk, and vmapple machine type.
- * Added SPDX license identifiers where they were missing.
+ * More logging improvements
+ * Use xxx64_overflow() functions for hexdump buffer size calculations.
 
-v5 -> v6:
+v7:
 
- * 01/15 (main/Cocoa/runloop): Combined functions, fixed whitespace
- * 02/15 (apple-gfx): Further refinement of PVG threading: reduced some callback
-   tasks from BHs to merely acquiring RCU read lock; replaced some libdispatch
-   tasks with BHs; last remaining synchronous BH now uses emphemeral
-   QemuSemaphore.
- * 02/15 (apple-gfx): Readability improvements and other smaller tweaks
-   (see patch change notes for details)
- * 04/15 (display modes): Replaced use of alloca() with NSMutableArray.
+ * Coding style tweaks.
 
-v6 -> v7:
+v8:
 
- * 02/15 (apple-gfx): Use g_ptr_array_find() helper function, coding style tweak
- * 03/15 (apple-gfx-pci): Removed an unused function parameter
- * 04/15 (apple-gfx display mode property): Simplified error handling in
-   property parsing.
- * 10/15 (vmapple/aes): Coding style tweaks.
- * 12/15 (vmapple/cfg): Changed error messages for overrun of properties with
-   fixed-length strings to be more useful to users than developers.
- * 15/15 (vmapple machine type): Tiny error handling fix, un-inlined function
+ * Further improved logging of guest errors.
 
-v7 -> v8:
+v9:
 
- * 02/15 (apple-gfx): Naming and type use improvements, fixes for a bug and a
-   leak.
- * 04/15 (apple-gfx display mode property): Type use improvement
- * 10/15 (vmapple/aes): Guest error logging tweaks.
- * 11/15 (vmapple/bdif): Replaced uses of cpu_physical_memory_read with
-   dma_memory_read, and a g_free call with g_autofree.
- * 12/15 (vmapple/cfg): Macro hygiene fix: consistently enclosing arguments in
-   parens.
- * 15/15 (vmapple machine type): Use less verbose pattern for defining uuid
-   property.
+ * Replaced a use of cpu_physical_memory_write with dma_memory_write.
+ * Dropped unnecessary use of ternary operator for bool -> 0/1.
 
-v8 -> v9:
+v10:
 
- * 01/16 (ui & main loop): Set qemu_main to NULL for GTK UI as well.
- * 02/16 (apple-gfx): Pass device pointer to graphic_console_init(), various
-	 non-functional changes.
- * 03/16 (apple-gfx-pci): Fixup of changed common call, whitespace and comment
-   formatting tweaks.
- * 04/16 (apple-gfx display modes): Re-ordered type definitions so we can drop
-   a 'struct' keyword.
- * 10/16 (vmapple/aes): Replaced a use of cpu_physical_memory_write with
-   dma_memory_write, minor style tweak.
- * 11/16 (vmapple/bdif): Replaced uses of cpu_physical_memory_write with
-   dma_memory_write.
- * 13/16 (vmapple/virtio-blk): Correctly specify class_size for
-   VMAppleVirtIOBlkClass.
- * 15/16 (vmapple machine type): Documentation improvements, fixed variable
-   name and struct field used during pvpanic device creation.
- * 16/16 (NEW/RFC vmapple/virtio-blk): Proposed change to replace type hierarchy
-   with a variant property. This seems cleaner and less confusing than the
-   original approach to me, but I'm not sure if it warrants creation of a new
-   QAPI enum and property type definition.
+ * Code style and comment improvements.
 
-v9 -> v10:
-
- * 01/15 (ui & main loop): Added comments to qemu_main declaration and GTK.
- * 02/15 (apple-gfx): Reworked the way frame rendering code is threaded to use
-   BHs for sections requiring BQL.
- * 02/15 (apple-gfx): Fixed ./configure error on non-macOS platforms.
- * 10/15 (vmapple/aes): Code style and comment improvements.
- * 12/15 (vmapple/cfg): Slightly tidier error reporting for overlong property
-   values.
- * 13/15 (vmapple/virtio-blk): Folded v9 patch 16/16 into this one, changing
-   the device type design to provide a single device type with a variant
-	 property instead of 2 different subtypes for aux and root volumes.
- * 15/15 (vmapple machine type): Documentation fixup for changed virtio-blk
-   device type; small improvements to shell commands in documentation;
-   improved propagation of errors during cfg device instantiation.
-
-v10 -> v11:
-
- * 01/15 (ui & main loop): Simplified main.c, better comments & commit message
- * 02/15 (apple-gfx): Give each PV display instance a unique serial number.
- * 02 & 03/15 (apple-gfx, -pci): Formatting/style tweaks
- * 15/15 (vmapple machine type): Improvements to shell code in docs
-
-v11 -> v12:
-
- * 01/15 (ui & main loop): More precise wording of code comments.
- * 02/15 (apple-gfx): Fixed memory management regressions introduced in v10;
-   improved error handling; various more conmetic code adjustments
- * 09/15 (GPEX): Fixed uses of deleted GPEX_NUM_IRQS constant that have been
-   added to QEMU since this patch was originally written.
-
-v12 -> v13:
-
- * 15/15 (vmapple machine type): Bumped the machine type version from 9.2
-   to 10.0.
- * All patches in the series now have been positively reviewed and received
-   corresponding reviewed-by tags.
-
-v13 -> v14:
-
- * 6/15 (hw/vmapple directory): Changed myself from reviewer
-   to maintainer, as that seemed appropriate at this point.
- * 15/15 (vmapple machine type): Gate creation of XHCI and
-   USB HID devices behind if (defaults_enabled()).
-
-Alexander Graf (9):
-  hw: Add vmapple subdir
-  hw/misc/pvpanic: Add MMIO interface
-  hvf: arm: Ignore writes to CNTP_CTL_EL0
-  gpex: Allow more than 4 legacy IRQs
-  hw/vmapple/aes: Introduce aes engine
-  hw/vmapple/bdif: Introduce vmapple backdoor interface
-  hw/vmapple/cfg: Introduce vmapple cfg region
-  hw/vmapple/virtio-blk: Add support for apple virtio-blk
-  hw/vmapple/vmapple: Add vmapple machine type
-
-Phil Dennis-Jordan (6):
-  ui & main loop: Redesign of system-specific main thread event handling
-  hw/display/apple-gfx: Introduce ParavirtualizedGraphics.Framework
-    support
-  hw/display/apple-gfx: Adds PCI implementation
-  hw/display/apple-gfx: Adds configurable mode list
-  MAINTAINERS: Add myself as maintainer for apple-gfx, reviewer for HVF
-  hw/block/virtio-blk: Replaces request free function with g_free
-
- MAINTAINERS                         |  15 +
- contrib/vmapple/uuid.sh             |   9 +
- docs/system/arm/vmapple.rst         |  63 ++
- docs/system/target-arm.rst          |   1 +
- hw/Kconfig                          |   1 +
- hw/arm/sbsa-ref.c                   |   2 +-
- hw/arm/virt.c                       |   2 +-
- hw/block/virtio-blk.c               |  58 +-
- hw/core/qdev-properties-system.c    |   8 +
- hw/display/Kconfig                  |  13 +
- hw/display/apple-gfx-mmio.m         | 289 +++++++++
- hw/display/apple-gfx-pci.m          | 157 +++++
- hw/display/apple-gfx.h              |  77 +++
- hw/display/apple-gfx.m              | 880 ++++++++++++++++++++++++++++
- hw/display/meson.build              |   7 +
- hw/display/trace-events             |  30 +
- hw/i386/microvm.c                   |   2 +-
- hw/loongarch/virt.c                 |  12 +-
- hw/meson.build                      |   1 +
- hw/mips/loongson3_virt.c            |   2 +-
- hw/misc/Kconfig                     |   4 +
- hw/misc/meson.build                 |   1 +
- hw/misc/pvpanic-mmio.c              |  61 ++
- hw/openrisc/virt.c                  |  12 +-
- hw/pci-host/gpex.c                  |  43 +-
- hw/riscv/virt.c                     |  12 +-
- hw/vmapple/Kconfig                  |  32 +
- hw/vmapple/aes.c                    | 581 ++++++++++++++++++
- hw/vmapple/bdif.c                   | 275 +++++++++
- hw/vmapple/cfg.c                    | 196 +++++++
- hw/vmapple/meson.build              |   5 +
- hw/vmapple/trace-events             |  21 +
- hw/vmapple/trace.h                  |   1 +
- hw/vmapple/virtio-blk.c             | 205 +++++++
- hw/vmapple/vmapple.c                | 646 ++++++++++++++++++++
- hw/xen/xen-pvh-common.c             |   2 +-
- hw/xtensa/virt.c                    |   2 +-
- include/hw/misc/pvpanic.h           |   1 +
- include/hw/pci-host/gpex.h          |   7 +-
- include/hw/pci/pci_ids.h            |   1 +
- include/hw/qdev-properties-system.h |   5 +
- include/hw/virtio/virtio-blk.h      |  11 +-
- include/hw/vmapple/vmapple.h        |  23 +
- include/qemu-main.h                 |  14 +-
- include/qemu/cutils.h               |  15 +
- meson.build                         |   5 +
- qapi/virtio.json                    |  14 +
- system/main.c                       |  37 +-
- target/arm/hvf/hvf.c                |   9 +
- ui/cocoa.m                          |  54 +-
- ui/gtk.c                            |   4 +
- ui/sdl2.c                           |   4 +
- util/hexdump.c                      |  18 +
- 53 files changed, 3840 insertions(+), 110 deletions(-)
- create mode 100755 contrib/vmapple/uuid.sh
- create mode 100644 docs/system/arm/vmapple.rst
- create mode 100644 hw/display/apple-gfx-mmio.m
- create mode 100644 hw/display/apple-gfx-pci.m
- create mode 100644 hw/display/apple-gfx.h
- create mode 100644 hw/display/apple-gfx.m
- create mode 100644 hw/misc/pvpanic-mmio.c
- create mode 100644 hw/vmapple/Kconfig
+ hw/vmapple/Kconfig           |   2 +
+ hw/vmapple/aes.c             | 581 +++++++++++++++++++++++++++++++++++
+ hw/vmapple/meson.build       |   1 +
+ hw/vmapple/trace-events      |  14 +
+ include/hw/vmapple/vmapple.h |  17 +
+ include/qemu/cutils.h        |  15 +
+ util/hexdump.c               |  18 ++
+ 7 files changed, 648 insertions(+)
  create mode 100644 hw/vmapple/aes.c
- create mode 100644 hw/vmapple/bdif.c
- create mode 100644 hw/vmapple/cfg.c
- create mode 100644 hw/vmapple/meson.build
- create mode 100644 hw/vmapple/trace-events
- create mode 100644 hw/vmapple/trace.h
- create mode 100644 hw/vmapple/virtio-blk.c
- create mode 100644 hw/vmapple/vmapple.c
  create mode 100644 include/hw/vmapple/vmapple.h
 
+diff --git a/hw/vmapple/Kconfig b/hw/vmapple/Kconfig
+index 8b137891791..a73504d5999 100644
+--- a/hw/vmapple/Kconfig
++++ b/hw/vmapple/Kconfig
+@@ -1 +1,3 @@
++config VMAPPLE_AES
++    bool
+ 
+diff --git a/hw/vmapple/aes.c b/hw/vmapple/aes.c
+new file mode 100644
+index 00000000000..3759dae11ba
+--- /dev/null
++++ b/hw/vmapple/aes.c
+@@ -0,0 +1,581 @@
++/*
++ * QEMU Apple AES device emulation
++ *
++ * Copyright © 2023 Amazon.com, Inc. or its affiliates. All Rights Reserved.
++ *
++ * This work is licensed under the terms of the GNU GPL, version 2 or later.
++ * See the COPYING file in the top-level directory.
++ *
++ * SPDX-License-Identifier: GPL-2.0-or-later
++ */
++
++#include "qemu/osdep.h"
++#include "trace.h"
++#include "crypto/hash.h"
++#include "crypto/aes.h"
++#include "crypto/cipher.h"
++#include "hw/irq.h"
++#include "hw/sysbus.h"
++#include "hw/vmapple/vmapple.h"
++#include "migration/vmstate.h"
++#include "qemu/cutils.h"
++#include "qemu/log.h"
++#include "qemu/module.h"
++#include "sysemu/dma.h"
++
++OBJECT_DECLARE_SIMPLE_TYPE(AESState, APPLE_AES)
++
++#define MAX_FIFO_SIZE     9
++
++#define CMD_KEY           0x1
++#define CMD_KEY_CONTEXT_SHIFT    27
++#define CMD_KEY_CONTEXT_MASK     (0x1 << CMD_KEY_CONTEXT_SHIFT)
++#define CMD_KEY_SELECT_MAX_IDX   0x7
++#define CMD_KEY_SELECT_SHIFT     24
++#define CMD_KEY_SELECT_MASK      (CMD_KEY_SELECT_MAX_IDX << CMD_KEY_SELECT_SHIFT)
++#define CMD_KEY_KEY_LEN_NUM      4u
++#define CMD_KEY_KEY_LEN_SHIFT    22
++#define CMD_KEY_KEY_LEN_MASK     ((CMD_KEY_KEY_LEN_NUM - 1u) << CMD_KEY_KEY_LEN_SHIFT)
++#define CMD_KEY_ENCRYPT_SHIFT    20
++#define CMD_KEY_ENCRYPT_MASK     (0x1 << CMD_KEY_ENCRYPT_SHIFT)
++#define CMD_KEY_BLOCK_MODE_SHIFT 16
++#define CMD_KEY_BLOCK_MODE_MASK  (0x3 << CMD_KEY_BLOCK_MODE_SHIFT)
++#define CMD_IV            0x2
++#define CMD_IV_CONTEXT_SHIFT     26
++#define CMD_IV_CONTEXT_MASK      (0x3 << CMD_KEY_CONTEXT_SHIFT)
++#define CMD_DSB           0x3
++#define CMD_SKG           0x4
++#define CMD_DATA          0x5
++#define CMD_DATA_KEY_CTX_SHIFT   27
++#define CMD_DATA_KEY_CTX_MASK    (0x1 << CMD_DATA_KEY_CTX_SHIFT)
++#define CMD_DATA_IV_CTX_SHIFT    25
++#define CMD_DATA_IV_CTX_MASK     (0x3 << CMD_DATA_IV_CTX_SHIFT)
++#define CMD_DATA_LEN_MASK        0xffffff
++#define CMD_STORE_IV      0x6
++#define CMD_STORE_IV_ADDR_MASK   0xffffff
++#define CMD_WRITE_REG     0x7
++#define CMD_FLAG          0x8
++#define CMD_FLAG_STOP_MASK       BIT(26)
++#define CMD_FLAG_RAISE_IRQ_MASK  BIT(27)
++#define CMD_FLAG_INFO_MASK       0xff
++#define CMD_MAX           0x10
++
++#define CMD_SHIFT         28
++
++#define REG_STATUS            0xc
++#define REG_STATUS_DMA_READ_RUNNING     BIT(0)
++#define REG_STATUS_DMA_READ_PENDING     BIT(1)
++#define REG_STATUS_DMA_WRITE_RUNNING    BIT(2)
++#define REG_STATUS_DMA_WRITE_PENDING    BIT(3)
++#define REG_STATUS_BUSY                 BIT(4)
++#define REG_STATUS_EXECUTING            BIT(5)
++#define REG_STATUS_READY                BIT(6)
++#define REG_STATUS_TEXT_DPA_SEEDED      BIT(7)
++#define REG_STATUS_UNWRAP_DPA_SEEDED    BIT(8)
++
++#define REG_IRQ_STATUS        0x18
++#define REG_IRQ_STATUS_INVALID_CMD      BIT(2)
++#define REG_IRQ_STATUS_FLAG             BIT(5)
++#define REG_IRQ_ENABLE        0x1c
++#define REG_WATERMARK         0x20
++#define REG_Q_STATUS          0x24
++#define REG_FLAG_INFO         0x30
++#define REG_FIFO              0x200
++
++static const uint32_t key_lens[CMD_KEY_KEY_LEN_NUM] = {
++    [0] = 16,
++    [1] = 24,
++    [2] = 32,
++    [3] = 64,
++};
++
++typedef struct Key {
++    uint32_t key_len;
++    uint8_t key[32];
++} Key;
++
++typedef struct IV {
++    uint32_t iv[4];
++} IV;
++
++static Key builtin_keys[CMD_KEY_SELECT_MAX_IDX + 1] = {
++    [1] = {
++        .key_len = 32,
++        .key = { 0x1 },
++    },
++    [2] = {
++        .key_len = 32,
++        .key = { 0x2 },
++    },
++    [3] = {
++        .key_len = 32,
++        .key = { 0x3 },
++    }
++};
++
++struct AESState {
++    SysBusDevice parent_obj;
++
++    qemu_irq irq;
++    MemoryRegion iomem1;
++    MemoryRegion iomem2;
++    AddressSpace *as;
++
++    uint32_t status;
++    uint32_t q_status;
++    uint32_t irq_status;
++    uint32_t irq_enable;
++    uint32_t watermark;
++    uint32_t flag_info;
++    uint32_t fifo[MAX_FIFO_SIZE];
++    uint32_t fifo_idx;
++    Key key[2];
++    IV iv[4];
++    bool is_encrypt;
++    QCryptoCipherMode block_mode;
++};
++
++static void aes_update_irq(AESState *s)
++{
++    qemu_set_irq(s->irq, !!(s->irq_status & s->irq_enable));
++}
++
++static uint64_t aes1_read(void *opaque, hwaddr offset, unsigned size)
++{
++    AESState *s = opaque;
++    uint64_t res = 0;
++
++    switch (offset) {
++    case REG_STATUS:
++        res = s->status;
++        break;
++    case REG_IRQ_STATUS:
++        res = s->irq_status;
++        break;
++    case REG_IRQ_ENABLE:
++        res = s->irq_enable;
++        break;
++    case REG_WATERMARK:
++        res = s->watermark;
++        break;
++    case REG_Q_STATUS:
++        res = s->q_status;
++        break;
++    case REG_FLAG_INFO:
++        res = s->flag_info;
++        break;
++
++    default:
++        qemu_log_mask(LOG_UNIMP, "%s: Unknown AES MMIO offset %" PRIx64 "\n",
++                      __func__, offset);
++        break;
++    }
++
++    trace_aes_read(offset, res);
++
++    return res;
++}
++
++static void fifo_append(AESState *s, uint64_t val)
++{
++    if (s->fifo_idx == MAX_FIFO_SIZE) {
++        /* Exceeded the FIFO. Bail out */
++        return;
++    }
++
++    s->fifo[s->fifo_idx++] = val;
++}
++
++static bool has_payload(AESState *s, uint32_t elems)
++{
++    return s->fifo_idx >= elems + 1;
++}
++
++static bool cmd_key(AESState *s)
++{
++    uint32_t cmd = s->fifo[0];
++    uint32_t key_select = (cmd & CMD_KEY_SELECT_MASK) >> CMD_KEY_SELECT_SHIFT;
++    uint32_t ctxt = (cmd & CMD_KEY_CONTEXT_MASK) >> CMD_KEY_CONTEXT_SHIFT;
++    uint32_t key_len;
++
++    switch ((cmd & CMD_KEY_BLOCK_MODE_MASK) >> CMD_KEY_BLOCK_MODE_SHIFT) {
++    case 0:
++        s->block_mode = QCRYPTO_CIPHER_MODE_ECB;
++        break;
++    case 1:
++        s->block_mode = QCRYPTO_CIPHER_MODE_CBC;
++        break;
++    default:
++        return false;
++    }
++
++    s->is_encrypt = cmd & CMD_KEY_ENCRYPT_MASK;
++    key_len = key_lens[(cmd & CMD_KEY_KEY_LEN_MASK) >> CMD_KEY_KEY_LEN_SHIFT];
++
++    if (key_select) {
++        trace_aes_cmd_key_select_builtin(ctxt, key_select,
++                                         s->is_encrypt ? "en" : "de",
++                                         QCryptoCipherMode_str(s->block_mode));
++        s->key[ctxt] = builtin_keys[key_select];
++    } else {
++        trace_aes_cmd_key_select_new(ctxt, key_len,
++                                     s->is_encrypt ? "en" : "de",
++                                     QCryptoCipherMode_str(s->block_mode));
++        if (key_len > sizeof(s->key[ctxt].key)) {
++            return false;
++        }
++        if (!has_payload(s, key_len / sizeof(uint32_t))) {
++            /* wait for payload */
++            qemu_log_mask(LOG_GUEST_ERROR, "%s: No payload\n", __func__);
++            return false;
++        }
++        memcpy(&s->key[ctxt].key, &s->fifo[1], key_len);
++        s->key[ctxt].key_len = key_len;
++    }
++
++    return true;
++}
++
++static bool cmd_iv(AESState *s)
++{
++    uint32_t cmd = s->fifo[0];
++    uint32_t ctxt = (cmd & CMD_IV_CONTEXT_MASK) >> CMD_IV_CONTEXT_SHIFT;
++
++    if (!has_payload(s, 4)) {
++        /* wait for payload */
++        return false;
++    }
++    memcpy(&s->iv[ctxt].iv, &s->fifo[1], sizeof(s->iv[ctxt].iv));
++    trace_aes_cmd_iv(ctxt, s->fifo[1], s->fifo[2], s->fifo[3], s->fifo[4]);
++
++    return true;
++}
++
++static void dump_data(const char *desc, const void *p, size_t len)
++{
++    static const size_t MAX_LEN = 0x1000;
++    char hex[MAX_LEN * 2 + 1] = "";
++
++    if (len > MAX_LEN) {
++        return;
++    }
++
++    qemu_hexdump_to_buffer(hex, sizeof(hex), p, len);
++    trace_aes_dump_data(desc, hex);
++}
++
++static bool cmd_data(AESState *s)
++{
++    uint32_t cmd = s->fifo[0];
++    uint32_t ctxt_iv = 0;
++    uint32_t ctxt_key = (cmd & CMD_DATA_KEY_CTX_MASK) >> CMD_DATA_KEY_CTX_SHIFT;
++    uint32_t len = cmd & CMD_DATA_LEN_MASK;
++    uint64_t src_addr = s->fifo[2];
++    uint64_t dst_addr = s->fifo[3];
++    QCryptoCipherAlgo alg;
++    g_autoptr(QCryptoCipher) cipher = NULL;
++    g_autoptr(GByteArray) src = NULL;
++    g_autoptr(GByteArray) dst = NULL;
++    MemTxResult r;
++
++    src_addr |= ((uint64_t)s->fifo[1] << 16) & 0xffff00000000ULL;
++    dst_addr |= ((uint64_t)s->fifo[1] << 32) & 0xffff00000000ULL;
++
++    trace_aes_cmd_data(ctxt_key, ctxt_iv, src_addr, dst_addr, len);
++
++    if (!has_payload(s, 3)) {
++        /* wait for payload */
++        qemu_log_mask(LOG_GUEST_ERROR, "%s: No payload\n", __func__);
++        return false;
++    }
++
++    if (ctxt_key >= ARRAY_SIZE(s->key) ||
++        ctxt_iv >= ARRAY_SIZE(s->iv)) {
++        qemu_log_mask(LOG_GUEST_ERROR, "%s: Invalid key or iv\n", __func__);
++        return false;
++    }
++
++    src = g_byte_array_sized_new(len);
++    g_byte_array_set_size(src, len);
++    dst = g_byte_array_sized_new(len);
++    g_byte_array_set_size(dst, len);
++
++    r = dma_memory_read(s->as, src_addr, src->data, len, MEMTXATTRS_UNSPECIFIED);
++    if (r != MEMTX_OK) {
++        qemu_log_mask(LOG_GUEST_ERROR, "%s: DMA read of %"PRIu32" bytes "
++                      "from 0x%"PRIx64" failed. (r=%d)\n",
++                      __func__, len, src_addr, r);
++        return false;
++    }
++
++    dump_data("cmd_data(): src_data=", src->data, len);
++
++    switch (s->key[ctxt_key].key_len) {
++    case 128 / 8:
++        alg = QCRYPTO_CIPHER_ALGO_AES_128;
++        break;
++    case 192 / 8:
++        alg = QCRYPTO_CIPHER_ALGO_AES_192;
++        break;
++    case 256 / 8:
++        alg = QCRYPTO_CIPHER_ALGO_AES_256;
++        break;
++    default:
++        qemu_log_mask(LOG_GUEST_ERROR, "%s: Invalid key length\n", __func__);
++        return false;
++    }
++    cipher = qcrypto_cipher_new(alg, s->block_mode,
++                                s->key[ctxt_key].key,
++                                s->key[ctxt_key].key_len, NULL);
++    if (!cipher) {
++        qemu_log_mask(LOG_GUEST_ERROR, "%s: Failed to create cipher object\n",
++                      __func__);
++        return false;
++    }
++    if (s->block_mode != QCRYPTO_CIPHER_MODE_ECB) {
++        if (qcrypto_cipher_setiv(cipher, (void *)s->iv[ctxt_iv].iv,
++                                 sizeof(s->iv[ctxt_iv].iv), NULL) != 0) {
++            qemu_log_mask(LOG_GUEST_ERROR, "%s: Failed to set IV\n", __func__);
++            return false;
++        }
++    }
++    if (s->is_encrypt) {
++        if (qcrypto_cipher_encrypt(cipher, src->data, dst->data, len, NULL) != 0) {
++            qemu_log_mask(LOG_GUEST_ERROR, "%s: Encryption failed\n", __func__);
++            return false;
++        }
++    } else {
++        if (qcrypto_cipher_decrypt(cipher, src->data, dst->data, len, NULL) != 0) {
++            qemu_log_mask(LOG_GUEST_ERROR, "%s: Decryption failed\n", __func__);
++            return false;
++        }
++    }
++
++    dump_data("cmd_data(): dst_data=", dst->data, len);
++    r = dma_memory_write(s->as, dst_addr, dst->data, len, MEMTXATTRS_UNSPECIFIED);
++    if (r != MEMTX_OK) {
++        qemu_log_mask(LOG_GUEST_ERROR, "%s: DMA write of %"PRIu32" bytes "
++                      "to 0x%"PRIx64" failed. (r=%d)\n",
++                      __func__, len, src_addr, r);
++        return false;
++    }
++
++    return true;
++}
++
++static bool cmd_store_iv(AESState *s)
++{
++    uint32_t cmd = s->fifo[0];
++    uint32_t ctxt = (cmd & CMD_IV_CONTEXT_MASK) >> CMD_IV_CONTEXT_SHIFT;
++    uint64_t addr = s->fifo[1];
++    MemTxResult dma_result;
++
++    if (!has_payload(s, 1)) {
++        qemu_log_mask(LOG_GUEST_ERROR, "%s: No payload\n", __func__);
++        return false;
++    }
++
++    if (ctxt >= ARRAY_SIZE(s->iv)) {
++        qemu_log_mask(LOG_GUEST_ERROR,
++                      "%s: Invalid context. ctxt = %u, allowed: 0..%zu\n",
++                      __func__, ctxt, ARRAY_SIZE(s->iv) - 1);
++        return false;
++    }
++
++    addr |= ((uint64_t)cmd << 32) & 0xff00000000ULL;
++    dma_result = dma_memory_write(&address_space_memory, addr,
++                                  &s->iv[ctxt].iv, sizeof(s->iv[ctxt].iv),
++                                  MEMTXATTRS_UNSPECIFIED);
++
++    trace_aes_cmd_store_iv(ctxt, addr, s->iv[ctxt].iv[0], s->iv[ctxt].iv[1],
++                           s->iv[ctxt].iv[2], s->iv[ctxt].iv[3]);
++
++    return dma_result == MEMTX_OK;
++}
++
++static bool cmd_flag(AESState *s)
++{
++    uint32_t cmd = s->fifo[0];
++    uint32_t raise_irq = cmd & CMD_FLAG_RAISE_IRQ_MASK;
++
++    /* We always process data when it's coming in, so fire an IRQ immediately */
++    if (raise_irq) {
++        s->irq_status |= REG_IRQ_STATUS_FLAG;
++    }
++
++    s->flag_info = cmd & CMD_FLAG_INFO_MASK;
++
++    trace_aes_cmd_flag(!!raise_irq, s->flag_info);
++
++    return true;
++}
++
++static void fifo_process(AESState *s)
++{
++    uint32_t cmd = s->fifo[0] >> CMD_SHIFT;
++    bool success = false;
++
++    if (!s->fifo_idx) {
++        return;
++    }
++
++    switch (cmd) {
++    case CMD_KEY:
++        success = cmd_key(s);
++        break;
++    case CMD_IV:
++        success = cmd_iv(s);
++        break;
++    case CMD_DATA:
++        success = cmd_data(s);
++        break;
++    case CMD_STORE_IV:
++        success = cmd_store_iv(s);
++        break;
++    case CMD_FLAG:
++        success = cmd_flag(s);
++        break;
++    default:
++        s->irq_status |= REG_IRQ_STATUS_INVALID_CMD;
++        break;
++    }
++
++    if (success) {
++        s->fifo_idx = 0;
++    }
++
++    trace_aes_fifo_process(cmd, success);
++}
++
++static void aes1_write(void *opaque, hwaddr offset, uint64_t val, unsigned size)
++{
++    AESState *s = opaque;
++
++    trace_aes_write(offset, val);
++
++    switch (offset) {
++    case REG_IRQ_STATUS:
++        s->irq_status &= ~val;
++        break;
++    case REG_IRQ_ENABLE:
++        s->irq_enable = val;
++        break;
++    case REG_FIFO:
++        fifo_append(s, val);
++        fifo_process(s);
++        break;
++    default:
++        qemu_log_mask(LOG_UNIMP,
++                      "%s: Unknown AES MMIO offset %"PRIx64", data %"PRIx64"\n",
++                      __func__, offset, val);
++        return;
++    }
++
++    aes_update_irq(s);
++}
++
++static const MemoryRegionOps aes1_ops = {
++    .read = aes1_read,
++    .write = aes1_write,
++    .endianness = DEVICE_NATIVE_ENDIAN,
++    .valid = {
++        .min_access_size = 4,
++        .max_access_size = 8,
++    },
++    .impl = {
++        .min_access_size = 4,
++        .max_access_size = 4,
++    },
++};
++
++static uint64_t aes2_read(void *opaque, hwaddr offset, unsigned size)
++{
++    uint64_t res = 0;
++
++    switch (offset) {
++    case 0:
++        res = 0;
++        break;
++    default:
++        qemu_log_mask(LOG_UNIMP,
++                      "%s: Unknown AES MMIO 2 offset %"PRIx64"\n",
++                      __func__, offset);
++        break;
++    }
++
++    trace_aes_2_read(offset, res);
++
++    return res;
++}
++
++static void aes2_write(void *opaque, hwaddr offset, uint64_t val, unsigned size)
++{
++    trace_aes_2_write(offset, val);
++
++    switch (offset) {
++    default:
++        qemu_log_mask(LOG_UNIMP,
++                      "%s: Unknown AES MMIO 2 offset %"PRIx64", data %"PRIx64"\n",
++                      __func__, offset, val);
++        return;
++    }
++}
++
++static const MemoryRegionOps aes2_ops = {
++    .read = aes2_read,
++    .write = aes2_write,
++    .endianness = DEVICE_NATIVE_ENDIAN,
++    .valid = {
++        .min_access_size = 4,
++        .max_access_size = 8,
++    },
++    .impl = {
++        .min_access_size = 4,
++        .max_access_size = 4,
++    },
++};
++
++static void aes_reset(Object *obj, ResetType type)
++{
++    AESState *s = APPLE_AES(obj);
++
++    s->status = 0x3f80;
++    s->q_status = 2;
++    s->irq_status = 0;
++    s->irq_enable = 0;
++    s->watermark = 0;
++}
++
++static void aes_init(Object *obj)
++{
++    AESState *s = APPLE_AES(obj);
++
++    memory_region_init_io(&s->iomem1, obj, &aes1_ops, s, TYPE_APPLE_AES, 0x4000);
++    memory_region_init_io(&s->iomem2, obj, &aes2_ops, s, TYPE_APPLE_AES, 0x4000);
++    sysbus_init_mmio(SYS_BUS_DEVICE(s), &s->iomem1);
++    sysbus_init_mmio(SYS_BUS_DEVICE(s), &s->iomem2);
++    sysbus_init_irq(SYS_BUS_DEVICE(s), &s->irq);
++    s->as = &address_space_memory;
++}
++
++static void aes_class_init(ObjectClass *klass, void *data)
++{
++    ResettableClass *rc = RESETTABLE_CLASS(klass);
++
++    rc->phases.hold = aes_reset;
++}
++
++static const TypeInfo aes_info = {
++    .name          = TYPE_APPLE_AES,
++    .parent        = TYPE_SYS_BUS_DEVICE,
++    .instance_size = sizeof(AESState),
++    .class_init    = aes_class_init,
++    .instance_init = aes_init,
++};
++
++static void aes_register_types(void)
++{
++    type_register_static(&aes_info);
++}
++
++type_init(aes_register_types)
+diff --git a/hw/vmapple/meson.build b/hw/vmapple/meson.build
+index e69de29bb2d..bcd4dcb28d2 100644
+--- a/hw/vmapple/meson.build
++++ b/hw/vmapple/meson.build
+@@ -0,0 +1 @@
++system_ss.add(when: 'CONFIG_VMAPPLE_AES',  if_true: files('aes.c'))
+diff --git a/hw/vmapple/trace-events b/hw/vmapple/trace-events
+index 9ccc5790487..0d4a73d7d1c 100644
+--- a/hw/vmapple/trace-events
++++ b/hw/vmapple/trace-events
+@@ -1,2 +1,16 @@
+ # See docs/devel/tracing.rst for syntax documentation.
+ 
++# aes.c
++aes_read(uint64_t offset, uint64_t res) "offset=0x%"PRIx64" res=0x%"PRIx64
++aes_cmd_key_select_builtin(uint32_t ctx, uint32_t key_id, const char *direction, const char *cipher) "[%d] Selecting builtin key %d to %scrypt with %s"
++aes_cmd_key_select_new(uint32_t ctx, uint32_t key_len, const char *direction, const char *cipher) "[%d] Selecting new key size=%d to %scrypt with %s"
++aes_cmd_iv(uint32_t ctx, uint32_t iv0, uint32_t iv1, uint32_t iv2, uint32_t iv3) "[%d] 0x%08x 0x%08x 0x%08x 0x%08x"
++aes_cmd_data(uint32_t key, uint32_t iv, uint64_t src, uint64_t dst, uint32_t len) "[key=%d iv=%d] src=0x%"PRIx64" dst=0x%"PRIx64" len=0x%x"
++aes_cmd_store_iv(uint32_t ctx, uint64_t addr, uint32_t iv0, uint32_t iv1, uint32_t iv2, uint32_t iv3) "[%d] addr=0x%"PRIx64"x -> 0x%08x 0x%08x 0x%08x 0x%08x"
++aes_cmd_flag(uint32_t raise, uint32_t flag_info) "raise=%d flag_info=0x%x"
++aes_fifo_process(uint32_t cmd, bool success) "cmd=%d success=%d"
++aes_write(uint64_t offset, uint64_t val) "offset=0x%"PRIx64" val=0x%"PRIx64
++aes_2_read(uint64_t offset, uint64_t res) "offset=0x%"PRIx64" res=0x%"PRIx64
++aes_2_write(uint64_t offset, uint64_t val) "offset=0x%"PRIx64" val=0x%"PRIx64
++aes_dump_data(const char *desc, const char *hex) "%s%s"
++
+diff --git a/include/hw/vmapple/vmapple.h b/include/hw/vmapple/vmapple.h
+new file mode 100644
+index 00000000000..6762b6c869f
+--- /dev/null
++++ b/include/hw/vmapple/vmapple.h
+@@ -0,0 +1,17 @@
++/*
++ * Devices specific to the VMApple machine type
++ *
++ * Copyright © 2023 Amazon.com, Inc. or its affiliates. All Rights Reserved.
++ *
++ * This work is licensed under the terms of the GNU GPL, version 2 or later.
++ * See the COPYING file in the top-level directory.
++ *
++ * SPDX-License-Identifier: GPL-2.0-or-later
++ */
++
++#ifndef HW_VMAPPLE_VMAPPLE_H
++#define HW_VMAPPLE_VMAPPLE_H
++
++#define TYPE_APPLE_AES "apple-aes"
++
++#endif /* HW_VMAPPLE_VMAPPLE_H */
+diff --git a/include/qemu/cutils.h b/include/qemu/cutils.h
+index 34a9b9b2204..36c68ce86c5 100644
+--- a/include/qemu/cutils.h
++++ b/include/qemu/cutils.h
+@@ -302,4 +302,19 @@ GString *qemu_hexdump_line(GString *str, const void *buf, size_t len,
+ void qemu_hexdump(FILE *fp, const char *prefix,
+                   const void *bufptr, size_t size);
+ 
++/**
++ * qemu_hexdump_to_buffer:
++ * @buffer: output string buffer
++ * @buffer_size: amount of available space in buffer. Must be at least
++ *               data_size*2+1.
++ * @data: input bytes
++ * @data_size: number of bytes in data
++ *
++ * Converts the @data_size bytes in @data into hex digit pairs, writing them to
++ * @buffer. Finally, a nul terminating character is written; @buffer therefore
++ * needs space for (data_size*2+1) chars.
++ */
++void qemu_hexdump_to_buffer(char *restrict buffer, size_t buffer_size,
++                            const uint8_t *restrict data, size_t data_size);
++
+ #endif
+diff --git a/util/hexdump.c b/util/hexdump.c
+index ae0d4992dcf..f29ffceb746 100644
+--- a/util/hexdump.c
++++ b/util/hexdump.c
+@@ -15,6 +15,7 @@
+ 
+ #include "qemu/osdep.h"
+ #include "qemu/cutils.h"
++#include "qemu/host-utils.h"
+ 
+ static inline char hexdump_nibble(unsigned x)
+ {
+@@ -97,3 +98,20 @@ void qemu_hexdump(FILE *fp, const char *prefix,
+     }
+ 
+ }
++
++void qemu_hexdump_to_buffer(char *restrict buffer, size_t buffer_size,
++                            const uint8_t *restrict data, size_t data_size)
++{
++    size_t i;
++    uint64_t required_buffer_size;
++    bool overflow = umul64_overflow(data_size, 2, &required_buffer_size);
++    overflow |= uadd64_overflow(required_buffer_size, 1, &required_buffer_size);
++    assert(!overflow && buffer_size >= required_buffer_size);
++
++    for (i = 0; i < data_size; i++) {
++        uint8_t val = data[i];
++        *(buffer++) = hexdump_nibble(val >> 4);
++        *(buffer++) = hexdump_nibble(val & 0xf);
++    }
++    *buffer = '\0';
++}
 -- 
 2.39.5 (Apple Git-154)
 
