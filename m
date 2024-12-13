@@ -4,83 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8E374E7717F
-	for <qemu-riscv@archiver.kernel.org>; Fri, 13 Dec 2024 20:10:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 04734E7717F
+	for <qemu-riscv@archiver.kernel.org>; Fri, 13 Dec 2024 20:38:30 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tMBzO-0007hi-OG; Fri, 13 Dec 2024 15:10:19 -0500
+	id 1tMCQV-0006MR-Rv; Fri, 13 Dec 2024 15:38:19 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1tMBzN-0007hE-63
- for qemu-riscv@nongnu.org; Fri, 13 Dec 2024 15:10:17 -0500
-Received: from mail-ot1-x32b.google.com ([2607:f8b0:4864:20::32b])
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1tMCQU-0006L6-1q
+ for qemu-riscv@nongnu.org; Fri, 13 Dec 2024 15:38:18 -0500
+Received: from mail-pf1-x433.google.com ([2607:f8b0:4864:20::433])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1tMBzL-0005b3-7Q
- for qemu-riscv@nongnu.org; Fri, 13 Dec 2024 15:10:16 -0500
-Received: by mail-ot1-x32b.google.com with SMTP id
- 46e09a7af769-71e1d6c7738so1149672a34.2
- for <qemu-riscv@nongnu.org>; Fri, 13 Dec 2024 12:10:14 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1tMCQP-0004LB-6N
+ for qemu-riscv@nongnu.org; Fri, 13 Dec 2024 15:38:17 -0500
+Received: by mail-pf1-x433.google.com with SMTP id
+ d2e1a72fcca58-725d9f57d90so1605217b3a.1
+ for <qemu-riscv@nongnu.org>; Fri, 13 Dec 2024 12:38:12 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1734120614; x=1734725414; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=r5mnyXonXiy4zaF6iAQaiGzQHiUuvaz9CiX/0uI1U14=;
- b=VBwJy9vTLOLmFAUpdOufsHf6tB8Qt/9t02b9YR4cp/DverLqdDXeDNtl2IonFIuL2S
- xZ1T6k8W1RK9tUpa4wOvVYGjnuOlVXBvWLDPD0os9/YboHn2QRgt9mIirUxNbiviXMbl
- dW3j1e/wHgVoqYEYXv1Kl/diikmFstLNzIV1+m+5pKPKigAQB76ZvuVlcWUUBda23yjH
- 6fVmviAJgLLz9sIGsSPZT6dRoIcBRXXqGCpQGInydJYJtt/D9rcOrWdpAFMxsRLuzOpJ
- SoAlnEwACHCEurcL+KyFiLesBwYu25YtAW5UB4+fA4cUp3B054Y41e2SidBQf8Yn66Tw
- IW9w==
+ d=ventanamicro.com; s=google; t=1734122291; x=1734727091; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=gRFktgGm38qO8Csj2wJgb6kJF5Uf5GY6gnXJpd6YWtU=;
+ b=UT3rngyWJjN+AJ3ttnklYdAGGyCWQlUswYCUw+kPLlpexPb6IP+XgBU1yIo8z8YxwC
+ c/SzfaBkdJ1KVS3CtiqI6C7766s/OQy3tC68lDxyYvBAVOtbqUudVveWnN/5hH6GTknv
+ 5Rj4Eu744vRItMOwtiHCpOem7HAWY9Q7gE7JxF0S3OFZXX9cF/skPRjWArRMdwmM/ORM
+ Q+AryZSF0pLakMKu0u9YS9ocpoBaTijRSPcUT0tyXFLMBeN59uuw4H7OrtHBR+xD6e/a
+ zl4Z5TVB1yOl76p73Omra98DzKcXRxLyHeP4fmdioxncLyr4SpQBF2c3BsZGsjkcpxqt
+ Wmaw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1734120614; x=1734725414;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=r5mnyXonXiy4zaF6iAQaiGzQHiUuvaz9CiX/0uI1U14=;
- b=qKngBhTfo2zbSfpttYvhDBR2u9v1nWy04u8GullOqS2E9WmjliUiARu+YErm/VAI9Z
- S1mCi0Y/PPz7RR1BlXO0S7Dk3KRz9FwmZTeYFnC9NZ/0ixfFZPFyoDAkVa0I2D7aqwq4
- +W7tUCdDPhVQv6mBylvQ4IyaFf410MFzMq0oHR1fRBFjmjVKDAZVXXeWwiwiSz1jTRgX
- vtTEqVnPCThCMv4nUKHDx/XAA7EoIJ460JJhw2+na+c5aCjhzNtAGmv/uBr0paWoZKdI
- Ze/j8iOPIOtL2+WMhdTeIS8sL1cz44lzJyDcGJdYD/DWvlEvNq1K1UiR2MdG7qLhLF3i
- 7DMw==
+ d=1e100.net; s=20230601; t=1734122291; x=1734727091;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=gRFktgGm38qO8Csj2wJgb6kJF5Uf5GY6gnXJpd6YWtU=;
+ b=H08AAcr22+vulnPEZ66Bek65vsLO9K+ri/PqFxYnl11c1EQY3gcWqBp9ZAo6BeQb+m
+ exSPRXubzCP7Gg4eTZgLTk+HpPiXcaSyyrJw41mPlMSwPu2I4pbx3C/V3ow9AnT6Q1Go
+ Mo1ZuPtsqKAQ0tVOlnGvH7e9E1JzIJAtlZd5hgMkh2hE7T0UD3h+ilpkgvYBz/Egfrk2
+ xbU8fJgUwBN8awX5ZYVmYpB6VgeuxAklZlMrqeN3mFNkdOUefdGkRnUlooh0uope0RUT
+ PBrBKqH4aGgZMtBPVLUISJO5o6v6nouyIDI9+wtcNxK7pndP5NqwMoDG8Z1YAoE+53I5
+ 5CdA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVRmelQTWeC+M2DLLu69EU1+hlDxQEP10p/jbuorNsVnD03hqygOS901xMV7kYVejqp57juPICq3YQS@nongnu.org
-X-Gm-Message-State: AOJu0YyPjBtIVJVqFQ6e6UCq5R6+5fecTt6eWKuuIsF9yUgKn9nWuZdf
- 9V1if0LQ6WPpSsTJZ+C7DAsSf8S+xurE9TIyWsA66yC4Dnm5y7IOdq2bcTfuVOjSY8URFJLFXRN
- KJbk9OGeR
-X-Gm-Gg: ASbGncu72yLz0joZulDxN820/HqvT7Mwen5ud8EIBcT+1GGZhFx+Qe2PoIG53YM3fJo
- dXj/gPc9NKlvEFCxtYKNfhXIBfjThMjkZBdMzKH/BEL5Xl/a4BSoolBzdbdZ8i6bI/LMfgWnpnm
- aYIFgvPKalFmHhkdfA6zNpoqeiCpheYvz6of8Rk1G3za04OfWk7pQLG75foBf2quSltyDtMtQWg
- 4Xf6FurnSjkbMT0D0ic4t3CiS+c3r6MQlDm8uoW+/j2gpsCRA+kz9Sh/7D9HvUQ
-X-Google-Smtp-Source: AGHT+IEJ015TDxooW1bcwkHq7R9aa7avAnhNp6/EbYwYtTQCLhkaK7I4Y49PNsTHyeblDmwhqU7/ww==
-X-Received: by 2002:a05:6870:7007:b0:29e:65ed:5c70 with SMTP id
- 586e51a60fabf-2a3ac99010amr2092273fac.30.1734116883097; 
- Fri, 13 Dec 2024 11:08:03 -0800 (PST)
-Received: from stoup.. ([187.217.227.247]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-71e4834da91sm29697a34.18.2024.12.13.11.08.01
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 13 Dec 2024 11:08:02 -0800 (PST)
-From: Richard Henderson <richard.henderson@linaro.org>
-To: qemu-devel@nongnu.org
-Cc: Roman Artemev <roman.artemev@syntacore.com>, qemu-stable@nongnu.org,
- Denis Tomashev <denis.tomashev@syntacore.com>,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <Alistair.Francis@wdc.com>,
- qemu-riscv@nongnu.org (open list:RISC-V TCG target)
-Subject: [PULL 2/4] tcg/riscv: Fix StoreStore barrier generation
-Date: Fri, 13 Dec 2024 13:06:34 -0600
-Message-ID: <20241213190750.2513964-5-richard.henderson@linaro.org>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20241213190750.2513964-1-richard.henderson@linaro.org>
-References: <20241213190750.2513964-1-richard.henderson@linaro.org>
+ AJvYcCV9H61P1Xiu68lYuRwLlAdhKYW3XSqXLf/Se7YvBVXISc2Mf3hguRRaI4oTorSUxr8jFDklqKoVx92j@nongnu.org
+X-Gm-Message-State: AOJu0YwInzbCJHEGzAFs+QXJKjPxqTWd1JdU9MFbgKT0eFa35pBQGA8N
+ hInOU0xxcgs+/XVw358y0Kl/KIEiToSOw9FX1O5eOqkcVJtgkr3lCFChn52nAR03MM1XdSnMKDb
+ J
+X-Gm-Gg: ASbGncu6+MDcz77On66X9YzOd3M8YTBPPhkyAXpLuXcSMmAn1fpj/WEksuE2N7QTkh2
+ pBUFBJ/yluZy5rm8Xhva3ZdP6QTDd7iy8ehPOGjMNph7IKXdF4EqIi9GHRiceaNNJ6a/WogdLed
+ Yg8U5lVUDMXH95hnMB+Cl0uasOZd9vpE+NgAGJClIZptKpV3N6LKXw94h9etJDtJp3m7fHMpi8Q
+ rpg7dNVF7Zxy5eyaZmlKGhHIT8o7mI4NP2bpzT7Sk7LwCVHZIiO0YXh85qcU2mqMKLVfG52Zoo6
+ cwBdOrxuvqKLqfLtoU+cDJeT8vO3tP+I
+X-Google-Smtp-Source: AGHT+IFcygqTjOxhrLRJOtQQ8qtKDxaqty0Oaod7p17YJzPfNcW506We74P/lJ9NwtiLfggLh2a8AA==
+X-Received: by 2002:a05:6a00:3e21:b0:728:eb32:356c with SMTP id
+ d2e1a72fcca58-7290c181477mr5894595b3a.11.1734122291111; 
+ Fri, 13 Dec 2024 12:38:11 -0800 (PST)
+Received: from ?IPV6:2804:7f0:bcc0:51cf:9cf:d2f2:d49e:7bd9?
+ ([2804:7f0:bcc0:51cf:9cf:d2f2:d49e:7bd9])
+ by smtp.gmail.com with ESMTPSA id
+ d2e1a72fcca58-72918bb0323sm198387b3a.148.2024.12.13.12.38.08
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 13 Dec 2024 12:38:10 -0800 (PST)
+Message-ID: <1e71d8ad-862e-4889-9cd0-4ec2d7bd67bd@ventanamicro.com>
+Date: Fri, 13 Dec 2024 17:38:06 -0300
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::32b;
- envelope-from=richard.henderson@linaro.org; helo=mail-ot1-x32b.google.com
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 08/71] target/riscv: Constify all Property
+To: Richard Henderson <richard.henderson@linaro.org>, qemu-devel@nongnu.org
+Cc: Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bmeng.cn@gmail.com>,
+ Weiwei Li <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ "open list:RISC-V TCG CPUs" <qemu-riscv@nongnu.org>
+References: <20241213190750.2513964-1-richard.henderson@linaro.org>
+ <20241213190750.2513964-13-richard.henderson@linaro.org>
+Content-Language: en-US
+From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+In-Reply-To: <20241213190750.2513964-13-richard.henderson@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::433;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pf1-x433.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -103,36 +108,30 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Roman Artemev <roman.artemev@syntacore.com>
 
-On RISC-V to StoreStore barrier corresponds
-`fence w, w` not `fence r, r`
 
-Cc: qemu-stable@nongnu.org
-Fixes: efbea94c76b ("tcg/riscv: Add slowpath load and store instructions")
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
-Signed-off-by: Denis Tomashev <denis.tomashev@syntacore.com>
-Signed-off-by: Roman Artemev <roman.artemev@syntacore.com>
-Message-ID: <e2f2131e294a49e79959d4fa9ec02cf4@syntacore.com>
-Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
----
- tcg/riscv/tcg-target.c.inc | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+On 12/13/24 4:06 PM, Richard Henderson wrote:
+> Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
+> ---
 
-diff --git a/tcg/riscv/tcg-target.c.inc b/tcg/riscv/tcg-target.c.inc
-index f8331e4688..96f9a7e348 100644
---- a/tcg/riscv/tcg-target.c.inc
-+++ b/tcg/riscv/tcg-target.c.inc
-@@ -1624,7 +1624,7 @@ static void tcg_out_mb(TCGContext *s, TCGArg a0)
-         insn |= 0x02100000;
-     }
-     if (a0 & TCG_MO_ST_ST) {
--        insn |= 0x02200000;
-+        insn |= 0x01100000;
-     }
-     tcg_out32(s, insn);
- }
--- 
-2.43.0
+Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+
+
+>   target/riscv/cpu.c | 2 +-
+>   1 file changed, 1 insertion(+), 1 deletion(-)
+> 
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index 80b09952e7..4329015076 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -2661,7 +2661,7 @@ RISCVCPUImpliedExtsRule *riscv_multi_ext_implied_rules[] = {
+>       NULL
+>   };
+>   
+> -static Property riscv_cpu_properties[] = {
+> +static const Property riscv_cpu_properties[] = {
+>       DEFINE_PROP_BOOL("debug", RISCVCPU, cfg.debug, true),
+>   
+>       {.name = "pmu-mask", .info = &prop_pmu_mask},
 
 
