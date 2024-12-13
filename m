@@ -4,172 +4,47 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D378FE7717F
-	for <qemu-riscv@archiver.kernel.org>; Thu, 12 Dec 2024 14:04:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 54A83E7717D
+	for <qemu-riscv@archiver.kernel.org>; Fri, 13 Dec 2024 09:05:59 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tLjnP-0006QN-SY; Thu, 12 Dec 2024 09:04:06 -0500
+	id 1tM1c9-0002f7-JZ; Fri, 13 Dec 2024 04:05:38 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1tLjmi-0006DY-O0
- for qemu-riscv@nongnu.org; Thu, 12 Dec 2024 09:03:25 -0500
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
+ (Exim 4.90_1) (envelope-from <mario.fleischmann@lauterbach.com>)
+ id 1tM1c0-0002ek-Mc; Fri, 13 Dec 2024 04:05:28 -0500
+Received: from bm.lauterbach.com ([62.154.241.218])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1tLjmf-0007so-4e
- for qemu-riscv@nongnu.org; Thu, 12 Dec 2024 09:03:20 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1734012191;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
- bh=zQz6IYbah35Sgq0De7iKtBS2F5KDq0YOtSeGx1V5t9w=;
- b=B34g6FRBnQYdqO/2IkkiR8/o0jU1XphqN21g0/uiCLzR5xBpQstLaANsqTfpfZXRnX1twO
- /VFqX6RfOdlZaAQQmx5OOpHsAr/vQIviSPVzYRj8C2b8tfbfw0MoY73CkDpXiDxJC5YiKo
- ldj8Um3uYLJ9pzP/CjkB00ER+YETzYI=
-Received: from mail-wm1-f69.google.com (mail-wm1-f69.google.com
- [209.85.128.69]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-573-usksabFaMFuyVP7apVzdwQ-1; Thu, 12 Dec 2024 09:03:10 -0500
-X-MC-Unique: usksabFaMFuyVP7apVzdwQ-1
-X-Mimecast-MFC-AGG-ID: usksabFaMFuyVP7apVzdwQ
-Received: by mail-wm1-f69.google.com with SMTP id
- 5b1f17b1804b1-434fa6d522bso3848445e9.1
- for <qemu-riscv@nongnu.org>; Thu, 12 Dec 2024 06:03:09 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1734012188; x=1734616988;
- h=content-transfer-encoding:in-reply-to:autocrypt:content-language
- :from:references:cc:to:subject:user-agent:mime-version:date
- :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=zQz6IYbah35Sgq0De7iKtBS2F5KDq0YOtSeGx1V5t9w=;
- b=u3sNiaJ6P7ePZX0xvpyTqdl5FehxIvraqi1PJE7spe6gEdfTlv7PcL+FwIesZATzP/
- TRWfJcqXn13gT3zasP/X2yFF/l4wJ7GclNZwN5EjppBnU/MpCNv4w0vsd+2dRKD0+jTp
- UamYad3QjtbmQCSt/CECYzthIsv+S/sl/8uvrrjhq5mrLlGuRyAXp9a6Mlhv3EXHCWtG
- Kx1CIOucDgEMZ+WqJLeIloWFef2bS/NWFEgUfJNn5/D3cIukLtc++Ztl/aUIfW2mgRxI
- L6W4vCRFQvjkdOhPKqqw9sZvdXe0U1uWpGpBJaAAmQZtoz6O7Upj/zo9RNjjwNs+fCOW
- brvA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVCG/+J7/RpEiO0oa6HuLIIl2Gt6//Q3GO2fhLUBH9NOQmTtSCZBURqyYN+MrBRqjQUcX5z14kmC5Pz@nongnu.org
-X-Gm-Message-State: AOJu0YxYxcDeLAK0xR6dJrYGAx7q3yPgXRNCbOh6jaZAeLtPXo3FfgEN
- 25T8kHtTaN9WacAvZhoWxW8qOjZCjqy3ixoGYY1SJl6DA9TaP9/AWsQeI//pLpOaB/RJ3VUl+Ht
- jlmrkFcwo8LmlZf/d3SwE6/Y/niQ+eqch18iWcPEMyCMDW5Flx34A
-X-Gm-Gg: ASbGncsiGEZwDT1hqXVf24uzWxOpMEfH7um0dJXleYNX+7Crng1aFnJP/6quVmmpSkp
- R97V59SLsXTwB1HuwbW1IRH29USOlHB71JTGUbrJg55YAJIs3LC4O5r4If3C9rd3PqTfV2F7w4T
- 1gbPjqdDbnD9Q4g2W2UU9iRJ15miVgm77mqu6pBpVGO4H8IrU8Z75l0/cxk/5PWLyV+76b3KQwW
- DAUSJy8q9wdd/fDN59Q6adZWF5CNGbYC4aRREBJiyWH3FIZRoFIGpcsNZaKJD/p95H7iQ0X1UyV
- MuxHxQ==
-X-Received: by 2002:a05:600c:501f:b0:436:1b0b:2633 with SMTP id
- 5b1f17b1804b1-436230eafa6mr24718265e9.9.1734012188445; 
- Thu, 12 Dec 2024 06:03:08 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IH7dqTzGCXow0385tkpX8KCorUht+ZtdE6OMEfDDPYasx20IuAMb+5ADdIvj0Ie6HdNuF3zmA==
-X-Received: by 2002:a05:600c:501f:b0:436:1b0b:2633 with SMTP id
- 5b1f17b1804b1-436230eafa6mr24712445e9.9.1734012182717; 
- Thu, 12 Dec 2024 06:03:02 -0800 (PST)
-Received: from [10.33.192.206] (nat-pool-str-t.redhat.com. [149.14.88.106])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-436257177c5sm17337065e9.43.2024.12.12.06.03.01
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 12 Dec 2024 06:03:02 -0800 (PST)
-Message-ID: <ec72b047-54c3-4712-aab5-e7b43e663dd9@redhat.com>
-Date: Thu, 12 Dec 2024 15:03:00 +0100
+ (Exim 4.90_1) (envelope-from <mario.fleischmann@lauterbach.com>)
+ id 1tM1bn-0006WS-Lq; Fri, 13 Dec 2024 04:05:28 -0500
+Received: from [10.2.13.100] (unknown [10.2.13.100])
+ (Authenticated sender: mario.fleischmann@lauterbach.com)
+ by bm.lauterbach.com (Postfix) with ESMTPSA id 00AB1426D093;
+ Fri, 13 Dec 2024 10:04:55 +0100 (CET)
+Message-ID: <5d28f5aa-bb59-4198-a6ff-495a0ea9a16a@lauterbach.com>
+Date: Fri, 13 Dec 2024 10:04:54 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 20/20] tests/functional: extend test_aarch64_virt with
- vulkan test
-To: =?UTF-8?Q?Alex_Benn=C3=A9e?= <alex.bennee@linaro.org>
-Cc: qemu-devel@nongnu.org, "Daniel P. Berrange" <berrange@redhat.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>, qemu-s390x@nongnu.org,
- Halil Pasic <pasic@linux.ibm.com>, Jiaxun Yang <jiaxun.yang@flygoat.com>,
- Weiwei Li <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Cleber Rosa <crosa@redhat.com>, Palmer Dabbelt <palmer@dabbelt.com>,
- Leif Lindholm <quic_llindhol@quicinc.com>, Eric Farman
- <farman@linux.ibm.com>, =?UTF-8?Q?Marc-Andr=C3=A9_Lureau?=
- <marcandre.lureau@redhat.com>, John Snow <jsnow@redhat.com>,
- =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Harsh Prateek Bora <harshpb@linux.ibm.com>,
- Aurelien Jarno <aurelien@aurel32.net>, Paolo Bonzini <pbonzini@redhat.com>,
- Joel Stanley <joel@jms.id.au>, Bernhard Beschow <shentey@gmail.com>,
- qemu-ppc@nongnu.org, qemu-riscv@nongnu.org,
- Daniel Henrique Barboza <danielhb413@gmail.com>,
- Laurent Vivier <lvivier@redhat.com>, qemu-arm@nongnu.org,
- Wainer dos Santos Moschetta <wainersm@redhat.com>,
- Fabiano Rosas <farosas@suse.de>, Markus Armbruster <armbru@redhat.com>,
- Bin Meng <bmeng.cn@gmail.com>, Pavel Dovgalyuk <pavel.dovgaluk@ispras.ru>,
- Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
- Richard Henderson <richard.henderson@linaro.org>,
- Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>,
- Christian Borntraeger <borntraeger@linux.ibm.com>,
- Beraldo Leal <bleal@redhat.com>, Peter Maydell <peter.maydell@linaro.org>,
- Radoslaw Biernacki <rad@semihalf.com>, Nicholas Piggin <npiggin@gmail.com>,
- Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
- "Michael S. Tsirkin" <mst@redhat.com>,
- Alistair Francis <alistair.francis@wdc.com>
-References: <20241210204349.723590-1-alex.bennee@linaro.org>
- <20241210204349.723590-21-alex.bennee@linaro.org>
- <d2a73820-58fa-41d0-8f38-68b0ad53fa7d@redhat.com>
- <87bjxhrsjf.fsf@draig.linaro.org>
-From: Thomas Huth <thuth@redhat.com>
-Autocrypt: addr=thuth@redhat.com; keydata=
- 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
-In-Reply-To: <87bjxhrsjf.fsf@draig.linaro.org>
-X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: h_z3fEiGEs8OcB9maj4H8hKgKzajoIbVHh3fpLpqcx4_1734012189
-X-Mimecast-Originator: redhat.com
+From: Mario Fleischmann <mario.fleischmann@lauterbach.com>
+Subject: Re: [PATCH v3] riscv/gdb: add V bit to priv register
+To: Yanfeng Liu <yfliu2008@qq.com>, qemu-riscv@nongnu.org
+Cc: qemu-devel@nongnu.org, alistair.francis@wdc.com, alex.bennee@linaro.org
+References: <tencent_D006B250779A0740A99BB51DA4A8F95EBF07@qq.com>
 Content-Language: en-US
+In-Reply-To: <tencent_D006B250779A0740A99BB51DA4A8F95EBF07@qq.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=170.10.129.124; envelope-from=thuth@redhat.com;
- helo=us-smtp-delivery-124.mimecast.com
-X-Spam_score_int: -25
-X-Spam_score: -2.6
-X-Spam_bar: --
-X-Spam_report: (-2.6 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.496,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H2=-0.001,
+Content-Transfer-Encoding: 7bit
+X-Bm-Milter-Handled: 166a2dfb-2e12-4590-8fa5-72e30323519f
+X-Bm-Transport-Timestamp: 1734080695009
+Received-SPF: pass client-ip=62.154.241.218;
+ envelope-from=mario.fleischmann@lauterbach.com; helo=bm.lauterbach.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9,
  RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001, RCVD_IN_VALIDITY_SAFE_BLOCKED=0.001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -185,31 +60,85 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 12/12/2024 13.32, Alex Bennée wrote:
-> Thomas Huth <thuth@redhat.com> writes:
-> 
->> On 10/12/2024 21.43, Alex Bennée wrote:
->>> Now we have virtio-gpu Vulkan support lets add a test for it.
->>> Currently this is using images build by buildroot:
->>>     https://lists.buildroot.org/pipermail/buildroot/2024-December/768196.html
->>> Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
-> <snip>
->>> +        self.vm.set_console()
->>> +        kernel_command_line = (self.KERNEL_COMMON_COMMAND_LINE +
->>> +                               'console=ttyAMA0 root=/dev/vda')
->>> +        self.require_accelerator("tcg")
->>
->> Same, please move to the beginning since it can skip the test.
->>
->>> +        self.vm.add_args("-accel", "tcg")
-> 
-> Actually this could run under KVM if we have it for Aarch64. Can we
-> represent that?
+Hi,
 
-Simply omit the line "require" line and add an additional -accel kvm here? 
-... I think nobody ever tried to run the functional tests with another 
-accelerator beside kvm and tcg on aarch64 hosts, so it should be fine.
+apologies for the delayed review; I've just gotten to it now.
 
-  Thomas
+On 06.12.2024 01:14, Yanfeng Liu wrote:
+> This adds virtualization mode (V bit) as bit(2) of register `priv`
+> per RiscV debug spec v1.0.0-rc3. Checked with gdb-multiarch v12.1.
+> 
+> Note that GDB may display `INVALID` tag for the value when V bit
+> is set, this doesn't affect accessing to the bit.
+> 
+> Signed-off-by: Yanfeng Liu <yfliu2008@qq.com>
+> ---
+>   target/riscv/gdbstub.c | 7 ++++++-
+>   1 file changed, 6 insertions(+), 1 deletion(-)
+> 
+> diff --git a/target/riscv/gdbstub.c b/target/riscv/gdbstub.c
+> index c07df972f1..8cc095cda3 100644
+> --- a/target/riscv/gdbstub.c
+> +++ b/target/riscv/gdbstub.c
+> @@ -213,7 +213,10 @@ static int riscv_gdb_get_virtual(CPUState *cs, GByteArray *buf, int n)
+>           RISCVCPU *cpu = RISCV_CPU(cs);
+>           CPURISCVState *env = &cpu->env;
+>   
+> -        return gdb_get_regl(buf, env->priv);
+> +        /* Per RiscV debug spec v1.0.0 rc3 */
+
+Now that rc4 is released, you might also cite "RISC-V Debug
+Specification v1.0.0 rc4".
+
+> +        target_ulong vbit = (env->virt_enabled) ? BIT(2) : 0;
+> +
+> +        return gdb_get_regl(buf, env->priv | vbit);
+>   #endif
+>       }
+>       return 0;
+> @@ -230,6 +233,8 @@ static int riscv_gdb_set_virtual(CPUState *cs, uint8_t *mem_buf, int n)
+>           if (env->priv == PRV_RESERVED) {
+>               env->priv = PRV_S;
+>           }
+> +        env->virt_enabled = (env->priv == PRV_M) ? 0 :
+> +                            ((ldtul_p(mem_buf) & BIT(2)) >> 2);
+
+Looking at the other places in the source code where virt_enabled is 
+set, we should also check here if the H extension is active.
+Alternatively, you might also consider using riscv_cpu_set_mode():
+
+Message-ID: <20240711-smcntrpmf_v7-v8-1-b7c38ae7b263@rivosinc.com>
+Date: Thu, 11 Jul 2024 15:31:04 -0700
+Subject: [PATCH v8 01/13] target/riscv: Combine set_mode and set_virt 
+functions.
+From: Atish Patra <atishp@rivosinc.com>
+
+>   #endif
+>           return sizeof(target_ulong);
+>       }
+
+In addition, we need to swap the virtual supervisor registers from the H 
+extension, e.g. vsstatus:
+
+"When V=1, vsstatus substitutes for the usual sstatus, so instructions 
+that normally read or modify sstatus actually access vsstatus instead." 
+(privileged spec)
+
+With the current patch, I was able to read and modify V, but the 
+registers were not changing:
+
+(gdb) info register $priv
+priv           0x4      prv:4 [INVALID]
+(gdb) info register $sstatus
+sstatus        0x200004022      8589951010
+(gdb) set $priv = 0x0
+(gdb) info register $priv
+priv           0x0      prv:0 [User/Application]
+(gdb) info register $sstatus
+sstatus        0x200004022      8589951010
+
+Take a look at riscv_cpu_swap_hypervisor_regs() which I believe does the 
+thing we need here. Note that the function is supposed be called before 
+the mode switch.
 
 
