@@ -4,88 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 692D7E7717F
-	for <qemu-riscv@archiver.kernel.org>; Sat, 14 Dec 2024 01:53:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B181FE7717F
+	for <qemu-riscv@archiver.kernel.org>; Sat, 14 Dec 2024 02:02:20 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tMHLZ-0004Wb-W7; Fri, 13 Dec 2024 20:53:34 -0500
+	id 1tMHTl-0005Lv-PX; Fri, 13 Dec 2024 21:02:01 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <berto@igalia.com>)
- id 1tMFfp-0004sH-9M; Fri, 13 Dec 2024 19:06:23 -0500
-Received: from fanzine.igalia.com ([178.60.130.6] helo=fanzine2.igalia.com)
+ (Exim 4.90_1) (envelope-from <yfliu2008@qq.com>)
+ id 1tMHTi-0005LM-Rm; Fri, 13 Dec 2024 21:01:58 -0500
+Received: from out203-205-221-231.mail.qq.com ([203.205.221.231])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <berto@igalia.com>)
- id 1tMFfj-0005h9-Bp; Fri, 13 Dec 2024 19:06:21 -0500
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=igalia.com; 
- s=20170329;
- h=Content-Type:MIME-Version:Message-ID:Date:References:
- In-Reply-To:Subject:Cc:To:From:Sender:Reply-To:Content-Transfer-Encoding:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
- List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=s3baxnvsv0QDjdbqpZIjo+pfDf0zddAKGBM4vYP+R4s=; b=AJ1SV70n7ay56Wph5Xdsr6p6Fi
- ypQHjAi5++9f6K3K8cMFXVCH2s7dvz+JMkaIlBo/lK9PaeDMNi/Q38Sf5hfM4hllCFstq43GI3JIs
- calJyadqr4UGXbq8Y2sW2/hu/MZNMWw46Zc9M5goyZaQtwdZCeR99GZjBBAinedWfQeEgm/T4miw9
- ZTt+YioIM0tfkuWx3koJEJp+NbnzFzNJO4bQjV05qs8YzDJ09d3TCdIMIcpYb3egXDwr+f4ofM95g
- GhRivEcAA2t/BPOBkuZNquIHG/zCQrdwQ3XsDHwrjeYdqxmhmeJPdToREXKyQKnj+itqMXjmg7WH8
- yJISu/bg==;
-Received: from maestria.local.igalia.com ([192.168.10.14] helo=mail.igalia.com)
- by fanzine2.igalia.com with esmtps 
- (Cipher TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__AES_256_GCM:256) (Exim)
- id 1tMFes-002sgk-73; Sat, 14 Dec 2024 01:05:22 +0100
-Received: from gate.service.igalia.com ([192.168.21.52])
- by mail.igalia.com with esmtp (Exim)
- id 1tMFeq-007HeJ-9B; Sat, 14 Dec 2024 01:05:22 +0100
-Received: from berto by gate.service.igalia.com with local (Exim 4.96)
- (envelope-from <berto@igalia.com>) id 1tMFeq-007aKe-0O;
- Sat, 14 Dec 2024 00:05:20 +0000
-From: Alberto Garcia <berto@igalia.com>
-To: Richard Henderson <richard.henderson@linaro.org>, qemu-devel@nongnu.org
-Cc: Michael Rolnik <mrolnik@gmail.com>, =?utf-8?Q?Marc-Andr=C3=A9?= Lureau
- <marcandre.lureau@redhat.com>, Paolo Bonzini <pbonzini@redhat.com>, Peter
- Maydell <peter.maydell@linaro.org>, Philippe =?utf-8?Q?Mathieu-Daud=C3=A9?=
- <philmd@linaro.org>, "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
- Alistair Francis <alistair@alistair23.me>, "Michael S. Tsirkin"
- <mst@redhat.com>, Antony Pavlov <antonynpavlov@gmail.com>, Igor Mitsyanko
- <i.mitsyanko@gmail.com>, Laurent Vivier <laurent@vivier.eu>, =?utf-8?Q?Cl?=
- =?utf-8?Q?=C3=A9ment?=
- Chigot <chigot@adacore.com>, Frederic Konrad <konrad.frederic@yahoo.fr>,
- Thomas Huth <huth@tuxfamily.org>, Joel Stanley <joel@jms.id.au>, Yoshinori
- Sato <ysato@users.sourceforge.jp>, Magnus Damm <magnus.damm@gmail.com>,
- Halil Pasic <pasic@linux.ibm.com>, Christian Borntraeger
- <borntraeger@linux.ibm.com>, Vijai Kumar K <vijai@behindbytes.com>, Bin
- Meng <bmeng.cn@gmail.com>, Palmer Dabbelt <palmer@dabbelt.com>, Nicholas
- Piggin <npiggin@gmail.com>, Daniel Henrique Barboza
- <danielhb413@gmail.com>, Harsh Prateek Bora <harshpb@linux.ibm.com>,
- Samuel Tardieu <sam@rfc1149.net>, Amit Shah <amit@kernel.org>, Stefano
- Stabellini <sstabellini@kernel.org>, Anthony PERARD
- <anthony@xenproject.org>, Paul Durrant <paul@xen.org>, "open
- list:Raspberry Pi" <qemu-arm@nongnu.org>, "open list:OpenTitan"
- <qemu-riscv@nongnu.org>, "open list:S390 general arch..."
- <qemu-s390x@nongnu.org>, "open list:sPAPR (pseries)"
- <qemu-ppc@nongnu.org>, "open list:X86 Xen CPUs"
- <xen-devel@lists.xenproject.org>
-Subject: Re: [PATCH 20/71] hw/char: Constify all Property
-In-Reply-To: <20241213190750.2513964-25-richard.henderson@linaro.org>
-References: <20241213190750.2513964-1-richard.henderson@linaro.org>
- <20241213190750.2513964-25-richard.henderson@linaro.org>
-Date: Sat, 14 Dec 2024 01:05:20 +0100
-Message-ID: <w511pybi0xr.fsf@igalia.com>
+ (Exim 4.90_1) (envelope-from <yfliu2008@qq.com>)
+ id 1tMHTd-0005a1-TP; Fri, 13 Dec 2024 21:01:58 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qq.com; s=s201512;
+ t=1734141692; bh=kDLUMkjjzYKh6GiL9pmLN4IOqKgzN2FcvSUdTyQ48ok=;
+ h=Subject:From:To:Cc:Date:In-Reply-To:References;
+ b=zm5gWOp6TZrZbJdlFWW7BsJ9mm8xXxF35fuCovAl4zyKHh1DxY59CxbldkeVXeyW/
+ rWX77xZp5Nee/Mar/j0iiixNtFu1iV6vsoS3FXzDTrQ4vxvXYsfHsu7niwcea2yFay
+ uTNOy2gc24qBScGf411CxdNX9LNBxauOzACybuIM=
+Received: from [192.168.1.13] ([220.167.33.182])
+ by newxmesmtplogicsvrszc25-0.qq.com (NewEsmtp) with SMTP
+ id 5D06E9A; Sat, 14 Dec 2024 10:01:29 +0800
+X-QQ-mid: xmsmtpt1734141689tm76lh56s
+Message-ID: <tencent_20FAAD91C9BA033D18489DAD01233DCD6B0A@qq.com>
+X-QQ-XMAILINFO: NZFlUIrZ4HCZx9fCutvCLLryKEjtOnfziBU53CfbE4adybuTN9CZKluH508FfG
+ IL3bDApmYmdMm5oBStPRYQAwKu6WFajrTAXkdf0grtiYRbQLn6xH2tlBCMCtjwvMRVwfwbB7lmhz
+ rQK4CtQl8+WVkbCpxAWsYjYPS8IOQM+3c36PjWRXKps0DMB5EzxFFUKYV7GU7L3F7g6rp1PCOIvM
+ A725zS0hTpTrXMl8KegibM5Sxm1piIUxcf77rD9xQ1AKWbU+f4VLIdtOqvTcfOF+asm9dcvrDrfi
+ Z4bFtFkJBmH5wjicMjpdhiNkhwZe71MFlONxxr7EZyWHSwa1fHX50C9TZjIPMweGgOV1vVqCQ02P
+ sjv7FZchyWXfGeEEIFnNlr0Db++ZsdGzC0qbRBVcgWJnYf0bwqjP9POyUuCkkhgUmDc9b8dxiIB8
+ H+X3Punt3BX6TswoJeUkX1ginqT7S9rRxgaH208YPA7+6sO/vBum2IeBNFWQ/al9qFmFnkGFRrTA
+ KnZDGBnZS8Z3BA9JO+dbHdEhvH+pJ4ZItkggobbZXnr20cxTlKmGG5h8KLyEhHyjEXI7/KtzVXNC
+ xvpJgAfKgYXGg+xRspZT+OrUq6OIqPx+1Zs9daD6M9nVfx+gG7arQSIxS7Md0RMIFyYfQk9HBBh9
+ LtarZ8EMrnIHiUxebhMDpvvsbmBdl1/lUmz4TJro/IcDWuH/3ep/cK8P9ANvp1JvhHe2fSTTpWcv
+ XiMVWhZb9gao/ER9YhtW3dlTw2tn5cP3PPdiKTa4ZXpIJ2jfh4IXo/VjasqgH9oOW+OIPdC+DO7F
+ 6I8wP5sEciq82P3OfqMUDOye6PIfZed6akLWBS8xE2JtW6mALJlbJaraP2iCRTOKR4RbRIkdCp7Q
+ YdvE4HhrVXAuQMPb3idUKEXRSnY6YbPv4lydrAv3Xj2cboXanu7+zHd5QmSV5n9vlpDZyxaclKDo
+ XMplPf20785ArpPjJycg==
+X-QQ-XMRINFO: NyFYKkN4Ny6FSmKK/uo/jdU=
+X-OQ-MSGID: <418e65d0dc751130a624a63c0620aa042414a5f9.camel@qq.com>
+Subject: Re: [PATCH v3] riscv/gdb: add V bit to priv register
+From: Yanfeng Liu <yfliu2008@qq.com>
+To: Mario Fleischmann <mario.fleischmann@lauterbach.com>, 
+ qemu-riscv@nongnu.org
+Cc: qemu-devel@nongnu.org, alistair.francis@wdc.com, alex.bennee@linaro.org
+Date: Sat, 14 Dec 2024 10:01:28 +0800
+In-Reply-To: <5d28f5aa-bb59-4198-a6ff-495a0ea9a16a@lauterbach.com>
+References: <tencent_D006B250779A0740A99BB51DA4A8F95EBF07@qq.com>
+ <5d28f5aa-bb59-4198-a6ff-495a0ea9a16a@lauterbach.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+User-Agent: Evolution 3.44.4-0ubuntu2 
 MIME-Version: 1.0
-Content-Type: text/plain
-Received-SPF: pass client-ip=178.60.130.6; envelope-from=berto@igalia.com;
- helo=fanzine2.igalia.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+Received-SPF: pass client-ip=203.205.221.231; envelope-from=yfliu2008@qq.com;
+ helo=out203-205-221-231.mail.qq.com
+X-Spam_score_int: 11
+X-Spam_score: 1.1
+X-Spam_bar: +
+X-Spam_report: (1.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
+ DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_ENVFROM_END_DIGIT=0.25,
+ FREEMAIL_FROM=0.001, HELO_DYNAMIC_IPADDR=1.951, RCVD_IN_DNSWL_NONE=-0.0001,
  RCVD_IN_VALIDITY_CERTIFIED_BLOCKED=0.001, RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ RDNS_DYNAMIC=0.982, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=no autolearn_force=no
 X-Spam_action: no action
-X-Mailman-Approved-At: Fri, 13 Dec 2024 20:53:31 -0500
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -100,10 +84,122 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Fri 13 Dec 2024 01:06:54 PM -06, Richard Henderson wrote:
-> Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
+On Fri, 2024-12-13 at 10:04 +0100, Mario Fleischmann wrote:
+> Hi,
+>=20
+> apologies for the delayed review; I've just gotten to it now.
+>=20
+> On 06.12.2024 01:14, Yanfeng Liu wrote:
+> > This adds virtualization mode (V bit) as bit(2) of register `priv`
+> > per RiscV debug spec v1.0.0-rc3. Checked with gdb-multiarch v12.1.
+> >=20
+> > Note that GDB may display `INVALID` tag for the value when V bit
+> > is set, this doesn't affect accessing to the bit.
+> >=20
+> > Signed-off-by: Yanfeng Liu <yfliu2008@qq.com>
+> > ---
+> > =C2=A0 target/riscv/gdbstub.c | 7 ++++++-
+> > =C2=A0 1 file changed, 6 insertions(+), 1 deletion(-)
+> >=20
+> > diff --git a/target/riscv/gdbstub.c b/target/riscv/gdbstub.c
+> > index c07df972f1..8cc095cda3 100644
+> > --- a/target/riscv/gdbstub.c
+> > +++ b/target/riscv/gdbstub.c
+> > @@ -213,7 +213,10 @@ static int riscv_gdb_get_virtual(CPUState *cs,
+> > GByteArray *buf, int n)
+> > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 RISCVCPU *cpu =
+=3D RISCV_CPU(cs);
+> > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 CPURISCVState *e=
+nv =3D &cpu->env;
+> > =C2=A0=20
+> > -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 return gdb_get_regl(buf, en=
+v->priv);
+> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 /* Per RiscV debug spec v1.=
+0.0 rc3 */
+>=20
+> Now that rc4 is released, you might also cite "RISC-V Debug
+> Specification v1.0.0 rc4".
+Okay, will do.
+> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 target_ulong vbit =3D (env-=
+>virt_enabled) ? BIT(2) : 0;
+> > +
+> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 return gdb_get_regl(buf, en=
+v->priv | vbit);
+> > =C2=A0 #endif
+> > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 }
+> > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 return 0;
+> > @@ -230,6 +233,8 @@ static int riscv_gdb_set_virtual(CPUState *cs, uint=
+8_t
+> > *mem_buf, int n)
+> > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 if (env->priv =
+=3D=3D PRV_RESERVED) {
+> > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0 env->priv =3D PRV_S;
+> > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 }
+> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 env->virt_enabled =3D (env-=
+>priv =3D=3D PRV_M) ? 0 :
+> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0 ((ldtul_p(mem_buf) & BIT(2)) >> 2);
+>=20
+> Looking at the other places in the source code where virt_enabled is=20
+> set, we should also check here if the H extension is active.
+> Alternatively, you might also consider using riscv_cpu_set_mode():
+>=20
+> Message-ID: <20240711-smcntrpmf_v7-v8-1-b7c38ae7b263@rivosinc.com>
+> Date: Thu, 11 Jul 2024 15:31:04 -0700
+> Subject: [PATCH v8 01/13] target/riscv: Combine set_mode and set_virt=20
+> functions.
+> From: Atish Patra <atishp@rivosinc.com>
+>=20
+Thanks for this, I will check both and see what is easier for a QEMU newbie
+later.
 
-Acked-by: Alberto Garcia <berto@igalia.com>
+> >=20
+> > =C2=A0 #endif
+> > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 return sizeof(ta=
+rget_ulong);
+> > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 }
+>=20
+> In addition, we need to swap the virtual supervisor registers from the H=
+=20
+> extension, e.g. vsstatus:
+>=20
+> "When V=3D1, vsstatus substitutes for the usual sstatus, so instructions=
+=20
+> that normally read or modify sstatus actually access vsstatus instead."=
+=20
+> (privileged spec)
+>=20
+> With the current patch, I was able to read and modify V, but the=20
+> registers were not changing:
+>=20
+> (gdb) info register $priv
+> priv=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 0x4=C2=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0 prv:4 [INVALID]
+> (gdb) info register $sstatus
+> sstatus=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 0x200004022=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0 8589951010
+> (gdb) set $priv =3D 0x0
+> (gdb) info register $priv
+> priv=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 0x0=C2=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0 prv:0 [User/Application]
+> (gdb) info register $sstatus
+> sstatus=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 0x200004022=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0 8589951010
+>=20
+> Take a look at riscv_cpu_swap_hypervisor_regs() which I believe does the=
+=20
+> thing we need here. Note that the function is supposed be called before=
+=20
+> the mode switch.
 
-Berto
+thanks again, I will check that swapping method and use it before changing =
+the v
+bit.=20
+
+Regards,
+yf
+
+
 
