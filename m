@@ -4,75 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 25352E77180
-	for <qemu-riscv@archiver.kernel.org>; Mon, 16 Dec 2024 04:56:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8BBB6E7717F
+	for <qemu-riscv@archiver.kernel.org>; Mon, 16 Dec 2024 05:23:49 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tN392-0006fU-Gv; Sun, 15 Dec 2024 23:55:48 -0500
+	id 1tN3Zr-0002Cg-UZ; Mon, 16 Dec 2024 00:23:31 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1tN391-0006fA-14; Sun, 15 Dec 2024 23:55:47 -0500
-Received: from mail-vk1-xa32.google.com ([2607:f8b0:4864:20::a32])
+ id 1tN3Zp-0002CB-99; Mon, 16 Dec 2024 00:23:29 -0500
+Received: from mail-vk1-xa29.google.com ([2607:f8b0:4864:20::a29])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1tN38z-0004MI-7K; Sun, 15 Dec 2024 23:55:46 -0500
-Received: by mail-vk1-xa32.google.com with SMTP id
- 71dfb90a1353d-51619b06a1cso1970109e0c.3; 
- Sun, 15 Dec 2024 20:55:43 -0800 (PST)
+ id 1tN3Zm-0007TK-E0; Mon, 16 Dec 2024 00:23:28 -0500
+Received: by mail-vk1-xa29.google.com with SMTP id
+ 71dfb90a1353d-51889930cb1so1000907e0c.0; 
+ Sun, 15 Dec 2024 21:23:24 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1734324943; x=1734929743; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1734326603; x=1734931403; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=EDbbJ8/0/ImSc1Hn0zTVodv5EIlnSBzh0NR3dPMWfiM=;
- b=G8KZTZZLOUMHgCpvbS4JHc1qT6bj4VxucNeDm6pvWR5l4ERKVUJhGOqVb2F5QtrMF6
- 8U6gr9pHSx4JsRlG9hkWjxec0F6GCVFSFELjT3HOH2EUQ3m7gVUgDKGxycK2+rzNb2Sq
- eOcAnaA5ApzsbJ335ghP4Lfm8bZGrZK0cXcdNnj0hRBKXRxSNsXd4KZfFcze2KF7uVGD
- OGUJRVm60oGt78HiuCebWn2uqRccZC2L2Mu7Z3d0AICrgp05F/7dNgYAw6QP99Davnnm
- Kvnc2p5SB20NpfrsTBVkXEJnaYIjio8yqgTEw3yOASUGcs9jqO6per9ZRLERMJTq2XFr
- KxhQ==
+ bh=I2WzYcVRm23iTLUtH2a8hod11FuenaP1GFcRFipp7R4=;
+ b=LYklHQxKrl1l8lJ+MkRekTppqLSp42JJuEmnsKcIz7QLMta7yttiY/tGcNm1voWDPk
+ rWxBcUNJBU5PmMre6z9HXkCNaEe4ndc7dc9fyiseUgG17RXaGP7ObsTxr2XO3bvPOzuF
+ SsGH4zK2ePMUiaV6UhU+ghlvVwWHAbRp91VXMh1EFpOtvrMllw3GjZbsM7PGFiUSqcTM
+ 8r3KucA6pchAZikwkOuYjKVpZTXtkbe8KoDvdbgnY5439U5mYY7S5I6ume0VEAfBIIDl
+ 62ST8YrY0bVYM+l3GBhm+Kg2aXCnVjiAJL+kBWnsOY7f277Iar/TVg5BdKyeEj7iKpdQ
+ eKJA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1734324943; x=1734929743;
+ d=1e100.net; s=20230601; t=1734326603; x=1734931403;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=EDbbJ8/0/ImSc1Hn0zTVodv5EIlnSBzh0NR3dPMWfiM=;
- b=PN9Y4bVdvJTMqO6s1gIy9vCmQNYx1T/zpvBGGRsARFXbz4ASozgaNdlI7rccj/Z5v3
- qdnLK4f5T9aR+T6fhe4HHWrRx6IGPAM/c+bdoWZ/u7EhiDwCKnAS4UsrkyiCdlX6JHSB
- LH3P8KPyoKFzGlxXW9OtD7GSVOFIO/0szX8YY/64vdb5scSdz3JAEdLSlZcv0obJTX7y
- ffmKM9LK0wUnvfNLlEHMLo7cyUuIdGkOnETjVu+UEn8HLiYJxb142d0tkqUXVfV7ZqLJ
- VfapMMXFxoC8ONlGr+yk32W6psdPuLasVwo9i7i46BcImmLN6Co/cI2qdp7XjKTL8EWq
- NM/A==
+ bh=I2WzYcVRm23iTLUtH2a8hod11FuenaP1GFcRFipp7R4=;
+ b=mxljhC6x+VZ8DYnKooJ3IHqDFaJD6lP/Tu+ZtDvyi3ELrzWza0fmX487t6fkBY8zdk
+ mivz7qz53L7IoMSg/c8TdXckUOcU1WNUzIqvWDPz60EIgBNiZnCtwiOvxwLruoC50/gY
+ hwnP0BHK9rmeWgzU9H5Vcgbmba5TemE5QMbcR1yd/hQGnAA2/d6tZahdT18aGsSaGS2Y
+ KK559rOwaMfi9h9INImiombXeNJQYa3hQqS578d8TkzLxsDtJ2cSjFDwYjMdEQyiW5O/
+ mwn9Nz22qQVOgrNRI5/pstO2Lqrm+iErJxPLvfNy9yOBVbm5JiBq4oS9i/XniH+QJ1Ue
+ 2VNA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVk1AKIe6XgXwfZ0HiiYGXEfvO9VCFLi+u2khIWJKgyeMA7ijA6ZycL9iiMGAhzEyLA2RDVxZuarHds@nongnu.org
-X-Gm-Message-State: AOJu0YxQiFyG+Hoy9YIj5R8RuOhvuw3J3ScceG9MZfNm6i9zdyEptpB1
- ltXr+/8I6lI3CSZgx4olOww3oKwHK5i0fL1CzddgyVcpoQZeQYvKe9qjuX3tV3EG2cphFCbTAHZ
- kHFLMwvYqVPf/9NQ9dKm9YjcV34M=
-X-Gm-Gg: ASbGncux9qRcEDXcvB168j2HFriOFGjoik+ENSav4Lul3nGlc3lkwJ9tqFjg518v5c2
- uiU28F/VB5MoVFdE2oZvbE+IKQqaYIyGGPpSIu0kA3+rbIfIptQdjHxKOKYx2FoVXSIXE
-X-Google-Smtp-Source: AGHT+IG1y6P/MBv2ymasYVym1ij5dHBIDbZr9PwCYaPDQgZfiIJc03Fhgjv+Ufg/BkE+/zvpuyfXr5iLI6HMqM3h1u8=
-X-Received: by 2002:a05:6122:1dab:b0:518:9040:6700 with SMTP id
- 71dfb90a1353d-518ca4a4181mr10817771e0c.11.1734324942846; Sun, 15 Dec 2024
- 20:55:42 -0800 (PST)
+ AJvYcCXppdtLVNSFT89uwCt8PMg2lQLb8U4FCTxcGXF+SfUxkekn0gSQBdjz3LYORScDNSFbVOKvyaRIPTwQ@nongnu.org,
+ AJvYcCXuCb60v/9LWbaos+je4uSxaDl+YsNQPc88UNCC7lX37fFL3VLeV/X7h5kp/9wcGI/jdGyFfBjvrn9Sew==@nongnu.org
+X-Gm-Message-State: AOJu0Yyxapay6Kcqa1kw0ducFM3wdUbV0+D9F4APsrDaaDELRZ1mjSQM
+ GKefM8+Bnm/2YwOyGAaAPUfsO+hm/E0Ab6KNKxKo28Q+wCE9Qqq0GgQFFppX76Tdu0X9Eu5/Z61
+ M+jCtg4p1trqqAhCRQ3atXQAAlWM=
+X-Gm-Gg: ASbGncv7TDwZH+f8l+k5yuQNSIiLy6EPxTWPQVOhxapP8Ef9cli+Am5on0xMbD0tU+X
+ nUtb/3y82+lOrZj2KX6grspVJCqo9bh9SxZXJABQveLh3nF/PvOAG61SgZjFxW3Wev61A
+X-Google-Smtp-Source: AGHT+IGh2JDwuI1zep3vfwYaOjum1fLPCJw2Zbp8johkvS74khRUtkQy+xchxaLy5qC3q0dIYRLxyuPX/QvxgtbHFOs=
+X-Received: by 2002:a05:6102:b02:b0:4af:dcbe:4767 with SMTP id
+ ada2fe7eead31-4b25d98d34bmr9398004137.10.1734326603612; Sun, 15 Dec 2024
+ 21:23:23 -0800 (PST)
 MIME-Version: 1.0
-References: <20241211211933.198792-1-fkonrad@amd.com>
- <20241211211933.198792-2-fkonrad@amd.com>
-In-Reply-To: <20241211211933.198792-2-fkonrad@amd.com>
+References: <20241205073622.46052-1-xiaoou@iscas.ac.cn>
+In-Reply-To: <20241205073622.46052-1-xiaoou@iscas.ac.cn>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 16 Dec 2024 14:55:16 +1000
-Message-ID: <CAKmqyKNeqRNfB3p_U4Q3kmV43rdD+b3P0t7qq7FZtGv46imQnQ@mail.gmail.com>
-Subject: Re: [PATCH 1/3] target/riscv: add a trap-misaligned-access property
-To: Frederic Konrad <fkonrad@amd.com>
-Cc: qemu-riscv@nongnu.org, palmer@dabbelt.com, alistair.francis@wdc.com, 
- bmeng.cn@gmail.com, liwei1518@gmail.com, dbarboza@ventanamicro.com, 
- zhiwei_liu@linux.alibaba.com, qemu-devel@nongnu.org, 
- francisco.iglesias@amd.com, Luc.Michel@amd.com
+Date: Mon, 16 Dec 2024 15:22:57 +1000
+Message-ID: <CAKmqyKPxfhOGGrLymaNtymiWZ9SQbV1iBvsc+4QhtzTwraYtHQ@mail.gmail.com>
+Subject: Re: [PATCH v1] target/riscv: add support for RV64 Xiangshan Nanhu CPU
+To: MollyChen <xiaoou@iscas.ac.cn>
+Cc: Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Bin Meng <bmeng.cn@gmail.com>, Weiwei Li <liwei1518@gmail.com>, 
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
+ qemu-riscv@nongnu.org, qemu-devel@nongnu.org
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::a32;
- envelope-from=alistair23@gmail.com; helo=mail-vk1-xa32.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::a29;
+ envelope-from=alistair23@gmail.com; helo=mail-vk1-xa29.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -96,42 +98,94 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Thu, Dec 12, 2024 at 7:21=E2=80=AFAM Frederic Konrad <fkonrad@amd.com> w=
-rote:
+On Thu, Dec 5, 2024 at 5:38=E2=80=AFPM MollyChen <xiaoou@iscas.ac.cn> wrote=
+:
 >
-> On riscv target, misaligned accesses are either authorized and implemente=
-d in
-> hardware, or unimplemented and generate a trap to be implemented in softw=
-are.
+> Add a CPU entry for the RV64 XiangShan NANHU CPU which
+> supports single-core and dual-core configurations. More
+> details can be found at
+> https://docs.xiangshan.cc/zh-cn/latest/integration/overview
 >
-> At the moment misaligned accesses for rvi just succeed, the intention of =
-this
-> new property is to let the user choose to have a trap when a misaligned a=
-ccess
-> happens.
->
-> Signed-off-by: Frederic Konrad <fkonrad@amd.com>
-> ---
->  target/riscv/cpu.c     | 5 +++++
->  target/riscv/cpu_cfg.h | 1 +
->  2 files changed, 6 insertions(+)
->
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index f219f0c3b5..1696d3db2a 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -2697,6 +2697,11 @@ static Property riscv_cpu_properties[] =3D {
->       * it with -x and default to 'false'.
->       */
->      DEFINE_PROP_BOOL("x-misa-w", RISCVCPU, cfg.misa_w, false),
-> +    /*
-> +     * when set, misaligned accesses will generate a trap.
-> +     */
-> +    DEFINE_PROP_BOOL("trap-misaligned-access", RISCVCPU,
-> +                     cfg.trap_misaligned_access, false),
+> Signed-off-by: MollyChen <xiaoou@iscas.ac.cn>
 
-This should be the last patch, we want to implement the feature before
-we expose it.
+Acked-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
+
+> ---
+>  target/riscv/cpu-qom.h |  1 +
+>  target/riscv/cpu.c     | 29 +++++++++++++++++++++++++++++
+>  2 files changed, 30 insertions(+)
+>
+> diff --git a/target/riscv/cpu-qom.h b/target/riscv/cpu-qom.h
+> index 6547642287..d56b067bf2 100644
+> --- a/target/riscv/cpu-qom.h
+> +++ b/target/riscv/cpu-qom.h
+> @@ -50,6 +50,7 @@
+>  #define TYPE_RISCV_CPU_THEAD_C906       RISCV_CPU_TYPE_NAME("thead-c906"=
+)
+>  #define TYPE_RISCV_CPU_VEYRON_V1        RISCV_CPU_TYPE_NAME("veyron-v1")
+>  #define TYPE_RISCV_CPU_TT_ASCALON       RISCV_CPU_TYPE_NAME("tt-ascalon"=
+)
+> +#define TYPE_RISCV_CPU_XIANGSHAN_NANHU  RISCV_CPU_TYPE_NAME("xiangshan-n=
+anhu")
+>  #define TYPE_RISCV_CPU_HOST             RISCV_CPU_TYPE_NAME("host")
+>
+>  OBJECT_DECLARE_CPU_TYPE(RISCVCPU, RISCVCPUClass, RISCV_CPU)
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index 8447ad0dfb..38baaa39f8 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -645,6 +645,34 @@ static void rv64_tt_ascalon_cpu_init(Object *obj)
+>  #endif
+>  }
+>
+> +static void rv64_xiangshan_nanhu_cpu_init(Object *obj)
+> +{
+> +    CPURISCVState *env =3D &RISCV_CPU(obj)->env;
+> +    RISCVCPU *cpu =3D RISCV_CPU(obj);
+> +
+> +    riscv_cpu_set_misa_ext(env, RVG | RVC | RVB | RVS | RVU);
+> +    env->priv_ver =3D PRIV_VERSION_1_12_0;
+> +
+> +    /* Enable ISA extensions */
+> +    cpu->cfg.ext_zbc =3D true;
+> +    cpu->cfg.ext_zbkb =3D true;
+> +    cpu->cfg.ext_zbkc =3D true;
+> +    cpu->cfg.ext_zbkx =3D true;
+> +    cpu->cfg.ext_zknd =3D true;
+> +    cpu->cfg.ext_zkne =3D true;
+> +    cpu->cfg.ext_zknh =3D true;
+> +    cpu->cfg.ext_zksed =3D true;
+> +    cpu->cfg.ext_zksh =3D true;
+> +    cpu->cfg.ext_svinval =3D true;
+> +
+> +    cpu->cfg.mmu =3D true;
+> +    cpu->cfg.pmp =3D true;
+> +
+> +#ifndef CONFIG_USER_ONLY
+> +    set_satp_mode_max_supported(cpu, VM_1_10_SV39);
+> +#endif
+> +}
+> +
+>  #ifdef CONFIG_TCG
+>  static void rv128_base_cpu_init(Object *obj)
+>  {
+> @@ -3050,6 +3078,7 @@ static const TypeInfo riscv_cpu_type_infos[] =3D {
+>      DEFINE_VENDOR_CPU(TYPE_RISCV_CPU_THEAD_C906, MXL_RV64,  rv64_thead_c=
+906_cpu_init),
+>      DEFINE_VENDOR_CPU(TYPE_RISCV_CPU_TT_ASCALON, MXL_RV64,  rv64_tt_asca=
+lon_cpu_init),
+>      DEFINE_VENDOR_CPU(TYPE_RISCV_CPU_VEYRON_V1,  MXL_RV64,  rv64_veyron_=
+v1_cpu_init),
+> +    DEFINE_VENDOR_CPU(TYPE_RISCV_CPU_XIANGSHAN_NANHU, MXL_RV64, rv64_xia=
+ngshan_nanhu_cpu_init),
+>  #ifdef CONFIG_TCG
+>      DEFINE_DYNAMIC_CPU(TYPE_RISCV_CPU_BASE128,   MXL_RV128, rv128_base_c=
+pu_init),
+>  #endif /* CONFIG_TCG */
+> --
+> 2.34.1
+>
+>
 
