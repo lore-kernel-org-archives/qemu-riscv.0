@@ -4,87 +4,47 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 955EAE7717F
-	for <qemu-riscv@archiver.kernel.org>; Mon, 16 Dec 2024 05:36:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 33019E7717F
+	for <qemu-riscv@archiver.kernel.org>; Mon, 16 Dec 2024 08:34:36 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tN3m2-0007FV-NA; Mon, 16 Dec 2024 00:36:06 -0500
+	id 1tN6YH-0000aA-1X; Mon, 16 Dec 2024 03:34:05 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1tN3m1-0007F9-G5; Mon, 16 Dec 2024 00:36:05 -0500
-Received: from mail-vs1-xe2c.google.com ([2607:f8b0:4864:20::e2c])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1tN3lz-0000Q5-Ui; Mon, 16 Dec 2024 00:36:05 -0500
-Received: by mail-vs1-xe2c.google.com with SMTP id
- ada2fe7eead31-4b10dd44c8bso647574137.3; 
- Sun, 15 Dec 2024 21:36:03 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1734327362; x=1734932162; darn=nongnu.org;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Z1tbmBiLrQEo0aRwmdZeClIAM8Yoa18M7B3FLTJwOhU=;
- b=SG2McaK/qbbjn2Pohk9yuDqQ1uPanZ17RAiClJNATrxxJGeasqNkTASEtMc7DgOUvS
- aQQI41zX7XmOOdgylKRY7Wpxm0MZXf3icDZOWrE+2zgGIeSK4cw+mu1j81mT0tK0J1J9
- k1U/4tr1dut+rOfeo0fyrzUOtSJ1T1G6MMZbVMQIUzCo5y/RfLeM41RANgpMrR1Y5gEL
- VkBdv7RZf9dPvIgRJGGJ/QUt/pMDl5EFpyT029GlQfBY9AsDVGNwlt1L/Gc809d3bkRY
- 2c0EfgZoistlbbcnWZz72Hp2uybegQhgQKCJTtMfgR+VQ8M09wM9UuuHx8+aKlrLl8Bc
- e4aw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1734327362; x=1734932162;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=Z1tbmBiLrQEo0aRwmdZeClIAM8Yoa18M7B3FLTJwOhU=;
- b=UJFtNI+jnwzqQGQpiOPmdLgOsbhAFrV48h/8G03SDCTDKEtGk+qKBqluZMp5VR0Xk6
- PKdrnTF7JhqwzuZZMF2dW3fRqlrQ21uW+/cB/mVaTdvS1G/BW7z8+t4ONMohSMfoCqUE
- EEBY3/fPL4Fs5pDymaouQ7sX0pT+c490sOhygOYtPcUBzeCJbm/WHHXMhbfDEqXHlcO7
- 0wvP69mcrT0d5hBDUbCxU43xQtGKVNeWKLCkfoWmHjy7G/DITOIWejG9KAGcWVJZGE4q
- VB0pCplJJxFLnSlDEO5N1i9+G6wr8LF5ov6MZRo1w/d9RwczNq6mSCyZmqKQ98UEtZ+T
- OPJA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCULkMWIsrwZIyg5dCV34bE5CfYGFmzoPz7H61mQj0E2g1MUjpJRcmnk3q4UOSh2gk8JRFmHW+vgPWfn@nongnu.org
-X-Gm-Message-State: AOJu0Yxx03+X8Xdas+IwpOI5YiDoEqUFRX2nDaVxJzb0bzZRYyeWfF3J
- OEG4xkbyw+kkEGJCwIQjdfjaFsS/HKurZpQfDxQY8GVe+DwBJ0FPe5c/ysf6EVj42BXEeCU8Jtu
- rdYMmgubggbvmciJBccwRIfBiZRo=
-X-Gm-Gg: ASbGncs/eZmv5rMJ8p9WK+SeTqAsFs7CJHqx4a0Eg2sxVO+4ZoB2svpk9551qUeN0vr
- egHd9QiEETYzCuXFJ6z6//DOVQ5Vg/h+NKpmuKMtmLmP/4xz4+XJcA851k2XE5KVp67xS
-X-Google-Smtp-Source: AGHT+IFBiZ3VI2WSmDKrtXeLM4ZBJiSsq7B70UJldfrBYj3smozmWt3t/TVe7qyaOd2ukGNyx0lZRQQ9E6+IOi/kczc=
-X-Received: by 2002:a05:6102:48:b0:4b2:73f7:5ad9 with SMTP id
- ada2fe7eead31-4b273f75c74mr3961676137.2.1734327362197; Sun, 15 Dec 2024
- 21:36:02 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <mario.fleischmann@lauterbach.com>)
+ id 1tN6YF-0000Zs-9g; Mon, 16 Dec 2024 03:34:03 -0500
+Received: from bm.lauterbach.com ([62.154.241.218])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <mario.fleischmann@lauterbach.com>)
+ id 1tN6YD-0003ft-8A; Mon, 16 Dec 2024 03:34:03 -0500
+Received: from [10.2.13.100] (unknown [10.2.13.100])
+ (Authenticated sender: mario.fleischmann@lauterbach.com)
+ by bm.lauterbach.com (Postfix) with ESMTPSA id B6CCA4F7AC1D;
+ Mon, 16 Dec 2024 09:33:41 +0100 (CET)
+Message-ID: <0f098c77-3f23-4f9a-82ba-8cffdfdf38fa@lauterbach.com>
+Date: Mon, 16 Dec 2024 09:33:41 +0100
 MIME-Version: 1.0
-References: <20241128141230.284320-1-cleger@rivosinc.com>
- <20241128141230.284320-2-cleger@rivosinc.com>
-In-Reply-To: <20241128141230.284320-2-cleger@rivosinc.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 16 Dec 2024 15:35:36 +1000
-Message-ID: <CAKmqyKPNY=R8MFd1Wai5pznMjDD=nQCVyBK90+6aaWYM5AqW_Q@mail.gmail.com>
-Subject: Re: [PATCH v6 1/9] target/riscv: fix henvcfg potentially containing
- stale bits
-To: =?UTF-8?B?Q2zDqW1lbnQgTMOpZ2Vy?= <cleger@rivosinc.com>
-Cc: qemu-riscv@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>, 
- Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bin.meng@windriver.com>,
- Weiwei Li <liwei1518@gmail.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>, 
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, Ved Shanbhogue <ved@rivosinc.com>, 
- Atish Patra <atishp@rivosinc.com>, qemu-devel@nongnu.org, 
- Frank Chang <frank.chang@sifive.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::e2c;
- envelope-from=alistair23@gmail.com; helo=mail-vs1-xe2c.google.com
-X-Spam_score_int: -17
-X-Spam_score: -1.8
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v4] riscv/gdbstub: add V bit to priv reg
+To: Yanfeng Liu <yfliu2008@qq.com>, qemu-riscv@nongnu.org
+Cc: qemu-devel@nongnu.org, alistair.francis@wdc.com, alex.bennee@linaro.org
+References: <tencent_1993B55C24DE7979BF34B200F78287002907@qq.com>
+Content-Language: en-US
+From: Mario Fleischmann <mario.fleischmann@lauterbach.com>
+In-Reply-To: <tencent_1993B55C24DE7979BF34B200F78287002907@qq.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Bm-Milter-Handled: 166a2dfb-2e12-4590-8fa5-72e30323519f
+X-Bm-Transport-Timestamp: 1734338021754
+Received-SPF: pass client-ip=62.154.241.218;
+ envelope-from=mario.fleischmann@lauterbach.com; helo=bm.lauterbach.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
 X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9,
+ RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001, RCVD_IN_VALIDITY_SAFE_BLOCKED=0.001,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -100,96 +60,78 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Fri, Nov 29, 2024 at 12:15=E2=80=AFAM Cl=C3=A9ment L=C3=A9ger <cleger@ri=
-vosinc.com> wrote:
->
-> With the current implementation, if we had the following scenario:
-> - Set bit x in menvcfg
-> - Set bit x in henvcfg
-> - Clear bit x in menvcfg
-> then, the internal variable env->henvcfg would still contain bit x due
-> to both a wrong menvcfg mask used in write_henvcfg() as well as a
-> missing update of henvcfg upon menvcfg update.
-> This can lead to some wrong interpretation of the context. In order to
-> update henvcfg upon menvcfg writing, call write_henvcfg() after writing
-> menvcfg. Clearing henvcfg upon writing the new value is also needed in
-> write_henvcfg() as well as clearing henvcfg upper part when writing it
-> with write_henvcfgh().
->
-> Signed-off-by: Cl=C3=A9ment L=C3=A9ger <cleger@rivosinc.com>
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
-Alistair
-
+On 15.12.2024 22:37, Yanfeng Liu wrote:
+> This adds virtualization mode (V bit) as bit(2) of register `priv`
+> per RiscV debug spec v1.0.0-rc4. Checked with gdb-multiarch v12.1.
+> 
+> Note that GDB may display `INVALID` tag for `priv` reg when V bit
+> is set, this doesn't affect actual access to the bit though.
+> 
+> Signed-off-by: Yanfeng Liu <yfliu2008@qq.com>
 > ---
->  target/riscv/csr.c | 10 ++++++++--
->  1 file changed, 8 insertions(+), 2 deletions(-)
->
-> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-> index 5d8d0d7514..98c683df60 100644
-> --- a/target/riscv/csr.c
-> +++ b/target/riscv/csr.c
-> @@ -2383,6 +2383,8 @@ static RISCVException read_menvcfg(CPURISCVState *e=
-nv, int csrno,
->      return RISCV_EXCP_NONE;
->  }
->
-> +static RISCVException write_henvcfg(CPURISCVState *env, int csrno,
-> +                                    target_ulong val);
->  static RISCVException write_menvcfg(CPURISCVState *env, int csrno,
->                                      target_ulong val)
->  {
-> @@ -2403,6 +2405,7 @@ static RISCVException write_menvcfg(CPURISCVState *=
-env, int csrno,
->          }
->      }
->      env->menvcfg =3D (env->menvcfg & ~mask) | (val & mask);
-> +    write_henvcfg(env, CSR_HENVCFG, env->henvcfg);
->
->      return RISCV_EXCP_NONE;
->  }
-> @@ -2414,6 +2417,8 @@ static RISCVException read_menvcfgh(CPURISCVState *=
-env, int csrno,
->      return RISCV_EXCP_NONE;
->  }
->
-> +static RISCVException write_henvcfgh(CPURISCVState *env, int csrno,
-> +                                    target_ulong val);
->  static RISCVException write_menvcfgh(CPURISCVState *env, int csrno,
->                                       target_ulong val)
->  {
-> @@ -2424,6 +2429,7 @@ static RISCVException write_menvcfgh(CPURISCVState =
-*env, int csrno,
->      uint64_t valh =3D (uint64_t)val << 32;
->
->      env->menvcfg =3D (env->menvcfg & ~mask) | (valh & mask);
-> +    write_henvcfgh(env, CSR_HENVCFGH, env->henvcfg >> 32);
->
->      return RISCV_EXCP_NONE;
->  }
-> @@ -2513,7 +2519,7 @@ static RISCVException write_henvcfg(CPURISCVState *=
-env, int csrno,
->          }
->      }
->
-> -    env->henvcfg =3D (env->henvcfg & ~mask) | (val & mask);
-> +    env->henvcfg =3D val & mask;
->
->      return RISCV_EXCP_NONE;
->  }
-> @@ -2546,7 +2552,7 @@ static RISCVException write_henvcfgh(CPURISCVState =
-*env, int csrno,
->          return ret;
->      }
->
-> -    env->henvcfg =3D (env->henvcfg & ~mask) | (valh & mask);
-> +    env->henvcfg =3D (env->henvcfg & 0xFFFFFFFF) | (valh & mask);
->      return RISCV_EXCP_NONE;
->  }
->
-> --
-> 2.45.2
->
->
+>   target/riscv/gdbstub.c | 23 +++++++++++++++++++----
+>   1 file changed, 19 insertions(+), 4 deletions(-)
+> 
+> diff --git a/target/riscv/gdbstub.c b/target/riscv/gdbstub.c
+> index c07df972f1..18e88f416a 100644
+> --- a/target/riscv/gdbstub.c
+> +++ b/target/riscv/gdbstub.c
+> @@ -213,7 +213,10 @@ static int riscv_gdb_get_virtual(CPUState *cs, GByteArray *buf, int n)
+>           RISCVCPU *cpu = RISCV_CPU(cs);
+>           CPURISCVState *env = &cpu->env;
+>   
+> -        return gdb_get_regl(buf, env->priv);
+> +        /* Per RiscV debug spec v1.0.0 rc4 */
+> +        target_ulong vbit = (env->virt_enabled) ? BIT(2) : 0;
+> +
+> +        return gdb_get_regl(buf, env->priv | vbit);
+>   #endif
+>       }
+>       return 0;
+> @@ -226,10 +229,22 @@ static int riscv_gdb_set_virtual(CPUState *cs, uint8_t *mem_buf, int n)
+>           RISCVCPU *cpu = RISCV_CPU(cs);
+>           CPURISCVState *env = &cpu->env;
+>   
+> -        env->priv = ldtul_p(mem_buf) & 0x3;
+> -        if (env->priv == PRV_RESERVED) {
+> -            env->priv = PRV_S;
+> +        target_ulong new_priv = ldtul_p(mem_buf) & 0x3;
+> +        bool new_virt = 0;
+> +
+> +        if (new_priv == PRV_RESERVED) {
+> +            new_priv = PRV_S;
+> +        }
+> +
+> +        if (new_priv != PRV_M) {
+> +            new_virt = (ldtul_p(mem_buf) & BIT(2)) >> 2;
+>           }
+> +
+> +        if (riscv_has_ext(env, RVH) && new_virt != env->virt_enabled) {
+> +            riscv_cpu_swap_hypervisor_regs(env);
+> +        }
+> +
+> +        riscv_cpu_set_mode(env, new_priv, new_virt);
+>   #endif
+>           return sizeof(target_ulong);
+>       }
+
+Thanks for the submission, it works as expected:
+
+(gdb) info register $priv
+priv           0x4      prv:4 [INVALID]
+(gdb) info register $sstatus
+sstatus        0x200004022      8589951010
+(gdb) set $priv = 0x0
+(gdb) info register $priv
+priv           0x0      prv:0 [User/Application]
+(gdb) info register $sstatus
+sstatus        0x8000000200006022       -9223372028264816606
+(gdb) set $priv = 0x4
+(gdb) info register $priv
+priv           0x4      prv:4 [INVALID]
+(gdb) info register $sstatus
+sstatus        0x200004022      8589951010
+
 
