@@ -4,64 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E1A56E7717F
-	for <qemu-riscv@archiver.kernel.org>; Mon, 16 Dec 2024 12:20:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6DA0CE77183
+	for <qemu-riscv@archiver.kernel.org>; Mon, 16 Dec 2024 12:20:35 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tNA4R-0002vJ-3K; Mon, 16 Dec 2024 07:19:31 -0500
+	id 1tNA4a-00033V-1v; Mon, 16 Dec 2024 07:19:40 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <baturo.alexey@gmail.com>)
- id 1tNA4I-0002rF-DN; Mon, 16 Dec 2024 07:19:25 -0500
-Received: from mail-lj1-x232.google.com ([2a00:1450:4864:20::232])
+ id 1tNA4N-0002sp-9e; Mon, 16 Dec 2024 07:19:27 -0500
+Received: from mail-lj1-x22d.google.com ([2a00:1450:4864:20::22d])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <baturo.alexey@gmail.com>)
- id 1tNA4E-00008R-U6; Mon, 16 Dec 2024 07:19:21 -0500
-Received: by mail-lj1-x232.google.com with SMTP id
- 38308e7fff4ca-3022598e213so39162891fa.0; 
- Mon, 16 Dec 2024 04:19:18 -0800 (PST)
+ id 1tNA4L-00009e-EW; Mon, 16 Dec 2024 07:19:26 -0500
+Received: by mail-lj1-x22d.google.com with SMTP id
+ 38308e7fff4ca-30036310158so35552561fa.0; 
+ Mon, 16 Dec 2024 04:19:24 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1734351556; x=1734956356; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1734351563; x=1734956363; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=QlGe+f3UGYSb/kEDepIoDVwMot6RVWe/m1fwsn8f8OU=;
- b=YoNflpMWGSWmnhh+27JiAK78kyP8+iV/y4BWf0GBGU9Gk+mXBJcDcSBvYTNgkUDHsJ
- QQVLaxzUXAjq8sV//Ol41rlfhlwk5FA/Hy2T+mz4GeG6xEFegvN3iWlZP1HhEH47l2S5
- zRIW78U3HdCktC3wyPaq479338MDlyJ9YlbYoxJtr3CuR+TO5o1Z6gw0aBIzNTm1VuUO
- mVyharmXfMag6h2oA8NbJ5QVx/lW1vjgSSWJoHACr+GICLCmiRd6PaFNbZEaYJ4h/QwQ
- CwPU+UlFEVz4q8UQkNhCD0SsdaviU0Mu0Dg2O4cNZx+CIdBKSekvbREY0QfSIV24uH9y
- v2fw==
+ bh=XHxxOwlnUxHuqwtnNL1F0EmUduhAuxOGlQ9xmeZ+TBc=;
+ b=a3pZ3uziOIG/Z+obEG6Fz+38JcXqGB5csVi7xhVZG7x33TBplFPmAGUwmqrWUzeSPY
+ XNSCiRDXwEvfbqVPLFDGJY8EFsqyEhJWeORvf+uZyS2zJr0ct4sBHHyw6P6X1gUadgKQ
+ f98fLyUbU8ZgridH2DQCDZpmQ/4AFddNvY29iBuUOkVOSehrxzTh+PjzgeW2DBsr36DL
+ uHFt1CnS5khgOw7CPGxnQRXqJxkeInsWFA1Cdi9YqXhK2TUzdMJJh7Be606BfbBw09NW
+ PbpbEBMzVNh3EwEViKB2mvFKp1VddLfgLX0CwdLXWpzLKbjeX3x0uP76qBZoCmjRJm9p
+ l+rw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1734351556; x=1734956356;
+ d=1e100.net; s=20230601; t=1734351563; x=1734956363;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=QlGe+f3UGYSb/kEDepIoDVwMot6RVWe/m1fwsn8f8OU=;
- b=stJ+hMc//3jVmJth1bef/+fZA13WLq4yx9IvCYPoSQxM8btrbHRNpzMAJRbS2CHMiQ
- jLQUneNn4T9CJ0YoGvNAiC0K5nPYISic0y3/biKpJx83qNr2TX1vpdHUsi6g/iMVBWEF
- 2yVpXgdmqDfOiXpyItrX5dlMg5LQs42zjv6y/Bz1iednKVsb/v8iz2VC4tc5dhYY4wz6
- 8CNS471gvNPCDm24chYUCOAzZuZtcuy1uWQSB8QfB90U51e+EjSH9pkIhWKPgnMKwetB
- m+o/GxEmHZhNJqVXCj6Dumu6L/uZJ0AvY9CvvXa9pDRkgRy4vcOgkI4ee1Rn2gS7PffT
- n/LA==
+ bh=XHxxOwlnUxHuqwtnNL1F0EmUduhAuxOGlQ9xmeZ+TBc=;
+ b=V1HahbSSlVUNBS/N/cvgd6MQ72AxEl0iWWAiOkHqZAYh6txWp0aTLJS6Hk9rQm/2BS
+ W4BjWudDnXy+MR6iL4i509a0WYhmL+CowPMUgepyxTjZR+Biz92kVw3Q/bOhlKP6WChd
+ mLAwQdzUiADX3D8P0fVcaH+0XhADefqTTz+8q8Bh/h2MaSpDRFMRiz31Y8/GlcnymdC+
+ h5kXi/XoTh+scDc8hpEpL6pCfWtfw3flCXugRJg9kD4q4sLa5v1rpEx76tLnij1bZQNM
+ TpgMGgvqSvG2/6stTOVp0Xfbv2iGkuYECjAEtHPnhM4b0Y6jVFpUtceP0Zl6ceS8aE5H
+ 2exg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUfLCEjsW9/8yTRvkhvV5v67Im0kPp2q6EuCHQkM3ZgV1v6seDu3GKwXL4CwpHrpt+dn8vo04N61QCa@nongnu.org,
- AJvYcCV5atMSa/SUiXi8k7Q8drRmqb9i3clGeTxCWdFA6HMFGt26fOYYFgUzUrphd0VAlFSLPEfAO4EJqG7cdQ==@nongnu.org
-X-Gm-Message-State: AOJu0YzFlbPlHVWBNA0kWGWcmnUukxTFs4sQfI3oMpqv/gSiSJq3js6z
- axL/j1mfUWll8dd/OlKsWq/nN83RFnM94q05xYs0xW3l0eiTSQcm
-X-Gm-Gg: ASbGncu/eUQ2dnivXiFiD6L/ZBBn1ScJe5Wxv83rMFBUnpQ1zGfgUXX/qAJvkOwLbc3
- sSFEdBCTrezzBMETDfk3j1Dw97xKp/8S9dFsrn2em8e0kGUMbLIEVmVyRlht9IBcnuNl8LSgj4q
- CuvwhU+WgNzTAjENBLXetVphY0e8fyw66fMyt57No6G7eUlnZA7o04pkVadiefXdyO6Av6vZKWd
- lJfblBQ/k5Yi1HWGPrKc9JXoywlsDyFl7jogBh5tVCEuSIOsTGocLknVsnofg==
-X-Google-Smtp-Source: AGHT+IH1JpCS5bwLc5yCt1nNUXwWf4kgSlzGq4boax/QNg40W6eY0qH6b1SHDQ0AdaQILqrAe7PJTg==
-X-Received: by 2002:a05:6512:1105:b0:53d:ed4e:e5af with SMTP id
- 2adb3069b0e04-5409056405dmr4017525e87.33.1734351556448; 
- Mon, 16 Dec 2024 04:19:16 -0800 (PST)
+ AJvYcCWD3rjwcgTu7ZiKm1z/e6kLNXVEWLh4g7YPcI0TsLocWHcEme4sdRh25VyPRQ3N+BIH3lvavMu0x9PygA==@nongnu.org,
+ AJvYcCWvU8G4l0JYELwBxJ3b1uGV4TaWmJIAfsVvjBhbFxlO9lECsWkyGIuqDbh3te1Vskef2Wf108OqrBiX@nongnu.org
+X-Gm-Message-State: AOJu0YwGulKHk0XL5aZffAqu4SwclDJ8oHtMwaWoZ6EjwjulWP2yeekm
+ nUhFOgkM0G0ubViqxPGxCyYutDKeL53E0yAaNUdKxEbOVihNKWEi
+X-Gm-Gg: ASbGncuaM///ic1MyztrCWfxnhNvZTM6Nw4pZbCyVIFzzVokBdtBLuWaRG6fCI3C0X8
+ sw//WKc0gdDumQiz73YzyREksDxh7sYuMfTTm83TSSeyupIfqMi11yYAEzP1NAyI0NUf7hCeDXa
+ +85ITnPNMc5iLgqN7lf+1MjpziioRToEJbuaTA8Vy5alp6MQGDpMbAnZMo7fDXTzirGfrAR6AmF
+ 53+hfOVy/lpPg7IrxQg/NLg53f1goxUtNPNyNTdQvoc7eljE76S4tov8tn/KA==
+X-Google-Smtp-Source: AGHT+IGNa4Bch8sSN2kS6cIAu2ZiIHgwR8B6fcIXQe644DgO1yTSYA7zVhsX+6XjOQwihT/+7hCumQ==
+X-Received: by 2002:a05:6512:39cc:b0:53e:df2b:df25 with SMTP id
+ 2adb3069b0e04-5409054e5c9mr4559392e87.16.1734351563155; 
+ Mon, 16 Dec 2024 04:19:23 -0800 (PST)
 Received: from vmdev.asgard ([81.200.11.243]) by smtp.gmail.com with ESMTPSA id
- 2adb3069b0e04-54120c13d0esm827143e87.192.2024.12.16.04.19.14
+ 2adb3069b0e04-54120c13d0esm827143e87.192.2024.12.16.04.19.21
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 16 Dec 2024 04:19:15 -0800 (PST)
+ Mon, 16 Dec 2024 04:19:22 -0800 (PST)
 From: baturo.alexey@gmail.com
 To: 
 Cc: baturo.alexey@gmail.com, richard.henderson@linaro.org,
@@ -69,18 +69,18 @@ Cc: baturo.alexey@gmail.com, richard.henderson@linaro.org,
  liwei1518@gmail.com, alistair23@gmail.com, frank.chang@sifive.com,
  palmer@dabbelt.com, Alistair.Francis@wdc.com, sagark@eecs.berkeley.edu,
  kbastian@mail.uni-paderborn.de, qemu-devel@nongnu.org,
- qemu-riscv@nongnu.org
-Subject: [PATCH v13 3/7] target/riscv: Add helper functions to calculate
- current number of masked bits for pointer masking
-Date: Mon, 16 Dec 2024 15:19:03 +0300
-Message-Id: <20241216121907.660504-4-baturo.alexey@gmail.com>
+ qemu-riscv@nongnu.org, Alistair Francis <alistair.francis@wdc.com>
+Subject: [PATCH v13 7/7] target/riscv: Enable updates for pointer masking
+ variables and thus enable pointer masking extension
+Date: Mon, 16 Dec 2024 15:19:07 +0300
+Message-Id: <20241216121907.660504-8-baturo.alexey@gmail.com>
 X-Mailer: git-send-email 2.39.5
 In-Reply-To: <20241216121907.660504-1-baturo.alexey@gmail.com>
 References: <20241216121907.660504-1-baturo.alexey@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::232;
- envelope-from=baturo.alexey@gmail.com; helo=mail-lj1-x232.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::22d;
+ envelope-from=baturo.alexey@gmail.com; helo=mail-lj1-x22d.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -106,113 +106,44 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 From: Alexey Baturo <baturo.alexey@gmail.com>
 
 Signed-off-by: Alexey Baturo <baturo.alexey@gmail.com>
----
- target/riscv/cpu.h        |  5 +++
- target/riscv/cpu_helper.c | 73 +++++++++++++++++++++++++++++++++++++++
- 2 files changed, 78 insertions(+)
 
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index 417ff45544..e7f346ff6b 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -768,8 +768,13 @@ void cpu_get_tb_cpu_state(CPURISCVState *env, vaddr *pc,
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+---
+ target/riscv/cpu.c | 6 ++++++
+ 1 file changed, 6 insertions(+)
+
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index 8dea26e214..05184b9a6e 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -186,11 +186,14 @@ const RISCVIsaExtData isa_edata_arr[] = {
+     ISA_EXT_DATA_ENTRY(smaia, PRIV_VERSION_1_12_0, ext_smaia),
+     ISA_EXT_DATA_ENTRY(smcntrpmf, PRIV_VERSION_1_12_0, ext_smcntrpmf),
+     ISA_EXT_DATA_ENTRY(smepmp, PRIV_VERSION_1_12_0, ext_smepmp),
++    ISA_EXT_DATA_ENTRY(smmpm, PRIV_VERSION_1_13_0, ext_smmpm),
++    ISA_EXT_DATA_ENTRY(smnpm, PRIV_VERSION_1_13_0, ext_smnpm),
+     ISA_EXT_DATA_ENTRY(smstateen, PRIV_VERSION_1_12_0, ext_smstateen),
+     ISA_EXT_DATA_ENTRY(ssaia, PRIV_VERSION_1_12_0, ext_ssaia),
+     ISA_EXT_DATA_ENTRY(ssccptr, PRIV_VERSION_1_11_0, has_priv_1_11),
+     ISA_EXT_DATA_ENTRY(sscofpmf, PRIV_VERSION_1_12_0, ext_sscofpmf),
+     ISA_EXT_DATA_ENTRY(sscounterenw, PRIV_VERSION_1_12_0, has_priv_1_12),
++    ISA_EXT_DATA_ENTRY(ssnpm, PRIV_VERSION_1_13_0, ext_ssnpm),
+     ISA_EXT_DATA_ENTRY(sstc, PRIV_VERSION_1_12_0, ext_sstc),
+     ISA_EXT_DATA_ENTRY(sstvala, PRIV_VERSION_1_12_0, has_priv_1_12),
+     ISA_EXT_DATA_ENTRY(sstvecd, PRIV_VERSION_1_12_0, has_priv_1_12),
+@@ -1492,9 +1495,12 @@ const RISCVCPUMultiExtConfig riscv_cpu_extensions[] = {
+     MULTI_EXT_CFG_BOOL("zvfh", ext_zvfh, false),
+     MULTI_EXT_CFG_BOOL("zvfhmin", ext_zvfhmin, false),
+     MULTI_EXT_CFG_BOOL("sstc", ext_sstc, true),
++    MULTI_EXT_CFG_BOOL("ssnpm", ext_ssnpm, false),
  
- bool riscv_cpu_is_32bit(RISCVCPU *cpu);
- 
-+bool riscv_cpu_virt_mem_enabled(CPURISCVState *env);
-+RISCVPmPmm riscv_pm_get_pmm(CPURISCVState *env);
-+uint32_t riscv_pm_get_pmlen(RISCVPmPmm pmm);
-+
- RISCVException riscv_csrr(CPURISCVState *env, int csrno,
-                           target_ulong *ret_value);
-+
- RISCVException riscv_csrrw(CPURISCVState *env, int csrno,
-                            target_ulong *ret_value,
-                            target_ulong new_value, target_ulong write_mask);
-diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-index dba04851d5..ed0d275e84 100644
---- a/target/riscv/cpu_helper.c
-+++ b/target/riscv/cpu_helper.c
-@@ -214,6 +214,79 @@ void cpu_get_tb_cpu_state(CPURISCVState *env, vaddr *pc,
-     *pflags = flags;
- }
- 
-+RISCVPmPmm riscv_pm_get_pmm(CPURISCVState *env)
-+{
-+    RISCVPmPmm pmm = PMM_FIELD_DISABLED;
-+#ifndef CONFIG_USER_ONLY
-+    if (get_field(env->mstatus, MSTATUS_MPRV) &&
-+        get_field(env->mstatus, MSTATUS_MXR)) {
-+        return pmm;
-+    }
-+    int priv_mode = cpu_address_mode(env);
-+    /* Get current PMM field */
-+    switch (priv_mode) {
-+    case PRV_M:
-+        if (riscv_cpu_cfg(env)->ext_smmpm) {
-+            pmm = get_field(env->mseccfg, MSECCFG_PMM);
-+        }
-+        break;
-+    case PRV_S:
-+        if (riscv_cpu_cfg(env)->ext_smnpm) {
-+            if (get_field(env->mstatus, MSTATUS_MPV)) {
-+                pmm = get_field(env->henvcfg, HENVCFG_PMM);
-+            } else {
-+                pmm = get_field(env->menvcfg, MENVCFG_PMM);
-+            }
-+        }
-+        break;
-+    case PRV_U:
-+        if (riscv_has_ext(env, RVS)) {
-+            if (riscv_cpu_cfg(env)->ext_ssnpm) {
-+                pmm = get_field(env->senvcfg, SENVCFG_PMM);
-+            }
-+        } else {
-+            if (riscv_cpu_cfg(env)->ext_smnpm) {
-+                pmm = get_field(env->menvcfg, MENVCFG_PMM);
-+            }
-+        }
-+        break;
-+    default:
-+        g_assert_not_reached();
-+    }
-+#endif
-+    return pmm;
-+}
-+
-+bool riscv_cpu_virt_mem_enabled(CPURISCVState *env)
-+{
-+    bool virt_mem_en = false;
-+#ifndef CONFIG_USER_ONLY
-+    int satp_mode = 0;
-+    int priv_mode = cpu_address_mode(env);
-+    if (riscv_cpu_mxl(env) == MXL_RV32) {
-+        satp_mode = get_field(env->satp, SATP32_MODE);
-+    } else {
-+        satp_mode = get_field(env->satp, SATP64_MODE);
-+    }
-+    virt_mem_en = ((satp_mode != VM_1_10_MBARE) && (priv_mode != PRV_M));
-+#endif
-+    return virt_mem_en;
-+}
-+
-+uint32_t riscv_pm_get_pmlen(RISCVPmPmm pmm)
-+{
-+    switch (pmm) {
-+    case PMM_FIELD_DISABLED:
-+        return 0;
-+    case PMM_FIELD_PMLEN7:
-+        return 7;
-+    case PMM_FIELD_PMLEN16:
-+        return 16;
-+    default:
-+        g_assert_not_reached();
-+    }
-+}
-+
- #ifndef CONFIG_USER_ONLY
- 
- /*
+     MULTI_EXT_CFG_BOOL("smaia", ext_smaia, false),
+     MULTI_EXT_CFG_BOOL("smepmp", ext_smepmp, false),
++    MULTI_EXT_CFG_BOOL("smmpm", ext_smmpm, false),
++    MULTI_EXT_CFG_BOOL("smnpm", ext_smnpm, false),
+     MULTI_EXT_CFG_BOOL("smstateen", ext_smstateen, false),
+     MULTI_EXT_CFG_BOOL("ssaia", ext_ssaia, false),
+     MULTI_EXT_CFG_BOOL("svade", ext_svade, false),
 -- 
 2.39.5
 
