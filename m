@@ -4,67 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6063AE7716A
-	for <qemu-riscv@archiver.kernel.org>; Mon, 16 Dec 2024 00:51:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8DCB2E7717F
+	for <qemu-riscv@archiver.kernel.org>; Mon, 16 Dec 2024 00:51:19 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tMzJG-0001Kd-Tu; Sun, 15 Dec 2024 19:50:06 -0500
+	id 1tMzJM-0001S9-HP; Sun, 15 Dec 2024 19:50:12 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <jason.chien@sifive.com>)
- id 1tMzJ8-0001HB-H4
- for qemu-riscv@nongnu.org; Sun, 15 Dec 2024 19:49:58 -0500
+ id 1tMzJL-0001Pd-19
+ for qemu-riscv@nongnu.org; Sun, 15 Dec 2024 19:50:11 -0500
 Received: from mail-pf1-x436.google.com ([2607:f8b0:4864:20::436])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <jason.chien@sifive.com>)
- id 1tMzJ6-00074c-5c
- for qemu-riscv@nongnu.org; Sun, 15 Dec 2024 19:49:58 -0500
+ id 1tMzJJ-0007JM-7d
+ for qemu-riscv@nongnu.org; Sun, 15 Dec 2024 19:50:10 -0500
 Received: by mail-pf1-x436.google.com with SMTP id
- d2e1a72fcca58-725ecc42d43so2988023b3a.3
- for <qemu-riscv@nongnu.org>; Sun, 15 Dec 2024 16:49:54 -0800 (PST)
+ d2e1a72fcca58-728ea1e0bdbso2564722b3a.0
+ for <qemu-riscv@nongnu.org>; Sun, 15 Dec 2024 16:50:08 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1734310193; x=1734914993; darn=nongnu.org;
+ d=sifive.com; s=google; t=1734310208; x=1734915008; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=gMz5z1qtJxQUJErlLKkRHU3+t7ygQhiQ+P8RsAR7bug=;
- b=IxL8Ja5XX3u+LXmSva3zRNf2X3uv19ueFIxz/Ns72fh558qe5zcWpK86Xu8fu88vox
- OIBorXodUf/vwsAhpFHstBpXHdiMK0qs9E31CoaI7jzpr93d6/GhWKoVbjYp2P/pxIJT
- TrpSJaQz1dVUaLZJneUUPnqZ9GK+A8OFCvkdgNRF/J70p+VgdtUovLLL3PY35LkmQlc0
- ohRZRi9ybDCo0t7NPpSPQN4uhzVh5wZY4JrJEvkQkWi0ftMa03eH3PQ0H82VMSVlRC+o
- 6P53oTLmqdSJKdGtnB0k3tRtqBbIc2wAFur/iV/wkwrVbQhKG3JMoC9MMaxX+nvIR8dc
- KkPg==
+ bh=FWmGdfs7I/39bU6vTy0i46WBke+O98sxD/aRcDZSQXA=;
+ b=BEtw417p0hbGy2kmGzuSeU97E0qDM6CoKLm5ZZUe6/GsGhtHD6yWVRoIIgfW+JqQkW
+ qEdUIcATUmN3gHqbXIA13AXG4Ln3zwExn4lxKq/LgUwMsdNVlCrJouGvcU5nQD/iOXQC
+ EBtkdzwEryWQfnBMaLTQFPi8TTXlwhT66nv2YerUd3zXcD71uhbCn/jzK2DRbffqP+Hn
+ x8taTB3HysBOtjZleMrzoauCbmj/t0hLJkNXlBDmJlYcqSntGp5iKd8QKeqmUyjZbiJQ
+ fHxRcybq3TMbcDB9w3E9VLNUBxDbImvzYwF0I/4+rM44OOYap5w/AAH2r2NCcFYFrajN
+ UFlw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1734310193; x=1734914993;
+ d=1e100.net; s=20230601; t=1734310208; x=1734915008;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=gMz5z1qtJxQUJErlLKkRHU3+t7ygQhiQ+P8RsAR7bug=;
- b=LCQwrDe+VsmAmkhm0svtzlsm8fQGSER6+l7MCI0IGypUxZoCVpQ/qkQohffTBRch2h
- EQFRK3bLg0WltvoaAZY8LowOUd66oUf4WLzfdgX6ignvM//LRPWQC+MYxIpwVgzlV7S1
- kTqsagKjtRQ6HAqcDQZzLJ/sgBvMvBbOQCezxCmLHmn6srG2k8puYlH/rOOTDFiL4gUP
- pUPQVBaPNg/a26atpzNkuDy8j8ZcribImlhBjHUXGYezs8YHLJptc7k3oBbU5KpfdnR0
- AYk9BfGZK6j0vPJ4f+0WE1PsH7aiOndStbgjNn9HV6wh1VO4SlRplFuawsZSLtiRMXMx
- Z52w==
+ bh=FWmGdfs7I/39bU6vTy0i46WBke+O98sxD/aRcDZSQXA=;
+ b=M82JYQDXfCYaOyMNN2fofE7oMsIoPVVRKWG+xYZIeUqB2jU4n+oEy3Fmgngk0N89Mb
+ /qvxqtF7Hyl97BD651q20N+KJD7xqlDDUUCkAvWNRJBKJAaYJszBhvYgLWZ4IEQntRca
+ tLiLBuFuyN2QMAugnfImMgaM/yqaKRwMpO+fD9U7Aezc7iPEULbHB9VzKQmwHSz1OFlT
+ 11NPd0ToemZxIRWF5rhZt712eGM0FqHLd3zfxxqC07XbBqYooY+2Fz/1O2CxdwqjGifn
+ I9I/3pJZe6u2+VxQiwA57TZ5kjh/XN62kLrfsI+fE2Js3/WaVEhjS6R39Q5PaY+4v7JT
+ oBTw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVfQFW5fKbI46AkBsUpUNp+C2mPsAi5MQCyl4XA09nWDihW6H9RM3P6v9TZ92Zmhu7zU88Zi5vqMDRQ@nongnu.org
-X-Gm-Message-State: AOJu0YwTWaUL1V09Jnp9kK2IIeRXSteyGakTAJR55Jt6DdFKvct4zTuP
- Lywyw+Jqejk5O9V9pYwfFKVKpvxQ+Lvl/rL1BCVDYZV2W8GczrwV5VwNVd1Ypgs=
-X-Gm-Gg: ASbGncsiBthLe0D6j7NWD3yYVaBPUI8Hp2YNohR0DDmTH1FzooB0qXn8JzRyPnZJhgl
- MNlm+WgD4b2Qwrk1q+NW/hJh2thksACR2ccbe/Hg8siqiMI//ukSY0irJMEgWsBSImixCiJQSjH
- 54bf9Cw0+1WnXLDnu6tcw9WLVtv3LB7a7A+mAH55tYJvj/NSf7ikj8aHmUn39kvZQ7KILAlfVNS
- QoHEtb3N+OvkechI4qJE6T6kgCJH2jXkyOiWXuewXHVaGYeBAOX/uUMh4unGFni5qlVpu6u2jP4
- r8SAxR0g
-X-Google-Smtp-Source: AGHT+IEHMPO7YkCWAGkSD7eI5KSN8Gv9wkinIu6eD/GvMxdLAFbKpvB3We7N+j/JoyzyEAQJ1Z9X/Q==
-X-Received: by 2002:a05:6a20:9143:b0:1e1:9f77:da92 with SMTP id
- adf61e73a8af0-1e1dfde6d4dmr14073191637.33.1734310193247; 
- Sun, 15 Dec 2024 16:49:53 -0800 (PST)
+ AJvYcCWgpUfHpoC8QHcrmwFhLZaoLWLlA0pMMHhis4KChFnSaPbz3uKvCCZO6kzEvRzpciKTbxJCGqeZPqmS@nongnu.org
+X-Gm-Message-State: AOJu0YyuxnMw7VDHD/w7snFM/2SW8gVYEmedFKecvDYrWOhKGuED30Lv
+ 70/rMcv/AbtzM0PiX0Z53c7SQc5rIdMbZWdvn/w6o4ncCY264asRVXi6anbhZes=
+X-Gm-Gg: ASbGncsS1DCUUEwsDMLUctb3sHtx2Qbn5Zg9E7kiUmIsPoDuH5+eiF3Rly/UHK7UXQh
+ v+V2Z76usfq6M4We4aKjUmtuQX5yFONC+3s+e48/wKLi70tY9aeN0O0pxPARM47nB8xNjrkRvkb
+ p52azed+A3J3Yq8O+RA06tOnTyXu8V1EhunMOp2bT3YxtVYN+b6Q7FSQu763KJ9oSG7YRO2MAJy
+ CN3SUwxa4un1sXGhpQ2ysG8mjURpiYR7TrXY1FKhmEAtjcNGSy7XRZ2nfFwJQefsUgmUDg0eY7Q
+ iY5BBGvm
+X-Google-Smtp-Source: AGHT+IEUS1j5PJe2vcxu53unoG7gkVeDB2mRvah5pKoextxKD6OEt13xB3poaEE9+1mKa223oiQq8g==
+X-Received: by 2002:a05:6a21:7185:b0:1e1:f281:8cfd with SMTP id
+ adf61e73a8af0-1e1f281925dmr8531798637.15.1734310207905; 
+ Sun, 15 Dec 2024 16:50:07 -0800 (PST)
 Received: from hsinchu16.internal.sifive.com ([210.176.154.34])
  by smtp.gmail.com with ESMTPSA id
- 41be03b00d2f7-801d5addbf9sm3059586a12.47.2024.12.15.16.49.50
+ 41be03b00d2f7-801d5addbf9sm3059586a12.47.2024.12.15.16.50.05
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 15 Dec 2024 16:49:52 -0800 (PST)
+ Sun, 15 Dec 2024 16:50:07 -0800 (PST)
 From: Jason Chien <jason.chien@sifive.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
@@ -79,10 +79,10 @@ Cc: Peter Maydell <peter.maydell@linaro.org>,
  Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
  qemu-arm@nongnu.org (open list:MCIMX7D SABRE / i...),
  Jason Chien <jason.chien@sifive.com>
-Subject: [RFC PATCH 3/6] hw/pci-host: Enable DW PCIe host to send memory
- transactions over specific mr
-Date: Mon, 16 Dec 2024 08:48:54 +0800
-Message-ID: <20241216004857.9367-4-jason.chien@sifive.com>
+Subject: [RFC PATCH 6/6] include/hw/pci: Send PCI dma requests with memory
+ attributes containing BDF
+Date: Mon, 16 Dec 2024 08:48:57 +0800
+Message-ID: <20241216004857.9367-7-jason.chien@sifive.com>
 X-Mailer: git-send-email 2.43.2
 In-Reply-To: <20241216004857.9367-1-jason.chien@sifive.com>
 References: <20241216004857.9367-1-jason.chien@sifive.com>
@@ -112,93 +112,57 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Current Designware PCIe host cannot connect to an IOMMU, since it has
-registered PCIIOMMUOps.get_address_space() and an IOMMU cannot overwrite
-PCIIOMMUOps.get_address_space() without breaking the PCIe translation
-rules.
-
-This commit implements designware_pcie_host_set_mem(), which is used to
-register PCIIOMMUOps.set_memory_region(), so an IOMMU can designate the
-downstream memory region for the PCIe devices.
+In order to distinguish which PCIe device sends the request over the IOMMU,
+the requester_id must be set with the BDF of the device.
 
 Signed-off-by: Jason Chien <jason.chien@sifive.com>
 ---
- hw/pci-host/designware.c         | 18 +++++++++++++++---
- include/hw/pci-host/designware.h |  2 ++
- 2 files changed, 17 insertions(+), 3 deletions(-)
+ include/hw/pci/pci_device.h | 15 ++++++++++++---
+ 1 file changed, 12 insertions(+), 3 deletions(-)
 
-diff --git a/hw/pci-host/designware.c b/hw/pci-host/designware.c
-index c3fc37b904..8afe447562 100644
---- a/hw/pci-host/designware.c
-+++ b/hw/pci-host/designware.c
-@@ -395,7 +395,6 @@ static void designware_pcie_root_realize(PCIDevice *dev, Error **errp)
+diff --git a/include/hw/pci/pci_device.h b/include/hw/pci/pci_device.h
+index 8eaf0d58bb..e22d05dae8 100644
+--- a/include/hw/pci/pci_device.h
++++ b/include/hw/pci/pci_device.h
+@@ -263,8 +263,11 @@ static inline MemTxResult pci_dma_rw(PCIDevice *dev, dma_addr_t addr,
+ static inline MemTxResult pci_dma_read(PCIDevice *dev, dma_addr_t addr,
+                                        void *buf, dma_addr_t len)
  {
-     DesignwarePCIERoot *root = DESIGNWARE_PCIE_ROOT(dev);
-     DesignwarePCIEHost *host = designware_pcie_root_to_host(root);
--    MemoryRegion *host_mem = get_system_memory();
-     MemoryRegion *address_space = &host->pci.memory;
-     PCIBridge *br = PCI_BRIDGE(dev);
-     DesignwarePCIEViewport *viewport;
-@@ -436,7 +435,7 @@ static void designware_pcie_root_realize(PCIDevice *dev, Error **errp)
-         viewport->cr[0]   = DESIGNWARE_PCIE_ATU_TYPE_MEM;
- 
-         source      = &host->pci.address_space_root;
--        destination = host_mem;
-+        destination = &host->bridge_mr;
-         direction   = "Inbound";
- 
-         /*
-@@ -461,7 +460,7 @@ static void designware_pcie_root_realize(PCIDevice *dev, Error **errp)
- 
-         destination = &host->pci.memory;
-         direction   = "Outbound";
--        source      = host_mem;
-+        source      = get_system_memory();
- 
-         /*
-          * Configure MemoryRegion implementing CPU -> PCI memory
-@@ -666,8 +665,16 @@ static AddressSpace *designware_pcie_host_set_iommu(PCIBus *bus, void *opaque,
-     return &s->pci.address_space;
++    MemTxAttrs attrs = {};
++    attrs.requester_id = pci_requester_id(dev);
++
+     return pci_dma_rw(dev, addr, buf, len,
+-                      DMA_DIRECTION_TO_DEVICE, MEMTXATTRS_UNSPECIFIED);
++                      DMA_DIRECTION_TO_DEVICE, attrs);
  }
  
-+void designware_pcie_host_set_mem(void *opaque, MemoryRegion *mr)
-+{
-+    DesignwarePCIEHost *s = DESIGNWARE_PCIE_HOST(opaque);
+ /**
+@@ -282,8 +285,11 @@ static inline MemTxResult pci_dma_read(PCIDevice *dev, dma_addr_t addr,
+ static inline MemTxResult pci_dma_write(PCIDevice *dev, dma_addr_t addr,
+                                         const void *buf, dma_addr_t len)
+ {
++    MemTxAttrs attrs = {};
++    attrs.requester_id = pci_requester_id(dev);
 +
-+    memory_region_add_subregion_overlap(&s->bridge_mr, 0, mr, INT32_MAX);
-+}
+     return pci_dma_rw(dev, addr, (void *) buf, len,
+-                      DMA_DIRECTION_FROM_DEVICE, MEMTXATTRS_UNSPECIFIED);
++                      DMA_DIRECTION_FROM_DEVICE, attrs);
+ }
+ 
+ #define PCI_DMA_DEFINE_LDST(_l, _s, _bits) \
+@@ -327,8 +333,11 @@ PCI_DMA_DEFINE_LDST(q_be, q_be, 64);
+ static inline void *pci_dma_map(PCIDevice *dev, dma_addr_t addr,
+                                 dma_addr_t *plen, DMADirection dir)
+ {
++    MemTxAttrs attrs = {};
++    attrs.requester_id = pci_requester_id(dev);
 +
- static const PCIIOMMUOps designware_iommu_ops = {
-     .get_address_space = designware_pcie_host_set_iommu,
-+    .set_memory_region = designware_pcie_host_set_mem,
- };
+     return dma_memory_map(pci_get_address_space(dev), addr, plen, dir,
+-                          MEMTXATTRS_UNSPECIFIED);
++                          attrs);
+ }
  
- static void designware_pcie_host_realize(DeviceState *dev, Error **errp)
-@@ -703,6 +710,11 @@ static void designware_pcie_host_realize(DeviceState *dev, Error **errp)
-                                      TYPE_PCIE_BUS);
-     pci->bus->flags |= PCI_BUS_EXTENDED_CONFIG_SPACE;
- 
-+    memory_region_init(&s->bridge_mr, OBJECT(s),
-+                       "pcie-bus-bridge-memory", UINT64_MAX);
-+    memory_region_add_subregion(&s->bridge_mr, 0x0, get_system_memory());
-+    address_space_init(&s->bridge_as, &s->bridge_mr, "pcie-bus-bridge-space");
-+
-     memory_region_init(&s->pci.address_space_root,
-                        OBJECT(s),
-                        "pcie-bus-address-space-root",
-diff --git a/include/hw/pci-host/designware.h b/include/hw/pci-host/designware.h
-index c484e377a8..9562a4ff96 100644
---- a/include/hw/pci-host/designware.h
-+++ b/include/hw/pci-host/designware.h
-@@ -89,6 +89,8 @@ struct DesignwarePCIEHost {
-     } pci;
- 
-     MemoryRegion mmio;
-+    AddressSpace bridge_as;
-+    MemoryRegion bridge_mr;
- };
- 
- #endif /* DESIGNWARE_H */
+ static inline void pci_dma_unmap(PCIDevice *dev, void *buffer, dma_addr_t len,
 -- 
 2.43.2
 
