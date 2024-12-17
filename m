@@ -4,95 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6B125E7716A
-	for <qemu-riscv@archiver.kernel.org>; Tue, 17 Dec 2024 09:10:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 46BCCE7717F
+	for <qemu-riscv@archiver.kernel.org>; Tue, 17 Dec 2024 14:43:21 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tNTYE-0008SI-Nq; Tue, 17 Dec 2024 04:07:34 -0500
+	id 1tNYn5-00023q-Vr; Tue, 17 Dec 2024 09:43:16 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <cleger@rivosinc.com>)
- id 1tNTY2-0008MH-9a
- for qemu-riscv@nongnu.org; Tue, 17 Dec 2024 04:07:22 -0500
-Received: from mail-wr1-x432.google.com ([2a00:1450:4864:20::432])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <cleger@rivosinc.com>)
- id 1tNTXw-0001WE-5z
- for qemu-riscv@nongnu.org; Tue, 17 Dec 2024 04:07:22 -0500
-Received: by mail-wr1-x432.google.com with SMTP id
- ffacd0b85a97d-38637614567so2258425f8f.3
- for <qemu-riscv@nongnu.org>; Tue, 17 Dec 2024 01:07:15 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1734426434; x=1735031234;
- darn=nongnu.org; 
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=eaTDHyYGUwurrDx3I7AZnQtNa0ZJXKnA6MuUrQ8NqEw=;
- b=Vv3EJ6V79hhGPqZUNmJaWvyqGhb/UQ6dgCiDiF6zJM0GYQnbepWaH8BJK9wxJ56gY4
- fuFSpN7ZNRIvZYy2LvNEhFt8Om+hR1CVFb16HWvIQcGqGXmCGM/Mmd44RN0tjYArRj80
- MyjLZ9E5w2B588WMbhifw10BffbTu1utZ/4jRuo/YL+H01N0aorPWpYdExIFtGbkE/Rz
- sh4MD1BrvszdqccCapjpFzOVl8HhH/gtpAJc87Wcg4UGCbMC0N53RhN1ttEqbsAlA4q2
- pqrpjoA4Vh7ODZhhAeJev/NUEuCVhPgi5f2oI9oDSpperqc1bFfzcDKZskn31MKl1xgQ
- wCXA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1734426434; x=1735031234;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=eaTDHyYGUwurrDx3I7AZnQtNa0ZJXKnA6MuUrQ8NqEw=;
- b=aj7nRff1rI8jR+Blt2MQ1O839bwY1sZpVwuwPBUt8z9Ew2vs0/bDAd2+czcCgvW9rM
- +hMwiPNJEghVsTSg8WR82/73ZmdlVDKASZgH07pNKuWyqJ54zQlBIffi4s+N8SbAEnZp
- 1XHJPtyLZfMzvRz4vZYixEUUtnhlVMQzhpfWlpwGvM1Ah8R2mOEpjBx/W+0Smp68+mnt
- mZ85xDvgnJKDvyTg32Nyk7Z7bYeh3TVacKCHyDnlieCGzT/HbQ26hNbPVe3UD4VuxLjj
- JeFQWkLim8wRjCYRNx01yzHT2uNU0ADmMDICwlJD0QFM3wpXdQP7GeQJ8zFVgP0wHrpe
- e1dg==
-X-Gm-Message-State: AOJu0Yzmy+qpqPCNeJKai269+LIGjPQ2s9d1gT7RAg8jbfzVFTUPJ3fy
- BA0icyOi9cLh4prJtQ/eJBdFkhKny7tzmx6VaVhv0NfEbbQc7lcz2kiLmP0xBbti1e4AtkAC98j
- dFHk=
-X-Gm-Gg: ASbGnctSps0HXNSZ3CChUskx/l93Rx9GpxlGDIdXCMQx6Hxmjcjbbk4UfNf3dRd1kUS
- lJVcB5aDZRHxrnE3iT3sRiEuuRTBue0Y/jg2RPjKTkm8o2YWDUGQ9OiL+/nKcjP7xlezvoONB2t
- euC0bmiRHaflXxct6ljwNktzTkex6DA5vCmmUchJoHgHhJmbL1F2pfnN1Ukvvz8ox0otf5ZyDW8
- U1mVF1ejJAk88KlaotJu4jESceh7kWUcDie1rPVeB7QbniqH0ElrPKBZw==
-X-Google-Smtp-Source: AGHT+IGGDh9sXxLmvUUAzIuM4BJARssM39arGx+NM1h0b0U+hixB7fOG/XI9R3mxsTAA5eQjz0JVwA==
-X-Received: by 2002:a5d:5f4f:0:b0:385:d7a7:ad60 with SMTP id
- ffacd0b85a97d-388da380a9bmr2485601f8f.3.1734426434374; 
- Tue, 17 Dec 2024 01:07:14 -0800 (PST)
-Received: from carbon-x1.. ([2a01:e0a:e17:9700:16d2:7456:6634:9626])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-388c8046c46sm10704122f8f.71.2024.12.17.01.07.13
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 17 Dec 2024 01:07:13 -0800 (PST)
-From: =?UTF-8?q?Cl=C3=A9ment=20L=C3=A9ger?= <cleger@rivosinc.com>
-To: qemu-riscv@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>
-Cc: =?UTF-8?q?Cl=C3=A9ment=20L=C3=A9ger?= <cleger@rivosinc.com>,
- Weiwei Li <liwei1518@gmail.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Ved Shanbhogue <ved@rivosinc.com>, Atish Patra <atishp@rivosinc.com>,
- qemu-devel@nongnu.org, Frank Chang <frank.chang@sifive.com>
-Subject: [PATCH v7 3/9] target/riscv: Implement Ssdbltrp sret,
- mret and mnret behavior
-Date: Tue, 17 Dec 2024 10:06:59 +0100
-Message-ID: <20241217090707.3511160-4-cleger@rivosinc.com>
-X-Mailer: git-send-email 2.45.2
-In-Reply-To: <20241217090707.3511160-1-cleger@rivosinc.com>
-References: <20241217090707.3511160-1-cleger@rivosinc.com>
+ (Exim 4.90_1) (envelope-from <alireza.sanaee@huawei.com>)
+ id 1tNYUP-0006JV-CV; Tue, 17 Dec 2024 09:23:57 -0500
+Received: from frasgout.his.huawei.com ([185.176.79.56])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <alireza.sanaee@huawei.com>)
+ id 1tNYUM-0003yK-OR; Tue, 17 Dec 2024 09:23:56 -0500
+Received: from mail.maildlp.com (unknown [172.18.186.31])
+ by frasgout.his.huawei.com (SkyGuard) with ESMTP id 4YCJqj50sNz6K9HY;
+ Tue, 17 Dec 2024 22:20:17 +0800 (CST)
+Received: from frapeml500003.china.huawei.com (unknown [7.182.85.28])
+ by mail.maildlp.com (Postfix) with ESMTPS id B26A4140B33;
+ Tue, 17 Dec 2024 22:23:50 +0800 (CST)
+Received: from localhost (10.47.30.16) by frapeml500003.china.huawei.com
+ (7.182.85.28) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.1.2507.39; Tue, 17 Dec
+ 2024 15:23:49 +0100
+Date: Tue, 17 Dec 2024 14:23:42 +0000
+To: Zhao Liu <zhao1.liu@intel.com>
+CC: "Daniel P . =?ISO-8859-1?Q?Berrang=E9?=" <berrange@redhat.com>, "Igor
+ Mammedov" <imammedo@redhat.com>, Eduardo Habkost <eduardo@habkost.net>,
+ Marcel Apfelbaum <marcel.apfelbaum@gmail.com>, Philippe =?ISO-8859-1?Q?Ma?=
+ =?ISO-8859-1?Q?thieu-Daud=E9?= <philmd@linaro.org>, Yanan Wang
+ <wangyanan55@huawei.com>, "Michael S . Tsirkin" <mst@redhat.com>, "Paolo
+ Bonzini" <pbonzini@redhat.com>, Richard Henderson
+ <richard.henderson@linaro.org>, Eric Blake <eblake@redhat.com>, "Markus
+ Armbruster" <armbru@redhat.com>, Marcelo Tosatti <mtosatti@redhat.com>, Alex
+ =?ISO-8859-1?Q?Benn=E9e?= <alex.bennee@linaro.org>, Peter Maydell
+ <peter.maydell@linaro.org>, Jonathan Cameron <Jonathan.Cameron@huawei.com>,
+ Sia Jee Heng <jeeheng.sia@starfivetech.com>, <qemu-devel@nongnu.org>,
+ <kvm@vger.kernel.org>, <qemu-riscv@nongnu.org>, <qemu-arm@nongnu.org>,
+ "Zhenyu Wang" <zhenyu.z.wang@intel.com>, Dapeng Mi
+ <dapeng1.mi@linux.intel.com>, Yongwei Ma <yongwei.ma@intel.com>
+Subject: Re: [PATCH v2 0/7] Introduce SMP Cache Topology
+Message-ID: <20241217142342.00007d96@huawei.com>
+In-Reply-To: <20240908125920.1160236-1-zhao1.liu@intel.com>
+References: <20240908125920.1160236-1-zhao1.liu@intel.com>
+Organization: Huawei
+X-Mailer: Claws Mail 4.3.0 (GTK 3.24.42; x86_64-w64-mingw32)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::432;
- envelope-from=cleger@rivosinc.com; helo=mail-wr1-x432.google.com
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- T_SPF_TEMPERROR=0.01 autolearn=unavailable autolearn_force=no
+Content-Type: text/plain; charset="US-ASCII"
+Content-Transfer-Encoding: 7bit
+X-Originating-IP: [10.47.30.16]
+X-ClientProxiedBy: lhrpeml500005.china.huawei.com (7.191.163.240) To
+ frapeml500003.china.huawei.com (7.182.85.28)
+Received-SPF: pass client-ip=185.176.79.56;
+ envelope-from=alireza.sanaee@huawei.com; helo=frasgout.his.huawei.com
+X-Spam_score_int: -52
+X-Spam_score: -5.3
+X-Spam_bar: -----
+X-Spam_report: (-5.3 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_MED=-2.3,
+ RCVD_IN_MSPIKE_H2=-1.116, RCVD_IN_VALIDITY_CERTIFIED_BLOCKED=0.001,
+ RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
+X-Mailman-Approved-At: Tue, 17 Dec 2024 09:43:13 -0500
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -104,95 +78,163 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
+Reply-to:  Alireza Sanaee <alireza.sanaee@huawei.com>
+From:  Alireza Sanaee via <qemu-riscv@nongnu.org>
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-When the Ssdbltrp extension is enabled, SSTATUS.SDT field is cleared
-when executing sret. When executing mret/mnret, SSTATUS.SDT is cleared
-when returning to U, VS or VU and VSSTATUS.SDT is cleared when returning
-to VU from HS.
+On Sun,  8 Sep 2024 20:59:13 +0800
+Zhao Liu <zhao1.liu@intel.com> wrote:
 
-Signed-off-by: Clément Léger <cleger@rivosinc.com>
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
----
- target/riscv/op_helper.c | 35 ++++++++++++++++++++++++++++++++++-
- 1 file changed, 34 insertions(+), 1 deletion(-)
+> Hi all,
+> 
+> Compared with previous Patch v1 [1], I've put the cache properties
+> list into -machine, this is to meet current needs and also remain
+> compatible with my future topology support (more discussion details,
+> pls refer [2]).
+> 
+> This series is based on the commit 1581a0bc928d ("Merge tag 'pull-ufs-
+> 20240906' of https://gitlab.com/jeuk20.kim/qemu into staging ufs
+> queue").
+> 
+> Background
+> ==========
+> 
+> The x86 and ARM (RISCV) need to allow user to configure cache
+> properties (current only topology):
+>  * For x86, the default cache topology model (of max/host CPU) does
+> not always match the Host's real physical cache topology. Performance
+> can increase when the configured virtual topology is closer to the
+>    physical topology than a default topology would be.
+>  * For ARM, QEMU can't get the cache topology information from the CPU
+>    registers, then user configuration is necessary. Additionally, the
+>    cache information is also needed for MPAM emulation (for TCG) to
+>    build the right PPTT. (Originally from Jonathan)
+> 
+> 
+> About smp-cache
+> ===============
+> 
+> In this version, smp-cache is implemented as a array integrated in
+> -machine. Though -machine currently can't support JSON format, this is
+> the one of the directions of future.
+> 
+> An example is as follows:
+> 
+> smp_cache=smp-cache.0.cache=l1i,smp-cache.0.topology=core,smp-cache.1.cache=l1d,smp-cache.1.topology=core,smp-cache.2.cache=l2,smp-cache.2.topology=module,smp-cache.3.cache=l3,smp-cache.3.topology=die
+> 
+> "cache" specifies the cache that the properties will be applied on.
+> This field is the combination of cache level and cache type. Now it
+> supports "l1d" (L1 data cache), "l1i" (L1 instruction cache), "l2"
+> (L2 unified cache) and "l3" (L3 unified cache).
+> 
+> "topology" field accepts CPU topology levels including "thread",
+> "core", "module", "cluster", "die", "socket", "book", "drawer" and a
+> special value "default".
+> 
+> The "default" is introduced to make it easier for libvirt to set a
+> default parameter value without having to care about the specific
+> machine (because currently there is no proper way for machine to
+> expose supported topology levels and caches).
+> 
+> If "default" is set, then the cache topology will follow the
+> architecture's default cache topology model. If other CPU topology
+> level is set, the cache will be shared at corresponding CPU topology
+> level.
+> 
+> 
+> Welcome your comment!
+> 
+> 
+> [1]: Patch
+> v1: https://lore.kernel.org/qemu-devel/20240704031603.1744546-1-zhao1.liu@intel.com/ [2]: API disscussion: https://lore.kernel.org/qemu-devel/8734ndj33j.fsf@pond.sub.org/
+> 
+> Thanks and Best Regards,
+> Zhao
+> ---
+> Changelog:
+> 
+> Main changes since Patch v1:
+>  * Dropped handwriten smp-cache object and integrated cache properties
+>    list into MachineState and used -machine to configure SMP cache
+>    properties. (Markus)
+>  * Dropped prefix of CpuTopologyLevel enumeration. (Markus)
+>  * Rename CPU_TOPO_LEVEL_* to CPU_TOPOLOGY_LEVEL_* to match the QAPI's
+>    generated code. (Markus)
+>  * Renamed SMPCacheProperty/SMPCacheProperties (QAPI structures) to
+>    SmpCacheProperties/SmpCachePropertiesWrapper. (Markus)
+>  * Renamed SMPCacheName (QAPI structure) to SmpCacheLevelAndType and
+>    dropped prefix. (Markus)
+>  * Renamed 'name' field in SmpCacheProperties to 'cache', since the
+>    type and level of the cache in SMP system could be able to specify
+>    all of these kinds of cache explicitly enough.
+>  * Renamed 'topo' field in SmpCacheProperties to 'topology'. (Markus)
+>  * Returned error information when user repeats setting cache
+>    properties. (Markus)
+>  * Renamed SmpCacheLevelAndType to CacheLevelAndType, since this
+>    representation is general across SMP or hybrid system.
+>  * Dropped machine_check_smp_cache_support() and did the check when
+>    -machine parses smp-cache in machine_parse_smp_cache().
+> 
+> Main changes since RFC v2:
+>  * Dropped cpu-topology.h and cpu-topology.c since QAPI has the helper
+>    (CpuTopologyLevel_str) to convert enum to string. (Markus)
+>  * Fixed text format in machine.json (CpuTopologyLevel naming, 2
+> spaces between sentences). (Markus)
+>  * Added a new level "default" to de-compatibilize some arch-specific
+>    topo settings. (Daniel)
+>  * Moved CpuTopologyLevel to qapi/machine-common.json, at where the
+>    cache enumeration and smp-cache object would be added.
+>    - If smp-cache object is defined in qapi/machine.json,
+> storage-daemon will complain about the qmp cmds in qapi/machine.json
+> during compiling.
+>  * Referred to Daniel's suggestion to introduce cache JSON list,
+> though as a standalone object since -smp/-machine can't support JSON.
+>  * Linked machine's smp_cache to smp-cache object instead of a builtin
+>    structure. This is to get around the fact that the keyval format of
+>    -machine can't support JSON.
+>  * Wrapped the cache topology level access into a helper.
+>  * Split as a separate commit to just include compatibility checking
+> and topology checking.
+>  * Allow setting "default" topology level even though the cache
+>    isn't supported by machine. (Daniel)
+>  * Rewrote the document of smp-cache object.
+> 
+> Main changes since RFC v1:
+>  * Split CpuTopology renaimg out of this RFC.
+>  * Use QAPI to enumerate CPU topology levels.
+>  * Drop string_to_cpu_topo() since QAPI will help to parse the topo
+>    levels.
+>  * Set has_*_cache field in machine_get_smp(). (JeeHeng)
+>  * Use "*_cache=topo_level" as -smp example as the original "level"
+>    term for a cache has a totally different meaning. (Jonathan)
+> ---
+> Zhao Liu (7):
+>   hw/core: Make CPU topology enumeration arch-agnostic
+>   qapi/qom: Define cache enumeration and properties
+>   hw/core: Add smp cache topology for machine
+>   hw/core: Check smp cache topology support for machine
+>   i386/cpu: Support thread and module level cache topology
+>   i386/cpu: Update cache topology with machine's configuration
+>   i386/pc: Support cache topology in -machine for PC machine
+> 
+>  hw/core/machine-smp.c      | 119 +++++++++++++++++++++++
+>  hw/core/machine.c          |  44 +++++++++
+>  hw/i386/pc.c               |   4 +
+>  hw/i386/x86-common.c       |   4 +-
+>  include/hw/boards.h        |  13 +++
+>  include/hw/i386/topology.h |  22 +----
+>  qapi/machine-common.json   |  96 ++++++++++++++++++-
+>  qemu-options.hx            |  28 +++++-
+>  target/i386/cpu.c          | 191
+> ++++++++++++++++++++++--------------- target/i386/cpu.h          |
+> 4 +- 10 files changed, 425 insertions(+), 100 deletions(-)
+> 
 
-diff --git a/target/riscv/op_helper.c b/target/riscv/op_helper.c
-index a4b625fcd9..eeacb2d1a1 100644
---- a/target/riscv/op_helper.c
-+++ b/target/riscv/op_helper.c
-@@ -287,6 +287,18 @@ target_ulong helper_sret(CPURISCVState *env)
-                         get_field(mstatus, MSTATUS_SPIE));
-     mstatus = set_field(mstatus, MSTATUS_SPIE, 1);
-     mstatus = set_field(mstatus, MSTATUS_SPP, PRV_U);
-+
-+    if (riscv_cpu_cfg(env)->ext_ssdbltrp) {
-+        if (riscv_has_ext(env, RVH)) {
-+            target_ulong prev_vu = get_field(env->hstatus, HSTATUS_SPV) &&
-+                                   prev_priv == PRV_U;
-+            /* Returning to VU from HS, vsstatus.sdt = 0 */
-+            if (!env->virt_enabled && prev_vu) {
-+                env->vsstatus = set_field(env->vsstatus, MSTATUS_SDT, 0);
-+            }
-+        }
-+        mstatus = set_field(mstatus, MSTATUS_SDT, 0);
-+    }
-     if (env->priv_ver >= PRIV_VERSION_1_12_0) {
-         mstatus = set_field(mstatus, MSTATUS_MPRV, 0);
-     }
-@@ -297,7 +309,6 @@ target_ulong helper_sret(CPURISCVState *env)
-         target_ulong hstatus = env->hstatus;
- 
-         prev_virt = get_field(hstatus, HSTATUS_SPV);
--
-         hstatus = set_field(hstatus, HSTATUS_SPV, 0);
- 
-         env->hstatus = hstatus;
-@@ -337,6 +348,22 @@ static void check_ret_from_m_mode(CPURISCVState *env, target_ulong retpc,
-         riscv_raise_exception(env, RISCV_EXCP_INST_ACCESS_FAULT, GETPC());
-     }
- }
-+static target_ulong ssdbltrp_mxret(CPURISCVState *env, target_ulong mstatus,
-+                                   target_ulong prev_priv,
-+                                   target_ulong prev_virt)
-+{
-+    /* If returning to U, VS or VU, sstatus.sdt = 0 */
-+    if (prev_priv == PRV_U || (prev_virt &&
-+        (prev_priv == PRV_S || prev_priv == PRV_U))) {
-+        mstatus = set_field(mstatus, MSTATUS_SDT, 0);
-+        /* If returning to VU, vsstatus.sdt = 0 */
-+        if (prev_virt && prev_priv == PRV_U) {
-+            env->vsstatus = set_field(env->vsstatus, MSTATUS_SDT, 0);
-+        }
-+    }
-+
-+    return mstatus;
-+}
- 
- target_ulong helper_mret(CPURISCVState *env)
- {
-@@ -354,6 +381,9 @@ target_ulong helper_mret(CPURISCVState *env)
-     mstatus = set_field(mstatus, MSTATUS_MPP,
-                         riscv_has_ext(env, RVU) ? PRV_U : PRV_M);
-     mstatus = set_field(mstatus, MSTATUS_MPV, 0);
-+    if (riscv_cpu_cfg(env)->ext_ssdbltrp) {
-+        mstatus = ssdbltrp_mxret(env, mstatus, prev_priv, prev_virt);
-+    }
-     if ((env->priv_ver >= PRIV_VERSION_1_12_0) && (prev_priv != PRV_M)) {
-         mstatus = set_field(mstatus, MSTATUS_MPRV, 0);
-     }
-@@ -395,6 +425,9 @@ target_ulong helper_mnret(CPURISCVState *env)
-     if (prev_priv < PRV_M) {
-         env->mstatus = set_field(env->mstatus, MSTATUS_MPRV, false);
-     }
-+    if (riscv_cpu_cfg(env)->ext_ssdbltrp) {
-+        env->mstatus = ssdbltrp_mxret(env, env->mstatus, prev_priv, prev_virt);
-+    }
- 
-     if (riscv_has_ext(env, RVH) && prev_virt) {
-         riscv_cpu_swap_hypervisor_regs(env);
--- 
-2.45.2
+Hi Zhao,
 
+I wonder if this patch-set requires rebase for the new cycle?
+
+Cheers,
+Alireza
 
