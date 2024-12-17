@@ -4,88 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 50174E7716A
-	for <qemu-riscv@archiver.kernel.org>; Tue, 17 Dec 2024 04:11:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CE987E7717F
+	for <qemu-riscv@archiver.kernel.org>; Tue, 17 Dec 2024 05:33:34 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tNOvT-0004nP-Ne; Mon, 16 Dec 2024 23:11:15 -0500
+	id 1tNQCR-00086R-GR; Tue, 17 Dec 2024 00:32:51 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <jim.shu@sifive.com>)
- id 1tNOvP-0004mY-VB
- for qemu-riscv@nongnu.org; Mon, 16 Dec 2024 23:11:12 -0500
-Received: from mail-ej1-x62a.google.com ([2a00:1450:4864:20::62a])
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1tNQCP-00085w-JL; Tue, 17 Dec 2024 00:32:49 -0500
+Received: from mail-vs1-xe2b.google.com ([2607:f8b0:4864:20::e2b])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <jim.shu@sifive.com>)
- id 1tNOvI-00064R-BQ
- for qemu-riscv@nongnu.org; Mon, 16 Dec 2024 23:11:11 -0500
-Received: by mail-ej1-x62a.google.com with SMTP id
- a640c23a62f3a-aa6aad76beeso678278766b.2
- for <qemu-riscv@nongnu.org>; Mon, 16 Dec 2024 20:11:03 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1tNQCN-0006hu-9D; Tue, 17 Dec 2024 00:32:49 -0500
+Received: by mail-vs1-xe2b.google.com with SMTP id
+ ada2fe7eead31-4afdf096fc5so1097232137.2; 
+ Mon, 16 Dec 2024 21:32:46 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1734408661; x=1735013461; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1734413566; x=1735018366; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=s5noHVT9zsBMCAMZp0If0Q8kGGuliCMIkpw2iQqCAis=;
- b=gUwci+2dOE1E7MjPH9GW5Xr3/Ne+XrKpzfvdEnudCSui6UW8VywaBarDlkOpCypsmk
- 6RhH1Ewk2Kj782k9ZAPYNe8pSam6GcSEKy3TjWRgk/AhrB3WiwstyQzhupCqcLmVwG3H
- nM1ecb8jtYPa9QezccnmnIjm1Hjy1Ub3RSf9vN4hktRw4UUzno94Chsu1ndU6pgETbtv
- 4xw1Bgr1FO7g4U5TyRvn71J12p6wuel1EKs3M5WVEmoFE9zCM+24VhXzxxFyTvd6JIMV
- P4L4L6lHmTJzLmvqcBP+KJggt/C8e2r/5oY+4Lqd4gke0qX5jOD1DJjU6xAzOyZIAK+Q
- 83IQ==
+ bh=c0B14DN1A+dthFCI2qIvw45RTkRxhR8p4TlvsJUaSyY=;
+ b=W+7/TAmB0/fj0SLIuODf9mvOjl8ScwzsDyYm0c3roe0ug5eZWaqonoMlRBJepybNVo
+ pkCX2pTe0+2jqAC6tmJGJSGd3GAXTwwHQnO8U1XdXtCMQv/6uh/DO3BnN5n+XaxIUJtW
+ 2qqiaElj2ON/aGyQ1BIod6ftVlbl/zEyR40AauSjEwzVZ0u5/v72g1xkAfDvE4njltUT
+ 3TEp7Ft2j2Vm2+3fXMB6wcShpcRk/z4udZ/8LslznmRtSpAD343ifxeuc+PoqIzWBS9k
+ 5eGlB9WmpDuVQpWIlLI5PFRs9lh6xRIjDFrj9Knl6VEHSe2xrDPSXkHPwThRytJpX+kG
+ NZ/A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1734408661; x=1735013461;
+ d=1e100.net; s=20230601; t=1734413566; x=1735018366;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=s5noHVT9zsBMCAMZp0If0Q8kGGuliCMIkpw2iQqCAis=;
- b=p/48fMxks/TPMA8vSMYGoMrk7jCfCd8ttOaV3LBWKoae+o+cmzmi1zo8G5g8yoMG+S
- yiCbK0AK9fS+ld4ZvpAU4XG9DxNKdplRRwW4I2vlhO3TlRjQ2B9+W8bg9CkZ3RkxzNWW
- 7jRKsNPXx4b2VFqYI4GckfBQpvv3wV7S+yZgcFWfa4a/Wm7LNgZTsBo0BOYg7OyL7cCv
- UStyLbTscPgDCsVuo3ZTbTCJTbBS/m6gsMHKbdn2gUVYy6n4JYUrY5689bBmktdDJyAr
- OGhkCtCzz2c9o5Khxorgdwo1nFxtxmn2ofwu/X7e4TDAlsWlkXbtqN8LI4WQp37+jiRJ
- a3HQ==
+ bh=c0B14DN1A+dthFCI2qIvw45RTkRxhR8p4TlvsJUaSyY=;
+ b=Rq78HJc2S6bqLSyGaKLqZH9cRXT43S11aaR+Q0mY1um5kugs3d0BndsZ1AHsK2MWIZ
+ L5cF38SHWHO+OcOYXtS+2H6/WTOtkYaKBSrS/pGVg8QmT1I1gmJ1hoTg17g693xWqJYd
+ mPDR66+x3i6AErUT3/UGhgrPccQaWlYtczS1aDF6GluZXo+i6r2Jn4vUvmSrP59htOX3
+ U31cSvP7llkV2ePVV0/MQnKB2JIQsrNz+cWYqlef9hValFuntnlm0QJvfWlYqanryfq7
+ 8PGXZNYGk/RkkTrh8W1q59l3JUJMTuotzLWMfRmpWXRwA22yIZQlBtARcZjTlJnxHdVV
+ Oukg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVLHufCMvetDiEjgBVjjvuKu4FD0GH3eWtlSj0bchh8ppdhSLzv5UPGZE8aUXFVthh/WHwH4c+HS3a8@nongnu.org
-X-Gm-Message-State: AOJu0YybD0ysujxEU7sA/0wQxBuMoR1zv8XXRS6Qx50mEV1sF8I7xWVO
- WtSwu2uj4X+G8hXftj9Vm7BJWSOLE0qwIasXCkTiMiLAC/I393p+y4pSLmGAGPxjMFokjQYLOZ2
- TWJDzp5GvSYVBNMoTNQWWmfutEBHABSBpiCBWPA==
-X-Gm-Gg: ASbGnctN3+1uHg02wJD4TePPcN8QBVDIWBlKq3EBMfbE+jibZGfio7O3nCXHzeMmUK0
- 5Sf25V8Ccio8d0Qfc39UTo9CIHOiqnumuImRZjYRs
-X-Google-Smtp-Source: AGHT+IFIrcAaMWAm7N9fqMXUvRJfLGFCWf834FB+yoX9SKugYqAmG21js/p7JPzOCwXJv4prPQB7EyiHgQjUoJldwOk=
-X-Received: by 2002:a17:906:f5a7:b0:aa6:7cf3:c6ef with SMTP id
- a640c23a62f3a-aab77959d62mr1758403166b.15.1734408661519; Mon, 16 Dec 2024
- 20:11:01 -0800 (PST)
+ AJvYcCUdiUp++7D5aJfeRDBHZAvi/vE/G80LOcV5Xj6jxLfs3D8TlAZ916FAXotKUXpZ06yHpGFIu4UQ/EPT@nongnu.org,
+ AJvYcCXqQX2kVz8neJLZVHcUuPauJUnIMOrrRl8JOZRUZI3bCqJvsprE4JJhNszeXC7YL85j3MajvHKCkWRouw==@nongnu.org
+X-Gm-Message-State: AOJu0Yx0cJmQWGe4QXVK41RqFKeHXnos3+MUnkrGLX9sL+BcP/Ke5Lb0
+ dFGmBsulSUYeYSWkaLX42uXRcQaRnhwmtwFgFrDvZms4pwKX51c+OEtex1bhSSy4Fc4TA6C9XP7
+ FedhPb5eOrOuSAkehkyhQmTVzT/k=
+X-Gm-Gg: ASbGncvjbn+lR2/fyWehd/Xn8P8F4YOb1vrk/vX89WqAvRjxhghe1FZIB067jQa8pUy
+ WbAoi5i5KUJ7libZJLRxCTGgcredJ7ggQh2nHxSw7b1UuYw/PX8T3Q70tR6e3+ZyKG181
+X-Google-Smtp-Source: AGHT+IF9uLQdLVoxTZla4gXzd+h0QqpMMlECa+9u3Z2EzEMhMfZmQXVhEJbawHDIhP9fieXAFkJ8D0QTgu4Pi3oM5lY=
+X-Received: by 2002:a05:6102:2b99:b0:4b0:ccec:c9de with SMTP id
+ ada2fe7eead31-4b25db5fa81mr16815614137.24.1734413565756; Mon, 16 Dec 2024
+ 21:32:45 -0800 (PST)
 MIME-Version: 1.0
-References: <20241120153935.24706-1-jim.shu@sifive.com>
- <20241120153935.24706-2-jim.shu@sifive.com>
- <CAKmqyKOTBkNpwvuGonW80T6LQtMu4sBWA_cu58S4+pMMkZAvcw@mail.gmail.com>
-In-Reply-To: <CAKmqyKOTBkNpwvuGonW80T6LQtMu4sBWA_cu58S4+pMMkZAvcw@mail.gmail.com>
-From: Jim Shu <jim.shu@sifive.com>
-Date: Tue, 17 Dec 2024 12:10:50 +0800
-Message-ID: <CALw707p3S8PNeoLM9aFnwCvF9AZeUWSTSdF6kqk7zuARhSWZ1Q@mail.gmail.com>
-Subject: Re: [PATCH v4 1/3] hw/riscv: Support to load DTB after 3GB memory on
- 64-bit system.
-To: Alistair Francis <alistair23@gmail.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, 
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, 
- Bin Meng <bmeng.cn@gmail.com>, Weiwei Li <liwei1518@gmail.com>, 
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
+References: <20241216121907.660504-1-baturo.alexey@gmail.com>
+ <20241216121907.660504-3-baturo.alexey@gmail.com>
+In-Reply-To: <20241216121907.660504-3-baturo.alexey@gmail.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Tue, 17 Dec 2024 15:32:19 +1000
+Message-ID: <CAKmqyKPmjNms-iZytUxNWvO4x5guyKMjZVNrsWM9kcqQZ51b_w@mail.gmail.com>
+Subject: Re: [PATCH v13 2/7] target/riscv: Add new CSR fields for S{sn, mn,
+ m}pm extensions as part of Zjpm v1.0
+To: baturo.alexey@gmail.com
+Cc: richard.henderson@linaro.org, zhiwei_liu@linux.alibaba.com, 
+ dbarboza@ventanamicro.com, liwei1518@gmail.com, frank.chang@sifive.com, 
+ palmer@dabbelt.com, Alistair.Francis@wdc.com, sagark@eecs.berkeley.edu, 
+ kbastian@mail.uni-paderborn.de, qemu-devel@nongnu.org, qemu-riscv@nongnu.org
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2a00:1450:4864:20::62a;
- envelope-from=jim.shu@sifive.com; helo=mail-ej1-x62a.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+Received-SPF: pass client-ip=2607:f8b0:4864:20::e2b;
+ envelope-from=alistair23@gmail.com; helo=mail-vs1-xe2b.google.com
+X-Spam_score_int: -17
+X-Spam_score: -1.8
+X-Spam_bar: -
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -101,157 +98,232 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-This is the correct fix, thanks!
+On Mon, Dec 16, 2024 at 10:19=E2=80=AFPM <baturo.alexey@gmail.com> wrote:
+>
+> From: Alexey Baturo <baturo.alexey@gmail.com>
+>
+> Signed-off-by: Alexey Baturo <baturo.alexey@gmail.com>
 
+You shouldn't include a newline here
 
-On Tue, Dec 17, 2024 at 11:39=E2=80=AFAM Alistair Francis <alistair23@gmail=
-.com> wrote:
 >
-> On Thu, Nov 21, 2024 at 1:41=E2=80=AFAM Jim Shu <jim.shu@sifive.com> wrot=
-e:
-> >
-> > Larger initrd image will overlap the DTB at 3GB address. Since 64-bit
-> > system doesn't have 32-bit addressable issue, we just load DTB to the e=
-nd
-> > of dram in 64-bit system.
-> >
-> > Signed-off-by: Jim Shu <jim.shu@sifive.com>
-> > ---
-> >  hw/riscv/boot.c            | 14 +++++++++-----
-> >  hw/riscv/microchip_pfsoc.c |  4 ++--
-> >  hw/riscv/sifive_u.c        |  4 ++--
-> >  hw/riscv/spike.c           |  4 ++--
-> >  hw/riscv/virt.c            |  2 +-
-> >  include/hw/riscv/boot.h    |  2 +-
-> >  6 files changed, 17 insertions(+), 13 deletions(-)
-> >
-> > diff --git a/hw/riscv/boot.c b/hw/riscv/boot.c
-> > index 2e319168db..d36d3a7104 100644
-> > --- a/hw/riscv/boot.c
-> > +++ b/hw/riscv/boot.c
-> > @@ -293,7 +293,7 @@ out:
-> >   * The FDT is fdt_packed() during the calculation.
-> >   */
-> >  uint64_t riscv_compute_fdt_addr(hwaddr dram_base, hwaddr dram_size,
-> > -                                MachineState *ms)
-> > +                                MachineState *ms, RISCVHartArrayState =
-*harts)
-> >  {
-> >      int ret =3D fdt_pack(ms->fdt);
-> >      hwaddr dram_end, temp;
-> > @@ -317,11 +317,15 @@ uint64_t riscv_compute_fdt_addr(hwaddr dram_base,=
- hwaddr dram_size,
-> >
-> >      /*
-> >       * We should put fdt as far as possible to avoid kernel/initrd ove=
-rwriting
-> > -     * its content. But it should be addressable by 32 bit system as w=
-ell.
-> > -     * Thus, put it at an 2MB aligned address that less than fdt size =
-from the
-> > -     * end of dram or 3GB whichever is lesser.
-> > +     * its content. But it should be addressable by 32 bit system as w=
-ell in RV32.
-> > +     * Thus, put it near to the end of dram in RV64, and put it near t=
-o the end
-> > +     * of dram or 3GB whichever is lesser in RV32.
-> >       */
-> > -    temp =3D (dram_base < 3072 * MiB) ? MIN(dram_end, 3072 * MiB) : dr=
-am_end;
-> > +    if (!riscv_is_32bit(harts)) {
-> > +        temp =3D dram_end;
-> > +    } else {
-> > +        temp =3D (dram_base < 3072 * MiB) ? MIN(dram_end, 3072 * MiB) =
-: dram_end;
-> > +    }
-> >
-> >      return QEMU_ALIGN_DOWN(temp - fdtsize, 2 * MiB);
-> >  }
-> > diff --git a/hw/riscv/microchip_pfsoc.c b/hw/riscv/microchip_pfsoc.c
-> > index f9a3b43d2e..ba8b0a2c26 100644
-> > --- a/hw/riscv/microchip_pfsoc.c
-> > +++ b/hw/riscv/microchip_pfsoc.c
-> > @@ -519,7 +519,7 @@ static void microchip_icicle_kit_machine_init(Machi=
-neState *machine)
-> >      bool kernel_as_payload =3D false;
-> >      target_ulong firmware_end_addr, kernel_start_addr;
-> >      uint64_t kernel_entry;
-> > -    uint32_t fdt_load_addr;
-> > +    uint64_t fdt_load_addr;
-> >      DriveInfo *dinfo =3D drive_get(IF_SD, 0, 0);
-> >
-> >      /* Sanity check on RAM size */
-> > @@ -625,7 +625,7 @@ static void microchip_icicle_kit_machine_init(Machi=
-neState *machine)
-> >          /* Compute the fdt load address in dram */
-> >          fdt_load_addr =3D riscv_compute_fdt_addr(memmap[MICROCHIP_PFSO=
-C_DRAM_LO].base,
-> >                                                 memmap[MICROCHIP_PFSOC_=
-DRAM_LO].size,
-> > -                                               machine);
-> > +                                               machine, &s->soc.u_cpus=
-);
-> >          riscv_load_fdt(fdt_load_addr, machine->fdt);
-> >
-> >          /* Load the reset vector */
-> > diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
-> > index c5e74126b1..05467e833a 100644
-> > --- a/hw/riscv/sifive_u.c
-> > +++ b/hw/riscv/sifive_u.c
-> > @@ -519,7 +519,7 @@ static void sifive_u_machine_init(MachineState *mac=
-hine)
-> >      const char *firmware_name;
-> >      uint32_t start_addr_hi32 =3D 0x00000000;
-> >      int i;
-> > -    uint32_t fdt_load_addr;
-> > +    uint64_t fdt_load_addr;
-> >      uint64_t kernel_entry;
-> >      DriveInfo *dinfo;
-> >      BlockBackend *blk;
-> > @@ -606,7 +606,7 @@ static void sifive_u_machine_init(MachineState *mac=
-hine)
-> >
-> >      fdt_load_addr =3D riscv_compute_fdt_addr(memmap[SIFIVE_U_DEV_DRAM]=
-.base,
-> >                                             memmap[SIFIVE_U_DEV_DRAM].s=
-ize,
-> > -                                           machine);
-> > +                                           machine, &s->soc.u_cpus);
+> Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+
+Alistair
+
+> ---
+>  target/riscv/cpu.h      |  8 ++++++++
+>  target/riscv/cpu_bits.h |  4 ++++
+>  target/riscv/cpu_cfg.h  |  3 +++
+>  target/riscv/csr.c      | 31 ++++++++++++++++++++++++++++++-
+>  target/riscv/pmp.c      | 14 +++++++++++---
+>  target/riscv/pmp.h      |  1 +
+>  6 files changed, 57 insertions(+), 4 deletions(-)
 >
-> This patch breaks boots with the sifive_u board.
+> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+> index e11264231d..417ff45544 100644
+> --- a/target/riscv/cpu.h
+> +++ b/target/riscv/cpu.h
+> @@ -128,6 +128,14 @@ typedef enum {
+>      EXT_STATUS_DIRTY,
+>  } RISCVExtStatus;
 >
-> This diff fixes it, I'm going to squash the diff into this patch
+> +/* Enum holds PMM field values for Zjpm v1.0 extension */
+> +typedef enum {
+> +    PMM_FIELD_DISABLED =3D 0,
+> +    PMM_FIELD_RESERVED =3D 1,
+> +    PMM_FIELD_PMLEN7   =3D 2,
+> +    PMM_FIELD_PMLEN16  =3D 3,
+> +} RISCVPmPmm;
+> +
+>  typedef struct riscv_cpu_implied_exts_rule {
+>  #ifndef CONFIG_USER_ONLY
+>      /*
+> diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
+> index 2a6aff63ed..d8f9bc68e3 100644
+> --- a/target/riscv/cpu_bits.h
+> +++ b/target/riscv/cpu_bits.h
+> @@ -574,6 +574,7 @@ typedef enum {
+>  #define HSTATUS_VTW          0x00200000
+>  #define HSTATUS_VTSR         0x00400000
+>  #define HSTATUS_VSXL         0x300000000
+> +#define HSTATUS_HUPMM        0x3000000000000
 >
-> diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
-> index ff6e26dec8..fd59124500 100644
-> --- a/hw/riscv/sifive_u.c
-> +++ b/hw/riscv/sifive_u.c
-> @@ -518,6 +518,7 @@ static void sifive_u_machine_init(MachineState *machi=
-ne)
->     target_ulong firmware_end_addr, kernel_start_addr;
->     const char *firmware_name;
->     uint32_t start_addr_hi32 =3D 0x00000000;
-> +    uint32_t fdt_load_addr_hi32 =3D 0x00000000;
->     int i;
->     uint64_t fdt_load_addr;
->     uint64_t kernel_entry;
-> @@ -611,6 +612,7 @@ static void sifive_u_machine_init(MachineState *machi=
-ne)
+>  #define HSTATUS32_WPRI       0xFF8FF87E
+>  #define HSTATUS64_WPRI       0xFFFFFFFFFF8FF87EULL
+> @@ -734,6 +735,7 @@ typedef enum RISCVException {
+>  #define MENVCFG_CBIE                       (3UL << 4)
+>  #define MENVCFG_CBCFE                      BIT(6)
+>  #define MENVCFG_CBZE                       BIT(7)
+> +#define MENVCFG_PMM                        (3ULL << 32)
+>  #define MENVCFG_ADUE                       (1ULL << 61)
+>  #define MENVCFG_PBMTE                      (1ULL << 62)
+>  #define MENVCFG_STCE                       (1ULL << 63)
+> @@ -749,6 +751,7 @@ typedef enum RISCVException {
+>  #define SENVCFG_CBIE                       MENVCFG_CBIE
+>  #define SENVCFG_CBCFE                      MENVCFG_CBCFE
+>  #define SENVCFG_CBZE                       MENVCFG_CBZE
+> +#define SENVCFG_PMM                        MENVCFG_PMM
 >
->     if (!riscv_is_32bit(&s->soc.u_cpus)) {
->         start_addr_hi32 =3D (uint64_t)start_addr >> 32;
-> +        fdt_load_addr_hi32 =3D fdt_load_addr >> 32;
->     }
+>  #define HENVCFG_FIOM                       MENVCFG_FIOM
+>  #define HENVCFG_LPE                        MENVCFG_LPE
+> @@ -756,6 +759,7 @@ typedef enum RISCVException {
+>  #define HENVCFG_CBIE                       MENVCFG_CBIE
+>  #define HENVCFG_CBCFE                      MENVCFG_CBCFE
+>  #define HENVCFG_CBZE                       MENVCFG_CBZE
+> +#define HENVCFG_PMM                        MENVCFG_PMM
+>  #define HENVCFG_ADUE                       MENVCFG_ADUE
+>  #define HENVCFG_PBMTE                      MENVCFG_PBMTE
+>  #define HENVCFG_STCE                       MENVCFG_STCE
+> diff --git a/target/riscv/cpu_cfg.h b/target/riscv/cpu_cfg.h
+> index 59d6fc445d..79a114eb07 100644
+> --- a/target/riscv/cpu_cfg.h
+> +++ b/target/riscv/cpu_cfg.h
+> @@ -128,6 +128,9 @@ struct RISCVCPUConfig {
+>      bool ext_ssaia;
+>      bool ext_sscofpmf;
+>      bool ext_smepmp;
+> +    bool ext_ssnpm;
+> +    bool ext_smnpm;
+> +    bool ext_smmpm;
+>      bool rvv_ta_all_1s;
+>      bool rvv_ma_all_1s;
+>      bool rvv_vl_half_avl;
+> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+> index 941c9691da..5389ccb983 100644
+> --- a/target/riscv/csr.c
+> +++ b/target/riscv/csr.c
+> @@ -575,6 +575,9 @@ static RISCVException have_mseccfg(CPURISCVState *env=
+, int csrno)
+>      if (riscv_cpu_cfg(env)->ext_zkr) {
+>          return RISCV_EXCP_NONE;
+>      }
+> +    if (riscv_cpu_cfg(env)->ext_smmpm) {
+> +        return RISCV_EXCP_NONE;
+> +    }
 >
->     /* reset vector */
-> @@ -625,7 +627,7 @@ static void sifive_u_machine_init(MachineState *machi=
-ne)
->         start_addr,                    /* start: .dword */
->         start_addr_hi32,
->         fdt_load_addr,                 /* fdt_laddr: .dword */
-> -        0x00000000,
-> +        fdt_load_addr_hi32,
->         0x00000000,
->                                        /* fw_dyn: */
->     };
+>      return RISCV_EXCP_ILLEGAL_INST;
+>  }
+> @@ -2379,6 +2382,12 @@ static RISCVException write_menvcfg(CPURISCVState =
+*env, int csrno,
+>          if (env_archcpu(env)->cfg.ext_zicfiss) {
+>              mask |=3D MENVCFG_SSE;
+>          }
+> +
+> +        /* Update PMM field only if the value is valid according to Zjpm=
+ v1.0 */
+> +        if (env_archcpu(env)->cfg.ext_smnpm &&
+> +            get_field(val, MENVCFG_PMM) !=3D PMM_FIELD_RESERVED) {
+> +            mask |=3D MENVCFG_PMM;
+> +        }
+>      }
+>      env->menvcfg =3D (env->menvcfg & ~mask) | (val & mask);
+>
+> @@ -2425,6 +2434,12 @@ static RISCVException write_senvcfg(CPURISCVState =
+*env, int csrno,
+>  {
+>      uint64_t mask =3D SENVCFG_FIOM | SENVCFG_CBIE | SENVCFG_CBCFE | SENV=
+CFG_CBZE;
+>      RISCVException ret;
+> +    /* Update PMM field only if the value is valid according to Zjpm v1.=
+0 */
+> +    if (env_archcpu(env)->cfg.ext_ssnpm &&
+> +        riscv_cpu_mxl(env) =3D=3D MXL_RV64 &&
+> +        get_field(val, SENVCFG_PMM) !=3D PMM_FIELD_RESERVED) {
+> +        mask |=3D SENVCFG_PMM;
+> +    }
+>
+>      ret =3D smstateen_acc_ok(env, 0, SMSTATEEN0_HSENVCFG);
+>      if (ret !=3D RISCV_EXCP_NONE) {
+> @@ -2489,6 +2504,12 @@ static RISCVException write_henvcfg(CPURISCVState =
+*env, int csrno,
+>              get_field(env->menvcfg, MENVCFG_SSE)) {
+>              mask |=3D HENVCFG_SSE;
+>          }
+> +
+> +        /* Update PMM field only if the value is valid according to Zjpm=
+ v1.0 */
+> +        if (env_archcpu(env)->cfg.ext_ssnpm &&
+> +            get_field(val, HENVCFG_PMM) !=3D PMM_FIELD_RESERVED) {
+> +            mask |=3D HENVCFG_PMM;
+> +        }
+>      }
+>
+>      env->henvcfg =3D (env->henvcfg & ~mask) | (val & mask);
+> @@ -3525,7 +3546,15 @@ static RISCVException read_hstatus(CPURISCVState *=
+env, int csrno,
+>  static RISCVException write_hstatus(CPURISCVState *env, int csrno,
+>                                      target_ulong val)
+>  {
+> -    env->hstatus =3D val;
+> +    uint64_t mask =3D (target_ulong)-1;
+> +    /* Update PMM field only if the value is valid according to Zjpm v1.=
+0 */
+> +    if (!env_archcpu(env)->cfg.ext_ssnpm ||
+> +        riscv_cpu_mxl(env) !=3D MXL_RV64 ||
+> +        get_field(val, HSTATUS_HUPMM) =3D=3D PMM_FIELD_RESERVED) {
+> +        mask &=3D ~HSTATUS_HUPMM;
+> +    }
+> +    env->hstatus =3D (env->hstatus & ~mask) | (val & mask);
+> +
+>      if (riscv_cpu_mxl(env) !=3D MXL_RV32 && get_field(val, HSTATUS_VSXL)=
+ !=3D 2) {
+>          qemu_log_mask(LOG_UNIMP,
+>                        "QEMU does not support mixed HSXLEN options.");
+> diff --git a/target/riscv/pmp.c b/target/riscv/pmp.c
+> index a1b36664fc..a185c246d6 100644
+> --- a/target/riscv/pmp.c
+> +++ b/target/riscv/pmp.c
+> @@ -575,6 +575,13 @@ target_ulong pmpaddr_csr_read(CPURISCVState *env, ui=
+nt32_t addr_index)
+>  void mseccfg_csr_write(CPURISCVState *env, target_ulong val)
+>  {
+>      int i;
+> +    uint64_t mask =3D MSECCFG_MMWP | MSECCFG_MML;
+> +    /* Update PMM field only if the value is valid according to Zjpm v1.=
+0 */
+> +    if (riscv_cpu_cfg(env)->ext_smmpm &&
+> +        riscv_cpu_mxl(env) =3D=3D MXL_RV64 &&
+> +        get_field(val, MSECCFG_PMM) !=3D PMM_FIELD_RESERVED) {
+> +        mask |=3D MSECCFG_PMM;
+> +    }
+>
+>      trace_mseccfg_csr_write(env->mhartid, val);
+>
+> @@ -590,12 +597,13 @@ void mseccfg_csr_write(CPURISCVState *env, target_u=
+long val)
+>
+>      if (riscv_cpu_cfg(env)->ext_smepmp) {
+>          /* Sticky bits */
+> -        val |=3D (env->mseccfg & (MSECCFG_MMWP | MSECCFG_MML));
+> -        if ((val ^ env->mseccfg) & (MSECCFG_MMWP | MSECCFG_MML)) {
+> +        val |=3D (env->mseccfg & mask);
+> +        if ((val ^ env->mseccfg) & mask) {
+>              tlb_flush(env_cpu(env));
+>          }
+>      } else {
+> -        val &=3D ~(MSECCFG_MMWP | MSECCFG_MML | MSECCFG_RLB);
+> +        mask |=3D MSECCFG_RLB;
+> +        val &=3D ~(mask);
+>      }
+>
+>      /* M-mode forward cfi to be enabled if cfi extension is implemented =
+*/
+> diff --git a/target/riscv/pmp.h b/target/riscv/pmp.h
+> index e0530a17a3..271cf24169 100644
+> --- a/target/riscv/pmp.h
+> +++ b/target/riscv/pmp.h
+> @@ -46,6 +46,7 @@ typedef enum {
+>      MSECCFG_USEED =3D 1 << 8,
+>      MSECCFG_SSEED =3D 1 << 9,
+>      MSECCFG_MLPE =3D  1 << 10,
+> +    MSECCFG_PMM =3D 3ULL << 32,
+>  } mseccfg_field_t;
+>
+>  typedef struct {
+> --
+> 2.39.5
+>
 
