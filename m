@@ -4,78 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EED05E7717F
-	for <qemu-riscv@archiver.kernel.org>; Tue, 17 Dec 2024 00:19:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8AA93E7717F
+	for <qemu-riscv@archiver.kernel.org>; Tue, 17 Dec 2024 03:40:40 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tNLIk-0004Ep-I6; Mon, 16 Dec 2024 19:19:02 -0500
+	id 1tNORJ-0005Ky-3u; Mon, 16 Dec 2024 22:40:05 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1tNLIh-0004EX-2P; Mon, 16 Dec 2024 19:19:00 -0500
-Received: from mail-vk1-xa30.google.com ([2607:f8b0:4864:20::a30])
+ id 1tNORD-0005J7-Qh; Mon, 16 Dec 2024 22:39:59 -0500
+Received: from mail-vs1-xe36.google.com ([2607:f8b0:4864:20::e36])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1tNLIe-0005w6-G7; Mon, 16 Dec 2024 19:18:58 -0500
-Received: by mail-vk1-xa30.google.com with SMTP id
- 71dfb90a1353d-518957b0533so1400198e0c.1; 
- Mon, 16 Dec 2024 16:18:55 -0800 (PST)
+ id 1tNORC-0001kY-0J; Mon, 16 Dec 2024 22:39:59 -0500
+Received: by mail-vs1-xe36.google.com with SMTP id
+ ada2fe7eead31-4aff1c57377so2570203137.0; 
+ Mon, 16 Dec 2024 19:39:55 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1734394735; x=1734999535; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1734406795; x=1735011595; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=+wtP+BMA/UMrXkQs3lIglsTuTDzJniqBemsUSN6ijz0=;
- b=RYwQTF1myLwYMgfl6HvaHpil7a/ao+sigx5Mqyg4OV6RwoyFEbbId8RqTcdlhoueDH
- rkfBg1tjjhq7VoU3TYKMFPM0jgAdetwTRmC+WEbzB5FFkj5VBTSDmA0mU69wN+H51uD7
- YhSQFfk17nJnXBpQKm47vwoVQv4N1CVKdrFTsBcv7SBU36y/eifxqoTnQnGz1mBBa5mr
- WBcajuiXfRzBl8/36CuurLOdDmZQso/I2NfGTcUTwCAE0sQSCcLZlo3Oc/l+qL9Hvgu/
- 3btwYQHFlo70sG/zjG/SahEjJWd16MeAigtH8tIAq/nYZJkImx39ymjvof0FCLtDs5zK
- aHOg==
+ bh=e0QNTPLjcwfUBSTQjEvcVF/2fKXU6mt6AS/45tw3vE4=;
+ b=KNvDY/Y3FNhVbO09mDGRyL34tqvCi2HVs3lygcgDoj+/5Qo/1VZ2PNGgYx0XfELmpB
+ wd/JUm56rWPd6n20h0Nr0gEsgUZjo5MWTJmN8uIqYZJRAdcUU/bfT9kh+OAGxnOxi42V
+ Fvg+p7T6ezuyvGaGjLr4vvbuY4GCgwgbyjB9JH6+qNhQKgLTZ+6k4ZIsw3Q09k4ACx3K
+ 3G+zOm4QOiPd7uKn62FNIQ0VSQPEEp4ku3nWdduMWP9Z4VIWourvT47drGiNjmCLpyOQ
+ LWWSECQPge42pkaohH00O0hyq82XjfHCbjxGHq8gnLBWnJptDT+O+/c8Vi4i0NzqCmfL
+ qvbA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1734394735; x=1734999535;
+ d=1e100.net; s=20230601; t=1734406795; x=1735011595;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=+wtP+BMA/UMrXkQs3lIglsTuTDzJniqBemsUSN6ijz0=;
- b=BKujnLIaQlvutfF5JDXr40gaeGKuCYwGraiZS9u6L5Xvr5jnieHdRjh0FqotGW899F
- EiB6b3rRs6kEXRWa6zMEyKlpyNE9fimf+hEqrAi28Ie+4OlXKXqRsRnJS0CFneswk7vi
- SPAf3rtvPNF5JahT0IJHFUEeoBoSmaErkrV3dbeysZuxEXWTRjpj+dPRAnWwwMCZOf3W
- HFlmW56Lhh6SfluVjET35e9uCMfq3R72IMXdJZi0+qHDZBlzrjhEnigmfb/jQ5lnY5p9
- aApY49qn92NQJA3r4gfAIFk9TM0Ms85FKnQ50Nk3tEWPx98Cgnlfo6fbU8J11meeVTaz
- oC9g==
+ bh=e0QNTPLjcwfUBSTQjEvcVF/2fKXU6mt6AS/45tw3vE4=;
+ b=wKWW5cu84Bp2gE62Sib+QifIrQGthPRaChTJHdjzb38cNfOvTGOai7Yr7Dpq1OIIzu
+ lHVq1sLpOI8BezGwIScfPvpfUuCqcPWW0rJVjOeQEHLdU40RGgqwYQfruplxZX5oRDQ2
+ U/go7GB6127nZ0pLxAT41jrNhKCpwHYTH8yCggkcs86cxGSXUBwt8afgR+tGeckdIugD
+ EfHNo/BuQKaTmWz3jYEpVAB4F8pZrHX/6b3i8SbqW+2Mh3wV5UFg+ef+FvE5aUjW/kZq
+ 528xfOGG2UySrsmdWqxH9CQqLydrPCTkUhESaBZPCeJK/cnpAYRIm72e/IRB3I72wtfc
+ d7HA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVCkKbU22ZhjkJRkmfxu171DXVaQQSnQSEQJznro+G6k6iSCaaGw/sX3WBnXi3fZ+a8eFLRd5QSHVq1@nongnu.org
-X-Gm-Message-State: AOJu0YwpeQpsyD02WZWwb2UQMcAbqmpX3T7h9xsXdIqGMuq/+xjF0Wph
- JXHWZCtbyhI/8SwSQC+E3LDBWPQi8P0/llI04SQNNnkotU12NDV8jaQrQ/g6jWKqCuAgo+9epxw
- iR3pchMsgdSmd76Pr8DpSgWKHS5o=
-X-Gm-Gg: ASbGncs31DOu/TbNW4jRrGbyv0GNu70FxVjZclyj2wVvpHWAIosipfyT/xNq85zfkwu
- IiNSGFp3ucgatXUEZYwWYzIIwi5vQkoK3ymD0iCaTG84JgatRx0cYbfMY1fg0rqUStG32
-X-Google-Smtp-Source: AGHT+IHdw0Te7mTWZk7s3SI2jTGuOBigdNw9W7tr7YyQtOngZQhsp7NV18H4ouCDDdm0Sv4xfx7+yKN2xk8AIr8Z/1o=
-X-Received: by 2002:a05:6122:2228:b0:518:7eec:be7a with SMTP id
- 71dfb90a1353d-518ca3a69b9mr12355409e0c.5.1734394734493; Mon, 16 Dec 2024
- 16:18:54 -0800 (PST)
+ AJvYcCU3/QQ44e5VZXYF6xQOb+OYjXydrS9dsRfgfRtCDiWaIhaupNM8LsoiRea6eYp1WCs+c+HJYOmovJI8@nongnu.org
+X-Gm-Message-State: AOJu0Yxgd1m/hvZtuQ/SWB6SUJlTWEWkTPCU9oMcvDZLgLvtJn9cGM9Z
+ CP3KgRjQnmNJSa3cwJktFs6R0Rtcc+2tu31Nm2btw3UbRLoz1ny4tM5DCgJHfsc74WE9b4WM9+/
+ hoEBm5GksfGgIPFgqgzhW+NpYVjk=
+X-Gm-Gg: ASbGncuu/0PTCAhfxN8HX6tbQzmssdA1jzyTD/lZ5bmmX6n7LOSv+ORmXaA8mltgw8y
+ ffifDiN5LLWJGMhsOX68JHZ/s9slIQrP8O7iw7NTJDmXvoFyDU7Eqe4t8gxkhiBbSJBRb
+X-Google-Smtp-Source: AGHT+IHFiIeTPAyKiUiNnIDUxhtnpGkOwL5yujW4LtZCgpd6qTAp5+V4B4lFxnTh9nK8UQVJM4oP+/FBnK29yMk/9W4=
+X-Received: by 2002:a67:ebd6:0:b0:4b1:f903:98d3 with SMTP id
+ ada2fe7eead31-4b29dc54ee8mr1822566137.7.1734406795097; Mon, 16 Dec 2024
+ 19:39:55 -0800 (PST)
 MIME-Version: 1.0
-References: <20241128141230.284320-1-cleger@rivosinc.com>
- <20241128141230.284320-3-cleger@rivosinc.com>
-In-Reply-To: <20241128141230.284320-3-cleger@rivosinc.com>
+References: <20241120153935.24706-1-jim.shu@sifive.com>
+ <20241120153935.24706-2-jim.shu@sifive.com>
+In-Reply-To: <20241120153935.24706-2-jim.shu@sifive.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Tue, 17 Dec 2024 10:18:28 +1000
-Message-ID: <CAKmqyKMeNOXCcEVVGJGCOD=06nhNcixsdQ_9XuHf+anMLgMnhQ@mail.gmail.com>
-Subject: Re: [PATCH v6 2/9] target/riscv: Add Ssdbltrp CSRs handling
-To: =?UTF-8?B?Q2zDqW1lbnQgTMOpZ2Vy?= <cleger@rivosinc.com>
-Cc: qemu-riscv@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>, 
- Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bin.meng@windriver.com>,
- Weiwei Li <liwei1518@gmail.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>, 
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, Ved Shanbhogue <ved@rivosinc.com>, 
- Atish Patra <atishp@rivosinc.com>, qemu-devel@nongnu.org, 
- Frank Chang <frank.chang@sifive.com>
+Date: Tue, 17 Dec 2024 13:39:29 +1000
+Message-ID: <CAKmqyKOTBkNpwvuGonW80T6LQtMu4sBWA_cu58S4+pMMkZAvcw@mail.gmail.com>
+Subject: Re: [PATCH v4 1/3] hw/riscv: Support to load DTB after 3GB memory on
+ 64-bit system.
+To: Jim Shu <jim.shu@sifive.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, 
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Bin Meng <bmeng.cn@gmail.com>, Weiwei Li <liwei1518@gmail.com>, 
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::a30;
- envelope-from=alistair23@gmail.com; helo=mail-vk1-xa30.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::e36;
+ envelope-from=alistair23@gmail.com; helo=mail-vs1-xe36.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -99,363 +99,148 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Fri, Nov 29, 2024 at 12:14=E2=80=AFAM Cl=C3=A9ment L=C3=A9ger <cleger@ri=
-vosinc.com> wrote:
+On Thu, Nov 21, 2024 at 1:41=E2=80=AFAM Jim Shu <jim.shu@sifive.com> wrote:
 >
-> Add ext_ssdbltrp in RISCVCPUConfig and implement MSTATUS.SDT,
-> {H|M}ENVCFG.DTE and modify the availability of MTVAL2 based on the
-> presence of the Ssdbltrp ISA extension.
+> Larger initrd image will overlap the DTB at 3GB address. Since 64-bit
+> system doesn't have 32-bit addressable issue, we just load DTB to the end
+> of dram in 64-bit system.
 >
-> Signed-off-by: Cl=C3=A9ment L=C3=A9ger <cleger@rivosinc.com>
-
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
-
-Alistair
-
+> Signed-off-by: Jim Shu <jim.shu@sifive.com>
 > ---
->  target/riscv/cpu.h        |  1 +
->  target/riscv/cpu_bits.h   |  6 ++++
->  target/riscv/cpu_cfg.h    |  1 +
->  target/riscv/cpu_helper.c | 17 +++++++++
->  target/riscv/csr.c        | 72 ++++++++++++++++++++++++++++++++-------
->  5 files changed, 84 insertions(+), 13 deletions(-)
+>  hw/riscv/boot.c            | 14 +++++++++-----
+>  hw/riscv/microchip_pfsoc.c |  4 ++--
+>  hw/riscv/sifive_u.c        |  4 ++--
+>  hw/riscv/spike.c           |  4 ++--
+>  hw/riscv/virt.c            |  2 +-
+>  include/hw/riscv/boot.h    |  2 +-
+>  6 files changed, 17 insertions(+), 13 deletions(-)
 >
-> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> index 8dc5b4d002..02e502768e 100644
-> --- a/target/riscv/cpu.h
-> +++ b/target/riscv/cpu.h
-> @@ -569,6 +569,7 @@ void riscv_cpu_set_virt_enabled(CPURISCVState *env, b=
-ool enable);
->  int riscv_env_mmu_index(CPURISCVState *env, bool ifetch);
->  bool cpu_get_fcfien(CPURISCVState *env);
->  bool cpu_get_bcfien(CPURISCVState *env);
-> +bool riscv_env_smode_dbltrp_enabled(CPURISCVState *env, bool virt);
->  G_NORETURN void  riscv_cpu_do_unaligned_access(CPUState *cs, vaddr addr,
->                                                 MMUAccessType access_type=
-,
->                                                 int mmu_idx, uintptr_t re=
-taddr);
-> diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
-> index f31735d15b..dcf63b7f32 100644
-> --- a/target/riscv/cpu_bits.h
-> +++ b/target/riscv/cpu_bits.h
-> @@ -562,6 +562,7 @@
->  #define MSTATUS_TW          0x00200000 /* since: priv-1.10 */
->  #define MSTATUS_TSR         0x00400000 /* since: priv-1.10 */
->  #define MSTATUS_SPELP       0x00800000 /* zicfilp */
-> +#define MSTATUS_SDT         0x01000000
->  #define MSTATUS_MPELP       0x020000000000 /* zicfilp */
->  #define MSTATUS_GVA         0x4000000000ULL
->  #define MSTATUS_MPV         0x8000000000ULL
-> @@ -594,6 +595,7 @@ typedef enum {
->  #define SSTATUS_SUM         0x00040000 /* since: priv-1.10 */
->  #define SSTATUS_MXR         0x00080000
->  #define SSTATUS_SPELP       MSTATUS_SPELP   /* zicfilp */
-> +#define SSTATUS_SDT         MSTATUS_SDT
->
->  #define SSTATUS64_UXL       0x0000000300000000ULL
->
-> @@ -791,11 +793,13 @@ typedef enum RISCVException {
->  #define MENVCFG_CBIE                       (3UL << 4)
->  #define MENVCFG_CBCFE                      BIT(6)
->  #define MENVCFG_CBZE                       BIT(7)
-> +#define MENVCFG_DTE                        (1ULL << 59)
->  #define MENVCFG_ADUE                       (1ULL << 61)
->  #define MENVCFG_PBMTE                      (1ULL << 62)
->  #define MENVCFG_STCE                       (1ULL << 63)
->
->  /* For RV32 */
-> +#define MENVCFGH_DTE                       BIT(27)
->  #define MENVCFGH_ADUE                      BIT(29)
->  #define MENVCFGH_PBMTE                     BIT(30)
->  #define MENVCFGH_STCE                      BIT(31)
-> @@ -813,11 +817,13 @@ typedef enum RISCVException {
->  #define HENVCFG_CBIE                       MENVCFG_CBIE
->  #define HENVCFG_CBCFE                      MENVCFG_CBCFE
->  #define HENVCFG_CBZE                       MENVCFG_CBZE
-> +#define HENVCFG_DTE                        MENVCFG_DTE
->  #define HENVCFG_ADUE                       MENVCFG_ADUE
->  #define HENVCFG_PBMTE                      MENVCFG_PBMTE
->  #define HENVCFG_STCE                       MENVCFG_STCE
->
->  /* For RV32 */
-> +#define HENVCFGH_DTE                        MENVCFGH_DTE
->  #define HENVCFGH_ADUE                       MENVCFGH_ADUE
->  #define HENVCFGH_PBMTE                      MENVCFGH_PBMTE
->  #define HENVCFGH_STCE                       MENVCFGH_STCE
-> diff --git a/target/riscv/cpu_cfg.h b/target/riscv/cpu_cfg.h
-> index 321f64fd72..1194dfd3bc 100644
-> --- a/target/riscv/cpu_cfg.h
-> +++ b/target/riscv/cpu_cfg.h
-> @@ -79,6 +79,7 @@ struct RISCVCPUConfig {
->      bool ext_smstateen;
->      bool ext_sstc;
->      bool ext_smcntrpmf;
-> +    bool ext_ssdbltrp;
->      bool ext_svadu;
->      bool ext_svinval;
->      bool ext_svnapot;
-> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-> index d53ddc384f..3fabd3379c 100644
-> --- a/target/riscv/cpu_helper.c
-> +++ b/target/riscv/cpu_helper.c
-> @@ -120,6 +120,19 @@ bool cpu_get_bcfien(CPURISCVState *env)
->      }
->  }
->
-> +bool riscv_env_smode_dbltrp_enabled(CPURISCVState *env, bool virt)
-> +{
-> +#ifdef CONFIG_USER_ONLY
-> +    return false;
-> +#else
-> +    if (virt) {
-> +        return (env->henvcfg & HENVCFG_DTE) !=3D 0;
-> +    } else {
-> +        return (env->menvcfg & MENVCFG_DTE) !=3D 0;
-> +    }
-> +#endif
-> +}
-> +
->  void cpu_get_tb_cpu_state(CPURISCVState *env, vaddr *pc,
->                            uint64_t *cs_base, uint32_t *pflags)
+> diff --git a/hw/riscv/boot.c b/hw/riscv/boot.c
+> index 2e319168db..d36d3a7104 100644
+> --- a/hw/riscv/boot.c
+> +++ b/hw/riscv/boot.c
+> @@ -293,7 +293,7 @@ out:
+>   * The FDT is fdt_packed() during the calculation.
+>   */
+>  uint64_t riscv_compute_fdt_addr(hwaddr dram_base, hwaddr dram_size,
+> -                                MachineState *ms)
+> +                                MachineState *ms, RISCVHartArrayState *h=
+arts)
 >  {
-> @@ -642,6 +655,10 @@ void riscv_cpu_swap_hypervisor_regs(CPURISCVState *e=
-nv)
+>      int ret =3D fdt_pack(ms->fdt);
+>      hwaddr dram_end, temp;
+> @@ -317,11 +317,15 @@ uint64_t riscv_compute_fdt_addr(hwaddr dram_base, h=
+waddr dram_size,
 >
->      g_assert(riscv_has_ext(env, RVH));
->
-> +    if (riscv_env_smode_dbltrp_enabled(env, current_virt)) {
-> +        mstatus_mask |=3D MSTATUS_SDT;
-> +    }
-> +
->      if (current_virt) {
->          /* Current V=3D1 and we are about to change to V=3D0 */
->          env->vsstatus =3D env->mstatus & mstatus_mask;
-> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-> index 98c683df60..611f44e044 100644
-> --- a/target/riscv/csr.c
-> +++ b/target/riscv/csr.c
-> @@ -559,6 +559,15 @@ static RISCVException aia_hmode32(CPURISCVState *env=
-, int csrno)
->      return hmode32(env, csrno);
->  }
->
-> +static RISCVException dbltrp_hmode(CPURISCVState *env, int csrno)
-> +{
-> +    if (riscv_cpu_cfg(env)->ext_ssdbltrp) {
-> +        return RISCV_EXCP_NONE;
-> +    }
-> +
-> +    return hmode(env, csrno);
-> +}
-> +
->  static RISCVException pmp(CPURISCVState *env, int csrno)
->  {
->      if (riscv_cpu_cfg(env)->pmp) {
-> @@ -1633,6 +1642,13 @@ static RISCVException write_mstatus(CPURISCVState =
-*env, int csrno,
->          mask |=3D MSTATUS_VS;
->      }
->
-> +    if (riscv_env_smode_dbltrp_enabled(env, env->virt_enabled)) {
-> +        mask |=3D MSTATUS_SDT;
-> +        if ((val & MSTATUS_SDT) !=3D 0) {
-> +            val &=3D ~MSTATUS_SIE;
-> +        }
-> +    }
-> +
->      if (xl !=3D MXL_RV32 || env->debugger) {
->          if (riscv_has_ext(env, RVH)) {
->              mask |=3D MSTATUS_MPV | MSTATUS_GVA;
-> @@ -2394,7 +2410,8 @@ static RISCVException write_menvcfg(CPURISCVState *=
-env, int csrno,
->      if (riscv_cpu_mxl(env) =3D=3D MXL_RV64) {
->          mask |=3D (cfg->ext_svpbmt ? MENVCFG_PBMTE : 0) |
->                  (cfg->ext_sstc ? MENVCFG_STCE : 0) |
-> -                (cfg->ext_svadu ? MENVCFG_ADUE : 0);
-> +                (cfg->ext_svadu ? MENVCFG_ADUE : 0) |
-> +                (cfg->ext_ssdbltrp ? MENVCFG_DTE : 0);
->
->          if (env_archcpu(env)->cfg.ext_zicfilp) {
->              mask |=3D MENVCFG_LPE;
-> @@ -2403,6 +2420,10 @@ static RISCVException write_menvcfg(CPURISCVState =
-*env, int csrno,
->          if (env_archcpu(env)->cfg.ext_zicfiss) {
->              mask |=3D MENVCFG_SSE;
->          }
-> +
-> +        if ((val & MENVCFG_DTE) =3D=3D 0) {
-> +            env->mstatus &=3D ~MSTATUS_SDT;
-> +        }
->      }
->      env->menvcfg =3D (env->menvcfg & ~mask) | (val & mask);
->      write_henvcfg(env, CSR_HENVCFG, env->henvcfg);
-> @@ -2425,9 +2446,14 @@ static RISCVException write_menvcfgh(CPURISCVState=
- *env, int csrno,
->      const RISCVCPUConfig *cfg =3D riscv_cpu_cfg(env);
->      uint64_t mask =3D (cfg->ext_svpbmt ? MENVCFG_PBMTE : 0) |
->                      (cfg->ext_sstc ? MENVCFG_STCE : 0) |
-> -                    (cfg->ext_svadu ? MENVCFG_ADUE : 0);
-> +                    (cfg->ext_svadu ? MENVCFG_ADUE : 0) |
-> +                    (cfg->ext_ssdbltrp ? MENVCFG_DTE : 0);
->      uint64_t valh =3D (uint64_t)val << 32;
->
-> +    if ((valh & MENVCFG_DTE) =3D=3D 0) {
-> +        env->mstatus &=3D ~MSTATUS_SDT;
-> +    }
-> +
->      env->menvcfg =3D (env->menvcfg & ~mask) | (valh & mask);
->      write_henvcfgh(env, CSR_HENVCFGH, env->henvcfg >> 32);
->
-> @@ -2488,9 +2514,10 @@ static RISCVException read_henvcfg(CPURISCVState *=
-env, int csrno,
->       * henvcfg.pbmte is read_only 0 when menvcfg.pbmte =3D 0
->       * henvcfg.stce is read_only 0 when menvcfg.stce =3D 0
->       * henvcfg.adue is read_only 0 when menvcfg.adue =3D 0
-> +     * henvcfg.dte is read_only 0 when menvcfg.dte =3D 0
+>      /*
+>       * We should put fdt as far as possible to avoid kernel/initrd overw=
+riting
+> -     * its content. But it should be addressable by 32 bit system as wel=
+l.
+> -     * Thus, put it at an 2MB aligned address that less than fdt size fr=
+om the
+> -     * end of dram or 3GB whichever is lesser.
+> +     * its content. But it should be addressable by 32 bit system as wel=
+l in RV32.
+> +     * Thus, put it near to the end of dram in RV64, and put it near to =
+the end
+> +     * of dram or 3GB whichever is lesser in RV32.
 >       */
-> -    *val =3D env->henvcfg & (~(HENVCFG_PBMTE | HENVCFG_STCE | HENVCFG_AD=
-UE) |
-> -                           env->menvcfg);
-> +    *val =3D env->henvcfg & (~(HENVCFG_PBMTE | HENVCFG_STCE | HENVCFG_AD=
-UE |
-> +                             HENVCFG_DTE) | env->menvcfg);
->      return RISCV_EXCP_NONE;
->  }
->
-> @@ -2506,7 +2533,8 @@ static RISCVException write_henvcfg(CPURISCVState *=
-env, int csrno,
->      }
->
->      if (riscv_cpu_mxl(env) =3D=3D MXL_RV64) {
-> -        mask |=3D env->menvcfg & (HENVCFG_PBMTE | HENVCFG_STCE | HENVCFG=
-_ADUE);
-> +        mask |=3D env->menvcfg & (HENVCFG_PBMTE | HENVCFG_STCE | HENVCFG=
-_ADUE |
-> +                                HENVCFG_DTE);
->
->          if (env_archcpu(env)->cfg.ext_zicfilp) {
->              mask |=3D HENVCFG_LPE;
-> @@ -2520,6 +2548,9 @@ static RISCVException write_henvcfg(CPURISCVState *=
-env, int csrno,
->      }
->
->      env->henvcfg =3D val & mask;
-> +    if ((env->henvcfg & HENVCFG_DTE) =3D=3D 0) {
-> +        env->vsstatus &=3D ~MSTATUS_SDT;
-> +    }
->
->      return RISCV_EXCP_NONE;
->  }
-> @@ -2534,8 +2565,8 @@ static RISCVException read_henvcfgh(CPURISCVState *=
-env, int csrno,
->          return ret;
->      }
->
-> -    *val =3D (env->henvcfg & (~(HENVCFG_PBMTE | HENVCFG_STCE | HENVCFG_A=
-DUE) |
-> -                            env->menvcfg)) >> 32;
-> +    *val =3D (env->henvcfg & (~(HENVCFG_PBMTE | HENVCFG_STCE | HENVCFG_A=
-DUE |
-> +                              HENVCFG_DTE) | env->menvcfg)) >> 32;
->      return RISCV_EXCP_NONE;
->  }
->
-> @@ -2543,7 +2574,7 @@ static RISCVException write_henvcfgh(CPURISCVState =
-*env, int csrno,
->                                       target_ulong val)
->  {
->      uint64_t mask =3D env->menvcfg & (HENVCFG_PBMTE | HENVCFG_STCE |
-> -                                    HENVCFG_ADUE);
-> +                                    HENVCFG_ADUE | HENVCFG_DTE);
->      uint64_t valh =3D (uint64_t)val << 32;
->      RISCVException ret;
->
-> @@ -2551,8 +2582,10 @@ static RISCVException write_henvcfgh(CPURISCVState=
- *env, int csrno,
->      if (ret !=3D RISCV_EXCP_NONE) {
->          return ret;
->      }
-> -
->      env->henvcfg =3D (env->henvcfg & 0xFFFFFFFF) | (valh & mask);
-> +    if ((env->henvcfg & HENVCFG_DTE) =3D=3D 0) {
-> +        env->vsstatus &=3D ~MSTATUS_SDT;
-> +    }
->      return RISCV_EXCP_NONE;
->  }
->
-> @@ -2980,6 +3013,9 @@ static RISCVException read_sstatus_i128(CPURISCVSta=
-te *env, int csrno,
->      if (env->xl !=3D MXL_RV32 || env->debugger) {
->          mask |=3D SSTATUS64_UXL;
->      }
-> +    if (riscv_cpu_cfg(env)->ext_ssdbltrp) {
-> +        mask |=3D SSTATUS_SDT;
-> +    }
->
->      if (env_archcpu(env)->cfg.ext_zicfilp) {
->          mask |=3D SSTATUS_SPELP;
-> @@ -2996,11 +3032,12 @@ static RISCVException read_sstatus(CPURISCVState =
-*env, int csrno,
->      if (env->xl !=3D MXL_RV32 || env->debugger) {
->          mask |=3D SSTATUS64_UXL;
->      }
-> -
->      if (env_archcpu(env)->cfg.ext_zicfilp) {
->          mask |=3D SSTATUS_SPELP;
->      }
-> -
-> +    if (riscv_cpu_cfg(env)->ext_ssdbltrp) {
-> +        mask |=3D SSTATUS_SDT;
-> +    }
->      /* TODO: Use SXL not MXL. */
->      *val =3D add_status_sd(riscv_cpu_mxl(env), env->mstatus & mask);
->      return RISCV_EXCP_NONE;
-> @@ -3020,7 +3057,9 @@ static RISCVException write_sstatus(CPURISCVState *=
-env, int csrno,
->      if (env_archcpu(env)->cfg.ext_zicfilp) {
->          mask |=3D SSTATUS_SPELP;
->      }
-> -
-> +    if (riscv_cpu_cfg(env)->ext_ssdbltrp) {
-> +        mask |=3D SSTATUS_SDT;
-> +    }
->      target_ulong newval =3D (env->mstatus & ~mask) | (val & mask);
->      return write_mstatus(env, CSR_MSTATUS, newval);
->  }
-> @@ -4126,6 +4165,13 @@ static RISCVException write_vsstatus(CPURISCVState=
- *env, int csrno,
->      if ((val & VSSTATUS64_UXL) =3D=3D 0) {
->          mask &=3D ~VSSTATUS64_UXL;
->      }
-> +    if ((env->henvcfg & HENVCFG_DTE)) {
-> +        if ((val & SSTATUS_SDT) !=3D 0) {
-> +            val &=3D ~SSTATUS_SIE;
-> +        }
+> -    temp =3D (dram_base < 3072 * MiB) ? MIN(dram_end, 3072 * MiB) : dram=
+_end;
+> +    if (!riscv_is_32bit(harts)) {
+> +        temp =3D dram_end;
 > +    } else {
-> +        val &=3D ~SSTATUS_SDT;
+> +        temp =3D (dram_base < 3072 * MiB) ? MIN(dram_end, 3072 * MiB) : =
+dram_end;
 > +    }
->      env->vsstatus =3D (env->vsstatus & ~mask) | (uint64_t)val;
->      return RISCV_EXCP_NONE;
+>
+>      return QEMU_ALIGN_DOWN(temp - fdtsize, 2 * MiB);
 >  }
-> @@ -5336,7 +5382,7 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] =3D {
->      [CSR_VSATP]       =3D { "vsatp",       hmode,   read_vsatp,    write=
-_vsatp,
->                            .min_priv_ver =3D PRIV_VERSION_1_12_0         =
-       },
+> diff --git a/hw/riscv/microchip_pfsoc.c b/hw/riscv/microchip_pfsoc.c
+> index f9a3b43d2e..ba8b0a2c26 100644
+> --- a/hw/riscv/microchip_pfsoc.c
+> +++ b/hw/riscv/microchip_pfsoc.c
+> @@ -519,7 +519,7 @@ static void microchip_icicle_kit_machine_init(Machine=
+State *machine)
+>      bool kernel_as_payload =3D false;
+>      target_ulong firmware_end_addr, kernel_start_addr;
+>      uint64_t kernel_entry;
+> -    uint32_t fdt_load_addr;
+> +    uint64_t fdt_load_addr;
+>      DriveInfo *dinfo =3D drive_get(IF_SD, 0, 0);
 >
-> -    [CSR_MTVAL2]      =3D { "mtval2",      hmode,   read_mtval2,   write=
-_mtval2,
-> +    [CSR_MTVAL2]      =3D { "mtval2", dbltrp_hmode, read_mtval2, write_m=
-tval2,
->                            .min_priv_ver =3D PRIV_VERSION_1_12_0         =
-       },
->      [CSR_MTINST]      =3D { "mtinst",      hmode,   read_mtinst,   write=
-_mtinst,
->                            .min_priv_ver =3D PRIV_VERSION_1_12_0         =
-       },
-> --
-> 2.45.2
+>      /* Sanity check on RAM size */
+> @@ -625,7 +625,7 @@ static void microchip_icicle_kit_machine_init(Machine=
+State *machine)
+>          /* Compute the fdt load address in dram */
+>          fdt_load_addr =3D riscv_compute_fdt_addr(memmap[MICROCHIP_PFSOC_=
+DRAM_LO].base,
+>                                                 memmap[MICROCHIP_PFSOC_DR=
+AM_LO].size,
+> -                                               machine);
+> +                                               machine, &s->soc.u_cpus);
+>          riscv_load_fdt(fdt_load_addr, machine->fdt);
 >
+>          /* Load the reset vector */
+> diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
+> index c5e74126b1..05467e833a 100644
+> --- a/hw/riscv/sifive_u.c
+> +++ b/hw/riscv/sifive_u.c
+> @@ -519,7 +519,7 @@ static void sifive_u_machine_init(MachineState *machi=
+ne)
+>      const char *firmware_name;
+>      uint32_t start_addr_hi32 =3D 0x00000000;
+>      int i;
+> -    uint32_t fdt_load_addr;
+> +    uint64_t fdt_load_addr;
+>      uint64_t kernel_entry;
+>      DriveInfo *dinfo;
+>      BlockBackend *blk;
+> @@ -606,7 +606,7 @@ static void sifive_u_machine_init(MachineState *machi=
+ne)
 >
+>      fdt_load_addr =3D riscv_compute_fdt_addr(memmap[SIFIVE_U_DEV_DRAM].b=
+ase,
+>                                             memmap[SIFIVE_U_DEV_DRAM].siz=
+e,
+> -                                           machine);
+> +                                           machine, &s->soc.u_cpus);
+
+This patch breaks boots with the sifive_u board.
+
+This diff fixes it, I'm going to squash the diff into this patch
+
+diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
+index ff6e26dec8..fd59124500 100644
+--- a/hw/riscv/sifive_u.c
++++ b/hw/riscv/sifive_u.c
+@@ -518,6 +518,7 @@ static void sifive_u_machine_init(MachineState *machine=
+)
+    target_ulong firmware_end_addr, kernel_start_addr;
+    const char *firmware_name;
+    uint32_t start_addr_hi32 =3D 0x00000000;
++    uint32_t fdt_load_addr_hi32 =3D 0x00000000;
+    int i;
+    uint64_t fdt_load_addr;
+    uint64_t kernel_entry;
+@@ -611,6 +612,7 @@ static void sifive_u_machine_init(MachineState *machine=
+)
+
+    if (!riscv_is_32bit(&s->soc.u_cpus)) {
+        start_addr_hi32 =3D (uint64_t)start_addr >> 32;
++        fdt_load_addr_hi32 =3D fdt_load_addr >> 32;
+    }
+
+    /* reset vector */
+@@ -625,7 +627,7 @@ static void sifive_u_machine_init(MachineState *machine=
+)
+        start_addr,                    /* start: .dword */
+        start_addr_hi32,
+        fdt_load_addr,                 /* fdt_laddr: .dword */
+-        0x00000000,
++        fdt_load_addr_hi32,
+        0x00000000,
+                                       /* fw_dyn: */
+    };
 
