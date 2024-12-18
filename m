@@ -4,99 +4,117 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 39DEFE77187
-	for <qemu-riscv@archiver.kernel.org>; Wed, 18 Dec 2024 16:53:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EE2CDE77187
+	for <qemu-riscv@archiver.kernel.org>; Wed, 18 Dec 2024 17:07:55 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tNxIL-0005uj-C2; Wed, 18 Dec 2024 11:53:09 -0500
+	id 1tNxWA-0007bb-UQ; Wed, 18 Dec 2024 12:07:26 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
- id 1tNxI5-0005sB-02
- for qemu-riscv@nongnu.org; Wed, 18 Dec 2024 11:52:53 -0500
-Received: from mail-pl1-x62a.google.com ([2607:f8b0:4864:20::62a])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tNxW9-0007bB-11
+ for qemu-riscv@nongnu.org; Wed, 18 Dec 2024 12:07:25 -0500
+Received: from mail-wm1-x331.google.com ([2a00:1450:4864:20::331])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
- id 1tNxI3-0007Zu-BZ
- for qemu-riscv@nongnu.org; Wed, 18 Dec 2024 11:52:52 -0500
-Received: by mail-pl1-x62a.google.com with SMTP id
- d9443c01a7336-21654fdd5daso57165945ad.1
- for <qemu-riscv@nongnu.org>; Wed, 18 Dec 2024 08:52:49 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tNxW2-0003Yx-03
+ for qemu-riscv@nongnu.org; Wed, 18 Dec 2024 12:07:24 -0500
+Received: by mail-wm1-x331.google.com with SMTP id
+ 5b1f17b1804b1-436249df846so47054665e9.3
+ for <qemu-riscv@nongnu.org>; Wed, 18 Dec 2024 09:07:17 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1734540768; x=1735145568; darn=nongnu.org;
+ d=linaro.org; s=google; t=1734541636; x=1735146436; darn=nongnu.org;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=UQ9UV4baBMSwcaeS+fgZ1pAcBLcTcp3faVoEM9XD5QM=;
- b=gebgH602Gx4pBqwzfgcLWdqXiKCSFcenVZPIjIXY7FWkskFZ+I3ZKAFiiZfmM3idl1
- JZzlDGPnSeUja2TnPjiO9HaNd97loYLNu9MMqztLif+XOsm8HzBJYtt5jHQKF6smGYpw
- KDDSYt1EHPKgdzq6Htom5/oSA9l0OGfgIj5Bp3mhusRCwR+rTOqSjkDIcLh+Vl8xVPgl
- mfJIQiV1Kq3/31qQF6S1WAo65Uptx4NYaq8NxzdYsMVMCpWBR6yCRW+4vKwWAnCinyiS
- Yt7sS3oijTZBX7XS5iySywBTD4cXxQtRrbQLBFF6Wh1egL+o120sSwrv1cRI7gJAqqSG
- ETxA==
+ bh=84Xp02vd965R6EVhlhdL+FhhEbC0vWzwkssxj/nxppI=;
+ b=rurhmHGW5uTIQDT7jMoSKouI/m2r+pOoRWpgvk84PTq7q2dvNtFoiI+XrTo/R23l5O
+ 4a1dVHQqxb1t+ifUlQfAl0bVitbSZ7hEHzuR+PL/XajCrm6VV7t3cIJaeUnvSmVgd9qW
+ H5a2/HageUNGXkRAf64cCdBNdv4B+3NB1mz5WYmAfoqz5TfbfLLbwn4M49+YqnVhWIzA
+ XmPmWw9sTYQzE6HDOSmvrpmVAxyM+VLJqeYmE6skQPIsdG0YMrAg4wcvbxSOdlOV+gKg
+ fQH4w+RnqbYYVEJt/eItr7DIImCiJtk2DbFdhSPUjvhDFSQuHCPDhoseBxt3J6KWfg/l
+ vEzA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1734540768; x=1735145568;
+ d=1e100.net; s=20230601; t=1734541636; x=1735146436;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=UQ9UV4baBMSwcaeS+fgZ1pAcBLcTcp3faVoEM9XD5QM=;
- b=g9mNxlv7+flZD2lVeosFS831mnsuGIsl4PKCNPBSpYkQGDbENMtSrpRrsmeAA0qXn2
- ZhpPjt7UWgAWpniaLPntMQAPCqHKnRPQHBukv7bl2cz01C94bVxj4DwaoDdCqbs8kCCn
- rkOdn/eCIbMITZLkE3q8xrzom15bMkjIm/XUWvAJnTUzC9bwlUhamuJ7ymHEtFe6wrxF
- nz1nnrkldpWgGjNJD4k2Hwp3YFJMGdK0JeX1o3LGJaX05Q4fyVKUNsbDLH17wdBlfy89
- taHsEDLvBpzpA4BAGCBR+bpzgZb2imZi6tQFwKT0jIfnNhikVG43O+suS4Pu8fSpqFMd
- Hw9Q==
+ bh=84Xp02vd965R6EVhlhdL+FhhEbC0vWzwkssxj/nxppI=;
+ b=I/BuKH1FkaAAZfE9AU+ZjPQP+rUvs8DIilYcZvWra0gyyyqzf7i8jyFtssH2L+dJ0b
+ sXtLw/DP07FjOkj4NtApyrfJZncugPV4YU9EYYO5wMsTB8GQCubpbwAKI2C10dB0BvQf
+ VoFguBDTYHUXRdEYGRJVZM9b5RYUFbbdAkJbPQOPvhwxWPA2wyDwaCdR46eMiLlie4KG
+ uRX8DMpM4X55U+8hduQsOVQgQYJn5n3u9vm1kycTkRpGSrakg7O4EP1Mw25Hch6SX/x/
+ JsO3y34d1Q+vKbvpmIGwi0ZNX49qQwY6hE6v1T4u0hbc6WbGZqiYO6yAtSPDm3mjey/L
+ /rMA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCX3l4H/bJ1pAK/2uRHBgQjoEGAM8L5G2NFliP+lO5yaWghV6NlZRKbmIlEdB+fyMrIM5dpNKudns9i0@nongnu.org
-X-Gm-Message-State: AOJu0YzXuyHU/9K+zrTCQHdYPZxHOUQ2pQlWJmOiHo0Tx9FQgoJ2Xotv
- NtEug2GKSlt/WAnGAZLa1pUC4JlO3ykYic3R6Euo4EfceI40QwstuxpKivuy+zc=
-X-Gm-Gg: ASbGncuGI2CvdqBFXZBHKQOUhVVIXsaSaTOUOfAIIzbw91LhQlvK51JCh0pjlGRvo+y
- mJRxkWg/c6QmqXXVrvssC8LOmhzN0aAjM9WweRDH7yRIEu+9PAsgnnM7lOj7hif8phcJtUhQqTn
- bizmntu2r9DtIMkH0d6zdCdeAgkHhPa6rwBsqAthHBc/zBv2dqlWze1kB6KeQ+L/MPVZ23aOEp5
- MBdJm5+XVOlVJwDG561ZCaWZPHr7uJE2JOe8Tsb87U40ge30mUVL40DOVB2AfiLuGYqFjffsF9o
- PegFvdLT8dSiwIYHhc9U0vLtxasC79EsvQ==
-X-Google-Smtp-Source: AGHT+IHuhhvvS6i8Gj4G9se35NRo8REjHPqtQG5QbeLgkSVrH6DhPQUtzbUgLITYoKV+/zAjOX1uKA==
-X-Received: by 2002:a17:902:ce05:b0:215:b45a:6a63 with SMTP id
- d9443c01a7336-218d723362bmr61524445ad.32.1734540768310; 
- Wed, 18 Dec 2024 08:52:48 -0800 (PST)
-Received: from [100.64.0.1] (114-35-142-126.hinet-ip.hinet.net.
- [114.35.142.126]) by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-218a1e5d1bcsm76150165ad.205.2024.12.18.08.52.45
+ AJvYcCXtik0z4mPlPNtIS2kvXKlp4eqezkwX8hjXbj+myui0d/sPe8OqwiCCCh7+dBzcIJmhmLMJTmL6DqVT@nongnu.org
+X-Gm-Message-State: AOJu0YypRAyDjv/cY5Ced7Cg313nhhHHLvE/g3i4m06fdaBK/G8ZfhUK
+ 9avz3HXIpuB4dL0OZB+wo2sUDSfOkZmFM98zffvBoeCbpzPw2XehU1UU5x/exW4=
+X-Gm-Gg: ASbGnct9I4SlVRMDZv2V4G0Z7LdPd7EeJDhlrr9Wp9FksV+BqJGOvI7TlEy6gq+nmPB
+ gUtfMwLNKQBv69SIxHTUk+HoTBArmOUbvDNyBHXaUAaeexsou6vV4tqyrufUN4kG04/7djfkRed
+ xRXa1gMZUfvvO/r1B+l5EnTjNe/L6sw73RqAJ8mtiqT8WLVESh6qq5P5ZGWaOEsSlgDVJUMhnEN
+ lJVnAER3f9drPcmYoVn/MVzaqcH+umEdBU+z1uf51l2yspU8YzrHgnufUk6SLTZYZgz0hbd
+X-Google-Smtp-Source: AGHT+IEgBsMsJq+hHwD0O44Y0o0aaOd3ofWzK08cLIPdBnnYipgVFHsDw/GjhdUOmRJDYKCm05ZQaA==
+X-Received: by 2002:a05:600c:4fd3:b0:436:346a:fa9b with SMTP id
+ 5b1f17b1804b1-4365c7c9707mr97695e9.20.1734541635603; 
+ Wed, 18 Dec 2024 09:07:15 -0800 (PST)
+Received: from [192.168.1.117] ([78.196.4.158])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-43656afc125sm26909535e9.6.2024.12.18.09.07.13
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 18 Dec 2024 08:52:47 -0800 (PST)
-Message-ID: <7c04ac72-7db5-406e-81a7-478bace0c5fd@sifive.com>
-Date: Thu, 19 Dec 2024 00:52:43 +0800
+ Wed, 18 Dec 2024 09:07:14 -0800 (PST)
+Message-ID: <f4988fd0-62c7-41ec-baab-2433aee78f04@linaro.org>
+Date: Wed, 18 Dec 2024 18:07:12 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v8 1/2] target/riscv: rvv: fix typo in vext continuous
- ldst function names
-To: Craig Blackmore <craig.blackmore@embecosm.com>, qemu-devel@nongnu.org,
- qemu-riscv@nongnu.org
-Cc: Richard Henderson <richard.henderson@linaro.org>,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bmeng.cn@gmail.com>,
- Weiwei Li <liwei1518@gmail.com>,
+Subject: Re: [PATCH v2 24/27] tests/vm: fix build_path based path
+To: =?UTF-8?Q?Alex_Benn=C3=A9e?= <alex.bennee@linaro.org>,
+ qemu-devel@nongnu.org
+Cc: =?UTF-8?Q?Daniel_P=2E_Berrang=C3=A9?= <berrange@redhat.com>,
+ Ed Maste <emaste@freebsd.org>, Eric Farman <farman@linux.ibm.com>,
+ Thomas Huth <thuth@redhat.com>, Li-Wen Hsu <lwhsu@freebsd.org>,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Aurelien Jarno <aurelien@aurel32.net>, Fabiano Rosas <farosas@suse.de>,
+ Radoslaw Biernacki <rad@semihalf.com>,
+ Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
+ =?UTF-8?Q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>,
+ qemu-riscv@nongnu.org, Nicholas Piggin <npiggin@gmail.com>,
+ Joel Stanley <joel@jms.id.au>, Beraldo Leal <bleal@redhat.com>,
+ Markus Armbruster <armbru@redhat.com>, Jiaxun Yang
+ <jiaxun.yang@flygoat.com>, Weiwei Li <liwei1518@gmail.com>,
+ Peter Maydell <peter.maydell@linaro.org>, Cleber Rosa <crosa@redhat.com>,
+ Leif Lindholm <quic_llindhol@quicinc.com>,
+ Christian Borntraeger <borntraeger@linux.ibm.com>,
+ John Snow <jsnow@redhat.com>, Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>, Bin Meng <bmeng.cn@gmail.com>,
+ Daniel Henrique Barboza <danielhb413@gmail.com>,
+ Paolo Bonzini <pbonzini@redhat.com>,
  Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Helene Chelin <helene.chelin@embecosm.com>, Nathan Egge <negge@google.com>,
- Paolo Savini <paolo.savini@embecosm.com>
-References: <14dfb7b7-98bb-4e8c-a223-c568512180b7@embecosm.com>
- <20241218142353.1027938-2-craig.blackmore@embecosm.com>
+ Wainer dos Santos Moschetta <wainersm@redhat.com>,
+ Laurent Vivier <laurent@vivier.eu>,
+ Pavel Dovgalyuk <pavel.dovgaluk@ispras.ru>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>,
+ Halil Pasic <pasic@linux.ibm.com>, qemu-arm@nongnu.org,
+ Harsh Prateek Bora <harshpb@linux.ibm.com>, qemu-ppc@nongnu.org,
+ Bernhard Beschow <shentey@gmail.com>, "Michael S. Tsirkin" <mst@redhat.com>,
+ qemu-s390x@nongnu.org, Laurent Vivier <lvivier@redhat.com>,
+ Alistair Francis <alistair.francis@wdc.com>
+References: <20241218162104.3493551-1-alex.bennee@linaro.org>
+ <20241218162104.3493551-25-alex.bennee@linaro.org>
 Content-Language: en-US
-From: Max Chou <max.chou@sifive.com>
-In-Reply-To: <20241218142353.1027938-2-craig.blackmore@embecosm.com>
+From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+In-Reply-To: <20241218162104.3493551-25-alex.bennee@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::62a;
- envelope-from=max.chou@sifive.com; helo=mail-pl1-x62a.google.com
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::331;
+ envelope-from=philmd@linaro.org; helo=mail-wm1-x331.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -112,60 +130,15 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Reviewed-by: Max Chou <max.chou@sifive.com>
-
-max
-
-
-On 2024/12/18 10:23 PM, Craig Blackmore wrote:
-> Replace `continus` with `continuous`.
->
-> Signed-off-by: Craig Blackmore <craig.blackmore@embecosm.com>
+On 18/12/24 17:21, Alex Bennée wrote:
+> We no longer need to go into the per-arch build directories to find
+> the build directories binary. Lets call it directly.
+> 
+> Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
 > ---
->   target/riscv/vector_helper.c | 10 +++++-----
->   1 file changed, 5 insertions(+), 5 deletions(-)
->
-> diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
-> index a85dd1d200..0f57e48cc5 100644
-> --- a/target/riscv/vector_helper.c
-> +++ b/target/riscv/vector_helper.c
-> @@ -195,7 +195,7 @@ GEN_VEXT_ST_ELEM(ste_w, uint32_t, H4, stl)
->   GEN_VEXT_ST_ELEM(ste_d, uint64_t, H8, stq)
->   
->   static inline QEMU_ALWAYS_INLINE void
-> -vext_continus_ldst_tlb(CPURISCVState *env, vext_ldst_elem_fn_tlb *ldst_tlb,
-> +vext_continuous_ldst_tlb(CPURISCVState *env, vext_ldst_elem_fn_tlb *ldst_tlb,
->                          void *vd, uint32_t evl, target_ulong addr,
->                          uint32_t reg_start, uintptr_t ra, uint32_t esz,
->                          bool is_load)
-> @@ -207,7 +207,7 @@ vext_continus_ldst_tlb(CPURISCVState *env, vext_ldst_elem_fn_tlb *ldst_tlb,
->   }
->   
->   static inline QEMU_ALWAYS_INLINE void
-> -vext_continus_ldst_host(CPURISCVState *env, vext_ldst_elem_fn_host *ldst_host,
-> +vext_continuous_ldst_host(CPURISCVState *env, vext_ldst_elem_fn_host *ldst_host,
->                           void *vd, uint32_t evl, uint32_t reg_start, void *host,
->                           uint32_t esz, bool is_load)
->   {
-> @@ -342,8 +342,8 @@ vext_page_ldst_us(CPURISCVState *env, void *vd, target_ulong addr,
->   
->       if (flags == 0) {
->           if (nf == 1) {
-> -            vext_continus_ldst_host(env, ldst_host, vd, evl, env->vstart, host,
-> -                                    esz, is_load);
-> +            vext_continuous_ldst_host(env, ldst_host, vd, evl, env->vstart,
-> +                                      host, esz, is_load);
->           } else {
->               for (i = env->vstart; i < evl; ++i) {
->                   k = 0;
-> @@ -357,7 +357,7 @@ vext_page_ldst_us(CPURISCVState *env, void *vd, target_ulong addr,
->           env->vstart += elems;
->       } else {
->           if (nf == 1) {
-> -            vext_continus_ldst_tlb(env, ldst_tlb, vd, evl, addr, env->vstart,
-> +            vext_continuous_ldst_tlb(env, ldst_tlb, vd, evl, addr, env->vstart,
->                                      ra, esz, is_load);
->           } else {
->               /* load bytes from guest memory */
+>   tests/vm/basevm.py | 3 +--
+>   1 file changed, 1 insertion(+), 2 deletions(-)
+
+Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 
 
