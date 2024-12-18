@@ -4,68 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7D242E77188
-	for <qemu-riscv@archiver.kernel.org>; Wed, 18 Dec 2024 16:27:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A8798E77187
+	for <qemu-riscv@archiver.kernel.org>; Wed, 18 Dec 2024 16:27:53 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tNwof-0000RA-PL; Wed, 18 Dec 2024 11:22:29 -0500
+	id 1tNwnt-0007ni-Eo; Wed, 18 Dec 2024 11:21:41 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1tNwo1-0007ym-0B
- for qemu-riscv@nongnu.org; Wed, 18 Dec 2024 11:21:49 -0500
-Received: from mail-ed1-x52e.google.com ([2a00:1450:4864:20::52e])
+ id 1tNwnl-0007Xg-LL
+ for qemu-riscv@nongnu.org; Wed, 18 Dec 2024 11:21:35 -0500
+Received: from mail-ed1-x52b.google.com ([2a00:1450:4864:20::52b])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1tNwnb-0006ue-9J
- for qemu-riscv@nongnu.org; Wed, 18 Dec 2024 11:21:48 -0500
-Received: by mail-ed1-x52e.google.com with SMTP id
- 4fb4d7f45d1cf-5d34030ebb2so10553053a12.1
- for <qemu-riscv@nongnu.org>; Wed, 18 Dec 2024 08:21:22 -0800 (PST)
+ id 1tNwnT-0006oe-52
+ for qemu-riscv@nongnu.org; Wed, 18 Dec 2024 11:21:32 -0500
+Received: by mail-ed1-x52b.google.com with SMTP id
+ 4fb4d7f45d1cf-5d0d32cd31aso8182051a12.0
+ for <qemu-riscv@nongnu.org>; Wed, 18 Dec 2024 08:21:14 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1734538882; x=1735143682; darn=nongnu.org;
+ d=linaro.org; s=google; t=1734538873; x=1735143673; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=lG7MbUBeLhp7BGSne5jxjhgnKJrC/8a0zBr1FqLJA6g=;
- b=fvW64KS8c6qWbBNXNbi35yl0/0q6YursmDbC2cy79dd5GDnQCf8bkQT/yHCADLC4Ac
- 7oKSUx2+rmHsb8VeF/OHAo0dzQFQW8uHRJ7yEC4dQMQgQWp6VtiQBI8UwXabpEyV6GSk
- uec0ajlHQ7AszL6T6hb19OD7ODhMAVqMTCeRVLo0O/ezR2TP+rh5bBEus0tIRThBulAc
- UMKU0ecpksW8Nco7DnL3t1LVV/oLO0nsl0emASLRDqeTFFU3BinLEX7HZX0Bcytx79Ks
- j8zGP/FMoPEAQs6nEZNvIg7nRgN7jTcm2kTds3GoJ+8A0Og3+XNV3bT8FEQAyw38JAbp
- CIUQ==
+ bh=kYtPKP+K5TFg3ROfXNJmvA24TJ2xerIjRSKiAVxUUqc=;
+ b=v6et6jg4jFzKEM4ZlsyaLgy85D7gmiwYV1pZKYlhKrW7pZ10dhhebSzS0G6z4LdEwV
+ y1zLPMfE+pqG1+G4q3oM/QjlbltI+une4PT73e5XowfQcEw2nlhZH+f/yTFCmTZN3aNh
+ s/Gb46xoylQjTjgC7hALxQd5tf90E50PASNT2Xm4HpmCbZ3pf7i302StTi4SjYhhaXkS
+ faLbDj4NfL/UwiXtFW+UzJwm7BHCh1EvRuTuxKZbEF3cixJWjesRwCbz8DHgr/IWC/fw
+ QInbOOGHT6VhX37aGxu1HcUu5rQRYv5bSmwiDQ35RnM6Rw3Q4c/XcKU9IbFEqEPc4Efp
+ fFng==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1734538882; x=1735143682;
+ d=1e100.net; s=20230601; t=1734538873; x=1735143673;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=lG7MbUBeLhp7BGSne5jxjhgnKJrC/8a0zBr1FqLJA6g=;
- b=RL5qk8HtE2AD2g/Y9L/95j8JJLm8A7aShU58cgqPC246g060v3D9qrn9Fi/iTKuxZo
- rNggnGzKyesiZcQ3P3haLR7rqu/x1IfXB+VSniDSz8WJdDsgu589Pc/98yjg/dAXTQT1
- gm8vpjtI7WzyJBnW9RqOfs6IC9RwqQfH6LuKfnyEslFueJlCSEgT3eVWI/MH/XxvhHU5
- 2LfqOyIDal776tkseT1Mu7sGhORRJkwD3Gzo6SnMhBbZjjD0YzjoO8OdDUvyI+epTgFe
- yBj08lq+eQK/HyCgGI+9+diPLmUDlCtg94QbDEzKgiFMWdxb1X6u9N2FO1bN+G4vpiUo
- B3eQ==
+ bh=kYtPKP+K5TFg3ROfXNJmvA24TJ2xerIjRSKiAVxUUqc=;
+ b=S/YZjh1uBOBNk/UN9PbOKDBcdBZza7zH2ihJmtEcjXsHgB4SVVDF6+fG+dK2UMaIPn
+ FdmuRP8Y5IMV7r1tvBbIM66KBkRNFPYSbaQkHsI8KBEdgw0mFyOLOuBg0D/SsQGHwIP7
+ UHu+MKJbxAI1IBowmXi2x+rC5dZZLurRb2IdPnbIEk9fGI1CLCi9k6VdFdpRMLyE7ipr
+ FnCLLoKbK083beHW9/duNMoDZKqoJ7QcEFzqwsS5PDLs0g1wCOsz3qllvliFVSkqI+Sw
+ HSt2tj4Cx8g/zDey3TNzoelCenC10/isv8hHlQ3Z1PMaNhLUyhn8c7BUAC0hjHpacqEf
+ FFvg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWqg1Go6s7EeQ/u14/Q+Aw7xeFSRrA+vHK86+ENk2f/ni4kLtoJ9mTJpjnHqIn5/sQh/R9sRkrfXXRk@nongnu.org
-X-Gm-Message-State: AOJu0YwVyWpYZutyM3XT6imGcqr103W37Qjt9HxdaYHC5T3jpe/4f31W
- M2nyVewPHCi0cWfe05rXsaGVKDJv5jXsot6XpAE8t3+9PYcIjCqu/QMuNp+bOYw=
-X-Gm-Gg: ASbGnct8OU/p3tMn+nnJnXcJfzCE8t/MpsACKawR8Af7dJ7xsl4si7Fg8W2eDaEoLg2
- dFeQPpVlK5N0Ask75Y3FZ+92oQKm3FdGsKnmYilx9/bK+I+VYK4CwCElakQAJR8XQ57whM2oqgZ
- KKEqtshcebiG5hxheD+KJqM9A59xxM/2Sn1Lvyh38FH3lBLqfEfy9jiW7/GVfWqKhbwUzxHVspV
- jLMAP2w3dtS2mys63Z+nR7ksTLHOFSoMJk7IMpoX+4rCdtvV8HMWFQ=
-X-Google-Smtp-Source: AGHT+IFcp+j4tlely32MlF+oeAn5yKl27JROY39I7hFbPS58gikkauyhkL5DTdLtqO+uRgsdZoj3DA==
-X-Received: by 2002:a05:6402:4001:b0:5d0:81f3:18bc with SMTP id
- 4fb4d7f45d1cf-5d7ee37660emr2710751a12.1.1734538881527; 
- Wed, 18 Dec 2024 08:21:21 -0800 (PST)
+ AJvYcCUbe6EjgHm+7ddMkv0fDUFHUlb8I85j0pDUaQYvoLVNbbNPvmCHjyzm7W5yxgUWsThgki2jXTHwywwY@nongnu.org
+X-Gm-Message-State: AOJu0YxgkdMOVFK657e74Og/oGXpBiiL0hhTc2w/eHWYUECtV4vfPsbV
+ 3kP0NQQq6d+ijM5q0Ws+GclzGRZjZ7fI0OvneJ3vk0Uo4MCmQ9LWQUIg9OcF73g=
+X-Gm-Gg: ASbGnctFlgZVPDsv3A9dwfC8uZ5bj2H9UVNLenSuMMO52tz1kUAPrD6FKl6G3zJbttP
+ oZ/+dloCHy2PMPNqfvqZt9UeiXBcO+c1mCGXydbBgkBxKK6GDXYB6s9giPsFZDsLLftQLAdW33r
+ vCXFqeyA6ilO+Hk1U9dCREuO+Zi9u76HZxGwfuY6CQNsGpPbxV/M/wZnfN0mxKLz0/R7nZwE3Po
+ X74Zx75QAVZx9UghsNg11v3dvrMwvjgYWabs1wpfquh39eRamqYqns=
+X-Google-Smtp-Source: AGHT+IEVQsX8wrlPMgS73Y3pvurdLk+llJT2zW1uH3n4JzYgo5lxxebfSsmJEwFAq6K/zx7senVVvg==
+X-Received: by 2002:a05:6402:4403:b0:5d3:ba42:e9e3 with SMTP id
+ 4fb4d7f45d1cf-5d7ee390c89mr8579814a12.13.1734538873132; 
+ Wed, 18 Dec 2024 08:21:13 -0800 (PST)
 Received: from draig.lan ([85.9.250.243]) by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5d652f25afbsm5752895a12.55.2024.12.18.08.21.12
+ 4fb4d7f45d1cf-5d652ae1127sm5745867a12.42.2024.12.18.08.21.09
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 18 Dec 2024 08:21:15 -0800 (PST)
+ Wed, 18 Dec 2024 08:21:13 -0800 (PST)
 Received: from draig.lan (localhost [IPv6:::1])
- by draig.lan (Postfix) with ESMTP id 48D2860BA3;
- Wed, 18 Dec 2024 16:21:06 +0000 (GMT)
+ by draig.lan (Postfix) with ESMTP id 75ADD5FF59;
+ Wed, 18 Dec 2024 16:21:05 +0000 (GMT)
 From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: =?UTF-8?q?Daniel=20P=2E=20Berrang=C3=A9?= <berrange@redhat.com>,
@@ -101,19 +101,19 @@ Cc: =?UTF-8?q?Daniel=20P=2E=20Berrang=C3=A9?= <berrange@redhat.com>,
  "Michael S. Tsirkin" <mst@redhat.com>, qemu-s390x@nongnu.org,
  Laurent Vivier <lvivier@redhat.com>,
  Alistair Francis <alistair.francis@wdc.com>,
- =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
-Subject: [PATCH v2 22/27] tests/docker: move riscv64 cross container from sid
- to trixie
-Date: Wed, 18 Dec 2024 16:20:58 +0000
-Message-Id: <20241218162104.3493551-23-alex.bennee@linaro.org>
+ =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
+ Anders Roxell <anders.roxell@linaro.org>
+Subject: [PATCH v2 14/27] tests/functional: update the x86_64 tuxrun tests
+Date: Wed, 18 Dec 2024 16:20:50 +0000
+Message-Id: <20241218162104.3493551-15-alex.bennee@linaro.org>
 X-Mailer: git-send-email 2.39.5
 In-Reply-To: <20241218162104.3493551-1-alex.bennee@linaro.org>
 References: <20241218162104.3493551-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::52e;
- envelope-from=alex.bennee@linaro.org; helo=mail-ed1-x52e.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::52b;
+ envelope-from=alex.bennee@linaro.org; helo=mail-ed1-x52b.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -136,49 +136,37 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Although riscv64 isn't going to be a release architecture for trixie
-the packages are still built while it is testing. Moving from sid will
-also avoid some of the volatility we get from tracking the bleeding
-edge.
+Now there are new up to date images available we should update to them.
 
+Cc: Anders Roxell <anders.roxell@linaro.org>
+Reviewed-by: Thomas Huth <thuth@redhat.com>
+Tested-by: Thomas Huth <thuth@redhat.com>
 Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
+Message-Id: <20241121165806.476008-35-alex.bennee@linaro.org>
 ---
- tests/docker/dockerfiles/debian-riscv64-cross.docker | 4 ++--
- tests/lcitool/refresh                                | 4 +++-
- 2 files changed, 5 insertions(+), 3 deletions(-)
+ tests/functional/test_x86_64_tuxrun.py | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/tests/docker/dockerfiles/debian-riscv64-cross.docker b/tests/docker/dockerfiles/debian-riscv64-cross.docker
-index 4d8ca83cb3..b0386cd3a1 100644
---- a/tests/docker/dockerfiles/debian-riscv64-cross.docker
-+++ b/tests/docker/dockerfiles/debian-riscv64-cross.docker
-@@ -1,10 +1,10 @@
- # THIS FILE WAS AUTO-GENERATED
- #
--#  $ lcitool dockerfile --layers all --cross-arch riscv64 debian-sid qemu-minimal
-+#  $ lcitool dockerfile --layers all --cross-arch riscv64 debian-13 qemu-minimal
- #
- # https://gitlab.com/libvirt/libvirt-ci
+diff --git a/tests/functional/test_x86_64_tuxrun.py b/tests/functional/test_x86_64_tuxrun.py
+index 4f96139871..fcbc62b1b0 100755
+--- a/tests/functional/test_x86_64_tuxrun.py
++++ b/tests/functional/test_x86_64_tuxrun.py
+@@ -17,11 +17,11 @@
+ class TuxRunX86Test(TuxRunBaselineTest):
  
--FROM docker.io/library/debian:sid-slim
-+FROM docker.io/library/debian:trixie-slim
+     ASSET_X86_64_KERNEL = Asset(
+-        'https://storage.tuxboot.com/20230331/x86_64/bzImage',
+-        '2bc7480a669ee9b6b82500a236aba0c54233debe98cb968268fa230f52f03461')
++        'https://storage.tuxboot.com/buildroot/20241119/x86_64/bzImage',
++        'f57bfc6553bcd6e0a54aab86095bf642b33b5571d14e3af1731b18c87ed5aef8')
+     ASSET_X86_64_ROOTFS = Asset(
+-        'https://storage.tuxboot.com/20230331/x86_64/rootfs.ext4.zst',
+-        'b72ac729769b8f51c6dffb221113c9a063c774dbe1d66af30eb593c4e9999b4b')
++        'https://storage.tuxboot.com/buildroot/20241119/x86_64/rootfs.ext4.zst',
++        '4b8b2a99117519c5290e1202cb36eb6c7aaba92b357b5160f5970cf5fb78a751')
  
- RUN export DEBIAN_FRONTEND=noninteractive && \
-     apt-get update && \
-diff --git a/tests/lcitool/refresh b/tests/lcitool/refresh
-index 6720516b94..53f8d2585f 100755
---- a/tests/lcitool/refresh
-+++ b/tests/lcitool/refresh
-@@ -220,7 +220,9 @@ try:
-                         trailer=cross_build("powerpc64le-linux-gnu-",
-                                             "ppc64-softmmu,ppc64-linux-user"))
- 
--    generate_dockerfile("debian-riscv64-cross", "debian-sid",
-+    # while not yet a release architecture the packages are still
-+    # build while part of testing
-+    generate_dockerfile("debian-riscv64-cross", "debian-13",
-                         project="qemu-minimal",
-                         cross="riscv64",
-                         trailer=cross_build("riscv64-linux-gnu-",
+     def test_x86_64(self):
+         self.set_machine('q35')
 -- 
 2.39.5
 
