@@ -4,97 +4,152 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8D61BE77188
-	for <qemu-riscv@archiver.kernel.org>; Wed, 18 Dec 2024 19:11:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BB493E77187
+	for <qemu-riscv@archiver.kernel.org>; Wed, 18 Dec 2024 20:11:09 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tNzPj-0001ZE-Qc; Wed, 18 Dec 2024 14:08:55 -0500
+	id 1tO0Nb-0007En-V4; Wed, 18 Dec 2024 15:10:47 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1tNzPh-0001Xs-C0
- for qemu-riscv@nongnu.org; Wed, 18 Dec 2024 14:08:53 -0500
-Received: from mail-ot1-x330.google.com ([2607:f8b0:4864:20::330])
+ (Exim 4.90_1) (envelope-from <farosas@suse.de>)
+ id 1tO0NY-0007Cq-I2; Wed, 18 Dec 2024 15:10:44 -0500
+Received: from smtp-out1.suse.de ([195.135.223.130])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1tNzPf-0006lF-Ke
- for qemu-riscv@nongnu.org; Wed, 18 Dec 2024 14:08:53 -0500
-Received: by mail-ot1-x330.google.com with SMTP id
- 46e09a7af769-71e1158fe3eso3623301a34.1
- for <qemu-riscv@nongnu.org>; Wed, 18 Dec 2024 11:08:51 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1734548930; x=1735153730; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=udJcTVb9DLI0AydQwO+2wkSMyUU5OAyGu8logyWVzCI=;
- b=DhubOM8RI94MAQXXEFoor47JR5AMjNShMMISdLwGJJmlgdaDr1bvKcJqiLx/Y+4255
- xafY5mvGHZVkmJAKbIlRTS6X/uibxRuQ7AwOEWcfpjSv9yZLZ+/g2KTKzYwtCNNg+/76
- wOOU4nR/PXD1rEdsyZqFMnsQmg4Fb35A5X6xRNNAZVEbZmQB3K2xmCDzLSMA1bQJVRZs
- 26F8DoMF48r/V67/empwu0ePrPxzG/3uT7i1MnoPXaFRNdtCutpJLnfEcYON8iUNkCyw
- QnwxBLRX+rvA9lyoa+zPjWjYBgOv0QLrCMVcW86SywiS0JMHRwMugDWcpqegpwVUJxzH
- 8MLQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1734548930; x=1735153730;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=udJcTVb9DLI0AydQwO+2wkSMyUU5OAyGu8logyWVzCI=;
- b=J16xMLf39Z7rkM7hzWISqjBi1pDLBMWvsi+hMwD+fn/TBNUbFUGlGWXBnuNOvlgGdS
- QLMmmnFl2+CFHhoiK9uGfM1mgjtX7jlXoVdvr1h2ULSdy/3Y1CROzIt1mdKGT8q4bqSo
- Fp4l4xsVuZItdHJk3D52bAuqnBh1ShYvmh744ivgIDoJiR/pk/ZlQZej2tEZogiTStFd
- JGVGbqJM81jUf5lxmt31bAczU4eLr6M+iQmUcVpZv3EdvpigwvRTBNkRoi6koM2NFE0M
- f1ietq2WRinAl1YtzNuYT1qa0TFUgom/2FrTB4uZfXgYGuHfLFmT1LTx+P/5rBapWNWB
- x7VA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWhHri8llmXrKt2HMUtLEDDZO6zE/xwSedlxTgdU8YM6Di/YTx2bDD9NFmUMg4e639IZ+s5qP+w2v8/@nongnu.org
-X-Gm-Message-State: AOJu0YxED5tp+iHbVMtlfrORogt4tnL8410RwsRxuEdDdJg5d95U1ALq
- NYmzS+zOzW3QIXXkK64HNsrI0muyaj0MfRB97AbCXcIiruSpVM45Dxj4eItwy5E=
-X-Gm-Gg: ASbGncsRwUU/7A6zznzsOG6y80hyGPRw+bFR6XBwr26CSTB9LwiSPGTfuFiAvqN2Pvw
- JZjfbzCL+6Ja+8f3b+G2kgqlAIXmhmG5XmKH6pdifrHNtEaA6UP4ldgxjJ07UeOc/KAi/HouINf
- WN0dXXAEhZylCzYJEDQzn0lWHiebBge/ollq/GMXvQEYTvgsSTwy4azjMjv495tPdvyLDyCgKvp
- PiUkeIH5guhfaXKwZvYWPmjyy8AjSTTXD5e/MtQw86sRd4M/5dE7NyvZ3WcbaUZU0OJxXPnLw==
-X-Google-Smtp-Source: AGHT+IGiXfaSqv6UQhnOL/WbhW6s1n3N8cLy1601OXY/Su2qeIdMZazB2bvJeXx6/RYFhpUSN/RP3g==
-X-Received: by 2002:a05:6830:6a98:b0:71d:4488:19d9 with SMTP id
- 46e09a7af769-71fb75a59e8mr2084831a34.17.1734548930207; 
- Wed, 18 Dec 2024 11:08:50 -0800 (PST)
-Received: from [172.20.0.130] ([187.217.227.247])
- by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-71e48371490sm2681475a34.33.2024.12.18.11.08.48
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 18 Dec 2024 11:08:49 -0800 (PST)
-Message-ID: <e8fb908d-4723-417a-bf88-b4050432ddad@linaro.org>
-Date: Wed, 18 Dec 2024 13:08:46 -0600
+ (Exim 4.90_1) (envelope-from <farosas@suse.de>)
+ id 1tO0NW-0007KB-Pl; Wed, 18 Dec 2024 15:10:44 -0500
+Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org
+ [IPv6:2a07:de40:b281:104:10:150:64:97])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-out1.suse.de (Postfix) with ESMTPS id CE6EF21163;
+ Wed, 18 Dec 2024 20:10:39 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
+ t=1734552640; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=tdYTLtosx3DqqhtmSGHqs7uSuX/xc70ZhSw0PZXO9r0=;
+ b=E77inyaKdXVnFOlyoTR4LpR/t5hf7kesWZ6zsI+PJLGy9WPQwNkHlldM64ZNIDvLM/T699
+ CrFrEfaxqz+pXeIP33+eGAGykmQGmc2tygtFkWBWhy94HwvLdcN/RkZOR3gzdLqgVAg/1K
+ jYuuVvEfRio39FMBGCyrzQ42dNPMsec=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
+ s=susede2_ed25519; t=1734552640;
+ h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=tdYTLtosx3DqqhtmSGHqs7uSuX/xc70ZhSw0PZXO9r0=;
+ b=vF3m4Ngy5MI8uXlhqnsb5QEeGhz9u+ftcISFLN3Z6lXRHy9PF6PbHos2KMxexet5+gc7ZO
+ hn657jlTzmnFY2Ag==
+Authentication-Results: smtp-out1.suse.de;
+ dkim=pass header.d=suse.de header.s=susede2_rsa header.b=Xy6IKisM;
+ dkim=pass header.d=suse.de header.s=susede2_ed25519 header.b=JxdAqtVH
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
+ t=1734552639; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=tdYTLtosx3DqqhtmSGHqs7uSuX/xc70ZhSw0PZXO9r0=;
+ b=Xy6IKisM84j0M9H9oBskJySyBoqxy9SV/ZbYxMoqvx6JAIVfpyZt6+6iykDDpEMxaIzy5X
+ DqxiE++kaTvaoN/qCtpQRtSZBx0uHKFvpfV5+FpHLppdV5YatyVGlXzGE9iOI86zOdCuWx
+ wpTFwOawScpWLqpZl/5RNy4YWSaxmso=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
+ s=susede2_ed25519; t=1734552639;
+ h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=tdYTLtosx3DqqhtmSGHqs7uSuX/xc70ZhSw0PZXO9r0=;
+ b=JxdAqtVHMg46v2mZxHH1lxiudTtfqb1zkM73F5AI6GSnY1JUIoCJ28g6FNXD1V1hAGSW6P
+ C2sq0Jt+9TDjozDQ==
+Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 1DC45137CF;
+ Wed, 18 Dec 2024 20:10:39 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
+ by imap1.dmz-prg2.suse.org with ESMTPSA id gnMwBz8sY2fqCQAAD6G6ig
+ (envelope-from <farosas@suse.de>); Wed, 18 Dec 2024 20:10:39 +0000
+From: Fabiano Rosas <farosas@suse.de>
+To: Alex =?utf-8?Q?Benn=C3=A9e?= <alex.bennee@linaro.org>,
+ qemu-devel@nongnu.org
+Cc: =?utf-8?Q?Daniel_P=2E_Berrang=C3=A9?= <berrange@redhat.com>, Ed Maste
+ <emaste@freebsd.org>, Eric Farman <farman@linux.ibm.com>, Thomas Huth
+ <thuth@redhat.com>, Li-Wen Hsu <lwhsu@freebsd.org>, Daniel Henrique
+ Barboza <dbarboza@ventanamicro.com>, Aurelien Jarno
+ <aurelien@aurel32.net>, Radoslaw Biernacki <rad@semihalf.com>, Mark
+ Cave-Ayland <mark.cave-ayland@ilande.co.uk>, =?utf-8?Q?Marc-Andr=C3=A9?=
+ Lureau
+ <marcandre.lureau@redhat.com>, Philippe =?utf-8?Q?Mathieu-Daud=C3=A9?=
+ <philmd@linaro.org>,
+ qemu-riscv@nongnu.org, Nicholas Piggin <npiggin@gmail.com>, Joel Stanley
+ <joel@jms.id.au>, Beraldo Leal <bleal@redhat.com>, Markus Armbruster
+ <armbru@redhat.com>, Jiaxun Yang <jiaxun.yang@flygoat.com>, Weiwei Li
+ <liwei1518@gmail.com>, Peter Maydell <peter.maydell@linaro.org>, Cleber
+ Rosa <crosa@redhat.com>, Leif Lindholm <quic_llindhol@quicinc.com>,
+ Christian Borntraeger <borntraeger@linux.ibm.com>, John Snow
+ <jsnow@redhat.com>, Marcel Apfelbaum <marcel.apfelbaum@gmail.com>, Palmer
+ Dabbelt <palmer@dabbelt.com>, Bin Meng <bmeng.cn@gmail.com>, Daniel
+ Henrique Barboza <danielhb413@gmail.com>, Paolo Bonzini
+ <pbonzini@redhat.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, Wainer
+ dos Santos Moschetta <wainersm@redhat.com>, Laurent Vivier
+ <laurent@vivier.eu>, Pavel Dovgalyuk <pavel.dovgaluk@ispras.ru>, Richard
+ Henderson <richard.henderson@linaro.org>, Marcin Juszkiewicz
+ <marcin.juszkiewicz@linaro.org>, Halil Pasic <pasic@linux.ibm.com>,
+ qemu-arm@nongnu.org, Harsh Prateek Bora <harshpb@linux.ibm.com>,
+ qemu-ppc@nongnu.org, Bernhard Beschow <shentey@gmail.com>, "Michael S.
+ Tsirkin" <mst@redhat.com>, qemu-s390x@nongnu.org, Laurent Vivier
+ <lvivier@redhat.com>, Alistair Francis <alistair.francis@wdc.com>, Alex
+ =?utf-8?Q?Benn=C3=A9e?= <alex.bennee@linaro.org>
+Subject: Re: [PATCH v2 18/27] system/qtest: properly feedback results of
+ clock_[step|set]
+In-Reply-To: <20241218162104.3493551-19-alex.bennee@linaro.org>
+References: <20241218162104.3493551-1-alex.bennee@linaro.org>
+ <20241218162104.3493551-19-alex.bennee@linaro.org>
+Date: Wed, 18 Dec 2024 17:10:36 -0300
+Message-ID: <878qscvjk3.fsf@suse.de>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [RFC 1/1] target/riscv: use tcg ops generation to emulate whole
- reg rvv loads/stores.
-To: Paolo Savini <paolo.savini@embecosm.com>, qemu-devel@nongnu.org,
- qemu-riscv@nongnu.org
-Cc: Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bmeng.cn@gmail.com>,
- Weiwei Li <liwei1518@gmail.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Helene Chelin <helene.chelin@embecosm.com>, Nathan Egge <negge@google.com>,
- Max Chou <max.chou@sifive.com>, Jeremy Bennett
- <jeremy.bennett@embecosm.com>, Craig Blackmore <craig.blackmore@embecosm.com>
-References: <20241218170840.1090473-1-paolo.savini@embecosm.com>
- <20241218170840.1090473-2-paolo.savini@embecosm.com>
-Content-Language: en-US
-From: Richard Henderson <richard.henderson@linaro.org>
-In-Reply-To: <20241218170840.1090473-2-paolo.savini@embecosm.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::330;
- envelope-from=richard.henderson@linaro.org; helo=mail-ot1-x330.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+X-Rspamd-Queue-Id: CE6EF21163
+X-Spamd-Result: default: False [-2.98 / 50.00]; BAYES_HAM(-2.97)[99.86%];
+ SUSPICIOUS_RECIPS(1.50)[]; NEURAL_HAM_LONG(-1.00)[-1.000];
+ R_DKIM_ALLOW(-0.20)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
+ NEURAL_HAM_SHORT(-0.20)[-1.000]; MIME_GOOD(-0.10)[text/plain];
+ MX_GOOD(-0.01)[]; FREEMAIL_ENVRCPT(0.00)[gmail.com];
+ TO_MATCH_ENVRCPT_ALL(0.00)[];
+ DKIM_SIGNED(0.00)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
+ FUZZY_BLOCKED(0.00)[rspamd.com]; ARC_NA(0.00)[];
+ RCPT_COUNT_TWELVE(0.00)[46];
+ RBL_SPAMHAUS_BLOCKED_OPENRESOLVER(0.00)[2a07:de40:b281:104:10:150:64:97:from]; 
+ MIME_TRACE(0.00)[0:+];
+ SPAMHAUS_XBL(0.00)[2a07:de40:b281:104:10:150:64:97:from];
+ FREEMAIL_CC(0.00)[redhat.com,freebsd.org,linux.ibm.com,ventanamicro.com,aurel32.net,semihalf.com,ilande.co.uk,linaro.org,nongnu.org,gmail.com,jms.id.au,flygoat.com,quicinc.com,dabbelt.com,linux.alibaba.com,vivier.eu,ispras.ru,wdc.com];
+ RCVD_TLS_ALL(0.00)[]; DKIM_TRACE(0.00)[suse.de:+];
+ RCVD_COUNT_TWO(0.00)[2]; MID_RHS_MATCH_FROM(0.00)[];
+ FROM_EQ_ENVFROM(0.00)[]; FROM_HAS_DN(0.00)[];
+ TO_DN_SOME(0.00)[];
+ RECEIVED_SPAMHAUS_BLOCKED_OPENRESOLVER(0.00)[2a07:de40:b281:106:10:150:64:167:received];
+ RCVD_VIA_SMTP_AUTH(0.00)[];
+ R_RATELIMIT(0.00)[to_ip_from(RL4imt8pjjaa6sqn3s4gq691sb)];
+ TAGGED_RCPT(0.00)[]; MISSING_XM_UA(0.00)[];
+ ASN(0.00)[asn:25478, ipnet:::/0, country:RU];
+ DBL_BLOCKED_OPENRESOLVER(0.00)[suse.de:email, suse.de:dkim, suse.de:mid,
+ imap1.dmz-prg2.suse.org:helo, imap1.dmz-prg2.suse.org:rdns]
+X-Rspamd-Server: rspamd2.dmz-prg2.suse.org
+X-Rspamd-Action: no action
+Received-SPF: pass client-ip=195.135.223.130; envelope-from=farosas@suse.de;
+ helo=smtp-out1.suse.de
+X-Spam_score_int: -43
+X-Spam_score: -4.4
+X-Spam_bar: ----
+X-Spam_report: (-4.4 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ RCVD_IN_DNSWL_MED=-2.3, RCVD_IN_VALIDITY_CERTIFIED_BLOCKED=0.001,
+ RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -111,96 +166,18 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 12/18/24 11:08, Paolo Savini wrote:
-> This patch aims at emulating the whole register loads and stores through
-> direct generation of tcg operations rather than through the aid of a helper
-> function.
-> 
-> Signed-off-by: Paolo Savini <paolo.savini@embecosm.com>
-> ---
->   target/riscv/insn_trans/trans_rvv.c.inc | 104 +++++++++++++-----------
->   1 file changed, 56 insertions(+), 48 deletions(-)
-> 
-> diff --git a/target/riscv/insn_trans/trans_rvv.c.inc b/target/riscv/insn_trans/trans_rvv.c.inc
-> index b9883a5d32..63d8b05bf1 100644
-> --- a/target/riscv/insn_trans/trans_rvv.c.inc
-> +++ b/target/riscv/insn_trans/trans_rvv.c.inc
-> @@ -1100,26 +1100,34 @@ GEN_VEXT_TRANS(vle64ff_v, MO_64, r2nfvm, ldff_op, ld_us_check)
->   typedef void gen_helper_ldst_whole(TCGv_ptr, TCGv, TCGv_env, TCGv_i32);
->   
->   static bool ldst_whole_trans(uint32_t vd, uint32_t rs1, uint32_t nf,
-> -                             gen_helper_ldst_whole *fn,
-> -                             DisasContext *s)
-> +                             uint32_t log2_esz, gen_helper_ldst_whole *fn,
-> +                             DisasContext *s, bool is_load)
->   {
-> -    TCGv_ptr dest;
-> -    TCGv base;
-> -    TCGv_i32 desc;
-> -
-> -    uint32_t data = FIELD_DP32(0, VDATA, NF, nf);
-> -    data = FIELD_DP32(data, VDATA, VM, 1);
-> -    dest = tcg_temp_new_ptr();
-> -    desc = tcg_constant_i32(simd_desc(s->cfg_ptr->vlenb,
-> -                                      s->cfg_ptr->vlenb, data));
-> -
-> -    base = get_gpr(s, rs1, EXT_NONE);
-> -    tcg_gen_addi_ptr(dest, tcg_env, vreg_ofs(s, vd));
-> +    TCGv addr;
-> +    addr = get_address(s, rs1, 0);
-> +    uint32_t size = s->cfg_ptr->vlenb * nf;
->   
-> -    mark_vs_dirty(s);	
+Alex Benn=C3=A9e <alex.bennee@linaro.org> writes:
 
-Did you lose this?  You can't rely on the call from finalize_rvv_inst at the end.  Dirty 
-must be already be set for the exception path if any of these memory operations fault.
+> Time will not advance if the system is paused or there are no timer
+> events set for the future. In absence of pending timer events
+> advancing time would make no difference the system state. Attempting
+> to do so would be a bug and the test or device under test would need
+> fixing.
+>
+> Tighten up the result reporting to `FAIL` if time was not advanced.
+>
+> Signed-off-by: Alex Benn=C3=A9e <alex.bennee@linaro.org>
+> Resolves: https://gitlab.com/qemu-project/qemu/-/issues/2687
 
-> -
-> -    fn(dest, base, tcg_env, desc);
-> +    TCGv_i128 t16 = tcg_temp_new_i128();
->   
-> +    /*
-> +     * Load/store minimum vlenb bytes per iteration.
-> +     * When possible do this atomically.
-> +     * Update vstart with the number of processed elements.
-> +     */
-> +    for (int i=0; i < size; i+=16) {
-
-Spaces.  scripts/checkpatch.pl should have complained.
-
-> +        addr = get_address(s, rs1, i);
-> +        if (is_load) {
-> +	    tcg_gen_qemu_ld_i128(t16, addr, s->mem_idx,
-> +		    MO_LE | MO_128 | MO_ATOM_WITHIN16);
-
-FWIW, for MO_128, MO_ATOM_WITHIN16 is equivalent to MO_ATOM_IFALIGN, which is the default.
-
-Where you can improve things if by specifying *less* atomicity.  For instance:
-
-   log2_esz == MO_8:  MO_ATOM_NONE
-   When operating on bytes, no larger atomicity is required.
-
-   log2_esz <= MO_64: MO_ATOM_IFALIGN_PAIR
-   Require atomicity on the two MO_64 halves, but no more than that.
-
-I don't currently support further granularity, because there doesn't seem to be a need, 
-and it's already somewhat confusing.
-
-There's no handling for vstart != 0.
-You could easily fall back to the helper for !s->vstart_eq_zero.
-
-> +	    tcg_gen_st_i128(t16, tcg_env, vreg_ofs(s, vd) + i);
-> +	    tcg_gen_addi_tl(cpu_vstart, cpu_vstart, 16 >> log2_esz);
-> +        } else {
-> +            tcg_gen_ld_i128(t16, tcg_env, vreg_ofs(s, vd) + i);
-> +            tcg_gen_qemu_st_i128(t16, addr, s->mem_idx,
-> +		    MO_LE | MO_128 | MO_ATOM_WITHIN16);
-> +	    tcg_gen_addi_tl(cpu_vstart, cpu_vstart, 16 >> log2_esz);
-
-The final iteration must set cpu_vstart to 0.
-
-Otherwise this looks quite plausible.
-
-
-r~
+Reviewed-by: Fabiano Rosas <farosas@suse.de>
 
