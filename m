@@ -4,51 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2C676E77187
-	for <qemu-riscv@archiver.kernel.org>; Wed, 18 Dec 2024 16:41:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B3421E77187
+	for <qemu-riscv@archiver.kernel.org>; Wed, 18 Dec 2024 16:42:46 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tNx5u-0007VK-GX; Wed, 18 Dec 2024 11:40:20 -0500
+	id 1tNx8C-0001A5-Mf; Wed, 18 Dec 2024 11:42:40 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <berrange@redhat.com>)
- id 1tNx5b-0007LF-Kn
- for qemu-riscv@nongnu.org; Wed, 18 Dec 2024 11:39:59 -0500
+ id 1tNx8B-00019L-Mi
+ for qemu-riscv@nongnu.org; Wed, 18 Dec 2024 11:42:39 -0500
 Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <berrange@redhat.com>)
- id 1tNx5X-0003xQ-BO
- for qemu-riscv@nongnu.org; Wed, 18 Dec 2024 11:39:57 -0500
+ id 1tNx86-00050x-IN
+ for qemu-riscv@nongnu.org; Wed, 18 Dec 2024 11:42:39 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1734539994;
+ s=mimecast20190719; t=1734540152;
  h=from:from:reply-to:reply-to:subject:subject:date:date:
  message-id:message-id:to:to:cc:cc:mime-version:mime-version:
  content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=XGlpZieNsCBXnIKD2cXRV0zgPqYY0gV21NOyHuyp8HU=;
- b=i0QMTRRjc7pwlm6+eEFXumgmL2+4FWWZ8Q8yyK0DO4KnMIFo6SKq7jIeLPq7agTyajZdWZ
- +/sRHQ75yFhYjJi+UFLDj/oKvbnVefrP3kJ2xLucLQVYsnk3pFL0dnHFSdx8Xq2GzepyUf
- P4ZuhJNfu5tRriagU8nbPvnygkkpEyY=
-Received: from mx-prod-mc-04.mail-002.prod.us-west-2.aws.redhat.com
+ bh=00azg0bxJY4Rn/l1rT1LJ13Rtkdjfr4MvO0BCYSrtzM=;
+ b=Wca3lzj4pgZv9aqnjQjrVIKSfRofHuJaO0IH8fsSUGb3yYDqQQKZtqKOkLHpKRLEoz2+b9
+ S0uEYmGFYuvNZRdzROmam47HcHnNva2JT+NPYU70hYlNkb9Y8lNIsvnIFGx4NS4wg1Nu4Q
+ 5N9aEszumfusDhQ+IjWlp1ujitetcCE=
+Received: from mx-prod-mc-05.mail-002.prod.us-west-2.aws.redhat.com
  (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
  relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-63-LYFe1BGbMh2zfILi_mCOYw-1; Wed,
- 18 Dec 2024 11:39:51 -0500
-X-MC-Unique: LYFe1BGbMh2zfILi_mCOYw-1
-X-Mimecast-MFC-AGG-ID: LYFe1BGbMh2zfILi_mCOYw
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-613-XSJa3orLOquC8v3XCVl43w-1; Wed,
+ 18 Dec 2024 11:42:29 -0500
+X-MC-Unique: XSJa3orLOquC8v3XCVl43w-1
+X-Mimecast-MFC-AGG-ID: XSJa3orLOquC8v3XCVl43w
 Received: from mx-prod-int-04.mail-002.prod.us-west-2.aws.redhat.com
  (mx-prod-int-04.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.40])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by mx-prod-mc-04.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id CECFF19560BC; Wed, 18 Dec 2024 16:39:45 +0000 (UTC)
+ by mx-prod-mc-05.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id 3F7331955EA5; Wed, 18 Dec 2024 16:42:24 +0000 (UTC)
 Received: from redhat.com (unknown [10.42.28.61])
  by mx-prod-int-04.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id 88C8F19560AD; Wed, 18 Dec 2024 16:39:30 +0000 (UTC)
-Date: Wed, 18 Dec 2024 16:39:26 +0000
+ id 2BA1D19560AD; Wed, 18 Dec 2024 16:42:08 +0000 (UTC)
+Date: Wed, 18 Dec 2024 16:42:05 +0000
 From: Daniel =?utf-8?B?UC4gQmVycmFuZ8Op?= <berrange@redhat.com>
 To: Alex =?utf-8?Q?Benn=C3=A9e?= <alex.bennee@linaro.org>
 Cc: qemu-devel@nongnu.org, Ed Maste <emaste@freebsd.org>,
@@ -84,16 +84,16 @@ Cc: qemu-devel@nongnu.org, Ed Maste <emaste@freebsd.org>,
  "Michael S. Tsirkin" <mst@redhat.com>, qemu-s390x@nongnu.org,
  Laurent Vivier <lvivier@redhat.com>,
  Alistair Francis <alistair.francis@wdc.com>
-Subject: Re: [PATCH v2 20/27] tests/functional: extend test_aarch64_virt with
- vulkan test
-Message-ID: <Z2L6vrM6uBZBBQ21@redhat.com>
+Subject: Re: [PATCH v2 21/27] tests/lcitool: bump to latest version of
+ libvirt-ci
+Message-ID: <Z2L7Xf4KlQD2WCVI@redhat.com>
 References: <20241218162104.3493551-1-alex.bennee@linaro.org>
- <20241218162104.3493551-21-alex.bennee@linaro.org>
+ <20241218162104.3493551-22-alex.bennee@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <20241218162104.3493551-21-alex.bennee@linaro.org>
+In-Reply-To: <20241218162104.3493551-22-alex.bennee@linaro.org>
 User-Agent: Mutt/2.2.13 (2024-03-09)
 X-Scanned-By: MIMEDefang 3.0 on 10.30.177.40
 Received-SPF: pass client-ip=170.10.129.124; envelope-from=berrange@redhat.com;
@@ -105,7 +105,7 @@ X-Spam_report: (-3.2 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
  DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H2=-1.116,
  RCVD_IN_VALIDITY_CERTIFIED_BLOCKED=0.001, RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -122,57 +122,20 @@ Reply-To: Daniel =?utf-8?B?UC4gQmVycmFuZ8Op?= <berrange@redhat.com>
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Wed, Dec 18, 2024 at 04:20:56PM +0000, Alex Bennée wrote:
-> Now we have virtio-gpu Vulkan support lets add a test for it.
-> Currently this is using images build by buildroot:
-> 
->   https://lists.buildroot.org/pipermail/buildroot/2024-December/768196.html
+On Wed, Dec 18, 2024 at 04:20:57PM +0000, Alex Bennée wrote:
+> We will shortly need this to build our riscv64 cross container.
+> However to keep the delta down just do the bump first. As ccache4 is
+> now preferred for FreeBSD to get the latest version there is a little
+> update in the FreeBSD metadata.
 > 
 > Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
-> 
 > ---
-> v2
->   - use decorator for has_cmd(zstd)
->   - move set_machine/require_accelerator to top of test
->   - un-handled->unhandled
->   - drop extra - from --snapshot
->   - drop unneeded virtualization=on
->   - only show 1s of each scene
->   - fix long lines
-> ---
->  tests/functional/test_aarch64_virt.py | 84 ++++++++++++++++++++++++++-
->  1 file changed, 81 insertions(+), 3 deletions(-)
-> 
+>  .gitlab-ci.d/cirrus/freebsd-14.vars | 2 +-
+>  tests/lcitool/libvirt-ci            | 2 +-
+>  tests/vm/generated/freebsd.json     | 2 +-
+>  3 files changed, 3 insertions(+), 3 deletions(-)
 
-> +    @skipUnless(*has_cmd('zstd'))
-> +    def test_aarch64_virt_with_gpu(self):
-> +        # This tests boots with a buildroot test image that contains
-> +        # vkmark and other GPU exercising tools. We run a headless
-> +        # weston that nevertheless still exercises the virtio-gpu
-> +        # backend.
-> +
-> +        self.set_machine('virt')
-> +        self.require_accelerator("tcg")
-> +
-> +        image_path_zst = self.ASSET_VIRT_GPU_ROOTFS.fetch()
-> +        kernel_path = self.ASSET_VIRT_GPU_KERNEL.fetch()
-> +
-> +        image_path = self.workdir + "/rootfs.ext4"
-
-Pending PULL has removed all direct access to self.workdir,
-use  'self.scratch_file("rootfs.ext4") instead, except that
-shouldn't be needed either....
-
-> +
-> +        run_cmd(['zstd', "-f", "-d", image_path_zst,
-> +                 "-o", image_path])
-
-...the pending PULL has added common helpers for uncompression,
-but only covers gz + lzma so far. Can you create a 'zstd_uncompress'
-in uncompress.py and wire it up in the same way. That would let
-this code turn into
-
-   image_path = self.uncompress(self.ASSERT_VIRT_GPU_ROOTFS)
+Reviewed-by: Daniel P. Berrangé <berrange@redhat.com>
 
 
 With regards,
