@@ -4,68 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 15DB0E7718A
-	for <qemu-riscv@archiver.kernel.org>; Wed, 18 Dec 2024 16:25:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0A746E77187
+	for <qemu-riscv@archiver.kernel.org>; Wed, 18 Dec 2024 16:27:01 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tNwo4-000866-K4; Wed, 18 Dec 2024 11:21:52 -0500
+	id 1tNwnQ-0007O4-Ge; Wed, 18 Dec 2024 11:21:12 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1tNwns-0007m3-6l
- for qemu-riscv@nongnu.org; Wed, 18 Dec 2024 11:21:40 -0500
-Received: from mail-ed1-x533.google.com ([2a00:1450:4864:20::533])
+ id 1tNwnP-0007NL-GK
+ for qemu-riscv@nongnu.org; Wed, 18 Dec 2024 11:21:11 -0500
+Received: from mail-ej1-x62f.google.com ([2a00:1450:4864:20::62f])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1tNwnV-0006qZ-Dy
- for qemu-riscv@nongnu.org; Wed, 18 Dec 2024 11:21:39 -0500
-Received: by mail-ed1-x533.google.com with SMTP id
- 4fb4d7f45d1cf-5cecbddb574so10982534a12.1
- for <qemu-riscv@nongnu.org>; Wed, 18 Dec 2024 08:21:16 -0800 (PST)
+ id 1tNwnM-0006c4-5a
+ for qemu-riscv@nongnu.org; Wed, 18 Dec 2024 11:21:11 -0500
+Received: by mail-ej1-x62f.google.com with SMTP id
+ a640c23a62f3a-a9f1d76dab1so1326841666b.0
+ for <qemu-riscv@nongnu.org>; Wed, 18 Dec 2024 08:21:07 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1734538876; x=1735143676; darn=nongnu.org;
+ d=linaro.org; s=google; t=1734538866; x=1735143666; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=/WD+OCh9xieXyi8aUL7na7hMYPj/U0GHInutd7eRNwQ=;
- b=Y2nME5dZeYtcJBmjx6ax9RpoZoFFa72POHjewp36RFIlS5MmrCKrGQMuVyoYcHe2lr
- q6qV9C5YfpUgwo4+eER9Ur6cQxIgZm+mJ8kR74d4tJ8HAohpCVBDLMA2CIrtiLDigeo6
- qBjkK8CIc7WyMwex9tkGTtIFjxRnQiL7XpIF6GptgLcgOptFGa51oOuO5/RyJ+UijoAz
- Zgov+Aoq9drseCfj7GLyxS3mvn4Tj4yc1W3fVZ1nsSGvd+NR5rnqDokD1OsVghRtrg/z
- 37kjHZcAgdIL8wWpRKhgY++1+tG82DRojT5QziYl4frk/DCGYvv674rZtjobtxGi7SYX
- QEAA==
+ bh=i/SJr+0xAZP15vcEaFWAWnIHAp8JE9E44SGnC3D++lo=;
+ b=IrrQjMVbhR9RdwYEWLL4oHpMcpoquerc/UfDV6TyNf5L2XAPS8ZjbHuROd6wV2Yz1K
+ IHulQGx3NuiE+TR+6s8KM8yuemAxgrHkpgxSWIb6YYvCL7tRMigxWoxos4d3sUXKvINy
+ 1dqq1SCFfgR/WC6gsQMXdVZZo6BFQjxPdo+EkqU8m6/vRd9yEEtNWhDjCpz5xQtvqPpn
+ Ga/HL/4fk3D5ur4YyBUQNteIPe1lJzTZyj2oUYN2OvuavD0wZ/oP9xt4X0pDZTnZNANb
+ PK6ouf1jgRyF+guqSFp3krxqWKkB5g/2hc4DVytr2naKOucuKsd3M+dN0F+naP69F4eo
+ bKmw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1734538876; x=1735143676;
+ d=1e100.net; s=20230601; t=1734538866; x=1735143666;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=/WD+OCh9xieXyi8aUL7na7hMYPj/U0GHInutd7eRNwQ=;
- b=oPFL0Mbf9ItF0jgf7Hpspvj6Wes2Qx6s+KqjMo15HOdTlwZ3dYoIwjoKgj+Wu+OKym
- fHQdZ17Mg9Gx1nESK7Ab4wxcKexhqZDBkOxfA6nOCBgoKNCG7ysxXBW0SDTbaSed8g1I
- YIef0lnFPBRMK1sTkf0FccG/81LfyCwXpPL24KYWIc2UU0d8wMOUA4CIDyyiamiPjBZ/
- oxH0cxmk1x5KxXGckMWnCpBuaFzZH4xn36+MuLxPu8Te9TmDzEW3zEFBIZmmjw7Vo8ib
- qKMD+4OXqmlM2t+KjxRsXiuSc4ev9pnuoCFxwR7MXUat9Wdw/RP2FMM7CSc6AHK/Cryq
- dWWQ==
+ bh=i/SJr+0xAZP15vcEaFWAWnIHAp8JE9E44SGnC3D++lo=;
+ b=Lhooo0dIgV4AbMnXLJ9bQLD5Tj/XlZInad28u1vOCR2ty+z42bpbcXkCSAo641oTkt
+ q8VWvC6BacR72rz73NIZDVBZ0DW6I+S4QsNU+I80/Hrp2ypuq7LDGus8z52dFoN9KgFK
+ zqyDYT45DAkBAOQ9bG69gf5UOIbeW8aLynptw7/It9GfC81DLhFzB42dRwUEUa+Qiobc
+ 7r7+Ne9JYD5hgPAUbs5PSVCQ57VKgcECHbzq0/IJxPOYy1sFf8ItJC4BXDZlYdzEyS/6
+ qHxYF77RjKBfHz4rIsGfWMRDiu+bhcmZcDBpk48KqCCoqRZNPDZGUWG6Vcul7wvg5Luw
+ WYUg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWrWP+edthai0Wl4666wOi1m2iIFRIog+HTHa9QA3bOe5Tfkytu9IHiJOqeQp8Ks7Yyh4xHq++Peeod@nongnu.org
-X-Gm-Message-State: AOJu0YyAtu7bQvPxD/mAgkhqjrTLr1AmLl0olGjlLOmTb9BrFc2B3ugx
- 1oKcOA5065poui11f1Cwz1opS+Kh4+JtQgpK6SicAuvGRrsgt4/TIWcVN9+E8Q4=
-X-Gm-Gg: ASbGncvFq/uONk6udm9d4sGyy4DHKqCW4HLRvWVUPHhoJEuzr/PWoaBro7uDx+fSoKR
- fe0SPWCovBdieOQKjLH816Bhe7C+i9bheftsnEVgEHWfOYL4Jx5UPOD/3sg6A3ONWYHKhdQ3sUU
- EMA9k4ZNrKvf8VTmO8Az41C/5kLTX1hOAHXtZDv0icty1pXX2qFoCbCWfos77hGdMYgDPZjbkFN
- 8FoBuvnyGibjYBqiWwSS7q325MqmHfRJiuPH9eZTpBikOm1XsnMgiU=
-X-Google-Smtp-Source: AGHT+IHiSqi+g0EE7Vs4MtUIdiCQOpAOtRZSSznSgSCmX7FN6dTmpkBuWIofdpLJUgqx25DZfIteqg==
-X-Received: by 2002:a05:6402:3589:b0:5d2:723c:a568 with SMTP id
- 4fb4d7f45d1cf-5d7ee3ba959mr3583489a12.10.1734538875792; 
- Wed, 18 Dec 2024 08:21:15 -0800 (PST)
+ AJvYcCXDLPiZgMJMtzAsGelRGGKz4q7Gl15HpkzI4eyvTdqZsfVHGO7OkXsMUszgJFuq7v0cZofRJyEwpa+L@nongnu.org
+X-Gm-Message-State: AOJu0Yz/rcIsVZ5+ZGPmAhO0UkmbjAkS8oOVSmRPRyNkNeMTGqA+DMJu
+ 6XSxIIMxnx9D7pOkfhJG7O7wcEKCecbhV3JEv9Cbck1BBqCTon08JEuk6otk3Ug=
+X-Gm-Gg: ASbGncsAU4XCv3BFtH71/jQh5Ge+0ojEzS+znYojebkae80rGOVl6yvutlSs1R/qwV3
+ 6hzLsg7F3LpJHBRCXP3Y1KlMpwmf+Hx6nljYOFvtIhhpGNzz2vsCgOSgF2J2ztGQ+o8LhDKpUCr
+ If6JZSdhy42gEzp/emj0hXcVo6DMs++Y0Cin0qLsCLbKnSoKyDGNFDmz8w0UF0p93ld9NV6tu/U
+ FjC3r48IYvjKwsj/JnDircOE2Op+9JfwPfCzKjOeUA8xkbxrsDXqzI=
+X-Google-Smtp-Source: AGHT+IFthPzbx6DY1sb7DlSTaktUVG3pixyKVA6o1865T4/8OhNarRdwyKxeCGIcknXole4IQIqUjA==
+X-Received: by 2002:a17:906:c104:b0:aab:dfef:8136 with SMTP id
+ a640c23a62f3a-aabf475c2e7mr274489866b.24.1734538866182; 
+ Wed, 18 Dec 2024 08:21:06 -0800 (PST)
 Received: from draig.lan ([85.9.250.243]) by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5d652ab604fsm5553991a12.2.2024.12.18.08.21.08
+ a640c23a62f3a-aab96359c8dsm573844466b.130.2024.12.18.08.21.04
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 18 Dec 2024 08:21:11 -0800 (PST)
+ Wed, 18 Dec 2024 08:21:05 -0800 (PST)
 Received: from draig.lan (localhost [IPv6:::1])
- by draig.lan (Postfix) with ESMTP id 449C55FDA3;
- Wed, 18 Dec 2024 16:21:05 +0000 (GMT)
+ by draig.lan (Postfix) with ESMTP id 492A25FB2E;
+ Wed, 18 Dec 2024 16:21:04 +0000 (GMT)
 From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: =?UTF-8?q?Daniel=20P=2E=20Berrang=C3=A9?= <berrange@redhat.com>,
@@ -103,17 +103,17 @@ Cc: =?UTF-8?q?Daniel=20P=2E=20Berrang=C3=A9?= <berrange@redhat.com>,
  Alistair Francis <alistair.francis@wdc.com>,
  =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
  Anders Roxell <anders.roxell@linaro.org>
-Subject: [PATCH v2 12/27] tests/functional: update the s390x tuxrun tests
-Date: Wed, 18 Dec 2024 16:20:48 +0000
-Message-Id: <20241218162104.3493551-13-alex.bennee@linaro.org>
+Subject: [PATCH v2 02/27] tests/functional: update the i386 tuxrun tests
+Date: Wed, 18 Dec 2024 16:20:38 +0000
+Message-Id: <20241218162104.3493551-3-alex.bennee@linaro.org>
 X-Mailer: git-send-email 2.39.5
 In-Reply-To: <20241218162104.3493551-1-alex.bennee@linaro.org>
 References: <20241218162104.3493551-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::533;
- envelope-from=alex.bennee@linaro.org; helo=mail-ed1-x533.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::62f;
+ envelope-from=alex.bennee@linaro.org; helo=mail-ej1-x62f.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -142,31 +142,31 @@ Cc: Anders Roxell <anders.roxell@linaro.org>
 Reviewed-by: Thomas Huth <thuth@redhat.com>
 Tested-by: Thomas Huth <thuth@redhat.com>
 Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
-Message-Id: <20241121165806.476008-33-alex.bennee@linaro.org>
+Message-Id: <20241121165806.476008-23-alex.bennee@linaro.org>
 ---
- tests/functional/test_s390x_tuxrun.py | 8 ++++----
+ tests/functional/test_i386_tuxrun.py | 8 ++++----
  1 file changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/tests/functional/test_s390x_tuxrun.py b/tests/functional/test_s390x_tuxrun.py
-index dcab17c68b..a7db4bfd84 100755
---- a/tests/functional/test_s390x_tuxrun.py
-+++ b/tests/functional/test_s390x_tuxrun.py
+diff --git a/tests/functional/test_i386_tuxrun.py b/tests/functional/test_i386_tuxrun.py
+index c593ffbe8c..f3ccf11ae8 100755
+--- a/tests/functional/test_i386_tuxrun.py
++++ b/tests/functional/test_i386_tuxrun.py
 @@ -17,11 +17,11 @@
- class TuxRunS390xTest(TuxRunBaselineTest):
+ class TuxRunI386Test(TuxRunBaselineTest):
  
-     ASSET_S390X_KERNEL = Asset(
--        'https://storage.tuxboot.com/20230331/s390/bzImage',
--        '0414e98dd1c3dafff8496c9cd9c28a5f8d04553bb5ba37e906a812b48d442ef0')
-+        'https://storage.tuxboot.com/buildroot/20241119/s390/bzImage',
-+        'ee67e91db52a2aed104a7c72b2a08987c678f8179c029626789c35d6dd0fedf1')
-     ASSET_S390X_ROOTFS = Asset(
--        'https://storage.tuxboot.com/20230331/s390/rootfs.ext4.zst',
--        '88c37c32276677f873a25ab9ec6247895b8e3e6f8259134de2a616080b8ab3fc')
-+        'https://storage.tuxboot.com/buildroot/20241119/s390/rootfs.ext4.zst',
-+        'bff7971fc2fef56372d98afe4557b82fd0a785a241e44c29b058e577ad1bbb44')
+     ASSET_I386_KERNEL = Asset(
+-        'https://storage.tuxboot.com/20230331/i386/bzImage',
+-        'a3e5b32a354729e65910f5a1ffcda7c14a6c12a55e8213fb86e277f1b76ed956')
++        'https://storage.tuxboot.com/buildroot/20241119/i386/bzImage',
++        '47fb44e38e34101eb0f71a2a01742b959d40ed5fd67cefb5608a39be11d3b74e')
+     ASSET_I386_ROOTFS = Asset(
+-        'https://storage.tuxboot.com/20230331/i386/rootfs.ext4.zst',
+-        'f15e66b2bf673a210ec2a4b2e744a80530b36289e04f5388aab812b97f69754a')
++        'https://storage.tuxboot.com/buildroot/20241119/i386/rootfs.ext4.zst',
++        'a1a3b3b4c9dccd6475b58db95c107b468b736b700f6620985a8ed050a73d51c8')
  
-     def test_s390(self):
-         self.wait_for_shutdown=False
+     def test_i386(self):
+         self.set_machine('q35')
 -- 
 2.39.5
 
