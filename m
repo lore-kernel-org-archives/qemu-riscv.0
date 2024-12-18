@@ -4,96 +4,98 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7172DE77187
-	for <qemu-riscv@archiver.kernel.org>; Wed, 18 Dec 2024 17:09:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8D61BE77188
+	for <qemu-riscv@archiver.kernel.org>; Wed, 18 Dec 2024 19:11:06 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tNxXo-0000WD-M0; Wed, 18 Dec 2024 12:09:08 -0500
+	id 1tNzPj-0001ZE-Qc; Wed, 18 Dec 2024 14:08:55 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <paolo.savini@embecosm.com>)
- id 1tNxXc-0000OC-Ht
- for qemu-riscv@nongnu.org; Wed, 18 Dec 2024 12:08:58 -0500
-Received: from mail-ej1-x631.google.com ([2a00:1450:4864:20::631])
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1tNzPh-0001Xs-C0
+ for qemu-riscv@nongnu.org; Wed, 18 Dec 2024 14:08:53 -0500
+Received: from mail-ot1-x330.google.com ([2607:f8b0:4864:20::330])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <paolo.savini@embecosm.com>)
- id 1tNxXW-0003nE-6R
- for qemu-riscv@nongnu.org; Wed, 18 Dec 2024 12:08:56 -0500
-Received: by mail-ej1-x631.google.com with SMTP id
- a640c23a62f3a-a9a0ec0a94fso1060575066b.1
- for <qemu-riscv@nongnu.org>; Wed, 18 Dec 2024 09:08:47 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1tNzPf-0006lF-Ke
+ for qemu-riscv@nongnu.org; Wed, 18 Dec 2024 14:08:53 -0500
+Received: by mail-ot1-x330.google.com with SMTP id
+ 46e09a7af769-71e1158fe3eso3623301a34.1
+ for <qemu-riscv@nongnu.org>; Wed, 18 Dec 2024 11:08:51 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=embecosm.com; s=google; t=1734541726; x=1735146526; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=wj53VmaKWxtGgzq29nXWsC+lzS5katF9PdJGMMTxpAc=;
- b=grQBPboRSACIsWoTONAYVnpza1PtzwZCkmDHa5v3Ox99iZkAebLtoiZNesSL46x1iP
- lO9epXgORzDLLW4+iwDEVZx+TaxQTK7HFovWamWzmmxqInkLmxrrkcG7v2Gdozn3DaQY
- 92piRtTMvLB8l0e24jX6QRpxEw7y8WYvaGggcL6R0xcX0M94xyleKejjO01v1iHiDHei
- jZqrVICLTiLdYmiIlTZKX90WKvP9vpimH6qbNeUBUTvK9S8W2U6JpyS51ZiuoYdC4gC5
- LR/0PE10OhRV1zrHoBdgnfrnENqTI01g29G+p4Dm7MgVKxan6m6BS3uuUnoD8Q/YK4vm
- Pjbw==
+ d=linaro.org; s=google; t=1734548930; x=1735153730; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=udJcTVb9DLI0AydQwO+2wkSMyUU5OAyGu8logyWVzCI=;
+ b=DhubOM8RI94MAQXXEFoor47JR5AMjNShMMISdLwGJJmlgdaDr1bvKcJqiLx/Y+4255
+ xafY5mvGHZVkmJAKbIlRTS6X/uibxRuQ7AwOEWcfpjSv9yZLZ+/g2KTKzYwtCNNg+/76
+ wOOU4nR/PXD1rEdsyZqFMnsQmg4Fb35A5X6xRNNAZVEbZmQB3K2xmCDzLSMA1bQJVRZs
+ 26F8DoMF48r/V67/empwu0ePrPxzG/3uT7i1MnoPXaFRNdtCutpJLnfEcYON8iUNkCyw
+ QnwxBLRX+rvA9lyoa+zPjWjYBgOv0QLrCMVcW86SywiS0JMHRwMugDWcpqegpwVUJxzH
+ 8MLQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1734541726; x=1735146526;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=wj53VmaKWxtGgzq29nXWsC+lzS5katF9PdJGMMTxpAc=;
- b=HkPIy/ogqRcwzC1aau/hMRp2W7RxaQtGRVVII0mkaOY0II9CYGAictr3MgzMlgBSN7
- B9QpuNO7pezWDgn41nKZ/+UVAQpmAs2eZeSX6nD53x303GREkyhKZk1343hiiiX4TigU
- M/Uf3uzYjXXXzEOdWhC6n5FZGPvtnpCmip1nn6lvFwe/DfnfcKTBbVRAZ1JpWIbhKb9R
- vFTiR0CPlwQIbpeunOdFaFu16E115HyxHGkOfCqaD7WhxkBS7Eon5OCRNFVghJqUsk/K
- Brhcb8zXUKoRLUG1Qy7oqqrEfXZCHatkHOjrXONQia1gMEUuwcMr3TyFwDhxZ2inoaxr
- LTYA==
+ d=1e100.net; s=20230601; t=1734548930; x=1735153730;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=udJcTVb9DLI0AydQwO+2wkSMyUU5OAyGu8logyWVzCI=;
+ b=J16xMLf39Z7rkM7hzWISqjBi1pDLBMWvsi+hMwD+fn/TBNUbFUGlGWXBnuNOvlgGdS
+ QLMmmnFl2+CFHhoiK9uGfM1mgjtX7jlXoVdvr1h2ULSdy/3Y1CROzIt1mdKGT8q4bqSo
+ Fp4l4xsVuZItdHJk3D52bAuqnBh1ShYvmh744ivgIDoJiR/pk/ZlQZej2tEZogiTStFd
+ JGVGbqJM81jUf5lxmt31bAczU4eLr6M+iQmUcVpZv3EdvpigwvRTBNkRoi6koM2NFE0M
+ f1ietq2WRinAl1YtzNuYT1qa0TFUgom/2FrTB4uZfXgYGuHfLFmT1LTx+P/5rBapWNWB
+ x7VA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUpNwPBdKbMnkETPblW2uwQ/kyVbMQePtpE6/SS0GdR43JDtGl3QRyODyyGPTVhTaS82SP0ksgQMIDC@nongnu.org
-X-Gm-Message-State: AOJu0YzFFOM+xoXWX+gYXYoQJNqr2gKFoTsFMJxZ3ymO7oKBOmP7VAk/
- cHl97PqW7cbjntstQiREzbTOoy/Om8YYLznlLXA/M/9SsPUDJLk2vQtEW44/PA4=
-X-Gm-Gg: ASbGncuhzPIV6E6JksAb+0JQyqtMO6fCeyO0ihZicUXkuA0sAovNoM6xvMUjI+ieG5i
- 7mvW8Pz5+870GoT3Pek0LzK1bZa+ld2t0oQt/dGiCKyTxB6S973EInWd0pYd4VDHq/rN4a+3EwR
- VYze2OpBYS9k0Pv/XCLQbHzrX/yye9eXGGEzHIDjqtWsi5y4Nb6YNU7qW4U3rZ7WGzOQ0lxT3Ti
- z7gxsa8Le0c3pCYYhI5jpkpF91eUCPSc8a0jVZ2d8BLY/mXfZVytLl/FFMJBhaD+Dt8DlnQqYpf
- uLC/KV0y0uq99ycRP+1+Pe/iUsZtTTdmqg3wuJsW11k=
-X-Google-Smtp-Source: AGHT+IES+IWWI8qu/Mln9BUyghDPHIMOGCPG5B75R/ta+SI+35ifI6BWGI+FYCKE43WWkEYNrO4Q+Q==
-X-Received: by 2002:a17:907:9409:b0:aab:cce0:f8b4 with SMTP id
- a640c23a62f3a-aabf4956d7bmr312897966b.52.1734541726471; 
- Wed, 18 Dec 2024 09:08:46 -0800 (PST)
-Received: from paolo-laptop-amd.station (mob-109-118-46-116.net.vodafone.it.
- [109.118.46.116]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-aabfbbb7a52sm70403966b.58.2024.12.18.09.08.43
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 18 Dec 2024 09:08:44 -0800 (PST)
-From: Paolo Savini <paolo.savini@embecosm.com>
-To: qemu-devel@nongnu.org,
-	qemu-riscv@nongnu.org
-Cc: Paolo Savini <paolo.savini@embecosm.com>,
- Richard Handerson <richard.henderson@linaro.org>,
- Palmer Dabbelt <palmer@dabbelt.com>,
+ AJvYcCWhHri8llmXrKt2HMUtLEDDZO6zE/xwSedlxTgdU8YM6Di/YTx2bDD9NFmUMg4e639IZ+s5qP+w2v8/@nongnu.org
+X-Gm-Message-State: AOJu0YxED5tp+iHbVMtlfrORogt4tnL8410RwsRxuEdDdJg5d95U1ALq
+ NYmzS+zOzW3QIXXkK64HNsrI0muyaj0MfRB97AbCXcIiruSpVM45Dxj4eItwy5E=
+X-Gm-Gg: ASbGncsRwUU/7A6zznzsOG6y80hyGPRw+bFR6XBwr26CSTB9LwiSPGTfuFiAvqN2Pvw
+ JZjfbzCL+6Ja+8f3b+G2kgqlAIXmhmG5XmKH6pdifrHNtEaA6UP4ldgxjJ07UeOc/KAi/HouINf
+ WN0dXXAEhZylCzYJEDQzn0lWHiebBge/ollq/GMXvQEYTvgsSTwy4azjMjv495tPdvyLDyCgKvp
+ PiUkeIH5guhfaXKwZvYWPmjyy8AjSTTXD5e/MtQw86sRd4M/5dE7NyvZ3WcbaUZU0OJxXPnLw==
+X-Google-Smtp-Source: AGHT+IGiXfaSqv6UQhnOL/WbhW6s1n3N8cLy1601OXY/Su2qeIdMZazB2bvJeXx6/RYFhpUSN/RP3g==
+X-Received: by 2002:a05:6830:6a98:b0:71d:4488:19d9 with SMTP id
+ 46e09a7af769-71fb75a59e8mr2084831a34.17.1734548930207; 
+ Wed, 18 Dec 2024 11:08:50 -0800 (PST)
+Received: from [172.20.0.130] ([187.217.227.247])
+ by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-71e48371490sm2681475a34.33.2024.12.18.11.08.48
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 18 Dec 2024 11:08:49 -0800 (PST)
+Message-ID: <e8fb908d-4723-417a-bf88-b4050432ddad@linaro.org>
+Date: Wed, 18 Dec 2024 13:08:46 -0600
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [RFC 1/1] target/riscv: use tcg ops generation to emulate whole
+ reg rvv loads/stores.
+To: Paolo Savini <paolo.savini@embecosm.com>, qemu-devel@nongnu.org,
+ qemu-riscv@nongnu.org
+Cc: Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bmeng.cn@gmail.com>,
  Weiwei Li <liwei1518@gmail.com>,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
  Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
  Helene Chelin <helene.chelin@embecosm.com>, Nathan Egge <negge@google.com>,
- Max Chou <max.chou@sifive.com>,
- Jeremy Bennett <jeremy.bennett@embecosm.com>,
- Craig Blackmore <craig.blackmore@embecosm.com>
-Subject: [RFC 0/1] target/riscv: use tcg ops generation to emulate whole reg
- rvv loads/stores.
-Date: Wed, 18 Dec 2024 17:08:39 +0000
-Message-ID: <20241218170840.1090473-1-paolo.savini@embecosm.com>
-X-Mailer: git-send-email 2.43.0
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::631;
- envelope-from=paolo.savini@embecosm.com; helo=mail-ej1-x631.google.com
+ Max Chou <max.chou@sifive.com>, Jeremy Bennett
+ <jeremy.bennett@embecosm.com>, Craig Blackmore <craig.blackmore@embecosm.com>
+References: <20241218170840.1090473-1-paolo.savini@embecosm.com>
+ <20241218170840.1090473-2-paolo.savini@embecosm.com>
+Content-Language: en-US
+From: Richard Henderson <richard.henderson@linaro.org>
+In-Reply-To: <20241218170840.1090473-2-paolo.savini@embecosm.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::330;
+ envelope-from=richard.henderson@linaro.org; helo=mail-ot1-x330.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- T_SPF_TEMPERROR=0.01 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -109,35 +111,96 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-The following patch aims at speeding up the emulation of whole register loads/stores by generating tcg operations rather then going through the call of a helper function.
-The proposed implementation aims at using atomic 16 byte loads and store when possible and it updates the value of vstart in order to keep the state of the cpu consistent.
-This kind of precaution doesn't seem to be followed by other vector operations that use tcg ops generation so this might be redundant.
-Also the atomicity requirements of qemu loads and stores get removed if we are running in serial mode (!CF_PARALLEL).
-In light of this I wonder whether exceptions could be a concern or not in the context of tcg ops generation, above all when it comes to updating the state of the cpu consistently (vstart).
-Any feedback welcome.
+On 12/18/24 11:08, Paolo Savini wrote:
+> This patch aims at emulating the whole register loads and stores through
+> direct generation of tcg operations rather than through the aid of a helper
+> function.
+> 
+> Signed-off-by: Paolo Savini <paolo.savini@embecosm.com>
+> ---
+>   target/riscv/insn_trans/trans_rvv.c.inc | 104 +++++++++++++-----------
+>   1 file changed, 56 insertions(+), 48 deletions(-)
+> 
+> diff --git a/target/riscv/insn_trans/trans_rvv.c.inc b/target/riscv/insn_trans/trans_rvv.c.inc
+> index b9883a5d32..63d8b05bf1 100644
+> --- a/target/riscv/insn_trans/trans_rvv.c.inc
+> +++ b/target/riscv/insn_trans/trans_rvv.c.inc
+> @@ -1100,26 +1100,34 @@ GEN_VEXT_TRANS(vle64ff_v, MO_64, r2nfvm, ldff_op, ld_us_check)
+>   typedef void gen_helper_ldst_whole(TCGv_ptr, TCGv, TCGv_env, TCGv_i32);
+>   
+>   static bool ldst_whole_trans(uint32_t vd, uint32_t rs1, uint32_t nf,
+> -                             gen_helper_ldst_whole *fn,
+> -                             DisasContext *s)
+> +                             uint32_t log2_esz, gen_helper_ldst_whole *fn,
+> +                             DisasContext *s, bool is_load)
+>   {
+> -    TCGv_ptr dest;
+> -    TCGv base;
+> -    TCGv_i32 desc;
+> -
+> -    uint32_t data = FIELD_DP32(0, VDATA, NF, nf);
+> -    data = FIELD_DP32(data, VDATA, VM, 1);
+> -    dest = tcg_temp_new_ptr();
+> -    desc = tcg_constant_i32(simd_desc(s->cfg_ptr->vlenb,
+> -                                      s->cfg_ptr->vlenb, data));
+> -
+> -    base = get_gpr(s, rs1, EXT_NONE);
+> -    tcg_gen_addi_ptr(dest, tcg_env, vreg_ofs(s, vd));
+> +    TCGv addr;
+> +    addr = get_address(s, rs1, 0);
+> +    uint32_t size = s->cfg_ptr->vlenb * nf;
+>   
+> -    mark_vs_dirty(s);	
 
-The proposed implementation aims at replacing the correspondent helper function, that will be removed in the final version of the patch, unless there are corner cases where it is still necessary to use it. 
+Did you lose this?  You can't rely on the call from finalize_rvv_inst at the end.  Dirty 
+must be already be set for the exception path if any of these memory operations fault.
 
-Cc: Richard Handerson <richard.henderson@linaro.org>
-Cc: Palmer Dabbelt <palmer@dabbelt.com>
-Cc: Alistair Francis <alistair.francis@wdc.com>
-Cc: Bin Meng <bmeng.cn@gmail.com>
-Cc: Weiwei Li <liwei1518@gmail.com>
-Cc: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Cc: Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
-Cc: Helene Chelin <helene.chelin@embecosm.com>
-Cc: Nathan Egge <negge@google.com>
-Cc: Max Chou <max.chou@sifive.com>
-Cc: Jeremy Bennett <jeremy.bennett@embecosm.com>
-Cc: Craig Blackmore <craig.blackmore@embecosm.com>
+> -
+> -    fn(dest, base, tcg_env, desc);
+> +    TCGv_i128 t16 = tcg_temp_new_i128();
+>   
+> +    /*
+> +     * Load/store minimum vlenb bytes per iteration.
+> +     * When possible do this atomically.
+> +     * Update vstart with the number of processed elements.
+> +     */
+> +    for (int i=0; i < size; i+=16) {
 
-Paolo Savini (1):
-  target/riscv: use tcg ops generation to emulate whole reg rvv
-    loads/stores.
+Spaces.  scripts/checkpatch.pl should have complained.
 
- target/riscv/insn_trans/trans_rvv.c.inc | 104 +++++++++++++-----------
- 1 file changed, 56 insertions(+), 48 deletions(-)
+> +        addr = get_address(s, rs1, i);
+> +        if (is_load) {
+> +	    tcg_gen_qemu_ld_i128(t16, addr, s->mem_idx,
+> +		    MO_LE | MO_128 | MO_ATOM_WITHIN16);
 
--- 
-2.34.1
+FWIW, for MO_128, MO_ATOM_WITHIN16 is equivalent to MO_ATOM_IFALIGN, which is the default.
+
+Where you can improve things if by specifying *less* atomicity.  For instance:
+
+   log2_esz == MO_8:  MO_ATOM_NONE
+   When operating on bytes, no larger atomicity is required.
+
+   log2_esz <= MO_64: MO_ATOM_IFALIGN_PAIR
+   Require atomicity on the two MO_64 halves, but no more than that.
+
+I don't currently support further granularity, because there doesn't seem to be a need, 
+and it's already somewhat confusing.
+
+There's no handling for vstart != 0.
+You could easily fall back to the helper for !s->vstart_eq_zero.
+
+> +	    tcg_gen_st_i128(t16, tcg_env, vreg_ofs(s, vd) + i);
+> +	    tcg_gen_addi_tl(cpu_vstart, cpu_vstart, 16 >> log2_esz);
+> +        } else {
+> +            tcg_gen_ld_i128(t16, tcg_env, vreg_ofs(s, vd) + i);
+> +            tcg_gen_qemu_st_i128(t16, addr, s->mem_idx,
+> +		    MO_LE | MO_128 | MO_ATOM_WITHIN16);
+> +	    tcg_gen_addi_tl(cpu_vstart, cpu_vstart, 16 >> log2_esz);
+
+The final iteration must set cpu_vstart to 0.
+
+Otherwise this looks quite plausible.
+
+
+r~
 
