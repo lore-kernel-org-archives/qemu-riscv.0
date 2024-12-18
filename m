@@ -4,117 +4,99 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EE2CDE77187
-	for <qemu-riscv@archiver.kernel.org>; Wed, 18 Dec 2024 17:07:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6042BE77188
+	for <qemu-riscv@archiver.kernel.org>; Wed, 18 Dec 2024 17:09:34 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tNxWA-0007bb-UQ; Wed, 18 Dec 2024 12:07:26 -0500
+	id 1tNxXp-0000a7-Lb; Wed, 18 Dec 2024 12:09:10 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tNxW9-0007bB-11
- for qemu-riscv@nongnu.org; Wed, 18 Dec 2024 12:07:25 -0500
-Received: from mail-wm1-x331.google.com ([2a00:1450:4864:20::331])
+ (Exim 4.90_1) (envelope-from <paolo.savini@embecosm.com>)
+ id 1tNxXc-0000OD-K4
+ for qemu-riscv@nongnu.org; Wed, 18 Dec 2024 12:08:58 -0500
+Received: from mail-ej1-x62a.google.com ([2a00:1450:4864:20::62a])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tNxW2-0003Yx-03
- for qemu-riscv@nongnu.org; Wed, 18 Dec 2024 12:07:24 -0500
-Received: by mail-wm1-x331.google.com with SMTP id
- 5b1f17b1804b1-436249df846so47054665e9.3
- for <qemu-riscv@nongnu.org>; Wed, 18 Dec 2024 09:07:17 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <paolo.savini@embecosm.com>)
+ id 1tNxXa-0003no-Ns
+ for qemu-riscv@nongnu.org; Wed, 18 Dec 2024 12:08:56 -0500
+Received: by mail-ej1-x62a.google.com with SMTP id
+ a640c23a62f3a-aa6c0d1833eso1205932766b.1
+ for <qemu-riscv@nongnu.org>; Wed, 18 Dec 2024 09:08:53 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1734541636; x=1735146436; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=84Xp02vd965R6EVhlhdL+FhhEbC0vWzwkssxj/nxppI=;
- b=rurhmHGW5uTIQDT7jMoSKouI/m2r+pOoRWpgvk84PTq7q2dvNtFoiI+XrTo/R23l5O
- 4a1dVHQqxb1t+ifUlQfAl0bVitbSZ7hEHzuR+PL/XajCrm6VV7t3cIJaeUnvSmVgd9qW
- H5a2/HageUNGXkRAf64cCdBNdv4B+3NB1mz5WYmAfoqz5TfbfLLbwn4M49+YqnVhWIzA
- XmPmWw9sTYQzE6HDOSmvrpmVAxyM+VLJqeYmE6skQPIsdG0YMrAg4wcvbxSOdlOV+gKg
- fQH4w+RnqbYYVEJt/eItr7DIImCiJtk2DbFdhSPUjvhDFSQuHCPDhoseBxt3J6KWfg/l
- vEzA==
+ d=embecosm.com; s=google; t=1734541730; x=1735146530; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=QjKrMxFPl8OMA4kqm+2v9mOTe2EEJBR99lcyaD4JPDU=;
+ b=Fb4D7cvQKsK+ujgubWgqcwl2lQY7E67ZTXFB8GyGKE/qj4UteKs2sQdPxi84DCTK4h
+ O1nX6zzUZncWQoKEIA1R2JjCV2DCEMgca4ZINPS5/ORDjSuo4JFmtw8zukUP/mXf3ft7
+ mm9zzE6x7eOC5xU04ZrTFC3VTrFySkJme7bKEk7KBi6/zzZs3N/Wrl7wKJhUa11BVNDw
+ ES/gsEQhwl5tZydz5AIlsXbI6Q0KgY5CrFCLEkYRYNPu39cmp6iM0yrc4uvzRddhX4cD
+ Gk6mZGgBZ2TZKdzCQL83mtLviqKXrPS8xRGVIUOErOQDbT4kRvdrBVRxDRlD/0oqqgXM
+ GZ4w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1734541636; x=1735146436;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=84Xp02vd965R6EVhlhdL+FhhEbC0vWzwkssxj/nxppI=;
- b=I/BuKH1FkaAAZfE9AU+ZjPQP+rUvs8DIilYcZvWra0gyyyqzf7i8jyFtssH2L+dJ0b
- sXtLw/DP07FjOkj4NtApyrfJZncugPV4YU9EYYO5wMsTB8GQCubpbwAKI2C10dB0BvQf
- VoFguBDTYHUXRdEYGRJVZM9b5RYUFbbdAkJbPQOPvhwxWPA2wyDwaCdR46eMiLlie4KG
- uRX8DMpM4X55U+8hduQsOVQgQYJn5n3u9vm1kycTkRpGSrakg7O4EP1Mw25Hch6SX/x/
- JsO3y34d1Q+vKbvpmIGwi0ZNX49qQwY6hE6v1T4u0hbc6WbGZqiYO6yAtSPDm3mjey/L
- /rMA==
+ d=1e100.net; s=20230601; t=1734541730; x=1735146530;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=QjKrMxFPl8OMA4kqm+2v9mOTe2EEJBR99lcyaD4JPDU=;
+ b=fcdI+6Pxsm+/mYg1rQdndikQzN1cXDd3sZANnPlkkWWX+7Ir1RVZA1PsOazk8f3utb
+ hMVjGTWNFQaurnI4UtmdUUz4nFzP7q3Rne8TM/LxgNMMLP5pkF92pmHjWZg50opgkp47
+ RHlS31U4Ux7gInO30D/tXVrEf/XFTmvZY+DlGyKVAuhDWnz/sDejMnZu/Q3MbIDcom7N
+ UDNhnp7+ICLyO3v51jQ37LSkM1C8dqhI9/Gf/4WfvbEGgUWm+5djybGZ+ytyeTCnIs0i
+ KEB/RcMr158WOWwS0iG3/ESsRNcy3jnYLG9nAymZObZNm4lcCHwSCgkLV5San08r+8k+
+ 9Xxw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXtik0z4mPlPNtIS2kvXKlp4eqezkwX8hjXbj+myui0d/sPe8OqwiCCCh7+dBzcIJmhmLMJTmL6DqVT@nongnu.org
-X-Gm-Message-State: AOJu0YypRAyDjv/cY5Ced7Cg313nhhHHLvE/g3i4m06fdaBK/G8ZfhUK
- 9avz3HXIpuB4dL0OZB+wo2sUDSfOkZmFM98zffvBoeCbpzPw2XehU1UU5x/exW4=
-X-Gm-Gg: ASbGnct9I4SlVRMDZv2V4G0Z7LdPd7EeJDhlrr9Wp9FksV+BqJGOvI7TlEy6gq+nmPB
- gUtfMwLNKQBv69SIxHTUk+HoTBArmOUbvDNyBHXaUAaeexsou6vV4tqyrufUN4kG04/7djfkRed
- xRXa1gMZUfvvO/r1B+l5EnTjNe/L6sw73RqAJ8mtiqT8WLVESh6qq5P5ZGWaOEsSlgDVJUMhnEN
- lJVnAER3f9drPcmYoVn/MVzaqcH+umEdBU+z1uf51l2yspU8YzrHgnufUk6SLTZYZgz0hbd
-X-Google-Smtp-Source: AGHT+IEgBsMsJq+hHwD0O44Y0o0aaOd3ofWzK08cLIPdBnnYipgVFHsDw/GjhdUOmRJDYKCm05ZQaA==
-X-Received: by 2002:a05:600c:4fd3:b0:436:346a:fa9b with SMTP id
- 5b1f17b1804b1-4365c7c9707mr97695e9.20.1734541635603; 
- Wed, 18 Dec 2024 09:07:15 -0800 (PST)
-Received: from [192.168.1.117] ([78.196.4.158])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-43656afc125sm26909535e9.6.2024.12.18.09.07.13
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 18 Dec 2024 09:07:14 -0800 (PST)
-Message-ID: <f4988fd0-62c7-41ec-baab-2433aee78f04@linaro.org>
-Date: Wed, 18 Dec 2024 18:07:12 +0100
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 24/27] tests/vm: fix build_path based path
-To: =?UTF-8?Q?Alex_Benn=C3=A9e?= <alex.bennee@linaro.org>,
- qemu-devel@nongnu.org
-Cc: =?UTF-8?Q?Daniel_P=2E_Berrang=C3=A9?= <berrange@redhat.com>,
- Ed Maste <emaste@freebsd.org>, Eric Farman <farman@linux.ibm.com>,
- Thomas Huth <thuth@redhat.com>, Li-Wen Hsu <lwhsu@freebsd.org>,
+ AJvYcCUu9gyjC6tdBreS+kgiVOOIubyM8h62ISAmGULFKtmxcM5EMWDTK1LlvH2gL3Ql5BpPkuDTrKXzN4Lz@nongnu.org
+X-Gm-Message-State: AOJu0YwldNwixy6nrriNKVwRJyaJI/tyKvAA93Ugl5nYgEf92SLvkCYW
+ dYitcqwYx5ULd9RKOCHUZvbSWFPdbEZT1+fcCE0jHUHIjTa+G5zhGyo+mdIFwcw=
+X-Gm-Gg: ASbGncv75kIxoNg2sMqXRXMvbEX+OPcI2TB0dUbjH0z0FLBclp0W+nnESZvjXPfnhbK
+ hZPF5e3703tvjrRur3xvZ+1fPLr19tJK3vGrQjEXk8KlyCOZhC0xJ9T3wjTetlf30wk1xTGDzd3
+ sep3dacZTk+TOYVIMY6qepzUrYkPtAVjfKR1clgylNLHxvmQ8nqktto1AEc4Y+6rQaWU7w/cBkX
+ zQvct2Yb+GH83swifwl3WFpk8xt3ahsRK6eDPG8ql9rZqGPCCk55s1inRsqCB8mtby6g7imeIbO
+ ATAGkFVsscsLrAhOM6iav8fnv0UVtiGqvdKooDhA9M8=
+X-Google-Smtp-Source: AGHT+IGWH7K/pg6IdIZGLLK9MQsx224hUj/lNB9zou8lx+3W74N6jhNX3aMDXXsX7egnp3iPTGz9nw==
+X-Received: by 2002:a17:907:7fa4:b0:aa6:715a:75b5 with SMTP id
+ a640c23a62f3a-aabf48d52afmr313171666b.46.1734541730425; 
+ Wed, 18 Dec 2024 09:08:50 -0800 (PST)
+Received: from paolo-laptop-amd.station (mob-109-118-46-116.net.vodafone.it.
+ [109.118.46.116]) by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-aabfbbb7a52sm70403966b.58.2024.12.18.09.08.48
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 18 Dec 2024 09:08:49 -0800 (PST)
+From: Paolo Savini <paolo.savini@embecosm.com>
+To: qemu-devel@nongnu.org,
+	qemu-riscv@nongnu.org
+Cc: Paolo Savini <paolo.savini@embecosm.com>,
+ Richard Handerson <richard.henderson@linaro.org>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bmeng.cn@gmail.com>,
+ Weiwei Li <liwei1518@gmail.com>,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Aurelien Jarno <aurelien@aurel32.net>, Fabiano Rosas <farosas@suse.de>,
- Radoslaw Biernacki <rad@semihalf.com>,
- Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
- =?UTF-8?Q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>,
- qemu-riscv@nongnu.org, Nicholas Piggin <npiggin@gmail.com>,
- Joel Stanley <joel@jms.id.au>, Beraldo Leal <bleal@redhat.com>,
- Markus Armbruster <armbru@redhat.com>, Jiaxun Yang
- <jiaxun.yang@flygoat.com>, Weiwei Li <liwei1518@gmail.com>,
- Peter Maydell <peter.maydell@linaro.org>, Cleber Rosa <crosa@redhat.com>,
- Leif Lindholm <quic_llindhol@quicinc.com>,
- Christian Borntraeger <borntraeger@linux.ibm.com>,
- John Snow <jsnow@redhat.com>, Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
- Palmer Dabbelt <palmer@dabbelt.com>, Bin Meng <bmeng.cn@gmail.com>,
- Daniel Henrique Barboza <danielhb413@gmail.com>,
- Paolo Bonzini <pbonzini@redhat.com>,
  Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Wainer dos Santos Moschetta <wainersm@redhat.com>,
- Laurent Vivier <laurent@vivier.eu>,
- Pavel Dovgalyuk <pavel.dovgaluk@ispras.ru>,
- Richard Henderson <richard.henderson@linaro.org>,
- Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>,
- Halil Pasic <pasic@linux.ibm.com>, qemu-arm@nongnu.org,
- Harsh Prateek Bora <harshpb@linux.ibm.com>, qemu-ppc@nongnu.org,
- Bernhard Beschow <shentey@gmail.com>, "Michael S. Tsirkin" <mst@redhat.com>,
- qemu-s390x@nongnu.org, Laurent Vivier <lvivier@redhat.com>,
- Alistair Francis <alistair.francis@wdc.com>
-References: <20241218162104.3493551-1-alex.bennee@linaro.org>
- <20241218162104.3493551-25-alex.bennee@linaro.org>
-Content-Language: en-US
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-In-Reply-To: <20241218162104.3493551-25-alex.bennee@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+ Helene Chelin <helene.chelin@embecosm.com>, Nathan Egge <negge@google.com>,
+ Max Chou <max.chou@sifive.com>,
+ Jeremy Bennett <jeremy.bennett@embecosm.com>,
+ Craig Blackmore <craig.blackmore@embecosm.com>
+Subject: [RFC 1/1] target/riscv: use tcg ops generation to emulate whole reg
+ rvv loads/stores.
+Date: Wed, 18 Dec 2024 17:08:40 +0000
+Message-ID: <20241218170840.1090473-2-paolo.savini@embecosm.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20241218170840.1090473-1-paolo.savini@embecosm.com>
+References: <20241218170840.1090473-1-paolo.savini@embecosm.com>
+MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::331;
- envelope-from=philmd@linaro.org; helo=mail-wm1-x331.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::62a;
+ envelope-from=paolo.savini@embecosm.com; helo=mail-ej1-x62a.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -130,15 +112,146 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 18/12/24 17:21, Alex Bennée wrote:
-> We no longer need to go into the per-arch build directories to find
-> the build directories binary. Lets call it directly.
-> 
-> Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
-> ---
->   tests/vm/basevm.py | 3 +--
->   1 file changed, 1 insertion(+), 2 deletions(-)
+This patch aims at emulating the whole register loads and stores through
+direct generation of tcg operations rather than through the aid of a helper
+function.
 
-Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+Signed-off-by: Paolo Savini <paolo.savini@embecosm.com>
+---
+ target/riscv/insn_trans/trans_rvv.c.inc | 104 +++++++++++++-----------
+ 1 file changed, 56 insertions(+), 48 deletions(-)
+
+diff --git a/target/riscv/insn_trans/trans_rvv.c.inc b/target/riscv/insn_trans/trans_rvv.c.inc
+index b9883a5d32..63d8b05bf1 100644
+--- a/target/riscv/insn_trans/trans_rvv.c.inc
++++ b/target/riscv/insn_trans/trans_rvv.c.inc
+@@ -1100,26 +1100,34 @@ GEN_VEXT_TRANS(vle64ff_v, MO_64, r2nfvm, ldff_op, ld_us_check)
+ typedef void gen_helper_ldst_whole(TCGv_ptr, TCGv, TCGv_env, TCGv_i32);
+ 
+ static bool ldst_whole_trans(uint32_t vd, uint32_t rs1, uint32_t nf,
+-                             gen_helper_ldst_whole *fn,
+-                             DisasContext *s)
++                             uint32_t log2_esz, gen_helper_ldst_whole *fn,
++                             DisasContext *s, bool is_load)
+ {
+-    TCGv_ptr dest;
+-    TCGv base;
+-    TCGv_i32 desc;
+-
+-    uint32_t data = FIELD_DP32(0, VDATA, NF, nf);
+-    data = FIELD_DP32(data, VDATA, VM, 1);
+-    dest = tcg_temp_new_ptr();
+-    desc = tcg_constant_i32(simd_desc(s->cfg_ptr->vlenb,
+-                                      s->cfg_ptr->vlenb, data));
+-
+-    base = get_gpr(s, rs1, EXT_NONE);
+-    tcg_gen_addi_ptr(dest, tcg_env, vreg_ofs(s, vd));
++    TCGv addr;
++    addr = get_address(s, rs1, 0);
++    uint32_t size = s->cfg_ptr->vlenb * nf;
+ 
+-    mark_vs_dirty(s);
+-
+-    fn(dest, base, tcg_env, desc);
++    TCGv_i128 t16 = tcg_temp_new_i128();
+ 
++    /*
++     * Load/store minimum vlenb bytes per iteration.
++     * When possible do this atomically.
++     * Update vstart with the number of processed elements.
++     */
++    for (int i=0; i < size; i+=16) {
++        addr = get_address(s, rs1, i);
++        if (is_load) {
++	    tcg_gen_qemu_ld_i128(t16, addr, s->mem_idx,
++		    MO_LE | MO_128 | MO_ATOM_WITHIN16);
++	    tcg_gen_st_i128(t16, tcg_env, vreg_ofs(s, vd) + i);
++	    tcg_gen_addi_tl(cpu_vstart, cpu_vstart, 16 >> log2_esz);
++        } else {
++            tcg_gen_ld_i128(t16, tcg_env, vreg_ofs(s, vd) + i);
++            tcg_gen_qemu_st_i128(t16, addr, s->mem_idx,
++		    MO_LE | MO_128 | MO_ATOM_WITHIN16);
++	    tcg_gen_addi_tl(cpu_vstart, cpu_vstart, 16 >> log2_esz);
++        }
++    }
+     finalize_rvv_inst(s);
+     return true;
+ }
+@@ -1128,42 +1136,42 @@ static bool ldst_whole_trans(uint32_t vd, uint32_t rs1, uint32_t nf,
+  * load and store whole register instructions ignore vtype and vl setting.
+  * Thus, we don't need to check vill bit. (Section 7.9)
+  */
+-#define GEN_LDST_WHOLE_TRANS(NAME, ARG_NF)                                \
+-static bool trans_##NAME(DisasContext *s, arg_##NAME * a)                 \
+-{                                                                         \
+-    if (require_rvv(s) &&                                                 \
+-        QEMU_IS_ALIGNED(a->rd, ARG_NF)) {                                 \
+-        return ldst_whole_trans(a->rd, a->rs1, ARG_NF,                    \
+-                                gen_helper_##NAME, s);                    \
+-    }                                                                     \
+-    return false;                                                         \
+-}
+-
+-GEN_LDST_WHOLE_TRANS(vl1re8_v,  1)
+-GEN_LDST_WHOLE_TRANS(vl1re16_v, 1)
+-GEN_LDST_WHOLE_TRANS(vl1re32_v, 1)
+-GEN_LDST_WHOLE_TRANS(vl1re64_v, 1)
+-GEN_LDST_WHOLE_TRANS(vl2re8_v,  2)
+-GEN_LDST_WHOLE_TRANS(vl2re16_v, 2)
+-GEN_LDST_WHOLE_TRANS(vl2re32_v, 2)
+-GEN_LDST_WHOLE_TRANS(vl2re64_v, 2)
+-GEN_LDST_WHOLE_TRANS(vl4re8_v,  4)
+-GEN_LDST_WHOLE_TRANS(vl4re16_v, 4)
+-GEN_LDST_WHOLE_TRANS(vl4re32_v, 4)
+-GEN_LDST_WHOLE_TRANS(vl4re64_v, 4)
+-GEN_LDST_WHOLE_TRANS(vl8re8_v,  8)
+-GEN_LDST_WHOLE_TRANS(vl8re16_v, 8)
+-GEN_LDST_WHOLE_TRANS(vl8re32_v, 8)
+-GEN_LDST_WHOLE_TRANS(vl8re64_v, 8)
++#define GEN_LDST_WHOLE_TRANS(NAME, ETYPE, ARG_NF, IS_LOAD)                  \
++static bool trans_##NAME(DisasContext *s, arg_##NAME * a)                   \
++{                                                                           \
++    if (require_rvv(s) &&                                                   \
++        QEMU_IS_ALIGNED(a->rd, ARG_NF)) {                                   \
++        return ldst_whole_trans(a->rd, a->rs1, ARG_NF, ctzl(sizeof(ETYPE)), \
++                                gen_helper_##NAME, s, IS_LOAD);             \
++    }                                                                       \
++    return false;                                                           \
++}
++
++GEN_LDST_WHOLE_TRANS(vl1re8_v,  int8_t,  1, true)
++GEN_LDST_WHOLE_TRANS(vl1re16_v, int16_t, 1, true)
++GEN_LDST_WHOLE_TRANS(vl1re32_v, int32_t, 1, true)
++GEN_LDST_WHOLE_TRANS(vl1re64_v, int64_t, 1, true)
++GEN_LDST_WHOLE_TRANS(vl2re8_v,  int8_t,  2, true)
++GEN_LDST_WHOLE_TRANS(vl2re16_v, int16_t, 2, true)
++GEN_LDST_WHOLE_TRANS(vl2re32_v, int32_t, 2, true)
++GEN_LDST_WHOLE_TRANS(vl2re64_v, int64_t, 2, true)
++GEN_LDST_WHOLE_TRANS(vl4re8_v,  int8_t,  4, true)
++GEN_LDST_WHOLE_TRANS(vl4re16_v, int16_t, 4, true)
++GEN_LDST_WHOLE_TRANS(vl4re32_v, int32_t, 4, true)
++GEN_LDST_WHOLE_TRANS(vl4re64_v, int64_t, 4, true)
++GEN_LDST_WHOLE_TRANS(vl8re8_v,  int8_t,  8, true)
++GEN_LDST_WHOLE_TRANS(vl8re16_v, int16_t, 8, true)
++GEN_LDST_WHOLE_TRANS(vl8re32_v, int32_t, 8, true)
++GEN_LDST_WHOLE_TRANS(vl8re64_v, int64_t, 8, true)
+ 
+ /*
+  * The vector whole register store instructions are encoded similar to
+  * unmasked unit-stride store of elements with EEW=8.
+  */
+-GEN_LDST_WHOLE_TRANS(vs1r_v, 1)
+-GEN_LDST_WHOLE_TRANS(vs2r_v, 2)
+-GEN_LDST_WHOLE_TRANS(vs4r_v, 4)
+-GEN_LDST_WHOLE_TRANS(vs8r_v, 8)
++GEN_LDST_WHOLE_TRANS(vs1r_v, int8_t, 1, false)
++GEN_LDST_WHOLE_TRANS(vs2r_v, int8_t, 2, false)
++GEN_LDST_WHOLE_TRANS(vs4r_v, int8_t, 4, false)
++GEN_LDST_WHOLE_TRANS(vs8r_v, int8_t, 8, false)
+ 
+ /*
+  *** Vector Integer Arithmetic Instructions
+-- 
+2.34.1
 
 
