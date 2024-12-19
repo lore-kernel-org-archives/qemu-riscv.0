@@ -4,79 +4,110 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 85FDEE77184
-	for <qemu-riscv@archiver.kernel.org>; Thu, 19 Dec 2024 17:11:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 120D3E77184
+	for <qemu-riscv@archiver.kernel.org>; Thu, 19 Dec 2024 17:31:26 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tOK3w-0008M5-45; Thu, 19 Dec 2024 12:11:48 -0500
+	id 1tOKMS-0002RA-Hr; Thu, 19 Dec 2024 12:30:56 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tOK3u-0008L7-AG
- for qemu-riscv@nongnu.org; Thu, 19 Dec 2024 12:11:46 -0500
-Received: from mail-wr1-x42a.google.com ([2a00:1450:4864:20::42a])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tOKMD-0002GW-6Z
+ for qemu-riscv@nongnu.org; Thu, 19 Dec 2024 12:30:52 -0500
+Received: from mail-wm1-x335.google.com ([2a00:1450:4864:20::335])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tOK3s-0005mY-St
- for qemu-riscv@nongnu.org; Thu, 19 Dec 2024 12:11:46 -0500
-Received: by mail-wr1-x42a.google.com with SMTP id
- ffacd0b85a97d-385ef8b64b3so793759f8f.0
- for <qemu-riscv@nongnu.org>; Thu, 19 Dec 2024 09:11:44 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tOKM9-0000mo-Ed
+ for qemu-riscv@nongnu.org; Thu, 19 Dec 2024 12:30:39 -0500
+Received: by mail-wm1-x335.google.com with SMTP id
+ 5b1f17b1804b1-43618283d48so8212765e9.1
+ for <qemu-riscv@nongnu.org>; Thu, 19 Dec 2024 09:30:36 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1734628303; x=1735233103; darn=nongnu.org;
+ d=linaro.org; s=google; t=1734629436; x=1735234236; darn=nongnu.org;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=CmHnEsj3gsaS1zdUBiynZBNgVYBd1XrnEMj/qbSnzLI=;
- b=TszhWQ6sBzJA5sCLF/G3da7SP/+FyctRLz3WR/7eFVO7lP95be0As+qeXEu4CsnP1G
- uTw1hdr1K7qQBzqHh3Tg6x0XXwLGVeqvtV7F3JxZeb1yxa4Omaz5fdo1/KShhObxjVqj
- 32RPXuGW6BbnhmTc7b+ttL97vChYtKaBzY+YXmx2mXsua+I1xz5eXTDDgmWiBZLsEK5A
- jXMvquEaHPs1KzhZMEFSErkhaNfmJoc0br99vq/u1fJvBsry8f0430LYUe+qoFAcygyY
- xarBFoZ6+Lft2/zgXxkvxF+QI4P+24yg0n4yT1m1vbe9oPEeJylief1yw0X+Fny09jc+
- Y2nw==
+ bh=FHozw9de/NvfPGX8IMwamoRKsGIkL6+8Xqk2d+A6kH8=;
+ b=CcCtx19mwkiZsmrFiDazZqemFPagJHRZF1rKKne0zeP9n3Z8tOoYuor8lQDRL+4hAj
+ P8tvS1w6Pkuxkw+12muuj3pX43Aj/b7BmvedFXiOQbBOMRoPNbKbrc8FsMEQ3cdZ1eJh
+ De0QezrPSJiOcN1oD0XP5PsQmRt/kenFMirFP6UE8v3vkRiGmPFH/h3IkFHiPbemn4XX
+ eU4PDNh1096WqepEsZ9qHtXC1l/zZregPLunbDdoGTZzHwsygOPQ76C4DYoguFYlv47R
+ qqBOP6qYdKzDjZ7NVEa2cgc0y4TesUXn7ygKQ7Wd0okIn7wb+ofbdRrMyVkTotwDrVB/
+ KtNA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1734628303; x=1735233103;
+ d=1e100.net; s=20230601; t=1734629436; x=1735234236;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=CmHnEsj3gsaS1zdUBiynZBNgVYBd1XrnEMj/qbSnzLI=;
- b=f1MiPTqfirHTkXSsb9BbKdt2HTBYDHBf5ciqTk1+83ZPQa+sDQ+IRM9ySZKme1Q541
- 0ba5DWdu3tMHdFLeAIRSTIBdP/9wI3ppmMYSwLlK6H9SeRyLJ/r5hJiYFyNhO++1JEF6
- b6WbzRyZSm8frGkIP2+Euk6+4Pa8OmYA5qsr8ywxKqY3I9mdbqGR+WzmgdfSGq+0aFXm
- BQu9nBCUBcpR/9+fIEGMFRqJmEu0JReEGxGnZHTIdy9es3+wavt8QdhmbyUCVQ4FMg8Y
- k7QL5wGmSnk02ViVKrnKtyN42gZBHkQ9Nbc4eIIQv3wLZSBwGfXOWe1gjwBTFfXEIiOv
- 8TPA==
-X-Gm-Message-State: AOJu0Yz2h5BlwvCaVueE4CP0WjzomalgxbIx0rOPofFC4ey9yShC3MLS
- MEt/MOomkH86a+vksJDTItydKj/ydQe12iWO6ObYODG/qouluMHSI0T7LrlUrnA=
-X-Gm-Gg: ASbGncvCfj4gP8QtEBdpRK46mSSmCJwPDB+dAkrJbMrP0UHmMgLCJ4nDL+7183K2kBw
- ZURZL9GsHt384EjXKlooMq4fIjw4pxrHa/73T+wFJdbz+u7mstEiETgtuK1s6tePbVGf3HuuhVo
- u6rf5ZHLe17b75C1ls9PBiElL2mlWe8XuKXPgzQnsMqFPElcrMqxUCQQZCEnOvVLRtHsmpPMdFi
- XV+5bpOGZJEeqK22EHgek7/+EtGxLh099/uzp7UWsD0UAtMokxzgoC3GeO3tNoh+p/7F34=
-X-Google-Smtp-Source: AGHT+IF+ZqXlAZt2iKiq6RbJ7N7JQxmAmuE6Pxkhc5ca1Mnl+qLhANmGSrqdNYRtpTI0ZVguN/Pu2A==
-X-Received: by 2002:a5d:6c64:0:b0:385:edd1:2249 with SMTP id
- ffacd0b85a97d-388e4d99564mr6498460f8f.50.1734628303336; 
- Thu, 19 Dec 2024 09:11:43 -0800 (PST)
+ bh=FHozw9de/NvfPGX8IMwamoRKsGIkL6+8Xqk2d+A6kH8=;
+ b=rK6mP5wEBA3Auncp/kUaWVg3z82IUy1QYBsIlfIS3jj4843re54oDKTSTou8uDkB//
+ GFoxUM75xTJ+opVIwt8WcrQ3PDs9R/46w/1aZNfrfaqeHX1tfCm4nLK+oEyHTfLrrFRq
+ 7zeNQspQE004cYUoR2EwT4mr5Q3f5YHQzsO/0mflffNuPSzz7KUurQQNfy98m8PW20w6
+ /4DjiyGfS3ulEeWulZh9UIEQaXq3Evn+Gd5AGB9UKPlePdS9lpYVd5vqFETBVPSbMzZ8
+ Bo7mQZKngJt4Tcceks+qh3N3eCmKlV+sxxO+ped5SdzDIiXJ+zvz3Nv1+DDVWje4D2lY
+ Lk1g==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVgpFQ5EbLZ4RhlifcJpfTlQTH3cfuXgbP48iHaufU8VKoJtuZ4io3xKRetPL2rKzrLn3U0IQ1JwGSY@nongnu.org
+X-Gm-Message-State: AOJu0Yy+x8uQr8o7GXUYn/uVG/esM95vo4Be9qWGssXA+3S15DdBDWZ+
+ p7etMklqEUk8HUVEzlpvlpBTcO8nypL8W2p4FIeWUErtEASHpCj+JpYx6Bmxo64=
+X-Gm-Gg: ASbGncsAKzI+EQGdl6IpE0e/e+MgZCbrxB53S6DLFknKu/tWm4/wd0pe/KYh/vYbj3g
+ 6Vrn/8iLzGfQbZWct7OhJ3JkoC/ObFUAy9lKthlWf2NYFEZ9hI65++BS989z+mse+UKOxQP99kL
+ O63HDZyDq8LNco/iuaWHFApbp7B5HD7OMHDx8MhGmbgB5PWsSO5wRKWSYvepD3Q+eXLIq+I9b8y
+ CnPqXaXNpL8LpRDNZROocC2Vc1PiMI29FP0vquK2+sg9isf+lSJtFa85ixRda4mFli+ONo=
+X-Google-Smtp-Source: AGHT+IGMc+NJHehstVIw9mDm4wDLjS2kb5W2EfaT3IzYxpHnuZGrK3pbLa5r2CQOFSJkffQaSuW2Sw==
+X-Received: by 2002:a05:600c:468a:b0:434:9499:9e87 with SMTP id
+ 5b1f17b1804b1-436553fe17dmr60200645e9.25.1734629435607; 
+ Thu, 19 Dec 2024 09:30:35 -0800 (PST)
 Received: from [192.168.1.67] ([78.196.4.158])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-43656af6aeesm57730605e9.6.2024.12.19.09.11.42
+ 5b1f17b1804b1-436611ea3d5sm24177795e9.5.2024.12.19.09.30.32
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 19 Dec 2024 09:11:42 -0800 (PST)
-Message-ID: <914c9d14-a416-4156-bd03-dc6764d17088@linaro.org>
-Date: Thu, 19 Dec 2024 18:11:41 +0100
+ Thu, 19 Dec 2024 09:30:35 -0800 (PST)
+Message-ID: <e19caf9c-f8d9-49dc-8ac6-26925400d9cd@linaro.org>
+Date: Thu, 19 Dec 2024 18:30:32 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] accel/tcg: Un-inline translator_is_same_page()
-To: qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, qemu-s390x@nongnu.org,
+Subject: Re: [PATCH v2 16/27] util/qemu-timer: fix indentation
+To: =?UTF-8?Q?Alex_Benn=C3=A9e?= <alex.bennee@linaro.org>,
+ qemu-devel@nongnu.org
+Cc: =?UTF-8?Q?Daniel_P=2E_Berrang=C3=A9?= <berrange@redhat.com>,
+ Ed Maste <emaste@freebsd.org>, Eric Farman <farman@linux.ibm.com>,
+ Thomas Huth <thuth@redhat.com>, Li-Wen Hsu <lwhsu@freebsd.org>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Aurelien Jarno <aurelien@aurel32.net>, Fabiano Rosas <farosas@suse.de>,
+ Radoslaw Biernacki <rad@semihalf.com>,
+ Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
+ =?UTF-8?Q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>,
+ qemu-riscv@nongnu.org, Nicholas Piggin <npiggin@gmail.com>,
+ Joel Stanley <joel@jms.id.au>, Beraldo Leal <bleal@redhat.com>,
+ Markus Armbruster <armbru@redhat.com>, Jiaxun Yang
+ <jiaxun.yang@flygoat.com>, Weiwei Li <liwei1518@gmail.com>,
+ Peter Maydell <peter.maydell@linaro.org>, Cleber Rosa <crosa@redhat.com>,
+ Leif Lindholm <quic_llindhol@quicinc.com>,
+ Christian Borntraeger <borntraeger@linux.ibm.com>,
+ John Snow <jsnow@redhat.com>, Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>, Bin Meng <bmeng.cn@gmail.com>,
+ Daniel Henrique Barboza <danielhb413@gmail.com>,
  Paolo Bonzini <pbonzini@redhat.com>,
- Richard Henderson <richard.henderson@linaro.org>
-References: <20241218154145.71353-1-philmd@linaro.org>
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Wainer dos Santos Moschetta <wainersm@redhat.com>,
+ Laurent Vivier <laurent@vivier.eu>,
+ Pavel Dovgalyuk <pavel.dovgaluk@ispras.ru>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>,
+ Halil Pasic <pasic@linux.ibm.com>, qemu-arm@nongnu.org,
+ Harsh Prateek Bora <harshpb@linux.ibm.com>, qemu-ppc@nongnu.org,
+ Bernhard Beschow <shentey@gmail.com>, "Michael S. Tsirkin" <mst@redhat.com>,
+ qemu-s390x@nongnu.org, Laurent Vivier <lvivier@redhat.com>,
+ Alistair Francis <alistair.francis@wdc.com>
+References: <20241218162104.3493551-1-alex.bennee@linaro.org>
+ <20241218162104.3493551-17-alex.bennee@linaro.org>
 Content-Language: en-US
 From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-In-Reply-To: <20241218154145.71353-1-philmd@linaro.org>
+In-Reply-To: <20241218162104.3493551-17-alex.bennee@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::42a;
- envelope-from=philmd@linaro.org; helo=mail-wr1-x42a.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::335;
+ envelope-from=philmd@linaro.org; helo=mail-wm1-x335.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -99,25 +130,13 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 18/12/24 16:41, Philippe Mathieu-Daudé wrote:
-> Remove the single target-specific definition used in
-> "exec/translator.h" (TARGET_PAGE_MASK) by un-inlining
-> is_same_page().
-> Rename the method as translator_is_same_page() and
-> improve its documentation.
-> Use it in translator_use_goto_tb().
+On 18/12/24 17:20, Alex Bennée wrote:
+> Purely cosmetic.
 > 
-> Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+> Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
 > ---
-> Richard, I'll merge this myself once reviewed.
-> ---
->   include/exec/translator.h    | 15 +++++++--------
->   accel/tcg/translator.c       |  7 ++++++-
->   target/i386/tcg/translate.c  |  6 +++---
->   target/riscv/translate.c     |  4 ++--
->   target/s390x/tcg/translate.c |  4 ++--
->   5 files changed, 20 insertions(+), 16 deletions(-)
+>   util/qemu-timer.c | 2 +-
+>   1 file changed, 1 insertion(+), 1 deletion(-)
 
-Patch queued.
-
+Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 
