@@ -4,95 +4,99 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 878B8E77188
-	for <qemu-riscv@archiver.kernel.org>; Fri, 20 Dec 2024 12:22:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EA18BE77188
+	for <qemu-riscv@archiver.kernel.org>; Fri, 20 Dec 2024 15:34:57 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tOc0X-0002lb-OM; Fri, 20 Dec 2024 07:21:29 -0500
+	id 1tOf1U-0000wS-Mm; Fri, 20 Dec 2024 10:34:40 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <craig.blackmore@embecosm.com>)
- id 1tOc0T-0002ko-Ru
- for qemu-riscv@nongnu.org; Fri, 20 Dec 2024 07:21:26 -0500
-Received: from mail-wm1-x32e.google.com ([2a00:1450:4864:20::32e])
+ (Exim 4.90_1) (envelope-from <paolo.savini@embecosm.com>)
+ id 1tOf1S-0000uY-Tu
+ for qemu-riscv@nongnu.org; Fri, 20 Dec 2024 10:34:38 -0500
+Received: from mail-ej1-x62e.google.com ([2a00:1450:4864:20::62e])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <craig.blackmore@embecosm.com>)
- id 1tOc0R-0006Lw-DM
- for qemu-riscv@nongnu.org; Fri, 20 Dec 2024 07:21:25 -0500
-Received: by mail-wm1-x32e.google.com with SMTP id
- 5b1f17b1804b1-4362f61757fso17727895e9.2
- for <qemu-riscv@nongnu.org>; Fri, 20 Dec 2024 04:21:20 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <paolo.savini@embecosm.com>)
+ id 1tOf1Q-00024l-E2
+ for qemu-riscv@nongnu.org; Fri, 20 Dec 2024 10:34:38 -0500
+Received: by mail-ej1-x62e.google.com with SMTP id
+ a640c23a62f3a-aa66e4d1d5aso313982366b.2
+ for <qemu-riscv@nongnu.org>; Fri, 20 Dec 2024 07:34:36 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=embecosm.com; s=google; t=1734697279; x=1735302079; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=K4RZjW1ZzfWtFNM7Fo6PWNkQd9tSs+Wm+SAia6AdYns=;
- b=Z7+tiaPA2oTbmMJtzJL5s6u/a6XXNsf/cGYL0OglAnuOQO0kl7vEmsxf1zbtgJfPkD
- D4gOWDYWAbImnqXchEo+u+GeV4dbPtJ6uB6+Ay16O4W6zsle3blHZPnFj7CkNYtE6hVJ
- ly9WMSYB9CG0DZ1o64GTeL9Acz49aS+ctMhHXcSc9HDq11RsT84uba9wgkLR6X5MaFAO
- MepbWqqsNKCtXNQ0KKoWlsf1jG/8knoJBE5KIM7XJxo6XNhGmwnDEoxxt29f7fWU3Ggd
- x7YmtpOf6opdCB8s87Ty2+OwxOln5pgh7tw7TID6wkPqU6zs0rC8GKIZ5MqGoLV/zi/N
- gZ3w==
+ d=embecosm.com; s=google; t=1734708875; x=1735313675; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=yuaZJpOlhqoq+AVWeiwLZIgDeh/1p5naseS9DVlnL0k=;
+ b=WnW3kjPVASSqwTGB/4LgLJ2UuWyGQrdD3ph1elmtn3AvvXOESgaO26wDYF3tA19yES
+ 5Pkb8egGUh5blJH00yNsujwJ/Oh+D1gQBERW5NmxLg+kpvDKBLXBTh5Lb+Ip5j683+4X
+ Xe2HGPkcpS0vFa5+t7ePvskgHu50Bixt8vcpLrcG4hQBBjo1MTU+M7reR5s1RS6ikip5
+ 6Xi3usvL/SOEVSUoTE2LJj6FSncPXQMHe4DgahzEXlElcMIsNemptENYAI54RgmtoKQT
+ wYc69kYjMjI2F49b+gI5ObNdP3HFUk++Ek93ueynuJS4DdmR/SOPtNSRbTXHG+jjL6S9
+ h1YA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1734697279; x=1735302079;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=K4RZjW1ZzfWtFNM7Fo6PWNkQd9tSs+Wm+SAia6AdYns=;
- b=uyN0LkppcE60PTHUMRlL9QNjLKHo3CHgBeXqYZhXVYc1fynOv/HF8CkG2gVpjYS8On
- niicFbGCKzgNjOgOHpItnnmVFt4oCJg5jgn6VsTlGi3yGqruUinb5BRhvcl7/x8v1CDX
- mwIiUSkIGWqgvZz92VxObsu7W2kuUIBxcPLyovDhdfBsfpTt8FYBHmTEFGNE9kCrB6g0
- ZGY9IHQdR2ErrVhWS5xA8dCSoGH1EmaOu8RLP16PSk6SzgVvWqfl+CmO3IJ61E1dgXKq
- dXAVwecUiwfD5cz8nHeJkoBAnJJIk/0uhXLwsW5n63bkjs5UW8n4LJ8fDdjRoxodOdsy
- 5W8g==
+ d=1e100.net; s=20230601; t=1734708875; x=1735313675;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=yuaZJpOlhqoq+AVWeiwLZIgDeh/1p5naseS9DVlnL0k=;
+ b=FMv+D+/gBYEXQCj3wWhDvrYeHLTfRc8FX9OOb9gB+I0GwH+XRZzHww/3bclvabALj9
+ o1EGy3daRpn9/9otOQGhgM7K6fmmFlN+B4CP66FTGH4DNmgS/FYIRsy5aWzRnuM/bZt0
+ 2X4VktmIGNBMZt8SgoJupReYqu2ml8XVNGZ6LQ1SpX7PqBZNgsCBhBml9JxGwc8B8Lwb
+ hTpejNbtecnRtBu7Xm37T5gIaetYOhhaOsvrAqSQuk2WQ2U0ivuuXlAfbl715LDwzbwc
+ O3cNoc6g07K0tvrMt5Cg4lSPttW5mYk0o4YT1LpmnDBaFpAOksSkssgdGH/ffq+9erxD
+ YZ7w==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWfvG6ZgKTZh1L4ZphjzzLEjNLBTxXVkrPVlQq7Lv9+ETtabEC7suRDA2q3uk256wra029wDLmc4zTK@nongnu.org
-X-Gm-Message-State: AOJu0YyA34K2JvJFxuMJedcuPRWCVsGM1UwHOdBkU+RI4LoeYGncCkza
- Qq7TiYUHYL19Rzzp6eM0RC/v5vEQWk7MQSUj3Ce54gP6jTmNgiqd0iNWUu6lZ9k=
-X-Gm-Gg: ASbGncui8g8TbQ+0rpzBPxNPCMY/YkyyG8CMcM9wXdgbXa17C8FsbwQ7R+NNaZc1CLo
- LgCBDQ70BFT02rQ/g9669bqhuIXUvThCZDwbofoZ/ngVd2dK8Mx6wqUrCZG6W6oRu/UMCzvBsAo
- UC7NlaMUIBhanZLRClj0epEnMQN7Y75s2Veo9KzjTKOaYQdGkK+EBJfl83Tnh6r7bpiwN8jARhT
- stXfDqmpI8OoMG2YI/8Lc+UwD+4nouagkqb5Pa+aIpF0mZ7nGJjuELIVxLA/LhMKgM9MjSmkbhz
- Gy5WA4gbmaBNuxxXZRUYTyrSGxYKkYVlSC1SFIhXjjmWxofP
-X-Google-Smtp-Source: AGHT+IGSev90TnkO1fSId4WqiStBjGUL2AHt1UTekhfEmhw3l3Y40BjNCpX3M0q1WgnjHjjeBenMtA==
-X-Received: by 2002:a05:600c:4fd3:b0:436:5165:f1ec with SMTP id
- 5b1f17b1804b1-43668b769f8mr24366605e9.30.1734697279136; 
- Fri, 20 Dec 2024 04:21:19 -0800 (PST)
-Received: from dorian..
- (sals-04-b2-v4wan-167965-cust660.vm36.cable.virginm.net. [80.3.10.149])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-43661289e0fsm44903785e9.39.2024.12.20.04.21.18
+ AJvYcCVT5ATHnLtwaWcsL+1Y8Ivo0+XCwmxDkdlbu/Wrc4Yh9ujC/3Ppz/AffPNOZ9DK6JMGUORQJR7e6nzk@nongnu.org
+X-Gm-Message-State: AOJu0YyNlD0gioxEylSxmsiQq3vi1F8IQNKL3lMdAV4epxBtMGQIaGwi
+ f+JSKzRgtUqSdWtLsBFnofR3QK7usKVXWR9np61nWxIknqJpFB8wscYAmsPghBI=
+X-Gm-Gg: ASbGncvoJYuh0A+r3SbsIDeAGwyNpqwDm0vtzY5cLHz6vGQNogdKtETnQuX6RRUYHaP
+ 0AyBeW42d6Pecj6Vl28NQhqLZPJB21oopzHXUk+AOmBG7NGdz/H1TJWRdQG+W7eQloAdyWefPat
+ zF6zzczaUVrA04sLS5g2BR7uQhsnd9obyM2PkrrXAraHLSR5HehEfF/yb35m66jROk7PuzS2U3x
+ 17ulG1OyekfQKi7dcKXj2DY2eQt0OjpuNi3RBoyjXYHVYL3+2M+R9w1DW+wD4OeJfEZbUWSfTV/
+ Lo3sqnJMCpfoyPxGq1QAo7V4q04pRtPt8NPyhPd9oSM=
+X-Google-Smtp-Source: AGHT+IGmcoDZ4Y480reismbtgVVUzyCxVuy3x9+Vj6jFOZ8K5/O2AJ8vh3VIB1QzNYkXV0iuOFt4kA==
+X-Received: by 2002:a17:907:728c:b0:aa6:6c08:dc79 with SMTP id
+ a640c23a62f3a-aac2cf50e65mr281224666b.35.1734708875032; 
+ Fri, 20 Dec 2024 07:34:35 -0800 (PST)
+Received: from paolo-laptop-amd.station (mob-109-118-46-116.net.vodafone.it.
+ [109.118.46.116]) by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-aac0f0128b8sm188131666b.145.2024.12.20.07.34.33
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 20 Dec 2024 04:21:18 -0800 (PST)
-From: Craig Blackmore <craig.blackmore@embecosm.com>
+ Fri, 20 Dec 2024 07:34:34 -0800 (PST)
+From: Paolo Savini <paolo.savini@embecosm.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
-Cc: Craig Blackmore <craig.blackmore@embecosm.com>,
- Richard Henderson <richard.henderson@linaro.org>,
+Cc: Paolo Savini <paolo.savini@embecosm.com>,
+ Richard Handerson <richard.henderson@linaro.org>,
  Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bmeng.cn@gmail.com>,
  Weiwei Li <liwei1518@gmail.com>,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
  Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
  Helene Chelin <helene.chelin@embecosm.com>, Nathan Egge <negge@google.com>,
- Max Chou <max.chou@sifive.com>
-Subject: [PATCH v7 0/1] target/riscv: rvv: Use wider accesses for unit stride
- load/store
-Date: Fri, 20 Dec 2024 12:21:08 +0000
-Message-ID: <20241220122109.2083215-1-craig.blackmore@embecosm.com>
+ Max Chou <max.chou@sifive.com>,
+ Jeremy Bennett <jeremy.bennett@embecosm.com>,
+ Craig Blackmore <craig.blackmore@embecosm.com>
+Subject: [PATCH 1/1] target/riscv: use tcg ops generation to emulate whole reg
+ rvv loads/stores.
+Date: Fri, 20 Dec 2024 15:34:28 +0000
+Message-ID: <20241220153428.16013-2-paolo.savini@embecosm.com>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20241220153428.16013-1-paolo.savini@embecosm.com>
+References: <20241220153428.16013-1-paolo.savini@embecosm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::32e;
- envelope-from=craig.blackmore@embecosm.com; helo=mail-wm1-x32e.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::62e;
+ envelope-from=paolo.savini@embecosm.com; helo=mail-ej1-x62e.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -108,38 +112,169 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Thanks Richard Henderson for the review on v6.
+This patch replaces the use of a helper function with direct tcg ops generation
+in order to emulate whole register loads and stores. This is done in order to
+improve the performance of QEMU.
+We still use the helper function when vstart is not 0 at the beginning of the
+emulation of the whole register load or store.
 
-Changes since v6:
-- Use atomic.h and atomic128.h functions
-- Fix incorrect indentation in ok_for_atomic
+Signed-off-by: Paolo Savini <paolo.savini@embecosm.com>
+---
+ target/riscv/insn_trans/trans_rvv.c.inc | 125 +++++++++++++++---------
+ 1 file changed, 78 insertions(+), 47 deletions(-)
 
-Previous versions:
-- v1: https://lore.kernel.org/all/20240717153040.11073-1-paolo.savini@embecosm.com/
-- v2: https://lore.kernel.org/all/20241002135708.99146-1-paolo.savini@embecosm.com/
-- v3: https://lore.kernel.org/all/20241014220153.196183-1-paolo.savini@embecosm.com/
-- v4: https://lore.kernel.org/all/20241029194348.59574-1-paolo.savini@embecosm.com/
-- v5: https://lore.kernel.org/all/20241211143118.661268-1-craig.blackmore@embecosm.com/
-- v6: https://lore.kernel.org/all/20241218142937.1028602-1-craig.blackmore@embecosm.com/
-
-Cc: Richard Henderson <richard.henderson@linaro.org>
-Cc: Palmer Dabbelt <palmer@dabbelt.com>
-Cc: Alistair Francis <alistair.francis@wdc.com>
-Cc: Bin Meng <bmeng.cn@gmail.com>
-Cc: Weiwei Li <liwei1518@gmail.com>
-Cc: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Cc: Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
-Cc: Helene Chelin <helene.chelin@embecosm.com>
-Cc: Nathan Egge <negge@google.com>
-Cc: Max Chou <max.chou@sifive.com>
-
-Craig Blackmore (1):
-  target/riscv: rvv: Use wider accesses for unit stride load/store
-
- target/riscv/vector_helper.c | 107 +++++++++++++++++++++++++++++++++--
- 1 file changed, 101 insertions(+), 6 deletions(-)
-
+diff --git a/target/riscv/insn_trans/trans_rvv.c.inc b/target/riscv/insn_trans/trans_rvv.c.inc
+index b9883a5d32..c2c2c53254 100644
+--- a/target/riscv/insn_trans/trans_rvv.c.inc
++++ b/target/riscv/insn_trans/trans_rvv.c.inc
+@@ -1100,25 +1100,56 @@ GEN_VEXT_TRANS(vle64ff_v, MO_64, r2nfvm, ldff_op, ld_us_check)
+ typedef void gen_helper_ldst_whole(TCGv_ptr, TCGv, TCGv_env, TCGv_i32);
+ 
+ static bool ldst_whole_trans(uint32_t vd, uint32_t rs1, uint32_t nf,
+-                             gen_helper_ldst_whole *fn,
+-                             DisasContext *s)
++                             uint32_t log2_esz, gen_helper_ldst_whole *fn,
++                             DisasContext *s, bool is_load)
+ {
+-    TCGv_ptr dest;
+-    TCGv base;
+-    TCGv_i32 desc;
+-
+-    uint32_t data = FIELD_DP32(0, VDATA, NF, nf);
+-    data = FIELD_DP32(data, VDATA, VM, 1);
+-    dest = tcg_temp_new_ptr();
+-    desc = tcg_constant_i32(simd_desc(s->cfg_ptr->vlenb,
+-                                      s->cfg_ptr->vlenb, data));
+-
+-    base = get_gpr(s, rs1, EXT_NONE);
+-    tcg_gen_addi_ptr(dest, tcg_env, vreg_ofs(s, vd));
+-
+     mark_vs_dirty(s);
+ 
+-    fn(dest, base, tcg_env, desc);
++    /*
++     * Load/store minimum vlenb bytes per iteration.
++     * When possible do this atomically.
++     * Update vstart with the number of processed elements.
++     */
++    if (s->vstart_eq_zero) {
++        TCGv addr = tcg_temp_new();
++        uint32_t size = s->cfg_ptr->vlenb * nf;
++        TCGv_i128 t16 = tcg_temp_new_i128();
++        MemOp atomicity = MO_ATOM_NONE;
++        if (log2_esz == 0) {
++            atomicity = MO_ATOM_NONE;
++        } else {
++            atomicity = MO_ATOM_IFALIGN_PAIR;
++        }
++        for (int i = 0; i < size; i += 16) {
++            addr = get_address(s, rs1, i);
++            if (is_load) {
++                tcg_gen_qemu_ld_i128(t16, addr, s->mem_idx,
++                        MO_LE | MO_128 | atomicity);
++                tcg_gen_st_i128(t16, tcg_env, vreg_ofs(s, vd) + i);
++            } else {
++                tcg_gen_ld_i128(t16, tcg_env, vreg_ofs(s, vd) + i);
++                tcg_gen_qemu_st_i128(t16, addr, s->mem_idx,
++                        MO_LE | MO_128 | atomicity);
++            }
++            if (i == size - 16) {
++                tcg_gen_movi_tl(cpu_vstart, 0);
++            } else {
++                tcg_gen_addi_tl(cpu_vstart, cpu_vstart, 16 >> log2_esz);
++            }
++        }
++    } else {
++        TCGv_ptr dest;
++        TCGv base;
++        TCGv_i32 desc;
++        uint32_t data = FIELD_DP32(0, VDATA, NF, nf);
++        data = FIELD_DP32(data, VDATA, VM, 1);
++        dest = tcg_temp_new_ptr();
++        desc = tcg_constant_i32(simd_desc(s->cfg_ptr->vlenb,
++                        s->cfg_ptr->vlenb, data));
++        base = get_gpr(s, rs1, EXT_NONE);
++        tcg_gen_addi_ptr(dest, tcg_env, vreg_ofs(s, vd));
++        fn(dest, base, tcg_env, desc);
++    }
+ 
+     finalize_rvv_inst(s);
+     return true;
+@@ -1128,42 +1159,42 @@ static bool ldst_whole_trans(uint32_t vd, uint32_t rs1, uint32_t nf,
+  * load and store whole register instructions ignore vtype and vl setting.
+  * Thus, we don't need to check vill bit. (Section 7.9)
+  */
+-#define GEN_LDST_WHOLE_TRANS(NAME, ARG_NF)                                \
+-static bool trans_##NAME(DisasContext *s, arg_##NAME * a)                 \
+-{                                                                         \
+-    if (require_rvv(s) &&                                                 \
+-        QEMU_IS_ALIGNED(a->rd, ARG_NF)) {                                 \
+-        return ldst_whole_trans(a->rd, a->rs1, ARG_NF,                    \
+-                                gen_helper_##NAME, s);                    \
+-    }                                                                     \
+-    return false;                                                         \
+-}
+-
+-GEN_LDST_WHOLE_TRANS(vl1re8_v,  1)
+-GEN_LDST_WHOLE_TRANS(vl1re16_v, 1)
+-GEN_LDST_WHOLE_TRANS(vl1re32_v, 1)
+-GEN_LDST_WHOLE_TRANS(vl1re64_v, 1)
+-GEN_LDST_WHOLE_TRANS(vl2re8_v,  2)
+-GEN_LDST_WHOLE_TRANS(vl2re16_v, 2)
+-GEN_LDST_WHOLE_TRANS(vl2re32_v, 2)
+-GEN_LDST_WHOLE_TRANS(vl2re64_v, 2)
+-GEN_LDST_WHOLE_TRANS(vl4re8_v,  4)
+-GEN_LDST_WHOLE_TRANS(vl4re16_v, 4)
+-GEN_LDST_WHOLE_TRANS(vl4re32_v, 4)
+-GEN_LDST_WHOLE_TRANS(vl4re64_v, 4)
+-GEN_LDST_WHOLE_TRANS(vl8re8_v,  8)
+-GEN_LDST_WHOLE_TRANS(vl8re16_v, 8)
+-GEN_LDST_WHOLE_TRANS(vl8re32_v, 8)
+-GEN_LDST_WHOLE_TRANS(vl8re64_v, 8)
++#define GEN_LDST_WHOLE_TRANS(NAME, ETYPE, ARG_NF, IS_LOAD)                  \
++static bool trans_##NAME(DisasContext *s, arg_##NAME * a)                   \
++{                                                                           \
++    if (require_rvv(s) &&                                                   \
++        QEMU_IS_ALIGNED(a->rd, ARG_NF)) {                                   \
++        return ldst_whole_trans(a->rd, a->rs1, ARG_NF, ctzl(sizeof(ETYPE)), \
++                                gen_helper_##NAME, s, IS_LOAD);             \
++    }                                                                       \
++    return false;                                                           \
++}
++
++GEN_LDST_WHOLE_TRANS(vl1re8_v,  int8_t,  1, true)
++GEN_LDST_WHOLE_TRANS(vl1re16_v, int16_t, 1, true)
++GEN_LDST_WHOLE_TRANS(vl1re32_v, int32_t, 1, true)
++GEN_LDST_WHOLE_TRANS(vl1re64_v, int64_t, 1, true)
++GEN_LDST_WHOLE_TRANS(vl2re8_v,  int8_t,  2, true)
++GEN_LDST_WHOLE_TRANS(vl2re16_v, int16_t, 2, true)
++GEN_LDST_WHOLE_TRANS(vl2re32_v, int32_t, 2, true)
++GEN_LDST_WHOLE_TRANS(vl2re64_v, int64_t, 2, true)
++GEN_LDST_WHOLE_TRANS(vl4re8_v,  int8_t,  4, true)
++GEN_LDST_WHOLE_TRANS(vl4re16_v, int16_t, 4, true)
++GEN_LDST_WHOLE_TRANS(vl4re32_v, int32_t, 4, true)
++GEN_LDST_WHOLE_TRANS(vl4re64_v, int64_t, 4, true)
++GEN_LDST_WHOLE_TRANS(vl8re8_v,  int8_t,  8, true)
++GEN_LDST_WHOLE_TRANS(vl8re16_v, int16_t, 8, true)
++GEN_LDST_WHOLE_TRANS(vl8re32_v, int32_t, 8, true)
++GEN_LDST_WHOLE_TRANS(vl8re64_v, int64_t, 8, true)
+ 
+ /*
+  * The vector whole register store instructions are encoded similar to
+  * unmasked unit-stride store of elements with EEW=8.
+  */
+-GEN_LDST_WHOLE_TRANS(vs1r_v, 1)
+-GEN_LDST_WHOLE_TRANS(vs2r_v, 2)
+-GEN_LDST_WHOLE_TRANS(vs4r_v, 4)
+-GEN_LDST_WHOLE_TRANS(vs8r_v, 8)
++GEN_LDST_WHOLE_TRANS(vs1r_v, int8_t, 1, false)
++GEN_LDST_WHOLE_TRANS(vs2r_v, int8_t, 2, false)
++GEN_LDST_WHOLE_TRANS(vs4r_v, int8_t, 4, false)
++GEN_LDST_WHOLE_TRANS(vs8r_v, int8_t, 8, false)
+ 
+ /*
+  *** Vector Integer Arithmetic Instructions
 -- 
-2.43.0
+2.34.1
 
 
