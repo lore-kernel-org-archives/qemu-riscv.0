@@ -4,91 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 121C1E77188
-	for <qemu-riscv@archiver.kernel.org>; Fri, 20 Dec 2024 16:29:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1A10CE77188
+	for <qemu-riscv@archiver.kernel.org>; Fri, 20 Dec 2024 16:49:13 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tOfro-00008p-AF; Fri, 20 Dec 2024 11:28:44 -0500
+	id 1tOgBM-0004ij-7U; Fri, 20 Dec 2024 11:48:56 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1tOfrm-00008T-PL
- for qemu-riscv@nongnu.org; Fri, 20 Dec 2024 11:28:42 -0500
-Received: from mail-pl1-x633.google.com ([2607:f8b0:4864:20::633])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1tOfrk-0001qQ-Ql
- for qemu-riscv@nongnu.org; Fri, 20 Dec 2024 11:28:42 -0500
-Received: by mail-pl1-x633.google.com with SMTP id
- d9443c01a7336-2161eb94cceso15122605ad.2
- for <qemu-riscv@nongnu.org>; Fri, 20 Dec 2024 08:28:40 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1734712119; x=1735316919; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:to:subject:user-agent:mime-version:date:message-id:from
- :to:cc:subject:date:message-id:reply-to;
- bh=udENEynPBHDOzD5HmEf366V/0YdRrDGVZxSULZeESUo=;
- b=L8ODg2MaDWt5A/FXw7DZu+UntQrARHeA9IhFhKy+uop78FbKFKFBRjEIRrWCyJms1O
- ekYZDQtx5+8qr6rTpjujO4ZaOEQgW3Cv2PoojkME4g9Q4f8q7zBVkBJQTnrVzKQR2Z+/
- qsrSuNhyArXBlRgdSYYaGi0xGBGpSzjIpwMr02Tg8xdmyL+E/GYMoGPE0V8it9PgkTL8
- hh8GjBMCsbnP5t9TmklTn/CE66xA1E8vMR/ZFpEEghL8XN1YexlCfNzokRk2l0LO/VYG
- FCvylJOR0CvhO9mZEk5S7jm+23Ei2NxON0xPy0jOh7bare1VPcn6LTUiTLdhbp9VyqTn
- E+QA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1734712119; x=1735316919;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=udENEynPBHDOzD5HmEf366V/0YdRrDGVZxSULZeESUo=;
- b=CMFYcSShkSyjnUEyfuprmIy5G5S7yKiQW0YCClBLiqYHcizFjzWIG/CJDxVfTKubQw
- d2E6eVD1UhuOLMQsi6brmDJNvlbUoZr6DY4Yb1McKWRFq/E4uWOtj5ULh/GIijizFTf8
- bOhNM8PNNKM97BCwVAjgUPd/bDeO+nVjm1hHz0nx1J/dLhYkPlXb/ue1BkdfCvb2yugr
- VTFNFZghVd7S36eqrcoftzhYs87xkBfFeL4PFkYRgFVwJfoYwWucwVLLjQCjX9QGqY8s
- Pg0HBDkpmIPLDGn5B+Zzmy8VV97rLMMKotV3zKZlUaR5Uf7OsYvL2TNVof1gULu4wcNb
- UfSw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVKphkDpjZD75gAZdy+zVA/KIPBXroHsTz7MwKpwy1PdDbCNRm/+9dLFYeLikN48jKXI8r73A4Wwa56@nongnu.org
-X-Gm-Message-State: AOJu0Yw0BH1a9EJPrtKUERFsuBLkxd9uBdTZ9VRg73G4meVF2BhNB2h/
- B4NOykLJBz+MFwC0qafE0bLDRH41RNxHRuYd/WvXDCHWR+D3gnllH+jkyl2Qpl4=
-X-Gm-Gg: ASbGnctG7N5oeqQ0ZcrUUU+fSgw8K4M5jGr3PavgxBEgwxWa2KzCHwwanglMazxfVrZ
- rT3T5zUJ770IYtvfvRc5u4FIGkveIOoczXg83bETsLWF+qzYeIHDjs4aSE/oW1TsenEVaVOWEfw
- cV3I6ZJAjQD4lYq3amvclcFmBp2dU78xLB+PTtOBqwrH4DIB9qcrV/8tnGt74iqgEsT70ELH9+Z
- O2PiFvmHmY4sUm6LpqNQKJS0/cp6J7xXu57eAVicuCL6qFQ7iNTpNAnxDnRk7ndd4cdwWw=
-X-Google-Smtp-Source: AGHT+IEmp/dHGHkXFCFWTK2lK8BGASIiUFVOS46Fs7OJC17y7DmEhJhKBpCxqt3Tkr39JyAZN9c81Q==
-X-Received: by 2002:a17:902:c941:b0:215:4d90:4caf with SMTP id
- d9443c01a7336-219e6ea1bb5mr38796725ad.14.1734712119139; 
- Fri, 20 Dec 2024 08:28:39 -0800 (PST)
-Received: from [192.168.0.4] ([71.212.144.252])
- by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-219dc9cdeccsm31051235ad.144.2024.12.20.08.28.38
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 20 Dec 2024 08:28:38 -0800 (PST)
-Message-ID: <ac1efe23-1920-45d1-97f1-3fd80d11039e@linaro.org>
-Date: Fri, 20 Dec 2024 08:28:37 -0800
+ (Exim 4.90_1) (envelope-from <roan.richmond@codethink.co.uk>)
+ id 1tOfZC-0004hQ-N0
+ for qemu-riscv@nongnu.org; Fri, 20 Dec 2024 11:09:31 -0500
+Received: from imap5.colo.codethink.co.uk ([78.40.148.171])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <roan.richmond@codethink.co.uk>)
+ id 1tOfZ9-0004YR-P1
+ for qemu-riscv@nongnu.org; Fri, 20 Dec 2024 11:09:29 -0500
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=codethink.co.uk; s=imap5-20230908; h=Sender:Content-Transfer-Encoding:
+ MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:
+ Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:Resent-From:
+ Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:
+ List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=Pm0n7vEByie+dDvGA5eDUGGDm40OkWizfV+a14GV0nc=; b=lSUr7/Kv5ANreK5uaajz02yu5x
+ +QBwLT+hR6tueXe4bbZvSzD/8p9ZrLCqXNT2GD2SG12gdn6C8t58PWKhim/am4G+3wis16ipbGxAC
+ odz5yEEALvPoLf/KEFalLXYo9tZi6DV/dVsh5DYvSgB6+3pYMJYdCsQVote2N8FuiHckB/gEhS0Oj
+ 8Z0fYe3JPKtOj0GrQP5qtp2EPV011EQ54EkTZHHULHbyoV6RTMYzm1621UahoQ9HmcgVH2ilUWzfk
+ p6EEKLSD41gw3DRquSFc/zjU+1s2FYMCbXGvbRDN/4ngRME6P5+jvXI3xHB8qOM/kdWbgYZ3fnsGM
+ RVPlkF/A==;
+Received: from [167.98.27.226] (helo=codethink.office.codethink.co.uk)
+ by imap5.colo.codethink.co.uk with esmtpsa  (Exim 4.94.2 #2 (Debian))
+ id 1tOfD2-00ACav-NN; Fri, 20 Dec 2024 15:46:36 +0000
+From: Roan Richmond <roan.richmond@codethink.co.uk>
+To: qemu-riscv@nongnu.org
+Cc: lawrence.hunter@codethink.co.uk, ben.dooks@codethink.co.uk,
+ felix.chong@codethink.co.uk, sagark@eecs.berkeley.edu, palmer@dabbet.com,
+ alistair.francis@wdc.com, bmeng.cn@gmail.com,
+ Roan Richmond <roan.richmond@codethink.co.uk>
+Subject: [RFC PATCH 3/7] target/riscv: Add riscv big endian data flag into
+ DisasContext
+Date: Fri, 20 Dec 2024 15:45:31 +0000
+Message-ID: <20241220154616.283933-4-roan.richmond@codethink.co.uk>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20241220154616.283933-1-roan.richmond@codethink.co.uk>
+References: <20241220154616.283933-1-roan.richmond@codethink.co.uk>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v7 1/1] target/riscv: rvv: Use wider accesses for unit
- stride load/store
-To: Craig Blackmore <craig.blackmore@embecosm.com>, qemu-devel@nongnu.org,
- qemu-riscv@nongnu.org
-References: <20241220122109.2083215-1-craig.blackmore@embecosm.com>
- <20241220122109.2083215-2-craig.blackmore@embecosm.com>
-Content-Language: en-US
-From: Richard Henderson <richard.henderson@linaro.org>
-In-Reply-To: <20241220122109.2083215-2-craig.blackmore@embecosm.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::633;
- envelope-from=richard.henderson@linaro.org; helo=mail-pl1-x633.google.com
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=78.40.148.171;
+ envelope-from=roan.richmond@codethink.co.uk; helo=imap5.colo.codethink.co.uk
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001, RCVD_IN_VALIDITY_SAFE_BLOCKED=0.001,
+ SPF_HELO_PASS=-0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
+X-Mailman-Approved-At: Fri, 20 Dec 2024 11:48:54 -0500
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -103,189 +75,91 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 12/20/24 04:21, Craig Blackmore wrote:
-> Use atomic load/store functions to access multiple elements from host.
-> 
-> Co-authored-by: Paolo Savini <paolo.savini@embecosm.com>
-> 
-> Signed-off-by: Paolo Savini <paolo.savini@embecosm.com>
-> Signed-off-by: Craig Blackmore <craig.blackmore@embecosm.com>
-> ---
->   target/riscv/vector_helper.c | 107 +++++++++++++++++++++++++++++++++--
->   1 file changed, 101 insertions(+), 6 deletions(-)
-> 
-> diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
-> index a85dd1d200..c0179165ce 100644
-> --- a/target/riscv/vector_helper.c
-> +++ b/target/riscv/vector_helper.c
-> @@ -206,10 +206,102 @@ vext_continus_ldst_tlb(CPURISCVState *env, vext_ldst_elem_fn_tlb *ldst_tlb,
->       }
->   }
->   
-> +#if !HOST_BIG_ENDIAN
-> +/* Atomic operations for load/store */
-> +
-> +/*
-> + * Return true if there are enough elements for this size access and the
-> + * pointer is aligned to the required atomicity.
-> + */
-> +
-> +static inline QEMU_ALWAYS_INLINE bool
-> +ok_for_atomic(uint32_t size, void *host, uint32_t reg_start, uint32_t evl,
-> +              uint32_t log2_esz)
-> +{
-> +    return (reg_start + (size >> log2_esz)) <= evl
-> +            && ((uintptr_t) host % size) == 0;
-> +}
-> +
-> +#define GEN_VEXT_LDST_ATOMIC_HOST(SIZE, TYPE)                             \
-> +static inline QEMU_ALWAYS_INLINE void                                     \
-> +vext_ldst_atom_##SIZE##_host(void *vd, uint32_t byte_offset, TYPE *host,  \
-> +                             bool is_load)                                \
-> +{                                                                         \
-> +    TYPE *vd_ptr = (TYPE *) (vd + byte_offset);                           \
-> +    if (is_load) {                                                        \
-> +        *vd_ptr = qatomic_read__nocheck(host);                            \
-> +    } else {                                                              \
-> +        qatomic_set__nocheck(host, *vd_ptr);                              \
-> +    }                                                                     \
-> +}                                                                         \
-> +
-> +GEN_VEXT_LDST_ATOMIC_HOST(2, uint16_t)
-> +GEN_VEXT_LDST_ATOMIC_HOST(4, uint32_t)
-> +#ifdef CONFIG_ATOMIC64
-> +GEN_VEXT_LDST_ATOMIC_HOST(8, uint64_t)
-> +#endif
-> +
-> +#ifdef CONFIG_INT128_TYPE
-> +static inline QEMU_ALWAYS_INLINE void
-> +vext_ldst_atom_16_host(void *vd, uint32_t byte_offset, Int128 *host,
-> +                       bool is_load)
-> +{
-> +    Int128 *vd_ptr = (Int128 *) (vd + byte_offset);
-> +    if (is_load) {
-> +        *vd_ptr = atomic16_read_ro(host);
-> +    } else {
-> +        atomic16_set(host, *vd_ptr);
-> +    }
-> +}
-> +#endif
-> +#endif
+Allows for endian check on load/store instructions. Keeps the BE_DATA
+flag in sync with the MSTATUS MBE value.
 
-Using CONFIG_INT128_TYPE is peeking under the hood a bit too far.
-As it happens, the ifdef should not be required, because the atomic16_{read,set} symbols 
-are always present.
+Authored-by: Roan Richmond <roan.richmond@codethink.co.uk>
+Co-authored-by: Lawrence Hunter <lawrence.hunter@codethink.co.uk>
+Co-authored-by: Ben Dooks <ben.dooks@codethink.co.uk>
+Signed-off-by: Lawrence Hunter <lawrence.hunter@codethink.co.uk>
+---
+ target/riscv/cpu.h                      | 2 ++
+ target/riscv/cpu_helper.c               | 1 +
+ target/riscv/insn_trans/trans_rvi.c.inc | 6 ++++++
+ target/riscv/translate.c                | 3 +++
+ 4 files changed, 12 insertions(+)
 
-> +#ifdef CONFIG_INT128_TYPE
-> +    if (((is_load && HAVE_ATOMIC128_RO) || (!is_load && HAVE_ATOMIC128_RW))
-> +        && ok_for_atomic(16, host, reg_start, evl, log2_esz)) {
-> +        vext_ldst_atom_16_host(vd, byte_offset, host, is_load);
-> +        return 16;
-> +    }
-> +#endif
-
-The tricky part is that if !HAVE_ATOMIC128_RO, then atomic16_set may be implemented with a 
-16-byte compare and store loop.  This is expensive, and you certainly don't want to use 
-that.  You'd prefer two 8-byte stores.
-
-So I think the condition should be
-
-     if (HAVE_ATOMIC128_RO && (is_load || HAVE_ATOMIC128_RW))
-
-with the above paragraph added as a comment.
-
-That said, RVV does not have 128-bit elements, so at no point do you actually require 
-128-bit atomicity.
-
-> +
-> +#ifdef CONFIG_ATOMIC64
-> +    if (ok_for_atomic(8, host, reg_start, evl, log2_esz)) {
-> +        vext_ldst_atom_8_host(vd, byte_offset, host, is_load);
-> +        return 8;
-> +    }
-> +#endif
-> +
-> +    if (ok_for_atomic(4, host, reg_start, evl, log2_esz)) {
-> +        vext_ldst_atom_4_host(vd, byte_offset, host, is_load);
-> +        return 4;
-> +    }
-> +
-> +    if (ok_for_atomic(2, host, reg_start, evl, log2_esz)) {
-> +        vext_ldst_atom_2_host(vd, byte_offset, host, is_load);
-> +        return 2;
-> +    }
-> +#endif
-> +
-> +    ldst_host(vd, reg_start, host);
-> +    return 1;
-> +}
-> +
->   static inline QEMU_ALWAYS_INLINE void
->   vext_continus_ldst_host(CPURISCVState *env, vext_ldst_elem_fn_host *ldst_host,
->                           void *vd, uint32_t evl, uint32_t reg_start, void *host,
-> -                        uint32_t esz, bool is_load)
-> +                        uint32_t esz, bool is_load, uint32_t log2_esz)
->   {
->   #if HOST_BIG_ENDIAN
->       for (; reg_start < evl; reg_start++, host += esz) {
-> @@ -225,10 +317,13 @@ vext_continus_ldst_host(CPURISCVState *env, vext_ldst_elem_fn_host *ldst_host,
->           } else {
->               memcpy(host, vd + byte_offset, size);
->           }
-> -    } else {
-> -        for (; reg_start < evl; reg_start++, host += esz) {
-> -            ldst_host(vd, reg_start, host);
-> -        }
-> +        return;
-> +    }
-> +    uint32_t chunk = 0;
-> +    for (; reg_start < evl; reg_start += (chunk >> log2_esz),
-> +                            host += chunk) {
-> +        chunk = vext_ldst_atomic_chunk_host(env, ldst_host, vd, evl, reg_start,
-> +                                            host, esz, is_load, log2_esz);
->       }
-
-My guess is the arrangement of the loop is not great, in that ok_for_atomic is buried at 
-the bottom of the call stack within this loop.
-
-It would be better to test for alignment once, here at the outside.  If the alignment is 
-below esz, then the individual elements are misaligned, at which point the architecture 
-does not require *any* atomicity.  At which point, I believe you could use the memcpy path 
-just above.
-
-Perhaps something like
-
-     uint32_t byte_offset = reg_start * esz;
-     uint32_t size = (evl - reg_start) * esz;
-     uint32_t test = (uintptr_t)host;
-
-     if (esz == 1 || unlikely(test % esz != 0)) {
-         if (is_load) {
-             memcpy(vd + byte_offset, host, size);
-         } else {
-             memcpy(host, vd + byte_offset, size);
-         }
-         return;
+diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+index 284b112821..18c3a2ed6b 100644
+--- a/target/riscv/cpu.h
++++ b/target/riscv/cpu.h
+@@ -637,6 +637,8 @@ FIELD(TB_FLAGS, FCFI_ENABLED, 28, 1)
+ FIELD(TB_FLAGS, FCFI_LP_EXPECTED, 29, 1)
+ /* zicfiss needs a TB flag so that correct TB is located based on tb flags */
+ FIELD(TB_FLAGS, BCFI_ENABLED, 30, 1)
++/* Indicates Big Endian (BE) data */
++FIELD(TB_FLAGS, BE_DATA, 31, 1)
+ 
+ #ifdef TARGET_RISCV32
+ #define riscv_cpu_mxl(env)  ((void)(env), MXL_RV32)
+diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+index 0a3ead69ea..6271c9b887 100644
+--- a/target/riscv/cpu_helper.c
++++ b/target/riscv/cpu_helper.c
+@@ -206,6 +206,7 @@ void cpu_get_tb_cpu_state(CPURISCVState *env, vaddr *pc,
      }
-
-     /* Test that both alignment and size are multiples. */
-     test |= size;
-     if (HAVE_ATOMIC128_RO && (is_load || HAVE_ATOMIC128_RW) && (test % 16 == 0) {
-         do {
-             vext_ldst_atom_16_host(vd, reg_offset, host, is_load);
-             reg_offset += 16 >> log2_esz;
-             host += 16;
-         } while (reg_offset < evl);
-         return;
+ #endif
+ 
++    flags = FIELD_DP32(flags, TB_FLAGS, BE_DATA, !!(env->mstatus & MSTATUS_MBE));
+     flags = FIELD_DP32(flags, TB_FLAGS, FS, fs);
+     flags = FIELD_DP32(flags, TB_FLAGS, VS, vs);
+     flags = FIELD_DP32(flags, TB_FLAGS, XL, env->xl);
+diff --git a/target/riscv/insn_trans/trans_rvi.c.inc b/target/riscv/insn_trans/trans_rvi.c.inc
+index 96c218a9d7..76bb233a37 100644
+--- a/target/riscv/insn_trans/trans_rvi.c.inc
++++ b/target/riscv/insn_trans/trans_rvi.c.inc
+@@ -326,6 +326,9 @@ static bool gen_load(DisasContext *ctx, arg_lb *a, MemOp memop)
+     if (ctx->cfg_ptr->ext_zama16b) {
+         memop |= MO_ATOM_WITHIN16;
      }
-     if (esz < 8 && test % 8 == 0) {
-         ...
++
++    memop |= ctx->be_data;
++
+     decode_save_opc(ctx, 0);
+     if (get_xl(ctx) == MXL_RV128) {
+         out = gen_load_i128(ctx, a, memop);
+@@ -427,6 +430,9 @@ static bool gen_store(DisasContext *ctx, arg_sb *a, MemOp memop)
+     if (ctx->cfg_ptr->ext_zama16b) {
+         memop |= MO_ATOM_WITHIN16;
      }
-     ...
-     for (; reg_start < evl; reg_start++, host += esz) {
-         ldst_host(vd, reg_start, host);
-     }
++
++    memop |= ctx->be_data;
++
+     decode_save_opc(ctx, 0);
+     if (get_xl(ctx) == MXL_RV128) {
+         return gen_store_i128(ctx, a, memop);
+diff --git a/target/riscv/translate.c b/target/riscv/translate.c
+index bccaf8e89a..d1c8ac7fa8 100644
+--- a/target/riscv/translate.c
++++ b/target/riscv/translate.c
+@@ -121,6 +121,8 @@ typedef struct DisasContext {
+     bool fcfi_lp_expected;
+     /* zicfiss extension, if shadow stack was enabled during TB gen */
+     bool bcfi_enabled;
++    /* If set to Big Endian data mode */
++    MemOp be_data;
+ } DisasContext;
+ 
+ static inline bool has_ext(DisasContext *ctx, uint32_t ext)
+@@ -1255,6 +1257,7 @@ static void riscv_tr_init_disas_context(DisasContextBase *dcbase, CPUState *cs)
+     ctx->zero = tcg_constant_tl(0);
+     ctx->virt_inst_excp = false;
+     ctx->decoders = cpu->decoders;
++    ctx->be_data = FIELD_EX32(tb_flags, TB_FLAGS, BE_DATA) ? MO_BE : MO_LE;
+ }
+ 
+ static void riscv_tr_tb_start(DisasContextBase *db, CPUState *cpu)
+-- 
+2.43.0
 
-
-r~
 
