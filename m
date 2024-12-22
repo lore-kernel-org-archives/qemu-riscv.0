@@ -4,98 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 59B0FE77188
-	for <qemu-riscv@archiver.kernel.org>; Sun, 22 Dec 2024 08:39:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 06631E77188
+	for <qemu-riscv@archiver.kernel.org>; Sun, 22 Dec 2024 21:45:42 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tPHUR-0005YU-Fg; Sun, 22 Dec 2024 03:39:07 -0500
+	id 1tPTlU-0001jC-Nn; Sun, 22 Dec 2024 16:45:33 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <mjt@tls.msk.ru>)
- id 1tPHUO-0005Xy-Fe; Sun, 22 Dec 2024 03:39:04 -0500
-Received: from isrv.corpit.ru ([86.62.121.231])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <mjt@tls.msk.ru>)
- id 1tPHUM-00084E-OW; Sun, 22 Dec 2024 03:39:04 -0500
-Received: from tsrv.corpit.ru (tsrv.tls.msk.ru [192.168.177.2])
- by isrv.corpit.ru (Postfix) with ESMTP id BFE7AC8C67;
- Sun, 22 Dec 2024 11:38:27 +0300 (MSK)
-Received: from [192.168.177.130] (mjt.wg.tls.msk.ru [192.168.177.130])
- by tsrv.corpit.ru (Postfix) with ESMTP id 4F46118DB43;
- Sun, 22 Dec 2024 11:38:58 +0300 (MSK)
-Message-ID: <fe6033cf-fee6-4172-a576-c3456cb2bd26@tls.msk.ru>
-Date: Sun, 22 Dec 2024 11:38:58 +0300
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 1/1] hw/intc/riscv_aplic: Fix APLIC in_clrip and
- clripnum write emulation
-To: Yong-Xuan Wang <yongxuan.wang@sifive.com>, qemu-devel@nongnu.org,
- qemu-riscv@nongnu.org
-Cc: greentime.hu@sifive.com, vincent.chen@sifive.com, frank.chang@sifive.com, 
- jim.shu@sifive.com, Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bmeng.cn@gmail.com>,
- Weiwei Li <liwei1518@gmail.com>,
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1tPTlK-0001gc-2M
+ for qemu-riscv@nongnu.org; Sun, 22 Dec 2024 16:45:23 -0500
+Received: from mail-pl1-x634.google.com ([2607:f8b0:4864:20::634])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1tPTlH-0001vF-3f
+ for qemu-riscv@nongnu.org; Sun, 22 Dec 2024 16:45:21 -0500
+Received: by mail-pl1-x634.google.com with SMTP id
+ d9443c01a7336-2166360285dso32822985ad.1
+ for <qemu-riscv@nongnu.org>; Sun, 22 Dec 2024 13:45:16 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=ventanamicro.com; s=google; t=1734903915; x=1735508715; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=6Jx370CFTAl7yh8PdG3ZOseQcMn3UXlcTs+5VqFVgwk=;
+ b=et0WTLoWD9UufgsKKbUhxIEYwwyy84tL+OWUUpB1VzBsVegAI/0knDv53dQ/mmUNqW
+ UmMF6+VxYPPasa7KU2UIXbelhtnIWU78BT0AILdMMG6RVJ/QHp8xN7VsUQ63aDN2Z+Zu
+ vF19w8skXuMhsDdFWA9Lb9Md66i9ap0BW2OX8W5z2aJTWF+zl0GyTinHquYuAXIsrWq3
+ 9pRZm7GgLEA4OHGPa7Cc/VRpF6bugNj5HtUilrpaAwFizm0k3VQoQj8bTbB+XVawx9VH
+ AWmNMIgZKiNoByMvSjNJBE+E0w49ISu3BRcpDf5nJ2jMLpXVU11Z3Gbt5LlXBSFDOnjI
+ vMcA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1734903915; x=1735508715;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=6Jx370CFTAl7yh8PdG3ZOseQcMn3UXlcTs+5VqFVgwk=;
+ b=M0sb9BPm6prI8j/eEB/xWs14dz1yIyK4CF0FXxpsRDaeKD7XeOBcCUyJBv3ptjF1y0
+ f0W0Lze3U3nYUcg18LLqXUvXoAfbnr7oOccBXs4gnu0JAtzbj5zS4365ntfRs7Uk1EOw
+ kScfIPfc27E2xrtF43DMovdn4TJ+PjFgpU1mz9uE6VyCuURRPOTBT1TZ/PaVK2AcrE7G
+ hiPGD/Ocdq9+2IjK0A6C+CHrT0VNCHlK+FxziaIhoT90LutbDfBPl3MjINQzorft6jS5
+ iAIlVXjmUAzs5QYewZ16yMieMmjybNf6rHvAtF41RtbcjeiJ/qOjkPyU7fB7IGzURb56
+ Mf5g==
+X-Gm-Message-State: AOJu0YxSn5+6ZMwGmO1nnvnI2em1Vevj8HWB1+mMJgpfRvMUX7TfBjCB
+ NyuyTBaEvj4Cvr9IxJ2I3EBkravvmCovm1MX5orr4dQSoBdGGqZL3j+nKGNBGyc=
+X-Gm-Gg: ASbGncsRGrWuGb7Zfl9Pgl02zhLRuabC4HNXtBZRbk8MXKftb+tXqyNaGDla2GTC9wm
+ 1cDLbRPfvioC86V7EYbepqsmrJx++sx9KCAdU64chHVeQBjAAIFPcDSTBFhgbeEsKQrV/2r37Dd
+ kjSeQ/kD8iJUacFUnMcS27hjTNUstv86XXg5l0d4Ni2lyO36pdDl7gyTR8CogF/LJe98M/CxT+R
+ 3Zk4q+QaGkUoWpVOLue/Tj+7dqSduVsazLDwVWnY+87NwZ9NjYWtNhSySfopJsmPWf/brxC/ErX
+ qkdy8mM=
+X-Google-Smtp-Source: AGHT+IFKH9jwIo9aJMZrUJYkYeESxx2qnXCyqi01O2xyG92HUKJAvukWHW3gK6CRyMjpfQ7hL4ZwJg==
+X-Received: by 2002:a17:902:d2c3:b0:216:69ca:7714 with SMTP id
+ d9443c01a7336-219e6e85c30mr145820255ad.11.1734903915653; 
+ Sun, 22 Dec 2024 13:45:15 -0800 (PST)
+Received: from grind.dc1.ventanamicro.com ([187.101.65.72])
+ by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-219dc9f7312sm60737175ad.225.2024.12.22.13.45.12
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 22 Dec 2024 13:45:15 -0800 (PST)
+From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+To: qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
+ liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- qemu-stable <qemu-stable@nongnu.org>
-References: <20241029085349.30412-1-yongxuan.wang@sifive.com>
-Content-Language: en-US, ru-RU
-From: Michael Tokarev <mjt@tls.msk.ru>
-Autocrypt: addr=mjt@tls.msk.ru; keydata=
- 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
-In-Reply-To: <20241029085349.30412-1-yongxuan.wang@sifive.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=86.62.121.231; envelope-from=mjt@tls.msk.ru;
- helo=isrv.corpit.ru
-X-Spam_score_int: -68
-X-Spam_score: -6.9
-X-Spam_bar: ------
-X-Spam_report: (-6.9 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_HI=-5,
- RCVD_IN_VALIDITY_CERTIFIED_BLOCKED=0.001, RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ qemu-trivial@nongnu.org, Peter Maydell <peter.maydell@linaro.org>
+Subject: [PATCH] hw/riscv/riscv-iommu-sys.c: fix duplicated 'table_size'
+Date: Sun, 22 Dec 2024 18:45:07 -0300
+Message-ID: <20241222214507.2173648-1-dbarboza@ventanamicro.com>
+X-Mailer: git-send-email 2.47.1
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::634;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pl1-x634.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -111,23 +98,35 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-29.10.2024 11:53, Yong-Xuan Wang wrote:
-> In the section "4.7 Precise effects on interrupt-pending bits"
-> of the RISC-V AIA specification defines that:
-> 
-> "If the source mode is Level1 or Level0 and the interrupt domain
-> is configured in MSI delivery mode (domaincfg.DM = 1):
-> The pending bit is cleared whenever the rectified input value is
-> low, when the interrupt is forwarded by MSI, or by a relevant
-> write to an in_clrip register or to clripnum."
-> 
-> Update the riscv_aplic_set_pending() to match the spec.
-> 
-> Fixes: bf31cf06eb ("hw/intc/riscv_aplic: Fix setipnum_le write emulation for APLIC MSI-mode")
+Trivial fix for the following ticket:
 
-Is it a qemu-stable material?
+CID 1568580:  Incorrect expression  (EVALUATION_ORDER)
+In "table_size = table_size = n_vectors * 16U",
+    "table_size" is written twice with the same value.
 
-Thanks,
+Cc: qemu-trivial@nongnu.org
+Cc: Peter Maydell <peter.maydell@linaro.org>
+Resolves: Coverity CID 1568580
+Fixes: 01c1caa9d1 ("hw/riscv/virt.c, riscv-iommu-sys.c: add MSIx support")
+Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+---
+ hw/riscv/riscv-iommu-sys.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-/mjt
+diff --git a/hw/riscv/riscv-iommu-sys.c b/hw/riscv/riscv-iommu-sys.c
+index 28153f38da..65b24fb07d 100644
+--- a/hw/riscv/riscv-iommu-sys.c
++++ b/hw/riscv/riscv-iommu-sys.c
+@@ -121,7 +121,7 @@ static void riscv_iommu_sysdev_init_msi(RISCVIOMMUStateSys *s,
+                                         uint32_t n_vectors)
+ {
+     RISCVIOMMUState *iommu = &s->iommu;
+-    uint32_t table_size = table_size = n_vectors * PCI_MSIX_ENTRY_SIZE;
++    uint32_t table_size = n_vectors * PCI_MSIX_ENTRY_SIZE;
+     uint32_t table_offset = RISCV_IOMMU_REG_MSI_CONFIG;
+     uint32_t pba_size = QEMU_ALIGN_UP(n_vectors, 64) / 8;
+     uint32_t pba_offset = RISCV_IOMMU_REG_MSI_CONFIG + 256;
+-- 
+2.47.1
+
 
