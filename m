@@ -4,71 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D8046E7718B
-	for <qemu-riscv@archiver.kernel.org>; Mon, 23 Dec 2024 16:29:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C3006E7718F
+	for <qemu-riscv@archiver.kernel.org>; Mon, 23 Dec 2024 16:32:05 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tPlJ8-0001UM-P4; Mon, 23 Dec 2024 11:29:26 -0500
+	id 1tPlL4-0002VA-3h; Mon, 23 Dec 2024 11:31:26 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tPlJ6-0001Tj-UK
- for qemu-riscv@nongnu.org; Mon, 23 Dec 2024 11:29:24 -0500
-Received: from mail-wm1-x336.google.com ([2a00:1450:4864:20::336])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tPlL3-0002Uj-55
+ for qemu-riscv@nongnu.org; Mon, 23 Dec 2024 11:31:25 -0500
+Received: from mail-wm1-x32b.google.com ([2a00:1450:4864:20::32b])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tPlJ4-0004Pt-3Q
- for qemu-riscv@nongnu.org; Mon, 23 Dec 2024 11:29:24 -0500
-Received: by mail-wm1-x336.google.com with SMTP id
- 5b1f17b1804b1-43618283d48so32357395e9.1
- for <qemu-riscv@nongnu.org>; Mon, 23 Dec 2024 08:29:21 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tPlL0-0004i0-Fj
+ for qemu-riscv@nongnu.org; Mon, 23 Dec 2024 11:31:24 -0500
+Received: by mail-wm1-x32b.google.com with SMTP id
+ 5b1f17b1804b1-4361815b96cso29288555e9.1
+ for <qemu-riscv@nongnu.org>; Mon, 23 Dec 2024 08:31:21 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1734971360; x=1735576160; darn=nongnu.org;
+ d=linaro.org; s=google; t=1734971481; x=1735576281; darn=nongnu.org;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=cvOlv5tQioQ4u3aXYsfz5x1SOijsn7NLXaLikJkyybY=;
- b=B1BceDJekwZ5qgpThfbhZbW97UmKbv5aMonoli8KA9C+WuzME0096GKXYb7OaQ26Dc
- RBU0/uV6WHLvc3LscHWxbEsdXtbZt59SysMLFfgR9oB82VnM+BSvxBeVYyBFJpYLUoq1
- ws+oySGgsFNNMYopJ/FSj9mRev7IjAtNSl+1g2jj3tUlcbwR9YiY2H82GIvItvKidpeg
- 9h6i1qhDzfzaYPGjQndrGz0EiP5j1hb7u4t6eyQTkLLAZBVEcjAtNOTDYu0wtVYA0Htt
- GA8e0g1DND6WpgQlT4VQFOWGXQUdM3rfPlRC8uro4dB+jCyghVtihx5ewCl/xEt6wVEG
- 7fog==
+ bh=OshU39fkw/Sq2aeDKqOUJz1CZscFEKzAYLrz4W4krFo=;
+ b=cMcepyjMhtCFrcdlOArVbKhtpd4eMf9/wgdTuSKhayjy9In3fhjRHia+u9VxKe7yuL
+ LCo7q9xP5qI4wcN07FCFy4KxiBe05XPQnlzTwQQZM1K3obN7FOWrVsbkZH7viDeal6tA
+ sT8thf4gb6XHQPnj6gVWcT3pskVVycSfQyVOJru52DZ+CZe0+K5luUbe7GyyERpRMPiQ
+ rMF9fabqa3i9SQU9avZ00PrSz58vyBV9JsUu88qzhfwwN12xKxiPSsG9VoUqQGgk6v/Z
+ 2X8Akmwb9EhRJHhhRhe9zA1TzY/r5YOuo8nJjGN47YFV9DR3Tu+/KO4hhXNJ0mDyoEF4
+ hoeg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1734971360; x=1735576160;
+ d=1e100.net; s=20230601; t=1734971481; x=1735576281;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=cvOlv5tQioQ4u3aXYsfz5x1SOijsn7NLXaLikJkyybY=;
- b=VIvAdYIuPZOtN7VP2QcjjgOpJH9GRt6R00PwzkRHoFUS8KyO9Mt46PBsndq2sh9UVe
- do5WP9ZVqmmFulT4no717L+eg6CvYQI3l2bZK31oWF/QTDgzub+vMHCrgi/awnZY1ipG
- MlPgzmIjlW924v/6UOxxWbIS/xFszqw0IcV0SurD6oFJUYvbHtPtK3JUVyB5MqJBO287
- DUL2T2XxdFbmU45WrjA4ZuWzb5RCdf8rZ3NQ6OXheNeqM2CxkPoEuBTTNZIhn1e8570+
- LRKmf8xGOlRpGYZ1Wfkge8lJXGQ6MmbzgGK9EDcPKNPEaOP6mJ+Gq1hBDPvMxyZUz5BN
- jGgg==
+ bh=OshU39fkw/Sq2aeDKqOUJz1CZscFEKzAYLrz4W4krFo=;
+ b=MLq8mCsBDvO7iJvMxS9zc3ZpemwJp7VzKvT/4xv0tDr6CnEnNovBvvh8svzuQZ6vWh
+ 5l5ZGQrje9rLLLooR11ysIXAcIKSQoHKYs3Lnj2Cpq3WDbAp7yEd6c2MjEJ9OOZDIUNb
+ LpdPh2h182/hXUH6PKF8V7KvQiBYnQBhoRBjfwK5QGCnUHLfonnanbPlcqvqwwDWtRl5
+ GggPx6TUEJvMdvXRUYsvvLE5FlG4kDBo3ZulgoPOr/pVyjdNUk+hoTHwHv6/IbhTbpg6
+ vgEY41leSVpuPFY3S0mkFdUd194avkhhGs7Z4TZkoU6LJWdZjgH4EYOkWur1wNlMG9uC
+ FVxA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWDF4gXddXWvLKCj36/uHJfuZPHwU/RRzxACKFloGj0fU/03JHOXdLgqPMnimdZRnkTFx57Hh5mMSjj@nongnu.org
-X-Gm-Message-State: AOJu0Yxode5MXuaHUX+zXyHnEqOF9xogOyuXgSw6JDLHd+QV5ANM1kIs
- xxTypTux7WJPmeJCcF3S+WbvdAeVoSO3VmJd+fyECsS0/QTsFEyN1AAtJ523GS4=
-X-Gm-Gg: ASbGncsf7hDgF4L0NfTGeLBMJ3BYJTT+qhnvu18tMkglGfjLg8vrGizEu82TitKhkxO
- v3CRRwP5YAy5G9Ps3ykyyIQh0WThZp0AfHQbRuavfzUW7/Wtqz7r46Xj1I5ruCoX07E3yxpvdaA
- +l50SJXPslDwzZnFJHEXgMWoFjce7Wjj07JzzBhx2u0PHJ53bB+UJDNc7GMPJcokQjy98AZIejJ
- YKIUEAslChYsvbADQaJNO64wEEBKUZl2amR+yy+tGg1qMekEy2AmMqyG4cF6DHvLTyJPRwQobfZ
- EJDGRV77O1tw4BgIeZw=
-X-Google-Smtp-Source: AGHT+IHXloTob8qhc6hjhiXbNOoToSs1EV8md/IyAhw2Z4E5BFdPaA7I/WM7shYhOL5oWHGuR15zMQ==
-X-Received: by 2002:a05:600c:4a83:b0:436:1aa6:b8ee with SMTP id
- 5b1f17b1804b1-4366d356735mr97671865e9.2.1734971359957; 
- Mon, 23 Dec 2024 08:29:19 -0800 (PST)
+ AJvYcCUeRFsOne17YbHBPPjSI//sr+BiFtIh4SCJ/aSEKBJ55tEyyXwCZ7VudxEfoU76F8JSOh6P3e3GG/AB@nongnu.org
+X-Gm-Message-State: AOJu0YyUidNXcBGPKdHy8HrqkzUwde/tnMatgxtAwfngquDSUeMtLcNU
+ ezEZ4ldBULN89fxm8nZNDVBrQdZNNA7mWIotnsNsfA82Eh2VEfHkKTv3WHL/Mdw=
+X-Gm-Gg: ASbGncvdi9NX9cb7TR3COyrA70B5Wm1wTEMvd81YftQUpIcAtP+U3+mxGby6fcYhU2w
+ qBq3Mxx+ZB0HY3w68odak6B7ueHKatmH78bV1GYmbr1ZPfbGFRdbCsqlDvNrndQT8swyQZDyxkl
+ Vz+87b5azp2/ibQZmMFR+aFiU9QbHNT4Wi1PKnjO8hlTUqqtYZNkrGLi/GsnKFGG11qEiwydj/B
+ lYSCn2egT5h+kt8+daeXgnctn7OF3T6twrV27CvpDFTEnHaX2pJKN3EfHT9zWfkNACfhMNJaIg+
+ 7yvs94pZeISWzUrJvJA=
+X-Google-Smtp-Source: AGHT+IG1O7g1q8OehghG1lbFKR03xFEFgsFyh3YCsv/O3RkwdCZ9RJfP2OnOnwOeHiq2PD/pGbBjyA==
+X-Received: by 2002:a05:600c:3ca4:b0:434:fe4b:be18 with SMTP id
+ 5b1f17b1804b1-436686468fcmr121973355e9.18.1734971480838; 
+ Mon, 23 Dec 2024 08:31:20 -0800 (PST)
 Received: from [10.89.88.213] (51.171.88.92.rev.sfr.net. [92.88.171.51])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4366128a44fsm140231775e9.43.2024.12.23.08.29.16
+ 5b1f17b1804b1-43656b0145csm175489215e9.15.2024.12.23.08.31.17
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 23 Dec 2024 08:29:19 -0800 (PST)
-Message-ID: <d861c401-483e-488d-a03c-cb11d0e80bf3@linaro.org>
-Date: Mon, 23 Dec 2024 17:29:15 +0100
+ Mon, 23 Dec 2024 08:31:20 -0800 (PST)
+Message-ID: <ba0226c1-1680-4f28-b575-c708a6aa82c5@linaro.org>
+Date: Mon, 23 Dec 2024 17:31:16 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v15 05/15] MAINTAINERS: Add myself as maintainer for
- apple-gfx, reviewer for HVF
+Subject: Re: [PATCH v15 09/15] gpex: Allow more than 4 legacy IRQs
 To: Phil Dennis-Jordan <phil@philjordan.eu>, qemu-devel@nongnu.org
 Cc: agraf@csgraf.de, peter.maydell@linaro.org, pbonzini@redhat.com,
  rad@semihalf.com, quic_llindhol@quicinc.com, stefanha@redhat.com,
@@ -80,16 +79,16 @@ Cc: agraf@csgraf.de, peter.maydell@linaro.org, pbonzini@redhat.com,
  dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com, jcmvbkbc@gmail.com,
  marcandre.lureau@redhat.com, berrange@redhat.com, akihiko.odaki@daynix.com,
  qemu-arm@nongnu.org, qemu-block@nongnu.org, qemu-riscv@nongnu.org,
- balaton@eik.bme.hu, Roman Bolshakov <rbolshakov@ddn.com>
+ balaton@eik.bme.hu, Alexander Graf <graf@amazon.com>
 References: <20241218202036.80064-1-phil@philjordan.eu>
- <20241218202036.80064-6-phil@philjordan.eu>
+ <20241218202036.80064-10-phil@philjordan.eu>
 Content-Language: en-US
 From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-In-Reply-To: <20241218202036.80064-6-phil@philjordan.eu>
+In-Reply-To: <20241218202036.80064-10-phil@philjordan.eu>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::336;
- envelope-from=philmd@linaro.org; helo=mail-wm1-x336.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::32b;
+ envelope-from=philmd@linaro.org; helo=mail-wm1-x32b.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -113,23 +112,42 @@ Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 On 18/12/24 21:20, Phil Dennis-Jordan wrote:
-> I'm happy to take responsibility for the macOS PV graphics code. As
-> HVF patches don't seem to get much attention at the moment, I'm also
-> adding myself as designated reviewer for HVF and x86 HVF to try and
-> improve that.
+> From: Alexander Graf <graf@amazon.com>
 > 
-> I anticipate that the resulting workload should be covered by the
-> funding I'm receiving for improving Qemu in combination with macOS. As
-> of right now this runs out at the end of 2024; I expect the workload on
-> apple-gfx should be relatively minor and manageable in my spare time
-> beyond that. I may have to remove myself from more general HVF duties
-> once the contract runs out if it's more than I can manage.
+> Some boards such as vmapple don't do real legacy PCI IRQ swizzling.
+> Instead, they just keep allocating more board IRQ lines for each new
+> legacy IRQ. Let's support that mode by giving instantiators a new
+> "nr_irqs" property they can use to support more than 4 legacy IRQ lines.
+> In this mode, GPEX will export more IRQ lines, one for each device.
 > 
+> Signed-off-by: Alexander Graf <graf@amazon.com>
 > Signed-off-by: Phil Dennis-Jordan <phil@philjordan.eu>
-> Reviewed-by: Roman Bolshakov <rbolshakov@ddn.com>
+> Reviewed-by: Akihiko Odaki <akihiko.odaki@daynix.com>
+> Tested-by: Akihiko Odaki <akihiko.odaki@daynix.com>
 > ---
->   MAINTAINERS | 7 +++++++
->   1 file changed, 7 insertions(+)
+> 
+> v4:
+> 
+>   * Turned pair of IRQ arrays into array of structs.
+>   * Simplified swizzling logic selection.
+> 
+> v12:
+> 
+>   * Fixed uses of deleted GPEX_NUM_IRQS constant that have been
+>     added to QEMU since this patch was originally written.
+> 
+>   hw/arm/sbsa-ref.c          |  2 +-
+>   hw/arm/virt.c              |  2 +-
+>   hw/i386/microvm.c          |  2 +-
+>   hw/loongarch/virt.c        | 12 +++++------
+>   hw/mips/loongson3_virt.c   |  2 +-
+>   hw/openrisc/virt.c         | 12 +++++------
+>   hw/pci-host/gpex.c         | 43 ++++++++++++++++++++++++++++++--------
+>   hw/riscv/virt.c            | 12 +++++------
+>   hw/xen/xen-pvh-common.c    |  2 +-
+>   hw/xtensa/virt.c           |  2 +-
+>   include/hw/pci-host/gpex.h |  7 +++----
+>   11 files changed, 61 insertions(+), 37 deletions(-)
 
 Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 
