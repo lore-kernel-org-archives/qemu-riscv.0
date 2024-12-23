@@ -4,71 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 516E1E7718B
-	for <qemu-riscv@archiver.kernel.org>; Mon, 23 Dec 2024 22:59:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 59120E7718B
+	for <qemu-riscv@archiver.kernel.org>; Mon, 23 Dec 2024 23:06:25 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tPrNy-0003CN-Cz; Mon, 23 Dec 2024 17:58:50 -0500
+	id 1tPrUj-0004ia-5t; Mon, 23 Dec 2024 18:05:49 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tPrNw-0003BR-MQ
- for qemu-riscv@nongnu.org; Mon, 23 Dec 2024 17:58:48 -0500
-Received: from mail-wm1-x329.google.com ([2a00:1450:4864:20::329])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tPrUh-0004hz-U9
+ for qemu-riscv@nongnu.org; Mon, 23 Dec 2024 18:05:48 -0500
+Received: from mail-wm1-x330.google.com ([2a00:1450:4864:20::330])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tPrNt-0002s7-1a
- for qemu-riscv@nongnu.org; Mon, 23 Dec 2024 17:58:48 -0500
-Received: by mail-wm1-x329.google.com with SMTP id
- 5b1f17b1804b1-43623f0c574so31834095e9.2
- for <qemu-riscv@nongnu.org>; Mon, 23 Dec 2024 14:58:43 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tPrUe-0003ks-IC
+ for qemu-riscv@nongnu.org; Mon, 23 Dec 2024 18:05:47 -0500
+Received: by mail-wm1-x330.google.com with SMTP id
+ 5b1f17b1804b1-434e3953b65so31905055e9.1
+ for <qemu-riscv@nongnu.org>; Mon, 23 Dec 2024 15:05:44 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1734994723; x=1735599523; darn=nongnu.org;
+ d=linaro.org; s=google; t=1734995143; x=1735599943; darn=nongnu.org;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=YGWkDaqt04ZkiclE3mCSHcf1ELTIIJpcH40F4qJ5MgU=;
- b=tZ4PiwKs52t5NUscZ7en4a5H//2L3hNRH/qHY2aiKmwp4E+/0jr9tKiCBpBimLtKi9
- +EPUTNv/+O/S3wWZ11gwil3b6gGwPRR9+9j5xRntnp5R8w9ZsU15qyslXEuRH6DhiRNV
- HzfJiW2jxJ5SShAlkQYF8qJfyGXsj42/OOrPtWYIrjhjqWNn7eo+8UsWtmXnA2f+kIFu
- RkIe4STkTsMH+D9QxdpMm2KYejT/9/ZImrzIxo5Bdrdsy9eotL+VrtIInhX4bJvF0DOJ
- QllTa5hWcC03BGOqwYazeTK/aVrDKU63VhbFx3KfP46cji7/AhIGpWn5MG3i5u4iSOvd
- MLbg==
+ bh=8wirB2oxzEwBCtv2tOsMsgvv/9t4T7GgUtSDc9qT4ag=;
+ b=WVqNaScc5QLoVTQd56omK1D00jMBPVO+R8s4kDiTQJzteMxRT810kzyCjfTa5Sleu0
+ w1/4D3+FE0Ts78TOJEJFE/zQxbLgeozjFDS3ZwdP0ldyYoLeOgtdp9vAA8tWzn1uiGG0
+ sjYkwtMmrRbNX8yHwNI9NH4kfcT9S9SNJr1lX7rjwtzF0aFgGE4seZOf74OKsRWTdo1Y
+ SDlcBgxJ9Wk4FAQavuZum02u76s0gxi6ziFYQFv7ZlEXHQXoVcEl+dhruRAUNxG6bJK6
+ WqxfE6WwDELmMOU6zmTLzV9EPctWVsPrgqWQHsLbym56Eq57I1Hot9QcUHU2IDlz7Rtn
+ 8kpA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1734994723; x=1735599523;
+ d=1e100.net; s=20230601; t=1734995143; x=1735599943;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=YGWkDaqt04ZkiclE3mCSHcf1ELTIIJpcH40F4qJ5MgU=;
- b=nYaDBXajQLpJiPO4upPaphM2+8ye0FF5Z902Cwvl7boIQ7nS/Kbp31U1GGsXNtBvh5
- BFMbze71IShjeo/pFmHZE5ZItap0SYeAN+e2PdKPRG9weIPnw6/aR1DtTHWACPTZApk5
- 37aQ7vGHU60j/vg9uy5UkRjSLKCWKZkV1vWnPi70Na4cPjeqUrKV/eZowTtgCNNeFJTU
- PBSP8PJbx9VlFiqplwOmbAWVqd9vbiJWn3KMbbtVtbemflcTJZWnVqN2q3MWTTXGyHLi
- EmqRw1v2ptXxinUEWta4z4b/0CemK9hRxJz5MsbkfzjWZPYYv2/07s75oxL0XBdf+O4u
- X/Fw==
+ bh=8wirB2oxzEwBCtv2tOsMsgvv/9t4T7GgUtSDc9qT4ag=;
+ b=lvIhl1hiMEurcCSPJ6MGIjEePcSiRmde3YCBb/vg7lU3AIHMyKxpcoyTejEnLiePq2
+ FeO0Z9xm76m0k8TXBdZZe/DDBIY2cwzQOXYlsX4cnX05aMNhM1B8hCpHqkVYjkPC3Ae6
+ T/Wx52b+tXdF6SHfeWaEKX0XYtLXYwokQELGEOqihHSO+fBrNdrOaqB7N995QScSjBDo
+ YLNonrj8Eyg9j2HHxwnP5QDwiycHYPNAcFRStwmKZP73YiOoCKYemoF7PwRgO8al0gSO
+ vRbk1j79+0L75OkS5d6dt0Rrdo+qrXQKjmrnDgsihpQm8UhY8+zHRjlbkozdMxR0E2z9
+ 2q8g==
 X-Forwarded-Encrypted: i=1;
- AJvYcCV5s0ZLQdFk/n04R1MW3stTJ/tImDbAckSfjX2oPuHoAuOGNWxBRZjUe4+3YDHo+NPQUo0GZK8PwOr/@nongnu.org
-X-Gm-Message-State: AOJu0YyEZUJTEGoV4QiDlTrna1z4nOHsEQDeJeiHJjT9hQCIjoc3WaIe
- Qxok15/MlUHQKs2xdiYBZ/5wH9JMd4nkwmxf84d92V9itNY6cfaOmRZ3GTLYgw4=
-X-Gm-Gg: ASbGncurXb12XguPUizdsNGO5sXlJlIdd5sWHjUvaUDDhL0Z1p+50XBRV6cY+QOviBa
- JXzoJO75QwhlQAzXh4dR8dxJVkgkjEGeDiFax4eHgqUd3t6fbOzl4Z1kwGhOuCOpBlAbNyYKEwA
- nHi5Vwwm7i0lIJP8Vdwp63GUdKso4LpH80vnKjB6z0wXAGNIF9S0RqAkNrJMICjQpgvaCasaKMj
- AsGINuUeG8mtBEBCG8l5cWyUbKo0+waggZfLzahEC7y1sCF9uXzyLsn9Y/X9JHW2ow=
-X-Google-Smtp-Source: AGHT+IEoFF/cw13FwWbaqNaSf/tAQVifLX4+vxdzLD2xsUmZ7k5nSwSPbG4CIDBk4eT4R/LDLzYDLQ==
-X-Received: by 2002:a05:600c:4f51:b0:436:1b7a:c0b4 with SMTP id
- 5b1f17b1804b1-4366854850emr93928925e9.1.1734994722648; 
- Mon, 23 Dec 2024 14:58:42 -0800 (PST)
+ AJvYcCXWKP/zGmJOWK34vaXmiV6xuQc8ioMMVx0w8QTc1FG9EXSZansHB/ZsfYjNAm1/Ss1baFY2jpp0bFQY@nongnu.org
+X-Gm-Message-State: AOJu0YwUqgMYGj9u2cGLipYOggOU9PUHRdpcD/L9iVhpnDfaXsb0mEf9
+ gAOlKaLrNUM8Kf9seIyB7RDpriw0uzJcU/ZO3m3lRjBkK66/uITN+eznvZU6HZ8=
+X-Gm-Gg: ASbGncvBwCtx+Nc8HSsS5KxEUFWnyRR/YZ4E/7u9QKzNkF68xTUMAWj1oxAcMu7onws
+ NcOIn50G3Cc98W2u54SGDGpiqAZIZ90Tne1CcVat49XL/V3VJ9LOO13L1pbC5PEkLt9bf2XErCb
+ m9M6vkCZ+RY5rS2V2FZKjdYI4YTKmFDRVfZ90aIoa3W7kKLgpW5FpG1eP02vHERWPGy8VvgRZyx
+ gpjMMqCY/qAxs3K8CoA7IaXFFgG7q2auFEs6pmLv6yc1eXPyiBr6UcZha+5hg9zAzI=
+X-Google-Smtp-Source: AGHT+IEkpZKtff9otRKBBcG+TWXg2q7OtBuEOOpTO9uYLS2uupqsMwq1V0+NDgxCNOsq9NFrZ1xqcw==
+X-Received: by 2002:a7b:cb93:0:b0:434:f270:a4f0 with SMTP id
+ 5b1f17b1804b1-43668b49981mr106293485e9.21.1734995142660; 
+ Mon, 23 Dec 2024 15:05:42 -0800 (PST)
 Received: from [192.168.1.117] ([78.196.4.158])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-43661289995sm147841595e9.36.2024.12.23.14.58.39
+ ffacd0b85a97d-38a1c847dabsm12370921f8f.59.2024.12.23.15.05.40
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 23 Dec 2024 14:58:41 -0800 (PST)
-Message-ID: <8554330d-fd9b-4fa5-b37c-161f70b71f7d@linaro.org>
-Date: Mon, 23 Dec 2024 23:58:38 +0100
+ Mon, 23 Dec 2024 15:05:41 -0800 (PST)
+Message-ID: <cfe36783-9353-45c0-9f4c-6aa1879ffd70@linaro.org>
+Date: Tue, 24 Dec 2024 00:05:39 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v16 00/14] macOS PV Graphics and new vmapple machine type
-To: Phil Dennis-Jordan <phil@philjordan.eu>, qemu-devel@nongnu.org
-Cc: agraf@csgraf.de, peter.maydell@linaro.org, pbonzini@redhat.com,
+Subject: Re: [PATCH v15 15/15] hw/vmapple/vmapple: Add vmapple machine type
+To: Phil Dennis-Jordan <phil@philjordan.eu>
+Cc: Akihiko Odaki <akihiko.odaki@daynix.com>, qemu-devel@nongnu.org,
+ agraf@csgraf.de, peter.maydell@linaro.org, pbonzini@redhat.com,
  rad@semihalf.com, quic_llindhol@quicinc.com, stefanha@redhat.com,
  mst@redhat.com, slp@redhat.com, richard.henderson@linaro.org,
  eduardo@habkost.net, marcel.apfelbaum@gmail.com, gaosong@loongson.cn,
@@ -76,17 +77,19 @@ Cc: agraf@csgraf.de, peter.maydell@linaro.org, pbonzini@redhat.com,
  hreitz@redhat.com, shorne@gmail.com, palmer@dabbelt.com,
  alistair.francis@wdc.com, bmeng.cn@gmail.com, liwei1518@gmail.com,
  dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com, jcmvbkbc@gmail.com,
- marcandre.lureau@redhat.com, berrange@redhat.com, akihiko.odaki@daynix.com,
- qemu-arm@nongnu.org, qemu-block@nongnu.org, qemu-riscv@nongnu.org,
- balaton@eik.bme.hu
-References: <20241223221645.29911-1-phil@philjordan.eu>
+ marcandre.lureau@redhat.com, berrange@redhat.com, qemu-arm@nongnu.org,
+ qemu-block@nongnu.org, qemu-riscv@nongnu.org, balaton@eik.bme.hu,
+ Alexander Graf <graf@amazon.com>
+References: <167ca349-980c-43a7-82f2-264b2f7250cb@linaro.org>
+ <50ABB5B0-4B7C-4F32-A956-82BD76C235E3@philjordan.eu>
+ <CAAibmn1sJ8cCyExHaEw853bek1hUt8QrA4Lv5=1R=zX=v=51QQ@mail.gmail.com>
 Content-Language: en-US
 From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-In-Reply-To: <20241223221645.29911-1-phil@philjordan.eu>
+In-Reply-To: <CAAibmn1sJ8cCyExHaEw853bek1hUt8QrA4Lv5=1R=zX=v=51QQ@mail.gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::329;
- envelope-from=philmd@linaro.org; helo=mail-wm1-x329.google.com
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::330;
+ envelope-from=philmd@linaro.org; helo=mail-wm1-x330.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -109,119 +112,77 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 23/12/24 23:16, Phil Dennis-Jordan wrote:
-> This patch set introduces a new ARM and macOS HVF specific machine type
-> called "vmapple", as well as a family of display devices based on the
-> ParavirtualizedGraphics.framework in macOS. One of the display adapter
-> variants, apple-gfx-mmio, is required for the new machine type, while
-> apple-gfx-pci can be used to enable 3D graphics acceleration with x86-64
-> macOS guest OSes.
-> 
-> Previous versions of this patch set were submitted semi-separately:
-> the original vmapple patch set by Alexander Graf included a monolithic
-> implementation of apple-gfx-mmio. I subsequently reviewed and reworked
-> the latter to support the PCI variant of the device as well and submitted
-> the result in isolation. As requested in subsequent review, I have now
-> recombined this with the original vmapple patch set, which I have updated
-> and improved in a few ways as well.
-> 
-> The vmapple machine type approximates the configuration in macOS's own
-> Virtualization.framework when running arm64 macOS guests. In addition to
-> generic components such as a GICv3 and an XHCI USB controller, it
-> includes nonstandard extensions to the virtio block device, a special
-> "hardware" aes engine, a configuration device, a pvpanic variant, a
-> "backdoor" interface, and of course the apple-gfx paravirtualised display
-> adapter.
-> 
-> There are currently a few limitations to this which aren't intrinsic,
-> just imperfect emulation of the VZF, but it's good enough to be just
-> about usable for some purposes:
-> 
->   * macOS 12 guests only. Versions 13+ currently fail during early boot.
->   * macOS 11+ arm64 hosts only, with hvf accel. (Perhaps some differences
->     between Apple M series CPUs and TCG's aarch64 implementation? macOS
->     hosts only because ParavirtualizedGraphics.framework is a black box
->     implementing most of the logic behind the apple-gfx device.)
->   * PCI devices use legacy IRQs, not MSI/MSI-X. As far as I can tell,
->     we'd need to include the GICv3 ITS, but it's unclear to me what
->     exactly needs wiring up.
->   * Due to a quirk (bug?) in the macOS XHCI driver when MSI-X is not
->     available, correct functioning of the USB controller (and thus
->     keyboard/tablet) requires a small workaround in the XHCI controller
->     device. This is part of another patch series:
->     https://patchew.org/QEMU/20241208191646.64857-1-phil@philjordan.eu/
->   * The guest OS must first be provisioned using Virtualization.framework;
->     the disk images can subsequently be used in Qemu. (See docs.)
-> 
-> The apple-gfx device can be used independently from the vmapple machine
-> type, at least in the PCI variant. It mainly targets x86-64 macOS guests
-> from version 11 on, but also includes a UEFI bootrom for basic
-> framebuffer mode. macOS 11 is also required on the host side, as well
-> as a GPU that supports the Metal API. On the guest side, this provides
-> 3D acceleration/GPGPU support with a baseline Metal feature set,
-> irrespective of the host GPU's feature set. A few limitations in the
-> current integration:
-> 
->   * Although it works fine with TCG, it does not work correctly
->     cross-architecture: x86-64 guests on arm64 hosts appear to make
->     some boot progress, but rendering is corrupted. I suspect
->     incompatible texture memory layouts; I have no idea if this is
->     fixable.
->   * ParavirtualizedGraphics.framework and the guest driver support
->     multi-headed configurations. The current Qemu integration always
->     connects precisely 1 display.
->   * State serialisation and deserialisation is currently not
->     implemented, though supported in principle by the framework.
->     Both apple-gfx variants thus set up a migration blocker.
->   * Rendering efficiency could be better. The GPU-rendered guest
->     framebuffer is copied to system memory and uses Qemu's usual
->     CPU-based drawing. For maximum efficiency, the Metal texture
->     containing the guest framebuffer could be drawn directly to
->     a Metal view in the host window, staying on the GPU. (Similar
->     to the OpenGL/virgl render path on other platforms.)
+On 23/12/24 23:17, Phil Dennis-Jordan wrote:
 
-
-> v15 -> v16
+>      > Do you have other changes in your v16? I'm quite happy to
+>     integrate this
+>      > v15.
 > 
->   * 14 patches now, as patch 8 has already been pulled. (Thanks Philippe!)
->   * Fixed a bunch of conflicts with upstream code motion:
->      - DEFINE_PROP_END_OF_LIST removal (4/14 - apple-gfx mode list, 7/14 -
->        pvpanic-mmio, 10/14 - bdif, 11/14 - cfg device, and
->        12/14 - vmapple-virtio-blk)
->      - sysemu->system move/rename: (1/14 - ui/qemu-main, 2/14 - apple-gfx,
->        9/14 - aes, 10/14 - bdif, 14/14 - vmapple machine type)
->   * 14/14 (vmapple machine type):
->      - Moved compatibility setting for removing legacy mode from virtio-pci
->        to proper global property table rather than (ab)using sugar property.
->      - Removed a few superfluous #includes during sysemu rename cleanup.
->      - Removed machine type versioning as it's not necessary (yet?)
->      - Made memory map array const
-
-Great.
-
-> Alexander Graf (8):
->    hw: Add vmapple subdir
->    hw/misc/pvpanic: Add MMIO interface
->    gpex: Allow more than 4 legacy IRQs
->    hw/vmapple/aes: Introduce aes engine
->    hw/vmapple/bdif: Introduce vmapple backdoor interface
->    hw/vmapple/cfg: Introduce vmapple cfg region
->    hw/vmapple/virtio-blk: Add support for apple virtio-blk
->    hw/vmapple/vmapple: Add vmapple machine type
+>     The ones proposed by Akihiko are the only ones. I’ve already
+>     implemented them, so I’m happy to post v16.
 > 
-> Phil Dennis-Jordan (6):
->    ui & main loop: Redesign of system-specific main thread event handling
->    hw/display/apple-gfx: Introduce ParavirtualizedGraphics.Framework
->      support
->    hw/display/apple-gfx: Adds PCI implementation
->    hw/display/apple-gfx: Adds configurable mode list
->    MAINTAINERS: Add myself as maintainer for apple-gfx, reviewer for HVF
->    hw/block/virtio-blk: Replaces request free function with g_free
+> 
+> OK, rebasing on the upstream master branch has revealed it's not quite 
+> so simple: there are a bunch of clashes with the recent sysemu->system 
+> rename and the removal of DEFINE_PROP_END_OF_LIST(). They amount to 
 
-If there are no objection or further comments, I'm taking this
-series and will post a PR after xmas & testing.
+Yep :/
 
-Thanks all!
+> pretty trivial changes, but almost all commits needed adjusting, so 
+> pulling v15 would be painful. I've just posted my v16 (including all the 
+> changes discussed here).
+> 
+> Thanks for taking an interest in this patch set!
+> 
+>      >> Adapting this giant macro for each machine type seems rather
+>     error-prone and the kind of thing a computer does better than a
+>     human writing the code. I can't help but wonder if we could define a
+>     generic version in boards.h and only implement the
+>     DEFINE_*_MACHINE{_LATEST,}() wrappers specifically for each machine
+>     type. I've created an issue for this on GitLab: https://gitlab.com/
+>     qemu-project/qemu/-/issues/2744 <https://gitlab.com/qemu-project/
+>     qemu/-/issues/2744> <https:// gitlab.com/qemu-project/qemu/-/
+>     issues/2744 <http://gitlab.com/qemu-project/qemu/-/issues/2744>> I
+>     might attack that once I've cut down my backlog of unmerged patches.
+>      >
+>      > Do we really want the vmapple machines to be versioned? I see 3
+>     options:
+>      > 1/ No (simplest)
+>      > 2/ Not yet, adding versioning when we see the needs
+>      > 3/ Yes
+>      >
+>      > Personally I prefer/recommend 1/ or 2/ ;)
+> 
+>     I didn’t realise these were an option. :-) I was just inheriting
+>     Alex’s code here and assumed it was the standard thing to do.
+> 
+>     I could imagine we might change a few things to get better guest
+>     version support and perhaps the guest iCloud support that was added
+>     to the Virtualization.framework in macOS 15. But yeah it seems
+>     unlikely that any of this would cause regressions.
+> 
+>     What change would you propose to remove the versioning? Is there a
+>     specific machine type I should use as reference? Or do you just want
+>     to change that yourself, if I push my v16 code to a public repository?
+> 
+> 
+> OK, grepping through the code base reveals there are quite a number of 
+> the "smaller" machine types are unversioned. So I guess that's a no- 
+> brainer then. I've worked out I essentially just need to move the compat 
+> properties registration to the main init, the "desc" field on the 
+> machine class needs to be set, and the type becomes non-abstract. 
+
+Correct.
+
+> Everything still appears to work when I add that back in after removing 
+> all the macro definitions and instantiations. Change included in v16, 
+> but I've still got the reverse of the removal commit around, so if 
+> anyone has good arguments why we need it, I can easily add versioning 
+> back in.
+
+Great :)
+
+Thanks,
 
 Phil.
 
