@@ -4,100 +4,146 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 59120E7718B
-	for <qemu-riscv@archiver.kernel.org>; Mon, 23 Dec 2024 23:06:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4C26CE77188
+	for <qemu-riscv@archiver.kernel.org>; Tue, 24 Dec 2024 05:00:51 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tPrUj-0004ia-5t; Mon, 23 Dec 2024 18:05:49 -0500
+	id 1tPx24-0005yL-Jf; Tue, 24 Dec 2024 00:00:36 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tPrUh-0004hz-U9
- for qemu-riscv@nongnu.org; Mon, 23 Dec 2024 18:05:48 -0500
-Received: from mail-wm1-x330.google.com ([2a00:1450:4864:20::330])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tPrUe-0003ks-IC
- for qemu-riscv@nongnu.org; Mon, 23 Dec 2024 18:05:47 -0500
-Received: by mail-wm1-x330.google.com with SMTP id
- 5b1f17b1804b1-434e3953b65so31905055e9.1
- for <qemu-riscv@nongnu.org>; Mon, 23 Dec 2024 15:05:44 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1734995143; x=1735599943; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=8wirB2oxzEwBCtv2tOsMsgvv/9t4T7GgUtSDc9qT4ag=;
- b=WVqNaScc5QLoVTQd56omK1D00jMBPVO+R8s4kDiTQJzteMxRT810kzyCjfTa5Sleu0
- w1/4D3+FE0Ts78TOJEJFE/zQxbLgeozjFDS3ZwdP0ldyYoLeOgtdp9vAA8tWzn1uiGG0
- sjYkwtMmrRbNX8yHwNI9NH4kfcT9S9SNJr1lX7rjwtzF0aFgGE4seZOf74OKsRWTdo1Y
- SDlcBgxJ9Wk4FAQavuZum02u76s0gxi6ziFYQFv7ZlEXHQXoVcEl+dhruRAUNxG6bJK6
- WqxfE6WwDELmMOU6zmTLzV9EPctWVsPrgqWQHsLbym56Eq57I1Hot9QcUHU2IDlz7Rtn
- 8kpA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1734995143; x=1735599943;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=8wirB2oxzEwBCtv2tOsMsgvv/9t4T7GgUtSDc9qT4ag=;
- b=lvIhl1hiMEurcCSPJ6MGIjEePcSiRmde3YCBb/vg7lU3AIHMyKxpcoyTejEnLiePq2
- FeO0Z9xm76m0k8TXBdZZe/DDBIY2cwzQOXYlsX4cnX05aMNhM1B8hCpHqkVYjkPC3Ae6
- T/Wx52b+tXdF6SHfeWaEKX0XYtLXYwokQELGEOqihHSO+fBrNdrOaqB7N995QScSjBDo
- YLNonrj8Eyg9j2HHxwnP5QDwiycHYPNAcFRStwmKZP73YiOoCKYemoF7PwRgO8al0gSO
- vRbk1j79+0L75OkS5d6dt0Rrdo+qrXQKjmrnDgsihpQm8UhY8+zHRjlbkozdMxR0E2z9
- 2q8g==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXWKP/zGmJOWK34vaXmiV6xuQc8ioMMVx0w8QTc1FG9EXSZansHB/ZsfYjNAm1/Ss1baFY2jpp0bFQY@nongnu.org
-X-Gm-Message-State: AOJu0YwUqgMYGj9u2cGLipYOggOU9PUHRdpcD/L9iVhpnDfaXsb0mEf9
- gAOlKaLrNUM8Kf9seIyB7RDpriw0uzJcU/ZO3m3lRjBkK66/uITN+eznvZU6HZ8=
-X-Gm-Gg: ASbGncvBwCtx+Nc8HSsS5KxEUFWnyRR/YZ4E/7u9QKzNkF68xTUMAWj1oxAcMu7onws
- NcOIn50G3Cc98W2u54SGDGpiqAZIZ90Tne1CcVat49XL/V3VJ9LOO13L1pbC5PEkLt9bf2XErCb
- m9M6vkCZ+RY5rS2V2FZKjdYI4YTKmFDRVfZ90aIoa3W7kKLgpW5FpG1eP02vHERWPGy8VvgRZyx
- gpjMMqCY/qAxs3K8CoA7IaXFFgG7q2auFEs6pmLv6yc1eXPyiBr6UcZha+5hg9zAzI=
-X-Google-Smtp-Source: AGHT+IEkpZKtff9otRKBBcG+TWXg2q7OtBuEOOpTO9uYLS2uupqsMwq1V0+NDgxCNOsq9NFrZ1xqcw==
-X-Received: by 2002:a7b:cb93:0:b0:434:f270:a4f0 with SMTP id
- 5b1f17b1804b1-43668b49981mr106293485e9.21.1734995142660; 
- Mon, 23 Dec 2024 15:05:42 -0800 (PST)
-Received: from [192.168.1.117] ([78.196.4.158])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-38a1c847dabsm12370921f8f.59.2024.12.23.15.05.40
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 23 Dec 2024 15:05:41 -0800 (PST)
-Message-ID: <cfe36783-9353-45c0-9f4c-6aa1879ffd70@linaro.org>
-Date: Tue, 24 Dec 2024 00:05:39 +0100
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v15 15/15] hw/vmapple/vmapple: Add vmapple machine type
-To: Phil Dennis-Jordan <phil@philjordan.eu>
-Cc: Akihiko Odaki <akihiko.odaki@daynix.com>, qemu-devel@nongnu.org,
- agraf@csgraf.de, peter.maydell@linaro.org, pbonzini@redhat.com,
- rad@semihalf.com, quic_llindhol@quicinc.com, stefanha@redhat.com,
- mst@redhat.com, slp@redhat.com, richard.henderson@linaro.org,
- eduardo@habkost.net, marcel.apfelbaum@gmail.com, gaosong@loongson.cn,
- jiaxun.yang@flygoat.com, chenhuacai@kernel.org, kwolf@redhat.com,
- hreitz@redhat.com, shorne@gmail.com, palmer@dabbelt.com,
- alistair.francis@wdc.com, bmeng.cn@gmail.com, liwei1518@gmail.com,
- dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com, jcmvbkbc@gmail.com,
- marcandre.lureau@redhat.com, berrange@redhat.com, qemu-arm@nongnu.org,
- qemu-block@nongnu.org, qemu-riscv@nongnu.org, balaton@eik.bme.hu,
- Alexander Graf <graf@amazon.com>
-References: <167ca349-980c-43a7-82f2-264b2f7250cb@linaro.org>
- <50ABB5B0-4B7C-4F32-A956-82BD76C235E3@philjordan.eu>
- <CAAibmn1sJ8cCyExHaEw853bek1hUt8QrA4Lv5=1R=zX=v=51QQ@mail.gmail.com>
+ (Exim 4.90_1) (envelope-from <jiachao1990@outlook.com>)
+ id 1tPuYl-0002qU-1b
+ for qemu-riscv@nongnu.org; Mon, 23 Dec 2024 21:22:11 -0500
+Received: from mail-psaapc01olkn2092.outbound.protection.outlook.com
+ ([40.92.52.92] helo=APC01-PSA-obe.outbound.protection.outlook.com)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <jiachao1990@outlook.com>)
+ id 1tPuYh-0007Cs-NO
+ for qemu-riscv@nongnu.org; Mon, 23 Dec 2024 21:22:10 -0500
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=E5bMxwtnwOVBnGYfLRVVSyrfRN7eGYryLNALRE/VGcPVLXx3EM2d3L8LgFuXufmdtT9ZfnnQMqqEuVbXYF5YpV0/KOOi6QjtBF2gLl7q76PINGwyeX8+8w0J5Oz3j8CcNidhTYdXT8qaiSQk92+8a/jNzc+PmyG80ZUndh2YwkdQ2n/pWfZ/5UdCbJ28xlKnf9iTxiSGi7cjvR+2oZdyN9/5Gmj4N0PKxHvBof60gfEuq7JKESc9cvNZB43jqxwk/in1X6bz4l4IJqTBjGkco81auV/MvXFEtyl0cKltDafK6vZup5qjv/UGzzXqD0GKL73qO/IaIs1C5LydgKQDXQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=RB3K4jdkuorKmariWhto0bPtBCGzGMGm8iWbhjYju7w=;
+ b=CifaShPj9uEYotzWmDhCCq7XRwdxU1LV+12074kyaJbBpEA6UYRX/2N6l6ze7H8PcbIItuRoDvSYTLSNR33Tu6e7WkhbKjzG/xsZvwKpBKeQhLya1kxZ7K8H6zpfwbXepqjwXytxTznJHn3z7YhGYA9boJJMCwyZVvh0aZdwsBpb5RXjn9M398orW2FInua7moSQm0mqhXw9e1HTWGOuWIq4mzHPOhlhOL/UADzcJTJn4O2IdgOswbp0+iDogSMFxswlXzUBKw9sWf7PYS0Rz1//EY/q2zKU2SmVQFJbjedGcMTMRIIUbxz5Kwui2jr1PGA9n9R2EquTCHNEuLutkA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=none; dmarc=none;
+ dkim=none; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=outlook.com;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=RB3K4jdkuorKmariWhto0bPtBCGzGMGm8iWbhjYju7w=;
+ b=fx3Cdqkz/CPffy70ooGqSUj62yAQMdoK8+diMIAs2XIYERaErKrANViVkQRnp/j4LYj0KXwp+vmMSdtNVUernmyL4MKFAy3AT9u8Y0YcYAeyvYBP2ZonTe7nQkRo6ZaSNXrWEM0iELbSJEJsA3kG2XW/HzQN0FzSsQ8Kk1/Wv/RhEbqlRyypqHitX38C0J/IW3sUdU9A6MUB2ttr6nYY1396vA0hPHwBfObVwkbxGsXAocS55MncvsITm8tBGUYKwusZgzsqJdwd4vYt9eax553LAw/hisljSAkuJMccJ4/hEey/u7R4AfmpRk4Q3W9mTZnby4uccEgupUpVyyI/5w==
+Received: from SEZPR02MB8046.apcprd02.prod.outlook.com (2603:1096:101:215::5)
+ by SG2PR02MB5973.apcprd02.prod.outlook.com (2603:1096:4:1dd::11) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8272.18; Tue, 24 Dec
+ 2024 02:16:43 +0000
+Received: from SEZPR02MB8046.apcprd02.prod.outlook.com
+ ([fe80::3929:d2f:a877:3443]) by SEZPR02MB8046.apcprd02.prod.outlook.com
+ ([fe80::3929:d2f:a877:3443%6]) with mapi id 15.20.8272.013; Tue, 24 Dec 2024
+ 02:16:43 +0000
+From: jia chao <jiachao1990@outlook.com>
+To: "qemu-riscv@nongnu.org" <qemu-riscv@nongnu.org>
+Subject: How to build a dynamic library for qemu
+Thread-Topic: How to build a dynamic library for qemu
+Thread-Index: AQHbVangxf9yRUaWUUWcKvVIyHogoQ==
+Date: Tue, 24 Dec 2024 02:16:43 +0000
+Message-ID: <FE74F6EE-3AA7-42C2-B539-858AA26E5A30@outlook.com>
+Accept-Language: zh-CN, en-US
 Content-Language: en-US
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-In-Reply-To: <CAAibmn1sJ8cCyExHaEw853bek1hUt8QrA4Lv5=1R=zX=v=51QQ@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::330;
- envelope-from=philmd@linaro.org; helo=mail-wm1-x330.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-ms-exchange-messagesentrepresentingtype: 1
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: SEZPR02MB8046:EE_|SG2PR02MB5973:EE_
+x-ms-office365-filtering-correlation-id: 041aca3f-41ab-41c6-ee0d-08dd23c102cd
+x-microsoft-antispam: BCL:0;
+ ARA:14566002|19110799003|8060799006|461199028|15080799006|8022599003|8062599003|7092599003|3412199025|440099028|102099032;
+x-microsoft-antispam-message-info: =?utf-8?B?RlgrVVU0R1UwL255MHcvSU9GMm1SckJKazN0dG9FTDFodUtkcGZiOVNyYmRa?=
+ =?utf-8?B?b0VVeEY0MWppd1FPOXMyekdyQWRxQnRRVUlpNHpGcGJ4SUZJTGViL0lXUkQ5?=
+ =?utf-8?B?Z1QxUWF5bStoMzVzNTl3NVZzSmVxeDNsNENpM1pCbHlQcFB5NFpBNlkwSXJH?=
+ =?utf-8?B?RlpsY0haSzhCaVNqa01tK1BlZ2JwTTJVeWE3UVQ4OEJyNGdzQ1k3ZklIZUlK?=
+ =?utf-8?B?aFdoN21Bbkp2QVc3NVVDcUJ0Mmc2TGIzeVI1UHVzS3FyTkhOZVB1YWJJZy8z?=
+ =?utf-8?B?OXZqaitZelBRY1JZOVZCSHlza1lLUUpISFBMZGFDQUdwb0o4dlQxaWdQeHpH?=
+ =?utf-8?B?ZzhXa3BGcncvR0VEVE5EU2ZLWnZYZjdMSjNmeHhCbU9Rc1lZTTBSM01wR290?=
+ =?utf-8?B?VGJ0VE5TcGR1cjRtUUtDNXJDV0UzOThoZWZvdExqa09iTmZlOXZKNXlRMjBa?=
+ =?utf-8?B?MWJkR09rUTdmL0JyQnJwV1Exdi9oRzBhQ3NjczVRWU5YbDcxZjMzYjNpOGE4?=
+ =?utf-8?B?ZE1Hbi9ERkFvVEF0cTNzN001K1pMWmZVQ05hdnoyVVpmSXhSSjVLYzlZZjM5?=
+ =?utf-8?B?bVQzKzNORzRCdFo2d0NlQkw2d3d0bVplNHJGLzNwNUtKMnVWOEVaNjVTRExz?=
+ =?utf-8?B?NmY5Ykw1cUtML0VEVG1jQ2ZzVmhieG8yN2dEL2NNL3VwNlUzT1c0SjdUck9S?=
+ =?utf-8?B?Z2FJM3dMK09RdlRuQld3R3JaSEgrc0QrZWdsaVdXeEoyd3c0MHY1bW4yeEcr?=
+ =?utf-8?B?THBYSnNYMnNsMVpaYWNncjk4UmIyMWE5MUl6NFllMGZDbXhSZE1WR1lzcW9t?=
+ =?utf-8?B?dXlrZm5hSEFaalY1WEhsYTNzSlpNdlR4TWUyNlVGdGZtRkt1VnBYbENBN1Bt?=
+ =?utf-8?B?K0lYTHdUK3BkUUsrd0x1TVJQU1BhK2xmSVNQRmQ2QWdHNGdBT01ySVRJWnp3?=
+ =?utf-8?B?U1JGSnFGQWhwRWVsa1RoNEFqUFNnaStnUXhmbTNhWlBEUTdBM05JYkYxVGlO?=
+ =?utf-8?B?NkxBRWZMQXJmR21zYXQzcnRHTXZUWjBpZ25tanlzd2ljSGZnRmZtZ0JZOGJp?=
+ =?utf-8?B?czY5cVZuQ1U1L3pqSmlNcFJRWmZUTllQWVg1MGJhM0JNOWxVam1zNEJsSTJp?=
+ =?utf-8?B?OFdJa1VaTjFSVGVUNXRwTWxHaXMrTHVxNklNVU1nRWlNOWFKbU5CSFFJOE1Q?=
+ =?utf-8?B?ZllNWmFvRm9UMHFhWXlBdThTd0s4ZnJLYmExSi85aENCaDh6eXI1VzBxTWlW?=
+ =?utf-8?B?YndvS0NUS0hRVEd2cmNIMEpwZ214RDRMZkZQU3I0NEtSVnZNZ0dFQkM0QzhZ?=
+ =?utf-8?B?ak55MWNaNENYV28wdzdteEFWTTkxMFpiNmZlaldsY25DZEJiV0RZZ1p4UnlF?=
+ =?utf-8?B?ajlPV1hjbWZRZy9sWHJsOW1iQ1BYenRnOVlnWGpaNmJiaFBRZFFMTU5tQzQ2?=
+ =?utf-8?B?K0ovNUhELzZZb1Ntc0RQTUYweEhQV2YyMXEwY1YycFV4UXExbm9iZWpvWUdU?=
+ =?utf-8?Q?a0bBSc=3D?=
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?utf-8?B?bW1lWExURnVWOVVCcEVFQXBEem5EeFpkdms3cG5WMEJqT2dNdm1GNmNHNUdT?=
+ =?utf-8?B?M3JTSXVGTWJiYy9WVXFmUVFzeUlNT0pHZlU3LzB2NGR5cDVoeEs1M3dqYUkr?=
+ =?utf-8?B?VFNTOUFXRzhtbFhtQnU5OU54M09acUdSMXQ1NHJOaXh3S093MVF2NXlBT3FF?=
+ =?utf-8?B?OGt4dG9hK3lPWVZCb001VEN5Mm5LU2NHM2RRRjU3RWZGeGJZR0hUcVFXZ0s3?=
+ =?utf-8?B?OUJ3N1d6eVg2blc3VTZodHQ5bG0xZGZZSktpeEtmeUdXVlFBZDU0VXNKQnVk?=
+ =?utf-8?B?SFhpV0JITmxES01FTXRXbER1WFNjamNxNHMyMTBJN3ZaNm4xTExlYkVqckRx?=
+ =?utf-8?B?bEMwOENMakE0WjBzZ3VrZFlEYjY5ZlFYQkwybHJvUkZ0b2dyczBBS2pJL3NZ?=
+ =?utf-8?B?czQ4M3l6emNJRXNBRzdrOWJ3UlBjVGpSeFBsRU9qZ1hzWFRHSVl1VllFZGNt?=
+ =?utf-8?B?R0IybDVJVjdnYmJuTkhiR1VrTFZVNVlZemhkRFZKTkN2TTFMaThZMnFFYU5t?=
+ =?utf-8?B?NzMyUUM2NFVQUm9ydWNCM0FnMWNpTnloZFBQR0RhTndHMWd0dHVENGNzSnJu?=
+ =?utf-8?B?U2k1ZURDdHBCMENwbFVTNXk4QTZUNTFBcmgwZXZxVlNZNWt6ajVCUHNzbGxS?=
+ =?utf-8?B?bkVuMHY0ODBUV0tCRG9GVXhIelA0eXlMTE5YVG1HVkY1MTRPd1VMSjdJaWZl?=
+ =?utf-8?B?RkpVK040SXBUN0hEekpVcnN5WDJIVGsvWjJkTGxNczhWc1pEZFZFczBpb0No?=
+ =?utf-8?B?ZHBwNzF0ZHpMckJaclZscDJoNk50b0UyOFlvZUxoZ003MGZvVVU2SXh4ajkz?=
+ =?utf-8?B?ZlFza3RXM0lsd3Blc0Rxb25QRENKUVg1NTRsZUpiYnhDS3FPSWx6V0VGQVB0?=
+ =?utf-8?B?Z0FpL0pxLzR5YUZtRVFwN09XcnFJLysxQUFaaG04VENVd0RsTVlKSWJyQ0hL?=
+ =?utf-8?B?NWVaVWdCT2F6cWJHVXBwK1JzSU1aUzA2UGY0Zm1DN3dNbW9jVmpxMDRFN0Fn?=
+ =?utf-8?B?MzN6dGV6dmpaZXBnWlVBQ1VoeFdnem5nckNZWVdZdkQ4aDRhTlkrVG8wakli?=
+ =?utf-8?B?bEljY0l6TWt1VWJwT3gzMTRRVEFyZUcxd3VVR2paR0FiME5pTzA4NnRmdnk0?=
+ =?utf-8?B?OEgyUjhGeE9xQkFZZGdYb2EyakxEeThaY3kyV21VUnhjVnMvcXgyVnVaRXNa?=
+ =?utf-8?B?R2xGdEtwRDZvMXlXeVQ4ZW1JTXhDVHd2NUllUHQ0Z1Bnd3BDclB6bWtGRXJy?=
+ =?utf-8?B?U3RJVGhDT2V4OVU2MEJaZVBlN3Y1L3c0SWZpM01KTnBKeC96SVFvM1hHNG9D?=
+ =?utf-8?B?L0UxdjFBdUZrZmh1R2dhdTB2ODBtSzBHVzQwUE15WXcrajM3WWRwUG5JeVI1?=
+ =?utf-8?B?ZEo3S29CRHpOMThheGNtVXhVSHVJVlNaRWltU3J5TTVIeEwvazV0cFo5WWNr?=
+ =?utf-8?B?VXIvUG1FcU9FOWtnVFptc3VCd29RYmRDUTlXK1kxR1FMVzdSUDZ2VHNsbTJD?=
+ =?utf-8?B?RDUvVEZIYlNmaERPNnAwOGh0VXZKMFU4MXYzYktkSDNYbkxkWDVQMDJaWmh5?=
+ =?utf-8?B?SU93RE1vY2dncXo1a0JDcG1yeW8vQk9HM0lsdERoSE9LWmZpdm9LU2lqMmVk?=
+ =?utf-8?B?Z1d5UGhBTG5tOTBvcnBnTnYwc1pLOTFSaUdiTm00dXlKUUF5a1VobExkTllz?=
+ =?utf-8?Q?Zo4ea+RwlaP6U93cbEsW?=
+Content-Type: text/plain; charset="utf-8"
+Content-ID: <C6F3BAD32F405048BB632A1F97A8B5ED@apcprd02.prod.outlook.com>
+Content-Transfer-Encoding: base64
+MIME-Version: 1.0
+X-OriginatorOrg: outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: SEZPR02MB8046.apcprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-RMS-PersistedConsumerOrg: 00000000-0000-0000-0000-000000000000
+X-MS-Exchange-CrossTenant-Network-Message-Id: 041aca3f-41ab-41c6-ee0d-08dd23c102cd
+X-MS-Exchange-CrossTenant-rms-persistedconsumerorg: 00000000-0000-0000-0000-000000000000
+X-MS-Exchange-CrossTenant-originalarrivaltime: 24 Dec 2024 02:16:43.8564 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 84df9e7f-e9f6-40af-b435-aaaaaaaaaaaa
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SG2PR02MB5973
+Received-SPF: pass client-ip=40.92.52.92; envelope-from=jiachao1990@outlook.com;
+ helo=APC01-PSA-obe.outbound.protection.outlook.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H2=-0.001,
+ RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001, RCVD_IN_VALIDITY_SAFE_BLOCKED=0.001,
+ SPF_HELO_PASS=-0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
+X-Mailman-Approved-At: Tue, 24 Dec 2024 00:00:33 -0500
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -112,77 +158,8 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 23/12/24 23:17, Phil Dennis-Jordan wrote:
-
->      > Do you have other changes in your v16? I'm quite happy to
->     integrate this
->      > v15.
-> 
->     The ones proposed by Akihiko are the only ones. I’ve already
->     implemented them, so I’m happy to post v16.
-> 
-> 
-> OK, rebasing on the upstream master branch has revealed it's not quite 
-> so simple: there are a bunch of clashes with the recent sysemu->system 
-> rename and the removal of DEFINE_PROP_END_OF_LIST(). They amount to 
-
-Yep :/
-
-> pretty trivial changes, but almost all commits needed adjusting, so 
-> pulling v15 would be painful. I've just posted my v16 (including all the 
-> changes discussed here).
-> 
-> Thanks for taking an interest in this patch set!
-> 
->      >> Adapting this giant macro for each machine type seems rather
->     error-prone and the kind of thing a computer does better than a
->     human writing the code. I can't help but wonder if we could define a
->     generic version in boards.h and only implement the
->     DEFINE_*_MACHINE{_LATEST,}() wrappers specifically for each machine
->     type. I've created an issue for this on GitLab: https://gitlab.com/
->     qemu-project/qemu/-/issues/2744 <https://gitlab.com/qemu-project/
->     qemu/-/issues/2744> <https:// gitlab.com/qemu-project/qemu/-/
->     issues/2744 <http://gitlab.com/qemu-project/qemu/-/issues/2744>> I
->     might attack that once I've cut down my backlog of unmerged patches.
->      >
->      > Do we really want the vmapple machines to be versioned? I see 3
->     options:
->      > 1/ No (simplest)
->      > 2/ Not yet, adding versioning when we see the needs
->      > 3/ Yes
->      >
->      > Personally I prefer/recommend 1/ or 2/ ;)
-> 
->     I didn’t realise these were an option. :-) I was just inheriting
->     Alex’s code here and assumed it was the standard thing to do.
-> 
->     I could imagine we might change a few things to get better guest
->     version support and perhaps the guest iCloud support that was added
->     to the Virtualization.framework in macOS 15. But yeah it seems
->     unlikely that any of this would cause regressions.
-> 
->     What change would you propose to remove the versioning? Is there a
->     specific machine type I should use as reference? Or do you just want
->     to change that yourself, if I push my v16 code to a public repository?
-> 
-> 
-> OK, grepping through the code base reveals there are quite a number of 
-> the "smaller" machine types are unversioned. So I guess that's a no- 
-> brainer then. I've worked out I essentially just need to move the compat 
-> properties registration to the main init, the "desc" field on the 
-> machine class needs to be set, and the type becomes non-abstract. 
-
-Correct.
-
-> Everything still appears to work when I add that back in after removing 
-> all the macro definitions and instantiations. Change included in v16, 
-> but I've still got the reverse of the removal commit around, so if 
-> anyone has good arguments why we need it, I can easily add versioning 
-> back in.
-
-Great :)
-
-Thanks,
-
-Phil.
+SSB3YW50IHRvIGNvbXBpbGUgcWVtdSByaXNjdiBhcmNoIGludG8gYSBkeW5hbWljIGxpYnJhcnks
+IGFuZCB0aGVuIG9wZW4gdGhlIGxpYnJhcnkgaW4gbXkgbWFpbi5jIHZpYSBsIGRvcGVuIGFuZCBz
+dGFydCBxZW11IHZpYSBwYXJhbWV0ZXIgcGFzc2luZ++8jEhvdyB0byBidWlsZCBhIGR5bmFtaWMg
+bGlicmFyeSBmb3IgcWVtdS4gTG9va2luZyBmb3J3YXJkIHRvIHlvdXIgcmVwbHkuICBUaGFua3M=
 
