@@ -4,91 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4D4F2E7718F
-	for <qemu-riscv@archiver.kernel.org>; Mon, 30 Dec 2024 18:55:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 36459E77188
+	for <qemu-riscv@archiver.kernel.org>; Mon, 30 Dec 2024 19:04:28 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tSKvP-0001ip-Aa; Mon, 30 Dec 2024 13:55:35 -0500
+	id 1tSL3K-0004G7-Lw; Mon, 30 Dec 2024 14:03:46 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tSKvN-0001i3-KA
- for qemu-riscv@nongnu.org; Mon, 30 Dec 2024 13:55:33 -0500
-Received: from mail-wr1-x432.google.com ([2a00:1450:4864:20::432])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tSL3E-0004Cp-Q4
+ for qemu-riscv@nongnu.org; Mon, 30 Dec 2024 14:03:41 -0500
+Received: from mail-wm1-x334.google.com ([2a00:1450:4864:20::334])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tSKvJ-00075M-LU
- for qemu-riscv@nongnu.org; Mon, 30 Dec 2024 13:55:33 -0500
-Received: by mail-wr1-x432.google.com with SMTP id
- ffacd0b85a97d-3862d16b4f5so5938020f8f.0
- for <qemu-riscv@nongnu.org>; Mon, 30 Dec 2024 10:55:28 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tSL3C-0007qx-H5
+ for qemu-riscv@nongnu.org; Mon, 30 Dec 2024 14:03:40 -0500
+Received: by mail-wm1-x334.google.com with SMTP id
+ 5b1f17b1804b1-43675b1155bso79657665e9.2
+ for <qemu-riscv@nongnu.org>; Mon, 30 Dec 2024 11:03:32 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1735584927; x=1736189727; darn=nongnu.org;
+ d=linaro.org; s=google; t=1735585411; x=1736190211; darn=nongnu.org;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=Qui2Y4KUafW4SCpWVDDOaVkKbTJ56eWr0XZNubRfJRc=;
- b=fHfB+HBMM5Xvazq+T3YIzILLrLTViLCUTVx+2YiJHzFKNE1AwYtA5neaWlW7pHyVMd
- K/eIVMybirba48SKmESty5m/p2Xj+kHRwvNgDzFNbMScDB4q+CGsJq180b8mHncCJoaq
- gbYyFncarXfdib/+xE8nEsHB+JXlgFHbYAl0qYvcUp8aGXaJ4EOacr2GU+dmVWQRmGMX
- IKnumQAz1pD84Q82uRGYDtv1U2KzgjMmBMKB3zSaPKS7cYyV8XtIzO3QYgWxQONWZv0i
- CIfTKzrrCS1jp5p/Vnj1rLGXrNbHpV0yFTKlcdBnGMRp3LaigGVpwzd0QlVb5Y64GU/z
- 4kzA==
+ bh=tqX4ZDqJeVvjB3AauIbeUtUX20e9/xznDP4YjX8B+/k=;
+ b=liWcT7jCJ/WaXY5s5NWQ2cNCkz6N1V9TgHKFW6zgFtGQeq9EpWklBVSq1Ft45UgfvS
+ LVmm4jfjj1b0FGcBLZtkHtKRt+9Bwp12uOzm3diHxrzqRyOhzeXvxOJucZGbu7+8uvjh
+ 22N7Y0EJ8wfWW+6BewAQT6mSzntti0Wt8fnebQSYEfnIo41hLslemSRBS2zyvyjznRDz
+ BwLvvfXn9i11FKPj6OQifKULPQ3EupO3BdN7X1osDY8U3QNYyPPTRxe5GS8x0EfkBRNf
+ ZUuRZRBIgn77fDlTHRP2pG36cUUEe+R403LBixXtykrxi27yFEEfniz2WiRf3N3lQCMz
+ MTHA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1735584927; x=1736189727;
+ d=1e100.net; s=20230601; t=1735585411; x=1736190211;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=Qui2Y4KUafW4SCpWVDDOaVkKbTJ56eWr0XZNubRfJRc=;
- b=kb0QfVIhwpXKiGM97EEZlv/0mkEUUadPSzvUmVoOjhrhc6lbosoihkxs3DqGxD8ihQ
- nsV8WaAYND4s8w4271uWm57UiW73kIMpYPx8hAaeNnMYH4MQ+D3yBiqKKIrYywt2O7mg
- XODkGuPh+h2a9SmDnXmgJy+WoXnCQm2A+cRHe9JVtCVfNK9MTZKZLYqcXRnGWQwkiKIe
- Egukyl3VcJ9R1N4gVPkgFbJ/cCNxEceZ0gggXazB0hhU9aZ4Yqyfbkx4J4mHVxK4JeGX
- 3l9e53kA3rs0G/X6qGRYsq+eVmOgY949VsKweh9AbKvE0BUgc8SUU/LKpHJj4jqn6DKS
- ICog==
+ bh=tqX4ZDqJeVvjB3AauIbeUtUX20e9/xznDP4YjX8B+/k=;
+ b=oUgNaZiyrOXPc+k0clb0drZ08VcxNe8T1DqvLee2FvNuz+ti/ZFyK5EaN60KNXrnjn
+ +75DE0mAE8j/rNA+7nLdUbQXwDF0uehMiJ8ijF1dcioSM/Uis1RTw28giglaJfLhm6NE
+ HSYsMV3Wos8o9LF2siLgIaD2bFp4MMlYJVoMTfbNpZmQZX4182cPUOxVUimY70Oc6BDJ
+ o71RutPR1X3K5TZvzYa7adXq9X6hE6KpGMVSY34w/sTX9Q6dTsxUs4EKwop/rRRp/Rvd
+ +s0YpK2oxuDU/gv2KuibK5i8H864eVPIq/IDiULn3i8HW5JUPd7ohs0P1PoniNEvKbny
+ 7x8w==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWjl2rgESUKveOwRMjegDIRogDEU7uY0NV53x8sUe7l/R+PgiZP4hItAKzr/7bUJroGXMV9+RF7q5Bg@nongnu.org
-X-Gm-Message-State: AOJu0YyNZSHpm8seYY81UKyieci1JA/JyDihSxlS9VPfbL8RHbf5PFfx
- TJ8z+KRLcZ2hNOAIykOggLmgcUMY4N+VJfQisVzYiLWrw68fk4zXQAMMPFdIDG4=
-X-Gm-Gg: ASbGncuH270JtnRp7PbTYG+7QU46nDT2QAegSCZA/khv15p6X6fPJzTcAzHai5ithvp
- eGecxjO/Qpeqzn9G2meb3SgZyWvQ8+N9VzpCfhpi6Vg836owzlhC577q17KL2pDjmeeRTFBrZ1f
- oGnEh/JRxr/3o5wBol93ErTvmHC8UqcSDyh6bnlTfFshxur3F9nGPxnD/Z6tYcJq2Vyu6JVCuJg
- 3tBaA0AlEeWUTKfPfviqYsobBzESbxdOM/ZJBX0+0CcCJgT1NySh8EDfPaP+Of+DZSwnxzaJCGx
- YL0rgrBPg2O70+jSi9Bf76Lp
-X-Google-Smtp-Source: AGHT+IF+A7uRN0qHdGjNeniPw0A3dVLJLhLh3rZcf5P1DtdbO8Nz+FtXZsISMVxcVx4H/4RLy7QMVQ==
-X-Received: by 2002:a05:6000:1864:b0:388:c61d:4415 with SMTP id
- ffacd0b85a97d-38a22a2d914mr27588800f8f.18.1735584926053; 
- Mon, 30 Dec 2024 10:55:26 -0800 (PST)
+ AJvYcCVDYSwZ3GXZeckxH6tbQAb4ZSjdT7k8M/1QmGraqcSdPcWxf0gJa1wiZW9W/ZFy8XcZZhZStTbD8Ydc@nongnu.org
+X-Gm-Message-State: AOJu0YxAdbODixlLQjla4OSpHgS6QLekfHETMMlZ0LKmTL8UKWiHHz0I
+ 1Z7iOuxvExpkG4ogKlxSWGMsRt+8im0pjwiVro3B5q9WErDICRyt8o0L7/2lbic=
+X-Gm-Gg: ASbGncvCiI8j6XrmiN26iDycCMB6gJEWqA/Vup2gglK7nMr4/uXR5goAO+N/cgU8Fd5
+ Nqenm4W6/JPhTxKDepWcTt9IcQTb7y50DS7k+wLmufALQlqzvK5ZGvp0kneU5OGWXmHga6pG98V
+ XqBLQwefJkV2ndpfkUrn+Ntdl7OnvHI9Ltl0IOiq2Jp1HXz/lfI2cD+hhggGCk99NrA2aX+6NGz
+ bJ6rM4h1stkQ0m3A3VUqL9iSVdNnOHv1P+P0eu43c5nrQasPTnim0peY95leIagXHx2BqC3BMre
+ 5BEBetEf7AtM/4v52yLjGYx0
+X-Google-Smtp-Source: AGHT+IES7PmJHLcqwRbUYA+ckt/6vwxS0oubVQwuf9EDJnQ5KH201seY73gJeHvSTqpx2HOrKhU6WQ==
+X-Received: by 2002:a05:600c:1388:b0:434:a7e3:db5c with SMTP id
+ 5b1f17b1804b1-436686440abmr300241725e9.11.1735585410746; 
+ Mon, 30 Dec 2024 11:03:30 -0800 (PST)
 Received: from [192.168.69.132] (88-187-86-199.subs.proxad.net.
  [88.187.86.199]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-38a1c8acadcsm30403457f8f.105.2024.12.30.10.55.23
+ 5b1f17b1804b1-436611ea42esm369813825e9.9.2024.12.30.11.03.28
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 30 Dec 2024 10:55:25 -0800 (PST)
-Message-ID: <5aeaca68-50c0-41f4-8cd2-81a931377954@linaro.org>
-Date: Mon, 30 Dec 2024 19:55:23 +0100
+ Mon, 30 Dec 2024 11:03:29 -0800 (PST)
+Message-ID: <4f6553bb-43e2-4db2-8c9f-cccbb9c817eb@linaro.org>
+Date: Mon, 30 Dec 2024 20:03:27 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 Subject: Re: [PATCH v16 00/14] macOS PV Graphics and new vmapple machine type
-To: Phil Dennis-Jordan <phil@philjordan.eu>, qemu-devel@nongnu.org,
- Joelle van Dyne <j@getutm.app>
-Cc: agraf@csgraf.de, peter.maydell@linaro.org, pbonzini@redhat.com,
- rad@semihalf.com, quic_llindhol@quicinc.com, stefanha@redhat.com,
- mst@redhat.com, slp@redhat.com, richard.henderson@linaro.org,
- eduardo@habkost.net, marcel.apfelbaum@gmail.com, gaosong@loongson.cn,
- jiaxun.yang@flygoat.com, chenhuacai@kernel.org, kwolf@redhat.com,
- hreitz@redhat.com, shorne@gmail.com, palmer@dabbelt.com,
- alistair.francis@wdc.com, bmeng.cn@gmail.com, liwei1518@gmail.com,
- dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com, jcmvbkbc@gmail.com,
+To: Phil Dennis-Jordan <phil@philjordan.eu>
+Cc: qemu-devel@nongnu.org, agraf@csgraf.de, peter.maydell@linaro.org,
+ pbonzini@redhat.com, rad@semihalf.com, quic_llindhol@quicinc.com,
+ stefanha@redhat.com, mst@redhat.com, slp@redhat.com,
+ richard.henderson@linaro.org, eduardo@habkost.net,
+ marcel.apfelbaum@gmail.com, gaosong@loongson.cn, jiaxun.yang@flygoat.com,
+ chenhuacai@kernel.org, kwolf@redhat.com, hreitz@redhat.com,
+ shorne@gmail.com, palmer@dabbelt.com, alistair.francis@wdc.com,
+ bmeng.cn@gmail.com, liwei1518@gmail.com, dbarboza@ventanamicro.com,
+ zhiwei_liu@linux.alibaba.com, jcmvbkbc@gmail.com,
  marcandre.lureau@redhat.com, berrange@redhat.com, akihiko.odaki@daynix.com,
  qemu-arm@nongnu.org, qemu-block@nongnu.org, qemu-riscv@nongnu.org,
  balaton@eik.bme.hu
 References: <20241223221645.29911-1-phil@philjordan.eu>
+ <8554330d-fd9b-4fa5-b37c-161f70b71f7d@linaro.org>
+ <CAAibmn3PGD5oN9nAeUaqYkAxsH1CWhAQrkqGEaFUd7Ohr-uRfg@mail.gmail.com>
 Content-Language: en-US
 From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-In-Reply-To: <20241223221645.29911-1-phil@philjordan.eu>
+In-Reply-To: <CAAibmn3PGD5oN9nAeUaqYkAxsH1CWhAQrkqGEaFUd7Ohr-uRfg@mail.gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::432;
- envelope-from=philmd@linaro.org; helo=mail-wr1-x432.google.com
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::334;
+ envelope-from=philmd@linaro.org; helo=mail-wm1-x334.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -111,183 +113,362 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Cc'ing Joelle (FYI https://github.com/utmapp/UTM/issues/3491)
-
-On 23/12/24 23:16, Phil Dennis-Jordan wrote:
-> This patch set introduces a new ARM and macOS HVF specific machine type
-> called "vmapple", as well as a family of display devices based on the
-> ParavirtualizedGraphics.framework in macOS. One of the display adapter
-> variants, apple-gfx-mmio, is required for the new machine type, while
-> apple-gfx-pci can be used to enable 3D graphics acceleration with x86-64
-> macOS guest OSes.
+On 27/12/24 13:19, Phil Dennis-Jordan wrote:
 > 
-> Previous versions of this patch set were submitted semi-separately:
-> the original vmapple patch set by Alexander Graf included a monolithic
-> implementation of apple-gfx-mmio. I subsequently reviewed and reworked
-> the latter to support the PCI variant of the device as well and submitted
-> the result in isolation. As requested in subsequent review, I have now
-> recombined this with the original vmapple patch set, which I have updated
-> and improved in a few ways as well.
 > 
-> The vmapple machine type approximates the configuration in macOS's own
-> Virtualization.framework when running arm64 macOS guests. In addition to
-> generic components such as a GICv3 and an XHCI USB controller, it
-> includes nonstandard extensions to the virtio block device, a special
-> "hardware" aes engine, a configuration device, a pvpanic variant, a
-> "backdoor" interface, and of course the apple-gfx paravirtualised display
-> adapter.
-> 
-> There are currently a few limitations to this which aren't intrinsic,
-> just imperfect emulation of the VZF, but it's good enough to be just
-> about usable for some purposes:
-> 
->   * macOS 12 guests only. Versions 13+ currently fail during early boot.
->   * macOS 11+ arm64 hosts only, with hvf accel. (Perhaps some differences
->     between Apple M series CPUs and TCG's aarch64 implementation? macOS
->     hosts only because ParavirtualizedGraphics.framework is a black box
->     implementing most of the logic behind the apple-gfx device.)
->   * PCI devices use legacy IRQs, not MSI/MSI-X. As far as I can tell,
->     we'd need to include the GICv3 ITS, but it's unclear to me what
->     exactly needs wiring up.
->   * Due to a quirk (bug?) in the macOS XHCI driver when MSI-X is not
->     available, correct functioning of the USB controller (and thus
->     keyboard/tablet) requires a small workaround in the XHCI controller
->     device. This is part of another patch series:
->     https://patchew.org/QEMU/20241208191646.64857-1-phil@philjordan.eu/
->   * The guest OS must first be provisioned using Virtualization.framework;
->     the disk images can subsequently be used in Qemu. (See docs.)
-> 
-> The apple-gfx device can be used independently from the vmapple machine
-> type, at least in the PCI variant. It mainly targets x86-64 macOS guests
-> from version 11 on, but also includes a UEFI bootrom for basic
-> framebuffer mode. macOS 11 is also required on the host side, as well
-> as a GPU that supports the Metal API. On the guest side, this provides
-> 3D acceleration/GPGPU support with a baseline Metal feature set,
-> irrespective of the host GPU's feature set. A few limitations in the
-> current integration:
-> 
->   * Although it works fine with TCG, it does not work correctly
->     cross-architecture: x86-64 guests on arm64 hosts appear to make
->     some boot progress, but rendering is corrupted. I suspect
->     incompatible texture memory layouts; I have no idea if this is
->     fixable.
-
-Zoltan, does that ring a bell?
-
-Phil, should we display a warning in this configuration case? Or only
-allow it with some developper option, like:
-
-     -device '{"driver":"apple-gfx-pci", \
-               "display-modes":["3840x2160@60"], \
-               "x-force-cross-rendering":"true"}'
-
->   * ParavirtualizedGraphics.framework and the guest driver support
->     multi-headed configurations. The current Qemu integration always
->     connects precisely 1 display.
->   * State serialisation and deserialisation is currently not
->     implemented, though supported in principle by the framework.
->     Both apple-gfx variants thus set up a migration blocker.
->   * Rendering efficiency could be better. The GPU-rendered guest
->     framebuffer is copied to system memory and uses Qemu's usual
->     CPU-based drawing. For maximum efficiency, the Metal texture
->     containing the guest framebuffer could be drawn directly to
->     a Metal view in the host window, staying on the GPU. (Similar
->     to the OpenGL/virgl render path on other platforms.)
-> 
-> Some of my part of this work has been sponsored by Sauce Labs Inc.
-> 
-> ---
+> On Mon, 23 Dec 2024 at 23:58, Philippe Mathieu-Daudé <philmd@linaro.org 
+> <mailto:philmd@linaro.org>> wrote:
 
 
-> Alexander Graf (8):
->    hw: Add vmapple subdir
->    hw/misc/pvpanic: Add MMIO interface
->    gpex: Allow more than 4 legacy IRQs
->    hw/vmapple/aes: Introduce aes engine
->    hw/vmapple/bdif: Introduce vmapple backdoor interface
->    hw/vmapple/cfg: Introduce vmapple cfg region
->    hw/vmapple/virtio-blk: Add support for apple virtio-blk
->    hw/vmapple/vmapple: Add vmapple machine type
+>      > Alexander Graf (8):
+>      >    hw: Add vmapple subdir
+>      >    hw/misc/pvpanic: Add MMIO interface
+>      >    gpex: Allow more than 4 legacy IRQs
+>      >    hw/vmapple/aes: Introduce aes engine
+>      >    hw/vmapple/bdif: Introduce vmapple backdoor interface
+>      >    hw/vmapple/cfg: Introduce vmapple cfg region
+>      >    hw/vmapple/virtio-blk: Add support for apple virtio-blk
+>      >    hw/vmapple/vmapple: Add vmapple machine type
+>      >
+>      > Phil Dennis-Jordan (6):
+>      >    ui & main loop: Redesign of system-specific main thread event
+>     handling
+>      >    hw/display/apple-gfx: Introduce ParavirtualizedGraphics.Framework
+>      >      support
+>      >    hw/display/apple-gfx: Adds PCI implementation
+>      >    hw/display/apple-gfx: Adds configurable mode list
+>      >    MAINTAINERS: Add myself as maintainer for apple-gfx, reviewer
+>     for HVF
+>      >    hw/block/virtio-blk: Replaces request free function with g_free
 > 
-> Phil Dennis-Jordan (6):
->    ui & main loop: Redesign of system-specific main thread event handling
->    hw/display/apple-gfx: Introduce ParavirtualizedGraphics.Framework
->      support
->    hw/display/apple-gfx: Adds PCI implementation
->    hw/display/apple-gfx: Adds configurable mode list
->    MAINTAINERS: Add myself as maintainer for apple-gfx, reviewer for HVF
->    hw/block/virtio-blk: Replaces request free function with g_free
+>     If there are no objection or further comments, I'm taking this
+>     series and will post a PR after xmas & testing.
 > 
->   MAINTAINERS                         |  15 +
->   contrib/vmapple/uuid.sh             |   9 +
->   docs/system/arm/vmapple.rst         |  63 ++
->   docs/system/target-arm.rst          |   1 +
->   hw/Kconfig                          |   1 +
->   hw/arm/sbsa-ref.c                   |   2 +-
->   hw/arm/virt.c                       |   2 +-
->   hw/block/virtio-blk.c               |  58 +-
->   hw/core/qdev-properties-system.c    |   8 +
->   hw/display/Kconfig                  |  13 +
->   hw/display/apple-gfx-mmio.m         | 288 +++++++++
->   hw/display/apple-gfx-pci.m          | 156 +++++
->   hw/display/apple-gfx.h              |  77 +++
->   hw/display/apple-gfx.m              | 880 ++++++++++++++++++++++++++++
->   hw/display/meson.build              |   7 +
->   hw/display/trace-events             |  30 +
->   hw/i386/microvm.c                   |   2 +-
->   hw/loongarch/virt.c                 |  12 +-
->   hw/meson.build                      |   1 +
->   hw/mips/loongson3_virt.c            |   2 +-
->   hw/misc/Kconfig                     |   4 +
->   hw/misc/meson.build                 |   1 +
->   hw/misc/pvpanic-mmio.c              |  60 ++
->   hw/openrisc/virt.c                  |  12 +-
->   hw/pci-host/gpex.c                  |  43 +-
->   hw/riscv/virt.c                     |  12 +-
->   hw/vmapple/Kconfig                  |  32 +
->   hw/vmapple/aes.c                    | 581 ++++++++++++++++++
->   hw/vmapple/bdif.c                   | 274 +++++++++
->   hw/vmapple/cfg.c                    | 195 ++++++
->   hw/vmapple/meson.build              |   5 +
->   hw/vmapple/trace-events             |  21 +
->   hw/vmapple/trace.h                  |   1 +
->   hw/vmapple/virtio-blk.c             | 204 +++++++
->   hw/vmapple/vmapple.c                | 612 +++++++++++++++++++
->   hw/xen/xen-pvh-common.c             |   2 +-
->   hw/xtensa/virt.c                    |   2 +-
->   include/hw/misc/pvpanic.h           |   1 +
->   include/hw/pci-host/gpex.h          |   7 +-
->   include/hw/pci/pci_ids.h            |   1 +
->   include/hw/qdev-properties-system.h |   5 +
->   include/hw/virtio/virtio-blk.h      |  11 +-
->   include/hw/vmapple/vmapple.h        |  23 +
->   include/qemu-main.h                 |  14 +-
->   include/qemu/cutils.h               |  15 +
->   meson.build                         |   5 +
->   qapi/virtio.json                    |  14 +
->   system/main.c                       |  37 +-
->   ui/cocoa.m                          |  54 +-
->   ui/gtk.c                            |   4 +
->   ui/sdl2.c                           |   4 +
->   util/hexdump.c                      |  18 +
->   52 files changed, 3791 insertions(+), 110 deletions(-)
->   create mode 100755 contrib/vmapple/uuid.sh
->   create mode 100644 docs/system/arm/vmapple.rst
->   create mode 100644 hw/display/apple-gfx-mmio.m
->   create mode 100644 hw/display/apple-gfx-pci.m
->   create mode 100644 hw/display/apple-gfx.h
->   create mode 100644 hw/display/apple-gfx.m
->   create mode 100644 hw/misc/pvpanic-mmio.c
->   create mode 100644 hw/vmapple/Kconfig
->   create mode 100644 hw/vmapple/aes.c
->   create mode 100644 hw/vmapple/bdif.c
->   create mode 100644 hw/vmapple/cfg.c
->   create mode 100644 hw/vmapple/meson.build
->   create mode 100644 hw/vmapple/trace-events
->   create mode 100644 hw/vmapple/trace.h
->   create mode 100644 hw/vmapple/virtio-blk.c
->   create mode 100644 hw/vmapple/vmapple.c
->   create mode 100644 include/hw/vmapple/vmapple.h
 > 
+> Thanks Phil, much appreciated! Enjoy your time off.
+> 
+> I've just posted an updated -v3 of my xhci patch series as v2 suffered 
+> from the same breakage as this patch set. I recommend applying that one 
+> on top for testing vmapple. It helps when you can use keyboard and mouse 
+> properly and don't need to mess around with VNC.
 
+I'm first taking patches 1-5 & 8 [*] squashing mostly style fixups,
+TypeInfo rebase and header reduction ("qemu/osdep.h" is only for .c):
+
+-- >8 --
+diff --git a/hw/display/apple-gfx.h b/hw/display/apple-gfx.h
+index a1160bf6619..3900cdbabbb 100644
+--- a/hw/display/apple-gfx.h
++++ b/hw/display/apple-gfx.h
+@@ -8,17 +8,14 @@
+  #ifndef QEMU_APPLE_GFX_H
+  #define QEMU_APPLE_GFX_H
+
+-#define TYPE_APPLE_GFX_MMIO         "apple-gfx-mmio"
+-#define TYPE_APPLE_GFX_PCI          "apple-gfx-pci"
+-
+-#include "qemu/osdep.h"
+-#include <dispatch/dispatch.h>
+-#import <ParavirtualizedGraphics/ParavirtualizedGraphics.h>
+-#include "qemu/typedefs.h"
++#include "qemu/queue.h"
+  #include "exec/memory.h"
+  #include "hw/qdev-properties.h"
+  #include "ui/surface.h"
+
++#define TYPE_APPLE_GFX_MMIO         "apple-gfx-mmio"
++#define TYPE_APPLE_GFX_PCI          "apple-gfx-pci"
++
+  @class PGDeviceDescriptor;
+  @protocol PGDevice;
+  @protocol PGDisplay;
+@@ -71,7 +68,7 @@ void *apple_gfx_host_ptr_for_gpa_range(uint64_t 
+guest_physical,
+                                         uint64_t length, bool read_only,
+                                         MemoryRegion **mapping_in_region);
+
+-extern const PropertyInfo qdev_prop_display_mode;
++extern const PropertyInfo qdev_prop_apple_gfx_display_mode;
+
+  #endif
+
+diff --git a/hw/display/apple-gfx-mmio.m b/hw/display/apple-gfx-mmio.m
+index 60580a373d8..b2e0e7a30fa 100644
+--- a/hw/display/apple-gfx-mmio.m
++++ b/hw/display/apple-gfx-mmio.m
+@@ -3,9 +3,6 @@
+   *
+   * Copyright © 2023 Amazon.com, Inc. or its affiliates. All Rights 
+Reserved.
+   *
+- * This work is licensed under the terms of the GNU GPL, version 2 or 
+later.
+- * See the COPYING file in the top-level directory.
+- *
+   * SPDX-License-Identifier: GPL-2.0-or-later
+   *
+   * ParavirtualizedGraphics.framework is a set of libraries that macOS 
+provides
+@@ -16,13 +13,14 @@
+   */
+
+  #include "qemu/osdep.h"
+-#import <ParavirtualizedGraphics/ParavirtualizedGraphics.h>
+-#include "apple-gfx.h"
+-#include "monitor/monitor.h"
++#include "qemu/log.h"
++#include "block/aio-wait.h"
+  #include "hw/sysbus.h"
+  #include "hw/irq.h"
++#include "apple-gfx.h"
+  #include "trace.h"
+-#include "qemu/log.h"
++
++#import <ParavirtualizedGraphics/ParavirtualizedGraphics.h>
+
+  OBJECT_DECLARE_SIMPLE_TYPE(AppleGFXMMIOState, APPLE_GFX_MMIO)
+
+@@ -32,10 +30,9 @@
+   * their definitions here so that we can also work with the ARM version.
+   */
+  typedef bool(^IOSFCRaiseInterrupt)(uint32_t vector);
+-typedef bool(^IOSFCUnmapMemory)(
+-    void *, void *, void *, void *, void *, void *);
+-typedef bool(^IOSFCMapMemory)(
+-    uint64_t phys, uint64_t len, bool ro, void **va, void *, void *);
++typedef bool(^IOSFCUnmapMemory)(void *, void *, void *, void *, void *, 
+void *);
++typedef bool(^IOSFCMapMemory)(uint64_t phys, uint64_t len, bool ro, 
+void **va,
++                              void *, void *);
+
+  @interface PGDeviceDescriptor (IOSurfaceMapper)
+  @property (readwrite, nonatomic) bool usingIOSurfaceMapper;
+@@ -168,8 +165,8 @@ static bool apple_gfx_mmio_unmap_surface_memory(void 
+*ptr)
+      RCU_READ_LOCK_GUARD();
+      region = memory_region_from_host(ptr, &offset);
+      if (!region) {
+-        qemu_log_mask(LOG_GUEST_ERROR, "%s: memory at %p to be unmapped 
+not "
+-                      "found.\n",
++        qemu_log_mask(LOG_GUEST_ERROR,
++                      "%s: memory at %p to be unmapped not found.\n",
+                        __func__, ptr);
+          return false;
+      }
+@@ -261,7 +258,7 @@ static void apple_gfx_mmio_reset(Object *obj, 
+ResetType type)
+  static const Property apple_gfx_mmio_properties[] = {
+      DEFINE_PROP_ARRAY("display-modes", AppleGFXMMIOState,
+                        common.num_display_modes, common.display_modes,
+-                      qdev_prop_display_mode, AppleGFXDisplayMode),
++                      qdev_prop_apple_gfx_display_mode, 
+AppleGFXDisplayMode),
+  };
+
+  static void apple_gfx_mmio_class_init(ObjectClass *klass, void *data)
+@@ -276,7 +273,7 @@ static void apple_gfx_mmio_class_init(ObjectClass 
+*klass, void *data)
+      device_class_set_props(dc, apple_gfx_mmio_properties);
+  }
+
+-static TypeInfo apple_gfx_mmio_types[] = {
++static const TypeInfo apple_gfx_mmio_types[] = {
+      {
+          .name          = TYPE_APPLE_GFX_MMIO,
+          .parent        = TYPE_SYS_BUS_DEVICE,
+diff --git a/hw/display/apple-gfx-pci.m b/hw/display/apple-gfx-pci.m
+index 4cfc01fc725..b939bb9b233 100644
+--- a/hw/display/apple-gfx-pci.m
++++ b/hw/display/apple-gfx-pci.m
+@@ -12,11 +12,12 @@
+   * aimed primarily at x86-64 macOS VMs.
+   */
+
+-#include "apple-gfx.h"
++#include "qemu/osdep.h"
+  #include "hw/pci/pci_device.h"
+  #include "hw/pci/msi.h"
+-#include "qapi/error.h"
++#include "apple-gfx.h"
+  #include "trace.h"
++
+  #import <ParavirtualizedGraphics/ParavirtualizedGraphics.h>
+
+  OBJECT_DECLARE_SIMPLE_TYPE(AppleGFXPCIState, APPLE_GFX_PCI)
+@@ -27,7 +28,7 @@
+      AppleGFXState common;
+  };
+
+-static const char* apple_gfx_pci_option_rom_path = NULL;
++static const char *apple_gfx_pci_option_rom_path = NULL;
+
+  static void apple_gfx_init_option_rom_path(void)
+  {
+@@ -117,7 +118,7 @@ static void apple_gfx_pci_reset(Object *obj, 
+ResetType type)
+  static const Property apple_gfx_pci_properties[] = {
+      DEFINE_PROP_ARRAY("display-modes", AppleGFXPCIState,
+                        common.num_display_modes, common.display_modes,
+-                      qdev_prop_display_mode, AppleGFXDisplayMode),
++                      qdev_prop_apple_gfx_display_mode, 
+AppleGFXDisplayMode),
+  };
+
+  static void apple_gfx_pci_class_init(ObjectClass *klass, void *data)
+@@ -139,7 +140,7 @@ static void apple_gfx_pci_class_init(ObjectClass 
+*klass, void *data)
+      device_class_set_props(dc, apple_gfx_pci_properties);
+  }
+
+-static TypeInfo apple_gfx_pci_types[] = {
++static const TypeInfo apple_gfx_pci_types[] = {
+      {
+          .name          = TYPE_APPLE_GFX_PCI,
+          .parent        = TYPE_PCI_DEVICE,
+diff --git a/hw/display/apple-gfx.m b/hw/display/apple-gfx.m
+index b00c72fc4dd..aa1455b6295 100644
+--- a/hw/display/apple-gfx.m
++++ b/hw/display/apple-gfx.m
+@@ -3,9 +3,6 @@
+   *
+   * Copyright © 2023 Amazon.com, Inc. or its affiliates. All Rights 
+Reserved.
+   *
+- * This work is licensed under the terms of the GNU GPL, version 2 or 
+later.
+- * See the COPYING file in the top-level directory.
+- *
+   * SPDX-License-Identifier: GPL-2.0-or-later
+   *
+   * ParavirtualizedGraphics.framework is a set of libraries that macOS 
+provides
+@@ -15,21 +12,24 @@
+   */
+
+  #include "qemu/osdep.h"
+-#import <ParavirtualizedGraphics/ParavirtualizedGraphics.h>
+-#include <mach/mach_vm.h>
+-#include "apple-gfx.h"
+-#include "trace.h"
+-#include "qemu-main.h"
+-#include "exec/address-spaces.h"
+-#include "migration/blocker.h"
+-#include "monitor/monitor.h"
+-#include "qemu/main-loop.h"
++#include "qemu/lockable.h"
+  #include "qemu/cutils.h"
+  #include "qemu/log.h"
+  #include "qapi/visitor.h"
+  #include "qapi/error.h"
++#include "block/aio-wait.h"
++#include "exec/address-spaces.h"
+  #include "system/dma.h"
++#include "migration/blocker.h"
+  #include "ui/console.h"
++#include "apple-gfx.h"
++#include "trace.h"
++
++#include <mach/mach.h>
++#include <mach/mach_vm.h>
++#include <dispatch/dispatch.h>
++
++#import <ParavirtualizedGraphics/ParavirtualizedGraphics.h>
+
+  static const AppleGFXDisplayMode apple_gfx_default_modes[] = {
+      { 1920, 1080, 60 },
+@@ -419,7 +419,7 @@ static void set_cursor_glyph(void *opaque)
+          s->cursor = NULL;
+      }
+
+-    if (bpp == 32) { /* Shouldn't be anything else, but just to be 
+safe...*/
++    if (bpp == 32) { /* Shouldn't be anything else, but just to be 
+safe... */
+          s->cursor = cursor_alloc(width, height);
+          s->cursor->hot_x = job->hotspot.x;
+          s->cursor->hot_y = job->hotspot.y;
+@@ -467,7 +467,7 @@ static void apple_gfx_do_read_memory(void *opaque)
+
+      r = dma_memory_read(&address_space_memory, job->physical_address,
+                          job->dst, job->length, MEMTXATTRS_UNSPECIFIED);
+-    job->success = r == MEMTX_OK;
++    job->success = (r == MEMTX_OK);
+
+      qemu_sem_post(&job->sem);
+  }
+@@ -694,12 +694,11 @@ static void new_frame_handler_bh(void *opaque)
+  static NSArray<PGDisplayMode *> *apple_gfx_create_display_mode_array(
+      const AppleGFXDisplayMode display_modes[], uint32_t 
+display_mode_count)
+  {
+-    uint32_t i;
+      PGDisplayMode *mode_obj;
+      NSMutableArray<PGDisplayMode *> *mode_array =
+          [[NSMutableArray alloc] initWithCapacity:display_mode_count];
+
+-    for (i = 0; i < display_mode_count; i++) {
++    for (unsigned i = 0; i < display_mode_count; i++) {
+          const AppleGFXDisplayMode *mode = &display_modes[i];
+          trace_apple_gfx_display_mode(i, mode->width_px, mode->height_px);
+          PGDisplayCoord_t mode_size = { mode->width_px, mode->height_px };
+@@ -836,8 +835,8 @@ static void apple_gfx_set_display_mode(Object *obj, 
+Visitor *v,
+
+      ret = qemu_strtoi(endptr, &endptr, 10, &val);
+      if (ret || val > UINT16_MAX || val <= 0) {
+-        error_setg(errp, "width in '%s' must be a decimal integer number "
+-                   "of pixels in the range 1..65535", name);
++        error_setg(errp, "width in '%s' must be a decimal integer number"
++                         " of pixels in the range 1..65535", name);
+          return;
+      }
+      mode->width_px = val;
+@@ -847,8 +846,8 @@ static void apple_gfx_set_display_mode(Object *obj, 
+Visitor *v,
+
+      ret = qemu_strtoi(endptr + 1, &endptr, 10, &val);
+      if (ret || val > UINT16_MAX || val <= 0) {
+-        error_setg(errp, "height in '%s' must be a decimal integer number "
+-                   "of pixels in the range 1..65535", name);
++        error_setg(errp, "height in '%s' must be a decimal integer number"
++                         " of pixels in the range 1..65535", name);
+          return;
+      }
+      mode->height_px = val;
+@@ -859,18 +858,18 @@ static void apple_gfx_set_display_mode(Object 
+*obj, Visitor *v,
+      ret = qemu_strtoi(endptr + 1, &endptr, 10, &val);
+      if (ret || val > UINT16_MAX || val <= 0) {
+          error_setg(errp, "refresh rate in '%s'"
+-                   " must be a positive decimal integer (Hertz)", name);
++                         " must be a positive decimal integer (Hertz)", 
+name);
+          return;
+      }
+      mode->refresh_rate_hz = val;
+      return;
+
+  separator_error:
+-    error_setg(errp, "Each display mode takes the format "
+-               "'<width>x<height>@<rate>'");
++    error_setg(errp,
++               "Each display mode takes the format 
+'<width>x<height>@<rate>'");
+  }
+
+-const PropertyInfo qdev_prop_display_mode = {
++const PropertyInfo qdev_prop_apple_gfx_display_mode = {
+      .name  = "display_mode",
+      .description =
+          "Display mode in pixels and Hertz, as 
+<width>x<height>@<refresh-rate> "
+---
+
+Regards,
+
+Phil.
+
+[*] I'll share the rebased branch later.
 
