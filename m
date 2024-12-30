@@ -4,67 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E4C3FE77188
-	for <qemu-riscv@archiver.kernel.org>; Mon, 30 Dec 2024 20:30:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3BCABE77188
+	for <qemu-riscv@archiver.kernel.org>; Mon, 30 Dec 2024 21:00:38 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tSMPG-0000A7-9Z; Mon, 30 Dec 2024 15:30:30 -0500
+	id 1tSMri-0006BZ-Ta; Mon, 30 Dec 2024 15:59:54 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tSMPB-00008u-GO
- for qemu-riscv@nongnu.org; Mon, 30 Dec 2024 15:30:25 -0500
-Received: from mail-wr1-x433.google.com ([2a00:1450:4864:20::433])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tSMrf-00069c-6R
+ for qemu-riscv@nongnu.org; Mon, 30 Dec 2024 15:59:52 -0500
+Received: from mail-wm1-x32a.google.com ([2a00:1450:4864:20::32a])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tSMP7-0000Wl-8b
- for qemu-riscv@nongnu.org; Mon, 30 Dec 2024 15:30:24 -0500
-Received: by mail-wr1-x433.google.com with SMTP id
- ffacd0b85a97d-385e27c75f4so6892076f8f.2
- for <qemu-riscv@nongnu.org>; Mon, 30 Dec 2024 12:30:20 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tSMrb-0002s7-Dv
+ for qemu-riscv@nongnu.org; Mon, 30 Dec 2024 15:59:50 -0500
+Received: by mail-wm1-x32a.google.com with SMTP id
+ 5b1f17b1804b1-4361f664af5so108062855e9.1
+ for <qemu-riscv@nongnu.org>; Mon, 30 Dec 2024 12:59:46 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1735590619; x=1736195419; darn=nongnu.org;
+ d=linaro.org; s=google; t=1735592386; x=1736197186; darn=nongnu.org;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=yzzKQhrMu9+ipQPX9U5PUvV4kGHzYUL/8aK4yLnwG5g=;
- b=puB8SIR+4EU1iqgYqTjeUsJIeU8ZWZlz/IxVG8//G5b6EBjhv75CSiNWLPxXV/T1qU
- 3neMIB9SLguFUjQ+OZE3Yb9ry/J/nyUxFcoMwzOecWEzpH4tlurE5Qd5tAtGWLNx0eyv
- gkPhQ7K8twse3S/9dEbyVaG0ZBH5uLgN8kuYuuHCGG/4hTL+lghl1coLEUi1JM/fL4Aa
- NNr/W5Zh+n7R/pAYqm/GqM8VXU6CINBeBkzn71Wat9MVZDnkFNfQRR7rA4vyrqE2p+zG
- uYt+iViJYlFfyTAXw6/8FKiOdy40z5UQobM1g+1/b0ajMbS43QyAfwpjdmeyWIFmQSNF
- xCLg==
+ bh=hMI7yEv1jSQhAu/0mSmlk2CoBBAXGicDSufwS04UZO4=;
+ b=APCF8EPC1DBp6L5Iwic0rvM19C7M0lgZamzq1YChg/zpREHdSmrdgC1OdqCQe9wpV7
+ T/w1GEhEVahnvB/tAFgAbdK+yy/Oe/uIQtTXOtl2o2iHSehcTyIDh1+fgNUOnl9TOUQk
+ Z+3OZs+PZdjmZpoboCmtOYAiZNqyNdsbGTh4o3iA6gddue4j0CG1aC9RsnZ+6FPfcmz9
+ nPyrO/9KEyL8AatPTbIASVIFRaCV9n8SKgKrpii/ITmnIr0x7OBppgXiIgQ8qfntDw6w
+ ZYhkIOsVqocmdX3jJ5Uwzsu9159yEqotCB2rt/EavHMEZhSn296t2e7qXBZhN7VFHps/
+ Tueg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1735590619; x=1736195419;
+ d=1e100.net; s=20230601; t=1735592386; x=1736197186;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=yzzKQhrMu9+ipQPX9U5PUvV4kGHzYUL/8aK4yLnwG5g=;
- b=cbVVrK7Qz+8s/bT7MMbTHUpGvTjOULKsnfuyCCNoKu424QoeycNkcmydD5rkIZnzzp
- 8DK5qEugbwPYRcgZxqkPQl8ZBiXalyXmW1GTRlrDUqkRchlWe0Us5hAu29K3F0j150XP
- RYg+DT5qXsAoS3bCQhVQmsFrDAVmtyp98X8UupdJsTYxu2qjRvBHOc7x9GBY+swk1oR6
- +qkVy+0cx60lOuQWhRbRAQsIx39u2ax6zfDGfC3UTXXHSpYT374bJ/sbcnxIMihsy7RV
- HJWuoDHMsiMzpG/IegF4TE4zuSdND13UzZmG7rrTfKd5vFFlD94EzUIVeADVPLJaya4j
- HbaA==
+ bh=hMI7yEv1jSQhAu/0mSmlk2CoBBAXGicDSufwS04UZO4=;
+ b=W1iX7etFg1lj5FXy6/2l8yP+UjVLIWBZEXVhcOcYMjVUuT0d3PqnjPrM/J39zj03sJ
+ oR1vxPnSZNtykW2HAotKvkoKoFbaVMeA3OstpfJDGkc5f7V1SxKi9fU8hYYe4JPbDIZ/
+ gVaqiD1HGVxwMmbRYwBtSjlWNW85RS7FRnJYH9uzTHLVy0TvAl7a1p75lmAE47vwAp5c
+ pj79NrSsnIpRIHH2Iuxpb9DWR3+Knf2zu64tvbQbgflKM9g0Dj8sTA93YG+hBrKN4MQD
+ GOVquJ5B2l1hwn8MksH/MHpsEWscPvOJ0PDW45CMBx+TtfjyljBF40wj+gfDLcfe6qYW
+ dMLw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVkqF3O1QMlseDcH4sGdQF3DKp8eQIX/GiY4qvDQuYsInMn5JtNvM0NnV4+HoUmEQcrg/N/8s7DhE6S@nongnu.org
-X-Gm-Message-State: AOJu0YztZ1gN0iL2/11PmIbTVSbamqU+34YYaRxaM0v16RXqebPMrVDq
- kPqKGxZYlrV9wDYvxTtPPMELfMZQIekgMAmfXkX1a5avq0UVCsqi8BexQX7jvGU=
-X-Gm-Gg: ASbGncsYByMfcZpNsHHjsmx2LfHEu+lh+WZX/z7glaRZTdbBQUDHjyrlWZMnyJXkW5F
- 1mdVb7/QCc5ghSBsDuztm3129poGxP/vuTUSv4luwWwxOXUeQd4Ftfeztmid5Yj4p0JnBhSz81W
- k2alyPRr6GH+ElsY2HVj8LyfnkxE2gFYj5jCRDqcqCGluzhzMzURX0azNWnKyZ298Gy7/iS+p1E
- 5Fd7NfYkarBvfoPPt1p5QP+ZEki0KPe5OHmbvlHYX57/J1ZysnysjHSNyhb9tdBp8TG4gbILgIb
- 1T3HQjlGtl1r1x8q2P7OXEf0
-X-Google-Smtp-Source: AGHT+IFtKdlySpgTFHcXdq3PbHF71/oV+iI3ZCsMwQy1hsgICs2WJd1dz7sU+bcPysmxbgWgFgI/Mg==
-X-Received: by 2002:a05:6000:18a3:b0:386:8ff:d20b with SMTP id
- ffacd0b85a97d-38a221f2f2dmr29322826f8f.27.1735590618884; 
- Mon, 30 Dec 2024 12:30:18 -0800 (PST)
+ AJvYcCU1sjq0YBLZJYbcfUEDyMALeEE86qxzIPtJqHyVSW0hUpml9bPRxWbnbe0rSokurqbrLx2FfaDaTK6S@nongnu.org
+X-Gm-Message-State: AOJu0YyeodXtqIWfuz3IdZHxHf03Hwqw76+tRv+DJnh28yVbkAskETmB
+ 2L/Yh9u614iXDb1734HrgH/9NRuhdHI5iuTJ1k5vYScILIDkcKbFSLh1A121Adw=
+X-Gm-Gg: ASbGncunjNLu5Q0FJDZJIdcxV6YhqeVQMoZHy71llpDqsa16mYdvjQpoW1NvUtQlzXt
+ khXE5KNXKHySxEL2cy7QMPumlsTM/+J6eKUm+lkdWbFSKNZzNPoPaGOeeQ5zv+pUSTY01JIBe8a
+ 0y6kkp+rvuYUkKZwXSdUEwJ0Z7mXz7ZbHpSJ4BVd4AqJoG5j3S/R1Dmcz8T3vtZ3JFg6x5SDLG8
+ 3lgnHEZmvzvMcQ/+Xsx2Z43RiXDvtYrdqvxKyTS+VSRLUDjmbote43M1vaHPBUItOAFNQyrrkiH
+ Uzd+y45GHO5Ry8g2o7Wgz2ni
+X-Google-Smtp-Source: AGHT+IH6KMbKyETy6n5HX2aHsvKhBiq6a5p+3VJIT48Y6CxZ/gxfcrh2v1oxFofvGPerAYZaX3OGxg==
+X-Received: by 2002:a05:600c:1c1a:b0:436:1b81:b65c with SMTP id
+ 5b1f17b1804b1-43668646aebmr342767945e9.15.1735592385747; 
+ Mon, 30 Dec 2024 12:59:45 -0800 (PST)
 Received: from [192.168.69.132] (88-187-86-199.subs.proxad.net.
  [88.187.86.199]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-38a1c832e8asm30543979f8f.37.2024.12.30.12.30.17
+ 5b1f17b1804b1-43656b0145csm401961895e9.15.2024.12.30.12.59.43
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 30 Dec 2024 12:30:18 -0800 (PST)
-Message-ID: <c2ce4e80-d918-4cf5-ab40-ac9e84955423@linaro.org>
-Date: Mon, 30 Dec 2024 21:30:16 +0100
+ Mon, 30 Dec 2024 12:59:45 -0800 (PST)
+Message-ID: <b394e626-b896-4ece-b6d3-bcb48e19d0f7@linaro.org>
+Date: Mon, 30 Dec 2024 21:59:43 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 Subject: Re: [PATCH v16 01/14] ui & main loop: Redesign of system-specific
@@ -88,8 +88,8 @@ From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 In-Reply-To: <20241223221645.29911-2-phil@philjordan.eu>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::433;
- envelope-from=philmd@linaro.org; helo=mail-wr1-x433.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::32a;
+ envelope-from=philmd@linaro.org; helo=mail-wm1-x32a.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -111,8 +111,6 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
-
-Hi,
 
 On 23/12/24 23:16, Phil Dennis-Jordan wrote:
 > macOS's Cocoa event handling must be done on the initial (main) thread
@@ -208,85 +206,95 @@ On 23/12/24 23:16, Phil Dennis-Jordan wrote:
 >   extern int (*qemu_main)(void);
 >   
 >   #endif /* QEMU_MAIN_H */
-
-
-> diff --git a/ui/gtk.c b/ui/gtk.c
-> index 0d38c070e4..c023743148 100644
-> --- a/ui/gtk.c
-> +++ b/ui/gtk.c
-> @@ -38,6 +38,7 @@
->   #include "qemu/cutils.h"
->   #include "qemu/error-report.h"
->   #include "qemu/main-loop.h"
-> +#include "qemu-main.h"
+> diff --git a/system/main.c b/system/main.c
+> index 4923520741..9c9a1adc20 100644
+> --- a/system/main.c
+> +++ b/system/main.c
+> @@ -24,26 +24,55 @@
 >   
->   #include "ui/console.h"
->   #include "ui/gtk.h"
-> @@ -2485,6 +2486,9 @@ static void gtk_display_init(DisplayState *ds, DisplayOptions *opts)
->   #ifdef CONFIG_GTK_CLIPBOARD
->       gd_clipboard_init(s);
->   #endif /* CONFIG_GTK_CLIPBOARD */
-> +
-> +    /* GTK's event polling must happen on the main thread. */
-> +    qemu_main = NULL;
->   }
->   
->   static void early_gtk_display_init(DisplayOptions *opts)
-> diff --git a/ui/sdl2.c b/ui/sdl2.c
-> index 1fb72f67a6..445eb1dd9f 100644
-> --- a/ui/sdl2.c
-> +++ b/ui/sdl2.c
-> @@ -34,6 +34,7 @@
+>   #include "qemu/osdep.h"
+>   #include "qemu-main.h"
+> +#include "qemu/main-loop.h"
 >   #include "system/system.h"
->   #include "ui/win32-kbd-hook.h"
->   #include "qemu/log.h"
-> +#include "qemu-main.h"
 >   
->   static int sdl2_num_outputs;
->   static struct sdl2_console *sdl2_console;
-> @@ -965,6 +966,9 @@ static void sdl2_display_init(DisplayState *ds, DisplayOptions *o)
->       }
+>   #ifdef CONFIG_SDL
+> +/*
+> + * SDL insists on wrapping the main() function with its own implementation on
+> + * some platforms; it does so via a macro that renames our main function, so
+> + * <SDL.h> must be #included here even with no SDL code called from this file.
+> + */
+>   #include <SDL.h>
+>   #endif
 >   
->       atexit(sdl_cleanup);
+> -int qemu_default_main(void)
+> +#ifdef CONFIG_DARWIN
+> +#include <CoreFoundation/CoreFoundation.h>
+> +#endif
 > +
-> +    /* SDL's event polling (in dpy_refresh) must happen on the main thread. */
-> +    qemu_main = NULL;
+> +static void *qemu_default_main(void *opaque)
+>   {
+>       int status;
+>   
+> +    bql_lock();
+>       status = qemu_main_loop();
+>       qemu_cleanup(status);
+> +    bql_unlock();
+>   
+> -    return status;
+> +    exit(status);
 >   }
 >   
->   static QemuDisplay qemu_display_sdl2 = {
+> -int (*qemu_main)(void) = qemu_default_main;
+> +int (*qemu_main)(void);
+> +
+> +#ifdef CONFIG_DARWIN
+> +static int os_darwin_cfrunloop_main(void)
+> +{
+> +    CFRunLoopRun();
+> +    g_assert_not_reached();
+> +}
+> +int (*qemu_main)(void) = os_darwin_cfrunloop_main;
+> +#endif
+>   
+>   int main(int argc, char **argv)
+>   {
+>       qemu_init(argc, argv);
+> -    return qemu_main();
+> +    bql_unlock();
+> +    if (qemu_main) {
+> +        QemuThread main_loop_thread;
+> +        qemu_thread_create(&main_loop_thread, "qemu_main",
+> +                           qemu_default_main, NULL, QEMU_THREAD_DETACHED);
+> +        return qemu_main();
+> +    } else {
+> +        qemu_default_main(NULL);
+> +    }
+>   }
 
-This fails the build-oss-fuzz job as:
+Build failure on Windows:
 
-     /usr/bin/ld: libcommon.a.p/ui_gtk.c.o: in function `gtk_display_init':
-     ../ui/gtk.c:2491:(.text+0x3df9): undefined reference to `qemu_main'
-     /usr/bin/ld: ../ui/gtk.c:2491:(.text+0x45f1): undefined reference 
-to `qemu_main'
-     /usr/bin/ld: libcommon.a.p/ui_sdl2.c.o: in function 
-`sdl2_display_init':
-     ../ui/sdl2.c:971:(.text+0x2e8c): undefined reference to `qemu_main'
-     /usr/bin/ld: ../ui/sdl2.c:971:(.text+0x30bf): undefined reference 
-to `qemu_main'
-     clang: error: linker command failed with exit code 1 (use -v to see 
-invocation)
+../system/main.c: In function 'SDL_main':
+../system/main.c:78:1: error: control reaches end of non-void function 
+[-Werror=return-type]
+    78 | }
+       | ^
+cc1: all warnings being treated as errors
+ninja: build stopped: subcommand failed.
+make: *** [Makefile:168: run-ninja] Error 1
 
-Therefore I'm squashing:
+I'm squashing:
 
 -- >8 --
-diff --git a/tests/qtest/fuzz/fuzz.c b/tests/qtest/fuzz/fuzz.c
-index 8274000bd55..ca248a51a6c 100644
---- a/tests/qtest/fuzz/fuzz.c
-+++ b/tests/qtest/fuzz/fuzz.c
-@@ -41,6 +41,7 @@ static FuzzTargetList *fuzz_target_list;
-  static FuzzTarget *fuzz_target;
-  static QTestState *fuzz_qts;
-
-+int (*qemu_main)(void);
-
-
-  void flush_events(QTestState *s)
+diff --git a/system/main.c b/system/main.c
+index 9c9a1adc20c..ecb12fd397c 100644
+--- a/system/main.c
++++ b/system/main.c
+@@ -74,5 +74,6 @@ int main(int argc, char **argv)
+          return qemu_main();
+      } else {
+          qemu_default_main(NULL);
++        g_assert_not_reached();
+      }
+  }
 ---
-
-Regards,
-
-Phil.
 
