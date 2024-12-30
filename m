@@ -4,92 +4,98 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7D40AE7718F
-	for <qemu-riscv@archiver.kernel.org>; Sat, 28 Dec 2024 10:00:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4D4F2E7718F
+	for <qemu-riscv@archiver.kernel.org>; Mon, 30 Dec 2024 18:55:58 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tRTc3-0002Ym-T0; Sat, 28 Dec 2024 05:00:07 -0500
+	id 1tSKvP-0001ip-Aa; Mon, 30 Dec 2024 13:55:35 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <phil@philjordan.eu>)
- id 1tRTbx-0002VJ-Dy
- for qemu-riscv@nongnu.org; Sat, 28 Dec 2024 04:59:57 -0500
-Received: from mail-ua1-x92f.google.com ([2607:f8b0:4864:20::92f])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tSKvN-0001i3-KA
+ for qemu-riscv@nongnu.org; Mon, 30 Dec 2024 13:55:33 -0500
+Received: from mail-wr1-x432.google.com ([2a00:1450:4864:20::432])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <phil@philjordan.eu>)
- id 1tRTbv-0002sh-LY
- for qemu-riscv@nongnu.org; Sat, 28 Dec 2024 04:59:57 -0500
-Received: by mail-ua1-x92f.google.com with SMTP id
- a1e0cc1a2514c-85baea70afeso1709282241.2
- for <qemu-riscv@nongnu.org>; Sat, 28 Dec 2024 01:59:55 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tSKvJ-00075M-LU
+ for qemu-riscv@nongnu.org; Mon, 30 Dec 2024 13:55:33 -0500
+Received: by mail-wr1-x432.google.com with SMTP id
+ ffacd0b85a97d-3862d16b4f5so5938020f8f.0
+ for <qemu-riscv@nongnu.org>; Mon, 30 Dec 2024 10:55:28 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=philjordan-eu.20230601.gappssmtp.com; s=20230601; t=1735379994; x=1735984794;
- darn=nongnu.org; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=LlncXcVIEccT+1A1oiS85lylcaqeiQZ3UpIE8UOa3ec=;
- b=a6VBG4FHgzwwkNF5AWwobH/Xe+5ZoelOYxk/Wu0hSBl/2T2acz2oseIsPX6EqJTy/O
- TbXrU1fa4HBfQWHLOG8uQkgME7XCVjSsIbz5n9opev5sXH9+9WlyQnCNLtmNKfe/pc8m
- hYgZMOanRebakiFitO9hGyB7Mw2do2J9IrswWb3LPH0V73R12gRuzPLQjjS3vbf7V2Vb
- nOJx9CLA4sWrmN8njauAbKc5klWIUJkA6neHt3GevRhZ2WT7czvlx6UM1me6phuwaQAK
- L3T2o2CCZuBCGcETkeeXdrHoP2H19dZ3JO2G6CH09TpKgR2OcJFTv7u/sVB0skhXGqQr
- ohWg==
+ d=linaro.org; s=google; t=1735584927; x=1736189727; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=Qui2Y4KUafW4SCpWVDDOaVkKbTJ56eWr0XZNubRfJRc=;
+ b=fHfB+HBMM5Xvazq+T3YIzILLrLTViLCUTVx+2YiJHzFKNE1AwYtA5neaWlW7pHyVMd
+ K/eIVMybirba48SKmESty5m/p2Xj+kHRwvNgDzFNbMScDB4q+CGsJq180b8mHncCJoaq
+ gbYyFncarXfdib/+xE8nEsHB+JXlgFHbYAl0qYvcUp8aGXaJ4EOacr2GU+dmVWQRmGMX
+ IKnumQAz1pD84Q82uRGYDtv1U2KzgjMmBMKB3zSaPKS7cYyV8XtIzO3QYgWxQONWZv0i
+ CIfTKzrrCS1jp5p/Vnj1rLGXrNbHpV0yFTKlcdBnGMRp3LaigGVpwzd0QlVb5Y64GU/z
+ 4kzA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1735379994; x=1735984794;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=LlncXcVIEccT+1A1oiS85lylcaqeiQZ3UpIE8UOa3ec=;
- b=a6dGWOCqlfETRP4DYpOpjYmh5eGGwEYAV/rNql63JgIP669sZXSuPKSkwqhbufY7ff
- jb82+7S2dek9Lh8yoUYxkyJzby98BT08uPYsvllNXcNEic2mXa73h44ND134W1JssMBP
- yEIgwNq3V7aTA2C5pLjZXHwa+PRWOBRLpD5k9ulFLfF24JuJVieuAo6gCisBQfGwcvgl
- nZ52BliWMask+SVeTuTDBjLYS+tBTISJ0OzFnIOueKbO8vgEq4TQBcFcb9YnCbYFYeIZ
- Cih0sLG4a8Y6XfgQHHFvT0zzq+YK6NI47h7PDY92MufRg01YM3yMa6pobXhRBd9twcd7
- z9/w==
+ d=1e100.net; s=20230601; t=1735584927; x=1736189727;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=Qui2Y4KUafW4SCpWVDDOaVkKbTJ56eWr0XZNubRfJRc=;
+ b=kb0QfVIhwpXKiGM97EEZlv/0mkEUUadPSzvUmVoOjhrhc6lbosoihkxs3DqGxD8ihQ
+ nsV8WaAYND4s8w4271uWm57UiW73kIMpYPx8hAaeNnMYH4MQ+D3yBiqKKIrYywt2O7mg
+ XODkGuPh+h2a9SmDnXmgJy+WoXnCQm2A+cRHe9JVtCVfNK9MTZKZLYqcXRnGWQwkiKIe
+ Egukyl3VcJ9R1N4gVPkgFbJ/cCNxEceZ0gggXazB0hhU9aZ4Yqyfbkx4J4mHVxK4JeGX
+ 3l9e53kA3rs0G/X6qGRYsq+eVmOgY949VsKweh9AbKvE0BUgc8SUU/LKpHJj4jqn6DKS
+ ICog==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUUsEdOchti7z9jCkecdNuTMAmRQnbc1mQLwORbyJXMfD5NGi43qaDV8NkH1QK305sFcE1allXaiibc@nongnu.org
-X-Gm-Message-State: AOJu0Ywa4GEprz0TY2mgnoWmCXH00FOJsikZAmVhQFbkVm6SzGTaUi6S
- Bb6w3FGSYgTs3RX97u7F5qb9oQb0Gu3RFaROJxA1hIy81c8nQBkBUpYADdfKdeEuzXTfTwELdSK
- 9PiqrmYGrvKCuTQ9T/hu/1mnlHBzJAqz/9dQF
-X-Gm-Gg: ASbGncvEDtD1IdeinHzYxYMvMHaoA3K1xrcFEgIg2PSlPwGt19doLFV3u8Wdgyim+Vf
- +OvcIVtuLHQcKZAq48k9C/s5w/tqhWv88u6aHsw==
-X-Google-Smtp-Source: AGHT+IFw5KSroPtXZyYs4idcBcuJSoNAa1ocx03E9/YgZQorCh5/Y/+6odkZ/wI+TySnDDGJBuaCSo/tKuCGp1/x5FY=
-X-Received: by 2002:a05:6102:2c08:b0:4b2:543f:b454 with SMTP id
- ada2fe7eead31-4b2cc4654d9mr23392863137.21.1735379994482; Sat, 28 Dec 2024
- 01:59:54 -0800 (PST)
+ AJvYcCWjl2rgESUKveOwRMjegDIRogDEU7uY0NV53x8sUe7l/R+PgiZP4hItAKzr/7bUJroGXMV9+RF7q5Bg@nongnu.org
+X-Gm-Message-State: AOJu0YyNZSHpm8seYY81UKyieci1JA/JyDihSxlS9VPfbL8RHbf5PFfx
+ TJ8z+KRLcZ2hNOAIykOggLmgcUMY4N+VJfQisVzYiLWrw68fk4zXQAMMPFdIDG4=
+X-Gm-Gg: ASbGncuH270JtnRp7PbTYG+7QU46nDT2QAegSCZA/khv15p6X6fPJzTcAzHai5ithvp
+ eGecxjO/Qpeqzn9G2meb3SgZyWvQ8+N9VzpCfhpi6Vg836owzlhC577q17KL2pDjmeeRTFBrZ1f
+ oGnEh/JRxr/3o5wBol93ErTvmHC8UqcSDyh6bnlTfFshxur3F9nGPxnD/Z6tYcJq2Vyu6JVCuJg
+ 3tBaA0AlEeWUTKfPfviqYsobBzESbxdOM/ZJBX0+0CcCJgT1NySh8EDfPaP+Of+DZSwnxzaJCGx
+ YL0rgrBPg2O70+jSi9Bf76Lp
+X-Google-Smtp-Source: AGHT+IF+A7uRN0qHdGjNeniPw0A3dVLJLhLh3rZcf5P1DtdbO8Nz+FtXZsISMVxcVx4H/4RLy7QMVQ==
+X-Received: by 2002:a05:6000:1864:b0:388:c61d:4415 with SMTP id
+ ffacd0b85a97d-38a22a2d914mr27588800f8f.18.1735584926053; 
+ Mon, 30 Dec 2024 10:55:26 -0800 (PST)
+Received: from [192.168.69.132] (88-187-86-199.subs.proxad.net.
+ [88.187.86.199]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-38a1c8acadcsm30403457f8f.105.2024.12.30.10.55.23
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 30 Dec 2024 10:55:25 -0800 (PST)
+Message-ID: <5aeaca68-50c0-41f4-8cd2-81a931377954@linaro.org>
+Date: Mon, 30 Dec 2024 19:55:23 +0100
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v16 00/14] macOS PV Graphics and new vmapple machine type
+To: Phil Dennis-Jordan <phil@philjordan.eu>, qemu-devel@nongnu.org,
+ Joelle van Dyne <j@getutm.app>
+Cc: agraf@csgraf.de, peter.maydell@linaro.org, pbonzini@redhat.com,
+ rad@semihalf.com, quic_llindhol@quicinc.com, stefanha@redhat.com,
+ mst@redhat.com, slp@redhat.com, richard.henderson@linaro.org,
+ eduardo@habkost.net, marcel.apfelbaum@gmail.com, gaosong@loongson.cn,
+ jiaxun.yang@flygoat.com, chenhuacai@kernel.org, kwolf@redhat.com,
+ hreitz@redhat.com, shorne@gmail.com, palmer@dabbelt.com,
+ alistair.francis@wdc.com, bmeng.cn@gmail.com, liwei1518@gmail.com,
+ dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com, jcmvbkbc@gmail.com,
+ marcandre.lureau@redhat.com, berrange@redhat.com, akihiko.odaki@daynix.com,
+ qemu-arm@nongnu.org, qemu-block@nongnu.org, qemu-riscv@nongnu.org,
+ balaton@eik.bme.hu
 References: <20241223221645.29911-1-phil@philjordan.eu>
- <20241223221645.29911-15-phil@philjordan.eu>
- <1211286e-9211-4d89-9021-f353169af6ad@linaro.org>
- <CAAibmn0q6cBc41J5mABd4bkUEo6pS0MhL8DU8fPfygDvjLSPBQ@mail.gmail.com>
- <49188838-5e52-4d9e-9c50-933e62678163@linaro.org>
-In-Reply-To: <49188838-5e52-4d9e-9c50-933e62678163@linaro.org>
-From: Phil Dennis-Jordan <phil@philjordan.eu>
-Date: Sat, 28 Dec 2024 10:59:43 +0100
-Message-ID: <CAAibmn0puNwDvHcU8xYi1EJ=dnAEhasoTKCk0kmF4DiQfR7dHQ@mail.gmail.com>
-Subject: Re: [PATCH v16 14/14] hw/vmapple/vmapple: Add vmapple machine type
-To: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@linaro.org>
-Cc: qemu-devel@nongnu.org, agraf@csgraf.de, peter.maydell@linaro.org, 
- pbonzini@redhat.com, rad@semihalf.com, quic_llindhol@quicinc.com, 
- stefanha@redhat.com, mst@redhat.com, slp@redhat.com, 
- richard.henderson@linaro.org, eduardo@habkost.net, marcel.apfelbaum@gmail.com, 
- gaosong@loongson.cn, jiaxun.yang@flygoat.com, chenhuacai@kernel.org, 
- kwolf@redhat.com, hreitz@redhat.com, shorne@gmail.com, palmer@dabbelt.com, 
- alistair.francis@wdc.com, bmeng.cn@gmail.com, liwei1518@gmail.com, 
- dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com, jcmvbkbc@gmail.com, 
- marcandre.lureau@redhat.com, berrange@redhat.com, akihiko.odaki@daynix.com, 
- qemu-arm@nongnu.org, qemu-block@nongnu.org, qemu-riscv@nongnu.org, 
- balaton@eik.bme.hu, Alexander Graf <graf@amazon.com>
-Content-Type: multipart/alternative; boundary="0000000000001f2e31062a51a4ce"
-Received-SPF: neutral client-ip=2607:f8b0:4864:20::92f;
- envelope-from=phil@philjordan.eu; helo=mail-ua1-x92f.google.com
-X-Spam_score_int: -10
-X-Spam_score: -1.1
-X-Spam_bar: -
-X-Spam_report: (-1.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, HTML_MESSAGE=0.001, RCVD_IN_DNSWL_NONE=-0.0001,
- SPF_HELO_NONE=0.001, SPF_NEUTRAL=0.779 autolearn=no autolearn_force=no
+Content-Language: en-US
+From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+In-Reply-To: <20241223221645.29911-1-phil@philjordan.eu>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::432;
+ envelope-from=philmd@linaro.org; helo=mail-wr1-x432.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -105,313 +111,183 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
---0000000000001f2e31062a51a4ce
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Cc'ing Joelle (FYI https://github.com/utmapp/UTM/issues/3491)
 
-On Fri, 27 Dec 2024 at 21:41, Philippe Mathieu-Daud=C3=A9 <philmd@linaro.or=
-g>
-wrote:
+On 23/12/24 23:16, Phil Dennis-Jordan wrote:
+> This patch set introduces a new ARM and macOS HVF specific machine type
+> called "vmapple", as well as a family of display devices based on the
+> ParavirtualizedGraphics.framework in macOS. One of the display adapter
+> variants, apple-gfx-mmio, is required for the new machine type, while
+> apple-gfx-pci can be used to enable 3D graphics acceleration with x86-64
+> macOS guest OSes.
+> 
+> Previous versions of this patch set were submitted semi-separately:
+> the original vmapple patch set by Alexander Graf included a monolithic
+> implementation of apple-gfx-mmio. I subsequently reviewed and reworked
+> the latter to support the PCI variant of the device as well and submitted
+> the result in isolation. As requested in subsequent review, I have now
+> recombined this with the original vmapple patch set, which I have updated
+> and improved in a few ways as well.
+> 
+> The vmapple machine type approximates the configuration in macOS's own
+> Virtualization.framework when running arm64 macOS guests. In addition to
+> generic components such as a GICv3 and an XHCI USB controller, it
+> includes nonstandard extensions to the virtio block device, a special
+> "hardware" aes engine, a configuration device, a pvpanic variant, a
+> "backdoor" interface, and of course the apple-gfx paravirtualised display
+> adapter.
+> 
+> There are currently a few limitations to this which aren't intrinsic,
+> just imperfect emulation of the VZF, but it's good enough to be just
+> about usable for some purposes:
+> 
+>   * macOS 12 guests only. Versions 13+ currently fail during early boot.
+>   * macOS 11+ arm64 hosts only, with hvf accel. (Perhaps some differences
+>     between Apple M series CPUs and TCG's aarch64 implementation? macOS
+>     hosts only because ParavirtualizedGraphics.framework is a black box
+>     implementing most of the logic behind the apple-gfx device.)
+>   * PCI devices use legacy IRQs, not MSI/MSI-X. As far as I can tell,
+>     we'd need to include the GICv3 ITS, but it's unclear to me what
+>     exactly needs wiring up.
+>   * Due to a quirk (bug?) in the macOS XHCI driver when MSI-X is not
+>     available, correct functioning of the USB controller (and thus
+>     keyboard/tablet) requires a small workaround in the XHCI controller
+>     device. This is part of another patch series:
+>     https://patchew.org/QEMU/20241208191646.64857-1-phil@philjordan.eu/
+>   * The guest OS must first be provisioned using Virtualization.framework;
+>     the disk images can subsequently be used in Qemu. (See docs.)
+> 
+> The apple-gfx device can be used independently from the vmapple machine
+> type, at least in the PCI variant. It mainly targets x86-64 macOS guests
+> from version 11 on, but also includes a UEFI bootrom for basic
+> framebuffer mode. macOS 11 is also required on the host side, as well
+> as a GPU that supports the Metal API. On the guest side, this provides
+> 3D acceleration/GPGPU support with a baseline Metal feature set,
+> irrespective of the host GPU's feature set. A few limitations in the
+> current integration:
+> 
+>   * Although it works fine with TCG, it does not work correctly
+>     cross-architecture: x86-64 guests on arm64 hosts appear to make
+>     some boot progress, but rendering is corrupted. I suspect
+>     incompatible texture memory layouts; I have no idea if this is
+>     fixable.
 
-> On 27/12/24 21:12, Phil Dennis-Jordan wrote:
->
-> >      > diff --git a/hw/vmapple/Kconfig b/hw/vmapple/Kconfig
-> >      > index bcd1be63e3..6a4c4a7fa2 100644
-> >      > --- a/hw/vmapple/Kconfig
-> >      > +++ b/hw/vmapple/Kconfig
-> >      > @@ -10,3 +10,23 @@ config VMAPPLE_CFG
-> >      >   config VMAPPLE_VIRTIO_BLK
-> >      >       bool
-> >      >
-> >      > +config VMAPPLE
-> >      > +    bool
-> >      > +    depends on ARM
-> >      > +    depends on HVF
-> >      > +    default y if ARM
-> >      > +    imply PCI_DEVICES
-> >      > +    select ARM_GIC
-> >
-> >     Hmmm I'm getting ...:
-> >
-> >     qemu-system-aarch64: unknown type 'arm-gicv3'
-> >
-> >      > +    select PLATFORM_BUS
-> >      > +    select PCI_EXPRESS
-> >      > +    select PCI_EXPRESS_GENERIC_BRIDGE
-> >      > +    select PL011 # UART
-> >      > +    select PL031 # RTC
-> >      > +    select PL061 # GPIO
-> >      > +    select GPIO_PWR
-> >      > +    select PVPANIC_MMIO
-> >      > +    select VMAPPLE_AES
-> >      > +    select VMAPPLE_BDIF
-> >      > +    select VMAPPLE_CFG
-> >      > +    select MAC_PVG_MMIO
-> >      > +    select VMAPPLE_VIRTIO_BLK
-> >
-> >
-> >      > +static void create_gic(VMAppleMachineState *vms, MemoryRegion
-> *mem)
-> >      > +{
-> >      > +    MachineState *ms =3D MACHINE(vms);
-> >      > +    /* We create a standalone GIC */
-> >      > +    SysBusDevice *gicbusdev;
-> >      > +    QList *redist_region_count;
-> >      > +    int i;
-> >      > +    unsigned int smp_cpus =3D ms->smp.cpus;
-> >      > +
-> >      > +    vms->gic =3D qdev_new(gicv3_class_name());
-> >
-> >     ... I suppose due to this call ^^^.
-> >
-> >     $ git grep arm-gicv3
-> >     hw/intc/arm_gicv3_kvm.c:45:#define TYPE_KVM_ARM_GICV3 "kvm-arm-gicv=
-3"
-> >     include/hw/intc/arm_gicv3.h:18:#define TYPE_ARM_GICV3 "arm-gicv3"
-> >     $ git grep TYPE_ARM_GICV3
-> >     hw/intc/arm_gicv3.c:466:    .name =3D TYPE_ARM_GICV3,
-> >     $ git grep -FW arm_gicv3.c
-> >     hw/intc/meson.build=3D9=3Dsystem_ss.add(when: 'CONFIG_ARM_GICV3_TCG=
-',
-> >     if_true: files(
-> >     hw/intc/meson.build:10:  'arm_gicv3.c',
-> >     ...
-> >
-> >
-> > Ahhh, good catch! I suppose this is with =E2=80=94disable-tcg (or equiv=
-alent)
->
-> Yes, this is how I test HVF.
->
-> >
-> >
-> >     I think commit a8a5546798c ("hw/intc/arm_gicv3: Introduce
-> >     CONFIG_ARM_GIC_TCG Kconfig selector") is invalid as being
-> >     too restrictive.
-> >
-> >     I can go a bit further with these changes on top (ignoring
-> >     renaming ARM_GICV3_TCG -> ARM_GICV3):
-> >
-> >
-> >     -- >8 --
-> >     diff --git a/hw/intc/Kconfig b/hw/intc/Kconfig
-> >     index dd405bdb5d2..9e06c05b449 100644
-> >     --- a/hw/intc/Kconfig
-> >     +++ b/hw/intc/Kconfig
-> >     @@ -26 +26 @@ config ARM_GIC
-> >     -    select ARM_GICV3_TCG if TCG
-> >     +    select ARM_GICV3_TCG if TCG || HVF
-> >     @@ -32 +32 @@ config ARM_GICV3_TCG
-> >     -    depends on ARM_GIC && TCG
-> >     +    depends on ARM_GIC && (TCG || HVF)
->
-> Now implemented as [*]:
->
-> https://lore.kernel.org/qemu-devel/20241227202435.48055-1-philmd@linaro.o=
-rg/
->
-> >     diff --git a/hw/vmapple/Kconfig b/hw/vmapple/Kconfig
-> >     index 6a4c4a7fa2e..374a89f6a8f 100644
-> >     --- a/hw/vmapple/Kconfig
-> >     +++ b/hw/vmapple/Kconfig
-> >     @@ -19 +19 @@ config VMAPPLE
-> >     -    select ARM_GIC
-> >     +    select ARM_GICV3_TCG
-> >
-> >
-> > Is this last part necessary/advisable? It would seem like the above
-> > changes in hw/intc/Kconfig should make ARM_GIC work too?
-> > (The PVG dependency means we currently can=E2=80=99t support anything o=
-ther than
-> > macOS host systems and thus HVF or theoretically TCG anyway, but if QEM=
-U
-> > gained support for the HVF-provided GIC implementation, we=E2=80=99d ne=
-ed to
-> > change this line again.)
->
-> Hmm indeed we can skip it, but vmapple machine enforces rev=3D3:
->
-> >      > +    qdev_prop_set_uint32(vms->gic, "revision", 3);
->
-> So directly selecting ARM_GICV3 sounds more explicit to me.
->
+Zoltan, does that ring a bell?
 
-That's true.
+Phil, should we display a warning in this configuration case? Or only
+allow it with some developper option, like:
 
-We can sort out the HVF GICV3 if and when that ever gets implemented.
+     -device '{"driver":"apple-gfx-pci", \
+               "display-modes":["3840x2160@60"], \
+               "x-force-cross-rendering":"true"}'
+
+>   * ParavirtualizedGraphics.framework and the guest driver support
+>     multi-headed configurations. The current Qemu integration always
+>     connects precisely 1 display.
+>   * State serialisation and deserialisation is currently not
+>     implemented, though supported in principle by the framework.
+>     Both apple-gfx variants thus set up a migration blocker.
+>   * Rendering efficiency could be better. The GPU-rendered guest
+>     framebuffer is copied to system memory and uses Qemu's usual
+>     CPU-based drawing. For maximum efficiency, the Metal texture
+>     containing the guest framebuffer could be drawn directly to
+>     a Metal view in the host window, staying on the GPU. (Similar
+>     to the OpenGL/virgl render path on other platforms.)
+> 
+> Some of my part of this work has been sponsored by Sauce Labs Inc.
+> 
+> ---
 
 
-> The diff is now (on top of [*]):
->
->       -    select ARM_GIC
->       +    select ARM_GICV3
->
-> WDYT?
->
+> Alexander Graf (8):
+>    hw: Add vmapple subdir
+>    hw/misc/pvpanic: Add MMIO interface
+>    gpex: Allow more than 4 legacy IRQs
+>    hw/vmapple/aes: Introduce aes engine
+>    hw/vmapple/bdif: Introduce vmapple backdoor interface
+>    hw/vmapple/cfg: Introduce vmapple cfg region
+>    hw/vmapple/virtio-blk: Add support for apple virtio-blk
+>    hw/vmapple/vmapple: Add vmapple machine type
+> 
+> Phil Dennis-Jordan (6):
+>    ui & main loop: Redesign of system-specific main thread event handling
+>    hw/display/apple-gfx: Introduce ParavirtualizedGraphics.Framework
+>      support
+>    hw/display/apple-gfx: Adds PCI implementation
+>    hw/display/apple-gfx: Adds configurable mode list
+>    MAINTAINERS: Add myself as maintainer for apple-gfx, reviewer for HVF
+>    hw/block/virtio-blk: Replaces request free function with g_free
+> 
+>   MAINTAINERS                         |  15 +
+>   contrib/vmapple/uuid.sh             |   9 +
+>   docs/system/arm/vmapple.rst         |  63 ++
+>   docs/system/target-arm.rst          |   1 +
+>   hw/Kconfig                          |   1 +
+>   hw/arm/sbsa-ref.c                   |   2 +-
+>   hw/arm/virt.c                       |   2 +-
+>   hw/block/virtio-blk.c               |  58 +-
+>   hw/core/qdev-properties-system.c    |   8 +
+>   hw/display/Kconfig                  |  13 +
+>   hw/display/apple-gfx-mmio.m         | 288 +++++++++
+>   hw/display/apple-gfx-pci.m          | 156 +++++
+>   hw/display/apple-gfx.h              |  77 +++
+>   hw/display/apple-gfx.m              | 880 ++++++++++++++++++++++++++++
+>   hw/display/meson.build              |   7 +
+>   hw/display/trace-events             |  30 +
+>   hw/i386/microvm.c                   |   2 +-
+>   hw/loongarch/virt.c                 |  12 +-
+>   hw/meson.build                      |   1 +
+>   hw/mips/loongson3_virt.c            |   2 +-
+>   hw/misc/Kconfig                     |   4 +
+>   hw/misc/meson.build                 |   1 +
+>   hw/misc/pvpanic-mmio.c              |  60 ++
+>   hw/openrisc/virt.c                  |  12 +-
+>   hw/pci-host/gpex.c                  |  43 +-
+>   hw/riscv/virt.c                     |  12 +-
+>   hw/vmapple/Kconfig                  |  32 +
+>   hw/vmapple/aes.c                    | 581 ++++++++++++++++++
+>   hw/vmapple/bdif.c                   | 274 +++++++++
+>   hw/vmapple/cfg.c                    | 195 ++++++
+>   hw/vmapple/meson.build              |   5 +
+>   hw/vmapple/trace-events             |  21 +
+>   hw/vmapple/trace.h                  |   1 +
+>   hw/vmapple/virtio-blk.c             | 204 +++++++
+>   hw/vmapple/vmapple.c                | 612 +++++++++++++++++++
+>   hw/xen/xen-pvh-common.c             |   2 +-
+>   hw/xtensa/virt.c                    |   2 +-
+>   include/hw/misc/pvpanic.h           |   1 +
+>   include/hw/pci-host/gpex.h          |   7 +-
+>   include/hw/pci/pci_ids.h            |   1 +
+>   include/hw/qdev-properties-system.h |   5 +
+>   include/hw/virtio/virtio-blk.h      |  11 +-
+>   include/hw/vmapple/vmapple.h        |  23 +
+>   include/qemu-main.h                 |  14 +-
+>   include/qemu/cutils.h               |  15 +
+>   meson.build                         |   5 +
+>   qapi/virtio.json                    |  14 +
+>   system/main.c                       |  37 +-
+>   ui/cocoa.m                          |  54 +-
+>   ui/gtk.c                            |   4 +
+>   ui/sdl2.c                           |   4 +
+>   util/hexdump.c                      |  18 +
+>   52 files changed, 3791 insertions(+), 110 deletions(-)
+>   create mode 100755 contrib/vmapple/uuid.sh
+>   create mode 100644 docs/system/arm/vmapple.rst
+>   create mode 100644 hw/display/apple-gfx-mmio.m
+>   create mode 100644 hw/display/apple-gfx-pci.m
+>   create mode 100644 hw/display/apple-gfx.h
+>   create mode 100644 hw/display/apple-gfx.m
+>   create mode 100644 hw/misc/pvpanic-mmio.c
+>   create mode 100644 hw/vmapple/Kconfig
+>   create mode 100644 hw/vmapple/aes.c
+>   create mode 100644 hw/vmapple/bdif.c
+>   create mode 100644 hw/vmapple/cfg.c
+>   create mode 100644 hw/vmapple/meson.build
+>   create mode 100644 hw/vmapple/trace-events
+>   create mode 100644 hw/vmapple/trace.h
+>   create mode 100644 hw/vmapple/virtio-blk.c
+>   create mode 100644 hw/vmapple/vmapple.c
+>   create mode 100644 include/hw/vmapple/vmapple.h
+> 
 
-Sounds good.
-
---0000000000001f2e31062a51a4ce
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><div dir=3D"ltr"><br></div><br><div class=3D"gmail_quote g=
-mail_quote_container"><div dir=3D"ltr" class=3D"gmail_attr">On Fri, 27 Dec =
-2024 at 21:41, Philippe Mathieu-Daud=C3=A9 &lt;<a href=3D"mailto:philmd@lin=
-aro.org">philmd@linaro.org</a>&gt; wrote:<br></div><blockquote class=3D"gma=
-il_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,2=
-04,204);padding-left:1ex">On 27/12/24 21:12, Phil Dennis-Jordan wrote:<br>
-<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt; diff --git a/hw/vmapple/Kconfig b/hw/vmapple/=
-Kconfig<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt; index bcd1be63e3..6a4c4a7fa2 100644<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt; --- a/hw/vmapple/Kconfig<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt; +++ b/hw/vmapple/Kconfig<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt; @@ -10,3 +10,23 @@ config VMAPPLE_CFG<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt;=C2=A0 =C2=A0config VMAPPLE_VIRTIO_BLK<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0bool<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt; +config VMAPPLE<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt; +=C2=A0 =C2=A0 bool<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt; +=C2=A0 =C2=A0 depends on ARM<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt; +=C2=A0 =C2=A0 depends on HVF<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt; +=C2=A0 =C2=A0 default y if ARM<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt; +=C2=A0 =C2=A0 imply PCI_DEVICES<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt; +=C2=A0 =C2=A0 select ARM_GIC<br>
-&gt; <br>
-&gt;=C2=A0 =C2=A0 =C2=A0Hmmm I&#39;m getting ...:<br>
-&gt; <br>
-&gt;=C2=A0 =C2=A0 =C2=A0qemu-system-aarch64: unknown type &#39;arm-gicv3&#3=
-9;<br>
-&gt; <br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt; +=C2=A0 =C2=A0 select PLATFORM_BUS<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt; +=C2=A0 =C2=A0 select PCI_EXPRESS<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt; +=C2=A0 =C2=A0 select PCI_EXPRESS_GENERIC_BRI=
-DGE<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt; +=C2=A0 =C2=A0 select PL011 # UART<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt; +=C2=A0 =C2=A0 select PL031 # RTC<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt; +=C2=A0 =C2=A0 select PL061 # GPIO<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt; +=C2=A0 =C2=A0 select GPIO_PWR<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt; +=C2=A0 =C2=A0 select PVPANIC_MMIO<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt; +=C2=A0 =C2=A0 select VMAPPLE_AES<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt; +=C2=A0 =C2=A0 select VMAPPLE_BDIF<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt; +=C2=A0 =C2=A0 select VMAPPLE_CFG<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt; +=C2=A0 =C2=A0 select MAC_PVG_MMIO<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt; +=C2=A0 =C2=A0 select VMAPPLE_VIRTIO_BLK<br>
-&gt; <br>
-&gt; <br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt; +static void create_gic(VMAppleMachineState *=
-vms, MemoryRegion *mem)<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt; +{<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt; +=C2=A0 =C2=A0 MachineState *ms =3D MACHINE(v=
-ms);<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt; +=C2=A0 =C2=A0 /* We create a standalone GIC =
-*/<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt; +=C2=A0 =C2=A0 SysBusDevice *gicbusdev;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt; +=C2=A0 =C2=A0 QList *redist_region_count;<br=
->
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt; +=C2=A0 =C2=A0 int i;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt; +=C2=A0 =C2=A0 unsigned int smp_cpus =3D ms-&=
-gt;smp.cpus;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt; +<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt; +=C2=A0 =C2=A0 vms-&gt;gic =3D qdev_new(gicv3=
-_class_name());<br>
-&gt; <br>
-&gt;=C2=A0 =C2=A0 =C2=A0... I suppose due to this call ^^^.<br>
-&gt; <br>
-&gt;=C2=A0 =C2=A0 =C2=A0$ git grep arm-gicv3<br>
-&gt;=C2=A0 =C2=A0 =C2=A0hw/intc/arm_gicv3_kvm.c:45:#define TYPE_KVM_ARM_GIC=
-V3 &quot;kvm-arm-gicv3&quot;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0include/hw/intc/arm_gicv3.h:18:#define TYPE_ARM_GIC=
-V3 &quot;arm-gicv3&quot;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0$ git grep TYPE_ARM_GICV3<br>
-&gt;=C2=A0 =C2=A0 =C2=A0hw/intc/arm_gicv3.c:466:=C2=A0 =C2=A0 .name =3D TYP=
-E_ARM_GICV3,<br>
-&gt;=C2=A0 =C2=A0 =C2=A0$ git grep -FW arm_gicv3.c<br>
-&gt;=C2=A0 =C2=A0 =C2=A0hw/intc/meson.build=3D9=3Dsystem_ss.add(when: &#39;=
-CONFIG_ARM_GICV3_TCG&#39;,<br>
-&gt;=C2=A0 =C2=A0 =C2=A0if_true: files(<br>
-&gt;=C2=A0 =C2=A0 =C2=A0hw/intc/meson.build:10:=C2=A0 &#39;arm_gicv3.c&#39;=
-,<br>
-&gt;=C2=A0 =C2=A0 =C2=A0...<br>
-&gt; <br>
-&gt; <br>
-&gt; Ahhh, good catch! I suppose this is with =E2=80=94disable-tcg (or equi=
-valent)<br>
-<br>
-Yes, this is how I test HVF.<br>
-<br>
-&gt; <br>
-&gt; <br>
-&gt;=C2=A0 =C2=A0 =C2=A0I think commit a8a5546798c (&quot;hw/intc/arm_gicv3=
-: Introduce<br>
-&gt;=C2=A0 =C2=A0 =C2=A0CONFIG_ARM_GIC_TCG Kconfig selector&quot;) is inval=
-id as being<br>
-&gt;=C2=A0 =C2=A0 =C2=A0too restrictive.<br>
-&gt; <br>
-&gt;=C2=A0 =C2=A0 =C2=A0I can go a bit further with these changes on top (i=
-gnoring<br>
-&gt;=C2=A0 =C2=A0 =C2=A0renaming ARM_GICV3_TCG -&gt; ARM_GICV3):<br>
-&gt; <br>
-&gt; <br>
-&gt;=C2=A0 =C2=A0 =C2=A0-- &gt;8 --<br>
-&gt;=C2=A0 =C2=A0 =C2=A0diff --git a/hw/intc/Kconfig b/hw/intc/Kconfig<br>
-&gt;=C2=A0 =C2=A0 =C2=A0index dd405bdb5d2..9e06c05b449 100644<br>
-&gt;=C2=A0 =C2=A0 =C2=A0--- a/hw/intc/Kconfig<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+++ b/hw/intc/Kconfig<br>
-&gt;=C2=A0 =C2=A0 =C2=A0@@ -26 +26 @@ config ARM_GIC<br>
-&gt;=C2=A0 =C2=A0 =C2=A0-=C2=A0 =C2=A0 select ARM_GICV3_TCG if TCG<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 select ARM_GICV3_TCG if TCG || HVF<b=
-r>
-&gt;=C2=A0 =C2=A0 =C2=A0@@ -32 +32 @@ config ARM_GICV3_TCG<br>
-&gt;=C2=A0 =C2=A0 =C2=A0-=C2=A0 =C2=A0 depends on ARM_GIC &amp;&amp; TCG<br=
->
-&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 depends on ARM_GIC &amp;&amp; (TCG |=
-| HVF)<br>
-<br>
-Now implemented as [*]:<br>
-<a href=3D"https://lore.kernel.org/qemu-devel/20241227202435.48055-1-philmd=
-@linaro.org/" rel=3D"noreferrer" target=3D"_blank">https://lore.kernel.org/=
-qemu-devel/20241227202435.48055-1-philmd@linaro.org/</a><br>
-<br>
-&gt;=C2=A0 =C2=A0 =C2=A0diff --git a/hw/vmapple/Kconfig b/hw/vmapple/Kconfi=
-g<br>
-&gt;=C2=A0 =C2=A0 =C2=A0index 6a4c4a7fa2e..374a89f6a8f 100644<br>
-&gt;=C2=A0 =C2=A0 =C2=A0--- a/hw/vmapple/Kconfig<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+++ b/hw/vmapple/Kconfig<br>
-&gt;=C2=A0 =C2=A0 =C2=A0@@ -19 +19 @@ config VMAPPLE<br>
-&gt;=C2=A0 =C2=A0 =C2=A0-=C2=A0 =C2=A0 select ARM_GIC<br>
-&gt;=C2=A0 =C2=A0 =C2=A0+=C2=A0 =C2=A0 select ARM_GICV3_TCG<br>
-&gt; <br>
-&gt; <br>
-&gt; Is this last part necessary/advisable? It would seem like the above <b=
-r>
-&gt; changes in hw/intc/Kconfig should make ARM_GIC work too?<br>
-&gt; (The PVG dependency means we currently can=E2=80=99t support anything =
-other than <br>
-&gt; macOS host systems and thus HVF or theoretically TCG anyway, but if QE=
-MU <br>
-&gt; gained support for the HVF-provided GIC implementation, we=E2=80=99d n=
-eed to <br>
-&gt; change this line again.)<br>
-<br>
-Hmm indeed we can skip it, but vmapple machine enforces rev=3D3:<br>
-<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 &gt; +=C2=A0 =C2=A0 qdev_prop_set_uint32(vms-&gt;g=
-ic, &quot;revision&quot;, 3);<br>
-<br>
-So directly selecting ARM_GICV3 sounds more explicit to me.<br></blockquote=
-><div><br></div><div>That&#39;s true.</div><div><br></div><div>We can sort =
-out the HVF GICV3 if and when that ever gets implemented.<br></div><div>=C2=
-=A0</div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8e=
-x;border-left:1px solid rgb(204,204,204);padding-left:1ex">
-The diff is now (on top of [*]):<br>
-<br>
-=C2=A0 =C2=A0 =C2=A0 -=C2=A0 =C2=A0 select ARM_GIC<br>
-=C2=A0 =C2=A0 =C2=A0 +=C2=A0 =C2=A0 select ARM_GICV3<br>
-<br>
-WDYT?<br></blockquote><div><br></div><div>Sounds good. <br></div></div></di=
-v>
-
---0000000000001f2e31062a51a4ce--
 
