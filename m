@@ -4,112 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8CF8EE77188
-	for <qemu-riscv@archiver.kernel.org>; Thu,  2 Jan 2025 15:48:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2C26FE77188
+	for <qemu-riscv@archiver.kernel.org>; Thu,  2 Jan 2025 18:20:49 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tTNQN-0005lD-KK; Thu, 02 Jan 2025 10:47:51 -0500
+	id 1tTPk8-0008Fq-U8; Thu, 02 Jan 2025 13:16:25 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <farosas@suse.de>)
- id 1tTNQL-0005h6-3y; Thu, 02 Jan 2025 10:47:49 -0500
-Received: from smtp-out2.suse.de ([2a07:de40:b251:101:10:150:64:2])
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1tTPjt-0007PR-ND
+ for qemu-riscv@nongnu.org; Thu, 02 Jan 2025 13:16:11 -0500
+Received: from mail-pj1-x102b.google.com ([2607:f8b0:4864:20::102b])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <farosas@suse.de>)
- id 1tTNQI-00041j-GJ; Thu, 02 Jan 2025 10:47:47 -0500
-Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org
- [IPv6:2a07:de40:b281:104:10:150:64:97])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-out2.suse.de (Postfix) with ESMTPS id 605A31F38E;
- Thu,  2 Jan 2025 15:47:41 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
- t=1735832861; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=vzzTzugfY2cOu1CYxY5Exva4j1143V3xxTP+ZttxU9Y=;
- b=sbLc/cJdFzA0DNndjbTYEeMeirfFhZc8AsspjG56zyET4uSQMEtGDGH5XvgqFmD6Oyo8EZ
- ERiSiXQTxpsYwUNFnLcM7KnpiInsi/3RGBdAM3c8CZJpLk3LV5JKpmlkfziz1ORgPbrsYV
- 4RmoWdNPc6DmT+pzyj85i+H9EJ4ff5I=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
- s=susede2_ed25519; t=1735832861;
- h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=vzzTzugfY2cOu1CYxY5Exva4j1143V3xxTP+ZttxU9Y=;
- b=p3HehVOoBZa/DAAC5e974qxr6PfYiPg8GIXzJWKuIThUe/LftAHrDbuulMLX4is/70iXB5
- psSF0Tf6s6prZZDA==
-Authentication-Results: smtp-out2.suse.de;
- dkim=pass header.d=suse.de header.s=susede2_rsa header.b="sbLc/cJd";
- dkim=pass header.d=suse.de header.s=susede2_ed25519 header.b=p3HehVOo
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
- t=1735832861; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=vzzTzugfY2cOu1CYxY5Exva4j1143V3xxTP+ZttxU9Y=;
- b=sbLc/cJdFzA0DNndjbTYEeMeirfFhZc8AsspjG56zyET4uSQMEtGDGH5XvgqFmD6Oyo8EZ
- ERiSiXQTxpsYwUNFnLcM7KnpiInsi/3RGBdAM3c8CZJpLk3LV5JKpmlkfziz1ORgPbrsYV
- 4RmoWdNPc6DmT+pzyj85i+H9EJ4ff5I=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
- s=susede2_ed25519; t=1735832861;
- h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=vzzTzugfY2cOu1CYxY5Exva4j1143V3xxTP+ZttxU9Y=;
- b=p3HehVOoBZa/DAAC5e974qxr6PfYiPg8GIXzJWKuIThUe/LftAHrDbuulMLX4is/70iXB5
- psSF0Tf6s6prZZDA==
-Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id D3E5A132EA;
- Thu,  2 Jan 2025 15:47:40 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
- by imap1.dmz-prg2.suse.org with ESMTPSA id cUpXJRy1dme5JwAAD6G6ig
- (envelope-from <farosas@suse.de>); Thu, 02 Jan 2025 15:47:40 +0000
-From: Fabiano Rosas <farosas@suse.de>
-To: Ivan Klokov <ivan.klokov@syntacore.com>, qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, palmer@dabbelt.com, alistair.francis@wdc.com,
- bmeng.cn@gmail.com, liwei1518@gmail.com, dbarboza@ventanamicro.com,
- zhiwei_liu@linux.alibaba.com, lvivier@redhat.com, pbonzini@redhat.com,
- Ivan Klokov <ivan.klokov@syntacore.com>
-Subject: Re: [PATCH v8 0/2] Support RISC-V CSR read/write in Qtest environment
-In-Reply-To: <20241225123718.45991-1-ivan.klokov@syntacore.com>
-References: <20241225123718.45991-1-ivan.klokov@syntacore.com>
-Date: Thu, 02 Jan 2025 12:47:38 -0300
-Message-ID: <87ttah8bfp.fsf@suse.de>
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1tTPjo-0006sQ-QB
+ for qemu-riscv@nongnu.org; Thu, 02 Jan 2025 13:16:09 -0500
+Received: by mail-pj1-x102b.google.com with SMTP id
+ 98e67ed59e1d1-2f441904a42so16360534a91.1
+ for <qemu-riscv@nongnu.org>; Thu, 02 Jan 2025 10:16:04 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1735841763; x=1736446563; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=6n3Ey0BMa2IfatRxBC8ClCoxhKKjolug6BuhijhMrb4=;
+ b=kNOTls45dz83dNll+S0rs90Ty2j4JjYNEoQhlcqZlVtFOe8PwTIgKhZA0GkECd1smB
+ j0f7YLU1/inpx2ttdGRPlCo7l4R5myK3WLM5pfltIJUDMvaZeJTaV3+bN9LcylTP/5tH
+ o1db6S6iO3C/WBcDNjDq0oNOT+Ujm12JsU9THva8ZYyiAakBEjmF19BD/Lt9v3Djh0gd
+ 54OuZ6HbqW1uE1TWDIr3V3aHuZBiQaqtnWpqcoUIo2S/RQzztelqnMh/Kp25RGXyalEB
+ Mnt219lklnM1oaFwodciJLY/SvDAvLkG10lCigfOicuBoeDhlJ0C/GsUYrfhuNiSwFmg
+ p2JQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1735841763; x=1736446563;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=6n3Ey0BMa2IfatRxBC8ClCoxhKKjolug6BuhijhMrb4=;
+ b=PXbomeTdJ7v1E/u1ElGBKWVZSm/libWlc8Ah4qs4opxnt0/QYnAXD9AhJIE5j6APBa
+ XD/qSNs9liFpDNeOceWXNBi0oXgfzbcJGL+u4IcVNlduRuidvnF0DZxJyIEgNfbxwQZs
+ 53vToukF2On8jwxFE6hcawwIJmuAUupfvci8VFLIq6D3eiO9xEeKafGhkMOL3iwz1JkX
+ tLkvnO4WKhTLr4Tq8hyp33QTj73Ju9O5/MseFrcdQtZVRHlbPLryyxsfqErjaUyAH4Jw
+ V7pQQUhYp3CLArKRTe1XY/l6C2CFdYEKxX5V3hEO7xO36rN4ZqsyUoRAXj7QWjY3Bt4N
+ wJMg==
+X-Gm-Message-State: AOJu0YyYvDYSSvxJ0wh4AAqvJaettE5uyeK2eYdIJ4ZQlegFtwjtPzKZ
+ OfgJJTT9EbLwVLbctr2+m2zM7EUDQ3YayVmt2wmYNMuHr/pZs2F2VPSr8SrxzY/RThSduk0KYIz
+ w
+X-Gm-Gg: ASbGncvq7Jr8CbkfZ7lXD9jC6Y3GMlt30KJIrV35PglFmJhB8PiAFowTEW2kHwHo/aB
+ 9zmiN0NnEWaWbt9icmX1KiKPZGx+F+VU0rCcDlpAoITJlk9DxqKy0UYnwytqvCe6IekY3kb/z/q
+ CaV3iacxJ8ucvttRWCafH+XHLZ9Qcz5XZJjzeqXYn9+QVdy6H/kOY6C7Lk9IewqxoFJx0Wf66ob
+ i3rLUdSwRpc+728E67J0Xsz+FIqTTjFDAqOM1Z54my9qYam3UEyHVBUFNLsww==
+X-Google-Smtp-Source: AGHT+IEbv6jRzoHjZUHIoSd5rezU6F6dIGTr1rLMUc0BitnFiESjNOmtuyfKKG76NnFWq2ORgcgq2w==
+X-Received: by 2002:a17:90b:2e4a:b0:2ea:b564:4b31 with SMTP id
+ 98e67ed59e1d1-2f452e3db0bmr68138350a91.19.1735841762961; 
+ Thu, 02 Jan 2025 10:16:02 -0800 (PST)
+Received: from stoup.. ([63.239.63.212]) by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-219dc9f68e4sm230148315ad.211.2025.01.02.10.16.02
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 02 Jan 2025 10:16:02 -0800 (PST)
+From: Richard Henderson <richard.henderson@linaro.org>
+To: qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org,
+	palmer@dabbelt.com,
+	Alistair.Francis@wdc.com
+Subject: [PATCH 0/2] tcg/riscv: Use BEXTI for single-bit extractions
+Date: Thu,  2 Jan 2025 10:15:59 -0800
+Message-ID: <20250102181601.1421059-1-richard.henderson@linaro.org>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Content-Type: text/plain
-X-Rspamd-Queue-Id: 605A31F38E
-X-Spamd-Result: default: False [-2.97 / 50.00]; BAYES_HAM(-2.96)[99.83%];
- SUSPICIOUS_RECIPS(1.50)[]; NEURAL_HAM_LONG(-1.00)[-1.000];
- R_DKIM_ALLOW(-0.20)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
- NEURAL_HAM_SHORT(-0.20)[-0.998]; MIME_GOOD(-0.10)[text/plain];
- MX_GOOD(-0.01)[]; TO_MATCH_ENVRCPT_ALL(0.00)[];
- FUZZY_BLOCKED(0.00)[rspamd.com]; ARC_NA(0.00)[];
- DKIM_SIGNED(0.00)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
- RCPT_COUNT_TWELVE(0.00)[12]; MIME_TRACE(0.00)[0:+];
- FREEMAIL_ENVRCPT(0.00)[gmail.com]; RCVD_TLS_ALL(0.00)[];
- TO_DN_SOME(0.00)[]; RCVD_COUNT_TWO(0.00)[2];
- FROM_EQ_ENVFROM(0.00)[]; FROM_HAS_DN(0.00)[];
- FREEMAIL_CC(0.00)[nongnu.org,dabbelt.com,wdc.com,gmail.com,ventanamicro.com,linux.alibaba.com,redhat.com,syntacore.com];
- MID_RHS_MATCH_FROM(0.00)[]; RCVD_VIA_SMTP_AUTH(0.00)[];
- TAGGED_RCPT(0.00)[]; DKIM_TRACE(0.00)[suse.de:+];
- MISSING_XM_UA(0.00)[];
- DBL_BLOCKED_OPENRESOLVER(0.00)[suse.de:dkim,suse.de:mid]
-X-Rspamd-Server: rspamd2.dmz-prg2.suse.org
-X-Rspamd-Action: no action
-Received-SPF: pass client-ip=2a07:de40:b251:101:10:150:64:2;
- envelope-from=farosas@suse.de; helo=smtp-out2.suse.de
-X-Spam_score_int: -43
-X-Spam_score: -4.4
-X-Spam_bar: ----
-X-Spam_report: (-4.4 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::102b;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pj1-x102b.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -125,32 +96,29 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Ivan Klokov <ivan.klokov@syntacore.com> writes:
+Based-on: 20250102180654.1420056-1-richard.henderson@linaro.org
+("[PATCH 00/73] tcg: Merge *_i32 and *_i64 opcodes")
 
-> These patches add functionality for unit testing RISC-V-specific registers.
-> The first patch adds a Qtest backend, and the second implements a simple test.
->
-> ---
-> v8:
->    - Delete RFC label.
-> v7:
->    - Fix build errors, add Reviewed-by, Acked-by.
-> ---
->
-> Ivan Klokov (2):
->   target/riscv: Add RISC-V CSR qtest support
->   tests/qtest: QTest example for RISC-V CSR register
->
->  hw/riscv/riscv_hart.c        | 56 ++++++++++++++++++++++++++++++++++++
->  tests/qtest/libqtest.c       | 27 +++++++++++++++++
->  tests/qtest/libqtest.h       | 14 +++++++++
->  tests/qtest/meson.build      |  2 +-
->  tests/qtest/riscv-csr-test.c | 56 ++++++++++++++++++++++++++++++++++++
->  5 files changed, 154 insertions(+), 1 deletion(-)
->  create mode 100644 tests/qtest/riscv-csr-test.c
+While riscv does not yet have a completely general extract,
+the Zbs extension added a single-bit extract.
 
-Hi, there are some CI jobs failing with this series, could you take a
-look?
+Tested on cfarm95, a Banana Pi BPI-F3.
 
-https://gitlab.com/farosas/qemu/-/pipelines/1609210965
+
+r~
+
+
+Richard Henderson (2):
+  util/cpuinfo-riscv: Detect Zbs
+  tcg/riscv: Use BEXTI for single-bit extractions
+
+ host/include/riscv/host/cpuinfo.h |  5 +++--
+ tcg/riscv/tcg-target-has.h        |  8 +++++++-
+ util/cpuinfo-riscv.c              | 18 ++++++++++++++++--
+ tcg/riscv/tcg-target.c.inc        | 13 +++++++++++--
+ 4 files changed, 37 insertions(+), 7 deletions(-)
+
+-- 
+2.43.0
+
 
