@@ -4,83 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2C26FE77188
-	for <qemu-riscv@archiver.kernel.org>; Thu,  2 Jan 2025 18:20:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 889CDE7718B
+	for <qemu-riscv@archiver.kernel.org>; Thu,  2 Jan 2025 18:27:36 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tTPk8-0008Fq-U8; Thu, 02 Jan 2025 13:16:25 -0500
+	id 1tTPk5-0007wX-Dh; Thu, 02 Jan 2025 13:16:21 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1tTPjt-0007PR-ND
- for qemu-riscv@nongnu.org; Thu, 02 Jan 2025 13:16:11 -0500
-Received: from mail-pj1-x102b.google.com ([2607:f8b0:4864:20::102b])
+ id 1tTPjt-0007Pk-TS
+ for qemu-riscv@nongnu.org; Thu, 02 Jan 2025 13:16:12 -0500
+Received: from mail-pl1-x62b.google.com ([2607:f8b0:4864:20::62b])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1tTPjo-0006sQ-QB
+ id 1tTPjq-0006se-Te
  for qemu-riscv@nongnu.org; Thu, 02 Jan 2025 13:16:09 -0500
-Received: by mail-pj1-x102b.google.com with SMTP id
- 98e67ed59e1d1-2f441904a42so16360534a91.1
- for <qemu-riscv@nongnu.org>; Thu, 02 Jan 2025 10:16:04 -0800 (PST)
+Received: by mail-pl1-x62b.google.com with SMTP id
+ d9443c01a7336-2163dc5155fso156103565ad.0
+ for <qemu-riscv@nongnu.org>; Thu, 02 Jan 2025 10:16:05 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1735841763; x=1736446563; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=6n3Ey0BMa2IfatRxBC8ClCoxhKKjolug6BuhijhMrb4=;
- b=kNOTls45dz83dNll+S0rs90Ty2j4JjYNEoQhlcqZlVtFOe8PwTIgKhZA0GkECd1smB
- j0f7YLU1/inpx2ttdGRPlCo7l4R5myK3WLM5pfltIJUDMvaZeJTaV3+bN9LcylTP/5tH
- o1db6S6iO3C/WBcDNjDq0oNOT+Ujm12JsU9THva8ZYyiAakBEjmF19BD/Lt9v3Djh0gd
- 54OuZ6HbqW1uE1TWDIr3V3aHuZBiQaqtnWpqcoUIo2S/RQzztelqnMh/Kp25RGXyalEB
- Mnt219lklnM1oaFwodciJLY/SvDAvLkG10lCigfOicuBoeDhlJ0C/GsUYrfhuNiSwFmg
- p2JQ==
+ d=linaro.org; s=google; t=1735841764; x=1736446564; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=AsTQ0M7Ew3tLGi+O218NnOIxDCbwYi5kOq0GHTv2YVY=;
+ b=BXQNJYynvo6h6+z+zdfb4l87+Ee1AMdusC4vZDA4uwWAw/+rXRG+4aGUjtkdQwdClV
+ VumDCWugl/5fayzw0h7QeAA8IR1KrtM0HBBL3akDJmavuOk9ilj5mnmsqewLPXSnr6sB
+ +E71U77xfE/YJ0Hy/F0f+h/EyoQP9hyNW6pNsTU70XFxh3kzPswylhoQ2WNdgS4a1q/6
+ 4YxgNTafrDV2QXbX8GpD/uW1lxyaO6NnBoeV99UFavs30PsKxNeM0KhLhudkfWxeM7Dc
+ oXypQQQ3Jx1Mn3752qKlnWuc8qcyl7/TIJXs2p4K618hh6yeFXqmKUC3ti6bHFKArHEb
+ ITew==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1735841763; x=1736446563;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=6n3Ey0BMa2IfatRxBC8ClCoxhKKjolug6BuhijhMrb4=;
- b=PXbomeTdJ7v1E/u1ElGBKWVZSm/libWlc8Ah4qs4opxnt0/QYnAXD9AhJIE5j6APBa
- XD/qSNs9liFpDNeOceWXNBi0oXgfzbcJGL+u4IcVNlduRuidvnF0DZxJyIEgNfbxwQZs
- 53vToukF2On8jwxFE6hcawwIJmuAUupfvci8VFLIq6D3eiO9xEeKafGhkMOL3iwz1JkX
- tLkvnO4WKhTLr4Tq8hyp33QTj73Ju9O5/MseFrcdQtZVRHlbPLryyxsfqErjaUyAH4Jw
- V7pQQUhYp3CLArKRTe1XY/l6C2CFdYEKxX5V3hEO7xO36rN4ZqsyUoRAXj7QWjY3Bt4N
- wJMg==
-X-Gm-Message-State: AOJu0YyYvDYSSvxJ0wh4AAqvJaettE5uyeK2eYdIJ4ZQlegFtwjtPzKZ
- OfgJJTT9EbLwVLbctr2+m2zM7EUDQ3YayVmt2wmYNMuHr/pZs2F2VPSr8SrxzY/RThSduk0KYIz
- w
-X-Gm-Gg: ASbGncvq7Jr8CbkfZ7lXD9jC6Y3GMlt30KJIrV35PglFmJhB8PiAFowTEW2kHwHo/aB
- 9zmiN0NnEWaWbt9icmX1KiKPZGx+F+VU0rCcDlpAoITJlk9DxqKy0UYnwytqvCe6IekY3kb/z/q
- CaV3iacxJ8ucvttRWCafH+XHLZ9Qcz5XZJjzeqXYn9+QVdy6H/kOY6C7Lk9IewqxoFJx0Wf66ob
- i3rLUdSwRpc+728E67J0Xsz+FIqTTjFDAqOM1Z54my9qYam3UEyHVBUFNLsww==
-X-Google-Smtp-Source: AGHT+IEbv6jRzoHjZUHIoSd5rezU6F6dIGTr1rLMUc0BitnFiESjNOmtuyfKKG76NnFWq2ORgcgq2w==
-X-Received: by 2002:a17:90b:2e4a:b0:2ea:b564:4b31 with SMTP id
- 98e67ed59e1d1-2f452e3db0bmr68138350a91.19.1735841762961; 
- Thu, 02 Jan 2025 10:16:02 -0800 (PST)
+ d=1e100.net; s=20230601; t=1735841764; x=1736446564;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=AsTQ0M7Ew3tLGi+O218NnOIxDCbwYi5kOq0GHTv2YVY=;
+ b=o0g4EJCVz7YNE6G8AD1farBWDPnvwkgnf0DPmW0vVN8RyMZusvzMdcpkiAmIJo5A39
+ JSwbg0SF0QRSejxDho1t+CfWEMcTlG9PAcLh+2OS6G6Y+dYcFTJeFlGWGVVYNZyftX4v
+ ijC+nPi0olv5TduIbc7DNf1d8mIYIyogZJZZ8QcqVKlvHYU8oUJPuSjjQqP2970Gowda
+ hGRJ8kPRqIWUKUHPQpLshxEKZddcmCJu2SImqM1EkXnJGY2Zl03x9uXKsdN/EwC55D1y
+ YM/o7u36Iy/hu8FnTQL9bReNjJAZS2GglQYlFKS45yMBIbUBNWedyMjOUc0L092EpiGs
+ cZ0A==
+X-Gm-Message-State: AOJu0Yw/oFUgzX2rFMnjZoKqsEnvu4nSpHupv2XFJ4ZqGqvMsUSx1sxN
+ ZETtzHmzffM2KHq2G/HXFJG+N5oQmg0Q+eJMnFObwR2SrGGz5TM5yuyf+V85pR0=
+X-Gm-Gg: ASbGncuvhznzFjw/Ztk0WGtYh63ZQWG+n8lhIyhOaEXC4k2tQElD34tXGUUznk1eu+z
+ r5PmuIeNDYX+G3CG5AZcOQFEZS0w9dCBB5NidLEJv8jjkhnvGqUfqklmBGTl2vNAW3DDnWk/oFz
+ tqI/PTVjfekmVJd8mTOj/6OZeDpgn1NaHlrTaIm9P8O+xQNmdbMPiyPkGcHpshS++rr4QALZWzL
+ hb89oa/iZNAZ3OGptIfSjdkcH/zCRXBT9MGlKQvZznaGajTSkRTjHk5q4vzEw==
+X-Google-Smtp-Source: AGHT+IHB9y3/tACCwbOijgfWnUwLDPrz+f6EZINXD++wYeTpdbP3tNqLvdvV7WHTo78M6yIWuy1HYg==
+X-Received: by 2002:a17:902:e945:b0:215:4a4e:9262 with SMTP id
+ d9443c01a7336-219e6e8c58amr708525275ad.8.1735841764530; 
+ Thu, 02 Jan 2025 10:16:04 -0800 (PST)
 Received: from stoup.. ([63.239.63.212]) by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-219dc9f68e4sm230148315ad.211.2025.01.02.10.16.02
+ d9443c01a7336-219dc9f68e4sm230148315ad.211.2025.01.02.10.16.03
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 02 Jan 2025 10:16:02 -0800 (PST)
+ Thu, 02 Jan 2025 10:16:04 -0800 (PST)
 From: Richard Henderson <richard.henderson@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org,
 	palmer@dabbelt.com,
 	Alistair.Francis@wdc.com
-Subject: [PATCH 0/2] tcg/riscv: Use BEXTI for single-bit extractions
-Date: Thu,  2 Jan 2025 10:15:59 -0800
-Message-ID: <20250102181601.1421059-1-richard.henderson@linaro.org>
+Subject: [PATCH 2/2] tcg/riscv: Use BEXTI for single-bit extractions
+Date: Thu,  2 Jan 2025 10:16:01 -0800
+Message-ID: <20250102181601.1421059-3-richard.henderson@linaro.org>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20250102181601.1421059-1-richard.henderson@linaro.org>
+References: <20250102181601.1421059-1-richard.henderson@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::102b;
- envelope-from=richard.henderson@linaro.org; helo=mail-pj1-x102b.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::62b;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pl1-x62b.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -96,28 +98,63 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Based-on: 20250102180654.1420056-1-richard.henderson@linaro.org
-("[PATCH 00/73] tcg: Merge *_i32 and *_i64 opcodes")
+Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
+---
+ tcg/riscv/tcg-target-has.h |  8 +++++++-
+ tcg/riscv/tcg-target.c.inc | 13 +++++++++++--
+ 2 files changed, 18 insertions(+), 3 deletions(-)
 
-While riscv does not yet have a completely general extract,
-the Zbs extension added a single-bit extract.
-
-Tested on cfarm95, a Banana Pi BPI-F3.
-
-
-r~
-
-
-Richard Henderson (2):
-  util/cpuinfo-riscv: Detect Zbs
-  tcg/riscv: Use BEXTI for single-bit extractions
-
- host/include/riscv/host/cpuinfo.h |  5 +++--
- tcg/riscv/tcg-target-has.h        |  8 +++++++-
- util/cpuinfo-riscv.c              | 18 ++++++++++++++++--
- tcg/riscv/tcg-target.c.inc        | 13 +++++++++++--
- 4 files changed, 37 insertions(+), 7 deletions(-)
-
+diff --git a/tcg/riscv/tcg-target-has.h b/tcg/riscv/tcg-target-has.h
+index 10e61edc45..ea38ee5cbb 100644
+--- a/tcg/riscv/tcg-target-has.h
++++ b/tcg/riscv/tcg-target-has.h
+@@ -64,7 +64,13 @@ tcg_target_extract_valid(TCGType type, unsigned ofs, unsigned len)
+         /* ofs > 0 uses SRLIW; ofs == 0 uses add.uw. */
+         return ofs || (cpuinfo & CPUINFO_ZBA);
+     }
+-    return (cpuinfo & CPUINFO_ZBB) && ofs == 0 && len == 16;
++    switch (len) {
++    case 1:
++        return (cpuinfo & CPUINFO_ZBS) && ofs != 0;
++    case 16:
++        return (cpuinfo & CPUINFO_ZBB) && ofs == 0;
++    }
++    return false;
+ }
+ #define TCG_TARGET_extract_valid  tcg_target_extract_valid
+ 
+diff --git a/tcg/riscv/tcg-target.c.inc b/tcg/riscv/tcg-target.c.inc
+index 12c3cffcc0..83ec7cd980 100644
+--- a/tcg/riscv/tcg-target.c.inc
++++ b/tcg/riscv/tcg-target.c.inc
+@@ -162,6 +162,7 @@ typedef enum {
+     OPC_ANDI = 0x7013,
+     OPC_AUIPC = 0x17,
+     OPC_BEQ = 0x63,
++    OPC_BEXTI = 0x48005013,
+     OPC_BGE = 0x5063,
+     OPC_BGEU = 0x7063,
+     OPC_BLT = 0x4063,
+@@ -2307,9 +2308,17 @@ static void tcg_out_op(TCGContext *s, TCGOpcode opc, TCGType type,
+             } else {
+                 tcg_out_opc_imm(s, OPC_SRLIW, a0, a1, a2);
+             }
+-        } else if (a2 == 0 && args[3] == 16) {
++            break;
++        }
++        switch (args[3]) {
++        case 1:
++            tcg_out_opc_imm(s, OPC_BEXTI, a0, a1, a2);
++            break;
++        case 16:
++            tcg_debug_assert(a2 == 0);
+             tcg_out_ext16u(s, a0, a1);
+-        } else {
++            break;
++        default:
+             g_assert_not_reached();
+         }
+         break;
 -- 
 2.43.0
 
