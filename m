@@ -4,84 +4,102 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7A662E7718B
-	for <qemu-riscv@archiver.kernel.org>; Thu,  2 Jan 2025 18:28:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A6C87E77188
+	for <qemu-riscv@archiver.kernel.org>; Sat,  4 Jan 2025 15:16:02 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tTPk4-0007qh-10; Thu, 02 Jan 2025 13:16:21 -0500
+	id 1tU5rm-00059e-Lk; Sat, 04 Jan 2025 10:15:06 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1tTPjt-0007PS-Q7
- for qemu-riscv@nongnu.org; Thu, 02 Jan 2025 13:16:12 -0500
-Received: from mail-pl1-x62c.google.com ([2607:f8b0:4864:20::62c])
+ (Exim 4.90_1) (envelope-from <akihiko.odaki@daynix.com>)
+ id 1tU5rk-00056b-67
+ for qemu-riscv@nongnu.org; Sat, 04 Jan 2025 10:15:04 -0500
+Received: from mail-pl1-x629.google.com ([2607:f8b0:4864:20::629])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1tTPjq-0006sW-T7
- for qemu-riscv@nongnu.org; Thu, 02 Jan 2025 13:16:09 -0500
-Received: by mail-pl1-x62c.google.com with SMTP id
- d9443c01a7336-21669fd5c7cso160782915ad.3
- for <qemu-riscv@nongnu.org>; Thu, 02 Jan 2025 10:16:04 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <akihiko.odaki@daynix.com>)
+ id 1tU5rh-0007J7-2D
+ for qemu-riscv@nongnu.org; Sat, 04 Jan 2025 10:15:03 -0500
+Received: by mail-pl1-x629.google.com with SMTP id
+ d9443c01a7336-21675fd60feso243024755ad.2
+ for <qemu-riscv@nongnu.org>; Sat, 04 Jan 2025 07:15:00 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1735841764; x=1736446564; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=d8h/Admcq7JHr895Vta0jYiW589ICp9iFjYzF/Y3DHs=;
- b=zW9QM1Wf948cZJh/HCxUyUr2/afaIdWbr3rBYIxI3hw5QPgNsKRvDR/nsLJ/cDejuu
- v18QIvDQBgQ4h1kDgUJGvkTFZelUx/oiuTy5wZGtlBpp/2mTTMeYjx0RIOICY9FK8pRl
- Oi1zLN4HkZT+kmGGBuzsMtrMWtLjzAqX9Kvh6Z4AkyALc0Rq8bciEk5sbPC087yf58vM
- ZA4lxvVrBhgbJGVJLd+bSlACTg2X25uTmK9T8ckDSzjSX4zo7C1gK9GIb08X7/shMWmy
- 1PnB7/Y8a/alp8R5NQO5DZVGjfpDU+JGwlZHdPV40yc7IK/01B1TyGavtZSMqbj/NKWw
- txXA==
+ d=daynix-com.20230601.gappssmtp.com; s=20230601; t=1736003699; x=1736608499;
+ darn=nongnu.org; 
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=FU8KhsuOqn9kBc9Geg/C01qcucshJGqJzoeDRPZsMuI=;
+ b=OKFFU4EQh1bPWgj1N+o5mUl7xw4pwlDKpMy4YrLGsUbFTvORsfvDME6xWyov+uLf5i
+ zNwPL0UuNYfgek0YbjhEDx946SEfxOT0bF8a/5METEwPXzFPOWWIUqKpRR6+/YgPUo7k
+ fBfxKdQHStTkbwTAGYDNSui0q7eDl/n9L31fWDPRAySB4lu90mRcRHBKV69GMAzELtC0
+ wIGes42Y/jNbaHU9hF8YObQLSziOTMYyAKf7OvBPJ/gyY2j30VAcwEGcHBSUNImijJFY
+ lR9lYH1aEBSaBlCBnvehd85kkr+IMNBsG4q4BtL2a+1xTzsWrQoYFCRbJaxUhR121nAJ
+ neJQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1735841764; x=1736446564;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=d8h/Admcq7JHr895Vta0jYiW589ICp9iFjYzF/Y3DHs=;
- b=nSl0zdDTA2PY4CsA0HSPd6nMB6rRPoXxF2ks9iKpTyzv0Q7LzwT01m28P7RH8DklJM
- RxYX3F1p4d+Yc5hPKTD7nrmOrCtfvu1NZVYBiKUxwKvwLqNkCl1kiJhJRiXHGivdfYgb
- ZHc0AYj3a1bfvv4+nZvDmX/DDww0pQ7m1+CMia/0TJSQinM/4Lzj9+SFNGq2Mjp8lu0Y
- 8+CUgusRJQPqL7G5ai9kXRDQk+NfJ42gLTw0m3m/vENRvjknI5HlolGfpzGdOOMznjsb
- UgSDZck6iz0R4CmRE9ZgkCJJU8sFh0gAEasHQChZXK+uJRsMeSYHMqh8W4uYCejOjV+8
- Qr7w==
-X-Gm-Message-State: AOJu0YxTkD+wg+O7OLcPkpZWmzJqAzyvcfQd4PcydXwXB2fjFXVXtDP0
- 0vPNMvTH01hxkHj0LAdC4aF5dWoQ+dh/trkvuMyjGgAQBPwJGWgF9k7vl1o/neE=
-X-Gm-Gg: ASbGnctxcrawUFc2D9QLzDr3cCvcaFbZlO8xFW6QWJWdW+ucCWO19iXvXKdcy3bkT+T
- uMP4vB/YwRelpID4++mSNvvJoIxMAqvI+8iiSSZllnFb+5KuSdpfAWte9HWklmvSjBQzBtf/AVG
- LxmMOhyToZ5pHU6JDOMvZNQdQa6tx8dUssy1i4t1a4ssT3PzcOmHxl76YvDMdNyuijuXXffY3GB
- KVqjTJhj8+3PbpUmpXQTaNBQ9ojL77/ExuL+sR9wFv6BJqpQ9UQUO0nLoCCIg==
-X-Google-Smtp-Source: AGHT+IFy4YL3h+4Ey3wfbIq6HK6LyH761h1mioVqaE3lFvrtVGwWpWp/rYRquZiGHhMmY2aaLQ9u3A==
-X-Received: by 2002:a17:902:d481:b0:215:6fcd:6cd1 with SMTP id
- d9443c01a7336-219e6e8c508mr527072735ad.7.1735841763688; 
- Thu, 02 Jan 2025 10:16:03 -0800 (PST)
-Received: from stoup.. ([63.239.63.212]) by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-219dc9f68e4sm230148315ad.211.2025.01.02.10.16.03
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 02 Jan 2025 10:16:03 -0800 (PST)
-From: Richard Henderson <richard.henderson@linaro.org>
-To: qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org,
-	palmer@dabbelt.com,
-	Alistair.Francis@wdc.com
-Subject: [PATCH 1/2] util/cpuinfo-riscv: Detect Zbs
-Date: Thu,  2 Jan 2025 10:16:00 -0800
-Message-ID: <20250102181601.1421059-2-richard.henderson@linaro.org>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20250102181601.1421059-1-richard.henderson@linaro.org>
-References: <20250102181601.1421059-1-richard.henderson@linaro.org>
+ d=1e100.net; s=20230601; t=1736003699; x=1736608499;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=FU8KhsuOqn9kBc9Geg/C01qcucshJGqJzoeDRPZsMuI=;
+ b=ScxeisWVVQAnH9HH2a0qAIjmbAU4H6fqBeKx+fx2v47b3KpBRM1J0hpcHFaP0E5LHN
+ 6y6z4NYO2Xxir8bMdQy1m8TvmeTikSnJIppfJY1PzTZldRclj8pwXw8VcTiwSW8OSKvw
+ gQWEMJl8JyO//hz2A6Je0BVlY+1mOf+wjx1QQptNFkWpybpVjO+w436EgXRKL6DmAxt0
+ RXMRYH6vM5hdNq3P862Mcsrw23t1KK45gGeh+/aI59M2jVVKxPKES4FS2L/SvJSSvGQl
+ h/TJZQoQQhoVJap57pTKzvxXHzEDunnQHG0qUQh1Y/afyNqvaUNo9OJ01SVB7RIytPE6
+ 7UYg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUO6Gj6OcqQe768fRcZezSTrQOl/VvM4MgZruNCkw/a42RaLCWvjnZ9kXnRq4Saet4aYjwrtM4oZVlw@nongnu.org
+X-Gm-Message-State: AOJu0Yy1EhPgKvp4leQOyKgcudjYnyYDO7b3V0QjvwMEZe8jxFkv5vps
+ eSKyZf/sovhPUv5H8wf6pdKO3j/w4fijq9rzw38kWkApcxAQmKgnTo7Dbaaod0U=
+X-Gm-Gg: ASbGncvtskhh5IhXWzR6uIwgPwaXaNjLqTcilFKqSaLkpTs97UVcK6jod6GJWaGTjFD
+ InjepybOsPPj1CyBaBf6XnUwcWLFLsD+WLgbsKPgYrXrYivzFsseCUiZawJOw4971Iw+3oYX6mL
+ IunMJwWHAW+wPljtgFrXvrV8MqAO80bSjtn6mp26a65AMq3//6i5Ntuo47VVYE0jCOWv68uKNoj
+ OupZoe3zZKlnlry/Bzy6wle2G6U5smjMvTU+4kGGHb2+YVGl1tGbuwcTL2roZ2wbRFxc3UL+Twv
+ ES7owN23EK1aqUmqa608TFXNNHBaN8Qdeec=
+X-Google-Smtp-Source: AGHT+IHvLoFu8SW3TrNF9hoHcnFd5fO6ixmeLIFvpg+G32HnntIHNSArsvoff/mOAhlIvc3Lplh1QQ==
+X-Received: by 2002:a05:6a20:158c:b0:1e1:ce7d:c0cc with SMTP id
+ adf61e73a8af0-1e5e081c937mr92420333637.38.1736003699417; 
+ Sat, 04 Jan 2025 07:14:59 -0800 (PST)
+Received: from ?IPV6:2400:4050:b783:b00:4952:3c52:120a:27e9?
+ ([2400:4050:b783:b00:4952:3c52:120a:27e9])
+ by smtp.gmail.com with ESMTPSA id
+ 41be03b00d2f7-842b8e885dasm26131662a12.48.2025.01.04.07.14.51
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Sat, 04 Jan 2025 07:14:58 -0800 (PST)
+Message-ID: <34ddf42c-8bb1-4155-90cf-69e1032b0437@daynix.com>
+Date: Sun, 5 Jan 2025 00:14:49 +0900
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v16 14/14] hw/vmapple/vmapple: Add vmapple machine type
+To: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
+ Phil Dennis-Jordan <phil@philjordan.eu>, qemu-devel@nongnu.org
+Cc: agraf@csgraf.de, peter.maydell@linaro.org, pbonzini@redhat.com,
+ rad@semihalf.com, quic_llindhol@quicinc.com, stefanha@redhat.com,
+ mst@redhat.com, slp@redhat.com, richard.henderson@linaro.org,
+ eduardo@habkost.net, marcel.apfelbaum@gmail.com, gaosong@loongson.cn,
+ jiaxun.yang@flygoat.com, chenhuacai@kernel.org, kwolf@redhat.com,
+ hreitz@redhat.com, shorne@gmail.com, palmer@dabbelt.com,
+ alistair.francis@wdc.com, bmeng.cn@gmail.com, liwei1518@gmail.com,
+ dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com, jcmvbkbc@gmail.com,
+ marcandre.lureau@redhat.com, berrange@redhat.com, qemu-arm@nongnu.org,
+ qemu-block@nongnu.org, qemu-riscv@nongnu.org, balaton@eik.bme.hu,
+ Alexander Graf <graf@amazon.com>
+References: <20241223221645.29911-1-phil@philjordan.eu>
+ <20241223221645.29911-15-phil@philjordan.eu>
+ <2ceda358-adce-42bd-9f29-9a2e441361f0@linaro.org>
+Content-Language: en-US
+From: Akihiko Odaki <akihiko.odaki@daynix.com>
+In-Reply-To: <2ceda358-adce-42bd-9f29-9a2e441361f0@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::62c;
- envelope-from=richard.henderson@linaro.org; helo=mail-pl1-x62c.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+Received-SPF: pass client-ip=2607:f8b0:4864:20::629;
+ envelope-from=akihiko.odaki@daynix.com; helo=mail-pl1-x629.google.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -98,79 +116,36 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
----
- host/include/riscv/host/cpuinfo.h |  5 +++--
- util/cpuinfo-riscv.c              | 18 ++++++++++++++++--
- 2 files changed, 19 insertions(+), 4 deletions(-)
+On 2024/12/28 5:36, Philippe Mathieu-Daudé wrote:
+> On 23/12/24 23:16, Phil Dennis-Jordan wrote:
+> 
+>> Known issues:
+>>   - Keyboard and mouse/tablet input is laggy. The reason for this is
+>>     that macOS's XHCI driver seems to expect interrupter mapping to
+>>     be disabled when MSI/MSI-X is unavailable. I have found a
+>>     workaround but discovered a bunch of other XHCI spec non-compliance
+>>     in the process, so I'm fixing all of those in a separate patch
+>>     set.
+> 
+> Should we wait for your XHCI fixes series to get reviewed first
+> so I can base this series on top (removing this comment) when merging?
 
-diff --git a/host/include/riscv/host/cpuinfo.h b/host/include/riscv/host/cpuinfo.h
-index cdc784e7b6..b2b53dbf62 100644
---- a/host/include/riscv/host/cpuinfo.h
-+++ b/host/include/riscv/host/cpuinfo.h
-@@ -9,8 +9,9 @@
- #define CPUINFO_ALWAYS          (1u << 0)  /* so cpuinfo is nonzero */
- #define CPUINFO_ZBA             (1u << 1)
- #define CPUINFO_ZBB             (1u << 2)
--#define CPUINFO_ZICOND          (1u << 3)
--#define CPUINFO_ZVE64X          (1u << 4)
-+#define CPUINFO_ZBS             (1u << 3)
-+#define CPUINFO_ZICOND          (1u << 4)
-+#define CPUINFO_ZVE64X          (1u << 5)
- 
- /* Initialized with a constructor. */
- extern unsigned cpuinfo;
-diff --git a/util/cpuinfo-riscv.c b/util/cpuinfo-riscv.c
-index 971c924012..0291b7218a 100644
---- a/util/cpuinfo-riscv.c
-+++ b/util/cpuinfo-riscv.c
-@@ -36,7 +36,8 @@ static void sigill_handler(int signo, siginfo_t *si, void *data)
- /* Called both as constructor and (possibly) via other constructors. */
- unsigned __attribute__((constructor)) cpuinfo_init(void)
- {
--    unsigned left = CPUINFO_ZBA | CPUINFO_ZBB | CPUINFO_ZICOND | CPUINFO_ZVE64X;
-+    unsigned left = CPUINFO_ZBA | CPUINFO_ZBB | CPUINFO_ZBS
-+                  | CPUINFO_ZICOND | CPUINFO_ZVE64X;
-     unsigned info = cpuinfo;
- 
-     if (info) {
-@@ -50,6 +51,9 @@ unsigned __attribute__((constructor)) cpuinfo_init(void)
- #if defined(__riscv_arch_test) && defined(__riscv_zbb)
-     info |= CPUINFO_ZBB;
- #endif
-+#if defined(__riscv_arch_test) && defined(__riscv_zbs)
-+    info |= CPUINFO_ZBS;
-+#endif
- #if defined(__riscv_arch_test) && defined(__riscv_zicond)
-     info |= CPUINFO_ZICOND;
- #endif
-@@ -71,7 +75,8 @@ unsigned __attribute__((constructor)) cpuinfo_init(void)
-             && pair.key >= 0) {
-             info |= pair.value & RISCV_HWPROBE_EXT_ZBA ? CPUINFO_ZBA : 0;
-             info |= pair.value & RISCV_HWPROBE_EXT_ZBB ? CPUINFO_ZBB : 0;
--            left &= ~(CPUINFO_ZBA | CPUINFO_ZBB);
-+            info |= pair.value & RISCV_HWPROBE_EXT_ZBS ? CPUINFO_ZBS : 0;
-+            left &= ~(CPUINFO_ZBA | CPUINFO_ZBB | CPUINFO_ZBS);
- #ifdef RISCV_HWPROBE_EXT_ZICOND
-             info |= pair.value & RISCV_HWPROBE_EXT_ZICOND ? CPUINFO_ZICOND : 0;
-             left &= ~CPUINFO_ZICOND;
-@@ -117,6 +122,15 @@ unsigned __attribute__((constructor)) cpuinfo_init(void)
-             left &= ~CPUINFO_ZBB;
-         }
- 
-+        if (left & CPUINFO_ZBS) {
-+            /* Probe for Zbs: bext zero,zero,zero. */
-+            got_sigill = 0;
-+            asm volatile(".insn r 0x33, 5, 0x24, zero, zero, zero"
-+                         : : : "memory");
-+            info |= got_sigill ? 0 : CPUINFO_ZBS;
-+            left &= ~CPUINFO_ZBS;
-+        }
-+
-         if (left & CPUINFO_ZICOND) {
-             /* Probe for Zicond: czero.eqz zero,zero,zero. */
-             got_sigill = 0;
--- 
-2.43.0
+This series no longer cleanly applies due to patches merged early so 
+please rebase it.
 
+It will be nice if you also:
+1. rebase this vmapple series onto the xHC series and
+2. move "[PATCH v3 6/6] hw/vmapple: XHCI controller's interrupt mapping 
+workaround for macOS" into this vmapple series
+
+xHC changes that are not specific to vmapple may be merged early in this 
+way. I will be also able to test all vmapple code at once.
+
+Please use Based-on: tag when you post a series that based on another. 
+It will create a Git tree that I can use for testing at: 
+https://patchew.org/QEMU/
+docs/devel/submitting-a-patch.rst describes the details.
+
+Regards,
+Akihiko Odaki
 
