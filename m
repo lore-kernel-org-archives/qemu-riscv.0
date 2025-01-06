@@ -4,83 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 48AFAE7719A
-	for <qemu-riscv@archiver.kernel.org>; Mon,  6 Jan 2025 05:45:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F32B3E77199
+	for <qemu-riscv@archiver.kernel.org>; Mon,  6 Jan 2025 05:45:39 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tUfvj-0005SD-4x; Mon, 06 Jan 2025 00:45:35 -0500
+	id 1tUfu7-0003iv-Vt; Mon, 06 Jan 2025 00:43:56 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1tUfvU-000591-6N
- for qemu-riscv@nongnu.org; Mon, 06 Jan 2025 00:45:21 -0500
-Received: from mail-ed1-x536.google.com ([2a00:1450:4864:20::536])
+ id 1tUfu5-0003im-NS
+ for qemu-riscv@nongnu.org; Mon, 06 Jan 2025 00:43:53 -0500
+Received: from mail-pl1-x630.google.com ([2607:f8b0:4864:20::630])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1tUfvQ-0004ak-Re
- for qemu-riscv@nongnu.org; Mon, 06 Jan 2025 00:45:19 -0500
-Received: by mail-ed1-x536.google.com with SMTP id
- 4fb4d7f45d1cf-5d4e2aa7ea9so26477096a12.2
- for <qemu-riscv@nongnu.org>; Sun, 05 Jan 2025 21:45:16 -0800 (PST)
+ id 1tUfu3-0004IX-IM
+ for qemu-riscv@nongnu.org; Mon, 06 Jan 2025 00:43:53 -0500
+Received: by mail-pl1-x630.google.com with SMTP id
+ d9443c01a7336-2163dc5155fso194934145ad.0
+ for <qemu-riscv@nongnu.org>; Sun, 05 Jan 2025 21:43:50 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1736142315; x=1736747115; darn=nongnu.org;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=O682btEOM1Rl7PEyZuuGOXhFL3ZlxKOw32XVYH9sxZE=;
- b=bn3GqKXJ28nBJNreXePWIfkUXI33cJAqj22YdmcXdSMzbR5Mp5xfLi0P27VcnP6kj6
- cDCWtzjRauSOtYyXW7zgpxQrWzCCh8sF5MtTU5wfu8GQk7+wpvKWiO39msgaa3TdeIr7
- vNT2O/HiN1MIiTvTAG/NiMEGaqvss7io6C75WFItHpBAO9YSd/X4NjBl5X5zIFwQcriI
- CQDo3jLfOz1nTDTnOF+Lm3gjVKSXs8uHZ6Az2g298OT85pvQtkcyTiJgy6eQ02bcJ8ny
- BjXoZEnit1jdMlHWRc0lqkqXCTuQu3mcOOxUN9xyeeTdbSVCULfyK6voHhG9zQ1jmNYP
- maQA==
+ d=sifive.com; s=google; t=1736142230; x=1736747030; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=DntsfFBjwCA5RYsDFTsuywnSc4lKU2VsGQNjqTvtrY0=;
+ b=HHEMZWdiOsi9J0J+9Jo2fuWPPP+EnLbzPfK8ITb/gRxnARvxpLtkrg6hyq6PDXBC8l
+ hfZzha2Lds/Bngm3sPl4wT5yE6ReLmQTndgSYqSluyn7W3xkiBdQDB7k5xH1yzwS9n1Z
+ mWA1FimT4wuODoHn3lY4xKbm8KzzgRt5mCu0HutbBjHbuk0TEObQLGm6zYVcsm4X8jUm
+ 64F2rt7h100IbNL9yX1JEOwnoqXJZaUY5jQWorW3uOr21al3G5DoxLzus5ZXfLUoVssW
+ LVpL0g9hHyKVSeD2qhjBYbnnxhsgVz7SlD5y0+iqSgfUSH9zlGrQP4VF10mQi6tV2GCZ
+ 7EGQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1736142315; x=1736747115;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=O682btEOM1Rl7PEyZuuGOXhFL3ZlxKOw32XVYH9sxZE=;
- b=Qom8sZOdsTF9V1WWNkcvsQyXfUKg/opgpKowFu/Dh8rp+Gw48/bUDA4nr8Z/hQ7qYR
- J4R3NPldA/oMw5BFn4dFLeimPpxE4GVd+uA/olVprbDf0vbGKB3lLougvlZq4SE9E5Ih
- pQPqheoEjeGaCyQWBFmgyO65iIYNhQ25aDBeFX9iHfTQn8XsQyam842wZWQCECWx1epW
- V/1Fc9M1KQhIHZkXNDf8Nwych0E69FNb3oQmJheoYNcgAcuxY2RGPrydO7SaT1PTRYQ+
- tditJT5LPG3rBG4WtAG+0D8vjkPL05a4H2KniL4j+UJlhfgKBGUy0A1J+oFsP9FvBm9v
- +DjA==
+ d=1e100.net; s=20230601; t=1736142230; x=1736747030;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=DntsfFBjwCA5RYsDFTsuywnSc4lKU2VsGQNjqTvtrY0=;
+ b=OtMxB1NgLCbCMnr7VtdIRHwLHHwVRE/z00o8SE69ib80FP9yUJ9ptGhsVGixJ0rRNh
+ Lv05ihU0cFUba6qM66SJ+d/wBcNlzr7wrHXJcVqtKKjNnP5HqWpfAlIILAevG3raS7dW
+ yFm47yRx/t9AuX/TJioJDf6HygoWSgc78l6SjmFqJVrHW05Ivqfxvy0E5YE6tceqbm+G
+ QDkQNSwhkM6GTHtuKLqEcaTHsFa6BpWIikhfzcav9XIO5Ds3SQSJloCwh+kRS8Se5nSA
+ tq9dnJ0ro9Egy3KIrBR6wqvI48nkEeuS2acyDIfzuCaXcX6TMwRVJptiDM2MJzIYLzq1
+ 9sdw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCX0KZll9anc1Jnaiu78O9Y8IAa/I11VqVxwijw8xQbeRZ56O5ev1Y4cpBikcLoEjvlAaZa0Zv9XTLoO@nongnu.org
-X-Gm-Message-State: AOJu0Yxl2MgFjuZUZpzn+N98TWoPTXCk8RcyW1mvWft7F8VfElOXBNyF
- LtSZd+yzPJErwYNtmR1OxgoTdu6We0lKozMwp6jDTPERTKMNCZqRFTTA0lxvqH4xMAL8tDnrcMI
- pAIArTqJfjFozgT8vEF1LHPhDXhU8yxVPk0Hkew==
-X-Gm-Gg: ASbGncs2puDdEp8a1uJRGh7M+v73t/XmBhsulfnSDyyGtLQE7SvIjPNh6vtjeyqUcC/
- Ezn8QxNaON/BAlrWz049aiGL59l06sZ2BmKg7zZ0=
-X-Google-Smtp-Source: AGHT+IHIbY5Wve+otfojHub9qczoC3Ifhr3iWOyapmhH9kXjZZbrsC5IAdv4XfldFINQhh8gqDJYhnsk/iMRjMAE6/4=
-X-Received: by 2002:a05:6402:11c7:b0:5d0:b51c:8489 with SMTP id
- 4fb4d7f45d1cf-5d81ddc01abmr43546356a12.12.1736142315182; Sun, 05 Jan 2025
- 21:45:15 -0800 (PST)
-MIME-Version: 1.0
-References: <20241231032654.133039-1-frank.chang@sifive.com>
- <20241231032654.133039-6-frank.chang@sifive.com>
- <CAKmqyKOUnh-iDiN7_H1rtRq_dmXT2b=5qN9iVDf-JeD7X7OGOw@mail.gmail.com>
-In-Reply-To: <CAKmqyKOUnh-iDiN7_H1rtRq_dmXT2b=5qN9iVDf-JeD7X7OGOw@mail.gmail.com>
-From: Frank Chang <frank.chang@sifive.com>
-Date: Mon, 6 Jan 2025 13:45:04 +0800
-Message-ID: <CAE_xrPgpWVvMEM_6MEAAGmxD-6C4W+8T-NkrGmzKLJYZisBPQg@mail.gmail.com>
-Subject: Re: [PATCH v11 5/6] target/riscv: Add Smrnmi cpu extension
-To: Alistair Francis <alistair23@gmail.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, 
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, 
- Bin Meng <bmeng.cn@gmail.com>, Weiwei Li <liwei1518@gmail.com>, 
+ AJvYcCU8eKmTrXNE2eaCnnMEJTsa8zD8cBLDRQhpKjwz8L9n7tatNlcKl2zE6xdtVuVIUCDNBbB+CAi5BWQb@nongnu.org
+X-Gm-Message-State: AOJu0YydkhAyDR+B8W+K8Y54ehFUVwncWTqFS/namOKbAGnsyoORFA/8
+ AYAgX14WgQU1J5FKyHkwyAAgx3jpsah/2JiRqWIAiuiSHW1/uZSFXGgKtcTHN2E=
+X-Gm-Gg: ASbGncv/QLo5Py6YPep3dZxGx6TuRg/Tivd+Z6wglI0XE8pqNFgnnuxwqCnpNdZf9aK
+ iBJr5HA5jnQQih7iD3cNPNzHSynD5/k2D2Ty7wWf+CmYYCLXW4j6ufJOCx4cWIwIW8FIuh9P9c+
+ qFpqQ+1IELiLXVj5FSq1hBDTBXlyDiEhOP+0g+GuZhEg7oTjUPDKN/g5LVf9oXJnz4ukClW5SgS
+ p4WdobgRrr5m1s4YzXX7yE+4g6m0Sg9ovpIgNeB3JQZPJl6KHrC2W1zGAmSGV63kCq1R9HqQxyw
+ ZWCskKOvjXw=
+X-Google-Smtp-Source: AGHT+IFXh5lAPkoTO7Q8rwrJebnYfNjWOTFXozz2ra+By2e3gSJpjGiUQzswqXXxEgTzdWyw3IodPw==
+X-Received: by 2002:a17:902:d48a:b0:215:b8b6:d2ea with SMTP id
+ d9443c01a7336-219e6ea1cc6mr748732875ad.15.1736142229963; 
+ Sun, 05 Jan 2025 21:43:49 -0800 (PST)
+Received: from fchang-1826.internal.sifive.com ([210.176.154.33])
+ by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-219dc96eac6sm285722215ad.80.2025.01.05.21.43.47
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 05 Jan 2025 21:43:49 -0800 (PST)
+From: frank.chang@sifive.com
+To: qemu-devel@nongnu.org,
+	qemu-riscv@nongnu.org
+Cc: Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bmeng.cn@gmail.com>,
+ Weiwei Li <liwei1518@gmail.com>,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, Tommy Wu <tommy.wu@sifive.com>
-Content-Type: multipart/alternative; boundary="000000000000f9f901062b03212b"
-Received-SPF: pass client-ip=2a00:1450:4864:20::536;
- envelope-from=frank.chang@sifive.com; helo=mail-ed1-x536.google.com
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, Tommy Wu <tommy.wu@sifive.com>,
+ Frank Chang <frank.chang@sifive.com>
+Subject: [PATCH v12 3/6] target/riscv: Handle Smrnmi interrupt and exception
+Date: Mon,  6 Jan 2025 13:43:33 +0800
+Message-Id: <20250106054336.1878291-4-frank.chang@sifive.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20250106054336.1878291-1-frank.chang@sifive.com>
+References: <20250106054336.1878291-1-frank.chang@sifive.com>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::630;
+ envelope-from=frank.chang@sifive.com; helo=mail-pl1-x630.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, HTML_MESSAGE=0.001,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -98,202 +107,354 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
---000000000000f9f901062b03212b
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+From: Tommy Wu <tommy.wu@sifive.com>
 
-On Mon, Jan 6, 2025 at 12:15=E2=80=AFPM Alistair Francis <alistair23@gmail.=
-com>
-wrote:
+Because the RNMI interrupt trap handler address is implementation defined.
+We add the 'rnmi-interrupt-vector' and 'rnmi-exception-vector' as the property
+of the harts. It’s very easy for users to set the address based on their
+expectation. This patch also adds the functionality to handle the RNMI signals.
 
-> On Tue, Dec 31, 2024 at 1:28=E2=80=AFPM <frank.chang@sifive.com> wrote:
-> >
-> > From: Tommy Wu <tommy.wu@sifive.com>
-> >
-> > This adds the properties for ISA extension Smrnmi.
-> >
-> > Also, when Smrnmi is present, the firmware (e.g., OpenSBI) must set
-> > mnstatus.NMIE to 1 before enabling any interrupts. Otherwise, all
-> > interrupts will be disabled. Since our current OpenSBI does not
-> > support Smrnmi yet, let's disable Smrnmi for the 'max' type CPU for
-> > now. We can re-enable it once OpenSBI includes proper support for it.
-> >
-> > Signed-off-by: Frank Chang <frank.chang@sifive.com>
-> > Signed-off-by: Tommy Wu <tommy.wu@sifive.com>
-> > Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-> > Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-> > ---
-> >  target/riscv/cpu.c         | 2 ++
-> >  target/riscv/tcg/tcg-cpu.c | 6 ++++++
-> >  2 files changed, 8 insertions(+)
-> >
-> > diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> > index 6c46a2f076..b0d9e93170 100644
-> > --- a/target/riscv/cpu.c
-> > +++ b/target/riscv/cpu.c
-> > @@ -186,6 +186,7 @@ const RISCVIsaExtData isa_edata_arr[] =3D {
-> >      ISA_EXT_DATA_ENTRY(smaia, PRIV_VERSION_1_12_0, ext_smaia),
-> >      ISA_EXT_DATA_ENTRY(smcntrpmf, PRIV_VERSION_1_12_0, ext_smcntrpmf),
-> >      ISA_EXT_DATA_ENTRY(smepmp, PRIV_VERSION_1_12_0, ext_smepmp),
-> > +    ISA_EXT_DATA_ENTRY(smrnmi, PRIV_VERSION_1_12_0, ext_smrnmi),
-> >      ISA_EXT_DATA_ENTRY(smstateen, PRIV_VERSION_1_12_0, ext_smstateen),
-> >      ISA_EXT_DATA_ENTRY(ssaia, PRIV_VERSION_1_12_0, ext_ssaia),
-> >      ISA_EXT_DATA_ENTRY(ssccptr, PRIV_VERSION_1_11_0, has_priv_1_11),
-> > @@ -1614,6 +1615,7 @@ const RISCVCPUMultiExtConfig
-> riscv_cpu_extensions[] =3D {
-> >
-> >      MULTI_EXT_CFG_BOOL("smaia", ext_smaia, false),
-> >      MULTI_EXT_CFG_BOOL("smepmp", ext_smepmp, false),
-> > +    MULTI_EXT_CFG_BOOL("smrnmi", ext_smrnmi, false),
-> >      MULTI_EXT_CFG_BOOL("smstateen", ext_smstateen, false),
-> >      MULTI_EXT_CFG_BOOL("ssaia", ext_ssaia, false),
-> >      MULTI_EXT_CFG_BOOL("svade", ext_svade, false),
-> > diff --git a/target/riscv/tcg/tcg-cpu.c b/target/riscv/tcg/tcg-cpu.c
-> > index cbf2cf1963..c4070c948e 100644
-> > --- a/target/riscv/tcg/tcg-cpu.c
-> > +++ b/target/riscv/tcg/tcg-cpu.c
-> > @@ -1421,6 +1421,12 @@ static void riscv_init_max_cpu_extensions(Object
-> *obj)
-> >      if (env->misa_mxl !=3D MXL_RV32) {
-> >          isa_ext_update_enabled(cpu, CPU_CFG_OFFSET(ext_zcf), false);
-> >      }
-> > +
-> > +    /*
-> > +     * ext_smrnmi requires OpenSBI changes that our current
-> > +     * image does not have. Disable it for now.
-> > +     */
-> > +    isa_ext_update_enabled(cpu, CPU_CFG_OFFSET(ext_smrnmi), false);
->
-> Should we log this to users so they know?
->
-> Alistair
->
+Signed-off-by: Frank Chang <frank.chang@sifive.com>
+Signed-off-by: Tommy Wu <tommy.wu@sifive.com>
+Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+---
+ hw/riscv/riscv_hart.c         | 41 ++++++++++++++++
+ include/hw/riscv/riscv_hart.h |  4 ++
+ target/riscv/cpu.c            | 11 +++++
+ target/riscv/cpu.h            |  3 ++
+ target/riscv/cpu_bits.h       | 12 +++++
+ target/riscv/cpu_helper.c     | 88 ++++++++++++++++++++++++++++++++---
+ 6 files changed, 152 insertions(+), 7 deletions(-)
 
-Sure, I've added it in the v12 patchset.
+diff --git a/hw/riscv/riscv_hart.c b/hw/riscv/riscv_hart.c
+index bc9ffdd2d4..62b7c44350 100644
+--- a/hw/riscv/riscv_hart.c
++++ b/hw/riscv/riscv_hart.c
+@@ -26,6 +26,7 @@
+ #include "target/riscv/cpu.h"
+ #include "hw/qdev-properties.h"
+ #include "hw/riscv/riscv_hart.h"
++#include "qemu/error-report.h"
+ 
+ static const Property riscv_harts_props[] = {
+     DEFINE_PROP_UINT32("num-harts", RISCVHartArrayState, num_harts, 1),
+@@ -33,6 +34,23 @@ static const Property riscv_harts_props[] = {
+     DEFINE_PROP_STRING("cpu-type", RISCVHartArrayState, cpu_type),
+     DEFINE_PROP_UINT64("resetvec", RISCVHartArrayState, resetvec,
+                        DEFAULT_RSTVEC),
++
++    /*
++     * Smrnmi implementation-defined interrupt and exception trap handlers.
++     *
++     * When an RNMI interrupt is detected, the hart then enters M-mode and
++     * jumps to the address defined by "rnmi-interrupt-vector".
++     *
++     * When the hart encounters an exception while executing in M-mode with
++     * the mnstatus.NMIE bit clear, the hart then jumps to the address
++     * defined by "rnmi-exception-vector".
++     */
++    DEFINE_PROP_ARRAY("rnmi-interrupt-vector", RISCVHartArrayState,
++                      num_rnmi_irqvec, rnmi_irqvec, qdev_prop_uint64,
++                      uint64_t),
++    DEFINE_PROP_ARRAY("rnmi-exception-vector", RISCVHartArrayState,
++                      num_rnmi_excpvec, rnmi_excpvec, qdev_prop_uint64,
++                      uint64_t),
+ };
+ 
+ static void riscv_harts_cpu_reset(void *opaque)
+@@ -46,6 +64,29 @@ static bool riscv_hart_realize(RISCVHartArrayState *s, int idx,
+ {
+     object_initialize_child(OBJECT(s), "harts[*]", &s->harts[idx], cpu_type);
+     qdev_prop_set_uint64(DEVICE(&s->harts[idx]), "resetvec", s->resetvec);
++
++    if (s->harts[idx].cfg.ext_smrnmi) {
++        if (idx < s->num_rnmi_irqvec) {
++            qdev_prop_set_uint64(DEVICE(&s->harts[idx]),
++                                 "rnmi-interrupt-vector", s->rnmi_irqvec[idx]);
++        }
++
++        if (idx < s->num_rnmi_excpvec) {
++            qdev_prop_set_uint64(DEVICE(&s->harts[idx]),
++                                 "rnmi-exception-vector", s->rnmi_excpvec[idx]);
++        }
++    } else {
++        if (s->num_rnmi_irqvec > 0) {
++            warn_report_once("rnmi-interrupt-vector property is ignored "
++                             "because Smrnmi extension is not enabled.");
++        }
++
++        if (s->num_rnmi_excpvec > 0) {
++            warn_report_once("rnmi-exception-vector property is ignored "
++                             "because Smrnmi extension is not enabled.");
++        }
++    }
++
+     s->harts[idx].env.mhartid = s->hartid_base + idx;
+     qemu_register_reset(riscv_harts_cpu_reset, &s->harts[idx]);
+     return qdev_realize(DEVICE(&s->harts[idx]), NULL, errp);
+diff --git a/include/hw/riscv/riscv_hart.h b/include/hw/riscv/riscv_hart.h
+index 912b4a2682..a6ed73a195 100644
+--- a/include/hw/riscv/riscv_hart.h
++++ b/include/hw/riscv/riscv_hart.h
+@@ -38,6 +38,10 @@ struct RISCVHartArrayState {
+     uint32_t hartid_base;
+     char *cpu_type;
+     uint64_t resetvec;
++    uint32_t num_rnmi_irqvec;
++    uint64_t *rnmi_irqvec;
++    uint32_t num_rnmi_excpvec;
++    uint64_t *rnmi_excpvec;
+     RISCVCPU *harts;
+ };
+ 
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index 2ae9a8a895..29d530ad85 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -1419,6 +1419,11 @@ static void riscv_cpu_set_irq(void *opaque, int irq, int level)
+         g_assert_not_reached();
+     }
+ }
++
++static void riscv_cpu_set_nmi(void *opaque, int irq, int level)
++{
++    riscv_cpu_set_rnmi(RISCV_CPU(opaque), irq, level);
++}
+ #endif /* CONFIG_USER_ONLY */
+ 
+ static bool riscv_cpu_is_dynamic(Object *cpu_obj)
+@@ -1442,6 +1447,8 @@ static void riscv_cpu_init(Object *obj)
+ #ifndef CONFIG_USER_ONLY
+     qdev_init_gpio_in(DEVICE(obj), riscv_cpu_set_irq,
+                       IRQ_LOCAL_MAX + IRQ_LOCAL_GUEST_MAX);
++    qdev_init_gpio_in_named(DEVICE(cpu), riscv_cpu_set_nmi,
++                            "riscv.cpu.rnmi", RNMI_MAX);
+ #endif /* CONFIG_USER_ONLY */
+ 
+     general_user_opts = g_hash_table_new(g_str_hash, g_str_equal);
+@@ -2798,6 +2805,10 @@ static const Property riscv_cpu_properties[] = {
+ 
+ #ifndef CONFIG_USER_ONLY
+     DEFINE_PROP_UINT64("resetvec", RISCVCPU, env.resetvec, DEFAULT_RSTVEC),
++    DEFINE_PROP_UINT64("rnmi-interrupt-vector", RISCVCPU, env.rnmi_irqvec,
++                       DEFAULT_RNMI_IRQVEC),
++    DEFINE_PROP_UINT64("rnmi-exception-vector", RISCVCPU, env.rnmi_excpvec,
++                       DEFAULT_RNMI_EXCPVEC),
+ #endif
+ 
+     DEFINE_PROP_BOOL("short-isa-string", RISCVCPU, cfg.short_isa_string, false),
+diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+index 0079c640f7..2c4f12e1e1 100644
+--- a/target/riscv/cpu.h
++++ b/target/riscv/cpu.h
+@@ -493,6 +493,8 @@ struct CPUArchState {
+     target_ulong mncause; /* mncause without bit XLEN-1 set to 1 */
+     target_ulong mnstatus;
+     target_ulong rnmip;
++    uint64_t rnmi_irqvec;
++    uint64_t rnmi_excpvec;
+ };
+ 
+ /*
+@@ -591,6 +593,7 @@ void riscv_cpu_swap_hypervisor_regs(CPURISCVState *env);
+ int riscv_cpu_claim_interrupts(RISCVCPU *cpu, uint64_t interrupts);
+ uint64_t riscv_cpu_update_mip(CPURISCVState *env, uint64_t mask,
+                               uint64_t value);
++void riscv_cpu_set_rnmi(RISCVCPU *cpu, uint32_t irq, bool level);
+ void riscv_cpu_interrupt(CPURISCVState *env);
+ #define BOOL_TO_MASK(x) (-!!(x)) /* helper for riscv_cpu_update_mip value */
+ void riscv_cpu_set_rdtime_fn(CPURISCVState *env, uint64_t (*fn)(void *),
+diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
+index 9e9637263d..17787fd693 100644
+--- a/target/riscv/cpu_bits.h
++++ b/target/riscv/cpu_bits.h
+@@ -680,6 +680,12 @@ typedef enum {
+ /* Default Reset Vector address */
+ #define DEFAULT_RSTVEC      0x1000
+ 
++/* Default RNMI Interrupt Vector address */
++#define DEFAULT_RNMI_IRQVEC     0x0
++
++/* Default RNMI Exception Vector address */
++#define DEFAULT_RNMI_EXCPVEC    0x0
++
+ /* Exception causes */
+ typedef enum RISCVException {
+     RISCV_EXCP_NONE = -1, /* sentinel value */
+@@ -734,6 +740,9 @@ typedef enum RISCVException {
+ /* -1 is due to bit zero of hgeip and hgeie being ROZ. */
+ #define IRQ_LOCAL_GUEST_MAX                (TARGET_LONG_BITS - 1)
+ 
++/* RNMI causes */
++#define RNMI_MAX                           16
++
+ /* mip masks */
+ #define MIP_USIP                           (1 << IRQ_U_SOFT)
+ #define MIP_SSIP                           (1 << IRQ_S_SOFT)
+@@ -972,6 +981,9 @@ typedef enum RISCVException {
+ #define MHPMEVENT_IDX_MASK                 0xFFFFF
+ #define MHPMEVENT_SSCOF_RESVD              16
+ 
++/* RISC-V-specific interrupt pending bits. */
++#define CPU_INTERRUPT_RNMI                 CPU_INTERRUPT_TGT_EXT_0
++
+ /* JVT CSR bits */
+ #define JVT_MODE                           0x3F
+ #define JVT_BASE                           (~0x3F)
+diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+index f62b21e182..e90b85f2cd 100644
+--- a/target/riscv/cpu_helper.c
++++ b/target/riscv/cpu_helper.c
+@@ -505,6 +505,18 @@ static int riscv_cpu_local_irq_pending(CPURISCVState *env)
+     uint64_t vsbits, irq_delegated;
+     int virq;
+ 
++    /* Priority: RNMI > Other interrupt. */
++    if (riscv_cpu_cfg(env)->ext_smrnmi) {
++        /* If mnstatus.NMIE == 0, all interrupts are disabled. */
++        if (!get_field(env->mnstatus, MNSTATUS_NMIE)) {
++            return RISCV_EXCP_NONE;
++        }
++
++        if (env->rnmip) {
++            return ctz64(env->rnmip); /* since non-zero */
++        }
++    }
++
+     /* Determine interrupt enable state of all privilege modes */
+     if (env->virt_enabled) {
+         mie = 1;
+@@ -567,7 +579,9 @@ static int riscv_cpu_local_irq_pending(CPURISCVState *env)
+ 
+ bool riscv_cpu_exec_interrupt(CPUState *cs, int interrupt_request)
+ {
+-    if (interrupt_request & CPU_INTERRUPT_HARD) {
++    uint32_t mask = CPU_INTERRUPT_HARD | CPU_INTERRUPT_RNMI;
++
++    if (interrupt_request & mask) {
+         RISCVCPU *cpu = RISCV_CPU(cs);
+         CPURISCVState *env = &cpu->env;
+         int interruptno = riscv_cpu_local_irq_pending(env);
+@@ -699,6 +713,30 @@ void riscv_cpu_set_geilen(CPURISCVState *env, target_ulong geilen)
+     env->geilen = geilen;
+ }
+ 
++void riscv_cpu_set_rnmi(RISCVCPU *cpu, uint32_t irq, bool level)
++{
++    CPURISCVState *env = &cpu->env;
++    CPUState *cs = CPU(cpu);
++    bool release_lock = false;
++
++    if (!bql_locked()) {
++        release_lock = true;
++        bql_lock();
++    }
++
++    if (level) {
++        env->rnmip |= 1 << irq;
++        cpu_interrupt(cs, CPU_INTERRUPT_RNMI);
++    } else {
++        env->rnmip &= ~(1 << irq);
++        cpu_reset_interrupt(cs, CPU_INTERRUPT_RNMI);
++    }
++
++    if (release_lock) {
++        bql_unlock();
++    }
++}
++
+ int riscv_cpu_claim_interrupts(RISCVCPU *cpu, uint64_t interrupts)
+ {
+     CPURISCVState *env = &cpu->env;
+@@ -1849,6 +1887,7 @@ void riscv_cpu_do_interrupt(CPUState *cs)
+     bool write_gva = false;
+     bool always_storeamo = (env->excp_uw2 & RISCV_UW2_ALWAYS_STORE_AMO);
+     uint64_t s;
++    int mode;
+ 
+     /*
+      * cs->exception is 32-bits wide unlike mcause which is XLEN-bits wide
+@@ -1866,7 +1905,24 @@ void riscv_cpu_do_interrupt(CPUState *cs)
+     target_ulong htval = 0;
+     target_ulong mtval2 = 0;
+     int sxlen = 0;
+-    int mxlen = 0;
++    int mxlen = 16 << riscv_cpu_mxl(env);
++    bool nnmi_excep = false;
++
++    if (cpu->cfg.ext_smrnmi && env->rnmip && async) {
++        env->mnstatus = set_field(env->mnstatus, MNSTATUS_NMIE, false);
++        env->mnstatus = set_field(env->mnstatus, MNSTATUS_MNPV,
++                                  env->virt_enabled);
++        env->mnstatus = set_field(env->mnstatus, MNSTATUS_MNPP,
++                                  env->priv);
++        env->mncause = cause | ((target_ulong)1U << (mxlen - 1));
++        env->mnepc = env->pc;
++        env->pc = env->rnmi_irqvec;
++
++        /* Trapping to M mode, virt is disabled */
++        riscv_cpu_set_mode(env, PRV_M, false);
++
++        return;
++    }
+ 
+     if (!async) {
+         /* set tval to badaddr for traps with address information */
+@@ -1960,8 +2016,10 @@ void riscv_cpu_do_interrupt(CPUState *cs)
+                   __func__, env->mhartid, async, cause, env->pc, tval,
+                   riscv_cpu_get_trap_name(cause, async));
+ 
+-    if (env->priv <= PRV_S && cause < 64 &&
+-        (((deleg >> cause) & 1) || s_injected || vs_injected)) {
++    mode = env->priv <= PRV_S && cause < 64 &&
++        (((deleg >> cause) & 1) || s_injected || vs_injected) ? PRV_S : PRV_M;
++
++    if (mode == PRV_S) {
+         /* handle the trap in S-mode */
+         /* save elp status */
+         if (cpu_get_fcfien(env)) {
+@@ -2016,6 +2074,14 @@ void riscv_cpu_do_interrupt(CPUState *cs)
+                   ((async && (env->stvec & 3) == 1) ? cause * 4 : 0);
+         riscv_cpu_set_mode(env, PRV_S, virt);
+     } else {
++        /*
++         * If the hart encounters an exception while executing in M-mode
++         * with the mnstatus.NMIE bit clear, the exception is an RNMI exception.
++         */
++        nnmi_excep = cpu->cfg.ext_smrnmi &&
++                     !get_field(env->mnstatus, MNSTATUS_NMIE) &&
++                     !async;
++
+         /* handle the trap in M-mode */
+         /* save elp status */
+         if (cpu_get_fcfien(env)) {
+@@ -2043,14 +2109,22 @@ void riscv_cpu_do_interrupt(CPUState *cs)
+         s = set_field(s, MSTATUS_MPP, env->priv);
+         s = set_field(s, MSTATUS_MIE, 0);
+         env->mstatus = s;
+-        mxlen = 16 << riscv_cpu_mxl(env);
+         env->mcause = cause | ((target_ulong)async << (mxlen - 1));
+         env->mepc = env->pc;
+         env->mtval = tval;
+         env->mtval2 = mtval2;
+         env->mtinst = tinst;
+-        env->pc = (env->mtvec >> 2 << 2) +
+-                  ((async && (env->mtvec & 3) == 1) ? cause * 4 : 0);
++
++        /*
++         * For RNMI exception, program counter is set to the RNMI exception
++         * trap handler address.
++         */
++        if (nnmi_excep) {
++            env->pc = env->rnmi_excpvec;
++        } else {
++            env->pc = (env->mtvec >> 2 << 2) +
++                      ((async && (env->mtvec & 3) == 1) ? cause * 4 : 0);
++        }
+         riscv_cpu_set_mode(env, PRV_M, virt);
+     }
+ 
+-- 
+2.34.1
 
-Regards,
-Frank Chang
-
-
->
-> >  }
-> >
-> >  static bool riscv_cpu_has_max_extensions(Object *cpu_obj)
-> > --
-> > 2.34.1
-> >
-> >
->
-
---000000000000f9f901062b03212b
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><div dir=3D"ltr">On Mon, Jan 6, 2025 at 12:15=E2=80=AFPM A=
-listair Francis &lt;<a href=3D"mailto:alistair23@gmail.com">alistair23@gmai=
-l.com</a>&gt; wrote:</div><div class=3D"gmail_quote gmail_quote_container">=
-<blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-=
-left:1px solid rgb(204,204,204);padding-left:1ex">On Tue, Dec 31, 2024 at 1=
-:28=E2=80=AFPM &lt;<a href=3D"mailto:frank.chang@sifive.com" target=3D"_bla=
-nk">frank.chang@sifive.com</a>&gt; wrote:<br>
-&gt;<br>
-&gt; From: Tommy Wu &lt;<a href=3D"mailto:tommy.wu@sifive.com" target=3D"_b=
-lank">tommy.wu@sifive.com</a>&gt;<br>
-&gt;<br>
-&gt; This adds the properties for ISA extension Smrnmi.<br>
-&gt;<br>
-&gt; Also, when Smrnmi is present, the firmware (e.g., OpenSBI) must set<br=
->
-&gt; mnstatus.NMIE to 1 before enabling any interrupts. Otherwise, all<br>
-&gt; interrupts will be disabled. Since our current OpenSBI does not<br>
-&gt; support Smrnmi yet, let&#39;s disable Smrnmi for the &#39;max&#39; typ=
-e CPU for<br>
-&gt; now. We can re-enable it once OpenSBI includes proper support for it.<=
-br>
-&gt;<br>
-&gt; Signed-off-by: Frank Chang &lt;<a href=3D"mailto:frank.chang@sifive.co=
-m" target=3D"_blank">frank.chang@sifive.com</a>&gt;<br>
-&gt; Signed-off-by: Tommy Wu &lt;<a href=3D"mailto:tommy.wu@sifive.com" tar=
-get=3D"_blank">tommy.wu@sifive.com</a>&gt;<br>
-&gt; Signed-off-by: Daniel Henrique Barboza &lt;<a href=3D"mailto:dbarboza@=
-ventanamicro.com" target=3D"_blank">dbarboza@ventanamicro.com</a>&gt;<br>
-&gt; Reviewed-by: Daniel Henrique Barboza &lt;<a href=3D"mailto:dbarboza@ve=
-ntanamicro.com" target=3D"_blank">dbarboza@ventanamicro.com</a>&gt;<br>
-&gt; ---<br>
-&gt;=C2=A0 target/riscv/cpu.c=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0| 2 ++<br>
-&gt;=C2=A0 target/riscv/tcg/tcg-cpu.c | 6 ++++++<br>
-&gt;=C2=A0 2 files changed, 8 insertions(+)<br>
-&gt;<br>
-&gt; diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c<br>
-&gt; index 6c46a2f076..b0d9e93170 100644<br>
-&gt; --- a/target/riscv/cpu.c<br>
-&gt; +++ b/target/riscv/cpu.c<br>
-&gt; @@ -186,6 +186,7 @@ const RISCVIsaExtData isa_edata_arr[] =3D {<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 ISA_EXT_DATA_ENTRY(smaia, PRIV_VERSION_1_12_0, ext=
-_smaia),<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 ISA_EXT_DATA_ENTRY(smcntrpmf, PRIV_VERSION_1_12_0,=
- ext_smcntrpmf),<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 ISA_EXT_DATA_ENTRY(smepmp, PRIV_VERSION_1_12_0, ex=
-t_smepmp),<br>
-&gt; +=C2=A0 =C2=A0 ISA_EXT_DATA_ENTRY(smrnmi, PRIV_VERSION_1_12_0, ext_smr=
-nmi),<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 ISA_EXT_DATA_ENTRY(smstateen, PRIV_VERSION_1_12_0,=
- ext_smstateen),<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 ISA_EXT_DATA_ENTRY(ssaia, PRIV_VERSION_1_12_0, ext=
-_ssaia),<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 ISA_EXT_DATA_ENTRY(ssccptr, PRIV_VERSION_1_11_0, h=
-as_priv_1_11),<br>
-&gt; @@ -1614,6 +1615,7 @@ const RISCVCPUMultiExtConfig riscv_cpu_extension=
-s[] =3D {<br>
-&gt;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 MULTI_EXT_CFG_BOOL(&quot;smaia&quot;, ext_smaia, f=
-alse),<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 MULTI_EXT_CFG_BOOL(&quot;smepmp&quot;, ext_smepmp,=
- false),<br>
-&gt; +=C2=A0 =C2=A0 MULTI_EXT_CFG_BOOL(&quot;smrnmi&quot;, ext_smrnmi, fals=
-e),<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 MULTI_EXT_CFG_BOOL(&quot;smstateen&quot;, ext_smst=
-ateen, false),<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 MULTI_EXT_CFG_BOOL(&quot;ssaia&quot;, ext_ssaia, f=
-alse),<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 MULTI_EXT_CFG_BOOL(&quot;svade&quot;, ext_svade, f=
-alse),<br>
-&gt; diff --git a/target/riscv/tcg/tcg-cpu.c b/target/riscv/tcg/tcg-cpu.c<b=
-r>
-&gt; index cbf2cf1963..c4070c948e 100644<br>
-&gt; --- a/target/riscv/tcg/tcg-cpu.c<br>
-&gt; +++ b/target/riscv/tcg/tcg-cpu.c<br>
-&gt; @@ -1421,6 +1421,12 @@ static void riscv_init_max_cpu_extensions(Objec=
-t *obj)<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 if (env-&gt;misa_mxl !=3D MXL_RV32) {<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 isa_ext_update_enabled(cpu, CPU_CFG_=
-OFFSET(ext_zcf), false);<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 }<br>
-&gt; +<br>
-&gt; +=C2=A0 =C2=A0 /*<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0* ext_smrnmi requires OpenSBI changes that our cu=
-rrent<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0* image does not have. Disable it for now.<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0*/<br>
-&gt; +=C2=A0 =C2=A0 isa_ext_update_enabled(cpu, CPU_CFG_OFFSET(ext_smrnmi),=
- false);<br>
-<br>
-Should we log this to users so they know?<br>
-<br>
-Alistair<br></blockquote><div><br></div><div><div>Sure, I&#39;ve added it i=
-n the v12 patchset.</div><div><br></div><div>Regards,</div><div>Frank Chang=
-</div></div><div>=C2=A0</div><blockquote class=3D"gmail_quote" style=3D"mar=
-gin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1=
-ex">
-<br>
-&gt;=C2=A0 }<br>
-&gt;<br>
-&gt;=C2=A0 static bool riscv_cpu_has_max_extensions(Object *cpu_obj)<br>
-&gt; --<br>
-&gt; 2.34.1<br>
-&gt;<br>
-&gt;<br>
-</blockquote></div></div>
-
---000000000000f9f901062b03212b--
 
