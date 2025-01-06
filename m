@@ -4,86 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C9F54E77198
-	for <qemu-riscv@archiver.kernel.org>; Mon,  6 Jan 2025 05:46:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6C9F4E77188
+	for <qemu-riscv@archiver.kernel.org>; Mon,  6 Jan 2025 07:03:40 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tUfuE-0003lB-2u; Mon, 06 Jan 2025 00:44:02 -0500
+	id 1tUh8S-0000IF-9R; Mon, 06 Jan 2025 02:02:48 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1tUfuA-0003k5-Tp
- for qemu-riscv@nongnu.org; Mon, 06 Jan 2025 00:43:58 -0500
-Received: from mail-pl1-x62b.google.com ([2607:f8b0:4864:20::62b])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tUh8Q-0000Hb-5Y
+ for qemu-riscv@nongnu.org; Mon, 06 Jan 2025 02:02:46 -0500
+Received: from mail-wm1-x334.google.com ([2a00:1450:4864:20::334])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1tUfu9-0004JO-AB
- for qemu-riscv@nongnu.org; Mon, 06 Jan 2025 00:43:58 -0500
-Received: by mail-pl1-x62b.google.com with SMTP id
- d9443c01a7336-21636268e43so14402305ad.2
- for <qemu-riscv@nongnu.org>; Sun, 05 Jan 2025 21:43:56 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tUh8O-0008MQ-JH
+ for qemu-riscv@nongnu.org; Mon, 06 Jan 2025 02:02:45 -0500
+Received: by mail-wm1-x334.google.com with SMTP id
+ 5b1f17b1804b1-4361f664af5so160085955e9.1
+ for <qemu-riscv@nongnu.org>; Sun, 05 Jan 2025 23:02:43 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1736142236; x=1736747036; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=lo+Qbn3A7nMoxmaDM+Be00oVtg6NcANgPSVAsqKGf7E=;
- b=ftXFen5IkYPY1kBbq04QjW+HC2BfNKqMBXykkqs39vJZDsAMTg5vg/YwfwS4HgK6X/
- uq/Lz6xcvTJID1sdLGaP04+icXrhgmvB+TnO1cORZVw4MGQYNEBcJmPHP1QcEfILGacA
- oHUAdwJm7BcBJfW18okvWOcSmFMwzPjaeFEtP4nZH6G/3kjAMsQ1COWwhs4w8wPnb3+U
- fY5cWfEAI6hCOPUwUS7Kwo8SzsTr0siv5nH8aLSTp6DaW3eQMFoxbSqKmockvI3/Uhld
- 1kG5CSjUEEkSvNmLGVkWYbP1QIm1kxrHvc+zuQ7GhjPzN/mUQRbiPvEYVb15jy52/TIt
- zLdg==
+ d=linaro.org; s=google; t=1736146962; x=1736751762; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=yPcfyLj0RsI9wYqcaozKL/Cd1GLzEcln//Q2DeARfPs=;
+ b=PajKtqA+KN0PycsIE40avwu79WrkJ3FMRdAgKcRrLPXrwhbof+7v3642Dl2evjv4X1
+ 6VYzIqTFISXjRHiPRZkAgTbTE3HQ9wCOMtJBSMepsZatG8MHVLc+41/8Mw8d5ikU05qI
+ k/CsGVbJWame2FChawEWanSWxiZ2LniK8Mt4lm8gIgtJUySTebUGc2cpwLDGWeqNR2v/
+ f9k66pxWQUFaxWryKatH3bDbIF5SRc4lbOCY2WiF8meLtn9cY8DumgOP9B1ANMgOTzpl
+ bVqQndItlq05En9Em6ES8hk82X2LnoaadmQ5AFl58wBE753tF9PW+yqb4sVHdEr6m7MR
+ BavA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1736142236; x=1736747036;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=lo+Qbn3A7nMoxmaDM+Be00oVtg6NcANgPSVAsqKGf7E=;
- b=dWNUikQaRKuC2mqYbmjFdWMzq3/36K9SugjqkS/MxtRRTAdSdGWfkVriSH4XFn2AKj
- 610i2j+Y0R04oRmhAashE9mFi+1mMrbIFzaOu9NY1hNm5AUcbL54301GJCY8sgh5565Z
- 24hEqPhWaC2vhiEA3DCEGUMnUXA+4iiHwbHsAcBtATAnZRQKoEE4WAVFktiyVJ2kBPTF
- EFdIJWfmzXIAzaDCiqORaWVjfyKZ8S47nJzcQbbucyYLw7qMBtoO52xBGjaIMgGNAdDV
- D6ytqcsAJHW2LQyAtnsE1cjyD+xmtwBsNdca1AFTfcd6tUP7Vv0j9FIsJUgaOQENlQC0
- B1+A==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVnAnUm0U3ZCMoYDtHKsMIASaL2cUyLLT2q9eKdD82XDSfKjfcYJYBQ+mDY4xeXnmKylVB/4DJPU21/@nongnu.org
-X-Gm-Message-State: AOJu0YxsHACP3Obw21l2yQyZC8obP/PyxS8NBGxbV/Mey9I8aAiM1LMJ
- aeAXTY5ZiUcbeVfCnW+9kaQtjQurFbY4Oj/6qCvbDCW9rR9Lw7fdYemDMRT405A=
-X-Gm-Gg: ASbGncsnUy93U0Ht2lOI0lXamd5SAk952E3aFHU3EKFeAaww9hDdYN+2qD1qIrI4E7u
- AbrYy6+v2EiUvr/1vfIqH2lR1fJ0Zg4+HTZ75EbKORVz56VaU7Q8Qr60lYYyTu7LZ9aR2WguMeg
- 5DR0+oNiiChxczBnjZvSquFhMvgjTO0iK3U8xeKaEM9zqWDZCXgjQy+8qrrXW1ae1P04dxdrzp0
- ep0EZIU15zOvIl4sxAObdsKaxOeTXXKCAvYQeAtVq3V/8VquA4jMAliYcYvnuR6i2SkvtYGPQRb
- tLqoCstQWLo=
-X-Google-Smtp-Source: AGHT+IHWU++NW0+tcazJZn6R+qRAOGkTkpbSd0uEs/QRr0TocMp7y+iFfioTubbETH7rRfffIXg79Q==
-X-Received: by 2002:a17:902:c40e:b0:215:853d:38 with SMTP id
- d9443c01a7336-219e6ebb75bmr790968905ad.25.1736142235769; 
- Sun, 05 Jan 2025 21:43:55 -0800 (PST)
-Received: from fchang-1826.internal.sifive.com ([210.176.154.33])
- by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-219dc96eac6sm285722215ad.80.2025.01.05.21.43.53
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 05 Jan 2025 21:43:55 -0800 (PST)
-From: frank.chang@sifive.com
-To: qemu-devel@nongnu.org,
-	qemu-riscv@nongnu.org
-Cc: Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bmeng.cn@gmail.com>,
- Weiwei Li <liwei1518@gmail.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, Tommy Wu <tommy.wu@sifive.com>,
- Frank Chang <frank.chang@sifive.com>
-Subject: [PATCH v12 5/6] target/riscv: Add Smrnmi cpu extension
-Date: Mon,  6 Jan 2025 13:43:35 +0800
-Message-Id: <20250106054336.1878291-6-frank.chang@sifive.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20250106054336.1878291-1-frank.chang@sifive.com>
-References: <20250106054336.1878291-1-frank.chang@sifive.com>
+ d=1e100.net; s=20230601; t=1736146962; x=1736751762;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=yPcfyLj0RsI9wYqcaozKL/Cd1GLzEcln//Q2DeARfPs=;
+ b=gLR/lemrosaFxcGwEABd25puTmnO/278c9c1L7UnXo5i517DvG6ew+C9YN3LjaQsHk
+ aKBQFEetkOv5OrrgyBtnG7JhjpZ56dA4YSqTeWUi/E0gKZGFWPKcFHEOEs3v+8T9fA0Q
+ roeiBiJ2XZgTAdDoL/p6wwmipo4txzCGA9XgHrA20Ru41DMrIcPDBORvtJpamKlignuj
+ UTjouP/d+WclQ+0r8KVPIC9PyeAGZqhrwQFwXuaNNp6wjrOuS2S3uUxtQPfjZcWCkibA
+ RmdrqP3tQkQYYKv9N4MX6RQ8ged1XWMdmrjhiLyb9ic1mujWnS1wZPaL1gt3aS19bIoO
+ 2dTA==
+X-Gm-Message-State: AOJu0YyHhmQaXDLIHGq8+aLWQ181LFI03W8M16sbp7liuapk5zPaUhyG
+ bjTaHU/oWkuZfcekHU0VXLzR/XJ7cXykI9F1Tjug5qkvjBUEqxpm0s4vtwOD9ck=
+X-Gm-Gg: ASbGncsUjuEqhuJ7GnAYR+hK9uO1B1G8/rZP50oQyYUUYkv9evARiXWCrbgD3O6TcSQ
+ 5HGX078GE6DNwx0kYoNLjMNTLmmlT3bKPVNAsOuSgeYi3aLfZ7bvErn+7OrSCh4iDnZouFDYQ94
+ dT7s48r2V7yT+BUgpnUe+dnB7qxpTf/vt5g9calflXua7iZYYaSc/b9YOjsKFyPCbHiTVQoY6mq
+ uPY8OKL5UjMb3m6sBITSP8ivd/md6rIkRkOulsT3dKgz3THbcPVI0kNdp5H+EVA8ozh9PMEtgJN
+ GAhdoBQOb8FLz5xv7gXC6blV
+X-Google-Smtp-Source: AGHT+IGLP6anKpHeC9pRPahJb2wo3oOk2ftUwLUu6FbNfufkWu2GWeHTxgDEO2TbDM2IMZF4HqOEMQ==
+X-Received: by 2002:a05:6000:1542:b0:385:fc70:7f6 with SMTP id
+ ffacd0b85a97d-38a221e1f67mr44293784f8f.7.1736146962417; 
+ Sun, 05 Jan 2025 23:02:42 -0800 (PST)
+Received: from [192.168.69.132] (88-187-86-199.subs.proxad.net.
+ [88.187.86.199]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-38a1c89e1acsm47238416f8f.68.2025.01.05.23.02.41
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Sun, 05 Jan 2025 23:02:41 -0800 (PST)
+Message-ID: <3b82468c-e388-4275-8a9c-b0085777e768@linaro.org>
+Date: Mon, 6 Jan 2025 08:02:40 +0100
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/2] target/riscv: use RISCVException enum in exception
+ helpers
+To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>, qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
+ liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com
+References: <20241219174657.1988767-1-dbarboza@ventanamicro.com>
+ <20241219174657.1988767-2-dbarboza@ventanamicro.com>
+Content-Language: en-US
+From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+In-Reply-To: <20241219174657.1988767-2-dbarboza@ventanamicro.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::62b;
- envelope-from=frank.chang@sifive.com; helo=mail-pl1-x62b.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::334;
+ envelope-from=philmd@linaro.org; helo=mail-wm1-x334.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -106,66 +101,22 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Tommy Wu <tommy.wu@sifive.com>
+On 19/12/24 18:46, Daniel Henrique Barboza wrote:
+> Do a cosmetic change in riscv_raise_exception() to change 'exception'
+> type from uint32_t to RISCVException, making it a bit clear that the
+> arg is directly correlated to the RISCVException enum.
+> 
+> As a side effect, change 'excp' type from int to RISCVException in
+> generate_exception() to guarantee that all callers of
+> riscv_raise_exception() will use the enum.
+> 
+> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+> ---
+>   target/riscv/cpu.h       | 3 ++-
+>   target/riscv/op_helper.c | 3 ++-
+>   target/riscv/translate.c | 2 +-
+>   3 files changed, 5 insertions(+), 3 deletions(-)
 
-This adds the properties for ISA extension Smrnmi.
-
-Also, when Smrnmi is present, the firmware (e.g., OpenSBI) must set
-mnstatus.NMIE to 1 before enabling any interrupts. Otherwise, all
-interrupts will be disabled. Since our current OpenSBI does not
-support Smrnmi yet, let's disable Smrnmi for the 'max' type CPU for
-now. We can re-enable it once OpenSBI includes proper support for it.
-
-Signed-off-by: Frank Chang <frank.chang@sifive.com>
-Signed-off-by: Tommy Wu <tommy.wu@sifive.com>
-Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
----
- target/riscv/cpu.c         | 2 ++
- target/riscv/tcg/tcg-cpu.c | 9 +++++++++
- 2 files changed, 11 insertions(+)
-
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 29d530ad85..d9bc0d124e 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -193,6 +193,7 @@ const RISCVIsaExtData isa_edata_arr[] = {
-     ISA_EXT_DATA_ENTRY(smaia, PRIV_VERSION_1_12_0, ext_smaia),
-     ISA_EXT_DATA_ENTRY(smcntrpmf, PRIV_VERSION_1_12_0, ext_smcntrpmf),
-     ISA_EXT_DATA_ENTRY(smepmp, PRIV_VERSION_1_12_0, ext_smepmp),
-+    ISA_EXT_DATA_ENTRY(smrnmi, PRIV_VERSION_1_12_0, ext_smrnmi),
-     ISA_EXT_DATA_ENTRY(smstateen, PRIV_VERSION_1_12_0, ext_smstateen),
-     ISA_EXT_DATA_ENTRY(ssaia, PRIV_VERSION_1_12_0, ext_ssaia),
-     ISA_EXT_DATA_ENTRY(ssccptr, PRIV_VERSION_1_11_0, has_priv_1_11),
-@@ -1621,6 +1622,7 @@ const RISCVCPUMultiExtConfig riscv_cpu_extensions[] = {
- 
-     MULTI_EXT_CFG_BOOL("smaia", ext_smaia, false),
-     MULTI_EXT_CFG_BOOL("smepmp", ext_smepmp, false),
-+    MULTI_EXT_CFG_BOOL("smrnmi", ext_smrnmi, false),
-     MULTI_EXT_CFG_BOOL("smstateen", ext_smstateen, false),
-     MULTI_EXT_CFG_BOOL("ssaia", ext_ssaia, false),
-     MULTI_EXT_CFG_BOOL("svade", ext_svade, false),
-diff --git a/target/riscv/tcg/tcg-cpu.c b/target/riscv/tcg/tcg-cpu.c
-index e03b409248..9cfdd68fdc 100644
---- a/target/riscv/tcg/tcg-cpu.c
-+++ b/target/riscv/tcg/tcg-cpu.c
-@@ -1431,6 +1431,15 @@ static void riscv_init_max_cpu_extensions(Object *obj)
-     if (env->misa_mxl != MXL_RV32) {
-         isa_ext_update_enabled(cpu, CPU_CFG_OFFSET(ext_zcf), false);
-     }
-+
-+    /*
-+     * ext_smrnmi requires OpenSBI changes that our current
-+     * image does not have. Disable it for now.
-+     */
-+    if (cpu->cfg.ext_smrnmi) {
-+        isa_ext_update_enabled(cpu, CPU_CFG_OFFSET(ext_smrnmi), false);
-+        qemu_log("Smrnmi is disabled in the 'max' type CPU\n");
-+    }
- }
- 
- static bool riscv_cpu_has_max_extensions(Object *cpu_obj)
--- 
-2.34.1
+Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 
 
