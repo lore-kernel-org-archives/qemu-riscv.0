@@ -4,91 +4,110 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0A876E77188
-	for <qemu-riscv@archiver.kernel.org>; Mon,  6 Jan 2025 17:38:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9FB9FE77188
+	for <qemu-riscv@archiver.kernel.org>; Mon,  6 Jan 2025 21:14:58 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tUr36-0001Sz-8p; Mon, 06 Jan 2025 12:37:56 -0500
+	id 1tUuQj-0006zZ-7E; Mon, 06 Jan 2025 16:14:33 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1tUr2x-0001Rf-8P
- for qemu-riscv@nongnu.org; Mon, 06 Jan 2025 12:37:50 -0500
-Received: from mail-pj1-x1029.google.com ([2607:f8b0:4864:20::1029])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1tUr2v-00059P-HS
- for qemu-riscv@nongnu.org; Mon, 06 Jan 2025 12:37:46 -0500
-Received: by mail-pj1-x1029.google.com with SMTP id
- 98e67ed59e1d1-2ee8aa26415so21228051a91.1
- for <qemu-riscv@nongnu.org>; Mon, 06 Jan 2025 09:37:44 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1736185064; x=1736789864; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=7vEPaDYMTmy26J/4RhVLGeEBUZMGkiMwnubqyq0F7bs=;
- b=KB5N+ikbTR4kPZ/gvXrUfnmJyUnM2SNHnFB/4/oM4DS1BmT5rI/o3hRg8QhIdyUhOy
- JJnAvZ3zeHFtaB9P8ZTIz9KMHkiT8B7oZ6qUg9XYt9/ZeXuHFc7kqL2epCVXvW/L+J/T
- oK2Q5iclBsCO4+AMmkz/LpQMXjG8k4FC4eFud+qXtrmpJZgXbt02IHTMnmSmdYJMfpot
- wsNmA4cqcMrUCGmY563jPPvaoPixM5o73XU2jOIfjgeqZzsiHLQDYSdaSTNT2CB9yqX3
- qwyLSlSKA/HimZmVY4uEvvlZT2A3f66JvfXzxukP96eBHT0jeYnUAGRJ/K9xJXQ5nt4F
- elmA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1736185064; x=1736789864;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=7vEPaDYMTmy26J/4RhVLGeEBUZMGkiMwnubqyq0F7bs=;
- b=kHpt451coxJ6HFIuC920pyELIqlft1QrarCkfFs6xqKpTAERv18TK/Uw2HMimiTeFs
- SshFbEjnWPM3ekBlFTG7i3oywb8A0QHFugApdai2BUpU9ZBbLV9jLGkCT7iY0w9irS2J
- 79ykNgUUykw990i+1rDS1e/vXzR44aVzd/mTz6h2oqoIbO/24fOqa80oAledBGGH/wBx
- D5p4Xytv/W2A1TAiPW3le5b23FS9/Ccebu1JICNSA0RdszUQz2lxNaelA/eTm0KNPyMp
- fM6by3+Be43wm7HH4UINCeuCk34ELB3ojYt6KMvaRF09I563y8DnbaVUwYoDbRDPxEzN
- CzwQ==
-X-Gm-Message-State: AOJu0YxaL3360sGsrn8lwVtQ1BMShSGwhbuF2RhVKAUQ/CKxDuOAEY2w
- GCsYIFXVyX7iajKgP7LMXdFCi8CZ5zPYi7umMLH2B8Dj/PVCImqGpoYaLR9Fz0U=
-X-Gm-Gg: ASbGncsm2O5cWHMCAwWhkfcl1fEiKHRdda0dwYcyMflaW++rquRClfRoTJlt+XrquwJ
- nDjhFK5R2B2kDH1+g1BYvyUbKDuM/dTNgtCBBf1Racv09A86+NstR5ly55eC7gZyEd7gXI3xgop
- D76xgwVr3W2P50jBO2NW9MssZrZijSE/QU+G0R7Ww2/exIIZMg2Iivd0AtN+STT072quXyIAiCH
- 1+53PM86gZDGfD3+u/WpL11DSnIBqGqLPmyivtEOCWgqIewioZomekyDjCBIPN0B/kAwSkUKVA1
- FOaKoIQQQw==
-X-Google-Smtp-Source: AGHT+IGrsoTurh9eO7bLfQY22rkBasvkH6TZOVwu8qJLFl7laanpLuq1Na30qnoU7Gkmh0YvrCv81g==
-X-Received: by 2002:a17:90b:2543:b0:2f4:432d:250d with SMTP id
- 98e67ed59e1d1-2f452e372edmr79415834a91.21.1736185064015; 
- Mon, 06 Jan 2025 09:37:44 -0800 (PST)
-Received: from grind.dc1.ventanamicro.com ([189.110.107.205])
- by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-2f4478ac7dbsm34139317a91.50.2025.01.06.09.37.41
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 06 Jan 2025 09:37:43 -0800 (PST)
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-To: qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
- liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-Subject: [PATCH v2 1/2] target/riscv: use RISCVException enum in exception
- helpers
-Date: Mon,  6 Jan 2025 14:37:33 -0300
-Message-ID: <20250106173734.412353-2-dbarboza@ventanamicro.com>
-X-Mailer: git-send-email 2.47.1
-In-Reply-To: <20250106173734.412353-1-dbarboza@ventanamicro.com>
-References: <20250106173734.412353-1-dbarboza@ventanamicro.com>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1029;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pj1-x1029.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
+ (Exim 4.90_1) (envelope-from <milesg@linux.ibm.com>)
+ id 1tUtVO-00016a-RI; Mon, 06 Jan 2025 15:15:18 -0500
+Received: from mx0b-001b2d01.pphosted.com ([148.163.158.5])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <milesg@linux.ibm.com>)
+ id 1tUtVL-0004pw-LB; Mon, 06 Jan 2025 15:15:18 -0500
+Received: from pps.filterd (m0353725.ppops.net [127.0.0.1])
+ by mx0a-001b2d01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 506E6sj7002701;
+ Mon, 6 Jan 2025 20:15:10 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ibm.com; h=cc
+ :content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:reply-to:subject:to; s=pp1;
+ bh=DlI62BJub4BdTeNvRspjlRb9urbaLpzCeHPPUjxorK4=; b=J4gL5MaVd82M
+ hOyQ9OGMDBi/WYI3MjB5VPRafg43SFxwQmUbJgr7Rf6RFv8dTOA/O+DDMBeDE/Dz
+ a3EsDF1Hd1jTsU+yVIIEnWCuW0ag6m4ncg3EfcpyjxfnAi/bUH8f4njoDZUbYfdx
+ KRHTPt57uO2WB7IbXnGSgsq51E4bmcEOVSBsN1VhZ+HcE3khwZjIAQfks+xhnwcV
+ pUIws38esAAnDqrot7W4SmJeQozqDh91Ozk/YBEF0+NU9ZwYsan0tfYddI+Bh+6v
+ dh3M/dhGrSwv3T/XHDrjDyyTT/6Vm0pDbkqkJzWDN42L2ADkhCGE2lWyhbd60VVd
+ IR4RgRiUBA==
+Received: from pps.reinject (localhost [127.0.0.1])
+ by mx0a-001b2d01.pphosted.com (PPS) with ESMTPS id 440gn51k11-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Mon, 06 Jan 2025 20:15:09 +0000 (GMT)
+Received: from m0353725.ppops.net (m0353725.ppops.net [127.0.0.1])
+ by pps.reinject (8.18.0.8/8.18.0.8) with ESMTP id 506KB09T017297;
+ Mon, 6 Jan 2025 20:15:09 GMT
+Received: from ppma12.dal12v.mail.ibm.com
+ (dc.9e.1632.ip4.static.sl-reverse.com [50.22.158.220])
+ by mx0a-001b2d01.pphosted.com (PPS) with ESMTPS id 440gn51k10-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Mon, 06 Jan 2025 20:15:09 +0000 (GMT)
+Received: from pps.filterd (ppma12.dal12v.mail.ibm.com [127.0.0.1])
+ by ppma12.dal12v.mail.ibm.com (8.18.1.2/8.18.1.2) with ESMTP id 506I56g5004143;
+ Mon, 6 Jan 2025 20:15:08 GMT
+Received: from smtprelay06.wdc07v.mail.ibm.com ([172.16.1.73])
+ by ppma12.dal12v.mail.ibm.com (PPS) with ESMTPS id 43yfasyfag-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Mon, 06 Jan 2025 20:15:08 +0000
+Received: from smtpav02.wdc07v.mail.ibm.com (smtpav02.wdc07v.mail.ibm.com
+ [10.39.53.229])
+ by smtprelay06.wdc07v.mail.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id
+ 506KF7tD31654622
+ (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Mon, 6 Jan 2025 20:15:08 GMT
+Received: from smtpav02.wdc07v.mail.ibm.com (unknown [127.0.0.1])
+ by IMSVA (Postfix) with ESMTP id D91895805B;
+ Mon,  6 Jan 2025 20:15:07 +0000 (GMT)
+Received: from smtpav02.wdc07v.mail.ibm.com (unknown [127.0.0.1])
+ by IMSVA (Postfix) with ESMTP id 1CA975805F;
+ Mon,  6 Jan 2025 20:15:07 +0000 (GMT)
+Received: from mambor8.rchland.ibm.com (unknown [9.10.239.198])
+ by smtpav02.wdc07v.mail.ibm.com (Postfix) with ESMTP;
+ Mon,  6 Jan 2025 20:15:07 +0000 (GMT)
+Message-ID: <43e8dde9c0605526a4ae796b7dc090aaa8e59b65.camel@linux.ibm.com>
+Subject: Re: [PATCH 26/71] hw/gpio: Constify all Property
+From: Miles Glenn <milesg@linux.ibm.com>
+To: Richard Henderson <richard.henderson@linaro.org>, qemu-devel@nongnu.org
+Cc: Peter Maydell <peter.maydell@linaro.org>, Tyrone Ting
+ <kfting@nuvoton.com>, Hao Wu <wuhaotsh@google.com>, Alistair Francis
+ <Alistair.Francis@wdc.com>, Bin Meng <bmeng.cn@gmail.com>, Palmer Dabbelt
+ <palmer@dabbelt.com>, Samuel Tardieu <sam@rfc1149.net>, "open list:i.MX31
+ (kzm)" <qemu-arm@nongnu.org>, "open list:pca955x" <qemu-ppc@nongnu.org>,
+ "open list:SiFive Machines" <qemu-riscv@nongnu.org>
+Date: Mon, 06 Jan 2025 14:15:06 -0600
+In-Reply-To: <20241213190750.2513964-31-richard.henderson@linaro.org>
+References: <20241213190750.2513964-1-richard.henderson@linaro.org>
+ <20241213190750.2513964-31-richard.henderson@linaro.org>
+Organization: IBM
+Content-Type: text/plain; charset="UTF-8"
+X-Mailer: Evolution 3.28.5 (3.28.5-22.el8_8.2) 
+Mime-Version: 1.0
+Content-Transfer-Encoding: 7bit
+X-TM-AS-GCONF: 00
+X-Proofpoint-ORIG-GUID: E2zrYNGCyRt_j5RA3Pgzv7hIcm1YZ2E9
+X-Proofpoint-GUID: amMgKoZRH-N6hREDOiNz2xcG2gDOi_Yq
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1051,Hydra:6.0.680,FMLib:17.12.62.30
+ definitions=2024-10-15_01,2024-10-11_01,2024-09-30_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ malwarescore=0 adultscore=0
+ mlxscore=0 priorityscore=1501 phishscore=0 suspectscore=0 impostorscore=0
+ mlxlogscore=984 spamscore=0 clxscore=1011 bulkscore=0 lowpriorityscore=0
+ classifier=spam adjust=0 reason=mlx scancount=1 engine=8.19.0-2411120000
+ definitions=main-2501060174
+Received-SPF: pass client-ip=148.163.158.5; envelope-from=milesg@linux.ibm.com;
+ helo=mx0b-001b2d01.pphosted.com
+X-Spam_score_int: -26
+X-Spam_score: -2.7
 X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+X-Spam_report: (-2.7 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_EF=-0.1, RCVD_IN_DNSWL_LOW=-0.7,
+ RCVD_IN_MSPIKE_H2=-0.001, RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001,
+ RCVD_IN_VALIDITY_SAFE_BLOCKED=0.001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
+X-Mailman-Approved-At: Mon, 06 Jan 2025 16:14:32 -0500
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -100,68 +119,143 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
+Reply-To: milesg@linux.ibm.com
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Do a cosmetic change in riscv_raise_exception() to change 'exception'
-type from uint32_t to RISCVException, making it a bit clear that the
-arg is directly correlated to the RISCVException enum.
+Reviewed-by: Glenn Miles <milesg@linux.ibm.com>
 
-As a side effect, change 'excp' type from int to RISCVException in
-generate_exception() to guarantee that all callers of
-riscv_raise_exception() will use the enum.
-
-Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
-Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
----
- target/riscv/cpu.h       | 3 ++-
- target/riscv/op_helper.c | 3 ++-
- target/riscv/translate.c | 2 +-
- 3 files changed, 5 insertions(+), 3 deletions(-)
-
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index 252fdb8672..3d9c404254 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -606,7 +606,8 @@ void riscv_translate_code(CPUState *cs, TranslationBlock *tb,
-                           int *max_insns, vaddr pc, void *host_pc);
- 
- G_NORETURN void riscv_raise_exception(CPURISCVState *env,
--                                      uint32_t exception, uintptr_t pc);
-+                                      RISCVException exception,
-+                                      uintptr_t pc);
- 
- target_ulong riscv_cpu_get_fflags(CPURISCVState *env);
- void riscv_cpu_set_fflags(CPURISCVState *env, target_ulong);
-diff --git a/target/riscv/op_helper.c b/target/riscv/op_helper.c
-index eddedacf4b..29c104bc23 100644
---- a/target/riscv/op_helper.c
-+++ b/target/riscv/op_helper.c
-@@ -27,7 +27,8 @@
- 
- /* Exceptions processing helpers */
- G_NORETURN void riscv_raise_exception(CPURISCVState *env,
--                                      uint32_t exception, uintptr_t pc)
-+                                      RISCVException exception,
-+                                      uintptr_t pc)
- {
-     CPUState *cs = env_cpu(env);
-     cs->exception_index = exception;
-diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-index a992d4f3c6..f46d76c785 100644
---- a/target/riscv/translate.c
-+++ b/target/riscv/translate.c
-@@ -245,7 +245,7 @@ static void gen_update_pc(DisasContext *ctx, target_long diff)
-     ctx->pc_save = ctx->base.pc_next + diff;
- }
- 
--static void generate_exception(DisasContext *ctx, int excp)
-+static void generate_exception(DisasContext *ctx, RISCVException excp)
- {
-     gen_update_pc(ctx, 0);
-     gen_helper_raise_exception(tcg_env, tcg_constant_i32(excp));
--- 
-2.47.1
+On Fri, 2024-12-13 at 13:07 -0600, Richard Henderson wrote:
+> Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
+> ---
+>  hw/gpio/imx_gpio.c       | 2 +-
+>  hw/gpio/npcm7xx_gpio.c   | 2 +-
+>  hw/gpio/omap_gpio.c      | 2 +-
+>  hw/gpio/pca9552.c        | 2 +-
+>  hw/gpio/pca9554.c        | 2 +-
+>  hw/gpio/pl061.c          | 2 +-
+>  hw/gpio/sifive_gpio.c    | 2 +-
+>  hw/gpio/stm32l4x5_gpio.c | 2 +-
+>  8 files changed, 8 insertions(+), 8 deletions(-)
+> 
+> diff --git a/hw/gpio/imx_gpio.c b/hw/gpio/imx_gpio.c
+> index 27535a577f..919d53701f 100644
+> --- a/hw/gpio/imx_gpio.c
+> +++ b/hw/gpio/imx_gpio.c
+> @@ -290,7 +290,7 @@ static const VMStateDescription vmstate_imx_gpio
+> = {
+>      }
+>  };
+>  
+> -static Property imx_gpio_properties[] = {
+> +static const Property imx_gpio_properties[] = {
+>      DEFINE_PROP_BOOL("has-edge-sel", IMXGPIOState, has_edge_sel,
+> true),
+>      DEFINE_PROP_BOOL("has-upper-pin-irq", IMXGPIOState,
+> has_upper_pin_irq,
+>                       false),
+> diff --git a/hw/gpio/npcm7xx_gpio.c b/hw/gpio/npcm7xx_gpio.c
+> index ba19b9ebad..db6792b2ad 100644
+> --- a/hw/gpio/npcm7xx_gpio.c
+> +++ b/hw/gpio/npcm7xx_gpio.c
+> @@ -386,7 +386,7 @@ static const VMStateDescription
+> vmstate_npcm7xx_gpio = {
+>      },
+>  };
+>  
+> -static Property npcm7xx_gpio_properties[] = {
+> +static const Property npcm7xx_gpio_properties[] = {
+>      /* Bit n set => pin n has pullup enabled by default. */
+>      DEFINE_PROP_UINT32("reset-pullup", NPCM7xxGPIOState, reset_pu,
+> 0),
+>      /* Bit n set => pin n has pulldown enabled by default. */
+> diff --git a/hw/gpio/omap_gpio.c b/hw/gpio/omap_gpio.c
+> index a47a2167a6..03ee9e47c6 100644
+> --- a/hw/gpio/omap_gpio.c
+> +++ b/hw/gpio/omap_gpio.c
+> @@ -225,7 +225,7 @@ void omap_gpio_set_clk(Omap1GpioState *gpio,
+> omap_clk clk)
+>      gpio->clk = clk;
+>  }
+>  
+> -static Property omap_gpio_properties[] = {
+> +static const Property omap_gpio_properties[] = {
+>      DEFINE_PROP_INT32("mpu_model", Omap1GpioState, mpu_model, 0),
+>      DEFINE_PROP_END_OF_LIST(),
+>  };
+> diff --git a/hw/gpio/pca9552.c b/hw/gpio/pca9552.c
+> index 59b233339a..427419d218 100644
+> --- a/hw/gpio/pca9552.c
+> +++ b/hw/gpio/pca9552.c
+> @@ -428,7 +428,7 @@ static void pca955x_realize(DeviceState *dev,
+> Error **errp)
+>      qdev_init_gpio_in(dev, pca955x_gpio_in_handler, k->pin_count);
+>  }
+>  
+> -static Property pca955x_properties[] = {
+> +static const Property pca955x_properties[] = {
+>      DEFINE_PROP_STRING("description", PCA955xState, description),
+>      DEFINE_PROP_END_OF_LIST(),
+>  };
+> diff --git a/hw/gpio/pca9554.c b/hw/gpio/pca9554.c
+> index 68cc9e1de4..e8b0458aac 100644
+> --- a/hw/gpio/pca9554.c
+> +++ b/hw/gpio/pca9554.c
+> @@ -291,7 +291,7 @@ static void pca9554_realize(DeviceState *dev,
+> Error **errp)
+>      qdev_init_gpio_in(dev, pca9554_gpio_in_handler,
+> PCA9554_PIN_COUNT);
+>  }
+>  
+> -static Property pca9554_properties[] = {
+> +static const Property pca9554_properties[] = {
+>      DEFINE_PROP_STRING("description", PCA9554State, description),
+>      DEFINE_PROP_END_OF_LIST(),
+>  };
+> diff --git a/hw/gpio/pl061.c b/hw/gpio/pl061.c
+> index d5838b8e98..9b8ca6de32 100644
+> --- a/hw/gpio/pl061.c
+> +++ b/hw/gpio/pl061.c
+> @@ -562,7 +562,7 @@ static void pl061_realize(DeviceState *dev, Error
+> **errp)
+>      }
+>  }
+>  
+> -static Property pl061_props[] = {
+> +static const Property pl061_props[] = {
+>      DEFINE_PROP_UINT32("pullups", PL061State, pullups, 0xff),
+>      DEFINE_PROP_UINT32("pulldowns", PL061State, pulldowns, 0x0),
+>      DEFINE_PROP_END_OF_LIST()
+> diff --git a/hw/gpio/sifive_gpio.c b/hw/gpio/sifive_gpio.c
+> index e85c0406a2..5603f0c235 100644
+> --- a/hw/gpio/sifive_gpio.c
+> +++ b/hw/gpio/sifive_gpio.c
+> @@ -349,7 +349,7 @@ static const VMStateDescription
+> vmstate_sifive_gpio = {
+>      }
+>  };
+>  
+> -static Property sifive_gpio_properties[] = {
+> +static const Property sifive_gpio_properties[] = {
+>      DEFINE_PROP_UINT32("ngpio", SIFIVEGPIOState, ngpio,
+> SIFIVE_GPIO_PINS),
+>      DEFINE_PROP_END_OF_LIST(),
+>  };
+> diff --git a/hw/gpio/stm32l4x5_gpio.c b/hw/gpio/stm32l4x5_gpio.c
+> index 30d8d6cba4..d1394f3f55 100644
+> --- a/hw/gpio/stm32l4x5_gpio.c
+> +++ b/hw/gpio/stm32l4x5_gpio.c
+> @@ -447,7 +447,7 @@ static const VMStateDescription
+> vmstate_stm32l4x5_gpio = {
+>      }
+>  };
+>  
+> -static Property stm32l4x5_gpio_properties[] = {
+> +static const Property stm32l4x5_gpio_properties[] = {
+>      DEFINE_PROP_STRING("name", Stm32l4x5GpioState, name),
+>      DEFINE_PROP_UINT32("mode-reset", Stm32l4x5GpioState,
+> moder_reset, 0),
+>      DEFINE_PROP_UINT32("ospeed-reset", Stm32l4x5GpioState,
+> ospeedr_reset, 0),
 
 
