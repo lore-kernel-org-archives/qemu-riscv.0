@@ -4,67 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 94585E77197
-	for <qemu-riscv@archiver.kernel.org>; Tue,  7 Jan 2025 16:59:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 69300E77198
+	for <qemu-riscv@archiver.kernel.org>; Tue,  7 Jan 2025 17:00:10 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tVCuB-0002DW-C6; Tue, 07 Jan 2025 11:58:16 -0500
+	id 1tVCub-00039U-OE; Tue, 07 Jan 2025 11:58:37 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1tVCu0-00029E-KI
- for qemu-riscv@nongnu.org; Tue, 07 Jan 2025 11:58:01 -0500
-Received: from mail-wm1-x329.google.com ([2a00:1450:4864:20::329])
+ id 1tVCu5-0002D9-OY
+ for qemu-riscv@nongnu.org; Tue, 07 Jan 2025 11:58:07 -0500
+Received: from mail-wr1-x429.google.com ([2a00:1450:4864:20::429])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1tVCtv-0006uA-QT
- for qemu-riscv@nongnu.org; Tue, 07 Jan 2025 11:58:00 -0500
-Received: by mail-wm1-x329.google.com with SMTP id
- 5b1f17b1804b1-436281c8a38so113259525e9.3
- for <qemu-riscv@nongnu.org>; Tue, 07 Jan 2025 08:57:55 -0800 (PST)
+ id 1tVCtx-0006uu-DR
+ for qemu-riscv@nongnu.org; Tue, 07 Jan 2025 11:58:04 -0500
+Received: by mail-wr1-x429.google.com with SMTP id
+ ffacd0b85a97d-385df53e559so12343469f8f.3
+ for <qemu-riscv@nongnu.org>; Tue, 07 Jan 2025 08:57:56 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1736269074; x=1736873874; darn=nongnu.org;
+ d=linaro.org; s=google; t=1736269075; x=1736873875; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=MJxt9IGDQlJ1+KQmlOP1oYH7KxpruLFwZ7bhPRqF6vE=;
- b=l6scB2UeqOFWseQ0mJKSXmNjPLWythqOImEmAn59mEIQgtVfWimw6sdfN88GJS51MP
- jXKRWbXW0KiBV9Bm+0psIsJ2tZz5kIcb/AI+dsY/C5Lk+DiwrlJ6AoJjr/R0aePkgfd9
- 0qjIFHozNcCbmARAdGakCzkOZUMurYhXR85J/RudLCyzfSa23pESMj/oGgVsmiU34p0S
- y6eHSJFYQyVKIEztYpoBo4s27lEdVPGyNOpZV/EnXr5F/CtHOdA2AJzKbC8IsbxqsIJH
- 4fA2KK/EAn9XXhArizEkbkMn6RXVo4DA2nEUIPBGQtBvZ/G5EKktKdwJnoCJx3xHpg01
- /SOA==
+ bh=nFfG/GhyJtenhyLEVTE3AVP5mUk8/FfquvKMuCtf9bQ=;
+ b=v+LKh1mpX0aUlJ5kD3m/Yfpjrk18zEu03oCIxC/i1M2NdMZEwnSTdhql5EcN41JESH
+ gxFL462q91sFmC4lZFIUZCF17/TF5KVDS5hWoGP6bjAJP3ojVfEItaknCcGDrlOIR4Gw
+ hmnPhKRggXcPDFg0SRAQ18RWoHBZ85/3U+0qF8cjsHexDnVdS56cSQLN4UTszB5Tok/F
+ NDTxvcxg+MmK477zSF4HHRM7et3L83+WHSXMHOvbslrDfa7uErFzrOnGLr7ZDeWhR7hc
+ 7qyFTl/E1WhLGVXdq0s7fI26J6NCxjJiqDdgS0SJO0wls3idmWBtWAEwIwxddkgNjYJK
+ soJQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1736269074; x=1736873874;
+ d=1e100.net; s=20230601; t=1736269075; x=1736873875;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=MJxt9IGDQlJ1+KQmlOP1oYH7KxpruLFwZ7bhPRqF6vE=;
- b=Jsrsw0/mUecTfsB8xmNfIzr0dgri+mMZONvJXawYNI5crdjClAzssUVqZVVun/ADEC
- osq+o713S8QXWcrEJAvaolTDc5v1fMGzZzMJki/3wpdpULNH5u/1Nq1W/bi7h1lcxfG0
- JRP+56toZxClC2sXfmTZVf28z/rgH4fLkn2ahtI6A83d54bwRvmAZFfRXDVRpH8MA5s/
- cRcMsskX6pzO3tUaIdvyxGZ35cozxWpM3Niq1iAY1EHPtQhHMy5VtlV8jzSwZgFbqI5+
- OY3rTPChD4XFIHZs6L4nUuNqdMwwhwokAv16eRagCg+1pDnWad/gblvMrX74iOm9SZWb
- SOHQ==
+ bh=nFfG/GhyJtenhyLEVTE3AVP5mUk8/FfquvKMuCtf9bQ=;
+ b=qx9XdI719/+honEN53XWAUEkEUENaAPqj0XVItpHncxgYk+g1Y0v0d3uBUbifhVD2n
+ JpvZSqFUbjzNswQ+UblKXTc5el8mfhaDpolV3i1bOfvjTc9q4ZpsQkw8u9zKU5v6P2Ih
+ 026/WWmCk2S/pLVM0hWz79EzHbEzc4cx3D/wqFB3kkRpoYrLqQyYVkND/8mP0b0hOMtW
+ oEVpAKJVs5ErXxo/eRWDbtAq9sub+NeoPqe9vX1VE5CwTAelnZO2yhD2mJ+5AW+pOqEU
+ pmJJC0A5um3EmPqdBXByn8MybDbrucb5rMhwWwKYKmeDG/nES9+11v1dokOmuklpaXNl
+ Is4w==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVs4rUAT4PZjFCl/bU62ASInkk6pBxYsMZxTBwXS1cCuaBtEquIxGv5KBpQ7TmHdfTuBll49G3Ip1lf@nongnu.org
-X-Gm-Message-State: AOJu0YwePPY7pkZfRr7hFm3Of1eoTKh7oiHyUiqj+4sbBt24j98T7di2
- h/QjQfzVS+tJFnoHLVehOx3GAjJaW36NhFQGVVM2SB1mpnNr7SfCaOi14O2LG5Q=
-X-Gm-Gg: ASbGncuBWFcUsrumFfhBALURUI1XlMlru55pW4doElSR956mjoDeDf3B2prYfm6B8Cb
- Pj+kZoF6HZfVPIv7+gTqwLwiHHRcbmviP6Y3nojBjw9oFakXUbZ9Jef8gBSdVwLDnugZpn2bw4M
- Jl5znWv6WFZLAfcfiU/4uy4+7Xg9oXx886SCB5AcFk7+YPggo3IkeKmykUx0pcYpFGmTDGIiYIh
- AA5axHkZySg7XwOTTpb0DjDiK68mgGBniJKGOeJXOA+0N7UdTXr07Y=
-X-Google-Smtp-Source: AGHT+IFAkBpxcnevEqMjoZiIDmMT7TgDciUe/fYSbyaBGvogpc4HTp5vOEekncGtiK89wQJWMjZjrA==
-X-Received: by 2002:a05:600c:4688:b0:435:b064:7dce with SMTP id
- 5b1f17b1804b1-4366864618emr570189795e9.18.1736269074296; 
- Tue, 07 Jan 2025 08:57:54 -0800 (PST)
+ AJvYcCV9vvNTw7usj5oEL78Rm1mvi/Af17JSrDgkVfeIlZDfwfflApxn+gzNSY8tSVkviSMTjOZYoEWQ1bxp@nongnu.org
+X-Gm-Message-State: AOJu0YzXlnsYbZsqua3L0uz1X5MFd2Nl5ACH5SNmC9t2KvU56Mkv7CQY
+ SPyiDFZyV+HUzzoIZFxplbYSXzqJBvxaJe21wRmIW5HWGBQ3rvWgdpMb5xX5/ac=
+X-Gm-Gg: ASbGncshNHuhKmS/JXnXww7D8JhlL/jp838jhMcuHtq1agpsDEWKilHLFfVlsQ8RPXO
+ P12B7Ku9nmkXZcxENfyQ/ESOEFq3qul/d+fQItIAU+MMeUboC6tgvt/XmH+12DUDoLeALDV9Qj/
+ t7zMPNbhL7QhsZTU9sKhzq7HqyaTS4iHKibC3ME1cMae3omXsKnhcr6QHhk7nY7T9oYSdLzKFOI
+ zbvs2gRvUCKC3y4LBlXxBLvZWdBMKLoMIKqKaJZDaN4TFce7ae3SSM=
+X-Google-Smtp-Source: AGHT+IE3ohtUbgRkaCW6ztb9H0NCoIYXv9QnP50PvzDAGEDJXZLSpd7/OQoX8BbLH2HoVO0GfGRyOw==
+X-Received: by 2002:a05:6000:4816:b0:386:37af:dd9a with SMTP id
+ ffacd0b85a97d-38a22201ac8mr57952980f8f.35.1736269075441; 
+ Tue, 07 Jan 2025 08:57:55 -0800 (PST)
 Received: from draig.lan ([85.9.250.243]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4366127c4b0sm604067075e9.35.2025.01.07.08.57.52
+ ffacd0b85a97d-38a1c829015sm50843202f8f.13.2025.01.07.08.57.53
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
  Tue, 07 Jan 2025 08:57:53 -0800 (PST)
 Received: from draig.lan (localhost [IPv6:::1])
- by draig.lan (Postfix) with ESMTP id 909285FC6C;
+ by draig.lan (Postfix) with ESMTP id D2DEB5FD97;
  Tue,  7 Jan 2025 16:52:09 +0000 (GMT)
 From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
 To: qemu-devel@nongnu.org
@@ -99,25 +99,25 @@ Cc: Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
  =?UTF-8?q?Daniel=20P=2E=20Berrang=C3=A9?= <berrange@redhat.com>,
  =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
  Bernhard Beschow <shentey@gmail.com>, "Michael S. Tsirkin" <mst@redhat.com>
-Subject: [PATCH v3 17/29] system/qtest: properly feedback results of
- clock_[step|set]
-Date: Tue,  7 Jan 2025 16:51:55 +0000
-Message-Id: <20250107165208.743958-18-alex.bennee@linaro.org>
+Subject: [PATCH v3 20/29] tests/functional: extend test_aarch64_virt with
+ vulkan test
+Date: Tue,  7 Jan 2025 16:51:58 +0000
+Message-Id: <20250107165208.743958-21-alex.bennee@linaro.org>
 X-Mailer: git-send-email 2.39.5
 In-Reply-To: <20250107165208.743958-1-alex.bennee@linaro.org>
 References: <20250107165208.743958-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::329;
- envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x329.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::429;
+ envelope-from=alex.bennee@linaro.org; helo=mail-wr1-x429.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -133,83 +133,154 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Time will not advance if the system is paused or there are no timer
-events set for the future. In absence of pending timer events
-advancing time would make no difference the system state. Attempting
-to do so would be a bug and the test or device under test would need
-fixing.
+Now we have virtio-gpu Vulkan support lets add a test for it.
+Currently this is using images build by buildroot:
 
-Tighten up the result reporting to `FAIL` if time was not advanced.
+  https://lists.buildroot.org/pipermail/buildroot/2024-December/768196.html
 
 Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
-Reviewed-by: Fabiano Rosas <farosas@suse.de>
-Resolves: https://gitlab.com/qemu-project/qemu/-/issues/2687
----
- system/qtest.c | 23 ++++++++++++++---------
- 1 file changed, 14 insertions(+), 9 deletions(-)
 
-diff --git a/system/qtest.c b/system/qtest.c
-index 99ef2042f6..e68ed0f2a8 100644
---- a/system/qtest.c
-+++ b/system/qtest.c
-@@ -78,6 +78,11 @@ static void *qtest_server_send_opaque;
-  * let you adjust the value of the clock (monotonically).  All the commands
-  * return the current value of the clock in nanoseconds.
-  *
-+ * If the commands FAIL then time wasn't advanced which is likely
-+ * because the machine was in a paused state or no timer events exist
-+ * in the future. This will cause qtest to abort and the test will
-+ * need to check its assumptions.
-+ *
-  * .. code-block:: none
-  *
-  *  > clock_step
-@@ -710,7 +715,8 @@ static void qtest_process_command(CharBackend *chr, gchar **words)
-             qtest_sendf(chr, "OK little\n");
-         }
-     } else if (qtest_enabled() && strcmp(words[0], "clock_step") == 0) {
--        int64_t ns;
-+        int64_t old_ns = qemu_clock_get_ns(QEMU_CLOCK_VIRTUAL);
-+        int64_t ns, new_ns;
+---
+v2
+  - use decorator for has_cmd(zstd)
+  - un-handled->unhandled
+  - drop extra - from --snapshot
+  - drop unneeded virtualization=on
+  - only show 1s of each scene
+  - fix long lines
+v3
+  - move set_machine/require_accelerator to top of test
+  - use uncompress utility function
+  - remove extra ()'s from ASSETS
+---
+ tests/functional/test_aarch64_virt.py | 84 +++++++++++++++++++++++++--
+ 1 file changed, 79 insertions(+), 5 deletions(-)
+
+diff --git a/tests/functional/test_aarch64_virt.py b/tests/functional/test_aarch64_virt.py
+index 2d9995a95d..bb68048537 100755
+--- a/tests/functional/test_aarch64_virt.py
++++ b/tests/functional/test_aarch64_virt.py
+@@ -13,11 +13,14 @@
+ import logging
+ from subprocess import check_call, DEVNULL
  
-         if (words[1]) {
-             int ret = qemu_strtoi64(words[1], NULL, 0, &ns);
-@@ -719,11 +725,10 @@ static void qtest_process_command(CharBackend *chr, gchar **words)
-             ns = qemu_clock_deadline_ns_all(QEMU_CLOCK_VIRTUAL,
-                                             QEMU_TIMER_ATTR_ALL);
-         }
--        qemu_clock_advance_virtual_time(
--            qemu_clock_get_ns(QEMU_CLOCK_VIRTUAL) + ns);
-+        new_ns = qemu_clock_advance_virtual_time(old_ns + ns);
-         qtest_send_prefix(chr);
--        qtest_sendf(chr, "OK %"PRIi64"\n",
--                    (int64_t)qemu_clock_get_ns(QEMU_CLOCK_VIRTUAL));
-+        qtest_sendf(chr, "%s %"PRIi64"\n",
-+                    new_ns > old_ns ? "OK" : "FAIL", new_ns);
-     } else if (strcmp(words[0], "module_load") == 0) {
-         Error *local_err = NULL;
-         int rv;
-@@ -740,16 +745,16 @@ static void qtest_process_command(CharBackend *chr, gchar **words)
-             qtest_sendf(chr, "FAIL\n");
-         }
-     } else if (qtest_enabled() && strcmp(words[0], "clock_set") == 0) {
--        int64_t ns;
-+        int64_t ns, new_ns;
-         int ret;
++from qemu.machine.machine import VMLaunchFailure
++
++from qemu_test import BUILD_DIR
+ from qemu_test import QemuSystemTest, Asset
+-from qemu_test import exec_command_and_wait_for_pattern
++from qemu_test import exec_command, exec_command_and_wait_for_pattern
+ from qemu_test import wait_for_console_pattern
+ from qemu_test import get_qemu_img
+-
++from qemu_test import skipIfMissingCommands, get_qemu_img
  
-         g_assert(words[1]);
-         ret = qemu_strtoi64(words[1], NULL, 0, &ns);
-         g_assert(ret == 0);
--        qemu_clock_advance_virtual_time(ns);
-+        new_ns = qemu_clock_advance_virtual_time(ns);
-         qtest_send_prefix(chr);
--        qtest_sendf(chr, "OK %"PRIi64"\n",
--                    (int64_t)qemu_clock_get_ns(QEMU_CLOCK_VIRTUAL));
-+        qtest_sendf(chr, "%s %"PRIi64"\n",
-+                    new_ns == ns ? "OK" : "FAIL", new_ns);
-     } else if (process_command_cb && process_command_cb(chr, words)) {
-         /* Command got consumed by the callback handler */
-     } else {
+ class Aarch64VirtMachine(QemuSystemTest):
+     KERNEL_COMMON_COMMAND_LINE = 'printk.time=0 '
+@@ -73,15 +76,16 @@ def common_aarch64_virt(self, machine):
+         Common code to launch basic virt machine with kernel+initrd
+         and a scratch disk.
+         """
++        self.set_machine('virt')
++        self.require_accelerator("tcg")
++
+         logger = logging.getLogger('aarch64_virt')
+ 
+         kernel_path = self.ASSET_KERNEL.fetch()
+ 
+-        self.set_machine('virt')
+         self.vm.set_console()
+         kernel_command_line = (self.KERNEL_COMMON_COMMAND_LINE +
+                                'console=ttyAMA0')
+-        self.require_accelerator("tcg")
+         self.vm.add_args('-cpu', 'max,pauth-impdef=on',
+                          '-machine', machine,
+                          '-accel', 'tcg',
+@@ -102,7 +106,9 @@ def common_aarch64_virt(self, machine):
+ 
+         # Add the device
+         self.vm.add_args('-blockdev',
+-                         f"driver=qcow2,file.driver=file,file.filename={image_path},node-name=scratch")
++                         "driver=qcow2,file."
++                         "driver=file,file."
++                         f"filename={image_path},node-name=scratch")
+         self.vm.add_args('-device',
+                          'virtio-blk-device,drive=scratch')
+ 
+@@ -131,5 +137,73 @@ def test_aarch64_virt_gicv2(self):
+         self.common_aarch64_virt("virt,gic-version=2")
+ 
+ 
++    ASSET_VIRT_GPU_KERNEL = Asset(
++        'https://fileserver.linaro.org/s/ce5jXBFinPxtEdx/'
++        'download?path=%2F&files='
++        'Image',
++        '89e5099d26166204cc5ca4bb6d1a11b92c217e1f82ec67e3ba363d09157462f6')
++
++    ASSET_VIRT_GPU_ROOTFS = Asset(
++        'https://fileserver.linaro.org/s/ce5jXBFinPxtEdx/'
++        'download?path=%2F&files='
++        'rootfs.ext4.zstd',
++        '792da7573f5dc2913ddb7c638151d4a6b2d028a4cb2afb38add513c1924bdad4')
++
++    @skipIfMissingCommands('zstd')
++    def test_aarch64_virt_with_gpu(self):
++        # This tests boots with a buildroot test image that contains
++        # vkmark and other GPU exercising tools. We run a headless
++        # weston that nevertheless still exercises the virtio-gpu
++        # backend.
++
++        self.set_machine('virt')
++        self.require_accelerator("tcg")
++
++        kernel_path = self.ASSET_VIRT_GPU_KERNEL.fetch()
++        image_path = self.uncompress(self.ASSET_VIRT_GPU_ROOTFS, format="zstd")
++
++        self.vm.set_console()
++        kernel_command_line = (self.KERNEL_COMMON_COMMAND_LINE +
++                               'console=ttyAMA0 root=/dev/vda')
++
++        self.vm.add_args("-accel", "tcg")
++        self.vm.add_args("-cpu", "neoverse-v1,pauth-impdef=on")
++        self.vm.add_args("-machine", "virt,gic-version=max",
++                         '-kernel', kernel_path,
++                         '-append', kernel_command_line)
++        self.vm.add_args("-smp", "2", "-m", "2048")
++        self.vm.add_args("-device",
++                         "virtio-gpu-gl-pci,hostmem=4G,blob=on,venus=on")
++        self.vm.add_args("-display", "egl-headless")
++        self.vm.add_args("-display", "dbus,gl=on")
++        self.vm.add_args("-device", "virtio-blk-device,drive=hd0")
++        self.vm.add_args("-blockdev",
++                         "driver=raw,file.driver=file,"
++                         "node-name=hd0,read-only=on,"
++                         f"file.filename={image_path}")
++        self.vm.add_args("-snapshot")
++
++        try:
++            self.vm.launch()
++        except VMLaunchFailure as excp:
++            if "old virglrenderer, blob resources unsupported" in excp.output:
++                self.skipTest("No blob support for virtio-gpu")
++            elif "old virglrenderer, venus unsupported" in excp.output:
++                self.skipTest("No venus support for virtio-gpu")
++            else:
++                self.log.info("unhandled launch failure: {excp.output}")
++                raise excp
++
++        self.wait_for_console_pattern('buildroot login:')
++        exec_command(self, 'root')
++        exec_command(self, 'export XDG_RUNTIME_DIR=/tmp')
++        exec_command_and_wait_for_pattern(self,
++                                          "weston -B headless "
++                                          "--renderer gl "
++                                          "--shell kiosk "
++                                          "-- vkmark -b:duration=1.0",
++                                          "vkmark Score")
++
++
+ if __name__ == '__main__':
+     QemuSystemTest.main()
 -- 
 2.39.5
 
