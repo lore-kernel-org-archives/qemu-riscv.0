@@ -4,90 +4,121 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 118F6E77198
-	for <qemu-riscv@archiver.kernel.org>; Tue,  7 Jan 2025 15:27:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AA548E77199
+	for <qemu-riscv@archiver.kernel.org>; Tue,  7 Jan 2025 16:53:00 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tVBU6-0001xp-Jn; Tue, 07 Jan 2025 10:27:10 -0500
+	id 1tVCot-0004CO-1g; Tue, 07 Jan 2025 11:52:44 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1tVBU3-0001xE-LO
- for qemu-riscv@nongnu.org; Tue, 07 Jan 2025 10:27:07 -0500
-Received: from mail-pj1-x102f.google.com ([2607:f8b0:4864:20::102f])
+ (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
+ id 1tVCol-00048D-VR
+ for qemu-riscv@nongnu.org; Tue, 07 Jan 2025 11:52:37 -0500
+Received: from mail-wr1-x435.google.com ([2a00:1450:4864:20::435])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1tVBU2-00047q-0m
- for qemu-riscv@nongnu.org; Tue, 07 Jan 2025 10:27:07 -0500
-Received: by mail-pj1-x102f.google.com with SMTP id
- 98e67ed59e1d1-2ee397a82f6so23333420a91.2
- for <qemu-riscv@nongnu.org>; Tue, 07 Jan 2025 07:27:05 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
+ id 1tVCoQ-0005ps-0D
+ for qemu-riscv@nongnu.org; Tue, 07 Jan 2025 11:52:35 -0500
+Received: by mail-wr1-x435.google.com with SMTP id
+ ffacd0b85a97d-385dece873cso5925185f8f.0
+ for <qemu-riscv@nongnu.org>; Tue, 07 Jan 2025 08:52:13 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1736263624; x=1736868424; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=Xnhe/f46nqxtalb7KGtFTeaX7QlcvPzDfu3D/eQVlsY=;
- b=NLIQmHXge127CVvXXfp+vNEuCrRpu1XHagwTXMgNSgnCBJzTl5o2SG/oCnb26TMaov
- nqz6v/Re7avDXZ+sNarI0x/u4f6zDBuqcgfM6zTayI5u4cimrWW7Yiw3Hz/uj2IzyFId
- fg/Y7OwiWkKzAMuh7liropfZ4IDPaED45p75pIUjq9/cmg/Kd2zrxLAzc329ROp60N7A
- LCazvSIvY4gDv6jBfqTNAMRvBJmPfgMLxZGuFJBxXje48wLpfhd9jxqskdWhfjhqYD0W
- 5dnLNRd4rBfDpebwc5KNoLsAkFfgvI3c9/0OvyD1279ItIFXIx+m8tFeI4Eagibi89KC
- pRcQ==
+ d=linaro.org; s=google; t=1736268732; x=1736873532; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=zZ8UT6jHrgv7BkeIPE8IB1TgPopOqtqdb8E+kOWH8C0=;
+ b=HsJ2xDWNOFSpLb9sbHNEwJRut+V88IIZMW5Ng82hM9UNuF+e7J1KP+N+4k5Qy6msFw
+ G1GZNA9qIXwWKcZYK9joA/8xZDmH7hX1OCSse23SZQradzNJ7n/2b+5tgkkL5wKUfLn5
+ rjVH2PbgJsUFAozHKUnoj7Fprt9+5VdcBxuKeaRD/Y0nWLRyC4MBM0Fr1vjy6hERpLPG
+ qqOqnYvYv4tiFJ3cMfWZGW/cBFb99mchfKP4nKru13EaFwPZFYgGaVYiUyEyjD7gFAJ+
+ NGi3BeyixvOx6CeryQHopeaaDAOcLz3AGWxc8L0qwQh83KL4DdLn61JUzXTFgg2d0tTx
+ t6Mw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1736263624; x=1736868424;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=Xnhe/f46nqxtalb7KGtFTeaX7QlcvPzDfu3D/eQVlsY=;
- b=N/0iV0HrYNtmJOg5PNlIwINce4sTyAyTSSveYrj2FFZ0J8ZcF7W7O72lVeFRBiA573
- so3lU5N36cpwBEeaYeO0TTxK/Al+O9kQMcK467WEJmjtvbzS+obQP1l7xdALRlmoYhBF
- VJeZaEimiYZoxevunH0zcsgmYlqZjAjS/6hzzx6vr07mf6mBXKjrpYtV3DMLWqGgEG8h
- 4z1HHvADBIq74fMftELI1Gwn9dVPfeOimITOul2p6D45ecR/aOsW1dUA0xUQS5GV/EOv
- jr97ilDylgF1iMs3GL9ceq+YBlfu3c7atDqbzCjnnioBEuwKNXRZUC0blyDB76f7HSGH
- nAOA==
-X-Gm-Message-State: AOJu0YzBX0fLQzpTFXrHUsXokZEPmy1ohNY9GTgDHMMBC3Rli/YGvToP
- 2U4MBprQ+p8BYXRoOZchELBtgHT6vmWEC0roQ+lpc0c8FQZNQ4Zk2OcKhT1NZSU=
-X-Gm-Gg: ASbGncutSZggfIdaP9hPs7o2Y4aAckfscyFsbcS/W0JRCJniI3Zyv0+XaJyr034Q79p
- U42XiBH3vxQS0IpHRcp5ON8OBBUbO54bRHXSnU9451VYrSM1uD8Ye1jyfuamtutVV3tRk7MFaze
- sa+D5akK9aXlOqgmgGrlXht6K8yZPzx8nkpjDrq0v+GcC00u8B6eEjhXTknpa85VNgehDmq9b7I
- AZQn/dG0KcEfTDqyQWmPLJZRifGM0iJcCqiUFGDUOdANdPXCxJq/VgPYTHmCs8mfFoJuHyyHt38
- qLUbV5fn+/zW9/3XZQykL5I4GVb4qyM=
-X-Google-Smtp-Source: AGHT+IH71vueA1E7eI8vMK9Vr28aT1Vn9Mvlzd76I4gNft2jGcvSZchMluQnK9wkIsL2EhkEFxMbSw==
-X-Received: by 2002:a17:90a:e18b:b0:2ee:fdf3:390d with SMTP id
- 98e67ed59e1d1-2f452edc2cfmr77205326a91.31.1736263624354; 
- Tue, 07 Jan 2025 07:27:04 -0800 (PST)
-Received: from [192.168.132.227] (76-14-228-138.or.wavecable.com.
- [76.14.228.138]) by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-219dc9f7307sm309935065ad.195.2025.01.07.07.27.03
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 07 Jan 2025 07:27:04 -0800 (PST)
-Message-ID: <4f5fb5fe-2f12-4fdf-9fab-600742b72a99@linaro.org>
-Date: Tue, 7 Jan 2025 07:27:01 -0800
+ d=1e100.net; s=20230601; t=1736268732; x=1736873532;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=zZ8UT6jHrgv7BkeIPE8IB1TgPopOqtqdb8E+kOWH8C0=;
+ b=ICrsUauwE3+Kz7ttZagil9zScCSwCCDQP/nBcKTbBGdY7iU0lhVM+b7DlBJ6yMFE5f
+ 5A3X4VAvvkcby8S1HfPGM67oermSX8cE+XyWk8glbqsv/DXKau3AAZA4/Pip6aQuSMFN
+ AiEOLMfi70tJEbvDV2cmdLn9hFeuwo/gk1SqiUhUSrrfO7RUI3sUcXiaBGraHpjkmASj
+ VwcMKAL/u/ppPKF5EfRRNqwtQH66V8M12Yl/C1CPg6e4OtYTnNojnIhr6zGRRscmYA9O
+ aFKY7KAD8vxnnD7mI7d+tYXZIpHjI7YxJRzaNpd/B50jiXpZKrdXfxs0kuXS7UfPydzR
+ QoVg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXNPw8OxE7kfA9zdknyVU5boT85qx0c6jJ6bimraycYbDfIbgimczT35UB9eOr49+7ffEzFuOB9Zws6@nongnu.org
+X-Gm-Message-State: AOJu0YxP7grGLH9Ym+Q6SUPN4CSfqFgS8HuYDD0ZQAVfoVuHr6X6GCyz
+ AZQiEz1x+cMPGKY/8Y5JYzpCeM5z+q5RepTXRkXX6VoTm9W4crtoT7BOntOaZ0c=
+X-Gm-Gg: ASbGncsPiz7BlKb34wKoHr/aHsohkIK9uxQd9C0+SfgV21fgpGKzrQtA/gbc3lK1jfz
+ y8CDMIniGU1eLUjiY8DTYvj7Zpxm8jkq4P3mmeyS5mDztIHuy9sOvEPTXp5qxcNEbCKSspWABkv
+ nesCg2O/GV2csxZUztv7VRG33icRna+qhP69nU6Y/N9DUy6zD6cthFSosDa9S05dsVrOe2NfeHw
+ uwE/zxodxdMsIuwDnHAoAZl5R0hmin5tyLopQeK3WF5I4g6Hnc7kvU=
+X-Google-Smtp-Source: AGHT+IENa6eTmPdepmstf8RKDbtX08AaB0+XJ0DJ2k/Ple9HilrT80qAtQxuP3P1aDLhVzJ2nLkXFw==
+X-Received: by 2002:a05:6000:471e:b0:382:31a1:8dc3 with SMTP id
+ ffacd0b85a97d-38a222007dcmr59367432f8f.35.1736268732318; 
+ Tue, 07 Jan 2025 08:52:12 -0800 (PST)
+Received: from draig.lan ([85.9.250.243]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-38a1c832c45sm50367205f8f.32.2025.01.07.08.52.09
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 07 Jan 2025 08:52:11 -0800 (PST)
+Received: from draig.lan (localhost [IPv6:::1])
+ by draig.lan (Postfix) with ESMTP id 68BE85F929;
+ Tue,  7 Jan 2025 16:52:08 +0000 (GMT)
+From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
+To: qemu-devel@nongnu.org
+Cc: Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
+ Beraldo Leal <bleal@redhat.com>, Ed Maste <emaste@freebsd.org>,
+ Halil Pasic <pasic@linux.ibm.com>, qemu-ppc@nongnu.org,
+ John Snow <jsnow@redhat.com>, Radoslaw Biernacki <rad@semihalf.com>,
+ Nicholas Piggin <npiggin@gmail.com>, Markus Armbruster <armbru@redhat.com>,
+ Leif Lindholm <quic_llindhol@quicinc.com>,
+ =?UTF-8?q?Marc-Andr=C3=A9=20Lureau?= <marcandre.lureau@redhat.com>,
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
+ Paolo Bonzini <pbonzini@redhat.com>, Bin Meng <bmeng.cn@gmail.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Marcel Apfelbaum <marcel.apfelbaum@gmail.com>, qemu-riscv@nongnu.org,
+ Christian Borntraeger <borntraeger@linux.ibm.com>,
+ Wainer dos Santos Moschetta <wainersm@redhat.com>, qemu-s390x@nongnu.org,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, Fabiano Rosas <farosas@suse.de>,
+ Weiwei Li <liwei1518@gmail.com>,
+ Harsh Prateek Bora <harshpb@linux.ibm.com>, qemu-arm@nongnu.org,
+ Li-Wen Hsu <lwhsu@freebsd.org>, Palmer Dabbelt <palmer@dabbelt.com>,
+ Daniel Henrique Barboza <danielhb413@gmail.com>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Cleber Rosa <crosa@redhat.com>,
+ Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>,
+ Peter Maydell <peter.maydell@linaro.org>,
+ Laurent Vivier <lvivier@redhat.com>, Aurelien Jarno <aurelien@aurel32.net>,
+ Eric Farman <farman@linux.ibm.com>,
+ Pavel Dovgalyuk <pavel.dovgaluk@ispras.ru>,
+ Jiaxun Yang <jiaxun.yang@flygoat.com>, Thomas Huth <thuth@redhat.com>,
+ Laurent Vivier <laurent@vivier.eu>, Joel Stanley <joel@jms.id.au>,
+ =?UTF-8?q?Daniel=20P=2E=20Berrang=C3=A9?= <berrange@redhat.com>,
+ =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
+ Bernhard Beschow <shentey@gmail.com>,
+ "Michael S. Tsirkin" <mst@redhat.com>,
+ Anders Roxell <anders.roxell@linaro.org>
+Subject: [PATCH v3 04/29] tests/functional: update the mips32 tuxrun tests
+Date: Tue,  7 Jan 2025 16:51:42 +0000
+Message-Id: <20250107165208.743958-5-alex.bennee@linaro.org>
+X-Mailer: git-send-email 2.39.5
+In-Reply-To: <20250107165208.743958-1-alex.bennee@linaro.org>
+References: <20250107165208.743958-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/2] tcg/riscv: Use BEXTI for single-bit extractions
-To: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, palmer@dabbelt.com, Alistair.Francis@wdc.com
-References: <20250102181601.1421059-1-richard.henderson@linaro.org>
- <20250102181601.1421059-3-richard.henderson@linaro.org>
- <05497e58-43ad-41de-b868-223aafa6ed3e@linaro.org>
-Content-Language: en-US
-From: Richard Henderson <richard.henderson@linaro.org>
-In-Reply-To: <05497e58-43ad-41de-b868-223aafa6ed3e@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::102f;
- envelope-from=richard.henderson@linaro.org; helo=mail-pj1-x102f.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::435;
+ envelope-from=alex.bennee@linaro.org; helo=mail-wr1-x435.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -103,33 +134,38 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 1/7/25 02:29, Philippe Mathieu-Daudé wrote:
-> Hi Richard,
-> 
-> On 2/1/25 19:16, Richard Henderson wrote:
->> Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
->> ---
->>   tcg/riscv/tcg-target-has.h |  8 +++++++-
->>   tcg/riscv/tcg-target.c.inc | 13 +++++++++++--
->>   2 files changed, 18 insertions(+), 3 deletions(-)
->>
->> diff --git a/tcg/riscv/tcg-target-has.h b/tcg/riscv/tcg-target-has.h
->> index 10e61edc45..ea38ee5cbb 100644
->> --- a/tcg/riscv/tcg-target-has.h
->> +++ b/tcg/riscv/tcg-target-has.h
->> @@ -64,7 +64,13 @@ tcg_target_extract_valid(TCGType type, unsigned ofs, unsigned len)
->>           /* ofs > 0 uses SRLIW; ofs == 0 uses add.uw. */
->>           return ofs || (cpuinfo & CPUINFO_ZBA);
->>       }
->> -    return (cpuinfo & CPUINFO_ZBB) && ofs == 0 && len == 16;
->> +    switch (len) {
->> +    case 1:
->> +        return (cpuinfo & CPUINFO_ZBS) && ofs != 0;
-> 
-> Why can't we have ofs=0?
+Now there are new up to date images available we should update to them.
 
-To prefer ANDI.
+Cc: Anders Roxell <anders.roxell@linaro.org>
+Reviewed-by: Thomas Huth <thuth@redhat.com>
+Tested-by: Thomas Huth <thuth@redhat.com>
+Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
+Message-Id: <20241121165806.476008-25-alex.bennee@linaro.org>
+---
+ tests/functional/test_mips_tuxrun.py | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
 
+diff --git a/tests/functional/test_mips_tuxrun.py b/tests/functional/test_mips_tuxrun.py
+index 6fec44c2bf..6771dbd57e 100755
+--- a/tests/functional/test_mips_tuxrun.py
++++ b/tests/functional/test_mips_tuxrun.py
+@@ -17,11 +17,11 @@
+ class TuxRunMipsTest(TuxRunBaselineTest):
+ 
+     ASSET_MIPS_KERNEL = Asset(
+-        'https://storage.tuxboot.com/20230331/mips32/vmlinux',
+-        'bfd2172f8b17fb32970ca0c8c58f59c5a4ca38aa5855d920be3a69b5d16e52f0')
++        'https://storage.tuxboot.com/buildroot/20241119/mips32/vmlinux',
++        'b6f97fc698ae8c96456ad8c996c7454228074df0d7520dedd0a15e2913700a19')
+     ASSET_MIPS_ROOTFS = Asset(
+-        'https://storage.tuxboot.com/20230331/mips32/rootfs.ext4.zst',
+-        'fc3da0b4c2f38d74c6d705123bb0f633c76ed953128f9d0859378c328a6d11a0')
++        'https://storage.tuxboot.com/buildroot/20241119/mips32/rootfs.ext4.zst',
++        '87055cf3cbde3fd134e5039e7b87feb03231d8c4b21ee712b8ba3308dfa72f50')
+ 
+     def test_mips32(self):
+         self.set_machine('malta')
+-- 
+2.39.5
 
-r~
 
