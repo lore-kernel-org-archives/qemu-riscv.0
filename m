@@ -4,67 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B921EE77197
-	for <qemu-riscv@archiver.kernel.org>; Tue,  7 Jan 2025 16:59:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D8D3BE77199
+	for <qemu-riscv@archiver.kernel.org>; Tue,  7 Jan 2025 16:59:33 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tVCtz-00025s-3X; Tue, 07 Jan 2025 11:57:59 -0500
+	id 1tVCqE-0005yH-9W; Tue, 07 Jan 2025 11:54:06 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1tVCtx-00022Q-1T
- for qemu-riscv@nongnu.org; Tue, 07 Jan 2025 11:57:57 -0500
-Received: from mail-wr1-x429.google.com ([2a00:1450:4864:20::429])
+ id 1tVCpP-0004oT-2Q
+ for qemu-riscv@nongnu.org; Tue, 07 Jan 2025 11:53:15 -0500
+Received: from mail-wm1-x336.google.com ([2a00:1450:4864:20::336])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1tVCtv-0006tj-5t
- for qemu-riscv@nongnu.org; Tue, 07 Jan 2025 11:57:56 -0500
-Received: by mail-wr1-x429.google.com with SMTP id
- ffacd0b85a97d-3862ca8e0bbso11997832f8f.0
- for <qemu-riscv@nongnu.org>; Tue, 07 Jan 2025 08:57:54 -0800 (PST)
+ id 1tVCoW-0005ta-1w
+ for qemu-riscv@nongnu.org; Tue, 07 Jan 2025 11:53:14 -0500
+Received: by mail-wm1-x336.google.com with SMTP id
+ 5b1f17b1804b1-43623f0c574so109033545e9.2
+ for <qemu-riscv@nongnu.org>; Tue, 07 Jan 2025 08:52:19 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1736269074; x=1736873874; darn=nongnu.org;
+ d=linaro.org; s=google; t=1736268738; x=1736873538; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=R2nl2q/jhmEGUG+F/0rLUrlSD8XWQpV+qDK7U0WrjiI=;
- b=ep1UI+ph1tfkafoqMiSs+87E1a+xmrIw95FPIQRlraBQsakLCgmET5SRQaaYEiaav+
- tGwApgixu7MHSp9kJRG9g6zejrd4ixwzQrQO1bnca0ZP/G3lvwS7D47UDQE22X5Lee0j
- 7MDgRLU8qEKcdb3AS/i520g4dzUVbRcoGJdn32ibJO+JtDzsYNxTgLYClB84M/6RQooN
- TCMBk6HtB5SPSXH7SOATKEI0r6B6jFD+QBOT4dOk4KiSqKYfnzjf6q7aya19aXt+kpJD
- DnQirlOVB+7Lc+0MBNQoNTznli5fE6AAlMnsGq5a7MnkDip9iAdoi+bg2oHicPXXdQKf
- xNGQ==
+ bh=5U9Od47PCiWI45o7WJdMxF/b5gdEZ4yrNLzNgilwbJs=;
+ b=Pa9tBIWRsggb1g1QKgQsQWpRWA+Ep9/r0cVP7PNIiUkw0xGBI2ns1ecq5Rm/LqmBf9
+ /HUadqeZIr5Q+2XzRSwLkXX7MsF3bAD9s4IZdHHxGsFRa9sSkvgIZwhAzoVPTuKik5S0
+ vqX7g9BQ980L6/GxaHWi/4Nbm0dDr8eJhDhFcgC5F0gnOjeO2xvPm91HGMgb49hgq5RK
+ RaGTfCFBlYhix+Rukh8enh6EYazQS54DENFADTwA1a2wqIdKtQH0iH3YflP9VoaEJs28
+ eafmFfvcBxVTEVtlA3sNYjBR6RNjdKrWnOk4LyFCdjnsycFPWoO4pDSMqV0sMxznoj0x
+ txzw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1736269074; x=1736873874;
+ d=1e100.net; s=20230601; t=1736268738; x=1736873538;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=R2nl2q/jhmEGUG+F/0rLUrlSD8XWQpV+qDK7U0WrjiI=;
- b=Iihsg00kFr88DIcofeR6oJcARcFU/8eQ+V9NPm4Nf5Ii+OrPy7myw0lYmAsVkvLZpC
- cA+I0vboAN39oEixFKo6epCyvID6f6vxCbhHR6nALKhs2dldVnyr+mRwEN0OFBsH4enQ
- Ng74B1fUtBPnfETTNCRofzuS+JoW/8/xC4FQW5GhQrtpqB3Xoz2dYqzx6dqi42dlaHhi
- wJgIYG+ECKPWaXZY+7yTb2JFO7ZHf6Sh1LwdCZWwTJ+dFtrdUJhFA3RamTJg1jSgGyGo
- HSyyhzv5Sdk2uL37TDGYLvoE9F6B9DEUPzNPnmy1wb+YPMybaMRiBNSFpJXfBpqn4Ugj
- LYSA==
+ bh=5U9Od47PCiWI45o7WJdMxF/b5gdEZ4yrNLzNgilwbJs=;
+ b=wVT0YgPjG6U9e5IPE4u5v54wC/nYw5irYOFyVLHTr5dcSNCJJSqBQPcVry+TrQl7i8
+ YmlhUbvafBgXaMiIxzJWqT4L7EiMEM6seg2Jk+TepNbnhFGD+riNjSAFEV+il58tF9P7
+ bxcqrWc9v/11wCEpXkWuDUHcHR8j4YxAdhaxBM42BHXSRV4CIv+h7JaMFSgWb6BOgWJ8
+ 2JFiN/Inz4DsZJvxo5+E1HxMMhciS8cX01BAjMh2QdYpLhiSGXo6W3bdNqX4h2SLkssy
+ 2PiSic2NmJQDmLFnvN5Y+rCRD7L4tNKq+a9anzXcnFFuXiol89RPqRKpEgNnKzqgp3Y/
+ sfNA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCX/pHiJgPa8vB9lg9iPz5sZVo93sl8B1sfPTSs7g0Qk0HNxOSTwXEg3ZI2DSnDmox6Cn8icL/d1XeX0@nongnu.org
-X-Gm-Message-State: AOJu0YyFA63Lo9dVAedSAnB9bNpPQtdH/W1xW+agzhyaVXOOdzZSRul7
- XMFa7tPuzvhxg5UkVnIZD+uUX9jsg2r4/3AULE4ZJZLZzkLzAroeE5ftOQXa6es=
-X-Gm-Gg: ASbGncvf2u0NdXPPtZUXbmLFf0LGOy6coksfOsfRsaWzmWj7ktJWHPL3536aHFt1VLT
- KuVaZ0//iMHKtVlwXOCMHckkLpXkrDal5g6xtLXjQFawquKeS5IykgvzWCl0276/bHsQc3wqpMe
- DyRPfRo7qc/9z+49F9VK8uStWzSmkKEgHoM2Z7i2ipyTNCYMYcNfD9XD206H6q7DTby2H5SlB2w
- WsBpyTnpmumSYqaQV8T2uI2fyhOM7R1/Zgvli97wmFafgnuyuaWXGQ=
-X-Google-Smtp-Source: AGHT+IGRf/DUfHTpWX1mrFa1rZyRHPWojHW3ZkaRYvLYQTxAPMD/fqdIkKloQyWPx+nXncAI4HJpZA==
-X-Received: by 2002:a05:6000:704:b0:385:fd24:3317 with SMTP id
- ffacd0b85a97d-38a221e2389mr51337852f8f.1.1736269073626; 
- Tue, 07 Jan 2025 08:57:53 -0800 (PST)
+ AJvYcCX7hIZ9K87EbJ4BjbObcmGNxYTSnNker4DH+STAOpLDmKDs+E3c5wJ4XRyU3LuQRtV1QF18LA9U/yDl@nongnu.org
+X-Gm-Message-State: AOJu0YwrTpNF+IUdN56TykaQ2kyBA1la6fRG9+X3AJE4SK5JO12OHkLN
+ uDH4+FS1dfVqFUWetZ3ssI3eehFTbXz2ucaAFMPFWvqafB9vqjNuvD9VMAbjFIY=
+X-Gm-Gg: ASbGncsHmT3iP7RGgoWqyXWEAkEF3O6NIFLrFsHkj5Yn+VBuPXtMnatvyKZt4wupxek
+ PsE9DRpokV0rMgyTnGCPYlwlTo6bT2dxnB4+oR0mLoIP9m9FfcMLDB4n9gzYBHtz6cylG1qS8lM
+ 3psfCanNgwUoUEUDWgYQe5bk7IVNWvDoAOVM4ULmpyEoC34DuBQ2AZBw27jZPEU7rW9aTZ3z+iE
+ DKJU038pDLQSzKRN4TupPUipCjZaRLRbBtQ43u/iEbNoX7cMxgAVLE=
+X-Google-Smtp-Source: AGHT+IF7eWBjzwgS7klw+c2qtHff5U2g9oOpXDSOOJAivsiA8CBu32akBs3XuivgDqN6Xf1w5zjiIQ==
+X-Received: by 2002:a05:600c:45cd:b0:434:a7b6:10e9 with SMTP id
+ 5b1f17b1804b1-436686462f9mr580879235e9.17.1736268738360; 
+ Tue, 07 Jan 2025 08:52:18 -0800 (PST)
 Received: from draig.lan ([85.9.250.243]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-436612008casm605560395e9.14.2025.01.07.08.57.52
+ 5b1f17b1804b1-43656b1143dsm633697005e9.18.2025.01.07.08.52.12
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 07 Jan 2025 08:57:53 -0800 (PST)
+ Tue, 07 Jan 2025 08:52:16 -0800 (PST)
 Received: from draig.lan (localhost [IPv6:::1])
- by draig.lan (Postfix) with ESMTP id EB81C5FDC6;
+ by draig.lan (Postfix) with ESMTP id 37B245FB53;
  Tue,  7 Jan 2025 16:52:09 +0000 (GMT)
 From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
 To: qemu-devel@nongnu.org
@@ -98,25 +98,27 @@ Cc: Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
  Laurent Vivier <laurent@vivier.eu>, Joel Stanley <joel@jms.id.au>,
  =?UTF-8?q?Daniel=20P=2E=20Berrang=C3=A9?= <berrange@redhat.com>,
  =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
- Bernhard Beschow <shentey@gmail.com>, "Michael S. Tsirkin" <mst@redhat.com>
-Subject: [PATCH v3 21/29] tests/lcitool: bump to latest version of libvirt-ci
-Date: Tue,  7 Jan 2025 16:51:59 +0000
-Message-Id: <20250107165208.743958-22-alex.bennee@linaro.org>
+ Bernhard Beschow <shentey@gmail.com>,
+ "Michael S. Tsirkin" <mst@redhat.com>,
+ Anders Roxell <anders.roxell@linaro.org>
+Subject: [PATCH v3 13/29] tests/functional: update the sparc64 tuxrun tests
+Date: Tue,  7 Jan 2025 16:51:51 +0000
+Message-Id: <20250107165208.743958-14-alex.bennee@linaro.org>
 X-Mailer: git-send-email 2.39.5
 In-Reply-To: <20250107165208.743958-1-alex.bennee@linaro.org>
 References: <20250107165208.743958-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::429;
- envelope-from=alex.bennee@linaro.org; helo=mail-wr1-x429.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::336;
+ envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x336.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -132,51 +134,37 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-We will shortly need this to build our riscv64 cross container.
-However to keep the delta down just do the bump first. As ccache4 is
-now preferred for FreeBSD to get the latest version there is a little
-update in the FreeBSD metadata.
+Now there are new up to date images available we should update to them.
 
+Cc: Anders Roxell <anders.roxell@linaro.org>
+Reviewed-by: Thomas Huth <thuth@redhat.com>
+Tested-by: Thomas Huth <thuth@redhat.com>
 Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
-Reviewed-by: Daniel P. Berrangé <berrange@redhat.com>
+Message-Id: <20241121165806.476008-34-alex.bennee@linaro.org>
 ---
- .gitlab-ci.d/cirrus/freebsd-14.vars | 2 +-
- tests/lcitool/libvirt-ci            | 2 +-
- tests/vm/generated/freebsd.json     | 2 +-
- 3 files changed, 3 insertions(+), 3 deletions(-)
+ tests/functional/test_sparc64_tuxrun.py | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/.gitlab-ci.d/cirrus/freebsd-14.vars b/.gitlab-ci.d/cirrus/freebsd-14.vars
-index 0a7ac5e0e1..0997c47af5 100644
---- a/.gitlab-ci.d/cirrus/freebsd-14.vars
-+++ b/.gitlab-ci.d/cirrus/freebsd-14.vars
-@@ -11,6 +11,6 @@ MAKE='/usr/local/bin/gmake'
- NINJA='/usr/local/bin/ninja'
- PACKAGING_COMMAND='pkg'
- PIP3='/usr/local/bin/pip'
--PKGS='alsa-lib bash bison bzip2 ca_root_nss capstone4 ccache cmocka ctags curl cyrus-sasl dbus diffutils dtc flex fusefs-libs3 gettext git glib gmake gnutls gsed gtk-vnc gtk3 json-c libepoxy libffi libgcrypt libjpeg-turbo libnfs libslirp libspice-server libssh libtasn1 llvm lzo2 meson mtools ncurses nettle ninja opencv pixman pkgconf png py311-numpy py311-pillow py311-pip py311-pyyaml py311-sphinx py311-sphinx_rtd_theme py311-tomli python3 rpm2cpio rust rust-bindgen-cli sdl2 sdl2_image snappy sndio socat spice-protocol tesseract usbredir virglrenderer vte3 xorriso zstd'
-+PKGS='alsa-lib bash bison bzip2 ca_root_nss capstone4 ccache4 cmocka ctags curl cyrus-sasl dbus diffutils dtc flex fusefs-libs3 gettext git glib gmake gnutls gsed gtk-vnc gtk3 json-c libepoxy libffi libgcrypt libjpeg-turbo libnfs libslirp libspice-server libssh libtasn1 llvm lzo2 meson mtools ncurses nettle ninja opencv pixman pkgconf png py311-numpy py311-pillow py311-pip py311-pyyaml py311-sphinx py311-sphinx_rtd_theme py311-tomli python3 rpm2cpio rust rust-bindgen-cli sdl2 sdl2_image snappy sndio socat spice-protocol tesseract usbredir virglrenderer vte3 xorriso zstd'
- PYPI_PKGS=''
- PYTHON='/usr/local/bin/python3'
-diff --git a/tests/lcitool/libvirt-ci b/tests/lcitool/libvirt-ci
-index 9ad3f70bde..b6a65806bc 160000
---- a/tests/lcitool/libvirt-ci
-+++ b/tests/lcitool/libvirt-ci
-@@ -1 +1 @@
--Subproject commit 9ad3f70bde9865d5ad18f36d256d472e72b5cbf3
-+Subproject commit b6a65806bc9b2b56985f5e97c936b77c7e7a99fc
-diff --git a/tests/vm/generated/freebsd.json b/tests/vm/generated/freebsd.json
-index 3cb7fb7060..81fc38d798 100644
---- a/tests/vm/generated/freebsd.json
-+++ b/tests/vm/generated/freebsd.json
-@@ -13,7 +13,7 @@
-     "bzip2",
-     "ca_root_nss",
-     "capstone4",
--    "ccache",
-+    "ccache4",
-     "cmocka",
-     "ctags",
-     "curl",
+diff --git a/tests/functional/test_sparc64_tuxrun.py b/tests/functional/test_sparc64_tuxrun.py
+index 1c2c005630..3be08d6102 100755
+--- a/tests/functional/test_sparc64_tuxrun.py
++++ b/tests/functional/test_sparc64_tuxrun.py
+@@ -17,11 +17,11 @@
+ class TuxRunSparc64Test(TuxRunBaselineTest):
+ 
+     ASSET_SPARC64_KERNEL = Asset(
+-        'https://storage.tuxboot.com/20230331/sparc64/vmlinux',
+-        'e34313e4325ff21deaa3d38a502aa09a373ef62b9bd4d7f8f29388b688225c55')
++        'https://storage.tuxboot.com/buildroot/20241119/sparc64/vmlinux',
++        'a04cfb2e70a264051d161fdd93aabf4b2a9472f2e435c14ed18c5848c5fed261')
+     ASSET_SPARC64_ROOTFS = Asset(
+-        'https://storage.tuxboot.com/20230331/sparc64/rootfs.ext4.zst',
+-        'ad2f1dc436ab51583543d25d2c210cab478645d47078d30d129a66ab0e281d76')
++        'https://storage.tuxboot.com/buildroot/20241119/sparc64/rootfs.ext4.zst',
++        '479c3dc104c82b68be55e2c0c5c38cd473d0b37ad4badccde4775bb88ce34611')
+ 
+     def test_sparc64(self):
+         self.root='sda'
 -- 
 2.39.5
 
