@@ -4,68 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5CBF8E77197
-	for <qemu-riscv@archiver.kernel.org>; Tue,  7 Jan 2025 16:55:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 44254E7719B
+	for <qemu-riscv@archiver.kernel.org>; Tue,  7 Jan 2025 16:55:47 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tVCoz-0004K2-VO; Tue, 07 Jan 2025 11:52:49 -0500
+	id 1tVCqM-0006bI-S2; Tue, 07 Jan 2025 11:54:14 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1tVCox-0004Fi-EB
- for qemu-riscv@nongnu.org; Tue, 07 Jan 2025 11:52:47 -0500
-Received: from mail-wr1-x42d.google.com ([2a00:1450:4864:20::42d])
+ id 1tVCpW-00056A-CJ
+ for qemu-riscv@nongnu.org; Tue, 07 Jan 2025 11:53:23 -0500
+Received: from mail-wr1-x436.google.com ([2a00:1450:4864:20::436])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1tVCoR-0005r0-Rj
- for qemu-riscv@nongnu.org; Tue, 07 Jan 2025 11:52:47 -0500
-Received: by mail-wr1-x42d.google.com with SMTP id
- ffacd0b85a97d-3862df95f92so6959928f8f.2
- for <qemu-riscv@nongnu.org>; Tue, 07 Jan 2025 08:52:15 -0800 (PST)
+ id 1tVCoZ-0005vl-8y
+ for qemu-riscv@nongnu.org; Tue, 07 Jan 2025 11:53:21 -0500
+Received: by mail-wr1-x436.google.com with SMTP id
+ ffacd0b85a97d-385e1fcb0e1so8632687f8f.2
+ for <qemu-riscv@nongnu.org>; Tue, 07 Jan 2025 08:52:22 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1736268734; x=1736873534; darn=nongnu.org;
+ d=linaro.org; s=google; t=1736268742; x=1736873542; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=tEl5ZxIur5QRWg63f27lDW4UGnFwRWpUXbJtYvdKy8I=;
- b=xzaIps/wVJwJKo6yxlO7oqmJDw1og9bURfqcch/CHkXccSnMfD5qBizjdcY0Z4OLGe
- KNWBngtPfVcCtI20ADsmxF1cy2OACqtdx2rlR17cB3xnW4CaMl+1sksaJBL+DD94JiZ8
- /xUmwc+pqGZ9HStAGwfqyW4Ew/7rsbn+9+pppfcGrpdi8XlQyTS+Ugz23v0mH3YHRbGg
- rIyevDhcWoBN4Oz0CHLfYbu+hByIpQKrrqWnlR9XsUaZbT3zQ1mcbWT5aCCK3wtdR1KP
- GimQNMa8v0afGKmDm+A0yNRzot6nBuZL3k7fNbqPSHOh4Cuv0N3vpQOLU0QYKtRyqAzH
- 3gGw==
+ bh=9bkcZ+UQ0l/G8BdjL46Ekgb6aiXVq9O7cYmGEkCbVeY=;
+ b=EtP2JYyofY27C6qg5Flc37aCdv7HrJZ5etsiFXU3bFNNm9aCsmF7nRx9tw2UYwDGH3
+ ASf4amad5vvIblAiy2rVl3dT1KL0k1q2FR7jzyh2ritrQNvkg+RWeofDqN3Nn6ejvSaj
+ wTk5adon3duCAIQN05BW+k/PjM4EP0XfZHKrT2Yf9oCbR8xQWaWKnRMw9XIeG8X876xR
+ DW9XZqsi/kvhJpOLOppGqHNlJUoTM8xdtMYD5/s4jls4IbWxrZOwy4kk7isMEUysAiwr
+ uirY+xEv0Kce3Q0GwDjcJA5/liQajBSQmOas7ExKhk6sp5Inta2w2IJXgi1R/UL+1+r1
+ O1CA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1736268734; x=1736873534;
+ d=1e100.net; s=20230601; t=1736268742; x=1736873542;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=tEl5ZxIur5QRWg63f27lDW4UGnFwRWpUXbJtYvdKy8I=;
- b=B0mVO4VAmmw2My0mryA0ZhmPROK3RCdLmUT6I1pHptrzqa9CsF8MkmujjxLsIWDWkU
- tZIR63G2yXxF6z+32LAK93ypZrQVgJKCFzWcBzherXk6mP56nbl4sPWMDyIFC8UFIZI6
- movuxTawCi3OinybqJbmt+94+5YhrPASOavvSmDrCVvcllP9CRLwHUYS74a+sm7+Go5Y
- SwyP0BJzqCoTNuSh9x7qaxhFhd5yh08rcG7EwHPD4zhlZ4lMtlxm72GQRJzfJdxm0SYP
- r+IfwPS74u6EcY+jK/APXWFf/KsBVJMpFI/XYQ+biDjPa6sTDNk6v0adPT57K0uX7OXC
- 5/ew==
+ bh=9bkcZ+UQ0l/G8BdjL46Ekgb6aiXVq9O7cYmGEkCbVeY=;
+ b=aV54T6bMftFZLIT3g93Rs+mwxaO0fcLzA64osIbJ1DBwF2jS2Kh17DpxJm0UZKKUNS
+ m4g8lCwffCGxekZ9ABK4r3VynZFeOeQYqnmFbQ/qTZ1FW58z4Lsaf2qUXTas6r9C5guK
+ ftcTwzB+kvyA3/cls/nzlt110UfTZdSte0hU2hp5r1hdEki+W0zgSToNEyNAMsFinVQp
+ 4H8HyRkmkBgst3t0e3KWkt16lEZBVeWuR3RdiUX8NfCRv6dGk1hRjmc9u44Ro4RowXCO
+ sNAiuiwzrpG8wzapG8+5EgnRc+6rlOQr/m0pVSoDVua1/a3UaoR+kKSq7m9GorC+sMrA
+ 061Q==
 X-Forwarded-Encrypted: i=1;
- AJvYcCU130uyUTKwXXXooT9zk8aWyqJSCNZa9BbpcZxebp46l+r8TXo49qHFG103HyJAAuhogjw3/yv9Y16G@nongnu.org
-X-Gm-Message-State: AOJu0YxNBOtM2rwDlFc+P0Pk47IJVJeLkP9Zk8AA1q7N/rahuZqVpToZ
- AaYHjBexGj+DD9ruPXlzvgJFrx6sIRaaiEqs5+JI7eI5uz9V38+wRZi+UXN1kyk=
-X-Gm-Gg: ASbGncvyXzyMhKKnusz1/geqff69YiCOrDRUgDY2DhwhioOxY8S0lSMc5kUq3Z2SiFP
- hhULjJeSw1DyiBj0uf2C0ixYJzkG6px3x+XU+GGvED7c3JtRi6QGOKDZP9kgs5JUkcCGfL3hWaw
- kYK6gxQVOny3ekMZ9BbYXrejEL1GyVxPwwoai/XmCv4DSk7tRd3Od3DmqNr2IREcuFFx17ziQPY
- UmDyzfphqzytREFuFO9Dujp8f2eNUS1wLVfBJu8eN96sk+6hA7EFgw=
-X-Google-Smtp-Source: AGHT+IG615Arlpv0gxDBvVJqfGCuJrrV7B0i+vru7SvdAIn74OPbWtlGlrnVi8z9S7CyhnJI5ikMew==
-X-Received: by 2002:a05:6000:1acb:b0:385:df19:cbf with SMTP id
- ffacd0b85a97d-38a221f2e1fmr56448349f8f.28.1736268733975; 
- Tue, 07 Jan 2025 08:52:13 -0800 (PST)
+ AJvYcCU2RHnD42uUeHq1j1+Hp+F2pguni2pPrDqxBC99d136rfLEnJgyxzO3MvwDH63so73yQMknwD6YHfGQ@nongnu.org
+X-Gm-Message-State: AOJu0YzJt/GF7v2LYCvj8C607n/bcLi/gjChgDdCXJXHQds1GI+OYfJO
+ +nPr/7GnfA1L/e/SZs08vV+czyCn/BrC5FeMn1XZg6SX8PC8IUKlrSILTsX6NHE=
+X-Gm-Gg: ASbGncs/u1wyE/Q3WkM+y9wTdGRM7Q5YZIqup8kF+0nawgSSMsDKkO1Kl8qrFZOcvQM
+ PMjYWPI+CtxKPvUpZ4CNe9RgwMKj9V1FuzG6BGskTqz2G6uYo0RII40AeGpmPLIVyj8X+4+RFya
+ 7anRaUJxZ4u4b9f/WVOnPF/nAhNul8IvxmAiAjzLJH4ar1EKNUY3RmoY08RoVKvmuTZx7aVHFRv
+ a0Z67y+u4l311jFmcYwHMWhmO36xn/FpJfJTEz1UvwoKEy1mQ5pbrw=
+X-Google-Smtp-Source: AGHT+IGefZKDySJlS4CrSeYUwxLMByi32RabbTOWrXYjfIFalO0HsUJ1KBm/dHAmxfMbCI9mOH8XbA==
+X-Received: by 2002:a05:6000:1fa9:b0:385:f38e:c0c3 with SMTP id
+ ffacd0b85a97d-38a221f1391mr47094494f8f.6.1736268741670; 
+ Tue, 07 Jan 2025 08:52:21 -0800 (PST)
 Received: from draig.lan ([85.9.250.243]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-38a412f778esm36660188f8f.4.2025.01.07.08.52.10
+ ffacd0b85a97d-38a457584bcsm33619886f8f.89.2025.01.07.08.52.16
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 07 Jan 2025 08:52:11 -0800 (PST)
+ Tue, 07 Jan 2025 08:52:16 -0800 (PST)
 Received: from draig.lan (localhost [IPv6:::1])
- by draig.lan (Postfix) with ESMTP id AE4B35F94C;
- Tue,  7 Jan 2025 16:52:08 +0000 (GMT)
+ by draig.lan (Postfix) with ESMTP id 4C6925F8FC;
+ Tue,  7 Jan 2025 16:52:10 +0000 (GMT)
 From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
@@ -98,27 +98,25 @@ Cc: Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
  Laurent Vivier <laurent@vivier.eu>, Joel Stanley <joel@jms.id.au>,
  =?UTF-8?q?Daniel=20P=2E=20Berrang=C3=A9?= <berrange@redhat.com>,
  =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
- Bernhard Beschow <shentey@gmail.com>,
- "Michael S. Tsirkin" <mst@redhat.com>,
- Anders Roxell <anders.roxell@linaro.org>
-Subject: [PATCH v3 07/29] tests/functional: update the mips64el tuxrun tests
-Date: Tue,  7 Jan 2025 16:51:45 +0000
-Message-Id: <20250107165208.743958-8-alex.bennee@linaro.org>
+ Bernhard Beschow <shentey@gmail.com>, "Michael S. Tsirkin" <mst@redhat.com>
+Subject: [PATCH v3 25/29] tests/vm: partially un-tabify help output
+Date: Tue,  7 Jan 2025 16:52:03 +0000
+Message-Id: <20250107165208.743958-26-alex.bennee@linaro.org>
 X-Mailer: git-send-email 2.39.5
 In-Reply-To: <20250107165208.743958-1-alex.bennee@linaro.org>
 References: <20250107165208.743958-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::42d;
- envelope-from=alex.bennee@linaro.org; helo=mail-wr1-x42d.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::436;
+ envelope-from=alex.bennee@linaro.org; helo=mail-wr1-x436.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -134,37 +132,56 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Now there are new up to date images available we should update to them.
+While the make syntax itself uses tabs having a mixture of tabs and
+spaces in the vm-help output make no sense and confuses things lining
+up between terminal and editor. Fix that.
 
-Cc: Anders Roxell <anders.roxell@linaro.org>
-Reviewed-by: Thomas Huth <thuth@redhat.com>
-Tested-by: Thomas Huth <thuth@redhat.com>
 Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
-Message-Id: <20241121165806.476008-28-alex.bennee@linaro.org>
 ---
- tests/functional/test_mips64el_tuxrun.py | 8 ++++----
- 1 file changed, 4 insertions(+), 4 deletions(-)
+ tests/vm/Makefile.include | 26 +++++++++++++-------------
+ 1 file changed, 13 insertions(+), 13 deletions(-)
 
-diff --git a/tests/functional/test_mips64el_tuxrun.py b/tests/functional/test_mips64el_tuxrun.py
-index 819549a27b..0a24757c51 100755
---- a/tests/functional/test_mips64el_tuxrun.py
-+++ b/tests/functional/test_mips64el_tuxrun.py
-@@ -17,11 +17,11 @@
- class TuxRunMips64ELTest(TuxRunBaselineTest):
+diff --git a/tests/vm/Makefile.include b/tests/vm/Makefile.include
+index 13ed80f72d..d80ca79a28 100644
+--- a/tests/vm/Makefile.include
++++ b/tests/vm/Makefile.include
+@@ -64,23 +64,23 @@ endif
+ 	@echo "  vm-boot-ssh-<guest>             - Boot guest and login via ssh"
+ 	@echo
+ 	@echo "Special variables:"
+-	@echo "    BUILD_TARGET=foo		 - Override the build target"
+-	@echo "    DEBUG=1              	 - Enable verbose output on host and interactive debugging"
+-	@echo '    EXTRA_CONFIGURE_OPTS="..."   - Pass to configure step'
+-	@echo "    J=[0..9]*            	 - Override the -jN parameter for make commands"
+-	@echo "    LOG_CONSOLE=1        	 - Log console to file in: ~/.cache/qemu-vm "
+-	@echo "    USE_TCG=1        	         - Use TCG for cross-arch images"
+-	@echo "    QEMU=/path/to/qemu		 - Change path to QEMU binary"
++	@echo "    BUILD_TARGET=foo              - Override the build target"
++	@echo "    DEBUG=1                       - Enable verbose output on host and interactive debugging"
++	@echo '    EXTRA_CONFIGURE_OPTS="..."    - Pass to configure step'
++	@echo "    J=[0..9]*                     - Override the -jN parameter for make commands"
++	@echo "    LOG_CONSOLE=1                 - Log console to file in: ~/.cache/qemu-vm "
++	@echo "    USE_TCG=1                     - Use TCG for cross-arch images"
++	@echo "    QEMU=/path/to/qemu            - Change path to QEMU binary"
+ ifeq ($(HAVE_PYTHON_YAML),yes)
+-	@echo "    QEMU_CONFIG=/path/conf.yml   - Change path to VM configuration .yml file."
++	@echo "    QEMU_CONFIG=/path/conf.yml    - Change path to VM configuration .yml file."
+ else
+ 	@echo "    (install python3-yaml to enable support for yaml file to configure a VM.)"
+ endif
+-	@echo "                                   See conf_example_*.yml for file format details."
+-	@echo "    QEMU_IMG=/path/to/qemu-img	 - Change path to qemu-img tool"
+-	@echo "    QEMU_LOCAL=1                 - Use QEMU binary local to this build."
+-	@echo "    TARGET_LIST=a,b,c    	 - Override target list in builds"
+-	@echo "    V=1				 - Enable verbose output on host and guest commands"
++	@echo "                                    See conf_example_*.yml for file format details."
++	@echo "    QEMU_IMG=/path/to/qemu-img    - Change path to qemu-img tool"
++	@echo "    QEMU_LOCAL=1                  - Use QEMU binary local to this build."
++	@echo "    TARGET_LIST=a,b,c             - Override target list in builds"
++	@echo "    V=1                           - Enable verbose output on host and guest commands"
  
-     ASSET_MIPS64EL_KERNEL = Asset(
--        'https://storage.tuxboot.com/20230331/mips64el/vmlinux',
--        'd4e08965e2155c4cccce7c5f34d18fe34c636cda2f2c9844387d614950155266')
-+        'https://storage.tuxboot.com/buildroot/20241119/mips64el/vmlinux',
-+        '0d2829a96f005229839c4cd586d4d8a136ea4b488d29821611c8e97f2266bfa9')
-     ASSET_MIPS64EL_ROOTFS = Asset(
--        'https://storage.tuxboot.com/20230331/mips64el/rootfs.ext4.zst',
--        'fba585368f5915b1498ed081863474b2d7ec4e97cdd46d21bdcb2f9698f83de4')
-+        'https://storage.tuxboot.com/buildroot/20241119/mips64el/rootfs.ext4.zst',
-+        '69c8b69a4f1582ce4c6f01a994968f5d73bffb2fc99cbeeeb26c8b5a28eaeb84')
+ vm-build-all: $(addprefix vm-build-, $(IMAGES))
  
-     def test_mips64el(self):
-         self.set_machine('malta')
 -- 
 2.39.5
 
