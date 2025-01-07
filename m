@@ -4,67 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 306A2E77197
-	for <qemu-riscv@archiver.kernel.org>; Tue,  7 Jan 2025 16:57:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E5280E7719A
+	for <qemu-riscv@archiver.kernel.org>; Tue,  7 Jan 2025 16:57:29 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tVCpk-0005EJ-5h; Tue, 07 Jan 2025 11:53:37 -0500
+	id 1tVCqS-00073L-Eo; Tue, 07 Jan 2025 11:54:20 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1tVCpD-0004br-5x
- for qemu-riscv@nongnu.org; Tue, 07 Jan 2025 11:53:03 -0500
-Received: from mail-wr1-x436.google.com ([2a00:1450:4864:20::436])
+ id 1tVCpV-00054n-2d
+ for qemu-riscv@nongnu.org; Tue, 07 Jan 2025 11:53:23 -0500
+Received: from mail-wm1-x330.google.com ([2a00:1450:4864:20::330])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1tVCoU-0005sa-4D
- for qemu-riscv@nongnu.org; Tue, 07 Jan 2025 11:53:02 -0500
-Received: by mail-wr1-x436.google.com with SMTP id
- ffacd0b85a97d-385d7f19f20so6992204f8f.1
- for <qemu-riscv@nongnu.org>; Tue, 07 Jan 2025 08:52:17 -0800 (PST)
+ id 1tVCoY-0005vR-Go
+ for qemu-riscv@nongnu.org; Tue, 07 Jan 2025 11:53:20 -0500
+Received: by mail-wm1-x330.google.com with SMTP id
+ 5b1f17b1804b1-43675b1155bso151148635e9.2
+ for <qemu-riscv@nongnu.org>; Tue, 07 Jan 2025 08:52:22 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1736268737; x=1736873537; darn=nongnu.org;
+ d=linaro.org; s=google; t=1736268741; x=1736873541; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=kwAIsSbR5veQrsYYHH6aBtjqtWXUUTPWi9UM3AxwMO8=;
- b=Ys0dnCYfICbf6yJ1VaYSLQYsFjktw+YYnfZrNby2mciprCaVXyTpoa0jPpbLoShgLv
- F/FYsMAfmJKczSoDlefxzOkLP/tP1j90QihfUgPNTeWZS63ZaZweh1jHSgvNdtrPRWVz
- S/mdOdI4haWrZQYzz080HABA453isHPS+/7INqEKknMMMNLyRMpE7fUZaoM0j1QEW58p
- AdsQwEHWH20PTdfzgvu5zZMncQWObHRSuHkFNuzG1XWXjuWJt58961AbHnmgo2Rsg3bA
- hZ0aQQkz7sT6eH20kAH9zxzdf7AQ4XTxUM77M+eZzRs0MRk6FZiIt/m3PlGiwezsD3Q7
- mB1A==
+ bh=lG7MbUBeLhp7BGSne5jxjhgnKJrC/8a0zBr1FqLJA6g=;
+ b=EaYY86GjY8yx41cog3rReYU6GGriUpxaAe4MJg9qimL0qMkBKGnO9Yky8K9tW1T+YN
+ awbZTls/CpZ1zljQyuX1AWgVzjA4hgxai74tLCpgqVY85h5eyNEZrZvuIkhKvgl7TFI5
+ R1jLGKjxI2phzjKZ0x7U/jesgNY0dSGUDOT4xuwv2dqDPV+PedqdxMm4tp8ZvJWtA2b7
+ hqtCqchZ03iBJJA1YBKwpPSMWvtEfDmWI+iEJyaqlgklRRI6aYAYKKhpnpTEWmqm2h7K
+ p4AHi4xKOQjPC8/s/w+9mzojWig9jfLrHtFBuSUiWt6wsf4PRufb3VkkqvBSzPPeWSat
+ iuxQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1736268737; x=1736873537;
+ d=1e100.net; s=20230601; t=1736268741; x=1736873541;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=kwAIsSbR5veQrsYYHH6aBtjqtWXUUTPWi9UM3AxwMO8=;
- b=rGbuoXWB1mLbQCuZePmvDL0WkfZI+GQJ4qCi3R08OjLsN7f1b3cg0P6Mjf37fbmGl8
- cnwFzq6+2hcxCiO4+SoPaDmPUbRJI5sEF63ANT6vMPFBfb74jtmmafzcyo4f/Qqi1CVm
- dF9mhViIBss6ZWR4LDRiZ3DM2VD3jSYY2P2XQX+b7tfxB+7IKxKEwpbzSMYCtCZ1QkjS
- LaeHEKJOhL/2tkn/6KO53vwD80GkCcNmRpB9OUwPitrKTWLbmAaS8bper3+BoJ3clcuK
- 3DfaA+s1KPzpN422e39OaHKl6iC9kSxQaGpkgT7+bmwMjNQo9A+xECmrun5wV5IjbMVB
- Q3jw==
+ bh=lG7MbUBeLhp7BGSne5jxjhgnKJrC/8a0zBr1FqLJA6g=;
+ b=Gli08HKK/DYzX0inQ2oFCbpcL+i2Dg2L6b7l/i8OvZtaQwbJhHImGbVy6ADUS6gn7c
+ xRLUKzKE0KRmLwPwZdj48M5efvaGxHCyX8k1HYJL/N64XRlOca/oh8CLWMLZCRrZuUyz
+ YqWk10e9AvJc0Um9Evz+B8G3CMD4NowVqhoen21JO0dI6S6CrnclZFw/3NT6Pf+OgvdD
+ B1KaAZbIPXJlG6aazB9BjpjHqebYxv7Aa5Sca73a2xZ36aT1/RfuSezNZlEjG88jNEKA
+ /m0vaOxPqKzhQXULPBC02Im6+SSjIL9ECgHomdtFybcYt2ujgGoZM/k2y5FwdNtKVszM
+ IWQA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUqcM8l3+Hr74ZDcE4x1UEOHYG6mjMM5uSzYzJqjtrQaIeczbEF+KpiuX/AhOVLy5QAxij1YCBb1Jol@nongnu.org
-X-Gm-Message-State: AOJu0YwglmHh0MGnTX1In8SjMmJMzRKEwksAhi93o3IOTxSg8dZK38rj
- otITEPFvLectBTgijbSkWZRcR7r6dApcFBtlaPFOzkjL9TJBknplgP4qpfZJ9zI=
-X-Gm-Gg: ASbGncsbmuodrYIjqAiSdTxbYRsllxYowr8RbAZh7r4+bjNd/QWFZpxVqKz98uOg/Dh
- ZHoWdGkB9mt4BcKpPnGzJSSzooaJG3TjhlTITAszX17WF0Uut+B8G2lzh2bor7H+6Eqjh0jNA73
- LxemtOsy7uO42+uFzWZuaHe8pBBZcyzdgVfzL3g7QmFDl1kf+aLe2jQpKIys2l/ElCr7BWScXXG
- /xK+qGGAvqLDVY4lzgQ3DhGitOwyfQlBw6MERtWmeyhmTViQ5QKSq0=
-X-Google-Smtp-Source: AGHT+IEocHxj2Rhi+GCUxV2FmFDrC6uen0UJr+MO6HARR3ACdqCh3EUsk7L5gS7PU51e4s8NKfjnXw==
-X-Received: by 2002:a05:6000:1848:b0:386:459e:655d with SMTP id
- ffacd0b85a97d-38a221fa039mr56509991f8f.20.1736268736727; 
- Tue, 07 Jan 2025 08:52:16 -0800 (PST)
+ AJvYcCXhf//T3M7hIsRrFzxAxAxNdZhB/JrQ6uUmBt3qgCawyaqMDImvR6GQgr+NZZ7ETtBWp9M0+6lusDeL@nongnu.org
+X-Gm-Message-State: AOJu0YxBCHP5N3UJf8+8hFmaIkYyJzTAXfD3Skd4iHVCRzYJWAoTy6Ff
+ LOrl1jvn0TB5jJFdqYbB+VB90jxxfdh3tFqYF2H842j7/zzudKKro1R079HDS+A=
+X-Gm-Gg: ASbGncuOfAG/iCj7ZX6XRQ3hLzv1EEETG2QJlDi+bIWvcn3vqVNTZULHD/43niBa9nK
+ IDz42CDt0AWMIaJSF+4GGGLU9M4Ce7JckTWpZf4jjm2vReOLtG8OLHuFQLQCfM8cUPGgAz4MF8N
+ m2rECAdlX7BwDIA4xBBWrQ82gRpInwtgjgGdzjq1H6Feclgo3OO2QbHNJJ6M7zQ7Ukqu4hnDhTX
+ GmrJVRbB8f2OlbY7WAFE1wy6QSeTktZ0ZVfOoCn8uzs07j5NSokMkY=
+X-Google-Smtp-Source: AGHT+IH7iqwDon8XGewQLXgOu/1cStkxVfVLr5WLrNmcktmwgWaeERsXwdfPTe57yv3zWJosorlr2w==
+X-Received: by 2002:a05:600c:3106:b0:434:a802:43d with SMTP id
+ 5b1f17b1804b1-43668b93817mr508634885e9.27.1736268740993; 
+ Tue, 07 Jan 2025 08:52:20 -0800 (PST)
 Received: from draig.lan ([85.9.250.243]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-38a1c89e528sm51453740f8f.83.2025.01.07.08.52.16
+ 5b1f17b1804b1-436dcceb8c6sm14053885e9.0.2025.01.07.08.52.15
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
  Tue, 07 Jan 2025 08:52:16 -0800 (PST)
 Received: from draig.lan (localhost [IPv6:::1])
- by draig.lan (Postfix) with ESMTP id 63FD76017C;
+ by draig.lan (Postfix) with ESMTP id 0C8D05FEF9;
  Tue,  7 Jan 2025 16:52:10 +0000 (GMT)
 From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
 To: qemu-devel@nongnu.org
@@ -99,17 +99,18 @@ Cc: Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
  =?UTF-8?q?Daniel=20P=2E=20Berrang=C3=A9?= <berrange@redhat.com>,
  =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
  Bernhard Beschow <shentey@gmail.com>, "Michael S. Tsirkin" <mst@redhat.com>
-Subject: [PATCH v3 26/29] tests/vm: allow interactive login as root
-Date: Tue,  7 Jan 2025 16:52:04 +0000
-Message-Id: <20250107165208.743958-27-alex.bennee@linaro.org>
+Subject: [PATCH v3 22/29] tests/docker: move riscv64 cross container from sid
+ to trixie
+Date: Tue,  7 Jan 2025 16:52:00 +0000
+Message-Id: <20250107165208.743958-23-alex.bennee@linaro.org>
 X-Mailer: git-send-email 2.39.5
 In-Reply-To: <20250107165208.743958-1-alex.bennee@linaro.org>
 References: <20250107165208.743958-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::436;
- envelope-from=alex.bennee@linaro.org; helo=mail-wr1-x436.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::330;
+ envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x330.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -132,62 +133,49 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-This is useful when debugging and you want to add packages to an
-image.
+Although riscv64 isn't going to be a release architecture for trixie
+the packages are still built while it is testing. Moving from sid will
+also avoid some of the volatility we get from tracking the bleeding
+edge.
 
 Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
 ---
- tests/vm/Makefile.include | 3 ++-
- tests/vm/basevm.py        | 9 +++++++--
- 2 files changed, 9 insertions(+), 3 deletions(-)
+ tests/docker/dockerfiles/debian-riscv64-cross.docker | 4 ++--
+ tests/lcitool/refresh                                | 4 +++-
+ 2 files changed, 5 insertions(+), 3 deletions(-)
 
-diff --git a/tests/vm/Makefile.include b/tests/vm/Makefile.include
-index d80ca79a28..14188bba1c 100644
---- a/tests/vm/Makefile.include
-+++ b/tests/vm/Makefile.include
-@@ -66,6 +66,7 @@ endif
- 	@echo "Special variables:"
- 	@echo "    BUILD_TARGET=foo              - Override the build target"
- 	@echo "    DEBUG=1                       - Enable verbose output on host and interactive debugging"
-+	@echo "    ROOT_USER=1                   - Login as root user for interactive shell"
- 	@echo '    EXTRA_CONFIGURE_OPTS="..."    - Pass to configure step'
- 	@echo "    J=[0..9]*                     - Override the -jN parameter for make commands"
- 	@echo "    LOG_CONSOLE=1                 - Log console to file in: ~/.cache/qemu-vm "
-@@ -141,6 +142,6 @@ vm-boot-ssh-%: $(IMAGES_DIR)/%.img $(VM_VENV)
- 		$(if $(EFI_AARCH64),--efi-aarch64 $(EFI_AARCH64)) \
- 		$(if $(LOG_CONSOLE),--log-console) \
- 		--image "$<" \
--		--interactive \
-+		$(if $(ROOT_USER),--interactive-root,-interactive) \
- 		false, \
- 		"  VM-BOOT-SSH $*") || true
-diff --git a/tests/vm/basevm.py b/tests/vm/basevm.py
-index 6f3f2e76df..6d41ac7574 100644
---- a/tests/vm/basevm.py
-+++ b/tests/vm/basevm.py
-@@ -612,8 +612,11 @@ def get_default_jobs():
-     parser.add_argument("--source-path", default=None,
-                         help="Path of source directory, "\
-                         "for finding additional files. ")
--    parser.add_argument("--interactive", "-I", action="store_true",
--                        help="Interactively run command")
-+    int_ops = parser.add_mutually_exclusive_group()
-+    int_ops.add_argument("--interactive", "-I", action="store_true",
-+                         help="Interactively run command")
-+    int_ops.add_argument("--interactive-root", action="store_true",
-+                         help="Interactively run command as root")
-     parser.add_argument("--snapshot", "-s", action="store_true",
-                         help="run tests with a snapshot")
-     parser.add_argument("--genisoimage", default="genisoimage",
-@@ -675,6 +678,8 @@ def main(vmcls, config=None):
-         exitcode = 3
-     if args.interactive:
-         vm.ssh()
-+    elif args.interactive_root:
-+        vm.ssh_root()
+diff --git a/tests/docker/dockerfiles/debian-riscv64-cross.docker b/tests/docker/dockerfiles/debian-riscv64-cross.docker
+index 4d8ca83cb3..b0386cd3a1 100644
+--- a/tests/docker/dockerfiles/debian-riscv64-cross.docker
++++ b/tests/docker/dockerfiles/debian-riscv64-cross.docker
+@@ -1,10 +1,10 @@
+ # THIS FILE WAS AUTO-GENERATED
+ #
+-#  $ lcitool dockerfile --layers all --cross-arch riscv64 debian-sid qemu-minimal
++#  $ lcitool dockerfile --layers all --cross-arch riscv64 debian-13 qemu-minimal
+ #
+ # https://gitlab.com/libvirt/libvirt-ci
  
-     if not args.snapshot:
-         vm.graceful_shutdown()
+-FROM docker.io/library/debian:sid-slim
++FROM docker.io/library/debian:trixie-slim
+ 
+ RUN export DEBIAN_FRONTEND=noninteractive && \
+     apt-get update && \
+diff --git a/tests/lcitool/refresh b/tests/lcitool/refresh
+index 6720516b94..53f8d2585f 100755
+--- a/tests/lcitool/refresh
++++ b/tests/lcitool/refresh
+@@ -220,7 +220,9 @@ try:
+                         trailer=cross_build("powerpc64le-linux-gnu-",
+                                             "ppc64-softmmu,ppc64-linux-user"))
+ 
+-    generate_dockerfile("debian-riscv64-cross", "debian-sid",
++    # while not yet a release architecture the packages are still
++    # build while part of testing
++    generate_dockerfile("debian-riscv64-cross", "debian-13",
+                         project="qemu-minimal",
+                         cross="riscv64",
+                         trailer=cross_build("riscv64-linux-gnu-",
 -- 
 2.39.5
 
