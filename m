@@ -4,67 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 44254E7719B
-	for <qemu-riscv@archiver.kernel.org>; Tue,  7 Jan 2025 16:55:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 73421E7719A
+	for <qemu-riscv@archiver.kernel.org>; Tue,  7 Jan 2025 16:55:46 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tVCqM-0006bI-S2; Tue, 07 Jan 2025 11:54:14 -0500
+	id 1tVCqP-0006uF-Vh; Tue, 07 Jan 2025 11:54:18 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1tVCpW-00056A-CJ
- for qemu-riscv@nongnu.org; Tue, 07 Jan 2025 11:53:23 -0500
-Received: from mail-wr1-x436.google.com ([2a00:1450:4864:20::436])
+ id 1tVCpX-00057X-Td
+ for qemu-riscv@nongnu.org; Tue, 07 Jan 2025 11:53:25 -0500
+Received: from mail-wm1-x335.google.com ([2a00:1450:4864:20::335])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1tVCoZ-0005vl-8y
- for qemu-riscv@nongnu.org; Tue, 07 Jan 2025 11:53:21 -0500
-Received: by mail-wr1-x436.google.com with SMTP id
- ffacd0b85a97d-385e1fcb0e1so8632687f8f.2
- for <qemu-riscv@nongnu.org>; Tue, 07 Jan 2025 08:52:22 -0800 (PST)
+ id 1tVCoZ-0005w2-RG
+ for qemu-riscv@nongnu.org; Tue, 07 Jan 2025 11:53:23 -0500
+Received: by mail-wm1-x335.google.com with SMTP id
+ 5b1f17b1804b1-43635796b48so95547445e9.0
+ for <qemu-riscv@nongnu.org>; Tue, 07 Jan 2025 08:52:23 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=linaro.org; s=google; t=1736268742; x=1736873542; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=9bkcZ+UQ0l/G8BdjL46Ekgb6aiXVq9O7cYmGEkCbVeY=;
- b=EtP2JYyofY27C6qg5Flc37aCdv7HrJZ5etsiFXU3bFNNm9aCsmF7nRx9tw2UYwDGH3
- ASf4amad5vvIblAiy2rVl3dT1KL0k1q2FR7jzyh2ritrQNvkg+RWeofDqN3Nn6ejvSaj
- wTk5adon3duCAIQN05BW+k/PjM4EP0XfZHKrT2Yf9oCbR8xQWaWKnRMw9XIeG8X876xR
- DW9XZqsi/kvhJpOLOppGqHNlJUoTM8xdtMYD5/s4jls4IbWxrZOwy4kk7isMEUysAiwr
- uirY+xEv0Kce3Q0GwDjcJA5/liQajBSQmOas7ExKhk6sp5Inta2w2IJXgi1R/UL+1+r1
- O1CA==
+ bh=PdsXyF3OC+6k01wdvpRGDBTvPRZa71R2EiA5i0mTRfY=;
+ b=nMYn7GTQCb9bdsHUmcrWHZcORIqdTlR7MrKlA3FdvPPhlTGfhkzusPTXXiQ1ib0hCf
+ s1N/ENcIHoLTs1gS8b/YUB6ZVU8aCmzGGtOCLmyYXcavpyT9NOBf8Erq9HP60XIweqqI
+ QNnqwTuN1d9VTzcexgLvCRLlEF52iOazvsqntbwJ7m2aWGkrBwO+FicyINSV8BTeQbnu
+ IWD1uQ/3JazO2LbrXYO/SjBwxvQMDHglARzfpXwrTzX+gWnff8/6ksyJ9pp34D78IDjB
+ gpF5n8oHrazy3lE0UXq33QkobVZY/2MJj3r7Y0DTQcN+KyPIEYJJiMfg9uZ8HE2nRJ1s
+ bpRQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1736268742; x=1736873542;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=9bkcZ+UQ0l/G8BdjL46Ekgb6aiXVq9O7cYmGEkCbVeY=;
- b=aV54T6bMftFZLIT3g93Rs+mwxaO0fcLzA64osIbJ1DBwF2jS2Kh17DpxJm0UZKKUNS
- m4g8lCwffCGxekZ9ABK4r3VynZFeOeQYqnmFbQ/qTZ1FW58z4Lsaf2qUXTas6r9C5guK
- ftcTwzB+kvyA3/cls/nzlt110UfTZdSte0hU2hp5r1hdEki+W0zgSToNEyNAMsFinVQp
- 4H8HyRkmkBgst3t0e3KWkt16lEZBVeWuR3RdiUX8NfCRv6dGk1hRjmc9u44Ro4RowXCO
- sNAiuiwzrpG8wzapG8+5EgnRc+6rlOQr/m0pVSoDVua1/a3UaoR+kKSq7m9GorC+sMrA
- 061Q==
+ bh=PdsXyF3OC+6k01wdvpRGDBTvPRZa71R2EiA5i0mTRfY=;
+ b=tC6a2r/sLKZwJeNiKAdlMYchnlTQ4q+yqbGSsAIqc/+7MKhP+tJIvcIXrkymb0Cqhd
+ bxyloOFJPBwTTal1QwNCfX2EHkJkF7C79nGMTiUE99AgRdoJgG5JSb0ZeOOuArrKuRM+
+ 3aFYUGboJOYFoQQ0Xb1SZPLNhEubQti9rSo+WRnoXLMmmxhP2x68NUMuuAqKWe5J2Uu0
+ DFhIuoiG1Qnj7TglIxOdRTCsfIbu0BanEWWF6GkH5rCkJr5eFBU9ocTYpEqggrpbYd36
+ 5xYAKT9Khl/rdNDR08Q6nqXEbiQ0gHV2i8k+sv+n2qKmMozYStQn5K1TwDzsQesK/zWD
+ Bbvw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCU2RHnD42uUeHq1j1+Hp+F2pguni2pPrDqxBC99d136rfLEnJgyxzO3MvwDH63so73yQMknwD6YHfGQ@nongnu.org
-X-Gm-Message-State: AOJu0YzJt/GF7v2LYCvj8C607n/bcLi/gjChgDdCXJXHQds1GI+OYfJO
- +nPr/7GnfA1L/e/SZs08vV+czyCn/BrC5FeMn1XZg6SX8PC8IUKlrSILTsX6NHE=
-X-Gm-Gg: ASbGncs/u1wyE/Q3WkM+y9wTdGRM7Q5YZIqup8kF+0nawgSSMsDKkO1Kl8qrFZOcvQM
- PMjYWPI+CtxKPvUpZ4CNe9RgwMKj9V1FuzG6BGskTqz2G6uYo0RII40AeGpmPLIVyj8X+4+RFya
- 7anRaUJxZ4u4b9f/WVOnPF/nAhNul8IvxmAiAjzLJH4ar1EKNUY3RmoY08RoVKvmuTZx7aVHFRv
- a0Z67y+u4l311jFmcYwHMWhmO36xn/FpJfJTEz1UvwoKEy1mQ5pbrw=
-X-Google-Smtp-Source: AGHT+IGefZKDySJlS4CrSeYUwxLMByi32RabbTOWrXYjfIFalO0HsUJ1KBm/dHAmxfMbCI9mOH8XbA==
-X-Received: by 2002:a05:6000:1fa9:b0:385:f38e:c0c3 with SMTP id
- ffacd0b85a97d-38a221f1391mr47094494f8f.6.1736268741670; 
- Tue, 07 Jan 2025 08:52:21 -0800 (PST)
+ AJvYcCVyURS5o+4ExAFNd/x66WxlxgGoKCgChogb5TZijs49M6OXO1WTjP9CpdGNudvpzH7PBim01qQHQIcJ@nongnu.org
+X-Gm-Message-State: AOJu0Yz8ijmRpCeDGN/zv0xrC8qqNXEvTGZDKBcFQCl6gqWfdHTNu2t5
+ TzWUSrSEkIOZ2X9WKqtxmypxtj845f+jE88qvCZhFNkKwhABbC8hP21u5M0Mk8U=
+X-Gm-Gg: ASbGnct8oiPC/llTgFbm9pQSHEWJt4ZVxaURGqlv6rr4ly24JjLx82HktfDSZ3mkPLy
+ F2kU+GvLWCZzw7wzrh0rVFhdNF9+Db1idPFSQI5XDVyQcv1kToZvMDy9nDwfcq2iWvLiQP0Fiih
+ zJlVW6zBmp1ZtyLFm0muTmFSWVeLriLmvAEgv5fQv1zs2hmPaD2Ix1Vnw3GycM1AttverK+bG0a
+ wM397WUwov84fRArXnwBeEqeGaXyWYmMuJCFhR0ri22TzrcVaABU7c=
+X-Google-Smtp-Source: AGHT+IEN/9AzSBRjuak9xErtOMyiDoVA1EbvFTKgsWZtKXTJnq6bdiMW0XiLttaVQc0w9IFA24s0Pw==
+X-Received: by 2002:a05:600c:3550:b0:435:1a2:262a with SMTP id
+ 5b1f17b1804b1-436dc1c20b8mr33295065e9.3.1736268742341; 
+ Tue, 07 Jan 2025 08:52:22 -0800 (PST)
 Received: from draig.lan ([85.9.250.243]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-38a457584bcsm33619886f8f.89.2025.01.07.08.52.16
+ 5b1f17b1804b1-43656b417afsm643187885e9.36.2025.01.07.08.52.16
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 07 Jan 2025 08:52:16 -0800 (PST)
+ Tue, 07 Jan 2025 08:52:20 -0800 (PST)
 Received: from draig.lan (localhost [IPv6:::1])
- by draig.lan (Postfix) with ESMTP id 4C6925F8FC;
+ by draig.lan (Postfix) with ESMTP id 7A69B6030B;
  Tue,  7 Jan 2025 16:52:10 +0000 (GMT)
 From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
 To: qemu-devel@nongnu.org
@@ -99,24 +99,24 @@ Cc: Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
  =?UTF-8?q?Daniel=20P=2E=20Berrang=C3=A9?= <berrange@redhat.com>,
  =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
  Bernhard Beschow <shentey@gmail.com>, "Michael S. Tsirkin" <mst@redhat.com>
-Subject: [PATCH v3 25/29] tests/vm: partially un-tabify help output
-Date: Tue,  7 Jan 2025 16:52:03 +0000
-Message-Id: <20250107165208.743958-26-alex.bennee@linaro.org>
+Subject: [PATCH v3 27/29] pc-bios: ensure keymaps dependencies set vnc tests
+Date: Tue,  7 Jan 2025 16:52:05 +0000
+Message-Id: <20250107165208.743958-28-alex.bennee@linaro.org>
 X-Mailer: git-send-email 2.39.5
 In-Reply-To: <20250107165208.743958-1-alex.bennee@linaro.org>
 References: <20250107165208.743958-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::436;
- envelope-from=alex.bennee@linaro.org; helo=mail-wr1-x436.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::335;
+ envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x335.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -132,56 +132,72 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-While the make syntax itself uses tabs having a mixture of tabs and
-spaces in the vm-help output make no sense and confuses things lining
-up between terminal and editor. Fix that.
+I was seeing failures on vnc-display-test on FreeBSD:
+
+  make vm-build-freebsd V=1 TARGET_LIST=aarch64-softmmu BUILD_TARGET=check-qtest QEMU_LOCAL=1 DEBUG=1
+
+Leads to:
+
+  qemu-system-aarch64: -vnc none: could not read keymap file: 'en-us'
+  Broken pipe
+  ../src/tests/qtest/libqtest.c:196: kill_qemu() tried to terminate QEMU process but encountered exit status 1 (expected 0)
+
+which was as far as I could tell because we don't populate the
+$BLD/pc-bios/keymaps (although something attempts to symlink
+qemu-bundle/usr/local/share/qemu/keymaps/ to that dir).
 
 Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
+Cc: Paolo Bonzini <pbonzini@redhat.com>
 ---
- tests/vm/Makefile.include | 26 +++++++++++++-------------
- 1 file changed, 13 insertions(+), 13 deletions(-)
+ pc-bios/keymaps/meson.build | 17 ++++++++---------
+ tests/qtest/meson.build     |  2 +-
+ 2 files changed, 9 insertions(+), 10 deletions(-)
 
-diff --git a/tests/vm/Makefile.include b/tests/vm/Makefile.include
-index 13ed80f72d..d80ca79a28 100644
---- a/tests/vm/Makefile.include
-+++ b/tests/vm/Makefile.include
-@@ -64,23 +64,23 @@ endif
- 	@echo "  vm-boot-ssh-<guest>             - Boot guest and login via ssh"
- 	@echo
- 	@echo "Special variables:"
--	@echo "    BUILD_TARGET=foo		 - Override the build target"
--	@echo "    DEBUG=1              	 - Enable verbose output on host and interactive debugging"
--	@echo '    EXTRA_CONFIGURE_OPTS="..."   - Pass to configure step'
--	@echo "    J=[0..9]*            	 - Override the -jN parameter for make commands"
--	@echo "    LOG_CONSOLE=1        	 - Log console to file in: ~/.cache/qemu-vm "
--	@echo "    USE_TCG=1        	         - Use TCG for cross-arch images"
--	@echo "    QEMU=/path/to/qemu		 - Change path to QEMU binary"
-+	@echo "    BUILD_TARGET=foo              - Override the build target"
-+	@echo "    DEBUG=1                       - Enable verbose output on host and interactive debugging"
-+	@echo '    EXTRA_CONFIGURE_OPTS="..."    - Pass to configure step'
-+	@echo "    J=[0..9]*                     - Override the -jN parameter for make commands"
-+	@echo "    LOG_CONSOLE=1                 - Log console to file in: ~/.cache/qemu-vm "
-+	@echo "    USE_TCG=1                     - Use TCG for cross-arch images"
-+	@echo "    QEMU=/path/to/qemu            - Change path to QEMU binary"
- ifeq ($(HAVE_PYTHON_YAML),yes)
--	@echo "    QEMU_CONFIG=/path/conf.yml   - Change path to VM configuration .yml file."
-+	@echo "    QEMU_CONFIG=/path/conf.yml    - Change path to VM configuration .yml file."
- else
- 	@echo "    (install python3-yaml to enable support for yaml file to configure a VM.)"
+diff --git a/pc-bios/keymaps/meson.build b/pc-bios/keymaps/meson.build
+index 0bd8ce0077..a79a09b276 100644
+--- a/pc-bios/keymaps/meson.build
++++ b/pc-bios/keymaps/meson.build
+@@ -39,19 +39,18 @@ else
+   native_qemu_keymap = qemu_keymap
  endif
--	@echo "                                   See conf_example_*.yml for file format details."
--	@echo "    QEMU_IMG=/path/to/qemu-img	 - Change path to qemu-img tool"
--	@echo "    QEMU_LOCAL=1                 - Use QEMU binary local to this build."
--	@echo "    TARGET_LIST=a,b,c    	 - Override target list in builds"
--	@echo "    V=1				 - Enable verbose output on host and guest commands"
-+	@echo "                                    See conf_example_*.yml for file format details."
-+	@echo "    QEMU_IMG=/path/to/qemu-img    - Change path to qemu-img tool"
-+	@echo "    QEMU_LOCAL=1                  - Use QEMU binary local to this build."
-+	@echo "    TARGET_LIST=a,b,c             - Override target list in builds"
-+	@echo "    V=1                           - Enable verbose output on host and guest commands"
  
- vm-build-all: $(addprefix vm-build-, $(IMAGES))
- 
++keymap_targets = []
+ if native_qemu_keymap.found()
+-  t = []
+   foreach km, args: keymaps
+     # generate with qemu-kvm
+-    t += custom_target(km,
+-                       build_by_default: true,
+-                       output: km,
+-                       command: [native_qemu_keymap, '-f', '@OUTPUT@', args.split()],
+-                       install: have_system,
+-                       install_dir: qemu_datadir / 'keymaps')
++    keymap_targets += custom_target(km,
++                                    build_by_default: true,
++                                    output: km,
++                                    command: [native_qemu_keymap, '-f', '@OUTPUT@', args.split()],
++                                    install: have_system,
++                                    install_dir: qemu_datadir / 'keymaps')
+   endforeach
+-
+-  alias_target('update-keymaps', t)
++  alias_target('update-keymaps', keymap_targets)
+ else
+   install_data(keymaps.keys(), install_dir: qemu_datadir / 'keymaps')
+ endif
+diff --git a/tests/qtest/meson.build b/tests/qtest/meson.build
+index c5a70021c5..f75c1057a4 100644
+--- a/tests/qtest/meson.build
++++ b/tests/qtest/meson.build
+@@ -383,7 +383,7 @@ qtests = {
+ if vnc.found()
+   gvnc = dependency('gvnc-1.0', method: 'pkg-config', required: false)
+   if gvnc.found()
+-    qtests += {'vnc-display-test': [gvnc]}
++    qtests += {'vnc-display-test': [gvnc, keymap_targets]}
+     qtests_generic += [ 'vnc-display-test' ]
+   endif
+ endif
 -- 
 2.39.5
 
