@@ -4,68 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1C7EFE77197
-	for <qemu-riscv@archiver.kernel.org>; Tue,  7 Jan 2025 16:57:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 640E0E77198
+	for <qemu-riscv@archiver.kernel.org>; Tue,  7 Jan 2025 16:58:25 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tVCql-0007hA-23; Tue, 07 Jan 2025 11:54:39 -0500
+	id 1tVCp3-0004Qd-Fp; Tue, 07 Jan 2025 11:52:53 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1tVCpY-0005A3-Vo
- for qemu-riscv@nongnu.org; Tue, 07 Jan 2025 11:53:27 -0500
-Received: from mail-wm1-x32d.google.com ([2a00:1450:4864:20::32d])
+ id 1tVCp1-0004NM-OO
+ for qemu-riscv@nongnu.org; Tue, 07 Jan 2025 11:52:52 -0500
+Received: from mail-wm1-x332.google.com ([2a00:1450:4864:20::332])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1tVCoa-0005wb-DF
- for qemu-riscv@nongnu.org; Tue, 07 Jan 2025 11:53:24 -0500
-Received: by mail-wm1-x32d.google.com with SMTP id
- 5b1f17b1804b1-4361dc6322fso105487095e9.3
- for <qemu-riscv@nongnu.org>; Tue, 07 Jan 2025 08:52:23 -0800 (PST)
+ id 1tVCoT-0005rV-1K
+ for qemu-riscv@nongnu.org; Tue, 07 Jan 2025 11:52:51 -0500
+Received: by mail-wm1-x332.google.com with SMTP id
+ 5b1f17b1804b1-436202dd7f6so178797135e9.0
+ for <qemu-riscv@nongnu.org>; Tue, 07 Jan 2025 08:52:16 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1736268743; x=1736873543; darn=nongnu.org;
+ d=linaro.org; s=google; t=1736268735; x=1736873535; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=teELEAk9lxdpoQ7xzO+V1Ovz+lGrytHqETaOuw27UxQ=;
- b=y9MkZwjpYhU86112TslXjETumPn/Yy3dBBnlQK9HLcVf5CmonRLtscOdigUujSjGbO
- 6cLe4tbBWInNv5nc3YJ1ZoYP+nbUMVZAtEeYv0ucxn9HpdGPfXRImN5MySANILy6dX+v
- LOturF7ILeNy6HC6jnwG++L58YzxdDgnsp9mnjs1vV2JNvRv+qylh+uqt5eI4HDSYmWe
- UOaGQaS/NhARLgBUG8180rXihR9kYYyS24pxQ7lYpKQ3+4Twpbl+AcN3kT0ndAfDEA1S
- vGCTYvZ9in29+dQQGEggRH50sEz/WFkqpSnck2Nh0Z6tfhG0QZDaiDrrlg4Fyo+ugJ4a
- vSGg==
+ bh=uQa8lE+2zCWqeETwyUKylE9fAVCRJIjj0umvCIZJA8E=;
+ b=xKMp93gEVruUadhTZftwuS1KhNk9z2b3Vh9Z9czFOwmYLranALWCioOkXoKw5iVdcs
+ ybH9Zrj3N96z5/l09PVFDzoe8S5Fhj8YAdPNNrJ3BMT8XfE70DJ/wtl+1LSRDef7zUPv
+ KWfrhjO3gbYvDVK4U29d/oCXprWPnjMcXeEYeEDk/afbhaIOHgR23cInu7Q1NMwdQHCX
+ CJx0k4j1YkjpEd1CpwVMFK5+TNlkjMdfSOC5Jl7zSaqzkRSkZrmd4WghED61WgEL0AAM
+ 01kr7gWhNFFUqF2J5iak0pAXFbhO7ldOYq2Hcbg/7X0z244EI7Y3j+oJOfGBWJvIjSJs
+ wCBg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1736268743; x=1736873543;
+ d=1e100.net; s=20230601; t=1736268735; x=1736873535;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=teELEAk9lxdpoQ7xzO+V1Ovz+lGrytHqETaOuw27UxQ=;
- b=DIqOR7XJlD9QD5cSURn5tMXbmqWklC1n3LJ3srsweGeYjANJCVmKAg3NpYylOPXi4R
- Y4pRl5Gi2Eq+2wixIyMDbNZmRbOEfs26be5mEuQYowDfifLgiscd5m7yVIX08XVbWckV
- Y4oZcHg+g79VJA+BWKltMHyIz2OwZvnpSIsk7pxG/ZaghXTMwU8CX/6iBUgvqpA0CtgY
- sbN0lVAYcJS6Zrxmkrfi+EV5E/MbRws5UK8ZwKSdY4v+TnfA+L7K4BVdOOLb6Jil+HD/
- 4OxPbbtSMu0J7ZAsA3MnRVK4OcjKIlnPjV3Pv4v9rTG3pwidOQyCNaQKODKHTDmZJe7y
- gUsQ==
+ bh=uQa8lE+2zCWqeETwyUKylE9fAVCRJIjj0umvCIZJA8E=;
+ b=YO4xPl7XaPnP3bfVkLoOTbvo6BrlgPcW/ojLk3VuiebSVVBsFxBxgA/IiviOZ9ti+T
+ hpl41I8StxYn5NBBIxhdCG7/Ywnef0oyEpwOCMgDnzSA1PXZxv2FpdxbamaE8OSAbnY+
+ 6TJyPKuIEAdZDuwBM039E9EKu0Af4FrrF2+IpsE7AAU+3QdcUjDM0k6Q2voNpPtXPpOP
+ Psdoy2OU4E+q74h7ReCaK/177/z3LXKMDJ2epCt9VMCPpFZ4OeetQvdDl7DhGTjpnFr6
+ iM4GesjFXUIX+j6EU9uEGSuxQooLBEsInus5H/2KpZR87SqgKWE3QRmB+pCNSC5OLzsO
+ 92Cw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCX63xclIzb9RIQiqGl3md9zhxspClwzgHyfliVWH6CqhgTCRuve1f3F0d9XJjsBL5lrP4baK1PhQNWT@nongnu.org
-X-Gm-Message-State: AOJu0Yzn+M+kjcCErIskO3O3SExRylcZ1ZYAXOm/7qwa8wo77/rAqk/8
- i9KCjOD0fM2rdse4fmo91u5WSCTu3HDcRmPErqQJrjvaTVG9mWplwW2tpnOgFRg=
-X-Gm-Gg: ASbGncsVJHFkPUbAZWm5Lux1i8qb5iEWIQt8R5G6cF054uDMumtQ41kQK/biHgGI8tY
- hj12UBqgyg0C/2itZ5OG17OsJpnjQjs6V0qga2r6+/SJ12PPMQ7jE5CgTOtfo/fvrP4ErMlXON+
- /mpGPm5e4uBy4r9QzNJfs7c7gWWOtDuSDyxjoGuLUT/cj4Fm+u40lwa7L3FRufa3/iTxhL9eJOx
- wJEo4lVz0B3Hp+cKvHU+g1d5NPxRMf3aU1m1ivtYdYaZ/a0c8H3f9k=
-X-Google-Smtp-Source: AGHT+IF5KN0QJZlag7RaR/440PwDWziP7LBlR3PxbPOEhT7E32BnhAx1109gpcHtw8ecM45NPx6RHQ==
-X-Received: by 2002:a05:600c:3505:b0:434:fafe:edb with SMTP id
- 5b1f17b1804b1-43668b5f326mr488852005e9.24.1736268742893; 
- Tue, 07 Jan 2025 08:52:22 -0800 (PST)
+ AJvYcCWzy+S00sOP8BFLQLPbJmzXW6vilyPJmATY1LDF4iCu2hjdPz5g6qOH+1ORxQjeLwzzQ/t0gnHanOyl@nongnu.org
+X-Gm-Message-State: AOJu0YzpCAdrqSNUHzm/c6sVaBr95RCPn7+fOUzulL1G7qt9LMr58R4w
+ MIcblP185OL3Dm84x7MTvyZ7UN0xzq3bWqpKtfaz/l+qNue7uV/kvu07tV2wXhc=
+X-Gm-Gg: ASbGncsxHZ3QesGYaCo1AIwWNceWAUZP3i7bYZXmB8No5wltq+eI2XaLHezA/TI7YNl
+ niIIqfQ+z4VXNFzNrLqUtlCQgrcZW3S+fRpNmp0vu1dY9sRylJEoB3HUbaaR+KLDw8XnapALHJk
+ Ndots53bq6D73zLR7wmJOLVvQRgk9LPz8RSk/IAfj0n4b8+n3ET/c+QpwX6/uEIv6FKI80/JnAR
+ syLMaqYnGF9CZmnUwn+3kb0rZGtWcKvTEub8ciTXchL7MLOZ0oHEps=
+X-Google-Smtp-Source: AGHT+IGJaMVN357lzD+88ol6Cqialy1zG6i3hgUTu42T6mKwSA+1SdTSP+i/ovxXPWbAC4GdSUKqgQ==
+X-Received: by 2002:a05:600c:a0a:b0:434:a781:f5d5 with SMTP id
+ 5b1f17b1804b1-43668b93ca2mr556772955e9.30.1736268735426; 
+ Tue, 07 Jan 2025 08:52:15 -0800 (PST)
 Received: from draig.lan ([85.9.250.243]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-43656b3b2afsm650058715e9.35.2025.01.07.08.52.16
+ ffacd0b85a97d-38a1c89e219sm51517269f8f.84.2025.01.07.08.52.11
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 07 Jan 2025 08:52:21 -0800 (PST)
+ Tue, 07 Jan 2025 08:52:11 -0800 (PST)
 Received: from draig.lan (localhost [IPv6:::1])
- by draig.lan (Postfix) with ESMTP id A05ED60679;
- Tue,  7 Jan 2025 16:52:10 +0000 (GMT)
+ by draig.lan (Postfix) with ESMTP id EFA365F9EC;
+ Tue,  7 Jan 2025 16:52:08 +0000 (GMT)
 From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
@@ -98,25 +98,27 @@ Cc: Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
  Laurent Vivier <laurent@vivier.eu>, Joel Stanley <joel@jms.id.au>,
  =?UTF-8?q?Daniel=20P=2E=20Berrang=C3=A9?= <berrange@redhat.com>,
  =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
- Bernhard Beschow <shentey@gmail.com>, "Michael S. Tsirkin" <mst@redhat.com>
-Subject: [PATCH v3 29/29] MAINTAINERS: Remove myself from reviewers
-Date: Tue,  7 Jan 2025 16:52:07 +0000
-Message-Id: <20250107165208.743958-30-alex.bennee@linaro.org>
+ Bernhard Beschow <shentey@gmail.com>,
+ "Michael S. Tsirkin" <mst@redhat.com>,
+ Anders Roxell <anders.roxell@linaro.org>
+Subject: [PATCH v3 10/29] tests/functional: update the riscv32 tuxrun tests
+Date: Tue,  7 Jan 2025 16:51:48 +0000
+Message-Id: <20250107165208.743958-11-alex.bennee@linaro.org>
 X-Mailer: git-send-email 2.39.5
 In-Reply-To: <20250107165208.743958-1-alex.bennee@linaro.org>
 References: <20250107165208.743958-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::32d;
- envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x32d.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::332;
+ envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x332.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -132,40 +134,37 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Wainer dos Santos Moschetta <wainersm@redhat.com>
+Now there are new up to date images available we should update to them.
 
-The time I spent contributing to QEMU was great, but I've not been active
-for a long time now. So removing myself from the reviewers list of
-"Integration Testing with the Avocado framework" and
-"Build and test automation" subsystems.
-
-Signed-off-by: Wainer dos Santos Moschetta <wainersm@redhat.com>
-Message-Id: <20250103194450.360789-1-wainersm@redhat.com>
+Cc: Anders Roxell <anders.roxell@linaro.org>
+Reviewed-by: Thomas Huth <thuth@redhat.com>
+Tested-by: Thomas Huth <thuth@redhat.com>
 Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
+Message-Id: <20241121165806.476008-31-alex.bennee@linaro.org>
 ---
- MAINTAINERS | 2 --
- 1 file changed, 2 deletions(-)
+ tests/functional/test_riscv32_tuxrun.py | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index cab9018d9f..c1d954c9de 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -4152,7 +4152,6 @@ M: Alex Bennée <alex.bennee@linaro.org>
- T: git https://gitlab.com/stsquad/qemu testing/next
- M: Philippe Mathieu-Daudé <philmd@linaro.org>
- M: Thomas Huth <thuth@redhat.com>
--R: Wainer dos Santos Moschetta <wainersm@redhat.com>
- S: Maintained
- F: .github/workflows/lockdown.yml
- F: .gitlab-ci.yml
-@@ -4198,7 +4197,6 @@ Integration Testing with the Avocado framework
- W: https://trello.com/b/6Qi1pxVn/avocado-qemu
- R: Cleber Rosa <crosa@redhat.com>
- R: Philippe Mathieu-Daudé <philmd@linaro.org>
--R: Wainer dos Santos Moschetta <wainersm@redhat.com>
- S: Odd Fixes
- F: tests/avocado/
+diff --git a/tests/functional/test_riscv32_tuxrun.py b/tests/functional/test_riscv32_tuxrun.py
+index 49b57cd428..3c570208d0 100755
+--- a/tests/functional/test_riscv32_tuxrun.py
++++ b/tests/functional/test_riscv32_tuxrun.py
+@@ -17,11 +17,11 @@
+ class TuxRunRiscV32Test(TuxRunBaselineTest):
  
+     ASSET_RISCV32_KERNEL = Asset(
+-        'https://storage.tuxboot.com/20230331/riscv32/Image',
+-        '89599407d7334de629a40e7ad6503c73670359eb5f5ae9d686353a3d6deccbd5')
++        'https://storage.tuxboot.com/buildroot/20241119/riscv32/Image',
++        '872bc8f8e0d4661825d5f47f7bec64988e9d0a8bd5db8917d57e16f66d83b329')
+     ASSET_RISCV32_ROOTFS = Asset(
+-        'https://storage.tuxboot.com/20230331/riscv32/rootfs.ext4.zst',
+-        '7168d296d0283238ea73cd5a775b3dd608e55e04c7b92b76ecce31bb13108cba')
++        'https://storage.tuxboot.com/buildroot/20241119/riscv32/rootfs.ext4.zst',
++        '511ad34e63222db08d6c1da16fad224970de36517a784110956ba6a24a0ee5f6')
+ 
+     def test_riscv32(self):
+         self.set_machine('virt')
 -- 
 2.39.5
 
