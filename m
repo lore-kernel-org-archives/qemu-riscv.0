@@ -4,67 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6D66DE77197
-	for <qemu-riscv@archiver.kernel.org>; Tue,  7 Jan 2025 17:01:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 59D93E77197
+	for <qemu-riscv@archiver.kernel.org>; Tue,  7 Jan 2025 17:01:39 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tVCua-00037J-Qq; Tue, 07 Jan 2025 11:58:36 -0500
+	id 1tVCqI-0006Ie-Rl; Tue, 07 Jan 2025 11:54:11 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1tVCu5-0002DA-OS
- for qemu-riscv@nongnu.org; Tue, 07 Jan 2025 11:58:07 -0500
-Received: from mail-wm1-x32c.google.com ([2a00:1450:4864:20::32c])
+ id 1tVCpR-00050o-GA
+ for qemu-riscv@nongnu.org; Tue, 07 Jan 2025 11:53:17 -0500
+Received: from mail-wm1-x32a.google.com ([2a00:1450:4864:20::32a])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1tVCtx-0006v8-Ku
- for qemu-riscv@nongnu.org; Tue, 07 Jan 2025 11:58:04 -0500
-Received: by mail-wm1-x32c.google.com with SMTP id
- 5b1f17b1804b1-435f8f29f8aso114344575e9.2
- for <qemu-riscv@nongnu.org>; Tue, 07 Jan 2025 08:57:56 -0800 (PST)
+ id 1tVCoX-0005uX-2r
+ for qemu-riscv@nongnu.org; Tue, 07 Jan 2025 11:53:17 -0500
+Received: by mail-wm1-x32a.google.com with SMTP id
+ 5b1f17b1804b1-43675b1155bso151148105e9.2
+ for <qemu-riscv@nongnu.org>; Tue, 07 Jan 2025 08:52:20 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1736269076; x=1736873876; darn=nongnu.org;
+ d=linaro.org; s=google; t=1736268739; x=1736873539; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=lmaBQafc1hcOcHjmvqmTitVigBgQH5FjwDw2a2hIcHI=;
- b=IhT5l9186tYJYy5kkb0qVdJ1CwyZPpehWg4/3DmiDywqqsz6p2H35p1zsWfHRsKjkD
- 9dkQlAsAktw9FNEP/zoP04JBo178r12txvO9xxZ8t6q3oWOZbneX+LIsYURkKjUyJAVG
- vFK53ZMnfYElT5zkXB4/t2kSGhu/eEkJ6KMXyvYrOUo2mEXlVy67ji5H0tmgRgovhNlT
- QbiR+vhj3wOPpJ8cbon42pYlMPrycv+fiwpRLm1VeJDDBinMuMyJ7EASFewMMbGEqqL0
- 5ZPRja2pZFEPnxIjSiHgwbTJluBPn9CMEZ52fOB3JP6W/RTGxDYGCIJ0nbv3//+g240j
- KDrg==
+ bh=EpM6m6rbJjz/cMmDUZY1x5tfWrWucIQIPNslhUNIhio=;
+ b=Obyxev90yOp9K+tU0BuHp0J2Bi7Xdo/iGYIsGbOxbAHYRlQQ13BYRCC9lnjKBUQFsu
+ OK9jVd/RMJdEOZ4MPqqfNQdKjNnivgIgzYzFnJ9qp9sBVxoV5y15fgzBpkDECHFw8pJF
+ SU5JmtOneGiNbmoncsJyPWzbj1fu4zs8Ra/GgPsyOPuGFixvlXUFAiYUJgPQ3bfUTtPp
+ UF3es1sbfwBgQfDIcZqjovAAlD+HOS4/iq4bf9nyeoD/UB+kNQWVyXwtff7qhVvv7AJH
+ 3Y7pEFaHfRLcGoXqo9IjG6Q8yWM6+7lq8L2cjRp1Tkx1KltSJjuR65HmqoOUZBbXL7at
+ cVQQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1736269076; x=1736873876;
+ d=1e100.net; s=20230601; t=1736268739; x=1736873539;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=lmaBQafc1hcOcHjmvqmTitVigBgQH5FjwDw2a2hIcHI=;
- b=oj5IrvkUOkzPfXlr2vQPRcYhjYdtXV/aPoxlwSeOF3Mfw0+9k3fqWl5rg0W0yPq9G2
- C1/JSbbFx0d/7nUArvNYkKVFIf9VjlwH6ReR6KBt0y5o2dBedhRMU68LQuaIvgcQmjRl
- sg1sNHniSUjzikgroP+6IF5M68J+FzpAM1OPxNkmGMK9oR1O3lq9jyCnQuLdqeQtjuuu
- e5uCKQwouxSO9WVsnrDonGnE5MYBkaKKDt+uiikywKn6eCC0KRbxMsJA8VrHSEHqYmcM
- GS4T1K43rpu8FC0IFeGo6ia3lkzmPORtcxb7Hh+tZwMn+TxwuxGZQGkYM7MfWs9zDZTr
- NZpQ==
+ bh=EpM6m6rbJjz/cMmDUZY1x5tfWrWucIQIPNslhUNIhio=;
+ b=VC10Q5KJCR+sttQHd2/kt0fRLiec7UvbAcUTR39SZ4vNDoe5NTE9dnT8BFpVQDMbo8
+ DL/CuyQUCQFTgSnpQjy8sjZaq6auhGEa7i/uzpcv+RGZsWDc/xDhz/swdVx2Sp+XYstl
+ L/Kmvqjrg8acIQ6kqflEswBc2692ii7MvnHKBGauVQqT2EdIMSGuGNJAOmIidNriENsL
+ XojAqfchWhls3AUpHxPEn7R0PwHTCqLUZ1iZLRL6fRFLTV3qecype/dKUM/tLG1MmmHQ
+ BxP6E6KvH1j0enMGOU+CKGLnpm2D1oMStF4yfevznsBokiC7ImdpnZAnRDpIvjB2DH0E
+ 6ghg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXH6dllBm7SErRFOo+Zz7FQi1+m6B2s8KEmfAo963uEI5aw/KdBqvWT2MOrHmAs/MdgOPNDp0WaqSIJ@nongnu.org
-X-Gm-Message-State: AOJu0YwrOUhSNizwV5sPBq6psY639rDfhOc4UBzZbduqhOvwnUkBNvuT
- 8YldPDKoIntefcg1SZrAbpvUPSsgR7Gut5r2kUsL0WdjH7RLZAu3uy+R87p/b5U=
-X-Gm-Gg: ASbGncu5gdLEdsusUIgHZ15MzwHxLvhXqSMzeXrhvoLezrGhGax/WUjMXQIHuGN9nC9
- /2NrlhDTkoXdNDKgU10+5ikY6NbWgQrWP2F7pO9d0pxrey2PVlGAY5Ln3ad82JfldhUZNHbumn9
- 4Wye+rnqDlX3LJGl3yYSzW4HG0T+xSQTAlFQAHzVR0+iGDT0984tDcU+oocsy9haTX6eWFc8O88
- XT0SJYsNP10IGUwKTSop3MF7n/jkGocaSZQPnbLzdFGqQFlbOpLVoY=
-X-Google-Smtp-Source: AGHT+IHIiQA0UrClHndchLe3wsTOvHly+pLlflFj495fnUqG7Hr9zCIqcXDumFHeW5YQLfbH4ERt/Q==
-X-Received: by 2002:a5d:47a9:0:b0:385:d7f9:f166 with SMTP id
- ffacd0b85a97d-38a221fa11cmr45355632f8f.17.1736269075813; 
- Tue, 07 Jan 2025 08:57:55 -0800 (PST)
+ AJvYcCXbWUdtWjME7BBWY+HDHhgdBu/QX0gcrW0wVTppa6Jg+A297yFPE8sqSYrbm+xVUw1aa9RMWOBp3c6X@nongnu.org
+X-Gm-Message-State: AOJu0YzXbcbAmrKZ3N30gwAQctbvygO3AwD3UziAmYSg/4v58iMbKs4h
+ 2EcAumg7j+Bh15b+MBI57wN6rokS2VYXgxbL8XlhPhSDCktNm47TXnGnh+uEqN8=
+X-Gm-Gg: ASbGncsNWcy07WIkGf2SnwwxUugY295s5INF7GneSjTcxWiKpqlgQxVpDhymp+gSwks
+ rHe5jKDMkhoXRupNpDoKlmxVzc4f6vYVtYa8GbkqSXpsQHBww489YlwQDw/inrsFHXeo1iACIjo
+ xJdYZlm+lyyrBxpLPNLZWM8cn1cMrktbAPpBPODUGk7UpsP5+rbJZXQAJvG225HvhRFMX37ff3p
+ UWoog3Nk9Z9V5mgLlcyGegcCWosYhL36hvgvdAj91B7mPtBhVSdFiY=
+X-Google-Smtp-Source: AGHT+IF0523KCs134XApVCOqRgsloHn+KhIomI1XUbcSYKL4dgq8EZTCG5gtyABiAk7cB+ZJNxv4hw==
+X-Received: by 2002:a05:600c:1388:b0:434:a7e3:db5c with SMTP id
+ 5b1f17b1804b1-436686440abmr513224965e9.11.1736268739582; 
+ Tue, 07 Jan 2025 08:52:19 -0800 (PST)
 Received: from draig.lan ([85.9.250.243]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-38a1c8a6ca5sm52045565f8f.86.2025.01.07.08.57.53
+ ffacd0b85a97d-38a1c847263sm50585906f8f.50.2025.01.07.08.52.13
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 07 Jan 2025 08:57:53 -0800 (PST)
+ Tue, 07 Jan 2025 08:52:16 -0800 (PST)
 Received: from draig.lan (localhost [IPv6:::1])
- by draig.lan (Postfix) with ESMTP id BC88B5FD35;
+ by draig.lan (Postfix) with ESMTP id 78EC65FBC2;
  Tue,  7 Jan 2025 16:52:09 +0000 (GMT)
 From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
 To: qemu-devel@nongnu.org
@@ -99,18 +99,17 @@ Cc: Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
  =?UTF-8?q?Daniel=20P=2E=20Berrang=C3=A9?= <berrange@redhat.com>,
  =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
  Bernhard Beschow <shentey@gmail.com>, "Michael S. Tsirkin" <mst@redhat.com>
-Subject: [PATCH v3 19/29] tests/functional: add zstd support to uncompress
- utility
-Date: Tue,  7 Jan 2025 16:51:57 +0000
-Message-Id: <20250107165208.743958-20-alex.bennee@linaro.org>
+Subject: [PATCH v3 16/29] tests/qtest: remove clock_steps from virtio tests
+Date: Tue,  7 Jan 2025 16:51:54 +0000
+Message-Id: <20250107165208.743958-17-alex.bennee@linaro.org>
 X-Mailer: git-send-email 2.39.5
 In-Reply-To: <20250107165208.743958-1-alex.bennee@linaro.org>
 References: <20250107165208.743958-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::32c;
- envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x32c.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::32a;
+ envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x32a.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -133,65 +132,63 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Rather than using the python library (which has a different API
-anyway) lets just call the binary. zstdtools is already in out
-qemu.yml so all test containers should have it around. Tests should
-still use @skipIfMissingCommands('zstd') to gracefully handle when
-only minimal dependencies have been installed.
+In the qtest environment time will not step forward if the system is
+paused (timers disabled) or we have no timer events to fire. As a
+result VirtIO events are responded to directly and we don't need to
+step time forward.
+
+We still do timeout processing to handle the fact the target QEMU may
+not be ready to respond right away. This will usually be due to a slow
+CI system or if QEMU is running under something like rr.
+
+Future qtest patches will assert that time actually changes when a
+step is requested.
 
 Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
----
- tests/functional/qemu_test/uncompress.py | 17 +++++++++++++++++
- 1 file changed, 17 insertions(+)
 
-diff --git a/tests/functional/qemu_test/uncompress.py b/tests/functional/qemu_test/uncompress.py
-index 6d02ded066..404eee1f83 100644
---- a/tests/functional/qemu_test/uncompress.py
-+++ b/tests/functional/qemu_test/uncompress.py
-@@ -12,6 +12,7 @@
- import os
- import shutil
- from urllib.parse import urlparse
-+from subprocess import check_call, CalledProcessError
+---
+v2
+  - s/with/when/
+  - drop clock_step entirely
+---
+ tests/qtest/libqos/virtio.c | 4 ----
+ 1 file changed, 4 deletions(-)
+
+diff --git a/tests/qtest/libqos/virtio.c b/tests/qtest/libqos/virtio.c
+index a21b6eee9c..2e7979652f 100644
+--- a/tests/qtest/libqos/virtio.c
++++ b/tests/qtest/libqos/virtio.c
+@@ -170,7 +170,6 @@ void qvirtio_wait_queue_isr(QTestState *qts, QVirtioDevice *d,
+     gint64 start_time = g_get_monotonic_time();
  
- from .asset import Asset
+     for (;;) {
+-        qtest_clock_step(qts, 100);
+         if (d->bus->get_queue_isr_status(d, vq)) {
+             return;
+         }
+@@ -192,7 +191,6 @@ uint8_t qvirtio_wait_status_byte_no_isr(QTestState *qts, QVirtioDevice *d,
+     uint8_t val;
  
-@@ -38,6 +39,18 @@ def lzma_uncompress(xz_path, output_path):
-             os.remove(output_path)
-             raise
+     while ((val = qtest_readb(qts, addr)) == 0xff) {
+-        qtest_clock_step(qts, 100);
+         g_assert(!d->bus->get_queue_isr_status(d, vq));
+         g_assert(g_get_monotonic_time() - start_time <= timeout_us);
+     }
+@@ -219,14 +217,12 @@ void qvirtio_wait_used_elem(QTestState *qts, QVirtioDevice *d,
+     for (;;) {
+         uint32_t got_desc_idx;
  
-+def zstd_uncompress(zstd_path, output_path):
-+    if os.path.exists(output_path):
-+        return
-+
-+    try:
-+        check_call(['zstd', "-f", "-d", zstd_path,
-+                    "-o", output_path])
-+    except CalledProcessError as e:
-+        os.remove(output_path)
-+        raise Exception(
-+            f"Unable to decompress zstd file {zstd_path} with {e}") from e
-+
- '''
- @params compressed: filename, Asset, or file-like object to uncompress
- @params uncompressed: filename to uncompress into
-@@ -59,6 +72,8 @@ def uncompress(compressed, uncompressed, format=None):
-         lzma_uncompress(str(compressed), uncompressed)
-     elif format == "gz":
-         gzip_uncompress(str(compressed), uncompressed)
-+    elif format == "zstd":
-+        zstd_uncompress(str(compressed), uncompressed)
-     else:
-         raise Exception(f"Unknown compression format {format}")
+-        qtest_clock_step(qts, 100);
  
-@@ -79,5 +94,7 @@ def guess_uncompress_format(compressed):
-         return "xz"
-     elif ext == ".gz":
-         return "gz"
-+    elif ext == ".zstd":
-+        return "zstd"
-     else:
-         raise Exception(f"Unknown compression format for {compressed}")
+         if (d->bus->get_queue_isr_status(d, vq) &&
+             qvirtqueue_get_buf(qts, vq, &got_desc_idx, len)) {
+             g_assert_cmpint(got_desc_idx, ==, desc_idx);
+             return;
+         }
+-
+         g_assert(g_get_monotonic_time() - start_time <= timeout_us);
+     }
+ }
 -- 
 2.39.5
 
