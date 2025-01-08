@@ -4,68 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 13BFAE77188
-	for <qemu-riscv@archiver.kernel.org>; Wed,  8 Jan 2025 12:19:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EAB9FE77199
+	for <qemu-riscv@archiver.kernel.org>; Wed,  8 Jan 2025 12:20:34 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tVUzh-0007JM-Ig; Wed, 08 Jan 2025 07:17:06 -0500
+	id 1tVUzs-000854-1e; Wed, 08 Jan 2025 07:17:16 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1tVUuY-0000rC-Jj
+ id 1tVUua-0000s4-2J
  for qemu-riscv@nongnu.org; Wed, 08 Jan 2025 07:11:49 -0500
-Received: from mail-ej1-x62c.google.com ([2a00:1450:4864:20::62c])
+Received: from mail-ej1-x62e.google.com ([2a00:1450:4864:20::62e])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1tVUuQ-0007Jz-PA
- for qemu-riscv@nongnu.org; Wed, 08 Jan 2025 07:11:46 -0500
-Received: by mail-ej1-x62c.google.com with SMTP id
- a640c23a62f3a-aaf60d85238so1235347166b.0
- for <qemu-riscv@nongnu.org>; Wed, 08 Jan 2025 04:11:10 -0800 (PST)
+ id 1tVUuQ-0007I4-T9
+ for qemu-riscv@nongnu.org; Wed, 08 Jan 2025 07:11:47 -0500
+Received: by mail-ej1-x62e.google.com with SMTP id
+ a640c23a62f3a-aaeef97ff02so2147936566b.1
+ for <qemu-riscv@nongnu.org>; Wed, 08 Jan 2025 04:11:06 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1736338269; x=1736943069; darn=nongnu.org;
+ d=linaro.org; s=google; t=1736338265; x=1736943065; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=HuCXulvJRMZygWdnINtFY7SjYOcclpP9r7Wb7ozg1Gw=;
- b=fSUrpDVl4EeL/Dz9Xf36jSCUPz3NuyOW3lQRM7rNwfaRW8PtgPYbSizCxsYTvzlBSS
- UucgNQ1WIvERwVVvFD3fpD0fCXdgJmCccGcyJiXbc61aeAvcBmKn9asOWOYXHGaErkqt
- pk9boR9oqJYfXrmTqt2DlRKawxOLF+2sA0b6+nG6iXhE4NPm/pNazekVsgm6ILGoKlPF
- HCq4j92+UhCNZsOo2GwEHtziSVguVp9buZqP7xw1deGGc9uoPAhEPXU97OgZNf7/kEPK
- qUSWu6x/xEGWrY71Y4nAdAQHTtN+PmqswOSYAtnjHmGOkf2xlP7oy689K90cIStKsjPh
- Pckg==
+ bh=/WD+OCh9xieXyi8aUL7na7hMYPj/U0GHInutd7eRNwQ=;
+ b=JPaNxTb44QRnn6gEWRLSOeE++u6EcMuPmFcHUZX8jkecrLeSzPrJ/+xxKGqjo4lw7P
+ lkVQ3g3yfRaNT6CGHp0YuDI/mg6tw3Z7crqT5ccrzWrDsY9r9UUOmtmyE4mdDxEC/sj6
+ l4MUWHtBG4Ti7FyeRL2m8GF5u59Onh6fpdDPX56q/m+BNaDEFg+a/lIy1Y762Ig5p/Jg
+ hHiMwUUafzyuN6ymLr9kzCqKPEi6V2MIzWj1VAflcdWDerWk0scS+Ql80Gy50nyPoJE4
+ KUyAQw2LKbfoIQNiDOmm1gtstyWoElZuvrMu1tprFoW+grnKQAay9He7r2LaYPD1puEl
+ m+LQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1736338269; x=1736943069;
+ d=1e100.net; s=20230601; t=1736338265; x=1736943065;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=HuCXulvJRMZygWdnINtFY7SjYOcclpP9r7Wb7ozg1Gw=;
- b=u9l6K22CjsprMKC4pu1USM5uEVG+tsXmV8tAwCP8rA0DA1jSM1DDxwLQ1dHeUEcAGi
- FamZmrKS1UrL4S0Dk7OoQ/dONBiBWCpHPaClugsSF0T1K0nH7cAxU8Clk+oZrZz0nI92
- XH9JXFm8+2MrmksTI99+N/9Kat812rnchqnj7SUBW9q1Eka9kAEL1b34k+lj7cvOE4am
- fodsQj6SQAOoXeqDD5w5Xoesx/2rwouXQbSzsvcy+mKqMkP7G9r8eutiNNt0HE7cwi6R
- opi2v74Wn778GHswNMxi55fJN5dK9XIHORlqvW3fyEPmcs9tmtK/cr8SGKaIhwNm5xun
- QC1A==
+ bh=/WD+OCh9xieXyi8aUL7na7hMYPj/U0GHInutd7eRNwQ=;
+ b=koKF71xM4P5IootcVKjFybb/zyUQTLJma8Pz3WNmrugrSNWw0lCR4xpGvcSeh31ucl
+ AVxke+ykFCQ7HCJUCmR68qbKgYB78CtO6aYdN2djatxzE4ngRkgkKKdjZB1lukab+/wd
+ IUCdW2mqu/+uaJ+aYnbuLeK0XmSf1IJJuP1fj7lHkHipREixpfgTUHL8zUzwgBo5KIOa
+ NLaVJi8sReS6Gzmtb6rrAEgbWm/veKq8TMuGqEsiWYSi9isGHP6RYQqZGqV/tNPgxXtp
+ GiHweqQckWaemSAuOht8ElVcnSRQ9EOb2LBZdWWk5FdvEITNTKiFO2NeHeEpw700RoSR
+ Nc6g==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXTPf3QKdoYF8yy65bq4TewAuBssUlDIgad0QmdppuVhVb6z/bys9iSuZChiEQ3oKPEPOqdrueoCv9C@nongnu.org
-X-Gm-Message-State: AOJu0YwEOHKeQPi4qv9QKTGFL0Qb51IYcKCQMeBaUyr0C3pwxzp+LiVH
- LaHsstmFuvfem2tOx5QUSSTIeigm4KBWLtLZOJaF9FInFQvSh0BHMWndSNDXt9E=
-X-Gm-Gg: ASbGncs6TojmjFjY/IH12qNYGugfYRWBa1BmWHYatZxUezD3c/0HflAoZKgQrdRsDJH
- 7+xJYn0XO2Mmo/QHCO+N90+p58cq0KpjLTmKFp/KtTWNg5Mc4bA+eJRtbiG1rbDZh4UpX3x8i0T
- KZwh1Rjs0i34FwtDR3iGO/gOJr1mwxgbrzUG43PRgoYziJJg77DE5WNeoBaVFlQDD3wSMzYcxPO
- zpv66KgLsLAL55g5orkVtOrbC015lIMnxaEpUHwQ6NUvjW9vjLAHdw=
-X-Google-Smtp-Source: AGHT+IHeGtEecnCdnr500hTk9KU+LP3vqiHrpEOKgft8A2cr91ZWcCsO3n02MTGHAGMNdk7ttarXDg==
-X-Received: by 2002:a17:907:7f8e:b0:aaf:f1a:d2ad with SMTP id
- a640c23a62f3a-ab2abc9f07dmr154794866b.50.1736338269092; 
- Wed, 08 Jan 2025 04:11:09 -0800 (PST)
+ AJvYcCVfwJNLHFUyxrSXTZEPiKFDmDoRkQdOHZVs5Tlxm0SURX75zquK+OkE3DWiESQOfgd4ef8Fiyufq7Ds@nongnu.org
+X-Gm-Message-State: AOJu0Yy3gjNy44CBtjBUnbDZlTAhU9aW74Yf/3bp1TI01BJQhmA5Hd7r
+ d8I9JZB0Ykfh+BBs5GKPsNUvtDdcxBMru1zdpTJ7rXkxkBPMo1KH63Eccr7DIi8=
+X-Gm-Gg: ASbGncuM09Bn2qASE/NApbbcTPbEybI29tbPd85gDRqDcYLBBY0ksz8T0fzCaWd5T63
+ Gp5BQhUsGab2lSr8agskn+G3LZi/fnhOfz7VpAvhnFTAAx1kuGFiexRIyC0/MeRjX6X0+7nehzU
+ 81r/x/D+E3HRq6RjP1THRChzwsDgkzkb3OuScQ4dCSOPC8jVljykwldBTdMXxQDmsHVtTbN65l1
+ wObe+Jg2z3l4t6e4IHrXi32IvZYtxPByLQTqhOGciomQzh7A2jY9Cw=
+X-Google-Smtp-Source: AGHT+IFYm0tncWUO1+PGv3qCpex4EpQHXV/VOy/Ebxb9cS9DVfy07mAHwrZzCDPOrWCry0A1nNblvA==
+X-Received: by 2002:a17:907:971e:b0:aa6:800a:1292 with SMTP id
+ a640c23a62f3a-ab2ab70be05mr189190566b.25.1736338265488; 
+ Wed, 08 Jan 2025 04:11:05 -0800 (PST)
 Received: from draig.lan ([85.9.250.243]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-aac0f0128b8sm2492701966b.145.2025.01.08.04.11.03
+ a640c23a62f3a-aac0eae5902sm2481836466b.85.2025.01.08.04.10.58
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 08 Jan 2025 04:11:06 -0800 (PST)
+ Wed, 08 Jan 2025 04:11:02 -0800 (PST)
 Received: from draig.lan (localhost [IPv6:::1])
- by draig.lan (Postfix) with ESMTP id B867A5FC58;
- Wed,  8 Jan 2025 12:10:56 +0000 (GMT)
+ by draig.lan (Postfix) with ESMTP id B6CF35F9EC;
+ Wed,  8 Jan 2025 12:10:55 +0000 (GMT)
 From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Halil Pasic <pasic@linux.ibm.com>, Aurelien Jarno <aurelien@aurel32.net>,
@@ -99,19 +99,19 @@ Cc: Halil Pasic <pasic@linux.ibm.com>, Aurelien Jarno <aurelien@aurel32.net>,
  Markus Armbruster <armbru@redhat.com>,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
  Palmer Dabbelt <palmer@dabbelt.com>,
- Peter Maydell <peter.maydell@linaro.org>, Li-Wen Hsu <lwhsu@freebsd.org>
-Subject: [PATCH v4 22/32] tests/functional: bail aarch64_virt tests early if
- missing TCG
-Date: Wed,  8 Jan 2025 12:10:44 +0000
-Message-Id: <20250108121054.1126164-23-alex.bennee@linaro.org>
+ Peter Maydell <peter.maydell@linaro.org>, Li-Wen Hsu <lwhsu@freebsd.org>,
+ Anders Roxell <anders.roxell@linaro.org>
+Subject: [PATCH v4 12/32] tests/functional: update the s390x tuxrun tests
+Date: Wed,  8 Jan 2025 12:10:34 +0000
+Message-Id: <20250108121054.1126164-13-alex.bennee@linaro.org>
 X-Mailer: git-send-email 2.39.5
 In-Reply-To: <20250108121054.1126164-1-alex.bennee@linaro.org>
 References: <20250108121054.1126164-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::62c;
- envelope-from=alex.bennee@linaro.org; helo=mail-ej1-x62c.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::62e;
+ envelope-from=alex.bennee@linaro.org; helo=mail-ej1-x62e.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -134,60 +134,37 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-The set_machine and require_accelerator steps can bail early so move
-those to the front of the test functions. While we are at it also
-clean up some long lines when adding the vm arguments.
+Now there are new up to date images available we should update to them.
 
+Cc: Anders Roxell <anders.roxell@linaro.org>
+Reviewed-by: Thomas Huth <thuth@redhat.com>
+Tested-by: Thomas Huth <thuth@redhat.com>
 Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
+Message-Id: <20241121165806.476008-33-alex.bennee@linaro.org>
 ---
- tests/functional/test_aarch64_virt.py | 11 +++++++----
- 1 file changed, 7 insertions(+), 4 deletions(-)
+ tests/functional/test_s390x_tuxrun.py | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/tests/functional/test_aarch64_virt.py b/tests/functional/test_aarch64_virt.py
-index b3d3b0ee51..201c5ed023 100755
---- a/tests/functional/test_aarch64_virt.py
-+++ b/tests/functional/test_aarch64_virt.py
-@@ -40,9 +40,9 @@ def test_alpine_virt_tcg_gic_max(self):
-         iso_path = self.ASSET_ALPINE_ISO.fetch()
+diff --git a/tests/functional/test_s390x_tuxrun.py b/tests/functional/test_s390x_tuxrun.py
+index dcab17c68b..a7db4bfd84 100755
+--- a/tests/functional/test_s390x_tuxrun.py
++++ b/tests/functional/test_s390x_tuxrun.py
+@@ -17,11 +17,11 @@
+ class TuxRunS390xTest(TuxRunBaselineTest):
  
-         self.set_machine('virt')
--        self.vm.set_console()
-         self.require_accelerator("tcg")
+     ASSET_S390X_KERNEL = Asset(
+-        'https://storage.tuxboot.com/20230331/s390/bzImage',
+-        '0414e98dd1c3dafff8496c9cd9c28a5f8d04553bb5ba37e906a812b48d442ef0')
++        'https://storage.tuxboot.com/buildroot/20241119/s390/bzImage',
++        'ee67e91db52a2aed104a7c72b2a08987c678f8179c029626789c35d6dd0fedf1')
+     ASSET_S390X_ROOTFS = Asset(
+-        'https://storage.tuxboot.com/20230331/s390/rootfs.ext4.zst',
+-        '88c37c32276677f873a25ab9ec6247895b8e3e6f8259134de2a616080b8ab3fc')
++        'https://storage.tuxboot.com/buildroot/20241119/s390/rootfs.ext4.zst',
++        'bff7971fc2fef56372d98afe4557b82fd0a785a241e44c29b058e577ad1bbb44')
  
-+        self.vm.set_console()
-         self.vm.add_args("-accel", "tcg")
-         self.vm.add_args("-cpu", "max,pauth-impdef=on")
-         self.vm.add_args("-machine",
-@@ -71,15 +71,16 @@ def common_aarch64_virt(self, machine):
-         Common code to launch basic virt machine with kernel+initrd
-         and a scratch disk.
-         """
-+        self.set_machine('virt')
-+        self.require_accelerator("tcg")
-+
-         logger = logging.getLogger('aarch64_virt')
- 
-         kernel_path = self.ASSET_KERNEL.fetch()
- 
--        self.set_machine('virt')
-         self.vm.set_console()
-         kernel_command_line = (self.KERNEL_COMMON_COMMAND_LINE +
-                                'console=ttyAMA0')
--        self.require_accelerator("tcg")
-         self.vm.add_args('-cpu', 'max,pauth-impdef=on',
-                          '-machine', machine,
-                          '-accel', 'tcg',
-@@ -100,7 +101,9 @@ def common_aarch64_virt(self, machine):
- 
-         # Add the device
-         self.vm.add_args('-blockdev',
--                         f"driver=qcow2,file.driver=file,file.filename={image_path},node-name=scratch")
-+                         "driver=qcow2,"
-+                         "file.driver=file,"
-+                         f"file.filename={image_path},node-name=scratch")
-         self.vm.add_args('-device',
-                          'virtio-blk-device,drive=scratch')
- 
+     def test_s390(self):
+         self.wait_for_shutdown=False
 -- 
 2.39.5
 
