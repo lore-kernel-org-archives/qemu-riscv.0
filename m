@@ -4,80 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 026C0E77188
-	for <qemu-riscv@archiver.kernel.org>; Wed,  8 Jan 2025 14:10:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 208BEE77188
+	for <qemu-riscv@archiver.kernel.org>; Wed,  8 Jan 2025 14:16:21 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tVWkp-0003jc-Mj; Wed, 08 Jan 2025 09:09:51 -0500
+	id 1tVWq5-00063j-AO; Wed, 08 Jan 2025 09:15:17 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1tVWkn-0003aB-ML
- for qemu-riscv@nongnu.org; Wed, 08 Jan 2025 09:09:49 -0500
+ (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1tVWq3-00062B-4z
+ for qemu-riscv@nongnu.org; Wed, 08 Jan 2025 09:15:15 -0500
 Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1tVWkl-0003tk-Dl
- for qemu-riscv@nongnu.org; Wed, 08 Jan 2025 09:09:49 -0500
+ (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1tVWq0-0004zl-Fk
+ for qemu-riscv@nongnu.org; Wed, 08 Jan 2025 09:15:14 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1736345386;
+ s=mimecast20190719; t=1736345711;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
- bh=MrFJNaOUOPaaan1zaHG7MPWllkYWyC8JnO9yPqggt/g=;
- b=CWQUjFQkLNU4dIafGu/h1G7K4ltzMD/xXVUZAsQPCWovzpR9SPPk9X/8peiTaogm1DJH1D
- chv32I4KI2LuqO6xcdSP1xCaMHwayDztGpPzqehyIul86ir4NQ3RDNXD6kbgRGaj8u4Y1+
- 46fzoGahrj5W05OsMWnfs5eSat0DKPk=
-Received: from mail-wr1-f69.google.com (mail-wr1-f69.google.com
- [209.85.221.69]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=6xKFvF+CTfc/Sx73gmcJGcAlmt1nugJqIuC/683n58I=;
+ b=O/m1izuM+FOkvtl7RKmu2tiKPu06BXkrKEi3cHel2sz6Gs80Ph8sxCrRLALw5acMKynIl0
+ DcT0CqwZWPoMT9oWFN8W8ZWembaFitCpEn5nqsfdBhq4ZInCYMFfszMdkYYP8LydYeTV0u
+ qE1j6s3jqcDBmVFqMZsJEC4w4VDmzjM=
+Received: from mail-qv1-f72.google.com (mail-qv1-f72.google.com
+ [209.85.219.72]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-369-lcQNhkStPeaXv2peb21wPA-1; Wed, 08 Jan 2025 09:09:44 -0500
-X-MC-Unique: lcQNhkStPeaXv2peb21wPA-1
-X-Mimecast-MFC-AGG-ID: lcQNhkStPeaXv2peb21wPA
-Received: by mail-wr1-f69.google.com with SMTP id
- ffacd0b85a97d-38a684a096eso2149592f8f.2
- for <qemu-riscv@nongnu.org>; Wed, 08 Jan 2025 06:09:43 -0800 (PST)
+ us-mta-647-RpPy6GpNPO2GpLoyBMgf0g-1; Wed, 08 Jan 2025 09:15:08 -0500
+X-MC-Unique: RpPy6GpNPO2GpLoyBMgf0g-1
+X-Mimecast-MFC-AGG-ID: RpPy6GpNPO2GpLoyBMgf0g
+Received: by mail-qv1-f72.google.com with SMTP id
+ 6a1803df08f44-6d8f78fdad0so253142296d6.2
+ for <qemu-riscv@nongnu.org>; Wed, 08 Jan 2025 06:15:08 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1736345383; x=1736950183;
+ d=1e100.net; s=20230601; t=1736345707; x=1736950507;
  h=content-transfer-encoding:in-reply-to:autocrypt:content-language
  :from:references:cc:to:subject:user-agent:mime-version:date
  :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=MrFJNaOUOPaaan1zaHG7MPWllkYWyC8JnO9yPqggt/g=;
- b=HaVl+E25it3wuPgOUXp3U1nZrh1qzma/gGtDbhgrS9uDtUs9B1VdjUwLKzZ0RP7joc
- tFWgd2CEgMgARnGGC1m6VTvdEtOoqJMOIpH4SLAYT1K/k3DZayArpxNDyIF7i8XegfW1
- 9Z4Qj6OlTM/dKXuOtYGW7Odj2GOpMp8mfjal1m93ExTM2YnCanBp/N++vg/jgEGpZwOa
- mlcNYlx1kh7+I/K/H4avDaf899YKo7kvotxTcTtEKZls6E3Ij5W8LNzf67i+mC+ggS+q
- 10oJYtb1kVuCNRm6mRbAPClZt++4e27MQjWOJ0yOIsq3lXy8Soj2HwMDpkfuoL2j0HGn
- CAcQ==
+ bh=6xKFvF+CTfc/Sx73gmcJGcAlmt1nugJqIuC/683n58I=;
+ b=r3Ih4dFcG0roBgAddiMA3F6/ZuUoa5k1Tp5S7eb97P10kGHHieqV7AR6JFyPylzsUO
+ j1r9NtcSGmqMpBfvPeAx5Dg1qRGSTBx9yr1FdUZc1Va17BHWw1p0uOVUxOmkPD/pCRsx
+ SKyGtKZUMvhiTyAUaXLxzVsP90w4gjMq8obTWKTNGcVAQavcVSvBcoOcOhSL9R9rrK/A
+ EEYRH0r4ugeOyKlic2caHY7XOpTi6eqE4Io8nhe3tCM3/CJTTHpPYIRux4ek+hPBsM9S
+ zGTRpQLmF+hnz6tDA/UOiUC+lvaPV615HoNHu68aEndITTQxQ3tmuCpdHaF472ye4YM0
+ JhTg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUD+xkFAZE0kmVctwBfaSHRAZlhBXChEKkVFdua19F7jQrksEPIWN0eszcgxQDvNEQakqiCcSwSD3Hz@nongnu.org
-X-Gm-Message-State: AOJu0Yzo54/lX/nAmvKYSOPEvDONE5rSLijtKhl+0moIPf/LrXZjI2pN
- hlutdQzwXeTATvsC7CUC3GS209gRynVeqtqIn/BWTxn3HHD9ztgZTlpKmDHMjuiPnk+amDzAx6N
- lILQo7WIr+TEERkxMCteoV/d02CrD5ylEvYkPKhTojuw6kT6AT7L8
-X-Gm-Gg: ASbGncvlIcZ5dEk3xBHW0pbOJK+kysm4wFMdpZoSbJ0E/eVcQdpPufNXSiwaq+OuRyg
- BfZyXFuw2538lM5CCa1QF+hwWndXdCrEzp5H3qK6p4LL/WEKE2jRocUjc1CUrN/urf+DbEZGtVy
- MotbtNFUy2mE9GqOsyRndxh/hQvaVqMVxaeO7Q4AScAq72lRL5skd53n9rmNu3AEKwg3fTdz7OT
- JsIXAZzIQHCMO28AHJDQYY01ZEYmaiMKPIYK07MUMCBINkBZc0Qs+8TOxKl/ckXfg3k1yHNMzBz
- 17A0kg==
-X-Received: by 2002:a05:6000:1ace:b0:385:f00a:a45c with SMTP id
- ffacd0b85a97d-38a87320a44mr2485792f8f.57.1736345382723; 
- Wed, 08 Jan 2025 06:09:42 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IG3TrZBYZo8h2cLFx2pHq+hCQozJ42kZ1Svg4FcDTjvdMcaE+iYi/m96mVHinKA+aJZXxgmyw==
-X-Received: by 2002:a05:6000:1ace:b0:385:f00a:a45c with SMTP id
- ffacd0b85a97d-38a87320a44mr2485760f8f.57.1736345382342; 
- Wed, 08 Jan 2025 06:09:42 -0800 (PST)
+ AJvYcCUJsCWh+zjyctKf5cMiG6IQI79Nw6RLQqIfkNk+BOQE/xHjPAocW2wNS/AL1VsNUN45LIgt9tyF4BBf@nongnu.org
+X-Gm-Message-State: AOJu0YwH/rx2oB6VMWpQeaAWlwcKCOd/WE1SM57gEthx4HgJSGuW0755
+ lGXJ0DI4k6NcO7eo04613eRZIRHVAJF4lJWFhYkQBjWarItih8efuWNjoxF/s5lYv1/For7ZKen
+ WccDmKluUXeetj35FGALos78udW51NHcbvj9nF+t/9h4ua2I7p00Q
+X-Gm-Gg: ASbGncsOOo5PPL+rnxurtjWEtjRxX8S64Dt5j5GtgBDuexvoTW4o33IAVKVu05xFXkf
+ 4RM0b14a76EtIVrdlfS++1HVMmEalISHti9hmCBPEmfVo/EmV5pAtaoigf0RY5fYKCQsHVDeddq
+ g5JpvbUne/gVlp9y7MOTWswTeEOVkrebWroQr517JtLnlHYVcyYcaJP7UPpwVX9vBQEqOh6CRC+
+ 7Ayj6fGoMo/ll3EU28GuK0FtxjDeA3maKM1NnpUZZPRW+OOMb6Zn+PfKnavssLC3gghc29eRtci
+ Ke4AMw==
+X-Received: by 2002:ad4:5967:0:b0:6d8:8aa6:ef27 with SMTP id
+ 6a1803df08f44-6df9b2d7f31mr51264396d6.38.1736345707526; 
+ Wed, 08 Jan 2025 06:15:07 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IF3i3rsX9px8lK3V6fS+YqRn1Jlw2pBrrzfYBTXOzgsCFyL3548rAfZc6ZYPfZlSLWNsU+9Lw==
+X-Received: by 2002:ad4:5967:0:b0:6d8:8aa6:ef27 with SMTP id
+ 6a1803df08f44-6df9b2d7f31mr51263836d6.38.1736345707164; 
+ Wed, 08 Jan 2025 06:15:07 -0800 (PST)
 Received: from [10.33.192.228] (nat-pool-str-t.redhat.com. [149.14.88.106])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-38a1c89e1cesm52212856f8f.64.2025.01.08.06.09.40
+ d75a77b69052e-46a3e6a9cb6sm196062931cf.51.2025.01.08.06.15.01
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 08 Jan 2025 06:09:41 -0800 (PST)
-Message-ID: <15fbe517-a646-4a21-ba02-a4a00ece641b@redhat.com>
-Date: Wed, 8 Jan 2025 15:09:40 +0100
+ Wed, 08 Jan 2025 06:15:06 -0800 (PST)
+Message-ID: <e9ea11e0-8833-4f76-a13c-0616c286a6ec@redhat.com>
+Date: Wed, 8 Jan 2025 15:15:00 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 20/32] tests/functional: update tuxruntest to use
- uncompress utility
+Subject: Re: [PATCH v4 21/32] tests/functional: remove unused
+ kernel_command_line
 To: =?UTF-8?Q?Alex_Benn=C3=A9e?= <alex.bennee@linaro.org>,
  qemu-devel@nongnu.org
 Cc: Halil Pasic <pasic@linux.ibm.com>, Aurelien Jarno <aurelien@aurel32.net>, 
@@ -111,7 +111,7 @@ Cc: Halil Pasic <pasic@linux.ibm.com>, Aurelien Jarno <aurelien@aurel32.net>,
  Palmer Dabbelt <palmer@dabbelt.com>, Peter Maydell
  <peter.maydell@linaro.org>, Li-Wen Hsu <lwhsu@freebsd.org>
 References: <20250108121054.1126164-1-alex.bennee@linaro.org>
- <20250108121054.1126164-21-alex.bennee@linaro.org>
+ <20250108121054.1126164-22-alex.bennee@linaro.org>
 From: Thomas Huth <thuth@redhat.com>
 Autocrypt: addr=thuth@redhat.com; keydata=
  xsFNBFH7eUwBEACzyOXKU+5Pcs6wNpKzrlJwzRl3VGZt95VCdb+FgoU9g11m7FWcOafrVRwU
@@ -155,9 +155,9 @@ Autocrypt: addr=thuth@redhat.com; keydata=
  oiT+z+/E59qj/EKfyce3sbC9XLjXv3mHMrq1tKX4G7IJGnS989E/fg6crv6NHae9Ckm7+lSs
  IQu4bBP2GxiRQ+NV3iV/KU3ebMRzqIC//DCOxzQNFNJAKldPe/bKZMCxEqtVoRkuJtNdp/5a
  yXFZ6TfE1hGKrDBYAm4vrnZ4CXFSBDllL59cFFOJCkn4Xboj/aVxxJxF30bn
-In-Reply-To: <20250108121054.1126164-21-alex.bennee@linaro.org>
+In-Reply-To: <20250108121054.1126164-22-alex.bennee@linaro.org>
 X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: 788gKgn4Ed5MQJyrN7cgPF8lU6xbfdopFE6vwzmH2GI_1736345383
+X-Mimecast-MFC-PROC-ID: fq-NAyg8jip3K9Sm-4iZOdCgGBxz4qsQZwaDzMlCDJg_1736345707
 X-Mimecast-Originator: redhat.com
 Content-Language: en-US
 Content-Type: text/plain; charset=UTF-8; format=flowed
@@ -188,12 +188,27 @@ Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 On 08/01/2025 13.10, Alex Bennée wrote:
-> Use the utility functions to reduce code duplication.
+> The Alpine test boots from the CDROM so we don't --append a command
+> line. Drop the unused code.
 > 
 > Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
 > ---
->   tests/functional/qemu_test/tuxruntest.py | 12 +-----------
->   1 file changed, 1 insertion(+), 11 deletions(-)
+>   tests/functional/test_aarch64_virt.py | 2 --
+>   1 file changed, 2 deletions(-)
+> 
+> diff --git a/tests/functional/test_aarch64_virt.py b/tests/functional/test_aarch64_virt.py
+> index 2d9995a95d..b3d3b0ee51 100755
+> --- a/tests/functional/test_aarch64_virt.py
+> +++ b/tests/functional/test_aarch64_virt.py
+> @@ -41,8 +41,6 @@ def test_alpine_virt_tcg_gic_max(self):
+>   
+>           self.set_machine('virt')
+>           self.vm.set_console()
+> -        kernel_command_line = (self.KERNEL_COMMON_COMMAND_LINE +
+> -                               'console=ttyAMA0')
+>           self.require_accelerator("tcg")
+>   
+>           self.vm.add_args("-accel", "tcg")
 
 Reviewed-by: Thomas Huth <thuth@redhat.com>
 
