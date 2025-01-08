@@ -4,80 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 80C3EE77188
-	for <qemu-riscv@archiver.kernel.org>; Wed,  8 Jan 2025 14:09:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 026C0E77188
+	for <qemu-riscv@archiver.kernel.org>; Wed,  8 Jan 2025 14:10:20 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tVWjf-0002QC-Mt; Wed, 08 Jan 2025 09:08:44 -0500
+	id 1tVWkp-0003jc-Mj; Wed, 08 Jan 2025 09:09:51 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1tVWjK-0002Kz-42
- for qemu-riscv@nongnu.org; Wed, 08 Jan 2025 09:08:25 -0500
+ (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1tVWkn-0003aB-ML
+ for qemu-riscv@nongnu.org; Wed, 08 Jan 2025 09:09:49 -0500
 Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1tVWjG-0003eM-6k
- for qemu-riscv@nongnu.org; Wed, 08 Jan 2025 09:08:17 -0500
+ (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1tVWkl-0003tk-Dl
+ for qemu-riscv@nongnu.org; Wed, 08 Jan 2025 09:09:49 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1736345293;
+ s=mimecast20190719; t=1736345386;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
- bh=qpxohD9h8i5S6p2TPOGVlTOYpkDWuNlt9sflRvsbfoc=;
- b=ipgP41lTWa2ri2Qp2/EHLSNpqSsddMbauH5137Q+lKxfStsAzmgl1vSC9FL+FxMRnojLk/
- GWA7WZ4rFToYHtofZZPrqP9B6jqApQMAL5Bil66th0KWOrFTMp0n0L4Y3u9UsrL+lNK0mD
- wBnBeTNqmQshd5NR9i1z1y+kaFoRuv4=
-Received: from mail-wr1-f70.google.com (mail-wr1-f70.google.com
- [209.85.221.70]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=MrFJNaOUOPaaan1zaHG7MPWllkYWyC8JnO9yPqggt/g=;
+ b=CWQUjFQkLNU4dIafGu/h1G7K4ltzMD/xXVUZAsQPCWovzpR9SPPk9X/8peiTaogm1DJH1D
+ chv32I4KI2LuqO6xcdSP1xCaMHwayDztGpPzqehyIul86ir4NQ3RDNXD6kbgRGaj8u4Y1+
+ 46fzoGahrj5W05OsMWnfs5eSat0DKPk=
+Received: from mail-wr1-f69.google.com (mail-wr1-f69.google.com
+ [209.85.221.69]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-29-4ncETQXgMti8JmktI5rpGA-1; Wed, 08 Jan 2025 09:08:10 -0500
-X-MC-Unique: 4ncETQXgMti8JmktI5rpGA-1
-X-Mimecast-MFC-AGG-ID: 4ncETQXgMti8JmktI5rpGA
-Received: by mail-wr1-f70.google.com with SMTP id
- ffacd0b85a97d-386321c8f4bso8675833f8f.0
- for <qemu-riscv@nongnu.org>; Wed, 08 Jan 2025 06:08:10 -0800 (PST)
+ us-mta-369-lcQNhkStPeaXv2peb21wPA-1; Wed, 08 Jan 2025 09:09:44 -0500
+X-MC-Unique: lcQNhkStPeaXv2peb21wPA-1
+X-Mimecast-MFC-AGG-ID: lcQNhkStPeaXv2peb21wPA
+Received: by mail-wr1-f69.google.com with SMTP id
+ ffacd0b85a97d-38a684a096eso2149592f8f.2
+ for <qemu-riscv@nongnu.org>; Wed, 08 Jan 2025 06:09:43 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1736345289; x=1736950089;
+ d=1e100.net; s=20230601; t=1736345383; x=1736950183;
  h=content-transfer-encoding:in-reply-to:autocrypt:content-language
  :from:references:cc:to:subject:user-agent:mime-version:date
  :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=qpxohD9h8i5S6p2TPOGVlTOYpkDWuNlt9sflRvsbfoc=;
- b=sunq3TOPNepfXBL5Lw8zv5gXOGrDiDg4hYcgwUWDV5pTb8v4fLdpfpH15YvRjDqNah
- obxIyQItQn407ANEstfAMF+IlY/LrBhdIzdjQg/jb+mKIl6VD69tXSDFKo4quoNcufcX
- c88hOsaq9c3b0cjVkg6Ihs17UzJ8soXRfEbZ6VBixN2+9gMX2KYMdY0zyoGIULAAcq6q
- /fqdpLrWXnzIcybqzqdOF9axO4Kb0OxUYSRU+ADBBiW8pftA1HjUYsJuCb7KKeQCtV/E
- RmUE9mGpPfMC7oha2nDxcFh8MP0qcVTIFaQFmCH8o+1Ww6/Gp+Jbtkciau+5YBFTwAqe
- 0jeA==
+ bh=MrFJNaOUOPaaan1zaHG7MPWllkYWyC8JnO9yPqggt/g=;
+ b=HaVl+E25it3wuPgOUXp3U1nZrh1qzma/gGtDbhgrS9uDtUs9B1VdjUwLKzZ0RP7joc
+ tFWgd2CEgMgARnGGC1m6VTvdEtOoqJMOIpH4SLAYT1K/k3DZayArpxNDyIF7i8XegfW1
+ 9Z4Qj6OlTM/dKXuOtYGW7Odj2GOpMp8mfjal1m93ExTM2YnCanBp/N++vg/jgEGpZwOa
+ mlcNYlx1kh7+I/K/H4avDaf899YKo7kvotxTcTtEKZls6E3Ij5W8LNzf67i+mC+ggS+q
+ 10oJYtb1kVuCNRm6mRbAPClZt++4e27MQjWOJ0yOIsq3lXy8Soj2HwMDpkfuoL2j0HGn
+ CAcQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVATD4kl5uNq1DIQ9MGfNtFILAWcFG9WBC0PwnoHcx4copv4XkplUq1k02TOocn/Mz4zUBL0Fybhzus@nongnu.org
-X-Gm-Message-State: AOJu0YzLimkyft+Sg/DTj1MFSIE6SnW5ldP4ANobhIkvcP3FTh9crB0o
- lwvfRfYKucrZ4HVz7GIEWkOA7YGRnSRQYomKR3b6Pg+x7HkhvZBvHHc6olV6jy/iVW6bCWAH10d
- HGXbSX2cnf7rlEgQwJ6zG4ud2+nm1fZQqDwQFVoGeOAG8Eti83as5
-X-Gm-Gg: ASbGncsuSnKAGroD9zVSE1q/pyzsrRmPMCZn1J9e7qOsQ2ZgIeCMhZKuqloaibLcNyj
- OhjdZ0du6jLVx31z1rcYWyBW3RUmen0WupUyBZIkLmfuyMefDGpuGPx/1l3Wpma39x9yBx29PwW
- IAQVe+KhuekSqlX62bsMM12jrv4UpG4C8+eRq2dIwZGWzX70q3o0mHD1I5lqTVAnEnsOP7QXsTM
- UTIxOaGYYYbLNYxKUI5Z/0IT+47HkYE8cc4uqhsKbKfCq6dUWsR9GU2qfJoMwLGvagdfSjQX4qi
- 15NUwg==
-X-Received: by 2002:a5d:598d:0:b0:386:3711:ff8c with SMTP id
- ffacd0b85a97d-38a873067b9mr2493985f8f.23.1736345289579; 
- Wed, 08 Jan 2025 06:08:09 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IEMGzeF9eNtYi1dMV8dxnf9A9LVEZYlOJgqE5wnYtccWnT97ZU9zLK445Gnl5bb1mmsEyYt7w==
-X-Received: by 2002:a5d:598d:0:b0:386:3711:ff8c with SMTP id
- ffacd0b85a97d-38a873067b9mr2493901f8f.23.1736345288473; 
- Wed, 08 Jan 2025 06:08:08 -0800 (PST)
+ AJvYcCUD+xkFAZE0kmVctwBfaSHRAZlhBXChEKkVFdua19F7jQrksEPIWN0eszcgxQDvNEQakqiCcSwSD3Hz@nongnu.org
+X-Gm-Message-State: AOJu0Yzo54/lX/nAmvKYSOPEvDONE5rSLijtKhl+0moIPf/LrXZjI2pN
+ hlutdQzwXeTATvsC7CUC3GS209gRynVeqtqIn/BWTxn3HHD9ztgZTlpKmDHMjuiPnk+amDzAx6N
+ lILQo7WIr+TEERkxMCteoV/d02CrD5ylEvYkPKhTojuw6kT6AT7L8
+X-Gm-Gg: ASbGncvlIcZ5dEk3xBHW0pbOJK+kysm4wFMdpZoSbJ0E/eVcQdpPufNXSiwaq+OuRyg
+ BfZyXFuw2538lM5CCa1QF+hwWndXdCrEzp5H3qK6p4LL/WEKE2jRocUjc1CUrN/urf+DbEZGtVy
+ MotbtNFUy2mE9GqOsyRndxh/hQvaVqMVxaeO7Q4AScAq72lRL5skd53n9rmNu3AEKwg3fTdz7OT
+ JsIXAZzIQHCMO28AHJDQYY01ZEYmaiMKPIYK07MUMCBINkBZc0Qs+8TOxKl/ckXfg3k1yHNMzBz
+ 17A0kg==
+X-Received: by 2002:a05:6000:1ace:b0:385:f00a:a45c with SMTP id
+ ffacd0b85a97d-38a87320a44mr2485792f8f.57.1736345382723; 
+ Wed, 08 Jan 2025 06:09:42 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IG3TrZBYZo8h2cLFx2pHq+hCQozJ42kZ1Svg4FcDTjvdMcaE+iYi/m96mVHinKA+aJZXxgmyw==
+X-Received: by 2002:a05:6000:1ace:b0:385:f00a:a45c with SMTP id
+ ffacd0b85a97d-38a87320a44mr2485760f8f.57.1736345382342; 
+ Wed, 08 Jan 2025 06:09:42 -0800 (PST)
 Received: from [10.33.192.228] (nat-pool-str-t.redhat.com. [149.14.88.106])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-38a1c8289a0sm54475531f8f.7.2025.01.08.06.08.06
+ ffacd0b85a97d-38a1c89e1cesm52212856f8f.64.2025.01.08.06.09.40
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 08 Jan 2025 06:08:07 -0800 (PST)
-Message-ID: <cc39bbff-e5aa-4b24-8cb1-49148c370ff9@redhat.com>
-Date: Wed, 8 Jan 2025 15:08:06 +0100
+ Wed, 08 Jan 2025 06:09:41 -0800 (PST)
+Message-ID: <15fbe517-a646-4a21-ba02-a4a00ece641b@redhat.com>
+Date: Wed, 8 Jan 2025 15:09:40 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 19/32] tests/functional: add zstd support to uncompress
- utility
+Subject: Re: [PATCH v4 20/32] tests/functional: update tuxruntest to use
+ uncompress utility
 To: =?UTF-8?Q?Alex_Benn=C3=A9e?= <alex.bennee@linaro.org>,
  qemu-devel@nongnu.org
 Cc: Halil Pasic <pasic@linux.ibm.com>, Aurelien Jarno <aurelien@aurel32.net>, 
@@ -111,7 +111,7 @@ Cc: Halil Pasic <pasic@linux.ibm.com>, Aurelien Jarno <aurelien@aurel32.net>,
  Palmer Dabbelt <palmer@dabbelt.com>, Peter Maydell
  <peter.maydell@linaro.org>, Li-Wen Hsu <lwhsu@freebsd.org>
 References: <20250108121054.1126164-1-alex.bennee@linaro.org>
- <20250108121054.1126164-20-alex.bennee@linaro.org>
+ <20250108121054.1126164-21-alex.bennee@linaro.org>
 From: Thomas Huth <thuth@redhat.com>
 Autocrypt: addr=thuth@redhat.com; keydata=
  xsFNBFH7eUwBEACzyOXKU+5Pcs6wNpKzrlJwzRl3VGZt95VCdb+FgoU9g11m7FWcOafrVRwU
@@ -155,9 +155,9 @@ Autocrypt: addr=thuth@redhat.com; keydata=
  oiT+z+/E59qj/EKfyce3sbC9XLjXv3mHMrq1tKX4G7IJGnS989E/fg6crv6NHae9Ckm7+lSs
  IQu4bBP2GxiRQ+NV3iV/KU3ebMRzqIC//DCOxzQNFNJAKldPe/bKZMCxEqtVoRkuJtNdp/5a
  yXFZ6TfE1hGKrDBYAm4vrnZ4CXFSBDllL59cFFOJCkn4Xboj/aVxxJxF30bn
-In-Reply-To: <20250108121054.1126164-20-alex.bennee@linaro.org>
+In-Reply-To: <20250108121054.1126164-21-alex.bennee@linaro.org>
 X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: YCvXR-psSC07kyyU7ld-xNS3AOKxpGOFA3sHbxJtOXU_1736345290
+X-Mimecast-MFC-PROC-ID: 788gKgn4Ed5MQJyrN7cgPF8lU6xbfdopFE6vwzmH2GI_1736345383
 X-Mimecast-Originator: redhat.com
 Content-Language: en-US
 Content-Type: text/plain; charset=UTF-8; format=flowed
@@ -188,13 +188,12 @@ Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 On 08/01/2025 13.10, Alex Bennée wrote:
-> Rather than using the python library (which has a different API
-> anyway) lets just call the binary. zstdtools is already in out
-> qemu.yml so all test containers should have it around. Tests should
-> still use @skipIfMissingCommands('zstd') to gracefully handle when
-> only minimal dependencies have been installed.
+> Use the utility functions to reduce code duplication.
 > 
 > Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
+> ---
+>   tests/functional/qemu_test/tuxruntest.py | 12 +-----------
+>   1 file changed, 1 insertion(+), 11 deletions(-)
 
 Reviewed-by: Thomas Huth <thuth@redhat.com>
 
