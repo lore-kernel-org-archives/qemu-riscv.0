@@ -4,67 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EC74EE77188
-	for <qemu-riscv@archiver.kernel.org>; Wed,  8 Jan 2025 12:28:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BF597E77188
+	for <qemu-riscv@archiver.kernel.org>; Wed,  8 Jan 2025 12:29:30 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tVV3n-0005mE-5W; Wed, 08 Jan 2025 07:21:24 -0500
+	id 1tVV6s-0003ri-38; Wed, 08 Jan 2025 07:24:30 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1tVUuo-0000yL-8O
- for qemu-riscv@nongnu.org; Wed, 08 Jan 2025 07:12:06 -0500
-Received: from mail-ed1-x534.google.com ([2a00:1450:4864:20::534])
+ id 1tVV0u-00020l-1b
+ for qemu-riscv@nongnu.org; Wed, 08 Jan 2025 07:18:24 -0500
+Received: from mail-wm1-x331.google.com ([2a00:1450:4864:20::331])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1tVUuS-0007MF-Ff
- for qemu-riscv@nongnu.org; Wed, 08 Jan 2025 07:11:57 -0500
-Received: by mail-ed1-x534.google.com with SMTP id
- 4fb4d7f45d1cf-5d3dce16a3dso1520289a12.1
- for <qemu-riscv@nongnu.org>; Wed, 08 Jan 2025 04:11:13 -0800 (PST)
+ id 1tVV0h-0002SG-3g
+ for qemu-riscv@nongnu.org; Wed, 08 Jan 2025 07:18:16 -0500
+Received: by mail-wm1-x331.google.com with SMTP id
+ 5b1f17b1804b1-4361b6f9faeso4989485e9.1
+ for <qemu-riscv@nongnu.org>; Wed, 08 Jan 2025 04:18:06 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1736338272; x=1736943072; darn=nongnu.org;
+ d=linaro.org; s=google; t=1736338685; x=1736943485; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=PdsXyF3OC+6k01wdvpRGDBTvPRZa71R2EiA5i0mTRfY=;
- b=NcMq+tVoCiDiBx8FLt2ANk/82TR6zKzu87h6qss89EpOWwk0p8HDHWbcYnopXTQcgd
- po3sPOJv5yTm4E5trvAe52697jjNIlPHyQzriwyWjuJlpkOI/7MVV1t3jVEgBzcHVCYB
- AhgPkjBA29bhhjg4QRZ7ekzS73R6p9rMjXmawe3+d+86V+vISLS1i23QdheUukyAdZ9T
- +nI0XkHmFF0Zh2e3Jf12f4U9zYL0wrpQNzf+DlNsapwF7JMMzNhhJRah+BuCEwWXNqWf
- Bn5FQ+Vpj2P3vCV9TWPhy+87W4wh+ULi1pkLVbtfX7/1BtigMq51Ra8KFy/elwyS1KXt
- i4AQ==
+ bh=oOL1w6DXYhRHKCvs8ew1RtJiJh2Nk45cuCcCN9iEMs4=;
+ b=cojh8EYWvYwldfOYHrFd1MpOdhQum4LsLpyU4k3KyR15pcgufLyMnpeYYvJ26pwF52
+ l8hzpM8ACJmXmc0uAPO0Rfwy7AxtCCT07o2kVqTGf/bDt19VO5dnV1GoE+cruFLubMaF
+ m1WGI0TFyK6x5veQT4vElFwbtB+a8mP6ikCGi4Jtt0T6Wo8IrkrjZ4r2QaecepmQ4vmv
+ I5uRu2eBuLZBfhSBuQ/8txFxzcCNbhskv5PDCmJpomXJ2bVcTr6+RYRCf7Z2P5B/IGac
+ Jg1beRvRyx4f2gGj1mYOyWyhrj3HcGKbvth3CNkJ6p5PIH0LDjTbi8/1Esq1dZhOmI6r
+ DB0w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1736338272; x=1736943072;
+ d=1e100.net; s=20230601; t=1736338685; x=1736943485;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=PdsXyF3OC+6k01wdvpRGDBTvPRZa71R2EiA5i0mTRfY=;
- b=SEUjkFoM2U7RnOiqQXKJx0SKbzW+mW2Xv61bA6zXHT4LNZ0RIFPGBpPmHOLriiFPpI
- T0jZdJd3+lMdAFyEV3NVS5zuCW6vLMyB4dtsbZCjoFTxg5yfqqY7TNlI+ccaHJb4XhJU
- 9/RSdTsJab5S9G9cZPTij50yM2HsadGmG77txoHUQMF/OJpwWkVtSbHS/a1pikl4mzNq
- ZmI7Vot5VY3dzjlpORTv0PwvjpdW3KRBuo6/3utgNtz2LQKKaiU9/KmMGe56Dg7d62dd
- xMeWqnMDrYYR/Y8CU4J+k+W8HFQmwN54Fjk/drNCmDraohpEScaaU0ssubnpM+IAjTfS
- ZJ3A==
+ bh=oOL1w6DXYhRHKCvs8ew1RtJiJh2Nk45cuCcCN9iEMs4=;
+ b=EYDlFWOhD0n9KNVakatuPyXfFwi4+fzqgdmnmDJKk1XJXMHm3PxBT1J+Ohkv/uN/pC
+ E7Z9bgXKYnxWjC5fORsyGQmu6ioqscM9bPjcv7ueqVEGPIuCa94xPAeId/5L27G56CwX
+ SBKUBnln5jE3PKn3k06cNvKH/DXAzXvlx96oACLbiISW070Y/Yl0hll1p/TLtDmiuyBw
+ ozGpzZigq3NPPXxm23U1cRgaPdCZyfQVQSc+vM0bjlIH5z48hse6OJkpjyyOjbstGNdj
+ silfaIXaQz67H+TxdwCRINpeYUFX40N8RTAMKG8a9wECvmvnYGHN76HkMoEgvMI5qtY1
+ PunQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVQpbxzLth7zLE6liv6dJUN1WYbMLN5SIiyrt/5lntEuJ9wWJVuyPD74UO25WmhrFLhNy1AtdNXKVpW@nongnu.org
-X-Gm-Message-State: AOJu0YxVxuuEs0xUU+pAyc4xPux/SXnTOl7hlHz49b44IbNC9mDjio2z
- mpvsYkf0EMxIVkGOInEfYb33k+2AZQ5Jtk5OetK0kojSyH5PvwNzRHt5yYTgCJs=
-X-Gm-Gg: ASbGncsflU8rKdoTfUsbGh/Is76ltrhqS6APwuUNQMZzzWD8lrZIThcqRWH5RsIPcjT
- qydcUtsQYWKprSbXthD/PyDpYwJNBT6ay/aQjDlSsaM10aMhxF+wdHnYg7XSecjMQbwlch4tbM1
- 0IBSn54KDS2gx8xbwBQiKxPyCIn/bsVjxGnj/9vE9zS6ZJ/lnc1ep7lmF/DFBoTdDwS/Jed8cnC
- TplNu1JRTHjrQNd7N5vcinvnLazv5V+ZfMSXmE6gQPhpLG4nsumlVk=
-X-Google-Smtp-Source: AGHT+IFyqyGoZ/xuk8ngbKshNkEnRC1VEfUnAYZBz2eWBtCTj5Qh5iWyg+7ZSyAdkuLb5nSAyJ1wQw==
-X-Received: by 2002:a05:6402:3593:b0:5d3:eb50:4e33 with SMTP id
- 4fb4d7f45d1cf-5d95e8ced09mr5874086a12.5.1736338272274; 
- Wed, 08 Jan 2025 04:11:12 -0800 (PST)
+ AJvYcCUXW98yE5g9O+RJ+wh1UWmFl0HW677mTs4cWwjvlEbnzWnj2BLR485XghyRGtNcVQdrB4yERp1s30ac@nongnu.org
+X-Gm-Message-State: AOJu0YzzLixhBgcqYev3XTGo1HgCDVRzAwGWHksT6Je3PT4iMaVc9A0i
+ dGlrlNx82qUOXD3jK7eI/S1aCohYE9Hjbk7jnR2zRIgym1Vu1u7ymNvytDwIjaU=
+X-Gm-Gg: ASbGncsI4Ulit9uUKSypo8jkaR2Bz1pvU8NT0ehPoUCAAHhZp3rEGV9WINqtFNuku0Q
+ R5+BDcc1L7GJuB2IwY8GmobvrpwQsTw4XRw5r/n6D8gXOME9VjrvT15z6xarxGiny8GuA/Xcb1C
+ nBETPiGEqd8YnT6+nJRi6gziCB/5ArnbzYywrzj70yAdY+y9/YWVgAIFRXtBgS8Y/n9KMp1VpuX
+ q2V2IaCO+J5JMsAO+iw5WNIWnluSRDrngTJ2Isk7oKOAMEEQ8oXkWI=
+X-Google-Smtp-Source: AGHT+IEZ3BVXJWYZEWA9wGATEo+F/iqXbvp4GLVQdNs9HUMSA1Twx1Wyojh9T4yEtxjJCTF7eUN2kw==
+X-Received: by 2002:a05:600c:1caa:b0:434:f1bd:1e40 with SMTP id
+ 5b1f17b1804b1-436e1dd3e30mr23490675e9.6.1736338685542; 
+ Wed, 08 Jan 2025 04:18:05 -0800 (PST)
 Received: from draig.lan ([85.9.250.243]) by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5d80678c5a4sm25056881a12.38.2025.01.08.04.11.05
+ 5b1f17b1804b1-436dd15766fsm25041785e9.2.2025.01.08.04.18.02
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 08 Jan 2025 04:11:08 -0800 (PST)
+ Wed, 08 Jan 2025 04:18:02 -0800 (PST)
 Received: from draig.lan (localhost [IPv6:::1])
- by draig.lan (Postfix) with ESMTP id 86EC960132;
+ by draig.lan (Postfix) with ESMTP id 3A54A5FDC6;
  Wed,  8 Jan 2025 12:10:57 +0000 (GMT)
 From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
 To: qemu-devel@nongnu.org
@@ -100,17 +100,17 @@ Cc: Halil Pasic <pasic@linux.ibm.com>, Aurelien Jarno <aurelien@aurel32.net>,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
  Palmer Dabbelt <palmer@dabbelt.com>,
  Peter Maydell <peter.maydell@linaro.org>, Li-Wen Hsu <lwhsu@freebsd.org>
-Subject: [PATCH v4 30/32] pc-bios: ensure keymaps dependencies set vnc tests
-Date: Wed,  8 Jan 2025 12:10:52 +0000
-Message-Id: <20250108121054.1126164-31-alex.bennee@linaro.org>
+Subject: [PATCH v4 27/32] tests/vm: fix build_path based path
+Date: Wed,  8 Jan 2025 12:10:49 +0000
+Message-Id: <20250108121054.1126164-28-alex.bennee@linaro.org>
 X-Mailer: git-send-email 2.39.5
 In-Reply-To: <20250108121054.1126164-1-alex.bennee@linaro.org>
 References: <20250108121054.1126164-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::534;
- envelope-from=alex.bennee@linaro.org; helo=mail-ed1-x534.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::331;
+ envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x331.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -133,72 +133,29 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-I was seeing failures on vnc-display-test on FreeBSD:
-
-  make vm-build-freebsd V=1 TARGET_LIST=aarch64-softmmu BUILD_TARGET=check-qtest QEMU_LOCAL=1 DEBUG=1
-
-Leads to:
-
-  qemu-system-aarch64: -vnc none: could not read keymap file: 'en-us'
-  Broken pipe
-  ../src/tests/qtest/libqtest.c:196: kill_qemu() tried to terminate QEMU process but encountered exit status 1 (expected 0)
-
-which was as far as I could tell because we don't populate the
-$BLD/pc-bios/keymaps (although something attempts to symlink
-qemu-bundle/usr/local/share/qemu/keymaps/ to that dir).
+We no longer need to go into the per-arch build directories to find
+the build directories binary. Lets call it directly.
 
 Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
-Cc: Paolo Bonzini <pbonzini@redhat.com>
+Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 ---
- pc-bios/keymaps/meson.build | 17 ++++++++---------
- tests/qtest/meson.build     |  2 +-
- 2 files changed, 9 insertions(+), 10 deletions(-)
+ tests/vm/basevm.py | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
 
-diff --git a/pc-bios/keymaps/meson.build b/pc-bios/keymaps/meson.build
-index 0bd8ce0077..a79a09b276 100644
---- a/pc-bios/keymaps/meson.build
-+++ b/pc-bios/keymaps/meson.build
-@@ -39,19 +39,18 @@ else
-   native_qemu_keymap = qemu_keymap
- endif
- 
-+keymap_targets = []
- if native_qemu_keymap.found()
--  t = []
-   foreach km, args: keymaps
-     # generate with qemu-kvm
--    t += custom_target(km,
--                       build_by_default: true,
--                       output: km,
--                       command: [native_qemu_keymap, '-f', '@OUTPUT@', args.split()],
--                       install: have_system,
--                       install_dir: qemu_datadir / 'keymaps')
-+    keymap_targets += custom_target(km,
-+                                    build_by_default: true,
-+                                    output: km,
-+                                    command: [native_qemu_keymap, '-f', '@OUTPUT@', args.split()],
-+                                    install: have_system,
-+                                    install_dir: qemu_datadir / 'keymaps')
-   endforeach
--
--  alias_target('update-keymaps', t)
-+  alias_target('update-keymaps', keymap_targets)
- else
-   install_data(keymaps.keys(), install_dir: qemu_datadir / 'keymaps')
- endif
-diff --git a/tests/qtest/meson.build b/tests/qtest/meson.build
-index c5a70021c5..f75c1057a4 100644
---- a/tests/qtest/meson.build
-+++ b/tests/qtest/meson.build
-@@ -383,7 +383,7 @@ qtests = {
- if vnc.found()
-   gvnc = dependency('gvnc-1.0', method: 'pkg-config', required: false)
-   if gvnc.found()
--    qtests += {'vnc-display-test': [gvnc]}
-+    qtests += {'vnc-display-test': [gvnc, keymap_targets]}
-     qtests_generic += [ 'vnc-display-test' ]
-   endif
- endif
+diff --git a/tests/vm/basevm.py b/tests/vm/basevm.py
+index 4a1af04b9a..6f3f2e76df 100644
+--- a/tests/vm/basevm.py
++++ b/tests/vm/basevm.py
+@@ -520,8 +520,7 @@ def get_qemu_path(arch, build_path=None):
+     if "QEMU" in os.environ:
+         qemu_path = os.environ["QEMU"]
+     elif build_path:
+-        qemu_path = os.path.join(build_path, arch + "-softmmu")
+-        qemu_path = os.path.join(qemu_path, "qemu-system-" + arch)
++        qemu_path = os.path.join(build_path, "qemu-system-" + arch)
+     else:
+         # Default is to use system path for qemu.
+         qemu_path = "qemu-system-" + arch
 -- 
 2.39.5
 
