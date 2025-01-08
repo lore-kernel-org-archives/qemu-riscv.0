@@ -4,51 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B37E8E77188
-	for <qemu-riscv@archiver.kernel.org>; Wed,  8 Jan 2025 12:35:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 05DBAE77188
+	for <qemu-riscv@archiver.kernel.org>; Wed,  8 Jan 2025 12:36:20 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tVVCx-0004jm-5g; Wed, 08 Jan 2025 07:30:47 -0500
+	id 1tVVG3-0007il-A8; Wed, 08 Jan 2025 07:34:03 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <berrange@redhat.com>)
- id 1tVVCS-0004Rq-T3
- for qemu-riscv@nongnu.org; Wed, 08 Jan 2025 07:30:21 -0500
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
+ id 1tVVFZ-0007P6-Rs
+ for qemu-riscv@nongnu.org; Wed, 08 Jan 2025 07:33:30 -0500
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <berrange@redhat.com>)
- id 1tVVCO-0006rQ-K8
- for qemu-riscv@nongnu.org; Wed, 08 Jan 2025 07:30:15 -0500
+ id 1tVVFV-0007VF-2T
+ for qemu-riscv@nongnu.org; Wed, 08 Jan 2025 07:33:27 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1736339410;
+ s=mimecast20190719; t=1736339600;
  h=from:from:reply-to:reply-to:subject:subject:date:date:
  message-id:message-id:to:to:cc:cc:mime-version:mime-version:
  content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=H/lVGwK4inVqSP+d8wKrWPmq6WbYLqE8Rag5d/vGmes=;
- b=AHd6aE4fDur05fQfWbGixw5eUh+hq9kiX6013oIizlWJ/oE7gjVsyYfM3h6xBlcM/yAKz7
- ftXJwwlm/RZREK9bN4ycfWFbD/liPuEFv6SvQJ9/MMejb4WpiZNtKfl+4pE55PMMcLa9yJ
- yiuAYwQTqtW4TdndPugQpsK/YAFtCaY=
-Received: from mx-prod-mc-02.mail-002.prod.us-west-2.aws.redhat.com
+ bh=bH6hCNPRDorQnY63I4xOpITClsVhCHPSYSt1oId0mvM=;
+ b=X4+D9bNk6sdGmJZHOvzfQfraKniF5AdsKe04ueplrj2C6UOzuQLTKxLXuxs1yUpLSaQFtG
+ NcgbmSzjdvvWvh9padM0xk0DrYhXHHmnaHF/J0/58TXY6fGg9k4yWz+Q2TQRuYSK7VhWCe
+ ktM2/rxs82e2AJgx2eEZS9YwFBFVXAM=
+Received: from mx-prod-mc-04.mail-002.prod.us-west-2.aws.redhat.com
  (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
  relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-571-YBMX4C2nNWSnW_cBlyGkoA-1; Wed,
- 08 Jan 2025 07:30:08 -0500
-X-MC-Unique: YBMX4C2nNWSnW_cBlyGkoA-1
-X-Mimecast-MFC-AGG-ID: YBMX4C2nNWSnW_cBlyGkoA
-Received: from mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com
- (mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.4])
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-22-VEplcDwENNG6rW1gPoGBuw-1; Wed,
+ 08 Jan 2025 07:33:15 -0500
+X-MC-Unique: VEplcDwENNG6rW1gPoGBuw-1
+X-Mimecast-MFC-AGG-ID: VEplcDwENNG6rW1gPoGBuw
+Received: from mx-prod-int-05.mail-002.prod.us-west-2.aws.redhat.com
+ (mx-prod-int-05.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.17])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by mx-prod-mc-02.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id F166919560AB; Wed,  8 Jan 2025 12:30:01 +0000 (UTC)
+ by mx-prod-mc-04.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id 761C419153CF; Wed,  8 Jan 2025 12:33:10 +0000 (UTC)
 Received: from redhat.com (unknown [10.42.28.103])
- by mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id 4BA883000199; Wed,  8 Jan 2025 12:29:44 +0000 (UTC)
-Date: Wed, 8 Jan 2025 12:29:41 +0000
+ by mx-prod-int-05.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id 2C966195608E; Wed,  8 Jan 2025 12:32:54 +0000 (UTC)
+Date: Wed, 8 Jan 2025 12:32:51 +0000
 From: Daniel =?utf-8?B?UC4gQmVycmFuZ8Op?= <berrange@redhat.com>
 To: Alex =?utf-8?Q?Benn=C3=A9e?= <alex.bennee@linaro.org>
 Cc: qemu-devel@nongnu.org, Halil Pasic <pasic@linux.ibm.com>,
@@ -81,29 +81,29 @@ Cc: qemu-devel@nongnu.org, Halil Pasic <pasic@linux.ibm.com>,
  Markus Armbruster <armbru@redhat.com>,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
  Palmer Dabbelt <palmer@dabbelt.com>,
- Peter Maydell <peter.maydell@linaro.org>, Li-Wen Hsu <lwhsu@freebsd.org>,
- Anders Roxell <anders.roxell@linaro.org>
-Subject: Re: [PATCH v4 03/32] tests/functional: add a m68k tuxrun tests
-Message-ID: <Z35vtfvX7OGNwjY_@redhat.com>
+ Peter Maydell <peter.maydell@linaro.org>, Li-Wen Hsu <lwhsu@freebsd.org>
+Subject: Re: [PATCH v4 19/32] tests/functional: add zstd support to
+ uncompress utility
+Message-ID: <Z35wc_YFjElT4ozH@redhat.com>
 References: <20250108121054.1126164-1-alex.bennee@linaro.org>
- <20250108121054.1126164-4-alex.bennee@linaro.org>
+ <20250108121054.1126164-20-alex.bennee@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <20250108121054.1126164-4-alex.bennee@linaro.org>
+In-Reply-To: <20250108121054.1126164-20-alex.bennee@linaro.org>
 User-Agent: Mutt/2.2.13 (2024-03-09)
-X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.4
-Received-SPF: pass client-ip=170.10.129.124; envelope-from=berrange@redhat.com;
+X-Scanned-By: MIMEDefang 3.0 on 10.30.177.17
+Received-SPF: pass client-ip=170.10.133.124; envelope-from=berrange@redhat.com;
  helo=us-smtp-delivery-124.mimecast.com
 X-Spam_score_int: -24
 X-Spam_score: -2.5
 X-Spam_bar: --
 X-Spam_report: (-2.5 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.432,
  DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001,
- RCVD_IN_VALIDITY_SAFE_BLOCKED=0.001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H2=-0.001,
+ RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001, RCVD_IN_VALIDITY_SAFE_BLOCKED=0.001,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -120,36 +120,47 @@ Reply-To: Daniel =?utf-8?B?UC4gQmVycmFuZ8Op?= <berrange@redhat.com>
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Wed, Jan 08, 2025 at 12:10:25PM +0000, Alex Bennée wrote:
-> We didn't have this before and as it exercises the m68k virt platform
-> it seems worth adding. We don't wait for the shutdown because QEMU
-> will auto-exit on the shutdown.
+On Wed, Jan 08, 2025 at 12:10:41PM +0000, Alex Bennée wrote:
+> Rather than using the python library (which has a different API
+> anyway) lets just call the binary. zstdtools is already in out
+> qemu.yml so all test containers should have it around. Tests should
+> still use @skipIfMissingCommands('zstd') to gracefully handle when
+> only minimal dependencies have been installed.
 > 
-> Cc: Laurent Vivier <laurent@vivier.eu>
-> Cc: Anders Roxell <anders.roxell@linaro.org>
-> Reviewed-by: Thomas Huth <thuth@redhat.com>
 > Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
-> Message-Id: <20241121165806.476008-24-alex.bennee@linaro.org>
 > 
 > ---
-> v2
->   - add to MAINTAINERS
+> v4
+>   - add chmod step to helper
+>   - also handle .zst extension
 > ---
->  MAINTAINERS                          |  1 +
->  tests/functional/meson.build         |  1 +
->  tests/functional/test_m68k_tuxrun.py | 34 ++++++++++++++++++++++++++++
->  3 files changed, 36 insertions(+)
->  create mode 100644 tests/functional/test_m68k_tuxrun.py
+>  tests/functional/qemu_test/uncompress.py | 26 ++++++++++++++++++++++++
+>  1 file changed, 26 insertions(+)
 
-> diff --git a/tests/functional/test_m68k_tuxrun.py b/tests/functional/test_m68k_tuxrun.py
-> new file mode 100644
+Reviewed-by: Daniel P. Berrangé <berrange@redhat.com>
 
-This (and any other new functional tests) should be mode 0755
-to enable direct execution
+> 
+> diff --git a/tests/functional/qemu_test/uncompress.py b/tests/functional/qemu_test/uncompress.py
+> index 6d02ded066..911d74ec23 100644
+> --- a/tests/functional/qemu_test/uncompress.py
+> +++ b/tests/functional/qemu_test/uncompress.py
 
-> index 0000000000..7eacba135f
-> --- /dev/null
-> +++ b/tests/functional/test_m68k_tuxrun.py
+
+> @@ -79,5 +101,9 @@ def guess_uncompress_format(compressed):
+>          return "xz"
+>      elif ext == ".gz":
+>          return "gz"
+> +    elif ext == ".zstd":
+> +        return "zstd"
+> +    elif ext == ".zst":
+> +        return "zstd"
+
+Or
+
+  elif ext in [".zstd", ".zst"]:
+      return 'zstd'
+
+Either way, by R-b stands.
 
 With regards,
 Daniel
