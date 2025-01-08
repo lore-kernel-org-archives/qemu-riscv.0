@@ -4,79 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3700EE77188
-	for <qemu-riscv@archiver.kernel.org>; Wed,  8 Jan 2025 14:24:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 68E1FE77199
+	for <qemu-riscv@archiver.kernel.org>; Wed,  8 Jan 2025 14:26:25 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tVWyK-00037z-7C; Wed, 08 Jan 2025 09:23:48 -0500
+	id 1tVX0Q-0004Dt-II; Wed, 08 Jan 2025 09:25:58 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1tVWyI-000372-9M
- for qemu-riscv@nongnu.org; Wed, 08 Jan 2025 09:23:46 -0500
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
+ (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1tVX0H-0004BS-Ia
+ for qemu-riscv@nongnu.org; Wed, 08 Jan 2025 09:25:49 -0500
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1tVWyF-0000yc-6l
- for qemu-riscv@nongnu.org; Wed, 08 Jan 2025 09:23:46 -0500
+ (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1tVX0F-0002AI-9q
+ for qemu-riscv@nongnu.org; Wed, 08 Jan 2025 09:25:49 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1736346222;
+ s=mimecast20190719; t=1736346346;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
- bh=K8lISznkSsY7JYLY+0cSfE3/Spssu6TIycJ1SVGaqA0=;
- b=T7dgWD/EiOMat/A4sY5++JPVB3h49sYWVCHlTctOzmHzovsjUgyCZupVv8ogXRMlirscC2
- /y9lYlwnwD4prmNvydgaMaVuGQkjSI6IzKIsIPN4I+2HzCSZx9KQDxyDOHqFbosMAlhHCg
- wPs+j35FYfLMAqhTfT7a7NMFBQ6GfbA=
-Received: from mail-qv1-f71.google.com (mail-qv1-f71.google.com
- [209.85.219.71]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=AXEibKuSVZlpViRtb1cZIFRQexR3IJ/dHIKw/SCt2RM=;
+ b=H3eq7um9C8OFehfzmc4WD4mt6YOBRnbnW/rEztot3wKZISAi2YU2svlJOjCjYAjV3wHFHw
+ jrPIVy8QRtAfvqe+pJyHKVNkA/YlteUCawi4RzqjJJPKwsDxzCkW5HsKh80SyAeoucxSD1
+ CtV6LAQl0g25IX9Euv3xdRlfELA8Te0=
+Received: from mail-wm1-f72.google.com (mail-wm1-f72.google.com
+ [209.85.128.72]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-681-S4e9fzYOMq68mj5oGXw5pw-1; Wed, 08 Jan 2025 09:23:41 -0500
-X-MC-Unique: S4e9fzYOMq68mj5oGXw5pw-1
-X-Mimecast-MFC-AGG-ID: S4e9fzYOMq68mj5oGXw5pw
-Received: by mail-qv1-f71.google.com with SMTP id
- 6a1803df08f44-6d8860ab00dso268568966d6.0
- for <qemu-riscv@nongnu.org>; Wed, 08 Jan 2025 06:23:40 -0800 (PST)
+ us-mta-660-XVJ5GuNXOdWWyE-DfR6miA-1; Wed, 08 Jan 2025 09:25:44 -0500
+X-MC-Unique: XVJ5GuNXOdWWyE-DfR6miA-1
+X-Mimecast-MFC-AGG-ID: XVJ5GuNXOdWWyE-DfR6miA
+Received: by mail-wm1-f72.google.com with SMTP id
+ 5b1f17b1804b1-4361c040ba8so54226955e9.1
+ for <qemu-riscv@nongnu.org>; Wed, 08 Jan 2025 06:25:44 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1736346220; x=1736951020;
+ d=1e100.net; s=20230601; t=1736346343; x=1736951143;
  h=content-transfer-encoding:in-reply-to:autocrypt:content-language
  :from:references:cc:to:subject:user-agent:mime-version:date
  :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=K8lISznkSsY7JYLY+0cSfE3/Spssu6TIycJ1SVGaqA0=;
- b=SKIrME+nEtqGudW+3QjfroMkunmLCN8GmkH8KnJZULGuXd9F066vhiJdClUbtnldcW
- 189UKdEtlM86OqzNu2kaoQQBBMK3HMkIRVK5W8mekH+p+jmyy1HV7twnzF5xbZvVck9A
- arhohrKHpuwR6psLt2vDX5JWPUPgxYz8D9SNRObJ2EjIkyfaf+9N5dRYvVio3V+sQO0S
- 9eTQUTWIX1riBDaX4MngI9s0eKKmaFNj6VSnQXGVVX+LvppzGDRLr8Kll8NpabPAkuFA
- XopumfvKzQUPZhzmtk+ee5GBXYaNgwrsNPg4y9gc8wu02vOIUofaAAJfb7l0J+LtIQPe
- jJ0g==
+ bh=AXEibKuSVZlpViRtb1cZIFRQexR3IJ/dHIKw/SCt2RM=;
+ b=sc+QdvVwjaqbRK+9EZJOiONFbyLUgWDuOQH+JdguJf+7+kRMDlUnnx/OdGtjFRpvsj
+ g4/qPpVoQdju7STIDm7vH6HWEWeAO1Wqkwvg/+dSNBpmOunHVPC+dSnHsZAiWWpj5Ezz
+ WYTxkOkxuW8oB7/uzdRohoCZvnbfAJ1385VvabenITadwzo6EhSXbh+C4pg35FTNFUgt
+ 0FiJ59or398NFSLGe6JEXrN1/JlcDzebIq3LploGUpODXxqEelAzraMqkKNGIIvDxa8Q
+ uOSz5VSkVr7BpFP/bdBl8He9TFffeDHX925iumIW1RJwX7NiGKVgX5zB7rFJw03/sisu
+ DcpQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCU15+gM5bkcxpQ1711/rzNxNC9ROZN7XWZhiFz2J51SrYed+MplpCRwUKfqGwZIvkYlGg1WqihSsVCv@nongnu.org
-X-Gm-Message-State: AOJu0YzQ5ShLoSIX8gBr8jaBni73yCO9XhJdBcyLZb4Wk3yLZG6RUBp1
- Bx8lBSUMs2wk9dCTUi2+7LUSZNSbrI7SkWK3a1WrKa1BWjhqYp5XBOvdDwg8SqTXPTi/oBKMoEv
- KOidRNtZlsoglcAu2qRgisvogxYZVG+nbt5FWb7RYL3IK+DumGt/6
-X-Gm-Gg: ASbGnctJxZ90WirXcnGOPEt6ysKVEtPBDBZOj6GP9erHvR+0TWqNqB25Yw+RivWVkPB
- yVN2qbJv9m9YaT04uNAyuD2XCsWCuEv73G2AgwmonT760t9NyqTBcjTHOoncdc8JL9Uih8nSB16
- yVxwbXOdXfJJLpW2ax4QoH5P/psAfhTLAqyljg9YJcfn4Id6yccMzZljW7/2ZQlzwtJZ/HU813C
- l2/BaHJ4B+wFL1/aEIP7jrHMvjHSwQotTjV+CcaHoxQUhEqjIBwx8CDdy7oB3Knatre6SFU6cLB
- CxC52w==
-X-Received: by 2002:a05:6214:21eb:b0:6d4:215d:91b9 with SMTP id
- 6a1803df08f44-6df9b2384bemr49512226d6.11.1736346220543; 
- Wed, 08 Jan 2025 06:23:40 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IG1CsFxVSo9qHWX2aH3anT9yyxECES6XiCdVE8hxIrwbQFVI0cv6gyIBZBvKA/yGWuNql8Xdw==
-X-Received: by 2002:a05:6214:21eb:b0:6d4:215d:91b9 with SMTP id
- 6a1803df08f44-6df9b2384bemr49511676d6.11.1736346220188; 
- Wed, 08 Jan 2025 06:23:40 -0800 (PST)
+ AJvYcCXZWGc3PXc+jp6iScuLYnc6l9jy/Y5Y9BYRWvSWBRrCSEBOwfmwsaGD09GUPgk8nbMLKGZm/p04s3/7@nongnu.org
+X-Gm-Message-State: AOJu0YxG+ZT5IpC9eab/L1eVe7DzhXZAx+67x7H+9I8bknoGYen2OtZI
+ 9WqgvFPxgeUcqqEJPDoU9plYxLFizIfmXPPmgzNQtcNvINSy1Gg3Q3qRpr4mjI/ZKAKuuTjY2qu
+ lO/tov6G0NGqoA/oim8qa6cUrzsM9qLjp1+zn+779sMGZPemsZHrh
+X-Gm-Gg: ASbGncu98VdAoXjZaEaIVOvxGi6JJNs4hSWQfm9wTpq0cQFGs8yrfkyu33MEu+ISwto
+ 3aBYlcuunaNVm6U+NR0xZCgy5TiDAb0QGWJdJKj5dP2pcVXcF01cIdiSy0DS2W/RQEBKKH//LcH
+ eIhxitlTnZJuQTX3vsm+cQSMz0W8sy3YCr95fd13Q2UNCLuFf5EGl/hw0IvNj9nfiaqs8AZxK6+
+ lCqcjvq+CJvWr9J6AI1i1d73yZM5OXaTl5M+CZK5zst/FAh75craYNQG9Xf/IMAE8qokIngBKMJ
+ HQOH1g==
+X-Received: by 2002:a05:600c:3c97:b0:436:840b:261c with SMTP id
+ 5b1f17b1804b1-436e26ab54fmr24511485e9.19.1736346343416; 
+ Wed, 08 Jan 2025 06:25:43 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IEW/VZmQGCFHL26iHoltEGoa1/hXsmymAFeZ9FozAthutIar/25REbOi0GZdgiL53jYuYNmYA==
+X-Received: by 2002:a05:600c:3c97:b0:436:840b:261c with SMTP id
+ 5b1f17b1804b1-436e26ab54fmr24510775e9.19.1736346342911; 
+ Wed, 08 Jan 2025 06:25:42 -0800 (PST)
 Received: from [10.33.192.228] (nat-pool-str-t.redhat.com. [149.14.88.106])
  by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6dd181d3db8sm190818236d6.104.2025.01.08.06.23.34
+ 5b1f17b1804b1-436e2da74dasm22530075e9.2.2025.01.08.06.25.41
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 08 Jan 2025 06:23:39 -0800 (PST)
-Message-ID: <fc682b87-faef-493a-9edc-e83e7fb1fc5c@redhat.com>
-Date: Wed, 8 Jan 2025 15:23:34 +0100
+ Wed, 08 Jan 2025 06:25:42 -0800 (PST)
+Message-ID: <d1dfef85-c830-416e-9ff6-a69c124aa32e@redhat.com>
+Date: Wed, 8 Jan 2025 15:25:41 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 28/32] tests/vm: partially un-tabify help output
+Subject: Re: [PATCH v4 29/32] tests/vm: allow interactive login as root
 To: =?UTF-8?Q?Alex_Benn=C3=A9e?= <alex.bennee@linaro.org>,
  qemu-devel@nongnu.org
 Cc: Halil Pasic <pasic@linux.ibm.com>, Aurelien Jarno <aurelien@aurel32.net>, 
@@ -110,7 +110,7 @@ Cc: Halil Pasic <pasic@linux.ibm.com>, Aurelien Jarno <aurelien@aurel32.net>,
  Palmer Dabbelt <palmer@dabbelt.com>, Peter Maydell
  <peter.maydell@linaro.org>, Li-Wen Hsu <lwhsu@freebsd.org>
 References: <20250108121054.1126164-1-alex.bennee@linaro.org>
- <20250108121054.1126164-29-alex.bennee@linaro.org>
+ <20250108121054.1126164-30-alex.bennee@linaro.org>
 From: Thomas Huth <thuth@redhat.com>
 Autocrypt: addr=thuth@redhat.com; keydata=
  xsFNBFH7eUwBEACzyOXKU+5Pcs6wNpKzrlJwzRl3VGZt95VCdb+FgoU9g11m7FWcOafrVRwU
@@ -154,23 +154,23 @@ Autocrypt: addr=thuth@redhat.com; keydata=
  oiT+z+/E59qj/EKfyce3sbC9XLjXv3mHMrq1tKX4G7IJGnS989E/fg6crv6NHae9Ckm7+lSs
  IQu4bBP2GxiRQ+NV3iV/KU3ebMRzqIC//DCOxzQNFNJAKldPe/bKZMCxEqtVoRkuJtNdp/5a
  yXFZ6TfE1hGKrDBYAm4vrnZ4CXFSBDllL59cFFOJCkn4Xboj/aVxxJxF30bn
-In-Reply-To: <20250108121054.1126164-29-alex.bennee@linaro.org>
+In-Reply-To: <20250108121054.1126164-30-alex.bennee@linaro.org>
 X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: gaR_hUJGobyg_eIa5kingv-CE2dpmdjUKn1XApW_Cqw_1736346220
+X-Mimecast-MFC-PROC-ID: SrHyO3LoWodQiK-4XFFSoOtKDIAFDUNThjSdKg6T2lU_1736346343
 X-Mimecast-Originator: redhat.com
 Content-Language: en-US
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=170.10.129.124; envelope-from=thuth@redhat.com;
+Received-SPF: pass client-ip=170.10.133.124; envelope-from=thuth@redhat.com;
  helo=us-smtp-delivery-124.mimecast.com
 X-Spam_score_int: -24
 X-Spam_score: -2.5
 X-Spam_bar: --
 X-Spam_report: (-2.5 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.432,
  DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001,
- RCVD_IN_VALIDITY_SAFE_BLOCKED=0.001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H2=-0.001,
+ RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001, RCVD_IN_VALIDITY_SAFE_BLOCKED=0.001,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -187,14 +187,14 @@ Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 On 08/01/2025 13.10, Alex Bennée wrote:
-> While the make syntax itself uses tabs having a mixture of tabs and
-> spaces in the vm-help output make no sense and confuses things lining
-> up between terminal and editor. Fix that.
+> This is useful when debugging and you want to add packages to an
+> image.
 > 
 > Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
 > ---
->   tests/vm/Makefile.include | 26 +++++++++++++-------------
->   1 file changed, 13 insertions(+), 13 deletions(-)
+>   tests/vm/Makefile.include | 3 ++-
+>   tests/vm/basevm.py        | 9 +++++++--
+>   2 files changed, 9 insertions(+), 3 deletions(-)
 
 Reviewed-by: Thomas Huth <thuth@redhat.com>
 
