@@ -4,80 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BDB03E77188
-	for <qemu-riscv@archiver.kernel.org>; Wed,  8 Jan 2025 06:42:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 13164E77188
+	for <qemu-riscv@archiver.kernel.org>; Wed,  8 Jan 2025 07:04:39 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tVPlk-00081l-Hr; Wed, 08 Jan 2025 01:42:20 -0500
+	id 1tVQ6W-0003hJ-1E; Wed, 08 Jan 2025 02:03:48 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1tVPlb-0007zc-5W
- for qemu-riscv@nongnu.org; Wed, 08 Jan 2025 01:42:12 -0500
+ (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1tVQ6P-0003fY-Oy
+ for qemu-riscv@nongnu.org; Wed, 08 Jan 2025 02:03:42 -0500
 Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1tVPlY-0005t0-NN
- for qemu-riscv@nongnu.org; Wed, 08 Jan 2025 01:42:10 -0500
+ (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1tVQ6L-0004SX-Mo
+ for qemu-riscv@nongnu.org; Wed, 08 Jan 2025 02:03:40 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1736318525;
+ s=mimecast20190719; t=1736319816;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
- bh=XhxNRVTCKtc9/WFiD1+tRaBv/KR4USKjJ+CA7V9EstM=;
- b=MC24fHl8f6F4SHgyM6GPZSTnFDwiylcmkTDzs7c2vbf31UOMvngBSDX3IJSe5LPegurBta
- xEQOxbCe+2gt9sNj2GizylSCSlSdt+neveHNurUFYbawMwSuMmkQUEmirBqZ2jw+9o5oDL
- nQefR/x2m3LtYYiXy/Vi/nWXECDksKs=
-Received: from mail-ej1-f69.google.com (mail-ej1-f69.google.com
- [209.85.218.69]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=NatfcuudAJ8cyj0CEfSoHFM2avWlrQG2di0+ZhF3h54=;
+ b=T6xZ1sjwc21b64wxJsQuGtcmlJoH3Duj1GaPpDzKdGmNrQW72SpTnSj56pkTEhqV29/9dv
+ js+5ndiWxBgB+2FTAn3D0UTKVfelEiwhKatgmUYP1+lVNDts3r+IcyU7k7H0XSq1K1fBBs
+ vVuoeysTp9AMRylsng5KBoVy3PJIF8I=
+Received: from mail-ej1-f71.google.com (mail-ej1-f71.google.com
+ [209.85.218.71]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-619-CC3d4tGJM_W-TQzjsiBY8w-1; Wed, 08 Jan 2025 01:42:01 -0500
-X-MC-Unique: CC3d4tGJM_W-TQzjsiBY8w-1
-X-Mimecast-MFC-AGG-ID: CC3d4tGJM_W-TQzjsiBY8w
-Received: by mail-ej1-f69.google.com with SMTP id
- a640c23a62f3a-aa66f6ce6bfso1184807066b.2
- for <qemu-riscv@nongnu.org>; Tue, 07 Jan 2025 22:42:01 -0800 (PST)
+ us-mta-617-Q6Wk0UuDMIGEJOJRoZk-UA-1; Wed, 08 Jan 2025 02:03:33 -0500
+X-MC-Unique: Q6Wk0UuDMIGEJOJRoZk-UA-1
+X-Mimecast-MFC-AGG-ID: Q6Wk0UuDMIGEJOJRoZk-UA
+Received: by mail-ej1-f71.google.com with SMTP id
+ a640c23a62f3a-aaf8396f65fso601709466b.0
+ for <qemu-riscv@nongnu.org>; Tue, 07 Jan 2025 23:03:33 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1736318520; x=1736923320;
+ d=1e100.net; s=20230601; t=1736319812; x=1736924612;
  h=content-transfer-encoding:in-reply-to:autocrypt:content-language
  :from:references:cc:to:subject:user-agent:mime-version:date
  :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=XhxNRVTCKtc9/WFiD1+tRaBv/KR4USKjJ+CA7V9EstM=;
- b=WA2LvbnmcCTzAse9FiWxi/LcDhJxRJeJgloGHQiSfCyvvSxGH08XC5t9S+YIk26xvN
- pgkKB6Zd0TunlyADlZKeTUujwtaKpvw9Uh6UDYCOJaLp8oBTjFMen0L7XLeRm79KmV+A
- tOkLnhbTkh2cKRataIhk9lTQ1UHLYwEAx20j93+BwyA1EXTcEC+ghm52bPZP5FHTmKzX
- gu8mRMCRbAGoOVT27Nl++TRZWyN7Gp3xteqjwA/Ys9n+KyRNs+BJl1+FD4CM8hYKvJGQ
- e17qSEyU/kRlYzyjs9ssXv6FJQyuyT/qKA1TKetkL2r2TSqoGRtO1GFN7Yo2NwaqaplY
- etFg==
+ bh=NatfcuudAJ8cyj0CEfSoHFM2avWlrQG2di0+ZhF3h54=;
+ b=WdF9Z30PpN8DmXIRGpebB0eRzJOG+MUqEoFupu0hpc4kGLq5ICMK0CJv7LxJH9HZVn
+ 24c0rbHVfEtW5GCGI7aNvv+jOm2dVJy9Dfd0ywbru7s4UHdIyuitYu7qQWFcavXObGpT
+ 25Xay9SPa9Ihv1AjT0fegCO6iz6SBPjbNQdgW3YbD1FXT9fqpU2m7ZK0NRpkVx2u2wLR
+ dFi5cHwYWSaZn0Q3Xf6+AUCMWQCDtd+2eMMHZBGsa93uO/nZu3ECGs9BDUDb4dBwKlUE
+ 3BskFkNDntgTCEXUm8L/fDvBiEU535u316F/kmFFUMQTliF/KCL3A8EF2vFIZqw0wMQ3
+ sIHg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUkEjTOQZST1jDuelIDCcaX7nIYk8JqyGHIM9szYJAz7z4JfveAnwuUSG38/hdVGsufSQ3aRBjsQhII@nongnu.org
-X-Gm-Message-State: AOJu0YzKDgepd51EJ8V73rzvMpT17zRaWuaf7LBxedvEh3Y2sbdA7v4u
- /2Zl+hNLHGUrqwNza7uQvC+MJ33q03OTNj20U49wpW2eXYZisXqwZDyoL1BDZhjsIFDpC/eDQrm
- ntatyN47Nm8jfoMnSahLPH6FA9B8oyujY4pGn39P0eRC/Q81DtZXA
-X-Gm-Gg: ASbGncv33XOtC+KnO1kanJvat3yY2uYaZemr2iRXTQiuOOdiKPt6r318k5V5DkiFK8s
- US0chpqkZcD0lVF/zZnitnZn7fyeh1EIUbdMy4V9mzatxIcF5ucrGSofCgFDp9/gjZX9WLomgtW
- Fn8RFx+hLz2Oxgh45mtQ/v+/FzegMWJ08ZBY7kXPrehPiFPZDJoa87NwSS9CJzQd1D8n/98BtuO
- 9+XwmBR5Gw2Ot2W/uSlJZISwfZTsiZCMF1arzfHjsrfp9jkkf+TZ7O1G7uWbpaT6LWRa/9Iarhr
- WiI2H/1Yaunz
-X-Received: by 2002:a17:907:3f89:b0:aac:501:5629 with SMTP id
- a640c23a62f3a-ab2abc95256mr130840566b.56.1736318520413; 
- Tue, 07 Jan 2025 22:42:00 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IGnuSk+iJhdaIsF2FaV8kvM9PEEQHx3bWKaA+PtNOmmUIBheVERBkX2RMXiEA10mfUs3nEFAw==
-X-Received: by 2002:a17:907:3f89:b0:aac:501:5629 with SMTP id
- a640c23a62f3a-ab2abc95256mr130836366b.56.1736318519970; 
- Tue, 07 Jan 2025 22:41:59 -0800 (PST)
+ AJvYcCWmnsE9XiWAK8tzjV9bH/ZKa8OMklkN4okz1+e2gTUKKu78q1+FAKynic2y6uJu3V4rZGO2lJnHlKrT@nongnu.org
+X-Gm-Message-State: AOJu0YyHNTgjBvhy5MwZUKPkgH94T3+vGtlZjA6eqfpbcGXfuifUCVCw
+ jT5tCzEQhByo5sYUtUKzeg8f+mnf/Fs1ChWeMpbwBi2ycRrYeO2pEORhi0RWXBbz8Pi2dDy0vfP
+ 0j/SJWK2sTvMYQURceLERF4WzuWf7aX2PgXDC9uiAR99ChcFBNhv8
+X-Gm-Gg: ASbGncsBvpurypodZmj7OfrB4/gLTKw8XrSOlZsnLQ0Z4prls2BeU9ITy5xDDQgUD9m
+ ZHrmOY7UYr1v1sW/D0hyFPBG8gk+hQRB0IOsbnilRMCLx5vEmij3cS2bcmsBqAXhiU5fQU2k+Zk
+ CnXwcytBPJhA9Dxf8wwW3y9pfKAs8fgfpAzofyw/2zTETjZNTLDzkHw3nQ2XFhB3PnIeVI4cSJl
+ BtwSdvZllybwMJmDJmU5lQFJzshzstcZUULMbQZWuSKsJR5U05xvRkg8poodz8ULAmrBYkA94wQ
+ 9HH9g2TbbiOF
+X-Received: by 2002:a17:907:2d08:b0:aac:278:98fd with SMTP id
+ a640c23a62f3a-ab2ab6a3f9dmr119366966b.17.1736319812538; 
+ Tue, 07 Jan 2025 23:03:32 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IHp/Xv5yjxjb8L+ALt+dNKnSybwRD8J4dGSTBwCa1ZS+3iOdo7I7nb/1vmWWI3tQbtpiQaTaQ==
+X-Received: by 2002:a17:907:2d08:b0:aac:278:98fd with SMTP id
+ a640c23a62f3a-ab2ab6a3f9dmr119364266b.17.1736319812075; 
+ Tue, 07 Jan 2025 23:03:32 -0800 (PST)
 Received: from [192.168.0.7] (ip-109-42-49-182.web.vodafone.de.
  [109.42.49.182]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-aac0f06da76sm2458615966b.194.2025.01.07.22.41.56
+ a640c23a62f3a-aac0e894f2esm2491667166b.69.2025.01.07.23.03.29
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 07 Jan 2025 22:41:59 -0800 (PST)
-Message-ID: <b7618b1d-a48d-459d-9768-40830c866560@redhat.com>
-Date: Wed, 8 Jan 2025 07:41:55 +0100
+ Tue, 07 Jan 2025 23:03:31 -0800 (PST)
+Message-ID: <f714ab7d-0056-4fd7-9804-62f669b50fcc@redhat.com>
+Date: Wed, 8 Jan 2025 08:03:28 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 19/29] tests/functional: add zstd support to uncompress
- utility
+Subject: Re: [PATCH v3 20/29] tests/functional: extend test_aarch64_virt with
+ vulkan test
 To: =?UTF-8?Q?Alex_Benn=C3=A9e?= <alex.bennee@linaro.org>,
  qemu-devel@nongnu.org
 Cc: Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
@@ -111,7 +111,7 @@ Cc: Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
  <berrange@redhat.com>, Bernhard Beschow <shentey@gmail.com>,
  "Michael S. Tsirkin" <mst@redhat.com>
 References: <20250107165208.743958-1-alex.bennee@linaro.org>
- <20250107165208.743958-20-alex.bennee@linaro.org>
+ <20250107165208.743958-21-alex.bennee@linaro.org>
 From: Thomas Huth <thuth@redhat.com>
 Autocrypt: addr=thuth@redhat.com; keydata=
  xsFNBFH7eUwBEACzyOXKU+5Pcs6wNpKzrlJwzRl3VGZt95VCdb+FgoU9g11m7FWcOafrVRwU
@@ -155,9 +155,9 @@ Autocrypt: addr=thuth@redhat.com; keydata=
  oiT+z+/E59qj/EKfyce3sbC9XLjXv3mHMrq1tKX4G7IJGnS989E/fg6crv6NHae9Ckm7+lSs
  IQu4bBP2GxiRQ+NV3iV/KU3ebMRzqIC//DCOxzQNFNJAKldPe/bKZMCxEqtVoRkuJtNdp/5a
  yXFZ6TfE1hGKrDBYAm4vrnZ4CXFSBDllL59cFFOJCkn4Xboj/aVxxJxF30bn
-In-Reply-To: <20250107165208.743958-20-alex.bennee@linaro.org>
+In-Reply-To: <20250107165208.743958-21-alex.bennee@linaro.org>
 X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: MVqG-BlQwVK6lgtO0mLMFiUBmvc8_X8sTQ4aMSeJ4Pc_1736318520
+X-Mimecast-MFC-PROC-ID: f5eFVaQyyW6hKQvVmS7Nt23O1l23-_3QV9Mw9V63g44_1736319813
 X-Mimecast-Originator: redhat.com
 Content-Language: en-US
 Content-Type: text/plain; charset=UTF-8; format=flowed
@@ -188,82 +188,150 @@ Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 On 07/01/2025 17.51, Alex Bennée wrote:
-> Rather than using the python library (which has a different API
-> anyway) lets just call the binary. zstdtools is already in out
-> qemu.yml so all test containers should have it around. Tests should
-> still use @skipIfMissingCommands('zstd') to gracefully handle when
-> only minimal dependencies have been installed.
+> Now we have virtio-gpu Vulkan support lets add a test for it.
 
-Thanks, sounds like a good idea to have a common function for this. Just a 
-comment below...
+I'm not a native speaker, but maybe rather:
 
-> Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
-> ---
->   tests/functional/qemu_test/uncompress.py | 17 +++++++++++++++++
->   1 file changed, 17 insertions(+)
-> 
-> diff --git a/tests/functional/qemu_test/uncompress.py b/tests/functional/qemu_test/uncompress.py
-> index 6d02ded066..404eee1f83 100644
-> --- a/tests/functional/qemu_test/uncompress.py
-> +++ b/tests/functional/qemu_test/uncompress.py
-> @@ -12,6 +12,7 @@
->   import os
->   import shutil
->   from urllib.parse import urlparse
-> +from subprocess import check_call, CalledProcessError
+Now that we have virtio-gpu Vulkan support, let's add a test for it.
+
+?
+
+...
+> diff --git a/tests/functional/test_aarch64_virt.py b/tests/functional/test_aarch64_virt.py
+> index 2d9995a95d..bb68048537 100755
+> --- a/tests/functional/test_aarch64_virt.py
+> +++ b/tests/functional/test_aarch64_virt.py
+> @@ -13,11 +13,14 @@
+>   import logging
+>   from subprocess import check_call, DEVNULL
 >   
->   from .asset import Asset
->   
-> @@ -38,6 +39,18 @@ def lzma_uncompress(xz_path, output_path):
->               os.remove(output_path)
->               raise
->   
-> +def zstd_uncompress(zstd_path, output_path):
-> +    if os.path.exists(output_path):
-> +        return
+> +from qemu.machine.machine import VMLaunchFailure
 > +
-> +    try:
-> +        check_call(['zstd', "-f", "-d", zstd_path,
-> +                    "-o", output_path])
-> +    except CalledProcessError as e:
-> +        os.remove(output_path)
-> +        raise Exception(
-> +            f"Unable to decompress zstd file {zstd_path} with {e}") from e
-
-In tests/functional/qemu_test/tuxruntest.py we had to add a
-
-   os.chmod(..., stat.S_IRUSR | stat.S_IWUSR)
-
-to make sure that the write-protected compressed assets are usable 
-afterwards... Would it make sense to add this here, too, so that the callers 
-don't have to do it on their own?
-
-Also, could you maybe change tests/functional/qemu_test/tuxruntest.py 
-accordingly to use this new function here?
-
-  Thanks,
-   Thomas
-
-
->   '''
->   @params compressed: filename, Asset, or file-like object to uncompress
->   @params uncompressed: filename to uncompress into
-> @@ -59,6 +72,8 @@ def uncompress(compressed, uncompressed, format=None):
->           lzma_uncompress(str(compressed), uncompressed)
->       elif format == "gz":
->           gzip_uncompress(str(compressed), uncompressed)
-> +    elif format == "zstd":
-> +        zstd_uncompress(str(compressed), uncompressed)
->       else:
->           raise Exception(f"Unknown compression format {format}")
+> +from qemu_test import BUILD_DIR
+>   from qemu_test import QemuSystemTest, Asset
+> -from qemu_test import exec_command_and_wait_for_pattern
+> +from qemu_test import exec_command, exec_command_and_wait_for_pattern
+>   from qemu_test import wait_for_console_pattern
+>   from qemu_test import get_qemu_img
+> -
+> +from qemu_test import skipIfMissingCommands, get_qemu_img
 >   
-> @@ -79,5 +94,7 @@ def guess_uncompress_format(compressed):
->           return "xz"
->       elif ext == ".gz":
->           return "gz"
-> +    elif ext == ".zstd":
-> +        return "zstd"
->       else:
->           raise Exception(f"Unknown compression format for {compressed}")
+
+Daniel recently tried to standardize two empty lines between the import and 
+class statements, so could you please keep the empty line here?
+
+>   class Aarch64VirtMachine(QemuSystemTest):
+>       KERNEL_COMMON_COMMAND_LINE = 'printk.time=0 '
+> @@ -73,15 +76,16 @@ def common_aarch64_virt(self, machine):
+>           Common code to launch basic virt machine with kernel+initrd
+>           and a scratch disk.
+>           """
+> +        self.set_machine('virt')
+> +        self.require_accelerator("tcg")
+
+Thanks for moving this to the beginning of the function!
+
+>           logger = logging.getLogger('aarch64_virt')
+>   
+>           kernel_path = self.ASSET_KERNEL.fetch()
+>   
+> -        self.set_machine('virt')
+>           self.vm.set_console()
+>           kernel_command_line = (self.KERNEL_COMMON_COMMAND_LINE +
+>                                  'console=ttyAMA0')
+> -        self.require_accelerator("tcg")
+>           self.vm.add_args('-cpu', 'max,pauth-impdef=on',
+>                            '-machine', machine,
+>                            '-accel', 'tcg',
+> @@ -102,7 +106,9 @@ def common_aarch64_virt(self, machine):
+>   
+>           # Add the device
+>           self.vm.add_args('-blockdev',
+> -                         f"driver=qcow2,file.driver=file,file.filename={image_path},node-name=scratch")
+> +                         "driver=qcow2,file."
+> +                         "driver=file,file."
+
+The line breaks look weird here. I'd rather start a new line after the 
+comma, not after the dot...? (also the changes look rather unrelated to the 
+patch subject?)
+
+> +                         f"filename={image_path},node-name=scratch")
+>           self.vm.add_args('-device',
+>                            'virtio-blk-device,drive=scratch')
+>   
+> @@ -131,5 +137,73 @@ def test_aarch64_virt_gicv2(self):
+>           self.common_aarch64_virt("virt,gic-version=2")
+>   
+>   
+> +    ASSET_VIRT_GPU_KERNEL = Asset(
+> +        'https://fileserver.linaro.org/s/ce5jXBFinPxtEdx/'
+> +        'download?path=%2F&files='
+> +        'Image',
+> +        '89e5099d26166204cc5ca4bb6d1a11b92c217e1f82ec67e3ba363d09157462f6')
+> +
+> +    ASSET_VIRT_GPU_ROOTFS = Asset(
+> +        'https://fileserver.linaro.org/s/ce5jXBFinPxtEdx/'
+> +        'download?path=%2F&files='
+> +        'rootfs.ext4.zstd',
+> +        '792da7573f5dc2913ddb7c638151d4a6b2d028a4cb2afb38add513c1924bdad4')
+> +
+> +    @skipIfMissingCommands('zstd')
+> +    def test_aarch64_virt_with_gpu(self):
+> +        # This tests boots with a buildroot test image that contains
+> +        # vkmark and other GPU exercising tools. We run a headless
+> +        # weston that nevertheless still exercises the virtio-gpu
+> +        # backend.
+> +
+> +        self.set_machine('virt')
+> +        self.require_accelerator("tcg")
+> +
+> +        kernel_path = self.ASSET_VIRT_GPU_KERNEL.fetch()
+> +        image_path = self.uncompress(self.ASSET_VIRT_GPU_ROOTFS, format="zstd")
+> +
+> +        self.vm.set_console()
+> +        kernel_command_line = (self.KERNEL_COMMON_COMMAND_LINE +
+> +                               'console=ttyAMA0 root=/dev/vda')
+> +
+> +        self.vm.add_args("-accel", "tcg")
+> +        self.vm.add_args("-cpu", "neoverse-v1,pauth-impdef=on")
+> +        self.vm.add_args("-machine", "virt,gic-version=max",
+> +                         '-kernel', kernel_path,
+> +                         '-append', kernel_command_line)
+> +        self.vm.add_args("-smp", "2", "-m", "2048")
+> +        self.vm.add_args("-device",
+> +                         "virtio-gpu-gl-pci,hostmem=4G,blob=on,venus=on")
+> +        self.vm.add_args("-display", "egl-headless")
+> +        self.vm.add_args("-display", "dbus,gl=on")
+> +        self.vm.add_args("-device", "virtio-blk-device,drive=hd0")
+> +        self.vm.add_args("-blockdev",
+> +                         "driver=raw,file.driver=file,"
+> +                         "node-name=hd0,read-only=on,"
+> +                         f"file.filename={image_path}")
+> +        self.vm.add_args("-snapshot")
+> +
+> +        try:
+> +            self.vm.launch()
+> +        except VMLaunchFailure as excp:
+> +            if "old virglrenderer, blob resources unsupported" in excp.output:
+> +                self.skipTest("No blob support for virtio-gpu")
+> +            elif "old virglrenderer, venus unsupported" in excp.output:
+> +                self.skipTest("No venus support for virtio-gpu")
+> +            else:
+> +                self.log.info("unhandled launch failure: {excp.output}")
+> +                raise excp
+> +
+> +        self.wait_for_console_pattern('buildroot login:')
+> +        exec_command(self, 'root')
+> +        exec_command(self, 'export XDG_RUNTIME_DIR=/tmp')
+> +        exec_command_and_wait_for_pattern(self,
+> +                                          "weston -B headless "
+> +                                          "--renderer gl "
+> +                                          "--shell kiosk "
+> +                                          "-- vkmark -b:duration=1.0",
+> +                                          "vkmark Score")
+
+The new test looks fine to me!
+
+  Thomas
 
 
