@@ -4,68 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 91FC4E77199
-	for <qemu-riscv@archiver.kernel.org>; Wed,  8 Jan 2025 12:15:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F0789E77188
+	for <qemu-riscv@archiver.kernel.org>; Wed,  8 Jan 2025 12:16:03 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tVUvS-0001Lu-Pq; Wed, 08 Jan 2025 07:12:46 -0500
+	id 1tVUyf-0004vl-Vd; Wed, 08 Jan 2025 07:16:02 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1tVUu4-0000Y5-C6
- for qemu-riscv@nongnu.org; Wed, 08 Jan 2025 07:11:20 -0500
-Received: from mail-ed1-x532.google.com ([2a00:1450:4864:20::532])
+ id 1tVUuS-0000oH-Pg
+ for qemu-riscv@nongnu.org; Wed, 08 Jan 2025 07:11:44 -0500
+Received: from mail-ed1-x530.google.com ([2a00:1450:4864:20::530])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1tVUtw-0007FH-8G
- for qemu-riscv@nongnu.org; Wed, 08 Jan 2025 07:11:13 -0500
-Received: by mail-ed1-x532.google.com with SMTP id
- 4fb4d7f45d1cf-5d88c355e0dso11053478a12.0
- for <qemu-riscv@nongnu.org>; Wed, 08 Jan 2025 04:11:00 -0800 (PST)
+ id 1tVUuO-0007KT-ID
+ for qemu-riscv@nongnu.org; Wed, 08 Jan 2025 07:11:40 -0500
+Received: by mail-ed1-x530.google.com with SMTP id
+ 4fb4d7f45d1cf-5d3cf094768so4755821a12.0
+ for <qemu-riscv@nongnu.org>; Wed, 08 Jan 2025 04:11:10 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1736338260; x=1736943060; darn=nongnu.org;
+ d=linaro.org; s=google; t=1736338270; x=1736943070; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=pqqTepJSvigFJNtOuIXqMUPxmyV0Odh55cVF5+vDAVM=;
- b=XmGj4ebx9NCVx7sLb5g6sieR8SiGVi17rQbZlZXpqJvKzlQ+Hz8JEK0Bnn6oEne9BQ
- jQjG18S9cEngWmS80HWGe8OwGFGURnXHqYIC5iXl/h/nQRle8v3xl+cNISyPtvlj/7oq
- t/anmXV7MA7WXVh6JS8rMpMDQ5c9DjzhvIa8F72ADC7t+0PTjp7+KdN1gUmWZGMNu51d
- VrxykoJ+kWW5GF4NRbvAN+qudQjkBMbkxEve0/B9qPeKhj5OO+iyKx7ANdblfP3zT4aW
- tXHi23A0bu9eSJ5423T1GMKMsbGu+yIu/8UMuJdhnXpTDM5P/0eEXsXJPzdOlqU82lFx
- hhpg==
+ bh=eCHUqeDgGCfAqVqQm1SyLdYpd9wMBKGUDQg7+tLuW+U=;
+ b=H5S37wvYNgHEGOfBDf/0bH0mGnhdB8yzAFXyWrF+Y/JGwsN6DiUqA4MbWyChdLBV5p
+ v53DckW36L/a7DgfHbesOZcPKp1NOeALg6GdV5Y9FronBgHWjbQLL+D8sWdc3zLa+JB0
+ 3SG6b4TIT6Vnl3iZhkErN1kG8TkTqsVsHDRi4uRBsUU/+dwybRl7WIwmLRdkVz2qPKR5
+ U58v2TFoBw/lUcZx9l1ltILZN/7d+WORzwowifg85XzlLL2V0m79PnHmDAzRfSZ5Sfwp
+ 2JgHjVc0USVf/YVBOjynrzxPDrNTvKbeWxMjyr3RtB/61bahOA9MUmEUzNA2pN4S95fY
+ 5Iwg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1736338260; x=1736943060;
+ d=1e100.net; s=20230601; t=1736338270; x=1736943070;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=pqqTepJSvigFJNtOuIXqMUPxmyV0Odh55cVF5+vDAVM=;
- b=DKgYaGFLEVLrwLhUPHUFQB5RuyxJ1o20N3EinjCdotD5utdsN/SsHiiXTufEIJnq9+
- vEwhq4MyDFEBTlUm8ETdnDhzh6SwCUNxY7gruB7rjXzOO1kkzPfLiqHzBUWZShsPAcEY
- N4/BKre74BeCe74+nqPDO0wtXJplH7imYaPZHcf1A0z9Y7HHcptgM05lLakXJfylYywd
- XnpWuXPIMSPkjEJ+8s23Uwn/UYawK5MFIefLRMVVsAmJbMRxA5aQbgOz4I4tgDMkFYpt
- d63MPh162k8dZ9vRTCMIWOiGBZdmu4Zoy46gGnUSfjjSXKNbf5G7lJocW1tYppB7SpFD
- WGIQ==
+ bh=eCHUqeDgGCfAqVqQm1SyLdYpd9wMBKGUDQg7+tLuW+U=;
+ b=Z/6nnDblMMa9GfV8K83jlr1KHnJGQreB/dPf96eZ3pNucUor/3NVost5A6K9581HHQ
+ FerQjsJOMXHvPpN6knsYRvXq5/+2JDDktsj4PHXD1TfL8iVjVPXT12BWsdiJYE3F3mPt
+ erCSAm28RvhmtuWbJvz5yOye/MiiH4HWekfM5rU/6mCbBRb/mmyCXvPvOAFYrlwTpWfB
+ P/3sXGTrGiPkfniYU9Pveu9v6ZkycotFO0rOxgZZYkvBtfzOoK2DCHk74g80u3QSXNg2
+ j5LbEDwVN06mQv7erJxgrARlC/L3LLx75JPG1p43OWgkjt7nPfSBA2ZhVHXhAk8oGJLA
+ 27xg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCV48pbW5e5R5xIgMc5t2L/01jx8ZTYJQ17Nd8vD5w8z7EMKhm7lwjICM3BqbIOoQit7Lr3PGWX7YrNT@nongnu.org
-X-Gm-Message-State: AOJu0YwV87WdAfKKCN+ZActN0w8ePHjwKweccBqfEgjuj6sZYD1mB33r
- houOyvn7Y2QIbwpdCbgDBiPTl1rJsbXj2+L6kk3tnQag8Qf4n05WnilqoQKGgEA=
-X-Gm-Gg: ASbGncvndqZ5jZlVl3AkayhPXV0yLGYKCu6r8CgvFgENpLkslcfzrFI+NCeMWboz0gw
- 7ChnAm0j+NJwUYMlyHxGaZGndVs6t9OBirs09UYiEfGFMal+iwSYSgvNpGhq3/fwYjQAncfecAr
- RZmsteO3xtrG0z35j1ptzd1gi6b09Un5jCaYL53IpddYMnAbi6UYa8qtVK6/KFuAFE7SSfXtP/A
- d3+NsIEsN0GAw5ENCl+eDym/8FL2yjJky6RRnqHMZJPBMNHYNI6ftQ=
-X-Google-Smtp-Source: AGHT+IFa2d8uZ9SIDFxzxS9uWLRjCmo1mYQXxfkxQrpAww6d99DHh9NBk2G7MODrvg0vuv7VFP40Aw==
-X-Received: by 2002:a05:6402:40c6:b0:5d0:c8fd:108a with SMTP id
- 4fb4d7f45d1cf-5d972e0e594mr2151228a12.13.1736338259735; 
- Wed, 08 Jan 2025 04:10:59 -0800 (PST)
+ AJvYcCU1l85xIdo+FgW2yagRBZJDqviYFKQjgRpQkRP/H+1vXk/f2WvCiUif7jTIMXc6lFdrFmBY5B0TCDlm@nongnu.org
+X-Gm-Message-State: AOJu0YxamOa8kytJHSmj8jBFNXx91CzVA55Emftgyx9UnVbbXFxUgTbm
+ Kv71N+bNJq+TDzW8O8jGllL8T10KTeL7c032Ffnr7fdQFyn/2+3c4rK9bw0bshk=
+X-Gm-Gg: ASbGncsi/ImekrFaqsUqMMkb5D/ik0utU7didlP4kWU9AbhMVjCj2sYe7f2rL2NOBaG
+ nSvxHEhHe8tXx4g2AWROLFAlV7kOeU/jWNM3KGhicXWBBXrJwyV4oOHVeezNvITYfUELZxXa2GZ
+ DUk9U3gWeslhyEpmyGb7KPQXGYa1UKpnKh8j7WXdDoQBuUKByihPFPjWewjiqNWWx2gwhBnbBxE
+ y0Pcr+EwCXxPheKs+p0SVlHNCSZOGKhQG65WtpfhsW68+t3Jd6TtY4=
+X-Google-Smtp-Source: AGHT+IEmVTl4F0gts8aW70HdOnN+WrT9ngMQQiCqqerIyTgqflvn+JTN9JLVz0I+jMgdbYsAxCS/Hw==
+X-Received: by 2002:a17:907:7e86:b0:aa6:92de:ddae with SMTP id
+ a640c23a62f3a-ab2ab6a3fbemr206355366b.16.1736338269668; 
+ Wed, 08 Jan 2025 04:11:09 -0800 (PST)
 Received: from draig.lan ([85.9.250.243]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-aaee340665asm2051194866b.187.2025.01.08.04.10.56
+ a640c23a62f3a-aac0e830b3bsm2510076266b.25.2025.01.08.04.11.02
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 08 Jan 2025 04:10:57 -0800 (PST)
+ Wed, 08 Jan 2025 04:11:06 -0800 (PST)
 Received: from draig.lan (localhost [IPv6:::1])
- by draig.lan (Postfix) with ESMTP id 57FCD5F948;
- Wed,  8 Jan 2025 12:10:55 +0000 (GMT)
+ by draig.lan (Postfix) with ESMTP id 9F9605FC51;
+ Wed,  8 Jan 2025 12:10:56 +0000 (GMT)
 From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Halil Pasic <pasic@linux.ibm.com>, Aurelien Jarno <aurelien@aurel32.net>,
@@ -99,26 +99,25 @@ Cc: Halil Pasic <pasic@linux.ibm.com>, Aurelien Jarno <aurelien@aurel32.net>,
  Markus Armbruster <armbru@redhat.com>,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
  Palmer Dabbelt <palmer@dabbelt.com>,
- Peter Maydell <peter.maydell@linaro.org>, Li-Wen Hsu <lwhsu@freebsd.org>,
- Anders Roxell <anders.roxell@linaro.org>
-Subject: [PATCH v4 08/32] tests/functional: update the ppc32 tuxrun tests
-Date: Wed,  8 Jan 2025 12:10:30 +0000
-Message-Id: <20250108121054.1126164-9-alex.bennee@linaro.org>
+ Peter Maydell <peter.maydell@linaro.org>, Li-Wen Hsu <lwhsu@freebsd.org>
+Subject: [PATCH v4 21/32] tests/functional: remove unused kernel_command_line
+Date: Wed,  8 Jan 2025 12:10:43 +0000
+Message-Id: <20250108121054.1126164-22-alex.bennee@linaro.org>
 X-Mailer: git-send-email 2.39.5
 In-Reply-To: <20250108121054.1126164-1-alex.bennee@linaro.org>
 References: <20250108121054.1126164-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::532;
- envelope-from=alex.bennee@linaro.org; helo=mail-ed1-x532.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::530;
+ envelope-from=alex.bennee@linaro.org; helo=mail-ed1-x530.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -134,37 +133,27 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Now there are new up to date images available we should update to them.
+The Alpine test boots from the CDROM so we don't --append a command
+line. Drop the unused code.
 
-Cc: Anders Roxell <anders.roxell@linaro.org>
-Reviewed-by: Thomas Huth <thuth@redhat.com>
-Tested-by: Thomas Huth <thuth@redhat.com>
 Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
-Message-Id: <20241121165806.476008-29-alex.bennee@linaro.org>
 ---
- tests/functional/test_ppc_tuxrun.py | 8 ++++----
- 1 file changed, 4 insertions(+), 4 deletions(-)
+ tests/functional/test_aarch64_virt.py | 2 --
+ 1 file changed, 2 deletions(-)
 
-diff --git a/tests/functional/test_ppc_tuxrun.py b/tests/functional/test_ppc_tuxrun.py
-index 50b76946c4..5458a7fb71 100755
---- a/tests/functional/test_ppc_tuxrun.py
-+++ b/tests/functional/test_ppc_tuxrun.py
-@@ -17,11 +17,11 @@
- class TuxRunPPC32Test(TuxRunBaselineTest):
+diff --git a/tests/functional/test_aarch64_virt.py b/tests/functional/test_aarch64_virt.py
+index 2d9995a95d..b3d3b0ee51 100755
+--- a/tests/functional/test_aarch64_virt.py
++++ b/tests/functional/test_aarch64_virt.py
+@@ -41,8 +41,6 @@ def test_alpine_virt_tcg_gic_max(self):
  
-     ASSET_PPC32_KERNEL = Asset(
--        'https://storage.tuxboot.com/20230331/ppc32/uImage',
--        '1a68f74b860fda022fb12e03c5efece8c2b8b590d96cca37a8481a3ae0b3f81f')
-+        'https://storage.tuxboot.com/buildroot/20241119/ppc32/uImage',
-+        'aa5d81deabdb255a318c4bc5ffd6fdd2b5da1ef39f1955dcc35b671d258b68e9')
-     ASSET_PPC32_ROOTFS = Asset(
--        'https://storage.tuxboot.com/20230331/ppc32/rootfs.ext4.zst',
--        '8885b9d999cc24d679542a02e9b6aaf48f718f2050ece6b8347074b6ee41dd09')
-+        'https://storage.tuxboot.com/buildroot/20241119/ppc32/rootfs.ext4.zst',
-+        '67554f830269d6bf53b67c7dd206bcc821e463993d526b1644066fea8117019b')
+         self.set_machine('virt')
+         self.vm.set_console()
+-        kernel_command_line = (self.KERNEL_COMMON_COMMAND_LINE +
+-                               'console=ttyAMA0')
+         self.require_accelerator("tcg")
  
-     def test_ppc32(self):
-         self.set_machine('ppce500')
+         self.vm.add_args("-accel", "tcg")
 -- 
 2.39.5
 
