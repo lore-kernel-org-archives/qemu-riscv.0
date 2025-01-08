@@ -4,68 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 81F44E77199
-	for <qemu-riscv@archiver.kernel.org>; Wed,  8 Jan 2025 12:28:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E42D1E77188
+	for <qemu-riscv@archiver.kernel.org>; Wed,  8 Jan 2025 12:28:31 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tVV5G-00010a-1l; Wed, 08 Jan 2025 07:22:50 -0500
+	id 1tVV5D-0000mu-O9; Wed, 08 Jan 2025 07:22:47 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1tVV0x-00021i-Vx
+ id 1tVV0y-00021l-0C
  for qemu-riscv@nongnu.org; Wed, 08 Jan 2025 07:18:25 -0500
-Received: from mail-wr1-x42c.google.com ([2a00:1450:4864:20::42c])
+Received: from mail-wm1-x334.google.com ([2a00:1450:4864:20::334])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1tVV0j-0002TV-Ey
+ id 1tVV0j-0002TH-Ei
  for qemu-riscv@nongnu.org; Wed, 08 Jan 2025 07:18:21 -0500
-Received: by mail-wr1-x42c.google.com with SMTP id
- ffacd0b85a97d-3862d161947so7917786f8f.3
+Received: by mail-wm1-x334.google.com with SMTP id
+ 5b1f17b1804b1-4361815b96cso111551805e9.1
  for <qemu-riscv@nongnu.org>; Wed, 08 Jan 2025 04:18:08 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=linaro.org; s=google; t=1736338687; x=1736943487; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=R2nl2q/jhmEGUG+F/0rLUrlSD8XWQpV+qDK7U0WrjiI=;
- b=Zt8VsKM39Eyz+4ncWrs0mlcpHTdqdO7jR2UNtw8yr0LYsaaRqK4g5XyrWzaa2j9C7x
- FjkCyDQ0TvBN/uBRJJl07LsCpvl5+or1aaoecYfVkNkndNjTo4D+8pc7wsEmj8H/PvBo
- vfBJ8Os0ccM5om3c+G5+W3QpQMGN2rp5V1+GAucMwqNidjue1jKrYoaMpb6P/x4ltStZ
- Q4pDtuhgMkvwmHPACnuimj3NroEF5ir4Uti2z6nGPrCxJFHu937lqwFoo011I3/Tporb
- IsXjvhZxgDz4E9o7sDsQb4vyjLx6mEvX6+RDIx19yIrGRg2EYyTBFToG7CaOblrz6p04
- VhzQ==
+ bh=teELEAk9lxdpoQ7xzO+V1Ovz+lGrytHqETaOuw27UxQ=;
+ b=SDf0vlrPMN9LzFPxdCb9wpwDTvbBiv9lxnAtQy+mx72+TBsj+fWwyV3RsMVKoJq0pH
+ 0J3QAj3YYhAks/xi868+JrYP7BliKbn2+oEt/Zce3GCl4X1W3qeUUTk71mf7+UYTvahU
+ adjY3bV23N3/vifjn+S0RyoBFY84cJCiLAUSLAo6uwduMJvxtkYsnlZrZD9VJBMLpkOg
+ Y3ot6RAeI2oa+F1Lh3ZOHuOlJS1DWWYfN3MKKcxFDJqzHWGLok74wqTDeZTD/vn0OaHj
+ H007AzC6drPZQ+qyrzeyc1fK6Ka9Xozh6r9Ch+5kEWBgmnSJmjNeRWIgOFtyQbhgCbD0
+ RcdA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1736338687; x=1736943487;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=R2nl2q/jhmEGUG+F/0rLUrlSD8XWQpV+qDK7U0WrjiI=;
- b=dp8LWNfXhlz1nO+9QXQ0Oy+ReghK1ccbuJHRo+iiOwdatGX2JKOkCu3hFwKYiUWF7T
- gk9h/p+oXODbgukBdKlP84t598hd9Dqszr1CliVyzQ/jycohI6KfYgxS5+b3TLohZUtU
- Bka3S+Z7FQmnKjCWBTM2n0b8eciKQoNPIzPkGQIWb23/n9ewel2SUEkcWMt98LlLv0xo
- VX2H/JLLRHISotCHVBWXKbDYqYZmMRT5fRdcwL8m/iLrEiP61tZ99Yc0X05L1+FiqqA2
- ezqXCzk6e2rhKmbT4dWB808p1ZkeL34NotYQ6fVDfXC1qvotgzEjqQIUPG7HZQCTDCJV
- CzJA==
+ bh=teELEAk9lxdpoQ7xzO+V1Ovz+lGrytHqETaOuw27UxQ=;
+ b=R6zpWTL3kQN/Hm/2rCs21Vt1HQ/ENkl7wlsM0WZ7IZ3nNwSVfOUzdggMNM/e92+0n2
+ wlNtxZcVoQccduWR+z9rqwM+79gmWamiBvtmlYUfpY47q7aXZvA8e0Lt2nP4+rMoca9U
+ ybAtqlrA0YQk7gb+h9+kqEpgzkryws00d2Vb/MHDhYgz1uvKo4lfpTBwt/XZ5KHOJJqP
+ ebNrgK4V5tl2o+rL7NKXiVGm+ZY9SybHdmYlDkQJQQVjQHnrsTL8+MVHUntuVDj/SzHI
+ EJ3KTf8p/eX6LHjUeZ/8gYWzp6Z2CG2W1h3CPPeIkhi89UL3aNkdATGmWVQqu/WgIca+
+ DDcA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUCTNFGXIpUxcFdRbYu6D0ejKJof9zQa26x2g0nag637hgvH0ANqPPwBqepNBw6AdC7tJdl2/pZ+Ss8@nongnu.org
-X-Gm-Message-State: AOJu0YwLuRX+b4rx8Pv6csvJx7Yu6F9dAgkNhGsU7F3ft0OOG7AAiUuB
- 9YSrBMJ5+G2SPk++UqJzEWtsEjQ77nGONlQEsg6lJiH16HGzmZMt9VJE0jsr38A=
-X-Gm-Gg: ASbGncvtcGjQ6i3iEscHOueySIIIzqe9jMBaUMdeTcKn+bj1HhYr+rymFPySeg3vNRL
- TEMIK4JWTsVMSD09fpS2Esv1QuL+COEXH5o1jXpgbO2j4xe1bAyN/XE3zVGadUoNJ+tjxCXLMEk
- WiQviyd+pABprf0x7f9wVKVWJBaj81JEjTY9x1ypyxACUwC/sXmDOuUuYJr8NtBd8VsqcNrcA9M
- /vIUwQC4peh6t0TmgfwNblD+GM89C1sy1fpJra1i45/uvyhtTuky+c=
-X-Google-Smtp-Source: AGHT+IGqQsl2GPhaWoitdCIdyZtsoCpzPTjAvkULnI/gMkWCOcFqBO0gjgVi8JEbisOorHhN+M0Rvg==
-X-Received: by 2002:a5d:59af:0:b0:385:f677:859b with SMTP id
- ffacd0b85a97d-38a872f7fbdmr2210583f8f.10.1736338687424; 
+ AJvYcCXTLsBcD9zw/MFp/Rr84Q3Y91VtbK7ndasLT3ZoBYAwr8KruZFe4hLLVTXDokWtzDelqGyba6pKWQ6y@nongnu.org
+X-Gm-Message-State: AOJu0YxP5EbRmZ8UB9CwBdOQhX+OgyIh3y4daGau+4ivck5kRMGnQxAp
+ L8Rx8XPuxpStP/xy/uZ1gYc2eqPI8Iw1wkHK+RFdaGklMYKlVc3/GZw5c5qKSv4=
+X-Gm-Gg: ASbGncuCLvQ73oP3ITGpxvjf/kGiP4z3YHkVZr5JRI7/28GQNLv1E/yy8ku3jWc27sO
+ /C64sZlQD+aJPceKA3r1POp/5EvGjf99dVWBDPr3EM7BN17VaHOLgH7GugC76y0aSXfSspOpkmk
+ lV3gC64q115xh5K66dw7wUszfWoMIo72E2QPsDFvfNwcnRdLmjF22vlo9ylk2UOfEUJagmEIzGs
+ jTY1P4EyZuO+B4Wl2XIfeAYMtUOzEqvVfQVoiIjZG9iyxZEkA5AOcc=
+X-Google-Smtp-Source: AGHT+IH9EmdrrLmuX302owwafBOgoAOVd3AQoLbVMFh6VqlzqHPPhx9nx2Xrg+9KHctVd74rmrQtzQ==
+X-Received: by 2002:a05:600c:3ca0:b0:42a:a6d2:3270 with SMTP id
+ 5b1f17b1804b1-436e26f01aamr19025195e9.21.1736338687071; 
  Wed, 08 Jan 2025 04:18:07 -0800 (PST)
 Received: from draig.lan ([85.9.250.243]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-436e2da6336sm19067545e9.8.2025.01.08.04.18.04
+ 5b1f17b1804b1-436dd14dfcasm39816765e9.1.2025.01.08.04.18.04
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
  Wed, 08 Jan 2025 04:18:05 -0800 (PST)
 Received: from draig.lan (localhost [IPv6:::1])
- by draig.lan (Postfix) with ESMTP id E3FBB5FC6C;
- Wed,  8 Jan 2025 12:10:56 +0000 (GMT)
+ by draig.lan (Postfix) with ESMTP id B4A166030B;
+ Wed,  8 Jan 2025 12:10:57 +0000 (GMT)
 From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Halil Pasic <pasic@linux.ibm.com>, Aurelien Jarno <aurelien@aurel32.net>,
@@ -100,17 +100,17 @@ Cc: Halil Pasic <pasic@linux.ibm.com>, Aurelien Jarno <aurelien@aurel32.net>,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
  Palmer Dabbelt <palmer@dabbelt.com>,
  Peter Maydell <peter.maydell@linaro.org>, Li-Wen Hsu <lwhsu@freebsd.org>
-Subject: [PATCH v4 24/32] tests/lcitool: bump to latest version of libvirt-ci
-Date: Wed,  8 Jan 2025 12:10:46 +0000
-Message-Id: <20250108121054.1126164-25-alex.bennee@linaro.org>
+Subject: [PATCH v4 32/32] MAINTAINERS: Remove myself from reviewers
+Date: Wed,  8 Jan 2025 12:10:54 +0000
+Message-Id: <20250108121054.1126164-33-alex.bennee@linaro.org>
 X-Mailer: git-send-email 2.39.5
 In-Reply-To: <20250108121054.1126164-1-alex.bennee@linaro.org>
 References: <20250108121054.1126164-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::42c;
- envelope-from=alex.bennee@linaro.org; helo=mail-wr1-x42c.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::334;
+ envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x334.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -133,51 +133,40 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-We will shortly need this to build our riscv64 cross container.
-However to keep the delta down just do the bump first. As ccache4 is
-now preferred for FreeBSD to get the latest version there is a little
-update in the FreeBSD metadata.
+From: Wainer dos Santos Moschetta <wainersm@redhat.com>
 
+The time I spent contributing to QEMU was great, but I've not been active
+for a long time now. So removing myself from the reviewers list of
+"Integration Testing with the Avocado framework" and
+"Build and test automation" subsystems.
+
+Signed-off-by: Wainer dos Santos Moschetta <wainersm@redhat.com>
+Message-Id: <20250103194450.360789-1-wainersm@redhat.com>
 Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
-Reviewed-by: Daniel P. Berrangé <berrange@redhat.com>
 ---
- .gitlab-ci.d/cirrus/freebsd-14.vars | 2 +-
- tests/lcitool/libvirt-ci            | 2 +-
- tests/vm/generated/freebsd.json     | 2 +-
- 3 files changed, 3 insertions(+), 3 deletions(-)
+ MAINTAINERS | 2 --
+ 1 file changed, 2 deletions(-)
 
-diff --git a/.gitlab-ci.d/cirrus/freebsd-14.vars b/.gitlab-ci.d/cirrus/freebsd-14.vars
-index 0a7ac5e0e1..0997c47af5 100644
---- a/.gitlab-ci.d/cirrus/freebsd-14.vars
-+++ b/.gitlab-ci.d/cirrus/freebsd-14.vars
-@@ -11,6 +11,6 @@ MAKE='/usr/local/bin/gmake'
- NINJA='/usr/local/bin/ninja'
- PACKAGING_COMMAND='pkg'
- PIP3='/usr/local/bin/pip'
--PKGS='alsa-lib bash bison bzip2 ca_root_nss capstone4 ccache cmocka ctags curl cyrus-sasl dbus diffutils dtc flex fusefs-libs3 gettext git glib gmake gnutls gsed gtk-vnc gtk3 json-c libepoxy libffi libgcrypt libjpeg-turbo libnfs libslirp libspice-server libssh libtasn1 llvm lzo2 meson mtools ncurses nettle ninja opencv pixman pkgconf png py311-numpy py311-pillow py311-pip py311-pyyaml py311-sphinx py311-sphinx_rtd_theme py311-tomli python3 rpm2cpio rust rust-bindgen-cli sdl2 sdl2_image snappy sndio socat spice-protocol tesseract usbredir virglrenderer vte3 xorriso zstd'
-+PKGS='alsa-lib bash bison bzip2 ca_root_nss capstone4 ccache4 cmocka ctags curl cyrus-sasl dbus diffutils dtc flex fusefs-libs3 gettext git glib gmake gnutls gsed gtk-vnc gtk3 json-c libepoxy libffi libgcrypt libjpeg-turbo libnfs libslirp libspice-server libssh libtasn1 llvm lzo2 meson mtools ncurses nettle ninja opencv pixman pkgconf png py311-numpy py311-pillow py311-pip py311-pyyaml py311-sphinx py311-sphinx_rtd_theme py311-tomli python3 rpm2cpio rust rust-bindgen-cli sdl2 sdl2_image snappy sndio socat spice-protocol tesseract usbredir virglrenderer vte3 xorriso zstd'
- PYPI_PKGS=''
- PYTHON='/usr/local/bin/python3'
-diff --git a/tests/lcitool/libvirt-ci b/tests/lcitool/libvirt-ci
-index 9ad3f70bde..b6a65806bc 160000
---- a/tests/lcitool/libvirt-ci
-+++ b/tests/lcitool/libvirt-ci
-@@ -1 +1 @@
--Subproject commit 9ad3f70bde9865d5ad18f36d256d472e72b5cbf3
-+Subproject commit b6a65806bc9b2b56985f5e97c936b77c7e7a99fc
-diff --git a/tests/vm/generated/freebsd.json b/tests/vm/generated/freebsd.json
-index 3cb7fb7060..81fc38d798 100644
---- a/tests/vm/generated/freebsd.json
-+++ b/tests/vm/generated/freebsd.json
-@@ -13,7 +13,7 @@
-     "bzip2",
-     "ca_root_nss",
-     "capstone4",
--    "ccache",
-+    "ccache4",
-     "cmocka",
-     "ctags",
-     "curl",
+diff --git a/MAINTAINERS b/MAINTAINERS
+index cab9018d9f..c1d954c9de 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -4152,7 +4152,6 @@ M: Alex Bennée <alex.bennee@linaro.org>
+ T: git https://gitlab.com/stsquad/qemu testing/next
+ M: Philippe Mathieu-Daudé <philmd@linaro.org>
+ M: Thomas Huth <thuth@redhat.com>
+-R: Wainer dos Santos Moschetta <wainersm@redhat.com>
+ S: Maintained
+ F: .github/workflows/lockdown.yml
+ F: .gitlab-ci.yml
+@@ -4198,7 +4197,6 @@ Integration Testing with the Avocado framework
+ W: https://trello.com/b/6Qi1pxVn/avocado-qemu
+ R: Cleber Rosa <crosa@redhat.com>
+ R: Philippe Mathieu-Daudé <philmd@linaro.org>
+-R: Wainer dos Santos Moschetta <wainersm@redhat.com>
+ S: Odd Fixes
+ F: tests/avocado/
+ 
 -- 
 2.39.5
 
