@@ -4,108 +4,174 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5717DE77199
-	for <qemu-riscv@archiver.kernel.org>; Wed,  8 Jan 2025 13:24:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 80C3EE77188
+	for <qemu-riscv@archiver.kernel.org>; Wed,  8 Jan 2025 14:09:07 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tVW2d-0005H3-KE; Wed, 08 Jan 2025 08:24:11 -0500
+	id 1tVWjf-0002QC-Mt; Wed, 08 Jan 2025 09:08:44 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <mst@redhat.com>) id 1tVW2K-0005Ej-F9
- for qemu-riscv@nongnu.org; Wed, 08 Jan 2025 08:23:52 -0500
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
+ (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1tVWjK-0002Kz-42
+ for qemu-riscv@nongnu.org; Wed, 08 Jan 2025 09:08:25 -0500
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <mst@redhat.com>) id 1tVW2D-0001Hq-NU
- for qemu-riscv@nongnu.org; Wed, 08 Jan 2025 08:23:50 -0500
+ (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1tVWjG-0003eM-6k
+ for qemu-riscv@nongnu.org; Wed, 08 Jan 2025 09:08:17 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1736342623;
+ s=mimecast20190719; t=1736345293;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=DUx8kHenwSjIvO5mMhkXGUqzmNKpRK1+EL+ISyHeQrM=;
- b=CVDcpJtTWFAYmBTDnJtAC0hkBLz1EN/inheGS58ZMwV8q2O9+cEqxQx4LywxWNRy/bOMvE
- VGtA8w5mFIWoTFQnJzUGvVcb8MuLzsX83yi8/g0uppC0zcrcwPAe/i/d94GgJVcXsFpc2R
- Wpuprw9ayAoJZSPD6eo/5qmG90Szsfk=
-Received: from mail-ej1-f70.google.com (mail-ej1-f70.google.com
- [209.85.218.70]) by relay.mimecast.com with ESMTP with STARTTLS
+ in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
+ bh=qpxohD9h8i5S6p2TPOGVlTOYpkDWuNlt9sflRvsbfoc=;
+ b=ipgP41lTWa2ri2Qp2/EHLSNpqSsddMbauH5137Q+lKxfStsAzmgl1vSC9FL+FxMRnojLk/
+ GWA7WZ4rFToYHtofZZPrqP9B6jqApQMAL5Bil66th0KWOrFTMp0n0L4Y3u9UsrL+lNK0mD
+ wBnBeTNqmQshd5NR9i1z1y+kaFoRuv4=
+Received: from mail-wr1-f70.google.com (mail-wr1-f70.google.com
+ [209.85.221.70]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-628-GdzqRWjAMsu9tvDJF-w2Lw-1; Wed, 08 Jan 2025 08:23:40 -0500
-X-MC-Unique: GdzqRWjAMsu9tvDJF-w2Lw-1
-X-Mimecast-MFC-AGG-ID: GdzqRWjAMsu9tvDJF-w2Lw
-Received: by mail-ej1-f70.google.com with SMTP id
- a640c23a62f3a-aa6b904a886so1041652466b.0
- for <qemu-riscv@nongnu.org>; Wed, 08 Jan 2025 05:23:39 -0800 (PST)
+ us-mta-29-4ncETQXgMti8JmktI5rpGA-1; Wed, 08 Jan 2025 09:08:10 -0500
+X-MC-Unique: 4ncETQXgMti8JmktI5rpGA-1
+X-Mimecast-MFC-AGG-ID: 4ncETQXgMti8JmktI5rpGA
+Received: by mail-wr1-f70.google.com with SMTP id
+ ffacd0b85a97d-386321c8f4bso8675833f8f.0
+ for <qemu-riscv@nongnu.org>; Wed, 08 Jan 2025 06:08:10 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1736342619; x=1736947419;
- h=in-reply-to:content-transfer-encoding:content-disposition
- :mime-version:references:message-id:subject:cc:to:from:date
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=DUx8kHenwSjIvO5mMhkXGUqzmNKpRK1+EL+ISyHeQrM=;
- b=tQHBiHDA8VxykWMYAAD4699b/lJkby/dwpfr4MuluJ8vxVT3hqu92COpropZ6dPds7
- DAZT5V+PMzwMlSC6ydMUGLPpcUsHZDCZs5PZcxBADMg2khMQ9mLzZLgUHBHKcg0asgCl
- dSZabKeVfybARpPSEzmagOz1l6t+22xOS0AVdxlo7/ragocFCiD0vFPO1SLPmk0qGkF3
- k7X2YVytZds/j9iWiorLe5ds1qpneIuOaYabe9msXvhFQlDvkUw9NSVWmtosl2ZZNfTw
- ST+3leXWhOerCxnqNdGzXWiI4PP9kUnrgixXpfp5VWlMjaBWPTjuWTQNu/PEnG3bd2K7
- vz4g==
+ d=1e100.net; s=20230601; t=1736345289; x=1736950089;
+ h=content-transfer-encoding:in-reply-to:autocrypt:content-language
+ :from:references:cc:to:subject:user-agent:mime-version:date
+ :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=qpxohD9h8i5S6p2TPOGVlTOYpkDWuNlt9sflRvsbfoc=;
+ b=sunq3TOPNepfXBL5Lw8zv5gXOGrDiDg4hYcgwUWDV5pTb8v4fLdpfpH15YvRjDqNah
+ obxIyQItQn407ANEstfAMF+IlY/LrBhdIzdjQg/jb+mKIl6VD69tXSDFKo4quoNcufcX
+ c88hOsaq9c3b0cjVkg6Ihs17UzJ8soXRfEbZ6VBixN2+9gMX2KYMdY0zyoGIULAAcq6q
+ /fqdpLrWXnzIcybqzqdOF9axO4Kb0OxUYSRU+ADBBiW8pftA1HjUYsJuCb7KKeQCtV/E
+ RmUE9mGpPfMC7oha2nDxcFh8MP0qcVTIFaQFmCH8o+1Ww6/Gp+Jbtkciau+5YBFTwAqe
+ 0jeA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXXWssV69XNI5dMJgP7mc0/8hQ6uqx0NJn3OeafREel+fPr803+xPwS+zHVnN+6zViZfbwQOQNFkoQN@nongnu.org
-X-Gm-Message-State: AOJu0Yz92CQTfJ0GNcZLHzXVU527YCq/8Z0i1VmTcNnW4J/s2RWfDtDD
- xZfuanjo0xwrMAUu1BoGdYTCnifMHrXeEauqRlQaPUBhd6/Zl4FEQ9oy6Q3DCjnSLRMxT4g87uu
- tf3unhxgDrIjV0Quo3lRJrLlupqB6I/cPRVY6jOPZlimJjbH2ZqGK
-X-Gm-Gg: ASbGncuGtux2hvs8NZc6xhpCM7M2zB056/qprsjzNv+aMXZCG2i8+tV4b1sQ8tnzplW
- 4Z1NJFOPKtTp3Sng5BwI+JcnE0XEcE/pJu6L8bdn+13zcI3C+7XtYyMfGdaKI2FRQcBO+5cjFJn
- 2izGvgjgowxhhgN7apkKuvSITBimHtJdm4D6a2BKTLPqARQ18o2jqW3co5yPmydPyKnDx55+Zpr
- SAUweysVnWE05kaoAUuysM4fDkiiaX7RG+W1++MXhZ9wPGEe40=
-X-Received: by 2002:a17:907:3e9f:b0:aae:bd4c:22c0 with SMTP id
- a640c23a62f3a-ab2ab70aeccmr221491066b.19.1736342618721; 
- Wed, 08 Jan 2025 05:23:38 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IG7IZj2eOmwp6EVhf8YjglmEUkjEa5CvYexcJwkVFeDe3kjwbMhlRUq36gCno/UonpvleGAkA==
-X-Received: by 2002:a17:907:3e9f:b0:aae:bd4c:22c0 with SMTP id
- a640c23a62f3a-ab2ab70aeccmr221485666b.19.1736342618157; 
- Wed, 08 Jan 2025 05:23:38 -0800 (PST)
-Received: from redhat.com ([2a02:14f:175:d62d:93ef:d7e2:e7da:ed72])
+ AJvYcCVATD4kl5uNq1DIQ9MGfNtFILAWcFG9WBC0PwnoHcx4copv4XkplUq1k02TOocn/Mz4zUBL0Fybhzus@nongnu.org
+X-Gm-Message-State: AOJu0YzLimkyft+Sg/DTj1MFSIE6SnW5ldP4ANobhIkvcP3FTh9crB0o
+ lwvfRfYKucrZ4HVz7GIEWkOA7YGRnSRQYomKR3b6Pg+x7HkhvZBvHHc6olV6jy/iVW6bCWAH10d
+ HGXbSX2cnf7rlEgQwJ6zG4ud2+nm1fZQqDwQFVoGeOAG8Eti83as5
+X-Gm-Gg: ASbGncsuSnKAGroD9zVSE1q/pyzsrRmPMCZn1J9e7qOsQ2ZgIeCMhZKuqloaibLcNyj
+ OhjdZ0du6jLVx31z1rcYWyBW3RUmen0WupUyBZIkLmfuyMefDGpuGPx/1l3Wpma39x9yBx29PwW
+ IAQVe+KhuekSqlX62bsMM12jrv4UpG4C8+eRq2dIwZGWzX70q3o0mHD1I5lqTVAnEnsOP7QXsTM
+ UTIxOaGYYYbLNYxKUI5Z/0IT+47HkYE8cc4uqhsKbKfCq6dUWsR9GU2qfJoMwLGvagdfSjQX4qi
+ 15NUwg==
+X-Received: by 2002:a5d:598d:0:b0:386:3711:ff8c with SMTP id
+ ffacd0b85a97d-38a873067b9mr2493985f8f.23.1736345289579; 
+ Wed, 08 Jan 2025 06:08:09 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IEMGzeF9eNtYi1dMV8dxnf9A9LVEZYlOJgqE5wnYtccWnT97ZU9zLK445Gnl5bb1mmsEyYt7w==
+X-Received: by 2002:a5d:598d:0:b0:386:3711:ff8c with SMTP id
+ ffacd0b85a97d-38a873067b9mr2493901f8f.23.1736345288473; 
+ Wed, 08 Jan 2025 06:08:08 -0800 (PST)
+Received: from [10.33.192.228] (nat-pool-str-t.redhat.com. [149.14.88.106])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-aac0efe494dsm2522812166b.101.2025.01.08.05.23.31
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 08 Jan 2025 05:23:37 -0800 (PST)
-Date: Wed, 8 Jan 2025 08:23:29 -0500
-From: "Michael S. Tsirkin" <mst@redhat.com>
-To: Phil Dennis-Jordan <phil@philjordan.eu>
-Cc: qemu-devel@nongnu.org, agraf@csgraf.de, peter.maydell@linaro.org,
- pbonzini@redhat.com, rad@semihalf.com, quic_llindhol@quicinc.com,
- stefanha@redhat.com, slp@redhat.com, richard.henderson@linaro.org,
- eduardo@habkost.net, marcel.apfelbaum@gmail.com,
- gaosong@loongson.cn, jiaxun.yang@flygoat.com, chenhuacai@kernel.org,
- kwolf@redhat.com, hreitz@redhat.com, philmd@linaro.org,
- shorne@gmail.com, palmer@dabbelt.com, alistair.francis@wdc.com,
- bmeng.cn@gmail.com, liwei1518@gmail.com, dbarboza@ventanamicro.com,
- zhiwei_liu@linux.alibaba.com, jcmvbkbc@gmail.com,
- marcandre.lureau@redhat.com, berrange@redhat.com,
- akihiko.odaki@daynix.com, qemu-arm@nongnu.org,
- qemu-block@nongnu.org, qemu-riscv@nongnu.org, balaton@eik.bme.hu
-Subject: Re: [PATCH v16 00/14] macOS PV Graphics and new vmapple machine type
-Message-ID: <20250108082246-mutt-send-email-mst@kernel.org>
-References: <20241223221645.29911-1-phil@philjordan.eu>
+ ffacd0b85a97d-38a1c8289a0sm54475531f8f.7.2025.01.08.06.08.06
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 08 Jan 2025 06:08:07 -0800 (PST)
+Message-ID: <cc39bbff-e5aa-4b24-8cb1-49148c370ff9@redhat.com>
+Date: Wed, 8 Jan 2025 15:08:06 +0100
 MIME-Version: 1.0
-In-Reply-To: <20241223221645.29911-1-phil@philjordan.eu>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v4 19/32] tests/functional: add zstd support to uncompress
+ utility
+To: =?UTF-8?Q?Alex_Benn=C3=A9e?= <alex.bennee@linaro.org>,
+ qemu-devel@nongnu.org
+Cc: Halil Pasic <pasic@linux.ibm.com>, Aurelien Jarno <aurelien@aurel32.net>, 
+ qemu-riscv@nongnu.org, Radoslaw Biernacki <rad@semihalf.com>,
+ Daniel Henrique Barboza <danielhb413@gmail.com>,
+ Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Beraldo Leal <bleal@redhat.com>, Fabiano Rosas <farosas@suse.de>,
+ Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
+ Laurent Vivier <lvivier@redhat.com>, Nicholas Piggin <npiggin@gmail.com>,
+ Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>,
+ Christian Borntraeger <borntraeger@linux.ibm.com>,
+ Wainer dos Santos Moschetta <wainersm@redhat.com>,
+ =?UTF-8?Q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>,
+ Ed Maste <emaste@freebsd.org>, Jiaxun Yang <jiaxun.yang@flygoat.com>,
+ Bernhard Beschow <shentey@gmail.com>, Bin Meng <bmeng.cn@gmail.com>,
+ qemu-ppc@nongnu.org, qemu-arm@nongnu.org, Laurent Vivier
+ <laurent@vivier.eu>, Joel Stanley <joel@jms.id.au>,
+ =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
+ John Snow <jsnow@redhat.com>, "Michael S. Tsirkin" <mst@redhat.com>,
+ Pavel Dovgalyuk <pavel.dovgaluk@ispras.ru>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Harsh Prateek Bora <harshpb@linux.ibm.com>,
+ Leif Lindholm <quic_llindhol@quicinc.com>, Cleber Rosa <crosa@redhat.com>,
+ Paolo Bonzini <pbonzini@redhat.com>, qemu-s390x@nongnu.org,
+ Eric Farman <farman@linux.ibm.com>, Weiwei Li <liwei1518@gmail.com>,
+ =?UTF-8?Q?Daniel_P=2E_Berrang=C3=A9?= <berrange@redhat.com>,
+ Markus Armbruster <armbru@redhat.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>, Peter Maydell
+ <peter.maydell@linaro.org>, Li-Wen Hsu <lwhsu@freebsd.org>
+References: <20250108121054.1126164-1-alex.bennee@linaro.org>
+ <20250108121054.1126164-20-alex.bennee@linaro.org>
+From: Thomas Huth <thuth@redhat.com>
+Autocrypt: addr=thuth@redhat.com; keydata=
+ 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
+In-Reply-To: <20250108121054.1126164-20-alex.bennee@linaro.org>
 X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: YfEuL3X4umr-X-8gmsc_imDx0s-fiFzaJvdIU65GMiE_1736342619
+X-Mimecast-MFC-PROC-ID: YCvXR-psSC07kyyU7ld-xNS3AOKxpGOFA3sHbxJtOXU_1736345290
 X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
+Content-Language: en-US
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=170.10.133.124; envelope-from=mst@redhat.com;
+Received-SPF: pass client-ip=170.10.129.124; envelope-from=thuth@redhat.com;
  helo=us-smtp-delivery-124.mimecast.com
 X-Spam_score_int: -24
 X-Spam_score: -2.5
 X-Spam_bar: --
 X-Spam_report: (-2.5 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.432,
  DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H2=-0.001,
- RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001, RCVD_IN_VALIDITY_SAFE_BLOCKED=0.001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001,
+ RCVD_IN_VALIDITY_SAFE_BLOCKED=0.001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -121,365 +187,15 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Mon, Dec 23, 2024 at 11:16:31PM +0100, Phil Dennis-Jordan wrote:
-> This patch set introduces a new ARM and macOS HVF specific machine type
-> called "vmapple", as well as a family of display devices based on the
-> ParavirtualizedGraphics.framework in macOS. One of the display adapter
-> variants, apple-gfx-mmio, is required for the new machine type, while
-> apple-gfx-pci can be used to enable 3D graphics acceleration with x86-64
-> macOS guest OSes.
+On 08/01/2025 13.10, Alex Bennée wrote:
+> Rather than using the python library (which has a different API
+> anyway) lets just call the binary. zstdtools is already in out
+> qemu.yml so all test containers should have it around. Tests should
+> still use @skipIfMissingCommands('zstd') to gracefully handle when
+> only minimal dependencies have been installed.
 > 
-> Previous versions of this patch set were submitted semi-separately:
-> the original vmapple patch set by Alexander Graf included a monolithic
-> implementation of apple-gfx-mmio. I subsequently reviewed and reworked
-> the latter to support the PCI variant of the device as well and submitted
-> the result in isolation. As requested in subsequent review, I have now
-> recombined this with the original vmapple patch set, which I have updated
-> and improved in a few ways as well.
-> 
-> The vmapple machine type approximates the configuration in macOS's own
-> Virtualization.framework when running arm64 macOS guests. In addition to
-> generic components such as a GICv3 and an XHCI USB controller, it
-> includes nonstandard extensions to the virtio block device, a special
-> "hardware" aes engine, a configuration device, a pvpanic variant, a
-> "backdoor" interface, and of course the apple-gfx paravirtualised display
-> adapter.
-> 
-> There are currently a few limitations to this which aren't intrinsic,
-> just imperfect emulation of the VZF, but it's good enough to be just
-> about usable for some purposes:
-> 
->  * macOS 12 guests only. Versions 13+ currently fail during early boot.
->  * macOS 11+ arm64 hosts only, with hvf accel. (Perhaps some differences
->    between Apple M series CPUs and TCG's aarch64 implementation? macOS
->    hosts only because ParavirtualizedGraphics.framework is a black box
->    implementing most of the logic behind the apple-gfx device.)
->  * PCI devices use legacy IRQs, not MSI/MSI-X. As far as I can tell,
->    we'd need to include the GICv3 ITS, but it's unclear to me what
->    exactly needs wiring up.
->  * Due to a quirk (bug?) in the macOS XHCI driver when MSI-X is not
->    available, correct functioning of the USB controller (and thus
->    keyboard/tablet) requires a small workaround in the XHCI controller
->    device. This is part of another patch series:
->    https://patchew.org/QEMU/20241208191646.64857-1-phil@philjordan.eu/
->  * The guest OS must first be provisioned using Virtualization.framework;
->    the disk images can subsequently be used in Qemu. (See docs.)
-> 
-> The apple-gfx device can be used independently from the vmapple machine
-> type, at least in the PCI variant. It mainly targets x86-64 macOS guests
-> from version 11 on, but also includes a UEFI bootrom for basic
-> framebuffer mode. macOS 11 is also required on the host side, as well
-> as a GPU that supports the Metal API. On the guest side, this provides
-> 3D acceleration/GPGPU support with a baseline Metal feature set,
-> irrespective of the host GPU's feature set. A few limitations in the
-> current integration:
+> Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
 
-virtio things:
-
-Reviewed-by: Michael S. Tsirkin <mst@redhat.com>
-
-feel free to merge, if if you want me to pick up
-virtio bits, let me know.
-
-
->  * Although it works fine with TCG, it does not work correctly
->    cross-architecture: x86-64 guests on arm64 hosts appear to make
->    some boot progress, but rendering is corrupted. I suspect
->    incompatible texture memory layouts; I have no idea if this is
->    fixable.
->  * ParavirtualizedGraphics.framework and the guest driver support
->    multi-headed configurations. The current Qemu integration always
->    connects precisely 1 display.
->  * State serialisation and deserialisation is currently not
->    implemented, though supported in principle by the framework.
->    Both apple-gfx variants thus set up a migration blocker.
->  * Rendering efficiency could be better. The GPU-rendered guest
->    framebuffer is copied to system memory and uses Qemu's usual
->    CPU-based drawing. For maximum efficiency, the Metal texture
->    containing the guest framebuffer could be drawn directly to
->    a Metal view in the host window, staying on the GPU. (Similar
->    to the OpenGL/virgl render path on other platforms.)
-> 
-> Some of my part of this work has been sponsored by Sauce Labs Inc.
-> 
-> ---
-> 
-> v2 -> v3:
-> 
->  * Merged the apple-gfx and vmapple patchsets.
->  * Squashed a bunch of later apple-gfx patches into the main one.
->    (dGPU support, queried MMIO area size, host GPU picking logic.)
->  * Rebased on latest upstream, fixing any breakages due to internal
->    Qemu API changes.
->  * apple-gfx: Switched to re-entrant MMIO. This is supported by the
->    underlying framework and simplifies the MMIO forwarding code which
->    was previously different on x86-64 vs aarch64.
->  * vmapple: Fixes for minor bugs and comments from the last round of
->    review.
->  * vmapple aes, conf, apple-gfx: Switched reset methods to implement
->    the ResettableClass base's interface.
->  * vmapple: switched from virtio-hid to an XHCI USB controller and
->    USB mouse and tablet devices. macOS does not provide drivers for
->    virtio HID devices, at least not in version 12's vmapple kernel.
->    So input now sort of works (interrupt issues) rather than not
->    at all. Use network-based remote access to the guest OS as a
->    work-around.
-> 
-> v3 -> v4:
-> 
->  * Complete rework of the mechanism for handling runloop/libdispatch
->    events on the main thread. PV graphics now work with the SDL UI.
->  * Renamed 'apple-gfx-vmapple' device to 'apple-gfx-mmio'
->  * hw/display/apple-gfx: threading model overhaul to be more consistent,
->    safer, and more QEMU-idiomatic.
->  * display-modes property on the apple-gfx devices now uses the
->    native array property mechanism and works on both device variants.
->  * hw/vmapple/aes: Improvements to logging and error handling.
->  * hw/vmapple/cfg: Bug fixes around device property default values.
->  * hw/vmapple/{aes,cfg,virtio-blk/vmapple}: Most header code moved into
->    .c files, only a single vmapple.h now contains the #defines for the
->    vmapple machine model-specific device type names.
->  * hw/block/virtio-blk: New patch for replacing virtio_blk_free_request
->    with g_free. (Optional)
->  * Various smaller changes following comments in v3 code review in
->    apple-gfx, aes, cfg, bdif, virtio-blk-vmapple, and the vmapple
->    machine type itself. See patch-specific v4 change notes for details.
-> 
-> v4 -> v5:
-> 
->  * Simplified the main thread runloop mechanism. Back to setting
-> 	 qemu_main directly, but narrowing the scope of what it needs to do,
-> 	 and it can now be NULL. (Meaning run the QEMU main event loop on
-> 	 the main thread as is traditional.)
->  * hw/display/apple-gfx: Further improvements to the BH based job code bridging
->    the libdispatch & QEMU thread synchronisation impedance mismatch.
->  * hw/display/apple-gfx: Thread safety and object lifetime improvements.
->  * hw/display/apple-gfx-*: Better buffer and error handling in display mode
->    property setters and getters.
->  * hw/vmapple/aes: More consistent and safer logging/tracing
->  * hw/vmapple/cfg: Better error reporting on overlong property strings.
->  * hw/vmapple/virtio-blk: Fixed theoretically-unaligned write to config buffer.
->  * vmapple machine type: Moved ecam region into machine state, improved device
->    property setting error handling, improved ECID/UUID extraction script and
->    docs.
->  * Various smaller fixes in apple-gfx/-mmio, apple-gfx-pci, vmapple/aes,
->    vmapple/cfg, vmapple/virtio-blk, and vmapple machine type.
->  * Added SPDX license identifiers where they were missing.
-> 
-> v5 -> v6:
-> 
->  * 01/15 (main/Cocoa/runloop): Combined functions, fixed whitespace
->  * 02/15 (apple-gfx): Further refinement of PVG threading: reduced some callback
->    tasks from BHs to merely acquiring RCU read lock; replaced some libdispatch
->    tasks with BHs; last remaining synchronous BH now uses emphemeral
->    QemuSemaphore.
->  * 02/15 (apple-gfx): Readability improvements and other smaller tweaks
->    (see patch change notes for details)
->  * 04/15 (display modes): Replaced use of alloca()�with NSMutableArray.
-> 
-> v6 -> v7:
-> 
->  * 02/15 (apple-gfx): Use g_ptr_array_find() helper function, coding style tweak
->  * 03/15 (apple-gfx-pci): Removed an unused function parameter
->  * 04/15 (apple-gfx display mode property): Simplified error handling in
->    property parsing.
->  * 10/15 (vmapple/aes): Coding style tweaks.
->  * 12/15 (vmapple/cfg): Changed error messages for overrun of properties with
->    fixed-length strings to be more useful to users than developers.
->  * 15/15 (vmapple machine type): Tiny error handling fix, un-inlined function
-> 
-> v7 -> v8:
-> 
->  * 02/15 (apple-gfx): Naming and type use improvements, fixes for a bug and a
->    leak.
->  * 04/15 (apple-gfx display mode property): Type use improvement
->  * 10/15 (vmapple/aes): Guest error logging tweaks.
->  * 11/15 (vmapple/bdif): Replaced uses of cpu_physical_memory_read with
->    dma_memory_read, and a g_free call with g_autofree.
->  * 12/15 (vmapple/cfg): Macro hygiene fix: consistently enclosing arguments in
->    parens.
->  * 15/15 (vmapple machine type): Use less verbose pattern for defining uuid
->    property.
-> 
-> v8 -> v9:
-> 
->  * 01/16 (ui & main loop): Set qemu_main to NULL for GTK UI as well.
->  * 02/16 (apple-gfx): Pass device pointer to graphic_console_init(), various
-> 	 non-functional changes.
->  * 03/16 (apple-gfx-pci): Fixup of changed common call, whitespace and comment
->    formatting tweaks.
->  * 04/16 (apple-gfx display modes): Re-ordered type definitions so we can drop
->    a 'struct' keyword.
->  * 10/16 (vmapple/aes): Replaced a use of cpu_physical_memory_write with
->    dma_memory_write, minor style tweak.
->  * 11/16 (vmapple/bdif): Replaced uses of cpu_physical_memory_write with
->    dma_memory_write.
->  * 13/16 (vmapple/virtio-blk): Correctly specify class_size for
->    VMAppleVirtIOBlkClass.
->  * 15/16 (vmapple machine type): Documentation improvements, fixed variable
->    name and struct field used during pvpanic device creation.
->  * 16/16 (NEW/RFC vmapple/virtio-blk): Proposed change to replace type hierarchy
->    with a variant property. This seems cleaner and less confusing than the
->    original approach to me, but I'm not sure if it warrants creation of a new
->    QAPI enum and property type definition.
-> 
-> v9 -> v10:
-> 
->  * 01/15 (ui & main loop): Added comments to qemu_main declaration and GTK.
->  * 02/15 (apple-gfx): Reworked the way frame rendering code is threaded to use
->    BHs for sections requiring BQL.
->  * 02/15 (apple-gfx): Fixed ./configure error on non-macOS platforms.
->  * 10/15 (vmapple/aes): Code style and comment improvements.
->  * 12/15 (vmapple/cfg): Slightly tidier error reporting for overlong property
->    values.
->  * 13/15 (vmapple/virtio-blk): Folded v9 patch 16/16 into this one, changing
->    the device type design to provide a single device type with a variant
-> 	 property instead of 2 different subtypes for aux and root volumes.
->  * 15/15 (vmapple machine type): Documentation fixup for changed virtio-blk
->    device type; small improvements to shell commands in documentation;
->    improved propagation of errors during cfg device instantiation.
-> 
-> v10 -> v11:
-> 
->  * 01/15 (ui & main loop): Simplified main.c, better comments & commit message
->  * 02/15 (apple-gfx): Give each PV display instance a unique serial number.
->  * 02 & 03/15 (apple-gfx, -pci): Formatting/style tweaks
->  * 15/15 (vmapple machine type): Improvements to shell code in docs
-> 
-> v11 -> v12:
-> 
->  * 01/15 (ui & main loop): More precise wording of code comments.
->  * 02/15 (apple-gfx): Fixed memory management regressions introduced in v10;
->    improved error handling; various more conmetic code adjustments
->  * 09/15 (GPEX): Fixed uses of deleted GPEX_NUM_IRQS constant that have been
->    added to QEMU since this patch was originally written.
-> 
-> v12 -> v13:
-> 
->  * 15/15 (vmapple machine type): Bumped the machine type version from 9.2
->    to 10.0.
->  * All patches in the series now have been positively reviewed and received
->    corresponding reviewed-by tags.
-> 
-> v13 -> v14:
-> 
->  * 6/15 (hw/vmapple directory): Changed myself from reviewer
->    to maintainer, as that seemed appropriate at this point.
->  * 15/15 (vmapple machine type): Gate creation of XHCI and
->    USB HID devices behind if (defaults_enabled()).
-> 
-> v14 -> v15
-> 
->  * Constified property tables to match Richard Henderson's recent project-
->    wide convention change. (patches 4/15, 7/15, 11/15, 12/15, & 13/15)
-> 
-> v15 -> v16
-> 
->  * 14 patches now, as patch 8 has already been pulled. (Thanks Philippe!)
->  * Fixed a bunch of conflicts with upstream code motion:
->     - DEFINE_PROP_END_OF_LIST removal (4/14 - apple-gfx mode list, 7/14 -
->       pvpanic-mmio, 10/14 - bdif, 11/14 - cfg device, and
->       12/14 - vmapple-virtio-blk)
->     - sysemu->system move/rename: (1/14 - ui/qemu-main, 2/14 - apple-gfx,
->       9/14 - aes, 10/14 - bdif, 14/14 - vmapple machine type)
->  * 14/14 (vmapple machine type):
->     - Moved compatibility setting for removing legacy mode from virtio-pci
->       to proper global property table rather than (ab)using sugar property.
->     - Removed a few superfluous #includes during sysemu rename cleanup.
->     - Removed machine type versioning as it's not necessary (yet?)
->     - Made memory map array const
-> 
-> Alexander Graf (8):
->   hw: Add vmapple subdir
->   hw/misc/pvpanic: Add MMIO interface
->   gpex: Allow more than 4 legacy IRQs
->   hw/vmapple/aes: Introduce aes engine
->   hw/vmapple/bdif: Introduce vmapple backdoor interface
->   hw/vmapple/cfg: Introduce vmapple cfg region
->   hw/vmapple/virtio-blk: Add support for apple virtio-blk
->   hw/vmapple/vmapple: Add vmapple machine type
-> 
-> Phil Dennis-Jordan (6):
->   ui & main loop: Redesign of system-specific main thread event handling
->   hw/display/apple-gfx: Introduce ParavirtualizedGraphics.Framework
->     support
->   hw/display/apple-gfx: Adds PCI implementation
->   hw/display/apple-gfx: Adds configurable mode list
->   MAINTAINERS: Add myself as maintainer for apple-gfx, reviewer for HVF
->   hw/block/virtio-blk: Replaces request free function with g_free
-> 
->  MAINTAINERS                         |  15 +
->  contrib/vmapple/uuid.sh             |   9 +
->  docs/system/arm/vmapple.rst         |  63 ++
->  docs/system/target-arm.rst          |   1 +
->  hw/Kconfig                          |   1 +
->  hw/arm/sbsa-ref.c                   |   2 +-
->  hw/arm/virt.c                       |   2 +-
->  hw/block/virtio-blk.c               |  58 +-
->  hw/core/qdev-properties-system.c    |   8 +
->  hw/display/Kconfig                  |  13 +
->  hw/display/apple-gfx-mmio.m         | 288 +++++++++
->  hw/display/apple-gfx-pci.m          | 156 +++++
->  hw/display/apple-gfx.h              |  77 +++
->  hw/display/apple-gfx.m              | 880 ++++++++++++++++++++++++++++
->  hw/display/meson.build              |   7 +
->  hw/display/trace-events             |  30 +
->  hw/i386/microvm.c                   |   2 +-
->  hw/loongarch/virt.c                 |  12 +-
->  hw/meson.build                      |   1 +
->  hw/mips/loongson3_virt.c            |   2 +-
->  hw/misc/Kconfig                     |   4 +
->  hw/misc/meson.build                 |   1 +
->  hw/misc/pvpanic-mmio.c              |  60 ++
->  hw/openrisc/virt.c                  |  12 +-
->  hw/pci-host/gpex.c                  |  43 +-
->  hw/riscv/virt.c                     |  12 +-
->  hw/vmapple/Kconfig                  |  32 +
->  hw/vmapple/aes.c                    | 581 ++++++++++++++++++
->  hw/vmapple/bdif.c                   | 274 +++++++++
->  hw/vmapple/cfg.c                    | 195 ++++++
->  hw/vmapple/meson.build              |   5 +
->  hw/vmapple/trace-events             |  21 +
->  hw/vmapple/trace.h                  |   1 +
->  hw/vmapple/virtio-blk.c             | 204 +++++++
->  hw/vmapple/vmapple.c                | 612 +++++++++++++++++++
->  hw/xen/xen-pvh-common.c             |   2 +-
->  hw/xtensa/virt.c                    |   2 +-
->  include/hw/misc/pvpanic.h           |   1 +
->  include/hw/pci-host/gpex.h          |   7 +-
->  include/hw/pci/pci_ids.h            |   1 +
->  include/hw/qdev-properties-system.h |   5 +
->  include/hw/virtio/virtio-blk.h      |  11 +-
->  include/hw/vmapple/vmapple.h        |  23 +
->  include/qemu-main.h                 |  14 +-
->  include/qemu/cutils.h               |  15 +
->  meson.build                         |   5 +
->  qapi/virtio.json                    |  14 +
->  system/main.c                       |  37 +-
->  ui/cocoa.m                          |  54 +-
->  ui/gtk.c                            |   4 +
->  ui/sdl2.c                           |   4 +
->  util/hexdump.c                      |  18 +
->  52 files changed, 3791 insertions(+), 110 deletions(-)
->  create mode 100755 contrib/vmapple/uuid.sh
->  create mode 100644 docs/system/arm/vmapple.rst
->  create mode 100644 hw/display/apple-gfx-mmio.m
->  create mode 100644 hw/display/apple-gfx-pci.m
->  create mode 100644 hw/display/apple-gfx.h
->  create mode 100644 hw/display/apple-gfx.m
->  create mode 100644 hw/misc/pvpanic-mmio.c
->  create mode 100644 hw/vmapple/Kconfig
->  create mode 100644 hw/vmapple/aes.c
->  create mode 100644 hw/vmapple/bdif.c
->  create mode 100644 hw/vmapple/cfg.c
->  create mode 100644 hw/vmapple/meson.build
->  create mode 100644 hw/vmapple/trace-events
->  create mode 100644 hw/vmapple/trace.h
->  create mode 100644 hw/vmapple/virtio-blk.c
->  create mode 100644 hw/vmapple/vmapple.c
->  create mode 100644 include/hw/vmapple/vmapple.h
-> 
-> -- 
-> 2.39.5 (Apple Git-154)
+Reviewed-by: Thomas Huth <thuth@redhat.com>
 
 
