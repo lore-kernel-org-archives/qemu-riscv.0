@@ -4,68 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 54E74E77188
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 81F44E77199
 	for <qemu-riscv@archiver.kernel.org>; Wed,  8 Jan 2025 12:28:23 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tVV5P-0001ha-CG; Wed, 08 Jan 2025 07:22:59 -0500
+	id 1tVV5G-00010a-1l; Wed, 08 Jan 2025 07:22:50 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1tVV0s-00020k-8Y
- for qemu-riscv@nongnu.org; Wed, 08 Jan 2025 07:18:23 -0500
-Received: from mail-wm1-x332.google.com ([2a00:1450:4864:20::332])
+ id 1tVV0x-00021i-Vx
+ for qemu-riscv@nongnu.org; Wed, 08 Jan 2025 07:18:25 -0500
+Received: from mail-wr1-x42c.google.com ([2a00:1450:4864:20::42c])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1tVV0g-0002S2-S6
- for qemu-riscv@nongnu.org; Wed, 08 Jan 2025 07:18:15 -0500
-Received: by mail-wm1-x332.google.com with SMTP id
- 5b1f17b1804b1-4361c705434so120600515e9.3
- for <qemu-riscv@nongnu.org>; Wed, 08 Jan 2025 04:18:06 -0800 (PST)
+ id 1tVV0j-0002TV-Ey
+ for qemu-riscv@nongnu.org; Wed, 08 Jan 2025 07:18:21 -0500
+Received: by mail-wr1-x42c.google.com with SMTP id
+ ffacd0b85a97d-3862d161947so7917786f8f.3
+ for <qemu-riscv@nongnu.org>; Wed, 08 Jan 2025 04:18:08 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1736338685; x=1736943485; darn=nongnu.org;
+ d=linaro.org; s=google; t=1736338687; x=1736943487; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=6UOxR9mHFC4u/8ZQKvQLQtYEWlgMJY9tIWZpiZZUDDA=;
- b=PuMZJ6hpLUwpmhu/uVcgNtnNfCPxCTIOcBjTXPzk6Fb+EPnCj76tQ0m7SYXqLxlDWb
- fIEB6xhabm8PaFFZhsFrNiW1vjzXG7qnDzVPkyK0eGHz+panyCR3C8aAXqzLmT/5qPRE
- EfA2jVvsugCOM/jbpm5dOZqRGBwYdpFVS5GN26Os64HFXn0hu9mgSnCpVu5Se8/IrlyY
- Vjm6+rh28LVFYU83j+d+DPIaeQDztjpp6GIw2SmN9/5d0SX4rh4dtbQsBZfew3PfwLUp
- c2SMpAwfyLgS48bCdCtuzb+B8ol4zB6HdaJgpgjeA745SaMKp5dh7HjLn2aeSBM8Gu+x
- NaqQ==
+ bh=R2nl2q/jhmEGUG+F/0rLUrlSD8XWQpV+qDK7U0WrjiI=;
+ b=Zt8VsKM39Eyz+4ncWrs0mlcpHTdqdO7jR2UNtw8yr0LYsaaRqK4g5XyrWzaa2j9C7x
+ FjkCyDQ0TvBN/uBRJJl07LsCpvl5+or1aaoecYfVkNkndNjTo4D+8pc7wsEmj8H/PvBo
+ vfBJ8Os0ccM5om3c+G5+W3QpQMGN2rp5V1+GAucMwqNidjue1jKrYoaMpb6P/x4ltStZ
+ Q4pDtuhgMkvwmHPACnuimj3NroEF5ir4Uti2z6nGPrCxJFHu937lqwFoo011I3/Tporb
+ IsXjvhZxgDz4E9o7sDsQb4vyjLx6mEvX6+RDIx19yIrGRg2EYyTBFToG7CaOblrz6p04
+ VhzQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1736338685; x=1736943485;
+ d=1e100.net; s=20230601; t=1736338687; x=1736943487;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=6UOxR9mHFC4u/8ZQKvQLQtYEWlgMJY9tIWZpiZZUDDA=;
- b=cG/xW+NgXienwTsHr0G5oW8px8knDpTUHtA970S/v1KKZU79mZmsMtGuJ8YqMksaVq
- JFDDTZ4AMb6xxCzFIl//aGhBV+pjV/JdIy5DBaZQ42xF9rEpl4JtTg7ZpEwy4wjpe3+f
- 1fXCJe2YzqqQbduW+gKOtlPmYmLn0i4dD/rOgC853SUuFX1hPaG/cA7+RUF6l621lzhb
- hGm8QMAQtNiHKm4ugpIBO4wFdmoi1ufeqQIuSizqZ7WoGfRkJfxB8zRNsYicTwqGjz4t
- TiFB4gxGqMjUa+c5m4Vy3rn7MlywvBvlFN9/WFog1Rh4vJCT5PEX/8WXmYo+9q8JOxBV
- mvmw==
+ bh=R2nl2q/jhmEGUG+F/0rLUrlSD8XWQpV+qDK7U0WrjiI=;
+ b=dp8LWNfXhlz1nO+9QXQ0Oy+ReghK1ccbuJHRo+iiOwdatGX2JKOkCu3hFwKYiUWF7T
+ gk9h/p+oXODbgukBdKlP84t598hd9Dqszr1CliVyzQ/jycohI6KfYgxS5+b3TLohZUtU
+ Bka3S+Z7FQmnKjCWBTM2n0b8eciKQoNPIzPkGQIWb23/n9ewel2SUEkcWMt98LlLv0xo
+ VX2H/JLLRHISotCHVBWXKbDYqYZmMRT5fRdcwL8m/iLrEiP61tZ99Yc0X05L1+FiqqA2
+ ezqXCzk6e2rhKmbT4dWB808p1ZkeL34NotYQ6fVDfXC1qvotgzEjqQIUPG7HZQCTDCJV
+ CzJA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWtC0GG1NVKbB0ByNJDjh4ZCZBppWL9Va3r2eMGBFCXHkGBHSbCLr5NAvK8YOwJ6yAsg0Twf0dpI604@nongnu.org
-X-Gm-Message-State: AOJu0YzzFwp03e9lQwiwrna5cPKxxKsmLOT/cJ2Z/gud44RncHiTImsn
- m+NJQxnHc3nzoE6VOXQhPwhSfoGwximFKThwP6MiViCEz6pq9tBvo9dz+CKUI/U=
-X-Gm-Gg: ASbGncuNDo54FhVT10d5cs2CUj8Y2FjFbNw4eBp9e+tf1RVqtKG71u070ZYncYtuWWJ
- 7XnpaN4j34KSt6p3itl2v/iCtpmbWFbP11yivOP5jRC+JyXsEaXOxXxvVptrjtDaYkRKq4Nvkp3
- IFsa/g9oO1w1ErrV8s8cFmUWqbfU0Cc9VD/wpMvmbFsUqHlbAKK1Ygj7q9oxrOPZbnZbM1zjCYX
- HWOSRFO8eqHSH51mYPyYy6Ek8wuzXj3RglDAfrSn21KgQYoRxsXTO8=
-X-Google-Smtp-Source: AGHT+IGBl5HY0BvqGcsvaAvLVU7eaOYfih3Are+F+GhLUJfwjh4ETIDnTuMBN+lNnaq4mJQZWrFlBA==
-X-Received: by 2002:a05:600c:5486:b0:434:f131:1e64 with SMTP id
- 5b1f17b1804b1-436e2696d1fmr21053675e9.9.1736338685136; 
- Wed, 08 Jan 2025 04:18:05 -0800 (PST)
+ AJvYcCUCTNFGXIpUxcFdRbYu6D0ejKJof9zQa26x2g0nag637hgvH0ANqPPwBqepNBw6AdC7tJdl2/pZ+Ss8@nongnu.org
+X-Gm-Message-State: AOJu0YwLuRX+b4rx8Pv6csvJx7Yu6F9dAgkNhGsU7F3ft0OOG7AAiUuB
+ 9YSrBMJ5+G2SPk++UqJzEWtsEjQ77nGONlQEsg6lJiH16HGzmZMt9VJE0jsr38A=
+X-Gm-Gg: ASbGncvtcGjQ6i3iEscHOueySIIIzqe9jMBaUMdeTcKn+bj1HhYr+rymFPySeg3vNRL
+ TEMIK4JWTsVMSD09fpS2Esv1QuL+COEXH5o1jXpgbO2j4xe1bAyN/XE3zVGadUoNJ+tjxCXLMEk
+ WiQviyd+pABprf0x7f9wVKVWJBaj81JEjTY9x1ypyxACUwC/sXmDOuUuYJr8NtBd8VsqcNrcA9M
+ /vIUwQC4peh6t0TmgfwNblD+GM89C1sy1fpJra1i45/uvyhtTuky+c=
+X-Google-Smtp-Source: AGHT+IGqQsl2GPhaWoitdCIdyZtsoCpzPTjAvkULnI/gMkWCOcFqBO0gjgVi8JEbisOorHhN+M0Rvg==
+X-Received: by 2002:a5d:59af:0:b0:385:f677:859b with SMTP id
+ ffacd0b85a97d-38a872f7fbdmr2210583f8f.10.1736338687424; 
+ Wed, 08 Jan 2025 04:18:07 -0800 (PST)
 Received: from draig.lan ([85.9.250.243]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-38a1c847d7fsm52703371f8f.60.2025.01.08.04.18.02
+ 5b1f17b1804b1-436e2da6336sm19067545e9.8.2025.01.08.04.18.04
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 08 Jan 2025 04:18:02 -0800 (PST)
+ Wed, 08 Jan 2025 04:18:05 -0800 (PST)
 Received: from draig.lan (localhost [IPv6:::1])
- by draig.lan (Postfix) with ESMTP id 226965FD97;
- Wed,  8 Jan 2025 12:10:57 +0000 (GMT)
+ by draig.lan (Postfix) with ESMTP id E3FBB5FC6C;
+ Wed,  8 Jan 2025 12:10:56 +0000 (GMT)
 From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Halil Pasic <pasic@linux.ibm.com>, Aurelien Jarno <aurelien@aurel32.net>,
@@ -100,18 +100,17 @@ Cc: Halil Pasic <pasic@linux.ibm.com>, Aurelien Jarno <aurelien@aurel32.net>,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
  Palmer Dabbelt <palmer@dabbelt.com>,
  Peter Maydell <peter.maydell@linaro.org>, Li-Wen Hsu <lwhsu@freebsd.org>
-Subject: [PATCH v4 26/32] tests/lcitool: remove temp workaround for debian
- mips64el
-Date: Wed,  8 Jan 2025 12:10:48 +0000
-Message-Id: <20250108121054.1126164-27-alex.bennee@linaro.org>
+Subject: [PATCH v4 24/32] tests/lcitool: bump to latest version of libvirt-ci
+Date: Wed,  8 Jan 2025 12:10:46 +0000
+Message-Id: <20250108121054.1126164-25-alex.bennee@linaro.org>
 X-Mailer: git-send-email 2.39.5
 In-Reply-To: <20250108121054.1126164-1-alex.bennee@linaro.org>
 References: <20250108121054.1126164-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::332;
- envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x332.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::42c;
+ envelope-from=alex.bennee@linaro.org; helo=mail-wr1-x42c.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -134,115 +133,51 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Daniel P. Berrangé <berrange@redhat.com>
+We will shortly need this to build our riscv64 cross container.
+However to keep the delta down just do the bump first. As ccache4 is
+now preferred for FreeBSD to get the latest version there is a little
+update in the FreeBSD metadata.
 
-The workaround applied in
-
-  commit c60473d29254b79d9437eface8b342e84663ba66
-  Author: Alex Bennée <alex.bennee@linaro.org>
-  Date:   Wed Oct 2 10:03:33 2024 +0200
-
-    testing: bump mips64el cross to bookworm and fix package list
-
-Is no longer required since the affected builds are now fixed.
-
-Signed-off-by: Daniel P. Berrangé <berrange@redhat.com>
-Tested-by: Thomas Huth <thuth@redhat.com>
-Message-Id: <20241217133525.3836570-1-berrange@redhat.com>
 Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
+Reviewed-by: Daniel P. Berrangé <berrange@redhat.com>
 ---
- .../dockerfiles/debian-mips64el-cross.docker  |  9 ++++++
- tests/lcitool/mappings.yml                    | 29 -------------------
- 2 files changed, 9 insertions(+), 29 deletions(-)
+ .gitlab-ci.d/cirrus/freebsd-14.vars | 2 +-
+ tests/lcitool/libvirt-ci            | 2 +-
+ tests/vm/generated/freebsd.json     | 2 +-
+ 3 files changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/tests/docker/dockerfiles/debian-mips64el-cross.docker b/tests/docker/dockerfiles/debian-mips64el-cross.docker
-index c09a8da890..9f6c4763c5 100644
---- a/tests/docker/dockerfiles/debian-mips64el-cross.docker
-+++ b/tests/docker/dockerfiles/debian-mips64el-cross.docker
-@@ -93,13 +93,18 @@ RUN export DEBIAN_FRONTEND=noninteractive && \
-                       libcmocka-dev:mips64el \
-                       libcurl4-gnutls-dev:mips64el \
-                       libdaxctl-dev:mips64el \
-+                      libdrm-dev:mips64el \
-+                      libepoxy-dev:mips64el \
-                       libfdt-dev:mips64el \
-                       libffi-dev:mips64el \
-                       libfuse3-dev:mips64el \
-+                      libgbm-dev:mips64el \
-                       libgcrypt20-dev:mips64el \
-                       libglib2.0-dev:mips64el \
-                       libglusterfs-dev:mips64el \
-                       libgnutls28-dev:mips64el \
-+                      libgtk-3-dev:mips64el \
-+                      libgtk-vnc-2.0-dev:mips64el \
-                       libibverbs-dev:mips64el \
-                       libiscsi-dev:mips64el \
-                       libjemalloc-dev:mips64el \
-@@ -119,6 +124,8 @@ RUN export DEBIAN_FRONTEND=noninteractive && \
-                       librbd-dev:mips64el \
-                       librdmacm-dev:mips64el \
-                       libsasl2-dev:mips64el \
-+                      libsdl2-dev:mips64el \
-+                      libsdl2-image-dev:mips64el \
-                       libseccomp-dev:mips64el \
-                       libselinux1-dev:mips64el \
-                       libslirp-dev:mips64el \
-@@ -134,6 +141,8 @@ RUN export DEBIAN_FRONTEND=noninteractive && \
-                       libusb-1.0-0-dev:mips64el \
-                       libusbredirhost-dev:mips64el \
-                       libvdeplug-dev:mips64el \
-+                      libvirglrenderer-dev:mips64el \
-+                      libvte-2.91-dev:mips64el \
-                       libxdp-dev:mips64el \
-                       libzstd-dev:mips64el \
-                       nettle-dev:mips64el \
-diff --git a/tests/lcitool/mappings.yml b/tests/lcitool/mappings.yml
-index f8186b0e69..74eb13d62b 100644
---- a/tests/lcitool/mappings.yml
-+++ b/tests/lcitool/mappings.yml
-@@ -6,23 +6,6 @@ mappings:
-   flake8:
-     OpenSUSELeap15:
- 
--  # Due to https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=1081535 we
--  # have to disable all packages that depend on libgl1-mesa-dri:mips64el
--  gtk3:
--    mips64el-deb:
--
--  libdrm:
--    mips64el-deb:
--
--  libepoxy:
--    mips64el-deb:
--
--  gtk-vnc:
--    mips64el-deb:
--
--  mesa-libgbm:
--    mips64el-deb:
--
-   meson:
-     OpenSUSELeap15:
- 
-@@ -81,18 +64,6 @@ mappings:
-   python3-wheel:
-     OpenSUSELeap15: python311-pip
- 
--  sdl2:
--    mips64el-deb:
--
--  sdl2-image:
--    mips64el-deb:
--
--  virglrenderer:
--    mips64el-deb:
--
--  vte:
--    mips64el-deb:
--
- pypi_mappings:
-   # Request more recent version
-   meson:
+diff --git a/.gitlab-ci.d/cirrus/freebsd-14.vars b/.gitlab-ci.d/cirrus/freebsd-14.vars
+index 0a7ac5e0e1..0997c47af5 100644
+--- a/.gitlab-ci.d/cirrus/freebsd-14.vars
++++ b/.gitlab-ci.d/cirrus/freebsd-14.vars
+@@ -11,6 +11,6 @@ MAKE='/usr/local/bin/gmake'
+ NINJA='/usr/local/bin/ninja'
+ PACKAGING_COMMAND='pkg'
+ PIP3='/usr/local/bin/pip'
+-PKGS='alsa-lib bash bison bzip2 ca_root_nss capstone4 ccache cmocka ctags curl cyrus-sasl dbus diffutils dtc flex fusefs-libs3 gettext git glib gmake gnutls gsed gtk-vnc gtk3 json-c libepoxy libffi libgcrypt libjpeg-turbo libnfs libslirp libspice-server libssh libtasn1 llvm lzo2 meson mtools ncurses nettle ninja opencv pixman pkgconf png py311-numpy py311-pillow py311-pip py311-pyyaml py311-sphinx py311-sphinx_rtd_theme py311-tomli python3 rpm2cpio rust rust-bindgen-cli sdl2 sdl2_image snappy sndio socat spice-protocol tesseract usbredir virglrenderer vte3 xorriso zstd'
++PKGS='alsa-lib bash bison bzip2 ca_root_nss capstone4 ccache4 cmocka ctags curl cyrus-sasl dbus diffutils dtc flex fusefs-libs3 gettext git glib gmake gnutls gsed gtk-vnc gtk3 json-c libepoxy libffi libgcrypt libjpeg-turbo libnfs libslirp libspice-server libssh libtasn1 llvm lzo2 meson mtools ncurses nettle ninja opencv pixman pkgconf png py311-numpy py311-pillow py311-pip py311-pyyaml py311-sphinx py311-sphinx_rtd_theme py311-tomli python3 rpm2cpio rust rust-bindgen-cli sdl2 sdl2_image snappy sndio socat spice-protocol tesseract usbredir virglrenderer vte3 xorriso zstd'
+ PYPI_PKGS=''
+ PYTHON='/usr/local/bin/python3'
+diff --git a/tests/lcitool/libvirt-ci b/tests/lcitool/libvirt-ci
+index 9ad3f70bde..b6a65806bc 160000
+--- a/tests/lcitool/libvirt-ci
++++ b/tests/lcitool/libvirt-ci
+@@ -1 +1 @@
+-Subproject commit 9ad3f70bde9865d5ad18f36d256d472e72b5cbf3
++Subproject commit b6a65806bc9b2b56985f5e97c936b77c7e7a99fc
+diff --git a/tests/vm/generated/freebsd.json b/tests/vm/generated/freebsd.json
+index 3cb7fb7060..81fc38d798 100644
+--- a/tests/vm/generated/freebsd.json
++++ b/tests/vm/generated/freebsd.json
+@@ -13,7 +13,7 @@
+     "bzip2",
+     "ca_root_nss",
+     "capstone4",
+-    "ccache",
++    "ccache4",
+     "cmocka",
+     "ctags",
+     "curl",
 -- 
 2.39.5
 
