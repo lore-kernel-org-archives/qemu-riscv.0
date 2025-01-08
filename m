@@ -4,68 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B7C1DE77199
-	for <qemu-riscv@archiver.kernel.org>; Wed,  8 Jan 2025 12:21:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 21DA8E77188
+	for <qemu-riscv@archiver.kernel.org>; Wed,  8 Jan 2025 12:22:26 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tVUyj-0005JR-79; Wed, 08 Jan 2025 07:16:08 -0500
+	id 1tVV3Y-0005Hh-N3; Wed, 08 Jan 2025 07:21:05 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1tVUuZ-0000rw-Sj
- for qemu-riscv@nongnu.org; Wed, 08 Jan 2025 07:11:50 -0500
-Received: from mail-ed1-x52e.google.com ([2a00:1450:4864:20::52e])
+ id 1tVUup-0000yo-9g
+ for qemu-riscv@nongnu.org; Wed, 08 Jan 2025 07:12:09 -0500
+Received: from mail-ej1-x629.google.com ([2a00:1450:4864:20::629])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1tVUuQ-0007ER-Tr
- for qemu-riscv@nongnu.org; Wed, 08 Jan 2025 07:11:47 -0500
-Received: by mail-ed1-x52e.google.com with SMTP id
- 4fb4d7f45d1cf-5d41848901bso1649861a12.0
- for <qemu-riscv@nongnu.org>; Wed, 08 Jan 2025 04:10:59 -0800 (PST)
+ id 1tVUuV-0007Hb-7O
+ for qemu-riscv@nongnu.org; Wed, 08 Jan 2025 07:12:02 -0500
+Received: by mail-ej1-x629.google.com with SMTP id
+ a640c23a62f3a-aaeecbb7309so494480466b.0
+ for <qemu-riscv@nongnu.org>; Wed, 08 Jan 2025 04:11:06 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1736338258; x=1736943058; darn=nongnu.org;
+ d=linaro.org; s=google; t=1736338265; x=1736943065; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Pg+m2UYdTGTiO8GlV1naIIPUfqxpX1jKwvMJgPoN6cA=;
- b=dRgx/+YY+wAQoFlXVDTohGRUuJ2PbbxS0ygy0TX5OBZp0bqvNaFSp+NAEYfVBIyM9H
- sA+0XwGNOuOg44akCVcXNSW0pxnnW06PARFmX30v3lAa2rCsKFaAKxQqq003rsIK7LRM
- qqqeFib7zDblG8ILlQG2uQf4ot170g11iYMbKeWnZ3F4FySxFMkIOn/yxH+h7dqa0iWP
- 5aTjQm/hnDDC4PDTVsmw4HmUVui0Ak2AIY/2QZafvZF31094cEzel65jdzVbJwH14OtI
- oXezhDNpUcZ1+LRAIU7rdUjED4j3TkBVYIGh3Ng0bS+4K699SInDQEFvi/Fv6lzg0nNw
- 0Mhw==
+ bh=uQa8lE+2zCWqeETwyUKylE9fAVCRJIjj0umvCIZJA8E=;
+ b=h348wafUSuqbNXTztHO4uhG+C2enpCxb49sLpZJ4Cl84x3kAHZWCyJptlqAFWtlBgi
+ vMNkn8rIP1CVxMHyyWTNyLyEIWbjrnsuWzhBLVYvMgAVZjXeP2c5pZBZKvQmysyFp3wS
+ 35JbRnp51n4PyvZJ/oOQdoi1gyoisWp1l/UDvu1utJP24X22hkyb7x7HkAitzjsbb8KQ
+ EQMXIfwcIjsm6PziOXC6o3DlQ20VS1O218H8V2yGNRpR7D0ZqLx2/XCipE6gI6PHyzxo
+ Ua3K67caRd+CYO1bGb5QPOU2Hcvf7vmf8uo9ew1LLxJBPUCkeOdjR3+d9pGaGPb/Xb1T
+ 3vgQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1736338258; x=1736943058;
+ d=1e100.net; s=20230601; t=1736338265; x=1736943065;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Pg+m2UYdTGTiO8GlV1naIIPUfqxpX1jKwvMJgPoN6cA=;
- b=SOWFima0IDGYf3UXlyPWY0RCFNAk8Eml7T6BDN8ekHPmh01zySQTumLAIasO1FthFh
- b8XmJiBX3TP5hFjXE3/WkaVyML9PShCn3eAHITOpKaMmQWzjQ9ZVHXd5KS5wyRQ14HLX
- z6Y9A5wkuO3/z0bZrqq6vS/+x2G8CduRddGhD7g370/uQkjJ125k74gvcL2ROBLBRn48
- 4dRfj/ofOXuI6zBkh3anzqNN2KoHG1DZ+VgAUGn4+bpmgANW+blUhoVJbsmA7887laub
- HpSyKAFzumcZR6LFaqXeQl3KiLRGNBbTypFiyRf9zuKtL+sr94BgUSIPRsA7c4FJIhgC
- sP0Q==
+ bh=uQa8lE+2zCWqeETwyUKylE9fAVCRJIjj0umvCIZJA8E=;
+ b=CdFSXI4rTB5p4DnKpbCo8fMXC5BjFX3ZN/PcBukhH8OaFG8y5aYPGwj9dsDLoml9UM
+ Lf3eGvk6XVeZXIYcTAQ/8bsxcJlfuoXdnQ3rqXtibyOE7Q5aj0MNwrcAy7GSC84Ki2rZ
+ huOOLmGz8xqIpMXVQnjQdcwkEXSfeNggaer26t9VMkJ6YkkRMbv6j0O7F4PYdqaSENPJ
+ YKR4fvTBCnKZ7kgnLR5VAGzluhasockWUk7p6fG2BF0Hwk2zmEh2WfMAJwEr/2stf7zK
+ x95ShOV85/Gkx2NmkZB06nlEa65IEBElV4WGcB9AW9ZrJUX3KyoKZLZH6cVqVtPVJD+Z
+ p3tg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXjggzZ1qT/F7mju1P3a1Zi8fg6bQNP7v9xqzamjPzD9FYrj6Hw+mtpgJREqeq2GlcvyneWNfbjoA2n@nongnu.org
-X-Gm-Message-State: AOJu0YzpAl/5orf3Ol27YXGgSvDj0l0e1vVus0cU3WT7imHZ0c0xRxvJ
- X9Xzwki8a1psCKsb6YjDZRbGufVAhtYJh6IqhQKl/H3cLeeMUbkvx18zZYm0Iw4=
-X-Gm-Gg: ASbGnctnv0NJwywTQdF318nuWqQTQwsEmZ2Bq4ZTZMhEwx3M0CxK8wk+9rgyQvYHcGE
- jDDvR5gqYAaf6PeNMv5OdCEgHVBXfj2+cOYfyMl08CiuIOGOuilfGKb8zfsuxpGnGjtbc+Ep0Vd
- XUxCTr+uN/InCVmqHXWoDK0fKjUJMI8fAGHHdxrlwV8kcOxMNNp6I9m+Y9Fu7p5t0YBJQ6H2lt0
- HTVFwofbvCtei+txiH4lsnBMqL3GzYy0LFZEMKKeTvocqkvr6Wdmq8=
-X-Google-Smtp-Source: AGHT+IGOZY2nvTjhj3zWQSDNUTRwhKCNJNu/AcYrj5Rp4lgF4m6lof8nW7rGnNE8g7247+2hBQiIag==
-X-Received: by 2002:a05:6402:4304:b0:5d3:f041:140e with SMTP id
- 4fb4d7f45d1cf-5d95e916cc8mr6054857a12.13.1736338258475; 
- Wed, 08 Jan 2025 04:10:58 -0800 (PST)
+ AJvYcCXX7gdXUBgZcURHeAaiYfw5aPBner/cZHIZfqQWIii3esBLDl1DRrokbhq02uvwjChYe+jX3TxcG6ds@nongnu.org
+X-Gm-Message-State: AOJu0YyW+GsTqGc+6RXWbUdur74mss2+udFfkUF+Lt60K3zmmK7E2f9c
+ zTX+lxMvkZZ/kOUNaleA0sOGCsYSst+eVZZn9nLXkolOTki8UM+TZM4CLhl20nY=
+X-Gm-Gg: ASbGncsFWbpfZxA+/aYKLo7oVETLBwTCqwNhkQEnB3OSHWRsG7TB6SMZES0/DqWoOkx
+ r/oWktV7Z6IeUYKf56K4Qo2zEnP8I+giqrN39kx7UDYyhacJMosIEvvFrH67U4QhSahTukqRBZR
+ xp4RMhoVz7ydyEmcnwsbSnULJPxe69kzwcrhA1pshk+mpiVlga8GMCrtUhz6KBUmG585He707MC
+ NVbTI42ISNhb3zM526nZvujEKjDi7c4qB8MvSZM9ty1lh1ai4eHkmY=
+X-Google-Smtp-Source: AGHT+IFg4PSxTBSnxHklWbGLZwPVvdsB5IX5lpcHHCk4n5FcHU2/CcDmHK0/G621kOiB7YQBkAs+kQ==
+X-Received: by 2002:a17:907:8004:b0:ab2:b72e:cf44 with SMTP id
+ a640c23a62f3a-ab2b72efaabmr99942166b.2.1736338261248; 
+ Wed, 08 Jan 2025 04:11:01 -0800 (PST)
 Received: from draig.lan ([85.9.250.243]) by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5d80676f40fsm25228478a12.28.2025.01.08.04.10.55
+ a640c23a62f3a-aac0f014df7sm2474107866b.152.2025.01.08.04.10.57
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 08 Jan 2025 04:10:56 -0800 (PST)
+ Wed, 08 Jan 2025 04:10:58 -0800 (PST)
 Received: from draig.lan (localhost [IPv6:::1])
- by draig.lan (Postfix) with ESMTP id D67835F929;
- Wed,  8 Jan 2025 12:10:54 +0000 (GMT)
+ by draig.lan (Postfix) with ESMTP id 8990B5F959;
+ Wed,  8 Jan 2025 12:10:55 +0000 (GMT)
 From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Halil Pasic <pasic@linux.ibm.com>, Aurelien Jarno <aurelien@aurel32.net>,
@@ -101,17 +101,17 @@ Cc: Halil Pasic <pasic@linux.ibm.com>, Aurelien Jarno <aurelien@aurel32.net>,
  Palmer Dabbelt <palmer@dabbelt.com>,
  Peter Maydell <peter.maydell@linaro.org>, Li-Wen Hsu <lwhsu@freebsd.org>,
  Anders Roxell <anders.roxell@linaro.org>
-Subject: [PATCH v4 03/32] tests/functional: add a m68k tuxrun tests
-Date: Wed,  8 Jan 2025 12:10:25 +0000
-Message-Id: <20250108121054.1126164-4-alex.bennee@linaro.org>
+Subject: [PATCH v4 10/32] tests/functional: update the riscv32 tuxrun tests
+Date: Wed,  8 Jan 2025 12:10:32 +0000
+Message-Id: <20250108121054.1126164-11-alex.bennee@linaro.org>
 X-Mailer: git-send-email 2.39.5
 In-Reply-To: <20250108121054.1126164-1-alex.bennee@linaro.org>
 References: <20250108121054.1126164-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::52e;
- envelope-from=alex.bennee@linaro.org; helo=mail-ed1-x52e.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::629;
+ envelope-from=alex.bennee@linaro.org; helo=mail-ej1-x629.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -134,90 +134,37 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-We didn't have this before and as it exercises the m68k virt platform
-it seems worth adding. We don't wait for the shutdown because QEMU
-will auto-exit on the shutdown.
+Now there are new up to date images available we should update to them.
 
-Cc: Laurent Vivier <laurent@vivier.eu>
 Cc: Anders Roxell <anders.roxell@linaro.org>
 Reviewed-by: Thomas Huth <thuth@redhat.com>
+Tested-by: Thomas Huth <thuth@redhat.com>
 Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
-Message-Id: <20241121165806.476008-24-alex.bennee@linaro.org>
-
+Message-Id: <20241121165806.476008-31-alex.bennee@linaro.org>
 ---
-v2
-  - add to MAINTAINERS
----
- MAINTAINERS                          |  1 +
- tests/functional/meson.build         |  1 +
- tests/functional/test_m68k_tuxrun.py | 34 ++++++++++++++++++++++++++++
- 3 files changed, 36 insertions(+)
- create mode 100644 tests/functional/test_m68k_tuxrun.py
+ tests/functional/test_riscv32_tuxrun.py | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index 2101b51217..cab9018d9f 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -1288,6 +1288,7 @@ F: include/hw/intc/goldfish_pic.h
- F: include/hw/intc/m68k_irqc.h
- F: include/hw/misc/virt_ctrl.h
- F: docs/specs/virt-ctlr.rst
-+F: tests/functional/test_m68k_tuxrun.py
+diff --git a/tests/functional/test_riscv32_tuxrun.py b/tests/functional/test_riscv32_tuxrun.py
+index 49b57cd428..3c570208d0 100755
+--- a/tests/functional/test_riscv32_tuxrun.py
++++ b/tests/functional/test_riscv32_tuxrun.py
+@@ -17,11 +17,11 @@
+ class TuxRunRiscV32Test(TuxRunBaselineTest):
  
- MicroBlaze Machines
- -------------------
-diff --git a/tests/functional/meson.build b/tests/functional/meson.build
-index a5087fcb34..7890dcb86d 100644
---- a/tests/functional/meson.build
-+++ b/tests/functional/meson.build
-@@ -116,6 +116,7 @@ tests_m68k_system_thorough = [
-   'm68k_mcf5208evb',
-   'm68k_nextcube',
-   'm68k_q800',
-+  'm68k_tuxrun',
- ]
+     ASSET_RISCV32_KERNEL = Asset(
+-        'https://storage.tuxboot.com/20230331/riscv32/Image',
+-        '89599407d7334de629a40e7ad6503c73670359eb5f5ae9d686353a3d6deccbd5')
++        'https://storage.tuxboot.com/buildroot/20241119/riscv32/Image',
++        '872bc8f8e0d4661825d5f47f7bec64988e9d0a8bd5db8917d57e16f66d83b329')
+     ASSET_RISCV32_ROOTFS = Asset(
+-        'https://storage.tuxboot.com/20230331/riscv32/rootfs.ext4.zst',
+-        '7168d296d0283238ea73cd5a775b3dd608e55e04c7b92b76ecce31bb13108cba')
++        'https://storage.tuxboot.com/buildroot/20241119/riscv32/rootfs.ext4.zst',
++        '511ad34e63222db08d6c1da16fad224970de36517a784110956ba6a24a0ee5f6')
  
- tests_microblaze_system_thorough = [
-diff --git a/tests/functional/test_m68k_tuxrun.py b/tests/functional/test_m68k_tuxrun.py
-new file mode 100644
-index 0000000000..7eacba135f
---- /dev/null
-+++ b/tests/functional/test_m68k_tuxrun.py
-@@ -0,0 +1,34 @@
-+#!/usr/bin/env python3
-+#
-+# Functional test that boots known good tuxboot images the same way
-+# that tuxrun (www.tuxrun.org) does. This tool is used by things like
-+# the LKFT project to run regression tests on kernels.
-+#
-+# Copyright (c) 2024 Linaro Ltd.
-+#
-+# Author:
-+#  Alex Bennée <alex.bennee@linaro.org>
-+#
-+# SPDX-License-Identifier: GPL-2.0-or-later
-+
-+from qemu_test import Asset
-+from qemu_test.tuxruntest import TuxRunBaselineTest
-+
-+class TuxRunM68KTest(TuxRunBaselineTest):
-+
-+    ASSET_M68K_KERNEL = Asset(
-+        'https://storage.tuxboot.com/buildroot/20241119/m68k/vmlinux',
-+        '7754e1d5cec753ccf1dc6894729a7f54c1a4965631ebf56df8e4ce1163ad19d8')
-+    ASSET_M68K_ROOTFS = Asset(
-+        'https://storage.tuxboot.com/buildroot/20241119/m68k/rootfs.ext4.zst',
-+        '557962ffff265607912e82232cf21adbe0e4e5a88e1e1d411ce848c37f0213e9')
-+
-+    def test_m68k(self):
-+        self.set_machine('virt')
-+        self.cpu="m68040"
-+        self.common_tuxrun(kernel_asset=self.ASSET_M68K_KERNEL,
-+                           rootfs_asset=self.ASSET_M68K_ROOTFS,
-+                           drive="virtio-blk-device")
-+
-+if __name__ == '__main__':
-+    TuxRunBaselineTest.main()
+     def test_riscv32(self):
+         self.set_machine('virt')
 -- 
 2.39.5
 
