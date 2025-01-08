@@ -4,80 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 208BEE77188
-	for <qemu-riscv@archiver.kernel.org>; Wed,  8 Jan 2025 14:16:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DC712E77188
+	for <qemu-riscv@archiver.kernel.org>; Wed,  8 Jan 2025 14:17:34 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tVWq5-00063j-AO; Wed, 08 Jan 2025 09:15:17 -0500
+	id 1tVWsA-0007OB-11; Wed, 08 Jan 2025 09:17:28 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1tVWq3-00062B-4z
- for qemu-riscv@nongnu.org; Wed, 08 Jan 2025 09:15:15 -0500
+ (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1tVWr9-00072M-PA
+ for qemu-riscv@nongnu.org; Wed, 08 Jan 2025 09:16:42 -0500
 Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1tVWq0-0004zl-Fk
- for qemu-riscv@nongnu.org; Wed, 08 Jan 2025 09:15:14 -0500
+ (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1tVWr4-0006i0-BF
+ for qemu-riscv@nongnu.org; Wed, 08 Jan 2025 09:16:20 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1736345711;
+ s=mimecast20190719; t=1736345777;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
- bh=6xKFvF+CTfc/Sx73gmcJGcAlmt1nugJqIuC/683n58I=;
- b=O/m1izuM+FOkvtl7RKmu2tiKPu06BXkrKEi3cHel2sz6Gs80Ph8sxCrRLALw5acMKynIl0
- DcT0CqwZWPoMT9oWFN8W8ZWembaFitCpEn5nqsfdBhq4ZInCYMFfszMdkYYP8LydYeTV0u
- qE1j6s3jqcDBmVFqMZsJEC4w4VDmzjM=
-Received: from mail-qv1-f72.google.com (mail-qv1-f72.google.com
- [209.85.219.72]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=5SxCrXjPyCzH10dGnHirxcsiqvKBep00xpCe5jk1cjQ=;
+ b=FAe6INvIHkCFYtPPU6ZllkYrmm6W6zWs0bZT7vlrtxTLsVnc6lxKdFFhYFlu2l+cBhs/70
+ JB2xtfjPoSWyX7JM8GsaYD72024duxPXvKWfbQNSR6ZFRR+2fmfmF8vXbntJAg9oa6459S
+ T6jJMVi5QvbqltGS8Sh6woZEmRt6dKs=
+Received: from mail-qv1-f69.google.com (mail-qv1-f69.google.com
+ [209.85.219.69]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-647-RpPy6GpNPO2GpLoyBMgf0g-1; Wed, 08 Jan 2025 09:15:08 -0500
-X-MC-Unique: RpPy6GpNPO2GpLoyBMgf0g-1
-X-Mimecast-MFC-AGG-ID: RpPy6GpNPO2GpLoyBMgf0g
-Received: by mail-qv1-f72.google.com with SMTP id
- 6a1803df08f44-6d8f78fdad0so253142296d6.2
- for <qemu-riscv@nongnu.org>; Wed, 08 Jan 2025 06:15:08 -0800 (PST)
+ us-mta-97-QRXwv5T2MoqBFVH8piDPYg-1; Wed, 08 Jan 2025 09:16:16 -0500
+X-MC-Unique: QRXwv5T2MoqBFVH8piDPYg-1
+X-Mimecast-MFC-AGG-ID: QRXwv5T2MoqBFVH8piDPYg
+Received: by mail-qv1-f69.google.com with SMTP id
+ 6a1803df08f44-6dd43b16631so179604216d6.2
+ for <qemu-riscv@nongnu.org>; Wed, 08 Jan 2025 06:16:16 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1736345707; x=1736950507;
+ d=1e100.net; s=20230601; t=1736345775; x=1736950575;
  h=content-transfer-encoding:in-reply-to:autocrypt:content-language
  :from:references:cc:to:subject:user-agent:mime-version:date
  :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=6xKFvF+CTfc/Sx73gmcJGcAlmt1nugJqIuC/683n58I=;
- b=r3Ih4dFcG0roBgAddiMA3F6/ZuUoa5k1Tp5S7eb97P10kGHHieqV7AR6JFyPylzsUO
- j1r9NtcSGmqMpBfvPeAx5Dg1qRGSTBx9yr1FdUZc1Va17BHWw1p0uOVUxOmkPD/pCRsx
- SKyGtKZUMvhiTyAUaXLxzVsP90w4gjMq8obTWKTNGcVAQavcVSvBcoOcOhSL9R9rrK/A
- EEYRH0r4ugeOyKlic2caHY7XOpTi6eqE4Io8nhe3tCM3/CJTTHpPYIRux4ek+hPBsM9S
- zGTRpQLmF+hnz6tDA/UOiUC+lvaPV615HoNHu68aEndITTQxQ3tmuCpdHaF472ye4YM0
- JhTg==
+ bh=5SxCrXjPyCzH10dGnHirxcsiqvKBep00xpCe5jk1cjQ=;
+ b=DEun5exbw0XaDYhjk1qodfbqPhC13Xxms0tHuU3jX9JRipkltswnxOr0dlmWovikXm
+ mRnokL228ULqxK8iY0hL36/SfhEsEfONVx4vgpzhkIntsmMfle3rtmc94y/C1m8+eGVo
+ U1869ZEQLk8GTtqcV1Osb0l1FP1UcdgWXNs4wDIQ6NZMAx3uaHBezlWcRoW8b45e5Kwg
+ +7MqDe+s8/5R4OOeN3u+0lgQ47OMQSJ66poSVFmt4ANWZ8Fjx11QLDQjJfRYpFwPsJRn
+ rZyd5i19YVnt7ovwJiKB8JxK1Wzvs2o27N6Qscf2gUo8Xr3OCKFcliuS6r312HtcfY1I
+ 4Bug==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUJsCWh+zjyctKf5cMiG6IQI79Nw6RLQqIfkNk+BOQE/xHjPAocW2wNS/AL1VsNUN45LIgt9tyF4BBf@nongnu.org
-X-Gm-Message-State: AOJu0YwH/rx2oB6VMWpQeaAWlwcKCOd/WE1SM57gEthx4HgJSGuW0755
- lGXJ0DI4k6NcO7eo04613eRZIRHVAJF4lJWFhYkQBjWarItih8efuWNjoxF/s5lYv1/For7ZKen
- WccDmKluUXeetj35FGALos78udW51NHcbvj9nF+t/9h4ua2I7p00Q
-X-Gm-Gg: ASbGncsOOo5PPL+rnxurtjWEtjRxX8S64Dt5j5GtgBDuexvoTW4o33IAVKVu05xFXkf
- 4RM0b14a76EtIVrdlfS++1HVMmEalISHti9hmCBPEmfVo/EmV5pAtaoigf0RY5fYKCQsHVDeddq
- g5JpvbUne/gVlp9y7MOTWswTeEOVkrebWroQr517JtLnlHYVcyYcaJP7UPpwVX9vBQEqOh6CRC+
- 7Ayj6fGoMo/ll3EU28GuK0FtxjDeA3maKM1NnpUZZPRW+OOMb6Zn+PfKnavssLC3gghc29eRtci
- Ke4AMw==
-X-Received: by 2002:ad4:5967:0:b0:6d8:8aa6:ef27 with SMTP id
- 6a1803df08f44-6df9b2d7f31mr51264396d6.38.1736345707526; 
- Wed, 08 Jan 2025 06:15:07 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IF3i3rsX9px8lK3V6fS+YqRn1Jlw2pBrrzfYBTXOzgsCFyL3548rAfZc6ZYPfZlSLWNsU+9Lw==
-X-Received: by 2002:ad4:5967:0:b0:6d8:8aa6:ef27 with SMTP id
- 6a1803df08f44-6df9b2d7f31mr51263836d6.38.1736345707164; 
- Wed, 08 Jan 2025 06:15:07 -0800 (PST)
+ AJvYcCXNaxmOons7YbnCMGriaRayXtizmimd2H3jvnd85t0AZ8/XvvyvqHz9sxbfrRaaikB8GQrksohaTRdq@nongnu.org
+X-Gm-Message-State: AOJu0YxAxTVnlvP6TUx8mY6nL8SgYm38ozOeVqdJJjjnkFl8crBSa+MH
+ lFF+GNbU7y72Ko8cMfYzek+MOtzP3px0D4DdI9ASjpA0PympfRt1RPn2KgNDYTAaQ1b5Qv0vMfL
+ zIQKLcw8G+q1c5YLM1dZ+9kkajfq/o91v/uytxvs8iMgMa3jKVEgTsBQfx5LV
+X-Gm-Gg: ASbGncv8l/XMvP1aNQ49/4zdxuDRgeHSz7kof/N1dNP+TfqhNdOtClTjQSM7T4fJBX6
+ MxFVvE4rfqqNTn5mchBmz/y5BejVXnSsazrsK6cYv1k94HWpqLoWAhre9Z3wvZGO5VP5/J74rVE
+ o6KGAp17S2D0qhROto9Bs0z7C4hYuLLvYpJwT8eO0Fm7gP4Kf1ADNILRK7xi1b2hd8FvjMi0mCK
+ 8VLsa0rQ4Drd6+DZloilrJym5W1879VJHhKyXeMVaGGArpykfI28w8SzJIkv1PMmHvI9xi6lLsE
+ rBwYTg==
+X-Received: by 2002:a05:6214:5f06:b0:6d9:353b:aa26 with SMTP id
+ 6a1803df08f44-6df9b1ef342mr48895766d6.13.1736345775669; 
+ Wed, 08 Jan 2025 06:16:15 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IEWdNFvOyzSCyKWuohZWw5l63MV9cCcSiiE3GaVn2N3YpH0CCfhVHk2gOnbFlnxHzu+70PcVg==
+X-Received: by 2002:a05:6214:5f06:b0:6d9:353b:aa26 with SMTP id
+ 6a1803df08f44-6df9b1ef342mr48895476d6.13.1736345775328; 
+ Wed, 08 Jan 2025 06:16:15 -0800 (PST)
 Received: from [10.33.192.228] (nat-pool-str-t.redhat.com. [149.14.88.106])
  by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-46a3e6a9cb6sm196062931cf.51.2025.01.08.06.15.01
+ 6a1803df08f44-6dd18137419sm190985636d6.69.2025.01.08.06.16.09
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 08 Jan 2025 06:15:06 -0800 (PST)
-Message-ID: <e9ea11e0-8833-4f76-a13c-0616c286a6ec@redhat.com>
-Date: Wed, 8 Jan 2025 15:15:00 +0100
+ Wed, 08 Jan 2025 06:16:14 -0800 (PST)
+Message-ID: <d843d910-9f00-4bf3-a3e7-f983f0b35676@redhat.com>
+Date: Wed, 8 Jan 2025 15:16:09 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 21/32] tests/functional: remove unused
- kernel_command_line
+Subject: Re: [PATCH v4 22/32] tests/functional: bail aarch64_virt tests early
+ if missing TCG
 To: =?UTF-8?Q?Alex_Benn=C3=A9e?= <alex.bennee@linaro.org>,
  qemu-devel@nongnu.org
 Cc: Halil Pasic <pasic@linux.ibm.com>, Aurelien Jarno <aurelien@aurel32.net>, 
@@ -111,7 +111,7 @@ Cc: Halil Pasic <pasic@linux.ibm.com>, Aurelien Jarno <aurelien@aurel32.net>,
  Palmer Dabbelt <palmer@dabbelt.com>, Peter Maydell
  <peter.maydell@linaro.org>, Li-Wen Hsu <lwhsu@freebsd.org>
 References: <20250108121054.1126164-1-alex.bennee@linaro.org>
- <20250108121054.1126164-22-alex.bennee@linaro.org>
+ <20250108121054.1126164-23-alex.bennee@linaro.org>
 From: Thomas Huth <thuth@redhat.com>
 Autocrypt: addr=thuth@redhat.com; keydata=
  xsFNBFH7eUwBEACzyOXKU+5Pcs6wNpKzrlJwzRl3VGZt95VCdb+FgoU9g11m7FWcOafrVRwU
@@ -155,9 +155,9 @@ Autocrypt: addr=thuth@redhat.com; keydata=
  oiT+z+/E59qj/EKfyce3sbC9XLjXv3mHMrq1tKX4G7IJGnS989E/fg6crv6NHae9Ckm7+lSs
  IQu4bBP2GxiRQ+NV3iV/KU3ebMRzqIC//DCOxzQNFNJAKldPe/bKZMCxEqtVoRkuJtNdp/5a
  yXFZ6TfE1hGKrDBYAm4vrnZ4CXFSBDllL59cFFOJCkn4Xboj/aVxxJxF30bn
-In-Reply-To: <20250108121054.1126164-22-alex.bennee@linaro.org>
+In-Reply-To: <20250108121054.1126164-23-alex.bennee@linaro.org>
 X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: fq-NAyg8jip3K9Sm-4iZOdCgGBxz4qsQZwaDzMlCDJg_1736345707
+X-Mimecast-MFC-PROC-ID: muoOU3WYoYH4o64TjrL_vn8j-kIObAWGUI1IPro3wD0_1736345775
 X-Mimecast-Originator: redhat.com
 Content-Language: en-US
 Content-Type: text/plain; charset=UTF-8; format=flowed
@@ -188,27 +188,14 @@ Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 On 08/01/2025 13.10, Alex Bennée wrote:
-> The Alpine test boots from the CDROM so we don't --append a command
-> line. Drop the unused code.
+> The set_machine and require_accelerator steps can bail early so move
+> those to the front of the test functions. While we are at it also
+> clean up some long lines when adding the vm arguments.
 > 
 > Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
 > ---
->   tests/functional/test_aarch64_virt.py | 2 --
->   1 file changed, 2 deletions(-)
-> 
-> diff --git a/tests/functional/test_aarch64_virt.py b/tests/functional/test_aarch64_virt.py
-> index 2d9995a95d..b3d3b0ee51 100755
-> --- a/tests/functional/test_aarch64_virt.py
-> +++ b/tests/functional/test_aarch64_virt.py
-> @@ -41,8 +41,6 @@ def test_alpine_virt_tcg_gic_max(self):
->   
->           self.set_machine('virt')
->           self.vm.set_console()
-> -        kernel_command_line = (self.KERNEL_COMMON_COMMAND_LINE +
-> -                               'console=ttyAMA0')
->           self.require_accelerator("tcg")
->   
->           self.vm.add_args("-accel", "tcg")
+>   tests/functional/test_aarch64_virt.py | 11 +++++++----
+>   1 file changed, 7 insertions(+), 4 deletions(-)
 
 Reviewed-by: Thomas Huth <thuth@redhat.com>
 
