@@ -4,89 +4,168 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 03A91E77199
-	for <qemu-riscv@archiver.kernel.org>; Thu,  9 Jan 2025 10:57:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9B32DE77197
+	for <qemu-riscv@archiver.kernel.org>; Thu,  9 Jan 2025 12:14:08 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tVqDy-0000iW-Kj; Thu, 09 Jan 2025 05:57:14 -0500
+	id 1tVrPv-0007ts-Dt; Thu, 09 Jan 2025 07:13:39 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <jason.chien@sifive.com>)
- id 1tVqDx-0000hp-Tj
- for qemu-riscv@nongnu.org; Thu, 09 Jan 2025 05:57:13 -0500
-Received: from mail-ed1-x532.google.com ([2a00:1450:4864:20::532])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <jason.chien@sifive.com>)
- id 1tVqDu-00008k-UV
- for qemu-riscv@nongnu.org; Thu, 09 Jan 2025 05:57:13 -0500
-Received: by mail-ed1-x532.google.com with SMTP id
- 4fb4d7f45d1cf-5d7e3f1fdafso1413019a12.0
- for <qemu-riscv@nongnu.org>; Thu, 09 Jan 2025 02:57:09 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1736420228; x=1737025028; darn=nongnu.org;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=QZizyE+sqVqNzd/4+/3++039N742rp8OayC2oGAAPnk=;
- b=K9TF3CswzFn28cESMU64Ycq7JnPREaoAGT0FBP0bH0U1vmSCAuPdZ92Z3UtqeiDUyc
- uJ38OMnWnGgyIpjxNFZgp2SlZP87GZOknHvcBnUldnG1gz6+3E1RzEhi+VfP6m5OeU7Z
- j4n5fY8hqW+e/nLakZfrVYM60R9yk7xJ6u/zE4znhDkbGbUApGgSdUJhX+A1k2gx83sT
- ofJz+KxNDrNPXP/o0sR/0bPCegRbvdIwDSiarV4lwey4/itmCUmB5z7LqpKgl9TMdG37
- YlB351KAxNpWFZw1l4nfOjJgprSRLJ3lkprIAETJYJL/ynW9A8bSaFFHrovrGLuzsIU6
- WUaA==
+ (Exim 4.90_1) (envelope-from <pbonzini@redhat.com>)
+ id 1tVrPn-0007sO-4m
+ for qemu-riscv@nongnu.org; Thu, 09 Jan 2025 07:13:32 -0500
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <pbonzini@redhat.com>)
+ id 1tVrPf-0006Pu-Dc
+ for qemu-riscv@nongnu.org; Thu, 09 Jan 2025 07:13:25 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1736424801;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
+ bh=95jH6vHVWwQhzjGzsxp2UEhTwqVMJr7Wv8BTRN7e3fA=;
+ b=g82AjQsLcc3MNs6haLiwyR4l/ecMLqGHtEzLlF5sdf16RNbQOlVpjLvh0ayC3qxC60xpPF
+ ybXxnXzx70eYIGS397VVVxeXZUMPoKTgZqMe5P8clkATiPJ446mdkYaJxiniZIlcVG+5iT
+ e+Pw2FWS0VbQnOWma+7WuXEr78yxhIE=
+Received: from mail-ed1-f69.google.com (mail-ed1-f69.google.com
+ [209.85.208.69]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-231-kryEYgcTNB-PRkcpiACF6A-1; Thu, 09 Jan 2025 07:13:20 -0500
+X-MC-Unique: kryEYgcTNB-PRkcpiACF6A-1
+X-Mimecast-MFC-AGG-ID: kryEYgcTNB-PRkcpiACF6A
+Received: by mail-ed1-f69.google.com with SMTP id
+ 4fb4d7f45d1cf-5d3fe75a9f0so718292a12.3
+ for <qemu-riscv@nongnu.org>; Thu, 09 Jan 2025 04:13:19 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1736420228; x=1737025028;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1736424799; x=1737029599;
+ h=content-transfer-encoding:in-reply-to:autocrypt:content-language
+ :from:references:cc:to:subject:user-agent:mime-version:date
+ :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=QZizyE+sqVqNzd/4+/3++039N742rp8OayC2oGAAPnk=;
- b=SYKDmWZGjiHCWLRy/gAq+hDeDhRkDsIQDtBYwI0sEWZkGezZEylAhLoXLc0TOkbT1J
- OyF14yHhf+hKybA64xwaiH2ihggVFwWLcOhZUY4d0JrJ6kZp1ex/yetXkUu56jh+qJFs
- j5ByVTsoL2Riuk/SVgqCOMDCpXDm+Gs6/4XlKslI8DfJTSGx2zC9ACMIv6I6KopkxbRa
- i27Jgm37OLfpDfXcgittq5W8ITY+eIhlIVi4OgiXLJRDOLdYZzXs6U/0pmTgLYZIyddC
- HySCXsX6CbYlHoi5XdClDNTclB1w3/Pt1FILPtcCdhqG85t65aPiwIQpMq/bC1UA4lAt
- ibnw==
+ bh=95jH6vHVWwQhzjGzsxp2UEhTwqVMJr7Wv8BTRN7e3fA=;
+ b=OrsX2JbXBrzSbshitG/MsnLgVzNrC5OfJSmA9Ah9CAOIU1iGWUj74fZizmfu9cEM49
+ cVHTHCb6ZYdxL9Nn0Q2YsJx08oih2wKb/VsuKY7zRHFPCuZwSsvyLGUJRNZtGMb3kncC
+ 4sqJH7/5AyeAx/E5UkGO9kQg6qot162lhItR/CIa/tXaZ9Kuc3OgzGe66K/5Yis7vCTl
+ 7aHYYq6lo7B1xVvUKODasHQOqja9YjFQf1iKp5SWzAvtPxgsexOzex2eTMnT5ll0mxm3
+ QwaUMIeaH8Aeonzz4aKCK7YTYkxSoVRMYRvDP21gtdRt5q7lAHICjxljSw+rOEfWNCop
+ lYQA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCX3w/IUUM7pJ1iL3Od30T/TAwFl+ARb6nk8K7BftvUm61acPEmRAOEn7hqvJ0WBYReXBLQIUFUnNKQ1@nongnu.org
-X-Gm-Message-State: AOJu0YwZkg+znD1mhQb/RC3Md35rUUikfE+FTDqdX9vA+SIcEDpPSIpR
- 7LoGHhfbtpqZaneeIN5cFumHZjyjncfrGN7MVWNf88R815n2hdfhaKN6wAXNW1BTdUp+ShD2HsK
- ln8Rrfgf2rGhsr3tHwlsQC67eXlb3XBLyWJIu1SUGpAlO2UAW
-X-Gm-Gg: ASbGncuYaOhyGQ2QwETg+dTAWis7QGFiAHOSrb2TLg24+aJDYUI5ZeSuDbOy/dutnvv
- zVl+/Q5pK3hX3J8jOrM8/MnHvKqgwF2g/MhMzAx9c
-X-Google-Smtp-Source: AGHT+IG7A1vWPzerGDGp5qybFTkUqfSIrPuGxpjc17kfgbDZ6lFrUY/D/HohdGgpzN20lQlgwucntd+OrIS+aQZgdHY=
-X-Received: by 2002:a05:6402:4415:b0:5d1:1f1:a283 with SMTP id
- 4fb4d7f45d1cf-5d972df6fecmr5421704a12.4.1736420228620; Thu, 09 Jan 2025
- 02:57:08 -0800 (PST)
+ AJvYcCX36V62ZmLazBlMp3yz44GBRCot8jzI6OmOrhNLBPZcsFIFLMxImEQ5lpoa2g8fNLl8/nqUh0kMAQ5C@nongnu.org
+X-Gm-Message-State: AOJu0YwTCzM3hnACEdUMaWGP+3TVankp4v1qGmrK9TFqjWhYzJQFDoz2
+ zkENMom8HgfNudX8b2vt/mWMMDqD/zY8MVl1Fmmj4/bt04j6fFYYtmm7OSJvJ7VMy10buaQuE03
+ RDa6NFFtH9UZJKYNkXOdKpY04URWhj7N+8TouQ7RhPur593y1OA4m
+X-Gm-Gg: ASbGncuNwj2S/p5L2SaUdHjJJl1PHqVAzxJQsz59pVhG8GasH6epStTVEwgio6VLj+7
+ HkOncBnRwhaRlKaTUHgKGgmEr+4PmlMhi6JjpfZ8T0usM+dHYi7ajFwsX4w2JLxyHgbgxr/g66X
+ p6gdRKNZOKwfcCuSsSOGHZmZXdHmvBvtWC/YztlylucjaEEMKTqTfvgooCBbUKae3W/WDeTF3YA
+ rCrsap5o8ITqI7zxV7yw8NVwylkgCE2Wu4Q5rlnlS8D+JIDRjfiOb85EC+U
+X-Received: by 2002:a05:6402:3585:b0:5cf:e66f:678d with SMTP id
+ 4fb4d7f45d1cf-5d972e6f913mr5652965a12.28.1736424798783; 
+ Thu, 09 Jan 2025 04:13:18 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IH9rhwhUAjzLXa6pmibkSNUzwF7xZ3fheV8aTbYk0X/WzOQNG4OgUFHzQn/00A/cKdGHYBvdQ==
+X-Received: by 2002:a05:6402:3585:b0:5cf:e66f:678d with SMTP id
+ 4fb4d7f45d1cf-5d972e6f913mr5652903a12.28.1736424798385; 
+ Thu, 09 Jan 2025 04:13:18 -0800 (PST)
+Received: from [192.168.10.27] ([151.62.105.73])
+ by smtp.googlemail.com with ESMTPSA id
+ 4fb4d7f45d1cf-5d99046d7d5sm528421a12.66.2025.01.09.04.13.15
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 09 Jan 2025 04:13:17 -0800 (PST)
+Message-ID: <82cc1e4a-7035-457e-a020-9a5e12f9a30c@redhat.com>
+Date: Thu, 9 Jan 2025 13:13:13 +0100
 MIME-Version: 1.0
-References: <20241216004857.9367-1-jason.chien@sifive.com>
-In-Reply-To: <20241216004857.9367-1-jason.chien@sifive.com>
-From: Jason Chien <jason.chien@sifive.com>
-Date: Thu, 9 Jan 2025 18:56:57 +0800
-X-Gm-Features: AbW1kvYz0C0jE49uTCElGy3vKnqKd2DkiKC61hXIFIqabUQVa4biuyRfrxbeJz8
-Message-ID: <CADr__8pzZ2+H1g0SZWqjYqRLf_gaeNYQ+ATNyYZLBtaqQDkhTA@mail.gmail.com>
-Subject: Re: [RFC PATCH 0/6] Avoid contention for PCIIOMMUOps between IOMMU
- and PCIe host
-To: qemu-devel@nongnu.org, qemu-riscv@nongnu.org
-Cc: Peter Maydell <peter.maydell@linaro.org>,
- Andrey Smirnov <andrew.smirnov@gmail.com>, 
- "Michael S. Tsirkin" <mst@redhat.com>,
- Marcel Apfelbaum <marcel.apfelbaum@gmail.com>, 
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, 
- Bin Meng <bmeng.cn@gmail.com>, Weiwei Li <liwei1518@gmail.com>, 
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v4 30/32] pc-bios: ensure keymaps dependencies set vnc
+ tests
+To: =?UTF-8?Q?Alex_Benn=C3=A9e?= <alex.bennee@linaro.org>,
+ qemu-devel@nongnu.org
+Cc: Halil Pasic <pasic@linux.ibm.com>, Aurelien Jarno <aurelien@aurel32.net>, 
+ qemu-riscv@nongnu.org, Radoslaw Biernacki <rad@semihalf.com>,
+ Daniel Henrique Barboza <danielhb413@gmail.com>,
+ Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Beraldo Leal <bleal@redhat.com>, Fabiano Rosas <farosas@suse.de>,
+ Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
+ Laurent Vivier <lvivier@redhat.com>, Nicholas Piggin <npiggin@gmail.com>,
+ Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>,
+ Christian Borntraeger <borntraeger@linux.ibm.com>,
+ Wainer dos Santos Moschetta <wainersm@redhat.com>,
+ =?UTF-8?Q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>,
+ Ed Maste <emaste@freebsd.org>, Jiaxun Yang <jiaxun.yang@flygoat.com>,
+ Bernhard Beschow <shentey@gmail.com>, Bin Meng <bmeng.cn@gmail.com>,
+ qemu-ppc@nongnu.org, qemu-arm@nongnu.org, Laurent Vivier
+ <laurent@vivier.eu>, Joel Stanley <joel@jms.id.au>,
+ =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
+ John Snow <jsnow@redhat.com>, "Michael S. Tsirkin" <mst@redhat.com>,
+ Pavel Dovgalyuk <pavel.dovgaluk@ispras.ru>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Harsh Prateek Bora <harshpb@linux.ibm.com>,
+ Leif Lindholm <quic_llindhol@quicinc.com>, Cleber Rosa <crosa@redhat.com>,
+ Thomas Huth <thuth@redhat.com>, qemu-s390x@nongnu.org,
+ Eric Farman <farman@linux.ibm.com>, Weiwei Li <liwei1518@gmail.com>,
+ =?UTF-8?Q?Daniel_P=2E_Berrang=C3=A9?= <berrange@redhat.com>,
+ Markus Armbruster <armbru@redhat.com>,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
- "open list:MCIMX7D SABRE / i..." <qemu-arm@nongnu.org>
-Content-Type: multipart/alternative; boundary="000000000000e88b3a062b43d600"
-Received-SPF: pass client-ip=2a00:1450:4864:20::532;
- envelope-from=jason.chien@sifive.com; helo=mail-ed1-x532.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
+ Palmer Dabbelt <palmer@dabbelt.com>, Peter Maydell
+ <peter.maydell@linaro.org>, Li-Wen Hsu <lwhsu@freebsd.org>
+References: <20250108121054.1126164-1-alex.bennee@linaro.org>
+ <20250108121054.1126164-31-alex.bennee@linaro.org>
+From: Paolo Bonzini <pbonzini@redhat.com>
+Autocrypt: addr=pbonzini@redhat.com; keydata=
+ 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
+In-Reply-To: <20250108121054.1126164-31-alex.bennee@linaro.org>
+X-Mimecast-Spam-Score: 0
+X-Mimecast-MFC-PROC-ID: 0nob3u_vHBGDxv64ZKjNsB66gCVES3x8AtrKKGg9P6k_1736424799
+X-Mimecast-Originator: redhat.com
+Content-Language: en-US
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=170.10.129.124; envelope-from=pbonzini@redhat.com;
+ helo=us-smtp-delivery-124.mimecast.com
+X-Spam_score_int: -24
+X-Spam_score: -2.5
 X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, HTML_MESSAGE=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+X-Spam_report: (-2.5 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.436,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_VALIDITY_CERTIFIED_BLOCKED=0.001,
+ RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -102,107 +181,82 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
---000000000000e88b3a062b43d600
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+On 1/8/25 13:10, Alex Bennée wrote:
+> I was seeing failures on vnc-display-test on FreeBSD:
+> 
+>    make vm-build-freebsd V=1 TARGET_LIST=aarch64-softmmu BUILD_TARGET=check-qtest QEMU_LOCAL=1 DEBUG=1
+> 
+> Leads to:
+> 
+>    qemu-system-aarch64: -vnc none: could not read keymap file: 'en-us'
+>    Broken pipe
+>    ../src/tests/qtest/libqtest.c:196: kill_qemu() tried to terminate QEMU process but encountered exit status 1 (expected 0)
+> 
+> which was as far as I could tell because we don't populate the
+> $BLD/pc-bios/keymaps (although something attempts to symlink
+> qemu-bundle/usr/local/share/qemu/keymaps/ to that dir).
 
-Ping.
+That something being scripts/symlink-install-tree.py.
 
-Jason Chien <jason.chien@sifive.com> =E6=96=BC 2024=E5=B9=B412=E6=9C=8816=
-=E6=97=A5 =E9=80=B1=E4=B8=80 =E4=B8=8A=E5=8D=888:49=E5=AF=AB=E9=81=93=EF=BC=
-=9A
+This is where QEMU looks for the keymaps and your patch ensures that it 
+is populated before running the test.  Please add the above info to the 
+commit message just for accuracy; otherwise:
 
-> When PCIIOMMUOps.get_address_space() is already registered by the pci hos=
-t,
-> e.g. TYPE_DESIGNWARE_PCIE_HOST, IOMMU cannot overwrite this hook without
-> breaking the PCIe translation rule, which means that IOMMU and the pci ho=
-st
-> cannot coexist.
->
-> This RFC introduces a new callback, PCIIOMMUOps.set_memory_region(), and
-> an API, pci_setup_iommu_downstream_mem, to avoid the contention for
-> PCIIOMMUOps.get_address_space().
->
-> Jason Chien (6):
->   include/hw/pci: Add a callback to set the downstream memory region of
->     a pci bus
->   hw/pci: Add an API to set the downstream memory region of a PCI bus
->   hw/pci-host: Enable DW PCIe host to send memory transactions over
->     specific mr
->   hw/riscv/riscv-iommu: Allow PCI hosts with iommu_ops registered
->     connecting to the IOMMU
->   hw/riscv/riscv-iommu: Acquire device IDs dynamically
->   include/hw/pci: Send PCI dma requests with memory attributes
->     containing BDF
->
->  hw/pci-host/designware.c         | 18 +++++++++++++++---
->  hw/pci/pci.c                     |  6 ++++++
->  hw/riscv/riscv-iommu.c           | 21 +++++++++++++++++++--
->  include/hw/pci-host/designware.h |  2 ++
->  include/hw/pci/pci.h             | 20 ++++++++++++++++++++
->  include/hw/pci/pci_device.h      | 15 ++++++++++++---
->  6 files changed, 74 insertions(+), 8 deletions(-)
->
-> --
-> 2.43.2
->
->
+Reviewed-by: Paolo Bonzini <pbonzini@redhat.com>
 
---000000000000e88b3a062b43d600
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Paolo
 
-<div dir=3D"ltr">Ping.</div><br><div class=3D"gmail_quote gmail_quote_conta=
-iner"><div dir=3D"ltr" class=3D"gmail_attr">Jason Chien &lt;<a href=3D"mail=
-to:jason.chien@sifive.com">jason.chien@sifive.com</a>&gt; =E6=96=BC 2024=E5=
-=B9=B412=E6=9C=8816=E6=97=A5 =E9=80=B1=E4=B8=80 =E4=B8=8A=E5=8D=888:49=E5=
-=AF=AB=E9=81=93=EF=BC=9A<br></div><blockquote class=3D"gmail_quote" style=
-=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding=
--left:1ex">When PCIIOMMUOps.get_address_space() is already registered by th=
-e pci host,<br>
-e.g. TYPE_DESIGNWARE_PCIE_HOST, IOMMU cannot overwrite this hook without<br=
->
-breaking the PCIe translation rule, which means that IOMMU and the pci host=
-<br>
-cannot coexist.<br>
-<br>
-This RFC introduces a new callback, PCIIOMMUOps.set_memory_region(), and<br=
->
-an API, pci_setup_iommu_downstream_mem, to avoid the contention for<br>
-PCIIOMMUOps.get_address_space().<br>
-<br>
-Jason Chien (6):<br>
-=C2=A0 include/hw/pci: Add a callback to set the downstream memory region o=
-f<br>
-=C2=A0 =C2=A0 a pci bus<br>
-=C2=A0 hw/pci: Add an API to set the downstream memory region of a PCI bus<=
-br>
-=C2=A0 hw/pci-host: Enable DW PCIe host to send memory transactions over<br=
->
-=C2=A0 =C2=A0 specific mr<br>
-=C2=A0 hw/riscv/riscv-iommu: Allow PCI hosts with iommu_ops registered<br>
-=C2=A0 =C2=A0 connecting to the IOMMU<br>
-=C2=A0 hw/riscv/riscv-iommu: Acquire device IDs dynamically<br>
-=C2=A0 include/hw/pci: Send PCI dma requests with memory attributes<br>
-=C2=A0 =C2=A0 containing BDF<br>
-<br>
-=C2=A0hw/pci-host/designware.c=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0| 18 ++++++=
-+++++++++---<br>
-=C2=A0hw/pci/pci.c=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0|=C2=A0 6 ++++++<br>
-=C2=A0hw/riscv/riscv-iommu.c=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0| 21 +=
-++++++++++++++++++--<br>
-=C2=A0include/hw/pci-host/designware.h |=C2=A0 2 ++<br>
-=C2=A0include/hw/pci/pci.h=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0|=
- 20 ++++++++++++++++++++<br>
-=C2=A0include/hw/pci/pci_device.h=C2=A0 =C2=A0 =C2=A0 | 15 ++++++++++++---<=
-br>
-=C2=A06 files changed, 74 insertions(+), 8 deletions(-)<br>
-<br>
--- <br>
-2.43.2<br>
-<br>
-</blockquote></div>
+> Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
+> Cc: Paolo Bonzini <pbonzini@redhat.com>
+> ---
+>   pc-bios/keymaps/meson.build | 17 ++++++++---------
+>   tests/qtest/meson.build     |  2 +-
+>   2 files changed, 9 insertions(+), 10 deletions(-)
+> 
+> diff --git a/pc-bios/keymaps/meson.build b/pc-bios/keymaps/meson.build
+> index 0bd8ce0077..a79a09b276 100644
+> --- a/pc-bios/keymaps/meson.build
+> +++ b/pc-bios/keymaps/meson.build
+> @@ -39,19 +39,18 @@ else
+>     native_qemu_keymap = qemu_keymap
+>   endif
+>   
+> +keymap_targets = []
+>   if native_qemu_keymap.found()
+> -  t = []
+>     foreach km, args: keymaps
+>       # generate with qemu-kvm
+> -    t += custom_target(km,
+> -                       build_by_default: true,
+> -                       output: km,
+> -                       command: [native_qemu_keymap, '-f', '@OUTPUT@', args.split()],
+> -                       install: have_system,
+> -                       install_dir: qemu_datadir / 'keymaps')
+> +    keymap_targets += custom_target(km,
+> +                                    build_by_default: true,
+> +                                    output: km,
+> +                                    command: [native_qemu_keymap, '-f', '@OUTPUT@', args.split()],
+> +                                    install: have_system,
+> +                                    install_dir: qemu_datadir / 'keymaps')
+>     endforeach
+> -
+> -  alias_target('update-keymaps', t)
+> +  alias_target('update-keymaps', keymap_targets)
+>   else
+>     install_data(keymaps.keys(), install_dir: qemu_datadir / 'keymaps')
+>   endif
+> diff --git a/tests/qtest/meson.build b/tests/qtest/meson.build
+> index c5a70021c5..f75c1057a4 100644
+> --- a/tests/qtest/meson.build
+> +++ b/tests/qtest/meson.build
+> @@ -383,7 +383,7 @@ qtests = {
+>   if vnc.found()
+>     gvnc = dependency('gvnc-1.0', method: 'pkg-config', required: false)
+>     if gvnc.found()
+> -    qtests += {'vnc-display-test': [gvnc]}
+> +    qtests += {'vnc-display-test': [gvnc, keymap_targets]}
+>       qtests_generic += [ 'vnc-display-test' ]
+>     endif
+>   endif
 
---000000000000e88b3a062b43d600--
 
