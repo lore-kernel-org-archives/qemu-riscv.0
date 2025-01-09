@@ -4,68 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 98790E77197
-	for <qemu-riscv@archiver.kernel.org>; Thu,  9 Jan 2025 09:12:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 03A91E77199
+	for <qemu-riscv@archiver.kernel.org>; Thu,  9 Jan 2025 10:57:32 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tVoZb-0001wm-JE; Thu, 09 Jan 2025 04:11:27 -0500
+	id 1tVqDy-0000iW-Kj; Thu, 09 Jan 2025 05:57:14 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <ivan.klokov@syntacore.com>)
- id 1tVoZR-0001q8-Vw; Thu, 09 Jan 2025 04:11:19 -0500
-Received: from m.syntacore.com ([178.249.69.228] helo=pmg.syntacore.com)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <ivan.klokov@syntacore.com>)
- id 1tVoZN-0003jI-Fg; Thu, 09 Jan 2025 04:11:16 -0500
-Received: from pmg.syntacore.com (localhost.localdomain [127.0.0.1])
- by pmg.syntacore.com (Proxmox) with ESMTP id 6D3E9B41CDC;
- Thu,  9 Jan 2025 12:10:54 +0300 (MSK)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=syntacore.com;
- h=cc:cc:content-transfer-encoding:content-type:content-type
- :date:from:from:in-reply-to:message-id:mime-version:references
- :reply-to:subject:subject:to:to; s=m; bh=HhEb5OGThDap061IAiGTEWz
- 6cH1TOOlieuqHwg3ZsEs=; b=IdlofsHEw1ZZmN5Acln16/YupnGmMp5JRVbCW9M
- vnTb/qxiGnty/ElG17LJuci3hbhv4MBG8H9F+v/Y+qXTS4lIqf1hgTix//SOVanD
- EJO6NR5wi3EEo+AOaTJXHkgpPdkjp+bowBldLCmTeD3FLziNy/v2yFyMWXajfvPN
- DbnSxAqecroIW45FFpC/zDTKQTkCU2KOBDAHJrBXuNIYJSwFUKw8VgW7U7atOp16
- JuTlKx82d4SHB9o++8hoSK6tq0BgGWOKyLfce+3vXcd6t0ukIstVeeJVKz+BwHos
- kDq0+ZwjuB8CWq/DfLwCOpRN3zrQ8vT1xsM49ky65dFddnA==
-Received: from S-SC-EXCH-01.corp.syntacore.com (exchange.syntacore.com
- [10.76.202.20])
- by pmg.syntacore.com (Proxmox) with ESMTPS id 5A7E4B41CC9;
- Thu,  9 Jan 2025 12:10:54 +0300 (MSK)
-Received: from VirtualBox.corp.yadro.com (10.76.4.56) by
- S-SC-EXCH-01.corp.syntacore.com (10.76.202.20) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1544.11; Thu, 9 Jan 2025 12:09:33 +0300
-From: Ivan Klokov <ivan.klokov@syntacore.com>
-To: <qemu-devel@nongnu.org>
-CC: <qemu-riscv@nongnu.org>, <palmer@dabbelt.com>, <alistair.francis@wdc.com>, 
- <bmeng.cn@gmail.com>, <liwei1518@gmail.com>, <dbarboza@ventanamicro.com>, 
- <zhiwei_liu@linux.alibaba.com>, <farosas@suse.de>, <lvivier@redhat.com>,
- <pbonzini@redhat.com>, Ivan Klokov <ivan.klokov@syntacore.com>
-Subject: [PATCH v9 2/2] tests/qtest: QTest example for RISC-V CSR register
-Date: Thu, 9 Jan 2025 12:10:44 +0300
-Message-ID: <20250109091044.32723-3-ivan.klokov@syntacore.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20250109091044.32723-1-ivan.klokov@syntacore.com>
-References: <20250109091044.32723-1-ivan.klokov@syntacore.com>
+ (Exim 4.90_1) (envelope-from <jason.chien@sifive.com>)
+ id 1tVqDx-0000hp-Tj
+ for qemu-riscv@nongnu.org; Thu, 09 Jan 2025 05:57:13 -0500
+Received: from mail-ed1-x532.google.com ([2a00:1450:4864:20::532])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <jason.chien@sifive.com>)
+ id 1tVqDu-00008k-UV
+ for qemu-riscv@nongnu.org; Thu, 09 Jan 2025 05:57:13 -0500
+Received: by mail-ed1-x532.google.com with SMTP id
+ 4fb4d7f45d1cf-5d7e3f1fdafso1413019a12.0
+ for <qemu-riscv@nongnu.org>; Thu, 09 Jan 2025 02:57:09 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=sifive.com; s=google; t=1736420228; x=1737025028; darn=nongnu.org;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=QZizyE+sqVqNzd/4+/3++039N742rp8OayC2oGAAPnk=;
+ b=K9TF3CswzFn28cESMU64Ycq7JnPREaoAGT0FBP0bH0U1vmSCAuPdZ92Z3UtqeiDUyc
+ uJ38OMnWnGgyIpjxNFZgp2SlZP87GZOknHvcBnUldnG1gz6+3E1RzEhi+VfP6m5OeU7Z
+ j4n5fY8hqW+e/nLakZfrVYM60R9yk7xJ6u/zE4znhDkbGbUApGgSdUJhX+A1k2gx83sT
+ ofJz+KxNDrNPXP/o0sR/0bPCegRbvdIwDSiarV4lwey4/itmCUmB5z7LqpKgl9TMdG37
+ YlB351KAxNpWFZw1l4nfOjJgprSRLJ3lkprIAETJYJL/ynW9A8bSaFFHrovrGLuzsIU6
+ WUaA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1736420228; x=1737025028;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=QZizyE+sqVqNzd/4+/3++039N742rp8OayC2oGAAPnk=;
+ b=SYKDmWZGjiHCWLRy/gAq+hDeDhRkDsIQDtBYwI0sEWZkGezZEylAhLoXLc0TOkbT1J
+ OyF14yHhf+hKybA64xwaiH2ihggVFwWLcOhZUY4d0JrJ6kZp1ex/yetXkUu56jh+qJFs
+ j5ByVTsoL2Riuk/SVgqCOMDCpXDm+Gs6/4XlKslI8DfJTSGx2zC9ACMIv6I6KopkxbRa
+ i27Jgm37OLfpDfXcgittq5W8ITY+eIhlIVi4OgiXLJRDOLdYZzXs6U/0pmTgLYZIyddC
+ HySCXsX6CbYlHoi5XdClDNTclB1w3/Pt1FILPtcCdhqG85t65aPiwIQpMq/bC1UA4lAt
+ ibnw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCX3w/IUUM7pJ1iL3Od30T/TAwFl+ARb6nk8K7BftvUm61acPEmRAOEn7hqvJ0WBYReXBLQIUFUnNKQ1@nongnu.org
+X-Gm-Message-State: AOJu0YwZkg+znD1mhQb/RC3Md35rUUikfE+FTDqdX9vA+SIcEDpPSIpR
+ 7LoGHhfbtpqZaneeIN5cFumHZjyjncfrGN7MVWNf88R815n2hdfhaKN6wAXNW1BTdUp+ShD2HsK
+ ln8Rrfgf2rGhsr3tHwlsQC67eXlb3XBLyWJIu1SUGpAlO2UAW
+X-Gm-Gg: ASbGncuYaOhyGQ2QwETg+dTAWis7QGFiAHOSrb2TLg24+aJDYUI5ZeSuDbOy/dutnvv
+ zVl+/Q5pK3hX3J8jOrM8/MnHvKqgwF2g/MhMzAx9c
+X-Google-Smtp-Source: AGHT+IG7A1vWPzerGDGp5qybFTkUqfSIrPuGxpjc17kfgbDZ6lFrUY/D/HohdGgpzN20lQlgwucntd+OrIS+aQZgdHY=
+X-Received: by 2002:a05:6402:4415:b0:5d1:1f1:a283 with SMTP id
+ 4fb4d7f45d1cf-5d972df6fecmr5421704a12.4.1736420228620; Thu, 09 Jan 2025
+ 02:57:08 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [10.76.4.56]
-X-ClientProxiedBy: S-SC-EXCH-01.corp.syntacore.com (10.76.202.20) To
- S-SC-EXCH-01.corp.syntacore.com (10.76.202.20)
-Received-SPF: pass client-ip=178.249.69.228;
- envelope-from=ivan.klokov@syntacore.com; helo=pmg.syntacore.com
+References: <20241216004857.9367-1-jason.chien@sifive.com>
+In-Reply-To: <20241216004857.9367-1-jason.chien@sifive.com>
+From: Jason Chien <jason.chien@sifive.com>
+Date: Thu, 9 Jan 2025 18:56:57 +0800
+X-Gm-Features: AbW1kvYz0C0jE49uTCElGy3vKnqKd2DkiKC61hXIFIqabUQVa4biuyRfrxbeJz8
+Message-ID: <CADr__8pzZ2+H1g0SZWqjYqRLf_gaeNYQ+ATNyYZLBtaqQDkhTA@mail.gmail.com>
+Subject: Re: [RFC PATCH 0/6] Avoid contention for PCIIOMMUOps between IOMMU
+ and PCIe host
+To: qemu-devel@nongnu.org, qemu-riscv@nongnu.org
+Cc: Peter Maydell <peter.maydell@linaro.org>,
+ Andrey Smirnov <andrew.smirnov@gmail.com>, 
+ "Michael S. Tsirkin" <mst@redhat.com>,
+ Marcel Apfelbaum <marcel.apfelbaum@gmail.com>, 
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Bin Meng <bmeng.cn@gmail.com>, Weiwei Li <liwei1518@gmail.com>, 
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
+ "open list:MCIMX7D SABRE / i..." <qemu-arm@nongnu.org>
+Content-Type: multipart/alternative; boundary="000000000000e88b3a062b43d600"
+Received-SPF: pass client-ip=2a00:1450:4864:20::532;
+ envelope-from=jason.chien@sifive.com; helo=mail-ed1-x532.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001, RCVD_IN_VALIDITY_SAFE_BLOCKED=0.001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, HTML_MESSAGE=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -81,94 +102,107 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Added demo for reading CSR register from qtest environment.
+--000000000000e88b3a062b43d600
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Ivan Klokov <ivan.klokov@syntacore.com>
-Reviewed-by: Fabiano Rosas <farosas@suse.de>
-Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
----
- tests/qtest/meson.build      |  2 +-
- tests/qtest/riscv-csr-test.c | 56 ++++++++++++++++++++++++++++++++++++
- 2 files changed, 57 insertions(+), 1 deletion(-)
- create mode 100644 tests/qtest/riscv-csr-test.c
+Ping.
 
-diff --git a/tests/qtest/meson.build b/tests/qtest/meson.build
-index c5a70021c5..7eb1199d91 100644
---- a/tests/qtest/meson.build
-+++ b/tests/qtest/meson.build
-@@ -273,7 +273,7 @@ qtests_s390x = \
- qtests_riscv32 = \
-   (config_all_devices.has_key('CONFIG_SIFIVE_E_AON') ? ['sifive-e-aon-watchdog-test'] : [])
- 
--qtests_riscv64 = \
-+qtests_riscv64 = ['riscv-csr-test'] + \
-   (unpack_edk2_blobs ? ['bios-tables-test'] : [])
- 
- qos_test_ss = ss.source_set()
-diff --git a/tests/qtest/riscv-csr-test.c b/tests/qtest/riscv-csr-test.c
-new file mode 100644
-index 0000000000..ff5c29e6c6
---- /dev/null
-+++ b/tests/qtest/riscv-csr-test.c
-@@ -0,0 +1,56 @@
-+/*
-+ * QTest testcase for RISC-V CSRs
-+ *
-+ * Copyright (c) 2024 Syntacore.
-+ *
-+ * This program is free software; you can redistribute it and/or modify it
-+ * under the terms of the GNU General Public License as published by the
-+ * Free Software Foundation; either version 2 of the License, or
-+ * (at your option) any later version.
-+ *
-+ * This program is distributed in the hope that it will be useful, but WITHOUT
-+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
-+ * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License
-+ * for more details.
-+ */
-+
-+#include "qemu/osdep.h"
-+#include "libqtest.h"
-+
-+#define CSR_MVENDORID       0xf11
-+#define CSR_MISELECT        0x350
-+
-+static void run_test_csr(void)
-+{
-+    uint64_t res;
-+    uint64_t val = 0;
-+
-+    QTestState *qts = qtest_init("-machine virt -cpu veyron-v1");
-+
-+    res = qtest_csr_call(qts, "get_csr", 0, CSR_MVENDORID, &val);
-+
-+    g_assert_cmpint(res, ==, 0);
-+    g_assert_cmpint(val, ==, 0x61f);
-+
-+    val = 0xff;
-+    res = qtest_csr_call(qts, "set_csr", 0, CSR_MISELECT, &val);
-+
-+    g_assert_cmpint(res, ==, 0);
-+
-+    val = 0;
-+    res = qtest_csr_call(qts, "get_csr", 0, CSR_MISELECT, &val);
-+
-+    g_assert_cmpint(res, ==, 0);
-+    g_assert_cmpint(val, ==, 0xff);
-+
-+    qtest_quit(qts);
-+}
-+
-+int main(int argc, char **argv)
-+{
-+    g_test_init(&argc, &argv, NULL);
-+
-+    qtest_add_func("/cpu/csr", run_test_csr);
-+
-+    return g_test_run();
-+}
--- 
-2.34.1
+Jason Chien <jason.chien@sifive.com> =E6=96=BC 2024=E5=B9=B412=E6=9C=8816=
+=E6=97=A5 =E9=80=B1=E4=B8=80 =E4=B8=8A=E5=8D=888:49=E5=AF=AB=E9=81=93=EF=BC=
+=9A
 
+> When PCIIOMMUOps.get_address_space() is already registered by the pci hos=
+t,
+> e.g. TYPE_DESIGNWARE_PCIE_HOST, IOMMU cannot overwrite this hook without
+> breaking the PCIe translation rule, which means that IOMMU and the pci ho=
+st
+> cannot coexist.
+>
+> This RFC introduces a new callback, PCIIOMMUOps.set_memory_region(), and
+> an API, pci_setup_iommu_downstream_mem, to avoid the contention for
+> PCIIOMMUOps.get_address_space().
+>
+> Jason Chien (6):
+>   include/hw/pci: Add a callback to set the downstream memory region of
+>     a pci bus
+>   hw/pci: Add an API to set the downstream memory region of a PCI bus
+>   hw/pci-host: Enable DW PCIe host to send memory transactions over
+>     specific mr
+>   hw/riscv/riscv-iommu: Allow PCI hosts with iommu_ops registered
+>     connecting to the IOMMU
+>   hw/riscv/riscv-iommu: Acquire device IDs dynamically
+>   include/hw/pci: Send PCI dma requests with memory attributes
+>     containing BDF
+>
+>  hw/pci-host/designware.c         | 18 +++++++++++++++---
+>  hw/pci/pci.c                     |  6 ++++++
+>  hw/riscv/riscv-iommu.c           | 21 +++++++++++++++++++--
+>  include/hw/pci-host/designware.h |  2 ++
+>  include/hw/pci/pci.h             | 20 ++++++++++++++++++++
+>  include/hw/pci/pci_device.h      | 15 ++++++++++++---
+>  6 files changed, 74 insertions(+), 8 deletions(-)
+>
+> --
+> 2.43.2
+>
+>
 
+--000000000000e88b3a062b43d600
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr">Ping.</div><br><div class=3D"gmail_quote gmail_quote_conta=
+iner"><div dir=3D"ltr" class=3D"gmail_attr">Jason Chien &lt;<a href=3D"mail=
+to:jason.chien@sifive.com">jason.chien@sifive.com</a>&gt; =E6=96=BC 2024=E5=
+=B9=B412=E6=9C=8816=E6=97=A5 =E9=80=B1=E4=B8=80 =E4=B8=8A=E5=8D=888:49=E5=
+=AF=AB=E9=81=93=EF=BC=9A<br></div><blockquote class=3D"gmail_quote" style=
+=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding=
+-left:1ex">When PCIIOMMUOps.get_address_space() is already registered by th=
+e pci host,<br>
+e.g. TYPE_DESIGNWARE_PCIE_HOST, IOMMU cannot overwrite this hook without<br=
+>
+breaking the PCIe translation rule, which means that IOMMU and the pci host=
+<br>
+cannot coexist.<br>
+<br>
+This RFC introduces a new callback, PCIIOMMUOps.set_memory_region(), and<br=
+>
+an API, pci_setup_iommu_downstream_mem, to avoid the contention for<br>
+PCIIOMMUOps.get_address_space().<br>
+<br>
+Jason Chien (6):<br>
+=C2=A0 include/hw/pci: Add a callback to set the downstream memory region o=
+f<br>
+=C2=A0 =C2=A0 a pci bus<br>
+=C2=A0 hw/pci: Add an API to set the downstream memory region of a PCI bus<=
+br>
+=C2=A0 hw/pci-host: Enable DW PCIe host to send memory transactions over<br=
+>
+=C2=A0 =C2=A0 specific mr<br>
+=C2=A0 hw/riscv/riscv-iommu: Allow PCI hosts with iommu_ops registered<br>
+=C2=A0 =C2=A0 connecting to the IOMMU<br>
+=C2=A0 hw/riscv/riscv-iommu: Acquire device IDs dynamically<br>
+=C2=A0 include/hw/pci: Send PCI dma requests with memory attributes<br>
+=C2=A0 =C2=A0 containing BDF<br>
+<br>
+=C2=A0hw/pci-host/designware.c=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0| 18 ++++++=
++++++++++---<br>
+=C2=A0hw/pci/pci.c=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0|=C2=A0 6 ++++++<br>
+=C2=A0hw/riscv/riscv-iommu.c=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0| 21 +=
+++++++++++++++++++--<br>
+=C2=A0include/hw/pci-host/designware.h |=C2=A0 2 ++<br>
+=C2=A0include/hw/pci/pci.h=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0|=
+ 20 ++++++++++++++++++++<br>
+=C2=A0include/hw/pci/pci_device.h=C2=A0 =C2=A0 =C2=A0 | 15 ++++++++++++---<=
+br>
+=C2=A06 files changed, 74 insertions(+), 8 deletions(-)<br>
+<br>
+-- <br>
+2.43.2<br>
+<br>
+</blockquote></div>
+
+--000000000000e88b3a062b43d600--
 
