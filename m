@@ -4,66 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A1BD1E77197
-	for <qemu-riscv@archiver.kernel.org>; Thu,  9 Jan 2025 15:29:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E97DBE77197
+	for <qemu-riscv@archiver.kernel.org>; Thu,  9 Jan 2025 15:29:41 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tVuSt-0008Dz-DD; Thu, 09 Jan 2025 10:28:57 -0500
+	id 1tVuT4-0008FY-Pr; Thu, 09 Jan 2025 10:29:09 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <craig.blackmore@embecosm.com>)
- id 1tVuSo-0008Db-Gc
- for qemu-riscv@nongnu.org; Thu, 09 Jan 2025 10:28:51 -0500
-Received: from mail-wm1-x330.google.com ([2a00:1450:4864:20::330])
+ id 1tVuSu-0008EE-IV
+ for qemu-riscv@nongnu.org; Thu, 09 Jan 2025 10:28:57 -0500
+Received: from mail-wr1-x430.google.com ([2a00:1450:4864:20::430])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <craig.blackmore@embecosm.com>)
- id 1tVuSm-0006sC-M0
- for qemu-riscv@nongnu.org; Thu, 09 Jan 2025 10:28:50 -0500
-Received: by mail-wm1-x330.google.com with SMTP id
- 5b1f17b1804b1-4362bae4d7dso8481735e9.1
- for <qemu-riscv@nongnu.org>; Thu, 09 Jan 2025 07:28:47 -0800 (PST)
+ id 1tVuSr-0006wC-AI
+ for qemu-riscv@nongnu.org; Thu, 09 Jan 2025 10:28:54 -0500
+Received: by mail-wr1-x430.google.com with SMTP id
+ ffacd0b85a97d-385e0e224cbso604666f8f.2
+ for <qemu-riscv@nongnu.org>; Thu, 09 Jan 2025 07:28:52 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=embecosm.com; s=google; t=1736436526; x=1737041326; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=c6WJpUs4643oGwxH6y7zuN4dJbGbFyPImupCGr0ate8=;
- b=bDIqZINdUVxuDg+yfVGGr/vZjnXFMGrFkv1LZzV58KaoIx+tWWqvJ+DtzPaixRSNlz
- rDlO+M0tkInu7pDUppQU7MhxRyv/dILCjCkX5JVG7a9tQ4alKq39YhZGN5/EjHuvhEKQ
- Y8Er8KGMxPhayIwrm5Ys1OOPyjXJt9XBnV7UDNSTxJMTjJBc6nzSa1FdFjg6H9ve7/Sv
- ZzApK+/TVJARfTYJJwjG6Tnbj55nqWFG1K9HVae6LzorNHFYSgglMv6faxyTf8rZuLnx
- hNEjW55WSJTifXQ8mZ5jYuykvSyzF3vt2MjSeTs1saIH7Ft2YzuRZRk5L4e1q6vVAB12
- yRFA==
+ d=embecosm.com; s=google; t=1736436532; x=1737041332; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=t1oMnkIl/o7It/rTrFudYT+14N4HDe4MZnOq/1oiaBU=;
+ b=QpMeYktnmnUYO2ych733Lnk+JkSDrukMu+rGw9WFIEvGYpXaHA62w1Xwu4es5ZC3FJ
+ 2GlMndAncdawga7pEZzWsltiF+mmIcH5QU8V+CxbbFXX/Hhjywp8dEBmDGRUZnuVgD7a
+ XRveIRH36vEHLL5tinR8t88O4eEsdcLVPS/7iLvm1QF2qNmRABL7SXhO70YjvJUxl0iC
+ vyuWZanpAY+71UQfX8Oi3xKVKlXZHmPbCSxjaOgNC3j0pFAxqFrmqLYGRAeHAYFOwWim
+ +HwIuP1zGvmNMNrrQ/eT/QTCZVBKzCeGclJMkxUVXWrtpZipC37eRGCT95FyOiwpPiSi
+ lBVw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1736436526; x=1737041326;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=c6WJpUs4643oGwxH6y7zuN4dJbGbFyPImupCGr0ate8=;
- b=pLQibR/CeTmO90WvGHYPNRNSVbL9fvY1mk/kee2YS49Ya1zvtZNoNdq14/a79KKC59
- kBfH3eMOcNQtCc1bxvclEXxIP6/C0w6S9gx8cKVNwZ118igcAR+deR9dq5xPmFlkY0iW
- Ym/p2Qm4+Ig6lTfRqmaeGrnGBSTRo8qvYTIdxOb0s+sullbA8Pjs/+uYBy7FJT11iQs2
- WbNvYZYHDFWnFuewINyTrdqU81CD5SoTnhexCDukbQZA+vaklag+/zGpFeYAML36z0oQ
- oIgy64rkNKU0JWvpX1ThsFNJKaXCWDxSstOt6coeZ6Pv9kTDOPhZLZA0stzeKjoKfflw
- 3Rpw==
+ d=1e100.net; s=20230601; t=1736436532; x=1737041332;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=t1oMnkIl/o7It/rTrFudYT+14N4HDe4MZnOq/1oiaBU=;
+ b=FdKazu7q0ZNf1ynSGjmu51M/ePXPOvuJIl0psb4fWvCiCXOMGqPb4vT8+ZpkX0TdGZ
+ P8ZNo9qgk4fuWet0WameEYlhW86lyWXapckD3ukmfiBM/E2Fy+2LVSXmxLJQeKXgOOf3
+ jKavaEgPBBunHp3qv559FWsTIom3e5ge5ixhWrKUz3LXnJfBef/bLfyNtZrQMI5Sa7tO
+ 3nSsGG3jtPnKYA0syYNZZ23XFrjocHUtYhMUm9qrG9R+CtnWA8jTIXSjDvIWcLioLoc0
+ rOo3C++BQyhJ7HSz1eQEWDRuFMwEc5NJMXN9aLgTgcYirw93HgFEWw/R+SBBDVUYyik1
+ LTYA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUm+ToIIzxsO43129j54jia7tE9qrzbDq0mI5dW9c/YWlCOXxybQat/USvxaTJ3leDuNHMQjGzMSU5L@nongnu.org
-X-Gm-Message-State: AOJu0YxRIddymT1bQT0vamtIuDWeDz7AIOtkb5EEHpz7DPn7j045ZKLN
- 2uK9pepY1CTMgxzQ0P0vSrQfj8/dJJqRFwZxxMcdW70bp8GFjx/FYaGGjCbgcJE=
-X-Gm-Gg: ASbGncuxap6GMfCmFaTlu/MeJlYF7vglVlJqT0iitMvwXEcUNz8elU1jPpNceMi2JwL
- iqKm2graglycRtyk1pvpo4gRgyyoIjyYIwDoGJXq6OoiZWTeXtz4SiAfqLRCQzVG6Xb/AXff0HK
- RHu3nt5YL7vGogaBCfqRa/Bw0Fj9ddaSqt1m8blFlFWn6vKft75wBXYb0VYOAGiZtzssh3q6cRx
- aiZdzXP7iGzarFGy9wLsi96HtFgstesJSm3jyiyD1kdZnGaZ8V6TiyqMOs6lu3V4hOsT8izSWwm
- 9j0JvclpYhXm
-X-Google-Smtp-Source: AGHT+IHEycFJQjTsq6l4eiTjwRcOrJBPYNwtPSYMh1f55P2vtlqlk/7oehIN6kvopQj0qEiO9msPNA==
-X-Received: by 2002:a05:600c:4449:b0:435:192:63ca with SMTP id
- 5b1f17b1804b1-436e26f481cmr57297475e9.21.1736436525753; 
- Thu, 09 Jan 2025 07:28:45 -0800 (PST)
+ AJvYcCWuLHsGUT7pfTlNohHanYobEeU9hU0xv2J6mPLv10oTbzjMWybvJF6Gqs3xo4Uyc59pmYKzis0awDwJ@nongnu.org
+X-Gm-Message-State: AOJu0YwP8ECstkJR2Zsc2yG1f8pGQvUCa1k5kNY2ZANCstWT2QusCSN7
+ WMIgpQmcm7XyeARU+FMz3Kp+L4Eem2+M4k1MTXH7frBFiOdWHkfKifd3DLHRRFk=
+X-Gm-Gg: ASbGncsD0+r8dtit56sFMRfNYN16JkiTZGkTXxRBZDughPh9FYQVjdYR1r6Xtr50due
+ vkCp9z13Ci0EEkfx4BfGpKzHSaBe2G3oq8LUU0qQOaoKTY6LDmy8xXc2jioyryJzNqXhPKpuHNY
+ MAv09xSwnleodWstks31W6xRaltoq/YWsqq+uLya0tG6z8MVkYNDyxqzVj+V+LeJrY7uSeyhSDk
+ TdyNW/SU+ZOnPbA33E8xfq0VbKtYvnN9w+hcqZ1X/o7wL4V5bJUipag5nM9aJkEQwtJbl1F3jTT
+ dt3oiX9Xo1VS
+X-Google-Smtp-Source: AGHT+IFbDutNdApNDUZr9x0Ih+ozC9l1/Fx2dSU02WZJgMVTyLshTP+G6C6z1bV959Lfz+/BTTxwvA==
+X-Received: by 2002:a5d:64ed:0:b0:385:e303:8dd8 with SMTP id
+ ffacd0b85a97d-38a872e8b18mr7310281f8f.26.1736436531743; 
+ Thu, 09 Jan 2025 07:28:51 -0800 (PST)
 Received: from dorian.sou.embecosm-corp.com ([212.69.42.53])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-436e2e92f7bsm59226775e9.38.2025.01.09.07.28.45
+ 5b1f17b1804b1-436e2e92f7bsm59226775e9.38.2025.01.09.07.28.51
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 09 Jan 2025 07:28:45 -0800 (PST)
+ Thu, 09 Jan 2025 07:28:51 -0800 (PST)
 From: Craig Blackmore <craig.blackmore@embecosm.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
@@ -75,16 +76,18 @@ Cc: Craig Blackmore <craig.blackmore@embecosm.com>,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
  Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
  Helene Chelin <helene.chelin@embecosm.com>, Nathan Egge <negge@google.com>,
- Max Chou <max.chou@sifive.com>
-Subject: [PATCH v9 0/1] target/riscv: rvv: Use wider accesses for unit stride
+ Max Chou <max.chou@sifive.com>, Paolo Savini <paolo.savini@embecosm.com>
+Subject: [PATCH v9 1/1] target/riscv: rvv: Use wider accesses for unit stride
  load/store
-Date: Thu,  9 Jan 2025 15:28:32 +0000
-Message-ID: <20250109152833.75385-1-craig.blackmore@embecosm.com>
+Date: Thu,  9 Jan 2025 15:28:33 +0000
+Message-ID: <20250109152833.75385-2-craig.blackmore@embecosm.com>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20250109152833.75385-1-craig.blackmore@embecosm.com>
+References: <20250109152833.75385-1-craig.blackmore@embecosm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::330;
- envelope-from=craig.blackmore@embecosm.com; helo=mail-wm1-x330.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::430;
+ envelope-from=craig.blackmore@embecosm.com; helo=mail-wr1-x430.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -107,36 +110,143 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Changes since v8:
-- Add missing CONFIG_ATOMIC64 guard.
+Use atomic load/store functions to access multiple elements from host.
 
-Previous versions:
-- v1: https://lore.kernel.org/all/20240717153040.11073-1-paolo.savini@embecosm.com/
-- v2: https://lore.kernel.org/all/20241002135708.99146-1-paolo.savini@embecosm.com/
-- v3: https://lore.kernel.org/all/20241014220153.196183-1-paolo.savini@embecosm.com/
-- v4: https://lore.kernel.org/all/20241029194348.59574-1-paolo.savini@embecosm.com/
-- v5: https://lore.kernel.org/all/20241211143118.661268-1-craig.blackmore@embecosm.com/
-- v6: https://lore.kernel.org/all/20241218142937.1028602-1-craig.blackmore@embecosm.com/
-- v7: https://lore.kernel.org/all/20241220122109.2083215-1-craig.blackmore@embecosm.com/
-- v8: https://lore.kernel.org/all/20250108143523.153010-1-craig.blackmore@embecosm.com/
+Co-authored-by: Paolo Savini <paolo.savini@embecosm.com>
 
-Cc: Richard Henderson <richard.henderson@linaro.org>
-Cc: Palmer Dabbelt <palmer@dabbelt.com>
-Cc: Alistair Francis <alistair.francis@wdc.com>
-Cc: Bin Meng <bmeng.cn@gmail.com>
-Cc: Weiwei Li <liwei1518@gmail.com>
-Cc: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Cc: Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
-Cc: Helene Chelin <helene.chelin@embecosm.com>
-Cc: Nathan Egge <negge@google.com>
-Cc: Max Chou <max.chou@sifive.com>
-
-Craig Blackmore (1):
-  target/riscv: rvv: Use wider accesses for unit stride load/store
-
+Signed-off-by: Paolo Savini <paolo.savini@embecosm.com>
+Signed-off-by: Craig Blackmore <craig.blackmore@embecosm.com>
+---
  target/riscv/vector_helper.c | 92 ++++++++++++++++++++++++++++++++----
  1 file changed, 84 insertions(+), 8 deletions(-)
 
+diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
+index a85dd1d200..7a2e5ca5b1 100644
+--- a/target/riscv/vector_helper.c
++++ b/target/riscv/vector_helper.c
+@@ -206,30 +206,106 @@ vext_continus_ldst_tlb(CPURISCVState *env, vext_ldst_elem_fn_tlb *ldst_tlb,
+     }
+ }
+ 
++#if !HOST_BIG_ENDIAN
++/* Atomic operations for load/store */
++
++#define GEN_VEXT_LDST_ATOMIC_HOST(SIZE, TYPE)                             \
++static inline QEMU_ALWAYS_INLINE void                                     \
++vext_ldst_atom_##SIZE##_host(void *vd, uint32_t byte_offset, TYPE *host,  \
++                             bool is_load)                                \
++{                                                                         \
++    TYPE *vd_ptr = (TYPE *) (vd + byte_offset);                           \
++    if (is_load) {                                                        \
++        *vd_ptr = qatomic_read__nocheck(host);                            \
++    } else {                                                              \
++        qatomic_set__nocheck(host, *vd_ptr);                              \
++    }                                                                     \
++}                                                                         \
++
++GEN_VEXT_LDST_ATOMIC_HOST(2, uint16_t)
++GEN_VEXT_LDST_ATOMIC_HOST(4, uint32_t)
++#ifdef CONFIG_ATOMIC64
++GEN_VEXT_LDST_ATOMIC_HOST(8, uint64_t)
++#endif
++
++static inline QEMU_ALWAYS_INLINE void
++vext_ldst_atom_16_host(void *vd, uint32_t byte_offset, Int128 *host,
++                       bool is_load)
++{
++    Int128 *vd_ptr = (Int128 *) (vd + byte_offset);
++    if (is_load) {
++        *vd_ptr = atomic16_read_ro(host);
++    } else {
++        atomic16_set(host, *vd_ptr);
++    }
++}
++#endif
++
+ static inline QEMU_ALWAYS_INLINE void
+ vext_continus_ldst_host(CPURISCVState *env, vext_ldst_elem_fn_host *ldst_host,
+                         void *vd, uint32_t evl, uint32_t reg_start, void *host,
+-                        uint32_t esz, bool is_load)
++                        uint32_t esz, bool is_load, uint32_t log2_esz)
+ {
+ #if HOST_BIG_ENDIAN
+     for (; reg_start < evl; reg_start++, host += esz) {
+         ldst_host(vd, reg_start, host);
+     }
+ #else
+-    if (esz == 1) {
+-        uint32_t byte_offset = reg_start * esz;
+-        uint32_t size = (evl - reg_start) * esz;
++    uint32_t size = (evl - reg_start) * esz;
++    uint32_t test = (uintptr_t) host;
+ 
++    /* Misaligned load/stores do not require any atomicity */
++    if (esz == 1 || unlikely(test % esz != 0)) {
++        uint32_t byte_offset = reg_start * esz;
+         if (is_load) {
+             memcpy(vd + byte_offset, host, size);
+         } else {
+             memcpy(host, vd + byte_offset, size);
+         }
+-    } else {
+-        for (; reg_start < evl; reg_start++, host += esz) {
+-            ldst_host(vd, reg_start, host);
++        return;
++    }
++
++    /*
++     * At this point esz > 1 and host is aligned to at least esz, so the ldst
++     * can be completed in atomic chunks of at least esz.
++     */
++
++    /* Test that both alignment and size are multiples of the atomic width. */
++    test |= size;
++
++    /*
++     * If !HAVE_ATOMIC128_RO, then atomic16_set may be implemented with a
++     * 16-byte compare and store loop, which is expensive, so prefer two 8-byte
++     * stores in this case.
++     */
++    if (HAVE_ATOMIC128_RO && (is_load || HAVE_ATOMIC128_RW)
++        && (test % 16 == 0)) {
++        for (; reg_start < evl; reg_start += 16 >> log2_esz, host += 16) {
++            vext_ldst_atom_16_host(vd, reg_start * esz, host, is_load);
++        }
++        return;
++    }
++#ifdef CONFIG_ATOMIC64
++    if (test % 8 == 0) {
++        for (; reg_start < evl; reg_start += 8 >> log2_esz, host += 8) {
++            vext_ldst_atom_8_host(vd, reg_start * esz, host, is_load);
++        }
++        return;
++    }
++#endif
++    if (test % 4 == 0) {
++        for (; reg_start < evl; reg_start += 4 >> log2_esz, host += 4) {
++            vext_ldst_atom_4_host(vd, reg_start * esz, host, is_load);
+         }
++        return;
++    }
++    if (test % 2 == 0) {
++        for (; reg_start < evl; reg_start += 2 >> log2_esz, host += 2) {
++            vext_ldst_atom_2_host(vd, reg_start * esz, host, is_load);
++        }
++        return;
+     }
++    g_assert_not_reached();
+ #endif
+ }
+ 
+@@ -343,7 +419,7 @@ vext_page_ldst_us(CPURISCVState *env, void *vd, target_ulong addr,
+     if (flags == 0) {
+         if (nf == 1) {
+             vext_continus_ldst_host(env, ldst_host, vd, evl, env->vstart, host,
+-                                    esz, is_load);
++                                    esz, is_load, log2_esz);
+         } else {
+             for (i = env->vstart; i < evl; ++i) {
+                 k = 0;
 -- 
 2.43.0
 
