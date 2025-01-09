@@ -4,167 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9B32DE77197
-	for <qemu-riscv@archiver.kernel.org>; Thu,  9 Jan 2025 12:14:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A1BD1E77197
+	for <qemu-riscv@archiver.kernel.org>; Thu,  9 Jan 2025 15:29:04 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tVrPv-0007ts-Dt; Thu, 09 Jan 2025 07:13:39 -0500
+	id 1tVuSt-0008Dz-DD; Thu, 09 Jan 2025 10:28:57 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <pbonzini@redhat.com>)
- id 1tVrPn-0007sO-4m
- for qemu-riscv@nongnu.org; Thu, 09 Jan 2025 07:13:32 -0500
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <pbonzini@redhat.com>)
- id 1tVrPf-0006Pu-Dc
- for qemu-riscv@nongnu.org; Thu, 09 Jan 2025 07:13:25 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1736424801;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
- bh=95jH6vHVWwQhzjGzsxp2UEhTwqVMJr7Wv8BTRN7e3fA=;
- b=g82AjQsLcc3MNs6haLiwyR4l/ecMLqGHtEzLlF5sdf16RNbQOlVpjLvh0ayC3qxC60xpPF
- ybXxnXzx70eYIGS397VVVxeXZUMPoKTgZqMe5P8clkATiPJ446mdkYaJxiniZIlcVG+5iT
- e+Pw2FWS0VbQnOWma+7WuXEr78yxhIE=
-Received: from mail-ed1-f69.google.com (mail-ed1-f69.google.com
- [209.85.208.69]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-231-kryEYgcTNB-PRkcpiACF6A-1; Thu, 09 Jan 2025 07:13:20 -0500
-X-MC-Unique: kryEYgcTNB-PRkcpiACF6A-1
-X-Mimecast-MFC-AGG-ID: kryEYgcTNB-PRkcpiACF6A
-Received: by mail-ed1-f69.google.com with SMTP id
- 4fb4d7f45d1cf-5d3fe75a9f0so718292a12.3
- for <qemu-riscv@nongnu.org>; Thu, 09 Jan 2025 04:13:19 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <craig.blackmore@embecosm.com>)
+ id 1tVuSo-0008Db-Gc
+ for qemu-riscv@nongnu.org; Thu, 09 Jan 2025 10:28:51 -0500
+Received: from mail-wm1-x330.google.com ([2a00:1450:4864:20::330])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <craig.blackmore@embecosm.com>)
+ id 1tVuSm-0006sC-M0
+ for qemu-riscv@nongnu.org; Thu, 09 Jan 2025 10:28:50 -0500
+Received: by mail-wm1-x330.google.com with SMTP id
+ 5b1f17b1804b1-4362bae4d7dso8481735e9.1
+ for <qemu-riscv@nongnu.org>; Thu, 09 Jan 2025 07:28:47 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=embecosm.com; s=google; t=1736436526; x=1737041326; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=c6WJpUs4643oGwxH6y7zuN4dJbGbFyPImupCGr0ate8=;
+ b=bDIqZINdUVxuDg+yfVGGr/vZjnXFMGrFkv1LZzV58KaoIx+tWWqvJ+DtzPaixRSNlz
+ rDlO+M0tkInu7pDUppQU7MhxRyv/dILCjCkX5JVG7a9tQ4alKq39YhZGN5/EjHuvhEKQ
+ Y8Er8KGMxPhayIwrm5Ys1OOPyjXJt9XBnV7UDNSTxJMTjJBc6nzSa1FdFjg6H9ve7/Sv
+ ZzApK+/TVJARfTYJJwjG6Tnbj55nqWFG1K9HVae6LzorNHFYSgglMv6faxyTf8rZuLnx
+ hNEjW55WSJTifXQ8mZ5jYuykvSyzF3vt2MjSeTs1saIH7Ft2YzuRZRk5L4e1q6vVAB12
+ yRFA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1736424799; x=1737029599;
- h=content-transfer-encoding:in-reply-to:autocrypt:content-language
- :from:references:cc:to:subject:user-agent:mime-version:date
- :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1736436526; x=1737041326;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=95jH6vHVWwQhzjGzsxp2UEhTwqVMJr7Wv8BTRN7e3fA=;
- b=OrsX2JbXBrzSbshitG/MsnLgVzNrC5OfJSmA9Ah9CAOIU1iGWUj74fZizmfu9cEM49
- cVHTHCb6ZYdxL9Nn0Q2YsJx08oih2wKb/VsuKY7zRHFPCuZwSsvyLGUJRNZtGMb3kncC
- 4sqJH7/5AyeAx/E5UkGO9kQg6qot162lhItR/CIa/tXaZ9Kuc3OgzGe66K/5Yis7vCTl
- 7aHYYq6lo7B1xVvUKODasHQOqja9YjFQf1iKp5SWzAvtPxgsexOzex2eTMnT5ll0mxm3
- QwaUMIeaH8Aeonzz4aKCK7YTYkxSoVRMYRvDP21gtdRt5q7lAHICjxljSw+rOEfWNCop
- lYQA==
+ bh=c6WJpUs4643oGwxH6y7zuN4dJbGbFyPImupCGr0ate8=;
+ b=pLQibR/CeTmO90WvGHYPNRNSVbL9fvY1mk/kee2YS49Ya1zvtZNoNdq14/a79KKC59
+ kBfH3eMOcNQtCc1bxvclEXxIP6/C0w6S9gx8cKVNwZ118igcAR+deR9dq5xPmFlkY0iW
+ Ym/p2Qm4+Ig6lTfRqmaeGrnGBSTRo8qvYTIdxOb0s+sullbA8Pjs/+uYBy7FJT11iQs2
+ WbNvYZYHDFWnFuewINyTrdqU81CD5SoTnhexCDukbQZA+vaklag+/zGpFeYAML36z0oQ
+ oIgy64rkNKU0JWvpX1ThsFNJKaXCWDxSstOt6coeZ6Pv9kTDOPhZLZA0stzeKjoKfflw
+ 3Rpw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCX36V62ZmLazBlMp3yz44GBRCot8jzI6OmOrhNLBPZcsFIFLMxImEQ5lpoa2g8fNLl8/nqUh0kMAQ5C@nongnu.org
-X-Gm-Message-State: AOJu0YwTCzM3hnACEdUMaWGP+3TVankp4v1qGmrK9TFqjWhYzJQFDoz2
- zkENMom8HgfNudX8b2vt/mWMMDqD/zY8MVl1Fmmj4/bt04j6fFYYtmm7OSJvJ7VMy10buaQuE03
- RDa6NFFtH9UZJKYNkXOdKpY04URWhj7N+8TouQ7RhPur593y1OA4m
-X-Gm-Gg: ASbGncuNwj2S/p5L2SaUdHjJJl1PHqVAzxJQsz59pVhG8GasH6epStTVEwgio6VLj+7
- HkOncBnRwhaRlKaTUHgKGgmEr+4PmlMhi6JjpfZ8T0usM+dHYi7ajFwsX4w2JLxyHgbgxr/g66X
- p6gdRKNZOKwfcCuSsSOGHZmZXdHmvBvtWC/YztlylucjaEEMKTqTfvgooCBbUKae3W/WDeTF3YA
- rCrsap5o8ITqI7zxV7yw8NVwylkgCE2Wu4Q5rlnlS8D+JIDRjfiOb85EC+U
-X-Received: by 2002:a05:6402:3585:b0:5cf:e66f:678d with SMTP id
- 4fb4d7f45d1cf-5d972e6f913mr5652965a12.28.1736424798783; 
- Thu, 09 Jan 2025 04:13:18 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IH9rhwhUAjzLXa6pmibkSNUzwF7xZ3fheV8aTbYk0X/WzOQNG4OgUFHzQn/00A/cKdGHYBvdQ==
-X-Received: by 2002:a05:6402:3585:b0:5cf:e66f:678d with SMTP id
- 4fb4d7f45d1cf-5d972e6f913mr5652903a12.28.1736424798385; 
- Thu, 09 Jan 2025 04:13:18 -0800 (PST)
-Received: from [192.168.10.27] ([151.62.105.73])
- by smtp.googlemail.com with ESMTPSA id
- 4fb4d7f45d1cf-5d99046d7d5sm528421a12.66.2025.01.09.04.13.15
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 09 Jan 2025 04:13:17 -0800 (PST)
-Message-ID: <82cc1e4a-7035-457e-a020-9a5e12f9a30c@redhat.com>
-Date: Thu, 9 Jan 2025 13:13:13 +0100
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 30/32] pc-bios: ensure keymaps dependencies set vnc
- tests
-To: =?UTF-8?Q?Alex_Benn=C3=A9e?= <alex.bennee@linaro.org>,
- qemu-devel@nongnu.org
-Cc: Halil Pasic <pasic@linux.ibm.com>, Aurelien Jarno <aurelien@aurel32.net>, 
- qemu-riscv@nongnu.org, Radoslaw Biernacki <rad@semihalf.com>,
- Daniel Henrique Barboza <danielhb413@gmail.com>,
- Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
+ AJvYcCUm+ToIIzxsO43129j54jia7tE9qrzbDq0mI5dW9c/YWlCOXxybQat/USvxaTJ3leDuNHMQjGzMSU5L@nongnu.org
+X-Gm-Message-State: AOJu0YxRIddymT1bQT0vamtIuDWeDz7AIOtkb5EEHpz7DPn7j045ZKLN
+ 2uK9pepY1CTMgxzQ0P0vSrQfj8/dJJqRFwZxxMcdW70bp8GFjx/FYaGGjCbgcJE=
+X-Gm-Gg: ASbGncuxap6GMfCmFaTlu/MeJlYF7vglVlJqT0iitMvwXEcUNz8elU1jPpNceMi2JwL
+ iqKm2graglycRtyk1pvpo4gRgyyoIjyYIwDoGJXq6OoiZWTeXtz4SiAfqLRCQzVG6Xb/AXff0HK
+ RHu3nt5YL7vGogaBCfqRa/Bw0Fj9ddaSqt1m8blFlFWn6vKft75wBXYb0VYOAGiZtzssh3q6cRx
+ aiZdzXP7iGzarFGy9wLsi96HtFgstesJSm3jyiyD1kdZnGaZ8V6TiyqMOs6lu3V4hOsT8izSWwm
+ 9j0JvclpYhXm
+X-Google-Smtp-Source: AGHT+IHEycFJQjTsq6l4eiTjwRcOrJBPYNwtPSYMh1f55P2vtlqlk/7oehIN6kvopQj0qEiO9msPNA==
+X-Received: by 2002:a05:600c:4449:b0:435:192:63ca with SMTP id
+ 5b1f17b1804b1-436e26f481cmr57297475e9.21.1736436525753; 
+ Thu, 09 Jan 2025 07:28:45 -0800 (PST)
+Received: from dorian.sou.embecosm-corp.com ([212.69.42.53])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-436e2e92f7bsm59226775e9.38.2025.01.09.07.28.45
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 09 Jan 2025 07:28:45 -0800 (PST)
+From: Craig Blackmore <craig.blackmore@embecosm.com>
+To: qemu-devel@nongnu.org,
+	qemu-riscv@nongnu.org
+Cc: Craig Blackmore <craig.blackmore@embecosm.com>,
  Richard Henderson <richard.henderson@linaro.org>,
- Beraldo Leal <bleal@redhat.com>, Fabiano Rosas <farosas@suse.de>,
- Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
- Laurent Vivier <lvivier@redhat.com>, Nicholas Piggin <npiggin@gmail.com>,
- Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>,
- Christian Borntraeger <borntraeger@linux.ibm.com>,
- Wainer dos Santos Moschetta <wainersm@redhat.com>,
- =?UTF-8?Q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>,
- Ed Maste <emaste@freebsd.org>, Jiaxun Yang <jiaxun.yang@flygoat.com>,
- Bernhard Beschow <shentey@gmail.com>, Bin Meng <bmeng.cn@gmail.com>,
- qemu-ppc@nongnu.org, qemu-arm@nongnu.org, Laurent Vivier
- <laurent@vivier.eu>, Joel Stanley <joel@jms.id.au>,
- =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- John Snow <jsnow@redhat.com>, "Michael S. Tsirkin" <mst@redhat.com>,
- Pavel Dovgalyuk <pavel.dovgaluk@ispras.ru>,
- Alistair Francis <alistair.francis@wdc.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Harsh Prateek Bora <harshpb@linux.ibm.com>,
- Leif Lindholm <quic_llindhol@quicinc.com>, Cleber Rosa <crosa@redhat.com>,
- Thomas Huth <thuth@redhat.com>, qemu-s390x@nongnu.org,
- Eric Farman <farman@linux.ibm.com>, Weiwei Li <liwei1518@gmail.com>,
- =?UTF-8?Q?Daniel_P=2E_Berrang=C3=A9?= <berrange@redhat.com>,
- Markus Armbruster <armbru@redhat.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bmeng.cn@gmail.com>,
+ Weiwei Li <liwei1518@gmail.com>,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Palmer Dabbelt <palmer@dabbelt.com>, Peter Maydell
- <peter.maydell@linaro.org>, Li-Wen Hsu <lwhsu@freebsd.org>
-References: <20250108121054.1126164-1-alex.bennee@linaro.org>
- <20250108121054.1126164-31-alex.bennee@linaro.org>
-From: Paolo Bonzini <pbonzini@redhat.com>
-Autocrypt: addr=pbonzini@redhat.com; keydata=
- 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
-In-Reply-To: <20250108121054.1126164-31-alex.bennee@linaro.org>
-X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: 0nob3u_vHBGDxv64ZKjNsB66gCVES3x8AtrKKGg9P6k_1736424799
-X-Mimecast-Originator: redhat.com
-Content-Language: en-US
-Content-Type: text/plain; charset=UTF-8; format=flowed
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Helene Chelin <helene.chelin@embecosm.com>, Nathan Egge <negge@google.com>,
+ Max Chou <max.chou@sifive.com>
+Subject: [PATCH v9 0/1] target/riscv: rvv: Use wider accesses for unit stride
+ load/store
+Date: Thu,  9 Jan 2025 15:28:32 +0000
+Message-ID: <20250109152833.75385-1-craig.blackmore@embecosm.com>
+X-Mailer: git-send-email 2.43.0
+MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=170.10.129.124; envelope-from=pbonzini@redhat.com;
- helo=us-smtp-delivery-124.mimecast.com
-X-Spam_score_int: -24
-X-Spam_score: -2.5
+Received-SPF: pass client-ip=2a00:1450:4864:20::330;
+ envelope-from=craig.blackmore@embecosm.com; helo=mail-wm1-x330.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
 X-Spam_bar: --
-X-Spam_report: (-2.5 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.436,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_VALIDITY_CERTIFIED_BLOCKED=0.001,
- RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001, SPF_HELO_NONE=0.001,
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -181,82 +107,37 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 1/8/25 13:10, Alex Bennée wrote:
-> I was seeing failures on vnc-display-test on FreeBSD:
-> 
->    make vm-build-freebsd V=1 TARGET_LIST=aarch64-softmmu BUILD_TARGET=check-qtest QEMU_LOCAL=1 DEBUG=1
-> 
-> Leads to:
-> 
->    qemu-system-aarch64: -vnc none: could not read keymap file: 'en-us'
->    Broken pipe
->    ../src/tests/qtest/libqtest.c:196: kill_qemu() tried to terminate QEMU process but encountered exit status 1 (expected 0)
-> 
-> which was as far as I could tell because we don't populate the
-> $BLD/pc-bios/keymaps (although something attempts to symlink
-> qemu-bundle/usr/local/share/qemu/keymaps/ to that dir).
+Changes since v8:
+- Add missing CONFIG_ATOMIC64 guard.
 
-That something being scripts/symlink-install-tree.py.
+Previous versions:
+- v1: https://lore.kernel.org/all/20240717153040.11073-1-paolo.savini@embecosm.com/
+- v2: https://lore.kernel.org/all/20241002135708.99146-1-paolo.savini@embecosm.com/
+- v3: https://lore.kernel.org/all/20241014220153.196183-1-paolo.savini@embecosm.com/
+- v4: https://lore.kernel.org/all/20241029194348.59574-1-paolo.savini@embecosm.com/
+- v5: https://lore.kernel.org/all/20241211143118.661268-1-craig.blackmore@embecosm.com/
+- v6: https://lore.kernel.org/all/20241218142937.1028602-1-craig.blackmore@embecosm.com/
+- v7: https://lore.kernel.org/all/20241220122109.2083215-1-craig.blackmore@embecosm.com/
+- v8: https://lore.kernel.org/all/20250108143523.153010-1-craig.blackmore@embecosm.com/
 
-This is where QEMU looks for the keymaps and your patch ensures that it 
-is populated before running the test.  Please add the above info to the 
-commit message just for accuracy; otherwise:
+Cc: Richard Henderson <richard.henderson@linaro.org>
+Cc: Palmer Dabbelt <palmer@dabbelt.com>
+Cc: Alistair Francis <alistair.francis@wdc.com>
+Cc: Bin Meng <bmeng.cn@gmail.com>
+Cc: Weiwei Li <liwei1518@gmail.com>
+Cc: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Cc: Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
+Cc: Helene Chelin <helene.chelin@embecosm.com>
+Cc: Nathan Egge <negge@google.com>
+Cc: Max Chou <max.chou@sifive.com>
 
-Reviewed-by: Paolo Bonzini <pbonzini@redhat.com>
+Craig Blackmore (1):
+  target/riscv: rvv: Use wider accesses for unit stride load/store
 
-Paolo
+ target/riscv/vector_helper.c | 92 ++++++++++++++++++++++++++++++++----
+ 1 file changed, 84 insertions(+), 8 deletions(-)
 
-> Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
-> Cc: Paolo Bonzini <pbonzini@redhat.com>
-> ---
->   pc-bios/keymaps/meson.build | 17 ++++++++---------
->   tests/qtest/meson.build     |  2 +-
->   2 files changed, 9 insertions(+), 10 deletions(-)
-> 
-> diff --git a/pc-bios/keymaps/meson.build b/pc-bios/keymaps/meson.build
-> index 0bd8ce0077..a79a09b276 100644
-> --- a/pc-bios/keymaps/meson.build
-> +++ b/pc-bios/keymaps/meson.build
-> @@ -39,19 +39,18 @@ else
->     native_qemu_keymap = qemu_keymap
->   endif
->   
-> +keymap_targets = []
->   if native_qemu_keymap.found()
-> -  t = []
->     foreach km, args: keymaps
->       # generate with qemu-kvm
-> -    t += custom_target(km,
-> -                       build_by_default: true,
-> -                       output: km,
-> -                       command: [native_qemu_keymap, '-f', '@OUTPUT@', args.split()],
-> -                       install: have_system,
-> -                       install_dir: qemu_datadir / 'keymaps')
-> +    keymap_targets += custom_target(km,
-> +                                    build_by_default: true,
-> +                                    output: km,
-> +                                    command: [native_qemu_keymap, '-f', '@OUTPUT@', args.split()],
-> +                                    install: have_system,
-> +                                    install_dir: qemu_datadir / 'keymaps')
->     endforeach
-> -
-> -  alias_target('update-keymaps', t)
-> +  alias_target('update-keymaps', keymap_targets)
->   else
->     install_data(keymaps.keys(), install_dir: qemu_datadir / 'keymaps')
->   endif
-> diff --git a/tests/qtest/meson.build b/tests/qtest/meson.build
-> index c5a70021c5..f75c1057a4 100644
-> --- a/tests/qtest/meson.build
-> +++ b/tests/qtest/meson.build
-> @@ -383,7 +383,7 @@ qtests = {
->   if vnc.found()
->     gvnc = dependency('gvnc-1.0', method: 'pkg-config', required: false)
->     if gvnc.found()
-> -    qtests += {'vnc-display-test': [gvnc]}
-> +    qtests += {'vnc-display-test': [gvnc, keymap_targets]}
->       qtests_generic += [ 'vnc-display-test' ]
->     endif
->   endif
+-- 
+2.43.0
 
 
