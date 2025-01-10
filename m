@@ -4,66 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E7EF9E7719C
-	for <qemu-riscv@archiver.kernel.org>; Fri, 10 Jan 2025 12:57:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A4E87E7719C
+	for <qemu-riscv@archiver.kernel.org>; Fri, 10 Jan 2025 12:57:10 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tWEYP-0005pr-94; Fri, 10 Jan 2025 07:55:57 -0500
+	id 1tWEYQ-0005sd-1p; Fri, 10 Jan 2025 07:55:58 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <cleger@rivosinc.com>)
- id 1tWEXY-0004E6-UV
+ id 1tWEXZ-0004Fz-HK
  for qemu-riscv@nongnu.org; Fri, 10 Jan 2025 07:55:07 -0500
-Received: from mail-wr1-x433.google.com ([2a00:1450:4864:20::433])
+Received: from mail-wm1-x334.google.com ([2a00:1450:4864:20::334])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <cleger@rivosinc.com>)
- id 1tWEXT-0000z6-Ee
- for qemu-riscv@nongnu.org; Fri, 10 Jan 2025 07:55:02 -0500
-Received: by mail-wr1-x433.google.com with SMTP id
- ffacd0b85a97d-385d7f19f20so1071816f8f.1
- for <qemu-riscv@nongnu.org>; Fri, 10 Jan 2025 04:54:56 -0800 (PST)
+ id 1tWEXV-0000zb-1a
+ for qemu-riscv@nongnu.org; Fri, 10 Jan 2025 07:55:04 -0500
+Received: by mail-wm1-x334.google.com with SMTP id
+ 5b1f17b1804b1-436ce2ab251so15364245e9.1
+ for <qemu-riscv@nongnu.org>; Fri, 10 Jan 2025 04:54:59 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1736513695; x=1737118495;
+ d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1736513697; x=1737118497;
  darn=nongnu.org; 
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=qWRo6Nv6sZWB2iYCQV3cOAbXEDznF+sv8nfS34tLEB4=;
- b=cyRpWNVCKhk8uIRPFI0jcOMcp8M/Ft2PNJNXtPxKWMG/6c8uhy2Pq/Y0ooO+6BkBFO
- 0Jstwph2LXznlGGQn8tumlkttYiqIX8r4g6ufh72AsGY3ubxsrTAG+WYhnGHi0j2BdrV
- R6dQ8cHUtDqIjWH/5ZqPJNKXXGz1PjlSqDUWHCK/WrIa7DJSL6eGp6Yc9oG1Ncw69M+7
- ZBXxT0fm9chGxBeLtS4uk9ZPvSsI0YJWGbgjPQyoKHjJgiATjBZ5zJSqlY9O01tXghwE
- ncajg/60mirfWoy+xyG5tcMEwNIzNX5G8sUV62ZOddtCOiLHqKDrv4fMQpSt12509+SI
- wB/g==
+ bh=Intj25dUMjfWMrsTWGApzMX540YpGGUYsQtvJQNbXsI=;
+ b=yfB6xj1hMcvtuCbAhrLJAgL4gCiCGbrKXgej7iNY9McxQ6J+wZu590gfOeUUjWlFSQ
+ XiSOs5ocrHRZucc7VUIK1rS35W0BsLiMVMZNKtP1mhr6OSBhnZJUa8JwVxSIw/nWGWo7
+ 5oWzErxXoIoNLXVUPYS8EcRRnIZIZAaw3x9+sbakFcbjADdSR9Z7nMJMdNyPUyQsz9Gp
+ eJP9g2AAOOI7gmMbLwusK8153WShU1uawgeNxOKa2UpTbaz7lDSrqJPQJQncvK84irci
+ dOOvRchVnBylHG9f8DAKDqiEqxuIDi+Zztqs7KLBIwp03sbzX1W3FITFbiPB2ZZgbNiO
+ ANeg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1736513695; x=1737118495;
+ d=1e100.net; s=20230601; t=1736513697; x=1737118497;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=qWRo6Nv6sZWB2iYCQV3cOAbXEDznF+sv8nfS34tLEB4=;
- b=a4VVCLAjhgU/9fvwzIKQHov+izQVTdqjl3kxR8BIi06kNtP95qUqLsSobzbI03g3Ts
- itcZXpgVCT02lhNfu8CPZwSxNSGflcAzrZdE/Dlfvm4sCXuo9SB9PH7tfDs5UW/DUtNZ
- uV/msJjoprObY6C1+olz989cfQmYDE8ZNUXdIIuvgkl4FEWctMtNHh+dLwRtfRM1y/Aa
- WC715YsffbFMWpsym027duD/gdhif2ndPg9QfYBGIMYpHQr2HGJxcro7stW6RsgQcJK1
- /INml2+gWgnmvYqo27Gmu8T4nEHxnVIjv/wOPPKlVz0SVK3Lox1lziLd2ofJdm7Z3g2z
- NNlg==
-X-Gm-Message-State: AOJu0YyVXZmR1Xdmj4Bn4fGZkGEHjUYiRJ+zT+y+F2EiNDhCDliDKf+3
- ktwt3pNU82nD8lNeZXGLPOVUZLfEqWZuLkmUbzhE+zHcfsexH1ba7lzwBH4riD6hX+si4fnM+eK
- A
-X-Gm-Gg: ASbGnctb2EiSYmeMa9tKfMAhCszMZ9gvpleG5+1PzoUTMuAaVQpaeA1N5lgm0T/LnSO
- 7qKoO0ZtKUGBpZWAczEYPqCJN9RjUdDl8aGXBUCXdbWy4OmWfVe4yLQcy4DO4MRYMjSAg0nFIHT
- E1XNfBL3jyMx5izdX91JgsJcnpzm2WVX0caCQAscUGdMiGCQMMRni/c/P6fQ5e32OOTQ6seyU1B
- CrJDkcrcJp72rZmHcJViUycB/2wJpp3YjaORlDsp46s5TENj8QNukBeIA==
-X-Google-Smtp-Source: AGHT+IEmKNIMEDvvXgq3UOUXNeXUrfLyl8W/ibeL/mei+Z6SA9KfYqKX1zALFUnVHdPLaTCFVi0sqQ==
-X-Received: by 2002:a05:6000:144a:b0:385:fc70:832 with SMTP id
- ffacd0b85a97d-38a87303cacmr10050464f8f.16.1736513695276; 
- Fri, 10 Jan 2025 04:54:55 -0800 (PST)
+ bh=Intj25dUMjfWMrsTWGApzMX540YpGGUYsQtvJQNbXsI=;
+ b=WVfvs0m5OMBqTKu9M98PzEEstMbE1Jhe4EtCRA5EtHpb45Ua/K1RCgY78qrJxSLehv
+ zlVWG12VIzwCYitNfsdRtR8XR9YCfp6xVcsL0a3iBUH5b1fwuvEcW40En8UE8bWEl6WT
+ kPjlqKVp2c7kRVII2VcZv5PDAzbraO95kjpWHo3/HPZ72oAG8bTD51FG1VI/6KI3JBHo
+ DPWPv+NA3MuUGSD35hOd4RfKXQer3OS9kjHZuY93sS1ik9wNj01Wv9lDuMClr3pJZuWr
+ A+oYrRn/j+HgfItOhPBukvnFkDTwkNsUUinTK/XGzyEta5q/3kFGGQfwXQAxSa4hh8x4
+ o5Xg==
+X-Gm-Message-State: AOJu0YwvN1ReV+V9e03qo+AxyTVduG5nhzyYu8TblxmJbamOAcZT9qYL
+ ImTsf/wCwR/nRdFTX/4Oa3p4h+um30KT4AEYnhzlkPeXBLmVrmCPnVXr0iPbG+GB6rr0vUbvpe+
+ N
+X-Gm-Gg: ASbGncsB2+Vmq66Xquemqqv6xRBWxo0UCByb3tW66EL4CX5GJrhFWIbM1PXMYBN3SVg
+ 4wuG7bcJBcGQ6J9Muy4eFUx28WZnb/dkIUbCJkh2dAQXS/+JZ+znZmpxU8JF3Yz7lo8TkhCKDqG
+ P4F/5oi+JsRNe3gx2mqYym76qNk7Va7jkAd6uvCjpnWnVYWYoozKT54wh1aE4tsS+YVjphDODXW
+ gKmFqaLnf1Za5ZeSgU9xvsJzoVCGLq0KSAxiGqaQ+gTAltHiNbj/radLA==
+X-Google-Smtp-Source: AGHT+IFEWMeI/gUoG9bum7xcWHg4H5NRrxSpWqF7gjzGhhTqE6tycViNzYwVPjLSEy2NXEYlxS1K3g==
+X-Received: by 2002:a05:600c:3c85:b0:434:a802:e99a with SMTP id
+ 5b1f17b1804b1-436e267821emr96007805e9.4.1736513697256; 
+ Fri, 10 Jan 2025 04:54:57 -0800 (PST)
 Received: from carbon-x1.. ([2a01:e0a:e17:9700:16d2:7456:6634:9626])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-38a8e4c1c01sm4548921f8f.97.2025.01.10.04.54.54
+ ffacd0b85a97d-38a8e4c1c01sm4548921f8f.97.2025.01.10.04.54.56
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 10 Jan 2025 04:54:54 -0800 (PST)
+ Fri, 10 Jan 2025 04:54:56 -0800 (PST)
 From: =?UTF-8?q?Cl=C3=A9ment=20L=C3=A9ger?= <cleger@rivosinc.com>
 To: qemu-riscv@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <alistair.francis@wdc.com>,
@@ -74,18 +74,17 @@ Cc: =?UTF-8?q?Cl=C3=A9ment=20L=C3=A9ger?= <cleger@rivosinc.com>,
  Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
  Ved Shanbhogue <ved@rivosinc.com>, Atish Patra <atishp@rivosinc.com>,
  qemu-devel@nongnu.org, Frank Chang <frank.chang@sifive.com>
-Subject: [PATCH v8 3/9] target/riscv: Implement Ssdbltrp sret,
- mret and mnret behavior
-Date: Fri, 10 Jan 2025 13:54:34 +0100
-Message-ID: <20250110125441.3208676-4-cleger@rivosinc.com>
+Subject: [PATCH v8 5/9] target/riscv: Add Ssdbltrp ISA extension enable switch
+Date: Fri, 10 Jan 2025 13:54:36 +0100
+Message-ID: <20250110125441.3208676-6-cleger@rivosinc.com>
 X-Mailer: git-send-email 2.47.1
 In-Reply-To: <20250110125441.3208676-1-cleger@rivosinc.com>
 References: <20250110125441.3208676-1-cleger@rivosinc.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::433;
- envelope-from=cleger@rivosinc.com; helo=mail-wr1-x433.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::334;
+ envelope-from=cleger@rivosinc.com; helo=mail-wm1-x334.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -107,91 +106,34 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-When the Ssdbltrp extension is enabled, SSTATUS.SDT field is cleared
-when executing sret. When executing mret/mnret, SSTATUS.SDT is cleared
-when returning to U, VS or VU and VSSTATUS.SDT is cleared when returning
-to VU from HS.
+Add the switch to enable the Ssdbltrp ISA extension.
 
 Signed-off-by: Clément Léger <cleger@rivosinc.com>
 Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 ---
- target/riscv/op_helper.c | 35 ++++++++++++++++++++++++++++++++++-
- 1 file changed, 34 insertions(+), 1 deletion(-)
+ target/riscv/cpu.c | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/target/riscv/op_helper.c b/target/riscv/op_helper.c
-index c825336519..59c4bf28ed 100644
---- a/target/riscv/op_helper.c
-+++ b/target/riscv/op_helper.c
-@@ -294,6 +294,18 @@ target_ulong helper_sret(CPURISCVState *env)
-                         get_field(mstatus, MSTATUS_SPIE));
-     mstatus = set_field(mstatus, MSTATUS_SPIE, 1);
-     mstatus = set_field(mstatus, MSTATUS_SPP, PRV_U);
-+
-+    if (riscv_cpu_cfg(env)->ext_ssdbltrp) {
-+        if (riscv_has_ext(env, RVH)) {
-+            target_ulong prev_vu = get_field(env->hstatus, HSTATUS_SPV) &&
-+                                   prev_priv == PRV_U;
-+            /* Returning to VU from HS, vsstatus.sdt = 0 */
-+            if (!env->virt_enabled && prev_vu) {
-+                env->vsstatus = set_field(env->vsstatus, MSTATUS_SDT, 0);
-+            }
-+        }
-+        mstatus = set_field(mstatus, MSTATUS_SDT, 0);
-+    }
-     if (env->priv_ver >= PRIV_VERSION_1_12_0) {
-         mstatus = set_field(mstatus, MSTATUS_MPRV, 0);
-     }
-@@ -304,7 +316,6 @@ target_ulong helper_sret(CPURISCVState *env)
-         target_ulong hstatus = env->hstatus;
- 
-         prev_virt = get_field(hstatus, HSTATUS_SPV);
--
-         hstatus = set_field(hstatus, HSTATUS_SPV, 0);
- 
-         env->hstatus = hstatus;
-@@ -344,6 +355,22 @@ static void check_ret_from_m_mode(CPURISCVState *env, target_ulong retpc,
-         riscv_raise_exception(env, RISCV_EXCP_INST_ACCESS_FAULT, GETPC());
-     }
- }
-+static target_ulong ssdbltrp_mxret(CPURISCVState *env, target_ulong mstatus,
-+                                   target_ulong prev_priv,
-+                                   target_ulong prev_virt)
-+{
-+    /* If returning to U, VS or VU, sstatus.sdt = 0 */
-+    if (prev_priv == PRV_U || (prev_virt &&
-+        (prev_priv == PRV_S || prev_priv == PRV_U))) {
-+        mstatus = set_field(mstatus, MSTATUS_SDT, 0);
-+        /* If returning to VU, vsstatus.sdt = 0 */
-+        if (prev_virt && prev_priv == PRV_U) {
-+            env->vsstatus = set_field(env->vsstatus, MSTATUS_SDT, 0);
-+        }
-+    }
-+
-+    return mstatus;
-+}
- 
- target_ulong helper_mret(CPURISCVState *env)
- {
-@@ -361,6 +388,9 @@ target_ulong helper_mret(CPURISCVState *env)
-     mstatus = set_field(mstatus, MSTATUS_MPP,
-                         riscv_has_ext(env, RVU) ? PRV_U : PRV_M);
-     mstatus = set_field(mstatus, MSTATUS_MPV, 0);
-+    if (riscv_cpu_cfg(env)->ext_ssdbltrp) {
-+        mstatus = ssdbltrp_mxret(env, mstatus, prev_priv, prev_virt);
-+    }
-     if ((env->priv_ver >= PRIV_VERSION_1_12_0) && (prev_priv != PRV_M)) {
-         mstatus = set_field(mstatus, MSTATUS_MPRV, 0);
-     }
-@@ -402,6 +432,9 @@ target_ulong helper_mnret(CPURISCVState *env)
-     if (prev_priv < PRV_M) {
-         env->mstatus = set_field(env->mstatus, MSTATUS_MPRV, false);
-     }
-+    if (riscv_cpu_cfg(env)->ext_ssdbltrp) {
-+        env->mstatus = ssdbltrp_mxret(env, env->mstatus, prev_priv, prev_virt);
-+    }
- 
-     if (riscv_has_ext(env, RVH) && prev_virt) {
-         riscv_cpu_swap_hypervisor_regs(env);
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index 5540eb7f63..9e1ce0e1f1 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -205,6 +205,7 @@ const RISCVIsaExtData isa_edata_arr[] = {
+     ISA_EXT_DATA_ENTRY(sscofpmf, PRIV_VERSION_1_12_0, ext_sscofpmf),
+     ISA_EXT_DATA_ENTRY(sscounterenw, PRIV_VERSION_1_12_0, has_priv_1_12),
+     ISA_EXT_DATA_ENTRY(sscsrind, PRIV_VERSION_1_12_0, ext_sscsrind),
++    ISA_EXT_DATA_ENTRY(ssdbltrp, PRIV_VERSION_1_13_0, ext_ssdbltrp),
+     ISA_EXT_DATA_ENTRY(ssnpm, PRIV_VERSION_1_13_0, ext_ssnpm),
+     ISA_EXT_DATA_ENTRY(ssstateen, PRIV_VERSION_1_12_0, ext_ssstateen),
+     ISA_EXT_DATA_ENTRY(sstc, PRIV_VERSION_1_12_0, ext_sstc),
+@@ -1628,6 +1629,7 @@ const RISCVCPUMultiExtConfig riscv_cpu_extensions[] = {
+     MULTI_EXT_CFG_BOOL("smnpm", ext_smnpm, false),
+     MULTI_EXT_CFG_BOOL("smstateen", ext_smstateen, false),
+     MULTI_EXT_CFG_BOOL("ssaia", ext_ssaia, false),
++    MULTI_EXT_CFG_BOOL("ssdbltrp", ext_ssdbltrp, false),
+     MULTI_EXT_CFG_BOOL("svade", ext_svade, false),
+     MULTI_EXT_CFG_BOOL("svadu", ext_svadu, true),
+     MULTI_EXT_CFG_BOOL("svinval", ext_svinval, false),
 -- 
 2.47.1
 
