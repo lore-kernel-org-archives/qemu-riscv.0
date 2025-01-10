@@ -4,93 +4,97 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3733BE7719D
-	for <qemu-riscv@archiver.kernel.org>; Fri, 10 Jan 2025 12:57:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DF5D7E77188
+	for <qemu-riscv@archiver.kernel.org>; Fri, 10 Jan 2025 13:22:56 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tWEYK-0005LC-Lh; Fri, 10 Jan 2025 07:55:52 -0500
+	id 1tWEu1-0004l2-Da; Fri, 10 Jan 2025 08:18:17 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <cleger@rivosinc.com>)
- id 1tWEXa-0004G5-JB
- for qemu-riscv@nongnu.org; Fri, 10 Jan 2025 07:55:07 -0500
-Received: from mail-wr1-x429.google.com ([2a00:1450:4864:20::429])
+ (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
+ id 1tWEtp-0004eE-Jk
+ for qemu-riscv@nongnu.org; Fri, 10 Jan 2025 08:18:05 -0500
+Received: from mail-wm1-x332.google.com ([2a00:1450:4864:20::332])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <cleger@rivosinc.com>)
- id 1tWEXX-000104-JJ
- for qemu-riscv@nongnu.org; Fri, 10 Jan 2025 07:55:06 -0500
-Received: by mail-wr1-x429.google.com with SMTP id
- ffacd0b85a97d-385e3621518so1162530f8f.1
- for <qemu-riscv@nongnu.org>; Fri, 10 Jan 2025 04:55:00 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
+ id 1tWEtn-0004j5-GP
+ for qemu-riscv@nongnu.org; Fri, 10 Jan 2025 08:18:05 -0500
+Received: by mail-wm1-x332.google.com with SMTP id
+ 5b1f17b1804b1-436281c8a38so15155865e9.3
+ for <qemu-riscv@nongnu.org>; Fri, 10 Jan 2025 05:18:03 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1736513699; x=1737118499;
- darn=nongnu.org; 
+ d=linaro.org; s=google; t=1736515082; x=1737119882; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=QlbfSsf0XLSLDDHpVKMC9VWFuIj2IqfXKyNi6zEbLXw=;
- b=tbnYaWxGZfECy4x9OO3uCoe1GZg2douZ2MTsytyvYyovp7qCLfGdNzDB+t94jqbnKu
- MYuPvg05T6YcPZUPDXcfQPK4LbBTctaJzJpBbjjb5IdYCRvd3cj0VBhMBdALr+C40PZE
- +qz5Vm0lcCc0IoEQ53EZwbG4ntICnmE9HFTp58TryCCGttoHvpvTlGhxpMNzHeQDVjPz
- 0hOYdw0jps/4ORgR+cZp5hJT9VBgjz7J2h32HxGJRd/Oq7y5a9mgu15OQi3MOUt0LxJV
- zutfdCdqis2iw5ppzJv3pABmlMxVmYs2GPPRC5I027IDhk7OLKRK2FGdze3wy0/OuffS
- 5R+w==
+ bh=+gnAsVuaYD+iYbCg1dbnY623A4xZ5emqKXVcVqjxUvo=;
+ b=sQwbaT9DVN/tFy17XxnepEDfw9POl+xBUaTW8KEwmq/ci9mzb0vIuI1Gxfm85fopaN
+ rWHfqs/ApZrQUEzfyyDHlYAJaO6ieLFN0yQDL8UKTd4thlSHMDE5OEBjGqlSCIjWZCXR
+ YRyBYQ7jQvI3gZLxIoZpht3YpTlkWcTJGawxwFdumkuMMGrdaE/+ak17lru5gLKlvOIs
+ Xv8ChkdZIqBrlPxnrdYqOJ5L2acB+ZWM3alY8Ws1ZD3IsRulSvFJPSDu7GtkKLOwu5Vf
+ Nj4kIJvlThttsYl5zTL4bvHqtojye3o5ZsRknMvwRlVzHOnHIxHaFlxQrzHBMcXUgtgt
+ n/KQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1736513699; x=1737118499;
+ d=1e100.net; s=20230601; t=1736515082; x=1737119882;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=QlbfSsf0XLSLDDHpVKMC9VWFuIj2IqfXKyNi6zEbLXw=;
- b=GnzXZ+U8K1emReUUiLTf42zPSeyT6c3Pr/qiH5fj5qhAJ00sPFWWX8yqjtHeDQms8K
- lrLUGcmq1wbx8wTUpmhTpq2a+IjUHC3UzzBUC4f8Fhzhk5nJVH4XyZcUJ2q3gpv7xO3K
- 8hGy63XnVmBLBzCHITF6sG6HCMz9HTmscPAMgUwKTiMUqGjlrGCPtvUu6Ioa8SbUwrl3
- f7eLeNOmtNwI7xw8FHYnmDPsemUuorHMcDAfnaG2RDATLNea38+wEDjx02OPwBWQNijR
- 0hgAVAgDPTjpclsJ4mE8M1JuncaAjxnSXW83IhcwVqpE6+006XgymiQcNVxswamLMCfQ
- kgBg==
-X-Gm-Message-State: AOJu0Yw/lgS33t6FhsNNROJQECqK/9GPtFqcbqIm4X7b++tK1GvX5AtJ
- ZwvFfs2HwPQBzHtX/WM4YWspAQW2EPvIb9l7h4dEuQwAkFaNeQFX0JqdmTm/OvpxSB+FsoqIHzM
- q
-X-Gm-Gg: ASbGncuzbOlKUNVZYLoWoQJFm/6rpN6eWls+J4VCgUuVXq9gQIvB44qnv0B1K2E1EUs
- 5B0drq7OHNXZDFHTMvOaswZAIQs/7zaHksYPtVDnBtnSJ/SYJvAJa708fa0gIzf3h8cuCF8G+Ts
- y8+GyvS4tZNaejE432AbqbSuIqdiOI52LxuimNH39U+g3ilnUfe/av9QHE+wvgAu1PQDsuhnLqJ
- OEKsUqRJVviMz4SNTiYSwGOiMp3OKTVP5NuZmKr5f0j64KmwnJk1Wn48g==
-X-Google-Smtp-Source: AGHT+IFlfnLsF/DkG0WbSLrRgDXRjnUt53LMczPXVmUoOzD9VdLX/pRLMfMhdY/DOvIpPiMRVgUyKA==
-X-Received: by 2002:a5d:6c66:0:b0:38a:4184:151a with SMTP id
- ffacd0b85a97d-38a87336d7emr9247148f8f.37.1736513698809; 
- Fri, 10 Jan 2025 04:54:58 -0800 (PST)
-Received: from carbon-x1.. ([2a01:e0a:e17:9700:16d2:7456:6634:9626])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-38a8e4c1c01sm4548921f8f.97.2025.01.10.04.54.57
+ bh=+gnAsVuaYD+iYbCg1dbnY623A4xZ5emqKXVcVqjxUvo=;
+ b=MyM05wqt6lTxcho0ZxCnQcdO3sKGx+ziXi/y7VVv1vqlqcHZO7G3cyKv1hf2QU+2ZG
+ heViZ6M9E3SDUyW3xg2iTHeFafcnkMVSIevYef2P3CwQU45LTG6epe/su6TAeXhfSWgw
+ D9+BrYogq1+RwHQCHur8+YreJ9Vp801oQOYHlBUBP/eUboRnNOcLjYkuEH3+3QwCfZBe
+ hNqIckTxG3BvfqoBli3HN6dybT/AZ4bqrtdxvs8bXtfdGhtuFthfmUXtVIxmLx79w3IH
+ +J5+wagNanEwLNgFXWA1TXblS9Ji2cqzLPCS4b0b6bvFYSK3LEgkhCoDq8ZnabA88TBK
+ Ly6A==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUHNQ65kk/PFg25knGjSbCirAsFDtkYmW8hFWzIf5u/KsiYe70mp2xEbisTnbRMmNaSaLk/79hbFeLN@nongnu.org
+X-Gm-Message-State: AOJu0YwKgz0pdAQAV25BChFzr/iTQth+azfjG1MHSYmyERvi66A2Lhme
+ ZG/ibW6e39kmg9m8CLecwfv1cCRASABKZWnabOoX9730Zt0dW5Xcdstdxi+UgI8=
+X-Gm-Gg: ASbGncvCxMw/TqhAufi6VS1ZdJamSlAs2w50q/kDNKnh5xX+OPi88DTxCcHmeNOFFXG
+ 5eg8SX26NkCJ0WTNXCEl3ZqSZ/n+CRnJPLjhXSY2X6sQd3ZQL5t8wpMZ87YGpzPLJu2hLngRTWd
+ BWgR9hJ+cveTMEpBpeF3YxOojioD4TwWeHIY+CZBdddBybeme3HRbLRWi1Joz7vRQrTsc+EDPX8
+ m+X7tdbxU2Oht1DeONefVd8qIMOoj3FBHu5DnidkIyaemNumMbeAzQ=
+X-Google-Smtp-Source: AGHT+IGTJNkcBuCzNh1ACToW0T5PlsBO9MZ1abCEMdvWIOSSkzW9wu7l2KbGk3SH9G8SyxsahT0g/w==
+X-Received: by 2002:a05:600c:1386:b0:434:f8e5:1bb with SMTP id
+ 5b1f17b1804b1-436e26aeb43mr106184455e9.12.1736515081959; 
+ Fri, 10 Jan 2025 05:18:01 -0800 (PST)
+Received: from draig.lan ([85.9.250.243]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-436e9e37d3bsm51784935e9.31.2025.01.10.05.17.57
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 10 Jan 2025 04:54:57 -0800 (PST)
-From: =?UTF-8?q?Cl=C3=A9ment=20L=C3=A9ger?= <cleger@rivosinc.com>
-To: qemu-riscv@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>
-Cc: =?UTF-8?q?Cl=C3=A9ment=20L=C3=A9ger?= <cleger@rivosinc.com>,
+ Fri, 10 Jan 2025 05:17:57 -0800 (PST)
+Received: from draig.lan (localhost [IPv6:::1])
+ by draig.lan (Postfix) with ESMTP id 1B43660030;
+ Fri, 10 Jan 2025 13:17:55 +0000 (GMT)
+From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
+To: qemu-devel@nongnu.org
+Cc: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
+ Anders Roxell <anders.roxell@linaro.org>, Thomas Huth <thuth@redhat.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bmeng.cn@gmail.com>,
  Weiwei Li <liwei1518@gmail.com>,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
  Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Ved Shanbhogue <ved@rivosinc.com>, Atish Patra <atishp@rivosinc.com>,
- qemu-devel@nongnu.org, Frank Chang <frank.chang@sifive.com>
-Subject: [PATCH v8 6/9] target/riscv: Add Smdbltrp CSRs handling
-Date: Fri, 10 Jan 2025 13:54:37 +0100
-Message-ID: <20250110125441.3208676-7-cleger@rivosinc.com>
-X-Mailer: git-send-email 2.47.1
-In-Reply-To: <20250110125441.3208676-1-cleger@rivosinc.com>
-References: <20250110125441.3208676-1-cleger@rivosinc.com>
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
+ qemu-riscv@nongnu.org (open list:RISC-V TCG CPUs)
+Subject: [PULL 11/32] tests/functional: update the riscv64 tuxrun tests
+Date: Fri, 10 Jan 2025 13:17:33 +0000
+Message-Id: <20250110131754.2769814-12-alex.bennee@linaro.org>
+X-Mailer: git-send-email 2.39.5
+In-Reply-To: <20250110131754.2769814-1-alex.bennee@linaro.org>
+References: <20250110131754.2769814-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::429;
- envelope-from=cleger@rivosinc.com; helo=mail-wr1-x429.google.com
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+Received-SPF: pass client-ip=2a00:1450:4864:20::332;
+ envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x332.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -106,88 +110,47 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Add `ext_smdbltrp`in RISCVCPUConfig and implement MSTATUS.MDT behavior.
-Also set MDT to 1 at reset according to the specification.
+Now there are new up to date images available we should update to them.
+Note we re-use the riscv32 kernel and rootfs for test_riscv64_rv32.
 
-Signed-off-by: Clément Léger <cleger@rivosinc.com>
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
----
- target/riscv/cpu.c      |  3 +++
- target/riscv/cpu_bits.h |  1 +
- target/riscv/cpu_cfg.h  |  1 +
- target/riscv/csr.c      | 13 +++++++++++++
- 4 files changed, 18 insertions(+)
+Cc: Anders Roxell <anders.roxell@linaro.org>
+Reviewed-by: Thomas Huth <thuth@redhat.com>
+Tested-by: Thomas Huth <thuth@redhat.com>
+Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
+Message-Id: <20250108121054.1126164-12-alex.bennee@linaro.org>
 
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 9e1ce0e1f1..e3ed11b0fd 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -1064,6 +1064,9 @@ static void riscv_cpu_reset_hold(Object *obj, ResetType type)
-             env->mstatus_hs = set_field(env->mstatus_hs,
-                                         MSTATUS64_UXL, env->misa_mxl);
-         }
-+        if (riscv_cpu_cfg(env)->ext_smdbltrp) {
-+            env->mstatus = set_field(env->mstatus, MSTATUS_MDT, 1);
-+        }
-     }
-     env->mcause = 0;
-     env->miclaim = MIP_SGEIP;
-diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
-index a3acda4bc8..f97c48a394 100644
---- a/target/riscv/cpu_bits.h
-+++ b/target/riscv/cpu_bits.h
-@@ -559,6 +559,7 @@
- #define MSTATUS_MPELP       0x020000000000 /* zicfilp */
- #define MSTATUS_GVA         0x4000000000ULL
- #define MSTATUS_MPV         0x8000000000ULL
-+#define MSTATUS_MDT         0x40000000000ULL /* Smdbltrp extension */
+diff --git a/tests/functional/test_riscv64_tuxrun.py b/tests/functional/test_riscv64_tuxrun.py
+index 4e2449539c..0d8de36204 100755
+--- a/tests/functional/test_riscv64_tuxrun.py
++++ b/tests/functional/test_riscv64_tuxrun.py
+@@ -17,18 +17,18 @@
+ class TuxRunRiscV64Test(TuxRunBaselineTest):
  
- #define MSTATUS64_UXL       0x0000000300000000ULL
- #define MSTATUS64_SXL       0x0000000C00000000ULL
-diff --git a/target/riscv/cpu_cfg.h b/target/riscv/cpu_cfg.h
-index 20e11a5bdd..aef896ba00 100644
---- a/target/riscv/cpu_cfg.h
-+++ b/target/riscv/cpu_cfg.h
-@@ -84,6 +84,7 @@ struct RISCVCPUConfig {
-     bool ext_smcsrind;
-     bool ext_sscsrind;
-     bool ext_ssdbltrp;
-+    bool ext_smdbltrp;
-     bool ext_svadu;
-     bool ext_svinval;
-     bool ext_svnapot;
-diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-index 4aded3f00c..afb7544f07 100644
---- a/target/riscv/csr.c
-+++ b/target/riscv/csr.c
-@@ -1954,6 +1954,13 @@ static RISCVException write_mstatus(CPURISCVState *env, int csrno,
-         }
-     }
+     ASSET_RISCV64_KERNEL = Asset(
+-        'https://storage.tuxboot.com/20230331/riscv64/Image',
+-        'cd634badc65e52fb63465ec99e309c0de0369f0841b7d9486f9729e119bac25e')
++        'https://storage.tuxboot.com/buildroot/20241119/riscv64/Image',
++        '2bd8132a3bf21570290042324fff48c987f42f2a00c08de979f43f0662ebadba')
+     ASSET_RISCV64_ROOTFS = Asset(
+-        'https://storage.tuxboot.com/20230331/riscv64/rootfs.ext4.zst',
+-        'b18e3a3bdf27be03da0b285e84cb71bf09eca071c3a087b42884b6982ed679eb')
++        'https://storage.tuxboot.com/buildroot/20241119/riscv64/rootfs.ext4.zst',
++        'aa4736a9872651dfc0d95e709465eedf1134fd19d42b8cb305bfd776f9801004')
  
-+    if (riscv_cpu_cfg(env)->ext_smdbltrp) {
-+        mask |= MSTATUS_MDT;
-+        if ((val & MSTATUS_MDT) != 0) {
-+            val &= ~MSTATUS_MIE;
-+        }
-+    }
-+
-     if (xl != MXL_RV32 || env->debugger) {
-         if (riscv_has_ext(env, RVH)) {
-             mask |= MSTATUS_MPV | MSTATUS_GVA;
-@@ -1996,6 +2003,12 @@ static RISCVException write_mstatush(CPURISCVState *env, int csrno,
-     uint64_t valh = (uint64_t)val << 32;
-     uint64_t mask = riscv_has_ext(env, RVH) ? MSTATUS_MPV | MSTATUS_GVA : 0;
+     ASSET_RISCV32_KERNEL = Asset(
+-        'https://storage.tuxboot.com/20230331/riscv32/Image',
+-        '89599407d7334de629a40e7ad6503c73670359eb5f5ae9d686353a3d6deccbd5')
++        'https://storage.tuxboot.com/buildroot/20241119/riscv32/Image',
++        '872bc8f8e0d4661825d5f47f7bec64988e9d0a8bd5db8917d57e16f66d83b329')
+     ASSET_RISCV32_ROOTFS = Asset(
+-        'https://storage.tuxboot.com/20230331/riscv32/rootfs.ext4.zst',
+-        '7168d296d0283238ea73cd5a775b3dd608e55e04c7b92b76ecce31bb13108cba')
++        'https://storage.tuxboot.com/buildroot/20241119/riscv32/rootfs.ext4.zst',
++        '511ad34e63222db08d6c1da16fad224970de36517a784110956ba6a24a0ee5f6')
  
-+    if (riscv_cpu_cfg(env)->ext_smdbltrp) {
-+        mask |= MSTATUS_MDT;
-+        if ((valh & MSTATUS_MDT) != 0) {
-+            mask |= MSTATUS_MIE;
-+        }
-+    }
-     env->mstatus = (env->mstatus & ~mask) | (valh & mask);
- 
-     return RISCV_EXCP_NONE;
+     def test_riscv64(self):
+         self.set_machine('virt')
 -- 
-2.47.1
+2.39.5
 
 
