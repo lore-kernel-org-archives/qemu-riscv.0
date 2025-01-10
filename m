@@ -4,78 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 77D20E7719C
-	for <qemu-riscv@archiver.kernel.org>; Fri, 10 Jan 2025 08:27:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 71BEDE7719D
+	for <qemu-riscv@archiver.kernel.org>; Fri, 10 Jan 2025 12:55:49 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tWAMI-0002O1-Dn; Fri, 10 Jan 2025 03:27:10 -0500
+	id 1tWEYB-0004hP-9v; Fri, 10 Jan 2025 07:55:43 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <atishp@rivosinc.com>)
- id 1tWAME-0002NN-P7
- for qemu-riscv@nongnu.org; Fri, 10 Jan 2025 03:27:07 -0500
-Received: from mail-pl1-x630.google.com ([2607:f8b0:4864:20::630])
+ (Exim 4.90_1) (envelope-from <cleger@rivosinc.com>)
+ id 1tWEXT-00049D-Ml
+ for qemu-riscv@nongnu.org; Fri, 10 Jan 2025 07:55:00 -0500
+Received: from mail-wr1-x434.google.com ([2a00:1450:4864:20::434])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <atishp@rivosinc.com>)
- id 1tWAMB-0000n8-MH
- for qemu-riscv@nongnu.org; Fri, 10 Jan 2025 03:27:05 -0500
-Received: by mail-pl1-x630.google.com with SMTP id
- d9443c01a7336-21a1e6fd923so39219455ad.1
- for <qemu-riscv@nongnu.org>; Fri, 10 Jan 2025 00:27:03 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <cleger@rivosinc.com>)
+ id 1tWEXP-0000yR-KS
+ for qemu-riscv@nongnu.org; Fri, 10 Jan 2025 07:54:58 -0500
+Received: by mail-wr1-x434.google.com with SMTP id
+ ffacd0b85a97d-3862d16b4f5so1280686f8f.0
+ for <qemu-riscv@nongnu.org>; Fri, 10 Jan 2025 04:54:53 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1736497622; x=1737102422;
+ d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1736513691; x=1737118491;
  darn=nongnu.org; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=bgZGVh+ycwDsOSKFa9SNlTClj0dfHISpgNjgoYAIZi0=;
- b=YdqTO5B0NvRI6NfQyEtivWXf9zQDn+yuJ+DJ5zctpBJABDS30fHf4JR3Hqe/Vb7Z4k
- 58a/CR9rt8suW2VhH+EHxhpHV14GyhvoamaFOUc2gLoxdVr6KQ+FLLzBnWclAbrwAy8G
- WTm0M2FQRXh2m6atDOKbLxhW6S8XuCH6yEi3exs1hkMEJ3QZvl1PSXe055ez14/x8dFc
- lCVVGns3Oh6noioK9K18RMw1U1hWVcBU8KJ2f6HDjwe84tIa6LuXhjeH8DFUdv5gOEgP
- llen85i/1haoecg/GtE376iFu+OC+NBU49LaWOOrho5IrijBSWBwdcadoGONH6yzkTCU
- tuVQ==
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=HUWbMWiJsodZ0h+IpbBBVfmT0eew1n8LHYvYIP+aD5w=;
+ b=sq76M+6mtyBjIlCkhNXBKvT/KBp41xq3WQOfBlsSWHZ/UrgRfIo61T81AnSzTU8DT3
+ xiol5hUM84q50VsEHnRdGWT25JleYpWdFtF4MfAKl1dR3j2I4VPNp/RFzVv+LC83ksag
+ 66UntjGy+nTRcPEgGsMp4kaBNZdKiurttDzaVF3GRQfJ8YS7WeZ6fE7KUiBzkreaHDGl
+ +0b4r9yWKE8A/suEJS9ZaY5+relleLil8v9J/FNidF53fl/JruenjEAS2tGpM9VwrD7l
+ VACA05Cs4BNAEu5iOXgDpNaLYy81JJB6FrsLnJsxEWL8qqo6x0t3/s2c1JGjg1kNQIQb
+ nj4g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1736497622; x=1737102422;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=bgZGVh+ycwDsOSKFa9SNlTClj0dfHISpgNjgoYAIZi0=;
- b=F/+zSR2juEY6BQPV5lOUlWKTzl+pjXxolDn1+PzA+HJqGNdiWmdkxJrHCNcyt0iyTF
- 1RzFBG5mK1icgM1uvUdofE5pJuB7gGkLBen2Mrs/c/+id9gUcVZJpARi+9Nm6vnBk89C
- OP0WBSpAvaGAVTIFx4378R0RWVgmxesed6SwQsdIeaYwmzZImnHr+Ve5V7/wjyHea+aW
- KqCUHoTKNLj7gwQSYPIlsDugFtSOrziEmc6wvdaJDSA9WZ/KYL7dBytfiGn1Fu8tO7M0
- 1S3M+miJBbI9elo/2+6pAJA+APbKGMslqsrq8XnsTCVmZkArIZE7QNIwp+5JtgNWxbp8
- uOMA==
-X-Gm-Message-State: AOJu0Yyy1fg6GGv6DpW3Bx0z5LWs0KqqcYr8kXIWYdSsAByGXFzbvz5N
- s2coplvtQUmUXOQJRAF4TLs5ZxcoOaTebeKqAZm+HTLJ24/zPFQ+RwI1YB2R7p4g+4ljyrZw821
- 76NbqIZ4I0coNZxuf3zipQx4zt+qVsta/fJudEw==
-X-Gm-Gg: ASbGncu8JlAXxso2aq2GO07jhuOHaZVTod9MTrXVcq812DXaZ5YEP+xAI33M6rzGsSO
- AKUdtr8v9yJmOvJ+KvhII2m38TILzcX/l3yAv
-X-Google-Smtp-Source: AGHT+IEFGXYiV13vbFHUp6WfPA0AZfjtwKsgdsSpmDsaRdTSrlOZLRUUEosGt6blRoRQYeVA1Wu37GNN3cHM59O8dbk=
-X-Received: by 2002:a05:6a00:2388:b0:72a:a7a4:9c6d with SMTP id
- d2e1a72fcca58-72d21ff97b1mr16598428b3a.24.1736497622020; Fri, 10 Jan 2025
- 00:27:02 -0800 (PST)
+ d=1e100.net; s=20230601; t=1736513691; x=1737118491;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=HUWbMWiJsodZ0h+IpbBBVfmT0eew1n8LHYvYIP+aD5w=;
+ b=X7wdIgzoW7nU3spKJzcCiPjR7YdGF8O1bqqPt4phBCPTshMhWLC8ipGTbmEdFBo+i/
+ HQIZnBT5qOqdSKiHTZGM+kDprKpoPi4S6OYyQDuvLuDAg3Qb/VfWnLxLqNXCKMd/ExjT
+ rp7ICfeVTfQYEHJB94bFDbiFrdVHUFeycjHBL1s1hpQDBwzaSc+JkqSmE2kVuRpzkXDt
+ hHBZHTTb7e0tV3VLUfsccKr6soi2HciXfCS1JNnpkYyBk60LNrnTzVBYk+w9PplLz1Pb
+ QIrXBF2vbB43ibJmY1OIzSntz4Rwf7AKBdBtmnape+I3wZWDLTr6AqtwUR+grpIcZ5DV
+ YXhA==
+X-Gm-Message-State: AOJu0YyM0FrNb7tJhtSAoUIpzBtG693TC201eU+EUylKrhHiysbxnUY2
+ p2oOz6A0qCONN6ys9vY1iN2x3dHNS50uuPVpa3i1aUUHyc0x4ak6POrIcruuXNbXXW0hDmv/11p
+ Q
+X-Gm-Gg: ASbGnctek+4zsfVhK+e6Pt7dNgRS1cXy/sMWmeSN27N+48NkI2PpvlZ9obIFXDkOZMa
+ z3bujZEay8YPLuVIYmgT60XHJyUbbXiQWqSA21MSUqh7/80BAATp25rb7I7u64RBsfeFFAmtYgY
+ BMK9tUs5IMbMlI7UmwL+JtWC8xCw2QGBwNAf0yKwHc1mv3ZpQUyh7cFQG199+2msm0TaZxlrFHs
+ gmR3WWBo2fjXK0mbu9jd86CY0/bgk0JXQlSQ98P18El8knvHOUKZvu0BQ==
+X-Google-Smtp-Source: AGHT+IEZaMZmTSHnrzRUem7j96IFmX89gzeo4iCvb76dVlVDaHaMFTZkdwcAWWPuHo7r9tm4WPZ/tw==
+X-Received: by 2002:a05:6000:154f:b0:386:32ca:7b5e with SMTP id
+ ffacd0b85a97d-38a8b0e5092mr5787408f8f.16.1736513691444; 
+ Fri, 10 Jan 2025 04:54:51 -0800 (PST)
+Received: from carbon-x1.. ([2a01:e0a:e17:9700:16d2:7456:6634:9626])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-38a8e4c1c01sm4548921f8f.97.2025.01.10.04.54.50
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 10 Jan 2025 04:54:50 -0800 (PST)
+From: =?UTF-8?q?Cl=C3=A9ment=20L=C3=A9ger?= <cleger@rivosinc.com>
+To: qemu-riscv@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Bin Meng <bin.meng@windriver.com>
+Cc: =?UTF-8?q?Cl=C3=A9ment=20L=C3=A9ger?= <cleger@rivosinc.com>,
+ Weiwei Li <liwei1518@gmail.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Ved Shanbhogue <ved@rivosinc.com>, Atish Patra <atishp@rivosinc.com>,
+ qemu-devel@nongnu.org, Frank Chang <frank.chang@sifive.com>
+Subject: [PATCH v8 0/9] target/riscv: Add support for Smdbltrp and Ssdbltrp
+ extensions
+Date: Fri, 10 Jan 2025 13:54:31 +0100
+Message-ID: <20250110125441.3208676-1-cleger@rivosinc.com>
+X-Mailer: git-send-email 2.47.1
 MIME-Version: 1.0
-References: <20241203-counter_delegation-v4-0-c12a89baed86@rivosinc.com>
- <CAKmqyKMBSoTR7-UexAu2qrur5bOgWBGOOQOPXgrh+k6LC3vG-A@mail.gmail.com>
-In-Reply-To: <CAKmqyKMBSoTR7-UexAu2qrur5bOgWBGOOQOPXgrh+k6LC3vG-A@mail.gmail.com>
-From: Atish Kumar Patra <atishp@rivosinc.com>
-Date: Fri, 10 Jan 2025 00:26:51 -0800
-X-Gm-Features: AbW1kva0Xq4do8qvoR3sf3egip_uGkUSfHOHMZ22R2msBeLH7EfuifmknEVew0M
-Message-ID: <CAHBxVyE7vd1TjgnV5Cd_yDKwnNuEORz2O5gU9qS0SVqK+t95WQ@mail.gmail.com>
-Subject: Re: [PATCH v4 00/11] Add RISC-V Counter delegation ISA extension
- support
-To: Alistair Francis <alistair23@gmail.com>
-Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, kaiwenxue1@gmail.com, 
- palmer@dabbelt.com, liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, 
- bin.meng@windriver.com, dbarboza@ventanamicro.com, alistair.francis@wdc.com, 
- Kaiwen Xue <kaiwenx@rivosinc.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::630;
- envelope-from=atishp@rivosinc.com; helo=mail-pl1-x630.google.com
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::434;
+ envelope-from=cleger@rivosinc.com; helo=mail-wr1-x434.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -97,143 +104,212 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Thu, Jan 9, 2025 at 6:10=E2=80=AFPM Alistair Francis <alistair23@gmail.c=
-om> wrote:
->
-> On Wed, Dec 4, 2024 at 9:18=E2=80=AFAM Atish Patra <atishp@rivosinc.com> =
-wrote:
-> >
-> > This series adds the counter delegation extension support. The counter
-> > delegation ISA extension(Smcdeleg/Ssccfg) actually depends on multiple =
-ISA
-> > extensions.
-> >
-> > 1. S[m|s]csrind : The indirect CSR extension[1] which defines additiona=
-l
-> >    5 ([M|S|VS]IREG2-[M|S|VS]IREG6) register to address size limitation =
-of
-> >    RISC-V CSR address space.
-> > 2. Smstateen: The stateen bit[60] controls the access to the registers
-> >    indirectly via the above indirect registers.
-> > 3. Smcdeleg/Ssccfg: The counter delegation extensions[2]
-> >
-> > The counter delegation extension allows Supervisor mode to program the
-> > hpmevent and hpmcounters directly without needing the assistance from t=
-he
-> > M-mode via SBI calls. This results in a faster perf profiling and very
-> > few traps. This extension also introduces a scountinhibit CSR which all=
-ows
-> > to stop/start any counter directly from the S-mode. As the counter
-> > delegation extension potentially can have more than 100 CSRs, the speci=
-ficaiton
-> > leverages the indirect CSR extension to save the precious CSR address r=
-ange.
-> >
-> > Due to the dependancy of these extensions, the following extensions mus=
-t be
-> > enabled to use the counter delegation feature in S-mode.
-> >
-> > "smstateen=3Dtrue,sscofpmf=3Dtrue,ssccfg=3Dtrue,smcdeleg=3Dtrue,smcsrin=
-d=3Dtrue,sscsrind=3Dtrue"
-> >
-> > This makes the qemu command line quite tedious. The previous version, I=
- tried
-> > to introduce a preferred rule to enable all but it was decided that an =
-user
-> > should opt to use max cpu if they don't want to enable all the dependan=
-t ISA
-> > extensions by hand. This series got rid of the preferred rule and added=
- 2
-> > patches for specifiying the mandatory ISA extensions via implied rule.
-> >
-> > The first 2 patches decouple the indirect CSR usage from AIA implementa=
-tion
-> > while patch3 adds stateen bits validation for AIA.
-> > The PATCH4 implements indirect CSR extensions while remaining patches
-> > implement the counter delegation extensions.
-> >
-> > The Qemu patches can be found here:
-> > https://github.com/atishp04/qemu/tree/b4/counter_delegation_v4
-> > The Linux kernel patches can be found here (WIP version due to onging u=
-pstream
-> > dependant patches):
-> > https://github.com/atishp04/linux/tree/b4/counter_delegation_v2
-> >
-> > [1] https://github.com/riscv/riscv-indirect-csr-access
-> > [2] https://github.com/riscv/riscv-smcdeleg-ssccfg
-> >
-> > Cc: kaiwenxue1@gmail.com
-> >
-> > Signed-off-by: Atish Patra <atishp@rivosinc.com>
-> > ---
-> > Changes in v4:
-> > - Fixed the comments recieved on v3.
-> > - code style comments and removed 1 redundant if else block.
-> > - Link to v3: https://lore.kernel.org/r/20241117-counter_delegation-v3-=
-0-476d6f36e3c8@rivosinc.com
-> >
-> > Changes in v3:
-> > 1. Updated the priv version in extensions
-> > 2. Fixed minor issues pointed out in v2.
-> > 3. Dropped preferred rule and added an implied rule for AIA and counter
-> >    delegation.
-> > - Link to v2: https://lore.kernel.org/r/20240723-counter_delegation-v2-=
-0-c4170a5348ca@rivosinc.com
-> >
-> > Changes from previous RFC version:
-> >
-> > 1. Renamed sxcsrind to csrind to align with other function names.
-> > 2. Enable sscofpmf by default for virt machine.
-> > 3. Introduced a preferred extension enabling rule strategy for generic
-> > mult-extension dependencies.
-> > 4. Enables all PMU related extensions if ssccfg extension is set.
-> >
-> > RFC Link:
-> > https://lore.kernel.org/all/35a4d40c-9d0d-4a0a-a2c9-5d5f7def9b9c@ventan=
-amicro.com/T/
-> >
-> > ---
-> > Atish Patra (5):
-> >       target/riscv: Enable S*stateen bits for AIA
-> >       target/riscv: Add properties for counter delegation ISA extension=
-s
-> >       target/riscv: Invoke pmu init after feature enable
-> >       target/riscv: Add implied rule for counter delegation extensions
-> >       target/riscv: Add configuration for S[m|s]csrind, Smcdeleg/Ssccfg
-> >
-> > Kaiwen Xue (6):
-> >       target/riscv: Add properties for Indirect CSR Access extension
-> >       target/riscv: Decouple AIA processing from xiselect and xireg
-> >       target/riscv: Support generic CSR indirect access
-> >       target/riscv: Add counter delegation definitions
-> >       target/riscv: Add select value range check for counter delegation
-> >       target/riscv: Add counter delegation/configuration support
-> >
-> >  target/riscv/cpu.c         |  20 +-
-> >  target/riscv/cpu.h         |   1 +
-> >  target/riscv/cpu_bits.h    |  34 ++-
-> >  target/riscv/cpu_cfg.h     |   4 +
-> >  target/riscv/csr.c         | 718 +++++++++++++++++++++++++++++++++++++=
-+++++---
-> >  target/riscv/machine.c     |   1 +
-> >  target/riscv/tcg/tcg-cpu.c |  28 +-
-> >  7 files changed, 753 insertions(+), 53 deletions(-)
->
-> This has all been Acked now, do you mind rebasing on
-> https://github.com/alistair23/qemu/tree/riscv-to-apply.next ?
->
+A double trap typically arises during a sensitive phase in trap handling
+operations — when an exception or interrupt occurs while the trap
+handler (the component responsible for managing these events) is in a
+non-reentrant state. This non-reentrancy usually occurs in the early
+phase of trap handling, wherein the trap handler has not yet preserved
+the necessary state to handle and resume from the trap. The occurrence
+of such event is unlikely but can happen when dealing with hardware
+errors.
 
-Done. I have coordinated with clement as well in case his Ssdbltrp
-rebase has some conflicts due to this.
+This series adds support for Ssdbltrp and Smdbltrp ratified ISA
+extensions [1]. It is based on the Smrnmi series [5].
 
-> Alistair
->
-> > ---
-> > base-commit: 27652f9ca9d831c67dd447346c6ee953669255f0
-> > change-id: 20240715-counter_delegation-10ab44c7d2c0
-> > --
-> > Regards,
-> > Atish patra
-> >
-> >
+Ssdbltrp can be tested using qemu[2], opensbi (master branch), linux[3] and
+kvm-unit-tests[4]. Assuming you have a riscv environment available and
+configured (CROSS_COMPILE), it can be built for riscv64 using the
+following instructions:
+
+Qemu:
+  $ git clone https://github.com/rivosinc/qemu.git
+  $ cd qemu
+  $ git switch -C dbltrp_v8 dev/cleger/dbltrp_v8
+  $ mkdir build && cd build
+  $ ../configure --target-list=riscv64-softmmu
+  $ make
+
+OpenSBI:
+  $ git clone https://github.com/rivosinc/opensbi.git
+  $ cd opensbi
+  $ make O=build PLATFORM_RISCV_XLEN=64 PLATFORM=generic
+
+Linux:
+  $ git clone https://github.com/rivosinc/linux.git
+  $ cd linux
+  $ git switch -C dbltrp_v1 dev/cleger/dbltrp_v1
+  $ export ARCH=riscv
+  $ make O=build defconfig
+  $ ./script/config --file build/.config --enable RISCV_DBLTRP
+  $ make O=build
+
+kvm-unit-tests:
+  $ git clone https://github.com/clementleger/kvm-unit-tests.git
+  $ cd kvm-unit-tests
+  $ git switch -C dbltrp_v1 dev/cleger/dbltrp_v1
+  $ ./configure --arch=riscv64 --cross-prefix=$CROSS_COMPILE
+  $ make
+
+You will also need kvmtool in your rootfs.
+
+Run with kvm-unit-test test as kernel:
+  $ qemu-system-riscv64 \
+    -M virt \
+    -cpu rv64,ssdbltrp=true,smdbltrp=true \
+    -nographic \
+    -serial mon:stdio \
+    -bios opensbi/build/platform/generic/firmware/fw_jump.bin \
+    -kernel kvm-unit-tests-dbltrp/riscv/sbi_dbltrp.flat
+  ...
+  [OpenSBI boot partially elided]
+  Boot HART ISA Extensions  : sscofpmf,sstc,zicntr,zihpm,zicboz,zicbom,sdtrig,svadu,ssdbltrp
+  ...
+  ##########################################################################
+  #    kvm-unit-tests
+  ##########################################################################
+
+  PASS: sbi: fwft: FWFT extension probing no error
+  PASS: sbi: fwft: FWFT extension is present
+  PASS: sbi: fwft: dbltrp: Get double trap enable feature value
+  PASS: sbi: fwft: dbltrp: Set double trap enable feature value == 0
+  PASS: sbi: fwft: dbltrp: Get double trap enable feature value == 0
+  PASS: sbi: fwft: dbltrp: Double trap disabled, trap first time ok
+  PASS: sbi: fwft: dbltrp: Set double trap enable feature value == 1
+  PASS: sbi: fwft: dbltrp: Get double trap enable feature value == 1
+  PASS: sbi: fwft: dbltrp: Trapped twice allowed ok
+  INFO: sbi: fwft: dbltrp: Should generate a double trap and crash !
+
+  sbi_trap_error: hart0: trap0: double trap handler failed (error -10)
+
+  sbi_trap_error: hart0: trap0: mcause=0x0000000000000010 mtval=0x0000000000000000
+  sbi_trap_error: hart0: trap0: mtval2=0x0000000000000003 mtinst=0x0000000000000000
+  sbi_trap_error: hart0: trap0: mepc=0x00000000802000d8 mstatus=0x8000000a01006900
+  sbi_trap_error: hart0: trap0: ra=0x00000000802001fc sp=0x0000000080213e70
+  sbi_trap_error: hart0: trap0: gp=0x0000000000000000 tp=0x0000000080088000
+  sbi_trap_error: hart0: trap0: s0=0x0000000080213e80 s1=0x0000000000000001
+  sbi_trap_error: hart0: trap0: a0=0x0000000080213e80 a1=0x0000000080208193
+  sbi_trap_error: hart0: trap0: a2=0x000000008020dc20 a3=0x000000000000000f
+  sbi_trap_error: hart0: trap0: a4=0x0000000080210cd8 a5=0x00000000802110d0
+  sbi_trap_error: hart0: trap0: a6=0x00000000802136e4 a7=0x0000000046574654
+  sbi_trap_error: hart0: trap0: s2=0x0000000080210cd9 s3=0x0000000000000000
+  sbi_trap_error: hart0: trap0: s4=0x0000000000000000 s5=0x0000000000000000
+  sbi_trap_error: hart0: trap0: s6=0x0000000000000000 s7=0x0000000000000001
+  sbi_trap_error: hart0: trap0: s8=0x0000000000002000 s9=0x0000000080083700
+  sbi_trap_error: hart0: trap0: s10=0x0000000000000000 s11=0x0000000000000000
+  sbi_trap_error: hart0: trap0: t0=0x0000000000000000 t1=0x0000000080213ed8
+  sbi_trap_error: hart0: trap0: t2=0x0000000000001000 t3=0x0000000080213ee0
+  sbi_trap_error: hart0: trap0: t4=0x0000000000000000 t5=0x000000008020f8d0
+  sbi_trap_error: hart0: trap0: t6=0x0000000000000000
+
+Run with linux and kvm-unit-test test in kvm (testing VS-mode):
+  $ qemu-system-riscv64 \
+    -M virt \
+    -cpu rv64,ssdbltrp=true,smdbltrp=true \
+    -nographic \
+    -serial mon:stdio \
+    -bios opensbi/build/platform/generic/firmware/fw_jump.bin \
+    -kernel linux/build/arch/riscv/boot/Image
+  ...
+  [Linux boot partially elided]
+  [    0.735079] riscv-dbltrp: Double trap handling registered
+  ...
+
+  $ lkvm run -k sbi_dbltrp.flat -m 128 -c 2
+  ##########################################################################
+  #    kvm-unit-tests
+  ##########################################################################
+
+  PASS: sbi: fwft: FWFT extension probing no error
+  PASS: sbi: fwft: FWFT extension is present
+  PASS: sbi: fwft: dbltrp: Get double trap enable feature value
+  PASS: sbi: fwft: dbltrp: Set double trap enable feature value == 0
+  PASS: sbi: fwft: dbltrp: Get double trap enable feature value == 0
+  PASS: sbi: fwft: dbltrp: Double trap disabled, trap first time ok
+  PASS: sbi: fwft: dbltrp: Set double trap enable feature value == 1
+  PASS: sbi: fwft: dbltrp: Get double trap enable feature value == 1
+  PASS: sbi: fwft: dbltrp: Trapped twice allowed ok
+  INFO: sbi: fwft: dbltrp: Should generate a double trap and crash !
+  [   51.939077] Guest double trap
+  [   51.939323] kvm [93]: VCPU exit error -95
+  [   51.939683] kvm [93]: SEPC=0x802000d8 SSTATUS=0x200004520 HSTATUS=0x200200180
+  [   51.939947] kvm [93]: SCAUSE=0x10 STVAL=0x0 HTVAL=0x3 HTINST=0x0
+  KVM_RUN failed: Operation not supported
+  $
+
+Testing Smbdbltrp can be done using gdb and trigger some trap. For
+instance, interrupt M-mode firmware at some point, set mstatus.mdt = 1
+and corrupt some register to generate a NULL pointer exception.
+
+Link: https://github.com/riscv/riscv-isa-manual/commit/52a5742d5ab5a0792019033631b2035a493ad981 [1]
+Link: https://github.com/rivosinc/qemu/tree/dev/cleger/dbltrp_v8 [2]
+Link: https://github.com/rivosinc/linux/tree/dev/cleger/dbltrp_v1 [3]
+Link: https://github.com/clementleger/kvm-unit-tests/tree/dev/cleger/dbltrp_v1 [4]
+Link: https://lore.kernel.org/qemu-riscv/20241217062440.884261-1-frank.chang@sifive.com/ [5]
+
+---
+
+V8:
+ - Rebased on top of Atish counter_delegation_v4 series
+
+V7:
+ - Rebased on riscv-to-apply.next, on top of snrmi v10 series
+
+V6:
+ - Simplify and fix write_henvcfg() masking by assigning the written
+   value to henvcfg and mask the value to be written as well as clearing
+   the upper part of henvcfgh upon writing.
+ - Rebased on RNMI v9 series.
+
+V5:
+ - Use 0 instead of false to set MSTATUS_MDT in helper_mnret()
+ - Added explicit comments about henvcfg write mask being tricky.
+ - Fixed a invalid menvcfg_mask in write_henvcfgh
+
+V4:
+ - Remove DTE from sstatus_v1_10_mask variable and add specific if for
+   DTE masking where it's used.
+ - Use mstatus_hs.sdt field rather than setting DTE to 0 in
+   riscv_do_cpu_interrupt().
+ - Add a fix for henvcfg value which was incorrectly set after changing
+   menvcfg
+ - Remove useless ext_ssdbltrp check in
+   riscv_env_smode_dbltrp_enabled().
+ - Remove useless mstatus clear in write_mstatus().
+ - Add proper handling of SDT writing to vsstatus.
+ - Add clearing of vsstatus//mstatus SDT field when DTE is disabled.
+ - Fix wrong value being written for MDT/MIE in write_mstatush().
+ - Rebased on Frank Snrnmi v7
+
+V3:
+ - Fix spec version from 1.12 to 1.13 for Smdbltrp and Ssdbltrp
+ - Add better comments for dte/sdt computation in
+   riscv_cpu_do_interrupt().
+ - Move some CSR related changes to the CSRs related commits.
+
+V2:
+ - Squashed commits that added ext_s{s|m}dbltrp as suggested by Daniel
+
+Clément Léger (9):
+  target/riscv: Fix henvcfg potentially containing stale bits
+  target/riscv: Add Ssdbltrp CSRs handling
+  target/riscv: Implement Ssdbltrp sret, mret and mnret behavior
+  target/riscv: Implement Ssdbltrp exception handling
+  target/riscv: Add Ssdbltrp ISA extension enable switch
+  target/riscv: Add Smdbltrp CSRs handling
+  target/riscv: Implement Smdbltrp sret, mret and mnret behavior
+  target/riscv: Implement Smdbltrp behavior
+  target/riscv: Add Smdbltrp ISA extension enable switch
+
+ target/riscv/cpu.c        |   9 ++-
+ target/riscv/cpu.h        |   1 +
+ target/riscv/cpu_bits.h   |   8 +++
+ target/riscv/cpu_cfg.h    |   2 +
+ target/riscv/cpu_helper.c | 116 +++++++++++++++++++++++++++++++-------
+ target/riscv/csr.c        |  94 +++++++++++++++++++++++++-----
+ target/riscv/op_helper.c  |  47 ++++++++++++++-
+ 7 files changed, 240 insertions(+), 37 deletions(-)
+
+-- 
+2.47.1
+
 
