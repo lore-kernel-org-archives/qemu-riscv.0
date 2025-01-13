@@ -4,67 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 572F6E7719F
-	for <qemu-riscv@archiver.kernel.org>; Mon, 13 Jan 2025 00:15:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BAE3EE7719E
+	for <qemu-riscv@archiver.kernel.org>; Mon, 13 Jan 2025 00:54:57 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tX878-0007Fw-HV; Sun, 12 Jan 2025 19:15:30 -0500
+	id 1tX8jD-0008P1-Ja; Sun, 12 Jan 2025 19:54:51 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1tX874-0007FA-DM; Sun, 12 Jan 2025 19:15:28 -0500
-Received: from mail-vk1-xa2c.google.com ([2607:f8b0:4864:20::a2c])
+ id 1tX8j6-0007ra-9k; Sun, 12 Jan 2025 19:54:44 -0500
+Received: from mail-vs1-xe30.google.com ([2607:f8b0:4864:20::e30])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1tX86z-0004D7-7L; Sun, 12 Jan 2025 19:15:26 -0500
-Received: by mail-vk1-xa2c.google.com with SMTP id
- 71dfb90a1353d-518a861612eso2378677e0c.1; 
- Sun, 12 Jan 2025 16:15:20 -0800 (PST)
+ id 1tX8j3-00032N-Q8; Sun, 12 Jan 2025 19:54:43 -0500
+Received: by mail-vs1-xe30.google.com with SMTP id
+ ada2fe7eead31-4aff04f17c7so3059701137.0; 
+ Sun, 12 Jan 2025 16:54:40 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1736727320; x=1737332120; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1736729679; x=1737334479; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=jMCe+GpChOBzayGVH8WNUzIOPMixrKF5IIptUHvZZ0s=;
- b=K1F8OfXasHc4hM7+OUaHFGFxT6V5yqFKom2/TtmzOIF+zU8lZ1YHQ9v+tXIawCaRug
- z22Z4NnmL8011WCuso/B1inJ53h0+1f2ZrSptrY+eaWF5TyPm21Fh2eaJAiLV9uGymvt
- hsXtOvzLk3hgt5HpGlg7tU8cv41eUWg4nEmTJMcOf3yQ26Po5FWPvtemxBAK1MjoWhS2
- 5iAcVcIi758dlU8L4E37NYSHYVM2HKwdOnFV/W9u6/6PSo24ZBDoUowgejnpiXMI0JkS
- V9kRveDj3XFXgo6IBum02YMsu/9hiTRLAiOkwvImkw+C+HiUjhdEJ3rdLZaGOYWXy5Pu
- VbpA==
+ bh=jKziCxKEZvmGVoKSzZlgWvLs3ZtkNvBSB1Ne8OxhzuA=;
+ b=cnX/Sjzb4tEuPytTeQ2qK3MLqdY6OYaW6xLJMW6NkamWOmTFgjrUOoCiqNSR5ZlVNX
+ Zan4CiuGFJfRIuyCjvgY7FqQ5m5Ci931pPoau33n4tdjjhjKgRVGRvT0AJ8YGPJk+ZSS
+ 430x1ipJiy21dGrC2e4eVzfUIjbRDi35CeOK7+isTHpJlfDPONkClFY2tZK2/0RgXCjj
+ 7GRvNFrgARbZjgNbozudLlmh4o5wqVLifV7N9N+4bwqyqmCj5XggZzgwFLrFa3RjU+7w
+ NAzft49VK2HEwL6OWswr67hZRXrgCtqTfgRwccHxWT7PRoEniBZr4xHwk86bgPf2u4tS
+ O+oA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1736727320; x=1737332120;
+ d=1e100.net; s=20230601; t=1736729679; x=1737334479;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=jMCe+GpChOBzayGVH8WNUzIOPMixrKF5IIptUHvZZ0s=;
- b=USW/rGBFU5C6qxvL5e+OsYWWnsSiu20MogJil9C/CYsZev0SiYIcH5XjDk0fNld0Y6
- E+dD6/G/5FngDvWTAuIVelfxUCjldFPIDf1prEmK6GgensN9cs3wwKqr5kMhcu2Vq014
- ojidjaFt3jIW97DuMx7tkVKGXuhoLgWjzqsWYu2hMRSunllJAO4sd6sh+OQZ6E+MMlga
- W02ZLs7bS3EOT7L5zt/Vc5IMYMn3zL6EMR8XAJ0yFL4ho019l1b5KW/Rp+UtWiPT9bXj
- 88O5r/cyvQPouKy1imsJLUqfVzTIgcaGnhBCRd24opPWTGR7V4aUI06vM4PXnmLfFie9
- 4WhA==
+ bh=jKziCxKEZvmGVoKSzZlgWvLs3ZtkNvBSB1Ne8OxhzuA=;
+ b=Hu+YbknHkrAeVqv1ztT8FlXFQAQ7B57qn6KDvIwnRdmrUeasRRcxoZBtRe+KOTVQZV
+ q4kdgSmfku+6fVsUVBOG1rwQQFfglhbfiv8kZwhek0Z1vMuICw7CL6dh6cZZ0FOzeOBr
+ dB5lTT3l7Njp0lhqn8qlT9VhJWAleEKoQ/UJQ7i/Ey4KCp1DCusHZuf2cQGBPDYZHsSB
+ Jv0iFiycUKx3Yu/f7/Y6lDJfpCX6vGjsMmcMRYWtTf85BQrCPoCs1jcr7jqwedLBygma
+ bRv2E30nrzad6pUUa96SRcJ8Jkt/yn/tgsw6LuHTzKjbkkD9YKpl7KpuBaYYW/X7SaVa
+ xKqQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUB37DSArK2ABYwPO96pZetDsg1fYc9Cehh4hu+kyelvRNc5/m8y8vQg5rJTRKFwvKmutp0rDVNz1UO@nongnu.org
-X-Gm-Message-State: AOJu0Yxgx+ICx0Vt9NAnoIAfLrkLw+DPsSSPneCeG/p4Trnv3Fif0Xmh
- xHOCAICPMU37fH6cNHtNAzI2k9WvThntGwAprnck3Y+MGM1agA8x+2X6h8oYBJDjc0+sbJ5F24N
- CkUg5KSO04TUukq/Rp1/PEllgQTY=
-X-Gm-Gg: ASbGncswMLipkG97rTtKb9quBnesJibsvYpELPhbVsAbJd80hqMHE+KeB3nqGDjquCz
- gu7OMJ8BktdCxcoxY1qki5EZfckKcNgjt2eD/r5ZDbeOfDxecbq/uXQkXglGuYSxzPtM=
-X-Google-Smtp-Source: AGHT+IGI0AWetrCs60PKl75gn999JHVeCSfiQbhD3m/qngFxta1ku32Ehd50rBBNvwbIw8d+iXreE4fS3GYpyGFGM2I=
-X-Received: by 2002:ac5:c20d:0:b0:515:20e6:7861 with SMTP id
- 71dfb90a1353d-51c7c73f836mr10796963e0c.2.1736727319719; Sun, 12 Jan 2025
- 16:15:19 -0800 (PST)
+ AJvYcCUjrZ/JX4BD4iBjKSrLKdGqkW3ZKwV16dsHZHjxYmu1OhoBUTEe/I/fCFURQ/f27AmICDAO/g09y1Eo@nongnu.org
+X-Gm-Message-State: AOJu0YxwL1Cx63XVH517LqRIYdJ6TIdCOS6pB7DJDnwIcLWcvamjCp3j
+ BJnxtlxZwquX+Z8gtyq1rBiVuc05YQiEDYabSEM2CPVZYvvc/C7yDnTl3XuPTD0iHufEj9KS2xy
+ aCcWGw5c6TuoafGcWYWN0JV4uWgc=
+X-Gm-Gg: ASbGncs+m4HLSVNYVyHGVTjmndT5r8jlL4urJrSNbm4xjPVKs+8JOOn6E/AjGhE+rIX
+ AL620sjPVuE1NqOz4OvtuOl2d7+OS+LrIuY9kOQyhlivEaX+BVtlwLbJEu1GkmlBNJiY=
+X-Google-Smtp-Source: AGHT+IHqGuMGSj/TwH2qheBlFvFScQy7P/uT4wZf8HLPYvNER4JA+GmbuJkRjhjgV4hH9KfV/rCGTBq9NKsu7+5QnXI=
+X-Received: by 2002:a05:6102:5112:b0:4af:cb0c:390b with SMTP id
+ ada2fe7eead31-4b6092d86d7mr10044318137.7.1736729679261; Sun, 12 Jan 2025
+ 16:54:39 -0800 (PST)
 MIME-Version: 1.0
 References: <20250112231344.34632-1-philmd@linaro.org>
- <20250112231344.34632-3-philmd@linaro.org>
-In-Reply-To: <20250112231344.34632-3-philmd@linaro.org>
+In-Reply-To: <20250112231344.34632-1-philmd@linaro.org>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 13 Jan 2025 10:14:53 +1000
-X-Gm-Features: AbW1kvaM2IOLaxTdT9FoUtATzcjN9ar0mQp9AIdezEldanr2wUxjaLGGe9ZWnzA
-Message-ID: <CAKmqyKP=JyG56yxDVwAfJKuNWdEj2Se4ZmWTmvXnSTcaqBFzEQ@mail.gmail.com>
-Subject: Re: [PATCH 2/2] hw/riscv/virt: Remove unnecessary use of &first_cpu
+Date: Mon, 13 Jan 2025 10:54:13 +1000
+X-Gm-Features: AbW1kvZUuJ8fEQ452Rxjq0TJEciBshr_d1C8kmlBobMauJDhfR6xCwKQZcgZZ8g
+Message-ID: <CAKmqyKMVFA6O_CunASBspYtuV=rfTckss=wNZHnAfr0XjfePDQ@mail.gmail.com>
+Subject: Re: [PATCH 0/2] hw/riscv/virt: Remove unnecessary use of &first_cpu
 To: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@linaro.org>
 Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, 
  Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, Bin Meng <bmeng.cn@gmail.com>, 
@@ -73,8 +72,8 @@ Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::a2c;
- envelope-from=alistair23@gmail.com; helo=mail-vk1-xa2c.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::e30;
+ envelope-from=alistair23@gmail.com; helo=mail-vs1-xe30.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -101,48 +100,29 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 On Mon, Jan 13, 2025 at 9:14=E2=80=AFAM Philippe Mathieu-Daud=C3=A9
 <philmd@linaro.org> wrote:
 >
-> virt_machine_init() creates the HARTs vCPUs, then later
-> virt_machine_done() calls create_fdt_sockets(), so the
-> latter has access to the first vCPU via:
+> Pass RISCVCPU to kvm_riscv_get_timebase_frequency(),
+> then access the first vCPU via Virt::Array::Hart[]
+> rather than the &first_cpu global, which is going to
+> be removed as part of the heterogeneous emulation
+> effort.
 >
->   RISCVVirtState {
->     RISCVHartArrayState {
->       RISCVCPU *harts;
->       ...
->
->     } soc[VIRT_SOCKETS_MAX];
->     ...
->
->   } s;
->
-> Directly use that instead of the &first_cpu global.
->
-> Signed-off-by: Philippe Mathieu-Daud=C3=A9 <philmd@linaro.org>
+> Philippe Mathieu-Daud=C3=A9 (2):
+>   target/riscv: Have kvm_riscv_get_timebase_frequency() take RISCVCPU
+>     cpu
+>   hw/riscv/virt: Remove unnecessary use of &first_cpu
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Thanks!
+
+Applied to riscv-to-apply.next
 
 Alistair
 
-> ---
->  hw/riscv/virt.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
 >
-> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-> index 9e8876be29b..241389d72f8 100644
-> --- a/hw/riscv/virt.c
-> +++ b/hw/riscv/virt.c
-> @@ -750,7 +750,7 @@ static void create_fdt_sockets(RISCVVirtState *s, con=
-st MemMapEntry *memmap,
->      qemu_fdt_add_subnode(ms->fdt, "/cpus");
->      qemu_fdt_setprop_cell(ms->fdt, "/cpus", "timebase-frequency",
->                            kvm_enabled() ?
-> -                          kvm_riscv_get_timebase_frequency(RISCV_CPU(fir=
-st_cpu)) :
-> +                          kvm_riscv_get_timebase_frequency(&s->soc->hart=
-s[0]) :
->                            RISCV_ACLINT_DEFAULT_TIMEBASE_FREQ);
->      qemu_fdt_setprop_cell(ms->fdt, "/cpus", "#size-cells", 0x0);
->      qemu_fdt_setprop_cell(ms->fdt, "/cpus", "#address-cells", 0x1);
+>  target/riscv/kvm/kvm_riscv.h | 4 +++-
+>  hw/riscv/virt.c              | 2 +-
+>  target/riscv/kvm/kvm-cpu.c   | 4 ++--
+>  3 files changed, 6 insertions(+), 4 deletions(-)
+>
 > --
 > 2.47.1
 >
