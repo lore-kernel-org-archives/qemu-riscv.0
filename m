@@ -4,123 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D54CCC02183
-	for <qemu-riscv@archiver.kernel.org>; Mon, 13 Jan 2025 15:22:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AAC2EC02180
+	for <qemu-riscv@archiver.kernel.org>; Mon, 13 Jan 2025 18:28:54 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tXMGl-0002JZ-Rq; Mon, 13 Jan 2025 10:22:24 -0500
+	id 1tXPBA-0007Ts-7C; Mon, 13 Jan 2025 13:28:48 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <mjt@tls.msk.ru>)
- id 1tXMGc-0002FZ-Bh; Mon, 13 Jan 2025 10:22:15 -0500
-Received: from isrv.corpit.ru ([86.62.121.231])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <mjt@tls.msk.ru>)
- id 1tXMGa-0002c1-KS; Mon, 13 Jan 2025 10:22:14 -0500
-Received: from tsrv.corpit.ru (tsrv.tls.msk.ru [192.168.177.2])
- by isrv.corpit.ru (Postfix) with ESMTP id C19E2D6C79;
- Mon, 13 Jan 2025 18:22:03 +0300 (MSK)
-Received: from [192.168.177.130] (mjt.wg.tls.msk.ru [192.168.177.130])
- by tsrv.corpit.ru (Postfix) with ESMTP id 074F519AB9C;
- Mon, 13 Jan 2025 18:22:06 +0300 (MSK)
-Message-ID: <15435e6d-a77c-4d3e-ae06-b1cd23fbee61@tls.msk.ru>
-Date: Mon, 13 Jan 2025 18:22:05 +0300
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1tXPB8-0007TE-8K
+ for qemu-riscv@nongnu.org; Mon, 13 Jan 2025 13:28:46 -0500
+Received: from mail-oo1-xc2b.google.com ([2607:f8b0:4864:20::c2b])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1tXPB5-0005RU-BM
+ for qemu-riscv@nongnu.org; Mon, 13 Jan 2025 13:28:45 -0500
+Received: by mail-oo1-xc2b.google.com with SMTP id
+ 006d021491bc7-5f63c89e72bso736924eaf.1
+ for <qemu-riscv@nongnu.org>; Mon, 13 Jan 2025 10:28:42 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=ventanamicro.com; s=google; t=1736792922; x=1737397722; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=O7Dx07Rn/xR1XyNUVo3dpYTgwW7BOYCNpi/FVCpoqKc=;
+ b=PRmLlBNcKtiISGrpnFikgHsI3bkCVANG6PmrtEOfs/3FuxOksiXCY55FpNGlV2neV1
+ 6OIf585qkag/m7C1fcAcMUgl3M89yzjqYmHF59qjfSwuFCNRBjamvFjvwToLv0lnFllb
+ iBI3jMNl5RNgn+Bl9Hq4S8qHkHGmgpSPWRIcosSD1cAqj1Eh0YtdPvXW++LQS80Xj8vz
+ 25U7mVe81Hsk0DsIxpmY3coZEBFkFQ70JyeWs/pRQH7oeBAYlXPtUzYfyfD6OVaWT5iL
+ Y569PPQz2yisLYLkLWZ/8LtPsenibQM5k5FnUNt6rtSaY2Y3S9Q8DFM0HvoslXpnUcN9
+ Kuhw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1736792922; x=1737397722;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=O7Dx07Rn/xR1XyNUVo3dpYTgwW7BOYCNpi/FVCpoqKc=;
+ b=BjSAmLVr3uMZ+cDihsEsUiy/wjINRMyydJAUWV8yiCmIdlxkdYqPXsSsUFQXfUKZFv
+ Is6ozMSeLJJlz4WmlrkMKVFmCJ9NI4Ik3ZPGaemr7MrIDqedXgMjw7W7nDjHUa4/zRS1
+ G8ldopV6m0qvznysW6zxq5nVr975JPssDxckIrUVDJvxvbOdqVUy4n+eqKzxu2j0cyfr
+ tpOs7JZ9Ru8YUAk8mxQHhvGJ6Mn/zWc1HD9SrZIOGD2CzigOjiGOSPJJbFtizEesFy1k
+ qNKiEkJv2l3h/rV41hwGAjHB+pgu0FFFfOJlfGwhWfZ2YgRUl8BD2I2wq0wESLz+/C6j
+ Md/A==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXh7TNZDvDj0xpyro1hikTZNSRqGllmoa6jzwSuZWDNGX1Bjp31w2NgPcgfHNx4Qxk0mVCPZU8NTw5x@nongnu.org
+X-Gm-Message-State: AOJu0YxA2RMuvyjvRK0AgjqLX4gRdRN+eq8f2pITMfp1Kb1XPcNelbjZ
+ ud/CEJUrnjE74HrspN0lKKCiWQOWtpcGoFn3M6zAU5Rsol4RivHjInp9wVXf0ZM=
+X-Gm-Gg: ASbGncu9Fvdh2KcWKE2mx9lE46OzdxJB4wHqWxfU7hOiPwF2QO7iIxZY8mH0ARElGdm
+ /w9htap1aQD95ED2YBCQ/EmUjqRrzLMhryVuUmuWwPC9PynqO9n3vUXJj37uF1lHiCPFLoj7jwX
+ PMogao2FWJQmuFvnUQFCBe6+wNxSbgt+CvrXjC96sTV5YQNRJEeqqXzFHTc3QOzdSlrZRUgs6w7
+ fxb/ChDT5sv3V8tUabj7UrYEaet+POFqjpyXKbiIc26RTqL6v9MJo0rISA2K2QtsUx0qT+WHqVO
+ yFnaJ2dnvnvlkPzpmFkWs82+R2U0l4OYacM=
+X-Google-Smtp-Source: AGHT+IEsrl2kfbpOriQW/5NjfpH6O8zAfiQSVL2xKUn5NlzMAHZFQ+ZYMWIjLZuNThND/J+WniL7hg==
+X-Received: by 2002:a05:6820:98f:b0:5f4:bff3:319f with SMTP id
+ 006d021491bc7-5f73071a44bmr12149862eaf.0.1736792921709; 
+ Mon, 13 Jan 2025 10:28:41 -0800 (PST)
+Received: from ?IPV6:2804:7f0:bcc0:6edb:f473:a9df:d551:443b?
+ ([2804:7f0:bcc0:6edb:f473:a9df:d551:443b])
+ by smtp.gmail.com with ESMTPSA id
+ 006d021491bc7-5f882624f82sm3442318eaf.5.2025.01.13.10.28.37
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 13 Jan 2025 10:28:40 -0800 (PST)
+Message-ID: <70e93c37-9c03-40de-bb57-e0acf66cca65@ventanamicro.com>
+Date: Mon, 13 Jan 2025 15:28:36 -0300
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 17/32] system/qtest: properly feedback results of
- clock_[step|set]
-To: =?UTF-8?Q?Alex_Benn=C3=A9e?= <alex.bennee@linaro.org>,
- qemu-devel@nongnu.org
-Cc: Halil Pasic <pasic@linux.ibm.com>, Aurelien Jarno <aurelien@aurel32.net>, 
- qemu-riscv@nongnu.org, Radoslaw Biernacki <rad@semihalf.com>,
- Daniel Henrique Barboza <danielhb413@gmail.com>,
- Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
- Richard Henderson <richard.henderson@linaro.org>,
- Beraldo Leal <bleal@redhat.com>, Fabiano Rosas <farosas@suse.de>,
- Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
- Laurent Vivier <lvivier@redhat.com>, Nicholas Piggin <npiggin@gmail.com>,
- Marcin Juszkiewicz <marcin.juszkiewicz@linaro.org>,
- Christian Borntraeger <borntraeger@linux.ibm.com>,
- Wainer dos Santos Moschetta <wainersm@redhat.com>,
- =?UTF-8?Q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>,
- Ed Maste <emaste@freebsd.org>, Jiaxun Yang <jiaxun.yang@flygoat.com>,
- Bernhard Beschow <shentey@gmail.com>, Bin Meng <bmeng.cn@gmail.com>,
- qemu-ppc@nongnu.org, qemu-arm@nongnu.org, Laurent Vivier
- <laurent@vivier.eu>, Joel Stanley <joel@jms.id.au>,
- =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- John Snow <jsnow@redhat.com>, "Michael S. Tsirkin" <mst@redhat.com>,
- Pavel Dovgalyuk <pavel.dovgaluk@ispras.ru>,
- Alistair Francis <alistair.francis@wdc.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Harsh Prateek Bora <harshpb@linux.ibm.com>,
- Leif Lindholm <quic_llindhol@quicinc.com>, Cleber Rosa <crosa@redhat.com>,
- Thomas Huth <thuth@redhat.com>, Paolo Bonzini <pbonzini@redhat.com>,
- qemu-s390x@nongnu.org, Eric Farman <farman@linux.ibm.com>,
- Weiwei Li <liwei1518@gmail.com>, =?UTF-8?Q?Daniel_P=2E_Berrang=C3=A9?=
- <berrange@redhat.com>, Markus Armbruster <armbru@redhat.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Palmer Dabbelt <palmer@dabbelt.com>, Peter Maydell
- <peter.maydell@linaro.org>, Li-Wen Hsu <lwhsu@freebsd.org>,
- qemu-stable <qemu-stable@nongnu.org>
-References: <20250108121054.1126164-1-alex.bennee@linaro.org>
- <20250108121054.1126164-18-alex.bennee@linaro.org>
-Content-Language: en-US, ru-RU
-From: Michael Tokarev <mjt@tls.msk.ru>
-Autocrypt: addr=mjt@tls.msk.ru; keydata=
- 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
-In-Reply-To: <20250108121054.1126164-18-alex.bennee@linaro.org>
+Subject: Re: [PATCH] target/riscv: Support Supm and Sspm as part of Zjpm v1.0
+To: baturo.alexey@gmail.com
+Cc: richard.henderson@linaro.org, zhiwei_liu@linux.alibaba.com,
+ liwei1518@gmail.com, frank.chang@sifive.com, palmer@dabbelt.com,
+ Alistair.Francis@wdc.com, sagark@eecs.berkeley.edu,
+ kbastian@mail.uni-paderborn.de, qemu-devel@nongnu.org, qemu-riscv@nongnu.org
+References: <20250111130653.1239737-1-baturo.alexey@gmail.com>
+Content-Language: en-US
+From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+In-Reply-To: <20250111130653.1239737-1-baturo.alexey@gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=86.62.121.231; envelope-from=mjt@tls.msk.ru;
- helo=isrv.corpit.ru
-X-Spam_score_int: -68
-X-Spam_score: -6.9
-X-Spam_bar: ------
-X-Spam_report: (-6.9 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_HI=-5,
- RCVD_IN_VALIDITY_CERTIFIED_BLOCKED=0.001, RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::c2b;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-oo1-xc2b.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -136,20 +106,106 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Ghrm. 46 recipients seems to be quite a bit too aggressive..
+Hi Alexey,
 
-08.01.2025 15:10, Alex Bennée wrote:
-> Time will not advance if the system is paused or there are no timer
-> events set for the future. In absence of pending timer events
-> advancing time would make no difference the system state. Attempting
-> to do so would be a bug and the test or device under test would need
-> fixing.
+On 1/11/25 10:06 AM, baturo.alexey@gmail.com wrote:
+> From: Alexey Baturo <baturo.alexey@gmail.com>
 > 
-> Tighten up the result reporting to `FAIL` if time was not advanced.
+> The Zjpm v1.0 spec states there should be Supm and Sspm extensions that are used in profile specification.
+> Enabling Supm extension enables both Ssnpm and Smnpm, while Sspm enables only Smnpm.
+> 
+> Signed-off-by: Alexey Baturo <baturo.alexey@gmail.com>
+> ---
 
-Is this qemu-stable material?
+This doesn't apply in the current alistair/riscv-to-apply.next tree. It's a trivial
+rebase, so if you could rebase it and send it again that would be great.
+
+
+I fixed the conflicts and tested it with the RVA23 patches I have, and it works. So
+please also add a
+
+Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+
 
 Thanks,
 
-/mjt
+Daniel
+
+>   target/riscv/cpu.c     | 23 +++++++++++++++++++++++
+>   target/riscv/cpu_cfg.h |  2 ++
+>   2 files changed, 25 insertions(+)
+> 
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index dace670e5e..8c5801b87a 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -202,10 +202,12 @@ const RISCVIsaExtData isa_edata_arr[] = {
+>       ISA_EXT_DATA_ENTRY(sscofpmf, PRIV_VERSION_1_12_0, ext_sscofpmf),
+>       ISA_EXT_DATA_ENTRY(sscounterenw, PRIV_VERSION_1_12_0, has_priv_1_12),
+>       ISA_EXT_DATA_ENTRY(ssnpm, PRIV_VERSION_1_13_0, ext_ssnpm),
+> +    ISA_EXT_DATA_ENTRY(sspm, PRIV_VERSION_1_13_0, ext_sspm),
+>       ISA_EXT_DATA_ENTRY(ssstateen, PRIV_VERSION_1_12_0, ext_ssstateen),
+>       ISA_EXT_DATA_ENTRY(sstc, PRIV_VERSION_1_12_0, ext_sstc),
+>       ISA_EXT_DATA_ENTRY(sstvala, PRIV_VERSION_1_12_0, has_priv_1_12),
+>       ISA_EXT_DATA_ENTRY(sstvecd, PRIV_VERSION_1_12_0, has_priv_1_12),
+> +    ISA_EXT_DATA_ENTRY(supm, PRIV_VERSION_1_13_0, ext_supm),
+>       ISA_EXT_DATA_ENTRY(svade, PRIV_VERSION_1_11_0, ext_svade),
+>       ISA_EXT_DATA_ENTRY(svadu, PRIV_VERSION_1_12_0, ext_svadu),
+>       ISA_EXT_DATA_ENTRY(svinval, PRIV_VERSION_1_12_0, ext_svinval),
+> @@ -1612,6 +1614,8 @@ const RISCVCPUMultiExtConfig riscv_cpu_extensions[] = {
+>       MULTI_EXT_CFG_BOOL("zvfhmin", ext_zvfhmin, false),
+>       MULTI_EXT_CFG_BOOL("sstc", ext_sstc, true),
+>       MULTI_EXT_CFG_BOOL("ssnpm", ext_ssnpm, false),
+> +    MULTI_EXT_CFG_BOOL("sspm", ext_sspm, false),
+> +    MULTI_EXT_CFG_BOOL("supm", ext_supm, false),
+>   
+>       MULTI_EXT_CFG_BOOL("smaia", ext_smaia, false),
+>       MULTI_EXT_CFG_BOOL("smepmp", ext_smepmp, false),
+> @@ -2756,6 +2760,24 @@ static RISCVCPUImpliedExtsRule ZVKSG_IMPLIED = {
+>       },
+>   };
+>   
+> +static RISCVCPUImpliedExtsRule SUPM_IMPLIED = {
+> +    .ext = CPU_CFG_OFFSET(ext_supm),
+> +    .implied_multi_exts = {
+> +        CPU_CFG_OFFSET(ext_ssnpm), CPU_CFG_OFFSET(ext_smnpm),
+> +
+> +        RISCV_IMPLIED_EXTS_RULE_END
+> +    },
+> +};
+> +
+> +static RISCVCPUImpliedExtsRule SSPM_IMPLIED = {
+> +    .ext = CPU_CFG_OFFSET(ext_sspm),
+> +    .implied_multi_exts = {
+> +        CPU_CFG_OFFSET(ext_smnpm),
+> +
+> +        RISCV_IMPLIED_EXTS_RULE_END
+> +    },
+> +};
+> +
+>   RISCVCPUImpliedExtsRule *riscv_misa_ext_implied_rules[] = {
+>       &RVA_IMPLIED, &RVD_IMPLIED, &RVF_IMPLIED,
+>       &RVM_IMPLIED, &RVV_IMPLIED, NULL
+> @@ -2774,6 +2796,7 @@ RISCVCPUImpliedExtsRule *riscv_multi_ext_implied_rules[] = {
+>       &ZVFH_IMPLIED, &ZVFHMIN_IMPLIED, &ZVKN_IMPLIED,
+>       &ZVKNC_IMPLIED, &ZVKNG_IMPLIED, &ZVKNHB_IMPLIED,
+>       &ZVKS_IMPLIED,  &ZVKSC_IMPLIED, &ZVKSG_IMPLIED,
+> +    &SUPM_IMPLIED, &SSPM_IMPLIED,
+>       NULL
+>   };
+>   
+> diff --git a/target/riscv/cpu_cfg.h b/target/riscv/cpu_cfg.h
+> index ee7c908710..76579b9b95 100644
+> --- a/target/riscv/cpu_cfg.h
+> +++ b/target/riscv/cpu_cfg.h
+> @@ -133,6 +133,8 @@ struct RISCVCPUConfig {
+>       bool ext_ssnpm;
+>       bool ext_smnpm;
+>       bool ext_smmpm;
+> +    bool ext_sspm;
+> +    bool ext_supm;
+>       bool rvv_ta_all_1s;
+>       bool rvv_ma_all_1s;
+>       bool rvv_vl_half_avl;
+
 
