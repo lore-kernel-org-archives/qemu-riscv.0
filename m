@@ -4,83 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DBEDDE77188
-	for <qemu-riscv@archiver.kernel.org>; Tue, 14 Jan 2025 15:26:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1483DC02183
+	for <qemu-riscv@archiver.kernel.org>; Tue, 14 Jan 2025 15:28:47 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tXinl-0006gD-I9; Tue, 14 Jan 2025 10:25:57 -0500
+	id 1tXiq3-0007YU-QA; Tue, 14 Jan 2025 10:28:19 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1tXinh-0006fc-59
- for qemu-riscv@nongnu.org; Tue, 14 Jan 2025 10:25:53 -0500
-Received: from mail-ej1-x62e.google.com ([2a00:1450:4864:20::62e])
+ id 1tXiq1-0007Xt-EO
+ for qemu-riscv@nongnu.org; Tue, 14 Jan 2025 10:28:17 -0500
+Received: from mail-ej1-x635.google.com ([2a00:1450:4864:20::635])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1tXinZ-0003GW-Kb
- for qemu-riscv@nongnu.org; Tue, 14 Jan 2025 10:25:48 -0500
-Received: by mail-ej1-x62e.google.com with SMTP id
- a640c23a62f3a-aa689a37dd4so1068982366b.3
- for <qemu-riscv@nongnu.org>; Tue, 14 Jan 2025 07:25:45 -0800 (PST)
+ id 1tXipz-0003aq-Ij
+ for qemu-riscv@nongnu.org; Tue, 14 Jan 2025 10:28:16 -0500
+Received: by mail-ej1-x635.google.com with SMTP id
+ a640c23a62f3a-aaef00ab172so897088766b.3
+ for <qemu-riscv@nongnu.org>; Tue, 14 Jan 2025 07:28:15 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1736868344; x=1737473144; darn=nongnu.org;
+ d=ventanamicro.com; s=google; t=1736868494; x=1737473294; darn=nongnu.org;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=gPZTiO31Q/Cg5BoGleAQgxej48cR4PkAAPzisfTgqww=;
- b=nCwlXzGLy5qZxgga4BzPxEw7lqZG/9Gor/rqZcNt6ORvGH8sQ4lHev4p/wc7HG3QNS
- SuTF3zG4VPu64LILGx6gKEk/0nij+NQOIBcbLb+HaqmLRvto6bkfx5m0gWzzQ4X+if/T
- dDHz9FQv+zJflPSTd4r5e/QrEgkAhTNaEGyeeIRpsVDm8oAO8Nc+JbAMO/D0XFQ6D+S7
- xQxaSGSzd9E/7nf9Cb0xPCfD/Vb60ezYtsCVcv3wR+LOpDEy96jSEMyLHwF20PDZsV7T
- F5t3moREODzD48v5qE5Lw0ae4Unp91l5+aMKlgWIdecuwc/UOjREYBy5Nh7EWuycvf4J
- qmOA==
+ bh=hTt1SkbW6w1cR4jr5NAjL59CkFA1v4Ig3bkZdeFFJ1U=;
+ b=l4c3IJFXvSwoOip8/UV0o9dX1tjR/5Jg1qy+eyt3TrG5yraBPKT37hUjg8lLAqx2wv
+ XkWcvgy7zemx/xtwaPlTWXxb1NqgQuLKowIZq4ZrAXllhjFpIVQ6DlTq9NDQEY8x3daq
+ S1/tW3VsfgmmWXbyuF/YL8UBxw5nzvAaad9pD238Qlhl/R8JicZVMNK6fYThHgArgUC1
+ oD5wAc+uQaEvR70OoHEdaYlAYzCiZX7ISDFX2m7BIgf/KRCWpRxYuyhtWlHqfB9VNOMV
+ Iok10QmmNkkoQZ2FF+lntDcIQldNkrMqzA+TluJpBZnxE9HtoTL/dakg2DKGBo+Boi6X
+ U/IA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1736868344; x=1737473144;
+ d=1e100.net; s=20230601; t=1736868494; x=1737473294;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=gPZTiO31Q/Cg5BoGleAQgxej48cR4PkAAPzisfTgqww=;
- b=l2cHsPNHzh455FpjfahayIq9FyAgx+eMIrKS0gMRhTn+tj8r6posmf7SgLK0m94srz
- ATUJecwvbXoIRtVvLvqHi8Gf5ZytGP/2ktHZr9mfCLvS2uLNpele5yjVrUFR9D9+k9Ds
- xUWMjpBFEW4ks1dJJj/zdXw+XjHT5TpHEXyhh3K8ksO2EkFwsnwG2Sg9Dxsxe5hQq2bl
- 9T53WsoK+PDv2BflhqXHRIpOs2cujdMe3NGHnGH1pRZYErXqrQWStogoNfJ7gDoZuYCy
- xKqJtPFpiRweWCNZmHb/SOc8D1vTUG5gbkPfZrdxElT5FuBKLJV38/0NGxq01eaIjbAt
- 2K/g==
+ bh=hTt1SkbW6w1cR4jr5NAjL59CkFA1v4Ig3bkZdeFFJ1U=;
+ b=nPLai6OnZRgndZrmvla+ivxdbfxvu2d090utAReGahLN0hgqFj3M3e80UtE4FnHMb6
+ Su/r7ob84odZg8VBc5NtfTZWWeCm4HPmM5HANkjAGoqUktFaFLzlaRKLJ9HBfovxKvZu
+ BILgShILdxDuqcEcGfrE7LTP8zdQ/BK9+SgKlz+OAyVFdY/dsXzeq563i5VvsftUahsJ
+ Pd60NA3l/JSyWeYbnGAyutTizRWbtBKod9dPDnNtlvQQTVLhLjJNpLOZlnewT245hyVr
+ E6D9Xv3wa66GvCfjzTGlpW2ZExfLc9SYlyYedMufJLvTu70ofqTH6gThPVrK51ETOSia
+ 73XQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVZdBtIal0H39G7GNmaH7IHJJU9iEURv2nuST2oTpgeyYEzsgea1yuWedPuanOMRpmk4wjOSqvgwz3N@nongnu.org
-X-Gm-Message-State: AOJu0YyBrbuOJjrqdoWHWekruWKGY1dwRTAzOoF07muM3hLbM3rKNw7I
- We9hjdCxEmmGiJ3lxEPB73OPm70xv7i8VpWzybBXFccgrGrX49kscysHu2VQPno=
-X-Gm-Gg: ASbGncs+E4bFcRiCWfqoWlUK8JbeAtlYb52DshElITWrGwHLxG9PXHdaCTh5mPx5+nJ
- NNki/LmV/2261c/poTaBSBfwaqiPlv7BYNyOyQg/3boqx3cjIgZPlKij2vG+lvCNoioLOamiFRO
- 641/tE1RzTB9PBsaglKZxDHLEeTOaFT8Ef4M/WUiFjAuQD7upxuyGMCO/Vwvs6AzfSrpOE0iELQ
- Fq8/TSzG+waSSdBNkv9BtNCcJkbQSk+D5ZtEmBibQG+4DYmWY6Svdwodw5zek/qXSo+ljoHGWZX
- qBi+JbCaqeC0X3vXfQvJAcbFHtmVTomITtgFEfiZfg==
-X-Google-Smtp-Source: AGHT+IF1KmlpeNz5YQQjpgMAiniTbZ5yV4W07g2ana/y1zgR0kJpdeN7NWAvtAqHysiMw8s20vq0zA==
-X-Received: by 2002:a17:907:1c2a:b0:aa6:8e9e:1b5 with SMTP id
- a640c23a62f3a-ab2ab6a8530mr2073888766b.3.1736868343699; 
- Tue, 14 Jan 2025 07:25:43 -0800 (PST)
+ AJvYcCV+gRLFsy/z/dB55sHRJ/ce4G7qDzm7SplMSOG3jipWtK5BUaei1kMzF+XzJ86VW4Tc4RpG9gu48sEW@nongnu.org
+X-Gm-Message-State: AOJu0Ywg6Gr8gg+tYIGpVeMT5++3xspjwBgr/LKSQWz0GDVEREUQZeJk
+ mDxGt7byu5pnLEgu4lQUhFhyJMvQUaf2BJaM06TRZsvc2ArqHMzKjbdCN46QZnU=
+X-Gm-Gg: ASbGncvTnZJlEyokV30B+jMT2IJ92q5cN/BtRCHVus27KNKjpgZIk18FLmrMEi8lkDV
+ h9/+5pT1eaCUfx5qNa/fjE0aqmDkP7Av0VxoIL8X9s4HBrhEFGZ5b6OEUvkT6Uh8OmbE2FG5U7O
+ xROXCielrix2VwbBN8bQQnVpzrKgixHuCVTZXndEq26CQ1HzTB4b34/cogTjTpo5QTYbh3H1Ar0
+ 3LOBclJoefSgweJGuCJNy6D7Y4xVOZvT+/yL3J0pCBMVnuohrfZDF7RaGV26bDCIyb+D6QB+W7V
+ oy6zKGEbAJ+JtgtCrS8YX8A2A26OBiCxJHpprjf/Eg==
+X-Google-Smtp-Source: AGHT+IFrvCaujikuxUoUvlAh5Kx1WCCojAdOmgX00IgmaxLrYw8+C6yCacc45u1Adpy8KGPaNAqpRA==
+X-Received: by 2002:a05:6402:2105:b0:5d0:81f5:a398 with SMTP id
+ 4fb4d7f45d1cf-5d972e00056mr55599514a12.1.1736868489275; 
+ Tue, 14 Jan 2025 07:28:09 -0800 (PST)
 Received: from localhost (2001-1ae9-1c2-4c00-20f-c6b4-1e57-7965.ip6.tmcz.cz.
  [2001:1ae9:1c2:4c00:20f:c6b4:1e57:7965])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-ab2c964dc9dsm649153866b.178.2025.01.14.07.25.43
+ a640c23a62f3a-ab2c90da0f0sm651816466b.52.2025.01.14.07.28.08
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 14 Jan 2025 07:25:43 -0800 (PST)
-Date: Tue, 14 Jan 2025 16:25:42 +0100
+ Tue, 14 Jan 2025 07:28:08 -0800 (PST)
+Date: Tue, 14 Jan 2025 16:28:08 +0100
 From: Andrew Jones <ajones@ventanamicro.com>
-To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
- bmeng@tinylab.org, liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, 
- palmer@rivosinc.com
-Subject: Re: [PATCH 4/4] target/riscv: add RVA23S64 profile
-Message-ID: <20250114-a6a244e7bfc4b7bd2535750d@orel>
-References: <20250114132012.1224941-1-dbarboza@ventanamicro.com>
- <20250114132012.1224941-5-dbarboza@ventanamicro.com>
+To: Jason Chien <jason.chien@sifive.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, 
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Bin Meng <bmeng.cn@gmail.com>, Weiwei Li <liwei1518@gmail.com>, 
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
+Subject: Re: [PATCH 2/2] hw/riscv/riscv-iommu-bits: Remove redundant
+ definitions
+Message-ID: <20250114-8b56e398bcbbf9863a72d968@orel>
+References: <20250114093647.4952-1-jason.chien@sifive.com>
+ <20250114093647.4952-2-jason.chien@sifive.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20250114132012.1224941-5-dbarboza@ventanamicro.com>
-Received-SPF: pass client-ip=2a00:1450:4864:20::62e;
- envelope-from=ajones@ventanamicro.com; helo=mail-ej1-x62e.google.com
+In-Reply-To: <20250114093647.4952-2-jason.chien@sifive.com>
+Received-SPF: pass client-ip=2a00:1450:4864:20::635;
+ envelope-from=ajones@ventanamicro.com; helo=mail-ej1-x635.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -103,122 +107,58 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Tue, Jan 14, 2025 at 10:20:12AM -0300, Daniel Henrique Barboza wrote:
-> Add RVA23S64 as described in [1]. This profile inherits all mandatory
-> extensions of RVA23U64, making it a child of the U64 profile.
-> 
-> A new "rva23s64" profile CPU is also added. This is the generated
-> riscv,isa for it (taken via -M dumpdtb):
-> 
-> rv64imafdcbvh_zic64b_zicbom_zicbop_zicboz_ziccamoa_ziccif_zicclsm_
-> ziccrse_zicond_zicntr_zicsr_zihintntl_zihintpause_zihpm_zimop_zmmul_
-> za64rs_zaamo_zalrsc_zawrs_zfa_zfhmin_zca_zcb_zcd_zcmop_zba_zbb_zbs_zkt_
-> zvbb_zve32f_zve32x_zve64f_zve64d_zve64x_zvfhmin_zvkb_zvkt_shcounterenw_
-> sha_shgatpa_shtvala_shvsatpa_shvstvala_shvstvecd_smnpm_smstateen_ssccptr_
-> sscofpmf_sscounterenw_ssnpm_ssstateen_sstc_sstvala_sstvecd_ssu64xl_
-> supm_svade_svinval_svnapot_svpbmt
-> 
-> [1] https://github.com/riscv/riscv-profiles/blob/main/src/rva23-profile.adoc
-> 
-> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+On Tue, Jan 14, 2025 at 05:36:46PM +0800, Jason Chien wrote:
+> Signed-off-by: Jason Chien <jason.chien@sifive.com>
 > ---
->  target/riscv/cpu-qom.h |  1 +
->  target/riscv/cpu.c     | 43 ++++++++++++++++++++++++++++++++++++++++++
->  2 files changed, 44 insertions(+)
+>  hw/riscv/riscv-iommu-bits.h | 22 ++++++----------------
+>  1 file changed, 6 insertions(+), 16 deletions(-)
 > 
-> diff --git a/target/riscv/cpu-qom.h b/target/riscv/cpu-qom.h
-> index 53ead481a9..4cfdb74891 100644
-> --- a/target/riscv/cpu-qom.h
-> +++ b/target/riscv/cpu-qom.h
-> @@ -41,6 +41,7 @@
->  #define TYPE_RISCV_CPU_RVA22U64         RISCV_CPU_TYPE_NAME("rva22u64")
->  #define TYPE_RISCV_CPU_RVA22S64         RISCV_CPU_TYPE_NAME("rva22s64")
->  #define TYPE_RISCV_CPU_RVA23U64         RISCV_CPU_TYPE_NAME("rva23u64")
-> +#define TYPE_RISCV_CPU_RVA23S64         RISCV_CPU_TYPE_NAME("rva23s64")
->  #define TYPE_RISCV_CPU_IBEX             RISCV_CPU_TYPE_NAME("lowrisc-ibex")
->  #define TYPE_RISCV_CPU_SHAKTI_C         RISCV_CPU_TYPE_NAME("shakti-c")
->  #define TYPE_RISCV_CPU_SIFIVE_E31       RISCV_CPU_TYPE_NAME("sifive-e31")
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index e10ecc4ece..14af141349 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -2419,10 +2419,45 @@ static RISCVCPUProfile RVA23U64 = {
->      }
+> diff --git a/hw/riscv/riscv-iommu-bits.h b/hw/riscv/riscv-iommu-bits.h
+> index 485f36b9c9..de599b80d6 100644
+> --- a/hw/riscv/riscv-iommu-bits.h
+> +++ b/hw/riscv/riscv-iommu-bits.h
+> @@ -50,8 +50,14 @@ struct riscv_iommu_pq_record {
+>  #define RISCV_IOMMU_PREQ_HDR_PRIV       BIT_ULL(33)
+>  #define RISCV_IOMMU_PREQ_HDR_EXEC       BIT_ULL(34)
+>  #define RISCV_IOMMU_PREQ_HDR_DID        GENMASK_ULL(63, 40)
+> +
+>  /* Payload fields */
+> +#define RISCV_IOMMU_PREQ_PAYLOAD_R      BIT_ULL(0)
+> +#define RISCV_IOMMU_PREQ_PAYLOAD_W      BIT_ULL(1)
+> +#define RISCV_IOMMU_PREQ_PAYLOAD_L      BIT_ULL(2)
+>  #define RISCV_IOMMU_PREQ_PAYLOAD_M      GENMASK_ULL(2, 0)
+> +#define RISCV_IOMMU_PREQ_PRG_INDEX      GENMASK_ULL(11, 3)
+> +#define RISCV_IOMMU_PREQ_UADDR          GENMASK_ULL(63, 12)
+>  
+>  /* Common field positions */
+>  #define RISCV_IOMMU_PPN_FIELD           GENMASK_ULL(53, 10)
+> @@ -382,22 +388,6 @@ enum riscv_iommu_fq_ttypes {
+>      RISCV_IOMMU_FW_TTYPE_PCIE_MSG_REQ = 9,
 >  };
 >  
-> +/*
-> + * As with RVA23U64, RVA23S64 also defines 'named features'.
-> + *
-> + * Cache related features that we consider enabled since we don't
-> + * implement cache: Ssccptr
-> + *
-> + * Other named features that we already implement: Sstvecd, Sstvala,
-> + * Sscounterenw, Ssu64xl
-> + *
-> + * The remaining features/extensions comes from RVA23U64.
-> + */
-> +static RISCVCPUProfile RVA23S64 = {
-> +    .parent = &RVA23U64,
-> +    .name = "rva23s64",
-> +    .misa_ext = RVS,
-> +    .priv_spec = PRIV_VERSION_1_13_0,
-> +    .satp_mode = VM_1_10_SV39,
-> +    .ext_offsets = {
-> +        /* These were present in RVA22S64 */
-> +        CPU_CFG_OFFSET(ext_svade), CPU_CFG_OFFSET(ext_svpbmt),
-> +        CPU_CFG_OFFSET(ext_svinval),
-> +
-> +        /* New in RVA23S64 */
-> +        CPU_CFG_OFFSET(ext_svnapot), CPU_CFG_OFFSET(ext_sstc),
-> +        CPU_CFG_OFFSET(ext_sscofpmf),
-> +
-> +        /* Named features: Sha, ssu64xl, ssnpm */
-> +        CPU_CFG_OFFSET(ext_sha),
-> +        CPU_CFG_OFFSET(ext_ssnpm),
-
-Why are we calling ssnpm a named feature? And same question for supm in
-the last patch.
-
-Thanks,
-drew
-
-> +
-> +        RISCV_PROFILE_EXT_LIST_END
-> +    }
-> +};
-> +
->  RISCVCPUProfile *riscv_profiles[] = {
->      &RVA22U64,
->      &RVA22S64,
->      &RVA23U64,
-> +    &RVA23S64,
->      NULL,
->  };
->  
-> @@ -2916,6 +2951,13 @@ static void rva23u64_profile_cpu_init(Object *obj)
->  
->      RVA23U64.enabled = true;
->  }
-> +
-> +static void rva23s64_profile_cpu_init(Object *obj)
-> +{
-> +    rv64i_bare_cpu_init(obj);
-> +
-> +    RVA23S64.enabled = true;
-> +}
->  #endif
->  
->  static const gchar *riscv_gdb_arch_name(CPUState *cs)
-> @@ -3196,6 +3238,7 @@ static const TypeInfo riscv_cpu_type_infos[] = {
->      DEFINE_PROFILE_CPU(TYPE_RISCV_CPU_RVA22U64,  MXL_RV64,  rva22u64_profile_cpu_init),
->      DEFINE_PROFILE_CPU(TYPE_RISCV_CPU_RVA22S64,  MXL_RV64,  rva22s64_profile_cpu_init),
->      DEFINE_PROFILE_CPU(TYPE_RISCV_CPU_RVA23U64,  MXL_RV64,  rva23u64_profile_cpu_init),
-> +    DEFINE_PROFILE_CPU(TYPE_RISCV_CPU_RVA23S64,  MXL_RV64,  rva23s64_profile_cpu_init),
->  #endif /* TARGET_RISCV64 */
->  };
->  
+> -/* Header fields */
+> -#define RISCV_IOMMU_PREQ_HDR_PID        GENMASK_ULL(31, 12)
+> -#define RISCV_IOMMU_PREQ_HDR_PV         BIT_ULL(32)
+> -#define RISCV_IOMMU_PREQ_HDR_PRIV       BIT_ULL(33)
+> -#define RISCV_IOMMU_PREQ_HDR_EXEC       BIT_ULL(34)
+> -#define RISCV_IOMMU_PREQ_HDR_DID        GENMASK_ULL(63, 40)
+> -
+> -/* Payload fields */
+> -#define RISCV_IOMMU_PREQ_PAYLOAD_R      BIT_ULL(0)
+> -#define RISCV_IOMMU_PREQ_PAYLOAD_W      BIT_ULL(1)
+> -#define RISCV_IOMMU_PREQ_PAYLOAD_L      BIT_ULL(2)
+> -#define RISCV_IOMMU_PREQ_PAYLOAD_M      GENMASK_ULL(2, 0)
+> -#define RISCV_IOMMU_PREQ_PRG_INDEX      GENMASK_ULL(11, 3)
+> -#define RISCV_IOMMU_PREQ_UADDR          GENMASK_ULL(63, 12)
+> -
+> -
+>  /*
+>   * struct riscv_iommu_msi_pte - MSI Page Table Entry
+>   */
 > -- 
-> 2.47.1
+> 2.43.2
 > 
-> 
+>
+
+Reviewed-by: Andrew Jones <ajones@ventanamicro.com>
 
