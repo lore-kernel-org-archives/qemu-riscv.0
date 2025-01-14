@@ -4,69 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DA866E77188
-	for <qemu-riscv@archiver.kernel.org>; Tue, 14 Jan 2025 16:14:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0C2EEE77188
+	for <qemu-riscv@archiver.kernel.org>; Tue, 14 Jan 2025 16:21:48 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tXjYb-0001Xd-Lf; Tue, 14 Jan 2025 11:14:21 -0500
+	id 1tXjfc-0003rC-Ke; Tue, 14 Jan 2025 11:21:36 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1tXjYS-0001WL-Rk
- for qemu-riscv@nongnu.org; Tue, 14 Jan 2025 11:14:14 -0500
+ id 1tXjfY-0003qp-9b
+ for qemu-riscv@nongnu.org; Tue, 14 Jan 2025 11:21:32 -0500
 Received: from mail-pl1-x644.google.com ([2607:f8b0:4864:20::644])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1tXjYR-0003vS-0s
- for qemu-riscv@nongnu.org; Tue, 14 Jan 2025 11:14:12 -0500
+ id 1tXjfW-0005F4-6m
+ for qemu-riscv@nongnu.org; Tue, 14 Jan 2025 11:21:31 -0500
 Received: by mail-pl1-x644.google.com with SMTP id
- d9443c01a7336-2164b662090so98282595ad.1
- for <qemu-riscv@nongnu.org>; Tue, 14 Jan 2025 08:14:08 -0800 (PST)
+ d9443c01a7336-216426b0865so100534125ad.0
+ for <qemu-riscv@nongnu.org>; Tue, 14 Jan 2025 08:21:29 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1736871247; x=1737476047; darn=nongnu.org;
+ d=ventanamicro.com; s=google; t=1736871688; x=1737476488; darn=nongnu.org;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=y//BXroZRvl/C+yUIMD+CUXOuvbdDtB8OCeJItWRgUE=;
- b=Rl93OSf3gVecEe3amHE4bTXptnQ5ozcXpBXLsURCN6phkBcuy9oigl0CrcLUmqdeBT
- rbATNqRu+DQhDI+6xJlGDuou5E04ImwrqkDTL/OdYxgcQSxJ5PU9/I7kUg2dE0AsA+k+
- 2wWW2tIoXwfCKhnLpThNYWl4sSCws/atP/Ho5MZHFB140hdIkt8tklDEokslohkh8pnn
- 0kAt4SEqhdh1yjNWJDKCtzFD2YJkJpdezpxoMsHPBomkAkMztMsexslCHxw7tlXcLqrv
- hE+ishHSnpIc8vvxqo+lPkxYvDDDV683EoFOk9OgbAffV9AWzZsFSwZKSgwscMpycid9
- t/2g==
+ bh=k7/mhpKZT4G4e8PT0xIft9JMuvq8L0okChkv9+rRC6M=;
+ b=FzyeOfpi+uHMFVhMH+CXMT/ByzBlk267R+hnFK0oz1+NRBwe+xqtq5b6y+ram/Z+Yy
+ cEBKONWEURgVkS8AU2Hs5ZNg7uxIT0VS+ropyYuWUqw992H6AmFJj0dM5uIxcqu7v9kE
+ 2qmQvkXmPRjB/0qg4mP7P0c6t6KqeKcG7l6KoX657us/yh8NhIm7XrKCnE8T+bG4Ow3N
+ 57MZfMgISqjWMiVcKuqsxj4tU1X6xV3R0FzKnEWjTlvSc3wZe6RIzXMHAaIepIKz6RGM
+ 5jX/NTKW6uYHe22tSfqVkG7OHMVkcAn8clBwtIdyVLuBa0YRMke4vFelQ2BmJl8noHp2
+ nZBg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1736871247; x=1737476047;
+ d=1e100.net; s=20230601; t=1736871688; x=1737476488;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=y//BXroZRvl/C+yUIMD+CUXOuvbdDtB8OCeJItWRgUE=;
- b=fGdznSr8yT1oQ/bmQv62OcGju90KdGMhPDWL+ZeTguqbnjMo8Xob9LrZJRXKvMDWmN
- Oc8kgzIrjNV6lyX0inOwonvlwRGuq0A1WNBqy0HdbHTpm0PPpbVnzf+qzmdaYtL0GAwm
- jzpocxK/niYclNjHpM8etVXc1A0ZPR8G9qM+DBcNp6NrjYFx5GDcT9n3mgAt0h/lCiho
- XzWSCgBfDpHeFK/IhMZxGGjSEE+iZs9PiBEx8tAYSAH3v56Ajd/IemCjDFQk6e2+Iv7w
- bDGNMhewnxP2ijWQqP+/fybZBgFTrVJLqot9RLIYKzy0XmNzNH8CTwbR8lWsn1PIXYYc
- Ny5g==
+ bh=k7/mhpKZT4G4e8PT0xIft9JMuvq8L0okChkv9+rRC6M=;
+ b=diegEG/a0hXH3fIfGLH8dEQ5xINBCG3M/LGwAfy0UBWtCS6Ks2FglooJXCcOhP67xs
+ /lKkJB6YuYS2ksQrk7lcsz56rCAVrVeIPdxRNBHMZ+PtnNmfLDdpvpxsklB/ABDEjz0k
+ a5Y80pnr86RYmKEyx12knX/VHnhSJcMt2KBbrJOqsSCzAQXch19jbSBLDVmS5LfFjSaN
+ whZkuMRxuov/ySSkFatmL850jEB82T6f58yEbfq9WpFYkmmIYhFjczqsZwwacaUMPIup
+ paYD8Dg54Hw7ms2Tu6bWbSkHpto+QGpiF3+TYzxu5EwO34kklA5mPXRxFXOYPBtvQDCr
+ zSvg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWSkcDm4gMaLT6vp6nEEthkq1IyO+9XdtB/4Jrjr/AmjnMIRc0pkwDU5cuZGphQPeHRjjbAcrLBh75x@nongnu.org
-X-Gm-Message-State: AOJu0YzwHL0ghH2jgkJDhYhbd0p8xRk/cAKrcSbwW/c0vVZrRUFAsf+h
- kidUWzuO395bOTmeS89qoeJT+si4vg8hqXPajgKY14lBRg4jj9ylwpqkcB0ApxCsyIYot+IZvd7
- 8hc/RTw==
-X-Gm-Gg: ASbGncv4+QKPg0VSEFq6+I32RR42V2Io0Zj9vdl7ujA+sSkX2RXQeYzdP0XJNGtzHdQ
- +EKXtBdIdi6DlJgAFmpDNmkE3p/JvopUY57moYKMEYyr76x20NRSpXKTDKeyvQCRSXlr5UyrO4P
- PfW9lYDs7zTdaEVUC6hLAL3MibKuptgX/GeaAk6rmQtBS4g9ltacJefWf8K0frcOei5Wlq/v63W
- 6x17zDMs6xyfP+elA8I0EjAL1JrDh4ggRYLiOP8doW1Zm5vUmlRqIgk119OftrQ2DWMhXZR
-X-Google-Smtp-Source: AGHT+IEsS0rgZM0gU3TnxpmjG+0sL9+oxHs/BtCIP33GEwWFQK83MDOu4tWqIqZBEJyhu5NHMTLbKA==
-X-Received: by 2002:a05:6a20:12cc:b0:1e1:e2d8:fd1d with SMTP id
- adf61e73a8af0-1e88d0a2b46mr37876502637.33.1736871247000; 
- Tue, 14 Jan 2025 08:14:07 -0800 (PST)
+ AJvYcCU5YGV92P19uAaD3Kg5EIjUHxQ70utKT8QWtaPUu1hj9dDiSjpKZQE8sOLT/t0DVE2yX/6N4MgRx3qa@nongnu.org
+X-Gm-Message-State: AOJu0YyTgvBrf3C/8FsTsVpqZk/qq18Crf1CYz/id8U2H5YiQB1pzcqC
+ NeB/3ET3hvLys0nr9LPK8XRkc4FGF97U1BrUNxC+g2Ry5HLQ4nOj2G7LVqSmsqA=
+X-Gm-Gg: ASbGncvN5Kw4JqSHZD52gFpzCJrwTJfW8Qh6qjg1StSk58ftEq7bZ8V6AMDZBLXh0jb
+ VK8jonLm2fB3UKcMRkph1T59gm31pSdpM+J4eoEkCb0ZP+kfJ7Trbyio5eo5SyQbNOyigoNa346
+ JGwW6VSqGqWgY01wASMek0BhsUPpqjQmteCuXgQSy3bF1RuspE4crsZW8j9pPjXEHa9yVnDcdG5
+ sMT5DyEECmrITP0m4LeRfh5wKrDFaHRv7tdzjHmjlPhzabC9qTETsEfhysZbXwKkeA5pOVR
+X-Google-Smtp-Source: AGHT+IGJ5q79En67yrMda/Meg/Ci6mVbnaowK9ym7WNi8a0Ou6diwKxVd11FW4JUENy1/JKKrWtZkw==
+X-Received: by 2002:a17:903:41c3:b0:216:18f9:528b with SMTP id
+ d9443c01a7336-21a83f6299emr370477525ad.26.1736871688602; 
+ Tue, 14 Jan 2025 08:21:28 -0800 (PST)
 Received: from [192.168.68.110] ([189.110.107.205])
  by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-72d40658db6sm7881635b3a.104.2025.01.14.08.14.04
+ d9443c01a7336-21a9f22d11fsm69115895ad.178.2025.01.14.08.21.26
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 14 Jan 2025 08:14:06 -0800 (PST)
-Message-ID: <f7ed01aa-2d8a-49d9-b082-6f31ae2b5fef@ventanamicro.com>
-Date: Tue, 14 Jan 2025 13:14:02 -0300
+ Tue, 14 Jan 2025 08:21:28 -0800 (PST)
+Message-ID: <5c8e6416-91db-42e8-84b4-062572436950@ventanamicro.com>
+Date: Tue, 14 Jan 2025 13:21:24 -0300
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 Subject: Re: [PATCH 4/4] target/riscv: add RVA23S64 profile
@@ -76,10 +75,10 @@ Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com,
  palmer@rivosinc.com
 References: <20250114132012.1224941-1-dbarboza@ventanamicro.com>
  <20250114132012.1224941-5-dbarboza@ventanamicro.com>
- <20250114-a6a244e7bfc4b7bd2535750d@orel>
+ <20250114-96a4217891128dc91926b19c@orel>
 Content-Language: en-US
 From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <20250114-a6a244e7bfc4b7bd2535750d@orel>
+In-Reply-To: <20250114-96a4217891128dc91926b19c@orel>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 Received-SPF: pass client-ip=2607:f8b0:4864:20::644;
@@ -108,7 +107,7 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 
 
-On 1/14/25 12:25 PM, Andrew Jones wrote:
+On 1/14/25 12:09 PM, Andrew Jones wrote:
 > On Tue, Jan 14, 2025 at 10:20:12AM -0300, Daniel Henrique Barboza wrote:
 >> Add RVA23S64 as described in [1]. This profile inherits all mandatory
 >> extensions of RVA23U64, making it a child of the U64 profile.
@@ -119,6 +118,10 @@ On 1/14/25 12:25 PM, Andrew Jones wrote:
 >> rv64imafdcbvh_zic64b_zicbom_zicbop_zicboz_ziccamoa_ziccif_zicclsm_
 >> ziccrse_zicond_zicntr_zicsr_zihintntl_zihintpause_zihpm_zimop_zmmul_
 >> za64rs_zaamo_zalrsc_zawrs_zfa_zfhmin_zca_zcb_zcd_zcmop_zba_zbb_zbs_zkt_
+> 
+> yeah, zba/zbb/zbs are still here as expected. So patch 2's bios table
+> change was likely just the 'b', which we see at the start.
+> 
 >> zvbb_zve32f_zve32x_zve64f_zve64d_zve64x_zvfhmin_zvkb_zvkt_shcounterenw_
 >> sha_shgatpa_shtvala_shvsatpa_shvstvala_shvstvecd_smnpm_smstateen_ssccptr_
 >> sscofpmf_sscounterenw_ssnpm_ssstateen_sstc_sstvala_sstvecd_ssu64xl_
@@ -173,6 +176,22 @@ On 1/14/25 12:25 PM, Andrew Jones wrote:
 >> +        /* These were present in RVA22S64 */
 >> +        CPU_CFG_OFFSET(ext_svade), CPU_CFG_OFFSET(ext_svpbmt),
 >> +        CPU_CFG_OFFSET(ext_svinval),
+> 
+> I guess we can't inherit from both rva23u64 and rva22s64, which is what
+> we'd like to do.
+
+Not at this moment, although it wouldn't be hard to pull it off if we want.
+
+> 
+> What about zifencei?
+
+Oh dear I forgot about it. I'll add it in v2. Good catch.
+
+
+Daniel
+
+
+> 
 >> +
 >> +        /* New in RVA23S64 */
 >> +        CPU_CFG_OFFSET(ext_svnapot), CPU_CFG_OFFSET(ext_sstc),
@@ -181,35 +200,6 @@ On 1/14/25 12:25 PM, Andrew Jones wrote:
 >> +        /* Named features: Sha, ssu64xl, ssnpm */
 >> +        CPU_CFG_OFFSET(ext_sha),
 >> +        CPU_CFG_OFFSET(ext_ssnpm),
-> 
-> Why are we calling ssnpm a named feature? And same question for supm in
-> the last patch.
-
-They're both defined in RVA23 as follows:
-
-- Supm Pointer masking, with the execution environment providing a means to
-select PMLEN=0 and PMLEN=7 at minimum.
-
-- Ssnpm Pointer masking, with senvcfg.PMM and henvcfg.PMM supporting, at minimum,
-settings PMLEN=0 and PMLEN=7.
-
-
-This is consistent to what we usually call a named feature, i.e. a special name
-for a particular setting for an existing extension.
-
-Granted, both are working as actual extensions in QEMU, so I guess we can treat
-them as such regardless of what the spec says.
-
-
-Thanks,
-
-Daniel
-
-
-> 
-> Thanks,
-> drew
-> 
 >> +
 >> +        RISCV_PROFILE_EXT_LIST_END
 >> +    }
@@ -249,5 +239,8 @@ Daniel
 >> 2.47.1
 >>
 >>
+> 
+> Thanks,
+> drew
 
 
