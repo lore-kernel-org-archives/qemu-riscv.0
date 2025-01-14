@@ -4,89 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1ADF7E77188
-	for <qemu-riscv@archiver.kernel.org>; Tue, 14 Jan 2025 19:03:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 428AAE77188
+	for <qemu-riscv@archiver.kernel.org>; Tue, 14 Jan 2025 23:26:51 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tXm9i-0007Q4-33; Tue, 14 Jan 2025 14:00:50 -0500
+	id 1tXqIr-0006J6-5O; Tue, 14 Jan 2025 18:26:33 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1tXm9N-0006Tp-7X
- for qemu-riscv@nongnu.org; Tue, 14 Jan 2025 14:00:30 -0500
-Received: from mail-ot1-x342.google.com ([2607:f8b0:4864:20::342])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1tXm9J-00035p-6e
- for qemu-riscv@nongnu.org; Tue, 14 Jan 2025 14:00:27 -0500
-Received: by mail-ot1-x342.google.com with SMTP id
- 46e09a7af769-71e3f291ad6so3798019a34.0
- for <qemu-riscv@nongnu.org>; Tue, 14 Jan 2025 11:00:22 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1736881222; x=1737486022; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=m6vq2sosVGVcjMUAGcKq1UGGLY86FU4I8V25OFJTASo=;
- b=Fmg/I2rTFWdhpEavlmPyjewO+01OQasv3NvVsEKASiz1EFfLAmkEpuS1T9Fy/7aIoJ
- m3s2SHITFiKOQOE0Th7x6YrTGVJMwT+HEDyIwpA9UoH3KM5dmPXJsSYKMJ/k3QnUVrAR
- Vq6hZAgcc+RtG5gdD6nB5/DcrasBeTyxQscZR2sPpgF4WNTSiU6OGYjGkDKkXUdMS9qU
- UfwbrSXry/l3vGC9SGW0/xY6DoYq0mFQgnV3+a7za0E/hUuE6VGlb8xxxFpDtt74fGEb
- g6VZh7Jhx2Ohmt8u50lkQIHxOxEq3ga4ZD8tekz3D04RZ1OCZPzjDf6DhvHQxmMjcAKa
- T/vQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1736881222; x=1737486022;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=m6vq2sosVGVcjMUAGcKq1UGGLY86FU4I8V25OFJTASo=;
- b=HAkWG1YpWI9xUib2wouY4yM/ixI9Po20y5H6EHnoa69w6t0T1voBsjGOJUzs7O9FkK
- W9dn5OS3HsO+tc6nwyQlaz1jvxcXTf5eCADsAHZJnrCNu8SFXUBZagKWPgPOr2N7Ic3c
- tlamK0F8QrP6CD9y0Xp8ha7zjxQwADvwD6JR7VfR9cUe/JuOzfB8PMU80xO3i0m3wVvv
- XW2C07QOyOEpdJnIL/Nua3tOo6F2EBBnvGq7kYfU50I3xxXw2qfnfhsY74JhgZXhOLv9
- WfOG2s8JjD6NtnW20VbiPCrrwviD6mlYFj8ZCQdfyVt+ANBlI7HNGEV9ePnDNkPUWSve
- /S5g==
-X-Gm-Message-State: AOJu0YyQKssR/wANmQ+7h9JGpBWb1ksnTyLzMqKXyen7Tfc2TVsjDZka
- V6oStZk1oYy80KDVZJRRmM0hKLt8rw3wJdwbjS3NSpknNqREWdtiCU9B8R0ugc8=
-X-Gm-Gg: ASbGncuZvUKjSryJj+eMciGBHvXik4NXnvEjaB3OApJiXqzk1dIzSKD8uSeWrkhQ6qY
- 2pAx9FLSVcvEF4sgP843D6tXl9iQSkBl9BFC/3VugaOT1H5i2jE+YFMloj91X5f9FzDWamFMX/v
- gtG23quc6bqQ7numIfqSgK2xv8VQkFDW9FT1In4tEMSDkD0ttpj84ZpOClkBsj9Y+l2MWsWaI17
- 2rp39YKzEimnx88+68/vQADwdxONy/2PuUDBT5ciBXC5csM/7t3+YFmPiHwW7IJAUAxeULND0RQ
- KyHAsmWJOA==
-X-Google-Smtp-Source: AGHT+IH+9w/4FHpO9Zml+ejdTgh0xHG3lBqclREnDR9vKs/fwhmoI9q6jgY/8X0u1xHqbvxYTaqXgA==
-X-Received: by 2002:a05:6830:6107:b0:71e:17c1:45e with SMTP id
- 46e09a7af769-721e2e9a53dmr22239436a34.21.1736881220883; 
- Tue, 14 Jan 2025 11:00:20 -0800 (PST)
-Received: from grind.dc1.ventanamicro.com ([189.110.107.205])
- by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7231855ee1esm4875647a34.32.2025.01.14.11.00.17
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 14 Jan 2025 11:00:20 -0800 (PST)
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-To: qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
- liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
- ajones@ventanamicro.com,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Subject: [PATCH v2 2/4] target/riscv: use RVB in RVA22U64
-Date: Tue, 14 Jan 2025 15:59:59 -0300
-Message-ID: <20250114190001.1650942-3-dbarboza@ventanamicro.com>
-X-Mailer: git-send-email 2.47.1
-In-Reply-To: <20250114190001.1650942-1-dbarboza@ventanamicro.com>
-References: <20250114190001.1650942-1-dbarboza@ventanamicro.com>
+ (Exim 4.90_1) (envelope-from <r@drigo.nl>) id 1tXoMd-00059V-5k
+ for qemu-riscv@nongnu.org; Tue, 14 Jan 2025 16:22:19 -0500
+Received: from smtp-42ad.mail.infomaniak.ch ([2001:1600:7:10::42ad])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <r@drigo.nl>) id 1tXoMb-0008CZ-6L
+ for qemu-riscv@nongnu.org; Tue, 14 Jan 2025 16:22:18 -0500
+Received: from smtp-4-0000.mail.infomaniak.ch (unknown
+ [IPv6:2001:1600:7:10:40ca:feff:fe05:0])
+ by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4YXhsX06Klz6v0;
+ Tue, 14 Jan 2025 22:22:08 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=drigo.nl;
+ s=20241108; t=1736889727;
+ bh=G2rbHS6u3Za8/AC5FJ/CdxlwUMqNT7soTE46QA9lHHw=;
+ h=From:To:Cc:Subject:Date:From;
+ b=VPsLgVDJmfmY3YHy94ysAD9X2EEpAZc/484AI69r95KdzGIDDRlr+qvjZS1s6KudA
+ b/ilGuzxv8KlC+rESDZad/ok4qiKmGFUUd2K0Om+HELueJNfWhDPgWIitl0vmfbNpr
+ 1bCkqm88KAlgCuq4mApiJBtbobzQsIXtNChACk89fwSPq11YxjRSSiWs3kt7cX8PWI
+ 7Bo7q9KGh78yugy1K+CgmQNaNjbAup7eaAbiZLZDdZWvOsw1NZlRXM2gIdxJ4al+Jy
+ 1yxUxQLfy4jdHMfwZWNM6cjPiY+PoAYgsnFwyDRtdyhlvOuyAPXdU9MTate6rJNkZg
+ vUvPGjGXNo30A==
+Received: from unknown by smtp-4-0000.mail.infomaniak.ch (Postfix) with ESMTPA
+ id 4YXhsW2Z14zgJR; Tue, 14 Jan 2025 22:22:07 +0100 (CET)
+From: Rodrigo Dias Correa <r@drigo.nl>
+To: anup.patel@wdc.com,
+	Alistair.Francis@wdc.com
+Cc: qemu-riscv@nongnu.org,
+	qemu-devel@nongnu.org
+Subject: [PATCH] goldfish_rtc: Fix tick_offset migration
+Date: Tue, 14 Jan 2025 22:21:50 +0100
+Message-Id: <20250114212150.228241-1-r@drigo.nl>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::342;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-ot1-x342.google.com
+X-Infomaniak-Routing: alpha
+Received-SPF: pass client-ip=2001:1600:7:10::42ad; envelope-from=r@drigo.nl;
+ helo=smtp-42ad.mail.infomaniak.ch
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, SPF_HELO_PASS=-0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
+X-Mailman-Approved-At: Tue, 14 Jan 2025 18:26:30 -0500
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -101,62 +70,101 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From the time we added RVA22U64 until now the spec didn't declare 'RVB'
-as a dependency, using zba/zbb/zbs instead. Since then the RVA22 spec
-[1] added the following in the 'RVA22U64 Mandatory Extensions' section:
+Instead of migrating the raw tick_offset, goldfish_rtc migrates a
+recalculated value based on QEMU_CLOCK_VIRTUAL. As QEMU_CLOCK_VIRTUAL
+stands still across a save-and-restore cycle, the guest RTC becomes out
+of sync with the host RTC when the VM is restored.
 
-"B Bit-manipulation instructions
+As described in the bug description, it looks like this calculation was
+copied from pl031 RTC, which had its tick_offset migration fixed by
+Commit 032cfe6a79c8 ("pl031: Correctly migrate state when using -rtc
+clock=host").
 
-Note: The B extension comprises the Zba, Zbb, and Zbs extensions. At the
-time of RVA22U64's ratification, the B extension had not yet been
-defined, and so RVA22U64 explicitly mandated Zba, Zbb, and Zbs instead.
-Mandating B is equivalent."
+Migrate the tick_offset directly, adding it as a version-dependent field
+to VMState. Keep the old behavior when migrating from previous versions.
 
-It is also equivalent to QEMU (see riscv_cpu_validate_b() in
-target/riscv/tcg/tcg-cpu.c).
-
-Finally, RVA23U64 [2] directly mentions RVB as a mandatory extension,
-not citing zba/zbb/zbs.
-
-To make it clear that RVA23U64 will extend RVA22U64 (i.e. RVA22 is a
-parent of RVA23), use RVB in RVA22U64 as well.
-
-(bios-tables-test change: RVB added to riscv,isa)
-
-[1] https://github.com/riscv/riscv-profiles/blob/main/src/profiles.adoc#61-rva22u64-profile
-[2] https://github.com/riscv/riscv-profiles/blob/main/src/rva23-profile.adoc#rva23u64-profile
-
-Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Resolves: https://gitlab.com/qemu-project/qemu/-/issues/2033
+Signed-off-by: Rodrigo Dias Correa <r@drigo.nl>
 ---
- target/riscv/cpu.c                |   2 +-
- tests/data/acpi/riscv64/virt/RHCT | Bin 398 -> 400 bytes
- 2 files changed, 1 insertion(+), 1 deletion(-)
+ As a new field was added to VMState, after this patch, it won't be possible to
+ migrate to old versions. I'm not sure if this is needed. Please, let me know.
+---
+ hw/rtc/goldfish_rtc.c | 43 +++++++++++++------------------------------
+ 1 file changed, 13 insertions(+), 30 deletions(-)
 
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index b187ef2e4b..6fb4d5f374 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -2351,7 +2351,7 @@ static const PropertyInfo prop_marchid = {
- static RISCVCPUProfile RVA22U64 = {
-     .parent = NULL,
-     .name = "rva22u64",
--    .misa_ext = RVI | RVM | RVA | RVF | RVD | RVC | RVU,
-+    .misa_ext = RVI | RVM | RVA | RVF | RVD | RVC | RVB | RVU,
-     .priv_spec = RISCV_PROFILE_ATTR_UNUSED,
-     .satp_mode = RISCV_PROFILE_ATTR_UNUSED,
-     .ext_offsets = {
-diff --git a/tests/data/acpi/riscv64/virt/RHCT b/tests/data/acpi/riscv64/virt/RHCT
-index b14ec15e553200760a63aad65586913d31ea2edc..13c8025b868051485be5ba62974a22971a07bc6a 100644
-GIT binary patch
-delta 53
-zcmeBUp1{l%<l!7LfsuiM@#{n`13^7TMg~>JqB1j+%-qDZl;ot1UQ&#clNpsc(ij;S
-I3K$s}0ARKZK>z>%
-
-delta 52
-zcmbQh+{ern<l!9B$H>6Im@tvcKtP9)kwJyAsLaeHGdD3UC3&N_6yxMHMkS6EMh1pF
-HMg|4|IwT82
-
+diff --git a/hw/rtc/goldfish_rtc.c b/hw/rtc/goldfish_rtc.c
+index fa1d9051f4..0f1b53e0e4 100644
+--- a/hw/rtc/goldfish_rtc.c
++++ b/hw/rtc/goldfish_rtc.c
+@@ -178,38 +178,21 @@ static void goldfish_rtc_write(void *opaque, hwaddr offset,
+     trace_goldfish_rtc_write(offset, value);
+ }
+ 
+-static int goldfish_rtc_pre_save(void *opaque)
+-{
+-    uint64_t delta;
+-    GoldfishRTCState *s = opaque;
+-
+-    /*
+-     * We want to migrate this offset, which sounds straightforward.
+-     * Unfortunately, we cannot directly pass tick_offset because
+-     * rtc_clock on destination Host might not be same source Host.
+-     *
+-     * To tackle, this we pass tick_offset relative to vm_clock from
+-     * source Host and make it relative to rtc_clock at destination Host.
+-     */
+-    delta = qemu_clock_get_ns(rtc_clock) -
+-            qemu_clock_get_ns(QEMU_CLOCK_VIRTUAL);
+-    s->tick_offset_vmstate = s->tick_offset + delta;
+-
+-    return 0;
+-}
+-
+ static int goldfish_rtc_post_load(void *opaque, int version_id)
+ {
+-    uint64_t delta;
+     GoldfishRTCState *s = opaque;
+ 
+-    /*
+-     * We extract tick_offset from tick_offset_vmstate by doing
+-     * reverse math compared to pre_save() function.
+-     */
+-    delta = qemu_clock_get_ns(rtc_clock) -
+-            qemu_clock_get_ns(QEMU_CLOCK_VIRTUAL);
+-    s->tick_offset = s->tick_offset_vmstate - delta;
++    if (version_id < 3) {
++        /*
++         * Previous versions didn't migrate tick_offset directly. Instead, they
++         * migrated tick_offset_vmstate, which is a recalculation based on
++         * QEMU_CLOCK_VIRTUAL. We use tick_offset_vmstate when migrating from
++         * older versions.
++         */
++        uint64_t delta = qemu_clock_get_ns(rtc_clock) -
++                 qemu_clock_get_ns(QEMU_CLOCK_VIRTUAL);
++        s->tick_offset = s->tick_offset_vmstate - delta;
++    }
+ 
+     goldfish_rtc_set_alarm(s);
+ 
+@@ -239,8 +222,7 @@ static const MemoryRegionOps goldfish_rtc_ops[2] = {
+ 
+ static const VMStateDescription goldfish_rtc_vmstate = {
+     .name = TYPE_GOLDFISH_RTC,
+-    .version_id = 2,
+-    .pre_save = goldfish_rtc_pre_save,
++    .version_id = 3,
+     .post_load = goldfish_rtc_post_load,
+     .fields = (const VMStateField[]) {
+         VMSTATE_UINT64(tick_offset_vmstate, GoldfishRTCState),
+@@ -249,6 +231,7 @@ static const VMStateDescription goldfish_rtc_vmstate = {
+         VMSTATE_UINT32(irq_pending, GoldfishRTCState),
+         VMSTATE_UINT32(irq_enabled, GoldfishRTCState),
+         VMSTATE_UINT32(time_high, GoldfishRTCState),
++        VMSTATE_UINT64_V(tick_offset, GoldfishRTCState, 3),
+         VMSTATE_END_OF_LIST()
+     }
+ };
 -- 
-2.47.1
+2.34.1
 
 
