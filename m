@@ -4,85 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 42AFBC02183
-	for <qemu-riscv@archiver.kernel.org>; Tue, 14 Jan 2025 19:01:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1ADF7E77188
+	for <qemu-riscv@archiver.kernel.org>; Tue, 14 Jan 2025 19:03:23 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tXm9W-0006ml-2t; Tue, 14 Jan 2025 14:00:38 -0500
+	id 1tXm9i-0007Q4-33; Tue, 14 Jan 2025 14:00:50 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1tXm9C-0006KK-AO
+ id 1tXm9N-0006Tp-7X
  for qemu-riscv@nongnu.org; Tue, 14 Jan 2025 14:00:30 -0500
-Received: from mail-ot1-x341.google.com ([2607:f8b0:4864:20::341])
+Received: from mail-ot1-x342.google.com ([2607:f8b0:4864:20::342])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1tXm99-00034c-GA
- for qemu-riscv@nongnu.org; Tue, 14 Jan 2025 14:00:17 -0500
-Received: by mail-ot1-x341.google.com with SMTP id
- 46e09a7af769-71e22b2387cso3911724a34.3
- for <qemu-riscv@nongnu.org>; Tue, 14 Jan 2025 11:00:14 -0800 (PST)
+ id 1tXm9J-00035p-6e
+ for qemu-riscv@nongnu.org; Tue, 14 Jan 2025 14:00:27 -0500
+Received: by mail-ot1-x342.google.com with SMTP id
+ 46e09a7af769-71e3f291ad6so3798019a34.0
+ for <qemu-riscv@nongnu.org>; Tue, 14 Jan 2025 11:00:22 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1736881213; x=1737486013; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=GwRBr/J/aluGiNq2YcJIUMCt8ffzwsH0WGGSpusgcIY=;
- b=SM2yBiOAYRb8wg859VHV+cayGf7QVpJCp1gqCBXAG19ApMCVReRkLO6k9OvgK9puLv
- S6Eu4a+obD6NtecQ9NxeypDecYI0K8qhH4DWNsCYdvaWkG8yPLcUstZYvmeui6ZIANQe
- zo6n8d0eIlgM1g+ibaXpOGJzOmgArdzSX+g6Onz4w3N3vYvjsvpBYGpgdHdLdhtwrfYJ
- mW2i8c1UjkFXWQvWcX27AYnA/eYB13LQGAHs+QifKhWFXL7mbumewMJjJu5mcTxAf0sn
- nL6CcOeod7sIHm6oVznefCGf6rKzY5u32Jd8q7JRVxAXpPrFMs1QxbFh3KzVi2AyRBQX
- fLDQ==
+ d=ventanamicro.com; s=google; t=1736881222; x=1737486022; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=m6vq2sosVGVcjMUAGcKq1UGGLY86FU4I8V25OFJTASo=;
+ b=Fmg/I2rTFWdhpEavlmPyjewO+01OQasv3NvVsEKASiz1EFfLAmkEpuS1T9Fy/7aIoJ
+ m3s2SHITFiKOQOE0Th7x6YrTGVJMwT+HEDyIwpA9UoH3KM5dmPXJsSYKMJ/k3QnUVrAR
+ Vq6hZAgcc+RtG5gdD6nB5/DcrasBeTyxQscZR2sPpgF4WNTSiU6OGYjGkDKkXUdMS9qU
+ UfwbrSXry/l3vGC9SGW0/xY6DoYq0mFQgnV3+a7za0E/hUuE6VGlb8xxxFpDtt74fGEb
+ g6VZh7Jhx2Ohmt8u50lkQIHxOxEq3ga4ZD8tekz3D04RZ1OCZPzjDf6DhvHQxmMjcAKa
+ T/vQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1736881213; x=1737486013;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=GwRBr/J/aluGiNq2YcJIUMCt8ffzwsH0WGGSpusgcIY=;
- b=dckYVlR77S1EG3dVPnM50+skg91d4hmuKY31g+YOyTMX0CZsg4AfZmCK+/sbma7262
- +5OnSAUCu5IuZlBFuy7gbeZiaFsapb0Q2pu4bzwKkcmimq2ojatDmm2JMGV3d6JP8Y7o
- DPyobrjoZz/eZFYtWcK+WbFtH9cAXwKWg/5d0BoH73CZ43RuJPCFDE/9olKC/BfbasHn
- IUTnkuyvgvAkjD8LrTnZlmAyPbHapFww3s937HVt86Ynxr6QsgbTo6mRQhafILL5E+E2
- w6SXLGofpziVoHDxzI5vimHNaRUXyMLr07J97hdP3aSzhEfXtDUvIh8I5oUVSylakMPw
- zxZQ==
-X-Gm-Message-State: AOJu0YzzinSvWgv8eErq/M++n2vo4JqgBkNha4bpgQKFf80EiNy7iFuh
- okMMqbb+0voDoO9S6nCGNhYvjEhjb2du1doefsWyGN93flGKnjPceiW+QfvOuTk=
-X-Gm-Gg: ASbGncuQzOSYM9m+Q7MN2r3X6dChiYKphm1nBzPI5Ev8daJuUxwqw51DiywDnp/dFE3
- ZumnrTJWs5PHiZtQVZGHFVf3wqoPizLdupUtZKAgjM5Ym+y6ceX0OGsQdlfFmspF9cuF7hstUkl
- k0i5DNOU8Yhv5yg84PxCQj8D5Y3PP+N+E3X35JV+CnwVg6r9d7NIndKMipurKcbVTQFKrpTzhj+
- /IhgnkN14M2wfQajSmgKJYQJnfE00znQnUhCdqjeJkaEoTTUU1bynrtQz6O7w1G/d0Z3heRzT3w
- HIrQrJhATw==
-X-Google-Smtp-Source: AGHT+IGiUftHDhrC7yQsWI6rUCip6T9bTbpSoTQS5OsyJnEoy/2ZEE/Yio6uiVvyPtizMudP31sxew==
-X-Received: by 2002:a05:6830:2a9f:b0:71d:3faf:b652 with SMTP id
- 46e09a7af769-721e2e0e976mr16015655a34.6.1736881213202; 
- Tue, 14 Jan 2025 11:00:13 -0800 (PST)
+ d=1e100.net; s=20230601; t=1736881222; x=1737486022;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=m6vq2sosVGVcjMUAGcKq1UGGLY86FU4I8V25OFJTASo=;
+ b=HAkWG1YpWI9xUib2wouY4yM/ixI9Po20y5H6EHnoa69w6t0T1voBsjGOJUzs7O9FkK
+ W9dn5OS3HsO+tc6nwyQlaz1jvxcXTf5eCADsAHZJnrCNu8SFXUBZagKWPgPOr2N7Ic3c
+ tlamK0F8QrP6CD9y0Xp8ha7zjxQwADvwD6JR7VfR9cUe/JuOzfB8PMU80xO3i0m3wVvv
+ XW2C07QOyOEpdJnIL/Nua3tOo6F2EBBnvGq7kYfU50I3xxXw2qfnfhsY74JhgZXhOLv9
+ WfOG2s8JjD6NtnW20VbiPCrrwviD6mlYFj8ZCQdfyVt+ANBlI7HNGEV9ePnDNkPUWSve
+ /S5g==
+X-Gm-Message-State: AOJu0YyQKssR/wANmQ+7h9JGpBWb1ksnTyLzMqKXyen7Tfc2TVsjDZka
+ V6oStZk1oYy80KDVZJRRmM0hKLt8rw3wJdwbjS3NSpknNqREWdtiCU9B8R0ugc8=
+X-Gm-Gg: ASbGncuZvUKjSryJj+eMciGBHvXik4NXnvEjaB3OApJiXqzk1dIzSKD8uSeWrkhQ6qY
+ 2pAx9FLSVcvEF4sgP843D6tXl9iQSkBl9BFC/3VugaOT1H5i2jE+YFMloj91X5f9FzDWamFMX/v
+ gtG23quc6bqQ7numIfqSgK2xv8VQkFDW9FT1In4tEMSDkD0ttpj84ZpOClkBsj9Y+l2MWsWaI17
+ 2rp39YKzEimnx88+68/vQADwdxONy/2PuUDBT5ciBXC5csM/7t3+YFmPiHwW7IJAUAxeULND0RQ
+ KyHAsmWJOA==
+X-Google-Smtp-Source: AGHT+IH+9w/4FHpO9Zml+ejdTgh0xHG3lBqclREnDR9vKs/fwhmoI9q6jgY/8X0u1xHqbvxYTaqXgA==
+X-Received: by 2002:a05:6830:6107:b0:71e:17c1:45e with SMTP id
+ 46e09a7af769-721e2e9a53dmr22239436a34.21.1736881220883; 
+ Tue, 14 Jan 2025 11:00:20 -0800 (PST)
 Received: from grind.dc1.ventanamicro.com ([189.110.107.205])
  by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7231855ee1esm4875647a34.32.2025.01.14.11.00.10
+ 46e09a7af769-7231855ee1esm4875647a34.32.2025.01.14.11.00.17
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 14 Jan 2025 11:00:12 -0800 (PST)
+ Tue, 14 Jan 2025 11:00:20 -0800 (PST)
 From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
  liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
  ajones@ventanamicro.com,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Subject: [PATCH v2 0/4] target/riscv: RVA23 profile support
-Date: Tue, 14 Jan 2025 15:59:57 -0300
-Message-ID: <20250114190001.1650942-1-dbarboza@ventanamicro.com>
+Subject: [PATCH v2 2/4] target/riscv: use RVB in RVA22U64
+Date: Tue, 14 Jan 2025 15:59:59 -0300
+Message-ID: <20250114190001.1650942-3-dbarboza@ventanamicro.com>
 X-Mailer: git-send-email 2.47.1
+In-Reply-To: <20250114190001.1650942-1-dbarboza@ventanamicro.com>
+References: <20250114190001.1650942-1-dbarboza@ventanamicro.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::341;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-ot1-x341.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::342;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-ot1-x342.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -98,36 +101,60 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Hi,
+From the time we added RVA22U64 until now the spec didn't declare 'RVB'
+as a dependency, using zba/zbb/zbs instead. Since then the RVA22 spec
+[1] added the following in the 'RVA22U64 Mandatory Extensions' section:
 
-This version implements changes based on Drew's feedback from v1.
+"B Bit-manipulation instructions
 
-Most notable change is the addition of zifencei in RVA23S64 that I
-somehow missed in v1.
+Note: The B extension comprises the Zba, Zbb, and Zbs extensions. At the
+time of RVA22U64's ratification, the B extension had not yet been
+defined, and so RVA22U64 explicitly mandated Zba, Zbb, and Zbs instead.
+Mandating B is equivalent."
 
-Patches based on alistair/riscv-to-apply.next.
+It is also equivalent to QEMU (see riscv_cpu_validate_b() in
+target/riscv/tcg/tcg-cpu.c).
 
-Changes from v1:
-- patch 2:
-  - do not remove zba/zbb/zbs from the extension list
-- patch 3:
-  - fixed commit msg
-  - treat supm as an extension rather than a named feature
-- patch 4:
-  - add zifencei
-  - treat ssnpm as a extension rather than a named feature
-v1 link: https://lore.kernel.org/qemu-riscv/20250114132012.1224941-1-dbarboza@ventanamicro.com/
+Finally, RVA23U64 [2] directly mentions RVB as a mandatory extension,
+not citing zba/zbb/zbs.
 
-Daniel Henrique Barboza (4):
-  target/riscv: add ssu64xl
-  target/riscv: use RVB in RVA22U64
-  target/riscv: add RVA23U64 profile
-  target/riscv: add RVA23S64 profile
+To make it clear that RVA23U64 will extend RVA22U64 (i.e. RVA22 is a
+parent of RVA23), use RVB in RVA22U64 as well.
 
- target/riscv/cpu-qom.h            |   2 +
- target/riscv/cpu.c                |  77 +++++++++++++++++++++++++++++-
- tests/data/acpi/riscv64/virt/RHCT | Bin 390 -> 400 bytes
- 3 files changed, 78 insertions(+), 1 deletion(-)
+(bios-tables-test change: RVB added to riscv,isa)
+
+[1] https://github.com/riscv/riscv-profiles/blob/main/src/profiles.adoc#61-rva22u64-profile
+[2] https://github.com/riscv/riscv-profiles/blob/main/src/rva23-profile.adoc#rva23u64-profile
+
+Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+---
+ target/riscv/cpu.c                |   2 +-
+ tests/data/acpi/riscv64/virt/RHCT | Bin 398 -> 400 bytes
+ 2 files changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index b187ef2e4b..6fb4d5f374 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -2351,7 +2351,7 @@ static const PropertyInfo prop_marchid = {
+ static RISCVCPUProfile RVA22U64 = {
+     .parent = NULL,
+     .name = "rva22u64",
+-    .misa_ext = RVI | RVM | RVA | RVF | RVD | RVC | RVU,
++    .misa_ext = RVI | RVM | RVA | RVF | RVD | RVC | RVB | RVU,
+     .priv_spec = RISCV_PROFILE_ATTR_UNUSED,
+     .satp_mode = RISCV_PROFILE_ATTR_UNUSED,
+     .ext_offsets = {
+diff --git a/tests/data/acpi/riscv64/virt/RHCT b/tests/data/acpi/riscv64/virt/RHCT
+index b14ec15e553200760a63aad65586913d31ea2edc..13c8025b868051485be5ba62974a22971a07bc6a 100644
+GIT binary patch
+delta 53
+zcmeBUp1{l%<l!7LfsuiM@#{n`13^7TMg~>JqB1j+%-qDZl;ot1UQ&#clNpsc(ij;S
+I3K$s}0ARKZK>z>%
+
+delta 52
+zcmbQh+{ern<l!9B$H>6Im@tvcKtP9)kwJyAsLaeHGdD3UC3&N_6yxMHMkS6EMh1pF
+HMg|4|IwT82
 
 -- 
 2.47.1
