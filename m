@@ -4,90 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 45C43E77188
-	for <qemu-riscv@archiver.kernel.org>; Tue, 14 Jan 2025 13:02:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 78306E77188
+	for <qemu-riscv@archiver.kernel.org>; Tue, 14 Jan 2025 13:08:35 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tXgZ2-00022f-JA; Tue, 14 Jan 2025 08:02:37 -0500
+	id 1tXgeh-0005bs-MF; Tue, 14 Jan 2025 08:08:28 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1tXgYx-00021l-Vq
- for qemu-riscv@nongnu.org; Tue, 14 Jan 2025 08:02:33 -0500
-Received: from mail-ot1-x332.google.com ([2607:f8b0:4864:20::332])
+ id 1tXgeW-0005XO-Sh
+ for qemu-riscv@nongnu.org; Tue, 14 Jan 2025 08:08:21 -0500
+Received: from mail-ot1-x336.google.com ([2607:f8b0:4864:20::336])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1tXgYv-00005o-Ql
- for qemu-riscv@nongnu.org; Tue, 14 Jan 2025 08:02:31 -0500
-Received: by mail-ot1-x332.google.com with SMTP id
- 46e09a7af769-71e2dccdb81so3721674a34.1
- for <qemu-riscv@nongnu.org>; Tue, 14 Jan 2025 05:02:28 -0800 (PST)
+ id 1tXgeU-0001zd-56
+ for qemu-riscv@nongnu.org; Tue, 14 Jan 2025 08:08:16 -0500
+Received: by mail-ot1-x336.google.com with SMTP id
+ 46e09a7af769-7231e2ac9e4so1142230a34.0
+ for <qemu-riscv@nongnu.org>; Tue, 14 Jan 2025 05:08:12 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1736859747; x=1737464547; darn=nongnu.org;
+ d=ventanamicro.com; s=google; t=1736860092; x=1737464892; darn=nongnu.org;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=CUmYZjbKWifUgCqnJjjOKcesi76UgUVZ4zkWYA6FKGQ=;
- b=UvzFbHyGk0vcmRD7GUrSen0oVETZfPaC3DnEQHLs+rUrIN42u8xXXOSKH61kAup4Ju
- Dyovh6+68owjoUXC6aW7Tmfg4z0yNLmqetQnl1/ny4oqVdm6a+6qBiJCW++avWHj8cok
- l6jnILj2NfFMxWfkyz7JVErI7LHykzBjs1hJrtGLr+EJyN5nMF5/49ZsG3pYoSzctRsm
- z5//RDVzWu/wNgnERgeNfDvbEU+FhIM7+Itxjyx8PmkKX4RH8KWVGH8T+GhqBRivSTNd
- 15MrIIHCKuzFy4t7LXfJMvhMGCzJGgY455Rgp9w+YPtUPEYQ32x3tbuE5JtlKswplKdg
- 8zoQ==
+ bh=0CHqtPvt3LZZuIyf8SFhofuwCMSuT2eDxjB5jqkyswo=;
+ b=V6Mgrqb2AgDSBbY6su8vYtvGal96FdQ9RRgPSShI3ELOn9zGOPQWReASXfwG3NJY/K
+ y8xzwz3WCDkewJuP1JkNjc7xgTTzV/2iNHFf7v0ab3g45Z8k3K/JFTK5Ut3/fB+0UGtt
+ ulNdIuuK4F8nGCJNMAHdAR146IYT4H9btBazm3r0rDWa+28zMV4vHGuwiMJbNGo6LO4N
+ mZ210k4H9kgA7R/KIFwAd6y3d+6DoqVGyKqz6VLSlNc+ddqgrkI7FyZ/TNnRT51OAJQL
+ 9jlLbJTD560gO70OByy7jNaeR7AFsX4hvTpSS7gJRCGNAGrEMNnsMiM/vlb+Hl4bJ9zO
+ nqsw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1736859747; x=1737464547;
+ d=1e100.net; s=20230601; t=1736860092; x=1737464892;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=CUmYZjbKWifUgCqnJjjOKcesi76UgUVZ4zkWYA6FKGQ=;
- b=XnZD/3X9loi0NSzhozwD0Xhw9JLcwRZloPzdG9vorFmiC4Fi1icMKASm6UlNCzE18E
- +Poo+drGdwoP64pDdCiW86Z+miNCSutubmoa8rahnBRZkX92rnFxJKNlMG4E+jnq2cwN
- 31FkdtJq2FNETGYj32BNhF0MbroPnYGG9AYSzNUF2fPsz9uU3Kt5lgQClO5VVcZBxzNk
- oO9U5Qwvin+CNI4TcSo6YE3gZZyG6oYX3//8hVjw6Zera77JS4nk96Hf8E8dTDlSciun
- s0rGo7LxDcH5tH4xWNfJ3dE81UL5xITIE07LacH8uLQQQZmOXxAMt2V8vsGsu6uFa1Cf
- W8Rw==
+ bh=0CHqtPvt3LZZuIyf8SFhofuwCMSuT2eDxjB5jqkyswo=;
+ b=gXvYrRQ8kqrHPYSclI1diHyrQCTuuqXKBuImu3y2JNMdaGCv/6uZU3afcJABnhEmft
+ e8LMfXspwdj1122xUaYzWOZ+Wkx0UJshP7J0/rWgUIrIIl9gDAbKjTnSAbxRUqvhG0A1
+ sdW+6XcV0qYAHNePK5cUJfMP2+iBVjtWjCiisVb4aMjL7uW6VMv9N+umEcmxQ1UYSjWx
+ qWKJtvQrVlFdPQXEWBNXFmDZP9f3Wlf9Z2k0QBNBOVEk28gOxZtjln0NU/bI/IsfPQ8r
+ Ll4lLSMWHBoWTIMAXpHfPrhpzBNEf/35vjg8Ez4B49bsG9x+Z5DVVVqXaoOqyt0cgQME
+ OKiA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVyMP7R8Ghh9HjVMPemuaMKlY9B/MN0Qfkg0TjQy8AIsRA0GuuSQKr09Et/DAztBGZggShLIz0h2l8r@nongnu.org
-X-Gm-Message-State: AOJu0YyQSpnS/L087Egx4KpOLOThzjC1aFt16cPWVGTmSkfuS5QeVbu8
- BqEVpBpXfzkcgpUAoaePdxvV0Qjjw442vvg7gs+h3ZwWE9gh6exu/a2HWbcJf/8=
-X-Gm-Gg: ASbGncuEBUASw1zFfQF+oIu49OBgvjpp88dQd0bSI0i2/wBsw4nhjfbP/l951ucDUeo
- AUry4cKATEQKlRWdbfhIquruTPLwGG/Wq9rczeSZOyxPPdEhpvYXcvgXixvefLljZWAu9lqxurq
- o5bkMR4EKN742XLnWVk+tWgqvQWomnvk7qiJcdr2hXuw9netht+x+t1j8490luN7tXBos788MIM
- dU/fq/WwCXJNmR3qka/hbxlajVTw/RbOmOGDEyMo0KYW+R5Wof2g/eMmKwVv+GwmiaOVcGP
-X-Google-Smtp-Source: AGHT+IHmGlZO9jTpnzTgb2wTSeID/WOlMMlEM368+LcvUpm6IMlbut6ToYypeaJRTD98a4NsqY4MoQ==
-X-Received: by 2002:a05:6830:d0c:b0:71d:f97a:7b with SMTP id
- 46e09a7af769-721e2ecd2c3mr14488016a34.20.1736859746886; 
- Tue, 14 Jan 2025 05:02:26 -0800 (PST)
+ AJvYcCXdmuJelrVGK0WaiyORkvejD9dutOiLRQXs8fjDn5Bels9UisoOqKa8Ryez3oe47vnDqxde/ikpTZiV@nongnu.org
+X-Gm-Message-State: AOJu0YwEnc4dg41+7PHEYMxb8Tv0341YW9Dhx5Zlk2UVszY7xmkGHtjF
+ A8cuaDMv2babPqgg+nM4K/fCtQ6gBhOhblyXzweuITD1QJfLnL6z3UY+i/f4kE8=
+X-Gm-Gg: ASbGnct1UwxvLlCC0TFnoHUv5OgQnqRReA7AAdpgvuGLJZTgyY6YBECFCTLzf26IAF9
+ pViARPzg2maw3snpPWTzytfo0KxIgI28YIpn4RIvn7q1OdQpUFcoBiIqZp1B/UxG6CpZCgeJrmh
+ KSAn6Q4mWDyQ9HTiKtuZMPJGweLZPSYpdyP2Ke6x8edavPzsmfauQ5KTzBnVH17hk7w5NKkx+V0
+ VveGxOc4uzCNNcb+V41DbnMbRuPsro39PFWlqsBkQac2WeSLps58xgoM8+2Go2DVvPsbtbg
+X-Google-Smtp-Source: AGHT+IEwhuldlpffjiQRJblz18f7v4MSkpZhZkZ7ynnWMnQZWY2Sc9oqqng46odyT5/4laWqJbI+dw==
+X-Received: by 2002:a05:6830:6610:b0:716:a95d:9ef with SMTP id
+ 46e09a7af769-721e2e000d6mr16590862a34.2.1736860091391; 
+ Tue, 14 Jan 2025 05:08:11 -0800 (PST)
 Received: from [192.168.68.110] ([189.110.107.205])
  by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-5f882756dd0sm4085108eaf.32.2025.01.14.05.02.22
+ 006d021491bc7-5f88266e273sm4209793eaf.26.2025.01.14.05.08.07
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 14 Jan 2025 05:02:25 -0800 (PST)
-Message-ID: <4326cc98-a280-4a47-9c9d-42709f5b8080@ventanamicro.com>
-Date: Tue, 14 Jan 2025 10:02:21 -0300
+ Tue, 14 Jan 2025 05:08:10 -0800 (PST)
+Message-ID: <72c3e437-1a2c-49e8-90ed-61ce1b1f5342@ventanamicro.com>
+Date: Tue, 14 Jan 2025 10:08:06 -0300
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] target/riscv/csr.c: Turn off mstatus.vs when misa.v is
- turned off
-To: Evgenii Prokopiev <evgenii.prokopiev@syntacore.com>, palmer@dabbelt.com
-Cc: alistair.francis@wdc.com, bmeng.cn@gmail.com, liwei1518@gmail.com,
- zhiwei_liu@linux.alibaba.com, qemu-riscv@nongnu.org, qemu-devel@nongnu.org
-References: <20250114092012.29024-1-evgenii.prokopiev@syntacore.com>
+Subject: Re: [PATCH v1] hw/intc/riscv_aplic: Remove redundant masking of
+ hart_idx in riscv_aplic_msi_send()
+To: Huang Borong <huangborong@bosc.ac.cn>, palmer@dabbelt.com,
+ alistair.francis@wdc.com, bmeng.cn@gmail.com, liwei1518@gmail.com,
+ zhiwei_liu@linux.alibaba.com, qemu-riscv@nongnu.org
+Cc: qemu-devel@nongnu.org
+References: <20250114025320.52696-1-huangborong@bosc.ac.cn>
 Content-Language: en-US
 From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <20250114092012.29024-1-evgenii.prokopiev@syntacore.com>
+In-Reply-To: <20250114025320.52696-1-huangborong@bosc.ac.cn>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::332;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-ot1-x332.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::336;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-ot1-x336.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -105,34 +106,45 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 
 
-On 1/14/25 6:20 AM, Evgenii Prokopiev wrote:
-> A behavior of misa.v must be similar as misa.f.
-> So when this bit's field is turned off, mstatus.vs must be turned off
-> too. It follows from the privileged manual of RISC-V, paragraph 3.1.1.
-> "Machine ISA (misa) Register".
+On 1/13/25 11:53 PM, Huang Borong wrote:
+> The line "hart_idx &= APLIC_xMSICFGADDR_PPN_LHX_MASK(lhxw);" was removed
+> because the same operation is performed later in the address calculation.
+> This change improves code clarity and avoids unnecessary operations.
 > 
-> Signed-off-by: Evgenii Prokopiev <evgenii.prokopiev@syntacore.com>
+> Signed-off-by: Huang Borong <huangborong@bosc.ac.cn>
 > ---
+>   hw/intc/riscv_aplic.c | 1 -
+>   1 file changed, 1 deletion(-)
+> 
+> diff --git a/hw/intc/riscv_aplic.c b/hw/intc/riscv_aplic.c
+> index 4866649115..0974c6a5db 100644
+> --- a/hw/intc/riscv_aplic.c
+> +++ b/hw/intc/riscv_aplic.c
+> @@ -421,7 +421,6 @@ static void riscv_aplic_msi_send(RISCVAPLICState *aplic,
+>               APLIC_xMSICFGADDRH_HHXW_MASK;
+>   
+>       group_idx = hart_idx >> lhxw;
+> -    hart_idx &= APLIC_xMSICFGADDR_PPN_LHX_MASK(lhxw);
+
+It is worth noticing that this will change 'hart_idx' in the qemu_log_mask() in the
+end:
+
+     if (result != MEMTX_OK) {
+         qemu_log_mask(LOG_GUEST_ERROR, "%s: MSI write failed for "
+                       "hart_index=%d guest_index=%d eiid=%d\n",
+                       __func__, hart_idx, guest_idx, eiid);
+     }
+
+
+But I believe 'hart_idx' in that context should be the original 'hart_idx' parameter,
+not the masked value like we're doing today.
+
 
 Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 
->   target/riscv/csr.c | 4 ++++
->   1 file changed, 4 insertions(+)
-> 
-> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-> index eab8e50012..fca2b1b40f 100644
-> --- a/target/riscv/csr.c
-> +++ b/target/riscv/csr.c
-> @@ -1537,6 +1537,10 @@ static RISCVException write_misa(CPURISCVState *env, int csrno,
->           env->mstatus &= ~MSTATUS_FS;
->       }
+
 >   
-> +    if (!(env->misa_ext & RVV)) {
-> +        env->mstatus &= ~MSTATUS_VS;
-> +    }
-> +
->       /* flush translation cache */
->       tb_flush(env_cpu(env));
->       env->xl = riscv_cpu_mxl(env);
+>       addr = msicfgaddr;
+>       addr |= ((uint64_t)(msicfgaddrH & APLIC_xMSICFGADDRH_BAPPN_MASK)) << 32;
 
 
