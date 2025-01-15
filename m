@@ -4,89 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C9DDDC02183
-	for <qemu-riscv@archiver.kernel.org>; Wed, 15 Jan 2025 15:07:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 31E16C02183
+	for <qemu-riscv@archiver.kernel.org>; Wed, 15 Jan 2025 15:25:17 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tY4yd-00026H-2l; Wed, 15 Jan 2025 10:06:39 -0500
+	id 1tY5GN-0007Xe-SI; Wed, 15 Jan 2025 10:24:59 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1tY4yZ-00025u-6D
- for qemu-riscv@nongnu.org; Wed, 15 Jan 2025 10:06:35 -0500
-Received: from mail-oi1-x22d.google.com ([2607:f8b0:4864:20::22d])
+ (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
+ id 1tY5GL-0007X7-6T
+ for qemu-riscv@nongnu.org; Wed, 15 Jan 2025 10:24:57 -0500
+Received: from mail-ej1-x62a.google.com ([2a00:1450:4864:20::62a])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1tY4yT-0003p3-QA
- for qemu-riscv@nongnu.org; Wed, 15 Jan 2025 10:06:33 -0500
-Received: by mail-oi1-x22d.google.com with SMTP id
- 5614622812f47-3eb7edfa42dso3115542b6e.2
- for <qemu-riscv@nongnu.org>; Wed, 15 Jan 2025 07:06:28 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
+ id 1tY5GJ-0006tL-1o
+ for qemu-riscv@nongnu.org; Wed, 15 Jan 2025 10:24:56 -0500
+Received: by mail-ej1-x62a.google.com with SMTP id
+ a640c23a62f3a-ab2c9b8aecaso953188266b.0
+ for <qemu-riscv@nongnu.org>; Wed, 15 Jan 2025 07:24:54 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1736953588; x=1737558388; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=WXZu+55vnbQ850EC85Qbq7saGi1ur3LUIKp5GTwdUiw=;
- b=AISYAERunrXIHW/ngtynpO9lS8JU375fRU+OBO9gEXeDJGSxnKBxqZsijrTAlB42rr
- FNmlxyP/BoCuaM2uBuix/Q6pK2xMW8+JLQhNtoOsjYanP4v8zBsUu5MWUyy5yC6P1gXj
- J5pK/bWqF7tJwfQhWLdzKI/Mgp2EMa/EXdnjutBRu3xWf9gnl4UuI5fWHhEigH5nxUqR
- lBM1Hq5P+BhjCdmOHdf9H9ObRmoC7Be2Nk+xoiNrdL/VGInMv4aTzZfWhiiPy0a7EpO4
- q6SG4iEQdnHJe8GAGOKGIVnU8TRBrSVKIEfHVjwv+Bbt2/AI6kxYKjxg1IioXJAJ0tBl
- sv3g==
+ d=ventanamicro.com; s=google; t=1736954693; x=1737559493; darn=nongnu.org;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=uoYTnK0PpxncAWVpUQa9skhgGj0av0eg98PVmyGpktc=;
+ b=N1zsVgo/5XPA+HqowzK3iCpgyI3kTzRL9/AQAG3GxaSrc7fufcg7nDTkfHsTQCVo9a
+ 2DRssWVd7GgR5OWv3ATLFKQBv0frzifKOdLv5wVwv0Rdq7WTGsz7n1J/Ot+K5RVYurj7
+ 7vyUre2Dfoe2B9iXG/shuVmTeE0IemjQMJgNheq1YVr7505NlPl8KguzU0P9pExnv9C6
+ 2iJiMBSu7IjszFDytfHEl8OW1ZDKgG+SmWewjM/zGm9Wo32w0TqgVHId/5PwW0gr3IYh
+ A+a5FGVIWb9HqtWv7ScAdyh+FxkwiDSIpSIQ4GBvsl/J/hc3ZLNU9LMcv8oYDW7/7kK1
+ iydA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1736953588; x=1737558388;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=WXZu+55vnbQ850EC85Qbq7saGi1ur3LUIKp5GTwdUiw=;
- b=wQdBjBN/Z2SbtJBnlMXYo9JchIJiv09TBUoeEUqUH9vTWRDDE8K6xua6fgon/iiEx5
- h1jspAUJtRQrEw3oYufjMkllRDtj3kbwY3YEpTSa0+rMAAnhE8X3x5KruDK8bgUhoK9t
- d3T0xHNuYIR++kNGCqAM8ST3kR02+uxjQqNUOsocYVX+bnqQ88KqE0YPgkPYuJ/1ScWC
- Lo1v2jBcFhkwmwXInGWPFFMODg7EvFGH//Lbvf4TsuJ1rBm2blrHnku88EuZGoV6SD1u
- WkyDiGAW6dypQv/7TDQvZ7qXV/Lrax2fd98mq4i+lkkJB1O2sbkK58d/rrj2pEJ5bCcU
- tlBw==
+ d=1e100.net; s=20230601; t=1736954693; x=1737559493;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=uoYTnK0PpxncAWVpUQa9skhgGj0av0eg98PVmyGpktc=;
+ b=LZS5KQ72Pd6I3GY1KlONZUl5AcFICVdErSxUPqvzX64pimBbbLveo7Bjeq4zVwNqIR
+ Bi6rdGFlnADKMLWn8TTs8WJnKEKYVHZpIaPop6Giv/UpeHVm5LFP7CgTMmXjPZmUgBEb
+ aoTEBWOeqKmJX4VEeEfBFZIKXV7pp8na5yE7KksskYz3hmBpRHOs2rsv08IQktFG2fwQ
+ tJGa+xFvRveoZS6P5C1IAz1UWWIGuTLTb+14yQWOnm85sA5wUz0d11GXwCut0DcNYMwW
+ 1DXX8/d2l8rNUtPTWyWVWDRosGnXLoG1FVCW0bIXi0aV7kIB6o3kypUdoLwCChROJ1nd
+ d5Iw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXa6BPU9vUJsC44vx3ZfcLO+fj3SU2hcPzIEJa0R4J9OUzQP700FQXj/rxJyGpw/E4gFr8Vkrz1kGS8@nongnu.org
-X-Gm-Message-State: AOJu0YwVo+f+ASdFnEhdE9PVbiMJcVjO/GCulHvsdDcUL6RbOTvNmss1
- E6DGl9FBBI8vNLHXgyslpJZSDlpetv1YiE3olipLEy3xTVbKPvnM2mPOV6Jc320=
-X-Gm-Gg: ASbGncud3fGgXtKI49rsjJN7YC7N2LG8GIGK02qeQOJFvHYk9ta5v2GUldLxx7t1JHL
- EnC1TTvT9Jp16qrUp+aFnHGtRFLJMjWciWal8ZSlMw9rHTuMUu7yti6thQwzS1zen4/LAABd026
- SjT7U/g18oDufXF8eoA1H0tWuFj4YvXG4ThXdIpvo/iRYk4e8IG1M08HsnHAObIaatHJhMJNDd9
- R8GRXdN7Brux1A0hw0muW+AjNGwoOjmsXryDkr4K6Kak6WJHpwmERhmDRvwWMe0y7vGkCc=
-X-Google-Smtp-Source: AGHT+IE0hfrblRAl65oyvm60AiPo3RQiO+IKgoU/lRf3QwOFN9d/JK7To2E5+ySpYoiN1EEiPf2Dgw==
-X-Received: by 2002:a05:6808:301f:b0:3eb:71d7:246b with SMTP id
- 5614622812f47-3ef2eddfb0cmr21067224b6e.39.1736953586965; 
- Wed, 15 Jan 2025 07:06:26 -0800 (PST)
-Received: from [192.168.68.110] ([191.202.238.10])
+ AJvYcCW9lHUVn0BcYMmNGtoxICA0gisvG5Ryw5dQ8Q7uE7wPVhzQd3Ri5IQ/crApNAyaTqnqRhDIfvKh+p5a@nongnu.org
+X-Gm-Message-State: AOJu0Yzm9zKuKktzBIy+ccPLb/UZ2uU0uPR8XnsZ9eLlvOP24fI5g76f
+ ZBL/Hino2h62ypLMSsssOXZ8P6RDPzflkfUqfeyAQVQA8fT5qc9aVwcQ7xk9pFI=
+X-Gm-Gg: ASbGnctf0ooB0GoJP9ilVhFvNBgvNQB/NotlBDqVsPLAY6ayYPbH7ROJPV3Q/yDdsSU
+ 4vBrzNvqUudPn5omsixMRq2fUlDlOrgLC13YbBbklx2jtxTewh54KV82KfvESuJmYoQpimi8bF0
+ hFeiYCWMy5ACpE4Y9AFOYqhyQzb23uFpn+s8OXzQEUfO3aXG2uFThGcOYlwv8iCDsvQ6RKo7f9D
+ Iza9dFgVW/cASFFqU0+2mPdlYHO3C+EX1JH3xAJBSk1JsBpvh688eCLgf3aJKKwoePDNsVH7KG5
+ GGfgNKCEL38XZeDnsIwUgONbvVbIiM9raSj6RXW2cw==
+X-Google-Smtp-Source: AGHT+IGPoocRV0D7G3Nhg9rnZU1ENy58XhbWTH1PEy7vrpu626YyMo3FFiWyud+0h3/SDiVCakbaCw==
+X-Received: by 2002:a17:907:97c6:b0:aaf:208:fd3f with SMTP id
+ a640c23a62f3a-ab2ab558911mr2720111766b.13.1736954692863; 
+ Wed, 15 Jan 2025 07:24:52 -0800 (PST)
+Received: from localhost (2001-1ae9-1c2-4c00-20f-c6b4-1e57-7965.ip6.tmcz.cz.
+ [2001:1ae9:1c2:4c00:20f:c6b4:1e57:7965])
  by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-5f95b0c780esm659719eaf.39.2025.01.15.07.06.23
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 15 Jan 2025 07:06:26 -0800 (PST)
-Message-ID: <36017420-8ed5-4e17-a7c2-0fc7e27a0f43@ventanamicro.com>
-Date: Wed, 15 Jan 2025 12:06:21 -0300
+ 4fb4d7f45d1cf-5d9900c4b56sm7355654a12.32.2025.01.15.07.24.50
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 15 Jan 2025 07:24:51 -0800 (PST)
+Date: Wed, 15 Jan 2025 16:24:50 +0100
+From: Andrew Jones <ajones@ventanamicro.com>
+To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
+ bmeng@tinylab.org, liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, 
+ palmer@rivosinc.com
+Subject: Re: [PATCH v3 3/6] target/riscv: add profile u_parent and s_parent
+Message-ID: <20250115-3af3c8e00a967f0538bfd4b5@orel>
+References: <20250115134957.2179085-1-dbarboza@ventanamicro.com>
+ <20250115134957.2179085-4-dbarboza@ventanamicro.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v10 1/1] target/riscv: rvv: Use wider accesses for unit
- stride load/store
-To: Craig Blackmore <craig.blackmore@embecosm.com>, qemu-devel@nongnu.org,
- qemu-riscv@nongnu.org
-Cc: Richard Henderson <richard.henderson@linaro.org>,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bmeng.cn@gmail.com>,
- Weiwei Li <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Helene Chelin <helene.chelin@embecosm.com>, Nathan Egge <negge@google.com>,
- Max Chou <max.chou@sifive.com>, Paolo Savini <paolo.savini@embecosm.com>
-References: <20250109160122.129409-1-craig.blackmore@embecosm.com>
- <20250109160122.129409-2-craig.blackmore@embecosm.com>
-Content-Language: en-US
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <20250109160122.129409-2-craig.blackmore@embecosm.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::22d;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-oi1-x22d.google.com
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20250115134957.2179085-4-dbarboza@ventanamicro.com>
+Received-SPF: pass client-ip=2a00:1450:4864:20::62a;
+ envelope-from=ajones@ventanamicro.com; helo=mail-ej1-x62a.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -109,150 +103,149 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-
-
-On 1/9/25 1:01 PM, Craig Blackmore wrote:
-> Use atomic load/store functions to access multiple elements from host.
+On Wed, Jan 15, 2025 at 10:49:54AM -0300, Daniel Henrique Barboza wrote:
+> The current 'parent' mechanic for profiles allows for one profile to be
+> a child of a previous/older profile, enabling all its extensions (and
+> the parent profile itself) and sparing us from tediously listing all
+> extensions for every profile.
 > 
-> Co-authored-by: Paolo Savini <paolo.savini@embecosm.com>
+> This works fine for u-mode profiles. For s-mode profiles this is not
+> enough: a s-mode profile extends not only his equivalent u-mode profile
+> but also the previous s-mode profile. This means, for example, that
+> RVA23S64 extends both RVA23U64 and RVA22S64.
 > 
-> Signed-off-by: Paolo Savini <paolo.savini@embecosm.com>
-> Signed-off-by: Craig Blackmore <craig.blackmore@embecosm.com>
+> To fit this usage, rename the existing 'parent' to 'u_parent' and add a
+> new 's_parent' attribute for profiles. Handle both like we're doing with
+> the previous 'profile' attribute, i.e. if set, enable it. This change
+
+...like we were doing with the previous 'parent'...
+
+> does nothing for the existing profiles but will make RVA23S64 simpler.
+> 
+> Suggested-by: Andrew Jones <ajones@ventanamicro.com>
+> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 > ---
-
-Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-
->   target/riscv/vector_helper.c | 95 +++++++++++++++++++++++++++++++++---
->   1 file changed, 87 insertions(+), 8 deletions(-)
+>  target/riscv/cpu.c         |  6 ++++--
+>  target/riscv/cpu.h         |  3 ++-
+>  target/riscv/tcg/tcg-cpu.c | 35 ++++++++++++++++++++++++++---------
+>  3 files changed, 32 insertions(+), 12 deletions(-)
 > 
-> diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
-> index a85dd1d200..f9228270b1 100644
-> --- a/target/riscv/vector_helper.c
-> +++ b/target/riscv/vector_helper.c
-> @@ -206,29 +206,108 @@ vext_continus_ldst_tlb(CPURISCVState *env, vext_ldst_elem_fn_tlb *ldst_tlb,
->       }
->   }
->   
-> +#if !HOST_BIG_ENDIAN
-> +/* Atomic operations for load/store */
-> +
-> +#define GEN_VEXT_LDST_ATOMIC_HOST(SIZE, TYPE)                             \
-> +static inline QEMU_ALWAYS_INLINE void                                     \
-> +vext_ldst_atom_##SIZE##_host(void *vd, uint32_t byte_offset, TYPE *host,  \
-> +                             bool is_load)                                \
-> +{                                                                         \
-> +    TYPE *vd_ptr = (TYPE *) (vd + byte_offset);                           \
-> +    if (is_load) {                                                        \
-> +        *vd_ptr = qatomic_read__nocheck(host);                            \
-> +    } else {                                                              \
-> +        qatomic_set__nocheck(host, *vd_ptr);                              \
-> +    }                                                                     \
-> +}                                                                         \
-> +
-> +GEN_VEXT_LDST_ATOMIC_HOST(2, uint16_t)
-> +GEN_VEXT_LDST_ATOMIC_HOST(4, uint32_t)
-> +#ifdef CONFIG_ATOMIC64
-> +GEN_VEXT_LDST_ATOMIC_HOST(8, uint64_t)
-> +#endif
-> +
-> +static inline QEMU_ALWAYS_INLINE void
-> +vext_ldst_atom_16_host(void *vd, uint32_t byte_offset, Int128 *host,
-> +                       bool is_load)
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index 6fb4d5f374..e215b1004d 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -2349,7 +2349,8 @@ static const PropertyInfo prop_marchid = {
+>   * doesn't need to be manually enabled by the profile.
+>   */
+>  static RISCVCPUProfile RVA22U64 = {
+> -    .parent = NULL,
+> +    .u_parent = NULL,
+> +    .s_parent = NULL,
+>      .name = "rva22u64",
+>      .misa_ext = RVI | RVM | RVA | RVF | RVD | RVC | RVB | RVU,
+>      .priv_spec = RISCV_PROFILE_ATTR_UNUSED,
+> @@ -2381,7 +2382,8 @@ static RISCVCPUProfile RVA22U64 = {
+>   * The remaining features/extensions comes from RVA22U64.
+>   */
+>  static RISCVCPUProfile RVA22S64 = {
+> -    .parent = &RVA22U64,
+> +    .u_parent = &RVA22U64,
+> +    .s_parent = NULL,
+>      .name = "rva22s64",
+>      .misa_ext = RVS,
+>      .priv_spec = PRIV_VERSION_1_12_0,
+> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+> index 97713681cb..986131a191 100644
+> --- a/target/riscv/cpu.h
+> +++ b/target/riscv/cpu.h
+> @@ -81,7 +81,8 @@ const char *riscv_get_misa_ext_description(uint32_t bit);
+>  #define CPU_CFG_OFFSET(_prop) offsetof(struct RISCVCPUConfig, _prop)
+>  
+>  typedef struct riscv_cpu_profile {
+> -    struct riscv_cpu_profile *parent;
+> +    struct riscv_cpu_profile *u_parent;
+> +    struct riscv_cpu_profile *s_parent;
+>      const char *name;
+>      uint32_t misa_ext;
+>      bool enabled;
+> diff --git a/target/riscv/tcg/tcg-cpu.c b/target/riscv/tcg/tcg-cpu.c
+> index 48be24bbbe..c9e5a3b580 100644
+> --- a/target/riscv/tcg/tcg-cpu.c
+> +++ b/target/riscv/tcg/tcg-cpu.c
+> @@ -713,13 +713,29 @@ static bool riscv_cpu_validate_profile_satp(RISCVCPU *cpu,
+>  }
+>  #endif
+>  
+> +static void riscv_cpu_check_parent_profile(RISCVCPU *cpu,
+> +                                           RISCVCPUProfile *profile,
+> +                                           RISCVCPUProfile *parent)
 > +{
-> +    Int128 *vd_ptr = (Int128 *) (vd + byte_offset);
-> +    if (is_load) {
-> +        *vd_ptr = atomic16_read_ro(host);
-> +    } else {
-> +        atomic16_set(host, *vd_ptr);
-> +    }
-> +}
-> +#endif
+> +    const char *parent_name;
+> +    bool parent_enabled;
 > +
->   static inline QEMU_ALWAYS_INLINE void
->   vext_continus_ldst_host(CPURISCVState *env, vext_ldst_elem_fn_host *ldst_host,
->                           void *vd, uint32_t evl, uint32_t reg_start, void *host,
-> -                        uint32_t esz, bool is_load)
-> +                        uint32_t esz, bool is_load, uint32_t log2_esz)
->   {
->   #if HOST_BIG_ENDIAN
->       for (; reg_start < evl; reg_start++, host += esz) {
->           ldst_host(vd, reg_start, host);
->       }
->   #else
-> -    if (esz == 1) {
-> -        uint32_t byte_offset = reg_start * esz;
-> -        uint32_t size = (evl - reg_start) * esz;
-> +    uint32_t size = (evl - reg_start) * esz;
-> +    uint32_t test = (uintptr_t) host;
->   
-> +    /* Misaligned load/stores do not require any atomicity */
-> +    if (esz == 1 || unlikely(test % esz != 0)) {
-> +        uint32_t byte_offset = reg_start * esz;
->           if (is_load) {
->               memcpy(vd + byte_offset, host, size);
->           } else {
->               memcpy(host, vd + byte_offset, size);
->           }
-> -    } else {
-> -        for (; reg_start < evl; reg_start++, host += esz) {
-> -            ldst_host(vd, reg_start, host);
+> +    if (!profile->enabled || !parent) {
 > +        return;
 > +    }
 > +
-> +    /*
-> +     * At this point esz > 1 and host is aligned to at least esz, so the ldst
-> +     * can be completed in atomic chunks of at least esz if the atomic operation
-> +     * is available.
-> +     */
-> +
-> +    /* Test that both alignment and size are multiples of the atomic width. */
-> +    test |= size;
-> +
-> +    /*
-> +     * If !HAVE_ATOMIC128_RO, then atomic16_set may be implemented with a
-> +     * 16-byte compare and store loop, which is expensive, so prefer two 8-byte
-> +     * stores in this case.
-> +     */
-> +    if (HAVE_ATOMIC128_RO && (is_load || HAVE_ATOMIC128_RW)
-> +        && (test % 16 == 0)) {
-> +        for (; reg_start < evl; reg_start += 16 >> log2_esz, host += 16) {
-> +            vext_ldst_atom_16_host(vd, reg_start * esz, host, is_load);
-> +        }
-> +        return;
-> +    }
-> +#ifdef CONFIG_ATOMIC64
-> +    if (test % 8 == 0) {
-> +        for (; reg_start < evl; reg_start += 8 >> log2_esz, host += 8) {
-> +            vext_ldst_atom_8_host(vd, reg_start * esz, host, is_load);
-> +        }
-> +        return;
-> +    }
-> +#endif
-> +    if (test % 4 == 0) {
-> +        for (; reg_start < evl; reg_start += 4 >> log2_esz, host += 4) {
-> +            vext_ldst_atom_4_host(vd, reg_start * esz, host, is_load);
-> +        }
-> +        return;
-> +    }
-> +    if (test % 2 == 0) {
-> +        for (; reg_start < evl; reg_start += 2 >> log2_esz, host += 2) {
-> +            vext_ldst_atom_2_host(vd, reg_start * esz, host, is_load);
->           }
-> +        return;
-> +    }
-> +    for (; reg_start < evl; reg_start++, host += esz) {
-> +        ldst_host(vd, reg_start, host);
->       }
->   #endif
->   }
-> @@ -343,7 +422,7 @@ vext_page_ldst_us(CPURISCVState *env, void *vd, target_ulong addr,
->       if (flags == 0) {
->           if (nf == 1) {
->               vext_continus_ldst_host(env, ldst_host, vd, evl, env->vstart, host,
-> -                                    esz, is_load);
-> +                                    esz, is_load, log2_esz);
->           } else {
->               for (i = env->vstart; i < evl; ++i) {
->                   k = 0;
+> +    parent_name = parent->name;
+> +    parent_enabled = object_property_get_bool(OBJECT(cpu), parent_name, NULL);
+> +    profile->enabled = profile->enabled && parent_enabled;
 
+Could drop the 'profile->enabled &&' since we already know
+profile->enabled is true from the test above.
+
+> +}
+> +
+>  static void riscv_cpu_validate_profile(RISCVCPU *cpu,
+>                                         RISCVCPUProfile *profile)
+>  {
+>      CPURISCVState *env = &cpu->env;
+>      const char *warn_msg = "Profile %s mandates disabled extension %s";
+>      bool send_warn = profile->user_set && profile->enabled;
+> -    bool parent_enabled, profile_impl = true;
+> +    bool profile_impl = true;
+>      int i;
+>  
+>  #ifndef CONFIG_USER_ONLY
+> @@ -773,12 +789,8 @@ static void riscv_cpu_validate_profile(RISCVCPU *cpu,
+>  
+>      profile->enabled = profile_impl;
+>  
+> -    if (profile->parent != NULL) {
+> -        parent_enabled = object_property_get_bool(OBJECT(cpu),
+> -                                                  profile->parent->name,
+> -                                                  NULL);
+> -        profile->enabled = profile->enabled && parent_enabled;
+> -    }
+> +    riscv_cpu_check_parent_profile(cpu, profile, profile->u_parent);
+> +    riscv_cpu_check_parent_profile(cpu, profile, profile->s_parent);
+>  }
+>  
+>  static void riscv_cpu_validate_profiles(RISCVCPU *cpu)
+> @@ -1181,8 +1193,13 @@ static void cpu_set_profile(Object *obj, Visitor *v, const char *name,
+>      profile->user_set = true;
+>      profile->enabled = value;
+>  
+> -    if (profile->parent != NULL) {
+> -        object_property_set_bool(obj, profile->parent->name,
+> +    if (profile->u_parent != NULL) {
+> +        object_property_set_bool(obj, profile->u_parent->name,
+> +                                 profile->enabled, NULL);
+> +    }
+> +
+> +    if (profile->s_parent != NULL) {
+> +        object_property_set_bool(obj, profile->s_parent->name,
+>                                   profile->enabled, NULL);
+>      }
+>  
+> -- 
+> 2.47.1
+>
+
+Otherwise,
+
+Reviewed-by: Andrew Jones <ajones@ventanamicro.com>
+
+Thanks,
+drew
 
