@@ -4,66 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A14DCC02180
-	for <qemu-riscv@archiver.kernel.org>; Wed, 15 Jan 2025 06:48:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C0604C02180
+	for <qemu-riscv@archiver.kernel.org>; Wed, 15 Jan 2025 06:49:10 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tXxCQ-0002Dq-Sc; Wed, 15 Jan 2025 01:48:23 -0500
+	id 1tXxCb-0002F6-Ku; Wed, 15 Jan 2025 01:48:33 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <jason.chien@sifive.com>)
- id 1tXxCJ-0002D9-Vy
- for qemu-riscv@nongnu.org; Wed, 15 Jan 2025 01:48:17 -0500
-Received: from mail-pl1-x62d.google.com ([2607:f8b0:4864:20::62d])
+ id 1tXxCP-0002Dj-3N
+ for qemu-riscv@nongnu.org; Wed, 15 Jan 2025 01:48:22 -0500
+Received: from mail-pl1-x634.google.com ([2607:f8b0:4864:20::634])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <jason.chien@sifive.com>)
- id 1tXxCF-0000ok-I4
- for qemu-riscv@nongnu.org; Wed, 15 Jan 2025 01:48:15 -0500
-Received: by mail-pl1-x62d.google.com with SMTP id
- d9443c01a7336-216426b0865so111799785ad.0
- for <qemu-riscv@nongnu.org>; Tue, 14 Jan 2025 22:48:09 -0800 (PST)
+ id 1tXxCN-0000pg-26
+ for qemu-riscv@nongnu.org; Wed, 15 Jan 2025 01:48:20 -0500
+Received: by mail-pl1-x634.google.com with SMTP id
+ d9443c01a7336-21a7ed0155cso109389535ad.3
+ for <qemu-riscv@nongnu.org>; Tue, 14 Jan 2025 22:48:18 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1736923689; x=1737528489; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=TWkLrilyr6xgAqOGuDM3wLiIgr0K8L2HbMAIGQO6peE=;
- b=N+0ksGyoMmEzXz1To9WJRR0f7i9OkY+mAh9wJAiRVCBs7rWBqZiS5cr03bAGH7C3C1
- Zco6MldLU2J/RhUXb8zfjkjhZmmPqnEn39YRfpJJX92/+kkNcgCZyGckLZjgXuRckkPx
- YV0cW/bKzb6xhNtSEepErxodFKDh8qBLfQkcQ6+jD/4uI8kRL7j5A5YeexTt/oUWduCE
- HVa71MjGQ4MD23g8iPyXlSI+tstGNMl7vnsSAISumbrOi4fQ9wk4pDAQRlY3SQiFwSG0
- rIDE+6GoYJ/aFxWqGTcDzMcEY325em0LQQQSm29WNfyIvyMTQMIhlTN98c3QwD2/ucFS
- W58A==
+ d=sifive.com; s=google; t=1736923697; x=1737528497; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=6pY9vdP9KrQzzUAagFD6e3VgrnW7ct4SyKNr03/IIzc=;
+ b=APIu33dX+r1r094/wA2X+07GFgOGfWwELcfHxvsq7cZeP3lVGzjms/VPRZ9kSZAo+t
+ dhKd5QscMjyBPV5j213ykyb2g7Wbce/5hbh764rJDVGbvnsGxIWjuUjBnIQCJU7zBCk0
+ wRGWUbsxjea50NdOqaQX3+h+K7V8NC9RIN1haawPace9hUhq8mTXcV/qH1pVPne8c7ro
+ /N/yjory1C7pydLFMNTMUQ/7elPPVrNVfrkY9h5XW8JVU6hZxXJ8GqKm7IWHwL6j8dog
+ ChDHBq4JHhrcTJN3jKq/+dhWseET/kv0PT+Vzrf6wpACXUc9XU6+6HoWKgrQvCXDfKog
+ bi8Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1736923689; x=1737528489;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=TWkLrilyr6xgAqOGuDM3wLiIgr0K8L2HbMAIGQO6peE=;
- b=b4a7TBn923PLSa6X6pZhMRxp5UwXyqGi9FKpquZj2e/j2fV0e31ryzPZrBoJtjMIR3
- dcewSy+6DLePX+/LdtQLVgTEpmoJ2lpCUFKKOEjXO7CEOjRxs18FaFlpe+ukmrnH46GO
- ZrQJkEX7esjU9RFDuO4FfoHUyQfXVfBFHtR+KtL1yoIKfopJlGJ9n3u9evuvdBSU8uvj
- rln9+yUOUvzWu4ECEdtaFRdWl6wYwa2r518YesNpLija4hP9LcIS78e9POIGf5Nj4r+F
- JUhHZuV+ia2daBERH8WydrW8LfA6eFRs5lENoUFe5uqOUBTH2rQTvED4s16dw/8qEnG7
- Wpxg==
+ d=1e100.net; s=20230601; t=1736923697; x=1737528497;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=6pY9vdP9KrQzzUAagFD6e3VgrnW7ct4SyKNr03/IIzc=;
+ b=OEt3TNZKuVaDTvbE+IY0KweWD4HiyzdX1Ban7J1PIUd6Ohyji+0OFre5bj9DSMiLsg
+ f/DsOSrOmn+HDJ98nfIaudgYI9NzmVWjWMAakV0i+BYZJUI6cjFjIbOix30zVRWqtxEJ
+ SBmrXr5yk2P8aeU1Gl03FXnD1h4OpRTwtFWj+5v9JI6S+H6jnBmoXV+Hrr+T9XT3ysqP
+ A5CCII3J1VeFoNq62Ej8WZjfuQvW0yrkh8SCjtGcHXrPmo1OCLQbrszt1fINvWVD1pmi
+ lup4QK6b2N/rfu+hV0Sj9rVWR8vSrmokN5rGBejxXzE4hd21xottjIcsfR2uytV20q/u
+ wyhw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVg8982IPoAs+8ELZiXLlWOrIcb0C4VzzlxHNeVogLV3h1Ledfajk20TNOkuQg5X8pl5/By90FM7HPV@nongnu.org
-X-Gm-Message-State: AOJu0YzJQMd3zSiIuRmVIrkwatO8vzbYkimt6xE2I4GfFNCpjY2Nfx2n
- Msy/ccX7z6ilnYNO/hOTOw+Ah9ap8V0tnQHFugMRR0zepVxJ3JCUSo1Zf7Jt46k=
-X-Gm-Gg: ASbGncvPGkxz3c78E0oymt5p4HgRsPxBQDkuHYm0CtIejZ1yxjlCatSLMKEe7+oksLg
- U72JJZqEqg570prxPGX4YXTKUjj5muk8j2aht+2bfZvbxJEyLLJVoOTDqMV7f0idtbzzCF5uVv9
- FLidtDI7z1Uhuplxobn9JOxdukpoWIkn2rFenqME9Bgc9k/IVfRxy+CsVCso0yTlxOF3iI3VxVL
- poV3nWnwSDY2iGeez0RzYEvNdr3FZm5PiRnA9LZGNRHWb16u9T+4oV8TZo3Ay5F8HA8HljwPasr
- D1CzDyeo
-X-Google-Smtp-Source: AGHT+IFtX0RfcuIqzT4HpX9o5JyJaamXw0DDwGxRPgtLRRJ+wL4Z+dE8eqJ9misaQMdEyocMJ2mqGw==
-X-Received: by 2002:a05:6a00:2908:b0:71e:1722:d019 with SMTP id
- d2e1a72fcca58-72d21ffd1f8mr35978605b3a.22.1736923688701; 
- Tue, 14 Jan 2025 22:48:08 -0800 (PST)
+ AJvYcCXXLdgIGzcYhW0Ce/lMhLPbVJ+sJYAxmdf/uu6cABaidwL0Ql7Jm2hZ5lVy1R8i5EJDNvZfIadzXSPR@nongnu.org
+X-Gm-Message-State: AOJu0YzPV2P99sGVg+O0O1kCRhmkrXx+JJD9VhHRWQcTR1vSOzM9Cyw9
+ FZIxYsQOPQ/2/Zw1BdV1/fgWe5ol8Yyyanqu3DTWd3elMZYHiBo61WtsoI5b//c=
+X-Gm-Gg: ASbGncv0SRBEpEO2WVILY0S4H1WQQrGNNybs+BsSctu9enAP4PwByvSR9Y0R3JWt7/9
+ Jx+2F7rS9t/grbP6la0zyof0m6CaT1UTQH/Ou9apN71MJxcqvQ2pWAceoroVOefvQAqPNFhIwnC
+ SuDtDf7aqBeTO/XtHQovFoElYtx5eD9kjP8cOaDafusLeWtDZJ4qFnAkujob3pGpfDJ0RjBaacA
+ 7jGmEOy7V7xcujs2FH2JCKZOt+1eZ7SXot7I46Di+qq4Pa7Arv14FoF89Y+wEg5+oh0TXrqe2SH
+ pr+ZcSNF
+X-Google-Smtp-Source: AGHT+IHSrZXijupkuYB1HEg2VkUP1gfVxOifl29QPVUUCBNGQj+aMbfxeiD/WzDf5hEeLzmClwiEqg==
+X-Received: by 2002:a05:6a20:748b:b0:1e1:a0b6:9861 with SMTP id
+ adf61e73a8af0-1e88d0e21dbmr45074921637.12.1736923697324; 
+ Tue, 14 Jan 2025 22:48:17 -0800 (PST)
 Received: from hsinchu16.internal.sifive.com ([210.176.154.34])
  by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-72d4067ee81sm8668470b3a.132.2025.01.14.22.48.06
+ d2e1a72fcca58-72d4067ee81sm8668470b3a.132.2025.01.14.22.48.15
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 14 Jan 2025 22:48:08 -0800 (PST)
+ Tue, 14 Jan 2025 22:48:16 -0800 (PST)
 From: Jason Chien <jason.chien@sifive.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
@@ -74,21 +75,23 @@ Cc: Palmer Dabbelt <palmer@dabbelt.com>,
  Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
  Jason Chien <jason.chien@sifive.com>,
  Andrew Jones <ajones@ventanamicro.com>
-Subject: [PATCH v2 1/2] hw/riscv/riscv-iommu: Remove redundant struct members
-Date: Wed, 15 Jan 2025 14:47:36 +0800
-Message-ID: <20250115064737.16350-1-jason.chien@sifive.com>
+Subject: [PATCH v2 2/2] hw/riscv/riscv-iommu-bits: Remove duplicate definitions
+Date: Wed, 15 Jan 2025 14:47:37 +0800
+Message-ID: <20250115064737.16350-2-jason.chien@sifive.com>
 X-Mailer: git-send-email 2.43.2
+In-Reply-To: <20250115064737.16350-1-jason.chien@sifive.com>
+References: <20250115064737.16350-1-jason.chien@sifive.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::62d;
- envelope-from=jason.chien@sifive.com; helo=mail-pl1-x62d.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::634;
+ envelope-from=jason.chien@sifive.com; helo=mail-pl1-x634.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -104,33 +107,58 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Initially, the IOMMU would create a thread, but this thread was removed in
-the merged version. The struct members for thread control should have been
-removed as well, but they were not removed at that time.
+The header contains duplicate macro definitions.
+This commit eliminates the duplicate part.
 
 Signed-off-by: Jason Chien <jason.chien@sifive.com>
 Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 Reviewed-by: Andrew Jones <ajones@ventanamicro.com>
 ---
- hw/riscv/riscv-iommu.h | 5 -----
- 1 file changed, 5 deletions(-)
+ hw/riscv/riscv-iommu-bits.h | 22 ++++++----------------
+ 1 file changed, 6 insertions(+), 16 deletions(-)
 
-diff --git a/hw/riscv/riscv-iommu.h b/hw/riscv/riscv-iommu.h
-index 9424989df4..fa8a50fa24 100644
---- a/hw/riscv/riscv-iommu.h
-+++ b/hw/riscv/riscv-iommu.h
-@@ -58,11 +58,6 @@ struct RISCVIOMMUState {
-     /* interrupt notifier */
-     void (*notify)(RISCVIOMMUState *iommu, unsigned vector);
+diff --git a/hw/riscv/riscv-iommu-bits.h b/hw/riscv/riscv-iommu-bits.h
+index 485f36b9c9..de599b80d6 100644
+--- a/hw/riscv/riscv-iommu-bits.h
++++ b/hw/riscv/riscv-iommu-bits.h
+@@ -50,8 +50,14 @@ struct riscv_iommu_pq_record {
+ #define RISCV_IOMMU_PREQ_HDR_PRIV       BIT_ULL(33)
+ #define RISCV_IOMMU_PREQ_HDR_EXEC       BIT_ULL(34)
+ #define RISCV_IOMMU_PREQ_HDR_DID        GENMASK_ULL(63, 40)
++
+ /* Payload fields */
++#define RISCV_IOMMU_PREQ_PAYLOAD_R      BIT_ULL(0)
++#define RISCV_IOMMU_PREQ_PAYLOAD_W      BIT_ULL(1)
++#define RISCV_IOMMU_PREQ_PAYLOAD_L      BIT_ULL(2)
+ #define RISCV_IOMMU_PREQ_PAYLOAD_M      GENMASK_ULL(2, 0)
++#define RISCV_IOMMU_PREQ_PRG_INDEX      GENMASK_ULL(11, 3)
++#define RISCV_IOMMU_PREQ_UADDR          GENMASK_ULL(63, 12)
  
--    /* IOMMU State Machine */
--    QemuThread core_proc; /* Background processing thread */
--    QemuCond core_cond;   /* Background processing wake up signal */
--    unsigned core_exec;   /* Processing thread execution actions */
+ /* Common field positions */
+ #define RISCV_IOMMU_PPN_FIELD           GENMASK_ULL(53, 10)
+@@ -382,22 +388,6 @@ enum riscv_iommu_fq_ttypes {
+     RISCV_IOMMU_FW_TTYPE_PCIE_MSG_REQ = 9,
+ };
+ 
+-/* Header fields */
+-#define RISCV_IOMMU_PREQ_HDR_PID        GENMASK_ULL(31, 12)
+-#define RISCV_IOMMU_PREQ_HDR_PV         BIT_ULL(32)
+-#define RISCV_IOMMU_PREQ_HDR_PRIV       BIT_ULL(33)
+-#define RISCV_IOMMU_PREQ_HDR_EXEC       BIT_ULL(34)
+-#define RISCV_IOMMU_PREQ_HDR_DID        GENMASK_ULL(63, 40)
 -
-     /* IOMMU target address space */
-     AddressSpace *target_as;
-     MemoryRegion *target_mr;
+-/* Payload fields */
+-#define RISCV_IOMMU_PREQ_PAYLOAD_R      BIT_ULL(0)
+-#define RISCV_IOMMU_PREQ_PAYLOAD_W      BIT_ULL(1)
+-#define RISCV_IOMMU_PREQ_PAYLOAD_L      BIT_ULL(2)
+-#define RISCV_IOMMU_PREQ_PAYLOAD_M      GENMASK_ULL(2, 0)
+-#define RISCV_IOMMU_PREQ_PRG_INDEX      GENMASK_ULL(11, 3)
+-#define RISCV_IOMMU_PREQ_UADDR          GENMASK_ULL(63, 12)
+-
+-
+ /*
+  * struct riscv_iommu_msi_pte - MSI Page Table Entry
+  */
 -- 
 2.43.2
 
