@@ -4,90 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 31E16C02183
-	for <qemu-riscv@archiver.kernel.org>; Wed, 15 Jan 2025 15:25:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AB066C02180
+	for <qemu-riscv@archiver.kernel.org>; Wed, 15 Jan 2025 15:37:28 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tY5GN-0007Xe-SI; Wed, 15 Jan 2025 10:24:59 -0500
+	id 1tY5S0-0004D7-KF; Wed, 15 Jan 2025 10:37:00 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1tY5GL-0007X7-6T
- for qemu-riscv@nongnu.org; Wed, 15 Jan 2025 10:24:57 -0500
-Received: from mail-ej1-x62a.google.com ([2a00:1450:4864:20::62a])
+ id 1tY5Rz-0004Cq-6W
+ for qemu-riscv@nongnu.org; Wed, 15 Jan 2025 10:36:59 -0500
+Received: from mail-ej1-x62f.google.com ([2a00:1450:4864:20::62f])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1tY5GJ-0006tL-1o
- for qemu-riscv@nongnu.org; Wed, 15 Jan 2025 10:24:56 -0500
-Received: by mail-ej1-x62a.google.com with SMTP id
- a640c23a62f3a-ab2c9b8aecaso953188266b.0
- for <qemu-riscv@nongnu.org>; Wed, 15 Jan 2025 07:24:54 -0800 (PST)
+ id 1tY5Rx-0000qu-Lw
+ for qemu-riscv@nongnu.org; Wed, 15 Jan 2025 10:36:58 -0500
+Received: by mail-ej1-x62f.google.com with SMTP id
+ a640c23a62f3a-ab2aea81cd8so1037225066b.2
+ for <qemu-riscv@nongnu.org>; Wed, 15 Jan 2025 07:36:57 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1736954693; x=1737559493; darn=nongnu.org;
+ d=ventanamicro.com; s=google; t=1736955416; x=1737560216; darn=nongnu.org;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=uoYTnK0PpxncAWVpUQa9skhgGj0av0eg98PVmyGpktc=;
- b=N1zsVgo/5XPA+HqowzK3iCpgyI3kTzRL9/AQAG3GxaSrc7fufcg7nDTkfHsTQCVo9a
- 2DRssWVd7GgR5OWv3ATLFKQBv0frzifKOdLv5wVwv0Rdq7WTGsz7n1J/Ot+K5RVYurj7
- 7vyUre2Dfoe2B9iXG/shuVmTeE0IemjQMJgNheq1YVr7505NlPl8KguzU0P9pExnv9C6
- 2iJiMBSu7IjszFDytfHEl8OW1ZDKgG+SmWewjM/zGm9Wo32w0TqgVHId/5PwW0gr3IYh
- A+a5FGVIWb9HqtWv7ScAdyh+FxkwiDSIpSIQ4GBvsl/J/hc3ZLNU9LMcv8oYDW7/7kK1
- iydA==
+ bh=AZvcO9gYJ5afPb/YV2OTE+Vdosc9Beh7nbZuIeIvLCg=;
+ b=AjKFj4KY1rugmaYOinTFlmOM6B824KGHJFV4yMUhVzv9UX0B74UrQcFSUIPuuCOkmQ
+ miIfyHVmGWA+YiePCfXb3u7pyFUXITAMNy7cSR4BgJrclCF8QFqBh6B6TeuGsovcwUji
+ eM1YwtgWDnU5pH48RC1aGBvoUEiGWf6d48tpQ609PniYYcyn3DPflAEM+78iCSGemc3r
+ cPE1yXBPCNTR60UHN1Giithvd9ZIS3/pYuUk3rGgsGWv/Rl+i/OmZflOYoi9GugzbWC/
+ jBWDz/k4uOkAP0oDcYv1RNZFY9tkp+GCKevGcaBlaWgyKMFJWiIXTByitHLCM6OAWxx5
+ mxcA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1736954693; x=1737559493;
+ d=1e100.net; s=20230601; t=1736955416; x=1737560216;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=uoYTnK0PpxncAWVpUQa9skhgGj0av0eg98PVmyGpktc=;
- b=LZS5KQ72Pd6I3GY1KlONZUl5AcFICVdErSxUPqvzX64pimBbbLveo7Bjeq4zVwNqIR
- Bi6rdGFlnADKMLWn8TTs8WJnKEKYVHZpIaPop6Giv/UpeHVm5LFP7CgTMmXjPZmUgBEb
- aoTEBWOeqKmJX4VEeEfBFZIKXV7pp8na5yE7KksskYz3hmBpRHOs2rsv08IQktFG2fwQ
- tJGa+xFvRveoZS6P5C1IAz1UWWIGuTLTb+14yQWOnm85sA5wUz0d11GXwCut0DcNYMwW
- 1DXX8/d2l8rNUtPTWyWVWDRosGnXLoG1FVCW0bIXi0aV7kIB6o3kypUdoLwCChROJ1nd
- d5Iw==
+ bh=AZvcO9gYJ5afPb/YV2OTE+Vdosc9Beh7nbZuIeIvLCg=;
+ b=MNIHlEGK0opY4HyzpWI+MQ7d+BJ9H7dzjv6zh9okmYIY+tS+ywLIHFdP1MybrNZhTX
+ qEb6/+10HhfPcP1ip11VMSdxvaQ/sUkejO+n3v1rPqRPmBe/gjZIm0HQ+8h+aPS6ltw0
+ qBlZZAOkPV2g5fN2oWCp6V/LNUttF4JXR4ILgLCEcXwBpRhWcUfvvEUx3yDzim51csSP
+ uxfE8Fg99OceEEI/754Qfw1fsDWJm/hhgU7H0GTeG9Cs3MuW6+1lgp41k0J+Aid67118
+ fggbnr0GgJZC+n0Ptqpl1fTgkL17bgBKitCDFriOlapl33VRFjKsBmhqb0YTSJxqPTbp
+ mh0Q==
 X-Forwarded-Encrypted: i=1;
- AJvYcCW9lHUVn0BcYMmNGtoxICA0gisvG5Ryw5dQ8Q7uE7wPVhzQd3Ri5IQ/crApNAyaTqnqRhDIfvKh+p5a@nongnu.org
-X-Gm-Message-State: AOJu0Yzm9zKuKktzBIy+ccPLb/UZ2uU0uPR8XnsZ9eLlvOP24fI5g76f
- ZBL/Hino2h62ypLMSsssOXZ8P6RDPzflkfUqfeyAQVQA8fT5qc9aVwcQ7xk9pFI=
-X-Gm-Gg: ASbGnctf0ooB0GoJP9ilVhFvNBgvNQB/NotlBDqVsPLAY6ayYPbH7ROJPV3Q/yDdsSU
- 4vBrzNvqUudPn5omsixMRq2fUlDlOrgLC13YbBbklx2jtxTewh54KV82KfvESuJmYoQpimi8bF0
- hFeiYCWMy5ACpE4Y9AFOYqhyQzb23uFpn+s8OXzQEUfO3aXG2uFThGcOYlwv8iCDsvQ6RKo7f9D
- Iza9dFgVW/cASFFqU0+2mPdlYHO3C+EX1JH3xAJBSk1JsBpvh688eCLgf3aJKKwoePDNsVH7KG5
- GGfgNKCEL38XZeDnsIwUgONbvVbIiM9raSj6RXW2cw==
-X-Google-Smtp-Source: AGHT+IGPoocRV0D7G3Nhg9rnZU1ENy58XhbWTH1PEy7vrpu626YyMo3FFiWyud+0h3/SDiVCakbaCw==
-X-Received: by 2002:a17:907:97c6:b0:aaf:208:fd3f with SMTP id
- a640c23a62f3a-ab2ab558911mr2720111766b.13.1736954692863; 
- Wed, 15 Jan 2025 07:24:52 -0800 (PST)
+ AJvYcCU8qgeK9NCYLX3/H19Ta5RdbT+97Rl47meKupQJplt6WZgOcbwWut/w/LAgQjZEWgWtnfOeQHK1YEgg@nongnu.org
+X-Gm-Message-State: AOJu0YwOx4Rn6eZCJRZqpvWLlC3Jvp+K7HPhlQBO+xF0/2j9yZDU/RVw
+ 7oUYfe2+HhAG2xte6Qj+QApQ1Ly9TWaZTyRBy4mQEpkZBuDo2I1I+SAdfqa/DCxVS727J3d2z4y
+ gKVA=
+X-Gm-Gg: ASbGncsuVWiCzhLWsZOF8tdXtkNMkyORSLHaNniNTsmBITYAh/AUsdG9eUHDu0VOxfX
+ B8aeDj3P9PDzfds1fZkWBHaexONo2WrOkGGKodtOF55P9BhJrD4i+xDVXRt48nZQULnRWlxikkA
+ KfQwbX29JAXHOEuUKcrYNcgGOTfchLqKq+vipoHFUNUrb7IfQarAlyOwHGFj4N0xgFgXEJiqtbh
+ FxoyrHI8XL0Yoyqs1OUzxYc1N1hSc6m33r9aa0fH4+QQC/PkvaSf2DXd5f6veMnI6gRmzCYEGLQ
+ ilyVNAwYDdSjlHDoEgpFHwnwqEr4T0CAelyARcLLcw==
+X-Google-Smtp-Source: AGHT+IGbwL00J3g4oeI8Qqvl6hhyaWh+/Xap2zFUMBqFQ7NRE+8RR69RqKiTtEJCpOi7RfMEAdYWvQ==
+X-Received: by 2002:a17:906:c141:b0:aa6:5eae:7ed6 with SMTP id
+ a640c23a62f3a-ab2ab6a2f04mr2620694666b.13.1736955415889; 
+ Wed, 15 Jan 2025 07:36:55 -0800 (PST)
 Received: from localhost (2001-1ae9-1c2-4c00-20f-c6b4-1e57-7965.ip6.tmcz.cz.
  [2001:1ae9:1c2:4c00:20f:c6b4:1e57:7965])
  by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5d9900c4b56sm7355654a12.32.2025.01.15.07.24.50
+ a640c23a62f3a-ab2c905ec4dsm768209166b.35.2025.01.15.07.36.55
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 15 Jan 2025 07:24:51 -0800 (PST)
-Date: Wed, 15 Jan 2025 16:24:50 +0100
+ Wed, 15 Jan 2025 07:36:55 -0800 (PST)
+Date: Wed, 15 Jan 2025 16:36:54 +0100
 From: Andrew Jones <ajones@ventanamicro.com>
 To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
  bmeng@tinylab.org, liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, 
  palmer@rivosinc.com
-Subject: Re: [PATCH v3 3/6] target/riscv: add profile u_parent and s_parent
-Message-ID: <20250115-3af3c8e00a967f0538bfd4b5@orel>
+Subject: Re: [PATCH v3 4/6] target/riscv: change priv_ver check in
+ validate_profile()
+Message-ID: <20250115-85f0f95a9d45ab2a27225043@orel>
 References: <20250115134957.2179085-1-dbarboza@ventanamicro.com>
- <20250115134957.2179085-4-dbarboza@ventanamicro.com>
+ <20250115134957.2179085-5-dbarboza@ventanamicro.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20250115134957.2179085-4-dbarboza@ventanamicro.com>
-Received-SPF: pass client-ip=2a00:1450:4864:20::62a;
- envelope-from=ajones@ventanamicro.com; helo=mail-ej1-x62a.google.com
+In-Reply-To: <20250115134957.2179085-5-dbarboza@ventanamicro.com>
+Received-SPF: pass client-ip=2a00:1450:4864:20::62f;
+ envelope-from=ajones@ventanamicro.com; helo=mail-ej1-x62f.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -103,149 +105,47 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Wed, Jan 15, 2025 at 10:49:54AM -0300, Daniel Henrique Barboza wrote:
-> The current 'parent' mechanic for profiles allows for one profile to be
-> a child of a previous/older profile, enabling all its extensions (and
-> the parent profile itself) and sparing us from tediously listing all
-> extensions for every profile.
+On Wed, Jan 15, 2025 at 10:49:55AM -0300, Daniel Henrique Barboza wrote:
+> The S profiles do a priv_ver check during validation to see if the
+> running priv_ver is compatible with it. This check is done by comparing
+> if the running priv_ver is equal to the priv_ver the profile specifies.
 > 
-> This works fine for u-mode profiles. For s-mode profiles this is not
-> enough: a s-mode profile extends not only his equivalent u-mode profile
-> but also the previous s-mode profile. This means, for example, that
-> RVA23S64 extends both RVA23U64 and RVA22S64.
+> There is an universe where we added RVA23S64 support based on both
+> RVA23U64 and RVA22S64 and this error is being thrown:
 > 
-> To fit this usage, rename the existing 'parent' to 'u_parent' and add a
-> new 's_parent' attribute for profiles. Handle both like we're doing with
-> the previous 'profile' attribute, i.e. if set, enable it. This change
-
-...like we were doing with the previous 'parent'...
-
-> does nothing for the existing profiles but will make RVA23S64 simpler.
+> qemu-system-riscv64: warning: Profile rva22s64 requires
+>     priv spec v1.12.0, but priv ver v1.13.0 was set
 > 
-> Suggested-by: Andrew Jones <ajones@ventanamicro.com>
+> We're enabling RVA22S64 (priv_ver 1.12) as a dependency of RVA23S64
+> (priv_ver 1.13) and complaining to users about what we did ourselves.
+> 
+> There's no drawback in allowing a profile to run in an env that has a
+> priv_ver newer than it's required by it. So, like Hiro Nakamura saves
+> the future by changing the past, change the priv_ver check now to allow
+> profiles to run in a newer priv_ver. This universe will have one less
+> warning to deal with.
+> 
 > Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 > ---
->  target/riscv/cpu.c         |  6 ++++--
->  target/riscv/cpu.h         |  3 ++-
->  target/riscv/tcg/tcg-cpu.c | 35 ++++++++++++++++++++++++++---------
->  3 files changed, 32 insertions(+), 12 deletions(-)
+>  target/riscv/tcg/tcg-cpu.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
 > 
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index 6fb4d5f374..e215b1004d 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -2349,7 +2349,8 @@ static const PropertyInfo prop_marchid = {
->   * doesn't need to be manually enabled by the profile.
->   */
->  static RISCVCPUProfile RVA22U64 = {
-> -    .parent = NULL,
-> +    .u_parent = NULL,
-> +    .s_parent = NULL,
->      .name = "rva22u64",
->      .misa_ext = RVI | RVM | RVA | RVF | RVD | RVC | RVB | RVU,
->      .priv_spec = RISCV_PROFILE_ATTR_UNUSED,
-> @@ -2381,7 +2382,8 @@ static RISCVCPUProfile RVA22U64 = {
->   * The remaining features/extensions comes from RVA22U64.
->   */
->  static RISCVCPUProfile RVA22S64 = {
-> -    .parent = &RVA22U64,
-> +    .u_parent = &RVA22U64,
-> +    .s_parent = NULL,
->      .name = "rva22s64",
->      .misa_ext = RVS,
->      .priv_spec = PRIV_VERSION_1_12_0,
-> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> index 97713681cb..986131a191 100644
-> --- a/target/riscv/cpu.h
-> +++ b/target/riscv/cpu.h
-> @@ -81,7 +81,8 @@ const char *riscv_get_misa_ext_description(uint32_t bit);
->  #define CPU_CFG_OFFSET(_prop) offsetof(struct RISCVCPUConfig, _prop)
->  
->  typedef struct riscv_cpu_profile {
-> -    struct riscv_cpu_profile *parent;
-> +    struct riscv_cpu_profile *u_parent;
-> +    struct riscv_cpu_profile *s_parent;
->      const char *name;
->      uint32_t misa_ext;
->      bool enabled;
 > diff --git a/target/riscv/tcg/tcg-cpu.c b/target/riscv/tcg/tcg-cpu.c
-> index 48be24bbbe..c9e5a3b580 100644
+> index c9e5a3b580..f5338f43cb 100644
 > --- a/target/riscv/tcg/tcg-cpu.c
 > +++ b/target/riscv/tcg/tcg-cpu.c
-> @@ -713,13 +713,29 @@ static bool riscv_cpu_validate_profile_satp(RISCVCPU *cpu,
->  }
+> @@ -746,7 +746,7 @@ static void riscv_cpu_validate_profile(RISCVCPU *cpu,
 >  #endif
 >  
-> +static void riscv_cpu_check_parent_profile(RISCVCPU *cpu,
-> +                                           RISCVCPUProfile *profile,
-> +                                           RISCVCPUProfile *parent)
-> +{
-> +    const char *parent_name;
-> +    bool parent_enabled;
-> +
-> +    if (!profile->enabled || !parent) {
-> +        return;
-> +    }
-> +
-> +    parent_name = parent->name;
-> +    parent_enabled = object_property_get_bool(OBJECT(cpu), parent_name, NULL);
-> +    profile->enabled = profile->enabled && parent_enabled;
-
-Could drop the 'profile->enabled &&' since we already know
-profile->enabled is true from the test above.
-
-> +}
-> +
->  static void riscv_cpu_validate_profile(RISCVCPU *cpu,
->                                         RISCVCPUProfile *profile)
->  {
->      CPURISCVState *env = &cpu->env;
->      const char *warn_msg = "Profile %s mandates disabled extension %s";
->      bool send_warn = profile->user_set && profile->enabled;
-> -    bool parent_enabled, profile_impl = true;
-> +    bool profile_impl = true;
->      int i;
+>      if (profile->priv_spec != RISCV_PROFILE_ATTR_UNUSED &&
+> -        profile->priv_spec != env->priv_ver) {
+> +        profile->priv_spec > env->priv_ver) {
+>          profile_impl = false;
 >  
->  #ifndef CONFIG_USER_ONLY
-> @@ -773,12 +789,8 @@ static void riscv_cpu_validate_profile(RISCVCPU *cpu,
->  
->      profile->enabled = profile_impl;
->  
-> -    if (profile->parent != NULL) {
-> -        parent_enabled = object_property_get_bool(OBJECT(cpu),
-> -                                                  profile->parent->name,
-> -                                                  NULL);
-> -        profile->enabled = profile->enabled && parent_enabled;
-> -    }
-> +    riscv_cpu_check_parent_profile(cpu, profile, profile->u_parent);
-> +    riscv_cpu_check_parent_profile(cpu, profile, profile->s_parent);
->  }
->  
->  static void riscv_cpu_validate_profiles(RISCVCPU *cpu)
-> @@ -1181,8 +1193,13 @@ static void cpu_set_profile(Object *obj, Visitor *v, const char *name,
->      profile->user_set = true;
->      profile->enabled = value;
->  
-> -    if (profile->parent != NULL) {
-> -        object_property_set_bool(obj, profile->parent->name,
-> +    if (profile->u_parent != NULL) {
-> +        object_property_set_bool(obj, profile->u_parent->name,
-> +                                 profile->enabled, NULL);
-> +    }
-> +
-> +    if (profile->s_parent != NULL) {
-> +        object_property_set_bool(obj, profile->s_parent->name,
->                                   profile->enabled, NULL);
->      }
->  
+>          if (send_warn) {
 > -- 
 > 2.47.1
 >
 
-Otherwise,
-
 Reviewed-by: Andrew Jones <ajones@ventanamicro.com>
-
-Thanks,
-drew
 
