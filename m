@@ -4,56 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 94BCDE77188
-	for <qemu-riscv@archiver.kernel.org>; Thu, 16 Jan 2025 03:31:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4CEACC02180
+	for <qemu-riscv@archiver.kernel.org>; Thu, 16 Jan 2025 09:24:27 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tYGbM-00081m-4b; Wed, 15 Jan 2025 22:31:24 -0500
+	id 1tYM6d-0007wu-3C; Thu, 16 Jan 2025 04:24:03 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <outgoing@sr.ht>)
- id 1tYGbK-00081L-7k; Wed, 15 Jan 2025 22:31:22 -0500
-Received: from mail-a.sr.ht ([46.23.81.152])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <outgoing@sr.ht>)
- id 1tYGbH-0000nT-KW; Wed, 15 Jan 2025 22:31:22 -0500
-DKIM-Signature: a=rsa-sha256; bh=Ap8sSREg/CILeMrOMnFFwdRa8KVj8p6A8f9TbWZAjCQ=; 
- c=simple/simple; d=git.sr.ht;
- h=From:Date:Subject:Reply-to:To:Cc; 
- q=dns/txt; s=20240113; t=1736998276; v=1;
- b=LlDRJN+vcQ7aATFYW/3ViD12d9Ww08jMZamjFqqIEB7nzNgHM1FINddDB+sAaNkslhWZOzXO
- Gm7u9fd56SFGySqptokP50mYLkiqQ+itSHtWO13wpboR0kkelouifcrkJMMqNiX5nI3G/Oz/DQZ
- nPpE4NXKza+KAp89sUpijqNO6NNFWWuIcitUnniBUaZ92s/xsFPm5CcYX834mBLBCWprcnEeXDd
- kBT5T1satnUm0FAvJWoiYUUFbIvpXGEvYdjfIbIhST+be2GTFBqsBC3FFq3tR/v2Nv6LUEr7Uuq
- c6+48DTjGqHukp+XPkhxuPiVSeO6bEQNmuCRbApi6ITHg==
-Received: from git.sr.ht (unknown [46.23.81.155])
- by mail-a.sr.ht (Postfix) with ESMTPSA id 2A3E120279;
- Thu, 16 Jan 2025 03:31:16 +0000 (UTC)
-From: ~yuming <yuming@git.sr.ht>
-Date: Thu, 16 Jan 2025 10:40:31 +0800
-Subject: [PATCH qemu] target/riscv: Check ext_zca for misaligned return
- address of mret/sret.
-Message-ID: <173699827608.29706.6576459159016491419-0@git.sr.ht>
-X-Mailer: git.sr.ht
-To: qemu-riscv@nongnu.org, qemu-devel@nongnu.org
-Cc: Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bmeng.cn@gmail.com>,
- Weiwei Li <liwei1518@gmail.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
+ (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
+ id 1tYM6a-0007wU-Sa
+ for qemu-riscv@nongnu.org; Thu, 16 Jan 2025 04:24:00 -0500
+Received: from mail-wr1-x430.google.com ([2a00:1450:4864:20::430])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
+ id 1tYM6Z-00072i-7U
+ for qemu-riscv@nongnu.org; Thu, 16 Jan 2025 04:24:00 -0500
+Received: by mail-wr1-x430.google.com with SMTP id
+ ffacd0b85a97d-3863c36a731so589391f8f.1
+ for <qemu-riscv@nongnu.org>; Thu, 16 Jan 2025 01:23:58 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=ventanamicro.com; s=google; t=1737019437; x=1737624237; darn=nongnu.org;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=b5Dhkp2yMFlr3DOu7jV73dzQBALI6mf8f0t2QiTjX3o=;
+ b=iNFRqDyByMoePmQkat5q26i9+ObP+Qj1NKYziWe5HaMG1D81O82PdrcaFbBjpxVeqM
+ p0slTYoN+HQd+6845xbFhFxkEDOJlRDkIoFWrjS79EZbjlXUc0PMUWF3/trf5lyN3Qov
+ CHyT+AnTXLV8ztuCZ/LOUJKf74Qgl5FU3LwwScJhn5VocoZIeWb7yeV+hNsRVTq/U9oE
+ Zzz3CAeaM8aNr86jr3QaUg/y4417HlmhWp6xdRK5uV5Vr2P9V8FjvED+/UbtmEWgtm1W
+ rCz9/NGN4XTUrrKwhJG8Ru6QkuHhYjo/R5FEMOcwJRaidgEug2ErbqID5UQFIm9EjWgI
+ e53A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1737019437; x=1737624237;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=b5Dhkp2yMFlr3DOu7jV73dzQBALI6mf8f0t2QiTjX3o=;
+ b=jA5/qMchue1Jx+cOxRIb+Eq/kQiN93htXiVoDH7ZG7rw7328BeSkUDkIzrxgIdqQPE
+ RqRGd50Ejh/l3BoS8JE0h9uby0XvB3ivz+y/xOlC5jgFUMYb8VbCr0VA9yml5gZwgYDU
+ 3Ox2J2LN/kxSDcC4ZlsrMFZBZP3kvE4Op6Cw/w4wQ9XA28y3bz+ccY1aFcljhBTLYgy5
+ u2l+7kZLvVHj7+TftH/stfYnkimiXvkuy+kUc9ZoT0zRwFSrUGMPaT6I0GDYv6sRMZ9X
+ cH0KDMsTbVGJvy38m53g5u8m20iCOEMRQLspiWPNbs0w0iTJ8i4kar0eFAuZ91WaaYYD
+ ZeIA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCV18KRY9JI/Mmk3nxoldwdwbzi+j4ZsCdJjuycvHrUE2Vfa4/cZIsF89Ojq8Ir0YbRR2D/RTfRedmw6@nongnu.org
+X-Gm-Message-State: AOJu0YwO35szT5U4cQrDOzSv4pf4Um+8WTc+GzzwcxPBfalzBa55Fx/p
+ gVFAfqgi4K95pNXIdT1ZpJaQNu/AgYwJki3YPYMn+ixX2ZXXTtw4UOf+PVyBR5Q=
+X-Gm-Gg: ASbGncvhCOgd5V44Pjzv6c6RbK/nP6fPoAL8AlJLPBiEozYweGELZ7Q5ir66CQ0/UtN
+ 7Dv36wRsJcav+IzuRTSn0risqES0fHGP46qXQBZ+dGq2GWs+ycNwLBSqSbzg/dz8NPUgMIEk+6+
+ VV/AsQxgiQokvCJvXVN+8BDv1SsyofCH+fbK8LmaAkgRzx0rNixWPHNPeyyZJrwsvovh0n794SZ
+ P7VAZ24T9QSmI/FagxikZ2qZJRC7rp70TA8oIdADqa4Rs0f7A+HFcb7SEs7A9G54sMS1/5BfLkm
+ o2euITfNt8BLGSocUaJlI4m7Bh5d0aJ7Jp9pgVq/OA==
+X-Google-Smtp-Source: AGHT+IG5Coe+PZ6XkKM1iuZuFak9ftPrINRJJbjfoFgocoRYX1v1be2/+Duu9oF32EAQKOCxJsWUfw==
+X-Received: by 2002:a5d:598d:0:b0:386:3711:ff8c with SMTP id
+ ffacd0b85a97d-38a873067b9mr32099598f8f.23.1737019437592; 
+ Thu, 16 Jan 2025 01:23:57 -0800 (PST)
+Received: from localhost (2001-1ae9-1c2-4c00-20f-c6b4-1e57-7965.ip6.tmcz.cz.
+ [2001:1ae9:1c2:4c00:20f:c6b4:1e57:7965])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-38a8e37d01dsm19756853f8f.9.2025.01.16.01.23.57
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 16 Jan 2025 01:23:57 -0800 (PST)
+Date: Thu, 16 Jan 2025 10:23:56 +0100
+From: Andrew Jones <ajones@ventanamicro.com>
+To: Vasilis Liaskovitis <vliaskovitis@suse.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, palmer@dabbelt.com, 
+ alistair.francis@wdc.com, jason.chien@sifive.com, zhiwei_liu@linux.alibaba.com,
+ dbarboza@ventanamicro.com, bmeng.cn@gmail.com, liwei1518@gmail.com,
+ philmd@linaro.org
+Subject: Re: [RFC PATCH] hw/riscv/virt: Add serial alias in DTB
+Message-ID: <20250116-089f795c1302e6f2b4a6b8c0@orel>
+References: <20250116084629.19983-1-vliaskovitis@suse.com>
 MIME-Version: 1.0
-Received-SPF: pass client-ip=46.23.81.152; envelope-from=outgoing@sr.ht;
- helo=mail-a.sr.ht
-X-Spam_score_int: -16
-X-Spam_score: -1.7
-X-Spam_bar: -
-X-Spam_report: (-1.7 / 5.0 requ) BAYES_00=-1.9, DKIM_INVALID=0.1,
- DKIM_SIGNED=0.1, RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001,
- RCVD_IN_VALIDITY_SAFE_BLOCKED=0.001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=no autolearn_force=no
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20250116084629.19983-1-vliaskovitis@suse.com>
+Received-SPF: pass client-ip=2a00:1450:4864:20::430;
+ envelope-from=ajones@ventanamicro.com; helo=mail-wr1-x430.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -66,50 +100,47 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-Reply-To: ~yuming <yumin686@andestech.com>
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Yu-Ming Chang <yumin686@andestech.com>
+On Thu, Jan 16, 2025 at 09:46:29AM +0100, Vasilis Liaskovitis wrote:
+> This patch adds an "aliases" node with a "serial0" entry for the
+> single UART in the riscv64 virt machine.
+> 
+> This was requested in Gitlab #2774. However, since the machine only
+> has one UART at the moment, it's not clear that this addition makes
+> sense.
+> 
+> Fixes: https://gitlab.com/qemu-project/qemu/-/issues/2774
 
-Only check misa.C will cause issues when ext_zca is enabled without
-misa.C being set. For example, only enable ext_zce.
+s/Fixes/Resolves/ (see docs/devel/submitting-a-patch.rst)
 
-Signed-off-by: Yu-Ming Chang <yumin686@andestech.com>
----
- target/riscv/op_helper.c | 12 ++++++++----
- 1 file changed, 8 insertions(+), 4 deletions(-)
+> Signed-off-by: Vasilis Liaskovitis <vliaskovitis@suse.com>
+> ---
+>  hw/riscv/virt.c | 2 ++
+>  1 file changed, 2 insertions(+)
+> 
+> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+> index 2bc5a9dd98..67b80e9430 100644
+> --- a/hw/riscv/virt.c
+> +++ b/hw/riscv/virt.c
+> @@ -971,6 +971,8 @@ static void create_fdt_uart(RISCVVirtState *s, const MemMapEntry *memmap,
+>      }
+>  
+>      qemu_fdt_setprop_string(ms->fdt, "/chosen", "stdout-path", name);
+> +    qemu_fdt_add_subnode(ms->fdt, "/aliases");
 
-diff --git a/target/riscv/op_helper.c b/target/riscv/op_helper.c
-index eddedacf4b..891002f954 100644
---- a/target/riscv/op_helper.c
-+++ b/target/riscv/op_helper.c
-@@ -269,8 +269,10 @@ target_ulong helper_sret(CPURISCVState *env)
-     }
- 
-     target_ulong retpc = env->sepc;
--    if (!riscv_has_ext(env, RVC) && (retpc & 0x3)) {
--        riscv_raise_exception(env, RISCV_EXCP_INST_ADDR_MIS, GETPC());
-+    if (!riscv_has_ext(env, RVC) && !env_archcpu(env)->cfg.ext_zca) {
-+        if ((retpc & 0x3) != 0) {
-+            riscv_raise_exception(env, RISCV_EXCP_INST_ADDR_MIS, GETPC());
-+        }
-     }
- 
-     if (get_field(env->mstatus, MSTATUS_TSR) && !(env->priv >= PRV_M)) {
-@@ -328,8 +330,10 @@ target_ulong helper_mret(CPURISCVState *env)
-     }
- 
-     target_ulong retpc = env->mepc;
--    if (!riscv_has_ext(env, RVC) && (retpc & 0x3)) {
--        riscv_raise_exception(env, RISCV_EXCP_INST_ADDR_MIS, GETPC());
-+    if (!riscv_has_ext(env, RVC) && !env_archcpu(env)->cfg.ext_zca) {
-+        if ((retpc & 0x3) != 0) {
-+            riscv_raise_exception(env, RISCV_EXCP_INST_ADDR_MIS, GETPC());
-+        }
-     }
- 
-     uint64_t mstatus = env->mstatus;
--- 
-2.45.2
+create_fdt_uart() is called at machine-done time, so we should create the
+/aliases node in create_fdt() in case we ever have other uses for it.
+
+> +    qemu_fdt_setprop_string(ms->fdt, "/aliases", "serial0", name);
+>  }
+>  
+>  static void create_fdt_rtc(RISCVVirtState *s, const MemMapEntry *memmap,
+> -- 
+> 2.46.0
+>
+
+Thanks,
+drew
 
