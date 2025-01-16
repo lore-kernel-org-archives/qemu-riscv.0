@@ -4,119 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1455BC02183
-	for <qemu-riscv@archiver.kernel.org>; Thu, 16 Jan 2025 19:02:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 34F69C02183
+	for <qemu-riscv@archiver.kernel.org>; Thu, 16 Jan 2025 22:36:56 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tYV8V-0006A5-QT; Thu, 16 Jan 2025 14:02:35 -0500
+	id 1tYYTO-0000eU-0f; Thu, 16 Jan 2025 17:36:22 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tYV8R-00068I-A0
- for qemu-riscv@nongnu.org; Thu, 16 Jan 2025 14:02:33 -0500
-Received: from mail-wr1-x431.google.com ([2a00:1450:4864:20::431])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tYYTH-0000e6-Tv
+ for qemu-riscv@nongnu.org; Thu, 16 Jan 2025 17:36:16 -0500
+Received: from mail-wm1-x332.google.com ([2a00:1450:4864:20::332])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tYV8P-0006do-0K
- for qemu-riscv@nongnu.org; Thu, 16 Jan 2025 14:02:31 -0500
-Received: by mail-wr1-x431.google.com with SMTP id
- ffacd0b85a97d-3862d161947so743708f8f.3
- for <qemu-riscv@nongnu.org>; Thu, 16 Jan 2025 11:02:24 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tYYTG-00009a-7I
+ for qemu-riscv@nongnu.org; Thu, 16 Jan 2025 17:36:15 -0500
+Received: by mail-wm1-x332.google.com with SMTP id
+ 5b1f17b1804b1-436ce2ab251so9753765e9.1
+ for <qemu-riscv@nongnu.org>; Thu, 16 Jan 2025 14:36:13 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1737054143; x=1737658943; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:content-language:references
- :cc:to:from:subject:user-agent:mime-version:date:message-id:from:to
- :cc:subject:date:message-id:reply-to;
- bh=fuRyw5EWWx6Yp+3IBCpdAz3q5PYO8xyuKBCIsOMef9E=;
- b=RMYzBDwwm3po1f1i0K3RYhwuzekPYE6LqZw3WgVj81Kf6VnA7VKUWHuC5WqIzNLm/p
- ZW5vNmt7mPHMAq6bN2VtT2iObw4SfLpAiaJ51V5caXjPa7mgRzXMNo4v3juPNTg44g39
- VeksL/syJSed4+eAE8XWV60ibv6xxXpzFEykXleaj+gdMP+cpLKP3V6xTPp5JN+k0xKx
- 6gwgHXA29AooGieqyj+5/xC+7Axm66iTHHPix73f8fo5kLEn2T/IXx0v6Zqbnh/npcpd
- +wTMNyiOX7QWfgezEiOVr+PjR62Nsc4qrb4Xw1o9CR/lvOGRp1RFG2F+yKBKsAaSPotw
- J6Ng==
+ d=linaro.org; s=google; t=1737066972; x=1737671772; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=NEWcwlZ3rL0pM1lPXHd3q45mvxB7AAKYo4rVKUiR+b0=;
+ b=jtRW/7Aknpi6jRHth7kSgyUQNe9nyKiVWSvz0ZQeItzSdsCFoDgDbYpELSN7qbME42
+ eZb30poq+3geRgcH7q23H89IPsdbbiac2cqKnM6tkEGREK05b2lC1/PlLRgnAVyHJ8tO
+ W+dObCZkfTFEToq0kvhp47TsCHedrT/w5ZcO2Kd6WDvTyiUF0DwO9IU8kQkYgoBh6jz5
+ VwnQAyvV3Vo96/S59XcG+oM9cUxBb958W7X252F0eeAvYRdOM/cEfup4WNO8BgtGz6Rr
+ 5U/mPB70jLgClpgt0IoNgFvzvsEhoomJ3nO3NGn2e7WFQzg714AHX5rnAEe2JSoOX+G6
+ DI/w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1737054143; x=1737658943;
- h=content-transfer-encoding:in-reply-to:content-language:references
- :cc:to:from:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=fuRyw5EWWx6Yp+3IBCpdAz3q5PYO8xyuKBCIsOMef9E=;
- b=A+o2XR5/y0/u+XCnLg51EgM4uMgDpmTAeXvXPlcMmFKJeCxuxL9rIbUiV8RDO566+L
- lZRZPeawVtf+FX1TJ7NUgAmK4VRbv5BxHoNdFttcL3bxlBSyGL3tiSFF/temyjYJkv+s
- vDudzvosj0U/P58LOQy0GVitgN9PpmlaxJW+OdikJgaEYySQRd5FbSn+VqyU8mRt4ZDJ
- RuznEows80HOhUNgUFXtzvOHuFR7yYNdLX1diXzakTOzlL/7EhUadnb8qKmWFEEQW9Ev
- AcZefvUS6z0Zdg9JcyDk0Ld4P0g7LZYLPV6EM8/NyQMwkoOv2295Gx/NGeC66CuBStHe
- uhEw==
+ d=1e100.net; s=20230601; t=1737066972; x=1737671772;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=NEWcwlZ3rL0pM1lPXHd3q45mvxB7AAKYo4rVKUiR+b0=;
+ b=t3StFiThy2Q3mqcoe0jr3BUxQKHrr0RKPBcppU3JyZcWL47SMMYdGG0viBsbjVS/Ck
+ xBny+/4z94fw9SU57eNMQNdABFK7wPfgNkfAAIgIttYUw+5BLULxiYJQgpvkLiAqlukp
+ OBH2YNuaRHAVpGuTj0bRPsCTNlMBIvnUtryeeXtFTiryp+dyZjs5vLYrQcJDB8UtYgv1
+ TA+iYM4DdSmh2n+uhbBsfMkqhYjrRx/4MbwWG9oiruWo67HnaA/YKxJQROpRlpF7GBnQ
+ l1HdvvYeu8ywMoltZLLyIq9BNC5rhc9XNKdUa5O0AHsBwAueXvqOy2DEl2oePWSLb09Z
+ uwLQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWXYEf9IYsLatI2Kr6LPx0AhwlEqSpadiV3PpJ5XSC8qSzDT2T3q+jKhvwtTK9ytP5riumT+V8SWTC4@nongnu.org
-X-Gm-Message-State: AOJu0YxIh663UtT8oJfEvHxvbY85W8NKS/bb6dcbA6c1iCDIQV52r5YZ
- ecplEWBjlsVB+W2ixciLbQX1w+mCMsedC6wXHTYPrYhLlOsQDU/nQv+Xl3ey6dQ=
-X-Gm-Gg: ASbGncskW/yOt0RgDuGRxg93ByB66V7dfPLHTsHPuHFchHEMqw2yY43m+GTvS4UTG5m
- ogRg0ied7k9pSBZRJI1MGMZpUoZNr77ZNKYfVt378BKOA6eQnpvJHLXCvVtQB9Zp8kpSrz+6MEp
- o/kHHDxqECnMTMcK/+NQYMDsCAvt96sLkiGDRr5LUEXhNBwDP6nDacSejL1k2DkducU5n6yw1Zc
- Hx71Uo0Jx5bB6Jfa119V47jtmcxTZIl4O4Oto2whQ6sTpxWFBaFI8YQsdzrVyZ8mj64fde9NtaC
- UIexOViU9wJlzWucR0mDWNXc
-X-Google-Smtp-Source: AGHT+IEcSQubzWb3CBuT1dMQ1/yjGUHi79uHcxM8wbngetpI0P1jFH07ZTZYoEfZXlXddWqceC+h5Q==
-X-Received: by 2002:a5d:64a8:0:b0:385:e429:e591 with SMTP id
- ffacd0b85a97d-38a8730a6bdmr34444859f8f.23.1737054142828; 
- Thu, 16 Jan 2025 11:02:22 -0800 (PST)
-Received: from [192.168.69.151] (88-187-86-199.subs.proxad.net.
+ AJvYcCWP2Pn/Iza8fL3r+kbjrgHQaj01+85Lpn8vmUZhh42LC7NuwZ14KklO6uJBJIqkbGUbs9qbSwKK+HnO@nongnu.org
+X-Gm-Message-State: AOJu0YyDzKULIYZcLsq8o7uApzcqKWJukflzkaxb9OC0yGH5efv0GwQM
+ 1ml7ME+oGr2V+osUNJvccrlyyeAfbixk2dxSPKEJTXxIZ2xsbpCulT0bXFQep10=
+X-Gm-Gg: ASbGncticrnhjyl9xRGNNwbfvD/0Hml5aRl+O66Os1dGNb7zCPMrQVsW26Uib6Se25m
+ 4sziu5npYRnhei5YMw0XGx4ppYNii9bb2uJbk+/b7Inat9YNpCso9oLW/JApnjPhTR8CC9uilJr
+ 9dlCWxFFnrVeh7CiIiQcJALNJUvovf/2kUzGTqERWKyUk7fpdzW1+anwYhXpPM0pCj+tIkQfqa7
+ gmZCsOpWboBY/nc+aqtUR034YtoQHMKB9r6nEJQ7k836xXlq1F/isQ/W3n7JAzM+RCx0QR/TwqX
+ 9mInGgaTi7JzyQiLy76OBqorrW+GXEE=
+X-Google-Smtp-Source: AGHT+IExwbmFrREWvyWRsLco6OE8GRSYcuIIEHEpNIFLaYT/kfXpzOjBJdoAqFx5YnL5oa8Y/DguRg==
+X-Received: by 2002:a05:600c:511b:b0:432:d797:404a with SMTP id
+ 5b1f17b1804b1-4389142e0e8mr3056075e9.22.1737066972163; 
+ Thu, 16 Jan 2025 14:36:12 -0800 (PST)
+Received: from localhost.localdomain (88-187-86-199.subs.proxad.net.
  [88.187.86.199]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-43890421fabsm7885525e9.24.2025.01.16.11.02.19
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 16 Jan 2025 11:02:22 -0800 (PST)
-Message-ID: <b55ea724-cdc7-4e8c-a954-b10a1cde9bdd@linaro.org>
-Date: Thu, 16 Jan 2025 20:02:18 +0100
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 06/22] exec/cpu: Call cpu_remove_sync() once in
- cpu_common_unrealize()
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-To: Igor Mammedov <imammedo@redhat.com>
-Cc: qemu-devel@nongnu.org, Laurent Vivier <laurent@vivier.eu>,
- Paolo Bonzini <pbonzini@redhat.com>, Max Filippov <jcmvbkbc@gmail.com>,
- David Hildenbrand <david@redhat.com>, Peter Xu <peterx@redhat.com>,
- Anton Johansson <anjo@rev.ng>, Peter Maydell <peter.maydell@linaro.org>,
- kvm@vger.kernel.org, Marek Vasut <marex@denx.de>,
- David Gibson <david@gibson.dropbear.id.au>, Brian Cain <bcain@quicinc.com>,
- Yoshinori Sato <ysato@users.sourceforge.jp>,
- "Edgar E . Iglesias" <edgar.iglesias@gmail.com>,
- Claudio Fontana <cfontana@suse.de>,
+ 5b1f17b1804b1-438904625e5sm12313865e9.32.2025.01.16.14.36.10
+ (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
+ Thu, 16 Jan 2025 14:36:11 -0800 (PST)
+From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+To: qemu-devel@nongnu.org
+Cc: Alistair Francis <alistair.francis@wdc.com>, qemu-riscv@nongnu.org,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, Bin Meng <bmeng.cn@gmail.com>,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Artyom Tarasenko <atar4qemu@gmail.com>, Marcelo Tosatti
- <mtosatti@redhat.com>, qemu-ppc@nongnu.org,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Aurelien Jarno <aurelien@aurel32.net>, Ilya Leoshkevich <iii@linux.ibm.com>,
- Daniel Henrique Barboza <danielhb413@gmail.com>,
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- =?UTF-8?Q?C=C3=A9dric_Le_Goater?= <clg@kaod.org>,
- Alistair Francis <alistair.francis@wdc.com>,
- Alessandro Di Federico <ale@rev.ng>, Song Gao <gaosong@loongson.cn>,
- Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
- Chris Wulff <crwulff@gmail.com>, "Michael S. Tsirkin" <mst@redhat.com>,
- Alistair Francis <alistair@alistair23.me>, Fabiano Rosas <farosas@suse.de>,
- qemu-s390x@nongnu.org, Yanan Wang <wangyanan55@huawei.com>,
- Luc Michel <luc@lmichel.fr>, Weiwei Li <liweiwei@iscas.ac.cn>,
- Bin Meng <bin.meng@windriver.com>, Stafford Horne <shorne@gmail.com>,
- Xiaojuan Yang <yangxiaojuan@loongson.cn>,
- "Daniel P . Berrange" <berrange@redhat.com>, Thomas Huth <thuth@redhat.com>,
- qemu-arm@nongnu.org, Jiaxun Yang <jiaxun.yang@flygoat.com>,
- Richard Henderson <richard.henderson@linaro.org>,
- Aleksandar Rikalo <aleksandar.rikalo@syrmia.com>,
- Bernhard Beschow <shentey@gmail.com>,
- Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>, qemu-riscv@nongnu.org,
- =?UTF-8?Q?Alex_Benn=C3=A9e?= <alex.bennee@linaro.org>,
- Nicholas Piggin <npiggin@gmail.com>, Greg Kurz <groug@kaod.org>,
- Michael Rolnik <mrolnik@gmail.com>, Eduardo Habkost <eduardo@habkost.net>,
- Markus Armbruster <armbru@redhat.com>, Palmer Dabbelt <palmer@dabbelt.com>
-References: <20230918160257.30127-1-philmd@linaro.org>
- <20230918160257.30127-7-philmd@linaro.org>
- <20231128174215.32d2a350@imammedo.users.ipa.redhat.com>
- <5f25576c-598f-4fd7-8238-61edcff2c411@linaro.org>
-Content-Language: en-US
-In-Reply-To: <5f25576c-598f-4fd7-8238-61edcff2c411@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+ Weiwei Li <liwei1518@gmail.com>, Paolo Bonzini <pbonzini@redhat.com>,
+ =?UTF-8?q?Marc-Andr=C3=A9=20Lureau?= <marcandre.lureau@redhat.com>,
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+Subject: [PATCH] hw/char/riscv_htif: Convert HTIF_DEBUG() to trace events
+Date: Thu, 16 Jan 2025 23:36:09 +0100
+Message-ID: <20250116223609.81594-1-philmd@linaro.org>
+X-Mailer: git-send-email 2.47.1
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::431;
- envelope-from=philmd@linaro.org; helo=mail-wr1-x431.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::332;
+ envelope-from=philmd@linaro.org; helo=mail-wm1-x332.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -139,141 +102,65 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 16/1/25 19:05, Philippe Mathieu-Daudé wrote:
-> On 28/11/23 17:42, Igor Mammedov wrote:
->> On Mon, 18 Sep 2023 18:02:39 +0200
->> Philippe Mathieu-Daudé <philmd@linaro.org> wrote:
->>
->>> While create_vcpu_thread() creates a vCPU thread, its counterpart
->>> is cpu_remove_sync(), which join and destroy the thread.
->>>
->>> create_vcpu_thread() is called in qemu_init_vcpu(), itself called
->>> in cpu_common_realizefn(). Since we don't have qemu_deinit_vcpu()
->>> helper (we probably don't need any), simply destroy the thread in
->>> cpu_common_unrealizefn().
->>>
->>> Note: only the PPC and X86 targets were calling cpu_remove_sync(),
->>> meaning all other targets were leaking the thread when the vCPU
->>> was unrealized (mostly when vCPU are hot-unplugged).
->>>
->>> Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
->>> ---
->>>   hw/core/cpu-common.c  | 3 +++
->>>   target/i386/cpu.c     | 1 -
->>>   target/ppc/cpu_init.c | 2 --
->>>   3 files changed, 3 insertions(+), 3 deletions(-)
->>>
->>> diff --git a/hw/core/cpu-common.c b/hw/core/cpu-common.c
->>> index a3b8de7054..e5841c59df 100644
->>> --- a/hw/core/cpu-common.c
->>> +++ b/hw/core/cpu-common.c
->>> @@ -221,6 +221,9 @@ static void cpu_common_unrealizefn(DeviceState *dev)
->>>       /* NOTE: latest generic point before the cpu is fully 
->>> unrealized */
->>>       cpu_exec_unrealizefn(cpu);
->>> +
->>> +    /* Destroy vCPU thread */
->>> +    cpu_remove_sync(cpu);
->>>   }
->>>   static void cpu_common_initfn(Object *obj)
->>> diff --git a/target/i386/cpu.c b/target/i386/cpu.c
->>> index cb41d30aab..d79797d963 100644
->>> --- a/target/i386/cpu.c
->>> +++ b/target/i386/cpu.c
->>> @@ -7470,7 +7470,6 @@ static void x86_cpu_unrealizefn(DeviceState *dev)
->>>       X86CPUClass *xcc = X86_CPU_GET_CLASS(dev);
->>>   #ifndef CONFIG_USER_ONLY
->>> -    cpu_remove_sync(CPU(dev));
->>>       qemu_unregister_reset(x86_cpu_machine_reset_cb, dev);
->>>   #endif
->>
->> missing  followup context:
->>      ...
->>      xcc->parent_unrealize(dev);
->>
->> Before the patch, vcpu thread is stopped and onnly then
->> clean up happens.
->>
->> After the patch we have cleanup while vcpu thread is still running.
->>
->> Even if it doesn't explode, such ordering still seems to be wrong.
-> 
-> OK.
-> 
->>> diff --git a/target/ppc/cpu_init.c b/target/ppc/cpu_init.c
->>> index e2c06c1f32..24d4e8fa7e 100644
->>> --- a/target/ppc/cpu_init.c
->>> +++ b/target/ppc/cpu_init.c
->>> @@ -6853,8 +6853,6 @@ static void ppc_cpu_unrealize(DeviceState *dev)
->>>       pcc->parent_unrealize(dev);
->>> -    cpu_remove_sync(CPU(cpu));
->>
->> bug in current code?
-> 
-> Plausibly. See:
-> 
-> commit f1023d21e81b7bf523ddf2ac91a48117f20ef9d7
-> Author: Greg Kurz <groug@kaod.org>
-> Date:   Thu Oct 15 23:18:32 2020 +0200
-> 
->      spapr: Unrealize vCPUs with qdev_unrealize()
-> 
->      Since we introduced CPU hot-unplug in sPAPR, we don't unrealize the
->      vCPU objects explicitly. Instead, we let QOM handle that for us
->      under object_property_del_all() when the CPU core object is
->      finalized. The only thing we do is calling cpu_remove_sync() to
->      tear the vCPU thread down.
-> 
->      This happens to work but it is ugly because:
->      - we call qdev_realize() but the corresponding qdev_unrealize() is
->        buried deep in the QOM code
->      - we call cpu_remove_sync() to undo qemu_init_vcpu() called by
->        ppc_cpu_realize() in target/ppc/translate_init.c.inc
->      - the CPU init and teardown paths aren't really symmetrical
-> 
->      The latter didn't bite us so far but a future patch that greatly
->      simplifies the CPU core realize path needs it to avoid a crash
->      in QOM.
-> 
->      For all these reasons, have ppc_cpu_unrealize() to undo the changes
->      of ppc_cpu_realize() by calling cpu_remove_sync() at the right
->      place, and have the sPAPR CPU core code to call qdev_unrealize().
-> 
->      This requires to add a missing stub because translate_init.c.inc is
->      also compiled for user mode.
+Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+---
+ hw/char/riscv_htif.c | 15 +++------------
+ hw/char/trace-events |  4 ++++
+ 2 files changed, 7 insertions(+), 12 deletions(-)
 
-See also:
-
-commit 5e22e29201d80124bca0124f2034e72b698cbb6f
-Author: David Gibson <david@gibson.dropbear.id.au>
-Date:   Wed Jun 13 12:08:42 2018 +1000
-
-     pnv: Add cpu unrealize path
-
-     Currently we don't have any unrealize path for pnv cpu cores.
-     We get away with this because we don't yet support cpu hotplug
-     for pnv.
-
-     However, we're going to want it eventually, and in the meantime,
-     it makes it non-obvious why there are a bunch of allocations on
-     the realize() path that don't have matching frees.
-
-     So, implement the missing unrealize path.
-
-diff --git a/hw/ppc/pnv_core.c b/hw/ppc/pnv_core.c
-index f4c41d89d6d..f7cf33f547a 100644
---- a/hw/ppc/pnv_core.c
-+++ b/hw/ppc/pnv_core.c
-@@ -186,6 +186,26 @@ err:
-      error_propagate(errp, local_err);
-  }
-
-+static void pnv_unrealize_vcpu(PowerPCCPU *cpu)
-+{
-+    qemu_unregister_reset(pnv_cpu_reset, cpu);
-+    object_unparent(cpu->intc);
-+    cpu_remove_sync(CPU(cpu));
-+    object_unparent(OBJECT(cpu));
-+}
+diff --git a/hw/char/riscv_htif.c b/hw/char/riscv_htif.c
+index 11a0e1a7b7d..ec5db5a597f 100644
+--- a/hw/char/riscv_htif.c
++++ b/hw/char/riscv_htif.c
+@@ -32,14 +32,7 @@
+ #include "exec/tswap.h"
+ #include "system/dma.h"
+ #include "system/runstate.h"
+-
+-#define RISCV_DEBUG_HTIF 0
+-#define HTIF_DEBUG(fmt, ...)                                                   \
+-    do {                                                                       \
+-        if (RISCV_DEBUG_HTIF) {                                                \
+-            qemu_log_mask(LOG_TRACE, "%s: " fmt "\n", __func__, ##__VA_ARGS__);\
+-        }                                                                      \
+-    } while (0)
++#include "trace.h"
+ 
+ #define HTIF_DEV_SHIFT          56
+ #define HTIF_CMD_SHIFT          48
+@@ -159,8 +152,7 @@ static void htif_handle_tohost_write(HTIFState *s, uint64_t val_written)
+     uint64_t payload = val_written & 0xFFFFFFFFFFFFULL;
+     int resp = 0;
+ 
+-    HTIF_DEBUG("mtohost write: device: %d cmd: %d what: %02" PRIx64
+-        " -payload: %016" PRIx64 "\n", device, cmd, payload & 0xFF, payload);
++    trace_htif_uart_write_to_host(device, cmd, payload);
+ 
+     /*
+      * Currently, there is a fixed mapping of devices:
+@@ -251,8 +243,7 @@ static void htif_handle_tohost_write(HTIFState *s, uint64_t val_written)
+         }
+     } else {
+         qemu_log("HTIF unknown device or command\n");
+-        HTIF_DEBUG("device: %d cmd: %d what: %02" PRIx64
+-            " payload: %016" PRIx64, device, cmd, payload & 0xFF, payload);
++        trace_htif_uart_unknown_device_command(device, cmd, payload);
+     }
+     /*
+      * Latest bbl does not set fromhost to 0 if there is a value in tohost.
+diff --git a/hw/char/trace-events b/hw/char/trace-events
+index 3ee7cfcdff2..b2e3d25ae34 100644
+--- a/hw/char/trace-events
++++ b/hw/char/trace-events
+@@ -136,3 +136,7 @@ stm32f2xx_usart_read(char *id, unsigned size, uint64_t ofs, uint64_t val) " %s s
+ stm32f2xx_usart_write(char *id, unsigned size, uint64_t ofs, uint64_t val) "%s size %d ofs 0x%02" PRIx64 " <- 0x%02" PRIx64
+ stm32f2xx_usart_drop(char *id) " %s dropping the chars"
+ stm32f2xx_usart_receive(char *id, uint8_t chr) " %s receiving '%c'"
++
++# riscv_htif.c
++htif_uart_write_to_host(uint8_t device, uint8_t cmd, uint64_t payload) "device: %u cmd: %02u payload: %016" PRIx64
++htif_uart_unknown_device_command(uint8_t device, uint8_t cmd, uint64_t payload) "device: %u cmd: %02u payload: %016" PRIx64
+-- 
+2.47.1
 
 
