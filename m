@@ -4,92 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9F1A0C02180
-	for <qemu-riscv@archiver.kernel.org>; Thu, 16 Jan 2025 12:16:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 64335C02180
+	for <qemu-riscv@archiver.kernel.org>; Thu, 16 Jan 2025 12:31:36 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tYOn0-0000VK-Kd; Thu, 16 Jan 2025 07:15:59 -0500
+	id 1tYP1k-0003w1-A9; Thu, 16 Jan 2025 07:31:12 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1tYOmp-0000Ui-Im
- for qemu-riscv@nongnu.org; Thu, 16 Jan 2025 07:15:47 -0500
-Received: from mail-pj1-x102e.google.com ([2607:f8b0:4864:20::102e])
+ id 1tYP1i-0003vq-Tf
+ for qemu-riscv@nongnu.org; Thu, 16 Jan 2025 07:31:10 -0500
+Received: from mail-oo1-xc42.google.com ([2607:f8b0:4864:20::c42])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1tYOmn-0006Bs-4Q
- for qemu-riscv@nongnu.org; Thu, 16 Jan 2025 07:15:46 -0500
-Received: by mail-pj1-x102e.google.com with SMTP id
- 98e67ed59e1d1-2f42992f608so1266649a91.0
- for <qemu-riscv@nongnu.org>; Thu, 16 Jan 2025 04:15:44 -0800 (PST)
+ id 1tYP1f-0001CI-1D
+ for qemu-riscv@nongnu.org; Thu, 16 Jan 2025 07:31:10 -0500
+Received: by mail-oo1-xc42.google.com with SMTP id
+ 006d021491bc7-5f8befb03d0so401396eaf.1
+ for <qemu-riscv@nongnu.org>; Thu, 16 Jan 2025 04:30:59 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1737029743; x=1737634543; darn=nongnu.org;
+ d=ventanamicro.com; s=google; t=1737030659; x=1737635459; darn=nongnu.org;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=oIlJHDEAr5kXhrWvJRykxP6NHD7AfkEEmwT5hp65unc=;
- b=Ni4l4en3T2fnjlEqNCEt8oTOCP723A4rgYMobD1yQafFZu/b+f3hEi3sSOyr+2hgPr
- V29H93kn7l4MwP2Vd8YjNHGH/wEr77rpGGJUTOCGXkIy+gqI3UDgkWggNATGK9xJZ7LT
- gq04ze5d9pw34aP0CUtZkD69fysgK1NK/LlTgGyHqjuCur5A/j1xOgM5TToVcpK38QLl
- YNfjFjhQyspUeNBmNwbb4Irx4y7mfMC5GEnRMFM69wpFTiEKPHuss1VYtCaWSx5KfLCZ
- bFSoWEUc1E5+gyH8Nh6ylrWKb4Lec2VvEB+CSHgmaqDGBnc++Oo3OBoa8rvb2owJjZaf
- T7Pg==
+ bh=SPCmTHJ30+Z0P1UK1SYBdnSWIoFkUkGXia6Kn2gnWy0=;
+ b=ID4/BN2gayaVQf/I3VxCaXuTaTpWUws0HcRolO4D3wwqG6hZKowkQeYRNKIs9LWKW/
+ Mpe5YdmetwyOHBsLRDlgeSjLVE4NSKZybcjPkbbf05fOi9S0xtxkuj9L0HOEwZJYK6ch
+ CddskU+HSlAkfzrXppMxAGh4dkffUW0TE1DzQlsn/WgiS+4shY4qN7YDS1SpxXH2xyBG
+ /Oz7HO+NLuwXqDxdmrw7vlRvrdMEwrgSQIG6/f4KOS9wPs8XfwVMdQlSx3kZnmXkIQyZ
+ 1adyXAB+C060g5GWmSO9E9OG9XCwe4qyUjLk4GUIjRKqbli8OlFYkFVJCo9CjuR7b1/D
+ EnXA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1737029743; x=1737634543;
+ d=1e100.net; s=20230601; t=1737030659; x=1737635459;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=oIlJHDEAr5kXhrWvJRykxP6NHD7AfkEEmwT5hp65unc=;
- b=lzJGy+ujjSsBE/74YO3JNysTXqUJOc8nzEwC1NCSAmvPZtSGLJGAauuR7p8xsVaG8z
- XvHnOsRBduBSixiIyMnB/BtvNSPIgof2sisK7wPds7cHvrUulY0wDc0+5fyqCsmO8Kaf
- VUjs3G2m2n3RWLiKoV+Pn4sGO8yD2IPUF1Eko+jvWi8/eY+XM1L4MEqmHujs6NU5Di6C
- L5EEPhtiJz6J2ijE6U077ircTqxeeUlbJlxuMtRFe5JxtWrn7kD3PyC5utrShYGDXwcJ
- VwxglFkRD4UEUka4lQoqxTZWJJeUnPcWI17g/ZnNH26086cg66KCa/ZhfaGN/cVefq+r
- zFeQ==
+ bh=SPCmTHJ30+Z0P1UK1SYBdnSWIoFkUkGXia6Kn2gnWy0=;
+ b=MbnVuIdHPwzkRvt71GUCzsCdCuKPnErSKZY7nNRu0SqjBmuFDqnq2lSi8+DIezz+B5
+ u6/hiTM4vnSyK8OhPiNH2Buxe1X7ZZfZMvoRLn9GaNuDTCzOniVtM/3OcGC+WAHfcuKO
+ aB3ZVx79zIlFTzoO8omqTPePni4bKwxWF81QR8Zi0rLufoPkJNvEtsRXVDAMq9z+E1hu
+ pJTbP+zsVJYYz7I2FWZhQ7MnlPIXmQFnHNnzU9M4thdzCX9EgHMbWIrFZHxo8C0++uVJ
+ UjaYzSWUyO9UShHi7/4Obw0U9n/FnJ74jUTJef/wN5WW7vo5iV/xPjYCq0mT48yeHFVG
+ 9ouA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCU6ua8A1/Ewl687t6lQEVAazyXP+6aeyZvtpZ0T66WNnlQapGZvQvakJweswB8lpAsZvcu7Orczs4Jh@nongnu.org
-X-Gm-Message-State: AOJu0YxjSyCAQml+bO61gpZGzP5FZqKnbdy/uZJiAzMlLjUy0ELSEdwc
- mdZGE9vtUHJJHSjFGwd8FkjUQAhRRNG3GxD8HLnPIkYCoYQFRFniv4G5hYgIM+A=
-X-Gm-Gg: ASbGncuax9sREMDjbWmiESPiqkaWpaLav7RJAGsptqQpCdKhwRnBjttImoj46zEgrKH
- 15ln30fTGOZsbCyHO6C8JL36VoROlWTgDMB1/nbXzUWl0ZKbWcjSh/yS/pLZAxPrOE4pXFcAWzo
- 4YYJWb33wMnO5a2hEKlDyGn7cImI6xhN73t4UCIeLIThs6KlvS3ZDQnqPlzqtAVxx0JnKVbSQIE
- DAtlEPl7FNhKG1a8Cqy3LK98gccqxcG4G5Y6JCQJYvZ0cQ4S+9C6FjesoKZqjemZyAh+Us=
-X-Google-Smtp-Source: AGHT+IHcuQl++MXnv7VUxcDBEBUzfMMwL1csW1vlU/7AHIxhtCqEyrbkXvZ+d+hBFn5+CawXuyyGRw==
-X-Received: by 2002:a17:90a:d00c:b0:2ee:c5ea:bd91 with SMTP id
- 98e67ed59e1d1-2f548f1d783mr46518448a91.29.1737029743043; 
- Thu, 16 Jan 2025 04:15:43 -0800 (PST)
+ AJvYcCV0Gynj6AOBEUIcTspBijkQ/udMKpjRr4SV4CjUKGH6skFdddn98JNcM/fK4pIyfb9x1qx6vhx46coC@nongnu.org
+X-Gm-Message-State: AOJu0YwkiXTJvQv+dFdd5v3y36B++3/1AiuG2NCs299kUYPbeDIky7CO
+ MCDVid+LCLsoSlPZ/6YZwoPckM9rtvhFl2MS6sZhvW47POspy94S5LCceVlL5mw=
+X-Gm-Gg: ASbGncuZRrEVmA0AVEDexR6hhAyvVdgl94lHo8BD2nIPf+9+GwfY3yt2IbBBCrhd7vu
+ Z/AjrL72FSHIVH9ypWVMcOzpgNj1XbsnF1P/+zOa4NHjbTqidJ2MPUItXzJukDMJjWzZHRb6/1b
+ aAq5qXzRAMOFBZe9q+IgkpQmdXRl0MPlbc469gVlqosfVUO6mwUfo0Kn0NwC1LiLCLNh9bZJqTQ
+ dsyAquw9sb8JKonK/GHy+Si5Lg6TjLDcus7GNg2XgZmOUaQt8x5JmTxzyFneClFuee6Pqc=
+X-Google-Smtp-Source: AGHT+IE7wl4YuZItxTjDj/1ruvAQAQzbgS4LvbC1/QAlid7NU8gis0U7HISlsnpUvJEz3IzQziJ/zg==
+X-Received: by 2002:a05:6820:4d02:b0:5f8:91b0:6c0f with SMTP id
+ 006d021491bc7-5f891b06d2amr14225383eaf.6.1737030658914; 
+ Thu, 16 Jan 2025 04:30:58 -0800 (PST)
 Received: from [192.168.68.110] ([191.202.238.10])
  by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-2f72c20ce31sm3153444a91.33.2025.01.16.04.15.40
+ 006d021491bc7-5f882641dc9sm6677161eaf.13.2025.01.16.04.30.54
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 16 Jan 2025 04:15:42 -0800 (PST)
-Message-ID: <9c58515e-bdbd-4183-9587-a7fd205717db@ventanamicro.com>
-Date: Thu, 16 Jan 2025 09:15:39 -0300
+ Thu, 16 Jan 2025 04:30:57 -0800 (PST)
+Message-ID: <4fc33d8d-e443-43c3-9809-7f9c025f2883@ventanamicro.com>
+Date: Thu, 16 Jan 2025 09:30:53 -0300
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] riscv: disable Smdbltrp for the max cpu
-To: =?UTF-8?B?Q2zDqW1lbnQgTMOpZ2Vy?= <cleger@rivosinc.com>,
- qemu-riscv@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>
-Cc: Ved Shanbhogue <ved@rivosinc.com>, Atish Patra <atishp@rivosinc.com>,
+Subject: Re: [PATCH 1/2] target/riscv: Fix the hpmevent mask
+To: Atish Patra <atishp@rivosinc.com>, qemu-riscv@nongnu.org,
  qemu-devel@nongnu.org
-References: <20250116092352.1630278-1-cleger@rivosinc.com>
+Cc: liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com,
+ bin.meng@windriver.com, alistair.francis@wdc.com
+References: <20250115-pmu_minor_fixes-v1-0-c32388defb02@rivosinc.com>
+ <20250115-pmu_minor_fixes-v1-1-c32388defb02@rivosinc.com>
 Content-Language: en-US
 From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <20250116092352.1630278-1-cleger@rivosinc.com>
+In-Reply-To: <20250115-pmu_minor_fixes-v1-1-c32388defb02@rivosinc.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::102e;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pj1-x102e.google.com
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::c42;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-oo1-xc42.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -107,68 +106,48 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 
 
-On 1/16/25 6:23 AM, Clément Léger wrote:
-> When present, Smdbltrp is enabled by default and MDT needs to be cleared
-> to avoid generating a double trap. Since not all firmwares are currently
-> ready to handle that, disable it for the max cpu.
+On 1/15/25 9:49 PM, Atish Patra wrote:
+> As per the latest privilege specification v1.13[1], the sscofpmf
+> only reserves first 8 bits of hpmeventX. Update the corresponding
+> masks accordingly.
 > 
-> Reported-by: Atish Patra <atishp@rivosinc.com>
-> Signed-off-by: Clément Léger <cleger@rivosinc.com>
+> [1]https://github.com/riscv/riscv-isa-manual/issues/1578
 > 
-
-This breaks 'make check-functional' indeed. Not sure why we didn't notice it
-earlier.
-
-The change is fine but it should be made in the patch that introduced the error
-since it's not merged upstream yet. The patch is:
-
-[PATCH v8 9/9] target/riscv: Add Smdbltrp ISA extension enable switch
-
-Otherwise we'll have a gap of patches where 'make check-functional' won't work
-and it'll make our lives harder when bisecting stuff. This is the same review I
-gave Frank in the v10 of the 'smrnmi' series:
-
-https://lore.kernel.org/qemu-riscv/26ecf1ca-07eb-4aed-9d06-a12c036c0723@ventanamicro.com/
-
-You can re-send "target/riscv: Add Smdbltrp ISA extension enable switch" as a v9 (I
-believe it's fine to send it standalone, no need to re-send the whole series) with
-this patch squashed in. Alternatively Alistair can squash in this change in his tree
-if he's up to it. Whatever works.
-
-But an extra patch is only justifiable if the change that broke stuff already made
-upstream and there's nothing we can do about it. This is not the case, and  we should
-fix it properly while we can.
-
-
-Thanks,
-
-Daniel
-
-
+> Signed-off-by: Atish Patra <atishp@rivosinc.com>
 > ---
->   target/riscv/tcg/tcg-cpu.c | 10 ++++++++++
->   1 file changed, 10 insertions(+)
+
+Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+
+>   target/riscv/cpu_bits.h | 9 ++++++---
+>   1 file changed, 6 insertions(+), 3 deletions(-)
 > 
-> diff --git a/target/riscv/tcg/tcg-cpu.c b/target/riscv/tcg/tcg-cpu.c
-> index 48be24bbbe..0a137281de 100644
-> --- a/target/riscv/tcg/tcg-cpu.c
-> +++ b/target/riscv/tcg/tcg-cpu.c
-> @@ -1439,6 +1439,16 @@ static void riscv_init_max_cpu_extensions(Object *obj)
->           isa_ext_update_enabled(cpu, CPU_CFG_OFFSET(ext_smrnmi), false);
->           qemu_log("Smrnmi is disabled in the 'max' type CPU\n");
->       }
-> +
-> +    /*
-> +     * ext_smdbltrp requires the firmware to clear MSTATUS.MDT on startup to
-> +     * avoid generating a double trap. OpenSBI does not currently support it,
-> +     * disable it for now.
-> +     */
-> +    if (cpu->cfg.ext_smdbltrp) {
-> +        isa_ext_update_enabled(cpu, CPU_CFG_OFFSET(ext_smdbltrp), false);
-> +        qemu_log("Smdbltrp is disabled in the 'max' type CPU\n");
-> +    }
->   }
+> diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
+> index f97c48a3943f..b48c0af9d48e 100644
+> --- a/target/riscv/cpu_bits.h
+> +++ b/target/riscv/cpu_bits.h
+> @@ -9,6 +9,10 @@
+>                    (((uint64_t)(val) * ((mask) & ~((mask) << 1))) & \
+>                    (uint64_t)(mask)))
 >   
->   static bool riscv_cpu_has_max_extensions(Object *cpu_obj)
+> +#ifndef GENMASK_ULL
+> +#define GENMASK_ULL(h, l) (((~0ULL) >> (63 - (h) + (l))) << (l))
+> +#endif
+> +
+>   /* Extension context status mask */
+>   #define EXT_STATUS_MASK     0x3ULL
+>   
+> @@ -933,9 +937,8 @@ typedef enum RISCVException {
+>                                               MHPMEVENTH_BIT_VSINH | \
+>                                               MHPMEVENTH_BIT_VUINH)
+>   
+> -#define MHPMEVENT_SSCOF_MASK               _ULL(0xFFFF000000000000)
+> -#define MHPMEVENT_IDX_MASK                 0xFFFFF
+> -#define MHPMEVENT_SSCOF_RESVD              16
+> +#define MHPMEVENT_SSCOF_MASK               GENMASK_ULL(63, 56)
+> +#define MHPMEVENT_IDX_MASK                 (~MHPMEVENT_SSCOF_MASK)
+>   
+>   /* RISC-V-specific interrupt pending bits. */
+>   #define CPU_INTERRUPT_RNMI                 CPU_INTERRUPT_TGT_EXT_0
+> 
 
 
