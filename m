@@ -4,92 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7F255C02183
-	for <qemu-riscv@archiver.kernel.org>; Thu, 16 Jan 2025 13:49:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BDB07C02180
+	for <qemu-riscv@archiver.kernel.org>; Thu, 16 Jan 2025 13:49:52 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tYQFO-0001Nx-Ll; Thu, 16 Jan 2025 08:49:22 -0500
+	id 1tYQFN-0001L9-SK; Thu, 16 Jan 2025 08:49:21 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <vliaskovitis@suse.com>)
- id 1tYQ4s-0006AR-34
- for qemu-riscv@nongnu.org; Thu, 16 Jan 2025 08:38:30 -0500
-Received: from mail-wm1-x32a.google.com ([2a00:1450:4864:20::32a])
+ id 1tYLWr-0003Pb-VY
+ for qemu-riscv@nongnu.org; Thu, 16 Jan 2025 03:47:06 -0500
+Received: from mail-wm1-x344.google.com ([2a00:1450:4864:20::344])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <vliaskovitis@suse.com>)
- id 1tYQ4p-0002Pm-QN
- for qemu-riscv@nongnu.org; Thu, 16 Jan 2025 08:38:29 -0500
-Received: by mail-wm1-x32a.google.com with SMTP id
- 5b1f17b1804b1-436326dcb1cso5748395e9.0
- for <qemu-riscv@nongnu.org>; Thu, 16 Jan 2025 05:38:25 -0800 (PST)
+ id 1tYLWn-0007SK-N4
+ for qemu-riscv@nongnu.org; Thu, 16 Jan 2025 03:47:05 -0500
+Received: by mail-wm1-x344.google.com with SMTP id
+ 5b1f17b1804b1-43621d27adeso3399255e9.2
+ for <qemu-riscv@nongnu.org>; Thu, 16 Jan 2025 00:46:59 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=suse.com; s=google; t=1737034704; x=1737639504; darn=nongnu.org;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:date:from:from:to:cc:subject:date:message-id:reply-to;
- bh=Q/mzHOquOT4qeJZ2Tem/iZOQqoRtMG7+aUtQRF2uBqQ=;
- b=MHXFzC33nQK2At7hnnGW0O9vQZNjmYXqp2K4uHnVrI7dbzQvpBe1mOZPPwSuAw7h1R
- rOEVTQ32POw7D4SX2lzW+2UwAl/MJ/nbBA/LlAJfC8ki6Z5IVIOT9Z92YbFhiNg+zPzu
- I892kqQJoddMuNUrM3Hl7D4tD3EcLBZkf9+d6UIz+pH4QxcNi2o6HazFJAh+pwpItuQi
- BSlO4f9XYWo3ly+Q8IcUdlW3ZGndvYd1i5soQgg8nFYmFPX0e2iYV/ofHb7meFw0t3yz
- 0RH2JsdYlJFZS3MrUvNXzOapIC4G3sB69otGGa6Q24zqP6xNVePBz7A/l8aykVbnZHjt
- dtfg==
+ d=suse.com; s=google; t=1737017218; x=1737622018; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=ubcG+QppDIx/jZMkDYBenA+AlXgLGAnXxSTUOAzYLiY=;
+ b=LyeJW6CGG1Gmx/D4nJtLZ4NHd8VR/mP5lBcd4B66kCElnrfjIFu76UeOZ+TkJgJB3W
+ /w9jTyCsBj7MlWaIjtypgmQ9elhgJbHmSwbyolI2UVj8ShRtAhRPy4T2UVLMGSECruG0
+ lrqnsBQDdtJ93ZB+ENSfTN/xA5ExQrSZOgReYVsx2RmAYpR/aT9swsJBE+mNh5pg0Rgn
+ hQxt+Bf3/GzcNntcRP2aDdUMvBF+uAxeNhuIhY264BUS2abgpXWVuxXHIwS1dhLHgAZ6
+ KxW58NTuw0kqvETux2+xq4oSYpftpa1vQY8iiTf4Sl6abgWH9p1y8/EZsagQkTvfZOkD
+ Me+Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1737034704; x=1737639504;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:date:from:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Q/mzHOquOT4qeJZ2Tem/iZOQqoRtMG7+aUtQRF2uBqQ=;
- b=JL4dMJHwoVHZkYoIMBhPdbRwPZPFrg1XiV63d3hd1OsB/gz/O1T6BaygOkRoCq4bkh
- Bt2cN6BmCfPUTf2VoCcubsSMBDad1YSM6f6JC5rSpAL6UolzANaU6f55pZF42b0yBZyR
- 3ah1mRn634H3+VU/ouKpix3qt+bB6ABehKd7t2uC0rObCOD2qxuSwX0ws3TjuLY6sHbK
- MP8vYXIcqMjZKvgw0OHpLC140l24tgDERmjAl7/k/Jq8V3FKlRZIXfPOX9XpfZGxa/+c
- ghM/9b8OKkOwNMvfCRT+yL8pjIofI+gttD6aUJgtiUVpAT4G4leI4+9Gxp5lKHnA514W
- J86A==
+ d=1e100.net; s=20230601; t=1737017218; x=1737622018;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=ubcG+QppDIx/jZMkDYBenA+AlXgLGAnXxSTUOAzYLiY=;
+ b=jiod5/3HSdqkNNZ1W4faUByfV0++Tp90EqZza9kWuDDPxI6vDLYyxxGk4ECaMm+M2y
+ YVcbwROuiwKjCxTi4E1LLDyjLARj3VBaCBTo4AGCfPzSGWDTHcqIm8ZaToWFy+vItgEO
+ Yu0t2uYAZxF9VmtJxbL/M4lxwFspD30ZwJ1XrPtnaOSfL2qDNRWCYCrm/owo2kT/2l9s
+ wktgfRnr87MbmVj3/701gxvLvASQff15HwVzuN+tpsUNti9zn6JPdrojZbQtGvvTPocg
+ WT4mpSiFPoxTKMJTRdahZLE5MgpnlCimBcSpXepts66BVz1brr8oGlkr1CIJCAUroXdn
+ 4Z8A==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXYNak0WjRZy4H8y0LlACtDRgWIsjYYNH3gYROpSV3EdUIt19ao9IHnUiZAM5Hfvme5Aa7PBHNSTkkh@nongnu.org
-X-Gm-Message-State: AOJu0Ywi9EU67pa5OMxamrtBUL1npkpOa0E3conhvT0E/ldS4WhDfFvw
- UFRpx+s4UQ26ZdJQpfr7VsWC9cfTiQQDjiEVTcnztucCM7v9vjHZj7u34MDIzp8=
-X-Gm-Gg: ASbGncsp8p7MezJUu1lD1Asu/a8aY1AZGWLJ9YKn+Ova29QlOZyDmb+LA5OOy6mN0Ll
- IplNIZ1vvax6EkJf2+3YB9c2Hs45At5XM0Hr0542Q0vyDfcUUc9p+Ld5+4JJUwvYkUKaAMy2Nms
- G33nalY24UycsJlW5dSwFOgOhLsaVM4uajBkGyvjcwh/G0zNAhplLsjgpqFil/jUQgxO8oQbVKb
- i1K70mF3/LYqI5WfEVQtCYu0zrxduTQQK2XVug+0LiFHZYq/4Ez36E9XH33QNSEc7AaEqlfDnLH
- 0KmvRzi9b0BVId/xN5A=
-X-Google-Smtp-Source: AGHT+IHwEDK9ToO1pM6BE8j7wsb/JsjMl9BNsFAwcqLGz3bSz//nfvxTdE5iIA4YW++sRrM2Js1pkw==
-X-Received: by 2002:a05:600c:4510:b0:431:54d9:da57 with SMTP id
- 5b1f17b1804b1-436e26ffb2cmr333712005e9.30.1737034704398; 
- Thu, 16 Jan 2025 05:38:24 -0800 (PST)
-Received: from linux-bfvj (ppp-2-86-138-70.home.otenet.gr. [2.86.138.70])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-38a8e4c1bebsm20590378f8f.95.2025.01.16.05.38.22
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 16 Jan 2025 05:38:24 -0800 (PST)
+ AJvYcCV7Pu7SPgYH9l0RB4H+IvyQoZlNguZsH306RoRVbiEDjxYKX9CVwAb/v9lHJ1j4IonUTkA7hwQpj1tP@nongnu.org
+X-Gm-Message-State: AOJu0YxXu8QvIxEx9GF8QZirO9liRWBss3GAvKM0/h5d/gLnR2ugmunb
+ GkwFSwP3XjufgrUuT6i0AlWbvltDFqprpmcERsO7JOXpYOfNPKddjS9DcQoIRbs=
+X-Gm-Gg: ASbGncvoDbBqR9NeyyNxJJv9B/Nhx3csd+MNvWU8ioCpyjmheIOr/5bcRzHWyVNyEx7
+ NlDqeavyqnnuOyRHeHVRywaCRmOwre1p/NMpbS8HPySOtbKunPI54CNDfAmFTGmBLzMjTt1OD4i
+ AujMhfq59O/5/sAZzMz1FpLQk20pyNvD9uorcnKeL4LdPv0+N5PLdapENk6IQ82EUATVZ9ke/75
+ +jdIVm5y+Yemyh1DPw5MvFWBawreNjSf1mi4m81PNG/aesLBvOyWb891VVQyow+j32tSjcyIcq5
+ JDpEWRWe
+X-Google-Smtp-Source: AGHT+IENMaoAUqAfcQ0CR0pDWEGtn8YlDJyp8bt/gm8HstNDpQganqvqF/tsu+4qVqf1M1SKac/dhQ==
+X-Received: by 2002:a05:600c:4f81:b0:434:f1d5:1453 with SMTP id
+ 5b1f17b1804b1-436e2531ec8mr318843695e9.0.1737017217780; 
+ Thu, 16 Jan 2025 00:46:57 -0800 (PST)
+Received: from localhost (ppp-2-86-138-70.home.otenet.gr. [2.86.138.70])
+ by smtp.gmail.com with UTF8SMTPSA id
+ 5b1f17b1804b1-437c7499502sm51600425e9.4.2025.01.16.00.46.56
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 16 Jan 2025 00:46:57 -0800 (PST)
 From: Vasilis Liaskovitis <vliaskovitis@suse.com>
-X-Google-Original-From: Vasilis Liaskovitis <vasilis.liaskovitis@suse.com>
-Date: Thu, 16 Jan 2025 14:38:21 +0100
-To: Andrew Jones <ajones@ventanamicro.com>
-Cc: Vasilis Liaskovitis <vliaskovitis@suse.com>, qemu-devel@nongnu.org,
- qemu-riscv@nongnu.org, palmer@dabbelt.com, alistair.francis@wdc.com,
- jason.chien@sifive.com, zhiwei_liu@linux.alibaba.com,
- dbarboza@ventanamicro.com, bmeng.cn@gmail.com, liwei1518@gmail.com,
- philmd@linaro.org
-Subject: Re: [RFC PATCH] hw/riscv/virt: Add serial alias in DTB
-Message-ID: <Z4kLze26LZNqqiU3@linux-bfvj>
-References: <20250116084629.19983-1-vliaskovitis@suse.com>
- <20250116-089f795c1302e6f2b4a6b8c0@orel>
+To: qemu-devel@nongnu.org,
+	qemu-riscv@nongnu.org
+Cc: palmer@dabbelt.com, alistair.francis@wdc.com, jason.chien@sifive.com,
+ zhiwei_liu@linux.alibaba.com, dbarboza@ventanamicro.com,
+ ajones@ventanamicro.com, bmeng.cn@gmail.com, liwei1518@gmail.com,
+ philmd@linaro.org, Vasilis Liaskovitis <vliaskovitis@suse.com>
+Subject: [RFC PATCH] hw/riscv/virt: Add serial alias in DTB
+Date: Thu, 16 Jan 2025 09:46:29 +0100
+Message-ID: <20250116084629.19983-1-vliaskovitis@suse.com>
+X-Mailer: git-send-email 2.46.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20250116-089f795c1302e6f2b4a6b8c0@orel>
-Received-SPF: pass client-ip=2a00:1450:4864:20::32a;
- envelope-from=vliaskovitis@suse.com; helo=mail-wm1-x32a.google.com
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::344;
+ envelope-from=vliaskovitis@suse.com; helo=mail-wm1-x344.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-Mailman-Approved-At: Thu, 16 Jan 2025 08:49:21 -0500
 X-BeenThere: qemu-riscv@nongnu.org
@@ -106,18 +102,33 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Thu, Jan 16, 2025 at 10:23:56AM +0100, Andrew Jones wrote:
-> 
-> s/Fixes/Resolves/ (see docs/devel/submitting-a-patch.rst)
-> 
-[..]
-> >      qemu_fdt_setprop_string(ms->fdt, "/chosen", "stdout-path", name);
-> > +    qemu_fdt_add_subnode(ms->fdt, "/aliases");
-> 
-> create_fdt_uart() is called at machine-done time, so we should create the
-> /aliases node in create_fdt() in case we ever have other uses for it.
+This patch adds an "aliases" node with a "serial0" entry for the
+single UART in the riscv64 virt machine.
 
-thanks for the review, I am sending a v2 with the changes.
+This was requested in Gitlab #2774. However, since the machine only
+has one UART at the moment, it's not clear that this addition makes
+sense.
 
-- Vasilis
+Fixes: https://gitlab.com/qemu-project/qemu/-/issues/2774
+Signed-off-by: Vasilis Liaskovitis <vliaskovitis@suse.com>
+---
+ hw/riscv/virt.c | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+index 2bc5a9dd98..67b80e9430 100644
+--- a/hw/riscv/virt.c
++++ b/hw/riscv/virt.c
+@@ -971,6 +971,8 @@ static void create_fdt_uart(RISCVVirtState *s, const MemMapEntry *memmap,
+     }
+ 
+     qemu_fdt_setprop_string(ms->fdt, "/chosen", "stdout-path", name);
++    qemu_fdt_add_subnode(ms->fdt, "/aliases");
++    qemu_fdt_setprop_string(ms->fdt, "/aliases", "serial0", name);
+ }
+ 
+ static void create_fdt_rtc(RISCVVirtState *s, const MemMapEntry *memmap,
+-- 
+2.46.0
+
 
