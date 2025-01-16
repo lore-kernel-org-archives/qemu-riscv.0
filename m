@@ -4,84 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 64335C02180
-	for <qemu-riscv@archiver.kernel.org>; Thu, 16 Jan 2025 12:31:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BF925C02180
+	for <qemu-riscv@archiver.kernel.org>; Thu, 16 Jan 2025 12:32:58 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tYP1k-0003w1-A9; Thu, 16 Jan 2025 07:31:12 -0500
+	id 1tYP3L-0004pk-Nx; Thu, 16 Jan 2025 07:32:51 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1tYP1i-0003vq-Tf
- for qemu-riscv@nongnu.org; Thu, 16 Jan 2025 07:31:10 -0500
-Received: from mail-oo1-xc42.google.com ([2607:f8b0:4864:20::c42])
+ id 1tYP39-0004kg-NK
+ for qemu-riscv@nongnu.org; Thu, 16 Jan 2025 07:32:41 -0500
+Received: from mail-oo1-xc34.google.com ([2607:f8b0:4864:20::c34])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1tYP1f-0001CI-1D
- for qemu-riscv@nongnu.org; Thu, 16 Jan 2025 07:31:10 -0500
-Received: by mail-oo1-xc42.google.com with SMTP id
- 006d021491bc7-5f8befb03d0so401396eaf.1
- for <qemu-riscv@nongnu.org>; Thu, 16 Jan 2025 04:30:59 -0800 (PST)
+ id 1tYP36-0001cJ-BM
+ for qemu-riscv@nongnu.org; Thu, 16 Jan 2025 07:32:38 -0500
+Received: by mail-oo1-xc34.google.com with SMTP id
+ 006d021491bc7-5f340d6db09so506529eaf.1
+ for <qemu-riscv@nongnu.org>; Thu, 16 Jan 2025 04:32:35 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1737030659; x=1737635459; darn=nongnu.org;
+ d=ventanamicro.com; s=google; t=1737030755; x=1737635555; darn=nongnu.org;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=SPCmTHJ30+Z0P1UK1SYBdnSWIoFkUkGXia6Kn2gnWy0=;
- b=ID4/BN2gayaVQf/I3VxCaXuTaTpWUws0HcRolO4D3wwqG6hZKowkQeYRNKIs9LWKW/
- Mpe5YdmetwyOHBsLRDlgeSjLVE4NSKZybcjPkbbf05fOi9S0xtxkuj9L0HOEwZJYK6ch
- CddskU+HSlAkfzrXppMxAGh4dkffUW0TE1DzQlsn/WgiS+4shY4qN7YDS1SpxXH2xyBG
- /Oz7HO+NLuwXqDxdmrw7vlRvrdMEwrgSQIG6/f4KOS9wPs8XfwVMdQlSx3kZnmXkIQyZ
- 1adyXAB+C060g5GWmSO9E9OG9XCwe4qyUjLk4GUIjRKqbli8OlFYkFVJCo9CjuR7b1/D
- EnXA==
+ bh=UgwvLOI/eN5mXU54qR9byI/WCCc4RKgaZGWeCSOI8Do=;
+ b=Shn6jfympqCip7vmz6gKTo+MGrsS1lC/gtJp9vS7qyKEbKgAqBBmWYTyk0XoLhk19F
+ oDf8AgvE2J53I05YO8CGQA16158WZ2T2RMmsSEtmuUErNpwCfK1vwYf9+Kgp8r+v52WR
+ DqyNHtsDSsOrwdkMAXzFtjSXo1tHft/HWS1m/3cCZ8KTA+AtUxr+jhaAxI3KG7wAGZeB
+ yjrDidUuY8FDCevTJeCqNassPcFvyQ8JbDhpcvSFsSDOL5N2/UbjYKI7iIREMmYilxsv
+ 7pYRnx5Wi3e9kphapkL65RGbWemG/+Ogj9XtOSSfMnxExlja1bn0OSbjn4Fsxp41+CJI
+ fsog==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1737030659; x=1737635459;
+ d=1e100.net; s=20230601; t=1737030755; x=1737635555;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=SPCmTHJ30+Z0P1UK1SYBdnSWIoFkUkGXia6Kn2gnWy0=;
- b=MbnVuIdHPwzkRvt71GUCzsCdCuKPnErSKZY7nNRu0SqjBmuFDqnq2lSi8+DIezz+B5
- u6/hiTM4vnSyK8OhPiNH2Buxe1X7ZZfZMvoRLn9GaNuDTCzOniVtM/3OcGC+WAHfcuKO
- aB3ZVx79zIlFTzoO8omqTPePni4bKwxWF81QR8Zi0rLufoPkJNvEtsRXVDAMq9z+E1hu
- pJTbP+zsVJYYz7I2FWZhQ7MnlPIXmQFnHNnzU9M4thdzCX9EgHMbWIrFZHxo8C0++uVJ
- UjaYzSWUyO9UShHi7/4Obw0U9n/FnJ74jUTJef/wN5WW7vo5iV/xPjYCq0mT48yeHFVG
- 9ouA==
+ bh=UgwvLOI/eN5mXU54qR9byI/WCCc4RKgaZGWeCSOI8Do=;
+ b=ARoIxfOzsqqecCR0shjUJhk9yaUBO5j8BjPw7PeCJIolBIuBfpOupWQ1Y/Fqft5Fk+
+ tgLxfyQ0BBXucGpgcAvw+3wajk+aS6PkqrCYDRMvEnVc9F6L5x1/gSSULTogErTa83hv
+ OLX6MT3DQkLDdHDQegTNqcwcP+5bCvLnGXCM/3FmWZNe44LKgrh7WXeccgsQtayuWEvi
+ y2oeLQo2B9SL8q/vsyNnq5BIhTqJOIpBnAcWgpCoUfznqVH/5qL+CAG7ncfk/EVow/sP
+ 5zJq3GdvtMBlHhU6/kx+Hua6Nw+8QGTqjiiquAwdyvAqeMqy/WvNjniRFRl+THj+7GKN
+ mGYw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCV0Gynj6AOBEUIcTspBijkQ/udMKpjRr4SV4CjUKGH6skFdddn98JNcM/fK4pIyfb9x1qx6vhx46coC@nongnu.org
-X-Gm-Message-State: AOJu0YwkiXTJvQv+dFdd5v3y36B++3/1AiuG2NCs299kUYPbeDIky7CO
- MCDVid+LCLsoSlPZ/6YZwoPckM9rtvhFl2MS6sZhvW47POspy94S5LCceVlL5mw=
-X-Gm-Gg: ASbGncuZRrEVmA0AVEDexR6hhAyvVdgl94lHo8BD2nIPf+9+GwfY3yt2IbBBCrhd7vu
- Z/AjrL72FSHIVH9ypWVMcOzpgNj1XbsnF1P/+zOa4NHjbTqidJ2MPUItXzJukDMJjWzZHRb6/1b
- aAq5qXzRAMOFBZe9q+IgkpQmdXRl0MPlbc469gVlqosfVUO6mwUfo0Kn0NwC1LiLCLNh9bZJqTQ
- dsyAquw9sb8JKonK/GHy+Si5Lg6TjLDcus7GNg2XgZmOUaQt8x5JmTxzyFneClFuee6Pqc=
-X-Google-Smtp-Source: AGHT+IE7wl4YuZItxTjDj/1ruvAQAQzbgS4LvbC1/QAlid7NU8gis0U7HISlsnpUvJEz3IzQziJ/zg==
-X-Received: by 2002:a05:6820:4d02:b0:5f8:91b0:6c0f with SMTP id
- 006d021491bc7-5f891b06d2amr14225383eaf.6.1737030658914; 
- Thu, 16 Jan 2025 04:30:58 -0800 (PST)
+ AJvYcCWjm+mwZu8RohbaSxlomls+z5Vg1f9em7YDswS0MJo35govsTWs5nhb1/Ff+/N3hit688N3+zcM8L1v@nongnu.org
+X-Gm-Message-State: AOJu0YxUJg42wPm1EbkfL1mHtY/eu7ZNvuUoObQEOf240UhrvfOpP07u
+ m16brMT+aPjFzW9PZv03Bp9y89Hh39WqByHNF2mOI8VxC3ola7S9N0RYguqDjZjQfi4mS6enlAD
+ pZk4=
+X-Gm-Gg: ASbGncsGI0Tf76VO4JLu2KXT33BbWQtOvLRuKP2zO/hLDDZkx+CS9WWojkOkYLHgR4D
+ mqRtmC5fSVGARJncm8MJuiVECTV1BkgJ9B7ku297tJ0D6wahYefpbQWEP1GxaD1I7KPNoYtb7rh
+ yU3tqUqJslOMHdjEBXyLpstQFzl5HceRnYhMmdkdwJL8GKsrNx2Rtx/3O75lDAQNNF1cm+nu/Q7
+ OqB3U/J8G6yXlqAalZjVjS0NG9GPh5bd/qbWMslWNd06vB0HK3gjatRWZlswxibxhHdN1c=
+X-Google-Smtp-Source: AGHT+IGLpkxdCVeI316958ZXs8uYfEF23wFGxIFZcVWyxBb2gjmrJCJHXcLlMVdZyYt/Yxt2d9NDxg==
+X-Received: by 2002:a05:6820:610:b0:5f9:4f8c:868e with SMTP id
+ 006d021491bc7-5f94f8c8838mr4042420eaf.2.1737030755107; 
+ Thu, 16 Jan 2025 04:32:35 -0800 (PST)
 Received: from [192.168.68.110] ([191.202.238.10])
  by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-5f882641dc9sm6677161eaf.13.2025.01.16.04.30.54
+ 006d021491bc7-5f88266c381sm6120434eaf.22.2025.01.16.04.32.31
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 16 Jan 2025 04:30:57 -0800 (PST)
-Message-ID: <4fc33d8d-e443-43c3-9809-7f9c025f2883@ventanamicro.com>
-Date: Thu, 16 Jan 2025 09:30:53 -0300
+ Thu, 16 Jan 2025 04:32:33 -0800 (PST)
+Message-ID: <66905257-fc4f-4b64-b532-13b00a0c00d4@ventanamicro.com>
+Date: Thu, 16 Jan 2025 09:32:30 -0300
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/2] target/riscv: Fix the hpmevent mask
+Subject: Re: [PATCH 2/2] target/riscv: Mask out upper sscofpmf bits during
+ validation
 To: Atish Patra <atishp@rivosinc.com>, qemu-riscv@nongnu.org,
  qemu-devel@nongnu.org
 Cc: liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com,
  bin.meng@windriver.com, alistair.francis@wdc.com
 References: <20250115-pmu_minor_fixes-v1-0-c32388defb02@rivosinc.com>
- <20250115-pmu_minor_fixes-v1-1-c32388defb02@rivosinc.com>
+ <20250115-pmu_minor_fixes-v1-2-c32388defb02@rivosinc.com>
 Content-Language: en-US
 From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <20250115-pmu_minor_fixes-v1-1-c32388defb02@rivosinc.com>
+In-Reply-To: <20250115-pmu_minor_fixes-v1-2-c32388defb02@rivosinc.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::c42;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-oo1-xc42.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::c34;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-oo1-xc34.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -107,47 +109,40 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 
 On 1/15/25 9:49 PM, Atish Patra wrote:
-> As per the latest privilege specification v1.13[1], the sscofpmf
-> only reserves first 8 bits of hpmeventX. Update the corresponding
-> masks accordingly.
+> As per the ISA definition, the upper 8 bits in hpmevent are defined
+> by Sscofpmf for privilege mode filtering and overflow bits while the
+> lower 56 bits are desginated for platform specific hpmevent values.
+
+s/desginated/designated
+
+> For the reset case, mhpmevent value should have zero in lower 56 bits.
+> Software may set the OF bit to indicate disable interrupt.
 > 
-> [1]https://github.com/riscv/riscv-isa-manual/issues/1578
+> Ensure that correct value is checked after masking while clearing the
+> event encodings.
 > 
 > Signed-off-by: Atish Patra <atishp@rivosinc.com>
 > ---
 
+
 Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 
->   target/riscv/cpu_bits.h | 9 ++++++---
->   1 file changed, 6 insertions(+), 3 deletions(-)
+>   target/riscv/pmu.c | 2 +-
+>   1 file changed, 1 insertion(+), 1 deletion(-)
 > 
-> diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
-> index f97c48a3943f..b48c0af9d48e 100644
-> --- a/target/riscv/cpu_bits.h
-> +++ b/target/riscv/cpu_bits.h
-> @@ -9,6 +9,10 @@
->                    (((uint64_t)(val) * ((mask) & ~((mask) << 1))) & \
->                    (uint64_t)(mask)))
->   
-> +#ifndef GENMASK_ULL
-> +#define GENMASK_ULL(h, l) (((~0ULL) >> (63 - (h) + (l))) << (l))
-> +#endif
-> +
->   /* Extension context status mask */
->   #define EXT_STATUS_MASK     0x3ULL
->   
-> @@ -933,9 +937,8 @@ typedef enum RISCVException {
->                                               MHPMEVENTH_BIT_VSINH | \
->                                               MHPMEVENTH_BIT_VUINH)
->   
-> -#define MHPMEVENT_SSCOF_MASK               _ULL(0xFFFF000000000000)
-> -#define MHPMEVENT_IDX_MASK                 0xFFFFF
-> -#define MHPMEVENT_SSCOF_RESVD              16
-> +#define MHPMEVENT_SSCOF_MASK               GENMASK_ULL(63, 56)
-> +#define MHPMEVENT_IDX_MASK                 (~MHPMEVENT_SSCOF_MASK)
->   
->   /* RISC-V-specific interrupt pending bits. */
->   #define CPU_INTERRUPT_RNMI                 CPU_INTERRUPT_TGT_EXT_0
+> diff --git a/target/riscv/pmu.c b/target/riscv/pmu.c
+> index cf713663ee56..0408f96e6af8 100644
+> --- a/target/riscv/pmu.c
+> +++ b/target/riscv/pmu.c
+> @@ -390,7 +390,7 @@ int riscv_pmu_update_event_map(CPURISCVState *env, uint64_t value,
+>        * Expected mhpmevent value is zero for reset case. Remove the current
+>        * mapping.
+>        */
+> -    if (!value) {
+> +    if (!(value & MHPMEVENT_IDX_MASK)) {
+>           g_hash_table_foreach_remove(cpu->pmu_event_ctr_map,
+>                                       pmu_remove_event_map,
+>                                       GUINT_TO_POINTER(ctr_idx));
 > 
 
 
