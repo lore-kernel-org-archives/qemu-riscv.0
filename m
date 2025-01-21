@@ -4,94 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1C52EC0218B
-	for <qemu-riscv@archiver.kernel.org>; Tue, 21 Jan 2025 18:47:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B0595C02182
+	for <qemu-riscv@archiver.kernel.org>; Tue, 21 Jan 2025 18:49:16 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1taJHk-0002gg-Lm; Tue, 21 Jan 2025 13:47:36 -0500
+	id 1taJJH-0004iv-Ez; Tue, 21 Jan 2025 13:49:12 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1taJHS-0002D0-Fj
- for qemu-riscv@nongnu.org; Tue, 21 Jan 2025 13:47:21 -0500
-Received: from mail-pj1-x1031.google.com ([2607:f8b0:4864:20::1031])
+ id 1taJJA-0004IS-4a
+ for qemu-riscv@nongnu.org; Tue, 21 Jan 2025 13:49:04 -0500
+Received: from mail-pl1-x629.google.com ([2607:f8b0:4864:20::629])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1taJHP-0004vU-F1
- for qemu-riscv@nongnu.org; Tue, 21 Jan 2025 13:47:18 -0500
-Received: by mail-pj1-x1031.google.com with SMTP id
- 98e67ed59e1d1-2f4448bf96fso7829545a91.0
- for <qemu-riscv@nongnu.org>; Tue, 21 Jan 2025 10:47:14 -0800 (PST)
+ id 1taJJ8-0005LX-1x
+ for qemu-riscv@nongnu.org; Tue, 21 Jan 2025 13:49:03 -0500
+Received: by mail-pl1-x629.google.com with SMTP id
+ d9443c01a7336-21649a7bcdcso102554985ad.1
+ for <qemu-riscv@nongnu.org>; Tue, 21 Jan 2025 10:49:01 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1737485233; x=1738090033; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=UC9vhkIhQz3zAYoW6dUSHkOnB7BHD1z7RRpICZPKN5Q=;
- b=ZBQ+tRHgX9EHJS98VO/kxnBtrihsRPbR8bSHiK+zIVLJCxgcUwy+PKlQXTFbTKPbzG
- JafxLBpip92hgRtPPTD7Vw+ohEoSJX66iCVsvExHrB2ERrvezqT7xT6lKpn7TmBBHdmT
- loX7SBi1MVzAlAOBBdOGcUVB2Doi9prKLwYAt0jKy644jUyMJXkZ6msN3Hmhmjh3tPyV
- RRuHujhxOZT94BB6tLcNSjxtI424Qma/5fTgDecwEqRaIIynjKpKfGyaIpymGvRIC0wH
- FWrirr1L4j5Mjy7UgdOpYGq9Eq+j2x7ysXsnfFFqgPCAxXXLLv1vmQR0AauAwcWBGkzV
- 1h0A==
+ d=ventanamicro.com; s=google; t=1737485340; x=1738090140; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=z7p6XN2M1MHDl+uW3Q8gV1olbYzbSDmoR29h4KhBMQc=;
+ b=Ik+7h1TjTvfHqJrzrQmdPA/q7PFJzbPaw7Eql9kxBaYXRZC21JW9QDSfHJblvosq2X
+ z+kJxtNhqIR2jNuisuWhC/xdLWy3jh277Rh6JkwFA8ATDbqWPYeTuJaU+aFvrhZnDh+0
+ CJoQREkdsGPrnWOBGtot9BgIn4AfxldwRRiZ9WF5eTxtEGqjot/qkAwKm8FzQLuZd5Lc
+ jsScc+7WKMzRLSRG/Fmdy9EdxlHWeteZfpqSF+mIaGpxtyCyk3AqAT+/5osR/po09qRs
+ O16L9Jw5aDkxnbUBR4gzcf1f8mmnNc1if/Ev7Y44e2nWubhLUDO6S9nlzEiXatTwrTfj
+ PXkw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1737485233; x=1738090033;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=UC9vhkIhQz3zAYoW6dUSHkOnB7BHD1z7RRpICZPKN5Q=;
- b=aF4BMgtU+A/BJFw7YCgWaHr4ixtBz1UTb6tiow7jawJvV0K+rlfuopEWnhA28Fgcgn
- SKk+MpFb+fnPdDK5ZXfyQdvH8GTLRU/UW7R155esH23pVuuC5XrjN7t9Q9zPXMLakmI3
- HlbOPvc8RMKcumhEQ+3JTPvUwWJ+bVcluKVjw5+m6Wwax3fwGiHpxERPZ5zmT4r/+Bwj
- nq2TW3VdtvWRVG1D70B4z9vm1zdx6c8h7wqzjHbjGBo3SHrfqG265GAM0oL/jcN6XM/U
- aBKozupa3LYoJeqHVpxjxU/XqIKIP4oKABZ/kXa7Tt0WaweemQ7iKTwFIh2PtO0jDx9b
- 9vMQ==
-X-Gm-Message-State: AOJu0YxrmPmYdKspRj9elJIK3qMHUzOtEduaqaY/KfRQO7GWNg6784zk
- ArIEndHBzAwYPqd2h+mcwuCeia4wyv//P4ZWyPii252Sslojx7CZ7y/9XIE9aa5BjEg+mW6LQBs
- P
-X-Gm-Gg: ASbGncstIl3k59Sy1pmdzcdIdBaOnfFFX7eQCDS/+hQOwhh61ptUOXnlNvPW515GjGq
- zSx8xnkGDifCn7IT9HrUaQ5AJPAAtQlQSesbrTdVVtKcIP3BdzgMbH8DklsiZH/ojkGkw/tFIBj
- 9SaAQPHS3GbFTi/3r9plAWlKxTkNxd4KNwS1RTlCOtmdbWFX9dkbS+/KfohNBZh1QTONCpj1lvF
- Puh05fx4+aXW0T3IAftEICN2xN7hbt/2bA3/2F5iUfmHVqAp8/fwnPRiWA9bwYOLJtw45qvqPQN
- UhZma/P+
-X-Google-Smtp-Source: AGHT+IFU5R03H49ksRLSlG2egRPJj5Jxf+QnMfeR40ZB3v+o2TIuzMpjMR5LoosRJhlIZ2a4+B7COQ==
-X-Received: by 2002:a17:90a:d2d0:b0:2ee:b6c5:1de7 with SMTP id
- 98e67ed59e1d1-2f782c4c297mr27844104a91.2.1737485232958; 
- Tue, 21 Jan 2025 10:47:12 -0800 (PST)
-Received: from [192.168.68.110] ([191.202.238.10])
- by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-2f7c30d60acsm4760983a91.47.2025.01.21.10.47.10
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 21 Jan 2025 10:47:12 -0800 (PST)
-Message-ID: <a6f3ed4a-94be-484e-a9ac-9f3b1eb9cf1d@ventanamicro.com>
-Date: Tue, 21 Jan 2025 15:47:08 -0300
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 1/2] target/riscv/debug.c: use wp size = 4 for 32-bit
- CPUs
-To: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- qemu-devel@nongnu.org
+ d=1e100.net; s=20230601; t=1737485340; x=1738090140;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=z7p6XN2M1MHDl+uW3Q8gV1olbYzbSDmoR29h4KhBMQc=;
+ b=iZ5USbzY0ymNwpaK3/bX4RHe8Bjk1I7l5M8omBL5dABNMS6SRxw46pNuLYQihxzFhc
+ bsH3UGQrqnMiE/39qq7O4OtNUUpNdf73BS1nmTYrYo2aJrKL88zmjxtPQxbbHHbHkHRB
+ NGtvlkqtVv5CfPslHDgduQqCz3daih2BU6r4cXB6ZfbtcWi73IyfWiNuX9aVtqNnh7/n
+ +oMHk6uP4t3X1OJ7XuZ9twdufaDGpk1yafwXD8s2wji9MYRxtQFjjPyJpFiaZEfWoXWK
+ 5xW+p1jyDVU6Rtwj10s/SEA1E8Shqq7f4toHr8o0kTwzHr6/OaWb5gD/RGXRZIK/82JL
+ pfyQ==
+X-Gm-Message-State: AOJu0YwcoRKbiSPrbSvc/WtySTDHLHVxbxBH4BcOHaVgmC+BNti9aQqc
+ X6bbxOrQHMiFs9oA0tzcq0Clu8mT1tFKCUmamiUmWJ/YLgplwPi/01KFbRmVZxg=
+X-Gm-Gg: ASbGncvvUBAMvbwa1kCcrJBJleRpDWd/a4k4OjlN9WgaSnpqHm5PkUqMQ2LoiH/029U
+ 2lyBz4DIocee25G0IyXSnyf4lMO0loIQltsFOULcasMO6hZRcQnspVNyO8iImvBjMjRlxmMov7w
+ Q8Vj4gBaP0o30E6GOLRN54aVzqxxpb7j97MIdWXE23sFy7fyYC63KNVjmM8R146x6aKA6sWIZqo
+ Rl7vdXsL93toNkUFADopPBYgFO1rRN2bdXj/jNFDKvekpsQ7ClUptKh2zbjNkusmRgtjwg5
+X-Google-Smtp-Source: AGHT+IGjZINNCRqYFGKCPRTPV2ftktRkwXOddQC1o0pW7jBlTkWZL76wtIGdjPotYqX8nqo/7itOSg==
+X-Received: by 2002:a17:902:da87:b0:216:501e:e314 with SMTP id
+ d9443c01a7336-21c3540d181mr266638255ad.20.1737485339030; 
+ Tue, 21 Jan 2025 10:48:59 -0800 (PST)
+Received: from grind.. ([191.202.238.10]) by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-21c2ceba56asm81121865ad.98.2025.01.21.10.48.56
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 21 Jan 2025 10:48:58 -0800 (PST)
+From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
  liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
- richard.henderson@linaro.org
-References: <20250120204910.1317013-1-dbarboza@ventanamicro.com>
- <20250120204910.1317013-2-dbarboza@ventanamicro.com>
- <9b2114bb-ed61-42bc-a5fe-f28a6a5319dc@linaro.org>
-Content-Language: en-US
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <9b2114bb-ed61-42bc-a5fe-f28a6a5319dc@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+ peter.maydell@linaro.org,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Subject: [PATCH 2/5] target/riscv/csr.c: fix 'ret' deadcode in rmw_xireg()
+Date: Tue, 21 Jan 2025 15:48:44 -0300
+Message-ID: <20250121184847.2109128-3-dbarboza@ventanamicro.com>
+X-Mailer: git-send-email 2.47.1
+In-Reply-To: <20250121184847.2109128-1-dbarboza@ventanamicro.com>
+References: <20250121184847.2109128-1-dbarboza@ventanamicro.com>
+MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1031;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pj1-x1031.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::629;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pl1-x629.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -107,67 +99,75 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
+Coverity found a second DEADCODE issue in rmw_xireg() claiming that we can't
+reach 'RISCV_EXCP_NONE' at the 'done' label:
 
+ > 2706     done:
+ > 2707         if (ret) {
+ > 2708             return (env->virt_enabled && virt) ?
+ > 2709                    RISCV_EXCP_VIRT_INSTRUCTION_FAULT : RISCV_EXCP_ILLEGAL_INST;
+ > 2710         }
+ >>>>      CID 1590356:  Control flow issues  (DEADCODE)
+ >>>>      Execution cannot reach this statement: "return RISCV_EXCP_NONE;".
+ > 2711         return RISCV_EXCP_NONE;
 
-On 1/21/25 2:40 PM, Philippe Mathieu-Daudé wrote:
-> On 20/1/25 21:49, Daniel Henrique Barboza wrote:
->> The mcontrol select bit (19) is always zero, meaning our triggers will
->> always match virtual addresses. In this condition, if the user does not
->> specify a size for the trigger, the access size defaults to XLEN.
->>
->> At this moment we're using def_size = 8 regardless of CPU XLEN. Use
->> def_size = 4 in case we're running 32 bits.
->>
->> Fixes: 95799e36c1 ("target/riscv: Add initial support for the Sdtrig extension")
->> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
->> ---
->>   target/riscv/debug.c | 6 ++++--
->>   1 file changed, 4 insertions(+), 2 deletions(-)
->>
->> diff --git a/target/riscv/debug.c b/target/riscv/debug.c
->> index f6241a80be..9db4048523 100644
->> --- a/target/riscv/debug.c
->> +++ b/target/riscv/debug.c
->> @@ -478,7 +478,7 @@ static void type2_breakpoint_insert(CPURISCVState *env, target_ulong index)
->>       bool enabled = type2_breakpoint_enabled(ctrl);
->>       CPUState *cs = env_cpu(env);
->>       int flags = BP_CPU | BP_STOP_BEFORE_ACCESS;
->> -    uint32_t size;
->> +    uint32_t size, def_size;
->>       if (!enabled) {
->>           return;
->> @@ -501,7 +501,9 @@ static void type2_breakpoint_insert(CPURISCVState *env, target_ulong index)
->>               cpu_watchpoint_insert(cs, addr, size, flags,
->>                                     &env->cpu_watchpoint[index]);
->>           } else {
->> -            cpu_watchpoint_insert(cs, addr, 8, flags,
->> +            def_size = riscv_cpu_mxl(env) == MXL_RV64 ? 8 : 4;
-> 
-> riscv_cpu_mxl() seems bugprone w.r.t. MXL_RV128, better could be
-> some riscv_cpu_mxl_wordsize() helper like riscv_cpu_mxl_bits()
-> (or better named).
+Our label is now reduced after fixing another deadcode in the previous
+patch but the problem reported here still remains:
 
-This existing pattern is benign since we don't have a functional RV128 and
-is safe seems to interpret RV64 == RV128.
+ done:
+    if (ret) {
+        return RISCV_EXCP_ILLEGAL_INST;
+    }
+    return RISCV_EXCP_NONE;
 
-However, if/when RV128 becomes a thing, we'll spare a moderate amount of agony
-if we choose to have a little suffering right now. I'll take a note about it
-and perhaps a refactor might be in order.
+This happens because 'ret' changes only once at the start of the
+function:
 
+    ret = smstateen_acc_ok(env, 0, SMSTATEEN0_SVSLCT);
+    if (ret != RISCV_EXCP_NONE) {
+        return ret;
+    }
 
-Thanks,
+So it's a guarantee that ret will be RISCV_EXCP_NONE (-1) if we ever
+reach the label, i.e. "if (ret)" will always be true, and  the label can
+be even further reduced to:
 
-Daniel
+done:
+    return RISCV_EXCP_ILLEGAL_INST;
 
-> 
-> Anyway this pattern is already all over, so meanwhile:
-> Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
-> 
->> +
->> +            cpu_watchpoint_insert(cs, addr, def_size, flags,
->>                                     &env->cpu_watchpoint[index]);
->>           }
->>       }
-> 
+To make a better use of the label, remove the 'else' from the
+xiselect_aia_range() chain and let it fall-through to the 'done' label
+since they are now both returning RISCV_EXCP_ILLEGAL_INST.
+
+Resolves: Coverity CID 1590356
+Fixes: dc0280723d ("target/riscv: Decouple AIA processing from xiselect and xireg")
+Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+---
+ target/riscv/csr.c | 7 +------
+ 1 file changed, 1 insertion(+), 6 deletions(-)
+
+diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+index ab209d0cda..0e83c3b045 100644
+--- a/target/riscv/csr.c
++++ b/target/riscv/csr.c
+@@ -2697,15 +2697,10 @@ static RISCVException rmw_xireg(CPURISCVState *env, int csrno,
+     } else if (riscv_cpu_cfg(env)->ext_smcsrind ||
+                riscv_cpu_cfg(env)->ext_sscsrind) {
+         return rmw_xireg_csrind(env, csrno, isel, val, new_val, wr_mask);
+-    } else {
+-        return RISCV_EXCP_ILLEGAL_INST;
+     }
+ 
+ done:
+-    if (ret) {
+-        return RISCV_EXCP_ILLEGAL_INST;
+-    }
+-    return RISCV_EXCP_NONE;
++    return RISCV_EXCP_ILLEGAL_INST;
+ }
+ 
+ static RISCVException rmw_xtopei(CPURISCVState *env, int csrno,
+-- 
+2.47.1
 
 
