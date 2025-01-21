@@ -4,83 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D8B8FC0218D
-	for <qemu-riscv@archiver.kernel.org>; Tue, 21 Jan 2025 14:32:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7E5C5C02182
+	for <qemu-riscv@archiver.kernel.org>; Tue, 21 Jan 2025 14:33:37 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1taFB8-0000iU-Tn; Tue, 21 Jan 2025 09:24:30 -0500
+	id 1taFDt-0004Me-TC; Tue, 21 Jan 2025 09:27:22 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1taFB7-0000hD-Hj
- for qemu-riscv@nongnu.org; Tue, 21 Jan 2025 09:24:29 -0500
-Received: from mail-wr1-x434.google.com ([2a00:1450:4864:20::434])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1taFBq-00021B-4B
+ for qemu-riscv@nongnu.org; Tue, 21 Jan 2025 09:25:17 -0500
+Received: from mail-wr1-x429.google.com ([2a00:1450:4864:20::429])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1taFB6-00038U-16
- for qemu-riscv@nongnu.org; Tue, 21 Jan 2025 09:24:29 -0500
-Received: by mail-wr1-x434.google.com with SMTP id
- ffacd0b85a97d-385eed29d17so3069343f8f.0
- for <qemu-riscv@nongnu.org>; Tue, 21 Jan 2025 06:24:27 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1taFBo-0003VE-8z
+ for qemu-riscv@nongnu.org; Tue, 21 Jan 2025 09:25:13 -0500
+Received: by mail-wr1-x429.google.com with SMTP id
+ ffacd0b85a97d-385ef8b64b3so5012012f8f.0
+ for <qemu-riscv@nongnu.org>; Tue, 21 Jan 2025 06:25:10 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1737469466; x=1738074266; darn=nongnu.org;
+ d=linaro.org; s=google; t=1737469510; x=1738074310; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=JiIs8YYj06822iMH2Rgg/pc1ZfogTC4R+p3YX6Af3lQ=;
- b=jTB3p5lDYf3+8kBtX5RyuD6LvUrcnogsIHONfQbMgRKJCV8vIcj2LxieF5U58M5dkQ
- fKLJ4CAztL5Tff2TetyutnsemG4C1vj4ovtpzoOJSbuV4rtpGWQsL6f9itG0ZVH12Veu
- ek5na5sfAyFudb+CyDRSK3imkSKN590idOVsiQOJ/79nNr1XtzmRZCR/DXgXphxc3o5M
- pkizCO9xoirdwf9eIvi1HY5bsLqhslx7BnKiFwUd7DOXdIn3X51WcjTtFiFQwMYnz1EX
- fK9bo/BeY3kRn955PM/EHYcUrM1eELUyBt5ICG7pDsNHI019zCme//J7n0mUlHq2Kr/W
- vJXA==
+ bh=GkHLGnbNtUXznuzSD8HY730UHLCtgMSWFluNpwmKQeM=;
+ b=Y55VdusCRh6NRwkgQrV9LWzBaxaMP9zNebptp8syRImpceW2JUrAbDmlBfxFdrx7In
+ gixa++qGF/ruAYBXJvfXwMBG1D+FtP0Un8Lp9/RfyxapDotSi5Fu3O+E9ieLqfEeFWuf
+ 4p9gIE45BH8wjKtJT7HnKoeVX9ZACOAwkEourgakv3i+1295KY7BWtK2JyNr5yFnR2CI
+ 9FBJtN/OeYOZL/FDTDKLa0Zcrfsl5oOoel0q42lRsYk19fuCj8DHbYnz7v8dVsfsJOHI
+ 5IXO4z8bcUEF8R7SVUJOGNlB42r/zgkXDgYYB/61ADFZ8cWFTphQHmZyHvlVgyOZNztf
+ Ii3w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1737469466; x=1738074266;
+ d=1e100.net; s=20230601; t=1737469510; x=1738074310;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=JiIs8YYj06822iMH2Rgg/pc1ZfogTC4R+p3YX6Af3lQ=;
- b=Yz6tPNhaSUl8+5el/RSqCL20d18fs020la3539IFjeA8SatAQLDn8JcQfyUGlVnJYZ
- dnuUUHfVAi4sn8gldRoKpJXaq3VRwjPJ2bbT9wyOlKBZJj07/1ZEIsrE6BheVpzCYbFZ
- XshgHKZPsLyD2YuFtap2+6oxmiiZ2gVVRkZ2dTzfoL9rd91ujHN0wAmHH02rAM5WYdrg
- ejg1bi7PejXCNI/8ozz91fdSglwwqTt5bII6nu2GQrLDaz/TK0isF5uZirnmF17ec1gE
- omkdDicA2BV4yweOxdStCB1GKF2REbXHCA/5EmjzkApeXYE4xkRPYCq84xcbbq7bf8rB
- A0Zw==
+ bh=GkHLGnbNtUXznuzSD8HY730UHLCtgMSWFluNpwmKQeM=;
+ b=ox8agY96ouY0a3k4s4pEJUXcozTUmQUpStAF8r4N6XRQgaeWNxE3DJnjlHTmvIBCrh
+ wuzI9x6Yd5DC5wDoo0ctnJaiDBxRqZpJnUtv3u9X07rbW4Aeu5XwdqcIPKWL9lSo9057
+ JhBoB7xIgO0lbC2epsOLCth6y2r8BX2QTFlYRggqG3V/WbfpZEhv036V3O4J0zoRZz5h
+ ByW55QwnmtQaKtgMY7iczFBB8aDVjYz8zo31CVdXxRXMPTzStiGYcGmZTrXUtp8oSxxe
+ XFMMxDWhCyc3+wfKfdqkvKHe1Q6dQVO+fPR526XRSk5P5577shChFXXE2io+o7/L9tlh
+ noJg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCU+i8mop8eUmNyAr8rGDrsWEdBfzWFJJ03u3k+1juvVlQl6obNFdvrZN7Y0RQyNQ1AhBjYCvsDwkKqN@nongnu.org
-X-Gm-Message-State: AOJu0Yw6V0Gfp5+uRR9WXGwfqLoc73/uxgpJ+h2iUaKb1Xo3co1ydXJQ
- 0IKMhwOsf+wVn+xbG1kpeWNrYg9td85gX3sVv9XOl+LQPjm3Form7OeOsXJDqgc=
-X-Gm-Gg: ASbGncseGT/LpH2+NM6UbXucaQr7M4kj/uHYz2grvsTx8IqaoRrBVespMKXt0tXj30n
- eNj4Aj3uq+mCPE6rHdjJHlGwPpd6URmE0kplpi9LuxiuE2yrF6SVs3qNKdCV1sgQdIj2NS1VAXx
- c+V5QE3xOzq9zzWJcqYx2JAmE0IYo2pyhEqT9o7qStNfxEYQ74CSrub4nX77ilBJwmG75sbTi5G
- X1vnXlw82+9jKOg3Ovqgto2z6ZiPn+1yZxhIhpqNFeO9Kwy8ObIm6LmdLSXWSGKDZG6WQm1WNbE
- hSDAJVvRdzR/vbLc6pbQqq7Qa5Y2FJPsdg1Y3P5fcpLs
-X-Google-Smtp-Source: AGHT+IEqU4c1vPc61VRhbpZWCkP23zax6N4SJjoafycJSvu6Z6n9Ti+CKt0NEksxbyrgsNYG7j/HIw==
-X-Received: by 2002:a5d:64ee:0:b0:385:f1f2:13ee with SMTP id
- ffacd0b85a97d-38bf57b9426mr14843696f8f.46.1737469466639; 
- Tue, 21 Jan 2025 06:24:26 -0800 (PST)
+ AJvYcCXvmp7+e5KRYjAvdjYb0pucLBOH4YO1aI7a4j7eLEwLbxuN5/HRefKX42f2vMpOQX3K0eWjMXvh7Jzc@nongnu.org
+X-Gm-Message-State: AOJu0Yw8HkJLWSGOS+ACMoTuWzcbzC6QC6cfCJU2szPSrHBgsGFdFnM8
+ 4t5QjAd9CMwokk8o5B18gmuxYu4D7II+aykcgTKQcKYzKZhl0ACD0bXQbXbpr+k=
+X-Gm-Gg: ASbGncugYLJB5f9yKFwrWP7RPl55kfwuCIbDVWa1xP4Ro9QTWioR/29dOJ1FuymjzeD
+ iHWBagpEP8bd6EKpkRDEV10ti1zJamiRekMdCFRID31dxBGFZOYz3cGoN5KYZVpnjvdR6pnsCe7
+ mu2Dz7qDmldLOvoVoz57O5FpzEyZfygRz4MdJYfbOb006v8mFNCEy/+WAb4l6ejEAFHCD110/ck
+ D6O5eGjmhOAzPbeFBMwy+fULpm61opELrIgIdio+udpyOGd4iFi6WIa/sla6JzfZG1eKRpq040Y
+ I9siAfptHlZMgKxJ+pybRsDhL6uFOyOgwvR6BzcUAU0O
+X-Google-Smtp-Source: AGHT+IGvEab1ClV7h5y897LB6+BdG5W4Px4cgpiqOAOhbSj4iHnOZ9w31FgAecyvJTeS+fdrHtBNiA==
+X-Received: by 2002:a5d:47c9:0:b0:385:fb56:5596 with SMTP id
+ ffacd0b85a97d-38bf5663956mr12725335f8f.19.1737469509642; 
+ Tue, 21 Jan 2025 06:25:09 -0800 (PST)
 Received: from localhost.localdomain (88-187-86-199.subs.proxad.net.
  [88.187.86.199]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-38bf327574asm13594085f8f.68.2025.01.21.06.24.25
+ ffacd0b85a97d-38bf3278088sm13563656f8f.73.2025.01.21.06.25.08
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Tue, 21 Jan 2025 06:24:26 -0800 (PST)
+ Tue, 21 Jan 2025 06:25:09 -0800 (PST)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: qemu-arm@nongnu.org, qemu-s390x@nongnu.org, qemu-riscv@nongnu.org,
  qemu-ppc@nongnu.org, Paolo Bonzini <pbonzini@redhat.com>,
  Richard Henderson <richard.henderson@linaro.org>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-Subject: [PATCH 09/28] target/arm: Move has_work() from CPUClass to
+Subject: [PATCH 18/28] target/openrisc: Move has_work() from CPUClass to
  SysemuCPUOps
-Date: Tue, 21 Jan 2025 15:23:22 +0100
-Message-ID: <20250121142341.17001-10-philmd@linaro.org>
+Date: Tue, 21 Jan 2025 15:23:31 +0100
+Message-ID: <20250121142341.17001-19-philmd@linaro.org>
 X-Mailer: git-send-email 2.47.1
 In-Reply-To: <20250121142341.17001-1-philmd@linaro.org>
 References: <20250121142341.17001-1-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::434;
- envelope-from=philmd@linaro.org; helo=mail-wr1-x434.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::429;
+ envelope-from=philmd@linaro.org; helo=mail-wr1-x429.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -105,45 +105,43 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 ---
- target/arm/cpu.c | 4 +++-
+ target/openrisc/cpu.c | 4 +++-
  1 file changed, 3 insertions(+), 1 deletion(-)
 
-diff --git a/target/arm/cpu.c b/target/arm/cpu.c
-index 048b825a006..322c95038d5 100644
---- a/target/arm/cpu.c
-+++ b/target/arm/cpu.c
-@@ -123,6 +123,7 @@ void arm_restore_state_to_opc(CPUState *cs,
+diff --git a/target/openrisc/cpu.c b/target/openrisc/cpu.c
+index b7bab0d7abf..5d80c4aa9ac 100644
+--- a/target/openrisc/cpu.c
++++ b/target/openrisc/cpu.c
+@@ -63,11 +63,13 @@ static void openrisc_restore_state_to_opc(CPUState *cs,
+     }
  }
- #endif /* CONFIG_TCG */
  
 +#ifndef CONFIG_USER_ONLY
- /*
-  * With SCTLR_ELx.NMI == 0, IRQ with Superpriority is masked identically with
-  * IRQ without Superpriority. Moreover, if the GIC is configured so that
-@@ -141,6 +142,7 @@ static bool arm_cpu_has_work(CPUState *cs)
-          | CPU_INTERRUPT_VFIQ | CPU_INTERRUPT_VIRQ | CPU_INTERRUPT_VSERR
-          | CPU_INTERRUPT_EXITTB);
+ static bool openrisc_cpu_has_work(CPUState *cs)
+ {
+     return cs->interrupt_request & (CPU_INTERRUPT_HARD |
+                                     CPU_INTERRUPT_TIMER);
  }
 +#endif /* !CONFIG_USER_ONLY */
  
- static int arm_cpu_mmu_index(CPUState *cs, bool ifetch)
+ static int openrisc_cpu_mmu_index(CPUState *cs, bool ifetch)
  {
-@@ -2671,6 +2673,7 @@ static const gchar *arm_gdb_arch_name(CPUState *cs)
+@@ -228,6 +230,7 @@ static void openrisc_any_initfn(Object *obj)
  #include "hw/core/sysemu-cpu-ops.h"
  
- static const struct SysemuCPUOps arm_sysemu_ops = {
-+    .has_work = arm_cpu_has_work,
-     .get_phys_page_attrs_debug = arm_cpu_get_phys_page_attrs_debug,
-     .asidx_from_attrs = arm_asidx_from_attrs,
-     .write_elf32_note = arm_cpu_write_elf32_note,
-@@ -2721,7 +2724,6 @@ static void arm_cpu_class_init(ObjectClass *oc, void *data)
-                                        &acc->parent_phases);
+ static const struct SysemuCPUOps openrisc_sysemu_ops = {
++    .has_work = openrisc_cpu_has_work,
+     .get_phys_page_debug = openrisc_cpu_get_phys_page_debug,
+ };
+ #endif
+@@ -261,7 +264,6 @@ static void openrisc_cpu_class_init(ObjectClass *oc, void *data)
+                                        &occ->parent_phases);
  
-     cc->class_by_name = arm_cpu_class_by_name;
--    cc->has_work = arm_cpu_has_work;
-     cc->mmu_index = arm_cpu_mmu_index;
-     cc->dump_state = arm_cpu_dump_state;
-     cc->set_pc = arm_cpu_set_pc;
+     cc->class_by_name = openrisc_cpu_class_by_name;
+-    cc->has_work = openrisc_cpu_has_work;
+     cc->mmu_index = openrisc_cpu_mmu_index;
+     cc->dump_state = openrisc_cpu_dump_state;
+     cc->set_pc = openrisc_cpu_set_pc;
 -- 
 2.47.1
 
