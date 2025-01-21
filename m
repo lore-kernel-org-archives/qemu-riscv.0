@@ -4,115 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 92428C0218B
-	for <qemu-riscv@archiver.kernel.org>; Tue, 21 Jan 2025 17:40:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 63199C02182
+	for <qemu-riscv@archiver.kernel.org>; Tue, 21 Jan 2025 17:40:58 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1taIEW-0005Uk-9Z; Tue, 21 Jan 2025 12:40:12 -0500
+	id 1taIEw-0006IC-4x; Tue, 21 Jan 2025 12:40:38 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <brian.cain@oss.qualcomm.com>)
- id 1taIEB-0005Iy-Rc
- for qemu-riscv@nongnu.org; Tue, 21 Jan 2025 12:39:53 -0500
-Received: from mx0a-0031df01.pphosted.com ([205.220.168.131])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <brian.cain@oss.qualcomm.com>)
- id 1taIEA-0002zI-0q
- for qemu-riscv@nongnu.org; Tue, 21 Jan 2025 12:39:51 -0500
-Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 50LA3bE0017060
- for <qemu-riscv@nongnu.org>; Tue, 21 Jan 2025 17:39:48 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- cc:content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- urqt7a22dhLPtw1A6TPrAusY6/mCkSDM1vs/YAPMn5w=; b=PoQbsQ6jOqqsoXpJ
- EHszinBtOI5uluh9wNOzNzKRCujZUe5TC/1o1gl4dlrb4IBArMTWsrBtqEFdWKOy
- MdcXhcgVaC2KqUAKuYh7vt2dnd3rOl7A2inrsvsILQL4REfdj5crJllzrlJ/j5Jy
- 9sEN7Qrz2i07nU0h2eOvM1IGHdA0ULQiWzw22tdzUArej5zzfyPNMsJFF/jF5vYQ
- Zn7q2vfdOdyHh4UqTniGAczRtmAEChO1P7Jc9gy0UUQhDpMLSC4k+xDvka76zLXa
- YTsigGqmGYkDra+TZsFgk2jkbU2/tgKLV/K3Fh6AQyZZodE1DwK/sanmfa19it1b
- qKAqCw==
-Received: from mail-qv1-f69.google.com (mail-qv1-f69.google.com
- [209.85.219.69])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 44a9gcs979-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
- for <qemu-riscv@nongnu.org>; Tue, 21 Jan 2025 17:39:47 +0000 (GMT)
-Received: by mail-qv1-f69.google.com with SMTP id
- 6a1803df08f44-6e19e09cc20so106219716d6.2
- for <qemu-riscv@nongnu.org>; Tue, 21 Jan 2025 09:39:47 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1taIEu-0006Ae-7k
+ for qemu-riscv@nongnu.org; Tue, 21 Jan 2025 12:40:36 -0500
+Received: from mail-wm1-x335.google.com ([2a00:1450:4864:20::335])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1taIEm-0003Fb-6w
+ for qemu-riscv@nongnu.org; Tue, 21 Jan 2025 12:40:30 -0500
+Received: by mail-wm1-x335.google.com with SMTP id
+ 5b1f17b1804b1-436326dcb1cso42002495e9.0
+ for <qemu-riscv@nongnu.org>; Tue, 21 Jan 2025 09:40:27 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1737481226; x=1738086026; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=0BYxFronY7Uple2vqBBHRK1EBFohH/hoFiEwcXYXDTQ=;
+ b=RuEXOVtCjnZs61UuqE7HQ4QwNtpfStrfk9Jbch0QLFFjxwGKFAyJptvgpxzewmXRvY
+ 0svyDadGtULPSWg1JrH7K/Ox8mCwKhPcNZf79SoHmlo4QzkH9aynusT7dCQVebHLroka
+ jZ7ZXwYdjf6BpfAR4nQwjM55jsDEouddMOG52P+i7n9pCLIR6cdYnvliZpaxWilVW3gu
+ xqqgTmMEKhblobHS0Ofr4w3dlDSaiOc0dHSOctFe86fJuKoAHwtDCOj11q+D0cmMwOEG
+ DfYpvmXtuQAm6/eiRM9hPpYDfjth1sxL4B+VqwksDB7SJ677tAy0TH6vakMaBam1BXVs
+ cuaQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1737481186; x=1738085986;
+ d=1e100.net; s=20230601; t=1737481226; x=1738086026;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=urqt7a22dhLPtw1A6TPrAusY6/mCkSDM1vs/YAPMn5w=;
- b=VBtDcDPDhrSS9zcHEJSS7ZtzLiuPuwcTNwIHMcByr8MiUfyWR9US6lS8DHWdnYQUsw
- CkS7DhRuqpx3wviL2ixfm1Q7QdjI/BWU2PR00ygdk57VdVmc2K+4AZ8XCrw8ORutKbgZ
- U/Z2vlXm3uut7aOucjvKCkey6H8jAxKxoejlL468bAlUPx/kriqldRSEFAJNy4vxOG20
- HrcsVlPcM/CBTKFXRljYZyra8CPZTTetUwJl0Zq8NQnTgsJuaTn65cLbZ6Y8z9HCbwzL
- 184l7lCUb0/vaKdcTTO6+Qyu7p74MYcuKY+zyx81rcvUwC1lk9QYAp+/MrFRMrClaOzt
- 1pJA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUm6FQQm7O1UWq0PKIZIKEnyJ5tufeFZdLEhd5sPKpkeqDv2E4oZaocqh3Rx0288g7w6pIEjK1/xqfM@nongnu.org
-X-Gm-Message-State: AOJu0YwfM/cx4yqsBnY8Rz9KWJib5bohYcZa7QQkPGkwc70jJlornzfZ
- UDk23OxN0mOySaBMDhBwdo487xeYd81+OfcsgACXNLCVfFyt6uzwEutbHDwnqnQBo7yPlGU8HMq
- Z7bZhfehxndQNXkW9vY598nm2XaA5658lShtgoMgzPZeGCyUW2QrWVQ==
-X-Gm-Gg: ASbGncuvBzOzR0dQR8bW4R9EiI6g0lQZFkwzDRaLdOqY+8YOo23VWCRXU2cOe6cHrHd
- Utp5rm0zfLz3ju8bsaquq5TW/ItKHFhg5iOBKBMjMdYKGBvPjRiFFRNmEIyBpj7Y1hshxBZ5JlV
- FqKz0+KcFAB+ZLl3msEFnNF3y3cHd0AV2QDdo9kKi5p31juakjYtScinkn/9n6VtWpQeWDY1mPg
- C4IKMF0HT3LpvXb4d/x7rsB/FzSHbMNYHRzBxrmLA49BLzdSZwKczPRQ4q/Ct6jYkfijyN3fvFB
- pJ5G+xEAWLGctgxBICX8Bb1Kv72NDqH3WsY5lwQoYRO9L5dkuXg1tyRhX4eTdAS9a3sD7ew=
-X-Received: by 2002:ad4:596c:0:b0:6d8:aa52:74a3 with SMTP id
- 6a1803df08f44-6e1b2213f57mr284730346d6.28.1737481186241; 
- Tue, 21 Jan 2025 09:39:46 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IG+5QDXGtbd1P6vJg1qxSMUJ5SCfZlVLCyU4FnnJfYtdUe/GN/qfPZGUsVZ+mVbZrhHWhrWHA==
-X-Received: by 2002:ad4:596c:0:b0:6d8:aa52:74a3 with SMTP id
- 6a1803df08f44-6e1b2213f57mr284729986d6.28.1737481185835; 
- Tue, 21 Jan 2025 09:39:45 -0800 (PST)
-Received: from [192.168.1.157] (104-54-226-75.lightspeed.austtx.sbcglobal.net.
- [104.54.226.75]) by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-46e104027afsm54879231cf.50.2025.01.21.09.39.45
+ bh=0BYxFronY7Uple2vqBBHRK1EBFohH/hoFiEwcXYXDTQ=;
+ b=YwDQKPrFuCPR0mqQIXZwKxZHZte/+Ma/+o0QpGn10QH4U3jte7D6djgD1xwIhrnggl
+ JC0EtEI61rundkleglwG9av7yqzm5dK7LxpJM7zhk63E/J2JMqt+fhdLxxhvcVKHLuml
+ CkBVHmJCB4lZWP/D66iJfA/4+iMU1GtnbevdovsPb5oiyvE64ittvOCIVpfwCPnbP7wa
+ FyZyn/Dq1Jf60KKaAXcOItQHd2inTWInUuD5MP4GhFzsCgVohNdxoT8S3q4kwDB6cxr/
+ E1Xv+PZTDdhSR1+KExuto4igFtPaeBKwt/5TqwtJNsjCNYSsY7ESXi44+SuJZH2Muu5P
+ d98Q==
+X-Gm-Message-State: AOJu0YyHRdr5SZZ7I4AuSdmWqj04/JxWkShcRPGp2DM5cYCa7i7uZxdX
+ /WTO8Hs4qBOZLzZpo3Enen8u7lUgRtu2dif4r3YJHawt385yxCoLPkRz3kctGAk=
+X-Gm-Gg: ASbGncs+7daZxO9pIRfTkSj7tIJ8sn3TcVjFB52/FVOuoDpKFNQs9XT58jOADAsddZ3
+ YTdS400/eAF8mtZNaLTdVV4tHKnLCf4gvuV8yselz1S1UTP43YrEcXLRIZAFoY5foXk6YsauSKG
+ J6A4cWwbAg9g/eOp5cyqPQwAebjGgXYgNgV/E/IEWlzvdLkEu4I4k277x6qaxeoA7bSE8lCqot5
+ GuYHXPYiEacrbOOXQvBxhU7uSIPmjJAUhFrQPRoGVHdIWwEeA+np5xQBhDyB6EPISSugVasVxVP
+ FWM8Nm68XDab7dVKAwAXEwSKWucbLPrZEgkpHA==
+X-Google-Smtp-Source: AGHT+IEqTmqbVjBrPTETkvHAZRrbq2Fd4Nw6JedK+1CwXRnQ9CiEDlDAHUMdsIkFR9OXYNyktMu1AQ==
+X-Received: by 2002:a05:600c:1e02:b0:438:ad4d:cf09 with SMTP id
+ 5b1f17b1804b1-438ad4dd134mr54411245e9.9.1737481226275; 
+ Tue, 21 Jan 2025 09:40:26 -0800 (PST)
+Received: from [192.168.69.181] (88-187-86-199.subs.proxad.net.
+ [88.187.86.199]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-43890462195sm185677075e9.30.2025.01.21.09.40.25
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 21 Jan 2025 09:39:45 -0800 (PST)
-Message-ID: <8df0bb65-9482-4b04-81ae-a8b7c5292142@oss.qualcomm.com>
-Date: Tue, 21 Jan 2025 11:39:44 -0600
+ Tue, 21 Jan 2025 09:40:25 -0800 (PST)
+Message-ID: <9b2114bb-ed61-42bc-a5fe-f28a6a5319dc@linaro.org>
+Date: Tue, 21 Jan 2025 18:40:24 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 01/28] target/hexagon: Ensure not being build on system
- emulation
-To: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- qemu-devel@nongnu.org
-Cc: qemu-arm@nongnu.org, qemu-s390x@nongnu.org, qemu-riscv@nongnu.org,
- qemu-ppc@nongnu.org, Paolo Bonzini <pbonzini@redhat.com>,
- Richard Henderson <richard.henderson@linaro.org>
-References: <20250121142341.17001-1-philmd@linaro.org>
- <20250121142341.17001-2-philmd@linaro.org>
+Subject: Re: [PATCH v2 1/2] target/riscv/debug.c: use wp size = 4 for 32-bit
+ CPUs
+To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>, qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
+ liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
+ richard.henderson@linaro.org
+References: <20250120204910.1317013-1-dbarboza@ventanamicro.com>
+ <20250120204910.1317013-2-dbarboza@ventanamicro.com>
 Content-Language: en-US
-From: Brian Cain <brian.cain@oss.qualcomm.com>
-In-Reply-To: <20250121142341.17001-2-philmd@linaro.org>
+From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+In-Reply-To: <20250120204910.1317013-2-dbarboza@ventanamicro.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-Proofpoint-GUID: 7jXdqG9K2WfNZfxKJ7EfarePplhyOyy7
-X-Proofpoint-ORIG-GUID: 7jXdqG9K2WfNZfxKJ7EfarePplhyOyy7
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1057,Hydra:6.0.680,FMLib:17.12.68.34
- definitions=2025-01-21_07,2025-01-21_03,2024-11-22_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- impostorscore=0
- malwarescore=0 lowpriorityscore=0 suspectscore=0 phishscore=0 spamscore=0
- mlxscore=0 bulkscore=0 clxscore=1015 adultscore=0 priorityscore=1501
- mlxlogscore=671 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.19.0-2411120000 definitions=main-2501210141
-Received-SPF: pass client-ip=205.220.168.131;
- envelope-from=brian.cain@oss.qualcomm.com; helo=mx0a-0031df01.pphosted.com
-X-Spam_score_int: -26
-X-Spam_score: -2.7
+Received-SPF: pass client-ip=2a00:1450:4864:20::335;
+ envelope-from=philmd@linaro.org; helo=mail-wm1-x335.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
 X-Spam_bar: --
-X-Spam_report: (-2.7 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_EF=-0.1, RCVD_IN_DNSWL_LOW=-0.7,
- RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001, RCVD_IN_VALIDITY_SAFE_BLOCKED=0.001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -128,38 +102,51 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-
-On 1/21/2025 8:23 AM, Philippe Mathieu-Daudé wrote:
-> Currently only user emulation is supported.
-> Assert no target code is built for system emulation.
->
-> Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+On 20/1/25 21:49, Daniel Henrique Barboza wrote:
+> The mcontrol select bit (19) is always zero, meaning our triggers will
+> always match virtual addresses. In this condition, if the user does not
+> specify a size for the trigger, the access size defaults to XLEN.
+> 
+> At this moment we're using def_size = 8 regardless of CPU XLEN. Use
+> def_size = 4 in case we're running 32 bits.
+> 
+> Fixes: 95799e36c1 ("target/riscv: Add initial support for the Sdtrig extension")
+> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 > ---
->   target/hexagon/cpu.h | 4 ++++
->   1 file changed, 4 insertions(+)
->
-> diff --git a/target/hexagon/cpu.h b/target/hexagon/cpu.h
-> index 79e60d4bfa1..f78c8f9c2a0 100644
-> --- a/target/hexagon/cpu.h
-> +++ b/target/hexagon/cpu.h
-> @@ -26,6 +26,10 @@
->   #include "mmvec/mmvec.h"
->   #include "hw/registerfields.h"
+>   target/riscv/debug.c | 6 ++++--
+>   1 file changed, 4 insertions(+), 2 deletions(-)
+> 
+> diff --git a/target/riscv/debug.c b/target/riscv/debug.c
+> index f6241a80be..9db4048523 100644
+> --- a/target/riscv/debug.c
+> +++ b/target/riscv/debug.c
+> @@ -478,7 +478,7 @@ static void type2_breakpoint_insert(CPURISCVState *env, target_ulong index)
+>       bool enabled = type2_breakpoint_enabled(ctrl);
+>       CPUState *cs = env_cpu(env);
+>       int flags = BP_CPU | BP_STOP_BEFORE_ACCESS;
+> -    uint32_t size;
+> +    uint32_t size, def_size;
 >   
-> +#ifndef CONFIG_USER_ONLY
-> +#error "Hexagon does not support system emulation"
-> +#endif
+>       if (!enabled) {
+>           return;
+> @@ -501,7 +501,9 @@ static void type2_breakpoint_insert(CPURISCVState *env, target_ulong index)
+>               cpu_watchpoint_insert(cs, addr, size, flags,
+>                                     &env->cpu_watchpoint[index]);
+>           } else {
+> -            cpu_watchpoint_insert(cs, addr, 8, flags,
+> +            def_size = riscv_cpu_mxl(env) == MXL_RV64 ? 8 : 4;
+
+riscv_cpu_mxl() seems bugprone w.r.t. MXL_RV128, better could be
+some riscv_cpu_mxl_wordsize() helper like riscv_cpu_mxl_bits()
+(or better named).
+
+Anyway this pattern is already all over, so meanwhile:
+Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+
 > +
->   #define NUM_PREGS 4
->   #define TOTAL_PER_THREAD_REGS 64
->   
-
-We hope to mitigate this one in the not-too-distant future. Staged 
-commits on my tree implement system emulation, undergoing some 
-review/revision now. ;)
-
-But of course this change makes sense for the time being.
-
-Reviewed-by: Brian Cain <brian.cain@oss.qualcomm.com>
+> +            cpu_watchpoint_insert(cs, addr, def_size, flags,
+>                                     &env->cpu_watchpoint[index]);
+>           }
+>       }
 
 
