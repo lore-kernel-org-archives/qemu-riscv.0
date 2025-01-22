@@ -4,137 +4,125 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E8B3CC02181
-	for <qemu-riscv@archiver.kernel.org>; Wed, 22 Jan 2025 12:37:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1B0EDC02181
+	for <qemu-riscv@archiver.kernel.org>; Wed, 22 Jan 2025 14:21:15 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1taZwv-0003Po-Ig; Wed, 22 Jan 2025 07:35:13 -0500
+	id 1tabaw-0000PU-1F; Wed, 22 Jan 2025 09:20:38 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1taZws-0003HR-5U
- for qemu-riscv@nongnu.org; Wed, 22 Jan 2025 07:35:10 -0500
+ (Exim 4.90_1) (envelope-from <imammedo@redhat.com>)
+ id 1tabau-0000Oi-54
+ for qemu-riscv@nongnu.org; Wed, 22 Jan 2025 09:20:36 -0500
 Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1taZwp-0008Dq-KY
- for qemu-riscv@nongnu.org; Wed, 22 Jan 2025 07:35:09 -0500
+ (Exim 4.90_1) (envelope-from <imammedo@redhat.com>)
+ id 1tabaq-0001kB-GP
+ for qemu-riscv@nongnu.org; Wed, 22 Jan 2025 09:20:35 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1737549305;
+ s=mimecast20190719; t=1737555630;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
- bh=1KES4xpsLEdFe1fXg8Bxj9Xy+gRWvqiZGMytL01K9eo=;
- b=EQPa2xbGYv3WFlVTe0ckgiNT/u6w0wTRtadw8caudjrXMNxAcubxf5L4hU4RPZxIhGvYNG
- AqyW2vGvI/VXn5xEh4R2ckCn34sPeZukWzCx0wUWOqKlB3axZS+nDNkJx+dd7e9ItAuyEo
- oTrumEllmEGP1O2sDwLfYXlXzaQJeo4=
-Received: from mail-wr1-f72.google.com (mail-wr1-f72.google.com
- [209.85.221.72]) by relay.mimecast.com with ESMTP with STARTTLS
+ in-reply-to:in-reply-to:references:references;
+ bh=hA+rZJ5GcDFgsjh2IUI+9lMrJYjCKdYHEsuzgSkYNk4=;
+ b=Jcb6Md3aNfDoEG1flLSHM7CEXmnHVBs/98TrgPCPmwBvxMdhybOotmEK2rAl622Xr2AGjK
+ NL7grRiKPmSuQ1F399nWRmqoT4jqSyGqxJtRLcoZnkv022SJCli2TftLiTQeJTT2s+ISfw
+ N1MCmZZlNzpZftaAzJE+5apFU0AFt9E=
+Received: from mail-wm1-f72.google.com (mail-wm1-f72.google.com
+ [209.85.128.72]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-561-GLZFsSZaPza9cAXb4xuXpw-1; Wed, 22 Jan 2025 07:35:02 -0500
-X-MC-Unique: GLZFsSZaPza9cAXb4xuXpw-1
-X-Mimecast-MFC-AGG-ID: GLZFsSZaPza9cAXb4xuXpw
-Received: by mail-wr1-f72.google.com with SMTP id
- ffacd0b85a97d-38639b4f19cso4704574f8f.0
- for <qemu-riscv@nongnu.org>; Wed, 22 Jan 2025 04:35:01 -0800 (PST)
+ us-mta-19-EAgdfiC4NviJ4uy8lL6m0Q-1; Wed, 22 Jan 2025 09:20:29 -0500
+X-MC-Unique: EAgdfiC4NviJ4uy8lL6m0Q-1
+X-Mimecast-MFC-AGG-ID: EAgdfiC4NviJ4uy8lL6m0Q
+Received: by mail-wm1-f72.google.com with SMTP id
+ 5b1f17b1804b1-4362f893bfaso37818935e9.1
+ for <qemu-riscv@nongnu.org>; Wed, 22 Jan 2025 06:20:28 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1737549301; x=1738154101;
- h=content-transfer-encoding:in-reply-to:autocrypt:content-language
- :from:references:cc:to:subject:user-agent:mime-version:date
- :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=1KES4xpsLEdFe1fXg8Bxj9Xy+gRWvqiZGMytL01K9eo=;
- b=F5+/AnfPpaD02Ky1zvFz0QnzGVjnRTXGmlzsx4rF6TNq0BfnBTmZ+Z64gcczBOSTRv
- PWyODN+xEkD+I8X7+WGUg9rXwe4iDmCThXolT/eby3zMuwyHvtwEoYDJmVfk9DBNxM/l
- MuG0CJdxg8IyzjrMmP8H3s0LwLtqcXhQXzPCJ93PXsZFUFuiJQiAtw0MOXcXH4R3IJMc
- IZ1JDTSBVXe+O4UDISWPKCvfJ+Yd9km3/ne2yYZ6hjK2D7gkWoQr9nM9QTPIu954qDlD
- bHBAjN/r4JjZeo/h6ZxTFkndUaPTtwesGapYGd8lIGPg+k1i7wEKUGX1mUSOLQ+PHYDf
- nyGg==
+ d=1e100.net; s=20230601; t=1737555628; x=1738160428;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:subject:cc:to:from:date:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=Dut6hZbDd6BfAIsiyGgJ+kYCdZA4Ogbk5rArrmutuEA=;
+ b=xA5KLqnPEFe1xlcRJ02GHUxs6I+9sEZ4brjf1Q1Ajd5HhKMq/SKY5z/zMt4JDfC6To
+ O0f62vZn4oCVnAOZK98mfVu9iQs/9xTIKwBzCcPpYSZPCHXx+rCLOhUtLvviAgHEs9Uk
+ nc8cS3MlukBCbLDsWhpimvXz/gaDVYFrqKWeep/Ejct4XNF0D2xhRI/g8ffVXV3YjSTY
+ ssc/PDNEvagW+6ZSSR2upVRs6148ofo3dEKWIt8qVth5RFCgnYWFFeOGzUdfjAA0VAFG
+ 420bferVfaoakjlSUXZrAs80FiUFVY5G32BdzMJJDtEpM0uDR59cfQYgALekOWz2dWgd
+ ZkCw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUsfNFE9Vhk5ZwHtK7nHvygpjvNWv35AfQg7gyQXNRdAhdZFNXBL1IVtSoZ/d6AkOImMA1yiVy3dE7D@nongnu.org
-X-Gm-Message-State: AOJu0YwbBZCCOJxfjphmGktiAPdWPkn1qOY6jbdBEhrUUqrAVpzSbzmx
- OS5zqBsxk6Mngqc6ssAfnYFMB0ZAcRv07VXPiesmHnehC0cEPeAG3u2D2LjuC/+neIAjGn4IUHO
- XtL5RuOTXgQ7Rm9gn2LQaNXnlaV6SV4UC6VpI46NvbpGd9/SgFdMi
-X-Gm-Gg: ASbGncuSwcLsmYtJavL4Ka0RTVMVBnvTWbzkORuLM4jT/RWzO1gjgiNkdPU4+qbnY0o
- swAnsVvCKiItokXVptcmZd1Cje8LKWICZWcZD/v4Iz+/9lzIBq4whhWdaHRMg4BngsTJYngSp7c
- DA0pmKddYFeW8YsnOnQtPD1ajNY3mfVZLCzjMmyPb0QwZpZvRylN7fMNbnkGyUQftU0Ks9Zkk71
- bMpPa7pWp2NTMTnW3So0UAIXZzZOr3p3xkoPiD/r8JSQfSio6oNXPL8l6FGFRk3rPdJTsTmUM4z
- MwgKHvUS+CcEPkMyMFM9LOBonw==
-X-Received: by 2002:a05:6000:1f88:b0:385:fd31:ca23 with SMTP id
- ffacd0b85a97d-38bf57a7797mr21884775f8f.40.1737549300192; 
- Wed, 22 Jan 2025 04:35:00 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IEq9j2XVfhZb6BfGEG7F/g4RlK/ryrxUz4608Kg5VNiBDgJcp/HDm+51ge7CQppTT3M2BCLxg==
-X-Received: by 2002:a05:6000:1f88:b0:385:fd31:ca23 with SMTP id
- ffacd0b85a97d-38bf57a7797mr21884743f8f.40.1737549299767; 
- Wed, 22 Jan 2025 04:34:59 -0800 (PST)
-Received: from [192.168.0.7] (ip-109-42-48-103.web.vodafone.de.
- [109.42.48.103]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-38bf3278088sm16216232f8f.73.2025.01.22.04.34.58
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 22 Jan 2025 04:34:59 -0800 (PST)
-Message-ID: <6393ca88-0613-415e-8178-18a34778b2ab@redhat.com>
-Date: Wed, 22 Jan 2025 13:34:57 +0100
+ AJvYcCW6Z4umHCqGSyiVvJRApvINvp+ETrAWxaeaFyFTRmaW6atwykQWcmRKSc6UZiBaXqkz3I34FsUmkzkg@nongnu.org
+X-Gm-Message-State: AOJu0Yyvh6xJk4+yRdOfcJdZYDQO7M4vrJZGBGteMfaErY/cr6+fH5nk
+ BpjpLEyD9nZk1D335dylV5sv/9pgh6oLUqNZBg9zV0y1vekOytmPvLocNYVz13S5JkL86eRvwIh
+ XIf3lg/J8o+LDpGX6A2L0ThUpfDrLM1CImOVtm3uX2eNprLMCvNzh
+X-Gm-Gg: ASbGncs0shdFXi774arce6ptSXaalIl9/TTB7enggXrqUwe8OHZbIGGJ6b+dDYmVOZK
+ KEWlOGUpITrMJCisHUaacLgX+1hCP+JOqAiMJpNu0+0Jof4mpW2Y9qGzTi3z5A6UQGPhs+x3AEh
+ QTCw8S6az8g6yMWCv5AioJBC8DRXIobRmHqx2KpDF7LCrbsCzdI0iI72uFPW+RxgtZq5WWyEJWN
+ t6mxOgwfqxRDnBPbmkAtPektsg/Ye/VoD/67hIm+FsPbm9+4Pw1dMbYmb/3ei90olAwZNww1/1R
+ pjooDZ+NMtC+JWbwgyUem1lbyTCuSL3fO+tWezZG9Q==
+X-Received: by 2002:a05:600c:4710:b0:434:a59c:43c6 with SMTP id
+ 5b1f17b1804b1-43891451388mr174742895e9.26.1737555627711; 
+ Wed, 22 Jan 2025 06:20:27 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IG5NEdwGW3AASXDNblTqeS/rrJSs7oL8g6o9u0iasINje1Lj5tIEqz7MQ/xoV62NeqtH0NxQQ==
+X-Received: by 2002:a05:600c:4710:b0:434:a59c:43c6 with SMTP id
+ 5b1f17b1804b1-43891451388mr174742065e9.26.1737555627147; 
+ Wed, 22 Jan 2025 06:20:27 -0800 (PST)
+Received: from imammedo.users.ipa.redhat.com (nat-pool-brq-t.redhat.com.
+ [213.175.37.10]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-438b31af925sm26918075e9.23.2025.01.22.06.20.24
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 22 Jan 2025 06:20:26 -0800 (PST)
+Date: Wed, 22 Jan 2025 15:20:23 +0100
+From: Igor Mammedov <imammedo@redhat.com>
+To: Philippe =?UTF-8?B?TWF0aGlldS1EYXVkw6k=?= <philmd@linaro.org>
+Cc: qemu-devel@nongnu.org, Laurent Vivier <laurent@vivier.eu>, Paolo Bonzini
+ <pbonzini@redhat.com>, Max Filippov <jcmvbkbc@gmail.com>, David Hildenbrand
+ <david@redhat.com>, Peter Xu <peterx@redhat.com>, Anton Johansson
+ <anjo@rev.ng>, Peter Maydell <peter.maydell@linaro.org>,
+ kvm@vger.kernel.org, Marek Vasut <marex@denx.de>, David Gibson
+ <david@gibson.dropbear.id.au>, Brian Cain <bcain@quicinc.com>, Yoshinori
+ Sato <ysato@users.sourceforge.jp>, "Edgar E . Iglesias"
+ <edgar.iglesias@gmail.com>, Claudio Fontana <cfontana@suse.de>, Daniel
+ Henrique Barboza <dbarboza@ventanamicro.com>, Artyom Tarasenko
+ <atar4qemu@gmail.com>, Marcelo Tosatti <mtosatti@redhat.com>,
+ qemu-ppc@nongnu.org, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, Aurelien
+ Jarno <aurelien@aurel32.net>, Ilya Leoshkevich <iii@linux.ibm.com>, Daniel
+ Henrique Barboza <danielhb413@gmail.com>, Bastian Koppelmann
+ <kbastian@mail.uni-paderborn.de>, =?UTF-8?B?Q8OpZHJpYw==?= Le Goater
+ <clg@kaod.org>, Alistair Francis <alistair.francis@wdc.com>, Alessandro Di
+ Federico <ale@rev.ng>, Song Gao <gaosong@loongson.cn>, Marcel Apfelbaum
+ <marcel.apfelbaum@gmail.com>, Chris Wulff <crwulff@gmail.com>, "Michael S.
+ Tsirkin" <mst@redhat.com>, Alistair Francis <alistair@alistair23.me>,
+ Fabiano Rosas <farosas@suse.de>, qemu-s390x@nongnu.org, Yanan Wang
+ <wangyanan55@huawei.com>, Luc Michel <luc@lmichel.fr>, Weiwei Li
+ <liweiwei@iscas.ac.cn>, Bin Meng <bin.meng@windriver.com>, Stafford Horne
+ <shorne@gmail.com>, Xiaojuan Yang <yangxiaojuan@loongson.cn>, "Daniel P .
+ Berrange" <berrange@redhat.com>, Thomas Huth <thuth@redhat.com>,
+ qemu-arm@nongnu.org, Jiaxun Yang <jiaxun.yang@flygoat.com>, Richard
+ Henderson <richard.henderson@linaro.org>, Aleksandar Rikalo
+ <aleksandar.rikalo@syrmia.com>, Bernhard Beschow <shentey@gmail.com>, Mark
+ Cave-Ayland <mark.cave-ayland@ilande.co.uk>, qemu-riscv@nongnu.org, Alex
+ =?UTF-8?B?QmVubsOpZQ==?= <alex.bennee@linaro.org>, Nicholas Piggin
+ <npiggin@gmail.com>, Greg Kurz <groug@kaod.org>, Michael Rolnik
+ <mrolnik@gmail.com>, Eduardo Habkost <eduardo@habkost.net>, Markus
+ Armbruster <armbru@redhat.com>, Palmer Dabbelt <palmer@dabbelt.com>
+Subject: Re: [PATCH 06/22] exec/cpu: Call cpu_remove_sync() once in
+ cpu_common_unrealize()
+Message-ID: <20250122152023.5ee90f50@imammedo.users.ipa.redhat.com>
+In-Reply-To: <5f25576c-598f-4fd7-8238-61edcff2c411@linaro.org>
+References: <20230918160257.30127-1-philmd@linaro.org>
+ <20230918160257.30127-7-philmd@linaro.org>
+ <20231128174215.32d2a350@imammedo.users.ipa.redhat.com>
+ <5f25576c-598f-4fd7-8238-61edcff2c411@linaro.org>
+X-Mailer: Claws Mail 4.3.0 (GTK 3.24.43; x86_64-redhat-linux-gnu)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] hw/boards: Convert MachineClass bitfields to boolean
-To: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- qemu-devel@nongnu.org
-Cc: qemu-s390x@nongnu.org, qemu-ppc@nongnu.org,
- Pierrick Bouvier <pierrick.bouvier@linaro.org>, qemu-riscv@nongnu.org,
- qemu-arm@nongnu.org, =?UTF-8?Q?Daniel_P=2E_Berrang=C3=A9?=
- <berrange@redhat.com>
-References: <20250122103223.55523-1-philmd@linaro.org>
-From: Thomas Huth <thuth@redhat.com>
-Autocrypt: addr=thuth@redhat.com; keydata=
- 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
-In-Reply-To: <20250122103223.55523-1-philmd@linaro.org>
 X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: _PhGZzmzyb8O8ndecmThGn5nq0y9fljVb0ZRWoiGXZs_1737549301
+X-Mimecast-MFC-PROC-ID: WfvOV96Ce-ykKSAa3HDEq2nT1FnCv_QPn-PTwmVUAhs_1737555628
 X-Mimecast-Originator: redhat.com
-Content-Language: en-US
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=170.10.129.124; envelope-from=thuth@redhat.com;
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=170.10.129.124; envelope-from=imammedo@redhat.com;
  helo=us-smtp-delivery-124.mimecast.com
 X-Spam_score_int: -50
 X-Spam_score: -5.1
@@ -159,76 +147,140 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 22/01/2025 11.32, Philippe Mathieu-Daudé wrote:
-> As Daniel mentioned:
-> 
->   "The number of instances of MachineClass is not large enough
->    that we save a useful amount of memory through bitfields."
-> 
-> Also, see recent commit ecbf3567e21 ("docs/devel/style: add a
-> section about bitfield, and disallow them for packed structures").
-> 
-> Convert the MachineClass bitfields used as boolean as real ones.
-> 
-> Suggested-by: Daniel P. Berrangé <berrange@redhat.com>
-> Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
-> ---
->   include/hw/boards.h        | 14 +++++++-------
->   hw/arm/aspeed.c            |  6 +++---
->   hw/arm/fby35.c             |  4 ++--
->   hw/arm/npcm7xx_boards.c    |  6 +++---
->   hw/arm/raspi.c             |  6 +++---
->   hw/arm/sbsa-ref.c          |  2 +-
->   hw/arm/virt.c              |  2 +-
->   hw/arm/xilinx_zynq.c       |  2 +-
->   hw/avr/arduino.c           |  6 +++---
->   hw/core/null-machine.c     | 10 +++++-----
->   hw/i386/microvm.c          |  2 +-
->   hw/i386/pc_piix.c          |  2 +-
->   hw/i386/pc_q35.c           |  4 ++--
->   hw/loongarch/virt.c        |  2 +-
->   hw/m68k/virt.c             |  6 +++---
->   hw/ppc/pnv.c               |  2 +-
->   hw/ppc/spapr.c             |  2 +-
->   hw/riscv/virt.c            |  2 +-
->   hw/s390x/s390-virtio-ccw.c |  8 ++++----
->   hw/xtensa/sim.c            |  2 +-
->   20 files changed, 45 insertions(+), 45 deletions(-)
+On Thu, 16 Jan 2025 19:05:46 +0100
+Philippe Mathieu-Daud=C3=A9 <philmd@linaro.org> wrote:
 
-So if you are touching all these files, why not go with an even more 
-meaningful rework instead? Flip the meaning of the "no_*" flags to the 
-opposite, so that we e.g. have "has_default_cdrom" instead of "no_cdrom", 
-then new boards would not have to remember to set these ugly "no_" flags 
-anymore. It's quite a bit of work, but it could certainly be helpful in the 
-long run.
+> On 28/11/23 17:42, Igor Mammedov wrote:
+> > On Mon, 18 Sep 2023 18:02:39 +0200
+> > Philippe Mathieu-Daud=C3=A9 <philmd@linaro.org> wrote:
+> >  =20
+> >> While create_vcpu_thread() creates a vCPU thread, its counterpart
+> >> is cpu_remove_sync(), which join and destroy the thread.
+> >>
+> >> create_vcpu_thread() is called in qemu_init_vcpu(), itself called
+> >> in cpu_common_realizefn(). Since we don't have qemu_deinit_vcpu()
+> >> helper (we probably don't need any), simply destroy the thread in
+> >> cpu_common_unrealizefn().
+> >>
+> >> Note: only the PPC and X86 targets were calling cpu_remove_sync(),
+> >> meaning all other targets were leaking the thread when the vCPU
+> >> was unrealized (mostly when vCPU are hot-unplugged).
+> >>
+> >> Signed-off-by: Philippe Mathieu-Daud=C3=A9 <philmd@linaro.org>
+> >> ---
+> >>   hw/core/cpu-common.c  | 3 +++
+> >>   target/i386/cpu.c     | 1 -
+> >>   target/ppc/cpu_init.c | 2 --
+> >>   3 files changed, 3 insertions(+), 3 deletions(-)
+> >>
+> >> diff --git a/hw/core/cpu-common.c b/hw/core/cpu-common.c
+> >> index a3b8de7054..e5841c59df 100644
+> >> --- a/hw/core/cpu-common.c
+> >> +++ b/hw/core/cpu-common.c
+> >> @@ -221,6 +221,9 @@ static void cpu_common_unrealizefn(DeviceState *de=
+v)
+> >>  =20
+> >>       /* NOTE: latest generic point before the cpu is fully unrealized=
+ */
+> >>       cpu_exec_unrealizefn(cpu);
+> >> +
+> >> +    /* Destroy vCPU thread */
+> >> +    cpu_remove_sync(cpu);
+> >>   }
+> >>  =20
+> >>   static void cpu_common_initfn(Object *obj)
+> >> diff --git a/target/i386/cpu.c b/target/i386/cpu.c
+> >> index cb41d30aab..d79797d963 100644
+> >> --- a/target/i386/cpu.c
+> >> +++ b/target/i386/cpu.c
+> >> @@ -7470,7 +7470,6 @@ static void x86_cpu_unrealizefn(DeviceState *dev=
+)
+> >>       X86CPUClass *xcc =3D X86_CPU_GET_CLASS(dev);
+> >>  =20
+> >>   #ifndef CONFIG_USER_ONLY
+> >> -    cpu_remove_sync(CPU(dev));
+> >>       qemu_unregister_reset(x86_cpu_machine_reset_cb, dev);
+> >>   #endif =20
+> >=20
+> > missing  followup context:
+> >      ...
+> >      xcc->parent_unrealize(dev);
+> >=20
+> > Before the patch, vcpu thread is stopped and onnly then
+> > clean up happens.
+> >=20
+> > After the patch we have cleanup while vcpu thread is still running.
+> >=20
+> > Even if it doesn't explode, such ordering still seems to be wrong. =20
+>=20
+> OK.
 
-  Thomas
+looking at all users, some do stop vcpu thread before tearing down vcpu obj=
+ect
+and interrupt controller, while some do it other way around or mix of both.
 
+It's probably safe to stop vcpu thread wrt intc cleanup.
+Can you check what would happen if there were a pending interrupt,
+but then flowing would happen:
+ 1. destroying intc
+ 2. can vcpu thread just kicked out from KVM_RUN,
+    trip over missing/invalid intc state while thread runs towards its exit=
+ point?
 
-> diff --git a/include/hw/boards.h b/include/hw/boards.h
-> index 2ad711e56db..ff5904d6fd8 100644
-> --- a/include/hw/boards.h
-> +++ b/include/hw/boards.h
-> @@ -279,13 +279,13 @@ struct MachineClass {
->       int max_cpus;
->       int min_cpus;
->       int default_cpus;
-> -    unsigned int no_serial:1,
-> -        no_parallel:1,
-> -        no_floppy:1,
-> -        no_cdrom:1,
-> -        no_sdcard:1,
-> -        pci_allow_0_address:1,
-> -        legacy_fw_cfg_order:1;
-> +    bool no_serial;
-> +    bool no_parallel;
-> +    bool no_floppy;
-> +    bool no_cdrom;
-> +    bool no_sdcard;
-> +    bool pci_allow_0_address;
-> +    bool legacy_fw_cfg_order;
->       bool is_default;
->       const char *default_machine_opts;
->       const char *default_boot_order;
+If above can't crash then,
+I'd prefer to stop vcpu at least before vcpu cleanup is run.
+i.e. put cpu_remove_sync() as the very 1st call inside of cpu_common_unreal=
+izefn()
+
+> >> diff --git a/target/ppc/cpu_init.c b/target/ppc/cpu_init.c
+> >> index e2c06c1f32..24d4e8fa7e 100644
+> >> --- a/target/ppc/cpu_init.c
+> >> +++ b/target/ppc/cpu_init.c
+> >> @@ -6853,8 +6853,6 @@ static void ppc_cpu_unrealize(DeviceState *dev)
+> >>  =20
+> >>       pcc->parent_unrealize(dev);
+> >>  =20
+> >> -    cpu_remove_sync(CPU(cpu)); =20
+> >=20
+> > bug in current code? =20
+>=20
+> Plausibly. See:
+>=20
+> commit f1023d21e81b7bf523ddf2ac91a48117f20ef9d7
+> Author: Greg Kurz <groug@kaod.org>
+> Date:   Thu Oct 15 23:18:32 2020 +0200
+>=20
+>      spapr: Unrealize vCPUs with qdev_unrealize()
+>=20
+>      Since we introduced CPU hot-unplug in sPAPR, we don't unrealize the
+>      vCPU objects explicitly. Instead, we let QOM handle that for us
+>      under object_property_del_all() when the CPU core object is
+>      finalized. The only thing we do is calling cpu_remove_sync() to
+>      tear the vCPU thread down.
+>=20
+>      This happens to work but it is ugly because:
+>      - we call qdev_realize() but the corresponding qdev_unrealize() is
+>        buried deep in the QOM code
+>      - we call cpu_remove_sync() to undo qemu_init_vcpu() called by
+>        ppc_cpu_realize() in target/ppc/translate_init.c.inc
+>      - the CPU init and teardown paths aren't really symmetrical
+>=20
+>      The latter didn't bite us so far but a future patch that greatly
+>      simplifies the CPU core realize path needs it to avoid a crash
+>      in QOM.
+>=20
+>      For all these reasons, have ppc_cpu_unrealize() to undo the changes
+>      of ppc_cpu_realize() by calling cpu_remove_sync() at the right
+>      place, and have the sPAPR CPU core code to call qdev_unrealize().
+>=20
+>      This requires to add a missing stub because translate_init.c.inc is
+>      also compiled for user mode.
+>=20
+> >  =20
+> >> -
+> >>       destroy_ppc_opcodes(cpu);
+> >>   }
+> >>    =20
+>=20
 
 
