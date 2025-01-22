@@ -4,58 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 740C6C02181
-	for <qemu-riscv@archiver.kernel.org>; Wed, 22 Jan 2025 08:49:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3D1ADC02181
+	for <qemu-riscv@archiver.kernel.org>; Wed, 22 Jan 2025 10:33:14 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1taWPp-0006ZP-No; Wed, 22 Jan 2025 03:48:49 -0500
+	id 1taY2E-0002JT-PZ; Wed, 22 Jan 2025 05:32:35 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <ethan84@andestech.com>)
- id 1taWPa-0005fA-3v; Wed, 22 Jan 2025 03:48:37 -0500
-Received: from 60-248-80-70.hinet-ip.hinet.net ([60.248.80.70]
- helo=Atcsqr.andestech.com)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <ethan84@andestech.com>)
- id 1taWPW-0004OD-EH; Wed, 22 Jan 2025 03:48:33 -0500
-Received: from mail.andestech.com (ATCPCS31.andestech.com [10.0.1.89])
- by Atcsqr.andestech.com with ESMTPS id 50M8m4FF025899
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Wed, 22 Jan 2025 16:48:04 +0800 (+08)
- (envelope-from ethan84@andestech.com)
-Received: from atcpcw16.andestech.com (10.0.1.106) by ATCPCS31.andestech.com
- (10.0.1.89) with Microsoft SMTP Server (TLS) id 14.3.498.0; Wed, 22 Jan 2025
- 16:48:04 +0800
-To: <qemu-devel@nongnu.org>
-CC: <richard.henderson@linaro.org>, <pbonzini@redhat.com>,
- <palmer@dabbelt.com>, <alistair.francis@wdc.com>, <bmeng.cn@gmail.com>,
- <liwei1518@gmail.com>, <dbarboza@ventanamicro.com>,
- <zhiwei_liu@linux.alibaba.com>, <peterx@redhat.com>,
- <david@redhat.com>, <philmd@linaro.org>, <qemu-riscv@nongnu.org>,
- Ethan Chen <ethan84@andestech.com>
-Subject: [PATCH v10 8/8] hw/riscv/virt: Add IOPMP support
-Date: Wed, 22 Jan 2025 16:47:47 +0800
-Message-ID: <20250122084747.3971444-1-ethan84@andestech.com>
-X-Mailer: git-send-email 2.42.0.345.gaab89be2eb.dirty
-In-Reply-To: <20250122083617.3940240-1-ethan84@andestech.com>
-References: <20250122083617.3940240-1-ethan84@andestech.com>
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1taY2C-0002ID-RT
+ for qemu-riscv@nongnu.org; Wed, 22 Jan 2025 05:32:32 -0500
+Received: from mail-wm1-x32e.google.com ([2a00:1450:4864:20::32e])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1taY28-0005u5-QZ
+ for qemu-riscv@nongnu.org; Wed, 22 Jan 2025 05:32:32 -0500
+Received: by mail-wm1-x32e.google.com with SMTP id
+ 5b1f17b1804b1-43635796b48so4558595e9.0
+ for <qemu-riscv@nongnu.org>; Wed, 22 Jan 2025 02:32:26 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1737541945; x=1738146745; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=Lc+q3saCS/w7IN/a5U6g/SgFDPz1VJaUexU4WrTXhAE=;
+ b=iZeOb+zdYrtcbQfZJHlBUpZMTTQx/N1i/i4se2XXvd7dhTC1bqBvTMZmT6oqz1dhC9
+ oO2954iCb8Cmcug9QlxGn64RR5SU5odBkeU/BEbqy/SvJlsvfm5kVwBsGoL946VtFEFp
+ HI89arFKBJ85WR3BGFuAn0SWuUe4DNJuW+oopnV2NMPqJQ/uC/tnZihZODAeAP07DlyK
+ nQtUr6eP1WtzqBBQ6Kyyqj4n44ttkm23IEjjPr1Tac17F4nn8HRxhuWhZpOeDnXAAebJ
+ 3wcpeYhuaqF8Og6Mlh6BMCdwGr61VEHojY1urNpsrm/w6Dp4g2cm1sj5aab5eymiwNI9
+ Ec9Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1737541945; x=1738146745;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=Lc+q3saCS/w7IN/a5U6g/SgFDPz1VJaUexU4WrTXhAE=;
+ b=CTCef6Gbcba/2xwVDKRvD5vJYD5O9iMgnQE5vFRhS11EGZPZNT9qpWXSg/lefGShvZ
+ NdzR1OGU8AuXzrKQJ6Wxp/bzuk7C+KKqRja2sG84KT9PucciRwfhP+icekRtk2SUhFRQ
+ 2d2T33FG5pt/nIqweJUkBdZiCDo8DhU/tEz8v8vlcjoJdZDI+mIhEAAKTk3Uu+IgYHpG
+ Du+nF/JreWT0e2aoAIZs9VZR1frEEuWKkCVXy4dG23cxiPMmW8rvP3eMPghRjh07ZZLM
+ NMqvBEs76JOt0w9tgrsuqCT1NasK0lz9KmpA3Jv+OAJqK9ieOVdu/9vVFRHOpLHsvVzd
+ 1b4w==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWLA3uHLZotfr35moM7tqRD5iHbOgM6yxCKJe+A/cYXbrYqEN21WGUrXcf/A6OUNkNzV7ErBTsqGZlG@nongnu.org
+X-Gm-Message-State: AOJu0YzXYP2hwR8nH705e0OgI/+FV7hUrf6jnbc1K7UBso6cu0YkR3Qx
+ fES38M4FsAhb1iCnvcRwuCXHHsPUB9tOw94/sk4EPxBz++5rapMSdo2lNt9p26VEZ/KkeirzsuV
+ jZQA=
+X-Gm-Gg: ASbGncuBRaFwJG1inD7PIV/YuaoW9ywgWOEvDvThxTkuEfIjBQNNOWCYO/TJp2/41Ym
+ EvzW5S2OOKYI3cmbSVscRlinbJG7HDXlF28H47wNS4/5K/F4Fz0WGTSlXvDyQ4H0Vx1usUffaOI
+ +9+jrLBOEKj0NXK60IpHklJ1b4+0Yt+STGkRWxMYgKHRrl+Z0d/A2HgdmPO5opWmRHJPHdu33JI
+ NDWsl86bwTpuHJzeGjrRbwsxyEE48Bm4jvupgXjmWuMX7oBHZDmGobKkD2KzMytqOv4Ot5Zkey1
+ Vu50HSKzZFr/I/ujKdEQqk5spSZZkywF6U23mkODw3FQ
+X-Google-Smtp-Source: AGHT+IFUxJXKmskD24bm34KbZV3t8HGKDgxwVhpi7iJNT7Bl9GXBRCkkMGRpfZEra2bZC40/R5D0ZA==
+X-Received: by 2002:a05:600c:218e:b0:434:e65e:457b with SMTP id
+ 5b1f17b1804b1-437c6ae9bdcmr261448295e9.3.1737541945115; 
+ Wed, 22 Jan 2025 02:32:25 -0800 (PST)
+Received: from localhost.localdomain (88-187-86-199.subs.proxad.net.
+ [88.187.86.199]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-438b31adbd7sm19630075e9.17.2025.01.22.02.32.24
+ (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
+ Wed, 22 Jan 2025 02:32:24 -0800 (PST)
+From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+To: qemu-devel@nongnu.org
+Cc: Thomas Huth <thuth@redhat.com>, qemu-s390x@nongnu.org, qemu-ppc@nongnu.org,
+ Pierrick Bouvier <pierrick.bouvier@linaro.org>, qemu-riscv@nongnu.org,
+ qemu-arm@nongnu.org,
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
+ =?UTF-8?q?Daniel=20P=2E=20Berrang=C3=A9?= <berrange@redhat.com>
+Subject: [PATCH] hw/boards: Convert MachineClass bitfields to boolean
+Date: Wed, 22 Jan 2025 11:32:23 +0100
+Message-ID: <20250122103223.55523-1-philmd@linaro.org>
+X-Mailer: git-send-email 2.47.1
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [10.0.1.106]
-X-DKIM-Results: atcpcs31.andestech.com; dkim=none;
-X-DNSRBL: 
-X-MAIL: Atcsqr.andestech.com 50M8m4FF025899
-Received-SPF: pass client-ip=60.248.80.70; envelope-from=ethan84@andestech.com;
- helo=Atcsqr.andestech.com
-X-Spam_score_int: -8
-X-Spam_score: -0.9
-X-Spam_bar: /
-X-Spam_report: (-0.9 / 5.0 requ) BAYES_00=-1.9,
- RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001, RCVD_IN_VALIDITY_SAFE_BLOCKED=0.001,
- RDNS_DYNAMIC=0.982, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- TVD_RCVD_IP=0.001 autolearn=no autolearn_force=no
+Received-SPF: pass client-ip=2a00:1450:4864:20::32e;
+ envelope-from=philmd@linaro.org; helo=mail-wm1-x32e.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -68,222 +98,362 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-Reply-to:  Ethan Chen <ethan84@andestech.com>
-From:  Ethan Chen via <qemu-riscv@nongnu.org>
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-- Add 'iopmp=on' option to enable IOPMP. It adds iopmp devices virt machine
-  to protect all regions of system memory.
+As Daniel mentioned:
 
-Signed-off-by: Ethan Chen <ethan84@andestech.com>
+ "The number of instances of MachineClass is not large enough
+  that we save a useful amount of memory through bitfields."
+
+Also, see recent commit ecbf3567e21 ("docs/devel/style: add a
+section about bitfield, and disallow them for packed structures").
+
+Convert the MachineClass bitfields used as boolean as real ones.
+
+Suggested-by: Daniel P. Berrangé <berrange@redhat.com>
+Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 ---
- docs/system/riscv/virt.rst |  7 ++++
- hw/riscv/Kconfig           |  1 +
- hw/riscv/virt.c            | 75 ++++++++++++++++++++++++++++++++++++++
- include/hw/riscv/virt.h    |  4 ++
- 4 files changed, 87 insertions(+)
+ include/hw/boards.h        | 14 +++++++-------
+ hw/arm/aspeed.c            |  6 +++---
+ hw/arm/fby35.c             |  4 ++--
+ hw/arm/npcm7xx_boards.c    |  6 +++---
+ hw/arm/raspi.c             |  6 +++---
+ hw/arm/sbsa-ref.c          |  2 +-
+ hw/arm/virt.c              |  2 +-
+ hw/arm/xilinx_zynq.c       |  2 +-
+ hw/avr/arduino.c           |  6 +++---
+ hw/core/null-machine.c     | 10 +++++-----
+ hw/i386/microvm.c          |  2 +-
+ hw/i386/pc_piix.c          |  2 +-
+ hw/i386/pc_q35.c           |  4 ++--
+ hw/loongarch/virt.c        |  2 +-
+ hw/m68k/virt.c             |  6 +++---
+ hw/ppc/pnv.c               |  2 +-
+ hw/ppc/spapr.c             |  2 +-
+ hw/riscv/virt.c            |  2 +-
+ hw/s390x/s390-virtio-ccw.c |  8 ++++----
+ hw/xtensa/sim.c            |  2 +-
+ 20 files changed, 45 insertions(+), 45 deletions(-)
 
-diff --git a/docs/system/riscv/virt.rst b/docs/system/riscv/virt.rst
-index 60850970ce..6b5fc1d37d 100644
---- a/docs/system/riscv/virt.rst
-+++ b/docs/system/riscv/virt.rst
-@@ -146,6 +146,13 @@ The following machine-specific options are supported:
+diff --git a/include/hw/boards.h b/include/hw/boards.h
+index 2ad711e56db..ff5904d6fd8 100644
+--- a/include/hw/boards.h
++++ b/include/hw/boards.h
+@@ -279,13 +279,13 @@ struct MachineClass {
+     int max_cpus;
+     int min_cpus;
+     int default_cpus;
+-    unsigned int no_serial:1,
+-        no_parallel:1,
+-        no_floppy:1,
+-        no_cdrom:1,
+-        no_sdcard:1,
+-        pci_allow_0_address:1,
+-        legacy_fw_cfg_order:1;
++    bool no_serial;
++    bool no_parallel;
++    bool no_floppy;
++    bool no_cdrom;
++    bool no_sdcard;
++    bool pci_allow_0_address;
++    bool legacy_fw_cfg_order;
+     bool is_default;
+     const char *default_machine_opts;
+     const char *default_boot_order;
+diff --git a/hw/arm/aspeed.c b/hw/arm/aspeed.c
+index a18d4ed1fb1..dc91052e94d 100644
+--- a/hw/arm/aspeed.c
++++ b/hw/arm/aspeed.c
+@@ -1225,9 +1225,9 @@ static void aspeed_machine_class_init(ObjectClass *oc, void *data)
+     AspeedMachineClass *amc = ASPEED_MACHINE_CLASS(oc);
  
-   Enables the riscv-iommu-sys platform device. Defaults to 'off'.
+     mc->init = aspeed_machine_init;
+-    mc->no_floppy = 1;
+-    mc->no_cdrom = 1;
+-    mc->no_parallel = 1;
++    mc->no_floppy = true;
++    mc->no_cdrom = true;
++    mc->no_parallel = true;
+     mc->default_ram_id = "ram";
+     amc->macs_mask = ASPEED_MAC0_ON;
+     amc->uart_default = ASPEED_DEV_UART5;
+diff --git a/hw/arm/fby35.c b/hw/arm/fby35.c
+index 83d08e578b7..04d0eb9b0c1 100644
+--- a/hw/arm/fby35.c
++++ b/hw/arm/fby35.c
+@@ -168,8 +168,8 @@ static void fby35_class_init(ObjectClass *oc, void *data)
  
-+- iopmp=[on|off]
-+
-+  When this option is "on", IOPMP devices are added to machine. IOPMP checks
-+  memory transcations in system memory. This option is assumed to be "off". To
-+  enable the CPU to perform transactions with a specified RRID, use the CPU
-+  option "-cpu <cpu>,iopmp=true,iopmp_rrid=<rrid>"
-+
- Running Linux kernel
- --------------------
+     mc->desc = "Meta Platforms fby35";
+     mc->init = fby35_init;
+-    mc->no_floppy = 1;
+-    mc->no_cdrom = 1;
++    mc->no_floppy = true;
++    mc->no_cdrom = true;
+     mc->min_cpus = mc->max_cpus = mc->default_cpus = 3;
  
-diff --git a/hw/riscv/Kconfig b/hw/riscv/Kconfig
-index e6a0ac1fa1..637438af2c 100644
---- a/hw/riscv/Kconfig
-+++ b/hw/riscv/Kconfig
-@@ -68,6 +68,7 @@ config RISCV_VIRT
-     select PLATFORM_BUS
-     select ACPI
-     select ACPI_PCI
-+    select RISCV_IOPMP
+     object_class_property_add_bool(oc, "execute-in-place",
+diff --git a/hw/arm/npcm7xx_boards.c b/hw/arm/npcm7xx_boards.c
+index 7727e0dc4bb..c9735b357cd 100644
+--- a/hw/arm/npcm7xx_boards.c
++++ b/hw/arm/npcm7xx_boards.c
+@@ -461,9 +461,9 @@ static void npcm7xx_machine_class_init(ObjectClass *oc, void *data)
+         NULL
+     };
  
- config SHAKTI_C
-     bool
+-    mc->no_floppy = 1;
+-    mc->no_cdrom = 1;
+-    mc->no_parallel = 1;
++    mc->no_floppy = true;
++    mc->no_cdrom = true;
++    mc->no_parallel = true;
+     mc->default_ram_id = "ram";
+     mc->valid_cpu_types = valid_cpu_types;
+ }
+diff --git a/hw/arm/raspi.c b/hw/arm/raspi.c
+index a7a662f40db..665ccd9b50b 100644
+--- a/hw/arm/raspi.c
++++ b/hw/arm/raspi.c
+@@ -322,9 +322,9 @@ void raspi_machine_class_common_init(MachineClass *mc,
+                                board_type(board_rev),
+                                FIELD_EX32(board_rev, REV_CODE, REVISION));
+     mc->block_default_type = IF_SD;
+-    mc->no_parallel = 1;
+-    mc->no_floppy = 1;
+-    mc->no_cdrom = 1;
++    mc->no_parallel = true;
++    mc->no_floppy = true;
++    mc->no_cdrom = true;
+     mc->default_cpus = mc->min_cpus = mc->max_cpus = cores_count(board_rev);
+     mc->default_ram_size = board_ram_size(board_rev);
+     mc->default_ram_id = "ram";
+diff --git a/hw/arm/sbsa-ref.c b/hw/arm/sbsa-ref.c
+index 6183111f2de..33c6b9ea3ec 100644
+--- a/hw/arm/sbsa-ref.c
++++ b/hw/arm/sbsa-ref.c
+@@ -899,7 +899,7 @@ static void sbsa_ref_class_init(ObjectClass *oc, void *data)
+     mc->pci_allow_0_address = true;
+     mc->minimum_page_bits = 12;
+     mc->block_default_type = IF_IDE;
+-    mc->no_cdrom = 1;
++    mc->no_cdrom = true;
+     mc->default_nic = "e1000e";
+     mc->default_ram_size = 1 * GiB;
+     mc->default_ram_id = "sbsa-ref.ram";
+diff --git a/hw/arm/virt.c b/hw/arm/virt.c
+index 99e0a68b6c5..8de57be1d1c 100644
+--- a/hw/arm/virt.c
++++ b/hw/arm/virt.c
+@@ -3124,7 +3124,7 @@ static void virt_machine_class_init(ObjectClass *oc, void *data)
+     machine_class_allow_dynamic_sysbus_dev(mc, TYPE_TPM_TIS_SYSBUS);
+ #endif
+     mc->block_default_type = IF_VIRTIO;
+-    mc->no_cdrom = 1;
++    mc->no_cdrom = true;
+     mc->pci_allow_0_address = true;
+     /* We know we will never create a pre-ARMv7 CPU which needs 1K pages */
+     mc->minimum_page_bits = 12;
+diff --git a/hw/arm/xilinx_zynq.c b/hw/arm/xilinx_zynq.c
+index 8477b828745..ac51fb512db 100644
+--- a/hw/arm/xilinx_zynq.c
++++ b/hw/arm/xilinx_zynq.c
+@@ -463,7 +463,7 @@ static void zynq_machine_class_init(ObjectClass *oc, void *data)
+     mc->desc = "Xilinx Zynq Platform Baseboard for Cortex-A9";
+     mc->init = zynq_init;
+     mc->max_cpus = ZYNQ_MAX_CPUS;
+-    mc->no_sdcard = 1;
++    mc->no_sdcard = true;
+     mc->ignore_memory_transaction_failures = true;
+     mc->valid_cpu_types = valid_cpu_types;
+     mc->default_ram_id = "zynq.ext_ram";
+diff --git a/hw/avr/arduino.c b/hw/avr/arduino.c
+index 48ef478346e..a7229da38aa 100644
+--- a/hw/avr/arduino.c
++++ b/hw/avr/arduino.c
+@@ -64,9 +64,9 @@ static void arduino_machine_class_init(ObjectClass *oc, void *data)
+     mc->default_cpus = 1;
+     mc->min_cpus = mc->default_cpus;
+     mc->max_cpus = mc->default_cpus;
+-    mc->no_floppy = 1;
+-    mc->no_cdrom = 1;
+-    mc->no_parallel = 1;
++    mc->no_floppy = true;
++    mc->no_cdrom = true;
++    mc->no_parallel = true;
+ }
+ 
+ static void arduino_duemilanove_class_init(ObjectClass *oc, void *data)
+diff --git a/hw/core/null-machine.c b/hw/core/null-machine.c
+index f586a4bef54..0655343ff59 100644
+--- a/hw/core/null-machine.c
++++ b/hw/core/null-machine.c
+@@ -49,11 +49,11 @@ static void machine_none_machine_init(MachineClass *mc)
+     mc->max_cpus = 1;
+     mc->default_ram_size = 0;
+     mc->default_ram_id = "ram";
+-    mc->no_serial = 1;
+-    mc->no_parallel = 1;
+-    mc->no_floppy = 1;
+-    mc->no_cdrom = 1;
+-    mc->no_sdcard = 1;
++    mc->no_serial = true;
++    mc->no_parallel = true;
++    mc->no_floppy = true;
++    mc->no_cdrom = true;
++    mc->no_sdcard = true;
+ }
+ 
+ DEFINE_MACHINE("none", machine_none_machine_init)
+diff --git a/hw/i386/microvm.c b/hw/i386/microvm.c
+index a8d354aabe5..c804a39debe 100644
+--- a/hw/i386/microvm.c
++++ b/hw/i386/microvm.c
+@@ -649,7 +649,7 @@ static void microvm_class_init(ObjectClass *oc, void *data)
+     mc->family = "microvm_i386";
+     mc->desc = "microvm (i386)";
+     mc->units_per_default_bus = 1;
+-    mc->no_floppy = 1;
++    mc->no_floppy = true;
+     mc->max_cpus = 288;
+     mc->has_hotpluggable_cpus = false;
+     mc->auto_enable_numa_with_memhp = false;
+diff --git a/hw/i386/pc_piix.c b/hw/i386/pc_piix.c
+index 04d2957adcd..0eda900b036 100644
+--- a/hw/i386/pc_piix.c
++++ b/hw/i386/pc_piix.c
+@@ -773,7 +773,7 @@ static void pc_i440fx_machine_2_5_options(MachineClass *m)
+ 
+     pc_i440fx_machine_2_6_options(m);
+     x86mc->save_tsc_khz = false;
+-    m->legacy_fw_cfg_order = 1;
++    m->legacy_fw_cfg_order = true;
+     compat_props_add(m->compat_props, hw_compat_2_5, hw_compat_2_5_len);
+     compat_props_add(m->compat_props, pc_compat_2_5, pc_compat_2_5_len);
+ }
+diff --git a/hw/i386/pc_q35.c b/hw/i386/pc_q35.c
+index 77536dd697f..444c8c5f0f6 100644
+--- a/hw/i386/pc_q35.c
++++ b/hw/i386/pc_q35.c
+@@ -348,7 +348,7 @@ static void pc_q35_machine_options(MachineClass *m)
+     m->default_display = "std";
+     m->default_nic = "e1000e";
+     m->default_kernel_irqchip_split = false;
+-    m->no_floppy = 1;
++    m->no_floppy = true;
+     m->max_cpus = 4096;
+     m->no_parallel = !module_object_class_by_name(TYPE_ISA_PARALLEL);
+     machine_class_allow_dynamic_sysbus_dev(m, TYPE_AMD_IOMMU_DEVICE);
+@@ -668,7 +668,7 @@ static void pc_q35_machine_2_5_options(MachineClass *m)
+ 
+     pc_q35_machine_2_6_options(m);
+     x86mc->save_tsc_khz = false;
+-    m->legacy_fw_cfg_order = 1;
++    m->legacy_fw_cfg_order = true;
+     compat_props_add(m->compat_props, hw_compat_2_5, hw_compat_2_5_len);
+     compat_props_add(m->compat_props, pc_compat_2_5, pc_compat_2_5_len);
+ }
+diff --git a/hw/loongarch/virt.c b/hw/loongarch/virt.c
+index 63fa0f4e32a..0077c22962b 100644
+--- a/hw/loongarch/virt.c
++++ b/hw/loongarch/virt.c
+@@ -1470,7 +1470,7 @@ static void virt_class_init(ObjectClass *oc, void *data)
+     mc->default_kernel_irqchip_split = false;
+     mc->block_default_type = IF_VIRTIO;
+     mc->default_boot_order = "c";
+-    mc->no_cdrom = 1;
++    mc->no_cdrom = true;
+     mc->possible_cpu_arch_ids = virt_possible_cpu_arch_ids;
+     mc->cpu_index_to_instance_props = virt_cpu_index_to_props;
+     mc->get_default_cpu_node_id = virt_get_default_cpu_node_id;
+diff --git a/hw/m68k/virt.c b/hw/m68k/virt.c
+index 87ec39eeae1..09fde6cfebd 100644
+--- a/hw/m68k/virt.c
++++ b/hw/m68k/virt.c
+@@ -315,9 +315,9 @@ static void virt_machine_class_init(ObjectClass *oc, void *data)
+     mc->desc = "QEMU M68K Virtual Machine";
+     mc->init = virt_init;
+     mc->default_cpu_type = M68K_CPU_TYPE_NAME("m68040");
+-    mc->max_cpus = 1;
+-    mc->no_floppy = 1;
+-    mc->no_parallel = 1;
++    mc->max_cpus = true;
++    mc->no_floppy = true;
++    mc->no_parallel = true;
+     mc->default_ram_id = "m68k_virt.ram";
+ }
+ 
+diff --git a/hw/ppc/pnv.c b/hw/ppc/pnv.c
+index 11fd477b71b..4897a711259 100644
+--- a/hw/ppc/pnv.c
++++ b/hw/ppc/pnv.c
+@@ -2877,7 +2877,7 @@ static void pnv_machine_class_init(ObjectClass *oc, void *data)
+     mc->max_cpus = MAX_CPUS;
+     /* Pnv provides a AHCI device for storage */
+     mc->block_default_type = IF_IDE;
+-    mc->no_parallel = 1;
++    mc->no_parallel = true;
+     mc->default_boot_order = NULL;
+     /*
+      * RAM defaults to less than 2048 for 32-bit hosts, and large
+diff --git a/hw/ppc/spapr.c b/hw/ppc/spapr.c
+index 623842f8064..5bbab1d470f 100644
+--- a/hw/ppc/spapr.c
++++ b/hw/ppc/spapr.c
+@@ -4593,7 +4593,7 @@ static void spapr_machine_class_init(ObjectClass *oc, void *data)
+      */
+     mc->max_cpus = SPAPR_IRQ_NR_IPIS;
+ 
+-    mc->no_parallel = 1;
++    mc->no_parallel = true;
+     mc->default_boot_order = "";
+     mc->default_ram_size = 512 * MiB;
+     mc->default_ram_id = "ppc_spapr.ram";
 diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-index 241389d72f..c5a8f7173e 100644
+index 241389d72f8..88612429cb3 100644
 --- a/hw/riscv/virt.c
 +++ b/hw/riscv/virt.c
-@@ -57,6 +57,8 @@
- #include "hw/acpi/aml-build.h"
- #include "qapi/qapi-visit-common.h"
- #include "hw/virtio/virtio-iommu.h"
-+#include "hw/misc/riscv_iopmp.h"
-+#include "hw/misc/riscv_iopmp_dispatcher.h"
- 
- /* KVM AIA only supports APLIC MSI. APLIC Wired is always emulated by QEMU. */
- static bool virt_use_kvm_aia_aplic_imsic(RISCVVirtAIAType aia_type)
-@@ -94,6 +96,7 @@ static const MemMapEntry virt_memmap[] = {
-     [VIRT_UART0] =        { 0x10000000,         0x100 },
-     [VIRT_VIRTIO] =       { 0x10001000,        0x1000 },
-     [VIRT_FW_CFG] =       { 0x10100000,          0x18 },
-+    [VIRT_IOPMP] =        { 0x10200000,      0x100000 },
-     [VIRT_FLASH] =        { 0x20000000,     0x4000000 },
-     [VIRT_IMSIC_M] =      { 0x24000000, VIRT_IMSIC_MAX_SIZE },
-     [VIRT_IMSIC_S] =      { 0x28000000, VIRT_IMSIC_MAX_SIZE },
-@@ -102,6 +105,11 @@ static const MemMapEntry virt_memmap[] = {
-     [VIRT_DRAM] =         { 0x80000000,           0x0 },
- };
- 
-+static const MemMapEntry iopmp_protect_memmap[] = {
-+    /* IOPMP protect all regions by default */
-+    {0x0, 0xFFFFFFFF},
-+};
-+
- /* PCIe high mmio is fixed for RV32 */
- #define VIRT32_HIGH_PCIE_MMIO_BASE  0x300000000ULL
- #define VIRT32_HIGH_PCIE_MMIO_SIZE  (4 * GiB)
-@@ -1117,6 +1125,24 @@ static void create_fdt_iommu(RISCVVirtState *s, uint16_t bdf)
-                            bdf + 1, iommu_phandle, bdf + 1, 0xffff - bdf);
+@@ -1917,7 +1917,7 @@ static void virt_machine_class_init(ObjectClass *oc, void *data)
+     mc->max_cpus = VIRT_CPUS_MAX;
+     mc->default_cpu_type = TYPE_RISCV_CPU_BASE;
+     mc->block_default_type = IF_VIRTIO;
+-    mc->no_cdrom = 1;
++    mc->no_cdrom = true;
+     mc->pci_allow_0_address = true;
+     mc->possible_cpu_arch_ids = riscv_numa_possible_cpu_arch_ids;
+     mc->cpu_index_to_instance_props = riscv_numa_cpu_index_to_props;
+diff --git a/hw/s390x/s390-virtio-ccw.c b/hw/s390x/s390-virtio-ccw.c
+index 38aeba14eeb..af150cf6155 100644
+--- a/hw/s390x/s390-virtio-ccw.c
++++ b/hw/s390x/s390-virtio-ccw.c
+@@ -785,10 +785,10 @@ static void ccw_machine_class_init(ObjectClass *oc, void *data)
+     mc->init = ccw_init;
+     mc->reset = s390_machine_reset;
+     mc->block_default_type = IF_VIRTIO;
+-    mc->no_cdrom = 1;
+-    mc->no_floppy = 1;
+-    mc->no_parallel = 1;
+-    mc->no_sdcard = 1;
++    mc->no_cdrom = true;
++    mc->no_floppy = true;
++    mc->no_parallel = true;
++    mc->no_sdcard = true;
+     mc->max_cpus = S390_MAX_CPUS;
+     mc->has_hotpluggable_cpus = true;
+     mc->smp_props.books_supported = true;
+diff --git a/hw/xtensa/sim.c b/hw/xtensa/sim.c
+index 0a1fd900376..e06a8c1813c 100644
+--- a/hw/xtensa/sim.c
++++ b/hw/xtensa/sim.c
+@@ -122,7 +122,7 @@ static void xtensa_sim_machine_init(MachineClass *mc)
+     mc->is_default = true;
+     mc->init = xtensa_sim_init;
+     mc->max_cpus = 4;
+-    mc->no_serial = 1;
++    mc->no_serial = true;
+     mc->default_cpu_type = XTENSA_DEFAULT_CPU_TYPE;
  }
  
-+static void create_fdt_iopmp(RISCVVirtState *s, const MemMapEntry *memmap,
-+                             uint32_t irq_mmio_phandle) {
-+    g_autofree char *name = NULL;
-+    MachineState *ms = MACHINE(s);
-+
-+    name = g_strdup_printf("/soc/iopmp@%lx", (long)memmap[VIRT_IOPMP].base);
-+    qemu_fdt_add_subnode(ms->fdt, name);
-+    qemu_fdt_setprop_string(ms->fdt, name, "compatible", "riscv_iopmp");
-+    qemu_fdt_setprop_cells(ms->fdt, name, "reg", 0x0, memmap[VIRT_IOPMP].base,
-+        0x0, memmap[VIRT_IOPMP].size);
-+    qemu_fdt_setprop_cell(ms->fdt, name, "interrupt-parent", irq_mmio_phandle);
-+    if (s->aia_type == VIRT_AIA_TYPE_NONE) {
-+        qemu_fdt_setprop_cell(ms->fdt, name, "interrupts", IOPMP_IRQ);
-+    } else {
-+        qemu_fdt_setprop_cells(ms->fdt, name, "interrupts", IOPMP_IRQ, 0x4);
-+    }
-+}
-+
- static void finalize_fdt(RISCVVirtState *s)
- {
-     uint32_t phandle = 1, irq_mmio_phandle = 1, msi_pcie_phandle = 1;
-@@ -1141,6 +1167,10 @@ static void finalize_fdt(RISCVVirtState *s)
-     create_fdt_uart(s, virt_memmap, irq_mmio_phandle);
- 
-     create_fdt_rtc(s, virt_memmap, irq_mmio_phandle);
-+
-+    if (s->have_iopmp) {
-+        create_fdt_iopmp(s, virt_memmap, irq_mmio_phandle);
-+    }
- }
- 
- static void create_fdt(RISCVVirtState *s, const MemMapEntry *memmap)
-@@ -1529,6 +1559,8 @@ static void virt_machine_init(MachineState *machine)
-     DeviceState *mmio_irqchip, *virtio_irqchip, *pcie_irqchip;
-     int i, base_hartid, hart_count;
-     int socket_count = riscv_socket_count(machine);
-+    DeviceState *iopmp_dev, *iopmp_disp_dev;
-+    StreamSink *iopmp_ss, *iopmp_disp_ss;
- 
-     /* Check socket count limit */
-     if (VIRT_SOCKETS_MAX < socket_count) {
-@@ -1710,6 +1742,29 @@ static void virt_machine_init(MachineState *machine)
-     }
-     virt_flash_map(s, system_memory);
- 
-+    if (s->have_iopmp) {
-+        iopmp_dev = iopmp_create(memmap[VIRT_IOPMP].base,
-+            qdev_get_gpio_in(DEVICE(mmio_irqchip), IOPMP_IRQ));
-+
-+        iopmp_setup_system_memory(iopmp_dev, &iopmp_protect_memmap[0], 1, 0);
-+
-+        iopmp_disp_dev = qdev_new(TYPE_RISCV_IOPMP_DISP);
-+        qdev_prop_set_uint32(DEVICE(iopmp_disp_dev), "target-num", 1);
-+        qdev_prop_set_uint32(DEVICE(iopmp_disp_dev), "stage-num", 1);
-+        qdev_realize(DEVICE(iopmp_disp_dev), NULL, &error_fatal);
-+
-+        /* Add memmap inforamtion to dispatcher */
-+        iopmp_ss = (StreamSink *)&(RISCV_IOPMP(iopmp_dev)->txn_info_sink);
-+        iopmp_dispatcher_add_target(DEVICE(iopmp_disp_dev), iopmp_ss,
-+                                    iopmp_protect_memmap[0].base,
-+                                    iopmp_protect_memmap[0].size,
-+                                    0, 0);
-+
-+        iopmp_disp_ss =
-+            (StreamSink *)&(RISCV_IOPMP_DISP(iopmp_disp_dev)->txn_info_sink);
-+        iopmp_setup_sink(iopmp_dev, iopmp_disp_ss);
-+    }
-+
-     /* load/create device tree */
-     if (machine->dtb) {
-         machine->fdt = load_device_tree(machine->dtb, &s->fdt_size);
-@@ -1845,6 +1900,20 @@ static void virt_set_iommu_sys(Object *obj, Visitor *v, const char *name,
-     visit_type_OnOffAuto(v, name, &s->iommu_sys, errp);
- }
- 
-+static bool virt_get_iopmp(Object *obj, Error **errp)
-+{
-+    RISCVVirtState *s = RISCV_VIRT_MACHINE(obj);
-+
-+    return s->have_iopmp;
-+}
-+
-+static void virt_set_iopmp(Object *obj, bool value, Error **errp)
-+{
-+    RISCVVirtState *s = RISCV_VIRT_MACHINE(obj);
-+
-+    s->have_iopmp = value;
-+}
-+
- bool virt_is_acpi_enabled(RISCVVirtState *s)
- {
-     return s->acpi != ON_OFF_AUTO_OFF;
-@@ -1972,6 +2041,12 @@ static void virt_machine_class_init(ObjectClass *oc, void *data)
-                               NULL, NULL);
-     object_class_property_set_description(oc, "iommu-sys",
-                                           "Enable IOMMU platform device");
-+
-+    object_class_property_add_bool(oc, "iopmp", virt_get_iopmp,
-+                                   virt_set_iopmp);
-+    object_class_property_set_description(oc, "iopmp",
-+                                          "Set on/off to enable/disable "
-+                                          "iopmp device");
- }
- 
- static const TypeInfo virt_machine_typeinfo = {
-diff --git a/include/hw/riscv/virt.h b/include/hw/riscv/virt.h
-index 48a14bea2e..77dcbd5450 100644
---- a/include/hw/riscv/virt.h
-+++ b/include/hw/riscv/virt.h
-@@ -55,6 +55,7 @@ struct RISCVVirtState {
- 
-     int fdt_size;
-     bool have_aclint;
-+    bool have_iopmp;
-     RISCVVirtAIAType aia_type;
-     int aia_guests;
-     char *oem_id;
-@@ -87,11 +88,14 @@ enum {
-     VIRT_PLATFORM_BUS,
-     VIRT_PCIE_ECAM,
-     VIRT_IOMMU_SYS,
-+    VIRT_IOPMP,
- };
- 
- enum {
-     UART0_IRQ = 10,
-     RTC_IRQ = 11,
-+    IOPMP_IRQ = 12,
-+    DMA_IRQ = 13,
-     VIRTIO_IRQ = 1, /* 1 to 8 */
-     VIRTIO_COUNT = 8,
-     PCIE_IRQ = 0x20, /* 32 to 35 */
 -- 
-2.34.1
+2.47.1
 
 
