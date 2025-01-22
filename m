@@ -4,25 +4,25 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6C5EDC02182
-	for <qemu-riscv@archiver.kernel.org>; Wed, 22 Jan 2025 08:38:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3F10DC02181
+	for <qemu-riscv@archiver.kernel.org>; Wed, 22 Jan 2025 08:38:49 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1taWF1-0006Hc-Av; Wed, 22 Jan 2025 03:37:39 -0500
+	id 1taWF1-0006IG-Mt; Wed, 22 Jan 2025 03:37:39 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <ethan84@andestech.com>)
- id 1taWEd-0006Dy-Gd; Wed, 22 Jan 2025 03:37:17 -0500
+ id 1taWEn-0006FU-IH; Wed, 22 Jan 2025 03:37:27 -0500
 Received: from 60-248-80-70.hinet-ip.hinet.net ([60.248.80.70]
  helo=Atcsqr.andestech.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <ethan84@andestech.com>)
- id 1taWEZ-0000c4-3q; Wed, 22 Jan 2025 03:37:15 -0500
+ id 1taWEl-0000eH-LJ; Wed, 22 Jan 2025 03:37:25 -0500
 Received: from mail.andestech.com (ATCPCS31.andestech.com [10.0.1.89])
- by Atcsqr.andestech.com with ESMTPS id 50M8aYUR018565
+ by Atcsqr.andestech.com with ESMTPS id 50M8aZ4c018567
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Wed, 22 Jan 2025 16:36:34 +0800 (+08)
+ Wed, 22 Jan 2025 16:36:35 +0800 (+08)
  (envelope-from ethan84@andestech.com)
 Received: from atcpcw16.andestech.com (10.0.1.106) by ATCPCS31.andestech.com
  (10.0.1.89) with Microsoft SMTP Server (TLS) id 14.3.498.0; Wed, 22 Jan 2025
@@ -34,9 +34,9 @@ CC: <richard.henderson@linaro.org>, <pbonzini@redhat.com>,
  <zhiwei_liu@linux.alibaba.com>, <peterx@redhat.com>,
  <david@redhat.com>, <philmd@linaro.org>, <qemu-riscv@nongnu.org>,
  Ethan Chen <ethan84@andestech.com>
-Subject: [PATCH v10 2/8] memory: Introduce memory region fetch operation
-Date: Wed, 22 Jan 2025 16:36:11 +0800
-Message-ID: <20250122083617.3940240-3-ethan84@andestech.com>
+Subject: [PATCH v10 4/8] target/riscv: Add support for IOPMP
+Date: Wed, 22 Jan 2025 16:36:13 +0800
+Message-ID: <20250122083617.3940240-5-ethan84@andestech.com>
 X-Mailer: git-send-email 2.42.0.345.gaab89be2eb.dirty
 In-Reply-To: <20250122083617.3940240-1-ethan84@andestech.com>
 References: <20250122083617.3940240-1-ethan84@andestech.com>
@@ -46,7 +46,7 @@ Content-Type: text/plain
 X-Originating-IP: [10.0.1.106]
 X-DKIM-Results: atcpcs31.andestech.com; dkim=none;
 X-DNSRBL: 
-X-MAIL: Atcsqr.andestech.com 50M8aYUR018565
+X-MAIL: Atcsqr.andestech.com 50M8aZ4c018567
 Received-SPF: pass client-ip=60.248.80.70; envelope-from=ethan84@andestech.com;
  helo=Atcsqr.andestech.com
 X-Spam_score_int: -8
@@ -73,232 +73,70 @@ From:  Ethan Chen via <qemu-riscv@nongnu.org>
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Allow memory regions to have different behaviors for read and fetch
-operations.
-
-For example, the RISC-V IOPMP could raise an interrupt when the CPU
-tries to fetch from a non-executable region.
-
-If the fetch operation for a memory region is not implemented, the read
-operation will still be used for fetch operations.
-
 Signed-off-by: Ethan Chen <ethan84@andestech.com>
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 ---
- accel/tcg/cputlb.c    |   9 +++-
- include/exec/memory.h |  27 +++++++++++
- system/memory.c       | 104 ++++++++++++++++++++++++++++++++++++++++++
- system/trace-events   |   2 +
- 4 files changed, 140 insertions(+), 2 deletions(-)
+ target/riscv/cpu.c        |  3 +++
+ target/riscv/cpu_cfg.h    |  2 ++
+ target/riscv/cpu_helper.c | 18 +++++++++++++++---
+ 3 files changed, 20 insertions(+), 3 deletions(-)
 
-diff --git a/accel/tcg/cputlb.c b/accel/tcg/cputlb.c
-index b4ccf0cdcb..71c16a1ac1 100644
---- a/accel/tcg/cputlb.c
-+++ b/accel/tcg/cputlb.c
-@@ -1947,8 +1947,13 @@ static uint64_t int_ld_mmio_beN(CPUState *cpu, CPUTLBEntryFull *full,
-         this_size = 1 << this_mop;
-         this_mop |= MO_BE;
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index 3d4bd157d2..0788511cf4 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -2867,6 +2867,9 @@ static const Property riscv_cpu_properties[] = {
+      * it with -x and default to 'false'.
+      */
+     DEFINE_PROP_BOOL("x-misa-w", RISCVCPU, cfg.misa_w, false),
++
++    DEFINE_PROP_BOOL("iopmp", RISCVCPU, cfg.iopmp, false),
++    DEFINE_PROP_UINT32("iopmp_rrid", RISCVCPU, cfg.iopmp_rrid, 0),
+ };
  
--        r = memory_region_dispatch_read(mr, mr_offset, &val,
--                                        this_mop, full->attrs);
-+        if (type == MMU_INST_FETCH) {
-+            r = memory_region_dispatch_fetch(mr, mr_offset, &val,
-+                                             this_mop, full->attrs);
+ #if defined(TARGET_RISCV64)
+diff --git a/target/riscv/cpu_cfg.h b/target/riscv/cpu_cfg.h
+index b410b1e603..09644b8252 100644
+--- a/target/riscv/cpu_cfg.h
++++ b/target/riscv/cpu_cfg.h
+@@ -188,6 +188,8 @@ struct RISCVCPUConfig {
+     bool pmp;
+     bool debug;
+     bool misa_w;
++    bool iopmp;
++    uint32_t iopmp_rrid;
+ 
+     bool short_isa_string;
+ 
+diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+index e1dfc4ecbf..3940e612af 100644
+--- a/target/riscv/cpu_helper.c
++++ b/target/riscv/cpu_helper.c
+@@ -1702,9 +1702,21 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
+     }
+ 
+     if (ret == TRANSLATE_SUCCESS) {
+-        tlb_set_page(cs, address & ~(tlb_size - 1), pa & ~(tlb_size - 1),
+-                     prot, mmu_idx, tlb_size);
+-        return true;
++        if (cpu->cfg.iopmp) {
++            /*
++             * Do not align address on early stage because IOPMP needs origin
++             * address for permission check.
++             */
++            tlb_set_page_with_attrs(cs, address, pa,
++                                    (MemTxAttrs)
++                                        {
++                                          .requester_id = cpu->cfg.iopmp_rrid,
++                                        },
++                                    prot, mmu_idx, tlb_size);
 +        } else {
-+            r = memory_region_dispatch_read(mr, mr_offset, &val,
-+                                            this_mop, full->attrs);
++            tlb_set_page(cs, address & ~(tlb_size - 1), pa & ~(tlb_size - 1),
++                         prot, mmu_idx, tlb_size);
 +        }
-         if (unlikely(r != MEMTX_OK)) {
-             io_failed(cpu, full, addr, this_size, type, mmu_idx, r, ra);
-         }
-diff --git a/include/exec/memory.h b/include/exec/memory.h
-index 3ee1901b52..6166d697d9 100644
---- a/include/exec/memory.h
-+++ b/include/exec/memory.h
-@@ -273,6 +273,11 @@ struct MemoryRegionOps {
-                   hwaddr addr,
-                   uint64_t data,
-                   unsigned size);
-+    /* Fetch from the memory region. @addr is relative to @mr; @size is
-+     * in bytes. */
-+    uint64_t (*fetch)(void *opaque,
-+                      hwaddr addr,
-+                      unsigned size);
- 
-     MemTxResult (*read_with_attrs)(void *opaque,
-                                    hwaddr addr,
-@@ -284,6 +289,11 @@ struct MemoryRegionOps {
-                                     uint64_t data,
-                                     unsigned size,
-                                     MemTxAttrs attrs);
-+    MemTxResult (*fetch_with_attrs)(void *opaque,
-+                                    hwaddr addr,
-+                                    uint64_t *data,
-+                                    unsigned size,
-+                                    MemTxAttrs attrs);
- 
-     enum device_endian endianness;
-     /* Guest-visible constraints: */
-@@ -2604,6 +2614,23 @@ MemTxResult memory_region_dispatch_write(MemoryRegion *mr,
-                                          MemOp op,
-                                          MemTxAttrs attrs);
- 
-+
-+/**
-+ * memory_region_dispatch_fetch: perform a fetch directly to the specified
-+ * MemoryRegion.
-+ *
-+ * @mr: #MemoryRegion to access
-+ * @addr: address within that region
-+ * @pval: pointer to uint64_t which the data is written to
-+ * @op: size, sign, and endianness of the memory operation
-+ * @attrs: memory transaction attributes to use for the access
-+ */
-+MemTxResult memory_region_dispatch_fetch(MemoryRegion *mr,
-+                                         hwaddr addr,
-+                                         uint64_t *pval,
-+                                         MemOp op,
-+                                         MemTxAttrs attrs);
-+
- /**
-  * address_space_init: initializes an address space
-  *
-diff --git a/system/memory.c b/system/memory.c
-index b17b5538ff..7f26f681f9 100644
---- a/system/memory.c
-+++ b/system/memory.c
-@@ -477,6 +477,51 @@ static MemTxResult memory_region_read_with_attrs_accessor(MemoryRegion *mr,
-     return r;
- }
- 
-+static MemTxResult memory_region_fetch_accessor(MemoryRegion *mr,
-+                                                hwaddr addr,
-+                                                uint64_t *value,
-+                                                unsigned size,
-+                                                signed shift,
-+                                                uint64_t mask,
-+                                                MemTxAttrs attrs)
-+{
-+    uint64_t tmp;
-+
-+    tmp = mr->ops->fetch(mr->opaque, addr, size);
-+    if (mr->subpage) {
-+        trace_memory_region_subpage_fetch(get_cpu_index(), mr, addr, tmp, size);
-+    } else if (trace_event_get_state_backends(TRACE_MEMORY_REGION_OPS_FETCH)) {
-+        hwaddr abs_addr = memory_region_to_absolute_addr(mr, addr);
-+        trace_memory_region_ops_fetch(get_cpu_index(), mr, abs_addr, tmp, size,
-+                                     memory_region_name(mr));
-+    }
-+    memory_region_shift_read_access(value, shift, mask, tmp);
-+    return MEMTX_OK;
-+}
-+
-+static MemTxResult memory_region_fetch_with_attrs_accessor(MemoryRegion *mr,
-+                                                          hwaddr addr,
-+                                                          uint64_t *value,
-+                                                          unsigned size,
-+                                                          signed shift,
-+                                                          uint64_t mask,
-+                                                          MemTxAttrs attrs)
-+{
-+    uint64_t tmp = 0;
-+    MemTxResult r;
-+
-+    r = mr->ops->fetch_with_attrs(mr->opaque, addr, &tmp, size, attrs);
-+    if (mr->subpage) {
-+        trace_memory_region_subpage_fetch(get_cpu_index(), mr, addr, tmp, size);
-+    } else if (trace_event_get_state_backends(TRACE_MEMORY_REGION_OPS_FETCH)) {
-+        hwaddr abs_addr = memory_region_to_absolute_addr(mr, addr);
-+        trace_memory_region_ops_fetch(get_cpu_index(), mr, abs_addr, tmp, size,
-+                                      memory_region_name(mr));
-+    }
-+    memory_region_shift_read_access(value, shift, mask, tmp);
-+    return r;
-+}
-+
- static MemTxResult memory_region_write_accessor(MemoryRegion *mr,
-                                                 hwaddr addr,
-                                                 uint64_t *value,
-@@ -1493,6 +1538,65 @@ MemTxResult memory_region_dispatch_read(MemoryRegion *mr,
-     return r;
- }
- 
-+static MemTxResult memory_region_dispatch_fetch1(MemoryRegion *mr,
-+                                                hwaddr addr,
-+                                                uint64_t *pval,
-+                                                unsigned size,
-+                                                MemTxAttrs attrs)
-+{
-+    *pval = 0;
-+
-+    if (mr->ops->fetch) {
-+        return access_with_adjusted_size(addr, pval, size,
-+                                         mr->ops->impl.min_access_size,
-+                                         mr->ops->impl.max_access_size,
-+                                         memory_region_fetch_accessor,
-+                                         mr, attrs);
-+    } else if (mr->ops->fetch_with_attrs) {
-+        return access_with_adjusted_size(addr, pval, size,
-+            mr->ops->impl.min_access_size,
-+            mr->ops->impl.max_access_size,
-+            memory_region_fetch_with_attrs_accessor,
-+            mr, attrs);
-+    } else if (mr->ops->read) {
-+        return access_with_adjusted_size(addr, pval, size,
-+                                         mr->ops->impl.min_access_size,
-+                                         mr->ops->impl.max_access_size,
-+                                         memory_region_read_accessor,
-+                                         mr, attrs);
-+    } else {
-+        return access_with_adjusted_size(addr, pval, size,
-+                                         mr->ops->impl.min_access_size,
-+                                         mr->ops->impl.max_access_size,
-+                                         memory_region_read_with_attrs_accessor,
-+                                         mr, attrs);
-+    }
-+}
-+
-+MemTxResult memory_region_dispatch_fetch(MemoryRegion *mr,
-+                                        hwaddr addr,
-+                                        uint64_t *pval,
-+                                        MemOp op,
-+                                        MemTxAttrs attrs)
-+{
-+    unsigned size = memop_size(op);
-+    MemTxResult r;
-+
-+    if (mr->alias) {
-+        return memory_region_dispatch_fetch(mr->alias,
-+                                           mr->alias_offset + addr,
-+                                           pval, op, attrs);
-+    }
-+    if (!memory_region_access_valid(mr, addr, size, false, attrs)) {
-+        *pval = unassigned_mem_read(mr, addr, size);
-+        return MEMTX_DECODE_ERROR;
-+    }
-+
-+    r = memory_region_dispatch_fetch1(mr, addr, pval, size, attrs);
-+    adjust_endianness(mr, pval, op);
-+    return r;
-+}
-+
- /* Return true if an eventfd was signalled */
- static bool memory_region_dispatch_write_eventfds(MemoryRegion *mr,
-                                                     hwaddr addr,
-diff --git a/system/trace-events b/system/trace-events
-index 5bbc3fbffa..4e78bb515b 100644
---- a/system/trace-events
-+++ b/system/trace-events
-@@ -18,8 +18,10 @@ cpu_out(unsigned int addr, char size, unsigned int val) "addr 0x%x(%c) value %u"
- # memory.c
- memory_region_ops_read(int cpu_index, void *mr, uint64_t addr, uint64_t value, unsigned size, const char *name) "cpu %d mr %p addr 0x%"PRIx64" value 0x%"PRIx64" size %u name '%s'"
- memory_region_ops_write(int cpu_index, void *mr, uint64_t addr, uint64_t value, unsigned size, const char *name) "cpu %d mr %p addr 0x%"PRIx64" value 0x%"PRIx64" size %u name '%s'"
-+memory_region_ops_fetch(int cpu_index, void *mr, uint64_t addr, uint64_t value, unsigned size, const char *name) "cpu %d mr %p addr 0x%"PRIx64" value 0x%"PRIx64" size %u name '%s'"
- memory_region_subpage_read(int cpu_index, void *mr, uint64_t offset, uint64_t value, unsigned size) "cpu %d mr %p offset 0x%"PRIx64" value 0x%"PRIx64" size %u"
- memory_region_subpage_write(int cpu_index, void *mr, uint64_t offset, uint64_t value, unsigned size) "cpu %d mr %p offset 0x%"PRIx64" value 0x%"PRIx64" size %u"
-+memory_region_subpage_fetch(int cpu_index, void *mr, uint64_t offset, uint64_t value, unsigned size) "cpu %d mr %p offset 0x%"PRIx64" value 0x%"PRIx64" size %u"
- memory_region_ram_device_read(int cpu_index, void *mr, uint64_t addr, uint64_t value, unsigned size) "cpu %d mr %p addr 0x%"PRIx64" value 0x%"PRIx64" size %u"
- memory_region_ram_device_write(int cpu_index, void *mr, uint64_t addr, uint64_t value, unsigned size) "cpu %d mr %p addr 0x%"PRIx64" value 0x%"PRIx64" size %u"
- memory_region_sync_dirty(const char *mr, const char *listener, int global) "mr '%s' listener '%s' synced (global=%d)"
+     } else if (probe) {
+         return false;
+     } else {
 -- 
 2.34.1
 
