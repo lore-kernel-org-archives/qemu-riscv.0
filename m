@@ -4,99 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7D658C02181
-	for <qemu-riscv@archiver.kernel.org>; Wed, 22 Jan 2025 16:50:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 26729C02181
+	for <qemu-riscv@archiver.kernel.org>; Wed, 22 Jan 2025 16:59:26 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1taduo-0002P6-T1; Wed, 22 Jan 2025 11:49:18 -0500
+	id 1tae40-0006uq-SX; Wed, 22 Jan 2025 11:58:48 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <paolo.savini@embecosm.com>)
- id 1tadul-0002MD-50
- for qemu-riscv@nongnu.org; Wed, 22 Jan 2025 11:49:15 -0500
-Received: from mail-wm1-x332.google.com ([2a00:1450:4864:20::332])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tae3x-0006tM-QP
+ for qemu-riscv@nongnu.org; Wed, 22 Jan 2025 11:58:45 -0500
+Received: from mail-wm1-x336.google.com ([2a00:1450:4864:20::336])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <paolo.savini@embecosm.com>)
- id 1taduh-000599-WF
- for qemu-riscv@nongnu.org; Wed, 22 Jan 2025 11:49:14 -0500
-Received: by mail-wm1-x332.google.com with SMTP id
- 5b1f17b1804b1-4364a37a1d7so70950185e9.3
- for <qemu-riscv@nongnu.org>; Wed, 22 Jan 2025 08:49:11 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tae3u-0000OQ-BJ
+ for qemu-riscv@nongnu.org; Wed, 22 Jan 2025 11:58:45 -0500
+Received: by mail-wm1-x336.google.com with SMTP id
+ 5b1f17b1804b1-4363dc916ceso7715635e9.0
+ for <qemu-riscv@nongnu.org>; Wed, 22 Jan 2025 08:58:41 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=embecosm.com; s=google; t=1737564550; x=1738169350; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=RFJJKfgkBEGM7sJusVELCJJSwbQK6DNE8A418I+aIT0=;
- b=gBkU+qpqmYAnh2YGf4xSeHJVUXj77RwQyuLfgzRtqamkAM7P+8ZOysX7bY53UOmmm8
- 8LMgVF+bLOhXqT9XOtRoYsd4lK8onmIa8rurmtdthYos6agAogOXN8zcQ91JXPh7D/U+
- GaeBElaRxIDegzhkHzaprIjOEYTV0E/Otaf+VRP2rODv0Chqiw8cvGmYxewVI1NULO/F
- UNQCpsmb3XBb/StshKNels7q5/xajlXTE63iCeA+ANrQjPHm3ARVEL96lcTc7Fv3fjg3
- km0hku8xrTV/lMaFf3E43MxvU8775tDLu2K4hUcHNSNOipu6RCZJRklkczqLWo8+Uy7c
- /q/A==
+ d=linaro.org; s=google; t=1737565120; x=1738169920; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=zBb0+Z25iBU/ZlpKFdEkVNY3Zn1H2tU+69Z2eZLvuBU=;
+ b=RrQhAs0VSbZrYnrTLHbqN35EvT30Kre9svUUEunF/0M1La6ylfZs+rZonTIEKPF9C7
+ HTHNrMGfZb1lmLr4wCn5ZIGmZMqQD6nD4Y0yEhgMeqZNA6wWBkKvc3x1Vi8uwhA2TFtV
+ 1CNZbPW9MHw3Gqz9RspufSNCR9G7mpyz86cDXr0HxtpZCOGh99QdAKyNrd7x1ij+vkam
+ CQvPyyBkagmqml/d3CQvUK2ALSFS28LmVpaEt1KLN9FcWyhNM5zEO3YJg4Gh5wkAebfu
+ JoFA9F7poaD8BSRcJHrwFZxnEPetXnwtWCARpc0QhdZgzebL0Onry2o/4dyHbAZWaYPc
+ 6x4g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1737564550; x=1738169350;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=RFJJKfgkBEGM7sJusVELCJJSwbQK6DNE8A418I+aIT0=;
- b=na0h6ro4f2WyXI1qWGJBvwSbwlAJ8H7xIjMiAUbV4btCEHbGIwArpRS6321V+Y8vtC
- nnvatrNRq4KLRFrehjP8gpAkoI8vgtIazW3dn2JBO3xYTjOGry73XkgokczlGdQ0b07h
- Bk50ykNOh542IH2m5DoeUjNP1c+uvbxQUs4Y9PWQC/2RHxoliVgi84cggw+v0xBopUcq
- SSvj+M+HGS2EUp21tZoaCLSA025N4ya2+AyQVauFBFTab84579ex1M1EqsUPTHG8zJfu
- TlTEjOzFo4mS0Tscr588LnpRJTHCivMesXcsJYtqby4ncfe7RoZFFKL4yQulEQWuXHm2
- TCEQ==
+ d=1e100.net; s=20230601; t=1737565120; x=1738169920;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=zBb0+Z25iBU/ZlpKFdEkVNY3Zn1H2tU+69Z2eZLvuBU=;
+ b=Mrpv8cP0FbBYUlSRrhayRis/zr5H2BT6Lbt+eeHlkaPyJ2mXddUrUhdWYA0IAZv+Jx
+ etKigZMMtoja5ouk+Mz03yWi0fI1Sp5vr9BWoCHlnXTancuMcEZQYIO3uNVeL8mkRald
+ S93Y6hxzokAJkPrC5sPFw7HU2M3ton7+vJCapLOxL+6uRhtYuj4rG2vo+tIUOwUxDCRv
+ 7fffdbEWGs5TSyt4gashf+FfNIvrKS4Z7SXylM8dqlMETwse6N1E3Hi89hmWN3tnEjhI
+ ziGlXsRAaLpIrK6I1deA5oTUBMBX65Mev/znhTRAvFdozXvkBD255r7eXU+a+mBetIPQ
+ 5oRg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVmNyUlCQi6yYiQ+4QA1zziw5vBWniCTEKeAJFJWI2gtYFMhphllVoEv2bKKCi0okJ1Kiz2W9poMKwr@nongnu.org
-X-Gm-Message-State: AOJu0YxQbQ1aCx079s6GB5APBTdudcIWRQ5Klekodb81IMPHIoR7aiz1
- MYZleyL8cC79hj7U/wRKngNlo66PIKwqTlnLPHswACf00SOsas91tOBn5AVN3wg=
-X-Gm-Gg: ASbGnctrPZ7BKotfTnnC9XyCjyf7q9RKkdICttrrZdneWtCLwiAUrl3iwp242X9UwjT
- bJTizaSxPWvlPzLpO0D7Sy0gx+RaJi1V3fYxYzgxeKxn0z+KgY1WxqmpQo5pQWspsiiF9+joiM2
- 7jPLijVOld31ASss6E8vuLQdIkgzfQssG4q5n8mXD2lh/sPybImpAD4XIbjwe8kJA+oqUBWRObH
- feoypUDapOph1Gva7Dj5uSgXMX2gnd0zM1Qvtc4HSuXOd8SLaVIhi3Cl/P8CqDKIacJH92VCvYd
- Xyz/klOf1v5UVahO19kF4RUAuNtVbOxvVFE=
-X-Google-Smtp-Source: AGHT+IElisiAtz7vDytLa2ac3g+k5tcdi6Kk7J6YQrFsU0Dm2TVBn5/7M42jyODk0rDS/8zXQRgv6w==
-X-Received: by 2002:a05:600c:3d05:b0:436:469f:2210 with SMTP id
- 5b1f17b1804b1-438af40851bmr59092435e9.1.1737564549726; 
- Wed, 22 Jan 2025 08:49:09 -0800 (PST)
-Received: from paolo-laptop-amd.sou.embecosm-corp.com ([212.69.42.53])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-438b318c059sm32095105e9.8.2025.01.22.08.49.09
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 22 Jan 2025 08:49:09 -0800 (PST)
-From: Paolo Savini <paolo.savini@embecosm.com>
-To: qemu-devel@nongnu.org,
-	qemu-riscv@nongnu.org
-Cc: Paolo Savini <paolo.savini@embecosm.com>,
- Richard Handerson <richard.henderson@linaro.org>,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bmeng.cn@gmail.com>,
- Weiwei Li <liwei1518@gmail.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Helene Chelin <helene.chelin@embecosm.com>, Nathan Egge <negge@google.com>,
- Max Chou <max.chou@sifive.com>,
- Jeremy Bennett <jeremy.bennett@embecosm.com>,
- Craig Blackmore <craig.blackmore@embecosm.com>
-Subject: [RFC 1/1 v3] target/riscv: use tcg ops generation to emulate whole
- reg rvv loads/stores.
-Date: Wed, 22 Jan 2025 16:49:05 +0000
-Message-ID: <20250122164905.13615-2-paolo.savini@embecosm.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20250122164905.13615-1-paolo.savini@embecosm.com>
-References: <20250122164905.13615-1-paolo.savini@embecosm.com>
+ AJvYcCULTg/lllR0+4Efa7o2C7cAQav8LruR2+/jQOTw6cLFnt4xjSopJ4oV5zLSuTGV/VAm3d3HyPOEHzAV@nongnu.org
+X-Gm-Message-State: AOJu0YzmxJaVP4e6jgEgS4OPUsCi1P2IH0WXQdvxC4AT0gjVa9tr8clJ
+ Y+L4DxCsZRncIF2E4E36fdEOyupxzBtMtWUOqp4+ax+eOc4lD9L/QMmza28OwJ8=
+X-Gm-Gg: ASbGncuuAcahvy9aV1cKD6Vqe/jfn/U/7NLFBwXmKrXVmkn0bPqZjvCxYCjQI8AaZl+
+ yffaR33mBSzpGCRsPAYVGtpnWeIQsJ7xaTyFWgf5k84gBrB6GyL7Q+/qLHhoe0U+p3WYCCZb3pU
+ Y1BEjCRHccNT/EDV0CAjgg9abNX5YVXMldxKPRllWHD/VLrNfjrRKxvligp32FaW21pmKq18ghn
+ UVUQja2CcrB9hum7+IfcL1x2AP27C8gOOXczT8UYPLNeXNxLS6fhmxB5706oUYWYtmb3b8B65nI
+ BdVNxGurrWnyXLNc9+I7F2yl7Jq0jKwaZDrsOg==
+X-Google-Smtp-Source: AGHT+IF7oM/QFCgoClUFVA8RcThbQLMdIzzFB2zrpHMCJqkoS64PBhTGB+SZ/2rWyFbIKShPTm29Cw==
+X-Received: by 2002:adf:9ccf:0:b0:386:4332:cc99 with SMTP id
+ ffacd0b85a97d-38bec505da6mr19793785f8f.17.1737565120299; 
+ Wed, 22 Jan 2025 08:58:40 -0800 (PST)
+Received: from [192.168.69.181] (88-187-86-199.subs.proxad.net.
+ [88.187.86.199]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-38bf3275622sm17053580f8f.69.2025.01.22.08.58.39
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 22 Jan 2025 08:58:39 -0800 (PST)
+Message-ID: <cf3f5611-2e66-4d31-bc20-d70e3bf4230a@linaro.org>
+Date: Wed, 22 Jan 2025 17:58:38 +0100
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] hw/boards: Convert MachineClass bitfields to boolean
+To: Thomas Huth <thuth@redhat.com>, Peter Maydell <peter.maydell@linaro.org>
+Cc: qemu-devel@nongnu.org, qemu-s390x@nongnu.org, qemu-ppc@nongnu.org,
+ Pierrick Bouvier <pierrick.bouvier@linaro.org>, qemu-riscv@nongnu.org,
+ qemu-arm@nongnu.org, =?UTF-8?Q?Daniel_P=2E_Berrang=C3=A9?=
+ <berrange@redhat.com>
+References: <20250122103223.55523-1-philmd@linaro.org>
+ <6393ca88-0613-415e-8178-18a34778b2ab@redhat.com>
+ <CAFEAcA-+9xhH+gXWGfN9bN=rnsShyRs0i+Kd0NDfMYrSNVbF4w@mail.gmail.com>
+ <a48356fd-d964-4bd8-b349-3f63c92431a2@redhat.com>
+Content-Language: en-US
+From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+In-Reply-To: <a48356fd-d964-4bd8-b349-3f63c92431a2@redhat.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::332;
- envelope-from=paolo.savini@embecosm.com; helo=mail-wm1-x332.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::336;
+ envelope-from=philmd@linaro.org; helo=mail-wm1-x336.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -112,216 +106,67 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-This patch replaces the use of a helper function with direct tcg ops generation
-in order to emulate whole register loads and stores. This is done in order to
-improve the performance of QEMU.
-We still use the helper function when vstart is not 0 at the beginning of the
-emulation of the whole register load or store or when we would end up generating
-partial loads or stores of vector elements (e.g. emulating 64 bits element loads
-with pairs of 32 bits loads on hosts with 32 bits registers).
-The latter condition ensures that we are not surprised by a trap in mid-element
-and consecutively that we can update vstart correctly.
-We also use the helper function when it performs better than tcg for specific
-combinations of vector length, number of fields and element size.
+On 22/1/25 16:27, Thomas Huth wrote:
+> On 22/01/2025 15.33, Peter Maydell wrote:
+>> On Wed, 22 Jan 2025 at 12:36, Thomas Huth <thuth@redhat.com> wrote:
+>>>
+>>> On 22/01/2025 11.32, Philippe Mathieu-Daudé wrote:
+>>>> As Daniel mentioned:
+>>>>
+>>>>    "The number of instances of MachineClass is not large enough
+>>>>     that we save a useful amount of memory through bitfields."
+>>>>
+>>>> Also, see recent commit ecbf3567e21 ("docs/devel/style: add a
+>>>> section about bitfield, and disallow them for packed structures").
+>>>>
+>>>> Convert the MachineClass bitfields used as boolean as real ones.
+>>>>
+>>>> Suggested-by: Daniel P. Berrangé <berrange@redhat.com>
+>>>> Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+>>>> ---
+>>>>    include/hw/boards.h        | 14 +++++++-------
+>>>>    hw/arm/aspeed.c            |  6 +++---
+>>>>    hw/arm/fby35.c             |  4 ++--
+>>>>    hw/arm/npcm7xx_boards.c    |  6 +++---
+>>>>    hw/arm/raspi.c             |  6 +++---
+>>>>    hw/arm/sbsa-ref.c          |  2 +-
+>>>>    hw/arm/virt.c              |  2 +-
+>>>>    hw/arm/xilinx_zynq.c       |  2 +-
+>>>>    hw/avr/arduino.c           |  6 +++---
+>>>>    hw/core/null-machine.c     | 10 +++++-----
+>>>>    hw/i386/microvm.c          |  2 +-
+>>>>    hw/i386/pc_piix.c          |  2 +-
+>>>>    hw/i386/pc_q35.c           |  4 ++--
+>>>>    hw/loongarch/virt.c        |  2 +-
+>>>>    hw/m68k/virt.c             |  6 +++---
+>>>>    hw/ppc/pnv.c               |  2 +-
+>>>>    hw/ppc/spapr.c             |  2 +-
+>>>>    hw/riscv/virt.c            |  2 +-
+>>>>    hw/s390x/s390-virtio-ccw.c |  8 ++++----
+>>>>    hw/xtensa/sim.c            |  2 +-
+>>>>    20 files changed, 45 insertions(+), 45 deletions(-)
+>>>
+>>> So if you are touching all these files, why not go with an even more
+>>> meaningful rework instead? Flip the meaning of the "no_*" flags to the
+>>> opposite, so that we e.g. have "has_default_cdrom" instead of 
+>>> "no_cdrom",
+>>> then new boards would not have to remember to set these ugly "no_" flags
+>>> anymore. It's quite a bit of work, but it could certainly be helpful 
+>>> in the
+>>> long run.
+>>
+>> Well, that depends on what you think the default for new
+>> boards should be. I suspect these are all no_foo because
+>> when they were put in the idea was "all boards should
+>> be default have a foo, and 'this board defaults to not
+>> having a foo' is the rarer special case it has to set"...
+> 
+> That might have been the reasoning for the naming 20 years ago. But 
+> times have changed... which recent board does still have a floppy drive? 
+> parallel port? And the others are also not that common anymore...
 
-Signed-off-by: Paolo Savini <paolo.savini@embecosm.com>
----
- target/riscv/insn_trans/trans_rvv.c.inc | 164 +++++++++++++++++-------
- 1 file changed, 119 insertions(+), 45 deletions(-)
+I tried but not much interest:
+https://lore.kernel.org/qemu-devel/219be312-4acc-46c9-8a56-16e5cb483ae4@linaro.org/
 
-diff --git a/target/riscv/insn_trans/trans_rvv.c.inc b/target/riscv/insn_trans/trans_rvv.c.inc
-index b9883a5d32..85935276de 100644
---- a/target/riscv/insn_trans/trans_rvv.c.inc
-+++ b/target/riscv/insn_trans/trans_rvv.c.inc
-@@ -1100,25 +1100,99 @@ GEN_VEXT_TRANS(vle64ff_v, MO_64, r2nfvm, ldff_op, ld_us_check)
- typedef void gen_helper_ldst_whole(TCGv_ptr, TCGv, TCGv_env, TCGv_i32);
- 
- static bool ldst_whole_trans(uint32_t vd, uint32_t rs1, uint32_t nf,
--                             gen_helper_ldst_whole *fn,
--                             DisasContext *s)
-+                             uint32_t log2_esz, gen_helper_ldst_whole *fn,
-+                             DisasContext *s, bool is_load)
- {
--    TCGv_ptr dest;
--    TCGv base;
--    TCGv_i32 desc;
-+    mark_vs_dirty(s);
- 
--    uint32_t data = FIELD_DP32(0, VDATA, NF, nf);
--    data = FIELD_DP32(data, VDATA, VM, 1);
--    dest = tcg_temp_new_ptr();
--    desc = tcg_constant_i32(simd_desc(s->cfg_ptr->vlenb,
--                                      s->cfg_ptr->vlenb, data));
-+    uint32_t vlen = s->cfg_ptr->vlenb << 3;
- 
--    base = get_gpr(s, rs1, EXT_NONE);
--    tcg_gen_addi_ptr(dest, tcg_env, vreg_ofs(s, vd));
-+    /*
-+     * Load/store multiple bytes per iteration.
-+     * When possible do this atomically.
-+     * Update vstart with the number of processed elements.
-+     * Use the helper function if either:
-+     * - vstart is not 0.
-+     * - the target has 32 bit registers and we are loading/storing 64 bit long
-+     *   elements. This is to ensure that we process every element with a single
-+     *   memory instruction.
-+     * - whether the helper function performs better:
-+     *   on x86 the helper function performs better with few combinations of NF,
-+     *   ESZ and VLEN.
-+     *   Other architectures may have other combinations or conditions and they
-+     *   can be added here if necessary.
-+     */
- 
--    mark_vs_dirty(s);
-+    bool use_helper_fn = !s->vstart_eq_zero || (TCG_TARGET_REG_BITS == 32 && log2_esz == 3);
-+
-+#if defined(HOST_X86_64)
-+    use_helper_fn |= ((nf == 4) && (log2_esz == 0) && (vlen == 1024)) ||
-+                     ((nf == 8) && (log2_esz == 0) && (vlen == 512))  ||
-+                     ((nf == 8) && (log2_esz == 0) && (vlen == 1024)) ||
-+                     ((nf == 8) && (log2_esz == 3) && (vlen == 1024));
-+#endif
- 
--    fn(dest, base, tcg_env, desc);
-+     if (!use_helper_fn) {
-+        TCGv addr = tcg_temp_new();
-+        uint32_t size = s->cfg_ptr->vlenb * nf;
-+        TCGv_i64 t8 = tcg_temp_new_i64();
-+        TCGv_i32 t4 = tcg_temp_new_i32();
-+        MemOp atomicity = MO_ATOM_NONE;
-+        if (log2_esz == 0) {
-+            atomicity = MO_ATOM_NONE;
-+        } else {
-+            atomicity = MO_ATOM_IFALIGN_PAIR;
-+        }
-+        if (TCG_TARGET_REG_BITS == 64) {
-+            for (int i = 0; i < size; i += 8) {
-+                addr = get_address(s, rs1, i);
-+                if (is_load) {
-+                    tcg_gen_qemu_ld_i64(t8, addr, s->mem_idx,
-+                            MO_LE | MO_64 | atomicity);
-+                    tcg_gen_st_i64(t8, tcg_env, vreg_ofs(s, vd) + i);
-+                } else {
-+                    tcg_gen_ld_i64(t8, tcg_env, vreg_ofs(s, vd) + i);
-+                    tcg_gen_qemu_st_i64(t8, addr, s->mem_idx,
-+                            MO_LE | MO_64 | atomicity);
-+                }
-+                if (i == size - 8) {
-+                    tcg_gen_movi_tl(cpu_vstart, 0);
-+                } else {
-+                    tcg_gen_addi_tl(cpu_vstart, cpu_vstart, 8 >> log2_esz);
-+                }
-+            }
-+        } else {
-+            for (int i = 0; i < size; i += 4) {
-+                addr = get_address(s, rs1, i);
-+                if (is_load) {
-+                    tcg_gen_qemu_ld_i32(t4, addr, s->mem_idx,
-+                            MO_LE | MO_32 | atomicity);
-+                    tcg_gen_st_i32(t4, tcg_env, vreg_ofs(s, vd) + i);
-+                } else {
-+                    tcg_gen_ld_i32(t4, tcg_env, vreg_ofs(s, vd) + i);
-+                    tcg_gen_qemu_st_i32(t4, addr, s->mem_idx,
-+                            MO_LE | MO_32 | atomicity);
-+                }
-+                if (i == size - 4) {
-+                    tcg_gen_movi_tl(cpu_vstart, 0);
-+                } else {
-+                    tcg_gen_addi_tl(cpu_vstart, cpu_vstart, 4 >> log2_esz);
-+                }
-+            }
-+        }
-+    } else {
-+        TCGv_ptr dest;
-+        TCGv base;
-+        TCGv_i32 desc;
-+        uint32_t data = FIELD_DP32(0, VDATA, NF, nf);
-+        data = FIELD_DP32(data, VDATA, VM, 1);
-+        dest = tcg_temp_new_ptr();
-+        desc = tcg_constant_i32(simd_desc(s->cfg_ptr->vlenb,
-+                        s->cfg_ptr->vlenb, data));
-+        base = get_gpr(s, rs1, EXT_NONE);
-+        tcg_gen_addi_ptr(dest, tcg_env, vreg_ofs(s, vd));
-+        fn(dest, base, tcg_env, desc);
-+    }
- 
-     finalize_rvv_inst(s);
-     return true;
-@@ -1128,42 +1202,42 @@ static bool ldst_whole_trans(uint32_t vd, uint32_t rs1, uint32_t nf,
-  * load and store whole register instructions ignore vtype and vl setting.
-  * Thus, we don't need to check vill bit. (Section 7.9)
-  */
--#define GEN_LDST_WHOLE_TRANS(NAME, ARG_NF)                                \
--static bool trans_##NAME(DisasContext *s, arg_##NAME * a)                 \
--{                                                                         \
--    if (require_rvv(s) &&                                                 \
--        QEMU_IS_ALIGNED(a->rd, ARG_NF)) {                                 \
--        return ldst_whole_trans(a->rd, a->rs1, ARG_NF,                    \
--                                gen_helper_##NAME, s);                    \
--    }                                                                     \
--    return false;                                                         \
--}
--
--GEN_LDST_WHOLE_TRANS(vl1re8_v,  1)
--GEN_LDST_WHOLE_TRANS(vl1re16_v, 1)
--GEN_LDST_WHOLE_TRANS(vl1re32_v, 1)
--GEN_LDST_WHOLE_TRANS(vl1re64_v, 1)
--GEN_LDST_WHOLE_TRANS(vl2re8_v,  2)
--GEN_LDST_WHOLE_TRANS(vl2re16_v, 2)
--GEN_LDST_WHOLE_TRANS(vl2re32_v, 2)
--GEN_LDST_WHOLE_TRANS(vl2re64_v, 2)
--GEN_LDST_WHOLE_TRANS(vl4re8_v,  4)
--GEN_LDST_WHOLE_TRANS(vl4re16_v, 4)
--GEN_LDST_WHOLE_TRANS(vl4re32_v, 4)
--GEN_LDST_WHOLE_TRANS(vl4re64_v, 4)
--GEN_LDST_WHOLE_TRANS(vl8re8_v,  8)
--GEN_LDST_WHOLE_TRANS(vl8re16_v, 8)
--GEN_LDST_WHOLE_TRANS(vl8re32_v, 8)
--GEN_LDST_WHOLE_TRANS(vl8re64_v, 8)
-+#define GEN_LDST_WHOLE_TRANS(NAME, ETYPE, ARG_NF, IS_LOAD)                  \
-+static bool trans_##NAME(DisasContext *s, arg_##NAME * a)                   \
-+{                                                                           \
-+    if (require_rvv(s) &&                                                   \
-+        QEMU_IS_ALIGNED(a->rd, ARG_NF)) {                                   \
-+        return ldst_whole_trans(a->rd, a->rs1, ARG_NF, ctzl(sizeof(ETYPE)), \
-+                                gen_helper_##NAME, s, IS_LOAD);             \
-+    }                                                                       \
-+    return false;                                                           \
-+}
-+
-+GEN_LDST_WHOLE_TRANS(vl1re8_v,  int8_t,  1, true)
-+GEN_LDST_WHOLE_TRANS(vl1re16_v, int16_t, 1, true)
-+GEN_LDST_WHOLE_TRANS(vl1re32_v, int32_t, 1, true)
-+GEN_LDST_WHOLE_TRANS(vl1re64_v, int64_t, 1, true)
-+GEN_LDST_WHOLE_TRANS(vl2re8_v,  int8_t,  2, true)
-+GEN_LDST_WHOLE_TRANS(vl2re16_v, int16_t, 2, true)
-+GEN_LDST_WHOLE_TRANS(vl2re32_v, int32_t, 2, true)
-+GEN_LDST_WHOLE_TRANS(vl2re64_v, int64_t, 2, true)
-+GEN_LDST_WHOLE_TRANS(vl4re8_v,  int8_t,  4, true)
-+GEN_LDST_WHOLE_TRANS(vl4re16_v, int16_t, 4, true)
-+GEN_LDST_WHOLE_TRANS(vl4re32_v, int32_t, 4, true)
-+GEN_LDST_WHOLE_TRANS(vl4re64_v, int64_t, 4, true)
-+GEN_LDST_WHOLE_TRANS(vl8re8_v,  int8_t,  8, true)
-+GEN_LDST_WHOLE_TRANS(vl8re16_v, int16_t, 8, true)
-+GEN_LDST_WHOLE_TRANS(vl8re32_v, int32_t, 8, true)
-+GEN_LDST_WHOLE_TRANS(vl8re64_v, int64_t, 8, true)
- 
- /*
-  * The vector whole register store instructions are encoded similar to
-  * unmasked unit-stride store of elements with EEW=8.
-  */
--GEN_LDST_WHOLE_TRANS(vs1r_v, 1)
--GEN_LDST_WHOLE_TRANS(vs2r_v, 2)
--GEN_LDST_WHOLE_TRANS(vs4r_v, 4)
--GEN_LDST_WHOLE_TRANS(vs8r_v, 8)
-+GEN_LDST_WHOLE_TRANS(vs1r_v, int8_t, 1, false)
-+GEN_LDST_WHOLE_TRANS(vs2r_v, int8_t, 2, false)
-+GEN_LDST_WHOLE_TRANS(vs4r_v, int8_t, 4, false)
-+GEN_LDST_WHOLE_TRANS(vs8r_v, int8_t, 8, false)
- 
- /*
-  *** Vector Integer Arithmetic Instructions
--- 
-2.34.1
-
+So Daniel suggested to clean the bad bitfield pattern in parallel.
 
