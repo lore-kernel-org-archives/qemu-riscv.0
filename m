@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 32207C02182
-	for <qemu-riscv@archiver.kernel.org>; Wed, 22 Jan 2025 08:48:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E1940C02182
+	for <qemu-riscv@archiver.kernel.org>; Wed, 22 Jan 2025 08:48:56 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1taWOZ-0003dD-MZ; Wed, 22 Jan 2025 03:47:31 -0500
+	id 1taWPl-0006BN-Ig; Wed, 22 Jan 2025 03:48:45 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <ethan84@andestech.com>)
- id 1taWOW-0003Tv-Vr; Wed, 22 Jan 2025 03:47:29 -0500
+ id 1taWPB-0005Lj-CE; Wed, 22 Jan 2025 03:48:10 -0500
 Received: from 60-248-80-70.hinet-ip.hinet.net ([60.248.80.70]
  helo=Atcsqr.andestech.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <ethan84@andestech.com>)
- id 1taWOP-000492-Oc; Wed, 22 Jan 2025 03:47:28 -0500
+ id 1taWP8-0004LO-J6; Wed, 22 Jan 2025 03:48:09 -0500
 Received: from mail.andestech.com (ATCPCS31.andestech.com [10.0.1.89])
- by Atcsqr.andestech.com with ESMTPS id 50M8khHp025013
+ by Atcsqr.andestech.com with ESMTPS id 50M8leE6025437
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Wed, 22 Jan 2025 16:46:43 +0800 (+08)
+ Wed, 22 Jan 2025 16:47:40 +0800 (+08)
  (envelope-from ethan84@andestech.com)
 Received: from atcpcw16.andestech.com (10.0.1.106) by ATCPCS31.andestech.com
  (10.0.1.89) with Microsoft SMTP Server (TLS) id 14.3.498.0; Wed, 22 Jan 2025
- 16:46:43 +0800
+ 16:47:40 +0800
 To: <qemu-devel@nongnu.org>
 CC: <richard.henderson@linaro.org>, <pbonzini@redhat.com>,
  <palmer@dabbelt.com>, <alistair.francis@wdc.com>, <bmeng.cn@gmail.com>,
@@ -34,10 +34,10 @@ CC: <richard.henderson@linaro.org>, <pbonzini@redhat.com>,
  <zhiwei_liu@linux.alibaba.com>, <peterx@redhat.com>,
  <david@redhat.com>, <philmd@linaro.org>, <qemu-riscv@nongnu.org>,
  Ethan Chen <ethan84@andestech.com>
-Subject: [PATCH v10 5/8] hw/misc/riscv_iopmp_txn_info: Add struct for
- transaction infomation
-Date: Wed, 22 Jan 2025 16:46:30 +0800
-Message-ID: <20250122084630.3965707-1-ethan84@andestech.com>
+Subject: [PATCH v10 7/8] hw/misc/riscv_iopmp_dispatcher: Device for redirect
+ IOPMP transaction infomation
+Date: Wed, 22 Jan 2025 16:47:25 +0800
+Message-ID: <20250122084725.3971111-1-ethan84@andestech.com>
 X-Mailer: git-send-email 2.42.0.345.gaab89be2eb.dirty
 In-Reply-To: <20250122083617.3940240-1-ethan84@andestech.com>
 References: <20250122083617.3940240-1-ethan84@andestech.com>
@@ -47,7 +47,7 @@ Content-Type: text/plain
 X-Originating-IP: [10.0.1.106]
 X-DKIM-Results: atcpcs31.andestech.com; dkim=none;
 X-DNSRBL: 
-X-MAIL: Atcsqr.andestech.com 50M8khHp025013
+X-MAIL: Atcsqr.andestech.com 50M8leE6025437
 Received-SPF: pass client-ip=60.248.80.70; envelope-from=ethan84@andestech.com;
  helo=Atcsqr.andestech.com
 X-Spam_score_int: -8
@@ -74,28 +74,43 @@ From:  Ethan Chen via <qemu-riscv@nongnu.org>
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-The entire valid transaction must fit within a single IOPMP entry.
-However, during IOMMU translation, the transaction size is not
-available. This structure defines the transaction information required
-by the IOPMP.
+This device determines the target IOPMP device for forwarding information
+based on:
+* Address: For parallel IOPMP devices
+* Stage: For cascading IOPMP devices
 
 Signed-off-by: Ethan Chen <ethan84@andestech.com>
 ---
- include/hw/misc/riscv_iopmp_txn_info.h | 38 ++++++++++++++++++++++++++
- 1 file changed, 38 insertions(+)
- create mode 100644 include/hw/misc/riscv_iopmp_txn_info.h
+ hw/misc/meson.build                      |   1 +
+ hw/misc/riscv_iopmp_dispatcher.c         | 136 +++++++++++++++++++++++
+ include/hw/misc/riscv_iopmp_dispatcher.h |  61 ++++++++++
+ 3 files changed, 198 insertions(+)
+ create mode 100644 hw/misc/riscv_iopmp_dispatcher.c
+ create mode 100644 include/hw/misc/riscv_iopmp_dispatcher.h
 
-diff --git a/include/hw/misc/riscv_iopmp_txn_info.h b/include/hw/misc/riscv_iopmp_txn_info.h
+diff --git a/hw/misc/meson.build b/hw/misc/meson.build
+index 88f2bb6b88..497f83637f 100644
+--- a/hw/misc/meson.build
++++ b/hw/misc/meson.build
+@@ -35,6 +35,7 @@ system_ss.add(when: 'CONFIG_SIFIVE_E_AON', if_true: files('sifive_e_aon.c'))
+ system_ss.add(when: 'CONFIG_SIFIVE_U_OTP', if_true: files('sifive_u_otp.c'))
+ system_ss.add(when: 'CONFIG_SIFIVE_U_PRCI', if_true: files('sifive_u_prci.c'))
+ specific_ss.add(when: 'CONFIG_RISCV_IOPMP', if_true: files('riscv_iopmp.c'))
++specific_ss.add(when: 'CONFIG_RISCV_IOPMP', if_true: files('riscv_iopmp_dispatcher.c'))
+ 
+ subdir('macio')
+ 
+diff --git a/hw/misc/riscv_iopmp_dispatcher.c b/hw/misc/riscv_iopmp_dispatcher.c
 new file mode 100644
-index 0000000000..98bd26b68b
+index 0000000000..4086e9c82b
 --- /dev/null
-+++ b/include/hw/misc/riscv_iopmp_txn_info.h
-@@ -0,0 +1,38 @@
++++ b/hw/misc/riscv_iopmp_dispatcher.c
+@@ -0,0 +1,136 @@
 +/*
-+ * QEMU RISC-V IOPMP transaction information
++ * QEMU RISC-V IOPMP dispatcher
 + *
-+ * The transaction information structure provides the complete transaction
-+ * length to the IOPMP device
++ * Receives transaction information from the requestor and forwards it to the
++ * corresponding IOPMP device.
 + *
 + * Copyright (c) 2023-2025 Andes Tech. Corp.
 + *
@@ -114,20 +129,185 @@ index 0000000000..98bd26b68b
 + * this program.  If not, see <http://www.gnu.org/licenses/>.
 + */
 +
-+#ifndef RISCV_IOPMP_TXN_INFO_H
-+#define RISCV_IOPMP_TXN_INFO_H
++#include "qemu/osdep.h"
++#include "qemu/log.h"
++#include "qapi/error.h"
++#include "trace.h"
++#include "exec/exec-all.h"
++#include "exec/address-spaces.h"
++#include "hw/qdev-properties.h"
++#include "hw/sysbus.h"
++#include "hw/misc/riscv_iopmp_dispatcher.h"
++#include "memory.h"
++#include "hw/irq.h"
++#include "hw/misc/riscv_iopmp_txn_info.h"
 +
-+typedef struct {
-+    /* The id of requestor */
-+    uint32_t rrid:16;
-+    /* The start address of transaction */
-+    uint64_t start_addr;
-+    /* The end address of transaction */
-+    uint64_t end_addr;
-+    /* The stage of cascading IOPMP */
++static void riscv_iopmp_dispatcher_realize(DeviceState *dev, Error **errp)
++{
++    int i;
++    RISCVIOPMPDispState *s = RISCV_IOPMP_DISP(dev);
++
++    s->SinkMemMap = g_new(SinkMemMapEntry *, s->stage_num);
++    for (i = 0; i < s->stage_num; i++) {
++        s->SinkMemMap[i] = g_new(SinkMemMapEntry, s->target_num);
++    }
++
++    object_initialize_child(OBJECT(s), "iopmp_dispatcher_txn_info",
++                            &s->txn_info_sink,
++                            TYPE_RISCV_IOPMP_DISP_SS);
++}
++
++static const Property iopmp_dispatcher_properties[] = {
++    DEFINE_PROP_UINT32("stage-num", RISCVIOPMPDispState, stage_num, 2),
++    DEFINE_PROP_UINT32("target-num", RISCVIOPMPDispState, target_num, 10),
++};
++
++static void riscv_iopmp_dispatcher_class_init(ObjectClass *klass, void *data)
++{
++    DeviceClass *dc = DEVICE_CLASS(klass);
++    device_class_set_props(dc, iopmp_dispatcher_properties);
++    dc->realize = riscv_iopmp_dispatcher_realize;
++}
++
++static const TypeInfo riscv_iopmp_dispatcher_info = {
++    .name = TYPE_RISCV_IOPMP_DISP,
++    .parent = TYPE_DEVICE,
++    .instance_size = sizeof(RISCVIOPMPDispState),
++    .class_init = riscv_iopmp_dispatcher_class_init,
++};
++
++static size_t dispatcher_txn_info_push(StreamSink *txn_info_sink,
++                                       unsigned char *buf,
++                                       size_t len, bool eop)
++{
++    uint64_t addr;
 +    uint32_t stage;
-+} riscv_iopmp_txn_info;
++    int i, j;
++    riscv_iopmp_disp_ss *ss =
++        RISCV_IOPMP_DISP_SS(txn_info_sink);
++    RISCVIOPMPDispState *s = RISCV_IOPMP_DISP(container_of(ss,
++        RISCVIOPMPDispState, txn_info_sink));
++    riscv_iopmp_txn_info signal;
++    memcpy(&signal, buf, len);
++    addr = signal.start_addr;
++    stage = signal.stage;
++    for (i = stage; i < s->stage_num; i++) {
++        for (j = 0; j < s->target_num; j++) {
++            if (s->SinkMemMap[i][j].map.base <= addr &&
++                addr < s->SinkMemMap[i][j].map.base
++                + s->SinkMemMap[i][j].map.size) {
++                    return stream_push(s->SinkMemMap[i][j].sink, buf, len, eop);
++            }
++        }
++    }
++    /* Always pass if target is not protected by IOPMP*/
++    return 1;
++}
 +
++static void riscv_iopmp_disp_ss_class_init(
++    ObjectClass *klass, void *data)
++{
++    StreamSinkClass *ssc = STREAM_SINK_CLASS(klass);
++    ssc->push = dispatcher_txn_info_push;
++}
++
++static const TypeInfo riscv_iopmp_disp_ss_info = {
++    .name = TYPE_RISCV_IOPMP_DISP_SS,
++    .parent = TYPE_OBJECT,
++    .instance_size = sizeof(riscv_iopmp_disp_ss),
++    .class_init = riscv_iopmp_disp_ss_class_init,
++    .interfaces = (InterfaceInfo[]) {
++        { TYPE_STREAM_SINK },
++        { }
++    },
++};
++
++void iopmp_dispatcher_add_target(DeviceState *dev, StreamSink *sink,
++    uint64_t base, uint64_t size, uint32_t stage, uint32_t id)
++{
++    RISCVIOPMPDispState *s = RISCV_IOPMP_DISP(dev);
++    if (stage < s->stage_num && id < s->target_num) {
++        s->SinkMemMap[stage][id].map.base = base;
++        s->SinkMemMap[stage][id].map.size = size;
++        s->SinkMemMap[stage][id].sink = sink;
++    }
++}
++
++static void
++iopmp_dispatcher_register_types(void)
++{
++    type_register_static(&riscv_iopmp_dispatcher_info);
++    type_register_static(&riscv_iopmp_disp_ss_info);
++}
++
++type_init(iopmp_dispatcher_register_types);
++
+diff --git a/include/hw/misc/riscv_iopmp_dispatcher.h b/include/hw/misc/riscv_iopmp_dispatcher.h
+new file mode 100644
+index 0000000000..bbaa76507b
+--- /dev/null
++++ b/include/hw/misc/riscv_iopmp_dispatcher.h
+@@ -0,0 +1,61 @@
++/*
++ * QEMU RISC-V IOPMP dispatcher
++ *
++ * Receives transaction information from the requestor and forwards it to the
++ * corresponding IOPMP device.
++ *
++ * Copyright (c) 2023-2024 Andes Tech. Corp.
++ *
++ * SPDX-License-Identifier: GPL-2.0-or-later
++ *
++ * This program is free software; you can redistribute it and/or modify it
++ * under the terms and conditions of the GNU General Public License,
++ * version 2 or later, as published by the Free Software Foundation.
++ *
++ * This program is distributed in the hope it will be useful, but WITHOUT
++ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
++ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
++ * more details.
++ *
++ * You should have received a copy of the GNU General Public License along with
++ * this program.  If not, see <http://www.gnu.org/licenses/>.
++ */
++
++#ifndef RISCV_IOPMP_DISPATCHER_H
++#define RISCV_IOPMP_DISPATCHER_H
++
++#include "hw/sysbus.h"
++#include "qemu/typedefs.h"
++#include "memory.h"
++#include "hw/stream.h"
++#include "hw/misc/riscv_iopmp_txn_info.h"
++#include "exec/hwaddr.h"
++
++#define TYPE_RISCV_IOPMP_DISP "riscv-iopmp-dispatcher"
++OBJECT_DECLARE_SIMPLE_TYPE(RISCVIOPMPDispState, RISCV_IOPMP_DISP)
++
++#define TYPE_RISCV_IOPMP_DISP_SS "riscv-iopmp-dispatcher-streamsink"
++OBJECT_DECLARE_SIMPLE_TYPE(riscv_iopmp_disp_ss, RISCV_IOPMP_DISP_SS)
++
++typedef struct riscv_iopmp_disp_ss {
++    Object parent;
++} riscv_iopmp_disp_ss;
++
++typedef struct SinkMemMapEntry {
++    StreamSink *sink;
++    MemMapEntry map;
++} SinkMemMapEntry;
++
++typedef struct RISCVIOPMPDispState {
++    SysBusDevice parent_obj;
++    riscv_iopmp_disp_ss txn_info_sink;
++    SinkMemMapEntry **SinkMemMap;
++    /* The maximum number of cascading stages of IOPMP */
++    uint32_t stage_num;
++    /* The maximum number of parallel IOPMP devices within a single stage. */
++    uint32_t target_num;
++} RISCVIOPMPDispState;
++
++void iopmp_dispatcher_add_target(DeviceState *dev, StreamSink *sink,
++    uint64_t base, uint64_t size, uint32_t stage, uint32_t id);
 +#endif
 -- 
 2.34.1
