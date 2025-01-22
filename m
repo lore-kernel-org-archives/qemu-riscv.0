@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E1940C02182
-	for <qemu-riscv@archiver.kernel.org>; Wed, 22 Jan 2025 08:48:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 740C6C02181
+	for <qemu-riscv@archiver.kernel.org>; Wed, 22 Jan 2025 08:49:28 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1taWPl-0006BN-Ig; Wed, 22 Jan 2025 03:48:45 -0500
+	id 1taWPp-0006ZP-No; Wed, 22 Jan 2025 03:48:49 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <ethan84@andestech.com>)
- id 1taWPB-0005Lj-CE; Wed, 22 Jan 2025 03:48:10 -0500
+ id 1taWPa-0005fA-3v; Wed, 22 Jan 2025 03:48:37 -0500
 Received: from 60-248-80-70.hinet-ip.hinet.net ([60.248.80.70]
  helo=Atcsqr.andestech.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <ethan84@andestech.com>)
- id 1taWP8-0004LO-J6; Wed, 22 Jan 2025 03:48:09 -0500
+ id 1taWPW-0004OD-EH; Wed, 22 Jan 2025 03:48:33 -0500
 Received: from mail.andestech.com (ATCPCS31.andestech.com [10.0.1.89])
- by Atcsqr.andestech.com with ESMTPS id 50M8leE6025437
+ by Atcsqr.andestech.com with ESMTPS id 50M8m4FF025899
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Wed, 22 Jan 2025 16:47:40 +0800 (+08)
+ Wed, 22 Jan 2025 16:48:04 +0800 (+08)
  (envelope-from ethan84@andestech.com)
 Received: from atcpcw16.andestech.com (10.0.1.106) by ATCPCS31.andestech.com
  (10.0.1.89) with Microsoft SMTP Server (TLS) id 14.3.498.0; Wed, 22 Jan 2025
- 16:47:40 +0800
+ 16:48:04 +0800
 To: <qemu-devel@nongnu.org>
 CC: <richard.henderson@linaro.org>, <pbonzini@redhat.com>,
  <palmer@dabbelt.com>, <alistair.francis@wdc.com>, <bmeng.cn@gmail.com>,
@@ -34,10 +34,9 @@ CC: <richard.henderson@linaro.org>, <pbonzini@redhat.com>,
  <zhiwei_liu@linux.alibaba.com>, <peterx@redhat.com>,
  <david@redhat.com>, <philmd@linaro.org>, <qemu-riscv@nongnu.org>,
  Ethan Chen <ethan84@andestech.com>
-Subject: [PATCH v10 7/8] hw/misc/riscv_iopmp_dispatcher: Device for redirect
- IOPMP transaction infomation
-Date: Wed, 22 Jan 2025 16:47:25 +0800
-Message-ID: <20250122084725.3971111-1-ethan84@andestech.com>
+Subject: [PATCH v10 8/8] hw/riscv/virt: Add IOPMP support
+Date: Wed, 22 Jan 2025 16:47:47 +0800
+Message-ID: <20250122084747.3971444-1-ethan84@andestech.com>
 X-Mailer: git-send-email 2.42.0.345.gaab89be2eb.dirty
 In-Reply-To: <20250122083617.3940240-1-ethan84@andestech.com>
 References: <20250122083617.3940240-1-ethan84@andestech.com>
@@ -47,7 +46,7 @@ Content-Type: text/plain
 X-Originating-IP: [10.0.1.106]
 X-DKIM-Results: atcpcs31.andestech.com; dkim=none;
 X-DNSRBL: 
-X-MAIL: Atcsqr.andestech.com 50M8leE6025437
+X-MAIL: Atcsqr.andestech.com 50M8m4FF025899
 Received-SPF: pass client-ip=60.248.80.70; envelope-from=ethan84@andestech.com;
  helo=Atcsqr.andestech.com
 X-Spam_score_int: -8
@@ -74,241 +73,216 @@ From:  Ethan Chen via <qemu-riscv@nongnu.org>
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-This device determines the target IOPMP device for forwarding information
-based on:
-* Address: For parallel IOPMP devices
-* Stage: For cascading IOPMP devices
+- Add 'iopmp=on' option to enable IOPMP. It adds iopmp devices virt machine
+  to protect all regions of system memory.
 
 Signed-off-by: Ethan Chen <ethan84@andestech.com>
 ---
- hw/misc/meson.build                      |   1 +
- hw/misc/riscv_iopmp_dispatcher.c         | 136 +++++++++++++++++++++++
- include/hw/misc/riscv_iopmp_dispatcher.h |  61 ++++++++++
- 3 files changed, 198 insertions(+)
- create mode 100644 hw/misc/riscv_iopmp_dispatcher.c
- create mode 100644 include/hw/misc/riscv_iopmp_dispatcher.h
+ docs/system/riscv/virt.rst |  7 ++++
+ hw/riscv/Kconfig           |  1 +
+ hw/riscv/virt.c            | 75 ++++++++++++++++++++++++++++++++++++++
+ include/hw/riscv/virt.h    |  4 ++
+ 4 files changed, 87 insertions(+)
 
-diff --git a/hw/misc/meson.build b/hw/misc/meson.build
-index 88f2bb6b88..497f83637f 100644
---- a/hw/misc/meson.build
-+++ b/hw/misc/meson.build
-@@ -35,6 +35,7 @@ system_ss.add(when: 'CONFIG_SIFIVE_E_AON', if_true: files('sifive_e_aon.c'))
- system_ss.add(when: 'CONFIG_SIFIVE_U_OTP', if_true: files('sifive_u_otp.c'))
- system_ss.add(when: 'CONFIG_SIFIVE_U_PRCI', if_true: files('sifive_u_prci.c'))
- specific_ss.add(when: 'CONFIG_RISCV_IOPMP', if_true: files('riscv_iopmp.c'))
-+specific_ss.add(when: 'CONFIG_RISCV_IOPMP', if_true: files('riscv_iopmp_dispatcher.c'))
+diff --git a/docs/system/riscv/virt.rst b/docs/system/riscv/virt.rst
+index 60850970ce..6b5fc1d37d 100644
+--- a/docs/system/riscv/virt.rst
++++ b/docs/system/riscv/virt.rst
+@@ -146,6 +146,13 @@ The following machine-specific options are supported:
  
- subdir('macio')
+   Enables the riscv-iommu-sys platform device. Defaults to 'off'.
  
-diff --git a/hw/misc/riscv_iopmp_dispatcher.c b/hw/misc/riscv_iopmp_dispatcher.c
-new file mode 100644
-index 0000000000..4086e9c82b
---- /dev/null
-+++ b/hw/misc/riscv_iopmp_dispatcher.c
-@@ -0,0 +1,136 @@
-+/*
-+ * QEMU RISC-V IOPMP dispatcher
-+ *
-+ * Receives transaction information from the requestor and forwards it to the
-+ * corresponding IOPMP device.
-+ *
-+ * Copyright (c) 2023-2025 Andes Tech. Corp.
-+ *
-+ * SPDX-License-Identifier: GPL-2.0-or-later
-+ *
-+ * This program is free software; you can redistribute it and/or modify it
-+ * under the terms and conditions of the GNU General Public License,
-+ * version 2 or later, as published by the Free Software Foundation.
-+ *
-+ * This program is distributed in the hope it will be useful, but WITHOUT
-+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
-+ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
-+ * more details.
-+ *
-+ * You should have received a copy of the GNU General Public License along with
-+ * this program.  If not, see <http://www.gnu.org/licenses/>.
-+ */
++- iopmp=[on|off]
 +
-+#include "qemu/osdep.h"
-+#include "qemu/log.h"
-+#include "qapi/error.h"
-+#include "trace.h"
-+#include "exec/exec-all.h"
-+#include "exec/address-spaces.h"
-+#include "hw/qdev-properties.h"
-+#include "hw/sysbus.h"
++  When this option is "on", IOPMP devices are added to machine. IOPMP checks
++  memory transcations in system memory. This option is assumed to be "off". To
++  enable the CPU to perform transactions with a specified RRID, use the CPU
++  option "-cpu <cpu>,iopmp=true,iopmp_rrid=<rrid>"
++
+ Running Linux kernel
+ --------------------
+ 
+diff --git a/hw/riscv/Kconfig b/hw/riscv/Kconfig
+index e6a0ac1fa1..637438af2c 100644
+--- a/hw/riscv/Kconfig
++++ b/hw/riscv/Kconfig
+@@ -68,6 +68,7 @@ config RISCV_VIRT
+     select PLATFORM_BUS
+     select ACPI
+     select ACPI_PCI
++    select RISCV_IOPMP
+ 
+ config SHAKTI_C
+     bool
+diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+index 241389d72f..c5a8f7173e 100644
+--- a/hw/riscv/virt.c
++++ b/hw/riscv/virt.c
+@@ -57,6 +57,8 @@
+ #include "hw/acpi/aml-build.h"
+ #include "qapi/qapi-visit-common.h"
+ #include "hw/virtio/virtio-iommu.h"
++#include "hw/misc/riscv_iopmp.h"
 +#include "hw/misc/riscv_iopmp_dispatcher.h"
-+#include "memory.h"
-+#include "hw/irq.h"
-+#include "hw/misc/riscv_iopmp_txn_info.h"
-+
-+static void riscv_iopmp_dispatcher_realize(DeviceState *dev, Error **errp)
-+{
-+    int i;
-+    RISCVIOPMPDispState *s = RISCV_IOPMP_DISP(dev);
-+
-+    s->SinkMemMap = g_new(SinkMemMapEntry *, s->stage_num);
-+    for (i = 0; i < s->stage_num; i++) {
-+        s->SinkMemMap[i] = g_new(SinkMemMapEntry, s->target_num);
-+    }
-+
-+    object_initialize_child(OBJECT(s), "iopmp_dispatcher_txn_info",
-+                            &s->txn_info_sink,
-+                            TYPE_RISCV_IOPMP_DISP_SS);
-+}
-+
-+static const Property iopmp_dispatcher_properties[] = {
-+    DEFINE_PROP_UINT32("stage-num", RISCVIOPMPDispState, stage_num, 2),
-+    DEFINE_PROP_UINT32("target-num", RISCVIOPMPDispState, target_num, 10),
+ 
+ /* KVM AIA only supports APLIC MSI. APLIC Wired is always emulated by QEMU. */
+ static bool virt_use_kvm_aia_aplic_imsic(RISCVVirtAIAType aia_type)
+@@ -94,6 +96,7 @@ static const MemMapEntry virt_memmap[] = {
+     [VIRT_UART0] =        { 0x10000000,         0x100 },
+     [VIRT_VIRTIO] =       { 0x10001000,        0x1000 },
+     [VIRT_FW_CFG] =       { 0x10100000,          0x18 },
++    [VIRT_IOPMP] =        { 0x10200000,      0x100000 },
+     [VIRT_FLASH] =        { 0x20000000,     0x4000000 },
+     [VIRT_IMSIC_M] =      { 0x24000000, VIRT_IMSIC_MAX_SIZE },
+     [VIRT_IMSIC_S] =      { 0x28000000, VIRT_IMSIC_MAX_SIZE },
+@@ -102,6 +105,11 @@ static const MemMapEntry virt_memmap[] = {
+     [VIRT_DRAM] =         { 0x80000000,           0x0 },
+ };
+ 
++static const MemMapEntry iopmp_protect_memmap[] = {
++    /* IOPMP protect all regions by default */
++    {0x0, 0xFFFFFFFF},
 +};
 +
-+static void riscv_iopmp_dispatcher_class_init(ObjectClass *klass, void *data)
-+{
-+    DeviceClass *dc = DEVICE_CLASS(klass);
-+    device_class_set_props(dc, iopmp_dispatcher_properties);
-+    dc->realize = riscv_iopmp_dispatcher_realize;
-+}
+ /* PCIe high mmio is fixed for RV32 */
+ #define VIRT32_HIGH_PCIE_MMIO_BASE  0x300000000ULL
+ #define VIRT32_HIGH_PCIE_MMIO_SIZE  (4 * GiB)
+@@ -1117,6 +1125,24 @@ static void create_fdt_iommu(RISCVVirtState *s, uint16_t bdf)
+                            bdf + 1, iommu_phandle, bdf + 1, 0xffff - bdf);
+ }
+ 
++static void create_fdt_iopmp(RISCVVirtState *s, const MemMapEntry *memmap,
++                             uint32_t irq_mmio_phandle) {
++    g_autofree char *name = NULL;
++    MachineState *ms = MACHINE(s);
 +
-+static const TypeInfo riscv_iopmp_dispatcher_info = {
-+    .name = TYPE_RISCV_IOPMP_DISP,
-+    .parent = TYPE_DEVICE,
-+    .instance_size = sizeof(RISCVIOPMPDispState),
-+    .class_init = riscv_iopmp_dispatcher_class_init,
-+};
-+
-+static size_t dispatcher_txn_info_push(StreamSink *txn_info_sink,
-+                                       unsigned char *buf,
-+                                       size_t len, bool eop)
-+{
-+    uint64_t addr;
-+    uint32_t stage;
-+    int i, j;
-+    riscv_iopmp_disp_ss *ss =
-+        RISCV_IOPMP_DISP_SS(txn_info_sink);
-+    RISCVIOPMPDispState *s = RISCV_IOPMP_DISP(container_of(ss,
-+        RISCVIOPMPDispState, txn_info_sink));
-+    riscv_iopmp_txn_info signal;
-+    memcpy(&signal, buf, len);
-+    addr = signal.start_addr;
-+    stage = signal.stage;
-+    for (i = stage; i < s->stage_num; i++) {
-+        for (j = 0; j < s->target_num; j++) {
-+            if (s->SinkMemMap[i][j].map.base <= addr &&
-+                addr < s->SinkMemMap[i][j].map.base
-+                + s->SinkMemMap[i][j].map.size) {
-+                    return stream_push(s->SinkMemMap[i][j].sink, buf, len, eop);
-+            }
-+        }
-+    }
-+    /* Always pass if target is not protected by IOPMP*/
-+    return 1;
-+}
-+
-+static void riscv_iopmp_disp_ss_class_init(
-+    ObjectClass *klass, void *data)
-+{
-+    StreamSinkClass *ssc = STREAM_SINK_CLASS(klass);
-+    ssc->push = dispatcher_txn_info_push;
-+}
-+
-+static const TypeInfo riscv_iopmp_disp_ss_info = {
-+    .name = TYPE_RISCV_IOPMP_DISP_SS,
-+    .parent = TYPE_OBJECT,
-+    .instance_size = sizeof(riscv_iopmp_disp_ss),
-+    .class_init = riscv_iopmp_disp_ss_class_init,
-+    .interfaces = (InterfaceInfo[]) {
-+        { TYPE_STREAM_SINK },
-+        { }
-+    },
-+};
-+
-+void iopmp_dispatcher_add_target(DeviceState *dev, StreamSink *sink,
-+    uint64_t base, uint64_t size, uint32_t stage, uint32_t id)
-+{
-+    RISCVIOPMPDispState *s = RISCV_IOPMP_DISP(dev);
-+    if (stage < s->stage_num && id < s->target_num) {
-+        s->SinkMemMap[stage][id].map.base = base;
-+        s->SinkMemMap[stage][id].map.size = size;
-+        s->SinkMemMap[stage][id].sink = sink;
++    name = g_strdup_printf("/soc/iopmp@%lx", (long)memmap[VIRT_IOPMP].base);
++    qemu_fdt_add_subnode(ms->fdt, name);
++    qemu_fdt_setprop_string(ms->fdt, name, "compatible", "riscv_iopmp");
++    qemu_fdt_setprop_cells(ms->fdt, name, "reg", 0x0, memmap[VIRT_IOPMP].base,
++        0x0, memmap[VIRT_IOPMP].size);
++    qemu_fdt_setprop_cell(ms->fdt, name, "interrupt-parent", irq_mmio_phandle);
++    if (s->aia_type == VIRT_AIA_TYPE_NONE) {
++        qemu_fdt_setprop_cell(ms->fdt, name, "interrupts", IOPMP_IRQ);
++    } else {
++        qemu_fdt_setprop_cells(ms->fdt, name, "interrupts", IOPMP_IRQ, 0x4);
 +    }
 +}
 +
-+static void
-+iopmp_dispatcher_register_types(void)
+ static void finalize_fdt(RISCVVirtState *s)
+ {
+     uint32_t phandle = 1, irq_mmio_phandle = 1, msi_pcie_phandle = 1;
+@@ -1141,6 +1167,10 @@ static void finalize_fdt(RISCVVirtState *s)
+     create_fdt_uart(s, virt_memmap, irq_mmio_phandle);
+ 
+     create_fdt_rtc(s, virt_memmap, irq_mmio_phandle);
++
++    if (s->have_iopmp) {
++        create_fdt_iopmp(s, virt_memmap, irq_mmio_phandle);
++    }
+ }
+ 
+ static void create_fdt(RISCVVirtState *s, const MemMapEntry *memmap)
+@@ -1529,6 +1559,8 @@ static void virt_machine_init(MachineState *machine)
+     DeviceState *mmio_irqchip, *virtio_irqchip, *pcie_irqchip;
+     int i, base_hartid, hart_count;
+     int socket_count = riscv_socket_count(machine);
++    DeviceState *iopmp_dev, *iopmp_disp_dev;
++    StreamSink *iopmp_ss, *iopmp_disp_ss;
+ 
+     /* Check socket count limit */
+     if (VIRT_SOCKETS_MAX < socket_count) {
+@@ -1710,6 +1742,29 @@ static void virt_machine_init(MachineState *machine)
+     }
+     virt_flash_map(s, system_memory);
+ 
++    if (s->have_iopmp) {
++        iopmp_dev = iopmp_create(memmap[VIRT_IOPMP].base,
++            qdev_get_gpio_in(DEVICE(mmio_irqchip), IOPMP_IRQ));
++
++        iopmp_setup_system_memory(iopmp_dev, &iopmp_protect_memmap[0], 1, 0);
++
++        iopmp_disp_dev = qdev_new(TYPE_RISCV_IOPMP_DISP);
++        qdev_prop_set_uint32(DEVICE(iopmp_disp_dev), "target-num", 1);
++        qdev_prop_set_uint32(DEVICE(iopmp_disp_dev), "stage-num", 1);
++        qdev_realize(DEVICE(iopmp_disp_dev), NULL, &error_fatal);
++
++        /* Add memmap inforamtion to dispatcher */
++        iopmp_ss = (StreamSink *)&(RISCV_IOPMP(iopmp_dev)->txn_info_sink);
++        iopmp_dispatcher_add_target(DEVICE(iopmp_disp_dev), iopmp_ss,
++                                    iopmp_protect_memmap[0].base,
++                                    iopmp_protect_memmap[0].size,
++                                    0, 0);
++
++        iopmp_disp_ss =
++            (StreamSink *)&(RISCV_IOPMP_DISP(iopmp_disp_dev)->txn_info_sink);
++        iopmp_setup_sink(iopmp_dev, iopmp_disp_ss);
++    }
++
+     /* load/create device tree */
+     if (machine->dtb) {
+         machine->fdt = load_device_tree(machine->dtb, &s->fdt_size);
+@@ -1845,6 +1900,20 @@ static void virt_set_iommu_sys(Object *obj, Visitor *v, const char *name,
+     visit_type_OnOffAuto(v, name, &s->iommu_sys, errp);
+ }
+ 
++static bool virt_get_iopmp(Object *obj, Error **errp)
 +{
-+    type_register_static(&riscv_iopmp_dispatcher_info);
-+    type_register_static(&riscv_iopmp_disp_ss_info);
++    RISCVVirtState *s = RISCV_VIRT_MACHINE(obj);
++
++    return s->have_iopmp;
 +}
 +
-+type_init(iopmp_dispatcher_register_types);
++static void virt_set_iopmp(Object *obj, bool value, Error **errp)
++{
++    RISCVVirtState *s = RISCV_VIRT_MACHINE(obj);
 +
-diff --git a/include/hw/misc/riscv_iopmp_dispatcher.h b/include/hw/misc/riscv_iopmp_dispatcher.h
-new file mode 100644
-index 0000000000..bbaa76507b
---- /dev/null
-+++ b/include/hw/misc/riscv_iopmp_dispatcher.h
-@@ -0,0 +1,61 @@
-+/*
-+ * QEMU RISC-V IOPMP dispatcher
-+ *
-+ * Receives transaction information from the requestor and forwards it to the
-+ * corresponding IOPMP device.
-+ *
-+ * Copyright (c) 2023-2024 Andes Tech. Corp.
-+ *
-+ * SPDX-License-Identifier: GPL-2.0-or-later
-+ *
-+ * This program is free software; you can redistribute it and/or modify it
-+ * under the terms and conditions of the GNU General Public License,
-+ * version 2 or later, as published by the Free Software Foundation.
-+ *
-+ * This program is distributed in the hope it will be useful, but WITHOUT
-+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
-+ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
-+ * more details.
-+ *
-+ * You should have received a copy of the GNU General Public License along with
-+ * this program.  If not, see <http://www.gnu.org/licenses/>.
-+ */
++    s->have_iopmp = value;
++}
 +
-+#ifndef RISCV_IOPMP_DISPATCHER_H
-+#define RISCV_IOPMP_DISPATCHER_H
+ bool virt_is_acpi_enabled(RISCVVirtState *s)
+ {
+     return s->acpi != ON_OFF_AUTO_OFF;
+@@ -1972,6 +2041,12 @@ static void virt_machine_class_init(ObjectClass *oc, void *data)
+                               NULL, NULL);
+     object_class_property_set_description(oc, "iommu-sys",
+                                           "Enable IOMMU platform device");
 +
-+#include "hw/sysbus.h"
-+#include "qemu/typedefs.h"
-+#include "memory.h"
-+#include "hw/stream.h"
-+#include "hw/misc/riscv_iopmp_txn_info.h"
-+#include "exec/hwaddr.h"
-+
-+#define TYPE_RISCV_IOPMP_DISP "riscv-iopmp-dispatcher"
-+OBJECT_DECLARE_SIMPLE_TYPE(RISCVIOPMPDispState, RISCV_IOPMP_DISP)
-+
-+#define TYPE_RISCV_IOPMP_DISP_SS "riscv-iopmp-dispatcher-streamsink"
-+OBJECT_DECLARE_SIMPLE_TYPE(riscv_iopmp_disp_ss, RISCV_IOPMP_DISP_SS)
-+
-+typedef struct riscv_iopmp_disp_ss {
-+    Object parent;
-+} riscv_iopmp_disp_ss;
-+
-+typedef struct SinkMemMapEntry {
-+    StreamSink *sink;
-+    MemMapEntry map;
-+} SinkMemMapEntry;
-+
-+typedef struct RISCVIOPMPDispState {
-+    SysBusDevice parent_obj;
-+    riscv_iopmp_disp_ss txn_info_sink;
-+    SinkMemMapEntry **SinkMemMap;
-+    /* The maximum number of cascading stages of IOPMP */
-+    uint32_t stage_num;
-+    /* The maximum number of parallel IOPMP devices within a single stage. */
-+    uint32_t target_num;
-+} RISCVIOPMPDispState;
-+
-+void iopmp_dispatcher_add_target(DeviceState *dev, StreamSink *sink,
-+    uint64_t base, uint64_t size, uint32_t stage, uint32_t id);
-+#endif
++    object_class_property_add_bool(oc, "iopmp", virt_get_iopmp,
++                                   virt_set_iopmp);
++    object_class_property_set_description(oc, "iopmp",
++                                          "Set on/off to enable/disable "
++                                          "iopmp device");
+ }
+ 
+ static const TypeInfo virt_machine_typeinfo = {
+diff --git a/include/hw/riscv/virt.h b/include/hw/riscv/virt.h
+index 48a14bea2e..77dcbd5450 100644
+--- a/include/hw/riscv/virt.h
++++ b/include/hw/riscv/virt.h
+@@ -55,6 +55,7 @@ struct RISCVVirtState {
+ 
+     int fdt_size;
+     bool have_aclint;
++    bool have_iopmp;
+     RISCVVirtAIAType aia_type;
+     int aia_guests;
+     char *oem_id;
+@@ -87,11 +88,14 @@ enum {
+     VIRT_PLATFORM_BUS,
+     VIRT_PCIE_ECAM,
+     VIRT_IOMMU_SYS,
++    VIRT_IOPMP,
+ };
+ 
+ enum {
+     UART0_IRQ = 10,
+     RTC_IRQ = 11,
++    IOPMP_IRQ = 12,
++    DMA_IRQ = 13,
+     VIRTIO_IRQ = 1, /* 1 to 8 */
+     VIRTIO_COUNT = 8,
+     PCIE_IRQ = 0x20, /* 32 to 35 */
 -- 
 2.34.1
 
