@@ -4,65 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 58232C02182
-	for <qemu-riscv@archiver.kernel.org>; Thu, 23 Jan 2025 23:48:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C7E8FC02182
+	for <qemu-riscv@archiver.kernel.org>; Thu, 23 Jan 2025 23:48:34 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tb6sp-0006ZD-TD; Thu, 23 Jan 2025 18:45:11 -0500
+	id 1tb6uM-0002jB-By; Thu, 23 Jan 2025 18:46:46 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tb6sn-0006WE-4M
- for qemu-riscv@nongnu.org; Thu, 23 Jan 2025 18:45:09 -0500
-Received: from mail-wm1-x332.google.com ([2a00:1450:4864:20::332])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tb6tx-0000sg-Aq
+ for qemu-riscv@nongnu.org; Thu, 23 Jan 2025 18:46:22 -0500
+Received: from mail-wr1-x42d.google.com ([2a00:1450:4864:20::42d])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tb6si-00041T-Ub
- for qemu-riscv@nongnu.org; Thu, 23 Jan 2025 18:45:07 -0500
-Received: by mail-wm1-x332.google.com with SMTP id
- 5b1f17b1804b1-436345cc17bso11060475e9.0
- for <qemu-riscv@nongnu.org>; Thu, 23 Jan 2025 15:45:02 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tb6to-0004YP-FD
+ for qemu-riscv@nongnu.org; Thu, 23 Jan 2025 18:46:17 -0500
+Received: by mail-wr1-x42d.google.com with SMTP id
+ ffacd0b85a97d-385e0e224cbso878629f8f.2
+ for <qemu-riscv@nongnu.org>; Thu, 23 Jan 2025 15:46:11 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1737675902; x=1738280702; darn=nongnu.org;
+ d=linaro.org; s=google; t=1737675971; x=1738280771; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=b+Ptx+X+/4qytTYw1NRizSw3Es7j283R5duCMBs45So=;
- b=Ef2fc/Pj/OZOiYX1+9odviTVzxzRJ/vZNN8Me63W8E6TIyrDHT6zv6ahYuXGlIwDiw
- 8eRxo795JASt5yUnNJHTBetdA0hVcgkOITLWvnnwpNzRj9/hCN7Lkt6kmiJyGZRYlgH4
- iGzzSwcmx2qJS0aJaAPQF4Ba5dxq8Tml9gmi2a27+LXVOPRoknJpWdtAWujstux7QwNh
- x7BLc2SDre7ya0+X2/otZGOWSiAheZo2NqL7sccd3Q4WsBEEc3tfbwYa38JubF7NyNVa
- NpngQeEnG6HvRLYcjZfDvJumPqnFEOWXMh5egUOXn08R6En5VciLj+v4uK5mseTzPoZk
- Ki/w==
+ bh=xSu/7xOdAlhOhpGqndt0dd/xIMB7MzmL+xgNpZ/1JvM=;
+ b=D8TpQ3ldiIUxakZQwnr1yZJRyuTjRVD02UOr3G/KjTXqztQUCGeIpYAmQSwD5Zw2UN
+ o7pk04ABeEvcTiAyHIfndE8Y5tntlBsV1IQx5oCG2vO1md7cB0mEalMtgcrqi9jfI8Vn
+ ruFXrczHqIA2sr8LBq0EOTldUsK4kmlSRdsjQ4rRP9GztGd8624S0BKkY5QSzE2iozey
+ z4oIgIO1JVNLT8s5S2faUTK8tEDVwEESlQmI0yPRUYw9wJOCgapV+jvk1tGoIeuENfRA
+ sO3LX5Jn6IgATCAg7lqEhgiMsp8Cr8TwZS6b1xgQ34PfGOYyElS2zpGJVD3BUjYFgBnL
+ hKHg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1737675902; x=1738280702;
+ d=1e100.net; s=20230601; t=1737675971; x=1738280771;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=b+Ptx+X+/4qytTYw1NRizSw3Es7j283R5duCMBs45So=;
- b=fjc6LyUWEEPWQQ55iN+ZPYrzebBnjWHpSKdxoPmrz0zIUq8Oftvkt1SzK5EnpeIOW9
- h9pY4DGYuABLRi9Terx74xUS3A/v7IIGD2BzFLXqNotBNFp7f2Hxyl8DOkxUJqGLkZ9d
- dKUQq+A0IXjayYqcAZ42Yx1WPBSlednwThxxxkhCz2EwV2Tz6fll4qy5K+0/mO4IBT4E
- YiGTcb5ib/RGoNGF5W9GfOQKoeoQrn26M/rf8ze1C5z/g/G3yPKqem/FPU0kFY+Fj/qd
- TgjkW/YQDW1lRbGNaf+VGaGcP7GEsqzfdzuvB3s9uxejgh4dH15AhMqjT8BGtwdUTkLY
- u5Zg==
+ bh=xSu/7xOdAlhOhpGqndt0dd/xIMB7MzmL+xgNpZ/1JvM=;
+ b=n+NlNJFSWQ3VTmDVZgOUnUNA0bwZFWefookrlOnTp4p+K9hgpdjojRWqHszWR1eKWP
+ kstq3g/Tt8wS6nUXOyXocXi7TY1ZDsFrmkh+vFvxrYyi/54ksTHKOE/unQYPcJWPY4WH
+ UQGQOHJkcrfWOvKfSYCQfGfq4TQrEi8DIJxfMj4u7O5zGjJJYBPRHpCbqCGamrPkelIr
+ hihdezoUUC9dw2x6N4PNAgJtc2/YRE1nqe91+yhiLRaudHEcvJGbL76TEAiI6aAnnQhV
+ w1/i2Gb2A0+uNBQuv/V3QdwwW5hULMadjjy3cKcnorq1RcJpnMYYeYhwuGeaC6yaiMvU
+ xvVQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUc2xRc3LnfD/PSKsqWx7TX8vAMfceVJzYq7X+CM8TCdBDhthkpEXd8Hppdic6snO44UZNwaXbL8zqi@nongnu.org
-X-Gm-Message-State: AOJu0YwSVwlnoBb76zvQziLH/GEzT5IqF/1SdbOgN2He8L+ZF9UiNl0A
- 1RxS9VxJON0OAuXn8HS+nvQyjhVpIyQWqI6sBHPvgpOfvqzEXeAi7kG/u86aF7M=
-X-Gm-Gg: ASbGncskp8l2msNVEMg7U2hx9srz9NeLAjl1DeoXEUznCWH0E3X23P3f4wYfbGjhgyt
- ASvzVBntlhaC1W5SNPCvmu1CF6mJMqqzEInJj4UxE0QRJPm3SL5A9BMu00TxoMKBeyk0r0rlKq2
- cONi5ajnpgXQ+Z6DQvU1lNDueczCWMlwN+WlU0tbR5oljhDgopSLBG01CzIJ5Xh9b6pmWR3OUdr
- CGnwyPKNHiI5qZgzqEPn0VqpYXpsNPgnH6qzSjsx+Oy4x3VHDcNaeVIBco/l/cEuPMXQ+20VPU+
- MAW9J390nXLABPV5AhL5t8sBXDQ7tnAI4+qq0EuJhplLNA+l7iMVTvk=
-X-Google-Smtp-Source: AGHT+IGYKHSOUWuv3Z35/L1kDcj+xko6P82ABEfwOu6IFt4mwFRNrLSNCMYz6YlSXtAKxKsobnoAmQ==
-X-Received: by 2002:a05:600c:46ca:b0:434:a367:2bd9 with SMTP id
- 5b1f17b1804b1-438913dfd7fmr310320675e9.14.1737675901922; 
- Thu, 23 Jan 2025 15:45:01 -0800 (PST)
+ AJvYcCXGuAP2BTBRDLA02EM46NITBcupfZIb/f4N3C1N/164Ss9S9aIa9GXyX0+5CVrnzNfZUMobDxIF0JnL@nongnu.org
+X-Gm-Message-State: AOJu0YzJ2HuqeE1vECmKAcyqnXwrsxgfToFaz2XWr1X4Kc3+lMQ7sSTq
+ dbvOHpT64KfwZqLAJWHLt7nroaMn3dyckYMeLkANHyb+HaxzoO6cOLUOzJuZ5fg=
+X-Gm-Gg: ASbGncuUuQy4MHrY9/5axEdsIq+6zbw/EuBvXJ9UyxQBwyE2FsgVJDqdfAkKxmhvRRs
+ vyhJRwejzLekbkFjMGvaucO6xUkq3vT8HdTUm9V6o+F6PU0S175wtIO7kV0NSniYvUGeeJA9p9c
+ PGsz17gN/WBIv1bQFDTjGwdU6s2qxxgOQelV0CFkePMy1L5bszZXbwRm+THlK5k+sKqCFJtcjwE
+ u/KDlii5Mzw5oGJXc9BjAfYx8oIU1pNVKY8CGyPGWqWpZ5Qfm3/wO2iM4+ZQhAMQrHy6BRoJkgw
+ T/WNDes9ny7wiWBSZ5QC8PxDnDJmBk5EpXrDZY0ffsoWVqMG6klXweo=
+X-Google-Smtp-Source: AGHT+IFycJysfhMaCpSR16Rzr8MUGZyLqdkkV1WoJ+3KdF//Z7stLVwsFpncYG19E6JH49Nuy1YUSA==
+X-Received: by 2002:a05:6000:e4a:b0:385:ed16:c91 with SMTP id
+ ffacd0b85a97d-38bf566f3bemr20406552f8f.24.1737675970851; 
+ Thu, 23 Jan 2025 15:46:10 -0800 (PST)
 Received: from localhost.localdomain (88-187-86-199.subs.proxad.net.
  [88.187.86.199]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-438bd54c0ecsm6510925e9.30.2025.01.23.15.44.59
+ 5b1f17b1804b1-438bd4d34e3sm6953255e9.39.2025.01.23.15.46.08
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Thu, 23 Jan 2025 15:45:00 -0800 (PST)
+ Thu, 23 Jan 2025 15:46:10 -0800 (PST)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Peter Maydell <peter.maydell@linaro.org>,
@@ -73,19 +73,18 @@ Cc: Peter Maydell <peter.maydell@linaro.org>,
  David Hildenbrand <david@redhat.com>, qemu-s390x@nongnu.org,
  xen-devel@lists.xenproject.org,
  Richard Henderson <richard.henderson@linaro.org>,
- =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Pierrick Bouvier <pierrick.bouvier@linaro.org>
-Subject: [PATCH 08/20] accel/tcg: Restrict tlb_init() / destroy() to TCG
-Date: Fri, 24 Jan 2025 00:44:02 +0100
-Message-ID: <20250123234415.59850-9-philmd@linaro.org>
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+Subject: [PATCH 20/20] cpus: Build cpu_exec_[un]realizefn() methods once
+Date: Fri, 24 Jan 2025 00:44:14 +0100
+Message-ID: <20250123234415.59850-21-philmd@linaro.org>
 X-Mailer: git-send-email 2.47.1
 In-Reply-To: <20250123234415.59850-1-philmd@linaro.org>
 References: <20250123234415.59850-1-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::332;
- envelope-from=philmd@linaro.org; helo=mail-wm1-x332.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::42d;
+ envelope-from=philmd@linaro.org; helo=mail-wr1-x42d.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -108,103 +107,111 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Move CPU TLB related methods to accel/tcg/ scope,
-in "internal-common.h".
+Now that cpu_exec_realizefn() and cpu_exec_unrealizefn()
+methods don't use any target specific definition anymore,
+we can move them to cpu-common.c to be able to build them
+once.
 
-Suggested-by: Richard Henderson <richard.henderson@linaro.org>
-Reviewed-by: Pierrick Bouvier <pierrick.bouvier@linaro.org>
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 ---
- accel/tcg/internal-common.h | 11 +++++++++++
- include/exec/exec-all.h     | 16 ----------------
- accel/tcg/user-exec-stub.c  | 11 +++++++++++
- 3 files changed, 22 insertions(+), 16 deletions(-)
+Eventually they'll be absorbed within cpu_common_[un]realizefn().
+---
+ cpu-target.c         | 30 ------------------------------
+ hw/core/cpu-common.c | 26 ++++++++++++++++++++++++++
+ 2 files changed, 26 insertions(+), 30 deletions(-)
 
-diff --git a/accel/tcg/internal-common.h b/accel/tcg/internal-common.h
-index c8d714256cb..d3186721839 100644
---- a/accel/tcg/internal-common.h
-+++ b/accel/tcg/internal-common.h
-@@ -53,6 +53,17 @@ TranslationBlock *tb_link_page(TranslationBlock *tb);
- void cpu_restore_state_from_tb(CPUState *cpu, TranslationBlock *tb,
-                                uintptr_t host_pc);
+diff --git a/cpu-target.c b/cpu-target.c
+index bfcd48f9ae2..8f4477be417 100644
+--- a/cpu-target.c
++++ b/cpu-target.c
+@@ -19,43 +19,13 @@
  
-+/**
-+ * tlb_init - initialize a CPU's TLB
-+ * @cpu: CPU whose TLB should be initialized
-+ */
-+void tlb_init(CPUState *cpu);
-+/**
-+ * tlb_destroy - destroy a CPU's TLB
-+ * @cpu: CPU whose TLB should be destroyed
-+ */
-+void tlb_destroy(CPUState *cpu);
-+
- bool tcg_exec_realizefn(CPUState *cpu, Error **errp);
- void tcg_exec_unrealizefn(CPUState *cpu);
- 
-diff --git a/include/exec/exec-all.h b/include/exec/exec-all.h
-index d9045c9ac4c..8eb0df48f94 100644
---- a/include/exec/exec-all.h
-+++ b/include/exec/exec-all.h
-@@ -29,16 +29,6 @@
- 
- #if !defined(CONFIG_USER_ONLY) && defined(CONFIG_TCG)
- /* cputlb.c */
--/**
-- * tlb_init - initialize a CPU's TLB
-- * @cpu: CPU whose TLB should be initialized
-- */
--void tlb_init(CPUState *cpu);
--/**
-- * tlb_destroy - destroy a CPU's TLB
-- * @cpu: CPU whose TLB should be destroyed
-- */
--void tlb_destroy(CPUState *cpu);
- /**
-  * tlb_flush_page:
-  * @cpu: CPU whose TLB should be flushed
-@@ -223,12 +213,6 @@ void tlb_set_page(CPUState *cpu, vaddr addr,
-                   hwaddr paddr, int prot,
-                   int mmu_idx, vaddr size);
- #else
--static inline void tlb_init(CPUState *cpu)
--{
--}
--static inline void tlb_destroy(CPUState *cpu)
--{
--}
- static inline void tlb_flush_page(CPUState *cpu, vaddr addr)
- {
- }
-diff --git a/accel/tcg/user-exec-stub.c b/accel/tcg/user-exec-stub.c
-index 4fbe2dbdc88..1d52f48226a 100644
---- a/accel/tcg/user-exec-stub.c
-+++ b/accel/tcg/user-exec-stub.c
-@@ -1,6 +1,7 @@
  #include "qemu/osdep.h"
- #include "hw/core/cpu.h"
+ #include "qapi/error.h"
+-#include "qemu/error-report.h"
+ #include "qemu/qemu-print.h"
+ #include "system/accel-ops.h"
+ #include "system/cpus.h"
  #include "exec/replay-core.h"
-+#include "internal-common.h"
+-#include "exec/cpu-common.h"
+ #include "exec/log.h"
+ #include "accel/accel-cpu-target.h"
+ #include "trace/trace-root.h"
+-#include "qemu/accel.h"
+-#include "hw/core/cpu.h"
+-
+-bool cpu_exec_realizefn(CPUState *cpu, Error **errp)
+-{
+-    if (!accel_cpu_common_realize(cpu, errp)) {
+-        return false;
+-    }
+-
+-    /* Wait until cpu initialization complete before exposing cpu. */
+-    cpu_list_add(cpu);
+-
+-    cpu_vmstate_register(cpu);
+-
+-    return true;
+-}
+-
+-void cpu_exec_unrealizefn(CPUState *cpu)
+-{
+-    cpu_vmstate_unregister(cpu);
+-
+-    cpu_list_remove(cpu);
+-    /*
+-     * Now that the vCPU has been removed from the RCU list, we can call
+-     * accel_cpu_common_unrealize, which may free fields using call_rcu.
+-     */
+-    accel_cpu_common_unrealize(cpu);
+-}
  
- void cpu_resume(CPUState *cpu)
+ char *cpu_model_from_type(const char *typename)
  {
-@@ -18,6 +19,16 @@ void cpu_exec_reset_hold(CPUState *cpu)
- {
+diff --git a/hw/core/cpu-common.c b/hw/core/cpu-common.c
+index 71425cb7422..c5382a350fc 100644
+--- a/hw/core/cpu-common.c
++++ b/hw/core/cpu-common.c
+@@ -193,6 +193,20 @@ static void cpu_common_parse_features(const char *typename, char *features,
+     }
  }
  
-+/* User mode emulation does not support softmmu yet.  */
-+
-+void tlb_init(CPUState *cpu)
++bool cpu_exec_realizefn(CPUState *cpu, Error **errp)
 +{
++    if (!accel_cpu_common_realize(cpu, errp)) {
++        return false;
++    }
++
++    /* Wait until cpu initialization complete before exposing cpu. */
++    cpu_list_add(cpu);
++
++    cpu_vmstate_register(cpu);
++
++    return true;
 +}
 +
-+void tlb_destroy(CPUState *cpu)
-+{
-+}
-+
- /* User mode emulation does not support record/replay yet.  */
+ static void cpu_common_realizefn(DeviceState *dev, Error **errp)
+ {
+     CPUState *cpu = CPU(dev);
+@@ -234,6 +248,18 @@ static void cpu_common_unrealizefn(DeviceState *dev)
+     cpu_exec_unrealizefn(cpu);
+ }
  
- bool replay_exception(void)
++void cpu_exec_unrealizefn(CPUState *cpu)
++{
++    cpu_vmstate_unregister(cpu);
++
++    cpu_list_remove(cpu);
++    /*
++     * Now that the vCPU has been removed from the RCU list, we can call
++     * accel_cpu_common_unrealize, which may free fields using call_rcu.
++     */
++    accel_cpu_common_unrealize(cpu);
++}
++
+ static void cpu_common_initfn(Object *obj)
+ {
+     CPUState *cpu = CPU(obj);
 -- 
 2.47.1
 
