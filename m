@@ -4,65 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7E93AC0218B
-	for <qemu-riscv@archiver.kernel.org>; Thu, 23 Jan 2025 23:48:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3BEA7C02182
+	for <qemu-riscv@archiver.kernel.org>; Thu, 23 Jan 2025 23:49:05 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tb6t4-0006tj-6a; Thu, 23 Jan 2025 18:45:26 -0500
+	id 1tb6sU-0006IL-Hu; Thu, 23 Jan 2025 18:44:50 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tb6t2-0006p0-3z
- for qemu-riscv@nongnu.org; Thu, 23 Jan 2025 18:45:24 -0500
-Received: from mail-wm1-x32a.google.com ([2a00:1450:4864:20::32a])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tb6sS-0006Gg-G4
+ for qemu-riscv@nongnu.org; Thu, 23 Jan 2025 18:44:48 -0500
+Received: from mail-wr1-x42b.google.com ([2a00:1450:4864:20::42b])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tb6sz-0004Gq-K3
- for qemu-riscv@nongnu.org; Thu, 23 Jan 2025 18:45:23 -0500
-Received: by mail-wm1-x32a.google.com with SMTP id
- 5b1f17b1804b1-43624b2d453so16029605e9.2
- for <qemu-riscv@nongnu.org>; Thu, 23 Jan 2025 15:45:20 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tb6sQ-0003wd-E2
+ for qemu-riscv@nongnu.org; Thu, 23 Jan 2025 18:44:48 -0500
+Received: by mail-wr1-x42b.google.com with SMTP id
+ ffacd0b85a97d-3862d16b4f5so936154f8f.0
+ for <qemu-riscv@nongnu.org>; Thu, 23 Jan 2025 15:44:46 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1737675920; x=1738280720; darn=nongnu.org;
+ d=linaro.org; s=google; t=1737675884; x=1738280684; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=KLiVQy6/uYr9fS/vE5notUMei/mcFiOsSDRea34SIY0=;
- b=h6937nvEdYMeCIIS+GtLYVN4CwpFkVX0s57GdJkeLhjh6qm4EyFz3ODp0dXigT5pE+
- 4ruophxsuGWTrolSobuDG+uQdjcQcUWFMTk8Ow1++nb/bAkLQwVvJPx/T85TmLswhoLd
- UzqRhZhOV+jQOKMk6C5a4VfsCOlH6bny9oW7DaBcadGneHg60FMSyjli7Z+n9DOiR5Cx
- goJpKtG6zv6gpd2AFGh02+Qgcl9cx3re08r+OuTRhijdQ86ipocS526+RScZmIBrwMye
- piSRPQGCRytBvPSK1H80S17NGwqn2mtzb+v9Sq0NPZAf6KoHpk435yCVqoNGi2gwYvDC
- +BeA==
+ bh=89WHzW+ji4rB+60gFYzeRD9ADgUNDHjcXvYSPMINgc0=;
+ b=IUCLje6AsykLpWFfkO2DPFz3e1nLIYD10d6w/vMvcWhKSLSKROfqvYPg4W3ifaK0sO
+ z/txwjr0lY1M/oRcf3nk3Zf68DhZsZC4FOlCc8l4WzYUiHnsbEmGelRF1/wDm8mWzcZd
+ 51wDyPdo0FDgTVMpxcnYN2eST92TE1eZUWCTUUe+dnJ0MGZNxkpraRCea5+aXUqyzlQ2
+ beA3qEuSULdpeCWrvqHc1gZ61g7zGXbMzkjFTehA1EpkND/LdO1ar5zyv6UzTUtUaGei
+ K+wIJwN4i0k9ObTh2nqLB4MbtuMuUHz862nE+4aRjrFOGg+TGWDjWhhKRcCsKgo0U+nG
+ XAXw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1737675920; x=1738280720;
+ d=1e100.net; s=20230601; t=1737675884; x=1738280684;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=KLiVQy6/uYr9fS/vE5notUMei/mcFiOsSDRea34SIY0=;
- b=tGtAcVH07/nv856gPDye6OdtDrGGQiAoPn8GAgDkw9b/pqEtvOV3ZnmXiAnKe5ROVq
- WGwx31dJ8+tEUWcROpI8pOXg4Fd4vbKldEzj6+ou/DczDPOCFs/h5Of6Vni5S2NovnqO
- 7Ohb6SzaKHuvgGI4vPV7g6D4/NJSx4XBHuqZHEHB+tFsrhv12z/5gTM0jYN8hW0VMpGM
- PYYHBrPRJFartLENAXExeN1rDYPrUcdgQZM9SrxyP+8HSF8KGAKNhXAH5etzGK1k7okK
- 8xcyzY/8iy1lXyylPCg8fj+Te061e/tDGOghwUuwmV881qiz3W272Df1Rsw4kmaPRV2/
- Wp5Q==
+ bh=89WHzW+ji4rB+60gFYzeRD9ADgUNDHjcXvYSPMINgc0=;
+ b=vF26Upqp3We0ruklUa9noTYfUOFdA37FvGpoEUG6r/IlhvmCU3/qRKAspCEi9TatDS
+ aMw4q679phsupKpSpO8EUx5xakBSYGz3OBxE/XFeAZzAzFhT7P9peRrysl7Q4OqmWA4H
+ 5dNIYgE72SNMf4ZPQnpBnNoW6uqC6OZF4GwKBzmUK1bc8mxXlMU081qPpWpnoGTfaUaD
+ elu5/ldn35x4Iut385fgTacLsILN5O9rQJguBf2EClpDnXTVXfg0j/Zpp+yrDkxJeUX7
+ uIdLBegL8gxq0N4XQ55onEKE1ADJhvs0i3aUTxzJyzu+8TajwXdUtxOEMGVFa1i3UF1q
+ knEg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVTuUWgQO751pbq7aquJ2Bi1NoS1vmxGyoVh5AzcxlVPkXi+wlwqVkWjRtTusZCWiis0jFgjP8KbC1W@nongnu.org
-X-Gm-Message-State: AOJu0YyiJGNQYT1b2IY/SN4hqYf6IHGeEruT3Gb5xiG7A+Lti58tVgdO
- PZXnpUTLJNtIDlEDWG23qbj7Nx2bALB/43sFm4aj4+OWQgQ6GISVMsm1WLXfnsg=
-X-Gm-Gg: ASbGncvkm+4ZvQjoqEVsj6+gBhwrvt7tL7txHnqCF7ZI8r1sO5ztDs2etptPSp5b8u6
- iHFaDUggNbe8DdYCHO9kTJIRvgzR5xraF4vqdtdnJKKRa/pfoO2vUclGQyYTM9PcctAaWLNlPCi
- 2mipeOBnooeTrlGgS66qHjYPSqSHZDxpXz5fOs9xyy1jponZJrJ1gNTKJZqZlX0RUW61TIcTt8a
- k3VNeB8DD8WmS0Kda7hEBsXgr+uaYwKx5HGTtDvnW7fkSGowDMbUpl0udlZYhZVtQKCdgSteNi7
- VzzU58E0TShCo7mfcoc9X3cLADIPto2zQHhLIdguAbXG1e4E3VhKWEM=
-X-Google-Smtp-Source: AGHT+IHCUhXEKn4F81kx6ZpXqs9faqGpJN5W9Mj/EUJJpXYvZE3+gYqYLTjnf0hJ5kDL6XLUxlFm9g==
-X-Received: by 2002:a05:600c:1913:b0:434:f4fa:83c4 with SMTP id
- 5b1f17b1804b1-43891453fa7mr280858325e9.29.1737675919693; 
- Thu, 23 Jan 2025 15:45:19 -0800 (PST)
+ AJvYcCWtC2cewBzxFR0ZBzH8EgkaMu+rCBiAWMYJhGkRMyAUvDerYxPoX/uwqdANjns4fnj5lTFmx0wW3Hyr@nongnu.org
+X-Gm-Message-State: AOJu0YwtIoL1U8mn5KQQ71PIRM+TKZ9UFBOYfdc5h6rV0gbabH+lj/rb
+ iGds9So1BZlcARvvWmNjIJqs/qb9LuKcLa8HxHdHn//5QUHJ3253moLVAAmB4nw=
+X-Gm-Gg: ASbGncva7AQ7jCjEFSaOrQ4IwEdEkjmNbxxWqAA4fD4K4YAH9Is113hiLmYtMajvv1x
+ QGj0rv7Zz03rS8mqFU0WEnt9sloqX/A8luWiYLRQonTv/chp4lrpAaQOL4Q/trC1AQavaKmqnYV
+ 7ags4RFP+vUuRo1RFPYfJvsdxfw6VBl0QjrBkCL3IJQvq4hveNQIfcFR6iHq+eNGiK8+7Tyvc3C
+ 496WTp+qKZTeEjLjv0tiX4DprzHId6nd4fJa/KXFWa05nTMuLULbQTSsHBNjPNo6G4eGxcoFJAb
+ 9wo4Qksf4U+r5hftOt44fQuGgcq0Jgn9K34nCTJu+gOAwVNjaqVJ1Vo=
+X-Google-Smtp-Source: AGHT+IHfcp2D5aSm8Sn0VT4IidLdBYhD/KSzWcZHka724j1qpNfMP/dVIsxPCprx8nPoBb5TgAtEpw==
+X-Received: by 2002:a05:6000:1fa9:b0:38b:f4dc:44ad with SMTP id
+ ffacd0b85a97d-38c2b65ebf8mr997845f8f.5.1737675884076; 
+ Thu, 23 Jan 2025 15:44:44 -0800 (PST)
 Received: from localhost.localdomain (88-187-86-199.subs.proxad.net.
  [88.187.86.199]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-438bd54c0f7sm6499935e9.28.2025.01.23.15.45.17
+ 5b1f17b1804b1-438bd4d29cesm6991745e9.35.2025.01.23.15.44.42
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Thu, 23 Jan 2025 15:45:18 -0800 (PST)
+ Thu, 23 Jan 2025 15:44:43 -0800 (PST)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Peter Maydell <peter.maydell@linaro.org>,
@@ -74,25 +74,25 @@ Cc: Peter Maydell <peter.maydell@linaro.org>,
  xen-devel@lists.xenproject.org,
  Richard Henderson <richard.henderson@linaro.org>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-Subject: [PATCH 11/20] accel: Rename 'hw/core/accel-cpu.h' ->
- 'accel/accel-cpu-target.h'
-Date: Fri, 24 Jan 2025 00:44:05 +0100
-Message-ID: <20250123234415.59850-12-philmd@linaro.org>
+Subject: [PATCH 05/20] cpus: Keep default fields initialization in
+ cpu_common_initfn()
+Date: Fri, 24 Jan 2025 00:43:59 +0100
+Message-ID: <20250123234415.59850-6-philmd@linaro.org>
 X-Mailer: git-send-email 2.47.1
 In-Reply-To: <20250123234415.59850-1-philmd@linaro.org>
 References: <20250123234415.59850-1-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::32a;
- envelope-from=philmd@linaro.org; helo=mail-wm1-x32a.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::42b;
+ envelope-from=philmd@linaro.org; helo=mail-wr1-x42b.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -108,177 +108,45 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-AccelCPUClass is for accelerator to initialize target specific
-features of a vCPU. Not really related to hardware emulation,
-rename "hw/core/accel-cpu.h" as "accel/accel-cpu-target.h"
-(using the explicit -target suffix).
+cpu_common_initfn() is our target agnostic initializer,
+while cpu_exec_initfn() is the target specific one.
 
-More importantly, target specific header often access the
-target specific definitions which are in each target/FOO/cpu.h
-header, usually included generically as "cpu.h" relative to
-target/FOO/. However, there is already a "cpu.h" in hw/core/
-which takes precedence. This change allows "accel-cpu-target.h"
-to include a target "cpu.h".
-
-Mechanical change doing:
-
- $  git mv include/hw/core/accel-cpu.h \
-           include/accel/accel-cpu-target.h
- $  sed -i -e 's,hw/core/accel-cpu.h,accel/accel-cpu-target.h,' \
-   $(git grep -l hw/core/accel-cpu.h)
-
-and renaming header guard 'ACCEL_CPU_TARGET_H'.
+The %as and %num_ases fields are not target specific,
+so initialize them in the common helper.
 
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 ---
- MAINTAINERS                                               | 2 +-
- include/{hw/core/accel-cpu.h => accel/accel-cpu-target.h} | 4 ++--
- accel/accel-target.c                                      | 2 +-
- cpu-target.c                                              | 2 +-
- target/i386/hvf/hvf-cpu.c                                 | 2 +-
- target/i386/kvm/kvm-cpu.c                                 | 2 +-
- target/i386/tcg/tcg-cpu.c                                 | 2 +-
- target/ppc/kvm.c                                          | 2 +-
- target/riscv/kvm/kvm-cpu.c                                | 2 +-
- target/riscv/tcg/tcg-cpu.c                                | 2 +-
- 10 files changed, 11 insertions(+), 11 deletions(-)
- rename include/{hw/core/accel-cpu.h => accel/accel-cpu-target.h} (95%)
+ cpu-target.c         | 3 ---
+ hw/core/cpu-common.c | 2 ++
+ 2 files changed, 2 insertions(+), 3 deletions(-)
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index fa46d077d30..e4521852519 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -499,7 +499,7 @@ R: Paolo Bonzini <pbonzini@redhat.com>
- S: Maintained
- F: include/qemu/accel.h
- F: include/system/accel-*.h
--F: include/hw/core/accel-cpu.h
-+F: include/accel/accel-cpu-target.h
- F: accel/accel-*.c
- F: accel/Makefile.objs
- F: accel/stubs/Makefile.objs
-diff --git a/include/hw/core/accel-cpu.h b/include/accel/accel-cpu-target.h
-similarity index 95%
-rename from include/hw/core/accel-cpu.h
-rename to include/accel/accel-cpu-target.h
-index 24dad45ab9e..0a8e518600d 100644
---- a/include/hw/core/accel-cpu.h
-+++ b/include/accel/accel-cpu-target.h
-@@ -8,8 +8,8 @@
-  * See the COPYING file in the top-level directory.
-  */
- 
--#ifndef ACCEL_CPU_H
--#define ACCEL_CPU_H
-+#ifndef ACCEL_CPU_TARGET_H
-+#define ACCEL_CPU_TARGET_H
- 
- /*
-  * This header is used to define new accelerator-specific target-specific
-diff --git a/accel/accel-target.c b/accel/accel-target.c
-index 08626c00c2d..09c1e1053e0 100644
---- a/accel/accel-target.c
-+++ b/accel/accel-target.c
-@@ -27,7 +27,7 @@
- #include "qemu/accel.h"
- 
- #include "cpu.h"
--#include "hw/core/accel-cpu.h"
-+#include "accel/accel-cpu-target.h"
- 
- #ifndef CONFIG_USER_ONLY
- #include "accel-system.h"
 diff --git a/cpu-target.c b/cpu-target.c
-index 75501a909df..f97f3a14751 100644
+index 89874496a41..75501a909df 100644
 --- a/cpu-target.c
 +++ b/cpu-target.c
-@@ -44,7 +44,7 @@
- #include "exec/tb-flush.h"
- #include "exec/translation-block.h"
- #include "exec/log.h"
--#include "hw/core/accel-cpu.h"
-+#include "accel/accel-cpu-target.h"
- #include "trace/trace-root.h"
- #include "qemu/accel.h"
+@@ -234,9 +234,6 @@ void cpu_class_init_props(DeviceClass *dc)
  
-diff --git a/target/i386/hvf/hvf-cpu.c b/target/i386/hvf/hvf-cpu.c
-index 560b5a05940..b5f4c80028f 100644
---- a/target/i386/hvf/hvf-cpu.c
-+++ b/target/i386/hvf/hvf-cpu.c
-@@ -14,7 +14,7 @@
- #include "system/system.h"
- #include "hw/boards.h"
- #include "system/hvf.h"
--#include "hw/core/accel-cpu.h"
-+#include "accel/accel-cpu-target.h"
- #include "hvf-i386.h"
- 
- static void hvf_cpu_max_instance_init(X86CPU *cpu)
-diff --git a/target/i386/kvm/kvm-cpu.c b/target/i386/kvm/kvm-cpu.c
-index 1bda403f88b..6269fa80452 100644
---- a/target/i386/kvm/kvm-cpu.c
-+++ b/target/i386/kvm/kvm-cpu.c
-@@ -15,7 +15,7 @@
- #include "hw/boards.h"
- 
- #include "kvm_i386.h"
--#include "hw/core/accel-cpu.h"
-+#include "accel/accel-cpu-target.h"
- 
- static void kvm_set_guest_phys_bits(CPUState *cs)
+ void cpu_exec_initfn(CPUState *cpu)
  {
-diff --git a/target/i386/tcg/tcg-cpu.c b/target/i386/tcg/tcg-cpu.c
-index f09ee813ac9..b8aff825eec 100644
---- a/target/i386/tcg/tcg-cpu.c
-+++ b/target/i386/tcg/tcg-cpu.c
-@@ -21,7 +21,7 @@
- #include "cpu.h"
- #include "helper-tcg.h"
- #include "qemu/accel.h"
--#include "hw/core/accel-cpu.h"
-+#include "accel/accel-cpu-target.h"
- #include "exec/translation-block.h"
- 
- #include "tcg-cpu.h"
-diff --git a/target/ppc/kvm.c b/target/ppc/kvm.c
-index 966c2c65723..216638dee40 100644
---- a/target/ppc/kvm.c
-+++ b/target/ppc/kvm.c
-@@ -49,7 +49,7 @@
- #include "elf.h"
- #include "system/kvm_int.h"
- #include "system/kvm.h"
--#include "hw/core/accel-cpu.h"
-+#include "accel/accel-cpu-target.h"
- 
- #include CONFIG_DEVICES
- 
-diff --git a/target/riscv/kvm/kvm-cpu.c b/target/riscv/kvm/kvm-cpu.c
-index 23ce7793594..7e4443c5bda 100644
---- a/target/riscv/kvm/kvm-cpu.c
-+++ b/target/riscv/kvm/kvm-cpu.c
-@@ -32,7 +32,7 @@
- #include "system/kvm_int.h"
- #include "cpu.h"
- #include "trace.h"
--#include "hw/core/accel-cpu.h"
-+#include "accel/accel-cpu-target.h"
- #include "hw/pci/pci.h"
- #include "exec/memattrs.h"
- #include "exec/address-spaces.h"
-diff --git a/target/riscv/tcg/tcg-cpu.c b/target/riscv/tcg/tcg-cpu.c
-index e40c8e85b26..79345e4b89d 100644
---- a/target/riscv/tcg/tcg-cpu.c
-+++ b/target/riscv/tcg/tcg-cpu.c
-@@ -30,7 +30,7 @@
- #include "qemu/accel.h"
- #include "qemu/error-report.h"
- #include "qemu/log.h"
--#include "hw/core/accel-cpu.h"
-+#include "accel/accel-cpu-target.h"
- #include "accel/tcg/cpu-ops.h"
- #include "tcg/tcg.h"
+-    cpu->as = NULL;
+-    cpu->num_ases = 0;
+-
  #ifndef CONFIG_USER_ONLY
+     cpu->memory = get_system_memory();
+     object_ref(OBJECT(cpu->memory));
+diff --git a/hw/core/cpu-common.c b/hw/core/cpu-common.c
+index ff605059c15..71425cb7422 100644
+--- a/hw/core/cpu-common.c
++++ b/hw/core/cpu-common.c
+@@ -244,6 +244,8 @@ static void cpu_common_initfn(Object *obj)
+     gdb_init_cpu(cpu);
+     cpu->cpu_index = UNASSIGNED_CPU_INDEX;
+     cpu->cluster_index = UNASSIGNED_CLUSTER_INDEX;
++    cpu->as = NULL;
++    cpu->num_ases = 0;
+     /* user-mode doesn't have configurable SMP topology */
+     /* the default value is changed by qemu_init_vcpu() for system-mode */
+     cpu->nr_threads = 1;
 -- 
 2.47.1
 
