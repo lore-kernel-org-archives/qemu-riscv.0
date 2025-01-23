@@ -4,65 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C3D1EC02182
-	for <qemu-riscv@archiver.kernel.org>; Thu, 23 Jan 2025 23:48:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C040FC0218C
+	for <qemu-riscv@archiver.kernel.org>; Thu, 23 Jan 2025 23:48:48 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tb6u9-0001Wj-D3; Thu, 23 Jan 2025 18:46:33 -0500
+	id 1tb6sI-0006CP-Vr; Thu, 23 Jan 2025 18:44:39 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tb6tj-0000At-IP
- for qemu-riscv@nongnu.org; Thu, 23 Jan 2025 18:46:09 -0500
-Received: from mail-wm1-x332.google.com ([2a00:1450:4864:20::332])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tb6sH-0006Ay-Ua
+ for qemu-riscv@nongnu.org; Thu, 23 Jan 2025 18:44:37 -0500
+Received: from mail-wr1-x42c.google.com ([2a00:1450:4864:20::42c])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tb6td-0004UQ-UP
- for qemu-riscv@nongnu.org; Thu, 23 Jan 2025 18:46:05 -0500
-Received: by mail-wm1-x332.google.com with SMTP id
- 5b1f17b1804b1-436202dd7f6so17198475e9.0
- for <qemu-riscv@nongnu.org>; Thu, 23 Jan 2025 15:46:00 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tb6sF-0003tQ-3a
+ for qemu-riscv@nongnu.org; Thu, 23 Jan 2025 18:44:37 -0500
+Received: by mail-wr1-x42c.google.com with SMTP id
+ ffacd0b85a97d-385d7b4da2bso1420425f8f.1
+ for <qemu-riscv@nongnu.org>; Thu, 23 Jan 2025 15:44:34 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1737675959; x=1738280759; darn=nongnu.org;
+ d=linaro.org; s=google; t=1737675873; x=1738280673; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=9gXZ2pCmpp3MBAsW4Hnbi8sV5bqYGRAr8w/4hsc1kvQ=;
- b=ltT2sGh/FbEpEsD6V48v4IhBk5KynU5kff7WyXFsZxlvIpYK5+35vqrMKy13ANRPT8
- cYzW/NUaytgnQpshnrHL0flVWl1Lkb6ye7Jjwd95NjWDyTjMUrBJHb44XuypkmvmuCO8
- LFR28+JzeVDkHk/QQHjliARHFoW6YKjiQsLglBJuYFua00RJKVMVIbw7Ow1fKHiDUh5J
- ns3P420Vzs81B2tCxeAm7H1LYsconXKYtggY3fQdIrRfMOAjXEKjpApmT8MmrYg+/vjQ
- U2P50z155KOE1GkAeQMorYsr2L8d/mQ9L+sFzDqiCEJHemG6YrdGgGcvl8mY3TfEMaKT
- pDqQ==
+ bh=ce4xXqVbqUUJ3kwtGZLdz75HP+CS3yxZeowyzQLM8Ns=;
+ b=ArNhyyY9wHQnUy9VaH2mZVYpmQHRKsjWgCeUgeb6aZqf0NLt+le9c0FxvRDUq4LwT8
+ xpXBUH0SUc8ymZFTrjZqqFqAqmPmTPPwCWjdOG3MpIT+w4lP14yqqpEQ74TJTBZFp6y4
+ qLfQNhghgu106Tpf8/YKWnsvXM1HpjskJLbwG/VVMyjc61E0Q+6KnZZU5Lwv9XIFHVva
+ 7zTeoyBzZRH/BfJIeCKZ7DiLJxCGpbyHYv+iK2Yoyb9X20E2jvPM3vQi49d/PED1AxWg
+ N5iZ2Qp8KujMU8ziwJ5cLzsfzOJVSjTnv8pTDWd4YD/CANL5IIhVBA9/H0WlYVAdvC1S
+ qu4w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1737675959; x=1738280759;
+ d=1e100.net; s=20230601; t=1737675873; x=1738280673;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=9gXZ2pCmpp3MBAsW4Hnbi8sV5bqYGRAr8w/4hsc1kvQ=;
- b=iuJrklYPaFEwHbt/xrOxWuDDpAAAZKUZJ5LiaXBdy+TcFiVAUq0V3K4nMDK49vlRNk
- uELpiBDyI4TSPYpelYYLXw4O/pMlk+Rs3WA8rjjfywK8ceqUcqRczgMHkqEPGBOOT10O
- 4Js3UGH7kQKG4iyPBEQC2ZJoYFPFa21j+D/XeY7M7i7kaXlHKnMAXAmw18gRnc5SPfO/
- 5IeQkPmTqao+tkgaRzgESYnVUejRwvceQJnz2g1T34se5WiuDs7rdK2a0C4XPQ6K2K/V
- 4SGRhUNwdl/wacBdnfRoGA1xQZixKIsQ1TQtGJd27VutcyfhJSmt5ZJLTO6GPY9I7N69
- Tyog==
+ bh=ce4xXqVbqUUJ3kwtGZLdz75HP+CS3yxZeowyzQLM8Ns=;
+ b=q7T5cqRDMfUec79PL7ZHzgFXHI2XDyiNI8r+3sdqTP2DdIL4ReCL0825/Y/iraSw8i
+ lGpPoXLwQkZ78bjPitQ0A8pu2BYduWtb4wM9SCGCMgfbhkvAqhIpVrvr9aSDzCeRWk2f
+ zVglkPUm1Ie+zlVz2BjvHefW6RT3w6XYGq9U8RcITCerUr2maVRQ/PGZKer8sqQs8i2B
+ wQp2UgmZgTGoLYPIBj1yUYuGPQwzz6IaVjLavm4N2jeBRg+5lBqAZ6cWHz5nKtlfC472
+ zz22UqSCfbQpPGFFEen3+ChYsfUA/ZUwVfEkz6OEZSo9U2x9Jdz4F2hE5HBnW97T7Olp
+ PzGQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCV+pSbUPnGG+KW8LKbuoQwl/klHCZzvPdaAmI1p+d5re+27c82VGU2uKm7dsI7PM5f9IybjYFuZk5od@nongnu.org
-X-Gm-Message-State: AOJu0Yw+nxh82WxE+9TVq4YP1sNBWkqpR3ihZKvNJ/Wlp4Ivay7/t0i5
- w3iuLA0+7rV1LvEt8EgAGdK3tFEo0pZBJoFgXwi13hgyoNIWD1fcZS5MTOLSUqA=
-X-Gm-Gg: ASbGncshoyWxoUz3rV8Fu40nmR/gyZhVmAm0I1qqcIS3JJwpbkX6kKgO4+sDYkplNnB
- FPVcFu4GEe1VXcq+2bt4cArR83kNNYbWqPMdHtVjaNiChMDkTJYLuWtXZiuqKl/uXQYYaMpOpag
- /3m1GaW0nGW+Txp8BKyQ7kYaXAw10gkWvlzx97AxOwnRNtmG2Lwfxv8v/B9fccZ9DR3yt9y6N3k
- oPhaIoUIb6fhaCJHfI82TLnImCBSDqDLZp28N0kh2PNHBv9aG9i3vcHnITJkP5JNh1tNvL2iDz3
- 8hQNFBViGnjYrUKNvT/O9rrM5dka2jGH0dG1aHgWOJzoznZM8aHrD10=
-X-Google-Smtp-Source: AGHT+IFkrF3nSiyRp86eT1OfDhljZaIiOgfPlVgQgIeU90j7M027ZvrIkgirhKCWekxtCJUAZQHWLg==
-X-Received: by 2002:a05:600c:4f48:b0:434:fd15:3adc with SMTP id
- 5b1f17b1804b1-43891431319mr209632555e9.25.1737675959187; 
- Thu, 23 Jan 2025 15:45:59 -0800 (PST)
+ AJvYcCXnF+N8XQGAO24jqlmlU87vYAEj3dNys99t6g5KV8x28xF+P4ZlnVe5VkqVefNZ4B5UG0hrAx0ehjLC@nongnu.org
+X-Gm-Message-State: AOJu0Yz7WmDth8LilxOMkj9V+s6iHkwE3+Rwsnl8ya719Ft9xkVhURKO
+ /SjRmUlupvz6asf/Ny8+b+2VxYWg/m38T/JKgrpmmzUDPolQnQqJQ+7Dg/OUeoE=
+X-Gm-Gg: ASbGncuKlcz+77Vy79nSekz7rMGj0yL85yg2rPf4BYhnp/CnJBTZPZQZajJjKgVSZRM
+ S0qusT278NSvsP2l4G5oYpS1Ie7VWCnxZq0NXxHpxSlMNpevSJAkq+C1tlVzHju/l8/hy9V0W0O
+ wMr5dNGwzsYaBfH+c7Tg7Eng91O/MR3uTHfqU84dzUpFisFvrHg0RmXjaB3tQfCzQXxoFqaaCou
+ zfhdEAoWxdpV0+zw33qrZe33gnANfBBXLUUUyuEzs5WwFK2KXzWLqI6mkSCn34Oss7kjVDT6PF9
+ zfzCsiri4DrvoIK/r+iZjFbIf4twhomNT45WRlQtFNvN8oGDqgqHC4xzp2DIIMGERg==
+X-Google-Smtp-Source: AGHT+IF2OW+qflIazHPgiEcST7oe1qZGT6aj/Hik/HFfGWbVcOJj4aFV8515DLdGfzbOF2nObYCMQg==
+X-Received: by 2002:a05:6000:144a:b0:38a:9c1b:df5b with SMTP id
+ ffacd0b85a97d-38bf566a279mr25563799f8f.30.1737675873434; 
+ Thu, 23 Jan 2025 15:44:33 -0800 (PST)
 Received: from localhost.localdomain (88-187-86-199.subs.proxad.net.
  [88.187.86.199]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-38c2a17d79csm1009152f8f.39.2025.01.23.15.45.57
+ ffacd0b85a97d-38c2a1c4006sm982952f8f.94.2025.01.23.15.44.30
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Thu, 23 Jan 2025 15:45:58 -0800 (PST)
+ Thu, 23 Jan 2025 15:44:32 -0800 (PST)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Peter Maydell <peter.maydell@linaro.org>,
@@ -74,17 +74,17 @@ Cc: Peter Maydell <peter.maydell@linaro.org>,
  xen-devel@lists.xenproject.org,
  Richard Henderson <richard.henderson@linaro.org>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-Subject: [PATCH 18/20] cpus: Have cpu_exec_initfn() per user / system emulation
-Date: Fri, 24 Jan 2025 00:44:12 +0100
-Message-ID: <20250123234415.59850-19-philmd@linaro.org>
+Subject: [PATCH 03/20] gdbstub: Check for TCG before calling tb_flush()
+Date: Fri, 24 Jan 2025 00:43:57 +0100
+Message-ID: <20250123234415.59850-4-philmd@linaro.org>
 X-Mailer: git-send-email 2.47.1
 In-Reply-To: <20250123234415.59850-1-philmd@linaro.org>
 References: <20250123234415.59850-1-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::332;
- envelope-from=philmd@linaro.org; helo=mail-wm1-x332.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::42c;
+ envelope-from=philmd@linaro.org; helo=mail-wr1-x42c.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -107,80 +107,54 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Slighly simplify cpu-target.c again by extracting cpu_exec_initfn()
-to cpu-{system,user}.c, adding an empty stub for user emulation.
+Use the tcg_enabled() check so the compiler can elide
+the call when TCG isn't available, allowing to remove
+the tb_flush() stub.
 
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 ---
-Good enough for now...
----
- cpu-target.c         | 9 ---------
- hw/core/cpu-system.c | 7 +++++++
- hw/core/cpu-user.c   | 5 +++++
- 3 files changed, 12 insertions(+), 9 deletions(-)
+ accel/stubs/tcg-stub.c | 4 ----
+ gdbstub/system.c       | 5 ++++-
+ 2 files changed, 4 insertions(+), 5 deletions(-)
 
-diff --git a/cpu-target.c b/cpu-target.c
-index dff8c0747f9..3d33d20b8c8 100644
---- a/cpu-target.c
-+++ b/cpu-target.c
-@@ -24,7 +24,6 @@
- #include "migration/vmstate.h"
- #ifndef CONFIG_USER_ONLY
- #include "hw/core/sysemu-cpu-ops.h"
--#include "exec/address-spaces.h"
- #endif
- #include "system/accel-ops.h"
- #include "system/cpus.h"
-@@ -176,14 +175,6 @@ void cpu_exec_unrealizefn(CPUState *cpu)
-     accel_cpu_common_unrealize(cpu);
- }
+diff --git a/accel/stubs/tcg-stub.c b/accel/stubs/tcg-stub.c
+index 7f4208fddf2..b2b9881bdfb 100644
+--- a/accel/stubs/tcg-stub.c
++++ b/accel/stubs/tcg-stub.c
+@@ -14,10 +14,6 @@
+ #include "exec/tb-flush.h"
+ #include "exec/exec-all.h"
  
--void cpu_exec_initfn(CPUState *cpu)
+-void tb_flush(CPUState *cpu)
 -{
--#ifndef CONFIG_USER_ONLY
--    cpu->memory = get_system_memory();
--    object_ref(OBJECT(cpu->memory));
--#endif
 -}
 -
- char *cpu_model_from_type(const char *typename)
+ G_NORETURN void cpu_loop_exit(CPUState *cpu)
  {
-     const char *suffix = "-" CPU_RESOLVING_TYPE;
-diff --git a/hw/core/cpu-system.c b/hw/core/cpu-system.c
-index c63c984a803..0520c362db4 100644
---- a/hw/core/cpu-system.c
-+++ b/hw/core/cpu-system.c
-@@ -20,6 +20,7 @@
- 
- #include "qemu/osdep.h"
- #include "qapi/error.h"
-+#include "exec/address-spaces.h"
- #include "exec/memory.h"
- #include "exec/tswap.h"
- #include "hw/qdev-core.h"
-@@ -182,3 +183,9 @@ void cpu_class_init_props(DeviceClass *dc)
- 
-     device_class_set_props(dc, cpu_system_props);
- }
-+
-+void cpu_exec_initfn(CPUState *cpu)
-+{
-+    cpu->memory = get_system_memory();
-+    object_ref(OBJECT(cpu->memory));
-+}
-diff --git a/hw/core/cpu-user.c b/hw/core/cpu-user.c
-index e5ccf6bf13a..cdd8de2fefa 100644
---- a/hw/core/cpu-user.c
-+++ b/hw/core/cpu-user.c
-@@ -25,3 +25,8 @@ void cpu_class_init_props(DeviceClass *dc)
- {
-     device_class_set_props(dc, cpu_user_props);
- }
-+
-+void cpu_exec_initfn(CPUState *cpu)
-+{
-+    /* nothing to do */
-+}
+     g_assert_not_reached();
+diff --git a/gdbstub/system.c b/gdbstub/system.c
+index 8ce79fa88cf..7f047a285c8 100644
+--- a/gdbstub/system.c
++++ b/gdbstub/system.c
+@@ -22,6 +22,7 @@
+ #include "system/cpus.h"
+ #include "system/runstate.h"
+ #include "system/replay.h"
++#include "system/tcg.h"
+ #include "hw/core/cpu.h"
+ #include "hw/cpu/cluster.h"
+ #include "hw/boards.h"
+@@ -171,7 +172,9 @@ static void gdb_vm_state_change(void *opaque, bool running, RunState state)
+         } else {
+             trace_gdbstub_hit_break();
+         }
+-        tb_flush(cpu);
++        if (tcg_enabled()) {
++            tb_flush(cpu);
++        }
+         ret = GDB_SIGNAL_TRAP;
+         break;
+     case RUN_STATE_PAUSED:
 -- 
 2.47.1
 
