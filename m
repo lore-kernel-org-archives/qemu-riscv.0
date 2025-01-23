@@ -4,65 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 94ED0C02182
-	for <qemu-riscv@archiver.kernel.org>; Thu, 23 Jan 2025 23:45:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B539FC0218B
+	for <qemu-riscv@archiver.kernel.org>; Thu, 23 Jan 2025 23:46:17 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tb6sC-00069o-Re; Thu, 23 Jan 2025 18:44:32 -0500
+	id 1tb6sO-0006FU-E5; Thu, 23 Jan 2025 18:44:44 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tb6sB-00068c-Gl
- for qemu-riscv@nongnu.org; Thu, 23 Jan 2025 18:44:31 -0500
-Received: from mail-wr1-x42e.google.com ([2a00:1450:4864:20::42e])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tb6sM-0006DZ-Az
+ for qemu-riscv@nongnu.org; Thu, 23 Jan 2025 18:44:42 -0500
+Received: from mail-wm1-x32f.google.com ([2a00:1450:4864:20::32f])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tb6s8-0003rd-KL
- for qemu-riscv@nongnu.org; Thu, 23 Jan 2025 18:44:31 -0500
-Received: by mail-wr1-x42e.google.com with SMTP id
- ffacd0b85a97d-385ddcfc97bso1316667f8f.1
- for <qemu-riscv@nongnu.org>; Thu, 23 Jan 2025 15:44:28 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tb6sJ-0003uw-VI
+ for qemu-riscv@nongnu.org; Thu, 23 Jan 2025 18:44:42 -0500
+Received: by mail-wm1-x32f.google.com with SMTP id
+ 5b1f17b1804b1-43626213fffso17170665e9.1
+ for <qemu-riscv@nongnu.org>; Thu, 23 Jan 2025 15:44:39 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1737675867; x=1738280667; darn=nongnu.org;
+ d=linaro.org; s=google; t=1737675878; x=1738280678; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=4nuXtmGFXC6ord9LKCUcMBdqEKN9u5T/6Xkbf7Pq9+s=;
- b=aFg1A+iXtHTzplQv2uBeKltCA6R4Lmfe8Eq1rybCKZigLroQLV2B553ijdCSuNhca0
- yitDaVxo5c14Z08YbzOzMHKGdanzlK5lAHIwrXRu56zxD+z3NV4Kri4bTiXf7IRe901u
- ewSh3ODLvS64lVeHaos+QAM2itNnueKwihf/VUbaYhFlz8DUflheKeLMm2CRcBlia0xr
- iA2SOxjzwU3emP659AOOaAbbTQ+iz7899QXBPoQbCAgJ4ilRv0QzKWazafKCia0ryG7m
- g1BJkT5HBi1ykw37JKs5+NntdFySavGUcVpLt0csONEukD40eiA+PEx/JUTLQie5aqC2
- rQ+A==
+ bh=JSvw35u1c/GeD9pKIKqf6WHVcOBbPhJhoq/j5sOwl2I=;
+ b=GoRdQTBO60uisqPbsnCeaTXiqcwQ5VAL/Y/vqmdVvUMB93sGL3FBXU2mkaz5g1+AQ1
+ 07JppaTzUfZ4YljrB3RzYn34yLc5dWPVkmC4m/3Zqn7sQLgBFZ6ImFig1CEyQD2xfRhc
+ AtbObKo7A4Kwz6bYz12mqVpFu0QPgoJD8qVO2wOyWvh4nCv9hSCuOayoBRCBxeFGcvYS
+ Kk0umoxokrBnUqX8SuA5ctRAP2hIQKg6aS1O8WNJU4jjWZUowTHrFi28aSFHIzxTBA+U
+ J9L+WNS4RyBfcbPGhgkLXJ35nQiPhSNLqeSsWsj9Mh9BgmS3jzbQkOf9K/ZNNVt9yVZl
+ 8zBA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1737675867; x=1738280667;
+ d=1e100.net; s=20230601; t=1737675878; x=1738280678;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=4nuXtmGFXC6ord9LKCUcMBdqEKN9u5T/6Xkbf7Pq9+s=;
- b=QPWcqd95ly5pjsJRABzIgbvZiClV5vMq6NZGc2pD71q6jS23fkskWBUg1XB6O7XR5F
- cck+Ol3+myV4YP4oFKPq2uiLNMqKAP8Y5G29LvzwJSHJYT830QCq5W+RJVeQ1dIC77U5
- M0kHPbaM7fJ6XVDYkygv48w6Fd7FKSBuo2BYP7ZHHEF5neM0Nz2Uu5SJuAQV/xqv94Qi
- H0w4pXUZfh9aya3+VYRR4vCBjBeVtD8tKmFINZXtu9xCcSo1Tkm2lBv2aORaJtkGobwj
- 6goNnKgVICiAipRklXg4cTo5McT/DUFZubHxQbfRQMQpe1GcxWfq+dkzsWrFukAXMW/S
- U5Qw==
+ bh=JSvw35u1c/GeD9pKIKqf6WHVcOBbPhJhoq/j5sOwl2I=;
+ b=bEO02lYP7PoKRePh3lHvxzpY3SmjdP+frTXRdJGgw3HINPSysxu9HVh0sULZWph+9Z
+ br21jFNstVgTHi3YqTF1ApWZSE15SMwWuHlmT2t3IUggGdUeXzpWxJO7DurZv9LE9Bhr
+ HKHyPjLgfyULDdzcQsJtoTAWbovcOdcRsUen/8MB9SMgucDKBj+1luFxXk227C72Mwm/
+ liJd5lc2Mx6V8ZRksxDP3518Uut6fiFFDXhqiwSvoQiya8OpHQowR04OD+RCyteOzJ6A
+ 9ofZctkCg2oBd+Gz8P+A2EUtPQlzsoXNqX7ljJy8zLCQoanaGUGPtp5IvYN3hc49MleC
+ zAbA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCX8c/VYFUzAROU9Uuicb0pBMN6GUxg/oGpVsNiPWYAV/D162wR2jJzs7wrBHb6Mtz8jc4BRu9FeXggH@nongnu.org
-X-Gm-Message-State: AOJu0Yz8q3UxxYD6g/JHIwnYIsp3Y0KQQV8KrMs3/oF/iA1b9dFjUYTU
- KfWSisgmjUIrQITfJgszLFbbpjB/ACtN8fI1l+W05H6R7tHio9G7L1lKmpLgh9w=
-X-Gm-Gg: ASbGnctwixKANLjBeFmbpcoziHC2ttqX6PLKjz6wILJBRfO7Cy+1KmrdThVpuEy64vH
- WiPeBZV8STsLB//Gorky8ul2b8oaWtJf6JeKGm8J/AK7bg2vhEKTgDKNQiFHLu6dfzQR0RrCo0/
- y+JXZ0AkacETvfZV+KQhfGox1qeHyaD4cB+3+98jnhpe6eq+X9LM6PzL4uZVDXhLXmnAZLm9dNM
- O35pMMK344b9lgksBVSaBHIgaarg7+5wPR0I2BVEnKNEBopU/PZjfs9yCQ3bGEOvhGNlbAx2tUf
- Dk60VxyewhejysremfBxrjjoemxG3S1AEkqX8v0CnEEHVqcQw7pwX44=
-X-Google-Smtp-Source: AGHT+IHv5zns5zWE/8mYKYb9FdwvG4F/GC7lN2DJcXXFDd0WLjCHyuvzadU0RlDxZ5dNLmoZuF9u5A==
-X-Received: by 2002:a05:6000:1887:b0:38a:87cc:fb42 with SMTP id
- ffacd0b85a97d-38bf56639d5mr27205303f8f.21.1737675867076; 
- Thu, 23 Jan 2025 15:44:27 -0800 (PST)
+ AJvYcCV9+eTrqQcnT7rRghIqbxg+NGpYiydYsfoVii/Yi57aMol1UIQlsb/vDSUY3aX/FRSiG+e/Nnz7+Q4w@nongnu.org
+X-Gm-Message-State: AOJu0YwDSy59ba+ZSFowNGeALNxsXMJM6VoepSwWwuaFZAurDNCjwJJO
+ 97Jg2+bcS8gd6Ks9R6O0+nSnQ2DrpuyE1iOPamiZ0foXKAUNLs0sNgutngJ5DIM=
+X-Gm-Gg: ASbGnctQNhFakhKzgfZMYxDPJkYgnJWij3EhFsam5UU6M7SP41nNGasMrq4M7IHP4hC
+ odeIKenahJLRhcVTwnypCx92KAdUxgOd8IBLq1tEJ/QVhvYMEh4Q8BalN9rCUF/I/915YBI3isl
+ CgDZPSdcD38tHVsJq+x6RX48UL4tO941UlrwYWmHLQdJ4HbF6g3viBoOTZY0YtCHJHtw8CzUVl/
+ pw92n/Qy3ShtEPjvpjwFHY8Ys6uUZVMauzChC3hnlJeVDdCfuaZsGPTcscddz/EgZebQD7/bJmY
+ 65r6Uqs4ic7tX/CzKWhq4GVDYE9wG8ytwWHSebIO+jYuSLVnM4HfHtC35X5Jdn2lkA==
+X-Google-Smtp-Source: AGHT+IGo8PNbuw90Bq4/JTfJj+icg7kmRyyI+cmqGdvUrpM4r/a237PZVlDOFDC6zvKvXQiH9M0QlA==
+X-Received: by 2002:a05:600c:3d05:b0:434:9e17:190c with SMTP id
+ 5b1f17b1804b1-438b87f953fmr44596875e9.0.1737675878313; 
+ Thu, 23 Jan 2025 15:44:38 -0800 (PST)
 Received: from localhost.localdomain (88-187-86-199.subs.proxad.net.
  [88.187.86.199]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-38c2a17d6e2sm989811f8f.23.2025.01.23.15.44.25
+ 5b1f17b1804b1-438bd4857c3sm7081075e9.10.2025.01.23.15.44.37
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Thu, 23 Jan 2025 15:44:26 -0800 (PST)
+ Thu, 23 Jan 2025 15:44:37 -0800 (PST)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Peter Maydell <peter.maydell@linaro.org>,
@@ -74,17 +74,17 @@ Cc: Peter Maydell <peter.maydell@linaro.org>,
  xen-devel@lists.xenproject.org,
  Richard Henderson <richard.henderson@linaro.org>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-Subject: [PATCH 02/20] user: Extract common MMAP API to 'user/mmap.h'
-Date: Fri, 24 Jan 2025 00:43:56 +0100
-Message-ID: <20250123234415.59850-3-philmd@linaro.org>
+Subject: [PATCH 04/20] cpus: Cache CPUClass early in instance_init() handler
+Date: Fri, 24 Jan 2025 00:43:58 +0100
+Message-ID: <20250123234415.59850-5-philmd@linaro.org>
 X-Mailer: git-send-email 2.47.1
 In-Reply-To: <20250123234415.59850-1-philmd@linaro.org>
 References: <20250123234415.59850-1-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::42e;
- envelope-from=philmd@linaro.org; helo=mail-wr1-x42e.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::32f;
+ envelope-from=philmd@linaro.org; helo=mail-wm1-x32f.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -107,128 +107,44 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Keep common MMAP-related declarations in a single place.
-
-Note, this disable ThreadSafetyAnalysis on Linux for:
-- mmap_fork_start()
-- mmap_fork_end().
+Cache CPUClass as early as possible, when the instance
+is initialized.
 
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 ---
- bsd-user/qemu.h        | 12 +-----------
- include/user/mmap.h    | 32 ++++++++++++++++++++++++++++++++
- linux-user/user-mmap.h | 19 ++-----------------
- 3 files changed, 35 insertions(+), 28 deletions(-)
- create mode 100644 include/user/mmap.h
+ cpu-target.c         | 3 ---
+ hw/core/cpu-common.c | 3 +++
+ 2 files changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/bsd-user/qemu.h b/bsd-user/qemu.h
-index 4e97c796318..c1c508281a8 100644
---- a/bsd-user/qemu.h
-+++ b/bsd-user/qemu.h
-@@ -32,6 +32,7 @@
- extern char **environ;
+diff --git a/cpu-target.c b/cpu-target.c
+index 667688332c9..89874496a41 100644
+--- a/cpu-target.c
++++ b/cpu-target.c
+@@ -134,9 +134,6 @@ const VMStateDescription vmstate_cpu_common = {
  
- #include "user/thunk.h"
-+#include "user/mmap.h"
- #include "target_arch.h"
- #include "syscall_defs.h"
- #include "target_syscall.h"
-@@ -233,19 +234,8 @@ void print_taken_signal(int target_signum, const target_siginfo_t *tinfo);
- extern int do_strace;
- 
- /* mmap.c */
--int target_mprotect(abi_ulong start, abi_ulong len, int prot);
--abi_long target_mmap(abi_ulong start, abi_ulong len, int prot,
--                     int flags, int fd, off_t offset);
--int target_munmap(abi_ulong start, abi_ulong len);
--abi_long target_mremap(abi_ulong old_addr, abi_ulong old_size,
--                       abi_ulong new_size, unsigned long flags,
--                       abi_ulong new_addr);
- int target_msync(abi_ulong start, abi_ulong len, int flags);
--extern abi_ulong mmap_next_start;
--abi_ulong mmap_find_vma(abi_ulong start, abi_ulong size);
- void mmap_reserve(abi_ulong start, abi_ulong size);
--void TSA_NO_TSA mmap_fork_start(void);
--void TSA_NO_TSA mmap_fork_end(int child);
- 
- /* main.c */
- extern char qemu_proc_pathname[];
-diff --git a/include/user/mmap.h b/include/user/mmap.h
-new file mode 100644
-index 00000000000..4d004e6b822
---- /dev/null
-+++ b/include/user/mmap.h
-@@ -0,0 +1,32 @@
-+/*
-+ * MMAP declarations for QEMU user emulation
-+ *
-+ * SPDX-License-Identifier: GPL-2.0-or-later
-+ */
-+#ifndef USER_MMAP_H
-+#define USER_MMAP_H
-+
-+#include "user/abitypes.h"
-+
-+/*
-+ * mmap_next_start: The base address for the next mmap without hint,
-+ * increased after each successful map, starting at task_unmapped_base.
-+ * This is an optimization within QEMU and not part of ADDR_COMPAT_LAYOUT.
-+ */
-+extern abi_ulong mmap_next_start;
-+
-+int target_mprotect(abi_ulong start, abi_ulong len, int prot);
-+
-+abi_long target_mmap(abi_ulong start, abi_ulong len, int prot,
-+                     int flags, int fd, off_t offset);
-+int target_munmap(abi_ulong start, abi_ulong len);
-+abi_long target_mremap(abi_ulong old_addr, abi_ulong old_size,
-+                       abi_ulong new_size, unsigned long flags,
-+                       abi_ulong new_addr);
-+
-+abi_ulong mmap_find_vma(abi_ulong, abi_ulong, abi_ulong);
-+
-+void TSA_NO_TSA mmap_fork_start(void);
-+void TSA_NO_TSA mmap_fork_end(int child);
-+
-+#endif
-diff --git a/linux-user/user-mmap.h b/linux-user/user-mmap.h
-index b94bcdcf83c..dfc4477a720 100644
---- a/linux-user/user-mmap.h
-+++ b/linux-user/user-mmap.h
-@@ -18,6 +18,8 @@
- #ifndef LINUX_USER_USER_MMAP_H
- #define LINUX_USER_USER_MMAP_H
- 
-+#include "user/mmap.h"
-+
- /*
-  * Guest parameters for the ADDR_COMPAT_LAYOUT personality
-  * (at present this is the only layout supported by QEMU).
-@@ -39,24 +41,7 @@
- extern abi_ulong task_unmapped_base;
- extern abi_ulong elf_et_dyn_base;
- 
--/*
-- * mmap_next_start: The base address for the next mmap without hint,
-- * increased after each successful map, starting at task_unmapped_base.
-- * This is an optimization within QEMU and not part of ADDR_COMPAT_LAYOUT.
-- */
--extern abi_ulong mmap_next_start;
+ bool cpu_exec_realizefn(CPUState *cpu, Error **errp)
+ {
+-    /* cache the cpu class for the hotpath */
+-    cpu->cc = CPU_GET_CLASS(cpu);
 -
--int target_mprotect(abi_ulong start, abi_ulong len, int prot);
--abi_long target_mmap(abi_ulong start, abi_ulong len, int prot,
--                     int flags, int fd, off_t offset);
--int target_munmap(abi_ulong start, abi_ulong len);
--abi_long target_mremap(abi_ulong old_addr, abi_ulong old_size,
--                       abi_ulong new_size, unsigned long flags,
--                       abi_ulong new_addr);
- abi_long target_madvise(abi_ulong start, abi_ulong len_in, int advice);
--abi_ulong mmap_find_vma(abi_ulong, abi_ulong, abi_ulong);
--void mmap_fork_start(void);
--void mmap_fork_end(int child);
+     if (!accel_cpu_common_realize(cpu, errp)) {
+         return false;
+     }
+diff --git a/hw/core/cpu-common.c b/hw/core/cpu-common.c
+index cb79566cc51..ff605059c15 100644
+--- a/hw/core/cpu-common.c
++++ b/hw/core/cpu-common.c
+@@ -238,6 +238,9 @@ static void cpu_common_initfn(Object *obj)
+ {
+     CPUState *cpu = CPU(obj);
  
- abi_ulong target_shmat(CPUArchState *cpu_env, int shmid,
-                        abi_ulong shmaddr, int shmflg);
++    /* cache the cpu class for the hotpath */
++    cpu->cc = CPU_GET_CLASS(cpu);
++
+     gdb_init_cpu(cpu);
+     cpu->cpu_index = UNASSIGNED_CPU_INDEX;
+     cpu->cluster_index = UNASSIGNED_CLUSTER_INDEX;
 -- 
 2.47.1
 
