@@ -4,65 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C040FC0218C
-	for <qemu-riscv@archiver.kernel.org>; Thu, 23 Jan 2025 23:48:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 58365C02182
+	for <qemu-riscv@archiver.kernel.org>; Thu, 23 Jan 2025 23:48:56 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tb6sI-0006CP-Vr; Thu, 23 Jan 2025 18:44:39 -0500
+	id 1tb6s4-00061c-Va; Thu, 23 Jan 2025 18:44:24 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tb6sH-0006Ay-Ua
- for qemu-riscv@nongnu.org; Thu, 23 Jan 2025 18:44:37 -0500
-Received: from mail-wr1-x42c.google.com ([2a00:1450:4864:20::42c])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tb6s2-00060h-O4
+ for qemu-riscv@nongnu.org; Thu, 23 Jan 2025 18:44:22 -0500
+Received: from mail-wm1-x331.google.com ([2a00:1450:4864:20::331])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tb6sF-0003tQ-3a
- for qemu-riscv@nongnu.org; Thu, 23 Jan 2025 18:44:37 -0500
-Received: by mail-wr1-x42c.google.com with SMTP id
- ffacd0b85a97d-385d7b4da2bso1420425f8f.1
- for <qemu-riscv@nongnu.org>; Thu, 23 Jan 2025 15:44:34 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tb6rz-0003ol-82
+ for qemu-riscv@nongnu.org; Thu, 23 Jan 2025 18:44:22 -0500
+Received: by mail-wm1-x331.google.com with SMTP id
+ 5b1f17b1804b1-43621d27adeso10189955e9.2
+ for <qemu-riscv@nongnu.org>; Thu, 23 Jan 2025 15:44:18 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1737675873; x=1738280673; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=ce4xXqVbqUUJ3kwtGZLdz75HP+CS3yxZeowyzQLM8Ns=;
- b=ArNhyyY9wHQnUy9VaH2mZVYpmQHRKsjWgCeUgeb6aZqf0NLt+le9c0FxvRDUq4LwT8
- xpXBUH0SUc8ymZFTrjZqqFqAqmPmTPPwCWjdOG3MpIT+w4lP14yqqpEQ74TJTBZFp6y4
- qLfQNhghgu106Tpf8/YKWnsvXM1HpjskJLbwG/VVMyjc61E0Q+6KnZZU5Lwv9XIFHVva
- 7zTeoyBzZRH/BfJIeCKZ7DiLJxCGpbyHYv+iK2Yoyb9X20E2jvPM3vQi49d/PED1AxWg
- N5iZ2Qp8KujMU8ziwJ5cLzsfzOJVSjTnv8pTDWd4YD/CANL5IIhVBA9/H0WlYVAdvC1S
- qu4w==
+ d=linaro.org; s=google; t=1737675857; x=1738280657; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=SrJqTercMM7Oiv7TI6NgScSjNQ/Q43/m4EWNljCwQJg=;
+ b=t3MYesDsGnrH3gGJe0ZQ0os3VY5n05M8xIFoC1B7D4X3sfM8GhhhlP+f9rkzeSu2Im
+ KssfjgynuCCE/nv7kG4fh3O/1gWg9gWK4okSRALRza0CyFN+1nSHPxDhJYcvHQJ5uVzz
+ fXipSF+E3GsheWtgKdvUSfFpVCGlIpgcDSQhWEmqITDvBePhgxHTrqNJuJmJ/q9K3YwF
+ //ayKAd93hkN+1dGreq6mXqswgrN81e4oz45Qqn5ZeFVcUPrJ6CMUnvOcyhxXBatOGY4
+ Zfu63QXbviaG4qE5ASTeWMxx327WwRKD1uYdZBLXafPR89rXSal38gc4hZtjAHhod9OQ
+ zVBQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1737675873; x=1738280673;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=ce4xXqVbqUUJ3kwtGZLdz75HP+CS3yxZeowyzQLM8Ns=;
- b=q7T5cqRDMfUec79PL7ZHzgFXHI2XDyiNI8r+3sdqTP2DdIL4ReCL0825/Y/iraSw8i
- lGpPoXLwQkZ78bjPitQ0A8pu2BYduWtb4wM9SCGCMgfbhkvAqhIpVrvr9aSDzCeRWk2f
- zVglkPUm1Ie+zlVz2BjvHefW6RT3w6XYGq9U8RcITCerUr2maVRQ/PGZKer8sqQs8i2B
- wQp2UgmZgTGoLYPIBj1yUYuGPQwzz6IaVjLavm4N2jeBRg+5lBqAZ6cWHz5nKtlfC472
- zz22UqSCfbQpPGFFEen3+ChYsfUA/ZUwVfEkz6OEZSo9U2x9Jdz4F2hE5HBnW97T7Olp
- PzGQ==
+ d=1e100.net; s=20230601; t=1737675857; x=1738280657;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=SrJqTercMM7Oiv7TI6NgScSjNQ/Q43/m4EWNljCwQJg=;
+ b=kVtYqdktDA/VC0mtCobSS25qb+Yb8Uho9JPGmnkQYrINmCTEaoWPBQKFrcBhN0yR7X
+ 4BdpyQ56PV0umrzqVUkbYYSAmj2pG3SlygRvGRyvfaDIrkq8F8to7aU+A5L6rON93ldu
+ BKkWSsldciVNr0dnqI5mS38pgfVuzPA40MQ1c1Srvb6cU8hmnw42aVd1qNvxfm2nb4at
+ OmNV2zM6bD6la9oNbVf2TRw5YVCP98qViTuod+qTw9/abLdqg+QYbogU/gooSntqSQoj
+ 7zPZfx/bNwdYK2e6j2AbHiIyQWaNexIyHO0zuF66598erMEDqPGjLiuBn/+oaSQajUm8
+ ZFkA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXnF+N8XQGAO24jqlmlU87vYAEj3dNys99t6g5KV8x28xF+P4ZlnVe5VkqVefNZ4B5UG0hrAx0ehjLC@nongnu.org
-X-Gm-Message-State: AOJu0Yz7WmDth8LilxOMkj9V+s6iHkwE3+Rwsnl8ya719Ft9xkVhURKO
- /SjRmUlupvz6asf/Ny8+b+2VxYWg/m38T/JKgrpmmzUDPolQnQqJQ+7Dg/OUeoE=
-X-Gm-Gg: ASbGncuKlcz+77Vy79nSekz7rMGj0yL85yg2rPf4BYhnp/CnJBTZPZQZajJjKgVSZRM
- S0qusT278NSvsP2l4G5oYpS1Ie7VWCnxZq0NXxHpxSlMNpevSJAkq+C1tlVzHju/l8/hy9V0W0O
- wMr5dNGwzsYaBfH+c7Tg7Eng91O/MR3uTHfqU84dzUpFisFvrHg0RmXjaB3tQfCzQXxoFqaaCou
- zfhdEAoWxdpV0+zw33qrZe33gnANfBBXLUUUyuEzs5WwFK2KXzWLqI6mkSCn34Oss7kjVDT6PF9
- zfzCsiri4DrvoIK/r+iZjFbIf4twhomNT45WRlQtFNvN8oGDqgqHC4xzp2DIIMGERg==
-X-Google-Smtp-Source: AGHT+IF2OW+qflIazHPgiEcST7oe1qZGT6aj/Hik/HFfGWbVcOJj4aFV8515DLdGfzbOF2nObYCMQg==
-X-Received: by 2002:a05:6000:144a:b0:38a:9c1b:df5b with SMTP id
- ffacd0b85a97d-38bf566a279mr25563799f8f.30.1737675873434; 
- Thu, 23 Jan 2025 15:44:33 -0800 (PST)
+ AJvYcCVLZTySPRUohrxuVLx7XW04Ykex4+o2PWO8RPbejQwJPfobzJH+mSxdLfEN0q1sXV51VcoodfuE5kNE@nongnu.org
+X-Gm-Message-State: AOJu0YzDkA7wOvpIniap5RmYmQOGAmNl2YnyZ7lBdejiBpYL5/8HMi6a
+ QufpbDmVAYSKJVEFI5UndJSzTGmMwsk7nuMuYZiWwmB7ToQX4La5fBHlzHHiSko=
+X-Gm-Gg: ASbGnctf9i9xQnML0Ru2cTACJZ2p68zqg3HVQCCnVvAVLQirThKUygzyPSb8GGxQcyb
+ enXRT/NeosKP0Lf9WN9sbrDJKOoWzaUJlDqswQtSYRi/foE4t/XIeQ1FN/OyacmpjIKhT2QlvgF
+ bwZhzpA+2+OGA2M57hVao2xdiQ1sSQXY0fGbvdloPidgIztuOAAdvjHd9DEmUCiQFFqbR+LtUK6
+ MQe2xcD/OXqR1XsPQF0ytODAqisTYhF+MhyI0zxo+yciWd7k+dZBEFu6aP1+faaY1B8J5IN5ZPS
+ IRzFphIDRE7iiqDoE8DHvZdW0nIDsRt5rRDRDSXFTDu8hqGBef+LuX/pNgdoarAMhA==
+X-Google-Smtp-Source: AGHT+IGBiB8E0eTSoI28+V9cp1gWnvQIF0NcnM5MrTMqS5rNZ7M1PFDJt5j8Or2lR2bn/A8RFfyqaQ==
+X-Received: by 2002:a05:600c:a09:b0:435:9ed3:5688 with SMTP id
+ 5b1f17b1804b1-438913f86dcmr267594425e9.18.1737675857123; 
+ Thu, 23 Jan 2025 15:44:17 -0800 (PST)
 Received: from localhost.localdomain (88-187-86-199.subs.proxad.net.
  [88.187.86.199]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-38c2a1c4006sm982952f8f.94.2025.01.23.15.44.30
+ 5b1f17b1804b1-438bd54c098sm6544235e9.31.2025.01.23.15.44.15
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Thu, 23 Jan 2025 15:44:32 -0800 (PST)
+ Thu, 23 Jan 2025 15:44:16 -0800 (PST)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Peter Maydell <peter.maydell@linaro.org>,
@@ -74,17 +73,15 @@ Cc: Peter Maydell <peter.maydell@linaro.org>,
  xen-devel@lists.xenproject.org,
  Richard Henderson <richard.henderson@linaro.org>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-Subject: [PATCH 03/20] gdbstub: Check for TCG before calling tb_flush()
-Date: Fri, 24 Jan 2025 00:43:57 +0100
-Message-ID: <20250123234415.59850-4-philmd@linaro.org>
+Subject: [PATCH 00/20] accel: Simplify cpu-target.c (omnibus)
+Date: Fri, 24 Jan 2025 00:43:54 +0100
+Message-ID: <20250123234415.59850-1-philmd@linaro.org>
 X-Mailer: git-send-email 2.47.1
-In-Reply-To: <20250123234415.59850-1-philmd@linaro.org>
-References: <20250123234415.59850-1-philmd@linaro.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::42c;
- envelope-from=philmd@linaro.org; helo=mail-wr1-x42c.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::331;
+ envelope-from=philmd@linaro.org; helo=mail-wm1-x331.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -107,54 +104,134 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Use the tcg_enabled() check so the compiler can elide
-the call when TCG isn't available, allowing to remove
-the tb_flush() stub.
+Yet another cleanup series before respining the "extract TCG
+fields from CPUState" series. Before that, we try to clarify
+a bit the code around CPU creation. Target specific code is
+reduced further. Some intermixed User/System is separated,
+making maintenance simpler IMHO. Since my local branch is
+quite big, I tried to group here all the generic patches.
 
-Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
----
- accel/stubs/tcg-stub.c | 4 ----
- gdbstub/system.c       | 5 ++++-
- 2 files changed, 4 insertions(+), 5 deletions(-)
+Regards,
 
-diff --git a/accel/stubs/tcg-stub.c b/accel/stubs/tcg-stub.c
-index 7f4208fddf2..b2b9881bdfb 100644
---- a/accel/stubs/tcg-stub.c
-+++ b/accel/stubs/tcg-stub.c
-@@ -14,10 +14,6 @@
- #include "exec/tb-flush.h"
- #include "exec/exec-all.h"
- 
--void tb_flush(CPUState *cpu)
--{
--}
--
- G_NORETURN void cpu_loop_exit(CPUState *cpu)
- {
-     g_assert_not_reached();
-diff --git a/gdbstub/system.c b/gdbstub/system.c
-index 8ce79fa88cf..7f047a285c8 100644
---- a/gdbstub/system.c
-+++ b/gdbstub/system.c
-@@ -22,6 +22,7 @@
- #include "system/cpus.h"
- #include "system/runstate.h"
- #include "system/replay.h"
-+#include "system/tcg.h"
- #include "hw/core/cpu.h"
- #include "hw/cpu/cluster.h"
- #include "hw/boards.h"
-@@ -171,7 +172,9 @@ static void gdb_vm_state_change(void *opaque, bool running, RunState state)
-         } else {
-             trace_gdbstub_hit_break();
-         }
--        tb_flush(cpu);
-+        if (tcg_enabled()) {
-+            tb_flush(cpu);
-+        }
-         ret = GDB_SIGNAL_TRAP;
-         break;
-     case RUN_STATE_PAUSED:
+Phil.
+
+Based-on: <20250123215609.30432-1-philmd@linaro.org>
+  "target/ppc: Move TCG code from excp_helper.c to tcg-excp_helper.c"
+
+Philippe Mathieu-Daudé (20):
+  qemu/compiler: Absorb 'clang-tsa.h'
+  user: Extract common MMAP API to 'user/mmap.h'
+  gdbstub: Check for TCG before calling tb_flush()
+  cpus: Cache CPUClass early in instance_init() handler
+  cpus: Keep default fields initialization in cpu_common_initfn()
+  accel/kvm: Remove unused 'system/cpus.h' header in kvm-cpus.h
+  accel/tcg: Build tcg_flags helpers as common code
+  accel/tcg: Restrict tlb_init() / destroy() to TCG
+  accel/tcg: Restrict 'icount_align_option' global to TCG
+  accel/tcg: Rename 'hw/core/tcg-cpu-ops.h' -> 'accel/tcg/cpu-ops.h'
+  accel: Rename 'hw/core/accel-cpu.h' -> 'accel/accel-cpu-target.h'
+  accel/accel-cpu-target.h: Include missing 'cpu.h' header
+  accel: Forward-declare AccelOpsClass in 'qemu/typedefs.h'
+  accel/tcg: Move cpu_memory_rw_debug() user implementation to
+    user-exec.c
+  cpus: Fix style in cpu-target.c
+  cpus: Restrict cpu_common_post_load() code to TCG
+  cpus: Have cpu_class_init_props() per user / system emulation
+  cpus: Have cpu_exec_initfn() per user / system emulation
+  cpus: Register VMState per user / system emulation
+  cpus: Build cpu_exec_[un]realizefn() methods once
+
+ MAINTAINERS                                   |   4 +-
+ accel/kvm/kvm-cpus.h                          |   2 -
+ accel/tcg/internal-common.h                   |  13 +
+ bsd-user/qemu.h                               |  13 +-
+ .../accel-cpu.h => accel/accel-cpu-target.h}  |   7 +-
+ .../tcg-cpu-ops.h => accel/tcg/cpu-ops.h}     |   0
+ include/block/block_int-common.h              |   1 -
+ include/block/graph-lock.h                    |   2 -
+ include/exec/exec-all.h                       |  16 -
+ include/exec/page-protection.h                |   2 -
+ include/hw/core/cpu.h                         |   2 +
+ include/qemu/clang-tsa.h                      | 114 -------
+ include/qemu/compiler.h                       |  87 +++++
+ include/qemu/thread.h                         |   1 -
+ include/qemu/typedefs.h                       |   1 +
+ include/system/accel-ops.h                    |   1 -
+ include/system/cpus.h                         |   4 -
+ include/user/mmap.h                           |  32 ++
+ linux-user/user-mmap.h                        |  19 +-
+ accel/accel-system.c                          |   1 +
+ accel/accel-target.c                          |   2 +-
+ accel/hvf/hvf-accel-ops.c                     |   1 +
+ accel/kvm/kvm-accel-ops.c                     |   1 +
+ accel/qtest/qtest.c                           |   1 +
+ accel/stubs/tcg-stub.c                        |   4 -
+ accel/tcg/cpu-exec-common.c                   |  34 +-
+ accel/tcg/cpu-exec.c                          |  37 +--
+ accel/tcg/cputlb.c                            |   2 +-
+ accel/tcg/icount-common.c                     |   2 +
+ accel/tcg/monitor.c                           |   1 -
+ accel/tcg/tcg-accel-ops.c                     |   1 +
+ accel/tcg/translate-all.c                     |   3 +-
+ accel/tcg/user-exec-stub.c                    |  11 +
+ accel/tcg/user-exec.c                         |  94 +++++-
+ accel/tcg/watchpoint.c                        |   2 +-
+ accel/xen/xen-all.c                           |   1 +
+ block/create.c                                |   1 -
+ bsd-user/signal.c                             |   2 +-
+ cpu-common.c                                  |   1 -
+ cpu-target.c                                  | 314 +-----------------
+ gdbstub/system.c                              |   6 +-
+ hw/core/cpu-common.c                          |  31 ++
+ hw/core/cpu-system.c                          | 170 ++++++++++
+ hw/core/cpu-user.c                            |  44 +++
+ hw/mips/jazz.c                                |   2 +-
+ linux-user/signal.c                           |   2 +-
+ system/cpus.c                                 |   1 +
+ system/globals.c                              |   1 -
+ system/physmem.c                              |   2 +-
+ target/alpha/cpu.c                            |   2 +-
+ target/arm/cpu.c                              |   2 +-
+ target/arm/tcg/cpu-v7m.c                      |   2 +-
+ target/arm/tcg/cpu32.c                        |   2 +-
+ target/arm/tcg/mte_helper.c                   |   2 +-
+ target/arm/tcg/sve_helper.c                   |   2 +-
+ target/avr/cpu.c                              |   2 +-
+ target/avr/helper.c                           |   2 +-
+ target/hexagon/cpu.c                          |   2 +-
+ target/hppa/cpu.c                             |   2 +-
+ target/i386/hvf/hvf-cpu.c                     |   2 +-
+ target/i386/kvm/kvm-cpu.c                     |   2 +-
+ target/i386/nvmm/nvmm-accel-ops.c             |   1 +
+ target/i386/tcg/tcg-cpu.c                     |   4 +-
+ target/i386/whpx/whpx-accel-ops.c             |   1 +
+ target/loongarch/cpu.c                        |   2 +-
+ target/m68k/cpu.c                             |   2 +-
+ target/microblaze/cpu.c                       |   2 +-
+ target/mips/cpu.c                             |   2 +-
+ target/openrisc/cpu.c                         |   2 +-
+ target/ppc/cpu_init.c                         |   2 +-
+ target/ppc/kvm.c                              |   2 +-
+ target/riscv/kvm/kvm-cpu.c                    |   2 +-
+ target/riscv/tcg/tcg-cpu.c                    |   4 +-
+ target/rx/cpu.c                               |   2 +-
+ target/s390x/cpu.c                            |   2 +-
+ target/s390x/tcg/mem_helper.c                 |   2 +-
+ target/sh4/cpu.c                              |   2 +-
+ target/sparc/cpu.c                            |   2 +-
+ target/tricore/cpu.c                          |   2 +-
+ target/xtensa/cpu.c                           |   2 +-
+ tests/unit/test-bdrv-drain.c                  |   1 -
+ tests/unit/test-block-iothread.c              |   1 -
+ util/qemu-thread-posix.c                      |   1 -
+ hw/core/meson.build                           |   5 +-
+ 84 files changed, 590 insertions(+), 578 deletions(-)
+ rename include/{hw/core/accel-cpu.h => accel/accel-cpu-target.h} (92%)
+ rename include/{hw/core/tcg-cpu-ops.h => accel/tcg/cpu-ops.h} (100%)
+ delete mode 100644 include/qemu/clang-tsa.h
+ create mode 100644 include/user/mmap.h
+ create mode 100644 hw/core/cpu-user.c
+
 -- 
 2.47.1
 
