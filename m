@@ -4,88 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A1318C02181
-	for <qemu-riscv@archiver.kernel.org>; Fri, 24 Jan 2025 17:17:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0C307C02181
+	for <qemu-riscv@archiver.kernel.org>; Fri, 24 Jan 2025 17:17:55 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tbNJ7-0005qB-TT; Fri, 24 Jan 2025 12:17:25 -0500
+	id 1tbNJO-0005xa-GH; Fri, 24 Jan 2025 12:17:43 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1tbNJ5-0005pa-K5
- for qemu-riscv@nongnu.org; Fri, 24 Jan 2025 12:17:23 -0500
-Received: from mail-qk1-x730.google.com ([2607:f8b0:4864:20::730])
+ id 1tbNJK-0005uw-PI
+ for qemu-riscv@nongnu.org; Fri, 24 Jan 2025 12:17:39 -0500
+Received: from mail-qk1-x72b.google.com ([2607:f8b0:4864:20::72b])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1tbNJ3-0006zN-Uw
- for qemu-riscv@nongnu.org; Fri, 24 Jan 2025 12:17:23 -0500
-Received: by mail-qk1-x730.google.com with SMTP id
- af79cd13be357-7b6e5ee6ac7so193081685a.0
- for <qemu-riscv@nongnu.org>; Fri, 24 Jan 2025 09:17:21 -0800 (PST)
+ id 1tbNJI-00070v-Pc
+ for qemu-riscv@nongnu.org; Fri, 24 Jan 2025 12:17:38 -0500
+Received: by mail-qk1-x72b.google.com with SMTP id
+ af79cd13be357-7b6f0afda3fso166758685a.2
+ for <qemu-riscv@nongnu.org>; Fri, 24 Jan 2025 09:17:36 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1737739041; x=1738343841; darn=nongnu.org;
+ d=linaro.org; s=google; t=1737739056; x=1738343856; darn=nongnu.org;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=CpxW8MxerAbm+Np/0rRPy4odW6Pnkt4zy9gY1/D9R70=;
- b=Jz7QSdF35HE71nst4xoNZ3zJt2yMRj1wzrFbtXBsP86Lz9O+SqJ4ibySxSrfala1gu
- odh0gBosKQ8+vUHiwb67lRMmxlFYCIw8OpDFfc3SJweJPgWKmqI00SVWfiWY2Squ5pzR
- 2zoMH3iHE9ohG4oEwcRs+KnlUvfdfzdilGEaK/JvRhhBB/GsbDRyO1UbEVwKNst+qUBj
- V6OM2I+dGh7IuaiCH/EGqmk582mhVyL2TfiBxb+pfolZ9TZarIFbR+pUXEZEJ9Y/8QcC
- Gc0tKqzpH0VxvhBJxsp/NZ5aN8XTnHNMZVSzygrIcpb4b90aFpxAkvmx916s/yEPAKGu
- O0nA==
+ bh=qBZiO4D1FqmlXSnrN8yKjuP8R99OxjLQaJMiyy6bpiQ=;
+ b=WmrVrdFyYsvReqWlk5GBs8PDdKtJR0/NI+w6OW2CYIH1EwonVzwa1x0xclkh8AfRFp
+ wCLHv8oXe/11X26YjWf9ViBMxJibY4H9PQgluMyoH1DJOoZxRbtOTwOjBL9qO79FMZ98
+ IHn2CV/t/uWwt9Bpc8RKPLDddwWs4YccV1CtNtUxmuDA3vAvusrzlsYJBVY8f8n6tO7t
+ UXyTdBGjzSjKWVbUhUImgMyQpDaeQg8+ZlbuCG/qwI/+hwVUn0rKKm7C9qUP63DkY9RM
+ CNpDqGTDCnlp/6MDhZdgrNrLev2f67ITaEgfAlJvLNSEkQJIhp6NKO4FqOygNsb7JDaL
+ 9/Kg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1737739041; x=1738343841;
+ d=1e100.net; s=20230601; t=1737739056; x=1738343856;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=CpxW8MxerAbm+Np/0rRPy4odW6Pnkt4zy9gY1/D9R70=;
- b=tEDNodD3JsmRR0h6E6NQxXYMqljz5Bj5RLPAJffKlo5V0utJcm/NN5xMUnfvO6MrIu
- Ivg4qyYv9r59yUuyCC2d7QG1U9w2nARqbAGi+hPgPG7RthClicIxB8SfPhMnFuev0KVZ
- xxeQORdPUURiPM0TnHwFrkZSckBl1nJHPh+n3F0NqmgNBxYT4474rB0b7WrldXTQnLKp
- JZOBQU2XoP0UpvfwCV7DQWgrB7KXzdv7gmEbLi1OKe99xNNj4ENAbDMl/eU2bKRjiyK+
- qIlx9rlmKMRGL5JxgP0aNMJUgr+B217OxVFY/SjiEZg6sHQRJhWZRMNGMeKIz+vlD0TF
- zLIg==
+ bh=qBZiO4D1FqmlXSnrN8yKjuP8R99OxjLQaJMiyy6bpiQ=;
+ b=WdHERIFfJynQsPAfPlMTnMbVvExfnKkZAtabmwSTHwxWP94MxsGKoQw+bFm+/m/8va
+ JUuYTVxxhOieZHlR4OWHhURZ/BNRMGrzKxAa9oe+tNvD8AhAHluXLEAUTI1Jnw3kZJVx
+ SUsNbR8JI905kg/uMbfIKqFN3DgVMJbqxMnwNy+jOvrqDbn1d2vd/28b4By4KAtjp18Q
+ bX0XlS35FAJ4Zi+kqwf5AvulsEqRrJqfDzpsb4PKfGtzAyF+1aJ/2MvIjZXxCpGZkdZh
+ loIpQGWmkStxVGK/FyW3jsarjRIWx8hFTzo7ZhJ8QTpISDQS+JRrhEonX1WflZqj5Fe8
+ jLwg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUww2m3u6BnYUCgzAAOaDX8xzYeqFeGfI50s+tVBHNmLor7PGfsaJWkoHPkQAlkvmkjwwT1UhzAof0P@nongnu.org
-X-Gm-Message-State: AOJu0Yy199m2DZdGxVXPkYsY2pnN2PnSJWFv4qK5/UMdfzft5PGAlUp7
- nNWrIILMwPhcTwIGQEIDd2fFYLQSefgvtpEpFJbsVVv7tSgY0OvQYODtI4VqI2cmdvm1OtoLEJT
- 0
-X-Gm-Gg: ASbGncuVrDnYluUE2/BFd6YFXJAehvb5C+P5JmnCz0vU3Z6bCz44JUbCEWejq9Q4LWL
- woJo4Gp5zardBxbNcwtNUru0N/HARGGjGmtBZOsKd0xIZN/XDGN20G6BeEtikE38nmlgrGw5bUT
- iC5+dBelazr8jnFLP5SDgp2VgYB+gQZF83Ipp29WD1Q0n7+oNEPbTuu1tJjDNuzn1uCv1Ym8lt2
- qZAImhweZKnKuItJ57BuvHXN5UgFfns77fTIuZqlQioIQFSbRYJw60ovIaFWNCUNIaO/R2RF3Ea
- NS05kNd6FWKN8Y6bZKuiNig0yBBpB524C51eSnP/emxd36ZLt2f01NRl4EpPgX/imQ==
-X-Google-Smtp-Source: AGHT+IE8sPM7ySgfWBuysxqsiv/qvZAyiZsk4w4l0DkHAYwmbJ7XI4QS2w0TANHnkWNVQ9N9mvvmQg==
-X-Received: by 2002:a05:620a:2a15:b0:7b6:e888:6b0e with SMTP id
- af79cd13be357-7be63219d5dmr4527197785a.2.1737739040901; 
- Fri, 24 Jan 2025 09:17:20 -0800 (PST)
+ AJvYcCWOjd66FJ3s5HClzufGFmTWvar0TI3lWE2QevxWKZfWrxfUW+nEoeA39XO6xT6Tx3Q2RS6tZ5wUGznW@nongnu.org
+X-Gm-Message-State: AOJu0YyF46cW7vvOcbiBuWcBpq/G/og7aAzj8I857PkzWEMMSglI+tqo
+ 1eo1Uu57V/kDOp3S3YyMiSLopJvGPzBszwEb6SR1YVYN0q2P+4nG26XKZIyet/s=
+X-Gm-Gg: ASbGncu4zCbi3BtWKQNZglsckrHQ3rdCmFrHV8eD2RY6T4Y/zaEcABRPTIz+g4kG9+2
+ CaHXSc03cl4p3PEgIZIOEu/InhryJbVZLVh9JSMUubn+ODsr4c1nz0pDmJpZNJoamj3Zpk7tVU8
+ ho3Q2yp8AMx6xxEpaGutff/juIUTMAc0HbfwgnS9D3Q9Vq8FtAWdOgcJ+SilWyNzPEdbFPJsvKF
+ 2r0m2qTKjj98t2VDEMwB42YHp1MVb4xoEsMrYpbcx09E6SSf1doSvux5+MgXtcHlS9Cnubpk31p
+ FArmHwMCAidz5Iwfz/9FdBm8IrWgGDJEiPTBaga7GWWHcVsvynKbYAvCvKpBXgxhnA==
+X-Google-Smtp-Source: AGHT+IFW722+xKvMmnKjmql7jzBxWTLNbvmvrCvKC9S7GT32+FnmnPGXcFh1fhDO6Jktvqb5suZ8Iw==
+X-Received: by 2002:a05:620a:2a13:b0:7b6:d8aa:7ef9 with SMTP id
+ af79cd13be357-7be6320c0f9mr4759858985a.32.1737739055757; 
+ Fri, 24 Jan 2025 09:17:35 -0800 (PST)
 Received: from ?IPV6:2607:fb90:c9e1:9829:9eed:533c:6788:9f4a?
  ([2607:fb90:c9e1:9829:9eed:533c:6788:9f4a])
  by smtp.gmail.com with ESMTPSA id
- af79cd13be357-7be9ae8aaa9sm113008085a.34.2025.01.24.09.17.19
+ af79cd13be357-7be9aeec6b8sm112525785a.84.2025.01.24.09.17.34
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 24 Jan 2025 09:17:20 -0800 (PST)
-Message-ID: <0bd61928-5bfc-44c7-8fc7-333f8e2e0b77@linaro.org>
-Date: Fri, 24 Jan 2025 09:17:17 -0800
+ Fri, 24 Jan 2025 09:17:34 -0800 (PST)
+Message-ID: <16332db7-6ed6-44eb-b266-8a3e9c7f34b8@linaro.org>
+Date: Fri, 24 Jan 2025 09:17:32 -0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 20/28] target/riscv: Move has_work() from CPUClass to
+Subject: Re: [PATCH 21/28] target/rx: Move has_work() from CPUClass to
  SysemuCPUOps
 To: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
  qemu-devel@nongnu.org
 Cc: qemu-arm@nongnu.org, qemu-s390x@nongnu.org, qemu-riscv@nongnu.org,
  qemu-ppc@nongnu.org, Paolo Bonzini <pbonzini@redhat.com>
 References: <20250121142341.17001-1-philmd@linaro.org>
- <20250121142341.17001-21-philmd@linaro.org>
+ <20250121142341.17001-22-philmd@linaro.org>
 Content-Language: en-US
 From: Richard Henderson <richard.henderson@linaro.org>
-In-Reply-To: <20250121142341.17001-21-philmd@linaro.org>
+In-Reply-To: <20250121142341.17001-22-philmd@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::730;
- envelope-from=richard.henderson@linaro.org; helo=mail-qk1-x730.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::72b;
+ envelope-from=richard.henderson@linaro.org; helo=mail-qk1-x72b.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -111,52 +110,10 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 On 1/21/25 06:23, Philippe Mathieu-Daudé wrote:
 > Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 > ---
->   target/riscv/cpu.h       | 9 +++++----
->   target/riscv/internals.h | 3 ---
->   target/riscv/cpu.c       | 8 +++-----
->   3 files changed, 8 insertions(+), 12 deletions(-)
-> 
-> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> index 97713681cbe..32e8e064f36 100644
-> --- a/target/riscv/cpu.h
-> +++ b/target/riscv/cpu.h
-> @@ -552,10 +552,6 @@ int riscv_cpu_gdb_read_register(CPUState *cpu, GByteArray *buf, int reg);
->   int riscv_cpu_gdb_write_register(CPUState *cpu, uint8_t *buf, int reg);
->   int riscv_cpu_hviprio_index2irq(int index, int *out_irq, int *out_rdzero);
->   uint8_t riscv_cpu_default_priority(int irq);
-> -uint64_t riscv_cpu_all_pending(CPURISCVState *env);
-> -int riscv_cpu_mirq_pending(CPURISCVState *env);
-> -int riscv_cpu_sirq_pending(CPURISCVState *env);
-> -int riscv_cpu_vsirq_pending(CPURISCVState *env);
->   bool riscv_cpu_fp_enabled(CPURISCVState *env);
->   target_ulong riscv_cpu_get_geilen(CPURISCVState *env);
->   void riscv_cpu_set_geilen(CPURISCVState *env, target_ulong geilen);
-> @@ -576,6 +572,11 @@ int riscv_cpu_max_xlen(RISCVCPUClass *mcc);
->   bool riscv_cpu_option_set(const char *optname);
->   
->   #ifndef CONFIG_USER_ONLY
-> +bool riscv_cpu_has_work(CPUState *cs);
-> +uint64_t riscv_cpu_all_pending(CPURISCVState *env);
-> +int riscv_cpu_mirq_pending(CPURISCVState *env);
-> +int riscv_cpu_sirq_pending(CPURISCVState *env);
-> +int riscv_cpu_vsirq_pending(CPURISCVState *env);
->   void riscv_cpu_do_interrupt(CPUState *cpu);
->   void riscv_isa_write_fdt(RISCVCPU *cpu, void *fdt, char *nodename);
->   void riscv_cpu_do_transaction_failed(CPUState *cs, hwaddr physaddr,
-> diff --git a/target/riscv/internals.h b/target/riscv/internals.h
-> index 67291933f84..86def39aec2 100644
-> --- a/target/riscv/internals.h
-> +++ b/target/riscv/internals.h
-> @@ -142,9 +142,6 @@ static inline float16 check_nanbox_h(CPURISCVState *env, uint64_t f)
->       }
->   }
->   
-> -/* Our implementation of CPUClass::has_work */
-> -bool riscv_cpu_has_work(CPUState *cs);
-> -
+>   target/rx/cpu.c | 2 +-
+>   1 file changed, 1 insertion(+), 1 deletion(-)
 
-Why move the declaration from internals.h to cpu.h?
-
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 
 r~
 
