@@ -4,85 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 95E35C0218C
-	for <qemu-riscv@archiver.kernel.org>; Fri, 24 Jan 2025 17:06:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EBE5AC02181
+	for <qemu-riscv@archiver.kernel.org>; Fri, 24 Jan 2025 17:06:43 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tbN7v-0003X5-MY; Fri, 24 Jan 2025 12:05:51 -0500
+	id 1tbN8a-0003rA-CQ; Fri, 24 Jan 2025 12:06:32 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1tbN7m-0003Ta-E2
- for qemu-riscv@nongnu.org; Fri, 24 Jan 2025 12:05:49 -0500
-Received: from mail-pl1-x635.google.com ([2607:f8b0:4864:20::635])
+ id 1tbN8J-0003jE-18
+ for qemu-riscv@nongnu.org; Fri, 24 Jan 2025 12:06:16 -0500
+Received: from mail-pj1-x102a.google.com ([2607:f8b0:4864:20::102a])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1tbN7k-0004fm-Cs
- for qemu-riscv@nongnu.org; Fri, 24 Jan 2025 12:05:42 -0500
-Received: by mail-pl1-x635.google.com with SMTP id
- d9443c01a7336-215770613dbso30578655ad.2
- for <qemu-riscv@nongnu.org>; Fri, 24 Jan 2025 09:05:38 -0800 (PST)
+ id 1tbN8G-0004oX-28
+ for qemu-riscv@nongnu.org; Fri, 24 Jan 2025 12:06:14 -0500
+Received: by mail-pj1-x102a.google.com with SMTP id
+ 98e67ed59e1d1-2ef714374c0so3876734a91.0
+ for <qemu-riscv@nongnu.org>; Fri, 24 Jan 2025 09:06:11 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1737738338; x=1738343138; darn=nongnu.org;
+ d=linaro.org; s=google; t=1737738370; x=1738343170; darn=nongnu.org;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=Dd+aG1twDpqirL1tKMkyzk/bBXE6Ersc67qRFYrHKAg=;
- b=u4GEGrtuPKzKL0sfuZo2LCQc6OcwbTPVco2SVQ9cy/LlFopc79kJ8VbhetRGjJtYwD
- zKRXS6E08Y/9PPqiqRRBK3DdNNt/qKILH7K4im2SC9hj7aVFBAZn4ekw9w9of19i1c8P
- YnpL0FRqkEJYQqlDxcVwnnojnZH3uCJAoDSmMyOcsUusTGERnsePH88CgNWO3VZt/nWv
- 0moYe9LH7LA9BmoE6xbO0sbkKwDLCvVnz17avikBbFaxgmj1p3Ao37PjqU/cziEjz9yc
- uopUFJ29jjfSaZ/JuUC+sDH1S/LePJiPy8fD+PoIOL1Yik+szZk7rPwmzuDK1rZZs+F8
- Mmgw==
+ bh=TrNfx2IQLbCv8te2qs82IcX9IkurKqGHcLiP17zLtEY=;
+ b=yGAeAJwruMArXHnxrQ5SQzI56J9XHlY0/7c+4xy+OnVu09H4Zkos5agwE8g/aRm/HD
+ p3AqfS/hfgoRSF8WTn4lT0TG2sjqs+HQoQhuW+KQXec5ixupTxUA7lzKGj0BR3b0qauU
+ eBhGrw4QH+UVMt+M0X8TUognQmHZzxvjLM2FU0GWnxpwezD7zHMtz8dA/tLeCzI7sDhS
+ rqrJ2EXQzx7dYxL5/qcEEB/tdCII8Arx4OsaOiONVYs1axS8dllckRT818b02OX3Ag4g
+ uQsNgL2LMHkze+BPAndQpwF+E1dnPSdWcyEVjc3MPS+CeCJs7UPWd+KNkAja7irCEPk4
+ yQcA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1737738338; x=1738343138;
+ d=1e100.net; s=20230601; t=1737738370; x=1738343170;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=Dd+aG1twDpqirL1tKMkyzk/bBXE6Ersc67qRFYrHKAg=;
- b=rF2A6w380dF2IK/0ksPBIj5oOYoxjcrszKL3qKSy32n6OuuIUh7vAWHRRc98kB1OZE
- lNwtWusL9kUdvb/ai/aw7QCipsJI9jcC/lF5yKWTWJvwbtAVGGuk3mHV1EYmV3eyDN0P
- Zt3se+esEtVWEqfZpywtOR9rpaByqVi+KLeHK/CbTpqaUfls4A62lgsXn+xca4drtcDS
- CfVGAuXg8EQhs+ZyASpG9FzO23qFE+lxkkGAmDa0JDtiKNQ47CAhfAMSiJlKX3y1Twx/
- 9CdxAKYsfTm+hHt36ILnTbbXNB6geYLldimPMCPn1+7Yaq/yO1jb1p21dKwcPGMzMzGb
- m2ew==
+ bh=TrNfx2IQLbCv8te2qs82IcX9IkurKqGHcLiP17zLtEY=;
+ b=NhgC6EDqBVTC48cBBi3I+147yAx6enItSzYiRXFtqntyqfeGjtNWTGNjWsRPrnDxEi
+ 6YcACy488nwPLLnhQwPTl4V1eis8l3WXVnWqUjQ8nh7wLU+awbV/nCrBamZtAaG+fVfi
+ B97r6x6NwsQjzks/5PAlVUo18kIQHwEfcage0JwmrcsyS97Eomhue8F+8xaXvA1gUoFh
+ uFZF0a8BnhyhRpjkqfBDWd66bsuAoSzPZctw9XcBhtv2RdHh46cuKpXNih8gtt7H8kKq
+ bfBtajv5n7yv+tlwhGuD+1xoaSnsJDUb3CuhCMUKu3HP01TRAH2ugHpTE/72YUlygKfF
+ IOZw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXSeOaY5JyfAxfkPA+7GCYL56P4YXoiEDGzhgUUcR4SuPQM/S4TE79FHkSs49IEP+t7tACd22lA2kgR@nongnu.org
-X-Gm-Message-State: AOJu0YyvFwivkkUxZUAFWMvFTfL59X00lBUHqcaW+Q6VKIcUdoMfQbVP
- YwypEOk5nucwhWcpCyzpMwV96bf4L7098HhWVzPT1SsgrePtnwGkZzVOJte2F4o=
-X-Gm-Gg: ASbGnctJldTCLBXJwqOjSVUwt0onjVukeJk4Jcy68LvtTy7/gy297+OK2MjAOVcQvPZ
- mkLGXf7Bu7iMEIqN39D9E/23hBBXR2KzDjdhGb2Jit9DJyjAKKCdTN85YNh0lDWK2AGrv/XtgFA
- pZmVZG89D8z/rEZ937siheQrRtDdtuRqD8/R4Ux602tMqp4Zly7qgxwtR+DKN+PytlC8yKkxu7P
- PdATx5iR4GfBW/jTz/zEcdADivNWxkeRzlnGQantBvFreimjvtXZ/oc+iC4yVNKJrzwHb0BTFZi
- v0/7zawxWzSywHZmlQEHIP19
-X-Google-Smtp-Source: AGHT+IGYq5j97v7WYNZBhpdqRcsaOMjK6A+Hi0lgPGGLBdBM5ExDIDyYiKIvQ1cPeaCNZ5zia+7haQ==
-X-Received: by 2002:a17:903:2381:b0:21a:8dec:e596 with SMTP id
- d9443c01a7336-21c355b54e7mr517678395ad.35.1737738337888; 
- Fri, 24 Jan 2025 09:05:37 -0800 (PST)
+ AJvYcCUQcM7pGhR7vPwg+aAFQVeY8z3NXvlL/PuSaM33UBxXdUHioOBlTk6o36ZfgtbBXbApSj6D2AaqRJSt@nongnu.org
+X-Gm-Message-State: AOJu0YxlzGLN+m2yHD3rT6DKCOBkHxRBqWprE8hhprjRBtwJ/ww2SkTo
+ tYRUXQ90nj9SsdTQBYBVyj/ixZCOfQjK1sOtioPiyhVXQDzE4GhgiLbiZ11WK24=
+X-Gm-Gg: ASbGncsn2KY4+qXeiAobkII40JQoiWjvmAThSCt2LeDtxuDbNeqMDXXVdwEkIWNNOMj
+ EyU9pfQTjScYLG67BsQdeHwc9fygcSGwgnzzJWVCxBegM0jmqACzR1/IUi93cbHuIX1jPIx4hUe
+ HIMhmB5szGxif4vavs3s8uYU/+166NcVbsNEpCt52z9MZHcLC3q7bL8qw41KFjF0HIcqjwWMoeJ
+ gBzn4Naocms723PJH8TZBWqbKMfhHvXILDZHBlmena2njhvdOuE6EOzQsCQMUkd9xJHA0x5H7q6
+ boK700ktGWaDJS42sDSHu+4Y
+X-Google-Smtp-Source: AGHT+IG5LgDdTFqhvy9653F/gzEQg3yZsG+nvhDh0F9tVkY2PaJoUPkS96T7jCGIHQGU5xUqK9fDdw==
+X-Received: by 2002:a17:90b:2b8c:b0:2f5:63a:44f8 with SMTP id
+ 98e67ed59e1d1-2f7ff2beae0mr7103688a91.8.1737738370636; 
+ Fri, 24 Jan 2025 09:06:10 -0800 (PST)
 Received: from [192.168.163.227] ([75.147.178.105])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-21da424aee6sm18487735ad.215.2025.01.24.09.05.37
+ 98e67ed59e1d1-2f7ffa8318asm1971992a91.47.2025.01.24.09.06.09
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 24 Jan 2025 09:05:37 -0800 (PST)
-Message-ID: <44625264-685d-4e99-b837-56879e199af7@linaro.org>
-Date: Fri, 24 Jan 2025 09:05:35 -0800
+ Fri, 24 Jan 2025 09:06:10 -0800 (PST)
+Message-ID: <b2a7f8e9-7571-432f-9cde-ec549217fcbb@linaro.org>
+Date: Fri, 24 Jan 2025 09:06:08 -0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 07/28] cpus: Introduce SysemuCPUOps::has_work() handler
+Subject: Re: [PATCH 08/28] target/alpha: Move has_work() from CPUClass to
+ SysemuCPUOps
 To: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
  qemu-devel@nongnu.org
 Cc: qemu-arm@nongnu.org, qemu-s390x@nongnu.org, qemu-riscv@nongnu.org,
  qemu-ppc@nongnu.org, Paolo Bonzini <pbonzini@redhat.com>
 References: <20250121142341.17001-1-philmd@linaro.org>
- <20250121142341.17001-8-philmd@linaro.org>
+ <20250121142341.17001-9-philmd@linaro.org>
 Content-Language: en-US
 From: Richard Henderson <richard.henderson@linaro.org>
-In-Reply-To: <20250121142341.17001-8-philmd@linaro.org>
+In-Reply-To: <20250121142341.17001-9-philmd@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::635;
- envelope-from=richard.henderson@linaro.org; helo=mail-pl1-x635.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::102a;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pj1-x102a.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -106,14 +107,10 @@ Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 On 1/21/25 06:23, Philippe Mathieu-Daudé wrote:
-> SysemuCPUOps::has_work() is similar to CPUClass::has_work(),
-> but only exposed on system emulation.
-> 
 > Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 > ---
->   include/hw/core/sysemu-cpu-ops.h | 4 ++++
->   hw/core/cpu-system.c             | 4 ++++
->   2 files changed, 8 insertions(+)
+>   target/alpha/cpu.c | 4 +++-
+>   1 file changed, 3 insertions(+), 1 deletion(-)
 
 Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 
