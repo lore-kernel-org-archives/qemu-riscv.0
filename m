@@ -4,94 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 61C3EC02182
-	for <qemu-riscv@archiver.kernel.org>; Thu, 23 Jan 2025 23:50:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D8B1CC02181
+	for <qemu-riscv@archiver.kernel.org>; Fri, 24 Jan 2025 07:34:24 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tb6u7-0001La-Kl; Thu, 23 Jan 2025 18:46:31 -0500
+	id 1tbECV-0002dg-Ok; Fri, 24 Jan 2025 02:33:59 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tb6tp-0000Sh-0x
- for qemu-riscv@nongnu.org; Thu, 23 Jan 2025 18:46:13 -0500
-Received: from mail-wr1-x429.google.com ([2a00:1450:4864:20::429])
+ (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
+ id 1tbECQ-0002ca-6j
+ for qemu-riscv@nongnu.org; Fri, 24 Jan 2025 02:33:55 -0500
+Received: from mail-pj1-x102c.google.com ([2607:f8b0:4864:20::102c])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tb6tj-0004WR-Mt
- for qemu-riscv@nongnu.org; Thu, 23 Jan 2025 18:46:12 -0500
-Received: by mail-wr1-x429.google.com with SMTP id
- ffacd0b85a97d-38be3bfb045so1815051f8f.0
- for <qemu-riscv@nongnu.org>; Thu, 23 Jan 2025 15:46:06 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
+ id 1tbECL-0004Fc-LH
+ for qemu-riscv@nongnu.org; Fri, 24 Jan 2025 02:33:53 -0500
+Received: by mail-pj1-x102c.google.com with SMTP id
+ 98e67ed59e1d1-2f441791e40so2580604a91.3
+ for <qemu-riscv@nongnu.org>; Thu, 23 Jan 2025 23:33:47 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1737675965; x=1738280765; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=sQ+5PubFZrrCYmUor7z2ohXZLQOj0+FDz6CQ50FZwrM=;
- b=FoioRx3PL/AeeneJUvRu40Bny2NuyZT2KKG3kq8XnX9xK/X11rL/4+Spw6+0UUJpt3
- P2Uip/6zPQKajgwrtLF4OGWovHSmxgRMLtiEAWl7rGQQ3383vEfNQjIqUTFnR778f32R
- PBAjyOG3FqPu6puYIrTlhnzTvGA8pkr1j5Ndi4M5WxS1ruenUHXBWtz/C+Yi42f32CTK
- AhHQwqA5eJ0ZRHstQuCrq7fp+xFNTDcj8+6S4cG922fjvlJKVZmZHzKDVDjBndTx8eQJ
- L8wLRMpDY54t2qoyfcio9DQA4vq02SAhC0FD3EWRUk4jKuaCml/Su3tM2ijx/ah5ZFkS
- 7VLA==
+ d=sifive.com; s=google; t=1737704027; x=1738308827; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=3NG+hueHH6AqupWOSB4OZObJndTP/YUoTxI8e1ofLFc=;
+ b=Qu/2opb8HJhmwAxMR3ZUro+eKsoyVWNsEbvwz7New4w3gsE7WJzW0DVEsth8PU/MMT
+ wug5qA/vcvuywLUjJ3hRo/4U49EFBlB3Ahgq3dZkFF4oif1Zo7IVTBK8Revxm3ZqM1/j
+ 45gmc8YpM1GBNjEbLrTck/bi2tMuVCNAHdecUXaTm2rhpqfhsYBcoQ42s1LXG6qBt3xr
+ 4IqIYi5Eq3QZdFspl1q0Rxm0b4gqblQodSxVNJJmg+u9DGyMRGUBUJ192N63Y968xNzE
+ nVAlaO/W1sZWwfOU3opXOYVGs8Ex0s4uQPtmtWcVfhuTpVvMC+clvEmXT/hZ1dCXt6WW
+ rSuA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1737675965; x=1738280765;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=sQ+5PubFZrrCYmUor7z2ohXZLQOj0+FDz6CQ50FZwrM=;
- b=OS3jxLZ0LtVPUGYCgZ2yucDUISTWaNpMV1djToX7+l5RWV6HRaIbHp+LVDmsQT05HV
- DXkSYc2FQ4SuW5iPX/9kabfPaKQr/Y8y1haK3cAx4tCxYO2T8DLpfhpmfKB3GJI+x1YG
- SnQ9QCdD2u/3ActKgBeYbc7P38WLmnmQKvstjRHzXe7mol64OJvzDi+wgfA0R4EHSma5
- hGHOYNKl+zTCzxUSLseJ+/1r1qrN9zgrezDMo6R6wcMSYImbqKhC9JBJ5ghulYFuLnyD
- /dGNF+KupoMHRalWvXXPst3pSyABEN3rO4/z5l3ldF51Smv7U/04nUwKlNjjMMLEzbCv
- UtMQ==
+ d=1e100.net; s=20230601; t=1737704027; x=1738308827;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=3NG+hueHH6AqupWOSB4OZObJndTP/YUoTxI8e1ofLFc=;
+ b=rRUpS39muK1sN4kcpdfODfYV+uiMMqYljo4BSuDWlvRbMXFdnHRTFcJGqXWwtW8JWI
+ LjrRg//1Uy9DKnMiu57xgfwRznniLO27ynpcv76XJJhUO3/4c4KB9DX7ftHruocKJi+N
+ 9jGIG2PeX8Mf0Yq9R0oTGWpOTgchXML/b6/c3T6cIngpbbDLdj5a209SLdIdMbXu/4ss
+ cpPhk7aArxh7LLbCw31VnQsnnXbDZ7xOiWR5RCTCF/XU55SHQs2cVgHqMPMLrRkF5Nng
+ znHEAHiv+xxR/ZHCjCqIBugwZ4eI+gBpAcYRlZR1I7dGLHR6K5zP7KSqoHW2hQ4Gdjax
+ 5/+Q==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVoUDOh/ftOwaP7C+R4lX63JN7utvvtthJEN7v/2ZWiClwadQf2/BG3yRUmDgSlT5d2OU8pFxlVeEdJ@nongnu.org
-X-Gm-Message-State: AOJu0YxCLM6qXHxwcrpqPFSc/S0lDy8ZE6g1knnWQWGn+zUDP+lQ5qPP
- RmOuGA2zJRd5GVakTCoQEvRKHXqNoyaXHc1bFlqDCFgaM0vyDY+9KLJjmiqFbkg=
-X-Gm-Gg: ASbGnctR49C5NRpcU9Y/i9q92U+s5U5H8ifxA7IBMw0w7ePabMB5GLnV47j97ucE/Ps
- 5sxJV/b8ubBXHOohjPGuMQqwC9vgCJ0plbTrVvYmrCCjY3yKjK3QsP/uo5mKoUIEAZXzQBPhSbJ
- xQso7K0rZO/ZZnAnMmAQF4cdg23U9guCjpZp788hk1omq37jLV+dt9Gwr5YMcjTUhtPZNBynCn3
- 73spxnsbG/b7ERzd1V4i6ZJDQCXTd70eGtjlr9YW0Uhtt78R5tYJgDITVrVXMiqYiaukeIy4XBy
- sGx940hcur1AqRWlpvz79Z/ffLuiobKOwVMv0izmWqyllaOnxCTRKhs=
-X-Google-Smtp-Source: AGHT+IGsiKZVvuhBn67VKbvp7ZCKdJegwhgfqv/IiEk5xyysRNRbKSY3tyJ6LqHq9Om3O3Zv9Xfmsw==
-X-Received: by 2002:adf:f250:0:b0:38a:5dc4:6dcd with SMTP id
- ffacd0b85a97d-38c22279dafmr4343550f8f.22.1737675965020; 
- Thu, 23 Jan 2025 15:46:05 -0800 (PST)
-Received: from localhost.localdomain (88-187-86-199.subs.proxad.net.
- [88.187.86.199]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-38c2a1c403asm989733f8f.93.2025.01.23.15.46.03
- (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Thu, 23 Jan 2025 15:46:03 -0800 (PST)
-From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-To: qemu-devel@nongnu.org
-Cc: Peter Maydell <peter.maydell@linaro.org>,
- Paolo Bonzini <pbonzini@redhat.com>, qemu-arm@nongnu.org,
- Igor Mammedov <imammedo@redhat.com>,
- =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
- kvm@vger.kernel.org, qemu-ppc@nongnu.org, qemu-riscv@nongnu.org,
- David Hildenbrand <david@redhat.com>, qemu-s390x@nongnu.org,
- xen-devel@lists.xenproject.org,
+ AJvYcCXdQEfS8YdLwYjZ1KP3NmE/G57hrknsNJGPbodXsMjXeEIy0VculgFYC5bAO41Xk0NNQH4PVao6yxvF@nongnu.org
+X-Gm-Message-State: AOJu0Yx55KL1tCmqWp6zBFjDJvJF2/+i9pdSVna/YBS9lJEHC6klZNY4
+ CScEGeyk307qilsnkFpeL6qA8GITN6RPRj09pRV0K9PYekEE9rNo9GwZvqCjdGY=
+X-Gm-Gg: ASbGncsyXOmypeGEkcNRMf3nslOZR5Jdn8MNBpPOq3ieKPT/4xMDeGJH1pw3ujNYLdX
+ /jSCxuSIj2hhnbBXVyHkb+TR0aUL5irZnybpwPqEPrT3bmMbKaKnzaDzwurqVTvbWm1l8LvXJp4
+ YjQ+vRE6vJXBnvYOKTBdEyg9eocq5rUBlfRsXSjV91lMjb/z17lXDv7lKOx9LXxGC7rW51wYsQu
+ qBBAW1Tdb0ULApP1YoVmAL4d2MX17nYhuqme8Zma623mwrfao5gHWml3RRF8wD+jtnL6Nq7YSlt
+ bDCUdxPV/Z8JO2R2byylJr61Uit7VoK/PWb2xfWltrEor5D3Fw==
+X-Google-Smtp-Source: AGHT+IHLQdZwBg3jofOPYkFVs1gt7g/0P3VtY/NEZluSWV7hJJ+hUE1Bs0nwYEmqLa9ASGOcLl/GJA==
+X-Received: by 2002:a17:90a:c2ce:b0:2ee:a76a:820 with SMTP id
+ 98e67ed59e1d1-2f782cbfa62mr46861434a91.18.1737704026630; 
+ Thu, 23 Jan 2025 23:33:46 -0800 (PST)
+Received: from duncan.localdomain (114-35-142-126.hinet-ip.hinet.net.
+ [114.35.142.126]) by smtp.gmail.com with ESMTPSA id
+ 98e67ed59e1d1-2f7ffa77043sm1072755a91.35.2025.01.23.23.33.44
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 23 Jan 2025 23:33:46 -0800 (PST)
+From: Max Chou <max.chou@sifive.com>
+To: qemu-devel@nongnu.org,
+	qemu-riscv@nongnu.org
+Cc: Max Chou <max.chou@sifive.com>, Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bmeng.cn@gmail.com>,
+ Weiwei Li <liwei1518@gmail.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
  Richard Henderson <richard.henderson@linaro.org>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-Subject: [PATCH 19/20] cpus: Register VMState per user / system emulation
-Date: Fri, 24 Jan 2025 00:44:13 +0100
-Message-ID: <20250123234415.59850-20-philmd@linaro.org>
-X-Mailer: git-send-email 2.47.1
-In-Reply-To: <20250123234415.59850-1-philmd@linaro.org>
-References: <20250123234415.59850-1-philmd@linaro.org>
+Subject: [PATCH] target/riscv: rvv: Fix vslide1[up|down].vx unexpected result
+ when XLEN=32 and SEW=64
+Date: Fri, 24 Jan 2025 15:33:22 +0800
+Message-Id: <20250124073325.2467664-1-max.chou@sifive.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::429;
- envelope-from=philmd@linaro.org; helo=mail-wr1-x429.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::102c;
+ envelope-from=max.chou@sifive.com; helo=mail-pj1-x102c.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -107,361 +105,158 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Simplify cpu-target.c by extracting mixed vmstate code
-into the cpu_vmstate_register() / cpu_vmstate_unregister()
-helpers, implemented in cpu-user.c and cpu-system.c.
+When XLEN is 32 and SEW is 64, the original implementation of
+vslide1up.vx and vslide1down.vx helper functions fills the 32-bit value
+of rs1 into the first element of the destination vector register (rd),
+which is a 64-bit element.
 
-Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+This commit attempted to resolve the issue by extending the rs1 value
+to 64 bits during the TCG translation phase to ensure that the helper
+functions won't lost the higer 32 bits.
+
+Signed-off-by: Max Chou <max.chou@sifive.com>
 ---
-XXX: tlb_flush() temporary declared manually.
+ target/riscv/helper.h                   | 16 ++++----
+ target/riscv/insn_trans/trans_rvv.c.inc | 50 ++++++++++++++++++++++++-
+ target/riscv/vector_helper.c            | 20 +++++-----
+ 3 files changed, 66 insertions(+), 20 deletions(-)
 
-Only 2 more CONFIG_USER_ONLY to go.
----
- include/hw/core/cpu.h |   2 +
- cpu-target.c          | 122 +----------------------------------------
- hw/core/cpu-system.c  | 123 ++++++++++++++++++++++++++++++++++++++++++
- hw/core/cpu-user.c    |  12 +++++
- 4 files changed, 139 insertions(+), 120 deletions(-)
-
-diff --git a/include/hw/core/cpu.h b/include/hw/core/cpu.h
-index fb397cdfc53..aadbd2e1122 100644
---- a/include/hw/core/cpu.h
-+++ b/include/hw/core/cpu.h
-@@ -1163,6 +1163,8 @@ G_NORETURN void cpu_abort(CPUState *cpu, const char *fmt, ...)
- /* $(top_srcdir)/cpu.c */
- void cpu_class_init_props(DeviceClass *dc);
- void cpu_exec_initfn(CPUState *cpu);
-+void cpu_vmstate_register(CPUState *cpu);
-+void cpu_vmstate_unregister(CPUState *cpu);
- bool cpu_exec_realizefn(CPUState *cpu, Error **errp);
- void cpu_exec_unrealizefn(CPUState *cpu);
- void cpu_exec_reset_hold(CPUState *cpu);
-diff --git a/cpu-target.c b/cpu-target.c
-index 3d33d20b8c8..bfcd48f9ae2 100644
---- a/cpu-target.c
-+++ b/cpu-target.c
-@@ -21,115 +21,16 @@
- #include "qapi/error.h"
- #include "qemu/error-report.h"
- #include "qemu/qemu-print.h"
--#include "migration/vmstate.h"
--#ifndef CONFIG_USER_ONLY
--#include "hw/core/sysemu-cpu-ops.h"
--#endif
- #include "system/accel-ops.h"
- #include "system/cpus.h"
--#include "system/tcg.h"
- #include "exec/replay-core.h"
- #include "exec/cpu-common.h"
--#include "exec/exec-all.h"
--#include "exec/tb-flush.h"
- #include "exec/log.h"
- #include "accel/accel-cpu-target.h"
- #include "trace/trace-root.h"
- #include "qemu/accel.h"
- #include "hw/core/cpu.h"
+diff --git a/target/riscv/helper.h b/target/riscv/helper.h
+index 16ea240d26d..0578d153bdf 100644
+--- a/target/riscv/helper.h
++++ b/target/riscv/helper.h
+@@ -1099,14 +1099,14 @@ DEF_HELPER_6(vslidedown_vx_b, void, ptr, ptr, tl, ptr, env, i32)
+ DEF_HELPER_6(vslidedown_vx_h, void, ptr, ptr, tl, ptr, env, i32)
+ DEF_HELPER_6(vslidedown_vx_w, void, ptr, ptr, tl, ptr, env, i32)
+ DEF_HELPER_6(vslidedown_vx_d, void, ptr, ptr, tl, ptr, env, i32)
+-DEF_HELPER_6(vslide1up_vx_b, void, ptr, ptr, tl, ptr, env, i32)
+-DEF_HELPER_6(vslide1up_vx_h, void, ptr, ptr, tl, ptr, env, i32)
+-DEF_HELPER_6(vslide1up_vx_w, void, ptr, ptr, tl, ptr, env, i32)
+-DEF_HELPER_6(vslide1up_vx_d, void, ptr, ptr, tl, ptr, env, i32)
+-DEF_HELPER_6(vslide1down_vx_b, void, ptr, ptr, tl, ptr, env, i32)
+-DEF_HELPER_6(vslide1down_vx_h, void, ptr, ptr, tl, ptr, env, i32)
+-DEF_HELPER_6(vslide1down_vx_w, void, ptr, ptr, tl, ptr, env, i32)
+-DEF_HELPER_6(vslide1down_vx_d, void, ptr, ptr, tl, ptr, env, i32)
++DEF_HELPER_6(vslide1up_vx_b, void, ptr, ptr, i64, ptr, env, i32)
++DEF_HELPER_6(vslide1up_vx_h, void, ptr, ptr, i64, ptr, env, i32)
++DEF_HELPER_6(vslide1up_vx_w, void, ptr, ptr, i64, ptr, env, i32)
++DEF_HELPER_6(vslide1up_vx_d, void, ptr, ptr, i64, ptr, env, i32)
++DEF_HELPER_6(vslide1down_vx_b, void, ptr, ptr, i64, ptr, env, i32)
++DEF_HELPER_6(vslide1down_vx_h, void, ptr, ptr, i64, ptr, env, i32)
++DEF_HELPER_6(vslide1down_vx_w, void, ptr, ptr, i64, ptr, env, i32)
++DEF_HELPER_6(vslide1down_vx_d, void, ptr, ptr, i64, ptr, env, i32)
  
--#ifndef CONFIG_USER_ONLY
--static int cpu_common_post_load(void *opaque, int version_id)
--{
--#ifdef CONFIG_TCG
--    if (tcg_enabled()) {
--        CPUState *cpu = opaque;
--
--        /*
--         * 0x01 was CPU_INTERRUPT_EXIT. This line can be removed when the
--         * version_id is increased.
--         */
--        cpu->interrupt_request &= ~0x01;
--
--        tlb_flush(cpu);
--
--        /*
--         * loadvm has just updated the content of RAM, bypassing the
--         * usual mechanisms that ensure we flush TBs for writes to
--         * memory we've translated code from. So we must flush all TBs,
--         * which will now be stale.
--         */
--        tb_flush(cpu);
--    }
--#endif
--
--    return 0;
--}
--
--static int cpu_common_pre_load(void *opaque)
--{
--    CPUState *cpu = opaque;
--
--    cpu->exception_index = -1;
--
--    return 0;
--}
--
--static bool cpu_common_exception_index_needed(void *opaque)
--{
--    CPUState *cpu = opaque;
--
--    return tcg_enabled() && cpu->exception_index != -1;
--}
--
--static const VMStateDescription vmstate_cpu_common_exception_index = {
--    .name = "cpu_common/exception_index",
--    .version_id = 1,
--    .minimum_version_id = 1,
--    .needed = cpu_common_exception_index_needed,
--    .fields = (const VMStateField[]) {
--        VMSTATE_INT32(exception_index, CPUState),
--        VMSTATE_END_OF_LIST()
--    }
--};
--
--static bool cpu_common_crash_occurred_needed(void *opaque)
--{
--    CPUState *cpu = opaque;
--
--    return cpu->crash_occurred;
--}
--
--static const VMStateDescription vmstate_cpu_common_crash_occurred = {
--    .name = "cpu_common/crash_occurred",
--    .version_id = 1,
--    .minimum_version_id = 1,
--    .needed = cpu_common_crash_occurred_needed,
--    .fields = (const VMStateField[]) {
--        VMSTATE_BOOL(crash_occurred, CPUState),
--        VMSTATE_END_OF_LIST()
--    }
--};
--
--const VMStateDescription vmstate_cpu_common = {
--    .name = "cpu_common",
--    .version_id = 1,
--    .minimum_version_id = 1,
--    .pre_load = cpu_common_pre_load,
--    .post_load = cpu_common_post_load,
--    .fields = (const VMStateField[]) {
--        VMSTATE_UINT32(halted, CPUState),
--        VMSTATE_UINT32(interrupt_request, CPUState),
--        VMSTATE_END_OF_LIST()
--    },
--    .subsections = (const VMStateDescription * const []) {
--        &vmstate_cpu_common_exception_index,
--        &vmstate_cpu_common_crash_occurred,
--        NULL
--    }
--};
--#endif
--
- bool cpu_exec_realizefn(CPUState *cpu, Error **errp)
- {
-     if (!accel_cpu_common_realize(cpu, errp)) {
-@@ -139,33 +40,14 @@ bool cpu_exec_realizefn(CPUState *cpu, Error **errp)
-     /* Wait until cpu initialization complete before exposing cpu. */
-     cpu_list_add(cpu);
- 
--#ifdef CONFIG_USER_ONLY
--    assert(qdev_get_vmsd(DEVICE(cpu)) == NULL ||
--           qdev_get_vmsd(DEVICE(cpu))->unmigratable);
--#else
--    if (qdev_get_vmsd(DEVICE(cpu)) == NULL) {
--        vmstate_register(NULL, cpu->cpu_index, &vmstate_cpu_common, cpu);
--    }
--    if (cpu->cc->sysemu_ops->legacy_vmsd != NULL) {
--        vmstate_register(NULL, cpu->cpu_index, cpu->cc->sysemu_ops->legacy_vmsd, cpu);
--    }
--#endif /* CONFIG_USER_ONLY */
-+    cpu_vmstate_register(cpu);
- 
-     return true;
+ DEF_HELPER_6(vfslide1up_vf_h, void, ptr, ptr, i64, ptr, env, i32)
+ DEF_HELPER_6(vfslide1up_vf_w, void, ptr, ptr, i64, ptr, env, i32)
+diff --git a/target/riscv/insn_trans/trans_rvv.c.inc b/target/riscv/insn_trans/trans_rvv.c.inc
+index b9883a5d323..775fe1baae7 100644
+--- a/target/riscv/insn_trans/trans_rvv.c.inc
++++ b/target/riscv/insn_trans/trans_rvv.c.inc
+@@ -3391,7 +3391,6 @@ static bool slideup_check(DisasContext *s, arg_rmrr *a)
  }
  
- void cpu_exec_unrealizefn(CPUState *cpu)
- {
--#ifndef CONFIG_USER_ONLY
--    CPUClass *cc = CPU_GET_CLASS(cpu);
--
--    if (cc->sysemu_ops->legacy_vmsd != NULL) {
--        vmstate_unregister(NULL, cc->sysemu_ops->legacy_vmsd, cpu);
--    }
--    if (qdev_get_vmsd(DEVICE(cpu)) == NULL) {
--        vmstate_unregister(NULL, &vmstate_cpu_common, cpu);
--    }
--#endif
-+    cpu_vmstate_unregister(cpu);
+ GEN_OPIVX_TRANS(vslideup_vx, slideup_check)
+-GEN_OPIVX_TRANS(vslide1up_vx, slideup_check)
+ GEN_OPIVI_TRANS(vslideup_vi, IMM_ZX, vslideup_vx, slideup_check)
  
-     cpu_list_remove(cpu);
-     /*
-diff --git a/hw/core/cpu-system.c b/hw/core/cpu-system.c
-index 0520c362db4..3e1f60f23df 100644
---- a/hw/core/cpu-system.c
-+++ b/hw/core/cpu-system.c
-@@ -22,10 +22,21 @@
- #include "qapi/error.h"
- #include "exec/address-spaces.h"
- #include "exec/memory.h"
-+#include "exec/tb-flush.h"
- #include "exec/tswap.h"
- #include "hw/qdev-core.h"
- #include "hw/qdev-properties.h"
- #include "hw/core/sysemu-cpu-ops.h"
-+#include "migration/vmstate.h"
-+#include "system/tcg.h"
-+
-+/*
-+ * XXX this series plan is to be applied on top on my exec/cputlb rework series,
-+ * then tlb_flush() won't be declared target-specific in exec-all.h.
-+ * Meanwhile, declare locally.
-+ * XXX
-+ */
-+void tlb_flush(CPUState *cs);
- 
- bool cpu_paging_enabled(const CPUState *cpu)
- {
-@@ -189,3 +200,115 @@ void cpu_exec_initfn(CPUState *cpu)
-     cpu->memory = get_system_memory();
-     object_ref(OBJECT(cpu->memory));
+ static bool slidedown_check(DisasContext *s, arg_rmrr *a)
+@@ -3402,9 +3401,56 @@ static bool slidedown_check(DisasContext *s, arg_rmrr *a)
  }
-+
-+static int cpu_common_post_load(void *opaque, int version_id)
-+{
-+#ifdef CONFIG_TCG
-+    if (tcg_enabled()) {
-+        CPUState *cpu = opaque;
-+
-+        /*
-+         * 0x01 was CPU_INTERRUPT_EXIT. This line can be removed when the
-+         * version_id is increased.
-+         */
-+        cpu->interrupt_request &= ~0x01;
-+
-+        tlb_flush(cpu);
-+
-+        /*
-+         * loadvm has just updated the content of RAM, bypassing the
-+         * usual mechanisms that ensure we flush TBs for writes to
-+         * memory we've translated code from. So we must flush all TBs,
-+         * which will now be stale.
-+         */
-+        tb_flush(cpu);
-+    }
-+#endif
-+
-+    return 0;
-+}
-+
-+static int cpu_common_pre_load(void *opaque)
-+{
-+    CPUState *cpu = opaque;
-+
-+    cpu->exception_index = -1;
-+
-+    return 0;
-+}
-+
-+static bool cpu_common_exception_index_needed(void *opaque)
-+{
-+    CPUState *cpu = opaque;
-+
-+    return tcg_enabled() && cpu->exception_index != -1;
-+}
-+
-+static const VMStateDescription vmstate_cpu_common_exception_index = {
-+    .name = "cpu_common/exception_index",
-+    .version_id = 1,
-+    .minimum_version_id = 1,
-+    .needed = cpu_common_exception_index_needed,
-+    .fields = (const VMStateField[]) {
-+        VMSTATE_INT32(exception_index, CPUState),
-+        VMSTATE_END_OF_LIST()
-+    }
-+};
-+
-+static bool cpu_common_crash_occurred_needed(void *opaque)
-+{
-+    CPUState *cpu = opaque;
-+
-+    return cpu->crash_occurred;
-+}
-+
-+static const VMStateDescription vmstate_cpu_common_crash_occurred = {
-+    .name = "cpu_common/crash_occurred",
-+    .version_id = 1,
-+    .minimum_version_id = 1,
-+    .needed = cpu_common_crash_occurred_needed,
-+    .fields = (const VMStateField[]) {
-+        VMSTATE_BOOL(crash_occurred, CPUState),
-+        VMSTATE_END_OF_LIST()
-+    }
-+};
-+
-+const VMStateDescription vmstate_cpu_common = {
-+    .name = "cpu_common",
-+    .version_id = 1,
-+    .minimum_version_id = 1,
-+    .pre_load = cpu_common_pre_load,
-+    .post_load = cpu_common_post_load,
-+    .fields = (const VMStateField[]) {
-+        VMSTATE_UINT32(halted, CPUState),
-+        VMSTATE_UINT32(interrupt_request, CPUState),
-+        VMSTATE_END_OF_LIST()
-+    },
-+    .subsections = (const VMStateDescription * const []) {
-+        &vmstate_cpu_common_exception_index,
-+        &vmstate_cpu_common_crash_occurred,
-+        NULL
-+    }
-+};
-+
-+void cpu_vmstate_register(CPUState *cpu)
-+{
-+    if (qdev_get_vmsd(DEVICE(cpu)) == NULL) {
-+        vmstate_register(NULL, cpu->cpu_index, &vmstate_cpu_common, cpu);
-+    }
-+    if (cpu->cc->sysemu_ops->legacy_vmsd != NULL) {
-+        vmstate_register(NULL, cpu->cpu_index, cpu->cc->sysemu_ops->legacy_vmsd, cpu);
-+    }
-+}
-+
-+void cpu_vmstate_unregister(CPUState *cpu)
-+{
-+    CPUClass *cc = CPU_GET_CLASS(cpu);
-+
-+    if (cc->sysemu_ops->legacy_vmsd != NULL) {
-+        vmstate_unregister(NULL, cc->sysemu_ops->legacy_vmsd, cpu);
-+    }
-+    if (qdev_get_vmsd(DEVICE(cpu)) == NULL) {
-+        vmstate_unregister(NULL, &vmstate_cpu_common, cpu);
-+    }
-+}
-diff --git a/hw/core/cpu-user.c b/hw/core/cpu-user.c
-index cdd8de2fefa..1892acdee0f 100644
---- a/hw/core/cpu-user.c
-+++ b/hw/core/cpu-user.c
-@@ -10,6 +10,7 @@
- #include "hw/qdev-core.h"
- #include "hw/qdev-properties.h"
- #include "hw/core/cpu.h"
-+#include "migration/vmstate.h"
  
- static const Property cpu_user_props[] = {
-     /*
-@@ -30,3 +31,14 @@ void cpu_exec_initfn(CPUState *cpu)
+ GEN_OPIVX_TRANS(vslidedown_vx, slidedown_check)
+-GEN_OPIVX_TRANS(vslide1down_vx, slidedown_check)
+ GEN_OPIVI_TRANS(vslidedown_vi, IMM_ZX, vslidedown_vx, slidedown_check)
+ 
++typedef void gen_helper_vslide1_vx(TCGv_ptr, TCGv_ptr, TCGv_i64, TCGv_ptr,
++                                TCGv_env, TCGv_i32);
++
++#define GEN_OPIVX_VSLIDE1_TRANS(NAME, CHECK)                            \
++static bool trans_##NAME(DisasContext *s, arg_rmrr *a)                  \
++{                                                                       \
++    if (CHECK(s, a)) {                                                  \
++        static gen_helper_vslide1_vx * const fns[4] = {                 \
++            gen_helper_##NAME##_b, gen_helper_##NAME##_h,               \
++            gen_helper_##NAME##_w, gen_helper_##NAME##_d,               \
++        };                                                              \
++                                                                        \
++        TCGv_ptr dest, src2, mask;                                      \
++        TCGv_i64 src1;                                                  \
++        TCGv_i32 desc;                                                  \
++        uint32_t data = 0;                                              \
++                                                                        \
++        dest = tcg_temp_new_ptr();                                      \
++        mask = tcg_temp_new_ptr();                                      \
++        src2 = tcg_temp_new_ptr();                                      \
++        src1 = tcg_temp_new_i64();                                      \
++                                                                        \
++        data = FIELD_DP32(data, VDATA, VM, a->vm);                      \
++        data = FIELD_DP32(data, VDATA, LMUL, s->lmul);                  \
++        data = FIELD_DP32(data, VDATA, VTA, s->vta);                    \
++        data = FIELD_DP32(data, VDATA, VTA_ALL_1S, s->cfg_vta_all_1s);  \
++        data = FIELD_DP32(data, VDATA, VMA, s->vma);                    \
++        desc = tcg_constant_i32(simd_desc(s->cfg_ptr->vlenb,            \
++                                s->cfg_ptr->vlenb, data));              \
++                                                                        \
++        tcg_gen_addi_ptr(dest, tcg_env, vreg_ofs(s, a->rd));            \
++        tcg_gen_addi_ptr(src2, tcg_env, vreg_ofs(s, a->rs2));           \
++        tcg_gen_addi_ptr(mask, tcg_env, vreg_ofs(s, 0));                \
++        tcg_gen_ext_tl_i64(src1, get_gpr(s, a->rs1, EXT_SIGN));         \
++                                                                        \
++        fns[s->sew](dest, mask, src1, src2, tcg_env, desc);             \
++                                                                        \
++        tcg_gen_movi_tl(cpu_vstart, 0);                                 \
++        finalize_rvv_inst(s);                                           \
++                                                                        \
++        return true;                                                    \
++    }                                                                   \
++    return false;                                                       \
++}
++
++GEN_OPIVX_VSLIDE1_TRANS(vslide1up_vx, slideup_check)
++GEN_OPIVX_VSLIDE1_TRANS(vslide1down_vx, slidedown_check)
++
+ /* Vector Floating-Point Slide Instructions */
+ static bool fslideup_check(DisasContext *s, arg_rmrr *a)
  {
-     /* nothing to do */
+diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
+index 5386e3b97c5..c7fe3424c47 100644
+--- a/target/riscv/vector_helper.c
++++ b/target/riscv/vector_helper.c
+@@ -5145,11 +5145,11 @@ GEN_VEXT_VSLIE1UP(16, H2)
+ GEN_VEXT_VSLIE1UP(32, H4)
+ GEN_VEXT_VSLIE1UP(64, H8)
+ 
+-#define GEN_VEXT_VSLIDE1UP_VX(NAME, BITWIDTH)                     \
+-void HELPER(NAME)(void *vd, void *v0, target_ulong s1, void *vs2, \
+-                  CPURISCVState *env, uint32_t desc)              \
+-{                                                                 \
+-    vslide1up_##BITWIDTH(vd, v0, s1, vs2, env, desc);             \
++#define GEN_VEXT_VSLIDE1UP_VX(NAME, BITWIDTH)                   \
++void HELPER(NAME)(void *vd, void *v0, uint64_t s1, void *vs2,   \
++                  CPURISCVState *env, uint32_t desc)            \
++{                                                               \
++    vslide1up_##BITWIDTH(vd, v0, s1, vs2, env, desc);           \
  }
-+
-+void cpu_vmstate_register(CPUState *cpu)
-+{
-+    assert(qdev_get_vmsd(DEVICE(cpu)) == NULL ||
-+           qdev_get_vmsd(DEVICE(cpu))->unmigratable);
-+}
-+
-+void cpu_vmstate_unregister(CPUState *cpu)
-+{
-+    /* nothing to do */
-+}
+ 
+ /* vslide1up.vx vd, vs2, rs1, vm # vd[0]=x[rs1], vd[i+1] = vs2[i] */
+@@ -5196,11 +5196,11 @@ GEN_VEXT_VSLIDE1DOWN(16, H2)
+ GEN_VEXT_VSLIDE1DOWN(32, H4)
+ GEN_VEXT_VSLIDE1DOWN(64, H8)
+ 
+-#define GEN_VEXT_VSLIDE1DOWN_VX(NAME, BITWIDTH)                   \
+-void HELPER(NAME)(void *vd, void *v0, target_ulong s1, void *vs2, \
+-                  CPURISCVState *env, uint32_t desc)              \
+-{                                                                 \
+-    vslide1down_##BITWIDTH(vd, v0, s1, vs2, env, desc);           \
++#define GEN_VEXT_VSLIDE1DOWN_VX(NAME, BITWIDTH)                 \
++void HELPER(NAME)(void *vd, void *v0, uint64_t s1, void *vs2,   \
++                  CPURISCVState *env, uint32_t desc)            \
++{                                                               \
++    vslide1down_##BITWIDTH(vd, v0, s1, vs2, env, desc);         \
+ }
+ 
+ /* vslide1down.vx vd, vs2, rs1, vm # vd[i] = vs2[i+1], vd[vl-1]=x[rs1] */
 -- 
-2.47.1
+2.34.1
 
 
