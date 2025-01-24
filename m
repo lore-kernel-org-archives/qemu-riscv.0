@@ -4,91 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 182A8C02181
-	for <qemu-riscv@archiver.kernel.org>; Fri, 24 Jan 2025 12:51:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7D144C0218B
+	for <qemu-riscv@archiver.kernel.org>; Fri, 24 Jan 2025 16:52:10 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tbJ9D-0003wY-D7; Fri, 24 Jan 2025 07:50:57 -0500
+	id 1tbMu5-0000AN-EZ; Fri, 24 Jan 2025 11:51:33 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1tbJ8t-0003sd-7I
- for qemu-riscv@nongnu.org; Fri, 24 Jan 2025 07:50:36 -0500
-Received: from mail-ed1-x52c.google.com ([2a00:1450:4864:20::52c])
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1tbMu0-0008TN-92
+ for qemu-riscv@nongnu.org; Fri, 24 Jan 2025 11:51:29 -0500
+Received: from mail-pj1-x1029.google.com ([2607:f8b0:4864:20::1029])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1tbJ8q-0005UQ-1g
- for qemu-riscv@nongnu.org; Fri, 24 Jan 2025 07:50:34 -0500
-Received: by mail-ed1-x52c.google.com with SMTP id
- 4fb4d7f45d1cf-5d3f65844deso3669880a12.0
- for <qemu-riscv@nongnu.org>; Fri, 24 Jan 2025 04:50:31 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1tbMtx-0001yc-Cm
+ for qemu-riscv@nongnu.org; Fri, 24 Jan 2025 11:51:28 -0500
+Received: by mail-pj1-x1029.google.com with SMTP id
+ 98e67ed59e1d1-2eeb4d643a5so4355223a91.3
+ for <qemu-riscv@nongnu.org>; Fri, 24 Jan 2025 08:51:20 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1737723030; x=1738327830; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:message-id:date:user-agent
- :references:in-reply-to:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=AB2Veo0ifNebcRcOL1ytt2gp+aiTiH3Sf5xY6qaSWgQ=;
- b=Jrj3n5pqWN8TDLirK0E0i8ju/e289V/TCmuHT0B3ttRL1DTDpmpkoVwHAOvn0xXyC+
- 4bTxLnJwMilNZwT2U/K+0DuDjNVAxv+qhNcYcPWc4ck7fshOh/4Lz3ey/g9wuywKA6r1
- okbCE9gc4CCGCukDPlUSWse0ofGMDzlRJUU0C0Mzu7/HjAOFHBzoKjJHS+czvZk+dP0L
- 2bFYQAs7WV7JK+7zS8FbwQp33LsodeUCQz9rUXvg8817XVq2iREXqy27yV3XB/8ML5HO
- pxqAI9WKESYUNj41OgpDfVrEni99MraC1t0nY1PdPA1BpsHx4AoRxEl0gCGFErbyXV3r
- EGQQ==
+ d=linaro.org; s=google; t=1737737479; x=1738342279; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=gXE15mkcNpzOGS5EJlj1b2+BpeJ5W5y/+0OTdAZnEfE=;
+ b=axKg9WIBX05hkdW4fXdkJP9V/pYEWL1L+Cw5I+ufc0cXYVjR1qaVt38XwSlCBgRTdE
+ xqEGRSal1uiTiXC4KcqCLiULYUtpLBR3Ax7Tntnn0DJPzeoo1Cw64ShCsNjiXxA0hF5p
+ xkjY00CA6jlIFTk/ZjxoS3+eOTr+Z68L7pQMyXPJZyFS9Tr0pFV952aqvVIuuVmnG+FM
+ j7ox+eCe6sR2cZMicMOKyJ+DPupgUkH0WLun+I3obMz69NNZaaiGuJ4C3uop7xagB213
+ 08ezOA+Bi7sk0Xc62O0STYTRpwjMY98DljO+xANYjaCNP1SM+elle2NTm2Cvtpk3tPt1
+ ShmQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1737723030; x=1738327830;
- h=content-transfer-encoding:mime-version:message-id:date:user-agent
- :references:in-reply-to:subject:cc:to:from:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=AB2Veo0ifNebcRcOL1ytt2gp+aiTiH3Sf5xY6qaSWgQ=;
- b=oKrCdhpTc3Lb68ee8ktc15PWw5q0mxhiebTK3wMjKN+qI9YTEKt3CiXcUApTVnjtTR
- F1i4qH9Undb6+wDYBBz/5vozY+KwMbW6n8JgjMUNsScebjYMVwlleMZ8/p5I7DT7Fwmo
- kQjmab+On7wpB/Hlw2l95G/0WyKKhtQa5oElUxmTGt+FQsn8932oNvAAfNpUv4OZcX0J
- Gig0DfkHxlIF7UJwXWJVW6LCAl3SZG9Po1ryimvWET0pJ/IzjprX4+Kgf9Jd1j2JtF5/
- R54TgB1pzqOEu1XtjYLTSmw0xR9SMCyqf0sxSmFlDQC58ui5R02ifObMEigJpvQ6aXp/
- /i/g==
+ d=1e100.net; s=20230601; t=1737737479; x=1738342279;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=gXE15mkcNpzOGS5EJlj1b2+BpeJ5W5y/+0OTdAZnEfE=;
+ b=GVpxN1CavNzeadQ9DbgPPF6dFcqusESmg/y3QfjDSRZP2ZcxOorcOMBJttv4I/COGf
+ smkJwMxOdVxnbbVEKS02LKfcHmrjUO/fWISF0ID7MNBP/4UJxPj3jHIdVcnWgwcBpl9s
+ psdVRVkvunrDr7CwVUYrQqkH18jjjKBynMLZv/cfviC9+EJGn6VA2uXkXSBqFsg9/9vC
+ hrcEIJ0+4ojyCp4EBMwGhrnwkTC+6rI2JwrJgmLrGwD4t3qDl5v5T1DAlXtsjVKYmO6R
+ XsJ7H/f5uW4piyG9+LcwvyJRII7D4gYY2kD9SMr0AYzUz3rpkwoE9G+/0rTeu6kDRocs
+ B8DQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVBwbgJ3QR1onaQrGnVYJ35gu1vBzr0cu5hoQLR3DAgqDOJ6UyaaWiuLZhMYoLG3gf0gqteRFxe2Wkm@nongnu.org
-X-Gm-Message-State: AOJu0YwskdR6RkUoWONoEJRoqUzaXSqZe8r1YuiTWJZEAVl3u29nsER5
- ByuRUZB+F9Q88iw5UlvLST9MnuKqeAr9BTY49DZw5XZMO9N6w6hUJoJgYgyCOIc=
-X-Gm-Gg: ASbGncs++O7LO2WkQtZSdZkIJ5queIjMHabOuTRfVB2UkLDfvJUoZqV4n2PVfeE28if
- ot3HdP7ohyPsZ0ZUb2eLbif9oPDraYo7kMt1WCDPXWTblGaqwbl0SCLD96e8qbZp5w+8jc7PMwO
- mtb9ZDldvsugTBTV/uMbNDnepRIq5B2XSTLcekG+fhPuAgkDXvD5rVOQ80dJzhauaYqImNon0/A
- ceUGcTb9+M3NSZQwaf/MXpdyN0um1Bo+wZvwDUKADF4x36Pl7WENcdQ09Oq2VfooA+Dzc387Hyj
- cnY=
-X-Google-Smtp-Source: AGHT+IHgpCErm6J9FACp/DlMJmoU6m0AQvWBem6CobohmkoE2PSx9F3d28v8z9FWDQeB/0B9Gf2dDQ==
-X-Received: by 2002:a05:6402:4403:b0:5da:b47:1092 with SMTP id
- 4fb4d7f45d1cf-5db7d2f9b01mr25474703a12.10.1737723030120; 
- Fri, 24 Jan 2025 04:50:30 -0800 (PST)
-Received: from draig.lan ([85.9.250.243]) by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5dc186d905asm1135005a12.79.2025.01.24.04.50.28
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 24 Jan 2025 04:50:29 -0800 (PST)
-Received: from draig (localhost [IPv6:::1])
- by draig.lan (Postfix) with ESMTP id 2C1185F8D0;
- Fri, 24 Jan 2025 12:50:28 +0000 (GMT)
-From: =?utf-8?Q?Alex_Benn=C3=A9e?= <alex.bennee@linaro.org>
-To: Philippe =?utf-8?Q?Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-Cc: qemu-devel@nongnu.org,  Peter Maydell <peter.maydell@linaro.org>,  Paolo
- Bonzini <pbonzini@redhat.com>,  qemu-arm@nongnu.org,  Igor Mammedov
- <imammedo@redhat.com>,  kvm@vger.kernel.org,  qemu-ppc@nongnu.org,
- qemu-riscv@nongnu.org,  David Hildenbrand <david@redhat.com>,
- qemu-s390x@nongnu.org,  xen-devel@lists.xenproject.org,  Richard
- Henderson <richard.henderson@linaro.org>
-Subject: Re: [PATCH 03/20] gdbstub: Check for TCG before calling tb_flush()
-In-Reply-To: <20250123234415.59850-4-philmd@linaro.org> ("Philippe
- =?utf-8?Q?Mathieu-Daud=C3=A9=22's?= message of "Fri, 24 Jan 2025 00:43:57
- +0100")
-References: <20250123234415.59850-1-philmd@linaro.org>
- <20250123234415.59850-4-philmd@linaro.org>
-User-Agent: mu4e 1.12.8; emacs 29.4
-Date: Fri, 24 Jan 2025 12:50:28 +0000
-Message-ID: <878qr0jrzf.fsf@draig.linaro.org>
+ AJvYcCVxcL9hjDRILiESyL7MK4aF/XILKjP87Y9jAekCuDMrpmWZKllnJkevphkyEQlAePPYOkzbquV6qBQ8@nongnu.org
+X-Gm-Message-State: AOJu0YxtC8mqjqMjowQbylwATnSwugC5ZzYNDNKAcTpWsVh5cdgsOCJp
+ ipE5sdosyr+pUqsTPVpuFiF5h+t70TcGEhX8iIbtLNOaxgiMNc3pIdQk3lyabdA=
+X-Gm-Gg: ASbGncsYCnBf5LnUshcuAhaG4HBr3bzQ4cKRcu4Og9UvSNl5bTgg2lUkNUQ8FYn1ZaG
+ 3ZxAyB1iUjKXjDV/E0oC3J5a046FvF2driBioUR8c/4PwMgvBUxGebR1P+OJ4/UBVTk0mKZr2Pm
+ uTIZXIIccBAB5I88TWzsdbclCyU1BU3HIbwstdYs/YHULPQ1mP2aU+muNlOx3fxUzhW1SOiKDp+
+ d5M5CO7UwRvGPPVozZ4qJOXQIQQ7fm5OAMtj0mlvTLysZOJfuz9UPTFFRQ218FMNy4knKMXdrfz
+ JEYW7ipWSBczR3MDeWbFUuvk
+X-Google-Smtp-Source: AGHT+IEzOH0H9LAMqeeid4z976NqSsP24+5Z9ZdBwQk/KKAuIIIGNBIr8tQZhwh7im0j7TLRTMuOgg==
+X-Received: by 2002:a17:90b:5206:b0:2f5:63a:44f9 with SMTP id
+ 98e67ed59e1d1-2f782d4f189mr38966313a91.23.1737737479552; 
+ Fri, 24 Jan 2025 08:51:19 -0800 (PST)
+Received: from [192.168.163.227] ([75.147.178.105])
+ by smtp.gmail.com with ESMTPSA id
+ 98e67ed59e1d1-2f7ffa56160sm1971766a91.18.2025.01.24.08.51.18
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 24 Jan 2025 08:51:19 -0800 (PST)
+Message-ID: <f6e862cb-09ee-43f8-9131-4f80b0ad7b5c@linaro.org>
+Date: Fri, 24 Jan 2025 08:51:16 -0800
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2a00:1450:4864:20::52c;
- envelope-from=alex.bennee@linaro.org; helo=mail-ed1-x52c.google.com
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 02/28] target/rx: Ensure not being build on user emulation
+To: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
+ qemu-devel@nongnu.org
+Cc: qemu-arm@nongnu.org, qemu-s390x@nongnu.org, qemu-riscv@nongnu.org,
+ qemu-ppc@nongnu.org, Paolo Bonzini <pbonzini@redhat.com>
+References: <20250121142341.17001-1-philmd@linaro.org>
+ <20250121142341.17001-3-philmd@linaro.org>
+Content-Language: en-US
+From: Richard Henderson <richard.henderson@linaro.org>
+In-Reply-To: <20250121142341.17001-3-philmd@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1029;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pj1-x1029.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -111,17 +105,20 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Philippe Mathieu-Daud=C3=A9 <philmd@linaro.org> writes:
+On 1/21/25 06:23, Philippe Mathieu-Daudé wrote:
+> Currently only system emulation is supported.
+> Assert no target code is built for user emulation.
+> Remove #ifdef'ry since more work is required before
+> being able to emulate a user process.
+> 
+> Signed-off-by: Philippe Mathieu-Daudé<philmd@linaro.org>
+> ---
+>   target/rx/cpu.h    | 6 ++++--
+>   target/rx/cpu.c    | 6 ------
+>   target/rx/helper.c | 4 ----
+>   3 files changed, 4 insertions(+), 12 deletions(-)
 
-> Use the tcg_enabled() check so the compiler can elide
-> the call when TCG isn't available, allowing to remove
-> the tb_flush() stub.
->
-> Signed-off-by: Philippe Mathieu-Daud=C3=A9 <philmd@linaro.org>
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 
-Reviewed-by: Alex Benn=C3=A9e <alex.bennee@linaro.org>
-
---=20
-Alex Benn=C3=A9e
-Virtualisation Tech Lead @ Linaro
+r~
 
