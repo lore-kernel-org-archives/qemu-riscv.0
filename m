@@ -4,85 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7D144C0218B
-	for <qemu-riscv@archiver.kernel.org>; Fri, 24 Jan 2025 16:52:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 055DDC02181
+	for <qemu-riscv@archiver.kernel.org>; Fri, 24 Jan 2025 16:53:21 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tbMu5-0000AN-EZ; Fri, 24 Jan 2025 11:51:33 -0500
+	id 1tbMuE-0000i9-Kz; Fri, 24 Jan 2025 11:51:42 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1tbMu0-0008TN-92
- for qemu-riscv@nongnu.org; Fri, 24 Jan 2025 11:51:29 -0500
-Received: from mail-pj1-x1029.google.com ([2607:f8b0:4864:20::1029])
+ id 1tbMu7-0000Hl-28
+ for qemu-riscv@nongnu.org; Fri, 24 Jan 2025 11:51:35 -0500
+Received: from mail-pj1-x102a.google.com ([2607:f8b0:4864:20::102a])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1tbMtx-0001yc-Cm
- for qemu-riscv@nongnu.org; Fri, 24 Jan 2025 11:51:28 -0500
-Received: by mail-pj1-x1029.google.com with SMTP id
- 98e67ed59e1d1-2eeb4d643a5so4355223a91.3
- for <qemu-riscv@nongnu.org>; Fri, 24 Jan 2025 08:51:20 -0800 (PST)
+ id 1tbMu4-0001zo-Cs
+ for qemu-riscv@nongnu.org; Fri, 24 Jan 2025 11:51:34 -0500
+Received: by mail-pj1-x102a.google.com with SMTP id
+ 98e67ed59e1d1-2ee86a1a92dso3506844a91.1
+ for <qemu-riscv@nongnu.org>; Fri, 24 Jan 2025 08:51:31 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1737737479; x=1738342279; darn=nongnu.org;
+ d=linaro.org; s=google; t=1737737491; x=1738342291; darn=nongnu.org;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=gXE15mkcNpzOGS5EJlj1b2+BpeJ5W5y/+0OTdAZnEfE=;
- b=axKg9WIBX05hkdW4fXdkJP9V/pYEWL1L+Cw5I+ufc0cXYVjR1qaVt38XwSlCBgRTdE
- xqEGRSal1uiTiXC4KcqCLiULYUtpLBR3Ax7Tntnn0DJPzeoo1Cw64ShCsNjiXxA0hF5p
- xkjY00CA6jlIFTk/ZjxoS3+eOTr+Z68L7pQMyXPJZyFS9Tr0pFV952aqvVIuuVmnG+FM
- j7ox+eCe6sR2cZMicMOKyJ+DPupgUkH0WLun+I3obMz69NNZaaiGuJ4C3uop7xagB213
- 08ezOA+Bi7sk0Xc62O0STYTRpwjMY98DljO+xANYjaCNP1SM+elle2NTm2Cvtpk3tPt1
- ShmQ==
+ bh=0LCjAHMbeciqIRiCxO32hVPO0Zm5aqjupkpfzKpyKb4=;
+ b=pTxfqGnDoaZ9W2q6KM7SpUS6ZGQbdT54vNQyhiXZLHgkYxEL1/7XGN0a01wiEZS5ER
+ c1x6ksg++alKM5JZWTTP38wjP92PWNO+P3OXLZujbSTtDI39lYSdmcmMumyls95/UUsg
+ D+06xCzidmFL86eat3pCHzz1CrhIxbFlP9C/hYnr5WPQ+gW/CmmlG/TIXfn6iNQ4Txmi
+ xsl+AegPROwMtpTzzViDOsWvJ+WAEX39XKgm8aGP9rgQ0PWN5Yw/Li//J/eTXlAOvzVx
+ SCcUriapPN4t8wDwUhZ4PbBsu1yXaRbThW1zJOi0Xv3U8I4kdLYSHh5cSUl2st5nQB0y
+ WRKA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1737737479; x=1738342279;
+ d=1e100.net; s=20230601; t=1737737491; x=1738342291;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=gXE15mkcNpzOGS5EJlj1b2+BpeJ5W5y/+0OTdAZnEfE=;
- b=GVpxN1CavNzeadQ9DbgPPF6dFcqusESmg/y3QfjDSRZP2ZcxOorcOMBJttv4I/COGf
- smkJwMxOdVxnbbVEKS02LKfcHmrjUO/fWISF0ID7MNBP/4UJxPj3jHIdVcnWgwcBpl9s
- psdVRVkvunrDr7CwVUYrQqkH18jjjKBynMLZv/cfviC9+EJGn6VA2uXkXSBqFsg9/9vC
- hrcEIJ0+4ojyCp4EBMwGhrnwkTC+6rI2JwrJgmLrGwD4t3qDl5v5T1DAlXtsjVKYmO6R
- XsJ7H/f5uW4piyG9+LcwvyJRII7D4gYY2kD9SMr0AYzUz3rpkwoE9G+/0rTeu6kDRocs
- B8DQ==
+ bh=0LCjAHMbeciqIRiCxO32hVPO0Zm5aqjupkpfzKpyKb4=;
+ b=r6vKQNUeZ1eYgokRfbYXp5cEUCpIRzZeMPEtASAYPhOAuebSdWOLefKmrS6qAiydHp
+ Ep71Jgqis5um/LGqFxHm1coX1UKr4j5L1PWsTIh7Srm+U7PlakqW5a7cyFqKi0tvBvD+
+ aI50sqg0qUGMOBLcrDMdrUToox4Xm7uR25Ng716F4jL66EceuSheV5OZkmx14mdtNwd+
+ u55bZonk7x0nHK5SiGSlv7vg2d2zMkcroUSHc9dNWPUHt4cKlaZi0nx45G/GBgX/Mrzw
+ zs8P8k7/cl72sbq2OzhNSqH7CmWhuvGxLbIUsR9AnCO8bZJbpAMgCriRrnmd3ek2QVY6
+ CnNw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVxcL9hjDRILiESyL7MK4aF/XILKjP87Y9jAekCuDMrpmWZKllnJkevphkyEQlAePPYOkzbquV6qBQ8@nongnu.org
-X-Gm-Message-State: AOJu0YxtC8mqjqMjowQbylwATnSwugC5ZzYNDNKAcTpWsVh5cdgsOCJp
- ipE5sdosyr+pUqsTPVpuFiF5h+t70TcGEhX8iIbtLNOaxgiMNc3pIdQk3lyabdA=
-X-Gm-Gg: ASbGncsYCnBf5LnUshcuAhaG4HBr3bzQ4cKRcu4Og9UvSNl5bTgg2lUkNUQ8FYn1ZaG
- 3ZxAyB1iUjKXjDV/E0oC3J5a046FvF2driBioUR8c/4PwMgvBUxGebR1P+OJ4/UBVTk0mKZr2Pm
- uTIZXIIccBAB5I88TWzsdbclCyU1BU3HIbwstdYs/YHULPQ1mP2aU+muNlOx3fxUzhW1SOiKDp+
- d5M5CO7UwRvGPPVozZ4qJOXQIQQ7fm5OAMtj0mlvTLysZOJfuz9UPTFFRQ218FMNy4knKMXdrfz
- JEYW7ipWSBczR3MDeWbFUuvk
-X-Google-Smtp-Source: AGHT+IEzOH0H9LAMqeeid4z976NqSsP24+5Z9ZdBwQk/KKAuIIIGNBIr8tQZhwh7im0j7TLRTMuOgg==
-X-Received: by 2002:a17:90b:5206:b0:2f5:63a:44f9 with SMTP id
- 98e67ed59e1d1-2f782d4f189mr38966313a91.23.1737737479552; 
- Fri, 24 Jan 2025 08:51:19 -0800 (PST)
+ AJvYcCV+pZDmRFVC/CbkWll/p9xSe2goyOyONGLbJcQ7K5ogtHqmN1v5nF/5vhLziAeAvKiRAs+NbELzaINS@nongnu.org
+X-Gm-Message-State: AOJu0Yy9sVm7yrNoVV8k+uZfkwb34ga+0/wmt8EBFWUpxtBJRb7+8ZKK
+ EmVSe2NNkuHs8FFmow8nJRPor7yyhKZNMmoHvz/YbBbe2S36VPKqEBujd1GEAcN02p8hcumsmRj
+ v
+X-Gm-Gg: ASbGnctGwqlWjfnc03rrKR8Y63CgSX2LhE0ve4iG/64y97BgER9drOosU7YgsJC42h+
+ rtFwvoQT69m2jfkO4pZ9gVdLyJ/WFaxtS4ORx59iHHD/Xd+OtExgdq/wWOY88vJIEOalLijWxXO
+ +J0RSbXi1iAwrC9Rgq1dbdxJYZFeR48BFrzEfQUjuAFi5N11jpPWeICziG/EADjINbBEmIyFt27
+ iyYYdgRcCqNO+vm/mOQWy4hjtXktcd8z0jEeXFWq1sPh0KDb6mkkoOVnuZI1uAyhlcqjKQlJWoP
+ ARnjlqKFnWJsoyoHdVwH1BWA
+X-Google-Smtp-Source: AGHT+IGiBFXU1FP/msO2nZAPr++pQPir4NIlwm76nIwl0zBqTzCznq8N+NrkqsA19Z0oU4UCFIpWIw==
+X-Received: by 2002:a17:90b:5249:b0:2ee:e518:c1cb with SMTP id
+ 98e67ed59e1d1-2f782c4bdd2mr48156264a91.7.1737737490973; 
+ Fri, 24 Jan 2025 08:51:30 -0800 (PST)
 Received: from [192.168.163.227] ([75.147.178.105])
  by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-2f7ffa56160sm1971766a91.18.2025.01.24.08.51.18
+ 98e67ed59e1d1-2f7ffa56147sm1975389a91.15.2025.01.24.08.51.30
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 24 Jan 2025 08:51:19 -0800 (PST)
-Message-ID: <f6e862cb-09ee-43f8-9131-4f80b0ad7b5c@linaro.org>
-Date: Fri, 24 Jan 2025 08:51:16 -0800
+ Fri, 24 Jan 2025 08:51:30 -0800 (PST)
+Message-ID: <52eac72e-d86e-4cee-a7a5-2f982fd781be@linaro.org>
+Date: Fri, 24 Jan 2025 08:51:28 -0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 02/28] target/rx: Ensure not being build on user emulation
+Subject: Re: [PATCH 03/28] target/tricore: Ensure not being build on user
+ emulation
 To: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
  qemu-devel@nongnu.org
 Cc: qemu-arm@nongnu.org, qemu-s390x@nongnu.org, qemu-riscv@nongnu.org,
  qemu-ppc@nongnu.org, Paolo Bonzini <pbonzini@redhat.com>
 References: <20250121142341.17001-1-philmd@linaro.org>
- <20250121142341.17001-3-philmd@linaro.org>
+ <20250121142341.17001-4-philmd@linaro.org>
 Content-Language: en-US
 From: Richard Henderson <richard.henderson@linaro.org>
-In-Reply-To: <20250121142341.17001-3-philmd@linaro.org>
+In-Reply-To: <20250121142341.17001-4-philmd@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1029;
- envelope-from=richard.henderson@linaro.org; helo=mail-pj1-x1029.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::102a;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pj1-x102a.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -108,15 +110,27 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 On 1/21/25 06:23, Philippe Mathieu-Daudé wrote:
 > Currently only system emulation is supported.
 > Assert no target code is built for user emulation.
-> Remove #ifdef'ry since more work is required before
-> being able to emulate a user process.
 > 
-> Signed-off-by: Philippe Mathieu-Daudé<philmd@linaro.org>
+> Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 > ---
->   target/rx/cpu.h    | 6 ++++--
->   target/rx/cpu.c    | 6 ------
->   target/rx/helper.c | 4 ----
->   3 files changed, 4 insertions(+), 12 deletions(-)
+>   target/tricore/cpu.h | 4 ++++
+>   1 file changed, 4 insertions(+)
+> 
+> diff --git a/target/tricore/cpu.h b/target/tricore/cpu.h
+> index 8e431d79222..cf9dbc6df8e 100644
+> --- a/target/tricore/cpu.h
+> +++ b/target/tricore/cpu.h
+> @@ -26,6 +26,10 @@
+>   #include "qemu/cpu-float.h"
+>   #include "tricore-defs.h"
+>   
+> +#ifdef CONFIG_USER_ONLY
+> +#error "TriCore does not support user mode emulation"
+> +#endif
+> +
+>   typedef struct CPUArchState {
+>       /* GPR Register */
+>       uint32_t gpr_a[16];
 
 Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 
