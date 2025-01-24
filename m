@@ -4,66 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D8B1CC02181
-	for <qemu-riscv@archiver.kernel.org>; Fri, 24 Jan 2025 07:34:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 60247C02181
+	for <qemu-riscv@archiver.kernel.org>; Fri, 24 Jan 2025 09:06:06 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tbECV-0002dg-Ok; Fri, 24 Jan 2025 02:33:59 -0500
+	id 1tbFdS-0005q6-FE; Fri, 24 Jan 2025 04:05:54 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
- id 1tbECQ-0002ca-6j
- for qemu-riscv@nongnu.org; Fri, 24 Jan 2025 02:33:55 -0500
-Received: from mail-pj1-x102c.google.com ([2607:f8b0:4864:20::102c])
+ id 1tbFdR-0005pm-A9
+ for qemu-riscv@nongnu.org; Fri, 24 Jan 2025 04:05:53 -0500
+Received: from mail-pl1-x635.google.com ([2607:f8b0:4864:20::635])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
- id 1tbECL-0004Fc-LH
- for qemu-riscv@nongnu.org; Fri, 24 Jan 2025 02:33:53 -0500
-Received: by mail-pj1-x102c.google.com with SMTP id
- 98e67ed59e1d1-2f441791e40so2580604a91.3
- for <qemu-riscv@nongnu.org>; Thu, 23 Jan 2025 23:33:47 -0800 (PST)
+ id 1tbFdP-0007cO-Fd
+ for qemu-riscv@nongnu.org; Fri, 24 Jan 2025 04:05:53 -0500
+Received: by mail-pl1-x635.google.com with SMTP id
+ d9443c01a7336-216401de828so32507105ad.3
+ for <qemu-riscv@nongnu.org>; Fri, 24 Jan 2025 01:05:50 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1737704027; x=1738308827; darn=nongnu.org;
+ d=sifive.com; s=google; t=1737709550; x=1738314350; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=3NG+hueHH6AqupWOSB4OZObJndTP/YUoTxI8e1ofLFc=;
- b=Qu/2opb8HJhmwAxMR3ZUro+eKsoyVWNsEbvwz7New4w3gsE7WJzW0DVEsth8PU/MMT
- wug5qA/vcvuywLUjJ3hRo/4U49EFBlB3Ahgq3dZkFF4oif1Zo7IVTBK8Revxm3ZqM1/j
- 45gmc8YpM1GBNjEbLrTck/bi2tMuVCNAHdecUXaTm2rhpqfhsYBcoQ42s1LXG6qBt3xr
- 4IqIYi5Eq3QZdFspl1q0Rxm0b4gqblQodSxVNJJmg+u9DGyMRGUBUJ192N63Y968xNzE
- nVAlaO/W1sZWwfOU3opXOYVGs8Ex0s4uQPtmtWcVfhuTpVvMC+clvEmXT/hZ1dCXt6WW
- rSuA==
+ bh=DiqkhodxlgaG5f3W+fdsVvVKaK/k4IU2znZnb436zgQ=;
+ b=XXJ0c9AGtdTA2kHq64hEUbMZ1wbkA7uw7x0FfMnB661ktFJ9Zlr9kKsny9eK1rOEvp
+ itgW/H0vJySPLqieGhvAHqUevqs08ZHER1BnNebmw4hzTWymv4/T6e9nHZA0+M+Coyjp
+ IIt27cH2FZCNPRWGt8lztGvxwFpbbbUSOIs6g/6qKU5Wg/DundwdXcYE0R+gKHjPrHV4
+ 2D5PnbBeYs+T0O1ZtQ58VLQ+VGJUFuit45O7lEmk/IWQrdQXzdgW7GVBkwxPiLKg7F34
+ d96cBiJEgjzYPoR1HXNKhurl1NSI6ViBiFKYQHPangknZazYBmRg7kdELk7gd4iFIQpc
+ 4iGw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1737704027; x=1738308827;
+ d=1e100.net; s=20230601; t=1737709550; x=1738314350;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=3NG+hueHH6AqupWOSB4OZObJndTP/YUoTxI8e1ofLFc=;
- b=rRUpS39muK1sN4kcpdfODfYV+uiMMqYljo4BSuDWlvRbMXFdnHRTFcJGqXWwtW8JWI
- LjrRg//1Uy9DKnMiu57xgfwRznniLO27ynpcv76XJJhUO3/4c4KB9DX7ftHruocKJi+N
- 9jGIG2PeX8Mf0Yq9R0oTGWpOTgchXML/b6/c3T6cIngpbbDLdj5a209SLdIdMbXu/4ss
- cpPhk7aArxh7LLbCw31VnQsnnXbDZ7xOiWR5RCTCF/XU55SHQs2cVgHqMPMLrRkF5Nng
- znHEAHiv+xxR/ZHCjCqIBugwZ4eI+gBpAcYRlZR1I7dGLHR6K5zP7KSqoHW2hQ4Gdjax
- 5/+Q==
+ bh=DiqkhodxlgaG5f3W+fdsVvVKaK/k4IU2znZnb436zgQ=;
+ b=aVTXjT57M7kg1y6+fgh6Sg82wATXZ2BpGyIeGMAw7kfYQ/waaE+oaWI9/6z1Zox/Ef
+ yeT79p3AAhlTUP8sSo7+O6iXx3hgWSq7boN+T5FHidlXvRUaxByVG2PWDRmDN8T1OqpN
+ ZqK023Pp0CSkG2Vpd3QIBTPB982ixe8fhV2l7fGeFAGCooByytNk3YkyIS/caDTzEzxx
+ 7YkLwY+1NSU/5H0jDJ1ieaJfAalqD6XEkLDDmolAZdAl0pme2epYQ0MdkIkx3ct/+ofm
+ Qj1MERTDeo1yyfOmUUaCSLOHmNhLZIj/unrtfziQ3MI0wbQR3y4Tm8RqBA/sdyzrA7Lp
+ Dxbg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXdQEfS8YdLwYjZ1KP3NmE/G57hrknsNJGPbodXsMjXeEIy0VculgFYC5bAO41Xk0NNQH4PVao6yxvF@nongnu.org
-X-Gm-Message-State: AOJu0Yx55KL1tCmqWp6zBFjDJvJF2/+i9pdSVna/YBS9lJEHC6klZNY4
- CScEGeyk307qilsnkFpeL6qA8GITN6RPRj09pRV0K9PYekEE9rNo9GwZvqCjdGY=
-X-Gm-Gg: ASbGncsyXOmypeGEkcNRMf3nslOZR5Jdn8MNBpPOq3ieKPT/4xMDeGJH1pw3ujNYLdX
- /jSCxuSIj2hhnbBXVyHkb+TR0aUL5irZnybpwPqEPrT3bmMbKaKnzaDzwurqVTvbWm1l8LvXJp4
- YjQ+vRE6vJXBnvYOKTBdEyg9eocq5rUBlfRsXSjV91lMjb/z17lXDv7lKOx9LXxGC7rW51wYsQu
- qBBAW1Tdb0ULApP1YoVmAL4d2MX17nYhuqme8Zma623mwrfao5gHWml3RRF8wD+jtnL6Nq7YSlt
- bDCUdxPV/Z8JO2R2byylJr61Uit7VoK/PWb2xfWltrEor5D3Fw==
-X-Google-Smtp-Source: AGHT+IHLQdZwBg3jofOPYkFVs1gt7g/0P3VtY/NEZluSWV7hJJ+hUE1Bs0nwYEmqLa9ASGOcLl/GJA==
-X-Received: by 2002:a17:90a:c2ce:b0:2ee:a76a:820 with SMTP id
- 98e67ed59e1d1-2f782cbfa62mr46861434a91.18.1737704026630; 
- Thu, 23 Jan 2025 23:33:46 -0800 (PST)
+ AJvYcCXHPQvFfhWFG8y0noH5LWH0YRw8WYayHnatrNGKVa8K9UvaYwogYUThUuPhMKjgA3LWThjI7ZAg+5ag@nongnu.org
+X-Gm-Message-State: AOJu0YzgWNaqhF4RY54fcfQCE9/wRakpuPQltaAp5pNpuQgTd1uqAPsm
+ Kjx8ZXeGTsmwUEvY9yppnhMcA0SQi7J0w0LM7rfMATTJrOkiPGTDw2GTew6i+QA=
+X-Gm-Gg: ASbGncsniZKWdAAcrN9M2NWVW6b2K5nTWZcWJNW+Q2EIFRLkmkziHjdQ2XJUuFYvEFu
+ rakqWIHc9d3diecJ2q9OYh1yYVKebFg8yU48J7x5oZMk/2oFkrKbomxw8jTYo4HJPlKE0TEl8Mf
+ xqZaiCfYQwepziWuBr0aelD2l4zjBxxgZXKn5YRLEgWvlxiDKblKcbWnTj8mDk4uN1e13fb1cbE
+ 4JXf+sgpRCpULAmBs0j9nezHEP0+n0VuQJyLGH4kIf5ypjEpniSVE1j8qeZf40vSqc1qRr1EB0I
+ M9mW7a0jvGRAB/k5xOcEGA96p3BoCPhPyQYCEQ0FyvWWdAR6sg==
+X-Google-Smtp-Source: AGHT+IGg7sy4Qx//uj8busZ4yeVErd5dWFBIcVRX9nSoNaPvDpdg676uaqV97tJU4lzWfHSiTG02Kw==
+X-Received: by 2002:a17:902:c411:b0:216:84e9:d334 with SMTP id
+ d9443c01a7336-21c35577e88mr407045865ad.33.1737709548608; 
+ Fri, 24 Jan 2025 01:05:48 -0800 (PST)
 Received: from duncan.localdomain (114-35-142-126.hinet-ip.hinet.net.
  [114.35.142.126]) by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-2f7ffa77043sm1072755a91.35.2025.01.23.23.33.44
+ 41be03b00d2f7-ac48f897f8dsm1150655a12.22.2025.01.24.01.05.46
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 23 Jan 2025 23:33:46 -0800 (PST)
+ Fri, 24 Jan 2025 01:05:48 -0800 (PST)
 From: Max Chou <max.chou@sifive.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
@@ -71,25 +71,23 @@ Cc: Max Chou <max.chou@sifive.com>, Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bmeng.cn@gmail.com>,
  Weiwei Li <liwei1518@gmail.com>,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Richard Henderson <richard.henderson@linaro.org>,
- =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-Subject: [PATCH] target/riscv: rvv: Fix vslide1[up|down].vx unexpected result
- when XLEN=32 and SEW=64
-Date: Fri, 24 Jan 2025 15:33:22 +0800
-Message-Id: <20250124073325.2467664-1-max.chou@sifive.com>
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
+Subject: [PATCH] target/riscv: rvv: Fix incorrect vlen comparison in
+ prop_vlen_set
+Date: Fri, 24 Jan 2025 17:05:38 +0800
+Message-Id: <20250124090539.2506448-1-max.chou@sifive.com>
 X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::102c;
- envelope-from=max.chou@sifive.com; helo=mail-pj1-x102c.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::635;
+ envelope-from=max.chou@sifive.com; helo=mail-pl1-x635.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -105,157 +103,42 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-When XLEN is 32 and SEW is 64, the original implementation of
-vslide1up.vx and vslide1down.vx helper functions fills the 32-bit value
-of rs1 into the first element of the destination vector register (rd),
-which is a 64-bit element.
-
-This commit attempted to resolve the issue by extending the rs1 value
-to 64 bits during the TCG translation phase to ensure that the helper
-functions won't lost the higer 32 bits.
+In prop_vlen_set function, there is an incorrect comparison between
+vlen(bit) and vlenb(byte).
+This will cause unexpected error when user applies the `vlen=1024` cpu
+option with a vendor predefined cpu type that the default vlen is
+1024(vlenb=128).
 
 Signed-off-by: Max Chou <max.chou@sifive.com>
 ---
- target/riscv/helper.h                   | 16 ++++----
- target/riscv/insn_trans/trans_rvv.c.inc | 50 ++++++++++++++++++++++++-
- target/riscv/vector_helper.c            | 20 +++++-----
- 3 files changed, 66 insertions(+), 20 deletions(-)
+ target/riscv/cpu.c | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
 
-diff --git a/target/riscv/helper.h b/target/riscv/helper.h
-index 16ea240d26d..0578d153bdf 100644
---- a/target/riscv/helper.h
-+++ b/target/riscv/helper.h
-@@ -1099,14 +1099,14 @@ DEF_HELPER_6(vslidedown_vx_b, void, ptr, ptr, tl, ptr, env, i32)
- DEF_HELPER_6(vslidedown_vx_h, void, ptr, ptr, tl, ptr, env, i32)
- DEF_HELPER_6(vslidedown_vx_w, void, ptr, ptr, tl, ptr, env, i32)
- DEF_HELPER_6(vslidedown_vx_d, void, ptr, ptr, tl, ptr, env, i32)
--DEF_HELPER_6(vslide1up_vx_b, void, ptr, ptr, tl, ptr, env, i32)
--DEF_HELPER_6(vslide1up_vx_h, void, ptr, ptr, tl, ptr, env, i32)
--DEF_HELPER_6(vslide1up_vx_w, void, ptr, ptr, tl, ptr, env, i32)
--DEF_HELPER_6(vslide1up_vx_d, void, ptr, ptr, tl, ptr, env, i32)
--DEF_HELPER_6(vslide1down_vx_b, void, ptr, ptr, tl, ptr, env, i32)
--DEF_HELPER_6(vslide1down_vx_h, void, ptr, ptr, tl, ptr, env, i32)
--DEF_HELPER_6(vslide1down_vx_w, void, ptr, ptr, tl, ptr, env, i32)
--DEF_HELPER_6(vslide1down_vx_d, void, ptr, ptr, tl, ptr, env, i32)
-+DEF_HELPER_6(vslide1up_vx_b, void, ptr, ptr, i64, ptr, env, i32)
-+DEF_HELPER_6(vslide1up_vx_h, void, ptr, ptr, i64, ptr, env, i32)
-+DEF_HELPER_6(vslide1up_vx_w, void, ptr, ptr, i64, ptr, env, i32)
-+DEF_HELPER_6(vslide1up_vx_d, void, ptr, ptr, i64, ptr, env, i32)
-+DEF_HELPER_6(vslide1down_vx_b, void, ptr, ptr, i64, ptr, env, i32)
-+DEF_HELPER_6(vslide1down_vx_h, void, ptr, ptr, i64, ptr, env, i32)
-+DEF_HELPER_6(vslide1down_vx_w, void, ptr, ptr, i64, ptr, env, i32)
-+DEF_HELPER_6(vslide1down_vx_d, void, ptr, ptr, i64, ptr, env, i32)
- 
- DEF_HELPER_6(vfslide1up_vf_h, void, ptr, ptr, i64, ptr, env, i32)
- DEF_HELPER_6(vfslide1up_vf_w, void, ptr, ptr, i64, ptr, env, i32)
-diff --git a/target/riscv/insn_trans/trans_rvv.c.inc b/target/riscv/insn_trans/trans_rvv.c.inc
-index b9883a5d323..775fe1baae7 100644
---- a/target/riscv/insn_trans/trans_rvv.c.inc
-+++ b/target/riscv/insn_trans/trans_rvv.c.inc
-@@ -3391,7 +3391,6 @@ static bool slideup_check(DisasContext *s, arg_rmrr *a)
- }
- 
- GEN_OPIVX_TRANS(vslideup_vx, slideup_check)
--GEN_OPIVX_TRANS(vslide1up_vx, slideup_check)
- GEN_OPIVI_TRANS(vslideup_vi, IMM_ZX, vslideup_vx, slideup_check)
- 
- static bool slidedown_check(DisasContext *s, arg_rmrr *a)
-@@ -3402,9 +3401,56 @@ static bool slidedown_check(DisasContext *s, arg_rmrr *a)
- }
- 
- GEN_OPIVX_TRANS(vslidedown_vx, slidedown_check)
--GEN_OPIVX_TRANS(vslide1down_vx, slidedown_check)
- GEN_OPIVI_TRANS(vslidedown_vi, IMM_ZX, vslidedown_vx, slidedown_check)
- 
-+typedef void gen_helper_vslide1_vx(TCGv_ptr, TCGv_ptr, TCGv_i64, TCGv_ptr,
-+                                TCGv_env, TCGv_i32);
-+
-+#define GEN_OPIVX_VSLIDE1_TRANS(NAME, CHECK)                            \
-+static bool trans_##NAME(DisasContext *s, arg_rmrr *a)                  \
-+{                                                                       \
-+    if (CHECK(s, a)) {                                                  \
-+        static gen_helper_vslide1_vx * const fns[4] = {                 \
-+            gen_helper_##NAME##_b, gen_helper_##NAME##_h,               \
-+            gen_helper_##NAME##_w, gen_helper_##NAME##_d,               \
-+        };                                                              \
-+                                                                        \
-+        TCGv_ptr dest, src2, mask;                                      \
-+        TCGv_i64 src1;                                                  \
-+        TCGv_i32 desc;                                                  \
-+        uint32_t data = 0;                                              \
-+                                                                        \
-+        dest = tcg_temp_new_ptr();                                      \
-+        mask = tcg_temp_new_ptr();                                      \
-+        src2 = tcg_temp_new_ptr();                                      \
-+        src1 = tcg_temp_new_i64();                                      \
-+                                                                        \
-+        data = FIELD_DP32(data, VDATA, VM, a->vm);                      \
-+        data = FIELD_DP32(data, VDATA, LMUL, s->lmul);                  \
-+        data = FIELD_DP32(data, VDATA, VTA, s->vta);                    \
-+        data = FIELD_DP32(data, VDATA, VTA_ALL_1S, s->cfg_vta_all_1s);  \
-+        data = FIELD_DP32(data, VDATA, VMA, s->vma);                    \
-+        desc = tcg_constant_i32(simd_desc(s->cfg_ptr->vlenb,            \
-+                                s->cfg_ptr->vlenb, data));              \
-+                                                                        \
-+        tcg_gen_addi_ptr(dest, tcg_env, vreg_ofs(s, a->rd));            \
-+        tcg_gen_addi_ptr(src2, tcg_env, vreg_ofs(s, a->rs2));           \
-+        tcg_gen_addi_ptr(mask, tcg_env, vreg_ofs(s, 0));                \
-+        tcg_gen_ext_tl_i64(src1, get_gpr(s, a->rs1, EXT_SIGN));         \
-+                                                                        \
-+        fns[s->sew](dest, mask, src1, src2, tcg_env, desc);             \
-+                                                                        \
-+        tcg_gen_movi_tl(cpu_vstart, 0);                                 \
-+        finalize_rvv_inst(s);                                           \
-+                                                                        \
-+        return true;                                                    \
-+    }                                                                   \
-+    return false;                                                       \
-+}
-+
-+GEN_OPIVX_VSLIDE1_TRANS(vslide1up_vx, slideup_check)
-+GEN_OPIVX_VSLIDE1_TRANS(vslide1down_vx, slidedown_check)
-+
- /* Vector Floating-Point Slide Instructions */
- static bool fslideup_check(DisasContext *s, arg_rmrr *a)
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index 3d4bd157d2c..2f53acbab59 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -2034,6 +2034,7 @@ static void prop_vlen_set(Object *obj, Visitor *v, const char *name,
+                          void *opaque, Error **errp)
  {
-diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
-index 5386e3b97c5..c7fe3424c47 100644
---- a/target/riscv/vector_helper.c
-+++ b/target/riscv/vector_helper.c
-@@ -5145,11 +5145,11 @@ GEN_VEXT_VSLIE1UP(16, H2)
- GEN_VEXT_VSLIE1UP(32, H4)
- GEN_VEXT_VSLIE1UP(64, H8)
+     RISCVCPU *cpu = RISCV_CPU(obj);
++    uint16_t cpu_vlen = cpu->cfg.vlenb << 3;
+     uint16_t value;
  
--#define GEN_VEXT_VSLIDE1UP_VX(NAME, BITWIDTH)                     \
--void HELPER(NAME)(void *vd, void *v0, target_ulong s1, void *vs2, \
--                  CPURISCVState *env, uint32_t desc)              \
--{                                                                 \
--    vslide1up_##BITWIDTH(vd, v0, s1, vs2, env, desc);             \
-+#define GEN_VEXT_VSLIDE1UP_VX(NAME, BITWIDTH)                   \
-+void HELPER(NAME)(void *vd, void *v0, uint64_t s1, void *vs2,   \
-+                  CPURISCVState *env, uint32_t desc)            \
-+{                                                               \
-+    vslide1up_##BITWIDTH(vd, v0, s1, vs2, env, desc);           \
- }
+     if (!visit_type_uint16(v, name, &value, errp)) {
+@@ -2045,10 +2046,10 @@ static void prop_vlen_set(Object *obj, Visitor *v, const char *name,
+         return;
+     }
  
- /* vslide1up.vx vd, vs2, rs1, vm # vd[0]=x[rs1], vd[i+1] = vs2[i] */
-@@ -5196,11 +5196,11 @@ GEN_VEXT_VSLIDE1DOWN(16, H2)
- GEN_VEXT_VSLIDE1DOWN(32, H4)
- GEN_VEXT_VSLIDE1DOWN(64, H8)
+-    if (value != cpu->cfg.vlenb && riscv_cpu_is_vendor(obj)) {
++    if (value != cpu_vlen && riscv_cpu_is_vendor(obj)) {
+         cpu_set_prop_err(cpu, name, errp);
+         error_append_hint(errp, "Current '%s' val: %u\n",
+-                          name, cpu->cfg.vlenb << 3);
++                          name, cpu_vlen);
+         return;
+     }
  
--#define GEN_VEXT_VSLIDE1DOWN_VX(NAME, BITWIDTH)                   \
--void HELPER(NAME)(void *vd, void *v0, target_ulong s1, void *vs2, \
--                  CPURISCVState *env, uint32_t desc)              \
--{                                                                 \
--    vslide1down_##BITWIDTH(vd, v0, s1, vs2, env, desc);           \
-+#define GEN_VEXT_VSLIDE1DOWN_VX(NAME, BITWIDTH)                 \
-+void HELPER(NAME)(void *vd, void *v0, uint64_t s1, void *vs2,   \
-+                  CPURISCVState *env, uint32_t desc)            \
-+{                                                               \
-+    vslide1down_##BITWIDTH(vd, v0, s1, vs2, env, desc);         \
- }
- 
- /* vslide1down.vx vd, vs2, rs1, vm # vd[i] = vs2[i+1], vd[vl-1]=x[rs1] */
 -- 
 2.34.1
 
