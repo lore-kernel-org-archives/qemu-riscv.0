@@ -4,83 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8C6B4C02181
-	for <qemu-riscv@archiver.kernel.org>; Fri, 24 Jan 2025 10:15:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 71E48C02181
+	for <qemu-riscv@archiver.kernel.org>; Fri, 24 Jan 2025 10:43:57 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tbGiW-0002bY-1r; Fri, 24 Jan 2025 05:15:12 -0500
+	id 1tbH9v-00039r-8z; Fri, 24 Jan 2025 05:43:31 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
- id 1tbGiO-0002Wl-Kj
- for qemu-riscv@nongnu.org; Fri, 24 Jan 2025 05:15:04 -0500
-Received: from mail-pl1-x635.google.com ([2607:f8b0:4864:20::635])
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1tbH9p-000377-A2
+ for qemu-riscv@nongnu.org; Fri, 24 Jan 2025 05:43:27 -0500
+Received: from mail-pl1-x632.google.com ([2607:f8b0:4864:20::632])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
- id 1tbGiM-0007po-QQ
- for qemu-riscv@nongnu.org; Fri, 24 Jan 2025 05:15:04 -0500
-Received: by mail-pl1-x635.google.com with SMTP id
- d9443c01a7336-21669fd5c7cso33220255ad.3
- for <qemu-riscv@nongnu.org>; Fri, 24 Jan 2025 02:15:01 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1tbH9n-0003qu-Eq
+ for qemu-riscv@nongnu.org; Fri, 24 Jan 2025 05:43:25 -0500
+Received: by mail-pl1-x632.google.com with SMTP id
+ d9443c01a7336-2164b1f05caso33035305ad.3
+ for <qemu-riscv@nongnu.org>; Fri, 24 Jan 2025 02:43:21 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1737713700; x=1738318500; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=726JYc2EOYPtf39xK4E0IwFh2U+9H3MDOohIfk12nUI=;
- b=IlrePebfSX4wg2vDQWIKOIjRnk3xaXdNJux226vjF6JVWTmQOgrQQO+pb3cA05WHlS
- BUlzWSOVn1h8YEDu2OaIQgVFs5fm7Qs7jSPh5tBeF3zMSOl9w7G9r+idQT1Wr+6lqulf
- lOjcCJVw0sylBroHPtNEJQPUXtp4Run4hJrrc0nyb8sUb5x57qdy9CuI24ft7cDRhQ7m
- N2Y7ZTJndWdPMNiXomQhUiwubF8ZDKdW9x4RBjCZa6FkXSRX7KIWFWkkSE43VywLyu6a
- YDZJiaNYpzJChKScXh+t2maLlaRmBxHtrBXUMBdSzB0JzJhEpKCXRkV8agpdkFCHFW6W
- d7lA==
+ d=ventanamicro.com; s=google; t=1737715400; x=1738320200; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=a94Y2oA6y/JmC15kO/nfePD/EsGA0LKVOYhCU0f9NEk=;
+ b=A5+mZ+t966HHpWcyWfv1Gm4aJ/x1ns032sVCsaHpFa1bD3R8pfCxpLvuuspLP4W8EJ
+ QnqIQatOQJHMEhdN9hkzgeS9zBQTHKCJ4TZEyv87OFTz04dbGjgDSx6KuF2T9l9Hem3e
+ I9UOBgDgZY2Fa3XujakxGi6bD2XZ+DtUYaPER6b6OP4/ZlVjvc7MAIgPllA0Q+LZNwYl
+ LE/8No13Xw+5uVdKPTIGNSgsCeQw83fAaQiTo3JQR8Gt2H38B6RRbt6rwsmbQ4x52Ota
+ G2kwifZ8h9VS84ZrmZISeHtaOf7HB3+76/i1fyiClVFYx9MetJ8+2HxzJ15nfWwPV4zw
+ yiQw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1737713700; x=1738318500;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=726JYc2EOYPtf39xK4E0IwFh2U+9H3MDOohIfk12nUI=;
- b=LeS9h9NXh3kd1CzQ4dHBPIgS+Qfh7GEuOf8t2tiMlSvwQd0fObLcwzRE/82Kw3Lwgn
- CYcX4wY7Tnj1kdLVg3wOL3iXEAXyq0av9eSfQm50vl8o4gIhJiDdGtDZHXBy2/ajL9So
- Nexcgfrq61Y8aGT3OkBinFvyoxzg9TJdgpPomq6k1Pqdi0T/ji9LyJIH+TubDK1hOGF+
- 0w3P0hxGkH7KBbMGUpUUpht6ctZZg6jbVUgGH+c8Nn8verGGGw4ogSc98aBPT7tM/a+d
- OoXoYq+g5eNoRJBrI9XUoULKkawU5h2jyg6QA/S1EVbvkA3hxI7ajhrBrrhKVTcu/pqw
- T5iw==
+ d=1e100.net; s=20230601; t=1737715400; x=1738320200;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=a94Y2oA6y/JmC15kO/nfePD/EsGA0LKVOYhCU0f9NEk=;
+ b=aaxClIe8dz0mX0usz2EYXbC4zwnEBkSB6Ta5fUOKA4w553uLjWO2U7IyMr1YfmZJt4
+ m0K3aWQtDb0vfXFbssdgvlKTh2Xx0VtnxkHb2JFfGJsQcb3fef94uHRK5arkc7m/yZUJ
+ 8PirKFQKoRYRLdW4z2UXY0OunJEBH2as5IGmPAImVQ19Nqixieigy2sRFhQbe6G8WvSG
+ ir7z/jyf2rUyV6glzi4zluO2dUq8WqX1sAtXYE/1Pm7EoHkwlieYsqYxIPxZ6WjYEtuH
+ C35OKU2WIEjpeJS9wGFJXZ1jzEGhEx84xh74OAxAbztPk0btuMUvQnKox883OjSTcM0i
+ Jfqw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWiUnlB/8xFzcC0IHEIk1oeSKL01fbdcA2ICf4SgncbWY8aOkL1/8wyYAQPfneRyb5URHlxHekSkCCB@nongnu.org
-X-Gm-Message-State: AOJu0YyR21gLXOEALtjkaA800ShYPW470DSDtcppw3HutfGjsm8PDRWQ
- TIZyL/a0Mi0y00EbiDFxEFUpjVGd2x1uIJRfZ9fyPwK179eHhoPA8WzDHcNqiqo=
-X-Gm-Gg: ASbGnctjPuZAfxxVA1aYkjyyxLvA3iIlMU6WhvH4yYZpaXFRgMsyH1fJnTT+FqMySwU
- OcrX4osoaeqUUnA9x1eBDoLXn1yxpN5NYUAoK+hEidf3wH+TM4gqt+7pu8emj42g7nooEGSZXpF
- +OPFDz673LhWXNeu6M94P5EELa2id1WGyITAWAtjog9Qa3cXFTf/vq0uN+RgM0/r5skn3IzigXy
- 1aDSVGhCRhgEhEaOMw8lPZD0Me8S6rOl+bw70wueE4Dh8VzwaHQevXs1x3CLbLyByhICv3+/bAE
- pU9WsLfVzdwdiGGAUFhkOQrqP+0p16T5UoXjWtSsDnmZIpCnxg==
-X-Google-Smtp-Source: AGHT+IF5/O9f0U22I7akfqHnEXp6zoaRQ2aXvubjD+5ok+uDqU/B79QZrIEddie1r59UfmcgpBitMA==
-X-Received: by 2002:a05:6a20:7f8e:b0:1e6:8f39:d635 with SMTP id
- adf61e73a8af0-1eb2146009bmr44951682637.9.1737713699157; 
- Fri, 24 Jan 2025 02:14:59 -0800 (PST)
-Received: from duncan.localdomain (114-35-142-126.hinet-ip.hinet.net.
- [114.35.142.126]) by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-72f8a69eb75sm1521502b3a.12.2025.01.24.02.14.56
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 24 Jan 2025 02:14:58 -0800 (PST)
-From: Max Chou <max.chou@sifive.com>
-To: qemu-devel@nongnu.org,
-	qemu-riscv@nongnu.org
-Cc: Max Chou <max.chou@sifive.com>, Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bmeng.cn@gmail.com>,
- Weiwei Li <liwei1518@gmail.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
-Subject: [PATCH] target/riscv: rvv: Fix unexpected behavior of vector
- reduction instructions when vl is 0
-Date: Fri, 24 Jan 2025 18:14:47 +0800
-Message-Id: <20250124101452.2519171-1-max.chou@sifive.com>
-X-Mailer: git-send-email 2.34.1
+ AJvYcCW4UPgLjE1w/xX6LnDmCtwB47i94qUESPejowwxZWGWM/Uu3/i4sEcgY5r0SvePqbjg0OCF3koykuQY@nongnu.org
+X-Gm-Message-State: AOJu0Yx5F/kKZfSzRn83USduFE+x88P7NhWAdClKcLVoPcLN/7vbRtxf
+ lbAGGxRW4zsR0hTc84DFpJC1jHl5XKAqEPvi7IJBsngyhcFCOh1V1xszEZ0xcKc=
+X-Gm-Gg: ASbGncuQ1sXeO61uyzWAe+9rIUVM4GzSjzIO+epHrPh91vCP3dw/Gv6ioFYm1HQeHsz
+ tARp2bGtWeoegzTPIuv9IWL2MZZWcEZ8S8DVYGpuzZ/aJNgJrmi+UU3E1cRG9HgDzyBEFNO5Etr
+ BHfbUqRx1+pnSTU/5ggLxEson5W4EPneGmwYRZ05qTd8LfaF2Ktq+nNSKc67GI4X8w3Q34o9OGx
+ rsuz1RkHPafOOBq/Cj+mfDdvkAB1z7FbnBekM8RBDGWNV//lejJzWRvh18cpb7oasM8xnH9aqzM
+ cqu0QFWUMIwiMTEN
+X-Google-Smtp-Source: AGHT+IH9xdOvBCUfCc6O/KC8c3FtiYNp/uUrwW8tzCsrLnv762c2WaiPxnCm01mBkz6os3wHeuv0dw==
+X-Received: by 2002:a17:902:c948:b0:211:efa9:a4e6 with SMTP id
+ d9443c01a7336-21c35549ac9mr449678965ad.23.1737715400477; 
+ Fri, 24 Jan 2025 02:43:20 -0800 (PST)
+Received: from [192.168.68.110] ([179.93.20.76])
+ by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-21da414df58sm13144555ad.187.2025.01.24.02.43.17
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 24 Jan 2025 02:43:20 -0800 (PST)
+Message-ID: <eafa7909-14d8-4000-b505-ea937f21f89f@ventanamicro.com>
+Date: Fri, 24 Jan 2025 07:43:16 -0300
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::635;
- envelope-from=max.chou@sifive.com; helo=mail-pl1-x635.google.com
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] target/riscv: rvv: Fix incorrect vlen comparison in
+ prop_vlen_set
+To: Max Chou <max.chou@sifive.com>, qemu-devel@nongnu.org,
+ qemu-riscv@nongnu.org
+Cc: Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bmeng.cn@gmail.com>,
+ Weiwei Li <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
+References: <20250124090539.2506448-1-max.chou@sifive.com>
+Content-Language: en-US
+From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+In-Reply-To: <20250124090539.2506448-1-max.chou@sifive.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::632;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pl1-x632.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -103,45 +106,50 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-According to the Vector Reduction Operations section in the RISC-V "V"
-Vector Extension spec,
-"If vl=0, no operation is performed and the destination register is not
-updated."
 
-The vd should be updated when vl is larger than 0.
 
-Signed-off-by: Max Chou <max.chou@sifive.com>
----
- target/riscv/vector_helper.c | 8 ++++++--
- 1 file changed, 6 insertions(+), 2 deletions(-)
+On 1/24/25 6:05 AM, Max Chou wrote:
+> In prop_vlen_set function, there is an incorrect comparison between
+> vlen(bit) and vlenb(byte).
+> This will cause unexpected error when user applies the `vlen=1024` cpu
+> option with a vendor predefined cpu type that the default vlen is
+> 1024(vlenb=128).
+> 
 
-diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
-index 5386e3b97c5..7773df6a7c7 100644
---- a/target/riscv/vector_helper.c
-+++ b/target/riscv/vector_helper.c
-@@ -4659,7 +4659,9 @@ void HELPER(NAME)(void *vd, void *v0, void *vs1,          \
-         }                                                 \
-         s1 = OP(s1, (TD)s2);                              \
-     }                                                     \
--    *((TD *)vd + HD(0)) = s1;                             \
-+    if (vl > 0) {                                         \
-+        *((TD *)vd + HD(0)) = s1;                         \
-+    }                                                     \
-     env->vstart = 0;                                      \
-     /* set tail elements to 1s */                         \
-     vext_set_elems_1s(vd, vta, esz, vlenb);               \
-@@ -4745,7 +4747,9 @@ void HELPER(NAME)(void *vd, void *v0, void *vs1,           \
-         }                                                  \
-         s1 = OP(s1, (TD)s2, &env->fp_status);              \
-     }                                                      \
--    *((TD *)vd + HD(0)) = s1;                              \
-+    if (vl > 0) {                                          \
-+        *((TD *)vd + HD(0)) = s1;                          \
-+    }                                                      \
-     env->vstart = 0;                                       \
-     /* set tail elements to 1s */                          \
-     vext_set_elems_1s(vd, vta, esz, vlenb);                \
--- 
-2.34.1
+Fixes: 4f6d036ccc ("target/riscv/cpu.c: remove cpu->cfg.vlen")
+
+> Signed-off-by: Max Chou <max.chou@sifive.com>
+> ---
+
+Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+
+>   target/riscv/cpu.c | 5 +++--
+>   1 file changed, 3 insertions(+), 2 deletions(-)
+> 
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index 3d4bd157d2c..2f53acbab59 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -2034,6 +2034,7 @@ static void prop_vlen_set(Object *obj, Visitor *v, const char *name,
+>                            void *opaque, Error **errp)
+>   {
+>       RISCVCPU *cpu = RISCV_CPU(obj);
+> +    uint16_t cpu_vlen = cpu->cfg.vlenb << 3;
+>       uint16_t value;
+>   
+>       if (!visit_type_uint16(v, name, &value, errp)) {
+> @@ -2045,10 +2046,10 @@ static void prop_vlen_set(Object *obj, Visitor *v, const char *name,
+>           return;
+>       }
+>   
+> -    if (value != cpu->cfg.vlenb && riscv_cpu_is_vendor(obj)) {
+> +    if (value != cpu_vlen && riscv_cpu_is_vendor(obj)) {
+>           cpu_set_prop_err(cpu, name, errp);
+>           error_append_hint(errp, "Current '%s' val: %u\n",
+> -                          name, cpu->cfg.vlenb << 3);
+> +                          name, cpu_vlen);
+>           return;
+>       }
+>   
 
 
