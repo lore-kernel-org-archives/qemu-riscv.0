@@ -4,84 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6C845C02181
-	for <qemu-riscv@archiver.kernel.org>; Fri, 24 Jan 2025 17:42:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1E7E7C0218C
+	for <qemu-riscv@archiver.kernel.org>; Sat, 25 Jan 2025 16:09:07 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tbNgu-0006OH-Dn; Fri, 24 Jan 2025 12:42:00 -0500
+	id 1tbii5-0006Il-I1; Sat, 25 Jan 2025 11:08:38 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tbNgq-0006GZ-MM
- for qemu-riscv@nongnu.org; Fri, 24 Jan 2025 12:41:57 -0500
-Received: from mail-wm1-x332.google.com ([2a00:1450:4864:20::332])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tbigq-000506-6W
+ for qemu-riscv@nongnu.org; Sat, 25 Jan 2025 11:07:28 -0500
+Received: from mail-wr1-x436.google.com ([2a00:1450:4864:20::436])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tbNgm-00038O-3k
- for qemu-riscv@nongnu.org; Fri, 24 Jan 2025 12:41:55 -0500
-Received: by mail-wm1-x332.google.com with SMTP id
- 5b1f17b1804b1-43635796b48so15976635e9.0
- for <qemu-riscv@nongnu.org>; Fri, 24 Jan 2025 09:41:50 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tbigm-0000mn-T3
+ for qemu-riscv@nongnu.org; Sat, 25 Jan 2025 11:07:18 -0500
+Received: by mail-wr1-x436.google.com with SMTP id
+ ffacd0b85a97d-385e1fcb0e1so1499270f8f.2
+ for <qemu-riscv@nongnu.org>; Sat, 25 Jan 2025 08:07:14 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1737740509; x=1738345309; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=a43/7Bt4MW4XTo3TsuSDc+PocOKZb0hbjZ5CqEhuwHg=;
- b=NeMqTW7i9zo51NKZHnyLgInlzOayUCfC93T/Uc5c0UEuDTbqo1+GSSIUPrDRT8L3+0
- fHA+2qYmjrI59EUJEBCwciZEhqK8njAcVCffJzgK15BYp3RHrkeX9Gjim1w+8dzviQLt
- w+GGqAdcIG6PH/5DQ77KaLdg29uehZihUspmVI3rO9AtVQVRxe2MENctWFNF3HB+kmzg
- S7HN2SFQCkEBz5Z3gwbtRzbMjEuy10cfJUvAjU7e1wBHgU/9GlRKNVGHBsQJqkWZ7EPH
- P7kA3HvrouBe4+z4lWWLH0iuINyU4199wXdTUrE1pHpQAAJ0skmvWR7B7sEqZHvm6/Nv
- k96w==
+ d=linaro.org; s=google; t=1737821233; x=1738426033; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=HrE30xT1EmuXt0tg0kaHmGrX7iIi1CpOMZL7K4RG6J8=;
+ b=KDSjV8K3x+ZucaXuRw5Cb3C07VOUJ1/+FQnCyEyib3y+QPyaBvazHZxKuPErI9BgEC
+ RsucQVM2/OtJbqwhMz+Ka8ckIvh/WKzHnJ7euxefusiEMwJPeFkcMvfq6mej8MDyEzFk
+ l63SKDsI9oJEMcLfSk0bu0lN7rLtGh7Fc3JhFe+VfNzWc/jUlO5DKN8UvULgrgOop2PV
+ AHn3OtMuXfT7asNtYwvYE2ZyZq8slj/0Kr84Kc5Mh0SwScAnIgdY4kNXS+B0b7zOFwjL
+ oxXwzKrHgrLr5MPOktZ2EbAOK6ZtLBRarrNx/MuP1B6TWmO51NQYTi0R2PSsw6kWI3Rb
+ ZR2g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1737740509; x=1738345309;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=a43/7Bt4MW4XTo3TsuSDc+PocOKZb0hbjZ5CqEhuwHg=;
- b=uti8ycUJ5/nkyTidKFi8KtH9P7HrV365oKgC4wxXXbQ9towNfbZwh2RVoM48CXsj5B
- +j8HzKE7YaNF8PEAtvSjZs9AenknWw+Opdz+nCxmKaATFdDgZEke2aiqllt3n9B1yHup
- 8oc8KqxWKlOtmtt+n6AqhJTyTlrw3o/b2IA6LgQxViUFn1L1vmG7dnXyXvOfkcjemZIY
- fexc/XcIgBydtqnTBtKeChxBTWM6SDaW/ZQ9n+lJME3j0WPbyA+TJgQ7wz/aBcNbO+Pt
- 38IeXCG9vtA0Zarsy1PZQYV34zqCoddpX+t1aW6/bVVSamAbuTI+ujWQ34wJqoMCeFCc
- 3L0g==
+ d=1e100.net; s=20230601; t=1737821233; x=1738426033;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=HrE30xT1EmuXt0tg0kaHmGrX7iIi1CpOMZL7K4RG6J8=;
+ b=Mv3JWQoDKNntKTeJLkgrStpLGs7GOaAd0qnLs7WEXbODnOyZm/LKqQRnblqZjL2B9L
+ 4hj/FEA3WW4VAYoATP6Mh7UXyjUqKhAPN4iXCVUgesTYHFz8r/ZjOSCUorP++8qCoihg
+ ES5cOXS7QUo2U9/y1/voJ4RfCek0jbYFNY9KnsGMv0ZQZmSTW66EaCuEvrQm+y4OeBEX
+ fG35cfrN5LTF3oH9uBp573+sSUUvMf4i+FY3qlkMxlGqC2FpRUaN1SDfgABABcfhQO6r
+ W6KXT6hRZ4JjoPuaB0HmFJ9eUNgaKsAyv4uP4ySOIaA5EQXnC95AW6EgKKhAPNSEi0Ot
+ /yVg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWgSJZo7Y1V+Q7Rxw4Sxtl3OdEm+x+6g2O0PLQAiH3NNq81a03Fd6fANvWwxThnLaf9+r5U4gPkuMTz@nongnu.org
-X-Gm-Message-State: AOJu0YxqeINiLn9yPRL7we9JFa9+71RlnnI2HLJclUPkeMMuuIhsqBr+
- oZlBDoVbm3djQklKCBHC3BmSQdUWHX8gJugkceeLAdWor1g6y2/CcVHibjXuCPg=
-X-Gm-Gg: ASbGncsYbyGJWM/PwMW7mXK4eDUZKTmOwWSopjEqTU/paTNs6Xuq8X2GyJsNcakZ5Sn
- Fc1Q3ptHxfJTC0UrvgSMhJjD4LRS0u8UovDs1CHvpPHKIzYo6V9TuKVXzTHKhHZy7AQOeuRyYr9
- 6vMGed1AGZ8p1hBbqSSzAaYo4eqO33lPnTDSGr6CBRsEdk5BLXttXfofnxh2r/3ReRp7SrkQ1Gi
- XDeMQ2pND6UoJK8kNXEjTVKXw0Ye8p4X8jeQYT4ZCIVPyIRaiqHA/dtENqm5/jO75736dLI4sdt
- QHlgTvWzcuI7Li32a1vn8CCiNtDHdOYeFjliPOkh5+jTRC2b
-X-Google-Smtp-Source: AGHT+IFUTa6yiieH2+97JGRCM7pOgWWa2duBJ8dPB1EgaVuwSMhss/jpQegG51rDReo5JRFNvSyqvQ==
-X-Received: by 2002:a05:600c:1c86:b0:434:f1bd:1e40 with SMTP id
- 5b1f17b1804b1-438b88511eamr71347785e9.6.1737740509374; 
- Fri, 24 Jan 2025 09:41:49 -0800 (PST)
-Received: from [192.168.69.181] (88-187-86-199.subs.proxad.net.
+ AJvYcCW7y46IurivR6tzhdaaT+vK6qP1dZE0Mw05TGgtH/GE1iaF1PUflZYXnwWXptzKyUfKDeRcCkpfiShu@nongnu.org
+X-Gm-Message-State: AOJu0Yz8t+rQ9omZWcMOytg7tIdiw8w4Sv9a14k7gW10AHxCf3ev5g+b
+ oA3kbAkRjD8zYJAM5RT9yg61QOUiDrc1sRu93dF6jqBJgDGC394ElQqJ+kKsaBc=
+X-Gm-Gg: ASbGncspXexw6c7BVGh9criFRRLpvGwcchxzXL/a8lCMTBYzNwtquKBnmb9YO8InktC
+ rYMHfqh5PnBUw/jLDFG3MQYWfVHCv7kpykQfGOEbMF3G97W1vknt86wV9Fw+Mm8Q5oVYZa5/Hyb
+ 9O4G9hByWfQRNjVEPHnBwYbJtV2pEU4Yus6ycM7sYppBfKCXcjAQrpGgI+Bw9M8QFUCnVU00gEr
+ mICR4feL2Ew++MoGcRhD45uHlU87oDrqrYgT8OPHnRKpVAfrT0aRQGO1GEJWxEYCkfBx4jCthYR
+ YM4ACxfDeJtjHVMGPOw8hODupfPO+YB0xTZtySBN2/BimEYB3Z9+Xp/HraHQ
+X-Google-Smtp-Source: AGHT+IHLhJh2YqNnHE3fSUV3On0ysIelj39LxAbMChPmUDOa62DMFtRr/OpccKkMtbpmSQ1MOKkwaQ==
+X-Received: by 2002:adf:cc90:0:b0:38a:4b8a:e47d with SMTP id
+ ffacd0b85a97d-38bf5674f99mr24452337f8f.26.1737821232905; 
+ Sat, 25 Jan 2025 08:07:12 -0800 (PST)
+Received: from localhost.localdomain (88-187-86-199.subs.proxad.net.
  [88.187.86.199]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-438bd54c0f7sm33208455e9.28.2025.01.24.09.41.48
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 24 Jan 2025 09:41:48 -0800 (PST)
-Message-ID: <3672ec62-191d-4e89-bd99-cc10ef588c0e@linaro.org>
-Date: Fri, 24 Jan 2025 18:41:48 +0100
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 20/28] target/riscv: Move has_work() from CPUClass to
+ ffacd0b85a97d-38c2a1bb02dsm5896988f8f.70.2025.01.25.08.07.12
+ (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
+ Sat, 25 Jan 2025 08:07:12 -0800 (PST)
+From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+To: qemu-devel@nongnu.org
+Cc: Richard Henderson <richard.henderson@linaro.org>,
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
+ qemu-riscv@nongnu.org
+Subject: [PATCH v2 16/24] target/riscv: Move has_work() from CPUClass to
  SysemuCPUOps
-To: Richard Henderson <richard.henderson@linaro.org>, qemu-devel@nongnu.org
-Cc: qemu-arm@nongnu.org, qemu-s390x@nongnu.org, qemu-riscv@nongnu.org,
- qemu-ppc@nongnu.org, Paolo Bonzini <pbonzini@redhat.com>
-References: <20250121142341.17001-1-philmd@linaro.org>
- <20250121142341.17001-21-philmd@linaro.org>
- <0bd61928-5bfc-44c7-8fc7-333f8e2e0b77@linaro.org>
-Content-Language: en-US
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-In-Reply-To: <0bd61928-5bfc-44c7-8fc7-333f8e2e0b77@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Date: Sat, 25 Jan 2025 17:05:44 +0100
+Message-ID: <20250125160552.20546-17-philmd@linaro.org>
+X-Mailer: git-send-email 2.47.1
+In-Reply-To: <20250125160552.20546-1-philmd@linaro.org>
+References: <20250125160552.20546-1-philmd@linaro.org>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::332;
- envelope-from=philmd@linaro.org; helo=mail-wm1-x332.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::436;
+ envelope-from=philmd@linaro.org; helo=mail-wr1-x436.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -104,58 +102,74 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 24/1/25 18:17, Richard Henderson wrote:
-> On 1/21/25 06:23, Philippe Mathieu-Daudé wrote:
->> Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
->> ---
->>   target/riscv/cpu.h       | 9 +++++----
->>   target/riscv/internals.h | 3 ---
->>   target/riscv/cpu.c       | 8 +++-----
->>   3 files changed, 8 insertions(+), 12 deletions(-)
->>
->> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
->> index 97713681cbe..32e8e064f36 100644
->> --- a/target/riscv/cpu.h
->> +++ b/target/riscv/cpu.h
->> @@ -552,10 +552,6 @@ int riscv_cpu_gdb_read_register(CPUState *cpu, 
->> GByteArray *buf, int reg);
->>   int riscv_cpu_gdb_write_register(CPUState *cpu, uint8_t *buf, int reg);
->>   int riscv_cpu_hviprio_index2irq(int index, int *out_irq, int 
->> *out_rdzero);
->>   uint8_t riscv_cpu_default_priority(int irq);
->> -uint64_t riscv_cpu_all_pending(CPURISCVState *env);
->> -int riscv_cpu_mirq_pending(CPURISCVState *env);
->> -int riscv_cpu_sirq_pending(CPURISCVState *env);
->> -int riscv_cpu_vsirq_pending(CPURISCVState *env);
->>   bool riscv_cpu_fp_enabled(CPURISCVState *env);
->>   target_ulong riscv_cpu_get_geilen(CPURISCVState *env);
->>   void riscv_cpu_set_geilen(CPURISCVState *env, target_ulong geilen);
->> @@ -576,6 +572,11 @@ int riscv_cpu_max_xlen(RISCVCPUClass *mcc);
->>   bool riscv_cpu_option_set(const char *optname);
->>   #ifndef CONFIG_USER_ONLY
->> +bool riscv_cpu_has_work(CPUState *cs);
->> +uint64_t riscv_cpu_all_pending(CPURISCVState *env);
->> +int riscv_cpu_mirq_pending(CPURISCVState *env);
->> +int riscv_cpu_sirq_pending(CPURISCVState *env);
->> +int riscv_cpu_vsirq_pending(CPURISCVState *env);
->>   void riscv_cpu_do_interrupt(CPUState *cpu);
->>   void riscv_isa_write_fdt(RISCVCPU *cpu, void *fdt, char *nodename);
->>   void riscv_cpu_do_transaction_failed(CPUState *cs, hwaddr physaddr,
->> diff --git a/target/riscv/internals.h b/target/riscv/internals.h
->> index 67291933f84..86def39aec2 100644
->> --- a/target/riscv/internals.h
->> +++ b/target/riscv/internals.h
->> @@ -142,9 +142,6 @@ static inline float16 check_nanbox_h(CPURISCVState 
->> *env, uint64_t f)
->>       }
->>   }
->> -/* Our implementation of CPUClass::has_work */
->> -bool riscv_cpu_has_work(CPUState *cs);
->> -
-> 
-> Why move the declaration from internals.h to cpu.h?
+Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+---
+Cc: qemu-riscv@nongnu.org
+---
+ target/riscv/internals.h | 4 +++-
+ target/riscv/cpu.c       | 8 +++-----
+ 2 files changed, 6 insertions(+), 6 deletions(-)
 
-I can't see a compelling reason, so I'll keep it there but add
-!CONFIG_USER_ONLY guard.
+diff --git a/target/riscv/internals.h b/target/riscv/internals.h
+index 67291933f84..213aff31d85 100644
+--- a/target/riscv/internals.h
++++ b/target/riscv/internals.h
+@@ -142,8 +142,10 @@ static inline float16 check_nanbox_h(CPURISCVState *env, uint64_t f)
+     }
+ }
+ 
+-/* Our implementation of CPUClass::has_work */
++#ifndef CONFIG_USER_ONLY
++/* Our implementation of SysemuCPUOps::has_work */
+ bool riscv_cpu_has_work(CPUState *cs);
++#endif
+ 
+ /* Zjpm addr masking routine */
+ static inline target_ulong adjust_addr_body(CPURISCVState *env,
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index 3d4bd157d2c..4a7e02d9a99 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -1010,9 +1010,9 @@ static vaddr riscv_cpu_get_pc(CPUState *cs)
+     return env->pc;
+ }
+ 
++#ifndef CONFIG_USER_ONLY
+ bool riscv_cpu_has_work(CPUState *cs)
+ {
+-#ifndef CONFIG_USER_ONLY
+     RISCVCPU *cpu = RISCV_CPU(cs);
+     CPURISCVState *env = &cpu->env;
+     /*
+@@ -1022,10 +1022,8 @@ bool riscv_cpu_has_work(CPUState *cs)
+     return riscv_cpu_all_pending(env) != 0 ||
+         riscv_cpu_sirq_pending(env) != RISCV_EXCP_NONE ||
+         riscv_cpu_vsirq_pending(env) != RISCV_EXCP_NONE;
+-#else
+-    return true;
+-#endif
+ }
++#endif /* !CONFIG_USER_ONLY */
+ 
+ static int riscv_cpu_mmu_index(CPUState *cs, bool ifetch)
+ {
+@@ -2912,6 +2910,7 @@ static int64_t riscv_get_arch_id(CPUState *cs)
+ #include "hw/core/sysemu-cpu-ops.h"
+ 
+ static const struct SysemuCPUOps riscv_sysemu_ops = {
++    .has_work = riscv_cpu_has_work,
+     .get_phys_page_debug = riscv_cpu_get_phys_page_debug,
+     .write_elf64_note = riscv_cpu_write_elf64_note,
+     .write_elf32_note = riscv_cpu_write_elf32_note,
+@@ -2933,7 +2932,6 @@ static void riscv_cpu_common_class_init(ObjectClass *c, void *data)
+                                        &mcc->parent_phases);
+ 
+     cc->class_by_name = riscv_cpu_class_by_name;
+-    cc->has_work = riscv_cpu_has_work;
+     cc->mmu_index = riscv_cpu_mmu_index;
+     cc->dump_state = riscv_cpu_dump_state;
+     cc->set_pc = riscv_cpu_set_pc;
+-- 
+2.47.1
 
 
