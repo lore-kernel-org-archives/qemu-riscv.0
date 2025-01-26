@@ -4,72 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D8A59C0218D
-	for <qemu-riscv@archiver.kernel.org>; Sun, 26 Jan 2025 21:19:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A419CC0218D
+	for <qemu-riscv@archiver.kernel.org>; Sun, 26 Jan 2025 21:22:19 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tcA22-0003UA-Hi; Sun, 26 Jan 2025 16:19:02 -0500
+	id 1tcA4W-0004eI-Ev; Sun, 26 Jan 2025 16:21:36 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1tcA21-0003Sv-6S
- for qemu-riscv@nongnu.org; Sun, 26 Jan 2025 16:19:01 -0500
-Received: from mail-pl1-x62c.google.com ([2607:f8b0:4864:20::62c])
+ id 1tcA4U-0004d5-KS
+ for qemu-riscv@nongnu.org; Sun, 26 Jan 2025 16:21:34 -0500
+Received: from mail-pl1-x62f.google.com ([2607:f8b0:4864:20::62f])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1tcA1y-0008Op-JG
- for qemu-riscv@nongnu.org; Sun, 26 Jan 2025 16:19:00 -0500
-Received: by mail-pl1-x62c.google.com with SMTP id
- d9443c01a7336-2165cb60719so64579375ad.0
- for <qemu-riscv@nongnu.org>; Sun, 26 Jan 2025 13:18:58 -0800 (PST)
+ id 1tcA4T-0000Os-4d
+ for qemu-riscv@nongnu.org; Sun, 26 Jan 2025 16:21:34 -0500
+Received: by mail-pl1-x62f.google.com with SMTP id
+ d9443c01a7336-216401de828so65980845ad.3
+ for <qemu-riscv@nongnu.org>; Sun, 26 Jan 2025 13:21:32 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1737926337; x=1738531137; darn=nongnu.org;
+ d=linaro.org; s=google; t=1737926492; x=1738531292; darn=nongnu.org;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=X+G0ryUleEoZxvXmUvLzmbIUvRMHYbb2l6B2uT5mTT0=;
- b=DOoJznXee6jjCVqD8YDziyoR2w/JMH6M/OizvjC2df43E7+xhnOnIALv6G4when83t
- pO2XxT1ZqRRwNrxsFe67lk/nY11PTnsAzIBxtsUwiM4c3pmWvuIX79fX9834o2IIdrSf
- 6ePVQUlp+LCGm8Gr6IEbKtMNIng192xvS7oQqUSv7JNS7K547smqUNnI8hr1Vp9zr2I8
- J/+z/E16x+XIUcB62WGv6oG3O8r3gURrm64sjjjEadyC4SINj8GYepXJVrFzmVNGDPQR
- 6sL157B6QYdY0QK7nBYf8D0su3o74ynPwaeWpQJ0Ku/EG2YPGi+oTh7a9l4LX7LpuAgs
- DM6A==
+ bh=QYxKemM/xZvwRVD9aoAgaA6gwfgdoNiv4c107IIPZT4=;
+ b=hRCGw3VT7/TqUf0kSQPw7ITJ3jbYlfjN4TvbK7Zze1cgWuZn6N+g6iMb0wprEjnY9E
+ Q8a1hW4MnzZM4Gax2PiUp7hVWCVte2kfUx1HpyLd+JGDH7eZFwKfqFtogn+wrTCcWOgw
+ ZMwFWCS3cSfvQN7hubbgmNQvcaVjuHywvh3L/pJ59eLCNbbu09zt1/9xp26bai7ZalAp
+ aeRTkcugCmIw1AWW/kXBhzd45RpHtyZX/mL7Vyn1CaJRRC4zl3Wz8LjC6PlIpwoHskYS
+ CnKe+VUk/gwzv6kMnzxsBA0FJOXLERWfqCNdRop7LQKEEy4lITXD4nen1H7Hl/cPCwy+
+ EEXA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1737926337; x=1738531137;
+ d=1e100.net; s=20230601; t=1737926492; x=1738531292;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=X+G0ryUleEoZxvXmUvLzmbIUvRMHYbb2l6B2uT5mTT0=;
- b=P57we4y9oMfkF9ggX/oy1ncoU7PdvfFx9VPGGelkf1GiW/AH2c9FpHMq5WdLmfa9kj
- bp9sOSTMkxpCuGGCMn3mgoYtrqMNe+DmohK1hlkCxHEIEXeyAo+WNMbVtFdnR4W1wIKn
- wwl2bxnmaLhFhV/Rrp1tAbRBAtUWAqo6AYxOO31jqpo0tv7Yc16X6M51FZ4scdkRTi4D
- ScnWaHN3ppmzVXSdJx8fDsPKGoiargevWRNcMaXKD3mmZcBAZzXnCSeFhfJzcw0eMam0
- LrrPF/7c02dBjETgVvGCZ7p1v41ry6Y5VTnZvfcUpRElgxLYXy72GKFLujyG02Y0KOSW
- fELg==
+ bh=QYxKemM/xZvwRVD9aoAgaA6gwfgdoNiv4c107IIPZT4=;
+ b=r1AZwEn/24xs4wuR5ZFuda4TnEvn/nbpJhVXFKwPRvbIMS8tGpr7EqGo1bMaBS4jbl
+ kE8Voi5LMv9CCwKPZsVPN8KK05NUZdKlAJH9X6IRI9SLf6NQH7C1w5f2bOz/lDnG6wIr
+ 3vZBJOBNsGdSQOxWl3w2nkYI7WzvARlFX62/TmhV1PlZy+bq7D7w/PvsIFTe3Y2Wy0DY
+ 1wYQ0saq1/4I6sQP7MPpcpKbz5UQ+kcX3iizRD9Wbi0xCsUeEwj1k84wxWgHpG9580hP
+ 1+we1/fqidZHPjugLiilca2C5f7sTmjzCyoEzGzrU99POCttBakwxUSkHFD2MGdGHwzT
+ POCQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVHrNfHUUujHhg5Os2OS/injcyAhXuFDsHaFyEFK/q6Bi04PRhd7LM4CgrWvQAcDXk03KWujFiw5hQl@nongnu.org
-X-Gm-Message-State: AOJu0Yx/llrXmOM7cAPdnLZwFbjwqTvz2cwN5YmCk993BkK2VRB2rJ2S
- rAR78QnWjF67wwUz3UnBy0A44/K7JV/MdFTDJhh96rONbxfo1Ten7f1AOONePj0=
-X-Gm-Gg: ASbGncu1TeEzq5SphvgWmoJZwBIfYc4w74Cp/KyAwas9iyM8mCsXBkHtmNPSDOIw5I5
- 51WRbYUO7MfaRPRFk9dxYxSr9s4QmiHky/UzBmIfV0PK+LzW82mFuFl6cLCqKs/pr6ABT8HGfpb
- ZKNYIAD1bFzIrvfA81xFTPjInT0VGZiy7L4VhyT0fPNA8X4aj8UPctbhETCRhpiPrHyjvIfwJ1d
- 1RQdxQtL4KFBO/JIBkK5hcZkNVZgDIuNrcajBMbsGbltnTxmcILmtCllPyeutVp5zpGZ67bJ8aT
- f/TJ35LsFk1g0cal2Q4w47rvm0nd0kmWMBhII9M6S3siFKPNM65rmVUD2A==
-X-Google-Smtp-Source: AGHT+IFqQ9SrCqtaqHBxnEeUe9wIIgiFAi160abwNWKtJLcX5dR1YlfbX/KbmypQ71AFHncXjFvVWg==
-X-Received: by 2002:a17:902:db0e:b0:215:522d:72d6 with SMTP id
- d9443c01a7336-21c355bae02mr611350715ad.38.1737926336707; 
- Sun, 26 Jan 2025 13:18:56 -0800 (PST)
+ AJvYcCWtPVQEO8s2RouSzFpJeX6vMO1uKqHDAB4opDlsWh4II64Yrr2zN3Zp+ZsDfX2FSY5ggVo4wgeTnzb9@nongnu.org
+X-Gm-Message-State: AOJu0Yy4th4Uzs9AFX7AKWWaD43WiU3FHMYWn4tPkSgMseAhVvFZnvBk
+ ZiRpgLoc1+OAo9pENRx6shcB7ta3U10vvVMrMqT4Mn8EW2GV0QH69k9OXMjh5aA=
+X-Gm-Gg: ASbGncs94BntSaOLUoX47/DZWUEBV10fVoZJVaVIxhN2VcG6PHGqb5WVcPkLLZwipR3
+ NYpdCH8Vb35K0f7dB06uZVLi6UYx7um7Y3EHamfapBmbgxp8w5wdf+Eppby7R8GI8oJd3ndVTAC
+ COyi5h1QN+tYsF88k3MompXA77CZxHmFEfcaGmRp9eg+DHsJWYzOEXPSQABQc74PVByDT0sHis2
+ TjLGY77TPmQMCcPkmOWLPwxOQsyCb5qODji/0phtGr4fU3OHnVIfGtNfO5s9kl9F+vJKIWPhW6z
+ uW94mKt02WElfpo5MFC5DS2Jo1vYI6w6ENyrb94uziUQ4HU=
+X-Google-Smtp-Source: AGHT+IEK/IDwjYTfcGC9vytnhg57Unum7j14HBhQ+TRt9SQk9fY2DLtXa4M3MfHh3b7yHzuy9lAQFA==
+X-Received: by 2002:a17:902:c951:b0:216:5268:9aab with SMTP id
+ d9443c01a7336-21c355e832amr552530105ad.46.1737926491907; 
+ Sun, 26 Jan 2025 13:21:31 -0800 (PST)
 Received: from [192.168.0.4] (174-21-71-127.tukw.qwest.net. [174.21.71.127])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-21da3d9db91sm50141815ad.48.2025.01.26.13.18.55
+ d9443c01a7336-21da4141e2dsm50143635ad.124.2025.01.26.13.21.31
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sun, 26 Jan 2025 13:18:55 -0800 (PST)
-Message-ID: <39ee3338-aa9b-4cdf-a06c-ab25341d3cd2@linaro.org>
-Date: Sun, 26 Jan 2025 13:18:54 -0800
+ Sun, 26 Jan 2025 13:21:31 -0800 (PST)
+Message-ID: <6fcaa7b1-ba43-4a3f-a560-5d05a57cdc7c@linaro.org>
+Date: Sun, 26 Jan 2025 13:21:29 -0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 17/20] cpus: Have cpu_class_init_props() per user / system
+Subject: Re: [PATCH 18/20] cpus: Have cpu_exec_initfn() per user / system
  emulation
 To: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
  qemu-devel@nongnu.org
@@ -80,21 +80,21 @@ Cc: Peter Maydell <peter.maydell@linaro.org>,
  qemu-riscv@nongnu.org, David Hildenbrand <david@redhat.com>,
  qemu-s390x@nongnu.org, xen-devel@lists.xenproject.org
 References: <20250123234415.59850-1-philmd@linaro.org>
- <20250123234415.59850-18-philmd@linaro.org>
+ <20250123234415.59850-19-philmd@linaro.org>
 Content-Language: en-US
 From: Richard Henderson <richard.henderson@linaro.org>
-In-Reply-To: <20250123234415.59850-18-philmd@linaro.org>
+In-Reply-To: <20250123234415.59850-19-philmd@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::62c;
- envelope-from=richard.henderson@linaro.org; helo=mail-pl1-x62c.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::62f;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pl1-x62f.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -111,18 +111,17 @@ Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 On 1/23/25 15:44, Philippe Mathieu-Daudé wrote:
-> Rather than maintaining a mix of system / user code for CPU
-> class properties, move system properties to cpu-system.c
-> and user ones to the new cpu-user.c unit.
+> Slighly simplify cpu-target.c again by extracting cpu_exec_initfn()
+> to cpu-{system,user}.c, adding an empty stub for user emulation.
 > 
 > Signed-off-by: Philippe Mathieu-Daudé<philmd@linaro.org>
 > ---
->   cpu-target.c         | 58 --------------------------------------------
->   hw/core/cpu-system.c | 40 ++++++++++++++++++++++++++++++
->   hw/core/cpu-user.c   | 27 +++++++++++++++++++++
->   hw/core/meson.build  |  5 +++-
->   4 files changed, 71 insertions(+), 59 deletions(-)
->   create mode 100644 hw/core/cpu-user.c
+> Good enough for now...
+> ---
+>   cpu-target.c         | 9 ---------
+>   hw/core/cpu-system.c | 7 +++++++
+>   hw/core/cpu-user.c   | 5 +++++
+>   3 files changed, 12 insertions(+), 9 deletions(-)
 
 Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 
