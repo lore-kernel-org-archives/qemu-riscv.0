@@ -4,66 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 446F3C02181
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9CDE7C0218E
 	for <qemu-riscv@archiver.kernel.org>; Sun, 26 Jan 2025 07:24:28 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tbwyQ-00058p-Vv; Sun, 26 Jan 2025 02:22:27 -0500
+	id 1tbwyV-0005CJ-NM; Sun, 26 Jan 2025 02:22:31 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <antonb@tenstorrent.com>)
- id 1tbwyI-00054C-7S
- for qemu-riscv@nongnu.org; Sun, 26 Jan 2025 02:22:18 -0500
-Received: from mail-oa1-x2f.google.com ([2001:4860:4864:20::2f])
+ id 1tbwyN-00056v-Jf
+ for qemu-riscv@nongnu.org; Sun, 26 Jan 2025 02:22:24 -0500
+Received: from mail-oa1-x2c.google.com ([2001:4860:4864:20::2c])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <antonb@tenstorrent.com>)
- id 1tbwyG-0004Ih-CN
- for qemu-riscv@nongnu.org; Sun, 26 Jan 2025 02:22:17 -0500
-Received: by mail-oa1-x2f.google.com with SMTP id
- 586e51a60fabf-29f7b5fbc9aso1208324fac.3
- for <qemu-riscv@nongnu.org>; Sat, 25 Jan 2025 23:22:15 -0800 (PST)
+ id 1tbwyK-0004Lk-Rf
+ for qemu-riscv@nongnu.org; Sun, 26 Jan 2025 02:22:22 -0500
+Received: by mail-oa1-x2c.google.com with SMTP id
+ 586e51a60fabf-2addd5053c0so1874253fac.1
+ for <qemu-riscv@nongnu.org>; Sat, 25 Jan 2025 23:22:20 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=tenstorrent.com; s=google; t=1737876135; x=1738480935; darn=nongnu.org;
+ d=tenstorrent.com; s=google; t=1737876139; x=1738480939; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=eQFjdJhNxka24LT0P5MCvvpngkXU4jPKMvtCsHELutA=;
- b=haHTllrqvGKORcLj3rwMlXrpO2qlY/fvRcWAA4b/6ae/Sn0AD0xmYvTk983HRTzkVz
- K9kq1uq2ZL1JtK1itUDPlt06bj0zQRAxaWM6MHXtR82q9Y9viaT5GbHAYUZakJ1I+kFf
- 1fk00hKmubBRaJbJNS38eiMGfn2xcF/ewsqv+FFO5/NJ40itYDdYYXtTZlkNkOZP3Wl9
- rq4N400GGuy5H3URydtSPYVMNQc10yMGLy8GIgPufw0uL8XEzihTLJq7cKU8aKMUIDzq
- NxC2Y6+ELjeJzUbKE5z0J6ckMfoNBxZNmKqNEhTNz9enGv/QR2ntkGMNeWIJEWH/gf4o
- x8Ig==
+ bh=syG75RGOgTx5HelHgSXbA5JdmQr+MnA04/L5PwImB2c=;
+ b=F3BgYyB4Dpm6bbmRZFbG8KkYpNkJk+BqFIwWuR7XsT9mBbmKtnwNBsZYieYY5rKX5V
+ MUxIBqRAvx5yibJxBg27zy/uTjWRS8AEGze72zPeDvKLQDJUC3kj7+XMu0nlvi7u3/lD
+ DdadIYLUqZymytK9NfLMh6AwjCMES15xGrogPFNhVVZefFJHRf1pnj60KIlxRSAbRwqd
+ 6UovBHLQ+ec77AH2wc7XN5HRZcMqOjn9Xgmo8lna+pUEiFCpdCfRt7TQu8CSCrIMuwCb
+ gL+bnpf+xA0a1NtvKzVkm1yiS1B1wEKFixoeJW3vfZgFqk1MsSxa/gLJXmqyCmkIxxB7
+ jKyg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1737876135; x=1738480935;
+ d=1e100.net; s=20230601; t=1737876139; x=1738480939;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=eQFjdJhNxka24LT0P5MCvvpngkXU4jPKMvtCsHELutA=;
- b=K5kzpqO2WQz2K5KghuWuu5IpHXHvFVdmJnraoBiO8T8SIJKtzROz4GW1WhMliRxfDh
- 9POiQxjFPIy4PWOsR6nVTLV3QKeLoq4ay8e8t0z+mITNVAKh3KRx/8JTGZ7qw0tW4+3+
- WKcNYRkmU9Q2daUR0rbQc4kbxt/amooPKVcSu2I2pYKHtHBbTeqVD0rrNsksKvTdL6oB
- fEw6/jm8Pu2FYVRzjGRoEC3BVPY/K0vIyaTf1mBDj7A/VZrBeOO/NcQO17WtQTI0/7fF
- E4KUVrmO5kfqvO4K/+0CfE0Wgn68HLaWETU3+K8JXd/1JkVCoVc4k5uaAsFY1hnAwtJZ
- SjgQ==
-X-Gm-Message-State: AOJu0YxzNVJ9IfCciNCTMeh+nlYSP4LcV2ENO84T3j9DAIVJ3anJxZuM
- zoFZMb/4hvZmdq+OsQex/yD6exllgk0CEvH3bBrEYsKnAai/DCRIAo+kNQZmNjp2VmtZZWJtWcF
- e1wFiVQ==
-X-Gm-Gg: ASbGncuopCp4Y45P0Glbx18bHMK3bhgksRtcGlupYL1dBjBOkpDKmmKCMJAF8DGBksj
- Rn0rmoI6xLugPMzG5AjATOP4zev1xOVUTz08IzbEzg0sJbfvETh6bnUp1/DORzBf4F1uRhSutjK
- xe2+i1ZjIue+UXi3mEu1HazMyPPKuGXfxAL/+l57xYz50m+pyP7yLBclEqBPoeLaXj7KToNILCO
- FPC5fM+Vul1R07MN9mJIQMp8YjZ9L6JTjg+B/lyh3HI8paSkpmbvTn2A49Ji/DMNSOCTZuBnXKc
- hGrHZAw00LfKWcKRfRFFd7ly3uq5FMfSBWusr+k=
-X-Google-Smtp-Source: AGHT+IFNxCoxaEc9cmrHKIONIz8BXh3QQdX/HFAolL00O2ACI5iPu46p4s5HLYyJwujoAWJpjuU3Jw==
-X-Received: by 2002:a05:6870:2f14:b0:29e:353b:8f25 with SMTP id
- 586e51a60fabf-2b1c0a29375mr18010054fac.12.1737876135003; 
- Sat, 25 Jan 2025 23:22:15 -0800 (PST)
+ bh=syG75RGOgTx5HelHgSXbA5JdmQr+MnA04/L5PwImB2c=;
+ b=psSC0FH64OT6i9JFYsX7jk38YHOcYNhNBtBprqttqplIOy98jWaoLrUzUG9H2+f2vn
+ B50gFMi57r7oRfvbOBSVyJnX7CH5UO6wOQHsZTJZ46TkE0W1Lr1AxvxtxPZr0CrrAAk9
+ EFAKQ9et8Ss0MfsagDCmR12KNdsxcKNxvq32jVceAKpfnyxMQ2+wFK60buUrPzActTuR
+ nHjitR7k82nEFa/jOfHGx2aF3R0dk0QX3b3L1awNr4y8XDHNRQiqt5Qo2qVPBEwD4JAn
+ gCT3pNdVH9FQd4u3kDksiT2Rt1NXdiYCkSRwIGYUBDbGKAFaVmDAZrBqZ1n97jDRJdBH
+ Gu+w==
+X-Gm-Message-State: AOJu0Yxq06418CxxmPApC3aNvEqaL1Rp8cn3D3L67vnWokbK4lu/4QO5
+ 4Ikydfe/oBFx6qjNetUDoTpcSaL0GMhtS/XGYj28jpZEuHTpo4XWfXSB9ttwuiJwxYADfrlTQyD
+ R2usENg==
+X-Gm-Gg: ASbGncvkMKHo8I/6ZeIFQNwdrDNdCpsnlPqE0Tv+8tpDG+tfKgW3VIRDEXL+mvnjDwr
+ ly3XTeWtEMP2dn7udtC3/CkVeq1gtunJVhfSIqrrTJ6Zetfe4zlHLt6tJYDEpOiPczWNCGw3rQU
+ S8sjN0pcXhvJki2cf4Sjue9CZPhJrM9rP62BK7f+IChXTokE7BRFq2aHzHq6bAds1AHnSSmSWrl
+ 7OJ6JzKA+xGYD8JLbThOofcdvop0jz1m/orrgGGeitWUprsMUDsyJabUO/CfGLUWeHWfs2fSKXe
+ JXXjEqzlCpouOMb9VVwaaKWneWr3P/FwSQbjx3QhGoAZzS0W3w==
+X-Google-Smtp-Source: AGHT+IEvFjjt3Biv6lexHmdsgnDgIbtAfLY+IE2fqpn0uGZuav8odDy0o2FhhqaH61OfWqCgb8Qkbg==
+X-Received: by 2002:a05:6871:7a84:b0:29e:6394:fd4a with SMTP id
+ 586e51a60fabf-2b1c08446cemr21835940fac.2.1737876139474; 
+ Sat, 25 Jan 2025 23:22:19 -0800 (PST)
 Received: from ausc-rvsw-c-01-anton.tenstorrent.com ([38.104.49.66])
  by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-2b28f1d887csm1814281fac.29.2025.01.25.23.22.14
+ 586e51a60fabf-2b28f1d887csm1814281fac.29.2025.01.25.23.22.18
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 25 Jan 2025 23:22:14 -0800 (PST)
+ Sat, 25 Jan 2025 23:22:19 -0800 (PST)
 From: Anton Blanchard <antonb@tenstorrent.com>
 To: qemu-riscv@nongnu.org,
 	qemu-devel@nongnu.org
@@ -73,24 +73,23 @@ Cc: Anton Blanchard <antonb@tenstorrent.com>,
  Weiwei Li <liwei1518@gmail.com>,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
  Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
-Subject: [PATCH 06/12] target/riscv: handle vzext.vf2 form mask and source
- overlap
-Date: Sun, 26 Jan 2025 07:20:50 +0000
-Message-Id: <20250126072056.4004912-7-antonb@tenstorrent.com>
+Subject: [PATCH 11/12] target/riscv: Add CHECK arg to GEN_OPFVF_WIDEN_TRANS
+Date: Sun, 26 Jan 2025 07:20:55 +0000
+Message-Id: <20250126072056.4004912-12-antonb@tenstorrent.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20250126072056.4004912-1-antonb@tenstorrent.com>
 References: <20250126072056.4004912-1-antonb@tenstorrent.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2001:4860:4864:20::2f;
- envelope-from=antonb@tenstorrent.com; helo=mail-oa1-x2f.google.com
+Received-SPF: pass client-ip=2001:4860:4864:20::2c;
+ envelope-from=antonb@tenstorrent.com; helo=mail-oa1-x2c.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -108,21 +107,61 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 Signed-off-by: Anton Blanchard <antonb@tenstorrent.com>
 ---
- target/riscv/insn_trans/trans_rvv.c.inc | 1 +
- 1 file changed, 1 insertion(+)
+ target/riscv/insn_trans/trans_rvv.c.inc | 18 +++++++++---------
+ 1 file changed, 9 insertions(+), 9 deletions(-)
 
 diff --git a/target/riscv/insn_trans/trans_rvv.c.inc b/target/riscv/insn_trans/trans_rvv.c.inc
-index a873536eea..0952bcbe2c 100644
+index 312d8b1b81..2741f8bd8e 100644
 --- a/target/riscv/insn_trans/trans_rvv.c.inc
 +++ b/target/riscv/insn_trans/trans_rvv.c.inc
-@@ -3631,6 +3631,7 @@ static bool int_ext_check(DisasContext *s, arg_rmr *a, uint8_t div)
-         require_align(a->rd, s->lmul) &&
-         require_align(a->rs2, s->lmul - div) &&
-         require_vm(a->vm, a->rd) &&
-+        require_vm(a->vm, a->rs2) &&
-         require_noover(a->rd, s->lmul, a->rs2, s->lmul - div);
-     return ret;
+@@ -2410,10 +2410,10 @@ static bool opfvf_widen_check(DisasContext *s, arg_rmrr *a)
  }
+ 
+ /* OPFVF with WIDEN */
+-#define GEN_OPFVF_WIDEN_TRANS(NAME)                              \
++#define GEN_OPFVF_WIDEN_TRANS(NAME, CHECK)                       \
+ static bool trans_##NAME(DisasContext *s, arg_rmrr *a)           \
+ {                                                                \
+-    if (opfvf_widen_check(s, a)) {                               \
++    if (CHECK(s, a)) {                                           \
+         uint32_t data = 0;                                       \
+         static gen_helper_opfvf *const fns[2] = {                \
+             gen_helper_##NAME##_h, gen_helper_##NAME##_w,        \
+@@ -2429,8 +2429,8 @@ static bool trans_##NAME(DisasContext *s, arg_rmrr *a)           \
+     return false;                                                \
+ }
+ 
+-GEN_OPFVF_WIDEN_TRANS(vfwadd_vf)
+-GEN_OPFVF_WIDEN_TRANS(vfwsub_vf)
++GEN_OPFVF_WIDEN_TRANS(vfwadd_vf, opfvf_widen_check)
++GEN_OPFVF_WIDEN_TRANS(vfwsub_vf, opfvf_widen_check)
+ 
+ static bool opfwv_widen_check(DisasContext *s, arg_rmrr *a)
+ {
+@@ -2512,7 +2512,7 @@ GEN_OPFVF_TRANS(vfrdiv_vf,  opfvf_check)
+ 
+ /* Vector Widening Floating-Point Multiply */
+ GEN_OPFVV_WIDEN_TRANS(vfwmul_vv, opfvv_widen_check)
+-GEN_OPFVF_WIDEN_TRANS(vfwmul_vf)
++GEN_OPFVF_WIDEN_TRANS(vfwmul_vf, opfvf_widen_check)
+ 
+ /* Vector Single-Width Floating-Point Fused Multiply-Add Instructions */
+ GEN_OPFVV_TRANS(vfmacc_vv, opfvv_check)
+@@ -2537,10 +2537,10 @@ GEN_OPFVV_WIDEN_TRANS(vfwmacc_vv, opfvv_widen_check)
+ GEN_OPFVV_WIDEN_TRANS(vfwnmacc_vv, opfvv_widen_check)
+ GEN_OPFVV_WIDEN_TRANS(vfwmsac_vv, opfvv_widen_check)
+ GEN_OPFVV_WIDEN_TRANS(vfwnmsac_vv, opfvv_widen_check)
+-GEN_OPFVF_WIDEN_TRANS(vfwmacc_vf)
+-GEN_OPFVF_WIDEN_TRANS(vfwnmacc_vf)
+-GEN_OPFVF_WIDEN_TRANS(vfwmsac_vf)
+-GEN_OPFVF_WIDEN_TRANS(vfwnmsac_vf)
++GEN_OPFVF_WIDEN_TRANS(vfwmacc_vf, opfvf_widen_check)
++GEN_OPFVF_WIDEN_TRANS(vfwnmacc_vf, opfvf_widen_check)
++GEN_OPFVF_WIDEN_TRANS(vfwmsac_vf, opfvf_widen_check)
++GEN_OPFVF_WIDEN_TRANS(vfwnmsac_vf, opfvf_widen_check)
+ 
+ /* Vector Floating-Point Square-Root Instruction */
+ 
 -- 
 2.34.1
 
