@@ -4,83 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D8596C0218C
-	for <qemu-riscv@archiver.kernel.org>; Sat, 25 Jan 2025 17:05:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 56A09C02181
+	for <qemu-riscv@archiver.kernel.org>; Sun, 26 Jan 2025 07:22:59 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tbjZo-0001rj-VN; Sat, 25 Jan 2025 12:04:14 -0500
+	id 1tbwyY-0005DX-Ei; Sun, 26 Jan 2025 02:22:34 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tbjYW-0000H6-Bo
- for qemu-riscv@nongnu.org; Sat, 25 Jan 2025 12:02:48 -0500
-Received: from mail-wm1-x332.google.com ([2a00:1450:4864:20::332])
+ (Exim 4.90_1) (envelope-from <antonb@tenstorrent.com>)
+ id 1tbwyN-00056w-Jf
+ for qemu-riscv@nongnu.org; Sun, 26 Jan 2025 02:22:24 -0500
+Received: from mail-oo1-xc33.google.com ([2607:f8b0:4864:20::c33])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tbjYU-0000Yn-Da
- for qemu-riscv@nongnu.org; Sat, 25 Jan 2025 12:02:47 -0500
-Received: by mail-wm1-x332.google.com with SMTP id
- 5b1f17b1804b1-43626213fffso26490795e9.1
- for <qemu-riscv@nongnu.org>; Sat, 25 Jan 2025 09:02:46 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <antonb@tenstorrent.com>)
+ id 1tbwyL-0004MB-Lb
+ for qemu-riscv@nongnu.org; Sun, 26 Jan 2025 02:22:23 -0500
+Received: by mail-oo1-xc33.google.com with SMTP id
+ 006d021491bc7-5fa3714d4bbso1623926eaf.1
+ for <qemu-riscv@nongnu.org>; Sat, 25 Jan 2025 23:22:21 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1737824565; x=1738429365; darn=nongnu.org;
+ d=tenstorrent.com; s=google; t=1737876140; x=1738480940; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=HrE30xT1EmuXt0tg0kaHmGrX7iIi1CpOMZL7K4RG6J8=;
- b=vjNJXPia0PUsFanBpDmNz+UZKsSYPHKz9tMycJahgLJwn50yPOeuR/RPegF4zWzsyu
- 1TRVwtKTonjZbYrCJvh+N3bxOhEb74g/bVdbFjmGcreHeaf7PKijJ8riqiBE9bHP6+sp
- updK4CX+X3PZVeY7PMSi2MWa004N/bbgbuRvOSBUAC1L7NBxpNoU/3jsQLIEDd/YiObO
- i9mio596nmoLYCKI4Rtk4IOXYYvizDd/OpWKGHdSOXpMJtxHXGi7ceiJTbfHhLimsurg
- SYIUNi1EN608wMSd6g75PxSC/nM223b+46c23GOe0frghu3xo7ZhRFYTzjxs879+pPXq
- 8P+w==
+ bh=uz1MxGS/m+B7rusrD5nYn9e+LaPbU4UbVw6Vgl0czKA=;
+ b=XbX9BElYP2N5hVEwYD4Ev7bPGgR7GhQbzDpwXQeKptAkup4wzA0wENl+zIaP56Cuul
+ k1dRpGx6d8SGkoLQltzdQLVx0YAUGeFzyi2DpScrHsvQRA7hczA0lx0YvMSDXA3vRcAV
+ EYbp/rPKt5InS08sqNBnTHAENVnSgUtEFCR1pqd5e7+ZuKtJqXDaWKCEPT2PbgoPi0x8
+ QA5F8F6v0VtJGizzyGSO0AwU5QDF0tf/ldmkKH9b5ahKuZv0EKdLrTLXCGDgFtr2h2fX
+ Q3BhehfwAAIDjYfScMeeGVjw4oG22fAPyNzJ7HvkR7VeXJ6MguNySQ3Wys7uiRgrm3H7
+ N7aQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1737824565; x=1738429365;
+ d=1e100.net; s=20230601; t=1737876140; x=1738480940;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=HrE30xT1EmuXt0tg0kaHmGrX7iIi1CpOMZL7K4RG6J8=;
- b=rww2XGbH5z2PCdtLXd8kYyFf2d+W59k3JjggfdQ68ll7Bf4+9zzTpKeyCEade7tL9Q
- IeGSQQ+yPTkYEw04mmR3/pxRagjEUqwF6iHI/TbpfbRqSGqrZehF4XeEEqU+9F2bF9uD
- uYo3M7YJDbMHbrMLpKUqBHmM3Nw75ucokqDDfSMUbjmcEoLMiBt91BmZ9nVGqghFrVbZ
- DKj50NrpCSoLiEWBJkCs8ffh9YldoqUPR2v8w87KRB6pDZAGjKGuBCgpjKFDLBBdsc4I
- 4VpbXEHickbbEUTpZ27IAZqkrojftlPOaAVYTUxee9W8bTMfcpcicc9mwZ17xq282+Ey
- RNIA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCW4ziYvuk4kzRu2T5+VzonAnXuIg7O+9JwF4hrJDtKO564eM6FUjBO85bfoZtExwfmrRbuEQN7adlGd@nongnu.org
-X-Gm-Message-State: AOJu0YzR7asHMQ0J2M86iIM27hmSjfJFSgEBV0dt0YC3gIu235o/5gei
- A1QqrKa6OaKc7C7+qnf/K9KPsUaLVolzEj5bynA0/4reXGRUB2trwMmV7bS44pXNeKjDYsbBK41
- sgUg=
-X-Gm-Gg: ASbGncvvyswWuZ/Yvl+84WDACaJzx6SA54nUb2Gnp7GcqTcB+5AYDabJ2NFW1//Im+S
- SpRrxEL6Jst9E5kkYuf30D4+xM9VOYpdEIsyDtCIXoUoqPAv7h+EJwPxZxsYt+Fr7phJynJ7fc4
- uA/bj3wQtUwgu8fM1MBC8F5XEp+W2dl//sGvBorgnvjZUR3Fbxq97MmgZWu3MVfVH/1fDnL9YY0
- 4KE8YmobXj/y3207VXlf6fbkMKWsjLceKLbmG/7tUkF2smjjTpsBclDRHjTDvF6UMZPY6PBjyQ8
- dmiXnAD/IEljLTpkqpaXretFnEEJIz7rsTIzBu3amW8Z3S6QiJNYhcE=
-X-Google-Smtp-Source: AGHT+IGNlyMXuaDnUDXdIELsE09/c/dVV0EjyQ3SCl8iTpsNtU2qcoEuigRn83q15WyThjIkwbVgaw==
-X-Received: by 2002:a05:6000:d09:b0:38a:88d0:1c9c with SMTP id
- ffacd0b85a97d-38c22275430mr9605028f8f.17.1737824564866; 
- Sat, 25 Jan 2025 09:02:44 -0800 (PST)
-Received: from localhost.localdomain (88-187-86-199.subs.proxad.net.
- [88.187.86.199]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-38c2a1c4199sm5861138f8f.89.2025.01.25.09.02.44
- (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Sat, 25 Jan 2025 09:02:44 -0800 (PST)
-From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-To: qemu-devel@nongnu.org
-Cc: Richard Henderson <richard.henderson@linaro.org>,
- =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- qemu-riscv@nongnu.org
-Subject: [PATCH v3 16/24] target/riscv: Move has_work() from CPUClass to
- SysemuCPUOps
-Date: Sat, 25 Jan 2025 18:01:17 +0100
-Message-ID: <20250125170125.32855-17-philmd@linaro.org>
-X-Mailer: git-send-email 2.47.1
-In-Reply-To: <20250125170125.32855-1-philmd@linaro.org>
-References: <20250125170125.32855-1-philmd@linaro.org>
+ bh=uz1MxGS/m+B7rusrD5nYn9e+LaPbU4UbVw6Vgl0czKA=;
+ b=HQyBfCZwuDusL4P1XuIbvXRbZRIuxgthTzIi1sWXD+njBNDo/Hxg6XNyVucG67EeWZ
+ Mexkt0fNgY6WCjhS8FR3EzjPCNZE7kj+dk+UjRvUZtCZvAdkAUq5bPxmKph8doMRQc/+
+ d1akTgY6eOwwuiA8G07Y+U3BKqExR4Y78BNsgW9w07prNpFF7p0A8lJxT0cKLSzr3OBR
+ 1CrwbQLPBTORPwjF43v0az8C1Wflb5JoAPBrpMAHio7J0fV/1Esh4nbvyGAlplzhBmes
+ jgm8vK3r/vCtDuf28eNPnE1cWoMDIcwxZV2T+LpjUkDlaL5zQtDBi3OMMX3kWPHsykkb
+ PPFA==
+X-Gm-Message-State: AOJu0YztBGqnrYGepHFSuor5H3CFG2Ro17YTL/VOAsWi3r+Yl1mQmapi
+ o26V81ea9a5GOFEUG8zhqIV4aIAJ6EvrK8/VWv0n5QIa8haqzskiCobawZaZhJoQwFhiFuFjRZr
+ EKU2/SA==
+X-Gm-Gg: ASbGncvdVbXSlK/cFI4L8Q8vOAwvefQzrpOmWxElNFNawwZ0Oku3f6HOKamyGcE9jGk
+ V4aZo3A5jpPMbOFG+G9wFvht3fNOVvbsQpoYgKGqO+SlrHIqseOHbh6/gF8CyFSyr/PhKIGe5QG
+ l37Mk5RFmIx+hEzNYqxXSQdtOIQXrsxUTERWu8EdE/0NR8+ZNwoFfsl+dtfnyBHefjlCyFbUgWG
+ kISrzBYXOSQ0wPuS/d1dwpnZLBirdhVGu71+y+kCj7+CFAq4imiYn8jjUJIk1mSsfNI4mcpj8WO
+ UmNG+dYaJNjLZ/FsdxxvurmOQJ+C0kM9vPxhSxw=
+X-Google-Smtp-Source: AGHT+IFW2fL7Au6aeZykeUHYJRJwUwLndMczM9WYpgKLQ444g/Qsy9LHosf9+ZLMCPLuGMOMu//Ilg==
+X-Received: by 2002:a05:6871:10b:b0:29d:c832:7ef6 with SMTP id
+ 586e51a60fabf-2b1c0cddb72mr19774250fac.39.1737876140434; 
+ Sat, 25 Jan 2025 23:22:20 -0800 (PST)
+Received: from ausc-rvsw-c-01-anton.tenstorrent.com ([38.104.49.66])
+ by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-2b28f1d887csm1814281fac.29.2025.01.25.23.22.19
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sat, 25 Jan 2025 23:22:20 -0800 (PST)
+From: Anton Blanchard <antonb@tenstorrent.com>
+To: qemu-riscv@nongnu.org,
+	qemu-devel@nongnu.org
+Cc: Anton Blanchard <antonb@tenstorrent.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bmeng.cn@gmail.com>,
+ Weiwei Li <liwei1518@gmail.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
+Subject: [PATCH 12/12] target/riscv: handle overlap in widening instructions
+ with overwrite
+Date: Sun, 26 Jan 2025 07:20:56 +0000
+Message-Id: <20250126072056.4004912-13-antonb@tenstorrent.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20250126072056.4004912-1-antonb@tenstorrent.com>
+References: <20250126072056.4004912-1-antonb@tenstorrent.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::332;
- envelope-from=philmd@linaro.org; helo=mail-wm1-x332.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::c33;
+ envelope-from=antonb@tenstorrent.com; helo=mail-oo1-xc33.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -103,74 +106,134 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
----
-Cc: qemu-riscv@nongnu.org
----
- target/riscv/internals.h | 4 +++-
- target/riscv/cpu.c       | 8 +++-----
- 2 files changed, 6 insertions(+), 6 deletions(-)
+In these instructions vd is considered a source, so no overlap
+is allowed between vd and vs1/vs2. See:
 
-diff --git a/target/riscv/internals.h b/target/riscv/internals.h
-index 67291933f84..213aff31d85 100644
---- a/target/riscv/internals.h
-+++ b/target/riscv/internals.h
-@@ -142,8 +142,10 @@ static inline float16 check_nanbox_h(CPURISCVState *env, uint64_t f)
-     }
+https://github.com/riscv/riscv-isa-manual/issues/1789
+
+Signed-off-by: Anton Blanchard <antonb@tenstorrent.com>
+---
+ target/riscv/insn_trans/trans_rvv.c.inc | 71 +++++++++++++++++++------
+ 1 file changed, 56 insertions(+), 15 deletions(-)
+
+diff --git a/target/riscv/insn_trans/trans_rvv.c.inc b/target/riscv/insn_trans/trans_rvv.c.inc
+index 2741f8bd8e..715008db79 100644
+--- a/target/riscv/insn_trans/trans_rvv.c.inc
++++ b/target/riscv/insn_trans/trans_rvv.c.inc
+@@ -1505,6 +1505,16 @@ static bool opivv_widen_check(DisasContext *s, arg_rmrr *a)
+            vext_check_dss(s, a->rd, a->rs1, a->rs2, a->vm);
  }
  
--/* Our implementation of CPUClass::has_work */
-+#ifndef CONFIG_USER_ONLY
-+/* Our implementation of SysemuCPUOps::has_work */
- bool riscv_cpu_has_work(CPUState *cs);
-+#endif
- 
- /* Zjpm addr masking routine */
- static inline target_ulong adjust_addr_body(CPURISCVState *env,
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 3d4bd157d2c..4a7e02d9a99 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -1010,9 +1010,9 @@ static vaddr riscv_cpu_get_pc(CPUState *cs)
-     return env->pc;
++/* OPIVV with overwrite and WIDEN */
++static bool opivv_overwrite_widen_check(DisasContext *s, arg_rmrr *a)
++{
++    return require_rvv(s) &&
++           vext_check_isa_ill(s) &&
++           vext_check_dss(s, a->rd, a->rs1, a->rs2, a->vm) &&
++           !is_overlapped(a->rd, 1 << MAX(s->lmul+1, 0), a->rs1, 1 << MAX(s->lmul, 0)) &&
++           !is_overlapped(a->rd, 1 << MAX(s->lmul+1, 0), a->rs2, 1 << MAX(s->lmul, 0));
++}
++
+ static bool do_opivv_widen(DisasContext *s, arg_rmrr *a,
+                            gen_helper_gvec_4_ptr *fn,
+                            bool (*checkfn)(DisasContext *, arg_rmrr *))
+@@ -1552,6 +1562,15 @@ static bool opivx_widen_check(DisasContext *s, arg_rmrr *a)
+            vext_check_ds(s, a->rd, a->rs2, a->vm);
  }
  
-+#ifndef CONFIG_USER_ONLY
- bool riscv_cpu_has_work(CPUState *cs)
- {
--#ifndef CONFIG_USER_ONLY
-     RISCVCPU *cpu = RISCV_CPU(cs);
-     CPURISCVState *env = &cpu->env;
-     /*
-@@ -1022,10 +1022,8 @@ bool riscv_cpu_has_work(CPUState *cs)
-     return riscv_cpu_all_pending(env) != 0 ||
-         riscv_cpu_sirq_pending(env) != RISCV_EXCP_NONE ||
-         riscv_cpu_vsirq_pending(env) != RISCV_EXCP_NONE;
--#else
--    return true;
--#endif
++/* OPIVX with overwrite and WIDEN */
++static bool opivx_overwrite_widen_check(DisasContext *s, arg_rmrr *a)
++{
++    return require_rvv(s) &&
++           vext_check_isa_ill(s) &&
++           vext_check_ds(s, a->rd, a->rs2, a->vm) &&
++           !is_overlapped(a->rd, 1 << MAX(s->lmul+1, 0), a->rs2, 1 << MAX(s->lmul, 0));
++}
++
+ #define GEN_OPIVX_WIDEN_TRANS(NAME, CHECK) \
+ static bool trans_##NAME(DisasContext *s, arg_rmrr *a)                    \
+ {                                                                         \
+@@ -2023,13 +2042,13 @@ GEN_OPIVX_TRANS(vmadd_vx, opivx_check)
+ GEN_OPIVX_TRANS(vnmsub_vx, opivx_check)
+ 
+ /* Vector Widening Integer Multiply-Add Instructions */
+-GEN_OPIVV_WIDEN_TRANS(vwmaccu_vv, opivv_widen_check)
+-GEN_OPIVV_WIDEN_TRANS(vwmacc_vv, opivv_widen_check)
+-GEN_OPIVV_WIDEN_TRANS(vwmaccsu_vv, opivv_widen_check)
+-GEN_OPIVX_WIDEN_TRANS(vwmaccu_vx, opivx_widen_check)
+-GEN_OPIVX_WIDEN_TRANS(vwmacc_vx, opivx_widen_check)
+-GEN_OPIVX_WIDEN_TRANS(vwmaccsu_vx, opivx_widen_check)
+-GEN_OPIVX_WIDEN_TRANS(vwmaccus_vx, opivx_widen_check)
++GEN_OPIVV_WIDEN_TRANS(vwmaccu_vv, opivv_overwrite_widen_check)
++GEN_OPIVV_WIDEN_TRANS(vwmacc_vv, opivv_overwrite_widen_check)
++GEN_OPIVV_WIDEN_TRANS(vwmaccsu_vv, opivv_overwrite_widen_check)
++GEN_OPIVX_WIDEN_TRANS(vwmaccu_vx, opivx_overwrite_widen_check)
++GEN_OPIVX_WIDEN_TRANS(vwmacc_vx, opivx_overwrite_widen_check)
++GEN_OPIVX_WIDEN_TRANS(vwmaccsu_vx, opivx_overwrite_widen_check)
++GEN_OPIVX_WIDEN_TRANS(vwmaccus_vx, opivx_overwrite_widen_check)
+ 
+ /* Vector Integer Merge and Move Instructions */
+ static bool trans_vmv_v_v(DisasContext *s, arg_vmv_v_v *a)
+@@ -2370,6 +2389,18 @@ static bool opfvv_widen_check(DisasContext *s, arg_rmrr *a)
+            vext_check_dss(s, a->rd, a->rs1, a->rs2, a->vm);
  }
-+#endif /* !CONFIG_USER_ONLY */
  
- static int riscv_cpu_mmu_index(CPUState *cs, bool ifetch)
- {
-@@ -2912,6 +2910,7 @@ static int64_t riscv_get_arch_id(CPUState *cs)
- #include "hw/core/sysemu-cpu-ops.h"
++/* Vector Widening Floating-Point Add/Subtract Instructions with overwrite */
++static bool opfvv_overwrite_widen_check(DisasContext *s, arg_rmrr *a)
++{
++    return require_rvv(s) &&
++           require_rvf(s) &&
++           require_scale_rvf(s) &&
++           vext_check_isa_ill(s) &&
++           vext_check_dss(s, a->rd, a->rs1, a->rs2, a->vm) &&
++           !is_overlapped(a->rd, 1 << MAX(s->lmul+1, 0), a->rs1, 1 << MAX(s->lmul, 0)) &&
++           !is_overlapped(a->rd, 1 << MAX(s->lmul+1, 0), a->rs2, 1 << MAX(s->lmul, 0));
++}
++
+ /* OPFVV with WIDEN */
+ #define GEN_OPFVV_WIDEN_TRANS(NAME, CHECK)                       \
+ static bool trans_##NAME(DisasContext *s, arg_rmrr *a)           \
+@@ -2409,6 +2440,16 @@ static bool opfvf_widen_check(DisasContext *s, arg_rmrr *a)
+            vext_check_ds(s, a->rd, a->rs2, a->vm);
+ }
  
- static const struct SysemuCPUOps riscv_sysemu_ops = {
-+    .has_work = riscv_cpu_has_work,
-     .get_phys_page_debug = riscv_cpu_get_phys_page_debug,
-     .write_elf64_note = riscv_cpu_write_elf64_note,
-     .write_elf32_note = riscv_cpu_write_elf32_note,
-@@ -2933,7 +2932,6 @@ static void riscv_cpu_common_class_init(ObjectClass *c, void *data)
-                                        &mcc->parent_phases);
++static bool opfvf_overwrite_widen_check(DisasContext *s, arg_rmrr *a)
++{
++    return require_rvv(s) &&
++           require_rvf(s) &&
++           require_scale_rvf(s) &&
++           vext_check_isa_ill(s) &&
++           vext_check_ds(s, a->rd, a->rs2, a->vm) &&
++           !is_overlapped(a->rd, 1 << MAX(s->lmul+1, 0), a->rs2, 1 << MAX(s->lmul, 0));
++}
++
+ /* OPFVF with WIDEN */
+ #define GEN_OPFVF_WIDEN_TRANS(NAME, CHECK)                       \
+ static bool trans_##NAME(DisasContext *s, arg_rmrr *a)           \
+@@ -2533,14 +2574,14 @@ GEN_OPFVF_TRANS(vfmsub_vf, opfvf_check)
+ GEN_OPFVF_TRANS(vfnmsub_vf, opfvf_check)
  
-     cc->class_by_name = riscv_cpu_class_by_name;
--    cc->has_work = riscv_cpu_has_work;
-     cc->mmu_index = riscv_cpu_mmu_index;
-     cc->dump_state = riscv_cpu_dump_state;
-     cc->set_pc = riscv_cpu_set_pc;
+ /* Vector Widening Floating-Point Fused Multiply-Add Instructions */
+-GEN_OPFVV_WIDEN_TRANS(vfwmacc_vv, opfvv_widen_check)
+-GEN_OPFVV_WIDEN_TRANS(vfwnmacc_vv, opfvv_widen_check)
+-GEN_OPFVV_WIDEN_TRANS(vfwmsac_vv, opfvv_widen_check)
+-GEN_OPFVV_WIDEN_TRANS(vfwnmsac_vv, opfvv_widen_check)
+-GEN_OPFVF_WIDEN_TRANS(vfwmacc_vf, opfvf_widen_check)
+-GEN_OPFVF_WIDEN_TRANS(vfwnmacc_vf, opfvf_widen_check)
+-GEN_OPFVF_WIDEN_TRANS(vfwmsac_vf, opfvf_widen_check)
+-GEN_OPFVF_WIDEN_TRANS(vfwnmsac_vf, opfvf_widen_check)
++GEN_OPFVV_WIDEN_TRANS(vfwmacc_vv, opfvv_overwrite_widen_check)
++GEN_OPFVV_WIDEN_TRANS(vfwnmacc_vv, opfvv_overwrite_widen_check)
++GEN_OPFVV_WIDEN_TRANS(vfwmsac_vv, opfvv_overwrite_widen_check)
++GEN_OPFVV_WIDEN_TRANS(vfwnmsac_vv, opfvv_overwrite_widen_check)
++GEN_OPFVF_WIDEN_TRANS(vfwmacc_vf, opfvf_overwrite_widen_check)
++GEN_OPFVF_WIDEN_TRANS(vfwnmacc_vf, opfvf_overwrite_widen_check)
++GEN_OPFVF_WIDEN_TRANS(vfwmsac_vf, opfvf_overwrite_widen_check)
++GEN_OPFVF_WIDEN_TRANS(vfwnmsac_vf, opfvf_overwrite_widen_check)
+ 
+ /* Vector Floating-Point Square-Root Instruction */
+ 
 -- 
-2.47.1
+2.34.1
 
 
