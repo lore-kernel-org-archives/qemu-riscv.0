@@ -4,65 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B62C7C0218E
-	for <qemu-riscv@archiver.kernel.org>; Sun, 26 Jan 2025 07:23:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 10531C0218D
+	for <qemu-riscv@archiver.kernel.org>; Sun, 26 Jan 2025 07:23:46 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tbwyH-000533-BA; Sun, 26 Jan 2025 02:22:17 -0500
+	id 1tbwyP-00057p-BZ; Sun, 26 Jan 2025 02:22:25 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <antonb@tenstorrent.com>)
- id 1tbwyE-00052S-3j
- for qemu-riscv@nongnu.org; Sun, 26 Jan 2025 02:22:14 -0500
-Received: from mail-oo1-xc35.google.com ([2607:f8b0:4864:20::c35])
+ id 1tbwyG-00053R-Kt
+ for qemu-riscv@nongnu.org; Sun, 26 Jan 2025 02:22:17 -0500
+Received: from mail-oa1-x2a.google.com ([2001:4860:4864:20::2a])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <antonb@tenstorrent.com>)
- id 1tbwyC-0004H1-3M
- for qemu-riscv@nongnu.org; Sun, 26 Jan 2025 02:22:13 -0500
-Received: by mail-oo1-xc35.google.com with SMTP id
- 006d021491bc7-5f321876499so1886410eaf.1
- for <qemu-riscv@nongnu.org>; Sat, 25 Jan 2025 23:22:11 -0800 (PST)
+ id 1tbwyD-0004HV-Nw
+ for qemu-riscv@nongnu.org; Sun, 26 Jan 2025 02:22:16 -0500
+Received: by mail-oa1-x2a.google.com with SMTP id
+ 586e51a60fabf-29fad34bb62so1850224fac.1
+ for <qemu-riscv@nongnu.org>; Sat, 25 Jan 2025 23:22:13 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=tenstorrent.com; s=google; t=1737876129; x=1738480929; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=Xt0LMIQ7NZAu8NqvvkKKQdk2axfzopl3xzJEcR0k5d4=;
- b=IJdMvQjbhMj5a9y72MmcQnRQEcY8AZbMdhbrfQVy3zzGx7zFuubMQBHeS+XKGHG1X/
- b0C6EelFUX/J7Tb+BvlYunF1b6CxgSCn5OTdqlhkfjpmoRiD4kAqPHjqd285jnEnwjzU
- +pe/NVZ4IT2UJZywvK1CdRo6I6xw7Qs0+UOOPEZKs4URWuhdd344X6itAoY8FSAuAMmu
- 7oB1x0iSBKyPhbP0T/hvRZRwzMkWSnl5RBuDxO1P8vzNkyH0SuzIDOHsgt+j4aW4vF/5
- TW/JBQ4OKcJqLmGo0dTUjgtirNxEKrNEBXk1uyWRb9sUqYwKjvFe96ZvAT6wyZ1Q7KsH
- Sj3w==
+ d=tenstorrent.com; s=google; t=1737876132; x=1738480932; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=uf7peyd2COR5J9ebNbp/+78Wow2GJZZgdhDpPr51VFU=;
+ b=bWVklSvRA5FnUsWmvosg+ZrbdFIIFmJ+B9Ej59AuyjbgjaUbDCcNBRS8HyNtWHMR/y
+ TzMPc8FAJZoMmR/ZFUJOkm8O+vnncB27ZTpiKRtHmN6fHAwLyOVMt25c1ZRNLyjqrUnl
+ c8gHOuMXbFonLHqFeuVqLc8dVW3DfgmklwP54VKJiBGxZ/nCQBejlQba+YdR8aMFRL68
+ 8Q6azmXF/Zkgi9Y6ZxHc/HC9D1N9voLYDr7bW35jHA6xaN+G2ybDW1RjN9kBqyc2FO4t
+ +91NjM7wzG65tdM2RMtjSGvlb8q2+M5pm0i4ih00/SvkCJ7+JuOf6SMhQ1wtsgP9UelX
+ aXEg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1737876129; x=1738480929;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=Xt0LMIQ7NZAu8NqvvkKKQdk2axfzopl3xzJEcR0k5d4=;
- b=giaBkr3Y5HPZKxMN5p13uxJBqqQ5l9bT9CTx9vo8ISMDQ5wBXCRGZXjCHjUSLxTlgv
- S56GirlJWFH1YCrpiapq3GMlxqJrNo8/XvXHepzDDXMQRnB6slhMHkYnF/zDIL1PR1tw
- Dqucu0nUtTg3o7KTsSNzhC2UB17b2KC8IM9qgYATca3WZgqL7KLf+P/M7/gb2LhRmsRx
- 2dgue/D6eKImFrHnwegQigQB7uvUirTnHJr3AuoLjLuos6nUk6gNwYqWg/zUsw4eOeKY
- Kodp/qMC4eW8Y0M4MuSSQO+nY/A3NAuRyCccCwIcRq5PkvKRACWO8ZNuLOb8zZbQYJc1
- yMzw==
-X-Gm-Message-State: AOJu0YxE8teoZmP31M6cg9kdpqdcEU4BRRPOWcqtXWDOj3xn7eJJwOq8
- AFnvFl9lsjMx/lNIP6DobByso8PlDb3aQjeE/2wE7qHVS679i/k3bTYh/tA1L2CHkFcRsA4KhCd
- cE0mERw==
-X-Gm-Gg: ASbGncu4UTkv1pJsElzsKpVWUmts/OXuAROyyAdHFE6iMGDrNfx7Fi8ENr2fXPg9tEY
- z1OSrAnLZL2fKIWbd7kWCKibx8jYspunFkdO1lfnjozJBbiNnGeyAIDD/WRU0IQnmkSz0LTBdsy
- euWThw1b7Y0CTCpv4JP5kQCq4USB7feXYvTxv7JyJ3tGBeTcuKLMSXTZ67gva5aR3mR7JqJRLKQ
- L+qhlRih/OArZi8qvaxASZonFgezncPgLAawVBaD3VeXgwvmY2+EHpIU7AxgY0Nd6EALzB+HUaZ
- u4V0aoEV1Reo7R0GajPTk1WrFjXqC+yLvJLksHg=
-X-Google-Smtp-Source: AGHT+IF7eCrv0ziwoCHlNjCL/kVUG6QfwaGkWtKEUTKnnr/D2Ct2V3FV8rmkTwAqnNuvbVj0gmx8UQ==
-X-Received: by 2002:a05:6870:55c8:b0:29e:4b60:d992 with SMTP id
- 586e51a60fabf-2b2913bda2fmr5498114fac.13.1737876129627; 
- Sat, 25 Jan 2025 23:22:09 -0800 (PST)
+ d=1e100.net; s=20230601; t=1737876132; x=1738480932;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=uf7peyd2COR5J9ebNbp/+78Wow2GJZZgdhDpPr51VFU=;
+ b=MF5SD3bNiiR4rFdoobP+KZEcjcFqxO+ZwoErxSa5SNRTBNKriHhFQuD4yF6CjeXEFJ
+ S6oJTpmpMRyHPxwJTN28emlfR8i2CNf5nvGvYWC1jbYn1OBn/x/+ycu400fK3DtTLGpA
+ lyHj45HYJ+XSW0FTR7bv6u/HN0b7KL/9AeSgbiA07pZcd6fso6gIay3aaV9SKGbHC5cf
+ dn2XRvYWNo2qdxxSa8iBhxoKy8/hgpEoarWcItIQd2ob0wRrAI+FQzDXK2zLZVK1khz2
+ 86pZ9tjSdpviNFDBkpxvvo16ci789VH0D9lxVPi+OF5LXFrduQlPaMLssG1q6YUFE8mz
+ 2skg==
+X-Gm-Message-State: AOJu0YzVxZYizbxOjqmATMWyiIQKEl8EzSuiSury6Wk8EUOMXyNeBHpx
+ RwA7vvHLe4bkimHm41gSaTXBPxYcvOJr+nFYw/3BDrgnNdRYp04AOE9I7JZdy+jufbIt2dAF+9P
+ Estl0wA==
+X-Gm-Gg: ASbGncslGBxOAJqiS4mKZFjE+SoY23O7tmQIg2a3QtjcuEewNWb8yWSGPoRC5tkWdda
+ vptvSNS9//GjQeoYvcn6rxS2EwcayKfcmP/Wl6a8jtP2Qci9Hev2H4X0vXJS6Mysak+gCfsdsB7
+ HQ9mjxNljifweTN6mxs7bNDt33eXp+J0jFYgYrB/NkgKsYMd4eiyNmYSrOWXaFtlP1n4E2Tpbgo
+ VTyQ41cqxH/chEohdgJqjRN1QyMbx+mI1GeSqxHyBMnoyp8OlpgaWJ683AZXpXDjbTVTIKPS2+A
+ fiv44QzQgwUznGToFBbo/F6kXtSyMz7LwkAlrCc=
+X-Google-Smtp-Source: AGHT+IHz9BQAGsOhwiE5/ojcR1/Velq2Jz6MobNVEDu6abEIjTPxNI2otT2ranyeUJXFo+UoAmN69w==
+X-Received: by 2002:a05:6871:d087:b0:29e:787f:b294 with SMTP id
+ 586e51a60fabf-2b1c0c86c2cmr20391792fac.38.1737876132313; 
+ Sat, 25 Jan 2025 23:22:12 -0800 (PST)
 Received: from ausc-rvsw-c-01-anton.tenstorrent.com ([38.104.49.66])
  by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-2b28f1d887csm1814281fac.29.2025.01.25.23.22.08
+ 586e51a60fabf-2b28f1d887csm1814281fac.29.2025.01.25.23.22.11
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 25 Jan 2025 23:22:09 -0800 (PST)
+ Sat, 25 Jan 2025 23:22:11 -0800 (PST)
 From: Anton Blanchard <antonb@tenstorrent.com>
 To: qemu-riscv@nongnu.org,
 	qemu-devel@nongnu.org
@@ -72,21 +73,24 @@ Cc: Anton Blanchard <antonb@tenstorrent.com>,
  Weiwei Li <liwei1518@gmail.com>,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
  Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
-Subject: [PATCH 00/12] target/riscv: Fix some RISC-V instruction corner cases
-Date: Sun, 26 Jan 2025 07:20:44 +0000
-Message-Id: <20250126072056.4004912-1-antonb@tenstorrent.com>
+Subject: [PATCH 03/12] target/riscv: handle vadd.vx form mask and source
+ overlap
+Date: Sun, 26 Jan 2025 07:20:47 +0000
+Message-Id: <20250126072056.4004912-4-antonb@tenstorrent.com>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20250126072056.4004912-1-antonb@tenstorrent.com>
+References: <20250126072056.4004912-1-antonb@tenstorrent.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::c35;
- envelope-from=antonb@tenstorrent.com; helo=mail-oo1-xc35.google.com
+Received-SPF: pass client-ip=2001:4860:4864:20::2a;
+ envelope-from=antonb@tenstorrent.com; helo=mail-oa1-x2a.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -102,30 +106,23 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-This series fixes some RISC-V instruction corner cases, specifically
-illegal overlaps between mask and source registers, illegal overlaps
-between source registers and illegal overlaps between source and
-destination registers. These were found by looking at miscompares
-between QEMU and the Tenstorrent fork of Whisper which models this
-behaviour better than Spike and Sail.
+Signed-off-by: Anton Blanchard <antonb@tenstorrent.com>
+---
+ target/riscv/insn_trans/trans_rvv.c.inc | 1 +
+ 1 file changed, 1 insertion(+)
 
-Anton Blanchard (12):
-  target/riscv: Source vector registers cannot overlap mask register
-  target/riscv: handle vrgather mask and source overlap
-  target/riscv: handle vadd.vx form mask and source overlap
-  target/riscv: handle vadd.vv form mask and source overlap
-  target/riscv: handle vslide1down.vx form mask and source overlap
-  target/riscv: handle vzext.vf2 form mask and source overlap
-  target/riscv: handle vwadd.vx form mask and source overlap
-  target/riscv: handle vwadd.vv form mask and source overlap
-  target/riscv: handle vwadd.wv form mask and source overlap
-  target/riscv: handle vwadd.wv form vs1 and vs2 overlap
-  target/riscv: Add CHECK arg to GEN_OPFVF_WIDEN_TRANS
-  target/riscv: handle overlap in widening instructions with overwrite
-
- target/riscv/insn_trans/trans_rvv.c.inc | 139 ++++++++++++++++++------
- 1 file changed, 108 insertions(+), 31 deletions(-)
-
+diff --git a/target/riscv/insn_trans/trans_rvv.c.inc b/target/riscv/insn_trans/trans_rvv.c.inc
+index c66cd95bdb..bc2780497e 100644
+--- a/target/riscv/insn_trans/trans_rvv.c.inc
++++ b/target/riscv/insn_trans/trans_rvv.c.inc
+@@ -382,6 +382,7 @@ static bool vext_check_ld_index(DisasContext *s, int vd, int vs2,
+ static bool vext_check_ss(DisasContext *s, int vd, int vs, int vm)
+ {
+     return require_vm(vm, vd) &&
++           require_vm(vm, vs) &&
+            require_align(vd, s->lmul) &&
+            require_align(vs, s->lmul);
+ }
 -- 
 2.34.1
 
