@@ -4,73 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D424CC0218F
-	for <qemu-riscv@archiver.kernel.org>; Sun, 26 Jan 2025 20:35:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 75B6FC0218F
+	for <qemu-riscv@archiver.kernel.org>; Sun, 26 Jan 2025 20:37:14 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tc9LI-0002cS-CZ; Sun, 26 Jan 2025 15:34:52 -0500
+	id 1tc9NE-0003zE-Uv; Sun, 26 Jan 2025 15:36:52 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1tc9L4-0002ZB-Jt
- for qemu-riscv@nongnu.org; Sun, 26 Jan 2025 15:34:39 -0500
-Received: from mail-pj1-x1032.google.com ([2607:f8b0:4864:20::1032])
+ id 1tc9NC-0003yX-MG
+ for qemu-riscv@nongnu.org; Sun, 26 Jan 2025 15:36:50 -0500
+Received: from mail-pl1-x62a.google.com ([2607:f8b0:4864:20::62a])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1tc9L2-00011R-Pp
- for qemu-riscv@nongnu.org; Sun, 26 Jan 2025 15:34:38 -0500
-Received: by mail-pj1-x1032.google.com with SMTP id
- 98e67ed59e1d1-2ef714374c0so5750050a91.0
- for <qemu-riscv@nongnu.org>; Sun, 26 Jan 2025 12:34:27 -0800 (PST)
+ id 1tc9NB-0001SW-0d
+ for qemu-riscv@nongnu.org; Sun, 26 Jan 2025 15:36:50 -0500
+Received: by mail-pl1-x62a.google.com with SMTP id
+ d9443c01a7336-2164b662090so71678295ad.1
+ for <qemu-riscv@nongnu.org>; Sun, 26 Jan 2025 12:36:48 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1737923666; x=1738528466; darn=nongnu.org;
+ d=linaro.org; s=google; t=1737923807; x=1738528607; darn=nongnu.org;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=HV0rFwm2c/DiJ3VIFDuxU64dDw12Xibjr9C6hrIuIZM=;
- b=IyvYzXDWglqc2TDOlIfdERC6BgdriQ8JCKYJTBLWun3F9TCTgSfxWb3NVtzrfI4wBJ
- hooROt7D/k/NyHzUIRvjxeQoTPGE3a1PHXu5/K54RM5iTuh4BPGEdMHZ8aycNVg8j5en
- oXalHdsFjhisKhBd9VX84pyuw6gOegqwHCmTAtzZTYBdtBYryLQM4FVNZsXZChRpmnmM
- pUHKGtt+UxgZINaiHoIMQIh4D/rJCqAo4gShYQx7p8kuWuuzwq8l4RjSPuu/tQFY4eOi
- jsXecPVxZKMoVhnJLd6x2tQewxZ/Eaa+9sUtlPJfa9dLbfYzS2tL9yqSRMif10yuB0Ph
- WAiQ==
+ bh=g2WeP5q4hv+K1Hr21O956YlU/gBG9YtJDHMFPAKuFc4=;
+ b=lweBQhrZNoBasysEa37m7p9tA5SPa2ecWLgsLnu+e3IoluI5QngqbtOklDitqHd+0I
+ ZEWDjfTEBE5iFz2ocGh0T3jCxfFxI4DF1OOT+L7llSmK8YjG3DieOQ0HIXcq7dxrpdau
+ MF6d2IR/Jr+X7OQ+BUc1bT9BT6tWndz1EM9hNDDvGyN7dI0tnrbM4LGdN/H46p810WK/
+ 2WTaOd5luXU7hpYHgrk74AzgocJmjc1NDq/iUgseifT6NQAfMR4qLfeTbEEZjpmD4GVT
+ EXq8lJIAoV8ZU6HwBsaIVx+ZE/J9tB0o3yqvO6x5Hs+JIFMWtipkW/oW+ryb2U18pQO9
+ 8DAQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1737923666; x=1738528466;
+ d=1e100.net; s=20230601; t=1737923807; x=1738528607;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=HV0rFwm2c/DiJ3VIFDuxU64dDw12Xibjr9C6hrIuIZM=;
- b=FeC4bEkaGw6k9P3M5tp3kmfWewKJs8Fm2LG3l/JF80Y4kjK1Ey6MsTSh46xWX5qbnj
- TIrlCKKnDNh2G3Umhxc73Lpfq3C3lKeqWgwIUiJLwLaRUBieqT4hxZyHukAAwbUhkcrZ
- khhy1vuFpYSzkBgqCn8Sfx60hxK0rC/QwdTSqKA3WLIVzwOrdU+Q/7Wfqs0ueDAkQoVP
- o/FIP0RaK57boAZXg2Q7pRwkWd1wW8w/lliz4PmZpEmQPkyd6k1jxFtiLxO2AlyQGjwr
- KQtdnvKeHH8VqnlfJDVX6j6y7exQ9poR5atHzdKzAdfIdRuH7iOixZFJaeiWP0nk8VfR
- jmew==
+ bh=g2WeP5q4hv+K1Hr21O956YlU/gBG9YtJDHMFPAKuFc4=;
+ b=pYonHuttWGdqluYU1lhzGpoky+AWskau50b66VFhvbNjMTNSWikhNwPCD0vlPQbrc3
+ 81IvkjAVJICR5hfIV20fR272hRoSsik2mKKoJpdysc3ecZxAemS0hZEn86CQoaYPSsMb
+ hP6NGK6ZOKkIizF5EGg3sw/Kjfi2WHptUekChvwkTcP8nzOn/Nd5T3RY8kMkgiY1aXj4
+ lxLF3kXpOOBcwLrmZPOYURSupfkQmklbfh3h+7K3br7xS+Jw5hF9kHbx2FkTAVuSSYve
+ 5kW3Mw7z8i2+BLHnb+yGAnAYPJE6GqJvIEppxfocE1mhZJbn6k4V3BCnQdyA+GbqeR7B
+ TbEA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVqYQ+iz3QFatPj2RP7CsVuG3lBuQaAjuPziM6j52Vlg61yc3MljLc/Ch6mCpsRIHuEe37/LqeoKKV/@nongnu.org
-X-Gm-Message-State: AOJu0YzVPHKANwr+/UnHzgBX/vP2mNuDs8wVg71n1pxCQSXfZTg8uCvi
- 4xnE5vmEIgizqTnr9Eln2gbADtbmDC57kvaz9zl5eiDmyUw/Eemr/qmFz9hHOJU=
-X-Gm-Gg: ASbGnculzAR/CQBVFevcdXFPjmRJ7W1rYyjEQh7wNBz/XTPx4dNP7XL/irN0nVgAuv+
- PsCgXI5C1eY+rinVjsOhtW7+CjnYXIcc9ZCUoPmmnVXVgaciC+REKKaqY92xQ8wYGpGzTYSVMdQ
- SOj7extfqdgGOm/8hjOAVZ28nua5uGLr3nGEaIioP/i/TWE6qX/c213tBj2CyVekonvlr54SgkC
- TdIiwoCTc4IuxetJKIwC6YXYI1O8X/LorL8LWiQ7cEDVfbDy3AKEzQTDo/u6YAzPQ7TeXemys6f
- /4UMxFU85b7YsZoMk84PTGrVYReR4GNi2ygP5I/qrkKHEs8=
-X-Google-Smtp-Source: AGHT+IEnuvCpks4R8m2CWUAxXqy7OUK3I7qmzF32T6Ls9afPXbIvlOOo7wFmoCIeuE1afURwxObJ8g==
-X-Received: by 2002:a17:90b:5488:b0:2ee:7e53:bfae with SMTP id
- 98e67ed59e1d1-2f7f177c6b3mr23097382a91.10.1737923666307; 
- Sun, 26 Jan 2025 12:34:26 -0800 (PST)
+ AJvYcCUrFTcBwUiGfKDM2eOrYdTDyUPvr5Ai9JprQfXO6utAQwMOiqJ89RLDu45KSiPIuZOE7ey8Wh6dWAVj@nongnu.org
+X-Gm-Message-State: AOJu0YyvXGuDeAWlegxtLapjbNLc504BUT5itnJIGm3JKgdj+98cxI0Q
+ dAlL/tJvuq6d9XyAajcn47svYRAoO+KWM4f1FisM7NwN06MGlrDSdR1wAKRfb+UCsQDTa+p4Xof
+ R
+X-Gm-Gg: ASbGncvYdOjYVhuzevSIlQ+9urzKb/gVFb1lgHC5fivQTauQ2aivQti71TpZlmUhzrA
+ u14b9Me/pttCI8EpDQ+rg9efTJwxClI3RO9oYJ64NmJqVYiYfvia6e9kagPveENY3wQ9/Lh3OpV
+ 5ChskfvkmRYzEezfb5Vy29AlFLd1FyceNDjQWULqIuEywGyCBJVoeO0ELPfrveiqPVQhuulOLqG
+ MHe3NrugdP0q377TtqYjce2VZwBzS2m5BhKrg4FFxG2l500j2smCrEDg4SYepK2DMA//uU/QxJw
+ jYjr+h/J+TJMVoo90AMIsCMSkC3BQWphqOqpPpGk+b8CxUg=
+X-Google-Smtp-Source: AGHT+IG7QHEN6N12IEj7HpZ8+9ISOfMpvPDzHND+sb7CKsQVCW2Siz1JbFKV0CJ4CarsM9/PXCPftw==
+X-Received: by 2002:a05:6a20:2447:b0:1e0:ce11:b0ce with SMTP id
+ adf61e73a8af0-1eb215adabfmr66485176637.35.1737923807521; 
+ Sun, 26 Jan 2025 12:36:47 -0800 (PST)
 Received: from [192.168.0.4] (174-21-71-127.tukw.qwest.net. [174.21.71.127])
  by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-2f7ffaf8b27sm5519409a91.37.2025.01.26.12.34.25
+ d2e1a72fcca58-72f8a6b18b5sm5645530b3a.39.2025.01.26.12.36.46
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sun, 26 Jan 2025 12:34:25 -0800 (PST)
-Message-ID: <2641e9da-db13-490e-9bae-64ecde1f9352@linaro.org>
-Date: Sun, 26 Jan 2025 12:34:24 -0800
+ Sun, 26 Jan 2025 12:36:47 -0800 (PST)
+Message-ID: <d81542e9-bebf-4f5f-a911-8ab7b6180d4e@linaro.org>
+Date: Sun, 26 Jan 2025 12:36:45 -0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 09/20] accel/tcg: Restrict 'icount_align_option' global to
- TCG
+Subject: Re: [PATCH 10/20] accel/tcg: Rename 'hw/core/tcg-cpu-ops.h' ->
+ 'accel/tcg/cpu-ops.h'
 To: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
  qemu-devel@nongnu.org
 Cc: Peter Maydell <peter.maydell@linaro.org>,
@@ -80,21 +81,21 @@ Cc: Peter Maydell <peter.maydell@linaro.org>,
  qemu-riscv@nongnu.org, David Hildenbrand <david@redhat.com>,
  qemu-s390x@nongnu.org, xen-devel@lists.xenproject.org
 References: <20250123234415.59850-1-philmd@linaro.org>
- <20250123234415.59850-10-philmd@linaro.org>
+ <20250123234415.59850-11-philmd@linaro.org>
 Content-Language: en-US
 From: Richard Henderson <richard.henderson@linaro.org>
-In-Reply-To: <20250123234415.59850-10-philmd@linaro.org>
+In-Reply-To: <20250123234415.59850-11-philmd@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1032;
- envelope-from=richard.henderson@linaro.org; helo=mail-pj1-x1032.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::62a;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pl1-x62a.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -111,20 +112,94 @@ Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 On 1/23/25 15:44, Philippe Mathieu-Daudé wrote:
-> Since commit 740b1759734 ("cpu-timers, icount: new modules")
-> we don't need to expose icount_align_option to all the
-> system code, we can restrict it to TCG. Since it is used as
-> a boolean, declare it as 'bool' type.
+> TCGCPUOps structure makes more sense in the accelerator context
+> rather than hardware emulation. Move it under the accel/tcg/ scope.
 > 
-> Signed-off-by: Philippe Mathieu-Daudé<philmd@linaro.org>
+> Mechanical change doing:
+> 
+>   $  sed -i -e 's,hw/core/tcg-cpu-ops.h,accel/tcg/cpu-ops.h,g' \
+>     $(git grep -l hw/core/tcg-cpu-ops.h)
+> 
+> Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 > ---
->   accel/tcg/internal-common.h | 2 ++
->   include/system/cpus.h       | 2 --
->   accel/tcg/icount-common.c   | 2 ++
->   system/globals.c            | 1 -
->   4 files changed, 4 insertions(+), 3 deletions(-)
+>   MAINTAINERS                                            | 2 +-
+>   include/{hw/core/tcg-cpu-ops.h => accel/tcg/cpu-ops.h} | 0
+>   accel/tcg/cpu-exec.c                                   | 4 ++--
+>   accel/tcg/cputlb.c                                     | 2 +-
+>   accel/tcg/translate-all.c                              | 2 +-
+>   accel/tcg/user-exec.c                                  | 2 +-
+>   accel/tcg/watchpoint.c                                 | 2 +-
+>   bsd-user/signal.c                                      | 2 +-
+>   hw/mips/jazz.c                                         | 2 +-
+>   linux-user/signal.c                                    | 2 +-
+>   system/physmem.c                                       | 2 +-
+>   target/alpha/cpu.c                                     | 2 +-
+>   target/arm/cpu.c                                       | 2 +-
+>   target/arm/tcg/cpu-v7m.c                               | 2 +-
+>   target/arm/tcg/cpu32.c                                 | 2 +-
+>   target/arm/tcg/mte_helper.c                            | 2 +-
+>   target/arm/tcg/sve_helper.c                            | 2 +-
+>   target/avr/cpu.c                                       | 2 +-
+>   target/avr/helper.c                                    | 2 +-
+>   target/hexagon/cpu.c                                   | 2 +-
+>   target/hppa/cpu.c                                      | 2 +-
+>   target/i386/tcg/tcg-cpu.c                              | 2 +-
+>   target/loongarch/cpu.c                                 | 2 +-
+>   target/m68k/cpu.c                                      | 2 +-
+>   target/microblaze/cpu.c                                | 2 +-
+>   target/mips/cpu.c                                      | 2 +-
+>   target/openrisc/cpu.c                                  | 2 +-
+>   target/ppc/cpu_init.c                                  | 2 +-
+>   target/riscv/tcg/tcg-cpu.c                             | 2 +-
+>   target/rx/cpu.c                                        | 2 +-
+>   target/s390x/cpu.c                                     | 2 +-
+>   target/s390x/tcg/mem_helper.c                          | 2 +-
+>   target/sh4/cpu.c                                       | 2 +-
+>   target/sparc/cpu.c                                     | 2 +-
+>   target/tricore/cpu.c                                   | 2 +-
+>   target/xtensa/cpu.c                                    | 2 +-
+>   36 files changed, 36 insertions(+), 36 deletions(-)
+>   rename include/{hw/core/tcg-cpu-ops.h => accel/tcg/cpu-ops.h} (100%)
+> 
+> diff --git a/MAINTAINERS b/MAINTAINERS
+> index 7be3d8f431a..fa46d077d30 100644
+> --- a/MAINTAINERS
+> +++ b/MAINTAINERS
+> @@ -175,7 +175,7 @@ F: include/exec/helper-info.c.inc
+>   F: include/exec/page-protection.h
+>   F: include/system/cpus.h
+>   F: include/system/tcg.h
+> -F: include/hw/core/tcg-cpu-ops.h
+> +F: include/accel/tcg/cpu-ops.h
+>   F: host/include/*/host/cpuinfo.h
+>   F: util/cpuinfo-*.c
+>   F: include/tcg/
+> diff --git a/include/hw/core/tcg-cpu-ops.h b/include/accel/tcg/cpu-ops.h
+> similarity index 100%
+> rename from include/hw/core/tcg-cpu-ops.h
+> rename to include/accel/tcg/cpu-ops.h
+> diff --git a/accel/tcg/cpu-exec.c b/accel/tcg/cpu-exec.c
+> index be2ba199d3d..8ee76e14b0d 100644
+> --- a/accel/tcg/cpu-exec.c
+> +++ b/accel/tcg/cpu-exec.c
+> @@ -22,7 +22,7 @@
+>   #include "qapi/error.h"
+>   #include "qapi/type-helpers.h"
+>   #include "hw/core/cpu.h"
+> -#include "hw/core/tcg-cpu-ops.h"
+> +#include "accel/tcg/cpu-ops.h"
+>   #include "trace.h"
+>   #include "disas/disas.h"
+>   #include "exec/cpu-common.h"
+> @@ -39,7 +39,7 @@
+>   #include "exec/replay-core.h"
+>   #include "system/tcg.h"
+>   #include "exec/helper-proto-common.h"
+> -#include "tb-jmp-cache.h"
+> +//#include "tb-jmp-cache.h"
 
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+What's this?
+
 
 r~
 
