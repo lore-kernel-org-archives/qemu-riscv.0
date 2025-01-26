@@ -4,66 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 09283C0218D
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B6B0CC02181
 	for <qemu-riscv@archiver.kernel.org>; Sun, 26 Jan 2025 07:25:18 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tbwyR-00059X-Mj; Sun, 26 Jan 2025 02:22:27 -0500
+	id 1tbwyR-00059U-G4; Sun, 26 Jan 2025 02:22:27 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <antonb@tenstorrent.com>)
- id 1tbwyI-000553-Nm
- for qemu-riscv@nongnu.org; Sun, 26 Jan 2025 02:22:19 -0500
-Received: from mail-oa1-x34.google.com ([2001:4860:4864:20::34])
+ id 1tbwyH-00053X-8S
+ for qemu-riscv@nongnu.org; Sun, 26 Jan 2025 02:22:17 -0500
+Received: from mail-oa1-x2b.google.com ([2001:4860:4864:20::2b])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <antonb@tenstorrent.com>)
- id 1tbwyH-0004JZ-0r
- for qemu-riscv@nongnu.org; Sun, 26 Jan 2025 02:22:18 -0500
-Received: by mail-oa1-x34.google.com with SMTP id
- 586e51a60fabf-29fc424237bso2527006fac.0
- for <qemu-riscv@nongnu.org>; Sat, 25 Jan 2025 23:22:16 -0800 (PST)
+ id 1tbwyF-0004I9-E7
+ for qemu-riscv@nongnu.org; Sun, 26 Jan 2025 02:22:16 -0500
+Received: by mail-oa1-x2b.google.com with SMTP id
+ 586e51a60fabf-2a8690dcb35so1139754fac.3
+ for <qemu-riscv@nongnu.org>; Sat, 25 Jan 2025 23:22:14 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=tenstorrent.com; s=google; t=1737876136; x=1738480936; darn=nongnu.org;
+ d=tenstorrent.com; s=google; t=1737876134; x=1738480934; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=yBsjI7aW2nO70G4tu6wAlrovv3tWfVJtXnpKYO3Mao8=;
- b=XyV8UybOFOH0oObZ1EoeRGq24x6h6vgKa9tITlamU+3Oz5u/1g3zwo53mBIi3HnWS1
- lzwJaSFQQS9PD3yoT9TdHqNCS3uJ2nt0FF5VLATKtM8QyuF2CmsVBWTp6NRooeZkmg92
- HqwQcRe048vocgmMm7sAuQDWTV3O9gbILTuZnzJSBZ886a5vYqlY/XzoCCE7yqh8iZvK
- GBDChEdItNe0uCu0BvZJpT+tTu8BOhnUpN4Am9Jd4jh/h+fd2op0T0T1FNBtySK3RE6/
- bVl26yNokdaaaRCep3x+UrZN2XYKadazimhBQ6ZbOPbA0HHAelmJBeDL11+AbnOKoyYl
- UCGA==
+ bh=+smqj6hYDDDrzjm4GxtEQwSjZgHAIk2Z3L68pTCDUWg=;
+ b=MzPbAK8aEGlGlrhnqJoxDimQdTUwvS3NEptFRdnUcsCBhZDRQxVvpZoJbVAnTCtUFA
+ xa4HqQmsqN2Vxd2Sb2CO+l8mZb/O9Wqj3jsTxCqQmK7xTUIw29nxwtU03+YGGHob4Mlb
+ GZdMSC5fdlnZPOZYTkSTF21CA5ITp+VebVmp/oqQ1KD+HE8r+iLbbNZX7S/4SWIG9eDk
+ vdh/VbmhXmdE9Fo4zBXGvlsrjNr8FILLZMWwT5FkNOujKJoWlVDC5PYaSRRGw+INvPh0
+ SXaTizmTXMOG+xQowxrxEqQrxAAvDSx3NaYKgE1hI4GiLu/HlwqlZdB6pmNrwEkpp2tU
+ fVJA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1737876136; x=1738480936;
+ d=1e100.net; s=20230601; t=1737876134; x=1738480934;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=yBsjI7aW2nO70G4tu6wAlrovv3tWfVJtXnpKYO3Mao8=;
- b=Ry2clwQjEHGs21jjQUti5eoLBvL3pBl61Zv/qk1T9jo7P9P3exuK/N6l5+bKRyPLmj
- LnP7bnK8HL+Qc2ig36dP01Vf1x4x6dCx9H1KmGD/8Et32Dkfb1rOG/QH42QYyMRcFlLf
- m/i7mkZq2LRTs8BTFzH7eJN9F5mombHCX7E5dzKQVF0gLO1bo9HkkQ5qU0wZyo7eFap1
- Cu3nZv4ggObO9ABVS1fw7rnhsSwSViKAqVcFDElweRhxv5wsvtgHeY4xFGmaxltaqLZG
- dPuaXsm4NYNAlTVsHCrg842jSE2rPO1vtZjzmzM2o34DwDhZuc1fHlF10qQh1TtI0nZp
- qIFA==
-X-Gm-Message-State: AOJu0YzuPfIN/qrsbFlK5jl8xkhG3cxll8ps9bVOyCCZaRzdihG3TSrQ
- fg8HMdBds4YN4ty2NPwjLgY6LbIPnKR4YRQ63G5aRf967LhEH/ol9cXKNnaKVezQLQI8qKaBtdn
- 9v+E5Kw==
-X-Gm-Gg: ASbGncsPmG0zb4UjrzSjH5RPDTK5bwLpn9Fr+CuRIolISqBkyqujOkI4Qn1C8QcizOM
- ME0BrTuPgWtzF7qrZGVZFMe+NrPLb3jsm2sWAkO1rkNGE7ajWnsToMEcy1IMHAxttmt7NrD9LnG
- aElxJcjOKYJzKwz5I/gAPFH+cUWFO54dA0z0VQtQHLBwCMIEjmYthb/9Gjlz9050SbiJCLqEDt8
- N2DLeG2Gsv6raC9V4TnwT/qYy/PqyTpqEt5RUw7ijIiHFFJlAZ+kybg+HCKNv3IC1e5cKbQlPt3
- Mb8t9s90TLAIiGHEN8wv/Kon9/vWSD+GfcSj3AY=
-X-Google-Smtp-Source: AGHT+IE6AL+BXFmwwop/qvocFxEigrnoelWWwX6AGvRIAbYALQhffyVk0yo9IQS+WHpiyxdUmwsK2Q==
-X-Received: by 2002:a05:6871:538e:b0:29e:5894:9de7 with SMTP id
- 586e51a60fabf-2b1c0cd8350mr20684770fac.33.1737876135890; 
- Sat, 25 Jan 2025 23:22:15 -0800 (PST)
+ bh=+smqj6hYDDDrzjm4GxtEQwSjZgHAIk2Z3L68pTCDUWg=;
+ b=xN817xOlev35teAho12HLD9UiX1GW6czF40dEcPZ05Z1ah8kMSe47Belt+POs8EBin
+ 89aPswkeQKE67ZUMWEliQAD9LuC54sSbV1GH/gKtiP8QqPjrRxjdNG1hRdpqxkGurRLO
+ VTWY/7cAuC+Pudo6QcdeSdH19fFep5LkFiBOkdshC+QofXBn9kRtAGuHM7+MviHtjc4z
+ x2yBlMXIVg/UxMQmW6I/KPmhDjMUp6IZ/FM89e+IZfnetB0GCNA5XS5R51cIDAiyfW/r
+ YhaymPgTn1UIvjR82/XEEVYhchpYp4ib92Tm5OYmS8LP9nDEh+0XSpqlfNcI1RUZYqjs
+ ssnQ==
+X-Gm-Message-State: AOJu0Yx0SVRFXVBOFpZUB0VQSIdsKa87aUbkxTRBYsomuSuXYMb44Hi/
+ mlV4sYrDF+PPI+OLhfs8ZzlycVgvrIeKO77m6BgwDkSEwQybkhqeiarYtaOvSlZaKhJQVob+8H1
+ d6aUqjw==
+X-Gm-Gg: ASbGnctHbEbKnDpwSTYTf4rCt1oKaK0Un1snjg5B9Lpc9hiRK/rM5ZaQ0shMea0csea
+ hc2NnOyhvAGmn2zkdi4hl/yzNjzNISAcb5Q6XtVyjjtbvrUEyDmE/oGpGEXPh2Ihk+rQmgmOXtN
+ ZGpb4xPU0Lt/AG4+SroGGp3ym49yC3BsYm7UVUCzcIAFcQuJinEI7IsL8bW9H6ViAfgMmJvZzHW
+ 39KQIqaQzVsHccs8nBfyI6nNRdbNzdM4pNW5GOHGEN45xS5nBORFjYbFJewVVhiKbc6sKSfSLBF
+ 8PwjNzyS6tnCxpmPtS2N8k1iFoeBUMbkmrxc/Es=
+X-Google-Smtp-Source: AGHT+IHr+XUaqBNZRwMPH8gM5DY/G1NCWelGpQolmMa5+SOYyiAtFM/3JK/XpixZSy9g6W2XJk4Paw==
+X-Received: by 2002:a05:6870:6981:b0:29f:f1cc:12a5 with SMTP id
+ 586e51a60fabf-2b1c0c025c8mr21889251fac.31.1737876134110; 
+ Sat, 25 Jan 2025 23:22:14 -0800 (PST)
 Received: from ausc-rvsw-c-01-anton.tenstorrent.com ([38.104.49.66])
  by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-2b28f1d887csm1814281fac.29.2025.01.25.23.22.15
+ 586e51a60fabf-2b28f1d887csm1814281fac.29.2025.01.25.23.22.13
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 25 Jan 2025 23:22:15 -0800 (PST)
+ Sat, 25 Jan 2025 23:22:13 -0800 (PST)
 From: Anton Blanchard <antonb@tenstorrent.com>
 To: qemu-riscv@nongnu.org,
 	qemu-devel@nongnu.org
@@ -73,17 +73,17 @@ Cc: Anton Blanchard <antonb@tenstorrent.com>,
  Weiwei Li <liwei1518@gmail.com>,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
  Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
-Subject: [PATCH 07/12] target/riscv: handle vwadd.vx form mask and source
- overlap
-Date: Sun, 26 Jan 2025 07:20:51 +0000
-Message-Id: <20250126072056.4004912-8-antonb@tenstorrent.com>
+Subject: [PATCH 05/12] target/riscv: handle vslide1down.vx form mask and
+ source overlap
+Date: Sun, 26 Jan 2025 07:20:49 +0000
+Message-Id: <20250126072056.4004912-6-antonb@tenstorrent.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20250126072056.4004912-1-antonb@tenstorrent.com>
 References: <20250126072056.4004912-1-antonb@tenstorrent.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2001:4860:4864:20::34;
- envelope-from=antonb@tenstorrent.com; helo=mail-oa1-x34.google.com
+Received-SPF: pass client-ip=2001:4860:4864:20::2b;
+ envelope-from=antonb@tenstorrent.com; helo=mail-oa1-x2b.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -108,47 +108,21 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 Signed-off-by: Anton Blanchard <antonb@tenstorrent.com>
 ---
- target/riscv/insn_trans/trans_rvv.c.inc | 9 +++++----
- 1 file changed, 5 insertions(+), 4 deletions(-)
+ target/riscv/insn_trans/trans_rvv.c.inc | 1 +
+ 1 file changed, 1 insertion(+)
 
 diff --git a/target/riscv/insn_trans/trans_rvv.c.inc b/target/riscv/insn_trans/trans_rvv.c.inc
-index 0952bcbe2c..bc22b42801 100644
+index f5ba1c4280..a873536eea 100644
 --- a/target/riscv/insn_trans/trans_rvv.c.inc
 +++ b/target/riscv/insn_trans/trans_rvv.c.inc
-@@ -458,13 +458,14 @@ static bool vext_check_mss(DisasContext *s, int vd, int vs1, int vs2)
-  *      instruction cannot overlap the source mask register (v0).
-  *      (Section 5.3)
-  */
--static bool vext_wide_check_common(DisasContext *s, int vd, int vm)
-+static bool vext_wide_check_common(DisasContext *s, int vd, int vs, int vm)
+@@ -609,6 +609,7 @@ static bool vext_check_slide(DisasContext *s, int vd, int vs2,
  {
-     return (s->lmul <= 2) &&
-            (s->sew < MO_64) &&
-            ((s->sew + 1) <= (s->cfg_ptr->elen >> 4)) &&
-            require_align(vd, s->lmul + 1) &&
--           require_vm(vm, vd);
-+           require_vm(vm, vd) &&
-+           require_vm(vm, vs);
- }
- 
- /*
-@@ -498,14 +499,14 @@ static bool vext_narrow_check_common(DisasContext *s, int vd, int vs2,
- 
- static bool vext_check_ds(DisasContext *s, int vd, int vs, int vm)
- {
--    return vext_wide_check_common(s, vd, vm) &&
-+    return vext_wide_check_common(s, vd, vs, vm) &&
-            require_align(vs, s->lmul) &&
-            require_noover(vd, s->lmul + 1, vs, s->lmul);
- }
- 
- static bool vext_check_dd(DisasContext *s, int vd, int vs, int vm)
- {
--    return vext_wide_check_common(s, vd, vm) &&
-+    return vext_wide_check_common(s, vd, vs, vm) &&
-            require_align(vs, s->lmul + 1);
- }
- 
+     bool ret = require_align(vs2, s->lmul) &&
+                require_align(vd, s->lmul) &&
++               require_vm(vm, vs2) &&
+                require_vm(vm, vd);
+     if (is_over) {
+         ret &= (vd != vs2);
 -- 
 2.34.1
 
