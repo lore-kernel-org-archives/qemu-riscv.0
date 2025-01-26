@@ -4,66 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 10531C0218D
-	for <qemu-riscv@archiver.kernel.org>; Sun, 26 Jan 2025 07:23:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 446F3C02181
+	for <qemu-riscv@archiver.kernel.org>; Sun, 26 Jan 2025 07:24:28 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tbwyP-00057p-BZ; Sun, 26 Jan 2025 02:22:25 -0500
+	id 1tbwyQ-00058p-Vv; Sun, 26 Jan 2025 02:22:27 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <antonb@tenstorrent.com>)
- id 1tbwyG-00053R-Kt
- for qemu-riscv@nongnu.org; Sun, 26 Jan 2025 02:22:17 -0500
-Received: from mail-oa1-x2a.google.com ([2001:4860:4864:20::2a])
+ id 1tbwyI-00054C-7S
+ for qemu-riscv@nongnu.org; Sun, 26 Jan 2025 02:22:18 -0500
+Received: from mail-oa1-x2f.google.com ([2001:4860:4864:20::2f])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <antonb@tenstorrent.com>)
- id 1tbwyD-0004HV-Nw
- for qemu-riscv@nongnu.org; Sun, 26 Jan 2025 02:22:16 -0500
-Received: by mail-oa1-x2a.google.com with SMTP id
- 586e51a60fabf-29fad34bb62so1850224fac.1
- for <qemu-riscv@nongnu.org>; Sat, 25 Jan 2025 23:22:13 -0800 (PST)
+ id 1tbwyG-0004Ih-CN
+ for qemu-riscv@nongnu.org; Sun, 26 Jan 2025 02:22:17 -0500
+Received: by mail-oa1-x2f.google.com with SMTP id
+ 586e51a60fabf-29f7b5fbc9aso1208324fac.3
+ for <qemu-riscv@nongnu.org>; Sat, 25 Jan 2025 23:22:15 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=tenstorrent.com; s=google; t=1737876132; x=1738480932; darn=nongnu.org;
+ d=tenstorrent.com; s=google; t=1737876135; x=1738480935; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=uf7peyd2COR5J9ebNbp/+78Wow2GJZZgdhDpPr51VFU=;
- b=bWVklSvRA5FnUsWmvosg+ZrbdFIIFmJ+B9Ej59AuyjbgjaUbDCcNBRS8HyNtWHMR/y
- TzMPc8FAJZoMmR/ZFUJOkm8O+vnncB27ZTpiKRtHmN6fHAwLyOVMt25c1ZRNLyjqrUnl
- c8gHOuMXbFonLHqFeuVqLc8dVW3DfgmklwP54VKJiBGxZ/nCQBejlQba+YdR8aMFRL68
- 8Q6azmXF/Zkgi9Y6ZxHc/HC9D1N9voLYDr7bW35jHA6xaN+G2ybDW1RjN9kBqyc2FO4t
- +91NjM7wzG65tdM2RMtjSGvlb8q2+M5pm0i4ih00/SvkCJ7+JuOf6SMhQ1wtsgP9UelX
- aXEg==
+ bh=eQFjdJhNxka24LT0P5MCvvpngkXU4jPKMvtCsHELutA=;
+ b=haHTllrqvGKORcLj3rwMlXrpO2qlY/fvRcWAA4b/6ae/Sn0AD0xmYvTk983HRTzkVz
+ K9kq1uq2ZL1JtK1itUDPlt06bj0zQRAxaWM6MHXtR82q9Y9viaT5GbHAYUZakJ1I+kFf
+ 1fk00hKmubBRaJbJNS38eiMGfn2xcF/ewsqv+FFO5/NJ40itYDdYYXtTZlkNkOZP3Wl9
+ rq4N400GGuy5H3URydtSPYVMNQc10yMGLy8GIgPufw0uL8XEzihTLJq7cKU8aKMUIDzq
+ NxC2Y6+ELjeJzUbKE5z0J6ckMfoNBxZNmKqNEhTNz9enGv/QR2ntkGMNeWIJEWH/gf4o
+ x8Ig==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1737876132; x=1738480932;
+ d=1e100.net; s=20230601; t=1737876135; x=1738480935;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=uf7peyd2COR5J9ebNbp/+78Wow2GJZZgdhDpPr51VFU=;
- b=MF5SD3bNiiR4rFdoobP+KZEcjcFqxO+ZwoErxSa5SNRTBNKriHhFQuD4yF6CjeXEFJ
- S6oJTpmpMRyHPxwJTN28emlfR8i2CNf5nvGvYWC1jbYn1OBn/x/+ycu400fK3DtTLGpA
- lyHj45HYJ+XSW0FTR7bv6u/HN0b7KL/9AeSgbiA07pZcd6fso6gIay3aaV9SKGbHC5cf
- dn2XRvYWNo2qdxxSa8iBhxoKy8/hgpEoarWcItIQd2ob0wRrAI+FQzDXK2zLZVK1khz2
- 86pZ9tjSdpviNFDBkpxvvo16ci789VH0D9lxVPi+OF5LXFrduQlPaMLssG1q6YUFE8mz
- 2skg==
-X-Gm-Message-State: AOJu0YzVxZYizbxOjqmATMWyiIQKEl8EzSuiSury6Wk8EUOMXyNeBHpx
- RwA7vvHLe4bkimHm41gSaTXBPxYcvOJr+nFYw/3BDrgnNdRYp04AOE9I7JZdy+jufbIt2dAF+9P
- Estl0wA==
-X-Gm-Gg: ASbGncslGBxOAJqiS4mKZFjE+SoY23O7tmQIg2a3QtjcuEewNWb8yWSGPoRC5tkWdda
- vptvSNS9//GjQeoYvcn6rxS2EwcayKfcmP/Wl6a8jtP2Qci9Hev2H4X0vXJS6Mysak+gCfsdsB7
- HQ9mjxNljifweTN6mxs7bNDt33eXp+J0jFYgYrB/NkgKsYMd4eiyNmYSrOWXaFtlP1n4E2Tpbgo
- VTyQ41cqxH/chEohdgJqjRN1QyMbx+mI1GeSqxHyBMnoyp8OlpgaWJ683AZXpXDjbTVTIKPS2+A
- fiv44QzQgwUznGToFBbo/F6kXtSyMz7LwkAlrCc=
-X-Google-Smtp-Source: AGHT+IHz9BQAGsOhwiE5/ojcR1/Velq2Jz6MobNVEDu6abEIjTPxNI2otT2ranyeUJXFo+UoAmN69w==
-X-Received: by 2002:a05:6871:d087:b0:29e:787f:b294 with SMTP id
- 586e51a60fabf-2b1c0c86c2cmr20391792fac.38.1737876132313; 
- Sat, 25 Jan 2025 23:22:12 -0800 (PST)
+ bh=eQFjdJhNxka24LT0P5MCvvpngkXU4jPKMvtCsHELutA=;
+ b=K5kzpqO2WQz2K5KghuWuu5IpHXHvFVdmJnraoBiO8T8SIJKtzROz4GW1WhMliRxfDh
+ 9POiQxjFPIy4PWOsR6nVTLV3QKeLoq4ay8e8t0z+mITNVAKh3KRx/8JTGZ7qw0tW4+3+
+ WKcNYRkmU9Q2daUR0rbQc4kbxt/amooPKVcSu2I2pYKHtHBbTeqVD0rrNsksKvTdL6oB
+ fEw6/jm8Pu2FYVRzjGRoEC3BVPY/K0vIyaTf1mBDj7A/VZrBeOO/NcQO17WtQTI0/7fF
+ E4KUVrmO5kfqvO4K/+0CfE0Wgn68HLaWETU3+K8JXd/1JkVCoVc4k5uaAsFY1hnAwtJZ
+ SjgQ==
+X-Gm-Message-State: AOJu0YxzNVJ9IfCciNCTMeh+nlYSP4LcV2ENO84T3j9DAIVJ3anJxZuM
+ zoFZMb/4hvZmdq+OsQex/yD6exllgk0CEvH3bBrEYsKnAai/DCRIAo+kNQZmNjp2VmtZZWJtWcF
+ e1wFiVQ==
+X-Gm-Gg: ASbGncuopCp4Y45P0Glbx18bHMK3bhgksRtcGlupYL1dBjBOkpDKmmKCMJAF8DGBksj
+ Rn0rmoI6xLugPMzG5AjATOP4zev1xOVUTz08IzbEzg0sJbfvETh6bnUp1/DORzBf4F1uRhSutjK
+ xe2+i1ZjIue+UXi3mEu1HazMyPPKuGXfxAL/+l57xYz50m+pyP7yLBclEqBPoeLaXj7KToNILCO
+ FPC5fM+Vul1R07MN9mJIQMp8YjZ9L6JTjg+B/lyh3HI8paSkpmbvTn2A49Ji/DMNSOCTZuBnXKc
+ hGrHZAw00LfKWcKRfRFFd7ly3uq5FMfSBWusr+k=
+X-Google-Smtp-Source: AGHT+IFNxCoxaEc9cmrHKIONIz8BXh3QQdX/HFAolL00O2ACI5iPu46p4s5HLYyJwujoAWJpjuU3Jw==
+X-Received: by 2002:a05:6870:2f14:b0:29e:353b:8f25 with SMTP id
+ 586e51a60fabf-2b1c0a29375mr18010054fac.12.1737876135003; 
+ Sat, 25 Jan 2025 23:22:15 -0800 (PST)
 Received: from ausc-rvsw-c-01-anton.tenstorrent.com ([38.104.49.66])
  by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-2b28f1d887csm1814281fac.29.2025.01.25.23.22.11
+ 586e51a60fabf-2b28f1d887csm1814281fac.29.2025.01.25.23.22.14
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 25 Jan 2025 23:22:11 -0800 (PST)
+ Sat, 25 Jan 2025 23:22:14 -0800 (PST)
 From: Anton Blanchard <antonb@tenstorrent.com>
 To: qemu-riscv@nongnu.org,
 	qemu-devel@nongnu.org
@@ -73,17 +73,17 @@ Cc: Anton Blanchard <antonb@tenstorrent.com>,
  Weiwei Li <liwei1518@gmail.com>,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
  Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
-Subject: [PATCH 03/12] target/riscv: handle vadd.vx form mask and source
+Subject: [PATCH 06/12] target/riscv: handle vzext.vf2 form mask and source
  overlap
-Date: Sun, 26 Jan 2025 07:20:47 +0000
-Message-Id: <20250126072056.4004912-4-antonb@tenstorrent.com>
+Date: Sun, 26 Jan 2025 07:20:50 +0000
+Message-Id: <20250126072056.4004912-7-antonb@tenstorrent.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20250126072056.4004912-1-antonb@tenstorrent.com>
 References: <20250126072056.4004912-1-antonb@tenstorrent.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2001:4860:4864:20::2a;
- envelope-from=antonb@tenstorrent.com; helo=mail-oa1-x2a.google.com
+Received-SPF: pass client-ip=2001:4860:4864:20::2f;
+ envelope-from=antonb@tenstorrent.com; helo=mail-oa1-x2f.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -112,16 +112,16 @@ Signed-off-by: Anton Blanchard <antonb@tenstorrent.com>
  1 file changed, 1 insertion(+)
 
 diff --git a/target/riscv/insn_trans/trans_rvv.c.inc b/target/riscv/insn_trans/trans_rvv.c.inc
-index c66cd95bdb..bc2780497e 100644
+index a873536eea..0952bcbe2c 100644
 --- a/target/riscv/insn_trans/trans_rvv.c.inc
 +++ b/target/riscv/insn_trans/trans_rvv.c.inc
-@@ -382,6 +382,7 @@ static bool vext_check_ld_index(DisasContext *s, int vd, int vs2,
- static bool vext_check_ss(DisasContext *s, int vd, int vs, int vm)
- {
-     return require_vm(vm, vd) &&
-+           require_vm(vm, vs) &&
-            require_align(vd, s->lmul) &&
-            require_align(vs, s->lmul);
+@@ -3631,6 +3631,7 @@ static bool int_ext_check(DisasContext *s, arg_rmr *a, uint8_t div)
+         require_align(a->rd, s->lmul) &&
+         require_align(a->rs2, s->lmul - div) &&
+         require_vm(a->vm, a->rd) &&
++        require_vm(a->vm, a->rs2) &&
+         require_noover(a->rd, s->lmul, a->rs2, s->lmul - div);
+     return ret;
  }
 -- 
 2.34.1
