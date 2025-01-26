@@ -4,73 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A5AC3C0218D
-	for <qemu-riscv@archiver.kernel.org>; Sun, 26 Jan 2025 20:01:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A6036C0218D
+	for <qemu-riscv@archiver.kernel.org>; Sun, 26 Jan 2025 20:02:32 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tc8ok-0004Fa-En; Sun, 26 Jan 2025 15:01:24 -0500
+	id 1tc8pq-0005ol-34; Sun, 26 Jan 2025 15:02:22 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1tc8ng-00033t-92
- for qemu-riscv@nongnu.org; Sun, 26 Jan 2025 15:00:11 -0500
-Received: from mail-pj1-x1030.google.com ([2607:f8b0:4864:20::1030])
+ id 1tc8oi-0004Hx-Qn
+ for qemu-riscv@nongnu.org; Sun, 26 Jan 2025 15:01:18 -0500
+Received: from mail-pl1-x62f.google.com ([2607:f8b0:4864:20::62f])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1tc8ne-0003JK-Mt
- for qemu-riscv@nongnu.org; Sun, 26 Jan 2025 15:00:08 -0500
-Received: by mail-pj1-x1030.google.com with SMTP id
- 98e67ed59e1d1-2f4409fc8fdso5690156a91.1
- for <qemu-riscv@nongnu.org>; Sun, 26 Jan 2025 12:00:06 -0800 (PST)
+ id 1tc8oX-0003hf-9X
+ for qemu-riscv@nongnu.org; Sun, 26 Jan 2025 15:01:03 -0500
+Received: by mail-pl1-x62f.google.com with SMTP id
+ d9443c01a7336-21669fd5c7cso64755365ad.3
+ for <qemu-riscv@nongnu.org>; Sun, 26 Jan 2025 12:01:00 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1737921605; x=1738526405; darn=nongnu.org;
+ d=linaro.org; s=google; t=1737921659; x=1738526459; darn=nongnu.org;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=jvT1nOyyGXJEnkXkKCQj0Xq14BrdlE2RAOYFWR4ybQg=;
- b=IUq5IpTPOLSEIAuBU+WXvx6ntkc2O4sbUPKuU1v+o3MF77F79fnfBTlB59lyEkYorh
- 4ZSbtqd0A35SwGQ4obMNLeqvYMJXjE117/2LHk6/N7w4/h5ra2WORh7i9wuXvFWs75/M
- S5pq9BU8ZA+DGyw6zWLCtJlKrVYT2SthY3O4sXjGR6U5p9CEKyCZyYKR91BrEmRW3iOD
- 21foiQPoiD1Ftte71ZUP3MAT9DTYX158Fb73zGA8oIZaO15OczHxvml7ScQ1gtAULbmj
- 5/g+77PvF5HZlF1oIETlh9foRgHVxSVCnKfxaPXExcgcU17X0cSWcxoVG0c/3dLS8enW
- fuQA==
+ bh=UTEeD0XMSKGDjb4UjeehXNP6i1pjJAUAQz3ZrUzV6BY=;
+ b=IhfovkTsNlpTlmE+0B6my/uNwrkrKslF9w3NMhA6vZ9i4MxSo2zxkjeEt362Y+RHRx
+ qeac3aJFSDFstdggaaFlINTHatwV5Ie0p7R7FDJccmX7V1m9grwwRGhJbLCOoiRX0rY7
+ ZhsJZuX2tlkjnvCajHSU7ftJx7b4Z5n9WYn90JYQ9K/36FfV8ArXn7sYWkbYoJt2nxfz
+ r9DY+O8M6wLL3E3PBeoSzXKbk1aGn3rMvMIu244wwRoxXWzBY8Tb6kno9bJ3eoaIZpGu
+ BC+O9OGENeaOcRGR3iT6oVXUng87FwrGUY7dhO0WTtphz8Tko3ybjCzTN5zEebbf1HQD
+ Rp5g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1737921605; x=1738526405;
+ d=1e100.net; s=20230601; t=1737921659; x=1738526459;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=jvT1nOyyGXJEnkXkKCQj0Xq14BrdlE2RAOYFWR4ybQg=;
- b=rDVf9h31Wc09r0zEMSDN+ksNaj8I+9X+c9PlTPrSnxcgb9eHaoxLZht3mI9aeLKR4h
- Wtqpphs0tWi8QOnTGzrvqCRV2KY5VjWtbCI/FEb8HrXP5aTnAumvVliOkqahqcywPHRZ
- FANdiCPbBZ2Rhw5EynFHTFrsEfUd7bicuiAu6zY9z46EQe796Ii5fuMurqYUjxNlnY2p
- ixD+Js321mXUVbqPd65eLbuyYWg1aMOjn7AGYypXbByBAY7uH6zLDy41I7T3b0zmOwMF
- Be+kwBFy8RBt+Uj6grOCfQyZikatOVHzcsT9C1qLy9vbPeO8b7BkPxMbkZF1m07rPTgD
- yjGA==
+ bh=UTEeD0XMSKGDjb4UjeehXNP6i1pjJAUAQz3ZrUzV6BY=;
+ b=n0QTuyaWnBXmtzyEFDrGYKYpaHjfHwluhkVHNX9AMHKe5f9WFLDk9I5onE7yUC9WTS
+ xrMBOYGqwQI0LfE6K6iG6h+piXeUXjD/sI6VUACpala0IaA8pUM5gu5QqIYh9fiNuxM3
+ ROZe/Xok7zaki3PFHkAEQ+KpT4CudUnwgSEiNNHZgxz4BWUopU0luiz51Fwqxk6QluGu
+ fH/UOBFCHgLV+PJjsPJxU5dVvZK9GWHMNytUJyFwObcUmYwuMcCS7lGhXwFYFLyPNTuF
+ S/YKiz1xVVJzFLuC82HQFfSKeDleZpYXx212OHh2AKVZh6Je/z1sqW+xXbHHPZDfojOp
+ dryg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCU8r8LEf4dcy3q9AygKwb0GsWoEMaUGZO6MqMLrRtHs0rkUTmIzdZ0YJfY990QfmQPXpBBkG/PVuRXs@nongnu.org
-X-Gm-Message-State: AOJu0YxE6B5+VgnzYCgzXca4aqIYJum+0ijX0q7WV1cS2QcHvA6rDNN9
- L5N91uXQu+Lq2Nx72oq8XtvNFA49spMR/CTIR1j6p7VLif76fF/JjUYU1LgGtU8=
-X-Gm-Gg: ASbGncvVR7yjC5gadHf7FLfgwEZ3Sc81LDpJ42Q451q8zvadth65bzNUuzMhwhITWT2
- PL3E/xkdfiv+Je7rPH3WCin9qhAAjbwBHBQMRdG4UdBCwrIfXm1bErZJeeW3QsvzOR7vYLb4H+G
- i8FEkDYvDnvrh/mncgpRIwcOF/sJLdE3vfFCj2nvx6SC43GRrjPL12Xm44yd5xoS1HbuS0MD2wB
- 3kSxJLwHDI+xkL6+he4QoG6WeL1SI9zNfcX6xtkTOT3fcFU1XrxLvIH8KaQhtjk+tJDN3JT+RMX
- gOcF0VFtywjjK5JdSSZKEGAENSXPkm4pB7o+wO5jmABM3+Q=
-X-Google-Smtp-Source: AGHT+IEP4DwQ/u514V5B38J2P62wTL0qYp8JNncl4+5UB0i/l/G/YI+4UbX8eVL0ayMsA+c7B1DDZA==
-X-Received: by 2002:a17:90a:f947:b0:2ee:8cbb:de28 with SMTP id
- 98e67ed59e1d1-2f7f176b184mr25848071a91.8.1737921605198; 
- Sun, 26 Jan 2025 12:00:05 -0800 (PST)
+ AJvYcCXewjlcYTb6kblYeTvW5LzOZtZn9/y6+kcBmw3lT4SnKFdsxXLDiFcAT+vMsNVqnj1iFBl842HBMx5L@nongnu.org
+X-Gm-Message-State: AOJu0Yx5LtbI2q+5LV2MQ6tUwJjEuh/Og7aP5DiYkIy9C4L7mAIV0cdy
+ 0adeiAepP0Lis9R0eHVV0w9NV/bYYt3aVdKzcdrLKY6syjzeURoCOuUh/2J7nAA=
+X-Gm-Gg: ASbGncu90DCGIyu4xaR+YqB+6YdlzH73fCgWghLo72N4dGd09lI7axbytqIZqtkkDfK
+ jEr3zG3V/XmlUwIyaA6f0F6TPd1fGfQTVvs7bKfyIVHyENQtHTVi5nHZ6EgbZsCXaE+0WCFVjb5
+ wuzIaOOpBTWIBWzC4trcoYmQkLGdCuvNVDQTuSeNj67wOMlS+LbPXMXJ+mLBxzO599fvFpQNbCq
+ SVyYpdzu9DozxAAP71ONRZL15uRgm4atqYTQ0oM6FnO3DkB3kMFI1guk3GNpYy6TMJsGjt2UFQc
+ GJRwVEPnY/UL0zrzdD74EaDs48IBFOGrY+CqPEVKOtMskxY=
+X-Google-Smtp-Source: AGHT+IHk4oCZBkQ3EpN55L01I/3BlN88uO4hEsi17nz9LIDtFF+nfMo3swxHhoOsy6uzlknivzwr8w==
+X-Received: by 2002:a05:6a21:99aa:b0:1e0:d89e:f5cc with SMTP id
+ adf61e73a8af0-1eb21485c9bmr55831284637.11.1737921659596; 
+ Sun, 26 Jan 2025 12:00:59 -0800 (PST)
 Received: from [192.168.0.4] (174-21-71-127.tukw.qwest.net. [174.21.71.127])
  by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-2f7ffb1dc56sm6196959a91.49.2025.01.26.12.00.04
+ 41be03b00d2f7-ac495983698sm4974713a12.55.2025.01.26.12.00.58
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sun, 26 Jan 2025 12:00:04 -0800 (PST)
-Message-ID: <ba781224-7b4a-43f6-af25-acb308f11313@linaro.org>
-Date: Sun, 26 Jan 2025 12:00:02 -0800
+ Sun, 26 Jan 2025 12:00:59 -0800 (PST)
+Message-ID: <aa1564ba-b51d-4278-9368-2849266f8685@linaro.org>
+Date: Sun, 26 Jan 2025 12:00:56 -0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 05/20] cpus: Keep default fields initialization in
- cpu_common_initfn()
+Subject: Re: [PATCH 07/20] accel/tcg: Build tcg_flags helpers as common code
 To: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
  qemu-devel@nongnu.org
 Cc: Peter Maydell <peter.maydell@linaro.org>,
@@ -80,14 +79,14 @@ Cc: Peter Maydell <peter.maydell@linaro.org>,
  qemu-riscv@nongnu.org, David Hildenbrand <david@redhat.com>,
  qemu-s390x@nongnu.org, xen-devel@lists.xenproject.org
 References: <20250123234415.59850-1-philmd@linaro.org>
- <20250123234415.59850-6-philmd@linaro.org>
+ <20250123234415.59850-8-philmd@linaro.org>
 Content-Language: en-US
 From: Richard Henderson <richard.henderson@linaro.org>
-In-Reply-To: <20250123234415.59850-6-philmd@linaro.org>
+In-Reply-To: <20250123234415.59850-8-philmd@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1030;
- envelope-from=richard.henderson@linaro.org; helo=mail-pj1-x1030.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::62f;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pl1-x62f.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -110,18 +109,16 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 1/23/25 15:43, Philippe Mathieu-Daudé wrote:
-> cpu_common_initfn() is our target agnostic initializer,
-> while cpu_exec_initfn() is the target specific one.
+On 1/23/25 15:44, Philippe Mathieu-Daudé wrote:
+> While cpu-exec.c is build for each target,tcg_flags helpers
+> aren't target specific. Move them to cpu-exec-common.c to
+> build them once.
 > 
-> The %as and %num_ases fields are not target specific,
-> so initialize them in the common helper.
-> 
-> Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+> Signed-off-by: Philippe Mathieu-Daudé<philmd@linaro.org>
 > ---
->   cpu-target.c         | 3 ---
->   hw/core/cpu-common.c | 2 ++
->   2 files changed, 2 insertions(+), 3 deletions(-)
+>   accel/tcg/cpu-exec-common.c | 33 +++++++++++++++++++++++++++++++++
+>   accel/tcg/cpu-exec.c        | 32 --------------------------------
+>   2 files changed, 33 insertions(+), 32 deletions(-)
 
 Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 
