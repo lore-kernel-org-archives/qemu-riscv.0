@@ -4,80 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1BFF1C02188
-	for <qemu-riscv@archiver.kernel.org>; Mon, 27 Jan 2025 14:06:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 79984C02188
+	for <qemu-riscv@archiver.kernel.org>; Mon, 27 Jan 2025 14:08:04 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tcPl2-0001kf-7T; Mon, 27 Jan 2025 09:06:32 -0500
+	id 1tcPmB-0004ba-AS; Mon, 27 Jan 2025 09:07:43 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1tcPkC-00013r-8A
- for qemu-riscv@nongnu.org; Mon, 27 Jan 2025 09:05:41 -0500
+ (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1tcPm8-0004Xz-0m
+ for qemu-riscv@nongnu.org; Mon, 27 Jan 2025 09:07:40 -0500
 Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1tcPk9-0000SM-Gc
- for qemu-riscv@nongnu.org; Mon, 27 Jan 2025 09:05:39 -0500
+ (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1tcPm4-00011i-S5
+ for qemu-riscv@nongnu.org; Mon, 27 Jan 2025 09:07:39 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1737986736;
+ s=mimecast20190719; t=1737986855;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
- bh=xkRJ/A+k3ci/jgRQIwBl5g6mUAHZnUlimZu8QfpnGLo=;
- b=SbEbqnzDmKdiZNyT2/TwmeUnnFEXdMEJOaEw54nGSfgQEyeq4pTYAZcIlV/BenFZjp+GzY
- 7bBgvuLJ8FFlNdrlOrQBiE/MuXi+FAjiTmO9Qx4VtEaVYlHHWRmES+d7YsIgyD2EIRsnCN
- UqlJ35CtEr5x+fFPSiMaSQT0VfgNJmA=
-Received: from mail-wr1-f72.google.com (mail-wr1-f72.google.com
- [209.85.221.72]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=Ypke+9YEqDi93Q1saXNmPEppmaqJ6lDrUZ8NulJrmGQ=;
+ b=MY6skZTe/Bb6YIzz9Qi3dMaSvT+xyydESzexg3zwK7i8zwJnOAiDd9HOwMj8J0VB0xRrKZ
+ 6LBvcXSQN5mhZz0VehDBF0Xy0TAWBmKu2DJ5QyMI7fXEO4mw6pU1weKV+D7nwKhme76/f6
+ s0ZdxIWv2v8SYzLFDn3zuEk1qoHm58U=
+Received: from mail-wm1-f69.google.com (mail-wm1-f69.google.com
+ [209.85.128.69]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-516-lzjyUUWtN5W9LJm1k22DTQ-1; Mon, 27 Jan 2025 09:05:34 -0500
-X-MC-Unique: lzjyUUWtN5W9LJm1k22DTQ-1
-X-Mimecast-MFC-AGG-ID: lzjyUUWtN5W9LJm1k22DTQ
-Received: by mail-wr1-f72.google.com with SMTP id
- ffacd0b85a97d-38c24ac3706so3715550f8f.0
- for <qemu-riscv@nongnu.org>; Mon, 27 Jan 2025 06:05:34 -0800 (PST)
+ us-mta-550-4aa1JKxpMQ2rftcc0kT2hA-1; Mon, 27 Jan 2025 09:07:33 -0500
+X-MC-Unique: 4aa1JKxpMQ2rftcc0kT2hA-1
+X-Mimecast-MFC-AGG-ID: 4aa1JKxpMQ2rftcc0kT2hA
+Received: by mail-wm1-f69.google.com with SMTP id
+ 5b1f17b1804b1-4361fc2b2d6so25636765e9.3
+ for <qemu-riscv@nongnu.org>; Mon, 27 Jan 2025 06:07:32 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1737986734; x=1738591534;
+ d=1e100.net; s=20230601; t=1737986852; x=1738591652;
  h=content-transfer-encoding:in-reply-to:autocrypt:content-language
  :from:references:cc:to:subject:user-agent:mime-version:date
  :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=xkRJ/A+k3ci/jgRQIwBl5g6mUAHZnUlimZu8QfpnGLo=;
- b=ItAV6OMeW/SiiXaojcAIM0DeFw+lwhKngJ+WaS/xouVXRlc/JYdTb7Ok9rv2Vq7ABg
- 5z0yQ3zqmnxoxUqlqrjWBbzz78RkCVKEc2725FRUn3jMRQ59mInFzrHlGzb/wJ7sYg38
- k0kUt90CXldPwtH+eR7WrUA7V/7eMtefzqJNWnvyFfLXgF5Mv3MD533D69EkM7+Ecfdl
- n+cz/CJIhPTjEScNjeQsgiCVb/miMPfStUKOSaYIgkzIYAYMRo83oXwfH2W4QHm2RBWU
- FvU/OPbdb39a630x1Ct1fuoYfG6is9Tpe4w2X6eyj+55h1n40SK+C7MEXPA7GLjnETS1
- B/jQ==
+ bh=Ypke+9YEqDi93Q1saXNmPEppmaqJ6lDrUZ8NulJrmGQ=;
+ b=BB+Zj5uS4D8AJ2xbzlfnUMn/3J0isTnTcgc3LOEp9iMTKD87zhUBWuv7e0nusRZvsG
+ A56ghB1hdopCBk2JeOpRa6QR/x8Gb5YyVa0T5crdJy1kL7a1A4y10uIfXkd6uAuPmzG9
+ LAaGA9k8VDDsOliuYPGMHDs6gff31XTvWHxQKZCMvU2MTuKTF2OHr3OGhUebb+fL4WLz
+ sGSULPq+G38Lt0jjxCH3S/IPvVpk1C343HV2H+EGC1N3msHnV9wh3g2yfmkNGlD8zME6
+ VfdwUlIyMOE1PSjYUukZ36mHNlgni6r9QKp265bicVbBSiQHgfvI9nl5OrethNRCeB7R
+ hTuA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVoR+XcVj484Tf0V6GmpFeLjvVVbCHwxdVslK4cZSQEBrTdj/RxA1xbbTTB4ZyzFRxoU9X81nSMGZez@nongnu.org
-X-Gm-Message-State: AOJu0Yxg6kltdMUVW/vqURglDNZI3NRAMEfh1RSTKpdEteTXUcIDbuAM
- PA1rP/DFAXh+9TnDa379lHJ2lJn691EkEJAwyxzzMrFmfGdSxpjwv8jpxJc2ETkjUr1kBGceMo2
- r3TvPskm7pp25NFaGsVArPWHiz4HqCobD6vr8zQjYjHNW7+emxa45
-X-Gm-Gg: ASbGncu6RMH4DizpG6j0nzPnhJ1LHz17uJ0dT24Ec3eEXX3HpFRQkvmP5w7y6rV9+sO
- CDBRV+E/ZtIwe9pXAlI9+j7pJklsjmzY4xc/hkp6+N5q7zNL/D1nZNo7t2k57cFNXdUJMjksUUd
- j6d9a01vfLBScu51PB6dtQj4lkzX9faefJOcXFg/oujZ8fCY4Gyjc5aEozCthGwGU4FEEinIZr6
- 2SNML1jPWwBJvWweHPsQ4NYvRXLRWIzq0laNxZIeR2GL0zldzwqOODzgSdSlyFpcxxbi2t0z/pU
- uKHx+7aVGq80/e0wvsG5aDEIjp4Ffw==
-X-Received: by 2002:a5d:64a1:0:b0:386:3262:28c6 with SMTP id
- ffacd0b85a97d-38bf5677c09mr36386806f8f.5.1737986733621; 
- Mon, 27 Jan 2025 06:05:33 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IGuYXESyi+kc9NCw7MuHL41XzG1QcCQlMyA984ONV9J24K5nNJ6tXBiXDGueu8RAcf5775iiQ==
-X-Received: by 2002:a5d:64a1:0:b0:386:3262:28c6 with SMTP id
- ffacd0b85a97d-38bf5677c09mr36386778f8f.5.1737986733292; 
- Mon, 27 Jan 2025 06:05:33 -0800 (PST)
+ AJvYcCVFuqwrUfU2psdX24l6GzUNljtwvbriwamIh330x3PMdypMrWFVK/PJDg59zYcQC+4+qnN6M8xbeLUs@nongnu.org
+X-Gm-Message-State: AOJu0YxakQyM+Vm8zX4uFu/wM3G07bhcue4greNpXdlFsKtOkdVm/4bK
+ 4Fg8sMgZJvOMsPDtpByng+5/mSqpefFUp7HkcoH7qV8Gi4W8VsJieJjL+5wKPi0mXv7ED3ihW2c
+ S2HN5jo/kl0rZggRfxf/yQWon46RO0qWFW396ffOZMjC+N5EcT5Iv
+X-Gm-Gg: ASbGncvq0v1OQpYbTH+q71qMz6nZa5ARW4XoPfnxWrb5LsZj5+DiJrhvjQ0eu2dI5mZ
+ aCXWADm3U3zv6YRYy401w+Wm4PRJXbshUVQigsHkIgNh3YR3/I6ZMWw6QZKhQAHmhSdSleqmB6F
+ txaK96B9xvkwHOLqxWmgv43KAkXI4qQxs594+wNkQaCSPeiDB7QG1uQl7e9kR+rJpcz6xLV0Vix
+ FzDdz6OawTRUpIn5b2kqyX1h0prH3rmIX1R3HgQBKn2jlxzNKvyrCIHYtUpBk34tcTxPozd6cHL
+ BTG/YaCBaKJX8RL7jsSMZRZE4bD2rw==
+X-Received: by 2002:a5d:6c6f:0:b0:38a:9ed4:9fff with SMTP id
+ ffacd0b85a97d-38bf57c070bmr41409945f8f.51.1737986850462; 
+ Mon, 27 Jan 2025 06:07:30 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IHr0vfPxvL7enOn7yah2SfP6PrcinbPjCqbFN5skcC0DTp52ifobOlssYnjZYeorp6CQMChbA==
+X-Received: by 2002:a5d:6c6f:0:b0:38a:9ed4:9fff with SMTP id
+ ffacd0b85a97d-38bf57c070bmr41409741f8f.51.1737986848373; 
+ Mon, 27 Jan 2025 06:07:28 -0800 (PST)
 Received: from [10.33.192.228] (nat-pool-str-t.redhat.com. [149.14.88.106])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-38c2a1c42fcsm11361252f8f.96.2025.01.27.06.05.32
+ ffacd0b85a97d-38c2a17650esm11260065f8f.12.2025.01.27.06.07.27
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 27 Jan 2025 06:05:32 -0800 (PST)
-Message-ID: <015585f2-4e63-46d5-a8d7-94db6a4220a8@redhat.com>
-Date: Mon, 27 Jan 2025 15:05:31 +0100
+ Mon, 27 Jan 2025 06:07:28 -0800 (PST)
+Message-ID: <b94f8b56-ccb6-4d38-b688-94d5e6e6af61@redhat.com>
+Date: Mon, 27 Jan 2025 15:07:27 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 09/10] target/xtensa: Set disassemble_info::endian value
- in disas_set_info()
+Subject: Re: [PATCH 10/10] disas: Remove target_words_bigendian() call in
+ initialize_debug_target()
 To: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
  qemu-devel@nongnu.org
 Cc: qemu-arm@nongnu.org, qemu-s390x@nongnu.org,
@@ -85,7 +85,7 @@ Cc: qemu-arm@nongnu.org, qemu-s390x@nongnu.org,
  Peter Maydell <peter.maydell@linaro.org>,
  Richard Henderson <richard.henderson@linaro.org>, qemu-ppc@nongnu.org
 References: <20250127115426.51355-1-philmd@linaro.org>
- <20250127115426.51355-10-philmd@linaro.org>
+ <20250127115426.51355-11-philmd@linaro.org>
 From: Thomas Huth <thuth@redhat.com>
 Autocrypt: addr=thuth@redhat.com; keydata=
  xsFNBFH7eUwBEACzyOXKU+5Pcs6wNpKzrlJwzRl3VGZt95VCdb+FgoU9g11m7FWcOafrVRwU
@@ -129,9 +129,9 @@ Autocrypt: addr=thuth@redhat.com; keydata=
  oiT+z+/E59qj/EKfyce3sbC9XLjXv3mHMrq1tKX4G7IJGnS989E/fg6crv6NHae9Ckm7+lSs
  IQu4bBP2GxiRQ+NV3iV/KU3ebMRzqIC//DCOxzQNFNJAKldPe/bKZMCxEqtVoRkuJtNdp/5a
  yXFZ6TfE1hGKrDBYAm4vrnZ4CXFSBDllL59cFFOJCkn4Xboj/aVxxJxF30bn
-In-Reply-To: <20250127115426.51355-10-philmd@linaro.org>
+In-Reply-To: <20250127115426.51355-11-philmd@linaro.org>
 X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: AMoaBrJGLzMpr-9ZcdEAbJkeCvUEXduLKjxB26veH_c_1737986734
+X-Mimecast-MFC-PROC-ID: cWn_-q9Hong-HJqgudSd3NIcHslN3dvJqy6ki47r_Jk_1737986852
 X-Mimecast-Originator: redhat.com
 Content-Language: en-US
 Content-Type: text/plain; charset=UTF-8; format=flowed
@@ -163,28 +163,23 @@ Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 On 27/01/2025 12.54, Philippe Mathieu-Daudé wrote:
-> Have the CPUClass::disas_set_info() callback set the
-> disassemble_info::endian field.
+> All CPUClass implementations must implement disas_set_info()
+> which sets the disassemble_info::endian value.
 > 
+> Ensure that by:
+> 
+> 1/ assert disas_set_info() handler is not NULL
+> 2/ set %endian to BFD_ENDIAN_UNKNOWN before calling the
+>     CPUClass::disas_set_info() handler, then assert %endian
+>     is not BFD_ENDIAN_UNKNOWN after the call.
+> 
+> This allows removing the target_words_bigendian() call in disas/.
+> 
+> Suggested-by: Richard Henderson <richard.henderson@linaro.org>
 > Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 > ---
->   target/xtensa/cpu.c | 5 +++++
->   1 file changed, 5 insertions(+)
-> 
-> diff --git a/target/xtensa/cpu.c b/target/xtensa/cpu.c
-> index efbfe73fcfb..bc170dbb5cc 100644
-> --- a/target/xtensa/cpu.c
-> +++ b/target/xtensa/cpu.c
-> @@ -159,6 +159,11 @@ static void xtensa_cpu_disas_set_info(CPUState *cs, disassemble_info *info)
->   
->       info->private_data = cpu->env.config->isa;
->       info->print_insn = print_insn_xtensa;
-> +#if TARGET_BIG_ENDIAN
-> +    info->endian = BFD_ENDIAN_BIG;
-> +#else
-> +    info->endian = BFD_ENDIAN_LITTLE;
-> +#endif
->   }
+>   disas/disas-common.c | 13 ++++---------
+>   1 file changed, 4 insertions(+), 9 deletions(-)
 
 Reviewed-by: Thomas Huth <thuth@redhat.com>
 
