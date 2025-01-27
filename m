@@ -4,47 +4,47 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 33B3EC02188
-	for <qemu-riscv@archiver.kernel.org>; Mon, 27 Jan 2025 13:01:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A9D85C0218A
+	for <qemu-riscv@archiver.kernel.org>; Mon, 27 Jan 2025 13:24:24 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tcOjO-0000Vv-7c; Mon, 27 Jan 2025 08:00:46 -0500
+	id 1tcP5q-0003Bp-LG; Mon, 27 Jan 2025 08:23:58 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <balaton@eik.bme.hu>)
- id 1tcOjK-0000Ot-0W; Mon, 27 Jan 2025 08:00:42 -0500
+ id 1tcP5L-00035Y-8J; Mon, 27 Jan 2025 08:23:34 -0500
 Received: from zero.eik.bme.hu ([152.66.115.2])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <balaton@eik.bme.hu>)
- id 1tcOjI-0008RM-41; Mon, 27 Jan 2025 08:00:41 -0500
+ id 1tcP5I-0003In-67; Mon, 27 Jan 2025 08:23:26 -0500
 Received: from zero.eik.bme.hu (localhost [127.0.0.1])
- by zero.eik.bme.hu (Postfix) with ESMTP id AA7354E600E;
- Mon, 27 Jan 2025 14:00:33 +0100 (CET)
+ by zero.eik.bme.hu (Postfix) with ESMTP id 130854E6004;
+ Mon, 27 Jan 2025 14:23:21 +0100 (CET)
 X-Virus-Scanned: amavisd-new at eik.bme.hu
 Received: from zero.eik.bme.hu ([127.0.0.1])
  by zero.eik.bme.hu (zero.eik.bme.hu [127.0.0.1]) (amavisd-new, port 10028)
- with ESMTP id ed1xDBco8JDT; Mon, 27 Jan 2025 14:00:31 +0100 (CET)
+ with ESMTP id yknCaIevVlOO; Mon, 27 Jan 2025 14:23:19 +0100 (CET)
 Received: by zero.eik.bme.hu (Postfix, from userid 432)
- id AA3FD4E6004; Mon, 27 Jan 2025 14:00:31 +0100 (CET)
+ id 136854E6001; Mon, 27 Jan 2025 14:23:19 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
- by zero.eik.bme.hu (Postfix) with ESMTP id A7F7274577C;
- Mon, 27 Jan 2025 14:00:31 +0100 (CET)
-Date: Mon, 27 Jan 2025 14:00:31 +0100 (CET)
+ by zero.eik.bme.hu (Postfix) with ESMTP id 1172874577C;
+ Mon, 27 Jan 2025 14:23:19 +0100 (CET)
+Date: Mon, 27 Jan 2025 14:23:19 +0100 (CET)
 From: BALATON Zoltan <balaton@eik.bme.hu>
 To: =?ISO-8859-15?Q?Philippe_Mathieu-Daud=E9?= <philmd@linaro.org>
 cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, qemu-ppc@nongnu.org, 
  Richard Henderson <richard.henderson@linaro.org>, qemu-s390x@nongnu.org, 
  qemu-arm@nongnu.org, Peter Maydell <peter.maydell@linaro.org>
-Subject: Re: [PATCH 3/6] hw/loader: Clarify local variable name in
- load_elf_ram_sym()
-In-Reply-To: <20250127113824.50177-4-philmd@linaro.org>
-Message-ID: <6c51f4a7-ae43-fadb-cf3b-191d4b59975c@eik.bme.hu>
+Subject: Re: [PATCH 6/6] hw/loader: Pass ELFDATA endian order argument to
+ load_elf()
+In-Reply-To: <20250127113824.50177-7-philmd@linaro.org>
+Message-ID: <cf92f7c0-9fc5-0b55-d14e-b4d9fd64d553@eik.bme.hu>
 References: <20250127113824.50177-1-philmd@linaro.org>
- <20250127113824.50177-4-philmd@linaro.org>
+ <20250127113824.50177-7-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: multipart/mixed;
- boundary="3866299591-1921631016-1737982831=:99138"
+ boundary="3866299591-678307236-1737984199=:99138"
 Received-SPF: pass client-ip=152.66.115.2; envelope-from=balaton@eik.bme.hu;
  helo=zero.eik.bme.hu
 X-Spam_score_int: -18
@@ -72,51 +72,64 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
   This message is in MIME format.  The first part should be readable text,
   while the remaining parts are likely unreadable without MIME-aware tools.
 
---3866299591-1921631016-1737982831=:99138
+--3866299591-678307236-1737984199=:99138
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8BIT
 
 On Mon, 27 Jan 2025, Philippe Mathieu-Daudé wrote:
-> load_elf_ram_sym() compares target_data_order versus
-> host data_order. Rename 'data_order' -> 'host_data_order'
-> to ease code review.
+> Rather than passing a boolean 'is_big_endian' argument,
+> directly pass the ELFDATA, which can be unspecified using
+> the ELFDATANONE value.
 >
+> Update the call sites:
+>  0                 -> ELFDATA2LSB
+>  1                 -> ELFDATA2MSB
+>  TARGET_BIG_ENDIAN -> TARGET_BIG_ENDIAN ? ELFDATA2MSB : ELFDATA2LSB
+>
+> Suggested-by: Richard Henderson <richard.henderson@linaro.org>
 > Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 
 Reviewed-by: BALATON Zoltan <balaton@eik.bme.hu>
 
 > ---
-> hw/core/loader.c | 8 ++++----
-> 1 file changed, 4 insertions(+), 4 deletions(-)
->
-> diff --git a/hw/core/loader.c b/hw/core/loader.c
-> index ead10fb6cb5..fc2e8f91267 100644
-> --- a/hw/core/loader.c
-> +++ b/hw/core/loader.c
-> @@ -443,7 +443,7 @@ ssize_t load_elf_ram_sym(const char *filename,
->                          int clear_lsb, int data_swab,
->                          AddressSpace *as, bool load_rom, symbol_fn_t sym_cb)
-> {
-> -    int fd, data_order, target_data_order, must_swab;
-> +    int fd, host_data_order, target_data_order, must_swab;
->     ssize_t ret = ELF_LOAD_FAILED;
->     uint8_t e_ident[EI_NIDENT];
->
-> @@ -462,11 +462,11 @@ ssize_t load_elf_ram_sym(const char *filename,
->         goto fail;
->     }
-> #if HOST_BIG_ENDIAN
-> -    data_order = ELFDATA2MSB;
-> +    host_data_order = ELFDATA2MSB;
-> #else
-> -    data_order = ELFDATA2LSB;
-> +    host_data_order = ELFDATA2LSB;
-> #endif
-> -    must_swab = data_order != e_ident[EI_DATA];
-> +    must_swab = host_data_order != e_ident[EI_DATA];
->     if (big_endian) {
->         target_data_order = ELFDATA2MSB;
->     } else {
->
---3866299591-1921631016-1737982831=:99138--
+> Sorry, couldn't find good ways to split this patch...
+> ---
+> include/hw/loader.h            | 2 +-
+> hw/core/loader.c               | 5 ++---
+> hw/alpha/dp264.c               | 4 ++--
+> hw/hppa/machine.c              | 4 ++--
+> hw/i386/multiboot.c            | 4 ++--
+> hw/i386/x86-common.c           | 4 ++--
+> hw/loongarch/boot.c            | 2 +-
+> hw/m68k/an5206.c               | 2 +-
+> hw/m68k/mcf5208.c              | 2 +-
+> hw/m68k/q800.c                 | 2 +-
+> hw/m68k/virt.c                 | 2 +-
+> hw/microblaze/boot.c           | 6 ++++--
+> hw/mips/boston.c               | 2 +-
+> hw/mips/fuloong2e.c            | 2 +-
+> hw/mips/loongson3_virt.c       | 2 +-
+> hw/mips/malta.c                | 5 +++--
+> hw/mips/mipssim.c              | 3 ++-
+> hw/openrisc/boot.c             | 2 +-
+> hw/pci-host/raven.c            | 4 ++--
+> hw/ppc/e500.c                  | 2 +-
+> hw/ppc/mac_newworld.c          | 5 +++--
+> hw/ppc/mac_oldworld.c          | 4 ++--
+> hw/ppc/pegasos2.c              | 8 ++++----
+> hw/ppc/ppc405_boards.c         | 2 +-
+> hw/ppc/ppc440_bamboo.c         | 3 ++-
+> hw/ppc/sam460ex.c              | 2 +-
+> hw/ppc/spapr.c                 | 8 ++++----
+> hw/ppc/virtex_ml507.c          | 4 ++--
+> hw/s390x/ipl.c                 | 6 +++---
+> hw/sparc/leon3.c               | 2 +-
+> hw/sparc/sun4m.c               | 5 +++--
+> hw/sparc64/sun4u.c             | 6 +++---
+> hw/tricore/triboard.c          | 2 +-
+> hw/tricore/tricore_testboard.c | 2 +-
+> hw/xtensa/sim.c                | 3 ++-
+> hw/xtensa/xtfpga.c             | 3 ++-
+> 36 files changed, 67 insertions(+), 59 deletions(-)
+--3866299591-678307236-1737984199=:99138--
 
