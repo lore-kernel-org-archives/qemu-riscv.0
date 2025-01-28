@@ -4,79 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 291FCC02188
-	for <qemu-riscv@archiver.kernel.org>; Tue, 28 Jan 2025 02:15:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 248A2C02190
+	for <qemu-riscv@archiver.kernel.org>; Tue, 28 Jan 2025 06:06:06 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tcb8I-0002p9-U8; Mon, 27 Jan 2025 21:15:18 -0500
+	id 1tcejY-0007R9-ON; Tue, 28 Jan 2025 01:06:00 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1tcb8C-0002kk-Ma; Mon, 27 Jan 2025 21:15:13 -0500
-Received: from mail-vs1-xe2e.google.com ([2607:f8b0:4864:20::e2e])
+ id 1tcejX-0007Qx-Ta; Tue, 28 Jan 2025 01:05:59 -0500
+Received: from mail-pl1-x631.google.com ([2607:f8b0:4864:20::631])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1tcb80-0004Iw-60; Mon, 27 Jan 2025 21:15:12 -0500
-Received: by mail-vs1-xe2e.google.com with SMTP id
- ada2fe7eead31-4afdd15db60so1463281137.1; 
- Mon, 27 Jan 2025 18:14:57 -0800 (PST)
+ id 1tcejW-0008Co-Am; Tue, 28 Jan 2025 01:05:59 -0500
+Received: by mail-pl1-x631.google.com with SMTP id
+ d9443c01a7336-219f8263ae0so96196755ad.0; 
+ Mon, 27 Jan 2025 22:05:57 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1738030497; x=1738635297; darn=nongnu.org;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=r9xHoRG6np2r6PA/PJt0tvyafxMMFMkMC3nLervUekI=;
- b=Pl9c0gvJbs+YweuAdTHqv2XbXtbpFNuTMREeBj9RcLOzicz1sJDjsjGWMnr60ZSKPI
- U085hLFfuKUslvQ+/QK79r4dnjs0naSkZU3GLwKmh1Er6uuhA4K1rPwkpfsdfULHhzRH
- 8rHEopTdQ2FKgU23BAnl/KX5vY8EHuzXbVkkdKLOsby+74Sq9BhEZWbnqXAOZ+3MtEIf
- U4x1xY2hFO3bf3ywglifhtWhUaBMuucjRTtWorFVgrZecaiZWoA0+EGoUnmQLzkM4gck
- lHbAOHO2YhuHgEyav0xhCx8eXXaw9CXDNdCg9E7CVF0DxZrzCNEglfUy1LWfioIxrwv4
- z8IA==
+ d=gmail.com; s=20230601; t=1738044356; x=1738649156; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=YrAW79KiOv42U4iKuxM5UGtySL8UZjDnK2Geh/ESVTc=;
+ b=McC2KsoX4u92Qn4cI/o1XpoVSrXyxd+hp37IfEuoYKgt4svYrzal8lRRVa94w8evke
+ 9EJQS1GYHNwl9r4OfPRea2SbRHR7jKl8H5dEAI0tHWAdv9xMMyWKF/Av+OpPUQBsXgDC
+ wBQQiT7eCH3kae4kHRDxFeTFPi97eC1G2f5aFI9KO2Eah4/WMCvyhwxsf5HYRLJfB8cl
+ Tq+SyfwwMWRAYHPOIi3CI9B6cNN39qJNjenD4PjJRWaEIIlBIOaJkFQHMt10z6Q/5j/A
+ IWwmSPB64aTwxEMkipWPUcoz0F6v/rCXWD15vLiKRbwFqhT2/e6k8bNRdOwmCAHMk9iz
+ GoSQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1738030497; x=1738635297;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=r9xHoRG6np2r6PA/PJt0tvyafxMMFMkMC3nLervUekI=;
- b=TMI7el6Tg190g84PjpFMQMFAr6Ua0I4w3GlvO60r1SpMATduhTo4ew+78vcZJrEtxu
- GZqkImOYPY8Ny9PiR1nD6P0JBPFtNrwkgVZ1fnRRCoMOhblwUg6I4gtXp1PwJmu65LuL
- GqktkvcsYzuoco/8z5Vttb7viPt7L9Kyd9pOGs88XJyQPWLtI5RYtofy4psGp/u98H9M
- CeBrztQjCuwesDYHIA4prV4UPIZDgy0Cf1Dt2ToYmEznWS1jQl9F5XuCRPHntO5UW1oL
- tL2BhF8zqj6AXpB2rRHKfdiNqOq0nC1lYH4p4R/9UOmeXLAt6whLs7PUZI+4iNm7KL6Q
- vqtA==
+ d=1e100.net; s=20230601; t=1738044356; x=1738649156;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=YrAW79KiOv42U4iKuxM5UGtySL8UZjDnK2Geh/ESVTc=;
+ b=Ul1px8lYpsJQQWTih5YGG0wPRA6nn4nqy9+LtuZstSa/ZiN1OFIdsVr3oBxKxV57+a
+ eqMxh96lm3wzaS8kU5ijI2/yJlFBSnKltD2wp5z/uaYBtsnxVuV5HnYBH6IjgucPCgK5
+ pnsZVayngnJLk0BdKpNWB/B/78Rth0tCJ/A0JDmQUrfpWlZMZU3RXhVnHfK3BTE7/D/G
+ shJC6JIIoDEXUwiQ+ve8+IOLg8HXquQDas6C0O26zMtRXop5HjHFAtZpbjg9eyQnR4ja
+ CPO5fd3Lla+wuKoy4Ul4aUsYim4zxXdHEA9l4OrNTjdrXHnpW0iIaM4KGQWTl6w/VgGr
+ vWpw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCU1LFT6PZGCowReSdDks3eXoSg9SAts76ADj01N49wAiXZK1B4669YNQcEZQoRCyKxo8r7fQsqXj19p+g==@nongnu.org,
- AJvYcCUefRFVdnaJE3VbvRKFEIdXfAmzWHiHE++5oXba6kHLg7MRZPWvsO4y5e54o+WEwd5hqqzZGAEsjiQ=@nongnu.org,
- AJvYcCUvRy0OlRj7UmOXDPxFtFuokrSSej7n0v+XkzzR16PMvZN6c0Vpkul+EFNzfgJRKGKi4+A+cXj2+g==@nongnu.org,
- AJvYcCXLAylIXYYo7Ow1vzl00qBqgvhptcmhRyigT5Eot22ugOHRffVgU4++D5larEnCSV1XzrjNNloubJ5i9Q==@nongnu.org
-X-Gm-Message-State: AOJu0Yw0icegZqrTTiGawRT44iOCj3o5LGpr9H2d75iY1PB4KVUJdgYr
- aAZDeixbAnj/B35PGCazHs6OsbyF32H9PWQL7P2YcDsYn+xrz6yVqDSGHo470MgaQVpq3CtBFaz
- 62OaiXHg18AlRYc+2UcD8t35LUF87yw==
-X-Gm-Gg: ASbGncv7bGZ2xOhLRe2hP3yCXruScHM44D9csKOUQrhvh4MIrFw4OEcZSuu5nlAk3/u
- mlq/BMeZk+UPWnanXdI3aVAKu0tBdj6MbBVJ3+2/r1kMP1KP2flCn3xECwhTA6qQNTBSvpbT1r3
- AwX6kQqHHZ/Rz8Mf5sn/eyGmnsAA==
-X-Google-Smtp-Source: AGHT+IF6wKBBt46fAkTq4f3x18N7wt1OFGl4OsWySu45maQDPa7acOvCpbdfwQFUNsrmv+vxzHISCrzWmMLd2G6WndY=
-X-Received: by 2002:a05:6102:548d:b0:4b6:5e0f:6ddc with SMTP id
- ada2fe7eead31-4b690be8ea7mr32059480137.14.1738030496737; Mon, 27 Jan 2025
- 18:14:56 -0800 (PST)
-MIME-Version: 1.0
-References: <20250127113824.50177-1-philmd@linaro.org>
- <20250127113824.50177-3-philmd@linaro.org>
-In-Reply-To: <20250127113824.50177-3-philmd@linaro.org>
+ AJvYcCWEi0mpd2iaEhyNYo/O7Dhc6JBT/pdLFxAR7Piyv9eAT/ZGVHWDMw/GGsFbYLe+LGSo9S6l5pprWg7V@nongnu.org
+X-Gm-Message-State: AOJu0Yz5IVmqLfsZcc1rExgf2W52G86QvN5r530gLMf8QvzIqho7KQMR
+ fpCkWXQxUkHK1AYxjFuPCWSBYx+DQIJlCDgnhWCZ+dMDpt57cwq+
+X-Gm-Gg: ASbGnctMLITX+i4B3J/u7qsHn15wrCV6AL+kfjVXnOUiGS4fnB4ZEdKN22+ycB3g0+f
+ lwvssM4DC0B9dPd8XckIf3CFU6wkt0S+xV4v2XHOIIndoOOOPfwXc1gMhzGoGmC7YRbWP/QYe1H
+ zA8JBcSgc7aVQyQxXDt4Nkkokt32+ZxJjaOK/zXQVMLHI1e7uCMiEz2u4XuvjnSwHOcVdZmntk6
+ Q8vO3o81X+c99EtbZaqAga7xUVIy8s4zDZzG705ORnfrRLRGHdxODztfjBgTFy0kyuRjQ42+BRp
+ oIfnQ4buF6WEj6JsAQd6RhN9oOt0Uqk3O2av3ukqMykHaDoZSmBbLRK9RgEEahVJlKqCkXVPjbA
+ MghBu5+QkRxuu6BCX1C6a0nLS18tzDw==
+X-Google-Smtp-Source: AGHT+IE6oeSsJ7WA/7Ag1h0zI3KSmNi4b8INrQVQY55DMvVA65HCITIvSbbOBlzAVJV/p8Nxbh59tw==
+X-Received: by 2002:a17:902:f644:b0:216:4e8d:4803 with SMTP id
+ d9443c01a7336-21c355f6ab4mr620505475ad.42.1738044356016; 
+ Mon, 27 Jan 2025 22:05:56 -0800 (PST)
+Received: from toolbox.alistair23.me
+ (2403-580b-97e8-0-321-6fb2-58f1-a1b1.ip6.aussiebb.net.
+ [2403:580b:97e8:0:321:6fb2:58f1:a1b1])
+ by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-21da3ea3b3asm73741145ad.85.2025.01.27.22.05.51
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 27 Jan 2025 22:05:54 -0800 (PST)
 From: Alistair Francis <alistair23@gmail.com>
-Date: Tue, 28 Jan 2025 12:14:30 +1000
-X-Gm-Features: AWEUYZkQfhfKtkyt5YLJdZtqmowkuuA3J0M10zrKucB3xT4x3esttp3fdyDS9ko
-Message-ID: <CAKmqyKMXZPnW3iTXVD8iL5cZRTxz+iokCYPhJuruFt7sm8GotQ@mail.gmail.com>
-Subject: Re: [PATCH 2/6] hw/loader: Remove unused load_elf_ram()
-To: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@linaro.org>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, qemu-ppc@nongnu.org, 
- Richard Henderson <richard.henderson@linaro.org>, qemu-s390x@nongnu.org,
- qemu-arm@nongnu.org, Peter Maydell <peter.maydell@linaro.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::e2e;
- envelope-from=alistair23@gmail.com; helo=mail-vs1-xe2e.google.com
+X-Google-Original-From: Alistair Francis <alistair.francis@wdc.com>
+To: palmer@dabbelt.com, liwei1518@gmail.com, dbarboza@ventanamicro.com,
+ zhiwei_liu@linux.alibaba.com, qemu-riscv@nongnu.org, philmd@linaro.org
+Cc: qemu-devel@nongnu.org,
+	Alistair Francis <alistair.francis@wdc.com>
+Subject: [PATCH] MAINTAINERS: Remove Bin Meng from RISC-V maintainers
+Date: Tue, 28 Jan 2025 16:05:46 +1000
+Message-ID: <20250128060546.1374394-1-alistair.francis@wdc.com>
+X-Mailer: git-send-email 2.48.1
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::631;
+ envelope-from=alistair23@gmail.com; helo=mail-pl1-x631.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -100,92 +102,58 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Mon, Jan 27, 2025 at 9:39=E2=80=AFPM Philippe Mathieu-Daud=C3=A9
-<philmd@linaro.org> wrote:
->
-> Last use of load_elf_ram() was removed in commit 188e255bf8e
-> ("hw/s390x: Remove the possibility to load the s390-netboot.img
-> binary"), remove it.
->
-> Signed-off-by: Philippe Mathieu-Daud=C3=A9 <philmd@linaro.org>
+Bin Meng has been a long time contributor and maintainer for QEMU RISC-V
+and has been very beneficial to the RISC-V ecosystem.
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Unfortunately his email has started to bounce so this patch is removing
+them from MAINTAINERS. If in the future Bin Meng wants to return we will
+happily re-add them.
 
-Alistair
+Note that I'm not removing Bin Meng as a "SD (Secure Card)" maintainer.
 
-> ---
->  include/hw/loader.h | 14 +-------------
->  hw/core/loader.c    | 16 +---------------
->  2 files changed, 2 insertions(+), 28 deletions(-)
->
-> diff --git a/include/hw/loader.h b/include/hw/loader.h
-> index 8985046be40..9bb34e6f062 100644
-> --- a/include/hw/loader.h
-> +++ b/include/hw/loader.h
-> @@ -155,20 +155,8 @@ ssize_t load_elf_ram_sym(const char *filename,
->                           int clear_lsb, int data_swab,
->                           AddressSpace *as, bool load_rom, symbol_fn_t sy=
-m_cb);
->
-> -/** load_elf_ram:
-> - * Same as load_elf_ram_sym(), but doesn't allow the caller to specify a
-> - * symbol callback function
-> - */
-> -ssize_t load_elf_ram(const char *filename,
-> -                     uint64_t (*elf_note_fn)(void *, void *, bool),
-> -                     uint64_t (*translate_fn)(void *, uint64_t),
-> -                     void *translate_opaque, uint64_t *pentry,
-> -                     uint64_t *lowaddr, uint64_t *highaddr, uint32_t *pf=
-lags,
-> -                     int big_endian, int elf_machine, int clear_lsb,
-> -                     int data_swab, AddressSpace *as, bool load_rom);
-> -
->  /** load_elf_as:
-> - * Same as load_elf_ram(), but always loads the elf as ROM
-> + * Same as load_elf_ram_sym(), but always loads the elf as ROM
->   */
->  ssize_t load_elf_as(const char *filename,
->                      uint64_t (*elf_note_fn)(void *, void *, bool),
-> diff --git a/hw/core/loader.c b/hw/core/loader.c
-> index 4dfdb027eee..ead10fb6cb5 100644
-> --- a/hw/core/loader.c
-> +++ b/hw/core/loader.c
-> @@ -425,26 +425,12 @@ ssize_t load_elf_as(const char *filename,
->                      uint64_t *highaddr, uint32_t *pflags, int big_endian=
-,
->                      int elf_machine, int clear_lsb, int data_swab,
->                      AddressSpace *as)
-> -{
-> -    return load_elf_ram(filename, elf_note_fn, translate_fn, translate_o=
-paque,
-> -                        pentry, lowaddr, highaddr, pflags, big_endian,
-> -                        elf_machine, clear_lsb, data_swab, as, true);
-> -}
-> -
-> -/* return < 0 if error, otherwise the number of bytes loaded in memory *=
-/
-> -ssize_t load_elf_ram(const char *filename,
-> -                     uint64_t (*elf_note_fn)(void *, void *, bool),
-> -                     uint64_t (*translate_fn)(void *, uint64_t),
-> -                     void *translate_opaque, uint64_t *pentry,
-> -                     uint64_t *lowaddr, uint64_t *highaddr, uint32_t *pf=
-lags,
-> -                     int big_endian, int elf_machine, int clear_lsb,
-> -                     int data_swab, AddressSpace *as, bool load_rom)
->  {
->      return load_elf_ram_sym(filename, elf_note_fn,
->                              translate_fn, translate_opaque,
->                              pentry, lowaddr, highaddr, pflags, big_endia=
-n,
->                              elf_machine, clear_lsb, data_swab, as,
-> -                            load_rom, NULL);
-> +                            true, NULL);
->  }
->
->  /* return < 0 if error, otherwise the number of bytes loaded in memory *=
-/
-> --
-> 2.47.1
->
->
+Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+---
+ MAINTAINERS | 5 +----
+ 1 file changed, 1 insertion(+), 4 deletions(-)
+
+diff --git a/MAINTAINERS b/MAINTAINERS
+index 7be3d8f431..a0e305aa99 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -318,7 +318,6 @@ F: tests/functional/test_ppc_74xx.py
+ RISC-V TCG CPUs
+ M: Palmer Dabbelt <palmer@dabbelt.com>
+ M: Alistair Francis <alistair.francis@wdc.com>
+-M: Bin Meng <bmeng.cn@gmail.com>
+ R: Weiwei Li <liwei1518@gmail.com>
+ R: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+ R: Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
+@@ -1599,7 +1598,6 @@ F: include/hw/riscv/opentitan.h
+ F: include/hw/*/ibex_*.h
+ 
+ Microchip PolarFire SoC Icicle Kit
+-M: Bin Meng <bmeng.cn@gmail.com>
+ L: qemu-riscv@nongnu.org
+ S: Supported
+ F: docs/system/riscv/microchip-icicle-kit.rst
+@@ -1626,7 +1624,6 @@ F: include/hw/char/shakti_uart.h
+ 
+ SiFive Machines
+ M: Alistair Francis <Alistair.Francis@wdc.com>
+-M: Bin Meng <bmeng.cn@gmail.com>
+ M: Palmer Dabbelt <palmer@dabbelt.com>
+ L: qemu-riscv@nongnu.org
+ S: Supported
+@@ -3721,7 +3718,7 @@ S: Orphan
+ F: hw/i386/amd_iommu.?
+ 
+ OpenSBI Firmware
+-M: Bin Meng <bmeng.cn@gmail.com>
++L: qemu-riscv@nongnu.org
+ S: Supported
+ F: pc-bios/opensbi-*
+ F: .gitlab-ci.d/opensbi.yml
+-- 
+2.48.1
+
 
