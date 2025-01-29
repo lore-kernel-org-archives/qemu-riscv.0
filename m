@@ -4,77 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 62C41C0218D
-	for <qemu-riscv@archiver.kernel.org>; Wed, 29 Jan 2025 00:49:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9847CC0218A
+	for <qemu-riscv@archiver.kernel.org>; Wed, 29 Jan 2025 00:53:53 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tcwFw-00089p-I1; Tue, 28 Jan 2025 19:48:36 -0500
+	id 1tcwL1-0001Wq-J2; Tue, 28 Jan 2025 19:53:51 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1tcwFv-00089W-NU; Tue, 28 Jan 2025 19:48:35 -0500
-Received: from mail-vk1-xa2d.google.com ([2607:f8b0:4864:20::a2d])
+ id 1tcwKz-0001Vh-1S; Tue, 28 Jan 2025 19:53:49 -0500
+Received: from mail-vs1-xe2f.google.com ([2607:f8b0:4864:20::e2f])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1tcwFu-0002aX-Bd; Tue, 28 Jan 2025 19:48:35 -0500
-Received: by mail-vk1-xa2d.google.com with SMTP id
- 71dfb90a1353d-5174d53437eso3559931e0c.2; 
- Tue, 28 Jan 2025 16:48:33 -0800 (PST)
+ id 1tcwKx-0003NA-Fi; Tue, 28 Jan 2025 19:53:48 -0500
+Received: by mail-vs1-xe2f.google.com with SMTP id
+ ada2fe7eead31-4afdf096fc5so1520698137.2; 
+ Tue, 28 Jan 2025 16:53:46 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1738111713; x=1738716513; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1738112026; x=1738716826; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=K6tnew2DgVFFKIJAEs5N01Y/fLiZdDy6HIq2f8o3AoU=;
- b=A38B0Qf+Y+T2ndJNzNcGG7I6bwWJLW7hPBAUjIcac6/0ZHskC9cxvgbQolH+WiBQ+E
- 4Fe3PFoou6SI0ftQuG9E+LQAlbrV35jdr+BB8PZ03DHtlTBQRsoovPF7OucUiygtYReQ
- f5kHtUjGgaXDSr8DERzYfMhMYjdbDd6pp9NKOq0N93okE06fKSO2y3LjcI3dbsgMvfGR
- xqHpX2wb1WQk69FUkhhW+Js3sZPuiZzdCQiGNdM0k1yTeJPMJlrQ27pCPS66WJjDAgHp
- hKeyA6F35p2oq/09Ao8UGPApMgjdVO5xhdDTaCnDHMEmZ4E8RviifjG6x8FPmyEvY2Xa
- ZcUw==
+ bh=HjMUK7PzJcbkHtu60lYMfOtI1KIULJ3JTE/7jDoXzxc=;
+ b=fZf+5ih41MVQKeR9t38El1nHnPlt8WtoeUEyqrFpI4eonLAgr7S3mvCYw76lkBdHsk
+ HTn1h+tQvnuFKoayh7ABst2yxV0GTWTAsBtlobNglZJBGJ833s2jxqT40MkzWk3J4yPz
+ p1OAD7YwrmXZmk4++m17FeS2ch6ZsGarHGSQJ6ZKsh3AnwiI/HG28han5rtYAhhIjeWS
+ V066a4gubKmBw7YUZ1m6P8hmlB/WTaLkljTqbxWSUnF5pIxKsZW+hntwpWBGozPJZZcg
+ KQ5oo9PrfJrPAoZFD3lY0S8J2RsODaxXgGigWmchuC/Ehs6tgeYhXySVC+mxnSZr4yGF
+ IMCQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1738111713; x=1738716513;
+ d=1e100.net; s=20230601; t=1738112026; x=1738716826;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=K6tnew2DgVFFKIJAEs5N01Y/fLiZdDy6HIq2f8o3AoU=;
- b=iA+lqNCZTFOp3uL4/zevn3OzxkAX0K6+qBVkkAUzuDc6GBHKplC/7u5p3xu6l7HG1q
- wvSgiD2W75rFj5eNwptgslcefG6FGgfPY/F/s7X1+0s/ea657SbgCKBB8aY1VV0tQ0D7
- l85buHD+FzF/wCLy6H0nK4AJ+xiS75UJaBMuPzNMyeMofUtGvKlZZEnw6DcUfrF4u9gQ
- TRvALL0j40dABsL7pjrHRGKa6rkVmxeUNcPSDVjCkz92QjWPYb2VsV8dxGPDN4vMY/6J
- WD/XFro58LOnMHXUwkf9awlFqI8WChfoN4KQm4NEHEi/O5uCN8u30k00hkVQAk+tJyDa
- 0zZw==
+ bh=HjMUK7PzJcbkHtu60lYMfOtI1KIULJ3JTE/7jDoXzxc=;
+ b=nT7Z/ozNn3d6AVQe88BWCnKmd1tISM6KW10wO7vvnkYYGfq5RWNPSXwYa/9Kxiyjp3
+ gNkFmb/P33+5bN1kTQOjN8hotXYJ4SQSElPxaL9c/RW8lavkaExNpkmCBNjX5lhyGDfJ
+ ngrGLHT9771vHI+wLCnhPHLth0cZow9A3pqLBxKZvBIXduucN+QZNPnhWkcwg9n5Tc0g
+ CxRLhFcmUtEcS6lFqVcf8Q5urMD6rg11oz9YdlPzpz59Tw9e2m8TbAgfbEIlSwU5BMw6
+ LMprIdfV3VQ01fI93P/JgR3EhTBduChxFvMk3SmFxH3PtOC49cXXYW4ofzjuzbsgqkFD
+ 5d4Q==
 X-Forwarded-Encrypted: i=1;
- AJvYcCX/INhQrSTPB/Bizc/6uvvLhvyG+hmCDzTG1GrHU+2qH1p2CLT71bh1xjez5cB/2PV+GlrsX3JQJywA@nongnu.org
-X-Gm-Message-State: AOJu0Yy1Szow1sY5qpiGY59vo8ML4gOA8WERc37qHxpTLbOBMkdRdaFn
- H2o0Gphn5zhaduYm3ThamwlfYbfB6Cci9pBb+w2413zJJwlTrXIDm9z1JIieqChbw+6t68mBY0C
- m53nG0eVG2/+cwzxKVM/y5hR8b9Y=
-X-Gm-Gg: ASbGncuVOJj/hBGJYFfi/rdtHqm+75Wp25hfj7azv36m0g9FdC23amNFlFl18uq4KeW
- 15zpu55VkoNn/FvbC5s1T+6OqsjI34X/sPfTuuKmIEjY2ejKEGVsR6XtDg6BqZ+teLc4m0H5Shb
- m2vlyRpol5nJmdLTxL416UvPgkng==
-X-Google-Smtp-Source: AGHT+IEN0KV1tkGi9LYGCYEGf4x1mrDyzx3TsiId0Lu3OQVrUHa48R9yAijoj3x81AHTrtQ5kVbVq5lyqH71rsMxLvc=
-X-Received: by 2002:a05:6122:a18:b0:518:a1a6:4642 with SMTP id
- 71dfb90a1353d-51e9e519390mr1961059e0c.9.1738111712850; Tue, 28 Jan 2025
- 16:48:32 -0800 (PST)
+ AJvYcCUaW7D89ANFCGW60ymYI9BBJGcj/hFEGPOH8UFVFklCzVSKJSpIZaqLrWsa+DnUoL9wd/PZvuA2bRIO@nongnu.org
+X-Gm-Message-State: AOJu0YyVTkNIzF8qisljSz7SkH5/PPAvddoIJuCqSnVbSQ0jvELkre6V
+ sLtBR6T03YtG3jxfWm0oEKV1H2nRuNIwp6Zr8Qpuuu4+P09jXm4RzZuD5RCSqG86K1Q64xMwNZW
+ AvWAKuumDIIeSCyEp/8FRKmCmGIU=
+X-Gm-Gg: ASbGncupM9lPLQnP7v56X/K4CsEOVXlLtx/BUpFuXkcj3XaizPxqyBP+BAfx88lDGYg
+ tItZEfC6pb105GBJfREULZs+nAaiWFTFapJRlqgZ5IgSCnkhqyzOaMj8r3mqwYYwCU2+ci9q9JC
+ hhIrP0dzSgm+pjQAr7Vzhlxnkbiw==
+X-Google-Smtp-Source: AGHT+IEGvaQJQMW1ISm4wgEfaS1n/f9EnNQD+kKfKs/SRaduCC3P6wABDXMPeZHY8Nvr5lC941s11D9bKP8BUbd2IK8=
+X-Received: by 2002:a05:6102:304f:b0:4b6:1a4e:9ed7 with SMTP id
+ ada2fe7eead31-4b9a4ec8bb1mr896794137.5.1738112025852; Tue, 28 Jan 2025
+ 16:53:45 -0800 (PST)
 MIME-Version: 1.0
-References: <20250115-pmu_minor_fixes-v1-0-c32388defb02@rivosinc.com>
- <20250115-pmu_minor_fixes-v1-2-c32388defb02@rivosinc.com>
-In-Reply-To: <20250115-pmu_minor_fixes-v1-2-c32388defb02@rivosinc.com>
+References: <20250121184847.2109128-1-dbarboza@ventanamicro.com>
+ <20250121184847.2109128-2-dbarboza@ventanamicro.com>
+In-Reply-To: <20250121184847.2109128-2-dbarboza@ventanamicro.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Wed, 29 Jan 2025 10:48:06 +1000
-X-Gm-Features: AWEUYZkEyIHczy_be9Dlwa8uJxUMZpB_O5ReBOQuFppmThquTAaxt1PqDRp_Yi0
-Message-ID: <CAKmqyKMS0DOnxX4A5QPViok0AS2uO3hbHY3fBEWYG1sLnGS2xg@mail.gmail.com>
-Subject: Re: [PATCH 2/2] target/riscv: Mask out upper sscofpmf bits during
- validation
-To: Atish Patra <atishp@rivosinc.com>
-Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, liwei1518@gmail.com, 
- zhiwei_liu@linux.alibaba.com, bin.meng@windriver.com, 
- dbarboza@ventanamicro.com, alistair.francis@wdc.com
+Date: Wed, 29 Jan 2025 10:53:19 +1000
+X-Gm-Features: AWEUYZnlOmwo1fIiEcI5lvmQDY4M-5d9zX6FFXmCyQ7z5pOy5qYf3i8Hkv8fNtk
+Message-ID: <CAKmqyKO91J5MjmyeUzJRf1ji_YYD2P2Li2TQxTeEZBGvPReJiQ@mail.gmail.com>
+Subject: Re: [PATCH 1/5] target/riscv/csr.c: fix deadcode in rmw_xireg()
+To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
+ bmeng@tinylab.org, liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, 
+ palmer@rivosinc.com, peter.maydell@linaro.org
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::a2d;
- envelope-from=alistair23@gmail.com; helo=mail-vk1-xa2d.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::e2f;
+ envelope-from=alistair23@gmail.com; helo=mail-vs1-xe2f.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -98,46 +97,111 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Thu, Jan 16, 2025 at 10:51=E2=80=AFAM Atish Patra <atishp@rivosinc.com> =
-wrote:
+On Wed, Jan 22, 2025 at 4:52=E2=80=AFAM Daniel Henrique Barboza
+<dbarboza@ventanamicro.com> wrote:
 >
-> As per the ISA definition, the upper 8 bits in hpmevent are defined
-> by Sscofpmf for privilege mode filtering and overflow bits while the
-> lower 56 bits are desginated for platform specific hpmevent values.
-> For the reset case, mhpmevent value should have zero in lower 56 bits.
-> Software may set the OF bit to indicate disable interrupt.
+> Coverity found a DEADCODE issue in rmw_xireg() claiming that we can't
+> reach 'RISCV_EXCP_VIRT_INSTRUCTION_FAULT' at the 'done' label:
 >
-> Ensure that correct value is checked after masking while clearing the
-> event encodings.
+> done:
+>     if (ret) {
+>         return (env->virt_enabled && virt) ?
+>                RISCV_EXCP_VIRT_INSTRUCTION_FAULT : RISCV_EXCP_ILLEGAL_INS=
+T;
+>     }
+>     return RISCV_EXCP_NONE;
 >
-> Signed-off-by: Atish Patra <atishp@rivosinc.com>
+> This happens because the 'virt' flag, which is only used by 'done', is
+> set to 'false' and it will always remain 'false' in any condition where
+> we'll jump to 'done':
+>
+>     switch (csrno) {
+>     (...)
+>     case CSR_VSIREG:
+>         isel =3D env->vsiselect;
+>         virt =3D true;
+>         break;
+>     default:
+>         goto done;
+>     };
+>
+> 'virt =3D true' will never reach 'done' because we have a if/else-if/else
+> block right before the label that will always return:
+>
+>     if (xiselect_aia_range(isel)) {
+>         return ...
+>     } else if (...) {
+>         return ...
+>     } else {
+>         return RISCV_EXCP_ILLEGAL_INST;
+>     }
+>
+> All this means that we can preserve the current logic by reducing the
+> 'done' label to:
+>
+> done:
+>     if (ret) {
+>         return RISCV_EXCP_ILLEGAL_INST;
+>     }
+>     return RISCV_EXCP_NONE;
+>
+> The flag 'virt' is now unused. Remove it.
+>
+> Fix the 'goto done' identation while we're at it.
+>
+> Resolves: Coverity CID 1590359
+> Fixes: dc0280723d ("target/riscv: Decouple AIA processing from xiselect a=
+nd xireg")
+> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 
-Acked-by: Alistair Francis <alistair.francis@wdc.com>
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
 > ---
->  target/riscv/pmu.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
+>  target/riscv/csr.c | 7 ++-----
+>  1 file changed, 2 insertions(+), 5 deletions(-)
 >
-> diff --git a/target/riscv/pmu.c b/target/riscv/pmu.c
-> index cf713663ee56..0408f96e6af8 100644
-> --- a/target/riscv/pmu.c
-> +++ b/target/riscv/pmu.c
-> @@ -390,7 +390,7 @@ int riscv_pmu_update_event_map(CPURISCVState *env, ui=
-nt64_t value,
->       * Expected mhpmevent value is zero for reset case. Remove the curre=
-nt
->       * mapping.
->       */
-> -    if (!value) {
-> +    if (!(value & MHPMEVENT_IDX_MASK)) {
->          g_hash_table_foreach_remove(cpu->pmu_event_ctr_map,
->                                      pmu_remove_event_map,
->                                      GUINT_TO_POINTER(ctr_idx));
+> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+> index afb7544f07..ab209d0cda 100644
+> --- a/target/riscv/csr.c
+> +++ b/target/riscv/csr.c
+> @@ -2658,7 +2658,6 @@ static RISCVException rmw_xireg(CPURISCVState *env,=
+ int csrno,
+>                                  target_ulong *val, target_ulong new_val,
+>                                  target_ulong wr_mask)
+>  {
+> -    bool virt =3D false;
+>      int ret =3D -EINVAL;
+>      target_ulong isel;
 >
+> @@ -2680,10 +2679,9 @@ static RISCVException rmw_xireg(CPURISCVState *env=
+, int csrno,
+>          break;
+>      case CSR_VSIREG:
+>          isel =3D env->vsiselect;
+> -        virt =3D true;
+>          break;
+>      default:
+> -         goto done;
+> +        goto done;
+>      };
+>
+>      /*
+> @@ -2705,8 +2703,7 @@ static RISCVException rmw_xireg(CPURISCVState *env,=
+ int csrno,
+>
+>  done:
+>      if (ret) {
+> -        return (env->virt_enabled && virt) ?
+> -               RISCV_EXCP_VIRT_INSTRUCTION_FAULT : RISCV_EXCP_ILLEGAL_IN=
+ST;
+> +        return RISCV_EXCP_ILLEGAL_INST;
+>      }
+>      return RISCV_EXCP_NONE;
+>  }
 > --
-> 2.34.1
+> 2.47.1
 >
 >
 
