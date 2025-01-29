@@ -4,76 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0D618C0218A
-	for <qemu-riscv@archiver.kernel.org>; Wed, 29 Jan 2025 01:49:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C4133C0218A
+	for <qemu-riscv@archiver.kernel.org>; Wed, 29 Jan 2025 01:52:04 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tcxC7-0007iD-Vj; Tue, 28 Jan 2025 20:48:43 -0500
+	id 1tcxFH-0001Vq-HS; Tue, 28 Jan 2025 20:52:00 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1tcxC4-0007hK-RD; Tue, 28 Jan 2025 20:48:40 -0500
-Received: from mail-vk1-xa2a.google.com ([2607:f8b0:4864:20::a2a])
+ id 1tcxF3-0001T3-VA; Tue, 28 Jan 2025 20:51:46 -0500
+Received: from mail-vs1-xe36.google.com ([2607:f8b0:4864:20::e36])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1tcxC3-0005G4-5T; Tue, 28 Jan 2025 20:48:40 -0500
-Received: by mail-vk1-xa2a.google.com with SMTP id
- 71dfb90a1353d-5188e0c2b52so1879367e0c.1; 
- Tue, 28 Jan 2025 17:48:38 -0800 (PST)
+ id 1tcxF2-0005tR-G8; Tue, 28 Jan 2025 20:51:45 -0500
+Received: by mail-vs1-xe36.google.com with SMTP id
+ ada2fe7eead31-4b6398d477fso1874946137.0; 
+ Tue, 28 Jan 2025 17:51:43 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1738115318; x=1738720118; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1738115503; x=1738720303; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Q7MpE9inRxOKKIFwH942mtqsH7coM70jyAcWa1TzOB8=;
- b=Ui9cCQmxIGlkgTt87Jb8Zvqf6RIl74XpCsQBz1YIsbBn4ePls5v01cB72yjXIn89Ch
- 8WuZP5p58HNqIshUksBe4+FpXxFJv/ipMQDj2QI6v7U54Ro/KCri2EaVzR+P/f2Acax4
- oSUjQptaiQvN5+Gvlf9rM0wYpbA3lHmDsSjl4nUGfp+3b0lFP7f8PYZhiFhnTAJz5zeM
- Th1va04Lg/HPLLcrocUUwmhqU3UbWwGY/eYJZJnf+vMaQJduxKh89HuH5rMTrf9zSr5P
- zy1YOnAy4ZMhGMOkgc/4uIOJO21ollJ20v81q9TjsZPNdHHOvISt1X3AlEIPKBtreACx
- Ca3g==
+ bh=2Yohw8QFLHPuMEmNOOGbOPYydeiVvXPdbpMJ7UJSR3M=;
+ b=Mr6JiQyzMNuq4pWQ3vteg0t/WJyQ0FHsDrDVxhm7Alwgyxgy/Vh5RjTLXQo1CfJPVi
+ 6pqAt/V0gfhEtMz1KPkter1IVsxsr92sKOBETyFSnqSlZ/h/890wZtsNanFFOETgUFno
+ 5BmmKf2Lpkg9L7NjDOF/+hTkAzNGCpbP5tCpOVIY8CUTSL8MUnY2fKIsJ/fLhblFvHvf
+ qDJSbXHW8ptTrOPafFH0UtFxFHcIUA5xpqM5zO3leJQ6tVpAB1pKQmfbcFDfQXLGFMZV
+ xi9zz+801NKMLGKp/PWmFS6XDMlybqhFnCoElCVPT+bcTs/Kz0dPp485cquqZ+94kUI2
+ j1CA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1738115318; x=1738720118;
+ d=1e100.net; s=20230601; t=1738115503; x=1738720303;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Q7MpE9inRxOKKIFwH942mtqsH7coM70jyAcWa1TzOB8=;
- b=UgJvvaPUHPSQ5Lno0xsADKmhITKDUGyIN0R0YL8vYiyNW2IlZbALdb6vwaDWF+yhAo
- B0J3zbVed05gfAeSDjQWQcB0RUwAIwjk6rfrrufqB2T1EG+k1Pv90XlQw0KRolJNagGl
- MGa8W0mDlc6lbABMr8TkrnA5LM/EG7S7ENQXEA7/1nof1BxtPc3SlQEcR2FD27OjPEsw
- 3TThEDxu5Xc97gsNSQFEcVxyr7DXxRIK5CSxNrNSxcr+LNgcic+Jy9E55N08B8DR/Sjf
- EsWBvS+LRKPneCj+2X2/8Eh5R1kcfJtn76geBA7nTX6WtbZnuA6Q/a86nP+pGFZuaX02
- M4eg==
+ bh=2Yohw8QFLHPuMEmNOOGbOPYydeiVvXPdbpMJ7UJSR3M=;
+ b=A9FesXpOBmWFGA1YoJ4o5D/3FywqpVZF935wguQiWPFPt+4rGLxBi/e7opmJqD8idM
+ xLscMTiEocsBd98EC+My+VoI74fYJhEts2FBMWiHEutlyiMNGKaN77PtwSSGdVE64qC+
+ dU50z88yaauNM5AXc3k9R2q4HfotNsXPG/l/GpXfB1FOLq54829FJ74VHhXY5mk5ZeCl
+ e3JNBxhK1Cc4ZJwV8aDm9NiH0yk6ax+tBS5OSnQOv7aMb8SuBpo0jR3HqRBMEt4qwMTX
+ 4SREofOSs7fTC74YYVTxYUP9qlPxqWOnEfkIIp++GeXV2AUK3tk1glGD6sqLxXxmMv4v
+ zTKQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUef1ARathXRhb7OP6wqZmzrsljP8+Iu/uKFZTV7pCyK+ienK7ys/ly0MiHqsbNc0u1VwGnkRPAbzv+@nongnu.org
-X-Gm-Message-State: AOJu0YzehpEq/52hg5VGZ1kMIzk2gT+1wjOfw3oAKuvEX0fSkDrBIv8N
- xUHs+9ZovqmsmUHBicOqMVlXkQRYGMpHTpvzMeWwmrOrmjv9f3KO8uwOnERJMI3aueqGm9xArHN
- N4Qmd5gYdwmL2mBSw+6+ALKZfPCv+cA==
-X-Gm-Gg: ASbGnctSvrRdl0NIRcjHRc1Hx42fSLzfxvhXX1FK8bsAa1/26L0499kDJu6rJdnqclW
- eHkQlQt6Z+bmIZPcx+BJMd0Ekr7G3AOIeU+wtHzVa45TjusNf3urLeOTsuU2Hbl4YKB/NZYKF9a
- ndvErOrbS33+QmjKIuDoOJzBO6Ww==
-X-Google-Smtp-Source: AGHT+IG6cB0+lcZyQn04P51zfEpHrzi0biN5QUqGu26PXz8ov830X5MxYKEk+lT3n2BX4CyU+uCQaQiqLCdyL58XCkA=
-X-Received: by 2002:a05:6122:17a6:b0:516:240b:58ff with SMTP id
- 71dfb90a1353d-51e9e45ecc4mr1920942e0c.5.1738115317630; Tue, 28 Jan 2025
- 17:48:37 -0800 (PST)
+ AJvYcCUpyP4zMgJM6ff4Pw6xC98zYbPlgwmLPr4T/ABWBW6vrNmsOlKQAnfyO6Vk+Uxesc+h8GMcAUxNB2r6Jw==@nongnu.org,
+ AJvYcCXj9ISqeVVHmpGSvgRu2CaNq34ovtVep9K1Wh+lcOLW/QGmzFTmU/irqV4qeIA2AzEQhmgpk0q15Eo2@nongnu.org
+X-Gm-Message-State: AOJu0YwQaNFtbjfMissOrowvE2QMvCFVL3qnbXBXusJEQ/ATn0tYfCMx
+ pWSbYC5Jb79OTPXV7ONRZkF9JgnXSDMSAitXgez3SUphVZKj4IDA7ehEVmRuA3842CdY6aA0kBx
+ ZKasHAZwFe/pSKry/tXvBRXMXcFg=
+X-Gm-Gg: ASbGncu2EvwHdx4lmlY6/a9KSX9acaUU9XG47YoMGHyZsUvbrAl7PYzV9yED36U7T1l
+ 4uQIvBhWx/22sZlxVCoGRe47ylFhIqnw8Kw+tYMGK+CAKTzbToqyvo21CuXnicQyChgkNvLB4r0
+ SyOAftZn+nxQSbWKgdK9mBUM2WMg==
+X-Google-Smtp-Source: AGHT+IGlDiZCezVm4OT2ihiUTejNo55NogpI6srQZeGX90I7ShfDT0XX4nAbCQUiQR0KNBbLyYORqEfsbP9AXhWaHtY=
+X-Received: by 2002:a05:6102:d94:b0:4b6:18b3:a4db with SMTP id
+ ada2fe7eead31-4b9a4f10949mr1169635137.8.1738115502824; Tue, 28 Jan 2025
+ 17:51:42 -0800 (PST)
 MIME-Version: 1.0
-References: <20250121170626.1992570-1-dbarboza@ventanamicro.com>
-In-Reply-To: <20250121170626.1992570-1-dbarboza@ventanamicro.com>
+References: <20250115035105.19600-1-huangborong@bosc.ac.cn>
+In-Reply-To: <20250115035105.19600-1-huangborong@bosc.ac.cn>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Wed, 29 Jan 2025 11:48:10 +1000
-X-Gm-Features: AWEUYZkAcBUtot1696tZIMqqqjThBCemLCkqXcIy5bEjdr4PXtOjvTLOJfuot70
-Message-ID: <CAKmqyKN-+Jo0Hoexk5Up=DBiHqmB_6-SK87Gwx-+bEORoAwQQQ@mail.gmail.com>
-Subject: Re: [PATCH v3 0/2] target/riscv: throw debug exception before page
- fault
-To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
- bmeng@tinylab.org, liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, 
- palmer@rivosinc.com, richard.henderson@linaro.org
+Date: Wed, 29 Jan 2025 11:51:16 +1000
+X-Gm-Features: AWEUYZlgSh5Y52ktMO-Z9ZT9WPAbpbPD3Bkze2p0qW9IQHpk14ATXUAiWVXN5t0
+Message-ID: <CAKmqyKOWkFyrhBHT1wFdfmPJSSRZom1id+cV8KXpioMFDaw2iA@mail.gmail.com>
+Subject: Re: [PATCH v2] hw/intc/riscv_aplic: Remove redundant "hart_idx"
+ masking
+To: Huang Borong <huangborong@bosc.ac.cn>
+Cc: palmer@dabbelt.com, alistair.francis@wdc.com, bmeng.cn@gmail.com, 
+ liwei1518@gmail.com, dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com, 
+ qemu-riscv@nongnu.org, qemu-devel@nongnu.org
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::a2a;
- envelope-from=alistair23@gmail.com; helo=mail-vk1-xa2a.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::e36;
+ envelope-from=alistair23@gmail.com; helo=mail-vs1-xe36.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -97,25 +98,18 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Wed, Jan 22, 2025 at 3:07=E2=80=AFAM Daniel Henrique Barboza
-<dbarboza@ventanamicro.com> wrote:
+On Wed, Jan 15, 2025 at 1:52=E2=80=AFPM Huang Borong <huangborong@bosc.ac.c=
+n> wrote:
 >
-> Hi,
+> Remove the redundant masking of "hart_idx", as the same operation is
+> performed later during address calculation.
 >
-> In this new version, in patch 2,  we're using the address 'size' val from
-> riscv_cpu_tlb_fill() instead of infering it from the CPU XLEN.
+> This change impacts the "hart_idx" value in the final qemu_log_mask()
+> call. The original "hart_idx" parameter should be used for logging to
+> ensure accuracy, rather than the masked value.
 >
-> No other changes made. Patches based on master.
->
-> Changes from v2:
-> - patch 2:
->   - use 'size' instead of infering wp_len using the CPU XLEN
-> - v2 link: https://lore.kernel.org/qemu-riscv/20250120204910.1317013-1-db=
-arboza@ventanamicro.com/
->
-> Daniel Henrique Barboza (2):
->   target/riscv/debug.c: use wp size =3D 4 for 32-bit CPUs
->   target/riscv: throw debug exception before page fault
+> Signed-off-by: Huang Borong <huangborong@bosc.ac.cn>
+> Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 
 Thanks!
 
@@ -123,13 +117,26 @@ Applied to riscv-to-apply.next
 
 Alistair
 
+> ---
+>  hw/intc/riscv_aplic.c | 1 -
+>  1 file changed, 1 deletion(-)
 >
->  target/riscv/cpu_helper.c | 18 ++++++++++++++++++
->  target/riscv/debug.c      |  6 ++++--
->  2 files changed, 22 insertions(+), 2 deletions(-)
+> diff --git a/hw/intc/riscv_aplic.c b/hw/intc/riscv_aplic.c
+> index 4866649115..0974c6a5db 100644
+> --- a/hw/intc/riscv_aplic.c
+> +++ b/hw/intc/riscv_aplic.c
+> @@ -421,7 +421,6 @@ static void riscv_aplic_msi_send(RISCVAPLICState *apl=
+ic,
+>              APLIC_xMSICFGADDRH_HHXW_MASK;
 >
+>      group_idx =3D hart_idx >> lhxw;
+> -    hart_idx &=3D APLIC_xMSICFGADDR_PPN_LHX_MASK(lhxw);
+>
+>      addr =3D msicfgaddr;
+>      addr |=3D ((uint64_t)(msicfgaddrH & APLIC_xMSICFGADDRH_BAPPN_MASK)) =
+<< 32;
 > --
-> 2.47.1
+> 2.34.1
 >
 >
 
