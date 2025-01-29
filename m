@@ -4,85 +4,99 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C4133C0218A
-	for <qemu-riscv@archiver.kernel.org>; Wed, 29 Jan 2025 01:52:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 170C9C0218D
+	for <qemu-riscv@archiver.kernel.org>; Wed, 29 Jan 2025 14:45:47 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tcxFH-0001Vq-HS; Tue, 28 Jan 2025 20:52:00 -0500
+	id 1td9J9-0001KQ-RP; Wed, 29 Jan 2025 09:44:47 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1tcxF3-0001T3-VA; Tue, 28 Jan 2025 20:51:46 -0500
-Received: from mail-vs1-xe36.google.com ([2607:f8b0:4864:20::e36])
+ (Exim 4.90_1) (envelope-from <paolo.savini@embecosm.com>)
+ id 1td9J6-00015r-Fz
+ for qemu-riscv@nongnu.org; Wed, 29 Jan 2025 09:44:44 -0500
+Received: from mail-wr1-x42e.google.com ([2a00:1450:4864:20::42e])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1tcxF2-0005tR-G8; Tue, 28 Jan 2025 20:51:45 -0500
-Received: by mail-vs1-xe36.google.com with SMTP id
- ada2fe7eead31-4b6398d477fso1874946137.0; 
- Tue, 28 Jan 2025 17:51:43 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <paolo.savini@embecosm.com>)
+ id 1td9J3-0001R2-N7
+ for qemu-riscv@nongnu.org; Wed, 29 Jan 2025 09:44:44 -0500
+Received: by mail-wr1-x42e.google.com with SMTP id
+ ffacd0b85a97d-3862d16b4f5so600766f8f.0
+ for <qemu-riscv@nongnu.org>; Wed, 29 Jan 2025 06:44:41 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1738115503; x=1738720303; darn=nongnu.org;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
+ d=embecosm.com; s=google; t=1738161880; x=1738766680; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=2Yohw8QFLHPuMEmNOOGbOPYydeiVvXPdbpMJ7UJSR3M=;
- b=Mr6JiQyzMNuq4pWQ3vteg0t/WJyQ0FHsDrDVxhm7Alwgyxgy/Vh5RjTLXQo1CfJPVi
- 6pqAt/V0gfhEtMz1KPkter1IVsxsr92sKOBETyFSnqSlZ/h/890wZtsNanFFOETgUFno
- 5BmmKf2Lpkg9L7NjDOF/+hTkAzNGCpbP5tCpOVIY8CUTSL8MUnY2fKIsJ/fLhblFvHvf
- qDJSbXHW8ptTrOPafFH0UtFxFHcIUA5xpqM5zO3leJQ6tVpAB1pKQmfbcFDfQXLGFMZV
- xi9zz+801NKMLGKp/PWmFS6XDMlybqhFnCoElCVPT+bcTs/Kz0dPp485cquqZ+94kUI2
- j1CA==
+ bh=q1C/J9uCSlWbjvXbc+Puqx9H3UViVHSv3el8cbY4rC4=;
+ b=ZhAgHnDHsq8t7gk44myFXx8lkPtwFofn87up+XLJRQe8o/x+b0/vZGvD3Bk9irw6ju
+ iWCWZ8L1iuVGz8/bQSUzRNShHWfVmU9ndJxUYO00kc2//GMIA/MPmTz+gAvhDt2jTNPm
+ lvkDKtFJSCvbwDmTUrngnQSuW9XjuNWC5H9glVrVMum1gsUl1bEmDSpwblMICp0C0wbu
+ yvIJzkDC992wtbVIcpN+G+5Cd+CVe4hoHnxrVYz3YDItyigJn5P9FIqmdV+hxZRUAsvj
+ TLq3u9CTQ05CBEfBrzU73ONcPcfl/KieCHB8RFEBz8B2toTucd9K/30FuovSpb6ZJVjh
+ R2dA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1738115503; x=1738720303;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ d=1e100.net; s=20230601; t=1738161880; x=1738766680;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=2Yohw8QFLHPuMEmNOOGbOPYydeiVvXPdbpMJ7UJSR3M=;
- b=A9FesXpOBmWFGA1YoJ4o5D/3FywqpVZF935wguQiWPFPt+4rGLxBi/e7opmJqD8idM
- xLscMTiEocsBd98EC+My+VoI74fYJhEts2FBMWiHEutlyiMNGKaN77PtwSSGdVE64qC+
- dU50z88yaauNM5AXc3k9R2q4HfotNsXPG/l/GpXfB1FOLq54829FJ74VHhXY5mk5ZeCl
- e3JNBxhK1Cc4ZJwV8aDm9NiH0yk6ax+tBS5OSnQOv7aMb8SuBpo0jR3HqRBMEt4qwMTX
- 4SREofOSs7fTC74YYVTxYUP9qlPxqWOnEfkIIp++GeXV2AUK3tk1glGD6sqLxXxmMv4v
- zTKQ==
+ bh=q1C/J9uCSlWbjvXbc+Puqx9H3UViVHSv3el8cbY4rC4=;
+ b=AY4Ck6g9/Tc7ZgqGD2IBz0qK2OUzxgEt0dVstKKq/o8fthDtTEqbgmmp6lZWt6wECI
+ 5Hf1NMlhRn82gcRsxjpAGStpSwxPrQ/ub0T2FiwBt31T2OReA3ZWlpDurGk7T5R3/fvE
+ vk3GMCf8dXOeSV4spYKLmw/aKjmQSC6Ou5RX54BVFGV4x6v2mjnEslXgIWNWff3DXKaI
+ qC1iFogPYGnNDeYpHb8S/PXOrOSSW5D4SecwZ4Q+J9QVPuzxPKqKqdqyxNoJt9Yo2kRQ
+ FJxkbljw2ZkQA/5XrnxMzN4HRZvjIwVG2H0fPPJCwDYfQV1gdl83eXGeS9dUTdHNTnv/
+ atWQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUpyP4zMgJM6ff4Pw6xC98zYbPlgwmLPr4T/ABWBW6vrNmsOlKQAnfyO6Vk+Uxesc+h8GMcAUxNB2r6Jw==@nongnu.org,
- AJvYcCXj9ISqeVVHmpGSvgRu2CaNq34ovtVep9K1Wh+lcOLW/QGmzFTmU/irqV4qeIA2AzEQhmgpk0q15Eo2@nongnu.org
-X-Gm-Message-State: AOJu0YwQaNFtbjfMissOrowvE2QMvCFVL3qnbXBXusJEQ/ATn0tYfCMx
- pWSbYC5Jb79OTPXV7ONRZkF9JgnXSDMSAitXgez3SUphVZKj4IDA7ehEVmRuA3842CdY6aA0kBx
- ZKasHAZwFe/pSKry/tXvBRXMXcFg=
-X-Gm-Gg: ASbGncu2EvwHdx4lmlY6/a9KSX9acaUU9XG47YoMGHyZsUvbrAl7PYzV9yED36U7T1l
- 4uQIvBhWx/22sZlxVCoGRe47ylFhIqnw8Kw+tYMGK+CAKTzbToqyvo21CuXnicQyChgkNvLB4r0
- SyOAftZn+nxQSbWKgdK9mBUM2WMg==
-X-Google-Smtp-Source: AGHT+IGlDiZCezVm4OT2ihiUTejNo55NogpI6srQZeGX90I7ShfDT0XX4nAbCQUiQR0KNBbLyYORqEfsbP9AXhWaHtY=
-X-Received: by 2002:a05:6102:d94:b0:4b6:18b3:a4db with SMTP id
- ada2fe7eead31-4b9a4f10949mr1169635137.8.1738115502824; Tue, 28 Jan 2025
- 17:51:42 -0800 (PST)
+ AJvYcCWt/EaMDyhbTtEYKaap3vSnvYEZed0GNTDb7H23SE0/maLDJMcOOFc2QR1DykTBxaGD3tlX3mCvne+d@nongnu.org
+X-Gm-Message-State: AOJu0YwIbaZPEn/pAeoPw6OVh+HdE3WmDAVZziyZRVUUyBHrje5Hhmfo
+ Z4qfwFDu94Tthc8RSjcLQ2LJ1g1TCwiC2/GU9ZC2YBa39KhwdM2myKhBNdfoLqA=
+X-Gm-Gg: ASbGncveZ99WHSd6m0+jIM48so5gWmE0dyTZDIRiZBigjVwpNWxSn7i+7l86A6aei8l
+ gDyukCHnq91/iQT1usIzuP4oLNhS8DlRXBEtkUwFEBJ81VV3RwjneEkIMFoWy/pLTSUd9R/WuXu
+ DKRyv8y5cJD8jMDJNJAFCZ1jh0n3YjjqSalmU44gJT78yL5CFIRXg+eL7rMSBmA409Yjc7zO4LE
+ o49V/DHwjkZB0uyu1LaoGJ8Iy431MZ1qsHtB/3CSlh/TtiJpmZVyh0lFhUtoLxJbbfUbmEpcs3c
+ GMlrYJP92JqVJtgCJo7IM2ZYHauKj1pLz/rYvE3cTkcsuMO+vW2nSW5G
+X-Google-Smtp-Source: AGHT+IHEB37kU1JBpkBUcL1DAmLi2+8ppbJk9xkhrkltPgR3/OX0cqHWoC3IAR2C5hqGm7umrxIdNA==
+X-Received: by 2002:a5d:64cf:0:b0:38a:4df5:a08 with SMTP id
+ ffacd0b85a97d-38c49a63339mr7432462f8f.22.1738161880152; 
+ Wed, 29 Jan 2025 06:44:40 -0800 (PST)
+Received: from paolo-laptop-amd.sou.embecosm-corp.com ([212.69.42.53])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-438dcc51df6sm24665255e9.38.2025.01.29.06.44.39
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 29 Jan 2025 06:44:39 -0800 (PST)
+From: Paolo Savini <paolo.savini@embecosm.com>
+To: qemu-devel@nongnu.org,
+	qemu-riscv@nongnu.org
+Cc: Paolo Savini <paolo.savini@embecosm.com>,
+ Richard Handerson <richard.henderson@linaro.org>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bmeng.cn@gmail.com>,
+ Weiwei Li <liwei1518@gmail.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Helene Chelin <helene.chelin@embecosm.com>, Nathan Egge <negge@google.com>,
+ Max Chou <max.chou@sifive.com>,
+ Jeremy Bennett <jeremy.bennett@embecosm.com>,
+ Craig Blackmore <craig.blackmore@embecosm.com>
+Subject: [RFC 1/1 v1] target/riscv: optimize the memory probing for vector
+ fault-only-first loads.
+Date: Wed, 29 Jan 2025 14:44:35 +0000
+Message-ID: <20250129144435.82451-2-paolo.savini@embecosm.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20250129144435.82451-1-paolo.savini@embecosm.com>
+References: <20250129144435.82451-1-paolo.savini@embecosm.com>
 MIME-Version: 1.0
-References: <20250115035105.19600-1-huangborong@bosc.ac.cn>
-In-Reply-To: <20250115035105.19600-1-huangborong@bosc.ac.cn>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Wed, 29 Jan 2025 11:51:16 +1000
-X-Gm-Features: AWEUYZlgSh5Y52ktMO-Z9ZT9WPAbpbPD3Bkze2p0qW9IQHpk14ATXUAiWVXN5t0
-Message-ID: <CAKmqyKOWkFyrhBHT1wFdfmPJSSRZom1id+cV8KXpioMFDaw2iA@mail.gmail.com>
-Subject: Re: [PATCH v2] hw/intc/riscv_aplic: Remove redundant "hart_idx"
- masking
-To: Huang Borong <huangborong@bosc.ac.cn>
-Cc: palmer@dabbelt.com, alistair.francis@wdc.com, bmeng.cn@gmail.com, 
- liwei1518@gmail.com, dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com, 
- qemu-riscv@nongnu.org, qemu-devel@nongnu.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::e36;
- envelope-from=alistair23@gmail.com; helo=mail-vs1-xe36.google.com
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::42e;
+ envelope-from=paolo.savini@embecosm.com; helo=mail-wr1-x42e.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -98,45 +112,132 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Wed, Jan 15, 2025 at 1:52=E2=80=AFPM Huang Borong <huangborong@bosc.ac.c=
-n> wrote:
->
-> Remove the redundant masking of "hart_idx", as the same operation is
-> performed later during address calculation.
->
-> This change impacts the "hart_idx" value in the final qemu_log_mask()
-> call. The original "hart_idx" parameter should be used for logging to
-> ensure accuracy, rather than the masked value.
->
-> Signed-off-by: Huang Borong <huangborong@bosc.ac.cn>
-> Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Fault-only-first loads in the RISC-V vector extension need to update
+the vl with the element index that causes an exception.
+In order to ensure this the emulation of this instruction used to probe the
+memory covered by the load operation with a loop that iterated over each element
+so that when a flag was raised it was possible to set the vl to the
+corresponding element index.
+This loop was executed every time whether an exception happened or not.
 
-Thanks!
+This commit removes the per element memory probing from the main execution path
+and adds a braod memory probing first. If this probing raises any flag that is
+not a watchpoint flag (that per standard is allowed by this instruction) we
+proceed with the per element probing to find the index of the element causing
+the exception and set vl to such index.
 
-Applied to riscv-to-apply.next
+Signed-off-by: Paolo Savini <paolo.savini@embecosm.com>
+---
+ target/riscv/vector_helper.c | 91 ++++++++++++++++++++++--------------
+ 1 file changed, 56 insertions(+), 35 deletions(-)
 
-Alistair
+diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
+index 5386e3b97c..d3ac99c72d 100644
+--- a/target/riscv/vector_helper.c
++++ b/target/riscv/vector_helper.c
+@@ -635,45 +635,66 @@ vext_ldff(void *vd, void *v0, target_ulong base, CPURISCVState *env,
+     uint32_t vma = vext_vma(desc);
+     target_ulong addr, offset, remain, page_split, elems;
+     int mmu_index = riscv_env_mmu_index(env, false);
++    int flags;
++    void *host;
+ 
+     VSTART_CHECK_EARLY_EXIT(env);
+ 
+-    /* probe every access */
+-    for (i = env->vstart; i < env->vl; i++) {
+-        if (!vm && !vext_elem_mask(v0, i)) {
+-            continue;
+-        }
+-        addr = adjust_addr(env, base + i * (nf << log2_esz));
+-        if (i == 0) {
+-            /* Allow fault on first element. */
+-            probe_pages(env, addr, nf << log2_esz, ra, MMU_DATA_LOAD);
+-        } else {
+-            remain = nf << log2_esz;
+-            while (remain > 0) {
+-                void *host;
+-                int flags;
+-
+-                offset = -(addr | TARGET_PAGE_MASK);
+-
+-                /* Probe nonfault on subsequent elements. */
+-                flags = probe_access_flags(env, addr, offset, MMU_DATA_LOAD,
+-                                           mmu_index, true, &host, 0);
+-
+-                /*
+-                 * Stop if invalid (unmapped) or mmio (transaction may fail).
+-                 * Do not stop if watchpoint, as the spec says that
+-                 * first-fault should continue to access the same
+-                 * elements regardless of any watchpoint.
+-                 */
+-                if (flags & ~TLB_WATCHPOINT) {
+-                    vl = i;
+-                    goto ProbeSuccess;
+-                }
+-                if (remain <= offset) {
+-                    break;
++    uint32_t probe_size = env->vl << log2_esz;
++    addr = base + ((env->vstart * nf) << log2_esz);
++    page_split = -(addr | TARGET_PAGE_MASK);
++    /* Get number of elements */
++    probe_size = page_split / msize;
++    if (unlikely(env->vstart + probe_size >= env->vl)) {
++        probe_size = env->vl - env->vstart;
++    }
++
++    /* Check page permission/pmp/watchpoint/etc. */
++    flags = probe_access_flags(env, adjust_addr(env, addr), probe_size,
++                               MMU_DATA_LOAD, mmu_index, true, &host, ra);
++
++    /* If we are crossing a page check also the second page. */
++    if (env->vl > probe_size) {
++        addr = addr + (probe_size << log2_esz);
++        flags |= probe_access_flags(env, adjust_addr(env, addr), probe_size,
++                                    MMU_DATA_LOAD, mmu_index, true, &host, ra);
++    }
++
++    if (flags & ~TLB_WATCHPOINT) {
++        /* probe every access */
++        for (i = env->vstart; i < env->vl; i++) {
++            if (!vm && !vext_elem_mask(v0, i)) {
++                continue;
++            }
++            addr = adjust_addr(env, base + i * (nf << log2_esz));
++            if (i == 0) {
++                /* Allow fault on first element. */
++                probe_pages(env, addr, nf << log2_esz, ra, MMU_DATA_LOAD);
++            } else {
++                remain = nf << log2_esz;
++                while (remain > 0) {
++                    offset = -(addr | TARGET_PAGE_MASK);
++
++                    /* Probe nonfault on subsequent elements. */
++                    flags = probe_access_flags(env, addr, offset, MMU_DATA_LOAD,
++                                               mmu_index, true, &host, 0);
++
++                    /*
++                     * Stop if invalid (unmapped) or mmio (transaction may
++                     * fail). Do not stop if watchpoint, as the spec says that
++                     * first-fault should continue to access the same
++                     * elements regardless of any watchpoint.
++                     */
++                    if (flags & ~TLB_WATCHPOINT) {
++                        vl = i;
++                        goto ProbeSuccess;
++                    }
++                    if (remain <= offset) {
++                        break;
++                    }
++                    remain -= offset;
++                    addr = adjust_addr(env, addr + offset);
+                 }
+-                remain -= offset;
+-                addr = adjust_addr(env, addr + offset);
+             }
+         }
+     }
+-- 
+2.34.1
 
-> ---
->  hw/intc/riscv_aplic.c | 1 -
->  1 file changed, 1 deletion(-)
->
-> diff --git a/hw/intc/riscv_aplic.c b/hw/intc/riscv_aplic.c
-> index 4866649115..0974c6a5db 100644
-> --- a/hw/intc/riscv_aplic.c
-> +++ b/hw/intc/riscv_aplic.c
-> @@ -421,7 +421,6 @@ static void riscv_aplic_msi_send(RISCVAPLICState *apl=
-ic,
->              APLIC_xMSICFGADDRH_HHXW_MASK;
->
->      group_idx =3D hart_idx >> lhxw;
-> -    hart_idx &=3D APLIC_xMSICFGADDR_PPN_LHX_MASK(lhxw);
->
->      addr =3D msicfgaddr;
->      addr |=3D ((uint64_t)(msicfgaddrH & APLIC_xMSICFGADDRH_BAPPN_MASK)) =
-<< 32;
-> --
-> 2.34.1
->
->
 
