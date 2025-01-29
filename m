@@ -4,90 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 85ACFC02192
-	for <qemu-riscv@archiver.kernel.org>; Tue, 28 Jan 2025 07:50:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2C83AC0218A
+	for <qemu-riscv@archiver.kernel.org>; Wed, 29 Jan 2025 00:48:46 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tcgLz-00073Z-0J; Tue, 28 Jan 2025 02:49:47 -0500
+	id 1tcwFV-00080S-IA; Tue, 28 Jan 2025 19:48:09 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tcgLr-00072Z-3I
- for qemu-riscv@nongnu.org; Tue, 28 Jan 2025 02:49:39 -0500
-Received: from mail-wr1-x433.google.com ([2a00:1450:4864:20::433])
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1tcwFM-0007zY-EJ; Tue, 28 Jan 2025 19:48:01 -0500
+Received: from mail-vk1-xa32.google.com ([2607:f8b0:4864:20::a32])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tcgLp-0006pu-GL
- for qemu-riscv@nongnu.org; Tue, 28 Jan 2025 02:49:38 -0500
-Received: by mail-wr1-x433.google.com with SMTP id
- ffacd0b85a97d-385e27c75f4so4590864f8f.2
- for <qemu-riscv@nongnu.org>; Mon, 27 Jan 2025 23:49:35 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1tcwFK-0002Vq-SW; Tue, 28 Jan 2025 19:48:00 -0500
+Received: by mail-vk1-xa32.google.com with SMTP id
+ 71dfb90a1353d-5160f1870f3so1857550e0c.0; 
+ Tue, 28 Jan 2025 16:47:58 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1738050574; x=1738655374; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=rUmyIiDaNrOoEKJwvjuDpM2uOTfEtcf4KoYX4nbPq+8=;
- b=NEfqDIZs1SWok+HR0z44M2/cUEVbJ+ydfFwIE7qFVqRYkJNOzFP++xkQmvS2Me/7K0
- zSkrot2J3+quNMIhQ4FPC8l9nNoxzra+10MXo3gW3PsFkQFtqiebNDb7UsRl5jMU3YqB
- J1LSVmJfRk2uX30f6cRPxUCFxJiWgnoChm9+6byP+hCaTVHyc8Z0r5nIavx7cCcpOsHD
- 7lU82OoX3Ryk3uEkXwy5X0Utm+89GH5CszrWUYWSzEkN1a7vkJcHi3lPE8tnhQvuc3nE
- f7LMxMrjWP7RO3rUJOZpcQsl4qziAd/fWAxflCoHbpA52M7OkrW4Q2++vQ1dsA6kODEs
- AbIQ==
+ d=gmail.com; s=20230601; t=1738111677; x=1738716477; darn=nongnu.org;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=lz26FLioiiDEbLzbWJndIdzGUsjgsatgdS60Qo1tt6c=;
+ b=GMLeQtlwqdhHQrU8Edd9kAD2Rp3YgloGI9/DrDN4xTXsoCSr5wDmzp9GUoYOha4Ikv
+ WviudYNspkzny0FjFb53LH/49oy7o9kNNZxCRjQpQsosemzxPmws1Um68CX41nD/L5sv
+ thHfe5fUg9hYwy0u3SlNiPtqMtkDFQTFhQv4mW0MSPzEMUOWwGLro3z8yN7jfvw2ufqs
+ 3yWpDfAiRrXidbZ+GvxGUc11yJb5ilQ+Iobdovx/Fa9VnclvxuHLEfMyHz7N11v5lwgE
+ KqgJAx9FzbDIirsUtK8lWMmQjoCKhJEnzXoNJJ2QbEl7gxbtI7M405uHAdM1dLgqt6dD
+ dDCg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1738050574; x=1738655374;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=rUmyIiDaNrOoEKJwvjuDpM2uOTfEtcf4KoYX4nbPq+8=;
- b=bEclwmY5ntwMypwelyMl24gwaieGwf8a1Ti2/YP4e81ORq9fxTevFySForIzZSJarS
- HD9MjLOkFMSc6Q4cx7sVTR7JO+DwzYZFJnLHVVwLuC/NHm18fipufMUZv3vQpsLrSyIA
- vKIwP3nbIeDGkGlHKv4TQEbIR5l/W4ZXOTsjwI7eQ1te1JlqS/WteUaABjN1LHJ6qtnX
- EMmVRBs83k+3IEIeY+ILJQK823Eu88DGYBav5bBev6MQQpWXHy7O73vtrhrw6RWDY4Zl
- pP4iq4MBDqnyzp/WhZUjBEWcH6a7Kq2EVPJ2bmSxWx4mOKGfi4xc4dmzabCGi1owlO36
- SXDQ==
+ d=1e100.net; s=20230601; t=1738111677; x=1738716477;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=lz26FLioiiDEbLzbWJndIdzGUsjgsatgdS60Qo1tt6c=;
+ b=rE20eottmCHVgJvL0lDPAsaMH9LE1xx0/9CWxRZ1NLAstPdS5LqWji2GnH/W4qQMoG
+ uM0S3xtKG9Bb7R7qYh8wvFjulXjGMCQsJbyXe1iiviACnmQ8HO73YQE7kBzZ50kKeHc1
+ wo7gTqMg73aF0Cl41cTDZZ6skPHLnNTEbI20UZL0CmN0e4Kl8gtXWG/7xofRF+VDO8Kv
+ iW9SoZbGVjxj5vK9WeWRoLoBcM7C0MtzTsd9EmKX120gpSbrzy+SckSTg/sUHhi5HK5w
+ q5ve7IIi9MZLXcG4O5gIZonq+SoQOXshxiOGyprks7g2atp02ayQo9l2bqpE5rZ8oUCs
+ H/Rg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVnQBZMrgtdyHqLhZF6Zux6raK9XcGQq7RUD58ll29WlfBD9O3C3rtJCwbJKG9Vb5G/Nj2h3Bw//cRP@nongnu.org
-X-Gm-Message-State: AOJu0YyoFO21JTuf4CotKjWo1WhwrVB+qQnHVTblzPZuVcr1E5zigkSn
- TqCjCMlTLqCre+4hzbCbMPyeEh1rl+KSUsr1+KI0gLfN2pAmXrCWDC7u7gu2o7s=
-X-Gm-Gg: ASbGncuWhcH5D7ShGjIttHr/2zpHTmL6RrlSwUOyRCr3Z2jXUMzzKFGmsdfg3b0RTBf
- VgHwC+yW7Vm/ZDzsnRiqq5Z6vjfB2FJa+/pjmB9zm2D4fOWtPYMDmPW4SuOiX3G8juFUbnlcsLT
- lkvkKkAgV6jdzxaUc30bGqP1w9gMy4BWwJq35hZ4Nhm/BIZQ8Nk2lgznv4OLqHLGXaG9Te/64cN
- PS97DrLrTnTDiFwt1tEP3CwZ1VFrkJZ06q9BHMBpEmxpQWPCr8qzTgWSo4fgqhtcpNEG4m7yatF
- Wr9zMwZxHMnwUVtbDJeBTMsuEwmzNlKyGaLVEPMwFsnkhywipwlQjUHQOoU=
-X-Google-Smtp-Source: AGHT+IFpa8pZHjhc4X3Ns7uaW6VRofGWCMk742fvNeAaBwh7piprIE6mfhLNCfGJUSrS1VzDc8S1fg==
-X-Received: by 2002:adf:fec5:0:b0:38a:88d0:18d6 with SMTP id
- ffacd0b85a97d-38bf58e8fa8mr27202453f8f.42.1738050574101; 
- Mon, 27 Jan 2025 23:49:34 -0800 (PST)
-Received: from [192.168.69.151] (88-187-86-199.subs.proxad.net.
- [88.187.86.199]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-38c2a1766d8sm13732792f8f.14.2025.01.27.23.49.33
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 27 Jan 2025 23:49:33 -0800 (PST)
-Message-ID: <df5c23f8-f8a4-40c3-9117-82af31e122f4@linaro.org>
-Date: Tue, 28 Jan 2025 08:49:32 +0100
+ AJvYcCW/kFz4642DfyJZYLJ5oZj1mfaHP96/x7lWaLgdFE/anlv02wy8UFNFt9KtX73Mzy8Z4gE8fxUd1QB4@nongnu.org
+X-Gm-Message-State: AOJu0YwfAHZtdMdcz2Va0se0VJlAGjLBDSlEkr7T9YoIctP3hLVZId5+
+ Ix/oDncT6nGUifTEGWZ3ddlekILaGATn+biAnTdjyib7r9iGB8VeuDPULcmL0L0btMD05ZzNeXo
+ 9zP4bLzhO3Fl+WxL01sEJMxqW80U=
+X-Gm-Gg: ASbGnctBZPqEK+mC1llzeCsw9QQ48Ll8/YqatNMEd+jbRzpW4wL8B+RJpVhK34/A7p8
+ pFoLVbQJHdbvVYpIq0o/Y2SxMoUZbQdtLeCmhkv37VwNKtWVyq+iWgptTBRzn8ZJZ35/9ocYxp7
+ CkyG5LGCSRzmWe1rx6mz5GO9eH4w==
+X-Google-Smtp-Source: AGHT+IFkzih4C69SB9h0mjRMPCeGNdtxXYh7QkjPV7AXu9/lNh77T3KTh9YsrX2nJI3JGMuyb1RPXUR6b3q1Yv/UkZM=
+X-Received: by 2002:a05:6122:4011:b0:518:8753:34aa with SMTP id
+ 71dfb90a1353d-51e9e5699b0mr1750036e0c.10.1738111677271; Tue, 28 Jan 2025
+ 16:47:57 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] MAINTAINERS: Remove Bin Meng from RISC-V maintainers
-To: Alistair Francis <alistair23@gmail.com>, palmer@dabbelt.com,
- liwei1518@gmail.com, dbarboza@ventanamicro.com,
- zhiwei_liu@linux.alibaba.com, qemu-riscv@nongnu.org
-Cc: qemu-devel@nongnu.org, Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>
-References: <20250128060546.1374394-1-alistair.francis@wdc.com>
-Content-Language: en-US
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-In-Reply-To: <20250128060546.1374394-1-alistair.francis@wdc.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::433;
- envelope-from=philmd@linaro.org; helo=mail-wr1-x433.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+References: <20250115-pmu_minor_fixes-v1-0-c32388defb02@rivosinc.com>
+ <20250115-pmu_minor_fixes-v1-1-c32388defb02@rivosinc.com>
+In-Reply-To: <20250115-pmu_minor_fixes-v1-1-c32388defb02@rivosinc.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Wed, 29 Jan 2025 10:47:31 +1000
+X-Gm-Features: AWEUYZl2ypl2sahTaOYD53IpHh4gSdrQH4ojqbrHkQvHBM-xTcFtxTTWjEam2e8
+Message-ID: <CAKmqyKO9SLuAnXNG76g-RQfUYJQZWTuUFWpzTC-hu37X2_OrUQ@mail.gmail.com>
+Subject: Re: [PATCH 1/2] target/riscv: Fix the hpmevent mask
+To: Atish Patra <atishp@rivosinc.com>
+Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, liwei1518@gmail.com, 
+ zhiwei_liu@linux.alibaba.com, bin.meng@windriver.com, 
+ dbarboza@ventanamicro.com, alistair.francis@wdc.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2607:f8b0:4864:20::a32;
+ envelope-from=alistair23@gmail.com; helo=mail-vk1-xa32.google.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_SCC_BODY_TEXT_LINE=-0.01 autolearn=unavailable autolearn_force=no
+ T_SCC_BODY_TEXT_LINE=-0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -103,59 +97,56 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Cc'ing work email
-
-On 28/1/25 07:05, Alistair Francis wrote:
-> Bin Meng has been a long time contributor and maintainer for QEMU RISC-V
-> and has been very beneficial to the RISC-V ecosystem.
-> 
-> Unfortunately his email has started to bounce so this patch is removing
-> them from MAINTAINERS. If in the future Bin Meng wants to return we will
-> happily re-add them.
-> 
-> Note that I'm not removing Bin Meng as a "SD (Secure Card)" maintainer.
-> 
-> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+On Thu, Jan 16, 2025 at 10:51=E2=80=AFAM Atish Patra <atishp@rivosinc.com> =
+wrote:
+>
+> As per the latest privilege specification v1.13[1], the sscofpmf
+> only reserves first 8 bits of hpmeventX. Update the corresponding
+> masks accordingly.
+>
+> [1]https://github.com/riscv/riscv-isa-manual/issues/1578
+>
+> Signed-off-by: Atish Patra <atishp@rivosinc.com>
 > ---
->   MAINTAINERS | 5 +----
->   1 file changed, 1 insertion(+), 4 deletions(-)
-> 
-> diff --git a/MAINTAINERS b/MAINTAINERS
-> index 7be3d8f431..a0e305aa99 100644
-> --- a/MAINTAINERS
-> +++ b/MAINTAINERS
-> @@ -318,7 +318,6 @@ F: tests/functional/test_ppc_74xx.py
->   RISC-V TCG CPUs
->   M: Palmer Dabbelt <palmer@dabbelt.com>
->   M: Alistair Francis <alistair.francis@wdc.com>
-> -M: Bin Meng <bmeng.cn@gmail.com>
->   R: Weiwei Li <liwei1518@gmail.com>
->   R: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
->   R: Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
-> @@ -1599,7 +1598,6 @@ F: include/hw/riscv/opentitan.h
->   F: include/hw/*/ibex_*.h
->   
->   Microchip PolarFire SoC Icicle Kit
-> -M: Bin Meng <bmeng.cn@gmail.com>
->   L: qemu-riscv@nongnu.org
->   S: Supported
->   F: docs/system/riscv/microchip-icicle-kit.rst
-> @@ -1626,7 +1624,6 @@ F: include/hw/char/shakti_uart.h
->   
->   SiFive Machines
->   M: Alistair Francis <Alistair.Francis@wdc.com>
-> -M: Bin Meng <bmeng.cn@gmail.com>
->   M: Palmer Dabbelt <palmer@dabbelt.com>
->   L: qemu-riscv@nongnu.org
->   S: Supported
-> @@ -3721,7 +3718,7 @@ S: Orphan
->   F: hw/i386/amd_iommu.?
->   
->   OpenSBI Firmware
-> -M: Bin Meng <bmeng.cn@gmail.com>
-> +L: qemu-riscv@nongnu.org
->   S: Supported
->   F: pc-bios/opensbi-*
->   F: .gitlab-ci.d/opensbi.yml
+>  target/riscv/cpu_bits.h | 9 ++++++---
+>  1 file changed, 6 insertions(+), 3 deletions(-)
+>
+> diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
+> index f97c48a3943f..b48c0af9d48e 100644
+> --- a/target/riscv/cpu_bits.h
+> +++ b/target/riscv/cpu_bits.h
+> @@ -9,6 +9,10 @@
+>                   (((uint64_t)(val) * ((mask) & ~((mask) << 1))) & \
+>                   (uint64_t)(mask)))
+>
+> +#ifndef GENMASK_ULL
+> +#define GENMASK_ULL(h, l) (((~0ULL) >> (63 - (h) + (l))) << (l))
+> +#endif
 
+We should use the existing MAKE_64BIT_MASK() and avoid adding new mask macr=
+os
+
+Alistair
+
+> +
+>  /* Extension context status mask */
+>  #define EXT_STATUS_MASK     0x3ULL
+>
+> @@ -933,9 +937,8 @@ typedef enum RISCVException {
+>                                              MHPMEVENTH_BIT_VSINH | \
+>                                              MHPMEVENTH_BIT_VUINH)
+>
+> -#define MHPMEVENT_SSCOF_MASK               _ULL(0xFFFF000000000000)
+> -#define MHPMEVENT_IDX_MASK                 0xFFFFF
+> -#define MHPMEVENT_SSCOF_RESVD              16
+> +#define MHPMEVENT_SSCOF_MASK               GENMASK_ULL(63, 56)
+> +#define MHPMEVENT_IDX_MASK                 (~MHPMEVENT_SSCOF_MASK)
+>
+>  /* RISC-V-specific interrupt pending bits. */
+>  #define CPU_INTERRUPT_RNMI                 CPU_INTERRUPT_TGT_EXT_0
+>
+> --
+> 2.34.1
+>
+>
 
