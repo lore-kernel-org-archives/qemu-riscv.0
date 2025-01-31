@@ -4,75 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E59EBC0218A
-	for <qemu-riscv@archiver.kernel.org>; Fri, 31 Jan 2025 00:26:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 78A0EC0218A
+	for <qemu-riscv@archiver.kernel.org>; Fri, 31 Jan 2025 00:31:44 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tderI-0005LQ-Sz; Thu, 30 Jan 2025 19:26:08 -0500
+	id 1tdewK-00078f-JT; Thu, 30 Jan 2025 19:31:20 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1tderD-0005KP-Vu; Thu, 30 Jan 2025 19:26:04 -0500
-Received: from mail-ua1-x92f.google.com ([2607:f8b0:4864:20::92f])
+ id 1tdewI-00077u-7Z; Thu, 30 Jan 2025 19:31:18 -0500
+Received: from mail-vk1-xa35.google.com ([2607:f8b0:4864:20::a35])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1tderA-0002Mc-Bm; Thu, 30 Jan 2025 19:26:02 -0500
-Received: by mail-ua1-x92f.google.com with SMTP id
- a1e0cc1a2514c-85b9f2de38eso310200241.2; 
- Thu, 30 Jan 2025 16:25:58 -0800 (PST)
+ id 1tdewG-00059H-O7; Thu, 30 Jan 2025 19:31:17 -0500
+Received: by mail-vk1-xa35.google.com with SMTP id
+ 71dfb90a1353d-51640f7bbd3so467223e0c.2; 
+ Thu, 30 Jan 2025 16:31:16 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1738283158; x=1738887958; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1738283475; x=1738888275; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=awS6yZQ3rHQBeJx3bIb/2HovVnbrfwV4w2WJsSlHDjw=;
- b=Y1S+Ss692IGCScRrw83K9+eXcDFLiL/i0x2dxqPnMEOqYMYggygS60KlSyk7M7RnYa
- uDhPKVCzNrSTNqcn/EksrxkshTmov+KVw9JPquV6Lfyf3cJ9sacYae+7oGReoV+Tbu7r
- +ZPfrWY+iAcj6vwkycHjOgBLrgTL8zrUESCLtRRwjQOA0cBnbq/ggVjyRa+AtIDdtrPv
- O7cC/U9G4XH6mmJQuUDVyrZJDcwgvsK2fijA5wqAq/ndKPD2sNHPKWYV0GPtgppugk5F
- o6QHlO1KqhTFK5AGii6gIabVnVVpycr2ewWLvF0NTrZKG4F9/aqnVStCBtQM00WH43Y2
- l0xw==
+ bh=PoeEDhGBBOdjh6ZT/msKo0/36txpP1py5hALGYifhVo=;
+ b=MapzqC9LSDMMOOKNZ3gvvfVfdw9KQNEC5VA0ilMUbnpc0l39w5lR7IkBYxn1SVHPzU
+ S177LWL4ukI6PjsxYujkMCg+TAD3wTSINoZ3iufgE2DEFmjL7p06pj4GS8St686a8N4C
+ FXI35t+HSH3vIaLGw0816RzIlRTXQFrlDrBTkp8Et1OyU1yHU4saSAi7NUYY+5Gm3UQr
+ U5eiK189knDF8UKOshf6pknUtlXwV7WcElCh5KQE4/4LEvnQnkBXxqlXNqrGVGH3HqZc
+ xI88+GoawCKU/dxrj7irJ5v31fdeecW1MYvOMGLxY+Nwwlr1865IQ+Gs5+eA/muotoPX
+ gvGQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1738283158; x=1738887958;
+ d=1e100.net; s=20230601; t=1738283475; x=1738888275;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=awS6yZQ3rHQBeJx3bIb/2HovVnbrfwV4w2WJsSlHDjw=;
- b=vqG+LrNBO181s+XjdqCJNFdXGsmONFnWkgNjOYcvIrVNgt9tPj0lCGiW4FcvlDjpJZ
- lZumNSniRYzsQLHZvoB3s2AEsfuRanS87CrOg9KPH6dTsWUtGDwvoYtOi/rCH8g9AaH6
- Vucz5uuxixPbm3RxBdIUvO13T9uLFn/5bgiz3MWyW0K1M8nABTmFB7RdHVgESIAzQAiX
- 0CnlxA0slyafaG0HdnwFPIOuxprCsOzdpXn1tHCYVE7E+ID1NO4WWqq9v9xF6zSzKpr5
- 3iZTBNL9+hDWXbTH/sk/CsNWJ4RBxl2DHEGbakDOctdz1dxFkAo/0no9t511PEOKgArn
- bWeA==
+ bh=PoeEDhGBBOdjh6ZT/msKo0/36txpP1py5hALGYifhVo=;
+ b=f4rTihKd+qh3Q4Hu53SpNRowT3sQ2sgcO4SCX6uGfsFFd4SChQycuLZ1x1rzAtE0Yi
+ vBQIlR3J+8iAS5k4QEVFrim/7qh1zcMHL4C133SmItReStPWo/WH2Evybv1fap9L6LXu
+ tubkRabu0uuKF/Wh5qJRkLwikGYSvt52f7/RoEyQttayMFTX4EfsOj8+CphiDUfF7Q6+
+ iEtAhYI4gy+PwFqKsdaPbnl/ZOEyolywJxlV+BQxLZmwCQiCmriDRIM0xDsduNOEMN6U
+ bXPE7nX3kl27w2vqiVnbUDzUBX3yDSJ5ggkXsKHOyok1XbJjNGHRI5BWtqTZWfgzsFF0
+ Wj2A==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUmJcVp73wLqSWKlHcpZY5p5zQEE8BUeM1Yl6otXE4WONZ0cAQGGJbN5h0OKrMr0EnSlSokgs8RisPc@nongnu.org
-X-Gm-Message-State: AOJu0Yyt1l9eVqc71rUUrSqRlDkjcH15lo2JtL5FWcs/RbPoLVslI7Nu
- vt8RFUBehNb95Jxt29zjcp3miXgvewGIlLz3VVzx1N2QEcrnVJM62fBFKL5PMDvXp4qOiOS4/PL
- GEEJLZGdmGRC/PqmbgBT5Sk4qUt0=
-X-Gm-Gg: ASbGncuVnmTRV3WpxqrkOqGtArCJVaaG/Z3RaqU/vfnmuCuNKY3KWXL3+Pi/AekzRqV
- DsE+vn0gEM2dhR5rAGbJIhZLZMGtYWqZEbdm4Og+MIkca/PSSkQKxqzNS0ZkDZp+TS+7S877UJH
- 7eHiV4mI+2UYHIaxdZz2EXyDeoVGY=
-X-Google-Smtp-Source: AGHT+IHcdErY6Z8JjWXkEUrMcDDUmg2I5zOgRcIs9au5zKH/GTihJbT9fHhMQe0m16kbs3HdFVrhc7fl2nZdMcQ4u4s=
-X-Received: by 2002:a05:6102:508a:b0:4b2:adca:c13a with SMTP id
- ada2fe7eead31-4b9a4f5c277mr8605310137.12.1738283158066; Thu, 30 Jan 2025
- 16:25:58 -0800 (PST)
+ AJvYcCXNVTUwpmMQKxnKLhXtn5KVNpVB1gfqN/vy4EQHSKJnGtOzV0MAEW6pXao6BsPm6HJMXHy8kSljCIlE@nongnu.org
+X-Gm-Message-State: AOJu0YyuStYx5U0f0Bz1BPVMCvAUVxagj1HIAHdnQUHQ4V1lxvR47PqZ
+ FbokCgLykeB5I8Y0XeBJI0B/26RrcLKQzwlJdEvGVkuH/vqXbOFQxdMxTAya90IUZxObeLfByy+
+ hRUlFBugJ6yVzLz4yLsc2ZBBRs/M=
+X-Gm-Gg: ASbGncsy8GOLC7452tfHqLuf1kkHslGhmbUmjwYbbODB8LZuQudhoHeFn5W8Q7nIROz
+ F/xPKRCROvGI150MSwYvPWZ9/3/PkPVkGQeI6vHzZMLMu/ssq/X8v0LDiM7qnVKC17HI/zU3a6v
+ M2f4SOlG3+LerDBdV59tB76mvQYpQ=
+X-Google-Smtp-Source: AGHT+IHb5KQEyylKPqJ/ZnpSEMOoU2C/pTq5DfYZXhw2Gipa3YVBVXGwtFB6RLTYiB0jqVquVDDA7FmZEafxhkIj/M0=
+X-Received: by 2002:a05:6122:c92:b0:516:c0b:8bfe with SMTP id
+ 71dfb90a1353d-51e9e30a69cmr7551688e0c.1.1738283475041; Thu, 30 Jan 2025
+ 16:31:15 -0800 (PST)
 MIME-Version: 1.0
-References: <20250115184316.2344583-1-dbarboza@ventanamicro.com>
-In-Reply-To: <20250115184316.2344583-1-dbarboza@ventanamicro.com>
+References: <20250115141730.30858-1-jason.chien@sifive.com>
+ <CADr__8onD=_FYyp03y+-fB5wq_8kiOrfydWx9_3BWwpWntpKfA@mail.gmail.com>
+In-Reply-To: <CADr__8onD=_FYyp03y+-fB5wq_8kiOrfydWx9_3BWwpWntpKfA@mail.gmail.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Fri, 31 Jan 2025 10:25:32 +1000
-X-Gm-Features: AWEUYZnvEemTC_xtXUG08-Qql3Ylh0ToFw3SaX7REUzqpHWb-O7Zb9WN7NMKqOs
-Message-ID: <CAKmqyKND+dt80wpaePWJRtRcBxUuxtkqPuxRcCRvNwGBZd2_1Q@mail.gmail.com>
-Subject: Re: [PATCH v4 0/6] target/riscv: RVA23 profile support
-To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
- bmeng@tinylab.org, liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, 
- palmer@rivosinc.com, ajones@ventanamicro.com
+Date: Fri, 31 Jan 2025 10:30:49 +1000
+X-Gm-Features: AWEUYZlzV9bWazRSUxMzvTaq8lVspOZ_BHq8ufG0DVsiWsFF8Q-gWM6yG1xHKIc
+Message-ID: <CAKmqyKPhqS3M8=E_jJNhcPcpFUjGvEWZS1e5Kb3=Ni-0zk_qoQ@mail.gmail.com>
+Subject: Re: [PATCH v3 1/2] hw/riscv/riscv-iommu: Remove redundant struct
+ members
+To: Jason Chien <jason.chien@sifive.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, 
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Bin Meng <bmeng.cn@gmail.com>, Weiwei Li <liwei1518@gmail.com>, 
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
+ Andrew Jones <ajones@ventanamicro.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::92f;
- envelope-from=alistair23@gmail.com; helo=mail-ua1-x92f.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::a35;
+ envelope-from=alistair23@gmail.com; helo=mail-vk1-xa35.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -96,35 +102,29 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Thu, Jan 16, 2025 at 4:44=E2=80=AFAM Daniel Henrique Barboza
-<dbarboza@ventanamicro.com> wrote:
+On Wed, Jan 22, 2025 at 6:11=E2=80=AFPM Jason Chien <jason.chien@sifive.com=
+> wrote:
 >
-> Hi,
+> Ping
 >
-> This new version has tweaks suggested by Drew in v3. No major changes
-> were made.
->
-> Patches based on alistair/riscv-to-apply.next.
->
-> All patches acked.
->
-> Changes from v3:
-> - patch 3:
->   - fix commit msg
->   - drop the 'profile->enabled &&' check from riscv_cpu_check_parent_prof=
-ile()
-> - patch 6:
->   - fix RVA23U64 -> RVA23S64 comment in the profile description
-> - v3 link: https://lore.kernel.org/qemu-riscv/20250115134957.2179085-1-db=
-arboza@ventanamicro.com/
->
-> Daniel Henrique Barboza (6):
->   target/riscv: add ssu64xl
->   target/riscv: use RVB in RVA22U64
->   target/riscv: add profile u_parent and s_parent
->   target/riscv: change priv_ver check in validate_profile()
->   target/riscv: add RVA23U64 profile
->   target/riscv: add RVA23S64 profile
+> Jason Chien <jason.chien@sifive.com> =E6=96=BC 2025=E5=B9=B41=E6=9C=8815=
+=E6=97=A5 =E9=80=B1=E4=B8=89 =E4=B8=8B=E5=8D=8810:17=E5=AF=AB=E9=81=93=EF=
+=BC=9A
+>>
+>> Initially, the IOMMU would create a thread, but this thread was removed =
+in
+>> the merged version. The struct members for thread control should have be=
+en
+>> removed as well, but they were not removed in commit 0c54acb8243
+>> ("hw/riscv: add RISC-V IOMMU base emulation").
+>>
+>> Signed-off-by: Jason Chien <jason.chien@sifive.com>
+>> Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+>> Reviewed-by: Andrew Jones <ajones@ventanamicro.com>
+
+Please use a cover letter for multiple patches in the future:
+https://www.qemu.org/docs/master/devel/submitting-a-patch.html#include-a-me=
+aningful-cover-letter
 
 Thanks!
 
@@ -132,16 +132,27 @@ Applied to riscv-to-apply.next
 
 Alistair
 
->
->  target/riscv/cpu-qom.h            |   2 +
->  target/riscv/cpu.c                |  81 ++++++++++++++++++++++++++++--
->  target/riscv/cpu.h                |   3 +-
->  target/riscv/tcg/tcg-cpu.c        |  37 ++++++++++----
->  tests/data/acpi/riscv64/virt/RHCT | Bin 390 -> 400 bytes
->  5 files changed, 109 insertions(+), 14 deletions(-)
->
-> --
-> 2.47.1
->
->
+>> ---
+>>  hw/riscv/riscv-iommu.h | 5 -----
+>>  1 file changed, 5 deletions(-)
+>>
+>> diff --git a/hw/riscv/riscv-iommu.h b/hw/riscv/riscv-iommu.h
+>> index 9424989df4..fa8a50fa24 100644
+>> --- a/hw/riscv/riscv-iommu.h
+>> +++ b/hw/riscv/riscv-iommu.h
+>> @@ -58,11 +58,6 @@ struct RISCVIOMMUState {
+>>      /* interrupt notifier */
+>>      void (*notify)(RISCVIOMMUState *iommu, unsigned vector);
+>>
+>> -    /* IOMMU State Machine */
+>> -    QemuThread core_proc; /* Background processing thread */
+>> -    QemuCond core_cond;   /* Background processing wake up signal */
+>> -    unsigned core_exec;   /* Processing thread execution actions */
+>> -
+>>      /* IOMMU target address space */
+>>      AddressSpace *target_as;
+>>      MemoryRegion *target_mr;
+>> --
+>> 2.43.2
+>>
 
