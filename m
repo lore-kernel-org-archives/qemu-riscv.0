@@ -4,84 +4,112 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9DF1EC0218A
-	for <qemu-riscv@archiver.kernel.org>; Fri, 31 Jan 2025 02:03:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B610FC0218F
+	for <qemu-riscv@archiver.kernel.org>; Fri, 31 Jan 2025 12:20:05 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tdgN1-0004GX-4h; Thu, 30 Jan 2025 21:02:59 -0500
+	id 1tdq05-00028t-Ui; Fri, 31 Jan 2025 07:19:58 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1tdgMt-0004FN-LA; Thu, 30 Jan 2025 21:02:51 -0500
-Received: from mail-vk1-xa30.google.com ([2607:f8b0:4864:20::a30])
+ (Exim 4.90_1) (envelope-from <farosas@suse.de>)
+ id 1tdq04-00028d-Aq; Fri, 31 Jan 2025 07:19:56 -0500
+Received: from smtp-out2.suse.de ([2a07:de40:b251:101:10:150:64:2])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1tdgMr-0005eN-RN; Thu, 30 Jan 2025 21:02:51 -0500
-Received: by mail-vk1-xa30.google.com with SMTP id
- 71dfb90a1353d-5174f9c0d2aso477166e0c.1; 
- Thu, 30 Jan 2025 18:02:49 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1738288968; x=1738893768; darn=nongnu.org;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=ELeHiLIcvWFtBOb3UEB1APK3nptoSWpTN2v5XS8N6Kc=;
- b=ivZhFH/Y5BkBQpN6tTljGNfmxsh4HXUFt7HMnw1h4lJW1+dXDfoDQq0YhLn0AmCV0c
- kT7YkpcIIca/OQHpPeup7o7k6MeUWyEHawE8h3sV6pE/IZdBOVtCHkzK0LMZrMzEzcsZ
- A76Hj5aTglc2YxrNqf8Vcv6sdM3b9+AjnWfHaR6PE7+lwsB8lc3ITYcuqTaXPLvcxXg+
- USqeDxddltqtUfHxB9ss5KDN0S7XklMF+3v2iZgWwzfowqGUF0wHLqaXwblQQjA4/dBW
- Js0GGT87NQbRgJ3NT1Y4gRZ2pCy+pHTA/aYSemIdP0RETRVEPfSL8ZN06aq3H463AhDI
- mzFA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1738288968; x=1738893768;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=ELeHiLIcvWFtBOb3UEB1APK3nptoSWpTN2v5XS8N6Kc=;
- b=nyFZrH9Qj2ItGAa76RRDJ/kfhPdFC/jSqB5gaJ47yJvtoBjs66GFMOm9qTDfFLEICZ
- ayN9qMWTQCTFdvevAiPuGpjoQTVewxpSViBKkl9l1aXDuz1US+YJJBlyDsx08cWOIYfp
- DamxFRKKPIRhrETOtxMTmOZAAim1NJMT3Sd4HYFmoUlrDJnwNywugPyotqDqZ5CISMXP
- 0XzHV3zkn55wEvn9IuZXFbYzJGHBcOYG3lE82YXMhn2ZZPAIWdauDkGkzAYEDaGm0bk3
- s5soVFCkT11mgMV/1y+m6twVF5okb3FeY4KGB50xtz7nqaaaHoy+olSSUZiaVjVDNRCV
- /+xQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXFO6w7kNQX53o0baxszUrRowYXzJvkSFr4kgoPwJjBId+LYlOkLyjc8yEzksxaS+fq4jw1n3WTB+ja@nongnu.org
-X-Gm-Message-State: AOJu0YzEP9/UxrtV3qneOUoeQdbJK71KwIwmfsieY0CEwqZDfr9GKGRJ
- i9x7h7qajLPdrkaSA0E3nPjIwABNFS4KC0U5N+WmQ7vbKGGesNuphbiIQgdbhgTLHVZv1qbrOiY
- eqB53c8hA/em8zA88sKfTWmtKd8Dbzg==
-X-Gm-Gg: ASbGncsC+BeRw8IequEYtwB7TJM2bi6BYNtI32JWInMjkpr8iarLgUIqIb7385DQUJs
- iW+d41+zShKap2qidDvlNnrQ/EA5D+1eSznOnEihSyuvzSpqo3f+rLlemKYt9POff+PM3BW92I2
- XcKnd9SgCtvSjomyiTPBzuaVWlk5U=
-X-Google-Smtp-Source: AGHT+IE0pjK4efEoR/3hoYuZPYgCcYJbLnzn2JxTtFzJTV63OWehQhbIzUYr68ci9zvocQxAToVzQatiqLSao9VYHFY=
-X-Received: by 2002:a05:6122:4281:b0:518:773b:39f with SMTP id
- 71dfb90a1353d-51e9e3fe69fmr10114175e0c.4.1738288967529; Thu, 30 Jan 2025
- 18:02:47 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <farosas@suse.de>)
+ id 1tdq02-0003sR-Ea; Fri, 31 Jan 2025 07:19:55 -0500
+Received: from imap1.dmz-prg2.suse.org (unknown [10.150.64.97])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-out2.suse.de (Postfix) with ESMTPS id 711441F38F;
+ Fri, 31 Jan 2025 12:19:50 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
+ t=1738325990; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=NNAbRgWNC0eO8xqPR27cbKytqzUbp9Ny3FUu3rnfBqU=;
+ b=rdAJip01CBM2xhM0ZQS8qyVK5DmaB2LDxp6QJgRToClGrKplcCXTQg0FoW0V3e/YUYkBvN
+ cqNc7TmmcCgc2EuPsfe1T82ASFXSlM2D9y4DaDEHy2sHZEU7seVv79uRYvTdlY/TuL8NJD
+ 7lT4oJTDz4ngSyQGc2vM8OJSmiVhDdk=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
+ s=susede2_ed25519; t=1738325990;
+ h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=NNAbRgWNC0eO8xqPR27cbKytqzUbp9Ny3FUu3rnfBqU=;
+ b=iv3ST8IdTn3+U486Dk1jT3tqHwKBi74nWkdDnp3X9fuoSULwUonb1i8PZrjGyljmH39PCl
+ sDyFYHhG3/HSncCw==
+Authentication-Results: smtp-out2.suse.de;
+	none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
+ t=1738325990; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=NNAbRgWNC0eO8xqPR27cbKytqzUbp9Ny3FUu3rnfBqU=;
+ b=rdAJip01CBM2xhM0ZQS8qyVK5DmaB2LDxp6QJgRToClGrKplcCXTQg0FoW0V3e/YUYkBvN
+ cqNc7TmmcCgc2EuPsfe1T82ASFXSlM2D9y4DaDEHy2sHZEU7seVv79uRYvTdlY/TuL8NJD
+ 7lT4oJTDz4ngSyQGc2vM8OJSmiVhDdk=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
+ s=susede2_ed25519; t=1738325990;
+ h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=NNAbRgWNC0eO8xqPR27cbKytqzUbp9Ny3FUu3rnfBqU=;
+ b=iv3ST8IdTn3+U486Dk1jT3tqHwKBi74nWkdDnp3X9fuoSULwUonb1i8PZrjGyljmH39PCl
+ sDyFYHhG3/HSncCw==
+Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id D445D133A6;
+ Fri, 31 Jan 2025 12:19:49 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
+ by imap1.dmz-prg2.suse.org with ESMTPSA id boRVI+W/nGdcUQAAD6G6ig
+ (envelope-from <farosas@suse.de>); Fri, 31 Jan 2025 12:19:49 +0000
+From: Fabiano Rosas <farosas@suse.de>
+To: Alistair Francis <alistair23@gmail.com>, Ivan Klokov
+ <ivan.klokov@syntacore.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, palmer@dabbelt.com,
+ alistair.francis@wdc.com, bmeng.cn@gmail.com, liwei1518@gmail.com,
+ dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com,
+ lvivier@redhat.com, pbonzini@redhat.com
+Subject: Re: [PATCH v9 0/2] Support RISC-V CSR read/write in Qtest environment
+In-Reply-To: <CAKmqyKNgPj+o3X6rN5-ru2jMfH3VHPLP094CAhbDA8_JJEE+gA@mail.gmail.com>
+References: <20250109091044.32723-1-ivan.klokov@syntacore.com>
+ <CAKmqyKNgPj+o3X6rN5-ru2jMfH3VHPLP094CAhbDA8_JJEE+gA@mail.gmail.com>
+Date: Fri, 31 Jan 2025 09:19:47 -0300
+Message-ID: <87o6znkwf0.fsf@suse.de>
 MIME-Version: 1.0
-References: <20250116161007.39710-1-vliaskovitis@suse.com>
-In-Reply-To: <20250116161007.39710-1-vliaskovitis@suse.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Fri, 31 Jan 2025 12:02:21 +1000
-X-Gm-Features: AWEUYZmQCdd9iVzwkFnxH5WQxuvT8CR6XFcH9_I1AbVZS1SgIrQr4SuttlgtgEk
-Message-ID: <CAKmqyKOo+XT=rWdcjp6CYnWuw-iv71p_5dELt6dCOGakDBeVbA@mail.gmail.com>
-Subject: Re: [PATCH v3] hw/riscv/virt: Add serial alias in DTB
-To: Vasilis Liaskovitis <vliaskovitis@suse.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, palmer@dabbelt.com, 
- alistair.francis@wdc.com, jason.chien@sifive.com, 
- zhiwei_liu@linux.alibaba.com, dbarboza@ventanamicro.com, 
- ajones@ventanamicro.com, bmeng.cn@gmail.com, liwei1518@gmail.com, 
- philmd@linaro.org
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::a30;
- envelope-from=alistair23@gmail.com; helo=mail-vk1-xa30.google.com
-X-Spam_score_int: -17
-X-Spam_score: -1.8
-X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+X-Spamd-Result: default: False [-2.80 / 50.00]; BAYES_HAM(-3.00)[99.98%];
+ SUSPICIOUS_RECIPS(1.50)[]; NEURAL_HAM_LONG(-1.00)[-1.000];
+ NEURAL_HAM_SHORT(-0.20)[-1.000]; MIME_GOOD(-0.10)[text/plain];
+ FREEMAIL_ENVRCPT(0.00)[gmail.com]; RCVD_TLS_ALL(0.00)[];
+ ARC_NA(0.00)[]; RCVD_VIA_SMTP_AUTH(0.00)[];
+ MIME_TRACE(0.00)[0:+]; MISSING_XM_UA(0.00)[];
+ RCPT_COUNT_TWELVE(0.00)[12]; TAGGED_RCPT(0.00)[];
+ MID_RHS_MATCH_FROM(0.00)[]; TO_DN_SOME(0.00)[];
+ FROM_EQ_ENVFROM(0.00)[]; FROM_HAS_DN(0.00)[];
+ FREEMAIL_CC(0.00)[nongnu.org,dabbelt.com,wdc.com,gmail.com,ventanamicro.com,linux.alibaba.com,redhat.com];
+ FREEMAIL_TO(0.00)[gmail.com,syntacore.com];
+ TO_MATCH_ENVRCPT_ALL(0.00)[]; FUZZY_BLOCKED(0.00)[rspamd.com];
+ RCVD_COUNT_TWO(0.00)[2];
+ DKIM_SIGNED(0.00)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
+ DBL_BLOCKED_OPENRESOLVER(0.00)[suse.de:mid]
+Received-SPF: pass client-ip=2a07:de40:b251:101:10:150:64:2;
+ envelope-from=farosas@suse.de; helo=smtp-out2.suse.de
+X-Spam_score_int: -43
+X-Spam_score: -4.4
+X-Spam_bar: ----
+X-Spam_report: (-4.4 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -98,51 +126,33 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Fri, Jan 17, 2025 at 2:13=E2=80=AFAM Vasilis Liaskovitis
-<vliaskovitis@suse.com> wrote:
->
-> Add an "aliases" node with a "serial0" entry for the single UART
-> in the riscv virt machine.
->
-> Resolves: https://gitlab.com/qemu-project/qemu/-/issues/2774
-> Signed-off-by: Vasilis Liaskovitis <vliaskovitis@suse.com>
-> Reviewed-by: Andrew Jones <ajones@ventanamicro.com>
+Alistair Francis <alistair23@gmail.com> writes:
 
-Thanks!
+> On Thu, Jan 9, 2025 at 7:13=E2=80=AFPM Ivan Klokov <ivan.klokov@syntacore=
+.com> wrote:
+>>
+>> These patches add functionality for unit testing RISC-V-specific registe=
+rs.
+>> The first patch adds a Qtest backend, and the second implements a simple=
+ test.
+>>
+>> ---
+>> v9:
+>>    - Fix build errors.
+>> v8:
+>>    - Delete RFC label.
+>> v7:
+>>    - Fix build errors, add Reviewed-by, Acked-by.
+>> ---
+>>
+>> Ivan Klokov (2):
+>>   target/riscv: Add RISC-V CSR qtest support
+>>   tests/qtest: QTest example for RISC-V CSR register
+>
+> Do you mind rebasing on
+> https://github.com/alistair23/qemu/tree/riscv-to-apply.next ?
+>
 
-Applied to riscv-to-apply.next
-
-Alistair
-
-> ---
->  hw/riscv/virt.c | 3 +++
->  1 file changed, 3 insertions(+)
->
-> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-> index 2bc5a9dd98..fb1928cebf 100644
-> --- a/hw/riscv/virt.c
-> +++ b/hw/riscv/virt.c
-> @@ -971,6 +971,7 @@ static void create_fdt_uart(RISCVVirtState *s, const =
-MemMapEntry *memmap,
->      }
->
->      qemu_fdt_setprop_string(ms->fdt, "/chosen", "stdout-path", name);
-> +    qemu_fdt_setprop_string(ms->fdt, "/aliases", "serial0", name);
->  }
->
->  static void create_fdt_rtc(RISCVVirtState *s, const MemMapEntry *memmap,
-> @@ -1180,6 +1181,8 @@ static void create_fdt(RISCVVirtState *s, const Mem=
-MapEntry *memmap)
->      qemu_fdt_setprop(ms->fdt, "/chosen", "rng-seed",
->                       rng_seed, sizeof(rng_seed));
->
-> +    qemu_fdt_add_subnode(ms->fdt, "/aliases");
-> +
->      create_fdt_flash(s, memmap);
->      create_fdt_fw_cfg(s, memmap);
->      create_fdt_pmu(s);
-> --
-> 2.46.0
->
->
+This was already merged via the qtest tree. I forgot to post a message
+to this thread, sorry.
 
