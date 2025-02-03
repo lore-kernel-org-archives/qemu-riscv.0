@@ -4,68 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1E3A2C02197
-	for <qemu-riscv@archiver.kernel.org>; Mon,  3 Feb 2025 14:46:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9CA4BC02192
+	for <qemu-riscv@archiver.kernel.org>; Mon,  3 Feb 2025 14:49:55 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1texdd-0003sE-46; Mon, 03 Feb 2025 09:41:25 -0500
+	id 1texlQ-0000sY-FG; Mon, 03 Feb 2025 09:49:28 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1texdI-0003cL-7U
- for qemu-riscv@nongnu.org; Mon, 03 Feb 2025 09:41:04 -0500
-Received: from mail-ej1-x62c.google.com ([2a00:1450:4864:20::62c])
+ id 1texlK-0000pH-Qy
+ for qemu-riscv@nongnu.org; Mon, 03 Feb 2025 09:49:23 -0500
+Received: from mail-ej1-x62f.google.com ([2a00:1450:4864:20::62f])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1texd9-0002MN-JV
- for qemu-riscv@nongnu.org; Mon, 03 Feb 2025 09:41:02 -0500
-Received: by mail-ej1-x62c.google.com with SMTP id
- a640c23a62f3a-ab2aea81cd8so804145166b.2
- for <qemu-riscv@nongnu.org>; Mon, 03 Feb 2025 06:40:54 -0800 (PST)
+ id 1texlH-0003HI-Jo
+ for qemu-riscv@nongnu.org; Mon, 03 Feb 2025 09:49:22 -0500
+Received: by mail-ej1-x62f.google.com with SMTP id
+ a640c23a62f3a-aaec111762bso375649366b.2
+ for <qemu-riscv@nongnu.org>; Mon, 03 Feb 2025 06:49:19 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1738593653; x=1739198453; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=gcYRZ4ZyzU/ziuzqrxT8ocayiAMfq9JGFe4w7hYy1hc=;
- b=D5WNUfCTK9Q7JGJuv919TFw6+1IYn3ysjcTzZUHVOd82kKT+r5VN64+XfWtyre+GMn
- XnNEwewwLowJ7XY209IgkRm7WagzcbLrcwbI7ptmxnsSTMIP+6JTPye1HV1b/AAZqdQZ
- laYxVQJdglF7Iu2sIrrBUD8yREbPJdVyPu7VD5mxtMdNwYbmLfORRz+KOXeR/JUQnvaS
- KwV80z8v+3gVxIOapidsSf40bi3ZBxSSnyu6zaArtG0yXv07R7thL1RScCUpwwV1n6KM
- 1symBa8wNd+1jERPEOmFwj+9RFZTpMQwPcIrL8WYrnu6jXOHdRFY91mmJvyJ4r7GiqI7
- tI8w==
+ d=linaro.org; s=google; t=1738594148; x=1739198948; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=nWETF7v5SQvqoJsQUou+WYUPWgAQpGGIidnYpzh2j4Q=;
+ b=HNSm6bRdHGDDFxqkp3PlHuInutEPWBEk2K1Hfw+WbHURBlxDRcrnH+3RzDPKWdHb1F
+ yWyZU5X/+R1SE65AsZQdIMvQYPJezx4R/3YkrZTl/fKVbX9KbeE3sLmie6ywPjtW27g8
+ uFE9TRtiGIKGKj5GpOvoN1uPXwYrFBO5rYqPsj4IKAC1Tmp4xonvbQKgBWSW2K8VjBpy
+ XZU+tKVV90FGp1s/Hb+jaf7b8+/l5IAACDaZGXWRpG8vlKuSg5SJ92tWdNvEI0pCJ3Uk
+ kE6o1OHLBfjC+zMA1RwB6IwKXWoF+IPCSoJVQBa1j5+lWSU+jS1I5I7aYaG89WOeEwQI
+ 1iQA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1738593653; x=1739198453;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=gcYRZ4ZyzU/ziuzqrxT8ocayiAMfq9JGFe4w7hYy1hc=;
- b=FpW4sT6l9D8CsElEvIvNQf1jEo8dmZ5PCZDGfIGh1lVx3dEQDXgYQ4HQWzAHOIXQ+4
- EZjLtwzTqwN8beMQtfDT/rXfKU2KYCqQppeWJoXaSk7bKXK21+jnB4/AC1tFxCI+gPBi
- AMkvQc9BYG9Ljl+E8J12Zb0ZaaCSfaXnOl330n5gXnnGMlQZjSidulHfARCramR2R5j1
- zTgs5HY7xEVtLqsFZ2n2J43JnLKSXoOaVvcbL2N4rTVC7ZzzoCFjgjhhzuv/H65/LYls
- 4qrrV1BOVhKpnghoxIBYh5XDht88FG/vEgx/nTzMWMGyQ56yBN/t/MxSc/WjtZNzKewt
- 6S5w==
+ d=1e100.net; s=20230601; t=1738594148; x=1739198948;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=nWETF7v5SQvqoJsQUou+WYUPWgAQpGGIidnYpzh2j4Q=;
+ b=t7OPKB5Gy08MbVwAymXDXiw9IyPq8818+jTFIWtROBm0FNjPO+XrZRZ90U4a59H94d
+ UYJwPIt3mLEq0Xxjtvcc4dgpIJOEiqtx2ePHtd65r3Y6dloqGaImv6c7qrPgA46Cqu8o
+ 6ivPL/18ee0JCdWp6Re4e+fAOvRta1617UoRGbquGbmJoDLBI3Mkrn+qVWS2VUPtdyk0
+ ZJahT0K/mpVbtRqRNUFpEbIf/P8M1Ky6bnGRGq3wmxI+kQ4QfBhCu/TBwMLJWuTJDCBv
+ LfHU5jmn3u/VLg0U1QkysMZAy0azJvWf4cUp4u5H9t1azuZWyjhIIlGAn5sHP2tyOWVP
+ S2mg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUTp0XqD5YMZU+2iiIy9gOW0qDMDFKicEAfTW8Qy1iK0xx9nWqzt/hZDTX7B9fpAofCfR6Yjb3keZ7L@nongnu.org
-X-Gm-Message-State: AOJu0YyLwZYoQhIBe8ZxntltpMlFtPYMkVbnEtJ7txCTjxAaBYz8jVJW
- NYo7obwLJAIoDzpGj5Ao3psbyE/3aHI2/slK4b+SjR4kNAz/p9/TQcv6jTtqKls=
-X-Gm-Gg: ASbGncv3sERir3OXxylRzK69P8e73sxjJZNRQPhF0nUT+c0ptU0tOtL71t4pk9/gDkl
- t0CXEd4wT560QTjMBxCy53UdWhiDsyds7dXKZsnhQ/gW/QjtrxsuhAA9r3JpG8qDskGh18JDTyA
- r2hPSQU4bd9Rbpq2S4KLzNvnSh5TZXexi3cuHQz4B7OQLotrs+wQx1CoUWoDtSsI/VfomZOU+eg
- 9/E3yvwTrF1WpqKEEBe2nvKdLrTKY/8V6pxMr+TaH4Nf1XwbzzaZ2ymlRqNVJY+yiKd4SqQV6bg
- +6knVJTH2K6UsRpEiQ==
-X-Google-Smtp-Source: AGHT+IGMs1lB4i1YUHZmt1XdOzhLFa17C8lCZ94DCRBbDEkv7u4FH1xlbJA5atWuoKqtZ/yU29iFfw==
-X-Received: by 2002:a17:907:3ea8:b0:ab3:8b1:12aa with SMTP id
- a640c23a62f3a-ab6cfcc5182mr2418938466b.8.1738593652739; 
- Mon, 03 Feb 2025 06:40:52 -0800 (PST)
+ AJvYcCX/HBCeRCllwmXLDM+Jh49sBX06xAcLsxLJmAs1PuMaUdMFBS+8qVz0SsAV+0uCzWc9U6rbLNLOGzMy@nongnu.org
+X-Gm-Message-State: AOJu0YykUJce15PQ9X17pY3vBI+f23Yet4P6976UWabHXNCvJEAgbSwc
+ E6OrnINYiEzg3JSJb0q+1kZ7Opbo5jxIxciqWSSHFX7ZScLFJ7HScDtIj19Lrvo=
+X-Gm-Gg: ASbGnctUKiCFcykTAJSPa36CjTMppUCop2M/H4QaTjh3ArLuUFzQeIABWfp6bWzQHXf
+ O0kEo7s5S38+I+j87mTE14lnWMTcmhq8YKLGk9ECnBFeCOWWzXaYTHEVxPTIoIfVILMCFcTxU5q
+ n4DG+YHuqaWMM0xRQb6702omxjoXVJArQDfwMK0tHL2qO2iHm4P2VGJwircvN7GUV/FmoKsx1Ny
+ Cg1LDJ6LO1/eb1KNGv/TI9bqrJw28NHJXEyb2Mv9IPX5hjIAYz3ub4r9MJT6uPZcK7/yLiwaSZM
+ yFeA2YDroGbmYvHbWA==
+X-Google-Smtp-Source: AGHT+IHCBJbspYBJtSHjAYclL3HRGFlq9TESmSXnRpqM9nfvkyXmc3bXADWs6SZLLMr4H9qJqw87bw==
+X-Received: by 2002:a17:907:6e92:b0:aae:8be7:ba07 with SMTP id
+ a640c23a62f3a-ab6cfcdf5dfmr2398457766b.17.1738594147546; 
+ Mon, 03 Feb 2025 06:49:07 -0800 (PST)
 Received: from draig.lan ([185.126.160.109]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-ab6ff432351sm578507166b.68.2025.02.03.06.40.49
+ a640c23a62f3a-ab7106178ccsm412435466b.9.2025.02.03.06.49.06
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 03 Feb 2025 06:40:49 -0800 (PST)
+ Mon, 03 Feb 2025 06:49:06 -0800 (PST)
 Received: from draig.lan (localhost [IPv6:::1])
- by draig.lan (Postfix) with ESMTP id 8F12F5F8BF;
- Mon,  3 Feb 2025 14:40:48 +0000 (GMT)
+ by draig.lan (Postfix) with ESMTP id 8209F60F1B;
+ Mon,  3 Feb 2025 14:40:50 +0000 (GMT)
 From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: qemu-ppc@nongnu.org, Mahmoud Mandour <ma.mandourr@gmail.com>,
@@ -85,23 +86,26 @@ Cc: qemu-ppc@nongnu.org, Mahmoud Mandour <ma.mandourr@gmail.com>,
  Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, Weiwei Li <liwei1518@gmail.com>,
  qemu-riscv@nongnu.org, Fabiano Rosas <farosas@suse.de>,
  Tyrone Ting <kfting@nuvoton.com>, Paolo Bonzini <pbonzini@redhat.com>,
- Nicholas Piggin <npiggin@gmail.com>, Alexandre Iooss <erdnaxe@crans.org>
-Subject: [PATCH 00/18] maintainer updates for feb25 (qtest, gdbstub, plugins)
-Date: Mon,  3 Feb 2025 14:40:30 +0000
-Message-Id: <20250203144048.2131117-1-alex.bennee@linaro.org>
+ Nicholas Piggin <npiggin@gmail.com>, Alexandre Iooss <erdnaxe@crans.org>,
+ =?UTF-8?q?Marc-Andr=C3=A9=20Lureau?= <marcandre.lureau@redhat.com>
+Subject: [PATCH 18/18] plugins: fix -Werror=maybe-uninitialized false-positive
+Date: Mon,  3 Feb 2025 14:40:48 +0000
+Message-Id: <20250203144048.2131117-19-alex.bennee@linaro.org>
 X-Mailer: git-send-email 2.39.5
+In-Reply-To: <20250203144048.2131117-1-alex.bennee@linaro.org>
+References: <20250203144048.2131117-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::62c;
- envelope-from=alex.bennee@linaro.org; helo=mail-ej1-x62c.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::62f;
+ envelope-from=alex.bennee@linaro.org; helo=mail-ej1-x62f.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -117,111 +121,36 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Another month and another set of updates from across my maintainer
-trees. They include:
+From: Marc-André Lureau <marcandre.lureau@redhat.com>
 
-  * qtest set/step clock cleanups
+../contrib/plugins/cache.c:638:9: error: ‘l2_cache’ may be used uninitialized [-Werror=maybe-uninitialized]
+  638 |         append_stats_line(rep, l1_dmem_accesses, l1_dmisses,
+      |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-It seems the earlier patch to avoid deadlock when shutting down was
-overly broad. So in this series after a little clean-up to the qtest
-reply code we tighten up some checks for steps that make no sense and
-eventually revert the original deadlock avoiding patch.
+Is a false-positive, since cores > 1, so the variable is set in the
+above loop.
 
-  * reducing migration test scope depending on accel
+Signed-off-by: Marc-André Lureau <marcandre.lureau@redhat.com>
+Reviewed-by: Pierrick Bouvier <pierrick.bouvier@linaro.org>
+Message-Id: <20250114104820.2613099-1-marcandre.lureau@redhat.com>
+Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
+---
+ contrib/plugins/cache.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Fabino's continued work on the migration tests and avoiding them
-taking too much of the overall test execution time. KVM guests still
-get the full range and we smoke test TCG guests.
-
-  * gdbstub late attachment
-
-These are Ilya's patches to make it easier to debug heavily
-multi-process linux-user invocations. Comes with documentation and
-a test case ;-)
-
-  * plugins
-
-Fix a compiler false positive.
-
-As this is the first iteration I intend to send out a pre-PR later
-this week if everything is reviewed ok with a PR shortly after.
-
-Alex.
-
-Alex Bennée (7):
-  tests/docker: replicate the check-rust-tools-nightly CI job
-  tests/qtest: don't attempt to clock_step while waiting for virtio ISR
-  tests/qtest: don't step clock at start of npcm7xx periodic IRQ test
-  tests/qtest: simplify qtest_process_inbuf
-  tests/qtest: rename qtest_send_prefix and roll-up into qtest_send
-  tests/qtest: tighten up the checks on clock_step
-  Revert "util/timer: avoid deadlock when shutting down"
-
-Fabiano Rosas (2):
-  tests/qtest/migration: Add --full option
-  tests/qtest/migration: Pick smoke tests
-
-Ilya Leoshkevich (8):
-  gdbstub: Allow the %d placeholder in the socket path
-  gdbstub: Try unlinking the unix socket before binding
-  user: Introduce user/signal.h
-  user: Introduce host_interrupt_signal
-  osdep: Introduce qemu_kill_thread()
-  gdbstub: Allow late attachment
-  docs/user: Document the %d placeholder and suspend=n QEMU_GDB features
-  tests/tcg: Add late gdbstub attach test
-
-Marc-André Lureau (1):
-  plugins: fix -Werror=maybe-uninitialized false-positive
-
- MAINTAINERS                                |   1 +
- docs/user/main.rst                         |  16 ++-
- bsd-user/signal-common.h                   |   1 -
- include/qemu/osdep.h                       |   9 ++
- include/system/qtest.h                     |   1 -
- include/user/signal.h                      |  25 ++++
- linux-user/signal-common.h                 |   1 -
- tests/qtest/migration/framework.h          |   1 +
- bsd-user/main.c                            |   1 -
- bsd-user/signal.c                          |  13 ++
- contrib/plugins/cache.c                    |   2 +-
- gdbstub/user.c                             | 150 ++++++++++++++++-----
- hw/ppc/spapr_rtas.c                        |   1 -
- hw/riscv/riscv_hart.c                      |   1 -
- linux-user/main.c                          |   1 -
- linux-user/signal.c                        |  26 +++-
- linux-user/syscall.c                       |   1 +
- stubs/monitor-fd.c                         |   9 ++
- system/qtest.c                             |  59 +++-----
- tests/qtest/libqos/virtio-pci-modern.c     |   6 +-
- tests/qtest/libqos/virtio-pci.c            |   6 +-
- tests/qtest/migration-test.c               |  25 ++++
- tests/qtest/migration/compression-tests.c  |  15 ++-
- tests/qtest/migration/cpr-tests.c          |   6 +
- tests/qtest/migration/file-tests.c         |  19 ++-
- tests/qtest/migration/misc-tests.c         |  16 ++-
- tests/qtest/migration/postcopy-tests.c     |  14 +-
- tests/qtest/migration/precopy-tests.c      |  23 +++-
- tests/qtest/migration/tls-tests.c          |  14 +-
- tests/qtest/npcm7xx_timer-test.c           |   1 -
- tests/tcg/multiarch/late-attach.c          |  41 ++++++
- util/oslib-posix.c                         |  15 +++
- util/qemu-timer.c                          |  16 +--
- stubs/meson.build                          |   2 +
- tests/docker/Makefile.include              |   3 +
- tests/docker/test-rust                     |  21 +++
- tests/guest-debug/run-test.py              |  15 ++-
- tests/qtest/meson.build                    |  11 +-
- tests/tcg/multiarch/Makefile.target        |   9 +-
- tests/tcg/multiarch/gdbstub/late-attach.py |  28 ++++
- util/meson.build                           |   2 +
- 41 files changed, 491 insertions(+), 136 deletions(-)
- create mode 100644 include/user/signal.h
- create mode 100644 stubs/monitor-fd.c
- create mode 100644 tests/tcg/multiarch/late-attach.c
- create mode 100755 tests/docker/test-rust
- create mode 100644 tests/tcg/multiarch/gdbstub/late-attach.py
-
+diff --git a/contrib/plugins/cache.c b/contrib/plugins/cache.c
+index 7baff86860..7cfd3df249 100644
+--- a/contrib/plugins/cache.c
++++ b/contrib/plugins/cache.c
+@@ -603,7 +603,7 @@ static int l2_cmp(gconstpointer a, gconstpointer b)
+ static void log_stats(void)
+ {
+     int i;
+-    Cache *icache, *dcache, *l2_cache;
++    Cache *icache, *dcache, *l2_cache = NULL;
+ 
+     g_autoptr(GString) rep = g_string_new("core #, data accesses, data misses,"
+                                           " dmiss rate, insn accesses,"
 -- 
 2.39.5
 
