@@ -4,68 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 17B4EC02194
-	for <qemu-riscv@archiver.kernel.org>; Mon,  3 Feb 2025 14:45:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B8CEFC02192
+	for <qemu-riscv@archiver.kernel.org>; Mon,  3 Feb 2025 14:45:17 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1texdr-000459-8W; Mon, 03 Feb 2025 09:41:39 -0500
+	id 1texde-0003up-MP; Mon, 03 Feb 2025 09:41:26 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1texdY-0003oW-78
- for qemu-riscv@nongnu.org; Mon, 03 Feb 2025 09:41:20 -0500
-Received: from mail-ej1-x632.google.com ([2a00:1450:4864:20::632])
+ id 1texdP-0003gk-Hi
+ for qemu-riscv@nongnu.org; Mon, 03 Feb 2025 09:41:12 -0500
+Received: from mail-ej1-x635.google.com ([2a00:1450:4864:20::635])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1texdG-0002Sa-C2
- for qemu-riscv@nongnu.org; Mon, 03 Feb 2025 09:41:19 -0500
-Received: by mail-ej1-x632.google.com with SMTP id
- a640c23a62f3a-aaeec07b705so736090866b.2
- for <qemu-riscv@nongnu.org>; Mon, 03 Feb 2025 06:41:01 -0800 (PST)
+ id 1texdC-0002Pn-VJ
+ for qemu-riscv@nongnu.org; Mon, 03 Feb 2025 09:41:10 -0500
+Received: by mail-ej1-x635.google.com with SMTP id
+ a640c23a62f3a-ab70043cd05so656046166b.0
+ for <qemu-riscv@nongnu.org>; Mon, 03 Feb 2025 06:40:58 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1738593661; x=1739198461; darn=nongnu.org;
+ d=linaro.org; s=google; t=1738593657; x=1739198457; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=+6N9ryvNx2tTT6HdSFLFKVlKftlNVXYRqQdp7SLQm3o=;
- b=m/cZ7HPpkdKAqBdfoXW/kFoIg8MkBsNFYWBlmLbcP8UYigF01sHNbRQTlqunWobX+m
- ztIiPzaJnVr80A/hEYl4fMV/BWMsIZYULbeFy3PhMod+Sh4AOejPYn8ugfrZQWx75vBy
- 64sqqMFzPWCJH7ko2sBEAtLnKtL2b2Mhd3X0L8qqK8xdI9c9t112IVFwAl6+wKn2I6bK
- r3bK+F2u/CHopPS9DY26qZYlppRgXQMjjC5qIWWc5ilZAiy3dUMfhzkddKhBYRdToQXo
- i9mBGuZOaQ0/UQR+TxLrj31A1z5+lXRHK3wgqSMQhwnzQ8W8IMMcK7G0vayVdGusNTYk
- q1gg==
+ bh=OdEyfb2ARjEb4j0/bYd/22LdLj+HvII9zUuxIjGCbvU=;
+ b=SRBmj/RxOfqz8oPg8EUiw1ZAgFWS4JNfdbkZGAUoYF6lqxH6Rwn7aAUFiVjspVd4fN
+ CDcsF8KgBHnPbLxe3CIDhHmn+tNOO7BtwEQ1Vf8D4gVzeE3y8fDCHbVLjMNjaVz0udbI
+ rh3p5gUcUCBRwrlCB+v9RmI0jiwnfJRRlpiCEOsniIwqIJfe0rerD4G24TOgbWh/s7Ec
+ EEbKcMLufKX4AHBOy1j/t3eKD4u/MKREHqInqF5MrHQDjV6xQuyND5LfWOXo+TLR2rNt
+ vmnH5edcg+1bFzheT1zri/omD6fhTv8mgvp+3lxOx7SaNz1ycFSAbw8+f/lUGFPdyQbo
+ upUw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1738593661; x=1739198461;
+ d=1e100.net; s=20230601; t=1738593657; x=1739198457;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=+6N9ryvNx2tTT6HdSFLFKVlKftlNVXYRqQdp7SLQm3o=;
- b=PYjCjQQ8t5hFKseBhVMRnpwJGA0lgnv1zAxk7Q1JDIl7O0hmPOP8LLPn6EW2qu/R0E
- qsVEUBe5A/5t0nIj5xSJbZveaOJB4DyiVVz6HTnnzN7xYMAbh14GD2mF/AvT0hykH1z6
- gryoKkabqwYB/yvd9p/My90E4yqX/JxHy6rxHswJV512BaaD61OeeXlz5RLGN7d2CmMU
- uk5aU3fCU7ZrJj22zpVVJapVqYPEgpSWK0FJXeueQawV3tXnw+2pLcHbORc5iadfM3sy
- yS8OGBEwqoP8R6kTMf9THgNzb9ZEAyruLFDTcjXHDlrbTQZoUijPQGOHhAJMPr759O2u
- MmRg==
+ bh=OdEyfb2ARjEb4j0/bYd/22LdLj+HvII9zUuxIjGCbvU=;
+ b=BCAVioDeafZmhmYleddgXq9vZh3AELNVm+I2wAWaO9fbCcrCdRdP24E1RuqegZGC7O
+ H8jeswporFrjPpx75fCBYtrNEG7xNkpIjn9iqDO73LJyPCobaQl/wVV+yNkKn4SQAGcv
+ nW3xjsgnEzAk40rK73fD8vG1PCmbTgBTbroUNIPzei9pIeySYiGxf0PLtbWoc5Nu38T0
+ qDXDbuXlglusypDe/TRLggWYbVfWgkUzvKe9Oia6oNIrlOhr2CMO46v0lN0QlaXmhmj2
+ 2b2nNH14/hF+Rlm/mgTzhVNOWV6fEZhD3+CFNd/+0O2GGCj4HgHF8kC2cpViMMrvem9d
+ nzRA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCW0D364DejX7LIzwuFXfvhJ7GvGIcQtu2V99g46d+pyTYVCh0Pl7kEhnQtKiwBYlYIsl0bwZGAxp3AR@nongnu.org
-X-Gm-Message-State: AOJu0Yyr+11tYeiB8jtwDBgeOzLmQsWGM3UKYxK3SGryASiNa6JMUHu1
- +J/ID3RioOmb84HkoRZKnhZWRCj5iVf2wniQ1hxVejyNoU69i8Jy5yz5Sqqtzp4=
-X-Gm-Gg: ASbGnct/S8WFE16x3uFkGjGJ+vIsIgQ5wk+FWJHc4G13n/wWSp3248IYxWAb6eIEkxH
- j7eZT5Rhl9GcSKrBbJyLQoX7J1zXJVxSKK9xwoyrU1XVoeC0E5CRTkpT/Yf4CGFM8YEGwUrnYtC
- Aj3WZ7MQhzHCeVZju2JOW+/8/gTVnIB6aEn8M75wuExzEihOP9dX3wBN5pKasdz0VLhvCcZxEnq
- eJc2/LrDr+aS9KOBQmXSNstWl+zjWMFiSL6IkhPXqeU6ysEAX5TZ9JJ5jIoBQliiU7D8UCotqtk
- /1//3AUhgsDjPdaABA==
-X-Google-Smtp-Source: AGHT+IHubMLubx4nwLSVuxzF7Wq0eWGnW/dzSLvKqvDK9sZ9EnBQNN9NebJo2lc6HX9/V41iBsZ7dA==
-X-Received: by 2002:a17:906:c146:b0:aa6:1e9a:e45a with SMTP id
- a640c23a62f3a-ab6cfdbc62cmr2220431966b.46.1738593660687; 
- Mon, 03 Feb 2025 06:41:00 -0800 (PST)
+ AJvYcCWc/bIyk4KhKrrYX0ZYVKJj0An75xtxokvSQNmO07vTfwVO1+tHMqwWrDTya/oQ4X7JEqG+b97c5iMH@nongnu.org
+X-Gm-Message-State: AOJu0Yy3kfaSZF8+e7QNx0ChR2CXBF/mfommdbPgl4c6mHEcZA2fIeYq
+ AJ7JKwZIIaRR5OVXEgoVgOHmeXLOluopPjxRjmqw2XdBxh+HORwEW7ktkIQjb+M=
+X-Gm-Gg: ASbGncu4Z3kfYigz7sXN5ofaWH36WEhMK0UCCLdycArmBMPQspRiSCoSMOkzhjoEWK2
+ aJfS4gekZF1uGuzZd1hTSfbaL8B8E9p9ZiSgmEPiPumIfi0mB7cB7xqnU8gleFtqfSz92lw+Wus
+ 8GGqZ/pyrPE+SZb4vb/TH6Ac4+JiegAUeFHbhpxZ35Crg7lG1Zy5hnHr0f/XSk6oWAU/jPDT+0W
+ AxiMka+znS/dKojOvd1jJxPo4fHMhLuD0rIIMBwq4erVdyA0UKY6P6pXwzOVo2shwOjafxDGbcY
+ u/FXeCk3UCTjV/t+XA==
+X-Google-Smtp-Source: AGHT+IGWR8d4DI0bOTpt9mK5dktCyya0EOEgqnxIxZI6WD5ySvslKGOe+hbROZIhyOtAFeq4BkoE9Q==
+X-Received: by 2002:a17:907:9452:b0:ab6:f99f:45e0 with SMTP id
+ a640c23a62f3a-ab6f99f5410mr1861971866b.37.1738593657466; 
+ Mon, 03 Feb 2025 06:40:57 -0800 (PST)
 Received: from draig.lan ([185.126.160.109]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-ab6e47d0feasm777494766b.52.2025.02.03.06.40.53
+ 4fb4d7f45d1cf-5dc723d0021sm7829264a12.5.2025.02.03.06.40.51
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 03 Feb 2025 06:40:56 -0800 (PST)
+ Mon, 03 Feb 2025 06:40:53 -0800 (PST)
 Received: from draig.lan (localhost [IPv6:::1])
- by draig.lan (Postfix) with ESMTP id B9D4A608B4;
+ by draig.lan (Postfix) with ESMTP id 438F15FB14;
  Mon,  3 Feb 2025 14:40:49 +0000 (GMT)
 From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
 To: qemu-devel@nongnu.org
@@ -87,18 +87,18 @@ Cc: qemu-ppc@nongnu.org, Mahmoud Mandour <ma.mandourr@gmail.com>,
  qemu-riscv@nongnu.org, Fabiano Rosas <farosas@suse.de>,
  Tyrone Ting <kfting@nuvoton.com>, Paolo Bonzini <pbonzini@redhat.com>,
  Nicholas Piggin <npiggin@gmail.com>, Alexandre Iooss <erdnaxe@crans.org>,
- Ilya Leoshkevich <iii@linux.ibm.com>
-Subject: [PATCH 11/18] gdbstub: Try unlinking the unix socket before binding
-Date: Mon,  3 Feb 2025 14:40:41 +0000
-Message-Id: <20250203144048.2131117-12-alex.bennee@linaro.org>
+ Peter Maydell <peter.maydell@linaro.org>
+Subject: [PATCH 07/18] Revert "util/timer: avoid deadlock when shutting down"
+Date: Mon,  3 Feb 2025 14:40:37 +0000
+Message-Id: <20250203144048.2131117-8-alex.bennee@linaro.org>
 X-Mailer: git-send-email 2.39.5
 In-Reply-To: <20250203144048.2131117-1-alex.bennee@linaro.org>
 References: <20250203144048.2131117-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::632;
- envelope-from=alex.bennee@linaro.org; helo=mail-ej1-x632.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::635;
+ envelope-from=alex.bennee@linaro.org; helo=mail-ej1-x635.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -121,127 +121,58 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Ilya Leoshkevich <iii@linux.ibm.com>
+This reverts commit bc02be4508d8753d1f6071b77d10f4661587df6f.
 
-In case an emulated process execve()s another emulated process, bind()
-will fail, because the socket already exists. So try deleting it. Use
-the existing unix_listen() function which does this. Link qemu-user
-with qemu-sockets.c and add the monitor_get_fd() stub.
+Now we catch attempts to clock_step to the next timer when none are
+enabled we can revert the previous attempt to prevent deadlock. As
+long as a new target time is given we will move time forward even if
+no timers will fire. This is desirable for tests which are checking
+that nothing changes when things are disabled.
 
-Note that it is not possible to handle this in do_execv(): deleting
-gdbserver_user_state.socket_path before safe_execve() is not correct,
-because the latter may fail, and afterwards we may lose control.
+Previously most tests got away with it because --enable-slirp always
+has a timer running while the test is active.
 
-Signed-off-by: Ilya Leoshkevich <iii@linux.ibm.com>
-Reviewed-by: Alex Bennée <alex.bennee@linaro.org>
-Message-Id: <20250117001542.8290-3-iii@linux.ibm.com>
 Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
+Cc: Peter Maydell <peter.maydell@linaro.org>
 ---
- gdbstub/user.c     | 29 +++--------------------------
- stubs/monitor-fd.c |  9 +++++++++
- stubs/meson.build  |  2 ++
- util/meson.build   |  2 ++
- 4 files changed, 16 insertions(+), 26 deletions(-)
- create mode 100644 stubs/monitor-fd.c
+ util/qemu-timer.c | 16 +++-------------
+ 1 file changed, 3 insertions(+), 13 deletions(-)
 
-diff --git a/gdbstub/user.c b/gdbstub/user.c
-index fd29d595f4..8225b70280 100644
---- a/gdbstub/user.c
-+++ b/gdbstub/user.c
-@@ -315,12 +315,10 @@ static bool gdb_accept_socket(int gdb_fd)
-     return true;
- }
- 
--static int gdbserver_open_socket(const char *path)
-+static int gdbserver_open_socket(const char *path, Error **errp)
+diff --git a/util/qemu-timer.c b/util/qemu-timer.c
+index 0e8a453eaa..3243d2c515 100644
+--- a/util/qemu-timer.c
++++ b/util/qemu-timer.c
+@@ -675,17 +675,10 @@ int64_t qemu_clock_advance_virtual_time(int64_t dest)
  {
-     g_autoptr(GString) buf = g_string_new("");
--    struct sockaddr_un sockaddr = {};
-     char *pid_placeholder;
--    int fd, ret;
- 
-     pid_placeholder = strstr(path, "%d");
-     if (pid_placeholder != NULL) {
-@@ -330,28 +328,7 @@ static int gdbserver_open_socket(const char *path)
-         path = buf->str;
-     }
- 
--    fd = socket(AF_UNIX, SOCK_STREAM, 0);
--    if (fd < 0) {
--        perror("create socket");
--        return -1;
--    }
+     int64_t clock = qemu_clock_get_ns(QEMU_CLOCK_VIRTUAL);
+     AioContext *aio_context;
+-    int64_t deadline;
 -
--    sockaddr.sun_family = AF_UNIX;
--    pstrcpy(sockaddr.sun_path, sizeof(sockaddr.sun_path) - 1, path);
--    ret = bind(fd, (struct sockaddr *)&sockaddr, sizeof(sockaddr));
--    if (ret < 0) {
--        perror("bind socket");
--        close(fd);
--        return -1;
--    }
--    ret = listen(fd, 1);
--    if (ret < 0) {
--        perror("listen socket");
--        close(fd);
--        return -1;
--    }
+     aio_context = qemu_get_aio_context();
 -
--    return fd;
-+    return unix_listen(path, errp);
- }
+-    deadline = qemu_clock_deadline_ns_all(QEMU_CLOCK_VIRTUAL,
+-                                          QEMU_TIMER_ATTR_ALL);
+-    /*
+-     * A deadline of < 0 indicates this timer is not enabled, so we
+-     * won't get far trying to run it forward.
+-     */
+-    while (deadline >= 0 && clock < dest) {
++    while (clock < dest) {
++        int64_t deadline = qemu_clock_deadline_ns_all(QEMU_CLOCK_VIRTUAL,
++                                                      QEMU_TIMER_ATTR_ALL);
+         int64_t warp = qemu_soonest_timeout(dest - clock, deadline);
  
- static bool gdb_accept_tcp(int gdb_fd)
-@@ -424,7 +401,7 @@ bool gdbserver_start(const char *port_or_path, Error **errp)
-     if (port > 0) {
-         gdb_fd = gdbserver_open_port(port, errp);
-     } else {
--        gdb_fd = gdbserver_open_socket(port_or_path);
-+        gdb_fd = gdbserver_open_socket(port_or_path, errp);
+         qemu_virtual_clock_set_ns(qemu_clock_get_ns(QEMU_CLOCK_VIRTUAL) + warp);
+@@ -693,9 +686,6 @@ int64_t qemu_clock_advance_virtual_time(int64_t dest)
+         qemu_clock_run_timers(QEMU_CLOCK_VIRTUAL);
+         timerlist_run_timers(aio_context->tlg.tl[QEMU_CLOCK_VIRTUAL]);
+         clock = qemu_clock_get_ns(QEMU_CLOCK_VIRTUAL);
+-
+-        deadline = qemu_clock_deadline_ns_all(QEMU_CLOCK_VIRTUAL,
+-                                              QEMU_TIMER_ATTR_ALL);
      }
+     qemu_clock_notify(QEMU_CLOCK_VIRTUAL);
  
-     if (gdb_fd < 0) {
-diff --git a/stubs/monitor-fd.c b/stubs/monitor-fd.c
-new file mode 100644
-index 0000000000..9bb6749885
---- /dev/null
-+++ b/stubs/monitor-fd.c
-@@ -0,0 +1,9 @@
-+/* SPDX-License-Identifier: GPL-2.0-or-later */
-+
-+#include "qemu/osdep.h"
-+#include "monitor/monitor.h"
-+
-+int monitor_get_fd(Monitor *mon, const char *fdname, Error **errp)
-+{
-+    abort();
-+}
-diff --git a/stubs/meson.build b/stubs/meson.build
-index a8b3aeb564..b0fee37e05 100644
---- a/stubs/meson.build
-+++ b/stubs/meson.build
-@@ -61,6 +61,8 @@ if have_user
-   if not have_system
-     stub_ss.add(files('qdev.c'))
-   endif
-+
-+  stub_ss.add(files('monitor-fd.c'))
- endif
- 
- if have_system
-diff --git a/util/meson.build b/util/meson.build
-index 5d8bef9891..780b5977a8 100644
---- a/util/meson.build
-+++ b/util/meson.build
-@@ -84,6 +84,8 @@ if have_block or have_ga
-   util_ss.add(files('qemu-coroutine.c', 'qemu-coroutine-lock.c', 'qemu-coroutine-io.c'))
-   util_ss.add(files(f'coroutine-@coroutine_backend@.c'))
-   util_ss.add(files('thread-pool.c', 'qemu-timer.c'))
-+endif
-+if have_block or have_ga or have_user
-   util_ss.add(files('qemu-sockets.c'))
- endif
- if have_block
 -- 
 2.39.5
 
