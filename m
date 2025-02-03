@@ -4,69 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 28FAFC0219B
-	for <qemu-riscv@archiver.kernel.org>; Mon,  3 Feb 2025 14:45:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 17B4EC02194
+	for <qemu-riscv@archiver.kernel.org>; Mon,  3 Feb 2025 14:45:04 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1texdg-0003wZ-2s; Mon, 03 Feb 2025 09:41:28 -0500
+	id 1texdr-000459-8W; Mon, 03 Feb 2025 09:41:39 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1texdW-0003kL-Ll
- for qemu-riscv@nongnu.org; Mon, 03 Feb 2025 09:41:18 -0500
-Received: from mail-ej1-x631.google.com ([2a00:1450:4864:20::631])
+ id 1texdY-0003oW-78
+ for qemu-riscv@nongnu.org; Mon, 03 Feb 2025 09:41:20 -0500
+Received: from mail-ej1-x632.google.com ([2a00:1450:4864:20::632])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1texdF-0002Ry-Ld
- for qemu-riscv@nongnu.org; Mon, 03 Feb 2025 09:41:18 -0500
-Received: by mail-ej1-x631.google.com with SMTP id
- a640c23a62f3a-ab2b29dfc65so737472666b.1
+ id 1texdG-0002Sa-C2
+ for qemu-riscv@nongnu.org; Mon, 03 Feb 2025 09:41:19 -0500
+Received: by mail-ej1-x632.google.com with SMTP id
+ a640c23a62f3a-aaeec07b705so736090866b.2
  for <qemu-riscv@nongnu.org>; Mon, 03 Feb 2025 06:41:01 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1738593660; x=1739198460; darn=nongnu.org;
+ d=linaro.org; s=google; t=1738593661; x=1739198461; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=M1O482OJIh050UUseeR+bYA6QoGKKDZRGYOAk/RFThQ=;
- b=ZIgKeMFbhbW4z/mtbAu8u2zY1rb+fKzdkxh79pY3Q+WAvCOBZckbdYzoOd+HCwCkPV
- QSmYXn+o9aspZAqFhflXdU5rHo2O5Ffx7suQnmMzp/LJJ8U71269l3tYn8AE1sZDHYql
- 45kFFSnDZhJTjszzUhsqG1K9vCmFWv5jqTxRCQjZtin50pwYCIquNhc74IJz4W4XW/ef
- MYRhbKL+rRYvIvsXRuGVJHzmW/J0WEqZm79fv0XNmtgee0WftZce08JMhOS5Xia8qGs1
- +uob1GzxHR+LXHv16De5ZhyYAyTM9tLPcD+8gi6ai9Ck31+I6D/p/FUhzyrqHFMQXtDb
- AKCw==
+ bh=+6N9ryvNx2tTT6HdSFLFKVlKftlNVXYRqQdp7SLQm3o=;
+ b=m/cZ7HPpkdKAqBdfoXW/kFoIg8MkBsNFYWBlmLbcP8UYigF01sHNbRQTlqunWobX+m
+ ztIiPzaJnVr80A/hEYl4fMV/BWMsIZYULbeFy3PhMod+Sh4AOejPYn8ugfrZQWx75vBy
+ 64sqqMFzPWCJH7ko2sBEAtLnKtL2b2Mhd3X0L8qqK8xdI9c9t112IVFwAl6+wKn2I6bK
+ r3bK+F2u/CHopPS9DY26qZYlppRgXQMjjC5qIWWc5ilZAiy3dUMfhzkddKhBYRdToQXo
+ i9mBGuZOaQ0/UQR+TxLrj31A1z5+lXRHK3wgqSMQhwnzQ8W8IMMcK7G0vayVdGusNTYk
+ q1gg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1738593660; x=1739198460;
+ d=1e100.net; s=20230601; t=1738593661; x=1739198461;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=M1O482OJIh050UUseeR+bYA6QoGKKDZRGYOAk/RFThQ=;
- b=ee4hdeLdkHjVd9egToqiFkWjDWsafsZcC+tX6CDBSvMSwB3V31hF4jkj/DElCtUeCL
- X2end8gRtUR9seyNemcqX0TWtBuSFazrNYNgqpmTvS74rD1uf6GJ3hGHtKnKfF2WPxcr
- uBPXF6ZPKrM5HDrYIzqlGYk8ju01uCIQxKAzlsT1Z+y1pg3L++PADk9NNzRt9BRqomis
- YLcyYnS39tZnw8VywtK9+MWAz1BKJV7NhvXie6t79//lgHei1+jXLTas+LjGsqNWUO5x
- IlWM1y5KWAXbsmCl5ClshswCWTyeVVSXgJ8rBsoCMSYepcKmW5XSl7HTIVtbWZz5tVdY
- OOEg==
+ bh=+6N9ryvNx2tTT6HdSFLFKVlKftlNVXYRqQdp7SLQm3o=;
+ b=PYjCjQQ8t5hFKseBhVMRnpwJGA0lgnv1zAxk7Q1JDIl7O0hmPOP8LLPn6EW2qu/R0E
+ qsVEUBe5A/5t0nIj5xSJbZveaOJB4DyiVVz6HTnnzN7xYMAbh14GD2mF/AvT0hykH1z6
+ gryoKkabqwYB/yvd9p/My90E4yqX/JxHy6rxHswJV512BaaD61OeeXlz5RLGN7d2CmMU
+ uk5aU3fCU7ZrJj22zpVVJapVqYPEgpSWK0FJXeueQawV3tXnw+2pLcHbORc5iadfM3sy
+ yS8OGBEwqoP8R6kTMf9THgNzb9ZEAyruLFDTcjXHDlrbTQZoUijPQGOHhAJMPr759O2u
+ MmRg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCX1i06gYtPQwnlXXHtdbKWlyftpdPH9+GDdx4YU6xnab/BEpdV0AlKkhwQGjF3TFUHEitdynKKqMOqm@nongnu.org
-X-Gm-Message-State: AOJu0Yyq3hcSe9NEA46vY22LeKas6CuRsuB770e0wIypOrEvtjOqApc9
- EXvDGMNdZow8jaDyUUYMcZMWWuuJrG2/4tm9Kj3pGeyXz+stqDX8iwLGDUl/1yk=
-X-Gm-Gg: ASbGnctqHdCkYOaTkEyWywat97YJIi63ZOtikjHh7QdpRSknKz/6zosWP63wZeCG64Q
- bLadrbnSfEtaZ4tHHx+LZ0cz3knHZi24VnpadKVshp9IJBVsBO4vPau/yQ2v04b/Y2tfA4W8mae
- XOduFG2tbLYJY+PlBxc0HCbRdnzzc2RA45xaIF7FmxGW/2mX1NNWUarWYlVuNg2TD6Ns9kGzEvu
- GqdwRhxrvwcY7cFiByhy+kXf7QFkteDErkjZEilXV9KgVm7HcbLTNQOLIMfnN9P44TgqhSjhow5
- jaQ9hB8v99f48RfGkg==
-X-Google-Smtp-Source: AGHT+IGab3SCD85uoPPmeDJwS01muUZc175e7mJc3sQGYUDW3fAkncK2Pzl1jNLZMtqCfhZXqxt+rQ==
-X-Received: by 2002:a17:906:478a:b0:aa6:94c0:f753 with SMTP id
- a640c23a62f3a-ab6cfd096f9mr2288818066b.33.1738593660035; 
+ AJvYcCW0D364DejX7LIzwuFXfvhJ7GvGIcQtu2V99g46d+pyTYVCh0Pl7kEhnQtKiwBYlYIsl0bwZGAxp3AR@nongnu.org
+X-Gm-Message-State: AOJu0Yyr+11tYeiB8jtwDBgeOzLmQsWGM3UKYxK3SGryASiNa6JMUHu1
+ +J/ID3RioOmb84HkoRZKnhZWRCj5iVf2wniQ1hxVejyNoU69i8Jy5yz5Sqqtzp4=
+X-Gm-Gg: ASbGnct/S8WFE16x3uFkGjGJ+vIsIgQ5wk+FWJHc4G13n/wWSp3248IYxWAb6eIEkxH
+ j7eZT5Rhl9GcSKrBbJyLQoX7J1zXJVxSKK9xwoyrU1XVoeC0E5CRTkpT/Yf4CGFM8YEGwUrnYtC
+ Aj3WZ7MQhzHCeVZju2JOW+/8/gTVnIB6aEn8M75wuExzEihOP9dX3wBN5pKasdz0VLhvCcZxEnq
+ eJc2/LrDr+aS9KOBQmXSNstWl+zjWMFiSL6IkhPXqeU6ysEAX5TZ9JJ5jIoBQliiU7D8UCotqtk
+ /1//3AUhgsDjPdaABA==
+X-Google-Smtp-Source: AGHT+IHubMLubx4nwLSVuxzF7Wq0eWGnW/dzSLvKqvDK9sZ9EnBQNN9NebJo2lc6HX9/V41iBsZ7dA==
+X-Received: by 2002:a17:906:c146:b0:aa6:1e9a:e45a with SMTP id
+ a640c23a62f3a-ab6cfdbc62cmr2220431966b.46.1738593660687; 
  Mon, 03 Feb 2025 06:41:00 -0800 (PST)
 Received: from draig.lan ([185.126.160.109]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-ab6e4a5621bsm779576466b.172.2025.02.03.06.40.53
+ a640c23a62f3a-ab6e47d0feasm777494766b.52.2025.02.03.06.40.53
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 03 Feb 2025 06:40:57 -0800 (PST)
+ Mon, 03 Feb 2025 06:40:56 -0800 (PST)
 Received: from draig.lan (localhost [IPv6:::1])
- by draig.lan (Postfix) with ESMTP id 1DBCA60BD2;
- Mon,  3 Feb 2025 14:40:50 +0000 (GMT)
+ by draig.lan (Postfix) with ESMTP id B9D4A608B4;
+ Mon,  3 Feb 2025 14:40:49 +0000 (GMT)
 From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: qemu-ppc@nongnu.org, Mahmoud Mandour <ma.mandourr@gmail.com>,
@@ -87,19 +87,18 @@ Cc: qemu-ppc@nongnu.org, Mahmoud Mandour <ma.mandourr@gmail.com>,
  qemu-riscv@nongnu.org, Fabiano Rosas <farosas@suse.de>,
  Tyrone Ting <kfting@nuvoton.com>, Paolo Bonzini <pbonzini@redhat.com>,
  Nicholas Piggin <npiggin@gmail.com>, Alexandre Iooss <erdnaxe@crans.org>,
- Ilya Leoshkevich <iii@linux.ibm.com>,
- Richard Henderson <richard.henderson@linaro.org>
-Subject: [PATCH 14/18] osdep: Introduce qemu_kill_thread()
-Date: Mon,  3 Feb 2025 14:40:44 +0000
-Message-Id: <20250203144048.2131117-15-alex.bennee@linaro.org>
+ Ilya Leoshkevich <iii@linux.ibm.com>
+Subject: [PATCH 11/18] gdbstub: Try unlinking the unix socket before binding
+Date: Mon,  3 Feb 2025 14:40:41 +0000
+Message-Id: <20250203144048.2131117-12-alex.bennee@linaro.org>
 X-Mailer: git-send-email 2.39.5
 In-Reply-To: <20250203144048.2131117-1-alex.bennee@linaro.org>
 References: <20250203144048.2131117-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::631;
- envelope-from=alex.bennee@linaro.org; helo=mail-ej1-x631.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::632;
+ envelope-from=alex.bennee@linaro.org; helo=mail-ej1-x632.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -124,66 +123,125 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 From: Ilya Leoshkevich <iii@linux.ibm.com>
 
-Add a function for sending signals to individual threads. It does not make
-sense on Windows, so do not provide an implementation, so that if someone
-uses it by accident, they will get a linker error.
+In case an emulated process execve()s another emulated process, bind()
+will fail, because the socket already exists. So try deleting it. Use
+the existing unix_listen() function which does this. Link qemu-user
+with qemu-sockets.c and add the monitor_get_fd() stub.
 
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
-Reviewed-by: Warner Losh <imp@bsdimp.com>
+Note that it is not possible to handle this in do_execv(): deleting
+gdbserver_user_state.socket_path before safe_execve() is not correct,
+because the latter may fail, and afterwards we may lose control.
+
 Signed-off-by: Ilya Leoshkevich <iii@linux.ibm.com>
-Message-Id: <20250117001542.8290-6-iii@linux.ibm.com>
+Reviewed-by: Alex Bennée <alex.bennee@linaro.org>
+Message-Id: <20250117001542.8290-3-iii@linux.ibm.com>
 Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
 ---
- include/qemu/osdep.h |  9 +++++++++
- util/oslib-posix.c   | 15 +++++++++++++++
- 2 files changed, 24 insertions(+)
+ gdbstub/user.c     | 29 +++--------------------------
+ stubs/monitor-fd.c |  9 +++++++++
+ stubs/meson.build  |  2 ++
+ util/meson.build   |  2 ++
+ 4 files changed, 16 insertions(+), 26 deletions(-)
+ create mode 100644 stubs/monitor-fd.c
 
-diff --git a/include/qemu/osdep.h b/include/qemu/osdep.h
-index 112ebdff21..4397a90680 100644
---- a/include/qemu/osdep.h
-+++ b/include/qemu/osdep.h
-@@ -631,6 +631,15 @@ bool qemu_write_pidfile(const char *pidfile, Error **errp);
- 
- int qemu_get_thread_id(void);
- 
-+/**
-+ * qemu_kill_thread:
-+ * @tid: thread id.
-+ * @sig: host signal.
-+ *
-+ * Send @sig to one of QEMU's own threads with identifier @tid.
-+ */
-+int qemu_kill_thread(int tid, int sig);
-+
- #ifndef CONFIG_IOVEC
- struct iovec {
-     void *iov_base;
-diff --git a/util/oslib-posix.c b/util/oslib-posix.c
-index 2bb34dade3..a697c602c6 100644
---- a/util/oslib-posix.c
-+++ b/util/oslib-posix.c
-@@ -111,6 +111,21 @@ int qemu_get_thread_id(void)
- #endif
+diff --git a/gdbstub/user.c b/gdbstub/user.c
+index fd29d595f4..8225b70280 100644
+--- a/gdbstub/user.c
++++ b/gdbstub/user.c
+@@ -315,12 +315,10 @@ static bool gdb_accept_socket(int gdb_fd)
+     return true;
  }
  
-+int qemu_kill_thread(int tid, int sig)
-+{
-+#if defined(__linux__)
-+    return syscall(__NR_tgkill, getpid(), tid, sig);
-+#elif defined(__FreeBSD__)
-+    return thr_kill2(getpid(), tid, sig);
-+#elif defined(__NetBSD__)
-+    return _lwp_kill(tid, sig);
-+#elif defined(__OpenBSD__)
-+    return thrkill(tid, sig, NULL);
-+#else
-+    return kill(tid, sig);
-+#endif
-+}
-+
- int qemu_daemon(int nochdir, int noclose)
+-static int gdbserver_open_socket(const char *path)
++static int gdbserver_open_socket(const char *path, Error **errp)
  {
-     return daemon(nochdir, noclose);
+     g_autoptr(GString) buf = g_string_new("");
+-    struct sockaddr_un sockaddr = {};
+     char *pid_placeholder;
+-    int fd, ret;
+ 
+     pid_placeholder = strstr(path, "%d");
+     if (pid_placeholder != NULL) {
+@@ -330,28 +328,7 @@ static int gdbserver_open_socket(const char *path)
+         path = buf->str;
+     }
+ 
+-    fd = socket(AF_UNIX, SOCK_STREAM, 0);
+-    if (fd < 0) {
+-        perror("create socket");
+-        return -1;
+-    }
+-
+-    sockaddr.sun_family = AF_UNIX;
+-    pstrcpy(sockaddr.sun_path, sizeof(sockaddr.sun_path) - 1, path);
+-    ret = bind(fd, (struct sockaddr *)&sockaddr, sizeof(sockaddr));
+-    if (ret < 0) {
+-        perror("bind socket");
+-        close(fd);
+-        return -1;
+-    }
+-    ret = listen(fd, 1);
+-    if (ret < 0) {
+-        perror("listen socket");
+-        close(fd);
+-        return -1;
+-    }
+-
+-    return fd;
++    return unix_listen(path, errp);
+ }
+ 
+ static bool gdb_accept_tcp(int gdb_fd)
+@@ -424,7 +401,7 @@ bool gdbserver_start(const char *port_or_path, Error **errp)
+     if (port > 0) {
+         gdb_fd = gdbserver_open_port(port, errp);
+     } else {
+-        gdb_fd = gdbserver_open_socket(port_or_path);
++        gdb_fd = gdbserver_open_socket(port_or_path, errp);
+     }
+ 
+     if (gdb_fd < 0) {
+diff --git a/stubs/monitor-fd.c b/stubs/monitor-fd.c
+new file mode 100644
+index 0000000000..9bb6749885
+--- /dev/null
++++ b/stubs/monitor-fd.c
+@@ -0,0 +1,9 @@
++/* SPDX-License-Identifier: GPL-2.0-or-later */
++
++#include "qemu/osdep.h"
++#include "monitor/monitor.h"
++
++int monitor_get_fd(Monitor *mon, const char *fdname, Error **errp)
++{
++    abort();
++}
+diff --git a/stubs/meson.build b/stubs/meson.build
+index a8b3aeb564..b0fee37e05 100644
+--- a/stubs/meson.build
++++ b/stubs/meson.build
+@@ -61,6 +61,8 @@ if have_user
+   if not have_system
+     stub_ss.add(files('qdev.c'))
+   endif
++
++  stub_ss.add(files('monitor-fd.c'))
+ endif
+ 
+ if have_system
+diff --git a/util/meson.build b/util/meson.build
+index 5d8bef9891..780b5977a8 100644
+--- a/util/meson.build
++++ b/util/meson.build
+@@ -84,6 +84,8 @@ if have_block or have_ga
+   util_ss.add(files('qemu-coroutine.c', 'qemu-coroutine-lock.c', 'qemu-coroutine-io.c'))
+   util_ss.add(files(f'coroutine-@coroutine_backend@.c'))
+   util_ss.add(files('thread-pool.c', 'qemu-timer.c'))
++endif
++if have_block or have_ga or have_user
+   util_ss.add(files('qemu-sockets.c'))
+ endif
+ if have_block
 -- 
 2.39.5
 
