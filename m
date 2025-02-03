@@ -4,56 +4,100 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0853FC02193
-	for <qemu-riscv@archiver.kernel.org>; Mon,  3 Feb 2025 05:32:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0A1FDC02193
+	for <qemu-riscv@archiver.kernel.org>; Mon,  3 Feb 2025 06:19:39 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tep3W-000653-S4; Mon, 03 Feb 2025 00:31:35 -0500
+	id 1tepnb-00037X-8s; Mon, 03 Feb 2025 01:19:11 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <outgoing@sr.ht>)
- id 1tep0Q-0005ex-Hs; Mon, 03 Feb 2025 00:28:23 -0500
-Received: from mail-a.sr.ht ([46.23.81.152])
+ (Exim 4.90_1) (envelope-from <midnight@trainwit.ch>)
+ id 1tepnX-00036k-Cx; Mon, 03 Feb 2025 01:19:07 -0500
+Received: from fhigh-a4-smtp.messagingengine.com ([103.168.172.155])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <outgoing@sr.ht>)
- id 1tep0N-0006h9-UL; Mon, 03 Feb 2025 00:28:21 -0500
-DKIM-Signature: a=rsa-sha256; bh=poFhMeLRXnQt45Hgwi4heYrRECsNY8bbkOpUuq+Av/k=; 
- c=simple/simple; d=git.sr.ht;
- h=From:Date:Subject:Reply-to:To:Cc; 
- q=dns/txt; s=20240113; t=1738560491; v=1;
- b=q4Tf9Xs1mellGBetelYNSUN9v/YKKlJT7fUPAZozcyQMxIMCXCE2OgCYTb7g/VQj6a9GWSCN
- WYS11ync9CHXOeph9JPIS+2M02CAH/9nfr/SBjwSeyQBdAeJIMh+JWxFvnoU0VDm5BMC+EjM1Lg
- dJT4lEQN4xYyPZRCPFBU7W+vO2zspdQ55lKuNsklfxDC46LtJ4HNIgeuDU0YBduA6YVt7oTuFuL
- 4j80eSv+EXwFQKvyStEchlUGIBtV95IWZKfvb724L5eSFlgiPqK+1nGULyu6MWcUyH6P+RRl11P
- xdkBCeix4t4g+QM5LwiP+VEkwhP7LQAeISbR/6ptUkoaw==
-Received: from git.sr.ht (unknown [46.23.81.155])
- by mail-a.sr.ht (Postfix) with ESMTPSA id 9760F200D0;
- Mon, 03 Feb 2025 05:28:11 +0000 (UTC)
-From: ~yuming <yuming@git.sr.ht>
-Date: Thu, 16 Jan 2025 10:40:31 +0800
-Subject: [PATCH qemu v2] target/riscv: Check ext_zca for misaligned return
- address of mret/sret.
+ (Exim 4.90_1) (envelope-from <midnight@trainwit.ch>)
+ id 1tepnV-000335-9u; Mon, 03 Feb 2025 01:19:07 -0500
+Received: from phl-compute-06.internal (phl-compute-06.phl.internal
+ [10.202.2.46])
+ by mailfhigh.phl.internal (Postfix) with ESMTP id 051241140086;
+ Mon,  3 Feb 2025 01:19:02 -0500 (EST)
+Received: from phl-mailfrontend-02 ([10.202.2.163])
+ by phl-compute-06.internal (MEProxy); Mon, 03 Feb 2025 01:19:02 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=trainwit.ch; h=
+ cc:cc:content-transfer-encoding:content-type:date:date:from:from
+ :in-reply-to:message-id:mime-version:reply-to:subject:subject:to
+ :to; s=fm2; t=1738563541; x=1738649941; bh=kILXHVU9Jt4NKRrxlWtCy
+ +Kuu9/FXdLPV8WhIsEs/Qs=; b=EKcz34t32+ehIdn569VXGs941MmYAhtUU83R+
+ gOwpSVS9C2yl8Ni88Db2R1SqA/Wd4aTe7IxePenL36k3BJR9NKkO9D0n9VwuGSh+
+ b0/jFHC3ozYpWRJiryWCSyDnd4C5+JUu0XgMi76Zk2rd1wylClCuwHQeC/FS7t2m
+ Zlow6Y9SIA7Rn1MjiDQXe4XQeLO3O8UMFYFgaDfikdF5DdLYlbFYnBHbc35LmbtB
+ rMcbhzv+J5d29CIwhuxHGyWuKPMZyJjmRq4RDscIHJAEQnfFTqcRmtaXW/DXdRLF
+ gCZmKWAYEjOP0hheTngIFFpQgPmrxkClNuCQ9GjlQDJfPc1fA==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+ messagingengine.com; h=cc:cc:content-transfer-encoding
+ :content-type:date:date:feedback-id:feedback-id:from:from
+ :in-reply-to:message-id:mime-version:reply-to:subject:subject:to
+ :to:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=fm3; t=
+ 1738563541; x=1738649941; bh=kILXHVU9Jt4NKRrxlWtCy+Kuu9/FXdLPV8W
+ hIsEs/Qs=; b=RFC3gu3ui0m+IzohtsMoZWYNptPrrp+b41S/uwmA+SNxtSmLRVR
+ i5NAG5lC2D0KfcK/cTpK+N+2ZHo9FeXOSrCRI6JXaxqYZc3bPKe+uZjEpXEscn0v
+ mc7IXROnfqyk2XBgZenRFBLhOP9+gBK1omDfqTskQGv+bxQKer6DwwONaMC4AeOc
+ q5HEUeZeTYDKj9s0Sy1G9dGc8kjp7dWJNafqB8TzWGXIi8bSFN38/qK05vsqrYId
+ Gb1qvVzGb9MaFCnp8LqJtLCx26u3yiZiYKG7IhW4KUc99iS/vDh1RX9WWuM3vekH
+ +nvJoU90bKyNrgThlkXx130MFPLxxBHOHOw==
+X-ME-Sender: <xms:1F-gZ4NmbamIlh0AF6DMQGpTyqRY4PJ_z3qm6FksBqd2WN-8vIJtlA>
+ <xme:1F-gZ-9zaNCjuuNka0mk87SRoJQtSZyRX2Kx4qhgd1jiopFpcRml6jo4lE6_1Wp3S
+ n1WomU9OHcE_-JC1Rw>
+X-ME-Received: <xmr:1F-gZ_RuVq7tLqBD1UE6eisykER9uJHQLRuSUTHGTJAOGObEnF8Ixv4gzLDfvd-Bu3BFr1mQT8ah4zQMWeMn6-EgznicXVg>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeefvddrtddtgdduieekfecutefuodetggdotefrod
+ ftvfcurfhrohhfihhlvgemucfhrghsthforghilhdpggftfghnshhusghstghrihgsvgdp
+ uffrtefokffrpgfnqfghnecuuegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivg
+ hnthhsucdlqddutddtmdenucfjughrpefhvfevufffkffoggfgsedtkeertdertddtnecu
+ hfhrohhmpehjuhhlihgruceomhhiughnihhghhhtsehtrhgrihhnfihithdrtghhqeenuc
+ ggtffrrghtthgvrhhnpedvffejleeiheegteefteeiffefteetheelgfevheegkeetlefg
+ ffetheekieevudenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepmhgrihhlfh
+ hrohhmpehmihgunhhighhhthesthhrrghinhifihhtrdgthhdpnhgspghrtghpthhtohep
+ ledpmhhouggvpehsmhhtphhouhhtpdhrtghpthhtohepqhgvmhhuqdguvghvvghlsehnoh
+ hnghhnuhdrohhrghdprhgtphhtthhopegusggrrhgsohiirgesvhgvnhhtrghnrghmihgt
+ rhhordgtohhmpdhrtghpthhtoheplhhifigvihduhedukeesghhmrghilhdrtghomhdprh
+ gtphhtthhopehprghlmhgvrhesuggrsggsvghlthdrtghomhdprhgtphhtthhopehqvghm
+ uhdqrhhishgtvhesnhhonhhgnhhurdhorhhgpdhrtghpthhtohepiihhihifvghipghlih
+ husehlihhnuhigrdgrlhhisggrsggrrdgtohhmpdhrtghpthhtohepsghmvghnghdrtghn
+ sehgmhgrihhlrdgtohhmpdhrtghpthhtoheprghlihhsthgrihhrrdhfrhgrnhgtihhsse
+ ifuggtrdgtohhmpdhrtghpthhtohepmhhiughnihhghhhtsehtrhgrihhnfihithdrtghh
+X-ME-Proxy: <xmx:1F-gZwviTwjDyWzL405B6Aa3Wg-D4jJZtlTFClVG1J4faCgDWQeiYA>
+ <xmx:1F-gZwflgHc3w3nCUxXcAHxXVHAEAG7Uf8rkKRME4e0PPnuRGdaZGA>
+ <xmx:1F-gZ01qAGVdAHpPagv-17EmjUERIyTkVtlczlP_Mfd1W6v7yOTXVg>
+ <xmx:1F-gZ08CSJhv7hqlQaidbfayk4DCYl_EE4PhfSwFPYcMbGWfnOWhSA>
+ <xmx:1V-gZ46bHWYcOCRyO5q_gVDxgHbpInsZMGlaT7zSmY0MET3TZKXsdz7b>
+Feedback-ID: ic5914928:Fastmail
+Received: by mail.messagingengine.com (Postfix) with ESMTPA; Mon,
+ 3 Feb 2025 01:18:56 -0500 (EST)
+From: julia <midnight@trainwit.ch>
+To: qemu-devel@nongnu.org
+Cc: Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Weiwei Li <liwei1518@gmail.com>, Palmer Dabbelt <palmer@dabbelt.com>,
+ qemu-riscv@nongnu.org, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Bin Meng <bmeng.cn@gmail.com>, Alistair Francis <alistair.francis@wdc.com>,
+ julia <midnight@trainwit.ch>
+Subject: [PATCH v2 1/1] target/riscv: log guest errors when reserved bits are
+ set in PTEs
+Date: Mon,  3 Feb 2025 17:18:52 +1100
+Message-ID: <20250203061852.2931556-1-midnight@trainwit.ch>
+X-Mailer: git-send-email 2.47.0
 MIME-Version: 1.0
-Message-ID: <173856049155.9683.4580810619712230382-0@git.sr.ht>
-X-Mailer: git.sr.ht
-To: qemu-riscv@nongnu.org, qemu-devel@nongnu.org
-Cc: Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bmeng.cn@gmail.com>,
- Weiwei Li <liwei1518@gmail.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=46.23.81.152; envelope-from=outgoing@sr.ht;
- helo=mail-a.sr.ht
-X-Spam_score_int: 17
-X-Spam_score: 1.7
-X-Spam_bar: +
-X-Spam_report: (1.7 / 5.0 requ) BAYES_00=-1.9, DATE_IN_PAST_96_XX=3.405,
- DKIM_INVALID=0.1, DKIM_SIGNED=0.1, RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001,
- RCVD_IN_VALIDITY_SAFE_BLOCKED=0.001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=no autolearn_force=no
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=103.168.172.155;
+ envelope-from=midnight@trainwit.ch; helo=fhigh-a4-smtp.messagingengine.com
+X-Spam_score_int: -27
+X-Spam_score: -2.8
+X-Spam_bar: --
+X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_LOW=-0.7, RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001,
+ RCVD_IN_VALIDITY_SAFE_BLOCKED=0.001, SPF_HELO_PASS=-0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -66,54 +110,94 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-Reply-To: ~yuming <yumin686@andestech.com>
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Yu-Ming Chang <yumin686@andestech.com>
+For instance, QEMUs newer than b6ecc63c569bb88c0fcadf79fb92bf4b88aefea8
+would silently treat this akin to an unmapped page (as required by the
+RISC-V spec, admittedly). However, not all hardware platforms do (e.g.
+CVA6) which leads to an apparent QEMU bug.
 
-We only check RVC to allow 16-bit aligned return addreses. This will
-cause issues when only ext_zca is enabled without RVC: 16-bit
-instructions are allowed, but 16-bit aligned return address are not.
-We should also check ext_zca to permit 16-bit aligned return addresses.
+Instead, log a guest error so that in future, incorrectly set up page
+tables can be debugged without bisecting QEMU.
 
-Signed-off-by: Yu-Ming Chang <yumin686@andestech.com>
+Signed-off-by: julia <midnight@trainwit.ch>
 ---
-The v2 has been updated to provide more explanation.
+ target/riscv/cpu_helper.c | 27 ++++++++++++++++++++++++++-
+ 1 file changed, 26 insertions(+), 1 deletion(-)
 
- target/riscv/op_helper.c | 12 ++++++++----
- 1 file changed, 8 insertions(+), 4 deletions(-)
-
-diff --git a/target/riscv/op_helper.c b/target/riscv/op_helper.c
-index eddedacf4b..891002f954 100644
---- a/target/riscv/op_helper.c
-+++ b/target/riscv/op_helper.c
-@@ -269,8 +269,10 @@ target_ulong helper_sret(CPURISCVState *env)
+diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+index e1dfc4ecbf..3dd8e06044 100644
+--- a/target/riscv/cpu_helper.c
++++ b/target/riscv/cpu_helper.c
+@@ -1226,14 +1226,27 @@ restart:
+             ppn = pte >> PTE_PPN_SHIFT;
+         } else {
+             if (pte & PTE_RESERVED) {
++                qemu_log_mask(LOG_GUEST_ERROR, "%s: reserved bits set in PTE: "
++                              "addr: 0x%" HWADDR_PRIx " pte: 0x" TARGET_FMT_lx "\n",
++                              __func__, pte_addr, pte);
+                 return TRANSLATE_FAIL;
+             }
+ 
+             if (!pbmte && (pte & PTE_PBMT)) {
++                /* Reserved without Svpbmt. */
++                qemu_log_mask(LOG_GUEST_ERROR, "%s: PBMT bits set in PTE, "
++                              "and Svpbmt extension is disabled: "
++                              "addr: 0x%" HWADDR_PRIx " pte: 0x" TARGET_FMT_lx "\n",
++                              __func__, pte_addr, pte);
+                 return TRANSLATE_FAIL;
+             }
+ 
+             if (!riscv_cpu_cfg(env)->ext_svnapot && (pte & PTE_N)) {
++                /* Reserved without Svnapot extension */
++                qemu_log_mask(LOG_GUEST_ERROR, "%s: N bit set in PTE, "
++                              "and Svnapot extension is disabled: "
++                              "addr: 0x%" HWADDR_PRIx " pte: 0x" TARGET_FMT_lx "\n",
++                              __func__, pte_addr, pte);
+                 return TRANSLATE_FAIL;
+             }
+ 
+@@ -1244,14 +1257,19 @@ restart:
+             /* Invalid PTE */
+             return TRANSLATE_FAIL;
+         }
++
+         if (pte & (PTE_R | PTE_W | PTE_X)) {
+             goto leaf;
+         }
+ 
+-        /* Inner PTE, continue walking */
+         if (pte & (PTE_D | PTE_A | PTE_U | PTE_ATTR)) {
++            /* D, A, and U bits are reserved in non-leaf/inner PTEs */
++            qemu_log_mask(LOG_GUEST_ERROR, "%s: D, A, or U bits set in non-leaf PTE: "
++                          "addr: 0x%" HWADDR_PRIx " pte: 0x" TARGET_FMT_lx "\n",
++                          __func__, pte_addr, pte);
+             return TRANSLATE_FAIL;
+         }
++        /* Inner PTE, continue walking */
+         base = ppn << PGSHIFT;
      }
  
-     target_ulong retpc = env->sepc;
--    if (!riscv_has_ext(env, RVC) && (retpc & 0x3)) {
--        riscv_raise_exception(env, RISCV_EXCP_INST_ADDR_MIS, GETPC());
-+    if (!riscv_has_ext(env, RVC) && !env_archcpu(env)->cfg.ext_zca) {
-+        if ((retpc & 0x3) != 0) {
-+            riscv_raise_exception(env, RISCV_EXCP_INST_ADDR_MIS, GETPC());
-+        }
+@@ -1261,10 +1279,17 @@ restart:
+  leaf:
+     if (ppn & ((1ULL << ptshift) - 1)) {
+         /* Misaligned PPN */
++        qemu_log_mask(LOG_GUEST_ERROR, "%s: PPN bits in PTE is misaligned: "
++                      "addr: 0x%" HWADDR_PRIx " pte: 0x" TARGET_FMT_lx "\n",
++                      __func__, pte_addr, pte);
+         return TRANSLATE_FAIL;
+     }
+     if (!pbmte && (pte & PTE_PBMT)) {
+         /* Reserved without Svpbmt. */
++        qemu_log_mask(LOG_GUEST_ERROR, "%s: PBMT bits set in PTE, "
++                      "and Svpbmt extension is disabled: "
++                      "addr: 0x%" HWADDR_PRIx " pte: 0x" TARGET_FMT_lx "\n",
++                      __func__, pte_addr, pte);
+         return TRANSLATE_FAIL;
      }
  
-     if (get_field(env->mstatus, MSTATUS_TSR) && !(env->priv >= PRV_M)) {
-@@ -328,8 +330,10 @@ target_ulong helper_mret(CPURISCVState *env)
-     }
- 
-     target_ulong retpc = env->mepc;
--    if (!riscv_has_ext(env, RVC) && (retpc & 0x3)) {
--        riscv_raise_exception(env, RISCV_EXCP_INST_ADDR_MIS, GETPC());
-+    if (!riscv_has_ext(env, RVC) && !env_archcpu(env)->cfg.ext_zca) {
-+        if ((retpc & 0x3) != 0) {
-+            riscv_raise_exception(env, RISCV_EXCP_INST_ADDR_MIS, GETPC());
-+        }
-     }
- 
-     uint64_t mstatus = env->mstatus;
 -- 
-2.45.3
+2.47.0
+
 
