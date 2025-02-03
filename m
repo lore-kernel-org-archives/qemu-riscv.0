@@ -4,96 +4,108 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 72304C02192
-	for <qemu-riscv@archiver.kernel.org>; Mon,  3 Feb 2025 14:16:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3D1B1C02192
+	for <qemu-riscv@archiver.kernel.org>; Mon,  3 Feb 2025 14:41:34 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1texF2-00025V-31; Mon, 03 Feb 2025 09:16:00 -0500
+	id 1texdF-0003XZ-3j; Mon, 03 Feb 2025 09:41:01 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1texEp-0001fa-PN
- for qemu-riscv@nongnu.org; Mon, 03 Feb 2025 09:15:53 -0500
-Received: from mail-ej1-x62e.google.com ([2a00:1450:4864:20::62e])
+ id 1texdA-0003S2-Q2
+ for qemu-riscv@nongnu.org; Mon, 03 Feb 2025 09:40:57 -0500
+Received: from mail-ed1-x531.google.com ([2a00:1450:4864:20::531])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1texEl-0008Fd-Hz
- for qemu-riscv@nongnu.org; Mon, 03 Feb 2025 09:15:45 -0500
-Received: by mail-ej1-x62e.google.com with SMTP id
- a640c23a62f3a-aaec61d0f65so746207366b.1
- for <qemu-riscv@nongnu.org>; Mon, 03 Feb 2025 06:15:42 -0800 (PST)
+ id 1texd6-0002LP-O3
+ for qemu-riscv@nongnu.org; Mon, 03 Feb 2025 09:40:56 -0500
+Received: by mail-ed1-x531.google.com with SMTP id
+ 4fb4d7f45d1cf-5db6890b64eso8594946a12.3
+ for <qemu-riscv@nongnu.org>; Mon, 03 Feb 2025 06:40:52 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1738592141; x=1739196941; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:message-id:date:user-agent
- :references:in-reply-to:subject:cc:to:from:from:to:cc:subject:date
+ d=linaro.org; s=google; t=1738593651; x=1739198451; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=a8DLNiMTlVpLcrkpzTxDv6WaCMVzL1II9OOeA1yxymo=;
- b=GhIXINK7AYqs5NryWWW/4s0crR0YI3/G5lL9rqk1K/G/KAy3LMbXZRP8eI5IvRtw9N
- GWxvMknkR9fodsl0P4jf2F1uj7NnNhoJ48RRbcpgIqWPadI737sRbsXydVlzY2hTmxTS
- vvNjJB1fSgR80nIYqmzPqiOxyU9XUFxYY8vZv4QIf6H+eDs0TLvdHQyd75MuNYrL6sxg
- plCd4fNxk6s+svCcuaHkdK58LH9vbQ4e2NJO3rWTVT6pm2RRxB15c4HODNPoCa8XgygO
- 1Seo45NqPBczAf8J4YJ2PxdpiSgakz/JfoE4DOHeUstrx/Kv/0vqNX2OeNZGnfBTBWJY
- Uvng==
+ bh=QTDOVYxM0E7wRyBsbgpa8GUo5K0fruAd8IIEzTdI9Ns=;
+ b=bfIx4/ddsM9UzAGhPaKwjAeWyH7jl7felKe4s7x/7JvXmAIMVZJmbOPi1i2UWg5bPF
+ 0PK1WBIjYq0OxgHNdHhzPXTfoVt0aRImjga26zJ6DN47jHq8VK6//GTWcISDzld6OwsP
+ KI75O5Z6nz81HF+i+TVNBGOdIXcWgB3mf5nYTCSkVI+JmdLpRM8GmOUZtqW3ozAvq5BA
+ MuvOEO8ZjQRMODGhuI1cgIDAdEJoqN+SDshyrisrVLno7YfZbMo+qsihmU/pIIaNXdJW
+ QjFeXybFllhSJxNpKsjUl9qpxlzdl7yGHGSU8IbCrPxQ5V/gaNGcpixsDNimX2CxdxAX
+ vhIQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1738592141; x=1739196941;
- h=content-transfer-encoding:mime-version:message-id:date:user-agent
- :references:in-reply-to:subject:cc:to:from:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=a8DLNiMTlVpLcrkpzTxDv6WaCMVzL1II9OOeA1yxymo=;
- b=ksNuex7i8ZFx0twkUDuUsHa3qlodXyvo7VHNk2AZqxH377bgBhxb38rzh5GFGZidU0
- hTkD/4Ktor0FMpFCVUz8NvWf3AbOTQ91s0i7R8ijTM9QXDttpkCTc05U4yzCMXuKKvyC
- 55K5WqVfya9nhuaI1DW3Nf94GBVUDQ+yZo51Smv7WYhZ62h6RBoQGqGBc+1RlpPPvsdT
- nFNx0Ckta/BFA5yHNzyHY1tHgpvcb8B1FLIDDN8g1f9x8G8S4E2bQPW6Jvo3ei4Vt4fh
- 3Q90jQN4C4WgcnfYawTS6bOZ1KF9tsl0cwi9CEpV0SRxXcR2bvMu7W7NIdDDEBP2rkqw
- JW+Q==
+ d=1e100.net; s=20230601; t=1738593651; x=1739198451;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=QTDOVYxM0E7wRyBsbgpa8GUo5K0fruAd8IIEzTdI9Ns=;
+ b=bzzLv4y1+0yeTtqr3fp0cnRSNjFoZ28atDX7KW5RePYLB/pc0j+EKRord7sQhO6TLJ
+ b1ipFrlqUyIYx7WBEATOcF7Ck+M+Y4PwId+/KpllpM+ilhlGLpWJc4tx9hOqm1w4fRBa
+ 0MXb+9J/yM5q4z2E/k5vR4H5ufUSIqoUAb0CEhKCy5cIxRASvdDTs/89UkMwP97cwpV1
+ SmGRYgBIh9lPLh14fFPwj1HhSTGxx01XuGNDHWoTUDpHEK81OEEn3m47WvYH28nQC6TW
+ AwU5b5Veixqdc7CfWbUmV3IzsBEIfdmy2gUzhnjAfz2ayTWC3kgtoQqODnDu1k6K8NmX
+ vz5A==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVyVMBMUKhcqlvm9PkcjeeJmoldmMEu6Tkyn1xNRsgnL9PTT/QRuhVowl8jyIEl4qGoz5kt9LfoKH6R@nongnu.org
-X-Gm-Message-State: AOJu0Yy3ee+O50rKdPszim1hMwUkIFm/LVqQQvUwh2lyM5GWCqURMt9I
- BsHtcU9UMvWsbDtDtjwMgjo64w4dx6V0foxmiooZh/TnjpUiYfCwV2EH+N4TWX4=
-X-Gm-Gg: ASbGncvMSFiUxg/o/j+pLafAdU0cjrVL7ql9PYKDLSXLYZ7jHycriNVOXV3L90bRHiP
- NaEAJ5dG+lFJduvG9MsikQrItk8Uey3jJB48D33PqI3OEdfNtLSsJ7HSqjI8Ad3VSYl6LfbJ9Yj
- f5YBQnMYJDhWaWw9sbzjwu3iohD139xwyiVr9pJdq6CT+Od5d6AbDFEftmsJlrHEgfHteyoAcs5
- NoroLfyAolVYpIBD7FjBKMxAdkm1k0eBKxDunAPIx2D+5BSuqAJ6JZQBs/Zz8/Hk/pSgtzEGd7h
- bVEzwDM+K2YkVo9Lgw==
-X-Google-Smtp-Source: AGHT+IEPL0/gAu4hoPsJMqL9NcTFl429Dwefiur/dR8AxW511cwk+fV3AItGSf977GcL8DCPpOJmqw==
-X-Received: by 2002:a17:907:72c4:b0:aa6:5eae:7ed6 with SMTP id
- a640c23a62f3a-ab6cfce8dbbmr2225358066b.13.1738592141399; 
- Mon, 03 Feb 2025 06:15:41 -0800 (PST)
+ AJvYcCVDXswPq0m/XF1mSvrPFMwqj5wrzzYoqkLYYFiGY6FE2oRBYnIKHuDO2ZO2ZAStDy8gbExbwByFhDNd@nongnu.org
+X-Gm-Message-State: AOJu0Yw66VhboH9MVwSMvXzRnAzL4WOlrBnGTxRTeTp93WEp04dz5mIc
+ /qe/Rdz0u68SDlugMNVo/TUPV3j+PM+A1vTKUBXGTK42p8HqE5VcCAfaelIRKXs=
+X-Gm-Gg: ASbGncvA42g8NHpaOlBK3TG4PfIifMeTb14+N4FwpbJUILzJ6E5T8FeD3aUhu/2yAHO
+ qcVoMtENHX4vNzFoX1dHA03u0cnQDX1usVtwNzeOWmUc16K0qZORchzdH8+Uq2eUYCp4ZjX3geK
+ HxwRP8XTs4QHxQq3GtlNZtXs0dOq5EuSDKqVmhn+5/swZNNoWf2n5Se57oM3wsB/Zz63KcZ53JS
+ ynKY1VD1fP8VxJRIQffJUR3guZxT+WyEQRCju2JUG+Ye61drDQG++mG0CzVxH1F51FXGOn1VMqW
+ R902kX3gEI3NbLGodw==
+X-Google-Smtp-Source: AGHT+IH/qleD9HY2aVbeknEfPVUsDluqxOpdMDkbIEC7YUJxy/b/vW3wRfGPVg1o5VF1/ZRyzF+I4Q==
+X-Received: by 2002:a17:906:6a24:b0:aa6:aa8e:c89c with SMTP id
+ a640c23a62f3a-ab6cfda42fbmr2842139766b.39.1738593650836; 
+ Mon, 03 Feb 2025 06:40:50 -0800 (PST)
 Received: from draig.lan ([185.126.160.109]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-ab6e4a2fa09sm765980266b.140.2025.02.03.06.15.40
+ a640c23a62f3a-ab6e47a827esm773718766b.15.2025.02.03.06.40.49
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 03 Feb 2025 06:15:40 -0800 (PST)
-Received: from draig (localhost [IPv6:::1])
- by draig.lan (Postfix) with ESMTP id 0198D5F8BF;
- Mon,  3 Feb 2025 14:15:40 +0000 (GMT)
-From: =?utf-8?Q?Alex_Benn=C3=A9e?= <alex.bennee@linaro.org>
-To: Julia <midnight@trainwit.ch>
-Cc: "Daniel Henrique Barboza" <dbarboza@ventanamicro.com>,
- qemu-devel@nongnu.org,  qemu-riscv@nongnu.org
-Subject: Re: [PATCH 1/1] target/riscv: log guest errors when reserved bits
- are set in PTEs
-In-Reply-To: <8149beba-66b1-4707-93f1-083b8bc5ece0@app.fastmail.com> (Julia's
- message of "Mon, 03 Feb 2025 18:12:21 +1100")
-References: <20250202051505.1846933-1-midnight@trainwit.ch>
- <20250202051505.1846933-2-midnight@trainwit.ch>
- <b76bf940-ff55-4619-a9ae-fa65c47e864f@ventanamicro.com>
- <8149beba-66b1-4707-93f1-083b8bc5ece0@app.fastmail.com>
-User-Agent: mu4e 1.12.8; emacs 29.4
-Date: Mon, 03 Feb 2025 14:15:39 +0000
-Message-ID: <87jza7azck.fsf@draig.linaro.org>
+ Mon, 03 Feb 2025 06:40:49 -0800 (PST)
+Received: from draig.lan (localhost [IPv6:::1])
+ by draig.lan (Postfix) with ESMTP id AAED45F906;
+ Mon,  3 Feb 2025 14:40:48 +0000 (GMT)
+From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
+To: qemu-devel@nongnu.org
+Cc: qemu-ppc@nongnu.org, Mahmoud Mandour <ma.mandourr@gmail.com>,
+ Thomas Huth <thuth@redhat.com>,
+ Daniel Henrique Barboza <danielhb413@gmail.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
+ Hao Wu <wuhaotsh@google.com>, Peter Xu <peterx@redhat.com>,
+ Warner Losh <imp@bsdimp.com>,
+ Pierrick Bouvier <pierrick.bouvier@linaro.org>, qemu-arm@nongnu.org,
+ Harsh Prateek Bora <harshpb@linux.ibm.com>,
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
+ Palmer Dabbelt <palmer@dabbelt.com>, Kyle Evans <kevans@freebsd.org>,
+ Laurent Vivier <laurent@vivier.eu>, Riku Voipio <riku.voipio@iki.fi>,
+ Bin Meng <bmeng.cn@gmail.com>, qemu-rust@nongnu.org,
+ Laurent Vivier <lvivier@redhat.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, Weiwei Li <liwei1518@gmail.com>,
+ qemu-riscv@nongnu.org, Fabiano Rosas <farosas@suse.de>,
+ Tyrone Ting <kfting@nuvoton.com>, Paolo Bonzini <pbonzini@redhat.com>,
+ Nicholas Piggin <npiggin@gmail.com>, Alexandre Iooss <erdnaxe@crans.org>
+Subject: [PATCH 01/18] tests/docker: replicate the check-rust-tools-nightly CI
+ job
+Date: Mon,  3 Feb 2025 14:40:31 +0000
+Message-Id: <20250203144048.2131117-2-alex.bennee@linaro.org>
+X-Mailer: git-send-email 2.39.5
+In-Reply-To: <20250203144048.2131117-1-alex.bennee@linaro.org>
+References: <20250203144048.2131117-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2a00:1450:4864:20::62e;
- envelope-from=alex.bennee@linaro.org; helo=mail-ej1-x62e.google.com
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::531;
+ envelope-from=alex.bennee@linaro.org; helo=mail-ed1-x531.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -109,34 +121,73 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Julia <midnight@trainwit.ch> writes:
+This allows people to run the test locally:
 
->> This happens because 'pte' is a 'target_ulong' type that, for riscv32, w=
-ill be
->> interpreted as uint32_t while the FMT being used is PRIx64.
->>
->> You can fix it by using TARGET_FMT_lx instead of PRIx64:
->>
->
-> I've sent a follow-up patch fixing these build errors, it builds on 32 & =
-64 bit on my system. Cheers=20
->
-> As for the Signed-off-by, I'd rather not, and the contributing guide
-> does not require it.
+  make docker-test-rust@fedora-rust-nightly
 
-Apologies - I missed the context.
+Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
 
-  The name used with =E2=80=9CSigned-off-by=E2=80=9D does not need to be yo=
-ur legal name,
-  nor birth name, nor appear on any government ID. It is the identity you
-  choose to be known by in the community, but should not be anonymous, nor
-  misrepresent whom you are.
+---
+v2
+  - update MAINTAINERS
+---
+ MAINTAINERS                   |  1 +
+ tests/docker/Makefile.include |  3 +++
+ tests/docker/test-rust        | 21 +++++++++++++++++++++
+ 3 files changed, 25 insertions(+)
+ create mode 100755 tests/docker/test-rust
 
->
-> Regards,
-> Julia
+diff --git a/MAINTAINERS b/MAINTAINERS
+index bf737eb6db..8008db18ab 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -3384,6 +3384,7 @@ F: rust/rustfmt.toml
+ 
+ Rust-related patches CC here
+ L: qemu-rust@nongnu.org
++F: tests/docker/test-rust
+ F: rust/
+ 
+ SLIRP
+diff --git a/tests/docker/Makefile.include b/tests/docker/Makefile.include
+index fead7d3abe..fa1cbb6726 100644
+--- a/tests/docker/Makefile.include
++++ b/tests/docker/Makefile.include
+@@ -236,3 +236,6 @@ docker-image: ${DOCKER_IMAGES:%=docker-image-%}
+ 
+ docker-clean:
+ 	$(call quiet-command, $(DOCKER_SCRIPT) clean)
++
++# Overrides
++docker-test-rust%: NETWORK=1
+diff --git a/tests/docker/test-rust b/tests/docker/test-rust
+new file mode 100755
+index 0000000000..e7e3e94a55
+--- /dev/null
++++ b/tests/docker/test-rust
+@@ -0,0 +1,21 @@
++#!/bin/bash -e
++#
++# Run the rust code checks (a.k.a. check-rust-tools-nightly)
++#
++# Copyright (c) 2025 Linaro Ltd
++#
++# Authors:
++#  Alex Bennée <alex.bennee@linaro.org>
++#
++# This work is licensed under the terms of the GNU GPL, version 2
++# or (at your option) any later version. See the COPYING file in
++# the top-level directory.
++
++. common.rc
++
++cd "$BUILD_DIR"
++
++configure_qemu --disable-user --disable-docs --enable-rust
++pyvenv/bin/meson devenv -w $QEMU_SRC/rust ${CARGO-cargo} fmt --check
++make clippy
++make rustdoc
+-- 
+2.39.5
 
---=20
-Alex Benn=C3=A9e
-Virtualisation Tech Lead @ Linaro
 
