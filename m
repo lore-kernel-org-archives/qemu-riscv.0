@@ -4,69 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 64991C02192
-	for <qemu-riscv@archiver.kernel.org>; Mon,  3 Feb 2025 14:44:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2B872C02196
+	for <qemu-riscv@archiver.kernel.org>; Mon,  3 Feb 2025 14:44:10 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1texdK-0003eZ-SQ; Mon, 03 Feb 2025 09:41:06 -0500
+	id 1texde-0003ta-95; Mon, 03 Feb 2025 09:41:26 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1texdF-0003Ys-HN
- for qemu-riscv@nongnu.org; Mon, 03 Feb 2025 09:41:01 -0500
-Received: from mail-ej1-x631.google.com ([2a00:1450:4864:20::631])
+ id 1texdN-0003fv-Cf
+ for qemu-riscv@nongnu.org; Mon, 03 Feb 2025 09:41:12 -0500
+Received: from mail-ej1-x62a.google.com ([2a00:1450:4864:20::62a])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1texd9-0002MY-46
- for qemu-riscv@nongnu.org; Mon, 03 Feb 2025 09:41:01 -0500
-Received: by mail-ej1-x631.google.com with SMTP id
- a640c23a62f3a-aaf60d85238so693569766b.0
- for <qemu-riscv@nongnu.org>; Mon, 03 Feb 2025 06:40:54 -0800 (PST)
+ id 1texdC-0002Oz-3A
+ for qemu-riscv@nongnu.org; Mon, 03 Feb 2025 09:41:09 -0500
+Received: by mail-ej1-x62a.google.com with SMTP id
+ a640c23a62f3a-a9e44654ae3so719431566b.1
+ for <qemu-riscv@nongnu.org>; Mon, 03 Feb 2025 06:40:57 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1738593653; x=1739198453; darn=nongnu.org;
+ d=linaro.org; s=google; t=1738593656; x=1739198456; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=ptvjzIuVDQT2UCn5M7MTp4nlZSIRLqW4pGkuqXQqZnQ=;
- b=PCG01pZjH+glbXe7AkXY6IMASqZiVhqNzQoVuD5Vc5KJpivgFEH2Q5XOHWEpgBMqoc
- iP4emz5Uh2xtCTQGphhNgvaZp2J4VUwZCyulN3gLo/BNqrOzZtCQeHsV5FPSUZNOs2R3
- 85NNEIq6Khi6iLfPZjbQo27u9s4wDLrk0LQ6B99ceCVe2y00zVDvR29+tdRCpNzfwNWy
- JiCbyMnSvBebOHSvmXWPzsZ7LFuWuxjj4jCwCxB6mEROYA3xKnA8FAsxsRGEbvO9Cg80
- E4cN0Td9U705qU5iPez+rLZyqhC6z/X1AYVuhYylnKGnBuOKC3Q5FgPTn32GiV1WxGIH
- /+Vw==
+ bh=/577CdB1eWedE91Z4d0PM1VMtk8hOH9rwbGlAE6K9w8=;
+ b=sHOqC0vR6eHlwNI6PcgEdE/FX4h0ziH7bPelCgmBDCUI6MYsY+PRNJCVbkcPUL8+ap
+ Xobyw+Y3pFTIdgZ7eR3AwmObQyHqJu+hnOr2y78M1u2qeWR238+F7b005yvyaBlmgSC0
+ k9odv5xB40MDNbiZjst+sdttbL6cQedSX4uPR7bkVhlpfcWWf0xFHphkI4dICtsLmpXe
+ MZcfEQuk0NQYWR9t7SsARjE0CeAIi/BPJngcmv7PptKf0Z1gfd6iqbTc2p31z5NbHkzk
+ 3c3BhXa9vEqydTRB5Rn+hc1omNEnCXIX6W3GU9v9s55iW281OM9ZeJVGNTQYy6qRYujM
+ kH8Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1738593653; x=1739198453;
+ d=1e100.net; s=20230601; t=1738593656; x=1739198456;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=ptvjzIuVDQT2UCn5M7MTp4nlZSIRLqW4pGkuqXQqZnQ=;
- b=hGDOxoVLbmLxACXqQaCXKlKEzgHi0H9VY+9EmnyTKSizwv9yM1/LvlWgo5/8kBK4Y5
- 0dQjdMP3wQ+OOAjgpHVdUYkL/wfsHmyWnEvGN1bHAodMx2wTHeE2UMzv75OzerA/t5s4
- gbRe9AOsAEsicU8RiGiYW063epDvY5M95udLyirGT6cUnbaWjKalbdsXNCjgt02YW1sL
- UMr/SO5jY/SDYKXo6eh+4llzyknYk7ikXZwjURb9QhZPAPISojZ7I3IJopqaHr/W/k8Z
- BP6KowpXG5cStF/fqNG8p9Ot2usTSkI/ncxq1CytFlSAmcCDBVK+Ko3Xhlvrss0wd7rW
- Eq7g==
+ bh=/577CdB1eWedE91Z4d0PM1VMtk8hOH9rwbGlAE6K9w8=;
+ b=DwQ2Sf8tmbqyfF53l7xx+LM/CyJCQJwhrDMfVqBPtAOpQEaN805g7fEZIhJKJygymw
+ Fk6LSe+UfUo0MUxztt3OP6MHoRIpWPv2c6CBRCd8E8WuKSVKOn6qaclNaOyUmw99WmxI
+ 4UMJH2w4sk7fZ6wgVQr/z+/YoxIvB1zEft+KXkk9YcNGf4uy02ywK6gBDYRFnQBN3pAQ
+ ihnnzTGI79ncCLwq2sX5jlX3EFuudgojKwwuhddMYpE5K4pR1n4htXkpi4nOX3/6YxA6
+ OZBgZdOxTS1qWC0husb3BEc9haD9mjHcUw86iRIVwQqc1zIXrtg59z3CObAdh7ZOqA2P
+ b/jg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVNsY3Ngf4VCeSO2UG1BOH1RSHPFWHI/KtnDIBTqsmHAyk3/v+9bh307Ytp5ShIRIRfCZvAvVpqZrDS@nongnu.org
-X-Gm-Message-State: AOJu0YxJtBffr47+OCWfK2vL8rCcZUmXRJhCM8+8NjIIrB2Bj5Fqbzz6
- ua7hz4U1qFYo/m4h1paJLVp/hn6ZmckC1MQ0A7AgcvFaeUzeffBQLwUMMLBSXeE=
-X-Gm-Gg: ASbGncuUfHIoO7lmcr69F6NveB/YIgSuGxJu0hbeGbjM+8Vi9W0bmTtscebgFBGjkGM
- Fz8RGt0GA8AvUxBqOoHTBHdojRfEs+E9h13OqTtxE2/s+12xaip9wdPpyJHbW0BIpYv6q8PskEx
- 0HE0I0uReYBQUDjWIsp4QDBpSP2v67eaghbpUvPK1qcb+85mKsfUXWt7norNaxcvxhmGqbn/qhy
- VusXWWlDK9zmynpKe5ewa17Y7zRq+4DR5DmNlWDfMmiwJpTvfT3bLHXLYt0jfv0usep6ErreQCg
- Vt/eLIGmpm2jWW5K4w==
-X-Google-Smtp-Source: AGHT+IHF7o4uKiUCRtU+UcxFhGwRawi+LrTe7yh1OzTqOsCnalydGp9O1YmIBbz5LxsQ77i5v+y96g==
-X-Received: by 2002:a17:907:8b94:b0:aa6:8a1b:8b84 with SMTP id
- a640c23a62f3a-ab6cfe17745mr2460856666b.57.1738593653070; 
- Mon, 03 Feb 2025 06:40:53 -0800 (PST)
+ AJvYcCUi+PP8NrvzWC751NY832qPFTgn+z8vPhvFQWmJ3NL5MYr5bMDXV7LdOUyZTSMdBG9LyNCtBm+cC6UM@nongnu.org
+X-Gm-Message-State: AOJu0YxZ5sUlqcKcH/nuQHL+Z3OuQU1PsFtXD81qVAAXhoAbDT9Cjlir
+ IkCkL5ZL/wUFzuPqA1mgsPNGQNE+Z0xPxY9PB1yLZfY8p5Qe71BstC5UYn0P/V8=
+X-Gm-Gg: ASbGncsz0b6kKp/nzdJ1/FYyme5PfU/oDSAU5lhBlcjbs40UUOaWwvkmmAzFgupNcA2
+ yDQ5uhw3F0J2Rra5Mx4MZM8AeN9qNAtBlS4yhDMnyf0ejNwn+2AjjARwVeO1IeYICmvIycLBK1l
+ 4nd8pEwniqhjBZ3CXMJ6ads1Af+AT3Dg8dXonfPBuo/BAOYnfnMJsqb+IjK7FawpKCsI/Q2YxGf
+ feaWLLwkgC2yBXS7fPtLtFRsDLJN4fkV+YrPP1IkYl+0oTk2OussJatBEAGUjD/F6jom9pkArn8
+ 0fF6iLb4MhGqq8NfIw==
+X-Google-Smtp-Source: AGHT+IHKcF2++g0wusgoUDeHmIZClv5NVUKi6L+52mtdageLBLkne32ON9bDgwCYMZ/GfaeVIOSc5A==
+X-Received: by 2002:a17:907:97c5:b0:aa6:5d30:d971 with SMTP id
+ a640c23a62f3a-ab6cfcb6979mr2706860166b.11.1738593655675; 
+ Mon, 03 Feb 2025 06:40:55 -0800 (PST)
 Received: from draig.lan ([185.126.160.109]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-ab6e49ff968sm767111566b.111.2025.02.03.06.40.49
+ a640c23a62f3a-ab6e47d070bsm757877366b.48.2025.02.03.06.40.51
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 03 Feb 2025 06:40:49 -0800 (PST)
+ Mon, 03 Feb 2025 06:40:53 -0800 (PST)
 Received: from draig.lan (localhost [IPv6:::1])
- by draig.lan (Postfix) with ESMTP id F2AE95FA60;
- Mon,  3 Feb 2025 14:40:48 +0000 (GMT)
+ by draig.lan (Postfix) with ESMTP id 9F6B260870;
+ Mon,  3 Feb 2025 14:40:49 +0000 (GMT)
 From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: qemu-ppc@nongnu.org, Mahmoud Mandour <ma.mandourr@gmail.com>,
@@ -86,18 +86,20 @@ Cc: qemu-ppc@nongnu.org, Mahmoud Mandour <ma.mandourr@gmail.com>,
  Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, Weiwei Li <liwei1518@gmail.com>,
  qemu-riscv@nongnu.org, Fabiano Rosas <farosas@suse.de>,
  Tyrone Ting <kfting@nuvoton.com>, Paolo Bonzini <pbonzini@redhat.com>,
- Nicholas Piggin <npiggin@gmail.com>, Alexandre Iooss <erdnaxe@crans.org>
-Subject: [PATCH 04/18] tests/qtest: simplify qtest_process_inbuf
-Date: Mon,  3 Feb 2025 14:40:34 +0000
-Message-Id: <20250203144048.2131117-5-alex.bennee@linaro.org>
+ Nicholas Piggin <npiggin@gmail.com>, Alexandre Iooss <erdnaxe@crans.org>,
+ Ilya Leoshkevich <iii@linux.ibm.com>,
+ Richard Henderson <richard.henderson@linaro.org>
+Subject: [PATCH 10/18] gdbstub: Allow the %d placeholder in the socket path
+Date: Mon,  3 Feb 2025 14:40:40 +0000
+Message-Id: <20250203144048.2131117-11-alex.bennee@linaro.org>
 X-Mailer: git-send-email 2.39.5
 In-Reply-To: <20250203144048.2131117-1-alex.bennee@linaro.org>
 References: <20250203144048.2131117-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::631;
- envelope-from=alex.bennee@linaro.org; helo=mail-ej1-x631.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::62a;
+ envelope-from=alex.bennee@linaro.org; helo=mail-ej1-x62a.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -120,53 +122,47 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Don't both creating a GString to temporarily hold our qtest command.
-Instead do a simpler g_strndup and use autofree to clean up
-afterwards.
+From: Ilya Leoshkevich <iii@linux.ibm.com>
 
+Just like for QEMU_LOG_FILENAME, replace %d with PID in the GDB socket
+path. This allows running multi-process applications with, e.g.,
+export QEMU_GDB=/tmp/qemu-%d.sock. Currently this is not possible,
+since the first process will cause the subsequent ones to fail due to
+not being able to bind() the GDB socket.
+
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+Reviewed-by: Warner Losh <imp@bsdimp.com>
+Signed-off-by: Ilya Leoshkevich <iii@linux.ibm.com>
+Message-Id: <20250117001542.8290-2-iii@linux.ibm.com>
 Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
 ---
- system/qtest.c | 20 ++++++++------------
- 1 file changed, 8 insertions(+), 12 deletions(-)
+ gdbstub/user.c | 10 ++++++++++
+ 1 file changed, 10 insertions(+)
 
-diff --git a/system/qtest.c b/system/qtest.c
-index e68ed0f2a8..bb1efba9fd 100644
---- a/system/qtest.c
-+++ b/system/qtest.c
-@@ -763,25 +763,21 @@ static void qtest_process_command(CharBackend *chr, gchar **words)
-     }
- }
+diff --git a/gdbstub/user.c b/gdbstub/user.c
+index c2bdfc3d49..fd29d595f4 100644
+--- a/gdbstub/user.c
++++ b/gdbstub/user.c
+@@ -317,9 +317,19 @@ static bool gdb_accept_socket(int gdb_fd)
  
-+/*
-+ * Process as much of @inbuf as we can in newline terminated chunks.
-+ * Remove the processed commands from @inbuf as we go.
-+ */
- static void qtest_process_inbuf(CharBackend *chr, GString *inbuf)
+ static int gdbserver_open_socket(const char *path)
  {
-     char *end;
++    g_autoptr(GString) buf = g_string_new("");
+     struct sockaddr_un sockaddr = {};
++    char *pid_placeholder;
+     int fd, ret;
  
-     while ((end = strchr(inbuf->str, '\n')) != NULL) {
--        size_t offset;
--        GString *cmd;
--        gchar **words;
--
--        offset = end - inbuf->str;
-+        size_t len = end - inbuf->str;
-+        g_autofree char *cmd = g_strndup(inbuf->str, len);
-+        g_auto(GStrv) words = g_strsplit(cmd, " ", 0);
- 
--        cmd = g_string_new_len(inbuf->str, offset);
--        g_string_erase(inbuf, 0, offset + 1);
--
--        words = g_strsplit(cmd->str, " ", 0);
-+        g_string_erase(inbuf, 0, len + 1);
-         qtest_process_command(chr, words);
--        g_strfreev(words);
--
--        g_string_free(cmd, TRUE);
-     }
- }
- 
++    pid_placeholder = strstr(path, "%d");
++    if (pid_placeholder != NULL) {
++        g_string_append_len(buf, path, pid_placeholder - path);
++        g_string_append_printf(buf, "%d", qemu_get_thread_id());
++        g_string_append(buf, pid_placeholder + 2);
++        path = buf->str;
++    }
++
+     fd = socket(AF_UNIX, SOCK_STREAM, 0);
+     if (fd < 0) {
+         perror("create socket");
 -- 
 2.39.5
 
