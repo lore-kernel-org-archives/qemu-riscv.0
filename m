@@ -4,98 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D51D5C02193
-	for <qemu-riscv@archiver.kernel.org>; Mon,  3 Feb 2025 07:13:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 89BA8C02196
+	for <qemu-riscv@archiver.kernel.org>; Mon,  3 Feb 2025 12:08:30 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1teqdX-0002VC-56; Mon, 03 Feb 2025 02:12:52 -0500
+	id 1tevFY-0004hx-VK; Mon, 03 Feb 2025 07:08:24 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <midnight@trainwit.ch>)
- id 1teqdV-0002U8-Ab; Mon, 03 Feb 2025 02:12:49 -0500
-Received: from fout-a2-smtp.messagingengine.com ([103.168.172.145])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <midnight@trainwit.ch>)
- id 1teqdT-0007xQ-4M; Mon, 03 Feb 2025 02:12:49 -0500
-Received: from phl-compute-01.internal (phl-compute-01.phl.internal
- [10.202.2.41])
- by mailfout.phl.internal (Postfix) with ESMTP id 141F213800E8;
- Mon,  3 Feb 2025 02:12:42 -0500 (EST)
-Received: from phl-imap-09 ([10.202.2.99])
- by phl-compute-01.internal (MEProxy); Mon, 03 Feb 2025 02:12:42 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=trainwit.ch; h=
- cc:cc:content-transfer-encoding:content-type:content-type:date
- :date:from:from:in-reply-to:in-reply-to:message-id:mime-version
- :references:reply-to:subject:subject:to:to; s=fm2; t=1738566762;
- x=1738653162; bh=l3rRSvqBN3E6hRNo8yjAbeMMDbHM8Yo6JHDFc/dTmas=; b=
- TiBL+Li+l6BL6v2XbUojkxpflXlRwqJhp5dKLSopZfJAncGfXtfzXoCpL+5e9dxE
- KuuiguINgv0WZK6xy+l1yt+NDhpNeHHw5bBWJuCzjX+FZufg2XJ+A5Zs/OBQbMI0
- 6VPW0YfR0sSh1aZxq8D4m5fIBwR/xZ59zmS3xGr5rgrEElWylbmKpdKvkbewpXyv
- 8hXgP+NZ85HzK340yc+2pSTFZA0OKGw9wD3S204pvzZGyTWk3uts+qzfTrqyvskx
- +3hCsimclpZkXswSxnoBiptY+AEkE0pXrvWmWtTsEA/8K0xYHVW8b9+LyS9QgLRd
- fw0YDLnuDtU17Fxxy/899A==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
- messagingengine.com; h=cc:cc:content-transfer-encoding
- :content-type:content-type:date:date:feedback-id:feedback-id
- :from:from:in-reply-to:in-reply-to:message-id:mime-version
- :references:reply-to:subject:subject:to:to:x-me-proxy
- :x-me-sender:x-me-sender:x-sasl-enc; s=fm3; t=1738566762; x=
- 1738653162; bh=l3rRSvqBN3E6hRNo8yjAbeMMDbHM8Yo6JHDFc/dTmas=; b=L
- i4GjAVW7pvVyCjXxoYXIlvJYSKTgQqTfTx4nilwBuM7uStTwQt7sXkkQDTNVaJDU
- nqNwtzX6Gn3ArRINvd4HwVRrHVBMm3eAyKs6nrgF+cUuKIDJzPR4j5TvsFyF8lF3
- eB34tjvCRfmC8uSH+sd284fAsOwRrPUOHXM7vXSIw8LCFtXd55zAnIqaE7GIMeqg
- h6S9y7MK5AOt7tjWUhBi9HPEJWoLH1L5CHc2C6ema//usAKf520LT84eX6Ykv/Lr
- Ip+oeH8+WyZW3IP9TeBp5XnWS/VZ+1oULCgBEb7juIx5iDHxhKuY2ZMAcrDNDm/S
- GtdmkfEkc6DOLR8oShEGw==
-X-ME-Sender: <xms:aWygZ9sRlOPnjHsxkjTw24q-vq1HKtuhhyBLs83KRwmHhJlSGjTovQ>
- <xme:aWygZ2d48JXx3o7KWLiS8EFxHpsuSA524wPkX88TBxlxw6n56ABdxJGiTvtOBeloR
- 0-D4QBjWqPhETpWzGg>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeefvddrtddtgdduieelhecutefuodetggdotefrod
- ftvfcurfhrohhfihhlvgemucfhrghsthforghilhdpggftfghnshhusghstghrihgsvgdp
- uffrtefokffrpgfnqfghnecuuegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivg
- hnthhsucdlqddutddtmdenucfjughrpefoggffhffvvefkjghfufgtgfesthejredtredt
- tdenucfhrhhomheplfhulhhirgcuoehmihgunhhighhhthesthhrrghinhifihhtrdgthh
- eqnecuggftrfgrthhtvghrnhepgefgfedvudehuefhiefhhfefudetvddtkeejueffkeef
- ieevleevhfehuddutddtnecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehmrg
- hilhhfrhhomhepmhhiughnihhghhhtsehtrhgrihhnfihithdrtghhpdhnsggprhgtphht
- thhopeefpdhmohguvgepshhmthhpohhuthdprhgtphhtthhopehqvghmuhdquggvvhgvlh
- esnhhonhhgnhhurdhorhhgpdhrtghpthhtohepqhgvmhhuqdhrihhstghvsehnohhnghhn
- uhdrohhrghdprhgtphhtthhopegusggrrhgsohiirgesvhgvnhhtrghnrghmihgtrhhord
- gtohhm
-X-ME-Proxy: <xmx:aWygZwwm5CsEpjtULTY7vWUhgotlWuVqvb-EzA_xYLrYav4f5Be-Fw>
- <xmx:aWygZ0NnRmrMv9BMg6ScG6oLcXJFxUrrqkM_csiEqsWZos34X8gSQQ>
- <xmx:aWygZ9_txwhHWyC9Q8TA6DATIQaqgthM2vGk2JJfrPN0gSwmSV-JCQ>
- <xmx:aWygZ0U-UYmT95p9fM7coeRtFGRT2Zd35Qnno5rMniEj4uCFfgAEBQ>
- <xmx:amygZ_I3ie2egRO1yDX9MDqRkpLbzjFpoIpU6KuRUjCooTBTfFeLnoC->
-Feedback-ID: ic5914928:Fastmail
-Received: by mailuser.phl.internal (Postfix, from userid 501)
- id 712F7780068; Mon,  3 Feb 2025 02:12:41 -0500 (EST)
-X-Mailer: MessagingEngine.com Webmail Interface
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1tevFX-0004hp-UY
+ for qemu-riscv@nongnu.org; Mon, 03 Feb 2025 07:08:23 -0500
+Received: from mail-pl1-x635.google.com ([2607:f8b0:4864:20::635])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1tevFW-0002FJ-3X
+ for qemu-riscv@nongnu.org; Mon, 03 Feb 2025 07:08:23 -0500
+Received: by mail-pl1-x635.google.com with SMTP id
+ d9443c01a7336-2165448243fso78715335ad.1
+ for <qemu-riscv@nongnu.org>; Mon, 03 Feb 2025 04:08:21 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=ventanamicro.com; s=google; t=1738584500; x=1739189300; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=aajia+cW/X4YxbxWcfrYWv+FJJ1bSui7r9ZaOLQS54c=;
+ b=Nw5xlmqHHXBovRIk2QTVmbykJO5x2shH+o+1f8FaaYiI3NyYIL8q1WGHf4/1KhwqVx
+ GN5Zvv+PbI5LFquYlMq122toGpI71dI5i40T5JKSej0VszJGhYapCDw51Gs+1MaI4DM/
+ Nv9TNWzRWfYN6mL9lEW7opoJwhHcLfVgL1R8PWNZa3ieRnHH8wSWZr88r+khULqMJgkf
+ sPqX4Zyi2uwmSDtjKFx37lYiN3Yr2SHiWylyyoVqW9+y6Sgy01Lhcv8bifjkhGPDwWno
+ 87OLBv29XxpOXs5Ll7KUYK4FvhQQDuOE3GptU/Hkz6j7o82Y8IYqX20XLdIg5DAlnZTU
+ oc2w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1738584500; x=1739189300;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=aajia+cW/X4YxbxWcfrYWv+FJJ1bSui7r9ZaOLQS54c=;
+ b=aZxiOWJfg4k5cIXVbH9S9sCRZvXXvTg0LJ7aPEPJhIS/jji/XZkJVtmmAogXwUroIO
+ Gk+VeIWVkeVnjJvXqI3Ug1Rx+0i4n33iZgA3tBK3052RIgSK8hSOXfJQZZ+236UvrtUd
+ luADSzSHQWl6N1bCTAWyKRnr6hkUhh9lbjCN66lekNugi/uwABf3fE+Ow6Xxzyae6GLz
+ K7lq13JNuQtUTMkJAy2XEwTpGGR6Uf8Rp+dSon+jlTLAmqQjoq9EK+GigYeOi0jXI97u
+ tgZxKNdAP7ETcizEUef1aHenAl6G2/sJJ2QO7YlkQI0rcigPcCQr8eAYJJ/Q/qC2kHSK
+ wMOA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWR1beJ28TsyvNkyAWSR9H3wALXJ1Xt1tpb0CUD0QVwLAbOyOuYjTTfflQk3tWbMZrM6rhAWD5WIfWV@nongnu.org
+X-Gm-Message-State: AOJu0YyUtaN0TwSC1gVijnrqJYcP+PAeZn0nTYoJfgJALUAhBajMWdBr
+ xgFuFwHpQZw8S8Xr37TQChewexlhkrGO+HNhsy20VJeBFS5DNHUqK/1s/uI/zuc=
+X-Gm-Gg: ASbGncurOaQqUqEKSSqI/1GzOTqzZMYgsbXzjzgwo0FqJWJwyd+Vh5NFpebPIIf12LF
+ j8xu8JGRbnA5AjcK/kK4hVWBybri2Lt1pUCm/S5PwLyEjJc//YKuo1ss3JPMESkpv40IFNvMwn5
+ gQuHMoCFyxAFwwlvMtCHSFVpcPx6IM7T9K38MAshB8cijTmS8cDPgLxjGfVMBMlKHUgEThNxLQF
+ BdJnYZgpmEmbUyziNQcQzy66wUKDon76onD43dRq+LDvqskYKc7txrnwpzl90tvybrXRHRMqL3e
+ 2y780Ok7yud0DoW9P11ZD9zKQgYO3nM=
+X-Google-Smtp-Source: AGHT+IGQXrZF/+FyMz80ZwY0mbSEE/Q/UdMAw2wcl7sSrl5nMiSRhauPKa+2h/dEOcFmVLhHZs7GBg==
+X-Received: by 2002:a05:6a00:2c88:b0:725:d1d5:6d86 with SMTP id
+ d2e1a72fcca58-72fd0c5b298mr33293901b3a.19.1738584500084; 
+ Mon, 03 Feb 2025 04:08:20 -0800 (PST)
+Received: from [192.168.68.110] ([177.170.227.211])
+ by smtp.gmail.com with ESMTPSA id
+ d2e1a72fcca58-72fe631bea6sm8243879b3a.22.2025.02.03.04.08.17
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 03 Feb 2025 04:08:19 -0800 (PST)
+Message-ID: <1bef9927-59fa-4c22-987a-29f80cd44a1f@ventanamicro.com>
+Date: Mon, 3 Feb 2025 09:08:15 -0300
 MIME-Version: 1.0
-Date: Mon, 03 Feb 2025 18:12:21 +1100
-From: Julia <midnight@trainwit.ch>
-To: "Daniel Henrique Barboza" <dbarboza@ventanamicro.com>,
- qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org
-Message-Id: <8149beba-66b1-4707-93f1-083b8bc5ece0@app.fastmail.com>
-In-Reply-To: <b76bf940-ff55-4619-a9ae-fa65c47e864f@ventanamicro.com>
-References: <20250202051505.1846933-1-midnight@trainwit.ch>
- <20250202051505.1846933-2-midnight@trainwit.ch>
- <b76bf940-ff55-4619-a9ae-fa65c47e864f@ventanamicro.com>
-Subject: Re: [PATCH 1/1] target/riscv: log guest errors when reserved bits are
- set in PTEs
-Content-Type: text/plain
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 1/1] target/riscv: log guest errors when reserved bits
+ are set in PTEs
+To: julia <midnight@trainwit.ch>, qemu-devel@nongnu.org
+Cc: Weiwei Li <liwei1518@gmail.com>, Palmer Dabbelt <palmer@dabbelt.com>,
+ qemu-riscv@nongnu.org, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Bin Meng <bmeng.cn@gmail.com>, Alistair Francis <alistair.francis@wdc.com>
+References: <20250203061852.2931556-1-midnight@trainwit.ch>
+Content-Language: en-US
+From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+In-Reply-To: <20250203061852.2931556-1-midnight@trainwit.ch>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=103.168.172.145;
- envelope-from=midnight@trainwit.ch; helo=fout-a2-smtp.messagingengine.com
-X-Spam_score_int: -27
-X-Spam_score: -2.8
+Received-SPF: pass client-ip=2607:f8b0:4864:20::635;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pl1-x635.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
 X-Spam_bar: --
-X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_LOW=-0.7, RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001,
- RCVD_IN_VALIDITY_SAFE_BLOCKED=0.001, SPF_HELO_PASS=-0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -112,16 +105,95 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-> This happens because 'pte' is a 'target_ulong' type that, for riscv32, will be
-> interpreted as uint32_t while the FMT being used is PRIx64.
->
-> You can fix it by using TARGET_FMT_lx instead of PRIx64:
->
 
-I've sent a follow-up patch fixing these build errors, it builds on 32 & 64 bit on my system. Cheers 
 
-As for the Signed-off-by, I'd rather not, and the contributing guide does not require it.
+On 2/3/25 3:18 AM, julia wrote:
+> For instance, QEMUs newer than b6ecc63c569bb88c0fcadf79fb92bf4b88aefea8
+> would silently treat this akin to an unmapped page (as required by the
+> RISC-V spec, admittedly). However, not all hardware platforms do (e.g.
+> CVA6) which leads to an apparent QEMU bug.
+> 
+> Instead, log a guest error so that in future, incorrectly set up page
+> tables can be debugged without bisecting QEMU.
+> 
+> Signed-off-by: julia <midnight@trainwit.ch>
+> ---
 
-Regards,
-Julia
+Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+
+>   target/riscv/cpu_helper.c | 27 ++++++++++++++++++++++++++-
+>   1 file changed, 26 insertions(+), 1 deletion(-)
+> 
+> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+> index e1dfc4ecbf..3dd8e06044 100644
+> --- a/target/riscv/cpu_helper.c
+> +++ b/target/riscv/cpu_helper.c
+> @@ -1226,14 +1226,27 @@ restart:
+>               ppn = pte >> PTE_PPN_SHIFT;
+>           } else {
+>               if (pte & PTE_RESERVED) {
+> +                qemu_log_mask(LOG_GUEST_ERROR, "%s: reserved bits set in PTE: "
+> +                              "addr: 0x%" HWADDR_PRIx " pte: 0x" TARGET_FMT_lx "\n",
+> +                              __func__, pte_addr, pte);
+>                   return TRANSLATE_FAIL;
+>               }
+>   
+>               if (!pbmte && (pte & PTE_PBMT)) {
+> +                /* Reserved without Svpbmt. */
+> +                qemu_log_mask(LOG_GUEST_ERROR, "%s: PBMT bits set in PTE, "
+> +                              "and Svpbmt extension is disabled: "
+> +                              "addr: 0x%" HWADDR_PRIx " pte: 0x" TARGET_FMT_lx "\n",
+> +                              __func__, pte_addr, pte);
+>                   return TRANSLATE_FAIL;
+>               }
+>   
+>               if (!riscv_cpu_cfg(env)->ext_svnapot && (pte & PTE_N)) {
+> +                /* Reserved without Svnapot extension */
+> +                qemu_log_mask(LOG_GUEST_ERROR, "%s: N bit set in PTE, "
+> +                              "and Svnapot extension is disabled: "
+> +                              "addr: 0x%" HWADDR_PRIx " pte: 0x" TARGET_FMT_lx "\n",
+> +                              __func__, pte_addr, pte);
+>                   return TRANSLATE_FAIL;
+>               }
+>   
+> @@ -1244,14 +1257,19 @@ restart:
+>               /* Invalid PTE */
+>               return TRANSLATE_FAIL;
+>           }
+> +
+>           if (pte & (PTE_R | PTE_W | PTE_X)) {
+>               goto leaf;
+>           }
+>   
+> -        /* Inner PTE, continue walking */
+>           if (pte & (PTE_D | PTE_A | PTE_U | PTE_ATTR)) {
+> +            /* D, A, and U bits are reserved in non-leaf/inner PTEs */
+> +            qemu_log_mask(LOG_GUEST_ERROR, "%s: D, A, or U bits set in non-leaf PTE: "
+> +                          "addr: 0x%" HWADDR_PRIx " pte: 0x" TARGET_FMT_lx "\n",
+> +                          __func__, pte_addr, pte);
+>               return TRANSLATE_FAIL;
+>           }
+> +        /* Inner PTE, continue walking */
+>           base = ppn << PGSHIFT;
+>       }
+>   
+> @@ -1261,10 +1279,17 @@ restart:
+>    leaf:
+>       if (ppn & ((1ULL << ptshift) - 1)) {
+>           /* Misaligned PPN */
+> +        qemu_log_mask(LOG_GUEST_ERROR, "%s: PPN bits in PTE is misaligned: "
+> +                      "addr: 0x%" HWADDR_PRIx " pte: 0x" TARGET_FMT_lx "\n",
+> +                      __func__, pte_addr, pte);
+>           return TRANSLATE_FAIL;
+>       }
+>       if (!pbmte && (pte & PTE_PBMT)) {
+>           /* Reserved without Svpbmt. */
+> +        qemu_log_mask(LOG_GUEST_ERROR, "%s: PBMT bits set in PTE, "
+> +                      "and Svpbmt extension is disabled: "
+> +                      "addr: 0x%" HWADDR_PRIx " pte: 0x" TARGET_FMT_lx "\n",
+> +                      __func__, pte_addr, pte);
+>           return TRANSLATE_FAIL;
+>       }
+>   
+
 
