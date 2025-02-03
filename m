@@ -4,94 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9FAC5C0218F
-	for <qemu-riscv@archiver.kernel.org>; Sun,  2 Feb 2025 22:04:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5E849C0218F
+	for <qemu-riscv@archiver.kernel.org>; Mon,  3 Feb 2025 01:32:01 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tei52-0005lF-3H; Sun, 02 Feb 2025 17:04:40 -0500
+	id 1telJ6-0007Rx-Hx; Sun, 02 Feb 2025 20:31:24 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1tei4z-0005kq-Gx
- for qemu-riscv@nongnu.org; Sun, 02 Feb 2025 17:04:37 -0500
-Received: from mail-pj1-x1034.google.com ([2607:f8b0:4864:20::1034])
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1telJ0-0007Pi-MD; Sun, 02 Feb 2025 20:31:20 -0500
+Received: from mail-vk1-xa34.google.com ([2607:f8b0:4864:20::a34])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1tei4x-0004xj-TX
- for qemu-riscv@nongnu.org; Sun, 02 Feb 2025 17:04:37 -0500
-Received: by mail-pj1-x1034.google.com with SMTP id
- 98e67ed59e1d1-2ef748105deso4624198a91.1
- for <qemu-riscv@nongnu.org>; Sun, 02 Feb 2025 14:04:33 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1telIy-0006D2-Oe; Sun, 02 Feb 2025 20:31:18 -0500
+Received: by mail-vk1-xa34.google.com with SMTP id
+ 71dfb90a1353d-51c7b5f3b8bso1213263e0c.2; 
+ Sun, 02 Feb 2025 17:31:14 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1738533872; x=1739138672; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:content-language:references
- :cc:to:subject:from:user-agent:mime-version:date:message-id:from:to
- :cc:subject:date:message-id:reply-to;
- bh=r/4P68+8VYI8SlmvuLMztsv2GjTHFmqq0Lz3EhmItok=;
- b=aDqdoaxP10Ly3P5qDRAi2/vQGPsWM3+6IS485wRDHsdnbWEEZH+AFjrWEgSf3FOE5F
- eYgAY/L8QAC7ZnqgaGztfLV6zbUDnElnpUMsTE6MonRm/c2cicYOWj1x0m4HaQK37clE
- Pd9b9oUsR11N0mi1/FcFoCtcRiBY0AhhrSmTPndQqpcZb60lIg8lGrjX0TLkX0pDTkX/
- tewQDyDvpz5KuKep18bs8ykYPiiQgcDJ6nqV4oLVQMt6QbZplPJbI/EQSnu/yGHOjYKP
- F8zVbBrl9EIzcQM7KkPNDlrnTKvuvssgxvjdIGdXO/DPRcJmOU3JqEhs0ogXK1bHhVeS
- P0Cg==
+ d=gmail.com; s=20230601; t=1738546274; x=1739151074; darn=nongnu.org;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=SXCJCrSXUkUTp1DmIu0lJK0yfYrll3qT0ys8xvAfP70=;
+ b=iuXrpVXz+WVknmS33U+y1Sb/vYTuK/ptIK+tW7TuVDgmQfA51xPUT6seggIC9AT5wV
+ obnr4wPPowTIRrm90/9SpZedyK3cOUVK3/DCGt5Jwtp8tLAPprCGzcqOou9P2jXs1XIa
+ owxpJKHsxEHvqsdY3P71M2kSLir0XFHshsBzkXZhh8RoEIhVez1gB5Uif5Y2bMAlruW/
+ evYutgRBWkASdWsvjdM94zJPEQk9vpqlvPAchYyiu7D5i6h8Fm+MxlVjXfNOyu2C7j6U
+ 6HeX20z5CpdjXgTwp46q34q5d5Lp8Vy6NfxVSQRaO32HfQ9NLO1K+Rdh51OLAm3tcuGr
+ ojuA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1738533872; x=1739138672;
- h=content-transfer-encoding:in-reply-to:content-language:references
- :cc:to:subject:from:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=r/4P68+8VYI8SlmvuLMztsv2GjTHFmqq0Lz3EhmItok=;
- b=pvzJJenvFJ0VTdWtR/rd9PZlGduTZ5Hsjcy2shZVmD7nMUnpq5kLUz+yKvVOv9GtQQ
- 4hVR6PqwjvYuhQ2CAlXiRGU+QejTeY/uk0Ihy0VQhIlOQXOMPcGBEGnuPKSeZDG9uT3H
- GdQ8YE8GBAzCjWoweP7uKE04K7fx/s6npyI/C3g1Gds/F7SY7/OII8182P44xe53tlQs
- DNZp25cdjtq4mofaGTv3Hwl9lvmDo7np+cTgpABS8SdxWTtsgd321nsHNa2TInLXhmoB
- BpUF+YfSxbwcRzzrDohc8VMVjd413i2QzTzBSJ+c/QfyeqQt26am1/YA2dMuSTcCnQUJ
- MuGQ==
+ d=1e100.net; s=20230601; t=1738546274; x=1739151074;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=SXCJCrSXUkUTp1DmIu0lJK0yfYrll3qT0ys8xvAfP70=;
+ b=of34nSmU3ckZR0Hutr8XHhpVJA9JJoxU8mVZpBqPakKjMalE5Ovieo3ukQhh0HUDsG
+ ipL5SDp3KqDSyss/zBGoNdoCLxSzhOMBAgdef1Me2UMqCJftQGs0rmoEaCu/ik0n7Yl4
+ koHmgGEkFwT5SEm8qoHSqYGz35U2kzLy+zDCR4Y61eKwQbhISxzr0ZhsGc71TgQum7Lf
+ kMM6bvt/nU3AtZZgtvPFtH2kFeDe6PMR4r8SO8YeHA6DqDiV11sjtvY1+C0a5i5VRXdo
+ PiqwgEC9fq34Pjepy2TOnyGaIlzQfc7ON1EBv8usVpbYXiztRdlf5Q2Va6pVJKy9pASW
+ WG1Q==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXEdw3VO7myn89rg4o/ZadWfFmiT/9/COvtIszqxB5+4SUsmP7B+Ci6lk/TJn05VIlUxZ8xAo482eCW@nongnu.org
-X-Gm-Message-State: AOJu0YxoWYon6MimmYkeSr8hfIHxU7l4k5Ib+0lhFFINyxzXuuBzqeOt
- Z5y8s9VbIzvbXbVK8+IvK7ZQdhiUmxP0v62xSG0EbIllwW4u/orboqgn55GD7HU=
-X-Gm-Gg: ASbGncts3z6qYXHDY0mOMJn8+aDWGGv4jURkjn/JQINVqOqe5Ofdi+R8otaGH3gw4n/
- +CHowyMoKr5DRV46abc+pwFT1NEusYBXYom5e2d3Lr9BRMKbZ0luBi18mxOyvgTcYAJvRnAOZxB
- DKHBfD7lkh8lJhJwuVfjpEV+W7Mth54twXwhEotH5vtDAyeE3qzOUea0PwZIyK6+ZSHLlndc5PA
- Lg9gBlemF3arlgpZd1qYnNlMB80UYqiz1shS0QyUDZVpry0vESltJ72izJhk/WhfCNiWUvNwqly
- zGUKqbMYVyQW5nB00NjGfVWfcDd4380=
-X-Google-Smtp-Source: AGHT+IHxSq9fqsBvD/uBGmI1dsYZDRP4Apn8xooLpjBsQo/xO5GV4EiHFST5Ht0luZMNoCjV3c08tw==
-X-Received: by 2002:a17:90b:1f81:b0:2ee:bc1d:f98b with SMTP id
- 98e67ed59e1d1-2f83ac8ac3amr26112942a91.31.1738533872084; 
- Sun, 02 Feb 2025 14:04:32 -0800 (PST)
-Received: from [192.168.68.110] ([177.170.227.211])
- by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-2f83bd09ca3sm9826244a91.24.2025.02.02.14.04.29
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sun, 02 Feb 2025 14:04:31 -0800 (PST)
-Message-ID: <b76bf940-ff55-4619-a9ae-fa65c47e864f@ventanamicro.com>
-Date: Sun, 2 Feb 2025 19:04:27 -0300
+ AJvYcCX3Tmnuo5MOeZwKCKj10rzvV7zQOSy9rW0b3n/l+Sb2K32jDos3/bMliiKM+2d0+UtVFUS9CmcKiIVW@nongnu.org
+X-Gm-Message-State: AOJu0YxrH0FXiCruBxpdirjVQhm10NKaBvA58gCNbQgb+DUQ7BG0AA4Z
+ dUPoEBeUTJMYTnm95eUW7iBO0BeWXdJlZ6b1XP1IAlcMrjgXbnouTtm2ghxvKMrlvH6omoYW+KJ
+ 8CmTcbj4h30lI1PQpLBegAV5PWmk=
+X-Gm-Gg: ASbGncvpxSIp9M9WLNU3QtBjnogUyUAQrA3jLGP6as649URm/Q8/8/rj3SSud5ifZbE
+ nNi8QpBthL//amC4///kQ9OWJKCnOJCXEU56ygbpsSdT9wMN8leMSOz0h21zZsOXSfX87g+bzpL
+ kWXXHRwHIcLDrKCTifa8XaDFia6A==
+X-Google-Smtp-Source: AGHT+IGuU0+8IQPOweAi1qVqQshNtv+eDZVMGGXd5C6rLZXaDl8oxrz5m7kWMU4w6KwonO3n865JeTNchK2oh88SIc0=
+X-Received: by 2002:a05:6102:2c0f:b0:4b9:c326:f998 with SMTP id
+ ada2fe7eead31-4b9c327004fmr8828119137.24.1738546273638; Sun, 02 Feb 2025
+ 17:31:13 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Subject: Re: [PATCH 1/1] target/riscv: log guest errors when reserved bits are
- set in PTEs
-To: julia <midnight@trainwit.ch>, qemu-devel@nongnu.org
-Cc: Weiwei Li <liwei1518@gmail.com>, Bin Meng <bmeng.cn@gmail.com>,
- qemu-riscv@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
-References: <20250202051505.1846933-1-midnight@trainwit.ch>
- <20250202051505.1846933-2-midnight@trainwit.ch>
-Content-Language: en-US
-In-Reply-To: <20250202051505.1846933-2-midnight@trainwit.ch>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1034;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pj1-x1034.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+References: <20250128060546.1374394-1-alistair.francis@wdc.com>
+In-Reply-To: <20250128060546.1374394-1-alistair.francis@wdc.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Mon, 3 Feb 2025 11:30:47 +1000
+X-Gm-Features: AWEUYZkbWOMIJBcsNqGN-J9KkiS-Fzzn7NKRk1p8arRBpLs6JQ5hOqnY0WRfxSc
+Message-ID: <CAKmqyKNyjq=SdHAefyzVP1wj=o5-FBOLf61MAe0KtbsMO6K0cA@mail.gmail.com>
+Subject: Re: [PATCH] MAINTAINERS: Remove Bin Meng from RISC-V maintainers
+To: palmer@dabbelt.com, liwei1518@gmail.com, dbarboza@ventanamicro.com, 
+ zhiwei_liu@linux.alibaba.com, qemu-riscv@nongnu.org, philmd@linaro.org
+Cc: qemu-devel@nongnu.org, Alistair Francis <alistair.francis@wdc.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2607:f8b0:4864:20::a34;
+ envelope-from=alistair23@gmail.com; helo=mail-vk1-xa34.google.com
+X-Spam_score_int: -17
+X-Spam_score: -1.8
+X-Spam_bar: -
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -107,140 +95,68 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
+On Tue, Jan 28, 2025 at 4:05=E2=80=AFPM Alistair Francis <alistair23@gmail.=
+com> wrote:
+>
+> Bin Meng has been a long time contributor and maintainer for QEMU RISC-V
+> and has been very beneficial to the RISC-V ecosystem.
+>
+> Unfortunately his email has started to bounce so this patch is removing
+> them from MAINTAINERS. If in the future Bin Meng wants to return we will
+> happily re-add them.
+>
+> Note that I'm not removing Bin Meng as a "SD (Secure Card)" maintainer.
+>
+> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
 
+Thanks!
 
-On 2/2/25 2:15 AM, julia wrote:
-> For instance, QEMUs newer than b6ecc63c569bb88c0fcadf79fb92bf4b88aefea8
-> would silently treat this akin to an unmapped page (as required by the
-> RISC-V spec, admittedly). However, not all hardware platforms do (e.g.
-> CVA6) which leads to an apparent QEMU bug.
-> 
-> Instead, log a guest error so that in future, incorrectly set up page
-> tables can be debugged without bisecting QEMU.
-> 
-> Signed-off-by: julia <midnight@trainwit.ch>
+Applied to riscv-to-apply.next
 
-Usually the author line consists of a full name. You can set the author name by
-using 'git config --global user.name <full_name>'. To amend an existing patch
-you can use:
-
-git commit --amend --author="Full Author Name <author@email>"
+Alistair
 
 > ---
->   target/riscv/cpu_helper.c | 27 ++++++++++++++++++++++++++-
->   1 file changed, 26 insertions(+), 1 deletion(-)
-> 
-> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-> index e1dfc4ecbf..87adf16a49 100644
-> --- a/target/riscv/cpu_helper.c
-> +++ b/target/riscv/cpu_helper.c
-> @@ -1226,14 +1226,27 @@ restart:
->               ppn = pte >> PTE_PPN_SHIFT;
->           } else {
->               if (pte & PTE_RESERVED) {
-> +                qemu_log_mask(LOG_GUEST_ERROR, "%s: reserved bits set in PTE: "
-> +                              "addr: 0x%" HWADDR_PRIx " pte: 0x%" PRIx64 "\n",
-> +                              __func__, pte_addr, pte);
-
-
-This will fail to compile for riscv32 (riscv32-softmmu configure target) with errors
-like this:
-
-../target/riscv/cpu_helper.c: In function ‘get_physical_address’:
-../target/riscv/cpu_helper.c:1230:48: error: format ‘%lx’ expects argument of type ‘long unsigned int’, but argument 4 has type ‘target_ulong’ {aka ‘unsigned int’} [-Werror=format=]
-  1230 |                 qemu_log_mask(LOG_GUEST_ERROR, "%s: reserved bits set in PTE: "
-       |                                                ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  1231 |                               "addr: 0x%" HWADDR_PRIx " pte: 0x%" PRIx64 "\n",
-  1232 |                               __func__, pte_addr, pte);
-       |                                                   ~~~
-       |                                                   |
-       |                                                   target_ulong {aka unsigned int}
-/home/danielhb/work/qemu/include/qemu/log.h:57:22: note: in definition of macro ‘qemu_log_mask’
-    57 |             qemu_log(FMT, ## __VA_ARGS__);              \
-       |                      ^~~
-
-This happens because 'pte' is a 'target_ulong' type that, for riscv32, will be
-interpreted as uint32_t while the FMT being used is PRIx64.
-
-You can fix it by using TARGET_FMT_lx instead of PRIx64:
-
-+++ b/target/riscv/cpu_helper.c
-@@ -1228,7 +1228,7 @@ restart:
-          } else {
-              if (pte & PTE_RESERVED) {
-                  qemu_log_mask(LOG_GUEST_ERROR, "%s: reserved bits set in PTE: "
--                              "addr: 0x%" HWADDR_PRIx " pte: 0x%" PRIx64 "\n",
-+                              "addr: 0x%" HWADDR_PRIx " pte:" TARGET_FMT_lx "\n",
-                                __func__, pte_addr, pte);
-                  return TRANSLATE_FAIL;
-
-
-This change is needed in all qemu_log_mask() entries added. Thanks,
-
-
-Daniel
-
-
-
->                   return TRANSLATE_FAIL;
->               }
->   
->               if (!pbmte && (pte & PTE_PBMT)) {
-> +                /* Reserved without Svpbmt. */
-> +                qemu_log_mask(LOG_GUEST_ERROR, "%s: PBMT bits set in PTE, "
-> +                              "and Svpbmt extension is disabled: "
-> +                              "addr: 0x%" HWADDR_PRIx " pte: 0x%" PRIx64 "\n",
-> +                              __func__, pte_addr, pte);
->                   return TRANSLATE_FAIL;
->               }
->   
->               if (!riscv_cpu_cfg(env)->ext_svnapot && (pte & PTE_N)) {
-> +                /* Reserved without Svnapot extension */
-> +                qemu_log_mask(LOG_GUEST_ERROR, "%s: N bit set in PTE, "
-> +                              "and Svnapot extension is disabled: "
-> +                              "addr: 0x%" HWADDR_PRIx " pte: 0x%" PRIx64 "\n",
-> +                              __func__, pte_addr, pte);
->                   return TRANSLATE_FAIL;
->               }
->   
-> @@ -1244,14 +1257,19 @@ restart:
->               /* Invalid PTE */
->               return TRANSLATE_FAIL;
->           }
-> +
->           if (pte & (PTE_R | PTE_W | PTE_X)) {
->               goto leaf;
->           }
->   
-> -        /* Inner PTE, continue walking */
->           if (pte & (PTE_D | PTE_A | PTE_U | PTE_ATTR)) {
-> +            /* D, A, and U bits are reserved in non-leaf/inner PTEs */
-> +            qemu_log_mask(LOG_GUEST_ERROR, "%s: D, A, or U bits set in non-leaf PTE: "
-> +                          "addr: 0x%" HWADDR_PRIx " pte: 0x%" PRIx64 "\n",
-> +                          __func__, pte_addr, pte);
->               return TRANSLATE_FAIL;
->           }
-> +        /* Inner PTE, continue walking */
->           base = ppn << PGSHIFT;
->       }
->   
-> @@ -1261,10 +1279,17 @@ restart:
->    leaf:
->       if (ppn & ((1ULL << ptshift) - 1)) {
->           /* Misaligned PPN */
-> +        qemu_log_mask(LOG_GUEST_ERROR, "%s: PPN bits in PTE is misaligned: "
-> +                      "addr: 0x%" HWADDR_PRIx " pte: 0x%" PRIx64 "\n",
-> +                      __func__, pte_addr, pte);
->           return TRANSLATE_FAIL;
->       }
->       if (!pbmte && (pte & PTE_PBMT)) {
->           /* Reserved without Svpbmt. */
-> +        qemu_log_mask(LOG_GUEST_ERROR, "%s: PBMT bits set in PTE, "
-> +                      "and Svpbmt extension is disabled: "
-> +                      "addr: 0x%" HWADDR_PRIx " pte: 0x%" PRIx64 "\n",
-> +                      __func__, pte_addr, pte);
->           return TRANSLATE_FAIL;
->       }
->   
-
+>  MAINTAINERS | 5 +----
+>  1 file changed, 1 insertion(+), 4 deletions(-)
+>
+> diff --git a/MAINTAINERS b/MAINTAINERS
+> index 7be3d8f431..a0e305aa99 100644
+> --- a/MAINTAINERS
+> +++ b/MAINTAINERS
+> @@ -318,7 +318,6 @@ F: tests/functional/test_ppc_74xx.py
+>  RISC-V TCG CPUs
+>  M: Palmer Dabbelt <palmer@dabbelt.com>
+>  M: Alistair Francis <alistair.francis@wdc.com>
+> -M: Bin Meng <bmeng.cn@gmail.com>
+>  R: Weiwei Li <liwei1518@gmail.com>
+>  R: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+>  R: Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
+> @@ -1599,7 +1598,6 @@ F: include/hw/riscv/opentitan.h
+>  F: include/hw/*/ibex_*.h
+>
+>  Microchip PolarFire SoC Icicle Kit
+> -M: Bin Meng <bmeng.cn@gmail.com>
+>  L: qemu-riscv@nongnu.org
+>  S: Supported
+>  F: docs/system/riscv/microchip-icicle-kit.rst
+> @@ -1626,7 +1624,6 @@ F: include/hw/char/shakti_uart.h
+>
+>  SiFive Machines
+>  M: Alistair Francis <Alistair.Francis@wdc.com>
+> -M: Bin Meng <bmeng.cn@gmail.com>
+>  M: Palmer Dabbelt <palmer@dabbelt.com>
+>  L: qemu-riscv@nongnu.org
+>  S: Supported
+> @@ -3721,7 +3718,7 @@ S: Orphan
+>  F: hw/i386/amd_iommu.?
+>
+>  OpenSBI Firmware
+> -M: Bin Meng <bmeng.cn@gmail.com>
+> +L: qemu-riscv@nongnu.org
+>  S: Supported
+>  F: pc-bios/opensbi-*
+>  F: .gitlab-ci.d/opensbi.yml
+> --
+> 2.48.1
+>
 
