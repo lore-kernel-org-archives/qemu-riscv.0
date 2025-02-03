@@ -4,69 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8C7AEC02192
-	for <qemu-riscv@archiver.kernel.org>; Mon,  3 Feb 2025 14:46:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1E3A2C02197
+	for <qemu-riscv@archiver.kernel.org>; Mon,  3 Feb 2025 14:46:36 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1texdr-00045P-EP; Mon, 03 Feb 2025 09:41:39 -0500
+	id 1texdd-0003sE-46; Mon, 03 Feb 2025 09:41:25 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1texdS-0003id-9U
- for qemu-riscv@nongnu.org; Mon, 03 Feb 2025 09:41:18 -0500
-Received: from mail-ed1-x530.google.com ([2a00:1450:4864:20::530])
+ id 1texdI-0003cL-7U
+ for qemu-riscv@nongnu.org; Mon, 03 Feb 2025 09:41:04 -0500
+Received: from mail-ej1-x62c.google.com ([2a00:1450:4864:20::62c])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1texdE-0002QU-0X
- for qemu-riscv@nongnu.org; Mon, 03 Feb 2025 09:41:14 -0500
-Received: by mail-ed1-x530.google.com with SMTP id
- 4fb4d7f45d1cf-5d3e6f6cf69so7988392a12.1
- for <qemu-riscv@nongnu.org>; Mon, 03 Feb 2025 06:40:59 -0800 (PST)
+ id 1texd9-0002MN-JV
+ for qemu-riscv@nongnu.org; Mon, 03 Feb 2025 09:41:02 -0500
+Received: by mail-ej1-x62c.google.com with SMTP id
+ a640c23a62f3a-ab2aea81cd8so804145166b.2
+ for <qemu-riscv@nongnu.org>; Mon, 03 Feb 2025 06:40:54 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1738593658; x=1739198458; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Vu9pOked5UqOucuAkIMsH1wV3NsjfZIqorCbgdhJbNs=;
- b=oz+PZ6kuKYzRbF0YsJ24w2ZlzLXWsH6vlpQ6lvDLM61YNufw5HDa9Pd07PAoxcI17A
- Egr2JPiH9/rPIRdoPt6k5cvGVzepqygM7IPQRoV7gIWdIuo+7vccv12IYw5QlelaIVpK
- 83+e2zGxYyzGdZjIYOxWPyxbvXyzh9iQlehp9AUXf1GRdMRHTpG0LtbOYRIuS7LitXYf
- M+NJ9p5o69xgyRaMI4qKWxAJe4OAnwQHuKOff26WwDKTdtc+Ao8cmEnsWQefrNCy3O8v
- ZoszT+5HlDUp5PLMXyNVreggW0eNXjRD7K5k3Ecsj+OHXxMZrvpLqLH1xy6hpZkNAhkK
- u3PQ==
+ d=linaro.org; s=google; t=1738593653; x=1739198453; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=gcYRZ4ZyzU/ziuzqrxT8ocayiAMfq9JGFe4w7hYy1hc=;
+ b=D5WNUfCTK9Q7JGJuv919TFw6+1IYn3ysjcTzZUHVOd82kKT+r5VN64+XfWtyre+GMn
+ XnNEwewwLowJ7XY209IgkRm7WagzcbLrcwbI7ptmxnsSTMIP+6JTPye1HV1b/AAZqdQZ
+ laYxVQJdglF7Iu2sIrrBUD8yREbPJdVyPu7VD5mxtMdNwYbmLfORRz+KOXeR/JUQnvaS
+ KwV80z8v+3gVxIOapidsSf40bi3ZBxSSnyu6zaArtG0yXv07R7thL1RScCUpwwV1n6KM
+ 1symBa8wNd+1jERPEOmFwj+9RFZTpMQwPcIrL8WYrnu6jXOHdRFY91mmJvyJ4r7GiqI7
+ tI8w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1738593658; x=1739198458;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=Vu9pOked5UqOucuAkIMsH1wV3NsjfZIqorCbgdhJbNs=;
- b=bncirQ5mmAiCpdRUm8jxvH+u4+HDR8dhuM856sZZKihSFKBmXmMOEAmMCOojZaI0E4
- /kX5QEUcXKZgtTOw6OP8o3FksdqVBRN7/O4z8PZkq+Bic0sAZh4jQnP/8TwZ7nC5zrdR
- vxrQccjzb7NdUhDKdqd8o8GuqLaoaZ/3EIKwIwKpzuXOFlv4dCFF7cPUg2qHbJGg+eiw
- dxu3BwQgjO4Lma1Re/QWt3TL9s2Lb8/2tsaVGpiarBeEPgo88Ak5PZuAxwaQOsX1Dj/V
- 33/QehBnhWSFpxUR8kkGOuNVNmftxaQjztj1lSSseufUYaQ1O41dze+CdiBa5sHtTsX8
- gqDQ==
+ d=1e100.net; s=20230601; t=1738593653; x=1739198453;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=gcYRZ4ZyzU/ziuzqrxT8ocayiAMfq9JGFe4w7hYy1hc=;
+ b=FpW4sT6l9D8CsElEvIvNQf1jEo8dmZ5PCZDGfIGh1lVx3dEQDXgYQ4HQWzAHOIXQ+4
+ EZjLtwzTqwN8beMQtfDT/rXfKU2KYCqQppeWJoXaSk7bKXK21+jnB4/AC1tFxCI+gPBi
+ AMkvQc9BYG9Ljl+E8J12Zb0ZaaCSfaXnOl330n5gXnnGMlQZjSidulHfARCramR2R5j1
+ zTgs5HY7xEVtLqsFZ2n2J43JnLKSXoOaVvcbL2N4rTVC7ZzzoCFjgjhhzuv/H65/LYls
+ 4qrrV1BOVhKpnghoxIBYh5XDht88FG/vEgx/nTzMWMGyQ56yBN/t/MxSc/WjtZNzKewt
+ 6S5w==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXOoSOz32f2FETRF7qN27thTVx3u1GrJLFHTdCMHQmSvubWw1lJdKofkH3K4D9Khb8eZluS3Ln+dkg8@nongnu.org
-X-Gm-Message-State: AOJu0YwTPFJW/VNPAK7Btp7dpCilpl2SwLg9zcC0Oo4jBaX8CKyQ+YAX
- /uzlMOjy+1/9k7B8IxIzKylonB4KCLIBvz9vmA7loE8LOObIV4QHqQRTRYzDggA=
-X-Gm-Gg: ASbGncu01dmvFiSP2ALwgslTiDbPRL2Xka538OSpYXDtHPIOAjPWsu8xz28/hw6UE+V
- Wf3crlDpvZz6CNhK5UD8gu3F+hoAMkCVjbANPUURj1XhtG/XUKNKlSvSvjgBK8XwbsYHk7GzIHf
- wIQdM2bZ0aQw7eu7sT9Qo9CyYEvK7/vAzeYiF1KNE2sY92k3ysXfnuCw+6nYWQe7jOJGIJ7hT+b
- qi9Ml+RIpVM30O3ay52NEH6qwN5u8czUKcyw5Pg3HSsZQ0SSJN0SsIeoqHR1LODeDgNZIqvgw8W
- 8wfpT6oTTemIB8xkmQ==
-X-Google-Smtp-Source: AGHT+IEdVQrHge+ZZtzPsalbMXBN7f3sBneytdfxQblWWoHlxRiCnjis6+76OPfKMAyMU4FY0srneQ==
-X-Received: by 2002:a17:907:8b94:b0:aa6:8a1b:8b84 with SMTP id
- a640c23a62f3a-ab6cfe17745mr2460903766b.57.1738593658202; 
- Mon, 03 Feb 2025 06:40:58 -0800 (PST)
+ AJvYcCUTp0XqD5YMZU+2iiIy9gOW0qDMDFKicEAfTW8Qy1iK0xx9nWqzt/hZDTX7B9fpAofCfR6Yjb3keZ7L@nongnu.org
+X-Gm-Message-State: AOJu0YyLwZYoQhIBe8ZxntltpMlFtPYMkVbnEtJ7txCTjxAaBYz8jVJW
+ NYo7obwLJAIoDzpGj5Ao3psbyE/3aHI2/slK4b+SjR4kNAz/p9/TQcv6jTtqKls=
+X-Gm-Gg: ASbGncv3sERir3OXxylRzK69P8e73sxjJZNRQPhF0nUT+c0ptU0tOtL71t4pk9/gDkl
+ t0CXEd4wT560QTjMBxCy53UdWhiDsyds7dXKZsnhQ/gW/QjtrxsuhAA9r3JpG8qDskGh18JDTyA
+ r2hPSQU4bd9Rbpq2S4KLzNvnSh5TZXexi3cuHQz4B7OQLotrs+wQx1CoUWoDtSsI/VfomZOU+eg
+ 9/E3yvwTrF1WpqKEEBe2nvKdLrTKY/8V6pxMr+TaH4Nf1XwbzzaZ2ymlRqNVJY+yiKd4SqQV6bg
+ +6knVJTH2K6UsRpEiQ==
+X-Google-Smtp-Source: AGHT+IGMs1lB4i1YUHZmt1XdOzhLFa17C8lCZ94DCRBbDEkv7u4FH1xlbJA5atWuoKqtZ/yU29iFfw==
+X-Received: by 2002:a17:907:3ea8:b0:ab3:8b1:12aa with SMTP id
+ a640c23a62f3a-ab6cfcc5182mr2418938466b.8.1738593652739; 
+ Mon, 03 Feb 2025 06:40:52 -0800 (PST)
 Received: from draig.lan ([185.126.160.109]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-ab6e47a7b0fsm769101066b.12.2025.02.03.06.40.53
+ a640c23a62f3a-ab6ff432351sm578507166b.68.2025.02.03.06.40.49
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 03 Feb 2025 06:40:57 -0800 (PST)
+ Mon, 03 Feb 2025 06:40:49 -0800 (PST)
 Received: from draig.lan (localhost [IPv6:::1])
- by draig.lan (Postfix) with ESMTP id 03C70609FC;
- Mon,  3 Feb 2025 14:40:50 +0000 (GMT)
+ by draig.lan (Postfix) with ESMTP id 8F12F5F8BF;
+ Mon,  3 Feb 2025 14:40:48 +0000 (GMT)
 From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: qemu-ppc@nongnu.org, Mahmoud Mandour <ma.mandourr@gmail.com>,
@@ -86,19 +85,16 @@ Cc: qemu-ppc@nongnu.org, Mahmoud Mandour <ma.mandourr@gmail.com>,
  Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, Weiwei Li <liwei1518@gmail.com>,
  qemu-riscv@nongnu.org, Fabiano Rosas <farosas@suse.de>,
  Tyrone Ting <kfting@nuvoton.com>, Paolo Bonzini <pbonzini@redhat.com>,
- Nicholas Piggin <npiggin@gmail.com>, Alexandre Iooss <erdnaxe@crans.org>,
- Ilya Leoshkevich <iii@linux.ibm.com>
-Subject: [PATCH 13/18] user: Introduce host_interrupt_signal
-Date: Mon,  3 Feb 2025 14:40:43 +0000
-Message-Id: <20250203144048.2131117-14-alex.bennee@linaro.org>
+ Nicholas Piggin <npiggin@gmail.com>, Alexandre Iooss <erdnaxe@crans.org>
+Subject: [PATCH 00/18] maintainer updates for feb25 (qtest, gdbstub, plugins)
+Date: Mon,  3 Feb 2025 14:40:30 +0000
+Message-Id: <20250203144048.2131117-1-alex.bennee@linaro.org>
 X-Mailer: git-send-email 2.39.5
-In-Reply-To: <20250203144048.2131117-1-alex.bennee@linaro.org>
-References: <20250203144048.2131117-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::530;
- envelope-from=alex.bennee@linaro.org; helo=mail-ed1-x530.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::62c;
+ envelope-from=alex.bennee@linaro.org; helo=mail-ej1-x62c.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -121,160 +117,111 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Ilya Leoshkevich <iii@linux.ibm.com>
+Another month and another set of updates from across my maintainer
+trees. They include:
 
-Attaching to the gdbstub of a running process requires stopping its
-threads. For threads that run on a CPU, cpu_exit() is enough, but the
-only way to grab attention of a thread that is stuck in a long-running
-syscall is to interrupt it with a signal.
+  * qtest set/step clock cleanups
 
-Reserve a host realtime signal for this, just like it's already done
-for TARGET_SIGABRT on Linux. This may reduce the number of available
-guest realtime signals by one, but this is acceptable, since there are
-quite a lot of them, and it's unlikely that there are apps that need
-them all.
+It seems the earlier patch to avoid deadlock when shutting down was
+overly broad. So in this series after a little clean-up to the qtest
+reply code we tighten up some checks for steps that make no sense and
+eventually revert the original deadlock avoiding patch.
 
-Set signal_pending for the safe_sycall machinery to prevent invoking
-the syscall. This is a lie, since we don't queue a guest signal, but
-process_pending_signals() can handle the absence of pending signals.
-The syscall returns with QEMU_ERESTARTSYS errno, which arranges for
-the automatic restart. This is important, because it helps avoiding
-disturbing poorly written guests.
+  * reducing migration test scope depending on accel
 
-Reviewed-by: Warner Losh <imp@bsdimp.com>
-Signed-off-by: Ilya Leoshkevich <iii@linux.ibm.com>
-Message-Id: <20250117001542.8290-5-iii@linux.ibm.com>
-Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
----
- include/user/signal.h |  2 ++
- bsd-user/signal.c     | 12 ++++++++++++
- linux-user/signal.c   | 25 ++++++++++++++++++++-----
- 3 files changed, 34 insertions(+), 5 deletions(-)
+Fabino's continued work on the migration tests and avoiding them
+taking too much of the overall test execution time. KVM guests still
+get the full range and we smoke test TCG guests.
 
-diff --git a/include/user/signal.h b/include/user/signal.h
-index 19b6b9e5dd..7fa33b05d9 100644
---- a/include/user/signal.h
-+++ b/include/user/signal.h
-@@ -20,4 +20,6 @@
-  */
- int target_to_host_signal(int sig);
- 
-+extern int host_interrupt_signal;
-+
- #endif
-diff --git a/bsd-user/signal.c b/bsd-user/signal.c
-index 8c51f6ce65..ff2ccbbf60 100644
---- a/bsd-user/signal.c
-+++ b/bsd-user/signal.c
-@@ -51,6 +51,8 @@ static inline int sas_ss_flags(TaskState *ts, unsigned long sp)
-         on_sig_stack(ts, sp) ? SS_ONSTACK : 0;
- }
- 
-+int host_interrupt_signal = SIGRTMAX;
-+
- /*
-  * The BSD ABIs use the same signal numbers across all the CPU architectures, so
-  * (unlike Linux) these functions are just the identity mapping. This might not
-@@ -491,6 +493,12 @@ static void host_signal_handler(int host_sig, siginfo_t *info, void *puc)
-     uintptr_t pc = 0;
-     bool sync_sig = false;
- 
-+    if (host_sig == host_interrupt_signal) {
-+        ts->signal_pending = 1;
-+        cpu_exit(thread_cpu);
-+        return;
-+    }
-+
-     /*
-      * Non-spoofed SIGSEGV and SIGBUS are synchronous, and need special
-      * handling wrt signal blocking and unwinding.
-@@ -854,6 +862,9 @@ void signal_init(void)
- 
-     for (i = 1; i <= TARGET_NSIG; i++) {
-         host_sig = target_to_host_signal(i);
-+        if (host_sig == host_interrupt_signal) {
-+            continue;
-+        }
-         sigaction(host_sig, NULL, &oact);
-         if (oact.sa_sigaction == (void *)SIG_IGN) {
-             sigact_table[i - 1]._sa_handler = TARGET_SIG_IGN;
-@@ -872,6 +883,7 @@ void signal_init(void)
-             sigaction(host_sig, &act, NULL);
-         }
-     }
-+    sigaction(host_interrupt_signal, &act, NULL);
- }
- 
- static void handle_pending_signal(CPUArchState *env, int sig,
-diff --git a/linux-user/signal.c b/linux-user/signal.c
-index bffbef235c..81a98c6d02 100644
---- a/linux-user/signal.c
-+++ b/linux-user/signal.c
-@@ -517,6 +517,8 @@ static int core_dump_signal(int sig)
-     }
- }
- 
-+int host_interrupt_signal;
-+
- static void signal_table_init(const char *rtsig_map)
- {
-     int hsig, tsig, count;
-@@ -580,10 +582,10 @@ static void signal_table_init(const char *rtsig_map)
-          * Attempts for configure "missing" signals via sigaction will be
-          * silently ignored.
-          *
--         * Reserve one signal for internal usage (see below).
-+         * Reserve two signals for internal usage (see below).
-          */
- 
--        hsig = SIGRTMIN + 1;
-+        hsig = SIGRTMIN + 2;
-         for (tsig = TARGET_SIGRTMIN;
-              hsig <= SIGRTMAX && tsig <= TARGET_NSIG;
-              hsig++, tsig++) {
-@@ -604,12 +606,17 @@ static void signal_table_init(const char *rtsig_map)
-     host_to_target_signal_table[SIGABRT] = 0;
-     for (hsig = SIGRTMIN; hsig <= SIGRTMAX; hsig++) {
-         if (!host_to_target_signal_table[hsig]) {
--            host_to_target_signal_table[hsig] = TARGET_SIGABRT;
--            break;
-+            if (host_interrupt_signal) {
-+                host_to_target_signal_table[hsig] = TARGET_SIGABRT;
-+                break;
-+            } else {
-+                host_interrupt_signal = hsig;
-+            }
-         }
-     }
-     if (hsig > SIGRTMAX) {
--        fprintf(stderr, "No rt signals left for SIGABRT mapping\n");
-+        fprintf(stderr,
-+                "No rt signals left for interrupt and SIGABRT mapping\n");
-         exit(EXIT_FAILURE);
-     }
- 
-@@ -689,6 +696,8 @@ void signal_init(const char *rtsig_map)
-         }
-         sigact_table[tsig - 1]._sa_handler = thand;
-     }
-+
-+    sigaction(host_interrupt_signal, &act, NULL);
- }
- 
- /* Force a synchronously taken signal. The kernel force_sig() function
-@@ -1036,6 +1045,12 @@ static void host_signal_handler(int host_sig, siginfo_t *info, void *puc)
-     bool sync_sig = false;
-     void *sigmask;
- 
-+    if (host_sig == host_interrupt_signal) {
-+        ts->signal_pending = 1;
-+        cpu_exit(thread_cpu);
-+        return;
-+    }
-+
-     /*
-      * Non-spoofed SIGSEGV and SIGBUS are synchronous, and need special
-      * handling wrt signal blocking and unwinding.  Non-spoofed SIGILL,
+  * gdbstub late attachment
+
+These are Ilya's patches to make it easier to debug heavily
+multi-process linux-user invocations. Comes with documentation and
+a test case ;-)
+
+  * plugins
+
+Fix a compiler false positive.
+
+As this is the first iteration I intend to send out a pre-PR later
+this week if everything is reviewed ok with a PR shortly after.
+
+Alex.
+
+Alex Bennée (7):
+  tests/docker: replicate the check-rust-tools-nightly CI job
+  tests/qtest: don't attempt to clock_step while waiting for virtio ISR
+  tests/qtest: don't step clock at start of npcm7xx periodic IRQ test
+  tests/qtest: simplify qtest_process_inbuf
+  tests/qtest: rename qtest_send_prefix and roll-up into qtest_send
+  tests/qtest: tighten up the checks on clock_step
+  Revert "util/timer: avoid deadlock when shutting down"
+
+Fabiano Rosas (2):
+  tests/qtest/migration: Add --full option
+  tests/qtest/migration: Pick smoke tests
+
+Ilya Leoshkevich (8):
+  gdbstub: Allow the %d placeholder in the socket path
+  gdbstub: Try unlinking the unix socket before binding
+  user: Introduce user/signal.h
+  user: Introduce host_interrupt_signal
+  osdep: Introduce qemu_kill_thread()
+  gdbstub: Allow late attachment
+  docs/user: Document the %d placeholder and suspend=n QEMU_GDB features
+  tests/tcg: Add late gdbstub attach test
+
+Marc-André Lureau (1):
+  plugins: fix -Werror=maybe-uninitialized false-positive
+
+ MAINTAINERS                                |   1 +
+ docs/user/main.rst                         |  16 ++-
+ bsd-user/signal-common.h                   |   1 -
+ include/qemu/osdep.h                       |   9 ++
+ include/system/qtest.h                     |   1 -
+ include/user/signal.h                      |  25 ++++
+ linux-user/signal-common.h                 |   1 -
+ tests/qtest/migration/framework.h          |   1 +
+ bsd-user/main.c                            |   1 -
+ bsd-user/signal.c                          |  13 ++
+ contrib/plugins/cache.c                    |   2 +-
+ gdbstub/user.c                             | 150 ++++++++++++++++-----
+ hw/ppc/spapr_rtas.c                        |   1 -
+ hw/riscv/riscv_hart.c                      |   1 -
+ linux-user/main.c                          |   1 -
+ linux-user/signal.c                        |  26 +++-
+ linux-user/syscall.c                       |   1 +
+ stubs/monitor-fd.c                         |   9 ++
+ system/qtest.c                             |  59 +++-----
+ tests/qtest/libqos/virtio-pci-modern.c     |   6 +-
+ tests/qtest/libqos/virtio-pci.c            |   6 +-
+ tests/qtest/migration-test.c               |  25 ++++
+ tests/qtest/migration/compression-tests.c  |  15 ++-
+ tests/qtest/migration/cpr-tests.c          |   6 +
+ tests/qtest/migration/file-tests.c         |  19 ++-
+ tests/qtest/migration/misc-tests.c         |  16 ++-
+ tests/qtest/migration/postcopy-tests.c     |  14 +-
+ tests/qtest/migration/precopy-tests.c      |  23 +++-
+ tests/qtest/migration/tls-tests.c          |  14 +-
+ tests/qtest/npcm7xx_timer-test.c           |   1 -
+ tests/tcg/multiarch/late-attach.c          |  41 ++++++
+ util/oslib-posix.c                         |  15 +++
+ util/qemu-timer.c                          |  16 +--
+ stubs/meson.build                          |   2 +
+ tests/docker/Makefile.include              |   3 +
+ tests/docker/test-rust                     |  21 +++
+ tests/guest-debug/run-test.py              |  15 ++-
+ tests/qtest/meson.build                    |  11 +-
+ tests/tcg/multiarch/Makefile.target        |   9 +-
+ tests/tcg/multiarch/gdbstub/late-attach.py |  28 ++++
+ util/meson.build                           |   2 +
+ 41 files changed, 491 insertions(+), 136 deletions(-)
+ create mode 100644 include/user/signal.h
+ create mode 100644 stubs/monitor-fd.c
+ create mode 100644 tests/tcg/multiarch/late-attach.c
+ create mode 100755 tests/docker/test-rust
+ create mode 100644 tests/tcg/multiarch/gdbstub/late-attach.py
+
 -- 
 2.39.5
 
