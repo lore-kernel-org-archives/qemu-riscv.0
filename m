@@ -4,90 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4A473C02194
-	for <qemu-riscv@archiver.kernel.org>; Tue,  4 Feb 2025 20:12:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 24EE7C02193
+	for <qemu-riscv@archiver.kernel.org>; Tue,  4 Feb 2025 21:46:49 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tfPFW-0001Lp-Jx; Tue, 04 Feb 2025 15:10:22 -0500
+	id 1tfQkc-0008Nu-HQ; Tue, 04 Feb 2025 16:46:34 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tfPFS-0001Fi-R3
- for qemu-riscv@nongnu.org; Tue, 04 Feb 2025 15:10:18 -0500
-Received: from mail-wm1-x335.google.com ([2a00:1450:4864:20::335])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tfQkb-0008NX-IQ
+ for qemu-riscv@nongnu.org; Tue, 04 Feb 2025 16:46:33 -0500
+Received: from mail-wr1-x433.google.com ([2a00:1450:4864:20::433])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tfPFP-0006hI-Qi
- for qemu-riscv@nongnu.org; Tue, 04 Feb 2025 15:10:18 -0500
-Received: by mail-wm1-x335.google.com with SMTP id
- 5b1f17b1804b1-4361dc6322fso42104395e9.3
- for <qemu-riscv@nongnu.org>; Tue, 04 Feb 2025 12:10:12 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tfQkZ-0005Nk-Kb
+ for qemu-riscv@nongnu.org; Tue, 04 Feb 2025 16:46:33 -0500
+Received: by mail-wr1-x433.google.com with SMTP id
+ ffacd0b85a97d-38da713b9daso1223896f8f.3
+ for <qemu-riscv@nongnu.org>; Tue, 04 Feb 2025 13:46:31 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1738699811; x=1739304611; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=PhmA/maE+T+RrjSr6dpY30qil8BVZDc6N3XpaacESEk=;
- b=XUNnyHcLRkC15Z8nlDkP68umo1S+C9vJQMmUkyBaYFcBkRg01UHLmdT1siQWh2hSQl
- 5HcVkjzrKGS/RnagCl6qaEa5XY1coXb3zgm5UuAe8DKIPiJZ2QEkKZ8iIZnpqDkto9mB
- 6K+OYNTUCGorTtNoLgHcvTBu2fkP+BVIyKxFtklP7SgwADd9cGyySGesFwDofdzZ/KUd
- QjNnOA++6wqjyEUqV77jonv5AR17ZBLB4b2vhDZ+Co2fgWcFFOeuZYlZmgFNbGMI7wlr
- yxOK4+GZpM4CFQDqNToLifqisM7nbE26IO4O8HwIIUss+6f5k/YYGLcyoc6szHNPMcyG
- yQSg==
+ d=linaro.org; s=google; t=1738705590; x=1739310390; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=6zix+2XzlAWB3iAZ7J6dqnst6Y/RLxo8jGubN17CA0I=;
+ b=Lza/yNQQN1cT0EuqDyveidlbE4Ep/Ek1FzSlMe3+cPoe764Th0o9hQvf5gTW1y4/8s
+ qrvs0YndgOiIUi9e9ts6I3F/qbwBQCP10g4KZy1EWZc+mukSBrFyOJwEPVMj7fclo3up
+ oY79w4s8RM917bhiZurHBYXmZkn2vlUZaa48trnQ8hg5f1x0ba4sFvqpQ9LnSAZEajKM
+ sIAGgyQRjkKSKPLdWqYtot7VzbXhGL4N+Hpv+KNXHreuP4oZyiNuHaM0aA58cfmuN+fF
+ U22xMH9G/KRMzx1fN1wMqMuuwp6li3/nHiEqocRFiZBQwq/8uCiFg+HCX2oxalSXVlNp
+ txmg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1738699811; x=1739304611;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=PhmA/maE+T+RrjSr6dpY30qil8BVZDc6N3XpaacESEk=;
- b=rbQl+I120tve2gOMvGIscYA8pIx8Hv0ugNH3IV7eDUSHz7SvUhJz/DpTDn3/G/y61y
- B1ohF6YiYWBdDVONSI+3hCntMHFB28lw0Pr1+ld6Aub/mexsztmwLVgLtLOdmwvgMKmA
- 069dZR6Sgp6H1XWijKjy9Mjx4ydrCHQ9nT6qyy/rwmlizu3ks2IfrCsShpZO+uJcSTku
- 8knRarKoBqy1VI+sKn11yKUv5L6M8T6evk9LFvFm22sQyZZlGaU+ug9FMfI2p2GTVbh4
- 9fCMRT2HoL2v9lNeN3KNQ6yY5j2sau4tG0Lc/RGoDvLXlhOX5UEthi30CXgVH8E3saKe
- VUdw==
-X-Gm-Message-State: AOJu0YxfnHwG03ZRZVu1IHZNYhfguKd8xOmsW9P26mVMKOODL9wqn/nR
- 5IOYEFE/XpNHlsfJr3rr44X4WyqReQVJxQyab758SdazhjSK3sEcNKaZyl6zBmvQu0mdxhbssOj
- JR8k=
-X-Gm-Gg: ASbGncvQG9igxf54iGvxEhfD7TunAFYgPa/6kcOmoVySKEyNXeiq7kGIvhTwLFy05Vt
- YQvtnixpH5Wo/+52Ef5MgqwZ1lmTBNm88nl3GSviA2Nc5LZObujiz00g9iCb1GRApUGGoSkykFp
- YQSD4caWyqPWLlWoE1U5STtSPytBGT2JXcOneuu8kUK12yO3RBf5ixBsAPojt8z64LnXt/cvTPX
- IwXevB3BjhlW554SjnVrwzdh4n5RSWlXaI6rM/RSqz+g2Fd7jyGTD/FbDrQXGN/kduVUVUwlGb+
- g+9VHLo/nz+FutZhcb9eReYe0ti2AikcwkNYkgPg/OSkRpqCaJXslXs77NLibSfp6Q==
-X-Google-Smtp-Source: AGHT+IECUpMeniqijK4mePxq840Vp3xOlLEVSJrdQh/GL2m7Mhjps3IHcc1c/ih6zKtBGGSc+riCFQ==
-X-Received: by 2002:a05:600c:5112:b0:436:fb02:e68 with SMTP id
- 5b1f17b1804b1-4390d42f7c5mr67025e9.2.1738699811044; 
- Tue, 04 Feb 2025 12:10:11 -0800 (PST)
-Received: from localhost.localdomain (88-187-86-199.subs.proxad.net.
+ d=1e100.net; s=20230601; t=1738705590; x=1739310390;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=6zix+2XzlAWB3iAZ7J6dqnst6Y/RLxo8jGubN17CA0I=;
+ b=Mp3EPwhbeckoEE/txxPlKu65FuHhWdA0uBAfaVKTIFHhcyAy8GvIKM3TNkGnDuYl8s
+ ACcaoBNSmHgrEkueBLQvwk+aMeMM/Wshi34bojL38xXmosQ9TNBBokQ3CPY8ue14dEHN
+ 78PoV6GLqz1tXcTqZgT/Adzf0N3aruh9ausn51nrED/KcDi8xrCTnxiQ3DaeDQqNEN+F
+ 6MGNSwZVuMBR1AeDd25Rj9eaI0i1rT0KzQKgDKL2eX4IqcXs5DYhoj6jLLqnu455J3Eb
+ tACaSLpmK1uZO+bprBw/5YK1NeW4agusCjD7xf6fFBe1DbxXhOLTStzJuFm4zahakTE5
+ 1p0g==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXb614LGbCFGQ+bq/GLS6HAqh+t4Yo5WH4nV9ML0GswaautXdJTJNaOMv8S4zYAQrfeEExSD6oB2aMz@nongnu.org
+X-Gm-Message-State: AOJu0Yzalie6Dn5gSL+PzUEIfHmxT6uqpOM50QmPbVf236HOWzgr/S0q
+ bZuyDYY+fconc1vwiT5/xDirKBZ8AgJpt95eikki9OCN0wIldq647+cEi+AhnlU=
+X-Gm-Gg: ASbGncsfa2yrIEtq4v/mNYckeBqVALOqQXEz0lvKmZUZoipXb9h+wtJR+0cGuNn45WE
+ ljSkc5rdwsJ9LdACBJ2bE7FLO/9pHgaV8nJQKHOeCs4G6ZKFqO0uJ7oPWfo4bv0reIypPygQraa
+ opNVnW4V/sVh3a/Ab/dIKq/O4Jd7/AgErTfZGmgnasi9l2HkXPSefwj9wqeUEo45yhOfR/M82/D
+ tH/6sDwFDqo635jCMniN61DvDgwWmh60v75MLFNCigiG4oiuu7AwAgWfcbUshN3ziP5N3nHhjGQ
+ lbK8OK1Lh4z1i+j5f5h9pbhYGanCo+55dsUTSFzWqmhlliqw6SCADLW+eYc=
+X-Google-Smtp-Source: AGHT+IG9fYVcNjd4KrepiyxYV/XOclbCs7/Tu4PydlvgnG441JpTbvLsm3f67QBRBdAo40c76+lx6Q==
+X-Received: by 2002:adf:ef89:0:b0:38d:a883:b95b with SMTP id
+ ffacd0b85a97d-38db48a42f8mr273456f8f.28.1738705589709; 
+ Tue, 04 Feb 2025 13:46:29 -0800 (PST)
+Received: from [192.168.69.198] (88-187-86-199.subs.proxad.net.
  [88.187.86.199]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-38da59470b2sm3255118f8f.40.2025.02.04.12.10.10
- (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Tue, 04 Feb 2025 12:10:10 -0800 (PST)
-From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-To: qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, qemu-s390x@nongnu.org,
- Markus Armbruster <armbru@redhat.com>, qemu-arm@nongnu.org,
- qemu-ppc@nongnu.org,
- =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Thomas Huth <thuth@redhat.com>
-Subject: [PATCH v4 7/7] hw/boards: Ensure machine setting auto_create_sdcard
- expose a SD Bus
-Date: Tue,  4 Feb 2025 21:09:34 +0100
-Message-ID: <20250204200934.65279-8-philmd@linaro.org>
-X-Mailer: git-send-email 2.47.1
-In-Reply-To: <20250204200934.65279-1-philmd@linaro.org>
-References: <20250204200934.65279-1-philmd@linaro.org>
+ ffacd0b85a97d-38c5c1cf560sm16648489f8f.89.2025.02.04.13.46.28
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 04 Feb 2025 13:46:29 -0800 (PST)
+Message-ID: <e6d14f33-94ec-47ba-9fec-64ce94da2ad0@linaro.org>
+Date: Tue, 4 Feb 2025 22:46:28 +0100
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] smbios: make memory device size configurable per Machine
+To: Igor Mammedov <imammedo@redhat.com>, qemu-riscv <qemu-riscv@nongnu.org>
+Cc: qemu-devel@nongnu.org, peter.maydell@linaro.org, mst@redhat.com,
+ wangyanan55@huawei.com, pbonzini@redhat.com, richard.henderson@linaro.org,
+ anisinha@redhat.com, qemu-arm@nongnu.org
+References: <20240711074822.3384344-1-imammedo@redhat.com>
+ <d921c3d3-71a9-49e4-9f28-1ff3f19b9c48@linaro.org>
+ <20240711104230.1582fba0@imammedo.users.ipa.redhat.com>
+Content-Language: en-US
+From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+In-Reply-To: <20240711104230.1582fba0@imammedo.users.ipa.redhat.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::335;
- envelope-from=philmd@linaro.org; helo=mail-wm1-x335.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::433;
+ envelope-from=philmd@linaro.org; helo=mail-wr1-x433.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -103,55 +104,95 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Using the auto_create_sdcard feature without SD Bus is irrelevant.
+On 11/7/24 10:42, Igor Mammedov wrote:
+> On Thu, 11 Jul 2024 10:19:27 +0200
+> Philippe Mathieu-Daudé <philmd@linaro.org> wrote:
+> 
+>> Hi Igor,
+>>
+>> On 11/7/24 09:48, Igor Mammedov wrote:
+>>> Currently SMBIOS maximum memory device chunk is capped at 16Gb,
+>>> which is fine for the most cases (QEMU uses it to describe initial
+>>> RAM (type 17 SMBIOS table entries)).
+>>> However when starting guest with terabytes of RAM this leads to
+>>> too many memory device structures, which eventually upsets linux
+>>> kernel as it reserves only 64K for these entries and when that
+>>> border is crossed out it runs out of reserved memory.
+>>>
+>>> Instead of partitioning initial RAM on 16Gb chunks, use maximum
+>>> possible chunk size that SMBIOS spec allows[1]. Which lets
+>>> encode RAM in Mb units in uint32_t-1 field (upto 2047Tb).
+>>> As result initial RAM will generate only one type 17 structure
+>>> until host/guest reach ability to use more RAM in the future.
+>>>
+>>> Compat changes:
+>>> We can't unconditionally change chunk size as it will break
+>>> QEMU<->guest ABI (and migration). Thus introduce a new machine class
+>>> field that would let older versioned machines to use 16Gb chunks
+>>> while new machine type could use maximum possible chunk size.
+>>>
+>>> While it might seem to be risky to rise max entry size this much
+>>> (much beyond of what current physical RAM modules support),
+>>> I'd not expect it causing much issues, modulo uncovering bugs
+>>> in software running within guest. And those should be fixed
+>>> on guest side to handle SMBIOS spec properly, especially if
+>>> guest is expected to support so huge RAM configs.
+>>> In worst case, QEMU can reduce chunk size later if we would
+>>> care enough about introducing a workaround for some 'unfixable'
+>>> guest OS, either by fixing up the next machine type or
+>>> giving users a CLI option to customize it.
+>>>
+>>> 1) SMBIOS 3.1.0 7.18.5 Memory Device — Extended Size
+>>>
+>>> PS:
+>>> * tested on 8Tb host with RHEL6 guest, which seems to parse
+>>>     type 17 SMBIOS table entries correctly (according to 'dmidecode').
+>>>
+>>> Signed-off-by: Igor Mammedov <imammedo@redhat.com>
+>>> ---
+>>>    include/hw/boards.h |  4 ++++
+>>>    hw/arm/virt.c       |  1 +
+>>>    hw/core/machine.c   |  1 +
+>>>    hw/i386/pc_piix.c   |  1 +
+>>>    hw/i386/pc_q35.c    |  1 +
+>>>    hw/smbios/smbios.c  | 11 ++++++-----
+>>>    6 files changed, 14 insertions(+), 5 deletions(-)
+>>>
+>>> diff --git a/include/hw/boards.h b/include/hw/boards.h
+>>> index ef6f18f2c1..48ff6d8b93 100644
+>>> --- a/include/hw/boards.h
+>>> +++ b/include/hw/boards.h
+>>> @@ -237,6 +237,9 @@ typedef struct {
+>>>     *    purposes only.
+>>>     *    Applies only to default memory backend, i.e., explicit memory backend
+>>>     *    wasn't used.
+>>> + * @smbios_memory_device_size:
+>>> + *    Default size of memory device,
+>>> + *    SMBIOS 3.1.0 "7.18 Memory Device (Type 17)"
+>>>     */
+>>>    struct MachineClass {
+>>>        /*< private >*/
+>>> @@ -304,6 +307,7 @@ struct MachineClass {
+>>>        const CPUArchIdList *(*possible_cpu_arch_ids)(MachineState *machine);
+>>>        int64_t (*get_default_cpu_node_id)(const MachineState *ms, int idx);
+>>>        ram_addr_t (*fixup_ram_size)(ram_addr_t size);
+>>> +    uint64_t smbios_memory_device_size;
+>>
+>> Quick notes since I'm on holidays (not meant to block this patch):
+>>
+>> - How will evolve this machine class property in the context of
+>>     a heterogeneous machine (i.e. x86_64 cores and 1 riscv32 one)?
+> 
+> I'm not aware of a SMBIOS spec (3.x) that cares about that heterogeneous
+> setup yet. Are there anything in that area exists yet?
 
-Reviewed-by: Thomas Huth <thuth@redhat.com>
-Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
----
- system/vl.c | 16 ++++++++++++++++
- 1 file changed, 16 insertions(+)
+Not yet.
 
-diff --git a/system/vl.c b/system/vl.c
-index 5ff461ea4ca..a904687b57c 100644
---- a/system/vl.c
-+++ b/system/vl.c
-@@ -53,6 +53,7 @@
- #include "hw/usb.h"
- #include "hw/isa/isa.h"
- #include "hw/scsi/scsi.h"
-+#include "hw/sd/sd.h"
- #include "hw/display/vga.h"
- #include "hw/firmware/smbios.h"
- #include "hw/acpi/acpi.h"
-@@ -2661,12 +2662,27 @@ static void qemu_init_displays(void)
- 
- static void qemu_init_board(void)
- {
-+    MachineClass *machine_class = MACHINE_GET_CLASS(current_machine);
-+
-     /* process plugin before CPUs are created, but once -smp has been parsed */
-     qemu_plugin_load_list(&plugin_list, &error_fatal);
- 
-     /* From here on we enter MACHINE_PHASE_INITIALIZED.  */
-     machine_run_board_init(current_machine, mem_path, &error_fatal);
- 
-+    if (machine_class->auto_create_sdcard) {
-+        bool ambigous;
-+
-+        /* Ensure there is a SD bus available to create SD card on */
-+        Object *obj = object_resolve_path_type("", TYPE_SD_BUS, &ambigous);
-+        if (!obj && !ambigous) {
-+            fprintf(stderr, "Can not create sd-card on '%s' machine"
-+                            " because it lacks a sd-bus\n",
-+                            machine_class->name);
-+            abort();
-+        }
-+    }
-+
-     drive_check_orphaned();
- 
-     realtime_init();
--- 
-2.47.1
+> 
+>> - Should this become a SmbiosProviderInterface later?
+> if/when SMBIOS does get there (heterogeneous machines), introducing
+> an interface might make a sense.
+
+OK.
 
 
