@@ -4,78 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B7A75C02193
-	for <qemu-riscv@archiver.kernel.org>; Tue,  4 Feb 2025 18:26:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 868D8C02193
+	for <qemu-riscv@archiver.kernel.org>; Tue,  4 Feb 2025 18:28:06 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tfNcq-0005hb-VH; Tue, 04 Feb 2025 13:26:20 -0500
+	id 1tfNeM-0007OH-S6; Tue, 04 Feb 2025 13:27:54 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1tfNcj-0005UJ-Vl
- for qemu-riscv@nongnu.org; Tue, 04 Feb 2025 13:26:15 -0500
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
+ (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1tfNeK-0007Jd-Di
+ for qemu-riscv@nongnu.org; Tue, 04 Feb 2025 13:27:52 -0500
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1tfNcg-00034f-AE
- for qemu-riscv@nongnu.org; Tue, 04 Feb 2025 13:26:12 -0500
+ (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1tfNeI-0004E1-Rk
+ for qemu-riscv@nongnu.org; Tue, 04 Feb 2025 13:27:52 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1738693569;
+ s=mimecast20190719; t=1738693670;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
- bh=zS47pmtUZUQ6DNMSEfcf2IShFa37ZgG1cQi167gSnV8=;
- b=U+dbmmx4XR7T8LU7pUb7fEAHq3m4y9tVDuZTVFEYXaXS+0WiiIT/jfhapcUbwOXeS14GdZ
- Dkq861K7tOjO3hZUrX6FnVF0Mgjy2LNzcs64FTA3L0476LEi8tx9s1YV+GfkEaz+BDBo+t
- wGvYO7ziomyS6815SdAVBSwceeWkwF4=
+ bh=WXp4akxJ/cyQ8iMEiQOrjKd1+VRa0ubwv6rlUgw6HGQ=;
+ b=LEQpgEHyWGOSKD/7hkMgBxWzmP7GFtMHx332+TMn7uRBame/n5YC6VfHCw9aFzS7PlGvRv
+ W5IpQb2jaw7vmU85jHvL+lkysktXSakTrHN+rL9bPc1U28Nm6nReGzsPgdtf3DK2v44gNe
+ oLn71jLca5VlsyvISk1Bq+xnLUB0Wlc=
 Received: from mail-ej1-f70.google.com (mail-ej1-f70.google.com
  [209.85.218.70]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-513-ZWj1FoPoOp67CJ-fW-Fr3A-1; Tue, 04 Feb 2025 13:26:07 -0500
-X-MC-Unique: ZWj1FoPoOp67CJ-fW-Fr3A-1
-X-Mimecast-MFC-AGG-ID: ZWj1FoPoOp67CJ-fW-Fr3A
+ us-mta-106-rUJ6bjPHP86IuCGI1UCpQA-1; Tue, 04 Feb 2025 13:27:48 -0500
+X-MC-Unique: rUJ6bjPHP86IuCGI1UCpQA-1
+X-Mimecast-MFC-AGG-ID: rUJ6bjPHP86IuCGI1UCpQA
 Received: by mail-ej1-f70.google.com with SMTP id
- a640c23a62f3a-ab698a658ceso501028866b.3
- for <qemu-riscv@nongnu.org>; Tue, 04 Feb 2025 10:26:07 -0800 (PST)
+ a640c23a62f3a-ab547c18515so247103966b.2
+ for <qemu-riscv@nongnu.org>; Tue, 04 Feb 2025 10:27:48 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1738693566; x=1739298366;
+ d=1e100.net; s=20230601; t=1738693668; x=1739298468;
  h=content-transfer-encoding:in-reply-to:autocrypt:content-language
  :from:references:cc:to:subject:user-agent:mime-version:date
  :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=zS47pmtUZUQ6DNMSEfcf2IShFa37ZgG1cQi167gSnV8=;
- b=l1e/q8n/otk7rg+yfPxJ/SWR7MmWKkWKtoYmJ7cmBSDCoOcCt5VMANjRxH3vB5tR8P
- 4k+drBi9wV76dgETeYvJT68hLMy7RMl3ktVx5ieXPNArawBPum5zLGU+zod8b4utc2hT
- 0c2K+E2F9cBvY0/rA5CQDIR8XOpPk6aTZUuxwF7c4tQ9Ixw6qWHrjy9HjZsxZRPwqLCO
- OVaRw0DAr4YeHBU5OFWXoIrcifJ4qcKG9KsVUpxKh4s5PhmaG0ty/9sJKMXXMmjmaj6j
- QV3gi9qLJSxgZCa3hDVAZcb80iMu7ycLVort+PbrJ3NhN9RkkLnn2OucGyUrIvHR8U66
- Y+9g==
-X-Gm-Message-State: AOJu0YwhllttDPJbG/SF6pWlrG3Yg9UXg4vmq5Ks2PsH/NQVXjjZFhzi
- rw/jcVF90J2dzqf4w847+DxZDQBe22/Liy5JVl4XTRmw+2LQd8W2Aa6IoDlt/PR0wqQxxfKKAX7
- mRlvsaxOge13DIVgypplYiXBd1NVgBoA3gR+uxgZXx6NU3F2GVVa6
-X-Gm-Gg: ASbGncv0Ntl6wWlFoyPVmCqdEsRh3ybnk5fYwL+O0hBq5AIc4nlU3Q0lQ0owVWJM7Am
- 0mG+7hq+MyEwMDmoq2xShpE/jrm7j6l51apKx5ac2WlUcoOn/ZaR0dIKtuVSn8DxtYDklTClsev
- 2/URtFNtuEvg+rfZ5VWySTRkVC6KhD6TOoD6n4irF+ixIZM3VJcFWBfVIwdt08bSCcSSrj+/kaQ
- SH6Pu7GtfdhWOMdI9G5RBTfiknOl8Q9IHfxQ6NEugLqIDUMjzzM02eTjJsMc7UdA4S4cErmhXv5
- GrupQJTyXG//Tv7w2ciYXKiEQzIC8VS+Mu12
-X-Received: by 2002:a17:907:7b8a:b0:aab:d7ef:d44 with SMTP id
- a640c23a62f3a-ab6cfce763emr3297437666b.24.1738693566641; 
- Tue, 04 Feb 2025 10:26:06 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IEbZNNBpDcS1iCGlS1yKv0JNRMzD3OcCu7wASO6tk+SkGwswm9rypuD9naUxJUEJEEfgc+XHQ==
-X-Received: by 2002:a17:907:7b8a:b0:aab:d7ef:d44 with SMTP id
- a640c23a62f3a-ab6cfce763emr3297434066b.24.1738693566227; 
- Tue, 04 Feb 2025 10:26:06 -0800 (PST)
+ bh=WXp4akxJ/cyQ8iMEiQOrjKd1+VRa0ubwv6rlUgw6HGQ=;
+ b=lKnzDdAJam5r2h1tJYz5lCpZzob9RZY4PK2+tcAZF+qY1wBd+8VqeQN2Rg3PAk/aDj
+ MVjysh8wIdetzF8kc+w4IuXns83jlXvt5LUpZQcjLlUprtjA1DLRrhZS87UMt+YnMXMu
+ wZkLsSXyFVB3Ik9L8nmwertvm9HgKvwCs1Jh7hSLUMzqmJZmcVjXiwnPQPx0cCDmidlI
+ FDg+KEmAcv9ONiMvJmaG70f5+OoJOe4TvFU59b7wk/Vlp7f8Yr7nZuOxpctautDpWGNu
+ uipBI0GijGhG9GzBd2Td9HvYHeyyLM7lMlkQrDl4HmMEF8vSJIIn7RUSecTxqDkeE0XX
+ Rr4A==
+X-Gm-Message-State: AOJu0YyST8CmxcWu8yvqBFyeY6ZNt7B9u+e2wMrO8Zl5rd0ZOii6J8RF
+ nwqz18kUVFQVbOT36VMIqDS9QSkCLwHmD91fk85dcs3gr4er8V4N0soc/CoycPLqbYLtuhfn/0V
+ KBIqwkpu0UVGuK4+XleoitRYjWZhQ6QWcte2Tx22oBJ8JNvDt+2hM
+X-Gm-Gg: ASbGnctMQKH72m18oAQ9vhY8NjEVfmF256PX7NU+UOyi5BAiY8NNrr/mP99XUkigTd0
+ qALGHK4zQDPXctNd1KohcnpKLXZX0+tpCcmM/rCjxu22D3uCI+p4j5CxsyqUuj+yCIXhJkZvtET
+ rJplIZQXI1ct8IR8guGQw4JUJn0x+aFDU1ChZxKjy0t28/V9UHxDajEahCWY4UhLs7BsKkMJ8mB
+ PUxK8LjtJnLcwikZU4M8jp6b7U6ZujRMw8PVLSPZ9/KojAwweb0IztLWUtsBeKTtNTJBjSQwaTz
+ VFQOiMuz053l2P9gSKlN6SU2QO5YZLNqydM4
+X-Received: by 2002:a17:907:2ce5:b0:ab2:c0c8:383f with SMTP id
+ a640c23a62f3a-ab6cfcc514emr2829758366b.1.1738693667667; 
+ Tue, 04 Feb 2025 10:27:47 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IFV7hP25416Vnzi24T77YfEMfGP4pDJzbJ/xNVJ43UQTcw6icNkyvxHPjKHtpeDiPNnTHyo4g==
+X-Received: by 2002:a17:907:2ce5:b0:ab2:c0c8:383f with SMTP id
+ a640c23a62f3a-ab6cfcc514emr2829756166b.1.1738693667281; 
+ Tue, 04 Feb 2025 10:27:47 -0800 (PST)
 Received: from [192.168.0.7] (ip-109-42-48-132.web.vodafone.de.
  [109.42.48.132]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-ab703a41cb1sm737584866b.103.2025.02.04.10.26.04
+ a640c23a62f3a-ab6e47cf930sm971116666b.54.2025.02.04.10.27.45
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 04 Feb 2025 10:26:05 -0800 (PST)
-Message-ID: <6e59b7c0-8a0c-4c49-9029-848cc1d4486d@redhat.com>
-Date: Tue, 4 Feb 2025 19:26:03 +0100
+ Tue, 04 Feb 2025 10:27:46 -0800 (PST)
+Message-ID: <608af675-4c8d-456f-941a-a1e8d1e1bb60@redhat.com>
+Date: Tue, 4 Feb 2025 19:27:45 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 4/8] hw/boards: Remove all invalid uses of
- auto_create_sdcard=true
+Subject: Re: [PATCH v2 5/8] hw/ppc/e500: Remove empty
+ ppce500_machine_class_init()
 To: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
  qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, qemu-arm@nongnu.org,
@@ -84,7 +84,8 @@ Cc: qemu-riscv@nongnu.org, qemu-arm@nongnu.org,
  Paolo Bonzini <pbonzini@redhat.com>, qemu-s390x@nongnu.org,
  Markus Armbruster <armbru@redhat.com>
 References: <20250204180746.58357-1-philmd@linaro.org>
- <20250204180746.58357-5-philmd@linaro.org>
+ <20250204180746.58357-6-philmd@linaro.org>
+ <4c200141-d9c9-4a8f-832e-38f4aeeb0ed0@linaro.org>
 From: Thomas Huth <thuth@redhat.com>
 Autocrypt: addr=thuth@redhat.com; keydata=
  xsFNBFH7eUwBEACzyOXKU+5Pcs6wNpKzrlJwzRl3VGZt95VCdb+FgoU9g11m7FWcOafrVRwU
@@ -128,21 +129,21 @@ Autocrypt: addr=thuth@redhat.com; keydata=
  oiT+z+/E59qj/EKfyce3sbC9XLjXv3mHMrq1tKX4G7IJGnS989E/fg6crv6NHae9Ckm7+lSs
  IQu4bBP2GxiRQ+NV3iV/KU3ebMRzqIC//DCOxzQNFNJAKldPe/bKZMCxEqtVoRkuJtNdp/5a
  yXFZ6TfE1hGKrDBYAm4vrnZ4CXFSBDllL59cFFOJCkn4Xboj/aVxxJxF30bn
-In-Reply-To: <20250204180746.58357-5-philmd@linaro.org>
+In-Reply-To: <4c200141-d9c9-4a8f-832e-38f4aeeb0ed0@linaro.org>
 X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: Y1S3ClyHQfnEcwXdOnft8djyOhF8nWykaNY50CxgOGo_1738693567
+X-Mimecast-MFC-PROC-ID: mv93euUPYnIM6UkVsxAy6y8mXgbQ4CjUe5reEfm3HfM_1738693668
 X-Mimecast-Originator: redhat.com
 Content-Language: en-US
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=170.10.129.124; envelope-from=thuth@redhat.com;
+Received-SPF: pass client-ip=170.10.133.124; envelope-from=thuth@redhat.com;
  helo=us-smtp-delivery-124.mimecast.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
  DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H5=0.001, RCVD_IN_MSPIKE_WL=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H2=0.001,
  RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001, RCVD_IN_VALIDITY_SAFE_BLOCKED=0.001,
  SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
@@ -160,20 +161,29 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 04/02/2025 19.07, Philippe Mathieu-Daudé wrote:
-> MachineClass::auto_create_sdcard is only useful to automatically
-> create a SD card, attach a IF_SD block drive to it and plug the
-> card onto a SD bus. Only the ARM and RISCV targets use such
-> feature:
+On 04/02/2025 19.12, Philippe Mathieu-Daudé wrote:
+> On 4/2/25 19:07, Philippe Mathieu-Daudé wrote:
+>> Previous commit left this method empty, remove it.
+>>
+>> Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+>> ---
+>>   hw/ppc/e500.c | 5 -----
+>>   1 file changed, 5 deletions(-)
+>>
+>> diff --git a/hw/ppc/e500.c b/hw/ppc/e500.c
+>> index 59208da87de..26933e0457e 100644
+>> --- a/hw/ppc/e500.c
+>> +++ b/hw/ppc/e500.c
+>> @@ -1285,10 +1285,6 @@ static void e500_ccsr_initfn(Object *obj)
+>>                          MPC8544_CCSRBAR_SIZE);
+>>   }
+>> -static void ppce500_machine_class_init(ObjectClass *oc, void *data)
+>> -{
+>> -}
 > 
->   $ git grep -wl IF_SD hw | cut -d/ -f-2 | sort -u
->   hw/arm
->   hw/riscv
->   $
-> 
-> Remove all other uses.
+> Hmm I think it is a left-over and shouldn't be necessary in patch #2.
 
-Smart!
+In case you want to keep it (or want to squash it into the previous patch):
 
 Reviewed-by: Thomas Huth <thuth@redhat.com>
 
