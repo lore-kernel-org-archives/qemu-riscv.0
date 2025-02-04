@@ -4,77 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AD429C02193
-	for <qemu-riscv@archiver.kernel.org>; Tue,  4 Feb 2025 18:45:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 28708C02193
+	for <qemu-riscv@archiver.kernel.org>; Tue,  4 Feb 2025 18:47:29 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tfNv4-0002r1-Ea; Tue, 04 Feb 2025 13:45:12 -0500
+	id 1tfNwd-0003ZO-Eo; Tue, 04 Feb 2025 13:46:47 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1tfNup-0002oC-L6
- for qemu-riscv@nongnu.org; Tue, 04 Feb 2025 13:44:58 -0500
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
+ (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1tfNwR-0003Sl-GU
+ for qemu-riscv@nongnu.org; Tue, 04 Feb 2025 13:46:36 -0500
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1tfNun-0000hs-Pp
- for qemu-riscv@nongnu.org; Tue, 04 Feb 2025 13:44:55 -0500
+ (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1tfNwQ-0001Hv-4t
+ for qemu-riscv@nongnu.org; Tue, 04 Feb 2025 13:46:35 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1738694692;
+ s=mimecast20190719; t=1738694793;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
- bh=eo85zQ+7YfbpOki7Z6UgjhVIPZgWLGNokkR4U8Z31+8=;
- b=ZCswNM7e+1fsA4iqSU9x7beBO16FzpOg6BTSegi4YcOKMkaYxqJY+kcXrSN14VC21ReJqb
- Ska6+OSMucKQ+lIVVdeJqiQAJnsrLgQxAKPvwH0Vfr08dozIMMe9PyZNw8DzIW7vP6o7+I
- yv+l5n01JuCjV/p8l76bAqn1NnjJunw=
-Received: from mail-ed1-f70.google.com (mail-ed1-f70.google.com
- [209.85.208.70]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=F2H3/Z4aHcBfAnig4eBOee22vnmGClRE4iAtkAYv2FE=;
+ b=dIRz+MbFo7P5Fe28f4YmZ+62eRmCPLInmhWgltdB1uuZ69Y5Zizbcq2tqhmgMDCkUj7aCn
+ 3NEEo6+k3Ud4yfvEa9SulP13V4h2/GNFKEQio2LGvUtnYxNYCUOo+aO9+tXZCJEYdtToc5
+ QGjdUCQMB7OaYnC9DwxTGIxlzQ/8Us8=
+Received: from mail-ej1-f72.google.com (mail-ej1-f72.google.com
+ [209.85.218.72]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-249-2viALK8-N9qoDOdHslRcKg-1; Tue, 04 Feb 2025 13:44:50 -0500
-X-MC-Unique: 2viALK8-N9qoDOdHslRcKg-1
-X-Mimecast-MFC-AGG-ID: 2viALK8-N9qoDOdHslRcKg
-Received: by mail-ed1-f70.google.com with SMTP id
- 4fb4d7f45d1cf-5dc5369fad7so6160383a12.3
- for <qemu-riscv@nongnu.org>; Tue, 04 Feb 2025 10:44:50 -0800 (PST)
+ us-mta-576-A4oxqEF-PwKMZFgZbiQomA-1; Tue, 04 Feb 2025 13:46:31 -0500
+X-MC-Unique: A4oxqEF-PwKMZFgZbiQomA-1
+X-Mimecast-MFC-AGG-ID: A4oxqEF-PwKMZFgZbiQomA
+Received: by mail-ej1-f72.google.com with SMTP id
+ a640c23a62f3a-ab2e529dc35so590986566b.3
+ for <qemu-riscv@nongnu.org>; Tue, 04 Feb 2025 10:46:31 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1738694689; x=1739299489;
+ d=1e100.net; s=20230601; t=1738694790; x=1739299590;
  h=content-transfer-encoding:in-reply-to:autocrypt:content-language
  :from:references:cc:to:subject:user-agent:mime-version:date
  :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=eo85zQ+7YfbpOki7Z6UgjhVIPZgWLGNokkR4U8Z31+8=;
- b=kWU8tzQyolHQmeUakMKWE1RrV8uonhq0B0GXRNT361PCzJyEw6sqdq3N0wH/ZuY7of
- eUcFRlCrBJkHyTR6Jl2MezR349YPK87fJE/vr4P8njK+IGSURrgDCvHcV/IfdkNCdhda
- ZpwjKeFC3e6GBikS9cJEFtYReNu9bSdpK5XubzkqIiLDVrB1LSDC+zurpm5gRF+OGgN6
- ixyKqksYbC3UQ1XCwoccs4DUUL2BCC/q56RsMc7e97hXeTe04B59Yg42I5xHxMygBX60
- m/aepVn3CrgIpFxKCqqPcgoB1jzrALQgJjRTJ6Sn7GsRnyy75D43IUrwRMDg5ArU79k6
- ylBg==
-X-Gm-Message-State: AOJu0Yy0YuvJBDJSB0l+/okYDVLFAEsKSa3YHpP+FOQX6H3+XNOECSGD
- nEQrStkuJ7HuBnoMD1Pm4H+QQML+ACumeOdvohJ1yQq3jc9dQl16Gi/hQwto7Q5xAoXwFel/J0/
- FkbF8lFxs1vgs/apCVNQ+9AzWOxWtdTRHzRIxUYpgdI9709E9H4Ll
-X-Gm-Gg: ASbGnctBPJGDGS09EZxKdFzWF1xH1dGyr2CZcKPXwv5WQ1hA3XE1yrei3Q1Mld56Xya
- H+HZR3v3umao4E60mW5m5WSfgO/L37MiKDwtrns2YiN5JEOvHJBZMM4FdeBsPWDYe7D30A2gnZ9
- x3nOsVcXM5DJ4OVA/OhqtjCBrqDxSzYr9DaVP99ZwMKwqHZuAqdYoPM7qr2u9PKSsZ6cZukoN/F
- 9HSJaKvSq4lkvIC02SQbCqRG3lSPpFOWuLFbSS3jZ/MrzOB25kf5eNoepuYWqEKXYYgspWCr6OM
- Uh6vwMlgXOr75NV25PmsVh2kUN2KVTZ/gYNr
-X-Received: by 2002:a17:907:6090:b0:ab6:d7c5:123 with SMTP id
- a640c23a62f3a-ab6d7c5140fmr2701044166b.51.1738694689601; 
- Tue, 04 Feb 2025 10:44:49 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IHvKqjZ9d9xGLWlFQOFqlByEoLOl88wTLPaDW4oRthVrJMC3TjrfbGUI6pJnjZyYeD8NunH9w==
-X-Received: by 2002:a17:907:6090:b0:ab6:d7c5:123 with SMTP id
- a640c23a62f3a-ab6d7c5140fmr2701040366b.51.1738694689079; 
- Tue, 04 Feb 2025 10:44:49 -0800 (PST)
+ bh=F2H3/Z4aHcBfAnig4eBOee22vnmGClRE4iAtkAYv2FE=;
+ b=wNKn0J2JjkbyD+OHacIGIW6TjV8uCIj+IrL7am03YSQpil5Y6XY9KP1P+VAWmdU/e5
+ 0mKIt0sk1XApJDDgxbF3+mP0dRvUhWoIJAKWg1Bm7XKzahz2+aurEhv6a2038JjKtsu1
+ kHRnjQ32Cw2Eidezo1BwyNXquuGxJZF+xIdSppdS3jum5kPJGNEgLH0qZ5P3RX2UZB32
+ c0luy7r7iOGzWHx17Wu7biTGzm+Y1J6i0qeSAkDsheqPMFLgDZNW43byuhyAXvRSHt+U
+ H8kmDoYFwEvvus0gVe4jaRubSZMlGnPb+xJeEvqp07/JKWkn80ED5Gdr4oQ3gn6/rczM
+ ELMQ==
+X-Gm-Message-State: AOJu0YxHbiPy38NksQULy5/asiwpr21Phxgv7o2p2pWlEubl2tdjPOBa
+ TWDFrQR0tJd8XGPoi+q30NnFeVeh69j/CXcpq07K3pzm0zeElm7ynC/yTIf0GurhKSrypPUF8Te
+ /Zz2S2zcmg8hS2i6HXgy7aCBIeiizsTBYquq0j7RKePMthQWfDoPa
+X-Gm-Gg: ASbGncsOlra3DIhbX/4yPHUuI8gc/A7/0B7lfU+i3lYPQOvUQ4O4M3/cR/A956KlZrd
+ o7iUf9H5KPLQgo3swRyA3cJn3H7frWsnaOj4PzPZMBnSX/Rg6jBce9GfBXC80pYLznzw1X1t2KV
+ 02G758TPTkjtYmWFHYSVNYP4uHmnV7FBmFFZO3w/chXlJdMdGpJI9posZ5f6zYffA3SVLCAuKbZ
+ xJtIDpEKVi65QG6L98gCXVzZYtWYbertKUr5+TZDGk+NhDwfm1RbuxSWqmn+ktVxts+mV4srTXs
+ 0Fv1LiIVsB3HUU2VSmRMWyFHtKtPZ35f5cVr
+X-Received: by 2002:a17:907:c24c:b0:ab6:e10e:2f5 with SMTP id
+ a640c23a62f3a-ab6e10e06e6mr2784652666b.37.1738694790454; 
+ Tue, 04 Feb 2025 10:46:30 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IGYA3NT+/7d3Bqk5rq7QleAUF7u57AIfMVfLZJO6nqxwGOVoMF+wU4pZmAUfEUuKaL/Per+zg==
+X-Received: by 2002:a17:907:c24c:b0:ab6:e10e:2f5 with SMTP id
+ a640c23a62f3a-ab6e10e06e6mr2784650566b.37.1738694790092; 
+ Tue, 04 Feb 2025 10:46:30 -0800 (PST)
 Received: from [192.168.0.7] (ip-109-42-48-132.web.vodafone.de.
  [109.42.48.132]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-ab6e47a8490sm955023566b.26.2025.02.04.10.44.47
+ a640c23a62f3a-ab6e4a31b37sm971702566b.143.2025.02.04.10.46.28
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 04 Feb 2025 10:44:48 -0800 (PST)
-Message-ID: <bf0a2502-42e5-410c-83fc-ff966cd242ef@redhat.com>
-Date: Tue, 4 Feb 2025 19:44:46 +0100
+ Tue, 04 Feb 2025 10:46:29 -0800 (PST)
+Message-ID: <208cdda0-4fbb-4106-b847-706635dd8a66@redhat.com>
+Date: Tue, 4 Feb 2025 19:46:28 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 6/8] hw/arm: Remove all invalid uses of
+Subject: Re: [PATCH v2 7/8] hw/riscv: Remove all invalid uses of
  auto_create_sdcard=true
 To: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
  qemu-devel@nongnu.org
@@ -84,7 +84,7 @@ Cc: qemu-riscv@nongnu.org, qemu-arm@nongnu.org,
  Paolo Bonzini <pbonzini@redhat.com>, qemu-s390x@nongnu.org,
  Markus Armbruster <armbru@redhat.com>
 References: <20250204180746.58357-1-philmd@linaro.org>
- <20250204180746.58357-7-philmd@linaro.org>
+ <20250204180746.58357-8-philmd@linaro.org>
 From: Thomas Huth <thuth@redhat.com>
 Autocrypt: addr=thuth@redhat.com; keydata=
  xsFNBFH7eUwBEACzyOXKU+5Pcs6wNpKzrlJwzRl3VGZt95VCdb+FgoU9g11m7FWcOafrVRwU
@@ -128,21 +128,21 @@ Autocrypt: addr=thuth@redhat.com; keydata=
  oiT+z+/E59qj/EKfyce3sbC9XLjXv3mHMrq1tKX4G7IJGnS989E/fg6crv6NHae9Ckm7+lSs
  IQu4bBP2GxiRQ+NV3iV/KU3ebMRzqIC//DCOxzQNFNJAKldPe/bKZMCxEqtVoRkuJtNdp/5a
  yXFZ6TfE1hGKrDBYAm4vrnZ4CXFSBDllL59cFFOJCkn4Xboj/aVxxJxF30bn
-In-Reply-To: <20250204180746.58357-7-philmd@linaro.org>
+In-Reply-To: <20250204180746.58357-8-philmd@linaro.org>
 X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: ppW7s3xRZaJAmvsDaClLOUV_NCunUdKSKtTk5C6RsKg_1738694690
+X-Mimecast-MFC-PROC-ID: M0MYqM8gyFXHQYlidvwAffcbBIYarSj79nE3uaVREFw_1738694790
 X-Mimecast-Originator: redhat.com
 Content-Language: en-US
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=170.10.129.124; envelope-from=thuth@redhat.com;
+Received-SPF: pass client-ip=170.10.133.124; envelope-from=thuth@redhat.com;
  helo=us-smtp-delivery-124.mimecast.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
  DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H5=0.001, RCVD_IN_MSPIKE_WL=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H2=0.001,
  RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001, RCVD_IN_VALIDITY_SAFE_BLOCKED=0.001,
  SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -163,172 +163,18 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 On 04/02/2025 19.07, Philippe Mathieu-Daudé wrote:
 > MachineClass::auto_create_sdcard is only useful to automatically
 > create a SD card, attach a IF_SD block drive to it and plug the
-> card onto a SD bus. None of the ARM machines modified by this
+> card onto a SD bus. None of the RISCV machines modified by this
 > commit try to use the IF_SD interface.
 > 
 > Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 > ---
-...
-> diff --git a/hw/arm/bananapi_m2u.c b/hw/arm/bananapi_m2u.c
-> index 4d84d10d24c..0a4b6f29b1c 100644
-> --- a/hw/arm/bananapi_m2u.c
-> +++ b/hw/arm/bananapi_m2u.c
-> @@ -141,7 +141,6 @@ static void bpim2u_machine_init(MachineClass *mc)
->       mc->valid_cpu_types = valid_cpu_types;
->       mc->default_ram_size = 1 * GiB;
->       mc->default_ram_id = "bpim2u.ram";
-> -    mc->auto_create_sdcard = true;
->   }
+>   hw/riscv/opentitan.c | 1 -
+>   hw/riscv/shakti_c.c  | 1 -
+>   hw/riscv/sifive_e.c  | 1 -
+>   hw/riscv/spike.c     | 1 -
+>   hw/riscv/virt.c      | 1 -
+>   5 files changed, 5 deletions(-)
 
-The bananapi seems to use IF_SD ... could you please double-check whether 
-this is the right change here?
-
-> diff --git a/hw/arm/exynos4_boards.c b/hw/arm/exynos4_boards.c
-> index 43dc89d902e..2410e2a28e8 100644
-> --- a/hw/arm/exynos4_boards.c
-> +++ b/hw/arm/exynos4_boards.c
-> @@ -165,7 +165,6 @@ static void nuri_class_init(ObjectClass *oc, void *data)
->       mc->min_cpus = EXYNOS4210_NCPUS;
->       mc->default_cpus = EXYNOS4210_NCPUS;
->       mc->ignore_memory_transaction_failures = true;
-> -    mc->auto_create_sdcard = true;
->   }
->   
->   static const TypeInfo nuri_type = {
-> @@ -185,7 +184,6 @@ static void smdkc210_class_init(ObjectClass *oc, void *data)
->       mc->min_cpus = EXYNOS4210_NCPUS;
->       mc->default_cpus = EXYNOS4210_NCPUS;
->       mc->ignore_memory_transaction_failures = true;
-> -    mc->auto_create_sdcard = true;
->   }
->   
->   static const TypeInfo smdkc210_type = {
-
-I think this is likely wrong, too - they use IF_SD via exynos4210.c, don't they?
-
-> diff --git a/hw/arm/imx25_pdk.c b/hw/arm/imx25_pdk.c
-> index e95ea5e4e18..c9c2e5dd3b1 100644
-> --- a/hw/arm/imx25_pdk.c
-> +++ b/hw/arm/imx25_pdk.c
-> @@ -147,7 +147,6 @@ static void imx25_pdk_machine_init(MachineClass *mc)
->       mc->init = imx25_pdk_init;
->       mc->ignore_memory_transaction_failures = true;
->       mc->default_ram_id = "imx25.ram";
-> -    mc->auto_create_sdcard = true;
->   }
-
-This machine seems to use IF_SD, too?
-
-> diff --git a/hw/arm/mcimx6ul-evk.c b/hw/arm/mcimx6ul-evk.c
-> index 86982cb0772..690cb64ef36 100644
-> --- a/hw/arm/mcimx6ul-evk.c
-> +++ b/hw/arm/mcimx6ul-evk.c
-> @@ -74,6 +74,5 @@ static void mcimx6ul_evk_machine_init(MachineClass *mc)
->       mc->init = mcimx6ul_evk_init;
->       mc->max_cpus = FSL_IMX6UL_NUM_CPUS;
->       mc->default_ram_id = "mcimx6ul-evk.ram";
-> -    mc->auto_create_sdcard = true;
->   }
->   DEFINE_MACHINE("mcimx6ul-evk", mcimx6ul_evk_machine_init)
-
-dito?
-
-> diff --git a/hw/arm/mcimx7d-sabre.c b/hw/arm/mcimx7d-sabre.c
-> index 33119610113..ac1f57f0671 100644
-> --- a/hw/arm/mcimx7d-sabre.c
-> +++ b/hw/arm/mcimx7d-sabre.c
-> @@ -74,6 +74,7 @@ static void mcimx7d_sabre_machine_init(MachineClass *mc)
->       mc->init = mcimx7d_sabre_init;
->       mc->max_cpus = FSL_IMX7_NUM_CPUS;
->       mc->default_ram_id = "mcimx7d-sabre.ram";
-> -    mc->auto_create_sdcard = true;
-> +
->   }
-
-dito?
-
-> diff --git a/hw/arm/stellaris.c b/hw/arm/stellaris.c
-> index df520c91906..00412193a4a 100644
-> --- a/hw/arm/stellaris.c
-> +++ b/hw/arm/stellaris.c
-> @@ -1421,7 +1421,6 @@ static void lm3s811evb_class_init(ObjectClass *oc, void *data)
->       mc->init = lm3s811evb_init;
->       mc->ignore_memory_transaction_failures = true;
->       mc->default_cpu_type = ARM_CPU_TYPE_NAME("cortex-m3");
-> -    mc->auto_create_sdcard = true;
->   }
-
-dito?
-
-> diff --git a/hw/arm/versatilepb.c b/hw/arm/versatilepb.c
-> index 941616cd25b..bc4522989ec 100644
-> --- a/hw/arm/versatilepb.c
-> +++ b/hw/arm/versatilepb.c
-> @@ -419,7 +419,6 @@ static void versatilepb_class_init(ObjectClass *oc, void *data)
->       mc->ignore_memory_transaction_failures = true;
->       mc->default_cpu_type = ARM_CPU_TYPE_NAME("arm926");
->       mc->default_ram_id = "versatile.ram";
-> -    mc->auto_create_sdcard = true;
->   
->       machine_add_audiodev_property(mc);
->   }
-> @@ -440,7 +439,6 @@ static void versatileab_class_init(ObjectClass *oc, void *data)
->       mc->ignore_memory_transaction_failures = true;
->       mc->default_cpu_type = ARM_CPU_TYPE_NAME("arm926");
->       mc->default_ram_id = "versatile.ram";
-> -    mc->auto_create_sdcard = true;
->   
->       machine_add_audiodev_property(mc);
->   }
-
-dito?
-
-> diff --git a/hw/arm/xilinx_zynq.c b/hw/arm/xilinx_zynq.c
-> index 2d626a96b9b..3c6a4604cc9 100644
-> --- a/hw/arm/xilinx_zynq.c
-> +++ b/hw/arm/xilinx_zynq.c
-> @@ -466,7 +466,6 @@ static void zynq_machine_class_init(ObjectClass *oc, void *data)
->       mc->ignore_memory_transaction_failures = true;
->       mc->valid_cpu_types = valid_cpu_types;
->       mc->default_ram_id = "zynq.ext_ram";
-> -    mc->auto_create_sdcard = true;
->       prop = object_class_property_add_str(oc, "boot-mode", NULL,
->                                            zynq_set_boot_mode);
->       object_class_property_set_description(oc, "boot-mode",
-
-I'm confused about this one ... it used to have no_sdcard = 1 , but it still 
-seems to use IF_SD ?
-
-> diff --git a/hw/arm/xlnx-versal-virt.c b/hw/arm/xlnx-versal-virt.c
-> index 0c6f0359e3d..1401d37959e 100644
-> --- a/hw/arm/xlnx-versal-virt.c
-> +++ b/hw/arm/xlnx-versal-virt.c
-> @@ -818,7 +818,6 @@ static void versal_virt_machine_class_init(ObjectClass *oc, void *data)
->       mc->max_cpus = XLNX_VERSAL_NR_ACPUS + XLNX_VERSAL_NR_RCPUS;
->       mc->default_cpus = XLNX_VERSAL_NR_ACPUS + XLNX_VERSAL_NR_RCPUS;
->       mc->no_cdrom = true;
-> -    mc->auto_create_sdcard = true;
->       mc->default_ram_id = "ddr";
->       object_class_property_add_str(oc, "ospi-flash", versal_get_ospi_model,
->                                      versal_set_ospi_model);
-
-Uses IF_SD, too?
-
-> diff --git a/hw/arm/xlnx-zcu102.c b/hw/arm/xlnx-zcu102.c
-> index 4fdb153e4d8..70fb444bbd9 100644
-> --- a/hw/arm/xlnx-zcu102.c
-> +++ b/hw/arm/xlnx-zcu102.c
-> @@ -280,7 +280,6 @@ static void xlnx_zcu102_machine_class_init(ObjectClass *oc, void *data)
->       mc->max_cpus = XLNX_ZYNQMP_NUM_APU_CPUS + XLNX_ZYNQMP_NUM_RPU_CPUS;
->       mc->default_cpus = XLNX_ZYNQMP_NUM_APU_CPUS;
->       mc->default_ram_id = "ddr-ram";
-> -    mc->auto_create_sdcard = true;
->   
->       machine_add_audiodev_property(mc);
->       object_class_property_add_bool(oc, "secure", zcu102_get_secure,
-
-dito ?
-
-  Thomas
+Reviewed-by: Thomas Huth <thuth@redhat.com>
 
 
