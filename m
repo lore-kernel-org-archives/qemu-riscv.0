@@ -4,80 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 68E59C0218F
-	for <qemu-riscv@archiver.kernel.org>; Tue,  4 Feb 2025 07:07:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9B6A2C0218F
+	for <qemu-riscv@archiver.kernel.org>; Tue,  4 Feb 2025 07:11:23 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tfD2I-0001BX-2q; Tue, 04 Feb 2025 02:07:54 -0500
+	id 1tfD5S-0002LO-HR; Tue, 04 Feb 2025 02:11:10 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1tfD2D-00017m-8M
- for qemu-riscv@nongnu.org; Tue, 04 Feb 2025 02:07:49 -0500
+ (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1tfD5Q-0002Kg-DJ
+ for qemu-riscv@nongnu.org; Tue, 04 Feb 2025 02:11:08 -0500
 Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1tfD2B-0004Ib-Jq
- for qemu-riscv@nongnu.org; Tue, 04 Feb 2025 02:07:49 -0500
+ (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1tfD5O-0004xY-85
+ for qemu-riscv@nongnu.org; Tue, 04 Feb 2025 02:11:07 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1738652866;
+ s=mimecast20190719; t=1738653065;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
- bh=uNjCgVuyeIElYttdKJKPR46f1EfWRRdzrsundMziGWI=;
- b=eSUgeYtXfntFkajoqLrthckq8jaB7m3hTrkpU9k1PYBwczWjWZBJ3h2/neLNZN6vBD/1Af
- mGOgXuG9iv+ZV0zi9LWLJoQmX2qB9vQiuT35Qlmp5rNidSxbM3SBnb3PqF7RYalJFRicvj
- qdfgCDmbRaI5bexvn/az3D5fvLw/0oc=
+ bh=QeKfa3/FqNOrTsiIT5bZDFSMoxo3ZoxiTxGpBbOMIG8=;
+ b=Zy21hbddpC87huiGLWesZ5+xkjPa75aXHvnRFQGQ2TANIFoVwW2WYP8mlPtkr1EnbR2GGD
+ 5oYeCxjz5TSWFhCfLNqwmSJLHo00adTqjEmpSVp5wHZaxeheS5+10TB8jYEqBYiwH0Xoo+
+ tzQkH0Q+OuH8aAWOdJX7WONTzgpsX5U=
 Received: from mail-wr1-f71.google.com (mail-wr1-f71.google.com
  [209.85.221.71]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-113-ge-aDmv0NaSjihLxz3Oygw-1; Tue, 04 Feb 2025 02:07:44 -0500
-X-MC-Unique: ge-aDmv0NaSjihLxz3Oygw-1
-X-Mimecast-MFC-AGG-ID: ge-aDmv0NaSjihLxz3Oygw
+ us-mta-679-Uin2ydPKNsG-ab-BcmCbxQ-1; Tue, 04 Feb 2025 02:11:04 -0500
+X-MC-Unique: Uin2ydPKNsG-ab-BcmCbxQ-1
+X-Mimecast-MFC-AGG-ID: Uin2ydPKNsG-ab-BcmCbxQ
 Received: by mail-wr1-f71.google.com with SMTP id
- ffacd0b85a97d-38dab928a84so139060f8f.0
- for <qemu-riscv@nongnu.org>; Mon, 03 Feb 2025 23:07:44 -0800 (PST)
+ ffacd0b85a97d-38bf4913659so3588346f8f.1
+ for <qemu-riscv@nongnu.org>; Mon, 03 Feb 2025 23:11:03 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1738652863; x=1739257663;
+ d=1e100.net; s=20230601; t=1738653063; x=1739257863;
  h=content-transfer-encoding:in-reply-to:autocrypt:content-language
  :from:references:cc:to:subject:user-agent:mime-version:date
  :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=uNjCgVuyeIElYttdKJKPR46f1EfWRRdzrsundMziGWI=;
- b=GiRiZdf2NGGJ48hTxDAG9GIN9RIm4UX5jog8tyNxOclwQ7RpKS5BwIlZ7zi9pW35Ba
- F3ZO6wGMqxMGCwgDmTksCMLHJ06NmM1P7kRv40FANzZx8a6CMx2DB1ukD9xDcPop8OCq
- bhnrfP2RK7XC+eSpFx1RZ3oehoJ2wgBjbwE12lMnm3XGeLtt4Utv8v+JKypxJf4ZNsk0
- 5rUjCybdYeoMOy7qYda+H9GosTl6uyvMi/cO0gZz4HkNvIzc6Fd5j5w1ql9I2f9hwwbX
- 7O4GaPbY6urx9v//bEzU7kIfVi7qu5Bg3o0TYO7ZC8kd5T6DXqisZPevk7zjTxE2hatU
- EZYQ==
+ bh=QeKfa3/FqNOrTsiIT5bZDFSMoxo3ZoxiTxGpBbOMIG8=;
+ b=DyV00MWGLkJhI7T3aQJnFf/f9oluuapxegY/eehKlpc4GDpANilUQ8XSGQLGVBL2R3
+ UjfCsRlgQPE0bJj2DqofVWW8G0zvDO63hWOTVE+qc/nsay9OqjnnUyWxYJ1MSBfyD3b7
+ eoWqEPmE4Nkseztn/EG5QJpd96ikXGMNiiwjMx7QoTIki3Lei+SiP8qSiFkvWTQ5pw7p
+ oZRpq3rO5il5+MhcaeZUNkD1IkFSN3RhxvhweJDiiJ26eBqJNlsoBv+JvyD7nateVUGX
+ exJ6FHsDEq51ncKebNVIayJoBOeExY3Ne8/dk3o9HeoxwxUD/wl0dKdhpEIswg/BspRr
+ OSDQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWDO2XwZq79sHeS3iJ3M6wkgMZ7+QmSACCLv4D2zIo1Fxk76fYAEhM/ErOzA4uKY5blb9UkxpJfcygK@nongnu.org
-X-Gm-Message-State: AOJu0YxLvx/gQMOcYWnp9zuArJYgbd98D8avImI/X2dXvJRwu43kOqRJ
- pgKmSxi9BYbqI3QN230BAIQXsVrOiLyMdzWSPnm6FgsPY3etneSIDh4D3XvyB6tWW0IjBKjc8Ue
- o0JudIiamLsKdQbzsq4dpNy9vGCeu5HbmceOgMuJYWL2IRrQxLE27
-X-Gm-Gg: ASbGncus4GlhlXAxbkZIjEmUPYhS2bIwIVWFZMfxixaGY2PoiAdDzDsv0t0iRONa5E1
- Deqy4yKCuZ5ZkIMMfQYNBIXQg+11wN4XFDfCrFygzK8HN1f1paFt86G5GovUej7sYBp+hmKAdcE
- vIbeh0eBSXvy4yiQK0CJrGUDWJ659HPDb4ED8zpBw5G4VuZcecLytmV2ARcBcCDd53SukJDT5zt
- YYG+3ECdGqhE9K+/9AcZinjaAcdWX97KIdlA1DjIDgkjE9xwbuQD5uy1EQ0SIyNz0PqtF9AqVAh
- pjP09h68PUgIQiQw/STfkFBMLLYRkck5D15y
-X-Received: by 2002:a5d:6d86:0:b0:38a:518d:97b with SMTP id
- ffacd0b85a97d-38c519311d8mr19192005f8f.11.1738652863611; 
- Mon, 03 Feb 2025 23:07:43 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IFSn1LZCScag6to9Tp3UuDQTRV5bpNr9hgs/eMUBEsWbZP5j9P7I/HeqME+MxG7HqYfaGRiGg==
-X-Received: by 2002:a5d:6d86:0:b0:38a:518d:97b with SMTP id
- ffacd0b85a97d-38c519311d8mr19191986f8f.11.1738652863259; 
- Mon, 03 Feb 2025 23:07:43 -0800 (PST)
+ AJvYcCXoNGph8OxBlCzI1ZBen+TFVvhqPNAKv99LioDXyyyItS8wydFRctayJL3s0vktyCP7NryhexzlSg34@nongnu.org
+X-Gm-Message-State: AOJu0YxueaOHY2EXnWVt/0BShs/irJeEG2wr90iTFXBETx9hi7oJ48wT
+ 2qx9bGzSwDWpQQ2gXFra7ZayY3bMv4lhAgIzBgJ/Bkq+kM+Wvj9FI1EBKBRj8mxsrc9O9sOKMU/
+ 3tWzvP1P1hIU7nqoqAHeLw4cZsaF6TPHquxfV51lzUN81Nkr8Xj98
+X-Gm-Gg: ASbGnctAQoohJH2ByqDPF3HQGBlTV2+AzdfeIDfA41wiaHInzWZRr2iuZBWr9jc5hUT
+ tC9vQQvayfcwMLBCHEQw7I5Hk7pjoQyrlyKRh/ZvfCSTcCT4K0/qTSVu/u7aNlyH4VTeyZ/stDR
+ G2gloNTXpGYRe36bI89v952f7V/PNaiKz78Nq0oWvFZdAuZfUKWs7oxvjCWbsg6x16I19alRlDO
+ 7pT6yDktNvTAe2KKQPrnoB9RFYk2eXA8vpU21CTqfrKUZj7HxiX9kaP3gc77s8m3aatBlYsZSVo
+ w3wE2oRmc6V62TRIaP0WscsHqcwPwBFGOgwP
+X-Received: by 2002:a05:6000:1884:b0:388:e377:8a1b with SMTP id
+ ffacd0b85a97d-38c51b60c11mr19565154f8f.28.1738653062951; 
+ Mon, 03 Feb 2025 23:11:02 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IE83OA2ZdyUwpCoRoa/dxWcenK51tCxhFW3QmQtkn2l5hNJ2xyhgJCA3aB1GNno4GhZ+fAV0g==
+X-Received: by 2002:a05:6000:1884:b0:388:e377:8a1b with SMTP id
+ ffacd0b85a97d-38c51b60c11mr19565135f8f.28.1738653062640; 
+ Mon, 03 Feb 2025 23:11:02 -0800 (PST)
 Received: from [192.168.0.7] (ip-109-42-48-132.web.vodafone.de.
  [109.42.48.132]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-38c5c102d2esm15119864f8f.33.2025.02.03.23.07.41
+ ffacd0b85a97d-38c5c1016easm14856161f8f.24.2025.02.03.23.11.01
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 03 Feb 2025 23:07:42 -0800 (PST)
-Message-ID: <47db9d33-8fa4-4ebf-90c9-db6e252cc38e@redhat.com>
-Date: Tue, 4 Feb 2025 08:07:41 +0100
+ Mon, 03 Feb 2025 23:11:02 -0800 (PST)
+Message-ID: <03497b94-e681-4bf7-8e1a-471d616219da@redhat.com>
+Date: Tue, 4 Feb 2025 08:11:00 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH-for-10.0 3/3] hw/boards: Rename no_sdcard ->
- create_default_sdcard_drive
+Subject: Re: [PATCH-for-10.0 0/3] hw/boards: Try to make sense of
+ MachineClass::no_sdcard flag
 To: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
  qemu-devel@nongnu.org
 Cc: Peter Maydell <peter.maydell@linaro.org>,
@@ -86,7 +86,7 @@ Cc: Peter Maydell <peter.maydell@linaro.org>,
  Paolo Bonzini <pbonzini@redhat.com>, qemu-s390x@nongnu.org,
  qemu-arm@nongnu.org
 References: <20241125181420.24424-1-philmd@linaro.org>
- <20241125181420.24424-4-philmd@linaro.org>
+ <219be312-4acc-46c9-8a56-16e5cb483ae4@linaro.org>
 From: Thomas Huth <thuth@redhat.com>
 Autocrypt: addr=thuth@redhat.com; keydata=
  xsFNBFH7eUwBEACzyOXKU+5Pcs6wNpKzrlJwzRl3VGZt95VCdb+FgoU9g11m7FWcOafrVRwU
@@ -130,9 +130,9 @@ Autocrypt: addr=thuth@redhat.com; keydata=
  oiT+z+/E59qj/EKfyce3sbC9XLjXv3mHMrq1tKX4G7IJGnS989E/fg6crv6NHae9Ckm7+lSs
  IQu4bBP2GxiRQ+NV3iV/KU3ebMRzqIC//DCOxzQNFNJAKldPe/bKZMCxEqtVoRkuJtNdp/5a
  yXFZ6TfE1hGKrDBYAm4vrnZ4CXFSBDllL59cFFOJCkn4Xboj/aVxxJxF30bn
-In-Reply-To: <20241125181420.24424-4-philmd@linaro.org>
+In-Reply-To: <219be312-4acc-46c9-8a56-16e5cb483ae4@linaro.org>
 X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: lOX4qokySJaewKYBLhL7sw13D13c8rVkQcu8e7e9NZU_1738652864
+X-Mimecast-MFC-PROC-ID: bc33KrIQECOkVeuqEwihPkIHPxVuFX-OvXB_-x1WM3Q_1738653063
 X-Mimecast-Originator: redhat.com
 Content-Language: en-US
 Content-Type: text/plain; charset=UTF-8; format=flowed
@@ -162,49 +162,29 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 25/11/2024 19.14, Philippe Mathieu-Daudé wrote:
-> Invert the 'no_sdcard' logic, renaming it as the more
-> explicit "create_default_sdcard_drive". Machines are
-> supposed to create a SD Card drive when this flag is
-> set. In many cases it doesn't make much sense (as
-> boards don't expose SD Card host controller),
+On 26/11/2024 06.24, Philippe Mathieu-Daudé wrote:
+> On 25/11/24 19:14, Philippe Mathieu-Daudé wrote:
+>> Invert MachineClass 'no_sdcard' flag logic and rename it
+>> to 'create_default_sdcard_drive' to make sense of this
+>> default value applied to all machines. No logical change
+>> intended.
+>>
+>> Philippe Mathieu-Daudé (3):
+>>    hw/boards: Convert no_sdcard flag to OnOffAuto tri-state
+>>    hw/boards: Explicit no_sdcard=false as ON_OFF_AUTO_OFF
+>>    hw/boards: Rename no_sdcard -> create_default_sdcard_drive
 
-This indeed shows the insanity of the previous state, thanks for tackling it!
+Sorry, this felt through the cracks, but I think this series here is indeed 
+a much better idea than the code churn in your other series that simply 
+changes the bitfields into booleans.
 
-> but this
-> is patch only aims to expose that nonsense; so no
-> logical change intended (mechanical patch using gsed).
+> I expect next steps to be:
 > 
-> Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
-> ---
-...
-> diff --git a/include/hw/boards.h b/include/hw/boards.h
-> index 86fcf9c81f..5cec73ae68 100644
-> --- a/include/hw/boards.h
-> +++ b/include/hw/boards.h
-> @@ -285,7 +285,7 @@ struct MachineClass {
->           no_cdrom:1,
->           pci_allow_0_address:1,
->           legacy_fw_cfg_order:1;
-> -    OnOffAuto no_sdcard;
-> +    bool create_default_sdcard_drive;
+>   - Remove nonsense create_default_sdcard_drive (where
+>     machines don't have SDHCI devices)
 
-Can we maybe still bikeshed about the naming here? The current name is a 
-little bit long, and maybe we could "standardize" the prefix of the flags 
-here a little bit. We already have one switch starting with "has_..." and 
-some others starting with "auto_enable_...", so I'd maybe suggest one of 
-those instead:
-
-   has_default_sdcard
-   auto_enable_sdcard
-
-WDYT?
+A fourth patch like this would be very welcome, too!
 
   Thomas
-
-
->       bool is_default;
->       const char *default_machine_opts;
->       const char *default_boot_order;
 
 
