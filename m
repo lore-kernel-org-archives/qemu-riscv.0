@@ -4,148 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 868D8C02193
-	for <qemu-riscv@archiver.kernel.org>; Tue,  4 Feb 2025 18:28:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 77B10C02193
+	for <qemu-riscv@archiver.kernel.org>; Tue,  4 Feb 2025 18:29:55 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tfNeM-0007OH-S6; Tue, 04 Feb 2025 13:27:54 -0500
+	id 1tfNfk-0000ML-GI; Tue, 04 Feb 2025 13:29:20 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1tfNeK-0007Jd-Di
- for qemu-riscv@nongnu.org; Tue, 04 Feb 2025 13:27:52 -0500
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1tfNeI-0004E1-Rk
- for qemu-riscv@nongnu.org; Tue, 04 Feb 2025 13:27:52 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1738693670;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
- bh=WXp4akxJ/cyQ8iMEiQOrjKd1+VRa0ubwv6rlUgw6HGQ=;
- b=LEQpgEHyWGOSKD/7hkMgBxWzmP7GFtMHx332+TMn7uRBame/n5YC6VfHCw9aFzS7PlGvRv
- W5IpQb2jaw7vmU85jHvL+lkysktXSakTrHN+rL9bPc1U28Nm6nReGzsPgdtf3DK2v44gNe
- oLn71jLca5VlsyvISk1Bq+xnLUB0Wlc=
-Received: from mail-ej1-f70.google.com (mail-ej1-f70.google.com
- [209.85.218.70]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-106-rUJ6bjPHP86IuCGI1UCpQA-1; Tue, 04 Feb 2025 13:27:48 -0500
-X-MC-Unique: rUJ6bjPHP86IuCGI1UCpQA-1
-X-Mimecast-MFC-AGG-ID: rUJ6bjPHP86IuCGI1UCpQA
-Received: by mail-ej1-f70.google.com with SMTP id
- a640c23a62f3a-ab547c18515so247103966b.2
- for <qemu-riscv@nongnu.org>; Tue, 04 Feb 2025 10:27:48 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tfNfh-0000KZ-9J
+ for qemu-riscv@nongnu.org; Tue, 04 Feb 2025 13:29:18 -0500
+Received: from mail-wm1-x333.google.com ([2a00:1450:4864:20::333])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tfNfc-0004mb-HG
+ for qemu-riscv@nongnu.org; Tue, 04 Feb 2025 13:29:16 -0500
+Received: by mail-wm1-x333.google.com with SMTP id
+ 5b1f17b1804b1-43626213fffso305475e9.1
+ for <qemu-riscv@nongnu.org>; Tue, 04 Feb 2025 10:29:07 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1738693746; x=1739298546; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=Ykqranp7X4nBDBQjg4lR9yhZHLNN6ITQwGAO0yzpXkM=;
+ b=K/ly31RNmCq4PH2GUmW0rKwKND5khicvbw1lfL2gi5NeN6M/6CHz7hauwqZ7+a7/Ae
+ hWUS6t8VTS3HtaddpC1+J8Pf3UuASyMj+KqtkZGdTk4FwR+W4wIJfX4w811mI6uh6KqK
+ +6rk6AgsuHV2oCbC+9yVHDJ0QlmgDLXdfWNzP/uRvlw5fdc9hirWecCmX8rb6eM3EEEf
+ 81QpgYZfx2me+znEVIeI88Tc/vdGh0RkWGlYmd25BorrQu+s3SudkxGytHlUa8B4eokS
+ t5qkBDNLilaeF6JK2jcL5vxOfx24EOL2VaDQVzTmsPPtrmzClBh+rrfty5fQFAknZTgu
+ yLAg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1738693668; x=1739298468;
- h=content-transfer-encoding:in-reply-to:autocrypt:content-language
- :from:references:cc:to:subject:user-agent:mime-version:date
- :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1738693746; x=1739298546;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=WXp4akxJ/cyQ8iMEiQOrjKd1+VRa0ubwv6rlUgw6HGQ=;
- b=lKnzDdAJam5r2h1tJYz5lCpZzob9RZY4PK2+tcAZF+qY1wBd+8VqeQN2Rg3PAk/aDj
- MVjysh8wIdetzF8kc+w4IuXns83jlXvt5LUpZQcjLlUprtjA1DLRrhZS87UMt+YnMXMu
- wZkLsSXyFVB3Ik9L8nmwertvm9HgKvwCs1Jh7hSLUMzqmJZmcVjXiwnPQPx0cCDmidlI
- FDg+KEmAcv9ONiMvJmaG70f5+OoJOe4TvFU59b7wk/Vlp7f8Yr7nZuOxpctautDpWGNu
- uipBI0GijGhG9GzBd2Td9HvYHeyyLM7lMlkQrDl4HmMEF8vSJIIn7RUSecTxqDkeE0XX
- Rr4A==
-X-Gm-Message-State: AOJu0YyST8CmxcWu8yvqBFyeY6ZNt7B9u+e2wMrO8Zl5rd0ZOii6J8RF
- nwqz18kUVFQVbOT36VMIqDS9QSkCLwHmD91fk85dcs3gr4er8V4N0soc/CoycPLqbYLtuhfn/0V
- KBIqwkpu0UVGuK4+XleoitRYjWZhQ6QWcte2Tx22oBJ8JNvDt+2hM
-X-Gm-Gg: ASbGnctMQKH72m18oAQ9vhY8NjEVfmF256PX7NU+UOyi5BAiY8NNrr/mP99XUkigTd0
- qALGHK4zQDPXctNd1KohcnpKLXZX0+tpCcmM/rCjxu22D3uCI+p4j5CxsyqUuj+yCIXhJkZvtET
- rJplIZQXI1ct8IR8guGQw4JUJn0x+aFDU1ChZxKjy0t28/V9UHxDajEahCWY4UhLs7BsKkMJ8mB
- PUxK8LjtJnLcwikZU4M8jp6b7U6ZujRMw8PVLSPZ9/KojAwweb0IztLWUtsBeKTtNTJBjSQwaTz
- VFQOiMuz053l2P9gSKlN6SU2QO5YZLNqydM4
-X-Received: by 2002:a17:907:2ce5:b0:ab2:c0c8:383f with SMTP id
- a640c23a62f3a-ab6cfcc514emr2829758366b.1.1738693667667; 
- Tue, 04 Feb 2025 10:27:47 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IFV7hP25416Vnzi24T77YfEMfGP4pDJzbJ/xNVJ43UQTcw6icNkyvxHPjKHtpeDiPNnTHyo4g==
-X-Received: by 2002:a17:907:2ce5:b0:ab2:c0c8:383f with SMTP id
- a640c23a62f3a-ab6cfcc514emr2829756166b.1.1738693667281; 
- Tue, 04 Feb 2025 10:27:47 -0800 (PST)
-Received: from [192.168.0.7] (ip-109-42-48-132.web.vodafone.de.
- [109.42.48.132]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-ab6e47cf930sm971116666b.54.2025.02.04.10.27.45
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 04 Feb 2025 10:27:46 -0800 (PST)
-Message-ID: <608af675-4c8d-456f-941a-a1e8d1e1bb60@redhat.com>
-Date: Tue, 4 Feb 2025 19:27:45 +0100
+ bh=Ykqranp7X4nBDBQjg4lR9yhZHLNN6ITQwGAO0yzpXkM=;
+ b=katehakyy+1Gynx3FIvAAuAJI40XqGD3Asa53gXiIwFeiNkG2QhfkDYLMILzEFhyft
+ yRBgUOc8quwWFv5uXkd/trpQDQ6H0GYCowlqN8qNMB8TMsp71rCeIwrgv3XEsGqmpVB8
+ ni6YATfWKh5deHa/yuG54n5xdkdN+gnDpsiy0PERINUHqNvpPDa/huMFiKXJaf/kEJ4Z
+ 4EMJJWYi7jOk3kDkSrtEIQlIbaNItX2mOcASxcNgvwhosOnvR4D4SfsOZyPgDKwTBGsF
+ dxlwYHQVr3lJEB4S16smeCKSjYe5+sGbNMX1kvhfOzeHeaYa2W8ytDx194aIRyHzVACs
+ gmmA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXjd/3l6w19ZLsrBvvFX4/DELGOYF0K9R4lgqIbeWm5n2nX9x5k7ynQO2k90Lj7qI8+qCAONLwlCAI7@nongnu.org
+X-Gm-Message-State: AOJu0YxuCAVMXe6shzGcGtchFS4ldiuZ2BsxJs97gHpg9xggPgIdrxOU
+ FBDdD82wMx1w5AYSwxKzC0DwmS7vVZs0tiveG8hF4QQFU5SOyKvcuNPAeLjwGvM=
+X-Gm-Gg: ASbGncvYieFoDs+Tg6Q3CmipFrqvKOP1Z7SteKDwofespvTRKeWvSx2MUluy8U6BbmZ
+ /MuYGiq7y6Uupb9ss+SuGTG97mkRoc5CS9MF7hlLqNnx0O0T9/bH3M+QnuNzXfjh7qtNH0djoo7
+ edoOuiebIa0Tuyv3YvtS7DhH63V2Bz/o8Myrzl9GcrBhQPlx/UWwOxAnyZv0tskG6SgtLIQFFyj
+ IshMeLrptF6KuQFzNVX0oVgVMJU3+aN8gkdvyERRZeuFrbOWMINljDSw/cERDIuMpe2o6yq5+sr
+ xz7z5g5FOqkJIZKWlFuo1OuOmDyx9MRGoRe9VEkfjxAs8tHqZGJzF0Fq9LPFCGqBoA==
+X-Google-Smtp-Source: AGHT+IGZ1wh5KslGHvIjxLM9k0hAjqp9q/rO4iR3ggiJcVyrHvZw5p6VEgicX0iRunjxZNGww74cdQ==
+X-Received: by 2002:a05:600c:1784:b0:436:1af3:5b13 with SMTP id
+ 5b1f17b1804b1-43905f99943mr34458085e9.15.1738693745465; 
+ Tue, 04 Feb 2025 10:29:05 -0800 (PST)
+Received: from localhost.localdomain (88-187-86-199.subs.proxad.net.
+ [88.187.86.199]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-438dcc26d6fsm231220125e9.14.2025.02.04.10.29.04
+ (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
+ Tue, 04 Feb 2025 10:29:05 -0800 (PST)
+From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+To: qemu-devel@nongnu.org
+Cc: qemu-ppc@nongnu.org, Thomas Huth <thuth@redhat.com>,
+ Paolo Bonzini <pbonzini@redhat.com>,
+ Peter Maydell <peter.maydell@linaro.org>,
+ Markus Armbruster <armbru@redhat.com>,
+ =?UTF-8?q?Daniel=20P=20=2E=20Berrang=C3=A9?= <berrange@redhat.com>,
+ qemu-arm@nongnu.org, qemu-riscv@nongnu.org, qemu-s390x@nongnu.org,
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+Subject: [PATCH v3 0/7] hw/boards: Try to make sense of
+ MachineClass::no_sdcard flag
+Date: Tue,  4 Feb 2025 19:28:56 +0100
+Message-ID: <20250204182903.59200-1-philmd@linaro.org>
+X-Mailer: git-send-email 2.47.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 5/8] hw/ppc/e500: Remove empty
- ppce500_machine_class_init()
-To: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, qemu-arm@nongnu.org,
- Peter Maydell <peter.maydell@linaro.org>, qemu-ppc@nongnu.org,
- =?UTF-8?Q?Daniel_P_=2E_Berrang=C3=A9?= <berrange@redhat.com>,
- Paolo Bonzini <pbonzini@redhat.com>, qemu-s390x@nongnu.org,
- Markus Armbruster <armbru@redhat.com>
-References: <20250204180746.58357-1-philmd@linaro.org>
- <20250204180746.58357-6-philmd@linaro.org>
- <4c200141-d9c9-4a8f-832e-38f4aeeb0ed0@linaro.org>
-From: Thomas Huth <thuth@redhat.com>
-Autocrypt: addr=thuth@redhat.com; keydata=
- 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
-In-Reply-To: <4c200141-d9c9-4a8f-832e-38f4aeeb0ed0@linaro.org>
-X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: mv93euUPYnIM6UkVsxAy6y8mXgbQ4CjUe5reEfm3HfM_1738693668
-X-Mimecast-Originator: redhat.com
-Content-Language: en-US
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=170.10.133.124; envelope-from=thuth@redhat.com;
- helo=us-smtp-delivery-124.mimecast.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::333;
+ envelope-from=philmd@linaro.org; helo=mail-wm1-x333.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H2=0.001,
- RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001, RCVD_IN_VALIDITY_SAFE_BLOCKED=0.001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -161,30 +103,44 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 04/02/2025 19.12, Philippe Mathieu-Daudé wrote:
-> On 4/2/25 19:07, Philippe Mathieu-Daudé wrote:
->> Previous commit left this method empty, remove it.
->>
->> Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
->> ---
->>   hw/ppc/e500.c | 5 -----
->>   1 file changed, 5 deletions(-)
->>
->> diff --git a/hw/ppc/e500.c b/hw/ppc/e500.c
->> index 59208da87de..26933e0457e 100644
->> --- a/hw/ppc/e500.c
->> +++ b/hw/ppc/e500.c
->> @@ -1285,10 +1285,6 @@ static void e500_ccsr_initfn(Object *obj)
->>                          MPC8544_CCSRBAR_SIZE);
->>   }
->> -static void ppce500_machine_class_init(ObjectClass *oc, void *data)
->> -{
->> -}
-> 
-> Hmm I think it is a left-over and shouldn't be necessary in patch #2.
+Invert MachineClass 'no_sdcard' flag logic and rename it
+to 'create_default_sdcard_drive' to make sense of this
+default value applied to all machines.
+We use the OnOffAuto tri-state to catch implicit default
+values. Then we toggle the logic and remove invalid uses.
+No logical change intended (except the assertion added).
 
-In case you want to keep it (or want to squash it into the previous patch):
+Since v2:
+- Fixed mis-rebase catched by Thomas
 
-Reviewed-by: Thomas Huth <thuth@redhat.com>
+Philippe Mathieu-Daudé (7):
+  hw/boards: Convert no_sdcard flag to OnOffAuto tri-state
+  hw/boards: Explicit no_sdcard=false as ON_OFF_AUTO_OFF
+  hw/boards: Rename no_sdcard -> auto_create_sdcard
+  hw/boards: Remove all invalid uses of auto_create_sdcard=true
+  hw/arm: Remove all invalid uses of auto_create_sdcard=true
+  hw/riscv: Remove all invalid uses of auto_create_sdcard=true
+  hw/boards: Ensure machine setting auto_create_sdcard expose a SD Bus
+
+ include/hw/boards.h        |  2 +-
+ hw/arm/cubieboard.c        |  1 +
+ hw/arm/integratorcp.c      |  1 +
+ hw/arm/mcimx7d-sabre.c     |  2 ++
+ hw/arm/npcm7xx_boards.c    |  5 +++++
+ hw/arm/omap_sx1.c          |  2 ++
+ hw/arm/orangepi.c          |  1 +
+ hw/arm/realview.c          |  4 ++++
+ hw/arm/stellaris.c         |  1 +
+ hw/arm/vexpress.c          |  2 ++
+ hw/arm/xilinx_zynq.c       |  1 -
+ hw/core/null-machine.c     |  1 -
+ hw/riscv/microchip_pfsoc.c |  1 +
+ hw/riscv/sifive_u.c        |  1 +
+ hw/s390x/s390-virtio-ccw.c |  1 -
+ system/vl.c                | 16 ++++++++++++----
+ 16 files changed, 34 insertions(+), 8 deletions(-)
+
+-- 
+2.47.1
 
 
