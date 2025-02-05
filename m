@@ -4,67 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 04A7FC02192
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 06D65C02194
 	for <qemu-riscv@archiver.kernel.org>; Wed,  5 Feb 2025 11:20:23 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tfdRe-0004ai-Rs; Wed, 05 Feb 2025 06:19:50 -0500
+	id 1tfdRg-0004c1-V6; Wed, 05 Feb 2025 06:19:53 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <rkanwal@rivosinc.com>)
- id 1tfdRR-0004RH-VH
- for qemu-riscv@nongnu.org; Wed, 05 Feb 2025 06:19:38 -0500
-Received: from mail-wm1-x331.google.com ([2a00:1450:4864:20::331])
+ id 1tfdRP-0004Qs-Sq
+ for qemu-riscv@nongnu.org; Wed, 05 Feb 2025 06:19:37 -0500
+Received: from mail-wm1-x32d.google.com ([2a00:1450:4864:20::32d])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <rkanwal@rivosinc.com>)
- id 1tfdRO-0003z5-5W
- for qemu-riscv@nongnu.org; Wed, 05 Feb 2025 06:19:37 -0500
-Received: by mail-wm1-x331.google.com with SMTP id
- 5b1f17b1804b1-436345cc17bso49311385e9.0
- for <qemu-riscv@nongnu.org>; Wed, 05 Feb 2025 03:19:33 -0800 (PST)
+ id 1tfdRM-0003yD-8W
+ for qemu-riscv@nongnu.org; Wed, 05 Feb 2025 06:19:35 -0500
+Received: by mail-wm1-x32d.google.com with SMTP id
+ 5b1f17b1804b1-436a03197b2so46080535e9.2
+ for <qemu-riscv@nongnu.org>; Wed, 05 Feb 2025 03:19:31 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1738754372; x=1739359172;
+ d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1738754370; x=1739359170;
  darn=nongnu.org; 
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=GKMFjIgxVL3VZsT6p8l1ocQBfJI6oRsr6VGKtkFAZvk=;
- b=Ok+2U0Krwx19GDHDs6qsVaMgTxZ0rkN2PYplyLuuqCyq3IFFdgmyzAZ41oYzmdtiEc
- gqvcdPJ4mxX508n22IuHlKWNd1ZXti/dipW1v8Kk6cZPEyq1U9wMoMAx8fMYM0ubhxRf
- icwZhXw0Io8hjPB627lOw1wqCUHxVN4HN0KYjRxpnbBt0Z6D7XxTbOkHTwbHJNyCHkZf
- b6JYu07Xhh0cirs2YkTDv64G7MzymDGdtNorqcT1zYNnXx9LrDlMlNWZ0WE2jBXzvK2R
- wQ9no4J7WyS0etY0OgmIdeN2cDwcI8Ld+K6o1DBJ5CFNeg37VJveHV/4Ws7+DJ45uPVa
- +5Jg==
+ bh=C/aTpSzWv4DLIdTtUZeXDZ5Nks7CoEIGi+GP/50G3Mk=;
+ b=cBZT2FJgcYgEPKbC4/MnCtzfXg9ssjuu/jf1tMBqc+yiyM4Bk2+N+82AHxJy7DvER7
+ MFgv9w6L/h/5hiHaUCbNCmFCq0wrYpZkFUVuoRNnKAh5PxuGQcir4WvUFSZ66ggqVzsZ
+ GqvcAQxCEDBJT/WjQHW8+oNv8D2vvtLBY25bcRCVAbRjTrYy2NsDqVlALSsYnYuCMkg1
+ NHwaqoIyZ3GQYbXaUXUr5uhnND8cn4sKd23GqXliP7JFMhbqLYOuNYHbFbUa4ZMFeTK2
+ 2e++PM0XttfWOuvydBCZUGyarWm3EKZohuW6JTUfyFNA8mBDSoCslWO/X+Xf+PBtkoPM
+ ofBg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1738754372; x=1739359172;
+ d=1e100.net; s=20230601; t=1738754370; x=1739359170;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=GKMFjIgxVL3VZsT6p8l1ocQBfJI6oRsr6VGKtkFAZvk=;
- b=AAshi3diFFMu25gxQzi7tZgYcTGMfgTHpGr9QROwR1Gm/6zjNkoRsM/0mnsy1nV9P8
- 7E8NQLHLU5nTRpBZ9BTZDTNm/UkJp25OdOQcFR+YcGxa+v+JYrqtLENIODF64H87h5/q
- /26HCWVZTHpdYrUugYrsMTb7ekqJkgCVpGC+lrgWOfMcYPf/v7JdCsMHQhIY6925Gmai
- +lyjy2D+TG/EO+uwFv0lv2AiMjxH5fh2Sm3BnVVzkJCm+4Mvb+aLkxiNCHm5ia7KgDST
- W0CR0U2CVxes/NjaCFDmhBJUzhcj1QSz6PsLJJfSKO6n4pFodrlhlEJIiS7Omblrw5kj
- fqrA==
-X-Gm-Message-State: AOJu0YxSrJTrL3DS43kKqn9ejPpvJf6NnTlMNT+V9RbSaeYwlt2+25NB
- Xz285Y/qHyIdUhDgBS0/WDF9X+anIpjBlVhmNVXw0D3/nmr35L1JyitGQYAwaJHdu5+ygh8L2d2
- j
-X-Gm-Gg: ASbGncviUoKjrEkyqjQzF44h6JhXark2eLYDZM4MzrV1YCKn0U+H+HExYJPwXMvGeSv
- dXa+IceLPyWlqBCJpBDOxffTQImqUdPNHcJO5ea9xdt5AUrqiP2a27iaewJ0PMLgUHNSXe+FzUi
- rgNQhf5iI55DsoxPMfTMcbkmNWLSsijy7AAHSYP3/u2lbKSisKGpSfl2JusgQ+Zww+mYp7pFMO0
- 8VyRsfZRaSZBCGGCFT79/1dJbPAFatj8eMbxSfXUgCu6T7l2M3hs0vuV89IABbRpV0k344Sfak7
- ANAz4OJ6NP3IelGMYciqeIg57Ds=
-X-Google-Smtp-Source: AGHT+IGwS7Bh3clFyeFg8O3LWv/Oj1m6GM+zuCbfu6TGDJ/LANzdRrIpFXcgwzOCO0Ud/qXWYJsP9A==
-X-Received: by 2002:a05:600c:4586:b0:434:f623:9ff3 with SMTP id
- 5b1f17b1804b1-4390d43da00mr18586955e9.15.1738754372146; 
- Wed, 05 Feb 2025 03:19:32 -0800 (PST)
+ bh=C/aTpSzWv4DLIdTtUZeXDZ5Nks7CoEIGi+GP/50G3Mk=;
+ b=a+jEWrYvAbl3uIUawHfLDdbI2bFabKYB4wxsrmBJJNw9bpTVtfvzMNFzNxStSgFESy
+ 8f1cMd+ROb7WASmhDBfRIlycj8GIFTsd5mTXkz0ZASgWIaJOOuBy66jNH98TEluM0ABG
+ h3BMBtQRfXnf48gLJDdorQzALAOjAVKR8sIw74hWIzovLauRBjdU2MMomA4FnHJ+r/YD
+ GfKyXkAZhRBbd+bYk1UysY7dUwQTeJh1Jj/s092YGUrydWpZjWSjZdqeKDm06P2V6Xad
+ 1qJDlwl4RuIskcfdLS/g8tUHZvEvmcz3iE6w44DzuCC62mdv9bWWn3ttmilgvLdH4HdF
+ f+OA==
+X-Gm-Message-State: AOJu0YzEZLGSlidOmvVMzt8vh9bSKbWtabxKi7zNDoAA6yxBgwRmA9Gj
+ FnoGU/enDQ+vGgo/ZLNp1mdbKmolGmclwwQTxpru72FyPrF2Ww9mYPy5sOoKioW8Cu+eeoOQemx
+ x
+X-Gm-Gg: ASbGnctelMVVVhfMq/lgMK7v1b4S2nP7f4+e0Kx8csbo65kDsIRcGqFz11Q02tHYQJl
+ Qp56rp4UFuSvaN8a3GAhL1L6YywwVVIs+nLZ6SYjyytOQYKdCBiJ3BR3uQNxY5dMWkWH98EIPjA
+ GWw47BgLfWbOtHcZUtTU7phhMX9CGxj2YpM+ja+5mObLw+QBlKxc1XimE03SKKbsuyy83jE7XgR
+ xF4vcZbEEFK7ma22KvdZ0RU0ogeXyrW6WNk5oe0F3NXw359HfeVQrHcaDSMp2NtdpALvAbuRTB9
+ oT6oQ9C0a5pxhf8cAYB/LEdvAks=
+X-Google-Smtp-Source: AGHT+IFjUbg8Wh6lCrLKX0xZK2kIMHfmXgBk5XjWziSyqO9FJDV0pBYaFqt4VLY8rm1nOPpyVvaQlg==
+X-Received: by 2002:a05:600c:5127:b0:438:da66:fdf9 with SMTP id
+ 5b1f17b1804b1-4390d43f779mr18152275e9.18.1738754369869; 
+ Wed, 05 Feb 2025 03:19:29 -0800 (PST)
 Received: from localhost.localdomain ([51.52.155.79])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4390d93382dsm18256575e9.4.2025.02.05.03.19.31
+ 5b1f17b1804b1-4390d93382dsm18256575e9.4.2025.02.05.03.19.29
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 05 Feb 2025 03:19:31 -0800 (PST)
+ Wed, 05 Feb 2025 03:19:29 -0800 (PST)
 From: Rajnesh Kanwal <rkanwal@rivosinc.com>
 To: qemu-riscv@nongnu.org,
 	qemu-devel@nongnu.org
@@ -73,10 +73,10 @@ Cc: alistair.francis@wdc.com, bin.meng@windriver.com, liweiwei@iscas.ac.cn,
  atishp@rivosinc.com, apatel@ventanamicro.com, rkanwal@rivosinc.com,
  beeman@rivosinc.com, jason.chien@sifive.com, frank.chang@sifive.com,
  richard.henderson@linaro.org, bmeng.cn@gmail.com
-Subject: [PATCH v6 6/7] target/riscv: machine: Add Control Transfer Record
- state description
-Date: Wed,  5 Feb 2025 11:18:50 +0000
-Message-Id: <20250205-b4-ctr_upstream_v6-v6-6-439d8e06c8ef@rivosinc.com>
+Subject: [PATCH v6 3/7] target/riscv: Add support for Control Transfer Records
+ extension CSRs.
+Date: Wed,  5 Feb 2025 11:18:47 +0000
+Message-Id: <20250205-b4-ctr_upstream_v6-v6-3-439d8e06c8ef@rivosinc.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20250205-b4-ctr_upstream_v6-v6-0-439d8e06c8ef@rivosinc.com>
 References: <20250205-b4-ctr_upstream_v6-v6-0-439d8e06c8ef@rivosinc.com>
@@ -84,8 +84,8 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 X-Mailer: b4 0.14.2
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::331;
- envelope-from=rkanwal@rivosinc.com; helo=mail-wm1-x331.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::32d;
+ envelope-from=rkanwal@rivosinc.com; helo=mail-wm1-x32d.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -107,57 +107,243 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Add a subsection to machine.c to migrate CTR CSR state
+This commit adds support for [m|s|vs]ctrcontrol, sctrstatus and
+sctrdepth CSRs handling.
 
 Signed-off-by: Rajnesh Kanwal <rkanwal@rivosinc.com>
 Acked-by: Alistair Francis <alistair.francis@wdc.com>
 ---
- target/riscv/machine.c | 25 +++++++++++++++++++++++++
- 1 file changed, 25 insertions(+)
+ target/riscv/cpu.h     |   5 ++
+ target/riscv/cpu_cfg.h |   2 +
+ target/riscv/csr.c     | 144 +++++++++++++++++++++++++++++++++++++++++++++++++
+ 3 files changed, 151 insertions(+)
 
-diff --git a/target/riscv/machine.c b/target/riscv/machine.c
-index d8445244ab251e23c07877d9f2a7c1c08f09d736..889e2b6570132950c25df6395794875df604cd11 100644
---- a/target/riscv/machine.c
-+++ b/target/riscv/machine.c
-@@ -300,6 +300,30 @@ static const VMStateDescription vmstate_envcfg = {
-     }
- };
+diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+index 97713681cbea79745ec1fabc625ebc707fee7eff..e51a4bc4a535276d1b348f9ed50443be898d538f 100644
+--- a/target/riscv/cpu.h
++++ b/target/riscv/cpu.h
+@@ -312,6 +312,11 @@ struct CPUArchState {
+     target_ulong mcause;
+     target_ulong mtval;  /* since: priv-1.10.0 */
  
-+static bool ctr_needed(void *opaque)
-+{
-+    RISCVCPU *cpu = opaque;
++    uint64_t mctrctl;
++    uint32_t sctrdepth;
++    uint32_t sctrstatus;
++    uint64_t vsctrctl;
 +
-+    return cpu->cfg.ext_smctr || cpu->cfg.ext_ssctr;
+     /* Machine and Supervisor interrupt priorities */
+     uint8_t miprio[64];
+     uint8_t siprio[64];
+diff --git a/target/riscv/cpu_cfg.h b/target/riscv/cpu_cfg.h
+index b410b1e603839dcb4091c8167a93473fba4191c1..3f3c1118c08ff66fb9cf1bf77575a4d7257819bf 100644
+--- a/target/riscv/cpu_cfg.h
++++ b/target/riscv/cpu_cfg.h
+@@ -133,6 +133,8 @@ struct RISCVCPUConfig {
+     bool ext_zvfhmin;
+     bool ext_smaia;
+     bool ext_ssaia;
++    bool ext_smctr;
++    bool ext_ssctr;
+     bool ext_sscofpmf;
+     bool ext_smepmp;
+     bool ext_smrnmi;
+diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+index afb7544f0780be4f1e9c94f26dc10e2be1060c85..07a591fc90a8a516888dd465292f4e4b4178524d 100644
+--- a/target/riscv/csr.c
++++ b/target/riscv/csr.c
+@@ -639,6 +639,48 @@ static RISCVException hgatp(CPURISCVState *env, int csrno)
+     return hmode(env, csrno);
+ }
+ 
++/*
++ * M-mode:
++ * Without ext_smctr raise illegal inst excep.
++ * Otherwise everything is accessible to m-mode.
++ *
++ * S-mode:
++ * Without ext_ssctr or mstateen.ctr raise illegal inst excep.
++ * Otherwise everything other than mctrctl is accessible.
++ *
++ * VS-mode:
++ * Without ext_ssctr or mstateen.ctr raise illegal inst excep.
++ * Without hstateen.ctr raise virtual illegal inst excep.
++ * Otherwise allow sctrctl (vsctrctl), sctrstatus, 0x200-0x2ff entry range.
++ * Always raise illegal instruction exception for sctrdepth.
++ */
++static RISCVException ctr_mmode(CPURISCVState *env, int csrno)
++{
++    /* Check if smctr-ext is present */
++    if (riscv_cpu_cfg(env)->ext_smctr) {
++        return RISCV_EXCP_NONE;
++    }
++
++    return RISCV_EXCP_ILLEGAL_INST;
 +}
 +
-+static const VMStateDescription vmstate_ctr = {
-+    .name = "cpu/ctr",
-+    .version_id = 1,
-+    .minimum_version_id = 1,
-+    .needed = ctr_needed,
-+    .fields = (const VMStateField[]) {
-+        VMSTATE_UINT64(env.mctrctl, RISCVCPU),
-+        VMSTATE_UINT32(env.sctrdepth, RISCVCPU),
-+        VMSTATE_UINT32(env.sctrstatus, RISCVCPU),
-+        VMSTATE_UINT64(env.vsctrctl, RISCVCPU),
-+        VMSTATE_UINT64_ARRAY(env.ctr_src, RISCVCPU, 16 << SCTRDEPTH_MAX),
-+        VMSTATE_UINT64_ARRAY(env.ctr_dst, RISCVCPU, 16 << SCTRDEPTH_MAX),
-+        VMSTATE_UINT64_ARRAY(env.ctr_data, RISCVCPU, 16 << SCTRDEPTH_MAX),
-+        VMSTATE_END_OF_LIST()
-+    }
-+};
++static RISCVException ctr_smode(CPURISCVState *env, int csrno)
++{
++    const RISCVCPUConfig *cfg = riscv_cpu_cfg(env);
 +
- static bool pmu_needed(void *opaque)
++    if (!cfg->ext_smctr && !cfg->ext_ssctr) {
++        return RISCV_EXCP_ILLEGAL_INST;
++    }
++
++    RISCVException ret = smstateen_acc_ok(env, 0, SMSTATEEN0_CTR);
++    if (ret == RISCV_EXCP_NONE && csrno == CSR_SCTRDEPTH &&
++        env->virt_enabled) {
++        return RISCV_EXCP_VIRT_INSTRUCTION_FAULT;
++    }
++
++    return ret;
++}
++
+ static RISCVException aia_hmode(CPURISCVState *env, int csrno)
  {
-     RISCVCPU *cpu = opaque;
-@@ -450,6 +474,7 @@ const VMStateDescription vmstate_riscv_cpu = {
-         &vmstate_jvt,
-         &vmstate_elp,
-         &vmstate_ssp,
-+        &vmstate_ctr,
-         NULL
+     int ret;
+@@ -3234,6 +3276,10 @@ static RISCVException write_mstateen0(CPURISCVState *env, int csrno,
+         wr_mask |= (SMSTATEEN0_AIA | SMSTATEEN0_IMSIC);
      }
- };
+ 
++    if (riscv_cpu_cfg(env)->ext_ssctr) {
++        wr_mask |= SMSTATEEN0_CTR;
++    }
++
+     return write_mstateen(env, csrno, wr_mask, new_val);
+ }
+ 
+@@ -3273,6 +3319,10 @@ static RISCVException write_mstateen0h(CPURISCVState *env, int csrno,
+         wr_mask |= SMSTATEEN0_P1P13;
+     }
+ 
++    if (riscv_cpu_cfg(env)->ext_ssctr) {
++        wr_mask |= SMSTATEEN0_CTR;
++    }
++
+     return write_mstateenh(env, csrno, wr_mask, new_val);
+ }
+ 
+@@ -3327,6 +3377,10 @@ static RISCVException write_hstateen0(CPURISCVState *env, int csrno,
+         wr_mask |= (SMSTATEEN0_AIA | SMSTATEEN0_IMSIC);
+     }
+ 
++    if (riscv_cpu_cfg(env)->ext_ssctr) {
++        wr_mask |= SMSTATEEN0_CTR;
++    }
++
+     return write_hstateen(env, csrno, wr_mask, new_val);
+ }
+ 
+@@ -3366,6 +3420,10 @@ static RISCVException write_hstateen0h(CPURISCVState *env, int csrno,
+ {
+     uint64_t wr_mask = SMSTATEEN_STATEEN | SMSTATEEN0_HSENVCFG;
+ 
++    if (riscv_cpu_cfg(env)->ext_ssctr) {
++        wr_mask |= SMSTATEEN0_CTR;
++    }
++
+     return write_hstateenh(env, csrno, wr_mask, new_val);
+ }
+ 
+@@ -4086,6 +4144,86 @@ static RISCVException write_satp(CPURISCVState *env, int csrno,
+     return RISCV_EXCP_NONE;
+ }
+ 
++static RISCVException rmw_sctrdepth(CPURISCVState *env, int csrno,
++                                    target_ulong *ret_val,
++                                    target_ulong new_val, target_ulong wr_mask)
++{
++    uint64_t mask = wr_mask & SCTRDEPTH_MASK;
++
++    if (ret_val) {
++        *ret_val = env->sctrdepth;
++    }
++
++    env->sctrdepth = (env->sctrdepth & ~mask) | (new_val & mask);
++
++    /* Correct depth. */
++    if (mask) {
++        uint64_t depth = get_field(env->sctrdepth, SCTRDEPTH_MASK);
++
++        if (depth > SCTRDEPTH_MAX) {
++            depth = SCTRDEPTH_MAX;
++            env->sctrdepth = set_field(env->sctrdepth, SCTRDEPTH_MASK, depth);
++        }
++
++        /* Update sctrstatus.WRPTR with a legal value */
++        depth = 16 << depth;
++        env->sctrstatus =
++            env->sctrstatus & (~SCTRSTATUS_WRPTR_MASK | (depth - 1));
++    }
++
++    return RISCV_EXCP_NONE;
++}
++
++static RISCVException rmw_sctrstatus(CPURISCVState *env, int csrno,
++                                     target_ulong *ret_val,
++                                     target_ulong new_val, target_ulong wr_mask)
++{
++    uint32_t depth = 16 << get_field(env->sctrdepth, SCTRDEPTH_MASK);
++    uint32_t mask = wr_mask & SCTRSTATUS_MASK;
++
++    if (ret_val) {
++        *ret_val = env->sctrstatus;
++    }
++
++    env->sctrstatus = (env->sctrstatus & ~mask) | (new_val & mask);
++
++    /* Update sctrstatus.WRPTR with a legal value */
++    env->sctrstatus = env->sctrstatus & (~SCTRSTATUS_WRPTR_MASK | (depth - 1));
++
++    return RISCV_EXCP_NONE;
++}
++
++static RISCVException rmw_xctrctl(CPURISCVState *env, int csrno,
++                                    target_ulong *ret_val,
++                                    target_ulong new_val, target_ulong wr_mask)
++{
++    uint64_t csr_mask, mask = wr_mask;
++    uint64_t *ctl_ptr = &env->mctrctl;
++
++    if (csrno == CSR_MCTRCTL) {
++        csr_mask = MCTRCTL_MASK;
++    } else if (csrno == CSR_SCTRCTL && !env->virt_enabled) {
++        csr_mask = SCTRCTL_MASK;
++    } else {
++        /*
++         * This is for csrno == CSR_SCTRCTL and env->virt_enabled == true
++         * or csrno == CSR_VSCTRCTL.
++         */
++        csr_mask = VSCTRCTL_MASK;
++        ctl_ptr = &env->vsctrctl;
++    }
++
++    mask &= csr_mask;
++
++    if (ret_val) {
++        *ret_val = *ctl_ptr & csr_mask;
++    }
++
++    *ctl_ptr = (*ctl_ptr & ~mask) | (new_val & mask);
++
++    return RISCV_EXCP_NONE;
++}
++
+ static RISCVException read_vstopi(CPURISCVState *env, int csrno,
+                                   target_ulong *val)
+ {
+@@ -5839,6 +5977,12 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] = {
+     [CSR_TINFO]     =  { "tinfo",    debug, read_tinfo,    write_ignore   },
+     [CSR_MCONTEXT]  =  { "mcontext", debug, read_mcontext, write_mcontext },
+ 
++    [CSR_MCTRCTL]    = { "mctrctl",    ctr_mmode,  NULL, NULL, rmw_xctrctl    },
++    [CSR_SCTRCTL]    = { "sctrctl",    ctr_smode,  NULL, NULL, rmw_xctrctl    },
++    [CSR_VSCTRCTL]   = { "vsctrctl",   ctr_smode,  NULL, NULL, rmw_xctrctl    },
++    [CSR_SCTRDEPTH]  = { "sctrdepth",  ctr_smode,  NULL, NULL, rmw_sctrdepth  },
++    [CSR_SCTRSTATUS] = { "sctrstatus", ctr_smode,  NULL, NULL, rmw_sctrstatus },
++
+     /* Performance Counters */
+     [CSR_HPMCOUNTER3]    = { "hpmcounter3",    ctr,    read_hpmcounter },
+     [CSR_HPMCOUNTER4]    = { "hpmcounter4",    ctr,    read_hpmcounter },
 
 -- 
 2.34.1
