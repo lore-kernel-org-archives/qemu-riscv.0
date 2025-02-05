@@ -4,67 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 31EBBC02192
-	for <qemu-riscv@archiver.kernel.org>; Wed,  5 Feb 2025 11:21:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 47D9DC02192
+	for <qemu-riscv@archiver.kernel.org>; Wed,  5 Feb 2025 11:22:02 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tfdRk-0004fY-9C; Wed, 05 Feb 2025 06:19:56 -0500
+	id 1tfdRh-0004dP-9e; Wed, 05 Feb 2025 06:19:53 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <rkanwal@rivosinc.com>)
- id 1tfdRO-0004Qj-Tw
- for qemu-riscv@nongnu.org; Wed, 05 Feb 2025 06:19:35 -0500
-Received: from mail-wm1-x331.google.com ([2a00:1450:4864:20::331])
+ id 1tfdRR-0004R6-T5
+ for qemu-riscv@nongnu.org; Wed, 05 Feb 2025 06:19:37 -0500
+Received: from mail-wm1-x329.google.com ([2a00:1450:4864:20::329])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <rkanwal@rivosinc.com>)
- id 1tfdRL-0003y3-Ec
- for qemu-riscv@nongnu.org; Wed, 05 Feb 2025 06:19:34 -0500
-Received: by mail-wm1-x331.google.com with SMTP id
- 5b1f17b1804b1-43618283dedso67007005e9.3
- for <qemu-riscv@nongnu.org>; Wed, 05 Feb 2025 03:19:30 -0800 (PST)
+ id 1tfdRM-0003yV-RO
+ for qemu-riscv@nongnu.org; Wed, 05 Feb 2025 06:19:37 -0500
+Received: by mail-wm1-x329.google.com with SMTP id
+ 5b1f17b1804b1-43635796b48so4513525e9.0
+ for <qemu-riscv@nongnu.org>; Wed, 05 Feb 2025 03:19:32 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1738754369; x=1739359169;
+ d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1738754371; x=1739359171;
  darn=nongnu.org; 
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=DdQMjneS+V47scU4Yl00bFTMeoWh+LhbYbiICyQ81bo=;
- b=TxXXXxQlY2/TOi1k++ROt0UYP3noBhRmGhsWDnR/pLnWh+5ZC2EJwFfZ+/nx0ubdoK
- DmKApG+kHZsIvAREGXyvc5ogeDtk4sRfhvh1uda1SxsuYp8eUUVZWgc5M1Qs+mGYbAxC
- SReV7SCHJN56GzmXFiHG+JB6I7smr7+mWaHlz/j3kNgomFHzImJbFIIKQkpYaPIKw3gQ
- gmYxcidy3y+yFae5NP4rX+s6WVmXwBBDAKStatga/y3WPI2ACQ2rkk3x5hTXZvUD/eMi
- oi6vghKranJzeWZy67GqrS1IPzsk6aP9d8uYR6aRnzcgsrCfajZ/d/fM/LlLAoRCFUl/
- pTFg==
+ bh=xsv8OTxNBbAm6aqdb0W3B09cV5UTwY9Ck6BkBSDYH3w=;
+ b=ceIiwpn/xI0tIA3PJfrYcg9Omo+mSwWXOsbfMpvvd/XjpnolzWdDEc8K2Q7Pg0nbDO
+ V1CJK75Epz/C2sSZBcsTGySZeWBQHMbWIS6PS+y7L1k+dwSpirrfA1WftkQ73VM2WyyA
+ bBJGabyakksjVOPfDMyltq2BYbsyK9Eh+lvjTA60cszAZ8Toby+TX64tHEgldeHWZWZ+
+ ictZhw0uBKZKJpbwcYJv6tVdIi3OQ97TAsw8KQo9jRy61dYwwB3TWpadACDsZiMeJQ5q
+ NvrV1ji3bkl/aaXD2Ov+X0ngm81h6+aULmvVbhfxqO27Wr21g9EIICEcAznCler0hQRW
+ GhYw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1738754369; x=1739359169;
+ d=1e100.net; s=20230601; t=1738754371; x=1739359171;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=DdQMjneS+V47scU4Yl00bFTMeoWh+LhbYbiICyQ81bo=;
- b=UKT/VKe+8HBPT6RmhbdPGa3ZmNhkt4178nV3evxEYuhLyo1AF53U1UYtQy+Y84j4fU
- UYkCJ9kT5lWkJXufLzMA0+caDzScbzHwPA+CDt374yVqCyxi4djfDz0onMehrnLVIo25
- St8U6JSl0RlDy0NDs3ak0GlH5f5Cp2Gm3+lLa8cOgxDmuOqZj89lgG6jYvvy2fDWEI/8
- 5gEXoMAMjK6Bwe0nJjOeZmb3F9vgKMqiYpjVIlOGtpS4yTZAHMoYcpBPJYjQ++DD0SDt
- 4YuQT7uzgCw7mla7Kas2qiktanSBrwtDG7ogM3OdM9jnUoo2UGYD1Fjj5McotTq1Q6mP
- WU3g==
-X-Gm-Message-State: AOJu0YzafX4cfsFWJHCb0t/uPwULdyUcT6a3VeNUaWdHE59t75mjBVdC
- rpRDApOk8I4AxEMz3O+oOJOtnE5rYKxARPArnTpO2sXbqVYKn0iiLgR6w88ReCLklmNWUSIepb8
- 8
-X-Gm-Gg: ASbGncsZc5FGjuYTbp4H/lybrl/YNKdbvI/t/sUjOnpyJYcsVJMUkZZFHUm9d/KbKGY
- b1VGr8XA9QUss9/aBThdEY/WbI5E8sos2mWjFzNyokOIWmSjHqodr3+FufWXwUZJN/vTZn8gFfj
- hNIF+rniQhmmCzaPGiup+8qVf+AqYyB0W1Pwx4Z4bD+wOgniH50SwzKiZCBLALb1NkoeP9gE/Ei
- Wvm54oFX4aTXd8WeBVErMQkRkq4lbCs21gLqfXiBXRai1srt9p67E+FUYzdRfJ/xN+viQNPtPlr
- yMb6XtelciQpph74CaOfNmd69Do=
-X-Google-Smtp-Source: AGHT+IFma9DmRfUU+ptY2kS5dPrRPeq3+GpSmavPXEOObMYlwXhIUL01w6xbIPFNnh1cUbrTi/eeDQ==
-X-Received: by 2002:a05:600c:5114:b0:435:32e:8270 with SMTP id
- 5b1f17b1804b1-4390d43d8ecmr20789435e9.14.1738754369131; 
- Wed, 05 Feb 2025 03:19:29 -0800 (PST)
+ bh=xsv8OTxNBbAm6aqdb0W3B09cV5UTwY9Ck6BkBSDYH3w=;
+ b=opOMv4G4D8yqMfSyTykwUd+fOZVFi0M6cLT0oy4HJ2ZF/sagT9RmXB69uT3PhbhJFh
+ /HmV5TDiDuTiaT9dMEoRBoRsZsYdZbM6/PM2cJnv6pLmTiMIRBN7Rx3gX7qUgaYyl9qj
+ QM3D/6Sqlq3vb6zbhKPvLqDoSrEpHkb6o2iKclNnK1Z72GfetBY+RNc6PloqBIzi+NrY
+ 2XP2yQZL+5qKpg+4VvPh4I05EFOAUSKnggFSn58r4kK+sYuQ1SnBa7hyWBOtK1GZp0hT
+ LfXnlarZze6+miKC1uuQ25yfiVUzrfJRNB/jDn+QQSLlPf/VCaV8qFAVj8XGS5TeCS/0
+ mbDQ==
+X-Gm-Message-State: AOJu0YzJXyLilU+nJvumLP/WTNLiSfHDil3Tt40Fa9aDgA/XX/BkcaZF
+ wbGMQSSnRAGgsUKPlJqzB4vZHamm15F1quWC6Z2RcUxh+xr75ZdUraR3igHi0D9vOCRXWlL6niC
+ d
+X-Gm-Gg: ASbGncuBDwyvV9TdoMnmQvxLZ3Y5+bcmrC7eIELAl8guju8vFEF9+VKbTwbqLTJOi8K
+ aQjG2S3LWp5jAGar21VkT4g3oEL0/8Vl3yekx7rNThZ47wCXft7QBWOFLaSwnLoo+UDeBsQ9kp0
+ sLT60UeIUwRQsSelPZZacXEanIfPRm+2rI82subeq3QHksKG3fzwl/l88HfV6QTOK6zoSM994ZE
+ 3/7qruNsxppews1ZmJOVycyHrxGsTxkKtMuratX9+t5LZfdumjoyQL9+cl37Ap6XVxa4rMvXEXr
+ qqwA9HSqaCeF9jZ9yYZv+svBbJA=
+X-Google-Smtp-Source: AGHT+IEXUM7/wrps9L4m2xPudggNZDtLiD7P1OCd9L26Yn8a+oqo8NygoAoC3vfjXSjeHIGNANdokA==
+X-Received: by 2002:a05:600c:4589:b0:436:e3ea:64dd with SMTP id
+ 5b1f17b1804b1-43905f8da7fmr53600845e9.11.1738754370659; 
+ Wed, 05 Feb 2025 03:19:30 -0800 (PST)
 Received: from localhost.localdomain ([51.52.155.79])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4390d93382dsm18256575e9.4.2025.02.05.03.19.28
+ 5b1f17b1804b1-4390d93382dsm18256575e9.4.2025.02.05.03.19.30
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 05 Feb 2025 03:19:28 -0800 (PST)
+ Wed, 05 Feb 2025 03:19:30 -0800 (PST)
 From: Rajnesh Kanwal <rkanwal@rivosinc.com>
 To: qemu-riscv@nongnu.org,
 	qemu-devel@nongnu.org
@@ -73,10 +73,9 @@ Cc: alistair.francis@wdc.com, bin.meng@windriver.com, liweiwei@iscas.ac.cn,
  atishp@rivosinc.com, apatel@ventanamicro.com, rkanwal@rivosinc.com,
  beeman@rivosinc.com, jason.chien@sifive.com, frank.chang@sifive.com,
  richard.henderson@linaro.org, bmeng.cn@gmail.com
-Subject: [PATCH v6 2/7] target/riscv: Add Control Transfer Records CSR
- definitions.
-Date: Wed,  5 Feb 2025 11:18:46 +0000
-Message-Id: <20250205-b4-ctr_upstream_v6-v6-2-439d8e06c8ef@rivosinc.com>
+Subject: [PATCH v6 4/7] target/riscv: Add support to record CTR entries.
+Date: Wed,  5 Feb 2025 11:18:48 +0000
+Message-Id: <20250205-b4-ctr_upstream_v6-v6-4-439d8e06c8ef@rivosinc.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20250205-b4-ctr_upstream_v6-v6-0-439d8e06c8ef@rivosinc.com>
 References: <20250205-b4-ctr_upstream_v6-v6-0-439d8e06c8ef@rivosinc.com>
@@ -84,14 +83,14 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 X-Mailer: b4 0.14.2
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::331;
- envelope-from=rkanwal@rivosinc.com; helo=mail-wm1-x331.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::329;
+ envelope-from=rkanwal@rivosinc.com; helo=mail-wm1-x329.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
 X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001, UPPERCASE_50_75=0.008 autolearn=no autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -107,190 +106,639 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-The Control Transfer Records (CTR) extension provides a method to
-record a limited branch history in register-accessible internal chip
-storage.
+This commit adds logic to records CTR entries of different types
+and adds required hooks in TCG and interrupt/Exception logic to
+record events.
 
-This extension is similar to Arch LBR in x86 and BRBE in ARM.
-The Extension has been stable and the latest release can be found here
-https://github.com/riscv/riscv-control-transfer-records/releases/tag/v1.0_rc5
+This commit also adds support to invoke freeze CTR logic for breakpoint
+exceptions and counter overflow interrupts.
 
 Signed-off-by: Rajnesh Kanwal <rkanwal@rivosinc.com>
 Acked-by: Alistair Francis <alistair.francis@wdc.com>
 ---
- target/riscv/cpu_bits.h | 145 ++++++++++++++++++++++++++++++++++++++++++++++++
- 1 file changed, 145 insertions(+)
+ target/riscv/cpu.h                             |   7 +
+ target/riscv/cpu_helper.c                      | 259 +++++++++++++++++++++++++
+ target/riscv/helper.h                          |   1 +
+ target/riscv/insn_trans/trans_privileged.c.inc |   2 +
+ target/riscv/insn_trans/trans_rvi.c.inc        |  75 +++++++
+ target/riscv/insn_trans/trans_rvzce.c.inc      |  21 ++
+ target/riscv/op_helper.c                       |  19 ++
+ target/riscv/translate.c                       |  46 +++++
+ 8 files changed, 430 insertions(+)
 
-diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
-index f97c48a3943fb17b8cbe2d5e45db8126726e9956..70ef443c9947755cc4e7c0c1d03f3cc225d4781b 100644
---- a/target/riscv/cpu_bits.h
-+++ b/target/riscv/cpu_bits.h
-@@ -247,6 +247,17 @@
- #define CSR_SIEH            0x114
- #define CSR_SIPH            0x154
+diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+index e51a4bc4a535276d1b348f9ed50443be898d538f..2d8212e2fefe21defb4ca007d894f02592ed3c89 100644
+--- a/target/riscv/cpu.h
++++ b/target/riscv/cpu.h
+@@ -317,6 +317,10 @@ struct CPUArchState {
+     uint32_t sctrstatus;
+     uint64_t vsctrctl;
  
-+/* Machine-Level Control transfer records CSRs */
-+#define CSR_MCTRCTL         0x34e
++    uint64_t ctr_src[16 << SCTRDEPTH_MAX];
++    uint64_t ctr_dst[16 << SCTRDEPTH_MAX];
++    uint64_t ctr_data[16 << SCTRDEPTH_MAX];
 +
-+/* Supervisor-Level Control transfer records CSRs */
-+#define CSR_SCTRCTL         0x14e
-+#define CSR_SCTRSTATUS      0x14f
-+#define CSR_SCTRDEPTH       0x15f
-+
-+/* VS-Level Control transfer records CSRs */
-+#define CSR_VSCTRCTL        0x24e
-+
- /* Hpervisor CSRs */
- #define CSR_HSTATUS         0x600
- #define CSR_HEDELEG         0x602
-@@ -344,6 +355,7 @@
- #define SMSTATEEN0_CS       (1ULL << 0)
- #define SMSTATEEN0_FCSR     (1ULL << 1)
- #define SMSTATEEN0_JVT      (1ULL << 2)
-+#define SMSTATEEN0_CTR      (1ULL << 54)
- #define SMSTATEEN0_P1P13    (1ULL << 56)
- #define SMSTATEEN0_HSCONTXT (1ULL << 57)
- #define SMSTATEEN0_IMSIC    (1ULL << 58)
-@@ -825,6 +837,139 @@ typedef enum RISCVException {
- #define HENVCFGH_PBMTE                      MENVCFGH_PBMTE
- #define HENVCFGH_STCE                       MENVCFGH_STCE
+     /* Machine and Supervisor interrupt priorities */
+     uint8_t miprio[64];
+     uint8_t siprio[64];
+@@ -612,6 +616,9 @@ RISCVException smstateen_acc_ok(CPURISCVState *env, int index, uint64_t bit);
  
-+/* Offsets for every pair of control bits per each priv level */
-+#define XS_OFFSET    0ULL
-+#define U_OFFSET     2ULL
-+#define S_OFFSET     5ULL
-+#define M_OFFSET     8ULL
+ void riscv_cpu_set_mode(CPURISCVState *env, target_ulong newpriv, bool virt_en);
+ 
++void riscv_ctr_add_entry(CPURISCVState *env, target_long src, target_long dst,
++    enum CTRType type, target_ulong prev_priv, bool prev_virt);
 +
-+#define PM_XS_BITS   (EXT_STATUS_MASK << XS_OFFSET)
-+#define U_PM_ENABLE  (PM_ENABLE  << U_OFFSET)
-+#define U_PM_CURRENT (PM_CURRENT << U_OFFSET)
-+#define U_PM_INSN    (PM_INSN    << U_OFFSET)
-+#define S_PM_ENABLE  (PM_ENABLE  << S_OFFSET)
-+#define S_PM_CURRENT (PM_CURRENT << S_OFFSET)
-+#define S_PM_INSN    (PM_INSN    << S_OFFSET)
-+#define M_PM_ENABLE  (PM_ENABLE  << M_OFFSET)
-+#define M_PM_CURRENT (PM_CURRENT << M_OFFSET)
-+#define M_PM_INSN    (PM_INSN    << M_OFFSET)
+ void riscv_translate_init(void);
+ void riscv_translate_code(CPUState *cs, TranslationBlock *tb,
+                           int *max_insns, vaddr pc, void *host_pc);
+diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+index e1dfc4ecbfc5da5204b261cb24d1afa312dba323..afecc822ae7d07a0904f1ec8c223845bbac92523 100644
+--- a/target/riscv/cpu_helper.c
++++ b/target/riscv/cpu_helper.c
+@@ -875,6 +875,247 @@ void riscv_cpu_set_aia_ireg_rmw_fn(CPURISCVState *env, uint32_t priv,
+     }
+ }
+ 
++static void riscv_ctr_freeze(CPURISCVState *env, uint64_t freeze_mask,
++                             bool virt)
++{
++    uint64_t ctl = virt ? env->vsctrctl : env->mctrctl;
 +
-+/* mmte CSR bits */
-+#define MMTE_PM_XS_BITS     PM_XS_BITS
-+#define MMTE_U_PM_ENABLE    U_PM_ENABLE
-+#define MMTE_U_PM_CURRENT   U_PM_CURRENT
-+#define MMTE_U_PM_INSN      U_PM_INSN
-+#define MMTE_S_PM_ENABLE    S_PM_ENABLE
-+#define MMTE_S_PM_CURRENT   S_PM_CURRENT
-+#define MMTE_S_PM_INSN      S_PM_INSN
-+#define MMTE_M_PM_ENABLE    M_PM_ENABLE
-+#define MMTE_M_PM_CURRENT   M_PM_CURRENT
-+#define MMTE_M_PM_INSN      M_PM_INSN
-+#define MMTE_MASK    (MMTE_U_PM_ENABLE | MMTE_U_PM_CURRENT | MMTE_U_PM_INSN | \
-+                      MMTE_S_PM_ENABLE | MMTE_S_PM_CURRENT | MMTE_S_PM_INSN | \
-+                      MMTE_M_PM_ENABLE | MMTE_M_PM_CURRENT | MMTE_M_PM_INSN | \
-+                      MMTE_PM_XS_BITS)
++    assert((freeze_mask & (~(XCTRCTL_BPFRZ | XCTRCTL_LCOFIFRZ))) == 0);
 +
-+/* (v)smte CSR bits */
-+#define SMTE_PM_XS_BITS     PM_XS_BITS
-+#define SMTE_U_PM_ENABLE    U_PM_ENABLE
-+#define SMTE_U_PM_CURRENT   U_PM_CURRENT
-+#define SMTE_U_PM_INSN      U_PM_INSN
-+#define SMTE_S_PM_ENABLE    S_PM_ENABLE
-+#define SMTE_S_PM_CURRENT   S_PM_CURRENT
-+#define SMTE_S_PM_INSN      S_PM_INSN
-+#define SMTE_MASK    (SMTE_U_PM_ENABLE | SMTE_U_PM_CURRENT | SMTE_U_PM_INSN | \
-+                      SMTE_S_PM_ENABLE | SMTE_S_PM_CURRENT | SMTE_S_PM_INSN | \
-+                      SMTE_PM_XS_BITS)
++    if (ctl & freeze_mask) {
++        env->sctrstatus |= SCTRSTATUS_FROZEN;
++    }
++}
 +
-+/* umte CSR bits */
-+#define UMTE_U_PM_ENABLE    U_PM_ENABLE
-+#define UMTE_U_PM_CURRENT   U_PM_CURRENT
-+#define UMTE_U_PM_INSN      U_PM_INSN
-+#define UMTE_MASK     (UMTE_U_PM_ENABLE | MMTE_U_PM_CURRENT | UMTE_U_PM_INSN)
++static uint64_t riscv_ctr_priv_to_mask(target_ulong priv, bool virt)
++{
++    switch (priv) {
++    case PRV_M:
++        return MCTRCTL_M;
++    case PRV_S:
++        if (virt) {
++            return XCTRCTL_S;
++        }
++        return XCTRCTL_S;
++    case PRV_U:
++        if (virt) {
++            return XCTRCTL_U;
++        }
++        return XCTRCTL_U;
++    }
 +
-+/* CTR control register commom fields */
-+#define XCTRCTL_U              BIT_ULL(0)
-+#define XCTRCTL_S              BIT_ULL(1)
-+#define XCTRCTL_RASEMU         BIT_ULL(7)
-+#define XCTRCTL_STE            BIT_ULL(8)
-+#define XCTRCTL_BPFRZ          BIT_ULL(11)
-+#define XCTRCTL_LCOFIFRZ       BIT_ULL(12)
-+#define XCTRCTL_EXCINH         BIT_ULL(33)
-+#define XCTRCTL_INTRINH        BIT_ULL(34)
-+#define XCTRCTL_TRETINH        BIT_ULL(35)
-+#define XCTRCTL_NTBREN         BIT_ULL(36)
-+#define XCTRCTL_TKBRINH        BIT_ULL(37)
-+#define XCTRCTL_INDCALLINH     BIT_ULL(40)
-+#define XCTRCTL_DIRCALLINH     BIT_ULL(41)
-+#define XCTRCTL_INDJMPINH      BIT_ULL(42)
-+#define XCTRCTL_DIRJMPINH      BIT_ULL(43)
-+#define XCTRCTL_CORSWAPINH     BIT_ULL(44)
-+#define XCTRCTL_RETINH         BIT_ULL(45)
-+#define XCTRCTL_INDLJMPINH     BIT_ULL(46)
-+#define XCTRCTL_DIRLJMPINH     BIT_ULL(47)
++    g_assert_not_reached();
++}
 +
-+#define XCTRCTL_MASK (XCTRCTL_U | XCTRCTL_S | XCTRCTL_RASEMU |                \
-+                      XCTRCTL_STE | XCTRCTL_BPFRZ | XCTRCTL_LCOFIFRZ |        \
-+                      XCTRCTL_EXCINH | XCTRCTL_INTRINH | XCTRCTL_TRETINH |    \
-+                      XCTRCTL_NTBREN | XCTRCTL_TKBRINH | XCTRCTL_INDCALLINH | \
-+                      XCTRCTL_DIRCALLINH | XCTRCTL_INDJMPINH |                \
-+                      XCTRCTL_DIRJMPINH | XCTRCTL_CORSWAPINH |                \
-+                      XCTRCTL_RETINH | XCTRCTL_INDLJMPINH | XCTRCTL_DIRLJMPINH)
++static uint64_t riscv_ctr_get_control(CPURISCVState *env, target_long priv,
++                                      bool virt)
++{
++    switch (priv) {
++    case PRV_M:
++        return env->mctrctl;
++    case PRV_S:
++    case PRV_U:
++        if (virt) {
++            return env->vsctrctl;
++        }
++        return env->mctrctl;
++    }
 +
-+#define XCTRCTL_INH_START         32U
++    g_assert_not_reached();
++}
 +
-+/* CTR mctrctl bits */
-+#define MCTRCTL_M                 BIT_ULL(2)
-+#define MCTRCTL_MTE               BIT_ULL(9)
++/*
++ * This function assumes that src privilege and target privilege are not same
++ * and src privilege is less than target privilege. This includes the virtual
++ * state as well.
++ */
++static bool riscv_ctr_check_xte(CPURISCVState *env, target_long src_prv,
++                                bool src_virt)
++{
++    target_long tgt_prv = env->priv;
++    bool res = true;
 +
-+#define MCTRCTL_MASK              (XCTRCTL_MASK | MCTRCTL_M | MCTRCTL_MTE)
-+#define SCTRCTL_MASK              XCTRCTL_MASK
-+#define VSCTRCTL_MASK             XCTRCTL_MASK
++    /*
++     * VS and U mode are same in terms of xTE bits required to record an
++     * external trap. See 6.1.2. External Traps, table 8 External Trap Enable
++     * Requirements. This changes VS to U to simplify the logic a bit.
++     */
++    if (src_virt && src_prv == PRV_S) {
++        src_prv = PRV_U;
++    } else if (env->virt_enabled && tgt_prv == PRV_S) {
++        tgt_prv = PRV_U;
++    }
 +
-+/* sctrstatus CSR bits. */
-+#define SCTRSTATUS_WRPTR_MASK       0xFF
-+#define SCTRSTATUS_FROZEN           BIT(31)
-+#define SCTRSTATUS_MASK             (SCTRSTATUS_WRPTR_MASK | SCTRSTATUS_FROZEN)
++    /* VU mode is an outlier here. */
++    if (src_virt && src_prv == PRV_U) {
++        res &= !!(env->vsctrctl & XCTRCTL_STE);
++    }
 +
-+/* sctrdepth CSR bits. */
-+#define SCTRDEPTH_MASK              0x7
-+#define SCTRDEPTH_MIN               0U  /* 16 Entries. */
-+#define SCTRDEPTH_MAX               4U  /* 256 Entries. */
++    switch (src_prv) {
++    case PRV_U:
++        if (tgt_prv == PRV_U) {
++            break;
++        }
++        res &= !!(env->mctrctl & XCTRCTL_STE);
++        /* fall-through */
++    case PRV_S:
++        if (tgt_prv == PRV_S) {
++            break;
++        }
++        res &= !!(env->mctrctl & MCTRCTL_MTE);
++        /* fall-through */
++    case PRV_M:
++        break;
++    }
 +
-+#define CTR_ENTRIES_FIRST           0x200
-+#define CTR_ENTRIES_LAST            0x2ff
++    return res;
++}
 +
-+#define CTRSOURCE_VALID             BIT(0)
-+#define CTRTARGET_MISP              BIT(0)
++/*
++ * Special cases for traps and trap returns:
++ *
++ * 1- Traps, and trap returns, between enabled modes are recorded as normal.
++ * 2- Traps from an inhibited mode to an enabled mode, and trap returns from an
++ * enabled mode back to an inhibited mode, are partially recorded.  In such
++ * cases, the PC from the inhibited mode (source PC for traps, and target PC
++ * for trap returns) is 0.
++ *
++ * 3- Trap returns from an inhibited mode to an enabled mode are not recorded.
++ * Traps from an enabled mode to an inhibited mode, known as external traps,
++ * receive special handling.
++ * By default external traps are not recorded, but a handshake mechanism exists
++ * to allow partial recording.  Software running in the target mode of the trap
++ * can opt-in to allowing CTR to record traps into that mode even when the mode
++ * is inhibited.  The MTE, STE, and VSTE bits allow M-mode, S-mode, and VS-mode,
++ * respectively, to opt-in. When an External Trap occurs, and xTE=1, such that
++ * x is the target privilege mode of the trap, will CTR record the trap. In such
++ * cases, the target PC is 0.
++ */
++/*
++ * CTR arrays are implemented as circular buffers and new entry is stored at
++ * sctrstatus.WRPTR, but they are presented to software as moving circular
++ * buffers. Which means, software get's the illusion that whenever a new entry
++ * is added the whole buffer is moved by one place and the new entry is added at
++ * the start keeping new entry at idx 0 and older ones follow.
++ *
++ * Depth = 16.
++ *
++ * buffer [0] [1] [2] [3] [4] [5] [6] [7] [8] [9] [A] [B] [C] [D] [E] [F]
++ * WRPTR                                   W
++ * entry   7   6   5   4   3   2   1   0   F   E   D   C   B   A   9   8
++ *
++ * When a new entry is added:
++ * buffer [0] [1] [2] [3] [4] [5] [6] [7] [8] [9] [A] [B] [C] [D] [E] [F]
++ * WRPTR                                       W
++ * entry   8   7   6   5   4   3   2   1   0   F   E   D   C   B   A   9
++ *
++ * entry here denotes the logical entry number that software can access
++ * using ctrsource, ctrtarget and ctrdata registers. So xiselect 0x200
++ * will return entry 0 i-e buffer[8] and 0x201 will return entry 1 i-e
++ * buffer[7]. Here is how we convert entry to buffer idx.
++ *
++ *    entry = isel - CTR_ENTRIES_FIRST;
++ *    idx = (sctrstatus.WRPTR - entry - 1) & (depth - 1);
++ */
++void riscv_ctr_add_entry(CPURISCVState *env, target_long src, target_long dst,
++    enum CTRType type, target_ulong src_priv, bool src_virt)
++{
++    bool tgt_virt = env->virt_enabled;
++    uint64_t src_mask = riscv_ctr_priv_to_mask(src_priv, src_virt);
++    uint64_t tgt_mask = riscv_ctr_priv_to_mask(env->priv, tgt_virt);
++    uint64_t src_ctrl = riscv_ctr_get_control(env, src_priv, src_virt);
++    uint64_t tgt_ctrl = riscv_ctr_get_control(env, env->priv, tgt_virt);
++    uint64_t depth, head;
++    bool ext_trap = false;
 +
-+#define CTRDATA_TYPE_MASK           0xF
-+#define CTRDATA_CCV                 BIT(15)
-+#define CTRDATA_CCM_MASK            0xFFF0000
-+#define CTRDATA_CCE_MASK            0xF0000000
++    /*
++     * Return immediately if both target and src recording is disabled or if
++     * CTR is in frozen state.
++     */
++    if ((!(src_ctrl & src_mask) && !(tgt_ctrl & tgt_mask)) ||
++        env->sctrstatus & SCTRSTATUS_FROZEN) {
++        return;
++    }
 +
-+#define CTRDATA_MASK            (CTRDATA_TYPE_MASK | CTRDATA_CCV |  \
-+                                 CTRDATA_CCM_MASK | CTRDATA_CCE_MASK)
++    /*
++     * With RAS Emul enabled, only allow Indirect, direct calls, Function
++     * returns and Co-routine swap types.
++     */
++    if (tgt_ctrl & XCTRCTL_RASEMU &&
++        type != CTRDATA_TYPE_INDIRECT_CALL &&
++        type != CTRDATA_TYPE_DIRECT_CALL &&
++        type != CTRDATA_TYPE_RETURN &&
++        type != CTRDATA_TYPE_CO_ROUTINE_SWAP) {
++        return;
++    }
 +
-+typedef enum CTRType {
-+    CTRDATA_TYPE_NONE                   = 0,
-+    CTRDATA_TYPE_EXCEPTION              = 1,
-+    CTRDATA_TYPE_INTERRUPT              = 2,
-+    CTRDATA_TYPE_EXCEP_INT_RET          = 3,
-+    CTRDATA_TYPE_NONTAKEN_BRANCH        = 4,
-+    CTRDATA_TYPE_TAKEN_BRANCH           = 5,
-+    CTRDATA_TYPE_RESERVED_0             = 6,
-+    CTRDATA_TYPE_RESERVED_1             = 7,
-+    CTRDATA_TYPE_INDIRECT_CALL          = 8,
-+    CTRDATA_TYPE_DIRECT_CALL            = 9,
-+    CTRDATA_TYPE_INDIRECT_JUMP          = 10,
-+    CTRDATA_TYPE_DIRECT_JUMP            = 11,
-+    CTRDATA_TYPE_CO_ROUTINE_SWAP        = 12,
-+    CTRDATA_TYPE_RETURN                 = 13,
-+    CTRDATA_TYPE_OTHER_INDIRECT_JUMP    = 14,
-+    CTRDATA_TYPE_OTHER_DIRECT_JUMP      = 15,
-+} CTRType;
++    if (type == CTRDATA_TYPE_EXCEPTION || type == CTRDATA_TYPE_INTERRUPT) {
++        /* Case 2 for traps. */
++        if (!(src_ctrl & src_mask)) {
++            src = 0;
++        } else if (!(tgt_ctrl & tgt_mask)) {
++            /* Check if target priv-mode has allowed external trap recording. */
++            if (!riscv_ctr_check_xte(env, src_priv, src_virt)) {
++                return;
++            }
 +
- /* MISELECT, SISELECT, and VSISELECT bits (AIA) */
- #define ISELECT_IPRIO0                     0x30
- #define ISELECT_IPRIO15                    0x3f
++            ext_trap = true;
++            dst = 0;
++        }
++    } else if (type == CTRDATA_TYPE_EXCEP_INT_RET) {
++        /*
++         * Case 3 for trap returns.  Trap returns from inhibited mode are not
++         * recorded.
++         */
++        if (!(src_ctrl & src_mask)) {
++            return;
++        }
++
++        /* Case 2 for trap returns. */
++        if (!(tgt_ctrl & tgt_mask)) {
++            dst = 0;
++        }
++    }
++
++    /* Ignore filters in case of RASEMU mode or External trap. */
++    if (!(tgt_ctrl & XCTRCTL_RASEMU) && !ext_trap) {
++        /*
++         * Check if the specific type is inhibited. Not taken branch filter is
++         * an enable bit and needs to be checked separatly.
++         */
++        bool check = tgt_ctrl & BIT_ULL(type + XCTRCTL_INH_START);
++        if ((type == CTRDATA_TYPE_NONTAKEN_BRANCH && !check) ||
++            (type != CTRDATA_TYPE_NONTAKEN_BRANCH && check)) {
++            return;
++        }
++    }
++
++    head = get_field(env->sctrstatus, SCTRSTATUS_WRPTR_MASK);
++
++    depth = 16 << get_field(env->sctrdepth, SCTRDEPTH_MASK);
++    if (tgt_ctrl & XCTRCTL_RASEMU && type == CTRDATA_TYPE_RETURN) {
++        head = (head - 1) & (depth - 1);
++
++        env->ctr_src[head] &= ~CTRSOURCE_VALID;
++        env->sctrstatus =
++            set_field(env->sctrstatus, SCTRSTATUS_WRPTR_MASK, head);
++        return;
++    }
++
++    /* In case of Co-routine SWAP we overwrite latest entry. */
++    if (tgt_ctrl & XCTRCTL_RASEMU && type == CTRDATA_TYPE_CO_ROUTINE_SWAP) {
++        head = (head - 1) & (depth - 1);
++    }
++
++    env->ctr_src[head] = src | CTRSOURCE_VALID;
++    env->ctr_dst[head] = dst & ~CTRTARGET_MISP;
++    env->ctr_data[head] = set_field(0, CTRDATA_TYPE_MASK, type);
++
++    head = (head + 1) & (depth - 1);
++
++    env->sctrstatus = set_field(env->sctrstatus, SCTRSTATUS_WRPTR_MASK, head);
++}
++
+ void riscv_cpu_set_mode(CPURISCVState *env, target_ulong newpriv, bool virt_en)
+ {
+     g_assert(newpriv <= PRV_M && newpriv != PRV_RESERVED);
+@@ -1986,10 +2227,13 @@ void riscv_cpu_do_interrupt(CPUState *cs)
+         !(env->mip & (1ULL << cause));
+     bool smode_double_trap = false;
+     uint64_t hdeleg = async ? env->hideleg : env->hedeleg;
++    const bool prev_virt = env->virt_enabled;
++    const target_ulong prev_priv = env->priv;
+     target_ulong tval = 0;
+     target_ulong tinst = 0;
+     target_ulong htval = 0;
+     target_ulong mtval2 = 0;
++    target_ulong src;
+     int sxlen = 0;
+     int mxlen = 16 << riscv_cpu_mxl(env);
+     bool nnmi_excep = false;
+@@ -2173,6 +2417,8 @@ void riscv_cpu_do_interrupt(CPUState *cs)
+         env->pc = (env->stvec >> 2 << 2) +
+                   ((async && (env->stvec & 3) == 1) ? cause * 4 : 0);
+         riscv_cpu_set_mode(env, PRV_S, virt);
++
++        src = env->sepc;
+     } else {
+         /*
+          * If the hart encounters an exception while executing in M-mode
+@@ -2257,6 +2503,19 @@ void riscv_cpu_do_interrupt(CPUState *cs)
+                       ((async && (env->mtvec & 3) == 1) ? cause * 4 : 0);
+         }
+         riscv_cpu_set_mode(env, PRV_M, virt);
++        src = env->mepc;
++    }
++
++    if (riscv_cpu_cfg(env)->ext_smctr || riscv_cpu_cfg(env)->ext_ssctr) {
++        if (async && cause == IRQ_PMU_OVF) {
++            riscv_ctr_freeze(env, XCTRCTL_LCOFIFRZ, virt);
++        } else if (!async && cause == RISCV_EXCP_BREAKPOINT) {
++            riscv_ctr_freeze(env, XCTRCTL_BPFRZ, virt);
++        }
++
++        riscv_ctr_add_entry(env, src, env->pc,
++                        async ? CTRDATA_TYPE_INTERRUPT : CTRDATA_TYPE_EXCEPTION,
++                        prev_priv, prev_virt);
+     }
+ 
+     /*
+diff --git a/target/riscv/helper.h b/target/riscv/helper.h
+index 16ea240d26d31b103dd5da0ac4c7f7d67869af71..163121ade599f5ec2682ecea25a59b664593fba3 100644
+--- a/target/riscv/helper.h
++++ b/target/riscv/helper.h
+@@ -136,6 +136,7 @@ DEF_HELPER_1(wfi, void, env)
+ DEF_HELPER_1(wrs_nto, void, env)
+ DEF_HELPER_1(tlb_flush, void, env)
+ DEF_HELPER_1(tlb_flush_all, void, env)
++DEF_HELPER_4(ctr_add_entry, void, env, tl, tl, tl)
+ /* Native Debug */
+ DEF_HELPER_1(itrigger_match, void, env)
+ #endif
+diff --git a/target/riscv/insn_trans/trans_privileged.c.inc b/target/riscv/insn_trans/trans_privileged.c.inc
+index 27d5558d63edf10a516c068a69023ad9035414fd..ca52405d7da411907f1d52234df955940efdc25d 100644
+--- a/target/riscv/insn_trans/trans_privileged.c.inc
++++ b/target/riscv/insn_trans/trans_privileged.c.inc
+@@ -86,6 +86,7 @@ static bool trans_sret(DisasContext *ctx, arg_sret *a)
+     if (has_ext(ctx, RVS)) {
+         decode_save_opc(ctx, 0);
+         translator_io_start(&ctx->base);
++        gen_update_pc(ctx, 0);
+         gen_helper_sret(cpu_pc, tcg_env);
+         exit_tb(ctx); /* no chaining */
+         ctx->base.is_jmp = DISAS_NORETURN;
+@@ -103,6 +104,7 @@ static bool trans_mret(DisasContext *ctx, arg_mret *a)
+ #ifndef CONFIG_USER_ONLY
+     decode_save_opc(ctx, 0);
+     translator_io_start(&ctx->base);
++    gen_update_pc(ctx, 0);
+     gen_helper_mret(cpu_pc, tcg_env);
+     exit_tb(ctx); /* no chaining */
+     ctx->base.is_jmp = DISAS_NORETURN;
+diff --git a/target/riscv/insn_trans/trans_rvi.c.inc b/target/riscv/insn_trans/trans_rvi.c.inc
+index 96c218a9d7875c6419287ac3aa9746251be3f442..b55f56a5eb2c72eee004e16817a6df13c60446de 100644
+--- a/target/riscv/insn_trans/trans_rvi.c.inc
++++ b/target/riscv/insn_trans/trans_rvi.c.inc
+@@ -93,6 +93,51 @@ static bool trans_jal(DisasContext *ctx, arg_jal *a)
+     return true;
+ }
+ 
++#ifndef CONFIG_USER_ONLY
++/*
++ * Indirect calls
++ * - jalr x1, rs where rs != x5;
++ * - jalr x5, rs where rs != x1;
++ * - c.jalr rs1 where rs1 != x5;
++ *
++ * Indirect jumps
++ * - jalr x0, rs where rs != x1 and rs != x5;
++ * - c.jr rs1 where rs1 != x1 and rs1 != x5.
++ *
++ * Returns
++ * - jalr rd, rs where (rs == x1 or rs == x5) and rd != x1 and rd != x5;
++ * - c.jr rs1 where rs1 == x1 or rs1 == x5.
++ *
++ * Co-routine swap
++ * - jalr x1, x5;
++ * - jalr x5, x1;
++ * - c.jalr x5.
++ *
++ * Other indirect jumps
++ * - jalr rd, rs where rs != x1, rs != x5, rd != x0, rd != x1 and rd != x5.
++ */
++static void gen_ctr_jalr(DisasContext *ctx, arg_jalr *a, TCGv dest)
++{
++    TCGv src = tcg_temp_new();
++    TCGv type;
++
++    if ((a->rd == 1 && a->rs1 != 5) || (a->rd == 5 && a->rs1 != 1)) {
++        type = tcg_constant_tl(CTRDATA_TYPE_INDIRECT_CALL);
++    } else if (a->rd == 0 && a->rs1 != 1 && a->rs1 != 5) {
++        type = tcg_constant_tl(CTRDATA_TYPE_INDIRECT_JUMP);
++    } else if ((a->rs1 == 1 || a->rs1 == 5) && (a->rd != 1 && a->rd != 5)) {
++        type = tcg_constant_tl(CTRDATA_TYPE_RETURN);
++    } else if ((a->rs1 == 1 && a->rd == 5) || (a->rs1 == 5 && a->rd == 1)) {
++        type = tcg_constant_tl(CTRDATA_TYPE_CO_ROUTINE_SWAP);
++    } else {
++        type = tcg_constant_tl(CTRDATA_TYPE_OTHER_INDIRECT_JUMP);
++    }
++
++    gen_pc_plus_diff(src, ctx, 0);
++    gen_helper_ctr_add_entry(tcg_env, src, dest, type);
++}
++#endif
++
+ static bool trans_jalr(DisasContext *ctx, arg_jalr *a)
+ {
+     TCGLabel *misaligned = NULL;
+@@ -117,6 +162,12 @@ static bool trans_jalr(DisasContext *ctx, arg_jalr *a)
+     gen_pc_plus_diff(succ_pc, ctx, ctx->cur_insn_len);
+     gen_set_gpr(ctx, a->rd, succ_pc);
+ 
++#ifndef CONFIG_USER_ONLY
++    if (ctx->cfg_ptr->ext_smctr || ctx->cfg_ptr->ext_ssctr) {
++        gen_ctr_jalr(ctx, a, target_pc);
++    }
++#endif
++
+     tcg_gen_mov_tl(cpu_pc, target_pc);
+     if (ctx->fcfi_enabled) {
+         /*
+@@ -231,6 +282,19 @@ static bool gen_branch(DisasContext *ctx, arg_b *a, TCGCond cond)
+     } else {
+         tcg_gen_brcond_tl(cond, src1, src2, l);
+     }
++
++#ifndef CONFIG_USER_ONLY
++    if (ctx->cfg_ptr->ext_smctr || ctx->cfg_ptr->ext_ssctr) {
++        TCGv type = tcg_constant_tl(CTRDATA_TYPE_NONTAKEN_BRANCH);
++        TCGv dest = tcg_temp_new();
++        TCGv src = tcg_temp_new();
++
++        gen_pc_plus_diff(src, ctx, 0);
++        gen_pc_plus_diff(dest, ctx, ctx->cur_insn_len);
++        gen_helper_ctr_add_entry(tcg_env, src, dest, type);
++    }
++#endif
++
+     gen_goto_tb(ctx, 1, ctx->cur_insn_len);
+     ctx->pc_save = orig_pc_save;
+ 
+@@ -243,6 +307,17 @@ static bool gen_branch(DisasContext *ctx, arg_b *a, TCGCond cond)
+         gen_pc_plus_diff(target_pc, ctx, a->imm);
+         gen_exception_inst_addr_mis(ctx, target_pc);
+     } else {
++#ifndef CONFIG_USER_ONLY
++        if (ctx->cfg_ptr->ext_smctr || ctx->cfg_ptr->ext_ssctr) {
++            TCGv type = tcg_constant_tl(CTRDATA_TYPE_TAKEN_BRANCH);
++            TCGv dest = tcg_temp_new();
++            TCGv src = tcg_temp_new();
++
++            gen_pc_plus_diff(src, ctx, 0);
++            gen_pc_plus_diff(dest, ctx, a->imm);
++            gen_helper_ctr_add_entry(tcg_env, src, dest, type);
++        }
++#endif
+         gen_goto_tb(ctx, 0, a->imm);
+     }
+     ctx->pc_save = -1;
+diff --git a/target/riscv/insn_trans/trans_rvzce.c.inc b/target/riscv/insn_trans/trans_rvzce.c.inc
+index cd234ad960724c936b92afb6fd1f3c7c2a37cb80..c77c2b927b0cfdf7d21dca7657712015494e1b46 100644
+--- a/target/riscv/insn_trans/trans_rvzce.c.inc
++++ b/target/riscv/insn_trans/trans_rvzce.c.inc
+@@ -203,6 +203,14 @@ static bool gen_pop(DisasContext *ctx, arg_cmpp *a, bool ret, bool ret_val)
+ 
+     if (ret) {
+         TCGv ret_addr = get_gpr(ctx, xRA, EXT_SIGN);
++#ifndef CONFIG_USER_ONLY
++        if (ctx->cfg_ptr->ext_smctr || ctx->cfg_ptr->ext_ssctr) {
++            TCGv type = tcg_constant_tl(CTRDATA_TYPE_RETURN);
++            TCGv src = tcg_temp_new();
++            gen_pc_plus_diff(src, ctx, 0);
++            gen_helper_ctr_add_entry(tcg_env, src, ret_addr, type);
++        }
++#endif
+         tcg_gen_mov_tl(cpu_pc, ret_addr);
+         tcg_gen_lookup_and_goto_ptr();
+         ctx->base.is_jmp = DISAS_NORETURN;
+@@ -309,6 +317,19 @@ static bool trans_cm_jalt(DisasContext *ctx, arg_cm_jalt *a)
+         gen_set_gpr(ctx, xRA, succ_pc);
+     }
+ 
++#ifndef CONFIG_USER_ONLY
++    if (ctx->cfg_ptr->ext_smctr || ctx->cfg_ptr->ext_ssctr) {
++        if (a->index >= 32) {
++            TCGv type = tcg_constant_tl(CTRDATA_TYPE_DIRECT_CALL);
++            gen_helper_ctr_add_entry(tcg_env, cpu_pc, addr, type);
++        } else {
++            TCGv type = tcg_constant_tl(CTRDATA_TYPE_DIRECT_JUMP);
++            gen_helper_ctr_add_entry(tcg_env, cpu_pc, addr, type);
++        }
++    }
++#endif
++
++
+     tcg_gen_mov_tl(cpu_pc, addr);
+ 
+     tcg_gen_lookup_and_goto_ptr();
+diff --git a/target/riscv/op_helper.c b/target/riscv/op_helper.c
+index ce1256f439c69c32335193dcdcb98f0c38b10b39..5a99c47b128caf847df76cd1b534f9fdf15a28a8 100644
+--- a/target/riscv/op_helper.c
++++ b/target/riscv/op_helper.c
+@@ -270,6 +270,8 @@ target_ulong helper_sret(CPURISCVState *env)
+ {
+     uint64_t mstatus;
+     target_ulong prev_priv, prev_virt = env->virt_enabled;
++    const target_ulong src_priv = env->priv;
++    const bool src_virt = env->virt_enabled;
+ 
+     if (!(env->priv >= PRV_S)) {
+         riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
+@@ -339,6 +341,11 @@ target_ulong helper_sret(CPURISCVState *env)
+     }
+     env->mstatus = set_field(env->mstatus, MSTATUS_SPELP, 0);
+ 
++    if (riscv_cpu_cfg(env)->ext_smctr || riscv_cpu_cfg(env)->ext_ssctr) {
++        riscv_ctr_add_entry(env, env->pc, retpc, CTRDATA_TYPE_EXCEP_INT_RET,
++                            src_priv, src_virt);
++    }
++
+     return retpc;
+ }
+ 
+@@ -416,6 +423,11 @@ target_ulong helper_mret(CPURISCVState *env)
+     }
+     env->mstatus = set_field(env->mstatus, MSTATUS_MPELP, 0);
+ 
++    if (riscv_cpu_cfg(env)->ext_smctr || riscv_cpu_cfg(env)->ext_ssctr) {
++        riscv_ctr_add_entry(env, env->pc, retpc, CTRDATA_TYPE_EXCEP_INT_RET,
++                            PRV_M, false);
++    }
++
+     return retpc;
+ }
+ 
+@@ -466,6 +478,13 @@ target_ulong helper_mnret(CPURISCVState *env)
+     return retpc;
+ }
+ 
++void helper_ctr_add_entry(CPURISCVState *env, target_ulong src,
++                          target_ulong dest, target_ulong type)
++{
++    riscv_ctr_add_entry(env, src, dest, (enum CTRType)type,
++                        env->priv, env->virt_enabled);
++}
++
+ void helper_wfi(CPURISCVState *env)
+ {
+     CPUState *cs = env_cpu(env);
+diff --git a/target/riscv/translate.c b/target/riscv/translate.c
+index 698b74f7a8fab0b55616dedb06e46805b34a3743..eaa5d86eaeedd53b2bc27142124129b0fb23674f 100644
+--- a/target/riscv/translate.c
++++ b/target/riscv/translate.c
+@@ -561,6 +561,46 @@ static void gen_set_fpr_d(DisasContext *ctx, int reg_num, TCGv_i64 t)
+     }
+ }
+ 
++#ifndef CONFIG_USER_ONLY
++/*
++ * Direct calls
++ * - jal x1;
++ * - jal x5;
++ * - c.jal.
++ * - cm.jalt.
++ *
++ * Direct jumps
++ * - jal x0;
++ * - c.j;
++ * - cm.jt.
++ *
++ * Other direct jumps
++ * - jal rd where rd != x1 and rd != x5 and rd != x0;
++ */
++static void gen_ctr_jal(DisasContext *ctx, int rd, target_ulong imm)
++{
++    TCGv dest = tcg_temp_new();
++    TCGv src = tcg_temp_new();
++    TCGv type;
++
++    /*
++     * If rd is x1 or x5 link registers, treat this as direct call otherwise
++     * its a direct jump.
++     */
++    if (rd == 1 || rd == 5) {
++        type = tcg_constant_tl(CTRDATA_TYPE_DIRECT_CALL);
++    } else if (rd == 0) {
++        type = tcg_constant_tl(CTRDATA_TYPE_DIRECT_JUMP);
++    } else {
++        type = tcg_constant_tl(CTRDATA_TYPE_OTHER_DIRECT_JUMP);
++    }
++
++    gen_pc_plus_diff(dest, ctx, imm);
++    gen_pc_plus_diff(src, ctx, 0);
++    gen_helper_ctr_add_entry(tcg_env, src, dest, type);
++}
++#endif
++
+ static void gen_jal(DisasContext *ctx, int rd, target_ulong imm)
+ {
+     TCGv succ_pc = dest_gpr(ctx, rd);
+@@ -575,6 +615,12 @@ static void gen_jal(DisasContext *ctx, int rd, target_ulong imm)
+         }
+     }
+ 
++#ifndef CONFIG_USER_ONLY
++    if (ctx->cfg_ptr->ext_smctr || ctx->cfg_ptr->ext_ssctr) {
++        gen_ctr_jal(ctx, rd, imm);
++    }
++#endif
++
+     gen_pc_plus_diff(succ_pc, ctx, ctx->cur_insn_len);
+     gen_set_gpr(ctx, rd, succ_pc);
+ 
 
 -- 
 2.34.1
