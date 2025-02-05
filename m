@@ -4,91 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 24EE7C02193
-	for <qemu-riscv@archiver.kernel.org>; Tue,  4 Feb 2025 21:46:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 51C35C02192
+	for <qemu-riscv@archiver.kernel.org>; Wed,  5 Feb 2025 07:04:01 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tfQkc-0008Nu-HQ; Tue, 04 Feb 2025 16:46:34 -0500
+	id 1tfZRa-0001U2-2H; Wed, 05 Feb 2025 02:03:30 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tfQkb-0008NX-IQ
- for qemu-riscv@nongnu.org; Tue, 04 Feb 2025 16:46:33 -0500
-Received: from mail-wr1-x433.google.com ([2a00:1450:4864:20::433])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tfQkZ-0005Nk-Kb
- for qemu-riscv@nongnu.org; Tue, 04 Feb 2025 16:46:33 -0500
-Received: by mail-wr1-x433.google.com with SMTP id
- ffacd0b85a97d-38da713b9daso1223896f8f.3
- for <qemu-riscv@nongnu.org>; Tue, 04 Feb 2025 13:46:31 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1738705590; x=1739310390; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=6zix+2XzlAWB3iAZ7J6dqnst6Y/RLxo8jGubN17CA0I=;
- b=Lza/yNQQN1cT0EuqDyveidlbE4Ep/Ek1FzSlMe3+cPoe764Th0o9hQvf5gTW1y4/8s
- qrvs0YndgOiIUi9e9ts6I3F/qbwBQCP10g4KZy1EWZc+mukSBrFyOJwEPVMj7fclo3up
- oY79w4s8RM917bhiZurHBYXmZkn2vlUZaa48trnQ8hg5f1x0ba4sFvqpQ9LnSAZEajKM
- sIAGgyQRjkKSKPLdWqYtot7VzbXhGL4N+Hpv+KNXHreuP4oZyiNuHaM0aA58cfmuN+fF
- U22xMH9G/KRMzx1fN1wMqMuuwp6li3/nHiEqocRFiZBQwq/8uCiFg+HCX2oxalSXVlNp
- txmg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1738705590; x=1739310390;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=6zix+2XzlAWB3iAZ7J6dqnst6Y/RLxo8jGubN17CA0I=;
- b=Mp3EPwhbeckoEE/txxPlKu65FuHhWdA0uBAfaVKTIFHhcyAy8GvIKM3TNkGnDuYl8s
- ACcaoBNSmHgrEkueBLQvwk+aMeMM/Wshi34bojL38xXmosQ9TNBBokQ3CPY8ue14dEHN
- 78PoV6GLqz1tXcTqZgT/Adzf0N3aruh9ausn51nrED/KcDi8xrCTnxiQ3DaeDQqNEN+F
- 6MGNSwZVuMBR1AeDd25Rj9eaI0i1rT0KzQKgDKL2eX4IqcXs5DYhoj6jLLqnu455J3Eb
- tACaSLpmK1uZO+bprBw/5YK1NeW4agusCjD7xf6fFBe1DbxXhOLTStzJuFm4zahakTE5
- 1p0g==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXb614LGbCFGQ+bq/GLS6HAqh+t4Yo5WH4nV9ML0GswaautXdJTJNaOMv8S4zYAQrfeEExSD6oB2aMz@nongnu.org
-X-Gm-Message-State: AOJu0Yzalie6Dn5gSL+PzUEIfHmxT6uqpOM50QmPbVf236HOWzgr/S0q
- bZuyDYY+fconc1vwiT5/xDirKBZ8AgJpt95eikki9OCN0wIldq647+cEi+AhnlU=
-X-Gm-Gg: ASbGncsfa2yrIEtq4v/mNYckeBqVALOqQXEz0lvKmZUZoipXb9h+wtJR+0cGuNn45WE
- ljSkc5rdwsJ9LdACBJ2bE7FLO/9pHgaV8nJQKHOeCs4G6ZKFqO0uJ7oPWfo4bv0reIypPygQraa
- opNVnW4V/sVh3a/Ab/dIKq/O4Jd7/AgErTfZGmgnasi9l2HkXPSefwj9wqeUEo45yhOfR/M82/D
- tH/6sDwFDqo635jCMniN61DvDgwWmh60v75MLFNCigiG4oiuu7AwAgWfcbUshN3ziP5N3nHhjGQ
- lbK8OK1Lh4z1i+j5f5h9pbhYGanCo+55dsUTSFzWqmhlliqw6SCADLW+eYc=
-X-Google-Smtp-Source: AGHT+IG9fYVcNjd4KrepiyxYV/XOclbCs7/Tu4PydlvgnG441JpTbvLsm3f67QBRBdAo40c76+lx6Q==
-X-Received: by 2002:adf:ef89:0:b0:38d:a883:b95b with SMTP id
- ffacd0b85a97d-38db48a42f8mr273456f8f.28.1738705589709; 
- Tue, 04 Feb 2025 13:46:29 -0800 (PST)
-Received: from [192.168.69.198] (88-187-86-199.subs.proxad.net.
- [88.187.86.199]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-38c5c1cf560sm16648489f8f.89.2025.02.04.13.46.28
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 04 Feb 2025 13:46:29 -0800 (PST)
-Message-ID: <e6d14f33-94ec-47ba-9fec-64ce94da2ad0@linaro.org>
-Date: Tue, 4 Feb 2025 22:46:28 +0100
+ (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1tfZRU-0001Sd-MQ
+ for qemu-riscv@nongnu.org; Wed, 05 Feb 2025 02:03:25 -0500
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1tfZRS-0004bF-J7
+ for qemu-riscv@nongnu.org; Wed, 05 Feb 2025 02:03:24 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1738739001;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=PeKzNCbqDHX5T2qs5ymRJlvRDQ8IU5pfqJoGl2ABSfo=;
+ b=O+CbXfBziCCu9fxpE4+WZBbuobjU2InCiCAWLSEIpuX39Fwy8o+gewdlqhhO2iQ8bYhlBX
+ Seo0sw4pGT/LdlXo3GFcX7ocReC30RW3TAZNXoSrnTpHrYlO0Ii2eJnS7SUwkiDiVMefk4
+ 6L6H4CN1EUTpcu1fE9/Vv0ZL4ylIm2g=
+Received: from mx-prod-mc-06.mail-002.prod.us-west-2.aws.redhat.com
+ (ec2-35-165-154-97.us-west-2.compute.amazonaws.com [35.165.154.97]) by
+ relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-549-NxnVGc7IMQ-OvdGzLLlYjw-1; Wed,
+ 05 Feb 2025 02:03:18 -0500
+X-MC-Unique: NxnVGc7IMQ-OvdGzLLlYjw-1
+X-Mimecast-MFC-AGG-ID: NxnVGc7IMQ-OvdGzLLlYjw
+Received: from mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com
+ (mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.111])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mx-prod-mc-06.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id E24DA1800875; Wed,  5 Feb 2025 07:03:15 +0000 (UTC)
+Received: from blackfin.pond.sub.org (unknown [10.39.192.40])
+ by mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id 3D45B180056F; Wed,  5 Feb 2025 07:03:13 +0000 (UTC)
+Received: by blackfin.pond.sub.org (Postfix, from userid 1000)
+ id DF4D921E6A28; Wed, 05 Feb 2025 08:03:10 +0100 (CET)
+From: Markus Armbruster <armbru@redhat.com>
+To: Philippe =?utf-8?Q?Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+Cc: qemu-devel@nongnu.org,  qemu-riscv@nongnu.org,  qemu-arm@nongnu.org,
+ Peter Maydell <peter.maydell@linaro.org>,  qemu-ppc@nongnu.org,  Daniel P
+ . =?utf-8?Q?Berrang=C3=A9?= <berrange@redhat.com>,  Paolo Bonzini
+ <pbonzini@redhat.com>,
+ Thomas Huth <thuth@redhat.com>,  qemu-s390x@nongnu.org
+Subject: Re: [PATCH v2 4/8] hw/boards: Remove all invalid uses of
+ auto_create_sdcard=true
+In-Reply-To: <20250204180746.58357-5-philmd@linaro.org> ("Philippe
+ =?utf-8?Q?Mathieu-Daud=C3=A9=22's?= message of "Tue, 4 Feb 2025 19:07:42
+ +0100")
+References: <20250204180746.58357-1-philmd@linaro.org>
+ <20250204180746.58357-5-philmd@linaro.org>
+Date: Wed, 05 Feb 2025 08:03:10 +0100
+Message-ID: <87a5b07u1d.fsf@pond.sub.org>
+User-Agent: Gnus/5.13 (Gnus v5.13)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] smbios: make memory device size configurable per Machine
-To: Igor Mammedov <imammedo@redhat.com>, qemu-riscv <qemu-riscv@nongnu.org>
-Cc: qemu-devel@nongnu.org, peter.maydell@linaro.org, mst@redhat.com,
- wangyanan55@huawei.com, pbonzini@redhat.com, richard.henderson@linaro.org,
- anisinha@redhat.com, qemu-arm@nongnu.org
-References: <20240711074822.3384344-1-imammedo@redhat.com>
- <d921c3d3-71a9-49e4-9f28-1ff3f19b9c48@linaro.org>
- <20240711104230.1582fba0@imammedo.users.ipa.redhat.com>
-Content-Language: en-US
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-In-Reply-To: <20240711104230.1582fba0@imammedo.users.ipa.redhat.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::433;
- envelope-from=philmd@linaro.org; helo=mail-wr1-x433.google.com
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.111
+Received-SPF: pass client-ip=170.10.129.124; envelope-from=armbru@redhat.com;
+ helo=us-smtp-delivery-124.mimecast.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H5=0.001, RCVD_IN_MSPIKE_WL=0.001,
+ RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001, RCVD_IN_VALIDITY_SAFE_BLOCKED=0.001,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -104,95 +93,25 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 11/7/24 10:42, Igor Mammedov wrote:
-> On Thu, 11 Jul 2024 10:19:27 +0200
-> Philippe Mathieu-Daudé <philmd@linaro.org> wrote:
-> 
->> Hi Igor,
->>
->> On 11/7/24 09:48, Igor Mammedov wrote:
->>> Currently SMBIOS maximum memory device chunk is capped at 16Gb,
->>> which is fine for the most cases (QEMU uses it to describe initial
->>> RAM (type 17 SMBIOS table entries)).
->>> However when starting guest with terabytes of RAM this leads to
->>> too many memory device structures, which eventually upsets linux
->>> kernel as it reserves only 64K for these entries and when that
->>> border is crossed out it runs out of reserved memory.
->>>
->>> Instead of partitioning initial RAM on 16Gb chunks, use maximum
->>> possible chunk size that SMBIOS spec allows[1]. Which lets
->>> encode RAM in Mb units in uint32_t-1 field (upto 2047Tb).
->>> As result initial RAM will generate only one type 17 structure
->>> until host/guest reach ability to use more RAM in the future.
->>>
->>> Compat changes:
->>> We can't unconditionally change chunk size as it will break
->>> QEMU<->guest ABI (and migration). Thus introduce a new machine class
->>> field that would let older versioned machines to use 16Gb chunks
->>> while new machine type could use maximum possible chunk size.
->>>
->>> While it might seem to be risky to rise max entry size this much
->>> (much beyond of what current physical RAM modules support),
->>> I'd not expect it causing much issues, modulo uncovering bugs
->>> in software running within guest. And those should be fixed
->>> on guest side to handle SMBIOS spec properly, especially if
->>> guest is expected to support so huge RAM configs.
->>> In worst case, QEMU can reduce chunk size later if we would
->>> care enough about introducing a workaround for some 'unfixable'
->>> guest OS, either by fixing up the next machine type or
->>> giving users a CLI option to customize it.
->>>
->>> 1) SMBIOS 3.1.0 7.18.5 Memory Device — Extended Size
->>>
->>> PS:
->>> * tested on 8Tb host with RHEL6 guest, which seems to parse
->>>     type 17 SMBIOS table entries correctly (according to 'dmidecode').
->>>
->>> Signed-off-by: Igor Mammedov <imammedo@redhat.com>
->>> ---
->>>    include/hw/boards.h |  4 ++++
->>>    hw/arm/virt.c       |  1 +
->>>    hw/core/machine.c   |  1 +
->>>    hw/i386/pc_piix.c   |  1 +
->>>    hw/i386/pc_q35.c    |  1 +
->>>    hw/smbios/smbios.c  | 11 ++++++-----
->>>    6 files changed, 14 insertions(+), 5 deletions(-)
->>>
->>> diff --git a/include/hw/boards.h b/include/hw/boards.h
->>> index ef6f18f2c1..48ff6d8b93 100644
->>> --- a/include/hw/boards.h
->>> +++ b/include/hw/boards.h
->>> @@ -237,6 +237,9 @@ typedef struct {
->>>     *    purposes only.
->>>     *    Applies only to default memory backend, i.e., explicit memory backend
->>>     *    wasn't used.
->>> + * @smbios_memory_device_size:
->>> + *    Default size of memory device,
->>> + *    SMBIOS 3.1.0 "7.18 Memory Device (Type 17)"
->>>     */
->>>    struct MachineClass {
->>>        /*< private >*/
->>> @@ -304,6 +307,7 @@ struct MachineClass {
->>>        const CPUArchIdList *(*possible_cpu_arch_ids)(MachineState *machine);
->>>        int64_t (*get_default_cpu_node_id)(const MachineState *ms, int idx);
->>>        ram_addr_t (*fixup_ram_size)(ram_addr_t size);
->>> +    uint64_t smbios_memory_device_size;
->>
->> Quick notes since I'm on holidays (not meant to block this patch):
->>
->> - How will evolve this machine class property in the context of
->>     a heterogeneous machine (i.e. x86_64 cores and 1 riscv32 one)?
-> 
-> I'm not aware of a SMBIOS spec (3.x) that cares about that heterogeneous
-> setup yet. Are there anything in that area exists yet?
+Philippe Mathieu-Daud=C3=A9 <philmd@linaro.org> writes:
 
-Not yet.
+> MachineClass::auto_create_sdcard is only useful to automatically
+> create a SD card, attach a IF_SD block drive to it and plug the
+> card onto a SD bus. Only the ARM and RISCV targets use such
+> feature:
+>
+>  $ git grep -wl IF_SD hw | cut -d/ -f-2 | sort -u
+>  hw/arm
+>  hw/riscv
+>  $
+>
+> Remove all other uses.
+>
+> Signed-off-by: Philippe Mathieu-Daud=C3=A9 <philmd@linaro.org>
 
-> 
->> - Should this become a SmbiosProviderInterface later?
-> if/when SMBIOS does get there (heterogeneous machines), introducing
-> an interface might make a sense.
+Impact?
 
-OK.
+As far as I can tell, this stops creation of the if=3Dsd default drive
+these machines don't actually use.  Correct?
 
 
