@@ -4,65 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EC26CC02194
-	for <qemu-riscv@archiver.kernel.org>; Thu,  6 Feb 2025 18:20:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D7EDDC02194
+	for <qemu-riscv@archiver.kernel.org>; Thu,  6 Feb 2025 18:20:37 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tg6T7-0008OJ-NP; Thu, 06 Feb 2025 13:19:18 -0500
+	id 1tg6Sv-000836-1M; Thu, 06 Feb 2025 13:19:05 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tg6T4-0008Hq-1M
- for qemu-riscv@nongnu.org; Thu, 06 Feb 2025 13:19:15 -0500
-Received: from mail-wr1-x429.google.com ([2a00:1450:4864:20::429])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tg6St-00080q-Er
+ for qemu-riscv@nongnu.org; Thu, 06 Feb 2025 13:19:03 -0500
+Received: from mail-wr1-x430.google.com ([2a00:1450:4864:20::430])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tg6Sx-0006sG-03
- for qemu-riscv@nongnu.org; Thu, 06 Feb 2025 13:19:08 -0500
-Received: by mail-wr1-x429.google.com with SMTP id
- ffacd0b85a97d-38db34a5c5fso614720f8f.2
- for <qemu-riscv@nongnu.org>; Thu, 06 Feb 2025 10:19:06 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tg6Sr-0006rA-R9
+ for qemu-riscv@nongnu.org; Thu, 06 Feb 2025 13:19:03 -0500
+Received: by mail-wr1-x430.google.com with SMTP id
+ ffacd0b85a97d-38dc6d9b292so106809f8f.2
+ for <qemu-riscv@nongnu.org>; Thu, 06 Feb 2025 10:19:01 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1738865945; x=1739470745; darn=nongnu.org;
+ d=linaro.org; s=google; t=1738865940; x=1739470740; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=cvk5XVWM6B/U3edLFXPiRke7Pe808hVHpTM0rnQwgtQ=;
- b=SVIQACkHxIxHQXcjc1ksIuC4CypjMF+czbB9r4LmfXrZNM1d+hCDdgrzgZMSgtN/1/
- jjWPWNFTzb/YWWv3ts5ruL80JDW9XgCFF/hPnX1ub8ycVwoYLv89B8fTyheym9KnWuPm
- uWJk3h+Fj86prAJeHuh2dNPoY+x0s2cOcZNIdwKYEc/fBHlPUPmXnPcigbS/6PrhogLh
- 8RVXXaBoa8t0wJRSe5IOMTvsBG8fQkDYnXOFvAxX/WR5fV3hGbSdMdX7IhYZ1IqeroNx
- ELuC8MIvwzY2ym+T/Qo559luruWDRnwY4RWdc/IvU4r3yevVEzqlFDWAlXHjyiKA5bd3
- a33g==
+ bh=5Rk4bXft0s/BXA9vpR8jU6qA4/CSXx2ZYQlNSJ5gsvQ=;
+ b=QjSLcK4Zl4wZIrLlHM1PKf2geh0rzVeMmfoaHDm4hKnPQdaOqrP21wBiV+6iFN3Mm2
+ k+/5tOIRLu4TCiV9hSwvsCOhj6lAnwl5sX66HREyTEq6YyiVhoRtITFQn7yAYOIMKfBT
+ zYk/kldzeWF4HDD4/W7hE9hzulSOHnB6GlXbYmCVmZIe6STzHFLSML4mt/UkqBdiwwYd
+ VWIfIM/lzPP+wAQlUjsLcntq+IvgDWv84RLNN2vgPu1kHScp4tAXyOFc8VhRuzCT//D+
+ E/pIF8Dcc2hif0wV2pl5IUTZUGbQQnY5mQ6rEKsr9Rkd1K0tfSWUAdQEOQ3N/TQeS7/G
+ RRwA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1738865945; x=1739470745;
+ d=1e100.net; s=20230601; t=1738865940; x=1739470740;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=cvk5XVWM6B/U3edLFXPiRke7Pe808hVHpTM0rnQwgtQ=;
- b=ehu+/t5bIbT7heCYIh6SGnmzPwK9a6+tohQMbZvjo5Dy7BdNaB9aW4UhFivws5h+fm
- qvjSwNdth/dSaPabGi6qzFQf4WQ1/xSI87iujb/ezq8KLErHz+j2QkweYAJ8onGPiFrs
- sCb6e1IYkSGICjjWyPOjR2xl7Xc9KavMYNKp+eESQ0Gx8LdUklN3KYglBFM+XErdEVsE
- 2f/H7nox/gOx7FfF02wAqrGmRxdMfRGyscAhR0DvD16F2yW3nN1sdxVPabgNrWHoPH34
- qW0bz8nzGFXU7otTfCQP70xeRpEMTozcdCyB8QZ388eSnwNM9S4963sokvMX86PfW3wb
- 5X/w==
+ bh=5Rk4bXft0s/BXA9vpR8jU6qA4/CSXx2ZYQlNSJ5gsvQ=;
+ b=hN9zHBWChaI3p7zRX3Hqk9HSfnL/sYvRis1YZGe/6v+gakfTgb4A1Px++i4bO1qmgn
+ 46aSJPr2zHEFhtPtvXRZFDpdwZppDITwIjm75JP3OIq6cDkBckRDQPHlNoPTF6mgtAVw
+ /wmfqKSmCoyxAdo0L9KQQrVvQZky9gdQnSIZkpBaw0nb5x9ieWBbJ3Hs42qxFpORgPES
+ +HfEAOl1mqcDiF9cwRsUp81p1RlPUK6QdMRCUiop+pdlwaUB4nhd/A27u9PxRoVKb+dj
+ R5IqRQiMY0rBul1slVCNXu2wFfa+cZvpsEjmhl9lUI+RnUUYMu1oiTuBzEUfjpu+Jc+a
+ u1YQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWJUqznqg0S+poofMID2YejgOZfUsEtxw3p6gYY53+TTkfzc6NF+IgxpxsHm9pdIMolxGSluy7XsMRq@nongnu.org
-X-Gm-Message-State: AOJu0YxpCgCG00UlyyH091AV+qb7JxpvO8xfOeEt/kpfKxaTxd4f1rBF
- LVmCOYgg6MbAMDkIEcYK7AcYaydif6JqubmlSsuYvCbL1r4HJFu5rEGQNBqCe0U=
-X-Gm-Gg: ASbGncu4p36zpQksfXl0YD8nZxYlda1BmmVyyn6lXLNyk7N0xVD6+BGq/nR49Kd6r5t
- +YDQk4WcKoTyanAllWnw37gXGtlNrdDwAVFqCm0YuGOL/HDVrDvUdRslPzaMgKg+SaQZSZf/kqf
- r0WZ5YcBB3nsG3gi9ge/k5vy13I+LSnK0PgztOdG1dEgKtbZPWMJa6T0DPZdUxlC1kJdVKBJ6fz
- t3TPV0TDH89PdQdNKWYW9skapIbTBVQebQ1t+aEGBuWof98ZTk12T/LEe+3WtUqlSXUTNLCHq5H
- 0rMzoRtECwHy42Bruq85ICVeTR6PyJs0GciG8HjVBMDwL9c22BzwPlkAzrVnHvWsAA==
-X-Google-Smtp-Source: AGHT+IEISMzuba5y5/a/hV1oFvHOX1dJCnIqiaCa55m0+aDk27ImuF5o9z6OsKXLJ5E4PHf3A2yCLA==
-X-Received: by 2002:adf:e30e:0:b0:38d:c85c:f917 with SMTP id
- ffacd0b85a97d-38dc85cf9f1mr99566f8f.55.1738865945467; 
- Thu, 06 Feb 2025 10:19:05 -0800 (PST)
+ AJvYcCXw1oBAHY9toG8Huo07jEWSRWNQeZEkn8DjSDpLMzS+iiwv2G+BMSAh9xr/AIQd+Xb5j2dm6h5UNxdr@nongnu.org
+X-Gm-Message-State: AOJu0YwQbqpTmT058+Mr9FSrfi90E95lmR1l0MahqGPYcMyl9jei+MCN
+ orRFskXVx3Ot9Yu/+a2kmpvfuh4+r4MRfLfm5LMiOj4vDVyCqy5C2SAoh33fdVo=
+X-Gm-Gg: ASbGnctwx/WIcAjkWyFFOZpcvfn80kacEfyoZFe8dMmrPsSCLy7tKReKUGZHebBAm9H
+ nqr0cS+K4PAVPzsxoPofRegQTw0FXuXEQ3WQ4Vp8jsEGXycD3oguR2QT7/eERnZoDXKC8FKR6dY
+ 2ncRKe8r6JNnCxCYj7NPKVSbMXJf+LuPR+wwSoImnLOlUszxSaa866McA/pC98tAQ1gNq8xjgHw
+ tqr1ngjJXYPlPXAWyrPcb/E2LD0PTphkrZbQIwaexD9iZBmjTBjPKxFEG7NwCrQ/JyqjGCyGLes
+ usbmfyMcW90463hwBPBaCDIq5Fj79EqRSfiaco1euU6rV+sM/RM6NsupFaVlwWy5tA==
+X-Google-Smtp-Source: AGHT+IE/1lQWPvojDSp4YKi4o595AHTqMFnURwEpiv2mdh2Nf9nSCBYB9pEzJYPH6M6RAwhKN+Tauw==
+X-Received: by 2002:a05:6000:4c1:b0:38d:a910:b4d5 with SMTP id
+ ffacd0b85a97d-38db494e5fcmr4870954f8f.54.1738865940138; 
+ Thu, 06 Feb 2025 10:19:00 -0800 (PST)
 Received: from localhost.localdomain (88-187-86-199.subs.proxad.net.
  [88.187.86.199]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-38dbdd1c151sm2310535f8f.7.2025.02.06.10.19.04
+ 5b1f17b1804b1-4390d94d802sm65995685e9.12.2025.02.06.10.18.59
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Thu, 06 Feb 2025 10:19:04 -0800 (PST)
+ Thu, 06 Feb 2025 10:18:59 -0800 (PST)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Palmer Dabbelt <palmer@dabbelt.com>, qemu-riscv@nongnu.org,
@@ -72,18 +72,17 @@ Cc: Palmer Dabbelt <palmer@dabbelt.com>, qemu-riscv@nongnu.org,
  Sunil V L <sunilvl@ventanamicro.com>,
  Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-Subject: [PATCH 7/7] hw/riscv: Move few objects to common_ss[] to build them
- once
-Date: Thu,  6 Feb 2025 19:18:27 +0100
-Message-ID: <20250206181827.41557-8-philmd@linaro.org>
+Subject: [PATCH 6/7] hw/riscv/hart: Make 'riscv_hart.h' header target-agnostic
+Date: Thu,  6 Feb 2025 19:18:26 +0100
+Message-ID: <20250206181827.41557-7-philmd@linaro.org>
 X-Mailer: git-send-email 2.47.1
 In-Reply-To: <20250206181827.41557-1-philmd@linaro.org>
 References: <20250206181827.41557-1-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::429;
- envelope-from=philmd@linaro.org; helo=mail-wr1-x429.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::430;
+ envelope-from=philmd@linaro.org; helo=mail-wr1-x430.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -106,38 +105,48 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-opentitan.c, riscv-iommu-pci.c, riscv-iommu-sys.c don't depend
-on target-specific knowledge. Move them to common_ss[] to build
-them once.
+Hardware code using HART rarely needs to knows its internals.
 
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 ---
- hw/riscv/meson.build | 5 +++--
- 1 file changed, 3 insertions(+), 2 deletions(-)
+ include/hw/riscv/riscv_hart.h | 4 ++--
+ hw/riscv/virt-acpi-build.c    | 1 +
+ 2 files changed, 3 insertions(+), 2 deletions(-)
 
-diff --git a/hw/riscv/meson.build b/hw/riscv/meson.build
-index 3c7e083aca1..ff578a2e01a 100644
---- a/hw/riscv/meson.build
-+++ b/hw/riscv/meson.build
-@@ -2,7 +2,7 @@ riscv_ss = ss.source_set()
- riscv_ss.add(files('boot.c'))
- riscv_ss.add(when: 'CONFIG_RISCV_NUMA', if_true: files('numa.c'))
- riscv_ss.add(files('riscv_hart.c'))
--riscv_ss.add(when: 'CONFIG_OPENTITAN', if_true: files('opentitan.c'))
-+common_ss.add(when: 'CONFIG_OPENTITAN', if_true: files('opentitan.c'))
- riscv_ss.add(when: 'CONFIG_RISCV_VIRT', if_true: files('virt.c'))
- riscv_ss.add(when: 'CONFIG_SHAKTI_C', if_true: files('shakti_c.c'))
- riscv_ss.add(when: 'CONFIG_SIFIVE_E', if_true: files('sifive_e.c'))
-@@ -10,7 +10,8 @@ riscv_ss.add(when: 'CONFIG_SIFIVE_U', if_true: files('sifive_u.c'))
- riscv_ss.add(when: 'CONFIG_SPIKE', if_true: files('spike.c'))
- riscv_ss.add(when: 'CONFIG_MICROCHIP_PFSOC', if_true: files('microchip_pfsoc.c'))
- riscv_ss.add(when: 'CONFIG_ACPI', if_true: files('virt-acpi-build.c'))
--riscv_ss.add(when: 'CONFIG_RISCV_IOMMU', if_true: files('riscv-iommu.c', 'riscv-iommu-pci.c', 'riscv-iommu-sys.c'))
-+riscv_ss.add(when: 'CONFIG_RISCV_IOMMU', if_true: files('riscv-iommu.c'))
-+common_ss.add(when: 'CONFIG_RISCV_IOMMU', if_true: files('riscv-iommu-pci.c', 'riscv-iommu-sys.c'))
- riscv_ss.add(when: 'CONFIG_MICROBLAZE_V', if_true: files('microblaze-v-generic.c'))
+diff --git a/include/hw/riscv/riscv_hart.h b/include/hw/riscv/riscv_hart.h
+index a6ed73a1956..a2ca455d8b1 100644
+--- a/include/hw/riscv/riscv_hart.h
++++ b/include/hw/riscv/riscv_hart.h
+@@ -22,7 +22,7 @@
+ #define HW_RISCV_HART_H
  
- hw_arch += {'riscv': riscv_ss}
+ #include "hw/sysbus.h"
+-#include "target/riscv/cpu.h"
++#include "target/riscv/cpu-qom.h"
+ #include "qom/object.h"
+ 
+ #define TYPE_RISCV_HART_ARRAY "riscv.hart_array"
+@@ -42,7 +42,7 @@ struct RISCVHartArrayState {
+     uint64_t *rnmi_irqvec;
+     uint32_t num_rnmi_excpvec;
+     uint64_t *rnmi_excpvec;
+-    RISCVCPU *harts;
++    ArchCPU *harts;
+ };
+ 
+ #endif
+diff --git a/hw/riscv/virt-acpi-build.c b/hw/riscv/virt-acpi-build.c
+index 1ad68005085..0030c21bc41 100644
+--- a/hw/riscv/virt-acpi-build.c
++++ b/hw/riscv/virt-acpi-build.c
+@@ -39,6 +39,7 @@
+ #include "qapi/error.h"
+ #include "qemu/error-report.h"
+ #include "system/reset.h"
++#include "target/riscv/cpu.h"
+ 
+ #define ACPI_BUILD_TABLE_SIZE             0x20000
+ #define ACPI_BUILD_INTC_ID(socket, index) ((socket << 24) | (index))
 -- 
 2.47.1
 
