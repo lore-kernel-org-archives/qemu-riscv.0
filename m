@@ -4,87 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4B68AC02199
-	for <qemu-riscv@archiver.kernel.org>; Thu,  6 Feb 2025 18:20:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E4ADCC0219B
+	for <qemu-riscv@archiver.kernel.org>; Thu,  6 Feb 2025 18:20:57 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tg6To-0000tr-Hq; Thu, 06 Feb 2025 13:20:00 -0500
+	id 1tg6Sf-0007dz-Sj; Thu, 06 Feb 2025 13:18:49 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tg6TY-0000aH-LZ
- for qemu-riscv@nongnu.org; Thu, 06 Feb 2025 13:19:49 -0500
-Received: from mail-wr1-x433.google.com ([2a00:1450:4864:20::433])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tg6Sb-0007by-FL
+ for qemu-riscv@nongnu.org; Thu, 06 Feb 2025 13:18:45 -0500
+Received: from mail-wm1-x331.google.com ([2a00:1450:4864:20::331])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tg6TV-0006up-Pf
- for qemu-riscv@nongnu.org; Thu, 06 Feb 2025 13:19:44 -0500
-Received: by mail-wr1-x433.google.com with SMTP id
- ffacd0b85a97d-38dc6d9b292so107085f8f.2
- for <qemu-riscv@nongnu.org>; Thu, 06 Feb 2025 10:19:39 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tg6SZ-0006oS-99
+ for qemu-riscv@nongnu.org; Thu, 06 Feb 2025 13:18:45 -0500
+Received: by mail-wm1-x331.google.com with SMTP id
+ 5b1f17b1804b1-436a39e4891so8727135e9.1
+ for <qemu-riscv@nongnu.org>; Thu, 06 Feb 2025 10:18:42 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1738865978; x=1739470778; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=rLMKHfpwsmRq9cvK/Unfd2Atjehb+xWOik9/MUFQQbw=;
- b=vp4SXV++8vmekOwKO32h5DTjIf+HIbah9BXCwbUeShvYbP4NwsVWX0AT0CuADCMBkb
- 6sCzEsXuM3WvGa+VC0RdzfCbJHywXNOK/YnjtdTYS+qH+DyGafP28NktrU9MjSYIc4hI
- gUMX+joAIPTqTMSRwrSmHYp0Wf/Zwy2zNJ10tweV6q33P5VsFiM85cnRSqJxxF7rkm3y
- NH5p25wx5F7XjnPP7GA05TPdfQ0sEpl+kzj6Fsy1wWyanlrR+FH/U7lxkIT1/waC4/YJ
- pH0RaAcB7yVOi7v76JQO15Zso0VA5+fz1z2Uv3nsRon9X2IaE2xZO2abjrx6phtMZp6w
- IEgw==
+ d=linaro.org; s=google; t=1738865921; x=1739470721; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=FJl7/XCq/mOYxrX7g6HKZEwMAdetJgh4DocsCwIosNE=;
+ b=lAde4DnB0uWJJXxZfn03EkrEA80KRWSlSVEr6cFP9UPJ024TjzCEc7GmAbTIUng1Np
+ C1E20ILsmX6iKkNZGatVhBfkpsMst/nQa3eAK5Ie8ZOg3r7GEGTApL2sJ/7aMuHjk+Ir
+ pQf21fmsn24lQxdYlh6mH6qGcmeYL+1idf5A4/ZWt6KAXlypCdqlwXxnOKxc/IZK/9hT
+ J9VfJ4YGLhccyAF+fGKAfxYviGNFp+4n2fFSSJIedm5ddlhA0GOPi1RwFRqCNVOvqFqk
+ Ls08RG30/n5p28AzmnRBl5Er5GTGe/7PHVeMQ4Iun4LLMppt5vs46zMdwj+c9YKfi4kC
+ pXAQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1738865978; x=1739470778;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=rLMKHfpwsmRq9cvK/Unfd2Atjehb+xWOik9/MUFQQbw=;
- b=pWqzCv1LYY1v/0phoyJOXU01lmGM2iwHw+dNU3OUnmszWxfIicjRjWyjOsCofmMUDL
- gxdOZazWtfaH0L9SphwCLfYOjckBhnSpv9Z7Phxm4a401FgaYIVlFQLChVEeponkeTFU
- ADK5S1lVpD0hyKndjEj6wtDOa2jSFVMp9MDQSyP+UnGT9HkCRXkr8NziTMphztEDIBt2
- +a/ot0Mc47BQVu432+2LbQtkaiguW9PiF93SofItRnIA4ZHAr9qIrlZVPsRYc0qB+cYu
- 6/xacOMPu/X263YcYcFMAQFMHfIOCXJ4CRlHI8YO3IthOo379VPc6aG38r1Cpz5AH/WW
- T1Zw==
+ d=1e100.net; s=20230601; t=1738865921; x=1739470721;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=FJl7/XCq/mOYxrX7g6HKZEwMAdetJgh4DocsCwIosNE=;
+ b=TFmsJYPyQIWppay23GUYhuBJbrl9r5NYCIQdxjp46r9UOvPrJyLoGHcf7y+8bOC/aN
+ kie5DBHUmbA+S7sd1kmiWFsWiMVxPn2bJpOI3yjOxuUu9AmRi7Ofnw1KGLSuTPewTGDV
+ Aef4gjBhbKF16OHRYAMIFVBB2uittOGYeD9EuY12bm9IVE7hSOWe+e+TQXsbuv+RiHoe
+ wJVRcOp4lx47dlIx7x4/wyD7XfGR/BVZUhzVa966yxw2nVJf6i6g0ggFu/4Wa6LJVTky
+ MQ427sux7kgtc1hP0/Cwnzh299vvxl5LsspA3XK60M7Z2X0Q1cplZRu1M8ivy9az5c4z
+ tKBQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWGPMXV8Wid6TJ0gGBME4lZqMa8HMKHVDQxnv1GqVOeyOieMIVhYIHduNSyJ5VcKM4nrfY2y5YLbuIr@nongnu.org
-X-Gm-Message-State: AOJu0Ywa5nPeSCcAQkWjeZG/ocwGhZetQx1zZZNdCZuejklH16bQaTao
- babmvEEBg4tTMyvy5RfKThzsGm3qBADtE52jRnkOv5+dRGMQCZXEiKNNmNFP5gU=
-X-Gm-Gg: ASbGncuIdY3ssM4dHh2FwjNR6NUFz0VsKgnugDpeKsQIXGeB/E3gslZtWN/coli079O
- Mc4PAuxgX1JTbP8bhoM4TJL0yYGDx6Y11wCIQ+qL1+/j4OYt4KsynRvj7bCq3rx2qT5h4mx6rc+
- CI5YfDzPORtU8MG6EIcxFopztA+okH/D1mIpX9oywAN1jSyIkgFGGRsNx161OuDi6yQB1fpebjj
- Rp/77jcmhMXji9lAgr23Td4/0VNOouYeJ//WuTfiob2k/MzmC9nXmZN8g4/PRAjOM6fOA8VS0OX
- /iAzQJG3wNWXpwwscJq1GiCfbCsc8SJhB3Yfa3hv/hHtwu6utD//NF4D5u0=
-X-Google-Smtp-Source: AGHT+IEX9XgRQKxCwwoo+fjKGwF6p4g6vZiIw0RmtERh0y0RhN08POvBePfkazta5gkMmeyikgSoSg==
-X-Received: by 2002:a05:6000:1865:b0:38c:5fbf:10d6 with SMTP id
- ffacd0b85a97d-38dc90e19e9mr8592f8f.7.1738865978389; 
- Thu, 06 Feb 2025 10:19:38 -0800 (PST)
-Received: from [192.168.69.198] (88-187-86-199.subs.proxad.net.
+ AJvYcCXPkRH+CfD4Ql3NihKSByt8j+Bewreg72NNxBilIAT/CrWdvx9hbhOYd6/R6v7rAJg5pzkEK2K3/9t/@nongnu.org
+X-Gm-Message-State: AOJu0YyxXMatDA4B5r86R7cU6SKGE+nn+nCC72UeLgAk/WO9bMVKyGTv
+ n/6/j1bVSc0TLld+o1YC1+CLeUPfCzw21kWpKqBxGDGwYq/EtvPI3N671Dfvgio=
+X-Gm-Gg: ASbGncv9GTBQkygUoG6DeqxM38Cz+Bohy8U5WUxPNKheSR1de1ZFVPKP02RnjunR1X3
+ 08gcmvMAy1XsVo1A3zJTvyOFU5RQHsCum5wbKCfkWMXP5Y29lW1uawP5WunkJzOWORfgxu2JHzH
+ U3qKn62O1+sUFW1lZX7OPn3DlE0HiuYrVkCuGMtQ4IM0Vb9yZj0T5ExqFKFENJUWB/8tfQaooi0
+ NKcNbsLyExyZAhU/3aZwMMCsoL3aJI6cckRtdpZTiJD9PX84ptkV5PznohDNgEzO6NK67vXqoq3
+ 3wZVrwmte9cxyxOeyYXFI5Ew7bIh2k2sXy3kOjnpKn4cypFMwbNcGBngaeX6nqNo0A==
+X-Google-Smtp-Source: AGHT+IHG7C2tyyfiGwe2p+xdnPWu21qDsS92W896e/2VOWr+1H/9f9iYFPgUHovHTeAn5h1rVy4ZOQ==
+X-Received: by 2002:a05:600c:1e28:b0:437:c3a1:5fe7 with SMTP id
+ 5b1f17b1804b1-439249abd7amr3524595e9.20.1738865919619; 
+ Thu, 06 Feb 2025 10:18:39 -0800 (PST)
+Received: from localhost.localdomain (88-187-86-199.subs.proxad.net.
  [88.187.86.199]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-38dbdd35bd6sm2317204f8f.22.2025.02.06.10.19.36
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 06 Feb 2025 10:19:37 -0800 (PST)
-Message-ID: <5574afe4-191b-454f-bbd2-cd7b26a0d581@linaro.org>
-Date: Thu, 6 Feb 2025 19:19:36 +0100
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/7] MAINTAINERS: Unify Alistair's professional email
- address
+ 5b1f17b1804b1-4390db11200sm61574155e9.38.2025.02.06.10.18.38
+ (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
+ Thu, 06 Feb 2025 10:18:39 -0800 (PST)
+From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Palmer Dabbelt <palmer@dabbelt.com>, qemu-riscv@nongnu.org,
  Alistair Francis <alistair.francis@wdc.com>,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
  Bin Meng <bmeng.cn@gmail.com>, Weiwei Li <liwei1518@gmail.com>,
  Sunil V L <sunilvl@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+Subject: [PATCH 2/7] target/riscv: Move target-agnostic definitions to
+ 'cpu-qom.h'
+Date: Thu,  6 Feb 2025 19:18:22 +0100
+Message-ID: <20250206181827.41557-3-philmd@linaro.org>
+X-Mailer: git-send-email 2.47.1
+In-Reply-To: <20250206181827.41557-1-philmd@linaro.org>
 References: <20250206181827.41557-1-philmd@linaro.org>
- <20250206181827.41557-2-philmd@linaro.org>
-Content-Language: en-US
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-In-Reply-To: <20250206181827.41557-2-philmd@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::433;
- envelope-from=philmd@linaro.org; helo=mail-wr1-x433.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::331;
+ envelope-from=philmd@linaro.org; helo=mail-wm1-x331.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -107,31 +106,131 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 6/2/25 19:18, Philippe Mathieu-Daudé wrote:
-> Alistair's email is typed differently, so the get_maintainer.pl
-> script add it twice :) Unify to reduce traffic.
-> 
->    $ git grep -h 'Alistair Francis' -- MAINTAINERS | sort -u
->    M: Alistair Francis <Alistair.Francis@wdc.com>
->    M: Alistair Francis <alistair.francis@wdc.com>
->    M: Alistair Francis <alistair@alistair23.me>
-> 
-> Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
-> ---
->   MAINTAINERS | 12 ++++++------
->   1 file changed, 6 insertions(+), 6 deletions(-)
-> 
-> diff --git a/MAINTAINERS b/MAINTAINERS
-> index 0cf37fce7b5..b7ac1519ee3 100644
-> --- a/MAINTAINERS
-> +++ b/MAINTAINERS
-> @@ -318,7 +318,7 @@ F: tests/functional/test_ppc_74xx.py
->   
->   RISC-V TCG CPUs
->   M: Palmer Dabbelt <palmer@dabbelt.com>
-> -M: Alistair Francis <alistair.francis@wdc.com>
-> +M: alistair.francis <alistair.francis@wdc.com>
+"cpu.h" is target-specific. Definitions which can be used
+by hw/ code when building QOM blocks can be in "cpu-qom.h",
+which is target-agnostic.
 
-Grr this isn't the version I wanted to post, sorry for the noise...
+Move the MISA bits (removing the pointless target_ulong cast)
+and the IRQ index definitions.
+
+Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+---
+ target/riscv/cpu-qom.h  | 40 ++++++++++++++++++++++++++++++++++++++++
+ target/riscv/cpu.h      | 24 ------------------------
+ target/riscv/cpu_bits.h | 15 ---------------
+ 3 files changed, 40 insertions(+), 39 deletions(-)
+
+diff --git a/target/riscv/cpu-qom.h b/target/riscv/cpu-qom.h
+index d56b067bf24..6028aa38fb2 100644
+--- a/target/riscv/cpu-qom.h
++++ b/target/riscv/cpu-qom.h
+@@ -55,4 +55,44 @@
+ 
+ OBJECT_DECLARE_CPU_TYPE(RISCVCPU, RISCVCPUClass, RISCV_CPU)
+ 
++/* Interrupt causes */
++#define IRQ_U_SOFT                         0
++#define IRQ_S_SOFT                         1
++#define IRQ_VS_SOFT                        2
++#define IRQ_M_SOFT                         3
++#define IRQ_U_TIMER                        4
++#define IRQ_S_TIMER                        5
++#define IRQ_VS_TIMER                       6
++#define IRQ_M_TIMER                        7
++#define IRQ_U_EXT                          8
++#define IRQ_S_EXT                          9
++#define IRQ_VS_EXT                         10
++#define IRQ_M_EXT                          11
++#define IRQ_S_GEXT                         12
++#define IRQ_PMU_OVF                        13
++
++#define RV(x) (1UL << (x - 'A'))
++
++/*
++ * Update misa_bits[], misa_ext_info_arr[] and misa_ext_cfgs[]
++ * when adding new MISA bits here.
++ */
++#define RVI RV('I')
++#define RVE RV('E') /* E and I are mutually exclusive */
++#define RVM RV('M')
++#define RVA RV('A')
++#define RVF RV('F')
++#define RVD RV('D')
++#define RVV RV('V')
++#define RVC RV('C')
++#define RVS RV('S')
++#define RVU RV('U')
++#define RVH RV('H')
++#define RVG RV('G')
++#define RVB RV('B')
++
++extern const uint32_t misa_bits[];
++const char *riscv_get_misa_ext_name(uint32_t bit);
++const char *riscv_get_misa_ext_description(uint32_t bit);
++
+ #endif /* RISCV_CPU_QOM_H */
+diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+index 97713681cbe..4e681ad3917 100644
+--- a/target/riscv/cpu.h
++++ b/target/riscv/cpu.h
+@@ -54,30 +54,6 @@ typedef struct CPUArchState CPURISCVState;
+  */
+ #define RISCV_UW2_ALWAYS_STORE_AMO 1
+ 
+-#define RV(x) ((target_ulong)1 << (x - 'A'))
+-
+-/*
+- * Update misa_bits[], misa_ext_info_arr[] and misa_ext_cfgs[]
+- * when adding new MISA bits here.
+- */
+-#define RVI RV('I')
+-#define RVE RV('E') /* E and I are mutually exclusive */
+-#define RVM RV('M')
+-#define RVA RV('A')
+-#define RVF RV('F')
+-#define RVD RV('D')
+-#define RVV RV('V')
+-#define RVC RV('C')
+-#define RVS RV('S')
+-#define RVU RV('U')
+-#define RVH RV('H')
+-#define RVG RV('G')
+-#define RVB RV('B')
+-
+-extern const uint32_t misa_bits[];
+-const char *riscv_get_misa_ext_name(uint32_t bit);
+-const char *riscv_get_misa_ext_description(uint32_t bit);
+-
+ #define CPU_CFG_OFFSET(_prop) offsetof(struct RISCVCPUConfig, _prop)
+ 
+ typedef struct riscv_cpu_profile {
+diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
+index f97c48a3943..80701bc77fe 100644
+--- a/target/riscv/cpu_bits.h
++++ b/target/riscv/cpu_bits.h
+@@ -720,21 +720,6 @@ typedef enum RISCVException {
+ #define RISCV_EXCP_INT_FLAG                0x80000000
+ #define RISCV_EXCP_INT_MASK                0x7fffffff
+ 
+-/* Interrupt causes */
+-#define IRQ_U_SOFT                         0
+-#define IRQ_S_SOFT                         1
+-#define IRQ_VS_SOFT                        2
+-#define IRQ_M_SOFT                         3
+-#define IRQ_U_TIMER                        4
+-#define IRQ_S_TIMER                        5
+-#define IRQ_VS_TIMER                       6
+-#define IRQ_M_TIMER                        7
+-#define IRQ_U_EXT                          8
+-#define IRQ_S_EXT                          9
+-#define IRQ_VS_EXT                         10
+-#define IRQ_M_EXT                          11
+-#define IRQ_S_GEXT                         12
+-#define IRQ_PMU_OVF                        13
+ #define IRQ_LOCAL_MAX                      64
+ /* -1 is due to bit zero of hgeip and hgeie being ROZ. */
+ #define IRQ_LOCAL_GUEST_MAX                (TARGET_LONG_BITS - 1)
+-- 
+2.47.1
 
 
