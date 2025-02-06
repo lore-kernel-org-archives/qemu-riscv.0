@@ -4,101 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D299CC02199
-	for <qemu-riscv@archiver.kernel.org>; Thu,  6 Feb 2025 15:54:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A7ECAC02199
+	for <qemu-riscv@archiver.kernel.org>; Thu,  6 Feb 2025 18:19:03 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tg4Bw-0002TQ-AX; Thu, 06 Feb 2025 10:53:24 -0500
+	id 1tg6Sp-0007rq-7P; Thu, 06 Feb 2025 13:18:59 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
- id 1tg4Bs-0002Oh-GU
- for qemu-riscv@nongnu.org; Thu, 06 Feb 2025 10:53:20 -0500
-Received: from mail-yb1-xb2d.google.com ([2607:f8b0:4864:20::b2d])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tg6So-0007qj-J2
+ for qemu-riscv@nongnu.org; Thu, 06 Feb 2025 13:18:58 -0500
+Received: from mail-wm1-x32f.google.com ([2a00:1450:4864:20::32f])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
- id 1tg4Bp-0006zk-EC
- for qemu-riscv@nongnu.org; Thu, 06 Feb 2025 10:53:20 -0500
-Received: by mail-yb1-xb2d.google.com with SMTP id
- 3f1490d57ef6-e573136107bso902189276.3
- for <qemu-riscv@nongnu.org>; Thu, 06 Feb 2025 07:53:16 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tg6Sm-0006qU-T7
+ for qemu-riscv@nongnu.org; Thu, 06 Feb 2025 13:18:58 -0500
+Received: by mail-wm1-x32f.google.com with SMTP id
+ 5b1f17b1804b1-435f8f29f8aso9054255e9.2
+ for <qemu-riscv@nongnu.org>; Thu, 06 Feb 2025 10:18:56 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1738857196; x=1739461996; darn=nongnu.org;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
+ d=linaro.org; s=google; t=1738865935; x=1739470735; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=5H+hhL1ihPNFguVGpGNPg7yjivptPGHwTYAbDhAvvlo=;
- b=moMpPSGaIF1Z2l53excfJmI3m2RGycFC/x1xK9te+HNQ+D34/4ys/CrLue2DBAJvlf
- 1O7J+2tl+KLQULcwtedCwvcjF6prDBsxdIHVt8olUlOtmYKM8lmn+W0TvUL3KUBTE+St
- 6hyyg6OzY3S56XqQ73LCEdSynRkpfbobSE8OvS/hcrPVrjhyYe2fyEpAjQwTuWKga2py
- B17f1mcspC8hrHaKPm4/6adrxgPj/awOxLm0wtn8HXaRAVxOwsBA5iufSN/7vfht/w39
- 9KMNoUpJsMZlT6GZl3BvaWZn2HmoP2+3IBNTgp+hjxmM4m60YsetjmxyoJDf/XDyoXV+
- IP8w==
+ bh=3chV6Syf4UgzPYrc3klqldaIF78PGsSbuVaW5fDvGGY=;
+ b=mM3fr7aYsRzvJJGqOTAiU7R7OJHjyzO640aF3yItt6Ixb5Lw/QiuDw0I0bUs4dIZ0T
+ XVH5Hz5Wy1gJApwoq5mkonhazpCpu49bVM8elitA7HY85cKaD3o087TvdGgoFkpFnGHx
+ cXa4KWk4FqolvrNO6v38Qxo/2dH4sMBCuEFh1un4UiJ/7hw1lErRWPA5XlaKVJGoEN1M
+ /nK2cu46sKyC5Wb2pthuvTBwsHyXzznGHM3DN5vxybT+LdB/KTkO9nWSk81ia0lcXduT
+ M5pxZA4/wyxhccDOjz/CTDjgmoRDU25XXpJoBGnQK25+cZx52diQNJrWNSQrkTplsD3N
+ hH5g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1738857196; x=1739461996;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ d=1e100.net; s=20230601; t=1738865935; x=1739470735;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=5H+hhL1ihPNFguVGpGNPg7yjivptPGHwTYAbDhAvvlo=;
- b=tiuubVAp8ZhzulE0XDRECx7/5yqzgkrUxvqvO5tjywQljSNo92RQYM/BDEGH4HLqfp
- +QACNLdbckVUglx/sidRB+6D/3lGX7Zr8Oo0supmZw8saKZ0PiVUMxLgm92nTWfM11dz
- zCrsKVihTARUoSJKnAjSmvbQp/E/nTG+UFKCOunr/vVV1un8VnIv0nSSbeCsUjeRKA+u
- PrNvXvdbkZAfZSy5E4EpqtuDGwnDD9gzwZsNgTCLh8qdbvmd5FC1zM1o7u6W6nq18H3N
- +uytGRdtFZQMP0rerL7pNLXA8U2+I/K3/Mhnxt5oi/acQWg7DBDcIRFLmCStI9BraKVb
- mZuQ==
+ bh=3chV6Syf4UgzPYrc3klqldaIF78PGsSbuVaW5fDvGGY=;
+ b=vhjLHX+Q5aa2Z9CHf2DxwJTvDaTF1nHjRLV2+siTVObLR0Ts9divToCdYXR8LJJW94
+ 6aUKG/jYjzp27dBbllDg09+pIhUIqrnUXS4E0RQDCc3eJ32y4SVDfl+jXvyTG16hm/gj
+ P9sxu5pgEm2uT0uYbo+nojZNxVbw5JVOAKeY86r3Y4Xwhgoyv799ClR7dPToZ3sFTsVX
+ SVnj5pjeuj6r3CWQXDqXpmFe8ScQ28yB2uJQL8GTXw2SNQh64HsBb3YPhTTLbhb8CMxF
+ vyemdr4lPcKD1iCUtSTelzchCmB/XYDuzgbZKq6CUHjFyIzR8anxn1jfIF/IaQZbOwMe
+ Hi3A==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUnujUtK+bRjrzDdw9K76F3uDfb8Xd6bzT2MkAJ6nbtRVyO07QsqwfEOPhH1hWxyK+rSuCCsAbqBYMV@nongnu.org
-X-Gm-Message-State: AOJu0YzWL4WafvZ07mEwceGJkPqihPqmSFhQnJCKn+lknXXYFHojy3FE
- nOY6xnR+oVZXL8rWKE0uDotexnvZ+hbvNZNIvlegNPcILaY+Pme0XgfhZ/IAldkA/fc+kXNhBpk
- k8vndgOgRR3NET/Ul/pw2nInU0JzbUMUfXCwCJg==
-X-Gm-Gg: ASbGncs8xl5q/1jt8dob6mxnyuTw/Tacz2Zt3R3lO7MH56nf4wBSB0EFRlatHl6RDGM
- 5xJppdUNC23oDd0JTEBfVDPx4GquKE1+ENkSTa2g24F3EfT4fFNOHxlcW6smkzgQMYIg2PINI5Q
- ==
-X-Google-Smtp-Source: AGHT+IH7se20k+IcZxopIIGWe8rNYHJ9965GJoItdH8fQqtHWEKQS0HtpBHMWxVRa1dfLgNz384z5mQm92UIUKnjmUo=
-X-Received: by 2002:a05:6902:218d:b0:e58:8e82:5345 with SMTP id
- 3f1490d57ef6-e5b259d213dmr6055544276.4.1738857196284; Thu, 06 Feb 2025
- 07:53:16 -0800 (PST)
+ AJvYcCWET2zfMUHPd2pOBx77YXmw1G9hU277sxGZxjoHFrZ8AFk0SUydLy385pQ9PpcMDHNyhzdFOA7JfGmy@nongnu.org
+X-Gm-Message-State: AOJu0YwfF4lDgfC1SviBWzwGvbvg9M8nN9XinZKVn0Yhb2vfRMjfrXOg
+ x+ey4ZqYAYjDrIV8HaLa6xRsYYHDndu6Lru1iDBagGTUUC7ymMiXxkCsnj71icQ=
+X-Gm-Gg: ASbGnctk78uk/DaOw8fheshCSL8CMa+YjhnKLLnP2Dbs/JN3vU2sU+mndwaeQYRzawm
+ fXnMv5ut2HKnRmrzrOP5hrG7wDwYKMyEVcD46QcJQvVXiXsc0d56SxDOuVp0AoQt0VDpv/RM0wr
+ ke8xhOeqUx0iHHIsRn56ZNLnC4Gk9t26mIG7rn2MaYyJ4sGDtvHq2qrhhpVHDmuSAz1/qIHZjAR
+ 5ZcLnNL3x9EY6X3jhWJbmZ3JQvLkkghr64dmrbrQDAsYanQbeHu5Hd0c/r8CZccE9895keff/3J
+ rHARU2GNyCjQ6Z0daCfXiOcBA2fCmo5fuRZWhzqG7zy1V2kMWElD+M8KaPYw77cEYg==
+X-Google-Smtp-Source: AGHT+IEA0DMN4iOBz9G2FC5ueovoYaZq2D4m+00UatsLM9qrQKFf6i0Vnv5yiTPmm2//MFKpTDLJHQ==
+X-Received: by 2002:a05:600c:1e0e:b0:436:f3f6:9582 with SMTP id
+ 5b1f17b1804b1-43924988870mr3600075e9.8.1738865935183; 
+ Thu, 06 Feb 2025 10:18:55 -0800 (PST)
+Received: from localhost.localdomain (88-187-86-199.subs.proxad.net.
+ [88.187.86.199]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-43907f16ffasm58795995e9.1.2025.02.06.10.18.53
+ (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
+ Thu, 06 Feb 2025 10:18:54 -0800 (PST)
+From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+To: qemu-devel@nongnu.org
+Cc: Palmer Dabbelt <palmer@dabbelt.com>, qemu-riscv@nongnu.org,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Bin Meng <bmeng.cn@gmail.com>, Weiwei Li <liwei1518@gmail.com>,
+ Sunil V L <sunilvl@ventanamicro.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+Subject: [PATCH 5/7] hw/riscv/iommu: Reduce needs for target-specific code
+Date: Thu,  6 Feb 2025 19:18:25 +0100
+Message-ID: <20250206181827.41557-6-philmd@linaro.org>
+X-Mailer: git-send-email 2.47.1
+In-Reply-To: <20250206181827.41557-1-philmd@linaro.org>
+References: <20250206181827.41557-1-philmd@linaro.org>
 MIME-Version: 1.0
-References: <20250203144048.2131117-1-alex.bennee@linaro.org>
- <20250203144048.2131117-8-alex.bennee@linaro.org>
-In-Reply-To: <20250203144048.2131117-8-alex.bennee@linaro.org>
-From: Peter Maydell <peter.maydell@linaro.org>
-Date: Thu, 6 Feb 2025 15:53:05 +0000
-X-Gm-Features: AWEUYZnHiVWrLGi-2zGS-ZXL0vgR8vDSrhzcIVVztSk6rKPjoO_A4eVt_FUbanA
-Message-ID: <CAFEAcA9SnRrYGZVkB_NF=VSkSDtRQSvQjOPSid+HN4997Mwxkg@mail.gmail.com>
-Subject: Re: [PATCH 07/18] Revert "util/timer: avoid deadlock when shutting
- down"
-To: =?UTF-8?B?QWxleCBCZW5uw6ll?= <alex.bennee@linaro.org>
-Cc: qemu-devel@nongnu.org, qemu-ppc@nongnu.org, 
- Mahmoud Mandour <ma.mandourr@gmail.com>, Thomas Huth <thuth@redhat.com>, 
- Daniel Henrique Barboza <danielhb413@gmail.com>,
- Alistair Francis <alistair.francis@wdc.com>, 
- Hao Wu <wuhaotsh@google.com>, Peter Xu <peterx@redhat.com>,
- Warner Losh <imp@bsdimp.com>, 
- Pierrick Bouvier <pierrick.bouvier@linaro.org>, qemu-arm@nongnu.org, 
- Harsh Prateek Bora <harshpb@linux.ibm.com>,
- =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@linaro.org>, 
- Palmer Dabbelt <palmer@dabbelt.com>, Kyle Evans <kevans@freebsd.org>, 
- Laurent Vivier <laurent@vivier.eu>, Riku Voipio <riku.voipio@iki.fi>,
- Bin Meng <bmeng.cn@gmail.com>, 
- qemu-rust@nongnu.org, Laurent Vivier <lvivier@redhat.com>, 
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, Weiwei Li <liwei1518@gmail.com>, 
- qemu-riscv@nongnu.org, Fabiano Rosas <farosas@suse.de>,
- Tyrone Ting <kfting@nuvoton.com>, 
- Paolo Bonzini <pbonzini@redhat.com>, Nicholas Piggin <npiggin@gmail.com>, 
- Alexandre Iooss <erdnaxe@crans.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::b2d;
- envelope-from=peter.maydell@linaro.org; helo=mail-yb1-xb2d.google.com
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::32f;
+ envelope-from=philmd@linaro.org; helo=mail-wm1-x32f.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -114,26 +105,71 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Mon, 3 Feb 2025 at 14:40, Alex Benn=C3=A9e <alex.bennee@linaro.org> wrot=
-e:
->
-> This reverts commit bc02be4508d8753d1f6071b77d10f4661587df6f.
->
-> Now we catch attempts to clock_step to the next timer when none are
-> enabled we can revert the previous attempt to prevent deadlock. As
-> long as a new target time is given we will move time forward even if
-> no timers will fire. This is desirable for tests which are checking
-> that nothing changes when things are disabled.
->
-> Previously most tests got away with it because --enable-slirp always
-> has a timer running while the test is active.
->
-> Signed-off-by: Alex Benn=C3=A9e <alex.bennee@linaro.org>
-> Cc: Peter Maydell <peter.maydell@linaro.org>
-> ---
+Use the qemu_target_page_size() runtime function instead
+of the TARGET_PAGE_SIZE definition, remove unnecessary
+"exec/exec-all.h" header.
 
-Reviewed-by: Peter Maydell <peter.maydell@linaro.org>
+Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+---
+ hw/riscv/riscv-iommu-pci.c | 5 +++--
+ hw/riscv/riscv-iommu-sys.c | 1 -
+ hw/riscv/riscv-iommu.c     | 1 +
+ 3 files changed, 4 insertions(+), 3 deletions(-)
 
-thanks
--- PMM
+diff --git a/hw/riscv/riscv-iommu-pci.c b/hw/riscv/riscv-iommu-pci.c
+index 12451869e41..d8779481421 100644
+--- a/hw/riscv/riscv-iommu-pci.c
++++ b/hw/riscv/riscv-iommu-pci.c
+@@ -22,13 +22,13 @@
+ #include "hw/pci/pci_bus.h"
+ #include "hw/qdev-properties.h"
+ #include "hw/riscv/riscv_hart.h"
++#include "exec/target_page.h"
+ #include "migration/vmstate.h"
+ #include "qapi/error.h"
+ #include "qemu/error-report.h"
+ #include "qemu/host-utils.h"
+ #include "qom/object.h"
+ 
+-#include "cpu_bits.h"
+ #include "riscv-iommu.h"
+ #include "riscv-iommu-bits.h"
+ #include "trace.h"
+@@ -102,7 +102,8 @@ static void riscv_iommu_pci_realize(PCIDevice *dev, Error **errp)
+     qdev_realize(DEVICE(iommu), NULL, errp);
+ 
+     memory_region_init(&s->bar0, OBJECT(s), "riscv-iommu-bar0",
+-        QEMU_ALIGN_UP(memory_region_size(&iommu->regs_mr), TARGET_PAGE_SIZE));
++        QEMU_ALIGN_UP(memory_region_size(&iommu->regs_mr),
++                      qemu_target_page_size()));
+     memory_region_add_subregion(&s->bar0, 0, &iommu->regs_mr);
+ 
+     pcie_endpoint_cap_init(dev, 0);
+diff --git a/hw/riscv/riscv-iommu-sys.c b/hw/riscv/riscv-iommu-sys.c
+index 65b24fb07de..bbe839ed241 100644
+--- a/hw/riscv/riscv-iommu-sys.c
++++ b/hw/riscv/riscv-iommu-sys.c
+@@ -26,7 +26,6 @@
+ #include "qemu/host-utils.h"
+ #include "qemu/module.h"
+ #include "qom/object.h"
+-#include "exec/exec-all.h"
+ #include "trace.h"
+ 
+ #include "riscv-iommu.h"
+diff --git a/hw/riscv/riscv-iommu.c b/hw/riscv/riscv-iommu.c
+index e7568ca227a..fb763e6e69d 100644
+--- a/hw/riscv/riscv-iommu.c
++++ b/hw/riscv/riscv-iommu.c
+@@ -26,6 +26,7 @@
+ #include "qapi/error.h"
+ #include "qemu/timer.h"
+ 
++#include "target/riscv/cpu.h"
+ #include "cpu_bits.h"
+ #include "riscv-iommu.h"
+ #include "riscv-iommu-bits.h"
+-- 
+2.47.1
+
 
