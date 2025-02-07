@@ -4,87 +4,102 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 52CDCC02194
-	for <qemu-riscv@archiver.kernel.org>; Fri,  7 Feb 2025 15:37:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 77CA8C02194
+	for <qemu-riscv@archiver.kernel.org>; Fri,  7 Feb 2025 15:37:50 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tgQO1-0005i1-UA; Fri, 07 Feb 2025 10:35:22 -0500
+	id 1tgQNc-0004sH-Ud; Fri, 07 Feb 2025 10:34:58 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1tgQNq-0005Tz-Bq
- for qemu-riscv@nongnu.org; Fri, 07 Feb 2025 10:35:12 -0500
-Received: from mail-pl1-x634.google.com ([2607:f8b0:4864:20::634])
+ (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
+ id 1tgQKU-0008Fr-Bs
+ for qemu-riscv@nongnu.org; Fri, 07 Feb 2025 10:31:51 -0500
+Received: from mail-ed1-x52f.google.com ([2a00:1450:4864:20::52f])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1tgQNn-0004ko-58
- for qemu-riscv@nongnu.org; Fri, 07 Feb 2025 10:35:09 -0500
-Received: by mail-pl1-x634.google.com with SMTP id
- d9443c01a7336-21f4a4fbb35so23188955ad.0
- for <qemu-riscv@nongnu.org>; Fri, 07 Feb 2025 07:35:05 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
+ id 1tgQKG-00044R-Fe
+ for qemu-riscv@nongnu.org; Fri, 07 Feb 2025 10:31:42 -0500
+Received: by mail-ed1-x52f.google.com with SMTP id
+ 4fb4d7f45d1cf-5dce27a72e8so5170937a12.2
+ for <qemu-riscv@nongnu.org>; Fri, 07 Feb 2025 07:31:26 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1738942504; x=1739547304; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=JL6HX0/rUgVOcxkk5vAabK9dtF8gasDai0xn6kwNf/0=;
- b=U5GNoRhzpC4yju1x80Yb4QAOfPKYw4r5nR9hcfCDbvdFkcL9iuQ/0A5vbWFn7oYmeD
- 2cmHakGMDirOAeHlth5/OWdiuv0268vPMtlgvDiQyTVRLu+8KSyQbYX6h4y299NKGSE+
- WK0BKzpe1zYVs+RgljYLUM/fMRsxSu/CwEe5toi/iwA7BXaG+zYBh8vBcGT993rXbqMd
- Q6N77wrxyzPCE7JkTH7/II9FsepGVl+4hJpyT5Bp/9F6ZLHXkxBbWUIMh0nNN+ovqmRy
- gmSn7g003PGsb4ENkRMirzQxZbQ3Ku93zSHBBGVl5AB/Af4noDgXGSpwPpeCqnaBNdUv
- WNxQ==
+ d=linaro.org; s=google; t=1738942286; x=1739547086; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=DNmUeNVqLMWnKw5VpxIg7HB3Zjmh6ElltpcE7zlO/sI=;
+ b=MiD6eUT3WnfnkpqKlDG+JXkYJyiDcqOC8tAK8NIbN1apzyqH57+v97qqT92TFHYPMb
+ pVPpMU+RA9Ski6WYGhyV0QcIoADiX7UJrUe8QjztM5T/sxtzdShgmmp0p21QZuxsyzUN
+ NtVOMDzZ6T8Da7VB5rQtnnYX5qKHSqPPoeLUK+wmR1UAf7q2pNu9qEc2iOZr8Ds0bHeA
+ +xw3qX5MTLqIEOtf3HRCO8470VC/OUMYLfypP84Zy7Bni0CjULjPIDveS28HrmLYdQHG
+ 3C0U+Gn5wMxTtUx+fX2RThid42/Un0Lms5xa337XWgDHxmLC5APexvILjEPmNfUUXisI
+ OD6A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1738942504; x=1739547304;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=JL6HX0/rUgVOcxkk5vAabK9dtF8gasDai0xn6kwNf/0=;
- b=irUsxv8BjZLVPSNaOCQFp9m0Qv0u8fRpl91Z8FHVhYTU9jUGw7A9obPRSzg89813y3
- SkcSgxpkJ5t50uu4hGyAA6PGnJMh53bla7Hymwoo9JKGBXyUqKiEdlYj3B8p9F/Mbzpo
- WCqx/oEEDLxB2dU7L8bSmfKHdIupQrfI3bueLYZ7Q2+/V2DrjXIU6SmyBPJf2w0evTXU
- GjhXrytq68txKPmPj8eDS2KhzE1LZ3g9lnbijX3kPVXH1Ke+VM6CIQMSV4e+LXhmagjm
- oXAcddM6mN4b+FWZNS07Axl34MdlFQgTo1+IMJB/ZDN+To5W8Be0HE7RURnSSfekrBak
- 0tDA==
+ d=1e100.net; s=20230601; t=1738942286; x=1739547086;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=DNmUeNVqLMWnKw5VpxIg7HB3Zjmh6ElltpcE7zlO/sI=;
+ b=L0wHBSgv4vQq6vDg7T5/cmRQRKTEGxsl9wTQlm37e9yKkF0ZUWZniRJ3hBuLK1yV62
+ zZZbD/xD+lohRtYTg0LWtpw9pLqBvjqtnxu+DR6XhYidMnbXskfCAs/qcRRiIZJrA2UJ
+ qVPXZUJ795dcJfziCU/Bfg4bn6wSxVd6eDgZSOuhZn4aKaYGBqp6BGkyC6xcoz4/eB/c
+ 8QmeJioMzZOCl/LPpKMXsFsO0koQRIlibjb7ddILfePPLIxCDQ5rxObh1MvMDV0kvT07
+ 9xBlygbtXEVGIrl7nAuPHdwtxfF7aX/K8MbasLSTNqscWqLMEtNQgzWviQFuv4KsXx8/
+ TMOw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWtnRkapKOVcmJBmmCuxRgdj5+K81wlgYRiKC04EAMygffkz/9LwktEaL8m6fD1MZuuTfdG6nBeY0Le@nongnu.org
-X-Gm-Message-State: AOJu0Yx315I3cgd98RaQ7FL1HSvvxBnZJpegt6tAXPfpsiiyJarM5Qpo
- LxEmTm2wmi8byVgaTwj1JG5hOYtw51YsjVjuJmtSaMS/Rz0z0znRuWHbd5TXmL8=
-X-Gm-Gg: ASbGncvgwAgUKbOgk+hEIc3v/GXamUEiyF9BynFGeqp26Fzm4Tu5X/8R5YCESsn51zN
- ukjLrTd/yNVZRuLwMgPdOhTGpIl/120MSJPHPY+rGdqlFfNSqTJdX0UAA0OYRqtbWoxC9XBCoby
- 0HQgwRTWK/xg6qUG9wKXUg6M5DKZDkyL1XShUhQDv7A/FxV0ViqIQqzcaqsGMh7r1x5+DzHCyde
- JATNtNNTrPTnGfujxBfxeUgaNH8qm6rRP5H1wGSQkrh2BnLiI57XBmem1KSBxjZj0Z0bp2qm34i
- CZF2CoXupMyAt7WtnQRNcCqG06oUvQajJb36nn/NT5VjpAN8DcRaD8eQOZhOpJdB
-X-Google-Smtp-Source: AGHT+IEg6TOgRbngSBxCtjXHpnQ5Uxj1dtAD59nwxTVtH8DBEiy+2pyGG6fbo45a7em/6DU7v01whA==
-X-Received: by 2002:a17:902:cf04:b0:216:5db1:5dc1 with SMTP id
- d9443c01a7336-21f4f0ef803mr54542665ad.1.1738942504312; 
- Fri, 07 Feb 2025 07:35:04 -0800 (PST)
-Received: from [192.168.68.110] (201-69-66-42.dial-up.telesp.net.br.
- [201.69.66.42]) by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-21f36560d6csm32052135ad.92.2025.02.07.07.35.01
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 07 Feb 2025 07:35:03 -0800 (PST)
-Message-ID: <8f551680-6553-42b1-9307-d4b56e7bc2a5@ventanamicro.com>
-Date: Fri, 7 Feb 2025 12:34:59 -0300
+ AJvYcCUcujc6d6co+nhiWS0P2fnFKXqik78TF2qMWqPJ03PdhdDRs19BWXuesHiFvaCwikI9hsvTgLoEK0XU@nongnu.org
+X-Gm-Message-State: AOJu0YyI7p8L673XPu/bK8IYVMrMJwW0qP04L9sNaELSHoxOgqwiVFAK
+ faT5ANVsBWZXh8K0pb0Iv6LmoJXzTgS8Snptg253AvQAWkdoGJ/l9YQ8dhSWR8c=
+X-Gm-Gg: ASbGnctRCxLziG2oYNVtErjn9rVvcVThJcYbhxuQnPbpGmb8RTAb2l1cxpk9ZdODAGa
+ l6odBPF+uMOuNLFs8Dg2DdkT5quc6q/ZtzJeUjb93FhG0YmbT8xBFZ7eACzLNjJjG0suksUNrbt
+ 0lldCX/u+99zWYXFfSG5VewnP4k4GdAPmXYTwEwe23Q5zVX9joe1CNWZPtk85dqEqH9XSDkarAK
+ +WymCTaaRsHd70P2WGPVv4TaQ2mpmg2hhMNehldaPfu3YOeth9avs5EgAjlRdveEU9WbFAePJEQ
+ OIGm2Q0aRzRkI5nkTA==
+X-Google-Smtp-Source: AGHT+IFirjpS0mVz0/6YA1kXSmyvyFpcRXUjfPU9FLurAIGWWuhQj7+PsqxZa9tcLtwCZXGyFQ6igw==
+X-Received: by 2002:a50:d6d7:0:b0:5dc:113c:46c3 with SMTP id
+ 4fb4d7f45d1cf-5de4508dcabmr3021579a12.21.1738942285586; 
+ Fri, 07 Feb 2025 07:31:25 -0800 (PST)
+Received: from draig.lan ([185.126.160.109]) by smtp.gmail.com with ESMTPSA id
+ 4fb4d7f45d1cf-5dcf6c9f8besm2702253a12.52.2025.02.07.07.31.18
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 07 Feb 2025 07:31:23 -0800 (PST)
+Received: from draig.lan (localhost [IPv6:::1])
+ by draig.lan (Postfix) with ESMTP id BF95060E67;
+ Fri,  7 Feb 2025 15:31:13 +0000 (GMT)
+From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
+To: qemu-devel@nongnu.org
+Cc: Peter Xu <peterx@redhat.com>,
+ =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
+ Thomas Huth <thuth@redhat.com>, Weiwei Li <liwei1518@gmail.com>,
+ qemu-arm@nongnu.org, Nicholas Piggin <npiggin@gmail.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, Bin Meng <bmeng.cn@gmail.com>,
+ Tyrone Ting <kfting@nuvoton.com>, Hao Wu <wuhaotsh@google.com>,
+ Kyle Evans <kevans@freebsd.org>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
+ Laurent Vivier <laurent@vivier.eu>, Riku Voipio <riku.voipio@iki.fi>,
+ Harsh Prateek Bora <harshpb@linux.ibm.com>,
+ Fabiano Rosas <farosas@suse.de>, Alexandre Iooss <erdnaxe@crans.org>,
+ Laurent Vivier <lvivier@redhat.com>,
+ Daniel Henrique Barboza <danielhb413@gmail.com>,
+ Warner Losh <imp@bsdimp.com>,
+ Pierrick Bouvier <pierrick.bouvier@linaro.org>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Mahmoud Mandour <ma.mandourr@gmail.com>, qemu-ppc@nongnu.org,
+ Paolo Bonzini <pbonzini@redhat.com>, qemu-rust@nongnu.org,
+ qemu-riscv@nongnu.org, Ilya Leoshkevich <iii@linux.ibm.com>
+Subject: [PATCH v2 15/17] gdbstub: Allow late attachment
+Date: Fri,  7 Feb 2025 15:31:10 +0000
+Message-Id: <20250207153112.3939799-16-alex.bennee@linaro.org>
+X-Mailer: git-send-email 2.39.5
+In-Reply-To: <20250207153112.3939799-1-alex.bennee@linaro.org>
+References: <20250207153112.3939799-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] target/riscv: Fix minor whitespace issue in
- riscv_cpu_properties
-To: Rob Bradford <rbradford@rivosinc.com>, qemu-devel@nongnu.org
-Cc: Bin Meng <bmeng.cn@gmail.com>, Alistair Francis
- <alistair.francis@wdc.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- qemu-riscv@nongnu.org, Weiwei Li <liwei1518@gmail.com>,
- Palmer Dabbelt <palmer@dabbelt.com>, qemu-trivial@nongnu.org,
- Michael Tokarev <mjt@tls.msk.ru>
-References: <20250207152823.265068-1-rbradford@rivosinc.com>
-Content-Language: en-US
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <20250207152823.265068-1-rbradford@rivosinc.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::634;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pl1-x634.google.com
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::52f;
+ envelope-from=alex.bennee@linaro.org; helo=mail-ed1-x52f.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -107,37 +122,205 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Ccing qemu-trivial and Michael
-  
-On 2/7/25 12:28 PM, Rob Bradford wrote:
-> The mvendorid/mimpid/marchid properties have the wrong amount of
-> whitespace ahead of them.
-> 
-> Signed-off-by: Rob Bradford <rbradford@rivosinc.com>
-> ---
+From: Ilya Leoshkevich <iii@linux.ibm.com>
 
+Allow debugging individual processes in multi-process applications by
+starting them with export QEMU_GDB=/tmp/qemu-%d.sock,suspend=n.
+Currently one would have to attach to every process to ensure the app
+makes progress.
 
-Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+In case suspend=n is not specified, the flow remains unchanged. If it
+is specified, then accepting the client connection is delegated to a
+thread. In the future this machinery may be reused for handling
+reconnections and interruptions.
 
->   target/riscv/cpu.c | 6 +++---
->   1 file changed, 3 insertions(+), 3 deletions(-)
-> 
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index 3d4bd157d2..cca24b9f1f 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -2844,9 +2844,9 @@ static const Property riscv_cpu_properties[] = {
->       {.name = "cbop_blocksize", .info = &prop_cbop_blksize},
->       {.name = "cboz_blocksize", .info = &prop_cboz_blksize},
->   
-> -     {.name = "mvendorid", .info = &prop_mvendorid},
-> -     {.name = "mimpid", .info = &prop_mimpid},
-> -     {.name = "marchid", .info = &prop_marchid},
-> +    {.name = "mvendorid", .info = &prop_mvendorid},
-> +    {.name = "mimpid", .info = &prop_mimpid},
-> +    {.name = "marchid", .info = &prop_marchid},
->   
->   #ifndef CONFIG_USER_ONLY
->       DEFINE_PROP_UINT64("resetvec", RISCVCPU, env.resetvec, DEFAULT_RSTVEC),
+On accepting a connection, the thread schedules gdb_handlesig() on the
+first CPU and wakes it up with host_interrupt_signal. Note that the
+result of this gdb_handlesig() invocation is handled, as opposed to
+many other existing call sites. These other call sites probably need to
+be fixed separately.
+
+Signed-off-by: Ilya Leoshkevich <iii@linux.ibm.com>
+Message-Id: <20250117001542.8290-7-iii@linux.ibm.com>
+Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
+---
+ bsd-user/main.c   |   1 -
+ gdbstub/user.c    | 115 +++++++++++++++++++++++++++++++++++++++++-----
+ linux-user/main.c |   1 -
+ 3 files changed, 103 insertions(+), 14 deletions(-)
+
+diff --git a/bsd-user/main.c b/bsd-user/main.c
+index b2f6a9be2f..fdb160bed0 100644
+--- a/bsd-user/main.c
++++ b/bsd-user/main.c
+@@ -629,7 +629,6 @@ int main(int argc, char **argv)
+ 
+     if (gdbstub) {
+         gdbserver_start(gdbstub, &error_fatal);
+-        gdb_handlesig(cpu, 0, NULL, NULL, 0);
+     }
+     cpu_loop(env);
+     /* never exits */
+diff --git a/gdbstub/user.c b/gdbstub/user.c
+index 8225b70280..3730f32c41 100644
+--- a/gdbstub/user.c
++++ b/gdbstub/user.c
+@@ -22,6 +22,7 @@
+ #include "gdbstub/user.h"
+ #include "gdbstub/enums.h"
+ #include "hw/core/cpu.h"
++#include "user/signal.h"
+ #include "trace.h"
+ #include "internals.h"
+ 
+@@ -393,32 +394,122 @@ static int gdbserver_open_port(int port, Error **errp)
+     return fd;
+ }
+ 
+-bool gdbserver_start(const char *port_or_path, Error **errp)
++static bool gdbserver_accept(int port, int gdb_fd, const char *path)
+ {
+-    int port = g_ascii_strtoull(port_or_path, NULL, 10);
++    bool ret;
++
++    if (port > 0) {
++        ret = gdb_accept_tcp(gdb_fd);
++    } else {
++        ret = gdb_accept_socket(gdb_fd);
++        if (ret) {
++            gdbserver_user_state.socket_path = g_strdup(path);
++        }
++    }
++
++    if (!ret) {
++        close(gdb_fd);
++    }
++
++    return ret;
++}
++
++struct {
++    int port;
+     int gdb_fd;
++    char *path;
++} gdbserver_args;
++
++static void do_gdb_handlesig(CPUState *cs, run_on_cpu_data arg)
++{
++    int sig;
++
++    sig = target_to_host_signal(gdb_handlesig(cs, 0, NULL, NULL, 0));
++    if (sig >= 1 && sig < NSIG) {
++        qemu_kill_thread(gdb_get_cpu_index(cs), sig);
++    }
++}
++
++static void *gdbserver_accept_thread(void *arg)
++{
++    if (gdbserver_accept(gdbserver_args.port, gdbserver_args.gdb_fd,
++                         gdbserver_args.path)) {
++        CPUState *cs = first_cpu;
++
++        async_safe_run_on_cpu(cs, do_gdb_handlesig, RUN_ON_CPU_NULL);
++        qemu_kill_thread(gdb_get_cpu_index(cs), host_interrupt_signal);
++    }
++
++    g_free(gdbserver_args.path);
++    gdbserver_args.path = NULL;
++
++    return NULL;
++}
+ 
++#define USAGE "\nUsage: -g {port|path}[,suspend={y|n}]"
++
++bool gdbserver_start(const char *args, Error **errp)
++{
++    g_auto(GStrv) argv = g_strsplit(args, ",", 0);
++    const char *port_or_path = NULL;
++    bool suspend = true;
++    int gdb_fd, port;
++    GStrv arg;
++
++    for (arg = argv; *arg; arg++) {
++        g_auto(GStrv) tokens = g_strsplit(*arg, "=", 2);
++
++        if (g_strcmp0(tokens[0], "suspend") == 0) {
++            if (tokens[1] == NULL) {
++                error_setg(errp,
++                           "gdbstub: missing \"suspend\" option value" USAGE);
++                return false;
++            } else if (!qapi_bool_parse(tokens[0], tokens[1],
++                                        &suspend, errp)) {
++                return false;
++            }
++        } else {
++            if (port_or_path) {
++                error_setg(errp, "gdbstub: unknown option \"%s\"" USAGE, *arg);
++                return false;
++            }
++            port_or_path = *arg;
++        }
++    }
++    if (!port_or_path) {
++        error_setg(errp, "gdbstub: port or path not specified" USAGE);
++        return false;
++    }
++
++    port = g_ascii_strtoull(port_or_path, NULL, 10);
+     if (port > 0) {
+         gdb_fd = gdbserver_open_port(port, errp);
+     } else {
+         gdb_fd = gdbserver_open_socket(port_or_path, errp);
+     }
+-
+     if (gdb_fd < 0) {
+         return false;
+     }
+ 
+-    if (port > 0 && gdb_accept_tcp(gdb_fd)) {
+-        return true;
+-    } else if (gdb_accept_socket(gdb_fd)) {
+-        gdbserver_user_state.socket_path = g_strdup(port_or_path);
++    if (suspend) {
++        if (gdbserver_accept(port, gdb_fd, port_or_path)) {
++            gdb_handlesig(first_cpu, 0, NULL, NULL, 0);
++            return true;
++        } else {
++            error_setg(errp, "gdbstub: failed to accept connection");
++            return false;
++        }
++    } else {
++        QemuThread thread;
++
++        gdbserver_args.port = port;
++        gdbserver_args.gdb_fd = gdb_fd;
++        gdbserver_args.path = g_strdup(port_or_path);
++        qemu_thread_create(&thread, "gdb-accept",
++                           &gdbserver_accept_thread, NULL,
++                           QEMU_THREAD_DETACHED);
+         return true;
+     }
+-
+-    /* gone wrong */
+-    close(gdb_fd);
+-    error_setg(errp, "gdbstub: failed to accept connection");
+-    return false;
+ }
+ 
+ void gdbserver_fork_start(void)
+diff --git a/linux-user/main.c b/linux-user/main.c
+index 7198fa0986..5c74c52cc5 100644
+--- a/linux-user/main.c
++++ b/linux-user/main.c
+@@ -1024,7 +1024,6 @@ int main(int argc, char **argv, char **envp)
+ 
+     if (gdbstub) {
+         gdbserver_start(gdbstub, &error_fatal);
+-        gdb_handlesig(cpu, 0, NULL, NULL, 0);
+     }
+ 
+ #ifdef CONFIG_SEMIHOSTING
+-- 
+2.39.5
 
 
