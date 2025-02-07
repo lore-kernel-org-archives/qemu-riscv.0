@@ -4,95 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 157FCC02196
-	for <qemu-riscv@archiver.kernel.org>; Fri,  7 Feb 2025 09:45:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E3C8EC02194
+	for <qemu-riscv@archiver.kernel.org>; Fri,  7 Feb 2025 12:50:56 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tgKvY-0007IZ-Aw; Fri, 07 Feb 2025 04:45:36 -0500
+	id 1tgNoA-0008Q9-2H; Fri, 07 Feb 2025 07:50:10 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
- id 1tgKvT-0007Ds-3T
- for qemu-riscv@nongnu.org; Fri, 07 Feb 2025 04:45:31 -0500
-Received: from mail-pl1-x634.google.com ([2607:f8b0:4864:20::634])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
- id 1tgKvR-0006Vv-3V
- for qemu-riscv@nongnu.org; Fri, 07 Feb 2025 04:45:30 -0500
-Received: by mail-pl1-x634.google.com with SMTP id
- d9443c01a7336-2166f1e589cso47220475ad.3
- for <qemu-riscv@nongnu.org>; Fri, 07 Feb 2025 01:45:28 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1738921527; x=1739526327; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=JAM3eL/WomDESnGsQK0BJe3nFp0migrvkKHJt3TK/u8=;
- b=j2rZ0H76EQ5CEZlZ2N89WyvyAbg4eYrd+Tl8BKLInq/Vngw287C39HYTr0GQLQFtXu
- zUVi0igIoKW0hpXGY5y/XmEDnKet02IKO+MCEy/E/nn5Mtfecg3cTPvUf13jPsPCTZ+K
- AT1kiRcs2dTp8lVKLJnQA8ctAP9fACoj+VCRdfd56ajl6+DknB29nfhykas7K0FbiwvZ
- P1xQkBlDyus6b1Fe275n2J6pyjlSPfbY7t9fJLKHMq9HyQPa0s8Nb4IY/Gq7bpe6m+S4
- YZH/ajNRZW77YFiwQ1vnvjdcmHqDRxpYup0aD6IjHSvq9WGtb66XvKOIGBNqcqa+bsLz
- wrqg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1738921527; x=1739526327;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=JAM3eL/WomDESnGsQK0BJe3nFp0migrvkKHJt3TK/u8=;
- b=Lwm4DlNtsm3KLu0n2pNWVU2JHMZY4QzWhJQuzGVQhKhMkrVBwiD3ZO8r3zSfxgE0HD
- WkGY9HoAroNOKCdmb9AhODife5/75uZXj0qAC0RYGAt1urJ/zhpYyQ79I2DV6ogMBDVT
- 4ZBRzjw8NGxvtnvgr4SItPG65Vse+8u0AH/gjivvKoixsy/OpX1L8WjJ18G7XMLVzuSo
- 2UZCpS2BZn90aJxHCEVFiWOiPYA+rqsNSBv0QZu9M0zlDrV6GIXkwl9ECirpxHwrTalw
- BHIcYWnmJKoCevrOzOVxfhs/UWIflDqzdQkC9qIbRCqjl9VvAKII58SN0CI3ZiFixT38
- Zm5w==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXHXIB7ybg59IxpAcb0lCft8epgvg92fTULKXrUceIM/vYV36zVJuYeqdhOsELFDx0qFNNymQS8DoBV@nongnu.org
-X-Gm-Message-State: AOJu0Yy1HtQ4s+U3DmHPPqxAaUQ0nBFtowCO53W/ikkMv5fS8Gdlpq0M
- bj/y/xyaKT9o0yetKu3CXVxG7S3/+TrfZjpiAc6ay0h5n6t0bm7I6ThgnISEkm0=
-X-Gm-Gg: ASbGnctiSEpJuNdmJI0DHyqeG8TvqZdvjwnF78iKT/cpvedXPhtGglDO5gPAHzENK+Y
- P+b0bskGZSzIdqnQO1enUY6g5mGYn3W+xBYCohYrwUvMV1grnHgMXIguOQapQwbpn8zorZP5bJs
- xeDdH/4OPLwJTXxvIImIBmiCP8XEuCrKITy6x6pnJkTVv48JSLdjSVGmbKkrVtcpjMqM8Gv0jkG
- 03Ko90NqZ1erT9KtaLChFnYSht49yXgDYLg8PDHhbnarwOT4qYL3sSe2zXUPtUo8H7PUTY+E4J3
- RYmADPSHIld6uPFkcr/d5HAMBJAzjK4IPUdI/ZwXgyNCe2s4/ZyNkRGd0iDr1HidsqWn
-X-Google-Smtp-Source: AGHT+IHzIZBGH+9zBTkP73+5nhvItKxusYGL2bXGYFJJgGG48nKVbhlxOKHP6ZzDhaMszcTHgml+2A==
-X-Received: by 2002:a05:6a00:3e0b:b0:725:eb85:f7f7 with SMTP id
- d2e1a72fcca58-7305d4187c1mr4583988b3a.5.1738921526882; 
- Fri, 07 Feb 2025 01:45:26 -0800 (PST)
-Received: from [100.64.0.1] (218-166-198-8.dynamic-ip.hinet.net.
- [218.166.198.8]) by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-73048e1e80fsm2584260b3a.157.2025.02.07.01.45.24
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 07 Feb 2025 01:45:26 -0800 (PST)
-Message-ID: <391b0fdb-b5f7-4151-ad84-0718a197dcee@sifive.com>
-Date: Fri, 7 Feb 2025 17:45:23 +0800
+ (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1tgNnw-0008OV-KL
+ for qemu-riscv@nongnu.org; Fri, 07 Feb 2025 07:49:57 -0500
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1tgNnu-0006Ch-7M
+ for qemu-riscv@nongnu.org; Fri, 07 Feb 2025 07:49:56 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1738932593;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=ACbs5y7bwLfuM7WcKRPlYYsOm/ka0y+AxXv51HcvjXA=;
+ b=Eh7Z2RhLpJyyEPjzoTBLzzCPSEXzbdK2b7YThzPkrityGepUM5v8Bo22cyXfWdyQMKe4VB
+ B2/jFP6ERLaLVDEdvubM+Xjp+B5yEmhrkscRZL4HQKCPueVmyio1u9iEhuOK8+hIxHg0sU
+ UWxFp6ZeIUSJv2Dv8hdtNrPHkxA3z24=
+Received: from mx-prod-mc-05.mail-002.prod.us-west-2.aws.redhat.com
+ (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
+ relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-663-LW7Ymt0-MbyNNieWC-LsFQ-1; Fri,
+ 07 Feb 2025 07:49:50 -0500
+X-MC-Unique: LW7Ymt0-MbyNNieWC-LsFQ-1
+X-Mimecast-MFC-AGG-ID: LW7Ymt0-MbyNNieWC-LsFQ
+Received: from mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com
+ (mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.111])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mx-prod-mc-05.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id 0CC191956094; Fri,  7 Feb 2025 12:49:48 +0000 (UTC)
+Received: from blackfin.pond.sub.org (unknown [10.45.242.26])
+ by mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id 40BCB1800360; Fri,  7 Feb 2025 12:49:47 +0000 (UTC)
+Received: by blackfin.pond.sub.org (Postfix, from userid 1000)
+ id BF9AB21E6A28; Fri, 07 Feb 2025 13:49:44 +0100 (CET)
+From: Markus Armbruster <armbru@redhat.com>
+To: Philippe =?utf-8?Q?Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+Cc: qemu-devel@nongnu.org,  qemu-riscv@nongnu.org,  qemu-arm@nongnu.org,
+ Peter Maydell <peter.maydell@linaro.org>,  qemu-ppc@nongnu.org,  Daniel
+ =?utf-8?Q?P=2EBerrang=C3=A9?= <berrange@redhat.com>,  Paolo Bonzini
+ <pbonzini@redhat.com>,
+ Thomas Huth <thuth@redhat.com>,  qemu-s390x@nongnu.org
+Subject: Re: [PATCH v2 4/8] hw/boards: Remove all invalid uses of
+ auto_create_sdcard=true
+In-Reply-To: <34235ce5-9f6c-4968-a8c1-ab868389e9cf@linaro.org> ("Philippe
+ =?utf-8?Q?Mathieu-Daud=C3=A9=22's?= message of "Thu, 6 Feb 2025 11:12:46
+ +0100")
+References: <20250204180746.58357-1-philmd@linaro.org>
+ <20250204180746.58357-5-philmd@linaro.org>
+ <87a5b07u1d.fsf@pond.sub.org>
+ <34235ce5-9f6c-4968-a8c1-ab868389e9cf@linaro.org>
+Date: Fri, 07 Feb 2025 13:49:44 +0100
+Message-ID: <8734gpj4wn.fsf@pond.sub.org>
+User-Agent: Gnus/5.13 (Gnus v5.13)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 11/12] target/riscv: Add CHECK arg to GEN_OPFVF_WIDEN_TRANS
-To: Anton Blanchard <antonb@tenstorrent.com>, qemu-riscv@nongnu.org,
- qemu-devel@nongnu.org
-Cc: Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bmeng.cn@gmail.com>,
- Weiwei Li <liwei1518@gmail.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
-References: <20250126072056.4004912-1-antonb@tenstorrent.com>
- <20250126072056.4004912-12-antonb@tenstorrent.com>
-Content-Language: en-US
-From: Max Chou <max.chou@sifive.com>
-In-Reply-To: <20250126072056.4004912-12-antonb@tenstorrent.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::634;
- envelope-from=max.chou@sifive.com; helo=mail-pl1-x634.google.com
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.111
+Received-SPF: pass client-ip=170.10.129.124; envelope-from=armbru@redhat.com;
+ helo=us-smtp-delivery-124.mimecast.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H5=0.001, RCVD_IN_MSPIKE_WL=0.001,
+ RCVD_IN_VALIDITY_CERTIFIED_BLOCKED=0.001, RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -108,66 +95,67 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Reviewed-by: Max Chou <max.chou@sifive.com>
+Philippe Mathieu-Daud=C3=A9 <philmd@linaro.org> writes:
 
-
-On 2025/1/26 3:20 PM, Anton Blanchard wrote:
-> Signed-off-by: Anton Blanchard <antonb@tenstorrent.com>
-> ---
->   target/riscv/insn_trans/trans_rvv.c.inc | 18 +++++++++---------
->   1 file changed, 9 insertions(+), 9 deletions(-)
+> On 5/2/25 08:03, Markus Armbruster wrote:
+>> Philippe Mathieu-Daud=C3=A9 <philmd@linaro.org> writes:
+>>=20
+>>> MachineClass::auto_create_sdcard is only useful to automatically
+>>> create a SD card, attach a IF_SD block drive to it and plug the
+>>> card onto a SD bus. Only the ARM and RISCV targets use such
+>>> feature:
+>>>
+>>>   $ git grep -wl IF_SD hw | cut -d/ -f-2 | sort -u
+>>>   hw/arm
+>>>   hw/riscv
+>>>   $
+>>>
+>>> Remove all other uses.
+>>>
+>>> Signed-off-by: Philippe Mathieu-Daud=C3=A9 <philmd@linaro.org>
+>>=20
+>> Impact?
+>>=20
+>> As far as I can tell, this stops creation of the if=3Dsd default drive
+>> these machines don't actually use.  Correct?
 >
-> diff --git a/target/riscv/insn_trans/trans_rvv.c.inc b/target/riscv/insn_trans/trans_rvv.c.inc
-> index 312d8b1b81..2741f8bd8e 100644
-> --- a/target/riscv/insn_trans/trans_rvv.c.inc
-> +++ b/target/riscv/insn_trans/trans_rvv.c.inc
-> @@ -2410,10 +2410,10 @@ static bool opfvf_widen_check(DisasContext *s, arg_rmrr *a)
->   }
->   
->   /* OPFVF with WIDEN */
-> -#define GEN_OPFVF_WIDEN_TRANS(NAME)                              \
-> +#define GEN_OPFVF_WIDEN_TRANS(NAME, CHECK)                       \
->   static bool trans_##NAME(DisasContext *s, arg_rmrr *a)           \
->   {                                                                \
-> -    if (opfvf_widen_check(s, a)) {                               \
-> +    if (CHECK(s, a)) {                                           \
->           uint32_t data = 0;                                       \
->           static gen_helper_opfvf *const fns[2] = {                \
->               gen_helper_##NAME##_h, gen_helper_##NAME##_w,        \
-> @@ -2429,8 +2429,8 @@ static bool trans_##NAME(DisasContext *s, arg_rmrr *a)           \
->       return false;                                                \
->   }
->   
-> -GEN_OPFVF_WIDEN_TRANS(vfwadd_vf)
-> -GEN_OPFVF_WIDEN_TRANS(vfwsub_vf)
-> +GEN_OPFVF_WIDEN_TRANS(vfwadd_vf, opfvf_widen_check)
-> +GEN_OPFVF_WIDEN_TRANS(vfwsub_vf, opfvf_widen_check)
->   
->   static bool opfwv_widen_check(DisasContext *s, arg_rmrr *a)
->   {
-> @@ -2512,7 +2512,7 @@ GEN_OPFVF_TRANS(vfrdiv_vf,  opfvf_check)
->   
->   /* Vector Widening Floating-Point Multiply */
->   GEN_OPFVV_WIDEN_TRANS(vfwmul_vv, opfvv_widen_check)
-> -GEN_OPFVF_WIDEN_TRANS(vfwmul_vf)
-> +GEN_OPFVF_WIDEN_TRANS(vfwmul_vf, opfvf_widen_check)
->   
->   /* Vector Single-Width Floating-Point Fused Multiply-Add Instructions */
->   GEN_OPFVV_TRANS(vfmacc_vv, opfvv_check)
-> @@ -2537,10 +2537,10 @@ GEN_OPFVV_WIDEN_TRANS(vfwmacc_vv, opfvv_widen_check)
->   GEN_OPFVV_WIDEN_TRANS(vfwnmacc_vv, opfvv_widen_check)
->   GEN_OPFVV_WIDEN_TRANS(vfwmsac_vv, opfvv_widen_check)
->   GEN_OPFVV_WIDEN_TRANS(vfwnmsac_vv, opfvv_widen_check)
-> -GEN_OPFVF_WIDEN_TRANS(vfwmacc_vf)
-> -GEN_OPFVF_WIDEN_TRANS(vfwnmacc_vf)
-> -GEN_OPFVF_WIDEN_TRANS(vfwmsac_vf)
-> -GEN_OPFVF_WIDEN_TRANS(vfwnmsac_vf)
-> +GEN_OPFVF_WIDEN_TRANS(vfwmacc_vf, opfvf_widen_check)
-> +GEN_OPFVF_WIDEN_TRANS(vfwnmacc_vf, opfvf_widen_check)
-> +GEN_OPFVF_WIDEN_TRANS(vfwmsac_vf, opfvf_widen_check)
-> +GEN_OPFVF_WIDEN_TRANS(vfwnmsac_vf, opfvf_widen_check)
->   
->   /* Vector Floating-Point Square-Root Instruction */
->   
+> Yes, since these machines don't expose a SD-bus, the drive can
+> not be attached and always triggers the same error:
+>
+> $ qemu-system-hppa -sd /bin/sh
+> qemu-system-hppa: -sd /bin/sh: machine type does not support=20
+> if=3Dsd,bus=3D0,unit=3D0
+
+To be precise...
+
+Before the series, a bunch of machines create an if=3Dsd,index=3D0 drive by
+default even though they cannot use it.  HMP "info block" shows it:
+
+    sd0: [not inserted]
+        Removable device: not locked, tray closed
+
+"By default" means -nodefaults suppresses it.
+
+After the series, this default drive is gone.
+
+That is all.
+
+Correct?
+
+The commit message could be clearer about this.  Perhaps:
+
+    hw/boards: Do not create unusable default if=3Dsd drives
+
+    A number of machines create an if=3Dsd drive by default even though
+    they lack an SD bus, and therefore cannot use the drive.
+
+    This drive is created when the machine sets flag
+    @auto_create_sdcard.
+
+    Delete that from machines that lack an SD bus.
+
+Listing the affected machines might be useful.
+
+Worth a mention in the release notes?  I don't know.
 
 
