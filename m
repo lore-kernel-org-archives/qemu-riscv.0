@@ -4,103 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 59637C02194
-	for <qemu-riscv@archiver.kernel.org>; Fri,  7 Feb 2025 15:37:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 52CDCC02194
+	for <qemu-riscv@archiver.kernel.org>; Fri,  7 Feb 2025 15:37:25 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tgQNS-000457-4t; Fri, 07 Feb 2025 10:34:46 -0500
+	id 1tgQO1-0005i1-UA; Fri, 07 Feb 2025 10:35:22 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1tgQKY-0008G9-JD
- for qemu-riscv@nongnu.org; Fri, 07 Feb 2025 10:31:52 -0500
-Received: from mail-ej1-x636.google.com ([2a00:1450:4864:20::636])
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1tgQNq-0005Tz-Bq
+ for qemu-riscv@nongnu.org; Fri, 07 Feb 2025 10:35:12 -0500
+Received: from mail-pl1-x634.google.com ([2607:f8b0:4864:20::634])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1tgQKH-00042L-50
- for qemu-riscv@nongnu.org; Fri, 07 Feb 2025 10:31:44 -0500
-Received: by mail-ej1-x636.google.com with SMTP id
- a640c23a62f3a-ab7863f9be4so168293666b.0
- for <qemu-riscv@nongnu.org>; Fri, 07 Feb 2025 07:31:23 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1tgQNn-0004ko-58
+ for qemu-riscv@nongnu.org; Fri, 07 Feb 2025 10:35:09 -0500
+Received: by mail-pl1-x634.google.com with SMTP id
+ d9443c01a7336-21f4a4fbb35so23188955ad.0
+ for <qemu-riscv@nongnu.org>; Fri, 07 Feb 2025 07:35:05 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1738942283; x=1739547083; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=M1O482OJIh050UUseeR+bYA6QoGKKDZRGYOAk/RFThQ=;
- b=Zp2VrnY9aJlvuuaDsu5xChFdmkAhqli7chpu33/UN+XNB85ibKm2YMIME//qQtiPoo
- fukKEJTJqDvMF4Xz46bsjdap4h8jm8I7bYrfVTB8N8W7AYPEpDd2SjyDetKgYw7nz1WP
- oIRPkfNip1nFIgsOslx6/eCW/2vj6voSRDJlPIU2oRXeL8cjwDo8plUwv0cY3IOv4q4j
- 4Z6CAG+xMsgeqD3TIcG3rVn1MW1JkXZPOmGn/3afL+y8+bqgq8W/+jWzHZi9aVRxEzoZ
- X7U2ADlcs1SppXGuKi+8PTZRkb+TALAnFgZfXQKOu/VH+9TRM96ssaFhIlWufRBdKiUo
- Wi1g==
+ d=ventanamicro.com; s=google; t=1738942504; x=1739547304; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=JL6HX0/rUgVOcxkk5vAabK9dtF8gasDai0xn6kwNf/0=;
+ b=U5GNoRhzpC4yju1x80Yb4QAOfPKYw4r5nR9hcfCDbvdFkcL9iuQ/0A5vbWFn7oYmeD
+ 2cmHakGMDirOAeHlth5/OWdiuv0268vPMtlgvDiQyTVRLu+8KSyQbYX6h4y299NKGSE+
+ WK0BKzpe1zYVs+RgljYLUM/fMRsxSu/CwEe5toi/iwA7BXaG+zYBh8vBcGT993rXbqMd
+ Q6N77wrxyzPCE7JkTH7/II9FsepGVl+4hJpyT5Bp/9F6ZLHXkxBbWUIMh0nNN+ovqmRy
+ gmSn7g003PGsb4ENkRMirzQxZbQ3Ku93zSHBBGVl5AB/Af4noDgXGSpwPpeCqnaBNdUv
+ WNxQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1738942283; x=1739547083;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=M1O482OJIh050UUseeR+bYA6QoGKKDZRGYOAk/RFThQ=;
- b=CNEHZjlxxwuwJFDpI8mNFe/9pwnb7MDncmzYsRoUjbF3xMAwDD/9OGgptEtO1AEbTt
- JJIZvVoNjRywnUG4v/32H8zDvWEsZeDP90pamG7vtD3dwaEizB6JtTvt9tWXUQfKlZlk
- 198jVZmO+juUhCLd6zK+PpZXmNQTYYQ25XA2bxywWuQMzYYmUw33c2GtvIpk2sYxpElS
- hbJaEW2fLR5qNvZmX/OrCVblVHPxov0s7DpIoDXbJMHqNvyFQuZJx2QxQ+VN83o66j9A
- xgyEfC69cotDV1ByD/cKwRCQJPG4L2+ubqUh0C2TQjOLWl+tZOdMQXHlqkLGIhZox3ax
- kdGg==
+ d=1e100.net; s=20230601; t=1738942504; x=1739547304;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=JL6HX0/rUgVOcxkk5vAabK9dtF8gasDai0xn6kwNf/0=;
+ b=irUsxv8BjZLVPSNaOCQFp9m0Qv0u8fRpl91Z8FHVhYTU9jUGw7A9obPRSzg89813y3
+ SkcSgxpkJ5t50uu4hGyAA6PGnJMh53bla7Hymwoo9JKGBXyUqKiEdlYj3B8p9F/Mbzpo
+ WCqx/oEEDLxB2dU7L8bSmfKHdIupQrfI3bueLYZ7Q2+/V2DrjXIU6SmyBPJf2w0evTXU
+ GjhXrytq68txKPmPj8eDS2KhzE1LZ3g9lnbijX3kPVXH1Ke+VM6CIQMSV4e+LXhmagjm
+ oXAcddM6mN4b+FWZNS07Axl34MdlFQgTo1+IMJB/ZDN+To5W8Be0HE7RURnSSfekrBak
+ 0tDA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVef2DbUIcM0hChHBrcvZoy9xtDk4+DgHB6E20Bvprf8K4KDq8w8CUHeoRa4e6CJbYeeZgHDHfpTVKq@nongnu.org
-X-Gm-Message-State: AOJu0Yym4w60h+PRy7c0zHMAetgI1AQdxjeAh94byv/SQupTcu+Ok+uf
- YaNuMPqLOeOzsylFdllBhGnZocHHLHzN4UUUTzAMQtFp3TZGaklc3JhFBUnZaYM=
-X-Gm-Gg: ASbGnctMYmKVOqwiYof9BACEPlcIH55UWptnbq3ZTMkBi+qVagj55AUihkxzZtsEHha
- PgMxGGH0WN6z2GGAMhMf7FkLqTZEbo5Mk8N5eIzKf7rOingYu4Fv08kS25Bkidfv/mVqfZJO5eP
- x147M8hEId0aaZp238ieDgoxnC/CIPuf0KFTdBeqe9+OSjpBYSxEdAC7DUratCrMgkvoBBLKBov
- GNXukolkBefXgMIouxc2NhzCBdKAajAj2h1zmeAs9jBUhqy0zl0l6YwghDd+Siuh8WDx/tr9Uq1
- zUkQD5MIsx8mI/ofeA==
-X-Google-Smtp-Source: AGHT+IEXZm1I4NYSLnye7I6ENS+G0tiNEGsW9LsilLjwvaf03/wO4ZNecuR48DUOaMpc9MV5S8GWIg==
-X-Received: by 2002:a17:906:4fd6:b0:aa6:79fa:b47d with SMTP id
- a640c23a62f3a-ab789a681a3mr405645966b.1.1738942282560; 
- Fri, 07 Feb 2025 07:31:22 -0800 (PST)
-Received: from draig.lan ([185.126.160.109]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-ab77f5f5a0esm216633666b.155.2025.02.07.07.31.17
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 07 Feb 2025 07:31:18 -0800 (PST)
-Received: from draig.lan (localhost [IPv6:::1])
- by draig.lan (Postfix) with ESMTP id A88E960C3D;
- Fri,  7 Feb 2025 15:31:13 +0000 (GMT)
-From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
-To: qemu-devel@nongnu.org
-Cc: Peter Xu <peterx@redhat.com>,
- =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
- Thomas Huth <thuth@redhat.com>, Weiwei Li <liwei1518@gmail.com>,
- qemu-arm@nongnu.org, Nicholas Piggin <npiggin@gmail.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, Bin Meng <bmeng.cn@gmail.com>,
- Tyrone Ting <kfting@nuvoton.com>, Hao Wu <wuhaotsh@google.com>,
- Kyle Evans <kevans@freebsd.org>,
- Alistair Francis <alistair.francis@wdc.com>,
- =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Laurent Vivier <laurent@vivier.eu>, Riku Voipio <riku.voipio@iki.fi>,
- Harsh Prateek Bora <harshpb@linux.ibm.com>,
- Fabiano Rosas <farosas@suse.de>, Alexandre Iooss <erdnaxe@crans.org>,
- Laurent Vivier <lvivier@redhat.com>,
- Daniel Henrique Barboza <danielhb413@gmail.com>,
- Warner Losh <imp@bsdimp.com>,
- Pierrick Bouvier <pierrick.bouvier@linaro.org>,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Mahmoud Mandour <ma.mandourr@gmail.com>, qemu-ppc@nongnu.org,
- Paolo Bonzini <pbonzini@redhat.com>, qemu-rust@nongnu.org,
- qemu-riscv@nongnu.org, Ilya Leoshkevich <iii@linux.ibm.com>,
- Richard Henderson <richard.henderson@linaro.org>
-Subject: [PATCH v2 14/17] osdep: Introduce qemu_kill_thread()
-Date: Fri,  7 Feb 2025 15:31:09 +0000
-Message-Id: <20250207153112.3939799-15-alex.bennee@linaro.org>
-X-Mailer: git-send-email 2.39.5
-In-Reply-To: <20250207153112.3939799-1-alex.bennee@linaro.org>
-References: <20250207153112.3939799-1-alex.bennee@linaro.org>
+ AJvYcCWtnRkapKOVcmJBmmCuxRgdj5+K81wlgYRiKC04EAMygffkz/9LwktEaL8m6fD1MZuuTfdG6nBeY0Le@nongnu.org
+X-Gm-Message-State: AOJu0Yx315I3cgd98RaQ7FL1HSvvxBnZJpegt6tAXPfpsiiyJarM5Qpo
+ LxEmTm2wmi8byVgaTwj1JG5hOYtw51YsjVjuJmtSaMS/Rz0z0znRuWHbd5TXmL8=
+X-Gm-Gg: ASbGncvgwAgUKbOgk+hEIc3v/GXamUEiyF9BynFGeqp26Fzm4Tu5X/8R5YCESsn51zN
+ ukjLrTd/yNVZRuLwMgPdOhTGpIl/120MSJPHPY+rGdqlFfNSqTJdX0UAA0OYRqtbWoxC9XBCoby
+ 0HQgwRTWK/xg6qUG9wKXUg6M5DKZDkyL1XShUhQDv7A/FxV0ViqIQqzcaqsGMh7r1x5+DzHCyde
+ JATNtNNTrPTnGfujxBfxeUgaNH8qm6rRP5H1wGSQkrh2BnLiI57XBmem1KSBxjZj0Z0bp2qm34i
+ CZF2CoXupMyAt7WtnQRNcCqG06oUvQajJb36nn/NT5VjpAN8DcRaD8eQOZhOpJdB
+X-Google-Smtp-Source: AGHT+IEg6TOgRbngSBxCtjXHpnQ5Uxj1dtAD59nwxTVtH8DBEiy+2pyGG6fbo45a7em/6DU7v01whA==
+X-Received: by 2002:a17:902:cf04:b0:216:5db1:5dc1 with SMTP id
+ d9443c01a7336-21f4f0ef803mr54542665ad.1.1738942504312; 
+ Fri, 07 Feb 2025 07:35:04 -0800 (PST)
+Received: from [192.168.68.110] (201-69-66-42.dial-up.telesp.net.br.
+ [201.69.66.42]) by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-21f36560d6csm32052135ad.92.2025.02.07.07.35.01
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 07 Feb 2025 07:35:03 -0800 (PST)
+Message-ID: <8f551680-6553-42b1-9307-d4b56e7bc2a5@ventanamicro.com>
+Date: Fri, 7 Feb 2025 12:34:59 -0300
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::636;
- envelope-from=alex.bennee@linaro.org; helo=mail-ej1-x636.google.com
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] target/riscv: Fix minor whitespace issue in
+ riscv_cpu_properties
+To: Rob Bradford <rbradford@rivosinc.com>, qemu-devel@nongnu.org
+Cc: Bin Meng <bmeng.cn@gmail.com>, Alistair Francis
+ <alistair.francis@wdc.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ qemu-riscv@nongnu.org, Weiwei Li <liwei1518@gmail.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>, qemu-trivial@nongnu.org,
+ Michael Tokarev <mjt@tls.msk.ru>
+References: <20250207152823.265068-1-rbradford@rivosinc.com>
+Content-Language: en-US
+From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+In-Reply-To: <20250207152823.265068-1-rbradford@rivosinc.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::634;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pl1-x634.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -123,69 +107,37 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Ilya Leoshkevich <iii@linux.ibm.com>
+Ccing qemu-trivial and Michael
+  
+On 2/7/25 12:28 PM, Rob Bradford wrote:
+> The mvendorid/mimpid/marchid properties have the wrong amount of
+> whitespace ahead of them.
+> 
+> Signed-off-by: Rob Bradford <rbradford@rivosinc.com>
+> ---
 
-Add a function for sending signals to individual threads. It does not make
-sense on Windows, so do not provide an implementation, so that if someone
-uses it by accident, they will get a linker error.
 
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
-Reviewed-by: Warner Losh <imp@bsdimp.com>
-Signed-off-by: Ilya Leoshkevich <iii@linux.ibm.com>
-Message-Id: <20250117001542.8290-6-iii@linux.ibm.com>
-Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
----
- include/qemu/osdep.h |  9 +++++++++
- util/oslib-posix.c   | 15 +++++++++++++++
- 2 files changed, 24 insertions(+)
+Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 
-diff --git a/include/qemu/osdep.h b/include/qemu/osdep.h
-index 112ebdff21..4397a90680 100644
---- a/include/qemu/osdep.h
-+++ b/include/qemu/osdep.h
-@@ -631,6 +631,15 @@ bool qemu_write_pidfile(const char *pidfile, Error **errp);
- 
- int qemu_get_thread_id(void);
- 
-+/**
-+ * qemu_kill_thread:
-+ * @tid: thread id.
-+ * @sig: host signal.
-+ *
-+ * Send @sig to one of QEMU's own threads with identifier @tid.
-+ */
-+int qemu_kill_thread(int tid, int sig);
-+
- #ifndef CONFIG_IOVEC
- struct iovec {
-     void *iov_base;
-diff --git a/util/oslib-posix.c b/util/oslib-posix.c
-index 2bb34dade3..a697c602c6 100644
---- a/util/oslib-posix.c
-+++ b/util/oslib-posix.c
-@@ -111,6 +111,21 @@ int qemu_get_thread_id(void)
- #endif
- }
- 
-+int qemu_kill_thread(int tid, int sig)
-+{
-+#if defined(__linux__)
-+    return syscall(__NR_tgkill, getpid(), tid, sig);
-+#elif defined(__FreeBSD__)
-+    return thr_kill2(getpid(), tid, sig);
-+#elif defined(__NetBSD__)
-+    return _lwp_kill(tid, sig);
-+#elif defined(__OpenBSD__)
-+    return thrkill(tid, sig, NULL);
-+#else
-+    return kill(tid, sig);
-+#endif
-+}
-+
- int qemu_daemon(int nochdir, int noclose)
- {
-     return daemon(nochdir, noclose);
--- 
-2.39.5
+>   target/riscv/cpu.c | 6 +++---
+>   1 file changed, 3 insertions(+), 3 deletions(-)
+> 
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index 3d4bd157d2..cca24b9f1f 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -2844,9 +2844,9 @@ static const Property riscv_cpu_properties[] = {
+>       {.name = "cbop_blocksize", .info = &prop_cbop_blksize},
+>       {.name = "cboz_blocksize", .info = &prop_cboz_blksize},
+>   
+> -     {.name = "mvendorid", .info = &prop_mvendorid},
+> -     {.name = "mimpid", .info = &prop_mimpid},
+> -     {.name = "marchid", .info = &prop_marchid},
+> +    {.name = "mvendorid", .info = &prop_mvendorid},
+> +    {.name = "mimpid", .info = &prop_mimpid},
+> +    {.name = "marchid", .info = &prop_marchid},
+>   
+>   #ifndef CONFIG_USER_ONLY
+>       DEFINE_PROP_UINT64("resetvec", RISCVCPU, env.resetvec, DEFAULT_RSTVEC),
 
 
