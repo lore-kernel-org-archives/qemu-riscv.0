@@ -4,68 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 64382C02194
-	for <qemu-riscv@archiver.kernel.org>; Fri,  7 Feb 2025 15:40:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 15698C02194
+	for <qemu-riscv@archiver.kernel.org>; Fri,  7 Feb 2025 15:40:47 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tgQN4-0003hN-5h; Fri, 07 Feb 2025 10:34:24 -0500
+	id 1tgQSZ-0005L7-1T; Fri, 07 Feb 2025 10:40:04 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1tgQKY-0008GG-Kg
- for qemu-riscv@nongnu.org; Fri, 07 Feb 2025 10:31:52 -0500
-Received: from mail-ed1-x52b.google.com ([2a00:1450:4864:20::52b])
+ id 1tgQSI-0004dU-Q8
+ for qemu-riscv@nongnu.org; Fri, 07 Feb 2025 10:39:47 -0500
+Received: from mail-ej1-x629.google.com ([2a00:1450:4864:20::629])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1tgQKH-00045F-4V
- for qemu-riscv@nongnu.org; Fri, 07 Feb 2025 10:31:44 -0500
-Received: by mail-ed1-x52b.google.com with SMTP id
- 4fb4d7f45d1cf-5de47cf93dfso1112754a12.2
- for <qemu-riscv@nongnu.org>; Fri, 07 Feb 2025 07:31:27 -0800 (PST)
+ id 1tgQSE-0005Qh-Q8
+ for qemu-riscv@nongnu.org; Fri, 07 Feb 2025 10:39:46 -0500
+Received: by mail-ej1-x629.google.com with SMTP id
+ a640c23a62f3a-ab794ae3cf2so41912466b.2
+ for <qemu-riscv@nongnu.org>; Fri, 07 Feb 2025 07:39:42 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1738942287; x=1739547087; darn=nongnu.org;
+ d=linaro.org; s=google; t=1738942781; x=1739547581; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=pPUDkSmMPYbLWvU17ZzS5yeDzam6zW4TjOrPUFAUhlo=;
- b=i95wKV0yKkOuGuXzhdZ6NcGa+2DzitY2IiNp/iy9LiY2JQitDB0gDNLihzZjATyRIm
- y+qKPzNUwzOni/awGpw91PofQ+/+HlSELx3aS7EYXNrQ+bJRGAKlZ4rnO7NNhvBonqki
- J8+kHA7b3PAN6NoYlWu24oR+Wi7lEDaZjmONitSPTCQYwwmbHVjRv0NGwPzKsPqvlh6y
- T5eqyDMVjT+8+FUt4Hoxi5+uSLZQm1SvLfn3tcnqjaSHqsSc/JuG9Hr3GA5Ok5ArWI4+
- ptzwsp4ioYslv4j0+hriqKP/5cz0dARR/S+Hu+5+51AksyKdSs++1ujor6D2nRvdu083
- K9PQ==
+ bh=gkJVfCavNsBQMZBi92Kjm0ej3U2Pdiir6so6tZSVLo8=;
+ b=kK54ulUUTfU7vcmorGOTmA6Lj5XKpd809W86iO8J3WqBjScA6oX23y/GUU6+L5BQJv
+ jjRN40Jzs23P7C61Cs+Zr35xsx/Y3J+8PTvboy1hJPGkfC5EOcRcT2Xzgnpe2pfFhtTp
+ BAOgJ0bl/lLfSA9+OohuKUsLsZn24q8dyDk/prjEXcI6s9c5IQWVQsN0nCNne9nW8LQ9
+ a+F4zKAzvba6280Bbi0PeWOX6L8zLGmu2Juei+j3BdUwNb/sXkxqB/6Hr9/6LBtkM06B
+ sNO8+/zj++W14LDAWQ6TLTyuX5Jyl3CtGZJkDkYpxQ/INwxQSTir9hlOwiFFpSU/6HMD
+ q4Iw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1738942287; x=1739547087;
+ d=1e100.net; s=20230601; t=1738942781; x=1739547581;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=pPUDkSmMPYbLWvU17ZzS5yeDzam6zW4TjOrPUFAUhlo=;
- b=im+GCI2DVwBPBetKHonwUsdWeIJpBFRsP+poiia4PEruXKfwfCAy+iSli3rJKcMzUQ
- W+WjQ4MNmV1wIgRuyxxS6GAoqJ4U3f3N61NrYTFxqG3SUsS4EnXAdhxA6ET8HEsaV39T
- 9CYB14Kr/XkffZVcnOQmK1vAlTpgX8X27mmBvn3rmP1/JfcTeEL+/wjMIyJYxfXv8Psd
- 0oZbGyx+qwXT9pbrfdd85JvEUVg4/L6uDHKmiRl1uhULzsRc+Y9SGztpMnLoL5ewlpV0
- kNbcFGO8/h3LLwOIax2YlKzCLjsMEgAJ768aGjmcepaAVtJKWq0X3Akbslmw9E73kKfV
- AXUg==
+ bh=gkJVfCavNsBQMZBi92Kjm0ej3U2Pdiir6so6tZSVLo8=;
+ b=nqW4SBVRcaUeyzKUPJf6GhGH4w7GHx0GZj19qmvkK7DZHmgicbutvaOp9oO94CjS/w
+ jSPuGtcfCKwVYg6BHYi04WJbH4sCEFvzs0V5LhqhwQ1zEDQ31dQdMXcI6kvnKWcCzLqS
+ zOQsYb6dsZIv5gXKY7QrduhTP1o6hmXxr0H4xuGUAajtntqNEBONdf5wAYiOha+H8CvV
+ i2qhP67dXecqobcarGt8uEv43LqSIJC8ArgnAqZ7ab6HLUMEWkmByUE/d0ubxirFMGi8
+ LqbjFt4Sbto5yO4WbDeHLtxskIqTAdcSXO+32aI04JwRF44UPu5gRF9nSXxWvKeoQfHi
+ 9NRw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCU3eBwZqm11J3VrPOnAmjq1qaqI3YVTpoBXIKzAsw79MUlfEbIKMuaFrUEePidIySLnkPcJNer15+GI@nongnu.org
-X-Gm-Message-State: AOJu0Yzx+Svh0CGUy9m7Aex63pdkf4K8TCrgwlO/UCrr7zLLT1TKPZQl
- 61fe6U28tEysy9Ez7qmbHTkPItp+clc83bULX9+xe71teHzVvsu6l/KQ2GLjNcU=
-X-Gm-Gg: ASbGncu0jxuhny423d5pjWKoVSGkRjtdXK40nx2UIGbvvet7Rjmw0+QbifJCANVdXb0
- kauueb4Qz8l/pKD1B9o1JeDjMqjaEzZgmFJLdyO9t5Wmpi9F/SoZNxv9YPSy0a2yZbTpXmNcG/F
- T7X7RGopZeCor1WXRdMocDiHX1ueQ/yFEM4lFNEWL8/OJH+k39hAVbUvX1YS/NcIVXvIZ9mvdSY
- SkzES3RBbRjXgtDMVS50ppji2W8CYbk8CXWXhEvrHDyAbUV0Ylc9fGCQxf3XBdd+cgB7MhPV+hK
- tu0q8SHqJq7XCiIUOg==
-X-Google-Smtp-Source: AGHT+IFRV196ER3Qoshm0OKFIo/daJCeveh8hvR4clDy2dZ1Zq/c9ZpzlpsLKZ1rrvJoQch2o0cU2g==
-X-Received: by 2002:a05:6402:42cb:b0:5dc:cf9b:b04a with SMTP id
- 4fb4d7f45d1cf-5de44fe9443mr9335607a12.1.1738942284912; 
- Fri, 07 Feb 2025 07:31:24 -0800 (PST)
+ AJvYcCXlGLIjb4+/TnZaGwY3aMXYa+Q/35V8uq0tzTuF9Go9rbyqP4fKFefg5wrqWJ4znm3ID6+qa2zrPR35@nongnu.org
+X-Gm-Message-State: AOJu0Yzap6jcBQgxwK95X89q6lMuNLhj5g/I3FmOZcTnCuH4uSK2RFVK
+ Ksa0SRBqUoNgXaEogCUU2bztFW8JHSF8tqgYEBeL2Una+6rJvSqd1coiPzYotEM=
+X-Gm-Gg: ASbGncv/+dktdyBHwQgTnSJ5+sU3T49YnjwzOo53Oi/WRGu4DMsDeprMf1MnhXVzsL8
+ 04f38Rrq9OMiBlsv27sE9aJJ57xUYkXAxKc0vTJz3owGCfZkC9lGXUxoc6Xl3ou+Un7SsTOr50v
+ Q5IUiEKTPLfga+ZWYTrXxzOM1WkotK0UpWGn9ArXEzv9QAxirk5IxIg1j3VFo8dwfZnenhMQDJR
+ KGc2MB5oPKUONAadnO+BCaLwygfhScTJIwxRp7HiB8E6m35IX5PjtujZ7ggGi6BhJT3mAy+Jg89
+ bLVtGHfOgYhsthmUDA==
+X-Google-Smtp-Source: AGHT+IGy3CFxyRw/yf4WHCWUzXcl5y/9NPCITxVQTG4AsZscUAZKIPFWb24sTK0/0lOFvmn8E7SNjA==
+X-Received: by 2002:a17:907:7e89:b0:ab3:ed0:8d7 with SMTP id
+ a640c23a62f3a-ab789ac0f4cmr330413066b.23.1738942780986; 
+ Fri, 07 Feb 2025 07:39:40 -0800 (PST)
 Received: from draig.lan ([185.126.160.109]) by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5de4c8a3966sm995512a12.46.2025.02.07.07.31.16
+ a640c23a62f3a-ab772f843f4sm290915266b.68.2025.02.07.07.39.40
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 07 Feb 2025 07:31:20 -0800 (PST)
+ Fri, 07 Feb 2025 07:39:40 -0800 (PST)
 Received: from draig.lan (localhost [IPv6:::1])
- by draig.lan (Postfix) with ESMTP id 3CACA60870;
+ by draig.lan (Postfix) with ESMTP id EBB25619CE;
  Fri,  7 Feb 2025 15:31:13 +0000 (GMT)
 From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
 To: qemu-devel@nongnu.org
@@ -88,18 +88,18 @@ Cc: Peter Xu <peterx@redhat.com>,
  Palmer Dabbelt <palmer@dabbelt.com>,
  Mahmoud Mandour <ma.mandourr@gmail.com>, qemu-ppc@nongnu.org,
  Paolo Bonzini <pbonzini@redhat.com>, qemu-rust@nongnu.org,
- qemu-riscv@nongnu.org
-Subject: [PATCH v2 09/17] tests/qtest/migration: Pick smoke tests
-Date: Fri,  7 Feb 2025 15:31:04 +0000
-Message-Id: <20250207153112.3939799-10-alex.bennee@linaro.org>
+ qemu-riscv@nongnu.org, Ilya Leoshkevich <iii@linux.ibm.com>
+Subject: [PATCH v2 17/17] tests/tcg: Add late gdbstub attach test
+Date: Fri,  7 Feb 2025 15:31:12 +0000
+Message-Id: <20250207153112.3939799-18-alex.bennee@linaro.org>
 X-Mailer: git-send-email 2.39.5
 In-Reply-To: <20250207153112.3939799-1-alex.bennee@linaro.org>
 References: <20250207153112.3939799-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::52b;
- envelope-from=alex.bennee@linaro.org; helo=mail-ed1-x52b.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::629;
+ envelope-from=alex.bennee@linaro.org; helo=mail-ej1-x629.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -122,284 +122,167 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Fabiano Rosas <farosas@suse.de>
+From: Ilya Leoshkevich <iii@linux.ibm.com>
 
-Choose a few tests per group and move them from the full set to the
-smoke set.
+Add a small test to prevent regressions.
+Make sure that host_interrupt_signal is not visible to the guest.
 
-Signed-off-by: Fabiano Rosas <farosas@suse.de>
-Reviewed-by: Peter Xu <peterx@redhat.com>
-Message-Id: <20250130184012.5711-3-farosas@suse.de>
+Reviewed-by: Alex Bennée <alex.bennee@linaro.org>
+Signed-off-by: Ilya Leoshkevich <iii@linux.ibm.com>
+Message-Id: <20250117001542.8290-9-iii@linux.ibm.com>
 Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
 ---
- tests/qtest/migration-test.c              |  1 -
- tests/qtest/migration/compression-tests.c | 11 ++++++---
- tests/qtest/migration/cpr-tests.c         |  2 ++
- tests/qtest/migration/file-tests.c        | 17 +++++++++-----
- tests/qtest/migration/misc-tests.c        | 12 +++++++---
- tests/qtest/migration/postcopy-tests.c    | 18 ++++++++++-----
- tests/qtest/migration/precopy-tests.c     | 27 ++++++++++++++---------
- tests/qtest/migration/tls-tests.c         | 10 +++++++--
- 8 files changed, 67 insertions(+), 31 deletions(-)
+ tests/tcg/multiarch/late-attach.c          | 41 ++++++++++++++++++++++
+ tests/guest-debug/run-test.py              | 15 ++++++--
+ tests/tcg/multiarch/Makefile.target        |  9 ++++-
+ tests/tcg/multiarch/gdbstub/late-attach.py | 28 +++++++++++++++
+ 4 files changed, 90 insertions(+), 3 deletions(-)
+ create mode 100644 tests/tcg/multiarch/late-attach.c
+ create mode 100644 tests/tcg/multiarch/gdbstub/late-attach.py
 
-diff --git a/tests/qtest/migration-test.c b/tests/qtest/migration-test.c
-index 61180fcbd5..0893687174 100644
---- a/tests/qtest/migration-test.c
-+++ b/tests/qtest/migration-test.c
-@@ -46,7 +46,6 @@ int main(int argc, char **argv)
-     g_test_init(&argc, &argv, NULL);
-     env = migration_get_env();
-     env->full_set = full_set;
--    env->full_set = true; /* temporary */
-     module_call_init(MODULE_INIT_QOM);
- 
-     migration_test_add_tls(env);
-diff --git a/tests/qtest/migration/compression-tests.c b/tests/qtest/migration/compression-tests.c
-index 9d0a258d51..8b58401b84 100644
---- a/tests/qtest/migration/compression-tests.c
-+++ b/tests/qtest/migration/compression-tests.c
-@@ -151,10 +151,18 @@ static void test_multifd_tcp_zlib(void)
-     test_precopy_common(&args);
- }
- 
-+static void migration_test_add_compression_smoke(MigrationTestEnv *env)
+diff --git a/tests/tcg/multiarch/late-attach.c b/tests/tcg/multiarch/late-attach.c
+new file mode 100644
+index 0000000000..20a364034b
+--- /dev/null
++++ b/tests/tcg/multiarch/late-attach.c
+@@ -0,0 +1,41 @@
++/*
++ * Test attaching GDB to a running process.
++ *
++ * SPDX-License-Identifier: GPL-2.0-or-later
++ */
++#include <assert.h>
++#include <signal.h>
++#include <stdio.h>
++#include <stdlib.h>
++
++static const char *phase = "start";
++
++int main(void)
 +{
-+    migration_test_add("/migration/multifd/tcp/plain/zlib",
-+                       test_multifd_tcp_zlib);
-+}
++    sigset_t set;
++    int sig;
 +
- void migration_test_add_compression(MigrationTestEnv *env)
- {
-     tmpfs = env->tmpfs;
- 
-+    migration_test_add_compression_smoke(env);
++    assert(sigfillset(&set) == 0);
++    assert(sigprocmask(SIG_BLOCK, &set, NULL) == 0);
 +
-     if (!env->full_set) {
-         return;
-     }
-@@ -183,7 +191,4 @@ void migration_test_add_compression(MigrationTestEnv *env)
-         migration_test_add("/migration/precopy/unix/xbzrle",
-                            test_precopy_unix_xbzrle);
-     }
--
--    migration_test_add("/migration/multifd/tcp/plain/zlib",
--                       test_multifd_tcp_zlib);
- }
-diff --git a/tests/qtest/migration/cpr-tests.c b/tests/qtest/migration/cpr-tests.c
-index b1651fe48c..4758841824 100644
---- a/tests/qtest/migration/cpr-tests.c
-+++ b/tests/qtest/migration/cpr-tests.c
-@@ -104,6 +104,8 @@ void migration_test_add_cpr(MigrationTestEnv *env)
- {
-     tmpfs = env->tmpfs;
- 
-+    /* no tests in the smoke set for now */
-+
-     if (!env->full_set) {
-         return;
-     }
-diff --git a/tests/qtest/migration/file-tests.c b/tests/qtest/migration/file-tests.c
-index 5b190853a5..f474b3590a 100644
---- a/tests/qtest/migration/file-tests.c
-+++ b/tests/qtest/migration/file-tests.c
-@@ -300,17 +300,25 @@ static void test_multifd_file_mapped_ram_fdset_dio(void)
- }
- #endif /* !_WIN32 */
- 
-+static void migration_test_add_file_smoke(MigrationTestEnv *env)
-+{
-+    migration_test_add("/migration/precopy/file",
-+                       test_precopy_file);
-+
-+    migration_test_add("/migration/multifd/file/mapped-ram/dio",
-+                       test_multifd_file_mapped_ram_dio);
-+}
-+
- void migration_test_add_file(MigrationTestEnv *env)
- {
-     tmpfs = env->tmpfs;
- 
-+    migration_test_add_file_smoke(env);
-+
-     if (!env->full_set) {
-         return;
-     }
- 
--    migration_test_add("/migration/precopy/file",
--                       test_precopy_file);
--
-     migration_test_add("/migration/precopy/file/offset",
-                        test_precopy_file_offset);
- #ifndef _WIN32
-@@ -330,9 +338,6 @@ void migration_test_add_file(MigrationTestEnv *env)
-     migration_test_add("/migration/multifd/file/mapped-ram/live",
-                        test_multifd_file_mapped_ram_live);
- 
--    migration_test_add("/migration/multifd/file/mapped-ram/dio",
--                       test_multifd_file_mapped_ram_dio);
--
- #ifndef _WIN32
-     migration_test_add("/migration/multifd/file/mapped-ram/fdset",
-                        test_multifd_file_mapped_ram_fdset);
-diff --git a/tests/qtest/migration/misc-tests.c b/tests/qtest/migration/misc-tests.c
-index 996256ef87..d03199f3c5 100644
---- a/tests/qtest/migration/misc-tests.c
-+++ b/tests/qtest/migration/misc-tests.c
-@@ -258,18 +258,24 @@ static void test_validate_uri_channels_none_set(void)
-     do_test_validate_uri_channel(&args);
- }
- 
-+static void migration_test_add_misc_smoke(MigrationTestEnv *env)
-+{
-+#ifndef _WIN32
-+    migration_test_add("/migration/analyze-script", test_analyze_script);
-+#endif
-+}
-+
- void migration_test_add_misc(MigrationTestEnv *env)
- {
-     tmpfs = env->tmpfs;
- 
-+    migration_test_add_misc_smoke(env);
-+
-     if (!env->full_set) {
-         return;
-     }
- 
-     migration_test_add("/migration/bad_dest", test_baddest);
--#ifndef _WIN32
--    migration_test_add("/migration/analyze-script", test_analyze_script);
--#endif
- 
-     /*
-      * Our CI system has problems with shared memory.
-diff --git a/tests/qtest/migration/postcopy-tests.c b/tests/qtest/migration/postcopy-tests.c
-index b08cde3270..7e84e60fea 100644
---- a/tests/qtest/migration/postcopy-tests.c
-+++ b/tests/qtest/migration/postcopy-tests.c
-@@ -79,18 +79,26 @@ static void test_postcopy_preempt_recovery(void)
-     test_postcopy_recovery_common(&args);
- }
- 
--void migration_test_add_postcopy(MigrationTestEnv *env)
-+static void migration_test_add_postcopy_smoke(MigrationTestEnv *env)
- {
--    if (!env->full_set) {
--        return;
--    }
--
-     if (env->has_uffd) {
-         migration_test_add("/migration/postcopy/plain", test_postcopy);
-         migration_test_add("/migration/postcopy/recovery/plain",
-                            test_postcopy_recovery);
-         migration_test_add("/migration/postcopy/preempt/plain",
-                            test_postcopy_preempt);
-+    }
-+}
-+
-+void migration_test_add_postcopy(MigrationTestEnv *env)
-+{
-+    migration_test_add_postcopy_smoke(env);
-+
-+    if (!env->full_set) {
-+        return;
++    /* Let GDB know it can send SIGUSR1. */
++    phase = "sigwait";
++    if (getenv("LATE_ATTACH_PY")) {
++        assert(sigwait(&set, &sig) == 0);
++        if (sig != SIGUSR1) {
++            fprintf(stderr, "Unexpected signal %d\n", sig);
++            return EXIT_FAILURE;
++        }
 +    }
 +
-+    if (env->has_uffd) {
-         migration_test_add("/migration/postcopy/preempt/recovery/plain",
-                            test_postcopy_preempt_recovery);
- 
-diff --git a/tests/qtest/migration/precopy-tests.c b/tests/qtest/migration/precopy-tests.c
-index c99a487bf1..b16f10e908 100644
---- a/tests/qtest/migration/precopy-tests.c
-+++ b/tests/qtest/migration/precopy-tests.c
-@@ -951,14 +951,8 @@ static void test_dirty_limit(void)
-     migrate_end(from, to, true);
- }
- 
--void migration_test_add_precopy(MigrationTestEnv *env)
-+static void migration_test_add_precopy_smoke(MigrationTestEnv *env)
- {
--    tmpfs = env->tmpfs;
--
--    if (!env->full_set) {
--        return;
--    }
--
-     if (env->is_x86) {
-         migration_test_add("/migration/precopy/unix/suspend/live",
-                            test_precopy_unix_suspend_live);
-@@ -970,6 +964,21 @@ void migration_test_add_precopy(MigrationTestEnv *env)
-                        test_precopy_unix_plain);
- 
-     migration_test_add("/migration/precopy/tcp/plain", test_precopy_tcp_plain);
-+    migration_test_add("/migration/multifd/tcp/uri/plain/none",
-+                       test_multifd_tcp_uri_none);
-+    migration_test_add("/migration/multifd/tcp/plain/cancel",
-+                       test_multifd_tcp_cancel);
-+}
-+
-+void migration_test_add_precopy(MigrationTestEnv *env)
-+{
-+    tmpfs = env->tmpfs;
-+
-+    migration_test_add_precopy_smoke(env);
-+
-+    if (!env->full_set) {
-+        return;
++    /* Check that the guest does not see host_interrupt_signal. */
++    assert(sigpending(&set) == 0);
++    for (sig = 1; sig < NSIG; sig++) {
++        if (sigismember(&set, sig)) {
++            fprintf(stderr, "Unexpected signal %d\n", sig);
++            return EXIT_FAILURE;
++        }
 +    }
- 
-     migration_test_add("/migration/precopy/tcp/plain/switchover-ack",
-                        test_precopy_tcp_switchover_ack);
-@@ -993,16 +1002,12 @@ void migration_test_add_precopy(MigrationTestEnv *env)
-                                test_dirty_limit);
-         }
-     }
--    migration_test_add("/migration/multifd/tcp/uri/plain/none",
--                       test_multifd_tcp_uri_none);
-     migration_test_add("/migration/multifd/tcp/channels/plain/none",
-                        test_multifd_tcp_channels_none);
-     migration_test_add("/migration/multifd/tcp/plain/zero-page/legacy",
-                        test_multifd_tcp_zero_page_legacy);
-     migration_test_add("/migration/multifd/tcp/plain/zero-page/none",
-                        test_multifd_tcp_no_zero_page);
--    migration_test_add("/migration/multifd/tcp/plain/cancel",
--                       test_multifd_tcp_cancel);
-     if (g_str_equal(env->arch, "x86_64")
-         && env->has_kvm && env->has_dirty_ring) {
- 
-diff --git a/tests/qtest/migration/tls-tests.c b/tests/qtest/migration/tls-tests.c
-index aee56930ac..2cb4a44bcd 100644
---- a/tests/qtest/migration/tls-tests.c
-+++ b/tests/qtest/migration/tls-tests.c
-@@ -722,10 +722,18 @@ static void test_multifd_tcp_tls_x509_reject_anon_client(void)
- }
- #endif /* CONFIG_TASN1 */
- 
-+static void migration_test_add_tls_smoke(MigrationTestEnv *env)
-+{
-+    migration_test_add("/migration/precopy/tcp/tls/psk/match",
-+                       test_precopy_tcp_tls_psk_match);
++
++    return EXIT_SUCCESS;
 +}
-+
- void migration_test_add_tls(MigrationTestEnv *env)
- {
-     tmpfs = env->tmpfs;
+diff --git a/tests/guest-debug/run-test.py b/tests/guest-debug/run-test.py
+index 5a091db8be..75e9c92e03 100755
+--- a/tests/guest-debug/run-test.py
++++ b/tests/guest-debug/run-test.py
+@@ -36,6 +36,8 @@ def get_args():
+     parser.add_argument("--gdb-args", help="Additional gdb arguments")
+     parser.add_argument("--output", help="A file to redirect output to")
+     parser.add_argument("--stderr", help="A file to redirect stderr to")
++    parser.add_argument("--no-suspend", action="store_true",
++                        help="Ask the binary to not wait for GDB connection")
  
-+    migration_test_add_tls_smoke(env);
-+
-     if (!env->full_set) {
-         return;
-     }
-@@ -755,8 +763,6 @@ void migration_test_add_tls(MigrationTestEnv *env)
-                        test_precopy_unix_tls_x509_override_host);
- #endif /* CONFIG_TASN1 */
+     return parser.parse_args()
  
--    migration_test_add("/migration/precopy/tcp/tls/psk/match",
--                       test_precopy_tcp_tls_psk_match);
-     migration_test_add("/migration/precopy/tcp/tls/psk/mismatch",
-                        test_precopy_tcp_tls_psk_mismatch);
- #ifdef CONFIG_TASN1
+@@ -73,10 +75,19 @@ def log(output, msg):
+ 
+     # Launch QEMU with binary
+     if "system" in args.qemu:
++        if args.no_suspend:
++            suspend = ''
++        else:
++            suspend = ' -S'
+         cmd = f'{args.qemu} {args.qargs} {args.binary}' \
+-            f' -S -gdb unix:path={socket_name},server=on'
++            f'{suspend} -gdb unix:path={socket_name},server=on'
+     else:
+-        cmd = f'{args.qemu} {args.qargs} -g {socket_name} {args.binary}'
++        if args.no_suspend:
++            suspend = ',suspend=n'
++        else:
++            suspend = ''
++        cmd = f'{args.qemu} {args.qargs} -g {socket_name}{suspend}' \
++            f' {args.binary}'
+ 
+     log(output, "QEMU CMD: %s" % (cmd))
+     inferior = subprocess.Popen(shlex.split(cmd))
+diff --git a/tests/tcg/multiarch/Makefile.target b/tests/tcg/multiarch/Makefile.target
+index 18d3cf4ae0..688a6be203 100644
+--- a/tests/tcg/multiarch/Makefile.target
++++ b/tests/tcg/multiarch/Makefile.target
+@@ -130,6 +130,13 @@ run-gdbstub-follow-fork-mode-parent: follow-fork-mode
+ 		--bin $< --test $(MULTIARCH_SRC)/gdbstub/follow-fork-mode-parent.py, \
+ 	following parents on fork)
+ 
++run-gdbstub-late-attach: late-attach
++	$(call run-test, $@, env LATE_ATTACH_PY=1 $(GDB_SCRIPT) \
++		--gdb $(GDB) \
++		--qemu $(QEMU) --qargs "$(QEMU_OPTS)" --no-suspend \
++		--bin $< --test $(MULTIARCH_SRC)/gdbstub/late-attach.py, \
++	attaching to a running process)
++
+ else
+ run-gdbstub-%:
+ 	$(call skip-test, "gdbstub test $*", "need working gdb with $(patsubst -%,,$(TARGET_NAME)) support")
+@@ -139,7 +146,7 @@ EXTRA_RUNS += run-gdbstub-sha1 run-gdbstub-qxfer-auxv-read \
+ 	      run-gdbstub-registers run-gdbstub-prot-none \
+ 	      run-gdbstub-catch-syscalls run-gdbstub-follow-fork-mode-child \
+ 	      run-gdbstub-follow-fork-mode-parent \
+-	      run-gdbstub-qxfer-siginfo-read
++	      run-gdbstub-qxfer-siginfo-read run-gdbstub-late-attach
+ 
+ # ARM Compatible Semi Hosting Tests
+ #
+diff --git a/tests/tcg/multiarch/gdbstub/late-attach.py b/tests/tcg/multiarch/gdbstub/late-attach.py
+new file mode 100644
+index 0000000000..1d40efb5ec
+--- /dev/null
++++ b/tests/tcg/multiarch/gdbstub/late-attach.py
+@@ -0,0 +1,28 @@
++"""Test attaching GDB to a running process.
++
++SPDX-License-Identifier: GPL-2.0-or-later
++"""
++from test_gdbstub import main, report
++
++
++def run_test():
++    """Run through the tests one by one"""
++    try:
++        phase = gdb.parse_and_eval("phase").string()
++    except gdb.error:
++        # Assume the guest did not reach main().
++        phase = "start"
++
++    if phase == "start":
++        gdb.execute("break sigwait")
++        gdb.execute("continue")
++        phase = gdb.parse_and_eval("phase").string()
++    report(phase == "sigwait", "{} == \"sigwait\"".format(phase))
++
++    gdb.execute("signal SIGUSR1")
++
++    exitcode = int(gdb.parse_and_eval("$_exitcode"))
++    report(exitcode == 0, "{} == 0".format(exitcode))
++
++
++main(run_test)
 -- 
 2.39.5
 
