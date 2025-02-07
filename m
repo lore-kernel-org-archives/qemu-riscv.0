@@ -4,80 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2A959C02194
-	for <qemu-riscv@archiver.kernel.org>; Fri,  7 Feb 2025 16:02:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 962CFC02194
+	for <qemu-riscv@archiver.kernel.org>; Fri,  7 Feb 2025 16:05:29 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tgQoL-0000R1-Sl; Fri, 07 Feb 2025 11:02:34 -0500
+	id 1tgQr7-00031S-Uv; Fri, 07 Feb 2025 11:05:27 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1tgQoF-0000QG-Hq
- for qemu-riscv@nongnu.org; Fri, 07 Feb 2025 11:02:27 -0500
+ (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1tgQqn-0002rx-AI
+ for qemu-riscv@nongnu.org; Fri, 07 Feb 2025 11:05:12 -0500
 Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1tgQoD-0007G3-Mo
- for qemu-riscv@nongnu.org; Fri, 07 Feb 2025 11:02:27 -0500
+ (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1tgQqh-0001lC-RO
+ for qemu-riscv@nongnu.org; Fri, 07 Feb 2025 11:05:02 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1738944144;
+ s=mimecast20190719; t=1738944298;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
- bh=nYmDv7aMaGjQaZMAV2X7qgjajETu0BznXuUVEYnnqMw=;
- b=URTWMTb3cES4RtB/q2qQDtp7WAz44awO8McLzdcG5jPYLBJ4JM81AlWSHPRVNeIC+oepNC
- uzDzievYm1frH4kgLEHQnb8QMbXKhODoYtbaODO1U+PGFNfxkKQi69UKN7grS5Sc28a/3/
- nn4kY5TeKMg89jHyIkNsx8C3Ewj2wtA=
-Received: from mail-wr1-f72.google.com (mail-wr1-f72.google.com
- [209.85.221.72]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=xz0hJOJEOEWUqaSdSnNyXz9h0M8g/hqw16cg12waP0g=;
+ b=hdLuyQhkXSNFoejLuutzMAzGNxYtak0L6h0O7i8S+iaE8GPllN1kp4/8+wihg2/CKP6vHo
+ sJQbuBihgrRlONfV7CsrL0kudOwY2Cx45jU5jb4kWQsc28Fxodey11ZYdE7wDWsWGcTxiU
+ IEjW3xzCEUStrmSFqzu82Hc7ugrWDUg=
+Received: from mail-wm1-f70.google.com (mail-wm1-f70.google.com
+ [209.85.128.70]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-222-T8ZkLZbAPDSPltp9UwOTgA-1; Fri, 07 Feb 2025 11:02:22 -0500
-X-MC-Unique: T8ZkLZbAPDSPltp9UwOTgA-1
-X-Mimecast-MFC-AGG-ID: T8ZkLZbAPDSPltp9UwOTgA
-Received: by mail-wr1-f72.google.com with SMTP id
- ffacd0b85a97d-38dc6aad9f8so644288f8f.1
- for <qemu-riscv@nongnu.org>; Fri, 07 Feb 2025 08:02:22 -0800 (PST)
+ us-mta-124-HgO3HzECO-mUPRrKNHGGLw-1; Fri, 07 Feb 2025 11:04:57 -0500
+X-MC-Unique: HgO3HzECO-mUPRrKNHGGLw-1
+X-Mimecast-MFC-AGG-ID: HgO3HzECO-mUPRrKNHGGLw
+Received: by mail-wm1-f70.google.com with SMTP id
+ 5b1f17b1804b1-436289a570eso19370885e9.0
+ for <qemu-riscv@nongnu.org>; Fri, 07 Feb 2025 08:04:57 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1738944141; x=1739548941;
+ d=1e100.net; s=20230601; t=1738944296; x=1739549096;
  h=content-transfer-encoding:in-reply-to:autocrypt:content-language
  :from:references:cc:to:subject:user-agent:mime-version:date
  :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=nYmDv7aMaGjQaZMAV2X7qgjajETu0BznXuUVEYnnqMw=;
- b=uIsfSZe2mQRU+19AH1Qt1zvBDag/kohHXNylIDmPZxlJt0yaHlUxOwFR1JV4VCuwLc
- 39Lo24H0mIKKEKmAjXobDRH2TqTNKEXHtAeieGCSkrqZUEeSJOtQCxKDJt4Hfi6yAlNj
- fCUqSZ9J1lldTQs1wS3r17GRoG7N9FKqd6wiVVBgAJ0x/sgOr+DyyPrwrcKx/yM2V3Lv
- tqxEdlYW9MlSxVay7EeN9eQF00qcWo8oFR4K5pLoNg5ldFTGnI7CvnnWIbO+XF347O/l
- vGGBbEPJdL1kSmhJjBf6ph6QQ73G5Ry9rZLww3XX7XafGvt0sQQ5pLVAnp1Wbc41nBFH
- dhUg==
+ bh=xz0hJOJEOEWUqaSdSnNyXz9h0M8g/hqw16cg12waP0g=;
+ b=bDATJBGKllCzX1AQxkvyEWPZA/NAVApror5DQj+RYr1PKuDlpHDzz+Pp75kou6slsM
+ Tc2+jJACu1UnklpgHTJ1Lfy858ZaFJfdNtdRNUEoIdPrUwpVZyd1mZr0EeDlc2t2eDhv
+ aCdjhy0OTZdIV3Ore9dGnjNvEpMxTbajTfm90Cx1tiHbYEzm/HSm8wO/NDPRqa9zYG+y
+ iCgwkgbgBUT9okAbk2OD4bwz2B3TTkAQYCb6aXg1hl6q1EDEGIhpy3RPeUE2ehg9cYEu
+ Mv2Apgf0aVqYugOhQPhY4FE3SVBZIbeJd4+gJPjwshNiUvP8LeXc/kqjIvxfLc0HOlur
+ aRWQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUXJdapfxVTXBYbJNH9pD5g9NQn+Eht82hul12ZDQHn4H0z78XSWTFQ3qR9LP4fUMGmrlX9dYcL8u9u@nongnu.org
-X-Gm-Message-State: AOJu0Yw61uBWGzLLPRBJ6EOlETAfaX/Y32KLU01E6LJicPwc6QttfF8r
- /PRDEThWnF53f9/KGM5CoSJK5spRF9uU9l0e/jmneQkl1e7USalYQOWHm6sm9upxdGyRvm39Km2
- Y313hA14Rec4G+LRU2vLzS9KjAbQAyZIz/GyGIn0P7fgSk/lNi5Hp
-X-Gm-Gg: ASbGnctDLp4ahRAeiXdpwvYlp1lfod3j310AQES/WD9/D6hSYbHamMCA39f43J/cFf3
- JC0LfXeTRoMypxDczNKsmX7P7k4xnGPt6GFCMzx8Q/XEhkC1bkkizPmMjz1rB6+B2Zmo53uGjOZ
- JQnMWvBJICR5TrmYf49WE7/NuxRFUY++40w8Bp7PsUaAdjxuSy3r9BhjA4e2+ZiekDom+51mIVL
- hz85f0n5JZ+f46gsTkM7LXFRks4hABvGWVJXqr1C9QjOOejohC7HcuGlY7d9TBEHk6Plj6f0WGy
- DRKAdl3ojlXATCqAKTSoPHdiQTx/rWOiNjWE
-X-Received: by 2002:a05:600c:198a:b0:436:1af3:5b13 with SMTP id
- 5b1f17b1804b1-43912d49c3amr65700125e9.15.1738944140036; 
- Fri, 07 Feb 2025 08:02:20 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IEPNKYqpqSev2PKeajI3uh5KtnlpQGvb1jhoV/TfPJa8J4oXLNMORLSS+7dvgrHtgXKIkmfJQ==
-X-Received: by 2002:a05:600c:198a:b0:436:1af3:5b13 with SMTP id
- 5b1f17b1804b1-43912d49c3amr65699565e9.15.1738944139545; 
- Fri, 07 Feb 2025 08:02:19 -0800 (PST)
+ AJvYcCX6Ho1AU5rO2Wqb6hKQfwnIrZ+xOLZCqwKl1Kpqt9TL1seN4oMObM9QGo43ypsVFN2QqGW5hLgjPXZt@nongnu.org
+X-Gm-Message-State: AOJu0YzxV3cZ9WdtBOPFaC2RL+XEUzh3QrqN6uxruImKhKgk1ZdbGdzX
+ b1glZnak0qVxXvVHSjBnbwwc08I3oeLk9SSQMrjtc6uOjWj4qUJyNla8A6GiGjH3TPVFbkN+xZG
+ QEfEB0teRK8vg/It1gmTddWLsb7h3JOfUN8O64AoeH+g9YKzom5ir
+X-Gm-Gg: ASbGncvIhkKL0zgpTpwBhSfrAOz3tuk/euw2hPuqdyg5ajgSIglxYhIZOedlGrgQ7Yk
+ +V18XVHle7dU/DL1Ic/d/IYceofHljmKy/ZRhgH2a0Ft8PgroPJWqzr/iaa3zT4Yc0hTFrE5t0l
+ c1wvkI0sG/EwtuI72LKDJJHrZlaDSybDlu4mv1Fbx5N8md497kEDS5OZDLBqZuCiV9S+efuy0pu
+ SWmUTc777XXuZm2JVOTmgpm2l/jO47S2ZsXFzmv0fVOXeBIzRJEATZOhAMsaehKMNECsWn0G2gD
+ 02WRpMZKHEjEaTGvpMeUQah84WD1qbunmbyT
+X-Received: by 2002:a05:600c:4754:b0:438:a1f5:3e41 with SMTP id
+ 5b1f17b1804b1-4392498b6b7mr41958235e9.12.1738944295953; 
+ Fri, 07 Feb 2025 08:04:55 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IEraYK+6gmFQGOGrzpx1iIDrUFHB5ABRtYi1f1eu0Eh4M+CzbNxh9pWSyrhWjDG0bCGIZ6Beg==
+X-Received: by 2002:a05:600c:4754:b0:438:a1f5:3e41 with SMTP id
+ 5b1f17b1804b1-4392498b6b7mr41957485e9.12.1738944295545; 
+ Fri, 07 Feb 2025 08:04:55 -0800 (PST)
 Received: from [192.168.0.7] (ip-109-42-48-132.web.vodafone.de.
  [109.42.48.132]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4391da9648dsm61317795e9.7.2025.02.07.08.02.16
+ 5b1f17b1804b1-4391dfc8a4asm59953685e9.32.2025.02.07.08.04.51
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 07 Feb 2025 08:02:18 -0800 (PST)
-Message-ID: <75f73a61-b89b-4c17-b72f-35a027049d5e@redhat.com>
-Date: Fri, 7 Feb 2025 17:02:16 +0100
+ Fri, 07 Feb 2025 08:04:54 -0800 (PST)
+Message-ID: <f9877082-0238-47ec-972b-c750aef356ea@redhat.com>
+Date: Fri, 7 Feb 2025 17:04:50 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 02/17] tests/qtest: don't attempt to clock_step while
- waiting for virtio ISR
+Subject: Re: [PATCH v2 05/17] tests/qtest: rename qtest_send_prefix and
+ roll-up into qtest_send
 To: =?UTF-8?Q?Alex_Benn=C3=A9e?= <alex.bennee@linaro.org>,
  qemu-devel@nongnu.org
 Cc: Peter Xu <peterx@redhat.com>, Weiwei Li <liwei1518@gmail.com>,
@@ -97,7 +97,7 @@ Cc: Peter Xu <peterx@redhat.com>, Weiwei Li <liwei1518@gmail.com>,
  Paolo Bonzini <pbonzini@redhat.com>, qemu-rust@nongnu.org,
  qemu-riscv@nongnu.org
 References: <20250207153112.3939799-1-alex.bennee@linaro.org>
- <20250207153112.3939799-3-alex.bennee@linaro.org>
+ <20250207153112.3939799-6-alex.bennee@linaro.org>
 From: Thomas Huth <thuth@redhat.com>
 Autocrypt: addr=thuth@redhat.com; keydata=
  xsFNBFH7eUwBEACzyOXKU+5Pcs6wNpKzrlJwzRl3VGZt95VCdb+FgoU9g11m7FWcOafrVRwU
@@ -141,9 +141,9 @@ Autocrypt: addr=thuth@redhat.com; keydata=
  oiT+z+/E59qj/EKfyce3sbC9XLjXv3mHMrq1tKX4G7IJGnS989E/fg6crv6NHae9Ckm7+lSs
  IQu4bBP2GxiRQ+NV3iV/KU3ebMRzqIC//DCOxzQNFNJAKldPe/bKZMCxEqtVoRkuJtNdp/5a
  yXFZ6TfE1hGKrDBYAm4vrnZ4CXFSBDllL59cFFOJCkn4Xboj/aVxxJxF30bn
-In-Reply-To: <20250207153112.3939799-3-alex.bennee@linaro.org>
+In-Reply-To: <20250207153112.3939799-6-alex.bennee@linaro.org>
 X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: 9tUmnRu-WWYODnBoHwzp-58PJmXCLLxotO0Ip7Kx27I_1738944142
+X-Mimecast-MFC-PROC-ID: v-f8XW1d7-nTB_wMQkxjyNDleSfm1gkePTCDCLgkmdA_1738944296
 X-Mimecast-Originator: redhat.com
 Content-Language: en-US
 Content-Type: text/plain; charset=UTF-8; format=flowed
@@ -173,25 +173,21 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 07/02/2025 16.30, Alex Bennée wrote:
-> This replicates the changes from 92cb8f8bf6 (tests/qtest: remove
-> clock_steps from virtio tests) as there are no timers in the virtio
-> code. We still busy wait and timeout though.
+On 07/02/2025 16.31, Alex Bennée wrote:
+> qtest_send_prefix never actually sent something over the chardev, all
+> it does is print the timestamp to the QTEST_LOG when enabled. So
+> rename the function, make it static, remove the unused CharDev and
+> simplify all the call sites by handling that directly with
+> qtest_send (and qtest_log_send).
 > 
 > Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
-> 
 > ---
-> v2
->    - fix trailing space
-> ---
->   tests/qtest/libqos/virtio-pci-modern.c | 6 ++----
->   tests/qtest/libqos/virtio-pci.c        | 6 ++----
->   2 files changed, 4 insertions(+), 8 deletions(-)
+>   include/system/qtest.h |  1 -
+>   hw/ppc/spapr_rtas.c    |  1 -
+>   hw/riscv/riscv_hart.c  |  1 -
+>   system/qtest.c         | 26 +++-----------------------
+>   4 files changed, 3 insertions(+), 26 deletions(-)
 
-I wonder whether a usleep(10000) in the loop might help to avoid burning too 
-much CPU time in there?
-
-Anyway,
 Reviewed-by: Thomas Huth <thuth@redhat.com>
 
 
