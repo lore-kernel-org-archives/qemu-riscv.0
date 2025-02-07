@@ -4,69 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A4E25C02194
-	for <qemu-riscv@archiver.kernel.org>; Fri,  7 Feb 2025 15:35:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5D48DC02194
+	for <qemu-riscv@archiver.kernel.org>; Fri,  7 Feb 2025 15:36:35 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tgQLd-0001WS-6t; Fri, 07 Feb 2025 10:32:53 -0500
+	id 1tgQMz-0003ag-Ka; Fri, 07 Feb 2025 10:34:17 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1tgQKM-00089k-AX
- for qemu-riscv@nongnu.org; Fri, 07 Feb 2025 10:31:37 -0500
-Received: from mail-ed1-x52c.google.com ([2a00:1450:4864:20::52c])
+ id 1tgQKR-0008Dw-On
+ for qemu-riscv@nongnu.org; Fri, 07 Feb 2025 10:31:49 -0500
+Received: from mail-ed1-x535.google.com ([2a00:1450:4864:20::535])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1tgQKA-000403-AS
- for qemu-riscv@nongnu.org; Fri, 07 Feb 2025 10:31:32 -0500
-Received: by mail-ed1-x52c.google.com with SMTP id
- 4fb4d7f45d1cf-5de56ff9851so378806a12.2
- for <qemu-riscv@nongnu.org>; Fri, 07 Feb 2025 07:31:21 -0800 (PST)
+ id 1tgQKE-00042a-OG
+ for qemu-riscv@nongnu.org; Fri, 07 Feb 2025 10:31:39 -0500
+Received: by mail-ed1-x535.google.com with SMTP id
+ 4fb4d7f45d1cf-5dce1d61b44so4087727a12.2
+ for <qemu-riscv@nongnu.org>; Fri, 07 Feb 2025 07:31:24 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1738942280; x=1739547080; darn=nongnu.org;
+ d=linaro.org; s=google; t=1738942283; x=1739547083; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=XyHIrLgGLhzWXn2IY26JotGt/snZhuH8wc9tGSgEE4k=;
- b=X1b0NquHt1rIGSgOTDLIwVmnCFmHAru0dQynHnPA9OXEeFUvzxH/8MN1q/kcbfu6Rd
- vq+WHDNwZ6tma0BAAXb8/wMxh63e2d7jUWKa/CUhZFiV3M3SuZS9bGIuerbpv+NF0/cm
- NSoXVO1Rfsq/pBCuoTDi64lfncVsCxjFfuF9rjeBD1XzLaGB0SSVPoczjUg/QwRtOKqF
- JmQDeUClCDC4p5OYYY1rkFmb6Wg8ZSLNFWv/0zSikCjRPmFgokyZN18gqbqV1C1YfdUy
- VEI//fq99O8Q65RNCqrlTqbwbfZvtlwHcC/35Ww21cTW4HGIvZMsi14UkyPUI4tbMy7F
- EbFQ==
+ bh=+6N9ryvNx2tTT6HdSFLFKVlKftlNVXYRqQdp7SLQm3o=;
+ b=QDOCmzDnR6lDCWbGxrpptVcpOr+EZC3ASYjZSPsGMtmu61FBUAaT/GhsYOwEeYknZq
+ hFNizwhIbcB2Aif3N5VdHMZ/0wGOFoHO+IJBDPbOFjbVOjb+ly2YIlDSYyok6g7M4nzS
+ LYs0x+DFNwI6vxj/HM22CIIumO54jXzTXclnPHyhKXspmtM32zOm22+ZBYNrT5XK50Km
+ Vho4sauydB4Xn8o6As7aK3mKEp7xXGoTZXmI01TM8ZY6vbEcLJakSRoeZhbWBb+LlKkD
+ hG8QKseSfQkO7ValAELFl3UuVo2O+jL+So9apNTC9JGcRGXt+ldUv47iEa7V4vZvVZps
+ pefg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1738942280; x=1739547080;
+ d=1e100.net; s=20230601; t=1738942283; x=1739547083;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=XyHIrLgGLhzWXn2IY26JotGt/snZhuH8wc9tGSgEE4k=;
- b=UvrJ5Eo80JbleFZ+E5KiHBzg3NIgQPm5nhLOLygELdn/ujJzxrDhxeoHDs2zAwjG1W
- jKV0iCkXLGvcGEizfDO/WkeBtS0dmEIgDhsRmz4Tf3PSJ0ifYPt8ti5Q1sz1mIUwLPCW
- 5DnA5B/PNZCQFeeb6sMUb9eiyikAvbnqjXUMTQRIwietx1vBmKnelN4dKMxCwZ2FVgWL
- OMUhny4AgKsI1d8GsaPWhKt/g6fDEtQYNKbnK2AG5yByH6Iw0x2xRFxv8ON6KBJr0HpH
- 4FCfSVflmX4W9CtowvRa+iYDyxYwmtyHe9f9/NWqr7IRnqnc2rHEmXJR0A9bcwn9P+6V
- XCRQ==
+ bh=+6N9ryvNx2tTT6HdSFLFKVlKftlNVXYRqQdp7SLQm3o=;
+ b=J1vgicfj510K7aAVLbNuVGiG7Sq19v0RwNiwYaXOBJGe7NyiQ2V5IXee8UFSI6PWys
+ p6mKWBBw7TJ6hOr34bXex8WIqL3Mo+E6tbOoWt0mv2ck9wXRioEE5YBD3VxeakoC1nPx
+ s0Wr3Pe0P+pmPCpdQTWaaJBP+DHV8sX6i/ue7zxSALOqFc7S2+wfR3xgRQFecnTGU+En
+ bolK1VSVh9mDV5FkXzmmIErV4gyqU50yKSbpKVcaXjFXb6+TYKKJAEsJoVCFm56lOEH1
+ SX2bUjYl7y5X6qFrTbEgRryGHS7V39JVWmuSV5cN7FS1/v2euP94j27FrQs5BriJGzt6
+ Tczg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUeW4FTdEvq7Msb8qAbaRc3+3zF5CIPkKdNQuMOoeDmhJLrCXm8dznftZ24mfTsgcHmE4lOp3tP/JgS@nongnu.org
-X-Gm-Message-State: AOJu0YxX+9rQrzKeoC5tXR+l0kvT4o8xPpiRV++EOk+PYlMMQa33Dm1s
- kZlZIEbdHEbnt6u10kUVN/itktmYvifitwL6inYrMRfZ7hy5WM1RD0iScDG0LPw=
-X-Gm-Gg: ASbGnct9nkSvgugEWzTNB4/J+n4RFmxUocevBjWQ4yoyZvswL7dM3RKHPRhFNeQmWPm
- jYYXEf7Mz2Qa6m+1lfzpQb2r16r4/n2kI48ByJhcrkkKNb3NEIayjeBqpuk1p+mvmJ02Q9fGSU4
- gyZ29DyN80c7fm6MzEotkmykiXRm2C/z9QAVKgTdtfp2lwwrh3w5k1L7nMNKQunIOAxbXS5OLbm
- mStgXtaMWqdi4QpJWcvWKtuKGVZCJWnPFGPO9H/XyWfj6sK9/b92XYp6lA5cxCmQKsOed5iLMjw
- 8cPQSCu7ttMl2MJgjw==
-X-Google-Smtp-Source: AGHT+IEfSV69e8DYUCGC03jbAWedKhxSTpRglbr9TC/MTS1Ma9XcHXuvFhJPnS9wWLWE59msKaO+BA==
-X-Received: by 2002:a05:6402:4588:b0:5db:731d:4456 with SMTP id
- 4fb4d7f45d1cf-5de45085cc7mr4289105a12.28.1738942280178; 
- Fri, 07 Feb 2025 07:31:20 -0800 (PST)
+ AJvYcCUliLqFsErVb4uqnzBaHYWoVB9rIFNcSlz/EL7LkYA29uWEoYfuoLqEt28KOxNuthY8wSjMss+pqjq/@nongnu.org
+X-Gm-Message-State: AOJu0Yx+fGB4ikb+qjmUTpHBxXK0Z7qfoasQ3+UdIN7L3Kiz/zaz/51P
+ SniGg8qXN31Ernm3JUY+fpeScV/tM8aQMfXX/Zpn7q1q2Q7v1ieoyUidFj6H2wI=
+X-Gm-Gg: ASbGncuoJ2BaHLdbmdBAuadv11XlgM4D7vEzOn4FBqK1TuupzvcnyXgdeN8rzdBsTBP
+ /K712cQWccvqyLxRBQGNdbYUQG2J2Ct/ZaOZwL/xtDt5JgBi6BaJ9/DlaXr8NeLyKHoSnmu6siv
+ 0J5HQ8lksowPxZM+IhxQo2Sn4fHMOBX+rtW24TB83Pxaw7oFsnZRAw40SXilWyehkZ/T1lIqyvC
+ alFLHWlcM+AeXttK926Z8txa+4pANho9nls2BikTXwSKJDGTXlfDueC7GdCODrW+G+n4alvjDga
+ nj2GqYyHSX+O7kSMVg==
+X-Google-Smtp-Source: AGHT+IGEqyms4T0+QP+oLlTpKko3AJZAofeuvgE+M7sIMrTL7r4br1e6xECR9X/F93EiULGYnjARpw==
+X-Received: by 2002:a17:906:f6c4:b0:ab7:9285:3442 with SMTP id
+ a640c23a62f3a-ab7928534f3mr176977466b.3.1738942283134; 
+ Fri, 07 Feb 2025 07:31:23 -0800 (PST)
 Received: from draig.lan ([185.126.160.109]) by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5dcf1b81608sm2621482a12.35.2025.02.07.07.31.14
+ a640c23a62f3a-ab78e82cc0csm105485566b.12.2025.02.07.07.31.16
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 07 Feb 2025 07:31:17 -0800 (PST)
+ Fri, 07 Feb 2025 07:31:18 -0800 (PST)
 Received: from draig.lan (localhost [IPv6:::1])
- by draig.lan (Postfix) with ESMTP id E35E65FB2E;
- Fri,  7 Feb 2025 15:31:12 +0000 (GMT)
+ by draig.lan (Postfix) with ESMTP id 665686099F;
+ Fri,  7 Feb 2025 15:31:13 +0000 (GMT)
 From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Peter Xu <peterx@redhat.com>,
@@ -88,18 +88,18 @@ Cc: Peter Xu <peterx@redhat.com>,
  Palmer Dabbelt <palmer@dabbelt.com>,
  Mahmoud Mandour <ma.mandourr@gmail.com>, qemu-ppc@nongnu.org,
  Paolo Bonzini <pbonzini@redhat.com>, qemu-rust@nongnu.org,
- qemu-riscv@nongnu.org, Peter Maydell <peter.maydell@linaro.org>
-Subject: [PATCH v2 06/17] tests/qtest: tighten up the checks on clock_step
-Date: Fri,  7 Feb 2025 15:31:01 +0000
-Message-Id: <20250207153112.3939799-7-alex.bennee@linaro.org>
+ qemu-riscv@nongnu.org, Ilya Leoshkevich <iii@linux.ibm.com>
+Subject: [PATCH v2 11/17] gdbstub: Try unlinking the unix socket before binding
+Date: Fri,  7 Feb 2025 15:31:06 +0000
+Message-Id: <20250207153112.3939799-12-alex.bennee@linaro.org>
 X-Mailer: git-send-email 2.39.5
 In-Reply-To: <20250207153112.3939799-1-alex.bennee@linaro.org>
 References: <20250207153112.3939799-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::52c;
- envelope-from=alex.bennee@linaro.org; helo=mail-ed1-x52c.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::535;
+ envelope-from=alex.bennee@linaro.org; helo=mail-ed1-x535.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -122,46 +122,127 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-It is invalid to call clock_step with an implied time to step forward
-as if no timers are running we won't be able to advance.
+From: Ilya Leoshkevich <iii@linux.ibm.com>
 
+In case an emulated process execve()s another emulated process, bind()
+will fail, because the socket already exists. So try deleting it. Use
+the existing unix_listen() function which does this. Link qemu-user
+with qemu-sockets.c and add the monitor_get_fd() stub.
+
+Note that it is not possible to handle this in do_execv(): deleting
+gdbserver_user_state.socket_path before safe_execve() is not correct,
+because the latter may fail, and afterwards we may lose control.
+
+Signed-off-by: Ilya Leoshkevich <iii@linux.ibm.com>
+Reviewed-by: Alex Bennée <alex.bennee@linaro.org>
+Message-Id: <20250117001542.8290-3-iii@linux.ibm.com>
 Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
-Reviewed-by: Peter Maydell <peter.maydell@linaro.org>
-
 ---
-v3
-  - used Peter's suggested wording
-  - used plain old if over ternary operator
----
- system/qtest.c | 13 +++++++++++--
- 1 file changed, 11 insertions(+), 2 deletions(-)
+ gdbstub/user.c     | 29 +++--------------------------
+ stubs/monitor-fd.c |  9 +++++++++
+ stubs/meson.build  |  2 ++
+ util/meson.build   |  2 ++
+ 4 files changed, 16 insertions(+), 26 deletions(-)
+ create mode 100644 stubs/monitor-fd.c
 
-diff --git a/system/qtest.c b/system/qtest.c
-index 28b6fac37c..12152efbcd 100644
---- a/system/qtest.c
-+++ b/system/qtest.c
-@@ -708,10 +708,19 @@ static void qtest_process_command(CharBackend *chr, gchar **words)
-         } else {
-             ns = qemu_clock_deadline_ns_all(QEMU_CLOCK_VIRTUAL,
-                                             QEMU_TIMER_ATTR_ALL);
-+            if (ns < 0) {
-+                qtest_send(chr, "FAIL "
-+                           "cannot advance clock to the next deadline "
-+                           "because there is no pending deadline\n");
-+                return;
-+            }
-         }
-         new_ns = qemu_clock_advance_virtual_time(old_ns + ns);
--        qtest_sendf(chr, "%s %"PRIi64"\n",
--                    new_ns > old_ns ? "OK" : "FAIL", new_ns);
-+        if (new_ns > old_ns) {
-+            qtest_sendf(chr, "OK %"PRIi64"\n", new_ns);
-+        } else {
-+            qtest_sendf(chr, "FAIL could not advance time\n");
-+        }
-     } else if (strcmp(words[0], "module_load") == 0) {
-         Error *local_err = NULL;
-         int rv;
+diff --git a/gdbstub/user.c b/gdbstub/user.c
+index fd29d595f4..8225b70280 100644
+--- a/gdbstub/user.c
++++ b/gdbstub/user.c
+@@ -315,12 +315,10 @@ static bool gdb_accept_socket(int gdb_fd)
+     return true;
+ }
+ 
+-static int gdbserver_open_socket(const char *path)
++static int gdbserver_open_socket(const char *path, Error **errp)
+ {
+     g_autoptr(GString) buf = g_string_new("");
+-    struct sockaddr_un sockaddr = {};
+     char *pid_placeholder;
+-    int fd, ret;
+ 
+     pid_placeholder = strstr(path, "%d");
+     if (pid_placeholder != NULL) {
+@@ -330,28 +328,7 @@ static int gdbserver_open_socket(const char *path)
+         path = buf->str;
+     }
+ 
+-    fd = socket(AF_UNIX, SOCK_STREAM, 0);
+-    if (fd < 0) {
+-        perror("create socket");
+-        return -1;
+-    }
+-
+-    sockaddr.sun_family = AF_UNIX;
+-    pstrcpy(sockaddr.sun_path, sizeof(sockaddr.sun_path) - 1, path);
+-    ret = bind(fd, (struct sockaddr *)&sockaddr, sizeof(sockaddr));
+-    if (ret < 0) {
+-        perror("bind socket");
+-        close(fd);
+-        return -1;
+-    }
+-    ret = listen(fd, 1);
+-    if (ret < 0) {
+-        perror("listen socket");
+-        close(fd);
+-        return -1;
+-    }
+-
+-    return fd;
++    return unix_listen(path, errp);
+ }
+ 
+ static bool gdb_accept_tcp(int gdb_fd)
+@@ -424,7 +401,7 @@ bool gdbserver_start(const char *port_or_path, Error **errp)
+     if (port > 0) {
+         gdb_fd = gdbserver_open_port(port, errp);
+     } else {
+-        gdb_fd = gdbserver_open_socket(port_or_path);
++        gdb_fd = gdbserver_open_socket(port_or_path, errp);
+     }
+ 
+     if (gdb_fd < 0) {
+diff --git a/stubs/monitor-fd.c b/stubs/monitor-fd.c
+new file mode 100644
+index 0000000000..9bb6749885
+--- /dev/null
++++ b/stubs/monitor-fd.c
+@@ -0,0 +1,9 @@
++/* SPDX-License-Identifier: GPL-2.0-or-later */
++
++#include "qemu/osdep.h"
++#include "monitor/monitor.h"
++
++int monitor_get_fd(Monitor *mon, const char *fdname, Error **errp)
++{
++    abort();
++}
+diff --git a/stubs/meson.build b/stubs/meson.build
+index a8b3aeb564..b0fee37e05 100644
+--- a/stubs/meson.build
++++ b/stubs/meson.build
+@@ -61,6 +61,8 @@ if have_user
+   if not have_system
+     stub_ss.add(files('qdev.c'))
+   endif
++
++  stub_ss.add(files('monitor-fd.c'))
+ endif
+ 
+ if have_system
+diff --git a/util/meson.build b/util/meson.build
+index 5d8bef9891..780b5977a8 100644
+--- a/util/meson.build
++++ b/util/meson.build
+@@ -84,6 +84,8 @@ if have_block or have_ga
+   util_ss.add(files('qemu-coroutine.c', 'qemu-coroutine-lock.c', 'qemu-coroutine-io.c'))
+   util_ss.add(files(f'coroutine-@coroutine_backend@.c'))
+   util_ss.add(files('thread-pool.c', 'qemu-timer.c'))
++endif
++if have_block or have_ga or have_user
+   util_ss.add(files('qemu-sockets.c'))
+ endif
+ if have_block
 -- 
 2.39.5
 
