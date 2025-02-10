@@ -4,85 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7A14AC0219E
-	for <qemu-riscv@archiver.kernel.org>; Mon, 10 Feb 2025 22:18:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 336FFC0219D
+	for <qemu-riscv@archiver.kernel.org>; Mon, 10 Feb 2025 22:18:57 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1thc5c-0008V1-Ly; Mon, 10 Feb 2025 17:17:16 -0500
+	id 1thc6x-0001ck-Mp; Mon, 10 Feb 2025 17:18:39 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1thc5S-0008O4-PS
- for qemu-riscv@nongnu.org; Mon, 10 Feb 2025 17:17:08 -0500
-Received: from mail-pj1-x102a.google.com ([2607:f8b0:4864:20::102a])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1thc6v-0001cH-EB
+ for qemu-riscv@nongnu.org; Mon, 10 Feb 2025 17:18:37 -0500
+Received: from mail-wr1-x42e.google.com ([2a00:1450:4864:20::42e])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1thc5N-0002RH-Ui
- for qemu-riscv@nongnu.org; Mon, 10 Feb 2025 17:17:06 -0500
-Received: by mail-pj1-x102a.google.com with SMTP id
- 98e67ed59e1d1-2fa7465baceso2954056a91.0
- for <qemu-riscv@nongnu.org>; Mon, 10 Feb 2025 14:16:59 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1thc6t-0002lC-OV
+ for qemu-riscv@nongnu.org; Mon, 10 Feb 2025 17:18:37 -0500
+Received: by mail-wr1-x42e.google.com with SMTP id
+ ffacd0b85a97d-38dd011ff8bso2702478f8f.0
+ for <qemu-riscv@nongnu.org>; Mon, 10 Feb 2025 14:18:34 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1739225819; x=1739830619; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=hxYnmVo73BQmCsNLmzhebDUlsTiyDBQaXiChNep1Lw4=;
- b=WVF213APi3qzcUcdM75GRs9pzSjIbyd2x82h3aOG7VMoJuDdVXOknYbhItfd5poZMM
- kOBpDHL9ncu6nR9xFtdGRmiyGZVEGVGxPQyZZJE3fuiMBqkAHPN1Ka4jBoZZBj9Yi11Q
- i4L5sJgnBd2qMCStbjwVhUaOfIYIa8qkiHNNSZV9qhJ09tqSZ5xfPcPh/3aDwEFki0LP
- 9c5pegkidNkYenjURu/4tCvSDt+9Z6QJyi3Xx9Au9NqW4ra/ZslfdiPWBBJdDdMOPQFN
- 9zDzdrie96OHnoN1H3/NLXGBWYzl2d0zcY9UMjH+g/hhcJUtbExom8EoScvndfJT1dKR
- eQ9Q==
+ d=linaro.org; s=google; t=1739225913; x=1739830713; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=0thBB/BPiPRDLTLYTupIBEhCPKjwL8ikHw/PhDfF75E=;
+ b=w+Cj3AYb8fnKPZ/0rM7cjfzUB7GS+bdo9+pRTXARY+uXTUHYGORUySZiBhCd+NaY+r
+ m6g86m6OfA8rh5ogKz4I2HJ9VVvGZyZok7zWmKFQ+YQ1S/evE9BEVyhkFItFtYgkQQ39
+ iY0PoraIACRHasaIbdiV6H16Uvdtt4r6qFEZIhh9t5y7LbUMNumwnslilRnr+T+gbt/L
+ Uf/v88T7ecWWHXdXRt+NVONAOeo/u94U5AE1/GpeNuUOo7ZjaN6CFynvJy00Yt2+1uwz
+ QZHG0C2uZUwM9PRqEDL+ZGBvlhx3tRldCkCu3rg/IIsd+VPdc7dl6olf/8Q0JbDQ0EWv
+ 5XkQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1739225819; x=1739830619;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=hxYnmVo73BQmCsNLmzhebDUlsTiyDBQaXiChNep1Lw4=;
- b=VbaPC+Hfeb8re7c536sdul4YpmzvBrWe7M2ddVVkQqgQ84+9FQX8fA76n8TcZipVEA
- G/AbGgwVQixDIOPbkASzpMX/EmsdkIaiXZ1uyL+pdBngAFpq40zke+J4LGDfLn3lElao
- Zepw7IqRA8WvMxg7AQPCuIN20JvCuggznjNcmCB2bJeycA7rxsxypAfFBbKX5yj2iRRv
- BCO3FXiJL/In3ApdkoSvZkGURfKhKSwDmyxnPim/AekidpVxdo926dbVwbUSJqjsMKgR
- xPOr5nL5siiSrZh7JzgviJw0WFiCvFJa7kqoDfAy/HoXNS94JjeDUTIbB9/k5ZVzKk1Z
- PVTA==
-X-Gm-Message-State: AOJu0YzaG4yMd9BAIfDHrfyWq8fH6u8fkvd78gD+0uENEhF4TC53jKS3
- U1Z+dPrB06YM5EhCQ5nOev9BYIEPcIgIxqrnBO6y+2uM7E8wVr9NkNfd37nRQLxjgy9Lny0LO3W
- i
-X-Gm-Gg: ASbGncsvaEM+yE0UUC5fUQoGx4oS18Q1/I4fLResMp4wzv40dxR6q56bNZSasq0c4Yj
- OMGarQY5Zu1bC3+ikcOofMDaIOAk36UvNX8I4tamGmJEkwgWqpzFgWA0Fby+eJQYjzxCi7oegRc
- 7DuLKXOriHVOMitgtlnak6MAR7pWSmBlBaDWdI3fXoiKx5gvGUCH3s1J9TujVzouQpfRnT2JxNt
- Svn60RpVLxSDFFns0OeqesNbyS3RpPn0hI4eVv9aH3GcI0zDnAB9ykKEUKxLUXm8WffQHT6BFIa
- 1OAZvVhmKM4cAWm2kK7pVnEP6lh/PrbFBLrKFC6KBh71glDKrZesnoE=
-X-Google-Smtp-Source: AGHT+IGbUupnISY5b9nHDINezpapgdfI/gxfHd61TFnDoafxjGnp2lY6nVBglRsxOXxRXNhn3VXAMg==
-X-Received: by 2002:a17:90b:23cb:b0:2ee:d63f:d77 with SMTP id
- 98e67ed59e1d1-2fa24063c18mr24573415a91.9.1739225818739; 
- Mon, 10 Feb 2025 14:16:58 -0800 (PST)
-Received: from [192.168.0.4] (71-212-39-66.tukw.qwest.net. [71.212.39.66])
- by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-2fa0942d30esm9207255a91.0.2025.02.10.14.16.58
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 10 Feb 2025 14:16:58 -0800 (PST)
-Message-ID: <b2f60c1a-16b3-4b9e-b7ff-b8452408809f@linaro.org>
-Date: Mon, 10 Feb 2025 14:16:56 -0800
+ d=1e100.net; s=20230601; t=1739225913; x=1739830713;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=0thBB/BPiPRDLTLYTupIBEhCPKjwL8ikHw/PhDfF75E=;
+ b=Sablgqi66L8q73V8BhTBHWGEWhIRZf+pbbyoa98fC1EvaUnSpJQtSDXrJfjcHLFMPY
+ J+XLC9tXV6+uxdBJNa22blT9NzO4lfJ+CmLP3koAc5jpjGlRi9mNroD0f7RzGJwJFMbx
+ uGxm+ehRLDzOLibJH6ShTkLT6U3yGzfGYfp3OqHZa79KzS4iHIWfMz/mKgELQD9XBTH+
+ fTq+XWiL9oMhePJ0azOj6tDgGR5za7ta6vddChewGkQsfS6idN9pddkendkCEUVhngqN
+ nhoN/IrsmGnK1atCEGINdiqnI7tpVIcItKzSIohTigh+bZvmc6YDQPL6esQ6OditOVaK
+ 8SVw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXJQnzarU0xaTLK76EllbLKVlVeEzPZugQ0l1PD/LR383trP/Cuda3X0PB0VNF3VRHkHTrZN8iMi1Pq@nongnu.org
+X-Gm-Message-State: AOJu0Yz0yefwxWGbGLJM9nRVdi446Cyvv39L1SSvtRmVV0nYFQHxyjV0
+ nxJKVcyloB1QO8k+DvcS7QoBProDxsp24AK/Y8RY+LdK9zd2NM3Bl1r8Q0G2smo=
+X-Gm-Gg: ASbGnctFDcnerzq8zqbbbDtdNH4ac41q69PgM9daBi+9oyD2AIPtrCu/tjGb575Tpzn
+ YRMD+x1SM7QjIaFfMG+CoEYKAJvvafy88Sx+L1MRoHdJ2jUOz2KMCDYJL9wYKQASAFhFMq9xrj8
+ U3yLTGa9GnkWEF0Og8JsqTsLkOcc/JPkVYohIYL4NuJCIm1oLsf88eeMN0+MxwUZVpr+ouPk/8B
+ nInd/cENrOjDJeRStWwTzsPjaAhrBhxR2pwGXCQdJGFCnViRwoisR9A1c+ZT+W9mdZdjhh1K+D5
+ EooRtQCkT+f3a73enWECkb7JXAW7P3ok3m2d51Ckrc+4ZURub5ItRJ3IoH0venUzdA==
+X-Google-Smtp-Source: AGHT+IG+R5Y4Z1zYMhuovnv5+Sx5e4P1NBGMhEhcA9hbaaAMf6F+SYS7UP7uEKAdU8f7YMMUAO4fog==
+X-Received: by 2002:a05:6000:1788:b0:38d:dee1:e2c5 with SMTP id
+ ffacd0b85a97d-38ddee1e8a3mr5021790f8f.1.1739225913001; 
+ Mon, 10 Feb 2025 14:18:33 -0800 (PST)
+Received: from localhost.localdomain (88-187-86-199.subs.proxad.net.
+ [88.187.86.199]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-38dc73c2e00sm11358278f8f.57.2025.02.10.14.18.31
+ (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
+ Mon, 10 Feb 2025 14:18:31 -0800 (PST)
+From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+To: qemu-devel@nongnu.org
+Cc: Richard Henderson <richard.henderson@linaro.org>, qemu-ppc@nongnu.org,
+ qemu-riscv@nongnu.org, Thomas Huth <thuth@redhat.com>, qemu-arm@nongnu.org,
+ qemu-s390x@nongnu.org,
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+Subject: [PATCH v3 00/10] disas: Have CPUClass::disas_set_info() callback set
+ the endianness
+Date: Mon, 10 Feb 2025 23:18:20 +0100
+Message-ID: <20250210221830.69129-1-philmd@linaro.org>
+X-Mailer: git-send-email 2.47.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 10/10] disas: Remove target_words_bigendian() call in
- initialize_debug_target()
-To: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, qemu-arm@nongnu.org, Thomas Huth
- <thuth@redhat.com>, qemu-s390x@nongnu.org, qemu-ppc@nongnu.org
-References: <20250210212931.62401-1-philmd@linaro.org>
- <20250210212931.62401-11-philmd@linaro.org>
-Content-Language: en-US
-From: Richard Henderson <richard.henderson@linaro.org>
-In-Reply-To: <20250210212931.62401-11-philmd@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::102a;
- envelope-from=richard.henderson@linaro.org; helo=mail-pj1-x102a.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::42e;
+ envelope-from=philmd@linaro.org; helo=mail-wr1-x42e.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -105,36 +100,54 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 2/10/25 13:29, Philippe Mathieu-Daudé wrote:
-> All CPUClass implementations must implement disas_set_info()
-> which sets the disassemble_info::endian value.
-> 
-> Ensure that by:
-> 
-> 1/ assert disas_set_info() handler is not NULL
+Since v2:
+- Addressed Richard comments, tricore not disingenuously modified.
 
-Can we do that earlier than here?
+Since v1:
+- Addressed Thomas & Richard comments
 
-> @@ -61,15 +60,11 @@ void disas_initialize_debug_target(CPUDebug *s, CPUState *cpu)
->   
->       s->cpu = cpu;
->       s->info.print_address_func = print_address;
-> -    if (target_words_bigendian()) {
-> -        s->info.endian = BFD_ENDIAN_BIG;
-> -    } else {
-> -        s->info.endian =  BFD_ENDIAN_LITTLE;
-> -    }
-> +    s->info.endian =  BFD_ENDIAN_UNKNOWN;
+Targets are aware of their endianness. No need for a global
+target_words_bigendian() call in disas/ where we call the
+CPUClass::disas_set_info() handler which already update
+disassemble_info fields. Specify the target endianness in
+each CPUClass handler.
 
-Extra space.
+Philippe Mathieu-Daudé (10):
+  target: Set disassemble_info::endian value for little-endian targets
+  target: Set disassemble_info::endian value for big-endian targets
+  target/arm: Set disassemble_info::endian value in disas_set_info()
+  target/microblaze: Set disassemble_info::endian value in
+    disas_set_info
+  target/mips: Set disassemble_info::endian value in disas_set_info()
+  target/ppc: Set disassemble_info::endian value in disas_set_info()
+  target/riscv: Set disassemble_info::endian value in disas_set_info()
+  target/sh4: Set disassemble_info::endian value in disas_set_info()
+  target/xtensa: Set disassemble_info::endian value in disas_set_info()
+  disas: Remove target_words_bigendian() call in
+    initialize_debug_target()
 
-> +    g_assert(s->info.endian !=  BFD_ENDIAN_UNKNOWN);
+ disas/disas-common.c    |  8 ++------
+ target/alpha/cpu.c      |  1 +
+ target/arm/cpu.c        | 10 +++-------
+ target/avr/cpu.c        |  1 +
+ target/hexagon/cpu.c    |  1 +
+ target/hppa/cpu.c       |  1 +
+ target/i386/cpu.c       |  1 +
+ target/loongarch/cpu.c  |  1 +
+ target/m68k/cpu.c       |  1 +
+ target/microblaze/cpu.c |  2 ++
+ target/mips/cpu.c       | 10 +++++-----
+ target/openrisc/cpu.c   |  1 +
+ target/ppc/cpu_init.c   |  2 ++
+ target/riscv/cpu.c      |  9 +++++++++
+ target/rx/cpu.c         |  1 +
+ target/s390x/cpu.c      |  1 +
+ target/sh4/cpu.c        |  2 ++
+ target/sparc/cpu.c      |  1 +
+ target/xtensa/cpu.c     |  2 ++
+ 19 files changed, 38 insertions(+), 18 deletions(-)
 
-And another one.
+-- 
+2.47.1
 
-With the spacing fixed,
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
-
-
-r~
 
