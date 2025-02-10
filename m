@@ -4,75 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7FBA0C0219B
-	for <qemu-riscv@archiver.kernel.org>; Mon, 10 Feb 2025 02:55:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3B867C02198
+	for <qemu-riscv@archiver.kernel.org>; Mon, 10 Feb 2025 04:12:25 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1thJxL-0007dP-Ld; Sun, 09 Feb 2025 21:55:31 -0500
+	id 1thL9A-00034H-VI; Sun, 09 Feb 2025 23:11:49 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1thJxG-0007d1-Eu; Sun, 09 Feb 2025 21:55:26 -0500
-Received: from mail-ua1-x92f.google.com ([2607:f8b0:4864:20::92f])
+ id 1thL99-000346-75; Sun, 09 Feb 2025 23:11:47 -0500
+Received: from mail-vs1-xe31.google.com ([2607:f8b0:4864:20::e31])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1thJxE-0001PG-U6; Sun, 09 Feb 2025 21:55:26 -0500
-Received: by mail-ua1-x92f.google.com with SMTP id
- a1e0cc1a2514c-866eb01bde9so2495771241.0; 
- Sun, 09 Feb 2025 18:55:24 -0800 (PST)
+ id 1thL96-0003ga-Pa; Sun, 09 Feb 2025 23:11:46 -0500
+Received: by mail-vs1-xe31.google.com with SMTP id
+ ada2fe7eead31-4bbbab48111so294497137.0; 
+ Sun, 09 Feb 2025 20:11:43 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1739156123; x=1739760923; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1739160703; x=1739765503; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=KEPlvcFJyyyPg9V3qUeq2H44oh55V3PP51Q9CSm/qo4=;
- b=Mkp1uDquC21BuqzNnqEEzvT9MNLe5X6MKOU+/Lq8gseHQ7Wlqs+j7C3EzzwwkExnhx
- uFcposOx7b6rjLcj7fvSjnm4BVlq1nldwLkhhMTNsusqygmVgZawWHE7ZHQV9+fvzunP
- xsM6HXjeqyo5pyYTpaw1c59CXQMZiQPmSVrRX19gPdD32OSi8PGwv/1BwYY8ESfx7gPc
- AUT7KJncR7vPK77+O14iXgKzC6mg4CdnN+niX0r7mTKhZI2w/9iPzG0wLOS3zP7bmKUu
- KgRwVhUBYu2IU11JsUFphePyOUpTCz6ioWMcSkkD1SDAefudwI+Qwq8rz6/Lg7vTUqEL
- rHdw==
+ bh=27DDN3UmqvhVrPbVFH9KHkVOpBm9fwG7BaJ5+WYBh2M=;
+ b=MBVXZmBDrBcgvYVz5XD1u9FZtVs/xHrtRkR4wrmyvdo0YiXtXMRv7ld/FzeaXFp3O8
+ UjugCzllh4gxBhu4aC5kYQ61r3rP3KZ6PtnIG1TjNVsV21RLg+A6TGIhgUQ7/cnL//ug
+ /6oUUbXvmrfhxhMc12uyrC1ZEj3NpJT+c7sHlFIUuGvwsfLZfRwtN8ypGsmfFGKfVQXu
+ LPiKaREyOQPVxXjzGxdE7xhvlkFSKmFmAPln3aV7q2/AD7e4xpkXctBI9Qes5klFN/GB
+ 1a4xIwy/B/WmzG/NhXPZaWm2OFtx2wbmvrhHSTmGJ0uwgLVQnTt21Hwb7TLtO0v4mGrB
+ B9dA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1739156123; x=1739760923;
+ d=1e100.net; s=20230601; t=1739160703; x=1739765503;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=KEPlvcFJyyyPg9V3qUeq2H44oh55V3PP51Q9CSm/qo4=;
- b=W8eexFMWDi4TgvroAa3JyUnP0ayd7MmcP6yqQp4R8zn5JkDQpzgKzVjqAXLLbH7xAR
- Bm8blsWhbY5ndaqNMe+rah4w/lKOSz1tU99IopxvkUq8AWHeqn+2LskMAPpktV8pBL5r
- 4LchBaTVYKoLOAQkbXOXd9dOUw1tr6DW6ZVLabt4QQtjvwCN6jXZaCiK7d3LyyUumqD0
- 9ymLWwkaBo3pihGptOyYEduUv53mUfIgjhpZVrXYlts8nzhDtwyN928LVNSRLPjdNeL5
- jGKMHjAmzaST3qVUoqz0/s/SgCRTcn8hDUy2pvDVxN2ei8pYpIKL2N5iqM6o7XYPMvJA
- KO9Q==
+ bh=27DDN3UmqvhVrPbVFH9KHkVOpBm9fwG7BaJ5+WYBh2M=;
+ b=tLtH8ZCzjIsIip0h6yk9sJu2xmRfAp7TZLqQo/gMwFiMdtsal53DLfsOMiLGbG5i9z
+ xD6kcgkjdO+iGwznUTxaAP6T2QbEkH9XKZLE8AKL8+Ag32SCCJFnkkYMrummFNmY731M
+ 2DedZAb+KKud9CI55SMMS1t+5PdcsYDgM99k3u0ncay3Hn+SaUFUamFOhF5PfZ+UEyx7
+ Sov8HdWFVawCnE9tnzVZf9OSgv2s+LrVD4uDOddfTQ9IVBHq/oDm9u3qUBdlpUpgkGe/
+ oTkj80ASdgWOjZzsenIl15TwK83f32ii2YJ/pOtk5uuU+L5JXiyXzmLPdJcOTSuenyQY
+ rffA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXMM2eBA8Ti9fkC904y06tfYZX3pIsZQpEdxY2KDEhUW/T93dmp5YyDf59LmtQPPzVppgQ0L3bjCukO@nongnu.org
-X-Gm-Message-State: AOJu0YwT8Bh0+gB6fWdI8zsmy3C5s1rL7pNXCsdMlKgPaNx7J5mhBdz0
- 828QlIbJ8FxB1UmcYFMEtkw3xG+0ehz87L8/TqJOfGGy40uMDG/Blix6epycwwaejF7tmWg+8bj
- RvKfeddJehSO9KtDYjuEsPcp62Jk=
-X-Gm-Gg: ASbGnctq6ACQM7EUkKyH9kx8WS8gorxDGU3xAalCPu1MiLIxY4oqJa9idMDimOztKSD
- B9dePE2u1OViUi/GjbOH9HkAQXvRcjKmxalvYX6RtvoEl03pEIbP/Vn8T2zK3do8kizadosloiS
- CaK8dfH7nT1a42mJiabQ64R2HKmg==
-X-Google-Smtp-Source: AGHT+IG+/yfWkHUGNF8Sdqv2ptBO6gc9KuzGQW5AtK0rDdwOL8mz0mJIAbTbDLEVuJLFeyUtgrV+jqFJlLfqByW4WCg=
-X-Received: by 2002:a05:6102:4414:b0:4af:e61d:e22f with SMTP id
- ada2fe7eead31-4ba85f90424mr9409532137.24.1739156123321; Sun, 09 Feb 2025
- 18:55:23 -0800 (PST)
+ AJvYcCW5Ak8Qfk6I4lOWVybJsZf5kxw0mmmjyYYjiRrEVvujPztnNFM/3zw4uN8vbEYs/Y65w7jlSxaRvpHj@nongnu.org
+X-Gm-Message-State: AOJu0Yw5s0jn9eobCwC9IhtnARGJmKaE6E0ZRJIi2Bn9OboyifKJNgrH
+ RxN/uzxHjm61sv3UV/4xC9Nt/6RQnA35UX0A+Ux7Ji/6MNKTJHzc+3FA9FkhBHqPYcp18QJMCaz
+ RDzwimGhSx3JuwJGfqKNiDEQkqgE=
+X-Gm-Gg: ASbGncu6vagM7DK8rrbq0+RnYdic5iAUhWJ6bg4p11/tsaupzgg9F3tC8RFlskmzCLA
+ TT4HscrjkusH7z5tjN6c6H+M/OYOluqNVSG7BVhLUAi2XHXsn+Xy1Ndped9+okd+XfcbC33iWpb
+ WnBtDafrvhhD0TlUqjXznaZJCeEw==
+X-Google-Smtp-Source: AGHT+IHsRMWPy6I3D8YFnYl1eq/EeVv4KDSd9loltaGn36mF9WPJRi0+aFkm6UUm+zdDeOTu9H2SyPgKWmWh95u1MhU=
+X-Received: by 2002:a05:6102:809e:b0:4bb:b589:9da5 with SMTP id
+ ada2fe7eead31-4bbb5899f31mr3063189137.25.1739160702762; Sun, 09 Feb 2025
+ 20:11:42 -0800 (PST)
 MIME-Version: 1.0
-References: <20250206-pmu_minor_fixes-v2-0-1bb0f4aeb8b4@rivosinc.com>
-In-Reply-To: <20250206-pmu_minor_fixes-v2-0-1bb0f4aeb8b4@rivosinc.com>
+References: <20250205-b4-ctr_upstream_v6-v6-0-439d8e06c8ef@rivosinc.com>
+ <CAKmqyKMhV8Nj2oUmD_vWCnZBjJgYcw=8CQ86P2jihy0S09TXTQ@mail.gmail.com>
+ <CAECbVCubhhy4y8oJPGiW5r322Uv02oOyKY4e+qWSMFNfbgx8yQ@mail.gmail.com>
+In-Reply-To: <CAECbVCubhhy4y8oJPGiW5r322Uv02oOyKY4e+qWSMFNfbgx8yQ@mail.gmail.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 10 Feb 2025 12:54:57 +1000
-X-Gm-Features: AWEUYZmIwcflzyh5bQuiuhXRX6VBW_PlqTJKgVIbNLN_ImC-HxOnRV_AjDx9pMg
-Message-ID: <CAKmqyKMuNS6kAytheSAwDXo1MEOvadi-0nXMOR9BRN_hKRnYEw@mail.gmail.com>
-Subject: Re: [PATCH v2 0/2] Minor mhpmevent related fixes
-To: Atish Patra <atishp@rivosinc.com>
-Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, liwei1518@gmail.com, 
- zhiwei_liu@linux.alibaba.com, bin.meng@windriver.com, 
- dbarboza@ventanamicro.com, alistair.francis@wdc.com
+Date: Mon, 10 Feb 2025 14:11:16 +1000
+X-Gm-Features: AWEUYZlvs4VoVvSp5zag60rxea99oKXG-u3W5SOUy0jG4zhOAUv8Cwa80zywR-A
+Message-ID: <CAKmqyKNaxUn_99=+3EsCiE48Qx+64Lu=ybR1asGscP_UiPxnxw@mail.gmail.com>
+Subject: Re: [PATCH v6 0/7] target/riscv: Add support for Control Transfer
+ Records Ext.
+To: Rajnesh Kanwal <rkanwal@rivosinc.com>
+Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, alistair.francis@wdc.com, 
+ bin.meng@windriver.com, liweiwei@iscas.ac.cn, dbarboza@ventanamicro.com, 
+ zhiwei_liu@linux.alibaba.com, atishp@rivosinc.com, apatel@ventanamicro.com, 
+ beeman@rivosinc.com, jason.chien@sifive.com, frank.chang@sifive.com, 
+ richard.henderson@linaro.org, bmeng.cn@gmail.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::92f;
- envelope-from=alistair23@gmail.com; helo=mail-ua1-x92f.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::e31;
+ envelope-from=alistair23@gmail.com; helo=mail-vs1-xe31.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -96,45 +101,183 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Thu, Feb 6, 2025 at 7:59=E2=80=AFPM Atish Patra <atishp@rivosinc.com> wr=
-ote:
+On Thu, Feb 6, 2025 at 9:45=E2=80=AFPM Rajnesh Kanwal <rkanwal@rivosinc.com=
+> wrote:
 >
-> Here are two small fixes around mhpmevent encoding and reset value.
-> The first patch is picked from the platform specific event encoding
-> series[1].
+> On Thu, Feb 6, 2025 at 5:39=E2=80=AFAM Alistair Francis <alistair23@gmail=
+.com> wrote:
+> >
+> > On Wed, Feb 5, 2025 at 9:21=E2=80=AFPM Rajnesh Kanwal <rkanwal@rivosinc=
+.com> wrote:
+> > >
+> > > This series enables Control Transfer Records extension support on ris=
+cv
+> > > platform. This extension is similar to Arch LBR in x86 and BRBE in AR=
+M.
+> > > The Extension has been ratified and this series is based on v1.0 [0]
+> > >
+> > > CTR extension depends on both the implementation of S-mode and Sscsri=
+nd
+> > > extension v1.0.0 [1]. CTR access ctrsource, ctrtartget and ctrdata CS=
+Rs using
+> > > sscsrind extension.
+> > >
+> > > The series is based on Smcdeleg/Ssccfg counter delegation extension [=
+2]
+> > > patches [3]. CTR itself doesn't depend on counter delegation support.=
+ This
+> > > rebase is basically to include the Smcsrind patches.
+> > >
+> > > Here is the link to a quick start guide [4] to setup and run a basic =
+perf demo
+> > > on Linux to use CTR Ext.
+> > >
+> > > Qemu patches can be found here:
+> > > https://github.com/rajnesh-kanwal/qemu/tree/b4/ctr_upstream_v6
+> > >
+> > > Opensbi patch can be found here:
+> > > https://github.com/rajnesh-kanwal/opensbi/tree/ctr_upstream_v2
+> > >
+> > > Linux kernel patches can be found here:
+> > > https://github.com/rajnesh-kanwal/linux/tree/b4/ctr_upstream_v2
+> > >
+> > > [0]: https://github.com/riscv/riscv-control-transfer-records/releases=
+/tag/v1.0
+> > > [1]: https://github.com/riscvarchive/riscv-indirect-csr-access/releas=
+es/tag/v1.0.0
+> > > [2]: https://github.com/riscvarchive/riscv-smcdeleg-ssccfg/releases/t=
+ag/v1.0.0
+> > > [3]: https://lore.kernel.org/qemu-riscv/20241203-counter_delegation-v=
+4-0-c12a89baed86@rivosinc.com/
+> > > [4]: https://github.com/rajnesh-kanwal/linux/wiki/Running-CTR-basic-d=
+emo-on-QEMU-RISC%E2%80%90V-Virt-machine
+> > >
+> > > Signed-off-by: Rajnesh Kanwal <rkanwal@rivosinc.com>
+> > > ---
+> > > Changelog:
+> > > v6: Rebased on latest riscv-to-apply.for-upstream.
+> >
+> > It should be rebased on
+> > https://github.com/alistair23/qemu/tree/riscv-to-apply.next
+> >
+> > I applied the first 6 patches as they apply cleanly
+> >
+> > Alistair
+> >
 >
-> [1] https://lore.kernel.org/qemu-devel/20241009-pmu_event_machine-v1-0-dc=
-bd7a60e3ba@rivosinc.com/
+> Sorry for the inconvenience. Strangely cherry-pick, patch and git am -3
+> all seem to work fine but git am seems to be failing.
 >
-> Signed-off-by: Atish Patra <atishp@rivosinc.com>
+> I looked into the conflict and it looks like am expects
+> ISA_EXT_DATA_ENTRY(sstvecd, PRIV_VERSION_1_12_0, has_priv_1_12),
+> but gets this in cpu.c.
+> ISA_EXT_DATA_ENTRY(ssu64xl, PRIV_VERSION_1_12_0, has_priv_1_12),
+>
+> I have tried following cmds on top of riscv-to-apply.next and these
+> fetch the last patch
+> only and apply the last patch perfectly fine.
+>
+> b4 am -i  -P=3D"-1" 20250205-b4-ctr_upstream_v6-v6-0-439d8e06c8ef@rivosin=
+c.com
+> git am -3 ./v6_20250205_rkanwal_target_riscv_add_support_for_control_tran=
+sfer_records_ext.mbx
 
-Thanks!
+The threeway merge is failing for me
 
-Applied to riscv-to-apply.next
+>
+> If you want I can send v7 as well rebased on top of riscv-to-apply.next.
+
+Yes please :)
 
 Alistair
 
-> ---
-> Changes in v2:
-> - Replace GENMASK_ULL with MAKE_64BIT_MASK
-> - Applied RB/AB tags.
-> - Link to v1: https://lore.kernel.org/r/20250115-pmu_minor_fixes-v1-0-c32=
-388defb02@rivosinc.com
 >
-> ---
-> Atish Patra (2):
->       target/riscv: Fix the hpmevent mask
->       target/riscv: Mask out upper sscofpmf bits during validation
+> Thanks
+> Rajnesh
 >
->  target/riscv/cpu_bits.h | 5 ++---
->  target/riscv/pmu.c      | 2 +-
->  2 files changed, 3 insertions(+), 4 deletions(-)
-> ---
-> base-commit: 3f26a7a370c11c7dff68dabcccc19c4e0de901e4
-> change-id: 20250115-pmu_minor_fixes-7a2b8e3658e4
-> --
-> Regards,
-> Atish patra
->
->
+> > >
+> > > v5: Improvements based on Richard Henderson's feedback.
+> > >   - Fixed code gen logic to use gen_update_pc() instead of
+> > >     tcg_constant_tl().
+> > >   - Some function renaming.
+> > >   - Rebased onto v4 of counter delegation series.
+> > >   - https://lore.kernel.org/qemu-riscv/20241205-b4-ctr_upstream_v3-v5=
+-0-60b993aa567d@rivosinc.com/
+> > >
+> > > v4: Improvements based on Richard Henderson's feedback.
+> > >   - Refactored CTR related code generation to move more code into
+> > >     translation side and avoid unnecessary code execution in generate=
+d
+> > >     code.
+> > >   - Added missing code in machine.c to migrate the new state.
+> > >   - https://lore.kernel.org/r/20241204-b4-ctr_upstream_v3-v4-0-d3ce6b=
+ef9432@rivosinc.com
+> > >
+> > > v3: Improvements based on Jason Chien and Frank Chang's feedback.
+> > >   - Created single set of MACROs for CTR CSRs in cpu_bit.h
+> > >   - Some fixes in riscv_ctr_add_entry.
+> > >   - Return zero for vs/sireg4-6 for CTR 0x200 to 0x2ff range.
+> > >   - Improved extension dependency check.
+> > >   - Fixed invalid ctrctl csr selection bug in riscv_ctr_freeze.
+> > >   - Added implied rules for Smctr and Ssctr.
+> > >   - Added missing SMSTATEEN0_CTR bit in mstateen0 and hstateen0 write=
+ ops.
+> > >   - Some more cosmetic changes.
+> > >   - https://lore.kernel.org/qemu-riscv/20241104-b4-ctr_upstream_v3-v3=
+-0-32fd3c48205f@rivosinc.com/
+> > >
+> > > v2: Lots of improvements based on Jason Chien's feedback including:
+> > >   - Added CTR recording for cm.jalt, cm.jt, cm.popret, cm.popretz.
+> > >   - Fixed and added more CTR extension enable checks.
+> > >   - Fixed CTR CSR predicate functions.
+> > >   - Fixed external trap xTE bit checks.
+> > >   - One fix in freeze function for VS-mode.
+> > >   - Lots of minor code improvements.
+> > >   - Added checks in sctrclr instruction helper.
+> > >   - https://lore.kernel.org/qemu-riscv/20240619152708.135991-1-rkanwa=
+l@rivosinc.com/
+> > >
+> > > v1:
+> > >   - https://lore.kernel.org/qemu-riscv/20240529160950.132754-1-rkanwa=
+l@rivosinc.com/
+> > >
+> > > ---
+> > > Rajnesh Kanwal (7):
+> > >       target/riscv: Remove obsolete sfence.vm instruction
+> > >       target/riscv: Add Control Transfer Records CSR definitions.
+> > >       target/riscv: Add support for Control Transfer Records extensio=
+n CSRs.
+> > >       target/riscv: Add support to record CTR entries.
+> > >       target/riscv: Add CTR sctrclr instruction.
+> > >       target/riscv: machine: Add Control Transfer Record state descri=
+ption
+> > >       target/riscv: Add support to access ctrsource, ctrtarget, ctrda=
+ta regs.
+> > >
+> > >  target/riscv/cpu.c                             |  26 ++-
+> > >  target/riscv/cpu.h                             |  13 ++
+> > >  target/riscv/cpu_bits.h                        | 145 ++++++++++++
+> > >  target/riscv/cpu_cfg.h                         |   2 +
+> > >  target/riscv/cpu_helper.c                      | 266 +++++++++++++++=
++++++++
+> > >  target/riscv/csr.c                             | 294 +++++++++++++++=
++++++++++-
+> > >  target/riscv/helper.h                          |   2 +
+> > >  target/riscv/insn32.decode                     |   2 +-
+> > >  target/riscv/insn_trans/trans_privileged.c.inc |  18 +-
+> > >  target/riscv/insn_trans/trans_rvi.c.inc        |  75 +++++++
+> > >  target/riscv/insn_trans/trans_rvzce.c.inc      |  21 ++
+> > >  target/riscv/machine.c                         |  25 +++
+> > >  target/riscv/op_helper.c                       |  48 ++++
+> > >  target/riscv/tcg/tcg-cpu.c                     |  11 +
+> > >  target/riscv/translate.c                       |  46 ++++
+> > >  15 files changed, 986 insertions(+), 8 deletions(-)
+> > > ---
+> > > base-commit: 699291ba7774f1580584cd96f84ceda8cc4edb7e
+> > > change-id: 20250205-b4-ctr_upstream_v6-71418cd245ee
+> > > --
+> > > Best Regards,
+> > > Rajnesh Kanwal
+> > >
+> > >
 
