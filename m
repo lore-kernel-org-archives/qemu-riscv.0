@@ -4,95 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 23AD3C0219E
-	for <qemu-riscv@archiver.kernel.org>; Mon, 10 Feb 2025 14:04:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6659BC0219E
+	for <qemu-riscv@archiver.kernel.org>; Mon, 10 Feb 2025 14:42:25 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1thUO5-0001Hj-I3; Mon, 10 Feb 2025 09:03:49 -0500
+	id 1thUzJ-0001Mh-6l; Mon, 10 Feb 2025 09:42:20 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1thUO1-0001Gb-QZ
- for qemu-riscv@nongnu.org; Mon, 10 Feb 2025 09:03:47 -0500
-Received: from mail-wm1-x32e.google.com ([2a00:1450:4864:20::32e])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1thUNx-0002kg-A2
- for qemu-riscv@nongnu.org; Mon, 10 Feb 2025 09:03:45 -0500
-Received: by mail-wm1-x32e.google.com with SMTP id
- 5b1f17b1804b1-43618283d48so30102945e9.1
- for <qemu-riscv@nongnu.org>; Mon, 10 Feb 2025 06:03:38 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1739196217; x=1739801017; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=54fufbxc7LkWLY3gsqftXZih0oh4axfXg2KzENgF1oo=;
- b=P2fqfghC6knXqtSxtOPh9lvj5VO3QGaxeVUDj0daSpQcE4c7BrhL21KX1T6TIr2gdL
- lfDWaY+JSAyqXL6hdtfxgFdpr3THkuLrrxLyy0/g3JDha7gcuQhrNoo+wR/PojGVClHy
- YAnOalZpG91Cha64IwJdIEVXqnHslQU+ieh1+jI6BDAlv41lfwBP6S+xi98CFpJZ0NnX
- tleFsTW6fRhwFkwr4ExQUvcc8PxGoOv/+zKuMR9cq+W+pnbUAfnwpH1IIV3U+I4N/xvd
- rwD8kZS8wteTwzmsb9Ii3wkDRuqCCaAsJk90CbFv6rvRmMWKASW+u7rqyNDTP4Iv4uvR
- 74Sw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1739196217; x=1739801017;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=54fufbxc7LkWLY3gsqftXZih0oh4axfXg2KzENgF1oo=;
- b=wIDP46SFFQJxMERCh7IHvPX0zzCownoWvuTRA2T68Db/R8Y4d7DOhaQxQuxzx4Cv5S
- JNAqLyR7p4cB/JprBU4NjrEnx/UgDWfGVUQcc+GafBGpMSuGVNjh0Wa/EdkZyoVxPzM+
- FbWK2qgwMymmNuNGiCRJ7qpXwk+xKcjfWy/ldVpjDkDwU1gzo/vP+9wckRh/1qzLmkHI
- v7Qdve6C7e8zODskVGy00eToX7prmwffeKZiy6PSrF3gTdGT4EbaHTzGgpohzIquqBhJ
- OasZIcdQH3Bo5h6ZibrF38rzPX1kJ3rDd/PUyCMo9TWt5PMDOFBtRCNozRU6Zk3/F5IY
- mopw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXVDLN94VMPul9tvak2dOPqehDXHw79mmpdj8bpKcbs7AAB0/FE7UOGFyMhHgYCCiyMFr66aRUeNcrR@nongnu.org
-X-Gm-Message-State: AOJu0YyonPLwC2Ts7tVNdu25RIckbkzx3VKs68nVAvf/DaZ+WLlKBPik
- FF8loFD4u9W7UGNovka0ATb57DW5kEXsWUgTvs3mD5Eo/XsgaFK8Hx/0k4dZggQ=
-X-Gm-Gg: ASbGncuHMfGJf0ZnVNKC641wy+zzGzAeF+ttuZA8AoAkyivBEHLkcB55lJaPj+15Isl
- Ar2h3wmqusHAV7SpCg1npNXMvmIYdBEbspzbyDggKSK0gDEpdADxT5WxhoExstfFH0anEW19HBd
- 87PvGXQ6GOZC6G5pvZUb7h98ino6FV9GvMYtk5odnd66vZg617pe8T1bWDtGgxzrnDkt+QzIRgj
- q3W/1oWH61qkGfsN52xLqBM/R+K6WexychWJoQzvpwPXLuMHdRFvlwsE8VjtD0KYXr2wuhDFxGA
- dNok5KqQmiMphN8znaUiOwFLOwwB6wzamnn081Vsl3UOi8aBRIadz1QxgIk=
-X-Google-Smtp-Source: AGHT+IFDI5iAKPiEdC4yZNr/+SQbo3QKZ1T3kfMWNM/vRzjowTchx4JCU+sOnY2E6kvln6x9huM1BA==
-X-Received: by 2002:a05:600c:1e0e:b0:436:f3f6:9582 with SMTP id
- 5b1f17b1804b1-43924988870mr103881395e9.8.1739196217423; 
- Mon, 10 Feb 2025 06:03:37 -0800 (PST)
-Received: from [192.168.69.198] (88-187-86-199.subs.proxad.net.
- [88.187.86.199]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-38dd9c48173sm4661490f8f.37.2025.02.10.06.03.36
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 10 Feb 2025 06:03:36 -0800 (PST)
-Message-ID: <96b39b3e-1a90-457c-bd8a-40a1b6216c1a@linaro.org>
-Date: Mon, 10 Feb 2025 15:03:34 +0100
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
+ (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1thUzB-0001JB-P1
+ for qemu-riscv@nongnu.org; Mon, 10 Feb 2025 09:42:10 -0500
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1thUz9-0001t1-Sy
+ for qemu-riscv@nongnu.org; Mon, 10 Feb 2025 09:42:09 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1739198526;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=ssA5j+bS7A7gy/93PxJkEwzIFJ0JIO3eg1MJ5VPaLvI=;
+ b=B4ZLLacD3zsBVDQYIH4O3kPwoW0dCEqP8jvS107+bPUL2UzxrmJwmnEc1Dd5+00lT5LMMV
+ e844BkOYkcIudHUqiw+qqLnODWu7UrMzP5Ju1QNYqneMeyQ+VP43z8BRKdgr2KvV7szG2u
+ PukrQDsj18PEwDFPWFXkmNOubiBEn1M=
+Received: from mx-prod-mc-01.mail-002.prod.us-west-2.aws.redhat.com
+ (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
+ relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-669-5PJrxQaoMUWLDEepON4KdA-1; Mon,
+ 10 Feb 2025 09:42:04 -0500
+X-MC-Unique: 5PJrxQaoMUWLDEepON4KdA-1
+X-Mimecast-MFC-AGG-ID: 5PJrxQaoMUWLDEepON4KdA
+Received: from mx-prod-int-04.mail-002.prod.us-west-2.aws.redhat.com
+ (mx-prod-int-04.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.40])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mx-prod-mc-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id D943D1956094; Mon, 10 Feb 2025 14:42:01 +0000 (UTC)
+Received: from blackfin.pond.sub.org (unknown [10.45.242.22])
+ by mx-prod-int-04.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id 5566219560A3; Mon, 10 Feb 2025 14:41:59 +0000 (UTC)
+Received: by blackfin.pond.sub.org (Postfix, from userid 1000)
+ id DB91621E6A28; Mon, 10 Feb 2025 15:41:56 +0100 (CET)
+From: Markus Armbruster <armbru@redhat.com>
+To: Philippe =?utf-8?Q?Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+Cc: qemu-devel@nongnu.org,  qemu-riscv@nongnu.org,  qemu-arm@nongnu.org,
+ Peter Maydell <peter.maydell@linaro.org>,  qemu-ppc@nongnu.org,  Daniel
+ =?utf-8?Q?P=2EBerrang=C3=A9?= <berrange@redhat.com>,  Paolo Bonzini
+ <pbonzini@redhat.com>,
+ Thomas Huth <thuth@redhat.com>,  qemu-s390x@nongnu.org
 Subject: Re: [PATCH v2 4/8] hw/boards: Remove all invalid uses of
  auto_create_sdcard=true
-To: Markus Armbruster <armbru@redhat.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, qemu-arm@nongnu.org,
- Peter Maydell <peter.maydell@linaro.org>, qemu-ppc@nongnu.org,
- =?UTF-8?Q?Daniel_P=2EBerrang=C3=A9?= <berrange@redhat.com>,
- Paolo Bonzini <pbonzini@redhat.com>, Thomas Huth <thuth@redhat.com>,
- qemu-s390x@nongnu.org
+In-Reply-To: <96b39b3e-1a90-457c-bd8a-40a1b6216c1a@linaro.org> ("Philippe
+ =?utf-8?Q?Mathieu-Daud=C3=A9=22's?= message of "Mon, 10 Feb 2025 15:03:34
+ +0100")
 References: <20250204180746.58357-1-philmd@linaro.org>
- <20250204180746.58357-5-philmd@linaro.org> <87a5b07u1d.fsf@pond.sub.org>
+ <20250204180746.58357-5-philmd@linaro.org>
+ <87a5b07u1d.fsf@pond.sub.org>
  <34235ce5-9f6c-4968-a8c1-ab868389e9cf@linaro.org>
  <8734gpj4wn.fsf@pond.sub.org>
-Content-Language: en-US
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-In-Reply-To: <8734gpj4wn.fsf@pond.sub.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::32e;
- envelope-from=philmd@linaro.org; helo=mail-wm1-x32e.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ <96b39b3e-1a90-457c-bd8a-40a1b6216c1a@linaro.org>
+Date: Mon, 10 Feb 2025 15:41:56 +0100
+Message-ID: <87pljp3lqj.fsf@pond.sub.org>
+User-Agent: Gnus/5.13 (Gnus v5.13)
+MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+X-Scanned-By: MIMEDefang 3.0 on 10.30.177.40
+Received-SPF: pass client-ip=170.10.129.124; envelope-from=armbru@redhat.com;
+ helo=us-smtp-delivery-124.mimecast.com
+X-Spam_score_int: -34
+X-Spam_score: -3.5
+X-Spam_bar: ---
+X-Spam_report: (-3.5 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-1.388,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H5=0.001, RCVD_IN_MSPIKE_WL=0.001,
+ RCVD_IN_VALIDITY_CERTIFIED_BLOCKED=0.001, RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -108,107 +97,115 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 7/2/25 13:49, Markus Armbruster wrote:
-> Philippe Mathieu-Daudé <philmd@linaro.org> writes:
-> 
->> On 5/2/25 08:03, Markus Armbruster wrote:
->>> Philippe Mathieu-Daudé <philmd@linaro.org> writes:
->>>
->>>> MachineClass::auto_create_sdcard is only useful to automatically
->>>> create a SD card, attach a IF_SD block drive to it and plug the
->>>> card onto a SD bus. Only the ARM and RISCV targets use such
->>>> feature:
->>>>
->>>>    $ git grep -wl IF_SD hw | cut -d/ -f-2 | sort -u
->>>>    hw/arm
->>>>    hw/riscv
->>>>    $
->>>>
->>>> Remove all other uses.
->>>>
->>>> Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
->>>
->>> Impact?
->>>
->>> As far as I can tell, this stops creation of the if=sd default drive
->>> these machines don't actually use.  Correct?
->>
->> Yes, since these machines don't expose a SD-bus, the drive can
->> not be attached and always triggers the same error:
->>
->> $ qemu-system-hppa -sd /bin/sh
->> qemu-system-hppa: -sd /bin/sh: machine type does not support
->> if=sd,bus=0,unit=0
-> 
-> To be precise...
-> 
-> Before the series, a bunch of machines create an if=sd,index=0 drive by
-> default even though they cannot use it.  HMP "info block" shows it:
-> 
->      sd0: [not inserted]
->          Removable device: not locked, tray closed
-> 
-> "By default" means -nodefaults suppresses it.
-> 
-> After the series, this default drive is gone.
-> 
-> That is all.
-> 
-> Correct?
+Philippe Mathieu-Daud=C3=A9 <philmd@linaro.org> writes:
 
-Correct.
-
-> The commit message could be clearer about this.  Perhaps:
-> 
->      hw/boards: Do not create unusable default if=sd drives
-> 
->      A number of machines create an if=sd drive by default even though
+> On 7/2/25 13:49, Markus Armbruster wrote:
+>> Philippe Mathieu-Daud=C3=A9 <philmd@linaro.org> writes:
+>>=20
+>>> On 5/2/25 08:03, Markus Armbruster wrote:
+>>>> Philippe Mathieu-Daud=C3=A9 <philmd@linaro.org> writes:
+>>>>
+>>>>> MachineClass::auto_create_sdcard is only useful to automatically
+>>>>> create a SD card, attach a IF_SD block drive to it and plug the
+>>>>> card onto a SD bus. Only the ARM and RISCV targets use such
+>>>>> feature:
+>>>>>
+>>>>>    $ git grep -wl IF_SD hw | cut -d/ -f-2 | sort -u
+>>>>>    hw/arm
+>>>>>    hw/riscv
+>>>>>    $
+>>>>>
+>>>>> Remove all other uses.
+>>>>>
+>>>>> Signed-off-by: Philippe Mathieu-Daud=C3=A9 <philmd@linaro.org>
+>>>>
+>>>> Impact?
+>>>>
+>>>> As far as I can tell, this stops creation of the if=3Dsd default drive
+>>>> these machines don't actually use.  Correct?
+>>>
+>>> Yes, since these machines don't expose a SD-bus, the drive can
+>>> not be attached and always triggers the same error:
+>>>
+>>> $ qemu-system-hppa -sd /bin/sh
+>>> qemu-system-hppa: -sd /bin/sh: machine type does not support
+>>> if=3Dsd,bus=3D0,unit=3D0
+>>=20
+>> To be precise...
+>>=20
+>> Before the series, a bunch of machines create an if=3Dsd,index=3D0 drive=
+ by
+>> default even though they cannot use it.  HMP "info block" shows it:
+>>=20
+>>      sd0: [not inserted]
+>>          Removable device: not locked, tray closed
+>>=20
+>> "By default" means -nodefaults suppresses it.
+>>=20
+>> After the series, this default drive is gone.
+>>=20
+>> That is all.
+>>=20
+>> Correct?
+>
+> Correct.
+>
+>> The commit message could be clearer about this.  Perhaps:
+>>=20
+>>      hw/boards: Do not create unusable default if=3Dsd drives
+>>=20
+>>      A number of machines create an if=3Dsd drive by default even though
+>>      they lack an SD bus, and therefore cannot use the drive.
+>>=20
+>>      This drive is created when the machine sets flag
+>>      @auto_create_sdcard.
+>>=20
+>>      Delete that from machines that lack an SD bus.
+>
+> I reworded as:
+>
+>      hw/boards: Do not create unusable default if=3Dsd drives
+>
+>      A number of machines create an if=3Dsd drive by default even though
 >      they lack an SD bus, and therefore cannot use the drive.
-> 
+>
 >      This drive is created when the machine sets flag
 >      @auto_create_sdcard.
-> 
+>
+>      See for example running HMP "info block" on the HPPA C3700 machine:
+>
+>        $ qemu-system-hppa -M C3700 -monitor stdio -S
+>        (qemu) info block
+>
+>        floppy0: [not inserted]
+>            Removable device: not locked, tray closed
+>
+>        sd0: [not inserted]
+>            Removable device: not locked, tray closed
+>
+>        $ qemu-system-hppa -M C3700 -sd /bin/sh
+>        qemu-system-hppa: -sd /bin/sh: machine type does not support=20
+> if=3Dsd,bus=3D0,unit=3D0
+>
 >      Delete that from machines that lack an SD bus.
+>
+>      Note, only the ARM and RISCV targets use such feature:
+>
+>       $ git grep -wl IF_SD hw | cut -d/ -f-2 | sort -u
+>       hw/arm
+>       hw/riscv
+>       $
 
-I reworded as:
+Lovely, thanks!
 
-     hw/boards: Do not create unusable default if=sd drives
+>> Listing the affected machines might be useful.
+>
+> I'll pass :)
+>
+>> Worth a mention in the release notes?  I don't know.
+>
+> I don't think so, since nothing working is lost.
 
-     A number of machines create an if=sd drive by default even though
-     they lack an SD bus, and therefore cannot use the drive.
+Okay :)
 
-     This drive is created when the machine sets flag
-     @auto_create_sdcard.
-
-     See for example running HMP "info block" on the HPPA C3700 machine:
-
-       $ qemu-system-hppa -M C3700 -monitor stdio -S
-       (qemu) info block
-
-       floppy0: [not inserted]
-           Removable device: not locked, tray closed
-
-       sd0: [not inserted]
-           Removable device: not locked, tray closed
-
-       $ qemu-system-hppa -M C3700 -sd /bin/sh
-       qemu-system-hppa: -sd /bin/sh: machine type does not support 
-if=sd,bus=0,unit=0
-
-     Delete that from machines that lack an SD bus.
-
-     Note, only the ARM and RISCV targets use such feature:
-
-      $ git grep -wl IF_SD hw | cut -d/ -f-2 | sort -u
-      hw/arm
-      hw/riscv
-      $
-
-> Listing the affected machines might be useful.
-
-I'll pass :)
-
-> Worth a mention in the release notes?  I don't know.
-
-I don't think so, since nothing working is lost.
 
