@@ -4,77 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E01D2C02198
-	for <qemu-riscv@archiver.kernel.org>; Wed, 12 Feb 2025 13:05:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CD9DDC02198
+	for <qemu-riscv@archiver.kernel.org>; Wed, 12 Feb 2025 13:07:37 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tiCQ3-0007DB-Ii; Wed, 12 Feb 2025 08:04:47 -0500
+	id 1tiCSO-0000KC-Av; Wed, 12 Feb 2025 08:07:12 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1tiCPu-00076S-NE
- for qemu-riscv@nongnu.org; Wed, 12 Feb 2025 08:04:39 -0500
+ (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1tiCS5-0000Hy-40
+ for qemu-riscv@nongnu.org; Wed, 12 Feb 2025 08:06:53 -0500
 Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1tiCPs-0007vk-H9
- for qemu-riscv@nongnu.org; Wed, 12 Feb 2025 08:04:38 -0500
+ (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1tiCS3-0008Sn-LI
+ for qemu-riscv@nongnu.org; Wed, 12 Feb 2025 08:06:52 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1739365476;
+ s=mimecast20190719; t=1739365609;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
- bh=2ZFDgS/m6BkeZPliAwUkjnEBmPfpb7tagttqpH98zqk=;
- b=NA/iDpXDqfl4lBKV5P4lc/f3K1Lph4l4KO0m5o7rv+3Dgnr7epCyRq1hzLEoRp5i/2fWAZ
- X4ioTvdM4NYYHhNhdzUHZXZ0MtNE/8hPdLlmOFqUL2T70Rg8OEeSD/4QdGtvDT6TdA+24h
- kcWw0J08jqZitKUuMPDdAYttvMIpZA4=
-Received: from mail-wm1-f72.google.com (mail-wm1-f72.google.com
- [209.85.128.72]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=IacliiBlMGlW6K20RTZuF7ubbluBMVvZfmm9KdohwmA=;
+ b=gkzhMJ9GL3ejqr93mbgKjRdxfXXPqSXOcmBZpsiFcEN1lKNXNlmK6Z2d9xrvP2ZtoqOptm
+ BejJqJ/LlOShWruOxWIQI1x6RIwaGLr7UbDIruJtIZpDH8NxVfAefSyvZ4apjy0Oydn2pT
+ YeBialRhY/wpgwwBXQfj05acNUnkWYM=
+Received: from mail-wm1-f70.google.com (mail-wm1-f70.google.com
+ [209.85.128.70]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-668-m-non5ZgPMelSSA5QZ59bg-1; Wed, 12 Feb 2025 08:04:34 -0500
-X-MC-Unique: m-non5ZgPMelSSA5QZ59bg-1
-X-Mimecast-MFC-AGG-ID: m-non5ZgPMelSSA5QZ59bg
-Received: by mail-wm1-f72.google.com with SMTP id
- 5b1f17b1804b1-43957a76838so5611815e9.0
- for <qemu-riscv@nongnu.org>; Wed, 12 Feb 2025 05:04:33 -0800 (PST)
+ us-mta-638-KOC3ai14M4qFZ2KDlM9KXw-1; Wed, 12 Feb 2025 08:06:48 -0500
+X-MC-Unique: KOC3ai14M4qFZ2KDlM9KXw-1
+X-Mimecast-MFC-AGG-ID: KOC3ai14M4qFZ2KDlM9KXw
+Received: by mail-wm1-f70.google.com with SMTP id
+ 5b1f17b1804b1-43941ad86d4so17497545e9.2
+ for <qemu-riscv@nongnu.org>; Wed, 12 Feb 2025 05:06:48 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1739365473; x=1739970273;
+ d=1e100.net; s=20230601; t=1739365607; x=1739970407;
  h=content-transfer-encoding:in-reply-to:autocrypt:content-language
  :from:references:cc:to:subject:user-agent:mime-version:date
  :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=2ZFDgS/m6BkeZPliAwUkjnEBmPfpb7tagttqpH98zqk=;
- b=JmFPYcEf43IR67//WfODtTlUZvP9MpTusawD0/wggyr0W17kr9kzbUfUKdwGZHsG39
- s5huZS55nM2kQZvgB7w60AlNCEISArqNN1H6oyfHJkvT6Ioy0YmXBhszbvLv8Fx/T8KE
- v7FJe3htbeISoFTtrcg5DGesh4ILH/18yHoC8osBnAHzk/wqtDQQ8NPtyyOJ2ugk5jy/
- NK5K5US1wgmPTYx5p7I0OX+LzG60AwVSu9YRofL6pXFnRdvYcEBOTTq/YJ4zulvH5DyQ
- srk7UZLY2B0h/JI0mi9MRpXeass85L947jNe72TpkLzj/OlbslDQZooRyvdZAk3bxseh
- wkRQ==
-X-Gm-Message-State: AOJu0YztjEcEPvkaf96c4YpKhf9sHb/JS3siGzZ8YtQWZ8SBsTNUGBO4
- dS+pOmki0hJ0VEYYvMAtm2hQDhD1cWqZUsEkhFbJzeZ8XIGXPTIvS0z6JL6oYwAAFxW0GmNBGZP
- G6Tvs36TwJhD+8UNxUOnClx0z988bQwY3RqO+y7KHg/0LGOSenfuX5xG+8M6N
-X-Gm-Gg: ASbGncse1CFFbRkFipQi5pTvlW99JN/l4pt5HSbZ9Gid93lOpL3O6+79gOO+Pd5Q05T
- D3E8oJgSNJStYpMzh8BYPuKjFDIDKctaxmrZBaSUc7N4PtZJnGZQtIm/DlV8E4Ov28VszZn5N9J
- MN4+RtptBA4AW3rI30f91MI/tbnfeQSuBqdKVVTiQ2J9uQeft9PwDwIXcujMNkk2g+LlcWIUpr1
- V++PxZEUFbpetk0NlLx5dasBVeIl3TNj8S4ST3z40FcrYPwiBcdylvPQp2SjG/P/ZmixSHwKlFh
- /IntI6Sj7mNo9CLtI8mqRusgjowzBeWj7A==
-X-Received: by 2002:a05:6000:4025:b0:38d:e1b1:be9f with SMTP id
- ffacd0b85a97d-38dea256927mr2102755f8f.4.1739365472698; 
- Wed, 12 Feb 2025 05:04:32 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IF1Eu/CSkUKVSuHhiX4HnO+oMxf33QU1dJH2e0yUchVSgYR6kXpeLW5EeRkgbJAC00Qz75hGg==
-X-Received: by 2002:a05:6000:4025:b0:38d:e1b1:be9f with SMTP id
- ffacd0b85a97d-38dea256927mr2102724f8f.4.1739365472315; 
- Wed, 12 Feb 2025 05:04:32 -0800 (PST)
+ bh=IacliiBlMGlW6K20RTZuF7ubbluBMVvZfmm9KdohwmA=;
+ b=W0l2x6xccFyb6JBG9RAO8htkggNyTEo0A/pFvxc0vwJ5Och0vwWb3ALPkOUkghCWZK
+ RB21/6Dgn8zfgCO8e8GMRLSWpdrWpJJk6/hddtbsvHLeW/k7jHu9Uw9MapJEBZaRk/cC
+ fWZEMxqXFcsiM9XwHQooyANu0nai9OyvDlZG2P0ZXqTFks1UZZjU9oiWTxIFPQrygZmW
+ EClTZ6820I8UWJhYJloAae0UnGlQvQQj975vzqtyDbGMiuXo23WyR6imBKwetJnQMrYH
+ O0j5WfnKa2tXl8g4vngyjOBGyNyfb0jJD8fY56tic89k29L+dhBskMX54OOtY+dcyA5o
+ u6IQ==
+X-Gm-Message-State: AOJu0YwfO/BIZ+jyjamoi/pPS09EjeB38JHoD85jaAzZrCObyL51HTcy
+ YefUS4mbLRAFt9L+IyK80GB8rIPNnS1OBXZznAdu1sATSPeEnsf8v9SVQPolFQxyMjvQ7BhkIXn
+ 4I5geyW1veii4yMQW26HVmMxka/CdkL9mqWQuWaA0u0kGs5hOKAK5+sD6IQ4s
+X-Gm-Gg: ASbGncutN5nqoCjN1TxU3WX/UytnyrH1iYexAxZsoPx37Ujs58fg3yYph7X3UiSgulC
+ 4cWPrkDLwEbHPrSyvh8CgDL3+r06HaSp+xZ/cIaJu/9OHtsDWLN9ylG0becC/gx2CUjq8kN8U15
+ 1dQo2jJWdVAhxk1TjHJgP7V5DH0FwsEXUfc1ZREA+8r/39oCVD6V4wTbtgHlhrHSKsAbYQAZ/Yo
+ EpM/aCtQtfmC3kx2Z8CXxjA8TVNobG/5KUq9DwxUh+jA5ZGc7fo86Zqq9aGO4j0pAiQA5eN/G3S
+ YUZ1ktphj3UlOLBaJtqTB/7kwGGn1XtFqQ==
+X-Received: by 2002:a05:600c:444c:b0:439:477c:cf73 with SMTP id
+ 5b1f17b1804b1-43958176299mr38441195e9.11.1739365607273; 
+ Wed, 12 Feb 2025 05:06:47 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IFQQbDv9p4bvNxHd5xXSh5TdviRJ4RdhB9KrYrx3hdsXGfO96jICH/lRNdHVP3OyegVA+Y2dg==
+X-Received: by 2002:a05:600c:444c:b0:439:477c:cf73 with SMTP id
+ 5b1f17b1804b1-43958176299mr38440605e9.11.1739365606809; 
+ Wed, 12 Feb 2025 05:06:46 -0800 (PST)
 Received: from [192.168.0.7] (ip-109-42-48-37.web.vodafone.de. [109.42.48.37])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-38dc7711bbbsm14908076f8f.47.2025.02.12.05.04.31
+ ffacd0b85a97d-38dd1093bb2sm12600147f8f.40.2025.02.12.05.06.45
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 12 Feb 2025 05:04:31 -0800 (PST)
-Message-ID: <ba9f09d1-88fd-42d4-acb2-5e531762371c@redhat.com>
-Date: Wed, 12 Feb 2025 14:04:30 +0100
+ Wed, 12 Feb 2025 05:06:46 -0800 (PST)
+Message-ID: <0b9f811e-cfd7-4b03-ac01-7c247e08e330@redhat.com>
+Date: Wed, 12 Feb 2025 14:06:44 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v7 04/10] hw/timer/xilinx_timer: Make device endianness
+Subject: Re: [PATCH v7 05/10] hw/char/xilinx_uartlite: Make device endianness
  configurable
 To: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
  qemu-devel@nongnu.org
@@ -86,7 +86,7 @@ Cc: qemu-riscv@nongnu.org, qemu-arm@nongnu.org,
  Alistair Francis <alistair.francis@wdc.com>,
  =?UTF-8?Q?Daniel_P=2E_Berrang=C3=A9?= <berrange@redhat.com>
 References: <20250212123659.52764-1-philmd@linaro.org>
- <20250212123659.52764-5-philmd@linaro.org>
+ <20250212123659.52764-6-philmd@linaro.org>
 From: Thomas Huth <thuth@redhat.com>
 Autocrypt: addr=thuth@redhat.com; keydata=
  xsFNBFH7eUwBEACzyOXKU+5Pcs6wNpKzrlJwzRl3VGZt95VCdb+FgoU9g11m7FWcOafrVRwU
@@ -130,9 +130,9 @@ Autocrypt: addr=thuth@redhat.com; keydata=
  oiT+z+/E59qj/EKfyce3sbC9XLjXv3mHMrq1tKX4G7IJGnS989E/fg6crv6NHae9Ckm7+lSs
  IQu4bBP2GxiRQ+NV3iV/KU3ebMRzqIC//DCOxzQNFNJAKldPe/bKZMCxEqtVoRkuJtNdp/5a
  yXFZ6TfE1hGKrDBYAm4vrnZ4CXFSBDllL59cFFOJCkn4Xboj/aVxxJxF30bn
-In-Reply-To: <20250212123659.52764-5-philmd@linaro.org>
+In-Reply-To: <20250212123659.52764-6-philmd@linaro.org>
 X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: GmXBL-OUHKaDFuc6dUNIBI6RitjRQrTePQqOxKYcDUA_1739365473
+X-Mimecast-MFC-PROC-ID: Zfa5QIPqxqNvtBusRcF3zm-kWBrn1bmWxBgydGajLqk_1739365607
 X-Mimecast-Originator: redhat.com
 Content-Language: en-US
 Content-Type: text/plain; charset=UTF-8; format=flowed
@@ -167,34 +167,10 @@ On 12/02/2025 13.36, Philippe Mathieu-Daudé wrote:
 > of DEVICE_LITTLE_ENDIAN / DEVICE_BIG_ENDIAN.
 > Add the "little-endian" property to select the device
 > endianness, defaulting to little endian.
-> Set the proper endianness for each machine using the device.
-> 
-> Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
-> ---
->   hw/microblaze/petalogix_ml605_mmu.c      |  1 +
->   hw/microblaze/petalogix_s3adsp1800_mmu.c |  1 +
->   hw/ppc/virtex_ml507.c                    |  1 +
->   hw/riscv/microblaze-v-generic.c          |  2 ++
->   hw/timer/xilinx_timer.c                  | 43 +++++++++++++++++-------
->   5 files changed, 35 insertions(+), 13 deletions(-)
-> 
-> diff --git a/hw/microblaze/petalogix_ml605_mmu.c b/hw/microblaze/petalogix_ml605_mmu.c
-> index 55398cc67d1..490640e9428 100644
-> --- a/hw/microblaze/petalogix_ml605_mmu.c
-> +++ b/hw/microblaze/petalogix_ml605_mmu.c
-> @@ -127,6 +127,7 @@ petalogix_ml605_init(MachineState *machine)
->   
->       /* 2 timers at irq 2 @ 100 Mhz.  */
->       dev = qdev_new("xlnx.xps-timer");
-> +    qdev_prop_set_enum(dev, "endianness", ENDIAN_MODE_LITTLE);
->       qdev_prop_set_uint32(dev, "one-timer-only", 0);
->       qdev_prop_set_uint32(dev, "clock-frequency", 100 * 1000000);
->       sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
+> Set the proper endianness on the single machine using the
+> device.
 
-Same question as in the second patch: Do we still need to take care of 
-TARGET_BIG_ENDIAN here?
-
-Anyway,
+With the patch description fixed (as you mentioned in patch 02):
 Reviewed-by: Thomas Huth <thuth@redhat.com>
 
 
