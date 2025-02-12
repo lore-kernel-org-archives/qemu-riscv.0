@@ -4,64 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A1F2EC021A1
-	for <qemu-riscv@archiver.kernel.org>; Wed, 12 Feb 2025 11:27:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9C684C02198
+	for <qemu-riscv@archiver.kernel.org>; Wed, 12 Feb 2025 11:27:54 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tiArC-00067T-E0; Wed, 12 Feb 2025 06:24:42 -0500
+	id 1tiAse-0007gh-AK; Wed, 12 Feb 2025 06:26:13 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tiArA-00066V-Se
- for qemu-riscv@nongnu.org; Wed, 12 Feb 2025 06:24:40 -0500
-Received: from mail-wr1-x436.google.com ([2a00:1450:4864:20::436])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tiAs1-0006pf-V2
+ for qemu-riscv@nongnu.org; Wed, 12 Feb 2025 06:25:34 -0500
+Received: from mail-wr1-x431.google.com ([2a00:1450:4864:20::431])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tiAr6-0004XO-RV
- for qemu-riscv@nongnu.org; Wed, 12 Feb 2025 06:24:40 -0500
-Received: by mail-wr1-x436.google.com with SMTP id
- ffacd0b85a97d-38ddfee3ba9so2612622f8f.2
- for <qemu-riscv@nongnu.org>; Wed, 12 Feb 2025 03:24:36 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tiAre-0004px-U9
+ for qemu-riscv@nongnu.org; Wed, 12 Feb 2025 06:25:18 -0500
+Received: by mail-wr1-x431.google.com with SMTP id
+ ffacd0b85a97d-38dcac27bcbso443072f8f.0
+ for <qemu-riscv@nongnu.org>; Wed, 12 Feb 2025 03:25:09 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1739359475; x=1739964275; darn=nongnu.org;
+ d=linaro.org; s=google; t=1739359509; x=1739964309; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=5sBJFg/2U3gLaznSuaixmYZ3AuMYFa/wvF5v+/9TO7s=;
- b=UCuySHPHXCYpTq5su3ihQ9KJ+jcbi078VqspFqiK4IovfLttDyBmUO6OxFFBf7R0uq
- gg0v2ZXZVLg3FMm8TfE2yy4biPnPvtUffjx/T9m8SyAs7d7ygkGMOnE/lsv33Zpg9UwD
- vPM+Q5DDlSD6NENsL54che5x4GTeLeqQgXTViDKwt/Q0mI6cm9/nPS3hAA4EDisch167
- y0J107TKP3knTVn1EdeKfSbelMFyPaq/uY3jIfGWDVv1l0yHAdyoJQIr/kASTgUgU7Vw
- ZsCtCFDFnR9eEB9ruGi8Cw2WypXNwxElPBNCZxKNh5HmFiZyrLV1FwY19StAdZGKxhhP
- +Dnw==
+ bh=dDfJ2Ax294CnyEXRoPzMDNsGf/a2aySSWaKYSBHH7B0=;
+ b=VYEq8Bp4Aa5JUD+YcySSvPLf/3ZvkD72Og4oD7cz/oyFYk8XgsEPl+VO6iKT3NK2xX
+ W/tvQRXvTz20u88BUDQBJ21QGGlQijcpXvDAa11VpmnRQpBTO2hITXQNbevLCnSJyzQC
+ u0ELq6YwOfEQOmu1fo0Y1guvFS3SM4QlG7EeANJs3Hz7ZorBf1Er6IFt97nMBNUtE3qo
+ oG26VUZsKspWzMeLOJvAsftNKVFlqssQ7322mD1BghAC6bjxOOp2n3yT3xj6GSFibNtp
+ YZaP58rxdub/F97nABEuEEjPZ8CWEGP9uOWYWV7KCGmhUe+MCkCWcLM9D4h2Pg2sDw90
+ lVGQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1739359475; x=1739964275;
+ d=1e100.net; s=20230601; t=1739359509; x=1739964309;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=5sBJFg/2U3gLaznSuaixmYZ3AuMYFa/wvF5v+/9TO7s=;
- b=lmRuZYtjB7srk+nBnfMpJfBWuP/mendqrsM+xDHjo0oI9Vr6HfiHt/KApiBIgPqiUR
- ZwZx5GLK/tjt73Nw2qcYuvtqCLGbQoaTOfqwrxFZlv/FTZuvXIIZ+3K8zciH467CGiA7
- jxy1FuWzhUYS5a5LEhz8gW840u8pktEtfUV3q7KtcHlBHqXC1qNkDz0Eusadun64FYvn
- 8FDSf6MJ/UE2XHzfiKCSJmzCl+A70Ae9Ed05euVZokBxMzPF08cja7JAZewESF1hI1PF
- fFCn3o8Dgg/QjQ+c9mCpBKM1hJ94PuAQuj9WvN97hzjMyF9iONvLJbvzTGrWKlb79JLV
- 66Tg==
-X-Gm-Message-State: AOJu0YxMxtU4c1a0X7aCKPhEvtansk15ENJEFqptrlFmYJflWUvsjBev
- zQQCnIkCmJyyJfg6QHxcwbqGcSHolEmNZmbSEZY+Xxe16XHctLU77QKS8nCerPs+Vwc2z11cdCn
- QlgU=
-X-Gm-Gg: ASbGncvSXEMBpUUNXAIwWNWU39mEMVBTTOUVEWOp8w+hmzJ9/mHnq18ycsJAqjgej/s
- KFSXuCZuzaFV/UaYXXcHcyspu81NIW8CGO53Www6TuNji1dcQjcdIZmNBFRbXrSrhvS8+IuMkTY
- wtU7LDB0E0nkhqSpGAW5wJp4YFCxVY237yvRz2WD1L1UjUNsWta2t2fXTJneTKnl6AHUMe5xoXy
- PSb3EQexnunYEpqCTtWpSYfzL9UIXpu1lrC6Od719R2b/gp/VJUMf/LOFjMi/XfM4cgWqPcOV4D
- baJW5tZHLXvDHyQarlNpeklxNTvoEse66ksq6AjRTcMHr1pKATfp2MqXHzF2keqGHA==
-X-Google-Smtp-Source: AGHT+IEURfDFVJ/dO2Ysfdkjk5ZK5+eBFiptzfiwsTd3i0r/Wum23xpwmZ7z5LqDnPWav+q0CTmkaA==
-X-Received: by 2002:adf:f08c:0:b0:38d:dce7:86cd with SMTP id
- ffacd0b85a97d-38dea28f6d6mr1798830f8f.24.1739359475092; 
- Wed, 12 Feb 2025 03:24:35 -0800 (PST)
+ bh=dDfJ2Ax294CnyEXRoPzMDNsGf/a2aySSWaKYSBHH7B0=;
+ b=g5SFBeFKfpbbyroLx9+Dstors+QfOK3lZzF67/0QerW5hcVKXuBcmTajfgoB5hN4Jf
+ r53Lal72J7RIwkF4IC+DcthW5fhEpWmb9Vubl9qrSUm1jcla+KpVFu616eTmYpXQHkk2
+ JqBxOORh99BTyZ6QJ+iWphNsDJkx3vxtsMPp8sh9Gx6dbHFUVqgVHWwLS28Rk4SdFSas
+ 76OZSnDJx4lbT5mGZtksINCY1nIEctHacx/Rc3NFa3+ZOQRHovT6x/k9b+F7liQkko9/
+ Fz05xtRGSCaFm1Xas7tVQs6EsZrsPRaCO8n5UZXr7kjMoKv6qzb8w1e5Ytt2WKvs67Oj
+ HznA==
+X-Gm-Message-State: AOJu0YwpmcQA77t+81zoLMe1+H7Mlo+cje8JkgsO5XiM4CV4UN04vUt5
+ hmGH+koWMLA60tTs4XCS3e16k5+BpsT+5NfHjSk5JJWwzdCT2wHJ5cF4THtFrJ0=
+X-Gm-Gg: ASbGnctKMblFYq/agChqhI9aA7GbXeGzq0HRdY75VJTMr1bBA+EjO6Aoh4RobpRGjGX
+ b/KAqJmbT3w2tn7eykSclO8zSG5Ma39MG/6bcdohE2QHOYuz1YEjJleFE45TJ5mpBBIVFXiZb+i
+ /i9uJcEwMTBl+vWHIN+37YGlXHCx6eOOTHYQjtnZjVYHBM0aYnNYcW7XKOyzGf7FpH43vBw3rfY
+ duYMWlhtMD7OyFvCJo/GhcizX/rW7g9tjh9ljljXA03cToFt6YqgGh2LPJtkspAxqJlR6EO6wPy
+ ZcyG8tpTeg6uO6z4LdvzfGSOqT53CN917rMePAIyHXRQ/H4HOzJS1CPlMP1xgELk2g==
+X-Google-Smtp-Source: AGHT+IFohKL4pHFVBESBD0es7sHCOakPMgtCPiehVbmj5s2aTzVdKWG2DBOUdS2zvgUCiKyvz02ESw==
+X-Received: by 2002:a05:6000:178d:b0:38d:e363:494b with SMTP id
+ ffacd0b85a97d-38de439d6d6mr5888296f8f.8.1739359508651; 
+ Wed, 12 Feb 2025 03:25:08 -0800 (PST)
 Received: from localhost.localdomain (88-187-86-199.subs.proxad.net.
  [88.187.86.199]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-38dc5839877sm15541563f8f.3.2025.02.12.03.24.34
+ ffacd0b85a97d-38dd4342502sm11629832f8f.26.2025.02.12.03.25.07
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Wed, 12 Feb 2025 03:24:34 -0800 (PST)
+ Wed, 12 Feb 2025 03:25:08 -0800 (PST)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, qemu-ppc@nongnu.org,
@@ -72,18 +71,18 @@ Cc: qemu-riscv@nongnu.org, qemu-ppc@nongnu.org,
  qemu-arm@nongnu.org,
  =?UTF-8?q?Daniel=20P=2E=20Berrang=C3=A9?= <berrange@redhat.com>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-Subject: [PATCH v6 04/11] hw/timer/xilinx_timer: Make device endianness
- configurable
-Date: Wed, 12 Feb 2025 12:24:06 +0100
-Message-ID: <20250212112413.37553-5-philmd@linaro.org>
+Subject: [PATCH v6 11/11] tests/functional: Have microblaze tests inherit
+ common parent class
+Date: Wed, 12 Feb 2025 12:24:13 +0100
+Message-ID: <20250212112413.37553-12-philmd@linaro.org>
 X-Mailer: git-send-email 2.47.1
 In-Reply-To: <20250212112413.37553-1-philmd@linaro.org>
 References: <20250212112413.37553-1-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::436;
- envelope-from=philmd@linaro.org; helo=mail-wr1-x436.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::431;
+ envelope-from=philmd@linaro.org; helo=mail-wr1-x431.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -106,178 +105,110 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Replace the DEVICE_NATIVE_ENDIAN MemoryRegionOps by a pair
-of DEVICE_LITTLE_ENDIAN / DEVICE_BIG_ENDIAN.
-Add the "little-endian" property to select the device
-endianness, defaulting to little endian.
-Set the proper endianness for each machine using the device.
+Have the MicroblazeMachine class being common to both
+MicroblazeBigEndianMachine and MicroblazeLittleEndianMachine
+classes. Move the xmaton and ballerina tests to the parent class.
 
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+Reviewed-by: Thomas Huth <thuth@redhat.com>
+Message-Id: <20250206131052.30207-16-philmd@linaro.org>
 ---
- hw/microblaze/petalogix_ml605_mmu.c      |  1 +
- hw/microblaze/petalogix_s3adsp1800_mmu.c |  1 +
- hw/ppc/virtex_ml507.c                    |  1 +
- hw/riscv/microblaze-v-generic.c          |  2 ++
- hw/timer/xilinx_timer.c                  | 43 +++++++++++++++++-------
- 5 files changed, 35 insertions(+), 13 deletions(-)
+ .../functional/test_microblaze_s3adsp1800.py  | 24 +++++++++++++++
+ .../test_microblazeel_s3adsp1800.py           | 30 ++-----------------
+ 2 files changed, 27 insertions(+), 27 deletions(-)
 
-diff --git a/hw/microblaze/petalogix_ml605_mmu.c b/hw/microblaze/petalogix_ml605_mmu.c
-index 55398cc67d1..490640e9428 100644
---- a/hw/microblaze/petalogix_ml605_mmu.c
-+++ b/hw/microblaze/petalogix_ml605_mmu.c
-@@ -127,6 +127,7 @@ petalogix_ml605_init(MachineState *machine)
+diff --git a/tests/functional/test_microblaze_s3adsp1800.py b/tests/functional/test_microblaze_s3adsp1800.py
+index c4226f49cf3..650416e0c09 100755
+--- a/tests/functional/test_microblaze_s3adsp1800.py
++++ b/tests/functional/test_microblaze_s3adsp1800.py
+@@ -7,6 +7,7 @@
+ # This work is licensed under the terms of the GNU GPL, version 2 or
+ # later. See the COPYING file in the top-level directory.
  
-     /* 2 timers at irq 2 @ 100 Mhz.  */
-     dev = qdev_new("xlnx.xps-timer");
-+    qdev_prop_set_enum(dev, "endianness", ENDIAN_MODE_LITTLE);
-     qdev_prop_set_uint32(dev, "one-timer-only", 0);
-     qdev_prop_set_uint32(dev, "clock-frequency", 100 * 1000000);
-     sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
-diff --git a/hw/microblaze/petalogix_s3adsp1800_mmu.c b/hw/microblaze/petalogix_s3adsp1800_mmu.c
-index d419dc49a25..caaea222a8c 100644
---- a/hw/microblaze/petalogix_s3adsp1800_mmu.c
-+++ b/hw/microblaze/petalogix_s3adsp1800_mmu.c
-@@ -116,6 +116,7 @@ petalogix_s3adsp1800_init(MachineState *machine)
++from qemu_test import exec_command_and_wait_for_pattern
+ from qemu_test import QemuSystemTest, Asset
+ from qemu_test import wait_for_console_pattern
  
-     /* 2 timers at irq 2 @ 62 Mhz.  */
-     dev = qdev_new("xlnx.xps-timer");
-+    qdev_prop_set_enum(dev, "endianness", endianness);
-     qdev_prop_set_uint32(dev, "one-timer-only", 0);
-     qdev_prop_set_uint32(dev, "clock-frequency", 62 * 1000000);
-     sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
-diff --git a/hw/ppc/virtex_ml507.c b/hw/ppc/virtex_ml507.c
-index df8f9644829..a01354d991d 100644
---- a/hw/ppc/virtex_ml507.c
-+++ b/hw/ppc/virtex_ml507.c
-@@ -231,6 +231,7 @@ static void virtex_init(MachineState *machine)
+@@ -20,6 +21,11 @@ class MicroblazeMachine(QemuSystemTest):
+          'day17.tar.xz'),
+         '3ba7439dfbea7af4876662c97f8e1f0cdad9231fc166e4861d17042489270057')
  
-     /* 2 timers at irq 2 @ 62 Mhz.  */
-     dev = qdev_new("xlnx.xps-timer");
-+    qdev_prop_set_enum(dev, "endianness", ENDIAN_MODE_BIG);
-     qdev_prop_set_uint32(dev, "one-timer-only", 0);
-     qdev_prop_set_uint32(dev, "clock-frequency", 62 * 1000000);
-     sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
-diff --git a/hw/riscv/microblaze-v-generic.c b/hw/riscv/microblaze-v-generic.c
-index a21fdfbe6db..3c79f5733b2 100644
---- a/hw/riscv/microblaze-v-generic.c
-+++ b/hw/riscv/microblaze-v-generic.c
-@@ -104,6 +104,7 @@ static void mb_v_generic_init(MachineState *machine)
- 
-     /* 2 timers at irq 0 @ 100 Mhz.  */
-     dev = qdev_new("xlnx.xps-timer");
-+    qdev_prop_set_enum(dev, "endianness", ENDIAN_MODE_LITTLE);
-     qdev_prop_set_uint32(dev, "one-timer-only", 0);
-     qdev_prop_set_uint32(dev, "clock-frequency", 100000000);
-     sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
-@@ -112,6 +113,7 @@ static void mb_v_generic_init(MachineState *machine)
- 
-     /* 2 timers at irq 3 @ 100 Mhz.  */
-     dev = qdev_new("xlnx.xps-timer");
-+    qdev_prop_set_enum(dev, "endianness", ENDIAN_MODE_LITTLE);
-     qdev_prop_set_uint32(dev, "one-timer-only", 0);
-     qdev_prop_set_uint32(dev, "clock-frequency", 100000000);
-     sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
-diff --git a/hw/timer/xilinx_timer.c b/hw/timer/xilinx_timer.c
-index 6595cf5f517..8cd44fd6925 100644
---- a/hw/timer/xilinx_timer.c
-+++ b/hw/timer/xilinx_timer.c
-@@ -3,6 +3,9 @@
-  *
-  * Copyright (c) 2009 Edgar E. Iglesias.
-  *
-+ * DS573: https://docs.amd.com/v/u/en-US/xps_timer
-+ * LogiCORE IP XPS Timer/Counter (v1.02a)
-+ *
-  * Permission is hereby granted, free of charge, to any person obtaining a copy
-  * of this software and associated documentation files (the "Software"), to deal
-  * in the Software without restriction, including without limitation the rights
-@@ -23,10 +26,12 @@
-  */
- 
- #include "qemu/osdep.h"
-+#include "qapi/error.h"
- #include "hw/sysbus.h"
- #include "hw/irq.h"
- #include "hw/ptimer.h"
- #include "hw/qdev-properties.h"
-+#include "hw/qdev-properties-system.h"
- #include "qemu/log.h"
- #include "qemu/module.h"
- #include "qom/object.h"
-@@ -69,6 +74,7 @@ struct XpsTimerState
- {
-     SysBusDevice parent_obj;
- 
-+    EndianMode model_endianness;
-     MemoryRegion mmio;
-     qemu_irq irq;
-     uint8_t one_timer_only;
-@@ -189,18 +195,21 @@ timer_write(void *opaque, hwaddr addr,
-     timer_update_irq(t);
- }
- 
--static const MemoryRegionOps timer_ops = {
--    .read = timer_read,
--    .write = timer_write,
--    .endianness = DEVICE_NATIVE_ENDIAN,
--    .impl = {
--        .min_access_size = 4,
--        .max_access_size = 4,
-+static const MemoryRegionOps timer_ops[2] = {
-+    [0 ... 1] = {
-+        .read = timer_read,
-+        .write = timer_write,
-+        .impl = {
-+            .min_access_size = 4,
-+            .max_access_size = 4,
-+        },
-+        .valid = {
-+            .min_access_size = 4,
-+            .max_access_size = 4,
-+        },
-     },
--    .valid = {
--        .min_access_size = 4,
--        .max_access_size = 4
--    }
-+    [ENDIAN_MODE_BIG].endianness = DEVICE_BIG_ENDIAN,
-+    [ENDIAN_MODE_LITTLE].endianness = DEVICE_LITTLE_ENDIAN,
- };
- 
- static void timer_hit(void *opaque)
-@@ -220,6 +229,12 @@ static void xilinx_timer_realize(DeviceState *dev, Error **errp)
-     XpsTimerState *t = XILINX_TIMER(dev);
-     unsigned int i;
- 
-+    if (t->model_endianness == ENDIAN_MODE_UNSPECIFIED) {
-+        error_setg(errp, TYPE_XILINX_TIMER " property 'endianness'"
-+                         " must be set to 'big' or 'little'");
-+        return;
-+    }
++    ASSET_IMAGE_LE = Asset(
++        ('https://qemu-advcal.gitlab.io/qac-best-of-multiarch/download/'
++         'day05.tar.xz'),
++        'b9b3d43c5dd79db88ada495cc6e0d1f591153fe41355e925d791fbf44de50c22')
 +
-     /* Init all the ptimers.  */
-     t->timers = g_malloc0(sizeof t->timers[0] * num_timers(t));
-     for (i = 0; i < num_timers(t); i++) {
-@@ -233,8 +248,9 @@ static void xilinx_timer_realize(DeviceState *dev, Error **errp)
-         ptimer_transaction_commit(xt->ptimer);
-     }
+     def do_ballerina_be_test(self, machine):
+         self.set_machine(machine)
+         self.archive_extract(self.ASSET_IMAGE_BE)
+@@ -34,6 +40,24 @@ def do_ballerina_be_test(self, machine):
+         # message, that's why we don't test for a later string here. This
+         # needs some investigation by a microblaze wizard one day...
  
--    memory_region_init_io(&t->mmio, OBJECT(t), &timer_ops, t, "xlnx.xps-timer",
--                          R_MAX * 4 * num_timers(t));
-+    memory_region_init_io(&t->mmio, OBJECT(t),
-+                          &timer_ops[t->model_endianness], t,
-+                          "xlnx.xps-timer", R_MAX * 4 * num_timers(t));
-     sysbus_init_mmio(SYS_BUS_DEVICE(dev), &t->mmio);
- }
++    def do_xmaton_le_test(self, machine):
++        self.require_netdev('user')
++        self.set_machine(machine)
++        self.archive_extract(self.ASSET_IMAGE_LE)
++        self.vm.set_console()
++        self.vm.add_args('-kernel', self.scratch_file('day13', 'xmaton.bin'))
++        tftproot = self.scratch_file('day13')
++        self.vm.add_args('-nic', f'user,tftp={tftproot}')
++        self.vm.launch()
++        wait_for_console_pattern(self, 'QEMU Advent Calendar 2023')
++        wait_for_console_pattern(self, 'buildroot login:')
++        exec_command_and_wait_for_pattern(self, 'root', '#')
++        exec_command_and_wait_for_pattern(self,
++                'tftp -g -r xmaton.png 10.0.2.2 ; md5sum xmaton.png',
++                '821cd3cab8efd16ad6ee5acc3642a8ea')
++
++class MicroblazeBigEndianMachine(MicroblazeMachine):
++
+     def test_microblaze_s3adsp1800_legacy_be(self):
+         self.do_ballerina_be_test('petalogix-s3adsp1800')
  
-@@ -247,6 +263,7 @@ static void xilinx_timer_init(Object *obj)
- }
+diff --git a/tests/functional/test_microblazeel_s3adsp1800.py b/tests/functional/test_microblazeel_s3adsp1800.py
+index d50b98342d7..56645bd0bb2 100755
+--- a/tests/functional/test_microblazeel_s3adsp1800.py
++++ b/tests/functional/test_microblazeel_s3adsp1800.py
+@@ -7,35 +7,11 @@
+ # This work is licensed under the terms of the GNU GPL, version 2 or
+ # later. See the COPYING file in the top-level directory.
  
- static const Property xilinx_timer_properties[] = {
-+    DEFINE_PROP_ENDIAN_NODEFAULT("endianness", XpsTimerState, model_endianness),
-     DEFINE_PROP_UINT32("clock-frequency", XpsTimerState, freq_hz, 62 * 1000000),
-     DEFINE_PROP_UINT8("one-timer-only", XpsTimerState, one_timer_only, 0),
- };
+-from qemu_test import exec_command_and_wait_for_pattern
+-from qemu_test import QemuSystemTest, Asset
+-from qemu_test import wait_for_console_pattern
++from qemu_test import QemuSystemTest
+ 
++from test_microblaze_s3adsp1800 import MicroblazeMachine
+ 
+-class MicroblazeelMachine(QemuSystemTest):
+-
+-    timeout = 90
+-
+-    ASSET_IMAGE_LE = Asset(
+-        ('https://qemu-advcal.gitlab.io/qac-best-of-multiarch/download/'
+-         'day05.tar.xz'),
+-        'b9b3d43c5dd79db88ada495cc6e0d1f591153fe41355e925d791fbf44de50c22')
+-
+-    def do_xmaton_le_test(self, machine):
+-        self.require_netdev('user')
+-        self.set_machine(machine)
+-        self.archive_extract(self.ASSET_IMAGE_LE)
+-        self.vm.set_console()
+-        self.vm.add_args('-kernel', self.scratch_file('day13', 'xmaton.bin'))
+-        tftproot = self.scratch_file('day13')
+-        self.vm.add_args('-nic', f'user,tftp={tftproot}')
+-        self.vm.launch()
+-        wait_for_console_pattern(self, 'QEMU Advent Calendar 2023')
+-        wait_for_console_pattern(self, 'buildroot login:')
+-        exec_command_and_wait_for_pattern(self, 'root', '#')
+-        exec_command_and_wait_for_pattern(self,
+-                'tftp -g -r xmaton.png 10.0.2.2 ; md5sum xmaton.png',
+-                '821cd3cab8efd16ad6ee5acc3642a8ea')
++class MicroblazeLittleEndianMachine(MicroblazeMachine):
+ 
+     def test_microblaze_s3adsp1800_legacy_le(self):
+         self.do_xmaton_le_test('petalogix-s3adsp1800')
 -- 
 2.47.1
 
