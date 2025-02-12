@@ -4,93 +4,95 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C66C7C021A1
-	for <qemu-riscv@archiver.kernel.org>; Wed, 12 Feb 2025 11:56:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2CC31C021A1
+	for <qemu-riscv@archiver.kernel.org>; Wed, 12 Feb 2025 12:03:01 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tiBLe-0004l4-Mh; Wed, 12 Feb 2025 06:56:10 -0500
+	id 1tiBS9-00084M-GZ; Wed, 12 Feb 2025 07:02:53 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tiBLZ-0004jX-Tu
- for qemu-riscv@nongnu.org; Wed, 12 Feb 2025 06:56:05 -0500
-Received: from mail-wm1-x334.google.com ([2a00:1450:4864:20::334])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tiBS3-00083N-Hw
+ for qemu-riscv@nongnu.org; Wed, 12 Feb 2025 07:02:47 -0500
+Received: from mail-ed1-x534.google.com ([2a00:1450:4864:20::534])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tiBLV-00041b-0r
- for qemu-riscv@nongnu.org; Wed, 12 Feb 2025 06:56:05 -0500
-Received: by mail-wm1-x334.google.com with SMTP id
- 5b1f17b1804b1-4395b367329so3165095e9.3
- for <qemu-riscv@nongnu.org>; Wed, 12 Feb 2025 03:55:58 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tiBS0-0005Uq-Gu
+ for qemu-riscv@nongnu.org; Wed, 12 Feb 2025 07:02:47 -0500
+Received: by mail-ed1-x534.google.com with SMTP id
+ 4fb4d7f45d1cf-5de849a0b6cso5952385a12.2
+ for <qemu-riscv@nongnu.org>; Wed, 12 Feb 2025 04:02:40 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1739361356; x=1739966156; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=RxESNT7HCJ6Of8a1TZuAFzI73cFXynRqLXnqZ+nXQTI=;
- b=p1qsof48TAvTHgqg0jLQlIBqifgCnNks4h8N1afzlfclncAtwrL8rZmCSKz9DDMbHd
- W1KK8bDo7gKQmxFzd9EQ/8Z/GUNb9ktQBXZqOC/HT32eZP1ra0KtEvOWpmepWUH3tVKT
- s1f0jD/ci5FVE2c9cPbBjjFaW+vRaAxUcjC50n6HW/Hz4iOx3yIppH5VtLaV1F1WNRFc
- 1Rv0DKwvKTpkU35pSMHqegyy1aWIRHLcL8K1NIJdcd2eyEgg88nkVgZ4GNFf9jKEFUKU
- ToJTK/5IAKoQamjnT4c6OzOQTy8zTY/3DfWZxBNl8Ah9A4ulwEnQ4pjCgbVqgHf4X8nP
- U07w==
+ d=linaro.org; s=google; t=1739361758; x=1739966558; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:content-language:references
+ :cc:to:from:subject:user-agent:mime-version:date:message-id:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=Basu0NzGRbdjUqVR/+YNCnEJIE3+3Y+dcbfNVJalzX4=;
+ b=wgq0ikObQGzOURXDlfJtz0mPyMs7hKQbsdDKhPoS6l0v1Dwigk5Ao2G/ZuTNQKAHPq
+ C3knENWrG2HuXOLUv88H6DUcOlvlIE1kcwvAUgAB6mIYP5P37XTO4q8VrWx9F9GZRO1T
+ yh5sAqt8fYxLG1Fvscc/fRQ1biBNEyCECm/M0rm3DNXaPwmuxzavL3DVielUIo+RWlmG
+ P8lZd0dngx4eCBQwT89JqnLqy55/A3+AwgcEFku++PwpTJev0aZh0z2NMb/ai9yhO4TE
+ cHYgJYIfxiYxO0AekJROR2nCyJMvjk9R3t1ixa6JTT/UHgDckfotJR6Jjv9pfAucWn4V
+ KAbA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1739361356; x=1739966156;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
+ d=1e100.net; s=20230601; t=1739361758; x=1739966558;
+ h=content-transfer-encoding:in-reply-to:content-language:references
+ :cc:to:from:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=RxESNT7HCJ6Of8a1TZuAFzI73cFXynRqLXnqZ+nXQTI=;
- b=NnebtM5aqepmAL3x2zY1pbYgfEptdzHDTvdIueFawDWRU128jUMpQjuUWwP7ddaGKt
- FfEMv00QX6ua2asG2rZM6M1FOtrcicjylDkQQBoyefGdgcoWnCTPMQVu7NQotcNqOM7o
- rMBPx/3euD/XDLCGQ+xWeNVEDhXZkiE1LhAHaRg7Gz8k++1NUArsnksHKIqqQ7rRpHdd
- 4Hat+MsgCLZGtEahkLknz7YFZ2mxmUU9iGQC2OXAm71CxQ9q6TGbHHPiBz90ff9vzPJc
- TPrh7lKE9on/3VkIOsquOVxoIh0H2kK4T7C1XQT2tCXrcHHO4PVbZWmitdZ0Mzu68Rwm
- /OOg==
-X-Gm-Message-State: AOJu0Yyc99WITZQiQAMnl8M8DE5LYpFIWqf/60BwSgyCBtNK7pLmhFiB
- KynuGyy0NF3a4WQvBkF66MSvUiwqOiw2kNOJnPQ+kPi+5+XNtgnNGiMXo2hsLLY=
-X-Gm-Gg: ASbGncsbls+3rDoNSG+FZW1eiHYQ2qcLog7jwpFmIpa9+mnMYwki+/r1I5v28p5sDrP
- vfgFiAjLOJsTjpYDFDr3xbHYqfQi8tXi4d7k+61NGkNlwOrESIZBZLAMJY1y28VjaXL5cgvHlqz
- DoF47o+OwbgWx5BdAX2i774imgtIOsZWW8zgxQ4P67/+VxNIFLJq8+qO4vX6LbODWpfpMQUmsLZ
- iUPdSMJDgJrbpQw4xWWR+CWUy3fmGEDy9Yd6f1RzRjLOHrB+HuX/F2tZmsYFzY3+F0JN8Xf4Zp+
- uvjWs0JNzjts9uXcia5JqQ4/mV+XazRpdlJHIo5rYTA8Re4666Ti/6Zt25M=
-X-Google-Smtp-Source: AGHT+IHxdudSorSPRRDScUpFIyb3AMeyK3B37cnXrlkjMf+xda3NgGokyVodB4eWMiz2M7XX11YX3Q==
-X-Received: by 2002:a05:600c:1c97:b0:439:4b8c:1459 with SMTP id
- 5b1f17b1804b1-43958165f0cmr29794715e9.4.1739361356244; 
- Wed, 12 Feb 2025 03:55:56 -0800 (PST)
+ bh=Basu0NzGRbdjUqVR/+YNCnEJIE3+3Y+dcbfNVJalzX4=;
+ b=bB/4xz33UH/OEvkp5cWBYnWB+itL0Y3P7uHsnrhZwj/nNCNm4WJqPrYH8FAEVzjnr3
+ /P2UyltJtJOS311iKV71uw5Durp4atBw6yPPXiEUaPKUSl3qA1PEXF/NoMjDzfdPXi2C
+ BU3vn/nG0J/TH+4bM5T2TDbRBTYNtbfcR/QPzN/PhwiBaD/nnXbg+fkIgsszv5MYakgg
+ qrYd0TQ3Q9KjUZRMF2v0PFHY6Oa/3jCdUosqWfkbZSeM2E2CfYmtO/yAZjyQQY1ps2Qc
+ f1ic1vx181/9YXJJtVUUBK+yXDtg6Ug+BgJqmm/oIeP7ETMVJplCs0HDEwvSd29nJznV
+ aUlg==
+X-Gm-Message-State: AOJu0YzuX5zkwz6Dq5hmnUf8GGAy7QTinQ/z1DHj8ghkrg02+JLePeVv
+ 1zDpwB+Y4cYv4EITbyQNAwPi3VJqero/NGREC50XOu76+oilsP6INd4VbnsY8TjnbOq6sI/Nh26
+ 94As=
+X-Gm-Gg: ASbGncv71F7mSmDT4t7iBF13TsPJhEdW1sgE3gI/Dnhnw7xzBXvUMe8Is4speMNVfDD
+ EY9m+IMJbRpyrQJooAyXgUxVJNKYuuYJenYbUFQEGoGki6nr7joquIlSc0Lvuk8m9HSX5DyHPxR
+ XpZoZAFldv6noo4eIv+ajW+eOTWIgNeDD9FhJExyLLg9mjKWlEKxsqphuj694FkO0jhofrHWDwl
+ nEVcC9fv7zWbYJ5dO73+ez+7qAshXuHi1WhGUAsvR3Ywe2WWVgg21oRtzaGh5ZF8kb/2U54yRNA
+ 6Sr2X9H8gD66jm6HFgPE3InQgPj0u02/Xotxxlx7xK5DSLNDQfVj/N/h9vE=
+X-Google-Smtp-Source: AGHT+IGY959yXJUmTUlxZEAKdHlBBgnt69Gxl2UhLJZJDq2WiEDqwqCyM4EtVbB49LOr23yu/5LFEw==
+X-Received: by 2002:a05:600c:4e8d:b0:439:4a1f:cf8b with SMTP id
+ 5b1f17b1804b1-439580e73femr31401585e9.0.1739361739588; 
+ Wed, 12 Feb 2025 04:02:19 -0800 (PST)
 Received: from [192.168.69.198] (88-187-86-199.subs.proxad.net.
  [88.187.86.199]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4395a076496sm17418505e9.32.2025.02.12.03.55.55
+ ffacd0b85a97d-38dbdd7f039sm17595138f8f.59.2025.02.12.04.02.18
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 12 Feb 2025 03:55:55 -0800 (PST)
-Message-ID: <d190b43f-df23-4cc7-bf0a-a9337a4488ca@linaro.org>
-Date: Wed, 12 Feb 2025 12:55:54 +0100
+ Wed, 12 Feb 2025 04:02:18 -0800 (PST)
+Message-ID: <24377a63-0772-4dda-875d-2c4fddd1bbca@linaro.org>
+Date: Wed, 12 Feb 2025 13:02:18 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v6 11/11] tests/functional: Have microblaze tests inherit
- common parent class
-To: Thomas Huth <thuth@redhat.com>, qemu-devel@nongnu.org
+Subject: Re: [PATCH v6 01/11] hw/qdev-properties-system: Introduce EndianMode
+ QAPI enum
+From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+To: Thomas Huth <thuth@redhat.com>, qemu-devel@nongnu.org,
+ Markus Armbruster <armbru@redhat.com>
 Cc: qemu-riscv@nongnu.org, qemu-ppc@nongnu.org,
  "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
  Alistair Francis <alistair@alistair23.me>,
- Richard Henderson <richard.henderson@linaro.org>,
- Markus Armbruster <armbru@redhat.com>, qemu-arm@nongnu.org,
+ Richard Henderson <richard.henderson@linaro.org>, qemu-arm@nongnu.org,
  =?UTF-8?Q?Daniel_P=2E_Berrang=C3=A9?= <berrange@redhat.com>
 References: <20250212112413.37553-1-philmd@linaro.org>
- <20250212112413.37553-12-philmd@linaro.org>
- <c18f47eb-c308-4dfe-9e2f-5f33bf73010d@redhat.com>
+ <20250212112413.37553-2-philmd@linaro.org>
+ <cb828dd8-25f6-47c6-9ac7-cae5b0d0932e@redhat.com>
+ <50ba4e4b-4124-46bb-bb84-4758ce9c5e66@linaro.org>
 Content-Language: en-US
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-In-Reply-To: <c18f47eb-c308-4dfe-9e2f-5f33bf73010d@redhat.com>
+In-Reply-To: <50ba4e4b-4124-46bb-bb84-4758ce9c5e66@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::334;
- envelope-from=philmd@linaro.org; helo=mail-wm1-x334.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::534;
+ envelope-from=philmd@linaro.org; helo=mail-ed1-x534.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -106,74 +108,49 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 12/2/25 12:46, Thomas Huth wrote:
-> On 12/02/2025 12.24, Philippe Mathieu-Daudé wrote:
->> Have the MicroblazeMachine class being common to both
->> MicroblazeBigEndianMachine and MicroblazeLittleEndianMachine
->> classes. Move the xmaton and ballerina tests to the parent class.
+On 12/2/25 12:43, Philippe Mathieu-Daudé wrote:
+> On 12/2/25 12:37, Thomas Huth wrote:
+>> On 12/02/2025 12.24, Philippe Mathieu-Daudé wrote:
+>>> Introduce the EndianMode type and the DEFINE_PROP_ENDIAN() macros.
+>>> Endianness can be BIG, LITTLE or unspecified (default).
+>>>
+>>> Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+>>> ---
+>>>   qapi/common.json                    | 16 ++++++++++++++++
+>>>   include/hw/qdev-properties-system.h |  7 +++++++
+>>>   hw/core/qdev-properties-system.c    | 11 +++++++++++
+>>>   3 files changed, 34 insertions(+)
+>>>
+>>> diff --git a/qapi/common.json b/qapi/common.json
+>>> index 6ffc7a37890..217feaaf683 100644
+>>> --- a/qapi/common.json
+>>> +++ b/qapi/common.json
+>>> @@ -212,3 +212,19 @@
+>>>   ##
+>>>   { 'struct': 'HumanReadableText',
+>>>     'data': { 'human-readable-text': 'str' } }
+>>> +
+>>> +##
+>>> +# @EndianMode:
+>>> +#
+>>> +# An enumeration of three options: little, big, and unspecified
+>>> +#
+>>> +# @little: Little endianness
+>>> +#
+>>> +# @big: Big endianness
+>>> +#
+>>> +# @unspecified: Endianness not specified
+>>> +#
+>>> +# Since: 10.0
+>>> +##
+>>> +{ 'enum': 'EndianMode',
+>>> +  'data': [ 'little', 'big', 'unspecified' ] }
 >>
->> Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
->> Reviewed-by: Thomas Huth <thuth@redhat.com>
->> Message-Id: <20250206131052.30207-16-philmd@linaro.org>
->> ---
->>   .../functional/test_microblaze_s3adsp1800.py  | 24 +++++++++++++++
->>   .../test_microblazeel_s3adsp1800.py           | 30 ++-----------------
->>   2 files changed, 27 insertions(+), 27 deletions(-)
->>
->> diff --git a/tests/functional/test_microblaze_s3adsp1800.py b/tests/ 
->> functional/test_microblaze_s3adsp1800.py
->> index c4226f49cf3..650416e0c09 100755
->> --- a/tests/functional/test_microblaze_s3adsp1800.py
->> +++ b/tests/functional/test_microblaze_s3adsp1800.py
->> @@ -7,6 +7,7 @@
->>   # This work is licensed under the terms of the GNU GPL, version 2 or
->>   # later. See the COPYING file in the top-level directory.
->> +from qemu_test import exec_command_and_wait_for_pattern
->>   from qemu_test import QemuSystemTest, Asset
->>   from qemu_test import wait_for_console_pattern
->> @@ -20,6 +21,11 @@ class MicroblazeMachine(QemuSystemTest):
->>            'day17.tar.xz'),
->>           
->> '3ba7439dfbea7af4876662c97f8e1f0cdad9231fc166e4861d17042489270057')
->> +    ASSET_IMAGE_LE = Asset(
->> +        ('https://qemu-advcal.gitlab.io/qac-best-of-multiarch/download/'
->> +         'day05.tar.xz'),
->> +        
->> 'b9b3d43c5dd79db88ada495cc6e0d1f591153fe41355e925d791fbf44de50c22')
->> +
->>       def do_ballerina_be_test(self, machine):
->>           self.set_machine(machine)
->>           self.archive_extract(self.ASSET_IMAGE_BE)
->> @@ -34,6 +40,24 @@ def do_ballerina_be_test(self, machine):
->>           # message, that's why we don't test for a later string here. 
->> This
->>           # needs some investigation by a microblaze wizard one day...
->> +    def do_xmaton_le_test(self, machine):
->> +        self.require_netdev('user')
->> +        self.set_machine(machine)
->> +        self.archive_extract(self.ASSET_IMAGE_LE)
->> +        self.vm.set_console()
->> +        self.vm.add_args('-kernel', self.scratch_file('day13', 
->> 'xmaton.bin'))
->> +        tftproot = self.scratch_file('day13')
->> +        self.vm.add_args('-nic', f'user,tftp={tftproot}')
->> +        self.vm.launch()
->> +        wait_for_console_pattern(self, 'QEMU Advent Calendar 2023')
->> +        wait_for_console_pattern(self, 'buildroot login:')
->> +        exec_command_and_wait_for_pattern(self, 'root', '#')
->> +        exec_command_and_wait_for_pattern(self,
->> +                'tftp -g -r xmaton.png 10.0.2.2 ; md5sum xmaton.png',
->> +                '821cd3cab8efd16ad6ee5acc3642a8ea')
->> +
->> +class MicroblazeBigEndianMachine(MicroblazeMachine):
-> 
-> Add this here 'til the problem with the precaching is fixed:
-> 
->      ASSET_IMAGE_BE = MicroblazeMachine.ASSET_IMAGE_BE
-> 
-> ?
+>> Should 'unspecified' come first? ... so that it gets the value 0, i.e. 
+>> when someone forgets to properly initialize a related variable, the 
+>> chances are higher that it ends up as "unspecified" than as "little" ?
 
-Actually the cache works, I mis-interpreted the network issue.
+BTW I'm not sure QAPI guaranty enums are following an order
+(at least, as in C, I wouldn't rely on that assumption).
 
-I'll update Daniel on the other thread.
 
