@@ -4,149 +4,98 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CE119C021A0
-	for <qemu-riscv@archiver.kernel.org>; Wed, 12 Feb 2025 13:10:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B8C8AC02198
+	for <qemu-riscv@archiver.kernel.org>; Wed, 12 Feb 2025 13:53:43 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tiCVO-0002Sc-7F; Wed, 12 Feb 2025 08:10:18 -0500
+	id 1tiDAv-00027s-Gx; Wed, 12 Feb 2025 08:53:13 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1tiCVK-0002PV-09
- for qemu-riscv@nongnu.org; Wed, 12 Feb 2025 08:10:14 -0500
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1tiCVH-00015o-M4
- for qemu-riscv@nongnu.org; Wed, 12 Feb 2025 08:10:13 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1739365810;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
- bh=Yd2eGfK+Lxdw9ddCog4geY1dPZFxFIy/5XYrJKGx/c0=;
- b=GjD3dJLOKEeVjyswR5mCzMx1w14SnLRk0NObMhNAk7b/JbrbosbSE9+xGL4BomJuwjvFPy
- xWVo+MbTqb9DMkCCmPCjGC5AbAY6KKMg4hqOO3NsxIk0dzz5TeeY6OXU6tN2cHlmeSiu3K
- iNLERwCyjqO17Qi1z0fljM9u0VqpCms=
-Received: from mail-wr1-f70.google.com (mail-wr1-f70.google.com
- [209.85.221.70]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-47-kkDyCEZbPfCFBN0QZc3m0Q-1; Wed, 12 Feb 2025 08:10:08 -0500
-X-MC-Unique: kkDyCEZbPfCFBN0QZc3m0Q-1
-X-Mimecast-MFC-AGG-ID: kkDyCEZbPfCFBN0QZc3m0Q_1739365808
-Received: by mail-wr1-f70.google.com with SMTP id
- ffacd0b85a97d-38de1e83c97so1241713f8f.1
- for <qemu-riscv@nongnu.org>; Wed, 12 Feb 2025 05:10:08 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tiDAp-0001z5-BY
+ for qemu-riscv@nongnu.org; Wed, 12 Feb 2025 08:53:10 -0500
+Received: from mail-wr1-x430.google.com ([2a00:1450:4864:20::430])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tiDAm-0004UB-Eh
+ for qemu-riscv@nongnu.org; Wed, 12 Feb 2025 08:53:06 -0500
+Received: by mail-wr1-x430.google.com with SMTP id
+ ffacd0b85a97d-38dd935a267so3114635f8f.1
+ for <qemu-riscv@nongnu.org>; Wed, 12 Feb 2025 05:53:03 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1739368382; x=1739973182; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=zfbyxcqWj/UiN856rWG2h1KLNYBYxW0dhw/bjjl2hE0=;
+ b=aYMeakJWs/OmTBwXGYTQIOS3fnmd2DDTL9fXfNxZpZTHJ3d5qLkv5REWRdHsf14iOV
+ p6KvwAeuyCyHzBfauGVUdwSDnAPpYzAl5xGtmxj/B4lpeVoajb5TdwYzE2ZEHgUeFH75
+ K2D2HKWl5V2CKqNNsH/FBVBeY/ZXfedFqD7rllAWQGejDGtVi4Q4HdkT4qmLfCnBdsYD
+ ocg3iS1zNlqkRqWVJh0xGgMwwPfRakFKDSX//mNtwPqUDrujVHCBg5x5poOpEpRV1zsa
+ dPG/iqtLVwT03vQ1vb65gLpCQbDJ01U+SGK3iWcwOix8c9+FNgSZKoiTjN2wvKjcT/rg
+ aAIA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1739365808; x=1739970608;
- h=content-transfer-encoding:in-reply-to:autocrypt:content-language
- :from:references:cc:to:subject:user-agent:mime-version:date
- :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=Yd2eGfK+Lxdw9ddCog4geY1dPZFxFIy/5XYrJKGx/c0=;
- b=T7LAltX/cJU6SB3FkQvbta/OSvaC/h1xnFJGwqCE3YCTIr6GnoKOGXWC/er+1ydieu
- ovY5lksHa1pU8hD5EllcdWB2s65FIVnXtsvdBMs9vj32v2f6s1AEJYf5wgmcx8WGtXw2
- 9Go6zy8KqCbdlLYNs6vglNudjcAGWYofA/X7ieF/uvENyy4v8PNZqGjO6VbZ/VnWd7tz
- Z8iZQn5HFuj/FAbx3UOBK2a/QT3+E88bojerpuIr12ElfWC+zoR2O7LeTcmmpXiaKCWB
- rQWQLeej0PhI2yyy5382smRUWer8I2S/p0hAsyJElU58tI5QYL/1DFNvT6qa5oHQ5MOE
- 5igA==
-X-Gm-Message-State: AOJu0Yw9K1MVy8uBs1pPiLP6DGD4/ssN1mpPJq2eRT1RHXLdTXW0MInQ
- Hpn8wgoGS3MMk7XYGTmTiLVSLpB6cnhjR8sRu2Ce/KZ2ZxSv2khECJHFOql0pxNS063oSoXhDwo
- T24XWG1Ln/LBr7Hc2qD/A75sTYOQCQpM0T5zBofjtZ29OSdQqPDuT
-X-Gm-Gg: ASbGncs7ztDTgAIpZF39YTJd437P+TOupivcTXKVxtziq930BPlOJFEHNcQJunV0/WI
- gg1QmUkXyQuhXC4p3OWH2jU5/vugQUu6rLlrxMoWiwuWIYtL6dUsl6tuoyRf/KXqJR0MhmXheQD
- b1iTU+DFGhrcMkYDQfpBZ/VUeNA+zidFjXvNbZnsjnkXvB6zgKrvr2t0k/162S54xeWg8UzdgzS
- 3udDlYLrdby74Gi+M9D1R5AgiXLuIGjqu/CrdCVIlj1OBMRevoWsMoEnkWfZ4PwPMwgxc98mn97
- HZAOs5ck0A858z1Nz6Itc4Nt36/Fxt6Pxg==
-X-Received: by 2002:adf:e60e:0:b0:38b:f4dc:4483 with SMTP id
- ffacd0b85a97d-38dea28c1e0mr2082972f8f.29.1739365807670; 
- Wed, 12 Feb 2025 05:10:07 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IHUhjykIe8Dj0AG0kzS38fycGmgxgX4RSUWn6cZ6KI0qM6FYo9Nq2xMNYAz+umUqbvfetjw1w==
-X-Received: by 2002:adf:e60e:0:b0:38b:f4dc:4483 with SMTP id
- ffacd0b85a97d-38dea28c1e0mr2082943f8f.29.1739365807308; 
- Wed, 12 Feb 2025 05:10:07 -0800 (PST)
-Received: from [192.168.0.7] (ip-109-42-48-37.web.vodafone.de. [109.42.48.37])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-38dde7d3f8asm8072300f8f.21.2025.02.12.05.10.06
+ d=1e100.net; s=20230601; t=1739368382; x=1739973182;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=zfbyxcqWj/UiN856rWG2h1KLNYBYxW0dhw/bjjl2hE0=;
+ b=IBJSEjU5RWk8GgIvCABmusC1FWAyQv0ghDdejGe1dT7328x26ltTByTDMKRG69dnHG
+ JEv8B1TyOVJR9j5OUUdzmw4Qv7mtzpN57Tm+yZCmb4xN3Fj8IWpZoGc+iNTx3yUVsDuv
+ Xp3T6zlXMJZoj1DPlMQBDAYqh7ptL18b/R8DlYO8h79McuTMSPpxMIsHhsx+yJPAHdzB
+ 8FfHcRaKYMSbZ64YC4EDRPWTmJLjwgJ8LhhsN9hUVJ4Ev295BjrWc1bPkkJkF+cL1uua
+ tFj30UKAUDil11Nvx0X5z21RklncBl4v8J75Td/JhyDFmGO/5qdOXWB9DAeGRL1BwoLX
+ aQaw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVfz9qFP7r98yYPD39z6n8o4+Kq+acH4S51BMihrv0ZBcLY65o2+SLUeFMoamh226/cOsBaoMFflp4k@nongnu.org
+X-Gm-Message-State: AOJu0Yzro44SYcoQXN3tuGl6gThpa03o5JY0+S6YKupvdrc5MXYjIM2k
+ Xj+dgcil2A6ifec/LoFlVr+7gZZ1PuLKaR3TsaEP7+vn18kwbE8se0fG+2CJd08=
+X-Gm-Gg: ASbGncuYXb1yitwM5EaPaL3jIJCGQiCH1GNazZWNZRIKC4RRC5S3pf6laTYNpXsIF05
+ j1rNOqWBEmGod56/+vPitbsNjlzuRb6fn1Jx8/LMQyoh1sU/igwCIT8UVs8e9XOgXIKaNHlxgnu
+ ww6j/pOatg2ZWtC4/41a6F9Ec92jXcADyGVrom9dKVfF3arWu55hTS7KskNzWyh1IffpGFRuO1o
+ 6R9fpOLQ03nIf1udGyXqXz/zGeUvBFz+1dw4lswC/CvVt5KqNYEcR9cWf9QFufqKBPER0fnPRND
+ HOHstHupQmnjLnGaZxN3+bIB2o4S4UASbdOWvs/Z4HNJc0Xum617R66Jgrc=
+X-Google-Smtp-Source: AGHT+IG/lfKP5G5CHY8c8pWMzE2yIWajKjW/XutuPwpU8TFbNmxnOtW2rm8Qjh6SBqJv2JE67Z8zcg==
+X-Received: by 2002:a05:6000:bd2:b0:38d:dc0d:8f4c with SMTP id
+ ffacd0b85a97d-38dea270ec9mr2169095f8f.20.1739368382142; 
+ Wed, 12 Feb 2025 05:53:02 -0800 (PST)
+Received: from [192.168.69.198] (88-187-86-199.subs.proxad.net.
+ [88.187.86.199]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-38dc33939f3sm16776390f8f.17.2025.02.12.05.53.00
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 12 Feb 2025 05:10:06 -0800 (PST)
-Message-ID: <3502836e-ef25-444e-92ba-a131d90d24e0@redhat.com>
-Date: Wed, 12 Feb 2025 14:10:05 +0100
+ Wed, 12 Feb 2025 05:53:01 -0800 (PST)
+Message-ID: <6e707c7f-b94c-47ef-83ab-795605e27963@linaro.org>
+Date: Wed, 12 Feb 2025 14:53:00 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v7 06/10] hw/ssi/xilinx_spi: Make device endianness
- configurable
-To: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, qemu-arm@nongnu.org,
- Richard Henderson <richard.henderson@linaro.org>, qemu-ppc@nongnu.org,
- Sai Pavan Boddu <sai.pavan.boddu@amd.com>,
- Markus Armbruster <armbru@redhat.com>,
+Subject: Re: [PATCH v6 01/11] hw/qdev-properties-system: Introduce EndianMode
+ QAPI enum
+To: BALATON Zoltan <balaton@eik.bme.hu>
+Cc: Thomas Huth <thuth@redhat.com>, qemu-devel@nongnu.org,
+ qemu-riscv@nongnu.org, qemu-ppc@nongnu.org,
  "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
- Alistair Francis <alistair.francis@wdc.com>,
+ Alistair Francis <alistair@alistair23.me>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Markus Armbruster <armbru@redhat.com>, qemu-arm@nongnu.org,
  =?UTF-8?Q?Daniel_P=2E_Berrang=C3=A9?= <berrange@redhat.com>
-References: <20250212123659.52764-1-philmd@linaro.org>
- <20250212123659.52764-7-philmd@linaro.org>
-From: Thomas Huth <thuth@redhat.com>
-Autocrypt: addr=thuth@redhat.com; keydata=
- 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
-In-Reply-To: <20250212123659.52764-7-philmd@linaro.org>
-X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: TUbPsHo4uwTgD5VziwLbnylWqDX8TKQ_I4dcLhF13cI_1739365808
-X-Mimecast-Originator: redhat.com
+References: <20250212112413.37553-1-philmd@linaro.org>
+ <20250212112413.37553-2-philmd@linaro.org>
+ <cb828dd8-25f6-47c6-9ac7-cae5b0d0932e@redhat.com>
+ <50ba4e4b-4124-46bb-bb84-4758ce9c5e66@linaro.org>
+ <3b3baed4-0d79-3a28-40cd-e1835e078863@eik.bme.hu>
 Content-Language: en-US
+From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+In-Reply-To: <3b3baed4-0d79-3a28-40cd-e1835e078863@eik.bme.hu>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=170.10.129.124; envelope-from=thuth@redhat.com;
- helo=us-smtp-delivery-124.mimecast.com
-X-Spam_score_int: -35
-X-Spam_score: -3.6
-X-Spam_bar: ---
-X-Spam_report: (-3.6 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-1.495,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H5=0.001, RCVD_IN_MSPIKE_WL=0.001,
- RCVD_IN_VALIDITY_CERTIFIED_BLOCKED=0.001, RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+Received-SPF: pass client-ip=2a00:1450:4864:20::430;
+ envelope-from=philmd@linaro.org; helo=mail-wr1-x430.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -162,36 +111,65 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 12/02/2025 13.36, Philippe Mathieu-Daudé wrote:
-> Replace the DEVICE_NATIVE_ENDIAN MemoryRegionOps by a pair
-> of DEVICE_LITTLE_ENDIAN / DEVICE_BIG_ENDIAN.
-> Add the "little-endian" property to select the device
-> endianness, defaulting to little endian.
-> Set the proper endianness on the single machine using the
-> device.
+On 12/2/25 13:56, BALATON Zoltan wrote:
+> On Wed, 12 Feb 2025, Philippe Mathieu-Daudé wrote:
+>> On 12/2/25 12:37, Thomas Huth wrote:
+>>> On 12/02/2025 12.24, Philippe Mathieu-Daudé wrote:
+>>>> Introduce the EndianMode type and the DEFINE_PROP_ENDIAN() macros.
+>>>> Endianness can be BIG, LITTLE or unspecified (default).
+>>>>
+>>>> Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+>>>> ---
+>>>>   qapi/common.json                    | 16 ++++++++++++++++
+>>>>   include/hw/qdev-properties-system.h |  7 +++++++
+>>>>   hw/core/qdev-properties-system.c    | 11 +++++++++++
+>>>>   3 files changed, 34 insertions(+)
+>>>>
+>>>> diff --git a/qapi/common.json b/qapi/common.json
+>>>> index 6ffc7a37890..217feaaf683 100644
+>>>> --- a/qapi/common.json
+>>>> +++ b/qapi/common.json
+>>>> @@ -212,3 +212,19 @@
+>>>>   ##
+>>>>   { 'struct': 'HumanReadableText',
+>>>>     'data': { 'human-readable-text': 'str' } }
+>>>> +
+>>>> +##
+>>>> +# @EndianMode:
+>>>> +#
+>>>> +# An enumeration of three options: little, big, and unspecified
+>>>> +#
+>>>> +# @little: Little endianness
+>>>> +#
+>>>> +# @big: Big endianness
+>>>> +#
+>>>> +# @unspecified: Endianness not specified
+>>>> +#
+>>>> +# Since: 10.0
+>>>> +##
+>>>> +{ 'enum': 'EndianMode',
+>>>> +  'data': [ 'little', 'big', 'unspecified' ] }
+>>>
+>>> Should 'unspecified' come first? ... so that it gets the value 0, 
+>>> i.e. when someone forgets to properly initialize a related variable, 
+>>> the chances are higher that it ends up as "unspecified" than as 
+>>> "little" ?
+>>
+>> Hmm but then in this series the dual-endianness regions are defined as:
+>>
+>> +static const MemoryRegionOps pic_ops[2] = {
+>> +    [0 ... 1] = {
 > 
-> Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
-> ---
->   hw/microblaze/petalogix_ml605_mmu.c |  1 +
->   hw/ssi/xilinx_spi.c                 | 32 +++++++++++++++++++++--------
->   2 files changed, 24 insertions(+), 9 deletions(-)
+> This is already confusing as you'd have to know that 0 and 1 here means 
+> ENDIAN_MODE_LITTLE and ENDIAN_MODE_BIG (using those constants here as 
+> well might be clearer). It's easy to miss what this does so maybe 
+> repeating the definitions for each case would be longer but less 
+> confusing and then it does not matter what the values are.
 > 
-> diff --git a/hw/microblaze/petalogix_ml605_mmu.c b/hw/microblaze/petalogix_ml605_mmu.c
-> index 490640e9428..b34edf13796 100644
-> --- a/hw/microblaze/petalogix_ml605_mmu.c
-> +++ b/hw/microblaze/petalogix_ml605_mmu.c
-> @@ -175,6 +175,7 @@ petalogix_ml605_init(MachineState *machine)
->           SSIBus *spi;
->   
->           dev = qdev_new("xlnx.xps-spi");
-> +        qdev_prop_set_enum(dev, "endianness", ENDIAN_MODE_LITTLE);
->           qdev_prop_set_uint8(dev, "num-ss-bits", NUM_SPI_FLASHES);
->           busdev = SYS_BUS_DEVICE(dev);
->           sysbus_realize_and_unref(busdev, &error_fatal);
+> Or what uses the ops.endianness now should look at the property 
+> introduced by this patch to avoid having to propagate it like below and 
+> drop the ops.endianness? Or it should move to the memory region and set 
+> when the ops are assigned?
 
-TARGET_BIG_ENDIAN required again?
-
-Anyway,
-Reviewed-by: Thomas Huth <thuth@redhat.com>
-
+I'm not understanding well what you ask, but maybe the answer is in v7 :)
 
