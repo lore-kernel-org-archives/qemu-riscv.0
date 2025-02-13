@@ -4,160 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 14B83C0219D
-	for <qemu-riscv@archiver.kernel.org>; Thu, 13 Feb 2025 14:34:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 159AAC0219D
+	for <qemu-riscv@archiver.kernel.org>; Thu, 13 Feb 2025 14:47:26 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tiaHr-0002ia-6Z; Thu, 13 Feb 2025 09:33:55 -0500
+	id 1tiaUd-0001Ff-VK; Thu, 13 Feb 2025 09:47:08 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1tiaHn-0002cx-Ly
- for qemu-riscv@nongnu.org; Thu, 13 Feb 2025 09:33:51 -0500
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1tiaHl-00081N-SC
- for qemu-riscv@nongnu.org; Thu, 13 Feb 2025 09:33:51 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1739457228;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
- bh=09LtHCy73cQW8++wX4PQphkMIVvm64+g9fGBTyLPkDE=;
- b=Xjmddc8Vz9zQoPpznEyCzkVjxM6tNNDEVcyCBm+/4udKRCS8VAiNy5NAif+YBd2q67I8eZ
- LT8Et8DEwhpdbEgupvYLzXLR+Ub6KcP1RFb58N56BlqQJ0+xsyyYYZ/6Sj+x+EpJcm/WYG
- ZK0ErBVOwJviToXmd9pHAYq1Vm0Zj44=
-Received: from mail-wr1-f70.google.com (mail-wr1-f70.google.com
- [209.85.221.70]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-441-i12Lz7ZLPp-NBGWLKNaRuQ-1; Thu, 13 Feb 2025 09:33:47 -0500
-X-MC-Unique: i12Lz7ZLPp-NBGWLKNaRuQ-1
-X-Mimecast-MFC-AGG-ID: i12Lz7ZLPp-NBGWLKNaRuQ
-Received: by mail-wr1-f70.google.com with SMTP id
- ffacd0b85a97d-38dc6aad9f8so1035676f8f.1
- for <qemu-riscv@nongnu.org>; Thu, 13 Feb 2025 06:33:47 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tiaUI-0001DH-OF
+ for qemu-riscv@nongnu.org; Thu, 13 Feb 2025 09:46:46 -0500
+Received: from mail-wm1-x336.google.com ([2a00:1450:4864:20::336])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tiaUG-0002Dp-3n
+ for qemu-riscv@nongnu.org; Thu, 13 Feb 2025 09:46:46 -0500
+Received: by mail-wm1-x336.google.com with SMTP id
+ 5b1f17b1804b1-4394345e4d5so7214695e9.0
+ for <qemu-riscv@nongnu.org>; Thu, 13 Feb 2025 06:46:43 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1739458002; x=1740062802; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=bHTGtPq57PXv4pUPdrR5UDSsO8SFpPQJk2kZVsswnOo=;
+ b=BXGKJmdZ/sWYjN4xt/BL7VSAV5APwaQmKMfeiA3gmnv3IfldIzN+xrR8vB9sj6sR30
+ hucHcvbns1Yx/Ho2XN2OZpElMZKNjTgmmgqrv+7Y9MTghv7+I+4rIdWOTL/eLEGTCBWE
+ 7OcDxT0Snud3PxZwgvBbOfzd5CTMv5xwz/sXHo/kHwnx34uCBlVGD0VPTQvAWagJE3Pl
+ 2GCfWVu90VfUWwS054COOs5SJgtyQ8u/6OmxyNaGnkSA/hGL63bmTTVMPHB5K71dcmmN
+ KiA73rQCaHRjlNBPb5wJlEGbr7tHICxoHPlMbGv/ovEIdJCHLL1FLCfFRKdc7QDkstIG
+ aoKw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1739457227; x=1740062027;
- h=content-transfer-encoding:in-reply-to:autocrypt:content-language
- :from:references:cc:to:subject:user-agent:mime-version:date
- :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=09LtHCy73cQW8++wX4PQphkMIVvm64+g9fGBTyLPkDE=;
- b=Cr5xV8OVrAo1FLmazkmgLcPyOZbhQrMMVtP5FwGaLHGJtLeg/gOmeNuIV3XFh/sKcc
- UChp7oTwh8CHLgF0BQruYRsOFpfcoZytEhPbVznfctn/UHC+9nEivuus9UL6hgoQVUEg
- 86gKzqIXYr7O5Q4X8jo2cv1q9G2UNjZfsdfUWhcCsLPJfTPzN0QzDSs/i/X950eQihp+
- YX78LBKJE3kJq9QRQhOv4IaUORcL0jAPc9IubBFQSt2ar7kfbpFF+SO7CbJAVks4JoLp
- I4LymWkii8vAyo7Vxv2vtNFDOSWuMogkRCF3nJmWyG5iUD+jlx3bBN6FRye0Cuasg4Y2
- zbXw==
+ d=1e100.net; s=20230601; t=1739458002; x=1740062802;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=bHTGtPq57PXv4pUPdrR5UDSsO8SFpPQJk2kZVsswnOo=;
+ b=H2CnSbbaBSl3StEfjy5s/uCdySYKGbm9wuktI/8dO/H+3RA7oU8GzGtWXUx6s+D8YZ
+ DgAlJkUseFPgDDgCBoGXwbRXe/xUBFzZUE4yiRB+oUIdzXvQDQiAp+U/02mcRWVxM6cz
+ kIHf9sv+AoKd3zmD40ZQxQH3uqxgZoJmR/x+pDdsL5NWLdRfE3G+nB726y/1vhgpkYtM
+ 3wPtOr5+7iutnGPc4Kp0RL91eamyoYF+VkIrQ3aRnbieBi9a+Rhb3PnBeetyh2YFfPMn
+ YcUhMhbUe5lfLzshPgkfl+Kiqk5WX4Kvkh+8VgAN9wnY+dV6Q1iPsvaIhPetrPZRy8iq
+ wsGw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUdvMnY8WlnjqPcM6uvzYqWOfqCpQhnHsJzUtk1lKxwSfJrZVR8Nv6wYIryIoaBrAn9h/9uUiDDPilJ@nongnu.org
-X-Gm-Message-State: AOJu0Yyu0kG544hnnoZ544o4M0tuh+NDLmVIR9BeQozgahKUetoc9RPS
- lfVotmONCjtseoIXd6CsVx2vUsF7q0isG/YwBZGXT/uE88c5+NlURoDO38PmSD0WrJVU4uhk04E
- wamGbBeo0tFVVqwzPO+GAa6jOowd/4ztXkD7eaJLC5uWmvFdvpTDg
-X-Gm-Gg: ASbGnctRXDr83MbneC5LfxDG7F2ZKZN/hgZNq+ozaxw0Gbafm602LPvr1yRSCj2WHbB
- V8Bb2DCcn9HyqyQK0z6QKKclZLKeUefPQjM3ZYG3k9Rx+p0s1OjnVmUmuNFUUVeabVnnYmdOhZ0
- rWZ7TvJUBTO6c2ls6ZJXYinfigIhpY16fT+NGEljvMNhV/1uwnxVq9CinO4dUTq+1gRo62MXzi6
- 3QgHgTnS+V2Er+HNU2OMpnhp8K3Bg5eQmNPwsHnXsZ8cgDwSQOxZM1YntCLulIYdUzFS+T5FGSV
- kUxpFqsQLmrRwjCNoOgds+hpgkvmDRrGtQ==
-X-Received: by 2002:a5d:64a2:0:b0:38d:b12f:60d1 with SMTP id
- ffacd0b85a97d-38f24f9bac8mr3772801f8f.26.1739457226264; 
- Thu, 13 Feb 2025 06:33:46 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IF+NAAJ6chBOjsP8woOR/3J1fEMxeOuacwWlV1I9+2ucD8oftZ4hnRU0M7lkFiroVhCe2r88A==
-X-Received: by 2002:a5d:64a2:0:b0:38d:b12f:60d1 with SMTP id
- ffacd0b85a97d-38f24f9bac8mr3772758f8f.26.1739457225808; 
- Thu, 13 Feb 2025 06:33:45 -0800 (PST)
-Received: from [192.168.0.7] (ip-109-42-48-37.web.vodafone.de. [109.42.48.37])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-38f258b4158sm2048386f8f.3.2025.02.13.06.33.44
+ AJvYcCWw2uoRK2c/asjaI9P+in2F0lQS8xT/fAp22tR/cmMOV6g5Rrk+Ws6cMmNt2suk1NmVlzrFqWmkH7+A@nongnu.org
+X-Gm-Message-State: AOJu0YyGzIeKJ2pZskaxXO/guJutPuhyu8T/HwvqnzDVHJCKU0V+byUQ
+ RDpE7jq/+qykBpaLACptV9jnYJGse2Olw8im5kD5/YxAXxTr8kL94ooXXfYDyAY=
+X-Gm-Gg: ASbGncvJfpsJx9jnT447KXAPVkCehEVuvqnXly6OS1aSeq3kijncWok7sNpRuqgDWzV
+ qsl+3Mry1mTf2iAc74s5KvCjGiV/kRHYTxCIuP4UmxGfYrXAR2J3EAwLsVySrEXkmOOxpy97/+C
+ f2U5VjOhJ0/i1eLJ0mGoqARGkDWqRoLLW+LbfONVg5SZpsXS+KMnP9UVmzgWDLzcxQexBOzaTgL
+ nkdPPua+DKoPbg8/JKq2JAeyJ4NdSKoio5KV+5ct37cMpdzKk677HkRvSkPYTxbCkD5DZD3FvC9
+ HTbAOKNKs7CcvYur4c3EFY3xysZdzx4pc3YC4AYs5DWgKe0DhHulwrxmsHffLVAAmu1LbUZVhA=
+ =
+X-Google-Smtp-Source: AGHT+IHV7izYXGLj0MG+10bU+iYRH4xvZ3ZJwje7yJ2B884RYSjy6BJes1WxRB8pSS7HGB9GK9f1Jg==
+X-Received: by 2002:a05:600c:1c92:b0:434:f739:7ce3 with SMTP id
+ 5b1f17b1804b1-43958173ef5mr77044265e9.8.1739458001688; 
+ Thu, 13 Feb 2025 06:46:41 -0800 (PST)
+Received: from [192.168.1.20] (lfbn-bay-1-170-196.w83-193.abo.wanadoo.fr.
+ [83.193.250.196]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-4395a04f217sm50363975e9.1.2025.02.13.06.46.40
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 13 Feb 2025 06:33:45 -0800 (PST)
-Message-ID: <babd30e7-0434-436a-852b-7ff1599d3944@redhat.com>
-Date: Thu, 13 Feb 2025 15:33:43 +0100
+ Thu, 13 Feb 2025 06:46:41 -0800 (PST)
+Message-ID: <ba4ea2d8-14d1-4952-b3bd-6dc9aadcb614@linaro.org>
+Date: Thu, 13 Feb 2025 15:46:40 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v6 01/11] hw/qdev-properties-system: Introduce EndianMode
- QAPI enum
-To: BALATON Zoltan <balaton@eik.bme.hu>
-Cc: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- qemu-devel@nongnu.org, qemu-riscv@nongnu.org, qemu-ppc@nongnu.org,
- "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
- Alistair Francis <alistair@alistair23.me>,
- Richard Henderson <richard.henderson@linaro.org>,
- Markus Armbruster <armbru@redhat.com>, qemu-arm@nongnu.org,
- =?UTF-8?Q?Daniel_P=2E_Berrang=C3=A9?= <berrange@redhat.com>
-References: <20250212112413.37553-1-philmd@linaro.org>
- <20250212112413.37553-2-philmd@linaro.org>
- <cb828dd8-25f6-47c6-9ac7-cae5b0d0932e@redhat.com>
- <50ba4e4b-4124-46bb-bb84-4758ce9c5e66@linaro.org>
- <3b3baed4-0d79-3a28-40cd-e1835e078863@eik.bme.hu>
- <6e707c7f-b94c-47ef-83ab-795605e27963@linaro.org>
- <a3608e43-79ce-403d-8ba7-6735fde66759@linaro.org>
- <e1436061-a840-0942-2c2c-4f49bfb932b8@eik.bme.hu>
- <672045c1-9b09-4b7b-9bed-fa990129ce2c@linaro.org>
- <fb7045a4-20f6-a52d-5531-2410fc803bb4@eik.bme.hu>
- <0f7ea6d6-8476-4ba6-9d4f-eeb76aed04fa@redhat.com>
- <9e121e62-8e6e-61d6-dbfb-4dfda469acc5@eik.bme.hu>
-From: Thomas Huth <thuth@redhat.com>
-Autocrypt: addr=thuth@redhat.com; keydata=
- xsFNBFH7eUwBEACzyOXKU+5Pcs6wNpKzrlJwzRl3VGZt95VCdb+FgoU9g11m7FWcOafrVRwU
- yYkTm9+7zBUc0sW5AuPGR/dp3pSLX/yFWsA/UB4nJsHqgDvDU7BImSeiTrnpMOTXb7Arw2a2
- 4CflIyFqjCpfDM4MuTmzTjXq4Uov1giGE9X6viNo1pxyEpd7PanlKNnf4PqEQp06X4IgUacW
- tSGj6Gcns1bCuHV8OPWLkf4hkRnu8hdL6i60Yxz4E6TqlrpxsfYwLXgEeswPHOA6Mn4Cso9O
- 0lewVYfFfsmokfAVMKWzOl1Sr0KGI5T9CpmRfAiSHpthhHWnECcJFwl72NTi6kUcUzG4se81
- O6n9d/kTj7pzTmBdfwuOZ0YUSqcqs0W+l1NcASSYZQaDoD3/SLk+nqVeCBB4OnYOGhgmIHNW
- 0CwMRO/GK+20alxzk//V9GmIM2ACElbfF8+Uug3pqiHkVnKqM7W9/S1NH2qmxB6zMiJUHlTH
- gnVeZX0dgH27mzstcF786uPcdEqS0KJuxh2kk5IvUSL3Qn3ZgmgdxBMyCPciD/1cb7/Ahazr
- 3ThHQXSHXkH/aDXdfLsKVuwDzHLVSkdSnZdt5HHh75/NFHxwaTlydgfHmFFwodK8y/TjyiGZ
- zg2Kje38xnz8zKn9iesFBCcONXS7txENTzX0z80WKBhK+XSFJwARAQABzR5UaG9tYXMgSHV0
- aCA8dGh1dGhAcmVkaGF0LmNvbT7CwXgEEwECACIFAlVgX6oCGwMGCwkIBwMCBhUIAgkKCwQW
- AgMBAh4BAheAAAoJEC7Z13T+cC21EbIP/ii9cvT2HHGbFRl8HqGT6+7Wkb+XLMqJBMAIGiQK
- QIP3xk1HPTsLfVG0ao4hy/oYkGNOP8+ubLnZen6Yq3zAFiMhQ44lvgigDYJo3Ve59gfe99KX
- EbtB+X95ODARkq0McR6OAsPNJ7gpEUzfkQUUJTXRDQXfG/FX303Gvk+YU0spm2tsIKPl6AmV
- 1CegDljzjycyfJbk418MQmMu2T82kjrkEofUO2a24ed3VGC0/Uz//XCR2ZTo+vBoBUQl41BD
- eFFtoCSrzo3yPFS+w5fkH9NT8ChdpSlbNS32NhYQhJtr9zjWyFRf0Zk+T/1P7ECn6gTEkp5k
- ofFIA4MFBc/fXbaDRtBmPB0N9pqTFApIUI4vuFPPO0JDrII9dLwZ6lO9EKiwuVlvr1wwzsgq
- zJTPBU3qHaUO4d/8G+gD7AL/6T4zi8Jo/GmjBsnYaTzbm94lf0CjXjsOX3seMhaE6WAZOQQG
- tZHAO1kAPWpaxne+wtgMKthyPLNwelLf+xzGvrIKvLX6QuLoWMnWldu22z2ICVnLQChlR9d6
- WW8QFEpo/FK7omuS8KvvopFcOOdlbFMM8Y/8vBgVMSsK6fsYUhruny/PahprPbYGiNIhKqz7
- UvgyZVl4pBFjTaz/SbimTk210vIlkDyy1WuS8Zsn0htv4+jQPgo9rqFE4mipJjy/iboDzsFN
- BFH7eUwBEAC2nzfUeeI8dv0C4qrfCPze6NkryUflEut9WwHhfXCLjtvCjnoGqFelH/PE9NF4
- 4VPSCdvD1SSmFVzu6T9qWdcwMSaC+e7G/z0/AhBfqTeosAF5XvKQlAb9ZPkdDr7YN0a1XDfa
- +NgA+JZB4ROyBZFFAwNHT+HCnyzy0v9Sh3BgJJwfpXHH2l3LfncvV8rgFv0bvdr70U+On2XH
- 5bApOyW1WpIG5KPJlDdzcQTyptOJ1dnEHfwnABEfzI3dNf63rlxsGouX/NFRRRNqkdClQR3K
- gCwciaXfZ7ir7fF0u1N2UuLsWA8Ei1JrNypk+MRxhbvdQC4tyZCZ8mVDk+QOK6pyK2f4rMf/
- WmqxNTtAVmNuZIwnJdjRMMSs4W4w6N/bRvpqtykSqx7VXcgqtv6eqoDZrNuhGbekQA0sAnCJ
- VPArerAZGArm63o39me/bRUQeQVSxEBmg66yshF9HkcUPGVeC4B0TPwz+HFcVhheo6hoJjLq
- knFOPLRj+0h+ZL+D0GenyqD3CyuyeTT5dGcNU9qT74bdSr20k/CklvI7S9yoQje8BeQAHtdV
- cvO8XCLrpGuw9SgOS7OP5oI26a0548M4KldAY+kqX6XVphEw3/6U1KTf7WxW5zYLTtadjISB
- X9xsRWSU+Yqs3C7oN5TIPSoj9tXMoxZkCIHWvnqGwZ7JhwARAQABwsFfBBgBAgAJBQJR+3lM
- AhsMAAoJEC7Z13T+cC21hPAQAIsBL9MdGpdEpvXs9CYrBkd6tS9mbaSWj6XBDfA1AEdQkBOn
- ZH1Qt7HJesk+qNSnLv6+jP4VwqK5AFMrKJ6IjE7jqgzGxtcZnvSjeDGPF1h2CKZQPpTw890k
- fy18AvgFHkVk2Oylyexw3aOBsXg6ukN44vIFqPoc+YSU0+0QIdYJp/XFsgWxnFIMYwDpxSHS
- 5fdDxUjsk3UBHZx+IhFjs2siVZi5wnHIqM7eK9abr2cK2weInTBwXwqVWjsXZ4tq5+jQrwDK
- cvxIcwXdUTLGxc4/Z/VRH1PZSvfQxdxMGmNTGaXVNfdFZjm4fz0mz+OUi6AHC4CZpwnsliGV
- ODqwX8Y1zic9viSTbKS01ZNp175POyWViUk9qisPZB7ypfSIVSEULrL347qY/hm9ahhqmn17
- Ng255syASv3ehvX7iwWDfzXbA0/TVaqwa1YIkec+/8miicV0zMP9siRcYQkyTqSzaTFBBmqD
- oiT+z+/E59qj/EKfyce3sbC9XLjXv3mHMrq1tKX4G7IJGnS989E/fg6crv6NHae9Ckm7+lSs
- IQu4bBP2GxiRQ+NV3iV/KU3ebMRzqIC//DCOxzQNFNJAKldPe/bKZMCxEqtVoRkuJtNdp/5a
- yXFZ6TfE1hGKrDBYAm4vrnZ4CXFSBDllL59cFFOJCkn4Xboj/aVxxJxF30bn
-In-Reply-To: <9e121e62-8e6e-61d6-dbfb-4dfda469acc5@eik.bme.hu>
-X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: T_ArQ2_hSq4jBPos_CBN0a54kKuHDVkB_ph8vL9xo58_1739457227
-X-Mimecast-Originator: redhat.com
+Subject: Re: [PATCH] target/riscv: silent warnings about Smdbltrp/Smrnmi being
+ disabled
+To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ =?UTF-8?B?Q2zDqW1lbnQgTMOpZ2Vy?= <cleger@rivosinc.com>,
+ qemu-riscv@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Bin Meng <bin.meng@windriver.com>, Tommy Wu <tommy.wu@sifive.com>
+Cc: Richard Henderson <richard.henderson@linaro.org>, qemu-devel@nongnu.org
+References: <20250213075221.622676-1-cleger@rivosinc.com>
+ <6ac67c25-9ad7-42f6-b246-24053ce37ddc@ventanamicro.com>
 Content-Language: en-US
+From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+In-Reply-To: <6ac67c25-9ad7-42f6-b246-24053ce37ddc@ventanamicro.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=170.10.129.124; envelope-from=thuth@redhat.com;
- helo=us-smtp-delivery-124.mimecast.com
-X-Spam_score_int: -35
-X-Spam_score: -3.6
-X-Spam_bar: ---
-X-Spam_report: (-3.6 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-1.495,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H5=0.001, RCVD_IN_MSPIKE_WL=0.001,
- RCVD_IN_VALIDITY_CERTIFIED_BLOCKED=0.001, RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::336;
+ envelope-from=philmd@linaro.org; helo=mail-wm1-x336.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -173,74 +107,35 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 13/02/2025 14.59, BALATON Zoltan wrote:
-> On Thu, 13 Feb 2025, Thomas Huth wrote:
->> On 12/02/2025 23.34, BALATON Zoltan wrote:
-[...]
->>> So then can the behaviour of NATIVE_ENDIAN be changed to look at the 
->>> machine endianness instead of replacing it with a constant?
+On 13/2/25 12:32, Daniel Henrique Barboza wrote:
+> 
+> 
+> On 2/13/25 4:52 AM, Clément Léger wrote:
+>> As raised by Richard Henderson, these warnings are displayed in user
+>> only as well. Disable them for CONFIG_USER_ONLY.
 >>
->> No, that does not work. First, the machine knows about its devices, but a 
->> device should not know about the wiring of the global machine (just like 
->> in real life).
+>> Signed-off-by: Clément Léger <cleger@rivosinc.com>
+>> ---
 > 
-> That means all devices should be either big or little endian and there 
-> should be no native endian ones. Why do we have those then?
-
-Some device can indeed be either big or little endian - think of devices 
-that are synthesized in an FPGA for example. But in most cases, it rather 
-depends on the bus wiring. Anyway, we need a config knob to allow either the 
-one or the other endianness for certain devices.
-
-> That's why this 
-> endianness property should either be removed from ops and only attached to 
-> it when added to a machine if needed or kept to show which machines it can 
-> be attached to: only big, little or both endian which is what it seems to be 
-> doing now.
-
-Again, devices should not know about machines, not the other way round. So 
-the device should offer a config switch (property) and the machine should 
-set it to the value that it needs.
-
->> Second, imagine a board with e.g. a big endian main CPU and a little 
->> endian service processor - how should a device know the right endianness 
->> here?
+> I'm second guessing having these warnings at all.
 > 
-> How would that work with this series? So the proposed solution is to double 
-> the devices now marked as NATIVE_ENDIAN to have a big and a little endian 
-> variant for them so the board can choose?
+> Sure they serve as a warning for us, developers, that something needs to
+> be revisited (e.g. after an OpenSBI update). However it will degrade user
+> experience with warnings related to something out of the user control.
+> 
+> Instead of adding CONFIG_USER_ONLY gates for these warnings I believe we're
+> better of removing them. We can add TODO/FIXME tags in the code if there's
+> something that we need to revisit at a later time.
 
-This is not doubling the devices. It just introduces a config property to 
-let the machine switch the endianness.
+You can also convert them to trace events, which are less invasive,
+or warn_report(). But IIUC this case I agree a comment is good enough.
 
-> That does not exist in real as you 
-> wrote, there's only one device so then this is probably not the right way to 
-> model it.
-
-Some devices can exist in both, big and little endian variants. We could of 
-course create two devices for this, but that's nonsense if it can simply be 
-handled by a property instead.
-
->>> Or would that be too much overhead? If always looking up the endianness 
->>> is not wanted could the ops declaration keep NATIVE_ENDIAN 
+> Thanks,
+> 
+> Daniel
+> 
+> 
+>>   target/riscv/tcg/tcg-cpu.c | 4 ++++
+>>   1 file changed, 4 insertions(+)
 >>
->> IMHO we should get rid of NATIVE_ENDIAN completely since there is no 
->> "native" endian in multi-CPU boards.
-> 
-> If we say NATIVE_ENDIAN means that the device can be attached to either big 
-> or little endian machine then we can keep this constant but when adding the 
-> ops to a memory region the board has to then decide which endianness it is 
-> and replace it with either big or little. Then we don't need two versions of 
-> the same device and NATIVE_ENDIAN means that the device can be used in both 
-> machines.
-
-Well, it's currently the devices that are calling memory_region_init_io().
-And since memory_region_init_io() does not copy the MemoryRegionOps struct,
-we need two implementations right now for this, one for big and one for 
-little endian. So I think Philippe's series here is fine. But feel free to 
-suggest clean up patches on top if you think that the 
-memory_region_init_io() needs to be handled differently in QEMU everywhere.
-
-  Thomas
-
 
