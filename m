@@ -4,90 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5049EC021A4
-	for <qemu-riscv@archiver.kernel.org>; Sun, 16 Feb 2025 21:03:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5C252C021A0
+	for <qemu-riscv@archiver.kernel.org>; Mon, 17 Feb 2025 05:11:27 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tjlnS-0008Do-6q; Sun, 16 Feb 2025 16:03:26 -0500
+	id 1tjtMC-0005xZ-1S; Mon, 17 Feb 2025 00:07:51 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tjlnO-0007vI-B9
- for qemu-riscv@nongnu.org; Sun, 16 Feb 2025 16:03:22 -0500
-Received: from mail-wm1-x334.google.com ([2a00:1450:4864:20::334])
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1tjtLs-0005xC-An; Mon, 17 Feb 2025 00:07:31 -0500
+Received: from mail-vs1-xe2f.google.com ([2607:f8b0:4864:20::e2f])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tjlnL-0007zo-5c
- for qemu-riscv@nongnu.org; Sun, 16 Feb 2025 16:03:22 -0500
-Received: by mail-wm1-x334.google.com with SMTP id
- 5b1f17b1804b1-43948021a45so38759635e9.1
- for <qemu-riscv@nongnu.org>; Sun, 16 Feb 2025 13:03:18 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1tjtLq-0005zl-Nj; Mon, 17 Feb 2025 00:07:28 -0500
+Received: by mail-vs1-xe2f.google.com with SMTP id
+ ada2fe7eead31-4bbdf3081acso2622426137.2; 
+ Sun, 16 Feb 2025 21:07:26 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1739739797; x=1740344597; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=qPXnTP3mseIxnWi5iwGj0e5kf+IUC/Zf2WfBfSwUIyQ=;
- b=N80bRGaCrRZuPaYgn8bsIHidBUvFPGTTjYowD72J91lKZzv+vfJ7HYKRppuiXVJ5bG
- qv8+nGZ3mPx4W5OYdBWbE8xgEKkmZvaMCaj8HlN77SmElaOwuywaAlurhjFR2fVbsuuu
- YuMWv7Qm5ghV+gx9KYaHG+hnt6N5H2bcq4WC86ik6YXBIaUVm4KTKG7OOjYiQs3WKren
- KTAR6wjasfuRAqPdbj5WdxJbtt0t4Qzy2XstLFi2c+dDxVb/DA3nwmQA731Yt7gb53cB
- pQd87i0lSi8dlGC6sRvZJ7ks0vyH8Wnw2imdml44m/n8fdZogjEYiW95DYOMYipthjJR
- xGlg==
+ d=gmail.com; s=20230601; t=1739768845; x=1740373645; darn=nongnu.org;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=ijyBLFWKZgoxP19ZwyN1K2uMa26g+cJPr9CkxbwnzRI=;
+ b=MHbweBWQ99d/f04kj9OGD+f4bHiinvsgL++aWmj++XqWX2KkfbI1zgalw9rhdDydBj
+ laVtq0yLv5UeNlfdDy1LvPYE1ewYl9jLDEYspJ3bQEzsRSAldE7AgxL1paKo70gf9slu
+ UsdS5IT1rxkanHHaTjLmq22DXIpZ75prvopMwu0JpWa5ZCX74pgHUOBpbU5mnEa2pocj
+ RhsghWHP5/CQBpFW0igiUgcgKHxwN0LwHaV5XVq4Tug6TzJQM41t/7jXvX1FaRNXhwyq
+ 6NqqsG+McOis+EcpA3wEOARtvGrtqqNgvcSJ/hdaDQTgW01yrfIYXjdsNXuQUIy+Qtst
+ lECw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1739739797; x=1740344597;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=qPXnTP3mseIxnWi5iwGj0e5kf+IUC/Zf2WfBfSwUIyQ=;
- b=Xcbfjwu1t8sbD9xdM8I0ASBH29ZLdLVsNdkwz9sJLWLmJBt3uxkn05DfemC3d+4cGa
- TF59AA5tIpiiUNVnNugMQvT3Z++h00yYmHWKJ1bCJbNXI/Ske/yeu/sXY6JTAHHztH17
- rdUtFVkqu6OWKVBxltVBwus1GKfsuj6xSUC7c7vPlYjSisDVvBuKTM3oUFur71Lkbvxm
- DvXFLQn9/opZx5G+53ky9a77WVyBpOVFIH8m38EFbnzXATcef7Ww7KhkFee9R70pobPn
- ueuWvt5/5DWkCkmyazOevBLWgHf5uKLj6PqFY6NpuUd4MA1veaF6HHjoO+YRX0Kkf399
- ZJvQ==
+ d=1e100.net; s=20230601; t=1739768845; x=1740373645;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=ijyBLFWKZgoxP19ZwyN1K2uMa26g+cJPr9CkxbwnzRI=;
+ b=K+oZ0D3M55m5J28RKEpXeCVSVAPZZDe0W0jiTMLlnDtIUHPAXGRZIaHxgT/9FmzlVm
+ wrGTR65KnU1h2kPIbflG5xgnrrHC5iAga/w9hBca266ASRroU85WlC+aP5+kVMBF+DQe
+ gxDjPIrLBpXe4msd68YEGj1diHiHBy66CR4ua/ZvoIqllUv82x9A07/9R/fR52amT79D
+ dDbaIY7X4hpko86+EVwQ1tVnhmOBtYRAyDowj/RmhoNx7Z9IWM+/P9Ak1q0e1kuy8EPF
+ NL31DhMdJU+z/1JUPl6u+8+SHS6GS6uLMzBCLowPNjHKnJ9fF381Jg8xZh74W49744Fo
+ 0nng==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUIfp6yfBImiy6+QxIACNOdTJuM7xxWLOWduNi/rUDe2okIfxhriHeVx3Kya8H1S8VpxlLdON9KpuX2@nongnu.org
-X-Gm-Message-State: AOJu0YwxiZCA5swIgU7gkQyQiT7G7KJlXH6B+mu+GXcD3w4ke2poVA8/
- uQU6w4pzX6pMh8R/i/Z/RidAP0z6mXoJWGop3KYFZ6c+yCOh8pghJSRwuoJFHK4I8XRI2g87ZL7
- sk98=
-X-Gm-Gg: ASbGncujxWFPbdSgoJ03qVPVYiU40Sd8/YY35SqlXpUHPzbX4+L1I7+IWyDhxGHUwiD
- lhbv4Nn5749Vqb1eXC/wD2PSPd9azfTXIZhEJiz99h4JY//Tiz3R+IHlz5aJMARyWij6WL01cZH
- j8yzz9ITT1zdgrClNzzRan+Kb2179AJmbqq9ZYMZfI88+OngDcDwe/IjgWxgA6sN/ahNRMpPL6U
- urzQEeGFo/3QdNHVjQU9yDYJ7VzMWNbIVHnbUZsqpkdRWYT8i9h8A36fFElQ7MMsDtQxxUNxRyE
- xtFYTcOg+UD7DXZHLRE9wo5xMGUG1MHjYzjFsYBiTwe3xDHaaNnwT2ml7fEYAGd/
-X-Google-Smtp-Source: AGHT+IGe9IKju6xLCRnsjrM2PR3gKvWlBbJW3BKX00jwJvVvLQIb5sYlpdBXYK4zSlD7Kqf6S3GwYw==
-X-Received: by 2002:a05:600c:4f94:b0:439:30bd:7df9 with SMTP id
- 5b1f17b1804b1-4396e6aa4a4mr57876685e9.9.1739739796980; 
- Sun, 16 Feb 2025 13:03:16 -0800 (PST)
-Received: from [192.168.69.196] (88-187-86-199.subs.proxad.net.
- [88.187.86.199]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4395a1aa7e8sm135359705e9.26.2025.02.16.13.03.14
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sun, 16 Feb 2025 13:03:15 -0800 (PST)
-Message-ID: <ff65a241-5035-41a7-beb3-d1c3232430d4@linaro.org>
-Date: Sun, 16 Feb 2025 22:03:13 +0100
+ AJvYcCVNKO76cDlHzblxKn7kFX1abVrifypYqFTbBIwFn4ZX0ibr/8poLBUxyYeW2WAZusdiqojR9/+HoAE3@nongnu.org
+X-Gm-Message-State: AOJu0YwxYXOozrUs36B/bmS5jJuxrf/Y4/btInTZLZmVhs+mFPwewbpE
+ nF3DqJ0CNcJD4nTuEIzk4w1jbCtGV9Io01ffihPVfbaOExzAbqBwk9dxOccTvHkbfA44uFWGtuE
+ WBU3VtUC3I21aaHvlHnoihXNTT/Q=
+X-Gm-Gg: ASbGncu/5HLPyA3x2urBeOy2BThzUTwmHAcMDXiU2cvkA85MVMAI+zJNsRnz7o6fyM5
+ KEsQPDFYYpjY0hfRx0J5JiOgTj5CMrTD+NUFQQygO/o1eRm3bZYM70ZmvGfEWJvA2nFxJqJXL1t
+ 6Lr3wnWna4LvL+E3L8W0Q970zKcw==
+X-Google-Smtp-Source: AGHT+IFct2DkbsZCPKDCg0t0DiOeeju7mNwaBiP9AUiFTtSZ7BH6N28hLWG2vAEU/Dor58MCQec7oAV/HI2NTu7tyiw=
+X-Received: by 2002:a05:6102:150f:b0:4bb:cf34:3757 with SMTP id
+ ada2fe7eead31-4bd3ff3f0a5mr4197766137.17.1739768843470; Sun, 16 Feb 2025
+ 21:07:23 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v8 0/6] hw/microblaze: Allow running cross-endian vCPUs
-To: qemu-devel@nongnu.org
-Cc: Thomas Huth <thuth@redhat.com>, qemu-riscv@nongnu.org,
- qemu-ppc@nongnu.org, qemu-arm@nongnu.org,
- Markus Armbruster <armbru@redhat.com>
-References: <20250213122217.62654-1-philmd@linaro.org>
-Content-Language: en-US
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-In-Reply-To: <20250213122217.62654-1-philmd@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::334;
- envelope-from=philmd@linaro.org; helo=mail-wm1-x334.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+References: <20250213145640.117275-1-cleger@rivosinc.com>
+In-Reply-To: <20250213145640.117275-1-cleger@rivosinc.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Mon, 17 Feb 2025 15:06:57 +1000
+X-Gm-Features: AWEUYZmAEOz5xs-fTwXRo1R-m7E6K8Tz73ur-lg9XHTKbSDnL_av8OYu2CQSIyE
+Message-ID: <CAKmqyKP++TPfVbvD0M3vtb4RPYd21NHe1z0-R32RsY60Owj=oQ@mail.gmail.com>
+Subject: Re: [PATCH v2] target/riscv: remove warnings about Smdbltrp/Smrnmi
+ being disabled
+To: =?UTF-8?B?Q2zDqW1lbnQgTMOpZ2Vy?= <cleger@rivosinc.com>
+Cc: qemu-riscv@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>, 
+ Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bin.meng@windriver.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>, 
+ Richard Henderson <richard.henderson@linaro.org>, qemu-devel@nongnu.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2607:f8b0:4864:20::e2f;
+ envelope-from=alistair23@gmail.com; helo=mail-vs1-xe2f.google.com
+X-Spam_score_int: -17
+X-Spam_score: -1.8
+X-Spam_bar: -
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -103,15 +98,68 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 13/2/25 13:22, Philippe Mathieu-Daudé wrote:
+On Fri, Feb 14, 2025 at 12:57=E2=80=AFAM Cl=C3=A9ment L=C3=A9ger <cleger@ri=
+vosinc.com> wrote:
+>
+> As raised by Richard Henderson, these warnings are displayed in user
+> only as well. Since they aren't really useful for the end-user, remove
+> them and add a "TODO" note in the leading comments.
+>
+> Signed-off-by: Cl=C3=A9ment L=C3=A9ger <cleger@rivosinc.com>
 
-> Philippe Mathieu-Daudé (6):
->    hw/qdev-properties-system: Introduce EndianMode QAPI enum
->    hw/intc/xilinx_intc: Make device endianness configurable
->    hw/net/xilinx_ethlite: Make device endianness configurable
->    hw/timer/xilinx_timer: Make device endianness configurable
->    hw/char/xilinx_uartlite: Make device endianness configurable
->    hw/ssi/xilinx_spi: Make device endianness configurable
+Thanks!
 
-Series queued again, thanks.
+Applied to riscv-to-apply.next
+
+Alistair
+
+> ---
+>
+> v2:
+>  - Remove Tommy bouncing mail from the recipient list
+>  - Entirely remove warnings and add "TODO" in the leading comments
+>
+>  target/riscv/tcg/tcg-cpu.c | 8 +++-----
+>  1 file changed, 3 insertions(+), 5 deletions(-)
+>
+> diff --git a/target/riscv/tcg/tcg-cpu.c b/target/riscv/tcg/tcg-cpu.c
+> index 0a137281de..94bfafd7db 100644
+> --- a/target/riscv/tcg/tcg-cpu.c
+> +++ b/target/riscv/tcg/tcg-cpu.c
+> @@ -1432,22 +1432,20 @@ static void riscv_init_max_cpu_extensions(Object =
+*obj)
+>      }
+>
+>      /*
+> -     * ext_smrnmi requires OpenSBI changes that our current
+> +     * TODO: ext_smrnmi requires OpenSBI changes that our current
+>       * image does not have. Disable it for now.
+>       */
+>      if (cpu->cfg.ext_smrnmi) {
+>          isa_ext_update_enabled(cpu, CPU_CFG_OFFSET(ext_smrnmi), false);
+> -        qemu_log("Smrnmi is disabled in the 'max' type CPU\n");
+>      }
+>
+>      /*
+> -     * ext_smdbltrp requires the firmware to clear MSTATUS.MDT on startu=
+p to
+> -     * avoid generating a double trap. OpenSBI does not currently suppor=
+t it,
+> +     * TODO: ext_smdbltrp requires the firmware to clear MSTATUS.MDT on =
+startup
+> +     * to avoid generating a double trap. OpenSBI does not currently sup=
+port it,
+>       * disable it for now.
+>       */
+>      if (cpu->cfg.ext_smdbltrp) {
+>          isa_ext_update_enabled(cpu, CPU_CFG_OFFSET(ext_smdbltrp), false)=
+;
+> -        qemu_log("Smdbltrp is disabled in the 'max' type CPU\n");
+>      }
+>  }
+>
+> --
+> 2.47.2
+>
+>
 
