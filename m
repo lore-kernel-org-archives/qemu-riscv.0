@@ -4,65 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E6CC4C021A4
-	for <qemu-riscv@archiver.kernel.org>; Mon, 17 Feb 2025 08:20:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D43CBC021A0
+	for <qemu-riscv@archiver.kernel.org>; Mon, 17 Feb 2025 08:20:55 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tjwKV-0002Ev-0I; Mon, 17 Feb 2025 03:18:15 -0500
+	id 1tjwM5-0005zc-L8; Mon, 17 Feb 2025 03:19:53 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <yongxuan.wang@sifive.com>)
- id 1tjwKR-0002AQ-Tp
- for qemu-riscv@nongnu.org; Mon, 17 Feb 2025 03:18:11 -0500
-Received: from mail-qv1-xf2c.google.com ([2607:f8b0:4864:20::f2c])
+ id 1tjwLz-0005bk-OD
+ for qemu-riscv@nongnu.org; Mon, 17 Feb 2025 03:19:48 -0500
+Received: from mail-pl1-x630.google.com ([2607:f8b0:4864:20::630])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <yongxuan.wang@sifive.com>)
- id 1tjwKP-00011h-I2
- for qemu-riscv@nongnu.org; Mon, 17 Feb 2025 03:18:10 -0500
-Received: by mail-qv1-xf2c.google.com with SMTP id
- 6a1803df08f44-6e67d2b9075so6732776d6.0
- for <qemu-riscv@nongnu.org>; Mon, 17 Feb 2025 00:18:09 -0800 (PST)
+ id 1tjwLu-00017G-Nz
+ for qemu-riscv@nongnu.org; Mon, 17 Feb 2025 03:19:46 -0500
+Received: by mail-pl1-x630.google.com with SMTP id
+ d9443c01a7336-220c8eb195aso84873475ad.0
+ for <qemu-riscv@nongnu.org>; Mon, 17 Feb 2025 00:19:42 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1739780288; x=1740385088; darn=nongnu.org;
+ d=sifive.com; s=google; t=1739780381; x=1740385181; darn=nongnu.org;
  h=references:in-reply-to:message-id:date:subject:cc:to:from:from:to
  :cc:subject:date:message-id:reply-to;
- bh=CIOoUkbjk51N51acNzDriCfyDC8X79FyXFjaBdinybo=;
- b=aiBprKqODdjpU/ID4k/tbfB7sGFiXmAt2NHzMewPflV7vPQq19n4XpXwC3FXqQt6n6
- dy26IpXxe7a5LlUcS7vn6856ELb7wVpzLOMiTsDp3/h8rj7dSaEzv3/DW/fIT8B35nuV
- sIjPE1iYB3TDoi5WeAE/BhhUQcO/eqeW0uckJKDIWgYciLRWLomzAYqGkpKTV6IfC2Ha
- HRAB04NgfB1mqkt2NoXggJeQPK8IGDlhGSozSg4I4owXahsIY3WwNrCjm9mJCrfy3YcX
- MchC2f13UVpyn80CQtDqZInTJgwSMhY1XdHzZl0fELl7ADbu1C0rD1EVXfcvCIvRM7j0
- bMwQ==
+ bh=aEhrJGTrK4HquXpUTZoqEf2aT92LTkcD02ZKWBhuP+I=;
+ b=ZlukgPEFBdtottawNOXVXCqXVLERy2Kwj/Pp6mHI2AZ/YI6MwFTt+y0+3x05xQ5RVv
+ pSMgPV5bBzgIF1RqNUTZP1ND0hRhtE/VVCsWFfNq75beDtzsUr7i8Mf4XjZD4OnoQd/B
+ rNHb917q8Rwq6fObHrYaPfI8UZaLtj0ssy5iuuDfVefijSEANEpgWo8vCAcInyqEtsQo
+ L/MKd8yCle3r8C73pDWrvkxKBfa5G+hK4rqoLybJXjJJ4uNSMJ5YCoJsxMiI758N6UWi
+ WOoklMx/+VRPZVukEQLg+PG980ePEwnTagb9CmBAMULcQ94t6bnWifXITNMwCWwOLt/c
+ g8yQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1739780288; x=1740385088;
+ d=1e100.net; s=20230601; t=1739780381; x=1740385181;
  h=references:in-reply-to:message-id:date:subject:cc:to:from
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=CIOoUkbjk51N51acNzDriCfyDC8X79FyXFjaBdinybo=;
- b=MdjwpbXuKLxoYu3yezUcANbaytYGmVd+FmhsHyMIYM8yTOnuJwFQlsywvZ7PTJksIN
- tP3IjoAUw6wBlY2bSsv+5Em8aJsh8hNuY6axY17g30yVf/6zpeg2ARF8MlC6n0bIJLth
- Srk/HUyzuqdEom75o/nOBjdE1VIzdAFWX9AvSo2JRkvF00Deio2KEzLn/vDcfLJjmFGs
- njMY/x7tmceGBUK4BBQ/7xeG6b3uOLrzSfDRsJZK+Q5z/4sdSha+OTrxtdo0jqbQ3XDZ
- qL3AY7tEj2btu8IzRVO8ZAW6z/wK+VAljlW0tAXKn0/iJwoI0QpA7/v8FT/kto3UgTFv
- 5VfQ==
+ bh=aEhrJGTrK4HquXpUTZoqEf2aT92LTkcD02ZKWBhuP+I=;
+ b=um4ivWZ3LBrqZP6j9M+J8eFtKUBs/VzGUAGlZCM/ELyJkjdzpuKYp19/pjkVAFhs90
+ oCrKy1Yoq3kbk5AeVe6ctowkNIMO+BVE9lZpJECM90gznVNBlTK7yLincQ8jU3G1DwvD
+ 7WnYXf/KD0H0aY4wTnVUuQ9VSOf627Uw16RM264Sgg7aThU1XdAW/lAPivVrN2b3r/wf
+ z4A44kJgWhwno9nF2aWiYMG8Qb6+9luNEKYrHZpR8rLJxQ6v7DbmU8oyfoiUNDn22Pdu
+ MHJXkQyGGHHPpoeM+V/dzA4/zYh51a2yJy2eE5xKuInAiufEODrGl5vZzH6kZm5dXHqL
+ wSWA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVQgWRu0gRt+08LrnSotM7SQ8O0SdooPu84sBkDXeAHeSXsISSVrFQIoLTUabQMJ6bwFh2ZrsAp4tKJ@nongnu.org
-X-Gm-Message-State: AOJu0YxKgGqMcNMKvmW9XHjx30Ak+otOfhXF10D//cmeLFR8ceM4LIRq
- EW4HuKLPYBIcv5uMxqxSWtQLp+y2WUC4NhEcQIcGwmLNG+aV87xk4KyuE/62U3A=
-X-Gm-Gg: ASbGncsZMuyBpxxWpYsvcWAxK8VCAvB/j7waDUSseN2jCWX33zuBOoUH6biOAm68Xfh
- qTU9zv1gqO6HGyaijlFX2TYhFdnuf3MEwdMLfmSX9b+vTW2uDxjNQxO8FP51BaXld6unN+H0mAh
- OQSqTw8wCBlYJiD9ss8p26pQywPJEMAVIXdLMk+Gbf0ee/W5B5x2xKUAflAMPr+OngxGIzNVzzU
- E+Hm5+zELNy3y2xO0vz0hOn05jdkUnBuNN9yQeqWqmO9mumWUfFvW7vZr2mmKQ+LT7Y03kamhOt
- BqkZjr1Up41yFcwYPIJps03GZzMeJZwEFI9u0ssRG2m1zQ==
-X-Google-Smtp-Source: AGHT+IEfZANQhcZDUv0bTis6sSavH9H1aY3LSqVQvrgPQLJ8aH649IbHLwd7nLcMsDV/2jlrYwF8Gw==
-X-Received: by 2002:a05:6214:262c:b0:6dd:d317:e0aa with SMTP id
- 6a1803df08f44-6e66cc85b7emr143122026d6.8.1739780288589; 
- Mon, 17 Feb 2025 00:18:08 -0800 (PST)
+ AJvYcCXH8442BtLURL0C2eoa6KY3/GtGOjbPBwJteYEFWG3NmXScwS4qTfnZ46Jt7wkEZ0TF+xQtbydmlO1X@nongnu.org
+X-Gm-Message-State: AOJu0YyeOB9fkTy5/Jf8vp+2jDzO0tRchQCY/Q/PWjLRH9C9bK9/3FBB
+ +tk4DqSIBZJo1sKXT/zSGO27cAb2Qadtu//72C33bnQg8jBUexKh19tyENGJJmIFe1uMcwylwg/
+ a
+X-Gm-Gg: ASbGncsYc8M20D/BLylUbapmVykRPZ3LZ7hakHBSTA4IyYkeN0sdy8Rh+G7Ut90ow2F
+ oLsBNdtgyLidRWeX5RsrTJwCHbCFCkAdpzvWhGeFkTL56TpFiqzfuur8ft6lhEprxhXVVTckoc/
+ DeF0cv2J0MzCrjmSidOb2bdWnp7c6vl4vMypkyuvWI7g16ui+Sbi9MF7y4m5yEsDH9eYGfolKbw
+ YUfwYT5cco5vfjzFkutm1oIFUXtQaOqTWgQT/rpHLbdM6R2asGXYqvnS3XQ1GaHzA6fVJq8L5UD
+ gdjFd4iDqjNqpD0dy2MDl4q3QcXOVmzriC9L+jo11ud7Mg==
+X-Google-Smtp-Source: AGHT+IHImZVpKPU6lfzfJNVcHRO2/kSa1dloFxwbc3nndzw1W877OHvb7T2Zk10LFl4ZWPp8JmC6kw==
+X-Received: by 2002:a17:902:ce89:b0:221:183:5bea with SMTP id
+ d9443c01a7336-221040d74d8mr150238495ad.50.1739780381116; 
+ Mon, 17 Feb 2025 00:19:41 -0800 (PST)
 Received: from hsinchu26.internal.sifive.com ([210.176.154.34])
  by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6e65d9f38absm49673346d6.88.2025.02.17.00.18.04
+ d9443c01a7336-220d556d5e6sm66023445ad.173.2025.02.17.00.19.38
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 17 Feb 2025 00:18:08 -0800 (PST)
+ Mon, 17 Feb 2025 00:19:40 -0800 (PST)
 From: Yong-Xuan Wang <yongxuan.wang@sifive.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
@@ -73,14 +74,14 @@ Cc: greentime.hu@sifive.com, vincent.chen@sifive.com, frank.chang@sifive.com,
  Weiwei Li <liwei1518@gmail.com>,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
  Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
-Subject: [PATCH 4/8] target/riscv: add helper to get CSR name
-Date: Mon, 17 Feb 2025 16:17:24 +0800
-Message-Id: <20250217081730.9000-5-yongxuan.wang@sifive.com>
+Subject: [PATCH 1/4] hw/riscv/virt: KVM AIA refinement
+Date: Mon, 17 Feb 2025 16:19:23 +0800
+Message-Id: <20250217081927.10613-2-yongxuan.wang@sifive.com>
 X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20250217081730.9000-1-yongxuan.wang@sifive.com>
-References: <20250217081730.9000-1-yongxuan.wang@sifive.com>
-Received-SPF: pass client-ip=2607:f8b0:4864:20::f2c;
- envelope-from=yongxuan.wang@sifive.com; helo=mail-qv1-xf2c.google.com
+In-Reply-To: <20250217081927.10613-1-yongxuan.wang@sifive.com>
+References: <20250217081927.10613-1-yongxuan.wang@sifive.com>
+Received-SPF: pass client-ip=2607:f8b0:4864:20::630;
+ envelope-from=yongxuan.wang@sifive.com; helo=mail-pl1-x630.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -103,31 +104,147 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Add a helper function to get CSR name from CSR number.
+KVM AIA is only needed to be set when the virt machine use the AIA MSI.
+So we can move the KVM AIA configuration into virt_create_aia() to reduce
+the condition checking.
 
 Signed-off-by: Yong-Xuan Wang <yongxuan.wang@sifive.com>
 ---
- target/riscv/cpu.h | 6 +++++-
- 1 file changed, 5 insertions(+), 1 deletion(-)
+ hw/riscv/virt.c | 79 +++++++++++++++++++++++--------------------------
+ 1 file changed, 37 insertions(+), 42 deletions(-)
 
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index 616c3bdc1c24..133d1852ee1e 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -920,8 +920,12 @@ extern const bool valid_vm_1_10_32[], valid_vm_1_10_64[];
- void riscv_get_csr_ops(int csrno, riscv_csr_operations *ops);
- void riscv_set_csr_ops(int csrno, riscv_csr_operations *ops);
+diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+index dae46f4733cd..a52117ef71ee 100644
+--- a/hw/riscv/virt.c
++++ b/hw/riscv/virt.c
+@@ -58,14 +58,6 @@
+ #include "qapi/qapi-visit-common.h"
+ #include "hw/virtio/virtio-iommu.h"
  
--void riscv_cpu_register_gdb_regs_for_features(CPUState *cs);
-+static inline const char *riscv_get_csr_name(int csr_no)
-+{
-+    return csr_ops[csr_no & (CSR_TABLE_SIZE - 1)].name;
-+}
+-/* KVM AIA only supports APLIC MSI. APLIC Wired is always emulated by QEMU. */
+-static bool virt_use_kvm_aia_aplic_imsic(RISCVVirtAIAType aia_type)
+-{
+-    bool msimode = aia_type == VIRT_AIA_TYPE_APLIC_IMSIC;
+-
+-    return riscv_is_kvm_aia_aplic_imsic(msimode);
+-}
+-
+ static bool virt_use_emulated_aplic(RISCVVirtAIAType aia_type)
+ {
+     bool msimode = aia_type == VIRT_AIA_TYPE_APLIC_IMSIC;
+@@ -1298,10 +1290,12 @@ static DeviceState *virt_create_plic(const MemMapEntry *memmap, int socket,
+     return ret;
+ }
  
-+void riscv_cpu_register_gdb_regs_for_features(CPUState *cs);
- target_ulong riscv_new_csr_seed(target_ulong new_value,
-                                 target_ulong write_mask);
+-static DeviceState *virt_create_aia(RISCVVirtAIAType aia_type, int aia_guests,
++static DeviceState *virt_create_aia(RISCVVirtState *s,
+                                     const MemMapEntry *memmap, int socket,
+                                     int base_hartid, int hart_count)
+ {
++    RISCVVirtAIAType aia_type = s->aia_type;
++    int aia_guests = s->aia_guests;
+     int i;
+     hwaddr addr = 0;
+     uint32_t guest_bits;
+@@ -1309,6 +1303,28 @@ static DeviceState *virt_create_aia(RISCVVirtAIAType aia_type, int aia_guests,
+     DeviceState *aplic_m = NULL;
+     bool msimode = aia_type == VIRT_AIA_TYPE_APLIC_IMSIC;
  
++    if (!kvm_enabled()) {
++        /* Per-socket M-level APLIC */
++        aplic_m = riscv_aplic_create(memmap[VIRT_APLIC_M].base +
++                                     socket * memmap[VIRT_APLIC_M].size,
++                                     memmap[VIRT_APLIC_M].size,
++                                     (msimode) ? 0 : base_hartid,
++                                     (msimode) ? 0 : hart_count,
++                                     VIRT_IRQCHIP_NUM_SOURCES,
++                                     VIRT_IRQCHIP_NUM_PRIO_BITS,
++                                     msimode, true, NULL);
++    }
++
++    /* Per-socket S-level APLIC */
++    aplic_s = riscv_aplic_create(memmap[VIRT_APLIC_S].base +
++                                 socket * memmap[VIRT_APLIC_S].size,
++                                 memmap[VIRT_APLIC_S].size,
++                                 (msimode) ? 0 : base_hartid,
++                                 (msimode) ? 0 : hart_count,
++                                 VIRT_IRQCHIP_NUM_SOURCES,
++                                 VIRT_IRQCHIP_NUM_PRIO_BITS,
++                                 msimode, false, aplic_m);
++
+     if (msimode) {
+         if (!kvm_enabled()) {
+             /* Per-socket M-level IMSICs */
+@@ -1329,32 +1345,20 @@ static DeviceState *virt_create_aia(RISCVVirtAIAType aia_type, int aia_guests,
+                                base_hartid + i, false, 1 + aia_guests,
+                                VIRT_IRQCHIP_NUM_MSIS);
+         }
+-    }
+ 
+-    if (!kvm_enabled()) {
+-        /* Per-socket M-level APLIC */
+-        aplic_m = riscv_aplic_create(memmap[VIRT_APLIC_M].base +
+-                                     socket * memmap[VIRT_APLIC_M].size,
+-                                     memmap[VIRT_APLIC_M].size,
+-                                     (msimode) ? 0 : base_hartid,
+-                                     (msimode) ? 0 : hart_count,
+-                                     VIRT_IRQCHIP_NUM_SOURCES,
+-                                     VIRT_IRQCHIP_NUM_PRIO_BITS,
+-                                     msimode, true, NULL);
+-    }
+ 
+-    /* Per-socket S-level APLIC */
+-    aplic_s = riscv_aplic_create(memmap[VIRT_APLIC_S].base +
+-                                 socket * memmap[VIRT_APLIC_S].size,
+-                                 memmap[VIRT_APLIC_S].size,
+-                                 (msimode) ? 0 : base_hartid,
+-                                 (msimode) ? 0 : hart_count,
++        if (kvm_irqchip_in_kernel()) {
++            kvm_riscv_aia_create(MACHINE(s), IMSIC_MMIO_GROUP_MIN_SHIFT,
+                                  VIRT_IRQCHIP_NUM_SOURCES,
+-                                 VIRT_IRQCHIP_NUM_PRIO_BITS,
+-                                 msimode, false, aplic_m);
++                                 VIRT_IRQCHIP_NUM_MSIS,
++                                 memmap[VIRT_APLIC_S].base,
++                                 memmap[VIRT_IMSIC_S].base,
++                                 aia_guests);
++        }
+ 
+-    if (kvm_enabled() && msimode) {
+-        riscv_aplic_set_kvm_msicfgaddr(RISCV_APLIC(aplic_s), addr);
++        if (kvm_enabled()) {
++            riscv_aplic_set_kvm_msicfgaddr(RISCV_APLIC(aplic_s), addr);
++        }
+     }
+ 
+     return kvm_enabled() ? aplic_s : aplic_m;
+@@ -1621,9 +1625,8 @@ static void virt_machine_init(MachineState *machine)
+             s->irqchip[i] = virt_create_plic(memmap, i,
+                                              base_hartid, hart_count);
+         } else {
+-            s->irqchip[i] = virt_create_aia(s->aia_type, s->aia_guests,
+-                                            memmap, i, base_hartid,
+-                                            hart_count);
++            s->irqchip[i] = virt_create_aia(s, memmap, i,
++                                            base_hartid, hart_count);
+         }
+ 
+         /* Try to use different IRQCHIP instance based device type */
+@@ -1641,14 +1644,6 @@ static void virt_machine_init(MachineState *machine)
+         }
+     }
+ 
+-    if (kvm_enabled() && virt_use_kvm_aia_aplic_imsic(s->aia_type)) {
+-        kvm_riscv_aia_create(machine, IMSIC_MMIO_GROUP_MIN_SHIFT,
+-                             VIRT_IRQCHIP_NUM_SOURCES, VIRT_IRQCHIP_NUM_MSIS,
+-                             memmap[VIRT_APLIC_S].base,
+-                             memmap[VIRT_IMSIC_S].base,
+-                             s->aia_guests);
+-    }
+-
+     if (riscv_is_32bit(&s->soc[0])) {
+ #if HOST_LONG_BITS == 64
+         /* limit RAM size in a 32-bit system */
 -- 
 2.17.1
 
