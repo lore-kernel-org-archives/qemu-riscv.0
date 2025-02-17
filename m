@@ -4,85 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6F9B4C021A0
-	for <qemu-riscv@archiver.kernel.org>; Mon, 17 Feb 2025 08:18:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F2D83C021A0
+	for <qemu-riscv@archiver.kernel.org>; Mon, 17 Feb 2025 08:18:50 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tjwKJ-0001zh-KA; Mon, 17 Feb 2025 03:18:03 -0500
+	id 1tjwKB-0001yY-OR; Mon, 17 Feb 2025 03:17:55 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <yongxuan.wang@sifive.com>)
- id 1tjwKG-0001zK-6t
- for qemu-riscv@nongnu.org; Mon, 17 Feb 2025 03:18:00 -0500
-Received: from mail-qv1-xf32.google.com ([2607:f8b0:4864:20::f32])
+ id 1tjwK1-0001wr-PN
+ for qemu-riscv@nongnu.org; Mon, 17 Feb 2025 03:17:45 -0500
+Received: from mail-qt1-x82a.google.com ([2607:f8b0:4864:20::82a])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <yongxuan.wang@sifive.com>)
- id 1tjwKD-000105-Oh
- for qemu-riscv@nongnu.org; Mon, 17 Feb 2025 03:17:59 -0500
-Received: by mail-qv1-xf32.google.com with SMTP id
- 6a1803df08f44-6e6864ab228so1026156d6.0
- for <qemu-riscv@nongnu.org>; Mon, 17 Feb 2025 00:17:57 -0800 (PST)
+ id 1tjwK0-0000yf-5i
+ for qemu-riscv@nongnu.org; Mon, 17 Feb 2025 03:17:45 -0500
+Received: by mail-qt1-x82a.google.com with SMTP id
+ d75a77b69052e-471f88518c8so345231cf.0
+ for <qemu-riscv@nongnu.org>; Mon, 17 Feb 2025 00:17:43 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1739780277; x=1740385077; darn=nongnu.org;
- h=references:in-reply-to:message-id:date:subject:cc:to:from:from:to
- :cc:subject:date:message-id:reply-to;
- bh=s8x/AUhlMa+i1pxB//o187dxahL7hFDjq4fu/AmY4EU=;
- b=fsLz0MA+/l7MN+8F8Sjq8Al3KWMQObmGIGsbm3yEerjR0FQWrDNwVod3cBuA6ibLK4
- yH5R7hj7/6UtandLJxcqIQQDsT8+L7MIMuMfuDw/ExKGHeABpQnkG1QgYqpP+Rbg6VlU
- pQ/Fyv/xCvRZZxRsZkelB/eBwzdrSNvyVulQw+WPgxu86+/i73H0auFfX+/0G2hQgTmU
- z9VXYuVtPlza9w3CSYk64EQpreiwPvaMwg8VHCj10SFaUlBlXO6evxft/9MghVBQ7AOV
- DtBxTdJGlJALlXkIrC2e1PjsBcZJx6TLrnp2h0HgzMaEPzf9GoerAg3prcOuqbmA4gzd
- BVmg==
+ d=sifive.com; s=google; t=1739780262; x=1740385062; darn=nongnu.org;
+ h=message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=Ca383jZ9H/7hPjftb6ykvA59uZ+joaH9NqOxjYmz17w=;
+ b=cRsdwfV92GcpVfTO2Ku6H/GdvNq65gurcQjHZSGT08Gn+oZFyf4mB0Q1MGMKBF4snp
+ fFsm9C+gFTwNBfS+JVbbFge3uV+zwEc5RioE6xnmJHMJvZtuBJwfddg4nTXPfQptzACW
+ NLyVWFuEg+yi4hhDjL2GmecrNN6HcsVy+9Up/vg3KYvvN6LnJLjPV7e7PrTnv+jPUeTF
+ WwYFCGlsmOwJV11lOLBEdMq473OP0V02UyEN0Y/nnt1BYPb3u/NgB/FQG3XD5ORaYJD3
+ qorpHQW9rjq/f7lm6lmmwH+wJ5vn3p8XsZRzMnCVTcKXmRCwoMdjRO+2iICiGlmkXqGF
+ 2W2A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1739780277; x=1740385077;
- h=references:in-reply-to:message-id:date:subject:cc:to:from
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=s8x/AUhlMa+i1pxB//o187dxahL7hFDjq4fu/AmY4EU=;
- b=eQGqkJHNq5Ez9eBOx9RhqStyaBclEP2uUbB1a2EbfUxD/dlJRO/0X0VEKDk62LaUia
- NYQRpZThxGDB3oX3HdvQMLWy7VQGJiVT6JUvHLj5k/exO/iZR6D9q8wMbB6+ZKNGAOYi
- 47nXphP5JrnMr+57eYDXzeKHETmFsBNmnYdg1zaxgH9S2Q6A0p6Bgd4ZMee2CF8xciIU
- ITUtVMpmulNFMJ9JSjd3i136qCiKHZVfq4rkjtGDVtJy0NWJiW8vjRg+8Q8zrUs4hjDX
- VKx4MRDn/+GoSgu0v+DFQyNDIM+qiEfIwcocN5+GkhZiVZD0SyvJIeZnqDHnOPNXTLcP
- KNKA==
+ d=1e100.net; s=20230601; t=1739780262; x=1740385062;
+ h=message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=Ca383jZ9H/7hPjftb6ykvA59uZ+joaH9NqOxjYmz17w=;
+ b=A2YCkFoJ7UW3k11pIBkWyPzO3iiCygOqUyvQhD8MUQbWzep8Gm4Lqprdh4lri8f3AV
+ SYflsHNJz/x9EFmsy+HhQ2nVHfA6tgjpx3CyDTYZMFM3fzX7hrXVdlgDyYLN91LPCqo/
+ MyIWo1UlWDt+BZkiag3vTYTJ8zYZEceVLVlbA9BjHcF2mZK+JoSR0qd6RJwpQDZTZPw3
+ fxpS5BmOtDJr0R7ZkKFognNIkSfGiaTNPbSWBUzO05W8YBwFSZSxDcuOT/fdp6t0Sz4b
+ 0yulVl3XBTzLZ50MNdiYBzByEr24COojUrxmizIm68/zKqNrxbS6DZAmcEBWOG1x08M+
+ ONqw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWVq28JnHA4tFzbBIdgKskZL3bXe5fNOOHHU+KcnV6no8xI4KbPfZbAKUH6/X1yZbdDlPlEJJBFRY08@nongnu.org
-X-Gm-Message-State: AOJu0YxwceQ6aQrQgiIIon7tBWFc+VglaGcF+303RjCWURo7SO76dec1
- vIjdNz7aC0YgxJ7U3ruxko7PJ/WTdQcySfBCxsFdqL1cEYnjto2T7izGuUxgrTY=
-X-Gm-Gg: ASbGncuIuDOioE9UAjAVkogCJlO0VmD9aWZ+1eWpj785/TJchrXkzC6w0ilbe+7e0Ry
- t3Ocw8K2NQ9UFs0T3z2G5G/gBzE8bhVChDli4kAKukOIe9AiVX6JnyLF6evC+96xwm2aXqrHmS6
- IaGAwaQ2XS6LN4zhf3mzREFh/09JqjHaRcHy9qIK9LJXZuQCkD2z2OWc2BdrlZBssdw0W6yWNdQ
- EUzbSxYwZu+48+m1LbRvHT2V6yG0u4pZgRmYTOeG/3Je6NjU019ffh5lkQmh1RDDF8UydT1uB5U
- mGn9H37KOFlbVAJcAcu4poe3mOY/wLMkIVycbDZUOOZwVg==
-X-Google-Smtp-Source: AGHT+IHESTeJBCnbLB/7Px+mUg+wKxnOm1fKtPgG0Bp/rz+E/ijmCPv+2q1nl0fUS2aZG3e7x/YExA==
-X-Received: by 2002:a05:6214:c4b:b0:6e6:646e:a0f8 with SMTP id
- 6a1803df08f44-6e66ccb7abamr128248356d6.16.1739780276749; 
- Mon, 17 Feb 2025 00:17:56 -0800 (PST)
+ AJvYcCULovDPnU2nlLGYt5PZJr/UGrqCT0oqzJhPB3gJNVlXyQkZHOVxP7YgAUjOyM8c3rL2wNMtkQcrLTL/@nongnu.org
+X-Gm-Message-State: AOJu0YxS0RrTX6rB5Ghxk2izKq66HLSN8x/e1GggLIXJluXY2bPWqc5r
+ 463t6keYU/OsSAr4Lj4SNmWg14m3/7mTsFH+LiabROmuU47sQTEWiDer/EmsnRY=
+X-Gm-Gg: ASbGnctEHbWHYfsjQf1fiIgldW+ff1Id5/C3IcZdzfpv+Ah8B07JvWaqGfIYHGRSJ0K
+ fKURhJczIH8bsH3aeG+Ge0cldc9IMvIh498PohUPFlk6Ak1t9um3s0Y33I6xcyosK5L1zj37eZd
+ w79doeCCRJHpiQ8K2Pqv/ctVeOQx1BEtGTZ6F5/BtHQkpNe1TpS/d/ifMH9BOpb2lO5yf6ZTVod
+ HMUDthm/c8qeDisFTl4cJYC5cUNUAeeJ2nlqHFES3nDZIzXURlC+t+HYloueYUX/0TFrY8wLqgA
+ oX8ORLbqb0q4W/C+lGv25FGRgZnzSR3OlWYseL4iZJa/sw==
+X-Google-Smtp-Source: AGHT+IFon/KRqEXx9zUKG3ffSrWw3wcDga3m5+1eOtEvhAiSiK++jGGkL5Vf1Wqvpags1k8e8hZXmg==
+X-Received: by 2002:a05:6214:20a6:b0:6e4:3c52:d684 with SMTP id
+ 6a1803df08f44-6e66cce6bb7mr146057156d6.19.1739780262693; 
+ Mon, 17 Feb 2025 00:17:42 -0800 (PST)
 Received: from hsinchu26.internal.sifive.com ([210.176.154.34])
  by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6e65d9f38absm49673346d6.88.2025.02.17.00.17.52
+ 6a1803df08f44-6e65d9f38absm49673346d6.88.2025.02.17.00.17.39
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 17 Feb 2025 00:17:56 -0800 (PST)
+ Mon, 17 Feb 2025 00:17:42 -0800 (PST)
 From: Yong-Xuan Wang <yongxuan.wang@sifive.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
 Cc: greentime.hu@sifive.com, vincent.chen@sifive.com, frank.chang@sifive.com,
- jim.shu@sifive.com, Yong-Xuan Wang <yongxuan.wang@sifive.com>,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Weiwei Li <liwei1518@gmail.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Andrew Jones <ajones@ventanamicro.com>,
- =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-Subject: [PATCH 2/8] target/riscv/kvm: add KVM_REG_RISCV_CSR_AIA
-Date: Mon, 17 Feb 2025 16:17:22 +0800
-Message-Id: <20250217081730.9000-3-yongxuan.wang@sifive.com>
+ jim.shu@sifive.com, Yong-Xuan Wang <yongxuan.wang@sifive.com>
+Subject: [PATCH 0/8] riscv: AIA: kernel-irqchip=off support
+Date: Mon, 17 Feb 2025 16:17:20 +0800
+Message-Id: <20250217081730.9000-1-yongxuan.wang@sifive.com>
 X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20250217081730.9000-1-yongxuan.wang@sifive.com>
-References: <20250217081730.9000-1-yongxuan.wang@sifive.com>
-Received-SPF: pass client-ip=2607:f8b0:4864:20::f32;
- envelope-from=yongxuan.wang@sifive.com; helo=mail-qv1-xf32.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::82a;
+ envelope-from=yongxuan.wang@sifive.com; helo=mail-qt1-x82a.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -105,87 +96,43 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Add KVM_REG_RISCV_CSR_AIA support to get/set the context of AIA
-extension in VS mode.
+This series introduces the user-space AIA MSI emulation when using KVM
+acceleration.
 
-Signed-off-by: Yong-Xuan Wang <yongxuan.wang@sifive.com>
----
- target/riscv/kvm/kvm-cpu.c | 45 ++++++++++++++++++++++++++++++++++++++
- 1 file changed, 45 insertions(+)
+After this series, RISC-V QEMU virt machine with KVM acceleration has
+3 parameters to control the type of irqchip and its emulation method:
+- Machine prop "aia" controls the type of irqchip
+  - none: use PLIC and emulated in user-space
+  - aplic: use AIA wired and emulated in user-space
+  - aplic-imsic: use AIA MSI, emulation mode is determined by
+    "kernel-irqchip" and "riscv-imsic"
+- Accel prop "kernel-irqchip", effective with AIA MSI
+  - on: in-kernel APLIC and in-kernel IMSIC
+  - off: user-space APLIC and user-space IMSIC
+  - split: user-space APLIC and in-kernel IMSIC
+- Accel prop "kernel-irqchip", effective with in-kernel IMSIC
+  - emul: use MRIF as in-kernel IMSIC
+  - hw: use hardware guest IMSIC file as in-kernel IMSIC
+  - auto: use the hardware guest IMSICs whenever available otherwise
+    fallback to MRIF
 
-diff --git a/target/riscv/kvm/kvm-cpu.c b/target/riscv/kvm/kvm-cpu.c
-index e315fea46973..e74c1d7cdcee 100644
---- a/target/riscv/kvm/kvm-cpu.c
-+++ b/target/riscv/kvm/kvm-cpu.c
-@@ -132,6 +132,9 @@ static uint64_t kvm_riscv_vector_reg_id(RISCVCPU *cpu,
- #define RISCV_GENERAL_CSR_REG(name) \
-     (KVM_REG_RISCV_CSR_GENERAL | KVM_REG_RISCV_CSR_REG(name))
- 
-+#define RISCV_AIA_CSR_REG(name) \
-+    (KVM_REG_RISCV_CSR_AIA | KVM_REG_RISCV_CSR_AIA_REG(name))
-+
- #define KVM_RISCV_GET_CSR(cs, env, idx, reg) \
-     do { \
-         int _ret = kvm_get_one_reg(cs, RISCV_CSR_REG(env, idx), &reg); \
-@@ -641,9 +644,50 @@ static int kvm_riscv_put_regs_general_csr(CPUState *cs)
-     return 0;
- }
- 
-+static int kvm_riscv_get_regs_aia_csr(CPUState *cs)
-+{
-+    CPURISCVState *env = &RISCV_CPU(cs)->env;
-+    uint64_t mask = MAKE_64BIT_MASK(32, 32);
-+    uint64_t val;
-+
-+    KVM_RISCV_GET_CSR(cs, env, RISCV_AIA_CSR_REG(siselect), env->siselect);
-+    KVM_RISCV_GET_CSR(cs, env, RISCV_AIA_CSR_REG(iprio1), env->siprio[0]);
-+    KVM_RISCV_GET_CSR(cs, env, RISCV_AIA_CSR_REG(iprio1h), env->siprio[8]);
-+    KVM_RISCV_GET_CSR(cs, env, RISCV_AIA_CSR_REG(iprio2), env->siprio[16]);
-+    KVM_RISCV_GET_CSR(cs, env, RISCV_AIA_CSR_REG(iprio2h), env->siprio[24]);
-+
-+    KVM_RISCV_GET_CSR(cs, env, RISCV_AIA_CSR_REG(sieh), val);
-+    env->sie = set_field(env->sie, mask, val);
-+    KVM_RISCV_GET_CSR(cs, env, RISCV_AIA_CSR_REG(siph), val);
-+    riscv_cpu_update_mip(env, mask, val);
-+
-+    return 0;
-+}
-+
-+static int kvm_riscv_put_regs_aia_csr(CPUState *cs)
-+{
-+    CPURISCVState *env = &RISCV_CPU(cs)->env;
-+    uint64_t mask = MAKE_64BIT_MASK(32, 32);
-+    uint64_t val;
-+
-+    KVM_RISCV_SET_CSR(cs, env, RISCV_AIA_CSR_REG(siselect), env->siselect);
-+    KVM_RISCV_SET_CSR(cs, env, RISCV_AIA_CSR_REG(iprio1), env->siprio[0]);
-+    KVM_RISCV_SET_CSR(cs, env, RISCV_AIA_CSR_REG(iprio1h), env->siprio[8]);
-+    KVM_RISCV_SET_CSR(cs, env, RISCV_AIA_CSR_REG(iprio2), env->siprio[16]);
-+    KVM_RISCV_SET_CSR(cs, env, RISCV_AIA_CSR_REG(iprio2h), env->siprio[24]);
-+
-+    val = get_field(env->sie, mask);
-+    KVM_RISCV_SET_CSR(cs, env, RISCV_AIA_CSR_REG(sieh), val);
-+    val = get_field(env->mip, mask);
-+    KVM_RISCV_SET_CSR(cs, env, RISCV_AIA_CSR_REG(siph), val);
-+
-+    return 0;
-+}
-+
- static int kvm_riscv_get_regs_csr(CPUState *cs)
- {
-     kvm_riscv_get_regs_general_csr(cs);
-+    kvm_riscv_get_regs_aia_csr(cs);
- 
-     return 0;
- }
-@@ -651,6 +695,7 @@ static int kvm_riscv_get_regs_csr(CPUState *cs)
- static int kvm_riscv_put_regs_csr(CPUState *cs)
- {
-     kvm_riscv_put_regs_general_csr(cs);
-+    kvm_riscv_put_regs_aia_csr(cs);
- 
-     return 0;
- }
+Yong-Xuan Wang (8):
+  target/riscv/kvm: rewrite get/set for KVM_REG_RISCV_CSR
+  target/riscv/kvm: add KVM_REG_RISCV_CSR_AIA
+  target/riscv/kvm: add KVM_REG_RISCV_CSR_SMSTATEEN
+  target/riscv: add helper to get CSR name
+  target/riscv/kvm: rewrite kvm_riscv_handle_csr
+  target/riscv/kvm: add CSR_SIREG and CSR_STOPEI emulation
+  target/riscv/kvm: rename riscv-aia to riscv-imsic
+  docs: update the description about RISC-V AIA
+
+ docs/specs/riscv-aia.rst   |  24 +++-
+ docs/system/riscv/virt.rst |  10 +-
+ target/riscv/cpu.h         |   8 +-
+ target/riscv/csr.c         |  30 ++--
+ target/riscv/kvm/kvm-cpu.c | 287 +++++++++++++++++++++++++++++--------
+ 5 files changed, 266 insertions(+), 93 deletions(-)
+
 -- 
 2.17.1
 
