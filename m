@@ -4,67 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8789FC021AA
-	for <qemu-riscv@archiver.kernel.org>; Mon, 17 Feb 2025 14:02:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 270D4C021AA
+	for <qemu-riscv@archiver.kernel.org>; Mon, 17 Feb 2025 14:08:00 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tk1gp-0001iP-7H; Mon, 17 Feb 2025 09:01:39 -0500
+	id 1tk1mq-0004WW-4d; Mon, 17 Feb 2025 09:07:52 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1tk1gm-0001h8-It
- for qemu-riscv@nongnu.org; Mon, 17 Feb 2025 09:01:36 -0500
-Received: from mail-wm1-x32b.google.com ([2a00:1450:4864:20::32b])
+ id 1tk1mo-0004W9-M1
+ for qemu-riscv@nongnu.org; Mon, 17 Feb 2025 09:07:50 -0500
+Received: from mail-wr1-x42d.google.com ([2a00:1450:4864:20::42d])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1tk1gk-0006RM-If
- for qemu-riscv@nongnu.org; Mon, 17 Feb 2025 09:01:36 -0500
-Received: by mail-wm1-x32b.google.com with SMTP id
- 5b1f17b1804b1-4395f81db4dso26034065e9.1
- for <qemu-riscv@nongnu.org>; Mon, 17 Feb 2025 06:01:33 -0800 (PST)
+ id 1tk1mm-0007VL-Sy
+ for qemu-riscv@nongnu.org; Mon, 17 Feb 2025 09:07:50 -0500
+Received: by mail-wr1-x42d.google.com with SMTP id
+ ffacd0b85a97d-38f2f748128so1367704f8f.1
+ for <qemu-riscv@nongnu.org>; Mon, 17 Feb 2025 06:07:48 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1739800892; x=1740405692; darn=nongnu.org;
+ d=ventanamicro.com; s=google; t=1739801267; x=1740406067; darn=nongnu.org;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=1OqSpTQRh1Twfi3SR5Jg4mnKOhwoe/lifEQcR2LHgI8=;
- b=hh85vzviDG4905JBTCfZjatFJ/gGl/Pr4TRDCDi2pY/AkeCj01weDmk1w02z3+BhG+
- 0OvIivFqDZ0fYP4DqQ56Y5Khdb/5qRRHrMhuee3LB0ha9sSw9r0jjXpXcR+akANCq+jN
- xzOr4Dzv3Ln48kFMPFNNsT6rRStMn00i9P+X2IFZqpLZccyUcWcyrhOly1KFv1L7kOkF
- IKMCJv6/+lAjI2Jsam8dt1FhAGgnGJH2KunT9Y6sOK9UB0XOYCu+b29Bq7eFc9GKYmha
- hSgoTBimFiVkSGsHdU/BtIrf36fPd3C2agspdOX3ux2YC/Eu/nPRO7YUn5kSfEFSyLBn
- Dvpg==
+ bh=PmgIdukFgg81QXZfPCUuO0nynNv6ogOqUR1G17GCxqc=;
+ b=IwCguBIoJaRXYMdJTaH7BwoxbHSiujF358e0R13CEyDJNDsxFTSzq47pfQTy1YXXE4
+ nrJFl8aYKwcbeP9iykDwPM15nxVca8VrSMk7KgEwrzgCCdeVGOaU1a6TnrIFVYNE/CGx
+ Z3fczXjAEG2b0mMbfMRyCMBV27bWj6NV+B8BJ8aY2tKkt+UBmlSh3YW3fsIfAa1++NRi
+ O47D32zlRS/UklhJQj+FhI174nXy1Xo2RNI+/QosW7l+r7G8u5NfhnQd8Rs1Ld4yV8W2
+ iyzqjWklCDsKimdJJ0z+m5un4Fzr3KM5zgg0gTD/7EJeQQplejRXEJRouuZYKh8d7D8J
+ ChOw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1739800892; x=1740405692;
+ d=1e100.net; s=20230601; t=1739801267; x=1740406067;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=1OqSpTQRh1Twfi3SR5Jg4mnKOhwoe/lifEQcR2LHgI8=;
- b=JqnLhZ5vrrgPlp8vU8R1SG5ltJtWpVVb5XRWjkfxvzS7msOkm0JnQV2R4ftWDWHu/E
- 5nxoMXbnjX+PhDdpPE09eq3EZ/n2/70JbyehpAj+uZqhOQ8Ofsq2mtccUdk+LKcp3qly
- eOgAQmITA1t28fzuNh4f3s8gPPjDYRUlbxDrbmwNNOvEYTS3x9Ge2Z6C0AMUz/8qQzg9
- 8yC2d2r/lZVVq8CcUi5fAfZU/RwoUYoA+qIopHT1rCV+10P6yPP3MZRl/GF/OjBd0d/U
- Gqw2Bz8KvBcjrtFK7CDwR6ZpYwgJrN94UprFNrnVVzrWSgxJc3R6CiYjVYSUqMKsQ5e6
- gGeg==
+ bh=PmgIdukFgg81QXZfPCUuO0nynNv6ogOqUR1G17GCxqc=;
+ b=i7ssbXIrSfsWMINQKfUSsHvjOdJ0PKXUyTGufLkpK+pihbUiuD788jcc4W0pUW1nzE
+ 9gtKMCs2dr+AWIL2R2ziDaKTItMQYEnN/Fo6rsthVuuLG0q2BnROBkb2d3rxXDuICRvI
+ 5c4Nom6IV/2vKpOgVBwhAwvvhXtI17JOZH04laLFno4+Nwg8CQb5Ofp4LOg1cWP9Hgn/
+ UMUBtVWLVIuu31zhTAaVBgAvmiZ1suz2iu2Unv2JqDVDy7vIqSPFt7gj9gN7c7/vh7kW
+ QOKFFrwTBRNpDboBYGAZ9W7GV7KzicPS5+pGWhiJrtouiuNV8WfFpXBP4V7nQPailDsH
+ pVcA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCW65C52HEkTr36XnlbeYp/7gVYEJ0ntoGjWwyoBTo4fhbfc85HSDLhxBHaYuMIf4ZdtIEeBlSV9EVgs@nongnu.org
-X-Gm-Message-State: AOJu0YwNj1X/APUBWzKZOya0D0JX3jrnRQJRGkcpx6R7hZ2Zq/tRtkXr
- zvWyYjKLALAt5WVrbuJgNVw7SChYPKjfmF2rcAinj5dce31tR9W4/8gsCDg8VeI=
-X-Gm-Gg: ASbGncukJeOo5+lNxx4fcDepxldDg2iPGDO1VYRyhSOZrktBxMoSVj5mV+Z6MWffxeB
- 5bB1/uUz95naaf7u5h14LJP7N71BOIyys4WoUHoKQuIo9d7tr0AdfKMK+WenjJp1y9gJXPjcuz3
- 0L3JqzrQeO8iLJRguPmS3F8m+kfEzOgbVIIKN7FLsCMQE9h0aadtaDk1yarEyTBFul6mjFPVsab
- ACmDJ9gD6emW7iXtlCiaH4Y/ZNpVrsaBoD5mvhBiAK/LcdF3ZrZxXYYA/2ZcGhY2clidEU2EO8N
- p6g=
-X-Google-Smtp-Source: AGHT+IFpyHztwirWiksqSwCLmRhjqFwfop7ZWjHDH19YOXoNe2bHw+ng8hatedolJBjP2gwMFVmOEQ==
-X-Received: by 2002:a05:600c:1c25:b0:439:8345:17a6 with SMTP id
- 5b1f17b1804b1-439834518abmr30833915e9.12.1739800892374; 
- Mon, 17 Feb 2025 06:01:32 -0800 (PST)
+ AJvYcCWbgRatZfI2D7wmdqM2BoVSWVA/1VJcX8FbgKu93Wf9h4sbQlBRCaFRGSsW0xyiKFfcUIEGzPMmANMT@nongnu.org
+X-Gm-Message-State: AOJu0YxLH7eMJC42ClCm9qQlzKfC1x/jXVo7+78CqKSJ8dyp5hyuo1KG
+ dWELEB/gd0GECgCFR21mr0XcoprvLB4uuYu5YB2Fc8jbwE7Iyev6dBPC049jc/M=
+X-Gm-Gg: ASbGnctQzbTHz6pgmRXjfxD7Xdc8nWcgDeqCyF/DZE2d+AAjCPHk9VzvZKlaeDTAYuV
+ YjUqE1gk8kmDFFQsuAA4m50czsGMFtkxk4dEPbNSnrWqa5Ri/5t/zmm8VbgjRRFh+QEzS3x65GZ
+ 2kjTrJUJE/mv2DKWyxCQKhJXJN5T4tV7/Qcga+huxzfeXm4OO4ZZw+9tfS3tjuaI1e0zpDMU2pO
+ UrV7I5HOK8Cgs0wtaNgCJuwDsxWW12b/FKUSn/pi7CyXPpJW6w5W0Nab1x9AtXHvcUVdvidAAWm
+ 2JY=
+X-Google-Smtp-Source: AGHT+IGe7x0l83EZz1S/BnhFgczyBH4ehZ+RcGMIT/e8NK1/Km22GXFwIO145autYnZjIxvKc/jHdA==
+X-Received: by 2002:a05:6000:18a9:b0:38b:ed1c:a70d with SMTP id
+ ffacd0b85a97d-38f33e87e68mr12298332f8f.0.1739801266538; 
+ Mon, 17 Feb 2025 06:07:46 -0800 (PST)
 Received: from localhost ([2a02:8308:a00c:e200::766e])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-43989087517sm19306015e9.8.2025.02.17.06.01.31
+ ffacd0b85a97d-38f258b432asm12115256f8f.6.2025.02.17.06.07.45
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 17 Feb 2025 06:01:31 -0800 (PST)
-Date: Mon, 17 Feb 2025 15:01:31 +0100
+ Mon, 17 Feb 2025 06:07:46 -0800 (PST)
+Date: Mon, 17 Feb 2025 15:07:45 +0100
 From: Andrew Jones <ajones@ventanamicro.com>
 To: Yong-Xuan Wang <yongxuan.wang@sifive.com>
 Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, greentime.hu@sifive.com, 
@@ -73,17 +73,18 @@ Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, greentime.hu@sifive.com,
  Alistair Francis <alistair.francis@wdc.com>, 
  Weiwei Li <liwei1518@gmail.com>,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>, 
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
-Subject: Re: [PATCH 4/8] target/riscv: add helper to get CSR name
-Message-ID: <20250217-d6ff55e1f04b68643ae8295e@orel>
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Philippe =?utf-8?Q?Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+Subject: Re: [PATCH 7/8] target/riscv/kvm: rename riscv-aia to riscv-imsic
+Message-ID: <20250217-9d3c0d38ed66b1a8257b4515@orel>
 References: <20250217081730.9000-1-yongxuan.wang@sifive.com>
- <20250217081730.9000-5-yongxuan.wang@sifive.com>
+ <20250217081730.9000-8-yongxuan.wang@sifive.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20250217081730.9000-5-yongxuan.wang@sifive.com>
-Received-SPF: pass client-ip=2a00:1450:4864:20::32b;
- envelope-from=ajones@ventanamicro.com; helo=mail-wm1-x32b.google.com
+In-Reply-To: <20250217081730.9000-8-yongxuan.wang@sifive.com>
+Received-SPF: pass client-ip=2a00:1450:4864:20::42d;
+ envelope-from=ajones@ventanamicro.com; helo=mail-wr1-x42d.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -106,41 +107,133 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Mon, Feb 17, 2025 at 04:17:24PM +0800, Yong-Xuan Wang wrote:
-> Add a helper function to get CSR name from CSR number.
+On Mon, Feb 17, 2025 at 04:17:27PM +0800, Yong-Xuan Wang wrote:
+> The riscv-aia property only controls the in-kernel IMSIC mode, the
+> emulation of AIA MSI mode is controlled by the kernel-irqchip property.
+> Rename the riscv-aia property to riscv-imsic to prevent the confusion.
 > 
 > Signed-off-by: Yong-Xuan Wang <yongxuan.wang@sifive.com>
 > ---
->  target/riscv/cpu.h | 6 +++++-
->  1 file changed, 5 insertions(+), 1 deletion(-)
+>  target/riscv/kvm/kvm-cpu.c | 52 ++++++++++++++++++++------------------
+>  1 file changed, 27 insertions(+), 25 deletions(-)
 > 
-> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> index 616c3bdc1c24..133d1852ee1e 100644
-> --- a/target/riscv/cpu.h
-> +++ b/target/riscv/cpu.h
-> @@ -920,8 +920,12 @@ extern const bool valid_vm_1_10_32[], valid_vm_1_10_64[];
->  void riscv_get_csr_ops(int csrno, riscv_csr_operations *ops);
->  void riscv_set_csr_ops(int csrno, riscv_csr_operations *ops);
+> diff --git a/target/riscv/kvm/kvm-cpu.c b/target/riscv/kvm/kvm-cpu.c
+> index c047d5f36951..ab53b76ab81f 100644
+> --- a/target/riscv/kvm/kvm-cpu.c
+> +++ b/target/riscv/kvm/kvm-cpu.c
+> @@ -1798,9 +1798,9 @@ void kvm_riscv_set_irq(RISCVCPU *cpu, int irq, int level)
+>      }
+>  }
 >  
-> -void riscv_cpu_register_gdb_regs_for_features(CPUState *cs);
-> +static inline const char *riscv_get_csr_name(int csr_no)
-> +{
-> +    return csr_ops[csr_no & (CSR_TABLE_SIZE - 1)].name;
+> -static int aia_mode;
+> +static int imsic_mode;
+>  
+> -static const char *kvm_aia_mode_str(uint64_t mode)
+> +static const char *kvm_imsic_mode_str(uint64_t mode)
+>  {
+>      switch (mode) {
+>      case KVM_DEV_RISCV_AIA_MODE_EMUL:
+> @@ -1813,19 +1813,19 @@ static const char *kvm_aia_mode_str(uint64_t mode)
+>      };
+>  }
+>  
+> -static char *riscv_get_kvm_aia(Object *obj, Error **errp)
+> +static char *riscv_get_kvm_imsic(Object *obj, Error **errp)
+>  {
+> -    return g_strdup(kvm_aia_mode_str(aia_mode));
+> +    return g_strdup(kvm_imsic_mode_str(imsic_mode));
+>  }
+>  
+> -static void riscv_set_kvm_aia(Object *obj, const char *val, Error **errp)
+> +static void riscv_set_kvm_imsic(Object *obj, const char *val, Error **errp)
+>  {
+>      if (!strcmp(val, "emul")) {
+> -        aia_mode = KVM_DEV_RISCV_AIA_MODE_EMUL;
+> +        imsic_mode = KVM_DEV_RISCV_AIA_MODE_EMUL;
+>      } else if (!strcmp(val, "hwaccel")) {
+> -        aia_mode = KVM_DEV_RISCV_AIA_MODE_HWACCEL;
+> +        imsic_mode = KVM_DEV_RISCV_AIA_MODE_HWACCEL;
+>      } else if (!strcmp(val, "auto")) {
+> -        aia_mode = KVM_DEV_RISCV_AIA_MODE_AUTO;
+> +        imsic_mode = KVM_DEV_RISCV_AIA_MODE_AUTO;
+>      } else {
+>          error_setg(errp, "Invalid KVM AIA mode");
+>          error_append_hint(errp, "Valid values are emul, hwaccel, and auto.\n");
+> @@ -1834,13 +1834,15 @@ static void riscv_set_kvm_aia(Object *obj, const char *val, Error **errp)
+>  
+>  void kvm_arch_accel_class_init(ObjectClass *oc)
+>  {
+> -    object_class_property_add_str(oc, "riscv-aia", riscv_get_kvm_aia,
+> -                                  riscv_set_kvm_aia);
+> -    object_class_property_set_description(oc, "riscv-aia",
+> -        "Set KVM AIA mode. Valid values are 'emul', 'hwaccel' and 'auto'. "
+> -        "Changing KVM AIA modes relies on host support. Defaults to 'auto' "
+> -        "if the host supports it");
+> -    object_property_set_default_str(object_class_property_find(oc, "riscv-aia"),
+> +    object_class_property_add_str(oc, "riscv-imsic", riscv_get_kvm_imsic,
+> +                                  riscv_set_kvm_imsic);
+> +    object_class_property_set_description(oc, "riscv-imsic",
+> +        "Set KVM IMSIC mode. Valid values are 'emul', 'hwaccel' and 'auto'. "
+> +        "Changing KVM IMSIC modes relies on host support. Defaults to 'auto' "
+> +        "if the host supports it. This property only takes effect when the "
+> +        "kernel-irqchip=on|split when using AIA MSI.");
+> +    object_property_set_default_str(object_class_property_find(oc,
+> +                                                               "riscv-imsic"),
+>                                      "auto");
 
-Shouldn't we assert csr_no is correct rather than silently
-truncate it?
+We can't change property names without deprecating the old name (which
+isn't likely worth it).
 
 Thanks,
 drew
 
-> +}
+
+>  }
 >  
-> +void riscv_cpu_register_gdb_regs_for_features(CPUState *cs);
->  target_ulong riscv_new_csr_seed(target_ulong new_value,
->                                  target_ulong write_mask);
+> @@ -1851,7 +1853,7 @@ void kvm_riscv_aia_create(MachineState *machine, uint64_t group_shift,
+>  {
+>      int ret, i;
+>      int aia_fd = -1;
+> -    uint64_t default_aia_mode;
+> +    uint64_t default_imsic_mode;
+>      uint64_t socket_count = riscv_socket_count(machine);
+>      uint64_t max_hart_per_socket = 0;
+>      uint64_t socket, base_hart, hart_count, socket_imsic_base, imsic_addr;
+> @@ -1867,24 +1869,24 @@ void kvm_riscv_aia_create(MachineState *machine, uint64_t group_shift,
+>  
+>      ret = kvm_device_access(aia_fd, KVM_DEV_RISCV_AIA_GRP_CONFIG,
+>                              KVM_DEV_RISCV_AIA_CONFIG_MODE,
+> -                            &default_aia_mode, false, NULL);
+> +                            &default_imsic_mode, false, NULL);
+>      if (ret < 0) {
+> -        error_report("KVM AIA: failed to get current KVM AIA mode");
+> +        error_report("KVM AIA: failed to get current KVM IMSIC mode");
+>          exit(1);
+>      }
+>  
+> -    if (default_aia_mode != aia_mode) {
+> +    if (default_imsic_mode != imsic_mode) {
+>          ret = kvm_device_access(aia_fd, KVM_DEV_RISCV_AIA_GRP_CONFIG,
+>                                  KVM_DEV_RISCV_AIA_CONFIG_MODE,
+> -                                &aia_mode, true, NULL);
+> +                                &imsic_mode, true, NULL);
+>          if (ret < 0) {
+> -            warn_report("KVM AIA: failed to set KVM AIA mode '%s', using "
+> +            warn_report("KVM AIA: failed to set KVM IMSIC mode '%s', using "
+>                          "default host mode '%s'",
+> -                        kvm_aia_mode_str(aia_mode),
+> -                        kvm_aia_mode_str(default_aia_mode));
+> +                        kvm_imsic_mode_str(imsic_mode),
+> +                        kvm_imsic_mode_str(default_imsic_mode));
+>  
+> -            /* failed to change AIA mode, use default */
+> -            aia_mode = default_aia_mode;
+> +            /* failed to change IMSIC mode, use default */
+> +            imsic_mode = default_imsic_mode;
+>          }
+>      }
 >  
 > -- 
 > 2.17.1
-> 
 > 
 
