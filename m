@@ -4,86 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B0613C021A9
-	for <qemu-riscv@archiver.kernel.org>; Mon, 17 Feb 2025 16:37:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D41D9C021A9
+	for <qemu-riscv@archiver.kernel.org>; Mon, 17 Feb 2025 17:20:09 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tk47w-0008W4-1B; Mon, 17 Feb 2025 11:37:48 -0500
+	id 1tk4ml-0004Y5-NO; Mon, 17 Feb 2025 12:19:59 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1tk47u-0008Va-TV
- for qemu-riscv@nongnu.org; Mon, 17 Feb 2025 11:37:46 -0500
-Received: from mail-pj1-x1030.google.com ([2607:f8b0:4864:20::1030])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tk4mj-0004Xf-Jp
+ for qemu-riscv@nongnu.org; Mon, 17 Feb 2025 12:19:57 -0500
+Received: from mail-wm1-x335.google.com ([2a00:1450:4864:20::335])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1tk47s-0007CW-UM
- for qemu-riscv@nongnu.org; Mon, 17 Feb 2025 11:37:46 -0500
-Received: by mail-pj1-x1030.google.com with SMTP id
- 98e67ed59e1d1-2fa8ac56891so6468665a91.2
- for <qemu-riscv@nongnu.org>; Mon, 17 Feb 2025 08:37:44 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tk4mg-0005y1-Ot
+ for qemu-riscv@nongnu.org; Mon, 17 Feb 2025 12:19:57 -0500
+Received: by mail-wm1-x335.google.com with SMTP id
+ 5b1f17b1804b1-4395f81db4dso27549405e9.1
+ for <qemu-riscv@nongnu.org>; Mon, 17 Feb 2025 09:19:54 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1739810263; x=1740415063; darn=nongnu.org;
+ d=linaro.org; s=google; t=1739812793; x=1740417593; darn=nongnu.org;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=QJAnQ6KSRQeLxo5DrQ1/+9lnEZmxA9TeBMNZXMAlfU0=;
- b=lYMAMOo1PDKIprCi+ln56C8KezYkmuTof5syGHbP3RySZBJNgS/wgNdHPkVp9BDeu8
- ebVg/Uq8fIuMXhOTUgiWn7hMKrVB7AShppijPlXeH52IGZAvKC3ukqq3Oql0ca3RG0xe
- yaRwyPYrWcltan65T7P0fgbEEByukEKJHeoPFzDRe2rioK99JDZsgIvMFcw+wGnwMVwH
- nkKTRZQVnY1osHO4AX18Km9Rzah0ABbnVc89dabRq7YSk8+lbqznBotd9mFe5TjUxvDx
- m+FC44f6UY5q2zLvEHxBfPKAcR2Q8h0EX+hSDslydfB7DUcMaBgwINa1/nUFjDQj6T9g
- ZRNw==
+ bh=iQ6iKHAl4GiTXceekAQxS3dDYx6wGvfJgfBKoYsDbfU=;
+ b=eZfvsUQKEpXzgTj0DY1EO8O9uezBz06lPX/xgObUKoC/Hm9j7aEs3yS/tGFRRIPpVp
+ 9RW37ZFR6/h6DbnedlXx36hvrFYWPL8I43J8f3T0wZ2ctxqkxFekEohaKZHfyHi7r5QT
+ vBDZXS7dPbUgHdySBnd3WlxUb03Jw3fV7L1kdYBKpdWSO6gY8httYpXmxSpCml2BRkmi
+ JHy8g+APTUikhMBFIqFmWwbJLqrq22MuBKOiyI9uPqVyHXtzbLcIwgC8lQzvloOrXapI
+ MvySQD9Kgv5fMHnNzBe0w7UUzCk8VPUnJdpu0RKAFwjbyjpridTsHQ2uus+/pWlby/Yo
+ pUkA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1739810263; x=1740415063;
+ d=1e100.net; s=20230601; t=1739812793; x=1740417593;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=QJAnQ6KSRQeLxo5DrQ1/+9lnEZmxA9TeBMNZXMAlfU0=;
- b=T1GuB+x6g7W1pL5KSJ8CBM/PxQ5/bFpiQOs2fiUL2nJfU5tw45o1IPdrbEDojUmn1c
- Qt6wg02TuOuULkzzbJkcb9AIu36Omtmpa2oE8bARJ3bSnyJAGwCfXTWUgu4D8Bec5R2K
- 6I43wUke3zP9kslofcRLGNa1jreAUG7yGfKPLWhvtnqEkN2xxSv3ZEw/Hlk4KKaxpCR8
- lYyjhfBXPcxLVt/AwRTF8R+CBdZhdGaQK3VTj2fPVdShh0NVBn9GjCWjSAMhZttvRhUA
- o5vcDkNXXGj/KaJkIgbxJgjYUHHXL1kDdGiROBHhC7BfSfTgaGAiUACWRPDXNy+AyIgr
- eovg==
+ bh=iQ6iKHAl4GiTXceekAQxS3dDYx6wGvfJgfBKoYsDbfU=;
+ b=idzBF9/ZsIELHFM5DpFfJD56A+F0ukXH2Zt4yCu5qezshqkoKxa/OC2Uad77X0Zxjo
+ PRNCPcyANB9GUV4fdQJar6Wm8Lp7vNRfLfTQBLG34922fpA6Cu8op6MTjAYfIQylXOB0
+ H3oi7dTAZhO+w7S4B9IseRHuZ3ncyzCYecQrdNo/RUenaR+tB54H94MW08AFj7fJoMao
+ scvi4VTfTAXwRV+Pj7M12Q01xXIp238ZI4zLsW2XG6o4AfL4g8Lf0fTI8kWrNoTfsZbC
+ cNKeJCBuzXkVNvmDzxxa7bj4VVwSWXleKuZ1XjUDjXVfxWbAp5e3N1bjleogIEhO9UUp
+ JqHg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCV62QtWXO7YDsJoYe4HOmykMKh/rTis8rqte2MNwuDLfu/4lgLz06BwL+mpf3Y+59j7QAGE3Ag1jaPI@nongnu.org
-X-Gm-Message-State: AOJu0YxrTvZx60hQHambqvUf/LoR1orxO6Y4BNiB6i7Sik2jns1tClTY
- x4c96TiISR351YwpQVP+Aw5NIw+f/WJP8uIyrEIr8Q5+WzVWznffSnsA49EPoi0=
-X-Gm-Gg: ASbGnctPvg46v+3JbinBZe1ar4UyXDhXZl1RPD/lf1vZk0xQ5+Dh0TQJEYmSRB3YCqj
- 30/4OQ/RccH5rmtnCvTWs0kmEr8PPIWWa0tbUyxQFaF5/AE1gpLVgzwGqUKGTAmcTb+ADu5dr9I
- c/PShkCHqjvqo93e5/1rohK13d1r8gZAd+AnE5IPdWcnPybTcmrcf3H49fGls6iWZQ/JwlMdPJm
- ILtuyEu5cUd/dy/1LNZzKDy1Ht+OvM/PkGgTDPJIguG2RAx46wyzKnn01bCApbvKV5KjAFFna4B
- 48OSAFFBpsljpyK8KseqAZAgFdIuJhkMCpjVdNgUTIj1K1k9qEHUDNNEsdrde5UE
-X-Google-Smtp-Source: AGHT+IH825bkQck0StXWlhdENnRDaIpTJwiimi1Dj/JaAOoL82WE1H6EdtnQ4gFWPg4gqpDGSSMl3g==
-X-Received: by 2002:a17:90b:2e46:b0:2ee:b6c5:1def with SMTP id
- 98e67ed59e1d1-2fc40f0f46dmr14739663a91.8.1739810262960; 
- Mon, 17 Feb 2025 08:37:42 -0800 (PST)
-Received: from [192.168.68.110] (201-68-240-180.dsl.telesp.net.br.
- [201.68.240.180]) by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-2fc13ac19aesm8301249a91.17.2025.02.17.08.37.40
+ AJvYcCVqCqL3cA3qJ1k12VheItG2ZLf4u18OYOVOOWNuZja4auJoAsNyqaVigcEG5VxOAOPdaSM68B1vQC2I@nongnu.org
+X-Gm-Message-State: AOJu0YwKEwoZSXI9dMUJbo420hyqt+EvU3pZhmMg1PE/SRTSPio8y0/6
+ u0pfePBpkcIm69yyuUsfhwFFn169vqEOnpQPDWb3NgHy700Z2r7juMWn7+VaLb8=
+X-Gm-Gg: ASbGnctobyJWp7l0dDk70CwA/Iclfu8/AJoA7DKDrGRyrd+RpHH4yturmqGib9kuyUH
+ uHk1iUQZ2JmqWL+6mUIQdiIACX909Gsdt/7DoenqPhnOnctL0x3eXWFKdF3Ovi8lQ80lNJGBjBx
+ rDbTlXGR5sU+zsvypl2FEybCHTOgzvcfo8wBeAb06FTDQkR1JUvfrAz3YsrHlHTMAx9LBuU9Kji
+ YzU5r7Jf1BOOHgk9PpLrE/4oMLdBQWMjovGs1kymtv9lD6ABOmoUfGCPWqLPUkgWCdQi0fEczit
+ P0ZmC3A9orLyMhPzHc+UlHXYDggCTQ==
+X-Google-Smtp-Source: AGHT+IEgo1pk8uQGUSG6ebpaxNPekQ6qVjpVo6fgVMW/kIFnegEFZYxMbxaDbrxa4QtPRDs+dN9QbQ==
+X-Received: by 2002:a05:600c:3396:b0:439:8439:de7e with SMTP id
+ 5b1f17b1804b1-4398439dfdamr42175065e9.15.1739812792683; 
+ Mon, 17 Feb 2025 09:19:52 -0800 (PST)
+Received: from [192.168.1.121] ([176.167.144.216])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-4395a1b83a3sm157295295e9.33.2025.02.17.09.19.49
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 17 Feb 2025 08:37:42 -0800 (PST)
-Message-ID: <ca0c6853-2968-4e3c-84ef-6656b33a51e2@ventanamicro.com>
-Date: Mon, 17 Feb 2025 13:37:37 -0300
+ Mon, 17 Feb 2025 09:19:51 -0800 (PST)
+Message-ID: <a8be34a4-c157-4a5f-99bc-50c87c1330b1@linaro.org>
+Date: Mon, 17 Feb 2025 18:19:48 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] target/riscv: Respect mseccfg.RLB bit for TOR mode PMP
- entry
-To: Rob Bradford <rbradford@rivosinc.com>, qemu-devel@nongnu.org
-Cc: Palmer Dabbelt <palmer@dabbelt.com>, Bin Meng <bmeng.cn@gmail.com>,
- Weiwei Li <liwei1518@gmail.com>, qemu-riscv@nongnu.org,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Alistair Francis <alistair.francis@wdc.com>
-References: <20250210153713.343626-1-rbradford@rivosinc.com>
+Subject: Re: [PATCH 16/20] cpus: Restrict cpu_common_post_load() code to TCG
+To: Richard Henderson <richard.henderson@linaro.org>, qemu-devel@nongnu.org
+Cc: Peter Maydell <peter.maydell@linaro.org>,
+ Paolo Bonzini <pbonzini@redhat.com>, qemu-arm@nongnu.org,
+ Igor Mammedov <imammedo@redhat.com>, =?UTF-8?Q?Alex_Benn=C3=A9e?=
+ <alex.bennee@linaro.org>, kvm@vger.kernel.org, qemu-ppc@nongnu.org,
+ qemu-riscv@nongnu.org, David Hildenbrand <david@redhat.com>,
+ qemu-s390x@nongnu.org, xen-devel@lists.xenproject.org
+References: <20250123234415.59850-1-philmd@linaro.org>
+ <20250123234415.59850-17-philmd@linaro.org>
+ <e52485c5-122a-4a95-928f-08fcd17cd772@linaro.org>
 Content-Language: en-US
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <20250210153713.343626-1-rbradford@rivosinc.com>
+From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+In-Reply-To: <e52485c5-122a-4a95-928f-08fcd17cd772@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1030;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pj1-x1030.google.com
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::335;
+ envelope-from=philmd@linaro.org; helo=mail-wm1-x335.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -106,38 +107,37 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-
-
-On 2/10/25 12:37 PM, Rob Bradford wrote:
-> When running in TOR mode (Top of Range) the next PMP entry controls
-> whether the entry is locked. However simply checking if the PMP_LOCK bit
-> is set is not sufficient with the Smepmp extension which now provides a
-> bit (mseccfg.RLB (Rule Lock Bypass)) to disregard the lock bits. In
-> order to respect this bit use the convenience pmp_is_locked() function
-> rather than directly checking PMP_LOCK since this function checks
-> mseccfg.RLB.
+On 26/1/25 22:16, Richard Henderson wrote:
+> On 1/23/25 15:44, Philippe Mathieu-Daudé wrote:
+>> CPU_INTERRUPT_EXIT was removed in commit 3098dba01c7
+>> ("Use a dedicated function to request exit from execution
+>> loop"), tlb_flush() and tb_flush() are related to TCG
+>> accelerator.
+>>
+>> Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+>> ---
+>>   cpu-target.c | 33 +++++++++++++++++++--------------
+>>   1 file changed, 19 insertions(+), 14 deletions(-)
+>>
+>> diff --git a/cpu-target.c b/cpu-target.c
+>> index a2999e7c3c0..c05ef1ff096 100644
+>> --- a/cpu-target.c
+>> +++ b/cpu-target.c
+>> @@ -45,22 +45,27 @@
+>>   #ifndef CONFIG_USER_ONLY
+>>   static int cpu_common_post_load(void *opaque, int version_id)
+>>   {
+>> -    CPUState *cpu = opaque;
+>> +#ifdef CONFIG_TCG
+>> +    if (tcg_enabled()) {
 > 
-> Signed-off-by: Rob Bradford <rbradford@rivosinc.com>
-> ---
-
-Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-
-
->   target/riscv/pmp.c | 2 +-
->   1 file changed, 1 insertion(+), 1 deletion(-)
+> Why do you need both ifdef and tcg_enabled()?  I would have thought just 
+> tcg_enabled().
 > 
-> diff --git a/target/riscv/pmp.c b/target/riscv/pmp.c
-> index a185c246d6..85ab270dad 100644
-> --- a/target/riscv/pmp.c
-> +++ b/target/riscv/pmp.c
-> @@ -524,7 +524,7 @@ void pmpaddr_csr_write(CPURISCVState *env, uint32_t addr_index,
->               uint8_t pmp_cfg = env->pmp_state.pmp[addr_index + 1].cfg_reg;
->               is_next_cfg_tor = PMP_AMATCH_TOR == pmp_get_a_field(pmp_cfg);
->   
-> -            if (pmp_cfg & PMP_LOCK && is_next_cfg_tor) {
-> +            if (pmp_is_locked(env, addr_index + 1) && is_next_cfg_tor) {
->                   qemu_log_mask(LOG_GUEST_ERROR,
->                                 "ignoring pmpaddr write - pmpcfg + 1 locked\n");
->                   return;
+> Are there declarations that are (unnecessarily?) protected?
 
+No, you are right, tcg_enabled() is sufficient, I don't remember why
+I added the #ifdef.
+
+Could I include your R-b tag without the #ifdef lines?
 
