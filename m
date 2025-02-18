@@ -4,80 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5EC20C021AA
-	for <qemu-riscv@archiver.kernel.org>; Tue, 18 Feb 2025 16:39:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EFBD4C021AD
+	for <qemu-riscv@archiver.kernel.org>; Tue, 18 Feb 2025 16:39:39 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tkQcm-0006qv-Tt; Tue, 18 Feb 2025 11:39:08 -0500
+	id 1tkQco-0006rT-BY; Tue, 18 Feb 2025 11:39:10 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1tkQcl-0006qL-6x
- for qemu-riscv@nongnu.org; Tue, 18 Feb 2025 11:39:07 -0500
-Received: from mail-pl1-x62d.google.com ([2607:f8b0:4864:20::62d])
+ id 1tkQcm-0006qw-UQ
+ for qemu-riscv@nongnu.org; Tue, 18 Feb 2025 11:39:08 -0500
+Received: from mail-pl1-x635.google.com ([2607:f8b0:4864:20::635])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1tkQci-0002LG-CH
- for qemu-riscv@nongnu.org; Tue, 18 Feb 2025 11:39:06 -0500
-Received: by mail-pl1-x62d.google.com with SMTP id
- d9443c01a7336-2212a930001so61667445ad.0
- for <qemu-riscv@nongnu.org>; Tue, 18 Feb 2025 08:39:04 -0800 (PST)
+ id 1tkQcl-0002Li-EE
+ for qemu-riscv@nongnu.org; Tue, 18 Feb 2025 11:39:08 -0500
+Received: by mail-pl1-x635.google.com with SMTP id
+ d9443c01a7336-220d132f16dso82881955ad.0
+ for <qemu-riscv@nongnu.org>; Tue, 18 Feb 2025 08:39:07 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1739896743; x=1740501543; darn=nongnu.org;
+ d=ventanamicro.com; s=google; t=1739896746; x=1740501546; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=XI0IvlQEH5O6ddnnlohPtfuIzpvfe1Je8XQOQkMl6nI=;
- b=Cbns2+RPZR3C4WDyvBaZ3zEASEuJ7VVejiKd8OWqOCYdq+913twqfsujN12IYMQ8cC
- o+k0SZOAgKC4qcM7VORVyLIV9vIuvYbEUvoXEoVDG9JUJ40NxqoxkJCc7VgY4xfw1QLU
- cvT9R1htL55MRD2dxcjv7D10JttTQ1Y2Q49Jsh48EcMHckl42KSoGQgm6b40+v7Sk5bh
- I9WyofGofW86I3mDOy3oPyv9GgT58Qjf7FH6ynXSH/qd41ywt7dNdTFJZJDWD+GGuGXj
- yBMyPxzEnzlqOFb2jIpsNOnyeJT5L0gCF9hezmajTyuSNYNvxEbN+uyv3fONZCZ9Plk6
- g1vw==
+ bh=TYUkm0URlvt/fEHggYoxirTMYLe7QUj525r8nmoUuyU=;
+ b=HSLKx+9/NxxZQJ6O2m27KiDT7MWeehDia9ORGxWrm57Qdo/gAMA3wLGzm+aVToA8lr
+ uD/j25MJfdnK+42QKTVkHENg8R9f0T743TIXfgLO4VdRdT5ovbbHJ9ioTX5IUT+OyoGF
+ 9NhCnp0GduUnzy1lwIJC9kzb7qT1yebVfPvbgTezBcLD9dv+4hqYblzUD5l1STX1XoVk
+ 660sH08Z+mwc3WYbJqMsYc3kAZQOhWA/OogKm0PeIO/vR/L+p7CzMloF55oiC+bcBycm
+ lsxrE0Tp09QO2pfnBXukNYP/UxcNG2UVy79ykyHNKt1XbWYEvGfthYfiGnXc6Huh+QRt
+ trVA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1739896743; x=1740501543;
+ d=1e100.net; s=20230601; t=1739896746; x=1740501546;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=XI0IvlQEH5O6ddnnlohPtfuIzpvfe1Je8XQOQkMl6nI=;
- b=I8Cn9UcjRAAuwCvl8CYRDRDeknPfaKRTJDlpa2TQDLpjhyq5pfJb0yEPFzGSnMDoIv
- Yy0dVbXYbUKSrttJcWc5mupMXY7Jw1bjom/JRTMsIhnsEsbe6y8KncGuuPC3yAqvcJ/4
- FEZ0twlcFmQn4y01YmL+Kace2QRKCC2sobCFWhhYVy58GF+Nn4WfnTvpIk1DNF6RvUt8
- FGMarE7aN4U6WPqrMHy0D+0CYVlxvJr5JAhxKbNycg99y3MFdMbYWBUOrfuTcDXCoNgT
- GrEUlJKdzyjuGcyydSBzkjc0tpTfNf6Cyk9kFIEhEXQnnFe2GnWkQl+yYdKg6xZAbTlk
- 2rtA==
-X-Gm-Message-State: AOJu0Yyiuf/1yGBMEW9ESW85xW6Ebx6WUAX942xaqmPigslnnd214ApR
- FKTKUxjiqqM5YfLrcu0FB0kEtA6MAqfzGp5pqTMVWFsZki5mEXA+Z3Aahp6g7V4=
-X-Gm-Gg: ASbGnctwZXV+rZ7/7vx2ozKPJe9S7WYr+WwPU0WiFNFEE0WsKLe1PtV9G+cAvQ/mmzX
- 0MSpbEmHCMZE94uSyOD1GaRIb/G171hoBd4xKcWjcGRCqGrdHjwAKCY8WMgHH3KSKJMDOx7KZIw
- L0w8I6DWco5z39em+HMToqHhPOdu9VKaY93tmTUSLFo+Ev2WapdVYe4jM1oXze783OOK4UmpAto
- iSnUES2vVtFGTO46l52t9ms+/1oJ8kxyi7NijIy03DynOpr0KXnZRwvcskm7aNU2Fmukkey83zX
- afciit4899LuZa3WiyCxeLO3g2SrMtcl18423M2KT4NxVUrELYe0
-X-Google-Smtp-Source: AGHT+IGTFuJOJ8D+I5TCRr7Qfb9ogp/BQ4Ya/nbZA84uVD5BOszx4D9zgzMngmFBIMBx/ESLVSFY8A==
-X-Received: by 2002:a05:6a21:6e47:b0:1ee:6786:ed50 with SMTP id
- adf61e73a8af0-1ee8cb82f6emr29114210637.24.1739896742925; 
- Tue, 18 Feb 2025 08:39:02 -0800 (PST)
+ bh=TYUkm0URlvt/fEHggYoxirTMYLe7QUj525r8nmoUuyU=;
+ b=sNxxQY0RWQVo8tEOne1L08x+rcHCPB57k76qevMDkvyWBHBQQBhMIwT5DZjJtZBLbq
+ 6AG4Ne/DVAsEBmVMWCLKMUTJciCXZycBldkd2G7VC+S0nuLpCA8QlxmpsIT0IWZ+B6ES
+ BQYVCaCJ3Oers4BOqtjEpl1fBmIq4Qe6tkBWyFrPZKZTF9nsanvwDcuGEuMFoEWkuE3J
+ QD+IqnHgaZvC9oRSJfuZBsKeyiyiMQUNHPrO5OTmlB4fS8V2Ibw4aykhW6lPgtKPrw7b
+ +HPouybE12bwY+yhCQk8U9mnKNKlDO6xybxRwhTRYuBQWqWQX8NPKAA5MAQ0CZwR3+Ns
+ Kd1w==
+X-Gm-Message-State: AOJu0YwdHKNQ/3otb6muKhvzVxqRTLs40ogm14WoSPkIcw/PHfqwjkBJ
+ pZElSizqsm91zMZJJMFRH/m48/SJHKpGWQ/Lp6bMEVzRnCOiDwvhpe2YdmH9x8A=
+X-Gm-Gg: ASbGncuTKVRWuOvjeNpNGV7NQ8Y+E6Xe+fo5IloM90UDzHSqZACSSlEk3bFfRpyjdQZ
+ jTKFdtuSH/qhQ96wARl3HEGmX60a1ojW+MMrCbeLiQh+64zdLV/TY+dbvcnh1IOzmdx64xMFSVl
+ SGDbGZ6coVVLhebbgPILYHvdha8JHNu/7okJ1ciFFEYTvmzAVl39SE7q1vPKdrWKB5xVWB7h8hr
+ yZrYpJL0rDO/4ffeqKsJOYisXp2mJHrfmLlKVjZBGNn+siZUB02WHXZnkzmMLiPrqzM5yY5J5GN
+ tWSeHxu1DFrKXos824LkQ71SJ2dvADx3JZpFE2DrjgLuNBWriIly
+X-Google-Smtp-Source: AGHT+IHtTeK7YiNntz8FIcfbRLXiFgTpoBDoe3qIcisBZRjXMGXrcSzcH+qOvAHyc2QRheznYF6HsA==
+X-Received: by 2002:a05:6a00:3d06:b0:730:9204:f0c6 with SMTP id
+ d2e1a72fcca58-732618c2a69mr24657445b3a.16.1739896745820; 
+ Tue, 18 Feb 2025 08:39:05 -0800 (PST)
 Received: from grind.. (201-68-240-180.dsl.telesp.net.br. [201.68.240.180])
  by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-73278d09228sm4595533b3a.117.2025.02.18.08.39.00
+ d2e1a72fcca58-73278d09228sm4595533b3a.117.2025.02.18.08.39.03
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 18 Feb 2025 08:39:02 -0800 (PST)
+ Tue, 18 Feb 2025 08:39:05 -0800 (PST)
 From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
  liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Subject: [PATCH 1/3] linux-headers: Update to Linux v6.14-rc3
-Date: Tue, 18 Feb 2025 13:38:52 -0300
-Message-ID: <20250218163854.425607-2-dbarboza@ventanamicro.com>
+Subject: [PATCH 2/3] target/riscv/cpu.c: create flag for ziccrse
+Date: Tue, 18 Feb 2025 13:38:53 -0300
+Message-ID: <20250218163854.425607-3-dbarboza@ventanamicro.com>
 X-Mailer: git-send-email 2.48.1
 In-Reply-To: <20250218163854.425607-1-dbarboza@ventanamicro.com>
 References: <20250218163854.425607-1-dbarboza@ventanamicro.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::62d;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pl1-x62d.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::635;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pl1-x635.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -100,481 +100,45 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Update headers to retrieve the latest KVM caps for RISC-V.
+At this moment ziccrse is a TCG always enable ext that has no flag. KVM
+will expose ziccrse to users, allowing them to turn it on/off.
 
 Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 ---
- include/standard-headers/linux/ethtool.h      |  4 +
- include/standard-headers/linux/fuse.h         | 76 ++++++++++++++++++-
- .../linux/input-event-codes.h                 |  1 +
- include/standard-headers/linux/pci_regs.h     | 16 ++--
- include/standard-headers/linux/virtio_pci.h   | 14 ++++
- linux-headers/asm-arm64/kvm.h                 |  3 -
- linux-headers/asm-loongarch/kvm_para.h        |  1 +
- linux-headers/asm-riscv/kvm.h                 |  7 +-
- linux-headers/asm-x86/kvm.h                   |  1 +
- linux-headers/linux/iommufd.h                 | 35 ++++++---
- linux-headers/linux/kvm.h                     |  8 +-
- linux-headers/linux/stddef.h                  | 13 +++-
- linux-headers/linux/vduse.h                   |  2 +-
- 13 files changed, 146 insertions(+), 35 deletions(-)
+ target/riscv/cpu.c     | 5 +++++
+ target/riscv/cpu_cfg.h | 3 +++
+ 2 files changed, 8 insertions(+)
 
-diff --git a/include/standard-headers/linux/ethtool.h b/include/standard-headers/linux/ethtool.h
-index 67c47912e5..e83382531c 100644
---- a/include/standard-headers/linux/ethtool.h
-+++ b/include/standard-headers/linux/ethtool.h
-@@ -681,6 +681,8 @@ enum ethtool_link_ext_substate_module {
-  * @ETH_SS_STATS_ETH_MAC: names of IEEE 802.3 MAC statistics
-  * @ETH_SS_STATS_ETH_CTRL: names of IEEE 802.3 MAC Control statistics
-  * @ETH_SS_STATS_RMON: names of RMON statistics
-+ * @ETH_SS_STATS_PHY: names of PHY(dev) statistics
-+ * @ETH_SS_TS_FLAGS: hardware timestamping flags
-  *
-  * @ETH_SS_COUNT: number of defined string sets
-  */
-@@ -706,6 +708,8 @@ enum ethtool_stringset {
- 	ETH_SS_STATS_ETH_MAC,
- 	ETH_SS_STATS_ETH_CTRL,
- 	ETH_SS_STATS_RMON,
-+	ETH_SS_STATS_PHY,
-+	ETH_SS_TS_FLAGS,
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index 522d6584e4..0b8d2c0c25 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -1711,6 +1711,11 @@ const RISCVCPUMultiExtConfig riscv_cpu_extensions[] = {
+     MULTI_EXT_CFG_BOOL("zvksc", ext_zvksc, false),
+     MULTI_EXT_CFG_BOOL("zvksg", ext_zvksg, false),
  
- 	/* add new constants above here */
- 	ETH_SS_COUNT
-diff --git a/include/standard-headers/linux/fuse.h b/include/standard-headers/linux/fuse.h
-index 889e12ad15..d303effb2a 100644
---- a/include/standard-headers/linux/fuse.h
-+++ b/include/standard-headers/linux/fuse.h
-@@ -220,6 +220,15 @@
-  *
-  *  7.41
-  *  - add FUSE_ALLOW_IDMAP
-+ *  7.42
-+ *  - Add FUSE_OVER_IO_URING and all other io-uring related flags and data
-+ *    structures:
-+ *    - struct fuse_uring_ent_in_out
-+ *    - struct fuse_uring_req_header
-+ *    - struct fuse_uring_cmd_req
-+ *    - FUSE_URING_IN_OUT_HEADER_SZ
-+ *    - FUSE_URING_OP_IN_OUT_SZ
-+ *    - enum fuse_uring_cmd
-  */
- 
- #ifndef _LINUX_FUSE_H
-@@ -251,7 +260,7 @@
- #define FUSE_KERNEL_VERSION 7
- 
- /** Minor version number of this interface */
--#define FUSE_KERNEL_MINOR_VERSION 41
-+#define FUSE_KERNEL_MINOR_VERSION 42
- 
- /** The node ID of the root inode */
- #define FUSE_ROOT_ID 1
-@@ -421,6 +430,7 @@ struct fuse_file_lock {
-  * FUSE_HAS_RESEND: kernel supports resending pending requests, and the high bit
-  *		    of the request ID indicates resend requests
-  * FUSE_ALLOW_IDMAP: allow creation of idmapped mounts
-+ * FUSE_OVER_IO_URING: Indicate that client supports io-uring
-  */
- #define FUSE_ASYNC_READ		(1 << 0)
- #define FUSE_POSIX_LOCKS	(1 << 1)
-@@ -467,6 +477,7 @@ struct fuse_file_lock {
- /* Obsolete alias for FUSE_DIRECT_IO_ALLOW_MMAP */
- #define FUSE_DIRECT_IO_RELAX	FUSE_DIRECT_IO_ALLOW_MMAP
- #define FUSE_ALLOW_IDMAP	(1ULL << 40)
-+#define FUSE_OVER_IO_URING	(1ULL << 41)
- 
- /**
-  * CUSE INIT request/reply flags
-@@ -1202,4 +1213,67 @@ struct fuse_supp_groups {
- 	uint32_t	groups[];
++    /*
++     * KVM can turn it on/off. For TCG this is always
++     * enabled if priv_ver >= 1.11.
++     */
++    MULTI_EXT_CFG_BOOL("ziccrse", ext_ziccrse, true),
+     { },
  };
  
-+/**
-+ * Size of the ring buffer header
-+ */
-+#define FUSE_URING_IN_OUT_HEADER_SZ 128
-+#define FUSE_URING_OP_IN_OUT_SZ 128
-+
-+/* Used as part of the fuse_uring_req_header */
-+struct fuse_uring_ent_in_out {
-+	uint64_t flags;
-+
-+	/*
-+	 * commit ID to be used in a reply to a ring request (see also
-+	 * struct fuse_uring_cmd_req)
-+	 */
-+	uint64_t commit_id;
-+
-+	/* size of user payload buffer */
-+	uint32_t payload_sz;
-+	uint32_t padding;
-+
-+	uint64_t reserved;
-+};
-+
-+/**
-+ * Header for all fuse-io-uring requests
-+ */
-+struct fuse_uring_req_header {
-+	/* struct fuse_in_header / struct fuse_out_header */
-+	char in_out[FUSE_URING_IN_OUT_HEADER_SZ];
-+
-+	/* per op code header */
-+	char op_in[FUSE_URING_OP_IN_OUT_SZ];
-+
-+	struct fuse_uring_ent_in_out ring_ent_in_out;
-+};
-+
-+/**
-+ * sqe commands to the kernel
-+ */
-+enum fuse_uring_cmd {
-+	FUSE_IO_URING_CMD_INVALID = 0,
-+
-+	/* register the request buffer and fetch a fuse request */
-+	FUSE_IO_URING_CMD_REGISTER = 1,
-+
-+	/* commit fuse request result and fetch next request */
-+	FUSE_IO_URING_CMD_COMMIT_AND_FETCH = 2,
-+};
-+
-+/**
-+ * In the 80B command area of the SQE.
-+ */
-+struct fuse_uring_cmd_req {
-+	uint64_t flags;
-+
-+	/* entry identifier for commits */
-+	uint64_t commit_id;
-+
-+	/* queue the command is for (queue index) */
-+	uint16_t qid;
-+	uint8_t padding[6];
-+};
-+
- #endif /* _LINUX_FUSE_H */
-diff --git a/include/standard-headers/linux/input-event-codes.h b/include/standard-headers/linux/input-event-codes.h
-index 50b2b7497e..09ba0ad878 100644
---- a/include/standard-headers/linux/input-event-codes.h
-+++ b/include/standard-headers/linux/input-event-codes.h
-@@ -519,6 +519,7 @@
- #define KEY_NOTIFICATION_CENTER	0x1bc	/* Show/hide the notification center */
- #define KEY_PICKUP_PHONE	0x1bd	/* Answer incoming call */
- #define KEY_HANGUP_PHONE	0x1be	/* Decline incoming call */
-+#define KEY_LINK_PHONE		0x1bf   /* AL Phone Syncing */
+diff --git a/target/riscv/cpu_cfg.h b/target/riscv/cpu_cfg.h
+index 3f3c1118c0..88565e29fd 100644
+--- a/target/riscv/cpu_cfg.h
++++ b/target/riscv/cpu_cfg.h
+@@ -157,6 +157,9 @@ struct RISCVCPUConfig {
+     bool ext_ssstateen;
+     bool ext_sha;
  
- #define KEY_DEL_EOL		0x1c0
- #define KEY_DEL_EOS		0x1c1
-diff --git a/include/standard-headers/linux/pci_regs.h b/include/standard-headers/linux/pci_regs.h
-index 1601c7ed5f..3445c4970e 100644
---- a/include/standard-headers/linux/pci_regs.h
-+++ b/include/standard-headers/linux/pci_regs.h
-@@ -533,7 +533,7 @@
- #define  PCI_EXP_DEVSTA_TRPND	0x0020	/* Transactions Pending */
- #define PCI_CAP_EXP_RC_ENDPOINT_SIZEOF_V1	12	/* v1 endpoints without link end here */
- #define PCI_EXP_LNKCAP		0x0c	/* Link Capabilities */
--#define  PCI_EXP_LNKCAP_SLS	0x0000000f /* Supported Link Speeds */
-+#define  PCI_EXP_LNKCAP_SLS	0x0000000f /* Max Link Speed (prior to PCIe r3.0: Supported Link Speeds) */
- #define  PCI_EXP_LNKCAP_SLS_2_5GB 0x00000001 /* LNKCAP2 SLS Vector bit 0 */
- #define  PCI_EXP_LNKCAP_SLS_5_0GB 0x00000002 /* LNKCAP2 SLS Vector bit 1 */
- #define  PCI_EXP_LNKCAP_SLS_8_0GB 0x00000003 /* LNKCAP2 SLS Vector bit 2 */
-@@ -665,6 +665,7 @@
- #define  PCI_EXP_DEVCAP2_OBFF_MSG	0x00040000 /* New message signaling */
- #define  PCI_EXP_DEVCAP2_OBFF_WAKE	0x00080000 /* Re-use WAKE# for OBFF */
- #define  PCI_EXP_DEVCAP2_EE_PREFIX	0x00200000 /* End-End TLP Prefix */
-+#define  PCI_EXP_DEVCAP2_EE_PREFIX_MAX	0x00c00000 /* Max End-End TLP Prefixes */
- #define PCI_EXP_DEVCTL2		0x28	/* Device Control 2 */
- #define  PCI_EXP_DEVCTL2_COMP_TIMEOUT	0x000f	/* Completion Timeout Value */
- #define  PCI_EXP_DEVCTL2_COMP_TMOUT_DIS	0x0010	/* Completion Timeout Disable */
-@@ -789,10 +790,11 @@
- 	/* Same bits as above */
- #define PCI_ERR_CAP		0x18	/* Advanced Error Capabilities & Ctrl*/
- #define  PCI_ERR_CAP_FEP(x)	((x) & 0x1f)	/* First Error Pointer */
--#define  PCI_ERR_CAP_ECRC_GENC	0x00000020	/* ECRC Generation Capable */
--#define  PCI_ERR_CAP_ECRC_GENE	0x00000040	/* ECRC Generation Enable */
--#define  PCI_ERR_CAP_ECRC_CHKC	0x00000080	/* ECRC Check Capable */
--#define  PCI_ERR_CAP_ECRC_CHKE	0x00000100	/* ECRC Check Enable */
-+#define  PCI_ERR_CAP_ECRC_GENC		0x00000020 /* ECRC Generation Capable */
-+#define  PCI_ERR_CAP_ECRC_GENE		0x00000040 /* ECRC Generation Enable */
-+#define  PCI_ERR_CAP_ECRC_CHKC		0x00000080 /* ECRC Check Capable */
-+#define  PCI_ERR_CAP_ECRC_CHKE		0x00000100 /* ECRC Check Enable */
-+#define  PCI_ERR_CAP_PREFIX_LOG_PRESENT	0x00000800 /* TLP Prefix Log Present */
- #define PCI_ERR_HEADER_LOG	0x1c	/* Header Log Register (16 bytes) */
- #define PCI_ERR_ROOT_COMMAND	0x2c	/* Root Error Command */
- #define  PCI_ERR_ROOT_CMD_COR_EN	0x00000001 /* Correctable Err Reporting Enable */
-@@ -808,6 +810,7 @@
- #define  PCI_ERR_ROOT_FATAL_RCV		0x00000040 /* Fatal Received */
- #define  PCI_ERR_ROOT_AER_IRQ		0xf8000000 /* Advanced Error Interrupt Message Number */
- #define PCI_ERR_ROOT_ERR_SRC	0x34	/* Error Source Identification */
-+#define PCI_ERR_PREFIX_LOG	0x38	/* TLP Prefix LOG Register (up to 16 bytes) */
- 
- /* Virtual Channel */
- #define PCI_VC_PORT_CAP1	0x04
-@@ -1001,9 +1004,6 @@
- #define PCI_ACS_CTRL		0x06	/* ACS Control Register */
- #define PCI_ACS_EGRESS_CTL_V	0x08	/* ACS Egress Control Vector */
- 
--#define PCI_VSEC_HDR		4	/* extended cap - vendor-specific */
--#define  PCI_VSEC_HDR_LEN_SHIFT	20	/* shift for length field */
--
- /* SATA capability */
- #define PCI_SATA_REGS		4	/* SATA REGs specifier */
- #define  PCI_SATA_REGS_MASK	0xF	/* location - BAR#/inline */
-diff --git a/include/standard-headers/linux/virtio_pci.h b/include/standard-headers/linux/virtio_pci.h
-index b177ed8972..91fec6f502 100644
---- a/include/standard-headers/linux/virtio_pci.h
-+++ b/include/standard-headers/linux/virtio_pci.h
-@@ -116,6 +116,8 @@
- #define VIRTIO_PCI_CAP_PCI_CFG		5
- /* Additional shared memory capability */
- #define VIRTIO_PCI_CAP_SHARED_MEMORY_CFG 8
-+/* PCI vendor data configuration */
-+#define VIRTIO_PCI_CAP_VENDOR_CFG	9
- 
- /* This is the PCI capability header: */
- struct virtio_pci_cap {
-@@ -130,6 +132,18 @@ struct virtio_pci_cap {
- 	uint32_t length;		/* Length of the structure, in bytes. */
- };
- 
-+/* This is the PCI vendor data capability header: */
-+struct virtio_pci_vndr_data {
-+	uint8_t cap_vndr;		/* Generic PCI field: PCI_CAP_ID_VNDR */
-+	uint8_t cap_next;		/* Generic PCI field: next ptr. */
-+	uint8_t cap_len;		/* Generic PCI field: capability length */
-+	uint8_t cfg_type;		/* Identifies the structure. */
-+	uint16_t vendor_id;	/* Identifies the vendor-specific format. */
-+	/* For Vendor Definition */
-+	/* Pads structure to a multiple of 4 bytes */
-+	/* Reads must not have side effects */
-+};
++    /* Always enabled for TCG, KVM wants to switch it on/off */
++    bool ext_ziccrse;
 +
- struct virtio_pci_cap64 {
- 	struct virtio_pci_cap cap;
- 	uint32_t offset_hi;             /* Most sig 32 bits of offset */
-diff --git a/linux-headers/asm-arm64/kvm.h b/linux-headers/asm-arm64/kvm.h
-index dccd5d965f..ec1e82bdc8 100644
---- a/linux-headers/asm-arm64/kvm.h
-+++ b/linux-headers/asm-arm64/kvm.h
-@@ -43,9 +43,6 @@
- #define KVM_COALESCED_MMIO_PAGE_OFFSET 1
- #define KVM_DIRTY_LOG_PAGE_OFFSET 64
- 
--#define KVM_REG_SIZE(id)						\
--	(1U << (((id) & KVM_REG_SIZE_MASK) >> KVM_REG_SIZE_SHIFT))
--
- struct kvm_regs {
- 	struct user_pt_regs regs;	/* sp = sp_el0 */
- 
-diff --git a/linux-headers/asm-loongarch/kvm_para.h b/linux-headers/asm-loongarch/kvm_para.h
-index 4ba4ad8db1..fd7f40713d 100644
---- a/linux-headers/asm-loongarch/kvm_para.h
-+++ b/linux-headers/asm-loongarch/kvm_para.h
-@@ -17,5 +17,6 @@
- #define  KVM_FEATURE_STEAL_TIME		2
- /* BIT 24 - 31 are features configurable by user space vmm */
- #define  KVM_FEATURE_VIRT_EXTIOI	24
-+#define  KVM_FEATURE_USER_HCALL		25
- 
- #endif /* _ASM_KVM_PARA_H */
-diff --git a/linux-headers/asm-riscv/kvm.h b/linux-headers/asm-riscv/kvm.h
-index 3482c9a73d..f06bc5efcd 100644
---- a/linux-headers/asm-riscv/kvm.h
-+++ b/linux-headers/asm-riscv/kvm.h
-@@ -179,6 +179,9 @@ enum KVM_RISCV_ISA_EXT_ID {
- 	KVM_RISCV_ISA_EXT_SSNPM,
- 	KVM_RISCV_ISA_EXT_SVADE,
- 	KVM_RISCV_ISA_EXT_SVADU,
-+	KVM_RISCV_ISA_EXT_SVVPTC,
-+	KVM_RISCV_ISA_EXT_ZABHA,
-+	KVM_RISCV_ISA_EXT_ZICCRSE,
- 	KVM_RISCV_ISA_EXT_MAX,
- };
- 
-@@ -198,6 +201,7 @@ enum KVM_RISCV_SBI_EXT_ID {
- 	KVM_RISCV_SBI_EXT_VENDOR,
- 	KVM_RISCV_SBI_EXT_DBCN,
- 	KVM_RISCV_SBI_EXT_STA,
-+	KVM_RISCV_SBI_EXT_SUSP,
- 	KVM_RISCV_SBI_EXT_MAX,
- };
- 
-@@ -211,9 +215,6 @@ struct kvm_riscv_sbi_sta {
- #define KVM_RISCV_TIMER_STATE_OFF	0
- #define KVM_RISCV_TIMER_STATE_ON	1
- 
--#define KVM_REG_SIZE(id)		\
--	(1U << (((id) & KVM_REG_SIZE_MASK) >> KVM_REG_SIZE_SHIFT))
--
- /* If you need to interpret the index values, here is the key: */
- #define KVM_REG_RISCV_TYPE_MASK		0x00000000FF000000
- #define KVM_REG_RISCV_TYPE_SHIFT	24
-diff --git a/linux-headers/asm-x86/kvm.h b/linux-headers/asm-x86/kvm.h
-index 96589490c4..86f2c34e7a 100644
---- a/linux-headers/asm-x86/kvm.h
-+++ b/linux-headers/asm-x86/kvm.h
-@@ -923,5 +923,6 @@ struct kvm_hyperv_eventfd {
- #define KVM_X86_SEV_VM		2
- #define KVM_X86_SEV_ES_VM	3
- #define KVM_X86_SNP_VM		4
-+#define KVM_X86_TDX_VM		5
- 
- #endif /* _ASM_X86_KVM_H */
-diff --git a/linux-headers/linux/iommufd.h b/linux-headers/linux/iommufd.h
-index 37aae16502..ccbdca5e11 100644
---- a/linux-headers/linux/iommufd.h
-+++ b/linux-headers/linux/iommufd.h
-@@ -297,7 +297,7 @@ struct iommu_ioas_unmap {
-  *                       ioctl(IOMMU_OPTION_HUGE_PAGES)
-  * @IOMMU_OPTION_RLIMIT_MODE:
-  *    Change how RLIMIT_MEMLOCK accounting works. The caller must have privilege
-- *    to invoke this. Value 0 (default) is user based accouting, 1 uses process
-+ *    to invoke this. Value 0 (default) is user based accounting, 1 uses process
-  *    based accounting. Global option, object_id must be 0
-  * @IOMMU_OPTION_HUGE_PAGES:
-  *    Value 1 (default) allows contiguous pages to be combined when generating
-@@ -390,7 +390,7 @@ struct iommu_vfio_ioas {
-  * @IOMMU_HWPT_ALLOC_PASID: Requests a domain that can be used with PASID. The
-  *                          domain can be attached to any PASID on the device.
-  *                          Any domain attached to the non-PASID part of the
-- *                          device must also be flaged, otherwise attaching a
-+ *                          device must also be flagged, otherwise attaching a
-  *                          PASID will blocked.
-  *                          If IOMMU does not support PASID it will return
-  *                          error (-EOPNOTSUPP).
-@@ -558,16 +558,25 @@ struct iommu_hw_info_vtd {
-  * For the details of @idr, @iidr and @aidr, please refer to the chapters
-  * from 6.3.1 to 6.3.6 in the SMMUv3 Spec.
-  *
-- * User space should read the underlying ARM SMMUv3 hardware information for
-- * the list of supported features.
-+ * This reports the raw HW capability, and not all bits are meaningful to be
-+ * read by userspace. Only the following fields should be used:
-  *
-- * Note that these values reflect the raw HW capability, without any insight if
-- * any required kernel driver support is present. Bits may be set indicating the
-- * HW has functionality that is lacking kernel software support, such as BTM. If
-- * a VMM is using this information to construct emulated copies of these
-- * registers it should only forward bits that it knows it can support.
-+ * idr[0]: ST_LEVEL, TERM_MODEL, STALL_MODEL, TTENDIAN , CD2L, ASID16, TTF
-+ * idr[1]: SIDSIZE, SSIDSIZE
-+ * idr[3]: BBML, RIL
-+ * idr[5]: VAX, GRAN64K, GRAN16K, GRAN4K
-  *
-- * In future, presence of required kernel support will be indicated in flags.
-+ * - S1P should be assumed to be true if a NESTED HWPT can be created
-+ * - VFIO/iommufd only support platforms with COHACC, it should be assumed to be
-+ *   true.
-+ * - ATS is a per-device property. If the VMM describes any devices as ATS
-+ *   capable in ACPI/DT it should set the corresponding idr.
-+ *
-+ * This list may expand in future (eg E0PD, AIE, PBHA, D128, DS etc). It is
-+ * important that VMMs do not read bits outside the list to allow for
-+ * compatibility with future kernels. Several features in the SMMUv3
-+ * architecture are not currently supported by the kernel for nesting: HTTU,
-+ * BTM, MPAM and others.
-  */
- struct iommu_hw_info_arm_smmuv3 {
- 	__u32 flags;
-@@ -766,7 +775,7 @@ struct iommu_hwpt_vtd_s1_invalidate {
- };
- 
- /**
-- * struct iommu_viommu_arm_smmuv3_invalidate - ARM SMMUv3 cahce invalidation
-+ * struct iommu_viommu_arm_smmuv3_invalidate - ARM SMMUv3 cache invalidation
-  *         (IOMMU_VIOMMU_INVALIDATE_DATA_ARM_SMMUV3)
-  * @cmd: 128-bit cache invalidation command that runs in SMMU CMDQ.
-  *       Must be little-endian.
-@@ -859,6 +868,7 @@ enum iommu_hwpt_pgfault_perm {
-  * @pasid: Process Address Space ID
-  * @grpid: Page Request Group Index
-  * @perm: Combination of enum iommu_hwpt_pgfault_perm
-+ * @__reserved: Must be 0.
-  * @addr: Fault address
-  * @length: a hint of how much data the requestor is expecting to fetch. For
-  *          example, if the PRI initiator knows it is going to do a 10MB
-@@ -874,7 +884,8 @@ struct iommu_hwpt_pgfault {
- 	__u32 pasid;
- 	__u32 grpid;
- 	__u32 perm;
--	__u64 addr;
-+	__u32 __reserved;
-+	__aligned_u64 addr;
- 	__u32 length;
- 	__u32 cookie;
- };
-diff --git a/linux-headers/linux/kvm.h b/linux-headers/linux/kvm.h
-index 3bcd4eabe3..27181b3dd8 100644
---- a/linux-headers/linux/kvm.h
-+++ b/linux-headers/linux/kvm.h
-@@ -609,10 +609,6 @@ struct kvm_ioeventfd {
- #define KVM_X86_DISABLE_EXITS_HLT            (1 << 1)
- #define KVM_X86_DISABLE_EXITS_PAUSE          (1 << 2)
- #define KVM_X86_DISABLE_EXITS_CSTATE         (1 << 3)
--#define KVM_X86_DISABLE_VALID_EXITS          (KVM_X86_DISABLE_EXITS_MWAIT | \
--                                              KVM_X86_DISABLE_EXITS_HLT | \
--                                              KVM_X86_DISABLE_EXITS_PAUSE | \
--                                              KVM_X86_DISABLE_EXITS_CSTATE)
- 
- /* for KVM_ENABLE_CAP */
- struct kvm_enable_cap {
-@@ -1062,6 +1058,10 @@ struct kvm_dirty_tlb {
- 
- #define KVM_REG_SIZE_SHIFT	52
- #define KVM_REG_SIZE_MASK	0x00f0000000000000ULL
-+
-+#define KVM_REG_SIZE(id)		\
-+	(1U << (((id) & KVM_REG_SIZE_MASK) >> KVM_REG_SIZE_SHIFT))
-+
- #define KVM_REG_SIZE_U8		0x0000000000000000ULL
- #define KVM_REG_SIZE_U16	0x0010000000000000ULL
- #define KVM_REG_SIZE_U32	0x0020000000000000ULL
-diff --git a/linux-headers/linux/stddef.h b/linux-headers/linux/stddef.h
-index 96aa341942..e1416f7937 100644
---- a/linux-headers/linux/stddef.h
-+++ b/linux-headers/linux/stddef.h
-@@ -8,6 +8,13 @@
- #define __always_inline __inline__
- #endif
- 
-+/* Not all C++ standards support type declarations inside an anonymous union */
-+#ifndef __cplusplus
-+#define __struct_group_tag(TAG)		TAG
-+#else
-+#define __struct_group_tag(TAG)
-+#endif
-+
- /**
-  * __struct_group() - Create a mirrored named and anonyomous struct
-  *
-@@ -20,13 +27,13 @@
-  * and size: one anonymous and one named. The former's members can be used
-  * normally without sub-struct naming, and the latter can be used to
-  * reason about the start, end, and size of the group of struct members.
-- * The named struct can also be explicitly tagged for layer reuse, as well
-- * as both having struct attributes appended.
-+ * The named struct can also be explicitly tagged for layer reuse (C only),
-+ * as well as both having struct attributes appended.
-  */
- #define __struct_group(TAG, NAME, ATTRS, MEMBERS...) \
- 	union { \
- 		struct { MEMBERS } ATTRS; \
--		struct TAG { MEMBERS } ATTRS NAME; \
-+		struct __struct_group_tag(TAG) { MEMBERS } ATTRS NAME; \
- 	} ATTRS
- 
- #ifdef __cplusplus
-diff --git a/linux-headers/linux/vduse.h b/linux-headers/linux/vduse.h
-index 6d2ca064b5..f46269af34 100644
---- a/linux-headers/linux/vduse.h
-+++ b/linux-headers/linux/vduse.h
-@@ -1,4 +1,4 @@
--/* SPDX-License-Identifier: GPL-2.0 WITH Linux-syscall-note */
-+/* SPDX-License-Identifier: ((GPL-2.0 WITH Linux-syscall-note) OR BSD-3-Clause) */
- #ifndef _VDUSE_H_
- #define _VDUSE_H_
- 
+     /*
+      * Always 'true' booleans for named features
+      * TCG always implement/can't be user disabled,
 -- 
 2.48.1
 
