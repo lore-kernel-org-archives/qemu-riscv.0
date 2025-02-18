@@ -4,88 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 908D5C021A9
-	for <qemu-riscv@archiver.kernel.org>; Tue, 18 Feb 2025 02:55:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BFBC4C021AA
+	for <qemu-riscv@archiver.kernel.org>; Tue, 18 Feb 2025 16:36:04 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tkDlO-0004AP-SZ; Mon, 17 Feb 2025 21:55:11 -0500
+	id 1tkQZi-0004XT-Qg; Tue, 18 Feb 2025 11:35:58 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <debug@rivosinc.com>)
- id 1tkDlE-00045q-22
- for qemu-riscv@nongnu.org; Mon, 17 Feb 2025 21:55:01 -0500
-Received: from mail-pl1-x635.google.com ([2607:f8b0:4864:20::635])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <debug@rivosinc.com>)
- id 1tkDl8-0000V1-UI
- for qemu-riscv@nongnu.org; Mon, 17 Feb 2025 21:54:59 -0500
-Received: by mail-pl1-x635.google.com with SMTP id
- d9443c01a7336-2211cd4463cso34396065ad.2
- for <qemu-riscv@nongnu.org>; Mon, 17 Feb 2025 18:54:53 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1739847292; x=1740452092;
- darn=nongnu.org; 
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=jMUW/GnUYvHdgMBPniAILJ6d8IoxDISMulVgOjY7AJs=;
- b=2cNRhxML4+5/kBihZKinNo2+/u8MRWnltw7H6eQYRX5AiTrTW3nzwCDBJO59FJG5e6
- DI2uO9Q6ohg0aKzwdH8L7H3hnrF23yhkdI0PI0CCwmxvVktt4AjllTSZRhl5QPHw6lZx
- dl5tbqQ//uI86vMBYxMC2Y/4ltAknakioGmQCIt4j2bS/L52VBmVQTqa1ZZNjYIaHFmk
- zDUjsTHo6AOVGyDuedVLif3E0nbIlbWUNR0gxkKMrHIA6P1Y/A5inEZwNQJj10R0Mbcv
- +q9lYFktJ0vY5QbOYWRHF2uiHbatqLG2brjognhg/nCQDnUFSSzr2LdqvG189xO/UznU
- GplA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1739847292; x=1740452092;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=jMUW/GnUYvHdgMBPniAILJ6d8IoxDISMulVgOjY7AJs=;
- b=hawxQj21bn/TyBcwwhoWcHDET8dGspeFRVqTHJKD6we3jJ3AYKp887OBUaowvldr1/
- 8Fz+/tZ7fSiyQ5oiHtHJfdAlEDYSoBabcyf4FksCaLGOUOibyEltGiKRf9McoQRUmzOj
- Iczd6Q2wIB2TPafSlYK31/l7l4pyl2JVBFZzs/0trR7d7VsYULjqeYPgrhr5D5P3vvgl
- mCvCMF/WaHzQjvpnpj6qfPPZoLQ9FUxLhCoFZqy0D3gkTjsR1lcA6kIAbX1KxL19rkC6
- LAGzGrQ1C6iLGXy26mebXkHKbkQYvQj0KwiKkPlfFadkMhqz9qyLkT8IC2pi1qB07ejf
- Ei+A==
-X-Gm-Message-State: AOJu0YzPCL+jY0m1FbTgw86F7L0uLuoXWqYcec/O5h54JGLsA8hCIcjs
- cG9WuPp14giBAL1fZQQJtX2BHNh9aOVr/0gEnGR/bj7jw+aHPVulCsTkpKqYAFuzC1ICsnY4oMk
- A
-X-Gm-Gg: ASbGncsAxTE8ZW7NIpMRwXe6M1/ZzYVjslJUTXN/wptC6TlZRld+R35lF4OPzXeCi5E
- +dj3eLE10ooE46i/r6yS0EBat1cgZxVNpGW5niAyzkYPBRbdHN5lo+akI+SUXxl3Lt1+SNL0vhB
- RTFee/nj7K5qmBlCh2xesgq0fjadLcoNefX0zrRVbjbLL4XkvgH3CAORuenYm7xjdidUR7nfvaM
- gxpljkk5YLsssv0aQms4ZGDZb/I1Tl4ucuFE5iCHxs72DN90ZLRzQfrRm0pTC0LuymS0vVZIuZu
- Grm0UQ25z2m1wqAzw3corhv2Ng==
-X-Google-Smtp-Source: AGHT+IHcTqgc4/lvSBqE2D6EQZhGZRrp93z7bvsvT3PjZbtKYZAv/aJrdATgWP36QjF8aIHEJJqcqA==
-X-Received: by 2002:a17:902:d58b:b0:216:2426:767f with SMTP id
- d9443c01a7336-221040cec77mr201836485ad.49.1739847292053; 
- Mon, 17 Feb 2025 18:54:52 -0800 (PST)
-Received: from debug.ba.rivosinc.com ([64.71.180.162])
- by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-220d556d473sm78293595ad.166.2025.02.17.18.54.51
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 17 Feb 2025 18:54:51 -0800 (PST)
-From: Deepak Gupta <debug@rivosinc.com>
-To: qemu-riscv@nongnu.org,
-	qemu-devel@nongnu.org
-Cc: palmer@dabbelt.com, alistair.francis@wdc.com, bmeng.cn@gmail.com,
- liwei1518@gmail.com, dbarboza@ventanamicro.com,
- zhiwei_liu@linux.alibaba.com, Deepak Gupta <debug@rivosinc.com>,
- Adam Zabrocki <azabrocki@nvidia.com>
-Subject: [PATCH 1/2] target/riscv: fix access permission checks for CSR_SSP
-Date: Mon, 17 Feb 2025 18:54:45 -0800
-Message-Id: <20250218025446.2452254-1-debug@rivosinc.com>
-X-Mailer: git-send-email 2.34.1
+ (Exim 4.90_1) (envelope-from <kchamart@redhat.com>)
+ id 1tkPuX-0001fr-Tc
+ for qemu-riscv@nongnu.org; Tue, 18 Feb 2025 10:53:26 -0500
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <kchamart@redhat.com>)
+ id 1tkPuV-0004NP-V4
+ for qemu-riscv@nongnu.org; Tue, 18 Feb 2025 10:53:25 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1739894002;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=2zxSz1CqwY+GhnY4zwjzPve3eNygbdqAT18E2j3Et+A=;
+ b=ZSPVUFn28hnA4E0/8OAD4NPQdlnJKG31ayvEn2XWHb+1Tr/ZhYy1OekELwzWOQOZQGSpOS
+ yvb+a5jSEzACRfqsRtNEhuesyfqBASaDX093k9LGsWeoMyr+IBq/bx5oXnykXxVYd0b+a/
+ FY+mK5DmgCQNm13fof6Sg30PoOM6xjY=
+Received: from mx-prod-mc-02.mail-002.prod.us-west-2.aws.redhat.com
+ (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
+ relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-100-c4uPWJKaMaeuDK7A1_1L-w-1; Tue,
+ 18 Feb 2025 10:53:18 -0500
+X-MC-Unique: c4uPWJKaMaeuDK7A1_1L-w-1
+X-Mimecast-MFC-AGG-ID: c4uPWJKaMaeuDK7A1_1L-w_1739893997
+Received: from mx-prod-int-04.mail-002.prod.us-west-2.aws.redhat.com
+ (mx-prod-int-04.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.40])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mx-prod-mc-02.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id 0A16118EB2C9; Tue, 18 Feb 2025 15:53:17 +0000 (UTC)
+Received: from gezellig (unknown [10.44.34.39])
+ by mx-prod-int-04.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id 4D12A19560AA; Tue, 18 Feb 2025 15:53:12 +0000 (UTC)
+Date: Tue, 18 Feb 2025 21:23:08 +0530
+From: Kashyap Chamarthy <kchamart@redhat.com>
+To: Yong-Xuan Wang <yongxuan.wang@sifive.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, greentime.hu@sifive.com,
+ vincent.chen@sifive.com, frank.chang@sifive.com, jim.shu@sifive.com
+Subject: Re: [PATCH 0/8] riscv: AIA: kernel-irqchip=off support
+Message-ID: <Z7Ss5F3t4R2GbIcu@gezellig>
+References: <20250217081730.9000-1-yongxuan.wang@sifive.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::635;
- envelope-from=debug@rivosinc.com; helo=mail-pl1-x635.google.com
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20250217081730.9000-1-yongxuan.wang@sifive.com>
+X-Scanned-By: MIMEDefang 3.0 on 10.30.177.40
+Received-SPF: pass client-ip=170.10.133.124; envelope-from=kchamart@redhat.com;
+ helo=us-smtp-delivery-124.mimecast.com
+X-Spam_score_int: -24
+X-Spam_score: -2.5
+X-Spam_bar: --
+X-Spam_report: (-2.5 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.423,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H2=0.001,
+ RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001, RCVD_IN_VALIDITY_SAFE_BLOCKED=0.001,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
+X-Mailman-Approved-At: Tue, 18 Feb 2025 11:35:56 -0500
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -100,39 +85,41 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Commit:8205bc1 ("target/riscv: introduce ssp and enabling controls for
-zicfiss") introduced CSR_SSP but it mis-interpreted the spec on access
-to CSR_SSP in M-mode. Gated to CSR_SSP is not gated via `xSSE`. But
-rather rules clearly specified in section "2.2.4. Shadow Stack Pointer"
-of `zicfiss` specification. Thanks to Adam Zabrocki for bringing this
-to attention.
+On Mon, Feb 17, 2025 at 04:17:20PM +0800, Yong-Xuan Wang wrote:
+> This series introduces the user-space AIA MSI emulation when using KVM
+> acceleration.
+> 
+> After this series, RISC-V QEMU virt machine with KVM acceleration has
+> 3 parameters to control the type of irqchip and its emulation method:
+> - Machine prop "aia" controls the type of irqchip
+>   - none: use PLIC and emulated in user-space
+>   - aplic: use AIA wired and emulated in user-space
+>   - aplic-imsic: use AIA MSI, emulation mode is determined by
+>     "kernel-irqchip" and "riscv-imsic"
+> - Accel prop "kernel-irqchip", effective with AIA MSI
+>   - on: in-kernel APLIC and in-kernel IMSIC
+>   - off: user-space APLIC and user-space IMSIC
+>   - split: user-space APLIC and in-kernel IMSIC
+> - Accel prop "kernel-irqchip", effective with in-kernel IMSIC
+>   - emul: use MRIF as in-kernel IMSIC
+>   - hw: use hardware guest IMSIC file as in-kernel IMSIC
+>   - auto: use the hardware guest IMSICs whenever available otherwise
+>     fallback to MRIF
 
-Fixes: 8205bc127a83 ("target/riscv: introduce ssp and enabling controls
-for zicfiss"
+Hi; as someone new to the RISC-V ecosystem, most of these acronyms feel
+impenetrable :-)  I see they're all RISC-V interrupt-handling related
+terms.  I hope you don't mind my spelling them out here:
 
-Reported-by: Adam Zabrocki <azabrocki@nvidia.com>
-Signed-off-by: Deepak Gupta <debug@rivosinc.com>
----
- target/riscv/csr.c | 5 +++++
- 1 file changed, 5 insertions(+)
+  - AIA   : Advanced Interrupt Architecture
+  - MSI   : Message Signaled Interrupts
+  - PLIC  : Platform-Level Interrupt Controller
+  - APLIC : Advanced Platform Level Interrupt Controller
+  - IMSIC : Incoming Message Signaled Interrupt Controller
+  - MRIF  : Message Routed Interrupt Facility
 
-diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-index afb7544f07..75c661d2a1 100644
---- a/target/riscv/csr.c
-+++ b/target/riscv/csr.c
-@@ -191,6 +191,11 @@ static RISCVException cfi_ss(CPURISCVState *env, int csrno)
-         return RISCV_EXCP_ILLEGAL_INST;
-     }
- 
-+    /* If ext implemented, M-mode always have access to SSP CSR */
-+    if (env->priv == PRV_M) {
-+        return RISCV_EXCP_NONE;
-+    }
-+
-     /* if bcfi not active for current env, access to csr is illegal */
-     if (!cpu_get_bcfien(env)) {
- #if !defined(CONFIG_USER_ONLY)
+[...]
+
 -- 
-2.34.1
+/kashyap
 
 
