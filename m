@@ -4,81 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 81071C021B1
-	for <qemu-riscv@archiver.kernel.org>; Wed, 19 Feb 2025 11:25:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B1DB0C021AA
+	for <qemu-riscv@archiver.kernel.org>; Wed, 19 Feb 2025 11:26:40 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tkiCq-0005tt-8y; Wed, 19 Feb 2025 06:25:32 -0500
+	id 1tkiDh-0006FB-Dx; Wed, 19 Feb 2025 06:26:25 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <yongxuan.wang@sifive.com>)
- id 1tkiCi-0005sp-VD
- for qemu-riscv@nongnu.org; Wed, 19 Feb 2025 06:25:25 -0500
-Received: from mail-qt1-x831.google.com ([2607:f8b0:4864:20::831])
+ id 1tkiDg-0006Cq-DO
+ for qemu-riscv@nongnu.org; Wed, 19 Feb 2025 06:26:24 -0500
+Received: from mail-qv1-xf31.google.com ([2607:f8b0:4864:20::f31])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <yongxuan.wang@sifive.com>)
- id 1tkiCg-0000lQ-O3
- for qemu-riscv@nongnu.org; Wed, 19 Feb 2025 06:25:24 -0500
-Received: by mail-qt1-x831.google.com with SMTP id
- d75a77b69052e-471963ae31bso72475711cf.3
- for <qemu-riscv@nongnu.org>; Wed, 19 Feb 2025 03:25:20 -0800 (PST)
+ id 1tkiDe-0000sN-G7
+ for qemu-riscv@nongnu.org; Wed, 19 Feb 2025 06:26:24 -0500
+Received: by mail-qv1-xf31.google.com with SMTP id
+ 6a1803df08f44-6e6827984b2so32109886d6.1
+ for <qemu-riscv@nongnu.org>; Wed, 19 Feb 2025 03:26:22 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1739964319; x=1740569119; darn=nongnu.org;
+ d=sifive.com; s=google; t=1739964381; x=1740569181; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=U76MIMyImaSdAXXhzV6BsoIZl+OsKtwKieV7WyvIqUM=;
- b=fu7LOflSZPH167WHPvBNaEpyqkollrkIRALXula51AaXa8S7v5IF6pWmPFIwkhYYqV
- UdZRADk8M7rFE64UWg37DAn4VHdOhFEi8tFJvhP+aMZAnHW3b65i2wIQMiuyX4wfruur
- RX136vYFdMtntJCB+8HDUGsyFYi6VVtsBzBib/BkwyJS2DjdDxX/y91nWJ39geRr4LUp
- 5XItHupvDEDM6/HGMjG7GhBWWd4rjnotC3G6pnTLBJYyISAkssceawlZBWOuI2UG/P+T
- uA0IgNNobFDLAfH6DR056m4q4+4mzwxW5t0x939KhHYLNuYypQmEIQs4+nq4i3jCNgT4
- 7I8g==
+ bh=ywdqwoI8kebjHm9wTy/sLLATh4m1ZbIxq3wEwOVvUfo=;
+ b=VzvHXPSU6fTZl+OqX7LCwwl69cF9k1PUy8Xf7y5jpUZcuFU6r++0+xBRrv50Dm20Id
+ U7KtHdWti9JIWuvuE5O8aljx/o00eWWB4ZZTFI+3ZTddjeG5sEDABkrQztzdcJtr5Rz3
+ VP05hB7S7BhSzF7/3kvN8tKQV4x0FXm15EUoEmFFtSaQGk9DOBeXFHY+U8f9LJRWh1/B
+ jc0T+tZM/W8RX8h49VrbegjKe2K7/aFyru1xCJSrjslJsptM/+LLso66jOj3r9uKoPax
+ wtB7gVZvY62eOGhw8Y/uSoJG6qN5FIJPfSgAAQpoZJXLiN0l7STi0f9F0L0XrWWV/iBB
+ kSkQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1739964319; x=1740569119;
+ d=1e100.net; s=20230601; t=1739964381; x=1740569181;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=U76MIMyImaSdAXXhzV6BsoIZl+OsKtwKieV7WyvIqUM=;
- b=qPfgdLf7Eo76vMGzNVDD4Z63aQmtzTSfYjFQkYx0n2MV+dPkKZmguSejMvxSM+MepP
- fe9TqYUWO+yetEpWZWE6iXgGv5ckvonMBsJp37GE5mXoeYV9k89hexlWEENY3lIa4ufd
- mYW7+ShnGYenPCWH5wwpuSj2egCx4vxG7aSXbZ9ZRldReiGqO5HRTNuxUO7N+WSS7Xpg
- NMdgDu1cIZlYcZ8Wzbi57OvHwHpQjRcyWSHgAGgK4SfmMmMW5lq9/woCZEWGGSv3yah8
- qqyTrSMMkSQupKy9pbqY6kD8J8zGBuOCFPXTkLznd5fYM7sWxEJxQLHd92as+FRr/heJ
- Xd7g==
+ bh=ywdqwoI8kebjHm9wTy/sLLATh4m1ZbIxq3wEwOVvUfo=;
+ b=wm4LHBRRoFer52IFhbjWTaJZSRjjs0YwyQF9kRTi4ZWZdMdX+6huX66mHuLaTgCetP
+ oZOGH4WrjifbE9ffgCX23oswJ1PIMK41RP4SLl1EW8FO9QsEdbKzRA89U/DpRh8WJS2S
+ Yo3+khMf3maKGy26DZeCEGDoCiebHgOhI4PMjp9hMa3I//w5X15QUgid50UNBCqlcDPR
+ dki5tMZ5UBfwLzHjUR1wVPkkliBvMmFyZf06HKwnelkZuMnHYruC/w+XJq7isP/yIZKI
+ urUziSlPRcl2/JZZlZnvXWZ6roWLp5X0RXXsrB+PVBLPzdxlnyHd9ebjiycFsZv9fqEY
+ gINw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCURDtFdXX4M4Kq+8tL0f/qPyG0BYQMSwVFvlz3M/lsPIMK3q/oOu5313k/Sys3/rIVDiYVAFvehiwSK@nongnu.org
-X-Gm-Message-State: AOJu0YxMyndWzWi8jBJ5Z7FHaZCezk6BmwdBEV4TQrBlOcKLWMuOq8Ez
- hqJ05l3HKnX3xdHfwU9FRVNdYf53OE9TOWm22ONeFlQugqTDL0s9AnPlIWO4tK1wtYipfh73Qvn
- CXUit4gSOoPOv1t3GdiUatF/HovayR2hxKSUFDg==
-X-Gm-Gg: ASbGncvUm1tq3857KrGJOYKGNnw6jTBj54N9xmPJDd5ne2qD7/f3ydZMOeTMVpoEKsM
- 2f3nJyIp9+urqJKdV4n8cG9TXG62a3CGue8bYazNJovvjm8gucr7I+fbTsoQXxbIA3ETm8ZXwqP
- Q=
-X-Google-Smtp-Source: AGHT+IFoifCneuVPca4dsDWtQEsqNhruHsRhNM9CVHsQLQsyjKvR0skdoFliJRRopUTh8BS6lQWi/U4xT+Z9dEZIbhM=
-X-Received: by 2002:ac8:5a82:0:b0:467:70ce:75f5 with SMTP id
- d75a77b69052e-471dbe7b209mr251136851cf.37.1739964319077; Wed, 19 Feb 2025
- 03:25:19 -0800 (PST)
+ AJvYcCWC7ZrYIo5luGOUccwSUo0v7goplPzzqAePIMSPgtFYaimo62KbN9G8fytwfm6XcLAumhNJ8Q5WgGw/@nongnu.org
+X-Gm-Message-State: AOJu0Yxi/lTFgJPB0+Y7EV8pzjDXvXfEiRRF6136PXoAlerlnVxGKKLh
+ AtbCI0c4gAkuc8XfsBTYH9n9LMsyNVQOU67qgT+uy2/zC4wAIhkCMiQYGkvCC7bfw5+AN6IgJ4+
+ CbihnyMOCUUrvGbeWgUvyrVKUC7qMQIFqKvSxEg==
+X-Gm-Gg: ASbGncuTj/USs1LQ5MHMBW2fzp2uLC06U+62GMrL19iwRG8JQbZL4nylp7y5uX1shtu
+ PJwMaMs7DNnV13iIEwhWcgowZq69kKV4u2H8kx0z4J9iMgZ2XW2NGjTSo91mpGIsU8ZVOxgbIeT
+ M=
+X-Google-Smtp-Source: AGHT+IFLxBwS0ublwzb927FVVbZn+kmdrfWLMly1/7v0QsFJ5uHDiV8ZjVf/jn8SZtFA6xYgKDH5eiqniTucXOaho4w=
+X-Received: by 2002:a05:6214:300e:b0:6d8:846b:cd8d with SMTP id
+ 6a1803df08f44-6e66cd06482mr219321266d6.30.1739964381146; Wed, 19 Feb 2025
+ 03:26:21 -0800 (PST)
 MIME-Version: 1.0
-References: <20250217081927.10613-1-yongxuan.wang@sifive.com>
- <20250217081927.10613-2-yongxuan.wang@sifive.com>
- <37cbfff3-9571-47e5-b955-41a85c7ef730@ventanamicro.com>
-In-Reply-To: <37cbfff3-9571-47e5-b955-41a85c7ef730@ventanamicro.com>
+References: <20250217081730.9000-1-yongxuan.wang@sifive.com>
+ <20250217081730.9000-8-yongxuan.wang@sifive.com>
+ <20250217-9d3c0d38ed66b1a8257b4515@orel>
+In-Reply-To: <20250217-9d3c0d38ed66b1a8257b4515@orel>
 From: Yong-Xuan Wang <yongxuan.wang@sifive.com>
-Date: Wed, 19 Feb 2025 19:25:08 +0800
-X-Gm-Features: AWEUYZlZ3a0V1Qxn_kZGNc9I2Cxq-e_eUOaYqfv7WOyFsa4uCHJCxcHUZiCoR7g
-Message-ID: <CAMWQL2j32880zSM2ZesnAYReJiU2BkN7dwfGQDjAbde5t3uLUQ@mail.gmail.com>
-Subject: Re: [PATCH 1/4] hw/riscv/virt: KVM AIA refinement
-To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Date: Wed, 19 Feb 2025 19:26:10 +0800
+X-Gm-Features: AWEUYZlDUQ_2CB8hECe2FSB2Hb7IqOnFPkicTXQWmUVnxZSjyq7BN-hFAwa6CoM
+Message-ID: <CAMWQL2j38794BJUY4BwBOCV6JTdrsLUVnTpY=-Lvi4guymwDdA@mail.gmail.com>
+Subject: Re: [PATCH 7/8] target/riscv/kvm: rename riscv-aia to riscv-imsic
+To: Andrew Jones <ajones@ventanamicro.com>
 Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, greentime.hu@sifive.com, 
  vincent.chen@sifive.com, frank.chang@sifive.com, jim.shu@sifive.com, 
  Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <alistair.francis@wdc.com>, 
- Weiwei Li <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
+ Weiwei Li <liwei1518@gmail.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>, 
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
+ =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@linaro.org>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::831;
- envelope-from=yongxuan.wang@sifive.com; helo=mail-qt1-x831.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::f31;
+ envelope-from=yongxuan.wang@sifive.com; helo=mail-qv1-xf31.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -101,255 +104,164 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Hi Daniel,
+Hi Andrew,
 
-
-On Tue, Feb 18, 2025 at 3:24=E2=80=AFAM Daniel Henrique Barboza
-<dbarboza@ventanamicro.com> wrote:
+On Mon, Feb 17, 2025 at 10:07=E2=80=AFPM Andrew Jones <ajones@ventanamicro.=
+com> wrote:
 >
->
->
-> On 2/17/25 5:19 AM, Yong-Xuan Wang wrote:
-> > KVM AIA is only needed to be set when the virt machine use the AIA MSI.
-> > So we can move the KVM AIA configuration into virt_create_aia() to redu=
-ce
-> > the condition checking.
+> On Mon, Feb 17, 2025 at 04:17:27PM +0800, Yong-Xuan Wang wrote:
+> > The riscv-aia property only controls the in-kernel IMSIC mode, the
+> > emulation of AIA MSI mode is controlled by the kernel-irqchip property.
+> > Rename the riscv-aia property to riscv-imsic to prevent the confusion.
 > >
 > > Signed-off-by: Yong-Xuan Wang <yongxuan.wang@sifive.com>
 > > ---
+> >  target/riscv/kvm/kvm-cpu.c | 52 ++++++++++++++++++++------------------
+> >  1 file changed, 27 insertions(+), 25 deletions(-)
+> >
+> > diff --git a/target/riscv/kvm/kvm-cpu.c b/target/riscv/kvm/kvm-cpu.c
+> > index c047d5f36951..ab53b76ab81f 100644
+> > --- a/target/riscv/kvm/kvm-cpu.c
+> > +++ b/target/riscv/kvm/kvm-cpu.c
+> > @@ -1798,9 +1798,9 @@ void kvm_riscv_set_irq(RISCVCPU *cpu, int irq, in=
+t level)
+> >      }
+> >  }
+> >
+> > -static int aia_mode;
+> > +static int imsic_mode;
+> >
+> > -static const char *kvm_aia_mode_str(uint64_t mode)
+> > +static const char *kvm_imsic_mode_str(uint64_t mode)
+> >  {
+> >      switch (mode) {
+> >      case KVM_DEV_RISCV_AIA_MODE_EMUL:
+> > @@ -1813,19 +1813,19 @@ static const char *kvm_aia_mode_str(uint64_t mo=
+de)
+> >      };
+> >  }
+> >
+> > -static char *riscv_get_kvm_aia(Object *obj, Error **errp)
+> > +static char *riscv_get_kvm_imsic(Object *obj, Error **errp)
+> >  {
+> > -    return g_strdup(kvm_aia_mode_str(aia_mode));
+> > +    return g_strdup(kvm_imsic_mode_str(imsic_mode));
+> >  }
+> >
+> > -static void riscv_set_kvm_aia(Object *obj, const char *val, Error **er=
+rp)
+> > +static void riscv_set_kvm_imsic(Object *obj, const char *val, Error **=
+errp)
+> >  {
+> >      if (!strcmp(val, "emul")) {
+> > -        aia_mode =3D KVM_DEV_RISCV_AIA_MODE_EMUL;
+> > +        imsic_mode =3D KVM_DEV_RISCV_AIA_MODE_EMUL;
+> >      } else if (!strcmp(val, "hwaccel")) {
+> > -        aia_mode =3D KVM_DEV_RISCV_AIA_MODE_HWACCEL;
+> > +        imsic_mode =3D KVM_DEV_RISCV_AIA_MODE_HWACCEL;
+> >      } else if (!strcmp(val, "auto")) {
+> > -        aia_mode =3D KVM_DEV_RISCV_AIA_MODE_AUTO;
+> > +        imsic_mode =3D KVM_DEV_RISCV_AIA_MODE_AUTO;
+> >      } else {
+> >          error_setg(errp, "Invalid KVM AIA mode");
+> >          error_append_hint(errp, "Valid values are emul, hwaccel, and a=
+uto.\n");
+> > @@ -1834,13 +1834,15 @@ static void riscv_set_kvm_aia(Object *obj, cons=
+t char *val, Error **errp)
+> >
+> >  void kvm_arch_accel_class_init(ObjectClass *oc)
+> >  {
+> > -    object_class_property_add_str(oc, "riscv-aia", riscv_get_kvm_aia,
+> > -                                  riscv_set_kvm_aia);
+> > -    object_class_property_set_description(oc, "riscv-aia",
+> > -        "Set KVM AIA mode. Valid values are 'emul', 'hwaccel' and 'aut=
+o'. "
+> > -        "Changing KVM AIA modes relies on host support. Defaults to 'a=
+uto' "
+> > -        "if the host supports it");
+> > -    object_property_set_default_str(object_class_property_find(oc, "ri=
+scv-aia"),
+> > +    object_class_property_add_str(oc, "riscv-imsic", riscv_get_kvm_ims=
+ic,
+> > +                                  riscv_set_kvm_imsic);
+> > +    object_class_property_set_description(oc, "riscv-imsic",
+> > +        "Set KVM IMSIC mode. Valid values are 'emul', 'hwaccel' and 'a=
+uto'. "
+> > +        "Changing KVM IMSIC modes relies on host support. Defaults to =
+'auto' "
+> > +        "if the host supports it. This property only takes effect when=
+ the "
+> > +        "kernel-irqchip=3Don|split when using AIA MSI.");
+> > +    object_property_set_default_str(object_class_property_find(oc,
+> > +                                                               "riscv-=
+imsic"),
+> >                                      "auto");
 >
-> Unfortunately this doesn't work.
->
-> The reason is that kvm_riscv_aia_create(), as it is now, is called only o=
-nce
-> during virt_machine_init() and it's already handling initialization for e=
-ach socket:
->
->
->      for (socket =3D 0; socket < socket_count; socket++) {
->          socket_imsic_base =3D imsic_base + socket * (1U << group_shift);
->          hart_count =3D riscv_socket_hart_count(machine, socket);
->          base_hart =3D riscv_socket_first_hartid(machine, socket);
->
->          if (max_hart_per_socket < hart_count) {
->              max_hart_per_socket =3D hart_count;
->          }
->
->          for (i =3D 0; i < hart_count; i++) {
->              imsic_addr =3D socket_imsic_base + i * IMSIC_HART_SIZE(guest=
-_bits);
->              ret =3D kvm_device_access(aia_fd, KVM_DEV_RISCV_AIA_GRP_ADDR=
-,
->                                      KVM_DEV_RISCV_AIA_ADDR_IMSIC(i + bas=
-e_hart),
->                                      &imsic_addr, true, NULL);
->              if (ret < 0) {
->                  error_report("KVM AIA: failed to set the IMSIC address f=
-or hart %d", i);
->                  exit(1);
->              }
->          }
->      }
->
-> After this change, kvm_riscv_aia_create() is being called once for each s=
-ocket since it's
-> now being called inside virt_create_aia(). And this will cause errors whe=
-n running qemu-kvm
-> with more than one socket:
->
-> ./qemu-system-riscv64 \
->         -machine virt,accel=3Dkvm,aia=3Daplic-imsic -m 2G \
->         -object memory-backend-ram,size=3D1G,id=3Dm0 \
->         -object memory-backend-ram,size=3D1G,id=3Dm1 \
->         -smp 2,sockets=3D2,cores=3D1,threads=3D1 \
->         -numa node,memdev=3Dm0,cpus=3D0,nodeid=3D0 \
->         -numa node,memdev=3Dm1,cpus=3D1,nodeid=3D1 \
->          (...)
-> qemu-system-riscv64: KVM AIA: failed to set the IMSIC address for hart 0
+> We can't change property names without deprecating the old name (which
+> isn't likely worth it).
 >
 
-Oh I forgot to test the NUMA config. Sorry.
-
->
-> To make this patch work we would need changes in kvm_riscv_aia_create() t=
-o handle just the
-> current socket. The loop I mentioned above is one place, and there's anot=
-her place where
-> we set group_bits and group_shift if socket_count > 1.
->
-
-Also we need to find a place to initialize the in-kernel AIA after
-setting up all the IMSICs among sockets. This would make things more
-complicated. I will remove this patch in the next version. Thank you!
+ok. I will remove this patch in the next version. Thank you!
 
 Regards,
 Yong-Xuan
 
-
-> To be honest I'm not sure if all these extra required changes are worth t=
-he simplification
-> this patch is proposing.
->
->
 > Thanks,
->
-> Daniel
->
+> drew
 >
 >
->
->
-> >   hw/riscv/virt.c | 79 +++++++++++++++++++++++-------------------------=
--
-> >   1 file changed, 37 insertions(+), 42 deletions(-)
+> >  }
 > >
-> > diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-> > index dae46f4733cd..a52117ef71ee 100644
-> > --- a/hw/riscv/virt.c
-> > +++ b/hw/riscv/virt.c
-> > @@ -58,14 +58,6 @@
-> >   #include "qapi/qapi-visit-common.h"
-> >   #include "hw/virtio/virtio-iommu.h"
+> > @@ -1851,7 +1853,7 @@ void kvm_riscv_aia_create(MachineState *machine, =
+uint64_t group_shift,
+> >  {
+> >      int ret, i;
+> >      int aia_fd =3D -1;
+> > -    uint64_t default_aia_mode;
+> > +    uint64_t default_imsic_mode;
+> >      uint64_t socket_count =3D riscv_socket_count(machine);
+> >      uint64_t max_hart_per_socket =3D 0;
+> >      uint64_t socket, base_hart, hart_count, socket_imsic_base, imsic_a=
+ddr;
+> > @@ -1867,24 +1869,24 @@ void kvm_riscv_aia_create(MachineState *machine=
+, uint64_t group_shift,
 > >
-> > -/* KVM AIA only supports APLIC MSI. APLIC Wired is always emulated by =
-QEMU. */
-> > -static bool virt_use_kvm_aia_aplic_imsic(RISCVVirtAIAType aia_type)
-> > -{
-> > -    bool msimode =3D aia_type =3D=3D VIRT_AIA_TYPE_APLIC_IMSIC;
-> > -
-> > -    return riscv_is_kvm_aia_aplic_imsic(msimode);
-> > -}
-> > -
-> >   static bool virt_use_emulated_aplic(RISCVVirtAIAType aia_type)
-> >   {
-> >       bool msimode =3D aia_type =3D=3D VIRT_AIA_TYPE_APLIC_IMSIC;
-> > @@ -1298,10 +1290,12 @@ static DeviceState *virt_create_plic(const MemM=
-apEntry *memmap, int socket,
-> >       return ret;
-> >   }
+> >      ret =3D kvm_device_access(aia_fd, KVM_DEV_RISCV_AIA_GRP_CONFIG,
+> >                              KVM_DEV_RISCV_AIA_CONFIG_MODE,
+> > -                            &default_aia_mode, false, NULL);
+> > +                            &default_imsic_mode, false, NULL);
+> >      if (ret < 0) {
+> > -        error_report("KVM AIA: failed to get current KVM AIA mode");
+> > +        error_report("KVM AIA: failed to get current KVM IMSIC mode");
+> >          exit(1);
+> >      }
 > >
-> > -static DeviceState *virt_create_aia(RISCVVirtAIAType aia_type, int aia=
-_guests,
-> > +static DeviceState *virt_create_aia(RISCVVirtState *s,
-> >                                       const MemMapEntry *memmap, int so=
-cket,
-> >                                       int base_hartid, int hart_count)
-> >   {
-> > +    RISCVVirtAIAType aia_type =3D s->aia_type;
-> > +    int aia_guests =3D s->aia_guests;
-> >       int i;
-> >       hwaddr addr =3D 0;
-> >       uint32_t guest_bits;
-> > @@ -1309,6 +1303,28 @@ static DeviceState *virt_create_aia(RISCVVirtAIA=
-Type aia_type, int aia_guests,
-> >       DeviceState *aplic_m =3D NULL;
-> >       bool msimode =3D aia_type =3D=3D VIRT_AIA_TYPE_APLIC_IMSIC;
-> >
-> > +    if (!kvm_enabled()) {
-> > +        /* Per-socket M-level APLIC */
-> > +        aplic_m =3D riscv_aplic_create(memmap[VIRT_APLIC_M].base +
-> > +                                     socket * memmap[VIRT_APLIC_M].siz=
-e,
-> > +                                     memmap[VIRT_APLIC_M].size,
-> > +                                     (msimode) ? 0 : base_hartid,
-> > +                                     (msimode) ? 0 : hart_count,
-> > +                                     VIRT_IRQCHIP_NUM_SOURCES,
-> > +                                     VIRT_IRQCHIP_NUM_PRIO_BITS,
-> > +                                     msimode, true, NULL);
-> > +    }
-> > +
-> > +    /* Per-socket S-level APLIC */
-> > +    aplic_s =3D riscv_aplic_create(memmap[VIRT_APLIC_S].base +
-> > +                                 socket * memmap[VIRT_APLIC_S].size,
-> > +                                 memmap[VIRT_APLIC_S].size,
-> > +                                 (msimode) ? 0 : base_hartid,
-> > +                                 (msimode) ? 0 : hart_count,
-> > +                                 VIRT_IRQCHIP_NUM_SOURCES,
-> > +                                 VIRT_IRQCHIP_NUM_PRIO_BITS,
-> > +                                 msimode, false, aplic_m);
-> > +
-> >       if (msimode) {
-> >           if (!kvm_enabled()) {
-> >               /* Per-socket M-level IMSICs */
-> > @@ -1329,32 +1345,20 @@ static DeviceState *virt_create_aia(RISCVVirtAI=
-AType aia_type, int aia_guests,
-> >                                  base_hartid + i, false, 1 + aia_guests=
+> > -    if (default_aia_mode !=3D aia_mode) {
+> > +    if (default_imsic_mode !=3D imsic_mode) {
+> >          ret =3D kvm_device_access(aia_fd, KVM_DEV_RISCV_AIA_GRP_CONFIG=
 ,
-> >                                  VIRT_IRQCHIP_NUM_MSIS);
-> >           }
-> > -    }
+> >                                  KVM_DEV_RISCV_AIA_CONFIG_MODE,
+> > -                                &aia_mode, true, NULL);
+> > +                                &imsic_mode, true, NULL);
+> >          if (ret < 0) {
+> > -            warn_report("KVM AIA: failed to set KVM AIA mode '%s', usi=
+ng "
+> > +            warn_report("KVM AIA: failed to set KVM IMSIC mode '%s', u=
+sing "
+> >                          "default host mode '%s'",
+> > -                        kvm_aia_mode_str(aia_mode),
+> > -                        kvm_aia_mode_str(default_aia_mode));
+> > +                        kvm_imsic_mode_str(imsic_mode),
+> > +                        kvm_imsic_mode_str(default_imsic_mode));
 > >
-> > -    if (!kvm_enabled()) {
-> > -        /* Per-socket M-level APLIC */
-> > -        aplic_m =3D riscv_aplic_create(memmap[VIRT_APLIC_M].base +
-> > -                                     socket * memmap[VIRT_APLIC_M].siz=
-e,
-> > -                                     memmap[VIRT_APLIC_M].size,
-> > -                                     (msimode) ? 0 : base_hartid,
-> > -                                     (msimode) ? 0 : hart_count,
-> > -                                     VIRT_IRQCHIP_NUM_SOURCES,
-> > -                                     VIRT_IRQCHIP_NUM_PRIO_BITS,
-> > -                                     msimode, true, NULL);
-> > -    }
+> > -            /* failed to change AIA mode, use default */
+> > -            aia_mode =3D default_aia_mode;
+> > +            /* failed to change IMSIC mode, use default */
+> > +            imsic_mode =3D default_imsic_mode;
+> >          }
+> >      }
 > >
-> > -    /* Per-socket S-level APLIC */
-> > -    aplic_s =3D riscv_aplic_create(memmap[VIRT_APLIC_S].base +
-> > -                                 socket * memmap[VIRT_APLIC_S].size,
-> > -                                 memmap[VIRT_APLIC_S].size,
-> > -                                 (msimode) ? 0 : base_hartid,
-> > -                                 (msimode) ? 0 : hart_count,
-> > +        if (kvm_irqchip_in_kernel()) {
-> > +            kvm_riscv_aia_create(MACHINE(s), IMSIC_MMIO_GROUP_MIN_SHIF=
-T,
-> >                                    VIRT_IRQCHIP_NUM_SOURCES,
-> > -                                 VIRT_IRQCHIP_NUM_PRIO_BITS,
-> > -                                 msimode, false, aplic_m);
-> > +                                 VIRT_IRQCHIP_NUM_MSIS,
-> > +                                 memmap[VIRT_APLIC_S].base,
-> > +                                 memmap[VIRT_IMSIC_S].base,
-> > +                                 aia_guests);
-> > +        }
+> > --
+> > 2.17.1
 > >
-> > -    if (kvm_enabled() && msimode) {
-> > -        riscv_aplic_set_kvm_msicfgaddr(RISCV_APLIC(aplic_s), addr);
-> > +        if (kvm_enabled()) {
-> > +            riscv_aplic_set_kvm_msicfgaddr(RISCV_APLIC(aplic_s), addr)=
-;
-> > +        }
-> >       }
-> >
-> >       return kvm_enabled() ? aplic_s : aplic_m;
-> > @@ -1621,9 +1625,8 @@ static void virt_machine_init(MachineState *machi=
-ne)
-> >               s->irqchip[i] =3D virt_create_plic(memmap, i,
-> >                                                base_hartid, hart_count)=
-;
-> >           } else {
-> > -            s->irqchip[i] =3D virt_create_aia(s->aia_type, s->aia_gues=
-ts,
-> > -                                            memmap, i, base_hartid,
-> > -                                            hart_count);
-> > +            s->irqchip[i] =3D virt_create_aia(s, memmap, i,
-> > +                                            base_hartid, hart_count);
-> >           }
-> >
-> >           /* Try to use different IRQCHIP instance based device type */
-> > @@ -1641,14 +1644,6 @@ static void virt_machine_init(MachineState *mach=
-ine)
-> >           }
-> >       }
-> >
-> > -    if (kvm_enabled() && virt_use_kvm_aia_aplic_imsic(s->aia_type)) {
-> > -        kvm_riscv_aia_create(machine, IMSIC_MMIO_GROUP_MIN_SHIFT,
-> > -                             VIRT_IRQCHIP_NUM_SOURCES, VIRT_IRQCHIP_NU=
-M_MSIS,
-> > -                             memmap[VIRT_APLIC_S].base,
-> > -                             memmap[VIRT_IMSIC_S].base,
-> > -                             s->aia_guests);
-> > -    }
-> > -
-> >       if (riscv_is_32bit(&s->soc[0])) {
-> >   #if HOST_LONG_BITS =3D=3D 64
-> >           /* limit RAM size in a 32-bit system */
->
 
