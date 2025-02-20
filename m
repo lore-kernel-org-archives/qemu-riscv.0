@@ -4,89 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A6B69C021B1
-	for <qemu-riscv@archiver.kernel.org>; Thu, 20 Feb 2025 18:01:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 37BFBC021B2
+	for <qemu-riscv@archiver.kernel.org>; Thu, 20 Feb 2025 18:31:42 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tlAqI-0002KN-CJ; Thu, 20 Feb 2025 13:00:10 -0500
+	id 1tlBKH-0004d7-91; Thu, 20 Feb 2025 13:31:09 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1tlAqG-0002Jm-PP
- for qemu-riscv@nongnu.org; Thu, 20 Feb 2025 13:00:08 -0500
-Received: from mail-pl1-x62c.google.com ([2607:f8b0:4864:20::62c])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1tlAqE-0000VH-8J
- for qemu-riscv@nongnu.org; Thu, 20 Feb 2025 13:00:08 -0500
-Received: by mail-pl1-x62c.google.com with SMTP id
- d9443c01a7336-21c2f1b610dso34286545ad.0
- for <qemu-riscv@nongnu.org>; Thu, 20 Feb 2025 10:00:05 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1740074404; x=1740679204; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=glkzZCvo/wxZi4YIKaS//8YD7Yv/u1Z/fSDSCRt0usI=;
- b=fwBql2pIjt9AKdH61npPk9tuiUQ3nYPmNYEHtIDwGsGpnZwdsA22zqc2WBXKJBoJXw
- tnQgaQJQfDcqxFRZvhmMUT2hbNMf969VeECkHig8V5vfgX4nDiFz6TYDjDquwvmSUcvn
- F/xXJfYwzXuzzb5zZqC9p4Rpsg1kd7NZOUdcBAHuo28NL0TygxOInCtgvaOvCkBrKuUl
- GqsNLLiYItgqZYb0rohrBNMO+Mqh0SYh0mdtB7KqXAq9TZixmM+jVuOtv6uShr8YaXWy
- 5r1aKQ9BeXprkT6R8Sk29Do5CQH3VGlKZTqAJu1tUpBEOnNskShF8yPRy4jd+kWT1zDB
- EWfg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1740074404; x=1740679204;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=glkzZCvo/wxZi4YIKaS//8YD7Yv/u1Z/fSDSCRt0usI=;
- b=hjG2Mi+s7UjCW4+hYsPzdQZXoAFVJYUF0kLXdnp8Wegn35DvsYEBVSqjz8k1ctyJmA
- YhwMAugmdDkKtzq3NhFhE/FQtDDKC+l5tdlhIhsIduIQejG6sesxYliZYDKf02gixIkG
- QU+fCIgq3VLLx+5r63Yofu5EJllzbZ3oUpgfo/O79QVsJVsMG9Xy0WHYDfjjGv/1AEBK
- fxWB9jYx424C+qfQOAEDJoShT/3lEVmQAY1pEAOq127cTBU1D3AJhka2Rasxzp3dU6kL
- PgmS477I+rrav9v+F/QlrS0zz177KTR4ZKv6Klh1+BRybms65Qyo2+7s3KOkBgu8HnhM
- qr+w==
-X-Gm-Message-State: AOJu0YzLJXxTn7kxzWYcss+aNdZtkbyjIYMAts1QfqgYkD+H5J2GvwYG
- W2pBQGMYkCqbsm8WRKMd9USYdfa+NqxyAdTU6WzpxOch1KpyDxHCScuaYLVcnxc=
-X-Gm-Gg: ASbGnctIlRefCAig6Z1Q8B7wAvvwzx2o9KSx7NypdgKUM5nOvJSES7U6nKoMctOHanc
- 6YAZVcwyCRYwuBc0Ov9Gn4lTGoTGH6t1ghCQPfi06PRWfdTNR52qbjY84euOx2bDTEjjO7OFWEM
- zAgO/DJBXKMiU17IBaO/v9iZbXRy10Cl9ToTbZvcfC2J9/lQUgeWEVicF+z4Z7JGEKzVm5qYoYL
- XHhRT6L+zuQ89oAP6fVDewms0Xqq+JXNHEUoUELRnrDd6GtoGDrKVa5Nsxafcekj4t8xbpptiRl
- n78eScrM4lUjBKIkqxH8c9ViqSoRJA==
-X-Google-Smtp-Source: AGHT+IG1082P+IPJM/r6Uz9F4yfQ8QFPqmvR7SR7+4klDIBPR7gVlEaiyobLbTtxUCMNAPDVQNGrPw==
-X-Received: by 2002:a17:902:ce85:b0:21f:f3d:d533 with SMTP id
- d9443c01a7336-2219ff3354fmr1175055ad.2.1740074402785; 
- Thu, 20 Feb 2025 10:00:02 -0800 (PST)
-Received: from [192.168.68.110] ([187.11.154.120])
- by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-220d53492d0sm124018405ad.35.2025.02.20.09.59.59
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 20 Feb 2025 10:00:02 -0800 (PST)
-Message-ID: <3ffe3ecf-4bd8-447e-a984-442c71a94f89@ventanamicro.com>
-Date: Thu, 20 Feb 2025 14:59:58 -0300
+ (Exim 4.90_1) (envelope-from <conor@kernel.org>)
+ id 1tlBK9-0004bx-T9; Thu, 20 Feb 2025 13:31:06 -0500
+Received: from dfw.source.kernel.org ([2604:1380:4641:c500::1])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <conor@kernel.org>)
+ id 1tlBK7-0004ku-2s; Thu, 20 Feb 2025 13:31:01 -0500
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by dfw.source.kernel.org (Postfix) with ESMTP id 2CE015C5EE1;
+ Thu, 20 Feb 2025 18:30:08 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id AD1B8C4CED1;
+ Thu, 20 Feb 2025 18:30:45 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1740076247;
+ bh=/kdP9buAZx0vOLae4NGdTxhcSmc0oF/S0NLyr7tEZVE=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=shyMGgVTj/INHQkycl0PhcEGCckj+Y8bOCbd14cb5Zz+UzX8EYSH1NRsl+/NF+yin
+ 5pjCIl0BbjT3kc1fwXjeL73ojXuJtaIvee0L9/swDaqMuNtgH0YdfaOAInahixWgon
+ d+9gye+dMfoq6J81HkSvomi0xLs3XHsofBOja2kCfGwKG3Ah7VW0a3KYJVYHXKAtKZ
+ yJYms079O1v9aeo7uuiRslC3Jio8XDNK17my093pq6reR8HO4PwY4BsqLExJQIcCts
+ 22EK37t1j1yuTFg+tt1aDR1IY1GkA6Wuz1O5e6jlLiSmrd7k950opUV27uhzkHsnjz
+ f+AOkO5yKRV9Q==
+Date: Thu, 20 Feb 2025 18:30:43 +0000
+From: Conor Dooley <conor@kernel.org>
+To: Sebastian Huber <sebastian.huber@embedded-brains.de>
+Cc: qemu-devel@nongnu.org, Conor Dooley <conor.dooley@microchip.com>,
+ Bin Meng <bin.meng@windriver.com>, alistair.francis@wdc.com,
+ qemu-riscv@nongnu.org
+Subject: Re: [PATCH 0/5] Improve Microchip Polarfire SoC customization
+Message-ID: <20250220-reggae-hardness-907e385516d8@spud>
+References: <20250214062443.9936-1-sebastian.huber@embedded-brains.de>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] target/riscv: fix C extension disabling on misa write
-To: Vladimir Isaev <vladimir.isaev@syntacore.com>, qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, palmer@dabbelt.com, alistair.francis@wdc.com,
- bmeng.cn@gmail.com, liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com,
- mjc@sifive.com
-References: <20250220163120.77328-1-vladimir.isaev@syntacore.com>
-Content-Language: en-US
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <20250220163120.77328-1-vladimir.isaev@syntacore.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::62c;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pl1-x62c.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature"; boundary="4TOzEZfzET3VZRIz"
+Content-Disposition: inline
+In-Reply-To: <20250214062443.9936-1-sebastian.huber@embedded-brains.de>
+Received-SPF: pass client-ip=2604:1380:4641:c500::1;
+ envelope-from=conor@kernel.org; helo=dfw.source.kernel.org
+X-Spam_score_int: -32
+X-Spam_score: -3.3
+X-Spam_bar: ---
+X-Spam_report: (-3.3 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.457,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -103,55 +72,101 @@ Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 
+--4TOzEZfzET3VZRIz
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-On 2/20/25 1:31 PM, Vladimir Isaev wrote:
-> According to spec:
-> Writing misa may increase IALIGN, e.g., by disabling the "C" extension. If an instruction that would
-> write misa increases IALIGN, and the subsequent instruction’s address is not IALIGN-bit aligned, the
-> write to misa is suppressed, leaving misa unchanged.
-> 
-> So we should suppress disabling "C" if it is already enabled and
-> next instruction is not aligned to 4.
-> 
-> Fixes: f18637cd611c ("RISC-V: Add misa runtime write support")
-> Signed-off-by: Vladimir Isaev <vladimir.isaev@syntacore.com>
-> ---
->   target/riscv/csr.c | 7 ++++---
->   1 file changed, 4 insertions(+), 3 deletions(-)
-> 
-> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-> index afb7544f0780..32f9b7b16f6f 100644
-> --- a/target/riscv/csr.c
-> +++ b/target/riscv/csr.c
-> @@ -2067,11 +2067,12 @@ static RISCVException write_misa(CPURISCVState *env, int csrno,
->       val &= env->misa_ext_mask;
->   
->       /*
-> -     * Suppress 'C' if next instruction is not aligned
-> +     * Disabling 'C' increases IALIGN to 32. If subsequent instruction's address
-> +     * is not 32-bit aligned, write to misa is suppressed.
->        * TODO: this should check next_pc
->        */
-> -    if ((val & RVC) && (GETPC() & ~3) != 0) {
-> -        val &= ~RVC;
++cc qemu-riscv, Alistar.
 
-Not related to your changes but it would be nice if we made more use of
-QEMU_IS_ALIGNED() instead of doing these bitwise ops to check alignment.
-E.g. to check if pc is aligned to 4: QEMU_IS_ALIGNED(GETPC(), 4).
+On Fri, Feb 14, 2025 at 07:24:37AM +0100, Sebastian Huber wrote:
+> Booting the microchip-icicle-kit machine using the latest PolarFire SoC
+> Hart Software Services (HSS) no longer works since Qemu lacks support
+> for several registers (clocks, DRAM controller). Also reading from the
+> SDCard does not work currently.
 
+On that note, I think the inaccurate docs about polarfire should be
+removed. There's a wiki page here with dead links, or links to things
+that do not work anymore:
+https://wiki.qemu.org/Documentation/Platforms/RISCV#Microchip_PolarFire_SoC=
+_Icicle_Kit
+I think the whole section should be removed, find it kinda odd that
+there's a polarfire section but not for any other board. Either way,
+it's talking about something that just does not work, the current HSS
+and Yocto don't boot.
 
-> +    if (!(val & RVC) && (env->misa_ext & RVC) && (GETPC() & 0x3)) {
-> +        return RISCV_EXCP_NONE;
->       }
+There's also a docs page here:
+https://www.qemu.org/docs/master/system/riscv/microchip-icicle-kit.html
+that has a copy of the table your patch 4 modifies, that probably should
+be updated to match your changes.
 
-This will abort the write altogether, skipping valid changes to other bits. What
-we want is a "val &= ~RVC" if the proper conditions for clearing RVC are met.
+In a similar vein to the wiki, it talks about the HSS and booting a
+yocto wic image. I think those should be deleted since they don't work.
 
-Thanks,
+Alistar/Other RISC-V folks, what do you think? Bin wrote the port but
+seems to be AFK and I don't have the capacity to fix any of that stuff
+on top of what I already do in my spare time - do you agree that
+deleting the now inaccurate docs makes sense?
 
-Daniel
+> In order to allow tests runs for real-time kernels such as RTEMS and
+> Zephyr, improve the boot customization. This patch set enables a direct
+> run of kernel executables, for example:
+>=20
+> qemu-system-riscv64 -no-reboot -nographic \
+>   -serial null -serial mon:stdio \
+>   -smp 2 \
+>   -bios none \
+>   -machine microchip-icicle-kit,clint-timebase-frequency=3D10000000 \
+>   -kernel rtos.elf
 
->   
->       /* Disable RVG if any of its dependencies are disabled */
+The series breaks my usage:
+qemu//build/qemu-system-riscv64 -M microchip-icicle-kit \
+        -m 3G -smp 5 \
+        -kernel vmlinux.bin \
+        -dtb riscvpc.dtb \
+        -initrd initramfs.cpio.gz \
+        -display none -serial null \
+        -serial mon:stdio \
+        -D qemu.log -d unimp
+opensbi-riscv64-generic-fw_dynamic.bin: No such file or directory
+qemu-system-riscv64: could not load firmware 'opensbi-riscv64-generic-fw_dy=
+namic.bin'
+make: *** [Makefile:305: qemu-icicle] Error 1
 
+Figure it is likely to be your patch 4? The file does exist, so probably
+some sort of path-to-it issues?
+
+Cheers,
+Conor.
+
+>=20
+> Sebastian Huber (5):
+>   hw/misc: Add MPFS system reset support
+>   hw/riscv: More flexible FDT placement for MPFS
+>   hw/riscv: Make FDT optional for MPFS
+>   hw/riscv: Allow direct start of kernel for MPFS
+>   hw/riscv: Configurable MPFS CLINT timebase freq
+>=20
+>  hw/misc/mchp_pfsoc_sysreg.c        |   7 ++
+>  hw/riscv/microchip_pfsoc.c         | 147 +++++++++++++++++++++--------
+>  include/hw/riscv/microchip_pfsoc.h |   1 +
+>  3 files changed, 115 insertions(+), 40 deletions(-)
+>=20
+> --=20
+> 2.43.0
+>=20
+>=20
+
+--4TOzEZfzET3VZRIz
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYIAB0WIQRh246EGq/8RLhDjO14tDGHoIJi0gUCZ7d00wAKCRB4tDGHoIJi
+0rYeAQDn/T624NmD2Hb6Tqh5ByLemQApLlpP/8c6kqNXyVbf/QEA+2XDoO7yn78J
+fwah4EFrkAzooSlLViXFFTdw0U1nJAQ=
+=U9GY
+-----END PGP SIGNATURE-----
+
+--4TOzEZfzET3VZRIz--
 
