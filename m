@@ -4,91 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 823FEC021B2
-	for <qemu-riscv@archiver.kernel.org>; Thu, 20 Feb 2025 22:29:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B5ADEC021B3
+	for <qemu-riscv@archiver.kernel.org>; Thu, 20 Feb 2025 23:28:16 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tlF2i-0005YQ-Sb; Thu, 20 Feb 2025 17:29:16 -0500
+	id 1tlFxI-0003g8-HH; Thu, 20 Feb 2025 18:27:44 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tlF2b-0005Xa-7A
- for qemu-riscv@nongnu.org; Thu, 20 Feb 2025 17:29:11 -0500
-Received: from mail-wm1-x334.google.com ([2a00:1450:4864:20::334])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tlFxG-0003bZ-Qt
+ for qemu-riscv@nongnu.org; Thu, 20 Feb 2025 18:27:42 -0500
+Received: from mail-wr1-x436.google.com ([2a00:1450:4864:20::436])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tlF2Z-0005KM-AD
- for qemu-riscv@nongnu.org; Thu, 20 Feb 2025 17:29:08 -0500
-Received: by mail-wm1-x334.google.com with SMTP id
- 5b1f17b1804b1-43996e95114so9769325e9.3
- for <qemu-riscv@nongnu.org>; Thu, 20 Feb 2025 14:29:04 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tlFxE-0003O7-WB
+ for qemu-riscv@nongnu.org; Thu, 20 Feb 2025 18:27:42 -0500
+Received: by mail-wr1-x436.google.com with SMTP id
+ ffacd0b85a97d-38f1e8efe82so1745376f8f.0
+ for <qemu-riscv@nongnu.org>; Thu, 20 Feb 2025 15:27:40 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1740090543; x=1740695343; darn=nongnu.org;
+ d=linaro.org; s=google; t=1740094059; x=1740698859; darn=nongnu.org;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=N/7rqyRjk2jq5+8gYrc7ktRzu/nUFo5bffB0tKFoM7Q=;
- b=nQYL9Eztr6oYgPy0GDJu1F2v1Pwpjh7lIU2QMw/0RGhZjgm6DggwPtp+IW3owP+5oQ
- pEmwsdaYNTj04gZMqanu8eKi+q1j9bWoQCbM696KWJS9ZkXUWFle/6iVnmFQZMTZSvLW
- 7yMZjso0eZuVx9kNSOpTs70b4baRmkQ/ienDc4bpHHbXB5JL6f498NtVOMaFXcW7QkFF
- FMheqVw5o7lUCebsQdbU35UlHBQZx8RcRZfOXbjs9Cw0XHMAQM9NMk9qRDden2OsQ+cu
- MXLlSK1Kp4OTyWY6vjeAAok3J8dW1jOxjIGr25KFpaExczD+T1JhIKWqLMU5dTy3vLU/
- lpLA==
+ bh=7Wr6181q14F4WVMnw4hDnzoAr6pZykpyNNWHBd6x5w0=;
+ b=DKC3iXYgtypDAiJH61NDIpqIxoBhvgLmG9nwbTsmGWdxnNx71BlZy4YlS1bYawGts/
+ cUdHZLm9mYrZBHgHohFxrjmSFPLks6n6hU5bDGAUkMKZy23NPBz/VXYZlX71U8p4KCm2
+ 3ZElTeJ8Mdrk7qLNlVxQDBdgDQt2GUA6urNT3wcOwS7HOLfd8WyS7QneP/U1WMDU7ibr
+ RViuaonBddm5b1z4tBTnPevhVgiI7tZIMqaebERaB7deQQCFqTL9I+e1Hu6lfUk/wU2f
+ 2zb+RJJcf710I0MpuvRLjp19h9mYq5tHh2tx9hRzCeNW0WoUyVn76oqUV00RrhNIWbSf
+ NLhA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1740090543; x=1740695343;
+ d=1e100.net; s=20230601; t=1740094059; x=1740698859;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=N/7rqyRjk2jq5+8gYrc7ktRzu/nUFo5bffB0tKFoM7Q=;
- b=mMXpdiCKUmV1XMoVuDRvrfQfTiuNVZ0IXy5/FI05q9ih+ZL+ZDkevQDL5ujYcmc3mn
- 0dgJnchlFvu+vUaCqqur1Vfcvleo7n13xuW6hhGQulExZe5V/27rUg1kcjR1D8icBrde
- sCza7e/imz6mcOTvsIsOZjqAmUdd+clkS8msVCHiByAXJiLxmMNQfYqLbyIKv0g6chRY
- B/wjHt8uyjiYw0CHlgzZPovKzwNO9PRIZRUtwsv+a6ErxWUUOIotVi68forAGAuNYoSc
- dikSeaaTlUQMmaiA7pTF/t/OZ43SnV4Q49x1QBKjjInQ49fB8y+pbuD522WUwJtmtGCp
- gdkA==
+ bh=7Wr6181q14F4WVMnw4hDnzoAr6pZykpyNNWHBd6x5w0=;
+ b=T12AlCeNw/1bfRq6uA4s9EforSxIn3Ffr6SoJRLLE5DHhbov+KT4bKyNFW+DFhXYXN
+ QGWAz++H9LRD+tahbeDOlM2aXlPolIIN4fUTPZEBSo+CJ7S7gplQ1VMrFR3FFZGdpaPf
+ iq/yvDBPxwbxdt3h9+bLuEgBfl38oeBdsehbw2qY9G2NXnc1dhP6BbjpTEX2NJ+cG4MO
+ 4rv2mRD/SgEcCOZ+W+XWR7L8JR4kxBzHGTxXFvP6zBU+DIsqjqHTI/3gyZv2Chl4y4n8
+ +oFaw8bxtbkdysQC3UxBh+vwbP0JoT8x8xKXlE3Irnl+sHZNseNrCyUTXKiICu3e5h2T
+ KkoQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXJqFL9UmJtSoEVD1eI1DNgRcGkHZDdWyJTLBiwxBC0tnpz80dwB7Badp/XRWmPOye4b741u4o+o8zC@nongnu.org
-X-Gm-Message-State: AOJu0Yxnd3MBE4R2Jr2k3k28ZcPSZkLZXoMuY/4ItYKWCZuT8keG//zy
- 3K/PrFME/dZSDIqcGW4C62ImFZklvBZG7nCuKJ1A2bs3rjvXPtOrk0tGeYt5xvg=
-X-Gm-Gg: ASbGncsKhJb6PtOlDdL8QE6e8D2ByOqXRK8q95bkLICv6aSq55b1cD8iwHuMJQ8+KPn
- tJl3ZTrzXhpjvib1Js+RYTIrvTbDEl++/XpeaUg1Z42UuTsgtTPkreTzM5jGRFDEYPFqjiB/Hgl
- AZVbXbcLmYIIZ/+qR1ifXMY3yI1geVDCX/m2aVW6Ij/xSVUwErM8Hqi93GjBumLUA+bmaRRxmnQ
- L0ygyzB57M5mXkfp4MRH65+K0nGnaski+a4C7la0xOoOu6SFaT93GFGwyP2H/r1iAWZajL0af+4
- 51QsZfHpM4isrEBQDwPWb7d4pBReThaS9l+tEzssGAMpFmMygLZC5u1IcRA=
-X-Google-Smtp-Source: AGHT+IFHur79MHodt2fHRD4QAVOlAQO0M3XCLOXhCit1yE2o1YrzOczcxvLsJYGvnRYze11ZPBsrRA==
-X-Received: by 2002:a05:600c:3b94:b0:439:8653:20bb with SMTP id
- 5b1f17b1804b1-439aeb2b6afmr4032185e9.14.1740090543491; 
- Thu, 20 Feb 2025 14:29:03 -0800 (PST)
+ AJvYcCX8O+bpfDysIgHesgK7+EyaSbKtYxclGJRxv5ni3Ku2R0kp6SctNBybDq7A8tPkOXIyF89vF2kczDo6@nongnu.org
+X-Gm-Message-State: AOJu0YwvxgYB8U5uWSTIKK1he5/Z6aACV2KDdmBhX2Z6UyZ7wRGGzjQS
+ lNI9ptuvpPYd3xNBaBrBc08qCKWy72dLJAmyyZjCadA7rko6jX5wAEr/HXO2EvI=
+X-Gm-Gg: ASbGnctDSCj5zozp+IFndE/vyTNpu/OnAuZzyW81Hf9CgyIna3v/pVQbYbHE0eKbMlQ
+ /xHrQ//8Zf69lSi3FCXPKgxwG+vYcGaTaNozouxB5x4gJuj0F+Scs7lSbdHMrP7pF0h812Nr2TJ
+ 7SVaD5GYW2FQ88oBB1mYxBU6Wgg0qlbhnJa1i5pttV5hhXKdtyd+csITXCsAO6TEzcTJs+h1QBT
+ FoW0Rqxy8FEDJpg9xadXwIajV7J85e02axpEXXWtj0ly6cm/PYy46HLcaL6oTHWVMUo7w2O0UgC
+ mmVjeXe9p841KdDs4JIktmUteHozYeEJVpIi0FwltDAwewMSIHsfS7Sz5jE=
+X-Google-Smtp-Source: AGHT+IECkEhXRMPw+Y4FT1tWpcf1H8Y4ZVkOT/sCF2MSFmIdWI7XD9iQwvSr3VYE96O3F8bFtVx5SQ==
+X-Received: by 2002:a05:6000:1888:b0:38c:5bc1:1f03 with SMTP id
+ ffacd0b85a97d-38f6e7563femr753648f8f.7.1740094059127; 
+ Thu, 20 Feb 2025 15:27:39 -0800 (PST)
 Received: from [192.168.69.157] (88-187-86-199.subs.proxad.net.
  [88.187.86.199]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-43995391824sm87349315e9.23.2025.02.20.14.29.01
+ ffacd0b85a97d-38f69b3ca41sm2143574f8f.27.2025.02.20.15.27.38
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 20 Feb 2025 14:29:03 -0800 (PST)
-Message-ID: <ade78f31-5279-4862-acdd-15f083a000e2@linaro.org>
-Date: Thu, 20 Feb 2025 23:29:01 +0100
+ Thu, 20 Feb 2025 15:27:38 -0800 (PST)
+Message-ID: <95e6af77-05bf-46f5-9e85-ce913b08706e@linaro.org>
+Date: Fri, 21 Feb 2025 00:27:37 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 0/5] Improve Microchip Polarfire SoC customization
-To: Conor Dooley <conor@kernel.org>,
- Sebastian Huber <sebastian.huber@embedded-brains.de>
-Cc: qemu-devel@nongnu.org, Conor Dooley <conor.dooley@microchip.com>,
- Bin Meng <bin.meng@windriver.com>, alistair.francis@wdc.com,
- qemu-riscv@nongnu.org
-References: <20250214062443.9936-1-sebastian.huber@embedded-brains.de>
- <20250220-reggae-hardness-907e385516d8@spud>
+Subject: Re: [PULL 33/42] tcg/riscv: Require TCG_TARGET_REG_BITS == 64
+To: Richard Henderson <richard.henderson@linaro.org>, qemu-devel@nongnu.org
+Cc: Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ qemu-riscv <qemu-riscv@nongnu.org>
+References: <20230505212447.374546-1-richard.henderson@linaro.org>
+ <20230505212447.374546-34-richard.henderson@linaro.org>
 Content-Language: en-US
 From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-In-Reply-To: <20250220-reggae-hardness-907e385516d8@spud>
+In-Reply-To: <20230505212447.374546-34-richard.henderson@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::334;
- envelope-from=philmd@linaro.org; helo=mail-wm1-x334.google.com
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::436;
+ envelope-from=philmd@linaro.org; helo=mail-wr1-x436.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -104,71 +102,127 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Hi Conor,
+On 5/5/23 23:24, Richard Henderson wrote:
+> The port currently does not support "oversize" guests, which
+> means riscv32 can only target 32-bit guests.  We will soon be
+> building TCG once for all guests.  This implies that we can
+> only support riscv64.
+> 
+> Since all Linux distributions target riscv64 not riscv32,
+> this is not much of a restriction and simplifies the code.
+> 
+> The brcond2 and setcond2 opcodes are exclusive to 32-bit hosts,
+> so we can and should remove the stubs.
+> 
+> Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+> Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+> Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
+> ---
+>   tcg/riscv/tcg-target-con-set.h |   8 --
+>   tcg/riscv/tcg-target.h         |  22 ++--
+>   tcg/riscv/tcg-target.c.inc     | 232 +++++++++------------------------
+>   3 files changed, 72 insertions(+), 190 deletions(-)
 
-On 20/2/25 19:30, Conor Dooley wrote:
-> +cc qemu-riscv, Alistar.
-> 
-> On Fri, Feb 14, 2025 at 07:24:37AM +0100, Sebastian Huber wrote:
->> Booting the microchip-icicle-kit machine using the latest PolarFire SoC
->> Hart Software Services (HSS) no longer works since Qemu lacks support
->> for several registers (clocks, DRAM controller). Also reading from the
->> SDCard does not work currently.
-> 
-> On that note, I think the inaccurate docs about polarfire should be
-> removed. There's a wiki page here with dead links, or links to things
-> that do not work anymore:
-> https://wiki.qemu.org/Documentation/Platforms/RISCV#Microchip_PolarFire_SoC_Icicle_Kit
-> I think the whole section should be removed, find it kinda odd that
-> there's a polarfire section but not for any other board. Either way,
-> it's talking about something that just does not work, the current HSS
-> and Yocto don't boot.
-> 
-> There's also a docs page here:
-> https://www.qemu.org/docs/master/system/riscv/microchip-icicle-kit.html
-> that has a copy of the table your patch 4 modifies, that probably should
-> be updated to match your changes.
-> 
-> In a similar vein to the wiki, it talks about the HSS and booting a
-> yocto wic image. I think those should be deleted since they don't work.
-> 
-> Alistar/Other RISC-V folks, what do you think? Bin wrote the port but
-> seems to be AFK and I don't have the capacity to fix any of that stuff
-> on top of what I already do in my spare time - do you agree that
-> deleting the now inaccurate docs makes sense?
-> 
->> In order to allow tests runs for real-time kernels such as RTEMS and
->> Zephyr, improve the boot customization. This patch set enables a direct
->> run of kernel executables, for example:
->>
->> qemu-system-riscv64 -no-reboot -nographic \
->>    -serial null -serial mon:stdio \
->>    -smp 2 \
->>    -bios none \
->>    -machine microchip-icicle-kit,clint-timebase-frequency=10000000 \
->>    -kernel rtos.elf
-> 
-> The series breaks my usage:
-> qemu//build/qemu-system-riscv64 -M microchip-icicle-kit \
->          -m 3G -smp 5 \
->          -kernel vmlinux.bin \
->          -dtb riscvpc.dtb \
->          -initrd initramfs.cpio.gz \
->          -display none -serial null \
->          -serial mon:stdio \
->          -D qemu.log -d unimp
-> opensbi-riscv64-generic-fw_dynamic.bin: No such file or directory
-> qemu-system-riscv64: could not load firmware 'opensbi-riscv64-generic-fw_dynamic.bin'
-> make: *** [Makefile:305: qemu-icicle] Error 1
-> 
-> Figure it is likely to be your patch 4? The file does exist, so probably
-> some sort of path-to-it issues?
 
-Maybe missing the -L option?
+> diff --git a/tcg/riscv/tcg-target.h b/tcg/riscv/tcg-target.h
+> index 0deb33701f..dddf2486c1 100644
+> --- a/tcg/riscv/tcg-target.h
+> +++ b/tcg/riscv/tcg-target.h
+> @@ -25,11 +25,14 @@
+>   #ifndef RISCV_TCG_TARGET_H
+>   #define RISCV_TCG_TARGET_H
+>   
+> -#if __riscv_xlen == 32
+> -# define TCG_TARGET_REG_BITS 32
+> -#elif __riscv_xlen == 64
+> -# define TCG_TARGET_REG_BITS 64
+> +/*
+> + * We don't support oversize guests.
+> + * Since we will only build tcg once, this in turn requires a 64-bit host.
+> + */
+> +#if __riscv_xlen != 64
+> +#error "unsupported code generation mode"
+>   #endif
+> +#define TCG_TARGET_REG_BITS 64
+>   
+>   #define TCG_TARGET_INSN_UNIT_SIZE 4
+>   #define TCG_TARGET_TLB_DISPLACEMENT_BITS 20
+> @@ -83,13 +86,8 @@ typedef enum {
+>   #define TCG_TARGET_STACK_ALIGN          16
+>   #define TCG_TARGET_CALL_STACK_OFFSET    0
+>   #define TCG_TARGET_CALL_ARG_I32         TCG_CALL_ARG_NORMAL
+> -#if TCG_TARGET_REG_BITS == 32
+> -#define TCG_TARGET_CALL_ARG_I64         TCG_CALL_ARG_EVEN
+> -#define TCG_TARGET_CALL_ARG_I128        TCG_CALL_ARG_EVEN
+> -#else
+>   #define TCG_TARGET_CALL_ARG_I64         TCG_CALL_ARG_NORMAL
+>   #define TCG_TARGET_CALL_ARG_I128        TCG_CALL_ARG_NORMAL
+> -#endif
+>   #define TCG_TARGET_CALL_RET_I128        TCG_CALL_RET_NORMAL
+>   
+>   /* optional instructions */
+> @@ -106,8 +104,8 @@ typedef enum {
+>   #define TCG_TARGET_HAS_sub2_i32         1
+>   #define TCG_TARGET_HAS_mulu2_i32        0
+>   #define TCG_TARGET_HAS_muls2_i32        0
+> -#define TCG_TARGET_HAS_muluh_i32        (TCG_TARGET_REG_BITS == 32)
+> -#define TCG_TARGET_HAS_mulsh_i32        (TCG_TARGET_REG_BITS == 32)
+> +#define TCG_TARGET_HAS_muluh_i32        0
+> +#define TCG_TARGET_HAS_mulsh_i32        0
 
-   -L path         set the directory for the BIOS, VGA BIOS and keymaps
+Should have we squashed the following with these changes?
 
-Regards,
+-- >8 --
+diff --git a/tcg/riscv/tcg-target.c.inc b/tcg/riscv/tcg-target.c.inc
+index f7e1ca5a56f..e395ffcdaf5 100644
+--- a/tcg/riscv/tcg-target.c.inc
++++ b/tcg/riscv/tcg-target.c.inc
+@@ -2323,10 +2323,8 @@ static void tcg_out_op(TCGContext *s, TCGOpcode 
+opc, TCGType type,
+          break;
 
-Phil.
+-    case INDEX_op_mulsh_i32:
+      case INDEX_op_mulsh_i64:
+          tcg_out_opc_reg(s, OPC_MULH, a0, a1, a2);
+          break;
+
+-    case INDEX_op_muluh_i32:
+      case INDEX_op_muluh_i64:
+          tcg_out_opc_reg(s, OPC_MULHU, a0, a1, a2);
+@@ -2399,4 +2397,6 @@ static void tcg_out_op(TCGContext *s, TCGOpcode 
+opc, TCGType type,
+      case INDEX_op_extu_i32_i64:
+      case INDEX_op_extrl_i64_i32:
++    case INDEX_op_mulsh_i32:
++    case INDEX_op_muluh_i32:
+      default:
+          g_assert_not_reached();
+@@ -2707,6 +2707,4 @@ tcg_target_op_def(TCGOpcode op, TCGType type, 
+unsigned flags)
+
+      case INDEX_op_mul_i32:
+-    case INDEX_op_mulsh_i32:
+-    case INDEX_op_muluh_i32:
+      case INDEX_op_div_i32:
+      case INDEX_op_divu_i32:
+---
+
+>   #define TCG_TARGET_HAS_ext8s_i32        1
+>   #define TCG_TARGET_HAS_ext16s_i32       1
+>   #define TCG_TARGET_HAS_ext8u_i32        1
+> @@ -128,7 +126,6 @@ typedef enum {
+>   #define TCG_TARGET_HAS_setcond2         1
+>   #define TCG_TARGET_HAS_qemu_st8_i32     0
+>   
+> -#if TCG_TARGET_REG_BITS == 64
+>   #define TCG_TARGET_HAS_movcond_i64      0
+>   #define TCG_TARGET_HAS_div_i64          1
+>   #define TCG_TARGET_HAS_rem_i64          1
+> @@ -165,7 +162,6 @@ typedef enum {
+>   #define TCG_TARGET_HAS_muls2_i64        0
+>   #define TCG_TARGET_HAS_muluh_i64        1
+>   #define TCG_TARGET_HAS_mulsh_i64        1
+> -#endif
+>   
+>   #define TCG_TARGET_DEFAULT_MO (0)
 
