@@ -4,82 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6678BC021AA
-	for <qemu-riscv@archiver.kernel.org>; Fri, 21 Feb 2025 08:38:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 85DC8C021AA
+	for <qemu-riscv@archiver.kernel.org>; Fri, 21 Feb 2025 08:46:25 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tlOXT-0006dt-81; Fri, 21 Feb 2025 03:37:39 -0500
+	id 1tlOfI-00015N-Nb; Fri, 21 Feb 2025 03:45:44 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1tlOXR-0006bv-0e
- for qemu-riscv@nongnu.org; Fri, 21 Feb 2025 03:37:37 -0500
-Received: from mail-wm1-x330.google.com ([2a00:1450:4864:20::330])
+ id 1tlOfE-00014X-S2
+ for qemu-riscv@nongnu.org; Fri, 21 Feb 2025 03:45:41 -0500
+Received: from mail-wm1-x32e.google.com ([2a00:1450:4864:20::32e])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1tlOXP-0001BW-3S
- for qemu-riscv@nongnu.org; Fri, 21 Feb 2025 03:37:36 -0500
-Received: by mail-wm1-x330.google.com with SMTP id
- 5b1f17b1804b1-4398c8c8b2cso17875955e9.2
- for <qemu-riscv@nongnu.org>; Fri, 21 Feb 2025 00:37:34 -0800 (PST)
+ id 1tlOfD-0002Km-65
+ for qemu-riscv@nongnu.org; Fri, 21 Feb 2025 03:45:40 -0500
+Received: by mail-wm1-x32e.google.com with SMTP id
+ 5b1f17b1804b1-439946a49e1so11466755e9.0
+ for <qemu-riscv@nongnu.org>; Fri, 21 Feb 2025 00:45:38 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1740127053; x=1740731853; darn=nongnu.org;
+ d=ventanamicro.com; s=google; t=1740127537; x=1740732337; darn=nongnu.org;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=1rGPbfcy/xIAluf2Och4444kyuNn2+vPPgTl1UY91QU=;
- b=ZkpiOGmr9V8KKix/fft+Kb3qDstSexsPjLm4OWt8UsJByj3zlbJkujA1NSGpEoDSfJ
- 5pmaU2pmXc3SYnkn9lkg3JZ9moV4TpmmRrrNGNaOzkWsJnzS6L38EjBVweKFsgeI5gZz
- tssgZ/TUG/M8GkXNyrxdB5Ku/rs3JyHGysqVIBCQknMamMSBcYdsbgrPaK8KruS3ZAXz
- YZ7G/EvTdTWix1AQuMSQg/nBWe76AWmSmfPkOhtfj35Tbbx01yvnFmg36otGg+Xg7jXv
- lsezctmISVeDB/d9og01Y+73ITEhEqxfalrfSkO1D09jbmHEzDTWWgIgVkraCnbrxnjw
- pUSQ==
+ bh=HW4cB7zY+a/g+kKXEB06zgRHhOYLfuD5pJeV64/vSDw=;
+ b=irpmHSLaAhWD0DCeWePYDSLBHSbiEEnHnx9qV7JxEEx4IX2k9WHmlYzxjJwugFjdKT
+ 9Xi+5Iq2360rT0aD58WTDWLjMldvLEfr10NzFMKEK0RjYkQWAGdSuTPM//+qYLDXdQKd
+ owWhjqJZfQoXPbKZHcUVRk0x1SCTEkEtjeS5+/JDq+2WhwTDt6mPEhRBZ6iQ6CKxs0ET
+ VsJ81wyMaGOAObU7RlzQBa7TuONj9eeWliNXx58X+5FjgF+XTeCQbScRvyNGU8T793Sd
+ x1TrH3IDc0xo3NdWUIriKag27jCYYOf9QepUNk7+sSDQj+CYDN1g5pgoV734Spbt0Fo1
+ 2Dow==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1740127053; x=1740731853;
+ d=1e100.net; s=20230601; t=1740127537; x=1740732337;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=1rGPbfcy/xIAluf2Och4444kyuNn2+vPPgTl1UY91QU=;
- b=kiOrGKi6gIir/zT9qC6t6SjjTEuhINckrvklfgI5zoJDo1wjw4pX5bGwLKK9kqfLjE
- KYyeZq7PE5vQTQeq6QG1MXmvYlMtRW2JqJo5QbwjdDYyTmRgoUzMjM45Y7iP6Y7tPyXc
- U6PJkWk1sBTWzYiob9QBbeDkNWhrKL9O9fomn6XsCM91tneIs8l1OyBQYHatINkEc8GN
- S7/ua3teZDZNMcpoXE2o1V8m/8G8wB1+wrk2AVLuC0phegnp3RHxlY+wogfFQoMIRHB7
- Q5YwKEBjqeRQH8GPP4waTIAdkdsbCHNdifrmUxW+QGr63wdglw2gHHqq6oyeUK1FWsWJ
- ADxg==
+ bh=HW4cB7zY+a/g+kKXEB06zgRHhOYLfuD5pJeV64/vSDw=;
+ b=b/1cHCQnfuA+L4ui6l17bRcnoWYlPErLNITYi5+oYceB2m+Uigbr4ALVUJdE1CH/9y
+ PxHLK3Lc+5+fFAfNlY21l8077WNpSKFzOln1oms4kdvWo/flLWmqqnSnu3sZ/50iRH95
+ 8+M2lo/oCG07rxvYZ2dyj2CG+3zVcD68aV2p4wwIjXfopsYVLVbo345Gp3BoTdwYb9U8
+ OKwJEgW6DLwRTKTEabQ0WWqAl3HkQwpXlX6Tdz36oUfXvQ4ALk2XGikJMAn6Q1EQlqgP
+ CAvPv1qtAXkL403aYTVLNPjL+mk6AtXkdh49FestAUx6SWNvyvfJbI147A1GIyGC87nm
+ nE1Q==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVwh9xTcgfV2/mzywfSiTOHCif59lBJI6gVguSWxLo6QuJVz+/ld/p1oKYgIbXA30JVdz4wff2nemw6@nongnu.org
-X-Gm-Message-State: AOJu0Yx4lH2SvVuQ2eiJxpLu7hogk1Oc/HHoDS/2gITONEaa6sHWwrVw
- 4+n9yI2JbNhQ7EHTGYyipGCI/ECj84GzFwDnwuWrXuoQJH7qBE3SCBv+bviOXn4=
-X-Gm-Gg: ASbGncs6kIo1R2TNPQCnRVXkzi1thRTEgJD25QG9WXRt9iLkbpzwBvXckzzbCiHnypE
- 8Ib/ekaSqKig9hu3mNhZKnLdoYikp8b+BO+Nd7NihasJbBNuuUwinghRGIPGAzVSIUAoObFOnUw
- MkJoBuRGRvrWnu6NFiTusQEYr4bqZeH6mJEAjl3YqAAUi+0ASNGws9tuEOjGZGfYTh/zRvsgkPr
- 1M4qr1hQvf7fANUMQxd9DQj5QlPyiiXQIE/Tr3UBJbSbfV1+t06M3wQ97FPNSTzs0U+J2HFFw4t
- x7sVTV8W+zZ2mg==
-X-Google-Smtp-Source: AGHT+IEzm2UqUYw3PWtWVyHC4jaliWCj1DZk7UTZuVjD6KBtehPILRk0j6G+bj0YuEFOq8yTwfHnLA==
-X-Received: by 2002:a05:6000:178f:b0:38c:5cd0:ecf3 with SMTP id
- ffacd0b85a97d-38f6e756a90mr1913930f8f.11.1740127053278; 
- Fri, 21 Feb 2025 00:37:33 -0800 (PST)
+ AJvYcCU+9sLxZpnSwN5UF9iiWoSC1CpAKwzJDQuZUWMVE3X5M8Gz/OAMqPrzcCJM7blwNi0SjotNvSSZ4xe+@nongnu.org
+X-Gm-Message-State: AOJu0YyO77IsZtQl7nTLC/in7WkHZ/4fH9pl8KSc4pSTRwR65K3jeBUN
+ 8KxldTbHXsCDxBC2SYuzbtiBsIYC4ODifKZ2sEBAhKNW2k8OCnXFU6wn/xnnVyA=
+X-Gm-Gg: ASbGnctkIztzXLrx5mxA1dU7K2/L5sYlTrNU50h4gR8MQ6gtEJVYBsPXRTGH8qdfOsU
+ 6pRa8ZbplihspTBHaY0e2v5f+VtfFzlQ04kf3rPUk3XhtEsrroy/a3QMXX9UltVpANJtw0Wvf/U
+ Olhdj9RnhQpQV82gRxIWEL6jC8IC8pnSSCbJ4VPkDwsFAX4dYPmtoZNmjQB2n65XZFeRVCWNOeK
+ 8B5NIyuEb8S/B3vvGdtxCCTNbyu2uSxqDSbQpMKWxIGvzQCkT5sMY8Cx9EsojcVwBz5eo4+VPVp
+ l0cz4n6Q8QJJQQ==
+X-Google-Smtp-Source: AGHT+IHxppOqllza0Vk46hLx6ehT443j0OfTzsOjcpUwENTCA/MbdXM6mP/AcK37oGeagbS/jYHuog==
+X-Received: by 2002:a05:600c:19cc:b0:439:5766:7232 with SMTP id
+ 5b1f17b1804b1-439ae212996mr16144455e9.21.1740127537122; 
+ Fri, 21 Feb 2025 00:45:37 -0800 (PST)
 Received: from localhost ([2a02:8308:a00c:e200::766e])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-439b02f23c2sm10260895e9.17.2025.02.21.00.37.32
+ 5b1f17b1804b1-439b030be5esm10376675e9.30.2025.02.21.00.45.36
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 21 Feb 2025 00:37:32 -0800 (PST)
-Date: Fri, 21 Feb 2025 09:37:32 +0100
+ Fri, 21 Feb 2025 00:45:36 -0800 (PST)
+Date: Fri, 21 Feb 2025 09:45:35 +0100
 From: Andrew Jones <ajones@ventanamicro.com>
 To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
  bmeng@tinylab.org, liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, 
  palmer@rivosinc.com
-Subject: Re: [PATCH 2/3] target/riscv/kvm: use env->sie to read/write 'sie' CSR
-Message-ID: <20250221-770a4da9465046f4fae9dc20@orel>
+Subject: Re: [PATCH 3/3] target/riscv/kvm: reset all available KVM CSRs in
+ kvm_reset()
+Message-ID: <20250221-1fab8b0e1e23a31880880f11@orel>
 References: <20250220161313.127376-1-dbarboza@ventanamicro.com>
- <20250220161313.127376-3-dbarboza@ventanamicro.com>
+ <20250220161313.127376-4-dbarboza@ventanamicro.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20250220161313.127376-3-dbarboza@ventanamicro.com>
-Received-SPF: pass client-ip=2a00:1450:4864:20::330;
- envelope-from=ajones@ventanamicro.com; helo=mail-wm1-x330.google.com
+In-Reply-To: <20250220161313.127376-4-dbarboza@ventanamicro.com>
+Received-SPF: pass client-ip=2a00:1450:4864:20::32e;
+ envelope-from=ajones@ventanamicro.com; helo=mail-wm1-x32e.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -102,49 +103,77 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Thu, Feb 20, 2025 at 01:13:12PM -0300, Daniel Henrique Barboza wrote:
-> Using env->sie is clearer than using env->mie.
+On Thu, Feb 20, 2025 at 01:13:13PM -0300, Daniel Henrique Barboza wrote:
+> Explictly reset env->mstatus and env->sie.
 
-Maybe? Just as sstatus is a subset of mstatus, sip and sie can be
-subsets of mip and mie. However, the AIA can change sip/sie so they
-no longer alias mip/mie, which is why we have 'mvip' an 'sie' members
-in CPURISCVState. In the end, for KVM, it doesn't really matter since
-this is just s/r storage. I'd probably just drop this patch and keep
-using mie. Otherwise, what about mip?
+mie was already getting set to zero, so that should have just been renamed
+in the last patch, but I still think we should drop the last patch.
 
-Thanks,
-drew
-
+> Add a comment about env->mip
+> being read/written into KVM 'sip' CSR.
+> 
+> We're also not read/writing 'scounteren' which is available in the KVM
+> UAPI. Add it in kvm_reset() and get/put_regs_csr().
 > 
 > Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 > ---
->  target/riscv/kvm/kvm-cpu.c | 4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
+>  target/riscv/kvm/kvm-cpu.c | 8 ++++++++
+>  1 file changed, 8 insertions(+)
 > 
 > diff --git a/target/riscv/kvm/kvm-cpu.c b/target/riscv/kvm/kvm-cpu.c
-> index 484b6afe7c..fea03f3657 100644
+> index fea03f3657..ee7a9295b4 100644
 > --- a/target/riscv/kvm/kvm-cpu.c
 > +++ b/target/riscv/kvm/kvm-cpu.c
-> @@ -610,7 +610,7 @@ static int kvm_riscv_get_regs_csr(CPUState *cs)
->      CPURISCVState *env = &RISCV_CPU(cs)->env;
+> @@ -618,6 +618,7 @@ static int kvm_riscv_get_regs_csr(CPUState *cs)
+>      KVM_RISCV_GET_CSR(cs, env, stval, env->stval);
+>      KVM_RISCV_GET_CSR(cs, env, sip, env->mip);
+>      KVM_RISCV_GET_CSR(cs, env, satp, env->satp);
+> +    KVM_RISCV_GET_CSR(cs, env, scounteren, env->scounteren);
+
+senvcfg is also missing.
+
 >  
->      KVM_RISCV_GET_CSR(cs, env, sstatus, env->mstatus);
-> -    KVM_RISCV_GET_CSR(cs, env, sie, env->mie);
-> +    KVM_RISCV_GET_CSR(cs, env, sie, env->sie);
->      KVM_RISCV_GET_CSR(cs, env, stvec, env->stvec);
->      KVM_RISCV_GET_CSR(cs, env, sscratch, env->sscratch);
->      KVM_RISCV_GET_CSR(cs, env, sepc, env->sepc);
-> @@ -627,7 +627,7 @@ static int kvm_riscv_put_regs_csr(CPUState *cs)
->      CPURISCVState *env = &RISCV_CPU(cs)->env;
+>      return 0;
+>  }
+> @@ -635,6 +636,7 @@ static int kvm_riscv_put_regs_csr(CPUState *cs)
+>      KVM_RISCV_SET_CSR(cs, env, stval, env->stval);
+>      KVM_RISCV_SET_CSR(cs, env, sip, env->mip);
+>      KVM_RISCV_SET_CSR(cs, env, satp, env->satp);
+> +    KVM_RISCV_SET_CSR(cs, env, scounteren, env->scounteren);
 >  
->      KVM_RISCV_SET_CSR(cs, env, sstatus, env->mstatus);
-> -    KVM_RISCV_SET_CSR(cs, env, sie, env->mie);
-> +    KVM_RISCV_SET_CSR(cs, env, sie, env->sie);
->      KVM_RISCV_SET_CSR(cs, env, stvec, env->stvec);
->      KVM_RISCV_SET_CSR(cs, env, sscratch, env->sscratch);
->      KVM_RISCV_SET_CSR(cs, env, sepc, env->sepc);
+>      return 0;
+>  }
+> @@ -1609,6 +1611,10 @@ void kvm_riscv_reset_vcpu(RISCVCPU *cpu)
+>      env->pc = cpu->env.kernel_addr;
+>      env->gpr[10] = kvm_arch_vcpu_id(CPU(cpu)); /* a0 */
+>      env->gpr[11] = cpu->env.fdt_addr;          /* a1 */
+> +
+> +    /* sstatus is read/written into mstatus */
+
+How about just a single comment above this function stating that we
+reset all registers that we will s/r with csr get/put. Interested
+parties can go look at get or put to see the mappings.
+
+> +    env->mstatus = 0;
+> +    env->sie = 0;
+>      env->satp = 0;
+>      env->mie = 0;
+>      env->stvec = 0;
+> @@ -1616,7 +1622,9 @@ void kvm_riscv_reset_vcpu(RISCVCPU *cpu)
+>      env->sepc = 0;
+>      env->scause = 0;
+>      env->stval = 0;
+> +    /* sip is read/written into mip */
+>      env->mip = 0;
+> +    env->scounteren = 0;
+>  }
+>  
+>  void kvm_riscv_set_irq(RISCVCPU *cpu, int irq, int level)
 > -- 
 > 2.48.1
 > 
-> 
+>
+
+Thanks,
+drew
 
