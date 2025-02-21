@@ -4,82 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 81A5FC021AA
-	for <qemu-riscv@archiver.kernel.org>; Fri, 21 Feb 2025 12:45:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 756DFC021B3
+	for <qemu-riscv@archiver.kernel.org>; Fri, 21 Feb 2025 12:45:44 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tlSOX-0003sI-0Y; Fri, 21 Feb 2025 07:44:41 -0500
+	id 1tlSPI-0004MM-Nb; Fri, 21 Feb 2025 07:45:28 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1tlSOO-0003q6-5Y
- for qemu-riscv@nongnu.org; Fri, 21 Feb 2025 07:44:32 -0500
-Received: from mail-wr1-x433.google.com ([2a00:1450:4864:20::433])
+ id 1tlSP6-0004EV-25
+ for qemu-riscv@nongnu.org; Fri, 21 Feb 2025 07:45:22 -0500
+Received: from mail-wr1-x429.google.com ([2a00:1450:4864:20::429])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1tlSOM-0001UU-Ai
- for qemu-riscv@nongnu.org; Fri, 21 Feb 2025 07:44:31 -0500
-Received: by mail-wr1-x433.google.com with SMTP id
- ffacd0b85a97d-38f325ddbc2so1436844f8f.1
- for <qemu-riscv@nongnu.org>; Fri, 21 Feb 2025 04:44:29 -0800 (PST)
+ id 1tlSOu-0001aH-8S
+ for qemu-riscv@nongnu.org; Fri, 21 Feb 2025 07:45:07 -0500
+Received: by mail-wr1-x429.google.com with SMTP id
+ ffacd0b85a97d-38a8b17d7a7so1110535f8f.2
+ for <qemu-riscv@nongnu.org>; Fri, 21 Feb 2025 04:45:03 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1740141868; x=1740746668; darn=nongnu.org;
+ d=ventanamicro.com; s=google; t=1740141903; x=1740746703; darn=nongnu.org;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=QkFqKyhO+UNGfTQB/aIiReQiVSLy+zuj4ed6HdbTGkI=;
- b=Ou7JNUSRKNnhg7VyZlvaT33ompvL9Em/jzpWRRUSuJICwQD5S+jntxwN2z+rA6BNFN
- 9ro4XmaRtBQRyM/ZgWdX8hFSeJT9Wmd4c7GwZIMyMEBD4aTc5WKLGT+InbRhEneRXqX4
- MLJvZMBzIO9YA2fHCappjFhwCELLGttvAFZ++/j0d3FU+j4KyFgdGI0Vbmy1f8psEpB5
- RzwEiaEMf+zx8HwvdOo3Y3HAEy/WSWhm5WNSR0Ep0JveL+HXix+kjzOTah0m/L1GI2vF
- vxvicY5AOFQni1nPAIkBy1gIaewRE+lqIshGMiBggCMyupGnPTdt39K34/t5HALSWBpC
- jvCA==
+ bh=AlHmfew6mJon304VdZYxG1YyGTsjIeTLnY1/4AtNcq4=;
+ b=UDNbJSUmthcN/I8u0ucstVs1/9IxElz9pvvXdjbh0EILiNFW79Uzi8xyWHKR/z/dnA
+ et+MbSFEulzkyy5l+4QTohczI2CnEN49PKS1PPUevEgEiUGv75hJIOiVK6Q+eRK165nu
+ E2RUWV6TAkHoZOmHuHBl9wg2hUfhK1ug49VbDghYjJh47P/foTsgaB5h7Fnrzdb3mOI3
+ oOBSn9iEYxPlwAcyxytizT6QsC0Eh98Tr5JigBvnE3sG+V9wSujvjALarzX9hdojWGfy
+ owoePj4WirH/JeDoH0abie1l1esDWuUSxAe1agEjnSmmGRKayfPHzbfdykBhrIFbCDgY
+ VSxg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1740141868; x=1740746668;
+ d=1e100.net; s=20230601; t=1740141903; x=1740746703;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=QkFqKyhO+UNGfTQB/aIiReQiVSLy+zuj4ed6HdbTGkI=;
- b=LA80qUeEewpMw8jtvARPDDMziLlHcqyJrcYnAf/lnqFgPo3fuDaJnWTy2gaBOPTQOX
- ndtTP8Yy9RRrPHn6TwFldMc+7iUGwCnxQ37bm2e+v/dg4Fd2CkFd/430u917/mDWZT2N
- Asf0rD5uMetT/wjvwOJ9DSGeysD6MiSmrGQ8dtJkgq9SckJi1HjA/454hvjyAPIZ7vMt
- s0jhrXJUpvtEc/P/13TnZiT/Yt8QZQQmRANfVeGEF/bPuGXfO4UxlNQAT3Tb0MFwX/en
- kHqxE9ILjjgP2L6a0tfQ91ViIjHPpjrVpXclEknmpvlUF+jl5yoHl7DVjt7K/8jfYSGZ
- Ddsw==
+ bh=AlHmfew6mJon304VdZYxG1YyGTsjIeTLnY1/4AtNcq4=;
+ b=aTq3FaEYLC/4fg8RbhtjSlYnYnNKTRoDadzhaJpvECmq+qtaF9bNFaj5zv4AebewJe
+ gyBoBoobU/QAuPmegjMwtyQ2C0OQogX5JYuEyTbmc57YRA8kTzBOOJnd+4xSmfz8ZPD2
+ ETErvnlS72yfZx+8lZNCxH99cOSlzUaJ5ySmVqaA+edcHl1JtS6qPUl5SaxWE5QNV8Nw
+ WovSRN8u2dtv7sH0ejm2CD09ZORGcNMpecS9OM7HlXPt1CdJ2sQp/cRWCd7DxuJ3hzpm
+ bsrpxk3aPlFwjRfQXk5ff9x1FP27vTRxlPcihhd0KZ/sNaHvVSKctfwEIZNYJS1IXVur
+ X3yQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXVL0WuGWLVulgQ6OZRbabukpsj90PbfOwQMq5Avs/PFfaiwWgdURzrG4fN14pR055nQjuqDjUPidg1@nongnu.org
-X-Gm-Message-State: AOJu0YyXWTtsfEJUfjAp8pkESBuNHKCQ+/+T86VBeRK82FoVE2/G/4D4
- 50WcHtGdmK4uj86+Z+YklLfAH2y7uHDDOLqmEQlHGZQH8nPYTGPF98lZMjq16ZY=
-X-Gm-Gg: ASbGncu0DAw1jbUI6VRtHmV5pdus+YPtS+ZDTteXJMENKNoJY1VhmNy/rf3bqMECmrp
- hctyx34R2OzF5zbnildwGPeL+nCBakfwx+x3X6h/pWiHy6Tx95hCGPoBgppEf7zGIORofmwI/Bm
- 2zwEqWo78SE/CjBgzVmFJUVkaGp5On/SfvCgvoR2M+r036+reRhbD2d3qFaOJwzeOUIzTZ+ZbWQ
- wFJ6F05Q3wBG2temdcFPFFQqUZ1hbJ282JpI4Xis0h9lr1P+NegSHYivzLd/k20SLTem8xoIXrL
- 06Cia4Klkd0bdQ==
-X-Google-Smtp-Source: AGHT+IFqSENDtEvRgG43k9iMiYLMOe5sDtKia0Dtjo+U6yoF7xtts0hwmAmfYg7gaG9LMq5ZmZA8tw==
-X-Received: by 2002:a5d:5985:0:b0:38d:d3e2:db32 with SMTP id
- ffacd0b85a97d-38f70783f03mr1672448f8f.7.1740141868226; 
- Fri, 21 Feb 2025 04:44:28 -0800 (PST)
+ AJvYcCUC7EfhOzJ0XB9gB+mZ131CSavgoSq7wLqUyQ8KloUYI1PINPE8qIiBTRokaiglfF7h0sZkvYSzZFkz@nongnu.org
+X-Gm-Message-State: AOJu0YzB5Fz+XVeNb9W/VgNIxTD8JlxuFSKi7IvLaDrDVksrA445NAc4
+ Q6WYXwizlQaM9R8mVjoKN9LLuQ+y+ubZbEFo+XKKzoXRR2ejRMHND/8PhfOJ3HU=
+X-Gm-Gg: ASbGncs/Ge55K6fJtChu/LxEjwpTSvuwH+5LiKkrL6K6IveJs6AakYxfQE6tev0oAO4
+ YS9jDyMFCeAARlhjX1IOlv4aZyNf21ttb3FZO8aaWsc1fZf2/hYSs/iQcKZF+0fSBZ4lG3mgsIn
+ lZ09ZRPAqqr+fHCx5Hn8M4NCYv1VdO3tGWv4VYwd5ZRtpWwFCBXGmtzAHVMN8Z8MIBEcsMgY7zs
+ Nm3AP2Gx48OFNf0G6IEF2TvIt/sEy4ICfFDdru71tt4qpUYWJFpFOkGuO8QLkLw1a5iEHARq6+f
+ U6c6omZTc3Y+JA==
+X-Google-Smtp-Source: AGHT+IEsNejglwHljlFJwYChj6+fRqTYUlijuumV11uFTiscFGfinzC/+tuSK7Q7SGktSz1GCoqQbQ==
+X-Received: by 2002:a5d:59a3:0:b0:38d:e15e:17e9 with SMTP id
+ ffacd0b85a97d-38f6f0b2161mr3500462f8f.35.1740141902849; 
+ Fri, 21 Feb 2025 04:45:02 -0800 (PST)
 Received: from localhost ([2a02:8308:a00c:e200::766e])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-38f69b3ca41sm3640123f8f.27.2025.02.21.04.44.27
+ 5b1f17b1804b1-439b02f5b38sm16348475e9.24.2025.02.21.04.45.02
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 21 Feb 2025 04:44:27 -0800 (PST)
-Date: Fri, 21 Feb 2025 13:44:27 +0100
+ Fri, 21 Feb 2025 04:45:02 -0800 (PST)
+Date: Fri, 21 Feb 2025 13:45:01 +0100
 From: Andrew Jones <ajones@ventanamicro.com>
 To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
  bmeng@tinylab.org, liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, 
  palmer@rivosinc.com
-Subject: Re: [PATCH v2 2/3] target/riscv/kvm: add kvm_riscv_reset_regs_csr()
-Message-ID: <20250221-94f103225a50973887399620@orel>
+Subject: Re: [PATCH v2 3/3] target/riscv/kvm: add missing KVM CSRs
+Message-ID: <20250221-4dff31114d91734968b5a05c@orel>
 References: <20250221122623.495188-1-dbarboza@ventanamicro.com>
- <20250221122623.495188-3-dbarboza@ventanamicro.com>
+ <20250221122623.495188-4-dbarboza@ventanamicro.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20250221122623.495188-3-dbarboza@ventanamicro.com>
-Received-SPF: pass client-ip=2a00:1450:4864:20::433;
- envelope-from=ajones@ventanamicro.com; helo=mail-wr1-x433.google.com
+In-Reply-To: <20250221122623.495188-4-dbarboza@ventanamicro.com>
+Received-SPF: pass client-ip=2a00:1450:4864:20::429;
+ envelope-from=ajones@ventanamicro.com; helo=mail-wr1-x429.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -102,63 +102,46 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Fri, Feb 21, 2025 at 09:26:22AM -0300, Daniel Henrique Barboza wrote:
-> We're setting reset vals for KVM csrs during kvm_riscv_reset_vcpu(), but
-> in no particular order and missing some of them (like env->mstatus).
-> 
-> Create a helper to do that, unclogging reset_vcpu(), and initialize
-> env->mstatus as well. Keep the regs in the same order they appear in
-> struct kvm_riscv_csr from the KVM UAPI, similar to what
-> kvm_riscv_(get|put)_regs_csr are doing. This will make a bit easier to
-> add new KVM CSRs and to verify which values we're writing back to KVM
-> during vcpu reset.
+On Fri, Feb 21, 2025 at 09:26:23AM -0300, Daniel Henrique Barboza wrote:
+> We're missing scounteren and senvcfg CSRs, both already present in the
+> KVM UAPI.
 > 
 > Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 > ---
->  target/riscv/kvm/kvm-cpu.c | 23 +++++++++++++++--------
->  1 file changed, 15 insertions(+), 8 deletions(-)
+>  target/riscv/kvm/kvm-cpu.c | 6 ++++++
+>  1 file changed, 6 insertions(+)
 > 
 > diff --git a/target/riscv/kvm/kvm-cpu.c b/target/riscv/kvm/kvm-cpu.c
-> index 484b6afe7c..f14fcc58bb 100644
+> index f14fcc58bb..017ca82226 100644
 > --- a/target/riscv/kvm/kvm-cpu.c
 > +++ b/target/riscv/kvm/kvm-cpu.c
-> @@ -605,6 +605,19 @@ static int kvm_riscv_put_regs_core(CPUState *cs)
->      return ret;
+> @@ -616,6 +616,8 @@ static void kvm_riscv_reset_regs_csr(CPURISCVState *env)
+>      env->stval = 0;
+>      env->mip = 0;
+>      env->satp = 0;
+> +    env->scounteren = 0;
+> +    env->senvcfg = 0;
 >  }
 >  
-> +static void kvm_riscv_reset_regs_csr(CPURISCVState *env)
-> +{
-> +    env->mstatus = 0;
-> +    env->mie = 0;
-> +    env->stvec = 0;
-> +    env->sscratch = 0;
-> +    env->sepc = 0;
-> +    env->scause = 0;
-> +    env->stval = 0;
-> +    env->mip = 0;
-> +    env->satp = 0;
-> +}
-> +
 >  static int kvm_riscv_get_regs_csr(CPUState *cs)
->  {
->      CPURISCVState *env = &RISCV_CPU(cs)->env;
-> @@ -1609,14 +1622,8 @@ void kvm_riscv_reset_vcpu(RISCVCPU *cpu)
->      env->pc = cpu->env.kernel_addr;
->      env->gpr[10] = kvm_arch_vcpu_id(CPU(cpu)); /* a0 */
->      env->gpr[11] = cpu->env.fdt_addr;          /* a1 */
-> -    env->satp = 0;
-> -    env->mie = 0;
-> -    env->stvec = 0;
-> -    env->sscratch = 0;
-> -    env->sepc = 0;
-> -    env->scause = 0;
-> -    env->stval = 0;
-> -    env->mip = 0;
-> +
-> +    kvm_riscv_reset_regs_csr(env);
->  }
+> @@ -631,6 +633,8 @@ static int kvm_riscv_get_regs_csr(CPUState *cs)
+>      KVM_RISCV_GET_CSR(cs, env, stval, env->stval);
+>      KVM_RISCV_GET_CSR(cs, env, sip, env->mip);
+>      KVM_RISCV_GET_CSR(cs, env, satp, env->satp);
+> +    KVM_RISCV_GET_CSR(cs, env, scounteren, env->scounteren);
+> +    KVM_RISCV_GET_CSR(cs, env, senvcfg, env->senvcfg);
 >  
->  void kvm_riscv_set_irq(RISCVCPU *cpu, int irq, int level)
+>      return 0;
+>  }
+> @@ -648,6 +652,8 @@ static int kvm_riscv_put_regs_csr(CPUState *cs)
+>      KVM_RISCV_SET_CSR(cs, env, stval, env->stval);
+>      KVM_RISCV_SET_CSR(cs, env, sip, env->mip);
+>      KVM_RISCV_SET_CSR(cs, env, satp, env->satp);
+> +    KVM_RISCV_SET_CSR(cs, env, scounteren, env->scounteren);
+> +    KVM_RISCV_SET_CSR(cs, env, senvcfg, env->senvcfg);
+>  
+>      return 0;
+>  }
 > -- 
 > 2.48.1
 >
