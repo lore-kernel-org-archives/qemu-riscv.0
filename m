@@ -4,82 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4D8CBC021AA
-	for <qemu-riscv@archiver.kernel.org>; Fri, 21 Feb 2025 12:41:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 81A5FC021AA
+	for <qemu-riscv@archiver.kernel.org>; Fri, 21 Feb 2025 12:45:07 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tlSLJ-0002HM-VN; Fri, 21 Feb 2025 07:41:22 -0500
+	id 1tlSOX-0003sI-0Y; Fri, 21 Feb 2025 07:44:41 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1tlSLD-000297-7D
- for qemu-riscv@nongnu.org; Fri, 21 Feb 2025 07:41:16 -0500
-Received: from mail-wm1-x330.google.com ([2a00:1450:4864:20::330])
+ id 1tlSOO-0003q6-5Y
+ for qemu-riscv@nongnu.org; Fri, 21 Feb 2025 07:44:32 -0500
+Received: from mail-wr1-x433.google.com ([2a00:1450:4864:20::433])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1tlSLB-000183-EE
- for qemu-riscv@nongnu.org; Fri, 21 Feb 2025 07:41:14 -0500
-Received: by mail-wm1-x330.google.com with SMTP id
- 5b1f17b1804b1-438a39e659cso13460355e9.2
- for <qemu-riscv@nongnu.org>; Fri, 21 Feb 2025 04:41:12 -0800 (PST)
+ id 1tlSOM-0001UU-Ai
+ for qemu-riscv@nongnu.org; Fri, 21 Feb 2025 07:44:31 -0500
+Received: by mail-wr1-x433.google.com with SMTP id
+ ffacd0b85a97d-38f325ddbc2so1436844f8f.1
+ for <qemu-riscv@nongnu.org>; Fri, 21 Feb 2025 04:44:29 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1740141671; x=1740746471; darn=nongnu.org;
+ d=ventanamicro.com; s=google; t=1740141868; x=1740746668; darn=nongnu.org;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=C0X5zw5TMkgq5HOoY4d24ewLzA9dOn8VZ6X5Dd+IQbE=;
- b=FYDJg9d4T8RhulztVK8zZ06ofw2R/UneYLrbEH4FSHPXV+de06kz/7WJkVkyoHsStI
- LudcyZbfp63k2QEJg2r7jUpj/aEnapTH/1Deqyo8A1IJDBR+cH2t5zxC7a+OGmca0tJf
- cqUMWhnbWaJOkzLpREjEm0kbQGzYKlpBxJtLgEjuX5l3WmfoVKGRGI8Sq6rsivwgJcF5
- C9Tn6GFDvB5TZJ9hZooc34nylaPpAFixL+15iRoDB/E1EdfNbhUvTBrqUql9Xneugs7I
- HBLLIdu4NmuhTJS+eBMXsC6EYzRGF1MlqPmz1rmCSBQZ4n13HX7EtxfLQqrNWTFUyDyz
- yBPg==
+ bh=QkFqKyhO+UNGfTQB/aIiReQiVSLy+zuj4ed6HdbTGkI=;
+ b=Ou7JNUSRKNnhg7VyZlvaT33ompvL9Em/jzpWRRUSuJICwQD5S+jntxwN2z+rA6BNFN
+ 9ro4XmaRtBQRyM/ZgWdX8hFSeJT9Wmd4c7GwZIMyMEBD4aTc5WKLGT+InbRhEneRXqX4
+ MLJvZMBzIO9YA2fHCappjFhwCELLGttvAFZ++/j0d3FU+j4KyFgdGI0Vbmy1f8psEpB5
+ RzwEiaEMf+zx8HwvdOo3Y3HAEy/WSWhm5WNSR0Ep0JveL+HXix+kjzOTah0m/L1GI2vF
+ vxvicY5AOFQni1nPAIkBy1gIaewRE+lqIshGMiBggCMyupGnPTdt39K34/t5HALSWBpC
+ jvCA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1740141671; x=1740746471;
+ d=1e100.net; s=20230601; t=1740141868; x=1740746668;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=C0X5zw5TMkgq5HOoY4d24ewLzA9dOn8VZ6X5Dd+IQbE=;
- b=Xue3uklKKysnYLlBYercYXWdG+3CsiGu4ZgofCJj86k0T1wFfyNNt1cdS9VnoTesfV
- KVp2L1gBeX2UYuZ69/jFdFtIWp0ojLxSFqiN4XH9w8eB45I8c0P8oZZ4otWH0cU6dtTU
- YwxDuPIv45Z9f8Qe8b3OX7hVOWR7alQ1v2P/PIumffoZTvjnoSS+Ioiu9bb4PGRy+3Mq
- fbzoUAQbMhvDkLJiErZOaIzNSQE/nXcUdXq2GuqxkPK8jEENGPTgUbu9ac4T2FJqUvst
- LjWIAZW6DaX0gbDAtO4nzv/2dSNbxHPqud2qh/kb2nbrHPIqbebd1rwFmCNhVFrnn5lL
- ODsQ==
+ bh=QkFqKyhO+UNGfTQB/aIiReQiVSLy+zuj4ed6HdbTGkI=;
+ b=LA80qUeEewpMw8jtvARPDDMziLlHcqyJrcYnAf/lnqFgPo3fuDaJnWTy2gaBOPTQOX
+ ndtTP8Yy9RRrPHn6TwFldMc+7iUGwCnxQ37bm2e+v/dg4Fd2CkFd/430u917/mDWZT2N
+ Asf0rD5uMetT/wjvwOJ9DSGeysD6MiSmrGQ8dtJkgq9SckJi1HjA/454hvjyAPIZ7vMt
+ s0jhrXJUpvtEc/P/13TnZiT/Yt8QZQQmRANfVeGEF/bPuGXfO4UxlNQAT3Tb0MFwX/en
+ kHqxE9ILjjgP2L6a0tfQ91ViIjHPpjrVpXclEknmpvlUF+jl5yoHl7DVjt7K/8jfYSGZ
+ Ddsw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXiCiiGdhYxTs8POmP8kuE5lX3m9Xpqu9yzd44XS3jh/3jf5cylD24AUqmPI6LWqGLysk6/w6xSkhbC@nongnu.org
-X-Gm-Message-State: AOJu0YxS3zDt/i+eAkZxUXFDRahN6W9k3crqkyDGTJthqP7/1hblOHVX
- TdsuKCJafghm6Um3dj+9ERlu6I4zSmS81S08rlTP/aSbQmfO+4tgqmYxP1tzQKU=
-X-Gm-Gg: ASbGnctmRqEiVTNYDbqDJc5DOAPAn74gnJbypnsQFUKPHRQlnd48lajDBHrjoxqF6NH
- 9lwu//y/hIYO5jFxiFXlIGgFnU3Ixq+T232DM35SvCZqOhaA+wC5/hK0CxwBUuFuJ5w3qxj4CFM
- uOeAsgERc/qauMyqDd7aDvDk9RkkCjOrQq9q/YO7Cw1oopLiYYK0mhDtq85yQ35Z26J7gYRT2+1
- +nxCqtFcFNzVSk//k3ds8nD8Irw01gH+WhEoeewG1/m9+efs3ADS3ORafUN6Yd7DmA/Mx9t6QwS
- 6XFNJ8iNsPbogQ==
-X-Google-Smtp-Source: AGHT+IHkVp3h61Pqz4TE6QN44u5uuAMVJHrB4BKEQkiDn9oEWpILNb05ByxUGcR+gwFu+EXnDS5rWg==
-X-Received: by 2002:a05:600c:1547:b0:439:884c:96ae with SMTP id
- 5b1f17b1804b1-439aebda78fmr21473845e9.27.1740141671061; 
- Fri, 21 Feb 2025 04:41:11 -0800 (PST)
+ AJvYcCXVL0WuGWLVulgQ6OZRbabukpsj90PbfOwQMq5Avs/PFfaiwWgdURzrG4fN14pR055nQjuqDjUPidg1@nongnu.org
+X-Gm-Message-State: AOJu0YyXWTtsfEJUfjAp8pkESBuNHKCQ+/+T86VBeRK82FoVE2/G/4D4
+ 50WcHtGdmK4uj86+Z+YklLfAH2y7uHDDOLqmEQlHGZQH8nPYTGPF98lZMjq16ZY=
+X-Gm-Gg: ASbGncu0DAw1jbUI6VRtHmV5pdus+YPtS+ZDTteXJMENKNoJY1VhmNy/rf3bqMECmrp
+ hctyx34R2OzF5zbnildwGPeL+nCBakfwx+x3X6h/pWiHy6Tx95hCGPoBgppEf7zGIORofmwI/Bm
+ 2zwEqWo78SE/CjBgzVmFJUVkaGp5On/SfvCgvoR2M+r036+reRhbD2d3qFaOJwzeOUIzTZ+ZbWQ
+ wFJ6F05Q3wBG2temdcFPFFQqUZ1hbJ282JpI4Xis0h9lr1P+NegSHYivzLd/k20SLTem8xoIXrL
+ 06Cia4Klkd0bdQ==
+X-Google-Smtp-Source: AGHT+IFqSENDtEvRgG43k9iMiYLMOe5sDtKia0Dtjo+U6yoF7xtts0hwmAmfYg7gaG9LMq5ZmZA8tw==
+X-Received: by 2002:a5d:5985:0:b0:38d:d3e2:db32 with SMTP id
+ ffacd0b85a97d-38f70783f03mr1672448f8f.7.1740141868226; 
+ Fri, 21 Feb 2025 04:44:28 -0800 (PST)
 Received: from localhost ([2a02:8308:a00c:e200::766e])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-439b02d510bsm16116325e9.9.2025.02.21.04.41.10
+ ffacd0b85a97d-38f69b3ca41sm3640123f8f.27.2025.02.21.04.44.27
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 21 Feb 2025 04:41:10 -0800 (PST)
-Date: Fri, 21 Feb 2025 13:41:09 +0100
+ Fri, 21 Feb 2025 04:44:27 -0800 (PST)
+Date: Fri, 21 Feb 2025 13:44:27 +0100
 From: Andrew Jones <ajones@ventanamicro.com>
 To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
  bmeng@tinylab.org, liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, 
  palmer@rivosinc.com
-Subject: Re: [PATCH 3/3] target/riscv/kvm: add extensions after 6.14-rc3 update
-Message-ID: <20250221-c98a4b5352ab3d7534a234c2@orel>
-References: <20250218163854.425607-1-dbarboza@ventanamicro.com>
- <20250218163854.425607-4-dbarboza@ventanamicro.com>
+Subject: Re: [PATCH v2 2/3] target/riscv/kvm: add kvm_riscv_reset_regs_csr()
+Message-ID: <20250221-94f103225a50973887399620@orel>
+References: <20250221122623.495188-1-dbarboza@ventanamicro.com>
+ <20250221122623.495188-3-dbarboza@ventanamicro.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20250218163854.425607-4-dbarboza@ventanamicro.com>
-Received-SPF: pass client-ip=2a00:1450:4864:20::330;
- envelope-from=ajones@ventanamicro.com; helo=mail-wm1-x330.google.com
+In-Reply-To: <20250221122623.495188-3-dbarboza@ventanamicro.com>
+Received-SPF: pass client-ip=2a00:1450:4864:20::433;
+ envelope-from=ajones@ventanamicro.com; helo=mail-wr1-x433.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -102,45 +102,65 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Tue, Feb 18, 2025 at 01:38:54PM -0300, Daniel Henrique Barboza wrote:
-> Expose ziccrse, zabha and svvptc.
+On Fri, Feb 21, 2025 at 09:26:22AM -0300, Daniel Henrique Barboza wrote:
+> We're setting reset vals for KVM csrs during kvm_riscv_reset_vcpu(), but
+> in no particular order and missing some of them (like env->mstatus).
+> 
+> Create a helper to do that, unclogging reset_vcpu(), and initialize
+> env->mstatus as well. Keep the regs in the same order they appear in
+> struct kvm_riscv_csr from the KVM UAPI, similar to what
+> kvm_riscv_(get|put)_regs_csr are doing. This will make a bit easier to
+> add new KVM CSRs and to verify which values we're writing back to KVM
+> during vcpu reset.
 > 
 > Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 > ---
->  target/riscv/kvm/kvm-cpu.c | 3 +++
->  1 file changed, 3 insertions(+)
+>  target/riscv/kvm/kvm-cpu.c | 23 +++++++++++++++--------
+>  1 file changed, 15 insertions(+), 8 deletions(-)
 > 
 > diff --git a/target/riscv/kvm/kvm-cpu.c b/target/riscv/kvm/kvm-cpu.c
-> index 23ce779359..471fd554b3 100644
+> index 484b6afe7c..f14fcc58bb 100644
 > --- a/target/riscv/kvm/kvm-cpu.c
 > +++ b/target/riscv/kvm/kvm-cpu.c
-> @@ -274,6 +274,7 @@ static void kvm_riscv_update_cpu_misa_ext(RISCVCPU *cpu, CPUState *cs)
->  static KVMCPUConfig kvm_multi_ext_cfgs[] = {
->      KVM_EXT_CFG("zicbom", ext_zicbom, KVM_RISCV_ISA_EXT_ZICBOM),
->      KVM_EXT_CFG("zicboz", ext_zicboz, KVM_RISCV_ISA_EXT_ZICBOZ),
-> +    KVM_EXT_CFG("ziccrse", ext_ziccrse, KVM_RISCV_ISA_EXT_ZICCRSE),
->      KVM_EXT_CFG("zicntr", ext_zicntr, KVM_RISCV_ISA_EXT_ZICNTR),
->      KVM_EXT_CFG("zicond", ext_zicond, KVM_RISCV_ISA_EXT_ZICOND),
->      KVM_EXT_CFG("zicsr", ext_zicsr, KVM_RISCV_ISA_EXT_ZICSR),
-> @@ -283,6 +284,7 @@ static KVMCPUConfig kvm_multi_ext_cfgs[] = {
->      KVM_EXT_CFG("zihpm", ext_zihpm, KVM_RISCV_ISA_EXT_ZIHPM),
->      KVM_EXT_CFG("zimop", ext_zimop, KVM_RISCV_ISA_EXT_ZIMOP),
->      KVM_EXT_CFG("zcmop", ext_zcmop, KVM_RISCV_ISA_EXT_ZCMOP),
-> +    KVM_EXT_CFG("zabha", ext_zabha, KVM_RISCV_ISA_EXT_ZABHA),
->      KVM_EXT_CFG("zacas", ext_zacas, KVM_RISCV_ISA_EXT_ZACAS),
->      KVM_EXT_CFG("zawrs", ext_zawrs, KVM_RISCV_ISA_EXT_ZAWRS),
->      KVM_EXT_CFG("zfa", ext_zfa, KVM_RISCV_ISA_EXT_ZFA),
-> @@ -325,6 +327,7 @@ static KVMCPUConfig kvm_multi_ext_cfgs[] = {
->      KVM_EXT_CFG("svinval", ext_svinval, KVM_RISCV_ISA_EXT_SVINVAL),
->      KVM_EXT_CFG("svnapot", ext_svnapot, KVM_RISCV_ISA_EXT_SVNAPOT),
->      KVM_EXT_CFG("svpbmt", ext_svpbmt, KVM_RISCV_ISA_EXT_SVPBMT),
-> +    KVM_EXT_CFG("svvptc", ext_svvptc, KVM_RISCV_ISA_EXT_SVVPTC),
->  };
+> @@ -605,6 +605,19 @@ static int kvm_riscv_put_regs_core(CPUState *cs)
+>      return ret;
+>  }
 >  
->  static void *kvmconfig_get_cfg_addr(RISCVCPU *cpu, KVMCPUConfig *kvmcfg)
+> +static void kvm_riscv_reset_regs_csr(CPURISCVState *env)
+> +{
+> +    env->mstatus = 0;
+> +    env->mie = 0;
+> +    env->stvec = 0;
+> +    env->sscratch = 0;
+> +    env->sepc = 0;
+> +    env->scause = 0;
+> +    env->stval = 0;
+> +    env->mip = 0;
+> +    env->satp = 0;
+> +}
+> +
+>  static int kvm_riscv_get_regs_csr(CPUState *cs)
+>  {
+>      CPURISCVState *env = &RISCV_CPU(cs)->env;
+> @@ -1609,14 +1622,8 @@ void kvm_riscv_reset_vcpu(RISCVCPU *cpu)
+>      env->pc = cpu->env.kernel_addr;
+>      env->gpr[10] = kvm_arch_vcpu_id(CPU(cpu)); /* a0 */
+>      env->gpr[11] = cpu->env.fdt_addr;          /* a1 */
+> -    env->satp = 0;
+> -    env->mie = 0;
+> -    env->stvec = 0;
+> -    env->sscratch = 0;
+> -    env->sepc = 0;
+> -    env->scause = 0;
+> -    env->stval = 0;
+> -    env->mip = 0;
+> +
+> +    kvm_riscv_reset_regs_csr(env);
+>  }
+>  
+>  void kvm_riscv_set_irq(RISCVCPU *cpu, int irq, int level)
 > -- 
 > 2.48.1
-> 
 >
 
 Reviewed-by: Andrew Jones <ajones@ventanamicro.com>
