@@ -4,81 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6F8F7C021B3
-	for <qemu-riscv@archiver.kernel.org>; Fri, 21 Feb 2025 15:39:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EDEC8C021B3
+	for <qemu-riscv@archiver.kernel.org>; Fri, 21 Feb 2025 15:53:48 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tlV6a-0006By-MD; Fri, 21 Feb 2025 10:38:20 -0500
+	id 1tlVLG-0004fE-Ar; Fri, 21 Feb 2025 10:53:30 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1tlV6U-0006Ac-Ju
- for qemu-riscv@nongnu.org; Fri, 21 Feb 2025 10:38:14 -0500
-Received: from mail-pj1-x102f.google.com ([2607:f8b0:4864:20::102f])
+ (Exim 4.90_1) (envelope-from <paolo.savini@embecosm.com>)
+ id 1tlVLD-0004eX-H3
+ for qemu-riscv@nongnu.org; Fri, 21 Feb 2025 10:53:27 -0500
+Received: from mail-wr1-x42c.google.com ([2a00:1450:4864:20::42c])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1tlV6T-0001VT-2o
- for qemu-riscv@nongnu.org; Fri, 21 Feb 2025 10:38:14 -0500
-Received: by mail-pj1-x102f.google.com with SMTP id
- 98e67ed59e1d1-2fcf3a69c3cso799801a91.1
- for <qemu-riscv@nongnu.org>; Fri, 21 Feb 2025 07:38:12 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <paolo.savini@embecosm.com>)
+ id 1tlVLB-0004F2-MP
+ for qemu-riscv@nongnu.org; Fri, 21 Feb 2025 10:53:27 -0500
+Received: by mail-wr1-x42c.google.com with SMTP id
+ ffacd0b85a97d-38f1e8efe84so816145f8f.1
+ for <qemu-riscv@nongnu.org>; Fri, 21 Feb 2025 07:53:24 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1740152291; x=1740757091; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=QngJEFJJKovZ/uA+suocSOP5z1bgaO/ljahDSblVzIU=;
- b=OKM+rdro2i8BVKm/FLaqmNemtivi5OtgyJURk3XFaJABlWd0IhkdqIlWnUFCz7SMpU
- TUV4YauNuJT0ITpIqq4VW1S/Oj0w1NkfAdxmS8h6DsypGGfr7qeBl6t9/vYcd4jAthFj
- s0qjs8nd+08SPvVBcgByQrjEzffv6kQ+e1nPX697jvyCzAHIUGzldO1JzLfu4nXomNcf
- vtZbklFxo9l+Kfm2PNxkIFjkKqGlUHRyd0fWhTa74fIdDhCnqWOCnJJ8U8k4FWmPYCKS
- hM7lfyTa7s5ZvOjDFh4eSYqENg72H626MxeNlh800QJlRNgEjXKBw8R3YRsjXrtIZwdy
- Pfww==
+ d=embecosm.com; s=google; t=1740153203; x=1740758003; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=B3PN5npkU2fZGy+04m+tjR9ps6/ogxxXtP2BCPt3H5c=;
+ b=cFzQRRi4N+eVrQ7W2LmelQh5uJmtjYhArB/vc1EIoCAyowIa2FMQ3WcHlMyTgQPrrN
+ 9xSAgdJojeJfyJIO6TdYIOXK9L3PCZRsNMAE2k1EX1sz1CxorNPzU8Pl9ui8ubjv9JAF
+ 5mtxs0WLyO2ycnbgVQ6G5FnIxwiRxx9CL/Fj1uBvXq+GwvT03QzD1NfQ7+16XnBIrStP
+ v+6BaezCzXeUTD0eeSpJHZxUODQwKjVwNRjnsob2DV3dBBf+Of4+jTWz6Q0chb2cNjZz
+ HVE5YYN6aTpO2PvEyAZUrpGOvvZki8YlFv1HzlJXefx01DrcxbaTFKRrL8WthSkOVpbB
+ 76DA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1740152291; x=1740757091;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=QngJEFJJKovZ/uA+suocSOP5z1bgaO/ljahDSblVzIU=;
- b=KGhfnTCVauV1AZbh688GHqlSbxWEb3h9uQYKjSjgWEMbxVIwJAyN4xolBkqst8FVyi
- 5zcQ8FqKM27BzAksYm+vfkiOeKCGieMzlH/VP0fTBMejTx4KXxge1nLKFxEBKqzilIFY
- UIJ+dlEWivgGfMJSMiqfyrS/ii0gOyGSKR/mnSoxmTbj0n3z+r3ZZiprYKajG+dHDqfz
- Pl8btyOynfEG2LW8BFYhqg8YvbABwbTSuonNx/2mTWe1sT0WNlciiC9ZUewZeHTffIOH
- /2xYe5lbb6XEKTEko8PlH2SvBiVrTsWy8rjGTDfa/+dCrA0LwybjVWY5jnRh7mrfvqN9
- YPeg==
-X-Gm-Message-State: AOJu0Yzis004gUgCeGGQDQygv+sopStb/CU9/4Fj1MRCSYuTmmKQg6wx
- 04jXjYHYrf1NHFo9MmvIbHiBzVHqumdYiJqZUX//tnpBhhNT7KIvrMDi4rVq5kI=
-X-Gm-Gg: ASbGncuaFiOtOAD2rjdezDrHoX+y1gR42hz1igfg7qUGobrkJsE2GGdBT2uZJHgjp/h
- uLHgyMDZmZpdvc8mJfgjv4ggGJ4/0uJhoLNfXgEVsGCfO8tF7HFub3X6sBzlMLYyC8eI7WVlSd3
- RTcamk9uC5mbVcI6wQYRdso1bW6k3w1f38SRZNOvYQ5ULc7eKd/pgGolwUKJY+StcqCmg/J76ig
- Caekkhy8z4Nz/UMiLjj3mK9QCHjylnjmM6h5giLmJ9x1206GihHUumCWqqiXMDXB4Ti6LkYsQCF
- ZhYERpjaZZSO7Snxt29O3yn2XtHTStRHSqzp4eGOEe+tMZbTWib/qQ==
-X-Google-Smtp-Source: AGHT+IEsWdh9Qt3H9k7Zwi5qDQ51Evp2NLNYjURELtu5Y7u7O4gX8uyMxcTOcC7c9m0v8fFFl7v75g==
-X-Received: by 2002:a17:90a:d643:b0:2ee:8031:cdbc with SMTP id
- 98e67ed59e1d1-2fce7af3f27mr5281023a91.23.1740152291573; 
- Fri, 21 Feb 2025 07:38:11 -0800 (PST)
-Received: from grind.dc1.ventanamicro.com ([187.11.154.120])
+ d=1e100.net; s=20230601; t=1740153203; x=1740758003;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=B3PN5npkU2fZGy+04m+tjR9ps6/ogxxXtP2BCPt3H5c=;
+ b=IinjZMlllv8kt+ce1VjWKbp5TMePnS6abw+CGeuuOGhM40vyXwnb7L6vs5wPeVlyLQ
+ i9hcAwl8MAJ0qCh6IhR4PKhdg4kSwP0rTgEVbii4Sv7rBpf553IDuxFnFi7kF99Z6kax
+ dZhjBitcinXrtGKIpGWR/ovTf8eQFky9BtTyNWMbXyC5vYnipjHTxMMv/FEqFgy68ioq
+ 7xIy1jTWNGcO/qLl7xc2T78/I2w18BiIht/J27h5Am4FRdkmPbjqH73jU1sWX7z76dSE
+ EqTkYr1q6plZPkXDnpfxoashXsjh5E/d06ty52ATfQrIFUHUu+OkvOJ7jRD9PPMzDSI1
+ GC4g==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVWKiVYC6uaiWOllN2B+E9CI0pnc80Oj7bWj7ylxhBudD3QB5yQjcZ01BKwum3kR/0vCpt13yQdaip4@nongnu.org
+X-Gm-Message-State: AOJu0Yy/p7PM5PXNX4d+2jKRYoJwaaH5mcs+BP6NMZ02yQNtkj8qHSRI
+ Ub9h19sDReI5v3VLEFv7D0intHW23WPeFSlg2bJx0C40PFVN+BTI63+nE7b6T0dVVIc+rhVnQD0
+ Yu5gZGA==
+X-Gm-Gg: ASbGnctiDDeex62xzw5aHHnnjbywFc/qGjMka0hYk4kqiLIqMlcQ5DmnLwQlsLw4iRj
+ pGr9jp/if4AxVURw+0M9FGOmu9ujUNq2m3LLkp/HvajHSySei+1CqGmz8nzsVpoEjAAoXBFrn37
+ ZU+vLIUrPnGoY/eCQGxHU2Y6HfHwTzGQoCMSJC4wpX+MjOCavTlC+Um/t/G1K+tS10k9Frc2IZY
+ CJgyntO9Qh/qAytyhJWDZOWJiPJlSi0Du8/b2af9n+T67eTmnoQGr81SXNLFb8KmA6qXvEtqUku
+ IEANCtjz8YzpFFGdPiW4CX0YJZoCc61gPFbWEBQsACs4
+X-Google-Smtp-Source: AGHT+IEerJHl3bzS+gDiBw/erKq8HFLu3r9xjjDGSyr0cSX9FLyOFLWakAGwyFfwwkNstulFt3W8rQ==
+X-Received: by 2002:a5d:64af:0:b0:38f:452f:9f89 with SMTP id
+ ffacd0b85a97d-38f6f0ae2c4mr3715212f8f.50.1740153203292; 
+ Fri, 21 Feb 2025 07:53:23 -0800 (PST)
+Received: from paolo-laptop-amd.. ([2a0e:cb01:d3:f100:1f03:a9f0:23a0:9bda])
  by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-2fceb04bedbsm1538081a91.18.2025.02.21.07.38.08
+ ffacd0b85a97d-38f25a0fa1esm23510035f8f.100.2025.02.21.07.53.22
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 21 Feb 2025 07:38:11 -0800 (PST)
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-To: qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
- liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
- ajones@ventanamicro.com,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Subject: [PATCH v3 2/3] target/riscv/cpu.c: create flag for ziccrse
-Date: Fri, 21 Feb 2025 12:37:57 -0300
-Message-ID: <20250221153758.652078-3-dbarboza@ventanamicro.com>
-X-Mailer: git-send-email 2.48.1
-In-Reply-To: <20250221153758.652078-1-dbarboza@ventanamicro.com>
-References: <20250221153758.652078-1-dbarboza@ventanamicro.com>
+ Fri, 21 Feb 2025 07:53:22 -0800 (PST)
+From: Paolo Savini <paolo.savini@embecosm.com>
+To: qemu-devel@nongnu.org,
+	qemu-riscv@nongnu.org
+Cc: Paolo Savini <paolo.savini@embecosm.com>,
+ Richard Handerson <richard.henderson@linaro.org>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bmeng.cn@gmail.com>,
+ Weiwei Li <liwei1518@gmail.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Helene Chelin <helene.chelin@embecosm.com>, Nathan Egge <negge@google.com>,
+ Max Chou <max.chou@sifive.com>,
+ Jeremy Bennett <jeremy.bennett@embecosm.com>,
+ Craig Blackmore <craig.blackmore@embecosm.com>
+Subject: [PATCH 0/1 v2] [RISC-V/RVV] optimize the memory probing for vector
+ fault-only-first loads.
+Date: Fri, 21 Feb 2025 15:53:19 +0000
+Message-ID: <20250221155320.59159-1-paolo.savini@embecosm.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::102f;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pj1-x102f.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::42c;
+ envelope-from=paolo.savini@embecosm.com; helo=mail-wr1-x42c.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -101,72 +110,50 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-At this moment ziccrse is a TCG always enabled named feature for
-priv_ver > 1.11 that has no exclusive flag. In the next patch we'll make
-the KVM driver turn ziccrse off if the extension isn't available in the
-host, and we'll need an ext_ziccrse flag in the CPU state for that.
+This version of the patch addresses the comments from the following review:
 
-Create an exclusive flag for it like we do with other named features.
-As with any named features we already have, it won't be exposed to
-users.
+https://lore.kernel.org/all/2df9ae98-afb8-4647-be80-12540a1c4612@ventanamicro.com/
 
-Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Reviewed-by: Andrew Jones <ajones@ventanamicro.com>
----
- target/riscv/cpu.c         | 3 ++-
- target/riscv/cpu_cfg.h     | 3 +++
- target/riscv/tcg/tcg-cpu.c | 2 ++
- 3 files changed, 7 insertions(+), 1 deletion(-)
+Previous version:
 
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 522d6584e4..fc4632ce36 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -105,7 +105,7 @@ const RISCVIsaExtData isa_edata_arr[] = {
-     ISA_EXT_DATA_ENTRY(ziccamoa, PRIV_VERSION_1_11_0, has_priv_1_11),
-     ISA_EXT_DATA_ENTRY(ziccif, PRIV_VERSION_1_11_0, has_priv_1_11),
-     ISA_EXT_DATA_ENTRY(zicclsm, PRIV_VERSION_1_11_0, has_priv_1_11),
--    ISA_EXT_DATA_ENTRY(ziccrse, PRIV_VERSION_1_11_0, has_priv_1_11),
-+    ISA_EXT_DATA_ENTRY(ziccrse, PRIV_VERSION_1_11_0, ext_ziccrse),
-     ISA_EXT_DATA_ENTRY(zicfilp, PRIV_VERSION_1_12_0, ext_zicfilp),
-     ISA_EXT_DATA_ENTRY(zicfiss, PRIV_VERSION_1_13_0, ext_zicfiss),
-     ISA_EXT_DATA_ENTRY(zicond, PRIV_VERSION_1_12_0, ext_zicond),
-@@ -1749,6 +1749,7 @@ const RISCVCPUMultiExtConfig riscv_cpu_named_features[] = {
-     MULTI_EXT_CFG_BOOL("zic64b", ext_zic64b, true),
-     MULTI_EXT_CFG_BOOL("ssstateen", ext_ssstateen, true),
-     MULTI_EXT_CFG_BOOL("sha", ext_sha, true),
-+    MULTI_EXT_CFG_BOOL("ziccrse", ext_ziccrse, true),
- 
-     { },
- };
-diff --git a/target/riscv/cpu_cfg.h b/target/riscv/cpu_cfg.h
-index 3f3c1118c0..8a843482cc 100644
---- a/target/riscv/cpu_cfg.h
-+++ b/target/riscv/cpu_cfg.h
-@@ -166,6 +166,9 @@ struct RISCVCPUConfig {
-     bool has_priv_1_12;
-     bool has_priv_1_11;
- 
-+    /* Always enabled for TCG if has_priv_1_11 */
-+    bool ext_ziccrse;
-+
-     /* Vendor-specific custom extensions */
-     bool ext_xtheadba;
-     bool ext_xtheadbb;
-diff --git a/target/riscv/tcg/tcg-cpu.c b/target/riscv/tcg/tcg-cpu.c
-index ea8d77d06a..c93612b1da 100644
---- a/target/riscv/tcg/tcg-cpu.c
-+++ b/target/riscv/tcg/tcg-cpu.c
-@@ -360,6 +360,8 @@ static void riscv_cpu_update_named_features(RISCVCPU *cpu)
- 
-     cpu->cfg.ext_sha = riscv_has_ext(&cpu->env, RVH) &&
-                        cpu->cfg.ext_ssstateen;
-+
-+    cpu->cfg.ext_ziccrse = cpu->cfg.has_priv_1_11;
- }
- 
- static void riscv_cpu_validate_g(RISCVCPU *cpu)
+- v1: https://lore.kernel.org/all/20250129144435.82451-1-paolo.savini@embecosm.com/
+
+The new version:
+
+- fixes the "braod" typo in the comment.
+- removes the "probe_size" variable in favour of "elems" that is already used
+  for the same purpose.
+- removes the duplication of the code calculating the page split and adds a
+  separate "addr_i" variable for probing the memory without polluting "addr"
+  used to perform the actual load.
+- multiplies "elems" by "msize" when calling for the memory probing function so
+  that we pass the number of bytes rather then the number of vector elements as
+  that is what the probe function expects.
+
+We also change the heading from RFC to PATCH.
+
+I also take the opportunity to thanks Daniel Barboza for the review.
+
+Cc: Richard Handerson <richard.henderson@linaro.org>
+Cc: Palmer Dabbelt <palmer@dabbelt.com>
+Cc: Alistair Francis <alistair.francis@wdc.com>
+Cc: Bin Meng <bmeng.cn@gmail.com>
+Cc: Weiwei Li <liwei1518@gmail.com>
+Cc: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Cc: Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
+Cc: Helene Chelin <helene.chelin@embecosm.com>
+Cc: Nathan Egge <negge@google.com>
+Cc: Max Chou <max.chou@sifive.com>
+Cc: Jeremy Bennett <jeremy.bennett@embecosm.com>
+Cc: Craig Blackmore <craig.blackmore@embecosm.com>
+
+Paolo Savini (1):
+  target/riscv: optimize the memory probing for vector fault-only-first
+    loads.
+
+ target/riscv/vector_helper.c | 91 ++++++++++++++++++++++--------------
+ 1 file changed, 56 insertions(+), 35 deletions(-)
+
 -- 
-2.48.1
-
+2.34.1
 
