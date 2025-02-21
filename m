@@ -4,70 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1D2C6C021B3
-	for <qemu-riscv@archiver.kernel.org>; Fri, 21 Feb 2025 08:00:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3FA30C021AA
+	for <qemu-riscv@archiver.kernel.org>; Fri, 21 Feb 2025 08:17:52 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tlNww-0002DU-80; Fri, 21 Feb 2025 02:59:56 -0500
+	id 1tlODm-0000d1-BZ; Fri, 21 Feb 2025 03:17:18 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <vladimir.isaev@syntacore.com>)
- id 1tlNwu-0002Cu-19; Fri, 21 Feb 2025 02:59:52 -0500
-Received: from m.syntacore.com ([178.249.69.228])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <vladimir.isaev@syntacore.com>)
- id 1tlNws-0004qI-3y; Fri, 21 Feb 2025 02:59:51 -0500
-Received: from pmg.syntacore.com (localhost.localdomain [127.0.0.1])
- by m.syntacore.com (Proxmox) with ESMTP id 8029DB41C1A;
- Fri, 21 Feb 2025 10:59:45 +0300 (MSK)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=syntacore.com;
- h=cc:cc:content-transfer-encoding:content-type:content-type
- :date:from:from:in-reply-to:message-id:mime-version:references
- :reply-to:subject:subject:to:to; s=m; bh=/CgyW+by9AtBGWY7IZ4XLgq
- saTkzvDeiCeVqfC19aY4=; b=Q1Xrd7wNix3Y5l3P6yxyvfnZi0NIGA8zfMSjdnM
- QcyE1/cFTBMNATwv8L6LSlLjpyz0saSM0n31Ps2sgSseNSyBafIQQ/Db0LDLwO1/
- IlrJ9U74qMt+8jyZPC/r4qxkVLq8F7GaKFYQbQv9AZWdWoeJDunPyU816XsftJ9V
- Lq43IZAXBGuwlwYhcqJJabscUJB2GS2TyW+Xkais4Mid+QLe4/X73aNl4DgWF5eN
- xwEyVOGQn6Dr053Q9vu9C6XmuHpXRp7wMdh83OiApOpV8lQIa5DJKWf/aFwY09Ft
- kRC2WHCLSxgUuJgG5YLzWd/QFcUxxNCxVn9tjHDcqX0eRoQ==
-Received: from S-SC-EXCH-01.corp.syntacore.com (exchange.syntacore.com
- [10.76.202.20])
- by m.syntacore.com (Proxmox) with ESMTPS id 5E680B41B9D;
- Fri, 21 Feb 2025 10:59:45 +0300 (MSK)
-Received: from [10.178.157.106] (10.178.157.106) by
- S-SC-EXCH-01.corp.syntacore.com (10.76.202.20) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1544.11; Fri, 21 Feb 2025 10:59:12 +0300
-Message-ID: <8e495335-7f21-47a5-925d-09ecf4b3a08b@syntacore.com>
-Date: Fri, 21 Feb 2025 10:58:28 +0300
+ (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
+ id 1tlODh-0000cH-8K
+ for qemu-riscv@nongnu.org; Fri, 21 Feb 2025 03:17:16 -0500
+Received: from mail-wr1-x42e.google.com ([2a00:1450:4864:20::42e])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
+ id 1tlODd-0006sv-Ou
+ for qemu-riscv@nongnu.org; Fri, 21 Feb 2025 03:17:11 -0500
+Received: by mail-wr1-x42e.google.com with SMTP id
+ ffacd0b85a97d-38a8b17d7a7so969035f8f.2
+ for <qemu-riscv@nongnu.org>; Fri, 21 Feb 2025 00:17:09 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=ventanamicro.com; s=google; t=1740125827; x=1740730627; darn=nongnu.org;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=VJ2O4QlqGIHJZcAki+1tAAOoP8Um3PUVmiLBnfF9/x4=;
+ b=pBhyco9Ulr7Vr+dEPiewucXsf5NlnJLR9/aj05rcWATlZkjSsuHkhylYtglwTW1p+9
+ nFKY2FAmx3D36z6VwPA9BJU8EscoGacuKvhQf/beUqjAlVTO83zjNLSENqbInd71YMz9
+ 8cX8SdcpkSjw3MrdfbCnRaKpK1BX5CSyZGY9n5IlHSOvMRmP8XUrRWZNGwW8908PPuua
+ HEz+9u/pGyGg4Tb+n1XJHvNKOHnfDKrluTfXQsxc+bM5iXC+8qg4ELsQAszEWrNgC/YE
+ Ep+F9tehJ94hQiJi90sNPfoc1aI06mYxk8nfwBWHnwNbv/+7X86HzFNQpW05v0eYi2Fv
+ rQGg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1740125827; x=1740730627;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=VJ2O4QlqGIHJZcAki+1tAAOoP8Um3PUVmiLBnfF9/x4=;
+ b=UuQAM4/ktPodwxp06Pl4JeRDGFWaeAAmthaFnOZsQdimKpHov7qyhHa6i3/y+X5KJY
+ 25Ys7Xhlhs1G/eHP1I+h5IlSPpgLMfcxpRcydqxpda5gKAjlFcZ47ELavDCylk05qd9g
+ L2KgUEcX3/69HJKEztG86tL5UkDNsAKW8dxnQRjm500Fo+Fn9llK+kMKHSJt/fqJPHwx
+ 3vR8HVARa3mN9YP2pbQPO/6GwkSpXTI7RROBm2RY22b5521a1KZwMGibNin2mG2fY+dj
+ J9CfYjKva/SbqKlCkdeyJ3uxsJhi9ilqGbXKY90ZHsMDeOzKNVk+AnWk7kFpenVAlvn/
+ tQHg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXsLnmoMpI4TkcsGzs/Fhl0qVTsIgEwZkZY1bd0bnDiSj5laebj6h5iiGPQD0N4zSBaTu2TgYF8MH8c@nongnu.org
+X-Gm-Message-State: AOJu0Yzvr25EpJmkD3svCnfrFHUyoikgCTF/gDR3R43oCyTLzdRQpvzq
+ W9zxdwcZ4WmS4cfiISOlr6gYj3EVbwvj7tLI17SqcQ6dZQFNXxsmMFta2exAwqhOjuBH181O6hm
+ 3
+X-Gm-Gg: ASbGncsReZlgiD75HKaSsHYWIcp//Z9SpksKl3UQH4tAkzwtHhy4A1W8aS3YErUqZYz
+ 4ZlzpCNc/+x7FVKgnZdW4hl1zSk4db6OuN81N8t0C+DSK0Iz7FE7oNZ4CrZTXSR6AybG5BZMMBY
+ O2Im231tGvQO1Va6kpbOKoH+Jt+He7GaTcS59zsrlael/hD15v6OSyOmnXtCWiyfPvO5CkqU1vw
+ 0FQ6VzHjdCS9cvL3zXl7RuOCP4csSDCYr0tRZpIJtpCkoYfOug6UStzR18P2BOFkk+hT/E2RCnU
+ 70/Rk3lqJFSr/g==
+X-Google-Smtp-Source: AGHT+IFLZXuPzJatWnO2rKvUxAKhpRlgR7D4/8wvBJ0n+r2kqEnQyRZ0gSjwIqkoHsgjSJXMAV9wmw==
+X-Received: by 2002:a5d:64ab:0:b0:38f:3735:68e with SMTP id
+ ffacd0b85a97d-38f6f0d102fmr1710372f8f.46.1740125827005; 
+ Fri, 21 Feb 2025 00:17:07 -0800 (PST)
+Received: from localhost ([2a02:8308:a00c:e200::766e])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-38f259f85c2sm23463039f8f.91.2025.02.21.00.17.06
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 21 Feb 2025 00:17:06 -0800 (PST)
+Date: Fri, 21 Feb 2025 09:17:05 +0100
+From: Andrew Jones <ajones@ventanamicro.com>
+To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
+ bmeng@tinylab.org, liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, 
+ palmer@rivosinc.com
+Subject: Re: [PATCH 1/3] target/riscv/cpu: ignore TCG init for KVM CPUs in
+ reset_hold
+Message-ID: <20250221-c821005cfd03e3fd07df4817@orel>
+References: <20250220161313.127376-1-dbarboza@ventanamicro.com>
+ <20250220161313.127376-2-dbarboza@ventanamicro.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] target/riscv: fix C extension disabling on misa write
-To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- <qemu-devel@nongnu.org>
-CC: <qemu-riscv@nongnu.org>, <palmer@dabbelt.com>, <alistair.francis@wdc.com>, 
- <bmeng.cn@gmail.com>, <liwei1518@gmail.com>, <zhiwei_liu@linux.alibaba.com>,
- <mjc@sifive.com>
-References: <20250220163120.77328-1-vladimir.isaev@syntacore.com>
- <3ffe3ecf-4bd8-447e-a984-442c71a94f89@ventanamicro.com>
-Content-Language: en-US, ru-RU
-From: Vladimir Isaev <vladimir.isaev@syntacore.com>
-In-Reply-To: <3ffe3ecf-4bd8-447e-a984-442c71a94f89@ventanamicro.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
-X-Originating-IP: [10.178.157.106]
-X-ClientProxiedBy: S-SC-EXCH-01.corp.syntacore.com (10.76.202.20) To
- S-SC-EXCH-01.corp.syntacore.com (10.76.202.20)
-Received-SPF: pass client-ip=178.249.69.228;
- envelope-from=vladimir.isaev@syntacore.com; helo=m.syntacore.com
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20250220161313.127376-2-dbarboza@ventanamicro.com>
+Received-SPF: pass client-ip=2a00:1450:4864:20::42e;
+ envelope-from=ajones@ventanamicro.com; helo=mail-wr1-x42e.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_VALIDITY_CERTIFIED_BLOCKED=0.001, RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -83,74 +104,74 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-
-
-20.02.2025 20:59, Daniel Henrique Barboza wrote:
+On Thu, Feb 20, 2025 at 01:13:11PM -0300, Daniel Henrique Barboza wrote:
+> riscv_cpu_reset_hold() does a lot of TCG-related initializations that
+> aren't relevant for KVM, but nevertheless are impacting the reset state
+> of KVM vcpus.
 > 
+> When running a KVM guest, kvm_riscv_reset_vcpu() is called at the end of
+> reset_hold(). At that point env->mstatus is initialized to a non-zero
+> value, and it will be use to write 'sstatus' in the vcpu
+> (kvm_arch_put_registers() then kvm_riscv_put_regs_csr()).
 > 
-> On 2/20/25 1:31 PM, Vladimir Isaev wrote:
->> According to spec:
->> Writing misa may increase IALIGN, e.g., by disabling the "C" extension. If an instruction that would
->> write misa increases IALIGN, and the subsequent instruction’s address is not IALIGN-bit aligned, the
->> write to misa is suppressed, leaving misa unchanged.
->>
->> So we should suppress disabling "C" if it is already enabled and
->> next instruction is not aligned to 4.
->>
->> Fixes: f18637cd611c ("RISC-V: Add misa runtime write support")
->> Signed-off-by: Vladimir Isaev <vladimir.isaev@syntacore.com>
->> ---
->>   target/riscv/csr.c | 7 ++++---
->>   1 file changed, 4 insertions(+), 3 deletions(-)
->>
->> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
->> index afb7544f0780..32f9b7b16f6f 100644
->> --- a/target/riscv/csr.c
->> +++ b/target/riscv/csr.c
->> @@ -2067,11 +2067,12 @@ static RISCVException write_misa(CPURISCVState *env, int csrno,
->>       val &= env->misa_ext_mask;
->>         /*
->> -     * Suppress 'C' if next instruction is not aligned
->> +     * Disabling 'C' increases IALIGN to 32. If subsequent instruction's address
->> +     * is not 32-bit aligned, write to misa is suppressed.
->>        * TODO: this should check next_pc
->>        */
->> -    if ((val & RVC) && (GETPC() & ~3) != 0) {
->> -        val &= ~RVC;
+> Do an early exit in riscv_cpu_reset_hold() if we're running KVM. All the
+> KVM reset procedure will be centered in kvm_riscv_reset_vcpu().
 > 
-> Not related to your changes but it would be nice if we made more use of
-> QEMU_IS_ALIGNED() instead of doing these bitwise ops to check alignment.
-> E.g. to check if pc is aligned to 4: QEMU_IS_ALIGNED(GETPC(), 4).
+> While we're at it, remove the kvm_enabled() check in
+> kvm_riscv_reset_vcpu() since it's already being gated in
+> riscv_cpu_reset_hold().
+> 
+> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+> ---
+>  target/riscv/cpu.c         | 9 +++++----
+>  target/riscv/kvm/kvm-cpu.c | 3 ---
+>  2 files changed, 5 insertions(+), 7 deletions(-)
+> 
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index 522d6584e4..8e6e629ec4 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -1050,6 +1050,11 @@ static void riscv_cpu_reset_hold(Object *obj, ResetType type)
+>          mcc->parent_phases.hold(obj, type);
+>      }
+>  #ifndef CONFIG_USER_ONLY
+> +    if (kvm_enabled()) {
+> +        kvm_riscv_reset_vcpu(cpu);
+> +        return;
+> +    }
+> +
+>      env->misa_mxl = mcc->misa_mxl_max;
+>      env->priv = PRV_M;
+>      env->mstatus &= ~(MSTATUS_MIE | MSTATUS_MPRV);
+> @@ -1146,10 +1151,6 @@ static void riscv_cpu_reset_hold(Object *obj, ResetType type)
+>          env->rnmip = 0;
+>          env->mnstatus = set_field(env->mnstatus, MNSTATUS_NMIE, false);
+>      }
+> -
+> -    if (kvm_enabled()) {
+> -        kvm_riscv_reset_vcpu(cpu);
+> -    }
+>  #endif
+>  }
+>  
+> diff --git a/target/riscv/kvm/kvm-cpu.c b/target/riscv/kvm/kvm-cpu.c
+> index 23ce779359..484b6afe7c 100644
+> --- a/target/riscv/kvm/kvm-cpu.c
+> +++ b/target/riscv/kvm/kvm-cpu.c
+> @@ -1603,9 +1603,6 @@ void kvm_riscv_reset_vcpu(RISCVCPU *cpu)
+>      CPURISCVState *env = &cpu->env;
+>      int i;
+>  
+> -    if (!kvm_enabled()) {
+> -        return;
+> -    }
+>      for (i = 0; i < 32; i++) {
+>          env->gpr[i] = 0;
+>      }
+> -- 
+> 2.48.1
+> 
+>
 
-will fix, thank you!
-
-> 
-> 
->> +    if (!(val & RVC) && (env->misa_ext & RVC) && (GETPC() & 0x3)) {
->> +        return RISCV_EXCP_NONE;
->>       }
-> 
-> This will abort the write altogether, skipping valid changes to other bits. What
-> we want is a "val &= ~RVC" if the proper conditions for clearing RVC are met.
-
-Not sure since specification says:
-
-> If an instruction that would write misa increases IALIGN, and the subsequent instruction’s
-> address is not IALIGN-bit aligned, the write to misa is suppressed, leaving misa unchanged.
-
-In my understanding here we should skip all changes to misa, not just C.
-
-Thank you,
-Vladimir Isaev
-
-> 
-> Thanks,
-> 
-> Daniel
-> 
->>         /* Disable RVG if any of its dependencies are disabled */
-> 
-> 
-
-
+Reviewed-by: Andrew Jones <ajones@ventanamicro.com>
 
