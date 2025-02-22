@@ -4,88 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 52BEBC021B2
-	for <qemu-riscv@archiver.kernel.org>; Sat, 22 Feb 2025 11:49:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0E4EAC021B2
+	for <qemu-riscv@archiver.kernel.org>; Sat, 22 Feb 2025 18:17:54 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tlo0B-0008FW-Ve; Sat, 22 Feb 2025 06:49:00 -0500
+	id 1tlu4L-0007aD-IX; Sat, 22 Feb 2025 13:17:41 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1tlo07-0008F9-52
- for qemu-riscv@nongnu.org; Sat, 22 Feb 2025 06:48:57 -0500
-Received: from mail-pl1-x62f.google.com ([2607:f8b0:4864:20::62f])
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1tlu4J-0007ZS-F2
+ for qemu-riscv@nongnu.org; Sat, 22 Feb 2025 13:17:39 -0500
+Received: from mail-pl1-x62a.google.com ([2607:f8b0:4864:20::62a])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1tlo05-0002bU-9d
- for qemu-riscv@nongnu.org; Sat, 22 Feb 2025 06:48:54 -0500
-Received: by mail-pl1-x62f.google.com with SMTP id
- d9443c01a7336-22128b7d587so57576085ad.3
- for <qemu-riscv@nongnu.org>; Sat, 22 Feb 2025 03:48:52 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1tlu4H-0001kM-Fn
+ for qemu-riscv@nongnu.org; Sat, 22 Feb 2025 13:17:39 -0500
+Received: by mail-pl1-x62a.google.com with SMTP id
+ d9443c01a7336-220e6028214so68966655ad.0
+ for <qemu-riscv@nongnu.org>; Sat, 22 Feb 2025 10:17:36 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1740224931; x=1740829731; darn=nongnu.org;
+ d=linaro.org; s=google; t=1740248255; x=1740853055; darn=nongnu.org;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=J8YOecwikxy0uJ/DhK841KjyPW/ldqPdEq4EIRUdH+U=;
- b=ByRnYrpIiBsy8YwtT+6o50WnH3I8FIiPDzuRk4TCksQHrSHd5eSO9zL0c3FojOSLOC
- uG36zLswnPBZj4q8Q91hwA6paZTU1FVNziArtpppE5ZZw+KobeO4RYsjlrrhtu9xf5Me
- cafBfWn5IhKSrL0KUhOkEOjJJZPXb3cTBQiFSjb11GI95YYmbuCHDdPm/hi2aUXEEj4o
- o5csUELamazb+KFFvtaAA3OBP34XJzdV6dUgZ2K5w8y2SaLQOMjJtSMFN5orT/wQ9h9R
- dcCp2UvGFMDQzpq0x3F/AbeJP5KQ6EQ+IpHwRJrNbqPvfgR9Htzj1GQmfKI+hIxlSikl
- re7Q==
+ bh=FRkI/Fb9WSLKtDmJG8RONehw53nMPKPblJ9FWNeo4xA=;
+ b=DI2j+DhFi59psVBiqjhLAzhIRd36p5cPm2VAIm4Skxbv081xliGf7en7IcR4P9Wo28
+ 3oC8cFzBiQtleOxUt8c0YViYSUGUq+25qHEMJkFSFCqJtkNXRgFwI5iOC/oAbCuRCtJz
+ BrZn0w+q6JJ4kCETtDBUi/5IFNoC6kD9QxtAK77hon/4BjZYrAyrPM+gZ2h6PAjvTFOj
+ KgR3XcKtxceVOehnoRCKEVIhOIRzlkmJyHmWV+l50FLHUjhXtAab+i+8BmttDxFzZCCn
+ a2AXbVCgSRVGmBIxVzZTx2MGgcrdHPHq4RnXgMcBNDxSoAF8XYYp9l/1ETBJRWW8W6Lv
+ Lspg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1740224931; x=1740829731;
+ d=1e100.net; s=20230601; t=1740248255; x=1740853055;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=J8YOecwikxy0uJ/DhK841KjyPW/ldqPdEq4EIRUdH+U=;
- b=odEbLvNofjQHEQ/otxsBL0ZSAHGp9bv6W7snTNPPBL+3+cxOmHhltxlFgHC0Fb0PXP
- pJMz5T9vWfMAHhHYhybAa3eJl0i3YAoNHEl34yF7BFl1bnRKojDR4Om7Hzu3n76RuT1s
- J6qZKyQjGRVPDIVzKFw3heoJ0mBg7kCpGz18u2nysPSz5rkau6UpFlm+v5/4kM5/sV7+
- JBm4SwbG/Sldm0TlCfs7v8cmckDynFy1/orU85QfKexPVi5tqz28iv1G8h1TPh54ZS2N
- eb45NcOXcvlSOx9tRuZ6SUZRWF12Nz6a5/b76gwDhyQeIrtPBmSJfRBcIJc5Ds/OOkQ1
- X5xQ==
-X-Gm-Message-State: AOJu0YyHWxQ5h+2QZDWAmstYXvyWe9QOUPDeLpZt31vlEaKtvHqh9GdP
- Nl+DurL38UotoIfYlRHrOKXlA38pYs5V6Yw87Z6HQ3k3hISPeWyMAaK3XB1YqrQ=
-X-Gm-Gg: ASbGnctnUOr1/JEHmwTPETPmVmODjQ3NB1a5a4ReV6i5Lx28cqxusI3zKLsUe4m+fNC
- GBOmXrf533nhtG6/LUM+0qx1oyQmouv63GKq/oM36AVv+WGcdoWC43LQLgHudiV7y5/rFMAOYUc
- wywqQuDDphvtktRhrIpYtBwmX1WGOUmUAg0d7zy6uvr4UMhA8pCHVzATjyzTXe8HJCPZag/C1V/
- 0duWbI0iyXpXQ8GJSAibxgk8vn5pxkuQ26yQkJiwKolZgfXo/UOA0JfL0/kNN2ag1aQzAiLOYAa
- N9UxIMVIN9QnNnzIj4NvHuBh0MBsp6QHqECGSr4=
-X-Google-Smtp-Source: AGHT+IEXP8f3/2g1iofh+B6zYL7Gvb0A4T9uG0sj/kPd2q7xVeO4wzewgHSVLeYBlomH7MdWLZ7VKw==
-X-Received: by 2002:a05:6a00:4b4f:b0:730:7499:4036 with SMTP id
- d2e1a72fcca58-73426d96b36mr10645843b3a.22.1740224931066; 
- Sat, 22 Feb 2025 03:48:51 -0800 (PST)
-Received: from [192.168.68.110] ([179.93.21.174])
- by smtp.gmail.com with ESMTPSA id
- 41be03b00d2f7-adb5a92b959sm15738629a12.63.2025.02.22.03.48.48
+ bh=FRkI/Fb9WSLKtDmJG8RONehw53nMPKPblJ9FWNeo4xA=;
+ b=Lq3dVv/P+C/MESSifJhb6+iqCtfkA1XQpmQwWZrlhWBfuNlOA0piH2bCwQWyrJM3fo
+ wMF++lUNAztpn4Rcenhepw6RToA/8o+AEWBe2Sxq1Icy4UA8leXZCcPwAQVSYfBJe4Gk
+ dOuRxAAh53vLTCY4S++622f9oKzk+Zbjc30ET0WqWoMOlT7z866r5I1tgAcJlogFWqTF
+ /3bEwuklu3YTvlDOPXym5Abz/NWoSnaYMxKYvu1VR5Oi1xS0Mbk4v2OTtsm9Qvd2DqZG
+ FtcKadqbsxlHioKmmV1lM70KvRdaSajezBennrIGYqlb/NLdMNzQtlSLlQUeO+l6H/uG
+ 2Gbw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXtJXNIwz1f+VThMlqPs8hElCt0rNrFXkIZpTS+7sKFuwVFwcTvCRBe01ql9LmrQPYYq9AWoRZirTSA@nongnu.org
+X-Gm-Message-State: AOJu0Yw5goYL8QklXhJCb0JQd7kBchDbfmGa5VQw9sJPZEnrUgccwAjM
+ 4C4Lbma/H5vRyYmsWe1hIZvp691Bz5fQrzNh20ObkjaJcC8b9NC/F6CE/9WbMY0=
+X-Gm-Gg: ASbGncvXLIvBlsTcQLcu14qBTP02ZVPpG4pIOAgdCZY4TgRLVpxSi9C5/wSrz0MCxpD
+ d7xVE8vWx6BqjESzmLDGqev6jikglEDUYGIs2nhTSZsROdIIUzs8LTISr+/wTzuU5XgJw7GzI4S
+ 1/yNtvDMG5tCS4Dee2PQ3WTdq8FSs6DZ12TcIpA5TvRlJ3PXnN9F3X5hmMnt84RPqfyR6EcjP8r
+ Wi2njC8ILMOLgxAmEJDXahy5LRu4bR9FU9l2NQ820cPmRQI6g3c7totMYQi9S1gY3VMCgtWr4+e
+ VmdB6TdJjLhnNAfhD5fSpeplb6vO3kvVGGR0kK0d/RMCY3VnB4i/ie7np+nDNCfRTsmuHMvY6w2
+ srQC0OO4=
+X-Google-Smtp-Source: AGHT+IEkUsH/X84S/nU1JKWqAd5GhWsDdJeTsRdyiiaJTaTOBdhdrVzL5mhhVK0g83PMsAi70FiZDA==
+X-Received: by 2002:a05:6a00:4fc6:b0:730:7499:4043 with SMTP id
+ d2e1a72fcca58-73426aedd26mr11293067b3a.0.1740248254894; 
+ Sat, 22 Feb 2025 10:17:34 -0800 (PST)
+Received: from [10.254.143.227] (syn-156-019-246-023.biz.spectrum.com.
+ [156.19.246.23]) by smtp.gmail.com with ESMTPSA id
+ d2e1a72fcca58-73271666ca7sm12782024b3a.155.2025.02.22.10.17.34
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sat, 22 Feb 2025 03:48:50 -0800 (PST)
-Message-ID: <06073138-61a4-4279-a5dd-8a9caeef0340@ventanamicro.com>
-Date: Sat, 22 Feb 2025 08:48:46 -0300
+ Sat, 22 Feb 2025 10:17:34 -0800 (PST)
+Message-ID: <2a2026eb-b92e-450f-9bcf-211620bdf450@linaro.org>
+Date: Sat, 22 Feb 2025 10:17:32 -0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] target/riscv: fix C extension disabling on misa write
-To: Vladimir Isaev <vladimir.isaev@syntacore.com>, qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, palmer@dabbelt.com, alistair.francis@wdc.com,
- bmeng.cn@gmail.com, liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com
-References: <20250221135735.85151-1-vladimir.isaev@syntacore.com>
+Subject: Re: [PULL 33/42] tcg/riscv: Require TCG_TARGET_REG_BITS == 64
+To: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
+ qemu-devel@nongnu.org
+Cc: Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ qemu-riscv <qemu-riscv@nongnu.org>
+References: <20230505212447.374546-1-richard.henderson@linaro.org>
+ <20230505212447.374546-34-richard.henderson@linaro.org>
+ <95e6af77-05bf-46f5-9e85-ce913b08706e@linaro.org>
 Content-Language: en-US
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <20250221135735.85151-1-vladimir.isaev@syntacore.com>
+From: Richard Henderson <richard.henderson@linaro.org>
+In-Reply-To: <95e6af77-05bf-46f5-9e85-ce913b08706e@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::62f;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pl1-x62f.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::62a;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pl1-x62a.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -101,53 +107,128 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
+On 2/20/25 15:27, Philippe Mathieu-Daudé wrote:
+> On 5/5/23 23:24, Richard Henderson wrote:
+>> The port currently does not support "oversize" guests, which
+>> means riscv32 can only target 32-bit guests.  We will soon be
+>> building TCG once for all guests.  This implies that we can
+>> only support riscv64.
+>>
+>> Since all Linux distributions target riscv64 not riscv32,
+>> this is not much of a restriction and simplifies the code.
+>>
+>> The brcond2 and setcond2 opcodes are exclusive to 32-bit hosts,
+>> so we can and should remove the stubs.
+>>
+>> Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+>> Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+>> Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
+>> ---
+>>   tcg/riscv/tcg-target-con-set.h |   8 --
+>>   tcg/riscv/tcg-target.h         |  22 ++--
+>>   tcg/riscv/tcg-target.c.inc     | 232 +++++++++------------------------
+>>   3 files changed, 72 insertions(+), 190 deletions(-)
+> 
+> 
+>> diff --git a/tcg/riscv/tcg-target.h b/tcg/riscv/tcg-target.h
+>> index 0deb33701f..dddf2486c1 100644
+>> --- a/tcg/riscv/tcg-target.h
+>> +++ b/tcg/riscv/tcg-target.h
+>> @@ -25,11 +25,14 @@
+>>   #ifndef RISCV_TCG_TARGET_H
+>>   #define RISCV_TCG_TARGET_H
+>> -#if __riscv_xlen == 32
+>> -# define TCG_TARGET_REG_BITS 32
+>> -#elif __riscv_xlen == 64
+>> -# define TCG_TARGET_REG_BITS 64
+>> +/*
+>> + * We don't support oversize guests.
+>> + * Since we will only build tcg once, this in turn requires a 64-bit host.
+>> + */
+>> +#if __riscv_xlen != 64
+>> +#error "unsupported code generation mode"
+>>   #endif
+>> +#define TCG_TARGET_REG_BITS 64
+>>   #define TCG_TARGET_INSN_UNIT_SIZE 4
+>>   #define TCG_TARGET_TLB_DISPLACEMENT_BITS 20
+>> @@ -83,13 +86,8 @@ typedef enum {
+>>   #define TCG_TARGET_STACK_ALIGN          16
+>>   #define TCG_TARGET_CALL_STACK_OFFSET    0
+>>   #define TCG_TARGET_CALL_ARG_I32         TCG_CALL_ARG_NORMAL
+>> -#if TCG_TARGET_REG_BITS == 32
+>> -#define TCG_TARGET_CALL_ARG_I64         TCG_CALL_ARG_EVEN
+>> -#define TCG_TARGET_CALL_ARG_I128        TCG_CALL_ARG_EVEN
+>> -#else
+>>   #define TCG_TARGET_CALL_ARG_I64         TCG_CALL_ARG_NORMAL
+>>   #define TCG_TARGET_CALL_ARG_I128        TCG_CALL_ARG_NORMAL
+>> -#endif
+>>   #define TCG_TARGET_CALL_RET_I128        TCG_CALL_RET_NORMAL
+>>   /* optional instructions */
+>> @@ -106,8 +104,8 @@ typedef enum {
+>>   #define TCG_TARGET_HAS_sub2_i32         1
+>>   #define TCG_TARGET_HAS_mulu2_i32        0
+>>   #define TCG_TARGET_HAS_muls2_i32        0
+>> -#define TCG_TARGET_HAS_muluh_i32        (TCG_TARGET_REG_BITS == 32)
+>> -#define TCG_TARGET_HAS_mulsh_i32        (TCG_TARGET_REG_BITS == 32)
+>> +#define TCG_TARGET_HAS_muluh_i32        0
+>> +#define TCG_TARGET_HAS_mulsh_i32        0
+> 
+> Should have we squashed the following with these changes?
+
+Yes, mulsh_i32 is not reachable anymore.  At this point I'll just leave this cleanup to 
+conversion of mulsh to TCGOutOpBinary.
 
 
-On 2/21/25 10:57 AM, Vladimir Isaev wrote:
-> According to spec:
-> Writing misa may increase IALIGN, e.g., by disabling the "C" extension. If an instruction that would
-> write misa increases IALIGN, and the subsequent instruction’s address is not IALIGN-bit aligned, the
-> write to misa is suppressed, leaving misa unchanged.
+r~
+
 > 
-> So we should suppress write to misa without "C" if it is enabled
-> and the subsequent instruction is not aligned to 4.
+> -- >8 --
+> diff --git a/tcg/riscv/tcg-target.c.inc b/tcg/riscv/tcg-target.c.inc
+> index f7e1ca5a56f..e395ffcdaf5 100644
+> --- a/tcg/riscv/tcg-target.c.inc
+> +++ b/tcg/riscv/tcg-target.c.inc
+> @@ -2323,10 +2323,8 @@ static void tcg_out_op(TCGContext *s, TCGOpcode opc, TCGType type,
+>           break;
 > 
-> Fixes: f18637cd611c ("RISC-V: Add misa runtime write support")
-> Signed-off-by: Vladimir Isaev <vladimir.isaev@syntacore.com>
+> -    case INDEX_op_mulsh_i32:
+>       case INDEX_op_mulsh_i64:
+>           tcg_out_opc_reg(s, OPC_MULH, a0, a1, a2);
+>           break;
+> 
+> -    case INDEX_op_muluh_i32:
+>       case INDEX_op_muluh_i64:
+>           tcg_out_opc_reg(s, OPC_MULHU, a0, a1, a2);
+> @@ -2399,4 +2397,6 @@ static void tcg_out_op(TCGContext *s, TCGOpcode opc, TCGType type,
+>       case INDEX_op_extu_i32_i64:
+>       case INDEX_op_extrl_i64_i32:
+> +    case INDEX_op_mulsh_i32:
+> +    case INDEX_op_muluh_i32:
+>       default:
+>           g_assert_not_reached();
+> @@ -2707,6 +2707,4 @@ tcg_target_op_def(TCGOpcode op, TCGType type, unsigned flags)
+> 
+>       case INDEX_op_mul_i32:
+> -    case INDEX_op_mulsh_i32:
+> -    case INDEX_op_muluh_i32:
+>       case INDEX_op_div_i32:
+>       case INDEX_op_divu_i32:
 > ---
-> v2:
-> - use env->pc instead of GETPC() since GETPC() is a host pc;
-> - use !QEMU_IS_ALIGNED(env->pc, 4) instead of GETPC() & 3;
 > 
-> ---
-
-Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-
-
->   target/riscv/csr.c | 10 ++++++----
->   1 file changed, 6 insertions(+), 4 deletions(-)
-> 
-> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-> index afb7544f0780..8aa77c53a0db 100644
-> --- a/target/riscv/csr.c
-> +++ b/target/riscv/csr.c
-> @@ -2067,11 +2067,13 @@ static RISCVException write_misa(CPURISCVState *env, int csrno,
->       val &= env->misa_ext_mask;
->   
->       /*
-> -     * Suppress 'C' if next instruction is not aligned
-> -     * TODO: this should check next_pc
-> +     * Disabling 'C' increases IALIGN to 32. If subsequent instruction's address
-> +     * is not 32-bit aligned, write to misa is suppressed.
-> +     *
-> +     * All csr-related instructions are 4-byte, so we can check current pc alignment.
->        */
-> -    if ((val & RVC) && (GETPC() & ~3) != 0) {
-> -        val &= ~RVC;
-> +    if (!(val & RVC) && (env->misa_ext & RVC) && !QEMU_IS_ALIGNED(env->pc, 4)) {
-> +        return RISCV_EXCP_NONE;
->       }
->   
->       /* Disable RVG if any of its dependencies are disabled */
+>>   #define TCG_TARGET_HAS_ext8s_i32        1
+>>   #define TCG_TARGET_HAS_ext16s_i32       1
+>>   #define TCG_TARGET_HAS_ext8u_i32        1
+>> @@ -128,7 +126,6 @@ typedef enum {
+>>   #define TCG_TARGET_HAS_setcond2         1
+>>   #define TCG_TARGET_HAS_qemu_st8_i32     0
+>> -#if TCG_TARGET_REG_BITS == 64
+>>   #define TCG_TARGET_HAS_movcond_i64      0
+>>   #define TCG_TARGET_HAS_div_i64          1
+>>   #define TCG_TARGET_HAS_rem_i64          1
+>> @@ -165,7 +162,6 @@ typedef enum {
+>>   #define TCG_TARGET_HAS_muls2_i64        0
+>>   #define TCG_TARGET_HAS_muluh_i64        1
+>>   #define TCG_TARGET_HAS_mulsh_i64        1
+>> -#endif
+>>   #define TCG_TARGET_DEFAULT_MO (0)
 
 
