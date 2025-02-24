@@ -4,84 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 57D72C021B3
-	for <qemu-riscv@archiver.kernel.org>; Mon, 24 Feb 2025 07:18:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ED2B9C021B3
+	for <qemu-riscv@archiver.kernel.org>; Mon, 24 Feb 2025 07:57:22 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tmSjG-0004YK-9r; Mon, 24 Feb 2025 02:18:14 -0500
+	id 1tmTKk-0001Oz-Sy; Mon, 24 Feb 2025 02:56:58 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <yongxuan.wang@sifive.com>)
- id 1tmSjD-0004XU-W6
- for qemu-riscv@nongnu.org; Mon, 24 Feb 2025 02:18:12 -0500
-Received: from mail-qt1-x833.google.com ([2607:f8b0:4864:20::833])
+ id 1tmTKj-0001On-4x
+ for qemu-riscv@nongnu.org; Mon, 24 Feb 2025 02:56:57 -0500
+Received: from mail-qt1-x82f.google.com ([2607:f8b0:4864:20::82f])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <yongxuan.wang@sifive.com>)
- id 1tmSjB-00027x-Ts
- for qemu-riscv@nongnu.org; Mon, 24 Feb 2025 02:18:11 -0500
-Received: by mail-qt1-x833.google.com with SMTP id
- d75a77b69052e-47220d28138so48886721cf.3
- for <qemu-riscv@nongnu.org>; Sun, 23 Feb 2025 23:18:09 -0800 (PST)
+ id 1tmTKg-0006d1-Qw
+ for qemu-riscv@nongnu.org; Mon, 24 Feb 2025 02:56:56 -0500
+Received: by mail-qt1-x82f.google.com with SMTP id
+ d75a77b69052e-471ede4b8e5so20911211cf.2
+ for <qemu-riscv@nongnu.org>; Sun, 23 Feb 2025 23:56:53 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1740381488; x=1740986288; darn=nongnu.org;
+ d=sifive.com; s=google; t=1740383813; x=1740988613; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=+InCRXc+1IOh7POCVfRD3O7joLY9IeZahyz9Seq3/Yc=;
- b=lwoasXETD2DoNUnIi3MMhteBqtvct78sZKn68395H5/MPbwTL0zGo1uHsQxis8AKIo
- W9tHza3t/m4bahzVOGgragjmaDDN8aKCmNR+a+5+PZ0qa+GIyQbl89eTdd76r6dXOqrz
- uUNxfruW19/h9lyIdXBePmbsCg1W9W8XwUKR1hw1X+tpyKd9nmr8/rNohmMiX9d6DB80
- ZvVuAPrKXbTthmTwCAESPwf9ml2FB+wAmkJOse68uzZco9okrHU2iAIw2HRPei07p+/N
- KR0Rb79k9mu0W+TKHIkCVjwXDxVRmscBch8MgRp70I5tnteKL7zAyAdPWZQqsrc1+ysB
- rIvw==
+ bh=0H44uaZel0YwtgrX8Da3ncQx8kVGrBB827ev2xiSjVU=;
+ b=TnLj7NkVc0jBUP8pyB1S1ws6D159/j7aD1zKglHPSP4az9UIpuh2XzQBxcGmnWrQsS
+ ai/2xkOAychwuzZmYTzU08WzoFO1kQVpUBfAgM+FKeoPx1fxgBztiavdoWOJ0u2u5ECG
+ ZulEVF2XJEAqGPe/08E0ZakVvE5MxxxBXmGO4Y6vqaeGNduHOjsRpVyK/4XGrM7nl6q0
+ OwbDRxjrn6YbOyY/h5Lou30QEMlae3Nc178cc1qINvAMAJFSJ8bp8O9TDcDKJOWIlq6M
+ 5pej0HEFAousWe8qoKrYWgVNtUvbdGSpRam9j4uBrMJvKWf/2qWdNt1nBfiVcH8tmEvQ
+ 3VSQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1740381488; x=1740986288;
+ d=1e100.net; s=20230601; t=1740383813; x=1740988613;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=+InCRXc+1IOh7POCVfRD3O7joLY9IeZahyz9Seq3/Yc=;
- b=obdA8sXOTn05sWt1klhl00x6c0ZzIicHmEuJWbY2Bb6U/FsGObRjkisp1DwTs/+CKO
- SGtmvjW2zfH9XS6kk3vOqXq1JRtsd6Q3RlFJvXRpyNPuhA8E78nDrffl17mNGPgslo3D
- pjNIhvCBevpN4ottmHSbqVPv779s8dWRH2yJanO7YVPchGYaXmAMLiaiIbZOVxmrEZK3
- xdDjLvyGQ9jiBqWYvRHHebOBamdm6DGKJyxBkXIgSqpwUxFX+KstxcNkKysPA28S04df
- vwqw5ds0kIjyIohb4l33lM0vUbC1FZ71WNVNmvNLDfCOg28Hyt024bFksQc+LknlTini
- pJEQ==
+ bh=0H44uaZel0YwtgrX8Da3ncQx8kVGrBB827ev2xiSjVU=;
+ b=C6MczdoLRQqdbW6cwO80R0kYRplBqjkwURjJIASYHpxHK6Nhzc1rXIqK0yeZRR23GD
+ 4uZVF6kM/1vSlvTjMueNK8lY260t7RVuI6ewwDnaFjMDS+udRPbMbawLM0fkxxvQz8gc
+ +O6UYnFBOONhzIjHC02PxsRoyXvT6db8S4xB3wkITYaV10025sFkISGq+wB4Duk0WoG8
+ QqNcflPeNi0jGsI53D0io1XDEfPnCGcFq2GEryh+07N+Z3E3658A4bhfikJh5cXqYyIT
+ zc0/FN/KLbxzvoFbOIZle3r7biQcZoPDiBJZ2qTQsXOZP0Gr3nFQA7/bG/8FYP2FX2hr
+ Q69g==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWGUbvNPEqSBn0c/yaqYbkLESMZ22O5AXoXaXhdgCQR7zik/8Oa7Rksxu8yFTKVtPYjblQ4C1CJPgle@nongnu.org
-X-Gm-Message-State: AOJu0Yy1RKk7dEcx87DMeno6qsuKxX1O66ot3X2dNUK4OAA1AQS31yLi
- lOjYmhpP38vx5yOXU1k3Hpu+gYyR7fjbX/mfacmC39rnru8SRuJzVm16t7WZnyrJnBG01MPGYlN
- +pOVWLX3pdf+gC0htvAxlLVLbORY+uOQc0OAL1Q==
-X-Gm-Gg: ASbGncv/684Fd6MvCoq7pNUC+4n3AZr1M081dZ85mPeaz3I94vKXkjdr74PAaYMog9M
- y9/P9ou4IUwtpas/jodGRGUhrw+tS95EeJguJdBP0ccN+0nn/gVqhtRBqyvAUwFYE7jLgLNtJ3K
- QruAhTI0wbyw==
-X-Google-Smtp-Source: AGHT+IHQ1Owu0CoZuyOSpo8LlUmOa37QtQTYznv2Tn2M1UXCJazBOz7X2eH6NYiz9xI0AP2m/P64CQvahhgvKGpeo+4=
-X-Received: by 2002:ac8:59c1:0:b0:472:6aa:d6be with SMTP id
- d75a77b69052e-472228cfc49mr122287381cf.17.1740381488359; Sun, 23 Feb 2025
- 23:18:08 -0800 (PST)
+ AJvYcCVZJSL8OFA7nh2QguEhDnO2icBGPuKodmWMLBx682hOwr9kR62kPbvhFVRdzruUnAVs9AR7qHmgDjwV@nongnu.org
+X-Gm-Message-State: AOJu0YyUuDamlDL4pPi7Lo/5yw0x02MZFrz+FwhgKCK7yiKVPKjJKX3r
+ mks/FrD0UO/k828wU5m012Y/TbfV/QmjI02g2j2/PT70g6qTPUXAwhuyzI+7A0QgN9d/EbEmO35
+ yre/KwjvlkmS0UmluWSyK64MoLm813hE7FSOXXw==
+X-Gm-Gg: ASbGncviI9b/pRjypXbNBdZJwyQs+0xUXfey+Or5DJskGOK31toSSYdCjvwBMhPwl77
+ MYWXFAeoI1bhLBQvPvjobk0wI95l0vR3Pz7IbZS3uDFzBPGNaELwQRiIrwD2qRhp7WBLvdH3zua
+ WsU9yZtHGpvg==
+X-Google-Smtp-Source: AGHT+IFvXLRqrrLahMh+nA+e87vJUGwcaiLd2HH6Qu5wGlqbc4j/SOx0YSKJfuFdH+AE/j78+oywJpfHRd8ZRLs1Y1Q=
+X-Received: by 2002:a05:622a:1447:b0:471:9b3f:2464 with SMTP id
+ d75a77b69052e-472228dc9fcmr166270121cf.31.1740383812963; Sun, 23 Feb 2025
+ 23:56:52 -0800 (PST)
 MIME-Version: 1.0
 References: <20250217081730.9000-1-yongxuan.wang@sifive.com>
- <Z7Ss5F3t4R2GbIcu@gezellig>
-In-Reply-To: <Z7Ss5F3t4R2GbIcu@gezellig>
+ <20250217081730.9000-5-yongxuan.wang@sifive.com>
+ <20250217-d6ff55e1f04b68643ae8295e@orel>
+In-Reply-To: <20250217-d6ff55e1f04b68643ae8295e@orel>
 From: Yong-Xuan Wang <yongxuan.wang@sifive.com>
-Date: Mon, 24 Feb 2025 15:17:59 +0800
-X-Gm-Features: AWEUYZndvaF1Z7BcsEcn4kW96qUzqlGu7l-WxEf1ixOnfUao7yVFJqUTucbeNqI
-Message-ID: <CAMWQL2gDNMD4UeUr6ti2AFUKdhLpbKeYXHUbUALufsLOW8huAQ@mail.gmail.com>
-Subject: Re: [PATCH 0/8] riscv: AIA: kernel-irqchip=off support
-To: Kashyap Chamarthy <kchamart@redhat.com>
+Date: Mon, 24 Feb 2025 15:56:42 +0800
+X-Gm-Features: AWEUYZl7vWFacCvZDaCFyIiguvyNwOSFkPxEFvEgGamnSxOdcKOkq3qZqtfXwrk
+Message-ID: <CAMWQL2ihmaRfkqDtr9Z6eeh=fCMZb1TqSk_h0AoeYxU1g21_sQ@mail.gmail.com>
+Subject: Re: [PATCH 4/8] target/riscv: add helper to get CSR name
+To: Andrew Jones <ajones@ventanamicro.com>
 Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, greentime.hu@sifive.com, 
- vincent.chen@sifive.com, frank.chang@sifive.com, jim.shu@sifive.com
+ vincent.chen@sifive.com, frank.chang@sifive.com, jim.shu@sifive.com, 
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Weiwei Li <liwei1518@gmail.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>, 
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::833;
- envelope-from=yongxuan.wang@sifive.com; helo=mail-qt1-x833.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::82f;
+ envelope-from=yongxuan.wang@sifive.com; helo=mail-qt1-x82f.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -97,51 +103,53 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Hi Kashyap,
+Hi Andrew,
 
-On Tue, Feb 18, 2025 at 11:53=E2=80=AFPM Kashyap Chamarthy <kchamart@redhat=
-.com> wrote:
+On Mon, Feb 17, 2025 at 10:01=E2=80=AFPM Andrew Jones <ajones@ventanamicro.=
+com> wrote:
 >
-> On Mon, Feb 17, 2025 at 04:17:20PM +0800, Yong-Xuan Wang wrote:
-> > This series introduces the user-space AIA MSI emulation when using KVM
-> > acceleration.
+> On Mon, Feb 17, 2025 at 04:17:24PM +0800, Yong-Xuan Wang wrote:
+> > Add a helper function to get CSR name from CSR number.
 > >
-> > After this series, RISC-V QEMU virt machine with KVM acceleration has
-> > 3 parameters to control the type of irqchip and its emulation method:
-> > - Machine prop "aia" controls the type of irqchip
-> >   - none: use PLIC and emulated in user-space
-> >   - aplic: use AIA wired and emulated in user-space
-> >   - aplic-imsic: use AIA MSI, emulation mode is determined by
-> >     "kernel-irqchip" and "riscv-imsic"
-> > - Accel prop "kernel-irqchip", effective with AIA MSI
-> >   - on: in-kernel APLIC and in-kernel IMSIC
-> >   - off: user-space APLIC and user-space IMSIC
-> >   - split: user-space APLIC and in-kernel IMSIC
-> > - Accel prop "kernel-irqchip", effective with in-kernel IMSIC
-> >   - emul: use MRIF as in-kernel IMSIC
-> >   - hw: use hardware guest IMSIC file as in-kernel IMSIC
-> >   - auto: use the hardware guest IMSICs whenever available otherwise
-> >     fallback to MRIF
+> > Signed-off-by: Yong-Xuan Wang <yongxuan.wang@sifive.com>
+> > ---
+> >  target/riscv/cpu.h | 6 +++++-
+> >  1 file changed, 5 insertions(+), 1 deletion(-)
+> >
+> > diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+> > index 616c3bdc1c24..133d1852ee1e 100644
+> > --- a/target/riscv/cpu.h
+> > +++ b/target/riscv/cpu.h
+> > @@ -920,8 +920,12 @@ extern const bool valid_vm_1_10_32[], valid_vm_1_1=
+0_64[];
+> >  void riscv_get_csr_ops(int csrno, riscv_csr_operations *ops);
+> >  void riscv_set_csr_ops(int csrno, riscv_csr_operations *ops);
+> >
+> > -void riscv_cpu_register_gdb_regs_for_features(CPUState *cs);
+> > +static inline const char *riscv_get_csr_name(int csr_no)
+> > +{
+> > +    return csr_ops[csr_no & (CSR_TABLE_SIZE - 1)].name;
 >
-> Hi; as someone new to the RISC-V ecosystem, most of these acronyms feel
-> impenetrable :-)  I see they're all RISC-V interrupt-handling related
-> terms.  I hope you don't mind my spelling them out here:
->
->   - AIA   : Advanced Interrupt Architecture
->   - MSI   : Message Signaled Interrupts
->   - PLIC  : Platform-Level Interrupt Controller
->   - APLIC : Advanced Platform Level Interrupt Controller
->   - IMSIC : Incoming Message Signaled Interrupt Controller
->   - MRIF  : Message Routed Interrupt Facility
->
-> [...]
->
-> --
-> /kashyap
->
+> Shouldn't we assert csr_no is correct rather than silently
+> truncate it?
 
-Sure. I would add them into the next version. Thank you!
+ok. I would add some assertions in this function.
 
 Regards,
 Yong-Xuan
+
+>
+> Thanks,
+> drew
+>
+> > +}
+> >
+> > +void riscv_cpu_register_gdb_regs_for_features(CPUState *cs);
+> >  target_ulong riscv_new_csr_seed(target_ulong new_value,
+> >                                  target_ulong write_mask);
+> >
+> > --
+> > 2.17.1
+> >
+> >
 
