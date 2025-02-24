@@ -4,81 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9A0B5C021BB
-	for <qemu-riscv@archiver.kernel.org>; Mon, 24 Feb 2025 19:10:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 491EBC021A4
+	for <qemu-riscv@archiver.kernel.org>; Mon, 24 Feb 2025 19:10:39 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tmdqE-0006Fn-HS; Mon, 24 Feb 2025 14:10:11 -0500
+	id 1tmdpL-0005kU-7K; Mon, 24 Feb 2025 14:09:15 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1tmdpA-0005hT-Nm
- for qemu-riscv@nongnu.org; Mon, 24 Feb 2025 14:09:06 -0500
-Received: from mail-pl1-x636.google.com ([2607:f8b0:4864:20::636])
+ id 1tmdok-0005bP-9Q
+ for qemu-riscv@nongnu.org; Mon, 24 Feb 2025 14:08:42 -0500
+Received: from mail-pl1-x632.google.com ([2607:f8b0:4864:20::632])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1tmdp5-0004rC-5B
- for qemu-riscv@nongnu.org; Mon, 24 Feb 2025 14:09:02 -0500
-Received: by mail-pl1-x636.google.com with SMTP id
- d9443c01a7336-220c4159f87so67124455ad.0
- for <qemu-riscv@nongnu.org>; Mon, 24 Feb 2025 11:08:58 -0800 (PST)
+ id 1tmdoi-0004mG-Eq
+ for qemu-riscv@nongnu.org; Mon, 24 Feb 2025 14:08:38 -0500
+Received: by mail-pl1-x632.google.com with SMTP id
+ d9443c01a7336-220c665ef4cso83363335ad.3
+ for <qemu-riscv@nongnu.org>; Mon, 24 Feb 2025 11:08:36 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1740424137; x=1741028937; darn=nongnu.org;
+ d=ventanamicro.com; s=google; t=1740424115; x=1741028915; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=OdvxoA7MO1HEsVdmxpLT+H+KWWtGcf6+0kEyDaOkd9I=;
- b=hVimHlHnVWUPdVOQCt2PUaMy4LC9RwKh3oI4utkedSi9+mCwVRFAyabMVfExipcvBs
- fSlAdr6Hd6CJ+onjhZfHXK1VQkhLr0F5/V+LXxJaL7vOh8zTYGt9W0pnBKkQVq03Nzlt
- sO2JM8pZmuiPFH2aksu8yjC+nIBKnr7mI4ONwTJ2/9Yst3QbqiXw0oyvm0Uw6i1pyMcN
- hvCEcPYEWYdGpqFEmfD+mzfWKV70UilUrKJp0cCbU4gW84AhhpTzVAocXX5azIrA9W2i
- 5y/lC1x9gRKu3PjWvDwEnEh17BGrJJBauqKOTEh2IZscC6Cw2Ocfh2EymdkjGF6gQ1fv
- 5BEg==
+ bh=H5YKF3HsuWUbiaPLrEWpm5TtTdaWovSQz+CQU4mRVEM=;
+ b=dpK6cZ2QMtzDHQv4rI3ryw/lvFDX3IXr1yUy19U0jFus831iUieovlFiO0OE8EO6O3
+ gAkmv/LFc/bHOXBk3NZq+abJ7ewRE3Mc/i+qifDaBDp4CWFoF9KryvemJR4PS1sw5vEK
+ AbXp3NQt/jwSxPTPZwp9IsVw6X2VI98neo5YrEArfYHDNh/eIamu5ceFBfUxHDqBDHCR
+ ulJY1ABVN4RvSfu4rfbn4ZA8J0bmKRUCght9bhA5BDHenDw7pfAHWuFBN9ieHQI9+/pg
+ 7y7NsEQi47NBv7gBfN7BjmSWLqKz8LQDFOzUFXImYwDWJJw4+Gq6XZtN73XDytjBfGPZ
+ Bnpg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1740424137; x=1741028937;
+ d=1e100.net; s=20230601; t=1740424115; x=1741028915;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=OdvxoA7MO1HEsVdmxpLT+H+KWWtGcf6+0kEyDaOkd9I=;
- b=M4jniIK770fQVtykfarumcXq6sCxerzK1ti2jkd89F3H5VFvNiw1ao2e7I5LP9XiPj
- eJ5pqTPlxdMw6u4RcZ/zfUOLEGG1y0fEH8btvRGIc9kUyAohWXMqUQjMschqdHCJ7Ne6
- x5Qni/c8kCQppEDLTtqrLj1ucvdVqZNLHgXRGI8FeU6KYJQTrdfjwUCGfTYh81CqYcwc
- wPyZIpi14jnEEIb1Zn5DAChs1TDmDd8kFbQt7xxuFJwRfxe1kj+5eJIyV8CDYUjjK5xY
- t9E5hyzXtHD6R/fd07z6lDu/OH4XDf1NZMZSp34jvMojO70B+3B5ejZWQoxGWxN7BP2C
- xXkg==
-X-Gm-Message-State: AOJu0Yxyb9UvnnuZblrjDGvtaOO0wdskWL0zvYZBwr9eHaTZs4enuHxp
- +Gwyn5/shrwurb+BpX8Un8wQXxq6M16tVlJsjiFrV5QfYztdXPDXDn3+qIrWcyQ=
-X-Gm-Gg: ASbGnctZ31WmUCWrjABpEdKIRjhEm/AVfpmrV1CxiEcAO02sVKg86xzWcN2os8WvFLY
- 7244KSMUUktSMYRlbdXMeSXKUP96sLK/Rs76SvbukNwNw07YQhYhTXGyw4sBYYWE1qJKMZZwh4v
- vI5mw1/vHkqq8Y8e9wrYyIl7u2TcFx2Iu2sCwtaVJJzeMzXkjQnUqTHqs71t0kqeMtZpmzg6dkf
- tQfcKWMuTcl5DqkWngdJWq82GJoRSOGY8Y6sA9Skd0WiYjBvQnM3wolX7W+0zRdGbK3SjQMrJLD
- WTy0AGFLMKzw/uwRGQnCvHzGFx/usQ==
-X-Google-Smtp-Source: AGHT+IEKv1W+/QME25fbgS5noawmtF0rlKUg3xy2kwI4RfKKE47Xf9N9drGHa9BBPFJjnVJ7AKT1hQ==
-X-Received: by 2002:a17:902:e5c2:b0:215:9470:7e82 with SMTP id
- d9443c01a7336-22307b455dcmr6044625ad.4.1740424136969; 
- Mon, 24 Feb 2025 11:08:56 -0800 (PST)
+ bh=H5YKF3HsuWUbiaPLrEWpm5TtTdaWovSQz+CQU4mRVEM=;
+ b=olA1xd2gYnZpHqgUYmGXHfSdiVFfsT0d1eYtSN+u85f7c9s2iB0jLvPrjBlHiCWMsU
+ T64Jjw6T8zuHH4VbqHEUdOBq55ecHCn8/HCBhyRCHupa1gLtdiqAqzDocLX6/28XgEGL
+ 7g0hokXZwv8PZbYBUmuxK+ctGiUh6meFl5wB70gUw9V5Cx6mVQsmuNuXr1okp4K9uPUk
+ KrexD46Za6oWkbcdMinusWAvlEAL87S2744X4AO4FEfC0zMALHqMFCog/TGRGaUyaW5h
+ 6o2uqblPjGNGjqZfJA1+q/duBynnpRqwRV7hpOtOvH5GEwaLakId8JYqil6yfsvOnVWv
+ RNug==
+X-Gm-Message-State: AOJu0YxG/QIRUHy55qiucUQDoo3Y7dE324d9PlHB3B1rKemUA9Q1r0SZ
+ FgWFFzcSskjrQAdpFOWHS6ktg4PClF80ELO8fIodCTkJ8DuRImFOm8KbjOSfPg8=
+X-Gm-Gg: ASbGncshE9xfI1HqJQtchyQn+F5oMff68xuJB8pumDVCX9lW4vno4rQjlMH5OlKj0UQ
+ zlXwo0JRwAIw79U1PRS6no2O9GgU+gFr3CEjhHRQ5CXicse4ZKkJd65xRk15uZsj1ldP1jutb1a
+ /lTUxNpPukIZoDaGvwEbWtVj6YzSxLz83wOh7+3ESzcVzOnL8x8d86YRgU0Wh7pXi1IJJtPtrMY
+ 27H3D5kQk5kDOIy38UQbUpjJ+S2qLH869Jj9LkiVx09kq5Fb2c+1r+TCmwXxGOYtpYNsJHBpcWA
+ QIXrFHJmPvnBwPtcRTMC+l0R//5vUg==
+X-Google-Smtp-Source: AGHT+IHFR7q/79SWVCsSWTocNfY/RAdad1m2qaTUQPu16hfUp1z4NaZP/483YVQ8VlKndyGV0Z9boA==
+X-Received: by 2002:a17:902:f544:b0:215:6cb2:7877 with SMTP id
+ d9443c01a7336-2219ff827cdmr287717055ad.4.1740424114844; 
+ Mon, 24 Feb 2025 11:08:34 -0800 (PST)
 Received: from grind.. ([2804:7f0:bcc0:6edb:f473:a9df:d551:443b])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-220d545df28sm183583155ad.153.2025.02.24.11.08.54
+ d9443c01a7336-220d545df28sm183583155ad.153.2025.02.24.11.08.32
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 24 Feb 2025 11:08:56 -0800 (PST)
+ Mon, 24 Feb 2025 11:08:34 -0800 (PST)
 From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
  liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
- Tomasz Jeznach <tjeznach@rivosinc.com>,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Subject: [PATCH v2 08/11] hw/riscv/riscv-iommu: add hpm events mmio write
-Date: Mon, 24 Feb 2025 16:08:23 -0300
-Message-ID: <20250224190826.1858473-9-dbarboza@ventanamicro.com>
+Subject: [PATCH v2 01/11] hw/riscv/riscv-iommu.h: add missing headers
+Date: Mon, 24 Feb 2025 16:08:16 -0300
+Message-ID: <20250224190826.1858473-2-dbarboza@ventanamicro.com>
 X-Mailer: git-send-email 2.48.1
 In-Reply-To: <20250224190826.1858473-1-dbarboza@ventanamicro.com>
 References: <20250224190826.1858473-1-dbarboza@ventanamicro.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::636;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pl1-x636.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::632;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pl1-x632.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -101,168 +101,57 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Tomasz Jeznach <tjeznach@rivosinc.com>
+This header is incomplete, i.e. it is using definitions that are being
+supplied by the .c files that are including it.
 
-To support hpm events mmio writes, done via
-riscv_iommu_process_hpmevt_write(), we're also adding the 'hpm-counters'
-IOMMU property that are used to determine the amount of counters
-available in the IOMMU.
+Adding this header into a fresh .c file will result in errors:
 
-Note that everything we did so far didn't change any IOMMU behavior
-because we're still not advertising HPM capability to software. This
-will be done in the next patch.
+/home/danielhb/work/qemu/hw/riscv/riscv-iommu.h:30:17: error: field ‘parent_obj’ has incomplete type
+   30 |     DeviceState parent_obj;
+      |                 ^~~~~~~~~~
+/home/danielhb/work/qemu/hw/riscv/riscv-iommu.h:50:5: error: unknown type name ‘dma_addr_t’; did you mean ‘in_addr_t’?
+   50 |     dma_addr_t cq_addr;   /* Command queue base physical address */
+      |     ^~~~~~~~~~
+      |     in_addr_t
+(...)
+/home/danielhb/work/qemu/hw/riscv/riscv-iommu.h:62:5: error: unknown type name ‘QemuThread’; did you mean ‘GThread’?
+   62 |     QemuThread core_proc; /* Background processing thread */
+      |     ^~~~~~~~~~
+      |     GThread
+/home/danielhb/work/qemu/hw/riscv/riscv-iommu.h:63:5: error: unknown type name ‘QemuCond’
+   63 |     QemuCond core_cond;   /* Background processing wake up signal */
+      |     ^~~~~~~~
+/home/danielhb/work/qemu/hw/riscv/riscv-iommu.h:71:18: error: field ‘trap_as’ has incomplete type
+   71 |     AddressSpace trap_as;
+      |                  ^~~~~~~
+/home/danielhb/work/qemu/hw/riscv/riscv-iommu.h:72:18: error: field ‘trap_mr’ has incomplete type
+   72 |     MemoryRegion trap_mr;
+      |                  ^~~~~~~
+/home/danielhb/work/qemu/hw/riscv/riscv-iommu.h:80:18: error: field ‘regs_mr’ has incomplete type
+   80 |     MemoryRegion regs_mr;
+      |                  ^~~~~~~
 
-Signed-off-by: Tomasz Jeznach <tjeznach@rivosinc.com>
+Fix it by adding the missing headers for these definitions.
+
 Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Acked-by: Alistair Francis <alistair.francis@wdc.com>
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 ---
- hw/riscv/riscv-iommu-hpm.c | 88 ++++++++++++++++++++++++++++++++++++++
- hw/riscv/riscv-iommu-hpm.h |  1 +
- hw/riscv/riscv-iommu.c     |  4 +-
- hw/riscv/riscv-iommu.h     |  1 +
- 4 files changed, 93 insertions(+), 1 deletion(-)
+ hw/riscv/riscv-iommu.h | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/hw/riscv/riscv-iommu-hpm.c b/hw/riscv/riscv-iommu-hpm.c
-index 1cea6b1df1..5518c287a5 100644
---- a/hw/riscv/riscv-iommu-hpm.c
-+++ b/hw/riscv/riscv-iommu-hpm.c
-@@ -281,3 +281,91 @@ void riscv_iommu_process_hpmcycle_write(RISCVIOMMUState *s)
-     s->hpmcycle_prev = get_cycles();
-     hpm_setup_timer(s, s->hpmcycle_val);
- }
-+
-+static inline bool check_valid_event_id(unsigned event_id)
-+{
-+    return event_id > RISCV_IOMMU_HPMEVENT_INVALID &&
-+           event_id < RISCV_IOMMU_HPMEVENT_MAX;
-+}
-+
-+static gboolean hpm_event_equal(gpointer key, gpointer value, gpointer udata)
-+{
-+    uint32_t *pair = udata;
-+
-+    if (GPOINTER_TO_UINT(value) & (1 << pair[0])) {
-+        pair[1] = GPOINTER_TO_UINT(key);
-+        return true;
-+    }
-+
-+    return false;
-+}
-+
-+/* Caller must check ctr_idx against hpm_ctrs to see if its supported or not. */
-+static void update_event_map(RISCVIOMMUState *s, uint64_t value,
-+                             uint32_t ctr_idx)
-+{
-+    unsigned event_id = get_field(value, RISCV_IOMMU_IOHPMEVT_EVENT_ID);
-+    uint32_t pair[2] = { ctr_idx, RISCV_IOMMU_HPMEVENT_INVALID };
-+    uint32_t new_value = 1 << ctr_idx;
-+    gpointer data;
-+
-+    /*
-+     * If EventID field is RISCV_IOMMU_HPMEVENT_INVALID
-+     * remove the current mapping.
-+     */
-+    if (event_id == RISCV_IOMMU_HPMEVENT_INVALID) {
-+        data = g_hash_table_find(s->hpm_event_ctr_map, hpm_event_equal, pair);
-+
-+        new_value = GPOINTER_TO_UINT(data) & ~(new_value);
-+        if (new_value != 0) {
-+            g_hash_table_replace(s->hpm_event_ctr_map,
-+                                 GUINT_TO_POINTER(pair[1]),
-+                                 GUINT_TO_POINTER(new_value));
-+        } else {
-+            g_hash_table_remove(s->hpm_event_ctr_map,
-+                                GUINT_TO_POINTER(pair[1]));
-+        }
-+
-+        return;
-+    }
-+
-+    /* Update the counter mask if the event is already enabled. */
-+    if (g_hash_table_lookup_extended(s->hpm_event_ctr_map,
-+                                     GUINT_TO_POINTER(event_id),
-+                                     NULL,
-+                                     &data)) {
-+        new_value |= GPOINTER_TO_UINT(data);
-+    }
-+
-+    g_hash_table_insert(s->hpm_event_ctr_map,
-+                        GUINT_TO_POINTER(event_id),
-+                        GUINT_TO_POINTER(new_value));
-+}
-+
-+void riscv_iommu_process_hpmevt_write(RISCVIOMMUState *s, uint32_t evt_reg)
-+{
-+    const uint32_t ctr_idx = (evt_reg - RISCV_IOMMU_REG_IOHPMEVT_BASE) >> 3;
-+    const uint32_t ovf = riscv_iommu_reg_get32(s, RISCV_IOMMU_REG_IOCOUNTOVF);
-+    uint64_t val = riscv_iommu_reg_get64(s, evt_reg);
-+
-+    if (ctr_idx >= s->hpm_cntrs) {
-+        return;
-+    }
-+
-+    /* Clear OF bit in IOCNTOVF if it's being cleared in IOHPMEVT register. */
-+    if (get_field(ovf, BIT(ctr_idx + 1)) &&
-+        !get_field(val, RISCV_IOMMU_IOHPMEVT_OF)) {
-+        /* +1 to offset CYCLE register OF bit. */
-+        riscv_iommu_reg_mod32(
-+            s, RISCV_IOMMU_REG_IOCOUNTOVF, 0, BIT(ctr_idx + 1));
-+    }
-+
-+    if (!check_valid_event_id(get_field(val, RISCV_IOMMU_IOHPMEVT_EVENT_ID))) {
-+        /* Reset EventID (WARL) field to invalid. */
-+        val = set_field(val, RISCV_IOMMU_IOHPMEVT_EVENT_ID,
-+            RISCV_IOMMU_HPMEVENT_INVALID);
-+        riscv_iommu_reg_set64(s, evt_reg, val);
-+    }
-+
-+    update_event_map(s, val, ctr_idx);
-+}
-diff --git a/hw/riscv/riscv-iommu-hpm.h b/hw/riscv/riscv-iommu-hpm.h
-index 0cd550975d..5fc4ef2e8b 100644
---- a/hw/riscv/riscv-iommu-hpm.h
-+++ b/hw/riscv/riscv-iommu-hpm.h
-@@ -28,5 +28,6 @@ void riscv_iommu_hpm_incr_ctr(RISCVIOMMUState *s, RISCVIOMMUContext *ctx,
- void riscv_iommu_hpm_timer_cb(void *priv);
- void riscv_iommu_process_iocntinh_cy(RISCVIOMMUState *s, bool prev_cy_inh);
- void riscv_iommu_process_hpmcycle_write(RISCVIOMMUState *s);
-+void riscv_iommu_process_hpmevt_write(RISCVIOMMUState *s, uint32_t evt_reg);
- 
- #endif
-diff --git a/hw/riscv/riscv-iommu.c b/hw/riscv/riscv-iommu.c
-index 821ecba3a4..cdbb848181 100644
---- a/hw/riscv/riscv-iommu.c
-+++ b/hw/riscv/riscv-iommu.c
-@@ -2040,7 +2040,7 @@ static void riscv_iommu_process_hpm_writes(RISCVIOMMUState *s,
- 
-     case RISCV_IOMMU_REG_IOHPMEVT_BASE ...
-         RISCV_IOMMU_REG_IOHPMEVT(RISCV_IOMMU_IOCOUNT_NUM) + 4:
--        /* not yet implemented */
-+        riscv_iommu_process_hpmevt_write(s, regb & ~7);
-         break;
-     }
- }
-@@ -2487,6 +2487,8 @@ static const Property riscv_iommu_properties[] = {
-     DEFINE_PROP_BOOL("g-stage", RISCVIOMMUState, enable_g_stage, TRUE),
-     DEFINE_PROP_LINK("downstream-mr", RISCVIOMMUState, target_mr,
-         TYPE_MEMORY_REGION, MemoryRegion *),
-+    DEFINE_PROP_UINT8("hpm-counters", RISCVIOMMUState, hpm_cntrs,
-+                      RISCV_IOMMU_IOCOUNT_NUM),
- };
- 
- static void riscv_iommu_class_init(ObjectClass *klass, void* data)
 diff --git a/hw/riscv/riscv-iommu.h b/hw/riscv/riscv-iommu.h
-index 2fef6eed27..a31aa62144 100644
+index fa8a50fa24..d2608d2f9b 100644
 --- a/hw/riscv/riscv-iommu.h
 +++ b/hw/riscv/riscv-iommu.h
-@@ -90,6 +90,7 @@ struct RISCVIOMMUState {
+@@ -20,6 +20,8 @@
+ #define HW_RISCV_IOMMU_STATE_H
  
-     /* HPM event counters */
-     GHashTable *hpm_event_ctr_map; /* Mapping of events to counters */
-+    uint8_t hpm_cntrs;
- };
+ #include "qom/object.h"
++#include "hw/qdev-properties.h"
++#include "system/dma.h"
+ #include "hw/riscv/iommu.h"
+ #include "hw/riscv/riscv-iommu-bits.h"
  
- void riscv_iommu_pci_setup_iommu(RISCVIOMMUState *iommu, PCIBus *bus,
 -- 
 2.48.1
 
