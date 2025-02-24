@@ -4,66 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 72E3BC021B6
-	for <qemu-riscv@archiver.kernel.org>; Mon, 24 Feb 2025 08:25:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 57475C021B5
+	for <qemu-riscv@archiver.kernel.org>; Mon, 24 Feb 2025 08:25:46 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tmTlk-0000Fk-SF; Mon, 24 Feb 2025 03:24:52 -0500
+	id 1tmTm3-0000f1-Bg; Mon, 24 Feb 2025 03:25:18 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <yongxuan.wang@sifive.com>)
- id 1tmTlS-000052-Jl
- for qemu-riscv@nongnu.org; Mon, 24 Feb 2025 03:24:36 -0500
-Received: from mail-pl1-x632.google.com ([2607:f8b0:4864:20::632])
+ id 1tmTlx-0000SM-0S
+ for qemu-riscv@nongnu.org; Mon, 24 Feb 2025 03:25:05 -0500
+Received: from mail-pl1-x631.google.com ([2607:f8b0:4864:20::631])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <yongxuan.wang@sifive.com>)
- id 1tmTlQ-00019U-Os
- for qemu-riscv@nongnu.org; Mon, 24 Feb 2025 03:24:34 -0500
-Received: by mail-pl1-x632.google.com with SMTP id
- d9443c01a7336-22100006bc8so68998855ad.0
- for <qemu-riscv@nongnu.org>; Mon, 24 Feb 2025 00:24:32 -0800 (PST)
+ id 1tmTlv-0001Ee-60
+ for qemu-riscv@nongnu.org; Mon, 24 Feb 2025 03:25:04 -0500
+Received: by mail-pl1-x631.google.com with SMTP id
+ d9443c01a7336-221206dbd7eso79643715ad.2
+ for <qemu-riscv@nongnu.org>; Mon, 24 Feb 2025 00:25:02 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1740385471; x=1740990271; darn=nongnu.org;
+ d=sifive.com; s=google; t=1740385501; x=1740990301; darn=nongnu.org;
  h=references:in-reply-to:message-id:date:subject:cc:to:from:from:to
  :cc:subject:date:message-id:reply-to;
- bh=AqEFQR6NtqYF016dWrhbdwKDvTxMgBYRr2uJaanV30U=;
- b=gWq9A+ify6ClIR+tq8nSwPQHghtwaY9ls2lsirVyosmNtw1W7bigd0bsIvdrOMtuCq
- q4HNE1G4OA07EuT1wJqkwgqqMh/JWhF2gnXig29cVQ8OqqUjEL+t64L/V3iLi7b42NXd
- jDp2edwGNzzRZ6H0M7VneTqS4fcUOpGaH6zJV2vdpyK8pPEH6hrcNwfOK0kLaFY8M76u
- nKd/BaS9+AHddRUfxArHgasDlyiVZb0I2E3flk0Mt0LjLmYoy/TudQIbMWh9S2gb/Ogk
- MHHUFG+ObnaRhrLKUJzjxayajJyaY/yXqbs0bnsgMt9M1XO/2ySdB12o/LvICfV7DlzE
- O32Q==
+ bh=YYEOMkvva/1IHr6h82yrTDeY/QvDiMhqXdSRY7LyxdI=;
+ b=Joz7cxhw3ODLjJmwcvh0CAlJ7sNtBWTgHVWdzXZHPMZ7KDn/qETXzc1dPSKaQzD94G
+ AoPkUNifBoGABjjRYJdVeTBw85QZRqks+bER5Ecavd6DPTr791o3Ym6YWThJJEIClpze
+ S+2nR3vm3LOrN47ecbNN2egldHVKxyh+I3mzF3tAiOI7NeEhLO1yw2Zk4PU5qZoRLT2s
+ t8GIvr78V0QMK/SAq+XVB8guGWLanm5k8P6Y9I1R2hHByz5MM3lIr5w5Gd+4ZlqNj+Kl
+ bzEIesJqynLWRf2jWk3KbEIaGE1RNhLkrZYjA6quCIZOdsk0unHOMtLoC3xM0tQmbS1u
+ Sz+Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1740385471; x=1740990271;
+ d=1e100.net; s=20230601; t=1740385501; x=1740990301;
  h=references:in-reply-to:message-id:date:subject:cc:to:from
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=AqEFQR6NtqYF016dWrhbdwKDvTxMgBYRr2uJaanV30U=;
- b=BXltwuuR5FwBLnEfmGbLU0lBdvaVMKeZEvipLn210ifJG0JPNT7yXpj8nNhqKpHX1n
- aSv8xryDU++kxRsl2Uz88GWTAzuvQqBnu9T68IYZmdl+1H/rHJ3Xg7VnYAtzZPsyIf70
- DKHwzsP3kXAMGGKNdJ5y3SmSW6L4GD1Yl3Vahh6MhX6Ck/WaLtSh1F0m6O2W38QAhLeb
- CcWaZSuZTo7AI+Ukh66EHSysOY3deIUh4VW48NKQK5EyC92V/JDLNy29vBm3VrUpZUgl
- CvX0AvLvF95iJCsnXfIF9iJybfU6OpH81PkWddEV3VB7VqHzfGxEyKd8Twyt3qoqccBz
- Fptg==
+ bh=YYEOMkvva/1IHr6h82yrTDeY/QvDiMhqXdSRY7LyxdI=;
+ b=vDd6ghOWSWyu39EKMSf1/4s/VdkSIb510lFJEVNxN8VKicvcZrRK2TTJxOcPuBsh2M
+ J42F1HTT8HUuMOf0AbJg86r/voIznlprEOY2U1JTw881Qv2bi+ImAE/Sy52htN4TReJm
+ wkvuJLQWlI5aU9JF3CBGcB7MblDxhiAHEPTfC5oCS+uN+tzZvwzEoGk4h9za0VyJlvnf
+ GLIOrWg+dqjEfDcnUpHomVwqPuf4GBdIUio4uGXcnkhiImnsb6B6pv2N5XodweOdx8z/
+ MUb2Rj9yxqJG6OtsrepwqJxnuOKbQNdp5Voxo2UqbzBk6ZT0ZtJml4aiDFtdFOyg26Fg
+ HqQg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXk+K1bhIqtfuzxG/QTzrgRBsJqfX9yQ+R4GkoO9jqxjfuo88ltSLxhF1vkE9Bl3JYGAOHv21cEPtdF@nongnu.org
-X-Gm-Message-State: AOJu0Yz3Wef20c+pwXTnnVH4SO8NmJ4/DV4oTi248KMuBdo0Yz9v0Fe1
- FgccXtqp2JC6j9NWKQIUd2efVYGAx+ce937dJ+2oKgcTwwt3nM1eiD6KwYF2KvXeQQV3Wb23Wv/
- m
-X-Gm-Gg: ASbGncvFXtCeKgigOZV1dxkPFxnmutZ+O/7ty9JUMraPn1uk6RbGNoAf7tOHnVdXtdF
- aOwYbhbcM+gRcv9Qau7Pc/Vtf8mj+Be/QYqivuggmgvDIqaqQehkQ9Dji+7tctMmMxhkFeU+fAe
- ze2lm3AdqLaWL9C8eB7kMnbc9mHjQ5YIIpQf2pRjtNQi+iumpUAd79WZ89XZiLwrzYg0D1hLpAX
- YI52XRoIrt50DebMT28MNAyQZMebUFmcm1PkbtNSuYCi1a++8GQXS2+2jjSAwkfVI9WsE6cgqPt
- yTMEfW3NHWYqgQqoAMDugX6is+XIWx0DNwC2G5S0EsQHQA8ph480uVRl
-X-Google-Smtp-Source: AGHT+IF5QqudS/guWJAwcTCu7MubeLiRik2qZEgTLndydkU2C2LlObe5fgmUapkZfrPinHV8GkaCVw==
-X-Received: by 2002:a05:6a21:501:b0:1f0:ea87:b40e with SMTP id
- adf61e73a8af0-1f0ea87b40fmr4464540637.41.1740385471311; 
- Mon, 24 Feb 2025 00:24:31 -0800 (PST)
+ AJvYcCXuKPw+WfnG+Bfv2X3nuMd4WN/nmgZ68IojxJnlKUN0Z5bT7uDvpGYq2rxHuju/ema960WxGcQ6wdh6@nongnu.org
+X-Gm-Message-State: AOJu0YylA0Li/P0pLybdmksEY3w3B+xDoDNrWIEixBpHuOkk2t0WYVg6
+ oLkDog4mBl1fmetaWE72oWiL2rOiuOJGQGlkVFstZVw8URMXQHII4WCc4DFhCok=
+X-Gm-Gg: ASbGnctU0NRKh8lUcgWQKGvUafyaTLMoDaHypthZ/VCoo4V8lth7Ii0K71fVnxNzgxr
+ 7A+q0NP/TBkH/ii918a4R37yo089cYZqarG0AIwh1CApMWkCjdb4fy2q4sldUPSqGwIlVnbt2XR
+ LTBZZY/ywKD4BRmyWizBy9DHKSr4h0M5OgFIUcjgd25zNSeR5pnu3SgGSm+1D+UgvcyU1bJHz/b
+ e3m5uYynX1jHTExkIfGFpyhsqqQ88IOwoCJ69nFKfA4zxNhx+hg85oYKTaXJOrj8iuRoKnrVbeI
+ jro1QjYmVYDSZHEAUKWHRvycfw424xGB6oCgI9TKQJBCi3EMuYwRFCei
+X-Google-Smtp-Source: AGHT+IHqru5QSjb9BmEx2XWBaNez57R75JTp0uS3W11selVagBhbIoeymiUkALT2yo/ICfOQA+nkcA==
+X-Received: by 2002:a05:6a00:8c2:b0:730:7d3f:8c6c with SMTP id
+ d2e1a72fcca58-73426d9002cmr18051654b3a.22.1740385501536; 
+ Mon, 24 Feb 2025 00:25:01 -0800 (PST)
 Received: from hsinchu26.internal.sifive.com ([210.176.154.34])
  by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-7325c88d74esm17714914b3a.149.2025.02.24.00.24.28
+ d2e1a72fcca58-7325c88d74esm17714914b3a.149.2025.02.24.00.24.59
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 24 Feb 2025 00:24:30 -0800 (PST)
+ Mon, 24 Feb 2025 00:25:01 -0800 (PST)
 From: Yong-Xuan Wang <yongxuan.wang@sifive.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
@@ -73,17 +72,16 @@ Cc: greentime.hu@sifive.com, vincent.chen@sifive.com, frank.chang@sifive.com,
  Alistair Francis <alistair.francis@wdc.com>,
  Weiwei Li <liwei1518@gmail.com>,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Andrew Jones <ajones@ventanamicro.com>,
- =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-Subject: [PATCH v2 1/8] target/riscv/kvm: rewrite get/set for KVM_REG_RISCV_CSR
-Date: Mon, 24 Feb 2025 16:24:08 +0800
-Message-Id: <20250224082417.31382-2-yongxuan.wang@sifive.com>
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
+Subject: [PATCH v2 8/8] hw/intc/imsic: prevent to use IMSIC when host doesn't
+ support AIA extension
+Date: Mon, 24 Feb 2025 16:24:15 +0800
+Message-Id: <20250224082417.31382-9-yongxuan.wang@sifive.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20250224082417.31382-1-yongxuan.wang@sifive.com>
 References: <20250224082417.31382-1-yongxuan.wang@sifive.com>
-Received-SPF: pass client-ip=2607:f8b0:4864:20::632;
- envelope-from=yongxuan.wang@sifive.com; helo=mail-pl1-x632.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::631;
+ envelope-from=yongxuan.wang@sifive.com; helo=mail-pl1-x631.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -106,126 +104,48 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-As KVM_REG_RISCV_CSR includes several subtypes of CSR, rewrite the
-related macros and functions to prepare for other subtypes.
+Currently QEMU will continue to create the IMSIC devices and enable the
+AIA extension for guest OS when the host kernel doesn't support the AIA
+extension. This will cause an illegal instruction exception when the
+guest OS access the AIA CSRs. Add additional checks to ensure the
+guest OS only uses the IMSIC devices when the host kernel supports
+the AIA extension.
 
 Signed-off-by: Yong-Xuan Wang <yongxuan.wang@sifive.com>
 ---
- target/riscv/kvm/kvm-cpu.c | 70 +++++++++++++++++++++++---------------
- 1 file changed, 43 insertions(+), 27 deletions(-)
+ hw/intc/riscv_imsic.c | 17 +++++++++++++----
+ 1 file changed, 13 insertions(+), 4 deletions(-)
 
-diff --git a/target/riscv/kvm/kvm-cpu.c b/target/riscv/kvm/kvm-cpu.c
-index 471fd554b369..ff1211d2fe39 100644
---- a/target/riscv/kvm/kvm-cpu.c
-+++ b/target/riscv/kvm/kvm-cpu.c
-@@ -111,9 +111,8 @@ static uint64_t kvm_riscv_vector_reg_id(RISCVCPU *cpu,
-     kvm_riscv_reg_id_ulong(env, KVM_REG_RISCV_CORE, \
-                            KVM_REG_RISCV_CORE_REG(name))
+diff --git a/hw/intc/riscv_imsic.c b/hw/intc/riscv_imsic.c
+index dc8162c0a7c9..8c64f2c21274 100644
+--- a/hw/intc/riscv_imsic.c
++++ b/hw/intc/riscv_imsic.c
+@@ -375,12 +375,21 @@ static void riscv_imsic_realize(DeviceState *dev, Error **errp)
  
--#define RISCV_CSR_REG(env, name) \
--    kvm_riscv_reg_id_ulong(env, KVM_REG_RISCV_CSR, \
--                           KVM_REG_RISCV_CSR_REG(name))
-+#define RISCV_CSR_REG(env, idx) \
-+    kvm_riscv_reg_id_ulong(env, KVM_REG_RISCV_CSR, idx)
- 
- #define RISCV_CONFIG_REG(env, name) \
-     kvm_riscv_reg_id_ulong(env, KVM_REG_RISCV_CONFIG, \
-@@ -130,17 +129,20 @@ static uint64_t kvm_riscv_vector_reg_id(RISCVCPU *cpu,
-     kvm_riscv_reg_id_ulong(env, KVM_REG_RISCV_VECTOR, \
-                            KVM_REG_RISCV_VECTOR_CSR_REG(name))
- 
--#define KVM_RISCV_GET_CSR(cs, env, csr, reg) \
-+#define RISCV_GENERAL_CSR_REG(name) \
-+    (KVM_REG_RISCV_CSR_GENERAL | KVM_REG_RISCV_CSR_REG(name))
+     /* Force select AIA feature and setup CSR read-modify-write callback */
+     if (env) {
+-        if (!imsic->mmode) {
+-            rcpu->cfg.ext_ssaia = true;
+-            riscv_cpu_set_geilen(env, imsic->num_pages - 1);
++        if (kvm_enabled()) {
++            if (!rcpu->cfg.ext_ssaia) {
++                error_report("Host machine doesn't support AIA extension. "
++                             "Do not use IMSIC as interrupt controller.");
++                exit(1);
++            }
+         } else {
+-            rcpu->cfg.ext_smaia = true;
++            if (!imsic->mmode) {
++                rcpu->cfg.ext_ssaia = true;
++                riscv_cpu_set_geilen(env, imsic->num_pages - 1);
++            } else {
++                rcpu->cfg.ext_smaia = true;
++            }
+         }
 +
-+#define KVM_RISCV_GET_CSR(cs, env, idx, reg) \
-     do { \
--        int _ret = kvm_get_one_reg(cs, RISCV_CSR_REG(env, csr), &reg); \
-+        int _ret = kvm_get_one_reg(cs, RISCV_CSR_REG(env, idx), &reg); \
-         if (_ret) { \
-             return _ret; \
-         } \
-     } while (0)
- 
--#define KVM_RISCV_SET_CSR(cs, env, csr, reg) \
-+#define KVM_RISCV_SET_CSR(cs, env, idx, reg) \
-     do { \
--        int _ret = kvm_set_one_reg(cs, RISCV_CSR_REG(env, csr), &reg); \
-+        int _ret = kvm_set_one_reg(cs, RISCV_CSR_REG(env, idx), &reg); \
-         if (_ret) { \
-             return _ret; \
-         } \
-@@ -608,36 +610,50 @@ static int kvm_riscv_put_regs_core(CPUState *cs)
-     return ret;
- }
- 
--static int kvm_riscv_get_regs_csr(CPUState *cs)
-+static int kvm_riscv_get_regs_general_csr(CPUState *cs)
- {
-     CPURISCVState *env = &RISCV_CPU(cs)->env;
- 
--    KVM_RISCV_GET_CSR(cs, env, sstatus, env->mstatus);
--    KVM_RISCV_GET_CSR(cs, env, sie, env->mie);
--    KVM_RISCV_GET_CSR(cs, env, stvec, env->stvec);
--    KVM_RISCV_GET_CSR(cs, env, sscratch, env->sscratch);
--    KVM_RISCV_GET_CSR(cs, env, sepc, env->sepc);
--    KVM_RISCV_GET_CSR(cs, env, scause, env->scause);
--    KVM_RISCV_GET_CSR(cs, env, stval, env->stval);
--    KVM_RISCV_GET_CSR(cs, env, sip, env->mip);
--    KVM_RISCV_GET_CSR(cs, env, satp, env->satp);
-+    KVM_RISCV_GET_CSR(cs, env, RISCV_GENERAL_CSR_REG(sstatus), env->mstatus);
-+    KVM_RISCV_GET_CSR(cs, env, RISCV_GENERAL_CSR_REG(sie), env->mie);
-+    KVM_RISCV_GET_CSR(cs, env, RISCV_GENERAL_CSR_REG(stvec), env->stvec);
-+    KVM_RISCV_GET_CSR(cs, env, RISCV_GENERAL_CSR_REG(sscratch), env->sscratch);
-+    KVM_RISCV_GET_CSR(cs, env, RISCV_GENERAL_CSR_REG(sepc), env->sepc);
-+    KVM_RISCV_GET_CSR(cs, env, RISCV_GENERAL_CSR_REG(scause), env->scause);
-+    KVM_RISCV_GET_CSR(cs, env, RISCV_GENERAL_CSR_REG(stval), env->stval);
-+    KVM_RISCV_GET_CSR(cs, env, RISCV_GENERAL_CSR_REG(sip), env->mip);
-+    KVM_RISCV_GET_CSR(cs, env, RISCV_GENERAL_CSR_REG(satp), env->satp);
- 
-     return 0;
- }
- 
--static int kvm_riscv_put_regs_csr(CPUState *cs)
-+static int kvm_riscv_put_regs_general_csr(CPUState *cs)
- {
-     CPURISCVState *env = &RISCV_CPU(cs)->env;
- 
--    KVM_RISCV_SET_CSR(cs, env, sstatus, env->mstatus);
--    KVM_RISCV_SET_CSR(cs, env, sie, env->mie);
--    KVM_RISCV_SET_CSR(cs, env, stvec, env->stvec);
--    KVM_RISCV_SET_CSR(cs, env, sscratch, env->sscratch);
--    KVM_RISCV_SET_CSR(cs, env, sepc, env->sepc);
--    KVM_RISCV_SET_CSR(cs, env, scause, env->scause);
--    KVM_RISCV_SET_CSR(cs, env, stval, env->stval);
--    KVM_RISCV_SET_CSR(cs, env, sip, env->mip);
--    KVM_RISCV_SET_CSR(cs, env, satp, env->satp);
-+    KVM_RISCV_SET_CSR(cs, env, RISCV_GENERAL_CSR_REG(sstatus), env->mstatus);
-+    KVM_RISCV_SET_CSR(cs, env, RISCV_GENERAL_CSR_REG(sie), env->mie);
-+    KVM_RISCV_SET_CSR(cs, env, RISCV_GENERAL_CSR_REG(stvec), env->stvec);
-+    KVM_RISCV_SET_CSR(cs, env, RISCV_GENERAL_CSR_REG(sscratch), env->sscratch);
-+    KVM_RISCV_SET_CSR(cs, env, RISCV_GENERAL_CSR_REG(sepc), env->sepc);
-+    KVM_RISCV_SET_CSR(cs, env, RISCV_GENERAL_CSR_REG(scause), env->scause);
-+    KVM_RISCV_SET_CSR(cs, env, RISCV_GENERAL_CSR_REG(stval), env->stval);
-+    KVM_RISCV_SET_CSR(cs, env, RISCV_GENERAL_CSR_REG(sip), env->mip);
-+    KVM_RISCV_SET_CSR(cs, env, RISCV_GENERAL_CSR_REG(satp), env->satp);
-+
-+    return 0;
-+}
-+
-+static int kvm_riscv_get_regs_csr(CPUState *cs)
-+{
-+    kvm_riscv_get_regs_general_csr(cs);
-+
-+    return 0;
-+}
-+
-+static int kvm_riscv_put_regs_csr(CPUState *cs)
-+{
-+    kvm_riscv_put_regs_general_csr(cs);
- 
-     return 0;
- }
+         riscv_cpu_set_aia_ireg_rmw_fn(env, (imsic->mmode) ? PRV_M : PRV_S,
+                                       riscv_imsic_rmw, imsic);
+     }
 -- 
 2.17.1
 
