@@ -4,80 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 93B2CC021B3
-	for <qemu-riscv@archiver.kernel.org>; Mon, 24 Feb 2025 08:26:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 40D1AC021B5
+	for <qemu-riscv@archiver.kernel.org>; Mon, 24 Feb 2025 09:25:43 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tmTlv-0000Q0-Vr; Mon, 24 Feb 2025 03:25:04 -0500
+	id 1tmUht-0001mM-HA; Mon, 24 Feb 2025 04:24:57 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <yongxuan.wang@sifive.com>)
- id 1tmTls-0000Ll-QB
- for qemu-riscv@nongnu.org; Mon, 24 Feb 2025 03:25:00 -0500
-Received: from mail-pl1-x630.google.com ([2607:f8b0:4864:20::630])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tmUhh-0001kL-TQ
+ for qemu-riscv@nongnu.org; Mon, 24 Feb 2025 04:24:47 -0500
+Received: from mail-wr1-x42c.google.com ([2a00:1450:4864:20::42c])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <yongxuan.wang@sifive.com>)
- id 1tmTlq-0001Dh-UR
- for qemu-riscv@nongnu.org; Mon, 24 Feb 2025 03:25:00 -0500
-Received: by mail-pl1-x630.google.com with SMTP id
- d9443c01a7336-221206dbd7eso79642885ad.2
- for <qemu-riscv@nongnu.org>; Mon, 24 Feb 2025 00:24:58 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tmUhe-0005CH-Rd
+ for qemu-riscv@nongnu.org; Mon, 24 Feb 2025 04:24:44 -0500
+Received: by mail-wr1-x42c.google.com with SMTP id
+ ffacd0b85a97d-38f29a1a93bso3294521f8f.1
+ for <qemu-riscv@nongnu.org>; Mon, 24 Feb 2025 01:24:41 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1740385497; x=1740990297; darn=nongnu.org;
- h=references:in-reply-to:message-id:date:subject:cc:to:from:from:to
- :cc:subject:date:message-id:reply-to;
- bh=Avllbujkgt9jGISnFqk3eNbI7THZ3CoG/MVM08xKPXc=;
- b=jMFB1gbV4SNS74Mo7vM+vbtE5UjEersDSVFkFBWO0f8Z63TagZAIsWdndpmM9cqUBV
- wpk/p0n3PX8DP+OK2wzWtf1KufTj3CZT6yR3vilEhuRZY9Ow9BV3IYyUaQQ57G/A+lAR
- +cawk6VyL86+4yIM73Zyj1EoRjCTIESr1dR++uyXjUlsgMQduaahtS5dX9Yc2n8vvGCC
- 6qM9oH8zKA0nstbvb34fJizUW1r70TeAHkLqvBFokLtheDwqIiOKl33on+IAJ3SdNDx2
- ZpfDD5tMGPlAJZOCTu6J+CEQdZfkKrZHP8NrXIVc8qG0/MlLvDweGw9WSfKPAfJ1mRod
- tfHw==
+ d=linaro.org; s=google; t=1740389080; x=1740993880; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=em8Wj6gdexYSbGcXIIzkB3WaMZ1vCoGcyE0NamhWvhQ=;
+ b=L+zZoJNvhPAOvd8RKhRlgz9Mw2feS25khk6YtzPgoksRcal+0+qcQ2n71ha+74cvci
+ ruuVy+iD3d4NonqE4G+VqgPGRn7TIRK+cwaSK0O0gXdbG7laJ7qt0Pq5sWIIYV7gjTOC
+ CEgc8lhGwmbQIgPUp5jIgz+gtBOsft4Si69eaFEXhy+DFzZLoQSoM0zni481NnI/+IEy
+ JzzHMno19rEJp9x8nUeskExOMMueFte3lH9ELxfvuKwcD+ntsC8enAsFr8ofQRHhcTM6
+ Dcvj0tQ+IHIhRbJqkzRj8OLKN3M+cUZpI4b3Ei1OeXhGI2niBYjGRY+L/banNkW3p7i6
+ OQ9g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1740385497; x=1740990297;
- h=references:in-reply-to:message-id:date:subject:cc:to:from
+ d=1e100.net; s=20230601; t=1740389080; x=1740993880;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=Avllbujkgt9jGISnFqk3eNbI7THZ3CoG/MVM08xKPXc=;
- b=uQmnWNLadksIURihsnlKk/kDZQo9cwmExxo+Kj+P96c6uWY4Qr7bT21qh9CIeL8nVu
- KtPpNHtqwLTDqeVILN/ksRB+EEpRzA0f0K4zmym+aRqrrKrYaNtFi8XmYRaYqxv6NFY/
- cfZM/AU2BGJGMAozsQWBoYLTgrj21yVeF5mvdVYN4+Lz6Cp3lu87hUeutFPXI8GQ2YtU
- NR1CWbkZVV9vB+taeMhgANDq9h6ZXiO2H9iYCT5r0djBdzJf8fk0dTYcr1Vs1ElNFaZ3
- CnHm+BAwbMeDYLtnox9d/SbrPEIxIuL1yZEu2u595ZxH2/aAHEUF5x1QzfOAGY44Q0qx
- quYw==
+ bh=em8Wj6gdexYSbGcXIIzkB3WaMZ1vCoGcyE0NamhWvhQ=;
+ b=tGj9+N0hJB8lM3JUka2lG74VYxpFkSw1RUcCEmT/QtEcvUi6uQCj9eCebnEO5+LBWq
+ WvdO+dOwtkKBydobHEB8bSXcoy485kpuFUTzgPZivX7NVQddB9u9/RNVvmKzy83HesqA
+ bI12TZGly+gAroWylSB8Km0QKf/kYUPa1/KK/FMXNbg7H4zODCxGA5ILVQfcAytAAwDq
+ lDl+261NTHN6XnEGWXm1Br2YxwRt2l4xoW3jCfMxehBPHLFP4lwkt0yulUcZI6HqNPJT
+ J8n6oEGx5aL2k0/ncOn/vyjzab2ZyfCXvp/dEdfBxPqqAv9GON2Kk7VeyE04uGO+as0e
+ 1M6g==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVqL3Rn1G0qb2/DsqqKKJxUJFzfh1osR0Pmxmfeoxo+tTsqQEdwpc4KXZmofeMqIND6jYUuxUNy/Lxg@nongnu.org
-X-Gm-Message-State: AOJu0YxKbFNJDnDuWVZlO3vR+Pk19uxKeuJ8y4t8AzrVMBwCDtLOCD3Z
- +sKDkoWZakG4GrDxl/WW87cRS7okEok8jY6MruJN7J4beuE0w8i+3n8bv7kl03I=
-X-Gm-Gg: ASbGncvCPU7DpKEkv7LNA+3LSEw3Vc52YKBnUIGcM0LbOrT8jG/MfnwrTxDlCYXuJM5
- 7u4d7CCDleE4RLhz8mmCIGUv2vB1Lkszi0LtO0Sjj6cHjA2oy4J0qVfYY7wqyCbfbhO0XdOSqyg
- 8a4RLRpLVohOrF7YUs3MbgN2uygpN2eLYJ0LJIeUaM4A+AMtdI3Eu3aEH9fhuvQUIjbOCobp+kz
- PjyJJFCE1woy/qKwTUfg0KTpN6z5N3X2hZDzsXv8Lsrx+APiXBd5UwQWCFVG4tezlZkvc8HcvpV
- ibmPblw1CCSzvyGcqj2kfg7/8pO9A/yEqqzhZ4nNol6/ofCyL7e/rHf/
-X-Google-Smtp-Source: AGHT+IHXVNbKiuaZi5hJilq5rfYkqfKJ1saB7u7EBGsYNKFH9pNciLVoY4TdM/LgkpwmuBmpcrzx9Q==
-X-Received: by 2002:a05:6a00:2e87:b0:732:2269:a15c with SMTP id
- d2e1a72fcca58-73426d8f207mr18199720b3a.20.1740385497562; 
- Mon, 24 Feb 2025 00:24:57 -0800 (PST)
-Received: from hsinchu26.internal.sifive.com ([210.176.154.34])
- by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-7325c88d74esm17714914b3a.149.2025.02.24.00.24.55
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 24 Feb 2025 00:24:57 -0800 (PST)
-From: Yong-Xuan Wang <yongxuan.wang@sifive.com>
-To: qemu-devel@nongnu.org,
-	qemu-riscv@nongnu.org
-Cc: greentime.hu@sifive.com, vincent.chen@sifive.com, frank.chang@sifive.com,
- jim.shu@sifive.com, Yong-Xuan Wang <yongxuan.wang@sifive.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Subject: [PATCH v2 7/8] docs: update the description about RISC-V AIA
-Date: Mon, 24 Feb 2025 16:24:14 +0800
-Message-Id: <20250224082417.31382-8-yongxuan.wang@sifive.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20250224082417.31382-1-yongxuan.wang@sifive.com>
-References: <20250224082417.31382-1-yongxuan.wang@sifive.com>
-Received-SPF: pass client-ip=2607:f8b0:4864:20::630;
- envelope-from=yongxuan.wang@sifive.com; helo=mail-pl1-x630.google.com
+ AJvYcCVWJWs4mgUAO+kEA09ZxPNAwtSW7EyRlrNayU8/kY1k36CemssrB0H0EUOeGvB4rUSynsaFwqjvPcim@nongnu.org
+X-Gm-Message-State: AOJu0YzFa1div/SUokQ70xQk+jZgyNujRrVwcS8QokewQ5y1tIsb3PwI
+ DjJibOBh1X3gDE6TwSClfWNIJxcPDpC/zOzIc9qHMNEZwdFuT3+Yb3gHpIwzK4fTZFlqjREQ5ah
+ o0HQ=
+X-Gm-Gg: ASbGncsG+ZAl2oTgqLSN4kp2WlSuin1JpXXNmEQEQpx4AZO1mbPjhjgenOKtnrWaODu
+ enpPNFfP7x7LdVfCNtqM9HDREJQkOs6rbItkJM/0gQNAErncX2Y8GoLLCZ5y+i1hN0jIpkrvsxc
+ GJPZEHhhknerW7lVGSn2X/IYd0yfgx5OVxQRj1ZAGgKX7g3ydYsei3ysioztLgYClvlzP0JW44G
+ xOCnKQGUZFYta/nRDaXy4GaZij3ROjAPp+hyBcDF/iuXer6JObMXIlJhv2pDj75t5aK3rN58FK4
+ rgUHqnlkXMTICyYZYfWOVmCPcu8pYj+RtyXtKSP21k7Pp93pmvywTQkD7YYerRN0Sf1Ung==
+X-Google-Smtp-Source: AGHT+IHFB77kvWkt91N63XIcorxkiSQplgsPWzmJn11K7JazVdOQxcaPGMWjnYfE469N9zWEUcrY8A==
+X-Received: by 2002:a05:6000:1788:b0:38d:d9bd:1897 with SMTP id
+ ffacd0b85a97d-38f6e95ef5bmr9636542f8f.22.1740389079743; 
+ Mon, 24 Feb 2025 01:24:39 -0800 (PST)
+Received: from [192.168.69.196] (88-187-86-199.subs.proxad.net.
+ [88.187.86.199]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-38f258dab74sm31459332f8f.32.2025.02.24.01.24.39
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 24 Feb 2025 01:24:39 -0800 (PST)
+Message-ID: <af650a49-8917-4d19-9cd4-e29a1538b86b@linaro.org>
+Date: Mon, 24 Feb 2025 10:24:38 +0100
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PULL 33/42] tcg/riscv: Require TCG_TARGET_REG_BITS == 64
+To: Richard Henderson <richard.henderson@linaro.org>, qemu-devel@nongnu.org
+Cc: Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ qemu-riscv <qemu-riscv@nongnu.org>
+References: <20230505212447.374546-1-richard.henderson@linaro.org>
+ <20230505212447.374546-34-richard.henderson@linaro.org>
+ <95e6af77-05bf-46f5-9e85-ce913b08706e@linaro.org>
+ <2a2026eb-b92e-450f-9bcf-211620bdf450@linaro.org>
+Content-Language: en-US
+From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+In-Reply-To: <2a2026eb-b92e-450f-9bcf-211620bdf450@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::42c;
+ envelope-from=philmd@linaro.org; helo=mail-wr1-x42c.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -100,83 +105,83 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Add the description about "-accel kvm,kernel-irqchip=off" into
-docs/specs/riscv-aia.rst and docs/system/riscv/virt.rst.
+On 22/2/25 19:17, Richard Henderson wrote:
+> On 2/20/25 15:27, Philippe Mathieu-Daudé wrote:
+>> On 5/5/23 23:24, Richard Henderson wrote:
+>>> The port currently does not support "oversize" guests, which
+>>> means riscv32 can only target 32-bit guests.  We will soon be
+>>> building TCG once for all guests.  This implies that we can
+>>> only support riscv64.
+>>>
+>>> Since all Linux distributions target riscv64 not riscv32,
+>>> this is not much of a restriction and simplifies the code.
+>>>
+>>> The brcond2 and setcond2 opcodes are exclusive to 32-bit hosts,
+>>> so we can and should remove the stubs.
+>>>
+>>> Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+>>> Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+>>> Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
+>>> ---
+>>>   tcg/riscv/tcg-target-con-set.h |   8 --
+>>>   tcg/riscv/tcg-target.h         |  22 ++--
+>>>   tcg/riscv/tcg-target.c.inc     | 232 +++++++++------------------------
+>>>   3 files changed, 72 insertions(+), 190 deletions(-)
+>>
+>>
+>>> diff --git a/tcg/riscv/tcg-target.h b/tcg/riscv/tcg-target.h
+>>> index 0deb33701f..dddf2486c1 100644
+>>> --- a/tcg/riscv/tcg-target.h
+>>> +++ b/tcg/riscv/tcg-target.h
+>>> @@ -25,11 +25,14 @@
+>>>   #ifndef RISCV_TCG_TARGET_H
+>>>   #define RISCV_TCG_TARGET_H
+>>> -#if __riscv_xlen == 32
+>>> -# define TCG_TARGET_REG_BITS 32
+>>> -#elif __riscv_xlen == 64
+>>> -# define TCG_TARGET_REG_BITS 64
+>>> +/*
+>>> + * We don't support oversize guests.
+>>> + * Since we will only build tcg once, this in turn requires a 64-bit 
+>>> host.
+>>> + */
+>>> +#if __riscv_xlen != 64
+>>> +#error "unsupported code generation mode"
+>>>   #endif
+>>> +#define TCG_TARGET_REG_BITS 64
+>>>   #define TCG_TARGET_INSN_UNIT_SIZE 4
+>>>   #define TCG_TARGET_TLB_DISPLACEMENT_BITS 20
+>>> @@ -83,13 +86,8 @@ typedef enum {
+>>>   #define TCG_TARGET_STACK_ALIGN          16
+>>>   #define TCG_TARGET_CALL_STACK_OFFSET    0
+>>>   #define TCG_TARGET_CALL_ARG_I32         TCG_CALL_ARG_NORMAL
+>>> -#if TCG_TARGET_REG_BITS == 32
+>>> -#define TCG_TARGET_CALL_ARG_I64         TCG_CALL_ARG_EVEN
+>>> -#define TCG_TARGET_CALL_ARG_I128        TCG_CALL_ARG_EVEN
+>>> -#else
+>>>   #define TCG_TARGET_CALL_ARG_I64         TCG_CALL_ARG_NORMAL
+>>>   #define TCG_TARGET_CALL_ARG_I128        TCG_CALL_ARG_NORMAL
+>>> -#endif
+>>>   #define TCG_TARGET_CALL_RET_I128        TCG_CALL_RET_NORMAL
+>>>   /* optional instructions */
+>>> @@ -106,8 +104,8 @@ typedef enum {
+>>>   #define TCG_TARGET_HAS_sub2_i32         1
+>>>   #define TCG_TARGET_HAS_mulu2_i32        0
+>>>   #define TCG_TARGET_HAS_muls2_i32        0
+>>> -#define TCG_TARGET_HAS_muluh_i32        (TCG_TARGET_REG_BITS == 32)
+>>> -#define TCG_TARGET_HAS_mulsh_i32        (TCG_TARGET_REG_BITS == 32)
+>>> +#define TCG_TARGET_HAS_muluh_i32        0
+>>> +#define TCG_TARGET_HAS_mulsh_i32        0
+>>
+>> Should have we squashed the following with these changes?
+> 
+> Yes, mulsh_i32 is not reachable anymore.  At this point I'll just leave 
+> this cleanup to conversion of mulsh to TCGOutOpBinary.
 
-Signed-off-by: Yong-Xuan Wang <yongxuan.wang@sifive.com>
----
- docs/specs/riscv-aia.rst   | 24 ++++++++++++++++++------
- docs/system/riscv/virt.rst | 10 ++++++----
- 2 files changed, 24 insertions(+), 10 deletions(-)
+Sure, I was not planing to ask for another patch, but trying to see if
+I was correctly understanding your conversion.
 
-diff --git a/docs/specs/riscv-aia.rst b/docs/specs/riscv-aia.rst
-index 8097e2f89744..38797cca4998 100644
---- a/docs/specs/riscv-aia.rst
-+++ b/docs/specs/riscv-aia.rst
-@@ -25,11 +25,16 @@ When running KVM:
- - no m-mode is provided, so there is no m-mode APLIC or IMSIC emulation regardless of
-   the AIA mode chosen
- - with "aia=aplic", s-mode APLIC will be emulated by userspace
--- with "aia=aplic-imsic" there are two possibilities.  If no additional KVM option
--  is provided there will be no APLIC or IMSIC emulation in userspace, and the virtual
--  machine will use the provided in-kernel APLIC and IMSIC controllers.  If the user
--  chooses to use the irqchip in split mode via "-accel kvm,kernel-irqchip=split",
--  s-mode APLIC will be emulated while using the s-mode IMSIC from the irqchip
-+- with "aia=aplic-imsic" there are three possibilities.
-+    - If no additional KVM option is provided there will be no APLIC or IMSIC emulation
-+      in userspace, and the virtual machine will use the provided in-kernel APLIC and
-+      IMSIC controllers.
-+    - If the user chooses to use the irqchip in split mode via
-+      "-accel kvm,kernel-irqchip=split", s-mode APLIC will be emulated while using
-+      the s-mode IMSIC from the irqchip.
-+    - If the user disables the in-kernel irqchip via "-accel kvm,kernel-irqchip=off",
-+      both s-mode APLIC and IMSIC controller will be emulated.
-+
- 
- The following table summarizes how the AIA and accelerator options defines what
- we will emulate in userspace:
-@@ -75,9 +80,16 @@ we will emulate in userspace:
-      - in-kernel
-      - in-kernel
-    * - kvm
--     - irqchip=split
-+     - kernel-irqchip=split
-      - aplic-imsic
-      - n/a
-      - n/a
-      - emul
-      - in-kernel
-+   * - kvm
-+     - kernel-irqchip=off
-+     - aplic-imsic
-+     - n/a
-+     - n/a
-+     - emul
-+     - emul
-diff --git a/docs/system/riscv/virt.rst b/docs/system/riscv/virt.rst
-index 60850970ce83..96d7ee1ebc64 100644
---- a/docs/system/riscv/virt.rst
-+++ b/docs/system/riscv/virt.rst
-@@ -129,12 +129,14 @@ The following machine-specific options are supported:
-   MSIs. When not specified, this option is assumed to be "none" which selects
-   SiFive PLIC to handle wired interrupts.
- 
--  This option also interacts with '-accel kvm'.  When using "aia=aplic-imsic"
--  with KVM, it is possible to set the use of the kernel irqchip in split mode
-+  This option also interacts with '-accel kvm', when using "aia=aplic-imsic"
-+  with KVM.  It is possible to set the use of the kernel irqchip in split mode
-   by using "-accel kvm,kernel-irqchip=split".  In this case the ``virt`` machine
-   will emulate the APLIC controller instead of using the APLIC controller from
--  the irqchip.  See :ref:`riscv-aia` for more details on all available AIA
--  modes.
-+  the in-kernel irqchip. Or the kernel irqchip can be disabled by using
-+  "-accel kvm,kernel-irqchip=off". In this case the ``virt`` machine will
-+  emulate the APLIC and IMSIC controller in user-space instead of using in-kernel
-+  irqchip.  See :ref:`riscv-aia` for more details on all available AIA modes.
- 
- - aia-guests=nnn
- 
--- 
-2.17.1
+Thanks,
 
+Phil.
 
