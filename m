@@ -4,85 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 64F69C021B3
-	for <qemu-riscv@archiver.kernel.org>; Mon, 24 Feb 2025 05:14:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 57D72C021B3
+	for <qemu-riscv@archiver.kernel.org>; Mon, 24 Feb 2025 07:18:41 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tmQna-0007vH-JW; Mon, 24 Feb 2025 00:14:34 -0500
+	id 1tmSjG-0004YK-9r; Mon, 24 Feb 2025 02:18:14 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1tmQnX-0007pt-MV; Mon, 24 Feb 2025 00:14:31 -0500
-Received: from mail-vs1-xe2b.google.com ([2607:f8b0:4864:20::e2b])
+ (Exim 4.90_1) (envelope-from <yongxuan.wang@sifive.com>)
+ id 1tmSjD-0004XU-W6
+ for qemu-riscv@nongnu.org; Mon, 24 Feb 2025 02:18:12 -0500
+Received: from mail-qt1-x833.google.com ([2607:f8b0:4864:20::833])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1tmQnV-0006d8-R5; Mon, 24 Feb 2025 00:14:31 -0500
-Received: by mail-vs1-xe2b.google.com with SMTP id
- ada2fe7eead31-4bdb423b971so1177892137.2; 
- Sun, 23 Feb 2025 21:14:27 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <yongxuan.wang@sifive.com>)
+ id 1tmSjB-00027x-Ts
+ for qemu-riscv@nongnu.org; Mon, 24 Feb 2025 02:18:11 -0500
+Received: by mail-qt1-x833.google.com with SMTP id
+ d75a77b69052e-47220d28138so48886721cf.3
+ for <qemu-riscv@nongnu.org>; Sun, 23 Feb 2025 23:18:09 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1740374067; x=1740978867; darn=nongnu.org;
+ d=sifive.com; s=google; t=1740381488; x=1740986288; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=A69i7VvcTTO+7ehkke80wkSGQ6qqqtZdm98NN1wdjdY=;
- b=LwbybJ3y5jynPrmT9LBxsr+3hJP9ni1/fbDG1kOjl0KHuJz2SQBgirZNneBirRsh0a
- 638vy4Gk0pHbP1uetHvXTaBmVwrK6l43yMe+4GTPpTxdwfYWzHYVt9k7kFPzW6+6hLMb
- Nfz1UyNcGXEERHGepBaU72+Sqq787HnC1sDHgeaWbDFWR1g22ShCDfv6y+l1fJbu5I7s
- mxUO6mAB6mgb09N30xQojSRs+6PyEonBjq0eld6BN+3mVSNdCVZghssvB0qQ6bajcleO
- vhs3mDD2cHKTcvhbO2hbUrdOTHezybq22JbkvazGCnFkZkYgo4fU5/G/lXV6ZExEA925
- zO/Q==
+ bh=+InCRXc+1IOh7POCVfRD3O7joLY9IeZahyz9Seq3/Yc=;
+ b=lwoasXETD2DoNUnIi3MMhteBqtvct78sZKn68395H5/MPbwTL0zGo1uHsQxis8AKIo
+ W9tHza3t/m4bahzVOGgragjmaDDN8aKCmNR+a+5+PZ0qa+GIyQbl89eTdd76r6dXOqrz
+ uUNxfruW19/h9lyIdXBePmbsCg1W9W8XwUKR1hw1X+tpyKd9nmr8/rNohmMiX9d6DB80
+ ZvVuAPrKXbTthmTwCAESPwf9ml2FB+wAmkJOse68uzZco9okrHU2iAIw2HRPei07p+/N
+ KR0Rb79k9mu0W+TKHIkCVjwXDxVRmscBch8MgRp70I5tnteKL7zAyAdPWZQqsrc1+ysB
+ rIvw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1740374067; x=1740978867;
+ d=1e100.net; s=20230601; t=1740381488; x=1740986288;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=A69i7VvcTTO+7ehkke80wkSGQ6qqqtZdm98NN1wdjdY=;
- b=hTqkZy3LODP0PIeZNQO37kkbSIuQdOLj3jKNd5zYenPJmvZzu/7hRZbRqBZbw3UXbo
- J6zBLcYe05ciXLFq7EQn0txPTpEz1vR2wo7fE8paPglYVIj0j1IDafAeUBXic0yZVGup
- B9r53y4EQsVUzDi65AM6+F+WjcHU6nLhjxEJwk5uevWdchaZs1u3jA22rSnXIgGY+rRt
- hdVI8U+bp94JMNAafPa4/JR8J7DmQip55BRVxFZZOP9delpq5mq1zWle6o0Wuzvn00gI
- Ve9jT07xfzLmP+4ViSsYlBs4NYDAVa9iwL0XjR8yHXD/0HXdsDuH9UZ9mXf2eKBiHmq/
- neRA==
+ bh=+InCRXc+1IOh7POCVfRD3O7joLY9IeZahyz9Seq3/Yc=;
+ b=obdA8sXOTn05sWt1klhl00x6c0ZzIicHmEuJWbY2Bb6U/FsGObRjkisp1DwTs/+CKO
+ SGtmvjW2zfH9XS6kk3vOqXq1JRtsd6Q3RlFJvXRpyNPuhA8E78nDrffl17mNGPgslo3D
+ pjNIhvCBevpN4ottmHSbqVPv779s8dWRH2yJanO7YVPchGYaXmAMLiaiIbZOVxmrEZK3
+ xdDjLvyGQ9jiBqWYvRHHebOBamdm6DGKJyxBkXIgSqpwUxFX+KstxcNkKysPA28S04df
+ vwqw5ds0kIjyIohb4l33lM0vUbC1FZ71WNVNmvNLDfCOg28Hyt024bFksQc+LknlTini
+ pJEQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWIrAAy1a5d3jbHS54KRUi2i0EEOtdSfS4nMe1FqSaxegdgS9PN4BLV8sipvbV0joHoo7sRs65lzHwsFA==@nongnu.org,
- AJvYcCXICAsdxiH17DiOBwhB8wxhy33wZxmvw2IDR7GTRo2x11xRWCYq+wSlyYIjiMWI+xl78Rm2cmv6h8pZ@nongnu.org
-X-Gm-Message-State: AOJu0YwOS8orATKAHM214uE9NJG26yYQTgakMfvSKXG4NTXRyhwAdrbL
- sovhuLC33Os26NoofeBn6dtgHFGod232MCcpMKR4xI1dLRLv8g7eaY6BxHDVzrKpjIdISOhzDtn
- gt1Mx8Bs8aE3Xa2UXmanwo66IlJ8=
-X-Gm-Gg: ASbGncu57P+i7pXALV/nhGDnbHPBiNXavWwBTNP5vo05/SHXinmT5pxfLkUYP2yEAug
- 6d/SY6TMqVJMqT9+CR8+MLUK+RcL4LZToPusmEuGnA27EIC8Vno6wT6BcG+Qh/3p6yCYSQ0jhyG
- xg9kaV3B3CdXfd2yvkDCUgdi40UbJz2Sdr0Sre
-X-Google-Smtp-Source: AGHT+IGuDxEonNmw1hmJjnYWIOdU7195mw84JLHY1eV7Ju+URBWlkre3kfojBy5Adq7ualji6nnkIvEiTYkguqt8Nkw=
-X-Received: by 2002:a05:6102:4b18:b0:4bb:c0a7:39b8 with SMTP id
- ada2fe7eead31-4bfc022708fmr6116037137.17.1740374067140; Sun, 23 Feb 2025
- 21:14:27 -0800 (PST)
+ AJvYcCWGUbvNPEqSBn0c/yaqYbkLESMZ22O5AXoXaXhdgCQR7zik/8Oa7Rksxu8yFTKVtPYjblQ4C1CJPgle@nongnu.org
+X-Gm-Message-State: AOJu0Yy1RKk7dEcx87DMeno6qsuKxX1O66ot3X2dNUK4OAA1AQS31yLi
+ lOjYmhpP38vx5yOXU1k3Hpu+gYyR7fjbX/mfacmC39rnru8SRuJzVm16t7WZnyrJnBG01MPGYlN
+ +pOVWLX3pdf+gC0htvAxlLVLbORY+uOQc0OAL1Q==
+X-Gm-Gg: ASbGncv/684Fd6MvCoq7pNUC+4n3AZr1M081dZ85mPeaz3I94vKXkjdr74PAaYMog9M
+ y9/P9ou4IUwtpas/jodGRGUhrw+tS95EeJguJdBP0ccN+0nn/gVqhtRBqyvAUwFYE7jLgLNtJ3K
+ QruAhTI0wbyw==
+X-Google-Smtp-Source: AGHT+IHQ1Owu0CoZuyOSpo8LlUmOa37QtQTYznv2Tn2M1UXCJazBOz7X2eH6NYiz9xI0AP2m/P64CQvahhgvKGpeo+4=
+X-Received: by 2002:ac8:59c1:0:b0:472:6aa:d6be with SMTP id
+ d75a77b69052e-472228cfc49mr122287381cf.17.1740381488359; Sun, 23 Feb 2025
+ 23:18:08 -0800 (PST)
 MIME-Version: 1.0
-References: <20250214062443.9936-1-sebastian.huber@embedded-brains.de>
- <20250220-reggae-hardness-907e385516d8@spud>
-In-Reply-To: <20250220-reggae-hardness-907e385516d8@spud>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 24 Feb 2025 15:14:00 +1000
-X-Gm-Features: AWEUYZlAb2LXUi9ehUHDn8C9xhjRaogHo7sWUQILq5TJI_nY77i8tsgSmjC4WHU
-Message-ID: <CAKmqyKNex8vQuT3ArR3gePfGfeLCZbW0DxzD9dz8oNAODE8sbw@mail.gmail.com>
-Subject: Re: [PATCH 0/5] Improve Microchip Polarfire SoC customization
-To: Conor Dooley <conor@kernel.org>
-Cc: Sebastian Huber <sebastian.huber@embedded-brains.de>, qemu-devel@nongnu.org,
- Conor Dooley <conor.dooley@microchip.com>, Bin Meng <bin.meng@windriver.com>, 
- alistair.francis@wdc.com, qemu-riscv@nongnu.org
+References: <20250217081730.9000-1-yongxuan.wang@sifive.com>
+ <Z7Ss5F3t4R2GbIcu@gezellig>
+In-Reply-To: <Z7Ss5F3t4R2GbIcu@gezellig>
+From: Yong-Xuan Wang <yongxuan.wang@sifive.com>
+Date: Mon, 24 Feb 2025 15:17:59 +0800
+X-Gm-Features: AWEUYZndvaF1Z7BcsEcn4kW96qUzqlGu7l-WxEf1ixOnfUao7yVFJqUTucbeNqI
+Message-ID: <CAMWQL2gDNMD4UeUr6ti2AFUKdhLpbKeYXHUbUALufsLOW8huAQ@mail.gmail.com>
+Subject: Re: [PATCH 0/8] riscv: AIA: kernel-irqchip=off support
+To: Kashyap Chamarthy <kchamart@redhat.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, greentime.hu@sifive.com, 
+ vincent.chen@sifive.com, frank.chang@sifive.com, jim.shu@sifive.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::e2b;
- envelope-from=alistair23@gmail.com; helo=mail-vs1-xe2b.google.com
-X-Spam_score_int: -17
-X-Spam_score: -1.8
-X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+Received-SPF: pass client-ip=2607:f8b0:4864:20::833;
+ envelope-from=yongxuan.wang@sifive.com; helo=mail-qt1-x833.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -98,101 +97,51 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Fri, Feb 21, 2025 at 4:31=E2=80=AFAM Conor Dooley <conor@kernel.org> wro=
-te:
->
-> +cc qemu-riscv, Alistar.
->
-> On Fri, Feb 14, 2025 at 07:24:37AM +0100, Sebastian Huber wrote:
-> > Booting the microchip-icicle-kit machine using the latest PolarFire SoC
-> > Hart Software Services (HSS) no longer works since Qemu lacks support
-> > for several registers (clocks, DRAM controller). Also reading from the
-> > SDCard does not work currently.
->
-> On that note, I think the inaccurate docs about polarfire should be
-> removed. There's a wiki page here with dead links, or links to things
-> that do not work anymore:
-> https://wiki.qemu.org/Documentation/Platforms/RISCV#Microchip_PolarFire_S=
-oC_Icicle_Kit
-> I think the whole section should be removed, find it kinda odd that
-> there's a polarfire section but not for any other board. Either way,
-> it's talking about something that just does not work, the current HSS
-> and Yocto don't boot.
+Hi Kashyap,
 
-The wiki is independent of the QEMU code base, so you can modify it. I
-agree that we should remove outdated/wrong information as it's very
-confusing to users.
-
+On Tue, Feb 18, 2025 at 11:53=E2=80=AFPM Kashyap Chamarthy <kchamart@redhat=
+.com> wrote:
 >
-> There's also a docs page here:
-> https://www.qemu.org/docs/master/system/riscv/microchip-icicle-kit.html
-
-That is generated from the QEMU codebase
-`docs/system/riscv/microchip-icicle-kit.rst` and should be updated,
-ideally with this patch set
-
-> that has a copy of the table your patch 4 modifies, that probably should
-> be updated to match your changes.
->
-> In a similar vein to the wiki, it talks about the HSS and booting a
-> yocto wic image. I think those should be deleted since they don't work.
-
-Agreed
-
-Alistair
-
->
-> Alistar/Other RISC-V folks, what do you think? Bin wrote the port but
-> seems to be AFK and I don't have the capacity to fix any of that stuff
-> on top of what I already do in my spare time - do you agree that
-> deleting the now inaccurate docs makes sense?
->
-> > In order to allow tests runs for real-time kernels such as RTEMS and
-> > Zephyr, improve the boot customization. This patch set enables a direct
-> > run of kernel executables, for example:
+> On Mon, Feb 17, 2025 at 04:17:20PM +0800, Yong-Xuan Wang wrote:
+> > This series introduces the user-space AIA MSI emulation when using KVM
+> > acceleration.
 > >
-> > qemu-system-riscv64 -no-reboot -nographic \
-> >   -serial null -serial mon:stdio \
-> >   -smp 2 \
-> >   -bios none \
-> >   -machine microchip-icicle-kit,clint-timebase-frequency=3D10000000 \
-> >   -kernel rtos.elf
+> > After this series, RISC-V QEMU virt machine with KVM acceleration has
+> > 3 parameters to control the type of irqchip and its emulation method:
+> > - Machine prop "aia" controls the type of irqchip
+> >   - none: use PLIC and emulated in user-space
+> >   - aplic: use AIA wired and emulated in user-space
+> >   - aplic-imsic: use AIA MSI, emulation mode is determined by
+> >     "kernel-irqchip" and "riscv-imsic"
+> > - Accel prop "kernel-irqchip", effective with AIA MSI
+> >   - on: in-kernel APLIC and in-kernel IMSIC
+> >   - off: user-space APLIC and user-space IMSIC
+> >   - split: user-space APLIC and in-kernel IMSIC
+> > - Accel prop "kernel-irqchip", effective with in-kernel IMSIC
+> >   - emul: use MRIF as in-kernel IMSIC
+> >   - hw: use hardware guest IMSIC file as in-kernel IMSIC
+> >   - auto: use the hardware guest IMSICs whenever available otherwise
+> >     fallback to MRIF
 >
-> The series breaks my usage:
-> qemu//build/qemu-system-riscv64 -M microchip-icicle-kit \
->         -m 3G -smp 5 \
->         -kernel vmlinux.bin \
->         -dtb riscvpc.dtb \
->         -initrd initramfs.cpio.gz \
->         -display none -serial null \
->         -serial mon:stdio \
->         -D qemu.log -d unimp
-> opensbi-riscv64-generic-fw_dynamic.bin: No such file or directory
-> qemu-system-riscv64: could not load firmware 'opensbi-riscv64-generic-fw_=
-dynamic.bin'
-> make: *** [Makefile:305: qemu-icicle] Error 1
+> Hi; as someone new to the RISC-V ecosystem, most of these acronyms feel
+> impenetrable :-)  I see they're all RISC-V interrupt-handling related
+> terms.  I hope you don't mind my spelling them out here:
 >
-> Figure it is likely to be your patch 4? The file does exist, so probably
-> some sort of path-to-it issues?
+>   - AIA   : Advanced Interrupt Architecture
+>   - MSI   : Message Signaled Interrupts
+>   - PLIC  : Platform-Level Interrupt Controller
+>   - APLIC : Advanced Platform Level Interrupt Controller
+>   - IMSIC : Incoming Message Signaled Interrupt Controller
+>   - MRIF  : Message Routed Interrupt Facility
 >
-> Cheers,
-> Conor.
+> [...]
 >
-> >
-> > Sebastian Huber (5):
-> >   hw/misc: Add MPFS system reset support
-> >   hw/riscv: More flexible FDT placement for MPFS
-> >   hw/riscv: Make FDT optional for MPFS
-> >   hw/riscv: Allow direct start of kernel for MPFS
-> >   hw/riscv: Configurable MPFS CLINT timebase freq
-> >
-> >  hw/misc/mchp_pfsoc_sysreg.c        |   7 ++
-> >  hw/riscv/microchip_pfsoc.c         | 147 +++++++++++++++++++++--------
-> >  include/hw/riscv/microchip_pfsoc.h |   1 +
-> >  3 files changed, 115 insertions(+), 40 deletions(-)
-> >
-> > --
-> > 2.43.0
-> >
-> >
+> --
+> /kashyap
+>
+
+Sure. I would add them into the next version. Thank you!
+
+Regards,
+Yong-Xuan
 
