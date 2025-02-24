@@ -4,85 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 40D1AC021B5
-	for <qemu-riscv@archiver.kernel.org>; Mon, 24 Feb 2025 09:25:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9E6CCC021B3
+	for <qemu-riscv@archiver.kernel.org>; Mon, 24 Feb 2025 09:59:58 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tmUht-0001mM-HA; Mon, 24 Feb 2025 04:24:57 -0500
+	id 1tmVFT-0003gh-3K; Mon, 24 Feb 2025 04:59:39 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tmUhh-0001kL-TQ
- for qemu-riscv@nongnu.org; Mon, 24 Feb 2025 04:24:47 -0500
-Received: from mail-wr1-x42c.google.com ([2a00:1450:4864:20::42c])
+ (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
+ id 1tmVFQ-0003gW-FG
+ for qemu-riscv@nongnu.org; Mon, 24 Feb 2025 04:59:36 -0500
+Received: from mail-yw1-x1135.google.com ([2607:f8b0:4864:20::1135])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tmUhe-0005CH-Rd
- for qemu-riscv@nongnu.org; Mon, 24 Feb 2025 04:24:44 -0500
-Received: by mail-wr1-x42c.google.com with SMTP id
- ffacd0b85a97d-38f29a1a93bso3294521f8f.1
- for <qemu-riscv@nongnu.org>; Mon, 24 Feb 2025 01:24:41 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
+ id 1tmVFO-0003G4-8I
+ for qemu-riscv@nongnu.org; Mon, 24 Feb 2025 04:59:36 -0500
+Received: by mail-yw1-x1135.google.com with SMTP id
+ 00721157ae682-6efe4e3d698so37321027b3.0
+ for <qemu-riscv@nongnu.org>; Mon, 24 Feb 2025 01:59:32 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1740389080; x=1740993880; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=em8Wj6gdexYSbGcXIIzkB3WaMZ1vCoGcyE0NamhWvhQ=;
- b=L+zZoJNvhPAOvd8RKhRlgz9Mw2feS25khk6YtzPgoksRcal+0+qcQ2n71ha+74cvci
- ruuVy+iD3d4NonqE4G+VqgPGRn7TIRK+cwaSK0O0gXdbG7laJ7qt0Pq5sWIIYV7gjTOC
- CEgc8lhGwmbQIgPUp5jIgz+gtBOsft4Si69eaFEXhy+DFzZLoQSoM0zni481NnI/+IEy
- JzzHMno19rEJp9x8nUeskExOMMueFte3lH9ELxfvuKwcD+ntsC8enAsFr8ofQRHhcTM6
- Dcvj0tQ+IHIhRbJqkzRj8OLKN3M+cUZpI4b3Ei1OeXhGI2niBYjGRY+L/banNkW3p7i6
- OQ9g==
+ d=linaro.org; s=google; t=1740391170; x=1740995970; darn=nongnu.org;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=m3KglIjf6ji1bqOAeWAwF/JZZNcLvsq10cRCA75mzVk=;
+ b=uLIooGi7gbStv9NF2wE2Lt1EYZ7RJbiUC+UPdNpsO+lx76u9tBkHtgAUk6qiqGlloN
+ QaPXiby+fzNRx/AepVzEjzC4ayhMMtTK6m94JNX3dAUBhLh9W73e5EiIoTnmO0hJFIiY
+ WEuHezPXjQRAP1bmO9JbGmm760maMQ0G5kXS16RbsE01ukhQboUlfDtXfpfMhXs3pEOL
+ YbxOT0QvgbT9mHSxlcfdcvkGMR3mf+jWbFK+Nk5lM380E5z3DicKT6yow/JmgDEY2guv
+ TiAVngMX7BeEg1Dpx7shmnm4orijTSIhPGoWHxS0c/KJQ94oAeQi8nhKSZ7FY8JccmR7
+ NlgQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1740389080; x=1740993880;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=em8Wj6gdexYSbGcXIIzkB3WaMZ1vCoGcyE0NamhWvhQ=;
- b=tGj9+N0hJB8lM3JUka2lG74VYxpFkSw1RUcCEmT/QtEcvUi6uQCj9eCebnEO5+LBWq
- WvdO+dOwtkKBydobHEB8bSXcoy485kpuFUTzgPZivX7NVQddB9u9/RNVvmKzy83HesqA
- bI12TZGly+gAroWylSB8Km0QKf/kYUPa1/KK/FMXNbg7H4zODCxGA5ILVQfcAytAAwDq
- lDl+261NTHN6XnEGWXm1Br2YxwRt2l4xoW3jCfMxehBPHLFP4lwkt0yulUcZI6HqNPJT
- J8n6oEGx5aL2k0/ncOn/vyjzab2ZyfCXvp/dEdfBxPqqAv9GON2Kk7VeyE04uGO+as0e
- 1M6g==
+ d=1e100.net; s=20230601; t=1740391170; x=1740995970;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=m3KglIjf6ji1bqOAeWAwF/JZZNcLvsq10cRCA75mzVk=;
+ b=Daz1gnS+6iVhHp/IB/mvYdk6CUtBelwBt+xneNbXtrEiAqdGldhdwjGTlsiIkwredK
+ EGdIEGuMH+7Z5KzRdsy4YLw3Najv50YiDTJ8T6/GJNcvEH8zGpjTCwjnHMXfbGfugP9n
+ L8U9Els7tC7sry+wjFdQRlAULCnkI5Uh5w/+VttA9NVsrWQOZY7L8Ry3GXcj2XYDUx4z
+ +JA3Wjj0HsLVqxbK/Y4kq9FHASWe1LR4asSlDBCWua7hqT2YZCk654LHjewUKVo+KQwi
+ JfYXwWwFUNZv2VIwS72yIe9+wr6BjMkfEqTnQBJiuccGoJOzBkyJv1JHpgr8xe5+ST3T
+ geog==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVWJWs4mgUAO+kEA09ZxPNAwtSW7EyRlrNayU8/kY1k36CemssrB0H0EUOeGvB4rUSynsaFwqjvPcim@nongnu.org
-X-Gm-Message-State: AOJu0YzFa1div/SUokQ70xQk+jZgyNujRrVwcS8QokewQ5y1tIsb3PwI
- DjJibOBh1X3gDE6TwSClfWNIJxcPDpC/zOzIc9qHMNEZwdFuT3+Yb3gHpIwzK4fTZFlqjREQ5ah
- o0HQ=
-X-Gm-Gg: ASbGncsG+ZAl2oTgqLSN4kp2WlSuin1JpXXNmEQEQpx4AZO1mbPjhjgenOKtnrWaODu
- enpPNFfP7x7LdVfCNtqM9HDREJQkOs6rbItkJM/0gQNAErncX2Y8GoLLCZ5y+i1hN0jIpkrvsxc
- GJPZEHhhknerW7lVGSn2X/IYd0yfgx5OVxQRj1ZAGgKX7g3ydYsei3ysioztLgYClvlzP0JW44G
- xOCnKQGUZFYta/nRDaXy4GaZij3ROjAPp+hyBcDF/iuXer6JObMXIlJhv2pDj75t5aK3rN58FK4
- rgUHqnlkXMTICyYZYfWOVmCPcu8pYj+RtyXtKSP21k7Pp93pmvywTQkD7YYerRN0Sf1Ung==
-X-Google-Smtp-Source: AGHT+IHFB77kvWkt91N63XIcorxkiSQplgsPWzmJn11K7JazVdOQxcaPGMWjnYfE469N9zWEUcrY8A==
-X-Received: by 2002:a05:6000:1788:b0:38d:d9bd:1897 with SMTP id
- ffacd0b85a97d-38f6e95ef5bmr9636542f8f.22.1740389079743; 
- Mon, 24 Feb 2025 01:24:39 -0800 (PST)
-Received: from [192.168.69.196] (88-187-86-199.subs.proxad.net.
- [88.187.86.199]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-38f258dab74sm31459332f8f.32.2025.02.24.01.24.39
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 24 Feb 2025 01:24:39 -0800 (PST)
-Message-ID: <af650a49-8917-4d19-9cd4-e29a1538b86b@linaro.org>
-Date: Mon, 24 Feb 2025 10:24:38 +0100
+ AJvYcCXlT5hUjw5TMc9gQ5QJoSBJHX5SvAMdgKEWhfQVyi810a37vI8Mz85Wc7IC3HjYTmPpckBVIkGKBi1B@nongnu.org
+X-Gm-Message-State: AOJu0YwHiH4yYcVE5BRgVgIVnTEthazF1+/rMpTgq0ubOPaqtCwIUlnq
+ Dav08ukXcG75zRmEzd2HFr2ft63tX0OTbwhWzl0mrMUuv4plmOnqyD4ANawWuvc0QghelYPngs9
+ LK27FySvOWMdlePZnHij87nzn7mepGaTBwmilBw==
+X-Gm-Gg: ASbGncs7fhckCD9UhaKyDzUHUTY6FODZLtnDoLhyhlQzY77XO/RL0XJaT6XnsWSlEup
+ Y/JMMwnMRGGAKFNT5btbCdji5Mbx7IK0IdB6qQmYq0BxptwifeDV3VLNN31xKvEtdIzlGK3sg1n
+ UqT3GcJjaW
+X-Google-Smtp-Source: AGHT+IGEMB6D+o0cve05P8d+NfPG7k59awKr5Pd3Gx5SsXMgueMOD3P1ut3nv40cQENY9PMNrX4qoixQeYUlVAdUkDo=
+X-Received: by 2002:a05:690c:8f:b0:6fb:4648:3425 with SMTP id
+ 00721157ae682-6fbcc2346ecmr105900067b3.16.1740391170219; Mon, 24 Feb 2025
+ 01:59:30 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PULL 33/42] tcg/riscv: Require TCG_TARGET_REG_BITS == 64
-To: Richard Henderson <richard.henderson@linaro.org>, qemu-devel@nongnu.org
-Cc: Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- qemu-riscv <qemu-riscv@nongnu.org>
-References: <20230505212447.374546-1-richard.henderson@linaro.org>
- <20230505212447.374546-34-richard.henderson@linaro.org>
- <95e6af77-05bf-46f5-9e85-ce913b08706e@linaro.org>
- <2a2026eb-b92e-450f-9bcf-211620bdf450@linaro.org>
-Content-Language: en-US
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-In-Reply-To: <2a2026eb-b92e-450f-9bcf-211620bdf450@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::42c;
- envelope-from=philmd@linaro.org; helo=mail-wr1-x42c.google.com
+References: <20250220161313.127376-1-dbarboza@ventanamicro.com>
+ <20250220161313.127376-2-dbarboza@ventanamicro.com>
+In-Reply-To: <20250220161313.127376-2-dbarboza@ventanamicro.com>
+From: Peter Maydell <peter.maydell@linaro.org>
+Date: Mon, 24 Feb 2025 09:59:19 +0000
+X-Gm-Features: AWEUYZlmWOg2HUqpWcSmaYSeZOOkYTsiwHUa8UCdt5WGgYLiHlnNtscgSp6yLbA
+Message-ID: <CAFEAcA8u8C2HTRjOBReSQ7oN7L248034VrfTHYgHCxBPy0gwDg@mail.gmail.com>
+Subject: Re: [PATCH 1/3] target/riscv/cpu: ignore TCG init for KVM CPUs in
+ reset_hold
+To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
+ bmeng@tinylab.org, liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, 
+ palmer@rivosinc.com
+Content-Type: text/plain; charset="UTF-8"
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1135;
+ envelope-from=peter.maydell@linaro.org; helo=mail-yw1-x1135.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -105,83 +97,73 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 22/2/25 19:17, Richard Henderson wrote:
-> On 2/20/25 15:27, Philippe Mathieu-Daudé wrote:
->> On 5/5/23 23:24, Richard Henderson wrote:
->>> The port currently does not support "oversize" guests, which
->>> means riscv32 can only target 32-bit guests.  We will soon be
->>> building TCG once for all guests.  This implies that we can
->>> only support riscv64.
->>>
->>> Since all Linux distributions target riscv64 not riscv32,
->>> this is not much of a restriction and simplifies the code.
->>>
->>> The brcond2 and setcond2 opcodes are exclusive to 32-bit hosts,
->>> so we can and should remove the stubs.
->>>
->>> Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
->>> Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
->>> Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
->>> ---
->>>   tcg/riscv/tcg-target-con-set.h |   8 --
->>>   tcg/riscv/tcg-target.h         |  22 ++--
->>>   tcg/riscv/tcg-target.c.inc     | 232 +++++++++------------------------
->>>   3 files changed, 72 insertions(+), 190 deletions(-)
->>
->>
->>> diff --git a/tcg/riscv/tcg-target.h b/tcg/riscv/tcg-target.h
->>> index 0deb33701f..dddf2486c1 100644
->>> --- a/tcg/riscv/tcg-target.h
->>> +++ b/tcg/riscv/tcg-target.h
->>> @@ -25,11 +25,14 @@
->>>   #ifndef RISCV_TCG_TARGET_H
->>>   #define RISCV_TCG_TARGET_H
->>> -#if __riscv_xlen == 32
->>> -# define TCG_TARGET_REG_BITS 32
->>> -#elif __riscv_xlen == 64
->>> -# define TCG_TARGET_REG_BITS 64
->>> +/*
->>> + * We don't support oversize guests.
->>> + * Since we will only build tcg once, this in turn requires a 64-bit 
->>> host.
->>> + */
->>> +#if __riscv_xlen != 64
->>> +#error "unsupported code generation mode"
->>>   #endif
->>> +#define TCG_TARGET_REG_BITS 64
->>>   #define TCG_TARGET_INSN_UNIT_SIZE 4
->>>   #define TCG_TARGET_TLB_DISPLACEMENT_BITS 20
->>> @@ -83,13 +86,8 @@ typedef enum {
->>>   #define TCG_TARGET_STACK_ALIGN          16
->>>   #define TCG_TARGET_CALL_STACK_OFFSET    0
->>>   #define TCG_TARGET_CALL_ARG_I32         TCG_CALL_ARG_NORMAL
->>> -#if TCG_TARGET_REG_BITS == 32
->>> -#define TCG_TARGET_CALL_ARG_I64         TCG_CALL_ARG_EVEN
->>> -#define TCG_TARGET_CALL_ARG_I128        TCG_CALL_ARG_EVEN
->>> -#else
->>>   #define TCG_TARGET_CALL_ARG_I64         TCG_CALL_ARG_NORMAL
->>>   #define TCG_TARGET_CALL_ARG_I128        TCG_CALL_ARG_NORMAL
->>> -#endif
->>>   #define TCG_TARGET_CALL_RET_I128        TCG_CALL_RET_NORMAL
->>>   /* optional instructions */
->>> @@ -106,8 +104,8 @@ typedef enum {
->>>   #define TCG_TARGET_HAS_sub2_i32         1
->>>   #define TCG_TARGET_HAS_mulu2_i32        0
->>>   #define TCG_TARGET_HAS_muls2_i32        0
->>> -#define TCG_TARGET_HAS_muluh_i32        (TCG_TARGET_REG_BITS == 32)
->>> -#define TCG_TARGET_HAS_mulsh_i32        (TCG_TARGET_REG_BITS == 32)
->>> +#define TCG_TARGET_HAS_muluh_i32        0
->>> +#define TCG_TARGET_HAS_mulsh_i32        0
->>
->> Should have we squashed the following with these changes?
-> 
-> Yes, mulsh_i32 is not reachable anymore.  At this point I'll just leave 
-> this cleanup to conversion of mulsh to TCGOutOpBinary.
+On Thu, 20 Feb 2025 at 16:14, Daniel Henrique Barboza
+<dbarboza@ventanamicro.com> wrote:
+>
+> riscv_cpu_reset_hold() does a lot of TCG-related initializations that
+> aren't relevant for KVM, but nevertheless are impacting the reset state
+> of KVM vcpus.
+>
+> When running a KVM guest, kvm_riscv_reset_vcpu() is called at the end of
+> reset_hold(). At that point env->mstatus is initialized to a non-zero
+> value, and it will be use to write 'sstatus' in the vcpu
+> (kvm_arch_put_registers() then kvm_riscv_put_regs_csr()).
+>
+> Do an early exit in riscv_cpu_reset_hold() if we're running KVM. All the
+> KVM reset procedure will be centered in kvm_riscv_reset_vcpu().
+>
+> While we're at it, remove the kvm_enabled() check in
+> kvm_riscv_reset_vcpu() since it's already being gated in
+> riscv_cpu_reset_hold().
+>
+> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+> ---
+>  target/riscv/cpu.c         | 9 +++++----
+>  target/riscv/kvm/kvm-cpu.c | 3 ---
+>  2 files changed, 5 insertions(+), 7 deletions(-)
+>
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index 522d6584e4..8e6e629ec4 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -1050,6 +1050,11 @@ static void riscv_cpu_reset_hold(Object *obj, ResetType type)
+>          mcc->parent_phases.hold(obj, type);
+>      }
+>  #ifndef CONFIG_USER_ONLY
+> +    if (kvm_enabled()) {
+> +        kvm_riscv_reset_vcpu(cpu);
+> +        return;
+> +    }
+> +
+>      env->misa_mxl = mcc->misa_mxl_max;
+>      env->priv = PRV_M;
+>      env->mstatus &= ~(MSTATUS_MIE | MSTATUS_MPRV);
+> @@ -1146,10 +1151,6 @@ static void riscv_cpu_reset_hold(Object *obj, ResetType type)
+>          env->rnmip = 0;
+>          env->mnstatus = set_field(env->mnstatus, MNSTATUS_NMIE, false);
+>      }
+> -
+> -    if (kvm_enabled()) {
+> -        kvm_riscv_reset_vcpu(cpu);
+> -    }
+>  #endif
+>  }
 
-Sure, I was not planing to ask for another patch, but trying to see if
-I was correctly understanding your conversion.
+This looks super odd, from an "I don't know anything about
+riscv specifics" position. Generally the idea is:
+ * reset in QEMU should reset the CPU state
+ * what a reset CPU looks like doesn't differ between
+   accelerators
+ * when we start the KVM CPU, we copy the state from QEMU
+   to the kernel, and then the kernel's idea of the reset state
+   matches
 
-Thanks,
+This patch looks like it's entirely skipping basically
+all of the QEMU CPU state reset code specifically for KVM.
+So now you'll have two different pieces of code controlling
+reset for different accelerators, and the resulting CPU
+state won't be consistent between them...
 
-Phil.
+thanks
+-- PMM
 
