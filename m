@@ -4,92 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0E4EAC021B2
-	for <qemu-riscv@archiver.kernel.org>; Sat, 22 Feb 2025 18:17:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CE471C021B2
+	for <qemu-riscv@archiver.kernel.org>; Mon, 24 Feb 2025 01:32:53 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tlu4L-0007aD-IX; Sat, 22 Feb 2025 13:17:41 -0500
+	id 1tmNKw-0001Dv-QK; Sun, 23 Feb 2025 20:32:46 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1tlu4J-0007ZS-F2
- for qemu-riscv@nongnu.org; Sat, 22 Feb 2025 13:17:39 -0500
-Received: from mail-pl1-x62a.google.com ([2607:f8b0:4864:20::62a])
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1tmNKk-0001DB-5t; Sun, 23 Feb 2025 20:32:34 -0500
+Received: from mail-vs1-xe34.google.com ([2607:f8b0:4864:20::e34])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1tlu4H-0001kM-Fn
- for qemu-riscv@nongnu.org; Sat, 22 Feb 2025 13:17:39 -0500
-Received: by mail-pl1-x62a.google.com with SMTP id
- d9443c01a7336-220e6028214so68966655ad.0
- for <qemu-riscv@nongnu.org>; Sat, 22 Feb 2025 10:17:36 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1tmNKg-0001Gq-F4; Sun, 23 Feb 2025 20:32:32 -0500
+Received: by mail-vs1-xe34.google.com with SMTP id
+ ada2fe7eead31-4be5033a2cbso1675494137.1; 
+ Sun, 23 Feb 2025 17:32:19 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1740248255; x=1740853055; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=FRkI/Fb9WSLKtDmJG8RONehw53nMPKPblJ9FWNeo4xA=;
- b=DI2j+DhFi59psVBiqjhLAzhIRd36p5cPm2VAIm4Skxbv081xliGf7en7IcR4P9Wo28
- 3oC8cFzBiQtleOxUt8c0YViYSUGUq+25qHEMJkFSFCqJtkNXRgFwI5iOC/oAbCuRCtJz
- BrZn0w+q6JJ4kCETtDBUi/5IFNoC6kD9QxtAK77hon/4BjZYrAyrPM+gZ2h6PAjvTFOj
- KgR3XcKtxceVOehnoRCKEVIhOIRzlkmJyHmWV+l50FLHUjhXtAab+i+8BmttDxFzZCCn
- a2AXbVCgSRVGmBIxVzZTx2MGgcrdHPHq4RnXgMcBNDxSoAF8XYYp9l/1ETBJRWW8W6Lv
- Lspg==
+ d=gmail.com; s=20230601; t=1740360738; x=1740965538; darn=nongnu.org;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=WkXNZnP4aqKo+z7UK+t378iD+iFjoz2b7Q6gX2Rkfkg=;
+ b=aEU9pTfM66cwu/wNmMXiTpHymlqlMnM9Yucasi7OOinRaawUVGXuReXrf921JYq3ya
+ Vco1RqT1oq6HlBQsnjgXjPxHgWKaINl32gH+DUI9XisS/O+hZIAnfJJpskEWfWFApeDt
+ PXGLghIERn5ncE1X8N89XwdW/fPIVfyIKmuHyVZa6t+qj8WOJHKCrTV0oyRlzPbUGfLS
+ UHEOWBonXSWM6DCwjlW/i5UGzxm+CjROqoyeJenxK+thjM4cIN/dkmbV/yENVlOYAOoS
+ VcOB606UgQmPn/cbWN8JSlpV7sF4Wv0PHBoeUXYvNns+VpASmfxqlr3Ib65T0FeBi+tV
+ m86g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1740248255; x=1740853055;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=FRkI/Fb9WSLKtDmJG8RONehw53nMPKPblJ9FWNeo4xA=;
- b=Lq3dVv/P+C/MESSifJhb6+iqCtfkA1XQpmQwWZrlhWBfuNlOA0piH2bCwQWyrJM3fo
- wMF++lUNAztpn4Rcenhepw6RToA/8o+AEWBe2Sxq1Icy4UA8leXZCcPwAQVSYfBJe4Gk
- dOuRxAAh53vLTCY4S++622f9oKzk+Zbjc30ET0WqWoMOlT7z866r5I1tgAcJlogFWqTF
- /3bEwuklu3YTvlDOPXym5Abz/NWoSnaYMxKYvu1VR5Oi1xS0Mbk4v2OTtsm9Qvd2DqZG
- FtcKadqbsxlHioKmmV1lM70KvRdaSajezBennrIGYqlb/NLdMNzQtlSLlQUeO+l6H/uG
- 2Gbw==
+ d=1e100.net; s=20230601; t=1740360739; x=1740965539;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=WkXNZnP4aqKo+z7UK+t378iD+iFjoz2b7Q6gX2Rkfkg=;
+ b=P90wBiG3J0tKK2qiIcc+qPbtg1lfI+hruyJBCV3xfPPArwCuDV4NCcmL+bVkrCESWY
+ HZ8ORYB6l/XBI5ItTW7ysJFALjtcLJ1r2geD5ljGFRes6YcktDySLwb9deUQroJWG4W8
+ ZPi6ltZZX8FpNfmsGH+HYnh2+mBqj4zcKcaVQ5VCS5DcdxHR1oVe4K5a0CTPkcsewuGx
+ gxffc4cdkmkYEOcKp9/oQUj79Y8C4uJO0VHn8CBaqzS3tDKxJaJ0kg1nrFt6MAYv14+g
+ PixZj+xqNNg6xmcqQrp742kfkQOCueqnwlf/3WaJuMDVvQXS2PustMz9MrYdk3fdGWAq
+ K/Dg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXtJXNIwz1f+VThMlqPs8hElCt0rNrFXkIZpTS+7sKFuwVFwcTvCRBe01ql9LmrQPYYq9AWoRZirTSA@nongnu.org
-X-Gm-Message-State: AOJu0Yw5goYL8QklXhJCb0JQd7kBchDbfmGa5VQw9sJPZEnrUgccwAjM
- 4C4Lbma/H5vRyYmsWe1hIZvp691Bz5fQrzNh20ObkjaJcC8b9NC/F6CE/9WbMY0=
-X-Gm-Gg: ASbGncvXLIvBlsTcQLcu14qBTP02ZVPpG4pIOAgdCZY4TgRLVpxSi9C5/wSrz0MCxpD
- d7xVE8vWx6BqjESzmLDGqev6jikglEDUYGIs2nhTSZsROdIIUzs8LTISr+/wTzuU5XgJw7GzI4S
- 1/yNtvDMG5tCS4Dee2PQ3WTdq8FSs6DZ12TcIpA5TvRlJ3PXnN9F3X5hmMnt84RPqfyR6EcjP8r
- Wi2njC8ILMOLgxAmEJDXahy5LRu4bR9FU9l2NQ820cPmRQI6g3c7totMYQi9S1gY3VMCgtWr4+e
- VmdB6TdJjLhnNAfhD5fSpeplb6vO3kvVGGR0kK0d/RMCY3VnB4i/ie7np+nDNCfRTsmuHMvY6w2
- srQC0OO4=
-X-Google-Smtp-Source: AGHT+IEkUsH/X84S/nU1JKWqAd5GhWsDdJeTsRdyiiaJTaTOBdhdrVzL5mhhVK0g83PMsAi70FiZDA==
-X-Received: by 2002:a05:6a00:4fc6:b0:730:7499:4043 with SMTP id
- d2e1a72fcca58-73426aedd26mr11293067b3a.0.1740248254894; 
- Sat, 22 Feb 2025 10:17:34 -0800 (PST)
-Received: from [10.254.143.227] (syn-156-019-246-023.biz.spectrum.com.
- [156.19.246.23]) by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-73271666ca7sm12782024b3a.155.2025.02.22.10.17.34
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sat, 22 Feb 2025 10:17:34 -0800 (PST)
-Message-ID: <2a2026eb-b92e-450f-9bcf-211620bdf450@linaro.org>
-Date: Sat, 22 Feb 2025 10:17:32 -0800
+ AJvYcCWV/QdE3kVA7/XcdsqgCn6L/VpkKnh0nsN/bk72u0fscB9gzdbZnhSZzzb/MKCTebhMep8TFKiHcQdt@nongnu.org
+X-Gm-Message-State: AOJu0YyRnvju/Ceu1FcsILsFvL6X2tjpllLbATaP0eGl0EvQD7yCek/H
+ 2YRw31TvdrZIU+I/WBhREx7WahOS2x4kf7XJhkybcFlM8O3TQueJeACIXkgOa5ZoSuR9ItmnuC4
+ jG6B8qxfK3i/HZWy7DFdXFlIFflI=
+X-Gm-Gg: ASbGncttba0nixM/kAxmbDSwqcZVRsJStXIQTNMNVnTxYDPWPlS7GloLHzgpO5huLO/
+ jiesdSGwBNvqTGWEWufQUrEelvtRmDkrxU03sstbRWQSJizeo1hwqHMaRd2Z1Kz5Sle3AmdADCQ
+ GSUZY5q5hqUtJYgvaIsndNyDTa0o/RlTuIGdmm
+X-Google-Smtp-Source: AGHT+IH9pOOrMMo/+QwJ2prDnKVaBHSA/ctZsaIlk/WyhMfwn3/Z87zoAde/E/1PfqX/ehS5DGo5d/zr/qiLjK0yzRA=
+X-Received: by 2002:a05:6102:c04:b0:4bd:3519:44be with SMTP id
+ ada2fe7eead31-4bfc0105e4dmr5679396137.15.1740360738656; Sun, 23 Feb 2025
+ 17:32:18 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PULL 33/42] tcg/riscv: Require TCG_TARGET_REG_BITS == 64
-To: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- qemu-devel@nongnu.org
-Cc: Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- qemu-riscv <qemu-riscv@nongnu.org>
-References: <20230505212447.374546-1-richard.henderson@linaro.org>
- <20230505212447.374546-34-richard.henderson@linaro.org>
- <95e6af77-05bf-46f5-9e85-ce913b08706e@linaro.org>
-Content-Language: en-US
-From: Richard Henderson <richard.henderson@linaro.org>
-In-Reply-To: <95e6af77-05bf-46f5-9e85-ce913b08706e@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::62a;
- envelope-from=richard.henderson@linaro.org; helo=mail-pl1-x62a.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+References: <20250221141834.626722-1-dbarboza@ventanamicro.com>
+In-Reply-To: <20250221141834.626722-1-dbarboza@ventanamicro.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Mon, 24 Feb 2025 11:31:52 +1000
+X-Gm-Features: AWEUYZmQSWtVjIyNwkL83zu88wnSEZfVJ5o80JZhEfLg4G4rw_B641y_JgtaWuc
+Message-ID: <CAKmqyKPaCJq87mAdOscatcWq=8zKAdy35TY8+WLDMoV=1_=eaQ@mail.gmail.com>
+Subject: Re: [PATCH v2 0/3] target/riscv/kvm: update to Linux 6.14-rc3
+To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
+ bmeng@tinylab.org, liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, 
+ palmer@rivosinc.com, ajones@ventanamicro.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2607:f8b0:4864:20::e34;
+ envelope-from=alistair23@gmail.com; helo=mail-vs1-xe34.google.com
+X-Spam_score_int: -17
+X-Spam_score: -1.8
+X-Spam_bar: -
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -107,128 +96,60 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 2/20/25 15:27, Philippe Mathieu-Daudé wrote:
-> On 5/5/23 23:24, Richard Henderson wrote:
->> The port currently does not support "oversize" guests, which
->> means riscv32 can only target 32-bit guests.  We will soon be
->> building TCG once for all guests.  This implies that we can
->> only support riscv64.
->>
->> Since all Linux distributions target riscv64 not riscv32,
->> this is not much of a restriction and simplifies the code.
->>
->> The brcond2 and setcond2 opcodes are exclusive to 32-bit hosts,
->> so we can and should remove the stubs.
->>
->> Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
->> Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
->> Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
->> ---
->>   tcg/riscv/tcg-target-con-set.h |   8 --
->>   tcg/riscv/tcg-target.h         |  22 ++--
->>   tcg/riscv/tcg-target.c.inc     | 232 +++++++++------------------------
->>   3 files changed, 72 insertions(+), 190 deletions(-)
-> 
-> 
->> diff --git a/tcg/riscv/tcg-target.h b/tcg/riscv/tcg-target.h
->> index 0deb33701f..dddf2486c1 100644
->> --- a/tcg/riscv/tcg-target.h
->> +++ b/tcg/riscv/tcg-target.h
->> @@ -25,11 +25,14 @@
->>   #ifndef RISCV_TCG_TARGET_H
->>   #define RISCV_TCG_TARGET_H
->> -#if __riscv_xlen == 32
->> -# define TCG_TARGET_REG_BITS 32
->> -#elif __riscv_xlen == 64
->> -# define TCG_TARGET_REG_BITS 64
->> +/*
->> + * We don't support oversize guests.
->> + * Since we will only build tcg once, this in turn requires a 64-bit host.
->> + */
->> +#if __riscv_xlen != 64
->> +#error "unsupported code generation mode"
->>   #endif
->> +#define TCG_TARGET_REG_BITS 64
->>   #define TCG_TARGET_INSN_UNIT_SIZE 4
->>   #define TCG_TARGET_TLB_DISPLACEMENT_BITS 20
->> @@ -83,13 +86,8 @@ typedef enum {
->>   #define TCG_TARGET_STACK_ALIGN          16
->>   #define TCG_TARGET_CALL_STACK_OFFSET    0
->>   #define TCG_TARGET_CALL_ARG_I32         TCG_CALL_ARG_NORMAL
->> -#if TCG_TARGET_REG_BITS == 32
->> -#define TCG_TARGET_CALL_ARG_I64         TCG_CALL_ARG_EVEN
->> -#define TCG_TARGET_CALL_ARG_I128        TCG_CALL_ARG_EVEN
->> -#else
->>   #define TCG_TARGET_CALL_ARG_I64         TCG_CALL_ARG_NORMAL
->>   #define TCG_TARGET_CALL_ARG_I128        TCG_CALL_ARG_NORMAL
->> -#endif
->>   #define TCG_TARGET_CALL_RET_I128        TCG_CALL_RET_NORMAL
->>   /* optional instructions */
->> @@ -106,8 +104,8 @@ typedef enum {
->>   #define TCG_TARGET_HAS_sub2_i32         1
->>   #define TCG_TARGET_HAS_mulu2_i32        0
->>   #define TCG_TARGET_HAS_muls2_i32        0
->> -#define TCG_TARGET_HAS_muluh_i32        (TCG_TARGET_REG_BITS == 32)
->> -#define TCG_TARGET_HAS_mulsh_i32        (TCG_TARGET_REG_BITS == 32)
->> +#define TCG_TARGET_HAS_muluh_i32        0
->> +#define TCG_TARGET_HAS_mulsh_i32        0
-> 
-> Should have we squashed the following with these changes?
+On Sat, Feb 22, 2025 at 12:19=E2=80=AFAM Daniel Henrique Barboza
+<dbarboza@ventanamicro.com> wrote:
+>
+> Hi,
+>
+> In this version all changes were made in patch 2. In the first posting I
+> forgot to update how riscv,isa was going to be calculated when
+> ext_ziccrse is set by KVM.
+>
+> A change was made in isa_edata_arr[] to use ext_ziccrse, instead of
+> 'has_priv_1_11', and TCG code were changed to set ext_ziccrse
+> accordingly.
+>
+> No other changes made. Patches based on alistair/riscv-to-apply.next.
+>
+> Changes from v1:
+> - patch 2:
+>   - use 'ext_ziccrse' instead of 'has_priv_1_11' in isa_edata_arr[]
+> - v1 link: https://lore.kernel.org/qemu-riscv/20250218163854.425607-1-dba=
+rboza@ventanamicro.com/
+>
+> Daniel Henrique Barboza (3):
+>   linux-headers: Update to Linux v6.14-rc3
+>   target/riscv/cpu.c: create flag for ziccrse
+>   target/riscv/kvm: add extensions after 6.14-rc3 update
 
-Yes, mulsh_i32 is not reachable anymore.  At this point I'll just leave this cleanup to 
-conversion of mulsh to TCGOutOpBinary.
+Thanks!
 
+Applied to riscv-to-apply.next
 
-r~
+Alistair
 
-> 
-> -- >8 --
-> diff --git a/tcg/riscv/tcg-target.c.inc b/tcg/riscv/tcg-target.c.inc
-> index f7e1ca5a56f..e395ffcdaf5 100644
-> --- a/tcg/riscv/tcg-target.c.inc
-> +++ b/tcg/riscv/tcg-target.c.inc
-> @@ -2323,10 +2323,8 @@ static void tcg_out_op(TCGContext *s, TCGOpcode opc, TCGType type,
->           break;
-> 
-> -    case INDEX_op_mulsh_i32:
->       case INDEX_op_mulsh_i64:
->           tcg_out_opc_reg(s, OPC_MULH, a0, a1, a2);
->           break;
-> 
-> -    case INDEX_op_muluh_i32:
->       case INDEX_op_muluh_i64:
->           tcg_out_opc_reg(s, OPC_MULHU, a0, a1, a2);
-> @@ -2399,4 +2397,6 @@ static void tcg_out_op(TCGContext *s, TCGOpcode opc, TCGType type,
->       case INDEX_op_extu_i32_i64:
->       case INDEX_op_extrl_i64_i32:
-> +    case INDEX_op_mulsh_i32:
-> +    case INDEX_op_muluh_i32:
->       default:
->           g_assert_not_reached();
-> @@ -2707,6 +2707,4 @@ tcg_target_op_def(TCGOpcode op, TCGType type, unsigned flags)
-> 
->       case INDEX_op_mul_i32:
-> -    case INDEX_op_mulsh_i32:
-> -    case INDEX_op_muluh_i32:
->       case INDEX_op_div_i32:
->       case INDEX_op_divu_i32:
-> ---
-> 
->>   #define TCG_TARGET_HAS_ext8s_i32        1
->>   #define TCG_TARGET_HAS_ext16s_i32       1
->>   #define TCG_TARGET_HAS_ext8u_i32        1
->> @@ -128,7 +126,6 @@ typedef enum {
->>   #define TCG_TARGET_HAS_setcond2         1
->>   #define TCG_TARGET_HAS_qemu_st8_i32     0
->> -#if TCG_TARGET_REG_BITS == 64
->>   #define TCG_TARGET_HAS_movcond_i64      0
->>   #define TCG_TARGET_HAS_div_i64          1
->>   #define TCG_TARGET_HAS_rem_i64          1
->> @@ -165,7 +162,6 @@ typedef enum {
->>   #define TCG_TARGET_HAS_muls2_i64        0
->>   #define TCG_TARGET_HAS_muluh_i64        1
->>   #define TCG_TARGET_HAS_mulsh_i64        1
->> -#endif
->>   #define TCG_TARGET_DEFAULT_MO (0)
-
+>
+>  include/standard-headers/linux/ethtool.h      |  4 +
+>  include/standard-headers/linux/fuse.h         | 76 ++++++++++++++++++-
+>  .../linux/input-event-codes.h                 |  1 +
+>  include/standard-headers/linux/pci_regs.h     | 16 ++--
+>  include/standard-headers/linux/virtio_pci.h   | 14 ++++
+>  linux-headers/asm-arm64/kvm.h                 |  3 -
+>  linux-headers/asm-loongarch/kvm_para.h        |  1 +
+>  linux-headers/asm-riscv/kvm.h                 |  7 +-
+>  linux-headers/asm-x86/kvm.h                   |  1 +
+>  linux-headers/linux/iommufd.h                 | 35 ++++++---
+>  linux-headers/linux/kvm.h                     |  8 +-
+>  linux-headers/linux/stddef.h                  | 13 +++-
+>  linux-headers/linux/vduse.h                   |  2 +-
+>  target/riscv/cpu.c                            |  3 +-
+>  target/riscv/cpu_cfg.h                        |  3 +
+>  target/riscv/kvm/kvm-cpu.c                    |  3 +
+>  target/riscv/tcg/tcg-cpu.c                    |  2 +
+>  17 files changed, 156 insertions(+), 36 deletions(-)
+>
+> --
+> 2.48.1
+>
+>
 
