@@ -4,71 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3FBD9C021B3
-	for <qemu-riscv@archiver.kernel.org>; Mon, 24 Feb 2025 08:19:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8BEA3C021B3
+	for <qemu-riscv@archiver.kernel.org>; Mon, 24 Feb 2025 08:25:39 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tmTfl-0006CZ-K8; Mon, 24 Feb 2025 03:18:41 -0500
+	id 1tmTli-0000EI-Bs; Mon, 24 Feb 2025 03:24:50 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <vladimir.isaev@syntacore.com>)
- id 1tmTfk-0006C4-0Z; Mon, 24 Feb 2025 03:18:40 -0500
-Received: from m.syntacore.com ([178.249.69.228])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <vladimir.isaev@syntacore.com>)
- id 1tmTfh-0000Yy-WF; Mon, 24 Feb 2025 03:18:39 -0500
-Received: from pmg.syntacore.com (localhost.localdomain [127.0.0.1])
- by m.syntacore.com (Proxmox) with ESMTP id AADB2B41C5E;
- Mon, 24 Feb 2025 11:18:27 +0300 (MSK)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=syntacore.com;
- h=cc:cc:content-transfer-encoding:content-type:content-type
- :date:from:from:in-reply-to:message-id:mime-version:references
- :reply-to:subject:subject:to:to; s=m; bh=z46XlG8zvGLNYH+5OsxYqAf
- JIYFAf67OMcTZsDIyTj0=; b=aJ5aT3hIlKHVpzN3ISz89zjQ9jy6BcyhCmDDizE
- 6cPojpN4boXUDEEPpPwwUDOADpK/9rkcSnS7zc647/CHFBJoW39w74aW/qQDxvG+
- HVk4sAkQMG00VqFhOyZnJK+jrS36g7GNyD49fLjL8EeDllTwI/8N38RxgCsSGtc9
- 7PHSyFSS2yIjqhrkLl/LCRHIXjUmX2lMjjbNpvN1Sx4ZnXOX6SyIg9fcjtmzuPjD
- JH8NK0RhZ1usRJL2F+dyZVmCIdRvS3WrTEuNbxnQMNkIUtgtyyTGOwHoy+qJub/8
- EM5kPGEmlbsdzAV0cHLCZm6n27Xvs3Hv6tmD0mTvzFasMgw==
-Received: from S-SC-EXCH-01.corp.syntacore.com (exchange.syntacore.com
- [10.76.202.20])
- by m.syntacore.com (Proxmox) with ESMTPS id 9596BB41BCF;
- Mon, 24 Feb 2025 11:18:27 +0300 (MSK)
-Received: from [10.199.68.145] (10.199.68.145) by
- S-SC-EXCH-01.corp.syntacore.com (10.76.202.20) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1544.11; Mon, 24 Feb 2025 11:17:36 +0300
-Message-ID: <5831a3f2-6cf7-43f9-a2c7-f08f04e01f25@syntacore.com>
-Date: Mon, 24 Feb 2025 11:16:45 +0300
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] target/riscv: fix C extension disabling on misa write
-To: Alistair Francis <alistair23@gmail.com>
-CC: <qemu-devel@nongnu.org>, <qemu-riscv@nongnu.org>, <palmer@dabbelt.com>,
- <alistair.francis@wdc.com>, <bmeng.cn@gmail.com>, <liwei1518@gmail.com>,
- <dbarboza@ventanamicro.com>, <zhiwei_liu@linux.alibaba.com>, Richard
- Henderson <richard.henderson@linaro.org>
-References: <20250221135735.85151-1-vladimir.isaev@syntacore.com>
- <CAKmqyKMbdWpNeb6xz5T-xfFh_BHkzZY_JCBH5etNLF7PK1HFTw@mail.gmail.com>
-Content-Language: en-US, ru-RU
-From: Vladimir Isaev <vladimir.isaev@syntacore.com>
-In-Reply-To: <CAKmqyKMbdWpNeb6xz5T-xfFh_BHkzZY_JCBH5etNLF7PK1HFTw@mail.gmail.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
-X-Originating-IP: [10.199.68.145]
-X-ClientProxiedBy: S-SC-EXCH-01.corp.syntacore.com (10.76.202.20) To
- S-SC-EXCH-01.corp.syntacore.com (10.76.202.20)
-Received-SPF: pass client-ip=178.249.69.228;
- envelope-from=vladimir.isaev@syntacore.com; helo=m.syntacore.com
+ (Exim 4.90_1) (envelope-from <yongxuan.wang@sifive.com>)
+ id 1tmTlZ-000061-G6
+ for qemu-riscv@nongnu.org; Mon, 24 Feb 2025 03:24:44 -0500
+Received: from mail-pl1-x62f.google.com ([2607:f8b0:4864:20::62f])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <yongxuan.wang@sifive.com>)
+ id 1tmTlW-0001AC-3Y
+ for qemu-riscv@nongnu.org; Mon, 24 Feb 2025 03:24:39 -0500
+Received: by mail-pl1-x62f.google.com with SMTP id
+ d9443c01a7336-220e6028214so85613445ad.0
+ for <qemu-riscv@nongnu.org>; Mon, 24 Feb 2025 00:24:36 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=sifive.com; s=google; t=1740385476; x=1740990276; darn=nongnu.org;
+ h=references:in-reply-to:message-id:date:subject:cc:to:from:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=/bWOD2oND7Vlosu6daJhAwxVOQyujRyeWSVMNgf17/o=;
+ b=jrZR5GrXF+l/NJzNeacCA10YcrCE83kUCxclmEW0haMDE2m+coIB0I3f7D2HC3Ujer
+ THeAGMAI4EJ0mhptUPhGM5ZYNOGNf3o/XeS/M85xJuXsADUYpwAQ+yhx60mhigI+zMI9
+ yF5Om8iqARVPueGatAo4qEUyrDDlbAEwNHEANXf4vuqOgLfLe5v+lUsCa5pTnt3HB64E
+ fbVjy/C7ZQZZSi1JwY6PqX+tHMNYY5jpbgmbIV4sT8kQWZfybQRsDffdjIIopSFTZoqc
+ 9v2dLTpLbbNkUjrPYHRXjbj6l97ki3X4IKyaDajcv2VN/MzQrk2RA/oPI19RJq3HGbzb
+ 9dfA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1740385476; x=1740990276;
+ h=references:in-reply-to:message-id:date:subject:cc:to:from
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=/bWOD2oND7Vlosu6daJhAwxVOQyujRyeWSVMNgf17/o=;
+ b=nex5z8EQUlhz/8e66QBGF3jjupFtaRpEHcBUQhM+E3eArsZJn/xv3IT8MSTStk6Udv
+ dnLUKb9BOKOI+m7V73FbwlAVL4470H/w9RME/FWyq4Z71xFs0H/EKTUlJbJIpYu468dc
+ iGexpkfGSiPi5l63Uf/nJxjO8z3ZaGDmoKA19XLwrabOOeFbVXPcCKkdCNT/h/Jlc7Bj
+ C4Td9sro7x5Or+oADa5T4/vvmW7dd5MiPKJU4wq6t+yVQFgoFc9LXH9qzwuDoA8+UIFu
+ JcuzDTyyr7NMTdzi5ftwlBFsE+nTWwF5sG5qCq5IHhMBchJfD/lfO2i0u2wuKAy9e9Rb
+ Rffg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUX1jZCE7nON1YC2M7/3PHY6xqxo90t+eUfT8ldoPQiowo0MTo1e9lt8z/jMQ1ncg+zv7z7huMaNS2W@nongnu.org
+X-Gm-Message-State: AOJu0Yx20IvJLnweE1Mwl5Xv36ljGCbfWa7AHB5tcJ5VU9XZVPGfKwW8
+ QNYCYLmWwHJnUrZdHEMUTBCTdLBRF77EdFetb8yPMkNK6ZfiIcl3K1YN94WSm6A=
+X-Gm-Gg: ASbGncsK9PdWcjIEkNMJ6sAT/rZPXRof9DYo3dk34Rj5g0u9exwEt/1Vn1MdqnftTon
+ eIzR8ZNc9QWfoOsmT/XDvfaayRdH+rbVCQioDy7gErPqcU1JwGu6YhCz1TQt4lOTFlLtOfYlQ+g
+ 89YCJ7xEDOEAEnbiNe1Il2xA7TbwGChWq4iYt5/iELWfgNsg6Q3k7oRLzgmwUDmL5HaunVNZUO0
+ lXmc4iKCKZhLbhwxVL1ASfLLPmZ3BjPPq4euooeyEsNjOXsUCledc6c5NlSiyOkD1tcUbHq4P+9
+ nYptSgdHCJGxmQQIq8VJ7h1Gi+yBdtE3JKjYzjdb9qrIJlysV9rAANe1
+X-Google-Smtp-Source: AGHT+IEOnxIkYT3cpPEoJ0iYbY7e59Nd8dloYrQNQ1LRjgyeH0A6NED9nKlU6VgDOa09rr3uMZ07oA==
+X-Received: by 2002:a05:6a21:7882:b0:1ee:cd18:d400 with SMTP id
+ adf61e73a8af0-1eef3c883ecmr23178823637.11.1740385475705; 
+ Mon, 24 Feb 2025 00:24:35 -0800 (PST)
+Received: from hsinchu26.internal.sifive.com ([210.176.154.34])
+ by smtp.gmail.com with ESMTPSA id
+ d2e1a72fcca58-7325c88d74esm17714914b3a.149.2025.02.24.00.24.33
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 24 Feb 2025 00:24:35 -0800 (PST)
+From: Yong-Xuan Wang <yongxuan.wang@sifive.com>
+To: qemu-devel@nongnu.org,
+	qemu-riscv@nongnu.org
+Cc: greentime.hu@sifive.com, vincent.chen@sifive.com, frank.chang@sifive.com,
+ jim.shu@sifive.com, Yong-Xuan Wang <yongxuan.wang@sifive.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Weiwei Li <liwei1518@gmail.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Andrew Jones <ajones@ventanamicro.com>,
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+Subject: [PATCH v2 2/8] target/riscv/kvm: add KVM_REG_RISCV_CSR_AIA
+Date: Mon, 24 Feb 2025 16:24:09 +0800
+Message-Id: <20250224082417.31382-3-yongxuan.wang@sifive.com>
+X-Mailer: git-send-email 2.17.1
+In-Reply-To: <20250224082417.31382-1-yongxuan.wang@sifive.com>
+References: <20250224082417.31382-1-yongxuan.wang@sifive.com>
+Received-SPF: pass client-ip=2607:f8b0:4864:20::62f;
+ envelope-from=yongxuan.wang@sifive.com; helo=mail-pl1-x62f.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001, RCVD_IN_VALIDITY_SAFE_BLOCKED=0.001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_MXG_EMAIL_FRAG=0.01 autolearn=ham autolearn_force=no
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -84,77 +105,88 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
+Add KVM_REG_RISCV_CSR_AIA support to get/set the context of AIA
+extension in VS mode.
 
+Signed-off-by: Yong-Xuan Wang <yongxuan.wang@sifive.com>
+---
+ target/riscv/kvm/kvm-cpu.c | 45 ++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 45 insertions(+)
 
-24.02.2025 06:53, Alistair Francis wrote:
-> On Sat, Feb 22, 2025 at 12:00 AM Vladimir Isaev
-> <vladimir.isaev@syntacore.com> wrote:
->>
->> According to spec:
->> Writing misa may increase IALIGN, e.g., by disabling the "C" extension. If an instruction that would
->> write misa increases IALIGN, and the subsequent instruction’s address is not IALIGN-bit aligned, the
->> write to misa is suppressed, leaving misa unchanged.
->>
->> So we should suppress write to misa without "C" if it is enabled
->> and the subsequent instruction is not aligned to 4.
->>
->> Fixes: f18637cd611c ("RISC-V: Add misa runtime write support")
->> Signed-off-by: Vladimir Isaev <vladimir.isaev@syntacore.com>
->> ---
->> v2:
->> - use env->pc instead of GETPC() since GETPC() is a host pc;
->> - use !QEMU_IS_ALIGNED(env->pc, 4) instead of GETPC() & 3;
->>
->> ---
->>  target/riscv/csr.c | 10 ++++++----
->>  1 file changed, 6 insertions(+), 4 deletions(-)
->>
->> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
->> index afb7544f0780..8aa77c53a0db 100644
->> --- a/target/riscv/csr.c
->> +++ b/target/riscv/csr.c
->> @@ -2067,11 +2067,13 @@ static RISCVException write_misa(CPURISCVState *env, int csrno,
->>      val &= env->misa_ext_mask;
->>
->>      /*
->> -     * Suppress 'C' if next instruction is not aligned
->> -     * TODO: this should check next_pc
->> +     * Disabling 'C' increases IALIGN to 32. If subsequent instruction's address
->> +     * is not 32-bit aligned, write to misa is suppressed.
->> +     *
->> +     * All csr-related instructions are 4-byte, so we can check current pc alignment.
->>       */
->> -    if ((val & RVC) && (GETPC() & ~3) != 0) {
->> -        val &= ~RVC;
->> +    if (!(val & RVC) && (env->misa_ext & RVC) && !QEMU_IS_ALIGNED(env->pc, 4)) {
-> 
-
-Hi Alistar,
-
-> env->pc has a stale PC unfortunately
-> 
-> See https://patchew.org/QEMU/20250220163120.77328-1-vladimir.isaev@syntacore.com/#97bea0ff-f93a-45a5-b8ec-2bb91e37f143@linaro.org
-> for details on how to fix this
-> 
-
-Thank you for pointing this (I somehow missed that mail:(), but is my understanding correct that env->pc contains
-current instruction PC? and if we know that all csrw/csrs instructions are 4-byte wide we can use current
-instruction pc?
-
-or env->pc may contain even previous pc?
-
-> Alistair
-> 
->> +        return RISCV_EXCP_NONE;
->>      }
->>
->>      /* Disable RVG if any of its dependencies are disabled */
->> --
->> 2.47.2
->>
->>
->>
-> 
-
+diff --git a/target/riscv/kvm/kvm-cpu.c b/target/riscv/kvm/kvm-cpu.c
+index ff1211d2fe39..c7318f64cf12 100644
+--- a/target/riscv/kvm/kvm-cpu.c
++++ b/target/riscv/kvm/kvm-cpu.c
+@@ -132,6 +132,9 @@ static uint64_t kvm_riscv_vector_reg_id(RISCVCPU *cpu,
+ #define RISCV_GENERAL_CSR_REG(name) \
+     (KVM_REG_RISCV_CSR_GENERAL | KVM_REG_RISCV_CSR_REG(name))
+ 
++#define RISCV_AIA_CSR_REG(name) \
++    (KVM_REG_RISCV_CSR_AIA | KVM_REG_RISCV_CSR_AIA_REG(name))
++
+ #define KVM_RISCV_GET_CSR(cs, env, idx, reg) \
+     do { \
+         int _ret = kvm_get_one_reg(cs, RISCV_CSR_REG(env, idx), &reg); \
+@@ -644,9 +647,50 @@ static int kvm_riscv_put_regs_general_csr(CPUState *cs)
+     return 0;
+ }
+ 
++static int kvm_riscv_get_regs_aia_csr(CPUState *cs)
++{
++    CPURISCVState *env = &RISCV_CPU(cs)->env;
++    uint64_t mask = MAKE_64BIT_MASK(32, 32);
++    uint64_t val;
++
++    KVM_RISCV_GET_CSR(cs, env, RISCV_AIA_CSR_REG(siselect), env->siselect);
++    KVM_RISCV_GET_CSR(cs, env, RISCV_AIA_CSR_REG(iprio1), env->siprio[0]);
++    KVM_RISCV_GET_CSR(cs, env, RISCV_AIA_CSR_REG(iprio1h), env->siprio[8]);
++    KVM_RISCV_GET_CSR(cs, env, RISCV_AIA_CSR_REG(iprio2), env->siprio[16]);
++    KVM_RISCV_GET_CSR(cs, env, RISCV_AIA_CSR_REG(iprio2h), env->siprio[24]);
++
++    KVM_RISCV_GET_CSR(cs, env, RISCV_AIA_CSR_REG(sieh), val);
++    env->sie = set_field(env->sie, mask, val);
++    KVM_RISCV_GET_CSR(cs, env, RISCV_AIA_CSR_REG(siph), val);
++    riscv_cpu_update_mip(env, mask, val);
++
++    return 0;
++}
++
++static int kvm_riscv_put_regs_aia_csr(CPUState *cs)
++{
++    CPURISCVState *env = &RISCV_CPU(cs)->env;
++    uint64_t mask = MAKE_64BIT_MASK(32, 32);
++    uint64_t val;
++
++    KVM_RISCV_SET_CSR(cs, env, RISCV_AIA_CSR_REG(siselect), env->siselect);
++    KVM_RISCV_SET_CSR(cs, env, RISCV_AIA_CSR_REG(iprio1), env->siprio[0]);
++    KVM_RISCV_SET_CSR(cs, env, RISCV_AIA_CSR_REG(iprio1h), env->siprio[8]);
++    KVM_RISCV_SET_CSR(cs, env, RISCV_AIA_CSR_REG(iprio2), env->siprio[16]);
++    KVM_RISCV_SET_CSR(cs, env, RISCV_AIA_CSR_REG(iprio2h), env->siprio[24]);
++
++    val = get_field(env->sie, mask);
++    KVM_RISCV_SET_CSR(cs, env, RISCV_AIA_CSR_REG(sieh), val);
++    val = get_field(env->mip, mask);
++    KVM_RISCV_SET_CSR(cs, env, RISCV_AIA_CSR_REG(siph), val);
++
++    return 0;
++}
++
+ static int kvm_riscv_get_regs_csr(CPUState *cs)
+ {
+     kvm_riscv_get_regs_general_csr(cs);
++    kvm_riscv_get_regs_aia_csr(cs);
+ 
+     return 0;
+ }
+@@ -654,6 +698,7 @@ static int kvm_riscv_get_regs_csr(CPUState *cs)
+ static int kvm_riscv_put_regs_csr(CPUState *cs)
+ {
+     kvm_riscv_put_regs_general_csr(cs);
++    kvm_riscv_put_regs_aia_csr(cs);
+ 
+     return 0;
+ }
+-- 
+2.17.1
 
 
