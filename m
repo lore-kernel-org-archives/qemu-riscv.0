@@ -4,73 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 981D8C021B2
-	for <qemu-riscv@archiver.kernel.org>; Tue, 25 Feb 2025 17:56:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 58AD2C021B2
+	for <qemu-riscv@archiver.kernel.org>; Tue, 25 Feb 2025 18:04:07 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tmzAV-0003br-Eh; Tue, 25 Feb 2025 12:56:33 -0500
+	id 1tmzHm-0006v3-LL; Tue, 25 Feb 2025 13:04:02 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1tmzAI-0003Ys-Dg
- for qemu-riscv@nongnu.org; Tue, 25 Feb 2025 12:56:20 -0500
-Received: from mail-pj1-x102d.google.com ([2607:f8b0:4864:20::102d])
+ id 1tmzHC-0006oV-OY
+ for qemu-riscv@nongnu.org; Tue, 25 Feb 2025 13:03:36 -0500
+Received: from mail-pj1-x1033.google.com ([2607:f8b0:4864:20::1033])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1tmzAG-0000qz-BY
- for qemu-riscv@nongnu.org; Tue, 25 Feb 2025 12:56:18 -0500
-Received: by mail-pj1-x102d.google.com with SMTP id
- 98e67ed59e1d1-2fa8ac56891so9581139a91.2
- for <qemu-riscv@nongnu.org>; Tue, 25 Feb 2025 09:56:14 -0800 (PST)
+ id 1tmzH7-0001hL-Nj
+ for qemu-riscv@nongnu.org; Tue, 25 Feb 2025 13:03:24 -0500
+Received: by mail-pj1-x1033.google.com with SMTP id
+ 98e67ed59e1d1-2fc042c9290so9214452a91.0
+ for <qemu-riscv@nongnu.org>; Tue, 25 Feb 2025 10:03:21 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1740506173; x=1741110973; darn=nongnu.org;
+ d=ventanamicro.com; s=google; t=1740506600; x=1741111400; darn=nongnu.org;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=nQgXZ0mMIQoHFov7MzlQ5j2szkWD4b2laCNt1dxfFr0=;
- b=Xfm7OyTXz7SXarrQM9QLnCGB3ujoyA9RPvXJsOWzcFOp3TkjrGzq8h9GXRTjdsMQzL
- Id4SbdaBGHccHRRk2KN2p+nRI56cUMvGBFT6u7zI8K39sGPlMjqnIxCQgxE6d5ug++VO
- SifrSuOGC57UoyvCsvai+iLNkzPSUI61I4HQig8PTGeV3/vPLASHMiG31rupb8XwBlvi
- xZ1Ji6xzuz982MIPyrmjeqERU0yKvJWZ0kQaATUlu5W4mfhwp4f+E4NBmYQ2yolt3PN6
- XpaUTba6BHHbX4hNVB3fKo/2Dqhdw7z+Fx7JdHT4RXj8UKjm/bKPCTR6ZU5qWUNVMVU0
- rS2w==
+ bh=Kz/ULFmmFW1L+imp4J+QHBTCN/NNETrnCiCuaeCd76E=;
+ b=EedmPsjIpgkKvkPV74vbFRTTMxnrDXApkQghPsDv8M95gs2zVAIoCcl4n7q+qiYDzk
+ J6o8rItrwD2lDPf8tMG+R/O4pVN6I1dgracykEDnkKdXNh5g/RKaVa79X83zqHvSJlff
+ 4x+7l7VikPyeWoEA6voTfqJZxDh65zwbrPWBjOVhGjEqiW/1neIVglsi+BbuQGrDszu+
+ bDQnbX/m9ABdnH+sJykLxYdlzilMp04qPY4k/vFyCyXsPwHD8tzT/Qds367inA9nUfz4
+ YECrD3YlwkqhcbRcF9JktqZIdop3llfoybxm2wv3UjhZI9zl3D9ZNUrUSCuZkxcTHFht
+ ktsA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1740506173; x=1741110973;
+ d=1e100.net; s=20230601; t=1740506600; x=1741111400;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=nQgXZ0mMIQoHFov7MzlQ5j2szkWD4b2laCNt1dxfFr0=;
- b=wdgbmzGS+3bBc2o9KPo9zaY4mpjyDwsg8CVikZHRUKaYMsgto2BpJz7ppYVM8C4//N
- Hd2KMQZXgmGwzMe1x8apbw5Hn9KPo5c9KsnDZFmcv6/yxUdWIYJTBNz1oHogjx5s6mZb
- 8S/4j0z4/rJ+zU6VRpnajCtkdrOU0OjWoWRjLHFtA07K9o8Djlh8s3IFZQvvEjzSou37
- DhF2HemplDyFrDELcA7uUxjYTtZrepH57kfYeJrB8p/rFIwmN0C7ZQ42mafR/+nGWLGJ
- lryQLECrjS4ynDCfP3iVZ22657zXL/bXUVNAYtLrv8q9enh39BSZTYgNxShDZEsZyP8Z
- RiIQ==
+ bh=Kz/ULFmmFW1L+imp4J+QHBTCN/NNETrnCiCuaeCd76E=;
+ b=LM2xnTB1m/GLD/9SPaBVvDvQUKSLyxXek40V10U3cifUMiLFk6Ucmi/htv3OhgzMPN
+ vmp1FxqMUrug8j2bTvE2ehFtWLwW67x+T6JGaxNfInFgZ62SCBCNMWP2AIMYh8FHPLeN
+ dEwST2kVi3Bt0e/CjiCtzSJt/pSSf3mpNZFTb9khGhwNSOQl/XaaGLerynNrqs5SSC2p
+ c2nH05U63D96/CsR143vYqESFD8u6CgCWLo+yb8rW7IXikIgMia2pdUp6vwchUjFX5gO
+ NKYBiyCTH6GA74rMxu4tJK4AGm3GlV1YLynKncYVCF/ZLfJYXzqZIpgpP6ufZJ503ink
+ mDXw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVff9eskqBZlACmRaZeOWl3pOyweSIX2X6pz8HklL4C3J0Tu7SoyP5cfhef6N1hIjjgonQ5QxbrnScm@nongnu.org
-X-Gm-Message-State: AOJu0YwwS+kgg2qgoqVLhYXVJj7tpEPTSEkBzIFd7A2SuZNMb1dbPP9e
- l+uzbBEdybJIw1m/fhQ/ChBmmvH8RNlqOwqxq3s/MSB51QOU7ruUval2Zw0vMZs=
-X-Gm-Gg: ASbGncszd27+AzkC9+PUZhdjBfJ1GJqfc7V2EX9M/JIAKIjHsQOGQQuUjvu34rM7ieq
- 2t4gGRYWcwKclO+v5jO2jb7/oYBi9ezksvS3KjBJhaMhTtq77UFzD2cdER/7p1VdpgBIboqEOsF
- LFly4R+COxB8ifrEI9ooE4RhtiufwjyzryoSF4rNc8GbTplZh01aZdxmi6xibC1g/9AUWUudZlF
- Uarr+Ldb+dv7V+roO2mb4bTNINL6TpVErIUMDjl8H+AMiCexqw1PrwAeJLMeNNubr9n6RgSSpu9
- mJChbEPE91epwD/ibJ41nBJQmZzf8W4pgdNCDQWhHg==
-X-Google-Smtp-Source: AGHT+IFZX2lUhrkBx2EWjeRRiTIQEavJnQXo2jc+SRpgzwHL+fdkclng+L9B5fBjAQDvoYCK0iLWlA==
-X-Received: by 2002:a17:90b:1f88:b0:2fc:bc04:2092 with SMTP id
- 98e67ed59e1d1-2fe68ae29cdmr7515013a91.17.1740506173635; 
- Tue, 25 Feb 2025 09:56:13 -0800 (PST)
+ AJvYcCV8Q/htJT6xkkuxNxmiVXG/Y+lfbEaYq1LHKfE8VXKyYR1Woho06KgrqlYj8xoxBthg/A1YQGjBSQGm@nongnu.org
+X-Gm-Message-State: AOJu0YyT6xJPXVwItyTMgvXJSiNgIeOPUJgx3VhVMCZo3Z+XA6+7OaMQ
+ UU+mQ1DjgLR24N7wHrykvDpxswpSyDm8A/UH2femfUeAoLP3IdTDZK5F2C48b08=
+X-Gm-Gg: ASbGncsMJcReUeHSmfpwomrZGyb/C/Sp36c0CPelcalM09Lgv7YEeVieuDVVe1yoU9V
+ 4HcyJn6dNE0Gg37qTNEix+jvInO0fOzl7w/+cMLXF1hIfoUCV2Dp69MkkfRwILmrfZFBsDJ92Mm
+ oBQur5tSjErDS9lOgijATeymEUmOduFBWgKtxL1mipJi8gmkDIujPG0WwVYhEP7xQqIx2UqPqL3
+ iIZNk/y4CuPeIG56LShsDaarq1NJVMl+1A7lS1Vhe+NDmUgVcMwUx8P+75BCjFHIPDICCihH0Ps
+ cN0+blzT9U6nW0+ncI+myJb9v3mmDhRqG4sJSiEW/A==
+X-Google-Smtp-Source: AGHT+IE8BhuRoA3I+joQAkSkZY2yH6cmNXEaAfyry/rV5DjUPMSR8Z1NyoE/MSn7XUUauJV5kK8B9Q==
+X-Received: by 2002:a17:90b:4d0d:b0:2f2:a664:df19 with SMTP id
+ 98e67ed59e1d1-2fe7e2e0719mr535365a91.7.1740506599810; 
+ Tue, 25 Feb 2025 10:03:19 -0800 (PST)
 Received: from [192.168.68.110] ([177.170.227.219])
  by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-2fceb12b532sm8835111a91.47.2025.02.25.09.56.09
+ d9443c01a7336-2230a094470sm17299285ad.111.2025.02.25.10.03.15
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 25 Feb 2025 09:56:13 -0800 (PST)
-Message-ID: <3443f418-7e3c-4f5a-855a-51afaa4b847d@ventanamicro.com>
-Date: Tue, 25 Feb 2025 14:56:08 -0300
+ Tue, 25 Feb 2025 10:03:19 -0800 (PST)
+Message-ID: <a4054c16-05e1-4d51-a94e-ae5b82113086@ventanamicro.com>
+Date: Tue, 25 Feb 2025 15:03:14 -0300
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/1 V2] [RISC-V/RVV] optimize the memory probing for
- vector fault-only-first loads.
+Subject: Re: [PATCH 1/1] [RISC-V/RVV] Expand the probe_pages helper function
+ to handle probe flags.
 To: Paolo Savini <paolo.savini@embecosm.com>, qemu-devel@nongnu.org,
  qemu-riscv@nongnu.org
 Cc: Richard Handerson <richard.henderson@linaro.org>,
@@ -80,15 +80,15 @@ Cc: Richard Handerson <richard.henderson@linaro.org>,
  Helene Chelin <helene.chelin@embecosm.com>, Nathan Egge <negge@google.com>,
  Max Chou <max.chou@sifive.com>, Jeremy Bennett
  <jeremy.bennett@embecosm.com>, Craig Blackmore <craig.blackmore@embecosm.com>
-References: <20250221155320.59159-1-paolo.savini@embecosm.com>
- <20250221155320.59159-2-paolo.savini@embecosm.com>
+References: <20250221162036.61521-1-paolo.savini@embecosm.com>
+ <20250221162036.61521-2-paolo.savini@embecosm.com>
 Content-Language: en-US
 From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <20250221155320.59159-2-paolo.savini@embecosm.com>
+In-Reply-To: <20250221162036.61521-2-paolo.savini@embecosm.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::102d;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pj1-x102d.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1033;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pj1-x1033.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -113,154 +113,142 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 
 
-On 2/21/25 12:53 PM, Paolo Savini wrote:
-> Fault-only-first loads in the RISC-V vector extension need to update
-> the vl with the element index that causes an exception.
-> In order to ensure this the emulation of this instruction used to probe the
-> memory covered by the load operation with a loop that iterated over each element
-> so that when a flag was raised it was possible to set the vl to the
-> corresponding element index.
-> This loop was executed every time whether an exception happened or not.
-> 
-> This commit removes the per element memory probing from the main execution path
-> and adds a broad memory probing first. If this probing raises any flag that is
-> not a watchpoint flag (that per standard is allowed by this instruction) we
-> proceed with the per element probing to find the index of the element causing
-> the exception and set vl to such index.
+On 2/21/25 1:20 PM, Paolo Savini wrote:
+> This commit expands the probe_pages helper function in
+> target/riscv/vector_helper.c to handle also the cases in which we need access to
+> the flags raised while probing the memory and the host address.
+> This is done in order to provide a unified interface to probe_access and
+> probe_access_flags.
+> The new version of probe_pages can now act as a regular call to probe_access as
+> before and as a call to probe_access_flags. In the latter case the user need to
+> pass pointers to flags and host address and a boolean value for nonfault.
+> The flags and host address will be set and made available as for a direct call
+> to probe_access_flags.
 > 
 > Signed-off-by: Paolo Savini <paolo.savini@embecosm.com>
 > ---
 
 Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 
->   target/riscv/vector_helper.c | 103 ++++++++++++++++++++---------------
->   1 file changed, 58 insertions(+), 45 deletions(-)
+>   target/riscv/vector_helper.c | 57 +++++++++++++++++++++++-------------
+>   1 file changed, 37 insertions(+), 20 deletions(-)
 > 
 > diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
-> index 5386e3b97c..772cff8fbe 100644
+> index 772cff8fbe..c0f1b7994e 100644
 > --- a/target/riscv/vector_helper.c
 > +++ b/target/riscv/vector_helper.c
-> @@ -633,47 +633,69 @@ vext_ldff(void *vd, void *v0, target_ulong base, CPURISCVState *env,
->       uint32_t esz = 1 << log2_esz;
->       uint32_t msize = nf * esz;
+> @@ -114,25 +114,42 @@ static inline uint32_t vext_max_elems(uint32_t desc, uint32_t log2_esz)
+>    * It will trigger an exception if there is no mapping in TLB
+>    * and page table walk can't fill the TLB entry. Then the guest
+>    * software can return here after process the exception or never return.
+> + *
+> + * This function can also be used when direct access to probe_access_flags is
+> + * needed in order to access the flags. If a pointer to a flags operand is
+> + * provided the function will call probe_access_flags instead, use nonfault
+> + * and update host and flags.
+>    */
+> -static void probe_pages(CPURISCVState *env, target_ulong addr,
+> -                        target_ulong len, uintptr_t ra,
+> -                        MMUAccessType access_type)
+> +static void probe_pages(CPURISCVState *env, target_ulong addr, target_ulong len,
+> +                        uintptr_t ra, MMUAccessType access_type, int mmu_index,
+> +                        void **host, int *flags, bool nonfault)
+>   {
+>       target_ulong pagelen = -(addr | TARGET_PAGE_MASK);
+>       target_ulong curlen = MIN(pagelen, len);
+> -    int mmu_index = riscv_env_mmu_index(env, false);
+>   
+> -    probe_access(env, adjust_addr(env, addr), curlen, access_type,
+> -                 mmu_index, ra);
+> +    if (flags != NULL) {
+> +        *flags = probe_access_flags(env, adjust_addr(env, addr), curlen,
+> +                                    access_type, mmu_index, nonfault, host, ra);
+> +    } else {
+> +        probe_access(env, adjust_addr(env, addr), curlen, access_type,
+> +                     mmu_index, ra);
+> +    }
+> +
+>       if (len > curlen) {
+>           addr += curlen;
+>           curlen = len - curlen;
+> -        probe_access(env, adjust_addr(env, addr), curlen, access_type,
+> -                     mmu_index, ra);
+> +        if (flags != NULL) {
+> +            *flags = probe_access_flags(env, adjust_addr(env, addr), curlen,
+> +                                        access_type, mmu_index, nonfault,
+> +                                        host, ra);
+> +        } else {
+> +            probe_access(env, adjust_addr(env, addr), curlen, access_type,
+> +                         mmu_index, ra);
+> +        }
+>       }
+>   }
+>   
+> +
+>   static inline void vext_set_elem_mask(void *v0, int index,
+>                                         uint8_t value)
+>   {
+> @@ -332,8 +349,8 @@ vext_page_ldst_us(CPURISCVState *env, void *vd, target_ulong addr,
+>       MMUAccessType access_type = is_load ? MMU_DATA_LOAD : MMU_DATA_STORE;
+>   
+>       /* Check page permission/pmp/watchpoint/etc. */
+> -    flags = probe_access_flags(env, adjust_addr(env, addr), size, access_type,
+> -                               mmu_index, true, &host, ra);
+> +    probe_pages(env, addr, size, ra, access_type, mmu_index, &host, &flags,
+> +                true);
+>   
+>       if (flags == 0) {
+>           if (nf == 1) {
+> @@ -635,7 +652,7 @@ vext_ldff(void *vd, void *v0, target_ulong base, CPURISCVState *env,
 >       uint32_t vma = vext_vma(desc);
-> -    target_ulong addr, offset, remain, page_split, elems;
-> +    target_ulong addr, addr_probe, addr_i, offset, remain, page_split, elems;
+>       target_ulong addr, addr_probe, addr_i, offset, remain, page_split, elems;
 >       int mmu_index = riscv_env_mmu_index(env, false);
-> +    int flags;
-> +    void *host;
+> -    int flags;
+> +    int flags, probe_flags;
+>       void *host;
 >   
 >       VSTART_CHECK_EARLY_EXIT(env);
->   
-> -    /* probe every access */
-> -    for (i = env->vstart; i < env->vl; i++) {
-> -        if (!vm && !vext_elem_mask(v0, i)) {
-> -            continue;
-> -        }
-> -        addr = adjust_addr(env, base + i * (nf << log2_esz));
-> -        if (i == 0) {
-> -            /* Allow fault on first element. */
-> -            probe_pages(env, addr, nf << log2_esz, ra, MMU_DATA_LOAD);
-> -        } else {
-> -            remain = nf << log2_esz;
-> -            while (remain > 0) {
-> -                void *host;
-> -                int flags;
-> -
-> -                offset = -(addr | TARGET_PAGE_MASK);
-> -
-> -                /* Probe nonfault on subsequent elements. */
-> -                flags = probe_access_flags(env, addr, offset, MMU_DATA_LOAD,
-> -                                           mmu_index, true, &host, 0);
-> -
-> -                /*
-> -                 * Stop if invalid (unmapped) or mmio (transaction may fail).
-> -                 * Do not stop if watchpoint, as the spec says that
-> -                 * first-fault should continue to access the same
-> -                 * elements regardless of any watchpoint.
-> -                 */
-> -                if (flags & ~TLB_WATCHPOINT) {
-> -                    vl = i;
-> -                    goto ProbeSuccess;
-> -                }
-> -                if (remain <= offset) {
-> -                    break;
-> +    addr = base + ((env->vstart * nf) << log2_esz);
-> +    page_split = -(addr | TARGET_PAGE_MASK);
-> +    /* Get number of elements */
-> +    elems = page_split / msize;
-> +    if (unlikely(env->vstart + elems >= env->vl)) {
-> +        elems = env->vl - env->vstart;
-> +    }
-> +
-> +    /* Check page permission/pmp/watchpoint/etc. */
-> +    flags = probe_access_flags(env, adjust_addr(env, addr), elems * msize,
-> +                               MMU_DATA_LOAD, mmu_index, true, &host, ra);
-> +
-> +    /* If we are crossing a page check also the second page. */
-> +    if (env->vl > elems) {
-> +        addr_probe = addr + (elems << log2_esz);
-> +        flags |= probe_access_flags(env, adjust_addr(env, addr_probe),
-> +                                    elems * msize, MMU_DATA_LOAD, mmu_index,
-> +                                    true, &host, ra);
-> +    }
-> +
-> +    if (flags & ~TLB_WATCHPOINT) {
-> +        /* probe every access */
-> +        for (i = env->vstart; i < env->vl; i++) {
-> +            if (!vm && !vext_elem_mask(v0, i)) {
-> +                continue;
-> +            }
-> +            addr_i = adjust_addr(env, base + i * (nf << log2_esz));
-> +            if (i == 0) {
-> +                /* Allow fault on first element. */
-> +                probe_pages(env, addr_i, nf << log2_esz, ra, MMU_DATA_LOAD);
-> +            } else {
-> +                remain = nf << log2_esz;
-> +                while (remain > 0) {
-> +                    offset = -(addr_i | TARGET_PAGE_MASK);
-> +
-> +                    /* Probe nonfault on subsequent elements. */
-> +                    flags = probe_access_flags(env, addr_i, offset,
-> +                                               MMU_DATA_LOAD, mmu_index, true,
-> +                                               &host, 0);
-> +
-> +                    /*
-> +                     * Stop if invalid (unmapped) or mmio (transaction may
-> +                     * fail). Do not stop if watchpoint, as the spec says that
-> +                     * first-fault should continue to access the same
-> +                     * elements regardless of any watchpoint.
-> +                     */
-> +                    if (flags & ~TLB_WATCHPOINT) {
-> +                        vl = i;
-> +                        goto ProbeSuccess;
-> +                    }
-> +                    if (remain <= offset) {
-> +                        break;
-> +                    }
-> +                    remain -= offset;
-> +                    addr_i = adjust_addr(env, addr_i + offset);
->                   }
-> -                remain -= offset;
-> -                addr = adjust_addr(env, addr + offset);
->               }
->           }
+> @@ -649,15 +666,15 @@ vext_ldff(void *vd, void *v0, target_ulong base, CPURISCVState *env,
 >       }
-> @@ -685,15 +707,6 @@ ProbeSuccess:
 >   
->       if (env->vstart < env->vl) {
->           if (vm) {
-> -            /* Calculate the page range of first page */
-> -            addr = base + ((env->vstart * nf) << log2_esz);
-> -            page_split = -(addr | TARGET_PAGE_MASK);
-> -            /* Get number of elements */
-> -            elems = page_split / msize;
-> -            if (unlikely(env->vstart + elems >= env->vl)) {
-> -                elems = env->vl - env->vstart;
-> -            }
-> -
->               /* Load/store elements in the first page */
->               if (likely(elems)) {
->                   vext_page_ldst_us(env, vd, addr, elems, nf, max_elems,
+>       /* Check page permission/pmp/watchpoint/etc. */
+> -    flags = probe_access_flags(env, adjust_addr(env, addr), elems * msize,
+> -                               MMU_DATA_LOAD, mmu_index, true, &host, ra);
+> +    probe_pages(env, addr, elems * msize, ra, MMU_DATA_LOAD, mmu_index, &host,
+> +                &flags, true);
+>   
+>       /* If we are crossing a page check also the second page. */
+>       if (env->vl > elems) {
+>           addr_probe = addr + (elems << log2_esz);
+> -        flags |= probe_access_flags(env, adjust_addr(env, addr_probe),
+> -                                    elems * msize, MMU_DATA_LOAD, mmu_index,
+> -                                    true, &host, ra);
+> +        probe_pages(env, addr_probe, elems * msize, ra, MMU_DATA_LOAD,
+> +                    mmu_index, &host, &probe_flags, true);
+> +        flags |= probe_flags;
+>       }
+>   
+>       if (flags & ~TLB_WATCHPOINT) {
+> @@ -669,16 +686,16 @@ vext_ldff(void *vd, void *v0, target_ulong base, CPURISCVState *env,
+>               addr_i = adjust_addr(env, base + i * (nf << log2_esz));
+>               if (i == 0) {
+>                   /* Allow fault on first element. */
+> -                probe_pages(env, addr_i, nf << log2_esz, ra, MMU_DATA_LOAD);
+> +                probe_pages(env, addr_i, nf << log2_esz, ra, MMU_DATA_LOAD,
+> +                            mmu_index, &host, NULL, false);
+>               } else {
+>                   remain = nf << log2_esz;
+>                   while (remain > 0) {
+>                       offset = -(addr_i | TARGET_PAGE_MASK);
+>   
+>                       /* Probe nonfault on subsequent elements. */
+> -                    flags = probe_access_flags(env, addr_i, offset,
+> -                                               MMU_DATA_LOAD, mmu_index, true,
+> -                                               &host, 0);
+> +                    probe_pages(env, addr_i, offset, 0, MMU_DATA_LOAD,
+> +                                mmu_index, &host, &flags, true);
+>   
+>                       /*
+>                        * Stop if invalid (unmapped) or mmio (transaction may
 
 
