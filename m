@@ -4,62 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9A197C021A4
-	for <qemu-riscv@archiver.kernel.org>; Mon, 24 Feb 2025 21:28:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4AC8AC021A4
+	for <qemu-riscv@archiver.kernel.org>; Tue, 25 Feb 2025 01:49:23 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tmg07-00016S-RK; Mon, 24 Feb 2025 16:28:32 -0500
+	id 1tmk3x-0007Eo-SJ; Mon, 24 Feb 2025 20:48:46 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <conor@kernel.org>)
- id 1tmfzr-00014m-Uy; Mon, 24 Feb 2025 16:28:16 -0500
-Received: from dfw.source.kernel.org ([139.178.84.217])
+ (Exim 4.90_1) (envelope-from <outgoing@sr.ht>)
+ id 1tmk3v-0007Dw-HJ; Mon, 24 Feb 2025 20:48:43 -0500
+Received: from mail-a.sr.ht ([46.23.81.152])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <conor@kernel.org>)
- id 1tmfzp-0007Yt-NE; Mon, 24 Feb 2025 16:28:15 -0500
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 47ABD5C587E;
- Mon, 24 Feb 2025 21:27:28 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7254BC4CED6;
- Mon, 24 Feb 2025 21:28:05 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1740432486;
- bh=+D+WFyVjBDCk8mvjOJUHIvKZrTaATWd2TnTdmtWsn+Y=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=CAlkiDJn/A3ahFkCB3IUYmx4cSr9U5HR/kgN6R5QqsdyFVwhZGmDUVHkFs/oKx2I9
- zFGwZXtyd5504D1i6RJ1wEDy/XMRIelEcuNttrsAGnr5bHA8w4O6Xwhhqvy1lmyS3b
- 9TFJC4qrcAzgdLQ2BoX7c34e6Ik+ZpgCkL6k80FBde4rZrbCeSDTVbTcnOETsZNvJg
- Bivg/zRclS5pMxvv7DJJZWIqeUVo2J6KLUYKNeeUddtTgcijZ7SgO/WhZ/wNRUsARw
- IMeZWm2AD/y1fTvwzvGKRIrrI6V6CCDo8ZuuqBN/K/v5sXwwvmeW8yOlc+/XQUnd5s
- 334PxPcX4DxLA==
-Date: Mon, 24 Feb 2025 21:28:03 +0000
-From: Conor Dooley <conor@kernel.org>
-To: Alistair Francis <alistair23@gmail.com>
-Cc: Sebastian Huber <sebastian.huber@embedded-brains.de>,
- qemu-devel@nongnu.org, Conor Dooley <conor.dooley@microchip.com>,
- Bin Meng <bin.meng@windriver.com>, alistair.francis@wdc.com,
- qemu-riscv@nongnu.org
-Subject: Re: [PATCH 0/5] Improve Microchip Polarfire SoC customization
-Message-ID: <20250224-ignition-afternoon-9d4996362813@spud>
-References: <20250214062443.9936-1-sebastian.huber@embedded-brains.de>
- <20250220-reggae-hardness-907e385516d8@spud>
- <CAKmqyKNex8vQuT3ArR3gePfGfeLCZbW0DxzD9dz8oNAODE8sbw@mail.gmail.com>
+ (Exim 4.90_1) (envelope-from <outgoing@sr.ht>)
+ id 1tmk3t-0003mI-A4; Mon, 24 Feb 2025 20:48:43 -0500
+DKIM-Signature: a=rsa-sha256; bh=TOkqf+2c+ZTgv85DXJaT5IhKf1HzuAnouJZhNQHkqaE=; 
+ c=simple/simple; d=git.sr.ht;
+ h=From:Date:Subject:Reply-to:To:Cc; 
+ q=dns/txt; s=20240113; t=1740448117; v=1;
+ b=R5vC2OsafHYY1rnDZh5N8ZfDpE6nP8EEbhcCu0bR6JxCNkqyj6A9dRsULiDHfrx5gV9Rk/2s
+ yPPM+IA4KXaJPIskwlQAFPNq5h7HUGfVX6+PfvsqK5DFebmUZEQkHULf1DXJ8668p3kXsugpeNI
+ hXvwbT1cJzkJLtxP8aNwRvX83jgH1plH7rOKZA6B7sqCSp1ScCQ15A0edCGjvXvnXLoL0x6c40c
+ 9AZVehv02fsF2dl6iIT/FSgtrCkZM9bwLsF3H3hwebp7HSYXQSGYNJ7odGz4rYNHHGFj5E+LKqp
+ T4AMiZxUwwZW/i9HSzNXwRcMReeXLGLhHIkzZ1BuBRj0A==
+Received: from git.sr.ht (unknown [46.23.81.155])
+ by mail-a.sr.ht (Postfix) with ESMTPSA id D68B72033F;
+ Tue, 25 Feb 2025 01:48:37 +0000 (UTC)
+From: ~yuming <yuming@git.sr.ht>
+Date: Tue, 25 Feb 2025 09:36:11 +0800
+Subject: [PATCH qemu] target/riscv: Only check ext_zca for 16-bit aligned PC.
+Message-ID: <174044811783.27139.4910941776283875756-0@git.sr.ht>
+X-Mailer: git.sr.ht
+To: qemu-riscv@nongnu.org, qemu-devel@nongnu.org
+Cc: Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bmeng.cn@gmail.com>,
+ Weiwei Li <liwei1518@gmail.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, yumin686@andestech.com
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature"; boundary="oCUJ5cCTfKbjgqOZ"
-Content-Disposition: inline
-In-Reply-To: <CAKmqyKNex8vQuT3ArR3gePfGfeLCZbW0DxzD9dz8oNAODE8sbw@mail.gmail.com>
-Received-SPF: pass client-ip=139.178.84.217; envelope-from=conor@kernel.org;
- helo=dfw.source.kernel.org
-X-Spam_score_int: -74
-X-Spam_score: -7.5
-X-Spam_bar: -------
-X-Spam_report: (-7.5 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.442,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_HI=-5, RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001,
+Received-SPF: pass client-ip=46.23.81.152; envelope-from=outgoing@sr.ht;
+ helo=mail-a.sr.ht
+X-Spam_score_int: -16
+X-Spam_score: -1.7
+X-Spam_bar: -
+X-Spam_report: (-1.7 / 5.0 requ) BAYES_00=-1.9, DKIM_INVALID=0.1,
+ DKIM_SIGNED=0.1, RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001,
  RCVD_IN_VALIDITY_SAFE_BLOCKED=0.001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -72,70 +65,85 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
+Reply-To: ~yuming <yumin686@andestech.com>
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
+From: Yu-Ming Chang <yumin686@andestech.com>
 
---oCUJ5cCTfKbjgqOZ
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Since C always implies Zca, Zca is always enabled when 16-bit
+insructions are supported. we can only check ext_zca to allow
+16-bit aligned PC addresses.
 
-On Mon, Feb 24, 2025 at 03:14:00PM +1000, Alistair Francis wrote:
-> On Fri, Feb 21, 2025 at 4:31=E2=80=AFAM Conor Dooley <conor@kernel.org> w=
-rote:
-> >
-> > +cc qemu-riscv, Alistar.
-> >
-> > On Fri, Feb 14, 2025 at 07:24:37AM +0100, Sebastian Huber wrote:
-> > > Booting the microchip-icicle-kit machine using the latest PolarFire S=
-oC
-> > > Hart Software Services (HSS) no longer works since Qemu lacks support
-> > > for several registers (clocks, DRAM controller). Also reading from the
-> > > SDCard does not work currently.
-> >
-> > On that note, I think the inaccurate docs about polarfire should be
-> > removed. There's a wiki page here with dead links, or links to things
-> > that do not work anymore:
-> > https://wiki.qemu.org/Documentation/Platforms/RISCV#Microchip_PolarFire=
-_SoC_Icicle_Kit
-> > I think the whole section should be removed, find it kinda odd that
-> > there's a polarfire section but not for any other board. Either way,
-> > it's talking about something that just does not work, the current HSS
-> > and Yocto don't boot.
->=20
-> The wiki is independent of the QEMU code base, so you can modify it. I
-> agree that we should remove outdated/wrong information as it's very
-> confusing to users.
+Signed-off-by: Yu-Ming Chang <yumin686@andestech.com>
+---
+ target/riscv/insn_trans/trans_rvi.c.inc | 5 ++---
+ target/riscv/op_helper.c                | 4 ++--
+ target/riscv/translate.c                | 2 +-
+ 3 files changed, 5 insertions(+), 6 deletions(-)
 
-I don't have an account to make the modification, any clue who has one
-and can hook me up with one?
-
-> > There's also a docs page here:
-> > https://www.qemu.org/docs/master/system/riscv/microchip-icicle-kit.html
->=20
-> That is generated from the QEMU codebase
-> `docs/system/riscv/microchip-icicle-kit.rst` and should be updated,
-> ideally with this patch set
-
-Ye, I think so too.
-
-> > that has a copy of the table your patch 4 modifies, that probably should
-> > be updated to match your changes.
-> >
-> > In a similar vein to the wiki, it talks about the HSS and booting a
-> > yocto wic image. I think those should be deleted since they don't work.
-
---oCUJ5cCTfKbjgqOZ
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYIAB0WIQRh246EGq/8RLhDjO14tDGHoIJi0gUCZ7zkYwAKCRB4tDGHoIJi
-0jG6AP416IdNUIKPfSRwoJIbECDq6tO7Neh/MIDAM3nym8ItZwEAtHdu8QhPRhpp
-qt/Gn1tnaT7bUssLu77fRN+Lq1WCSwE=
-=6Mbk
------END PGP SIGNATURE-----
-
---oCUJ5cCTfKbjgqOZ--
+diff --git a/target/riscv/insn_trans/trans_rvi.c.inc b/target/riscv/insn_tran=
+s/trans_rvi.c.inc
+index 96c218a9d7..e5965201a7 100644
+--- a/target/riscv/insn_trans/trans_rvi.c.inc
++++ b/target/riscv/insn_trans/trans_rvi.c.inc
+@@ -106,7 +106,7 @@ static bool trans_jalr(DisasContext *ctx, arg_jalr *a)
+         tcg_gen_ext32s_tl(target_pc, target_pc);
+     }
+=20
+-    if (!has_ext(ctx, RVC) && !ctx->cfg_ptr->ext_zca) {
++    if (!ctx->cfg_ptr->ext_zca) {
+         TCGv t0 =3D tcg_temp_new();
+=20
+         misaligned =3D gen_new_label();
+@@ -236,8 +236,7 @@ static bool gen_branch(DisasContext *ctx, arg_b *a, TCGCo=
+nd cond)
+=20
+     gen_set_label(l); /* branch taken */
+=20
+-    if (!has_ext(ctx, RVC) && !ctx->cfg_ptr->ext_zca &&
+-        (a->imm & 0x3)) {
++    if (!ctx->cfg_ptr->ext_zca && (a->imm & 0x3)) {
+         /* misaligned */
+         TCGv target_pc =3D tcg_temp_new();
+         gen_pc_plus_diff(target_pc, ctx, a->imm);
+diff --git a/target/riscv/op_helper.c b/target/riscv/op_helper.c
+index ce1256f439..68882136d7 100644
+--- a/target/riscv/op_helper.c
++++ b/target/riscv/op_helper.c
+@@ -276,7 +276,7 @@ target_ulong helper_sret(CPURISCVState *env)
+     }
+=20
+     target_ulong retpc =3D env->sepc;
+-    if (!riscv_has_ext(env, RVC) && (retpc & 0x3)) {
++    if (!env_archcpu(env)->cfg.ext_zca && (retpc & 0x3)) {
+         riscv_raise_exception(env, RISCV_EXCP_INST_ADDR_MIS, GETPC());
+     }
+=20
+@@ -349,7 +349,7 @@ static void check_ret_from_m_mode(CPURISCVState *env, tar=
+get_ulong retpc,
+         riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
+     }
+=20
+-    if (!riscv_has_ext(env, RVC) && (retpc & 0x3)) {
++    if (!env_archcpu(env)->cfg.ext_zca && (retpc & 0x3)) {
+         riscv_raise_exception(env, RISCV_EXCP_INST_ADDR_MIS, GETPC());
+     }
+=20
+diff --git a/target/riscv/translate.c b/target/riscv/translate.c
+index 698b74f7a8..34eeed50be 100644
+--- a/target/riscv/translate.c
++++ b/target/riscv/translate.c
+@@ -566,7 +566,7 @@ static void gen_jal(DisasContext *ctx, int rd, target_ulo=
+ng imm)
+     TCGv succ_pc =3D dest_gpr(ctx, rd);
+=20
+     /* check misaligned: */
+-    if (!has_ext(ctx, RVC) && !ctx->cfg_ptr->ext_zca) {
++    if (!ctx->cfg_ptr->ext_zca) {
+         if ((imm & 0x3) !=3D 0) {
+             TCGv target_pc =3D tcg_temp_new();
+             gen_pc_plus_diff(target_pc, ctx, imm);
+--=20
+2.45.3
 
