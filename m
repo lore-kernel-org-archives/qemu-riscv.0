@@ -4,67 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0ACD9C021B8
-	for <qemu-riscv@archiver.kernel.org>; Tue, 25 Feb 2025 16:02:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EEB5CC021BB
+	for <qemu-riscv@archiver.kernel.org>; Tue, 25 Feb 2025 16:02:57 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tmxNP-0007LA-44; Tue, 25 Feb 2025 11:01:43 -0500
+	id 1tmxON-0007oH-9a; Tue, 25 Feb 2025 11:02:48 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <loic@rivosinc.com>) id 1tmxMz-0007Fj-Bq
- for qemu-riscv@nongnu.org; Tue, 25 Feb 2025 11:01:17 -0500
-Received: from mail-wr1-x42c.google.com ([2a00:1450:4864:20::42c])
+ (Exim 4.90_1) (envelope-from <loic@rivosinc.com>) id 1tmxN0-0007GA-4G
+ for qemu-riscv@nongnu.org; Tue, 25 Feb 2025 11:01:18 -0500
+Received: from mail-wm1-x32b.google.com ([2a00:1450:4864:20::32b])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <loic@rivosinc.com>) id 1tmxMs-0001x4-PO
- for qemu-riscv@nongnu.org; Tue, 25 Feb 2025 11:01:16 -0500
-Received: by mail-wr1-x42c.google.com with SMTP id
- ffacd0b85a97d-38f378498b0so4818306f8f.0
- for <qemu-riscv@nongnu.org>; Tue, 25 Feb 2025 08:01:00 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <loic@rivosinc.com>) id 1tmxMs-0001wL-PM
+ for qemu-riscv@nongnu.org; Tue, 25 Feb 2025 11:01:17 -0500
+Received: by mail-wm1-x32b.google.com with SMTP id
+ 5b1f17b1804b1-43996e95114so38434665e9.3
+ for <qemu-riscv@nongnu.org>; Tue, 25 Feb 2025 08:00:56 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1740499259; x=1741104059;
+ d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1740499255; x=1741104055;
  darn=nongnu.org; 
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=d+TDZqvkgY5ij9r5M1+7oHx+8x9yD312lxwT4tfm9xs=;
- b=g1gWvKoLoF3LrzWYtMRWXtvDwqn2+uDWG7OZIf4VQbAPwRow8z4V4ZAtbTT/O/bLq4
- XkJZCo5fBjWYkBQU4NSFgOWXJglWcnGh0FgCx9KFLUAroZf64vSFJM90wNhgrv8OD8CJ
- MDwfvF1xdus6bk6erII0dBs+Bgyo3qhidwqrHfSquJWVkMkZML08hd+Q6wrP2UGpFMG4
- Zh1nR76L+56vcVraCH57I4AUP29lhucbUpxADgnfUbwcjvBAPdJjON37n8qU7jIcurFo
- NhUHW412ndoJsue6qwCmGXKWB2NZQI5VnveitVj/v7c7cmSIsbIQo2AW8XT1JyfnmtCa
- 8Fyw==
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=D0G1BlFEwahcM4AHHFlaoJCV2Tx9e8WvmvlKENfqIqs=;
+ b=1pQPqI8MjZMJj9f73A/2n5VqSu3nxCNbnNTHwx1ZCUu3AXU6x3zzLap7PrLKEoraiw
+ 1qN5mddC5mceLO/CpBUUJqZ0m/ElME3LS/GZxXSww5qjsk2KkoZKiZPRtjB7O80p4DoS
+ YUJ81LnfD7GECt42DG9VNgCpoCc7vRcDVXiONesvr2cdBJfnGGVFOQzEjwCLnr3di+eU
+ 3fj9uAA94KqRH6mte3eHdVCrc8t8VHdjd/c7uYlXuW8ch4HYmjsQPiZJU4aGGAtl+dnm
+ EXe0urdWU7FcKhBgYruCDtqj9kE40pX8MVWDhR4XuU4iZX5dIsa3fsG6D+49IOTzaBNR
+ 5C6g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1740499259; x=1741104059;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=d+TDZqvkgY5ij9r5M1+7oHx+8x9yD312lxwT4tfm9xs=;
- b=ghVgu/G9ZNGizb/X+Q9Ah+fGYh68B2dKzJ6psebkhfACGJhlin8ZwfyVjFM4a4+mpl
- xSXfZ35Wq4OrsaU77XGavG03Xluf2NcmXNd+LGV5aaE5+fQjAA5PbdjXHjM+FzJofUgo
- jyr5E+yhfcwtk/TyChJBQK3njwDgf+smmpMhPeK+vehmEla+/azJitr+XgHAA/SBf8vb
- q2uBPZX4pDVGMRy9wFoxDvJtO2QhL7QHgXfxUVm0vyByI6wzE7ombJsIs45W28C29Sw9
- cDpA0ByoVM7kE8QxQiL/12LJv+q5RZ/v81MbWULvL1gmxx8GIPd+GES2Iv6e6tKjuVE0
- lyhA==
+ d=1e100.net; s=20230601; t=1740499255; x=1741104055;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=D0G1BlFEwahcM4AHHFlaoJCV2Tx9e8WvmvlKENfqIqs=;
+ b=cp9ys7lfFSY/36WGpnZBXKes2Etrzy5rW285tkMAeNB7yTip+0O/wYwrb89DA1BR4a
+ HwtfukyfVXOGHyau36yfivqPyuSuNha+9rm/wxlTpWBsM9gvF/adxZcwQuXz10fE0Yon
+ /HXbsLfMqxvFFcCsK3gQSwjSnPY1o8osOcSYxQqtRWLez6Aiy0lRxkScX4gMpiLxZTWN
+ mK7qxUve/Bw/tC4u3DH7fVdPDn3Uh3obu0VvAgp7tDt39PawVmJT5pa01cYjeRJPfZ1l
+ yqbwk4OjaIV8pyn/OS3JJDXQwhc0Yz47y4UbU26tV750IOBp309e5zcMiTIrWOCGtSvD
+ 2XDg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUfpoe3maAH9ZbdU2FLCuY+PWzXxQfJz+JGWMcZUmsz/cnzDHMU67qoCjZoTIxkBUw8FKseeGUxuqIt@nongnu.org
-X-Gm-Message-State: AOJu0YzCKWTdlgFujws3T+hGnKUVzLxmbsrV1a9rwUA+5HjvIKxvQXTT
- 8G7vyMVncLhROoJR02Ey03LOrIOpnppgly4J2ttvsQcGrFyfnrQ9eYUwYTQHyjw=
-X-Gm-Gg: ASbGncsU3LuBNdYby+HWoeDXnIMijojxdtuGw0vnRjx53gEnAfXJ//t7LCmQ7LYgnHq
- 5sf4IV6GWUxHmHtlokQ3yZaEmALJUSdIcCfm/J4aGpdhhsuPvBrys2bvF4DwhXWHkRnJCsmuFMX
- EeyDuH0qqka+csNh2+ivMrd09/ls0mF5dsPStEIzc5BMR2txf+tbUlJ4vCFef5G+46fnDfuWIGi
- TZ+Bg6vmuGvrSX8rcn5nPMOsMXXuVEUQVwSVl1D0WASnKwikMuQ/mO+TGlGkFuWtWEl9Hd3z+Nl
- gD1Lh5Qcoe4nzMfb+X975sue9lIfs1j+ESR/ydRt1WYTuHZjwYj+fkotzsY2VCZNJ98lg+iGnw=
+ AJvYcCW47A6eP/g7A0zfpDJKK59NjO0mPOaboGLpxMERT3dVwc3mYVSoCaEFhsImkpqwj8Mp1s0VX5BFu5e8@nongnu.org
+X-Gm-Message-State: AOJu0YxQ/+nW5fw91uj6tRlrt25IYCjIwbL4IsKCnCd0kBIfVHGjwLoK
+ S4PESkOu3wnXNCpT45J1ZMBMuZVqph2qCEcOP03hPgrcgLiylOhWMc1BBrizTlg=
+X-Gm-Gg: ASbGncvFJUlFseg9GIn6mtMgeDBShNCie+r0J9B0gBiK7rLfEeSOC3mhOO5Pxh6UBST
+ lOMbBUX7m3c7wgiQRNZatWeOkmJsgcjRmf4IO0JzSi83C9b3j1TFGLgr5KoKND6Nq01XRFA9NZC
+ 3dA5SCeWHDJlinfB01Lx7ZX2VEmNqmPapiifsTzAkSq/ShIs8by1L0fVtknUYm/HUtJGvfCfq6l
+ r9ppurgtqmSxjIdTvwk3O6ceNLrExMMtiob7bxTFfQTrr7FuZkXAWcrdZw2QChv05012SDqYl2G
+ h1uG9SgcqGK4ZPAqTJDYdc2asV3GfN2O3sZ3grquG8p4y0TbAJtKLTAyMfXmm9+wJWPBKjVCWQ=
  =
-X-Google-Smtp-Source: AGHT+IHuIaJbWn54WqI7K/p5z1g0TwWQC/jpTrAVwCWtLU3+79KsYmrITHDvEGCsbZgdBCDLL7WoLA==
-X-Received: by 2002:a5d:59a5:0:b0:385:f7d9:99f5 with SMTP id
- ffacd0b85a97d-38f6f0c3b6fmr15386446f8f.51.1740499259008; 
- Tue, 25 Feb 2025 08:00:59 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IH9/nIdXEJG8xS0y2So5FuCfzYmG8qjQ2yNx1oWH8TLHk7/aqf2xNxzTgkojx5IEwL/KxLS4g==
+X-Received: by 2002:a05:600c:4ece:b0:439:9274:8203 with SMTP id
+ 5b1f17b1804b1-439aeae0543mr145133975e9.6.1740499254652; 
+ Tue, 25 Feb 2025 08:00:54 -0800 (PST)
 Received: from llx1.cad.pilog.net (lfbn-mar-1-50-94.w86-229.abo.wanadoo.fr.
  [86.229.28.94]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-43ab1546df4sm30530755e9.17.2025.02.25.08.00.58
+ 5b1f17b1804b1-43ab1546df4sm30530755e9.17.2025.02.25.08.00.53
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 25 Feb 2025 08:00:58 -0800 (PST)
+ Tue, 25 Feb 2025 08:00:54 -0800 (PST)
 From: =?UTF-8?q?Lo=C3=AFc=20Lefort?= <loic@rivosinc.com>
 To: qemu-devel@nongnu.org
 Cc: Alistair Francis <alistair.francis@wdc.com>,
@@ -72,18 +71,15 @@ Cc: Alistair Francis <alistair.francis@wdc.com>,
  qemu-riscv@nongnu.org, Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
  Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
  =?UTF-8?q?Lo=C3=AFc=20Lefort?= <loic@rivosinc.com>
-Subject: [PATCH 4/5] target/riscv: pmp: exit csr writes early if value was not
- changed
-Date: Tue, 25 Feb 2025 17:00:51 +0100
-Message-ID: <20250225160052.39564-5-loic@rivosinc.com>
+Subject: [PATCH 0/5] target/riscv: Smepmp fixes to match specification
+Date: Tue, 25 Feb 2025 17:00:47 +0100
+Message-ID: <20250225160052.39564-1-loic@rivosinc.com>
 X-Mailer: git-send-email 2.47.2
-In-Reply-To: <20250225160052.39564-1-loic@rivosinc.com>
-References: <20250225160052.39564-1-loic@rivosinc.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::42c;
- envelope-from=loic@rivosinc.com; helo=mail-wr1-x42c.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::32b;
+ envelope-from=loic@rivosinc.com; helo=mail-wm1-x32b.google.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -105,59 +101,26 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Signed-off-by: Loïc Lefort <loic@rivosinc.com>
----
- target/riscv/pmp.c | 22 +++++++++++++++-------
- 1 file changed, 15 insertions(+), 7 deletions(-)
+Hi,
 
-diff --git a/target/riscv/pmp.c b/target/riscv/pmp.c
-index e0ea436f8e..e4fee10d93 100644
---- a/target/riscv/pmp.c
-+++ b/target/riscv/pmp.c
-@@ -141,6 +141,11 @@ static inline uint8_t pmp_read_cfg(CPURISCVState *env, uint32_t pmp_index)
- static bool pmp_write_cfg(CPURISCVState *env, uint32_t pmp_index, uint8_t val)
- {
-     if (pmp_index < MAX_RISCV_PMPS) {
-+        if (env->pmp_state.pmp[pmp_index].cfg_reg == val) {
-+            /* no change */
-+            return false;
-+        }
-+
-         if (pmp_is_readonly(env, pmp_index)) {
-             qemu_log_mask(LOG_GUEST_ERROR,
-                           "ignoring pmpcfg write - read only\n");
-@@ -528,6 +533,11 @@ void pmpaddr_csr_write(CPURISCVState *env, uint32_t addr_index,
-     bool is_next_cfg_tor = false;
- 
-     if (addr_index < MAX_RISCV_PMPS) {
-+        if (env->pmp_state.pmp[addr_index].addr_reg == val) {
-+            /* no change */
-+            return;
-+        }
-+
-         /*
-          * In TOR mode, need to check the lock bit of the next pmp
-          * (if there is a next).
-@@ -544,14 +554,12 @@ void pmpaddr_csr_write(CPURISCVState *env, uint32_t addr_index,
-         }
- 
-         if (!pmp_is_readonly(env, addr_index)) {
--            if (env->pmp_state.pmp[addr_index].addr_reg != val) {
--                env->pmp_state.pmp[addr_index].addr_reg = val;
--                pmp_update_rule_addr(env, addr_index);
--                if (is_next_cfg_tor) {
--                    pmp_update_rule_addr(env, addr_index + 1);
--                }
--                tlb_flush(env_cpu(env));
-+            env->pmp_state.pmp[addr_index].addr_reg = val;
-+            pmp_update_rule_addr(env, addr_index);
-+            if (is_next_cfg_tor) {
-+                pmp_update_rule_addr(env, addr_index + 1);
-             }
-+            tlb_flush(env_cpu(env));
-         } else {
-             qemu_log_mask(LOG_GUEST_ERROR,
-                           "ignoring pmpaddr write - read only\n");
+These patches fix Smepmp implementation to make it compliant with the spec.
+
+First patch limits RLB to CSR changes since RLB should not affect privilege
+evaluation. Patch 2 extracts some common code into a function (to be used in
+patch 3). Patch 3 fixes validation of pmpcfg CSR writes in order to match Smepmp
+specification. Patch 4 is a small optimization and last patch is just removing
+redundant code.
+
+Loïc Lefort (5):
+  target/riscv: pmp: don't allow RLB to bypass rule privileges
+  target/riscv: pmp: move Smepmp operation conversion into a function
+  target/riscv: pmp: fix checks on writes to pmpcfg in Smepmp MML mode
+  target/riscv: pmp: exit csr writes early if value was not changed
+  target/riscv: pmp: remove redundant check in pmp_is_locked
+
+ target/riscv/pmp.c | 151 +++++++++++++++++++++++++--------------------
+ 1 file changed, 83 insertions(+), 68 deletions(-)
+
 -- 
 2.47.2
 
