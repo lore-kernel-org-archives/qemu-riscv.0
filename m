@@ -4,87 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6EDEAC021BE
-	for <qemu-riscv@archiver.kernel.org>; Wed, 26 Feb 2025 02:47:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9A112C021BF
+	for <qemu-riscv@archiver.kernel.org>; Wed, 26 Feb 2025 11:36:33 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tn7SK-0006jG-Ux; Tue, 25 Feb 2025 21:47:28 -0500
+	id 1tnFhy-0006l4-KH; Wed, 26 Feb 2025 06:36:10 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1tn7S8-0006gG-7q; Tue, 25 Feb 2025 21:47:19 -0500
-Received: from mail-vs1-xe2b.google.com ([2607:f8b0:4864:20::e2b])
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1tnFhw-0006kS-1j
+ for qemu-riscv@nongnu.org; Wed, 26 Feb 2025 06:36:08 -0500
+Received: from mail-pl1-x633.google.com ([2607:f8b0:4864:20::633])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1tn7S5-0004c9-H9; Tue, 25 Feb 2025 21:47:15 -0500
-Received: by mail-vs1-xe2b.google.com with SMTP id
- ada2fe7eead31-4be74b9de53so1870586137.3; 
- Tue, 25 Feb 2025 18:47:11 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1tnFhq-0003Wv-Gz
+ for qemu-riscv@nongnu.org; Wed, 26 Feb 2025 06:36:07 -0500
+Received: by mail-pl1-x633.google.com with SMTP id
+ d9443c01a7336-220f4dd756eso141370305ad.3
+ for <qemu-riscv@nongnu.org>; Wed, 26 Feb 2025 03:36:01 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1740538031; x=1741142831; darn=nongnu.org;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=F95Tvv63zG7/DaG/ueIhsClwZWNLrFPgC5rHgRqZz84=;
- b=ml5lDpNdvfv2npPKVSdkyzGuy1K3kvZzpEIlJI+hDHZVQrYYQL/uW6duPRAjkM/EbH
- 2YRyQB1zJrWh397NYjLAiwZiAcEWGSmk5/yN1+rbfWIdNRCQHBHoH4gDJyTRel33KXm0
- 7aKvJrLkHMTwK9NWIDJU8dmeb51zvNDBVLtLHizSWd2F7QWZmsvJTTDG+OIKBinJv6pv
- gBNEi62G4H1vp3pSm5Vgv2mq9KZwlYsgT/Gzxio8+6H42wKbSuK4bRwuUUc16c0VYkHt
- bOYL00nA29m/88z/1g3xlKyLmaVFKJDWfry21tWvmuSSunNkuECnlol1/mzzbIz16RiE
- hHLQ==
+ d=ventanamicro.com; s=google; t=1740569761; x=1741174561; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=h2MubOhANbXa6uZuLvkBxKL10EQPxXfrs+dkjDMImQ0=;
+ b=NSwA7WR34iO4v+HZxLsSDB4WouFrYOKuS1zAMyGet8Flrlu77gE11fy06J3HOZeTml
+ LWT4XgL70vORu3RnX4yaONYNsszYcDBi5KL2xo8FNYYjgqEPs9DU34T2HshMhr2gWDK7
+ phfRbngw/QIOAow40G53FJRnKT1IOKg/DD622HVMYqRmdEWVru4k9S6pJ1tje9cDM6NA
+ GKRpQghkC+M16bzb2C825FfQ2p6dSTj3YBraBXDifLm9pEky3OgcsTiAWk/dZ2sOmgK/
+ Cw8jMQVQOiwjTfNCw/Lri9Mms3VWw2uqghXtaon4RnxKyMiI6RMCj8KCg5tfpLGdttJP
+ VzTQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1740538031; x=1741142831;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=F95Tvv63zG7/DaG/ueIhsClwZWNLrFPgC5rHgRqZz84=;
- b=BnSAGojpNGY/XB+rx1XkdT1LCOkR3Nwl+MoBFRI1qtc+SosRd+tcAkKhqblYuXAI/R
- un31rD0iqS7cPelTkUgdJ+KdtsKtCRX6aTwXCEJG22Ox6rVC0Ms+5Si7i5RzyUuSmFkU
- vxb2wjTmOvuUpcOJlXIEBrQK1O/gnEW+adz7CIbeWmJT6TsKcxUSv7pTnQgIpQbfaR8N
- 7LgbeBNfRPcGYPtXjrvMSCvTYpJnQi9lCj+2lH2H0/dmP225VpPLNyfWNafCSJU9/ROc
- dCgWQE/fGO8PipXLZyGArj574r2/EsxMOcPa536tVw95Q85rHtrBrQFuXdnpDr135HMw
- HOnA==
+ d=1e100.net; s=20230601; t=1740569761; x=1741174561;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=h2MubOhANbXa6uZuLvkBxKL10EQPxXfrs+dkjDMImQ0=;
+ b=YDt+YZ0VjyMUh9434wR3zr+pjyAWVLNmKRQoIPqk/G1dDZaeAYOuiGWdzxllsmpVR4
+ yazbJ9g6MCNIDn2SMkC36Pfc29EnpW2T90y5CGAGQFtuqEmBBJfkncPv5Pi2aPFzQCBN
+ ZGg0jB2AYyUub1cuuW60kgkWP8V1tLuL+z4ZG/jDlX745/5zfVtxUlHfwZAof/TsB1eF
+ A2dHO41ecK+P4QM77IEqgzJF8Ex80QDzztzdVaf6ge8JWYLWWqgCna5Pd32vO1JfH9lz
+ vbRJq4utYBTFGAG5Cqbui7SjJHPHxu1bkBHZypQwZBWrM4hHAZsozUNl1iklZpqcqRC3
+ RIGA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCU/z3bnEjcJIOyRbK3Yhi27zVyJPD4M8HkS5X4gqCGiabG6p+iJFDD4YIHeOiacJFTb0ROD2WINN+OTYA==@nongnu.org,
- AJvYcCUf71VuLnViCEUj3IOm/JYsgu8VrxglEvWc521BsmaPfR/niFSrku55XBNAv2v6vqUR4U3Y3CFpOq9S@nongnu.org
-X-Gm-Message-State: AOJu0Yxb8c0Rij4izLReysX+cQ4UuwILaI+r/AK4XnCuohU1TNgKVJV3
- glnO3phzox5GmcJY/ZP/V+/0SeQgx7HSsiRZ2rDswaPpaNRHj37A+mRUR3c8U9PoSfiK7jezATZ
- bBGY3EnUFDmBzJ3yWDJnoNoHveWY=
-X-Gm-Gg: ASbGnct9QIEJddkQ2WYWov0wPe7lsY+JZy7tK9ah8CE+58AUEmp9/cUKzD+OCHcHuqm
- APAIJHTIbEu2bLGW/MfekQT7w60ZMB6ecVKZxJ5haxLpTJZT4CjB09GLY2PGzBrjnD6yUk5lkUJ
- 9ADdatZ1f4kB6xtlX2tMAODyqq64mrpV69XxJ58A==
-X-Google-Smtp-Source: AGHT+IFZck125UeBc09nrlot+7p15RYZmDSPxo+kMotxrB1ySozOc1mrwqU5qKOz/T0DDI0IoVYIL0Hp6bQqqQ2fB6Q=
-X-Received: by 2002:a05:6102:3ed5:b0:4bb:b809:36c0 with SMTP id
- ada2fe7eead31-4c00ae566bbmr3582390137.20.1740538030742; Tue, 25 Feb 2025
- 18:47:10 -0800 (PST)
+ AJvYcCVlX2ZVM5zhYMQ5NFAxYvPUx9KfOOvUhKdQ0kQ90t1rj2fTW+xtnf/Wxwbtk3XqEcLxrJRXFgWU1CCR@nongnu.org
+X-Gm-Message-State: AOJu0YzmaB7XY1+9kijNELhPmoCmgOtCzKyOrv++V3x8unACdONLjB0u
+ qJ2ZoBI+RRyRYu5PIq/tGPKHiPbdEGUCtuOtSh5eTGl5U2OuimSxj5NiYg14ltY=
+X-Gm-Gg: ASbGncvW0TPv7iWTB9PvvtzKY5vbVGMiqynTrtbC2UgJmcu1iU7lsinop3phNsWMqYt
+ 8lFVCymP8dBe/x4ZDBBnzrAmJksZiRT3JOUoH35ghykH7O3TeGhYwvWDy1PUoFE+U1yrORYlC/t
+ u63+H48ZqpKCb1tbXmiRR75Zb5lWY73m8NOUuNPAxV+xQN28qGJoHNGRIgLgKOlzMWhlpeNESzY
+ AmQDFQfMub88x97IU/xBIge0QrI/J2LnDRZInqy8zZA4+QvtGFYxG0wkaKaR9AO675XmmaqG2kK
+ 3JDFT12fzsyH7LAfTmnXSUSNT0ksBaIm+C13h4WUomuTNVy1rnlQ23ER2//bl9liWc7H7L+Kpnb
+ vzTei
+X-Google-Smtp-Source: AGHT+IG1rGwfGr6t8stP7wq/c4j/04pRegpw5iJKxj1vWg0+87G2/WJ7LvRZX+NVbl1PQj7bKcY33g==
+X-Received: by 2002:a17:902:e543:b0:21f:515:d61 with SMTP id
+ d9443c01a7336-22307b52f48mr106307795ad.21.1740569760835; 
+ Wed, 26 Feb 2025 03:36:00 -0800 (PST)
+Received: from ?IPV6:2804:7f0:bcc0:8aac:3850:3cde:f614:deb0?
+ ([2804:7f0:bcc0:8aac:3850:3cde:f614:deb0])
+ by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-2230a0aec38sm29346325ad.233.2025.02.26.03.35.56
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 26 Feb 2025 03:36:00 -0800 (PST)
+Message-ID: <58c4d7e5-a4a3-4a4d-b5d9-57fdbedd97f0@ventanamicro.com>
+Date: Wed, 26 Feb 2025 08:35:54 -0300
 MIME-Version: 1.0
-References: <20250214062443.9936-1-sebastian.huber@embedded-brains.de>
- <20250220-reggae-hardness-907e385516d8@spud>
- <CAKmqyKNex8vQuT3ArR3gePfGfeLCZbW0DxzD9dz8oNAODE8sbw@mail.gmail.com>
- <20250224-ignition-afternoon-9d4996362813@spud>
-In-Reply-To: <20250224-ignition-afternoon-9d4996362813@spud>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Wed, 26 Feb 2025 12:46:44 +1000
-X-Gm-Features: AQ5f1Jqq1J74sJURigvO-mkwQjY47A6DHDEa-hNO_hdSZ5KR_othf_2DV_C9Eho
-Message-ID: <CAKmqyKOXkUNSdw-xeboHdo3wTF=73378h6_U9S-0aHB--wCUJQ@mail.gmail.com>
-Subject: Re: [PATCH 0/5] Improve Microchip Polarfire SoC customization
-To: Conor Dooley <conor@kernel.org>,
- =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@linaro.org>, 
- Peter Maydell <peter.maydell@linaro.org>
-Cc: Sebastian Huber <sebastian.huber@embedded-brains.de>, qemu-devel@nongnu.org,
- Conor Dooley <conor.dooley@microchip.com>, Bin Meng <bin.meng@windriver.com>, 
- alistair.francis@wdc.com, qemu-riscv@nongnu.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::e2b;
- envelope-from=alistair23@gmail.com; helo=mail-vs1-xe2b.google.com
-X-Spam_score_int: -17
-X-Spam_score: -1.8
-X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 1/3] hw/intc/imsic: refine the IMSIC realize
+To: Yong-Xuan Wang <yongxuan.wang@sifive.com>, qemu-devel@nongnu.org,
+ qemu-riscv@nongnu.org
+Cc: greentime.hu@sifive.com, vincent.chen@sifive.com, frank.chang@sifive.com, 
+ jim.shu@sifive.com, Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, Weiwei Li
+ <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
+References: <20250224025722.3999-1-yongxuan.wang@sifive.com>
+ <20250224025722.3999-2-yongxuan.wang@sifive.com>
+Content-Language: en-US
+From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+In-Reply-To: <20250224025722.3999-2-yongxuan.wang@sifive.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::633;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pl1-x633.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -102,44 +109,107 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Tue, Feb 25, 2025 at 7:28=E2=80=AFAM Conor Dooley <conor@kernel.org> wro=
-te:
->
-> On Mon, Feb 24, 2025 at 03:14:00PM +1000, Alistair Francis wrote:
-> > On Fri, Feb 21, 2025 at 4:31=E2=80=AFAM Conor Dooley <conor@kernel.org>=
- wrote:
-> > >
-> > > +cc qemu-riscv, Alistar.
-> > >
-> > > On Fri, Feb 14, 2025 at 07:24:37AM +0100, Sebastian Huber wrote:
-> > > > Booting the microchip-icicle-kit machine using the latest PolarFire=
- SoC
-> > > > Hart Software Services (HSS) no longer works since Qemu lacks suppo=
-rt
-> > > > for several registers (clocks, DRAM controller). Also reading from =
-the
-> > > > SDCard does not work currently.
-> > >
-> > > On that note, I think the inaccurate docs about polarfire should be
-> > > removed. There's a wiki page here with dead links, or links to things
-> > > that do not work anymore:
-> > > https://wiki.qemu.org/Documentation/Platforms/RISCV#Microchip_PolarFi=
-re_SoC_Icicle_Kit
-> > > I think the whole section should be removed, find it kinda odd that
-> > > there's a polarfire section but not for any other board. Either way,
-> > > it's talking about something that just does not work, the current HSS
-> > > and Yocto don't boot.
-> >
-> > The wiki is independent of the QEMU code base, so you can modify it. I
-> > agree that we should remove outdated/wrong information as it's very
-> > confusing to users.
->
-> I don't have an account to make the modification, any clue who has one
-> and can hook me up with one?
 
-@Peter Maydell  @Philippe Mathieu-Daud=C3=A9 can you create wiki accounts?
 
-I don't seem to have permissions to create new accounts
+On 2/23/25 11:57 PM, Yong-Xuan Wang wrote:
+> When the IMSIC is emulated in the kernel, the GPIO output lines to CPUs
+> and aia_ireg_rmw_fn setting can be remove. In this case the IMSIC
+> trigger CPU interrupts by KVM APIs, and the RMW of IREG is handled in
+> kernel.
+> 
+> This patch also move the code that claim the CPU interrupts to the
+> beginning of IMSIC realization. This can avoid the unnecessary resource
+> allocation before checking failed.
+> 
+> Signed-off-by: Yong-Xuan Wang <yongxuan.wang@sifive.com>
+> ---
 
-Alistair
+Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+
+>   hw/intc/riscv_imsic.c | 47 ++++++++++++++++++++++++-------------------
+>   1 file changed, 26 insertions(+), 21 deletions(-)
+> 
+> diff --git a/hw/intc/riscv_imsic.c b/hw/intc/riscv_imsic.c
+> index dc8162c0a7c9..241b12fef09f 100644
+> --- a/hw/intc/riscv_imsic.c
+> +++ b/hw/intc/riscv_imsic.c
+> @@ -349,7 +349,19 @@ static void riscv_imsic_realize(DeviceState *dev, Error **errp)
+>       CPUState *cpu = cpu_by_arch_id(imsic->hartid);
+>       CPURISCVState *env = cpu ? cpu_env(cpu) : NULL;
+>   
+> +    /* Claim the CPU interrupt to be triggered by this IMSIC */
+> +    if (riscv_cpu_claim_interrupts(rcpu,
+> +            (imsic->mmode) ? MIP_MEIP : MIP_SEIP) < 0) {
+> +        error_setg(errp, "%s already claimed",
+> +                   (imsic->mmode) ? "MEIP" : "SEIP");
+> +        return;
+> +    }
+> +
+>       if (!kvm_irqchip_in_kernel()) {
+> +        /* Create output IRQ lines */
+> +        imsic->external_irqs = g_malloc(sizeof(qemu_irq) * imsic->num_pages);
+> +        qdev_init_gpio_out(dev, imsic->external_irqs, imsic->num_pages);
+> +
+>           imsic->num_eistate = imsic->num_pages * imsic->num_irqs;
+>           imsic->eidelivery = g_new0(uint32_t, imsic->num_pages);
+>           imsic->eithreshold = g_new0(uint32_t, imsic->num_pages);
+> @@ -361,18 +373,6 @@ static void riscv_imsic_realize(DeviceState *dev, Error **errp)
+>                             IMSIC_MMIO_SIZE(imsic->num_pages));
+>       sysbus_init_mmio(SYS_BUS_DEVICE(dev), &imsic->mmio);
+>   
+> -    /* Claim the CPU interrupt to be triggered by this IMSIC */
+> -    if (riscv_cpu_claim_interrupts(rcpu,
+> -            (imsic->mmode) ? MIP_MEIP : MIP_SEIP) < 0) {
+> -        error_setg(errp, "%s already claimed",
+> -                   (imsic->mmode) ? "MEIP" : "SEIP");
+> -        return;
+> -    }
+> -
+> -    /* Create output IRQ lines */
+> -    imsic->external_irqs = g_malloc(sizeof(qemu_irq) * imsic->num_pages);
+> -    qdev_init_gpio_out(dev, imsic->external_irqs, imsic->num_pages);
+> -
+>       /* Force select AIA feature and setup CSR read-modify-write callback */
+>       if (env) {
+>           if (!imsic->mmode) {
+> @@ -381,8 +381,11 @@ static void riscv_imsic_realize(DeviceState *dev, Error **errp)
+>           } else {
+>               rcpu->cfg.ext_smaia = true;
+>           }
+> -        riscv_cpu_set_aia_ireg_rmw_fn(env, (imsic->mmode) ? PRV_M : PRV_S,
+> -                                      riscv_imsic_rmw, imsic);
+> +
+> +        if (!kvm_irqchip_in_kernel()) {
+> +            riscv_cpu_set_aia_ireg_rmw_fn(env, (imsic->mmode) ? PRV_M : PRV_S,
+> +                                          riscv_imsic_rmw, imsic);
+> +        }
+>       }
+>   
+>       msi_nonbroken = true;
+> @@ -464,15 +467,17 @@ DeviceState *riscv_imsic_create(hwaddr addr, uint32_t hartid, bool mmode,
+>       sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
+>       sysbus_mmio_map(SYS_BUS_DEVICE(dev), 0, addr);
+>   
+> -    for (i = 0; i < num_pages; i++) {
+> -        if (!i) {
+> -            qdev_connect_gpio_out_named(dev, NULL, i,
+> -                                        qdev_get_gpio_in(DEVICE(cpu),
+> +    if (!kvm_irqchip_in_kernel()) {
+> +        for (i = 0; i < num_pages; i++) {
+> +            if (!i) {
+> +                qdev_connect_gpio_out_named(dev, NULL, i,
+> +                                            qdev_get_gpio_in(DEVICE(cpu),
+>                                               (mmode) ? IRQ_M_EXT : IRQ_S_EXT));
+> -        } else {
+> -            qdev_connect_gpio_out_named(dev, NULL, i,
+> -                                        qdev_get_gpio_in(DEVICE(cpu),
+> +            } else {
+> +                qdev_connect_gpio_out_named(dev, NULL, i,
+> +                                            qdev_get_gpio_in(DEVICE(cpu),
+>                                               IRQ_LOCAL_MAX + i - 1));
+> +            }
+>           }
+>       }
+>   
+
 
