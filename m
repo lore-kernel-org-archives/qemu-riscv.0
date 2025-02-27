@@ -4,83 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B0FECC19776
-	for <qemu-riscv@archiver.kernel.org>; Wed, 26 Feb 2025 23:21:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E7C00C021BE
+	for <qemu-riscv@archiver.kernel.org>; Thu, 27 Feb 2025 07:31:21 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tnQi7-0002Mg-1r; Wed, 26 Feb 2025 18:21:03 -0500
+	id 1tnYMU-0003xo-K2; Thu, 27 Feb 2025 02:31:15 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1tnQhu-00028y-Vs; Wed, 26 Feb 2025 18:20:51 -0500
-Received: from mail-vk1-xa2c.google.com ([2607:f8b0:4864:20::a2c])
+ (Exim 4.90_1) (envelope-from <jason.chien@sifive.com>)
+ id 1tnYMJ-0003uy-BT
+ for qemu-riscv@nongnu.org; Thu, 27 Feb 2025 02:31:03 -0500
+Received: from mail-pl1-x62c.google.com ([2607:f8b0:4864:20::62c])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1tnQht-0001M3-9r; Wed, 26 Feb 2025 18:20:50 -0500
-Received: by mail-vk1-xa2c.google.com with SMTP id
- 71dfb90a1353d-521b5bd2268so276801e0c.0; 
- Wed, 26 Feb 2025 15:20:48 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <jason.chien@sifive.com>)
+ id 1tnYMF-0004Mf-1p
+ for qemu-riscv@nongnu.org; Thu, 27 Feb 2025 02:31:03 -0500
+Received: by mail-pl1-x62c.google.com with SMTP id
+ d9443c01a7336-2212a930001so15582515ad.0
+ for <qemu-riscv@nongnu.org>; Wed, 26 Feb 2025 23:30:56 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1740612048; x=1741216848; darn=nongnu.org;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=lihyeHMp5H2UMxaKitKFSk6Vszj7Vm/LIP8ICpGjSXQ=;
- b=BaEyucwioNWkERFMUBORVXR+E/PTFmOsimzfXpnlRgtPvxZvKVaGK2jmS4L+Dwg0rI
- JJlVXG2f9roNQjhn62TyVMNZgcaRQC3WMlY3eKeqXQcHXbfken/XTogsCUekF9sOXzwX
- X7UU/snwRokxjeKrVINeyfXPal4wwp0NCBcghYYarXqnwkV83WOEDyO9U+JqmlhJFR8y
- 50bpPP3gxJGocubXmtV7Sn5y0gyPHchzLulQ9GnzBbkHWtwpA5h0vkeFqLANlAjZhxPM
- Zp1RjJdllses/nRqsNuZyEwAumiEq0p52SMek/lbp5HhOnH2YEuVdcJC7pT12LDwUPnz
- 1JJA==
+ d=sifive.com; s=google; t=1740641455; x=1741246255; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=W1cRaC5gQFqx4sw4ws+KyDi9AyCOSvamK2A+8kQRjfk=;
+ b=KNn6rE69nbePLfv3ugS0yOcP5Wpjftgf722O3giL6xf8327aH1ySk5QGYbNm0ilhb1
+ hKnfC5yYgQfU9xqJzTOTuZ7vM1tZ7le1qnmeVKY9E4T0w1Z+g6NEt3DHy59hq9nmUaQh
+ Vi2FlTKD533y7Mk7eDBhJ4lxFlgg/lRtshVe6oXkC1ws59pEPXm0hTy64G0G6k/DnGw/
+ a3XcZGyb5bRz/doX/+p2UL8Ymuc2nYxIHwLSUskb0gCj619pJ8PDLY8J5bSu+FYSS2dL
+ YzONPAo7E9sNzRYSUlUcF2LvnjITgREddOoFiuvVuJfhJik3Fwu8/FGokG5tWptAg+K2
+ b9Fw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1740612048; x=1741216848;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=lihyeHMp5H2UMxaKitKFSk6Vszj7Vm/LIP8ICpGjSXQ=;
- b=Jaj8YmOrroIToT6s02ZgI5eLgsAbJ85VQSSQ1OJrqJ9SvZAQUnZy/P7s7nZa4nUfNA
- AXxlUkcInk4P7oHcTTbjVIv6pd2W7EamhG/ByI3yYl9GYLbrjNZzpmX80myVPgekq4Gt
- +19Ne9JuzpYGDSQzc8l3XXVMLX5/Rv3UXFfrXBHgjYnxG/uPJnR4A7XwSfcxoBtsvDW0
- iQLoCRx8ZEfkqxVgGuqb/CMFGFxqQt6s8pF4dkeUcBfC13IBlQ4E0xBOMA+yCOZp7W36
- ddwl7otQ6xZeT779CQoK/AKyQP2emhKsPt+y9n4SjN7uGWakIxHLiN6ZLgOWAugFkbKz
- qwTQ==
+ d=1e100.net; s=20230601; t=1740641455; x=1741246255;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=W1cRaC5gQFqx4sw4ws+KyDi9AyCOSvamK2A+8kQRjfk=;
+ b=Bc0MXTQrTaDRECae/HjjJeO4iUll+S+Teqs1CJY3rlSLNj/xGLVfll2VjqVhrehorg
+ hTsZEfKbshrd5+b1GZwy2x9StrIV2VabVyfsvPnJuqpoaUPhGFRQ5qpfrygi/mUP5nNx
+ Bh813FNWEE3xEJYs36LOEjUKLZZ53czE1RC1rM+/n+xpwO1Soj81W18tn3+5CX7kOtb9
+ 7RtC25ESzsZ9pUJ7uYRwT0K3gbc1Mma9YYQa2j01D4Gw1JcpT30yFDbOOyK2J6AzGBQ2
+ nuHYgIJav0mqdD/MD67NShoQc0DR2lAfLmZLCAAFXQJSDf7EsZk+Lg1u9cWfDuYLsE/Y
+ 2sMw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVVWs+VUftIwiTa0xmeFigU0GEXIMKZITiGVMB0YgkITfRYwNaHHt3SWPVHELRf3mY/RuyhQxyyxSEV@nongnu.org
-X-Gm-Message-State: AOJu0YzFLzeDbpA7LjT5r/o9Y2YjPeDUPHIC7RSvETlw7yq/oBBM0BBA
- 595iw0We7g19SWo4923a8f9GkHdaBxFFBfiaZiSOMd9jO4OkI2v02+d44eir9FqY+Wx1RnKczp6
- m1Ek620Gq16eYTOBv4/yPtbIWvRk=
-X-Gm-Gg: ASbGnctSscDzIeF5GoSUfxuN84D+axUxfFoDwthQDFPKixacW2Jnkmb3b5J2ojrteLN
- KvQ0xfIguOmqWQS+N3ovjIliV6LAcg79mFcP8CwMKWgUi+zQi/wPCXc9UhUBxQDpvZ1hvzmktWx
- WtZ3eZKs9drCzWX5N0dnl+9nxHwugMoOLpSu0YEw==
-X-Google-Smtp-Source: AGHT+IHFM1ocPKcHeH+UXQfOGTcdEbK/sUAGxZRwTPzx4zoQjVVlux6tFyUvn5yM2yfM+fFxyI7lZGeflp4Df5OgFe0=
-X-Received: by 2002:a05:6122:32d5:b0:516:1ab2:9955 with SMTP id
- 71dfb90a1353d-5224cced0b6mr3488737e0c.6.1740612047771; Wed, 26 Feb 2025
- 15:20:47 -0800 (PST)
+ AJvYcCXmqhO8L1fnKlzMVcsXv1bJ9aRieZOiP16b7PRvQZ9Gdkd2ptWAtHD5Bg5t9RGYBCpYOr4fjUSA3WKQ@nongnu.org
+X-Gm-Message-State: AOJu0Yw9jUrIrKx2unPhhB13TsPZZex+/ek1enYksTAbiJ9tQQY4jzZc
+ aycwlcq6mEecD6WYRqTuwJ8OBItJeMHHhESn5n6k3qeux09oJaKt3IpQnzectno=
+X-Gm-Gg: ASbGncs7NN7iYVokGGJLpPtT3picGFZXUzwGRcsfSwYD6VcIJ0wm46OJxQMns7AnJfe
+ LpUZCEKYUQrUMsmJVqzS4DNv6GIZWe11NVh4NZ6DMd0Xs5t00InI8gV/gQpyzAQG0ChliQA98Hz
+ xjX71G6V+Q6S2UzYTwR8HWN2uRqD3tWZUA1EDLh+uP93AjUo2BleN9UoQPKbCnHfrqrco/Wtw5u
+ AsGjtngh14sj5yhdY6IKNDYhUAx8/xSZyT+jqnrCVisD0cSE53b51flUjTO4lCA9AUxAcr/bF4f
+ sRU2vtDNBkA7aJbcjW0qfIktckwZH59E7ieSuIvlOXAp+VHlpfObpw==
+X-Google-Smtp-Source: AGHT+IFDxKXagRZxdP/bUaV7OZcddxqG+Egy14RcpjwohSoEoHaJNhvo4C47QQbATRh45ZyZXkt7QQ==
+X-Received: by 2002:a05:6a21:8801:b0:1f0:e3b9:6b17 with SMTP id
+ adf61e73a8af0-1f0e3b96b1amr21723557637.26.1740641455623; 
+ Wed, 26 Feb 2025 23:30:55 -0800 (PST)
+Received: from hsinchu16.internal.sifive.com ([210.176.154.34])
+ by smtp.gmail.com with ESMTPSA id
+ 41be03b00d2f7-aee7dec6727sm716764a12.51.2025.02.26.23.30.54
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 26 Feb 2025 23:30:55 -0800 (PST)
+From: Jason Chien <jason.chien@sifive.com>
+To: qemu-devel@nongnu.org,
+	qemu-riscv@nongnu.org
+Cc: Jiri Slaby <jslaby@suse.cz>,
+	Jason Chien <jason.chien@sifive.com>
+Subject: [PATCH] hw/misc/edu: Rename macros indicating the direction of DMA
+ operations
+Date: Thu, 27 Feb 2025 15:30:49 +0800
+Message-ID: <20250227073049.32655-1-jason.chien@sifive.com>
+X-Mailer: git-send-email 2.43.2
 MIME-Version: 1.0
-References: <303616ccad2b5309768157b50d93b3e89fecc9cb.1740371468.git.zhouquan@iscas.ac.cn>
-In-Reply-To: <303616ccad2b5309768157b50d93b3e89fecc9cb.1740371468.git.zhouquan@iscas.ac.cn>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Thu, 27 Feb 2025 09:20:21 +1000
-X-Gm-Features: AQ5f1Jol6HTKbncCCO9b7LU1RZSmTybESWrWdyWiQmLuJ2_VL_WemsmB6_16Kek
-Message-ID: <CAKmqyKNGFj5rzfyMvn-5OEdADBa0-ULikuLczSoOUB+Dg_fQ_w@mail.gmail.com>
-Subject: Re: [PATCH] target/riscv/kvm: Add some exts support
-To: zhouquan@iscas.ac.cn
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
- bmeng@tinylab.org, liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, 
- palmer@rivosinc.com, ajones@ventanamicro.com, dbarboza@ventanamicro.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::a2c;
- envelope-from=alistair23@gmail.com; helo=mail-vk1-xa2c.google.com
-X-Spam_score_int: -17
-X-Spam_score: -1.8
-X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::62c;
+ envelope-from=jason.chien@sifive.com; helo=mail-pl1-x62c.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -96,47 +100,44 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Mon, Feb 24, 2025 at 2:46=E2=80=AFPM <zhouquan@iscas.ac.cn> wrote:
->
-> From: Quan Zhou <zhouquan@iscas.ac.cn>
->
-> When the Sscofpmf/Svade/Svadu/Smnpm/Ssnpm exts is available
-> expose it to the guest so that guest can use it.
->
-> Signed-off-by: Quan Zhou <zhouquan@iscas.ac.cn>
+This commit renames the macros to accurately reflect the direction of
+DMA operations.
 
-Thanks!
+EDU_DMA_TO_PCI now represents reading memory content into the EDU buffer,
+while EDU_DMA_FROM_PCI represents writing EDU buffer content to memory.
 
-Applied to riscv-to-apply.next
+The previous naming was misleading, as the definitions were reversed.
 
-Alistair
+Signed-off-by: Jason Chien <jason.chien@sifive.com>
+---
+ hw/misc/edu.c | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-> ---
->  target/riscv/kvm/kvm-cpu.c | 5 +++++
->  1 file changed, 5 insertions(+)
->
-> diff --git a/target/riscv/kvm/kvm-cpu.c b/target/riscv/kvm/kvm-cpu.c
-> index 23ce779359..06a9f30841 100644
-> --- a/target/riscv/kvm/kvm-cpu.c
-> +++ b/target/riscv/kvm/kvm-cpu.c
-> @@ -319,9 +319,14 @@ static KVMCPUConfig kvm_multi_ext_cfgs[] =3D {
->      KVM_EXT_CFG("zvksed", ext_zvksed, KVM_RISCV_ISA_EXT_ZVKSED),
->      KVM_EXT_CFG("zvksh", ext_zvksh, KVM_RISCV_ISA_EXT_ZVKSH),
->      KVM_EXT_CFG("zvkt", ext_zvkt, KVM_RISCV_ISA_EXT_ZVKT),
-> +    KVM_EXT_CFG("smnpm", ext_smnpm, KVM_RISCV_ISA_EXT_SMNPM),
->      KVM_EXT_CFG("smstateen", ext_smstateen, KVM_RISCV_ISA_EXT_SMSTATEEN)=
-,
->      KVM_EXT_CFG("ssaia", ext_ssaia, KVM_RISCV_ISA_EXT_SSAIA),
-> +    KVM_EXT_CFG("sscofpmf", ext_sscofpmf, KVM_RISCV_ISA_EXT_SSCOFPMF),
-> +    KVM_EXT_CFG("ssnpm", ext_ssnpm, KVM_RISCV_ISA_EXT_SSNPM),
->      KVM_EXT_CFG("sstc", ext_sstc, KVM_RISCV_ISA_EXT_SSTC),
-> +    KVM_EXT_CFG("svade", ext_svade, KVM_RISCV_ISA_EXT_SVADE),
-> +    KVM_EXT_CFG("svadu", ext_svadu, KVM_RISCV_ISA_EXT_SVADU),
->      KVM_EXT_CFG("svinval", ext_svinval, KVM_RISCV_ISA_EXT_SVINVAL),
->      KVM_EXT_CFG("svnapot", ext_svnapot, KVM_RISCV_ISA_EXT_SVNAPOT),
->      KVM_EXT_CFG("svpbmt", ext_svpbmt, KVM_RISCV_ISA_EXT_SVPBMT),
-> --
-> 2.34.1
->
->
+diff --git a/hw/misc/edu.c b/hw/misc/edu.c
+index 504178b4a2..1353c67dc2 100644
+--- a/hw/misc/edu.c
++++ b/hw/misc/edu.c
+@@ -63,8 +63,8 @@ struct EduState {
+ 
+ #define EDU_DMA_RUN             0x1
+ #define EDU_DMA_DIR(cmd)        (((cmd) & 0x2) >> 1)
+-# define EDU_DMA_FROM_PCI       0
+-# define EDU_DMA_TO_PCI         1
++# define EDU_DMA_TO_PCI         0
++# define EDU_DMA_FROM_PCI       1
+ #define EDU_DMA_IRQ             0x4
+     struct dma_state {
+         dma_addr_t src;
+@@ -146,7 +146,7 @@ static void edu_dma_timer(void *opaque)
+         return;
+     }
+ 
+-    if (EDU_DMA_DIR(edu->dma.cmd) == EDU_DMA_FROM_PCI) {
++    if (EDU_DMA_DIR(edu->dma.cmd) == EDU_DMA_TO_PCI) {
+         uint64_t dst = edu->dma.dst;
+         edu_check_range(dst, edu->dma.cnt, DMA_START, DMA_SIZE);
+         dst -= DMA_START;
+-- 
+2.43.2
+
 
