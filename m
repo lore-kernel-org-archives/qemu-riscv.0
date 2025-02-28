@@ -4,94 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0D64BC19F2E
-	for <qemu-riscv@archiver.kernel.org>; Thu, 27 Feb 2025 14:48:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DC7ABC19F32
+	for <qemu-riscv@archiver.kernel.org>; Fri, 28 Feb 2025 01:20:02 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tnfBI-0005jQ-8Y; Thu, 27 Feb 2025 09:48:08 -0500
+	id 1tnp2d-0006aP-Go; Thu, 27 Feb 2025 20:19:51 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
- id 1tnfB9-0005fU-HE
- for qemu-riscv@nongnu.org; Thu, 27 Feb 2025 09:48:01 -0500
-Received: from mail-pl1-x62f.google.com ([2607:f8b0:4864:20::62f])
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1tnp2P-0006Sd-8r; Thu, 27 Feb 2025 20:19:38 -0500
+Received: from mail-vk1-xa2c.google.com ([2607:f8b0:4864:20::a2c])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
- id 1tnfB5-00010n-KW
- for qemu-riscv@nongnu.org; Thu, 27 Feb 2025 09:47:58 -0500
-Received: by mail-pl1-x62f.google.com with SMTP id
- d9443c01a7336-2234e5347e2so19735285ad.1
- for <qemu-riscv@nongnu.org>; Thu, 27 Feb 2025 06:47:53 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1tnp2N-0002oR-8j; Thu, 27 Feb 2025 20:19:37 -0500
+Received: by mail-vk1-xa2c.google.com with SMTP id
+ 71dfb90a1353d-521c478d433so743887e0c.0; 
+ Thu, 27 Feb 2025 17:19:34 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1740667672; x=1741272472; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=ouxuFR+qq/ps7rpmIIc2v4Y4JNhrl6fTBDzTfB1UsJU=;
- b=JTrYrI5/5brY7tTISQQ8fIhyS9vaQ1/492eH8lolApTF8Lj5xsVNPVh6eOApxtUSMI
- XippYwJ2bor1Ly1xNb1AzDpXW2OLY7RAl48EcZ7us2H0YNGY4utujaf5SCJtiGY3dRzY
- GCLWvSGqa990Udybr6FyAAWdMfobV3PFycweZud7dRQedq23ssFhkEoee1cJi1hSGW7X
- mQtgoDggAiLaHdBXxx0fn8RnXelHuL3MXfR2bijSZHrOAyM9cK+W6FmW6IID+/Z2cffI
- DfNXGmwJVy1j74mMNxM0MAwlLoxRz+z0cExe3yOEZ6wJCOjYEmr4lmFuBrF+pEmdqvTT
- mOLQ==
+ d=gmail.com; s=20230601; t=1740705573; x=1741310373; darn=nongnu.org;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=1jlK16RNducbvQEuAHjldApuBirP4j8l8j9PAI4j0Xg=;
+ b=ZZkd3DghvIY0KBCmL8UBOkZmAIlpgithjc71WhLhgEhYyfQTPWseb18fMGbGd1gix/
+ dZQ/rDWRg3BYHxozF8rjxWBi/XuUue55X7/raw9dYSIt87iax6UV2QS5YLwyJ3sH0C1f
+ 4d0eIHr7skLYW39wh0cvTEfICgo3uEPUiot3fFdFkhnUCK5daJTM41Z2Cs4mg9Kf1W92
+ 56kORCwA3Ji0DQKwmkyzkHaMrdOzhkBEB6h27wfzmD8P/IOQ+50OIyD0Y7op5LU6OXI3
+ 0yfa8BvG8ZlLrKTuZ58IlLcI/S2rD9q3d63GjoFNCsrxCI4Y6l4DPaQRtFZTFvmT3Vi6
+ hUmg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1740667672; x=1741272472;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=ouxuFR+qq/ps7rpmIIc2v4Y4JNhrl6fTBDzTfB1UsJU=;
- b=wwD0xTanqFVpg2ig9+rB+ifv1ZahcoTwSconSTs3FyHleErLC4BDG8vidtTzSi7phT
- osx3g0zlTm+77GWwf1aeUisZQR4tnjAq2L59WsXMK9MHUpNIARCc5cW6o5l81IAKp3Mw
- Due0ViwPdwreSVntlAFdGGaBm4O4Mteol26E6Bcb40h4AEgulBRMz2UARafMYS5xY8UT
- WdZAXIyb9EMdM3f9tytaooQeCoLWhkEVHHfzyqpfe6IqPaeBA1Ms5IQXf81qmh/DIfZh
- RMQEftc3ScW6gCNzEsVzuPQIrIe00RZVsJV93jmWzzWKuSvYQNrijZo4Ebs351xHxd9c
- 8Zrg==
+ d=1e100.net; s=20230601; t=1740705573; x=1741310373;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=1jlK16RNducbvQEuAHjldApuBirP4j8l8j9PAI4j0Xg=;
+ b=eDVIQHOvRUBlsvIHnH2NjV9PCtmpwLzhjif1AMtU6iPDPu6+x2dCQsjmpQPwa46rAN
+ lSg3c/Gh2Sqi7WFk30cnZcEwvVLTBcp1b+fBvCtsT/EvzlhMn4RPEouPLzIN2EEt0Oa4
+ ofIHBPnVYUxT+df31UCbhoizcd5el80tPvu16tyHPd8AEpVQS/DoNnFZ+2SpmlwPYxlL
+ DV55UPHGx2qiwclPNQl+kaQ60h7sZf8FnteP4TowosNBRcQyyM58gvlqNRnlbkCKkrhe
+ 0MLaZFBpf2rQNyY1uWkjamLKWXE8BTdR36RnP5It2cHaxrnw1TaKiiM1BlXHTWDOv3JJ
+ ewmg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWKbhU+NA4s5Q5skRm2jE/9hKNlE+vhOZvQl/diXwCtUDI46a857hPZ9gANiQ+ZphtXeXlc8fYOGkgv@nongnu.org
-X-Gm-Message-State: AOJu0YyxIzGU3m19Sn95+fXUXDgWTqgTpIL+dCUaQwtWuILidQ7+TzyE
- W4loIl7NMts4XcapOjVmviSVaBSr/0KQLXLHJJGUaR5B3nGAb+5Gv1GNUaWOkAo=
-X-Gm-Gg: ASbGncuJpzcJk0W6c+yR+a+on3wIzeOb/tK/ClvC8nXSwnZ86PSiEeYjQQX5wkbVDuu
- 82pmI6X3SL1byfZIjiJghkB+FOaPXqrowrlcu5yzZ0H2VWhPvPysrStX2Jlb34sdVrR6aqeUp31
- 0VImS281Zws0WNW92I9dhU7vfa8cg66LabrnmjRAiw7Cx7mTUxSw0/Zvpca5gE6JBUAG/BejU8u
- LuSqB1phFof7+8KUNk4oRFIfyjZY94KuWBztvub9K8e9uRTWQj8m9UbCel2SDxfFHcSDlDNyiYZ
- Ya2B9m5P7yUZ8LyXwPSBjFlNLPoS6RoDqOjvp/W6kdsfQa0B6Ow4JyWi3ByHW0v8f/6VJsBVMFb
- KC5I=
-X-Google-Smtp-Source: AGHT+IFmlQ51ucfjjSQZormO6+bFNmvYorBpRmdL6Zrhe+jSpBUtjmVEvEsv/XCMXW2UxiGjXQIcbg==
-X-Received: by 2002:a05:6a21:3994:b0:1ee:d317:48e9 with SMTP id
- adf61e73a8af0-1f10acf5fa9mr13499151637.6.1740667672217; 
- Thu, 27 Feb 2025 06:47:52 -0800 (PST)
-Received: from [100.64.0.1] (218-166-197-4.dynamic-ip.hinet.net.
- [218.166.197.4]) by smtp.gmail.com with ESMTPSA id
- 41be03b00d2f7-aee7dec3ce0sm1334227a12.47.2025.02.27.06.47.50
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 27 Feb 2025 06:47:51 -0800 (PST)
-Message-ID: <53591e3f-78d2-463e-b857-0b7d170b84e5@sifive.com>
-Date: Thu, 27 Feb 2025 22:47:47 +0800
+ AJvYcCXNxLHBkh6VGDBk7mPqJpIMqja1NMybOD462K+ZpbFH5/xWm7LNqbPL+mofLR+vXuoIMIqI89rffinZ@nongnu.org
+X-Gm-Message-State: AOJu0YyHmbNX31XFBTDGxm5G/WOUG356b62zXOH3dHQTF4giWGhOyDC5
+ 47CYv6V/6mANcbvCIL/Rh6Uf2W0QMsPTqIBXA4kcARrw4MQf7Jh279IHjP8HN5mbajo0mocg77v
+ +Aupu2k1KbRqwBVhOzrqzjZw3puQ=
+X-Gm-Gg: ASbGncurmvWUlSvte8SlTU8EhGgMgCPYk7d9TEw3sF6kDGfPBWXiXcXLkYi5wQ32Jzx
+ OrDJwOyuWG9E1K1i6360Ojjukk5H5WGuxJBD9LeVxCSiox2LsssKQczT/IKrCLz8Dm6VIXxlTM8
+ wsqs0YIrCvlmgvCxv9OD43cpD86vVMZp8Atmvz
+X-Google-Smtp-Source: AGHT+IHQDB3esgrs6vxN97UuZohLEKgDOa0nZ/JD8cesdOyf1xwBTZPy5QUdovA4PEmuVdAG8wGbYX3vuXQawdb8kbU=
+X-Received: by 2002:a05:6102:3910:b0:4bb:d062:43e with SMTP id
+ ada2fe7eead31-4c044528389mr1619854137.0.1740705573090; Thu, 27 Feb 2025
+ 17:19:33 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 00/12] target/riscv: Fix some RISC-V instruction corner
- cases
-To: Anton Blanchard <antonb@tenstorrent.com>, qemu-riscv@nongnu.org,
- qemu-devel@nongnu.org
-Cc: Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bmeng.cn@gmail.com>,
- Weiwei Li <liwei1518@gmail.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
-References: <20250126072056.4004912-1-antonb@tenstorrent.com>
-Content-Language: en-US
-From: Max Chou <max.chou@sifive.com>
-In-Reply-To: <20250126072056.4004912-1-antonb@tenstorrent.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::62f;
- envelope-from=max.chou@sifive.com; helo=mail-pl1-x62f.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+References: <20250122083617.3940240-1-ethan84@andestech.com>
+ <20250122083617.3940240-3-ethan84@andestech.com>
+In-Reply-To: <20250122083617.3940240-3-ethan84@andestech.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Fri, 28 Feb 2025 11:19:06 +1000
+X-Gm-Features: AQ5f1Jo8etBIkHbZrP0bZUwKIvsNqfSkOSFZKCkFWZcM0gkB0ezDBGA4ULr38Y0
+Message-ID: <CAKmqyKPQWL=o3FohvdK=re5rwmrN=znZna2=QCB3z9rk_uZWVw@mail.gmail.com>
+Subject: Re: [PATCH v10 2/8] memory: Introduce memory region fetch operation
+To: Ethan Chen <ethan84@andestech.com>
+Cc: qemu-devel@nongnu.org, richard.henderson@linaro.org, pbonzini@redhat.com, 
+ palmer@dabbelt.com, alistair.francis@wdc.com, bmeng.cn@gmail.com, 
+ liwei1518@gmail.com, dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com, 
+ peterx@redhat.com, david@redhat.com, philmd@linaro.org, qemu-riscv@nongnu.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2607:f8b0:4864:20::a2c;
+ envelope-from=alistair23@gmail.com; helo=mail-vk1-xa2c.google.com
+X-Spam_score_int: -17
+X-Spam_score: -1.8
+X-Spam_bar: -
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -109,48 +98,279 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Hi Anton,
-
-I hope you’re doing well.
-
-While reviewing this patchset, I noticed a few missing parts related to 
-the mismatched input EEWs encoding constraint.
-I also found a few other rvv encoding issues and planned to submit an 
-upstream patchset to address them.
-However, I think it would be better to merge these fixes into this 
-patchset to maintain the series’ cohesion and keep up to date.
-
-If you agree with this approach, I can integrate the fixes and submit a 
-v2 of the patchset.
-Please let me know your thoughts, and we can discuss the details further.
-
-Thanks,
-Max
-
-On 2025/1/26 3:20 PM, Anton Blanchard wrote:
-> This series fixes some RISC-V instruction corner cases, specifically
-> illegal overlaps between mask and source registers, illegal overlaps
-> between source registers and illegal overlaps between source and
-> destination registers. These were found by looking at miscompares
-> between QEMU and the Tenstorrent fork of Whisper which models this
-> behaviour better than Spike and Sail.
+On Wed, Jan 22, 2025 at 6:39=E2=80=AFPM Ethan Chen via <qemu-devel@nongnu.o=
+rg> wrote:
 >
-> Anton Blanchard (12):
->    target/riscv: Source vector registers cannot overlap mask register
->    target/riscv: handle vrgather mask and source overlap
->    target/riscv: handle vadd.vx form mask and source overlap
->    target/riscv: handle vadd.vv form mask and source overlap
->    target/riscv: handle vslide1down.vx form mask and source overlap
->    target/riscv: handle vzext.vf2 form mask and source overlap
->    target/riscv: handle vwadd.vx form mask and source overlap
->    target/riscv: handle vwadd.vv form mask and source overlap
->    target/riscv: handle vwadd.wv form mask and source overlap
->    target/riscv: handle vwadd.wv form vs1 and vs2 overlap
->    target/riscv: Add CHECK arg to GEN_OPFVF_WIDEN_TRANS
->    target/riscv: handle overlap in widening instructions with overwrite
+> Allow memory regions to have different behaviors for read and fetch
+> operations.
 >
->   target/riscv/insn_trans/trans_rvv.c.inc | 139 ++++++++++++++++++------
->   1 file changed, 108 insertions(+), 31 deletions(-)
+> For example, the RISC-V IOPMP could raise an interrupt when the CPU
+> tries to fetch from a non-executable region.
 >
+> If the fetch operation for a memory region is not implemented, the read
+> operation will still be used for fetch operations.
+>
+> Signed-off-by: Ethan Chen <ethan84@andestech.com>
 
+This looks ok to me, but I would like someone who knows this better to
+review it as well
+
+Acked-by: Alistair Francis <alistair.francis@wdc.com>
+
+Alistair
+
+> ---
+>  accel/tcg/cputlb.c    |   9 +++-
+>  include/exec/memory.h |  27 +++++++++++
+>  system/memory.c       | 104 ++++++++++++++++++++++++++++++++++++++++++
+>  system/trace-events   |   2 +
+>  4 files changed, 140 insertions(+), 2 deletions(-)
+>
+> diff --git a/accel/tcg/cputlb.c b/accel/tcg/cputlb.c
+> index b4ccf0cdcb..71c16a1ac1 100644
+> --- a/accel/tcg/cputlb.c
+> +++ b/accel/tcg/cputlb.c
+> @@ -1947,8 +1947,13 @@ static uint64_t int_ld_mmio_beN(CPUState *cpu, CPU=
+TLBEntryFull *full,
+>          this_size =3D 1 << this_mop;
+>          this_mop |=3D MO_BE;
+>
+> -        r =3D memory_region_dispatch_read(mr, mr_offset, &val,
+> -                                        this_mop, full->attrs);
+> +        if (type =3D=3D MMU_INST_FETCH) {
+> +            r =3D memory_region_dispatch_fetch(mr, mr_offset, &val,
+> +                                             this_mop, full->attrs);
+> +        } else {
+> +            r =3D memory_region_dispatch_read(mr, mr_offset, &val,
+> +                                            this_mop, full->attrs);
+> +        }
+>          if (unlikely(r !=3D MEMTX_OK)) {
+>              io_failed(cpu, full, addr, this_size, type, mmu_idx, r, ra);
+>          }
+> diff --git a/include/exec/memory.h b/include/exec/memory.h
+> index 3ee1901b52..6166d697d9 100644
+> --- a/include/exec/memory.h
+> +++ b/include/exec/memory.h
+> @@ -273,6 +273,11 @@ struct MemoryRegionOps {
+>                    hwaddr addr,
+>                    uint64_t data,
+>                    unsigned size);
+> +    /* Fetch from the memory region. @addr is relative to @mr; @size is
+> +     * in bytes. */
+> +    uint64_t (*fetch)(void *opaque,
+> +                      hwaddr addr,
+> +                      unsigned size);
+>
+>      MemTxResult (*read_with_attrs)(void *opaque,
+>                                     hwaddr addr,
+> @@ -284,6 +289,11 @@ struct MemoryRegionOps {
+>                                      uint64_t data,
+>                                      unsigned size,
+>                                      MemTxAttrs attrs);
+> +    MemTxResult (*fetch_with_attrs)(void *opaque,
+> +                                    hwaddr addr,
+> +                                    uint64_t *data,
+> +                                    unsigned size,
+> +                                    MemTxAttrs attrs);
+>
+>      enum device_endian endianness;
+>      /* Guest-visible constraints: */
+> @@ -2604,6 +2614,23 @@ MemTxResult memory_region_dispatch_write(MemoryReg=
+ion *mr,
+>                                           MemOp op,
+>                                           MemTxAttrs attrs);
+>
+> +
+> +/**
+> + * memory_region_dispatch_fetch: perform a fetch directly to the specifi=
+ed
+> + * MemoryRegion.
+> + *
+> + * @mr: #MemoryRegion to access
+> + * @addr: address within that region
+> + * @pval: pointer to uint64_t which the data is written to
+> + * @op: size, sign, and endianness of the memory operation
+> + * @attrs: memory transaction attributes to use for the access
+> + */
+> +MemTxResult memory_region_dispatch_fetch(MemoryRegion *mr,
+> +                                         hwaddr addr,
+> +                                         uint64_t *pval,
+> +                                         MemOp op,
+> +                                         MemTxAttrs attrs);
+> +
+>  /**
+>   * address_space_init: initializes an address space
+>   *
+> diff --git a/system/memory.c b/system/memory.c
+> index b17b5538ff..7f26f681f9 100644
+> --- a/system/memory.c
+> +++ b/system/memory.c
+> @@ -477,6 +477,51 @@ static MemTxResult memory_region_read_with_attrs_acc=
+essor(MemoryRegion *mr,
+>      return r;
+>  }
+>
+> +static MemTxResult memory_region_fetch_accessor(MemoryRegion *mr,
+> +                                                hwaddr addr,
+> +                                                uint64_t *value,
+> +                                                unsigned size,
+> +                                                signed shift,
+> +                                                uint64_t mask,
+> +                                                MemTxAttrs attrs)
+> +{
+> +    uint64_t tmp;
+> +
+> +    tmp =3D mr->ops->fetch(mr->opaque, addr, size);
+> +    if (mr->subpage) {
+> +        trace_memory_region_subpage_fetch(get_cpu_index(), mr, addr, tmp=
+, size);
+> +    } else if (trace_event_get_state_backends(TRACE_MEMORY_REGION_OPS_FE=
+TCH)) {
+> +        hwaddr abs_addr =3D memory_region_to_absolute_addr(mr, addr);
+> +        trace_memory_region_ops_fetch(get_cpu_index(), mr, abs_addr, tmp=
+, size,
+> +                                     memory_region_name(mr));
+> +    }
+> +    memory_region_shift_read_access(value, shift, mask, tmp);
+> +    return MEMTX_OK;
+> +}
+> +
+> +static MemTxResult memory_region_fetch_with_attrs_accessor(MemoryRegion =
+*mr,
+> +                                                          hwaddr addr,
+> +                                                          uint64_t *valu=
+e,
+> +                                                          unsigned size,
+> +                                                          signed shift,
+> +                                                          uint64_t mask,
+> +                                                          MemTxAttrs att=
+rs)
+> +{
+> +    uint64_t tmp =3D 0;
+> +    MemTxResult r;
+> +
+> +    r =3D mr->ops->fetch_with_attrs(mr->opaque, addr, &tmp, size, attrs)=
+;
+> +    if (mr->subpage) {
+> +        trace_memory_region_subpage_fetch(get_cpu_index(), mr, addr, tmp=
+, size);
+> +    } else if (trace_event_get_state_backends(TRACE_MEMORY_REGION_OPS_FE=
+TCH)) {
+> +        hwaddr abs_addr =3D memory_region_to_absolute_addr(mr, addr);
+> +        trace_memory_region_ops_fetch(get_cpu_index(), mr, abs_addr, tmp=
+, size,
+> +                                      memory_region_name(mr));
+> +    }
+> +    memory_region_shift_read_access(value, shift, mask, tmp);
+> +    return r;
+> +}
+> +
+>  static MemTxResult memory_region_write_accessor(MemoryRegion *mr,
+>                                                  hwaddr addr,
+>                                                  uint64_t *value,
+> @@ -1493,6 +1538,65 @@ MemTxResult memory_region_dispatch_read(MemoryRegi=
+on *mr,
+>      return r;
+>  }
+>
+> +static MemTxResult memory_region_dispatch_fetch1(MemoryRegion *mr,
+> +                                                hwaddr addr,
+> +                                                uint64_t *pval,
+> +                                                unsigned size,
+> +                                                MemTxAttrs attrs)
+> +{
+> +    *pval =3D 0;
+> +
+> +    if (mr->ops->fetch) {
+> +        return access_with_adjusted_size(addr, pval, size,
+> +                                         mr->ops->impl.min_access_size,
+> +                                         mr->ops->impl.max_access_size,
+> +                                         memory_region_fetch_accessor,
+> +                                         mr, attrs);
+> +    } else if (mr->ops->fetch_with_attrs) {
+> +        return access_with_adjusted_size(addr, pval, size,
+> +            mr->ops->impl.min_access_size,
+> +            mr->ops->impl.max_access_size,
+> +            memory_region_fetch_with_attrs_accessor,
+> +            mr, attrs);
+> +    } else if (mr->ops->read) {
+> +        return access_with_adjusted_size(addr, pval, size,
+> +                                         mr->ops->impl.min_access_size,
+> +                                         mr->ops->impl.max_access_size,
+> +                                         memory_region_read_accessor,
+> +                                         mr, attrs);
+> +    } else {
+> +        return access_with_adjusted_size(addr, pval, size,
+> +                                         mr->ops->impl.min_access_size,
+> +                                         mr->ops->impl.max_access_size,
+> +                                         memory_region_read_with_attrs_a=
+ccessor,
+> +                                         mr, attrs);
+> +    }
+> +}
+> +
+> +MemTxResult memory_region_dispatch_fetch(MemoryRegion *mr,
+> +                                        hwaddr addr,
+> +                                        uint64_t *pval,
+> +                                        MemOp op,
+> +                                        MemTxAttrs attrs)
+> +{
+> +    unsigned size =3D memop_size(op);
+> +    MemTxResult r;
+> +
+> +    if (mr->alias) {
+> +        return memory_region_dispatch_fetch(mr->alias,
+> +                                           mr->alias_offset + addr,
+> +                                           pval, op, attrs);
+> +    }
+> +    if (!memory_region_access_valid(mr, addr, size, false, attrs)) {
+> +        *pval =3D unassigned_mem_read(mr, addr, size);
+> +        return MEMTX_DECODE_ERROR;
+> +    }
+> +
+> +    r =3D memory_region_dispatch_fetch1(mr, addr, pval, size, attrs);
+> +    adjust_endianness(mr, pval, op);
+> +    return r;
+> +}
+> +
+>  /* Return true if an eventfd was signalled */
+>  static bool memory_region_dispatch_write_eventfds(MemoryRegion *mr,
+>                                                      hwaddr addr,
+> diff --git a/system/trace-events b/system/trace-events
+> index 5bbc3fbffa..4e78bb515b 100644
+> --- a/system/trace-events
+> +++ b/system/trace-events
+> @@ -18,8 +18,10 @@ cpu_out(unsigned int addr, char size, unsigned int val=
+) "addr 0x%x(%c) value %u"
+>  # memory.c
+>  memory_region_ops_read(int cpu_index, void *mr, uint64_t addr, uint64_t =
+value, unsigned size, const char *name) "cpu %d mr %p addr 0x%"PRIx64" valu=
+e 0x%"PRIx64" size %u name '%s'"
+>  memory_region_ops_write(int cpu_index, void *mr, uint64_t addr, uint64_t=
+ value, unsigned size, const char *name) "cpu %d mr %p addr 0x%"PRIx64" val=
+ue 0x%"PRIx64" size %u name '%s'"
+> +memory_region_ops_fetch(int cpu_index, void *mr, uint64_t addr, uint64_t=
+ value, unsigned size, const char *name) "cpu %d mr %p addr 0x%"PRIx64" val=
+ue 0x%"PRIx64" size %u name '%s'"
+>  memory_region_subpage_read(int cpu_index, void *mr, uint64_t offset, uin=
+t64_t value, unsigned size) "cpu %d mr %p offset 0x%"PRIx64" value 0x%"PRIx=
+64" size %u"
+>  memory_region_subpage_write(int cpu_index, void *mr, uint64_t offset, ui=
+nt64_t value, unsigned size) "cpu %d mr %p offset 0x%"PRIx64" value 0x%"PRI=
+x64" size %u"
+> +memory_region_subpage_fetch(int cpu_index, void *mr, uint64_t offset, ui=
+nt64_t value, unsigned size) "cpu %d mr %p offset 0x%"PRIx64" value 0x%"PRI=
+x64" size %u"
+>  memory_region_ram_device_read(int cpu_index, void *mr, uint64_t addr, ui=
+nt64_t value, unsigned size) "cpu %d mr %p addr 0x%"PRIx64" value 0x%"PRIx6=
+4" size %u"
+>  memory_region_ram_device_write(int cpu_index, void *mr, uint64_t addr, u=
+int64_t value, unsigned size) "cpu %d mr %p addr 0x%"PRIx64" value 0x%"PRIx=
+64" size %u"
+>  memory_region_sync_dirty(const char *mr, const char *listener, int globa=
+l) "mr '%s' listener '%s' synced (global=3D%d)"
+> --
+> 2.34.1
+>
+>
 
