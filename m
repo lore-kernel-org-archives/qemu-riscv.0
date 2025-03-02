@@ -4,77 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ECF82C19F32
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EF39AC282D1
 	for <qemu-riscv@archiver.kernel.org>; Sun,  2 Mar 2025 13:58:53 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tojqB-0001m1-F0; Sun, 02 Mar 2025 08:58:47 -0500
+	id 1tojq4-0001hf-3T; Sun, 02 Mar 2025 08:58:40 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <hemanshu.khilari.foss@gmail.com>)
- id 1toiVF-0007Ev-GO
- for qemu-riscv@nongnu.org; Sun, 02 Mar 2025 07:33:05 -0500
-Received: from mail-pj1-x1044.google.com ([2607:f8b0:4864:20::1044])
+ id 1toj28-000313-QC; Sun, 02 Mar 2025 08:07:04 -0500
+Received: from mail-pl1-x644.google.com ([2607:f8b0:4864:20::644])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <hemanshu.khilari.foss@gmail.com>)
- id 1toiVD-00087T-9G
- for qemu-riscv@nongnu.org; Sun, 02 Mar 2025 07:33:04 -0500
-Received: by mail-pj1-x1044.google.com with SMTP id
- 98e67ed59e1d1-2fec3176ef3so2698563a91.1
- for <qemu-riscv@nongnu.org>; Sun, 02 Mar 2025 04:33:02 -0800 (PST)
+ id 1toj27-00036i-5K; Sun, 02 Mar 2025 08:07:04 -0500
+Received: by mail-pl1-x644.google.com with SMTP id
+ d9443c01a7336-22385253e2bso24935245ad.1; 
+ Sun, 02 Mar 2025 05:07:02 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1740918781; x=1741523581; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1740920821; x=1741525621; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:from:to:cc:subject:date:message-id:reply-to;
  bh=I717ThhCHMHXaLzr82CQoevh9Tv9rqnCvSSdwP9fxSI=;
- b=RPaplD0ri68wQS8Jvw3m5WkmN95CrQFym235eO+/+VzZ8pS5frX/EfvMOqMj2Gtbci
- 2HBlODqzjCfT7CQQ7ZqPKkyEnO7x27kDfS4E5XiyquhoqcFhHFuUVy4NKkLtAfiRktoD
- 8idj+jmUdADJrupIcEcsent9U855cNcrAwUSmoe2dvBFKtjhTJ2PKRsBaEhoTSgCLQrp
- YpQLFEdFib/a2q6Jm90sUSdhOKPSZmImNyZPM+CvRfH3CtwvHFScRbM/y3Md9zJkM/RX
- +Tnk7ji1YXQ2+MJ7umCcnD436R8mjheum4tggv28Pg4+YK2I4ZUsSM2V/4wRWMTnGGku
- cWww==
+ b=mpqyH67Fs/dBNJFQEcHR2FjXO8cZLRXkoafn5ADK9WLPYADToUOfS9Q9q45sISQ9Yk
+ 4OMCI5sHMuofOZFzQ2DIl7f53WYPZVXPyFrWhnV/m1wojuNcW7IW3w7aENXpqWfYI0fs
+ 8dJ2SCQnwMS7B/4uFJBYLJeKQHrKRvjIkz8FtEs8jlVJJhhQkN6BLKgbWGEvD6bvK2KN
+ VEk+bGWiNElKrk0AFIpS9CzeraQ2VhdLAell00NLLJpxhNEF/anh9z7vjNwAVom9MCG9
+ bmymzrF66KoENtFbZYAWNcGuRVVioDd0d1TKEszXZAVzoSd7cGb3UEKAk8GFMBIv5cWF
+ 0gAA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1740918781; x=1741523581;
+ d=1e100.net; s=20230601; t=1740920821; x=1741525621;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
  bh=I717ThhCHMHXaLzr82CQoevh9Tv9rqnCvSSdwP9fxSI=;
- b=vVhJiOVGV3rwWIcLatvmzX14H4E97o1Z26RmLdksyvH6kU5kv32eRpF3FJojP5v44m
- qTjwX7J4wSVM7xRXdYaCdqzd6vJwtk6p068AYwtsIwBl7GKGVLsg0GwLgQPKgGYZgbCK
- FshNGc2fScY2PLA+VVBY0mgXgD+EfT4fLHDzNf6IfZi5heghME8o6ITzXZRfAn0oZ7Af
- FvVT651kCM2n8BVyYXGSo7tXv5sh6dOQolYOVHO2oy9YsMPEI/OXwuZ7Ah01gFEbhmQJ
- VdPg8ftSvjSyMe2/VUHuHOJwMGIV5Gl/OExWY3MyncSslYMyANMiA1ZA0fwDtuta9DMJ
- iSww==
-X-Gm-Message-State: AOJu0Yx8ZSoz2eaILsAfJt8QzBigQncVMtl8u3lAprGARFY2xrDPtulB
- 3tp9ZzpwpLLszX2Av4lckGh51J9JAyWd6MvyE1/8UOAy3w2Zegg7
-X-Gm-Gg: ASbGnct8mQ77ly27YdZGwZ1NY+KvEZffG7UTVzuTPvp5p38MrUeQ8ywiKIGfCwajW1g
- Ibfq2ozzDfslYkADRZ3QuLkAhdzZ+HN9t0VpaW+cJvQt3rwJ6MoLXLuWZbg8F2CV5ayEDAV/6c7
- 7uRTIuBqVyBo/913wF5t1cLHOLN7vnBJu/aIdHURImXuXiLdQscCtamZh11Ov/RlAtgGotqrzSj
- oe/lyPCRTrB687+sguQiRYQ4UI/8RYLGJnHPHMVZyNht70mkAHCKZ2VkJLy7f1urU02ONsyO1iG
- CVOKtZII6jYmprVVHdp9Udkv9yhwyIlk5npsrdpqxZQX6nZKU2+/dUG+6qrMChq/egyMjFF7hg=
+ b=mOkJE+/KfhSzExXXoxHzzxETfeBiTiHpjrSXa40fw2nLeqwxR6aYR11eKeTbs+Roof
+ AYTa5kpMFGj7HnOd2lsBYL184dtnrM59ILN2EsADXHizV2DlLZApDcbuCap4eM6SXLMm
+ fp+8kwbjy1ofeuTC6SvUTDRHbEBkZwtSvIeXWN6sJAjRU8a/UejuEt3UxlC1hAmT/V90
+ Z+WBlG5TVeLktOx0Se6hR37QZqaZCM7DFxoXk0OkhKGL2J/Qfi8/LDNYpAPj6ei4uZBL
+ GfgY3+4TMojKq4HQKu45aJkUJ6LkiZhuJZz0CgYdyFzbNXklJVZZ8+WarklGZPdS51RF
+ vwxw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWy3Dig1JpmqpOxV/2dLWk9T26MQ0YKKtC9d238dtIMlj/lJe61XXm5gdR5vwo8qoIlN0/GeeD7Ypc2@nongnu.org
+X-Gm-Message-State: AOJu0YzquwyHLrx4ic1MSp+Dp33+L2txqG4w73UITBwqkMtW4EZ28B0N
+ aLIrObW+FJgKXd0n6nSSkjQ79NEk65wnZnSmMdr3evA5uiHX+1TcFPEdcb2Fl97id7+9FPE=
+X-Gm-Gg: ASbGncuEGySROSveOzvUAV4PIGdr9DYD7x9+eB5H9t2lHYFh6B6Iu/jfMslFEOtRxYK
+ GMgec0MzIKXfY5NJOHPWMp+4ahhPe+3A9izV0HUFemRayCrftAfMtjk1htap1BTLOnnT/d4a+HW
+ nZPdw9gYumyQyORIWW/P84CW6t9KuMFW7pe059+XleDos2EoR91eyYViCnIcNXceqTfikXyFsy2
+ r0ifQcZT4+b/L8GKRmcZPhh391utT9+NWm3H0Ue0/6wf6QlKAvdKgY7HU9aJeaRy+4y9g3nqbFX
+ JfUFN5cZTfDLhhHWLED3mbBuZRU8etOcCOwTnA0hYuciSBSuU+kY521+i4Y/0x9tx85EDJOiVw=
  =
-X-Google-Smtp-Source: AGHT+IE8NzDI16Du80QWtgYYGwUaUEi0J85q4ApowGaGoKpD/8TNQS6LnlWbpa8ujegNdlDlgbFH0w==
-X-Received: by 2002:a17:90b:1645:b0:2ea:5dea:eb0a with SMTP id
- 98e67ed59e1d1-2febab300damr14418218a91.4.1740918779682; 
- Sun, 02 Mar 2025 04:32:59 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IFe8DMPIMW7UG64j0V7tYuoeMZ8Jte1skg00FEr+VFeEWxre93S6nmfdeSBMf4hb6cuTuPNTQ==
+X-Received: by 2002:a05:6a00:22d6:b0:736:533b:f6fa with SMTP id
+ d2e1a72fcca58-736533bfd92mr691377b3a.13.1740920820770; 
+ Sun, 02 Mar 2025 05:07:00 -0800 (PST)
 Received: from localhost.localdomain ([160.202.36.167])
  by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-2fec63c0cfcsm4169897a91.17.2025.03.02.04.32.57
+ d2e1a72fcca58-7349fe4894bsm7226071b3a.55.2025.03.02.05.06.58
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 02 Mar 2025 04:32:59 -0800 (PST)
+ Sun, 02 Mar 2025 05:07:00 -0800 (PST)
 From: "hemanshu.khilari.foss" <hemanshu.khilari.foss@gmail.com>
-To: hemanshu.khilari.foss@gmail.com
-Cc: qemu-riscv@nongnu.org
-Subject: [PATCH] docs/specs/riscv-iommu: Fixed broken link to external risv
+To: qemu-devel@nongnu.org
+Cc: Alistair.Francis@wdc.com, hemanshu.khilari.foss@gmail.com,
+ qemu-riscv@nongnu.org
+Subject: [PATCH v2] docs/specs/riscv-iommu: Fixed broken link to external risv
  iommu document
-Date: Sun,  2 Mar 2025 18:02:45 +0530
-Message-ID: <20250302123245.24568-1-hemanshu.khilari.foss@gmail.com>
+Date: Sun,  2 Mar 2025 18:36:19 +0530
+Message-ID: <20250302130618.25688-2-hemanshu.khilari.foss@gmail.com>
 X-Mailer: git-send-email 2.42.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1044;
- envelope-from=hemanshu.khilari.foss@gmail.com; helo=mail-pj1-x1044.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::644;
+ envelope-from=hemanshu.khilari.foss@gmail.com; helo=mail-pl1-x644.google.com
 X-Spam_score_int: 12
 X-Spam_score: 1.2
 X-Spam_bar: +
