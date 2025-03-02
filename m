@@ -4,66 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5EC01C19F32
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6861FC282CD
 	for <qemu-riscv@archiver.kernel.org>; Sun,  2 Mar 2025 09:12:44 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tofNC-0001Dq-Pm; Sun, 02 Mar 2025 04:12:34 -0500
+	id 1tofN5-0001Bv-9l; Sun, 02 Mar 2025 04:12:27 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <jason.chien@sifive.com>)
- id 1tofN0-0001BA-VQ
+ id 1tofN2-0001BL-9W
  for qemu-riscv@nongnu.org; Sun, 02 Mar 2025 04:12:24 -0500
-Received: from mail-pl1-x632.google.com ([2607:f8b0:4864:20::632])
+Received: from mail-pl1-x633.google.com ([2607:f8b0:4864:20::633])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <jason.chien@sifive.com>)
- id 1tofMx-0003If-Dt
- for qemu-riscv@nongnu.org; Sun, 02 Mar 2025 04:12:21 -0500
-Received: by mail-pl1-x632.google.com with SMTP id
- d9443c01a7336-2237cf6a45dso20881005ad.2
- for <qemu-riscv@nongnu.org>; Sun, 02 Mar 2025 01:12:18 -0800 (PST)
+ id 1tofN0-0003Iv-Nu
+ for qemu-riscv@nongnu.org; Sun, 02 Mar 2025 04:12:24 -0500
+Received: by mail-pl1-x633.google.com with SMTP id
+ d9443c01a7336-22185cddbffso76465595ad.1
+ for <qemu-riscv@nongnu.org>; Sun, 02 Mar 2025 01:12:22 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1740906737; x=1741511537; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=DN86mKl0zW+WcZeCQCQRUKlWU80EaiUKlPYzAriTbGw=;
- b=VwYKV44PAcGFnFBNDXCbpMEaIdc97nP26sjOamtOfrtMGu3tZsmA2MtwCHc++7xt7f
- 60qWtjt/ZPg4deM16zQlvJRQrPrtNNx5gVMct+nuP+ZomSzD9v3fuZF9iwU1aKFKgTk1
- V1kg2bEaDu4kk/vSKZ3gnBFw3SR1pr4vB7kgTtAgPm4FvIF5tb0m2kA4oLghbu6xO8es
- 0eOMH0KPRagwfN7pbdThCO7a3br6rss4xPeOEQCEkqiMrJQ3yBLkLlomXU5VP+JDUBnR
- tMFVadvx6uYY/EzGmQTyjcCF+fVo+witebG/zuOBVnm3d7XwT3OYTrV/gQlgDsXUlejj
- G7ww==
+ d=sifive.com; s=google; t=1740906741; x=1741511541; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=OtyLrb1aKO9DhjGPwejqW8uHWFAo2HE0XI7GenYT5VA=;
+ b=SjnLCIBnAzCGBq+dgVISbHPoODBnD2eoeLpu7+vgLt9CE1Onnp44XEkz8729pv4Tbk
+ S28bqri0vMlxR6dDaxZzYtA5uMu5a4hDw27KnZw0YXj6wreGQTqErn5HRuye98fiDL08
+ b+Q+vmTaP21YB5X6f2pAJqVkWftNip3v7yFaOCK9kWJJQyLYg2mapzveNKUMydpJLJup
+ 2BMDTji0nU9iscdIRKOzn3E+HsF58JhhXamjtY6Zyfi2BLB09iTnk3UDfhCqStdeo72u
+ 9BlZb4TjsDyli9uvJoBo3BUEZ5bnzWY4zwbrzTJCfoIW2C0Nt/368MphZL23Z65VEEbX
+ zlhA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1740906737; x=1741511537;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=DN86mKl0zW+WcZeCQCQRUKlWU80EaiUKlPYzAriTbGw=;
- b=q5p9b/wr2Gjdudviij6VrU4lt+v1gF9FNdRQQG5l4VDTL5YrHFrjNz8cGFcgjUjZzC
- MqaoQDqv6UTrTnFB7hF+wS7pND7gZZVaCRyhxCh/o41TvQzOCeZ8PcwFv80f/PkUcZ7C
- x8A5WfVH+wksc+AEATI30we1BnCTWB71j6skgQGnkyLog/je2MegKNK7Ec5jJVWQfCp+
- eamMwdYTzogGSWMFV+mrilhYijJ/NMwgugVcuDwm+cnHxGhn+OKdL5fRirRhHRQtu7xo
- rqH/yzpWYMjEpzCJjgUKePi79VSVyS8WIwwYObZxdxBii9i7u7nPGPPLeRTeMrOFRI/Z
- MgmA==
+ d=1e100.net; s=20230601; t=1740906741; x=1741511541;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=OtyLrb1aKO9DhjGPwejqW8uHWFAo2HE0XI7GenYT5VA=;
+ b=jZledQjPcp8skrsWi3LWQdrGu7uT+ih9YHz6C/j7ZUChseg70s4lSIB4bf5Ua7sNPa
+ z+iMvAooghPaygvv+NOTfXGf+oN+lGHOm98tiuaDovuwxqwnBicnYH4tbt04LWEUcgDg
+ xqCNllmwfTPAMKfshZ1hhAHwdyBOCA5R7vYoDK0e1iQChn3aNQskqeSvGh9MhIh0mygb
+ AvjQGRn9upJcDO/VrvrzL6UD4hCNkyfo6rSsNd7NNKX6WPQf5cwQqkHZ3XBhI//udWRr
+ mir1RnvxTBzkQMbe9PqrzNt93KkIe/ySguNTDHRhVr3nwR8fFGU9I9b/lqdB4JNWJMfG
+ e2Iw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUrhC1PGYYoNy32BmcMjcLMaYenK0UFLHuckBMx0QcjDHFMUCNy1sIVBEbMu44izsFnmS+BynKVfdK1@nongnu.org
-X-Gm-Message-State: AOJu0Yw9CXcTK532ilwV4GN/W78uBoWQOEujIFInLLWqnuegidezqaX5
- 2KsjkcftETp5jbbk/CwWeutfAhG6/sh8bmuhRUd9UMMLwl6GbOah5IGA0PwSvCI=
-X-Gm-Gg: ASbGncsFZXeYp/0jFncBWShoqxBqiMzYrrJluZHD65exqieLy1CVaBsHkgQes4BtTfQ
- +52NUyksYaCy86pOEgI802lqmWs1pn1SXPjj424MbDrDKBzGxWyZgYEpmHbkAYrp+1ZC73cT3SA
- CyCSM/7v6E9iQ8WO5F2GbaqlSQq365HrXp/1oEDMDdrTWuYfTq3a1U3GelYCRWM8ENxyJgRHqnX
- IZr3yA9G+n5cJK8/hnWPX6ztP+TQvse4i0PtwLxRRxVMOhb6uBk4Uu6TaY0unk0biM+T9rtWSdj
- Q2r5rIlPFaeCet6nI/IreVtUarLBBK8EFQIQJ6GJiW7fruprVoIt3+VmChSmt8gdHGk4Hn4e
-X-Google-Smtp-Source: AGHT+IEGrjImPNjdfrQ9WibLY+IfqFcYZErIXaAqJjnRR008HZ+pLE76qkA0Qo6ta0IbCxJv485kVw==
-X-Received: by 2002:a17:902:f693:b0:216:31c2:3db8 with SMTP id
- d9443c01a7336-22369213455mr153550775ad.37.1740906737407; 
- Sun, 02 Mar 2025 01:12:17 -0800 (PST)
+ AJvYcCXfMVpgpWeSqPjP0fcLH0Ld6CWcWS5wghCyiffW4r+Gg4rgeYUnZ9NMWXpLqzz1Pv9hzEdu+eneYhhj@nongnu.org
+X-Gm-Message-State: AOJu0Yw1yXp6O+IUz4dRmTwdLwdzUgwiPlYFUasiCPVNQxdwS8TTiMH1
+ 83X455pw5XHRtntQ1XgSPwL6WDXb+PKAW07l3QDaJkSx+o1aVCxyQLhL2enSNXs=
+X-Gm-Gg: ASbGncs3X4zdiviYHi1YqqA8sPnWP2jZLVtZYuqR7l/lfaHlR1Ju+XQ1UCBYM7yVwcG
+ HnzQsAfhsHoimo+fBUbBoPZEaoFRGtI/8kxyOlt5JPaX6uASg5Z1v5abAorw283h+hucNk7H6Le
+ u1vRM6PKnsgGoQjIC4tsYb9swLaRPiXOHzKkJmnwK/49yvdt+ofB/7690isQWEk0ChCt+Ho6Afq
+ ZM9JKHyBd20yYE9Xdb+uavDQpmuAvvCLCNCEvRHst1UZQ4JYaZ52eP2Ra5L532OoV6mJqn9UtKt
+ SaipPAAJarKF2K5hPfAapYs7RMJvqkJNsrVbMsOOQ8NHiX9QUb/FHswEd4WzRBRwXsAlFb5q
+X-Google-Smtp-Source: AGHT+IEXjGU0kwn2xcJSd0qRW7Na0ZbtDN1x+vk6uFRz5H9gVULuxc56TEu3uVJ4VJ0QmB+B4pYLbg==
+X-Received: by 2002:a05:6a00:cd1:b0:736:4d05:2e35 with SMTP id
+ d2e1a72fcca58-7364d0530cfmr1248045b3a.3.1740906741135; 
+ Sun, 02 Mar 2025 01:12:21 -0800 (PST)
 Received: from hsinchu16.internal.sifive.com ([210.176.154.34])
  by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-736310abc8csm2952616b3a.77.2025.03.02.01.12.15
+ d2e1a72fcca58-736310abc8csm2952616b3a.77.2025.03.02.01.12.19
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 02 Mar 2025 01:12:16 -0800 (PST)
+ Sun, 02 Mar 2025 01:12:20 -0800 (PST)
 From: Jason Chien <jason.chien@sifive.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
@@ -75,22 +76,23 @@ Cc: Palmer Dabbelt <palmer@dabbelt.com>,
  "Michael S. Tsirkin" <mst@redhat.com>,
  Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
  Jason Chien <jason.chien@sifive.com>
-Subject: [PATCH 0/3] Enhancing Device Identification in RISC-V IOMMU Using
- Memory Attributes
-Date: Sun,  2 Mar 2025 17:12:06 +0800
-Message-ID: <20250302091209.20063-1-jason.chien@sifive.com>
+Subject: [PATCH 1/3] include/hw/pci: Attach BDF to Memory Attributes
+Date: Sun,  2 Mar 2025 17:12:07 +0800
+Message-ID: <20250302091209.20063-2-jason.chien@sifive.com>
 X-Mailer: git-send-email 2.43.2
+In-Reply-To: <20250302091209.20063-1-jason.chien@sifive.com>
+References: <20250302091209.20063-1-jason.chien@sifive.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::632;
- envelope-from=jason.chien@sifive.com; helo=mail-pl1-x632.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::633;
+ envelope-from=jason.chien@sifive.com; helo=mail-pl1-x633.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -106,33 +108,55 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-This patch series enhances how device IDs are handled in RISC-V IOMMU by
-leveraging memory attributes.
+This commit adds the BDF to the memory attributes for DMA operations.
 
-The BDF (Bus-Device-Function) is now included in memory attributes for
-DMA operations, ensuring accurate device identification.
-
-Since PCIe bus numbers can change after re-enumeration, relying on static
-device IDs in RISCVIOMMUSpace may lead to incorrect Device Directory Table
-walk. The IOMMU now dynamically retrieves latest device IDs from memory
-attributes.
-
-The bus property, previously used to set non-root endpoint bus numbers,
-is removed. As PCIe bus numbers are assigned at runtime and vary across
-endpoints, exposing a single property to pre-set them is unnecessary and
-incorrect. With device IDs now retrieved dynamically, this property is no
-longer required.
-
-Jason Chien (3):
-  include/hw/pci: Attach BDF to Memory Attributes
-  hw/riscv/riscv-iommu: Obtain Device IDs from Memory Attributes
-  hw/riscv/riscv_iommu: Remove the "bus" property
-
- hw/riscv/riscv-iommu.c      | 15 +++++++--------
- hw/riscv/riscv-iommu.h      |  1 -
+Signed-off-by: Jason Chien <jason.chien@sifive.com>
+---
  include/hw/pci/pci_device.h | 10 ++++++++--
- 3 files changed, 15 insertions(+), 11 deletions(-)
+ 1 file changed, 8 insertions(+), 2 deletions(-)
 
+diff --git a/include/hw/pci/pci_device.h b/include/hw/pci/pci_device.h
+index add208edfa..968f1ba3e9 100644
+--- a/include/hw/pci/pci_device.h
++++ b/include/hw/pci/pci_device.h
+@@ -244,6 +244,8 @@ static inline MemTxResult pci_dma_rw(PCIDevice *dev, dma_addr_t addr,
+                                      void *buf, dma_addr_t len,
+                                      DMADirection dir, MemTxAttrs attrs)
+ {
++    attrs.unspecified = 0;
++    attrs.requester_id = pci_requester_id(dev);
+     return dma_memory_rw(pci_get_address_space(dev), addr, buf, len,
+                          dir, attrs);
+ }
+@@ -292,6 +294,8 @@ static inline MemTxResult pci_dma_write(PCIDevice *dev, dma_addr_t addr,
+                                                uint##_bits##_t *val, \
+                                                MemTxAttrs attrs) \
+     { \
++        attrs.unspecified = 0; \
++        attrs.requester_id = pci_requester_id(dev); \
+         return ld##_l##_dma(pci_get_address_space(dev), addr, val, attrs); \
+     } \
+     static inline MemTxResult st##_s##_pci_dma(PCIDevice *dev, \
+@@ -299,6 +303,8 @@ static inline MemTxResult pci_dma_write(PCIDevice *dev, dma_addr_t addr,
+                                                uint##_bits##_t val, \
+                                                MemTxAttrs attrs) \
+     { \
++        attrs.unspecified = 0; \
++        attrs.requester_id = pci_requester_id(dev); \
+         return st##_s##_dma(pci_get_address_space(dev), addr, val, attrs); \
+     }
+ 
+@@ -327,8 +333,8 @@ PCI_DMA_DEFINE_LDST(q_be, q_be, 64);
+ static inline void *pci_dma_map(PCIDevice *dev, dma_addr_t addr,
+                                 dma_addr_t *plen, DMADirection dir)
+ {
+-    return dma_memory_map(pci_get_address_space(dev), addr, plen, dir,
+-                          MEMTXATTRS_UNSPECIFIED);
++    MemTxAttrs attrs = {.requester_id = pci_requester_id(dev)};
++    return dma_memory_map(pci_get_address_space(dev), addr, plen, dir, attrs);
+ }
+ 
+ static inline void pci_dma_unmap(PCIDevice *dev, void *buffer, dma_addr_t len,
 -- 
 2.43.2
 
