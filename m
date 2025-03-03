@@ -4,83 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 46937C282D2
-	for <qemu-riscv@archiver.kernel.org>; Mon,  3 Mar 2025 14:24:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 54937C282D2
+	for <qemu-riscv@archiver.kernel.org>; Mon,  3 Mar 2025 14:47:06 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tp6iQ-0000sM-0K; Mon, 03 Mar 2025 09:24:18 -0500
+	id 1tp74G-0007Ag-DH; Mon, 03 Mar 2025 09:46:52 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tp6ht-0000fW-0Z
- for qemu-riscv@nongnu.org; Mon, 03 Mar 2025 09:23:45 -0500
-Received: from mail-lj1-x22c.google.com ([2a00:1450:4864:20::22c])
+ (Exim 4.90_1) (envelope-from <chigot@adacore.com>)
+ id 1tp74E-00075s-KF
+ for qemu-riscv@nongnu.org; Mon, 03 Mar 2025 09:46:50 -0500
+Received: from mail-ej1-x62d.google.com ([2a00:1450:4864:20::62d])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tp6hr-0000DX-3f
- for qemu-riscv@nongnu.org; Mon, 03 Mar 2025 09:23:44 -0500
-Received: by mail-lj1-x22c.google.com with SMTP id
- 38308e7fff4ca-30b99c6cd35so26887391fa.0
- for <qemu-riscv@nongnu.org>; Mon, 03 Mar 2025 06:23:42 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <chigot@adacore.com>)
+ id 1tp74C-0005X0-NZ
+ for qemu-riscv@nongnu.org; Mon, 03 Mar 2025 09:46:50 -0500
+Received: by mail-ej1-x62d.google.com with SMTP id
+ a640c23a62f3a-aaec61d0f65so920711066b.1
+ for <qemu-riscv@nongnu.org>; Mon, 03 Mar 2025 06:46:48 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1741011819; x=1741616619; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=pF8mhgVS9mR7+xpM7SF4Y/E3aG2pQC5gehg+3H9tV80=;
- b=v5kfkr/sUcaPZXGKq7AOTS1+L5OOAYgrIxq1DBmDZYwJpbaGR/sqCYcZ3xYtzVywE9
- N4N3//ikMAJFufDfxuSYfc/3DO44j1/auPZMFFKr0ERzsxcqpFX1H3socX95eP3NrpIB
- hQy+Lg+Itbz9sCRwvYtKw1ydIpxumx4JOqTLoFQ+KkzYRQGe/EQjDDwYFTxcLyyD3YUB
- VnOXybetYPH6QthuKnhKg2u4vBMeUQmW4f4P9Ckn1sODkIvnuQttQiydXjBN+X99QMeK
- EWUjvOOQmXd4uAzpGUruoPiJ4Z4sBo2ky/2s3NsYwOdX7tHwKUicjGo4H+9UKrekvY3m
- Pvrw==
+ d=adacore.com; s=google; t=1741013206; x=1741618006; darn=nongnu.org;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=sEsCkJCO92Uhpe8NcsbaVWng72KRhe2mDUc3KEa8z50=;
+ b=k6AmgH3uVgpUU9BFZbW6ER3LPdlp2JwsutbxUQXxBSlZZ88j7z1bUHa5T5ZHZFBuYK
+ YlEoIB7rjBbbr7pKj7Bw20OO3utA2t10foAiFMkKUS/tuWZjROIirUGLPo1XBWsj+L/O
+ 3yjf0rPboaztn+sFzJgBIv1j74fwke6wGoA3+RqlKkQ7kft3EA2zkuXzGr05y09je8Lc
+ 7UHtwAsKWupLezrHRxQOkycG9lOAq3YTE9IFQgpNV8rdPElhHNAKmAO0JxJJ0QRf2ccb
+ hfgcB29kgka50wZll9ADxRR2AdkdaXrk0pBbGpDSHiN3vy5fvLtP3WPMEdjUyvQfgPpm
+ LztQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741011819; x=1741616619;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=pF8mhgVS9mR7+xpM7SF4Y/E3aG2pQC5gehg+3H9tV80=;
- b=SU1+bvTx+XkXvTi8VSJ9807m/DZfKmKV5TqX9g93yaUmyT6vgr4+1L4lsuS8vzCF2a
- mgdRCcejHTpuctXZuxHhlWl8zYYCw4BukqXgBhHdEPkpF5MY64fVj4hou7LsXfI/9CK+
- LiE77qcQVOp46cSGm9NKGP8Q6SSEJMHWIwoFv0rjTZoFjJLoALdYjqZf5cSeV0OalrPC
- CoXvYzbsWdB9etqPg1wr3hNNLyj69P+ygH73uA3/FTSR+c1B5MNh171kgpy4sPpO663F
- yCYPsCaZ0wc35gwqa0HfLQh5WLtFq4/31OFoCRldS3++JcaU3D2QnDaFUjvApObeQsYB
- Ifeg==
+ d=1e100.net; s=20230601; t=1741013206; x=1741618006;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=sEsCkJCO92Uhpe8NcsbaVWng72KRhe2mDUc3KEa8z50=;
+ b=RrnVyF1J4Qz37lC2VRBWnqRcRbB+cmoVjvlSIaWn1Pf6gboMEA0JNsSshDnw0bMRBL
+ cbxNcDLBrvdqZ/bp9MajarS0INvOmeHMyqY5qFZfR9oQib/sq3K4eUOLjjz5bLeL0zyW
+ lfHwGweY8qi7FreZidxCcJB/64MpSzQkvn0HZ8VapKQ5za4AXMf0YWVJdCCjLzpJ0Gp0
+ HJgZ/zejHuCTH/fZNPYDXFkc7L8v4PzhLmBVkjV9x7Uw5fsdn7cLxML6OptcWkVfDap3
+ jQ3FY+m5ajO6vPzGcR8wcK2WXKhVIewHYCCLLzq2Lh3Q9DgsFHePqIkd4+srfeDmuwOx
+ jFnw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUjZ1HxlHMk8Ql0HhNF53GyOv3SOqD+cAtccbS4VoHpFbqfus4NPRIAMQsSihXpKKdQRVupM5lubsCM@nongnu.org
-X-Gm-Message-State: AOJu0YwTMMnOzORC2Rt3thx/xXl9jT9pwR+6CHID9qxc5ic4BfnUyV56
- qftRPFN3mttqgVO8awEo8CzzSKRu38XmmmbotSwdGbeRYQ//umQfR3xKmE0Ejnc=
-X-Gm-Gg: ASbGncuIA3Z2B1IVBT8IS+RWcTC22Pmj391F9OV9wOaHosvDrVavyRFFU10vUWZc8dr
- /5d/IytCAsirdOJApEDrYe7/iPZ0PsTzqdE+45SaImyu/Rwt/o4XhTAGshPeYpEmdIbQwi+724n
- sllYrufz8g3zflGuC9HfcajuGSIFYpX1VJduTkfZWOyNLwDNEWMWjYsX/dIyIvJ+YaPPeHJAUvp
- gRXOK0Cg35yis+xKvsJwlXkDW7cZNtWrApLz33YWv+xjlq/OllBSIPaFI5S7k6hSg6Tpn5o1S01
- T30u31QWjY+DA6GXQVrrNr2hWcmGFAWVY5H4qSz5zyp8chEtIanPnBz3zjRanIeJU3xQYrQiw6Z
- KHVanIzonNj7j
-X-Google-Smtp-Source: AGHT+IGautwzdxbFpKOav9W11W73VWUeR18+q7gSWI1T5LbnQC6a6mxUxouTG99MtltBGDByZeGB/A==
-X-Received: by 2002:a05:651c:19a7:b0:302:2620:ec84 with SMTP id
- 38308e7fff4ca-30b931f9d3dmr45740011fa.7.1741011819461; 
- Mon, 03 Mar 2025 06:23:39 -0800 (PST)
-Received: from [192.168.69.199] (88-187-86-199.subs.proxad.net.
- [88.187.86.199]) by smtp.gmail.com with ESMTPSA id
- 38308e7fff4ca-30bb22c2189sm5179171fa.33.2025.03.03.06.23.37
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 03 Mar 2025 06:23:38 -0800 (PST)
-Message-ID: <846d2da9-1254-4c38-aa36-d3160bb84b0e@linaro.org>
-Date: Mon, 3 Mar 2025 15:23:36 +0100
+ AJvYcCW9IEJQIRffDJ9RK3wTkbF9gYRp5Jz6JXOXZg7Hj2ZGMbS92X+IIuRbcXyTEMECZNrRoH6eKi5sZg9U@nongnu.org
+X-Gm-Message-State: AOJu0Yz/qJkEbj+kaoSO6RYatRVRlLFRSuoaUgy5yMNqkOYSy8/nlqsF
+ DIrve/EQypyZedypm//Qrw6bdVhT5vza4Oakj9QJ1n/t/b9bbgb1h3j5MqiDtAcUeFjoTzwlJnH
+ VWlm8VcHSR/NA84z+YyGZJhJLQuP/KIPluVVW
+X-Gm-Gg: ASbGncsjiEMxyzwDle+ioEzLvtZrertcYw1kocd6kzQnN5Kf67Uhsvq82JlJyuHtyG1
+ UproBO1mxguSgR9U7QS+Tb7NZ9B76FLEmnUn+aSfHbSnurEYVp0Tyz1ZG81aCMAe4sR/ZiiNo/Q
+ zfe99+go2BhGxqdeDhNVa3Cx2abw==
+X-Google-Smtp-Source: AGHT+IEKzY93VBMaIlShrPqZyYCVREnRUeGcApiTend2ouCXi8Tbs0cgTkm2f6h6sad7V5u6vF1ZND83BiFXIgAC+lU=
+X-Received: by 2002:a17:907:6d20:b0:ac1:e1a7:9445 with SMTP id
+ a640c23a62f3a-ac1e1a7ac33mr194302366b.12.1741013206405; Mon, 03 Mar 2025
+ 06:46:46 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] hw/char: sifive_uart: Free fifo on unrealize
-To: Alistair Francis <alistair23@gmail.com>, palmer@dabbelt.com,
- liwei1518@gmail.com, dbarboza@ventanamicro.com,
- zhiwei_liu@linux.alibaba.com, qemu-riscv@nongnu.org, chigot@adacore.com
-Cc: qemu-devel@nongnu.org, Alistair Francis <alistair.francis@wdc.com>
 References: <20250303023120.157221-1-alistair.francis@wdc.com>
-Content-Language: en-US
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 In-Reply-To: <20250303023120.157221-1-alistair.francis@wdc.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::22c;
- envelope-from=philmd@linaro.org; helo=mail-lj1-x22c.google.com
+From: =?UTF-8?Q?Cl=C3=A9ment_Chigot?= <chigot@adacore.com>
+Date: Mon, 3 Mar 2025 15:46:35 +0100
+X-Gm-Features: AQ5f1JrAZNLgmYcv5py3eEsgMfLIOn8qB7gvMk8YPpSEBSR2yYQpaygHdj6nu3s
+Message-ID: <CAJ307EiCgR83H2C0U69_x8nikjERtoHiODK8T9udtAKvST793Q@mail.gmail.com>
+Subject: Re: [PATCH] hw/char: sifive_uart: Free fifo on unrealize
+To: Alistair Francis <alistair23@gmail.com>
+Cc: palmer@dabbelt.com, liwei1518@gmail.com, dbarboza@ventanamicro.com, 
+ zhiwei_liu@linux.alibaba.com, qemu-riscv@nongnu.org, philmd@linaro.org, 
+ qemu-devel@nongnu.org, Alistair Francis <alistair.francis@wdc.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2a00:1450:4864:20::62d;
+ envelope-from=chigot@adacore.com; helo=mail-ej1-x62d.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -103,16 +97,107 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 3/3/25 03:31, Alistair Francis wrote:
+On Mon, Mar 3, 2025 at 3:31=E2=80=AFAM Alistair Francis <alistair23@gmail.c=
+om> wrote:
+>
 > We previously allocate the fifo on reset and never free it, which means
 > we are leaking memory.
-> 
+>
 > Instead let's allocate on realize and free on unrealize.
-> 
+>
 > Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
 > ---
->   hw/char/sifive_uart.c | 44 +++++++++++++++++++++++++++----------------
->   1 file changed, 28 insertions(+), 16 deletions(-)
+>  hw/char/sifive_uart.c | 44 +++++++++++++++++++++++++++----------------
+>  1 file changed, 28 insertions(+), 16 deletions(-)
+>
+> diff --git a/hw/char/sifive_uart.c b/hw/char/sifive_uart.c
+> index 4bc5767284..b45e6c098c 100644
+> --- a/hw/char/sifive_uart.c
+> +++ b/hw/char/sifive_uart.c
+> @@ -251,6 +251,23 @@ static int sifive_uart_be_change(void *opaque)
+>      return 0;
+>  }
+>
+> +static void sifive_uart_reset_enter(Object *obj, ResetType type)
+> +{
+> +    SiFiveUARTState *s =3D SIFIVE_UART(obj);
+> +
+> +    s->txfifo =3D 0;
+> +    s->ie =3D 0;
+> +    s->ip =3D 0;
+> +    s->txctrl =3D 0;
+> +    s->rxctrl =3D 0;
+> +    s->div =3D 0;
+> +
+> +    s->rx_fifo_len =3D 0;
+> +
+> +    memset(s->rx_fifo, 0, SIFIVE_UART_RX_FIFO_SIZE);
+> +    fifo8_reset(&s->tx_fifo);
+> +}
+> +
+>  static const Property sifive_uart_properties[] =3D {
+>      DEFINE_PROP_CHR("chardev", SiFiveUARTState, chr),
+>  };
+> @@ -270,30 +287,24 @@ static void sifive_uart_realize(DeviceState *dev, E=
+rror **errp)
+>  {
+>      SiFiveUARTState *s =3D SIFIVE_UART(dev);
+>
+> +    fifo8_create(&s->tx_fifo, SIFIVE_UART_TX_FIFO_SIZE);
+> +
+>      s->fifo_trigger_handle =3D timer_new_ns(QEMU_CLOCK_VIRTUAL,
+>                                            fifo_trigger_update, s);
+>
+> -    qemu_chr_fe_set_handlers(&s->chr, sifive_uart_can_rx, sifive_uart_rx=
+,
+> -                             sifive_uart_event, sifive_uart_be_change, s=
+,
+> -                             NULL, true);
+> +    if (qemu_chr_fe_backend_connected(&s->chr)) {
+> +        qemu_chr_fe_set_handlers(&s->chr, sifive_uart_can_rx, sifive_uar=
+t_rx,
+> +                                 sifive_uart_event, sifive_uart_be_chang=
+e, s,
+> +                                 NULL, true);
+> +    }
+>
+>  }
+>
+> -static void sifive_uart_reset_enter(Object *obj, ResetType type)
+> +static void sifive_uart_unrealize(DeviceState *dev)
+>  {
+> -    SiFiveUARTState *s =3D SIFIVE_UART(obj);
+> -
+> -    s->txfifo =3D 0;
+> -    s->ie =3D 0;
+> -    s->ip =3D 0;
+> -    s->txctrl =3D 0;
+> -    s->rxctrl =3D 0;
+> -    s->div =3D 0;
+> -
+> -    s->rx_fifo_len =3D 0;
+> +    SiFiveUARTState *s =3D SIFIVE_UART(dev);
+>
+> -    memset(s->rx_fifo, 0, SIFIVE_UART_RX_FIFO_SIZE);
+> -    fifo8_create(&s->tx_fifo, SIFIVE_UART_TX_FIFO_SIZE);
+> +    fifo8_destroy(&s->tx_fifo);
+>  }
+>
+>  static void sifive_uart_reset_hold(Object *obj, ResetType type)
+> @@ -329,6 +340,7 @@ static void sifive_uart_class_init(ObjectClass *oc, v=
+oid *data)
+>      ResettableClass *rc =3D RESETTABLE_CLASS(oc);
+>
+>      dc->realize =3D sifive_uart_realize;
+> +    dc->unrealize =3D sifive_uart_unrealize;
+>      dc->vmsd =3D &vmstate_sifive_uart;
+>      rc->phases.enter =3D sifive_uart_reset_enter;
+>      rc->phases.hold  =3D sifive_uart_reset_hold;
+> --
+> 2.48.1
+>
 
-Patch queued, thanks!
+Thanks for the patch.
+
+Tested-by: Cl=C3=A9ment Chigot <chigot@adacore.com>
 
