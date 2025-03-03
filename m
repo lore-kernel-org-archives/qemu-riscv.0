@@ -4,66 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 90190C19F32
-	for <qemu-riscv@archiver.kernel.org>; Mon,  3 Mar 2025 00:21:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6D05BC19F32
+	for <qemu-riscv@archiver.kernel.org>; Mon,  3 Mar 2025 00:48:00 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1totYE-0007b9-H0; Sun, 02 Mar 2025 19:20:54 -0500
+	id 1totxx-00042e-Rh; Sun, 02 Mar 2025 19:47:29 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1totYA-0007Vr-0H; Sun, 02 Mar 2025 19:20:50 -0500
+ id 1totxq-00040X-Cw; Sun, 02 Mar 2025 19:47:22 -0500
 Received: from mail-vk1-xa2c.google.com ([2607:f8b0:4864:20::a2c])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1totY7-0003Wm-El; Sun, 02 Mar 2025 19:20:49 -0500
+ id 1totxo-0000ZD-9D; Sun, 02 Mar 2025 19:47:22 -0500
 Received: by mail-vk1-xa2c.google.com with SMTP id
- 71dfb90a1353d-5236d34a37fso595835e0c.3; 
- Sun, 02 Mar 2025 16:20:45 -0800 (PST)
+ 71dfb90a1353d-5235db99207so1122395e0c.2; 
+ Sun, 02 Mar 2025 16:47:18 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1740961244; x=1741566044; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1740962838; x=1741567638; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=KPwCWdcoMhh3y5danql1RTaIbOlgclZJ9bSTtKH/Pb4=;
- b=M0ux6ftgIifzaGoqAZn1dnLb2NOs0fnTK89ShP0zG1PpQkXNKqbxuRr3wfR8Q5imWI
- tS9C3t8Dje47smTCP4DEVA5DOWJMnLyhuNJSfdt9XjMNa6LYGlbHFPR1lmxZO8pXYI/d
- vg/9ZPrnb/PKOFywdpcm0uFR71/7g6sGqnTC/ox0JBK8GWviSwBL2actlnHB50vbMbR9
- qf7nfNWA98k+FK3yC9KGSo7b1iPHMTKCpcleSySZTQtGzCENEW0QUW6Qf4LGy7CQ3goa
- O1JGFDSSJtOSPv1cYoBz5xATBuRWxGuH0Mj9/m8HtXqupgoENfMBontC6njv4jPxdM+N
- lkTA==
+ bh=43/oH12xfHwc93u0Ay1nV8mrz2l2kWNWL16TGiUGCgE=;
+ b=iSd+kD6jcw8AMTUeH5hDJ8BSEJhPtuEeV4c4JNfmGGRx2f3JnV9DFqfwKMeA61tgDM
+ ePYXCQkm2giCnLct4qPoQVkAHEUwDokWiW9akr16zRhatI0C3G+ymf6D1LamW2TMasXU
+ PV+4o+Q71EXQU/jNLtoW2X5+rP8kqevlZq1q2DR54YJX1rDlqit9jSHvwDD2881ZHbM3
+ pJ9qpC2uK3vamruMZUJmcofUJR45uBJAN3fUyjyDygQj2pplovKQRNcymmA5wCZ01IlX
+ lGbWTWv13t/SYNZV6Lj/M0jMN47tSmj1tl0jJUkEPy77YYxFmACFESW4Zgad81LMClVR
+ evug==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1740961244; x=1741566044;
+ d=1e100.net; s=20230601; t=1740962838; x=1741567638;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=KPwCWdcoMhh3y5danql1RTaIbOlgclZJ9bSTtKH/Pb4=;
- b=CE78C8lgmkXfTlg0Uz6JFItooH4hthckcFmYUd1su618w1KqgFi54oumQvSuHtC83i
- Ikmr87MRyZA7+go/1Lmg20ZeOzDE1Bf9q0WTiKDxxvi2HUJ/anZwyETqC+dsQyNYKP0h
- 3Be8cvlGHRZ5LB8f/fMS8h9Omk6qgwbOZt+4t9E08WoAL14qZfX0DHz/qjHBvpIrRTAl
- dPK31CrGzwvb0fPbAcq0DNw5i4hdQP5m9Fsu8y8OSx8LBF5QYa7quynbZunqVEVIUNI0
- 7NPchFpRNKxeLQk1hKTkaRo3oi22ZeMFBNmIwQ/FgZTG9aJztutQGDmH0N7DBCsdZQ7a
- vdgg==
+ bh=43/oH12xfHwc93u0Ay1nV8mrz2l2kWNWL16TGiUGCgE=;
+ b=sMm6XI4TjSWe19w1V/vkSXqXiHM7kTiLbgyaWoCNTqabhRyWOfXefIEq9DlYx7y/+q
+ t9QZz35ZwVXZX8YNL3J92cSD0Q12qZiZ2eWAHeRn2UOHYCR4LAnSmFAjrqk8+jCQAhxs
+ 4Yxydax5urq+HNy3qj+iHr/1QAMryuR02zEYpUhiEsj1s4lhm9lany8RXODWeHCmsXgW
+ bZrDPH+tdbVB05hAFDcOGVeFeWWr0WjvGNfoQdiY83OT0+ABvpGPNBVGAYI0IN4RBgVG
+ kpZdBK46ZrRL+DX7rciTldEpc2DKgUZ752N4F7KPu3Z00eYB2664X7Zn1k9bDAi8STD6
+ f4jw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXFHfQpbfvC19uKOE1OUZ8fnz/PET35HMS9NRMKrPtG9cysw0MlUqSIcYOxBRKgzPhWZxydyiiuyp35@nongnu.org
-X-Gm-Message-State: AOJu0YyfHs7V+RcsVb1EQ/OwrUlbT5OhBrx6wlpyhLPU3t/kKYWJjq9m
- L5KvHkGY0ofj7O5eQyyNw0/1xfjpUcDombo5/7T7E+jCQXkq2ohqT08MW0+jbjnHWkA0QBx/HZd
- lBSKUaD2OpJgFLVDYoByYGj0WVdk=
-X-Gm-Gg: ASbGncsjH6ubBk5ZF6ILyllH8/50s+TYDCXJgER9kLW7/Dqfb0NEnUcMVs4lcOJCSfO
- /XlbrGRgPC1Cc5gYq/18OxAvjYYwRGd3YH4/q9fqDEKQYS7xCjD7ijRjhwpulUEFHdfKpFNxlqZ
- WZ1uNu53kKBgB97FGW0hPwTEmqcJumQxUXflSd7lt3D6jRoQXMMIdAbOIV
-X-Google-Smtp-Source: AGHT+IGsptj714yteR5swNprcpFr886k+nknQaCQBcvnOMgZXlW+NiuVqDOZ1EGU2qwyDyKoZ/bNrewWRMGGHQ41HLI=
-X-Received: by 2002:a05:6122:3382:b0:51f:3e67:75df with SMTP id
- 71dfb90a1353d-5235b8cc4d0mr6843744e0c.10.1740961244645; Sun, 02 Mar 2025
- 16:20:44 -0800 (PST)
+ AJvYcCVvnVgleXC4QZlFYyNZljWF34EuTe/Gn43+tf8cKScwkLVUxhOS+C3bAii7r3BbDv7N94DrdiaCAtYv@nongnu.org
+X-Gm-Message-State: AOJu0YyLEMZNXBBAh+WmQQcecqkhl2dPLKQHmwypj06t/xLQwz9gs9Q7
+ lc5O7L85+QccRyTcOxlCltFjHnO6OfGhqQorZlJEZm8Fo4/HKwQbrwhNq9htyn2wpZ37O9nfq4E
+ dwwZpg37kfgrRU4oAsAl3Z27qbWc=
+X-Gm-Gg: ASbGnctC1Ryi2ezd0fXudlHFOUwcuiC6lItiBzbjZgqGAXR67u+wl0YVHhE+vffWnHU
+ FpK1Qu+AjbbgbPJDOyQgXxAtvV+bVMhhjjBJmE9OXgKYIEMPyqnMPxMma6Yti5jb5ilRPeIK8jp
+ FgzaknaOHcmWLFjxsgChT2/blp2H+xPWl3u+Rlxj6h6EjA/ZtJKin4VR3O
+X-Google-Smtp-Source: AGHT+IHtJ2sjaamUx9vfw0i/2i+scuA+nV18mQxuVm3f+txLDd3VslDYOku16kPmyJ5fVH7QIQo8S6t6zpxRKnpWWLw=
+X-Received: by 2002:a05:6102:6e89:b0:4c1:9526:a635 with SMTP id
+ ada2fe7eead31-4c19526b1b1mr883697137.17.1740962837961; Sun, 02 Mar 2025
+ 16:47:17 -0800 (PST)
 MIME-Version: 1.0
 References: <20250302130618.25688-2-hemanshu.khilari.foss@gmail.com>
 In-Reply-To: <20250302130618.25688-2-hemanshu.khilari.foss@gmail.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 3 Mar 2025 10:20:18 +1000
-X-Gm-Features: AQ5f1Jp_PT7CTlAGk9rMaurQOwjteouGJyKBqiF4armMBq8b3zH2SAgOQz60O40
-Message-ID: <CAKmqyKPyTRNTb92D7GLsWmYdkapo4ev88u3k_xtH9XALRZi-8A@mail.gmail.com>
+Date: Mon, 3 Mar 2025 10:46:52 +1000
+X-Gm-Features: AQ5f1Jpgdp5pyvijX2CIfgj25NFvfPvRz9YeZweCBx709X5tW3P6JniDWi0dmhY
+Message-ID: <CAKmqyKNFzHeVhWm4=fa_VEMaThR7hS1M4QK0wi2Vx4M4KGnwRQ@mail.gmail.com>
 Subject: Re: [PATCH v2] docs/specs/riscv-iommu: Fixed broken link to external
  risv iommu document
 To: "hemanshu.khilari.foss" <hemanshu.khilari.foss@gmail.com>
@@ -105,7 +105,9 @@ On Sun, Mar 2, 2025 at 11:07=E2=80=AFPM hemanshu.khilari.foss
 > Resolves: https://gitlab.com/qemu-project/qemu/-/issues/2808
 > Signed-off-by: hemanshu.khilari.foss <hemanshu.khilari.foss@gmail.com>
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Thanks!
+
+Applied to riscv-to-apply.next
 
 Alistair
 
