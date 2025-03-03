@@ -4,84 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 54937C282D2
-	for <qemu-riscv@archiver.kernel.org>; Mon,  3 Mar 2025 14:47:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4C6C0C282CD
+	for <qemu-riscv@archiver.kernel.org>; Mon,  3 Mar 2025 19:20:25 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tp74G-0007Ag-DH; Mon, 03 Mar 2025 09:46:52 -0500
+	id 1tpBKl-0003Oh-9U; Mon, 03 Mar 2025 14:20:11 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <chigot@adacore.com>)
- id 1tp74E-00075s-KF
- for qemu-riscv@nongnu.org; Mon, 03 Mar 2025 09:46:50 -0500
-Received: from mail-ej1-x62d.google.com ([2a00:1450:4864:20::62d])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <chigot@adacore.com>)
- id 1tp74C-0005X0-NZ
- for qemu-riscv@nongnu.org; Mon, 03 Mar 2025 09:46:50 -0500
-Received: by mail-ej1-x62d.google.com with SMTP id
- a640c23a62f3a-aaec61d0f65so920711066b.1
- for <qemu-riscv@nongnu.org>; Mon, 03 Mar 2025 06:46:48 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=adacore.com; s=google; t=1741013206; x=1741618006; darn=nongnu.org;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=sEsCkJCO92Uhpe8NcsbaVWng72KRhe2mDUc3KEa8z50=;
- b=k6AmgH3uVgpUU9BFZbW6ER3LPdlp2JwsutbxUQXxBSlZZ88j7z1bUHa5T5ZHZFBuYK
- YlEoIB7rjBbbr7pKj7Bw20OO3utA2t10foAiFMkKUS/tuWZjROIirUGLPo1XBWsj+L/O
- 3yjf0rPboaztn+sFzJgBIv1j74fwke6wGoA3+RqlKkQ7kft3EA2zkuXzGr05y09je8Lc
- 7UHtwAsKWupLezrHRxQOkycG9lOAq3YTE9IFQgpNV8rdPElhHNAKmAO0JxJJ0QRf2ccb
- hfgcB29kgka50wZll9ADxRR2AdkdaXrk0pBbGpDSHiN3vy5fvLtP3WPMEdjUyvQfgPpm
- LztQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741013206; x=1741618006;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=sEsCkJCO92Uhpe8NcsbaVWng72KRhe2mDUc3KEa8z50=;
- b=RrnVyF1J4Qz37lC2VRBWnqRcRbB+cmoVjvlSIaWn1Pf6gboMEA0JNsSshDnw0bMRBL
- cbxNcDLBrvdqZ/bp9MajarS0INvOmeHMyqY5qFZfR9oQib/sq3K4eUOLjjz5bLeL0zyW
- lfHwGweY8qi7FreZidxCcJB/64MpSzQkvn0HZ8VapKQ5za4AXMf0YWVJdCCjLzpJ0Gp0
- HJgZ/zejHuCTH/fZNPYDXFkc7L8v4PzhLmBVkjV9x7Uw5fsdn7cLxML6OptcWkVfDap3
- jQ3FY+m5ajO6vPzGcR8wcK2WXKhVIewHYCCLLzq2Lh3Q9DgsFHePqIkd4+srfeDmuwOx
- jFnw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCW9IEJQIRffDJ9RK3wTkbF9gYRp5Jz6JXOXZg7Hj2ZGMbS92X+IIuRbcXyTEMECZNrRoH6eKi5sZg9U@nongnu.org
-X-Gm-Message-State: AOJu0Yz/qJkEbj+kaoSO6RYatRVRlLFRSuoaUgy5yMNqkOYSy8/nlqsF
- DIrve/EQypyZedypm//Qrw6bdVhT5vza4Oakj9QJ1n/t/b9bbgb1h3j5MqiDtAcUeFjoTzwlJnH
- VWlm8VcHSR/NA84z+YyGZJhJLQuP/KIPluVVW
-X-Gm-Gg: ASbGncsjiEMxyzwDle+ioEzLvtZrertcYw1kocd6kzQnN5Kf67Uhsvq82JlJyuHtyG1
- UproBO1mxguSgR9U7QS+Tb7NZ9B76FLEmnUn+aSfHbSnurEYVp0Tyz1ZG81aCMAe4sR/ZiiNo/Q
- zfe99+go2BhGxqdeDhNVa3Cx2abw==
-X-Google-Smtp-Source: AGHT+IEKzY93VBMaIlShrPqZyYCVREnRUeGcApiTend2ouCXi8Tbs0cgTkm2f6h6sad7V5u6vF1ZND83BiFXIgAC+lU=
-X-Received: by 2002:a17:907:6d20:b0:ac1:e1a7:9445 with SMTP id
- a640c23a62f3a-ac1e1a7ac33mr194302366b.12.1741013206405; Mon, 03 Mar 2025
- 06:46:46 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <kchamart@redhat.com>)
+ id 1tpBKV-0003Ns-Mw
+ for qemu-riscv@nongnu.org; Mon, 03 Mar 2025 14:19:56 -0500
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <kchamart@redhat.com>)
+ id 1tpBKQ-0003Gp-O6
+ for qemu-riscv@nongnu.org; Mon, 03 Mar 2025 14:19:55 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1741029586;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=ew8cLbviQXGRSsXKjXB+/SyYXVC0dlfqrmPZgpUh6lg=;
+ b=d1pPac8S9v3I6O8AJPPkp3vixXbnhwDC624VGtm5LJCxAIP+kapLejpOsKawF3CkCpZoEU
+ DNfycOX/Ko53BUwWL+KnmM/TcBK49HPBkOqv9gpOpXlwaeND4zWxT7Jt81Tbs7iX2DmJaS
+ WZW8h/zwshGfBSQK5UYR6kjfW7t8kMw=
+Received: from mx-prod-mc-08.mail-002.prod.us-west-2.aws.redhat.com
+ (ec2-35-165-154-97.us-west-2.compute.amazonaws.com [35.165.154.97]) by
+ relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-31-X3wY6VqJOq2gGFoTobeCTA-1; Mon,
+ 03 Mar 2025 14:19:37 -0500
+X-MC-Unique: X3wY6VqJOq2gGFoTobeCTA-1
+X-Mimecast-MFC-AGG-ID: X3wY6VqJOq2gGFoTobeCTA_1741029576
+Received: from mx-prod-int-06.mail-002.prod.us-west-2.aws.redhat.com
+ (mx-prod-int-06.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.93])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mx-prod-mc-08.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id DBE6E1800874; Mon,  3 Mar 2025 19:19:35 +0000 (UTC)
+Received: from gezellig (unknown [10.45.224.57])
+ by mx-prod-int-06.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id 3F831180035F; Mon,  3 Mar 2025 19:19:30 +0000 (UTC)
+Date: Tue, 4 Mar 2025 00:49:26 +0530
+From: Kashyap Chamarthy <kchamart@redhat.com>
+To: Yong-Xuan Wang <yongxuan.wang@sifive.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, greentime.hu@sifive.com,
+ vincent.chen@sifive.com, frank.chang@sifive.com, jim.shu@sifive.com
+Subject: Re: [PATCH v2 0/8] riscv: AIA: kernel-irqchip=off support
+Message-ID: <Z8YAvmO4OMEeyL3U@gezellig>
+References: <20250224082417.31382-1-yongxuan.wang@sifive.com>
 MIME-Version: 1.0
-References: <20250303023120.157221-1-alistair.francis@wdc.com>
-In-Reply-To: <20250303023120.157221-1-alistair.francis@wdc.com>
-From: =?UTF-8?Q?Cl=C3=A9ment_Chigot?= <chigot@adacore.com>
-Date: Mon, 3 Mar 2025 15:46:35 +0100
-X-Gm-Features: AQ5f1JrAZNLgmYcv5py3eEsgMfLIOn8qB7gvMk8YPpSEBSR2yYQpaygHdj6nu3s
-Message-ID: <CAJ307EiCgR83H2C0U69_x8nikjERtoHiODK8T9udtAKvST793Q@mail.gmail.com>
-Subject: Re: [PATCH] hw/char: sifive_uart: Free fifo on unrealize
-To: Alistair Francis <alistair23@gmail.com>
-Cc: palmer@dabbelt.com, liwei1518@gmail.com, dbarboza@ventanamicro.com, 
- zhiwei_liu@linux.alibaba.com, qemu-riscv@nongnu.org, philmd@linaro.org, 
- qemu-devel@nongnu.org, Alistair Francis <alistair.francis@wdc.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2a00:1450:4864:20::62d;
- envelope-from=chigot@adacore.com; helo=mail-ej1-x62d.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <20250224082417.31382-1-yongxuan.wang@sifive.com>
+X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.93
+Received-SPF: pass client-ip=170.10.129.124; envelope-from=kchamart@redhat.com;
+ helo=us-smtp-delivery-124.mimecast.com
+X-Spam_score_int: -30
+X-Spam_score: -3.1
+X-Spam_bar: ---
+X-Spam_report: (-3.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_MSPIKE_H5=-1, RCVD_IN_MSPIKE_WL=-0.01,
+ RCVD_IN_VALIDITY_CERTIFIED_BLOCKED=0.001, RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -97,107 +86,114 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Mon, Mar 3, 2025 at 3:31=E2=80=AFAM Alistair Francis <alistair23@gmail.c=
-om> wrote:
->
-> We previously allocate the fifo on reset and never free it, which means
-> we are leaking memory.
->
-> Instead let's allocate on realize and free on unrealize.
->
-> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
-> ---
->  hw/char/sifive_uart.c | 44 +++++++++++++++++++++++++++----------------
->  1 file changed, 28 insertions(+), 16 deletions(-)
->
-> diff --git a/hw/char/sifive_uart.c b/hw/char/sifive_uart.c
-> index 4bc5767284..b45e6c098c 100644
-> --- a/hw/char/sifive_uart.c
-> +++ b/hw/char/sifive_uart.c
-> @@ -251,6 +251,23 @@ static int sifive_uart_be_change(void *opaque)
->      return 0;
->  }
->
-> +static void sifive_uart_reset_enter(Object *obj, ResetType type)
-> +{
-> +    SiFiveUARTState *s =3D SIFIVE_UART(obj);
-> +
-> +    s->txfifo =3D 0;
-> +    s->ie =3D 0;
-> +    s->ip =3D 0;
-> +    s->txctrl =3D 0;
-> +    s->rxctrl =3D 0;
-> +    s->div =3D 0;
-> +
-> +    s->rx_fifo_len =3D 0;
-> +
-> +    memset(s->rx_fifo, 0, SIFIVE_UART_RX_FIFO_SIZE);
-> +    fifo8_reset(&s->tx_fifo);
-> +}
-> +
->  static const Property sifive_uart_properties[] =3D {
->      DEFINE_PROP_CHR("chardev", SiFiveUARTState, chr),
->  };
-> @@ -270,30 +287,24 @@ static void sifive_uart_realize(DeviceState *dev, E=
-rror **errp)
->  {
->      SiFiveUARTState *s =3D SIFIVE_UART(dev);
->
-> +    fifo8_create(&s->tx_fifo, SIFIVE_UART_TX_FIFO_SIZE);
-> +
->      s->fifo_trigger_handle =3D timer_new_ns(QEMU_CLOCK_VIRTUAL,
->                                            fifo_trigger_update, s);
->
-> -    qemu_chr_fe_set_handlers(&s->chr, sifive_uart_can_rx, sifive_uart_rx=
-,
-> -                             sifive_uart_event, sifive_uart_be_change, s=
-,
-> -                             NULL, true);
-> +    if (qemu_chr_fe_backend_connected(&s->chr)) {
-> +        qemu_chr_fe_set_handlers(&s->chr, sifive_uart_can_rx, sifive_uar=
-t_rx,
-> +                                 sifive_uart_event, sifive_uart_be_chang=
-e, s,
-> +                                 NULL, true);
-> +    }
->
->  }
->
-> -static void sifive_uart_reset_enter(Object *obj, ResetType type)
-> +static void sifive_uart_unrealize(DeviceState *dev)
->  {
-> -    SiFiveUARTState *s =3D SIFIVE_UART(obj);
-> -
-> -    s->txfifo =3D 0;
-> -    s->ie =3D 0;
-> -    s->ip =3D 0;
-> -    s->txctrl =3D 0;
-> -    s->rxctrl =3D 0;
-> -    s->div =3D 0;
-> -
-> -    s->rx_fifo_len =3D 0;
-> +    SiFiveUARTState *s =3D SIFIVE_UART(dev);
->
-> -    memset(s->rx_fifo, 0, SIFIVE_UART_RX_FIFO_SIZE);
-> -    fifo8_create(&s->tx_fifo, SIFIVE_UART_TX_FIFO_SIZE);
-> +    fifo8_destroy(&s->tx_fifo);
->  }
->
->  static void sifive_uart_reset_hold(Object *obj, ResetType type)
-> @@ -329,6 +340,7 @@ static void sifive_uart_class_init(ObjectClass *oc, v=
-oid *data)
->      ResettableClass *rc =3D RESETTABLE_CLASS(oc);
->
->      dc->realize =3D sifive_uart_realize;
-> +    dc->unrealize =3D sifive_uart_unrealize;
->      dc->vmsd =3D &vmstate_sifive_uart;
->      rc->phases.enter =3D sifive_uart_reset_enter;
->      rc->phases.hold  =3D sifive_uart_reset_hold;
-> --
-> 2.48.1
->
+On Mon, Feb 24, 2025 at 04:24:07PM +0800, Yong-Xuan Wang wrote:
+> This series introduces the user-space AIA MSI emulation when using KVM
+> acceleration.
+> 
+> After this series, RISC-V QEMU virt machine with KVM acceleration has
+> 3 parameters to control the type of irqchip and its emulation method:
+> - Machine prop "aia" controls the type of irqchip
+>   - none: use PLIC and emulated in user-space
+>   - aplic: use AIA wired and emulated in user-space
+>   - aplic-imsic: use AIA MSI, emulation mode is determined by
+>     "kernel-irqchip" and "riscv-aia". This can only be used
+>     when the host machine support the AIA extension.
+> - Accel prop "kernel-irqchip", effective with AIA MSI
+>   - on: in-kernel APLIC and in-kernel IMSIC
+>   - off: user-space APLIC and user-space IMSIC
+>   - split: user-space APLIC and in-kernel IMSIC
+> - Accel prop "riscv-aia", effective with in-kernel IMSIC
+>   - emul: use MRIF as in-kernel IMSIC
+>   - hw: use hardware guest IMSIC file as in-kernel IMSIC
+>   - auto: use the hardware guest IMSICs whenever available otherwise
+>     fallback to MRIF
 
-Thanks for the patch.
+[...]
 
-Tested-by: Cl=C3=A9ment Chigot <chigot@adacore.com>
+> Yong-Xuan Wang (8):
+>   target/riscv/kvm: rewrite get/set for KVM_REG_RISCV_CSR
+>   target/riscv/kvm: add KVM_REG_RISCV_CSR_AIA
+>   target/riscv/kvm: add KVM_REG_RISCV_CSR_SMSTATEEN
+>   target/riscv: add helper to get CSR name
+>   target/riscv/kvm: rewrite kvm_riscv_handle_csr
+>   target/riscv/kvm: add CSR_SIREG and CSR_STOPEI emulation
+>   docs: update the description about RISC-V AIA
+>   hw/intc/imsic: prevent to use IMSIC when host doesn't support AIA
+>     extension
+> 
+>  docs/specs/riscv-aia.rst   |  24 +++-
+>  docs/system/riscv/virt.rst |  10 +-
+>  hw/intc/riscv_imsic.c      |  17 ++-
+>  target/riscv/cpu.h         |  10 +-
+>  target/riscv/csr.c         |  30 ++---
+>  target/riscv/kvm/kvm-cpu.c | 235 +++++++++++++++++++++++++++++++------
+>  6 files changed, 254 insertions(+), 72 deletions(-)
+
+
+I don't pretend to grok all the details here, and I couldn't test the
+KVM-acceleration path ("-accel kvm,kernel-irqchip=split"), as I don't
+yet have hardware to test.  I was able to test the TCG part:
+
+I'm at:
+
+    $> git describe
+    v9.2.0-1976-g68d58113df
+
+My QEMU command-line is here[1].  I tried out these two variataions:
+
+    ... -machine virt,accel=tcg,aia=aplic,kernel-irqchip=split ...
+
+    ... -machine virt,accel=tcg,aia=aplic-imsic,kernel-irqchip=split ...
+
+And booted a Fedora-41 RISC-V host-generic guest image from here:
+
+    https://dl.fedoraproject.org/pub/alt/risc-v/release/41/Server/riscv64/images/
+
+As near as I see, nothing exploded :)
+
+I see that:
+
+  - From the docs: “aia=aplic” selects APLIC (advanced platform level
+    interrupt controller) to handle wired interrupts whereas the
+    “aia=aplic-imsic” selects APLIC and IMSIC (incoming message signaled
+    interrupt controller) to handle both wired interrupts and MSIs
+
+  - There's no user-visible change here, but only a developer-visible
+    change: in terms of what's being emulated in userspace vs. in-kernel
+    irqchip.)
+
+So, if it's still not too late:
+
+    Tested-by: Kashyap Chamarthy <kchamart@redhat.com>
+
+        * * *
+
+[1] QEMU command-line:
+------------------------------------------------------------------------
+$ ./qemu-system-riscv64
+-display none
+-cpu max
+-no-user-config
+-nodefaults
+-serial stdio
+-smp 4,sockets=4,cores=1,threads=1
+-machine virt,accel=tcg,aia=aplic,kernel-irqchip=split
+-blockdev node-name=node-Base1,driver=raw,file.driver=file,file.filename=./base1.raw,file.node-name=node-Base1-file
+-device virtio-blk,drive=node-Base1,id=virtio0
+-device virtio-net-device,netdev=net \
+-netdev user,id=net,hostfwd=tcp::2222-:22 \
+-blockdev '{"driver":"file","filename":"/usr/share/edk2/riscv/RISCV_VIRT_CODE.qcow2","node-name":"pflash0-storage","auto-read-only":true,"discard":"unmap"}' \
+-blockdev '{"node-name":"pflash0-format","read-only":true,"driver":"qcow2","file":"pflash0-storage"}' \
+-blockdev '{"driver":"file","filename":"/var/lib/libvirt/qemu/nvram/base1_VARS.qcow2","node-name":"pflash1-storage","auto-read-only":true,"discard":"unmap"}' \
+-blockdev '{"node-name":"pflash1-format","read-only":false,"driver":"qcow2","file":"pflash1-storage"}' \
+-machine virt,usb=off,dump-guest-core=off,memory-backend=riscv_virt_board.ram,pflash0=pflash0-format,pflash1=pflash1-format,acpi=off \
+-m size=4194304k \
+-object '{"qom-type":"memory-backend-ram","id":"riscv_virt_board.ram","size":4294967296}' \
+-object rng-random,filename=/dev/urandom,id=rng \
+-device virtio-rng-device,rng=rng 
+------------------------------------------------------------------------
+
+-- 
+/kashyap
+
 
