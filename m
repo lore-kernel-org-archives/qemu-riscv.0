@@ -4,95 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 95D6FC282D2
-	for <qemu-riscv@archiver.kernel.org>; Tue,  4 Mar 2025 15:53:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8143FC021B8
+	for <qemu-riscv@archiver.kernel.org>; Tue,  4 Mar 2025 23:20:38 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tpUZd-0004vX-Ff; Tue, 04 Mar 2025 10:52:49 -0500
+	id 1tpbYX-0002Gw-IM; Tue, 04 Mar 2025 18:20:09 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1tpUZY-0004uC-Pv
- for qemu-riscv@nongnu.org; Tue, 04 Mar 2025 10:52:44 -0500
-Received: from mail-wm1-x32d.google.com ([2a00:1450:4864:20::32d])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tpbYU-0002GL-9q
+ for qemu-riscv@nongnu.org; Tue, 04 Mar 2025 18:20:06 -0500
+Received: from mail-wr1-x433.google.com ([2a00:1450:4864:20::433])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1tpUZW-0003Il-SB
- for qemu-riscv@nongnu.org; Tue, 04 Mar 2025 10:52:44 -0500
-Received: by mail-wm1-x32d.google.com with SMTP id
- 5b1f17b1804b1-4394036c0efso37527035e9.2
- for <qemu-riscv@nongnu.org>; Tue, 04 Mar 2025 07:52:42 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tpbYQ-0005ol-Ju
+ for qemu-riscv@nongnu.org; Tue, 04 Mar 2025 18:20:04 -0500
+Received: by mail-wr1-x433.google.com with SMTP id
+ ffacd0b85a97d-390eb7c1024so3579773f8f.0
+ for <qemu-riscv@nongnu.org>; Tue, 04 Mar 2025 15:20:01 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1741103561; x=1741708361; darn=nongnu.org;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=ob+55ii8E4Ycc2GkEVlEPolvIyx3KgrxuhKnE7204WA=;
- b=SfS3g3PfmbK/MgNUHRPhTcEddK5gBuEa18CbncHnh1euxPUpUisVOjh1a2B9th6LAv
- B8XF0xNqwWbSBB9A/oPEx9MkphSMccxb4gtDcHqKsDumtFdJ3q3C1ODc4XvRepp7Tkdj
- Q7IiFowHCg1ir+SLt1WM3l90IWD9PxXf/OKq0eI/jQR/NSP1L3iSKGm6xTJanoAqmv2G
- NOkRWwngJxwCtC7joMP3d959MDqQKQ8S6u78obUul4ONUobdPeKQ1AHXtEuzcr8TCQgH
- tsp3aJ9WMIi2tQNJldDv8ITOjKdct1rOdWcj3PADjfmUXMiQfMcytUFFQXRR3aaolej9
- yEjQ==
+ d=linaro.org; s=google; t=1741130399; x=1741735199; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=cDmsLECyh1lWtnAcqmQINo04yHjsZIx/j//AFNZo4aE=;
+ b=DvShwWMkHdLnLOzMiXK5kmOI8+CouqNz8G4M2cqd2Wbcsd/Chd+rVR1IgP8jquhJeB
+ jF7nZj//r34w5HZPOfJXHWLWYzysYWWQBRD1CF1RmkfJaaszaUHVKk+s1s52z7FpXspv
+ LV/reYb/AiixSRfsfdlhb89ux68AyYWlNztCij5I5XaDFa/ya2NY+ILyTKNdRykH1mCX
+ sEN9JXuLjY8ir2oEYqGe3k5aOtAbqSQQe6Mv7rmf89mCZe4EqnX7+lRLbPL38MFvr/0K
+ f3FpHnQiukSxzOWkYayCvjnG73iCwSxf8BgxQe54fRSZ+qFVcaXGdfstjIhWz0DgJ2Si
+ lGNg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741103561; x=1741708361;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=ob+55ii8E4Ycc2GkEVlEPolvIyx3KgrxuhKnE7204WA=;
- b=hZzu0x5GCfMctQUsRLXWphS0pBJuTX4QT3tHOcEJ9YyWjJn9BltleT9WttZNrJo3qZ
- dwc5LeoBbnMslYhEIK6MGfW3808FSdQP/OhRNeW+DH6XvN2El330hmyeoKfHpe8vd3XS
- r4bqjqDrTB/jqNh/PNrFws7XjYrgXZ7/A4IP+Z8fB/838Bs+KrhhaPCnhbMYW6J8S4Lb
- LjkIviUpQaOFD4Kv///CiAIMekQ5027n2HqMnz2G8Sqc093pjwseooWcVgbkUCohUpgK
- uDTxJJJgtgC5vs+oNgzzyF9hOkYcZgaHAgeTPrclVOHyGLY07KuTPo5eEsvfg8GfPTIZ
- huNg==
+ d=1e100.net; s=20230601; t=1741130399; x=1741735199;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=cDmsLECyh1lWtnAcqmQINo04yHjsZIx/j//AFNZo4aE=;
+ b=Sjnip8PqtfPq6ceG2WftuAuOD98zQQcpRu2qHhgHYptI88QYYU2C1UagUzowCWEX9M
+ 65it/HnaxW+TSVgHqoZpCfIqiMQi4gSZ83BnJeXYBCFfVO5XcWQkDvBziBZJy8KmK4Pe
+ nwlcB3P+GgyBQ9mc6mbkbQrnyVafpmqUnCKGozgMOG11Nk5m7QA0kvYQiYd523CYqlwF
+ BuYny4LCDtojvNSbf5eYWJX/4gcHg8xN9mizjDGhVK1mgP0UmIHQ5RnIwOpIH9752Ot0
+ 66li9bepVJTnMp0PsUknlLmFWCsySyyvxjGsAs+ija5d6vIlOmyVdb9QEVQLlTHc4Eti
+ j4fA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXB3nsClcGyqdJPJTCGFY4btAb8jPa36+q/ZEPKu6F1OXjxae4m58AOkGX81BYNSV1+zBu5hDoS7n1s@nongnu.org
-X-Gm-Message-State: AOJu0YzmwPrt1eiuraGYerwq7M9nzkGWfbBlLMAgiNe9t+qgcVtjKNFX
- iVbCmYs8GUdKxCOiT/1QJ45P9Ip5xPff6JBZTCfeCS7k9iV4DtRLpO4kbbc4KeI=
-X-Gm-Gg: ASbGncsSTn1siyYPVMHiCs0S6vxBqq6pvUaf4+epwBUILwiJR6z59eekW65R4Vhka/p
- Yxk66anR483eL470fAwyDqGDTL3kLFZYGbCx2kPhdOq2k7MDs5+KmvphjOxuXGOdT6B4QBcH7AD
- TafGT8dHRGeIPhzKh+GAhyhx4m6n2DrW2d3kACnBhlMED84kgvynhiXfYNEpvLEoCY1i9ozBOtS
- Pb2ANGyYJqOuqNg31GKoj4N7WXGcvJMpkW+2WcuzgSSG9B8AW3jOklgCW2qDU8zscYfMGGhuLJh
- 7jJqFGkrY2xBvXsbo3F3aKkr0wWE+i5q
-X-Google-Smtp-Source: AGHT+IGjscO4ADJjKnuALrcPAQ0LK/XwIq1iH7QKTDkKX2tPx7j7fB1QbfPoWnzpTvL1WH5s3/780Q==
-X-Received: by 2002:a05:600c:4fd0:b0:43b:d12a:40e1 with SMTP id
- 5b1f17b1804b1-43bd12a42b8mr835005e9.18.1741103561024; 
- Tue, 04 Mar 2025 07:52:41 -0800 (PST)
-Received: from localhost ([2a02:8308:a00c:e200::688c])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-43bbed8b26asm92527595e9.22.2025.03.04.07.52.40
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 04 Mar 2025 07:52:40 -0800 (PST)
-Date: Tue, 4 Mar 2025 16:52:39 +0100
-From: Andrew Jones <ajones@ventanamicro.com>
-To: Yong-Xuan Wang <yongxuan.wang@sifive.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, greentime.hu@sifive.com, 
- vincent.chen@sifive.com, frank.chang@sifive.com, jim.shu@sifive.com, 
+ AJvYcCXYYGe2znu28NOVpttlDpxmMU72aienUBx6wiShgiIGw0Me9eBxIHYa/OPvpa+frLMHIcCK7A/JGB00@nongnu.org
+X-Gm-Message-State: AOJu0Yy4bkzjE7adBmuNgti/HB9jCtbVXikjqSA7OgK0HR/CvjtX9+iF
+ O9ZIKwiiAqCd4ROLucErtG0oj/1hQWvb0NLz9IicYoZykvuAhhAODvm4ZhuoSX4=
+X-Gm-Gg: ASbGncs0ATheTM3x2tV+8i58qlKGY13q1VJymrE1itYB0BHxEvhxYsBnl/xdFMj1jgs
+ pR9NgFclN9Osaw/fRFhZYgUYvlLayqszdE7xSsNkgZXxr0oM5ZWqglDVspM4jvpHd3AtBLZ8r0V
+ jWhqkKxzj131S4oR+ExN/2AoWuh484W5yAKclIsnfVotl3KjEpmymG3Cg2KcOAFZXLeh3LYwFhR
+ SoS4/XzAk5i8LEUTpZFmCLIxWTccMXw1aKbB6sFPfdZTQdmyC+hjGiEAUjM2ZvesOkBgdDAQvcv
+ lRMgSoZwMnRt7j3+ta/hlf2JluxAV6Tk6nXbRzXakYOpZBbff7otUYlM+KvlWpq0SiE8FuHtwiy
+ CW09uPecrsVWIQbaTgA0=
+X-Google-Smtp-Source: AGHT+IGjgXkehsg2ZYkMcZ/jfreXBKgemzzI56u1y0hIUSZi/BLhlEv4GJ+zMIL0KfdUKl8qM10+xg==
+X-Received: by 2002:a5d:6487:0:b0:38f:3b9b:6f91 with SMTP id
+ ffacd0b85a97d-3911f74009fmr421470f8f.12.1741130398771; 
+ Tue, 04 Mar 2025 15:19:58 -0800 (PST)
+Received: from localhost.localdomain (88-187-86-199.subs.proxad.net.
+ [88.187.86.199]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-43bbf2edf84sm99190215e9.40.2025.03.04.15.19.57
+ (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
+ Tue, 04 Mar 2025 15:19:57 -0800 (PST)
+From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+To: qemu-devel@nongnu.org
+Cc: Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, Bin Meng <bmeng.cn@gmail.com>,
+ qemu-riscv@nongnu.org, Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
  Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, 
+ Pierrick Bouvier <pierrick.bouvier@linaro.org>,
  Weiwei Li <liwei1518@gmail.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>, 
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Philippe =?utf-8?Q?Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-Subject: Re: [PATCH v2 6/8] target/riscv/kvm: add CSR_SIREG and CSR_STOPEI
- emulation
-Message-ID: <20250304-d8cce0e92dc6363ebfecd07a@orel>
-References: <20250224082417.31382-1-yongxuan.wang@sifive.com>
- <20250224082417.31382-7-yongxuan.wang@sifive.com>
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+Subject: [PATCH] hw/riscv/riscv-iommu: Get target page info using runtime
+ helpers
+Date: Wed,  5 Mar 2025 00:19:56 +0100
+Message-ID: <20250304231956.34396-1-philmd@linaro.org>
+X-Mailer: git-send-email 2.47.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20250224082417.31382-7-yongxuan.wang@sifive.com>
-Received-SPF: pass client-ip=2a00:1450:4864:20::32d;
- envelope-from=ajones@ventanamicro.com; helo=mail-wm1-x32d.google.com
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::433;
+ envelope-from=philmd@linaro.org; helo=mail-wr1-x433.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -108,131 +104,176 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Mon, Feb 24, 2025 at 04:24:13PM +0800, Yong-Xuan Wang wrote:
-> Support user-space emulation of SIREG and STOPEI CSR with KVM
-> acceleration. For SIREG emulation, the SISELECT CSR value and iprio
-> array must be loaded before handling, and since the iprio array might
-> be modified, it must be written back after the emulation.
-> 
-> When running with KVM acceleration, the machine lacks M-mode CSRs and
-> does not report S-mode support in its environment configuration, even
-> though some S-mode CSRs are accessible. This patch adds kvm_enabled()
-> checks in relevant predicates to ensure proper handling and validation.
-> 
-> Signed-off-by: Yong-Xuan Wang <yongxuan.wang@sifive.com>
-> ---
->  target/riscv/csr.c         | 12 +++++++++---
->  target/riscv/kvm/kvm-cpu.c | 27 +++++++++++++++++++++++++++
->  2 files changed, 36 insertions(+), 3 deletions(-)
-> 
-> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-> index a2830888d010..594df30c456a 100644
-> --- a/target/riscv/csr.c
-> +++ b/target/riscv/csr.c
-> @@ -27,6 +27,7 @@
->  #include "exec/exec-all.h"
->  #include "exec/tb-flush.h"
->  #include "system/cpu-timers.h"
-> +#include "system/kvm.h"
->  #include "qemu/guest-random.h"
->  #include "qapi/error.h"
->  #include <stdbool.h>
-> @@ -42,6 +43,11 @@ void riscv_set_csr_ops(int csrno, riscv_csr_operations *ops)
->      csr_ops[csrno & (CSR_TABLE_SIZE - 1)] = *ops;
->  }
->  
-> +static bool riscv_has_ext_s(CPURISCVState *env)
-> +{
-> +    return riscv_has_ext(env, RVS) || kvm_enabled();
-> +}
-> +
->  /* Predicates */
->  #if !defined(CONFIG_USER_ONLY)
->  RISCVException smstateen_acc_ok(CPURISCVState *env, int index, uint64_t bit)
-> @@ -52,7 +58,7 @@ RISCVException smstateen_acc_ok(CPURISCVState *env, int index, uint64_t bit)
->          return RISCV_EXCP_NONE;
->      }
->  
-> -    if (!(env->mstateen[index] & bit)) {
-> +    if (!kvm_enabled() && !(env->mstateen[index] & bit)) {
->          return RISCV_EXCP_ILLEGAL_INST;
->      }
->  
-> @@ -66,7 +72,7 @@ RISCVException smstateen_acc_ok(CPURISCVState *env, int index, uint64_t bit)
->          }
->      }
->  
-> -    if (env->priv == PRV_U && riscv_has_ext(env, RVS)) {
-> +    if (env->priv == PRV_U && riscv_has_ext_s(env)) {
->          if (!(env->sstateen[index] & bit)) {
->              return RISCV_EXCP_ILLEGAL_INST;
->          }
-> @@ -326,7 +332,7 @@ static RISCVException csrind_or_aia_any(CPURISCVState *env, int csrno)
->  
->  static RISCVException smode(CPURISCVState *env, int csrno)
->  {
-> -    if (riscv_has_ext(env, RVS)) {
-> +    if (riscv_has_ext_s(env)) {
->          return RISCV_EXCP_NONE;
->      }
+Prefer runtime helpers to get target page size / mask / bits
+rather than compile time definitions. This will help to build
+these files once for all RISC-V binaries.
 
-Scattering kvm_enabled() checks around, as is done in the above hunks, is
-what I meant in my reply to the previous patch about TCG likely not having
-its state maintained well enough to always provide functional CSR
-emulation for KVM. Rather than fixing things up as we bump into them with
-kvm_enabled() checks we should come up with a way to truly support QEMU
-KVM emulation forwarding to TCG.
+Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+---
+ hw/riscv/riscv-iommu-pci.c |  4 +++-
+ hw/riscv/riscv-iommu.c     | 29 +++++++++++++++--------------
+ 2 files changed, 18 insertions(+), 15 deletions(-)
 
-Thanks,
-drew
+diff --git a/hw/riscv/riscv-iommu-pci.c b/hw/riscv/riscv-iommu-pci.c
+index 12451869e41..e2b893c5898 100644
+--- a/hw/riscv/riscv-iommu-pci.c
++++ b/hw/riscv/riscv-iommu-pci.c
+@@ -23,6 +23,7 @@
+ #include "hw/qdev-properties.h"
+ #include "hw/riscv/riscv_hart.h"
+ #include "migration/vmstate.h"
++#include "exec/target_page.h"
+ #include "qapi/error.h"
+ #include "qemu/error-report.h"
+ #include "qemu/host-utils.h"
+@@ -102,7 +103,8 @@ static void riscv_iommu_pci_realize(PCIDevice *dev, Error **errp)
+     qdev_realize(DEVICE(iommu), NULL, errp);
+ 
+     memory_region_init(&s->bar0, OBJECT(s), "riscv-iommu-bar0",
+-        QEMU_ALIGN_UP(memory_region_size(&iommu->regs_mr), TARGET_PAGE_SIZE));
++                       QEMU_ALIGN_UP(memory_region_size(&iommu->regs_mr),
++                                     qemu_target_page_size()));
+     memory_region_add_subregion(&s->bar0, 0, &iommu->regs_mr);
+ 
+     pcie_endpoint_cap_init(dev, 0);
+diff --git a/hw/riscv/riscv-iommu.c b/hw/riscv/riscv-iommu.c
+index e7568ca227a..8bbb33b8b53 100644
+--- a/hw/riscv/riscv-iommu.c
++++ b/hw/riscv/riscv-iommu.c
+@@ -23,6 +23,7 @@
+ #include "hw/qdev-properties.h"
+ #include "hw/riscv/riscv_hart.h"
+ #include "migration/vmstate.h"
++#include "exec/target_page.h"
+ #include "qapi/error.h"
+ #include "qemu/timer.h"
+ 
+@@ -300,14 +301,14 @@ static int riscv_iommu_spa_fetch(RISCVIOMMUState *s, RISCVIOMMUContext *ctx,
+         riscv_iommu_msi_check(s, ctx, iotlb->iova)) {
+         iotlb->target_as = &s->trap_as;
+         iotlb->translated_addr = iotlb->iova;
+-        iotlb->addr_mask = ~TARGET_PAGE_MASK;
++        iotlb->addr_mask = ~qemu_target_page_mask();
+         return 0;
+     }
+ 
+     /* Exit early for pass-through mode. */
+     if (!(en_s || en_g)) {
+         iotlb->translated_addr = iotlb->iova;
+-        iotlb->addr_mask = ~TARGET_PAGE_MASK;
++        iotlb->addr_mask = ~qemu_target_page_mask();
+         /* Allow R/W in pass-through mode */
+         iotlb->perm = IOMMU_RW;
+         return 0;
+@@ -390,7 +391,7 @@ static int riscv_iommu_spa_fetch(RISCVIOMMUState *s, RISCVIOMMUContext *ctx,
+     do {
+         const unsigned widened = (pass && !sc[pass].step) ? 2 : 0;
+         const unsigned va_bits = widened + sc[pass].ptidxbits;
+-        const unsigned va_skip = TARGET_PAGE_BITS + sc[pass].ptidxbits *
++        const unsigned va_skip = qemu_target_page_bits() + sc[pass].ptidxbits *
+                                  (sc[pass].levels - 1 - sc[pass].step);
+         const unsigned idx = (addr >> va_skip) & ((1 << va_bits) - 1);
+         const dma_addr_t pte_addr = base + idx * sc[pass].ptesize;
+@@ -448,7 +449,7 @@ static int riscv_iommu_spa_fetch(RISCVIOMMUState *s, RISCVIOMMUContext *ctx,
+             break;                /* Reserved leaf PTE flags: PTE_W */
+         } else if ((pte & (PTE_R | PTE_W | PTE_X)) == (PTE_W | PTE_X)) {
+             break;                /* Reserved leaf PTE flags: PTE_W + PTE_X */
+-        } else if (ppn & ((1ULL << (va_skip - TARGET_PAGE_BITS)) - 1)) {
++        } else if (ppn & ((1ULL << (va_skip - qemu_target_page_bits())) - 1)) {
+             break;                /* Misaligned PPN */
+         } else if ((iotlb->perm & IOMMU_RO) && !(pte & PTE_R)) {
+             break;                /* Read access check failed */
+@@ -480,7 +481,7 @@ static int riscv_iommu_spa_fetch(RISCVIOMMUState *s, RISCVIOMMUContext *ctx,
+                 riscv_iommu_msi_check(s, ctx, base)) {
+                 /* Trap MSI writes and return GPA address. */
+                 iotlb->target_as = &s->trap_as;
+-                iotlb->addr_mask = ~TARGET_PAGE_MASK;
++                iotlb->addr_mask = ~qemu_target_page_mask();
+                 return 0;
+             }
+ 
+@@ -950,7 +951,7 @@ static int riscv_iommu_ctx_fetch(RISCVIOMMUState *s, RISCVIOMMUContext *ctx)
+          *   device index: [23:16][15:7][6:0]
+          */
+         const int split = depth * 9 + 6 + dc_fmt;
+-        addr |= ((ctx->devid >> split) << 3) & ~TARGET_PAGE_MASK;
++        addr |= ((ctx->devid >> split) << 3) & ~qemu_target_page_mask();
+         if (dma_memory_read(s->target_as, addr, &de, sizeof(de),
+                             MEMTXATTRS_UNSPECIFIED) != MEMTX_OK) {
+             return RISCV_IOMMU_FQ_CAUSE_DDT_LOAD_FAULT;
+@@ -968,7 +969,7 @@ static int riscv_iommu_ctx_fetch(RISCVIOMMUState *s, RISCVIOMMUContext *ctx)
+     }
+ 
+     /* index into device context entry page */
+-    addr |= (ctx->devid * dc_len) & ~TARGET_PAGE_MASK;
++    addr |= (ctx->devid * dc_len) & ~qemu_target_page_mask();
+ 
+     memset(&dc, 0, sizeof(dc));
+     if (dma_memory_read(s->target_as, addr, &dc, dc_len,
+@@ -1037,7 +1038,7 @@ static int riscv_iommu_ctx_fetch(RISCVIOMMUState *s, RISCVIOMMUContext *ctx)
+          * level. See IOMMU Specification, 2.2. Process-Directory-Table.
+          */
+         const int split = depth * 9 + 8;
+-        addr |= ((ctx->process_id >> split) << 3) & ~TARGET_PAGE_MASK;
++        addr |= ((ctx->process_id >> split) << 3) & ~qemu_target_page_mask();
+         if (dma_memory_read(s->target_as, addr, &de, sizeof(de),
+                             MEMTXATTRS_UNSPECIFIED) != MEMTX_OK) {
+             return RISCV_IOMMU_FQ_CAUSE_PDT_LOAD_FAULT;
+@@ -1050,7 +1051,7 @@ static int riscv_iommu_ctx_fetch(RISCVIOMMUState *s, RISCVIOMMUContext *ctx)
+     }
+ 
+     /* Leaf entry in PDT */
+-    addr |= (ctx->process_id << 4) & ~TARGET_PAGE_MASK;
++    addr |= (ctx->process_id << 4) & ~qemu_target_page_mask();
+     if (dma_memory_read(s->target_as, addr, &dc.ta, sizeof(uint64_t) * 2,
+                         MEMTXATTRS_UNSPECIFIED) != MEMTX_OK) {
+         return RISCV_IOMMU_FQ_CAUSE_PDT_LOAD_FAULT;
+@@ -1440,7 +1441,7 @@ static int riscv_iommu_translate(RISCVIOMMUState *s, RISCVIOMMUContext *ctx,
+     perm = iot ? iot->perm : IOMMU_NONE;
+     if (perm != IOMMU_NONE) {
+         iotlb->translated_addr = PPN_PHYS(iot->phys);
+-        iotlb->addr_mask = ~TARGET_PAGE_MASK;
++        iotlb->addr_mask = ~qemu_target_page_mask();
+         iotlb->perm = perm;
+         fault = 0;
+         goto done;
+@@ -1481,7 +1482,7 @@ done:
+                                RISCV_IOMMU_PREQ_HDR_PID, ctx->process_id);
+         }
+         pr.hdr = set_field(pr.hdr, RISCV_IOMMU_PREQ_HDR_DID, ctx->devid);
+-        pr.payload = (iotlb->iova & TARGET_PAGE_MASK) |
++        pr.payload = (iotlb->iova & qemu_target_page_mask()) |
+                      RISCV_IOMMU_PREQ_PAYLOAD_M;
+         riscv_iommu_pri(s, &pr);
+         return fault;
+@@ -1683,7 +1684,7 @@ static void riscv_iommu_process_cq_tail(RISCVIOMMUState *s)
+                                        RISCV_IOMMU_CMD_IOTINVAL_GSCID);
+             uint32_t pscid = get_field(cmd.dword0,
+                                        RISCV_IOMMU_CMD_IOTINVAL_PSCID);
+-            hwaddr iova = (cmd.dword1 << 2) & TARGET_PAGE_MASK;
++            hwaddr iova = (cmd.dword1 << 2) & qemu_target_page_mask();
+ 
+             if (pscv) {
+                 /* illegal command arguments IOTINVAL.GVMA & PSCV == 1 */
+@@ -1715,7 +1716,7 @@ static void riscv_iommu_process_cq_tail(RISCVIOMMUState *s)
+                                        RISCV_IOMMU_CMD_IOTINVAL_GSCID);
+             uint32_t pscid = get_field(cmd.dword0,
+                                        RISCV_IOMMU_CMD_IOTINVAL_PSCID);
+-            hwaddr iova = (cmd.dword1 << 2) & TARGET_PAGE_MASK;
++            hwaddr iova = (cmd.dword1 << 2) & qemu_target_page_mask();
+             RISCVIOMMUTransTag transtag;
+ 
+             if (gv) {
+@@ -1928,7 +1929,7 @@ static void riscv_iommu_process_dbg(RISCVIOMMUState *s)
+             iova = RISCV_IOMMU_TR_RESPONSE_FAULT | (((uint64_t) fault) << 10);
+         } else {
+             iova = iotlb.translated_addr & ~iotlb.addr_mask;
+-            iova >>= TARGET_PAGE_BITS;
++            iova >>= qemu_target_page_bits();
+             iova &= RISCV_IOMMU_TR_RESPONSE_PPN;
+ 
+             /* We do not support superpages (> 4kbs) for now */
+-- 
+2.47.1
 
->  
-> diff --git a/target/riscv/kvm/kvm-cpu.c b/target/riscv/kvm/kvm-cpu.c
-> index b088b947adae..50b0e7c9ff7d 100644
-> --- a/target/riscv/kvm/kvm-cpu.c
-> +++ b/target/riscv/kvm/kvm-cpu.c
-> @@ -1627,6 +1627,31 @@ static int kvm_riscv_handle_sbi(CPUState *cs, struct kvm_run *run)
->  }
->  
->  /* User-space CSR emulation */
-> +static int kvm_riscv_emu_sireg_ctx_load(CPUState *cs)
-> +{
-> +    CPURISCVState *env = &RISCV_CPU(cs)->env;
-> +
-> +    KVM_RISCV_GET_CSR(cs, env, RISCV_AIA_CSR_REG(siselect), env->siselect);
-> +    KVM_RISCV_GET_CSR(cs, env, RISCV_AIA_CSR_REG(iprio1), env->siprio[0]);
-> +    KVM_RISCV_GET_CSR(cs, env, RISCV_AIA_CSR_REG(iprio1h), env->siprio[8]);
-> +    KVM_RISCV_GET_CSR(cs, env, RISCV_AIA_CSR_REG(iprio2), env->siprio[16]);
-> +    KVM_RISCV_GET_CSR(cs, env, RISCV_AIA_CSR_REG(iprio2h), env->siprio[24]);
-> +
-> +    return 0;
-> +}
-> +
-> +static int kvm_riscv_emu_sireg_ctx_put(CPUState *cs)
-> +{
-> +    CPURISCVState *env = &RISCV_CPU(cs)->env;
-> +
-> +    KVM_RISCV_SET_CSR(cs, env, RISCV_AIA_CSR_REG(iprio1), env->siprio[0]);
-> +    KVM_RISCV_SET_CSR(cs, env, RISCV_AIA_CSR_REG(iprio1h), env->siprio[8]);
-> +    KVM_RISCV_SET_CSR(cs, env, RISCV_AIA_CSR_REG(iprio2), env->siprio[16]);
-> +    KVM_RISCV_SET_CSR(cs, env, RISCV_AIA_CSR_REG(iprio2h), env->siprio[24]);
-> +
-> +    return 0;
-> +}
-> +
->  struct kvm_riscv_emu_csr_data {
->      target_ulong csr_num;
->      int (*context_load)(CPUState *cs);
-> @@ -1635,6 +1660,8 @@ struct kvm_riscv_emu_csr_data {
->  
->  struct kvm_riscv_emu_csr_data kvm_riscv_emu_csr_data[] = {
->      { CSR_SEED, NULL, NULL },
-> +    { CSR_SIREG, kvm_riscv_emu_sireg_ctx_load, kvm_riscv_emu_sireg_ctx_put },
-> +    { CSR_STOPEI, NULL, NULL },
->  };
->  
->  static int kvm_riscv_handle_csr(CPUState *cs, struct kvm_run *run)
-> -- 
-> 2.17.1
-> 
 
