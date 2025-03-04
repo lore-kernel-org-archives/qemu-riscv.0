@@ -4,73 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4C6C0C282CD
-	for <qemu-riscv@archiver.kernel.org>; Mon,  3 Mar 2025 19:20:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4FD33C021B8
+	for <qemu-riscv@archiver.kernel.org>; Tue,  4 Mar 2025 15:46:54 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tpBKl-0003Oh-9U; Mon, 03 Mar 2025 14:20:11 -0500
+	id 1tpUTW-00014L-BE; Tue, 04 Mar 2025 10:46:30 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <kchamart@redhat.com>)
- id 1tpBKV-0003Ns-Mw
- for qemu-riscv@nongnu.org; Mon, 03 Mar 2025 14:19:56 -0500
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <kchamart@redhat.com>)
- id 1tpBKQ-0003Gp-O6
- for qemu-riscv@nongnu.org; Mon, 03 Mar 2025 14:19:55 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1741029586;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=ew8cLbviQXGRSsXKjXB+/SyYXVC0dlfqrmPZgpUh6lg=;
- b=d1pPac8S9v3I6O8AJPPkp3vixXbnhwDC624VGtm5LJCxAIP+kapLejpOsKawF3CkCpZoEU
- DNfycOX/Ko53BUwWL+KnmM/TcBK49HPBkOqv9gpOpXlwaeND4zWxT7Jt81Tbs7iX2DmJaS
- WZW8h/zwshGfBSQK5UYR6kjfW7t8kMw=
-Received: from mx-prod-mc-08.mail-002.prod.us-west-2.aws.redhat.com
- (ec2-35-165-154-97.us-west-2.compute.amazonaws.com [35.165.154.97]) by
- relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-31-X3wY6VqJOq2gGFoTobeCTA-1; Mon,
- 03 Mar 2025 14:19:37 -0500
-X-MC-Unique: X3wY6VqJOq2gGFoTobeCTA-1
-X-Mimecast-MFC-AGG-ID: X3wY6VqJOq2gGFoTobeCTA_1741029576
-Received: from mx-prod-int-06.mail-002.prod.us-west-2.aws.redhat.com
- (mx-prod-int-06.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.93])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by mx-prod-mc-08.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id DBE6E1800874; Mon,  3 Mar 2025 19:19:35 +0000 (UTC)
-Received: from gezellig (unknown [10.45.224.57])
- by mx-prod-int-06.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id 3F831180035F; Mon,  3 Mar 2025 19:19:30 +0000 (UTC)
-Date: Tue, 4 Mar 2025 00:49:26 +0530
-From: Kashyap Chamarthy <kchamart@redhat.com>
+ (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
+ id 1tpUSM-0000aP-Jv
+ for qemu-riscv@nongnu.org; Tue, 04 Mar 2025 10:45:19 -0500
+Received: from mail-wr1-x436.google.com ([2a00:1450:4864:20::436])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
+ id 1tpUSD-00086x-82
+ for qemu-riscv@nongnu.org; Tue, 04 Mar 2025 10:45:11 -0500
+Received: by mail-wr1-x436.google.com with SMTP id
+ ffacd0b85a97d-390df0138beso3052290f8f.0
+ for <qemu-riscv@nongnu.org>; Tue, 04 Mar 2025 07:45:07 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=ventanamicro.com; s=google; t=1741103106; x=1741707906; darn=nongnu.org;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=iKp2omLbKRWiRwQwOc0T42zHQ7cbkg0n1YgTcwa2RAs=;
+ b=Px5aqoxMXkHqE1FGOBoDcRnWjLzZHGNH+JTs/8pdRLart0gjhoj3XsYt5VN5POtCxt
+ zfnPez44g0swZMCDj9MQSDRDYJ/+OCBD1T1Q84XAkhmD0ZZYaaC2gdUwqSMKGgaRc7VH
+ 7EUKnrboqX2uuyovLXEMR6PrYESQUjQoQcHQoRvcoLrNiV4JN/Y3MJKb4q5jMhgR7l0Z
+ twc/XPQj9y1BWuQlullFWBCQrS3eShg/anXrfHiAeRQ80sZTjxS1JjUsWeb17SY6413s
+ MJ7W/OLbEDHztMlNkG25fE7FWbOSJ7e+EZWGWB4zA0MDuh1zJtTLhp7L6+B+ksjgFQ8u
+ ovhg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1741103106; x=1741707906;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=iKp2omLbKRWiRwQwOc0T42zHQ7cbkg0n1YgTcwa2RAs=;
+ b=RSR8VKMvLe9YfPVtyj5at5hZGgZFyivfDPaGSltFe7ULEqEnInraK6CWrXVtKdwGUC
+ prhzvVObZwhO+6MVHX9V2VBxD2Armb5mgzQtMfX6ExpPKuYerUgk9kQLxgUP7ufDcphg
+ 9oyzAeRMkFLqEbLLyg630VH5pIeO8m+KJxKeIOnmv9XIcrKhY7P38ssYVHClA6lL0XvM
+ HJAuFBU5pSBqOwSUDHEAgx6bF9PQlDPr7lU+AFFIjT2FRiiz8ZwvnEvwCMaZiWfNM2To
+ +hb0QWg6YiaeQjz7NPmPeDJyQWNLrgNVPZ8hrpsYgiN971Vj8OiNm2orKLDBrwOV0KjM
+ 99vg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVowT6duiw+NOrs+0l/Wk9ls4baD6W6gsHYIryKlcwbGTa/L5xGkkBU0VQt9UUXQVstGCgAeEJLXyP/@nongnu.org
+X-Gm-Message-State: AOJu0YxIRdI7fKB0Uk6oXiWtJrviOTV9TXg0FC7D/iAofFlGN36abhkV
+ WEPjTyFGYa/lDWeAh/V5ALxfAcq9b9OjhmgqDoRs9BDDB/LtuX5akI+QStGXd14=
+X-Gm-Gg: ASbGncubZnwZx3wpMh0DQB/ZOKacZ1uGyzqjd22gq+J0f7ehpyj/ykzb1N3a/I0vW0K
+ 4ooKwmDACmQlckSwx2/jJE92EJOKXDiJg+Sx57HbG9amu98BTp6+5+7J8BMn85EMQCoPL/69TNQ
+ ZVOBV9lw2V1MM2xhELZjzY5rQWbFgG2ls5mvNReNkFaZRyM9AWbZ5UApaWyQXlS57dOCGmfNnjO
+ raXR/pwJDz0e20/pIc5s8U3qu6+/+iFQaTcebPTf3B5ZfnhlYKegSzULngYlear7W3lGV9Q6hpq
+ OCQvkrSvvHtaSOhKd4Eglk+EC/EUD5Q/
+X-Google-Smtp-Source: AGHT+IF9M6Pk908+Sw8P2vXfX2s3eJxeNQ3D/hlPwqjXBDdN6gHG4QGisCTw9aVgKtVWUHwBaxhdZQ==
+X-Received: by 2002:a05:6000:270f:b0:390:ea34:7d83 with SMTP id
+ ffacd0b85a97d-390ec9c166cmr13029763f8f.31.1741103106138; 
+ Tue, 04 Mar 2025 07:45:06 -0800 (PST)
+Received: from localhost ([2a02:8308:a00c:e200::688c])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-43bc03dcb13sm81318325e9.37.2025.03.04.07.45.05
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 04 Mar 2025 07:45:05 -0800 (PST)
+Date: Tue, 4 Mar 2025 16:45:04 +0100
+From: Andrew Jones <ajones@ventanamicro.com>
 To: Yong-Xuan Wang <yongxuan.wang@sifive.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, greentime.hu@sifive.com,
- vincent.chen@sifive.com, frank.chang@sifive.com, jim.shu@sifive.com
-Subject: Re: [PATCH v2 0/8] riscv: AIA: kernel-irqchip=off support
-Message-ID: <Z8YAvmO4OMEeyL3U@gezellig>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, greentime.hu@sifive.com, 
+ vincent.chen@sifive.com, frank.chang@sifive.com, jim.shu@sifive.com, 
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Weiwei Li <liwei1518@gmail.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>, 
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Philippe =?utf-8?Q?Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+Subject: Re: [PATCH v2 5/8] target/riscv/kvm: rewrite kvm_riscv_handle_csr
+Message-ID: <20250304-b89365aae1f0776e67d0aa0a@orel>
 References: <20250224082417.31382-1-yongxuan.wang@sifive.com>
+ <20250224082417.31382-6-yongxuan.wang@sifive.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <20250224082417.31382-1-yongxuan.wang@sifive.com>
-X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.93
-Received-SPF: pass client-ip=170.10.129.124; envelope-from=kchamart@redhat.com;
- helo=us-smtp-delivery-124.mimecast.com
-X-Spam_score_int: -30
-X-Spam_score: -3.1
-X-Spam_bar: ---
-X-Spam_report: (-3.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_MSPIKE_H5=-1, RCVD_IN_MSPIKE_WL=-0.01,
- RCVD_IN_VALIDITY_CERTIFIED_BLOCKED=0.001, RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+In-Reply-To: <20250224082417.31382-6-yongxuan.wang@sifive.com>
+Received-SPF: pass client-ip=2a00:1450:4864:20::436;
+ envelope-from=ajones@ventanamicro.com; helo=mail-wr1-x436.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -86,114 +107,190 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Mon, Feb 24, 2025 at 04:24:07PM +0800, Yong-Xuan Wang wrote:
-> This series introduces the user-space AIA MSI emulation when using KVM
-> acceleration.
+On Mon, Feb 24, 2025 at 04:24:12PM +0800, Yong-Xuan Wang wrote:
+> Rewrite the kvm_riscv_handle_csr() to support additional CSR emulation
+> in user space with KVM acceleration. This update reuses the TCG CSR
+> emulation function to simplify the implementation and reduce the
+> redundant work. Also it introduces two hook functions for certain CSRs.
+> Before emulation, the related VS mode context of the CSR can be loaded
+> from host in context_load() hook. After the CSR handling, the modified
+> VS context is written back in context_put() hook.
 > 
-> After this series, RISC-V QEMU virt machine with KVM acceleration has
-> 3 parameters to control the type of irqchip and its emulation method:
-> - Machine prop "aia" controls the type of irqchip
->   - none: use PLIC and emulated in user-space
->   - aplic: use AIA wired and emulated in user-space
->   - aplic-imsic: use AIA MSI, emulation mode is determined by
->     "kernel-irqchip" and "riscv-aia". This can only be used
->     when the host machine support the AIA extension.
-> - Accel prop "kernel-irqchip", effective with AIA MSI
->   - on: in-kernel APLIC and in-kernel IMSIC
->   - off: user-space APLIC and user-space IMSIC
->   - split: user-space APLIC and in-kernel IMSIC
-> - Accel prop "riscv-aia", effective with in-kernel IMSIC
->   - emul: use MRIF as in-kernel IMSIC
->   - hw: use hardware guest IMSIC file as in-kernel IMSIC
->   - auto: use the hardware guest IMSICs whenever available otherwise
->     fallback to MRIF
-
-[...]
-
-> Yong-Xuan Wang (8):
->   target/riscv/kvm: rewrite get/set for KVM_REG_RISCV_CSR
->   target/riscv/kvm: add KVM_REG_RISCV_CSR_AIA
->   target/riscv/kvm: add KVM_REG_RISCV_CSR_SMSTATEEN
->   target/riscv: add helper to get CSR name
->   target/riscv/kvm: rewrite kvm_riscv_handle_csr
->   target/riscv/kvm: add CSR_SIREG and CSR_STOPEI emulation
->   docs: update the description about RISC-V AIA
->   hw/intc/imsic: prevent to use IMSIC when host doesn't support AIA
->     extension
+> Signed-off-by: Yong-Xuan Wang <yongxuan.wang@sifive.com>
+> ---
+>  target/riscv/cpu.h         |  2 --
+>  target/riscv/csr.c         | 18 +++-------
+>  target/riscv/kvm/kvm-cpu.c | 68 ++++++++++++++++++++++++++++++++------
+>  3 files changed, 61 insertions(+), 27 deletions(-)
 > 
->  docs/specs/riscv-aia.rst   |  24 +++-
->  docs/system/riscv/virt.rst |  10 +-
->  hw/intc/riscv_imsic.c      |  17 ++-
->  target/riscv/cpu.h         |  10 +-
->  target/riscv/csr.c         |  30 ++---
->  target/riscv/kvm/kvm-cpu.c | 235 +++++++++++++++++++++++++++++++------
->  6 files changed, 254 insertions(+), 72 deletions(-)
+> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+> index df10ff63474b..81b8081d81e0 100644
+> --- a/target/riscv/cpu.h
+> +++ b/target/riscv/cpu.h
+> @@ -928,8 +928,6 @@ static inline const char *riscv_get_csr_name(int csr_no)
+>  }
+>  
+>  void riscv_cpu_register_gdb_regs_for_features(CPUState *cs);
+> -target_ulong riscv_new_csr_seed(target_ulong new_value,
+> -                                target_ulong write_mask);
+>  
+>  uint8_t satp_mode_max_from_map(uint32_t map);
+>  const char *satp_mode_str(uint8_t satp_mode, bool is_32_bit);
+> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+> index d0068ce98c15..a2830888d010 100644
+> --- a/target/riscv/csr.c
+> +++ b/target/riscv/csr.c
+> @@ -5389,8 +5389,10 @@ static int write_mnstatus(CPURISCVState *env, int csrno, target_ulong val)
+>  #endif
+>  
+>  /* Crypto Extension */
+> -target_ulong riscv_new_csr_seed(target_ulong new_value,
+> -                                target_ulong write_mask)
+> +static RISCVException rmw_seed(CPURISCVState *env, int csrno,
+> +                               target_ulong *ret_value,
+> +                               target_ulong new_value,
+> +                               target_ulong write_mask)
+>  {
+>      uint16_t random_v;
+>      Error *random_e = NULL;
+> @@ -5414,18 +5416,6 @@ target_ulong riscv_new_csr_seed(target_ulong new_value,
+>          rval = random_v | SEED_OPST_ES16;
+>      }
+>  
+> -    return rval;
+> -}
+> -
+> -static RISCVException rmw_seed(CPURISCVState *env, int csrno,
+> -                               target_ulong *ret_value,
+> -                               target_ulong new_value,
+> -                               target_ulong write_mask)
+> -{
+> -    target_ulong rval;
+> -
+> -    rval = riscv_new_csr_seed(new_value, write_mask);
+> -
+>      if (ret_value) {
+>          *ret_value = rval;
+>      }
+> diff --git a/target/riscv/kvm/kvm-cpu.c b/target/riscv/kvm/kvm-cpu.c
+> index d421c7a1b65d..b088b947adae 100644
+> --- a/target/riscv/kvm/kvm-cpu.c
+> +++ b/target/riscv/kvm/kvm-cpu.c
+> @@ -1626,26 +1626,72 @@ static int kvm_riscv_handle_sbi(CPUState *cs, struct kvm_run *run)
+>      return ret;
+>  }
+>  
+> +/* User-space CSR emulation */
+> +struct kvm_riscv_emu_csr_data {
+> +    target_ulong csr_num;
+> +    int (*context_load)(CPUState *cs);
+> +    int (*context_put)(CPUState *cs);
+> +};
+> +
+> +struct kvm_riscv_emu_csr_data kvm_riscv_emu_csr_data[] = {
+> +    { CSR_SEED, NULL, NULL },
 
+Needing to ensure TCG state is correct, and therefore introducing the
+load/put callbacks, makes me wonder if this is a good idea at all. Sharing
+code is good, but, other than the TCG state concerns, we also will have to
+deal with potentially wanting to compile with CONFIG_TCG=n when we only
+want QEMU to be a KVM VMM.
 
-I don't pretend to grok all the details here, and I couldn't test the
-KVM-acceleration path ("-accel kvm,kernel-irqchip=split"), as I don't
-yet have hardware to test.  I was able to test the TCG part:
+> +};
+> +
+>  static int kvm_riscv_handle_csr(CPUState *cs, struct kvm_run *run)
+>  {
+> +    CPURISCVState *env = cpu_env(cs);
+>      target_ulong csr_num = run->riscv_csr.csr_num;
+>      target_ulong new_value = run->riscv_csr.new_value;
+>      target_ulong write_mask = run->riscv_csr.write_mask;
+> -    int ret = 0;
+> +    struct kvm_riscv_emu_csr_data *emu_csr_data = NULL;
+> +    target_ulong ret_value;
+> +    RISCVException ret_excp;
+> +    int i, ret;
+>  
+> -    switch (csr_num) {
+> -    case CSR_SEED:
+> -        run->riscv_csr.ret_value = riscv_new_csr_seed(new_value, write_mask);
+> -        break;
+> -    default:
+> +    for (i = 0; i < ARRAY_SIZE(kvm_riscv_emu_csr_data); i++) {
+> +        if (csr_num == kvm_riscv_emu_csr_data[i].csr_num) {
+> +            emu_csr_data = &kvm_riscv_emu_csr_data[i];
+> +
 
-I'm at:
+remove this extra blank line
 
-    $> git describe
-    v9.2.0-1976-g68d58113df
+> +            break;
+> +        }
+> +    }
+> +
+> +    if (!emu_csr_data) {
+>          qemu_log_mask(LOG_UNIMP,
+> -                      "%s: un-handled CSR EXIT for CSR %lx\n",
+> -                      __func__, csr_num);
+> -        ret = -1;
+> -        break;
+> +                      "%s: un-handled CSR EXIT for CSR %s\n",
+> +                      __func__, riscv_get_csr_name(csr_num));
+> +
+> +        return -1;
+>      }
+>  
+> -    return ret;
+> +    if (emu_csr_data->context_load) {
+> +        ret = emu_csr_data->context_load(cs);
+> +        if (ret) {
+> +            goto handle_failed;
+> +        }
+> +    }
+> +
+> +    ret_excp = riscv_csrrw(env, csr_num, &ret_value, new_value, write_mask);
+> +    if (ret_excp != RISCV_EXCP_NONE) {
+> +        goto handle_failed;
+> +    }
+> +    run->riscv_csr.ret_value = ret_value;
+> +
+> +    if (emu_csr_data->context_put) {
+> +        ret = emu_csr_data->context_put(cs);
+> +        if (ret) {
+> +            goto handle_failed;
+> +        }
+> +    }
+> +
+> +    return 0;
+> +
+> +handle_failed:
+> +    qemu_log_mask(LOG_UNIMP,
+> +                  "%s: failed to handle CSR EXIT for CSR %s\n",
+> +                  __func__, riscv_get_csr_name(csr_num));
+> +
+> +    return -1;
+>  }
+>  
+>  static bool kvm_riscv_handle_debug(CPUState *cs)
+> -- 
+> 2.17.1
+>
 
-My QEMU command-line is here[1].  I tried out these two variataions:
+So, as I said above, I'm skeptical of this approach, since I'm not sure we
+maintain TCG state well enough when using KVM to trust riscv_csrrw() nor
+am I sure we can always have such simple load/put functions like the next
+patch proposes for AIA registers.
 
-    ... -machine virt,accel=tcg,aia=aplic,kernel-irqchip=split ...
+I vote we manage CSRs case-by-case. SEED is already managed and shares
+code at a point that is easy to audit, proving there are no TCG state
+dependencies in the emulation. AIA should do the same, at least until
+we've decided to build a KVM->TCG model that ensures TCG state is always
+correct, in which case I don't think the load/put functions would be
+necessary here.
 
-    ... -machine virt,accel=tcg,aia=aplic-imsic,kernel-irqchip=split ...
+(On a related note, Radim Krcmar suggested we consider forwarding more
+SBI calls from KVM to QEMU where QEMU could then use OpenSBI's
+implementation. That makes sense to me, but we'd need to create that
+KVM->TCG model first for it too.)
 
-And booted a Fedora-41 RISC-V host-generic guest image from here:
-
-    https://dl.fedoraproject.org/pub/alt/risc-v/release/41/Server/riscv64/images/
-
-As near as I see, nothing exploded :)
-
-I see that:
-
-  - From the docs: “aia=aplic” selects APLIC (advanced platform level
-    interrupt controller) to handle wired interrupts whereas the
-    “aia=aplic-imsic” selects APLIC and IMSIC (incoming message signaled
-    interrupt controller) to handle both wired interrupts and MSIs
-
-  - There's no user-visible change here, but only a developer-visible
-    change: in terms of what's being emulated in userspace vs. in-kernel
-    irqchip.)
-
-So, if it's still not too late:
-
-    Tested-by: Kashyap Chamarthy <kchamart@redhat.com>
-
-        * * *
-
-[1] QEMU command-line:
-------------------------------------------------------------------------
-$ ./qemu-system-riscv64
--display none
--cpu max
--no-user-config
--nodefaults
--serial stdio
--smp 4,sockets=4,cores=1,threads=1
--machine virt,accel=tcg,aia=aplic,kernel-irqchip=split
--blockdev node-name=node-Base1,driver=raw,file.driver=file,file.filename=./base1.raw,file.node-name=node-Base1-file
--device virtio-blk,drive=node-Base1,id=virtio0
--device virtio-net-device,netdev=net \
--netdev user,id=net,hostfwd=tcp::2222-:22 \
--blockdev '{"driver":"file","filename":"/usr/share/edk2/riscv/RISCV_VIRT_CODE.qcow2","node-name":"pflash0-storage","auto-read-only":true,"discard":"unmap"}' \
--blockdev '{"node-name":"pflash0-format","read-only":true,"driver":"qcow2","file":"pflash0-storage"}' \
--blockdev '{"driver":"file","filename":"/var/lib/libvirt/qemu/nvram/base1_VARS.qcow2","node-name":"pflash1-storage","auto-read-only":true,"discard":"unmap"}' \
--blockdev '{"node-name":"pflash1-format","read-only":false,"driver":"qcow2","file":"pflash1-storage"}' \
--machine virt,usb=off,dump-guest-core=off,memory-backend=riscv_virt_board.ram,pflash0=pflash0-format,pflash1=pflash1-format,acpi=off \
--m size=4194304k \
--object '{"qom-type":"memory-backend-ram","id":"riscv_virt_board.ram","size":4294967296}' \
--object rng-random,filename=/dev/urandom,id=rng \
--device virtio-rng-device,rng=rng 
-------------------------------------------------------------------------
-
--- 
-/kashyap
-
+Thanks,
+drew
 
