@@ -4,67 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4FD33C021B8
-	for <qemu-riscv@archiver.kernel.org>; Tue,  4 Mar 2025 15:46:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 95D6FC282D2
+	for <qemu-riscv@archiver.kernel.org>; Tue,  4 Mar 2025 15:53:29 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tpUTW-00014L-BE; Tue, 04 Mar 2025 10:46:30 -0500
+	id 1tpUZd-0004vX-Ff; Tue, 04 Mar 2025 10:52:49 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1tpUSM-0000aP-Jv
- for qemu-riscv@nongnu.org; Tue, 04 Mar 2025 10:45:19 -0500
-Received: from mail-wr1-x436.google.com ([2a00:1450:4864:20::436])
+ id 1tpUZY-0004uC-Pv
+ for qemu-riscv@nongnu.org; Tue, 04 Mar 2025 10:52:44 -0500
+Received: from mail-wm1-x32d.google.com ([2a00:1450:4864:20::32d])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1tpUSD-00086x-82
- for qemu-riscv@nongnu.org; Tue, 04 Mar 2025 10:45:11 -0500
-Received: by mail-wr1-x436.google.com with SMTP id
- ffacd0b85a97d-390df0138beso3052290f8f.0
- for <qemu-riscv@nongnu.org>; Tue, 04 Mar 2025 07:45:07 -0800 (PST)
+ id 1tpUZW-0003Il-SB
+ for qemu-riscv@nongnu.org; Tue, 04 Mar 2025 10:52:44 -0500
+Received: by mail-wm1-x32d.google.com with SMTP id
+ 5b1f17b1804b1-4394036c0efso37527035e9.2
+ for <qemu-riscv@nongnu.org>; Tue, 04 Mar 2025 07:52:42 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1741103106; x=1741707906; darn=nongnu.org;
+ d=ventanamicro.com; s=google; t=1741103561; x=1741708361; darn=nongnu.org;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=iKp2omLbKRWiRwQwOc0T42zHQ7cbkg0n1YgTcwa2RAs=;
- b=Px5aqoxMXkHqE1FGOBoDcRnWjLzZHGNH+JTs/8pdRLart0gjhoj3XsYt5VN5POtCxt
- zfnPez44g0swZMCDj9MQSDRDYJ/+OCBD1T1Q84XAkhmD0ZZYaaC2gdUwqSMKGgaRc7VH
- 7EUKnrboqX2uuyovLXEMR6PrYESQUjQoQcHQoRvcoLrNiV4JN/Y3MJKb4q5jMhgR7l0Z
- twc/XPQj9y1BWuQlullFWBCQrS3eShg/anXrfHiAeRQ80sZTjxS1JjUsWeb17SY6413s
- MJ7W/OLbEDHztMlNkG25fE7FWbOSJ7e+EZWGWB4zA0MDuh1zJtTLhp7L6+B+ksjgFQ8u
- ovhg==
+ bh=ob+55ii8E4Ycc2GkEVlEPolvIyx3KgrxuhKnE7204WA=;
+ b=SfS3g3PfmbK/MgNUHRPhTcEddK5gBuEa18CbncHnh1euxPUpUisVOjh1a2B9th6LAv
+ B8XF0xNqwWbSBB9A/oPEx9MkphSMccxb4gtDcHqKsDumtFdJ3q3C1ODc4XvRepp7Tkdj
+ Q7IiFowHCg1ir+SLt1WM3l90IWD9PxXf/OKq0eI/jQR/NSP1L3iSKGm6xTJanoAqmv2G
+ NOkRWwngJxwCtC7joMP3d959MDqQKQ8S6u78obUul4ONUobdPeKQ1AHXtEuzcr8TCQgH
+ tsp3aJ9WMIi2tQNJldDv8ITOjKdct1rOdWcj3PADjfmUXMiQfMcytUFFQXRR3aaolej9
+ yEjQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741103106; x=1741707906;
+ d=1e100.net; s=20230601; t=1741103561; x=1741708361;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=iKp2omLbKRWiRwQwOc0T42zHQ7cbkg0n1YgTcwa2RAs=;
- b=RSR8VKMvLe9YfPVtyj5at5hZGgZFyivfDPaGSltFe7ULEqEnInraK6CWrXVtKdwGUC
- prhzvVObZwhO+6MVHX9V2VBxD2Armb5mgzQtMfX6ExpPKuYerUgk9kQLxgUP7ufDcphg
- 9oyzAeRMkFLqEbLLyg630VH5pIeO8m+KJxKeIOnmv9XIcrKhY7P38ssYVHClA6lL0XvM
- HJAuFBU5pSBqOwSUDHEAgx6bF9PQlDPr7lU+AFFIjT2FRiiz8ZwvnEvwCMaZiWfNM2To
- +hb0QWg6YiaeQjz7NPmPeDJyQWNLrgNVPZ8hrpsYgiN971Vj8OiNm2orKLDBrwOV0KjM
- 99vg==
+ bh=ob+55ii8E4Ycc2GkEVlEPolvIyx3KgrxuhKnE7204WA=;
+ b=hZzu0x5GCfMctQUsRLXWphS0pBJuTX4QT3tHOcEJ9YyWjJn9BltleT9WttZNrJo3qZ
+ dwc5LeoBbnMslYhEIK6MGfW3808FSdQP/OhRNeW+DH6XvN2El330hmyeoKfHpe8vd3XS
+ r4bqjqDrTB/jqNh/PNrFws7XjYrgXZ7/A4IP+Z8fB/838Bs+KrhhaPCnhbMYW6J8S4Lb
+ LjkIviUpQaOFD4Kv///CiAIMekQ5027n2HqMnz2G8Sqc093pjwseooWcVgbkUCohUpgK
+ uDTxJJJgtgC5vs+oNgzzyF9hOkYcZgaHAgeTPrclVOHyGLY07KuTPo5eEsvfg8GfPTIZ
+ huNg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVowT6duiw+NOrs+0l/Wk9ls4baD6W6gsHYIryKlcwbGTa/L5xGkkBU0VQt9UUXQVstGCgAeEJLXyP/@nongnu.org
-X-Gm-Message-State: AOJu0YxIRdI7fKB0Uk6oXiWtJrviOTV9TXg0FC7D/iAofFlGN36abhkV
- WEPjTyFGYa/lDWeAh/V5ALxfAcq9b9OjhmgqDoRs9BDDB/LtuX5akI+QStGXd14=
-X-Gm-Gg: ASbGncubZnwZx3wpMh0DQB/ZOKacZ1uGyzqjd22gq+J0f7ehpyj/ykzb1N3a/I0vW0K
- 4ooKwmDACmQlckSwx2/jJE92EJOKXDiJg+Sx57HbG9amu98BTp6+5+7J8BMn85EMQCoPL/69TNQ
- ZVOBV9lw2V1MM2xhELZjzY5rQWbFgG2ls5mvNReNkFaZRyM9AWbZ5UApaWyQXlS57dOCGmfNnjO
- raXR/pwJDz0e20/pIc5s8U3qu6+/+iFQaTcebPTf3B5ZfnhlYKegSzULngYlear7W3lGV9Q6hpq
- OCQvkrSvvHtaSOhKd4Eglk+EC/EUD5Q/
-X-Google-Smtp-Source: AGHT+IF9M6Pk908+Sw8P2vXfX2s3eJxeNQ3D/hlPwqjXBDdN6gHG4QGisCTw9aVgKtVWUHwBaxhdZQ==
-X-Received: by 2002:a05:6000:270f:b0:390:ea34:7d83 with SMTP id
- ffacd0b85a97d-390ec9c166cmr13029763f8f.31.1741103106138; 
- Tue, 04 Mar 2025 07:45:06 -0800 (PST)
+ AJvYcCXB3nsClcGyqdJPJTCGFY4btAb8jPa36+q/ZEPKu6F1OXjxae4m58AOkGX81BYNSV1+zBu5hDoS7n1s@nongnu.org
+X-Gm-Message-State: AOJu0YzmwPrt1eiuraGYerwq7M9nzkGWfbBlLMAgiNe9t+qgcVtjKNFX
+ iVbCmYs8GUdKxCOiT/1QJ45P9Ip5xPff6JBZTCfeCS7k9iV4DtRLpO4kbbc4KeI=
+X-Gm-Gg: ASbGncsSTn1siyYPVMHiCs0S6vxBqq6pvUaf4+epwBUILwiJR6z59eekW65R4Vhka/p
+ Yxk66anR483eL470fAwyDqGDTL3kLFZYGbCx2kPhdOq2k7MDs5+KmvphjOxuXGOdT6B4QBcH7AD
+ TafGT8dHRGeIPhzKh+GAhyhx4m6n2DrW2d3kACnBhlMED84kgvynhiXfYNEpvLEoCY1i9ozBOtS
+ Pb2ANGyYJqOuqNg31GKoj4N7WXGcvJMpkW+2WcuzgSSG9B8AW3jOklgCW2qDU8zscYfMGGhuLJh
+ 7jJqFGkrY2xBvXsbo3F3aKkr0wWE+i5q
+X-Google-Smtp-Source: AGHT+IGjscO4ADJjKnuALrcPAQ0LK/XwIq1iH7QKTDkKX2tPx7j7fB1QbfPoWnzpTvL1WH5s3/780Q==
+X-Received: by 2002:a05:600c:4fd0:b0:43b:d12a:40e1 with SMTP id
+ 5b1f17b1804b1-43bd12a42b8mr835005e9.18.1741103561024; 
+ Tue, 04 Mar 2025 07:52:41 -0800 (PST)
 Received: from localhost ([2a02:8308:a00c:e200::688c])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-43bc03dcb13sm81318325e9.37.2025.03.04.07.45.05
+ 5b1f17b1804b1-43bbed8b26asm92527595e9.22.2025.03.04.07.52.40
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 04 Mar 2025 07:45:05 -0800 (PST)
-Date: Tue, 4 Mar 2025 16:45:04 +0100
+ Tue, 04 Mar 2025 07:52:40 -0800 (PST)
+Date: Tue, 4 Mar 2025 16:52:39 +0100
 From: Andrew Jones <ajones@ventanamicro.com>
 To: Yong-Xuan Wang <yongxuan.wang@sifive.com>
 Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, greentime.hu@sifive.com, 
@@ -75,23 +75,24 @@ Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, greentime.hu@sifive.com,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>, 
  Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
  Philippe =?utf-8?Q?Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-Subject: Re: [PATCH v2 5/8] target/riscv/kvm: rewrite kvm_riscv_handle_csr
-Message-ID: <20250304-b89365aae1f0776e67d0aa0a@orel>
+Subject: Re: [PATCH v2 6/8] target/riscv/kvm: add CSR_SIREG and CSR_STOPEI
+ emulation
+Message-ID: <20250304-d8cce0e92dc6363ebfecd07a@orel>
 References: <20250224082417.31382-1-yongxuan.wang@sifive.com>
- <20250224082417.31382-6-yongxuan.wang@sifive.com>
+ <20250224082417.31382-7-yongxuan.wang@sifive.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20250224082417.31382-6-yongxuan.wang@sifive.com>
-Received-SPF: pass client-ip=2a00:1450:4864:20::436;
- envelope-from=ajones@ventanamicro.com; helo=mail-wr1-x436.google.com
+In-Reply-To: <20250224082417.31382-7-yongxuan.wang@sifive.com>
+Received-SPF: pass client-ip=2a00:1450:4864:20::32d;
+ envelope-from=ajones@ventanamicro.com; helo=mail-wm1-x32d.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -107,190 +108,131 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Mon, Feb 24, 2025 at 04:24:12PM +0800, Yong-Xuan Wang wrote:
-> Rewrite the kvm_riscv_handle_csr() to support additional CSR emulation
-> in user space with KVM acceleration. This update reuses the TCG CSR
-> emulation function to simplify the implementation and reduce the
-> redundant work. Also it introduces two hook functions for certain CSRs.
-> Before emulation, the related VS mode context of the CSR can be loaded
-> from host in context_load() hook. After the CSR handling, the modified
-> VS context is written back in context_put() hook.
+On Mon, Feb 24, 2025 at 04:24:13PM +0800, Yong-Xuan Wang wrote:
+> Support user-space emulation of SIREG and STOPEI CSR with KVM
+> acceleration. For SIREG emulation, the SISELECT CSR value and iprio
+> array must be loaded before handling, and since the iprio array might
+> be modified, it must be written back after the emulation.
+> 
+> When running with KVM acceleration, the machine lacks M-mode CSRs and
+> does not report S-mode support in its environment configuration, even
+> though some S-mode CSRs are accessible. This patch adds kvm_enabled()
+> checks in relevant predicates to ensure proper handling and validation.
 > 
 > Signed-off-by: Yong-Xuan Wang <yongxuan.wang@sifive.com>
 > ---
->  target/riscv/cpu.h         |  2 --
->  target/riscv/csr.c         | 18 +++-------
->  target/riscv/kvm/kvm-cpu.c | 68 ++++++++++++++++++++++++++++++++------
->  3 files changed, 61 insertions(+), 27 deletions(-)
+>  target/riscv/csr.c         | 12 +++++++++---
+>  target/riscv/kvm/kvm-cpu.c | 27 +++++++++++++++++++++++++++
+>  2 files changed, 36 insertions(+), 3 deletions(-)
 > 
-> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> index df10ff63474b..81b8081d81e0 100644
-> --- a/target/riscv/cpu.h
-> +++ b/target/riscv/cpu.h
-> @@ -928,8 +928,6 @@ static inline const char *riscv_get_csr_name(int csr_no)
->  }
->  
->  void riscv_cpu_register_gdb_regs_for_features(CPUState *cs);
-> -target_ulong riscv_new_csr_seed(target_ulong new_value,
-> -                                target_ulong write_mask);
->  
->  uint8_t satp_mode_max_from_map(uint32_t map);
->  const char *satp_mode_str(uint8_t satp_mode, bool is_32_bit);
 > diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-> index d0068ce98c15..a2830888d010 100644
+> index a2830888d010..594df30c456a 100644
 > --- a/target/riscv/csr.c
 > +++ b/target/riscv/csr.c
-> @@ -5389,8 +5389,10 @@ static int write_mnstatus(CPURISCVState *env, int csrno, target_ulong val)
->  #endif
->  
->  /* Crypto Extension */
-> -target_ulong riscv_new_csr_seed(target_ulong new_value,
-> -                                target_ulong write_mask)
-> +static RISCVException rmw_seed(CPURISCVState *env, int csrno,
-> +                               target_ulong *ret_value,
-> +                               target_ulong new_value,
-> +                               target_ulong write_mask)
->  {
->      uint16_t random_v;
->      Error *random_e = NULL;
-> @@ -5414,18 +5416,6 @@ target_ulong riscv_new_csr_seed(target_ulong new_value,
->          rval = random_v | SEED_OPST_ES16;
->      }
->  
-> -    return rval;
-> -}
-> -
-> -static RISCVException rmw_seed(CPURISCVState *env, int csrno,
-> -                               target_ulong *ret_value,
-> -                               target_ulong new_value,
-> -                               target_ulong write_mask)
-> -{
-> -    target_ulong rval;
-> -
-> -    rval = riscv_new_csr_seed(new_value, write_mask);
-> -
->      if (ret_value) {
->          *ret_value = rval;
->      }
-> diff --git a/target/riscv/kvm/kvm-cpu.c b/target/riscv/kvm/kvm-cpu.c
-> index d421c7a1b65d..b088b947adae 100644
-> --- a/target/riscv/kvm/kvm-cpu.c
-> +++ b/target/riscv/kvm/kvm-cpu.c
-> @@ -1626,26 +1626,72 @@ static int kvm_riscv_handle_sbi(CPUState *cs, struct kvm_run *run)
->      return ret;
+> @@ -27,6 +27,7 @@
+>  #include "exec/exec-all.h"
+>  #include "exec/tb-flush.h"
+>  #include "system/cpu-timers.h"
+> +#include "system/kvm.h"
+>  #include "qemu/guest-random.h"
+>  #include "qapi/error.h"
+>  #include <stdbool.h>
+> @@ -42,6 +43,11 @@ void riscv_set_csr_ops(int csrno, riscv_csr_operations *ops)
+>      csr_ops[csrno & (CSR_TABLE_SIZE - 1)] = *ops;
 >  }
 >  
-> +/* User-space CSR emulation */
-> +struct kvm_riscv_emu_csr_data {
-> +    target_ulong csr_num;
-> +    int (*context_load)(CPUState *cs);
-> +    int (*context_put)(CPUState *cs);
-> +};
+> +static bool riscv_has_ext_s(CPURISCVState *env)
+> +{
+> +    return riscv_has_ext(env, RVS) || kvm_enabled();
+> +}
 > +
-> +struct kvm_riscv_emu_csr_data kvm_riscv_emu_csr_data[] = {
-> +    { CSR_SEED, NULL, NULL },
-
-Needing to ensure TCG state is correct, and therefore introducing the
-load/put callbacks, makes me wonder if this is a good idea at all. Sharing
-code is good, but, other than the TCG state concerns, we also will have to
-deal with potentially wanting to compile with CONFIG_TCG=n when we only
-want QEMU to be a KVM VMM.
-
-> +};
-> +
->  static int kvm_riscv_handle_csr(CPUState *cs, struct kvm_run *run)
->  {
-> +    CPURISCVState *env = cpu_env(cs);
->      target_ulong csr_num = run->riscv_csr.csr_num;
->      target_ulong new_value = run->riscv_csr.new_value;
->      target_ulong write_mask = run->riscv_csr.write_mask;
-> -    int ret = 0;
-> +    struct kvm_riscv_emu_csr_data *emu_csr_data = NULL;
-> +    target_ulong ret_value;
-> +    RISCVException ret_excp;
-> +    int i, ret;
->  
-> -    switch (csr_num) {
-> -    case CSR_SEED:
-> -        run->riscv_csr.ret_value = riscv_new_csr_seed(new_value, write_mask);
-> -        break;
-> -    default:
-> +    for (i = 0; i < ARRAY_SIZE(kvm_riscv_emu_csr_data); i++) {
-> +        if (csr_num == kvm_riscv_emu_csr_data[i].csr_num) {
-> +            emu_csr_data = &kvm_riscv_emu_csr_data[i];
-> +
-
-remove this extra blank line
-
-> +            break;
-> +        }
-> +    }
-> +
-> +    if (!emu_csr_data) {
->          qemu_log_mask(LOG_UNIMP,
-> -                      "%s: un-handled CSR EXIT for CSR %lx\n",
-> -                      __func__, csr_num);
-> -        ret = -1;
-> -        break;
-> +                      "%s: un-handled CSR EXIT for CSR %s\n",
-> +                      __func__, riscv_get_csr_name(csr_num));
-> +
-> +        return -1;
+>  /* Predicates */
+>  #if !defined(CONFIG_USER_ONLY)
+>  RISCVException smstateen_acc_ok(CPURISCVState *env, int index, uint64_t bit)
+> @@ -52,7 +58,7 @@ RISCVException smstateen_acc_ok(CPURISCVState *env, int index, uint64_t bit)
+>          return RISCV_EXCP_NONE;
 >      }
 >  
-> -    return ret;
-> +    if (emu_csr_data->context_load) {
-> +        ret = emu_csr_data->context_load(cs);
-> +        if (ret) {
-> +            goto handle_failed;
-> +        }
-> +    }
-> +
-> +    ret_excp = riscv_csrrw(env, csr_num, &ret_value, new_value, write_mask);
-> +    if (ret_excp != RISCV_EXCP_NONE) {
-> +        goto handle_failed;
-> +    }
-> +    run->riscv_csr.ret_value = ret_value;
-> +
-> +    if (emu_csr_data->context_put) {
-> +        ret = emu_csr_data->context_put(cs);
-> +        if (ret) {
-> +            goto handle_failed;
-> +        }
-> +    }
-> +
-> +    return 0;
-> +
-> +handle_failed:
-> +    qemu_log_mask(LOG_UNIMP,
-> +                  "%s: failed to handle CSR EXIT for CSR %s\n",
-> +                  __func__, riscv_get_csr_name(csr_num));
-> +
-> +    return -1;
->  }
+> -    if (!(env->mstateen[index] & bit)) {
+> +    if (!kvm_enabled() && !(env->mstateen[index] & bit)) {
+>          return RISCV_EXCP_ILLEGAL_INST;
+>      }
 >  
->  static bool kvm_riscv_handle_debug(CPUState *cs)
-> -- 
-> 2.17.1
->
+> @@ -66,7 +72,7 @@ RISCVException smstateen_acc_ok(CPURISCVState *env, int index, uint64_t bit)
+>          }
+>      }
+>  
+> -    if (env->priv == PRV_U && riscv_has_ext(env, RVS)) {
+> +    if (env->priv == PRV_U && riscv_has_ext_s(env)) {
+>          if (!(env->sstateen[index] & bit)) {
+>              return RISCV_EXCP_ILLEGAL_INST;
+>          }
+> @@ -326,7 +332,7 @@ static RISCVException csrind_or_aia_any(CPURISCVState *env, int csrno)
+>  
+>  static RISCVException smode(CPURISCVState *env, int csrno)
+>  {
+> -    if (riscv_has_ext(env, RVS)) {
+> +    if (riscv_has_ext_s(env)) {
+>          return RISCV_EXCP_NONE;
+>      }
 
-So, as I said above, I'm skeptical of this approach, since I'm not sure we
-maintain TCG state well enough when using KVM to trust riscv_csrrw() nor
-am I sure we can always have such simple load/put functions like the next
-patch proposes for AIA registers.
-
-I vote we manage CSRs case-by-case. SEED is already managed and shares
-code at a point that is easy to audit, proving there are no TCG state
-dependencies in the emulation. AIA should do the same, at least until
-we've decided to build a KVM->TCG model that ensures TCG state is always
-correct, in which case I don't think the load/put functions would be
-necessary here.
-
-(On a related note, Radim Krcmar suggested we consider forwarding more
-SBI calls from KVM to QEMU where QEMU could then use OpenSBI's
-implementation. That makes sense to me, but we'd need to create that
-KVM->TCG model first for it too.)
+Scattering kvm_enabled() checks around, as is done in the above hunks, is
+what I meant in my reply to the previous patch about TCG likely not having
+its state maintained well enough to always provide functional CSR
+emulation for KVM. Rather than fixing things up as we bump into them with
+kvm_enabled() checks we should come up with a way to truly support QEMU
+KVM emulation forwarding to TCG.
 
 Thanks,
 drew
+
+>  
+> diff --git a/target/riscv/kvm/kvm-cpu.c b/target/riscv/kvm/kvm-cpu.c
+> index b088b947adae..50b0e7c9ff7d 100644
+> --- a/target/riscv/kvm/kvm-cpu.c
+> +++ b/target/riscv/kvm/kvm-cpu.c
+> @@ -1627,6 +1627,31 @@ static int kvm_riscv_handle_sbi(CPUState *cs, struct kvm_run *run)
+>  }
+>  
+>  /* User-space CSR emulation */
+> +static int kvm_riscv_emu_sireg_ctx_load(CPUState *cs)
+> +{
+> +    CPURISCVState *env = &RISCV_CPU(cs)->env;
+> +
+> +    KVM_RISCV_GET_CSR(cs, env, RISCV_AIA_CSR_REG(siselect), env->siselect);
+> +    KVM_RISCV_GET_CSR(cs, env, RISCV_AIA_CSR_REG(iprio1), env->siprio[0]);
+> +    KVM_RISCV_GET_CSR(cs, env, RISCV_AIA_CSR_REG(iprio1h), env->siprio[8]);
+> +    KVM_RISCV_GET_CSR(cs, env, RISCV_AIA_CSR_REG(iprio2), env->siprio[16]);
+> +    KVM_RISCV_GET_CSR(cs, env, RISCV_AIA_CSR_REG(iprio2h), env->siprio[24]);
+> +
+> +    return 0;
+> +}
+> +
+> +static int kvm_riscv_emu_sireg_ctx_put(CPUState *cs)
+> +{
+> +    CPURISCVState *env = &RISCV_CPU(cs)->env;
+> +
+> +    KVM_RISCV_SET_CSR(cs, env, RISCV_AIA_CSR_REG(iprio1), env->siprio[0]);
+> +    KVM_RISCV_SET_CSR(cs, env, RISCV_AIA_CSR_REG(iprio1h), env->siprio[8]);
+> +    KVM_RISCV_SET_CSR(cs, env, RISCV_AIA_CSR_REG(iprio2), env->siprio[16]);
+> +    KVM_RISCV_SET_CSR(cs, env, RISCV_AIA_CSR_REG(iprio2h), env->siprio[24]);
+> +
+> +    return 0;
+> +}
+> +
+>  struct kvm_riscv_emu_csr_data {
+>      target_ulong csr_num;
+>      int (*context_load)(CPUState *cs);
+> @@ -1635,6 +1660,8 @@ struct kvm_riscv_emu_csr_data {
+>  
+>  struct kvm_riscv_emu_csr_data kvm_riscv_emu_csr_data[] = {
+>      { CSR_SEED, NULL, NULL },
+> +    { CSR_SIREG, kvm_riscv_emu_sireg_ctx_load, kvm_riscv_emu_sireg_ctx_put },
+> +    { CSR_STOPEI, NULL, NULL },
+>  };
+>  
+>  static int kvm_riscv_handle_csr(CPUState *cs, struct kvm_run *run)
+> -- 
+> 2.17.1
+> 
 
