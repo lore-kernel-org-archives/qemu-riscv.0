@@ -4,38 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5AC82C282DE
-	for <qemu-riscv@archiver.kernel.org>; Thu,  6 Mar 2025 06:36:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 461E2C282D1
+	for <qemu-riscv@archiver.kernel.org>; Thu,  6 Mar 2025 06:42:50 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tq4pU-0007ZB-Pr; Thu, 06 Mar 2025 01:35:36 -0500
+	id 1tq4wH-0002oL-Gm; Thu, 06 Mar 2025 01:42:37 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <mjt@tls.msk.ru>)
- id 1tq4pP-0007VA-JN; Thu, 06 Mar 2025 01:35:31 -0500
+ id 1tq4w2-0002du-Gf; Thu, 06 Mar 2025 01:42:23 -0500
 Received: from isrv.corpit.ru ([86.62.121.231])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <mjt@tls.msk.ru>)
- id 1tq4pN-0005cj-Pg; Thu, 06 Mar 2025 01:35:31 -0500
+ id 1tq4vz-0006Hh-1Y; Thu, 06 Mar 2025 01:42:20 -0500
 Received: from tsrv.corpit.ru (tsrv.tls.msk.ru [192.168.177.2])
- by isrv.corpit.ru (Postfix) with ESMTP id 09CBDF8563;
- Thu, 06 Mar 2025 09:34:48 +0300 (MSK)
+ by isrv.corpit.ru (Postfix) with ESMTP id A354FF857F;
+ Thu, 06 Mar 2025 09:41:35 +0300 (MSK)
 Received: from [192.168.177.130] (mjt.wg.tls.msk.ru [192.168.177.130])
- by tsrv.corpit.ru (Postfix) with ESMTP id 7E12D1C4FE7;
- Thu,  6 Mar 2025 09:35:27 +0300 (MSK)
-Message-ID: <558cbfb7-fdd4-40b1-84ee-27c1c6aba4b2@tls.msk.ru>
-Date: Thu, 6 Mar 2025 09:35:27 +0300
+ by tsrv.corpit.ru (Postfix) with ESMTP id 252441C4FF0;
+ Thu,  6 Mar 2025 09:42:15 +0300 (MSK)
+Message-ID: <f741f6da-46b6-499d-9432-11277b9dded6@tls.msk.ru>
+Date: Thu, 6 Mar 2025 09:42:15 +0300
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 Subject: Re: [PATCH] goldfish_rtc: Fix tick_offset migration
+From: Michael Tokarev <mjt@tls.msk.ru>
 To: Rodrigo Dias Correa <r@drigo.nl>, anup.patel@wdc.com,
  Alistair.Francis@wdc.com
 Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org,
  qemu-stable <qemu-stable@nongnu.org>
 References: <20250114212150.228241-1-r@drigo.nl>
+ <558cbfb7-fdd4-40b1-84ee-27c1c6aba4b2@tls.msk.ru>
 Content-Language: en-US, ru-RU
-From: Michael Tokarev <mjt@tls.msk.ru>
 Autocrypt: addr=mjt@tls.msk.ru; keydata=
  xsFNBGYpLkcBEACsajkUXU2lngbm6RyZuCljo19q/XjZTMikctzMoJnBGVSmFV66kylUghxs
  HDQQF2YZJbnhSVt/mP6+V7gG6MKR5gYXYxLmypgu2lJdqelrtGf1XtMrobG6kuKFiD8OqV6l
@@ -79,7 +80,7 @@ Autocrypt: addr=mjt@tls.msk.ru; keydata=
  YPkzzso6HT7rlapB5nulYmplJZSZ4RmE1ATZKf+wUPocDu6N10LtBNbwHWTT5NLtxNJAJAvl
  ojis6H1kRWZE/n5buyPY2NYeyWfjjrerOYt3er55n4C1I88RSCTGeejVmXWuo65QD2epvzE6
  3GgKngeVm7shlp7+d3D3+fAAHTvulQQqV3jOodz+B4yzuZ7WljkNrmrWrH8aI4uA98c=
-In-Reply-To: <20250114212150.228241-1-r@drigo.nl>
+In-Reply-To: <558cbfb7-fdd4-40b1-84ee-27c1c6aba4b2@tls.msk.ru>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 Received-SPF: pass client-ip=86.62.121.231; envelope-from=mjt@tls.msk.ru;
@@ -105,29 +106,17 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-15.01.2025 00:21, Rodrigo Dias Correa wrote:
-> Instead of migrating the raw tick_offset, goldfish_rtc migrates a
-> recalculated value based on QEMU_CLOCK_VIRTUAL. As QEMU_CLOCK_VIRTUAL
-> stands still across a save-and-restore cycle, the guest RTC becomes out
-> of sync with the host RTC when the VM is restored.
-> 
-> As described in the bug description, it looks like this calculation was
-> copied from pl031 RTC, which had its tick_offset migration fixed by
-> Commit 032cfe6a79c8 ("pl031: Correctly migrate state when using -rtc
-> clock=host").
-> 
-> Migrate the tick_offset directly, adding it as a version-dependent field
-> to VMState. Keep the old behavior when migrating from previous versions.
-> 
-> Resolves: https://gitlab.com/qemu-project/qemu/-/issues/2033
+06.03.2025 09:35, Michael Tokarev wrote:
 
-Is this a qemu-stable material?
+>> Migrate the tick_offset directly, adding it as a version-dependent field
+>> to VMState. Keep the old behavior when migrating from previous versions.
+>>
+>> Resolves: https://gitlab.com/qemu-project/qemu/-/issues/2033
+> 
+> Is this a qemu-stable material?
 
-If yes, how far to older stable series it is worth to pick?
-(Currently active older stable series are 7.2 and 8.2).
-
-Please add Cc: qemu-stable@ for fixes which are supposed to be picked up
-for the stable series.
+It is probably not, since this change adds a new field (and version) to the
+migration stream.
 
 Thanks,
 
