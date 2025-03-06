@@ -4,48 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E8A29C19F32
-	for <qemu-riscv@archiver.kernel.org>; Wed,  5 Mar 2025 11:25:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 471DAC19F32
+	for <qemu-riscv@archiver.kernel.org>; Thu,  6 Mar 2025 03:00:04 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tpmrj-0008Es-2V; Wed, 05 Mar 2025 06:24:43 -0500
+	id 1tq1Sm-00011u-G9; Wed, 05 Mar 2025 21:59:56 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <lc00631@tecorigin.com>)
- id 1tpmrg-0008ER-Q2; Wed, 05 Mar 2025 06:24:40 -0500
-Received: from out28-124.mail.aliyun.com ([115.124.28.124])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <lc00631@tecorigin.com>)
- id 1tpmrc-0006D1-Qk; Wed, 05 Mar 2025 06:24:40 -0500
-Received: from localhost.localdomain(mailfrom:lc00631@tecorigin.com
- fp:SMTPD_---.bl5H9d._1741173860 cluster:ay29) by smtp.aliyun-inc.com;
- Wed, 05 Mar 2025 19:24:21 +0800
-From: Chao Liu <lc00631@tecorigin.com>
-To: lc00631@tecorigin.com,
-	alistair23@gmail.com
-Cc: alistair.francis@wdc.com, bmeng.cn@gmail.com, dbarboza@ventanamicro.com,
- liwei1518@gmail.com, palmer@dabbelt.com, qemu-devel@nongnu.org,
- qemu-riscv@nongnu.org, zhiwei_liu@linux.alibaba.com, zqz00548@tecorigin.com
-Subject: Re: [PATCH v3 0/2] Enhanced VSTART and VL checks for vector
- instructions
-Date: Wed,  5 Mar 2025 19:24:12 +0800
-Message-ID: <20250305112412.1804-1-lc00631@tecorigin.com>
-X-Mailer: git-send-email 2.48.1.windows.1
-In-Reply-To: <cover.1736130472.git.lc00631@tecorigin.com>
-References: <cover.1736130472.git.lc00631@tecorigin.com>
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1tq1Sj-0000zb-7d; Wed, 05 Mar 2025 21:59:54 -0500
+Received: from mail-vk1-xa30.google.com ([2607:f8b0:4864:20::a30])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1tq1Sg-0007XT-4m; Wed, 05 Mar 2025 21:59:52 -0500
+Received: by mail-vk1-xa30.google.com with SMTP id
+ 71dfb90a1353d-51eb18130f9so81911e0c.3; 
+ Wed, 05 Mar 2025 18:59:48 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1741229987; x=1741834787; darn=nongnu.org;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=r7+Xg3w7AAR07uAWdomT3Ya921CSzcZWjod6SEhzFJY=;
+ b=JEgrPdLnfxObjZg4CyD7ds3xmIcg/VZXKZ+2ef49jqRqFFVvyerghjzF0WRim4itDI
+ QnCoqNKFn0MymSn+ysKcHfhNArMgwfvfmDeM6pbhArJS10hnHiFp8ckFRRC4XTRdQEe2
+ mH/BrJeDhkCnQptdN9CXsJQj9aNHZY2DpFG22UuN3ukHfKU/+OKCQxXcNF6lvFM69Ny5
+ Y0qWb/caqR8QwoP4SmmitXpLh2Pu6c1Agms+BudHVQKumMFQ2MBStrAnvgKEwOj3gTFt
+ HWfC8Pi6cojX5dDkWtjUAz8ucARmI1i6N1u7NzxFj3WoVt3xd58oPZNl9OSP6FRbJYvK
+ R7Lg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1741229987; x=1741834787;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=r7+Xg3w7AAR07uAWdomT3Ya921CSzcZWjod6SEhzFJY=;
+ b=LzuO7ot/BsnjubTWoySC9DknC+rsE3LengxcTk8aixfs0/1GoM2k0i7BWU/uHzsRoI
+ 1n3g6ZFv3MIsW6T3sRs14EzSeI8i7Z70kkGu28VgYymT7Monu0ymsCZk41JlWqX0fpzf
+ 3p8HNX4AZ54QWm84Xn6LDZbCv1xqRAZCvBUw7123PwO4ZWLcTg4Tmxz38YBkv77RChGN
+ Z3FBQ8yMTV0d5z8aZVxnpnL4BuqL2qDE544NDe6Oi2vDlJn2dOEgyCw4Z+dmvZbqm9Nf
+ 4Unsk6igvz8fh4l+vRbMfGEXsn1NtGojrCbvS/3xDwuZrOZSXz7naPNI3xWQ/rHyunPn
+ jzlg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUzUrKKLm2iv39z4cmzqBRHPgH8mFSzf1P/VxtKPKFJ26mFzZvtXEl0KVwJgGe+lFsIJZdqSdLSiAn2@nongnu.org
+X-Gm-Message-State: AOJu0YyIm1wn+xl/lUxChVMl/eedHTKbIrOIvpVJF9bjYf43tvpJIYVi
+ 3NER/osGke8gq/k5/8fOXTiFzHTbqJ3PDVSv5mwPih1FA+DAMlo3hSrMc6h0K8tAzuzrVCsNqfz
+ BHYvdmmnDhaE3Q5L77d53qslceaY=
+X-Gm-Gg: ASbGncu1I2ulMCsom0lDgEhk5+pq+FSl7l8n0h+A4PImdOKaH+FLrgryRNOyTHndwKZ
+ JAS2b9gOoqd48RNN04bMGrm1rldZCE+/3EV3LrMu/1wFhdj1ofl2gfiggHscUQrgjzbU0qtP/DR
+ V7Aek0JKm0uUmzaPCDxkEgeMfg0rNnrbKVw6rRayXLy4UpA/FVX9NuYfAN
+X-Google-Smtp-Source: AGHT+IErSTaQ6CVU7db1Isb45I6BTkhs+cKiSvBrznw9I4MBPJbBCcQ6GVDPGvATpyx/tm6g2wFEhvAi2s+HX4vmBIw=
+X-Received: by 2002:a05:6102:3c98:b0:4c1:9e65:f90b with SMTP id
+ ada2fe7eead31-4c2e2910854mr4171878137.17.1741229986916; Wed, 05 Mar 2025
+ 18:59:46 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=115.124.28.124;
- envelope-from=lc00631@tecorigin.com; helo=out28-124.mail.aliyun.com
-X-Spam_score_int: -18
-X-Spam_score: -1.9
+References: <174044811783.27139.4910941776283875756-0@git.sr.ht>
+In-Reply-To: <174044811783.27139.4910941776283875756-0@git.sr.ht>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Thu, 6 Mar 2025 12:59:20 +1000
+X-Gm-Features: AQ5f1Jp730SsjRe5OL3LVaSMUEKoI8XFIJ5VtVaUzI-1DCr1GYGNWVxPj6t61nI
+Message-ID: <CAKmqyKMOaGs4aTgHzgsfYTVxkawNG9xRrJac02PazJ8kWQWScQ@mail.gmail.com>
+Subject: Re: [PATCH qemu] target/riscv: Only check ext_zca for 16-bit aligned
+ PC.
+To: "~yuming" <yumin686@andestech.com>
+Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, 
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Bin Meng <bmeng.cn@gmail.com>, Weiwei Li <liwei1518@gmail.com>, 
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2607:f8b0:4864:20::a30;
+ envelope-from=alistair23@gmail.com; helo=mail-vk1-xa30.google.com
+X-Spam_score_int: -17
+X-Spam_score: -1.8
 X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_NONE=-0.0001,
- RCVD_IN_MSPIKE_H5=0.001, RCVD_IN_MSPIKE_WL=0.001,
- RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001, RCVD_IN_VALIDITY_SAFE_BLOCKED=0.001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- UNPARSEABLE_RELAY=0.001 autolearn=ham autolearn_force=no
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -61,50 +100,92 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Hi,
+On Tue, Feb 25, 2025 at 11:49=E2=80=AFAM ~yuming <yuming@git.sr.ht> wrote:
+>
+> From: Yu-Ming Chang <yumin686@andestech.com>
+>
+> Since C always implies Zca, Zca is always enabled when 16-bit
+> insructions are supported. we can only check ext_zca to allow
+> 16-bit aligned PC addresses.
+>
+> Signed-off-by: Yu-Ming Chang <yumin686@andestech.com>
 
-This patchset fixes some bugs in RVV instructions,
+Thanks!
 
-can you pull it in the near future please? 
+Applied to riscv-to-apply.next
 
-Looking forward to your reply!
+Alistair
 
---
-Regards,
-Chao
-
-> 
-> Hi, all:
-> 
-> In accordance with the review, i improved the commit message of patch and added
-> the reason for the modification.
-> 
-> There was no change in the patch content.
-> 
-> PATCH v2 review:
-> https://lore.kernel.org/qemu-devel/61e8f7d8-607a-4d63-b9dd-cfbfc840716e@ventanamicro.com/
-> 
-> PATCH v1 review:
-> https://lore.kernel.org/qemu-devel/CAKmqyKPFYxhK8PANOVzV3FMWxd79wZSJYLWkKOAgEMt_b2KvZA@mail.gmail.com/
-> 
+> ---
+>  target/riscv/insn_trans/trans_rvi.c.inc | 5 ++---
+>  target/riscv/op_helper.c                | 4 ++--
+>  target/riscv/translate.c                | 2 +-
+>  3 files changed, 5 insertions(+), 6 deletions(-)
+>
+> diff --git a/target/riscv/insn_trans/trans_rvi.c.inc b/target/riscv/insn_=
+trans/trans_rvi.c.inc
+> index 96c218a9d7..e5965201a7 100644
+> --- a/target/riscv/insn_trans/trans_rvi.c.inc
+> +++ b/target/riscv/insn_trans/trans_rvi.c.inc
+> @@ -106,7 +106,7 @@ static bool trans_jalr(DisasContext *ctx, arg_jalr *a=
+)
+>          tcg_gen_ext32s_tl(target_pc, target_pc);
+>      }
+>
+> -    if (!has_ext(ctx, RVC) && !ctx->cfg_ptr->ext_zca) {
+> +    if (!ctx->cfg_ptr->ext_zca) {
+>          TCGv t0 =3D tcg_temp_new();
+>
+>          misaligned =3D gen_new_label();
+> @@ -236,8 +236,7 @@ static bool gen_branch(DisasContext *ctx, arg_b *a, T=
+CGCond cond)
+>
+>      gen_set_label(l); /* branch taken */
+>
+> -    if (!has_ext(ctx, RVC) && !ctx->cfg_ptr->ext_zca &&
+> -        (a->imm & 0x3)) {
+> +    if (!ctx->cfg_ptr->ext_zca && (a->imm & 0x3)) {
+>          /* misaligned */
+>          TCGv target_pc =3D tcg_temp_new();
+>          gen_pc_plus_diff(target_pc, ctx, a->imm);
+> diff --git a/target/riscv/op_helper.c b/target/riscv/op_helper.c
+> index ce1256f439..68882136d7 100644
+> --- a/target/riscv/op_helper.c
+> +++ b/target/riscv/op_helper.c
+> @@ -276,7 +276,7 @@ target_ulong helper_sret(CPURISCVState *env)
+>      }
+>
+>      target_ulong retpc =3D env->sepc;
+> -    if (!riscv_has_ext(env, RVC) && (retpc & 0x3)) {
+> +    if (!env_archcpu(env)->cfg.ext_zca && (retpc & 0x3)) {
+>          riscv_raise_exception(env, RISCV_EXCP_INST_ADDR_MIS, GETPC());
+>      }
+>
+> @@ -349,7 +349,7 @@ static void check_ret_from_m_mode(CPURISCVState *env,=
+ target_ulong retpc,
+>          riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, GETPC());
+>      }
+>
+> -    if (!riscv_has_ext(env, RVC) && (retpc & 0x3)) {
+> +    if (!env_archcpu(env)->cfg.ext_zca && (retpc & 0x3)) {
+>          riscv_raise_exception(env, RISCV_EXCP_INST_ADDR_MIS, GETPC());
+>      }
+>
+> diff --git a/target/riscv/translate.c b/target/riscv/translate.c
+> index 698b74f7a8..34eeed50be 100644
+> --- a/target/riscv/translate.c
+> +++ b/target/riscv/translate.c
+> @@ -566,7 +566,7 @@ static void gen_jal(DisasContext *ctx, int rd, target=
+_ulong imm)
+>      TCGv succ_pc =3D dest_gpr(ctx, rd);
+>
+>      /* check misaligned: */
+> -    if (!has_ext(ctx, RVC) && !ctx->cfg_ptr->ext_zca) {
+> +    if (!ctx->cfg_ptr->ext_zca) {
+>          if ((imm & 0x3) !=3D 0) {
+>              TCGv target_pc =3D tcg_temp_new();
+>              gen_pc_plus_diff(target_pc, ctx, imm);
 > --
-> Regards,
-> Chao
-> 
-> Chao Liu (2):
->   target/riscv: refactor VSTART_CHECK_EARLY_EXIT() to accept vl as a
->     parameter
->   target/riscv: fix handling of nop for vstart >= vl in some vector
->     instruction
-> 
->  target/riscv/vcrypto_helper.c   | 32 ++++++-------
->  target/riscv/vector_helper.c    | 83 ++++++++++++++++++---------------
->  target/riscv/vector_internals.c |  4 +-
->  target/riscv/vector_internals.h | 12 ++---
->  4 files changed, 69 insertions(+), 62 deletions(-)
-> 
-> -- 
-> 2.47.1
-> 
-> 
+> 2.45.3
+>
 
