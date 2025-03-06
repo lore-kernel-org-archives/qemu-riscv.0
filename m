@@ -4,91 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BE8FAC282DE
-	for <qemu-riscv@archiver.kernel.org>; Thu,  6 Mar 2025 06:47:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D322FC282DE
+	for <qemu-riscv@archiver.kernel.org>; Thu,  6 Mar 2025 07:44:22 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tq50J-0000m3-0u; Thu, 06 Mar 2025 01:46:47 -0500
+	id 1tq5tN-00086J-QG; Thu, 06 Mar 2025 02:43:41 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <debug@rivosinc.com>)
- id 1tq50H-0000l8-LP
- for qemu-riscv@nongnu.org; Thu, 06 Mar 2025 01:46:45 -0500
-Received: from mail-pj1-x1029.google.com ([2607:f8b0:4864:20::1029])
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1tq5tL-00085m-I8; Thu, 06 Mar 2025 02:43:40 -0500
+Received: from mail-ua1-x92e.google.com ([2607:f8b0:4864:20::92e])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <debug@rivosinc.com>)
- id 1tq50F-0006iH-ED
- for qemu-riscv@nongnu.org; Thu, 06 Mar 2025 01:46:45 -0500
-Received: by mail-pj1-x1029.google.com with SMTP id
- 98e67ed59e1d1-2fee4d9c2efso560760a91.3
- for <qemu-riscv@nongnu.org>; Wed, 05 Mar 2025 22:46:42 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1tq5tJ-0004Gn-II; Thu, 06 Mar 2025 02:43:39 -0500
+Received: by mail-ua1-x92e.google.com with SMTP id
+ a1e0cc1a2514c-867129fdb0aso331325241.1; 
+ Wed, 05 Mar 2025 23:43:36 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1741243601; x=1741848401;
- darn=nongnu.org; 
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ d=gmail.com; s=20230601; t=1741247015; x=1741851815; darn=nongnu.org;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=RbZuOP22vzkw2+P6QIU7v8LOOYj3TomNQdTgry0GHck=;
- b=YJ7jFCFA90M/J7no+m+25Yc1DqbzZ6MjCCG8l+6mMCXIFfmFgBQk9NpZ75YX9Rcf8W
- fPV5AIPgUW1QnLMkcD/1uujxFRIfPPvZ65LB3b8FyglzQyWJ1dCJX68z9vGAJnRKbhe7
- WDCvSM+/LRdq9xLfSzjhSwqw1bUg1lyEc8Wcau3stHnjtGjgqy9ker2ahzKkhy6mCpQY
- /G/2jVUvaKreEmQ9rlfj8UHQypNuuKWZ7tVOgY0ZLAca3k6dKNltc/0F0D1hzTHO8lXO
- TVAgOjEgkUOWYbniLnRNr0hx6b5ui6cN5P/E5UKfIRHyr76GkLvWlwV0mJRav48nx7pS
- UQ0g==
+ bh=HqNGyI//q83eMzRxlxja32xoaCTlCbUk9n2MSqaDgKM=;
+ b=S+a9TMVXhOVhHVfUMW9gt+EjSvXP7rTEzOJiGqzomSd6CYJx013qAZRv+yGIhs5LIt
+ m0E99Si3CNXk0FqJiRbZ1UxxnJ5ORe3cGf0cb79XKdKEtNXwbf8yI27Uiwn5s22vMoVT
+ lseaOLboYMtrQ9d3zAvL7bOJuRiuafpVost0OVXX0JOwAuJOfv4K+znyNN3+gw8GGrr7
+ NGP3/USMjvrH5gmkl5qj6W09klQ4n7JJkRihH5sb8MQejyh78j8SeifuI4P193jfqTcD
+ T7T9tMGt3QTV8ciIJpF+5CHsc5syj9iOe79LJv9RJEhFo7pnrOzD0YSSsUg1tkjqJ8Sz
+ 5gFQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741243601; x=1741848401;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ d=1e100.net; s=20230601; t=1741247015; x=1741851815;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=RbZuOP22vzkw2+P6QIU7v8LOOYj3TomNQdTgry0GHck=;
- b=TY9UHyNPWSydOajlXrA+yiytARq9xsRWDzLYd6ZBiWNyM2Dvu5h0xP3R3McVas0i/V
- zw9yeYqrlWCdwx/ULT4HbdYUvx6x74wAQY4yTL0i4+ioIXs8Ku2Zd6ExonhZ5Hu7zbcV
- g+G/R5eD7/A/O7vsp0O/7d4ffir3Hw9P88YTiW/aBF3bCUo/gNi4La8hrsHsbsg6WS1W
- HUuGMMoZwiaowDWqn7WUNF/b1b2TmGhkb3NAF8YI0YXB4qZSISmgyDq1R+7Sy36vJu2o
- wENL0VbVNhDq1bPFFy33nwz2hDDFcgXuToqVJ+xK/WY5fzBGImWuofAQOK//XwVU5HnP
- A+Dw==
-X-Gm-Message-State: AOJu0YyMGxmgf9408LdkqvHyax8H4CwtFASK8OX0e8dMqi7BydjjOKm0
- thodEnV8lPJgAe7UFifSWxJwu2g8H53+mtNW932WJumDmZdwmfYEoejMPPLoUyi8ZtUdyGjKN6a
- t
-X-Gm-Gg: ASbGnctnkwSyfoSP331Tp2zUqf+m8nfGfaXRREvf/mPSQK7190i6O0lrjYuMSuFr/bl
- 28HL2RZ8k+qy8MCyGALl5YT4Q0aLnzBBiKxlRg3DjAPenCr54aoVfmAGZFNF26b9H6NzSTSH609
- Axp5sGbb3PCJs336f281UuqMLzTFeYY9YAY5fGbnOXfH6HeUwtNnG5pu1qFLQm+XXhO5/5o3Lyg
- z5ka6D+0Kb36rFm8iu1KVkInBreFHQosvG84kIUUYpCZOqjy7EmuWH2ZQsYeT+swW1Hclr1lBlO
- UmjYp3ppk8XEcYdeyNzdWJ4H4zR/4MQVmX3NO3NqEYPNidXQB/VNmEY=
-X-Google-Smtp-Source: AGHT+IGhglqGWLeZ6lwM5EYr1+qz51yIjo0EHhJOf0aJQYQCjWxHZbjlnBRTeyAwOrlfeWEURf/cUw==
-X-Received: by 2002:a17:90b:5147:b0:2f4:4500:bb4d with SMTP id
- 98e67ed59e1d1-2ff49753b47mr10071962a91.20.1741243601389; 
- Wed, 05 Mar 2025 22:46:41 -0800 (PST)
-Received: from debug.ba.rivosinc.com ([64.71.180.162])
- by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-22410a80edfsm4828185ad.150.2025.03.05.22.46.40
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 05 Mar 2025 22:46:41 -0800 (PST)
-From: Deepak Gupta <debug@rivosinc.com>
-To: qemu-riscv@nongnu.org,
-	qemu-devel@nongnu.org
-Cc: palmer@dabbelt.com, alistair.francis@wdc.com, bmeng.cn@gmail.com,
- liwei1518@gmail.com, dbarboza@ventanamicro.com,
- zhiwei_liu@linux.alibaba.com, Deepak Gupta <debug@rivosinc.com>,
- Ved Shanbhogue <ved@rivosinc.com>
-Subject: [PATCH v2 2/2] target/riscv: fixes a bug against `ssamoswap` behavior
- in M-mode
-Date: Wed,  5 Mar 2025 22:46:36 -0800
-Message-Id: <20250306064636.452396-2-debug@rivosinc.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20250306064636.452396-1-debug@rivosinc.com>
-References: <20250306064636.452396-1-debug@rivosinc.com>
+ bh=HqNGyI//q83eMzRxlxja32xoaCTlCbUk9n2MSqaDgKM=;
+ b=Kmm+rEPj0W2kg0VzEUlEis5oc/q4Eko+GigmufVywWxsoCFUQm8M7p60kiW2DsDvTk
+ qgXxx+KGptSgc1VqZ06cGj7thVQJDN9OgOEihF2MZ1gRBggHeDCscrSpfvQ+RBT2tShV
+ h/74+eoYvKEwe+SfSNms8s5aNTVr9UeFbOTIKIMxLmv7aKdB/WS2Zn0BVayGchKO4gma
+ cBPzh3qbzQEhPj1o9lVUkShdcRiW7XuhzlKnNul01Oq2oxNX+02M07MNraHpZ/FP82Ih
+ mLT7ucoTw7IxeCPxELsQnt+2DMvKUwqGMMBu2rZYVHXriVwsR/ddYSCD1PPFdHoG29Sd
+ njhw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCV3+h9NXU58FGhF/w2FWhUmPHaKexnkaTwha/JLt97Z+af9PIL4YIEiKHDykKOgLInAnFE7ppPxgwRHuA==@nongnu.org,
+ AJvYcCW83f4e/yOop+4cbUe/6HAehULMzUzlkLGBkkKSniaIzXOTqGN57sw9Zh83HLABceiUxXM0a2J3Qi0bldk=@nongnu.org,
+ AJvYcCWkKDhxwk2bhbDgJbzD08fYY0Ez5NFI0wR9WRHVPkQdCHEKdYzWGjm15hxi/KDzdHaHNm/Hizv14Vcd@nongnu.org
+X-Gm-Message-State: AOJu0YwUOTM0RM92VKDMQzOQm6RCJ3lm8Esxvv3jSyKcIGF/X+VItmti
+ BWMh3SoRc1NEj/OFnkbdHaOqbFMt7Ky7FRcvpGFbUkimyGNNrqfq3czrCuH9hY/yQALj7lYnRF8
+ lQ3v+rBwy13+n6DSpVDSNeybVfw4=
+X-Gm-Gg: ASbGncvUAKwc3RMwlgJZVGPl0tEGSf7vhxw8wTitztbdYqD0Q2faC6YxQdzpRV0Ucsp
+ 4GruvEE03L80zcSCQa8F0XWTnwwBMw7gfNZXETXHmlKZpueuN4yVDSwJovlK2Dj65nWaz4rg0MJ
+ bCRMvVzhlH7lOSQh2PGZ3ZjBu9NYfjSQUp5CGTGAyivAQ/VaRTyBpgvVj8
+X-Google-Smtp-Source: AGHT+IEPASYQj/Hyp3BsdPQEaFGu5kINDlxXANE49uya3QAPk5Wmij3MOrddE2T7FU5g/+8cley3k/GR1huquNBRTOo=
+X-Received: by 2002:a05:6102:4bc5:b0:4bb:623:e1f7 with SMTP id
+ ada2fe7eead31-4c2e2920642mr4103259137.16.1741247015566; Wed, 05 Mar 2025
+ 23:43:35 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1029;
- envelope-from=debug@rivosinc.com; helo=mail-pj1-x1029.google.com
-X-Spam_score_int: -18
-X-Spam_score: -1.9
+References: <20250124101452.2519171-1-max.chou@sifive.com>
+ <26e6ce70-94f8-4fb7-8a56-77135ef3928f@tls.msk.ru>
+In-Reply-To: <26e6ce70-94f8-4fb7-8a56-77135ef3928f@tls.msk.ru>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Thu, 6 Mar 2025 17:43:09 +1000
+X-Gm-Features: AQ5f1JpJEODXqsEL28-CyC5iaxcKj8JYQzzGXBW4Sia-2yMeP7hny9YpI2hLY2Y
+Message-ID: <CAKmqyKNDry=f_Y7BCqAEPLVziyyWXyKm0BXwnov8JCaXwprinw@mail.gmail.com>
+Subject: Re: [PATCH] target/riscv: rvv: Fix unexpected behavior of vector
+ reduction instructions when vl is 0
+To: Michael Tokarev <mjt@tls.msk.ru>
+Cc: Max Chou <max.chou@sifive.com>, qemu-devel@nongnu.org,
+ qemu-riscv@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Bin Meng <bmeng.cn@gmail.com>, Weiwei Li <liwei1518@gmail.com>, 
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
+ qemu-stable <qemu-stable@nongnu.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2607:f8b0:4864:20::92e;
+ envelope-from=alistair23@gmail.com; helo=mail-ua1-x92e.google.com
+X-Spam_score_int: -17
+X-Spam_score: -1.8
 X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -104,66 +104,35 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Commit f06bfe3dc38c ("target/riscv: implement zicfiss instructions") adds
-`ssamoswap` instruction. `ssamoswap` takes the code-point from existing
-reserved encoding (and not a zimop like other shadow stack instructions).
-If shadow stack is not enabled (via xenvcfg.SSE) and effective priv is
-less than M then `ssamoswap` must result in an illegal instruction
-exception. However if effective priv is M, then `ssamoswap` results in
-store/AMO access fault. See Section "22.2.3. Shadow Stack Memory
-Protection" of priv spec.
+On Thu, Mar 6, 2025 at 4:27=E2=80=AFPM Michael Tokarev <mjt@tls.msk.ru> wro=
+te:
+>
+> 24.01.2025 13:14, Max Chou wrote:
+> > According to the Vector Reduction Operations section in the RISC-V "V"
+> > Vector Extension spec,
+> > "If vl=3D0, no operation is performed and the destination register is n=
+ot
+> > updated."
+> >
+> > The vd should be updated when vl is larger than 0.
+>
+> Is this a qemu-stable material?
 
-Fixes: f06bfe3dc38c ("target/riscv: implement zicfiss instructions")
+Yes
 
-Reported-by: Ved Shanbhogue <ved@rivosinc.com>
-Signed-off-by: Deepak Gupta <debug@rivosinc.com>
----
- target/riscv/insn_trans/trans_rvzicfiss.c.inc | 17 +++++++++++++++++
- 1 file changed, 17 insertions(+)
+>
+> If yes, how far to previous releases it is worth to pick?
+> (Current older stable series are 7.2 and 8.2).
+>
+> I currently picked this up for 7.2, 8.2 and 9.2.
 
-diff --git a/target/riscv/insn_trans/trans_rvzicfiss.c.inc b/target/riscv/insn_trans/trans_rvzicfiss.c.inc
-index e3ebc4977c..b0096adcd0 100644
---- a/target/riscv/insn_trans/trans_rvzicfiss.c.inc
-+++ b/target/riscv/insn_trans/trans_rvzicfiss.c.inc
-@@ -15,6 +15,13 @@
-  * You should have received a copy of the GNU General Public License along with
-  * this program.  If not, see <http://www.gnu.org/licenses/>.
-  */
-+
-+#define REQUIRE_ZICFISS(ctx) do {        \
-+    if (!ctx->cfg_ptr->ext_zicfiss) {    \
-+        return false;                    \
-+    }                                    \
-+} while (0)
-+
- static bool trans_sspopchk(DisasContext *ctx, arg_sspopchk *a)
- {
-     if (!ctx->bcfi_enabled) {
-@@ -77,6 +84,11 @@ static bool trans_ssrdp(DisasContext *ctx, arg_ssrdp *a)
- static bool trans_ssamoswap_w(DisasContext *ctx, arg_amoswap_w *a)
- {
-     REQUIRE_A_OR_ZAAMO(ctx);
-+    REQUIRE_ZICFISS(ctx);
-+    if (ctx->priv == PRV_M) {
-+        generate_exception(ctx, RISCV_EXCP_STORE_AMO_ACCESS_FAULT);
-+    }
-+
-     if (!ctx->bcfi_enabled) {
-         return false;
-     }
-@@ -97,6 +109,11 @@ static bool trans_ssamoswap_d(DisasContext *ctx, arg_amoswap_w *a)
- {
-     REQUIRE_64BIT(ctx);
-     REQUIRE_A_OR_ZAAMO(ctx);
-+    REQUIRE_ZICFISS(ctx);
-+    if (ctx->priv == PRV_M) {
-+        generate_exception(ctx, RISCV_EXCP_STORE_AMO_ACCESS_FAULT);
-+    }
-+
-     if (!ctx->bcfi_enabled) {
-         return false;
-     }
--- 
-2.34.1
+That's perfect
 
+Alistair
+
+>
+> Thanks,
+>
+> /mjt
+>
 
