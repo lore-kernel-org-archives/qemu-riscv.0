@@ -4,80 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4B296C282D1
-	for <qemu-riscv@archiver.kernel.org>; Thu,  6 Mar 2025 04:03:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E3ABCC28B23
+	for <qemu-riscv@archiver.kernel.org>; Thu,  6 Mar 2025 04:12:27 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tq2Rm-0002K5-Hj; Wed, 05 Mar 2025 23:02:58 -0500
+	id 1tq2aw-0006hU-7x; Wed, 05 Mar 2025 23:12:26 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1tq2Rg-0002JJ-TO; Wed, 05 Mar 2025 23:02:55 -0500
-Received: from mail-ua1-x92d.google.com ([2607:f8b0:4864:20::92d])
+ id 1tq2aV-0006aA-M9; Wed, 05 Mar 2025 23:12:00 -0500
+Received: from mail-vk1-xa29.google.com ([2607:f8b0:4864:20::a29])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1tq2Re-0006Mm-LA; Wed, 05 Mar 2025 23:02:52 -0500
-Received: by mail-ua1-x92d.google.com with SMTP id
- a1e0cc1a2514c-86911fd168dso69369241.1; 
- Wed, 05 Mar 2025 20:02:49 -0800 (PST)
+ id 1tq2aT-0007KO-Pe; Wed, 05 Mar 2025 23:11:59 -0500
+Received: by mail-vk1-xa29.google.com with SMTP id
+ 71dfb90a1353d-5239067df8eso83864e0c.3; 
+ Wed, 05 Mar 2025 20:11:57 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1741233769; x=1741838569; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1741234315; x=1741839115; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=0Q44+Jr43EjF7kk5hQoiPCOSjLF+Y6mo7Oc5ScaxovM=;
- b=OJyD7RUWKl9egpAV6M0TLRscG8mW6Xr3n46WgAneTlsdMxN1p4aCKp86N+5Y6e2H/p
- XFFNY/WaZyTaPG/t6OV80ZWep+ZNcr/bTAtpKpbK09qxEdTuVQ2QzCUv2JDmBJoc1t10
- Fb1PjZaFQrl3Ndb6oB2jai4IszgV3c5vr+wWWWf9EBO/ctxss29n7vgrcC3yLQPTcOVO
- PKWTvmi9B1oqEn11yzPZyifxsZDVUh8eNHu3PyDh1zPnds3zDPucHUhyhhhnIonBA0l2
- a5gq5QSGV0tMTgPpO5vozzNYGUwpzDZA9g/MeLUDw3rl2y58naA7l98uvzDp3i33TMph
- FIpw==
+ bh=xfAFU0n8E2x+65ma+4/seir36h9JujQcLnUNYu+mCl0=;
+ b=OM4y3tv6D2R/dr3sbU+OXyyjH4rCG9jDUphPhYWsRAtnB44SS8SL+4X01VVcOkKxwr
+ F0pf1ACudKDRDKpEmNxwFb35B/y19BJ/avNKpqvOCVGYJN/di7/26/a57cuOLeFGbbNv
+ 1yzSkMIQCT9stukpO/FXaUKl9Ne0rt9lEypzPaE5eRgE5GAgpV6xYzMGek66UZAR4k93
+ kaB3YactoSeYhwkw5YfffU4CMnONp+1aE97Gw4HHv/Ppvg9kzsdpGSzt+2vZfY4revyW
+ OYEDqUMvg9LcGLxlZrx+j/oEDtZg8j8D5lu8R83lndRGRaP8MAuazye+/uFBJpJ3nU9K
+ 9j1A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741233769; x=1741838569;
+ d=1e100.net; s=20230601; t=1741234315; x=1741839115;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=0Q44+Jr43EjF7kk5hQoiPCOSjLF+Y6mo7Oc5ScaxovM=;
- b=pOs5pMDuixPT+tXeQzPD3C/RfnQ9sWQSs5bTItJ6Mqr+275JxnBJXLn0EPt+pqG3Fz
- by+H7nmLxBPLPAYmRnGxsyBFniMx/aSbOjgd/m9yuujRI8K2Ou0pmYMlwkhX8rB8ZYAY
- ul2Xh4Ghp1Hr/Rfqm1W/lP3t6ONhg4l2iRgWa6OUSL0LntwGtPIik0hBUqJSVIvSNIz7
- UvHacRjTFsY0BuhyMVZ/O+4GmhGlMIFYeVXO4C6p6T1G8HzawMoFiK9ylHpvDu1BlEoT
- JSHOSdY9Eg8X/jSPm2Y41FTveAVNFglH8ktrf+tmOwo7DluRUp3O1uumawAzUiuKM+tR
- HkwQ==
+ bh=xfAFU0n8E2x+65ma+4/seir36h9JujQcLnUNYu+mCl0=;
+ b=eZ7gl7xQpFwRMh39QeofDJwJIc3wPcCUK1DBZLv7+as+D9DUWfDH0RF+xbmz7fTV3v
+ MisUjxNJhld1ENu/eFJy8xjC2JZghtoS/UWD1F76gcxGAkD2wL2oXRU5PZAE9WTjuKmL
+ iCUrS/bfVkMooubdUIHUL2IcI5ub+TbrHpWbTk+u5a521ZGciqDaSQZz96rDj4JQUPLx
+ 8IihZmUs8AwC65Kqb8GyCeGPHPRci0BoMjjRj4SgRPjRJ62JEectcbUL5Sw23teL+WAY
+ AAadyVd4bGNNpAW9r0IJmX+/btOZF6O07sqtelfPrnmCtDre32wWPfBZh5NwQoEeOAtb
+ StLw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUaOeBtlRa0flKOFR5db+yB53kP/8BjgmstMv4U7HfeSFFWvi8VoWYiu2zHKqOHYTEccftgnu7ThpL1@nongnu.org
-X-Gm-Message-State: AOJu0YwU/PFR0aXZBnG0u8BfVDdet5Cbc39pSxLfqH7/D5QQ3ZaKhExd
- Vs0X84h399qniugkatKROsbDvFfGEUnt7fAG0qerA+BTokcmxd6xTh0GfWXqxcWw9UaxjT3cyOj
- f9dgxvpou1/Wii9BrK7bciBIDQzc=
-X-Gm-Gg: ASbGnctMc6t3qsQGDaCKfg7GPOsXy6Tupp7bsMA/lBEr/Wj5AjjX9UKxXWpvSOaPFn4
- LpLf+Sji7Kij/xUZvsfDLuUsQBGyafKoyzDSlXZ7/sYNgySyoo5sSxt6ypkkQk3Bhc5ZXxaD1db
- JBP3SKJHDeuzwcFER77WYJIea4nDc1WA2ZvO9GaQrElLbldrgBpeVvaYUo
-X-Google-Smtp-Source: AGHT+IH+qakCOVujinTt/Hp6uFlHGJy0KOCDjDY/tWzeLi8InMEnIiFo8XJXyEsBmq9OmN0IPHVKEg9eI5TY8mMb/jc=
-X-Received: by 2002:a05:6102:c48:b0:4bb:f1f0:1b34 with SMTP id
- ada2fe7eead31-4c2e2749be6mr4173482137.2.1741233769096; Wed, 05 Mar 2025
- 20:02:49 -0800 (PST)
+ AJvYcCVTjKrVcByB6Syds3HmCeYyyC5rpKn7s28tZvmnMJpz0YBYEiAe3pqIF1gW/qxiZgYB9r5S3M5dJXD8@nongnu.org
+X-Gm-Message-State: AOJu0Yx4AS91/SAKZXZzjok+u3hbd1t7aID7OEGTvf4NxTiihYBgRVUL
+ Gvx/3QybYrSSAdi3PIPsI7/2citAfthilxTGccUzYC6oLNkaLuuGpX5B0okHsOhonLphxmFsVIE
+ 4KIxtmbM8DhxnAPyCKUfK6PDsd9M=
+X-Gm-Gg: ASbGncu+s1FvTtaRwwEuXohUxAjpP6YAg3ajwPvA9vlrHR5pdFSbYr4sPdfQ9e63ApI
+ h5qGnOJp1oi9FpgcW+iPr0T3Z2ky6qieZZOy52YbfTsQGuD/5NRMCddAZ1x9hy21e+QZaYQAQCD
+ D6QFCKERE63DqhjkGvVO0+npS6bdYQ8nV2lY9o5OYCUd/QtruPFjlx/KuV
+X-Google-Smtp-Source: AGHT+IEX1j93wMxt5wJIjyKSQkz87WYgNOGlzpH1jWIBYN1U2UyDeDi1UQjHhd/aXV0I82j/0mfwHnpGRfEyrOWRrR8=
+X-Received: by 2002:a05:6102:38cf:b0:4c1:8bea:d421 with SMTP id
+ ada2fe7eead31-4c2e27fe02fmr3517758137.14.1741234315248; Wed, 05 Mar 2025
+ 20:11:55 -0800 (PST)
 MIME-Version: 1.0
-References: <20250304231956.34396-1-philmd@linaro.org>
-In-Reply-To: <20250304231956.34396-1-philmd@linaro.org>
+References: <20250225005446.13894-1-sebastian.huber@embedded-brains.de>
+ <20250225005446.13894-4-sebastian.huber@embedded-brains.de>
+In-Reply-To: <20250225005446.13894-4-sebastian.huber@embedded-brains.de>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Thu, 6 Mar 2025 14:02:23 +1000
-X-Gm-Features: AQ5f1Jr8oSuimA5fjovSBgba_uOsDnwGVx-IZP3agI9uN18k3bict7kk3SMNlJQ
-Message-ID: <CAKmqyKOKUZ4Ct0K1X3DrK3VqVEKCStdig076ys59Y1UMnA_qmw@mail.gmail.com>
-Subject: Re: [PATCH] hw/riscv/riscv-iommu: Get target page info using runtime
- helpers
-To: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@linaro.org>
-Cc: qemu-devel@nongnu.org, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
- Bin Meng <bmeng.cn@gmail.com>, qemu-riscv@nongnu.org, 
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Alistair Francis <alistair.francis@wdc.com>, 
- Palmer Dabbelt <palmer@dabbelt.com>,
- Pierrick Bouvier <pierrick.bouvier@linaro.org>, 
- Weiwei Li <liwei1518@gmail.com>
+Date: Thu, 6 Mar 2025 14:11:29 +1000
+X-Gm-Features: AQ5f1JpZY8ZwfpGDoKj-7N95lPZyHFsXxZE9MG9zIpk9wv_e4GuwK6tadmnYCuk
+Message-ID: <CAKmqyKOgbKh29K06gi-QTUzNfrjvaTp1PwF1g0WuJ3_Ck5CWSA@mail.gmail.com>
+Subject: Re: [PATCH v2 3/6] hw/riscv: Make FDT optional for MPFS
+To: Sebastian Huber <sebastian.huber@embedded-brains.de>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, 
+ =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@linaro.org>, 
+ Conor Dooley <conor.dooley@microchip.com>, Bin Meng <bin.meng@windriver.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::92d;
- envelope-from=alistair23@gmail.com; helo=mail-ua1-x92d.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::a29;
+ envelope-from=alistair23@gmail.com; helo=mail-vk1-xa29.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -101,215 +97,139 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Wed, Mar 5, 2025 at 9:20=E2=80=AFAM Philippe Mathieu-Daud=C3=A9 <philmd@=
-linaro.org> wrote:
+On Tue, Feb 25, 2025 at 10:55=E2=80=AFAM Sebastian Huber
+<sebastian.huber@embedded-brains.de> wrote:
 >
-> Prefer runtime helpers to get target page size / mask / bits
-> rather than compile time definitions. This will help to build
-> these files once for all RISC-V binaries.
+> Real-time kernels such as RTEMS or Zephyr may use a static device tree
+> built into the kernel image.  Do not require to use the -dtb option if
+> -kernel is used for the microchip-icicle-kit machine.  Issue a warning
+> if no device tree is provided by the user since the machine does not
+> generate one.
 >
-> Signed-off-by: Philippe Mathieu-Daud=C3=A9 <philmd@linaro.org>
+> Signed-off-by: Sebastian Huber <sebastian.huber@embedded-brains.de>
 
-Thanks!
-
-Do you mind rebasing on
-https://github.com/alistair23/qemu/tree/riscv-to-apply.next ?
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
 > ---
->  hw/riscv/riscv-iommu-pci.c |  4 +++-
->  hw/riscv/riscv-iommu.c     | 29 +++++++++++++++--------------
->  2 files changed, 18 insertions(+), 15 deletions(-)
+>  hw/riscv/microchip_pfsoc.c | 56 +++++++++++++++++++-------------------
+>  1 file changed, 28 insertions(+), 28 deletions(-)
 >
-> diff --git a/hw/riscv/riscv-iommu-pci.c b/hw/riscv/riscv-iommu-pci.c
-> index 12451869e41..e2b893c5898 100644
-> --- a/hw/riscv/riscv-iommu-pci.c
-> +++ b/hw/riscv/riscv-iommu-pci.c
-> @@ -23,6 +23,7 @@
->  #include "hw/qdev-properties.h"
->  #include "hw/riscv/riscv_hart.h"
->  #include "migration/vmstate.h"
-> +#include "exec/target_page.h"
->  #include "qapi/error.h"
->  #include "qemu/error-report.h"
->  #include "qemu/host-utils.h"
-> @@ -102,7 +103,8 @@ static void riscv_iommu_pci_realize(PCIDevice *dev, E=
-rror **errp)
->      qdev_realize(DEVICE(iommu), NULL, errp);
+> diff --git a/hw/riscv/microchip_pfsoc.c b/hw/riscv/microchip_pfsoc.c
+> index f477d2791e..844dc0545c 100644
+> --- a/hw/riscv/microchip_pfsoc.c
+> +++ b/hw/riscv/microchip_pfsoc.c
+> @@ -516,7 +516,6 @@ static void microchip_icicle_kit_machine_init(Machine=
+State *machine)
+>      uint64_t mem_low_size, mem_high_size;
+>      hwaddr firmware_load_addr;
+>      const char *firmware_name;
+> -    bool kernel_as_payload =3D false;
+>      target_ulong firmware_end_addr, kernel_start_addr;
+>      uint64_t kernel_entry;
+>      uint64_t fdt_load_addr;
+> @@ -589,25 +588,12 @@ static void microchip_icicle_kit_machine_init(Machi=
+neState *machine)
+>       *
+>       * This ensures backwards compatibility with how we used to expose -=
+bios
+>       * to users but allows them to run through direct kernel booting as =
+well.
+> -     *
+> -     * When -kernel is used for direct boot, -dtb must be present to pro=
+vide
+> -     * a valid device tree for the board, as we don't generate device tr=
+ee.
+>       */
 >
->      memory_region_init(&s->bar0, OBJECT(s), "riscv-iommu-bar0",
-> -        QEMU_ALIGN_UP(memory_region_size(&iommu->regs_mr), TARGET_PAGE_S=
-IZE));
-> +                       QEMU_ALIGN_UP(memory_region_size(&iommu->regs_mr)=
-,
-> +                                     qemu_target_page_size()));
->      memory_region_add_subregion(&s->bar0, 0, &iommu->regs_mr);
->
->      pcie_endpoint_cap_init(dev, 0);
-> diff --git a/hw/riscv/riscv-iommu.c b/hw/riscv/riscv-iommu.c
-> index e7568ca227a..8bbb33b8b53 100644
-> --- a/hw/riscv/riscv-iommu.c
-> +++ b/hw/riscv/riscv-iommu.c
-> @@ -23,6 +23,7 @@
->  #include "hw/qdev-properties.h"
->  #include "hw/riscv/riscv_hart.h"
->  #include "migration/vmstate.h"
-> +#include "exec/target_page.h"
->  #include "qapi/error.h"
->  #include "qemu/timer.h"
->
-> @@ -300,14 +301,14 @@ static int riscv_iommu_spa_fetch(RISCVIOMMUState *s=
-, RISCVIOMMUContext *ctx,
->          riscv_iommu_msi_check(s, ctx, iotlb->iova)) {
->          iotlb->target_as =3D &s->trap_as;
->          iotlb->translated_addr =3D iotlb->iova;
-> -        iotlb->addr_mask =3D ~TARGET_PAGE_MASK;
-> +        iotlb->addr_mask =3D ~qemu_target_page_mask();
->          return 0;
+> -    if (machine->kernel_filename && machine->dtb) {
+> -        int fdt_size;
+> -        machine->fdt =3D load_device_tree(machine->dtb, &fdt_size);
+> -        if (!machine->fdt) {
+> -            error_report("load_device_tree() failed");
+> -            exit(1);
+> -        }
+> -
+> +    if (machine->kernel_filename) {
+>          firmware_name =3D RISCV64_BIOS_BIN;
+>          firmware_load_addr =3D memmap[MICROCHIP_PFSOC_DRAM_LO].base;
+> -        kernel_as_payload =3D true;
+> -    }
+> -
+> -    if (!kernel_as_payload) {
+> +    } else {
+>          firmware_name =3D BIOS_FILENAME;
+>          firmware_load_addr =3D RESET_VECTOR;
 >      }
+> @@ -617,7 +603,7 @@ static void microchip_icicle_kit_machine_init(Machine=
+State *machine)
+>                                                       &firmware_load_addr=
+, NULL);
 >
->      /* Exit early for pass-through mode. */
->      if (!(en_s || en_g)) {
->          iotlb->translated_addr =3D iotlb->iova;
-> -        iotlb->addr_mask =3D ~TARGET_PAGE_MASK;
-> +        iotlb->addr_mask =3D ~qemu_target_page_mask();
->          /* Allow R/W in pass-through mode */
->          iotlb->perm =3D IOMMU_RW;
->          return 0;
-> @@ -390,7 +391,7 @@ static int riscv_iommu_spa_fetch(RISCVIOMMUState *s, =
-RISCVIOMMUContext *ctx,
->      do {
->          const unsigned widened =3D (pass && !sc[pass].step) ? 2 : 0;
->          const unsigned va_bits =3D widened + sc[pass].ptidxbits;
-> -        const unsigned va_skip =3D TARGET_PAGE_BITS + sc[pass].ptidxbits=
- *
-> +        const unsigned va_skip =3D qemu_target_page_bits() + sc[pass].pt=
-idxbits *
->                                   (sc[pass].levels - 1 - sc[pass].step);
->          const unsigned idx =3D (addr >> va_skip) & ((1 << va_bits) - 1);
->          const dma_addr_t pte_addr =3D base + idx * sc[pass].ptesize;
-> @@ -448,7 +449,7 @@ static int riscv_iommu_spa_fetch(RISCVIOMMUState *s, =
-RISCVIOMMUContext *ctx,
->              break;                /* Reserved leaf PTE flags: PTE_W */
->          } else if ((pte & (PTE_R | PTE_W | PTE_X)) =3D=3D (PTE_W | PTE_X=
-)) {
->              break;                /* Reserved leaf PTE flags: PTE_W + PT=
-E_X */
-> -        } else if (ppn & ((1ULL << (va_skip - TARGET_PAGE_BITS)) - 1)) {
-> +        } else if (ppn & ((1ULL << (va_skip - qemu_target_page_bits())) =
-- 1)) {
->              break;                /* Misaligned PPN */
->          } else if ((iotlb->perm & IOMMU_RO) && !(pte & PTE_R)) {
->              break;                /* Read access check failed */
-> @@ -480,7 +481,7 @@ static int riscv_iommu_spa_fetch(RISCVIOMMUState *s, =
-RISCVIOMMUContext *ctx,
->                  riscv_iommu_msi_check(s, ctx, base)) {
->                  /* Trap MSI writes and return GPA address. */
->                  iotlb->target_as =3D &s->trap_as;
-> -                iotlb->addr_mask =3D ~TARGET_PAGE_MASK;
-> +                iotlb->addr_mask =3D ~qemu_target_page_mask();
->                  return 0;
->              }
+>      riscv_boot_info_init(&boot_info, &s->soc.u_cpus);
+> -    if (kernel_as_payload) {
+> +    if (machine->kernel_filename) {
+>          kernel_start_addr =3D riscv_calc_kernel_start_addr(&boot_info,
+>                                                           firmware_end_ad=
+dr);
 >
-> @@ -950,7 +951,7 @@ static int riscv_iommu_ctx_fetch(RISCVIOMMUState *s, =
-RISCVIOMMUContext *ctx)
->           *   device index: [23:16][15:7][6:0]
->           */
->          const int split =3D depth * 9 + 6 + dc_fmt;
-> -        addr |=3D ((ctx->devid >> split) << 3) & ~TARGET_PAGE_MASK;
-> +        addr |=3D ((ctx->devid >> split) << 3) & ~qemu_target_page_mask(=
-);
->          if (dma_memory_read(s->target_as, addr, &de, sizeof(de),
->                              MEMTXATTRS_UNSPECIFIED) !=3D MEMTX_OK) {
->              return RISCV_IOMMU_FQ_CAUSE_DDT_LOAD_FAULT;
-> @@ -968,7 +969,7 @@ static int riscv_iommu_ctx_fetch(RISCVIOMMUState *s, =
-RISCVIOMMUContext *ctx)
->      }
+> @@ -625,19 +611,33 @@ static void microchip_icicle_kit_machine_init(Machi=
+neState *machine)
+>                            true, NULL);
+>          kernel_entry =3D boot_info.image_low_addr;
 >
->      /* index into device context entry page */
-> -    addr |=3D (ctx->devid * dc_len) & ~TARGET_PAGE_MASK;
-> +    addr |=3D (ctx->devid * dc_len) & ~qemu_target_page_mask();
->
->      memset(&dc, 0, sizeof(dc));
->      if (dma_memory_read(s->target_as, addr, &dc, dc_len,
-> @@ -1037,7 +1038,7 @@ static int riscv_iommu_ctx_fetch(RISCVIOMMUState *s=
-, RISCVIOMMUContext *ctx)
->           * level. See IOMMU Specification, 2.2. Process-Directory-Table.
->           */
->          const int split =3D depth * 9 + 8;
-> -        addr |=3D ((ctx->process_id >> split) << 3) & ~TARGET_PAGE_MASK;
-> +        addr |=3D ((ctx->process_id >> split) << 3) & ~qemu_target_page_=
-mask();
->          if (dma_memory_read(s->target_as, addr, &de, sizeof(de),
->                              MEMTXATTRS_UNSPECIFIED) !=3D MEMTX_OK) {
->              return RISCV_IOMMU_FQ_CAUSE_PDT_LOAD_FAULT;
-> @@ -1050,7 +1051,7 @@ static int riscv_iommu_ctx_fetch(RISCVIOMMUState *s=
-, RISCVIOMMUContext *ctx)
->      }
->
->      /* Leaf entry in PDT */
-> -    addr |=3D (ctx->process_id << 4) & ~TARGET_PAGE_MASK;
-> +    addr |=3D (ctx->process_id << 4) & ~qemu_target_page_mask();
->      if (dma_memory_read(s->target_as, addr, &dc.ta, sizeof(uint64_t) * 2=
-,
->                          MEMTXATTRS_UNSPECIFIED) !=3D MEMTX_OK) {
->          return RISCV_IOMMU_FQ_CAUSE_PDT_LOAD_FAULT;
-> @@ -1440,7 +1441,7 @@ static int riscv_iommu_translate(RISCVIOMMUState *s=
-, RISCVIOMMUContext *ctx,
->      perm =3D iot ? iot->perm : IOMMU_NONE;
->      if (perm !=3D IOMMU_NONE) {
->          iotlb->translated_addr =3D PPN_PHYS(iot->phys);
-> -        iotlb->addr_mask =3D ~TARGET_PAGE_MASK;
-> +        iotlb->addr_mask =3D ~qemu_target_page_mask();
->          iotlb->perm =3D perm;
->          fault =3D 0;
->          goto done;
-> @@ -1481,7 +1482,7 @@ done:
->                                 RISCV_IOMMU_PREQ_HDR_PID, ctx->process_id=
-);
+> -        /* Compute the fdt load address in dram */
+> -        hwaddr kernel_ram_base =3D memmap[MICROCHIP_PFSOC_DRAM_LO].base;
+> -        hwaddr kernel_ram_size =3D memmap[MICROCHIP_PFSOC_DRAM_LO].size;
+> -
+> -        if (kernel_entry - kernel_ram_base >=3D kernel_ram_size) {
+> -            kernel_ram_base =3D memmap[MICROCHIP_PFSOC_DRAM_HI].base;
+> -            kernel_ram_size =3D mem_high_size;
+> +        if (machine->dtb) {
+> +            int fdt_size;
+> +            machine->fdt =3D load_device_tree(machine->dtb, &fdt_size);
+> +            if (!machine->fdt) {
+> +                error_report("load_device_tree() failed");
+> +                exit(1);
+> +            }
+> +
+> +            /* Compute the FDT load address in DRAM */
+> +            hwaddr kernel_ram_base =3D memmap[MICROCHIP_PFSOC_DRAM_LO].b=
+ase;
+> +            hwaddr kernel_ram_size =3D memmap[MICROCHIP_PFSOC_DRAM_LO].s=
+ize;
+> +
+> +            if (kernel_entry - kernel_ram_base >=3D kernel_ram_size) {
+> +                kernel_ram_base =3D memmap[MICROCHIP_PFSOC_DRAM_HI].base=
+;
+> +                kernel_ram_size =3D mem_high_size;
+> +            }
+> +
+> +            fdt_load_addr =3D riscv_compute_fdt_addr(kernel_ram_base, ke=
+rnel_ram_size,
+> +                                                   machine, &boot_info);
+> +            riscv_load_fdt(fdt_load_addr, machine->fdt);
+> +        } else {
+> +            warn_report_once("The QEMU microchip-icicle-kit machine does=
+ not "
+> +                             "generate a device tree, so no device tree =
+is "
+> +                             "being provided to the guest.");
+> +            fdt_load_addr =3D 0;
 >          }
->          pr.hdr =3D set_field(pr.hdr, RISCV_IOMMU_PREQ_HDR_DID, ctx->devi=
-d);
-> -        pr.payload =3D (iotlb->iova & TARGET_PAGE_MASK) |
-> +        pr.payload =3D (iotlb->iova & qemu_target_page_mask()) |
->                       RISCV_IOMMU_PREQ_PAYLOAD_M;
->          riscv_iommu_pri(s, &pr);
->          return fault;
-> @@ -1683,7 +1684,7 @@ static void riscv_iommu_process_cq_tail(RISCVIOMMUS=
-tate *s)
->                                         RISCV_IOMMU_CMD_IOTINVAL_GSCID);
->              uint32_t pscid =3D get_field(cmd.dword0,
->                                         RISCV_IOMMU_CMD_IOTINVAL_PSCID);
-> -            hwaddr iova =3D (cmd.dword1 << 2) & TARGET_PAGE_MASK;
-> +            hwaddr iova =3D (cmd.dword1 << 2) & qemu_target_page_mask();
 >
->              if (pscv) {
->                  /* illegal command arguments IOTINVAL.GVMA & PSCV =3D=3D=
- 1 */
-> @@ -1715,7 +1716,7 @@ static void riscv_iommu_process_cq_tail(RISCVIOMMUS=
-tate *s)
->                                         RISCV_IOMMU_CMD_IOTINVAL_GSCID);
->              uint32_t pscid =3D get_field(cmd.dword0,
->                                         RISCV_IOMMU_CMD_IOTINVAL_PSCID);
-> -            hwaddr iova =3D (cmd.dword1 << 2) & TARGET_PAGE_MASK;
-> +            hwaddr iova =3D (cmd.dword1 << 2) & qemu_target_page_mask();
->              RISCVIOMMUTransTag transtag;
->
->              if (gv) {
-> @@ -1928,7 +1929,7 @@ static void riscv_iommu_process_dbg(RISCVIOMMUState=
- *s)
->              iova =3D RISCV_IOMMU_TR_RESPONSE_FAULT | (((uint64_t) fault)=
- << 10);
->          } else {
->              iova =3D iotlb.translated_addr & ~iotlb.addr_mask;
-> -            iova >>=3D TARGET_PAGE_BITS;
-> +            iova >>=3D qemu_target_page_bits();
->              iova &=3D RISCV_IOMMU_TR_RESPONSE_PPN;
->
->              /* We do not support superpages (> 4kbs) for now */
+> -        fdt_load_addr =3D riscv_compute_fdt_addr(kernel_ram_base, kernel=
+_ram_size,
+> -                                               machine, &boot_info);
+> -        riscv_load_fdt(fdt_load_addr, machine->fdt);
+> -
+>          /* Load the reset vector */
+>          riscv_setup_rom_reset_vec(machine, &s->soc.u_cpus, firmware_load=
+_addr,
+>                                    memmap[MICROCHIP_PFSOC_ENVM_DATA].base=
+,
 > --
-> 2.47.1
->
+> 2.43.0
 >
 
