@@ -4,85 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B8D7CC282D1
-	for <qemu-riscv@archiver.kernel.org>; Thu,  6 Mar 2025 07:48:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ABD9DC282D1
+	for <qemu-riscv@archiver.kernel.org>; Thu,  6 Mar 2025 13:59:40 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tq5xJ-0002Ve-Gg; Thu, 06 Mar 2025 02:47:45 -0500
+	id 1tqBkd-0007Zb-Ey; Thu, 06 Mar 2025 08:59:03 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tq5xH-0002Si-Ud
- for qemu-riscv@nongnu.org; Thu, 06 Mar 2025 02:47:44 -0500
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tqBkb-0007YL-SV
+ for qemu-riscv@nongnu.org; Thu, 06 Mar 2025 08:59:01 -0500
 Received: from mail-wr1-x436.google.com ([2a00:1450:4864:20::436])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tq5xF-0004jk-U0
- for qemu-riscv@nongnu.org; Thu, 06 Mar 2025 02:47:43 -0500
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tqBkY-0007tH-BF
+ for qemu-riscv@nongnu.org; Thu, 06 Mar 2025 08:59:01 -0500
 Received: by mail-wr1-x436.google.com with SMTP id
- ffacd0b85a97d-390d98ae34dso258245f8f.3
- for <qemu-riscv@nongnu.org>; Wed, 05 Mar 2025 23:47:41 -0800 (PST)
+ ffacd0b85a97d-3912e96c8e8so353584f8f.2
+ for <qemu-riscv@nongnu.org>; Thu, 06 Mar 2025 05:58:57 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1741247260; x=1741852060; darn=nongnu.org;
+ d=linaro.org; s=google; t=1741269536; x=1741874336; darn=nongnu.org;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=ERJcXhxy1/ObbXn5t0J/hMiD4CcdF5xsrlCPUqDW6o8=;
- b=w88TpD/bNWvCISEJxRRad26frzU+pA5jDrwSIvLifkRIK+Z/sy0MhtjShaHIPRQIOd
- cMHvUjDR7VRLBRQLtf8uMviL2bHgbLi6/7rWipgrZjCEL0YUiKfwiB5MvZ+FMPIKRojj
- SWhjr/0tyvGsgw5627OpM9oozCjsXpVyK0sWYuqvNZvnqNWnX/J0UlMMDL1B2rFF5xnk
- xxc2GXBV5nuz1AxZZmQgnsPemCX1tOIIAS3ic0Sr81bDKM2rmqsuZMEjDHZdhVHvo7/z
- XpQQfnyw3PJ7AYY27m3ZvIrNhPFi+tIP/Mg8hUc2JCxOIGKSSiD5gdTl5b07v9RvsSZH
- +HxQ==
+ bh=nCk7xfTFWFGROlrsmv5jMFrY4lgry6lErJKkNV3UDvY=;
+ b=IAzFldW2NJkY06gM2pYg1eiqGButGn1HWaYnFE+UGCkAcrUS3VUCVJd8jjLhfer9Q7
+ lM4UtIZqORPxkXb4GcOoTk2GUU3XqiwQcklLPG0UeyB42FBLjyvikem2IMCRe00j5ArP
+ gklM2WB9Zkm7JNr2LQYFAv3oNkyzFAMAJdwkyWmLADdOMPCwG5n5o/5OJiOJM+yFebZD
+ FWn2q4Q2F/hEIwxkl50VUuGjwLABDjLG5DZMQbNGhdy9P0EIlTIpK2XYaBZ5yCF9mOOg
+ I2/+qs+Se2CHqhmqg3YK+q6UjM8cCJK6JV5smC/rPnmGnQSiC7X5mgZJ5wm5gFpVpaRI
+ 96Mw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741247260; x=1741852060;
+ d=1e100.net; s=20230601; t=1741269536; x=1741874336;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=ERJcXhxy1/ObbXn5t0J/hMiD4CcdF5xsrlCPUqDW6o8=;
- b=POkkdd+t+Dw+72F9o7Cmbi+fK9bAJVTIWoJCUvkR/nqCLJ0YXnV7lXV91YDhgcKEBJ
- pn17xKil5TAU1AhA9ahiu7IA741yT3Ur7+wI3ktUs4/2NyaB4l07YH6H1KWbG6CprILb
- 7JcPa/65Jv0CykinazXIpncLUa+4ds8UjbvnqeVfIhYdbAIZ8K8yJSoavMyVzlq4h/ip
- ANGWNjN1zl0iN8s5aP0fMKklQqqp5+FHAYejCPTAvKO6gxCdSZKmtYYLzVn2IIFSMLjP
- lbftlq9h/dF7b6rKlMVUG6N+SiTIdKXcUYkYCn4fv9sfJTSrSFTDnJ9og2BmkZ024qK7
- qCpg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWEGOxy6WsMg6eyLmlFdXnLiF/r02E5xoQkhv0eZ0Bk5Ftn+ZDnNZi06++5EUT/sNZU949uOXemKpDH@nongnu.org
-X-Gm-Message-State: AOJu0Yxj8Th1NPwokkwfqsGgILvudA+KZhFVZxWNj3aNWSqi/GfPldei
- 8YP0NX730X4PPILCuOOqkjPgYZEVS4+9oV5GX28XZazvP5NGzLrgcEFSTTcq4D0=
-X-Gm-Gg: ASbGncuXGzrcCmyEipasdHVdLbq2XGyHh+OX5DzqHskymEJbXet6qZAHL0ZajSzWPC5
- F0sWWBkq5GPJnQHA2UdmlQO255PFSc7g0YtyPBxqcNOCBm7H9IQpP1MctWR2y1N86cCkvjlaN4S
- C3EXnXPW2bDB9xS1LnGtTemazA/K/3BFLgTZLAFAzo7nL5fy3aalYU4yePyZ+TYCOVUmqp4NCM5
- SyWPFZx3ZWPFhJoClVuR/SrcmWTvxAa69Wy4Gmnng5esgiYANF8LlHf3/0YIFitVg7W5O3B/hBl
- fGs8/PNy6mHYjcsCTxxXNaeSCE5nX8XC0+0HUqTRu4bWGnBZRLfUt1ud9D+zF7kWv8UFVC1J9XX
- ZWU5IJxR7VKk3
-X-Google-Smtp-Source: AGHT+IGIe+zZQ09eXOQ7cxk7OVLTCMtyWfl7WSGr4AFkzqYqJIszaNMMGZXNqU/HPgH+fAVaJnVtXw==
-X-Received: by 2002:a05:6000:154c:b0:390:e7c1:59c0 with SMTP id
- ffacd0b85a97d-3911f75a94dmr4992264f8f.26.1741247259977; 
- Wed, 05 Mar 2025 23:47:39 -0800 (PST)
+ bh=nCk7xfTFWFGROlrsmv5jMFrY4lgry6lErJKkNV3UDvY=;
+ b=q5IWAx/gKe+HXS5aVKHnbHlO/pYmYyrdqOfK6Qjjv6oh2NUUvBMR6r+W792l804QtS
+ ZJ8GfucidyVFcGy0kVHkDqnVqS7bApw64h3YUNhx26G9ui4riPXaKZbuILzR/dNK3rDW
+ cK4ZCZXD1RLYdrdETxtL2K2taR6jLrEZ6F7A9XETw1LJvMNIHRo43pA4WpqvuTwvd6Dx
+ U161e1HU7NOMIdtlEVBEZ+HSwDEGmFOhigTOZQuvc1wUJ30UBdutUxz4ssXVukSswtpt
+ i7+YZ9Wf+EP6KHTgRQps7ZO3KPmPvu1LFjzNZc7HCa8dBpLBkE3Sg2W2/pGlATGyZ4Ka
+ scJg==
+X-Gm-Message-State: AOJu0YyATajjJ+x4KpaY7s3+VJGVWAy8bpTR0guU68PYx7SW3tNuXHuj
+ PFsOp2XOk7YjdV8OVKjza3y0j3CGO4RMki9oAluycInRw1wQkPildHJ3Bjo0Cbg=
+X-Gm-Gg: ASbGncsZkmnhpUSk33rh3TJjsZGf3izEzN0zMLcQQ0ApJMf6cjzdE/BcV+J5KArLPzq
+ Hyz/zbrvw8y4JTzc0gvOkaFT7r9wM0wNgD450I/+J7AmACAeEkktnbEzseL8uHhghtH5SGBHrzY
+ riSyzbJIYwFkLkvF2V6+gxcI+FJ1GBdj+Zadm/2DSPPJUCj3JwqKAQS4vVBZeVdAYxb40NDkR7f
+ sfjeFnagfvDd6PecfBHziYg9I/p9frSyKRgO+lOLGKWFtrdWAawJUUM9EmAEmvEHzZsvc9SwLMU
+ gjgiIAa2q4inUoQuX3TWQSyLGBAWMV2pimjUT00FJ+UDeh1VGPYunj7/lovdy5nK20+OCamx6k+
+ reoLeNHqdiWjR
+X-Google-Smtp-Source: AGHT+IFB1AX8mjv9QI/Wqgw81OBthHGrGT6Vi4R1b+3ml4kSkyvQeK5lsUyn9VR6GCztvJJTNQhqHw==
+X-Received: by 2002:a05:6000:4022:b0:38f:5057:5810 with SMTP id
+ ffacd0b85a97d-3911f7567c5mr5613840f8f.25.1741269536557; 
+ Thu, 06 Mar 2025 05:58:56 -0800 (PST)
 Received: from [192.168.69.199] (88-187-86-199.subs.proxad.net.
  [88.187.86.199]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-43bd42c5880sm40810155e9.19.2025.03.05.23.47.38
+ ffacd0b85a97d-3912bfba8a9sm2149631f8f.9.2025.03.06.05.58.55
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 05 Mar 2025 23:47:39 -0800 (PST)
-Message-ID: <34ea7324-2df6-4c97-97d3-b37463a3ff7b@linaro.org>
-Date: Thu, 6 Mar 2025 08:47:38 +0100
+ Thu, 06 Mar 2025 05:58:55 -0800 (PST)
+Message-ID: <8a185083-0459-4108-bd57-4bae75d871c6@linaro.org>
+Date: Thu, 6 Mar 2025 14:58:54 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/7] target/riscv: Move target-agnostic definitions to
- 'cpu-qom.h'
-To: Paolo Bonzini <pbonzini@redhat.com>, qemu-devel@nongnu.org
-Cc: Palmer Dabbelt <palmer@dabbelt.com>, qemu-riscv@nongnu.org,
- Alistair Francis <alistair.francis@wdc.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Bin Meng <bmeng.cn@gmail.com>, Weiwei Li <liwei1518@gmail.com>,
- Sunil V L <sunilvl@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
-References: <20250206181827.41557-1-philmd@linaro.org>
- <20250206181827.41557-3-philmd@linaro.org>
- <1faf3550-909d-47ba-89e5-c8955a03784e@redhat.com>
+Subject: Re: [PATCH v2 00/10] disas: Have CPUClass::disas_set_info() callback
+ set the endianness
+To: qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, qemu-arm@nongnu.org, Thomas Huth
+ <thuth@redhat.com>, qemu-s390x@nongnu.org,
+ Richard Henderson <richard.henderson@linaro.org>, qemu-ppc@nongnu.org
+References: <20250210212931.62401-1-philmd@linaro.org>
 Content-Language: en-US
 From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-In-Reply-To: <1faf3550-909d-47ba-89e5-c8955a03784e@redhat.com>
+In-Reply-To: <20250210212931.62401-1-philmd@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 Received-SPF: pass client-ip=2a00:1450:4864:20::436;
@@ -93,7 +86,7 @@ X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -109,63 +102,21 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 9/2/25 08:34, Paolo Bonzini wrote:
-> On 2/6/25 19:18, Philippe Mathieu-Daudé wrote:
->> "cpu.h" is target-specific. Definitions which can be used
->> by hw/ code when building QOM blocks can be in "cpu-qom.h",
->> which is target-agnostic.
->>
->> Move the MISA bits (removing the pointless target_ulong cast)
->> and the IRQ index definitions.
-> 
-> This seems wrong.  Why not move from cpu.h to cpu_bits.h, and include that?
+On 10/2/25 22:29, Philippe Mathieu-Daudé wrote:
 
-Because of ...
+> Philippe Mathieu-Daudé (10):
+>    target: Set disassemble_info::endian value for little-endian targets
+>    target: Set disassemble_info::endian value for big-endian targets
+>    target/arm: Set disassemble_info::endian value in disas_set_info()
+>    target/microblaze: Set disassemble_info::endian value in
+>      disas_set_info
+>    target/mips: Set disassemble_info::endian value in disas_set_info()
+>    target/ppc: Set disassemble_info::endian value in disas_set_info()
+>    target/riscv: Set disassemble_info::endian value in disas_set_info()
+>    target/sh4: Set disassemble_info::endian value in disas_set_info()
+>    target/xtensa: Set disassemble_info::endian value in disas_set_info()
+>    disas: Remove target_words_bigendian() call in
+>      initialize_debug_target()
 
-> 
-> Paolo
-> 
->> Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
->> ---
->>   target/riscv/cpu-qom.h  | 40 ++++++++++++++++++++++++++++++++++++++++
->>   target/riscv/cpu.h      | 24 ------------------------
->>   target/riscv/cpu_bits.h | 15 ---------------
->>   3 files changed, 40 insertions(+), 39 deletions(-)
-
-
->> diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
->> index f97c48a3943..80701bc77fe 100644
->> --- a/target/riscv/cpu_bits.h
->> +++ b/target/riscv/cpu_bits.h
->> @@ -720,21 +720,6 @@ typedef enum RISCVException {
->>   #define RISCV_EXCP_INT_FLAG                0x80000000
->>   #define RISCV_EXCP_INT_MASK                0x7fffffff
->> -/* Interrupt causes */
->> -#define IRQ_U_SOFT                         0
->> -#define IRQ_S_SOFT                         1
->> -#define IRQ_VS_SOFT                        2
->> -#define IRQ_M_SOFT                         3
->> -#define IRQ_U_TIMER                        4
->> -#define IRQ_S_TIMER                        5
->> -#define IRQ_VS_TIMER                       6
->> -#define IRQ_M_TIMER                        7
->> -#define IRQ_U_EXT                          8
->> -#define IRQ_S_EXT                          9
->> -#define IRQ_VS_EXT                         10
->> -#define IRQ_M_EXT                          11
->> -#define IRQ_S_GEXT                         12
->> -#define IRQ_PMU_OVF                        13
->>   #define IRQ_LOCAL_MAX                      64
->>   /* -1 is due to bit zero of hgeip and hgeie being ROZ. */
->>   #define IRQ_LOCAL_GUEST_MAX                (TARGET_LONG_BITS - 1)
-
-... this TARGET_LONG_BITS use in cpu_bits.h.
-
-and:
-
-target/riscv/cpu_bits.h:1070:44: error: attempt to use a poisoned identifier
-  1070 | #define CPU_INTERRUPT_RNMI                 CPU_INTERRUPT_TGT_EXT_0
-       |                                            ^
-
-But I got your idea and will only move these 2 to "cpu.h".
+Series queued with rth's comments addressed, thanks!
 
