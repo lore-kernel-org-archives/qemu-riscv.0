@@ -4,86 +4,96 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 75B00C19F32
-	for <qemu-riscv@archiver.kernel.org>; Fri,  7 Mar 2025 12:46:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BCD87C19F32
+	for <qemu-riscv@archiver.kernel.org>; Fri,  7 Mar 2025 20:40:48 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tqX62-00012Z-VX; Fri, 07 Mar 2025 07:46:35 -0500
+	id 1tqeUS-0004MZ-Vz; Fri, 07 Mar 2025 15:40:17 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1tqX5f-0000pY-FR
- for qemu-riscv@nongnu.org; Fri, 07 Mar 2025 07:46:17 -0500
-Received: from mail-pl1-x632.google.com ([2607:f8b0:4864:20::632])
+ (Exim 4.90_1) (envelope-from <jason.chien@sifive.com>)
+ id 1tqeUS-0004M3-3Z
+ for qemu-riscv@nongnu.org; Fri, 07 Mar 2025 15:40:16 -0500
+Received: from mail-pj1-x1034.google.com ([2607:f8b0:4864:20::1034])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1tqX5d-0007EO-Du
- for qemu-riscv@nongnu.org; Fri, 07 Mar 2025 07:46:11 -0500
-Received: by mail-pl1-x632.google.com with SMTP id
- d9443c01a7336-22185cddbffso55022295ad.1
- for <qemu-riscv@nongnu.org>; Fri, 07 Mar 2025 04:46:08 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <jason.chien@sifive.com>)
+ id 1tqeUM-0001tK-QC
+ for qemu-riscv@nongnu.org; Fri, 07 Mar 2025 15:40:15 -0500
+Received: by mail-pj1-x1034.google.com with SMTP id
+ 98e67ed59e1d1-2feae794508so3697149a91.0
+ for <qemu-riscv@nongnu.org>; Fri, 07 Mar 2025 12:40:09 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1741351568; x=1741956368; darn=nongnu.org;
+ d=sifive.com; s=google; t=1741380008; x=1741984808; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=Zn5zdOLWrlPYSatPXhjUavXi3a/YRl3Hwq7GCOD2Vmg=;
- b=RoQ4a5MuMzlZQcexTDq0DAphvQSf93ADBA3h5wHMqkXC/aj9sIQBdl2Xp+MiA8Ziqv
- qeWsH0KRnhMblE6d3ysaPwrtwDnRtjB+VY6re1WbjbkKQW6NtAOD9N2Ru8b64yWRBJ8G
- +6T2zgIWTbQNARY2eV2B5sO09uPXaBeCbSjvPnvOgWYqax8tSJ8LfTljGycJTvsXZZfY
- ecexO0VugaiVDlg66QRqVQJvAb3F5Gam4b3Rsx+9+yJURIi0FU6gkxKuOsT0Zdv/6WHT
- i/Ibtr3XDq95LPLhlhUiBBkabeDOREfyc5zvHD9VfSgb0IZG0HRcb5uOGio6oUCFUsoV
- NBPQ==
+ bh=dppJGFKe0O8FEfkLqUZJx0Vx/phQ/obvZ/lkzgf8YXE=;
+ b=VxVV8h0NemvJa/e5VP8rK1NQBI1TCdw2xhx71Azvzq7+uDbpBKrRwgGCN2OxNmLFGy
+ xS3ghE3xHdw/mjGObf4EZztQVsrZoavynYIfIFZ4E3TRBXYjYgxVSvzf5imx354YwxwL
+ D6x5RagxFjky8+jbqhjtnwdVbgLkYUHyOS4XarM8Fj5z17Ra2Exfmxq2+8HxD1Ck+kZr
+ JjeLkHWdx9bdRI0/4JDXqPc+L5RP9Uo2gVQNl/yszj/Hv36eZQ8BYZWsqtmYxfydxE7K
+ rizOExCUR7wr+2QjSnlG0s20pfg0MrnD5Fy6LvPUVYnTi+t0U+1Fw8mRZsoCcXnEdpkI
+ TgHg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741351568; x=1741956368;
+ d=1e100.net; s=20230601; t=1741380008; x=1741984808;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=Zn5zdOLWrlPYSatPXhjUavXi3a/YRl3Hwq7GCOD2Vmg=;
- b=qgo/yEU89NK4g/0UTx7Sv4ND92uxO/19Z1TRcyf/zvcUHlmAufSB5hMR98k8UvGrhQ
- VomMb28Tp21DAnL46ocgQ7tFnaam6UKyxO4LihTgna6TimK86sXr2hOGWMk3uc01iTL3
- Q3enegfaY+Kh8uyieWP5lz20CALcu0A9N/CS5i1Pm9wbHGzCiB7RVhdqXH/lFSPukZGc
- cdL0J5fmCDAO/+I77yVHzGuUOaOSwYo7xWl/aTE2Qe3PlnVwA/0sOmpxXOsJ8yAQ7wCs
- xjsl1/qoukj5/BVIrWiWYLd9DAvvkKXZV1s4FonNMVKDJE2zqYaATEvpNnNeDPMr8bSH
- h/iA==
-X-Gm-Message-State: AOJu0YzEA7EWswjtAeLn1/SGyeEQaMJ6iAU+5/p6LyiUG6g3ZpGJ5RwQ
- XZSUBrq2IFMFR+AyTc50F6LbyTv8SyG8pDWrWZnBuFLpii3RBVb9Db98bP8MF/k=
-X-Gm-Gg: ASbGncsQ0lH2I5P3iccMT56/An+hjwGPipjJRrfpSSrxavaS5jfM1jU5NQavl4+xOAM
- Vm95ZLKkmHP8rzYKuFqrifOIKF3OWq5/W60ZZVCNTwgssimfTBljRW9UWxEGwjX3n1b3bbdXcsW
- mkVrBThEsiRlyccNSlJnRtGuHiRzFJD/QqwAQYDJgVJDFHwwiIcdFFCWQ0V55tRoRWDoXx6SFWO
- e4LyeoBL4TUzVfNADmWrR4Ie/kAHOtf8Fy5f9gv/1tx6miffrj/WJwlf3gPDuxvV5UbW5ZfVg8I
- dJTOpl5ojva3xNIX7jULiypihqZ6FOMnvmjyZlrOAXOnY2PI0X0TOxx2P5vjGyPiO5mS/LL1
-X-Google-Smtp-Source: AGHT+IFVmg8qFh8I9aVtKBGgeKF6O5b5bJmIaCvp6KJncWlKmNT3DDnHFcWCdLcdayXfHq3/Rwfjxw==
-X-Received: by 2002:a05:6a21:6d96:b0:1f3:20be:c18a with SMTP id
- adf61e73a8af0-1f544b185aamr4721978637.10.1741351567806; 
- Fri, 07 Mar 2025 04:46:07 -0800 (PST)
-Received: from grind.dc1.ventanamicro.com ([177.170.118.40])
+ bh=dppJGFKe0O8FEfkLqUZJx0Vx/phQ/obvZ/lkzgf8YXE=;
+ b=I0jLfzs4JmmRFmT3g0fgGc8l9bsOTRrdlE8E8dBY6yZI28UGQUzCK+Kjwn2XUA9k/1
+ S7cl6NtC3rN2atAah/HxIVQnL49wdDHK2+GhJjpWhDckSS5nW07C4jJNyqCZeKJdtbK2
+ 4W20FJ+zdFGV+NCGbhp2KezdzoGQqNZxKkApJCXioPWUmC0Midig+d4QZcy1ekRUJrV+
+ TjYFLzoFhIFT1Zrhwo6/J+5WDbnLh7Rg8s+nGIVpMYlHIvY5Hc5SZn4kjy4PH+0WUNAN
+ Es/MHqKLLuOBirHR5sezJwPNcGcH+gqWvPdndOHRhjWyR2Oiq8+wJ3oEcmKFyg3SEtb2
+ F9Tg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCU08TBqNOXi5LvAP8pUoTsBCPhF7HjkidD5itYf6EiTqJxpOtChYd/H644tT+wTV/IMljWQc9pXvQ80@nongnu.org
+X-Gm-Message-State: AOJu0YzINFVQgghpBx0cqptWnXE0/T+zl5BSLlUXZCAJYh/OaKtSt98Q
+ o0QO5ahsSX+SKMwUeu7+/zfLIIuj6anZWiG7mky8v+6VVyXQsb1NB4MxP2Nq164=
+X-Gm-Gg: ASbGncus7dqAETG6GgJwLCgewh8bML8fvXUBYEfYNbfVOqfYkoNC2QMzgtc5KT3m6tV
+ dUuv0nqwyFpCvJXjhYB2ggeDHJzSl/8dFiABYcsVJUq9TDxHSaWRhaaTAZlQWIwN8kuiUGOxWVP
+ kK4FpsKyhTamOoKWJ510FyrfW/pn8rLhCbuP0ASmaAmyjqkkUE91xSRrqedHmFTjGjefBqK2jE6
+ VhUF8NUbhO2FK9ODsw6KQRQSVIptjbH/1BaDzQ73jJQqcVkUL7229M1kxponF4rycEhVjcFh7d1
+ +UeY3HpRqiNiIonxcR0KF2zMsYOfqCnYWTW5xGaWQ85RnPl0CYFqPfF9E79ACaALN7wHWmGR
+X-Google-Smtp-Source: AGHT+IG1Y4/xz6hk0YT4x0gmAAUF+JK6ZT9SziZSR1qtLRcv8OhlbExiO8LM/5kenrUZGBovoHmx2Q==
+X-Received: by 2002:a17:90b:1dce:b0:2ff:62f3:5b19 with SMTP id
+ 98e67ed59e1d1-2ff7ce6f0bcmr7494655a91.13.1741380008547; 
+ Fri, 07 Mar 2025 12:40:08 -0800 (PST)
+Received: from hsinchu16.internal.sifive.com ([210.176.154.34])
  by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-7369844cfeesm3123588b3a.77.2025.03.07.04.46.05
+ 98e67ed59e1d1-2ff5aa3d3ccsm3270900a91.0.2025.03.07.12.40.05
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 07 Mar 2025 04:46:07 -0800 (PST)
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-To: qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, liwei1518@gmail.com,
- zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
- peter.maydell@linaro.org,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Subject: [PATCH] target/riscv/csr.c: fix OVERFLOW_BEFORE_WIDEN in
- rmw_sctrdepth()
-Date: Fri,  7 Mar 2025 09:46:02 -0300
-Message-ID: <20250307124602.1905754-1-dbarboza@ventanamicro.com>
-X-Mailer: git-send-email 2.48.1
+ Fri, 07 Mar 2025 12:40:08 -0800 (PST)
+From: Jason Chien <jason.chien@sifive.com>
+To: qemu-devel@nongnu.org,
+	qemu-riscv@nongnu.org
+Cc: Peter Maydell <peter.maydell@linaro.org>,
+ Andrey Smirnov <andrew.smirnov@gmail.com>,
+ "Michael S. Tsirkin" <mst@redhat.com>,
+ Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Weiwei Li <liwei1518@gmail.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ qemu-arm@nongnu.org (open list:MCIMX7D SABRE / i...),
+ Jason Chien <jason.chien@sifive.com>
+Subject: [PATCH 0/4] Integrate IOMMUs with PCI hosts that have ATUs
+Date: Sat,  8 Mar 2025 04:39:33 +0800
+Message-ID: <20250307203952.13871-1-jason.chien@sifive.com>
+X-Mailer: git-send-email 2.43.2
 MIME-Version: 1.0
+Content-Type: text/plain; charset=y
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::632;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pl1-x632.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1034;
+ envelope-from=jason.chien@sifive.com; helo=mail-pj1-x1034.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ T_SPF_TEMPERROR=0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -99,38 +109,32 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Coverity found the following issue:
+The struct PCIIOMMUOps is designed for use by an IOMMU, but many PCI hosts
+also utilize it to implement their ATUs, preventing coexistence with IOMMUs.
+Overwriting a PCI host’s PCIIOMMUOps disrupts its translation rules.
 
-  >>>     CID 1593156:  Integer handling issues  (OVERFLOW_BEFORE_WIDEN)
-  >>>     Potentially overflowing expression "0x10 << depth" with type
-  "int" (32 bits, signed) is evaluated using 32-bit arithmetic, and then
-  used in a context that expects an expression of type "uint64_t" (64
-  bits, unsigned).
-  4299             depth = 16 << depth;
+This patch series introduces a mechanism to route inbound transactions from
+PCI hosts to the IOMMU, enabling proper integration.
 
-Fix it by forcing the expression to be 64 bits wide by using '16ULL'.
+The final patch depends on another patch series:
+https://lists.nongnu.org/archive/html/qemu-riscv/2025-03/msg00003.html
 
-Resolves: Coverity CID 1593156
-Fixes: c48bd18eae ("target/riscv: Add support for Control Transfer Records extension CSRs.")
-Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
----
- target/riscv/csr.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Jason Chien (4):
+  include/hw/pci: Introduce a callback to set the downstream mr of PCI
+    hosts
+  hw/pci: Introduce an API to set PCI host downstream mr for IOMMU
+    integration
+  hw/pci-host/designware: Implement PCIIOMMUOps.set_downstream_mr()
+  hw/riscv/riscv-iommu: Connect the IOMMU with PCI hosts that have ATUs
 
-diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-index 0ebcca4597..e832ff3ca9 100644
---- a/target/riscv/csr.c
-+++ b/target/riscv/csr.c
-@@ -4296,7 +4296,7 @@ static RISCVException rmw_sctrdepth(CPURISCVState *env, int csrno,
-         }
- 
-         /* Update sctrstatus.WRPTR with a legal value */
--        depth = 16 << depth;
-+        depth = 16ULL << depth;
-         env->sctrstatus =
-             env->sctrstatus & (~SCTRSTATUS_WRPTR_MASK | (depth - 1));
-     }
+ hw/pci-host/designware.c         | 18 +++++++++++++++---
+ hw/pci/pci.c                     |  8 ++++++++
+ hw/riscv/riscv-iommu.c           | 15 ++++++++++-----
+ include/hw/pci-host/designware.h |  2 ++
+ include/hw/pci/pci.h             | 21 +++++++++++++++++++++
+ 5 files changed, 56 insertions(+), 8 deletions(-)
+
 -- 
-2.48.1
+2.43.2
 
 
