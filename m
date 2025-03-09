@@ -4,99 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0B4E7C28B28
-	for <qemu-riscv@archiver.kernel.org>; Fri,  7 Mar 2025 20:41:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6BF7FC28B28
+	for <qemu-riscv@archiver.kernel.org>; Sun,  9 Mar 2025 22:32:16 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tqeV6-0004dB-4N; Fri, 07 Mar 2025 15:40:56 -0500
+	id 1trPBp-00071I-Le; Sun, 09 Mar 2025 18:32:10 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <jason.chien@sifive.com>)
- id 1tqeUh-0004Qz-MZ
- for qemu-riscv@nongnu.org; Fri, 07 Mar 2025 15:40:31 -0500
-Received: from mail-pl1-x635.google.com ([2607:f8b0:4864:20::635])
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1trPBn-0006x5-UB; Sun, 09 Mar 2025 18:32:07 -0400
+Received: from mail-ua1-x936.google.com ([2607:f8b0:4864:20::936])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <jason.chien@sifive.com>)
- id 1tqeUd-0001w0-7g
- for qemu-riscv@nongnu.org; Fri, 07 Mar 2025 15:40:31 -0500
-Received: by mail-pl1-x635.google.com with SMTP id
- d9443c01a7336-223fd89d036so48534835ad.1
- for <qemu-riscv@nongnu.org>; Fri, 07 Mar 2025 12:40:26 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1trPBl-00072d-3Z; Sun, 09 Mar 2025 18:32:07 -0400
+Received: by mail-ua1-x936.google.com with SMTP id
+ a1e0cc1a2514c-86d6ac4d5a9so262241.1; 
+ Sun, 09 Mar 2025 15:32:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1741380025; x=1741984825; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ d=gmail.com; s=20230601; t=1741559522; x=1742164322; darn=nongnu.org;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=iEe0rHIOQ6h9LxkKOZ8XIB5DeqYtbj0ptb/VSdm22+8=;
- b=kxG4EkqHzhmHO7OPZul21m9dQpQDu1e6uEJQdr0o53cjRZAT3H+sMrLyxHsonLzfJF
- 8c0jxadHgpstBFnquSfBkiAMNUZ1qbc+maEu4XFzdKHjVHxHE6IB68AEyMf1SiwGQAwE
- oKzbjl2XwH3fP+7a7QpjVGPjGXJ5iWOk3kj/gZsQWhBYZz29hpDwc0HJxNfdLuk+4cgF
- R6mkLQySUbxzEzW1Baqueyck8oOFa2QsgKGl9FYGHYvZiqdTMLW/0WokDR9Hnx+Dt8ZV
- XDRej60c765/MR4VCejCRcbzO9Id4Jlkfsua3yiEP80z3FL1D+Ej3Ij4UTo1NL2Pr0VF
- L5Ag==
+ bh=uDes8Fe0NbgLcGeeAJL0eKKPjL87NZq5FcvIzWHjqoE=;
+ b=fJ7c8bNgtIl4KHurj8cEmRDtke36kB7qls71QUKM7D9iMPcUS/7n9VDGWkoj8jdc/K
+ sm3IjmUk4L3gT4JdcVy2B+JXru+Qkwzx78cOZ4v96Fid0uR4T2QdnONxbLdxVDXS5o4W
+ 2V5FCdaD5CyWxeLsYbQX8vgUdWgLoHSnBjAK4xdDPVeRW7frARr8DnPyOKpO+RtpBk7G
+ aZ47qWY23B0q9tHQ5P2qVOEC6Xte9I5F3Q/UJSDFC4S8uCRVehLv9Up5y0kUKi71WJit
+ B/RC4JKpA7LnM69lVJVGg6Hw6oPVvupiuzApMHPDNOPS1pHlKGeXNrwmZPhWROC145Wx
+ DPFA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741380025; x=1741984825;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ d=1e100.net; s=20230601; t=1741559522; x=1742164322;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=iEe0rHIOQ6h9LxkKOZ8XIB5DeqYtbj0ptb/VSdm22+8=;
- b=WhJDUoHndqN4A9lpThMCN77WHSWep2bKVdl6v1bkoWdIsgtkVjautJ5TYdD8eLdXHr
- ZbnhLXx9a8IDIV5zFMcVGhX6p5XN0D9IddO58Rk+n8L9xjslHKvol1GhI/IPuz/0weYn
- 0KStiBpv4DkpmlXhqISI1YI3FsnLyBTWYSIcbLVmM8zxRvYCGaCFbnRnfyu+1Y6dajAX
- ZEsXxSjx7CSYY0P/N6g+fLENi2YM3Ih6PZ/dwEpHJv+0ieiwEB99CcbMQYuTIptcbNrl
- E9I65SSAhYZlOU065hshNBXPhY3mXv/nE4MqvGygbm8CjapWhcen+WBUktWlE1bDtCwi
- ss6g==
+ bh=uDes8Fe0NbgLcGeeAJL0eKKPjL87NZq5FcvIzWHjqoE=;
+ b=VQdh9vGMglugtgd/OajyvrjAWCjkt5CxJ5zTVeF/uWDSka+vkMFSAaTJ2hegHxiaBU
+ mE7lmRn3txhOItiJpLiSJW+iPLjelQHAH6y1bJa+F9C4ss4kmX2s9SXeQ/VukIgPp/bN
+ crv21BBHFMxv3rQuI0qslTWGxlhgu3aD7x3gHFhaAxGMxeMsT8OrhMZtOWM2JuSafqJU
+ 5OXPUiPis2Rq0CLPbyZTG6DXIoXuk9NP6JY8x0rPT5cIGXrGIFhGLHqWVjCelkEsLqlt
+ 4i9sEjt5VG5jOn2BECAxYvu8wc5LebD/CsJw+GsPBh3dcEjJUppp5J5FKPvlvWKry53N
+ SR6w==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWKEYkyyqfgJI4kSirrw27Fk/MeunAd0+hMCbxDIvtUTCkmX8C+7eOx355tW5EjTeZUnLsqlbefsm1+@nongnu.org
-X-Gm-Message-State: AOJu0Yx479kOvxg0A/iLAN3w7Q1c6U9MernVvsy/2WtST0NqLBwN80L+
- XKLXyBCJ456/nC0JEWHhzGFRFgLltRZ5KpSfiE5KSG7KkSLMfHaZSD6D+Zok0EA=
-X-Gm-Gg: ASbGncttZYsqlkj4YFyBkWhtx14F/1D/b+4PWnF2Yl87Xx4pfb6iWBb1v8HYfCb1N6b
- eYlEy7llGxQOVKPodZCGDahn8LleWKt9ohaU0Wl9i7PbLLEhEqBefQdfRymksUh64d6v+zaW2s/
- pyRetyR6KNn9N3Ih/Dmw4YWvAdpQFRj2UzhiFtiuIsgE8tV63Oz10Jyvsxr6SMHzh2NeeUCmZyR
- wzaxCnAfcci/vHYaoZwV2smmTuLj3h5dJ0NEGOGevCAYVMB9M7sep2ZAHsQOrMrIc9Sjpi6J7ia
- bOCUvxxOupQpKdSk/0Yl0dpL/9BEefsajOqjk58OW9fXwKOLT0g6BvPu1NIEwxZcM6mV4xAE
-X-Google-Smtp-Source: AGHT+IG65DhcZ6NOEcgAJVNYS1w8Ue3XFFy1z6qQdUW9LusIsKYog4R+2hqXfrBlL8f1odQoXupXyg==
-X-Received: by 2002:a17:902:e5d2:b0:224:160d:3f5b with SMTP id
- d9443c01a7336-22428c1169cmr79400585ad.49.1741380025111; 
- Fri, 07 Mar 2025 12:40:25 -0800 (PST)
-Received: from hsinchu16.internal.sifive.com ([210.176.154.34])
- by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-2ff5aa3d3ccsm3270900a91.0.2025.03.07.12.40.22
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 07 Mar 2025 12:40:24 -0800 (PST)
-From: Jason Chien <jason.chien@sifive.com>
-To: qemu-devel@nongnu.org,
-	qemu-riscv@nongnu.org
-Cc: Peter Maydell <peter.maydell@linaro.org>,
- Andrey Smirnov <andrew.smirnov@gmail.com>,
- "Michael S. Tsirkin" <mst@redhat.com>,
- Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Weiwei Li <liwei1518@gmail.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- qemu-arm@nongnu.org (open list:MCIMX7D SABRE / i...),
- Jason Chien <jason.chien@sifive.com>
-Subject: [PATCH 2/4] hw/pci: Introduce an API to set PCI host downstream mr
- for IOMMU integration
-Date: Sat,  8 Mar 2025 04:39:35 +0800
-Message-ID: <20250307203952.13871-3-jason.chien@sifive.com>
-X-Mailer: git-send-email 2.43.2
-In-Reply-To: <20250307203952.13871-1-jason.chien@sifive.com>
-References: <20250307203952.13871-1-jason.chien@sifive.com>
+ AJvYcCVytCqsdPi/mPtbEvotnLEVR7V/1nUxGK4rWG2dtXu2D3J9n7R7Zy1+g7xC4G0KcKe7a37RtDie9UmPCQ==@nongnu.org,
+ AJvYcCW0UXoZmXc85ixaR8RgIwNTwYxkJzWn6D6o/f3M80dw1/F0DSmi1N6mokt2ySrP9q1WoGQKoRuBOyY0@nongnu.org
+X-Gm-Message-State: AOJu0Yyxo6Sb+6xeGHMU3aNdKgn/5IeH73n+gswi4Y9O/7O9XWXo3U97
+ ORCbazZSaOw72dYA6Xg1CWeF13+C4sqV6fo3C3dNxRFraTK7VK8vexsDoEQkqubT72APuv1stdx
+ +5GU7t3AjLRl6HdwC6wp6tMM2KOk=
+X-Gm-Gg: ASbGnctsQLpoD0rmsFEfuPOtxJqisXKqZiL913MpsASOK4kms+NYFDmHQhAOYhWvzOb
+ vvbxP/HqbDvdPcHK2M5xXeKCYAC8GxJumb5wbwDrNOVnBv14Zg2R9OfiKRCRlf8effPU9A1xK16
+ DuVD5Vdp6OgvBtI426z4Qwc6RZDz4cZj3rExDD4UC9Odwsg8WI/z30ZwM=
+X-Google-Smtp-Source: AGHT+IG66IhyuuMRVMNZAAUwZJLICdlbrPeZscQNGiWX1Kfg9a9Ygtg1sBlZXq7AYBkA5tlxhE4q/HXdIqYQrMVDrtE=
+X-Received: by 2002:a05:6102:1613:b0:4af:c519:4e86 with SMTP id
+ ada2fe7eead31-4c30a501950mr7601614137.1.1741559522456; Sun, 09 Mar 2025
+ 15:32:02 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::635;
- envelope-from=jason.chien@sifive.com; helo=mail-pl1-x635.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+References: <cover.1736130472.git.lc00631@tecorigin.com>
+In-Reply-To: <cover.1736130472.git.lc00631@tecorigin.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Mon, 10 Mar 2025 08:31:36 +1000
+X-Gm-Features: AQ5f1JrxPhGniueMU36EPKa6uf8C_odEz-NbYzaYSZncwxNy1CuaoVIg4oiOV3M
+Message-ID: <CAKmqyKMu04UPhs_D5xg_z3H+o1_9m9yh+GRhDCgLak9j=Jw+=A@mail.gmail.com>
+Subject: Re: [PATCH v3 0/2] Enhanced VSTART and VL checks for vector
+ instructions
+To: Chao Liu <lc00631@tecorigin.com>
+Cc: alistair.francis@wdc.com, dbarboza@ventanamicro.com, bmeng.cn@gmail.com, 
+ palmer@dabbelt.com, liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, 
+ qemu-riscv@nongnu.org, qemu-devel@nongnu.org, zqz00548@tecorigin.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2607:f8b0:4864:20::936;
+ envelope-from=alistair23@gmail.com; helo=mail-ua1-x936.google.com
+X-Spam_score_int: -17
+X-Spam_score: -1.8
+X-Spam_bar: -
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -112,57 +98,49 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-When an IOMMU detects that a PCI host has registered struct PCIIOMMUOps,
-it should call pci_setup_iommu_downstream_mr(), which invokes
-PCIIOMMUOps.set_downstream_mr() to configure the PCI host's downstream
-memory region, directing inbound transactions to the IOMMU.
+On Mon, Jan 6, 2025 at 12:44=E2=80=AFPM Chao Liu <lc00631@tecorigin.com> wr=
+ote:
+>
+> Hi, all:
+>
+> In accordance with the review, i improved the commit message of patch and=
+ added
+> the reason for the modification.
+>
+> There was no change in the patch content.
+>
+> PATCH v2 review:
+> https://lore.kernel.org/qemu-devel/61e8f7d8-607a-4d63-b9dd-cfbfc840716e@v=
+entanamicro.com/
+>
+> PATCH v1 review:
+> https://lore.kernel.org/qemu-devel/CAKmqyKPFYxhK8PANOVzV3FMWxd79wZSJYLWkK=
+OAgEMt_b2KvZA@mail.gmail.com/
+>
+> --
+> Regards,
+> Chao
+>
+> Chao Liu (2):
+>   target/riscv: refactor VSTART_CHECK_EARLY_EXIT() to accept vl as a
+>     parameter
+>   target/riscv: fix handling of nop for vstart >=3D vl in some vector
+>     instruction
 
-Signed-off-by: Jason Chien <jason.chien@sifive.com>
----
- hw/pci/pci.c         | 8 ++++++++
- include/hw/pci/pci.h | 9 +++++++++
- 2 files changed, 17 insertions(+)
+Do you mind rebasing on:
+https://github.com/alistair23/qemu/tree/riscv-to-apply.next
 
-diff --git a/hw/pci/pci.c b/hw/pci/pci.c
-index 1d42847ef0..983290ef0b 100644
---- a/hw/pci/pci.c
-+++ b/hw/pci/pci.c
-@@ -2858,6 +2858,14 @@ void pci_device_unset_iommu_device(PCIDevice *dev)
-     }
- }
- 
-+void pci_setup_iommu_downstream_mr(PCIBus *bus, MemoryRegion *mr)
-+{
-+    assert(bus->iommu_ops);
-+    assert(bus->iommu_ops->set_downstream_mr);
-+
-+    bus->iommu_ops->set_downstream_mr(bus->iommu_opaque, mr);
-+}
-+
- void pci_setup_iommu(PCIBus *bus, const PCIIOMMUOps *ops, void *opaque)
- {
-     /*
-diff --git a/include/hw/pci/pci.h b/include/hw/pci/pci.h
-index fcf648da19..1ad5dc7d9d 100644
---- a/include/hw/pci/pci.h
-+++ b/include/hw/pci/pci.h
-@@ -442,6 +442,15 @@ bool pci_device_set_iommu_device(PCIDevice *dev, HostIOMMUDevice *hiod,
-                                  Error **errp);
- void pci_device_unset_iommu_device(PCIDevice *dev);
- 
-+/**
-+ * pci_setup_iommu_downstream_mr: Designate a downstream memory region
-+ * for a PCIBus
-+ *
-+ * @bus: the #PCIBus being updated.
-+ * @mr: the designated memory region.
-+ */
-+void pci_setup_iommu_downstream_mr(PCIBus *bus, MemoryRegion *mr);
-+
- /**
-  * pci_setup_iommu: Initialize specific IOMMU handlers for a PCIBus
-  *
--- 
-2.43.2
+Alistair
 
+>
+>  target/riscv/vcrypto_helper.c   | 32 ++++++-------
+>  target/riscv/vector_helper.c    | 83 ++++++++++++++++++---------------
+>  target/riscv/vector_internals.c |  4 +-
+>  target/riscv/vector_internals.h | 12 ++---
+>  4 files changed, 69 insertions(+), 62 deletions(-)
+>
+> --
+> 2.47.1
+>
+>
 
