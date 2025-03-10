@@ -4,84 +4,47 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A1D2CC28B28
-	for <qemu-riscv@archiver.kernel.org>; Sun,  9 Mar 2025 22:43:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2A98CC28B28
+	for <qemu-riscv@archiver.kernel.org>; Mon, 10 Mar 2025 02:38:33 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1trPMK-0005nr-Q2; Sun, 09 Mar 2025 18:43:00 -0400
+	id 1trT1b-0003rC-6n; Sun, 09 Mar 2025 22:37:51 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1trPMI-0005nX-Cl; Sun, 09 Mar 2025 18:42:58 -0400
-Received: from mail-ua1-x932.google.com ([2607:f8b0:4864:20::932])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1trPMG-0000GD-KB; Sun, 09 Mar 2025 18:42:58 -0400
-Received: by mail-ua1-x932.google.com with SMTP id
- a1e0cc1a2514c-86d42f08135so941662241.0; 
- Sun, 09 Mar 2025 15:42:55 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1741560175; x=1742164975; darn=nongnu.org;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=WbSmkDKLAOpBxTdZyiY5SkGxR5TU6K4rKLFsF80AAiY=;
- b=VaQeGHd/VfwKl7VQJb1nh9BG0BmMJWhiBzF9gJcKzn1e0+72TfJQoagqivOlYZzBrB
- cl+FAIc6QNnx6KKrwsQaPiVijoSzldIV9fDp/MjClrjkx1uth6qktKAck0o9jkBJQc1L
- lfM4h1Qf80ZiQsQKoiXc1iTCCkViz1ieiaK3yfIMUA3mZyvEl0Xchov4EH3y9KO3YXDr
- /0fF2h16kcfZtyBPyNuDS0n5oOxksYdrYPycpYsWFCnJJ38AsfcxfDCUYGFgW6OVqdId
- iao4/qYTA7tlifzCAE9vktxhKAyyd5Ae+4UxBlbFNR+dW7zTjWCGAa5+YfIpgJSqKZZr
- gVFg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741560175; x=1742164975;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=WbSmkDKLAOpBxTdZyiY5SkGxR5TU6K4rKLFsF80AAiY=;
- b=qVtEm/WojT9XtGGfNj3cKU/RpLYvJYYCCF+1rdlnEaO5gYmY2G3kScPGATZDcvhuvD
- 9AdYOxkQPJL+/GqCjp1FWZF7hRppBbL0hNQ7y/LIJ3CUuKVFukba7qrbBJiNrwiwAg6S
- mVL+x1BjzePJBTPKOaIBcR9fYD1inamFU/dsQkOD77swRjbAZOksf3YlRe7c+zZauU55
- K9fUSE4bzIg459oE4uQl1ULcY8Lftu8umWwkbcV5cQhuSjCgzsOdjsl36JKMU0JBGN4+
- gzxgI8fvVBN4YU0J7f0d25hbA8LHaYGaW1KcWW+JWOZqvzWDiQYv2Z+C6k/FYnEq8rku
- 7RuA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCU0OUHz3m/mzAwKdVppkj65eC9pvW1p6yXBZoFHUXjQkwTAnd1na6mLltMfPptBjTFa8aSPvJ2V7uP7@nongnu.org
-X-Gm-Message-State: AOJu0YyZWlNSVv0rVzE1T1GXubiXdTaU53LJmn4wCPSwn3fwsGVwbvQW
- RktqNmuuoh8TSyBoeJ1ln2yRrhkKOJypqqlqb8epWVIc8Ypfuwpl/HLSFwcnhuX07TcNZUYJUbq
- vnp0PaWebl4BL2y+zzW8PiHHAN2SBOQ==
-X-Gm-Gg: ASbGncvahm0hUuXCwFsSvDia2x+XHUud+W4zURq1wavr6t1ya/bgfnYg+c3ePGsuPiS
- cu4mirKByPBe2gJXUZL+yEHDDK4uUFgnzD7JeLaYQkkxZ1CweNRyjYP42zIQnHOgk8moxK9Hezb
- 3//Hx9NW2e5gDgE0LQKb3x/a6oxkSONYHhwpjarOxtjqQiK8GYfX3U/03YhCF7H3Wbhw==
-X-Google-Smtp-Source: AGHT+IGv9nwGuX+iuaf8IZjetxoqFin5b1t+/ES3vurP5Bj9xfrJ+Wj0ye5H04Sdu5YYDeYjgWs9F7LrBuMApSOegao=
-X-Received: by 2002:a05:6102:578f:b0:4bb:4c52:6730 with SMTP id
- ada2fe7eead31-4c30a5ec045mr7494389137.12.1741560174773; Sun, 09 Mar 2025
- 15:42:54 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <lc00631@tecorigin.com>)
+ id 1trT1W-0003db-5f; Sun, 09 Mar 2025 22:37:46 -0400
+Received: from out28-149.mail.aliyun.com ([115.124.28.149])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <lc00631@tecorigin.com>)
+ id 1trT1T-0003Qo-FV; Sun, 09 Mar 2025 22:37:45 -0400
+Received: from TC-DZ-03-0020.tc.local(mailfrom:lc00631@tecorigin.com
+ fp:SMTPD_---.booCGfo_1741574252 cluster:ay29) by smtp.aliyun-inc.com;
+ Mon, 10 Mar 2025 10:37:32 +0800
+From: Chao Liu <lc00631@tecorigin.com>
+To: alistair23@gmail.com
+Cc: alistair.francis@wdc.com, bmeng.cn@gmail.com, dbarboza@ventanamicro.com,
+ lc00631@tecorigin.com, liwei1518@gmail.com, palmer@dabbelt.com,
+ qemu-devel@nongnu.org, qemu-riscv@nongnu.org, zhiwei_liu@linux.alibaba.com,
+ zqz00548@tecorigin.com
+Subject: [PATCH v4 2/2] target/riscv: fix handling of nop for vstart >= vl in
+ some vector instruction
+Date: Mon, 10 Mar 2025 10:35:25 +0800
+Message-ID: <b2649f14915150be4c602d63cd3ea4adf47e9d75.1741573286.git.lc00631@tecorigin.com>
+X-Mailer: git-send-email 2.47.0.windows.2
+In-Reply-To: <cover.1741573286.git.lc00631@tecorigin.com>
+References: <cover.1741573286.git.lc00631@tecorigin.com>
 MIME-Version: 1.0
-References: <20250307124602.1905754-1-dbarboza@ventanamicro.com>
-In-Reply-To: <20250307124602.1905754-1-dbarboza@ventanamicro.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 10 Mar 2025 08:42:28 +1000
-X-Gm-Features: AQ5f1Jrm9PDNhjBcANOE-Zo0CoXOUchSfPmXSh1UXQwM28XGAk-ieowExCidbYk
-Message-ID: <CAKmqyKMbX4EH9-GcKz2nSCC_v3EGWH8Ezkjik68cLd5o-Cp8cQ@mail.gmail.com>
-Subject: Re: [PATCH] target/riscv/csr.c: fix OVERFLOW_BEFORE_WIDEN in
- rmw_sctrdepth()
-To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
- liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com, 
- peter.maydell@linaro.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::932;
- envelope-from=alistair23@gmail.com; helo=mail-ua1-x932.google.com
-X-Spam_score_int: -17
-X-Spam_score: -1.8
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=115.124.28.149;
+ envelope-from=lc00631@tecorigin.com; helo=out28-149.mail.aliyun.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
 X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_NONE=-0.0001,
+ RCVD_IN_MSPIKE_H2=0.001, RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001,
+ RCVD_IN_VALIDITY_SAFE_BLOCKED=0.001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ UNPARSEABLE_RELAY=0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -97,51 +60,116 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Fri, Mar 7, 2025 at 10:47=E2=80=AFPM Daniel Henrique Barboza
-<dbarboza@ventanamicro.com> wrote:
->
-> Coverity found the following issue:
->
->   >>>     CID 1593156:  Integer handling issues  (OVERFLOW_BEFORE_WIDEN)
->   >>>     Potentially overflowing expression "0x10 << depth" with type
->   "int" (32 bits, signed) is evaluated using 32-bit arithmetic, and then
->   used in a context that expects an expression of type "uint64_t" (64
->   bits, unsigned).
->   4299             depth =3D 16 << depth;
->
-> Fix it by forcing the expression to be 64 bits wide by using '16ULL'.
->
-> Resolves: Coverity CID 1593156
-> Fixes: c48bd18eae ("target/riscv: Add support for Control Transfer Record=
-s extension CSRs.")
-> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Recently, when I was writing a RISCV test, I found that when VL is set to 0, the
+instruction should be nop, but when I tested it, I found that QEMU will treat
+all elements as tail elements, and in the case of VTA=1, write all elements
+to 1.
 
-Thanks!
+After troubleshooting, it was found that the vext_vx_rm_1 function was called in
+the vext_vx_rm_2, and then the vext_set_elems_1s function was called to process
+the tail element, but only VSTART >= vl was checked in the vext_vx_rm_1
+function, which caused the tail element to still be processed even if it was
+returned in advance.
 
-Applied to riscv-to-apply.next
+So I've made the following change:
 
-Alistair
+Put VSTART_CHECK_EARLY_EXIT(env) at the beginning of the vext_vx_rm_2 function,
+so that the VSTART register is checked correctly.
 
-> ---
->  target/riscv/csr.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->
-> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-> index 0ebcca4597..e832ff3ca9 100644
-> --- a/target/riscv/csr.c
-> +++ b/target/riscv/csr.c
-> @@ -4296,7 +4296,7 @@ static RISCVException rmw_sctrdepth(CPURISCVState *=
-env, int csrno,
->          }
->
->          /* Update sctrstatus.WRPTR with a legal value */
-> -        depth =3D 16 << depth;
-> +        depth =3D 16ULL << depth;
->          env->sctrstatus =3D
->              env->sctrstatus & (~SCTRSTATUS_WRPTR_MASK | (depth - 1));
->      }
-> --
-> 2.48.1
->
->
+Fixes: df4252b2ec ("target/riscv/vector_helpers: do early exit when
+vstart >= vl")
+Signed-off-by: Chao Liu <lc00631@tecorigin.com>
+Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+---
+ target/riscv/vector_helper.c | 18 ++++++++++++++----
+ 1 file changed, 14 insertions(+), 4 deletions(-)
+
+diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
+index 217d2f6..67b3baf 100644
+--- a/target/riscv/vector_helper.c
++++ b/target/riscv/vector_helper.c
+@@ -2175,8 +2175,6 @@ vext_vv_rm_1(void *vd, void *v0, void *vs1, void *vs2,
+              uint32_t vl, uint32_t vm, int vxrm,
+              opivv2_rm_fn *fn, uint32_t vma, uint32_t esz)
+ {
+-    VSTART_CHECK_EARLY_EXIT(env, vl);
+-
+     for (uint32_t i = env->vstart; i < vl; i++) {
+         if (!vm && !vext_elem_mask(v0, i)) {
+             /* set masked-off elements to 1s */
+@@ -2200,6 +2198,8 @@ vext_vv_rm_2(void *vd, void *v0, void *vs1, void *vs2,
+     uint32_t vta = vext_vta(desc);
+     uint32_t vma = vext_vma(desc);
+ 
++    VSTART_CHECK_EARLY_EXIT(env, vl);
++
+     switch (env->vxrm) {
+     case 0: /* rnu */
+         vext_vv_rm_1(vd, v0, vs1, vs2,
+@@ -2302,8 +2302,6 @@ vext_vx_rm_1(void *vd, void *v0, target_long s1, void *vs2,
+              uint32_t vl, uint32_t vm, int vxrm,
+              opivx2_rm_fn *fn, uint32_t vma, uint32_t esz)
+ {
+-    VSTART_CHECK_EARLY_EXIT(env, vl);
+-
+     for (uint32_t i = env->vstart; i < vl; i++) {
+         if (!vm && !vext_elem_mask(v0, i)) {
+             /* set masked-off elements to 1s */
+@@ -2327,6 +2325,8 @@ vext_vx_rm_2(void *vd, void *v0, target_long s1, void *vs2,
+     uint32_t vta = vext_vta(desc);
+     uint32_t vma = vext_vma(desc);
+ 
++    VSTART_CHECK_EARLY_EXIT(env, vl);
++
+     switch (env->vxrm) {
+     case 0: /* rnu */
+         vext_vx_rm_1(vd, v0, s1, vs2,
+@@ -4662,6 +4662,8 @@ void HELPER(NAME)(void *vd, void *v0, void *vs1,          \
+     uint32_t i;                                           \
+     TD s1 =  *((TD *)vs1 + HD(0));                        \
+                                                           \
++    VSTART_CHECK_EARLY_EXIT(env, vl);                     \
++                                                          \
+     for (i = env->vstart; i < vl; i++) {                  \
+         TS2 s2 = *((TS2 *)vs2 + HS2(i));                  \
+         if (!vm && !vext_elem_mask(v0, i)) {              \
+@@ -4750,6 +4752,8 @@ void HELPER(NAME)(void *vd, void *v0, void *vs1,           \
+     uint32_t i;                                            \
+     TD s1 =  *((TD *)vs1 + HD(0));                         \
+                                                            \
++    VSTART_CHECK_EARLY_EXIT(env, vl);                      \
++                                                           \
+     for (i = env->vstart; i < vl; i++) {                   \
+         TS2 s2 = *((TS2 *)vs2 + HS2(i));                   \
+         if (!vm && !vext_elem_mask(v0, i)) {               \
+@@ -4914,6 +4918,8 @@ static void vmsetm(void *vd, void *v0, void *vs2, CPURISCVState *env,
+     int i;
+     bool first_mask_bit = false;
+ 
++    VSTART_CHECK_EARLY_EXIT(env, vl);
++
+     for (i = env->vstart; i < vl; i++) {
+         if (!vm && !vext_elem_mask(v0, i)) {
+             /* set masked-off elements to 1s */
+@@ -4986,6 +4992,8 @@ void HELPER(NAME)(void *vd, void *v0, void *vs2, CPURISCVState *env,      \
+     uint32_t sum = 0;                                                     \
+     int i;                                                                \
+                                                                           \
++    VSTART_CHECK_EARLY_EXIT(env, vl);                                     \
++                                                                          \
+     for (i = env->vstart; i < vl; i++) {                                  \
+         if (!vm && !vext_elem_mask(v0, i)) {                              \
+             /* set masked-off elements to 1s */                           \
+@@ -5344,6 +5352,8 @@ void HELPER(NAME)(void *vd, void *v0, void *vs1, void *vs2,               \
+     uint32_t vta = vext_vta(desc);                                        \
+     uint32_t num = 0, i;                                                  \
+                                                                           \
++    VSTART_CHECK_EARLY_EXIT(env, vl);                                     \
++                                                                          \
+     for (i = env->vstart; i < vl; i++) {                                  \
+         if (!vext_elem_mask(vs1, i)) {                                    \
+             continue;                                                     \
+-- 
+2.48.1
+
 
