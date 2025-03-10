@@ -4,65 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7CBD6C282DE
-	for <qemu-riscv@archiver.kernel.org>; Mon, 10 Mar 2025 05:02:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ABA2BC282DE
+	for <qemu-riscv@archiver.kernel.org>; Mon, 10 Mar 2025 05:03:14 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1trVE7-0002dI-7o; Mon, 10 Mar 2025 00:58:55 -0400
+	id 1trVEV-0003Bm-9b; Mon, 10 Mar 2025 00:59:19 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <pierrick.bouvier@linaro.org>)
- id 1trVE5-0002cY-Fv
- for qemu-riscv@nongnu.org; Mon, 10 Mar 2025 00:58:53 -0400
-Received: from mail-pl1-x635.google.com ([2607:f8b0:4864:20::635])
+ id 1trVEP-0002yG-Pv
+ for qemu-riscv@nongnu.org; Mon, 10 Mar 2025 00:59:13 -0400
+Received: from mail-pj1-x102c.google.com ([2607:f8b0:4864:20::102c])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <pierrick.bouvier@linaro.org>)
- id 1trVE3-000893-Jr
- for qemu-riscv@nongnu.org; Mon, 10 Mar 2025 00:58:53 -0400
-Received: by mail-pl1-x635.google.com with SMTP id
- d9443c01a7336-2234e4b079cso64067675ad.1
- for <qemu-riscv@nongnu.org>; Sun, 09 Mar 2025 21:58:50 -0700 (PDT)
+ id 1trVEM-0008Hr-N4
+ for qemu-riscv@nongnu.org; Mon, 10 Mar 2025 00:59:13 -0400
+Received: by mail-pj1-x102c.google.com with SMTP id
+ 98e67ed59e1d1-2feb91a25bdso5710860a91.1
+ for <qemu-riscv@nongnu.org>; Sun, 09 Mar 2025 21:59:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1741582730; x=1742187530; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=CyMnY8DCOyhH4sll8UBWjGQBOdpS4N2V2sRcD5CyECM=;
- b=hfLiPxvyqxmTjLmZ3nHbM5hovdVZpMl8UjjeM9FOXEt19EmPihv0lDDEUNXHbaz+A2
- grqQ439HrcAOhn+hbFe8/8kAgY6IEegpzXEqbP+qowOj7j92KbsgpqeNp80JrzHrWNt6
- agXIGxUsEmhL+VhlqgWKC/JjNNo7Q3g0KcH+K9zBCqTdsE+2iFQBi4UPJFsPI8tFVN7W
- UQVPyAFxA+dxkYjlRwW99bsNZant7KFzGDvkxkQN4CrMJwZzazXCfz9M2Hw9zy/vJwX8
- TxCYLJr3iRvzcrioUCmNv0pUuWlUth5YkejF2bofZPs4SBBaug3zm/HJnwHapxPuo/v+
- 1OeA==
+ d=linaro.org; s=google; t=1741582749; x=1742187549; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=yo5TAW5cQeh1DHP1d5HtuffIuVKJac+rUoQhULbtd80=;
+ b=jLPqevBtlhY7745DKYvPHrRFxIFvApoW5Sal+uA+E2NTEbez2Qc4GUaEoDpLXoE34U
+ +gbOrOh+awYNhahSqzxyPecPvCd+E/qxcm2x1xdwEbnC91krU9iYUYCdK745ub8/Dwch
+ DO3u2zoVwar4c9WDX2zqxD8peyjJUtjEyO8mtsrXX1AAI22tf8BnTpfG6Ai1FLODEbCg
+ e81B2IWDcm3CVd8E1lm6VoeykiGI2OdpBUkqb/oCmOq/dHcFeJ3KfneyG96NISUQ+UHE
+ PPRND3AQ9ZY8yuH03DiQMRhcz/BU6pWTWCkT0zuyryj3aoXfa7v98JAVLeQ0mvt2vbnB
+ awEQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741582730; x=1742187530;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=CyMnY8DCOyhH4sll8UBWjGQBOdpS4N2V2sRcD5CyECM=;
- b=tQpHxUHuDvZVEhBL3AeT6XjTUvXWPd866LUKaE0S8DBjcWv4hkFKyRHwl9uZ3KIDKG
- XJ+8Yq81HsYswhWc8gUqlWs/c9SyWEQeniLA2Jqiypxz8nSGSDONwy1fTKhrW0yy8cPk
- zKYh7wgWUGSjTVZK6GQMcR2AsSnrY3/KGfI+iScBeBIr6CQVGVo4JLmsRSpZ2hfgYl1M
- MFOF2lMMQS/T5E91XCeIvTZgFUhx7vW4GTtPzQHoQFcQHQbepHXoFfd+eIp9OOWGkbcT
- XFACaNPcOBh+zCbZO37FDRiLn2h5dZkoeRk87gyoUjuJf45Hv1wOVE9RMZO0ndsdokAL
- GlZA==
+ d=1e100.net; s=20230601; t=1741582749; x=1742187549;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=yo5TAW5cQeh1DHP1d5HtuffIuVKJac+rUoQhULbtd80=;
+ b=AMHJuKgJHTmZpyFkiYfothxPaY7RbipCyTcsPrcS3JVNlJOp385LH729xwmRj0FUsK
+ XrbbLo5WN5SjIM406cXXHKpglphF8qyV5tMwD3fSd3AcYFtiKSC0aNpCkiZYhIv8VcAv
+ zpYqWZHtK6Aiu0lCcbhpHNElgS98uFI/KgXI6qjLN3EnkViYrcs2uplFy3d4RWFqnj3o
+ hytUWaox7BYlIg4c2mB/McO2bvssjlIFXNtD0/qIOtC62Ptf8w4TgSyQ1Sd8FrpqZk8V
+ NmAJjYxFNgJcak2r3ZPqB1SRDge4PKt4nXluwk/N4NgmS93VPGVIeXkXoAlfVNxx9Mfg
+ rMbA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUMGXHfHwQvPNVjtFc8HMl+Tv44EVvrTRGlvmvcqm6qd5y7f5QCMmZG7pXOikYG5IZbvXhhsQvLVlUk@nongnu.org
-X-Gm-Message-State: AOJu0YySVAIGkMTAV3AvDXAU7L6VaUE8chRLz0F2jzV7Q3qn70bIF4Z1
- 4O0hK58JEDRalMLA0vK27revNyd2D0AFv9wJkjQwfur/e1p4JDG+u5TgUcPcB/Y=
-X-Gm-Gg: ASbGncs1dSVjr0BBGf+ClY3LNgoIxMa88chFJ4mmHKqdRkbOEOAMVJ0UzKInlHbqAig
- 4qvcWj0APFfqfNxC2wC/PpHUNxA37A/FY+3QZJ8tdVOFtfOvivmJWdWIg/Mb2rnDZXCGaueG+Ux
- QkL+9cRS/XAizOInNY12xesqqsBqBV9YXyuimhfHon8aDV33+4V1YqoVis5FLFn28K4GqfS12xr
- XQrbUUJdXsmwpNOAoZLZS40pSb6aYJVIdAsP3QQYOkuP3aUb1WLrgpddFu+Tl1oqvF+/02Gl67K
- w41oAxIY40qNeKM5tasmk4KK+acVtW1LQVX6dQFE2w4GnROhFuKMrQA=
-X-Google-Smtp-Source: AGHT+IFBRE9vcuWy/8QGIVJH+CegCd8ZXFRntWgx7wfqbQL9hdyzkh8MEMl2t2vqfLHGN0wEW9B3Eg==
-X-Received: by 2002:a05:6a00:b4e:b0:736:57cb:f2b6 with SMTP id
- d2e1a72fcca58-736aaa1acf0mr17943212b3a.12.1741582729877; 
- Sun, 09 Mar 2025 21:58:49 -0700 (PDT)
+ AJvYcCWvF6CNYsYsk/B8QXNVr78M/XttVs+J/uWDPuibOOHdutEz6yHfDSt2FInLShBaMvAUPtS1bUc5jtzt@nongnu.org
+X-Gm-Message-State: AOJu0Yxb+0cBjG5kG4QTjcMrPho9S4+3erQADoAutmCoL7pHd/FwDypD
+ 3KiEBZ/BBFKf712WbiIwf+/DQ0VZ25APhNNOdZ7z9oCepq12ya3h29FDmT52sDc=
+X-Gm-Gg: ASbGncseFewEs5aCrgFtXmShTtJWnE/Bc0oa94gfnngRXGUwVsFY/874o4P7weLd+S3
+ EelJD7YcXKoajuJzHGt5+D5EgQ+nd8fKaU+RhGrgG+oMKE/A+ZZiJoqAMsasdCWLU9pmn4mLc/N
+ 976xsDPoq1b5x7NsisZ2A3Gp2ZxFhJQplxIU4U6qCbQjnfpNH+UgtVuEq6nwgGGLmHS2z2Behtm
+ /aMQnQ5qR12U6NNDtwmkBbDgWoh1o6+m8yK+1CqrrjF3xzbCHGacxYKOo5jIMWllz+aPCh4obKP
+ vmBpw4tph1GlvQhRmlX1wKBxUQk64m5R2cVKcKnGJPLf
+X-Google-Smtp-Source: AGHT+IE5gWrqVh7MPBsCW9xpH4WbBfOw86WZFsUWQXQSa3FRghy/XQpC1OkuRKA1xd7a02NCd2RqPg==
+X-Received: by 2002:a05:6a21:6e93:b0:1f5:6e00:14da with SMTP id
+ adf61e73a8af0-1f56e0016d7mr7868375637.40.1741582749217; 
+ Sun, 09 Mar 2025 21:59:09 -0700 (PDT)
 Received: from pc.. ([38.39.164.180]) by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-736d2ae318csm1708308b3a.53.2025.03.09.21.58.48
+ d2e1a72fcca58-736d2ae318csm1708308b3a.53.2025.03.09.21.59.08
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 09 Mar 2025 21:58:49 -0700 (PDT)
+ Sun, 09 Mar 2025 21:59:08 -0700 (PDT)
 From: Pierrick Bouvier <pierrick.bouvier@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: qemu-ppc@nongnu.org, Alistair Francis <alistair.francis@wdc.com>,
@@ -82,22 +83,23 @@ Cc: qemu-ppc@nongnu.org, Alistair Francis <alistair.francis@wdc.com>,
  Paolo Bonzini <pbonzini@redhat.com>, xen-devel@lists.xenproject.org,
  Stefano Stabellini <sstabellini@kernel.org>,
  Pierrick Bouvier <pierrick.bouvier@linaro.org>
-Subject: [PATCH 00/16] make system memory API available for common code
-Date: Sun,  9 Mar 2025 21:58:26 -0700
-Message-Id: <20250310045842.2650784-1-pierrick.bouvier@linaro.org>
+Subject: [PATCH 16/16] system/ioport: make compilation unit common
+Date: Sun,  9 Mar 2025 21:58:42 -0700
+Message-Id: <20250310045842.2650784-17-pierrick.bouvier@linaro.org>
 X-Mailer: git-send-email 2.39.5
-Content-Type: text/plain; charset="utf-8"
+In-Reply-To: <20250310045842.2650784-1-pierrick.bouvier@linaro.org>
+References: <20250310045842.2650784-1-pierrick.bouvier@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::635;
- envelope-from=pierrick.bouvier@linaro.org; helo=mail-pl1-x635.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::102c;
+ envelope-from=pierrick.bouvier@linaro.org; helo=mail-pj1-x102c.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -113,68 +115,43 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-The main goal of this series is to be able to call any memory ld/st function
-from code that is *not* target dependent. As a positive side effect, we can
-turn related system compilation units into common code.
+Signed-off-by: Pierrick Bouvier <pierrick.bouvier@linaro.org>
+---
+ system/ioport.c    | 1 -
+ system/meson.build | 2 +-
+ 2 files changed, 1 insertion(+), 2 deletions(-)
 
-The first 6 patches remove dependency of memory API to cpu headers and remove
-dependency to target specific code. This could be a series on its own, but it's
-great to be able to turn system memory compilation units into common code to
-make sure it can't regress, and prove it achieves the desired result.
-
-The next patches remove more dependencies on cpu headers (exec-all,
-memory-internal, ram_addr).
-Then, we add access to a needed function from kvm, some xen stubs, and we
-finally can turn our compilation units into common code.
-
-Every commit was tested to build correctly for all targets (on windows, linux,
-macos), and the series was fully tested by running all tests we have (linux,
-x86_64 host).
-
-Pierrick Bouvier (16):
-  exec/memory_ldst: extract memory_ldst declarations from cpu-all.h
-  exec/memory_ldst_phys: extract memory_ldst_phys declarations from
-    cpu-all.h
-  include: move target_words_bigendian() from tswap to bswap
-  exec/memory.h: make devend_memop target agnostic
-  qemu/bswap: implement {ld,st}.*_p as functions
-  exec/cpu-all.h: we can now remove ld/st macros
-  codebase: prepare to remove cpu.h from exec/exec-all.h
-  exec/exec-all: remove dependency on cpu.h
-  exec/memory-internal: remove dependency on cpu.h
-  exec/ram_addr: remove dependency on cpu.h
-  system/kvm: make kvm_flush_coalesced_mmio_buffer() accessible for
-    common code
-  exec/ram_addr: call xen_hvm_modified_memory only if xen is enabled
-  hw/xen: add stubs for various functions
-  system/physmem: compilation unit is now common to all targets
-  system/memory: make compilation unit common
-  system/ioport: make compilation unit common
-
- include/exec/cpu-all.h              | 52 ------------------
- include/exec/exec-all.h             |  1 -
- include/exec/memory-internal.h      |  2 -
- include/exec/memory.h               | 48 ++++++++++++++---
- include/exec/ram_addr.h             | 11 ++--
- include/exec/tswap.h                | 11 ----
- include/qemu/bswap.h                | 82 +++++++++++++++++++++++++++++
- include/system/kvm.h                |  6 +--
- include/tcg/tcg-op.h                |  1 +
- target/ppc/helper_regs.h            |  2 +
- include/exec/memory_ldst.h.inc      | 13 ++---
- include/exec/memory_ldst_phys.h.inc |  5 +-
- hw/ppc/spapr_nested.c               |  1 +
- hw/sh4/sh7750.c                     |  1 +
- hw/xen/xen_stubs.c                  | 56 ++++++++++++++++++++
- page-vary-target.c                  |  3 +-
- system/ioport.c                     |  1 -
- system/memory.c                     | 22 +++++---
- target/riscv/bitmanip_helper.c      |  1 +
- hw/xen/meson.build                  |  3 ++
- system/meson.build                  |  6 +--
- 21 files changed, 225 insertions(+), 103 deletions(-)
- create mode 100644 hw/xen/xen_stubs.c
-
+diff --git a/system/ioport.c b/system/ioport.c
+index 55c2a752396..89daae9d602 100644
+--- a/system/ioport.c
++++ b/system/ioport.c
+@@ -26,7 +26,6 @@
+  */
+ 
+ #include "qemu/osdep.h"
+-#include "cpu.h"
+ #include "exec/ioport.h"
+ #include "exec/memory.h"
+ #include "exec/address-spaces.h"
+diff --git a/system/meson.build b/system/meson.build
+index 881cb2736fe..3faec7e4dfb 100644
+--- a/system/meson.build
++++ b/system/meson.build
+@@ -1,6 +1,5 @@
+ specific_ss.add(when: 'CONFIG_SYSTEM_ONLY', if_true: [files(
+   'arch_init.c',
+-  'ioport.c',
+ )])
+ 
+ system_ss.add(files(
+@@ -12,6 +11,7 @@ system_ss.add(files(
+   'dirtylimit.c',
+   'dma-helpers.c',
+   'globals.c',
++  'ioport.c',
+   'memory_mapping.c',
+   'memory.c',
+   'physmem.c',
 -- 
 2.39.5
 
