@@ -4,105 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 90947C282DE
-	for <qemu-riscv@archiver.kernel.org>; Mon, 10 Mar 2025 16:57:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B70FFC282DE
+	for <qemu-riscv@archiver.kernel.org>; Mon, 10 Mar 2025 19:40:52 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1trgQq-0005ne-LT; Mon, 10 Mar 2025 12:56:48 -0400
+	id 1triz2-0005sj-TD; Mon, 10 Mar 2025 15:40:16 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <pierrick.bouvier@linaro.org>)
- id 1trgQo-0005nM-Vc
- for qemu-riscv@nongnu.org; Mon, 10 Mar 2025 12:56:47 -0400
-Received: from mail-pj1-x1034.google.com ([2607:f8b0:4864:20::1034])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <pierrick.bouvier@linaro.org>)
- id 1trgQi-0006Qj-Jw
- for qemu-riscv@nongnu.org; Mon, 10 Mar 2025 12:56:46 -0400
-Received: by mail-pj1-x1034.google.com with SMTP id
- 98e67ed59e1d1-2fe9759e5c1so6646247a91.0
- for <qemu-riscv@nongnu.org>; Mon, 10 Mar 2025 09:56:40 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1741625799; x=1742230599; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:references:cc:to:from
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=ZkjkedmykN6Dnae+6hPjYb5eiAU0Rz5li5jIqpcMQ1w=;
- b=iANxVSePFuTsAxE5T2+qhuI/xZZkefBYL3HlXom59t3T2zmykfpnZfWj9h6pbEX2uf
- suuyMRTwxLgZJguXuca7uc9QPREVErlbCIwpJT92wRwz4JXx1gzXb1+7jICv1MB8qUaY
- DEtfZKIPlIYCMuizEVz9eoUiPfm74T/nbjd/B08K+0HS2TpWro59BazcA4A0rW9Rlxdb
- 4x9yga02b45t2bkZ6iWfWcrB99EYjAGCDjb4EzW7HCPSOK4Yv+UQsBWWCWwZQPuKcpqt
- eQknCrJCWLpwKs3PNsOskH5MY25MF0afDDeWvEl/yOtG0JXkZHaOAqYmLWTcz9AZ44zq
- hhGA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741625799; x=1742230599;
- h=content-transfer-encoding:in-reply-to:references:cc:to:from
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=ZkjkedmykN6Dnae+6hPjYb5eiAU0Rz5li5jIqpcMQ1w=;
- b=qT9brdpd4MIbpgGnyf5YfqUaDT3HxAM5bQSfc2LEQRXvfkC/FTyh5vb27xdnxp/v1L
- XZZWIWto1b8tQfdTTDtPi8MrjQbAEYNnIdtjCCFrSrqnazFl68PlhAp2ukHWu5FYvU7L
- Qfer5F2r01f/397u7P5mNQv75UDo5OLuWETyc0ipNjyjvV8XYjLktYSGTyvPoCYL60T8
- M2JKlUFphx46t6oJv9Q+CqLHMfzo8UlmCCttDdG2KIpCO4mS5wm5oE2finpt+8lGKNLD
- W4blkvkgmitHvz5ee3SId6DYjidrx8G+AQffiGxvmvlP9SvP13Fu9EY7HFJRSchX6Par
- I0+w==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXvAcbVKuk+tU4DgUP6Wjgjb8HiSsAghNRsmATNPtwte1NIr4qc1+c/DweMFqBIxgvPdhLHRx4qOcjD@nongnu.org
-X-Gm-Message-State: AOJu0YyPHOOVgP6d7vwsHGEeouFvE4JubQ82mI7P7iDDiVKKcJ9xFsjP
- EwAV4hSSsMufLMxrDS1JFQJnmOxg+Lng/3Xfh48HbWDxIh2/O1vjrLMnNWJ/zC0=
-X-Gm-Gg: ASbGncvOqlXL0gCqd/g1IPYPvbDqbOGOuQVjkN8dZyHgmE8zSNUYTN6k9dDfYFRTi8z
- Y1xrqQjZM13IU+lVK5ogS6/0eH6iNc4ZzSfeNScdjqNvoDgkT3YaqAYZ8IcWXdUkV06NWwiSeKI
- BLqWpLpT6uGIIqBwbmXZQbCO/xbXfOAJJ6PF2vUKbT6Xb/vK84eT4qC4NJPH+X8fVJbBv5Nv0Bk
- LtaOhWFs1K4i/0qxgrSjQKtJsgWsVwrX1mvlimjCbKLearEEyEZ2m5u/WPbpw7vv1JBLDUetrpG
- tL7nHWt59XsKBUK2uMJYZwADhLt/FfMqoeZYOsvYBUpNKz7DSEsZraFRMQ==
-X-Google-Smtp-Source: AGHT+IHIbgCn3Exn+AALN657KIom6PGObNAGMKxJbf0VIqQkDogxhfDXJch+Uz3paJ/iK/pOhThzrA==
-X-Received: by 2002:a17:90b:4a51:b0:2fa:e9b:33b8 with SMTP id
- 98e67ed59e1d1-300ff10caacmr851943a91.18.1741625798731; 
- Mon, 10 Mar 2025 09:56:38 -0700 (PDT)
-Received: from [192.168.1.67] ([38.39.164.180])
- by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-22410aa883asm80360745ad.239.2025.03.10.09.56.37
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 10 Mar 2025 09:56:38 -0700 (PDT)
-Message-ID: <a57faa36-2e66-4438-accc-0cbfdeebf100@linaro.org>
-Date: Mon, 10 Mar 2025 09:56:36 -0700
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
+ (Exim 4.90_1) (envelope-from <balaton@eik.bme.hu>)
+ id 1triz0-0005mt-Al; Mon, 10 Mar 2025 15:40:14 -0400
+Received: from zero.eik.bme.hu ([2001:738:2001:2001::2001])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <balaton@eik.bme.hu>)
+ id 1triyx-0000tL-Pc; Mon, 10 Mar 2025 15:40:14 -0400
+Received: from zero.eik.bme.hu (localhost [127.0.0.1])
+ by zero.eik.bme.hu (Postfix) with ESMTP id 4525E4E602E;
+ Mon, 10 Mar 2025 20:40:07 +0100 (CET)
+X-Virus-Scanned: amavisd-new at eik.bme.hu
+Received: from zero.eik.bme.hu ([127.0.0.1])
+ by zero.eik.bme.hu (zero.eik.bme.hu [127.0.0.1]) (amavisd-new, port 10028)
+ with ESMTP id UKowroTsGVfA; Mon, 10 Mar 2025 20:40:04 +0100 (CET)
+Received: by zero.eik.bme.hu (Postfix, from userid 432)
+ id EF2D94E6030; Mon, 10 Mar 2025 20:40:04 +0100 (CET)
+Received: from localhost (localhost [127.0.0.1])
+ by zero.eik.bme.hu (Postfix) with ESMTP id EC36774577C;
+ Mon, 10 Mar 2025 20:40:04 +0100 (CET)
+Date: Mon, 10 Mar 2025 20:40:04 +0100 (CET)
+From: BALATON Zoltan <balaton@eik.bme.hu>
+To: Pierrick Bouvier <pierrick.bouvier@linaro.org>
+cc: qemu-devel@nongnu.org, qemu-ppc@nongnu.org, 
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Richard Henderson <richard.henderson@linaro.org>, 
+ Harsh Prateek Bora <harshpb@linux.ibm.com>, alex.bennee@linaro.org, 
+ Palmer Dabbelt <palmer@dabbelt.com>, 
+ Daniel Henrique Barboza <danielhb413@gmail.com>, kvm@vger.kernel.org, 
+ Peter Xu <peterx@redhat.com>, Nicholas Piggin <npiggin@gmail.com>, 
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
+ David Hildenbrand <david@redhat.com>, Weiwei Li <liwei1518@gmail.com>, 
+ Paul Durrant <paul@xen.org>, 
+ "Edgar E. Iglesias" <edgar.iglesias@gmail.com>, 
+ =?ISO-8859-15?Q?Philippe_Mathieu-Daud=E9?= <philmd@linaro.org>, 
+ Anthony PERARD <anthony@xenproject.org>, 
+ Yoshinori Sato <ysato@users.sourceforge.jp>, 
+ manos.pitsidianakis@linaro.org, qemu-riscv@nongnu.org, 
+ Paolo Bonzini <pbonzini@redhat.com>, xen-devel@lists.xenproject.org, 
+ Stefano Stabellini <sstabellini@kernel.org>
 Subject: Re: [PATCH 00/16] make system memory API available for common code
-Content-Language: en-US
-From: Pierrick Bouvier <pierrick.bouvier@linaro.org>
-To: BALATON Zoltan <balaton@eik.bme.hu>
-Cc: qemu-devel@nongnu.org, qemu-ppc@nongnu.org,
- Alistair Francis <alistair.francis@wdc.com>,
- Richard Henderson <richard.henderson@linaro.org>,
- Harsh Prateek Bora <harshpb@linux.ibm.com>, alex.bennee@linaro.org,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Daniel Henrique Barboza <danielhb413@gmail.com>, kvm@vger.kernel.org,
- Peter Xu <peterx@redhat.com>, Nicholas Piggin <npiggin@gmail.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- David Hildenbrand <david@redhat.com>, Weiwei Li <liwei1518@gmail.com>,
- Paul Durrant <paul@xen.org>, "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
- =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Anthony PERARD <anthony@xenproject.org>,
- Yoshinori Sato <ysato@users.sourceforge.jp>, manos.pitsidianakis@linaro.org,
- qemu-riscv@nongnu.org, Paolo Bonzini <pbonzini@redhat.com>,
- xen-devel@lists.xenproject.org, Stefano Stabellini <sstabellini@kernel.org>
+In-Reply-To: <a57faa36-2e66-4438-accc-0cbfdeebf100@linaro.org>
+Message-ID: <6b3e48e2-0730-09e2-55b1-35daff4ecf75@eik.bme.hu>
 References: <20250310045842.2650784-1-pierrick.bouvier@linaro.org>
  <f231b3be-b308-56cf-53ff-1a6a7fb4da5c@eik.bme.hu>
  <c5b9eea9-c412-461d-b79b-0fa2f72128ee@linaro.org>
-In-Reply-To: <c5b9eea9-c412-461d-b79b-0fa2f72128ee@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1034;
- envelope-from=pierrick.bouvier@linaro.org; helo=mail-pj1-x1034.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ <a57faa36-2e66-4438-accc-0cbfdeebf100@linaro.org>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=US-ASCII; format=flowed
+Received-SPF: pass client-ip=2001:738:2001:2001::2001;
+ envelope-from=balaton@eik.bme.hu; helo=zero.eik.bme.hu
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -118,95 +81,162 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 3/10/25 09:28, Pierrick Bouvier wrote:
-> Hi Zoltan,
-> 
-> On 3/10/25 06:23, BALATON Zoltan wrote:
->> On Sun, 9 Mar 2025, Pierrick Bouvier wrote:
->>> The main goal of this series is to be able to call any memory ld/st function
->>> from code that is *not* target dependent.
->>
->> Why is that needed?
->>
-> 
-> this series belongs to the "single binary" topic, where we are trying to
-> build a single QEMU binary with all architectures embedded.
-> 
-> To achieve that, we need to have every single compilation unit compiled
-> only once, to be able to link a binary without any symbol conflict.
-> 
-> A consequence of that is target specific code (in terms of code relying
-> of target specific macros) needs to be converted to common code,
-> checking at runtime properties of the target we run. We are tackling
-> various places in QEMU codebase at the same time, which can be confusing
-> for the community members.
-> 
-> This series take care of system memory related functions and associated
-> compilation units in system/.
-> 
->>> As a positive side effect, we can
->>> turn related system compilation units into common code.
->>
->> Are there any negative side effects? In particular have you done any
->> performance benchmarking to see if this causes a measurable slow down?
->> Such as with the STREAM benchmark:
->> https://stackoverflow.com/questions/56086993/what-does-stream-memory-bandwidth-benchmark-really-measure
->>
->> Maybe it would be good to have some performance tests similiar to
->> functional tests that could be run like the CI tests to detect such
->> performance changes. People report that QEMU is getting slower and slower
->> with each release. Maybe it could be a GSoC project to make such tests but
->> maybe we're too late for that.
->>
-> 
-> I agree with you, and it's something we have mentioned during our
-> "internal" conversations. Testing performance with existing functional
-> tests would already be a first good step. However, given the poor
-> reliability we have on our CI runners, I think it's a bit doomed.
-> 
-> Ideally, every QEMU release cycle should have a performance measurement
-> window to detect potential sources of regressions.
-> 
-> To answer to your specific question, I am trying first to get a review
-> on the approach taken. We can always optimize in next series version, in
-> case we identify it's a big deal to introduce a branch for every memory
-> related function call.
-> 
-> In all cases, transforming code relying on compile time
-> optimization/dead code elimination through defines to runtime checks
-> will *always* have an impact, even though it should be minimal in most
-> of cases. But the maintenance and compilation time benefits, as well as
-> the perspectives it opens (single binary, heterogeneous emulation, use
-> QEMU as a library) are worth it IMHO.
-> 
+On Mon, 10 Mar 2025, Pierrick Bouvier wrote:
+> On 3/10/25 09:28, Pierrick Bouvier wrote:
+>> Hi Zoltan,
+>> 
+>> On 3/10/25 06:23, BALATON Zoltan wrote:
+>>> On Sun, 9 Mar 2025, Pierrick Bouvier wrote:
+>>>> The main goal of this series is to be able to call any memory ld/st 
+>>>> function
+>>>> from code that is *not* target dependent.
+>>> 
+>>> Why is that needed?
+>>> 
+>> 
+>> this series belongs to the "single binary" topic, where we are trying to
+>> build a single QEMU binary with all architectures embedded.
+
+Yes I get it now, I just forgot as this wasn't mentioned so the goal 
+wasn't obvious.
+
+>> To achieve that, we need to have every single compilation unit compiled
+>> only once, to be able to link a binary without any symbol conflict.
+>> 
+>> A consequence of that is target specific code (in terms of code relying
+>> of target specific macros) needs to be converted to common code,
+>> checking at runtime properties of the target we run. We are tackling
+>> various places in QEMU codebase at the same time, which can be confusing
+>> for the community members.
+
+Mentioning this single binary in related series may help reminding readers 
+about the context.
+
+>> This series take care of system memory related functions and associated
+>> compilation units in system/.
+>> 
+>>>> As a positive side effect, we can
+>>>> turn related system compilation units into common code.
+>>> 
+>>> Are there any negative side effects? In particular have you done any
+>>> performance benchmarking to see if this causes a measurable slow down?
+>>> Such as with the STREAM benchmark:
+>>> https://stackoverflow.com/questions/56086993/what-does-stream-memory-bandwidth-benchmark-really-measure
+>>> 
+>>> Maybe it would be good to have some performance tests similiar to
+>>> functional tests that could be run like the CI tests to detect such
+>>> performance changes. People report that QEMU is getting slower and slower
+>>> with each release. Maybe it could be a GSoC project to make such tests but
+>>> maybe we're too late for that.
+>>> 
+>> 
+>> I agree with you, and it's something we have mentioned during our
+>> "internal" conversations. Testing performance with existing functional
+>> tests would already be a first good step. However, given the poor
+>> reliability we have on our CI runners, I think it's a bit doomed.
+>> 
+>> Ideally, every QEMU release cycle should have a performance measurement
+>> window to detect potential sources of regressions.
+
+Maybe instead of aiming for full CI like performance testing something 
+simpler like a few tests that excercise some apects each like STREAM that 
+tests memory access, copying a file from network and/or disk that tests 
+I/O and mp3 encode with lame for example that's supposed to test floating 
+point and SIMD might be simpler to do. It could be made a bootable image 
+that just runs the test and reports a number (I did that before for 
+qemu-system-ppc when we wanted to test an issue that on some hosts it ran 
+slower). Such test could be run by somebody making changes so they could 
+call these before and after their patch to quickly check if there's 
+anything to improve. This may be less through then full performance 
+testing but still give some insight and better than not testing anything 
+for performance.
+
+I'm bringig this topic up to try to keep awareness on this so QEMU can 
+remain true to its name. (Although I'm not sure if originally the Q in the 
+name stood for the time it took to write or its performance but it's 
+hopefully still a goal to keep it fast.)
+
+>> To answer to your specific question, I am trying first to get a review
+>> on the approach taken. We can always optimize in next series version, in
+>> case we identify it's a big deal to introduce a branch for every memory
+>> related function call.
+
+I'm not sure we can always optimise after the fact so sometimes it can be 
+necessary to take performance in consideration while designing changes.
+
+>> In all cases, transforming code relying on compile time
+>> optimization/dead code elimination through defines to runtime checks
+>> will *always* have an impact,
+
+Yes, that's why it would be good to know how much impact is that.
+
+>> even though it should be minimal in most of cases.
+
+Hopefully but how do we know if we don't even test for it?
+
+>> But the maintenance and compilation time benefits, as well as
+>> the perspectives it opens (single binary, heterogeneous emulation, use
+>> QEMU as a library) are worth it IMHO.
+
+I'm not so sure about that. Heterogeneous emulation sounds interesting but 
+is it needed most of the time? Using QEMU as a library also may not be 
+common and limited by licencing. The single binary would simplify packages 
+but then this binary may get huge so it's slower to load, may take more 
+resources to run and more time to compile and if somebody only needs one 
+architecture why do I want to include all of the others and wait for it to 
+compile using up a lot of space on my disk? So in other words, while these 
+are interesting and good goals could it be achieved with keeping the 
+current way of building single ARCH binary as opposed to single binary 
+with multiple archs and not throwing out the optimisations a single arch 
+binary can use? Which one is better may depend on the use case so if 
+possible it would be better to allow both keeping what we have and adding 
+multi arch binary on top not replacing the current way completely.
+
+>>> Regards,
+>>> BALATON Zoltan
+>> 
 >> Regards,
->> BALATON Zoltan
-> 
-> Regards,
-> Pierrick
-> 
+>> Pierrick
+>> 
+>
+> As a side note, we recently did some work around performance analysis (for 
+> aarch64), as you can see here [1]. In the end, QEMU performance depends
 
-As a side note, we recently did some work around performance analysis 
-(for aarch64), as you can see here [1]. In the end, QEMU performance 
-depends (roughly in this order) on:
-1. quality of code generated by TCG
-2. helper code to implement instructions
-3. mmu emulation
+Thank you, very interesting read.
 
-Other state of the art translators that exist are faster (fex, box64) 
-mainly by enhancing 1, and relying on various tricks to avoid 
-translating some libraries calls. But those translators are host/target 
-specific, and the ratio of instructions generated (vs target ones read) 
-is much lower than QEMU. In the experimentation listed in the blog, I 
-observed that for qemu-system-aarch64, we have an average expansion 
-factor of around 18 (1 guest insn translates to 18 host ones).
+> (roughly in this order) on:
+> 1. quality of code generated by TCG
+> 2. helper code to implement instructions
+> 3. mmu emulation
+>
+> Other state of the art translators that exist are faster (fex, box64) mainly 
+> by enhancing 1, and relying on various tricks to avoid translating some 
+> libraries calls. But those translators are host/target specific, and the 
+> ratio of instructions generated (vs target ones read) is much lower than 
+> QEMU. In the experimentation listed in the blog, I observed that for 
+> qemu-system-aarch64, we have an average expansion factor of around 18 (1 
+> guest insn translates to 18 host ones).
+>
+> For users seeing performance decreases, beyond the QEMU code changes, adding 
+> new target instructions may add new helpers, which may be called by the stack 
+> people use, and they can sometimes observe a slower behaviour.
 
-For users seeing performance decreases, beyond the QEMU code changes, 
-adding new target instructions may add new helpers, which may be called 
-by the stack people use, and they can sometimes observe a slower behaviour.
+I'm mostly interested in emulating PPC for older and obscure OSes running 
+on older hardware so there new instructions isn't a problem. Most of the 
+time MMU emulation, helpers and TCG code generation is mostly dominating 
+there and on PPC particularly the lack of hard float usage. Apart from 
+that maybe some device emulations but that's a different topic. This is 
+already slow so any overhead introduced at lowest levels just adds to 
+that and target specific optimisation may only get back what's lost 
+elsewhere.
 
-There are probably some other low hanging fruits for other target 
-architectures.
+Regards,
+BALATON Zoltan
 
-[1] https://www.linaro.org/blog/qemu-a-tale-of-performance-analysis/
+> There are probably some other low hanging fruits for other target 
+> architectures.
+>
+> [1] https://www.linaro.org/blog/qemu-a-tale-of-performance-analysis/
+>
+>
 
