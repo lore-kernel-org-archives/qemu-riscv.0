@@ -4,100 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AFEA7C282EC
-	for <qemu-riscv@archiver.kernel.org>; Tue, 11 Mar 2025 15:24:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6207AC282EC
+	for <qemu-riscv@archiver.kernel.org>; Tue, 11 Mar 2025 18:41:54 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1ts1Ss-0000u0-15; Tue, 11 Mar 2025 11:24:18 -0400
+	id 1ts4Xr-00087b-2g; Tue, 11 Mar 2025 14:41:41 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <pierrick.bouvier@linaro.org>)
- id 1ts1Sm-0000t7-Cb
- for qemu-riscv@nongnu.org; Tue, 11 Mar 2025 11:24:12 -0400
-Received: from mail-pj1-x102e.google.com ([2607:f8b0:4864:20::102e])
+ (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
+ id 1ts4XO-00081k-LX
+ for qemu-riscv@nongnu.org; Tue, 11 Mar 2025 14:41:11 -0400
+Received: from mail-yb1-xb2a.google.com ([2607:f8b0:4864:20::b2a])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <pierrick.bouvier@linaro.org>)
- id 1ts1Sj-0007LZ-Rs
- for qemu-riscv@nongnu.org; Tue, 11 Mar 2025 11:24:12 -0400
-Received: by mail-pj1-x102e.google.com with SMTP id
- 98e67ed59e1d1-2fa8ac56891so8437700a91.2
- for <qemu-riscv@nongnu.org>; Tue, 11 Mar 2025 08:24:04 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
+ id 1ts4XM-0005VC-Di
+ for qemu-riscv@nongnu.org; Tue, 11 Mar 2025 14:41:10 -0400
+Received: by mail-yb1-xb2a.google.com with SMTP id
+ 3f1490d57ef6-e5dc299deb4so5205575276.1
+ for <qemu-riscv@nongnu.org>; Tue, 11 Mar 2025 11:41:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1741706643; x=1742311443; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=9SkM+QBVMzm9A6N98427a8lsiY/0Sg+B4uvqfE1GeA4=;
- b=Ya28SmOC/I9tEsXTSuWONdKCNwAplzfsYnpLTQQR0rzzR1YY5xz7yxc7xer7UYGC8N
- shJ2g4416wn/6LWa/kx5fSWhU1aduFiuaKJ7v1Ktt8wnAsxXOPXBdnx7aROSMF18geUk
- vh1ax4mVcF8q+DRvkWEA8WB+UPemnHr8UrkeWZVbz0tm8zEMjtaBRSKynTbgaFZ1Nr95
- hISIhdaYJNsQpAQHaeuJrSjL3aM2sX2YLo55DPPgfkU4iA8MSaG8/Kbb4cvGuc7mw5j3
- QKJdfQLcdlUoM21OOg8HCdEekEXaMwPjfpcxjgyQQ7QwCN/ot7k1RDMJvoHICXErAIoo
- 1M+g==
+ d=linaro.org; s=google; t=1741718464; x=1742323264; darn=nongnu.org;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=9Ud0FKd3zeRdaYRZH6CT8xOBJbHe3ZdulDPSR2uTzq0=;
+ b=kGvwS/5vCZIsjdM7cAso7iRoGXAmSLovqrux9+PTe6r7ba0mX4jl0D64c+5SpoFILt
+ Ctttj0QeFpzutFagCTkljft2lxtvPnxK0bdDv5O92o0scdXNxCfwknmhGv3QGNMBYvHQ
+ A0smZWyDj3pg+6VZF4/jHmMq0ZDDRj77b+DYjJiYIDG2Juczx0l6983SCola+ROt+vQj
+ aRR1wnledEQrqDodzbO+rUeKD8Tl5NQkN9ZtFcjX4HqEPz4W8FVa6nh+vFvIVfUOBJkI
+ iCu+9Ia9dS7BXINyfLfNn0hNxzIY8SQOt9k834bz8S6DaWfqLA6m53xKqZ7rm/3S9pbP
+ x5Nw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741706643; x=1742311443;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=9SkM+QBVMzm9A6N98427a8lsiY/0Sg+B4uvqfE1GeA4=;
- b=Qz/b4P1k1ZrsZfHfICFYA4c0mcyRIF5WSm9mZhxWZSGJGYCii5OGXOeXiWWgbdfjHS
- ytYbnUBSUM4BJ53EkNNTrN5jV13olpMVZ4a6tmkwoAMOVeOMjtbzi2g+srag3VGUDAf2
- RVYx72JLWsYAB4ZIjk6aG02L/jpPocBQnZVANLo+gA6QCfWEAaQRmBWNxk8rSWsduUWt
- J67hXKcKhuViXdR8pC9mPh1Ys7BX8NOWpKKZUPdeoS46ieo1DD9LwmfU/fXdwp8s5gTR
- 3Jb5Zq3koaKHOCMfKIOJZdPWSeZabe3qo/kBRGSDSgCq8eox15VErWfFqJ/7JCcpqJGs
- 0lhg==
+ d=1e100.net; s=20230601; t=1741718464; x=1742323264;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=9Ud0FKd3zeRdaYRZH6CT8xOBJbHe3ZdulDPSR2uTzq0=;
+ b=lSExuKaEnrJfal5OAj62CE4w96aPlTerBnuKUtqr3ibUlReZmBFG00zaLBO3WLD/Vm
+ bDP4pyhxPVmvfZX5suJv8kJAlsB4KoA8euPERRKLcscFDg18K7ARzYHFlQIEKjT3lqZ4
+ EpyMmFMvNFyf4C5CVV2umqTiKw2hixLVsoaohU4C4QPRVBJt2zGqfug3uD3ZogEQ/AJ2
+ ii1EAWmNJbjAGjVG8+G9T5olVNrNkdpmTmnooXAeJVXeQEhDJqtRYerThs9dlR55zSFl
+ Hj7/9nlWJWejn5a50NoGRJwWeWBqQBrV0sGv6rbaKIYOmicIhon818f2QmVBtyoJVCWT
+ CB1Q==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWSExeT3rc4tP10Rg/GGskWZMh4eeOqq92U/IU7PZTPr510KmJveAbRxOrnMsQCf+t1xIXiyPi7qHFS@nongnu.org
-X-Gm-Message-State: AOJu0Yx2fMV0/HOslOwNEzVXJx3isbrvTi81kbmLWqZHFCfkZN8TChAI
- P1rWZvPwj4qQ7Yu3Pxww2GYRryBhhvEDLx0yQ8fW3o8dUckZghPkIkI/N/+UuAQ=
-X-Gm-Gg: ASbGncsFhfetzhrjlqmUV7qpMPniE0OjYnmICOmFHSQ9h8e7/Do0hP6YhQAPowGVNNU
- qSZA2wFUMWdgoi0ZdZFP0+sEIGSijj/+uj9PuxeSAJum+1NnWCzPKPnIdaZI3bYj5VkRFRYTfaw
- JkYRXaioORrQX5xsC4OHrPt5dmb0pUNg7TWn0Jo9y2Q4qOtu3ctYuz+Vah3ulphxiWGSveeN9+r
- vVEHt6w8JlIPB4Km3HFOk+OtIjc199CiwgxaU67QCYKyU69xKiA971E9MKVZLq/Bs6TKKNeEGu3
- OzJX501Rfr42oMSpGhxz2dq36Yp15cnkMl7gD/HZ0u0baqSI8x2OCx1aSm6365kKSmge
-X-Google-Smtp-Source: AGHT+IFBs0+S+LkojiDrxva0/M3wYEnbIAEG3pIneKNxcshy9ERSmJz3RFAr2j7Us8awjWxYZcw3Bg==
-X-Received: by 2002:a17:90b:1c05:b0:2ee:a583:e616 with SMTP id
- 98e67ed59e1d1-2ff7ce6d543mr28614081a91.9.1741706643713; 
- Tue, 11 Mar 2025 08:24:03 -0700 (PDT)
-Received: from [192.168.1.67] ([38.39.164.180])
- by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-2ff4e773c7csm12057570a91.15.2025.03.11.08.24.02
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 11 Mar 2025 08:24:03 -0700 (PDT)
-Message-ID: <dbe403b1-a90a-4e32-a773-680539ce5550@linaro.org>
-Date: Tue, 11 Mar 2025 08:24:02 -0700
+ AJvYcCVrhzcTXBTH2H1kquUsmH6zrzU3I+lM0kn/XqtJdoAWs+ST2zjPUkJvqupJevapbMJ3NnEsR93Cf0kn@nongnu.org
+X-Gm-Message-State: AOJu0YxwPp2MBBpCJdJ7l9Xvv4SPQ0rH1Fsu2N7pxtBi9DGnCykqR5jS
+ QsYhllzc2wvIcft65STQjrK0/lMXvTeqhUAG/RK7lJo57DrgLZrO29w+iW1fnGOFnbyXmfV7Fhv
+ hD/OaWp1RVROjyFEdWNe9DWO71NKO6IuU3aGuvQ==
+X-Gm-Gg: ASbGnctPdZArUoZCS/Q0ZPAhFLAzOvCAfeSMGD19uaJBJ6NsOZRoKwIS+VIBlA+Ord0
+ 4ySoEg2GIpb+E3cNPoLoZ0c8AB8dMouT2rHl2k7A/8XAR7wrFlKvs5lkoLup0jaUPARLDqudZ6/
+ tici1tTtHUTZf58JkddHxpTeWlK3Y=
+X-Google-Smtp-Source: AGHT+IGuKevcUIvXFEzyP3o1DXyCV+QKcNpVG+elMJi28R5FlAxroa4Y3OmYf0D8Z4dzUVKQTQkCVL5ZhxFg3mv92ic=
+X-Received: by 2002:a05:6902:2784:b0:e38:c0ed:8128 with SMTP id
+ 3f1490d57ef6-e635c0f9194mr25472869276.3.1741718464175; Tue, 11 Mar 2025
+ 11:41:04 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 14/16] include/exec/memory: extract devend_big_endian
- from devend_memop
-Content-Language: en-US
-To: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- qemu-devel@nongnu.org
-Cc: Paul Durrant <paul@xen.org>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- David Hildenbrand <david@redhat.com>, Weiwei Li <liwei1518@gmail.com>,
- xen-devel@lists.xenproject.org, Paolo Bonzini <pbonzini@redhat.com>,
- Richard Henderson <richard.henderson@linaro.org>,
- Peter Xu <peterx@redhat.com>, Nicholas Piggin <npiggin@gmail.com>,
- kvm@vger.kernel.org, qemu-ppc@nongnu.org,
- Alistair Francis <alistair.francis@wdc.com>,
- "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
- Stefano Stabellini <sstabellini@kernel.org>,
- Harsh Prateek Bora <harshpb@linux.ibm.com>, alex.bennee@linaro.org,
- qemu-riscv@nongnu.org, manos.pitsidianakis@linaro.org,
- Yoshinori Sato <ysato@users.sourceforge.jp>,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Daniel Henrique Barboza <danielhb413@gmail.com>,
- Anthony PERARD <anthony@xenproject.org>
-References: <20250311040838.3937136-1-pierrick.bouvier@linaro.org>
- <20250311040838.3937136-15-pierrick.bouvier@linaro.org>
- <b8073e25-ae8a-462b-b085-84c471a4bf5e@linaro.org>
-From: Pierrick Bouvier <pierrick.bouvier@linaro.org>
-In-Reply-To: <b8073e25-ae8a-462b-b085-84c471a4bf5e@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: base64
-Received-SPF: pass client-ip=2607:f8b0:4864:20::102e;
- envelope-from=pierrick.bouvier@linaro.org; helo=mail-pj1-x102e.google.com
+References: <20250227073049.32655-1-jason.chien@sifive.com>
+In-Reply-To: <20250227073049.32655-1-jason.chien@sifive.com>
+From: Peter Maydell <peter.maydell@linaro.org>
+Date: Tue, 11 Mar 2025 18:40:51 +0000
+X-Gm-Features: AQ5f1Jo7nCMLSopVLhXpvlFyjSRhVDC6klkfXYushm7Xc6T7hWrVU6nH8ZDza3c
+Message-ID: <CAFEAcA8LPHEmLxDMUNN7DSHCw8pwvA7kUOAH+Ef1mDvOVH-dYQ@mail.gmail.com>
+Subject: Re: [PATCH] hw/misc/edu: Rename macros indicating the direction of
+ DMA operations
+To: Jason Chien <jason.chien@sifive.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, Jiri Slaby <jslaby@suse.cz>
+Content-Type: text/plain; charset="UTF-8"
+Received-SPF: pass client-ip=2607:f8b0:4864:20::b2a;
+ envelope-from=peter.maydell@linaro.org; helo=mail-yb1-xb2a.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -120,47 +94,30 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-T24gMy8xMS8yNSAwMDozNiwgUGhpbGlwcGUgTWF0aGlldS1EYXVkw6kgd3JvdGU6DQo+IE9u
-IDExLzMvMjUgMDU6MDgsIFBpZXJyaWNrIEJvdXZpZXIgd3JvdGU6DQo+PiB3ZSdsbCB1c2Ug
-aXQgaW4gc3lzdGVtL21lbW9yeS5jLg0KPiANCj4gSGF2aW5nIHBhcnQgb2YgdGhlIGNvbW1p
-dCBkZXNjcmlwdGlvbiBzZXBhcmF0ZWQgaW4gaXRzIHN1YmplY3QgaXMgYQ0KPiBiaXQgYW5u
-b3lpbmcuIEJ1dCB0aGVuIEknbSBwcm9iYWJseSB1c2luZyAyMC15ZWFycyB0b28gb2xkIHRv
-b2xzIGluDQo+IG15IHBhdGNoIHdvcmtmbG93Lg0KDQpDYW4geW91IHBsZWFzZSBzaGFyZSB3
-aGF0IHdvdWxkIGJlIHRoZSBtZXNzYWdlIHlvdSAob3IgdGhlIHRvb2wpIHdvdWxkIA0KcHJl
-ZmVyIGluIHRoaXMgY2FzZT8NCg0KSXQncyBqdXN0IGEgc2luZ2xlIGxpbmUgc3ViamVjdCAo
-c2F5aW5nICJ3ZSBleHRyYWN0IHRoZSBmdW5jdGlvbiIpICsgYW4gDQphZGRpdGlvbmFsIGxp
-bmUganVzdGlmeWluZyB3aHkgaXQncyBuZWVkZWQuDQoNCj4gDQo+IE9ubHkgdXNlZCBpbiBz
-eXN0ZW0ve21lbW9yeSxwaHlzbWVtfS5jLCB3b3J0aCBtb3ZlIHRvIGEgbG9jYWwNCj4gc3lz
-dGVtL21lbW9yeS1pbnRlcm5hbC5oIGhlYWRlcj8gT3IgZXZlbiBzaW1wbGVyLCBtb3ZlDQo+
-IGluY2x1ZGUvZXhlYy9tZW1vcnktaW50ZXJuYWwuaCAtPiBleGVjL21lbW9yeS1pbnRlcm5h
-bC5oIGZpcnN0Lg0KPiANCj4+IFNpZ25lZC1vZmYtYnk6IFBpZXJyaWNrIEJvdXZpZXIgPHBp
-ZXJyaWNrLmJvdXZpZXJAbGluYXJvLm9yZz4NCj4+IC0tLQ0KPj4gICAgaW5jbHVkZS9leGVj
-L21lbW9yeS5oIHwgMTggKysrKysrKysrKysrLS0tLS0tDQo+PiAgICAxIGZpbGUgY2hhbmdl
-ZCwgMTIgaW5zZXJ0aW9ucygrKSwgNiBkZWxldGlvbnMoLSkNCj4+DQo+PiBkaWZmIC0tZ2l0
-IGEvaW5jbHVkZS9leGVjL21lbW9yeS5oIGIvaW5jbHVkZS9leGVjL21lbW9yeS5oDQo+PiBp
-bmRleCA2MGMwZmI2Y2NkNC4uNTc2NjEyODM2ODQgMTAwNjQ0DQo+PiAtLS0gYS9pbmNsdWRl
-L2V4ZWMvbWVtb3J5LmgNCj4+ICsrKyBiL2luY2x1ZGUvZXhlYy9tZW1vcnkuaA0KPj4gQEAg
-LTMxMzgsMTYgKzMxMzgsMjIgQEAgYWRkcmVzc19zcGFjZV93cml0ZV9jYWNoZWQoTWVtb3J5
-UmVnaW9uQ2FjaGUgKmNhY2hlLCBod2FkZHIgYWRkciwNCj4+ICAgIE1lbVR4UmVzdWx0IGFk
-ZHJlc3Nfc3BhY2Vfc2V0KEFkZHJlc3NTcGFjZSAqYXMsIGh3YWRkciBhZGRyLA0KPj4gICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgdWludDhfdCBjLCBod2FkZHIgbGVuLCBN
-ZW1UeEF0dHJzIGF0dHJzKTsNCj4+ICAgIA0KPj4gLS8qIGVudW0gZGV2aWNlX2VuZGlhbiB0
-byBNZW1PcC4gICovDQo+PiAtc3RhdGljIGlubGluZSBNZW1PcCBkZXZlbmRfbWVtb3AoZW51
-bSBkZXZpY2VfZW5kaWFuIGVuZCkNCj4+ICsvKiByZXR1cm5zIHRydWUgaWYgZW5kIGlzIGJp
-ZyBlbmRpYW4uICovDQo+PiArc3RhdGljIGlubGluZSBib29sIGRldmVuZF9iaWdfZW5kaWFu
-KGVudW0gZGV2aWNlX2VuZGlhbiBlbmQpDQo+PiAgICB7DQo+PiAgICAgICAgUUVNVV9CVUlM
-RF9CVUdfT04oREVWSUNFX0hPU1RfRU5ESUFOICE9IERFVklDRV9MSVRUTEVfRU5ESUFOICYm
-DQo+PiAgICAgICAgICAgICAgICAgICAgICAgICAgREVWSUNFX0hPU1RfRU5ESUFOICE9IERF
-VklDRV9CSUdfRU5ESUFOKTsNCj4+ICAgIA0KPj4gLSAgICBib29sIGJpZ19lbmRpYW4gPSAo
-ZW5kID09IERFVklDRV9OQVRJVkVfRU5ESUFODQo+PiAtICAgICAgICAgICAgICAgICAgICAg
-ICA/IHRhcmdldF93b3Jkc19iaWdlbmRpYW4oKQ0KPj4gLSAgICAgICAgICAgICAgICAgICAg
-ICAgOiBlbmQgPT0gREVWSUNFX0JJR19FTkRJQU4pOw0KPj4gLSAgICByZXR1cm4gYmlnX2Vu
-ZGlhbiA/IE1PX0JFIDogTU9fTEU7DQo+PiArICAgIGlmIChlbmQgPT0gREVWSUNFX05BVElW
-RV9FTkRJQU4pIHsNCj4+ICsgICAgICAgIHJldHVybiB0YXJnZXRfd29yZHNfYmlnZW5kaWFu
-KCk7DQo+PiArICAgIH0NCj4+ICsgICAgcmV0dXJuIGVuZCA9PSBERVZJQ0VfQklHX0VORElB
-TjsNCj4+ICt9DQo+PiArDQo+PiArLyogZW51bSBkZXZpY2VfZW5kaWFuIHRvIE1lbU9wLiAg
-Ki8NCj4+ICtzdGF0aWMgaW5saW5lIE1lbU9wIGRldmVuZF9tZW1vcChlbnVtIGRldmljZV9l
-bmRpYW4gZW5kKQ0KPj4gK3sNCj4+ICsgICAgcmV0dXJuIGRldmVuZF9iaWdfZW5kaWFuKGVu
-ZCkgPyBNT19CRSA6IE1PX0xFOw0KPj4gICAgfQ0KPj4gICAgDQo+PiAgICAvKg0KPiANCg0K
+On Thu, 27 Feb 2025 at 07:32, Jason Chien <jason.chien@sifive.com> wrote:
+>
+> This commit renames the macros to accurately reflect the direction of
+> DMA operations.
+>
+> EDU_DMA_TO_PCI now represents reading memory content into the EDU buffer,
+> while EDU_DMA_FROM_PCI represents writing EDU buffer content to memory.
 
+The EDU device is a PCI device, so if it is reading
+then it is reading data from the PCI bus, and if it is
+writing then it is writing data to the PCI bus. So I
+think there's an argument that the current names make
+sense.
+
+Plus, presumably this device model is implementing the hardware
+half of a defined specification. The authoritative source for
+what names the 0 and 1 values of the DIR bit should be named
+would be that specification.
+
+Where is that spec, and what does it say? If it says 0 for
+FROM and 1 for TO, that's what we should use. If it's the
+other way around, that's an error in our device implementation
+that we should correct.
+
+thanks
+-- PMM
 
