@@ -4,71 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 67739C28B2F
-	for <qemu-riscv@archiver.kernel.org>; Tue, 11 Mar 2025 07:26:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 97621C28B2E
+	for <qemu-riscv@archiver.kernel.org>; Tue, 11 Mar 2025 07:27:16 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tru0W-0001Yn-Vy; Tue, 11 Mar 2025 03:26:33 -0400
+	id 1tru0q-0001kg-4T; Tue, 11 Mar 2025 03:26:53 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tru0U-0001XW-4l
- for qemu-riscv@nongnu.org; Tue, 11 Mar 2025 03:26:30 -0400
-Received: from mail-wr1-x42f.google.com ([2a00:1450:4864:20::42f])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tru0m-0001ig-GL
+ for qemu-riscv@nongnu.org; Tue, 11 Mar 2025 03:26:48 -0400
+Received: from mail-wm1-x336.google.com ([2a00:1450:4864:20::336])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tru0N-0007bj-9z
- for qemu-riscv@nongnu.org; Tue, 11 Mar 2025 03:26:29 -0400
-Received: by mail-wr1-x42f.google.com with SMTP id
- ffacd0b85a97d-3913958ebf2so2494226f8f.3
- for <qemu-riscv@nongnu.org>; Tue, 11 Mar 2025 00:26:21 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tru0j-0007fF-L1
+ for qemu-riscv@nongnu.org; Tue, 11 Mar 2025 03:26:48 -0400
+Received: by mail-wm1-x336.google.com with SMTP id
+ 5b1f17b1804b1-43cf06eabdaso23609265e9.2
+ for <qemu-riscv@nongnu.org>; Tue, 11 Mar 2025 00:26:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1741677980; x=1742282780; darn=nongnu.org;
+ d=linaro.org; s=google; t=1741678002; x=1742282802; darn=nongnu.org;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=WBH8un9SN3jvdF5o16jBTUcJYgDHmjsu0gBD/ioH79g=;
- b=qqtGxbA9z6XQ9J3lLtHNZz/rMKS9cEE68CBPNtJpq15MTZM9pyCnBwyuerc4jI/2Cj
- to+uab5c/g449cxEP3Yw+lJDv9IU0w4ipTBEGjtZLrYVs4bIOVmfvQK7+81MWe00fMso
- G/RQaGaEk86ibJfGdY3VXWZqAEvPbUXHUljyOko8ByB/jj2iFVgjZkhStkAaTlfg7Onf
- jArJN7hqFcuCm5eDcc5mdasS8hv/s2lcQ6/vr6bD5RFhg/EVNdcwTOLDLlxVExDuCJhA
- NLe3gH7ZxiGWYpefbywdth6omtvBVuTrXZt74m6XRC3jjc1tLvBw41+mJalhB4gPdHLb
- Ea4A==
+ bh=ixQm0MWjxG3W9XU5tOCfvUKz5fda/FdNvvBHZqMnUSI=;
+ b=MltIaAoKRydnfUGmAN6i7p1qBdEQyn2IgjUvyquc5pAUuuNcTZcF/NKnSsEMbQI3l6
+ 6t3m5NHyWgEQjuOaQFvSh1ox/x3WByjvbvBO23wt/bh9Mq4g+AknmND/qQQHrsg2y/hP
+ xDhauptNEJm81vz5VZulh4gxaT0QKbwJnrqOLRobkI4NwUOfqMZ8P+S8PNZ4RFAyI+m4
+ fAMQvU3ZGznQuIKf04FLRvy7xPmCiW/YRti2bn+PUPjpuqtzBAHySucQoE39WJ+Zz9xk
+ xlgAAuj45A9qLy9mZUsj9G/cguFBVayFSjP7K1LrBFCOKjN637D6r8+cUNMZNDWWVqIe
+ Xt0w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741677980; x=1742282780;
+ d=1e100.net; s=20230601; t=1741678002; x=1742282802;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=WBH8un9SN3jvdF5o16jBTUcJYgDHmjsu0gBD/ioH79g=;
- b=q9H4kK0UsSHUFCS59DBVt46jcNJSw0w8zgftl65ix2WAP1SUI2YzwY1VgXNUDaodcA
- oncWfpLCupOlFYV4OBFwPMUmFhnShTUQ1otmlXsGVhk5jZ0BJ34vi/0G8Ncv6cz6oPRt
- FxkZQ1KfoifKGlOTGGMhwFWMH/4Gw0YrJKbPpz16d8lDjAU1Zj3iWAp0bCN7bJOgBNZm
- VEZK88yieyvHMdhLD4pyy9sxavIDILD25Fj3Hzdff6lUXQP+7tX7jKXbjr4ozoO1t+Ov
- +iBy6IsT5bZldyY9T1PBQ7e4HJem3xnz1yqcmatJud0/bWOUhl69vVD+q136yUGZmavK
- rtzg==
+ bh=ixQm0MWjxG3W9XU5tOCfvUKz5fda/FdNvvBHZqMnUSI=;
+ b=TJpb53UkSvj4e7Xo+gTuLCLncw+6ndt8V7edVNhef5FUDHbp9kIxKNgNcR759UcYB8
+ BTq1NTCqNJyd+mYE/6NH9d8m9H9lO6FVfVTJL9UDl5s8TATTI0V38YdB/7YbApXuALUz
+ nzpxQ6lBTan2ZTmcSEXoXBe5hWh5y7Zm1WaMqUUrxD9OOE3vJlY5ia0Aec48DH9evNSK
+ CzFGLvFDqwWZ0ldehfUuZWa3IOuLlPVKRXI0vi5yuy4GyoNjXcHfXVjdUEM2NDNcbnmw
+ JxaCf5fskTE/LYvyiCtXhclyQacJIa+uH11u0Tylky5PVSlnQz7BopvYDbcGYcjBQgIi
+ +3HQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWiqLWd+G+JJNIIxfQi0bEDDUn+XGUFHKzcQLcYqn2t4zdrmM/jsimK1c/nKKfcn0Xsz57b4mFM3BnU@nongnu.org
-X-Gm-Message-State: AOJu0Ywv9VS1wg0nKyhgKWDQjAX4Av2c23pzDOVKxCzh8Whk1HJ9Aumc
- 3K3cjHMoMrrUupHWuz17F+dp9hVcY8sxaIiY4DUu3+slLNQ9DhjXsEtSxpNkVOI=
-X-Gm-Gg: ASbGncuVyRrgnxB8Dhw/1sMvFrtaNcalmEfNy0GLGNk+N4HHrdhYEiZio8Cv3JhdXUR
- zrqqliNgPWrWPt+gtSnizsrf9GEX0MPkmrRRlZMPjXi7RkoxpQgNxP8DWZyR5LICUkbaB+9j5JB
- mlBM8XwI3UlyoQhzZQK10IU81z8Nn7C/nEWTfHJfLlK4Tnwhzm5M6BlrXgwT2Wy4oSORNl635Su
- 1T+FEplGJPfr7UoFqr5qSfYa7OEsz078wT4i5uIK2rSQXIH8pFuqE+3DJfcoxJP5p1u6Z0gb5zQ
- Dezc+8+7VQGwMRpgmpco4OWazCGwGcrXKtod1GpbyMGwH2I2MnQX1UjrcbQP3iZue8/ypvS1G/Q
- U32VUWK7kt1RO
-X-Google-Smtp-Source: AGHT+IGFEKvevhRYU5jwIA+OF5lD7GqYNAbzux+l1q3TxUHSloakvK6wXKgncMmFM2y1SaO/Ty9ZZA==
-X-Received: by 2002:a05:6000:440e:b0:391:39bd:a381 with SMTP id
- ffacd0b85a97d-3926487d48bmr2239834f8f.30.1741677979924; 
- Tue, 11 Mar 2025 00:26:19 -0700 (PDT)
+ AJvYcCUKimLLsb2AaSBndQK7zro6ZCq7kxSnMJ4plfzUKEcicHHMZF7Sw0W+5WgGhimZ/wKjVPScp5Ky7zPF@nongnu.org
+X-Gm-Message-State: AOJu0Yy7VDW1M9RykzfhOo33o4jHJp00/QY86xfIEQdfBg0j3KABaVya
+ uzvE8IShKAtnhdJlGh1sQZIt37bpCeIcSr9QUZK9/fC8JPyyjoJklSL0Dilihq4=
+X-Gm-Gg: ASbGncsZJDk7Gm6LKY93SZzH3ofJdBO/Kql/GdaALmCgN/2OXgJ06MQBhVHngy1gsl1
+ ilzKzbiGSef/6k9HOL36IE7JjjieyAYX/CXLQPrUvv8LMuWyICjQsmtmWCgy/nPYd5lAy8rYaxX
+ b+UuhRuWCZpX4QQ4KN/5KdBfdWkB42Tuc6+OTuNpFFdxD8qchR/Bs38gL0LPtlDz3stIFu59y1o
+ gMyWOK0w17AVe2jdBlWVSLrxFr6ERHb+a6is64LQjawmfIJhjxB+vIMFwlP5Uare8uLxECtQgJy
+ gZtYhMMd4dkklhjes+Cgga27qaC1tILluuzq8fQuQifemXVEiqjH+XUiZGDjzuk+GWLfNPEWlyH
+ RYwuIdPb9uRjm
+X-Google-Smtp-Source: AGHT+IHkbKwZ85r50y8SupgnjoEiG0z2vsuYpmQ1kXDuNtR/J+NTZlfd2MeQZu55SLcc8fFLvUwdtQ==
+X-Received: by 2002:a05:600c:4f16:b0:43c:fd72:f039 with SMTP id
+ 5b1f17b1804b1-43cfd72f2ccmr76596325e9.11.1741678002154; 
+ Tue, 11 Mar 2025 00:26:42 -0700 (PDT)
 Received: from [192.168.69.199] (88-187-86-199.subs.proxad.net.
  [88.187.86.199]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-43bdd8b0548sm176538855e9.6.2025.03.11.00.26.17
+ 5b1f17b1804b1-43d025869e7sm19373395e9.7.2025.03.11.00.26.40
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 11 Mar 2025 00:26:19 -0700 (PDT)
-Message-ID: <f0c7b0ff-a43a-4203-aba1-2e06a462771e@linaro.org>
-Date: Tue, 11 Mar 2025 08:26:17 +0100
+ Tue, 11 Mar 2025 00:26:41 -0700 (PDT)
+Message-ID: <9f92a783-3826-4a06-9944-0e0ec5faccc9@linaro.org>
+Date: Tue, 11 Mar 2025 08:26:39 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 07/16] exec/exec-all: remove dependency on cpu.h
+Subject: Re: [PATCH v2 08/16] exec/memory-internal: remove dependency on cpu.h
 To: Pierrick Bouvier <pierrick.bouvier@linaro.org>, qemu-devel@nongnu.org
 Cc: Paul Durrant <paul@xen.org>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
  David Hildenbrand <david@redhat.com>, Weiwei Li <liwei1518@gmail.com>,
@@ -86,21 +86,21 @@ Cc: Paul Durrant <paul@xen.org>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
  Daniel Henrique Barboza <danielhb413@gmail.com>,
  Anthony PERARD <anthony@xenproject.org>
 References: <20250311040838.3937136-1-pierrick.bouvier@linaro.org>
- <20250311040838.3937136-8-pierrick.bouvier@linaro.org>
+ <20250311040838.3937136-9-pierrick.bouvier@linaro.org>
 Content-Language: en-US
 From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-In-Reply-To: <20250311040838.3937136-8-pierrick.bouvier@linaro.org>
+In-Reply-To: <20250311040838.3937136-9-pierrick.bouvier@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::42f;
- envelope-from=philmd@linaro.org; helo=mail-wr1-x42f.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::336;
+ envelope-from=philmd@linaro.org; helo=mail-wm1-x336.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -123,20 +123,21 @@ On 11/3/25 05:08, Pierrick Bouvier wrote:
 Missing the "why" justification we couldn't do that before.
 
 > ---
->   include/exec/exec-all.h | 1 -
->   1 file changed, 1 deletion(-)
+>   include/exec/memory-internal.h | 2 --
+>   1 file changed, 2 deletions(-)
 > 
-> diff --git a/include/exec/exec-all.h b/include/exec/exec-all.h
-> index dd5c40f2233..19b0eda44a7 100644
-> --- a/include/exec/exec-all.h
-> +++ b/include/exec/exec-all.h
-> @@ -20,7 +20,6 @@
->   #ifndef EXEC_ALL_H
->   #define EXEC_ALL_H
+> diff --git a/include/exec/memory-internal.h b/include/exec/memory-internal.h
+> index 100c1237ac2..b729f3b25ad 100644
+> --- a/include/exec/memory-internal.h
+> +++ b/include/exec/memory-internal.h
+> @@ -20,8 +20,6 @@
+>   #ifndef MEMORY_INTERNAL_H
+>   #define MEMORY_INTERNAL_H
 >   
 > -#include "cpu.h"
->   #if defined(CONFIG_USER_ONLY)
->   #include "exec/cpu_ldst.h"
->   #endif
+> -
+>   #ifndef CONFIG_USER_ONLY
+>   static inline AddressSpaceDispatch *flatview_to_dispatch(FlatView *fv)
+>   {
 
 
