@@ -4,66 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CE60CC2BA1B
-	for <qemu-riscv@archiver.kernel.org>; Tue, 11 Mar 2025 20:04:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3056DC282EC
+	for <qemu-riscv@archiver.kernel.org>; Tue, 11 Mar 2025 20:05:03 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1ts5lE-0002ZW-72; Tue, 11 Mar 2025 15:59:32 -0400
+	id 1ts5kV-0001HB-TB; Tue, 11 Mar 2025 15:58:48 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <pierrick.bouvier@linaro.org>)
- id 1ts5k9-0000zX-BJ
- for qemu-riscv@nongnu.org; Tue, 11 Mar 2025 15:58:29 -0400
-Received: from mail-pl1-x636.google.com ([2607:f8b0:4864:20::636])
+ id 1ts5jz-0000oi-IH
+ for qemu-riscv@nongnu.org; Tue, 11 Mar 2025 15:58:17 -0400
+Received: from mail-pl1-x62b.google.com ([2607:f8b0:4864:20::62b])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <pierrick.bouvier@linaro.org>)
- id 1ts5k4-00004y-GO
- for qemu-riscv@nongnu.org; Tue, 11 Mar 2025 15:58:24 -0400
-Received: by mail-pl1-x636.google.com with SMTP id
- d9443c01a7336-2243803b776so107920135ad.0
- for <qemu-riscv@nongnu.org>; Tue, 11 Mar 2025 12:58:19 -0700 (PDT)
+ id 1ts5jx-0008UV-8a
+ for qemu-riscv@nongnu.org; Tue, 11 Mar 2025 15:58:15 -0400
+Received: by mail-pl1-x62b.google.com with SMTP id
+ d9443c01a7336-223959039f4so120348515ad.3
+ for <qemu-riscv@nongnu.org>; Tue, 11 Mar 2025 12:58:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1741723099; x=1742327899; darn=nongnu.org;
+ d=linaro.org; s=google; t=1741723092; x=1742327892; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=bYYGOsy+zcSjxVOnigwMonGaAhWbZB7W76ZyOX5Jlgc=;
- b=aw/aQ+jpPy2luIZYXTFo5tY/KJYB+/jY9ET4myaJoAMSxyzNVBizMum3OOhDAzU8qu
- qv8k478ouBY6Uh5l2gqMW1jSZu4xVM7zkaYxmA5Z6OQj4SFuV+KKMGPblopXp+oLnfxR
- EtTEzVC6e7+ODUyea+NX4rd0vYE9VSV9x/XA3ZN2CTnDsBecKDnOa+gPj6YzE7ujzp9P
- qrQqIR5av7A5xICug4gPqILjkhNq/3/QTzXUNKu+DGfeDtM6F7tRrebo130rBRJwq/M3
- 2mePmOM0VMoFe2JligtDOsOzuUaPq5zNbkkmqpSuJ6d3n/Jkpezw5VM52NX+AVtijm3i
- VWYg==
+ bh=949DeBQijWmgHqYCdDdupcSTn3rDdND8nLqwkILEwEI=;
+ b=w1mlVKH4kEhNempyiiXq96ZE2QOzsOnrItzWRdZwSZ79IRZl/h/qyDHVUpRctSM9ct
+ wqPVKDAOGYZFxdzh3zGSKxN5pPD9IriWWhcFH5x/dfULOYYgE+DQ8A3v/M9tMyqokb0K
+ Lq1SmPCUey4wxvLTziidBM2OR1EQYQNey52iAlpaq1BrApyt9DP5rt2AriqFGFDfxCei
+ Z3BvoidHsSLtalP+nQjSIsfIUWgJT1G76CTE9IdRXYd/GUtWDsmt8uvj9npI3rli+oaZ
+ NNUpnLiFYoU5u4qZTg6G2EGX9/YBrOBoSKp0vKiH0V1glIZ6lMxOVMPagWLuGicow83B
+ h6Rg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741723099; x=1742327899;
+ d=1e100.net; s=20230601; t=1741723092; x=1742327892;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=bYYGOsy+zcSjxVOnigwMonGaAhWbZB7W76ZyOX5Jlgc=;
- b=rlN7dwn8u3JrsNwOcMz3zl/WdhNUpE4zSJ937VMSI9UcSKDoFZsDqP5+Gc6j2EHqNo
- zsftsg2Cvd2+LXBsDsNdsULB39bzsDpmSvtQPQwCKbuLFXH6r4uMmdARUpMU6q8g2Ajr
- vGfosbLPMnUsWXpGRPSkhqzQGMVhd/9iD4hd87zXxRLQE5KRqAHxYNfbJWgoxDbV1PbK
- US0kBCeCLkA2TUsfHqOgn0/g58JOirPInFI6yApqQnWlp9T2K3MysdK4Y2XIc19E7NuL
- IN/keBpHTvFdCpZ51p/79vY58Pt0H/oiVutr9NF9RSLHolCKg5au7X/Nxo+HQ/5nbCZ1
- 8VGQ==
+ bh=949DeBQijWmgHqYCdDdupcSTn3rDdND8nLqwkILEwEI=;
+ b=o9qS5NtCWtpnO2xV0rGpcuF/dnMlWTGSqIj/Strc7P6BNu5dRuaOnUdXlLc6SPFrlT
+ OlQ+4alQj5iAzzHIBeAAFenCQbgxI4nnGGqEXO6MO4g2qFiBoTh06tY9tw/BdbEjRb12
+ yKa6UpcO10gm6alL35C3ez9YqLmV436yTRBO0kGfAuLFS1JhYrN/LFT9XgOzwnk6Yjha
+ XRr4htvG08kyCOWUdvt57Z8ytRlvj4VqG4IRKyzN6X007NFdzMk2VNuSjLb8c75QSERu
+ rynj7ATi2Hmq8QZDO1D2CoKTIkUmIYvv2HG0PTcrUpfWmqi4Mx6gmch6kYCWlktsqaNu
+ qp3g==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUkD4rZT5kRLDJYTZ6c+ei65us/P6BpaigCY4QvY7X0kOvOra6Esv93zSVg2KrIyploZULz2RaLEOMy@nongnu.org
-X-Gm-Message-State: AOJu0YzE499nZ2mDHYTgvTGb51w8c90dUzoDVmpnSuzYPYhx8CKdaT4a
- H/7sT/6MFhY/JOdM1qWE3eewxVPFYYdNj+5lfX5y6q4XAHXH5WkwgkHPTL+dlQg=
-X-Gm-Gg: ASbGncsgfM0ywYB0q8O4dA/bhqmdF0cqRV5IbIojz/U4Mu6gKLfz07E9lmwcs94IB+A
- tHr57Mk+4xMdSkJlk5U7k+rYYNsdBn+hpclYT5IN5Urv5fvP3lkGMfpkX5SprkYF1qXiEy3D6pn
- VGrQrTEVpfxv3JaWirQOb5uV8QpRQFLa4FLoYa2uDB/bb1I6gBJnrnqa75YmswPZQMVqJ1z0+sG
- DsBSS5nnwJkbZE8lD8BIz70oJDmqbVguKqWiAL1ltqFtyChFvVSbuJlWXAKervkz73LnO5LVYaE
- ccK7fjgFmimudbHhQwgqrHiRens7kyMdDwEm+UVHMNYO5pl7iprnHHk=
-X-Google-Smtp-Source: AGHT+IFbL/EikEqHmQH7/+hOB9jflYFjv2fXkewmYVpLTsSrUYTiBJ9zTgGhdqBywi26rV+yUM0nVQ==
-X-Received: by 2002:a05:6a00:1708:b0:736:43d6:f008 with SMTP id
- d2e1a72fcca58-736aa9f0b0cmr27815913b3a.12.1741723098739; 
- Tue, 11 Mar 2025 12:58:18 -0700 (PDT)
+ AJvYcCXus7qyNDbIYPHFMzKpc9DavcEhfK07iIT3wvWw0VL3VLXjgmM47sFl5A+4IbDUjIKmqKYeCBU67Q1F@nongnu.org
+X-Gm-Message-State: AOJu0YwxfQ/SyUpHSk1Pzgx5omX7bL5zuXjHKbXo6prHOdrcZN5mXXDq
+ W5qT3REX2mez9nig/ldIBBLXkK5Y7TcgQHrxoSC5GV/qqyTpYGSd82CR2oV6RdY=
+X-Gm-Gg: ASbGnctGSDIVN33Ptcg1pieHEwAm3fceXXZrsdT/nAPWahnazeyzMNyCBy6mjastx8p
+ d3RXLWTvWAtJr7infRc1DKYrOALj9JwnKxsqgU+NA2RWIUv0Qd41Fns9vnVJtN1yghtt0oeKipM
+ vKjeTsLy/cY4327kE2DjwGm9Dp8t4iZ4q/M8Iq/GC9/nKoUpKN+L/gXZjpIHs2SK730RjFaayhu
+ ii7xVwEzRTHEpc4MSohsY2oY9WJzN9TbiBj8afDXWOlJQoLcVqgDSyOtTbH2UD0v5LfHsUNmmit
+ MsIZTM4dtFjQg+djGbdHJoLma8lyQlkhoksq5CDHJxyN8xw1P4lz0fA=
+X-Google-Smtp-Source: AGHT+IEdn0vUjdqWf+0ft6dtNABWq7WqhDB4TNeuQtg0nIMIUQeKA5OeniZU9oewAupJBz+i092ynA==
+X-Received: by 2002:aa7:9e43:0:b0:736:d297:164 with SMTP id
+ d2e1a72fcca58-736d29703d5mr9263457b3a.1.1741723091837; 
+ Tue, 11 Mar 2025 12:58:11 -0700 (PDT)
 Received: from pc.. ([38.39.164.180]) by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-736a6e5c13asm9646981b3a.157.2025.03.11.12.58.17
+ d2e1a72fcca58-736a6e5c13asm9646981b3a.157.2025.03.11.12.58.10
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 11 Mar 2025 12:58:18 -0700 (PDT)
+ Tue, 11 Mar 2025 12:58:11 -0700 (PDT)
 From: Pierrick Bouvier <pierrick.bouvier@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: David Hildenbrand <david@redhat.com>,
@@ -82,23 +82,24 @@ Cc: David Hildenbrand <david@redhat.com>,
  Alistair Francis <alistair.francis@wdc.com>, alex.bennee@linaro.org,
  Yoshinori Sato <ysato@users.sourceforge.jp>, qemu-riscv@nongnu.org,
  qemu-ppc@nongnu.org, Pierrick Bouvier <pierrick.bouvier@linaro.org>
-Subject: [PATCH v3 07/17] exec/exec-all: remove dependency on cpu.h
-Date: Tue, 11 Mar 2025 12:57:53 -0700
-Message-Id: <20250311195803.4115788-8-pierrick.bouvier@linaro.org>
+Subject: [PATCH v3 01/17] exec/tswap: target code can use TARGET_BIG_ENDIAN
+ instead of target_words_bigendian()
+Date: Tue, 11 Mar 2025 12:57:47 -0700
+Message-Id: <20250311195803.4115788-2-pierrick.bouvier@linaro.org>
 X-Mailer: git-send-email 2.39.5
 In-Reply-To: <20250311195803.4115788-1-pierrick.bouvier@linaro.org>
 References: <20250311195803.4115788-1-pierrick.bouvier@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::636;
- envelope-from=pierrick.bouvier@linaro.org; helo=mail-pl1-x636.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::62b;
+ envelope-from=pierrick.bouvier@linaro.org; helo=mail-pl1-x62b.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -114,26 +115,49 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Previous commit changed files relying transitively on it.
-
 Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 Signed-off-by: Pierrick Bouvier <pierrick.bouvier@linaro.org>
 ---
- include/exec/exec-all.h | 1 -
- 1 file changed, 1 deletion(-)
+ include/exec/tswap.h | 11 ++++++-----
+ cpu-target.c         |  1 +
+ 2 files changed, 7 insertions(+), 5 deletions(-)
 
-diff --git a/include/exec/exec-all.h b/include/exec/exec-all.h
-index dd5c40f2233..19b0eda44a7 100644
---- a/include/exec/exec-all.h
-+++ b/include/exec/exec-all.h
-@@ -20,7 +20,6 @@
- #ifndef EXEC_ALL_H
- #define EXEC_ALL_H
+diff --git a/include/exec/tswap.h b/include/exec/tswap.h
+index ecd4faef015..2683da0adb7 100644
+--- a/include/exec/tswap.h
++++ b/include/exec/tswap.h
+@@ -13,13 +13,14 @@
+ /**
+  * target_words_bigendian:
+  * Returns true if the (default) endianness of the target is big endian,
+- * false otherwise. Note that in target-specific code, you can use
+- * TARGET_BIG_ENDIAN directly instead. On the other hand, common
+- * code should normally never need to know about the endianness of the
+- * target, so please do *not* use this function unless you know very well
+- * what you are doing!
++ * false otherwise. Common code should normally never need to know about the
++ * endianness of the target, so please do *not* use this function unless you
++ * know very well what you are doing!
+  */
+ bool target_words_bigendian(void);
++#ifdef COMPILING_PER_TARGET
++#define target_words_bigendian()  TARGET_BIG_ENDIAN
++#endif
  
--#include "cpu.h"
- #if defined(CONFIG_USER_ONLY)
- #include "exec/cpu_ldst.h"
- #endif
+ /*
+  * If we're in target-specific code, we can hard-code the swapping
+diff --git a/cpu-target.c b/cpu-target.c
+index cae77374b38..519b0f89005 100644
+--- a/cpu-target.c
++++ b/cpu-target.c
+@@ -155,6 +155,7 @@ void cpu_abort(CPUState *cpu, const char *fmt, ...)
+     abort();
+ }
+ 
++#undef target_words_bigendian
+ bool target_words_bigendian(void)
+ {
+     return TARGET_BIG_ENDIAN;
 -- 
 2.39.5
 
