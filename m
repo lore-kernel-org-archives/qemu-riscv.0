@@ -4,66 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A9846C28B2F
-	for <qemu-riscv@archiver.kernel.org>; Tue, 11 Mar 2025 20:04:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 57162C282EC
+	for <qemu-riscv@archiver.kernel.org>; Tue, 11 Mar 2025 20:04:30 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1ts5ln-0004X6-O5; Tue, 11 Mar 2025 16:00:08 -0400
+	id 1ts5ln-0004X7-Sh; Tue, 11 Mar 2025 16:00:08 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <pierrick.bouvier@linaro.org>)
- id 1ts5kO-00014G-4g
- for qemu-riscv@nongnu.org; Tue, 11 Mar 2025 15:58:41 -0400
-Received: from mail-pl1-x62d.google.com ([2607:f8b0:4864:20::62d])
+ id 1ts5kQ-00017s-IJ
+ for qemu-riscv@nongnu.org; Tue, 11 Mar 2025 15:58:43 -0400
+Received: from mail-pl1-x630.google.com ([2607:f8b0:4864:20::630])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <pierrick.bouvier@linaro.org>)
- id 1ts5kH-00009m-Cf
- for qemu-riscv@nongnu.org; Tue, 11 Mar 2025 15:58:36 -0400
-Received: by mail-pl1-x62d.google.com with SMTP id
- d9443c01a7336-224191d92e4so104660315ad.3
- for <qemu-riscv@nongnu.org>; Tue, 11 Mar 2025 12:58:27 -0700 (PDT)
+ id 1ts5kM-0000B4-4g
+ for qemu-riscv@nongnu.org; Tue, 11 Mar 2025 15:58:42 -0400
+Received: by mail-pl1-x630.google.com with SMTP id
+ d9443c01a7336-22398e09e39so111122435ad.3
+ for <qemu-riscv@nongnu.org>; Tue, 11 Mar 2025 12:58:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1741723107; x=1742327907; darn=nongnu.org;
+ d=linaro.org; s=google; t=1741723110; x=1742327910; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=0vI16NHb2tKWbIxjnq/SoVUTdY/Lep770BkCc47k0Rc=;
- b=Crv3UZaW/GimI91WYuRikjJuiPd3ufM4fJRv3G1tj7YLRkwf5JGMzm4ynzquaLvueN
- MnsFFEVw8oBFKzNi22RuqyLxHcrCPRbkmRBXf2ZWYWeipyt+Wn5oh+xNdp236KTnADxj
- v9s/sDyojhI/ig1P84V3zLCjjWrDwZbeD7g/CiP37KqGTpDPdf2eMbvgXzlQgA9Hknjt
- BJh+HdOjeW9Nbh5Y8JylQvoKhgnXIYap//4rVuXm3fb1QEPo7JuHM8poCA/Rr/3YzctE
- 6IqlSl6lLEIHBC3G8NbJnf29F8MdVtGula/zgHmdfYVqEPpDkGv3wcu+f5vEXs8ir9aT
- jsIg==
+ bh=/jGKe5PComzh06JRRSjyC3R7ujh2oauOlO5efOCu+zg=;
+ b=PgouqsR8viTpWlGxTGmzHQ3VC0Vq9uBIaFthQVLiMVgOLqSB5MhQnJu2C8EIFEQoFT
+ UAhaVlBhOpd7ywUmCCrkRnaUaJ+egwgj8bFoJMHqvcscZFloxwtfiqtVSkG5jPvoMeUT
+ 1HU3/D3ZY4pRCprmsWN1a+L7o137Rl8YUKYa0SueMYFUFGzBEKgu4CcfOHyBxVYmADZW
+ nygSX/cb3JvuOJjeFdCIF53xPNMatyUW39hj+jqh476dac3OWD0w+ZJXUuhC/rne17sZ
+ uQlNkdJ240gZ9oosJAdpoRtripHqohm+0XGuruYOsF3KfHy3ugGXcf2ZVGnTE44jEHSl
+ 5Gag==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741723107; x=1742327907;
+ d=1e100.net; s=20230601; t=1741723110; x=1742327910;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=0vI16NHb2tKWbIxjnq/SoVUTdY/Lep770BkCc47k0Rc=;
- b=XeYGx+gFTFR9A1jF/uMm8i67dIntjnhScffWAD3tkYqX+gT4VKJMjttnkf6boJ18za
- A8stSmAW2tZKHmIf+zBODYsFbndv2DQ9IRWKWeRoSXGx0EgqxO1JDPMmoGIE1BnLwre4
- /y6HVfzQ4hEyQQZG0s2pItHxEd8UfedFaMUcuV1t/oiQGVPHu0NyeYRktGxZEeStr8OV
- RX2sT96bM0ElNhIq4U7BYTHEuezVhfXP10bg6XO5mI4kpJcqF2vjFuRf+vbWREOydttG
- I3KXyZTd6s8i7m4BVsKbYwsj5L9j9lyVmqXJ5e5jaBjg7zczQM/SNsjgJT3StpOZ+sYd
- FdSA==
+ bh=/jGKe5PComzh06JRRSjyC3R7ujh2oauOlO5efOCu+zg=;
+ b=lkd+sXOowMKHoIU02qQSCX1j4yi8185VyBY1TBcC5CSSjCCNOgATJL/QWPtPH7o5SS
+ xEaytF6X3sRs49bXQgMBxtbqENX5G9zZBODxJqUhQ3RJyoqar+qO7wZkiMupzYdP6lCr
+ ZC+XGoN+fFkI2AoQsQTpum31bEzsUiUqjwaIJL/lUxMbaHHWnlZC3VNntU1TXnm4M7c0
+ K4v/Qs76UApF28J+fLTmZdO+mKJf7l9QXx42DnoWnMpXTcPd33+VtOpLKTO+KyTXgrtB
+ Om1LZUeyHkNiP4jZYE7jXXOMagvZPbgrPJHim3zGcHATBHfU3ty5C8bJWnbhF1gZgGgG
+ KHDA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXsmNrb1Vye5DU6MtKEqTkd6Y/+LuwWbsKyY+/aXBH/F7ShsP9KfjPCvnL/fkCYhzba0QWgsqust7qv@nongnu.org
-X-Gm-Message-State: AOJu0YzEAZ9ZTOlfdtc5/h2akgxOd0uWKgWk4vaz7EEgVYeg5PQWvPB2
- gvdIja7d4q5vFBTakw1v/duuQ1fQxUQqB5fum64c4z8TuECsy56MlrHtzogzWsU=
-X-Gm-Gg: ASbGncubHFlX9FKTl5USmthIcV37OUxxpVRf7v1BiNQYx+keYuAPJFvUEBZM2vzpIa1
- RDlarEpKulqpYyq2W+QH+22gx7E7JVHkujieOiuoQqX6knL/oT1U63diwqDt5LmEAH9GVYCSMwH
- 7Q1HCsKoP1s/ErPM2hAWdA9l2XlaLzUJp/PzaJo5PxGaci+KLGdsZFbTDbjolajrl5SIyHWzTUE
- /4qZK8n0iD236kaCm6xrqe10IPoJ7f6+3/i14IyoHw4NkvCq9Yhb4y6fkV1oWPlTtZ3TqrbCv4y
- tkZVq1vlUFB76zJfg0zM3xHmQkRvnxhEskTG/zoY4B9u
-X-Google-Smtp-Source: AGHT+IH4DZQtwoxJlYICmsHBrM9aJbv4mOOcZipSBsnLFw41tHWuGL9LYWyAZtn5lP/0QysRh7Mo8Q==
-X-Received: by 2002:a05:6a00:928b:b0:736:5dc6:a14b with SMTP id
- d2e1a72fcca58-736aaa1ace3mr27769096b3a.13.1741723106807; 
- Tue, 11 Mar 2025 12:58:26 -0700 (PDT)
+ AJvYcCWKcbkvnLxNHcTqM4bBpaO6QmwDf2wVa5nhPh3gavWA40h6qxKHiysC5HnuRFBS2fux8KKaOO2C1d+B@nongnu.org
+X-Gm-Message-State: AOJu0Yy1rKXKEfeWp4FZZ/RnnBid88LQ/+S8vk5TdLbSpLYh0ifC694d
+ lxasqi8pMKMFI+dkhpBQ4e1XJSuHoaifoWC54Ukg6Iqd7OzOs7vR77QWS6lpWy4=
+X-Gm-Gg: ASbGnctZDiBLXDrzriftkDzonNC9cDHo11vUCSpMmC7ebD7VE4W99FxQHKuAwEXIj1j
+ nWrcACTa5YSznAJ8FncrOqA9p3KsG+HDNSF3uHi7i1q2hjOn3Uq9nr1NB35s/eisbjqCPsSN2z2
+ EGCsZlCs5mK+jZB63Wlyz/VlSboxzoe3sjyoV/VBsjxdvh+bcb8MzEKy9ujHHd8lxoRy3jT5PPk
+ h8/f5Qzs0Pr15XHT01SP8pwekt9rOZEZxheqvcu7YFZhmSkuaae7U59v+MKWcaY1+Q/6z2ZgDFy
+ LVl3U7ARry0u44m7IM4gs3N+CPIzq2RRf354jjuZMidw
+X-Google-Smtp-Source: AGHT+IFWRSSWAAZ74eVr+KcVmFNEyBuYNdoBJPeRpIUKcbNy7sibb5A9vNOWSCrzmBmp9nxRDwlIAw==
+X-Received: by 2002:a05:6a00:b86:b0:736:50c4:3e0f with SMTP id
+ d2e1a72fcca58-736aaa373b8mr22374606b3a.10.1741723110296; 
+ Tue, 11 Mar 2025 12:58:30 -0700 (PDT)
 Received: from pc.. ([38.39.164.180]) by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-736a6e5c13asm9646981b3a.157.2025.03.11.12.58.25
+ d2e1a72fcca58-736a6e5c13asm9646981b3a.157.2025.03.11.12.58.29
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 11 Mar 2025 12:58:26 -0700 (PDT)
+ Tue, 11 Mar 2025 12:58:29 -0700 (PDT)
 From: Pierrick Bouvier <pierrick.bouvier@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: David Hildenbrand <david@redhat.com>,
@@ -82,17 +82,16 @@ Cc: David Hildenbrand <david@redhat.com>,
  Alistair Francis <alistair.francis@wdc.com>, alex.bennee@linaro.org,
  Yoshinori Sato <ysato@users.sourceforge.jp>, qemu-riscv@nongnu.org,
  qemu-ppc@nongnu.org, Pierrick Bouvier <pierrick.bouvier@linaro.org>
-Subject: [PATCH v3 14/17] include/exec/memory: extract devend_big_endian from
- devend_memop
-Date: Tue, 11 Mar 2025 12:58:00 -0700
-Message-Id: <20250311195803.4115788-15-pierrick.bouvier@linaro.org>
+Subject: [PATCH v3 17/17] system/ioport: make compilation unit common
+Date: Tue, 11 Mar 2025 12:58:03 -0700
+Message-Id: <20250311195803.4115788-18-pierrick.bouvier@linaro.org>
 X-Mailer: git-send-email 2.39.5
 In-Reply-To: <20250311195803.4115788-1-pierrick.bouvier@linaro.org>
 References: <20250311195803.4115788-1-pierrick.bouvier@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::62d;
- envelope-from=pierrick.bouvier@linaro.org; helo=mail-pl1-x62d.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::630;
+ envelope-from=pierrick.bouvier@linaro.org; helo=mail-pl1-x630.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -115,47 +114,44 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-we'll use it in system/memory.c.
-
 Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 Signed-off-by: Pierrick Bouvier <pierrick.bouvier@linaro.org>
 ---
- include/exec/memory.h | 18 ++++++++++++------
- 1 file changed, 12 insertions(+), 6 deletions(-)
+ system/ioport.c    | 1 -
+ system/meson.build | 2 +-
+ 2 files changed, 1 insertion(+), 2 deletions(-)
 
-diff --git a/include/exec/memory.h b/include/exec/memory.h
-index 069021ac3ff..70177304a92 100644
---- a/include/exec/memory.h
-+++ b/include/exec/memory.h
-@@ -3138,16 +3138,22 @@ address_space_write_cached(MemoryRegionCache *cache, hwaddr addr,
- MemTxResult address_space_set(AddressSpace *as, hwaddr addr,
-                               uint8_t c, hwaddr len, MemTxAttrs attrs);
+diff --git a/system/ioport.c b/system/ioport.c
+index 55c2a752396..89daae9d602 100644
+--- a/system/ioport.c
++++ b/system/ioport.c
+@@ -26,7 +26,6 @@
+  */
  
--/* enum device_endian to MemOp.  */
--static inline MemOp devend_memop(enum device_endian end)
-+/* returns true if end is big endian. */
-+static inline bool devend_big_endian(enum device_endian end)
- {
-     QEMU_BUILD_BUG_ON(DEVICE_HOST_ENDIAN != DEVICE_LITTLE_ENDIAN &&
-                       DEVICE_HOST_ENDIAN != DEVICE_BIG_ENDIAN);
+ #include "qemu/osdep.h"
+-#include "cpu.h"
+ #include "exec/ioport.h"
+ #include "exec/memory.h"
+ #include "exec/address-spaces.h"
+diff --git a/system/meson.build b/system/meson.build
+index 881cb2736fe..3faec7e4dfb 100644
+--- a/system/meson.build
++++ b/system/meson.build
+@@ -1,6 +1,5 @@
+ specific_ss.add(when: 'CONFIG_SYSTEM_ONLY', if_true: [files(
+   'arch_init.c',
+-  'ioport.c',
+ )])
  
--    bool big_endian = (end == DEVICE_NATIVE_ENDIAN
--                       ? target_words_bigendian()
--                       : end == DEVICE_BIG_ENDIAN);
--    return big_endian ? MO_BE : MO_LE;
-+    if (end == DEVICE_NATIVE_ENDIAN) {
-+        return target_words_bigendian();
-+    }
-+    return end == DEVICE_BIG_ENDIAN;
-+}
-+
-+/* enum device_endian to MemOp.  */
-+static inline MemOp devend_memop(enum device_endian end)
-+{
-+    return devend_big_endian(end) ? MO_BE : MO_LE;
- }
- 
- /*
+ system_ss.add(files(
+@@ -12,6 +11,7 @@ system_ss.add(files(
+   'dirtylimit.c',
+   'dma-helpers.c',
+   'globals.c',
++  'ioport.c',
+   'memory_mapping.c',
+   'memory.c',
+   'physmem.c',
 -- 
 2.39.5
 
