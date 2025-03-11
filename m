@@ -4,66 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9A8F0C28B2E
-	for <qemu-riscv@archiver.kernel.org>; Tue, 11 Mar 2025 04:12:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5ACCFC2BA1B
+	for <qemu-riscv@archiver.kernel.org>; Tue, 11 Mar 2025 04:12:54 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1trqxg-0005Q0-Ry; Tue, 11 Mar 2025 00:11:25 -0400
+	id 1trqxI-0004iA-Ri; Tue, 11 Mar 2025 00:11:01 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <pierrick.bouvier@linaro.org>)
- id 1trqvb-0003Ox-HA
- for qemu-riscv@nongnu.org; Tue, 11 Mar 2025 00:09:16 -0400
-Received: from mail-pl1-x62c.google.com ([2607:f8b0:4864:20::62c])
+ id 1trqvW-0003MC-Vk
+ for qemu-riscv@nongnu.org; Tue, 11 Mar 2025 00:09:11 -0400
+Received: from mail-pl1-x635.google.com ([2607:f8b0:4864:20::635])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <pierrick.bouvier@linaro.org>)
- id 1trqvW-0006UV-5r
- for qemu-riscv@nongnu.org; Tue, 11 Mar 2025 00:09:15 -0400
-Received: by mail-pl1-x62c.google.com with SMTP id
- d9443c01a7336-22435603572so52633915ad.1
- for <qemu-riscv@nongnu.org>; Mon, 10 Mar 2025 21:09:09 -0700 (PDT)
+ id 1trqvS-0006SW-ST
+ for qemu-riscv@nongnu.org; Tue, 11 Mar 2025 00:09:10 -0400
+Received: by mail-pl1-x635.google.com with SMTP id
+ d9443c01a7336-223fd89d036so97388005ad.1
+ for <qemu-riscv@nongnu.org>; Mon, 10 Mar 2025 21:09:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1741666149; x=1742270949; darn=nongnu.org;
+ d=linaro.org; s=google; t=1741666145; x=1742270945; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=lSQnGpOqRDw3w//OvJparnGxlKjvigYzwQgvxmVvIU4=;
- b=wooyaybViqP1byEs+hy1w62H6jLG4fvt8jvtS9DSxYc/ObvZSK3umAEpygexHXlIKV
- gZrp5lhSXBfHfxCW7HOJp9zg9rCdNhDSRFBKAFnePSfsoI92AUf/Vb82OFlupwRqtptG
- rU2U4ogDbMgKByU47wiG9yZMP3pXN2IaZcX33VSzX85d9spQD7IrY0CTYAseRv1zX+WI
- FZqzKQn6Fd83Oxl9mN4rcs7v8Dam+zVMj2K99vjqbTOepujSugVLWl57TgaCmHfQdx0L
- rprQqGm+6JGY78ienR2mwlwEkjK+nwfyn9WSci/SFbLhChq9GuXjXsBnn36Ds411VkPl
- pgbA==
+ bh=JJTMw6tkQg2gyyv9VopXfGbD8re6/gGFQNon8Npv7Ak=;
+ b=Otz9/smOaGLqXsY92KOsYixd8d8OhNs8pfdO9+gdcHa3Pr9Z2vdLd1ahh/A3IMq4lx
+ IdM0CBHGouOsFtEXJHHeojn3YWIvkj3IBgnMn4xdn465yaRZcRT6FOENF7S+MNCzUWnG
+ vjSJpDaLH5YysTkM0qrbCHKwV+pbHHvmcvP4WW2OpRMB2S/K84R4rmGil/XnD9xK1RyA
+ 1uEY/e49825ik2T26rzmhbklovh6ndcArHh99O94oqN5UknDu6W6GuaB8LdKbS9UIOPA
+ 3BaDUqze6XZgKWR/QOhAx80dENNiIYzNXm9IGJP8rV0McwK+d9f8ABfY0X60o7O9IVkT
+ 1C0A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741666149; x=1742270949;
+ d=1e100.net; s=20230601; t=1741666145; x=1742270945;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=lSQnGpOqRDw3w//OvJparnGxlKjvigYzwQgvxmVvIU4=;
- b=P6vvv3Y/gG4uTCA6cM2JXY8CJyhBx0N5E/T5LaezDdyvXQFsEe0+UfXWIvox+EHRk4
- +R5XcrnDJJrvwkbcpMt/OkRUJpsBx+QVmkDxNZpBL9CJWZXzG5Q0TADpp1l21PnU8syM
- AZmS1tAklfDbvdYuSPo9wEF0NQIrBwXv9F0Sk17niOdSKX7j3/Lv2C8UF7J0+bnzhLkL
- pdFlw36Sur2yDKhQIDYWThm7v9/rdQQlxsvyEEGiXavgs+tOZ4zCoGvNco3Q6ftBxspt
- peet/xJAkwa0LEobTKbt8PSi5ITzuRgmsxoSjLorAJVqwL58i4szRB6vQddLQtW2GlnY
- quOw==
+ bh=JJTMw6tkQg2gyyv9VopXfGbD8re6/gGFQNon8Npv7Ak=;
+ b=wjxKnFZ1DtgO1A/aJF/iGRsutPvYqxjrwo1aFMPvFuM0c1KmW5mvqO/2W+6u4iz8dB
+ TLC00pL+BAjBX8nTsDBnZmAUR+JlM+nCI586gT6s2fKbY1V561pF+/mVFNzyjvP4NMZ6
+ p/ZVVOZbc24n6UbsurqEyblGwkLlpOsEkt2PTWTV+kizeaZN4F39LaE2ksdmYB6dGPMz
+ /HX/yuRSvLIKXh4Kc60/VarR1otBuPPQpPO+8VrEkvngGw/3sBZQJR7Y3UsqSDeUYsJw
+ baAQy70cCOePgL2JvQob01+ro54JefFSgJvJyyQYAPCiRq7gh2436aoUj0flBPQx3bbo
+ oeuA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXsVh5IM86PlyF4cKNXHHfaYUrJA1wOAzPGShXunuXDZSe/jTQ2BJ6Bwf3Aq8i72G94VtP0BF+iVfLo@nongnu.org
-X-Gm-Message-State: AOJu0YwNq+5G7jdsvxDasfUqVSc1l5lsVOeQ0Brh5rueE6kd7yIPL45t
- AGnnND3Dl52h0HvOmLE+vhM611MNCB0iTowLR17bpY0OEADMXQyqmLTfapcAIOI=
-X-Gm-Gg: ASbGnctNRllJGzw6mDVqaHRovj3HWrYELdr9pbcfnjSFjjNE8sEzzBIR30BFHvtfiIt
- BM5hQXgXyTqqSuvQS2cZdxd9uSifqr9/uNbUQxP9n6bvoAO2WtkgmDM8xNV65c/6sjnA/2xX2nF
- tblgagHDFu29ypjHbUWm0T/P2db58VgJ1C/0o7RhuwN/MeOTG3vnWvJFvxiLEbGC6mwGhCtE1XF
- FK90iAlxFv2nO29iW81NrkzCCthJfcVfyqPL7fZkpJ5uVU5Y/MXNTh5V2CcDTDrBjTSyz12Wm0I
- d/lJDLTC3JA9pWpbOfvds/cbe/FUtWusYFBR69ufD3vMSg+mIRhMuno=
-X-Google-Smtp-Source: AGHT+IGAtyqJ8JwUWzZUpShXBSvpRNbrwAinE/LFxHiM0RsFVnA1TPY911KWPkY4EkoTDg/0IjRi5A==
-X-Received: by 2002:a05:6a00:23cb:b0:736:55ec:ea8b with SMTP id
- d2e1a72fcca58-736e1b3e670mr7549220b3a.24.1741666147270; 
- Mon, 10 Mar 2025 21:09:07 -0700 (PDT)
+ AJvYcCV/z+qeLsqTF9Cp7TWFgWotq2mpSJSkMf2YnmCuL2j0KznkDOFZmBIiMaZLE2EgTx9889/MBrFgQBEV@nongnu.org
+X-Gm-Message-State: AOJu0YxmPohqM4oPAJbkxh/lkK2iW+IicAIEsD9DRPSJ72QxZeLldkGP
+ YQI4u3gskb9GeyPdkdVZipy1dXAxKNqC4x8TlUrNvfsX/pbYFYwE65ufHNsW2kc=
+X-Gm-Gg: ASbGncvWQtqmAsYdL4yfxv1z+Uunm3wka+lP/6nhs9O9egHIijO4rMCW9tJrlpyHLZ+
+ b7mwYv6r/Lv8cgBoDDBuT26vJrxVdCgHf/XKATYs5vsgJ+zXxzdkr0XcE3tQRIR0vvpIj0arrDj
+ a2qlUUZnYEfUgDagGhbJsq1gemqjoWQkQEhALhT5MJ7TkgmAMJynzKx2pY343aTfKizNVgbQBzj
+ hYHXyVgv6AM09m5V+afqLvXBlOKf1+IBq8ZemQToMMWwqe7RMAk5vtYMyx1T/BmT3Mc1af1oQCi
+ DzX5YaaDIDGI3RwuzML1DavQxt+4INDu8cpECE8/21SagLQnHFnLtuQ=
+X-Google-Smtp-Source: AGHT+IEZQz4PbmDcJ14zbyjAyAYIBXfqlvYCPkEDTZUS00hzo0yd+SRkwBCunP0Y6iJa+tBGNAcErA==
+X-Received: by 2002:a05:6a20:2d2c:b0:1f5:8221:d68c with SMTP id
+ adf61e73a8af0-1f58221fee5mr8742647637.3.1741666145118; 
+ Mon, 10 Mar 2025 21:09:05 -0700 (PDT)
 Received: from pc.. ([38.39.164.180]) by smtp.gmail.com with ESMTPSA id
- 41be03b00d2f7-af28c0339cesm7324454a12.46.2025.03.10.21.09.06
+ 41be03b00d2f7-af28c0339cesm7324454a12.46.2025.03.10.21.09.04
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 10 Mar 2025 21:09:06 -0700 (PDT)
+ Mon, 10 Mar 2025 21:09:04 -0700 (PDT)
 From: Pierrick Bouvier <pierrick.bouvier@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Paul Durrant <paul@xen.org>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
@@ -83,16 +83,16 @@ Cc: Paul Durrant <paul@xen.org>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
  Daniel Henrique Barboza <danielhb413@gmail.com>,
  Anthony PERARD <anthony@xenproject.org>,
  Pierrick Bouvier <pierrick.bouvier@linaro.org>
-Subject: [PATCH v2 09/16] exec/ram_addr: remove dependency on cpu.h
-Date: Mon, 10 Mar 2025 21:08:31 -0700
-Message-Id: <20250311040838.3937136-10-pierrick.bouvier@linaro.org>
+Subject: [PATCH v2 07/16] exec/exec-all: remove dependency on cpu.h
+Date: Mon, 10 Mar 2025 21:08:29 -0700
+Message-Id: <20250311040838.3937136-8-pierrick.bouvier@linaro.org>
 X-Mailer: git-send-email 2.39.5
 In-Reply-To: <20250311040838.3937136-1-pierrick.bouvier@linaro.org>
 References: <20250311040838.3937136-1-pierrick.bouvier@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::62c;
- envelope-from=pierrick.bouvier@linaro.org; helo=mail-pl1-x62c.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::635;
+ envelope-from=pierrick.bouvier@linaro.org; helo=mail-pl1-x635.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -118,29 +118,21 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 Signed-off-by: Pierrick Bouvier <pierrick.bouvier@linaro.org>
 ---
- include/exec/ram_addr.h | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+ include/exec/exec-all.h | 1 -
+ 1 file changed, 1 deletion(-)
 
-diff --git a/include/exec/ram_addr.h b/include/exec/ram_addr.h
-index 3d8df4edf15..7c011fadd11 100644
---- a/include/exec/ram_addr.h
-+++ b/include/exec/ram_addr.h
-@@ -20,13 +20,14 @@
- #define RAM_ADDR_H
+diff --git a/include/exec/exec-all.h b/include/exec/exec-all.h
+index dd5c40f2233..19b0eda44a7 100644
+--- a/include/exec/exec-all.h
++++ b/include/exec/exec-all.h
+@@ -20,7 +20,6 @@
+ #ifndef EXEC_ALL_H
+ #define EXEC_ALL_H
  
- #ifndef CONFIG_USER_ONLY
 -#include "cpu.h"
- #include "system/xen.h"
- #include "system/tcg.h"
- #include "exec/cputlb.h"
- #include "exec/ramlist.h"
- #include "exec/ramblock.h"
- #include "exec/exec-all.h"
-+#include "exec/memory.h"
-+#include "exec/target_page.h"
- #include "qemu/rcu.h"
- 
- #include "exec/hwaddr.h"
+ #if defined(CONFIG_USER_ONLY)
+ #include "exec/cpu_ldst.h"
+ #endif
 -- 
 2.39.5
 
