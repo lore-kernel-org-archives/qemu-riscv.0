@@ -4,66 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C28D6C2BA1B
-	for <qemu-riscv@archiver.kernel.org>; Tue, 11 Mar 2025 04:13:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F04DFC28B2E
+	for <qemu-riscv@archiver.kernel.org>; Tue, 11 Mar 2025 04:13:30 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1trqy8-00068E-Ee; Tue, 11 Mar 2025 00:11:52 -0400
+	id 1trqy3-0005uz-Iw; Tue, 11 Mar 2025 00:11:47 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <pierrick.bouvier@linaro.org>)
- id 1trqvf-0003Qm-0I
- for qemu-riscv@nongnu.org; Tue, 11 Mar 2025 00:09:19 -0400
-Received: from mail-pj1-x1030.google.com ([2607:f8b0:4864:20::1030])
+ id 1trqvh-0003Qy-KH
+ for qemu-riscv@nongnu.org; Tue, 11 Mar 2025 00:09:27 -0400
+Received: from mail-pl1-x62d.google.com ([2607:f8b0:4864:20::62d])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <pierrick.bouvier@linaro.org>)
- id 1trqvY-0006WM-2z
- for qemu-riscv@nongnu.org; Tue, 11 Mar 2025 00:09:17 -0400
-Received: by mail-pj1-x1030.google.com with SMTP id
- 98e67ed59e1d1-2fee4d9c2efso8346081a91.3
- for <qemu-riscv@nongnu.org>; Mon, 10 Mar 2025 21:09:11 -0700 (PDT)
+ id 1trqvb-0006YV-5h
+ for qemu-riscv@nongnu.org; Tue, 11 Mar 2025 00:09:20 -0400
+Received: by mail-pl1-x62d.google.com with SMTP id
+ d9443c01a7336-224341bbc1dso60932465ad.3
+ for <qemu-riscv@nongnu.org>; Mon, 10 Mar 2025 21:09:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1741666150; x=1742270950; darn=nongnu.org;
+ d=linaro.org; s=google; t=1741666154; x=1742270954; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=YZcwoIie6BtZ5Bqo8BYW0CKBTK95znA0iA8YHmiy7v4=;
- b=g1IZNUjnq36g2EP+lzfCwYWVFUAy3fM0/Pvz3UtxxPlutccXo0EadWlw7L9rlno8g0
- 4g7O6cYMje+k9dkI3rZZtcyL9h2ugaGC/wuDFGWI3u9fqN5O889nv7gQe3Nl9iOflL6M
- vQsg4uqP/QtGkHcjQKNCQu4glCKMgNdTn7+XTJpCaSgqJy2k9GYSvOGtw83IMBy/kCBd
- hB/zBMY8/UGXFDF+e3V6W7H4w1m+vDsjVuGQNwhSHRzd1kNQJBVm0SZ+amxuW8YVm0gY
- KMAe+PqVrB9olSJ4eiO5kK4+hJw9i3rv3jtGeHsg9xSDWWfi6zkNKa1xW5F9uMUGezVk
- aPgQ==
+ bh=v3CzVNwffqVfXfk4NE2Z+/4EFEG8FprDV2OFnBt+VLQ=;
+ b=gsZx0LaSkfehRQBaUSGoBk2kGCqDwoBmXlnZPgHqtGtI/36h3+larrt+Ab3zq0PDCT
+ RG565/Nx0NJasSE8xe/Y/EYgtKDRmYOUvF3QNpfygcPqtsgc0u0p3L7ED4OKqsqCKBpX
+ l3Ja2atNlRSrImZGiS4fLa95uGi4l7lhBYzVNMVRxa7dF1hhiVgv0zbcbdkP2sJjGMSw
+ qOZIcdp+eQTNu0vqhorreLm9cEiifytoMk6PbyBSI5UndcPIaPlMiCUzz1J4SpQfP4pD
+ T5QM758cNx16v0CvHjTYxeF7HCyWUXeU/N636rwNfa9ch+r6d+F0eBtkO9nwog5as01x
+ DP8Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741666150; x=1742270950;
+ d=1e100.net; s=20230601; t=1741666154; x=1742270954;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=YZcwoIie6BtZ5Bqo8BYW0CKBTK95znA0iA8YHmiy7v4=;
- b=Mf4e/wyU0eWgtU1ar+CT67SmKNCynC5tfPO8V8G/Ttz3nOeeCTV2tTxfddDDdMU37U
- 73k5cu4U4esttZYuZYc95vTpJiQ+xawf3tWvzrGY3FRBQ4wKgvRjyRJ0FhY7ElAlADOG
- xGVGF8IAXT0B/o9vA+jmuLh9DCy31jHZ2uvXQcs/62YMWu4yddAlv9FzoP2BD5qTJLtF
- 0F7zhlnqhq8zAReY+tF2A1/JYuEtWX4i0msHN9Gc/Uvewr3ZG50dJMkmvnjiewB6hMNd
- aJbrlTao9qTRBklTFBzaCflICniPjYNLRkgobDbYrK9ir4kzv9B7ZCrF0Ej5hl+lht7v
- A6FA==
+ bh=v3CzVNwffqVfXfk4NE2Z+/4EFEG8FprDV2OFnBt+VLQ=;
+ b=sfjLD2fdanuj3a8Imi/i48Axi5C3BHHE3jrDSmS3CB1UaQt+6ZH+pO4hPGeHFtCvlc
+ PYRAKDBCcXTbAcq68IIn4AJNh9UjRjm9odqJ2sAUl45aATjF36ZzTjTBXBj5GiAAX+cn
+ +XRk6HkKztmxdRVv8RG1GerXtG3p8Ppi6GU4tZW6QJDNwtUj+W3Dbs2477PCPboOCmIr
+ S+i+cNiQYdcHzY/4DijDX4XUeWByW7sw91vZKtqA/qcWY4W5pToL2kiC+6Gidnpa2shm
+ rjiIHMYERRfJb0vmyOkBPtTVw/9LxHE+wnibN8ElFHlLw66X7nWjjGD0U/Wetmi9Wl+s
+ dYOg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUTnfFbSdsWTYS+JFhOkXK09ECOpPlle06kr4DKrGiPFfOtxM9jgBuZucCG4l4t1+a8QlQwaF9lngPY@nongnu.org
-X-Gm-Message-State: AOJu0Yzyqautdq9G95eQo/JYKTxjaSb8O0wBYZzSmE7VoclksoYd11n8
- A2qB8anzw0PYqHRkgOV8SBRLN7RxweFdWmpBPQitJhaoX4AWJOX1Mw+Aftpj3kE=
-X-Gm-Gg: ASbGncsHk8puhl7h18+zx5RhvYiKnTjmPf8Ss4th7NjE6fNuUBnJfUvjroOgrmHbMfo
- g/yT8sQzYUAb62fldvgqHQC9mbCAyVAgzxY0QY9/cY64RtPK4+OE3WXuZEAtESN2+SI8PGgm9JN
- XmLR9bnmw2YnqpqxO6oiN5TmDtKuX1avZeieLwjQ12mSILwM6GaSnoJMzkYECfsvnjpNK0rlb8P
- 9+aWXEmL8YE5V8ihVMwCRppJWLrnvidiHXqMa2D7v971gMcgWhPlKdFUhNaXp5iKBETVuev9CWO
- QdTab6mvsrwO4X/v+f+u4OuTb1JAs8fLJmSPYi1Aw19O
-X-Google-Smtp-Source: AGHT+IHJmCe2dJrkKZuUg8Hp5UUMBrSHtlgnmpF6Gn789stb7ihIio5wxKC4BVHFee5F9pMJvA7mBw==
-X-Received: by 2002:a05:6a21:3941:b0:1f0:e42e:fb1d with SMTP id
- adf61e73a8af0-1f544c7fc7fmr33091101637.36.1741666150581; 
- Mon, 10 Mar 2025 21:09:10 -0700 (PDT)
+ AJvYcCVUufYE9U/ES9NvDojzVe/abBHb2G6y2ic5+asgNx7eUUU0r1Ay2xNOOKdYMAIFCHW3yPl99nUmBEtJ@nongnu.org
+X-Gm-Message-State: AOJu0Yx2XVcf0Z8HVNrJoa+pdcge/vBQFG0oEoAtjGwE2on6fPudAnp+
+ 6pjwtJV0ewdFBLNtyn7ikm9tPXd4ucoDs3xfO8mVFACltOCMITmAcs/pHI3Lsxc=
+X-Gm-Gg: ASbGncuKXDknauNa/8fgqdcJAKtXintwpZRIlNoKClT5/AtwsqzwmhIqVtpMUQ7oA2Y
+ riEsQi4cAb+j/jE73AKCClwdyhxpVs0gIZhxJcrCnc1HTzLHA2PIkABueoBxRlxn6gkJn2Rwbh5
+ tz5b3+p4omloJoblTDNaCq3sJbzWLrk4qqlgXK2hESRG3Zi8Pc5dyl+rvoOZPl4FtoaoC0mdeDV
+ /cRYG+rYBKEyYGOahjO+Bxgfnfmip6aXYQ8/PNS+UK3pvQ5BUajak6br8lBx4QxcY3uSPgHv9L8
+ QTlVR3Q7dt1qLzpeOalTCMADMoeOh5vjHy8881WthHww
+X-Google-Smtp-Source: AGHT+IFvXFjaslvNGXJjltHn8NjSjDrKRDjnKt7uWKtRausP/KT3hgu5XPa6ctrl8hlKzv3rih4ocw==
+X-Received: by 2002:a05:6a20:c6c1:b0:1f5:59e5:8ad2 with SMTP id
+ adf61e73a8af0-1f58cb40fa8mr3753307637.24.1741666153903; 
+ Mon, 10 Mar 2025 21:09:13 -0700 (PDT)
 Received: from pc.. ([38.39.164.180]) by smtp.gmail.com with ESMTPSA id
- 41be03b00d2f7-af28c0339cesm7324454a12.46.2025.03.10.21.09.09
+ 41be03b00d2f7-af28c0339cesm7324454a12.46.2025.03.10.21.09.12
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 10 Mar 2025 21:09:10 -0700 (PDT)
+ Mon, 10 Mar 2025 21:09:13 -0700 (PDT)
 From: Pierrick Bouvier <pierrick.bouvier@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Paul Durrant <paul@xen.org>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
@@ -83,16 +83,16 @@ Cc: Paul Durrant <paul@xen.org>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
  Daniel Henrique Barboza <danielhb413@gmail.com>,
  Anthony PERARD <anthony@xenproject.org>,
  Pierrick Bouvier <pierrick.bouvier@linaro.org>
-Subject: [PATCH v2 12/16] hw/xen: add stubs for various functions
-Date: Mon, 10 Mar 2025 21:08:34 -0700
-Message-Id: <20250311040838.3937136-13-pierrick.bouvier@linaro.org>
+Subject: [PATCH v2 15/16] system/memory: make compilation unit common
+Date: Mon, 10 Mar 2025 21:08:37 -0700
+Message-Id: <20250311040838.3937136-16-pierrick.bouvier@linaro.org>
 X-Mailer: git-send-email 2.39.5
 In-Reply-To: <20250311040838.3937136-1-pierrick.bouvier@linaro.org>
 References: <20250311040838.3937136-1-pierrick.bouvier@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1030;
- envelope-from=pierrick.bouvier@linaro.org; helo=mail-pj1-x1030.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::62d;
+ envelope-from=pierrick.bouvier@linaro.org; helo=mail-pl1-x62d.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -115,95 +115,81 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Those functions are used by system/physmem.c, and are called only if
-xen is enabled (which happens only if CONFIG_XEN is not set).
-
-So we can crash in case those are called.
-
-Acked-by: Richard Henderson <richard.henderson@linaro.org>
 Signed-off-by: Pierrick Bouvier <pierrick.bouvier@linaro.org>
 ---
- hw/xen/xen_stubs.c | 56 ++++++++++++++++++++++++++++++++++++++++++++++
- hw/xen/meson.build |  3 +++
- 2 files changed, 59 insertions(+)
- create mode 100644 hw/xen/xen_stubs.c
+ system/memory.c    | 17 +++++------------
+ system/meson.build |  2 +-
+ 2 files changed, 6 insertions(+), 13 deletions(-)
 
-diff --git a/hw/xen/xen_stubs.c b/hw/xen/xen_stubs.c
-new file mode 100644
-index 00000000000..19cee84bbb4
---- /dev/null
-+++ b/hw/xen/xen_stubs.c
-@@ -0,0 +1,56 @@
-+/*
-+ * Various stubs for xen functions
-+ *
-+ * Those functions are used only if xen_enabled(). This file is linked only if
-+ * CONFIG_XEN is not set, so they should never be called.
-+ *
-+ * Copyright (c) 2025 Linaro, Ltd.
-+ *
-+ * SPDX-License-Identifier: GPL-2.0-or-later
-+ */
-+
-+#include "qemu/osdep.h"
-+#include "system/xen.h"
-+#include "system/xen-mapcache.h"
-+
-+void xen_hvm_modified_memory(ram_addr_t start, ram_addr_t length)
-+{
-+    g_assert_not_reached();
-+}
-+
-+void xen_ram_alloc(ram_addr_t ram_addr, ram_addr_t size,
-+                   struct MemoryRegion *mr, Error **errp)
-+{
-+    g_assert_not_reached();
-+}
-+
-+bool xen_mr_is_memory(MemoryRegion *mr)
-+{
-+    g_assert_not_reached();
-+}
-+
-+void xen_invalidate_map_cache_entry(uint8_t *buffer)
-+{
-+    g_assert_not_reached();
-+}
-+
-+void xen_invalidate_map_cache(void)
-+{
-+    g_assert_not_reached();
-+}
-+
-+ram_addr_t xen_ram_addr_from_mapcache(void *ptr)
-+{
-+    g_assert_not_reached();
-+}
-+
-+uint8_t *xen_map_cache(MemoryRegion *mr,
-+                       hwaddr phys_addr,
-+                       hwaddr size,
-+                       ram_addr_t ram_addr_offset,
-+                       uint8_t lock,
-+                       bool dma,
-+                       bool is_write)
-+{
-+    g_assert_not_reached();
-+}
-diff --git a/hw/xen/meson.build b/hw/xen/meson.build
-index 4a486e36738..a1850e76988 100644
---- a/hw/xen/meson.build
-+++ b/hw/xen/meson.build
-@@ -9,6 +9,9 @@ system_ss.add(when: ['CONFIG_XEN_BUS'], if_true: files(
+diff --git a/system/memory.c b/system/memory.c
+index 4c829793a0a..eddd21a6cdb 100644
+--- a/system/memory.c
++++ b/system/memory.c
+@@ -353,15 +353,6 @@ static void flatview_simplify(FlatView *view)
+     }
+ }
  
- system_ss.add(when: ['CONFIG_XEN', xen], if_true: files(
-   'xen-operations.c',
-+),
-+if_false: files(
-+  'xen_stubs.c',
- ))
+-static bool memory_region_big_endian(MemoryRegion *mr)
+-{
+-#if TARGET_BIG_ENDIAN
+-    return mr->ops->endianness != DEVICE_LITTLE_ENDIAN;
+-#else
+-    return mr->ops->endianness == DEVICE_BIG_ENDIAN;
+-#endif
+-}
+-
+ static void adjust_endianness(MemoryRegion *mr, uint64_t *data, MemOp op)
+ {
+     if ((op & MO_BSWAP) != devend_memop(mr->ops->endianness)) {
+@@ -563,7 +554,7 @@ static MemTxResult access_with_adjusted_size(hwaddr addr,
+     /* FIXME: support unaligned access? */
+     access_size = MAX(MIN(size, access_size_max), access_size_min);
+     access_mask = MAKE_64BIT_MASK(0, access_size * 8);
+-    if (memory_region_big_endian(mr)) {
++    if (devend_big_endian(mr->ops->endianness)) {
+         for (i = 0; i < size; i += access_size) {
+             r |= access_fn(mr, addr + i, value, access_size,
+                         (size - access_size - i) * 8, access_mask, attrs);
+@@ -2584,7 +2575,8 @@ void memory_region_add_eventfd(MemoryRegion *mr,
+     unsigned i;
  
- xen_specific_ss = ss.source_set()
+     if (size) {
+-        adjust_endianness(mr, &mrfd.data, size_memop(size) | MO_TE);
++        MemOp mop = (target_words_bigendian() ? MO_BE : MO_LE) | size_memop(size);
++        adjust_endianness(mr, &mrfd.data, mop);
+     }
+     memory_region_transaction_begin();
+     for (i = 0; i < mr->ioeventfd_nb; ++i) {
+@@ -2619,7 +2611,8 @@ void memory_region_del_eventfd(MemoryRegion *mr,
+     unsigned i;
+ 
+     if (size) {
+-        adjust_endianness(mr, &mrfd.data, size_memop(size) | MO_TE);
++        MemOp mop = (target_words_bigendian() ? MO_BE : MO_LE) | size_memop(size);
++        adjust_endianness(mr, &mrfd.data, mop);
+     }
+     memory_region_transaction_begin();
+     for (i = 0; i < mr->ioeventfd_nb; ++i) {
+diff --git a/system/meson.build b/system/meson.build
+index 9d0b0122e54..881cb2736fe 100644
+--- a/system/meson.build
++++ b/system/meson.build
+@@ -1,7 +1,6 @@
+ specific_ss.add(when: 'CONFIG_SYSTEM_ONLY', if_true: [files(
+   'arch_init.c',
+   'ioport.c',
+-  'memory.c',
+ )])
+ 
+ system_ss.add(files(
+@@ -14,6 +13,7 @@ system_ss.add(files(
+   'dma-helpers.c',
+   'globals.c',
+   'memory_mapping.c',
++  'memory.c',
+   'physmem.c',
+   'qdev-monitor.c',
+   'qtest.c',
 -- 
 2.39.5
 
