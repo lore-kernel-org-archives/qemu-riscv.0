@@ -4,85 +4,104 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4507FC282DE
-	for <qemu-riscv@archiver.kernel.org>; Mon, 10 Mar 2025 22:53:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 76201C282DE
+	for <qemu-riscv@archiver.kernel.org>; Tue, 11 Mar 2025 00:09:42 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1trlzs-0006Fx-4b; Mon, 10 Mar 2025 18:53:20 -0400
+	id 1trnB3-0005bw-4z; Mon, 10 Mar 2025 20:08:58 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1trlzo-0006FB-CW; Mon, 10 Mar 2025 18:53:16 -0400
-Received: from mail-ua1-x933.google.com ([2607:f8b0:4864:20::933])
+ (Exim 4.90_1) (envelope-from <pierrick.bouvier@linaro.org>)
+ id 1trnAq-0005aF-M2
+ for qemu-riscv@nongnu.org; Mon, 10 Mar 2025 20:08:46 -0400
+Received: from mail-pj1-x1035.google.com ([2607:f8b0:4864:20::1035])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1trlzm-0003yW-3X; Mon, 10 Mar 2025 18:53:15 -0400
-Received: by mail-ua1-x933.google.com with SMTP id
- a1e0cc1a2514c-868da0af0fcso2087664241.2; 
- Mon, 10 Mar 2025 15:53:12 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <pierrick.bouvier@linaro.org>)
+ id 1trnAn-0005fM-Gh
+ for qemu-riscv@nongnu.org; Mon, 10 Mar 2025 20:08:43 -0400
+Received: by mail-pj1-x1035.google.com with SMTP id
+ 98e67ed59e1d1-2ff6e91cff5so6914257a91.2
+ for <qemu-riscv@nongnu.org>; Mon, 10 Mar 2025 17:08:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1741647192; x=1742251992; darn=nongnu.org;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=ig7G6llHHqx30UhKA8gmhky22+sViIctHpc/Hwgbt9A=;
- b=YMEAbNz8p3jlK2K8ehg11qKBqi5Nz0LHrWPpEHIIcSMJy2bJFPeoBDRzSX/1lf0Nl1
- HAp39dTIq9chf03AQfcsePcQlj4kEWacIDSQvMnFEtZ/KHIEkljq0R9KqWwyFU45rzYr
- Q8L5aYM8P48RxvHsK9YzsZL83tnu5wxJW+3pzyrSlq/lk+DJunaobz8ruvJkuB35aP51
- BvEspgfdY4SuzsMSfeDOe7yrdGXO1BbguJCMpHbpMBYGg68sRXAg9QEgBUZrK3OvbPYq
- VMbpflwB/CmRozNJk/mLTa41C2KXJho8hUge5NVCC13o93c+935333lrkZSg2dR5A5pN
- dg9g==
+ d=linaro.org; s=google; t=1741651719; x=1742256519; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=PTvxJUlPBJjWMPlx3bz6qPMSvpnDhRXJlpzPDdfISJA=;
+ b=RCUxvX4iyZD32o7vBXOGGE24h06RD9FZ5pNvGEsY4zKTqROy7Fiyb4UKwq79g3tQ/i
+ k72+jNrdMOyqh3wbBcu7KJOpkxjT9r9oEcJ9tofxJz7W4fDTbFISnzFrHAUXk5Pjdfs3
+ XPijIWS5Em/yvvNbLHKuJ7SbYlYwQ+zDVuShhZc1LSAczL+EVvBWoBViNchz/enHTrs1
+ 4H2ADmkdDBoDRwP77DMQXLvDl/2uQ/ReaoJX/WJRGPHdT0Wf4vA0JAf0bOGarTZcj2pu
+ ilTv8Qkxo+AEoYOG9TDVPyCc2OH/rXezrDmvDUrGvtRr/vMOPSRTJ3PneK9fL4SHgiWe
+ Qw2A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741647192; x=1742251992;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=ig7G6llHHqx30UhKA8gmhky22+sViIctHpc/Hwgbt9A=;
- b=Z3WW4hoXTc7OhhFoUt7DklbUbeksy506tPwMIrNIMVeC9M4pTFENCqk+je6/v7TAj4
- T+I3hdqEUqLya+thAWMH75wQVimbu/r/xf/nsOXLP2Ti8lW04b8pe2BHUe/9zj4OmWkv
- /dnEatLNnRJa/z45SaJmoZH2HPrGK2xd3GGogHjyjaFag3aqzLpQoXPZsTgnr+v4v0T/
- Zu28p2KPYsekJIRl7tIQ8XNrMrtOF7OKYRhxCBSBC10Uwkbf44lVKiHDylARWO/phEFO
- JsNQBO5X3FeOHJFlm+q2uMJhIT2TFlXrYYoZxuXXly7Cd8ZGNDF3khBR1eJHhRZfBTiZ
- QDuw==
+ d=1e100.net; s=20230601; t=1741651719; x=1742256519;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=PTvxJUlPBJjWMPlx3bz6qPMSvpnDhRXJlpzPDdfISJA=;
+ b=Evl2eznqBzZnOjchytnz+sBncG2s2QC2B+2AMfzcseqndZo2Ti0IIkKho7wJrSl+K/
+ QiDq4TcxJWjywDiw9B3KQxj4qldYkj7NdMR9uQjsTqlWGYAfRr4YgfLrIBKijAnUYAo2
+ s8i2rSNQJ7kO7V0Whi0BWh5fOpVBPEYD/UfZ8ryYNwHeAj/7GnHGo/RstVwwh+8XvIri
+ S1crBjg25di5rXY5OdVsvpZsU0XCY+2uzuSQjizcG/T+ROJsKfXtciunV+T3P6z9bQnE
+ cWH9oe6i0wzNiW2LDjaBcPtb8fl+m5OYh569YxGfQwWHmrsi3010cR33Lxdj2TrNIJAE
+ z2Dg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUZ4JUAetZpCMHexZuz6VbCMaP3A5/J0W7WMTqMgL73l06t7eq5Otu2AHrZ2U2bJeNLfJ92u6CLIHGY@nongnu.org,
- AJvYcCXK2k4ZcuNaXpg5DxS+YWPmJNY7uKHy4LMSRYZDBf3Cu0X/W/wKgBx7lTl4/Hpp+BvFm3FmNFiBJhfshg==@nongnu.org
-X-Gm-Message-State: AOJu0YxWImvXd9ivG7NtuP7CDLn4qY1ujMY7rJ1ohH2QvFn4ysVooYKl
- ivVNo+NyZDX7/M+jBT+fX5t5JSgovzS6MJUY3QVri5i0c2QT5D3fAyt3oicRoxaPIw1DKBfQ0Lw
- IVhPJXF02/PkGpaYcJdb0G0tlEPs=
-X-Gm-Gg: ASbGncvsrr3JCFTzc3cMzVN6CR0Rp8vDtqAvWiDX0yyCYx51PNsqFq4ojKlYkFThizc
- mZFJGtF+WfLnZ5spxn+UagPdroIRVwk2EV2dwqrDMJXCUJoc/8rPMv2zRAJ+jnwgqxpmUZrNqzd
- KBxqKYrLpdgyKCXT9Es6dNyujgRPXYpJiGMDFOPv4EeoiERqhWv1/Ugod3
-X-Google-Smtp-Source: AGHT+IFiJdheOdDM4Y3rcnssRvxcVYtxRL5LCQU4O+t6bTzique5VnlZvUou8bKRKZsqX7q3r9Y/TQI1mOotq202qkw=
-X-Received: by 2002:a05:6102:578f:b0:4c1:8928:cefb with SMTP id
- ada2fe7eead31-4c30a5e6c20mr10774790137.12.1741647191828; Mon, 10 Mar 2025
- 15:53:11 -0700 (PDT)
+ AJvYcCUamSskU54BPIx6KPgHSO1GXj1ekzr+F+JsO53kT6HKDhlHFMtawMriJBnX5kE4ztfdq5/zBRgCevC+@nongnu.org
+X-Gm-Message-State: AOJu0YyVsDRJUxWeXPQsd7jS9uKolAXykTckEsSDMDU5vlr3xIAgx+p2
+ FUpoaxU+1k3pFOlQ8j+whYgt7RQUaT1L8OL6DXp9TKL5+JtgXXk5Dw8lA0tpfps=
+X-Gm-Gg: ASbGncsi9f+/C3K5wZ8abVCQDkf7+hAb/N7qRMkcjZaUpad8uw/Sf3CLj9DnoxGing7
+ +abgLLkyX7Nve7C0Td++z8Ea0i3J7MA/MZtXhqpq7amsKVktNoTtgknGSyIrxg3+k6KITBkDozd
+ KyYVTk/MDfDBxSN/FnYVRaCcRgOMavBIhPEWWDgo+tzo2N4R2fBj+dNDWDungDtYZCDx99G+fyO
+ WbIfRRM+v8k+5RTdTIAd8iWq1pa6S8yUjzl5wdV8ahvODKfIXBJtYlU56UJolKIka88IevE4oZd
+ wqraa/1z1nmxy1sUPp5HjDglMGWs2THBadq1eHpR9wfKjVYuKlOgTu3PXg==
+X-Google-Smtp-Source: AGHT+IGi4aJraVBfVl/EoRE61kEiyTdmOlXjmvYO10+d4f3aT2ylBHqrXw1ypyhAFiauPBgYo5Y/4w==
+X-Received: by 2002:a17:90b:3c49:b0:2ee:e317:69ab with SMTP id
+ 98e67ed59e1d1-2ff7cd62f6dmr28557548a91.0.1741651719455; 
+ Mon, 10 Mar 2025 17:08:39 -0700 (PDT)
+Received: from [192.168.1.67] ([38.39.164.180])
+ by smtp.gmail.com with ESMTPSA id
+ 98e67ed59e1d1-30103449c84sm109325a91.1.2025.03.10.17.08.38
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 10 Mar 2025 17:08:39 -0700 (PDT)
+Message-ID: <106877af-deff-4919-adad-698b4c09b85e@linaro.org>
+Date: Mon, 10 Mar 2025 17:08:38 -0700
 MIME-Version: 1.0
-References: <cover.1741573286.git.lc00631@tecorigin.com>
-In-Reply-To: <cover.1741573286.git.lc00631@tecorigin.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Tue, 11 Mar 2025 08:52:45 +1000
-X-Gm-Features: AQ5f1JoOkHszo03f1h4r0glQzyyiRMHgegc3WH6ycVj6y47Z9a65Nt_2pflv8xQ
-Message-ID: <CAKmqyKMpSxYquX+_x-S-FU8-kpdB93Xv7BYk5H=_9neEMpg_hA@mail.gmail.com>
-Subject: Re: [PATCH v4 0/2] Enhanced VSTART and VL checks for vector
- instructions
-To: Chao Liu <lc00631@tecorigin.com>
-Cc: alistair.francis@wdc.com, bmeng.cn@gmail.com, dbarboza@ventanamicro.com, 
- liwei1518@gmail.com, palmer@dabbelt.com, qemu-devel@nongnu.org, 
- qemu-riscv@nongnu.org, zhiwei_liu@linux.alibaba.com, zqz00548@tecorigin.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::933;
- envelope-from=alistair23@gmail.com; helo=mail-ua1-x933.google.com
-X-Spam_score_int: -17
-X-Spam_score: -1.8
-X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 02/16] exec/memory_ldst_phys: extract memory_ldst_phys
+ declarations from cpu-all.h
+Content-Language: en-US
+To: qemu-devel@nongnu.org
+Cc: qemu-ppc@nongnu.org, Alistair Francis <alistair.francis@wdc.com>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Harsh Prateek Bora <harshpb@linux.ibm.com>, alex.bennee@linaro.org,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Daniel Henrique Barboza <danielhb413@gmail.com>, kvm@vger.kernel.org,
+ Peter Xu <peterx@redhat.com>, Nicholas Piggin <npiggin@gmail.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ David Hildenbrand <david@redhat.com>, Weiwei Li <liwei1518@gmail.com>,
+ Paul Durrant <paul@xen.org>, "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
+ =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
+ Anthony PERARD <anthony@xenproject.org>,
+ Yoshinori Sato <ysato@users.sourceforge.jp>, manos.pitsidianakis@linaro.org,
+ qemu-riscv@nongnu.org, Paolo Bonzini <pbonzini@redhat.com>,
+ xen-devel@lists.xenproject.org, Stefano Stabellini <sstabellini@kernel.org>
+References: <20250310045842.2650784-1-pierrick.bouvier@linaro.org>
+ <20250310045842.2650784-3-pierrick.bouvier@linaro.org>
+From: Pierrick Bouvier <pierrick.bouvier@linaro.org>
+In-Reply-To: <20250310045842.2650784-3-pierrick.bouvier@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1035;
+ envelope-from=pierrick.bouvier@linaro.org; helo=mail-pj1-x1035.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -98,56 +117,129 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Mon, Mar 10, 2025 at 12:37=E2=80=AFPM Chao Liu <lc00631@tecorigin.com> w=
-rote:
->
-> Hi, Alistair:
->
-> I rebase both patches based on the riscv-to-apply.next branch and tested =
-them.
-> https://github.com/alistair23/qemu/tree/riscv-to-apply.next
->
-> Only the first patch had two conflicts, which were resolved nicely,
-> and the second patch rebased fine, so you can review it again if necessar=
-y,
-> thanks!
->
-> PATCH v3 review:
-> https://lore.kernel.org/qemu-riscv/71f15782-ec28-4763-8197-c10ec12811ec@v=
-entanamicro.com/
->
-> PATCH v2 review:
-> https://lore.kernel.org/qemu-devel/61e8f7d8-607a-4d63-b9dd-cfbfc840716e@v=
-entanamicro.com/
->
-> PATCH v1 review:
-> https://lore.kernel.org/qemu-devel/CAKmqyKPFYxhK8PANOVzV3FMWxd79wZSJYLWkK=
-OAgEMt_b2KvZA@mail.gmail.com/
->
-> --
-> Regards,
-> Chao
->
-> Chao Liu (2):
->   target/riscv: refactor VSTART_CHECK_EARLY_EXIT() to  accept vl as a
->     parameter
->   target/riscv: fix handling of nop for vstart >=3D vl in some vector
->     instruction
+On 3/9/25 21:58, Pierrick Bouvier wrote:
+> They are now accessible through exec/memory.h instead, and we make sure
+> all variants are available for common or target dependent code.
+> 
+> To allow this, we need to implement address_space_st{*}_cached, simply
+> forwarding the calls to _cached_slow variants.
+> 
 
-Thanks!
+It's not needed, following inclusion will do it.
 
-Applied to riscv-to-apply.next
+#define ENDIANNESS
++#include "exec/memory_ldst_cached.h.inc"
 
-Alistair
+> Signed-off-by: Pierrick Bouvier <pierrick.bouvier@linaro.org>
+> ---
+>   include/exec/cpu-all.h              | 15 ------------
+>   include/exec/memory.h               | 36 +++++++++++++++++++++++++++++
+>   include/exec/memory_ldst_phys.h.inc |  5 +---
+>   3 files changed, 37 insertions(+), 19 deletions(-)
+> 
+> diff --git a/include/exec/cpu-all.h b/include/exec/cpu-all.h
+> index 17ea82518a0..1c2e18f492b 100644
+> --- a/include/exec/cpu-all.h
+> +++ b/include/exec/cpu-all.h
+> @@ -75,21 +75,6 @@ static inline void stl_phys_notdirty(AddressSpace *as, hwaddr addr, uint32_t val
+>                                  MEMTXATTRS_UNSPECIFIED, NULL);
+>   }
+>   
+> -#define SUFFIX
+> -#define ARG1         as
+> -#define ARG1_DECL    AddressSpace *as
+> -#define TARGET_ENDIANNESS
+> -#include "exec/memory_ldst_phys.h.inc"
+> -
+> -/* Inline fast path for direct RAM access.  */
+> -#define ENDIANNESS
+> -#include "exec/memory_ldst_cached.h.inc"
+> -
+> -#define SUFFIX       _cached
+> -#define ARG1         cache
+> -#define ARG1_DECL    MemoryRegionCache *cache
+> -#define TARGET_ENDIANNESS
+> -#include "exec/memory_ldst_phys.h.inc"
+>   #endif
+>   
+>   /* page related stuff */
+> diff --git a/include/exec/memory.h b/include/exec/memory.h
+> index 78c4e0aec8d..7c20f36a312 100644
+> --- a/include/exec/memory.h
+> +++ b/include/exec/memory.h
+> @@ -2798,6 +2798,42 @@ static inline void address_space_stb_cached(MemoryRegionCache *cache,
+>       }
+>   }
+>   
+> +static inline uint16_t address_space_lduw_cached(MemoryRegionCache *cache,
+> +    hwaddr addr, MemTxAttrs attrs, MemTxResult *result)
+> +{
+> +    return address_space_lduw_cached_slow(cache, addr, attrs, result);
+> +}
+> +
+> +static inline void address_space_stw_cached(MemoryRegionCache *cache,
+> +    hwaddr addr, uint16_t val, MemTxAttrs attrs, MemTxResult *result)
+> +{
+> +    address_space_stw_cached_slow(cache, addr, val, attrs, result);
+> +}
+> +
+> +static inline uint32_t address_space_ldl_cached(MemoryRegionCache *cache,
+> +    hwaddr addr, MemTxAttrs attrs, MemTxResult *result)
+> +{
+> +    return address_space_ldl_cached_slow(cache, addr, attrs, result);
+> +}
+> +
+> +static inline void address_space_stl_cached(MemoryRegionCache *cache,
+> +    hwaddr addr, uint32_t val, MemTxAttrs attrs, MemTxResult *result)
+> +{
+> +    address_space_stl_cached_slow(cache, addr, val, attrs, result);
+> +}
+> +
+> +static inline uint64_t address_space_ldq_cached(MemoryRegionCache *cache,
+> +    hwaddr addr, MemTxAttrs attrs, MemTxResult *result)
+> +{
+> +    return address_space_ldq_cached_slow(cache, addr, attrs, result);
+> +}
+> +
+> +static inline void address_space_stq_cached(MemoryRegionCache *cache,
+> +    hwaddr addr, uint64_t val, MemTxAttrs attrs, MemTxResult *result)
+> +{
+> +    address_space_stq_cached_slow(cache, addr, val, attrs, result);
+> +}
+> +
+>   #define ENDIANNESS   _le
+>   #include "exec/memory_ldst_cached.h.inc"
+>   
+> diff --git a/include/exec/memory_ldst_phys.h.inc b/include/exec/memory_ldst_phys.h.inc
+> index ecd678610d1..db67de75251 100644
+> --- a/include/exec/memory_ldst_phys.h.inc
+> +++ b/include/exec/memory_ldst_phys.h.inc
+> @@ -19,7 +19,6 @@
+>    * License along with this library; if not, see <http://www.gnu.org/licenses/>.
+>    */
+>   
+> -#ifdef TARGET_ENDIANNESS
+>   static inline uint16_t glue(lduw_phys, SUFFIX)(ARG1_DECL, hwaddr addr)
+>   {
+>       return glue(address_space_lduw, SUFFIX)(ARG1, addr,
+> @@ -55,7 +54,7 @@ static inline void glue(stq_phys, SUFFIX)(ARG1_DECL, hwaddr addr, uint64_t val)
+>       glue(address_space_stq, SUFFIX)(ARG1, addr, val,
+>                                       MEMTXATTRS_UNSPECIFIED, NULL);
+>   }
+> -#else
+> +
+>   static inline uint8_t glue(ldub_phys, SUFFIX)(ARG1_DECL, hwaddr addr)
+>   {
+>       return glue(address_space_ldub, SUFFIX)(ARG1, addr,
+> @@ -139,9 +138,7 @@ static inline void glue(stq_be_phys, SUFFIX)(ARG1_DECL, hwaddr addr, uint64_t va
+>       glue(address_space_stq_be, SUFFIX)(ARG1, addr, val,
+>                                          MEMTXATTRS_UNSPECIFIED, NULL);
+>   }
+> -#endif
+>   
+>   #undef ARG1_DECL
+>   #undef ARG1
+>   #undef SUFFIX
+> -#undef TARGET_ENDIANNESS
 
->
->  target/riscv/vcrypto_helper.c   | 32 ++++++-------
->  target/riscv/vector_helper.c    | 83 ++++++++++++++++++---------------
->  target/riscv/vector_internals.c |  4 +-
->  target/riscv/vector_internals.h | 12 ++---
->  4 files changed, 69 insertions(+), 62 deletions(-)
->
-> --
-> 2.48.1
->
 
