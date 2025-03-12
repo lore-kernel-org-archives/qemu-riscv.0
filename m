@@ -4,99 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6062DC28B28
-	for <qemu-riscv@archiver.kernel.org>; Wed, 12 Mar 2025 15:57:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 38DC4C28B28
+	for <qemu-riscv@archiver.kernel.org>; Wed, 12 Mar 2025 17:00:24 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tsORk-0005Yu-Ll; Wed, 12 Mar 2025 11:56:41 -0400
+	id 1tsPR2-0008LU-SV; Wed, 12 Mar 2025 13:00:02 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <paolo.savini@embecosm.com>)
- id 1tsOR4-0005TY-Fi
- for qemu-riscv@nongnu.org; Wed, 12 Mar 2025 11:56:03 -0400
-Received: from mail-wm1-x332.google.com ([2a00:1450:4864:20::332])
+ (Exim 4.90_1) (envelope-from <jason.chien@sifive.com>)
+ id 1tsPQy-0008JS-V5
+ for qemu-riscv@nongnu.org; Wed, 12 Mar 2025 12:59:57 -0400
+Received: from mail-ed1-x531.google.com ([2a00:1450:4864:20::531])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <paolo.savini@embecosm.com>)
- id 1tsOR1-0006Bg-E6
- for qemu-riscv@nongnu.org; Wed, 12 Mar 2025 11:55:58 -0400
-Received: by mail-wm1-x332.google.com with SMTP id
- 5b1f17b1804b1-43cf06eabdaso42606065e9.2
- for <qemu-riscv@nongnu.org>; Wed, 12 Mar 2025 08:55:52 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <jason.chien@sifive.com>)
+ id 1tsPQw-0007qU-3A
+ for qemu-riscv@nongnu.org; Wed, 12 Mar 2025 12:59:56 -0400
+Received: by mail-ed1-x531.google.com with SMTP id
+ 4fb4d7f45d1cf-5e66407963fso7696213a12.2
+ for <qemu-riscv@nongnu.org>; Wed, 12 Mar 2025 09:59:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=embecosm.com; s=google; t=1741794951; x=1742399751; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=cHWlT+6QGuOJhNJ+hFgxDOqJOlxwlR0tU1tgg6QxyE0=;
- b=CMmVQ0SJj4ISKJVUyJ/yHIUJDeDITzx8hSIOsxyWyINgJkHB4b/bzyiJ0FlApipae/
- wlz+MtW+BSo2zts5H6iTnWuKxeya5bB1XtH23hyWPsMgmHJqq8Lv0Gt7ASqS18R5rwch
- V9deyHMPdGQaqtAuoYuh0NdGOLvOBZqlAEAqyLJJfwvYKFRpVThHGABvqrN5Ck4PhPKr
- UU26KnZJU3TwkuXiZmqqV+uBtEozPw5cfH4F/AV1M+PL3En6uOARDyi47ALrT89FIAfw
- R7x4qkIkrTWZXSGnv3S2j+V6wSh9RYsIwGb1SMjIIsJAZW/CenH/idUaFsqLp5xy8W8a
- EuJg==
+ d=sifive.com; s=google; t=1741798790; x=1742403590; darn=nongnu.org;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=ya+FjLCCjdR33uDqugDcilKzi1+6loZJ94oEWgLmenY=;
+ b=Yvcg/yNyStG2c88OmL0Z77ADVYA0An68Luez0hcAi+nm6YyBopD8Agpy0xO2ORaRN7
+ DBTJEp4XZC9p0kErFwbQXHWIKJob4r2Ka+XlYcMPROhLQ38/8yiZzPkxahdQw5geemyp
+ sUIDOxzWntWBWt41QOuFTRmspKfZbGaJrRs+NrlvB7v74e99hB4gnzh7HXyNpppbqpBl
+ 2NQEWUYaIZDqV5F2/lfQQNX9yNuyEuDZ3fPD2QaY8vnnvvwLYD/PgCVPFLfj5JJfluVG
+ xPwafhv7Mfvpj2UWxMecaxdg4mIDb6mGabCZeWZw3G8TyqRPS98CjeAJKicmg+NOkBFi
+ pljA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741794951; x=1742399751;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=cHWlT+6QGuOJhNJ+hFgxDOqJOlxwlR0tU1tgg6QxyE0=;
- b=Gsiu0bBbcDS+b7NxlYRF1hNuFfdcdv8lbn61gOPHEZhjFaSKcTDP4OZTqSY5Nk3qZZ
- /Cl6Kdwa3ie7X997tAS3hI4w99PYIzbI8ZYUpoRs0az45Z9O55N9VG5o9aMrEodSppnN
- +jp+FbqBbSA0U+pX8atET0sE6PrNZQZcshAH2Y0sjQGdUikgTRsCydeAqpQhGiL5aeOn
- wnPQ60UzNJZulMjghi8+QqrZmV0K959feyqoUE4mHWuy8Ho2Sj++uvVUnGRU+4DfnzkI
- gKteDY8IiDl00aB/D/T4zf75GqviYVh+5M2VjPM9E8VrsXMxyLWMDlgkzXpNAWTrOrSv
- Ok5g==
+ d=1e100.net; s=20230601; t=1741798790; x=1742403590;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=ya+FjLCCjdR33uDqugDcilKzi1+6loZJ94oEWgLmenY=;
+ b=DR1XpHfDcKqXfXWnILlp6k8ijz5m8rwWeOEar07tzB7UaMHE+brWJiBssohLIZA8Rl
+ OuTwGve3muL6Xp1eyFVqrJH5QJIDBHIbh6aO4o8F6Frfmauy2hC6kHve7DZAyfRzZs0i
+ gdC8/2ndPg8e2PQX1/mQ11Jw31DyHevJ1VkyAMjbywXowRuHX/SXFf24XkLBrgRXF/uV
+ iJz5U3oSky7Js9zespvdITmXQNwbKhj70coYgQA4qtzpVyrGlqImAE4Kdrp+F4IDwYdo
+ aouLkljpixwsCcZslcw4FyWYOhusj4WPyM/YfEljtk2xo3rfaQ9rNdqQFHbutP9n6EOC
+ V5tw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVNcPIRq0Ht/Bk9OejqG7u2DYYnL6GQ4eWHofuLFyVvaqTZLdeZ8rxUHwkbA2IG1XXRAmv20Qurr/kM@nongnu.org
-X-Gm-Message-State: AOJu0YxaDdsPBlUmpcRKSsTKym5wYYmpRJbLIgx1RIGJ30HqgZmYezZ4
- LNAmFq1Ohn5/67jVCoWBX+nG56GpnMHiBUDxXbqgjhCyL3saNIsMeBWIwQFKp+g=
-X-Gm-Gg: ASbGnctEPzFIHPwnCj+vooIdyeMuH1N3KHU/qragDxhig5qT7ydfmJGF8vdLRqH/BpC
- IxL1sizE6iAOWR8Zvlf1Ju3QN44DFGMCR7W93qU52863kwVbEFJpdBn2F+y6s7fwl/+kaPHV9NV
- jh/sVyghA1sW6ACZ2HLPUCSsScsIquOBkW9TAon7W5cZXsjjSP35yVli0HoPek0errGK0QMeQFt
- CuYj/40oCkL7XmlZ97kl4yI6t4diAT2jDoXI9Tfs+zyZ5D4FcWSh3v7XnCl1/9E++tuSouO528H
- l7vuIZ1X8E62AH7qh8kkRIxy9ElFo+tN8e+OdB+S9rtH1eYGEMfc1g6pSCbhnfk=
-X-Google-Smtp-Source: AGHT+IGDqja6eaRVNzn9jWfrwRanCI906YejVZVwRMuKjn9bf3mMs2IeF8QfuISorwUrTzFuYpQMOw==
-X-Received: by 2002:a05:600c:3b24:b0:43d:b85:1831 with SMTP id
- 5b1f17b1804b1-43d147ffaa8mr15721845e9.0.1741794951103; 
- Wed, 12 Mar 2025 08:55:51 -0700 (PDT)
-Received: from paolo-laptop-amd.. ([2a0e:cb01:d3:f100:3f9b:7278:8381:286b])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-43d0ac26758sm23583115e9.35.2025.03.12.08.55.50
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 12 Mar 2025 08:55:50 -0700 (PDT)
-From: Paolo Savini <paolo.savini@embecosm.com>
-To: qemu-devel@nongnu.org,
-	qemu-riscv@nongnu.org
-Cc: Paolo Savini <paolo.savini@embecosm.com>,
- Richard Handerson <richard.henderson@linaro.org>,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bmeng.cn@gmail.com>,
- Weiwei Li <liwei1518@gmail.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Helene Chelin <helene.chelin@embecosm.com>, Nathan Egge <negge@google.com>,
- Max Chou <max.chou@sifive.com>,
- Jeremy Bennett <jeremy.bennett@embecosm.com>,
- Craig Blackmore <craig.blackmore@embecosm.com>
-Subject: [PATCH 1/1 v2] [RISC-V/RVV] Generate strided vector loads/stores with
- tcg nodes.
-Date: Wed, 12 Mar 2025 15:55:47 +0000
-Message-ID: <20250312155547.289642-2-paolo.savini@embecosm.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20250312155547.289642-1-paolo.savini@embecosm.com>
-References: <20250312155547.289642-1-paolo.savini@embecosm.com>
+ AJvYcCXia6oD2ZNuP+qAFAJKfJk1rHI0jyDDbjh2+OsEBy7j4ZXlHeYfh91yLjN/+1kfPqwLlBFKMjBr/X/P@nongnu.org
+X-Gm-Message-State: AOJu0YyEMXKXYXM1P+1P/nucXJNGbdCzVe/p8XlWy+4G2g3nqEnJd9rG
+ /UN53p3brVU2jELUd1AgtHI0aKusFeyT5yjqlueiJv3rEKfpseOn5eDysdbHc/VJ5EVEgFi3arc
+ /UjXoRmndvtCwOG6v0DEtN+/bOteYOnl1MYklZg==
+X-Gm-Gg: ASbGnctRXGf1hsJf8nS/ZaRc2di7DxLLT7IcyylODBxYxQb12x/dLrQx+gGZgd/rMvv
+ zcvXS8i+1jfsH6L7mRE+pKn30mdcBCrmn2lBC+EpYTBlCyn9/yhfmbrhZHen8lm1RnMLCQxgwNo
+ +uB7epNsuVe7UM3/zd2E60uQI=
+X-Google-Smtp-Source: AGHT+IFqNiM2K4Uv0Q/WsDMai4EYmQGj9gu+VcvLxLjqsmM+7P4AutD8EWAyrJBH6OPlIkpy3E93hmBo2BTBKHJlrm0=
+X-Received: by 2002:a05:6402:13cc:b0:5e6:17e6:9510 with SMTP id
+ 4fb4d7f45d1cf-5e617e69fefmr22364533a12.6.1741798790476; Wed, 12 Mar 2025
+ 09:59:50 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::332;
- envelope-from=paolo.savini@embecosm.com; helo=mail-wm1-x332.google.com
+References: <20250302091209.20063-1-jason.chien@sifive.com>
+ <20250302091209.20063-2-jason.chien@sifive.com>
+ <0464a115-fbfe-4038-9e2d-409ad133647e@ventanamicro.com>
+In-Reply-To: <0464a115-fbfe-4038-9e2d-409ad133647e@ventanamicro.com>
+From: Jason Chien <jason.chien@sifive.com>
+Date: Thu, 13 Mar 2025 00:59:40 +0800
+X-Gm-Features: AQ5f1JocGzvKzWUlmOX03k6U47g5PSIDeBU1tREq-bJHsm3de5rCEeQGe9hhPB8
+Message-ID: <CADr__8p54Fp4PqkmSC_gWhiOwa9Yem0KU53woFFCQ_sA35sFHw@mail.gmail.com>
+Subject: Re: [PATCH 1/3] include/hw/pci: Attach BDF to Memory Attributes
+To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, 
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Weiwei Li <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
+ "Michael S. Tsirkin" <mst@redhat.com>,
+ Marcel Apfelbaum <marcel.apfelbaum@gmail.com>
+Content-Type: multipart/alternative; boundary="0000000000002d65410630282267"
+Received-SPF: pass client-ip=2a00:1450:4864:20::531;
+ envelope-from=jason.chien@sifive.com; helo=mail-ed1-x531.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, HTML_MESSAGE=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -112,394 +100,199 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-This commit improves the performance of QEMU when emulating strided vector
-loads and stores by substituting the call for the helper function with the
-generation of equivalent TCG operations.
+--0000000000002d65410630282267
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Paolo Savini <paolo.savini@embecosm.com>
-Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
----
- target/riscv/insn_trans/trans_rvv.c.inc | 323 ++++++++++++++++++++----
- 1 file changed, 273 insertions(+), 50 deletions(-)
+Ping.
 
-diff --git a/target/riscv/insn_trans/trans_rvv.c.inc b/target/riscv/insn_trans/trans_rvv.c.inc
-index b9883a5d32..7079f758ad 100644
---- a/target/riscv/insn_trans/trans_rvv.c.inc
-+++ b/target/riscv/insn_trans/trans_rvv.c.inc
-@@ -802,32 +802,286 @@ GEN_VEXT_TRANS(vlm_v, MO_8, vlm_v, ld_us_mask_op, ld_us_mask_check)
- GEN_VEXT_TRANS(vsm_v, MO_8, vsm_v, st_us_mask_op, st_us_mask_check)
- 
- /*
-- *** stride load and store
-+ * MAXSZ returns the maximum vector size can be operated in bytes,
-+ * which is used in GVEC IR when vl_eq_vlmax flag is set to true
-+ * to accelerate vector operation.
-+ */
-+static inline uint32_t MAXSZ(DisasContext *s)
-+{
-+    int max_sz = s->cfg_ptr->vlenb << 3;
-+    return max_sz >> (3 - s->lmul);
-+}
-+
-+static inline uint32_t get_log2(uint32_t a)
-+{
-+    uint32_t i = 0;
-+    for (; a > 0;) {
-+        a >>= 1;
-+        i++;
-+    }
-+    return i;
-+}
-+
-+typedef void gen_tl_ldst(TCGv, TCGv_ptr, tcg_target_long);
-+
-+/*
-+ * Simulate the strided load/store main loop:
-+ *
-+ * for (i = env->vstart; i < env->vl; env->vstart = ++i) {
-+ *     k = 0;
-+ *     while (k < nf) {
-+ *         if (!vm && !vext_elem_mask(v0, i)) {
-+ *             vext_set_elems_1s(vd, vma, (i + k * max_elems) * esz,
-+ *                               (i + k * max_elems + 1) * esz);
-+ *             k++;
-+ *             continue;
-+ *         }
-+ *         target_ulong addr = base + stride * i + (k << log2_esz);
-+ *         ldst(env, adjust_addr(env, addr), i + k * max_elems, vd, ra);
-+ *         k++;
-+ *     }
-+ * }
-+ */
-+static void gen_ldst_stride_main_loop(DisasContext *s, TCGv dest, uint32_t rs1,
-+                                      uint32_t rs2, uint32_t vm, uint32_t nf,
-+                                      gen_tl_ldst *ld_fn, gen_tl_ldst *st_fn,
-+                                      bool is_load)
-+{
-+    TCGv addr = tcg_temp_new();
-+    TCGv base = get_gpr(s, rs1, EXT_NONE);
-+    TCGv stride = get_gpr(s, rs2, EXT_NONE);
-+
-+    TCGv i = tcg_temp_new();
-+    TCGv i_esz = tcg_temp_new();
-+    TCGv k = tcg_temp_new();
-+    TCGv k_esz = tcg_temp_new();
-+    TCGv k_max = tcg_temp_new();
-+    TCGv mask = tcg_temp_new();
-+    TCGv mask_offs = tcg_temp_new();
-+    TCGv mask_offs_64 = tcg_temp_new();
-+    TCGv mask_elem = tcg_temp_new();
-+    TCGv mask_offs_rem = tcg_temp_new();
-+    TCGv vreg = tcg_temp_new();
-+    TCGv dest_offs = tcg_temp_new();
-+    TCGv stride_offs = tcg_temp_new();
-+
-+    uint32_t max_elems = MAXSZ(s) >> s->sew;
-+
-+    TCGLabel *start = gen_new_label();
-+    TCGLabel *end = gen_new_label();
-+    TCGLabel *start_k = gen_new_label();
-+    TCGLabel *inc_k = gen_new_label();
-+    TCGLabel *end_k = gen_new_label();
-+
-+    MemOp atomicity = MO_ATOM_NONE;
-+    if (s->sew == 0) {
-+        atomicity = MO_ATOM_NONE;
-+    } else {
-+        atomicity = MO_ATOM_IFALIGN_PAIR;
-+    }
-+
-+    mark_vs_dirty(s);
-+
-+    tcg_gen_addi_tl(mask, (TCGv)tcg_env, vreg_ofs(s, 0));
-+
-+    /* Start of outer loop. */
-+    tcg_gen_mov_tl(i, cpu_vstart);
-+    gen_set_label(start);
-+    tcg_gen_brcond_tl(TCG_COND_GE, i, cpu_vl, end);
-+    tcg_gen_shli_tl(i_esz, i, s->sew);
-+    /* Start of inner loop. */
-+    tcg_gen_movi_tl(k, 0);
-+    gen_set_label(start_k);
-+    tcg_gen_brcond_tl(TCG_COND_GE, k, tcg_constant_tl(nf), end_k);
-+    /*
-+     * If we are in mask agnostic regime and the operation is not unmasked we
-+     * set the inactive elements to 1.
-+     */
-+    if (!vm && s->vma) {
-+        TCGLabel *active_element = gen_new_label();
-+        /* (i + k * max_elems) * esz */
-+        tcg_gen_shli_tl(mask_offs, k, get_log2(max_elems << s->sew));
-+        tcg_gen_add_tl(mask_offs, mask_offs, i_esz);
-+
-+        /*
-+         * Check whether the i bit of the mask is 0 or 1.
-+         *
-+         * static inline int vext_elem_mask(void *v0, int index)
-+         * {
-+         *     int idx = index / 64;
-+         *     int pos = index  % 64;
-+         *     return (((uint64_t *)v0)[idx] >> pos) & 1;
-+         * }
-+         */
-+        tcg_gen_shri_tl(mask_offs_64, mask_offs, 3);
-+        tcg_gen_add_tl(mask_offs_64, mask_offs_64, mask);
-+        tcg_gen_ld_i64((TCGv_i64)mask_elem, (TCGv_ptr)mask_offs_64, 0);
-+        tcg_gen_rem_tl(mask_offs_rem, mask_offs, tcg_constant_tl(8));
-+        tcg_gen_shr_tl(mask_elem, mask_elem, mask_offs_rem);
-+        tcg_gen_andi_tl(mask_elem, mask_elem, 1);
-+        tcg_gen_brcond_tl(TCG_COND_NE, mask_elem, tcg_constant_tl(0),
-+                          active_element);
-+        /*
-+         * Set masked-off elements in the destination vector register to 1s.
-+         * Store instructions simply skip this bit as memory ops access memory
-+         * only for active elements.
-+         */
-+        if (is_load) {
-+            tcg_gen_shli_tl(mask_offs, mask_offs, s->sew);
-+            tcg_gen_add_tl(mask_offs, mask_offs, dest);
-+            st_fn(tcg_constant_tl(-1), (TCGv_ptr)mask_offs, 0);
-+        }
-+        tcg_gen_br(inc_k);
-+        gen_set_label(active_element);
-+    }
-+    /*
-+     * The element is active, calculate the address with stride:
-+     * target_ulong addr = base + stride * i + (k << log2_esz);
-+     */
-+    tcg_gen_mul_tl(stride_offs, stride, i);
-+    tcg_gen_shli_tl(k_esz, k, s->sew);
-+    tcg_gen_add_tl(stride_offs, stride_offs, k_esz);
-+    tcg_gen_add_tl(addr, base, stride_offs);
-+    /* Calculate the offset in the dst/src vector register. */
-+    tcg_gen_shli_tl(k_max, k, get_log2(max_elems));
-+    tcg_gen_add_tl(dest_offs, i, k_max);
-+    tcg_gen_shli_tl(dest_offs, dest_offs, s->sew);
-+    tcg_gen_add_tl(dest_offs, dest_offs, dest);
-+    if (is_load) {
-+        tcg_gen_qemu_ld_tl(vreg, addr, s->mem_idx, MO_LE | s->sew | atomicity);
-+        st_fn((TCGv)vreg, (TCGv_ptr)dest_offs, 0);
-+    } else {
-+        ld_fn((TCGv)vreg, (TCGv_ptr)dest_offs, 0);
-+        tcg_gen_qemu_st_tl(vreg, addr, s->mem_idx, MO_LE | s->sew | atomicity);
-+    }
-+    /*
-+     * We don't execute the load/store above if the element was inactive.
-+     * We jump instead directly to incrementing k and continuing the loop.
-+     */
-+    if (!vm && s->vma) {
-+        gen_set_label(inc_k);
-+    }
-+    tcg_gen_addi_tl(k, k, 1);
-+    tcg_gen_br(start_k);
-+    /* End of the inner loop. */
-+    gen_set_label(end_k);
-+
-+    tcg_gen_addi_tl(i, i, 1);
-+    tcg_gen_mov_tl(cpu_vstart, i);
-+    tcg_gen_br(start);
-+
-+    /* End of the outer loop. */
-+    gen_set_label(end);
-+
-+    return;
-+}
-+
-+
-+/*
-+ * Set the tail bytes of the strided loads/stores to 1:
-+ *
-+ * for (k = 0; k < nf; ++k) {
-+ *     cnt = (k * max_elems + vl) * esz;
-+ *     tot = (k * max_elems + max_elems) * esz;
-+ *     for (i = cnt; i < tot; i += esz) {
-+ *         store_1s(-1, vd[vl+i]);
-+ *     }
-+ * }
-  */
--typedef void gen_helper_ldst_stride(TCGv_ptr, TCGv_ptr, TCGv,
--                                    TCGv, TCGv_env, TCGv_i32);
-+static void gen_ldst_stride_tail_loop(DisasContext *s, TCGv dest, uint32_t nf,
-+                                      gen_tl_ldst *st_fn)
-+{
-+    TCGv i = tcg_temp_new();
-+    TCGv k = tcg_temp_new();
-+    TCGv tail_cnt = tcg_temp_new();
-+    TCGv tail_tot = tcg_temp_new();
-+    TCGv tail_addr = tcg_temp_new();
-+
-+    TCGLabel *start = gen_new_label();
-+    TCGLabel *end = gen_new_label();
-+    TCGLabel *start_i = gen_new_label();
-+    TCGLabel *end_i = gen_new_label();
-+
-+    uint32_t max_elems_b = MAXSZ(s);
-+    uint32_t esz = 1 << s->sew;
-+
-+    /* Start of the outer loop. */
-+    tcg_gen_movi_tl(k, 0);
-+    tcg_gen_shli_tl(tail_cnt, cpu_vl, s->sew);
-+    tcg_gen_movi_tl(tail_tot, max_elems_b);
-+    tcg_gen_add_tl(tail_addr, dest, tail_cnt);
-+    gen_set_label(start);
-+    tcg_gen_brcond_tl(TCG_COND_GE, k, tcg_constant_tl(nf), end);
-+    /* Start of the inner loop. */
-+    tcg_gen_mov_tl(i, tail_cnt);
-+    gen_set_label(start_i);
-+    tcg_gen_brcond_tl(TCG_COND_GE, i, tail_tot, end_i);
-+    /* store_1s(-1, vd[vl+i]); */
-+    st_fn(tcg_constant_tl(-1), (TCGv_ptr)tail_addr, 0);
-+    tcg_gen_addi_tl(tail_addr, tail_addr, esz);
-+    tcg_gen_addi_tl(i, i, esz);
-+    tcg_gen_br(start_i);
-+    /* End of the inner loop. */
-+    gen_set_label(end_i);
-+    /* Update the counts */
-+    tcg_gen_addi_tl(tail_cnt, tail_cnt, max_elems_b);
-+    tcg_gen_addi_tl(tail_tot, tail_cnt, max_elems_b);
-+    tcg_gen_addi_tl(k, k, 1);
-+    tcg_gen_br(start);
-+    /* End of the outer loop. */
-+    gen_set_label(end);
-+
-+    return;
-+}
- 
- static bool ldst_stride_trans(uint32_t vd, uint32_t rs1, uint32_t rs2,
--                              uint32_t data, gen_helper_ldst_stride *fn,
--                              DisasContext *s)
-+                              uint32_t data, DisasContext *s, bool is_load)
- {
--    TCGv_ptr dest, mask;
--    TCGv base, stride;
--    TCGv_i32 desc;
-+    if (!s->vstart_eq_zero) {
-+        return false;
-+    }
- 
--    dest = tcg_temp_new_ptr();
--    mask = tcg_temp_new_ptr();
--    base = get_gpr(s, rs1, EXT_NONE);
--    stride = get_gpr(s, rs2, EXT_NONE);
--    desc = tcg_constant_i32(simd_desc(s->cfg_ptr->vlenb,
--                                      s->cfg_ptr->vlenb, data));
-+    TCGv dest = tcg_temp_new();
- 
--    tcg_gen_addi_ptr(dest, tcg_env, vreg_ofs(s, vd));
--    tcg_gen_addi_ptr(mask, tcg_env, vreg_ofs(s, 0));
-+    uint32_t nf = FIELD_EX32(data, VDATA, NF);
-+    uint32_t vm = FIELD_EX32(data, VDATA, VM);
-+
-+    /* Destination register and mask register */
-+    tcg_gen_addi_tl(dest, (TCGv)tcg_env, vreg_ofs(s, vd));
-+
-+    /*
-+     * Select the appropriate load/tore to retrieve data from the vector
-+     * register given a specific sew.
-+     */
-+    static gen_tl_ldst * const ld_fns[4] = {
-+        tcg_gen_ld8u_tl, tcg_gen_ld16u_tl,
-+        tcg_gen_ld32u_tl, tcg_gen_ld_tl
-+    };
-+
-+    static gen_tl_ldst * const st_fns[4] = {
-+        tcg_gen_st8_tl, tcg_gen_st16_tl,
-+        tcg_gen_st32_tl, tcg_gen_st_tl
-+    };
-+
-+    gen_tl_ldst *ld_fn = ld_fns[s->sew];
-+    gen_tl_ldst *st_fn = st_fns[s->sew];
-+
-+    if (ld_fn == NULL || st_fn == NULL) {
-+        return false;
-+    }
- 
-     mark_vs_dirty(s);
- 
--    fn(dest, mask, base, stride, tcg_env, desc);
-+    gen_ldst_stride_main_loop(s, dest, rs1, rs2, vm, nf, ld_fn, st_fn, is_load);
-+
-+    tcg_gen_movi_tl(cpu_vstart, 0);
-+
-+    /*
-+     * Set the tail bytes to 1 if tail agnostic:
-+     */
-+    if (s->vta != 0 && is_load) {
-+        gen_ldst_stride_tail_loop(s, dest, nf, st_fn);
-+    }
- 
-     finalize_rvv_inst(s);
-     return true;
-@@ -836,16 +1090,6 @@ static bool ldst_stride_trans(uint32_t vd, uint32_t rs1, uint32_t rs2,
- static bool ld_stride_op(DisasContext *s, arg_rnfvm *a, uint8_t eew)
- {
-     uint32_t data = 0;
--    gen_helper_ldst_stride *fn;
--    static gen_helper_ldst_stride * const fns[4] = {
--        gen_helper_vlse8_v, gen_helper_vlse16_v,
--        gen_helper_vlse32_v, gen_helper_vlse64_v
--    };
--
--    fn = fns[eew];
--    if (fn == NULL) {
--        return false;
--    }
- 
-     uint8_t emul = vext_get_emul(s, eew);
-     data = FIELD_DP32(data, VDATA, VM, a->vm);
-@@ -853,7 +1097,7 @@ static bool ld_stride_op(DisasContext *s, arg_rnfvm *a, uint8_t eew)
-     data = FIELD_DP32(data, VDATA, NF, a->nf);
-     data = FIELD_DP32(data, VDATA, VTA, s->vta);
-     data = FIELD_DP32(data, VDATA, VMA, s->vma);
--    return ldst_stride_trans(a->rd, a->rs1, a->rs2, data, fn, s);
-+    return ldst_stride_trans(a->rd, a->rs1, a->rs2, data, s, true);
- }
- 
- static bool ld_stride_check(DisasContext *s, arg_rnfvm* a, uint8_t eew)
-@@ -871,23 +1115,13 @@ GEN_VEXT_TRANS(vlse64_v, MO_64, rnfvm, ld_stride_op, ld_stride_check)
- static bool st_stride_op(DisasContext *s, arg_rnfvm *a, uint8_t eew)
- {
-     uint32_t data = 0;
--    gen_helper_ldst_stride *fn;
--    static gen_helper_ldst_stride * const fns[4] = {
--        /* masked stride store */
--        gen_helper_vsse8_v,  gen_helper_vsse16_v,
--        gen_helper_vsse32_v,  gen_helper_vsse64_v
--    };
- 
-     uint8_t emul = vext_get_emul(s, eew);
-     data = FIELD_DP32(data, VDATA, VM, a->vm);
-     data = FIELD_DP32(data, VDATA, LMUL, emul);
-     data = FIELD_DP32(data, VDATA, NF, a->nf);
--    fn = fns[eew];
--    if (fn == NULL) {
--        return false;
--    }
- 
--    return ldst_stride_trans(a->rd, a->rs1, a->rs2, data, fn, s);
-+    return ldst_stride_trans(a->rd, a->rs1, a->rs2, data, s, false);
- }
- 
- static bool st_stride_check(DisasContext *s, arg_rnfvm* a, uint8_t eew)
-@@ -1169,17 +1403,6 @@ GEN_LDST_WHOLE_TRANS(vs8r_v, 8)
-  *** Vector Integer Arithmetic Instructions
-  */
- 
--/*
-- * MAXSZ returns the maximum vector size can be operated in bytes,
-- * which is used in GVEC IR when vl_eq_vlmax flag is set to true
-- * to accelerate vector operation.
-- */
--static inline uint32_t MAXSZ(DisasContext *s)
--{
--    int max_sz = s->cfg_ptr->vlenb * 8;
--    return max_sz >> (3 - s->lmul);
--}
--
- static bool opivv_check(DisasContext *s, arg_rmrr *a)
- {
-     return require_rvv(s) &&
--- 
-2.34.1
+Michael/Marcel, would you mind taking a look? Thanks!
 
+
+Jason
+
+Daniel Henrique Barboza <dbarboza@ventanamicro.com> =E6=96=BC 2025=E5=B9=B4=
+3=E6=9C=887=E6=97=A5 =E9=80=B1=E4=BA=94 =E4=B8=8B=E5=8D=888:40=E5=AF=AB=E9=
+=81=93=EF=BC=9A
+
+>
+>
+> On 3/2/25 6:12 AM, Jason Chien wrote:
+> > This commit adds the BDF to the memory attributes for DMA operations.
+> >
+> > Signed-off-by: Jason Chien <jason.chien@sifive.com>
+> > ---
+>
+> This looks sensible but I'll feel more comfortable if Michael/Marcel also
+> takes a look. Thanks,
+>
+>
+> Daniel
+>
+> >   include/hw/pci/pci_device.h | 10 ++++++++--
+> >   1 file changed, 8 insertions(+), 2 deletions(-)
+> >
+> > diff --git a/include/hw/pci/pci_device.h b/include/hw/pci/pci_device.h
+> > index add208edfa..968f1ba3e9 100644
+> > --- a/include/hw/pci/pci_device.h
+> > +++ b/include/hw/pci/pci_device.h
+> > @@ -244,6 +244,8 @@ static inline MemTxResult pci_dma_rw(PCIDevice *dev=
+,
+> dma_addr_t addr,
+> >                                        void *buf, dma_addr_t len,
+> >                                        DMADirection dir, MemTxAttrs
+> attrs)
+> >   {
+> > +    attrs.unspecified =3D 0;
+> > +    attrs.requester_id =3D pci_requester_id(dev);
+> >       return dma_memory_rw(pci_get_address_space(dev), addr, buf, len,
+> >                            dir, attrs);
+> >   }
+> > @@ -292,6 +294,8 @@ static inline MemTxResult pci_dma_write(PCIDevice
+> *dev, dma_addr_t addr,
+> >                                                  uint##_bits##_t *val, =
+\
+> >                                                  MemTxAttrs attrs) \
+> >       { \
+> > +        attrs.unspecified =3D 0; \
+> > +        attrs.requester_id =3D pci_requester_id(dev); \
+> >           return ld##_l##_dma(pci_get_address_space(dev), addr, val,
+> attrs); \
+> >       } \
+> >       static inline MemTxResult st##_s##_pci_dma(PCIDevice *dev, \
+> > @@ -299,6 +303,8 @@ static inline MemTxResult pci_dma_write(PCIDevice
+> *dev, dma_addr_t addr,
+> >                                                  uint##_bits##_t val, \
+> >                                                  MemTxAttrs attrs) \
+> >       { \
+> > +        attrs.unspecified =3D 0; \
+> > +        attrs.requester_id =3D pci_requester_id(dev); \
+> >           return st##_s##_dma(pci_get_address_space(dev), addr, val,
+> attrs); \
+> >       }
+> >
+> > @@ -327,8 +333,8 @@ PCI_DMA_DEFINE_LDST(q_be, q_be, 64);
+> >   static inline void *pci_dma_map(PCIDevice *dev, dma_addr_t addr,
+> >                                   dma_addr_t *plen, DMADirection dir)
+> >   {
+> > -    return dma_memory_map(pci_get_address_space(dev), addr, plen, dir,
+> > -                          MEMTXATTRS_UNSPECIFIED);
+> > +    MemTxAttrs attrs =3D {.requester_id =3D pci_requester_id(dev)};
+> > +    return dma_memory_map(pci_get_address_space(dev), addr, plen, dir,
+> attrs);
+> >   }
+> >
+> >   static inline void pci_dma_unmap(PCIDevice *dev, void *buffer,
+> dma_addr_t len,
+>
+>
+
+--0000000000002d65410630282267
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr">Ping.<br><br>Michael/Marcel, would you mind taking a look?=
+ Thanks!<br><br><br>Jason</div><br><div class=3D"gmail_quote gmail_quote_co=
+ntainer"><div dir=3D"ltr" class=3D"gmail_attr">Daniel Henrique Barboza &lt;=
+<a href=3D"mailto:dbarboza@ventanamicro.com">dbarboza@ventanamicro.com</a>&=
+gt; =E6=96=BC 2025=E5=B9=B43=E6=9C=887=E6=97=A5 =E9=80=B1=E4=BA=94 =E4=B8=
+=8B=E5=8D=888:40=E5=AF=AB=E9=81=93=EF=BC=9A<br></div><blockquote class=3D"g=
+mail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204=
+,204,204);padding-left:1ex"><br>
+<br>
+On 3/2/25 6:12 AM, Jason Chien wrote:<br>
+&gt; This commit adds the BDF to the memory attributes for DMA operations.<=
+br>
+&gt; <br>
+&gt; Signed-off-by: Jason Chien &lt;<a href=3D"mailto:jason.chien@sifive.co=
+m" target=3D"_blank">jason.chien@sifive.com</a>&gt;<br>
+&gt; ---<br>
+<br>
+This looks sensible but I&#39;ll feel more comfortable if Michael/Marcel al=
+so<br>
+takes a look. Thanks,<br>
+<br>
+<br>
+Daniel<br>
+<br>
+&gt;=C2=A0 =C2=A0include/hw/pci/pci_device.h | 10 ++++++++--<br>
+&gt;=C2=A0 =C2=A01 file changed, 8 insertions(+), 2 deletions(-)<br>
+&gt; <br>
+&gt; diff --git a/include/hw/pci/pci_device.h b/include/hw/pci/pci_device.h=
+<br>
+&gt; index add208edfa..968f1ba3e9 100644<br>
+&gt; --- a/include/hw/pci/pci_device.h<br>
+&gt; +++ b/include/hw/pci/pci_device.h<br>
+&gt; @@ -244,6 +244,8 @@ static inline MemTxResult pci_dma_rw(PCIDevice *de=
+v, dma_addr_t addr,<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 void =
+*buf, dma_addr_t len,<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 DMADi=
+rection dir, MemTxAttrs attrs)<br>
+&gt;=C2=A0 =C2=A0{<br>
+&gt; +=C2=A0 =C2=A0 attrs.unspecified =3D 0;<br>
+&gt; +=C2=A0 =C2=A0 attrs.requester_id =3D pci_requester_id(dev);<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0return dma_memory_rw(pci_get_address_space(d=
+ev), addr, buf, len,<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 dir, attrs);<br>
+&gt;=C2=A0 =C2=A0}<br>
+&gt; @@ -292,6 +294,8 @@ static inline MemTxResult pci_dma_write(PCIDevice =
+*dev, dma_addr_t addr,<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 uint##_bits##_t *val, \<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 MemTxAttrs attrs) \<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0{ \<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 attrs.unspecified =3D 0; \<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 attrs.requester_id =3D pci_requester_id(d=
+ev); \<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0return ld##_l##_dma(pci_get_ad=
+dress_space(dev), addr, val, attrs); \<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0} \<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0static inline MemTxResult st##_s##_pci_dma(P=
+CIDevice *dev, \<br>
+&gt; @@ -299,6 +303,8 @@ static inline MemTxResult pci_dma_write(PCIDevice =
+*dev, dma_addr_t addr,<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 uint##_bits##_t val, \<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 MemTxAttrs attrs) \<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0{ \<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 attrs.unspecified =3D 0; \<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 attrs.requester_id =3D pci_requester_id(d=
+ev); \<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0return st##_s##_dma(pci_get_ad=
+dress_space(dev), addr, val, attrs); \<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0}<br>
+&gt;=C2=A0 =C2=A0<br>
+&gt; @@ -327,8 +333,8 @@ PCI_DMA_DEFINE_LDST(q_be, q_be, 64);<br>
+&gt;=C2=A0 =C2=A0static inline void *pci_dma_map(PCIDevice *dev, dma_addr_t=
+ addr,<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0dma_addr_t *plen, DM=
+ADirection dir)<br>
+&gt;=C2=A0 =C2=A0{<br>
+&gt; -=C2=A0 =C2=A0 return dma_memory_map(pci_get_address_space(dev), addr,=
+ plen, dir,<br>
+&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
+ =C2=A0 =C2=A0 =C2=A0 MEMTXATTRS_UNSPECIFIED);<br>
+&gt; +=C2=A0 =C2=A0 MemTxAttrs attrs =3D {.requester_id =3D pci_requester_i=
+d(dev)};<br>
+&gt; +=C2=A0 =C2=A0 return dma_memory_map(pci_get_address_space(dev), addr,=
+ plen, dir, attrs);<br>
+&gt;=C2=A0 =C2=A0}<br>
+&gt;=C2=A0 =C2=A0<br>
+&gt;=C2=A0 =C2=A0static inline void pci_dma_unmap(PCIDevice *dev, void *buf=
+fer, dma_addr_t len,<br>
+<br>
+</blockquote></div>
+
+--0000000000002d65410630282267--
 
