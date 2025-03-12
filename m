@@ -4,82 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F1C0AC28B2E
-	for <qemu-riscv@archiver.kernel.org>; Wed, 12 Mar 2025 09:22:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 595EBC28B28
+	for <qemu-riscv@archiver.kernel.org>; Wed, 12 Mar 2025 09:40:42 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tsIHd-0002x4-G1; Wed, 12 Mar 2025 05:21:49 -0400
+	id 1tsIYp-0003ec-35; Wed, 12 Mar 2025 05:39:35 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <loic@rivosinc.com>) id 1tsIGL-0002fo-Vx
- for qemu-riscv@nongnu.org; Wed, 12 Mar 2025 05:20:32 -0400
-Received: from mail-ed1-x532.google.com ([2a00:1450:4864:20::532])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <loic@rivosinc.com>) id 1tsIGB-00055Y-1w
- for qemu-riscv@nongnu.org; Wed, 12 Mar 2025 05:20:29 -0400
-Received: by mail-ed1-x532.google.com with SMTP id
- 4fb4d7f45d1cf-5e5e8274a74so7441627a12.1
- for <qemu-riscv@nongnu.org>; Wed, 12 Mar 2025 02:19:39 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1741771174; x=1742375974;
- darn=nongnu.org; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=4t6itwPZHn5dbAeY2359zUbJPYtovq785h9XygaE1JI=;
- b=oKSwrrfqbMoqEM6qTh5gCTc4bRLDnRNaruZcxxL3sDY6GQacbIIJ2fmGhwfKSho0gD
- QFoCxO/B/S1JP27vCOncSORqOFLUI036D1ExxTX1WM6IAe8bwR85CMKsJ5nj+vQ3JLzj
- 0FMBmck4vZjXqs4Sutg7uQ5tG2h9sXbOEC8lrYXQJO7jDhBijF4EP1xApeuzJ9gC7h7Q
- s9KpxkDmaOFqFN4Om+HNxBEJvV3hBNBnu6vQokxudJ/x5IxfKO18GQOxCq2BHsccWvKV
- F/Bhfy3ReTagdahPX0iMGY+Z6lk6kNUNG0F5I4/8MU34v09y4+cyOMEaCiCyX5eFcP8B
- DkOA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741771174; x=1742375974;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=4t6itwPZHn5dbAeY2359zUbJPYtovq785h9XygaE1JI=;
- b=QZZ4kQCowekGL2FTTSVKd3YIoEMdLRa9B8r/wx7ekKm//lcSXu6j6jzowwr3ajawCI
- Yd5aX3l/wiudR/ia53ykPQQ9yWK/qPO7AwN1kLAM35AGWrhMKD/r2OAFbsBk+d8qiDLY
- ZErvkmm7Rovk6+2rSkqHFbBmBGxTKnBVllyq6hhdof8KCRuD3D0U7ML0cwWd+rvI5TBR
- Khh1uLgu5WEzxTftALjVH08ySups9SZnK6CzNgfrJcTkIIiNcqv5fFddurxinmHEFj0S
- 0+pUyCC6aP/PeBYENpGG8wGvFPc/2sVJ4Buh3ehwab0cDjVyUdlzjsMf8V7rihBkwjIk
- ceOA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVuTVWYogWTBybR1YItgdTCbj0AOpovmJq1LaPd3SbbY77w4Elt5zKL5CcACiQ+InXdpjE6rT+F1+Er@nongnu.org
-X-Gm-Message-State: AOJu0YzW7PPWFGGrXlBF6ccZ+fFuWRBFDS6Jk+6sfp+O6tIX4XXiibWO
- 0FHc8PTqVi1WQnpSk74gxC4ZLGy10lpkZxXBMNRhQFDC89jzRsvz3oB1HHc+hcr+crukMnkCNoR
- 3chvdLvXvLxWJfLMn30qUgkuXcxlGrcRJXMikoQ==
-X-Gm-Gg: ASbGncsLcBJ904OsPGc/EqOpREKxb70+fvX4Dqg0aCHM7GKzooflTge7YAVMGhP+0uJ
- nKSudfR+TDOKSWRtzWMae52bzbjrW23qzotZx9RZkWHpP/n5SwTPgWn6ExihGr/6zGAqrstKpcH
- bdRxRuumuB2OHabp8y/d7n52y6
-X-Google-Smtp-Source: AGHT+IE6J7su8iHUF8HR6SisxFj/l2MRaot9VLg9EByN6T4NcQJIdtJPVooLiDTkhonBOC2rSGNf6y+pXw3aasvuuwE=
-X-Received: by 2002:a17:907:3606:b0:abf:61b7:4603 with SMTP id
- a640c23a62f3a-ac252718911mr461818466b.33.1741771173795; Wed, 12 Mar 2025
- 02:19:33 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <ethan84@andestech.com>)
+ id 1tsIYc-0003YU-Mr; Wed, 12 Mar 2025 05:39:22 -0400
+Received: from 60-248-80-70.hinet-ip.hinet.net ([60.248.80.70]
+ helo=Atcsqr.andestech.com)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <ethan84@andestech.com>)
+ id 1tsIYX-0000mI-3O; Wed, 12 Mar 2025 05:39:22 -0400
+Received: from mail.andestech.com (ATCPCS31.andestech.com [10.0.1.89])
+ by Atcsqr.andestech.com with ESMTPS id 52C9bBOf069431
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Wed, 12 Mar 2025 17:37:11 +0800 (+08)
+ (envelope-from ethan84@andestech.com)
+Received: from atcpcw16.andestech.com (10.0.1.106) by ATCPCS31.andestech.com
+ (10.0.1.89) with Microsoft SMTP Server (TLS) id 14.3.498.0; Wed, 12 Mar 2025
+ 17:38:42 +0800
+To: <qemu-devel@nongnu.org>
+CC: <richard.henderson@linaro.org>, <pbonzini@redhat.com>,
+ <palmer@dabbelt.com>, <alistair.francis@wdc.com>,
+ <liwei1518@gmail.com>, <dbarboza@ventanamicro.com>,
+ <zhiwei_liu@linux.alibaba.com>, <peterx@redhat.com>,
+ <david@redhat.com>, <philmd@linaro.org>, <qemu-riscv@nongnu.org>,
+ Ethan Chen <ethan84@andestech.com>
+Subject: [PATCH v11 3/8] system/physmem: Support IOMMU granularity smaller
+ than TARGET_PAGE size
+Date: Wed, 12 Mar 2025 17:37:27 +0800
+Message-ID: <20250312093735.1517740-4-ethan84@andestech.com>
+X-Mailer: git-send-email 2.42.0.345.gaab89be2eb.dirty
+In-Reply-To: <20250312093735.1517740-1-ethan84@andestech.com>
+References: <20250312093735.1517740-1-ethan84@andestech.com>
 MIME-Version: 1.0
-References: <20250225160052.39564-1-loic@rivosinc.com>
-In-Reply-To: <20250225160052.39564-1-loic@rivosinc.com>
-From: =?UTF-8?B?TG/Dr2MgTGVmb3J0?= <loic@rivosinc.com>
-Date: Wed, 12 Mar 2025 10:19:22 +0100
-X-Gm-Features: AQ5f1JoXxNtRDqxjx-X6PX1MG4oXdMLRRrY7cx92ZZ6L1XDFCZcf-IiKlSOciKE
-Message-ID: <CAGKm2N+h2mdUTv9jCXx-S8bi3FZ7PNrQcD8uw4pnc=pa0GjRMg@mail.gmail.com>
-Subject: Re: [PATCH 0/5] target/riscv: Smepmp fixes to match specification
-To: qemu-devel@nongnu.org
-Cc: Alistair Francis <alistair.francis@wdc.com>,
- Palmer Dabbelt <palmer@dabbelt.com>, 
- Weiwei Li <liwei1518@gmail.com>, qemu-riscv@nongnu.org, 
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
-Content-Type: multipart/alternative; boundary="0000000000001836fd063021b417"
-Received-SPF: pass client-ip=2a00:1450:4864:20::532;
- envelope-from=loic@rivosinc.com; helo=mail-ed1-x532.google.com
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, HTML_MESSAGE=0.001, RCVD_IN_DNSWL_NONE=-0.0001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [10.0.1.106]
+X-DKIM-Results: atcpcs31.andestech.com; dkim=none;
+X-DNSRBL: 
+X-MAIL: Atcsqr.andestech.com 52C9bBOf069431
+Received-SPF: pass client-ip=60.248.80.70; envelope-from=ethan84@andestech.com;
+ helo=Atcsqr.andestech.com
+X-Spam_score_int: -8
+X-Spam_score: -0.9
+X-Spam_bar: /
+X-Spam_report: (-0.9 / 5.0 requ) BAYES_00=-1.9,
+ RCVD_IN_VALIDITY_CERTIFIED_BLOCKED=0.001, RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001,
+ RDNS_DYNAMIC=0.982, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ TVD_RCVD_IP=0.001 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -92,87 +69,81 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
+Reply-to:  Ethan Chen <ethan84@andestech.com>
+From:  Ethan Chen via <qemu-riscv@nongnu.org>
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
---0000000000001836fd063021b417
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+If the IOMMU granularity is smaller than the TARGET_PAGE size, there may be
+ multiple entries within the same page. To obtain the correct result, pass
+the original address to the IOMMU.
 
-On Tue, Feb 25, 2025 at 5:00=E2=80=AFPM Lo=C3=AFc Lefort <loic@rivosinc.com=
-> wrote:
+Similar to the RISC-V PMP solution, the TLB_INVALID_MASK will be set when
+there are multiple entries in the same page, ensuring that the IOMMU is
+checked on every access.
 
-> Hi,
->
-> These patches fix Smepmp implementation to make it compliant with the spe=
-c.
->
-> First patch limits RLB to CSR changes since RLB should not affect privile=
-ge
-> evaluation. Patch 2 extracts some common code into a function (to be used
-> in
-> patch 3). Patch 3 fixes validation of pmpcfg CSR writes in order to match
-> Smepmp
-> specification. Patch 4 is a small optimization and last patch is just
-> removing
-> redundant code.
->
-> Lo=C3=AFc Lefort (5):
->   target/riscv: pmp: don't allow RLB to bypass rule privileges
->   target/riscv: pmp: move Smepmp operation conversion into a function
->   target/riscv: pmp: fix checks on writes to pmpcfg in Smepmp MML mode
->   target/riscv: pmp: exit csr writes early if value was not changed
->   target/riscv: pmp: remove redundant check in pmp_is_locked
->
->  target/riscv/pmp.c | 151 +++++++++++++++++++++++++--------------------
->  1 file changed, 83 insertions(+), 68 deletions(-)
->
-> --
-> 2.47.2
->
-> Ping?
+Signed-off-by: Ethan Chen <ethan84@andestech.com>
+Acked-by: Alistair Francis <alistair.francis@wdc.com>
+---
+ accel/tcg/cputlb.c | 20 ++++++++++++++++----
+ system/physmem.c   |  4 ++++
+ 2 files changed, 20 insertions(+), 4 deletions(-)
 
---0000000000001836fd063021b417
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+diff --git a/accel/tcg/cputlb.c b/accel/tcg/cputlb.c
+index 83d689f9a6..73551b649d 100644
+--- a/accel/tcg/cputlb.c
++++ b/accel/tcg/cputlb.c
+@@ -1043,8 +1043,23 @@ void tlb_set_page_full(CPUState *cpu, int mmu_idx,
+ 
+     prot = full->prot;
+     asidx = cpu_asidx_from_attrs(cpu, full->attrs);
+-    section = address_space_translate_for_iotlb(cpu, asidx, paddr_page,
++    section = address_space_translate_for_iotlb(cpu, asidx, full->phys_addr,
+                                                 &xlat, &sz, full->attrs, &prot);
++    /* Update page size */
++    full->lg_page_size = ctz64(sz);
++    if (full->lg_page_size > TARGET_PAGE_BITS) {
++        full->lg_page_size = TARGET_PAGE_BITS;
++    } else {
++        sz = TARGET_PAGE_SIZE;
++    }
++
++    is_ram = memory_region_is_ram(section->mr);
++    is_romd = memory_region_is_romd(section->mr);
++    /* If the translated mr is ram/rom, make xlat align the TARGET_PAGE */
++    if (is_ram || is_romd) {
++        xlat &= TARGET_PAGE_MASK;
++    }
++
+     assert(sz >= TARGET_PAGE_SIZE);
+ 
+     tlb_debug("vaddr=%016" VADDR_PRIx " paddr=0x" HWADDR_FMT_plx
+@@ -1057,9 +1072,6 @@ void tlb_set_page_full(CPUState *cpu, int mmu_idx,
+         read_flags |= TLB_INVALID_MASK;
+     }
+ 
+-    is_ram = memory_region_is_ram(section->mr);
+-    is_romd = memory_region_is_romd(section->mr);
+-
+     if (is_ram || is_romd) {
+         /* RAM and ROMD both have associated host memory. */
+         addend = (uintptr_t)memory_region_get_ram_ptr(section->mr) + xlat;
+diff --git a/system/physmem.c b/system/physmem.c
+index e97de3ef65..c5059cb006 100644
+--- a/system/physmem.c
++++ b/system/physmem.c
+@@ -708,6 +708,10 @@ address_space_translate_for_iotlb(CPUState *cpu, int asidx, hwaddr orig_addr,
+         iotlb = imrc->translate(iommu_mr, addr, IOMMU_NONE, iommu_idx);
+         addr = ((iotlb.translated_addr & ~iotlb.addr_mask)
+                 | (addr & iotlb.addr_mask));
++        /* Update size */
++        if (iotlb.addr_mask != -1 && *plen > iotlb.addr_mask + 1) {
++            *plen = iotlb.addr_mask + 1;
++        }
+         /* Update the caller's prot bits to remove permissions the IOMMU
+          * is giving us a failure response for. If we get down to no
+          * permissions left at all we can give up now.
+-- 
+2.34.1
 
-<div dir=3D"ltr"><div class=3D"gmail_quote gmail_quote_container"><div dir=
-=3D"ltr" class=3D"gmail_attr">On Tue, Feb 25, 2025 at 5:00=E2=80=AFPM Lo=C3=
-=AFc Lefort &lt;<a href=3D"mailto:loic@rivosinc.com">loic@rivosinc.com</a>&=
-gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0=
-px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">Hi,<b=
-r>
-<br>
-These patches fix Smepmp implementation to make it compliant with the spec.=
-<br>
-<br>
-First patch limits RLB to CSR changes since RLB should not affect privilege=
-<br>
-evaluation. Patch 2 extracts some common code into a function (to be used i=
-n<br>
-patch 3). Patch 3 fixes validation of pmpcfg CSR writes in order to match S=
-mepmp<br>
-specification. Patch 4 is a small optimization and last patch is just remov=
-ing<br>
-redundant code.<br>
-<br>
-Lo=C3=AFc Lefort (5):<br>
-=C2=A0 target/riscv: pmp: don&#39;t allow RLB to bypass rule privileges<br>
-=C2=A0 target/riscv: pmp: move Smepmp operation conversion into a function<=
-br>
-=C2=A0 target/riscv: pmp: fix checks on writes to pmpcfg in Smepmp MML mode=
-<br>
-=C2=A0 target/riscv: pmp: exit csr writes early if value was not changed<br=
->
-=C2=A0 target/riscv: pmp: remove redundant check in pmp_is_locked<br>
-<br>
-=C2=A0target/riscv/pmp.c | 151 +++++++++++++++++++++++++-------------------=
--<br>
-=C2=A01 file changed, 83 insertions(+), 68 deletions(-)<br>
-<br>
--- <br>
-2.47.2<br>
-<br></blockquote><div>Ping? <br></div></div></div>
-
---0000000000001836fd063021b417--
 
