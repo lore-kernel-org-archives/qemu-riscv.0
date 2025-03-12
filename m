@@ -4,85 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 38DC4C28B28
-	for <qemu-riscv@archiver.kernel.org>; Wed, 12 Mar 2025 17:00:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5D2C0C28B28
+	for <qemu-riscv@archiver.kernel.org>; Wed, 12 Mar 2025 19:22:54 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tsPR2-0008LU-SV; Wed, 12 Mar 2025 13:00:02 -0400
+	id 1tsRf1-0008Lu-BU; Wed, 12 Mar 2025 15:22:35 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <jason.chien@sifive.com>)
- id 1tsPQy-0008JS-V5
- for qemu-riscv@nongnu.org; Wed, 12 Mar 2025 12:59:57 -0400
-Received: from mail-ed1-x531.google.com ([2a00:1450:4864:20::531])
+ (Exim 4.90_1) (envelope-from <paolo.savini@embecosm.com>)
+ id 1tsRer-0008Ke-72
+ for qemu-riscv@nongnu.org; Wed, 12 Mar 2025 15:22:29 -0400
+Received: from mail-wm1-x335.google.com ([2a00:1450:4864:20::335])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <jason.chien@sifive.com>)
- id 1tsPQw-0007qU-3A
- for qemu-riscv@nongnu.org; Wed, 12 Mar 2025 12:59:56 -0400
-Received: by mail-ed1-x531.google.com with SMTP id
- 4fb4d7f45d1cf-5e66407963fso7696213a12.2
- for <qemu-riscv@nongnu.org>; Wed, 12 Mar 2025 09:59:52 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <paolo.savini@embecosm.com>)
+ id 1tsRen-0002Uv-Bi
+ for qemu-riscv@nongnu.org; Wed, 12 Mar 2025 15:22:24 -0400
+Received: by mail-wm1-x335.google.com with SMTP id
+ 5b1f17b1804b1-4393dc02b78so899585e9.3
+ for <qemu-riscv@nongnu.org>; Wed, 12 Mar 2025 12:22:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1741798790; x=1742403590; darn=nongnu.org;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=ya+FjLCCjdR33uDqugDcilKzi1+6loZJ94oEWgLmenY=;
- b=Yvcg/yNyStG2c88OmL0Z77ADVYA0An68Luez0hcAi+nm6YyBopD8Agpy0xO2ORaRN7
- DBTJEp4XZC9p0kErFwbQXHWIKJob4r2Ka+XlYcMPROhLQ38/8yiZzPkxahdQw5geemyp
- sUIDOxzWntWBWt41QOuFTRmspKfZbGaJrRs+NrlvB7v74e99hB4gnzh7HXyNpppbqpBl
- 2NQEWUYaIZDqV5F2/lfQQNX9yNuyEuDZ3fPD2QaY8vnnvvwLYD/PgCVPFLfj5JJfluVG
- xPwafhv7Mfvpj2UWxMecaxdg4mIDb6mGabCZeWZw3G8TyqRPS98CjeAJKicmg+NOkBFi
- pljA==
+ d=embecosm.com; s=google; t=1741807338; x=1742412138; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=UHMiH010S4aan6Gt1Wj1vvKZFHwFsnIHu+Ji39csrbU=;
+ b=Mf7ol72zZ0iqvx0hKVN0EpPmmbF/nmeg0wdRFz07JYbazfha16B7mnquliHwIjBqbZ
+ gKy2p13+5z9Z3DEPUClIP/jWhCB8i1FuUxMLLEcoU1PdWOuMuIf35nRsvAq7Ryn4Pzmn
+ be/BzexpFM6CFbEUKUBynH7zYnWlujDemODFbHw8kcVTRchQrsQMJy83Zkd2NQzNaoC1
+ gRP/Ep5TV887od1O+ZbgIZ9BBfZp2tBrvoswGc5PwOju4ATrvZnDeleuHu8PgjJkqMyc
+ icck+l6rsPtd0LxH6G6T0Oq8ZQOFkWav+Rh1qdfjbO6bGbkEp7hC+pRervTskHCwjYpo
+ 7iuA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741798790; x=1742403590;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1741807338; x=1742412138;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=ya+FjLCCjdR33uDqugDcilKzi1+6loZJ94oEWgLmenY=;
- b=DR1XpHfDcKqXfXWnILlp6k8ijz5m8rwWeOEar07tzB7UaMHE+brWJiBssohLIZA8Rl
- OuTwGve3muL6Xp1eyFVqrJH5QJIDBHIbh6aO4o8F6Frfmauy2hC6kHve7DZAyfRzZs0i
- gdC8/2ndPg8e2PQX1/mQ11Jw31DyHevJ1VkyAMjbywXowRuHX/SXFf24XkLBrgRXF/uV
- iJz5U3oSky7Js9zespvdITmXQNwbKhj70coYgQA4qtzpVyrGlqImAE4Kdrp+F4IDwYdo
- aouLkljpixwsCcZslcw4FyWYOhusj4WPyM/YfEljtk2xo3rfaQ9rNdqQFHbutP9n6EOC
- V5tw==
+ bh=UHMiH010S4aan6Gt1Wj1vvKZFHwFsnIHu+Ji39csrbU=;
+ b=YahRK8GX01gQWYpGFPdbB7QmHJ49jeOqlhECmjdgB/lckx3tnBp1vkyHginyHAfZtt
+ 56FmBCZ4II6UR6/Csp7h7KnBRCAikXCDFHRLDgrJnyKc1SomTn0ECuqUlifRJULl2tCR
+ R4mmkK+FSfUgS5ZEEwIJBVpX6AWjFGAVQt0CAm7X4RyFSlQJibCZatMs7jhMHAou0rKz
+ 5NRFL3wUeMxcN9GbICLgJXgiamgcwVhGeT1qWSGmobe9RLDWhbaw1pXOiP+zLX7b9eOA
+ +dF04p+7lCOII0EHb+quZiPbcKVnZ4SVdyEOwxJIyOEgm/YP5AKj/ttum6DytUD48H5q
+ f6Sw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXia6oD2ZNuP+qAFAJKfJk1rHI0jyDDbjh2+OsEBy7j4ZXlHeYfh91yLjN/+1kfPqwLlBFKMjBr/X/P@nongnu.org
-X-Gm-Message-State: AOJu0YyEMXKXYXM1P+1P/nucXJNGbdCzVe/p8XlWy+4G2g3nqEnJd9rG
- /UN53p3brVU2jELUd1AgtHI0aKusFeyT5yjqlueiJv3rEKfpseOn5eDysdbHc/VJ5EVEgFi3arc
- /UjXoRmndvtCwOG6v0DEtN+/bOteYOnl1MYklZg==
-X-Gm-Gg: ASbGnctRXGf1hsJf8nS/ZaRc2di7DxLLT7IcyylODBxYxQb12x/dLrQx+gGZgd/rMvv
- zcvXS8i+1jfsH6L7mRE+pKn30mdcBCrmn2lBC+EpYTBlCyn9/yhfmbrhZHen8lm1RnMLCQxgwNo
- +uB7epNsuVe7UM3/zd2E60uQI=
-X-Google-Smtp-Source: AGHT+IFqNiM2K4Uv0Q/WsDMai4EYmQGj9gu+VcvLxLjqsmM+7P4AutD8EWAyrJBH6OPlIkpy3E93hmBo2BTBKHJlrm0=
-X-Received: by 2002:a05:6402:13cc:b0:5e6:17e6:9510 with SMTP id
- 4fb4d7f45d1cf-5e617e69fefmr22364533a12.6.1741798790476; Wed, 12 Mar 2025
- 09:59:50 -0700 (PDT)
-MIME-Version: 1.0
-References: <20250302091209.20063-1-jason.chien@sifive.com>
- <20250302091209.20063-2-jason.chien@sifive.com>
- <0464a115-fbfe-4038-9e2d-409ad133647e@ventanamicro.com>
-In-Reply-To: <0464a115-fbfe-4038-9e2d-409ad133647e@ventanamicro.com>
-From: Jason Chien <jason.chien@sifive.com>
-Date: Thu, 13 Mar 2025 00:59:40 +0800
-X-Gm-Features: AQ5f1JocGzvKzWUlmOX03k6U47g5PSIDeBU1tREq-bJHsm3de5rCEeQGe9hhPB8
-Message-ID: <CADr__8p54Fp4PqkmSC_gWhiOwa9Yem0KU53woFFCQ_sA35sFHw@mail.gmail.com>
-Subject: Re: [PATCH 1/3] include/hw/pci: Attach BDF to Memory Attributes
-To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, 
+ AJvYcCUw/1qGb6lc96ffsYQVGOW0Dn1C6iPShw75Gxk4UrbrGTXISgeiv9BNf5pPmjsIXUNprLnzzMblCtDW@nongnu.org
+X-Gm-Message-State: AOJu0YwXM1fWFulNKDXEnK+/sgfoCzdCETR+RUO4Thgyw9zd7HaPXufc
+ 2jyoQll93ovIUlRbdX2T0I1pksyjSLtCazso+CXsB2ew1G2Ul5fmle+d/1o06tg=
+X-Gm-Gg: ASbGncsorz358XqCa7VnoXxFVGN2ipYDTIVmdWY49fqhuEQ1ZvkD8V1cTAaWPzOod8X
+ pNL/eElCADKT6t1BdYx3gX9rk0Wicv8UpASaTTZInlqt24bAQzf1zzcij2s09djimUTXiDn32nr
+ Le3SGXgMe/ENoEDGQ+YRSU0TRkUSpHvtTtAfgUJfVyGSuc4iKnIS400Jpf7V9q+e3xx/yUMucUs
+ WotWkxc4gRv6ZpV/gvKoGIXaqlBW9sFmJJ6XFKr8Hk8VnWrku04zIDD3Fx11M/0ATVio70bfv77
+ 6eG8e62IYwIkJH0vNgF+J6IKHCI39c/8o2TckqjXnJ04iW73tPdc5BGBjXy/nXA=
+X-Google-Smtp-Source: AGHT+IGznpOyP091qVaQkFRrlM4lddX/xtiWB0apWHnXssKXOkONI7RnwPFBOEAGRhopTFqUD4tJBg==
+X-Received: by 2002:a5d:5f84:0:b0:391:300f:749e with SMTP id
+ ffacd0b85a97d-39263affb8bmr8761091f8f.11.1741807338187; 
+ Wed, 12 Mar 2025 12:22:18 -0700 (PDT)
+Received: from paolo-laptop-amd.. ([2a0e:cb01:d3:f100:3f9b:7278:8381:286b])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-3912bfba686sm22331645f8f.19.2025.03.12.12.22.17
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 12 Mar 2025 12:22:17 -0700 (PDT)
+From: Paolo Savini <paolo.savini@embecosm.com>
+To: qemu-devel@nongnu.org,
+	qemu-riscv@nongnu.org
+Cc: Paolo Savini <paolo.savini@embecosm.com>,
+ Richard Handerson <richard.henderson@linaro.org>,
  Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, 
- Weiwei Li <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
- "Michael S. Tsirkin" <mst@redhat.com>,
- Marcel Apfelbaum <marcel.apfelbaum@gmail.com>
-Content-Type: multipart/alternative; boundary="0000000000002d65410630282267"
-Received-SPF: pass client-ip=2a00:1450:4864:20::531;
- envelope-from=jason.chien@sifive.com; helo=mail-ed1-x531.google.com
+ Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bmeng.cn@gmail.com>,
+ Weiwei Li <liwei1518@gmail.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Helene Chelin <helene.chelin@embecosm.com>, Nathan Egge <negge@google.com>,
+ Max Chou <max.chou@sifive.com>,
+ Jeremy Bennett <jeremy.bennett@embecosm.com>,
+ Craig Blackmore <craig.blackmore@embecosm.com>
+Subject: [PATCH 0/1 v3] [RISC-V/RVV] optimize the memory probing for vector
+ fault-only-first loads.
+Date: Wed, 12 Mar 2025 19:22:14 +0000
+Message-ID: <20250312192215.318565-1-paolo.savini@embecosm.com>
+X-Mailer: git-send-email 2.43.0
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::335;
+ envelope-from=paolo.savini@embecosm.com; helo=mail-wm1-x335.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, HTML_MESSAGE=0.001,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
@@ -100,199 +109,33 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
---0000000000002d65410630282267
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Adding reviewer information to the patch and rebasing on top of master.
 
-Ping.
+Previous versions:
 
-Michael/Marcel, would you mind taking a look? Thanks!
+- v1: https://lore.kernel.org/all/20250129144435.82451-1-paolo.savini@embecosm.com/
+- v2: https://lore.kernel.org/all/20250221155320.59159-1-paolo.savini@embecosm.com/
 
+Cc: Richard Handerson <richard.henderson@linaro.org>
+Cc: Palmer Dabbelt <palmer@dabbelt.com>
+Cc: Alistair Francis <alistair.francis@wdc.com>
+Cc: Bin Meng <bmeng.cn@gmail.com>
+Cc: Weiwei Li <liwei1518@gmail.com>
+Cc: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Cc: Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
+Cc: Helene Chelin <helene.chelin@embecosm.com>
+Cc: Nathan Egge <negge@google.com>
+Cc: Max Chou <max.chou@sifive.com>
+Cc: Jeremy Bennett <jeremy.bennett@embecosm.com>
+Cc: Craig Blackmore <craig.blackmore@embecosm.com>
 
-Jason
+Paolo Savini (1):
+  target/riscv: optimize the memory probing for vector fault-only-first
+    loads.
 
-Daniel Henrique Barboza <dbarboza@ventanamicro.com> =E6=96=BC 2025=E5=B9=B4=
-3=E6=9C=887=E6=97=A5 =E9=80=B1=E4=BA=94 =E4=B8=8B=E5=8D=888:40=E5=AF=AB=E9=
-=81=93=EF=BC=9A
+ target/riscv/vector_helper.c | 103 ++++++++++++++++++++---------------
+ 1 file changed, 58 insertions(+), 45 deletions(-)
 
->
->
-> On 3/2/25 6:12 AM, Jason Chien wrote:
-> > This commit adds the BDF to the memory attributes for DMA operations.
-> >
-> > Signed-off-by: Jason Chien <jason.chien@sifive.com>
-> > ---
->
-> This looks sensible but I'll feel more comfortable if Michael/Marcel also
-> takes a look. Thanks,
->
->
-> Daniel
->
-> >   include/hw/pci/pci_device.h | 10 ++++++++--
-> >   1 file changed, 8 insertions(+), 2 deletions(-)
-> >
-> > diff --git a/include/hw/pci/pci_device.h b/include/hw/pci/pci_device.h
-> > index add208edfa..968f1ba3e9 100644
-> > --- a/include/hw/pci/pci_device.h
-> > +++ b/include/hw/pci/pci_device.h
-> > @@ -244,6 +244,8 @@ static inline MemTxResult pci_dma_rw(PCIDevice *dev=
-,
-> dma_addr_t addr,
-> >                                        void *buf, dma_addr_t len,
-> >                                        DMADirection dir, MemTxAttrs
-> attrs)
-> >   {
-> > +    attrs.unspecified =3D 0;
-> > +    attrs.requester_id =3D pci_requester_id(dev);
-> >       return dma_memory_rw(pci_get_address_space(dev), addr, buf, len,
-> >                            dir, attrs);
-> >   }
-> > @@ -292,6 +294,8 @@ static inline MemTxResult pci_dma_write(PCIDevice
-> *dev, dma_addr_t addr,
-> >                                                  uint##_bits##_t *val, =
-\
-> >                                                  MemTxAttrs attrs) \
-> >       { \
-> > +        attrs.unspecified =3D 0; \
-> > +        attrs.requester_id =3D pci_requester_id(dev); \
-> >           return ld##_l##_dma(pci_get_address_space(dev), addr, val,
-> attrs); \
-> >       } \
-> >       static inline MemTxResult st##_s##_pci_dma(PCIDevice *dev, \
-> > @@ -299,6 +303,8 @@ static inline MemTxResult pci_dma_write(PCIDevice
-> *dev, dma_addr_t addr,
-> >                                                  uint##_bits##_t val, \
-> >                                                  MemTxAttrs attrs) \
-> >       { \
-> > +        attrs.unspecified =3D 0; \
-> > +        attrs.requester_id =3D pci_requester_id(dev); \
-> >           return st##_s##_dma(pci_get_address_space(dev), addr, val,
-> attrs); \
-> >       }
-> >
-> > @@ -327,8 +333,8 @@ PCI_DMA_DEFINE_LDST(q_be, q_be, 64);
-> >   static inline void *pci_dma_map(PCIDevice *dev, dma_addr_t addr,
-> >                                   dma_addr_t *plen, DMADirection dir)
-> >   {
-> > -    return dma_memory_map(pci_get_address_space(dev), addr, plen, dir,
-> > -                          MEMTXATTRS_UNSPECIFIED);
-> > +    MemTxAttrs attrs =3D {.requester_id =3D pci_requester_id(dev)};
-> > +    return dma_memory_map(pci_get_address_space(dev), addr, plen, dir,
-> attrs);
-> >   }
-> >
-> >   static inline void pci_dma_unmap(PCIDevice *dev, void *buffer,
-> dma_addr_t len,
->
->
-
---0000000000002d65410630282267
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr">Ping.<br><br>Michael/Marcel, would you mind taking a look?=
- Thanks!<br><br><br>Jason</div><br><div class=3D"gmail_quote gmail_quote_co=
-ntainer"><div dir=3D"ltr" class=3D"gmail_attr">Daniel Henrique Barboza &lt;=
-<a href=3D"mailto:dbarboza@ventanamicro.com">dbarboza@ventanamicro.com</a>&=
-gt; =E6=96=BC 2025=E5=B9=B43=E6=9C=887=E6=97=A5 =E9=80=B1=E4=BA=94 =E4=B8=
-=8B=E5=8D=888:40=E5=AF=AB=E9=81=93=EF=BC=9A<br></div><blockquote class=3D"g=
-mail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204=
-,204,204);padding-left:1ex"><br>
-<br>
-On 3/2/25 6:12 AM, Jason Chien wrote:<br>
-&gt; This commit adds the BDF to the memory attributes for DMA operations.<=
-br>
-&gt; <br>
-&gt; Signed-off-by: Jason Chien &lt;<a href=3D"mailto:jason.chien@sifive.co=
-m" target=3D"_blank">jason.chien@sifive.com</a>&gt;<br>
-&gt; ---<br>
-<br>
-This looks sensible but I&#39;ll feel more comfortable if Michael/Marcel al=
-so<br>
-takes a look. Thanks,<br>
-<br>
-<br>
-Daniel<br>
-<br>
-&gt;=C2=A0 =C2=A0include/hw/pci/pci_device.h | 10 ++++++++--<br>
-&gt;=C2=A0 =C2=A01 file changed, 8 insertions(+), 2 deletions(-)<br>
-&gt; <br>
-&gt; diff --git a/include/hw/pci/pci_device.h b/include/hw/pci/pci_device.h=
-<br>
-&gt; index add208edfa..968f1ba3e9 100644<br>
-&gt; --- a/include/hw/pci/pci_device.h<br>
-&gt; +++ b/include/hw/pci/pci_device.h<br>
-&gt; @@ -244,6 +244,8 @@ static inline MemTxResult pci_dma_rw(PCIDevice *de=
-v, dma_addr_t addr,<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 void =
-*buf, dma_addr_t len,<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 DMADi=
-rection dir, MemTxAttrs attrs)<br>
-&gt;=C2=A0 =C2=A0{<br>
-&gt; +=C2=A0 =C2=A0 attrs.unspecified =3D 0;<br>
-&gt; +=C2=A0 =C2=A0 attrs.requester_id =3D pci_requester_id(dev);<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0return dma_memory_rw(pci_get_address_space(d=
-ev), addr, buf, len,<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 dir, attrs);<br>
-&gt;=C2=A0 =C2=A0}<br>
-&gt; @@ -292,6 +294,8 @@ static inline MemTxResult pci_dma_write(PCIDevice =
-*dev, dma_addr_t addr,<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 uint##_bits##_t *val, \<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 MemTxAttrs attrs) \<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0{ \<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 attrs.unspecified =3D 0; \<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 attrs.requester_id =3D pci_requester_id(d=
-ev); \<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0return ld##_l##_dma(pci_get_ad=
-dress_space(dev), addr, val, attrs); \<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0} \<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0static inline MemTxResult st##_s##_pci_dma(P=
-CIDevice *dev, \<br>
-&gt; @@ -299,6 +303,8 @@ static inline MemTxResult pci_dma_write(PCIDevice =
-*dev, dma_addr_t addr,<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 uint##_bits##_t val, \<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 MemTxAttrs attrs) \<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0{ \<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 attrs.unspecified =3D 0; \<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 attrs.requester_id =3D pci_requester_id(d=
-ev); \<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0return st##_s##_dma(pci_get_ad=
-dress_space(dev), addr, val, attrs); \<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0}<br>
-&gt;=C2=A0 =C2=A0<br>
-&gt; @@ -327,8 +333,8 @@ PCI_DMA_DEFINE_LDST(q_be, q_be, 64);<br>
-&gt;=C2=A0 =C2=A0static inline void *pci_dma_map(PCIDevice *dev, dma_addr_t=
- addr,<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0dma_addr_t *plen, DM=
-ADirection dir)<br>
-&gt;=C2=A0 =C2=A0{<br>
-&gt; -=C2=A0 =C2=A0 return dma_memory_map(pci_get_address_space(dev), addr,=
- plen, dir,<br>
-&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0 =C2=A0 =C2=A0 MEMTXATTRS_UNSPECIFIED);<br>
-&gt; +=C2=A0 =C2=A0 MemTxAttrs attrs =3D {.requester_id =3D pci_requester_i=
-d(dev)};<br>
-&gt; +=C2=A0 =C2=A0 return dma_memory_map(pci_get_address_space(dev), addr,=
- plen, dir, attrs);<br>
-&gt;=C2=A0 =C2=A0}<br>
-&gt;=C2=A0 =C2=A0<br>
-&gt;=C2=A0 =C2=A0static inline void pci_dma_unmap(PCIDevice *dev, void *buf=
-fer, dma_addr_t len,<br>
-<br>
-</blockquote></div>
-
---0000000000002d65410630282267--
+-- 
+2.34.1
 
