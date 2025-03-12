@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 595EBC28B28
-	for <qemu-riscv@archiver.kernel.org>; Wed, 12 Mar 2025 09:40:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6F474C28B28
+	for <qemu-riscv@archiver.kernel.org>; Wed, 12 Mar 2025 09:40:45 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tsIYp-0003ec-35; Wed, 12 Mar 2025 05:39:35 -0400
+	id 1tsIYl-0003bs-8r; Wed, 12 Mar 2025 05:39:31 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <ethan84@andestech.com>)
- id 1tsIYc-0003YU-Mr; Wed, 12 Mar 2025 05:39:22 -0400
+ id 1tsIYc-0003Yp-VG; Wed, 12 Mar 2025 05:39:22 -0400
 Received: from 60-248-80-70.hinet-ip.hinet.net ([60.248.80.70]
  helo=Atcsqr.andestech.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <ethan84@andestech.com>)
- id 1tsIYX-0000mI-3O; Wed, 12 Mar 2025 05:39:22 -0400
+ id 1tsIYZ-0000mk-WB; Wed, 12 Mar 2025 05:39:22 -0400
 Received: from mail.andestech.com (ATCPCS31.andestech.com [10.0.1.89])
- by Atcsqr.andestech.com with ESMTPS id 52C9bBOf069431
+ by Atcsqr.andestech.com with ESMTPS id 52C9bBkl069432
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Wed, 12 Mar 2025 17:37:11 +0800 (+08)
+ Wed, 12 Mar 2025 17:37:12 +0800 (+08)
  (envelope-from ethan84@andestech.com)
 Received: from atcpcw16.andestech.com (10.0.1.106) by ATCPCS31.andestech.com
  (10.0.1.89) with Microsoft SMTP Server (TLS) id 14.3.498.0; Wed, 12 Mar 2025
- 17:38:42 +0800
+ 17:38:43 +0800
 To: <qemu-devel@nongnu.org>
 CC: <richard.henderson@linaro.org>, <pbonzini@redhat.com>,
  <palmer@dabbelt.com>, <alistair.francis@wdc.com>,
@@ -34,10 +34,9 @@ CC: <richard.henderson@linaro.org>, <pbonzini@redhat.com>,
  <zhiwei_liu@linux.alibaba.com>, <peterx@redhat.com>,
  <david@redhat.com>, <philmd@linaro.org>, <qemu-riscv@nongnu.org>,
  Ethan Chen <ethan84@andestech.com>
-Subject: [PATCH v11 3/8] system/physmem: Support IOMMU granularity smaller
- than TARGET_PAGE size
-Date: Wed, 12 Mar 2025 17:37:27 +0800
-Message-ID: <20250312093735.1517740-4-ethan84@andestech.com>
+Subject: [PATCH v11 4/8] target/riscv: Add support for IOPMP
+Date: Wed, 12 Mar 2025 17:37:28 +0800
+Message-ID: <20250312093735.1517740-5-ethan84@andestech.com>
 X-Mailer: git-send-email 2.42.0.345.gaab89be2eb.dirty
 In-Reply-To: <20250312093735.1517740-1-ethan84@andestech.com>
 References: <20250312093735.1517740-1-ethan84@andestech.com>
@@ -47,7 +46,7 @@ Content-Type: text/plain
 X-Originating-IP: [10.0.1.106]
 X-DKIM-Results: atcpcs31.andestech.com; dkim=none;
 X-DNSRBL: 
-X-MAIL: Atcsqr.andestech.com 52C9bBOf069431
+X-MAIL: Atcsqr.andestech.com 52C9bBkl069432
 Received-SPF: pass client-ip=60.248.80.70; envelope-from=ethan84@andestech.com;
  helo=Atcsqr.andestech.com
 X-Spam_score_int: -8
@@ -74,75 +73,70 @@ From:  Ethan Chen via <qemu-riscv@nongnu.org>
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-If the IOMMU granularity is smaller than the TARGET_PAGE size, there may be
- multiple entries within the same page. To obtain the correct result, pass
-the original address to the IOMMU.
-
-Similar to the RISC-V PMP solution, the TLB_INVALID_MASK will be set when
-there are multiple entries in the same page, ensuring that the IOMMU is
-checked on every access.
-
 Signed-off-by: Ethan Chen <ethan84@andestech.com>
-Acked-by: Alistair Francis <alistair.francis@wdc.com>
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 ---
- accel/tcg/cputlb.c | 20 ++++++++++++++++----
- system/physmem.c   |  4 ++++
- 2 files changed, 20 insertions(+), 4 deletions(-)
+ target/riscv/cpu.c        |  3 +++
+ target/riscv/cpu_cfg.h    |  2 ++
+ target/riscv/cpu_helper.c | 18 +++++++++++++++---
+ 3 files changed, 20 insertions(+), 3 deletions(-)
 
-diff --git a/accel/tcg/cputlb.c b/accel/tcg/cputlb.c
-index 83d689f9a6..73551b649d 100644
---- a/accel/tcg/cputlb.c
-+++ b/accel/tcg/cputlb.c
-@@ -1043,8 +1043,23 @@ void tlb_set_page_full(CPUState *cpu, int mmu_idx,
- 
-     prot = full->prot;
-     asidx = cpu_asidx_from_attrs(cpu, full->attrs);
--    section = address_space_translate_for_iotlb(cpu, asidx, paddr_page,
-+    section = address_space_translate_for_iotlb(cpu, asidx, full->phys_addr,
-                                                 &xlat, &sz, full->attrs, &prot);
-+    /* Update page size */
-+    full->lg_page_size = ctz64(sz);
-+    if (full->lg_page_size > TARGET_PAGE_BITS) {
-+        full->lg_page_size = TARGET_PAGE_BITS;
-+    } else {
-+        sz = TARGET_PAGE_SIZE;
-+    }
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index 09ded6829a..2d7ff3f37e 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -2968,6 +2968,9 @@ static const Property riscv_cpu_properties[] = {
+      * it with -x and default to 'false'.
+      */
+     DEFINE_PROP_BOOL("x-misa-w", RISCVCPU, cfg.misa_w, false),
 +
-+    is_ram = memory_region_is_ram(section->mr);
-+    is_romd = memory_region_is_romd(section->mr);
-+    /* If the translated mr is ram/rom, make xlat align the TARGET_PAGE */
-+    if (is_ram || is_romd) {
-+        xlat &= TARGET_PAGE_MASK;
-+    }
-+
-     assert(sz >= TARGET_PAGE_SIZE);
++    DEFINE_PROP_BOOL("iopmp", RISCVCPU, cfg.iopmp, false),
++    DEFINE_PROP_UINT32("iopmp_rrid", RISCVCPU, cfg.iopmp_rrid, 0),
+ };
  
-     tlb_debug("vaddr=%016" VADDR_PRIx " paddr=0x" HWADDR_FMT_plx
-@@ -1057,9 +1072,6 @@ void tlb_set_page_full(CPUState *cpu, int mmu_idx,
-         read_flags |= TLB_INVALID_MASK;
+ #if defined(TARGET_RISCV64)
+diff --git a/target/riscv/cpu_cfg.h b/target/riscv/cpu_cfg.h
+index 8a843482cc..8dcf38eb0f 100644
+--- a/target/riscv/cpu_cfg.h
++++ b/target/riscv/cpu_cfg.h
+@@ -193,6 +193,8 @@ struct RISCVCPUConfig {
+     bool pmp;
+     bool debug;
+     bool misa_w;
++    bool iopmp;
++    uint32_t iopmp_rrid;
+ 
+     bool short_isa_string;
+ 
+diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+index 6c4391d96b..a1270f752c 100644
+--- a/target/riscv/cpu_helper.c
++++ b/target/riscv/cpu_helper.c
+@@ -1966,9 +1966,21 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
      }
  
--    is_ram = memory_region_is_ram(section->mr);
--    is_romd = memory_region_is_romd(section->mr);
--
-     if (is_ram || is_romd) {
-         /* RAM and ROMD both have associated host memory. */
-         addend = (uintptr_t)memory_region_get_ram_ptr(section->mr) + xlat;
-diff --git a/system/physmem.c b/system/physmem.c
-index e97de3ef65..c5059cb006 100644
---- a/system/physmem.c
-+++ b/system/physmem.c
-@@ -708,6 +708,10 @@ address_space_translate_for_iotlb(CPUState *cpu, int asidx, hwaddr orig_addr,
-         iotlb = imrc->translate(iommu_mr, addr, IOMMU_NONE, iommu_idx);
-         addr = ((iotlb.translated_addr & ~iotlb.addr_mask)
-                 | (addr & iotlb.addr_mask));
-+        /* Update size */
-+        if (iotlb.addr_mask != -1 && *plen > iotlb.addr_mask + 1) {
-+            *plen = iotlb.addr_mask + 1;
+     if (ret == TRANSLATE_SUCCESS) {
+-        tlb_set_page(cs, address & ~(tlb_size - 1), pa & ~(tlb_size - 1),
+-                     prot, mmu_idx, tlb_size);
+-        return true;
++        if (cpu->cfg.iopmp) {
++            /*
++             * Do not align address on early stage because IOPMP needs origin
++             * address for permission check.
++             */
++            tlb_set_page_with_attrs(cs, address, pa,
++                                    (MemTxAttrs)
++                                        {
++                                          .requester_id = cpu->cfg.iopmp_rrid,
++                                        },
++                                    prot, mmu_idx, tlb_size);
++        } else {
++            tlb_set_page(cs, address & ~(tlb_size - 1), pa & ~(tlb_size - 1),
++                         prot, mmu_idx, tlb_size);
 +        }
-         /* Update the caller's prot bits to remove permissions the IOMMU
-          * is giving us a failure response for. If we get down to no
-          * permissions left at all we can give up now.
+     } else if (probe) {
+         return false;
+     } else {
 -- 
 2.34.1
 
