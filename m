@@ -4,92 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 809C4C282DE
-	for <qemu-riscv@archiver.kernel.org>; Thu, 13 Mar 2025 12:45:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 75952C282EC
+	for <qemu-riscv@archiver.kernel.org>; Thu, 13 Mar 2025 15:24:12 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tshvr-0003f2-Tx; Thu, 13 Mar 2025 08:45:03 -0400
+	id 1tskPO-0007WV-PK; Thu, 13 Mar 2025 11:23:42 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1tshvp-0003cf-F0
- for qemu-riscv@nongnu.org; Thu, 13 Mar 2025 08:45:01 -0400
-Received: from mail-pl1-x62f.google.com ([2607:f8b0:4864:20::62f])
+ (Exim 4.90_1) (envelope-from <paolo.savini@embecosm.com>)
+ id 1tskPJ-0007Sm-TM
+ for qemu-riscv@nongnu.org; Thu, 13 Mar 2025 11:23:37 -0400
+Received: from mail-wm1-x32a.google.com ([2a00:1450:4864:20::32a])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1tshvl-0003m2-5l
- for qemu-riscv@nongnu.org; Thu, 13 Mar 2025 08:45:00 -0400
-Received: by mail-pl1-x62f.google.com with SMTP id
- d9443c01a7336-2241053582dso22111955ad.1
- for <qemu-riscv@nongnu.org>; Thu, 13 Mar 2025 05:44:56 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <paolo.savini@embecosm.com>)
+ id 1tskPH-0001fK-UV
+ for qemu-riscv@nongnu.org; Thu, 13 Mar 2025 11:23:37 -0400
+Received: by mail-wm1-x32a.google.com with SMTP id
+ 5b1f17b1804b1-4394a0c65fcso10461595e9.1
+ for <qemu-riscv@nongnu.org>; Thu, 13 Mar 2025 08:23:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1741869894; x=1742474694; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=D6feM5Xy+zarRq9YhH8FI7IPuKUW/t+Or20kqkXx3d8=;
- b=jLmZUqykW51Ha6Bnqnpcg0C90p1j8gsZlpnWO+PaNEHG1/HY9iYqduAt24ODYjSh42
- l2ylgGm6Fz9LAc1sNhqcyA+pYiHAO9hHgZYAosL/eRrrb+jDxLFhR/2JAyAFALp4AsHd
- QDdVAfa1r1Kb0lAWMyb/o5Tog60l0Cdwwxgp3hsWgQ+XU4Ew17RFQyEfE8Tfm9NxijUW
- S2I/KhU1CrAEJA87iCxLBbF5viUgU4NGHyNrkPrRGRoWIx8KwmrMJ+uaEXaQyjxQHAQJ
- 9H9QzeQlDnqKcG4YMu3Z5EOr7rnSgKEoMr5rzf8m9C+uV3GIBXpXYP8bpG/6RWhT1N5D
- Ne6w==
+ d=embecosm.com; s=google; t=1741879413; x=1742484213; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=9nVjncuiVzGqqYqTlXbnw4WnIwWipltA0nH22oS5ZUs=;
+ b=cRBt0bOZZmP17WXeUnY1fhrnL62vuZHc957vgyONqkbNwMS1IBE5kOy2v4QQuUPuRj
+ /B8tlfTbF9uwTvIKZilhIM9NsZitNM2BVP9Xu07f4N/GujiyhTXI2jIc6tdn9obhXbDF
+ jrH0pzwtmdHMNyCC5goL0jT2LIsZMTMbD4oN2rnvL1r9I98asrfu1XFl+d7sZUt/MoHj
+ avMn5W7BazlJdAvbZbTi1s5JSk7MCLduNqUnlFaXTKAFpbErwIUR3MpaFBdxlAZX4ORT
+ yvPjaJZKA+l9VqU9NejZqqxqPO5ghaWu6lhJSYzwL9R940L4rXpWjmPO1ZGaOku2i+cA
+ 7E8Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741869894; x=1742474694;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=D6feM5Xy+zarRq9YhH8FI7IPuKUW/t+Or20kqkXx3d8=;
- b=Jf2wtatBu3Wq/TllI2X5xDcAEChOlLsDy2TPdHzWFmBHvV+Oqlta80cF6UZMxQLgOX
- VtAerjh/iHUvfKr14Ec1R9Y+K7AWCab9sbUF+M8/2+W5ppovF0aFBsvfM/HPKoKqdWzd
- mJhaNY+7wC49E7Z9VnaqdbyM1kxZtK059Wk9ZNxfz0e0u2JFEYZryI9avscujVLk1vPW
- LG/qYBBhtJuYJnOgAO3DNcjpMTXBBsGIal7TEA9few8OigLJVN60AkrfjAVqmh1cbf0E
- lRD7Ut7urYl+4V7YfuK2tFdHAlHd/+a7I8h/iA9eZAGa4tYmcDgxZmjCAZ052ZceD6Yg
- C4TQ==
+ d=1e100.net; s=20230601; t=1741879413; x=1742484213;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=9nVjncuiVzGqqYqTlXbnw4WnIwWipltA0nH22oS5ZUs=;
+ b=mI+sibF9u8quIA9J7QOxFsn/sUchPzt7Jt+XLgrUAhoqSC9hKqJJCOrn4A0Bemv/te
+ fEhTLP/UGMzNlVi4w2rahS+s+LrzT8oy7c1RZFy8X5i0gkqQZwGg6jKMtpMqt/QidmNZ
+ d6WqTX2Z57MebHM50G54AvpWRlmqYEaPWwDkUIMdtboOhJNXP1PUFi7y08xgXmsel/Jp
+ Qvk9EYhtwoBLZyDa8XHDv+uSgpli8OmfzoBt7bJKg0ZQJ5ehVfDwxWu5nGiGkyIvXbAw
+ N+76fWsXOG4PFeJp9XzFD+6mSASvIauXQMl7LEDuVzOdMTWAbKmQGG+BcZY1N1kqtawj
+ iaDg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXhdFpm87wgKeCnU7KKLKljs9qxfN17IVYv0i795RPnCQdexb/MBh37wKUEg298aXzaUR5nsd03VQKc@nongnu.org
-X-Gm-Message-State: AOJu0Yx1FwlVO/WE5TNDx3tN6+eTTf0P9UEg1Fvmef5tba5Hc+3VHckO
- y40paHzQKdMv9TGBo6bgr6hT44wPKBru3XTl5tCw8KqdOgOeDQKPkt6q8hlLUac=
-X-Gm-Gg: ASbGnct8tEbh3TWq7TC4bbYyqPI7fzUEswhwXDujUDEGS4t8aCkeWnVIuzE0tipT5Kk
- NGVjqPv2qTm1PYTcSUXI0ikUjFFq+3XUQGFHBGf+P6dLoDxwqWHmSIqW27Sq7bguvezozOdJCeu
- 6htQq+CLEdv7y5zBq5OcuCY1+wAhULy7KFEJbgRF8jGphywv3jaE2kkvTz1YwKxdeBNb5IY44qE
- Ly/ZVI0rzzCSIqgKlL66YEosEZnuIROS8hKkOd2yMXXZSbWoHk4oItERu23lN3nzpX7M/lIetL0
- cOYKJXaSxJHJLZuW6mZxW2hMyiOxjnhym3FMbogZoetoSLeRnJbd2XS7418=
-X-Google-Smtp-Source: AGHT+IFw5OLNJZQDskE2fPXy5V18FpjqlRl+dDtg/2iXjhxYt92tumniX2AfQMCJnjosEaoD+X1M9Q==
-X-Received: by 2002:a05:6a21:1519:b0:1f5:7280:1cdb with SMTP id
- adf61e73a8af0-1f572802b7amr25495560637.16.1741869894263; 
- Thu, 13 Mar 2025 05:44:54 -0700 (PDT)
-Received: from [192.168.68.110] ([177.170.117.79])
+ AJvYcCWWA+RubuOfNeQXRK0/4NDI/mGMY/W5fisZP/fkBDLfAGpHOOHHsSN1olSc7HbOsXo+A6/EBz/KWzZS@nongnu.org
+X-Gm-Message-State: AOJu0Yyn+aftePF1osVKJVeLOXmxmP1Y4TAbKbIDLp5ow+CCCg/0eR9a
+ VfByeF7JDn9kGR37pEAyc/wizIpD19qZpHJnYtZp6X6WL3d/BakfWjuw7/p6Pfk=
+X-Gm-Gg: ASbGncuH3rmFurRDpZYk4l3wuK+gVl96rcsco2vMi3Kzu5WPKMDuai9Xvr6XvgKjA4X
+ mh7FoBGRxLjEYkLU/W4RDxwvEfStDQ3dLXWPpmOoQ0EZ6zvsEeXB3GaespVFmbklmbFQG5URytU
+ Ym0u9WGmgRMm+xP6EN7MljHaIXRh/7NzYzEzTBrevqw3y+DmASMxs5zZjFgUuAOKZIi/z0eIoDw
+ 4t1+jVovxvfzHMIQSczxsnn94KK2//CConM1FvguctjGpOtTjGWhlSXonABFJqlBO+KBBDnAlg5
+ PZ0ANAtjIhouXQMY4kZ4Ggy0nbOPP1SacEPh8Btb7EjsfHIWM4D42XZGbsDeb4OJpDEX6+7+YHj
+ WlmD/wKq6AQ==
+X-Google-Smtp-Source: AGHT+IEQMV2Zhvynym5jPJEeBEzsOTWLlS4hmQv6E96166TOjIAPpd2etOrK8btyzJHoNfGsTQvKLg==
+X-Received: by 2002:a05:6000:1545:b0:390:fc5a:91c8 with SMTP id
+ ffacd0b85a97d-39132dbd475mr25968294f8f.53.1741879413146; 
+ Thu, 13 Mar 2025 08:23:33 -0700 (PDT)
+Received: from paolo-laptop-amd.sou.embecosm-corp.com ([212.69.42.53])
  by smtp.gmail.com with ESMTPSA id
- 41be03b00d2f7-af56ea95651sm1162523a12.73.2025.03.13.05.44.50
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 13 Mar 2025 05:44:53 -0700 (PDT)
-Message-ID: <f08a8ad9-186a-4983-9c7e-3976668ae8fd@ventanamicro.com>
-Date: Thu, 13 Mar 2025 09:44:49 -0300
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 4/4] hw/riscv/riscv-iommu: Connect the IOMMU with PCI
- hosts that have ATUs
-To: Jason Chien <jason.chien@sifive.com>, qemu-devel@nongnu.org,
- qemu-riscv@nongnu.org
-Cc: Peter Maydell <peter.maydell@linaro.org>,
- Andrey Smirnov <andrew.smirnov@gmail.com>,
- "Michael S. Tsirkin" <mst@redhat.com>,
- Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
+ ffacd0b85a97d-395cb7ebaedsm2462868f8f.90.2025.03.13.08.23.32
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 13 Mar 2025 08:23:32 -0700 (PDT)
+From: Paolo Savini <paolo.savini@embecosm.com>
+To: qemu-devel@nongnu.org,
+	qemu-riscv@nongnu.org
+Cc: Paolo Savini <paolo.savini@embecosm.com>,
+ Richard Handerson <richard.henderson@linaro.org>,
  Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, Weiwei Li
- <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- "open list:MCIMX7D SABRE / i..." <qemu-arm@nongnu.org>
-References: <20250307203952.13871-1-jason.chien@sifive.com>
- <20250307203952.13871-5-jason.chien@sifive.com>
-Content-Language: en-US
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <20250307203952.13871-5-jason.chien@sifive.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::62f;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pl1-x62f.google.com
+ Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bmeng.cn@gmail.com>,
+ Weiwei Li <liwei1518@gmail.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Helene Chelin <helene.chelin@embecosm.com>, Nathan Egge <negge@google.com>,
+ Max Chou <max.chou@sifive.com>,
+ Jeremy Bennett <jeremy.bennett@embecosm.com>,
+ Craig Blackmore <craig.blackmore@embecosm.com>
+Subject: [PATCH 0/1 v4] target/riscv: use tcg ops generation to emulate whole
+ reg rvv loads/stores.
+Date: Thu, 13 Mar 2025 15:23:29 +0000
+Message-ID: <20250313152330.398396-1-paolo.savini@embecosm.com>
+X-Mailer: git-send-email 2.43.0
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::32a;
+ envelope-from=paolo.savini@embecosm.com; helo=mail-wm1-x32a.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -112,48 +111,43 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
+Previous versions:
+
+- RFC v1: https://lore.kernel.org/all/20241218170840.1090473-1-paolo.savini@embecosm.com/
+- RFC v2: https://lore.kernel.org/all/20241220153834.16302-1-paolo.savini@embecosm.com/
+- RFC v3: https://lore.kernel.org/all/20250122164905.13615-1-paolo.savini@embecosm.com/
+
+Version v4 of this patch brings the following changes:
+
+- removed the host specific conditions so that the behaviour of the emulation
+  doesn't depend on the host we are running on.
+  The intruduction of this extra complexity is not worth the very marginal
+  performance improvement, when the overall performance improves anyway
+  considerably without.
+- added reviewers contacts (thanks all for reviewing the work).
+- changed the header from RFC to PATCH.
+
+Cc: Richard Handerson <richard.henderson@linaro.org>
+Cc: Palmer Dabbelt <palmer@dabbelt.com>
+Cc: Alistair Francis <alistair.francis@wdc.com>
+Cc: Bin Meng <bmeng.cn@gmail.com>
+Cc: Weiwei Li <liwei1518@gmail.com>
+Cc: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Cc: Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
+Cc: Helene Chelin <helene.chelin@embecosm.com>
+Cc: Nathan Egge <negge@google.com>
+Cc: Max Chou <max.chou@sifive.com>
+Cc: Jeremy Bennett <jeremy.bennett@embecosm.com>
+Cc: Craig Blackmore <craig.blackmore@embecosm.com>
 
 
-On 3/7/25 5:39 PM, Jason Chien wrote:
-> When the IOMMU detects that bus->iommu_ops has been registered, indicating
-> the presence of an ATU, it sets the bus's downstream memory region to ensure
-> transactions are directed to the IOMMU.
-> 
-> Signed-off-by: Jason Chien <jason.chien@sifive.com>
-> ---
+Paolo Savini (1):
+  target/riscv: use tcg ops generation to emulate whole reg rvv
+    loads/stores.
 
+ target/riscv/insn_trans/trans_rvv.c.inc | 155 +++++++++++++++++-------
+ 1 file changed, 108 insertions(+), 47 deletions(-)
 
-Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-
-
->   hw/riscv/riscv-iommu.c | 15 ++++++++++-----
->   1 file changed, 10 insertions(+), 5 deletions(-)
-> 
-> diff --git a/hw/riscv/riscv-iommu.c b/hw/riscv/riscv-iommu.c
-> index d46beb2d64..9701fe3831 100644
-> --- a/hw/riscv/riscv-iommu.c
-> +++ b/hw/riscv/riscv-iommu.c
-> @@ -2628,11 +2628,16 @@ static const PCIIOMMUOps riscv_iommu_ops = {
->   void riscv_iommu_pci_setup_iommu(RISCVIOMMUState *iommu, PCIBus *bus,
->           Error **errp)
->   {
-> -    if (bus->iommu_ops &&
-> -        bus->iommu_ops->get_address_space == riscv_iommu_find_as) {
-> -        /* Allow multiple IOMMUs on the same PCIe bus, link known devices */
-> -        RISCVIOMMUState *last = (RISCVIOMMUState *)bus->iommu_opaque;
-> -        QLIST_INSERT_AFTER(last, iommu, iommus);
-> +    if (bus->iommu_ops) {
-> +        if (bus->iommu_ops->get_address_space == riscv_iommu_find_as) {
-> +            /* Allow multiple IOMMUs on the same PCIe bus, link known devices */
-> +            RISCVIOMMUState *last = (RISCVIOMMUState *)bus->iommu_opaque;
-> +            QLIST_INSERT_AFTER(last, iommu, iommus);
-> +        } else {
-> +            /* The bus has an ATU. Set its downsteam memory region. */
-> +            AddressSpace *as = riscv_iommu_space(iommu, 0);
-> +            pci_setup_iommu_downstream_mr(bus, as->root);
-> +        }
->       } else if (!bus->iommu_ops && !bus->iommu_opaque) {
->           pci_setup_iommu(bus, &riscv_iommu_ops, iommu);
->       } else {
-
+-- 
+2.34.1
 
