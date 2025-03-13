@@ -4,95 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B1256C35FF3
-	for <qemu-riscv@archiver.kernel.org>; Thu, 13 Mar 2025 15:24:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 88013C35FF3
+	for <qemu-riscv@archiver.kernel.org>; Thu, 13 Mar 2025 15:39:46 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tskPN-0007VZ-Am; Thu, 13 Mar 2025 11:23:41 -0400
+	id 1tskeH-00049N-FH; Thu, 13 Mar 2025 11:39:05 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <paolo.savini@embecosm.com>)
- id 1tskPL-0007TZ-2P
- for qemu-riscv@nongnu.org; Thu, 13 Mar 2025 11:23:39 -0400
-Received: from mail-wr1-x432.google.com ([2a00:1450:4864:20::432])
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1tskeF-00048W-Dm
+ for qemu-riscv@nongnu.org; Thu, 13 Mar 2025 11:39:03 -0400
+Received: from mail-pl1-x632.google.com ([2607:f8b0:4864:20::632])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <paolo.savini@embecosm.com>)
- id 1tskPI-0001fV-7I
- for qemu-riscv@nongnu.org; Thu, 13 Mar 2025 11:23:38 -0400
-Received: by mail-wr1-x432.google.com with SMTP id
- ffacd0b85a97d-3911748893aso721688f8f.3
- for <qemu-riscv@nongnu.org>; Thu, 13 Mar 2025 08:23:35 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1tskeD-0004Ly-HV
+ for qemu-riscv@nongnu.org; Thu, 13 Mar 2025 11:39:03 -0400
+Received: by mail-pl1-x632.google.com with SMTP id
+ d9443c01a7336-223959039f4so24139655ad.3
+ for <qemu-riscv@nongnu.org>; Thu, 13 Mar 2025 08:39:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=embecosm.com; s=google; t=1741879414; x=1742484214; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=JKtNdPa7LTv10WYlPiVYfpqgYoxHOE+GIe+ymVWq8ik=;
- b=FT7oT5zzPg2NkvgyhsTGwH6HW8N6BpAtFQghFgqVWVM4vws+cYWnfpyq20/yutAYxM
- Iae3LSxx4dkLpozXIV0m9aiptx0iwhfG22TaBOLAe7zaWh/aGSMak3iJYWMYXT3EKNRI
- B9SkJYezAh4lX21dHA6puXDI0ozrkKb+Hj8cvg9uL+WbQT+15c6osY/Zf1oz71rv8V5v
- DamotLLHL3ooofF5XM9u3IG9nIz3RIM7q2bKFwEReDlOV1T/1Wi8COjPtJrANxIbAofg
- geSttBlnIa5lGOHq6/fGVd3AJvoylKdf3HJGAZoDsCZdfzPei25HGYEpJE1Bbv1kRAFg
- ZJRg==
+ d=ventanamicro.com; s=google; t=1741880340; x=1742485140; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=10s1kh6LxDeEKRR1+yf4kN8vq+idkH6USo34XE6tcOE=;
+ b=XuDi0qhEIUp7Xa5fxYgSbcDq4BtgEHOswFSofOYNOPdkMUWPpX6Gmvdjm3NAsxH/1M
+ h13J3iZuGK5na0pjrrLe3/8w4xgXc6vVU8bGpRdJjzii3Vb6hi3AEDgu92L4FAzHwZ0H
+ E8tWkPALTx6CVR/Zw6Gq5uTGtugVj+pp/mgbZpYKyE6IESGkIAd1k7xywN5l3KoieAV9
+ Vt7F1FYJXiFgE6pquIO4iCtvfJd+T13CUi/4YJALIk+frkJPT4w+2peGbEXf7e7lReu4
+ 9rtc9FAF44Tqc+QTI2EoLrIWNZwYRI8KLHu/p9mc/PcvqPH+AXe2w89xCyogCCG7/tmf
+ A72w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741879414; x=1742484214;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=JKtNdPa7LTv10WYlPiVYfpqgYoxHOE+GIe+ymVWq8ik=;
- b=VI1xfAymUf1xlmCAQyEmDDgpXanTxUY0l7+8JKxgYn/P+d9ZEVcTYXqvcmO8mlYhqB
- rAx8XLvT7thADpg96dlwxu1zj3xDzwjlRhR5QDy743IyoXMcTxonwzimkxdbJbOVdHxs
- mxYHT9hE3DVXLWsN+msj6QltGgqYAcVBGSGcK7JXW/EvyZPHccnPEPvPsmLmBxjjyWUB
- jPqJtzgTChYe2oPSf5YXKklSxf+ewupxgP/wANMxexBcboGAqEhItyS1RWc/IbCouXF1
- H18HFokmeLQ3VXw5kBxduCLoTvxM76umAsp2mL1W6aIxgBdRXXZDcBWqyXvw6V82YuFs
- tcmg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVs5x/0ek6uO0Wwhd7VxbKDR3FvexhD6hQtQTyFq+Bb0zXkxRDSF+blWPegH+7G3Bb/aeVqx70soaS1@nongnu.org
-X-Gm-Message-State: AOJu0YzwGhE7uYhfZouw+pY6nkZgU7GewXDabhiVwhC+5WdvAVZadoHI
- JBYL82lNdE4bo7C5VULd8KkrBhgVWWvylde4oCPEInEOg7GpMRgo2ZCM+ubnfbE=
-X-Gm-Gg: ASbGnctCCfEelO5WCT7v6Ld34pM95cyC8XKiygPlx4IQbp5xA26abtkeAC1a+vuUhJk
- xRfLMh3dGRmDLzrxtwsy9tRzsfg8LOHtLufOfjRKHC2sL3Zuj6sBTAoNuF13ikKdVhbd6YQxe6C
- +BCzKnSqkLwWyyUNTOWEXDfM+VKJnODtgd+KomYYOy9H/8ZJoUfeh93FiuHCJ2Z77nhaACJchzQ
- AXZCFjQ0JSVsvKYrhKyJ2CVAwbx3aCQnn2EOSuoYNoisScp+ww8I6QwBOVhWafDWyJymflwqAaG
- 8Y6vmDfWxGXP2CY0DdpmlMrqwHw5lXz56bKmmgVG8uuZ3DV6YvCQ1c6tN/WvfIPDxZTDZ3z3Vxn
- Ep2QGwije+Jit1MnMp8eB
-X-Google-Smtp-Source: AGHT+IFsyDOX/Blc9E5oymCi/EBrqc8obx2uTyb4Wb4BpLsSCqIFSGMyCTUh3DNfx4wi32ATfXSnmQ==
-X-Received: by 2002:a5d:47a2:0:b0:391:31c8:ba6b with SMTP id
- ffacd0b85a97d-39132d77343mr20285183f8f.10.1741879414375; 
- Thu, 13 Mar 2025 08:23:34 -0700 (PDT)
-Received: from paolo-laptop-amd.sou.embecosm-corp.com ([212.69.42.53])
+ d=1e100.net; s=20230601; t=1741880340; x=1742485140;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=10s1kh6LxDeEKRR1+yf4kN8vq+idkH6USo34XE6tcOE=;
+ b=kJJF7U11NLhrz5QL3ilQvpDcRx5Qh+AZp1e21o+F1G2pzO9k5FZf3rrB4zjGvBeRpJ
+ 8Lr8pdXxSEUHxxdgG2CQO78c3dz4WTm20g3uYHSIrVI7aVVIMzHPy44cIbU12vIRh5sE
+ WITj8+XIhob66o9J/HTe766afnARzsoalxvCKz37+Z+C0pbfXOzHQ9GzjAvv207N9Snz
+ ECS+XOZxwq3OuWY6VudARvqjJWVpMkDVq0Z2wsDJo7QtxqR2GVM21qUYnGNw+M3JjNpk
+ j3J8lu5vrVkl6E1Kcr+zJtas2P1mZCim6uenvz73i37igr45NdKOpRc0iSKKY3j9EF8+
+ FW4g==
+X-Gm-Message-State: AOJu0YwoIqddtnC332Xtvb3Sop3kJAa+RrVfyYsO1REJjPSlugqeAh4E
+ JaqNqkq71Q0+19YDwWXFMNqe+aNDps38Lzu85cexU8i7jp5wuTK7tJ6a9L7M52M=
+X-Gm-Gg: ASbGncu1wp0/b9VjOg6Sn/vCWsC9vkRJq8f/AgHqrgubZm2Y/+1QJt0t/1tAbNdyM7y
+ DjNKWE+3sQZaKvTJ95J5wunuF0lPs98mtOaLunVsdybmTT33eKIMrT+d9ea7sJvh0DJBFj6hdaM
+ XSj3Gw7H4rSm6kOFRZCXogoxGXdCsYclC9Fr4FG9NTBRZVhWYynl2Fmu1Klqu5XQGXCKRxD6DQi
+ wz7aGMAeKuU5MfGj1Hf43z2DmbvDd9ASMmLGrovd8sJsxMkonlGFNowR3EHLDYQSn4Ez+b//kza
+ 4a6QNptcQ8JiCtFnmIs6IdShs+kKaA/V/oP7wcAs/k2AbS4QDipFm8Z7z478iHfcrPiw+g==
+X-Google-Smtp-Source: AGHT+IEwUYYWYC1thHsGouISnY/KWxKKz+p3kkTBarBYkJGdgPdqfR5sJaGdgQfycn6ePhORaNkH2A==
+X-Received: by 2002:a17:902:fc4c:b0:21f:7077:2aaf with SMTP id
+ d9443c01a7336-22428bf1715mr463473935ad.44.1741880339624; 
+ Thu, 13 Mar 2025 08:38:59 -0700 (PDT)
+Received: from [192.168.68.110] ([177.170.117.79])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-395cb7ebaedsm2462868f8f.90.2025.03.13.08.23.33
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 13 Mar 2025 08:23:34 -0700 (PDT)
-From: Paolo Savini <paolo.savini@embecosm.com>
-To: qemu-devel@nongnu.org,
-	qemu-riscv@nongnu.org
-Cc: Paolo Savini <paolo.savini@embecosm.com>,
- Richard Handerson <richard.henderson@linaro.org>,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bmeng.cn@gmail.com>,
- Weiwei Li <liwei1518@gmail.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Helene Chelin <helene.chelin@embecosm.com>, Nathan Egge <negge@google.com>,
- Max Chou <max.chou@sifive.com>,
- Jeremy Bennett <jeremy.bennett@embecosm.com>,
- Craig Blackmore <craig.blackmore@embecosm.com>,
- =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
-Subject: [PATCH 1/1 v4] target/riscv: use tcg ops generation to emulate whole
- reg rvv loads/stores.
-Date: Thu, 13 Mar 2025 15:23:30 +0000
-Message-ID: <20250313152330.398396-2-paolo.savini@embecosm.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20250313152330.398396-1-paolo.savini@embecosm.com>
-References: <20250313152330.398396-1-paolo.savini@embecosm.com>
+ d9443c01a7336-225c6ba70f3sm14698555ad.157.2025.03.13.08.38.57
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 13 Mar 2025 08:38:59 -0700 (PDT)
+Message-ID: <85cb962d-7e18-4c4d-b056-f543df778555@ventanamicro.com>
+Date: Thu, 13 Mar 2025 12:38:56 -0300
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::432;
- envelope-from=paolo.savini@embecosm.com; helo=mail-wr1-x432.google.com
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 4/6] hw/riscv: Allow direct start of kernel for MPFS
+To: Sebastian Huber <sebastian.huber@embedded-brains.de>, qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?=
+ <philmd@linaro.org>, Alistair Francis <alistair23@gmail.com>,
+ Conor Dooley <conor.dooley@microchip.com>, Bin Meng <bin.meng@windriver.com>
+References: <20250225005446.13894-1-sebastian.huber@embedded-brains.de>
+ <20250225005446.13894-5-sebastian.huber@embedded-brains.de>
+Content-Language: en-US
+From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+In-Reply-To: <20250225005446.13894-5-sebastian.huber@embedded-brains.de>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::632;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pl1-x632.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -115,209 +103,149 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-This patch replaces the use of a helper function with direct tcg ops generation
-in order to emulate whole register loads and stores. This is done in order to
-improve the performance of QEMU.
-We still use the helper function when vstart is not 0 at the beginning of the
-emulation of the whole register load or store or when we would end up generating
-partial loads or stores of vector elements (e.g. emulating 64 bits element loads
-with pairs of 32 bits loads on hosts with 32 bits registers).
-The latter condition ensures that we are not surprised by a trap in mid-element
-and consecutively that we can update vstart correctly.
-We also use the helper function when it performs better than tcg for specific
-combinations of vector length, number of fields and element size.
+Hi,
 
-Signed-off-by: Paolo Savini <paolo.savini@embecosm.com>
-Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Reviewed-by: Richard Handerson <richard.henderson@linaro.org>
-Reviewed-by: Max Chou <max.chou@sifive.com>
-Reviewed-by: "Alex Bennée" <alex.bennee@linaro.org>
----
- target/riscv/insn_trans/trans_rvv.c.inc | 155 +++++++++++++++++-------
- 1 file changed, 108 insertions(+), 47 deletions(-)
+On 2/24/25 9:54 PM, Sebastian Huber wrote:
+> Further customize the -bios and -kernel options behaviour for the
+> microchip-icicle-kit machine.  If "-bios none -kernel filename" is
+> specified, then do not load a firmware and instead only load and start
+> the kernel image.
+> 
+> Signed-off-by: Sebastian Huber <sebastian.huber@embedded-brains.de>
+> ---
+>   hw/riscv/microchip_pfsoc.c | 57 ++++++++++++++++++++++++++------------
+>   1 file changed, 40 insertions(+), 17 deletions(-)
+> 
+> diff --git a/hw/riscv/microchip_pfsoc.c b/hw/riscv/microchip_pfsoc.c
+> index 844dc0545c..df902c8667 100644
+> --- a/hw/riscv/microchip_pfsoc.c
+> +++ b/hw/riscv/microchip_pfsoc.c
+> @@ -578,29 +578,45 @@ static void microchip_icicle_kit_machine_init(MachineState *machine)
+>       }
+>   
+>       /*
+> -     * We follow the following table to select which payload we execute.
+> +     * We follow the following table to select which firmware we use.
+>        *
+> -     *  -bios |    -kernel | payload
+> -     * -------+------------+--------
+> -     *      N |          N | HSS
+> -     *      Y | don't care | HSS
+> -     *      N |          Y | kernel
+> -     *
+> -     * This ensures backwards compatibility with how we used to expose -bios
+> -     * to users but allows them to run through direct kernel booting as well.
+> +     * -bios         | -kernel    | firmware
+> +     * --------------+------------+--------
+> +     * none          |          N | error
+> +     * none          |          Y | kernel
+> +     * NULL, default |          N | BIOS_FILENAME
 
-diff --git a/target/riscv/insn_trans/trans_rvv.c.inc b/target/riscv/insn_trans/trans_rvv.c.inc
-index b9883a5d32..2914efbb2b 100644
---- a/target/riscv/insn_trans/trans_rvv.c.inc
-+++ b/target/riscv/insn_trans/trans_rvv.c.inc
-@@ -1100,25 +1100,86 @@ GEN_VEXT_TRANS(vle64ff_v, MO_64, r2nfvm, ldff_op, ld_us_check)
- typedef void gen_helper_ldst_whole(TCGv_ptr, TCGv, TCGv_env, TCGv_i32);
- 
- static bool ldst_whole_trans(uint32_t vd, uint32_t rs1, uint32_t nf,
--                             gen_helper_ldst_whole *fn,
--                             DisasContext *s)
-+                             uint32_t log2_esz, gen_helper_ldst_whole *fn,
-+                             DisasContext *s, bool is_load)
- {
--    TCGv_ptr dest;
--    TCGv base;
--    TCGv_i32 desc;
--
--    uint32_t data = FIELD_DP32(0, VDATA, NF, nf);
--    data = FIELD_DP32(data, VDATA, VM, 1);
--    dest = tcg_temp_new_ptr();
--    desc = tcg_constant_i32(simd_desc(s->cfg_ptr->vlenb,
--                                      s->cfg_ptr->vlenb, data));
--
--    base = get_gpr(s, rs1, EXT_NONE);
--    tcg_gen_addi_ptr(dest, tcg_env, vreg_ofs(s, vd));
--
-     mark_vs_dirty(s);
- 
--    fn(dest, base, tcg_env, desc);
-+    /*
-+     * Load/store multiple bytes per iteration.
-+     * When possible do this atomically.
-+     * Update vstart with the number of processed elements.
-+     * Use the helper function if either:
-+     * - vstart is not 0.
-+     * - the target has 32 bit registers and we are loading/storing 64 bit long
-+     *   elements. This is to ensure that we process every element with a single
-+     *   memory instruction.
-+     */
-+
-+    bool use_helper_fn = !(s->vstart_eq_zero) ||
-+                          (TCG_TARGET_REG_BITS == 32 && log2_esz == 3);
-+
-+    if (!use_helper_fn) {
-+        TCGv addr = tcg_temp_new();
-+        uint32_t size = s->cfg_ptr->vlenb * nf;
-+        TCGv_i64 t8 = tcg_temp_new_i64();
-+        TCGv_i32 t4 = tcg_temp_new_i32();
-+        MemOp atomicity = MO_ATOM_NONE;
-+        if (log2_esz == 0) {
-+            atomicity = MO_ATOM_NONE;
-+        } else {
-+            atomicity = MO_ATOM_IFALIGN_PAIR;
-+        }
-+        if (TCG_TARGET_REG_BITS == 64) {
-+            for (int i = 0; i < size; i += 8) {
-+                addr = get_address(s, rs1, i);
-+                if (is_load) {
-+                    tcg_gen_qemu_ld_i64(t8, addr, s->mem_idx,
-+                            MO_LE | MO_64 | atomicity);
-+                    tcg_gen_st_i64(t8, tcg_env, vreg_ofs(s, vd) + i);
-+                } else {
-+                    tcg_gen_ld_i64(t8, tcg_env, vreg_ofs(s, vd) + i);
-+                    tcg_gen_qemu_st_i64(t8, addr, s->mem_idx,
-+                            MO_LE | MO_64 | atomicity);
-+                }
-+                if (i == size - 8) {
-+                    tcg_gen_movi_tl(cpu_vstart, 0);
-+                } else {
-+                    tcg_gen_addi_tl(cpu_vstart, cpu_vstart, 8 >> log2_esz);
-+                }
-+            }
-+        } else {
-+            for (int i = 0; i < size; i += 4) {
-+                addr = get_address(s, rs1, i);
-+                if (is_load) {
-+                    tcg_gen_qemu_ld_i32(t4, addr, s->mem_idx,
-+                            MO_LE | MO_32 | atomicity);
-+                    tcg_gen_st_i32(t4, tcg_env, vreg_ofs(s, vd) + i);
-+                } else {
-+                    tcg_gen_ld_i32(t4, tcg_env, vreg_ofs(s, vd) + i);
-+                    tcg_gen_qemu_st_i32(t4, addr, s->mem_idx,
-+                            MO_LE | MO_32 | atomicity);
-+                }
-+                if (i == size - 4) {
-+                    tcg_gen_movi_tl(cpu_vstart, 0);
-+                } else {
-+                    tcg_gen_addi_tl(cpu_vstart, cpu_vstart, 4 >> log2_esz);
-+                }
-+            }
-+        }
-+    } else {
-+        TCGv_ptr dest;
-+        TCGv base;
-+        TCGv_i32 desc;
-+        uint32_t data = FIELD_DP32(0, VDATA, NF, nf);
-+        data = FIELD_DP32(data, VDATA, VM, 1);
-+        dest = tcg_temp_new_ptr();
-+        desc = tcg_constant_i32(simd_desc(s->cfg_ptr->vlenb,
-+                        s->cfg_ptr->vlenb, data));
-+        base = get_gpr(s, rs1, EXT_NONE);
-+        tcg_gen_addi_ptr(dest, tcg_env, vreg_ofs(s, vd));
-+        fn(dest, base, tcg_env, desc);
-+    }
- 
-     finalize_rvv_inst(s);
-     return true;
-@@ -1128,42 +1189,42 @@ static bool ldst_whole_trans(uint32_t vd, uint32_t rs1, uint32_t nf,
-  * load and store whole register instructions ignore vtype and vl setting.
-  * Thus, we don't need to check vill bit. (Section 7.9)
-  */
--#define GEN_LDST_WHOLE_TRANS(NAME, ARG_NF)                                \
--static bool trans_##NAME(DisasContext *s, arg_##NAME * a)                 \
--{                                                                         \
--    if (require_rvv(s) &&                                                 \
--        QEMU_IS_ALIGNED(a->rd, ARG_NF)) {                                 \
--        return ldst_whole_trans(a->rd, a->rs1, ARG_NF,                    \
--                                gen_helper_##NAME, s);                    \
--    }                                                                     \
--    return false;                                                         \
--}
--
--GEN_LDST_WHOLE_TRANS(vl1re8_v,  1)
--GEN_LDST_WHOLE_TRANS(vl1re16_v, 1)
--GEN_LDST_WHOLE_TRANS(vl1re32_v, 1)
--GEN_LDST_WHOLE_TRANS(vl1re64_v, 1)
--GEN_LDST_WHOLE_TRANS(vl2re8_v,  2)
--GEN_LDST_WHOLE_TRANS(vl2re16_v, 2)
--GEN_LDST_WHOLE_TRANS(vl2re32_v, 2)
--GEN_LDST_WHOLE_TRANS(vl2re64_v, 2)
--GEN_LDST_WHOLE_TRANS(vl4re8_v,  4)
--GEN_LDST_WHOLE_TRANS(vl4re16_v, 4)
--GEN_LDST_WHOLE_TRANS(vl4re32_v, 4)
--GEN_LDST_WHOLE_TRANS(vl4re64_v, 4)
--GEN_LDST_WHOLE_TRANS(vl8re8_v,  8)
--GEN_LDST_WHOLE_TRANS(vl8re16_v, 8)
--GEN_LDST_WHOLE_TRANS(vl8re32_v, 8)
--GEN_LDST_WHOLE_TRANS(vl8re64_v, 8)
-+#define GEN_LDST_WHOLE_TRANS(NAME, ETYPE, ARG_NF, IS_LOAD)                  \
-+static bool trans_##NAME(DisasContext *s, arg_##NAME * a)                   \
-+{                                                                           \
-+    if (require_rvv(s) &&                                                   \
-+        QEMU_IS_ALIGNED(a->rd, ARG_NF)) {                                   \
-+        return ldst_whole_trans(a->rd, a->rs1, ARG_NF, ctzl(sizeof(ETYPE)), \
-+                                gen_helper_##NAME, s, IS_LOAD);             \
-+    }                                                                       \
-+    return false;                                                           \
-+}
-+
-+GEN_LDST_WHOLE_TRANS(vl1re8_v,  int8_t,  1, true)
-+GEN_LDST_WHOLE_TRANS(vl1re16_v, int16_t, 1, true)
-+GEN_LDST_WHOLE_TRANS(vl1re32_v, int32_t, 1, true)
-+GEN_LDST_WHOLE_TRANS(vl1re64_v, int64_t, 1, true)
-+GEN_LDST_WHOLE_TRANS(vl2re8_v,  int8_t,  2, true)
-+GEN_LDST_WHOLE_TRANS(vl2re16_v, int16_t, 2, true)
-+GEN_LDST_WHOLE_TRANS(vl2re32_v, int32_t, 2, true)
-+GEN_LDST_WHOLE_TRANS(vl2re64_v, int64_t, 2, true)
-+GEN_LDST_WHOLE_TRANS(vl4re8_v,  int8_t,  4, true)
-+GEN_LDST_WHOLE_TRANS(vl4re16_v, int16_t, 4, true)
-+GEN_LDST_WHOLE_TRANS(vl4re32_v, int32_t, 4, true)
-+GEN_LDST_WHOLE_TRANS(vl4re64_v, int64_t, 4, true)
-+GEN_LDST_WHOLE_TRANS(vl8re8_v,  int8_t,  8, true)
-+GEN_LDST_WHOLE_TRANS(vl8re16_v, int16_t, 8, true)
-+GEN_LDST_WHOLE_TRANS(vl8re32_v, int32_t, 8, true)
-+GEN_LDST_WHOLE_TRANS(vl8re64_v, int64_t, 8, true)
- 
- /*
-  * The vector whole register store instructions are encoded similar to
-  * unmasked unit-stride store of elements with EEW=8.
-  */
--GEN_LDST_WHOLE_TRANS(vs1r_v, 1)
--GEN_LDST_WHOLE_TRANS(vs2r_v, 2)
--GEN_LDST_WHOLE_TRANS(vs4r_v, 4)
--GEN_LDST_WHOLE_TRANS(vs8r_v, 8)
-+GEN_LDST_WHOLE_TRANS(vs1r_v, int8_t, 1, false)
-+GEN_LDST_WHOLE_TRANS(vs2r_v, int8_t, 2, false)
-+GEN_LDST_WHOLE_TRANS(vs4r_v, int8_t, 4, false)
-+GEN_LDST_WHOLE_TRANS(vs8r_v, int8_t, 8, false)
- 
- /*
-  *** Vector Integer Arithmetic Instructions
--- 
-2.34.1
+
+This change is breaking the following test:
+
+---------
+
+$ QTEST_QEMU_BINARY=./build/qemu-system-riscv64 ./build/tests/qtest/qom-test
+(...)
+# slow test /riscv64/qom/amd-microblaze-v-generic executed in 2.28 secs
+# starting QEMU: exec ./build/qemu-system-riscv64 -qtest unix:/tmp/qtest-1361875.sock -qtest-log /dev/null -chardev socket,path=/tmp/qtest-1361875.qmp,id=char0 -mon chardev=char0,mode=control -display none -audio none -machine microchip-icicle-kit -accel qtest
+**
+ERROR:../hw/riscv/boot.c:164:riscv_load_firmware: assertion failed: (firmware_filename != NULL)
+Bail out! ERROR:../hw/riscv/boot.c:164:riscv_load_firmware: assertion failed: (firmware_filename != NULL)
+Broken pipe
+
+---------
+
+The reason is that, with the default machine settings (no -bios and no -kernel
+options), firmware_name is now defaulted to BIOS_FILENAME (hss.bin). But we're not
+distributing 'hss.bin' in pc-bios:
+
+$ ls pc-bios/ |  grep hss
+$
+
+Then, in the following code, 'filename' will be NULL and riscv_load_firmware() will
+g_assert():
+
+
+> +    if (firmware_name) {
+> +        const char *filename = riscv_find_firmware(firmware_name, NULL);
+> +        firmware_end_addr = riscv_load_firmware(filename, &firmware_load_addr,
+> +                                                NULL);
+> +    }
+
+
+Possible solutions:
+
+- package hss.bin in QEMU so it can be used as a default firmware;
+
+- redo the logic to allow the board to run (even if inactive) with absent
+-bios and -kernel to allow QEMU model tests to run.
+
+
+
+Thanks,
+
+Daniel
+
+> +     * NULL, default |          Y | RISCV64_BIOS_BIN
+> +     * other         | don't care | other
+>        */
+> +    if (machine->firmware && !strcmp(machine->firmware, "none")) {
+> +        if (!machine->kernel_filename) {
+> +            error_report("for -bios none, a kernel is required");
+> +            exit(1);
+> +        }
+>   
+> -    if (machine->kernel_filename) {
+> -        firmware_name = RISCV64_BIOS_BIN;
+> -        firmware_load_addr = memmap[MICROCHIP_PFSOC_DRAM_LO].base;
+> +        firmware_name = NULL;
+> +        firmware_load_addr = RESET_VECTOR;
+> +    } else if (!machine->firmware || !strcmp(machine->firmware, "default")) {
+> +        if (machine->kernel_filename) {
+> +            firmware_name = RISCV64_BIOS_BIN;
+> +            firmware_load_addr = memmap[MICROCHIP_PFSOC_DRAM_LO].base;
+> +        } else {
+> +            firmware_name = BIOS_FILENAME;
+> +            firmware_load_addr = RESET_VECTOR;
+> +        }
+>       } else {
+> -        firmware_name = BIOS_FILENAME;
+> +        firmware_name = machine->firmware;
+>           firmware_load_addr = RESET_VECTOR;
+>       }
+>   
+> -    /* Load the firmware */
+> -    firmware_end_addr = riscv_find_and_load_firmware(machine, firmware_name,
+> -                                                     &firmware_load_addr, NULL);
+> +    /* Load the firmware if necessary */
+> +    if (firmware_name) {
+> +        const char *filename = riscv_find_firmware(firmware_name, NULL);
+> +        firmware_end_addr = riscv_load_firmware(filename, &firmware_load_addr,
+> +                                                NULL);
+> +    } else {
+> +        firmware_end_addr = firmware_load_addr;
+> +    }
+>   
+>       riscv_boot_info_init(&boot_info, &s->soc.u_cpus);
+>       if (machine->kernel_filename) {
+> @@ -638,8 +654,15 @@ static void microchip_icicle_kit_machine_init(MachineState *machine)
+>               fdt_load_addr = 0;
+>           }
+>   
+> +        hwaddr start_addr;
+> +        if (firmware_name) {
+> +            start_addr = firmware_load_addr;
+> +        } else {
+> +            start_addr = kernel_entry;
+> +        }
+> +
+>           /* Load the reset vector */
+> -        riscv_setup_rom_reset_vec(machine, &s->soc.u_cpus, firmware_load_addr,
+> +        riscv_setup_rom_reset_vec(machine, &s->soc.u_cpus, start_addr,
+>                                     memmap[MICROCHIP_PFSOC_ENVM_DATA].base,
+>                                     memmap[MICROCHIP_PFSOC_ENVM_DATA].size,
+>                                     kernel_entry, fdt_load_addr);
 
 
