@@ -4,68 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BA235C282EC
-	for <qemu-riscv@archiver.kernel.org>; Thu, 13 Mar 2025 12:40:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 632DEC282DE
+	for <qemu-riscv@archiver.kernel.org>; Thu, 13 Mar 2025 12:40:33 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tshqk-0006jH-1x; Thu, 13 Mar 2025 08:39:46 -0400
+	id 1tshqi-0006it-Kx; Thu, 13 Mar 2025 08:39:44 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <paolo.savini@embecosm.com>)
- id 1tshqi-0006is-G1
- for qemu-riscv@nongnu.org; Thu, 13 Mar 2025 08:39:44 -0400
-Received: from mail-wm1-x32e.google.com ([2a00:1450:4864:20::32e])
+ id 1tshqd-0006hy-Qt
+ for qemu-riscv@nongnu.org; Thu, 13 Mar 2025 08:39:39 -0400
+Received: from mail-wm1-x334.google.com ([2a00:1450:4864:20::334])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <paolo.savini@embecosm.com>)
- id 1tshqX-0002zh-Q4
- for qemu-riscv@nongnu.org; Thu, 13 Mar 2025 08:39:43 -0400
-Received: by mail-wm1-x32e.google.com with SMTP id
- 5b1f17b1804b1-43cfb6e9031so8337845e9.0
+ id 1tshqX-0002zb-3N
+ for qemu-riscv@nongnu.org; Thu, 13 Mar 2025 08:39:39 -0400
+Received: by mail-wm1-x334.google.com with SMTP id
+ 5b1f17b1804b1-43cf06eabdaso8149635e9.2
  for <qemu-riscv@nongnu.org>; Thu, 13 Mar 2025 05:39:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=embecosm.com; s=google; t=1741869570; x=1742474370; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=IbRR7H53hotLFHHWC9P26n2OfTWPsqKY3P8IXBsMAgw=;
- b=fmxa26Wp1wUOb/lCMEHMGdxFmm9F9gL/gfdrP8e+fux4igAOQ9q6seKx5oyPat8hQ0
- KHThbgHlaoMrjuOJv0qP7kW0xkRF6C+D1g81bL+h8NzZi0/J96nE5Rd+u7j13MHYXgd1
- qjWBfByECGA8BFiqa/Z0+WtwdYunpyB2yUMOJkPrXy1qsNrF+HePhHKxNhGFE8pyH+iF
- NPJ+oYYEjl70nmS9uFxjyKpNv8VBFhhi69rBumT3hm18Wd5jMl2WQreFVWIsMU50Gt3R
- ALeZTU3bB6ZpI/VPBy3MUZd8RprQlvWtKhzxXW6781gkwdfzo6E/tZ6tFf/BXFeQkYOJ
- J+NQ==
+ d=embecosm.com; s=google; t=1741869569; x=1742474369; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=aAvyRn48a7ZTQotFDe13Sewn7nxKlzZEGo5p22G6j8M=;
+ b=GdAveYTCCWTMC9iw85Vi1dhYqZ9WcScVnP2Fx2NCqH3l2i/bq4anEhW8njSIrrGdbt
+ CoKcTW6Hk6sWfIUmMMst4gqfQzTo+bnraRWncxJkwsBJEvaqFcYi9OMYZuwTTqnaaUkn
+ rdGnhixPPzB2GIL/IF1Alp1jWUZCQEf49fUDHr4zf6i2Xnk7JYdsvNdlvVswwPdLSh8z
+ wdgbS+3L6FI3BIlmhTNW/O70Q30xf3S09g9R6n4x8H6fPADDc0Fh9YhY/O4+dz7tkv2j
+ JyUScrV8Y8dF+Xgm5ukdmPOdl6U4yEIlQigAQLrIodAq1CLDvon6zqPWibBN29HYHWeX
+ VoSA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741869570; x=1742474370;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=IbRR7H53hotLFHHWC9P26n2OfTWPsqKY3P8IXBsMAgw=;
- b=ihOjERZhnJurXnS8UmCW6GUhC/+3DfA2q4A6vF8Qv49nMDlsTWw0tJqCH6fPRxvlgJ
- UckuasVX759N5kKKN3YppXFz6qnQLyb5IiQs2eegDuNSEHSwR0ozxbDbFwkzaowdSc6X
- 4lqfojyRKF+ZvKJjdQpAn+bMWg+UwXhL8SjZwZKFlOhd+3Hh0Jb1vbN6N2y/A/JgFGN2
- PWoDsBzf0xmtD8UIz/vIq9eUEUjePYalUtLMUycnhs4jNGdGNuDYuSEmLMXy4yD1guYr
- zMMdXtdRBluxwVkmc6rsqGBlwF9bceLK5aql6sd72eQTCc6nL2JEmOMyKUx8UTtki6JV
- ke+g==
+ d=1e100.net; s=20230601; t=1741869569; x=1742474369;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=aAvyRn48a7ZTQotFDe13Sewn7nxKlzZEGo5p22G6j8M=;
+ b=PuUsHJRIoykwfFw4we+Mz62lhVrRRb2/NyUdgMQt7MkT7mDY1J2YudvqbXTyYi8m/c
+ qwgWEZnR31GVVqmuG4g5GCohH6y7u1UsVZTTJnzyjqf2IdpPOgpxU7TH2EWaL7Kq+ov2
+ HFJ98uG8zYFPny8Kq0TAOV7R9m0beDJOYUO3bM4NXo/5ZfzKJvaqFG91lOkAJzQIxeNw
+ lxIuWTjUdznUOpLWasAbRHMKjRnNIAROeh6b87EDid4G1kr5E5HK+RDsI06rI9jAwIWB
+ XHWE4yRIGj2z6xREepo/lOyZdgA+/pbrtO2nRoqeMbVld/olwshPc8GTeNgVSaaak03U
+ M1rQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVJePzYVKYL1Bk03qwHNPZjnCBEQ7WEf/cHebHYf06n++l8KbSdTR2KV20nN4xYgUIkUG0uLFdRPwqa@nongnu.org
-X-Gm-Message-State: AOJu0Yx+VZuv4I2ul/Kzwzec2hvzf6j7w7hNzZiHNfAR373P/n2g6CUG
- c5fiRzTSxXaMjjP+tz47hC5wKwWIYPNmbV0YlLlPep1MqInlhgrBzOVg7saJX1c=
-X-Gm-Gg: ASbGncvfmUmSPhL/xZMR5F4Qe3TbjvgqBcBtCQ5Whuy85KiRUnB35M3M/7xCkepBCNF
- 2d5tNJTZ0xr/+vuKkdTnnAcf3iZns8tQpnUIxWroXWioLCrlCNx1sC+IUNsuuDikkpFEcr4WyWm
- o1e+IC3AS4PlDyYNJUn7CoJiCSIQd1TadbKi2/xFXhp3NoIWPIZs+VG0W9akr+7tq6E7mWju57K
- U59QxolPAmNy+Dkz4szFQIj0Ts20ydJJcwxHJibb2La5j5cHPBDzupa7UO7d+GavKNmhamM3w5V
- 28lkn3c1gLkOJuW9N+zHVbw7NWqECtP96k0sC3L9UZvTCVxIx02JfSqGJXHuh1z7CJEmgj5a3K3
- ZtJnu/QOvFA==
-X-Google-Smtp-Source: AGHT+IGkaBbwPII0Kz10ecShYMfeuFg82sEg9Q09ObOIIeFq2bJTOtfrqM0SdzjwB0fWPw9U9y/2+Q==
-X-Received: by 2002:a05:600c:46d3:b0:439:9424:1b70 with SMTP id
- 5b1f17b1804b1-43c602223f0mr258041045e9.30.1741869570338; 
- Thu, 13 Mar 2025 05:39:30 -0700 (PDT)
+ AJvYcCWIn75j3ZRiSBf5MQCTqpPqZI5i0W2LmvB29fcoTUC8co44Nfa7lFeVuPKyVDhSsi3XhAZLKxObnMkh@nongnu.org
+X-Gm-Message-State: AOJu0YwsJE0A+q7jSEkOwz9/3TFsBGP5gJ7VCXK/V9n/7Zg2DRI37/3Z
+ yMIx+KZr0DCBPOzNkr93MUntFew7pnIrXlM+Xq+p205o1/9VarxQq6kzohicWp4=
+X-Gm-Gg: ASbGnctP5DzGA1CTXPaTz3gca1+8PcTicnEeMqwL38EtYrqIbRmj698YsIubBVHcgl3
+ Zv46Jh58lYIkL40A7vj5Wya5dPhkRHFPU/gPMdLlssg6Qgz1zoZoR1V4zxRQ07gICCJmLsoZAiO
+ nm84wMcRV55UeorOo01iz2/ZOdKACv/0bCcVxarp2VVaY7ayft8DsYNp7HzLEKEvaMnS3P5KPPg
+ jDys18CtgiPSSwYeZo14cicDBpm59JfAwoWtAON5azUN99nfJjv+ToM4vZaomgBVHQHnspvwPub
+ 8U4jeod86ZvHUIrf97msv52lcJyVZVmWUylSkxxNnQkFknrHLr2V6kh4t046h0H4WZAhsN0YW3G
+ szlGrV/djIQ==
+X-Google-Smtp-Source: AGHT+IGmmANvKKyvbGmAa8TJmmYHZFqtndRshJVddX40du45pVK7nmKteOcJ/et78r4yIc2tS2fCHA==
+X-Received: by 2002:a05:600c:4ed1:b0:43c:e7ae:4bc9 with SMTP id
+ 5b1f17b1804b1-43ce7ae4df2mr158545335e9.1.1741869568962; 
+ Thu, 13 Mar 2025 05:39:28 -0700 (PDT)
 Received: from paolo-laptop-amd.sou.embecosm-corp.com ([212.69.42.53])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-43d0a8c5ccasm52092665e9.26.2025.03.13.05.39.29
+ 5b1f17b1804b1-43d0a8c5ccasm52092665e9.26.2025.03.13.05.39.28
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 13 Mar 2025 05:39:30 -0700 (PDT)
+ Thu, 13 Mar 2025 05:39:28 -0700 (PDT)
 From: Paolo Savini <paolo.savini@embecosm.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
@@ -80,24 +79,21 @@ Cc: Paolo Savini <paolo.savini@embecosm.com>,
  Max Chou <max.chou@sifive.com>,
  Jeremy Bennett <jeremy.bennett@embecosm.com>,
  Craig Blackmore <craig.blackmore@embecosm.com>
-Subject: [PATCH 1/1 v2] [RISC-V/RVV] Expand the probe_pages helper function to
- handle probe flags.
-Date: Thu, 13 Mar 2025 12:39:26 +0000
-Message-ID: <20250313123926.374878-2-paolo.savini@embecosm.com>
+Subject: [PATCH 0/1 v2] [RISC-V/RVV] use a single function to probe memory.
+Date: Thu, 13 Mar 2025 12:39:25 +0000
+Message-ID: <20250313123926.374878-1-paolo.savini@embecosm.com>
 X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20250313123926.374878-1-paolo.savini@embecosm.com>
-References: <20250313123926.374878-1-paolo.savini@embecosm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::32e;
- envelope-from=paolo.savini@embecosm.com; helo=mail-wm1-x32e.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::334;
+ envelope-from=paolo.savini@embecosm.com; helo=mail-wm1-x334.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_PASS=-0.001,
+ T_SPF_HELO_TEMPERROR=0.01 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -113,141 +109,32 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-This commit expands the probe_pages helper function in
-target/riscv/vector_helper.c to handle also the cases in which we need access to
-the flags raised while probing the memory and the host address.
-This is done in order to provide a unified interface to probe_access and
-probe_access_flags.
-The new version of probe_pages can now act as a regular call to probe_access as
-before and as a call to probe_access_flags. In the latter case the user need to
-pass pointers to flags and host address and a boolean value for nonfault.
-The flags and host address will be set and made available as for a direct call
-to probe_access_flags.
+Previous version:
 
-Signed-off-by: Paolo Savini <paolo.savini@embecosm.com>
-Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
----
+- v1: https://lore.kernel.org/all/20250221162036.61521-1-paolo.savini@embecosm.com/
+
+Add reviewer information and rebase on top of riscv-to-apply.next branch.
+
+Cc: Richard Handerson <richard.henderson@linaro.org>
+Cc: Palmer Dabbelt <palmer@dabbelt.com>
+Cc: Alistair Francis <alistair.francis@wdc.com>
+Cc: Bin Meng <bmeng.cn@gmail.com>
+Cc: Weiwei Li <liwei1518@gmail.com>
+Cc: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Cc: Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
+Cc: Helene Chelin <helene.chelin@embecosm.com>
+Cc: Nathan Egge <negge@google.com>
+Cc: Max Chou <max.chou@sifive.com>
+Cc: Jeremy Bennett <jeremy.bennett@embecosm.com>
+Cc: Craig Blackmore <craig.blackmore@embecosm.com>
+
+Paolo Savini (1):
+  [RISC-V/RVV] Expand the probe_pages helper function to handle probe
+    flags.
+
  target/riscv/vector_helper.c | 57 +++++++++++++++++++++++-------------
  1 file changed, 37 insertions(+), 20 deletions(-)
 
-diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
-index 67b3bafebb..4bd511a03d 100644
---- a/target/riscv/vector_helper.c
-+++ b/target/riscv/vector_helper.c
-@@ -114,25 +114,42 @@ static inline uint32_t vext_max_elems(uint32_t desc, uint32_t log2_esz)
-  * It will trigger an exception if there is no mapping in TLB
-  * and page table walk can't fill the TLB entry. Then the guest
-  * software can return here after process the exception or never return.
-+ *
-+ * This function can also be used when direct access to probe_access_flags is
-+ * needed in order to access the flags. If a pointer to a flags operand is
-+ * provided the function will call probe_access_flags instead, use nonfault
-+ * and update host and flags.
-  */
--static void probe_pages(CPURISCVState *env, target_ulong addr,
--                        target_ulong len, uintptr_t ra,
--                        MMUAccessType access_type)
-+static void probe_pages(CPURISCVState *env, target_ulong addr, target_ulong len,
-+                        uintptr_t ra, MMUAccessType access_type, int mmu_index,
-+                        void **host, int *flags, bool nonfault)
- {
-     target_ulong pagelen = -(addr | TARGET_PAGE_MASK);
-     target_ulong curlen = MIN(pagelen, len);
--    int mmu_index = riscv_env_mmu_index(env, false);
- 
--    probe_access(env, adjust_addr(env, addr), curlen, access_type,
--                 mmu_index, ra);
-+    if (flags != NULL) {
-+        *flags = probe_access_flags(env, adjust_addr(env, addr), curlen,
-+                                    access_type, mmu_index, nonfault, host, ra);
-+    } else {
-+        probe_access(env, adjust_addr(env, addr), curlen, access_type,
-+                     mmu_index, ra);
-+    }
-+
-     if (len > curlen) {
-         addr += curlen;
-         curlen = len - curlen;
--        probe_access(env, adjust_addr(env, addr), curlen, access_type,
--                     mmu_index, ra);
-+        if (flags != NULL) {
-+            *flags = probe_access_flags(env, adjust_addr(env, addr), curlen,
-+                                        access_type, mmu_index, nonfault,
-+                                        host, ra);
-+        } else {
-+            probe_access(env, adjust_addr(env, addr), curlen, access_type,
-+                         mmu_index, ra);
-+        }
-     }
- }
- 
-+
- static inline void vext_set_elem_mask(void *v0, int index,
-                                       uint8_t value)
- {
-@@ -332,8 +349,8 @@ vext_page_ldst_us(CPURISCVState *env, void *vd, target_ulong addr,
-     MMUAccessType access_type = is_load ? MMU_DATA_LOAD : MMU_DATA_STORE;
- 
-     /* Check page permission/pmp/watchpoint/etc. */
--    flags = probe_access_flags(env, adjust_addr(env, addr), size, access_type,
--                               mmu_index, true, &host, ra);
-+    probe_pages(env, addr, size, ra, access_type, mmu_index, &host, &flags,
-+                true);
- 
-     if (flags == 0) {
-         if (nf == 1) {
-@@ -632,7 +649,7 @@ vext_ldff(void *vd, void *v0, target_ulong base, CPURISCVState *env,
-     uint32_t vma = vext_vma(desc);
-     target_ulong addr, addr_probe, addr_i, offset, remain, page_split, elems;
-     int mmu_index = riscv_env_mmu_index(env, false);
--    int flags;
-+    int flags, probe_flags;
-     void *host;
- 
-     VSTART_CHECK_EARLY_EXIT(env, env->vl);
-@@ -646,15 +663,15 @@ vext_ldff(void *vd, void *v0, target_ulong base, CPURISCVState *env,
-     }
- 
-     /* Check page permission/pmp/watchpoint/etc. */
--    flags = probe_access_flags(env, adjust_addr(env, addr), elems * msize,
--                               MMU_DATA_LOAD, mmu_index, true, &host, ra);
-+    probe_pages(env, addr, elems * msize, ra, MMU_DATA_LOAD, mmu_index, &host,
-+                &flags, true);
- 
-     /* If we are crossing a page check also the second page. */
-     if (env->vl > elems) {
-         addr_probe = addr + (elems << log2_esz);
--        flags |= probe_access_flags(env, adjust_addr(env, addr_probe),
--                                    elems * msize, MMU_DATA_LOAD, mmu_index,
--                                    true, &host, ra);
-+        probe_pages(env, addr_probe, elems * msize, ra, MMU_DATA_LOAD,
-+                    mmu_index, &host, &probe_flags, true);
-+        flags |= probe_flags;
-     }
- 
-     if (flags & ~TLB_WATCHPOINT) {
-@@ -666,16 +683,16 @@ vext_ldff(void *vd, void *v0, target_ulong base, CPURISCVState *env,
-             addr_i = adjust_addr(env, base + i * (nf << log2_esz));
-             if (i == 0) {
-                 /* Allow fault on first element. */
--                probe_pages(env, addr_i, nf << log2_esz, ra, MMU_DATA_LOAD);
-+                probe_pages(env, addr_i, nf << log2_esz, ra, MMU_DATA_LOAD,
-+                            mmu_index, &host, NULL, false);
-             } else {
-                 remain = nf << log2_esz;
-                 while (remain > 0) {
-                     offset = -(addr_i | TARGET_PAGE_MASK);
- 
-                     /* Probe nonfault on subsequent elements. */
--                    flags = probe_access_flags(env, addr_i, offset,
--                                               MMU_DATA_LOAD, mmu_index, true,
--                                               &host, 0);
-+                    probe_pages(env, addr_i, offset, 0, MMU_DATA_LOAD,
-+                                mmu_index, &host, &flags, true);
- 
-                     /*
-                      * Stop if invalid (unmapped) or mmio (transaction may
 -- 
 2.34.1
-
 
