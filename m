@@ -4,95 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6F6FBC282DE
-	for <qemu-riscv@archiver.kernel.org>; Thu, 13 Mar 2025 11:41:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 31BD8C282DE
+	for <qemu-riscv@archiver.kernel.org>; Thu, 13 Mar 2025 12:38:35 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tsgvg-0007Pe-Nf; Thu, 13 Mar 2025 07:40:48 -0400
+	id 1tshpL-0006Js-TQ; Thu, 13 Mar 2025 08:38:19 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1tsgvf-0007P8-Ug
- for qemu-riscv@nongnu.org; Thu, 13 Mar 2025 07:40:47 -0400
-Received: from mail-pl1-x630.google.com ([2607:f8b0:4864:20::630])
+ id 1tshpK-0006JU-BH
+ for qemu-riscv@nongnu.org; Thu, 13 Mar 2025 08:38:18 -0400
+Received: from mail-pj1-x1036.google.com ([2607:f8b0:4864:20::1036])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1tsgvZ-0004tJ-3A
- for qemu-riscv@nongnu.org; Thu, 13 Mar 2025 07:40:47 -0400
-Received: by mail-pl1-x630.google.com with SMTP id
- d9443c01a7336-22438c356c8so14435255ad.1
- for <qemu-riscv@nongnu.org>; Thu, 13 Mar 2025 04:40:39 -0700 (PDT)
+ id 1tshpH-0002sP-Se
+ for qemu-riscv@nongnu.org; Thu, 13 Mar 2025 08:38:17 -0400
+Received: by mail-pj1-x1036.google.com with SMTP id
+ 98e67ed59e1d1-2ff087762bbso1506005a91.3
+ for <qemu-riscv@nongnu.org>; Thu, 13 Mar 2025 05:38:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1741866038; x=1742470838; darn=nongnu.org;
+ d=ventanamicro.com; s=google; t=1741869493; x=1742474293; darn=nongnu.org;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=2C0/1iiRnXXrGzsGkuEmeEE64O9iSLHDARRgo/qxu6E=;
- b=GCmpv3rKSv90aSIGoptfD9g5sYDp0fZy/+qLZOSXi2MA0BDAlf9PAwUSulX013CNe2
- 8A7Sqj9G/zhHmiy2MYMfX+jYC857pmN8uxKfwuiOuBhiHQwJMLJ9/OHvTspEm+e0a2us
- dNm3tDkWM7gO8LC/M+8k5BEaDosFR464yoAjksofqBSbOvbvNF7vrrkkrN88k/YxiCZ6
- +Fu4dvMVfR0nouc3gK8VfawJL/9/F9wW4mFA1WsGkBxw2HCyPX1N10MU2L0R+jSowvPq
- QJhY+icHR/+193WsRekoJ4cOg3C8kd29BkBjKJIgDFyyPEUbpmMdW7qQD8ozL9hMSETy
- BkzA==
+ bh=bt4zRQBOYHSax/cei+k4mZ/WSu+wxrkNEI8A1aplspU=;
+ b=LA1yYD5sk2QAzivRchr2laAxcKsDDRN0MZwJg5mARzWUp75wtbd12343h4DKOiB539
+ FOOwlcrxhSscIGIae6S5GCP0Vd9RWpkCROkfzcOJGGitnOccYVtqssWqZ3SPidYvGpJM
+ j8DDkEWzUMSuCeNpZOAyotkex8Ub/WE+kcaX4xTPsoEZGmxnPPlxLNK643Fo3PaTkBg2
+ iBCNvhwSXlcz5SXbfZ9e/lGp/dVWDgX7xgHSO3ZdKaORiBKm85Q7cQ+IA8KpXrD1177V
+ 2pLaCsgtj/UCP5iN4Phg9ImHag283hCu+xgj04bzitUTQ3E3KBE5XpQleqt4TV1T2RgK
+ 0jrg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741866038; x=1742470838;
+ d=1e100.net; s=20230601; t=1741869493; x=1742474293;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=2C0/1iiRnXXrGzsGkuEmeEE64O9iSLHDARRgo/qxu6E=;
- b=dBRjDjPd1CMdOnMswiV1O7Dor+IvPtwhMuBC9uZUfUe8Rc91XdCeKHF1+Rg6sbiGjr
- CLmpxFEHYzWHnOJ8JmQr3jEtGra4lVzkXxaG6SBPTQHZ7umhh2SpMdoumay8DdoA5N4D
- djeptFStV6uPlK2sYnRM2Zc1Tu6XndJAOAQ188zdHfZzyMt97Z6gmHpyuH+hpYntr+2Z
- FTQxqDcGi3alFCgxo5MAQVhR+TJbD7F+EbrvTEvc6D8kSdmspGPWVFOpy76tL/qv8lO3
- 24irRBmQa3HkE+ygVdcVB1tdEc16pRmR4iKgqy/Ibl9S1noSsRvI3dDuxCnAGmoVgT4H
- Ho0g==
+ bh=bt4zRQBOYHSax/cei+k4mZ/WSu+wxrkNEI8A1aplspU=;
+ b=OKjt5Xfn7PgIG0b4TOVkEhRX/bEV54OmRiN8UxgEmvJJznG9LF8MEcIDEeQOPl6P3R
+ 49ssEJWC6d4/gQa3aoBlZE2io2psOf2HqPzbVsHIfVnGsd4bb/DBbd312EG/SxKo1fR/
+ hJjoauBumGpvs+NhSDrbNbz5na0lZjzX58OMg9of/Ju+dgSuzxG8T7m/D7jIrE/UTIRi
+ vuie5cX1a/kEriu1gEI6u/KCY7yzTfHh+qxLllxiahb0/D50SxjjqhVhU5oTUI4gwnN5
+ LjhMLFmkPZoil8CKjGg1JD8AYAIvT5iFfoeZqKBz2IM8p6S2vp1DcGNMk2bcoTDKAitL
+ 8Nog==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWJI7tNJOssg/oJ5HjNhdbOOOKLaQPug9LkG1gFWGeCVs2yYIMiVuSzG/AaRIM/m8/2xHmbMBrdUAtv@nongnu.org
-X-Gm-Message-State: AOJu0Ywf0n6b9rah1FN5q3OXHv8s0XxscSx4lvIzyXfCr7IduVRGlMg3
- A1VAc4IB/OHDV4z6H3/SEaCJ9hjevHWWMQq958DcGtbOmQ0zS1XNVI4bk8OiGZc=
-X-Gm-Gg: ASbGncuZ6aRSKeRjO5PEzDoSFEG/pMp9G72In08t7xGST+OieS4TtSwD8MiuVVwt0/H
- wyatBGTxsUWWuQNSf9ZyXX7q1WkGKOnOTyHoaaJsZ+AKOSZ4PROmrJJrNYtArHcoOFJd7EkAfuc
- iVfmZElr0+WMWZ9jb8mCYPoDWCRgnokE/CTLjtQDG+QIW3tZle8DsKTwmuQAT0zzk/EY/unYylE
- F5vTJdw3lruTmHbl5p/QujCpH/BP2RSi+38rgSgZNjlbCJDvH+K6qw4Yj8MxkpxuJpd+46+QfvY
- MMjhLgx05CE8H9Pb6g1D4ojv2CmsHyBe0AW1763zPKyXI/9VqzwJFiBI4GmJkY9yZ2AIZkhYSKj
- dkTH+uWL8XWxrd0gokNJJbOA=
-X-Google-Smtp-Source: AGHT+IFGlaTJIgxPDUWlYnZAtrIDJ6AvK54lJzRxChoydGs0UWkGcbT0YrnFGKKhSUYA6CTADoqEtw==
-X-Received: by 2002:a05:6a00:174c:b0:736:450c:fa54 with SMTP id
- d2e1a72fcca58-736aa9f132fmr33383943b3a.6.1741866038094; 
- Thu, 13 Mar 2025 04:40:38 -0700 (PDT)
-Received: from ?IPV6:2804:7f0:bcc0:89fc:59f0:a5a7:feb2:304e?
- ([2804:7f0:bcc0:89fc:59f0:a5a7:feb2:304e])
+ AJvYcCVc3l+Atq+7pnQgvRdPJcPeGU3hmgJpD5nE9vKrqiD0xy8XftadUeCaaA6/kUm5pyBTpdxZKbxA5LHt@nongnu.org
+X-Gm-Message-State: AOJu0YzxewnTfCbLLG+ocIa+IVEZjC2t67ChNR20q8HxRb3cLgKcSnDa
+ WwF58RUrIOpz90On9HZEdIrEImyGrkbupYvLtW3htDa8rXzpnYby5YGMEUfepQ0=
+X-Gm-Gg: ASbGncvX6t5usoHeyTPMnozLa72T2XC5dmp3P0pa9Dy26j9ncJItn/RbSGBOHtX6YOF
+ S/aOO2x7bJkHlU8bA27/Jvmoc5ShxzEni31dta3z+dvtIB2RabBZAu2tBVpkzWoWhqeqvuwW+VD
+ WSvkDiYgYvolD/hYM6tmEVqqF9ZYmiMkcpDKLha50/f7NVdfxo7o7c+e4INB+IKgXR15KUIokJ5
+ 6UbNZgaJwcq8tsVfZjfdHMq3+S34nvTBTfHkmI+WL0UrWoEuBCRF7JMhWjaO40SyLy4vqnGqd/t
+ Dv/2Eskp7ooUPzwHU96lrsTTyHX4dCzH9QchOPOGFwtnJ6AmXZ3xFPPnJzE=
+X-Google-Smtp-Source: AGHT+IEF4eUalHT6nffszNuhAjnWCNNoONl1J2H1VHaxg6T0KJUcji1SE9KlnWY53nzFqwLBG4ACTw==
+X-Received: by 2002:a17:90b:4c48:b0:2ea:a9ac:eee1 with SMTP id
+ 98e67ed59e1d1-300ff0d49damr15551960a91.10.1741869493007; 
+ Thu, 13 Mar 2025 05:38:13 -0700 (PDT)
+Received: from [192.168.68.110] ([177.170.117.79])
  by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-73711559289sm1149037b3a.68.2025.03.13.04.40.34
+ 98e67ed59e1d1-30138b5d279sm1235975a91.26.2025.03.13.05.38.10
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 13 Mar 2025 04:40:37 -0700 (PDT)
-Message-ID: <bb50a8a4-9d82-4f57-b1d6-b2e6b4b95212@ventanamicro.com>
-Date: Thu, 13 Mar 2025 08:40:32 -0300
+ Thu, 13 Mar 2025 05:38:12 -0700 (PDT)
+Message-ID: <871134bb-9627-4403-80c0-ede30216e978@ventanamicro.com>
+Date: Thu, 13 Mar 2025 09:38:08 -0300
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/5] target/riscv: pmp: don't allow RLB to bypass rule
- privileges
+Subject: Re: [PATCH 2/5] target/riscv: pmp: move Smepmp operation conversion
+ into a function
 To: =?UTF-8?Q?Lo=C3=AFc_Lefort?= <loic@rivosinc.com>, qemu-devel@nongnu.org
 Cc: Alistair Francis <alistair.francis@wdc.com>,
  Palmer Dabbelt <palmer@dabbelt.com>, Weiwei Li <liwei1518@gmail.com>,
  qemu-riscv@nongnu.org, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
 References: <20250225160052.39564-1-loic@rivosinc.com>
- <20250225160052.39564-2-loic@rivosinc.com>
+ <20250225160052.39564-3-loic@rivosinc.com>
 Content-Language: en-US
 From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <20250225160052.39564-2-loic@rivosinc.com>
+In-Reply-To: <20250225160052.39564-3-loic@rivosinc.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::630;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pl1-x630.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1036;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pj1-x1036.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -111,166 +109,60 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 
 On 2/25/25 1:00 PM, Loïc Lefort wrote:
-> When Smepmp is supported, RLB allows bypassing locks when writing CSRs but
-> should not affect interpretation of actual PMP rules.
-> 
-> pmp_is_locked is changed to only check LOCK bit and a new pmp_is_readonly
-> function is added that checks both LOCK bit and mseccfg.RLB. pmp_write_cfg and
-> pmpaddr_csr_write are changed to use pmp_is_readonly while pmp_hart_has_privs
-> keeps using pmp_is_locked.
-
-
-Note that this change (removing  MSECCFG_RLB_ISSET(env) check from pmp_is_locked())
-can impact the behavior of at least one caller in pmp_hart_has_privs():
-
-
-             if (!MSECCFG_MML_ISSET(env)) {
-                 /*
-                  * If mseccfg.MML Bit is not set, do pmp priv check
-                  * This will always apply to regular PMP.
-                  */
-                 *allowed_privs = PMP_READ | PMP_WRITE | PMP_EXEC;
-                 if ((mode != PRV_M) || pmp_is_locked(env, i)) {
-                     *allowed_privs &= env->pmp_state.pmp[i].cfg_reg;
-                 }
-             }
-
-Setting allowed_privs requires !MSECCFG_RLB_ISSET(env), and after this patch allowed_privs
-will be set regardless of MSECCFG_RLB_ISSET(env), at least w.r.t how pmp_is_locked() works.
-
-This might not be an issue and there's not behavioral change. In this case it would be good
-to mention in the commit msg why this is the case.
-
-We can just add a !MSECCFG_RLB_ISSET(env) at this point to preserve behavior too.
-
-
-> 
 > Signed-off-by: Loïc Lefort <loic@rivosinc.com>
 > ---
->   target/riscv/pmp.c | 43 ++++++++++++++++++++++++-------------------
->   1 file changed, 24 insertions(+), 19 deletions(-)
+
+Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+
+>   target/riscv/pmp.c | 22 ++++++++++++----------
+>   1 file changed, 12 insertions(+), 10 deletions(-)
 > 
 > diff --git a/target/riscv/pmp.c b/target/riscv/pmp.c
-> index 85ab270dad..ddb7e0d23c 100644
+> index ddb7e0d23c..b7f1430ff8 100644
 > --- a/target/riscv/pmp.c
 > +++ b/target/riscv/pmp.c
-> @@ -45,11 +45,6 @@ static inline uint8_t pmp_get_a_field(uint8_t cfg)
->    */
->   static inline int pmp_is_locked(CPURISCVState *env, uint32_t pmp_index)
->   {
-> -    /* mseccfg.RLB is set */
-> -    if (MSECCFG_RLB_ISSET(env)) {
-> -        return 0;
-> -    }
-> -
->       if (env->pmp_state.pmp[pmp_index].cfg_reg & PMP_LOCK) {
->           return 1;
->       }
-> @@ -62,6 +57,15 @@ static inline int pmp_is_locked(CPURISCVState *env, uint32_t pmp_index)
->       return 0;
->   }
+> @@ -31,6 +31,15 @@ static bool pmp_write_cfg(CPURISCVState *env, uint32_t addr_index,
+>                             uint8_t val);
+>   static uint8_t pmp_read_cfg(CPURISCVState *env, uint32_t addr_index);
 >   
 > +/*
-> + * Check whether a PMP is locked for writing or not.
-> + * (i.e. has LOCK flag and mseccfg.RLB is unset)
+> + * Convert the PMP permissions to match the truth table in the Smepmp spec.
 > + */
-> +static int pmp_is_readonly(CPURISCVState *env, uint32_t pmp_index)
+> +static inline uint8_t pmp_get_smepmp_operation(uint8_t cfg)
 > +{
-> +    return pmp_is_locked(env, pmp_index) && !MSECCFG_RLB_ISSET(env);
+> +    return ((cfg & PMP_LOCK) >> 4) | ((cfg & PMP_READ) << 2) |
+> +           (cfg & PMP_WRITE) | ((cfg & PMP_EXEC) >> 2);
 > +}
 > +
 >   /*
->    * Count the number of active rules.
+>    * Accessor method to extract address matching type 'a field' from cfg reg
 >    */
-> @@ -90,39 +94,40 @@ static inline uint8_t pmp_read_cfg(CPURISCVState *env, uint32_t pmp_index)
->   static bool pmp_write_cfg(CPURISCVState *env, uint32_t pmp_index, uint8_t val)
->   {
->       if (pmp_index < MAX_RISCV_PMPS) {
-> -        bool locked = true;
-> +        bool readonly = true;
+> @@ -357,16 +366,6 @@ bool pmp_hart_has_privs(CPURISCVState *env, hwaddr addr,
+>           const uint8_t a_field =
+>               pmp_get_a_field(env->pmp_state.pmp[i].cfg_reg);
 >   
->           if (riscv_cpu_cfg(env)->ext_smepmp) {
->               /* mseccfg.RLB is set */
->               if (MSECCFG_RLB_ISSET(env)) {
-> -                locked = false;
-> +                readonly = false;
->               }
->   
->               /* mseccfg.MML is not set */
-> -            if (!MSECCFG_MML_ISSET(env) && !pmp_is_locked(env, pmp_index)) {
-> -                locked = false;
-> +            if (!MSECCFG_MML_ISSET(env) && !pmp_is_readonly(env, pmp_index)) {
-> +                readonly = false;
->               }
->   
->               /* mseccfg.MML is set */
->               if (MSECCFG_MML_ISSET(env)) {
->                   /* not adding execute bit */
->                   if ((val & PMP_LOCK) != 0 && (val & PMP_EXEC) != PMP_EXEC) {
-> -                    locked = false;
-> +                    readonly = false;
->                   }
->                   /* shared region and not adding X bit */
->                   if ((val & PMP_LOCK) != PMP_LOCK &&
->                       (val & 0x7) != (PMP_WRITE | PMP_EXEC)) {
-> -                    locked = false;
-> +                    readonly = false;
->                   }
->               }
->           } else {
-> -            if (!pmp_is_locked(env, pmp_index)) {
-> -                locked = false;
-> +            if (!pmp_is_readonly(env, pmp_index)) {
-> +                readonly = false;
-
-Here we can do:
-
-                   readonly = pmp_is_readonly(env, pmp_index);
-
-And spare an extra if.
-
-
-Thanks,
-
-Daniel
-
->               }
->           }
->   
-> -        if (locked) {
-> -            qemu_log_mask(LOG_GUEST_ERROR, "ignoring pmpcfg write - locked\n");
-> +        if (readonly) {
-> +            qemu_log_mask(LOG_GUEST_ERROR,
-> +                          "ignoring pmpcfg write - read only\n");
->           } else if (env->pmp_state.pmp[pmp_index].cfg_reg != val) {
->               /* If !mseccfg.MML then ignore writes with encoding RW=01 */
->               if ((val & PMP_WRITE) && !(val & PMP_READ) &&
-> @@ -524,14 +529,14 @@ void pmpaddr_csr_write(CPURISCVState *env, uint32_t addr_index,
->               uint8_t pmp_cfg = env->pmp_state.pmp[addr_index + 1].cfg_reg;
->               is_next_cfg_tor = PMP_AMATCH_TOR == pmp_get_a_field(pmp_cfg);
->   
-> -            if (pmp_is_locked(env, addr_index + 1) && is_next_cfg_tor) {
-> +            if (pmp_is_readonly(env, addr_index + 1) && is_next_cfg_tor) {
->                   qemu_log_mask(LOG_GUEST_ERROR,
-> -                              "ignoring pmpaddr write - pmpcfg + 1 locked\n");
-> +                              "ignoring pmpaddr write - pmpcfg+1 read only\n");
->                   return;
->               }
->           }
->   
-> -        if (!pmp_is_locked(env, addr_index)) {
-> +        if (!pmp_is_readonly(env, addr_index)) {
->               if (env->pmp_state.pmp[addr_index].addr_reg != val) {
->                   env->pmp_state.pmp[addr_index].addr_reg = val;
->                   pmp_update_rule_addr(env, addr_index);
-> @@ -542,7 +547,7 @@ void pmpaddr_csr_write(CPURISCVState *env, uint32_t addr_index,
->               }
->           } else {
->               qemu_log_mask(LOG_GUEST_ERROR,
-> -                          "ignoring pmpaddr write - locked\n");
-> +                          "ignoring pmpaddr write - read only\n");
->           }
->       } else {
->           qemu_log_mask(LOG_GUEST_ERROR,
+> -        /*
+> -         * Convert the PMP permissions to match the truth table in the
+> -         * Smepmp spec.
+> -         */
+> -        const uint8_t smepmp_operation =
+> -            ((env->pmp_state.pmp[i].cfg_reg & PMP_LOCK) >> 4) |
+> -            ((env->pmp_state.pmp[i].cfg_reg & PMP_READ) << 2) |
+> -            (env->pmp_state.pmp[i].cfg_reg & PMP_WRITE) |
+> -            ((env->pmp_state.pmp[i].cfg_reg & PMP_EXEC) >> 2);
+> -
+>           if (((s + e) == 2) && (PMP_AMATCH_OFF != a_field)) {
+>               /*
+>                * If the PMP entry is not off and the address is in range,
+> @@ -385,6 +384,9 @@ bool pmp_hart_has_privs(CPURISCVState *env, hwaddr addr,
+>                   /*
+>                    * If mseccfg.MML Bit set, do the enhanced pmp priv check
+>                    */
+> +                const uint8_t smepmp_operation =
+> +                    pmp_get_smepmp_operation(env->pmp_state.pmp[i].cfg_reg);
+> +
+>                   if (mode == PRV_M) {
+>                       switch (smepmp_operation) {
+>                       case 0:
 
 
