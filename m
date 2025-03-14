@@ -4,101 +4,107 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B60F1C282EC
-	for <qemu-riscv@archiver.kernel.org>; Fri, 14 Mar 2025 16:45:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CD5DCC35FF1
+	for <qemu-riscv@archiver.kernel.org>; Fri, 14 Mar 2025 17:21:01 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tt8AH-00065f-2W; Fri, 14 Mar 2025 12:45:41 -0400
+	id 1tt8iI-0000gA-LF; Fri, 14 Mar 2025 13:20:50 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from
- <bounce-md_30504962.67d43086.v1-957ea96c0f704cfba5fbb6ca474f632c@bounce.vates.tech>)
- id 1tt5Sl-00033h-Px
- for qemu-riscv@nongnu.org; Fri, 14 Mar 2025 09:52:36 -0400
-Received: from mail177-1.suw61.mandrillapp.com ([198.2.177.1])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from
- <bounce-md_30504962.67d43086.v1-957ea96c0f704cfba5fbb6ca474f632c@bounce.vates.tech>)
- id 1tt5Si-0000ec-Qc
- for qemu-riscv@nongnu.org; Fri, 14 Mar 2025 09:52:35 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mandrillapp.com;
- s=mte1; t=1741959302; x=1742229302;
- bh=uG1KcJgwcW9T2cGN3oyD/12pz8pEMNAmvmnymfhPGS4=;
- h=From:Subject:To:Cc:Message-Id:References:In-Reply-To:Feedback-ID:
- Date:MIME-Version:Content-Type:Content-Transfer-Encoding:CC:Date:
- Subject:From;
- b=g9hfdA/eM7vcBcCDkScEmdyush/aDVF9niLOhO1Tls29AehJMunYoTLPcqPx4URix
- /aMh2g12ndPjgUTy22QDmBO2Q/RAv0cXaFZI+qOcWz1ZgrHfQZCrr1K3y464VLIJyL
- qwG0X7PDYl8MR1m8vayWQ7hjrpV24L5fx3uL30NrDreDdDALoHwoF2h0fysd+K3iam
- uuGcNVID5TPwnEu+AzI8k4h0x2P7SOTZNSkGAuW/rTouVWcrQV+q0j9IK/9Uc1NvBZ
- Z7+4wG6V3IKm+zhLAqIfOwcWPE+QHkNe69r5WmAQgVIJNVrhCRzbohvB2D7UahSoln
- xxQo5w3wwGFsA==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech; s=mte1;
- t=1741959302; x=1742219802; i=anthony.perard@vates.tech;
- bh=uG1KcJgwcW9T2cGN3oyD/12pz8pEMNAmvmnymfhPGS4=;
- h=From:Subject:To:Cc:Message-Id:References:In-Reply-To:Feedback-ID:
- Date:MIME-Version:Content-Type:Content-Transfer-Encoding:CC:Date:
- Subject:From;
- b=JLfWifvyw3oMpzh/DIkhmNZnn3FOeOLirZx5hCQxLEpJmiyfjBrlmwr/pGpcuVoIu
- fByVYbcweMsQZSr7P+jLoVx6FJX4LBZ/iPwhvohnmYlx2QihXR4olRcsJr2TAYMy5/
- hudYvliyweXeQ59PZIeXS3fEzmoqQIVSV6WfgZ8kP/fcI+MggULGuM1sVWsTSFvWHP
- wXDJuAaRWZnF/BAQRml7SWQp9RISG2jZlaNr/J+RKpmHFJEJy5WNTAhhvlfN+4YBHH
- UwqWVJizjxihe4lGii0OSWJTOD6a2L1zM3QHS6AxlxRtem1HD3UbiF+zgVJ/AFupkT
- hzdtfbtU4eblQ==
-Received: from pmta14.mandrill.prod.suw01.rsglab.com (localhost [127.0.0.1])
- by mail177-1.suw61.mandrillapp.com (Mailchimp) with ESMTP id 4ZDljL4NMWzBsTwYN
- for <qemu-riscv@nongnu.org>; Fri, 14 Mar 2025 13:35:02 +0000 (GMT)
-From: "Anthony PERARD" <anthony.perard@vates.tech>
-Subject: =?utf-8?Q?Re:=20[PATCH=20v4=2012/17]=20hw/xen:=20add=20stubs=20for=20various=20functions?=
-Received: from [37.26.189.201] by mandrillapp.com id
- 957ea96c0f704cfba5fbb6ca474f632c; Fri, 14 Mar 2025 13:35:02 +0000
-X-Bm-Disclaimer: Yes
-X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
-X-Bm-Transport-Timestamp: 1741959300664
-To: "Pierrick Bouvier" <pierrick.bouvier@linaro.org>
-Cc: qemu-devel@nongnu.org, "Paul Durrant" <paul@xen.org>,
- "=?utf-8?Q?Philippe=20Mathieu-Daud=C3=A9?=" <philmd@linaro.org>,
- "Harsh Prateek Bora" <harshpb@linux.ibm.com>,
- "Liu Zhiwei" <zhiwei_liu@linux.alibaba.com>,
- "Edgar E. Iglesias" <edgar.iglesias@gmail.com>, xen-devel@lists.xenproject.org,
- "Peter Xu" <peterx@redhat.com>, alex.bennee@linaro.org,
- manos.pitsidianakis@linaro.org, "Stefano Stabellini" <sstabellini@kernel.org>,
- "Paolo Bonzini" <pbonzini@redhat.com>, qemu-ppc@nongnu.org,
- "Richard Henderson" <richard.henderson@linaro.org>, kvm@vger.kernel.org,
- "David Hildenbrand" <david@redhat.com>, "Palmer Dabbelt" <palmer@dabbelt.com>,
- "Weiwei Li" <liwei1518@gmail.com>, qemu-riscv@nongnu.org,
- "Alistair Francis" <alistair.francis@wdc.com>,
- "Yoshinori Sato" <ysato@users.sourceforge.jp>,
- "Daniel Henrique Barboza" <danielhb413@gmail.com>,
- "Nicholas Piggin" <npiggin@gmail.com>
-Message-Id: <Z9Qwg4PC_1bEaOLK@l14>
+ (Exim 4.90_1) (envelope-from <pierrick.bouvier@linaro.org>)
+ id 1tt8i6-0000fV-7h
+ for qemu-riscv@nongnu.org; Fri, 14 Mar 2025 13:20:38 -0400
+Received: from mail-pj1-x1032.google.com ([2607:f8b0:4864:20::1032])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <pierrick.bouvier@linaro.org>)
+ id 1tt8i2-0006hx-1A
+ for qemu-riscv@nongnu.org; Fri, 14 Mar 2025 13:20:37 -0400
+Received: by mail-pj1-x1032.google.com with SMTP id
+ 98e67ed59e1d1-30155bbbed9so1067043a91.1
+ for <qemu-riscv@nongnu.org>; Fri, 14 Mar 2025 10:20:32 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1741972832; x=1742577632; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=3Z8Ejyf5gVIQB49egYugEEvIlbhLo/s2/9aU/7U8kVY=;
+ b=nnByt/7ISSab8zmfjkf9ebyAQgZqqRA/JtoEohkmZBAPK+9t+/Pw6dsDdG5hEUTsTl
+ zM+1HZwfY0nvCXf9J1EbCHQIxKK4b0kdb+z4P2iXiqudysRp1cxDs6S5SMyR5dopZJzx
+ ZknP+izsE9Bu6PDOvuRYLC7SyJcWmtpw5WEIAsdnhi8dkexq0VILNAwFJpUUtlzcnaGr
+ W1CQVBstgiDHwU6HlVizbc4T2N4najva+X6lGOhNwH5iw3YjSPEv0aQlz2ZcDjtkxYDd
+ iq/qObx0kEGVnSU7VrzjSLCpB87KjO14bg0i5YfPSYXxFt681apgIWPpnMBpWlxme+fZ
+ 1hzA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1741972832; x=1742577632;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=3Z8Ejyf5gVIQB49egYugEEvIlbhLo/s2/9aU/7U8kVY=;
+ b=AVErxasvhiwKFEvr/dXCLPu+RLwc5iTgOnLlgBKNky3tVr7XdbXrfQSuuPIXlH54Vg
+ 3e10gTg1dEG32AruK7FcY6x/saRP0v7bEU1ImCEB4iesP8flsUpT68Tv+89qbshMeLrU
+ VVXtJJpfoJL3i9dzA0ecQLBVvqA20Up24jAjogfweJhw1iwhGCgkJPSKMqM8Avfef6rA
+ yYSvy2AUYrFo3BWXa8pcD9kiWvnc22Yas+oEplB0S5u5SdSxl8fAsPdMjp9uNHAtzHTE
+ qZ7z+OAbyyRc6AmWdTzPqJ9Gv2dxYZrZij48zAo5d4WVRf9yy/ZDWjRhaFheaQyqpZLf
+ 0vfA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXEQ/VFFa1vRUYGxnrh3uDYrTLTkk8NA7sb0tfBmsaGERzYJsLOnQpr1udbS6U+PGRKbLSYjK9h1BLp@nongnu.org
+X-Gm-Message-State: AOJu0YxkO0E+nSdtZxcLb611Lyz58r0BlEw7M3gVWwaEB0eerZQuD3pW
+ iba1rJq++2mcTAIzMSWspxQV7OF1Ya3bLd9T8wvIToX41wU+bTwMUkNXWupDbWo=
+X-Gm-Gg: ASbGncsCJNOv4EyFB+MR0jLs5sWviSw3mFcaw5xP0ybs50uyjeIIirY+hByJX5kSdhz
+ sTt4VtbeJg/4uxwmMwRaTTXG/LmJnzr4IOWQgYMAjWidXybULG85NorR8HDFgfLLI4nIt+R96aX
+ 61KVQUMpXsH/5QltBSQLNwdeyH5azf8qnSSbvuVf83eqQrdyMwTrW/RJ7LepSzHyh2eVuozex0o
+ S5DlU2NsKEX7Zbgw07/IsO4XtwvpOZdykgRHQjqiIg7mZXt//lTtGu4t+02C6EX3d2SaVbKxlgh
+ D4FN9EmosbGPaWHo8bVUe9MhlOxZojYEhUVE7na/J2C720HdeYEd2GeJMvMImMOVOM2D
+X-Google-Smtp-Source: AGHT+IH14/vkNdOBVlHqTbsYx0wGv8KV3ghiAEvAGkec1UsA+oGhZP9+b0le8JVQuRL27/WBey/Lyg==
+X-Received: by 2002:a17:90a:da87:b0:2ff:5e4e:861 with SMTP id
+ 98e67ed59e1d1-30151d9d4d8mr119507a91.24.1741972831743; 
+ Fri, 14 Mar 2025 10:20:31 -0700 (PDT)
+Received: from [192.168.1.67] ([38.39.164.180])
+ by smtp.gmail.com with ESMTPSA id
+ 98e67ed59e1d1-301539d40a1sm1393009a91.1.2025.03.14.10.20.30
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 14 Mar 2025 10:20:31 -0700 (PDT)
+Message-ID: <a04d4b3e-c2d6-4193-a95b-b8f61645dc27@linaro.org>
+Date: Fri, 14 Mar 2025 10:20:30 -0700
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v4 12/17] hw/xen: add stubs for various functions
+Content-Language: en-US
+To: Anthony PERARD <anthony.perard@vates.tech>
+Cc: qemu-devel@nongnu.org, Paul Durrant <paul@xen.org>,
+ =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
+ Harsh Prateek Bora <harshpb@linux.ibm.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
+ xen-devel@lists.xenproject.org, Peter Xu <peterx@redhat.com>,
+ alex.bennee@linaro.org, manos.pitsidianakis@linaro.org,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ Paolo Bonzini <pbonzini@redhat.com>, qemu-ppc@nongnu.org,
+ Richard Henderson <richard.henderson@linaro.org>, kvm@vger.kernel.org,
+ David Hildenbrand <david@redhat.com>, Palmer Dabbelt <palmer@dabbelt.com>,
+ Weiwei Li <liwei1518@gmail.com>, qemu-riscv@nongnu.org,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Yoshinori Sato <ysato@users.sourceforge.jp>,
+ Daniel Henrique Barboza <danielhb413@gmail.com>,
+ Nicholas Piggin <npiggin@gmail.com>
 References: <20250313163903.1738581-1-pierrick.bouvier@linaro.org>
  <20250313163903.1738581-13-pierrick.bouvier@linaro.org>
-In-Reply-To: <20250313163903.1738581-13-pierrick.bouvier@linaro.org>
-X-Native-Encoded: 1
-X-Report-Abuse: =?UTF-8?Q?Please=20forward=20a=20copy=20of=20this=20message,
- =20including=20all=20headers,
- =20to=20abuse@mandrill.com.=20You=20can=20also=20report=20abuse=20here:=20https://mandrillapp.com/contact/abuse=3Fid=3D30504962.957ea96c0f704cfba5fbb6ca474f632c?=
-X-Mandrill-User: md_30504962
-Feedback-ID: 30504962:30504962.20250314:md
-Date: Fri, 14 Mar 2025 13:35:02 +0000
-MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
+ <Z9Qwg4PC_1bEaOLK@l14>
+From: Pierrick Bouvier <pierrick.bouvier@linaro.org>
+In-Reply-To: <Z9Qwg4PC_1bEaOLK@l14>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=198.2.177.1;
- envelope-from=bounce-md_30504962.67d43086.v1-957ea96c0f704cfba5fbb6ca474f632c@bounce.vates.tech;
- helo=mail177-1.suw61.mandrillapp.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1032;
+ envelope-from=pierrick.bouvier@linaro.org; helo=mail-pj1-x1032.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_MED=-0.001,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_VALIDITY_CERTIFIED_BLOCKED=0.001,
- RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001, SPF_HELO_PASS=-0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
-X-Mailman-Approved-At: Fri, 14 Mar 2025 12:45:38 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -113,39 +119,40 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Thu, Mar 13, 2025 at 09:38:58AM -0700, Pierrick Bouvier wrote:
-> Those functions are used by system/physmem.c, and are called only if
-> xen is enabled (which happens only if CONFIG_XEN is not set).
-
-You mean, 's/is not set/is set/'?
+On 3/14/25 06:35, Anthony PERARD wrote:
+> On Thu, Mar 13, 2025 at 09:38:58AM -0700, Pierrick Bouvier wrote:
+>> Those functions are used by system/physmem.c, and are called only if
+>> xen is enabled (which happens only if CONFIG_XEN is not set).
 > 
-> So we can crash in case those are called.
+> You mean, 's/is not set/is set/'?
+
+Right, I'll update the comment.
+
+>>
+>> So we can crash in case those are called.
+>>
+>> Acked-by: Richard Henderson <richard.henderson@linaro.org>
+>> Signed-off-by: Pierrick Bouvier <pierrick.bouvier@linaro.org>
+>> ---
+>> diff --git a/hw/xen/xen_stubs.c b/hw/xen/xen_stubs.c
+>> new file mode 100644
+>> index 00000000000..19cee84bbb4
+>> --- /dev/null
+>> +++ b/hw/xen/xen_stubs.c
+>> +
+>> +void xen_invalidate_map_cache(void)
+>> +{
 > 
-> Acked-by: Richard Henderson <richard.henderson@linaro.org>
-> Signed-off-by: Pierrick Bouvier <pierrick.bouvier@linaro.org>
-> ---
-> diff --git a/hw/xen/xen_stubs.c b/hw/xen/xen_stubs.c
-> new file mode 100644
-> index 00000000000..19cee84bbb4
-> --- /dev/null
-> +++ b/hw/xen/xen_stubs.c
-> +
-> +void xen_invalidate_map_cache(void)
-> +{
+> Is this stub actually necessary? xen_invalidate_map_cache() doesn't
+> seems to be used outside of xen's code.
+>
 
-Is this stub actually necessary? xen_invalidate_map_cache() doesn't
-seems to be used outside of xen's code.
+You're right again, I added it by mistake.
 
-In anycase:
-Acked-by: Anthony PERARD <anthony.perard@vates.tech>
+> In anycase:
+> Acked-by: Anthony PERARD <anthony.perard@vates.tech>
+> 
+> Thanks,
+> 
 
-Thanks,
-
--- 
-
-Anthony Perard | Vates XCP-ng Developer
-
-XCP-ng & Xen Orchestra - Vates solutions
-
-web: https://vates.tech
 
