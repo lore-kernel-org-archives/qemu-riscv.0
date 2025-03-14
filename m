@@ -4,66 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 80A5FC282EC
-	for <qemu-riscv@archiver.kernel.org>; Fri, 14 Mar 2025 17:35:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5D592C282EC
+	for <qemu-riscv@archiver.kernel.org>; Fri, 14 Mar 2025 17:35:45 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tt8tf-0005sA-Bo; Fri, 14 Mar 2025 13:32:35 -0400
+	id 1tt8to-0005wx-3J; Fri, 14 Mar 2025 13:32:44 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <pierrick.bouvier@linaro.org>)
- id 1tt8t6-0005ad-3W
+ id 1tt8t6-0005ac-2A
  for qemu-riscv@nongnu.org; Fri, 14 Mar 2025 13:32:01 -0400
 Received: from mail-pl1-x633.google.com ([2607:f8b0:4864:20::633])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <pierrick.bouvier@linaro.org>)
- id 1tt8t0-0008F1-NJ
- for qemu-riscv@nongnu.org; Fri, 14 Mar 2025 13:31:59 -0400
+ id 1tt8sz-0008EL-Fb
+ for qemu-riscv@nongnu.org; Fri, 14 Mar 2025 13:31:58 -0400
 Received: by mail-pl1-x633.google.com with SMTP id
- d9443c01a7336-22423adf751so38666105ad.2
- for <qemu-riscv@nongnu.org>; Fri, 14 Mar 2025 10:31:53 -0700 (PDT)
+ d9443c01a7336-225b5448519so44944555ad.0
+ for <qemu-riscv@nongnu.org>; Fri, 14 Mar 2025 10:31:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1741973513; x=1742578313; darn=nongnu.org;
+ d=linaro.org; s=google; t=1741973512; x=1742578312; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=bYYGOsy+zcSjxVOnigwMonGaAhWbZB7W76ZyOX5Jlgc=;
- b=H9duQxFvfjDJ/5RWK7zM0lYMQNiNW83G69CdomQndShsG0t/7YILuSCNLqX2ihNS/D
- i+B6XoQzVfYWuwsauMEUySfWjVi1N4w+JhsXwe/vPgkkjVOGKkk3bHnYW9NbwQzDd/WL
- BSGO47p2tQV2Zi9v0WOTK+B3XwknoHEsl2G1BKwEymS5tGs/2zHGaFGBzJAA4YPamiyV
- P5J14SyIpc3YZ2UKY2Lu86TH9yVmHCwzgBPWMsTdp8qu847nuevOTU98prGZ+SO5EgNC
- /4Fa49yUr2Xc/68pP6D/Q2tXMT80Pfzs8TI8hDv+nd1O47rMk3JrgtD9kfsTqICx8tyL
- FUOQ==
+ bh=mZcjdDtX1Z7JVvsuWgguTldfqVr7ZBWkV3i9i17ooa8=;
+ b=n+LwXw0DzB9F+4gUKwR92e7oiExEn2dwLtkupXqVKhhxEdf31YZCvsAHTbgC+mVvbk
+ VzZP4wxpBTu6Uk7w61RzbQs644Fo226eyqfViBtaVUY3kIdpgLYk5uiIvWrSg3jJYrYM
+ EJ2l6cZejtER1Ch4BKNyU9+RrmmrVjuGgHNSqaGhw2Q4Z/u9wU9qyqJs1B55HGWj2T8a
+ HoNdT+Qcat+DTyqiirZ08n6mDtGIdByWOkWf9lce9RVgd1pHBQr8Gci/pjc8C3x79cAB
+ 8gO1Bt8QkA9uGUpkGLA1tP/GSs6QXHWGdLdQ5ehnwqB7Pgwz3c3pdkBTHl9PdFGAzrkB
+ YJWw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741973513; x=1742578313;
+ d=1e100.net; s=20230601; t=1741973512; x=1742578312;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=bYYGOsy+zcSjxVOnigwMonGaAhWbZB7W76ZyOX5Jlgc=;
- b=faNnCONDbLdYb4o0MJA3hZWs5S2MRc0LbS6JWuKj9ac6jGukd/xLXSfBwP5LoScg2+
- b+LsgUzhzle/6stF0VhXsMYUehDtT3ZBhPNLYlYAausBiHgFXZ384R6FTCbZbHjFthV2
- NfEPYm3mCKRR4KkDsqtd6ziM+Ey4k6nID14HI4WdRgVYgqlnG4p7woQwxVU9eurrPIga
- pYtIT9CLE7Iykf3/Rtai1KAAQvs0p3bqjRoZUBFXyWSAysDAQkbxgenbAQG+uckF+AhO
- rZx4h7KVgaCeWn2XlJ6Uf/8Y310E2npHl7GizvrPNUU1Vc6qxtiy7pp4x9eFcDfiNHei
- DXLw==
+ bh=mZcjdDtX1Z7JVvsuWgguTldfqVr7ZBWkV3i9i17ooa8=;
+ b=Kgx+fg+cL5rbO8Z9RUAZ4eBlF4+gypf0T0yckTs6KIV9TUH2zDiDNXmGdfTVCc1xtZ
+ zxE++oaucCTtDGn6bDlWH6JWP5OQ7w/QdDR7GRDzAWEYbAvohv9wYzuQLz6+hzNMyAEN
+ Fu5YdivzJV0feH6skRah6CNrCwsyJ04TzaWV7i9thIUCZMLVVT5O6eq33c3VowR2HvIU
+ 7MUqRJBZCeEJ4rgyXLyeKJ64u21aFDL7ka5KZfNSKDR4ilWKQrJZeEpzjdkRrWuxZ/5T
+ t80VF6P9PU1VjSsLyIzZPxqmTNzQoMAMn+zqeUcwO5D0tJKBshztlWPI6B47HENvZn3X
+ GHIQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCX98Gx8IqRzJvqdug51Mf7gf/0baAcYtBqkPC4KH7HU4hhnj+0ZneXQAgbqt/SyYLpVR5n11W4jjB6l@nongnu.org
-X-Gm-Message-State: AOJu0YxLmM39fAUJmoN/Sqaj39uNiiLUXjrWUzfKrRaPjd+uJfuBaqLa
- as2fCSdLTDwWsR55uQ9NykE/cswyq+22d3xR86DFJ04tAIrvMKP2ptVp8BXmIjw=
-X-Gm-Gg: ASbGncu/O5Pz5IjnGt4sHHzMX2r1KKJ3WB4Xfs+YgiqiqjYEncHEr+r4deVRfoQvvc0
- 0zGWIMUTTwo3uZp9VF9db7nvau0m45pazOQelqnOSeh0Qv9B8lp3uUAGNlAxKH27InrAzmZyT1U
- BWtXIXgdBBdGmAUzd11twLSP0m+rCUNyzDBxgvGA+A47h4Y5SVbqnR2mww8niexTxHvgPMuBJFi
- hx5sp+keJtGw4TWKRMyKjBg/6J9ynXtWvoS38v93J4tY0XHZkwWlxajOzAAu6+5I9Ha0Euhe1N3
- o3pIuPbMGjGGvojO9YPun6VcLGLDUafAWrxr9a8qtGyP
-X-Google-Smtp-Source: AGHT+IHKJWanCd9a3ngVFjdniRCV0nA3qgwDHy2sNxgD5gHXjvzGRnW7PF30BgY1b31dJB7uC0Yy3g==
-X-Received: by 2002:a05:6a21:7308:b0:1f5:64fd:68eb with SMTP id
- adf61e73a8af0-1f5c1137439mr5964561637.7.1741973513079; 
- Fri, 14 Mar 2025 10:31:53 -0700 (PDT)
+ AJvYcCXkmElAPH+FvoPv4MODPj9t6A308W6y3bTFv+aNyqK8enChObDa7t2QNjSIF/3x0ZNZWE66w60Be3wL@nongnu.org
+X-Gm-Message-State: AOJu0YwGEKzxG30Oo1yH6JOVnLQ9ACFh7lVkvozOGEQQgX8lhJXObldH
+ AcXRlstT32d62U/mwnpNm9UTpIQ+hz41oIXqaTNHaQ83Z6LcpxM2QFyhke1ZKmmGAtJTivNQYMR
+ 0smo=
+X-Gm-Gg: ASbGncvbCCa6yowATKHsdN+VN5KaaSP77m7bucUhcK6Icq3ajWIga/xtd6KOfZml0vM
+ bNo7S79xjOFThx0+qhaR6OiyceG9iVOGRS/B8ghA6h5m2aZ0ipTlnLSamDNrPuBmZtPEJFCGpoE
+ 1kb02w47cWT5eMQGVN8ofQcd6VaIk5YTKJs7DpLXyyPWkrSLtUp3NEkxl6Mq7jEo1FzjKrxlg4B
+ /Hm1R5fuTXlRRSlRzke3Knmvw5pF16qMAqvKyWMLHlI621PYc2o2JhsZJ88w5A3tgcHB7LTG+no
+ zUPXdi7b5Q/yF74YCheqsOqjMFSETkoboYDy5/HZqrHJ
+X-Google-Smtp-Source: AGHT+IEORLbJQZPgomOf1sDjTcDkAnGl+mlFCK1VHaTDHzBWmfJYoIo2+c2hSAC++5jNWglDm/0AKA==
+X-Received: by 2002:a05:6a21:502:b0:1f5:8179:4f47 with SMTP id
+ adf61e73a8af0-1f5c11d86e1mr5274835637.20.1741973511929; 
+ Fri, 14 Mar 2025 10:31:51 -0700 (PDT)
 Received: from pc.. ([38.39.164.180]) by smtp.gmail.com with ESMTPSA id
- 41be03b00d2f7-af56e9cd03bsm2990529a12.8.2025.03.14.10.31.52
+ 41be03b00d2f7-af56e9cd03bsm2990529a12.8.2025.03.14.10.31.50
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 14 Mar 2025 10:31:52 -0700 (PDT)
+ Fri, 14 Mar 2025 10:31:51 -0700 (PDT)
 From: Pierrick Bouvier <pierrick.bouvier@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: qemu-ppc@nongnu.org, Yoshinori Sato <ysato@users.sourceforge.jp>,
@@ -83,9 +84,10 @@ Cc: qemu-ppc@nongnu.org, Yoshinori Sato <ysato@users.sourceforge.jp>,
  Stefano Stabellini <sstabellini@kernel.org>,
  Paolo Bonzini <pbonzini@redhat.com>, Weiwei Li <liwei1518@gmail.com>,
  Pierrick Bouvier <pierrick.bouvier@linaro.org>
-Subject: [PATCH v5 07/17] exec/exec-all: remove dependency on cpu.h
-Date: Fri, 14 Mar 2025 10:31:29 -0700
-Message-Id: <20250314173139.2122904-8-pierrick.bouvier@linaro.org>
+Subject: [PATCH v5 06/17] codebase: prepare to remove cpu.h from
+ exec/exec-all.h
+Date: Fri, 14 Mar 2025 10:31:28 -0700
+Message-Id: <20250314173139.2122904-7-pierrick.bouvier@linaro.org>
 X-Mailer: git-send-email 2.39.5
 In-Reply-To: <20250314173139.2122904-1-pierrick.bouvier@linaro.org>
 References: <20250314173139.2122904-1-pierrick.bouvier@linaro.org>
@@ -115,26 +117,105 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Previous commit changed files relying transitively on it.
-
 Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 Signed-off-by: Pierrick Bouvier <pierrick.bouvier@linaro.org>
 ---
- include/exec/exec-all.h | 1 -
- 1 file changed, 1 deletion(-)
+ include/tcg/tcg-op.h           | 1 +
+ target/ppc/helper_regs.h       | 2 ++
+ hw/ppc/spapr_nested.c          | 1 +
+ hw/sh4/sh7750.c                | 1 +
+ page-vary-target.c             | 2 +-
+ target/ppc/tcg-excp_helper.c   | 1 +
+ target/riscv/bitmanip_helper.c | 2 +-
+ 7 files changed, 8 insertions(+), 2 deletions(-)
 
-diff --git a/include/exec/exec-all.h b/include/exec/exec-all.h
-index dd5c40f2233..19b0eda44a7 100644
---- a/include/exec/exec-all.h
-+++ b/include/exec/exec-all.h
-@@ -20,7 +20,6 @@
- #ifndef EXEC_ALL_H
- #define EXEC_ALL_H
+diff --git a/include/tcg/tcg-op.h b/include/tcg/tcg-op.h
+index a02850583bd..bc46b5570c4 100644
+--- a/include/tcg/tcg-op.h
++++ b/include/tcg/tcg-op.h
+@@ -9,6 +9,7 @@
+ #define TCG_TCG_OP_H
  
--#include "cpu.h"
- #if defined(CONFIG_USER_ONLY)
+ #include "tcg/tcg-op-common.h"
++#include "exec/target_long.h"
+ 
+ #ifndef TARGET_LONG_BITS
+ #error must include QEMU headers
+diff --git a/target/ppc/helper_regs.h b/target/ppc/helper_regs.h
+index 8196c1346dc..b928c2c452d 100644
+--- a/target/ppc/helper_regs.h
++++ b/target/ppc/helper_regs.h
+@@ -20,6 +20,8 @@
+ #ifndef HELPER_REGS_H
+ #define HELPER_REGS_H
+ 
++#include "target/ppc/cpu.h"
++
+ void hreg_swap_gpr_tgpr(CPUPPCState *env);
+ void hreg_compute_hflags(CPUPPCState *env);
+ void hreg_update_pmu_hflags(CPUPPCState *env);
+diff --git a/hw/ppc/spapr_nested.c b/hw/ppc/spapr_nested.c
+index 201f6292033..a79e398c132 100644
+--- a/hw/ppc/spapr_nested.c
++++ b/hw/ppc/spapr_nested.c
+@@ -2,6 +2,7 @@
+ #include "qemu/cutils.h"
+ #include "exec/exec-all.h"
+ #include "exec/cputlb.h"
++#include "exec/target_long.h"
+ #include "helper_regs.h"
+ #include "hw/ppc/ppc.h"
+ #include "hw/ppc/spapr.h"
+diff --git a/hw/sh4/sh7750.c b/hw/sh4/sh7750.c
+index 6faf0e3ca8b..41306fb6008 100644
+--- a/hw/sh4/sh7750.c
++++ b/hw/sh4/sh7750.c
+@@ -29,6 +29,7 @@
+ #include "hw/irq.h"
+ #include "hw/sh4/sh.h"
+ #include "system/system.h"
++#include "target/sh4/cpu.h"
+ #include "hw/qdev-properties.h"
+ #include "hw/qdev-properties-system.h"
+ #include "sh7750_regs.h"
+diff --git a/page-vary-target.c b/page-vary-target.c
+index 3f81144cda8..84ddeb7c26a 100644
+--- a/page-vary-target.c
++++ b/page-vary-target.c
+@@ -21,7 +21,7 @@
+ 
+ #include "qemu/osdep.h"
+ #include "exec/page-vary.h"
+-#include "exec/exec-all.h"
++#include "exec/target_page.h"
+ 
+ bool set_preferred_target_page_bits(int bits)
+ {
+diff --git a/target/ppc/tcg-excp_helper.c b/target/ppc/tcg-excp_helper.c
+index 5a189dc3d70..c422648cfdd 100644
+--- a/target/ppc/tcg-excp_helper.c
++++ b/target/ppc/tcg-excp_helper.c
+@@ -19,6 +19,7 @@
+ #include "qemu/osdep.h"
+ #include "qemu/main-loop.h"
+ #include "qemu/log.h"
++#include "target/ppc/cpu.h"
  #include "exec/cpu_ldst.h"
- #endif
+ #include "exec/exec-all.h"
+ #include "exec/helper-proto.h"
+diff --git a/target/riscv/bitmanip_helper.c b/target/riscv/bitmanip_helper.c
+index b99c4a39a1f..e9c8d7f7780 100644
+--- a/target/riscv/bitmanip_helper.c
++++ b/target/riscv/bitmanip_helper.c
+@@ -20,7 +20,7 @@
+ 
+ #include "qemu/osdep.h"
+ #include "qemu/host-utils.h"
+-#include "exec/exec-all.h"
++#include "exec/target_long.h"
+ #include "exec/helper-proto.h"
+ #include "tcg/tcg.h"
+ 
 -- 
 2.39.5
 
