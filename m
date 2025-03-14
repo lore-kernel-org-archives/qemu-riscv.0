@@ -4,67 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B3E2CC282EC
-	for <qemu-riscv@archiver.kernel.org>; Fri, 14 Mar 2025 17:37:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 79569C35FF1
+	for <qemu-riscv@archiver.kernel.org>; Fri, 14 Mar 2025 17:37:09 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tt8tx-00067N-Li; Fri, 14 Mar 2025 13:32:53 -0400
+	id 1tt8tv-00063q-6j; Fri, 14 Mar 2025 13:32:51 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <pierrick.bouvier@linaro.org>)
- id 1tt8tI-0005fS-DO
+ id 1tt8tI-0005fN-4S
  for qemu-riscv@nongnu.org; Fri, 14 Mar 2025 13:32:16 -0400
-Received: from mail-pl1-x62b.google.com ([2607:f8b0:4864:20::62b])
+Received: from mail-pl1-x62d.google.com ([2607:f8b0:4864:20::62d])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <pierrick.bouvier@linaro.org>)
- id 1tt8tD-0008IP-SJ
+ id 1tt8tD-0008HF-SV
  for qemu-riscv@nongnu.org; Fri, 14 Mar 2025 13:32:10 -0400
-Received: by mail-pl1-x62b.google.com with SMTP id
- d9443c01a7336-223594b3c6dso48659675ad.2
+Received: by mail-pl1-x62d.google.com with SMTP id
+ d9443c01a7336-2232aead377so53470365ad.0
  for <qemu-riscv@nongnu.org>; Fri, 14 Mar 2025 10:32:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1741973520; x=1742578320; darn=nongnu.org;
+ d=linaro.org; s=google; t=1741973519; x=1742578319; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=cOa15ppvF5kxsldjPkSIJYe5T0c824L9GaUvR3via0Q=;
- b=x4ccqJU2JUQQ4yet4DjM5vBu8Il7lqMZ4PMkueyUg/A4G8TO/fe7ORIXPA2F3x7clI
- jJvmHQXPhumSvRwXKjWOtjZ/+Hc/i1aIAu/Hv+X7XTWZUO6B+/8ck5A/Sp178Z4FRlU+
- nIAHYPdbt3JdT9hbdis4mAHBU3QRZ0s60mrd8vX0gLmrvwz7pcPumVOt7H2mV9Ow75Jt
- KERHQ2e2QTkgpfHXSS6P1AA1u60vFcBOJAkHkoFv0iCtM/vqgIMyVbmvVPhklOOVEF3h
- 3GbTIcbPiM/4GhTWu5YmPugR72mixdwCIt1dqiBRYVd7z1Cwu/g5pv4Irctz25FGyKAp
- g+Ng==
+ bh=WZK4IDfbpcoj/UHXYNBc9hj61CH/qnmJNHrSERoWz24=;
+ b=k285P5i9vOuCu9IxPnh7OBLSosROs8en99zv6zczWSCR9fI16nQSB1ZKJhuimUck6P
+ QMT8a2nOci676V8rchwL97ywt4v5jj/U/zANyulfkxL33nnwRCSXBlSFli+5kOwMa5Sw
+ Jct6qfL/2y3S415Be2+Ptd8kNpxao1GpH6lpRGGf/j+hkFmDGd8WtWCV3b1CJ4OIMoer
+ tK+y6vtrSwy2LRnFEm5fnT4TW9BGr8FZz0+bocPDzY7Mb8MEmkkYcNsoa5B74dEEnOhm
+ 1qH2c7ySCW4/BpS26uCJjZGCuHPfa8E+1aLs/ccFn4lUgLJloJJRCoUSFN5uUYFcOC5h
+ mfgA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741973520; x=1742578320;
+ d=1e100.net; s=20230601; t=1741973519; x=1742578319;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=cOa15ppvF5kxsldjPkSIJYe5T0c824L9GaUvR3via0Q=;
- b=YTkHKXM3ctmLYdQOWiFKGE7noPCCGPgrB9OjG7R+bVzV4l9c+dyQOemZQq7dZPa6oz
- reYdMGreQadSmV/TIjMa7UtE75E5uwUsh68CH4LpvYSRUrytfsVkycaYNkjjbFmpwyU4
- QMKxbje1mntLfxaiS/+/Ir3oD4vuaO+HuabfnQpvQdgewljv7iNsiD4ilxXZOPuL+OTY
- rVv0Nz1IYoB7gooRE+tfy9HPaN9tIV1ofczVwenHTB/lrHLkpAMH9mFLXG7+AOP+QLXz
- y/weF5UaUNOP7UCjeY/9jFWMg5VemMqYYwZqcYH/yiy+kf/H5wcSAMi26xAcBO5Byue2
- XZFQ==
+ bh=WZK4IDfbpcoj/UHXYNBc9hj61CH/qnmJNHrSERoWz24=;
+ b=BRMWCOPo7hRCL4hTi1Jyacr+nuHlF5p1OY+KislnYuq8gXm/aWar/kGyxUe/sBfxHZ
+ rfhkRnOVIaZN6r+EmTdydx3zc6N1QOS1beZcqxMw/In5kiWrv4fH1F7yt8qSgQmi1SFq
+ MyxBdtGeeDSf/hfoaTkAnn5OB1ynACrljG3Mv0Z3duTVjLQmu80qMkcrt6vk/L4no8tE
+ T6yrUN5/pH0X/2RTvy4T26I0OwU8qHJPAbMX31sOO2oI5GbsISqdQc+WKofJtWq7VT7h
+ NtN9N0fh3LxuzBn13nJ+BoeEQVDifDQFsCgNPwV9jbhHvcthAYjoU43mttQJEG+EkLIY
+ 3dPg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUZt5sDcT6DIMvyTH8MouPuRUmfvdacb8bDWoC0ynv6XlPT4AYA8Ew1nBRB91apZqAfqrL4ue4Hb090@nongnu.org
-X-Gm-Message-State: AOJu0Yx+6p7Dqm7C2WLSvKBAjKx0BzN43vt7LOxppTWPQ7xbo8N2n7zS
- wWV8zk8FMY1y5vgTO3URv6F4/ZoAGhNOwVXR0O8YHpDdVelogom+Md60HRVNsmQQzQRVn+PXfsK
- kfV0=
-X-Gm-Gg: ASbGncvU963IP9qaa/E+7DfUsbjsolk0sLCBpzRqANOK2F8KkyV128lfqGP7HNpAspq
- G9mCUJYCgZ3TNnw5Uo0os02smBktytHvi5oBCKAqEJyvjYPwy1w6hxTOBLYeLYniMN0Rri8hBju
- yyW0+5mm2EqqRa7n3pTrFlR395UJPLHsxOEpOZ1vV8yLr2sAV6uvvvhKq3vlvwR3H38zu7Wtmia
- PuEWueGUEEeIdfjOvw8NDJtevKaTM0xFC0kVqr3YXaM/ZQl+hcB6AgPm577NHuzP4rNLMgWJo5A
- UVtVP5SGPDQTe23NE6g4Nz3jxc6YxH94pyHYLsvBuPuW9q0aAiCQxS0=
-X-Google-Smtp-Source: AGHT+IFlQhNJcOD04DdXfXRzIQFpLw7YnyShzSPUUYA1tOEz0vWyEbVCk22Q9xZ8telIqsQxDa+sSQ==
-X-Received: by 2002:a05:6a21:4a8c:b0:1f0:e42e:fb1d with SMTP id
- adf61e73a8af0-1f5c1326a41mr6196288637.36.1741973520104; 
- Fri, 14 Mar 2025 10:32:00 -0700 (PDT)
+ AJvYcCWO0593Sw3NLoQogA7JhDRQYWBG9QIRtv2JxAtWv9ewH63CkOSH533EnDt1P4GJ5a+i55yfW4LEi+s3@nongnu.org
+X-Gm-Message-State: AOJu0Yx6Jsreu9+WeLgWwLmEHXHvoPSh55EfggI+UKkreMJEaWPuv/l1
+ bAyL1hMLTuw1Kuv9c9yHOXMTbvjJJ2ew0vcW6AsemQ7rXrvU6Oy61ywcF59iFiA=
+X-Gm-Gg: ASbGncsGSGKOI+2+nRIJ5EZ7ztfawhNx9Q3U4eNnQ4nztBzZqeRn578PqyDZiwN2Wrg
+ om1n6j+Jhit5kyPZ/Ev962y6k49SVephYL7KmraMXMID4MMgr7XyjQ9NFFk+TD3UdwbTnuAywK/
+ c89I+JpxUOhYu3OD13SaPcYUQGbCyidE144N4455OcD7E95e364S3QxraNukL78EugAxEaIRWru
+ L5dVQ1Yvl467N6xKzo03XNDi1aJvUMDpxQ3kX7bbdETYKwWap0V2SIIFFd52x5wFe3Ny/q9DIsl
+ QahSNQBiqE+irBufZ2ynlMjNeFLwftdus30I52h/edx4
+X-Google-Smtp-Source: AGHT+IFO+PDwMeyLa4EGhItdNdod3PivHdGg2tuOsQqj5N7me/+24tmsBkj8Jw+BltKmizpirWlssg==
+X-Received: by 2002:a05:6a00:b4e:b0:736:533b:f6fa with SMTP id
+ d2e1a72fcca58-737223bf5e7mr3790179b3a.13.1741973518933; 
+ Fri, 14 Mar 2025 10:31:58 -0700 (PDT)
 Received: from pc.. ([38.39.164.180]) by smtp.gmail.com with ESMTPSA id
- 41be03b00d2f7-af56e9cd03bsm2990529a12.8.2025.03.14.10.31.59
+ 41be03b00d2f7-af56e9cd03bsm2990529a12.8.2025.03.14.10.31.57
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 14 Mar 2025 10:31:59 -0700 (PDT)
+ Fri, 14 Mar 2025 10:31:58 -0700 (PDT)
 From: Pierrick Bouvier <pierrick.bouvier@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: qemu-ppc@nongnu.org, Yoshinori Sato <ysato@users.sourceforge.jp>,
@@ -83,18 +82,18 @@ Cc: qemu-ppc@nongnu.org, Yoshinori Sato <ysato@users.sourceforge.jp>,
  xen-devel@lists.xenproject.org,
  Stefano Stabellini <sstabellini@kernel.org>,
  Paolo Bonzini <pbonzini@redhat.com>, Weiwei Li <liwei1518@gmail.com>,
- Pierrick Bouvier <pierrick.bouvier@linaro.org>
-Subject: [PATCH v5 13/17] system/physmem: compilation unit is now common to
- all targets
-Date: Fri, 14 Mar 2025 10:31:35 -0700
-Message-Id: <20250314173139.2122904-14-pierrick.bouvier@linaro.org>
+ Pierrick Bouvier <pierrick.bouvier@linaro.org>,
+ Anthony PERARD <anthony.perard@vates.tech>
+Subject: [PATCH v5 12/17] hw/xen: add stubs for various functions
+Date: Fri, 14 Mar 2025 10:31:34 -0700
+Message-Id: <20250314173139.2122904-13-pierrick.bouvier@linaro.org>
 X-Mailer: git-send-email 2.39.5
 In-Reply-To: <20250314173139.2122904-1-pierrick.bouvier@linaro.org>
 References: <20250314173139.2122904-1-pierrick.bouvier@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::62b;
- envelope-from=pierrick.bouvier@linaro.org; helo=mail-pl1-x62b.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::62d;
+ envelope-from=pierrick.bouvier@linaro.org; helo=mail-pl1-x62d.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -117,32 +116,93 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+Those symbols are used by system/physmem.c, and are called only if
+xen_enabled() (which happens only if CONFIG_XEN is set and xen is
+available).
+
+So we can crash the stubs in case those are called, as they are linked
+only when CONFIG_XEN is not set.
+
+Acked-by: Richard Henderson <richard.henderson@linaro.org>
+Acked-by: Anthony PERARD <anthony.perard@vates.tech>
 Signed-off-by: Pierrick Bouvier <pierrick.bouvier@linaro.org>
 ---
- system/meson.build | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ hw/xen/xen_stubs.c | 51 ++++++++++++++++++++++++++++++++++++++++++++++
+ hw/xen/meson.build |  3 +++
+ 2 files changed, 54 insertions(+)
+ create mode 100644 hw/xen/xen_stubs.c
 
-diff --git a/system/meson.build b/system/meson.build
-index eec07a94513..bd82ef132e7 100644
---- a/system/meson.build
-+++ b/system/meson.build
-@@ -3,7 +3,6 @@ specific_ss.add(when: 'CONFIG_SYSTEM_ONLY', if_true: [files(
-   'ioport.c',
-   'globals-target.c',
-   'memory.c',
--  'physmem.c',
- )])
+diff --git a/hw/xen/xen_stubs.c b/hw/xen/xen_stubs.c
+new file mode 100644
+index 00000000000..5e565df3929
+--- /dev/null
++++ b/hw/xen/xen_stubs.c
+@@ -0,0 +1,51 @@
++/*
++ * Various stubs for xen functions
++ *
++ * Those functions are used only if xen_enabled(). This file is linked only if
++ * CONFIG_XEN is not set, so they should never be called.
++ *
++ * Copyright (c) 2025 Linaro, Ltd.
++ *
++ * SPDX-License-Identifier: GPL-2.0-or-later
++ */
++
++#include "qemu/osdep.h"
++#include "system/xen.h"
++#include "system/xen-mapcache.h"
++
++void xen_hvm_modified_memory(ram_addr_t start, ram_addr_t length)
++{
++    g_assert_not_reached();
++}
++
++void xen_ram_alloc(ram_addr_t ram_addr, ram_addr_t size,
++                   struct MemoryRegion *mr, Error **errp)
++{
++    g_assert_not_reached();
++}
++
++bool xen_mr_is_memory(MemoryRegion *mr)
++{
++    g_assert_not_reached();
++}
++
++void xen_invalidate_map_cache_entry(uint8_t *buffer)
++{
++    g_assert_not_reached();
++}
++
++ram_addr_t xen_ram_addr_from_mapcache(void *ptr)
++{
++    g_assert_not_reached();
++}
++
++uint8_t *xen_map_cache(MemoryRegion *mr,
++                       hwaddr phys_addr,
++                       hwaddr size,
++                       ram_addr_t ram_addr_offset,
++                       uint8_t lock,
++                       bool dma,
++                       bool is_write)
++{
++    g_assert_not_reached();
++}
+diff --git a/hw/xen/meson.build b/hw/xen/meson.build
+index 4a486e36738..a1850e76988 100644
+--- a/hw/xen/meson.build
++++ b/hw/xen/meson.build
+@@ -9,6 +9,9 @@ system_ss.add(when: ['CONFIG_XEN_BUS'], if_true: files(
  
- system_ss.add(files(
-@@ -16,6 +15,7 @@ system_ss.add(files(
-   'dma-helpers.c',
-   'globals.c',
-   'memory_mapping.c',
-+  'physmem.c',
-   'qdev-monitor.c',
-   'qtest.c',
-   'rtc.c',
+ system_ss.add(when: ['CONFIG_XEN', xen], if_true: files(
+   'xen-operations.c',
++),
++if_false: files(
++  'xen_stubs.c',
+ ))
+ 
+ xen_specific_ss = ss.source_set()
 -- 
 2.39.5
 
