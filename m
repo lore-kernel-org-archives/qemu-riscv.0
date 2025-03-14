@@ -4,89 +4,101 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 57F49C28B30
-	for <qemu-riscv@archiver.kernel.org>; Fri, 14 Mar 2025 13:31:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B60F1C282EC
+	for <qemu-riscv@archiver.kernel.org>; Fri, 14 Mar 2025 16:45:56 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tt58K-0004SO-Pk; Fri, 14 Mar 2025 09:31:28 -0400
+	id 1tt8AH-00065f-2W; Fri, 14 Mar 2025 12:45:41 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alexghiti@rivosinc.com>)
- id 1tt58H-0004Qt-4M
- for qemu-riscv@nongnu.org; Fri, 14 Mar 2025 09:31:26 -0400
-Received: from mail-ed1-x535.google.com ([2a00:1450:4864:20::535])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alexghiti@rivosinc.com>)
- id 1tt58E-00052J-39
- for qemu-riscv@nongnu.org; Fri, 14 Mar 2025 09:31:24 -0400
-Received: by mail-ed1-x535.google.com with SMTP id
- 4fb4d7f45d1cf-5e61d91a087so3213182a12.0
- for <qemu-riscv@nongnu.org>; Fri, 14 Mar 2025 06:31:18 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1741959077; x=1742563877;
- darn=nongnu.org; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Z7dvQKGuKXLM1+01riVexho59nGYEOYjS7U+HLC0zzo=;
- b=g/wAXLS7dFPwC+J3OS9Ns5GVEs4dhK9C30h6Va+cocgeKIBdioOG1/LqXbJX7dzMQ2
- 07LsnP7bVdCy2itTxxdyrEB/SnOIg4TZEqi/2R8DAgNf3toaVaGWOEXW1jhkPA79fNwK
- hlkg679UNFt3PHMNHVWEhLmCuTiCp9bFl8zaqkwVM/KdFP3/EFiQzKoldJ8mi6GQITcF
- lQGlkJShkvTxeibDG1o9Q6CPB91W5+e7V3HX8XkiVa4Lu9V4A5cg6gzs2vl3fa5a32qv
- HpWdVloyFcg4/4l0QQOlFaMEiE2S0ykGkvy6eud1DdTVfJyhWwTnLQuTLuiUUbCVvOQd
- g21Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741959077; x=1742563877;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=Z7dvQKGuKXLM1+01riVexho59nGYEOYjS7U+HLC0zzo=;
- b=bw1leKoZkMqj533mmPUXAjkFdRh8SBxzrFK41m1WevSHMkUhPNY3b9KhLJaGxhhZMo
- 09EP2h2en8/j4aZxqdLHZ0t1nveq5iAbR5U+rOb2PMNCxwqaNN0Wlnd76GPNYb9S7NxG
- 06DOq1XpCgB3yTKZE63+i02UcfHhFgr5LA4XtItkTc2wfn/2neQIE0g0SQJos3u8BL5W
- 3tbUqQS9c3jRjdO2E+rWnfK/9xF6KFL5xpEViVX9S3iqnuvGr2OKXd5Im4X8mtddMVBG
- YV9+fGj2nLPs2UTJCITUTyMBq7lQsk5O30HRF/urIi7RLFR0LkYO3KgXA4Lf7nPHzZrK
- g2IA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXu8ZZvjmMLsyMTpTJg+6QJ/6UJ0vcPvoev83zXYCPTwOeLqtIADZCdUM4kdGifUqd8FlLt6ZfNmFlX@nongnu.org
-X-Gm-Message-State: AOJu0Yw5Z+VzN4yHEA6NVula08Td+t8emcxy+O4DReuJ6h3hQaGKQVmf
- fB0oBssR6v+toWOwWgom74DvkqIBcdm7yCmOVWM0v2T6m0Zd7e0D1DoBUjBU5rXQi2YEtYyoY1o
- e8KMeB9HMwFYA564CGrSDWY5/UXQ0l3VqeqXY+m9SQFe4AYTd
-X-Gm-Gg: ASbGnctpuAVLZzrSOa23GALy8ub9TYldBhVhhG/zaP6l/ZaRcvS0TFMLY6WmWpqVyBP
- 0+FxvbzLABDTL5NI7MtaW4YubbtYyIu4oK9iizkN00NHlDyjnFLL5B516NHv+i35HrLxhoc7WDj
- fxa9znEDBCU3EVKsbBfq/G3RhchfBOncS/xtq0eZZdZiNSJrvtjLphlyVWIRk=
-X-Google-Smtp-Source: AGHT+IEUSCNPYnV1iivyO5qvJuCKo5ik820TXmoqguPmGjCP+1wOVRPGtDU2GP+qv8y7NqQZ0OiaGg1Ju46cb+CSQGk=
-X-Received: by 2002:a05:6402:5186:b0:5e5:b572:a6d7 with SMTP id
- 4fb4d7f45d1cf-5e89e6b0648mr3347328a12.6.1741959077396; Fri, 14 Mar 2025
- 06:31:17 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from
+ <bounce-md_30504962.67d43086.v1-957ea96c0f704cfba5fbb6ca474f632c@bounce.vates.tech>)
+ id 1tt5Sl-00033h-Px
+ for qemu-riscv@nongnu.org; Fri, 14 Mar 2025 09:52:36 -0400
+Received: from mail177-1.suw61.mandrillapp.com ([198.2.177.1])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from
+ <bounce-md_30504962.67d43086.v1-957ea96c0f704cfba5fbb6ca474f632c@bounce.vates.tech>)
+ id 1tt5Si-0000ec-Qc
+ for qemu-riscv@nongnu.org; Fri, 14 Mar 2025 09:52:35 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mandrillapp.com;
+ s=mte1; t=1741959302; x=1742229302;
+ bh=uG1KcJgwcW9T2cGN3oyD/12pz8pEMNAmvmnymfhPGS4=;
+ h=From:Subject:To:Cc:Message-Id:References:In-Reply-To:Feedback-ID:
+ Date:MIME-Version:Content-Type:Content-Transfer-Encoding:CC:Date:
+ Subject:From;
+ b=g9hfdA/eM7vcBcCDkScEmdyush/aDVF9niLOhO1Tls29AehJMunYoTLPcqPx4URix
+ /aMh2g12ndPjgUTy22QDmBO2Q/RAv0cXaFZI+qOcWz1ZgrHfQZCrr1K3y464VLIJyL
+ qwG0X7PDYl8MR1m8vayWQ7hjrpV24L5fx3uL30NrDreDdDALoHwoF2h0fysd+K3iam
+ uuGcNVID5TPwnEu+AzI8k4h0x2P7SOTZNSkGAuW/rTouVWcrQV+q0j9IK/9Uc1NvBZ
+ Z7+4wG6V3IKm+zhLAqIfOwcWPE+QHkNe69r5WmAQgVIJNVrhCRzbohvB2D7UahSoln
+ xxQo5w3wwGFsA==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech; s=mte1;
+ t=1741959302; x=1742219802; i=anthony.perard@vates.tech;
+ bh=uG1KcJgwcW9T2cGN3oyD/12pz8pEMNAmvmnymfhPGS4=;
+ h=From:Subject:To:Cc:Message-Id:References:In-Reply-To:Feedback-ID:
+ Date:MIME-Version:Content-Type:Content-Transfer-Encoding:CC:Date:
+ Subject:From;
+ b=JLfWifvyw3oMpzh/DIkhmNZnn3FOeOLirZx5hCQxLEpJmiyfjBrlmwr/pGpcuVoIu
+ fByVYbcweMsQZSr7P+jLoVx6FJX4LBZ/iPwhvohnmYlx2QihXR4olRcsJr2TAYMy5/
+ hudYvliyweXeQ59PZIeXS3fEzmoqQIVSV6WfgZ8kP/fcI+MggULGuM1sVWsTSFvWHP
+ wXDJuAaRWZnF/BAQRml7SWQp9RISG2jZlaNr/J+RKpmHFJEJy5WNTAhhvlfN+4YBHH
+ UwqWVJizjxihe4lGii0OSWJTOD6a2L1zM3QHS6AxlxRtem1HD3UbiF+zgVJ/AFupkT
+ hzdtfbtU4eblQ==
+Received: from pmta14.mandrill.prod.suw01.rsglab.com (localhost [127.0.0.1])
+ by mail177-1.suw61.mandrillapp.com (Mailchimp) with ESMTP id 4ZDljL4NMWzBsTwYN
+ for <qemu-riscv@nongnu.org>; Fri, 14 Mar 2025 13:35:02 +0000 (GMT)
+From: "Anthony PERARD" <anthony.perard@vates.tech>
+Subject: =?utf-8?Q?Re:=20[PATCH=20v4=2012/17]=20hw/xen:=20add=20stubs=20for=20various=20functions?=
+Received: from [37.26.189.201] by mandrillapp.com id
+ 957ea96c0f704cfba5fbb6ca474f632c; Fri, 14 Mar 2025 13:35:02 +0000
+X-Bm-Disclaimer: Yes
+X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
+X-Bm-Transport-Timestamp: 1741959300664
+To: "Pierrick Bouvier" <pierrick.bouvier@linaro.org>
+Cc: qemu-devel@nongnu.org, "Paul Durrant" <paul@xen.org>,
+ "=?utf-8?Q?Philippe=20Mathieu-Daud=C3=A9?=" <philmd@linaro.org>,
+ "Harsh Prateek Bora" <harshpb@linux.ibm.com>,
+ "Liu Zhiwei" <zhiwei_liu@linux.alibaba.com>,
+ "Edgar E. Iglesias" <edgar.iglesias@gmail.com>, xen-devel@lists.xenproject.org,
+ "Peter Xu" <peterx@redhat.com>, alex.bennee@linaro.org,
+ manos.pitsidianakis@linaro.org, "Stefano Stabellini" <sstabellini@kernel.org>,
+ "Paolo Bonzini" <pbonzini@redhat.com>, qemu-ppc@nongnu.org,
+ "Richard Henderson" <richard.henderson@linaro.org>, kvm@vger.kernel.org,
+ "David Hildenbrand" <david@redhat.com>, "Palmer Dabbelt" <palmer@dabbelt.com>,
+ "Weiwei Li" <liwei1518@gmail.com>, qemu-riscv@nongnu.org,
+ "Alistair Francis" <alistair.francis@wdc.com>,
+ "Yoshinori Sato" <ysato@users.sourceforge.jp>,
+ "Daniel Henrique Barboza" <danielhb413@gmail.com>,
+ "Nicholas Piggin" <npiggin@gmail.com>
+Message-Id: <Z9Qwg4PC_1bEaOLK@l14>
+References: <20250313163903.1738581-1-pierrick.bouvier@linaro.org>
+ <20250313163903.1738581-13-pierrick.bouvier@linaro.org>
+In-Reply-To: <20250313163903.1738581-13-pierrick.bouvier@linaro.org>
+X-Native-Encoded: 1
+X-Report-Abuse: =?UTF-8?Q?Please=20forward=20a=20copy=20of=20this=20message,
+ =20including=20all=20headers,
+ =20to=20abuse@mandrill.com.=20You=20can=20also=20report=20abuse=20here:=20https://mandrillapp.com/contact/abuse=3Fid=3D30504962.957ea96c0f704cfba5fbb6ca474f632c?=
+X-Mandrill-User: md_30504962
+Feedback-ID: 30504962:30504962.20250314:md
+Date: Fri, 14 Mar 2025 13:35:02 +0000
 MIME-Version: 1.0
-References: <20250314104833.369365-1-alexghiti@rivosinc.com>
- <CAHVXubjJ_oCKqjYBFRjn-BM-cB4JUsFJ-dX3Dqs6j=6vTh+yHA@mail.gmail.com>
- <d6295353-33d8-4816-b815-49958634d263@ventanamicro.com>
-In-Reply-To: <d6295353-33d8-4816-b815-49958634d263@ventanamicro.com>
-From: Alexandre Ghiti <alexghiti@rivosinc.com>
-Date: Fri, 14 Mar 2025 14:31:06 +0100
-X-Gm-Features: AQ5f1Jr3SKKEMtY76TLoi5BU3xbsFQ0I0RTivgcGqdqUs_aYmwumvu-Ztp7_h_I
-Message-ID: <CAHVXubh8bE6OGX3M6Gm7GiMXyuQf1GPK2nf50cnJXPwBH0Rc_g@mail.gmail.com>
-Subject: Re: [PATCH RFC] target: riscv: Add Svrsw60b59b extension support
-To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Cc: Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, 
- Bin Meng <bin.meng@windriver.com>, Weiwei Li <liwei1518@gmail.com>, 
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, qemu-riscv@nongnu.org,
- qemu-devel@nongnu.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2a00:1450:4864:20::535;
- envelope-from=alexghiti@rivosinc.com; helo=mail-ed1-x535.google.com
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=198.2.177.1;
+ envelope-from=bounce-md_30504962.67d43086.v1-957ea96c0f704cfba5fbb6ca474f632c@bounce.vates.tech;
+ helo=mail177-1.suw61.mandrillapp.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_MED=-0.001,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_VALIDITY_CERTIFIED_BLOCKED=0.001,
+ RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001, SPF_HELO_PASS=-0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
+X-Mailman-Approved-At: Fri, 14 Mar 2025 12:45:38 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -101,133 +113,39 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Fri, Mar 14, 2025 at 1:38=E2=80=AFPM Daniel Henrique Barboza
-<dbarboza@ventanamicro.com> wrote:
->
->
->
-> On 3/14/25 9:11 AM, Alexandre Ghiti wrote:
-> > On Fri, Mar 14, 2025 at 11:48=E2=80=AFAM Alexandre Ghiti <alexghiti@riv=
-osinc.com> wrote:
-> >>
-> >> The Svrsw60b59b extension allows to free the PTE reserved bits 60 and =
-59
-> >> for software to use.
-> >
-> > I missed that the extension had been renamed to Svrsw60*t*59b, I'll
-> > fix that in v2 later after I collect some feedback.
->
-> Just to be clear: the extension is going to be named Svrsw60t59b, not
-> "Svrsw60*t*59b". Correct?
+On Thu, Mar 13, 2025 at 09:38:58AM -0700, Pierrick Bouvier wrote:
+> Those functions are used by system/physmem.c, and are called only if
+> xen is enabled (which happens only if CONFIG_XEN is not set).
 
-Yes, I added the '*' to emphasize the subtle change :)
+You mean, 's/is not set/is set/'?
+> 
+> So we can crash in case those are called.
+> 
+> Acked-by: Richard Henderson <richard.henderson@linaro.org>
+> Signed-off-by: Pierrick Bouvier <pierrick.bouvier@linaro.org>
+> ---
+> diff --git a/hw/xen/xen_stubs.c b/hw/xen/xen_stubs.c
+> new file mode 100644
+> index 00000000000..19cee84bbb4
+> --- /dev/null
+> +++ b/hw/xen/xen_stubs.c
+> +
+> +void xen_invalidate_map_cache(void)
+> +{
 
->
->
-> Aside from that code LGTM. Thanks,
+Is this stub actually necessary? xen_invalidate_map_cache() doesn't
+seems to be used outside of xen's code.
 
-Thanks!
+In anycase:
+Acked-by: Anthony PERARD <anthony.perard@vates.tech>
 
-Alex
+Thanks,
 
->
-> Daniel
->
->
-> >
-> > Thanks,
-> >
-> > Alex
-> >
-> >>
-> >> Signed-off-by: Alexandre Ghiti <alexghiti@rivosinc.com>
-> >> ---
-> >>
-> >> I tested it by always setting the bits 60 and 59 in Linux which booted
-> >> fine.
-> >>
-> >>   target/riscv/cpu.c        | 2 ++
-> >>   target/riscv/cpu_bits.h   | 3 ++-
-> >>   target/riscv/cpu_cfg.h    | 1 +
-> >>   target/riscv/cpu_helper.c | 3 ++-
-> >>   4 files changed, 7 insertions(+), 2 deletions(-)
-> >>
-> >> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> >> index 3d4bd157d2..ee89cdef46 100644
-> >> --- a/target/riscv/cpu.c
-> >> +++ b/target/riscv/cpu.c
-> >> @@ -219,6 +219,7 @@ const RISCVIsaExtData isa_edata_arr[] =3D {
-> >>       ISA_EXT_DATA_ENTRY(svinval, PRIV_VERSION_1_12_0, ext_svinval),
-> >>       ISA_EXT_DATA_ENTRY(svnapot, PRIV_VERSION_1_12_0, ext_svnapot),
-> >>       ISA_EXT_DATA_ENTRY(svpbmt, PRIV_VERSION_1_12_0, ext_svpbmt),
-> >> +    ISA_EXT_DATA_ENTRY(svrsw60b59b, PRIV_VERSION_1_13_0, ext_svrsw60b=
-59b),
-> >>       ISA_EXT_DATA_ENTRY(svukte, PRIV_VERSION_1_13_0, ext_svukte),
-> >>       ISA_EXT_DATA_ENTRY(svvptc, PRIV_VERSION_1_13_0, ext_svvptc),
-> >>       ISA_EXT_DATA_ENTRY(xtheadba, PRIV_VERSION_1_11_0, ext_xtheadba),
-> >> @@ -1644,6 +1645,7 @@ const RISCVCPUMultiExtConfig riscv_cpu_extension=
-s[] =3D {
-> >>       MULTI_EXT_CFG_BOOL("svinval", ext_svinval, false),
-> >>       MULTI_EXT_CFG_BOOL("svnapot", ext_svnapot, false),
-> >>       MULTI_EXT_CFG_BOOL("svpbmt", ext_svpbmt, false),
-> >> +    MULTI_EXT_CFG_BOOL("svrsw60b59b", ext_svrsw60b59b, false),
-> >>       MULTI_EXT_CFG_BOOL("svvptc", ext_svvptc, true),
-> >>
-> >>       MULTI_EXT_CFG_BOOL("zicntr", ext_zicntr, true),
-> >> diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
-> >> index f97c48a394..71f9e603c5 100644
-> >> --- a/target/riscv/cpu_bits.h
-> >> +++ b/target/riscv/cpu_bits.h
-> >> @@ -663,7 +663,8 @@ typedef enum {
-> >>   #define PTE_SOFT            0x300 /* Reserved for Software */
-> >>   #define PTE_PBMT            0x6000000000000000ULL /* Page-based memo=
-ry types */
-> >>   #define PTE_N               0x8000000000000000ULL /* NAPOT translati=
-on */
-> >> -#define PTE_RESERVED        0x1FC0000000000000ULL /* Reserved bits */
-> >> +#define PTE_RESERVED(svrsw60b59b)              \
-> >> +               (svrsw60b59b ? 0x07C0000000000000ULL : 0x1FC0000000000=
-000ULL) /* Reserved bits */
-> >>   #define PTE_ATTR            (PTE_N | PTE_PBMT) /* All attributes bit=
-s */
-> >>
-> >>   /* Page table PPN shift amount */
-> >> diff --git a/target/riscv/cpu_cfg.h b/target/riscv/cpu_cfg.h
-> >> index b410b1e603..f6e4b0068a 100644
-> >> --- a/target/riscv/cpu_cfg.h
-> >> +++ b/target/riscv/cpu_cfg.h
-> >> @@ -89,6 +89,7 @@ struct RISCVCPUConfig {
-> >>       bool ext_svinval;
-> >>       bool ext_svnapot;
-> >>       bool ext_svpbmt;
-> >> +    bool ext_svrsw60b59b;
-> >>       bool ext_svvptc;
-> >>       bool ext_svukte;
-> >>       bool ext_zdinx;
-> >> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-> >> index e1dfc4ecbf..6546cea403 100644
-> >> --- a/target/riscv/cpu_helper.c
-> >> +++ b/target/riscv/cpu_helper.c
-> >> @@ -1156,6 +1156,7 @@ static int get_physical_address(CPURISCVState *e=
-nv, hwaddr *physical,
-> >>       bool svade =3D riscv_cpu_cfg(env)->ext_svade;
-> >>       bool svadu =3D riscv_cpu_cfg(env)->ext_svadu;
-> >>       bool adue =3D svadu ? env->menvcfg & MENVCFG_ADUE : !svade;
-> >> +    bool svrsw60b59b =3D riscv_cpu_cfg(env)->ext_svrsw60b59b;
-> >>
-> >>       if (first_stage && two_stage && env->virt_enabled) {
-> >>           pbmte =3D pbmte && (env->henvcfg & HENVCFG_PBMTE);
-> >> @@ -1225,7 +1226,7 @@ restart:
-> >>           if (riscv_cpu_sxl(env) =3D=3D MXL_RV32) {
-> >>               ppn =3D pte >> PTE_PPN_SHIFT;
-> >>           } else {
-> >> -            if (pte & PTE_RESERVED) {
-> >> +            if (pte & PTE_RESERVED(svrsw60b59b)) {
-> >>                   return TRANSLATE_FAIL;
-> >>               }
-> >>
-> >> --
-> >> 2.39.2
-> >>
->
+-- 
+
+Anthony Perard | Vates XCP-ng Developer
+
+XCP-ng & Xen Orchestra - Vates solutions
+
+web: https://vates.tech
 
