@@ -4,101 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5D19BC282EC
-	for <qemu-riscv@archiver.kernel.org>; Fri, 14 Mar 2025 18:53:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F2F5AC28B2F
+	for <qemu-riscv@archiver.kernel.org>; Mon, 17 Mar 2025 02:09:17 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1ttA9o-0007dN-PU; Fri, 14 Mar 2025 14:53:20 -0400
+	id 1ttzu8-0000Nu-Ph; Sun, 16 Mar 2025 22:08:36 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from
- <bounce-md_30504962.67d4769c.v1-270d3009b7ba42eba666d9b14ad188e9@bounce.vates.tech>)
- id 1ttA9n-0007cW-7Z
- for qemu-riscv@nongnu.org; Fri, 14 Mar 2025 14:53:19 -0400
-Received: from mail136-29.atl41.mandrillapp.com ([198.2.136.29])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from
- <bounce-md_30504962.67d4769c.v1-270d3009b7ba42eba666d9b14ad188e9@bounce.vates.tech>)
- id 1ttA9k-0001Lm-Ug
- for qemu-riscv@nongnu.org; Fri, 14 Mar 2025 14:53:18 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mandrillapp.com;
- s=mte1; t=1741977244; x=1742247244;
- bh=XJ3a24qpetFIlkUTjB8MUIt/veN1MpcWIkxiqMq1Nms=;
- h=From:Subject:To:Cc:Message-Id:References:In-Reply-To:Feedback-ID:
- Date:MIME-Version:Content-Type:Content-Transfer-Encoding:CC:Date:
- Subject:From;
- b=xH+OAiKSmUm4/2oiqH1GoA8oUrr7Vt6/KmY/4NlzrJapPIoIkHeP+9Q4yqfK+F9Zx
- Mh4e6qi17JXa+j6oJwKoNy1NoQqUSqB/gvlene111G//q8Mlc7JDvBJmmEpGKBKimR
- fvzOeCMt4zWdnebpSk3Jgxlp/R1wcxxn01byg3SQZCy1hfHl0d3qRa8SywZ0/d7pnS
- n/uS4hnl63NYhRW/ce8sjTwnWvH6nDbpP6dvLdlWHT4EHDklkabt6ZzCVwRij34nKD
- rTHFzfZZD3fLMf7Xfqk1QwZDK+ms+E/QkIAqsAwOXyjTd6jTfxH/LKLQybwni6vWT3
- XZUms1sJ9HuyA==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech; s=mte1;
- t=1741977244; x=1742237744; i=anthony.perard@vates.tech;
- bh=XJ3a24qpetFIlkUTjB8MUIt/veN1MpcWIkxiqMq1Nms=;
- h=From:Subject:To:Cc:Message-Id:References:In-Reply-To:Feedback-ID:
- Date:MIME-Version:Content-Type:Content-Transfer-Encoding:CC:Date:
- Subject:From;
- b=pKWYCvfIR1ts08e4UHFts7qlobnSh7qbX1EEx79CkVs5o75YfRprtpHm0bfkuskOX
- /4C6bpSjV4xq8kEeSs2yNwlRCGTIWlor7SmSPRBOWuB0IQp8egGRHdQa/0MiHQT8gj
- JaoWk28Vdmk7Ta/1SE38+i6o9oimVaMAjsLRxOdPLr+BJHxiQlvBo9zlTBgCbP8hlP
- njxJ3o3HMzLBb9BRzVm+V9fO802nPYibo/39RDFcN6ZZneSaUjPUcrvbaD5GInsZpq
- /em6dPXg3g/R44mU8uFTirheYaJ2Whn9Wz7eZWriA2zwYvXw2h/26yox/UMC9J4NrJ
- a3pphRt5VFENw==
-Received: from pmta11.mandrill.prod.atl01.rsglab.com (localhost [127.0.0.1])
- by mail136-29.atl41.mandrillapp.com (Mailchimp) with ESMTP id
- 4ZDtLN49HNz6CQ6YZ
- for <qemu-riscv@nongnu.org>; Fri, 14 Mar 2025 18:34:04 +0000 (GMT)
-From: "Anthony PERARD" <anthony.perard@vates.tech>
-Subject: =?utf-8?Q?Re:=20[PATCH=20v5=2000/17]=20make=20system=20memory=20API=20available=20for=20common=20code?=
-Received: from [37.26.189.201] by mandrillapp.com id
- 270d3009b7ba42eba666d9b14ad188e9; Fri, 14 Mar 2025 18:34:04 +0000
-X-Bm-Disclaimer: Yes
-X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
-X-Bm-Transport-Timestamp: 1741977242834
-To: "Pierrick Bouvier" <pierrick.bouvier@linaro.org>
-Cc: qemu-devel@nongnu.org, qemu-ppc@nongnu.org,
- "Yoshinori Sato" <ysato@users.sourceforge.jp>, "Paul Durrant" <paul@xen.org>,
- "Peter Xu" <peterx@redhat.com>, alex.bennee@linaro.org,
- "Harsh Prateek Bora" <harshpb@linux.ibm.com>,
- "David Hildenbrand" <david@redhat.com>,
- "Alistair Francis" <alistair.francis@wdc.com>,
- "=?utf-8?Q?Philippe=20Mathieu-Daud=C3=A9?=" <philmd@linaro.org>,
- "Richard Henderson" <richard.henderson@linaro.org>,
- "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
- "Liu Zhiwei" <zhiwei_liu@linux.alibaba.com>,
- "Nicholas Piggin" <npiggin@gmail.com>,
- "Daniel Henrique Barboza" <danielhb413@gmail.com>, qemu-riscv@nongnu.org,
- manos.pitsidianakis@linaro.org, "Palmer Dabbelt" <palmer@dabbelt.com>,
- kvm@vger.kernel.org, xen-devel@lists.xenproject.org,
- "Stefano Stabellini" <sstabellini@kernel.org>,
- "Paolo Bonzini" <pbonzini@redhat.com>, "Weiwei Li" <liwei1518@gmail.com>
-Message-Id: <Z9R2mjfaNcsSuQWq@l14>
-References: <20250314173139.2122904-1-pierrick.bouvier@linaro.org>
- <5951f731-b936-42eb-b3ff-bc66ef9c9414@linaro.org>
-In-Reply-To: <5951f731-b936-42eb-b3ff-bc66ef9c9414@linaro.org>
-X-Native-Encoded: 1
-X-Report-Abuse: =?UTF-8?Q?Please=20forward=20a=20copy=20of=20this=20message,
- =20including=20all=20headers,
- =20to=20abuse@mandrill.com.=20You=20can=20also=20report=20abuse=20here:=20https://mandrillapp.com/contact/abuse=3Fid=3D30504962.270d3009b7ba42eba666d9b14ad188e9?=
-X-Mandrill-User: md_30504962
-Feedback-ID: 30504962:30504962.20250314:md
-Date: Fri, 14 Mar 2025 18:34:04 +0000
+ (Exim 4.90_1) (envelope-from <antonb@tenstorrent.com>)
+ id 1ttzu6-0000Nb-KT
+ for qemu-riscv@nongnu.org; Sun, 16 Mar 2025 22:08:34 -0400
+Received: from mail-yb1-xb36.google.com ([2607:f8b0:4864:20::b36])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <antonb@tenstorrent.com>)
+ id 1ttzu5-00011k-3P
+ for qemu-riscv@nongnu.org; Sun, 16 Mar 2025 22:08:34 -0400
+Received: by mail-yb1-xb36.google.com with SMTP id
+ 3f1490d57ef6-e62d132a6a7so2795853276.3
+ for <qemu-riscv@nongnu.org>; Sun, 16 Mar 2025 19:08:31 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=tenstorrent.com; s=google; t=1742177311; x=1742782111; darn=nongnu.org;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=sEvWfgrA1xQt7Pck2ReN71OGZAzJWFV9g5EFB1cLTK8=;
+ b=BCAd+kwzGJHq4EfotGtu28IGelRGDrgaQsHnLN3SRT6C+OUAXb6VxBMhuyDYZ6Uosd
+ mN/lwIA263uL5V2dJ1/6AT8yr6zDzz2WzS0o1LozPejDEVQPglKexdZjG5M+cnSA675N
+ WO3HPXrafU6kBRIuAHUuuXOu7dJA4dgPvWy46j+cpq0YWsGE2XGz+UY62AocofxarWEB
+ NVD6LCa5iAm84zJyoXL0DSSN6SUNhyx8TaM1ManTm6LuiBnQZR8/I5JFYHEvi3FdZd2a
+ wzCJzIydPFN+TvjqRY//HdAjhgQT6/xV5zN6DfKHqlFEO7D+wCUuFfUpA/T5I7FoyCH2
+ UhBg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1742177311; x=1742782111;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=sEvWfgrA1xQt7Pck2ReN71OGZAzJWFV9g5EFB1cLTK8=;
+ b=BByWuXb7My01cD8PJlAGG4IYWAQJ2DQ7OWHpu6dgtVZicOcYrhsEuF17OQQgZ2gG8v
+ qHTj/9ncQD3RyGuBQ/5spq+iVbyCrtUADlC3xz7jEoba1vST4Uv1BuIsOWu8GsS3MW7T
+ qUPx1+RqetQ1LvoKOV8GvStZGEAMihZaGrfWSKkX4JIc0SxDGvVhFAvX4vtGMed6EIk2
+ MUr6xX4MFQk/3aR0k0fYmWas8zBwvMCxysSz3RQBOEko1bk+mOhsSFLbey4C/j+3Y9gG
+ iALfz3kCm+VJ1FQoHJjJVRVlygzBxNYY7DKXgisuFGNt+ePSwv/hnTihZDNpYlAqNAVd
+ VZZg==
+X-Gm-Message-State: AOJu0YwDSQQchZiSVnc2BRBp7sXBkbL8znx/FAVwFjxma2CG1pHHeZom
+ htTz5oB2ErYvDlx+40FDh0+KDFnLp/t/0+jlCtDKEEPgHJ6wbXrnSlVDU6ulPoGvSX/cAzcN6gD
+ ipz5j7IsFM4nxLTS8uZYfXULQ42Xs+Jq7wDN52w==
+X-Gm-Gg: ASbGncv5NPr0yoal7aw2quOXOLH20CxP0P/6mLyO79Lwgp6c2an49ks/glgZ7Ze2aIY
+ E5ZdTfoxAb1BuXwG41/NH5C+1XbLs3EITub9ufSn3MpE3MJMZCZoYtTCNm2bM0NeoR5Bh4pGjOF
+ wFcGaY9Hd9RZaKwfdALRhbzkeWhRUTjWMbugPiegcFiX/0WTakfiwOtm8=
+X-Google-Smtp-Source: AGHT+IFQraTHV0NnExhL+b0DQnySWKsDCjDtgjmrW0U8OfzB/WB9ZYdqhHb6HtBZL97EFuayyrDvSCsb/CWIHhDHUY4=
+X-Received: by 2002:a05:690c:3813:b0:6fe:aa66:5d84 with SMTP id
+ 00721157ae682-6ff460d0e48mr141434407b3.37.1742177310841; Sun, 16 Mar 2025
+ 19:08:30 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=198.2.136.29;
- envelope-from=bounce-md_30504962.67d4769c.v1-270d3009b7ba42eba666d9b14ad188e9@bounce.vates.tech;
- helo=mail136-29.atl41.mandrillapp.com
+References: <20250126072056.4004912-1-antonb@tenstorrent.com>
+ <53591e3f-78d2-463e-b857-0b7d170b84e5@sifive.com>
+In-Reply-To: <53591e3f-78d2-463e-b857-0b7d170b84e5@sifive.com>
+From: Anton Blanchard <antonb@tenstorrent.com>
+Date: Mon, 17 Mar 2025 13:08:20 +1100
+X-Gm-Features: AQ5f1JqX_p3knzu0ZP0C9Gy5qROtmUfYKwhxccBIQey5w4oacUgQEpVUloR49v0
+Message-ID: <CAN7m+mAtsMtafZzWVhUJzVCHyrAyhPN8a3zAdGzFk7=evJWHRg@mail.gmail.com>
+Subject: Re: [CAUTION - External Sender] Re: [PATCH 00/12] target/riscv: Fix
+ some RISC-V instruction corner cases
+To: Max Chou <max.chou@sifive.com>
+Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, 
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Bin Meng <bmeng.cn@gmail.com>, Weiwei Li <liwei1518@gmail.com>, 
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2607:f8b0:4864:20::b36;
+ envelope-from=antonb@tenstorrent.com; helo=mail-yb1-xb36.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_MED=-0.001,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H5=0.001, RCVD_IN_MSPIKE_WL=0.001,
- RCVD_IN_VALIDITY_CERTIFIED_BLOCKED=0.001, RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001,
- SPF_HELO_PASS=-0.001, SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -114,22 +100,23 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Fri, Mar 14, 2025 at 10:33:08AM -0700, Pierrick Bouvier wrote:
-> Hi,
-> 
-> one patch is missing review:
-> [PATCH v5 12/17] hw/xen: add stubs for various functions.
+Hi Max,
 
-My "Acked-by" wasn't enough? Feel free try change it to "Reviewed-by"
-instead.
+On Fri, Feb 28, 2025 at 1:47=E2=80=AFAM Max Chou <max.chou@sifive.com> wrot=
+e:
+> While reviewing this patchset, I noticed a few missing parts related to
+> the mismatched input EEWs encoding constraint.
+> I also found a few other rvv encoding issues and planned to submit an
+> upstream patchset to address them.
+> However, I think it would be better to merge these fixes into this
+> patchset to maintain the series=E2=80=99 cohesion and keep up to date.
+>
+> If you agree with this approach, I can integrate the fixes and submit a
+> v2 of the patchset.
+> Please let me know your thoughts, and we can discuss the details further.
 
-Cheers,
+Sorry for not getting back to you earlier but that would be great.
 
--- 
-
-Anthony Perard | Vates XCP-ng Developer
-
-XCP-ng & Xen Orchestra - Vates solutions
-
-web: https://vates.tech
+Thanks,
+Anton
 
