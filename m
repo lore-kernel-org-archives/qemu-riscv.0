@@ -4,107 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 015FAC282EC
-	for <qemu-riscv@archiver.kernel.org>; Mon, 17 Mar 2025 09:21:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C076EC282EC
+	for <qemu-riscv@archiver.kernel.org>; Mon, 17 Mar 2025 13:13:11 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tu6f7-00075j-2O; Mon, 17 Mar 2025 05:21:33 -0400
+	id 1tuAH0-0007Qr-0C; Mon, 17 Mar 2025 09:12:54 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tu6en-00073O-97
- for qemu-riscv@nongnu.org; Mon, 17 Mar 2025 05:21:14 -0400
-Received: from mail-wr1-x435.google.com ([2a00:1450:4864:20::435])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tuAGw-0007GF-1I
+ for qemu-riscv@nongnu.org; Mon, 17 Mar 2025 09:12:50 -0400
+Received: from mail-wm1-x329.google.com ([2a00:1450:4864:20::329])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tu6eh-0004AD-E1
- for qemu-riscv@nongnu.org; Mon, 17 Mar 2025 05:21:12 -0400
-Received: by mail-wr1-x435.google.com with SMTP id
- ffacd0b85a97d-3912baafc58so3593163f8f.1
- for <qemu-riscv@nongnu.org>; Mon, 17 Mar 2025 02:21:05 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tuAGt-0004aY-MI
+ for qemu-riscv@nongnu.org; Mon, 17 Mar 2025 09:12:49 -0400
+Received: by mail-wm1-x329.google.com with SMTP id
+ 5b1f17b1804b1-4394a0c65fcso19458105e9.1
+ for <qemu-riscv@nongnu.org>; Mon, 17 Mar 2025 06:12:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1742203264; x=1742808064; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=YpUsKKtqVCRGopEBPreIzxle1j3+eqS8AQYhEVEoDhg=;
- b=cHZ7zu9xtGTfV9uyfrxhY7ZGRO3CzGDPhYBg+9A+Crf3vUUTRZT0jTEbmtDBKmmiV2
- TkVOAGspCePcDjnZpJSvDhEsMJ4h98hTc+P+lsv/GI8D4NUk9riH+2kYDyPmyaHYKDSE
- nDWoSFImn7ESfwHld6ApF3Q/X+Op648yWq8t6YqaAG7GobtFCMg6rM/BbikrpWNfm8FY
- J8gc9ZPY9plck83wezTu37PE6lM+TsuKNCAB6BNTSV0A+GmrYs710DHh8iQGf5wXunSc
- wu6nY3YZ/K19Tfn9RTLIbIwBn6jTQqXHd63dtnWp+/4NmmOjaVVqJ7XxLsjqJgJO2FGx
- 5/3A==
+ d=linaro.org; s=google; t=1742217165; x=1742821965; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:cc:content-language
+ :references:to:subject:user-agent:mime-version:date:message-id:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=KNJ7M218ffxDY6ICDLw/30l2jXTRbqIn/zz2bIvcdYQ=;
+ b=jp95mSUM1Acz1sur2ihFsbEU3O1tyNPjwFYsKh6fgf5RjPHeU3WtSVI0b1ckwDaMvX
+ W0SSMujMW7c/sxTLAPaQf1sPwgKEFhjbrXxheO4wAfucA9L/0JySOaeoaDMpq3DNpbb7
+ RODjlNXPHGgUGpOnhTGO4FpmylsYNEN8EDV6zI1Il2vDlwPsZth7F3u4A6L9CmFkjh86
+ DowbHk1uxJJ+2c+4tiZd3hbQ1Mrf8lQ93Oam8hG9/UwZxvH2wnoQ6xXx7DMQkEt/CH8/
+ FzJwkUkGB3IuExQaQwx3xtA1/w3fkpJ//ASOlrnYhybvOPYSo2lylt/kahLYI95Z/eZ2
+ RpZg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1742203264; x=1742808064;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
+ d=1e100.net; s=20230601; t=1742217165; x=1742821965;
+ h=content-transfer-encoding:in-reply-to:from:cc:content-language
+ :references:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=YpUsKKtqVCRGopEBPreIzxle1j3+eqS8AQYhEVEoDhg=;
- b=vlImlqwLP2LpxTipu43iZZkFxnmEWXaiCPmRh1Vb6YZKriyS47jobKEIR4J+QaZrQr
- YT2r11Vm3RY8UMCQqtucrq6/dihy8a+PWAPVxwpcM5iL1boZjAV78FkJtIvCB7F81XAl
- aeK38QPzNEqnUQDeThmBybCsNvZuxydtAY9Hbjg20/Wfpo7UFgww1wd5OWGPjHuI4qVW
- o1G0qkfbcguOc86HxjtC/oCBTh3xj2xLLThnPgY0nJrkzu2tKw+2PZsLBV9MxBF2oSU/
- s2Wm2SACeOh3YkKQdNAlfCftuqSuEagOz1ATb2pvGacvZWWc4Rz881g8rG9VKnFSWYM3
- KZow==
-X-Forwarded-Encrypted: i=1;
- AJvYcCV8O5nle2xNn9PQMOsyzujhiBbJHg9QmteAx0SBGxug7HkfzGYdRwnXtYK7Vv6NIo1QcZxsGTIEmPbt@nongnu.org
-X-Gm-Message-State: AOJu0YyA7Ik34dop1DIG4DZvb02/ImzJj9KwZ22eKdaJCNhiiC8gVwTc
- yDleIvF77+fMMDSsiBNojjqykRrpC3TV4bchCUfLqkpw4Z+8jmH1O028uPn5pG4=
-X-Gm-Gg: ASbGncvszpiFSX9Zpn18wttEKXl8E0nqUvxh+E/VgXXFNDjJQAgE4e0BSSm9qLDhY6e
- ADHeofo6lMFhDyEDZp0gRe571YCrm85MITx8WFa5RRqEz7Hivb8n8vjCObgvaoF2SIrrtJqAX8m
- gm9BNGD42yRcaOyShkmmbZlPRXfsUjBRUtO339W+Soku1yCOBJGyOndYWp5y5lq6tvCl3QHoDEw
- WOMbyE9M70e5HUNOTOX+eVdC/Y+3LjPJDwT6NTp2aGga906mKL5Z92X632JcmIuZOiA9e9aNu/5
- Bi+e5jTEHJXP34qy1roURlkT1662D6om2x3WkdEe8IHP5iacxhXGk0uicIX+4TkdF6UpAdkeIWu
- itsAe1bW26yY=
-X-Google-Smtp-Source: AGHT+IGWnfmu1vxKt8DfVr5Wh5yIJXe0q4pEomCwp6mUHJGY4TnJ5r3CTWvfyQ4vsQ6wNtdAUg6E4w==
-X-Received: by 2002:adf:a456:0:b0:390:df83:1f5d with SMTP id
- ffacd0b85a97d-3971f4116ecmr10959222f8f.35.1742203263878; 
- Mon, 17 Mar 2025 02:21:03 -0700 (PDT)
-Received: from [10.223.46.213] (109.21.205.77.rev.sfr.net. [77.205.21.109])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-395c888152dsm14131479f8f.48.2025.03.17.02.21.01
+ bh=KNJ7M218ffxDY6ICDLw/30l2jXTRbqIn/zz2bIvcdYQ=;
+ b=E/WalSeBnO26rcXJR8pTub0xt+FY5gwb6cazZYrq8+o7n6kVKDBOe4VtrYNSH5K9IW
+ pFnSrGVWj2vqCAdA8XuPzYGAqp3XNbPlRcA+W/XQGCEprf0Btsshx1jtYRzry0dtkLXo
+ Jwjw2wwdP0VVH+cnqV7Tqu/9nYZswMcrVKMds4FMeF3k2aOz3azPi1In8nelaUzrW5UB
+ 5wkQlyqWesdG5SyzzqfABssL2xxF76Ar7IW9szWDZDN/B28RbFP1G+3q/BanP5qNbDel
+ kH0UavkoEkALMHKmDXog4q3aILfTQicRJlUHpHvXv6bzea5k+yrfw2XD2+IhcWcyRRXL
+ 44Bw==
+X-Gm-Message-State: AOJu0Yyw6GQ+1WpX9eMS79B5iwnNGZMqRmaDls4K52zalEuWkus+Fi0j
+ rZx875q9mKLP3rt/audWR3chLIHz08451ky77GMFCRHNeZwKKUxGiuOOpFNxKGw=
+X-Gm-Gg: ASbGncvQwdyBZ4JtB/nRdceqK6ml/q+dLOPcwYDP11iTe9DIVt+9OjSEB2UJFngYKxF
+ cIYyBKnBKTHuhRiZ7qu3nw5PTwMP8eUq4Gdbyep6pZtNqcVfu+LLgf+ilAx+Sr/yhGO3bW+cYeB
+ 1c05q45E77CP4UvGt8l5EwCKlSKlI4hOikKGPhmKKmtu+B6RwL4QT/xu3beEFbdc3bqt1LhJUpK
+ +tOshPg8L0qH2uHjsijuQ+9h38BhsLGoCzpu4LZMGCdzouPJMT5w92WjDOE/gx1xTcWBBAhmIk/
+ pJVBHsR2GM5q3TFeuzdOimQ3ZldS5cbwsYbGgdXzLqkPkbCAn2VvgOGlJTT5EMvwo64SXpH7JhK
+ supr8sFt/ndIs
+X-Google-Smtp-Source: AGHT+IGprCd88A6aDVOWIi0Z46aSt7DTO0GweoPfwWLf/vkTnyUwWxTQ5fSQaZjIo+GuPHlz4Z0eZg==
+X-Received: by 2002:a05:6000:18ae:b0:391:40bd:621e with SMTP id
+ ffacd0b85a97d-39720398fe7mr13152912f8f.44.1742217165113; 
+ Mon, 17 Mar 2025 06:12:45 -0700 (PDT)
+Received: from [192.168.69.235] (88-187-86-199.subs.proxad.net.
+ [88.187.86.199]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-43d1ffb626esm104516535e9.8.2025.03.17.06.12.44
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 17 Mar 2025 02:21:03 -0700 (PDT)
-Message-ID: <3ce90214-a080-4ae8-86ff-9f8fd20f1733@linaro.org>
-Date: Mon, 17 Mar 2025 10:21:00 +0100
+ Mon, 17 Mar 2025 06:12:44 -0700 (PDT)
+Message-ID: <994737fb-287a-452e-8ea0-9e1abd6f50f5@linaro.org>
+Date: Mon, 17 Mar 2025 14:12:43 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v5 00/17] make system memory API available for common code
-To: Pierrick Bouvier <pierrick.bouvier@linaro.org>,
- Anthony PERARD <anthony.perard@vates.tech>
-Cc: qemu-devel@nongnu.org, qemu-ppc@nongnu.org,
- Yoshinori Sato <ysato@users.sourceforge.jp>, Paul Durrant <paul@xen.org>,
- Peter Xu <peterx@redhat.com>, alex.bennee@linaro.org,
- Harsh Prateek Bora <harshpb@linux.ibm.com>,
- David Hildenbrand <david@redhat.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Richard Henderson <richard.henderson@linaro.org>,
- "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Nicholas Piggin <npiggin@gmail.com>,
- Daniel Henrique Barboza <danielhb413@gmail.com>, qemu-riscv@nongnu.org,
- manos.pitsidianakis@linaro.org, Palmer Dabbelt <palmer@dabbelt.com>,
- kvm@vger.kernel.org, xen-devel@lists.xenproject.org,
- Stefano Stabellini <sstabellini@kernel.org>,
- Paolo Bonzini <pbonzini@redhat.com>, Weiwei Li <liwei1518@gmail.com>,
- Markus Armbruster <armbru@redhat.com>,
- Peter Maydell <peter.maydell@linaro.org>
-References: <20250314173139.2122904-1-pierrick.bouvier@linaro.org>
- <5951f731-b936-42eb-b3ff-bc66ef9c9414@linaro.org> <Z9R2mjfaNcsSuQWq@l14>
- <ee814e2f-c461-4cc2-889d-16bb2df44fdf@linaro.org>
+Subject: Re: Question regarding "Microblaze-V generic board,
+ amd-microblaze-v-generic"
+To: Prashant Joshi <prashant.joshi79s10@gmail.com>, qemu-discuss@nongnu.org
+References: <CAGK8z34FBuHukQ9qorkVqGsm3sTtU3TbQt-bdgrrSxrva_qkww@mail.gmail.com>
 Content-Language: en-US
+Cc: qemu-riscv <qemu-riscv@nongnu.org>
 From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-In-Reply-To: <ee814e2f-c461-4cc2-889d-16bb2df44fdf@linaro.org>
+In-Reply-To: <CAGK8z34FBuHukQ9qorkVqGsm3sTtU3TbQt-bdgrrSxrva_qkww@mail.gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::435;
- envelope-from=philmd@linaro.org; helo=mail-wr1-x435.google.com
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::329;
+ envelope-from=philmd@linaro.org; helo=mail-wm1-x329.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -120,31 +100,20 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Hi,
+Hi Prashant,
 
-On 14/3/25 19:39, Pierrick Bouvier wrote:
-> On 3/14/25 11:34, Anthony PERARD wrote:
->> On Fri, Mar 14, 2025 at 10:33:08AM -0700, Pierrick Bouvier wrote:
->>> Hi,
->>>
->>> one patch is missing review:
->>> [PATCH v5 12/17] hw/xen: add stubs for various functions.
->>
->> My "Acked-by" wasn't enough? Feel free try change it to "Reviewed-by"
->> instead.
->>
+Cc'ing qemu-riscv list.
+
+On 15/3/25 01:03, Prashant Joshi wrote:
+> Hi,
 > 
-> Those are differents. From what I understand, Reviewed implies Acked, 
-> but the opposite is not true. If it was, they would be equivalent.
-> Thanks.
+> I have question regarding Riscv architecture machine "Microblaze-V 
+> generic board". As per the documentation this machine boots only till u- 
+> boot prompt and does not load kernel image. I tried to give the Image 
+> using -kernel option but it did not work. Does this machine support 
+> linux boot from u-boot?
+> 
+> Regards,
+> Prashant
 
-IIUC on QEMU Acked-by means "as a maintainer of files modified by
-this patch, I don't have objection on my area, as long as someone
-else takes the patch". It doesn't mean the patch has been reviewed.
-
-Please correct me if I'm wrong.
-
-Thanks,
-
-Phil.
 
