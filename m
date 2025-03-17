@@ -4,66 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 233D3C28B28
-	for <qemu-riscv@archiver.kernel.org>; Mon, 17 Mar 2025 18:37:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 59FEEC35FF8
+	for <qemu-riscv@archiver.kernel.org>; Mon, 17 Mar 2025 18:37:59 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tuFJh-0005Dr-Qe; Mon, 17 Mar 2025 14:36:01 -0400
+	id 1tuFJf-0005Du-Lc; Mon, 17 Mar 2025 14:35:59 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <pierrick.bouvier@linaro.org>)
- id 1tuFJK-0004qM-CS
- for qemu-riscv@nongnu.org; Mon, 17 Mar 2025 14:35:38 -0400
-Received: from mail-pl1-x633.google.com ([2607:f8b0:4864:20::633])
+ id 1tuFJG-0004nA-FS
+ for qemu-riscv@nongnu.org; Mon, 17 Mar 2025 14:35:34 -0400
+Received: from mail-pl1-x62c.google.com ([2607:f8b0:4864:20::62c])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <pierrick.bouvier@linaro.org>)
- id 1tuFIY-0006Dl-4h
- for qemu-riscv@nongnu.org; Mon, 17 Mar 2025 14:35:36 -0400
-Received: by mail-pl1-x633.google.com with SMTP id
- d9443c01a7336-225df540edcso61416795ad.0
- for <qemu-riscv@nongnu.org>; Mon, 17 Mar 2025 11:34:48 -0700 (PDT)
+ id 1tuFIX-0006AW-Ae
+ for qemu-riscv@nongnu.org; Mon, 17 Mar 2025 14:35:34 -0400
+Received: by mail-pl1-x62c.google.com with SMTP id
+ d9443c01a7336-225e3002dffso47306785ad.1
+ for <qemu-riscv@nongnu.org>; Mon, 17 Mar 2025 11:34:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1742236484; x=1742841284; darn=nongnu.org;
+ d=linaro.org; s=google; t=1742236472; x=1742841272; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=EBRugwqnxw4q7Phz2P050i5IjB6Zbf1WGwdoEilqtkY=;
- b=wtclrS1vnQKrSCKG+duhvTktAa8YXsFt61dGfLCWkZk6A7N/ihYAKedibD9NuwR3+E
- S4kRL31mReks20wi5pcKJnTg3ccZt9LSwAwtnwd11YC6lCJX8b88Z78KIVAA5CDS+SPh
- kOYVSVaMpofKNoMd0rtqtcgXFtUieNIAgrjA9za4q6CR8nsC3XlFi9FR8DXxktnkGp5W
- LK3dVHPSyiD7Pa+hHP/V+cHAQSXpIjkz87QOo4cb9vVssRSqeI8FfiGyUtK6hi+aeLwx
- S+O0cFFMUsUzJhZf3gQNrameNDfsIf2aRAqDAm2DCk9mrau/KPc9QZ5Q4y7Oq63qtyqD
- 3gXQ==
+ bh=mZcjdDtX1Z7JVvsuWgguTldfqVr7ZBWkV3i9i17ooa8=;
+ b=qi0SZyYTjwSkYxAsdkd/cBZGZ15yogKkujp/cyfniIEK+3fRVj4xurD7Nk0GaKf2pH
+ /6Kfajekioz54iJ20Iq17gVstSAw3DhoHcAyyRfhnr0ZtWGbGU95fkxHVQukpA3MDcgE
+ 3KF+FOGF+yKJVC/7rlbcnBE+toNtqnt5nMl6QrnL8czrsWYBeyiIE82inGT+co+4PoD6
+ Y8clKk/rhpUCWA/btJwX6Nsxf6DABpeAkjByQCwcikXpwy4sEYvC2Fj8KAL8ZPHUtY/f
+ WOngCRAmVopQgu0PPYHXrJeIevNVv2RUaLHVpuuIvKs4c3+fpfRIf/kjxeSTtQxO5aGi
+ Ktgw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1742236484; x=1742841284;
+ d=1e100.net; s=20230601; t=1742236472; x=1742841272;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=EBRugwqnxw4q7Phz2P050i5IjB6Zbf1WGwdoEilqtkY=;
- b=mDw0xeYyR7ivzmckgNIdtOfOmiNQ04NqaP52jbqw00sLj9FmqAi4QTEaQGTkigyCYu
- LUh0UlfMlSB9PdqwZHM/zi0VBPOXd+NGEVmngd/mMgsYSF3hU3uYjlWtMSIZw7lbFDR8
- 9w3cdj8QPQLWgoP4Z/kaA8NIbyfvhELXUpi/0dvL9vVjj3lD2zqf+goLmFd14F3aSKrS
- xJ5cfgcxPxvE2f5H+qZqBN8gxJ1OS1d73Byl+YBQ92fXEEnu1HFdm+hE2Iu8lIhpPpsW
- gqKxoAlVZPOAIT7bzZUnCEdd7L+QPvatbdeaOWrPV0JEoTH4P+xStdOSdh4EcODoLGGM
- SJ8A==
+ bh=mZcjdDtX1Z7JVvsuWgguTldfqVr7ZBWkV3i9i17ooa8=;
+ b=VlG7sqe+ow6z/l4DaqdWMDaEoYJRwC6gQwcYl4oJ+iZRrymr/W34hAl+JEDd4MmKzQ
+ ikSsmyhYvSOsAMLeklzhXAinEkn3aVcHrI/XUN7w585UIeGBkf+ofANAygsPMTAByKyG
+ beue2fkDGePtojUqfhpPCWoBih6lf22setHk8ZRsAgTBwChWLSwgNykGYl0yfZnulcC7
+ TnhWllyRdX7bjmgcC2Zt/Fcfv/CPv6VVaRAh+3uax1roQVSOnUqIxw0XDlgmWH378uNs
+ 5dqBGkz8zS5esvn+teDYKGnBApSI6XLFiigx6eKIXZwlNcAmDRlhh10CK7cbvz7QRLnn
+ Xtcw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVe+yNGUW3T/vuB5CVFBgCiD+BpkfuVtsGNGIeX0cy6lgUBEJmm53A5pQN8bC0qJX+6QSKxgZQ/vMWy@nongnu.org
-X-Gm-Message-State: AOJu0YxHECakWByz/+jAETzTeJI8/ujJWsgqgOtaZ3xdIbIM3/n8vUmE
- cNyaJHFEfM7iALsI/NCXuth7UFh3tIq6enjvs5Yw+NF/NibpiTgltDjNEvud16Q=
-X-Gm-Gg: ASbGnctjkPVmIFvkTSf7pYu5Tpwqg/48hrM6H1zscA88Kw2iYlxaDwpoVQWyq8CcRgB
- BRESRTuA/BiScDYNXbPBNBp7NSoYDuolbknaN6PP2BrHQg5rOsVplxK8zslrqNeUhLXhcWbk4N8
- yV8kreEUvyvOA8TaDTdxcv8vfdPref6KkjS5ckZbshaiVteQJ4Apmrn2nNuUAn5wABZTzEzclm8
- bp6Vu/8xvdfWSV6wmYRo2slX+avU/iEVtJhXikfCs5t0wVUrlaZ/+KKBl/Rfghj8AZlK+MqUhtZ
- qnPQwqalz5FXOcGkt5v0Wv4bgGWVQZnQIjXI4yA1jPIF
-X-Google-Smtp-Source: AGHT+IHaIWG93SjaignFKD4IVBdMoq9cQTxlUlmFhZIj0sg1/yp4Pm5Fp9URm2R1oo2C+UJzak1b5Q==
-X-Received: by 2002:a05:6a00:2e84:b0:736:476b:fccc with SMTP id
- d2e1a72fcca58-737577c60dcmr700300b3a.8.1742236484037; 
- Mon, 17 Mar 2025 11:34:44 -0700 (PDT)
+ AJvYcCX//liQLVGhuOK2INDW8x96dE3+Z3zIU8VtBZEAgJL6zNAaQ8T6g9jPVJwhz4ceN3UYSVCbsqe4ggxW@nongnu.org
+X-Gm-Message-State: AOJu0Yzv5O/naa3Vbov/I2yQCm6fAgXXQp6XBXO2gtzuZOCm/I/SCvCj
+ PorKwDdSCY51iwcuH3BqeHx3kmNFjP+rYb0InBvTYZrB2Hhje7MULJXiHM2xEyQ=
+X-Gm-Gg: ASbGnctkw2Rj9BQAyejM7Sx/mu+v230OpwAOqWSDy6T9bwjh0rsi8HBvAL2RUFl2+g/
+ ByDSYHZO9DbIcGnvxUVyglEiX8+dTpiFwUnxD6ZwKvqwKAEyt2DpCIXT1y6mZ7vQIFcpMxF/jug
+ zj1QD65kX4bmN0lIpNh6+Y2T4Nl056it1XL3Dwbh05hiRaLNVeOwGAmxhDNL+CIhbXzJk5Eedtd
+ WOy7OAAN6gAfaBlTPLoogpmoK7JMXbhU7xlEmsjovjztT8j2Irp7ZfPjZ+gT7p92/G1CkzfsGAS
+ zRN9DW+aBuSP0BoKfn2IgeBoAjvzyd2ozkgEoiLH8pGs
+X-Google-Smtp-Source: AGHT+IGNO8bUyUW0Tf64WVNf5jONex1ECKej9xrvhw7mQgHMktiWmZ+ZuCh9rC5TGEXL07arJnJidg==
+X-Received: by 2002:a05:6a00:3c81:b0:736:5544:7ad7 with SMTP id
+ d2e1a72fcca58-7375723f949mr818617b3a.14.1742236471771; 
+ Mon, 17 Mar 2025 11:34:31 -0700 (PDT)
 Received: from pc.. ([38.39.164.180]) by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-73711695a2esm8188770b3a.144.2025.03.17.11.34.43
+ d2e1a72fcca58-73711695a2esm8188770b3a.144.2025.03.17.11.34.30
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 17 Mar 2025 11:34:43 -0700 (PDT)
+ Mon, 17 Mar 2025 11:34:31 -0700 (PDT)
 From: Pierrick Bouvier <pierrick.bouvier@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Paul Durrant <paul@xen.org>, xen-devel@lists.xenproject.org,
@@ -84,16 +84,17 @@ Cc: Paul Durrant <paul@xen.org>, xen-devel@lists.xenproject.org,
  Stefano Stabellini <sstabellini@kernel.org>,
  Nicholas Piggin <npiggin@gmail.com>,
  Pierrick Bouvier <pierrick.bouvier@linaro.org>
-Subject: [PATCH v6 17/18] system/memory: make compilation unit common
-Date: Mon, 17 Mar 2025 11:34:16 -0700
-Message-Id: <20250317183417.285700-18-pierrick.bouvier@linaro.org>
+Subject: [PATCH v6 06/18] codebase: prepare to remove cpu.h from
+ exec/exec-all.h
+Date: Mon, 17 Mar 2025 11:34:05 -0700
+Message-Id: <20250317183417.285700-7-pierrick.bouvier@linaro.org>
 X-Mailer: git-send-email 2.39.5
 In-Reply-To: <20250317183417.285700-1-pierrick.bouvier@linaro.org>
 References: <20250317183417.285700-1-pierrick.bouvier@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::633;
- envelope-from=pierrick.bouvier@linaro.org; helo=mail-pl1-x633.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::62c;
+ envelope-from=pierrick.bouvier@linaro.org; helo=mail-pl1-x62c.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -119,79 +120,102 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 Signed-off-by: Pierrick Bouvier <pierrick.bouvier@linaro.org>
 ---
- system/memory.c    | 17 +++++------------
- system/meson.build |  2 +-
- 2 files changed, 6 insertions(+), 13 deletions(-)
+ include/tcg/tcg-op.h           | 1 +
+ target/ppc/helper_regs.h       | 2 ++
+ hw/ppc/spapr_nested.c          | 1 +
+ hw/sh4/sh7750.c                | 1 +
+ page-vary-target.c             | 2 +-
+ target/ppc/tcg-excp_helper.c   | 1 +
+ target/riscv/bitmanip_helper.c | 2 +-
+ 7 files changed, 8 insertions(+), 2 deletions(-)
 
-diff --git a/system/memory.c b/system/memory.c
-index 4c829793a0a..eddd21a6cdb 100644
---- a/system/memory.c
-+++ b/system/memory.c
-@@ -353,15 +353,6 @@ static void flatview_simplify(FlatView *view)
-     }
- }
+diff --git a/include/tcg/tcg-op.h b/include/tcg/tcg-op.h
+index a02850583bd..bc46b5570c4 100644
+--- a/include/tcg/tcg-op.h
++++ b/include/tcg/tcg-op.h
+@@ -9,6 +9,7 @@
+ #define TCG_TCG_OP_H
  
--static bool memory_region_big_endian(MemoryRegion *mr)
--{
--#if TARGET_BIG_ENDIAN
--    return mr->ops->endianness != DEVICE_LITTLE_ENDIAN;
--#else
--    return mr->ops->endianness == DEVICE_BIG_ENDIAN;
--#endif
--}
--
- static void adjust_endianness(MemoryRegion *mr, uint64_t *data, MemOp op)
+ #include "tcg/tcg-op-common.h"
++#include "exec/target_long.h"
+ 
+ #ifndef TARGET_LONG_BITS
+ #error must include QEMU headers
+diff --git a/target/ppc/helper_regs.h b/target/ppc/helper_regs.h
+index 8196c1346dc..b928c2c452d 100644
+--- a/target/ppc/helper_regs.h
++++ b/target/ppc/helper_regs.h
+@@ -20,6 +20,8 @@
+ #ifndef HELPER_REGS_H
+ #define HELPER_REGS_H
+ 
++#include "target/ppc/cpu.h"
++
+ void hreg_swap_gpr_tgpr(CPUPPCState *env);
+ void hreg_compute_hflags(CPUPPCState *env);
+ void hreg_update_pmu_hflags(CPUPPCState *env);
+diff --git a/hw/ppc/spapr_nested.c b/hw/ppc/spapr_nested.c
+index 201f6292033..a79e398c132 100644
+--- a/hw/ppc/spapr_nested.c
++++ b/hw/ppc/spapr_nested.c
+@@ -2,6 +2,7 @@
+ #include "qemu/cutils.h"
+ #include "exec/exec-all.h"
+ #include "exec/cputlb.h"
++#include "exec/target_long.h"
+ #include "helper_regs.h"
+ #include "hw/ppc/ppc.h"
+ #include "hw/ppc/spapr.h"
+diff --git a/hw/sh4/sh7750.c b/hw/sh4/sh7750.c
+index 6faf0e3ca8b..41306fb6008 100644
+--- a/hw/sh4/sh7750.c
++++ b/hw/sh4/sh7750.c
+@@ -29,6 +29,7 @@
+ #include "hw/irq.h"
+ #include "hw/sh4/sh.h"
+ #include "system/system.h"
++#include "target/sh4/cpu.h"
+ #include "hw/qdev-properties.h"
+ #include "hw/qdev-properties-system.h"
+ #include "sh7750_regs.h"
+diff --git a/page-vary-target.c b/page-vary-target.c
+index 3f81144cda8..84ddeb7c26a 100644
+--- a/page-vary-target.c
++++ b/page-vary-target.c
+@@ -21,7 +21,7 @@
+ 
+ #include "qemu/osdep.h"
+ #include "exec/page-vary.h"
+-#include "exec/exec-all.h"
++#include "exec/target_page.h"
+ 
+ bool set_preferred_target_page_bits(int bits)
  {
-     if ((op & MO_BSWAP) != devend_memop(mr->ops->endianness)) {
-@@ -563,7 +554,7 @@ static MemTxResult access_with_adjusted_size(hwaddr addr,
-     /* FIXME: support unaligned access? */
-     access_size = MAX(MIN(size, access_size_max), access_size_min);
-     access_mask = MAKE_64BIT_MASK(0, access_size * 8);
--    if (memory_region_big_endian(mr)) {
-+    if (devend_big_endian(mr->ops->endianness)) {
-         for (i = 0; i < size; i += access_size) {
-             r |= access_fn(mr, addr + i, value, access_size,
-                         (size - access_size - i) * 8, access_mask, attrs);
-@@ -2584,7 +2575,8 @@ void memory_region_add_eventfd(MemoryRegion *mr,
-     unsigned i;
+diff --git a/target/ppc/tcg-excp_helper.c b/target/ppc/tcg-excp_helper.c
+index 5a189dc3d70..c422648cfdd 100644
+--- a/target/ppc/tcg-excp_helper.c
++++ b/target/ppc/tcg-excp_helper.c
+@@ -19,6 +19,7 @@
+ #include "qemu/osdep.h"
+ #include "qemu/main-loop.h"
+ #include "qemu/log.h"
++#include "target/ppc/cpu.h"
+ #include "exec/cpu_ldst.h"
+ #include "exec/exec-all.h"
+ #include "exec/helper-proto.h"
+diff --git a/target/riscv/bitmanip_helper.c b/target/riscv/bitmanip_helper.c
+index b99c4a39a1f..e9c8d7f7780 100644
+--- a/target/riscv/bitmanip_helper.c
++++ b/target/riscv/bitmanip_helper.c
+@@ -20,7 +20,7 @@
  
-     if (size) {
--        adjust_endianness(mr, &mrfd.data, size_memop(size) | MO_TE);
-+        MemOp mop = (target_words_bigendian() ? MO_BE : MO_LE) | size_memop(size);
-+        adjust_endianness(mr, &mrfd.data, mop);
-     }
-     memory_region_transaction_begin();
-     for (i = 0; i < mr->ioeventfd_nb; ++i) {
-@@ -2619,7 +2611,8 @@ void memory_region_del_eventfd(MemoryRegion *mr,
-     unsigned i;
+ #include "qemu/osdep.h"
+ #include "qemu/host-utils.h"
+-#include "exec/exec-all.h"
++#include "exec/target_long.h"
+ #include "exec/helper-proto.h"
+ #include "tcg/tcg.h"
  
-     if (size) {
--        adjust_endianness(mr, &mrfd.data, size_memop(size) | MO_TE);
-+        MemOp mop = (target_words_bigendian() ? MO_BE : MO_LE) | size_memop(size);
-+        adjust_endianness(mr, &mrfd.data, mop);
-     }
-     memory_region_transaction_begin();
-     for (i = 0; i < mr->ioeventfd_nb; ++i) {
-diff --git a/system/meson.build b/system/meson.build
-index bd82ef132e7..4f44b78df31 100644
---- a/system/meson.build
-+++ b/system/meson.build
-@@ -2,7 +2,6 @@ specific_ss.add(when: 'CONFIG_SYSTEM_ONLY', if_true: [files(
-   'arch_init.c',
-   'ioport.c',
-   'globals-target.c',
--  'memory.c',
- )])
- 
- system_ss.add(files(
-@@ -15,6 +14,7 @@ system_ss.add(files(
-   'dma-helpers.c',
-   'globals.c',
-   'memory_mapping.c',
-+  'memory.c',
-   'physmem.c',
-   'qdev-monitor.c',
-   'qtest.c',
 -- 
 2.39.5
 
