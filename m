@@ -4,75 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A3E83C282EC
-	for <qemu-riscv@archiver.kernel.org>; Tue, 18 Mar 2025 16:43:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8CF83C282EC
+	for <qemu-riscv@archiver.kernel.org>; Tue, 18 Mar 2025 19:08:08 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tua1i-00026g-FW; Tue, 18 Mar 2025 12:42:50 -0400
+	id 1tucHn-00017m-RS; Tue, 18 Mar 2025 15:07:35 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
- id 1tua1d-00025s-UQ
- for qemu-riscv@nongnu.org; Tue, 18 Mar 2025 12:42:45 -0400
-Received: from mail-yb1-xb2a.google.com ([2607:f8b0:4864:20::b2a])
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1tucHk-000179-79
+ for qemu-riscv@nongnu.org; Tue, 18 Mar 2025 15:07:33 -0400
+Received: from mail-pl1-x632.google.com ([2607:f8b0:4864:20::632])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
- id 1tua1P-0007tg-5y
- for qemu-riscv@nongnu.org; Tue, 18 Mar 2025 12:42:45 -0400
-Received: by mail-yb1-xb2a.google.com with SMTP id
- 3f1490d57ef6-e64405b3b9aso1211200276.1
- for <qemu-riscv@nongnu.org>; Tue, 18 Mar 2025 09:42:30 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1tucHi-0007xt-BB
+ for qemu-riscv@nongnu.org; Tue, 18 Mar 2025 15:07:31 -0400
+Received: by mail-pl1-x632.google.com with SMTP id
+ d9443c01a7336-223594b3c6dso130631445ad.2
+ for <qemu-riscv@nongnu.org>; Tue, 18 Mar 2025 12:07:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1742316150; x=1742920950; darn=nongnu.org;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=S+u1fpDV2HCsOzvClPbiSBrO0B9TKgb3d0wC6KYgsHI=;
- b=grG88Y9l3JfgFFUcpztqnQl5Ccb7UYqKreNvj4ZorBGEB9rg6Pp4vLf4OhZdW+tMMU
- 9u7XM05cH0DRDU7YsJCLIkYXwT2iEnAbmF7blvgAsxz+MkyDYugoVsnOXhuBjjW25Q+k
- +GBv1WzbS/rNTmQym7bSw3HtV9n1gaFWyamHvTuZdXDQzRdpDNf2qX2XO6yplsHrwTWQ
- glNdNzdnHw+Bbxm+zMtfA3ra7eb5U8u8//AED36H+QzI9iJXDbKHNv7sKZM+arYSMk38
- cFBXli2kSNuG3wXpZre4urEYDW2S+8Fnh1jv6vfRLN9Cl/8KZ4wiSNC1T9DtGWsTlKsE
- ZIVA==
+ d=ventanamicro.com; s=google; t=1742324848; x=1742929648; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=sCH8wxOJwzBxbM/iEeUn+tfPU/lOmxaIrFfqOLR5qo8=;
+ b=ab1ZT2wO4+oh9Km21NoA8IvHAFCuqtN869AXCSusZfUktwjUxUfSPi25NAmcSsc1Y5
+ sY2Fkcqsi1dj2jn5TgSR0seYP8VpoffSGVFKh7Hc9WpGJ+0VzEj8n4GpKCV/v1M0hS+Z
+ 5rYY+ZPTUO6NryIqY4rQMEkzIqtziVyPz64cVNCFSGxaD3IoSRhJAWo6auZsxF6+PfbK
+ HYRonLsc1m3BlaEQQA2pEx1nE0fIFnmwmX8tmhdfR6UWaedIjmaDsQoAeOnBXpnBONql
+ NiGQWOAKE9tMOGejavXgXtZhoy4CboGcQpkREIoZmgLSMsHbL/WNw73Ed+YROGzpn1bT
+ SKqA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1742316150; x=1742920950;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=S+u1fpDV2HCsOzvClPbiSBrO0B9TKgb3d0wC6KYgsHI=;
- b=d+zYKwt4EiszPjl8FxQMjNBOJSFqRBJ9LkhZEJ1oIl2dhgnNfMT/Gu+y0K3qZqGa2r
- ByqWjXCMDxaLWRJ5+HblsoP44svk+6meFUNZdF627aVmFq+1r21GQePOTced1JZ8XuKz
- 8BTvuL+XqQZ3HxqZfZaGJecE9B9R6yIv42MmbCpWB1iWnsA+Vw/0CVPkjQ0/QqL1LxLc
- fC1DikuK1Vxg6UsseEg6zhsMz3I0qFFgpKIRaXs9OWSYirPPD4bQ1u5a8co7+Q5C8dHM
- Z4gSMbrYIgoouyvNxc6W/Y9sJQ6jl37NnImW00bGYRHJ/0EPP+pjkrGYGaRZVpR/LANu
- wJBg==
+ d=1e100.net; s=20230601; t=1742324848; x=1742929648;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=sCH8wxOJwzBxbM/iEeUn+tfPU/lOmxaIrFfqOLR5qo8=;
+ b=Z7icwDP8dRmlIj6mcArgE699OeCxpGqjhaXI1Cupc/R8pexk6sZoZXen0L0OkvZ8hg
+ LLQNoCRkdwdslWw4lfg81lNZ4DYa4BlLbHE8QcfUTDwv0BU6EX4LO2viG5Ot7w3cLpy9
+ RGEw2ykYmU8uZ/Mu5lEpnZmo8oRvoFjh6ifZwvkVY9IgCm7r49FkIY+++CIh2X3x4yEL
+ YzWRE0ECVKGcZdd5MVzOORQBMd+iXxknRY7klU4rnt4va6HlnfB8V8HKJbDmMg0wvrRG
+ SjxU+EpkAIAdBoGAd62qwzZ6R6W85fbO7DQJMWEXPfSP+UITpLcIoLf3LTTBCPDlvdT4
+ K0BA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCX3sauwaRszKo1Zujf2dcvAjYU2FsnIcvp9zwMRIn5dCHhnir2f0j8NjyAMfojca63Pc0R2KWnDBXxS@nongnu.org
-X-Gm-Message-State: AOJu0YwhT1WgdNo8jimdbARfvJnGAnmJEWgvYv9CFRrnkdTqONFKbhyv
- JEgyal9/WzaxWN9VmD5q1hBd7QSzwuNwdc8jG6OsVrN8atUwvbxnXBqs5w9VcPBpn85/Sf1HyUT
- kXDtfAQTcVQGcddYTZncSt7cu6/tnSE3HSQGfZQ==
-X-Gm-Gg: ASbGncvtlmfwVPbEl+3k8iZEVqS66/9UJVmANvboXO1h2gOJMITd6E6M2AzgWi3cG1e
- 0XgLgIRzNHgEFrrV4XhTkmzarj9Uq4TbxRJTDKp8lLJLXkatScq44QohE/3JtvvmWw2edqWM1Mf
- CLmRWbTdiVZYsVYVdSI1AuDuRTuxU=
-X-Google-Smtp-Source: AGHT+IHQZuUB7IrHcPiqkDUGxyEcQ9ZbmTmaaf+dHK62z/Y77V27zvq9OmEqfihu//b6N+m44CWVWn+H5eICHl5njDM=
-X-Received: by 2002:a05:6902:1890:b0:e5b:3ad3:4010 with SMTP id
- 3f1490d57ef6-e64c0e1accfmr6588944276.31.1742316149742; Tue, 18 Mar 2025
- 09:42:29 -0700 (PDT)
+ AJvYcCVI7P+wh1z6kOFYK6GEhABHBvImZGZREK8srRXkVLocA9RbSwJLe1pH4mryyUXrWdZz6/x0Xxoy8/ik@nongnu.org
+X-Gm-Message-State: AOJu0Yzr3JqTQmx4pqE9BMnhaNrCQh2coc7eW6AV/5WBOUtEgW0dKBQv
+ mtK1wsr4MCiW88ge0BaHXob0w/gxqFCMi1FmpuTVnWSw7uevdpCaBC8nNk9Q+kA=
+X-Gm-Gg: ASbGncvhwSvuuVzK2XlbF/2zDXwPi86aXjlsVr8+VK+nYZxXJuL/uadwbe1sIaPGvCX
+ Hc6F8MwyS/+fnkA6H3Nz+XxmB8XMJvm2HavSt1sz/Yo4QvmP4qOKhrqXtVcmEk1THhyGJku1mVm
+ y86oH8Qqtfq63tXdUtOb87O7HqlqF9NV6iU614v2RpTWMAbQwwNZ6M0dZ2TEuakkzECPuKRJdHe
+ VriPh4fZQoY8HKPx1wk0ziXFbwfLoq3VdMYJ8Xd5eqW2MAOKAH8LhEMKqunTzjkpuJKjhep51i9
+ MGQAyjZkcMd+s1UY6OvP3H1MCMhyWeRwTJcWzTPCHi4iaBWH9O+5PZ+qVYadk0quyHjLIwtWwLL
+ vl/zo9uzlU2c1OSt7OuSPc/GQjzVu40zpvQ==
+X-Google-Smtp-Source: AGHT+IEfTMs8efQoCIy48fRBBCQheuC9VZDS5BowbbEYh0b8IrH/38HIGPlb7N3PiqToWPmzclzR9w==
+X-Received: by 2002:a17:902:f706:b0:223:47e4:d288 with SMTP id
+ d9443c01a7336-226483de593mr2098375ad.47.1742324848107; 
+ Tue, 18 Mar 2025 12:07:28 -0700 (PDT)
+Received: from ?IPV6:2804:7f0:bcc0:89fc:59f0:a5a7:feb2:304e?
+ ([2804:7f0:bcc0:89fc:59f0:a5a7:feb2:304e])
+ by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-22647996c7asm668955ad.20.2025.03.18.12.07.25
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 18 Mar 2025 12:07:27 -0700 (PDT)
+Message-ID: <c17a3e7e-9383-4f37-9fc5-b93afbf13bd3@ventanamicro.com>
+Date: Tue, 18 Mar 2025 16:07:24 -0300
 MIME-Version: 1.0
-References: <20250307124602.1905754-1-dbarboza@ventanamicro.com>
-In-Reply-To: <20250307124602.1905754-1-dbarboza@ventanamicro.com>
-From: Peter Maydell <peter.maydell@linaro.org>
-Date: Tue, 18 Mar 2025 16:42:18 +0000
-X-Gm-Features: AQ5f1Jrza_7dRzLh17j1N3Ui7uyjHS06_ZSu-pcc89B7uvkRBwiNIAeA5y4WGBA
-Message-ID: <CAFEAcA_P3XbJ-H9O=K-U7HtBAU9c=0TngEfV8fpQxcH0JRuGVA@mail.gmail.com>
+User-Agent: Mozilla Thunderbird
 Subject: Re: [PATCH] target/riscv/csr.c: fix OVERFLOW_BEFORE_WIDEN in
  rmw_sctrdepth()
-To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
+To: Peter Maydell <peter.maydell@linaro.org>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com,
  liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com
-Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::b2a;
- envelope-from=peter.maydell@linaro.org; helo=mail-yb1-xb2a.google.com
+References: <20250307124602.1905754-1-dbarboza@ventanamicro.com>
+ <CAFEAcA_P3XbJ-H9O=K-U7HtBAU9c=0TngEfV8fpQxcH0JRuGVA@mail.gmail.com>
+Content-Language: en-US
+From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+In-Reply-To: <CAFEAcA_P3XbJ-H9O=K-U7HtBAU9c=0TngEfV8fpQxcH0JRuGVA@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::632;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pl1-x632.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -95,44 +107,62 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Fri, 7 Mar 2025 at 12:46, Daniel Henrique Barboza
-<dbarboza@ventanamicro.com> wrote:
->
-> Coverity found the following issue:
->
->   >>>     CID 1593156:  Integer handling issues  (OVERFLOW_BEFORE_WIDEN)
->   >>>     Potentially overflowing expression "0x10 << depth" with type
->   "int" (32 bits, signed) is evaluated using 32-bit arithmetic, and then
->   used in a context that expects an expression of type "uint64_t" (64
->   bits, unsigned).
->   4299             depth = 16 << depth;
->
-> Fix it by forcing the expression to be 64 bits wide by using '16ULL'.
->
-> Resolves: Coverity CID 1593156
-> Fixes: c48bd18eae ("target/riscv: Add support for Control Transfer Records extension CSRs.")
-> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-> ---
->  target/riscv/csr.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->
-> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-> index 0ebcca4597..e832ff3ca9 100644
-> --- a/target/riscv/csr.c
-> +++ b/target/riscv/csr.c
-> @@ -4296,7 +4296,7 @@ static RISCVException rmw_sctrdepth(CPURISCVState *env, int csrno,
->          }
->
->          /* Update sctrstatus.WRPTR with a legal value */
-> -        depth = 16 << depth;
-> +        depth = 16ULL << depth;
->          env->sctrstatus =
->              env->sctrstatus & (~SCTRSTATUS_WRPTR_MASK | (depth - 1));
->      }
 
-This is a clear false-positive from Coverity, by the way: we just
-checked and enforced that depth is at most SCTRDEPTH_MAX, i.e. 4,
-and 16 << 4 cannot possibly overflow anything.
 
--- PMM
+On 3/18/25 1:42 PM, Peter Maydell wrote:
+> On Fri, 7 Mar 2025 at 12:46, Daniel Henrique Barboza
+> <dbarboza@ventanamicro.com> wrote:
+>>
+>> Coverity found the following issue:
+>>
+>>    >>>     CID 1593156:  Integer handling issues  (OVERFLOW_BEFORE_WIDEN)
+>>    >>>     Potentially overflowing expression "0x10 << depth" with type
+>>    "int" (32 bits, signed) is evaluated using 32-bit arithmetic, and then
+>>    used in a context that expects an expression of type "uint64_t" (64
+>>    bits, unsigned).
+>>    4299             depth = 16 << depth;
+>>
+>> Fix it by forcing the expression to be 64 bits wide by using '16ULL'.
+>>
+>> Resolves: Coverity CID 1593156
+>> Fixes: c48bd18eae ("target/riscv: Add support for Control Transfer Records extension CSRs.")
+>> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+>> ---
+>>   target/riscv/csr.c | 2 +-
+>>   1 file changed, 1 insertion(+), 1 deletion(-)
+>>
+>> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+>> index 0ebcca4597..e832ff3ca9 100644
+>> --- a/target/riscv/csr.c
+>> +++ b/target/riscv/csr.c
+>> @@ -4296,7 +4296,7 @@ static RISCVException rmw_sctrdepth(CPURISCVState *env, int csrno,
+>>           }
+>>
+>>           /* Update sctrstatus.WRPTR with a legal value */
+>> -        depth = 16 << depth;
+>> +        depth = 16ULL << depth;
+>>           env->sctrstatus =
+>>               env->sctrstatus & (~SCTRSTATUS_WRPTR_MASK | (depth - 1));
+>>       }
+> 
+> This is a clear false-positive from Coverity, by the way: we just
+> checked and enforced that depth is at most SCTRDEPTH_MAX, i.e. 4,
+> and 16 << 4 cannot possibly overflow anything.
+
+True. I wonder if we should keep this patch anyway due to the better code
+pattern in using ULL when left shifting into a 64 bit var, regardless of
+not fixing any overflows. There's a chance that we might copy/paste the
+existing pattern into another situation where an overflow might actually
+happen.
+
+I'll leave to Alistair to decide whether to keep to drop this patch. Either
+way works for me. Thanks,
+
+
+
+Daniel
+
+> 
+> -- PMM
+
 
