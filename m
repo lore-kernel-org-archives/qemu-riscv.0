@@ -4,88 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E8804C35FFA
-	for <qemu-riscv@archiver.kernel.org>; Wed, 19 Mar 2025 12:41:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A9078C36001
+	for <qemu-riscv@archiver.kernel.org>; Wed, 19 Mar 2025 12:53:52 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tusjO-0004FA-UL; Wed, 19 Mar 2025 08:41:13 -0400
+	id 1tusuX-0003KL-E9; Wed, 19 Mar 2025 08:52:42 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1tusit-00049L-Cn
- for qemu-riscv@nongnu.org; Wed, 19 Mar 2025 08:40:40 -0400
-Received: from mail-pl1-x633.google.com ([2607:f8b0:4864:20::633])
+ id 1tussf-0001rn-Ew
+ for qemu-riscv@nongnu.org; Wed, 19 Mar 2025 08:51:01 -0400
+Received: from mail-pl1-x62b.google.com ([2607:f8b0:4864:20::62b])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1tusio-0001Zw-RM
- for qemu-riscv@nongnu.org; Wed, 19 Mar 2025 08:40:38 -0400
-Received: by mail-pl1-x633.google.com with SMTP id
- d9443c01a7336-223f4c06e9fso10314855ad.1
- for <qemu-riscv@nongnu.org>; Wed, 19 Mar 2025 05:40:34 -0700 (PDT)
+ id 1tussZ-0006oh-J6
+ for qemu-riscv@nongnu.org; Wed, 19 Mar 2025 08:50:45 -0400
+Received: by mail-pl1-x62b.google.com with SMTP id
+ d9443c01a7336-22409077c06so169638525ad.1
+ for <qemu-riscv@nongnu.org>; Wed, 19 Mar 2025 05:50:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1742388033; x=1742992833; darn=nongnu.org;
+ d=ventanamicro.com; s=google; t=1742388638; x=1742993438; darn=nongnu.org;
  h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=sqSQ/XuVmaLcJkKs0Nq8S7WYVPfAp4PUej/1bKuIozQ=;
- b=QtgKAsmFZGG5BXwkEevvlrIPTsynX9gFoLDZ5WxLTwixc9KhsuhQGoy502dEdILTgD
- luzIeHevIuqSut/0DFpP+G89FYuIJhBLIlg9VKDeh/oFxteLVaMrFxVLOnNECSiFzO6n
- CFM97Hqxj/alJh/Gpcjv6f02xOX3Op3I4Frsby0I63OW9qCHFmkYmmCan8b4QNRvmTSH
- 1ZcNfwU6XALGeb7RJYg+zTFpo31wKk5tczWm5lvcZanm8H4Rop8lYdJ0iFIhVlXEpUqz
- E6O21WyBuvFqVZPwy1nd6BhuW2LKi8K4IDnWCU8W8EWFo0/f6NKNMvpUnufVJWjx1UTd
- KrwA==
+ :references:to:subject:user-agent:mime-version:date:message-id:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=Rc9600+NFzOCAqvbzrl4Mc9z30rP+N90z1s0bKSmK6w=;
+ b=MzkEzEUMB1jgaLl3yyWerCsQoWCTJv7lYVxhu/gsKRCrtDMjGihUR6vNF2zXQB0YRi
+ Fw2gYY6l/kL07dGToagWPQK9y4mzHXexh3rK8YsXfIMQN0jYiYqQ4Q2/ZwdzueLJVKcM
+ xR2vsDL9Omh0dGWd+pf+LsYEhTbIbjKX7k7J7zhnLacMVFrXPbvyKVI5OHKr8m8karrA
+ ISNbNm691gAz3svsacaUT40AqOeyTm6WMUsaFUTkt8psqo9KloFAq9qgVDkDicDAU+wp
+ 0PTQQnmKq9HhK6QxCKT/TaR7VV7zG9vKDB0nHZ3gyaOekyIf0FxNwAGWe1zyACP1Fwax
+ Hj/A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1742388033; x=1742992833;
+ d=1e100.net; s=20230601; t=1742388638; x=1742993438;
  h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :references:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=sqSQ/XuVmaLcJkKs0Nq8S7WYVPfAp4PUej/1bKuIozQ=;
- b=J0D1sre1sbS2S4D0VmS+JOIaL4d58O2RR8eEjICeYpsbgYGdNpGrblxe0v3HZcxCQp
- IKDrUwGKhYIWB4nidO6wq5CvZ/ZeE2d0pcM7W8bCmDFLiqdodg8HC5rp/N5NI32Rk5YU
- gLXvZpsv6ZgrfQwfXqDtzTwHwh5ML8V6ZfksD0eVWgd6dISEzsVDq0oDha6iMmT7unJd
- r12mLo6cz5rEbIdNEiK4fAyCdjT9cePBcSVCe3PbLREks+Pv5tNbaLGheMLPrnrH6lr9
- dj75f8vU1GfHgDjWRzUtv0+Xe/AiSyvxnBhaj1y0Elhk8LVoYGaW95WVWMwRPckOErYG
- YNbA==
+ bh=Rc9600+NFzOCAqvbzrl4Mc9z30rP+N90z1s0bKSmK6w=;
+ b=Fu+PlzdWUO2aoAYVDhp2woNusckTqgMKPRXWeO7S4JYUPDDDQkpnyPdmlZOenrLYFl
+ d+gOW15Rrf4VAhDxSg8db7r6qE4WKAKdeSNwGO5cDBTIoh4SnxBYHKf/4RL92P0yNpY1
+ LYNLZmJNQUDJf7rHMEn2xEzCErndyX7zaTgy9csCEc6nI4JTSubQ5pOdhpr8VOLi+GOf
+ CqKu40hbMDrOYmshKAqqKlQr8x1B/x2veJDcGkDvmg/sXmfaxECIjamBtH1VBAPr5IvP
+ oghb8oQraG+UvGFjgHdAC7u0ynw+jNoCQV29okKwolcEGn+4rSrUCWgvLmLHe0YUnOzJ
+ 9S+Q==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWtwbv2eRUM26Q0rVEnNMLv07gyPKfzXhfyL9qt5VmFAEoDEwRHCWqTKYeeKiNxVwEJaxihjh0icQgA@nongnu.org
-X-Gm-Message-State: AOJu0YykJMbrDlj80E6LTMXgNmU79giNnNs/N737zle4ZtqB1uDaYf9u
- U0wbUXwpJkw3/PxEKrHT4u1WzLQbwnPapBFEt98SDq1ucekJrY/n9gcdoOBW1GM=
-X-Gm-Gg: ASbGnctap/TiD1jvRbejVO+iEOVblUR+E3pZSh/mnL4R1Fg+uyvwKYzTI4ITYbsvMIx
- t9RyoX0FeileAn/APl4lbctRoH2bkGph/6H+ZRhzang+QGptwt/Iwm6nFDmDU87KZ1C1wV1OOeZ
- Y86Na0Xqfa/1zh5GYLOel3XrDE9T3fmxYjRIK+Lsd1Jq1VKz7kVWR010NHA7YlIry4Ge7meDBD7
- M9dK5ppHw5QrB4mTb2wxEzrfCPmMQrTBvkuoa5HZ3u98FNwf2Xg+dDX7BKk9JJOJcXu8cTn/1YW
- MhTAzJDUyiCQEjenREq3fWjcM5e+qmZelV/68f/LBOU9HLZQXk0hKQAnLv4=
-X-Google-Smtp-Source: AGHT+IHVoD3COLZ2/0h+im3NBDG7iJUpUpDGJr4OkOB7AxF6DxiBnB2wNautCMSNkm2VLaRwv8XGsA==
-X-Received: by 2002:a17:903:228c:b0:226:194f:48ef with SMTP id
- d9443c01a7336-2262c9d26d4mr120081645ad.13.1742388033193; 
- Wed, 19 Mar 2025 05:40:33 -0700 (PDT)
+ AJvYcCUA62Kr1cT2L9GANlAJiL89yaN5bMo8Iz63fOoUnhHVPx/mVWit7YkpdNnFLMTz4cqtBempUVbVM0sK@nongnu.org
+X-Gm-Message-State: AOJu0Yw12qxyw5xxEjspfNh/c7izGtgeer7w7CB/NXJpq9w+liuXxmA4
+ +/KGiiF3g3DMfAoaOpNJ47qXGHueHZENB5rLIqbizjalQe1rir+x4Xvo7qvxr+vJRdP25f+jFrj
+ 3
+X-Gm-Gg: ASbGncvUvqmdCO/AdzMQjnZ9b/MEKLKvBF/wdxCZl/io0V69UTDbKiiZzO4lLCsb/Sb
+ d2GL05mqUu9sZW80egm9RvDGxLzWtvEUg0t6dW2Y5qc59jiOL1SQiX+au6n68WRMmzDbIEOOfYD
+ spwvjqRYARZ5hz/TPfL0FKG/Qp4LVwatIoupPgoMz38BnZqic5JOCHgLEc/iS608q2CvxU4o7vD
+ J1x5MOkNerCvIeVWd6R9AdMI8eGkXKO7uPvjrxBPe4n0FiCjjF8LBpcZHxFftt9ZRc44p2NAz4v
+ ZNzdOf3iY8WzP8HlNRnfkOsXDU2yJseYYurmJ5UlcICQI7WvOhMXGAs9bz8=
+X-Google-Smtp-Source: AGHT+IGUgP1w1yM2JyQqdBmyW1pVIRknyemqFz6ZKVb/0rXLIhpaRCIbOh9Zbm+lFYYktirMVK0IFQ==
+X-Received: by 2002:a05:6a21:168e:b0:1f5:8f7f:8f19 with SMTP id
+ adf61e73a8af0-1fbeb5a7545mr4257021637.10.1742388638045; 
+ Wed, 19 Mar 2025 05:50:38 -0700 (PDT)
 Received: from [192.168.68.110] ([177.170.117.79])
  by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-73711578ceasm11501501b3a.84.2025.03.19.05.40.28
+ d2e1a72fcca58-737115295e5sm11508813b3a.23.2025.03.19.05.50.36
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 19 Mar 2025 05:40:32 -0700 (PDT)
-Message-ID: <06ed94a2-8b7e-4022-8ba9-36b62e8f59e2@ventanamicro.com>
-Date: Wed, 19 Mar 2025 09:40:26 -0300
+ Wed, 19 Mar 2025 05:50:37 -0700 (PDT)
+Message-ID: <a7ffa471-c5f6-4a80-9e2c-f1b4d0c19b64@ventanamicro.com>
+Date: Wed, 19 Mar 2025 09:50:35 -0300
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/2] hw/riscv/virt-acpi-build: Add support for RIMT
-To: Sunil V L <sunilvl@ventanamicro.com>, qemu-riscv@nongnu.org,
- qemu-devel@nongnu.org
-Cc: Alistair Francis <alistair.francis@wdc.com>,
- Palmer Dabbelt <palmer@dabbelt.com>, Weiwei Li <liwei1518@gmail.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Andrew Jones <ajones@ventanamicro.com>, Anup Patel
- <apatel@ventanamicro.com>, Atish Patra <atishp@rivosinc.com>
-References: <20250314051527.1892488-1-sunilvl@ventanamicro.com>
- <20250314051527.1892488-3-sunilvl@ventanamicro.com>
+Subject: Re: emulated riscv PLIC
+To: Yanfeng Liu <yfliu2008@qq.com>, qemu-riscv <qemu-riscv@nongnu.org>
+References: <tencent_B08E6CCE1DE2E1580A782D03697B9EC40F05@qq.com>
 Content-Language: en-US
 From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <20250314051527.1892488-3-sunilvl@ventanamicro.com>
+In-Reply-To: <tencent_B08E6CCE1DE2E1580A782D03697B9EC40F05@qq.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::633;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pl1-x633.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::62b;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pl1-x62b.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -110,279 +104,26 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 
 
-On 3/14/25 2:15 AM, Sunil V L wrote:
-> RISC-V IO Mapping Table (RIMT) is a new static ACPI table used to
-> communicate IOMMU information to the OS. Add support for creating this
-> table when the IOMMU is present. The specification is frozen and
-> available at [1].
+On 3/19/25 4:55 AM, Yanfeng Liu wrote:
+> Dear experts,
 > 
-> [1] - https://github.com/riscv-non-isa/riscv-acpi-rimt/releases/download/v0.99/rimt-spec.pdf
+> I am wondering the emulated riscv PLIC in QEMU allows triggering an interrupt by
+> writing directly to the memory mapped pending register?
 > 
-> Signed-off-by: Sunil V L <sunilvl@ventanamicro.com>
-> ---
->   hw/riscv/virt-acpi-build.c | 215 +++++++++++++++++++++++++++++++++++++
->   1 file changed, 215 insertions(+)
+> For example, to trigger PLIC interrupt 12, I wrote uint32_t (1 << 12) to
+> 0xc001000. But with QEMU v6.2 this seems has no effect.
+
+Can you test with a newer QEMU release? There were a lot of bug fixes and
+changes that landed in the PLIC emulation in the last 3 years.
+
+Thanks,
+
+Daniel
+
 > 
-> diff --git a/hw/riscv/virt-acpi-build.c b/hw/riscv/virt-acpi-build.c
-> index 1ad6800508..2b4f5b2cea 100644
-> --- a/hw/riscv/virt-acpi-build.c
-> +++ b/hw/riscv/virt-acpi-build.c
-> @@ -198,6 +198,32 @@ acpi_dsdt_add_uart(Aml *scope, const MemMapEntry *uart_memmap,
->       aml_append(scope, dev);
->   }
->   
-> +/*
-> + * Add DSDT entry for the IOMMU platform device.
-> + * ACPI ID for IOMMU is defined in the section 6.2 of RISC-V BRS spec.
-> + * https://github.com/riscv-non-isa/riscv-brs/releases/download/v0.8/riscv-brs-spec.pdf
-> + */
-> +static void acpi_dsdt_add_iommu_sys(Aml *scope, const MemMapEntry *iommu_memmap,
-> +                                    uint32_t iommu_irq)
-> +{
-> +    uint32_t i;
-> +
-> +    Aml *dev = aml_device("IMU0");
-> +    aml_append(dev, aml_name_decl("_HID", aml_string("RSCV0004")));
-> +    aml_append(dev, aml_name_decl("_UID", aml_int(0)));
-> +
-> +    Aml *crs = aml_resource_template();
-> +    aml_append(crs, aml_memory32_fixed(iommu_memmap->base,
-> +                                       iommu_memmap->size, AML_READ_WRITE));
-> +    for (i = iommu_irq; i < iommu_irq + 4; i++) {
-> +        aml_append(crs, aml_interrupt(AML_CONSUMER, AML_EDGE, AML_ACTIVE_LOW,
-> +                                      AML_EXCLUSIVE, &i, 1));
-> +    }
-> +
-> +    aml_append(dev, aml_name_decl("_CRS", crs));
-> +    aml_append(scope, dev);
-> +}
-> +
->   /*
->    * Serial Port Console Redirection Table (SPCR)
->    * Rev: 1.10
-> @@ -450,6 +476,9 @@ static void build_dsdt(GArray *table_data,
->       }
->   
->       acpi_dsdt_add_uart(scope, &memmap[VIRT_UART0], UART0_IRQ);
-> +    if (virt_is_iommu_sys_enabled(s)) {
-> +        acpi_dsdt_add_iommu_sys(scope, &memmap[VIRT_IOMMU_SYS], IOMMU_SYS_IRQ);
-> +    }
->   
->       if (socket_count == 1) {
->           virtio_acpi_dsdt_add(scope, memmap[VIRT_VIRTIO].base,
-> @@ -602,6 +631,187 @@ static void build_madt(GArray *table_data,
->       acpi_table_end(linker, &table);
->   }
->   
-> +#define ID_MAPPING_ENTRY_SIZE        20
-> +#define IOMMU_ENTRY_SIZE             40
-> +#define RISCV_INTERRUPT_WIRE_OFFSSET 40
-> +#define ROOT_COMPLEX_ENTRY_SIZE      20
-> +#define RIMT_NODE_OFFSET             48
-> +
-> +/*
-> + * ID Mapping Structure
-> + */
-> +static void build_rimt_id_mapping(GArray *table_data, uint32_t source_id_base,
-> +                                  uint32_t num_ids, uint32_t dest_id_base)
-> +{
-> +    /* Source ID Base */
-> +    build_append_int_noprefix(table_data, source_id_base, 4);
-> +    /* Number of IDs */
-> +    build_append_int_noprefix(table_data, num_ids, 4);
-> +    /* Destination Device ID Base */
-> +    build_append_int_noprefix(table_data, source_id_base, 4);
-> +    /* Destination IOMMU Offset */
-> +    build_append_int_noprefix(table_data, dest_id_base, 4);
-> +    /* Flags */
-> +    build_append_int_noprefix(table_data, 0, 4);
-> +}
-> +
-> +struct AcpiRimtIdMapping {
-> +    uint32_t source_id_base;
-> +    uint32_t num_ids;
-> +};
-> +typedef struct AcpiRimtIdMapping AcpiRimtIdMapping;
-> +
-> +/* Build the rimt ID mapping to IOMMU for a given PCI host bridge */
-> +static int rimt_host_bridges(Object *obj, void *opaque)
-> +{
-> +    GArray *idmap_blob = opaque;
-> +
-> +    if (object_dynamic_cast(obj, TYPE_PCI_HOST_BRIDGE)) {
-> +        PCIBus *bus = PCI_HOST_BRIDGE(obj)->bus;
-> +
-> +        if (bus && !pci_bus_bypass_iommu(bus)) {
-> +            int min_bus, max_bus;
-> +
-> +            pci_bus_range(bus, &min_bus, &max_bus);
-> +
-> +            AcpiRimtIdMapping idmap = {
-> +                .source_id_base = min_bus << 8,
-> +                .num_ids = (max_bus - min_bus + 1) << 8,
-> +            };
-> +            g_array_append_val(idmap_blob, idmap);
-> +        }
-> +    }
-> +
-> +    return 0;
-> +}
-> +
-> +static int rimt_idmap_compare(gconstpointer a, gconstpointer b)
-> +{
-> +    AcpiRimtIdMapping *idmap_a = (AcpiRimtIdMapping *)a;
-> +    AcpiRimtIdMapping *idmap_b = (AcpiRimtIdMapping *)b;
-> +
-> +    return idmap_a->source_id_base - idmap_b->source_id_base;
-> +}
-> +
-> +/*
-> + * RISC-V IO Mapping Table (RIMT)
-> + * https://github.com/riscv-non-isa/riscv-acpi-rimt/releases/download/v0.99/rimt-spec.pdf
-> + */
-> +static void build_rimt(GArray *table_data, BIOSLinker *linker,
-> +                       RISCVVirtState *s)
-> +{
-> +    int i, nb_nodes, rc_mapping_count;
-> +    size_t node_size, iommu_offset = 0;
-> +    uint32_t id = 0;
-> +    GArray *iommu_idmaps = g_array_new(false, true, sizeof(AcpiRimtIdMapping));
-
-I suggest using
-
-
-g_autoptr(GArray) *iommu_idmaps = g_array_new(false, true, sizeof(AcpiRimtIdMapping));
-
-
-And then you can get rid of the g_array_free() in the end.
-
-
-With this change:
-
-Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-
-> +
-> +    AcpiTable table = { .sig = "RIMT", .rev = 1, .oem_id = s->oem_id,
-> +                        .oem_table_id = s->oem_table_id };
-> +
-> +    acpi_table_begin(&table, table_data);
-> +
-> +    object_child_foreach_recursive(object_get_root(),
-> +                                   rimt_host_bridges, iommu_idmaps);
-> +
-> +    /* Sort the ID mapping  by Source ID Base*/
-> +    g_array_sort(iommu_idmaps, rimt_idmap_compare);
-> +
-> +    nb_nodes = 2; /* RC, IOMMU */
-> +    rc_mapping_count = iommu_idmaps->len;
-> +    /* Number of RIMT Nodes */
-> +    build_append_int_noprefix(table_data, nb_nodes, 4);
-> +
-> +    /* Offset to Array of RIMT Nodes */
-> +    build_append_int_noprefix(table_data, RIMT_NODE_OFFSET, 4);
-> +    build_append_int_noprefix(table_data, 0, 4); /* Reserved */
-> +
-> +    iommu_offset = table_data->len - table.table_offset;
-> +    /*  IOMMU Device Structure */
-> +    build_append_int_noprefix(table_data, 0, 1);         /* Type - IOMMU*/
-> +    build_append_int_noprefix(table_data, 1, 1);         /* Revision */
-> +    node_size =  IOMMU_ENTRY_SIZE;
-> +    build_append_int_noprefix(table_data, node_size, 2); /* Length */
-> +    build_append_int_noprefix(table_data, 0, 2);         /* Reserved */
-> +    build_append_int_noprefix(table_data, id++, 2);      /* ID */
-> +    if (virt_is_iommu_sys_enabled(s)) {
-> +        /* Hardware ID */
-> +        build_append_int_noprefix(table_data, 'R', 1);
-> +        build_append_int_noprefix(table_data, 'S', 1);
-> +        build_append_int_noprefix(table_data, 'C', 1);
-> +        build_append_int_noprefix(table_data, 'V', 1);
-> +        build_append_int_noprefix(table_data, '0', 1);
-> +        build_append_int_noprefix(table_data, '0', 1);
-> +        build_append_int_noprefix(table_data, '0', 1);
-> +        build_append_int_noprefix(table_data, '4', 1);
-> +        /* Base Address */
-> +        build_append_int_noprefix(table_data,
-> +                                  s->memmap[VIRT_IOMMU_SYS].base, 8);
-> +        build_append_int_noprefix(table_data, 0, 4);   /* Flags */
-> +    } else {
-> +        /* Hardware ID */
-> +        build_append_int_noprefix(table_data, '0', 1);
-> +        build_append_int_noprefix(table_data, '0', 1);
-> +        build_append_int_noprefix(table_data, '1', 1);
-> +        build_append_int_noprefix(table_data, '0', 1);
-> +        build_append_int_noprefix(table_data, '0', 1);
-> +        build_append_int_noprefix(table_data, '0', 1);
-> +        build_append_int_noprefix(table_data, '1', 1);
-> +        build_append_int_noprefix(table_data, '4', 1);
-> +
-> +        build_append_int_noprefix(table_data, 0, 8);   /* Base Address */
-> +        build_append_int_noprefix(table_data, 1, 4);   /* Flags */
-> +    }
-> +
-> +    build_append_int_noprefix(table_data, 0, 4);       /* Proximity Domain */
-> +    build_append_int_noprefix(table_data, 0, 2);       /* PCI Segment number */
-> +    /* PCIe B/D/F */
-> +    if (virt_is_iommu_sys_enabled(s)) {
-> +        build_append_int_noprefix(table_data, 0, 2);
-> +    } else {
-> +        build_append_int_noprefix(table_data, s->pci_iommu_bdf, 2);
-> +    }
-> +    /* Number of interrupt wires */
-> +    build_append_int_noprefix(table_data, 0, 2);
-> +    /* Interrupt wire array offset */
-> +    build_append_int_noprefix(table_data, RISCV_INTERRUPT_WIRE_OFFSSET, 2);
-> +
-> +    /*  PCIe Root Complex Node */
-> +    build_append_int_noprefix(table_data, 1, 1);           /* Type */
-> +    build_append_int_noprefix(table_data, 1, 1);           /* Revision */
-> +    node_size =  ROOT_COMPLEX_ENTRY_SIZE +
-> +                 ID_MAPPING_ENTRY_SIZE * rc_mapping_count;
-> +    build_append_int_noprefix(table_data, node_size, 2);   /* Length */
-> +    build_append_int_noprefix(table_data, 0, 2);           /* Reserved */
-> +    build_append_int_noprefix(table_data, id++, 2);        /* ID */
-> +    build_append_int_noprefix(table_data, 0, 4);           /* Flags */
-> +    build_append_int_noprefix(table_data, 0, 2);           /* Reserved */
-> +    /* PCI Segment number */
-> +    build_append_int_noprefix(table_data, 0, 2);
-> +    /* ID mapping array offset */
-> +    build_append_int_noprefix(table_data, ROOT_COMPLEX_ENTRY_SIZE, 2);
-> +    /* Number of ID mappings */
-> +    build_append_int_noprefix(table_data, rc_mapping_count, 2);
-> +
-> +    /* Output Reference */
-> +    AcpiRimtIdMapping *range;
-> +
-> +    /* ID mapping array */
-> +    for (i = 0; i < iommu_idmaps->len; i++) {
-> +        range = &g_array_index(iommu_idmaps, AcpiRimtIdMapping, i);
-> +        if (virt_is_iommu_sys_enabled(s)) {
-> +            range->source_id_base = 0;
-> +        } else {
-> +            range->source_id_base = s->pci_iommu_bdf + 1;
-> +        }
-> +        range->num_ids = 0xffff - s->pci_iommu_bdf;
-> +        build_rimt_id_mapping(table_data, range->source_id_base,
-> +                              range->num_ids, iommu_offset);
-> +    }
-> +
-> +    acpi_table_end(linker, &table);
-> +    g_array_free(iommu_idmaps, true);
-> +}
-> +
->   /*
->    * ACPI spec, Revision 6.5+
->    * 5.2.16 System Resource Affinity Table (SRAT)
-> @@ -679,6 +889,11 @@ static void virt_acpi_build(RISCVVirtState *s, AcpiBuildTables *tables)
->       acpi_add_table(table_offsets, tables_blob);
->       build_rhct(tables_blob, tables->linker, s);
->   
-> +    if (virt_is_iommu_sys_enabled(s) || s->pci_iommu_bdf) {
-> +        acpi_add_table(table_offsets, tables_blob);
-> +        build_rimt(tables_blob, tables->linker, s);
-> +    }
-> +
->       acpi_add_table(table_offsets, tables_blob);
->       spcr_setup(tables_blob, tables->linker, s);
->   
+> Regards,
+> yf
+> 
+> 
 
 
