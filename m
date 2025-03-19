@@ -4,82 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1EA56C35FFC
-	for <qemu-riscv@archiver.kernel.org>; Wed, 19 Mar 2025 17:16:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EA3AEC35FFC
+	for <qemu-riscv@archiver.kernel.org>; Wed, 19 Mar 2025 17:19:50 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tux1f-0006Fk-2N; Wed, 19 Mar 2025 13:16:20 -0400
+	id 1tux4w-00020G-Ok; Wed, 19 Mar 2025 13:19:42 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <jason.chien@sifive.com>)
- id 1tux1F-0006Ax-Kk
- for qemu-riscv@nongnu.org; Wed, 19 Mar 2025 13:15:55 -0400
-Received: from mail-ed1-x52f.google.com ([2a00:1450:4864:20::52f])
+ id 1tux4r-0001ts-UQ
+ for qemu-riscv@nongnu.org; Wed, 19 Mar 2025 13:19:37 -0400
+Received: from mail-ed1-x52b.google.com ([2a00:1450:4864:20::52b])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <jason.chien@sifive.com>)
- id 1tux1D-00045N-6U
- for qemu-riscv@nongnu.org; Wed, 19 Mar 2025 13:15:53 -0400
-Received: by mail-ed1-x52f.google.com with SMTP id
- 4fb4d7f45d1cf-5e5b56fc863so10101752a12.3
- for <qemu-riscv@nongnu.org>; Wed, 19 Mar 2025 10:15:50 -0700 (PDT)
+ id 1tux4o-0006NQ-EA
+ for qemu-riscv@nongnu.org; Wed, 19 Mar 2025 13:19:37 -0400
+Received: by mail-ed1-x52b.google.com with SMTP id
+ 4fb4d7f45d1cf-5e6c18e2c7dso12164086a12.3
+ for <qemu-riscv@nongnu.org>; Wed, 19 Mar 2025 10:19:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1742404550; x=1743009350; darn=nongnu.org;
+ d=sifive.com; s=google; t=1742404772; x=1743009572; darn=nongnu.org;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=IdJgxjmcTGbXvVdKYoLURKEw4k89qqKLcVUAeOb46hU=;
- b=SOOGlkQfnNT8R3LWM2n50vTjs6pCs7en1xXaE9csRvp4blhMyWTjreQYgjfj1+W+AB
- U9zO/dbGOHynApjpOBMP4TNoGvPVZ7qG+tQG0BTpseC4liMVbP8oF47QGeYbdDGeKoG/
- uMDq6abIZoHfH2Vhk4ZV8Uj2KN7D39fS/kNgapHC8HSU8AtthB2R0SVH6JMZfjMXqt3V
- fabYPmupJ4BC9pVlq5qApVd/BqE0lpbSkvOTCTU1J7NOfVFvqrv35GdPwsCjKKaU6uNJ
- uDQiqq8XTWXC07nkP9xKfLYLqRkQSH4WbFTJvAWggAMCaooVJ9u/aOZ5Q8MXqRbpyPym
- ubog==
+ bh=9SRSY3jrkOn9x5eeoNPjo/upYoDQHJ3GIjwfWH+DP0s=;
+ b=dTJjnzUKMbEjJDOL/5XVYZb7zwNZUdOLFHtdH17Yfo3efV9R0OAHLkSuYFA3hzwioT
+ EgVw8hgEYWvjdPrqOtP0l5FxvxC6yNECFx0pVfbX4gjKiJHS/Q5nBxYTI9nY9nCr5Y4d
+ w9ET1h0A/W73HmBhNW35n+Elr3uyijOXUkXwiuJKjK1frhCWHew20OX5L+iV7PaPOEIZ
+ thmHCKBPQ0XgMnQdxATtF/+PicOvX5/Zqm53Hu/4tBJi6ADD7tKYcWAJRrPMAyWJmdjT
+ psqg5JGmSnClmf+eh/6Db0j8PkYVeF66TFs2vGeYJ1VEV8WLNLX7gHNahpdqgVZNsomY
+ lzPA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1742404550; x=1743009350;
+ d=1e100.net; s=20230601; t=1742404772; x=1743009572;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=IdJgxjmcTGbXvVdKYoLURKEw4k89qqKLcVUAeOb46hU=;
- b=oX13/24SeDs0otHx7pkezjYwmoWF74CzLGSk8jK+3lCouNStNjxouOLvxLJcrykZ1p
- P57DRhPt6Ru3NaumOo1InyvbYHrsQvssDD41C0t86fKkUy8+KgpfJkBo8EgbIqaoced6
- aGdA0K7/eZAtr3NTyDZHwZtyIWVo3vVita7avMkcNAzAIl2RRNP517Jwx+nvUboZjHFC
- CcDEuaoENSqTleuKB/YaDaTnhieYUOvFDMce7887En4ogw/MUqLY+7v0LGL53JNnQ+KL
- 2CmQEhBhf5vkVMd1IKTfLDgFHrxBA1ec0XRh8b4omg6LItTXiRciSACTdhSQbbecqb8y
- X0MA==
+ bh=9SRSY3jrkOn9x5eeoNPjo/upYoDQHJ3GIjwfWH+DP0s=;
+ b=kX3Bne2SN9aBlIzFOLYo6hQ7PGZG7Uqj3w1cNGWl1lYDg0y94mFt0xffKJTQ6ij/48
+ wiDpWiYskIHoisjxUcKBQZ0lFhMh4Mj2bqJtt9PBM6R6j/sIxoGO/y6Sn9LWNnYqdhMa
+ qJwvjSGjBYMx12jMlFUDqPUuYdTo23DM3eknQb3SC1oR4qr8wqiy0IMV5bHfVJ1rn/6M
+ pRjK/BvoHDdaYR7MCoTJ/yPHDwOteaVJMXRM5JuFphr4LIOYQeG+Mcdu7ymGzdKbG+ro
+ vbOZWj5KpGUWkTV3TGTM/sQvmxb465tVx01BSuWCnErk/+BJ+T53+k3fZNrt6xRnZ0nZ
+ gwXQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUxTTrv3g/Ddqi0t8etJog22iTudlVNcU0IQ7OLEtv4qoKyrLLX51Fpuiue+Fzy9+h/9y+0LwkKHI5X@nongnu.org
-X-Gm-Message-State: AOJu0Yyq7RHgYrMKeAPg0qqwmZAlOgugF72m3hfvzTr4KtJilUzIt3Ma
- dMaDhdJLZfDnreq4YSCq2vM+OAqMubCyqvhNJ+Lah2KX0WrEE+mPRHHOBteCrHKpJanwrEgja9A
- z5zSxet2nTeenh8A2plAY4ctiGGoCtDGgSbvdNjhkUwyMycPV3piwSQ==
-X-Gm-Gg: ASbGncu8QCdQbRZ4j5jj+oxy04xhMvJTFI2HIM+XafWdctC9QLLdW9ntTTrJVna7st8
- mFuH+pDcAcgqDrD04KpsT7rOYe9eijYMJn+Sp54sT2FbyWrv6nkm+PIsRFd0iqtiwKV/AIYTqlY
- iCs8/WVpzpyUBUhJ/W9pD2iCY=
-X-Google-Smtp-Source: AGHT+IE6oHZTZRT78SJvDDqaoCAXPLU4gbGBCTUlzsL6CuZ9NSRxbUAm3uNn8UCNWD1cUTYU7cW8LjB5aO2mZNBQm/s=
-X-Received: by 2002:a05:6402:3513:b0:5e5:c637:b69 with SMTP id
- 4fb4d7f45d1cf-5eb80cde92dmr4365996a12.6.1742404549533; Wed, 19 Mar 2025
- 10:15:49 -0700 (PDT)
+ AJvYcCUaKaWI6qtl62dRxyZaKaNcAmyl6qOAjLkuCqubwT4waw+5Ri/pc29jt8QM/xwTeCfs3WM1hoo9CXn5@nongnu.org
+X-Gm-Message-State: AOJu0Yzu3yh1c3qJqi5S75od9gMNfBrHQ54+aRdvO/oIt4imVLtEirbw
+ 9iW8iwJZJR9QLIuYdm5I+8rI0WTG604GWqnwCHLtUIoEt7KdYF6haOtNH4Z/xnFsff1f84NgzuS
+ AS5odyiEAl7mRVtCt544ubXSIa8BnwZmP1vewOw==
+X-Gm-Gg: ASbGncvilfw25WcanftVSNy27R3rirwuL0Jepb2g92/awdk3dNLfJCKPjKkKyYrxxAw
+ lebyWyAKmVvpNGuzFnPdeygYDGSMgMX3JFhZtD/ulGo6NkDhw06muxWpA4lE5ls/hnt7Zr5EB5C
+ wNLvvuCrC5/15zHCapsWBLyno=
+X-Google-Smtp-Source: AGHT+IF0AuiGxOMy/h0eJcb4T+DuMx0aJ4k42YEfNE3byNW8+5u9n4tY0OXPrxsmAHQ+wmWfYqtv6B8Im27SFFp8X7A=
+X-Received: by 2002:a05:6402:26d4:b0:5e0:8937:6ef2 with SMTP id
+ 4fb4d7f45d1cf-5eb80d0ef20mr4021495a12.8.1742404771528; Wed, 19 Mar 2025
+ 10:19:31 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250227073049.32655-1-jason.chien@sifive.com>
- <CAFEAcA8LPHEmLxDMUNN7DSHCw8pwvA7kUOAH+Ef1mDvOVH-dYQ@mail.gmail.com>
-In-Reply-To: <CAFEAcA8LPHEmLxDMUNN7DSHCw8pwvA7kUOAH+Ef1mDvOVH-dYQ@mail.gmail.com>
+References: <20250307203952.13871-1-jason.chien@sifive.com>
+In-Reply-To: <20250307203952.13871-1-jason.chien@sifive.com>
 From: Jason Chien <jason.chien@sifive.com>
-Date: Thu, 20 Mar 2025 01:15:38 +0800
-X-Gm-Features: AQ5f1Jqvm014VnT5kG0xaBrYnT1Wz6kKHYmKtYUIvkn5KaLbtks6kbBk8gs4y-s
-Message-ID: <CADr__8rhGpOtLBh_8hhtpncAeN9OrxL19ODEcq8n1P9gp420ZA@mail.gmail.com>
-Subject: Re: [PATCH] hw/misc/edu: Rename macros indicating the direction of
- DMA operations
-To: Peter Maydell <peter.maydell@linaro.org>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, Jiri Slaby <jslaby@suse.cz>
-Content-Type: multipart/alternative; boundary="0000000000003afd2b0630b52c47"
-Received-SPF: pass client-ip=2a00:1450:4864:20::52f;
- envelope-from=jason.chien@sifive.com; helo=mail-ed1-x52f.google.com
+Date: Thu, 20 Mar 2025 01:19:18 +0800
+X-Gm-Features: AQ5f1JqZAlTLGxIqrg1Xli1h2HIPrLWalQEsGwmyMEFt4ifDschwS-jD0ovIUhs
+Message-ID: <CADr__8rgTBJW-KKAr55Y1wHLS7jRDyvQjx=vJCGAj4T1YZhUNA@mail.gmail.com>
+Subject: Re: [PATCH 0/4] Integrate IOMMUs with PCI hosts that have ATUs
+To: qemu-devel@nongnu.org, qemu-riscv@nongnu.org
+Cc: Peter Maydell <peter.maydell@linaro.org>,
+ Andrey Smirnov <andrew.smirnov@gmail.com>, 
+ "Michael S. Tsirkin" <mst@redhat.com>,
+ Marcel Apfelbaum <marcel.apfelbaum@gmail.com>, 
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Weiwei Li <liwei1518@gmail.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>, 
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
+ "open list:MCIMX7D SABRE / i..." <qemu-arm@nongnu.org>
+Content-Type: multipart/alternative; boundary="0000000000007667080630b53981"
+Received-SPF: pass client-ip=2a00:1450:4864:20::52b;
+ envelope-from=jason.chien@sifive.com; helo=mail-ed1-x52b.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, HTML_MESSAGE=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -95,116 +102,101 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
---0000000000003afd2b0630b52c47
+--0000000000007667080630b53981
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-This is a virtual device designed for educational purposes. The only spec I
-found is in QEMU documentation:
-https://github.com/qemu/qemu/blob/master/docs/specs/edu.rst
-According to the documentation:
-direction (0: from RAM to EDU, 1: from EDU to RAM)
-The macros confused me and my goal is to make the direction easier to
-differentiate. Something like EDU_DMA_TO_PCI_BUS and EDU_DMA_FROM_PCI_BUS
-would also work. Do you have any suggestions?
+Ping
 
-thanks
+Jason Chien <jason.chien@sifive.com> =E6=96=BC 2025=E5=B9=B43=E6=9C=888=E6=
+=97=A5 =E9=80=B1=E5=85=AD =E4=B8=8A=E5=8D=884:40=E5=AF=AB=E9=81=93=EF=BC=9A
 
-Peter Maydell <peter.maydell@linaro.org> =E6=96=BC 2025=E5=B9=B43=E6=9C=881=
-2=E6=97=A5 =E9=80=B1=E4=B8=89 =E4=B8=8A=E5=8D=882:41=E5=AF=AB=E9=81=93=EF=
-=BC=9A
-
-> On Thu, 27 Feb 2025 at 07:32, Jason Chien <jason.chien@sifive.com> wrote:
-> >
-> > This commit renames the macros to accurately reflect the direction of
-> > DMA operations.
-> >
-> > EDU_DMA_TO_PCI now represents reading memory content into the EDU buffe=
-r,
-> > while EDU_DMA_FROM_PCI represents writing EDU buffer content to memory.
+> The struct PCIIOMMUOps is designed for use by an IOMMU, but many PCI host=
+s
+> also utilize it to implement their ATUs, preventing coexistence with
+> IOMMUs.
+> Overwriting a PCI host=E2=80=99s PCIIOMMUOps disrupts its translation rul=
+es.
 >
-> The EDU device is a PCI device, so if it is reading
-> then it is reading data from the PCI bus, and if it is
-> writing then it is writing data to the PCI bus. So I
-> think there's an argument that the current names make
-> sense.
+> This patch series introduces a mechanism to route inbound transactions fr=
+om
+> PCI hosts to the IOMMU, enabling proper integration.
 >
-> Plus, presumably this device model is implementing the hardware
-> half of a defined specification. The authoritative source for
-> what names the 0 and 1 values of the DIR bit should be named
-> would be that specification.
+> The final patch depends on another patch series:
+> https://lists.nongnu.org/archive/html/qemu-riscv/2025-03/msg00003.html
 >
-> Where is that spec, and what does it say? If it says 0 for
-> FROM and 1 for TO, that's what we should use. If it's the
-> other way around, that's an error in our device implementation
-> that we should correct.
+> Jason Chien (4):
+>   include/hw/pci: Introduce a callback to set the downstream mr of PCI
+>     hosts
+>   hw/pci: Introduce an API to set PCI host downstream mr for IOMMU
+>     integration
+>   hw/pci-host/designware: Implement PCIIOMMUOps.set_downstream_mr()
+>   hw/riscv/riscv-iommu: Connect the IOMMU with PCI hosts that have ATUs
 >
-> thanks
-> -- PMM
+>  hw/pci-host/designware.c         | 18 +++++++++++++++---
+>  hw/pci/pci.c                     |  8 ++++++++
+>  hw/riscv/riscv-iommu.c           | 15 ++++++++++-----
+>  include/hw/pci-host/designware.h |  2 ++
+>  include/hw/pci/pci.h             | 21 +++++++++++++++++++++
+>  5 files changed, 56 insertions(+), 8 deletions(-)
+>
+> --
+> 2.43.2
+>
 >
 
---0000000000003afd2b0630b52c47
+--0000000000007667080630b53981
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-<div dir=3D"ltr"><div id=3D"gmail-:1g8" class=3D"gmail-Am gmail-aiL gmail-a=
-O9 gmail-Al editable gmail-LW-avf gmail-tS-tW gmail-tS-tY" aria-label=3D"=
-=E9=83=B5=E4=BB=B6=E5=85=A7=E6=96=87" role=3D"textbox" aria-multiline=3D"tr=
-ue" tabindex=3D"1" style=3D"direction:ltr;min-height:85px" aria-controls=3D=
-":20c" aria-expanded=3D"false">This is a virtual device designed for educat=
-ional purposes. The only spec I found is in QEMU documentation: <a href=3D"=
-https://github.com/qemu/qemu/blob/master/docs/specs/edu.rst">https://github=
-.com/qemu/qemu/blob/master/docs/specs/edu.rst</a></div><div id=3D"gmail-:1g=
-8" class=3D"gmail-Am gmail-aiL gmail-aO9 gmail-Al editable gmail-LW-avf gma=
-il-tS-tW gmail-tS-tY" aria-label=3D"=E9=83=B5=E4=BB=B6=E5=85=A7=E6=96=87" r=
-ole=3D"textbox" aria-multiline=3D"true" tabindex=3D"1" style=3D"direction:l=
-tr;min-height:85px" aria-controls=3D":20c" aria-expanded=3D"false">Accordin=
-g to the documentation:<br>direction (0: from RAM to EDU, 1: from EDU to RA=
-M)</div><div id=3D"gmail-:1g8" class=3D"gmail-Am gmail-aiL gmail-aO9 gmail-=
-Al editable gmail-LW-avf gmail-tS-tW gmail-tS-tY" aria-label=3D"=E9=83=B5=
-=E4=BB=B6=E5=85=A7=E6=96=87" role=3D"textbox" aria-multiline=3D"true" tabin=
-dex=3D"1" style=3D"direction:ltr;min-height:85px" aria-controls=3D":20c" ar=
-ia-expanded=3D"false">The macros confused me and my goal is to make the dir=
-ection easier to differentiate. Something like EDU_DMA_TO_PCI_BUS and=C2=A0=
-EDU_DMA_FROM_PCI_BUS would also work. Do you have any suggestions?<br><br>t=
-hanks<br></div></div><br><div class=3D"gmail_quote gmail_quote_container"><=
-div dir=3D"ltr" class=3D"gmail_attr">Peter Maydell &lt;<a href=3D"mailto:pe=
-ter.maydell@linaro.org">peter.maydell@linaro.org</a>&gt; =E6=96=BC 2025=E5=
-=B9=B43=E6=9C=8812=E6=97=A5 =E9=80=B1=E4=B8=89 =E4=B8=8A=E5=8D=882:41=E5=AF=
+<div dir=3D"ltr">Ping</div><br><div class=3D"gmail_quote gmail_quote_contai=
+ner"><div dir=3D"ltr" class=3D"gmail_attr">Jason Chien &lt;<a href=3D"mailt=
+o:jason.chien@sifive.com">jason.chien@sifive.com</a>&gt; =E6=96=BC 2025=E5=
+=B9=B43=E6=9C=888=E6=97=A5 =E9=80=B1=E5=85=AD =E4=B8=8A=E5=8D=884:40=E5=AF=
 =AB=E9=81=93=EF=BC=9A<br></div><blockquote class=3D"gmail_quote" style=3D"m=
 argin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left=
-:1ex">On Thu, 27 Feb 2025 at 07:32, Jason Chien &lt;<a href=3D"mailto:jason=
-.chien@sifive.com" target=3D"_blank">jason.chien@sifive.com</a>&gt; wrote:<=
-br>
-&gt;<br>
-&gt; This commit renames the macros to accurately reflect the direction of<=
-br>
-&gt; DMA operations.<br>
-&gt;<br>
-&gt; EDU_DMA_TO_PCI now represents reading memory content into the EDU buff=
-er,<br>
-&gt; while EDU_DMA_FROM_PCI represents writing EDU buffer content to memory=
+:1ex">The struct PCIIOMMUOps is designed for use by an IOMMU, but many PCI =
+hosts<br>
+also utilize it to implement their ATUs, preventing coexistence with IOMMUs=
+.<br>
+Overwriting a PCI host=E2=80=99s PCIIOMMUOps disrupts its translation rules=
 .<br>
 <br>
-The EDU device is a PCI device, so if it is reading<br>
-then it is reading data from the PCI bus, and if it is<br>
-writing then it is writing data to the PCI bus. So I<br>
-think there&#39;s an argument that the current names make<br>
-sense.<br>
+This patch series introduces a mechanism to route inbound transactions from=
 <br>
-Plus, presumably this device model is implementing the hardware<br>
-half of a defined specification. The authoritative source for<br>
-what names the 0 and 1 values of the DIR bit should be named<br>
-would be that specification.<br>
+PCI hosts to the IOMMU, enabling proper integration.<br>
 <br>
-Where is that spec, and what does it say? If it says 0 for<br>
-FROM and 1 for TO, that&#39;s what we should use. If it&#39;s the<br>
-other way around, that&#39;s an error in our device implementation<br>
-that we should correct.<br>
+The final patch depends on another patch series:<br>
+<a href=3D"https://lists.nongnu.org/archive/html/qemu-riscv/2025-03/msg0000=
+3.html" rel=3D"noreferrer" target=3D"_blank">https://lists.nongnu.org/archi=
+ve/html/qemu-riscv/2025-03/msg00003.html</a><br>
 <br>
-thanks<br>
--- PMM<br>
+Jason Chien (4):<br>
+=C2=A0 include/hw/pci: Introduce a callback to set the downstream mr of PCI=
+<br>
+=C2=A0 =C2=A0 hosts<br>
+=C2=A0 hw/pci: Introduce an API to set PCI host downstream mr for IOMMU<br>
+=C2=A0 =C2=A0 integration<br>
+=C2=A0 hw/pci-host/designware: Implement PCIIOMMUOps.set_downstream_mr()<br=
+>
+=C2=A0 hw/riscv/riscv-iommu: Connect the IOMMU with PCI hosts that have ATU=
+s<br>
+<br>
+=C2=A0hw/pci-host/designware.c=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0| 18 ++++++=
++++++++++---<br>
+=C2=A0hw/pci/pci.c=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0|=C2=A0 8 ++++++++<br>
+=C2=A0hw/riscv/riscv-iommu.c=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0| 15 +=
++++++++++-----<br>
+=C2=A0include/hw/pci-host/designware.h |=C2=A0 2 ++<br>
+=C2=A0include/hw/pci/pci.h=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0|=
+ 21 +++++++++++++++++++++<br>
+=C2=A05 files changed, 56 insertions(+), 8 deletions(-)<br>
+<br>
+-- <br>
+2.43.2<br>
+<br>
 </blockquote></div>
 
---0000000000003afd2b0630b52c47--
+--0000000000007667080630b53981--
 
