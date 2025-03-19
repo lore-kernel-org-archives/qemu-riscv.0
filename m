@@ -4,81 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C8E1EC35FFA
-	for <qemu-riscv@archiver.kernel.org>; Wed, 19 Mar 2025 16:41:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1EA56C35FFC
+	for <qemu-riscv@archiver.kernel.org>; Wed, 19 Mar 2025 17:16:23 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tuwT4-0006xG-DF; Wed, 19 Mar 2025 12:40:37 -0400
+	id 1tux1f-0006Fk-2N; Wed, 19 Mar 2025 13:16:20 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <jason.chien@sifive.com>)
- id 1tuwSy-0006uX-F1
- for qemu-riscv@nongnu.org; Wed, 19 Mar 2025 12:40:29 -0400
-Received: from mail-ed1-x530.google.com ([2a00:1450:4864:20::530])
+ id 1tux1F-0006Ax-Kk
+ for qemu-riscv@nongnu.org; Wed, 19 Mar 2025 13:15:55 -0400
+Received: from mail-ed1-x52f.google.com ([2a00:1450:4864:20::52f])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <jason.chien@sifive.com>)
- id 1tuwSv-0000Mj-3G
- for qemu-riscv@nongnu.org; Wed, 19 Mar 2025 12:40:28 -0400
-Received: by mail-ed1-x530.google.com with SMTP id
- 4fb4d7f45d1cf-5e5e0caa151so3661967a12.0
- for <qemu-riscv@nongnu.org>; Wed, 19 Mar 2025 09:40:24 -0700 (PDT)
+ id 1tux1D-00045N-6U
+ for qemu-riscv@nongnu.org; Wed, 19 Mar 2025 13:15:53 -0400
+Received: by mail-ed1-x52f.google.com with SMTP id
+ 4fb4d7f45d1cf-5e5b56fc863so10101752a12.3
+ for <qemu-riscv@nongnu.org>; Wed, 19 Mar 2025 10:15:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1742402420; x=1743007220; darn=nongnu.org;
+ d=sifive.com; s=google; t=1742404550; x=1743009350; darn=nongnu.org;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=ZJECdhPl+N3hj6liSZCsCGX7VeSQ1+SG3LeNFBLxVxY=;
- b=P0T3EC2BTTHOwWeQ3M3vwi3H9vzfMqeAoDLTERDxJ8V6oIUQEwarDCP9x1G4sYhRsH
- Q+NhBR9xCxA2ESRMcEQhz/iuXmx133+yNKdAps3JvX4guCx27Q4Km8Umo0KK0B4Mz99s
- QYJNRCXj4cLR9EdBluR/E+ahuYGd1xVNhpbERxFZ7lWEFePl4tFEqP0K+SDcPuq3UWDQ
- eP4WeYxcOpQVGiwPFvlaZrqiv/K4SPVDUeIWr4KaPlIhwy9DKphYYTTODmzKuO6eTJBP
- 9JqjlP0/g93DMaKHAE95U16wNH53lJdautTTRiRhBd3K17chLhIZIY/O12eZX9FyTAZC
- LomQ==
+ bh=IdJgxjmcTGbXvVdKYoLURKEw4k89qqKLcVUAeOb46hU=;
+ b=SOOGlkQfnNT8R3LWM2n50vTjs6pCs7en1xXaE9csRvp4blhMyWTjreQYgjfj1+W+AB
+ U9zO/dbGOHynApjpOBMP4TNoGvPVZ7qG+tQG0BTpseC4liMVbP8oF47QGeYbdDGeKoG/
+ uMDq6abIZoHfH2Vhk4ZV8Uj2KN7D39fS/kNgapHC8HSU8AtthB2R0SVH6JMZfjMXqt3V
+ fabYPmupJ4BC9pVlq5qApVd/BqE0lpbSkvOTCTU1J7NOfVFvqrv35GdPwsCjKKaU6uNJ
+ uDQiqq8XTWXC07nkP9xKfLYLqRkQSH4WbFTJvAWggAMCaooVJ9u/aOZ5Q8MXqRbpyPym
+ ubog==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1742402420; x=1743007220;
+ d=1e100.net; s=20230601; t=1742404550; x=1743009350;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=ZJECdhPl+N3hj6liSZCsCGX7VeSQ1+SG3LeNFBLxVxY=;
- b=fkdKyO3jycSrcAZDUKsu1ncSozPriDx+ivl2Q796TI4sMPQgxbFfIHd6RbY2SIftGV
- fMlz7DPaj4yGbMd5nGSkXfsyM1/W3YxRRS1vK1XTgDPO2BqQKGYfFQOY4yPCpG+PZukF
- etRuqmBTi+dGSbcsKM2jVf4XFOZYN20j4CnAKJRX+hwwKdOZmJ/Gww1kFznNMd4B+una
- eY5rRthcl2ZprRLmHLtSMWo0Tf0ZB1YEhY0CBgErSaGKHVY2FTTVfUJ5tN4gQDt3l2GM
- MysaehpbrGth90HRFnKZ+034b+7i4LCJZZk/E4g2Yu1hbaSoup5gt3YMBqce0MN2QzOX
- S3nw==
+ bh=IdJgxjmcTGbXvVdKYoLURKEw4k89qqKLcVUAeOb46hU=;
+ b=oX13/24SeDs0otHx7pkezjYwmoWF74CzLGSk8jK+3lCouNStNjxouOLvxLJcrykZ1p
+ P57DRhPt6Ru3NaumOo1InyvbYHrsQvssDD41C0t86fKkUy8+KgpfJkBo8EgbIqaoced6
+ aGdA0K7/eZAtr3NTyDZHwZtyIWVo3vVita7avMkcNAzAIl2RRNP517Jwx+nvUboZjHFC
+ CcDEuaoENSqTleuKB/YaDaTnhieYUOvFDMce7887En4ogw/MUqLY+7v0LGL53JNnQ+KL
+ 2CmQEhBhf5vkVMd1IKTfLDgFHrxBA1ec0XRh8b4omg6LItTXiRciSACTdhSQbbecqb8y
+ X0MA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXtpHKteLPBet6/IyGm2QiEz34oo6ztiAxNeie3M8uJmqNu3slkh/UQ0rwJbgQ9w1NpOK3W8m5b6yf7@nongnu.org
-X-Gm-Message-State: AOJu0Yyn8jkHWekbAoc73LPplm9ppvF4sGtY4cTewaCkpZdtRfWEUkM3
- D0j5y4SxnoG3oFwOkFTb9jESWllogpUvaAoPjKfe7PRCTeRwoS4rjgORBd3r4SYC/YMvae18dNi
- 2dHjc84W9OYq5c+BAnUiBmQ463oieZaKRCvIrir+29ao+bEMwmi4=
-X-Gm-Gg: ASbGncvqCApJN8cZGsGLwjep97lYT9USmS4DAsRN1ALWyTlujkHcHM0HktbZ88+9RCy
- OFUfAmGZId0+IbLBomFd23Y84GUTiZ0TranPSmbLOg8c4YlLVifmMZMsr5CGErd/7HAu/B4CcZf
- HlA0uD9hqDQ+ipm+NS0KRyXrs=
-X-Google-Smtp-Source: AGHT+IHjgzw3qIp+mah0D7endcLv6fWy0wfTcBuNc8mPrIOyhvobhj4WlvifYps9Y5xLqmT8kHl1QX+qDjPVBxwKAh0=
-X-Received: by 2002:a05:6402:51d2:b0:5e6:e68c:9d66 with SMTP id
- 4fb4d7f45d1cf-5eb80d3d4c0mr3518745a12.8.1742402420035; Wed, 19 Mar 2025
- 09:40:20 -0700 (PDT)
+ AJvYcCUxTTrv3g/Ddqi0t8etJog22iTudlVNcU0IQ7OLEtv4qoKyrLLX51Fpuiue+Fzy9+h/9y+0LwkKHI5X@nongnu.org
+X-Gm-Message-State: AOJu0Yyq7RHgYrMKeAPg0qqwmZAlOgugF72m3hfvzTr4KtJilUzIt3Ma
+ dMaDhdJLZfDnreq4YSCq2vM+OAqMubCyqvhNJ+Lah2KX0WrEE+mPRHHOBteCrHKpJanwrEgja9A
+ z5zSxet2nTeenh8A2plAY4ctiGGoCtDGgSbvdNjhkUwyMycPV3piwSQ==
+X-Gm-Gg: ASbGncu8QCdQbRZ4j5jj+oxy04xhMvJTFI2HIM+XafWdctC9QLLdW9ntTTrJVna7st8
+ mFuH+pDcAcgqDrD04KpsT7rOYe9eijYMJn+Sp54sT2FbyWrv6nkm+PIsRFd0iqtiwKV/AIYTqlY
+ iCs8/WVpzpyUBUhJ/W9pD2iCY=
+X-Google-Smtp-Source: AGHT+IE6oHZTZRT78SJvDDqaoCAXPLU4gbGBCTUlzsL6CuZ9NSRxbUAm3uNn8UCNWD1cUTYU7cW8LjB5aO2mZNBQm/s=
+X-Received: by 2002:a05:6402:3513:b0:5e5:c637:b69 with SMTP id
+ 4fb4d7f45d1cf-5eb80cde92dmr4365996a12.6.1742404549533; Wed, 19 Mar 2025
+ 10:15:49 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250302091209.20063-1-jason.chien@sifive.com>
- <20250302091209.20063-2-jason.chien@sifive.com>
- <0464a115-fbfe-4038-9e2d-409ad133647e@ventanamicro.com>
- <CADr__8p54Fp4PqkmSC_gWhiOwa9Yem0KU53woFFCQ_sA35sFHw@mail.gmail.com>
-In-Reply-To: <CADr__8p54Fp4PqkmSC_gWhiOwa9Yem0KU53woFFCQ_sA35sFHw@mail.gmail.com>
+References: <20250227073049.32655-1-jason.chien@sifive.com>
+ <CAFEAcA8LPHEmLxDMUNN7DSHCw8pwvA7kUOAH+Ef1mDvOVH-dYQ@mail.gmail.com>
+In-Reply-To: <CAFEAcA8LPHEmLxDMUNN7DSHCw8pwvA7kUOAH+Ef1mDvOVH-dYQ@mail.gmail.com>
 From: Jason Chien <jason.chien@sifive.com>
-Date: Thu, 20 Mar 2025 00:40:09 +0800
-X-Gm-Features: AQ5f1JqL7cM2wb5-h9A2DU51O-H7NULyuWKfMTUBI7cXpuPLHWh9RyD1UmuLmas
-Message-ID: <CADr__8orYp2MGJHknFUUNhcO0iG+-jqgTkAC86CN482wZX2ZWA@mail.gmail.com>
-Subject: Re: [PATCH 1/3] include/hw/pci: Attach BDF to Memory Attributes
-To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, 
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, 
- Weiwei Li <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
- "Michael S. Tsirkin" <mst@redhat.com>,
- Marcel Apfelbaum <marcel.apfelbaum@gmail.com>
-Content-Type: multipart/alternative; boundary="0000000000004d6dfa0630b4ade8"
-Received-SPF: pass client-ip=2a00:1450:4864:20::530;
- envelope-from=jason.chien@sifive.com; helo=mail-ed1-x530.google.com
+Date: Thu, 20 Mar 2025 01:15:38 +0800
+X-Gm-Features: AQ5f1Jqvm014VnT5kG0xaBrYnT1Wz6kKHYmKtYUIvkn5KaLbtks6kbBk8gs4y-s
+Message-ID: <CADr__8rhGpOtLBh_8hhtpncAeN9OrxL19ODEcq8n1P9gp420ZA@mail.gmail.com>
+Subject: Re: [PATCH] hw/misc/edu: Rename macros indicating the direction of
+ DMA operations
+To: Peter Maydell <peter.maydell@linaro.org>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, Jiri Slaby <jslaby@suse.cz>
+Content-Type: multipart/alternative; boundary="0000000000003afd2b0630b52c47"
+Received-SPF: pass client-ip=2a00:1450:4864:20::52f;
+ envelope-from=jason.chien@sifive.com; helo=mail-ed1-x52f.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -101,215 +95,116 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
---0000000000004d6dfa0630b4ade8
+--0000000000003afd2b0630b52c47
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-Ping
+This is a virtual device designed for educational purposes. The only spec I
+found is in QEMU documentation:
+https://github.com/qemu/qemu/blob/master/docs/specs/edu.rst
+According to the documentation:
+direction (0: from RAM to EDU, 1: from EDU to RAM)
+The macros confused me and my goal is to make the direction easier to
+differentiate. Something like EDU_DMA_TO_PCI_BUS and EDU_DMA_FROM_PCI_BUS
+would also work. Do you have any suggestions?
 
-Jason Chien <jason.chien@sifive.com> =E6=96=BC 2025=E5=B9=B43=E6=9C=8813=E6=
-=97=A5 =E9=80=B1=E5=9B=9B =E4=B8=8A=E5=8D=8812:59=E5=AF=AB=E9=81=93=EF=BC=
-=9A
+thanks
 
-> Ping.
->
-> Michael/Marcel, would you mind taking a look? Thanks!
->
->
-> Jason
->
-> Daniel Henrique Barboza <dbarboza@ventanamicro.com> =E6=96=BC 2025=E5=B9=
-=B43=E6=9C=887=E6=97=A5 =E9=80=B1=E4=BA=94
-> =E4=B8=8B=E5=8D=888:40=E5=AF=AB=E9=81=93=EF=BC=9A
->
->>
->>
->> On 3/2/25 6:12 AM, Jason Chien wrote:
->> > This commit adds the BDF to the memory attributes for DMA operations.
->> >
->> > Signed-off-by: Jason Chien <jason.chien@sifive.com>
->> > ---
->>
->> This looks sensible but I'll feel more comfortable if Michael/Marcel als=
-o
->> takes a look. Thanks,
->>
->>
->> Daniel
->>
->> >   include/hw/pci/pci_device.h | 10 ++++++++--
->> >   1 file changed, 8 insertions(+), 2 deletions(-)
->> >
->> > diff --git a/include/hw/pci/pci_device.h b/include/hw/pci/pci_device.h
->> > index add208edfa..968f1ba3e9 100644
->> > --- a/include/hw/pci/pci_device.h
->> > +++ b/include/hw/pci/pci_device.h
->> > @@ -244,6 +244,8 @@ static inline MemTxResult pci_dma_rw(PCIDevice
->> *dev, dma_addr_t addr,
->> >                                        void *buf, dma_addr_t len,
->> >                                        DMADirection dir, MemTxAttrs
->> attrs)
->> >   {
->> > +    attrs.unspecified =3D 0;
->> > +    attrs.requester_id =3D pci_requester_id(dev);
->> >       return dma_memory_rw(pci_get_address_space(dev), addr, buf, len,
->> >                            dir, attrs);
->> >   }
->> > @@ -292,6 +294,8 @@ static inline MemTxResult pci_dma_write(PCIDevice
->> *dev, dma_addr_t addr,
->> >                                                  uint##_bits##_t *val,=
- \
->> >                                                  MemTxAttrs attrs) \
->> >       { \
->> > +        attrs.unspecified =3D 0; \
->> > +        attrs.requester_id =3D pci_requester_id(dev); \
->> >           return ld##_l##_dma(pci_get_address_space(dev), addr, val,
->> attrs); \
->> >       } \
->> >       static inline MemTxResult st##_s##_pci_dma(PCIDevice *dev, \
->> > @@ -299,6 +303,8 @@ static inline MemTxResult pci_dma_write(PCIDevice
->> *dev, dma_addr_t addr,
->> >                                                  uint##_bits##_t val, =
-\
->> >                                                  MemTxAttrs attrs) \
->> >       { \
->> > +        attrs.unspecified =3D 0; \
->> > +        attrs.requester_id =3D pci_requester_id(dev); \
->> >           return st##_s##_dma(pci_get_address_space(dev), addr, val,
->> attrs); \
->> >       }
->> >
->> > @@ -327,8 +333,8 @@ PCI_DMA_DEFINE_LDST(q_be, q_be, 64);
->> >   static inline void *pci_dma_map(PCIDevice *dev, dma_addr_t addr,
->> >                                   dma_addr_t *plen, DMADirection dir)
->> >   {
->> > -    return dma_memory_map(pci_get_address_space(dev), addr, plen, dir=
-,
->> > -                          MEMTXATTRS_UNSPECIFIED);
->> > +    MemTxAttrs attrs =3D {.requester_id =3D pci_requester_id(dev)};
->> > +    return dma_memory_map(pci_get_address_space(dev), addr, plen, dir=
-,
->> attrs);
->> >   }
->> >
->> >   static inline void pci_dma_unmap(PCIDevice *dev, void *buffer,
->> dma_addr_t len,
->>
->>
+Peter Maydell <peter.maydell@linaro.org> =E6=96=BC 2025=E5=B9=B43=E6=9C=881=
+2=E6=97=A5 =E9=80=B1=E4=B8=89 =E4=B8=8A=E5=8D=882:41=E5=AF=AB=E9=81=93=EF=
+=BC=9A
 
---0000000000004d6dfa0630b4ade8
+> On Thu, 27 Feb 2025 at 07:32, Jason Chien <jason.chien@sifive.com> wrote:
+> >
+> > This commit renames the macros to accurately reflect the direction of
+> > DMA operations.
+> >
+> > EDU_DMA_TO_PCI now represents reading memory content into the EDU buffe=
+r,
+> > while EDU_DMA_FROM_PCI represents writing EDU buffer content to memory.
+>
+> The EDU device is a PCI device, so if it is reading
+> then it is reading data from the PCI bus, and if it is
+> writing then it is writing data to the PCI bus. So I
+> think there's an argument that the current names make
+> sense.
+>
+> Plus, presumably this device model is implementing the hardware
+> half of a defined specification. The authoritative source for
+> what names the 0 and 1 values of the DIR bit should be named
+> would be that specification.
+>
+> Where is that spec, and what does it say? If it says 0 for
+> FROM and 1 for TO, that's what we should use. If it's the
+> other way around, that's an error in our device implementation
+> that we should correct.
+>
+> thanks
+> -- PMM
+>
+
+--0000000000003afd2b0630b52c47
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-<div dir=3D"ltr">Ping</div><br><div class=3D"gmail_quote gmail_quote_contai=
-ner"><div dir=3D"ltr" class=3D"gmail_attr">Jason Chien &lt;<a href=3D"mailt=
-o:jason.chien@sifive.com">jason.chien@sifive.com</a>&gt; =E6=96=BC 2025=E5=
-=B9=B43=E6=9C=8813=E6=97=A5 =E9=80=B1=E5=9B=9B =E4=B8=8A=E5=8D=8812:59=E5=
-=AF=AB=E9=81=93=EF=BC=9A<br></div><blockquote class=3D"gmail_quote" style=
-=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding=
--left:1ex"><div dir=3D"ltr">Ping.<br><br>Michael/Marcel, would you mind tak=
-ing a look? Thanks!<br><br><br>Jason</div><br><div class=3D"gmail_quote"><d=
-iv dir=3D"ltr" class=3D"gmail_attr">Daniel Henrique Barboza &lt;<a href=3D"=
-mailto:dbarboza@ventanamicro.com" target=3D"_blank">dbarboza@ventanamicro.c=
-om</a>&gt; =E6=96=BC 2025=E5=B9=B43=E6=9C=887=E6=97=A5 =E9=80=B1=E4=BA=94 =
-=E4=B8=8B=E5=8D=888:40=E5=AF=AB=E9=81=93=EF=BC=9A<br></div><blockquote clas=
-s=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid r=
-gb(204,204,204);padding-left:1ex"><br>
-<br>
-On 3/2/25 6:12 AM, Jason Chien wrote:<br>
-&gt; This commit adds the BDF to the memory attributes for DMA operations.<=
+<div dir=3D"ltr"><div id=3D"gmail-:1g8" class=3D"gmail-Am gmail-aiL gmail-a=
+O9 gmail-Al editable gmail-LW-avf gmail-tS-tW gmail-tS-tY" aria-label=3D"=
+=E9=83=B5=E4=BB=B6=E5=85=A7=E6=96=87" role=3D"textbox" aria-multiline=3D"tr=
+ue" tabindex=3D"1" style=3D"direction:ltr;min-height:85px" aria-controls=3D=
+":20c" aria-expanded=3D"false">This is a virtual device designed for educat=
+ional purposes. The only spec I found is in QEMU documentation: <a href=3D"=
+https://github.com/qemu/qemu/blob/master/docs/specs/edu.rst">https://github=
+.com/qemu/qemu/blob/master/docs/specs/edu.rst</a></div><div id=3D"gmail-:1g=
+8" class=3D"gmail-Am gmail-aiL gmail-aO9 gmail-Al editable gmail-LW-avf gma=
+il-tS-tW gmail-tS-tY" aria-label=3D"=E9=83=B5=E4=BB=B6=E5=85=A7=E6=96=87" r=
+ole=3D"textbox" aria-multiline=3D"true" tabindex=3D"1" style=3D"direction:l=
+tr;min-height:85px" aria-controls=3D":20c" aria-expanded=3D"false">Accordin=
+g to the documentation:<br>direction (0: from RAM to EDU, 1: from EDU to RA=
+M)</div><div id=3D"gmail-:1g8" class=3D"gmail-Am gmail-aiL gmail-aO9 gmail-=
+Al editable gmail-LW-avf gmail-tS-tW gmail-tS-tY" aria-label=3D"=E9=83=B5=
+=E4=BB=B6=E5=85=A7=E6=96=87" role=3D"textbox" aria-multiline=3D"true" tabin=
+dex=3D"1" style=3D"direction:ltr;min-height:85px" aria-controls=3D":20c" ar=
+ia-expanded=3D"false">The macros confused me and my goal is to make the dir=
+ection easier to differentiate. Something like EDU_DMA_TO_PCI_BUS and=C2=A0=
+EDU_DMA_FROM_PCI_BUS would also work. Do you have any suggestions?<br><br>t=
+hanks<br></div></div><br><div class=3D"gmail_quote gmail_quote_container"><=
+div dir=3D"ltr" class=3D"gmail_attr">Peter Maydell &lt;<a href=3D"mailto:pe=
+ter.maydell@linaro.org">peter.maydell@linaro.org</a>&gt; =E6=96=BC 2025=E5=
+=B9=B43=E6=9C=8812=E6=97=A5 =E9=80=B1=E4=B8=89 =E4=B8=8A=E5=8D=882:41=E5=AF=
+=AB=E9=81=93=EF=BC=9A<br></div><blockquote class=3D"gmail_quote" style=3D"m=
+argin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left=
+:1ex">On Thu, 27 Feb 2025 at 07:32, Jason Chien &lt;<a href=3D"mailto:jason=
+.chien@sifive.com" target=3D"_blank">jason.chien@sifive.com</a>&gt; wrote:<=
 br>
-&gt; <br>
-&gt; Signed-off-by: Jason Chien &lt;<a href=3D"mailto:jason.chien@sifive.co=
-m" target=3D"_blank">jason.chien@sifive.com</a>&gt;<br>
-&gt; ---<br>
+&gt;<br>
+&gt; This commit renames the macros to accurately reflect the direction of<=
+br>
+&gt; DMA operations.<br>
+&gt;<br>
+&gt; EDU_DMA_TO_PCI now represents reading memory content into the EDU buff=
+er,<br>
+&gt; while EDU_DMA_FROM_PCI represents writing EDU buffer content to memory=
+.<br>
 <br>
-This looks sensible but I&#39;ll feel more comfortable if Michael/Marcel al=
-so<br>
-takes a look. Thanks,<br>
+The EDU device is a PCI device, so if it is reading<br>
+then it is reading data from the PCI bus, and if it is<br>
+writing then it is writing data to the PCI bus. So I<br>
+think there&#39;s an argument that the current names make<br>
+sense.<br>
 <br>
+Plus, presumably this device model is implementing the hardware<br>
+half of a defined specification. The authoritative source for<br>
+what names the 0 and 1 values of the DIR bit should be named<br>
+would be that specification.<br>
 <br>
-Daniel<br>
+Where is that spec, and what does it say? If it says 0 for<br>
+FROM and 1 for TO, that&#39;s what we should use. If it&#39;s the<br>
+other way around, that&#39;s an error in our device implementation<br>
+that we should correct.<br>
 <br>
-&gt;=C2=A0 =C2=A0include/hw/pci/pci_device.h | 10 ++++++++--<br>
-&gt;=C2=A0 =C2=A01 file changed, 8 insertions(+), 2 deletions(-)<br>
-&gt; <br>
-&gt; diff --git a/include/hw/pci/pci_device.h b/include/hw/pci/pci_device.h=
-<br>
-&gt; index add208edfa..968f1ba3e9 100644<br>
-&gt; --- a/include/hw/pci/pci_device.h<br>
-&gt; +++ b/include/hw/pci/pci_device.h<br>
-&gt; @@ -244,6 +244,8 @@ static inline MemTxResult pci_dma_rw(PCIDevice *de=
-v, dma_addr_t addr,<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 void =
-*buf, dma_addr_t len,<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 DMADi=
-rection dir, MemTxAttrs attrs)<br>
-&gt;=C2=A0 =C2=A0{<br>
-&gt; +=C2=A0 =C2=A0 attrs.unspecified =3D 0;<br>
-&gt; +=C2=A0 =C2=A0 attrs.requester_id =3D pci_requester_id(dev);<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0return dma_memory_rw(pci_get_address_space(d=
-ev), addr, buf, len,<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 dir, attrs);<br>
-&gt;=C2=A0 =C2=A0}<br>
-&gt; @@ -292,6 +294,8 @@ static inline MemTxResult pci_dma_write(PCIDevice =
-*dev, dma_addr_t addr,<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 uint##_bits##_t *val, \<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 MemTxAttrs attrs) \<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0{ \<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 attrs.unspecified =3D 0; \<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 attrs.requester_id =3D pci_requester_id(d=
-ev); \<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0return ld##_l##_dma(pci_get_ad=
-dress_space(dev), addr, val, attrs); \<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0} \<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0static inline MemTxResult st##_s##_pci_dma(P=
-CIDevice *dev, \<br>
-&gt; @@ -299,6 +303,8 @@ static inline MemTxResult pci_dma_write(PCIDevice =
-*dev, dma_addr_t addr,<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 uint##_bits##_t val, \<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 MemTxAttrs attrs) \<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0{ \<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 attrs.unspecified =3D 0; \<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 attrs.requester_id =3D pci_requester_id(d=
-ev); \<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0return st##_s##_dma(pci_get_ad=
-dress_space(dev), addr, val, attrs); \<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0}<br>
-&gt;=C2=A0 =C2=A0<br>
-&gt; @@ -327,8 +333,8 @@ PCI_DMA_DEFINE_LDST(q_be, q_be, 64);<br>
-&gt;=C2=A0 =C2=A0static inline void *pci_dma_map(PCIDevice *dev, dma_addr_t=
- addr,<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0dma_addr_t *plen, DM=
-ADirection dir)<br>
-&gt;=C2=A0 =C2=A0{<br>
-&gt; -=C2=A0 =C2=A0 return dma_memory_map(pci_get_address_space(dev), addr,=
- plen, dir,<br>
-&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0 =C2=A0 =C2=A0 MEMTXATTRS_UNSPECIFIED);<br>
-&gt; +=C2=A0 =C2=A0 MemTxAttrs attrs =3D {.requester_id =3D pci_requester_i=
-d(dev)};<br>
-&gt; +=C2=A0 =C2=A0 return dma_memory_map(pci_get_address_space(dev), addr,=
- plen, dir, attrs);<br>
-&gt;=C2=A0 =C2=A0}<br>
-&gt;=C2=A0 =C2=A0<br>
-&gt;=C2=A0 =C2=A0static inline void pci_dma_unmap(PCIDevice *dev, void *buf=
-fer, dma_addr_t len,<br>
-<br>
-</blockquote></div>
+thanks<br>
+-- PMM<br>
 </blockquote></div>
 
---0000000000004d6dfa0630b4ade8--
+--0000000000003afd2b0630b52c47--
 
