@@ -4,54 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AE8EDC35FF1
-	for <qemu-riscv@archiver.kernel.org>; Wed, 19 Mar 2025 06:14:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D9AD1C35FFC
+	for <qemu-riscv@archiver.kernel.org>; Wed, 19 Mar 2025 06:15:07 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tumgj-0006eM-9z; Wed, 19 Mar 2025 02:14:01 -0400
+	id 1tumgs-0006yM-Sj; Wed, 19 Mar 2025 02:14:10 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <sebastian.huber@embedded-brains.de>)
- id 1tumgh-0006Z5-3c; Wed, 19 Mar 2025 02:13:59 -0400
+ id 1tumgi-0006eC-Qg; Wed, 19 Mar 2025 02:14:00 -0400
 Received: from dedi548.your-server.de ([85.10.215.148])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <sebastian.huber@embedded-brains.de>)
- id 1tumge-0001R5-CO; Wed, 19 Mar 2025 02:13:57 -0400
+ id 1tumgh-0001Rs-3x; Wed, 19 Mar 2025 02:14:00 -0400
 Received: from sslproxy08.your-server.de ([78.47.166.52])
  by dedi548.your-server.de with esmtpsa  (TLS1.3) tls TLS_AES_256_GCM_SHA384
  (Exim 4.96.2) (envelope-from <sebastian.huber@embedded-brains.de>)
- id 1tumgZ-000ACk-0U; Wed, 19 Mar 2025 07:13:51 +0100
+ id 1tumge-000ADF-2y; Wed, 19 Mar 2025 07:13:56 +0100
 Received: from [82.100.198.138] (helo=mail.embedded-brains.de)
  by sslproxy08.your-server.de with esmtpsa (TLS1.3) tls TLS_AES_256_GCM_SHA384
  (Exim 4.96) (envelope-from <sebastian.huber@embedded-brains.de>)
- id 1tumgZ-000Hof-00; Wed, 19 Mar 2025 07:13:51 +0100
+ id 1tumge-000IEz-2X; Wed, 19 Mar 2025 07:13:56 +0100
 Received: from localhost (localhost [127.0.0.1])
- by mail.embedded-brains.de (Postfix) with ESMTP id 905C5480106;
- Wed, 19 Mar 2025 07:13:50 +0100 (CET)
+ by mail.embedded-brains.de (Postfix) with ESMTP id 5CD58480106;
+ Wed, 19 Mar 2025 07:13:56 +0100 (CET)
 Received: from mail.embedded-brains.de ([127.0.0.1])
  by localhost (zimbra.eb.localhost [127.0.0.1]) (amavis, port 10032)
- with ESMTP id nUe4hvZkMEO5; Wed, 19 Mar 2025 07:13:50 +0100 (CET)
+ with ESMTP id ow8qxEv570jm; Wed, 19 Mar 2025 07:13:56 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
- by mail.embedded-brains.de (Postfix) with ESMTP id 2764D4800A8;
- Wed, 19 Mar 2025 07:13:50 +0100 (CET)
+ by mail.embedded-brains.de (Postfix) with ESMTP id 0A6724800A8;
+ Wed, 19 Mar 2025 07:13:56 +0100 (CET)
 X-Virus-Scanned: amavis at zimbra.eb.localhost
 Received: from mail.embedded-brains.de ([127.0.0.1])
  by localhost (zimbra.eb.localhost [127.0.0.1]) (amavis, port 10026)
- with ESMTP id fmC0TZUdYPyu; Wed, 19 Mar 2025 07:13:50 +0100 (CET)
+ with ESMTP id QWpZzolNSl-Q; Wed, 19 Mar 2025 07:13:55 +0100 (CET)
 Received: from zimbra.eb.localhost (unknown [10.10.171.10])
- by mail.embedded-brains.de (Postfix) with ESMTPSA id DD0DB4800A3;
- Wed, 19 Mar 2025 07:13:48 +0100 (CET)
+ by mail.embedded-brains.de (Postfix) with ESMTPSA id D03464800A3;
+ Wed, 19 Mar 2025 07:13:54 +0100 (CET)
 From: Sebastian Huber <sebastian.huber@embedded-brains.de>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, "Alistair Francis" <alistair23@gmail.com>,
  "Daniel Henrique Barboza" <dbarboza@ventanamicro.com>
-Subject: [PATCH v3 0/6] Improve Microchip Polarfire SoC customization
-Date: Wed, 19 Mar 2025 07:13:32 +0100
-Message-ID: <20250319061342.26435-1-sebastian.huber@embedded-brains.de>
+Subject: [PATCH v3 4/6] hw/riscv: Allow direct start of kernel for MPFS
+Date: Wed, 19 Mar 2025 07:13:36 +0100
+Message-ID: <20250319061342.26435-5-sebastian.huber@embedded-brains.de>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20250319061342.26435-1-sebastian.huber@embedded-brains.de>
+References: <20250319061342.26435-1-sebastian.huber@embedded-brains.de>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 X-Authenticated-Sender: smtp-embedded@poldi-networks.de
 X-Virus-Scanned: Clear (ClamAV 1.0.7/27581/Tue Mar 18 14:04:32 2025)
@@ -78,49 +79,115 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Booting the microchip-icicle-kit machine using the latest PolarFire SoC
-Hart Software Services (HSS) no longer works since Qemu lacks support
-for several registers (clocks, DRAM controller). Also reading from the
-SDCard does not work currently.
+Further customize the -bios and -kernel options behaviour for the
+microchip-icicle-kit machine.  If "-bios none -kernel filename" is
+specified, then do not load a firmware and instead only load and start
+the kernel image.
 
-In order to allow tests runs for real-time kernels such as RTEMS and
-Zephyr, improve the boot customization. This patch set enables a direct
-run of kernel executables, for example:
+For test runs, use an approach similar to
+riscv_find_and_load_firmware().
 
-qemu-system-riscv64 -no-reboot -nographic \
-  -serial null -serial mon:stdio \
-  -smp 2 \
-  -bios none \
-  -machine microchip-icicle-kit,clint-timebase-frequency=3D10000000 \
-  -kernel rtos.elf
+Signed-off-by: Sebastian Huber <sebastian.huber@embedded-brains.de>
+---
+ hw/riscv/microchip_pfsoc.c | 59 +++++++++++++++++++++++++++-----------
+ 1 file changed, 42 insertions(+), 17 deletions(-)
 
-v2:
-
-* Add documentation update.
-
-* In patch 3, warn if no device tree is specified.
-
-* In patch 4, use riscv_find_firmware() to locate the firmware shipped wi=
-th Qemu.
-
-v3:
-
-* In patch 4, add support for Qemu test runs.
-
-Sebastian Huber (6):
-  hw/misc: Add MPFS system reset support
-  hw/riscv: More flexible FDT placement for MPFS
-  hw/riscv: Make FDT optional for MPFS
-  hw/riscv: Allow direct start of kernel for MPFS
-  hw/riscv: Configurable MPFS CLINT timebase freq
-  hw/riscv: microchip_pfsoc: Rework documentation
-
- docs/system/riscv/microchip-icicle-kit.rst | 124 ++++++-----------
- hw/misc/mchp_pfsoc_sysreg.c                |   7 +
- hw/riscv/microchip_pfsoc.c                 | 153 +++++++++++++++------
- include/hw/riscv/microchip_pfsoc.h         |   1 +
- 4 files changed, 164 insertions(+), 121 deletions(-)
-
+diff --git a/hw/riscv/microchip_pfsoc.c b/hw/riscv/microchip_pfsoc.c
+index 844dc0545c..5c9f7f643f 100644
+--- a/hw/riscv/microchip_pfsoc.c
++++ b/hw/riscv/microchip_pfsoc.c
+@@ -578,29 +578,47 @@ static void microchip_icicle_kit_machine_init(Machi=
+neState *machine)
+     }
+=20
+     /*
+-     * We follow the following table to select which payload we execute.
++     * We follow the following table to select which firmware we use.
+      *
+-     *  -bios |    -kernel | payload
+-     * -------+------------+--------
+-     *      N |          N | HSS
+-     *      Y | don't care | HSS
+-     *      N |          Y | kernel
+-     *
+-     * This ensures backwards compatibility with how we used to expose -=
+bios
+-     * to users but allows them to run through direct kernel booting as =
+well.
++     * -bios         | -kernel    | firmware
++     * --------------+------------+--------
++     * none          |          N | error
++     * none          |          Y | kernel
++     * NULL, default |          N | BIOS_FILENAME
++     * NULL, default |          Y | RISCV64_BIOS_BIN
++     * other         | don't care | other
+      */
++    if (machine->firmware && !strcmp(machine->firmware, "none")) {
++        if (!machine->kernel_filename) {
++            error_report("for -bios none, a kernel is required");
++            exit(1);
++        }
+=20
+-    if (machine->kernel_filename) {
+-        firmware_name =3D RISCV64_BIOS_BIN;
+-        firmware_load_addr =3D memmap[MICROCHIP_PFSOC_DRAM_LO].base;
++        firmware_name =3D NULL;
++        firmware_load_addr =3D RESET_VECTOR;
++    } else if (!machine->firmware || !strcmp(machine->firmware, "default=
+")) {
++        if (machine->kernel_filename) {
++            firmware_name =3D RISCV64_BIOS_BIN;
++            firmware_load_addr =3D memmap[MICROCHIP_PFSOC_DRAM_LO].base;
++        } else {
++            firmware_name =3D BIOS_FILENAME;
++            firmware_load_addr =3D RESET_VECTOR;
++        }
+     } else {
+-        firmware_name =3D BIOS_FILENAME;
++        firmware_name =3D machine->firmware;
+         firmware_load_addr =3D RESET_VECTOR;
+     }
+=20
+-    /* Load the firmware */
+-    firmware_end_addr =3D riscv_find_and_load_firmware(machine, firmware=
+_name,
+-                                                     &firmware_load_addr=
+, NULL);
++    /* Load the firmware if necessary */
++    firmware_end_addr =3D firmware_load_addr;
++    if (firmware_name) {
++        char *filename =3D riscv_find_firmware(firmware_name, NULL);
++        if (filename) {
++            firmware_end_addr =3D riscv_load_firmware(filename,
++                                                    &firmware_load_addr,=
+ NULL);
++            g_free(filename);
++        }
++    }
+=20
+     riscv_boot_info_init(&boot_info, &s->soc.u_cpus);
+     if (machine->kernel_filename) {
+@@ -638,8 +656,15 @@ static void microchip_icicle_kit_machine_init(Machin=
+eState *machine)
+             fdt_load_addr =3D 0;
+         }
+=20
++        hwaddr start_addr;
++        if (firmware_name) {
++            start_addr =3D firmware_load_addr;
++        } else {
++            start_addr =3D kernel_entry;
++        }
++
+         /* Load the reset vector */
+-        riscv_setup_rom_reset_vec(machine, &s->soc.u_cpus, firmware_load=
+_addr,
++        riscv_setup_rom_reset_vec(machine, &s->soc.u_cpus, start_addr,
+                                   memmap[MICROCHIP_PFSOC_ENVM_DATA].base=
+,
+                                   memmap[MICROCHIP_PFSOC_ENVM_DATA].size=
+,
+                                   kernel_entry, fdt_load_addr);
 --=20
 2.43.0
 
