@@ -4,97 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 904F4C35FFC
-	for <qemu-riscv@archiver.kernel.org>; Wed, 19 Mar 2025 15:05:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C8E1EC35FFA
+	for <qemu-riscv@archiver.kernel.org>; Wed, 19 Mar 2025 16:41:12 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tuuyM-0003D9-8l; Wed, 19 Mar 2025 11:04:50 -0400
+	id 1tuwT4-0006xG-DF; Wed, 19 Mar 2025 12:40:37 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1tuuy3-00038u-9Z
- for qemu-riscv@nongnu.org; Wed, 19 Mar 2025 11:04:28 -0400
-Received: from mail-pj1-x1030.google.com ([2607:f8b0:4864:20::1030])
+ (Exim 4.90_1) (envelope-from <jason.chien@sifive.com>)
+ id 1tuwSy-0006uX-F1
+ for qemu-riscv@nongnu.org; Wed, 19 Mar 2025 12:40:29 -0400
+Received: from mail-ed1-x530.google.com ([2a00:1450:4864:20::530])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1tuuxw-0000Bm-OJ
- for qemu-riscv@nongnu.org; Wed, 19 Mar 2025 11:04:26 -0400
-Received: by mail-pj1-x1030.google.com with SMTP id
- 98e67ed59e1d1-300fefb8e06so8593328a91.0
- for <qemu-riscv@nongnu.org>; Wed, 19 Mar 2025 08:04:18 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <jason.chien@sifive.com>)
+ id 1tuwSv-0000Mj-3G
+ for qemu-riscv@nongnu.org; Wed, 19 Mar 2025 12:40:28 -0400
+Received: by mail-ed1-x530.google.com with SMTP id
+ 4fb4d7f45d1cf-5e5e0caa151so3661967a12.0
+ for <qemu-riscv@nongnu.org>; Wed, 19 Mar 2025 09:40:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1742396657; x=1743001457; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=P6SR2DZxoKbkuCDWrwn/UiRFCMww89FlVIVgP8rvAnU=;
- b=bh2eImTpbQFd192pjF3Zf6o000DpXKTNA7A78Bl24kXxUvt385Ba5PdG6yLWU2as6i
- DTBYd1jBYYFChHhsVApxkAZkrJxBCoMSrmO0kYpe42HndDWeZNWMLKLBHcUaVX9OmLdo
- KR5PM5ANwx8GKHcvsr7rXEK9HxSNy4u9+zHVaUv2/V4PUfOuzkjFctFDeNeUdUM/C4E6
- Wi8aW8drGUm+A5saK+Q5GZf3o9+yg7f3zo5FE26KT5bjJEHpnKFUHJ39QhZc+XG5geXw
- KUuIh3Ac0g4ClxvqKRxXMoUpTwBW/FVKsY+ICfv+yhlFKaHrHYIjeMiHAiLgemR0o1x3
- trFQ==
+ d=sifive.com; s=google; t=1742402420; x=1743007220; darn=nongnu.org;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=ZJECdhPl+N3hj6liSZCsCGX7VeSQ1+SG3LeNFBLxVxY=;
+ b=P0T3EC2BTTHOwWeQ3M3vwi3H9vzfMqeAoDLTERDxJ8V6oIUQEwarDCP9x1G4sYhRsH
+ Q+NhBR9xCxA2ESRMcEQhz/iuXmx133+yNKdAps3JvX4guCx27Q4Km8Umo0KK0B4Mz99s
+ QYJNRCXj4cLR9EdBluR/E+ahuYGd1xVNhpbERxFZ7lWEFePl4tFEqP0K+SDcPuq3UWDQ
+ eP4WeYxcOpQVGiwPFvlaZrqiv/K4SPVDUeIWr4KaPlIhwy9DKphYYTTODmzKuO6eTJBP
+ 9JqjlP0/g93DMaKHAE95U16wNH53lJdautTTRiRhBd3K17chLhIZIY/O12eZX9FyTAZC
+ LomQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1742396657; x=1743001457;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=P6SR2DZxoKbkuCDWrwn/UiRFCMww89FlVIVgP8rvAnU=;
- b=ZfxxHBAI6rrj7SdzGSyL+LOaHa9EPEhrUh9Yua9E0oCM5aBz7NfGfxSB2BDKRXhdYu
- gDV77RtTjRyRPk3sE0S75w9H/BvwFDx3TnQsBfx8WRlR8QapdaJ7hXj9kvv0lbiIP64T
- bjPxxYFJ3nnFOKWsvN7+kLE36MEY0uN7wjWRxz9I15P4FelPAQ+fd+SZwR5qktngnJMY
- wvLo+H4O/RcAO7wRZheD5B4mCcwHeLzYO0onoboZza+ZPvSqSRpW1B4OxDNXuHs/pRAi
- m9xfrL4pHME18jpmOhfqZRcxlI14EbY1vmhaMEZ9GXQvcCNYbHThBfrc8IQTZn1OmxVc
- BTEw==
+ d=1e100.net; s=20230601; t=1742402420; x=1743007220;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=ZJECdhPl+N3hj6liSZCsCGX7VeSQ1+SG3LeNFBLxVxY=;
+ b=fkdKyO3jycSrcAZDUKsu1ncSozPriDx+ivl2Q796TI4sMPQgxbFfIHd6RbY2SIftGV
+ fMlz7DPaj4yGbMd5nGSkXfsyM1/W3YxRRS1vK1XTgDPO2BqQKGYfFQOY4yPCpG+PZukF
+ etRuqmBTi+dGSbcsKM2jVf4XFOZYN20j4CnAKJRX+hwwKdOZmJ/Gww1kFznNMd4B+una
+ eY5rRthcl2ZprRLmHLtSMWo0Tf0ZB1YEhY0CBgErSaGKHVY2FTTVfUJ5tN4gQDt3l2GM
+ MysaehpbrGth90HRFnKZ+034b+7i4LCJZZk/E4g2Yu1hbaSoup5gt3YMBqce0MN2QzOX
+ S3nw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWamwkAackVqgDbFU57vBWZVIqfriEHf+aPnCZqdJ+H2Y9t0u+BETq87KjX5J+M9HVcH44CPZZTYmDa@nongnu.org
-X-Gm-Message-State: AOJu0Yz7Mqm+w37ALDQifvvynP+gsQcD4th+ZCJYn82feXsXn80OwfeO
- GS62r0lfXu6FLwL3ohzH8Ko8uLDREwYOJoKjwV2x5zuM8X3TQzBUnYDOXSPWUnQ=
-X-Gm-Gg: ASbGncv3GFdUyJ1C8piU1jcO1H9DrNUepv34aHSfuKHVIsGhLupKmGAd/h9U1qitH74
- YK1bfizNyyHc8cMtfsw/xQUORWJYK8jPKUX3TpV2XrggvvIbSQhqjY+rTqHOkEnaM4D2MJLibmm
- ITIcypr6Aeny02qUObuSANEs39PEtVaZZxulxGvOF4J47By5y8MHVkKTmjtA6bC//zPNzNgriwp
- mnBhaqTQu1+XF8BjTYzz5ohT0Xvpdt/sfo9UASkAUcCMnIe8u5H2C5na/cI6rQj7ezNZAmfrevp
- dTmtWo8jrI2a7IRGztO4aFGXGWhbS06FyGDee/KgLGpVpMnanNcSVHxj/lI=
-X-Google-Smtp-Source: AGHT+IFom6ww010xi6iwaZFX8PcNbPd8AlcrdD+abDzMsanCtLhGqSZ+ALguQ4cDLruZTtWQFfEEmw==
-X-Received: by 2002:a17:90b:538c:b0:2fe:b470:dde4 with SMTP id
- 98e67ed59e1d1-301bde59c52mr6585992a91.12.1742396657024; 
- Wed, 19 Mar 2025 08:04:17 -0700 (PDT)
-Received: from [192.168.68.110] ([177.170.117.79])
- by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-301bf5b7cdcsm1841076a91.34.2025.03.19.08.04.12
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 19 Mar 2025 08:04:16 -0700 (PDT)
-Message-ID: <9bc5f892-889d-4fdd-9c33-4734851babc3@ventanamicro.com>
-Date: Wed, 19 Mar 2025 12:04:10 -0300
+ AJvYcCXtpHKteLPBet6/IyGm2QiEz34oo6ztiAxNeie3M8uJmqNu3slkh/UQ0rwJbgQ9w1NpOK3W8m5b6yf7@nongnu.org
+X-Gm-Message-State: AOJu0Yyn8jkHWekbAoc73LPplm9ppvF4sGtY4cTewaCkpZdtRfWEUkM3
+ D0j5y4SxnoG3oFwOkFTb9jESWllogpUvaAoPjKfe7PRCTeRwoS4rjgORBd3r4SYC/YMvae18dNi
+ 2dHjc84W9OYq5c+BAnUiBmQ463oieZaKRCvIrir+29ao+bEMwmi4=
+X-Gm-Gg: ASbGncvqCApJN8cZGsGLwjep97lYT9USmS4DAsRN1ALWyTlujkHcHM0HktbZ88+9RCy
+ OFUfAmGZId0+IbLBomFd23Y84GUTiZ0TranPSmbLOg8c4YlLVifmMZMsr5CGErd/7HAu/B4CcZf
+ HlA0uD9hqDQ+ipm+NS0KRyXrs=
+X-Google-Smtp-Source: AGHT+IHjgzw3qIp+mah0D7endcLv6fWy0wfTcBuNc8mPrIOyhvobhj4WlvifYps9Y5xLqmT8kHl1QX+qDjPVBxwKAh0=
+X-Received: by 2002:a05:6402:51d2:b0:5e6:e68c:9d66 with SMTP id
+ 4fb4d7f45d1cf-5eb80d3d4c0mr3518745a12.8.1742402420035; Wed, 19 Mar 2025
+ 09:40:20 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 4/6] hw/uefi-vars-sysbus: allow for riscv virt
-To: Gerd Hoffmann <kraxel@redhat.com>, qemu-devel@nongnu.org
-Cc: Bibo Mao <maobibo@loongson.cn>, Kashyap Chamarthy <kchamart@redhat.com>,
- Paolo Bonzini <pbonzini@redhat.com>, Song Gao <gaosong@loongson.cn>,
- Jiaxun Yang <jiaxun.yang@flygoat.com>,
- =?UTF-8?Q?Daniel_P=2E_Berrang=C3=A9?= <berrange@redhat.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- qemu-riscv@nongnu.org, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Weiwei Li <liwei1518@gmail.com>, Palmer Dabbelt <palmer@dabbelt.com>
-References: <20250319141159.1461621-1-kraxel@redhat.com>
- <20250319141159.1461621-5-kraxel@redhat.com>
-Content-Language: en-US
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <20250319141159.1461621-5-kraxel@redhat.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1030;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pj1-x1030.google.com
+References: <20250302091209.20063-1-jason.chien@sifive.com>
+ <20250302091209.20063-2-jason.chien@sifive.com>
+ <0464a115-fbfe-4038-9e2d-409ad133647e@ventanamicro.com>
+ <CADr__8p54Fp4PqkmSC_gWhiOwa9Yem0KU53woFFCQ_sA35sFHw@mail.gmail.com>
+In-Reply-To: <CADr__8p54Fp4PqkmSC_gWhiOwa9Yem0KU53woFFCQ_sA35sFHw@mail.gmail.com>
+From: Jason Chien <jason.chien@sifive.com>
+Date: Thu, 20 Mar 2025 00:40:09 +0800
+X-Gm-Features: AQ5f1JqL7cM2wb5-h9A2DU51O-H7NULyuWKfMTUBI7cXpuPLHWh9RyD1UmuLmas
+Message-ID: <CADr__8orYp2MGJHknFUUNhcO0iG+-jqgTkAC86CN482wZX2ZWA@mail.gmail.com>
+Subject: Re: [PATCH 1/3] include/hw/pci: Attach BDF to Memory Attributes
+To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, 
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Weiwei Li <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
+ "Michael S. Tsirkin" <mst@redhat.com>,
+ Marcel Apfelbaum <marcel.apfelbaum@gmail.com>
+Content-Type: multipart/alternative; boundary="0000000000004d6dfa0630b4ade8"
+Received-SPF: pass client-ip=2a00:1450:4864:20::530;
+ envelope-from=jason.chien@sifive.com; helo=mail-ed1-x530.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, HTML_MESSAGE=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -110,48 +101,215 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
+--0000000000004d6dfa0630b4ade8
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
+Ping
 
-On 3/19/25 11:11 AM, Gerd Hoffmann wrote:
-> Allow the device being added to riscv virt VMs.
-> 
-> Signed-off-by: Gerd Hoffmann <kraxel@redhat.com>
-> ---
+Jason Chien <jason.chien@sifive.com> =E6=96=BC 2025=E5=B9=B43=E6=9C=8813=E6=
+=97=A5 =E9=80=B1=E5=9B=9B =E4=B8=8A=E5=8D=8812:59=E5=AF=AB=E9=81=93=EF=BC=
+=9A
 
-Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+> Ping.
+>
+> Michael/Marcel, would you mind taking a look? Thanks!
+>
+>
+> Jason
+>
+> Daniel Henrique Barboza <dbarboza@ventanamicro.com> =E6=96=BC 2025=E5=B9=
+=B43=E6=9C=887=E6=97=A5 =E9=80=B1=E4=BA=94
+> =E4=B8=8B=E5=8D=888:40=E5=AF=AB=E9=81=93=EF=BC=9A
+>
+>>
+>>
+>> On 3/2/25 6:12 AM, Jason Chien wrote:
+>> > This commit adds the BDF to the memory attributes for DMA operations.
+>> >
+>> > Signed-off-by: Jason Chien <jason.chien@sifive.com>
+>> > ---
+>>
+>> This looks sensible but I'll feel more comfortable if Michael/Marcel als=
+o
+>> takes a look. Thanks,
+>>
+>>
+>> Daniel
+>>
+>> >   include/hw/pci/pci_device.h | 10 ++++++++--
+>> >   1 file changed, 8 insertions(+), 2 deletions(-)
+>> >
+>> > diff --git a/include/hw/pci/pci_device.h b/include/hw/pci/pci_device.h
+>> > index add208edfa..968f1ba3e9 100644
+>> > --- a/include/hw/pci/pci_device.h
+>> > +++ b/include/hw/pci/pci_device.h
+>> > @@ -244,6 +244,8 @@ static inline MemTxResult pci_dma_rw(PCIDevice
+>> *dev, dma_addr_t addr,
+>> >                                        void *buf, dma_addr_t len,
+>> >                                        DMADirection dir, MemTxAttrs
+>> attrs)
+>> >   {
+>> > +    attrs.unspecified =3D 0;
+>> > +    attrs.requester_id =3D pci_requester_id(dev);
+>> >       return dma_memory_rw(pci_get_address_space(dev), addr, buf, len,
+>> >                            dir, attrs);
+>> >   }
+>> > @@ -292,6 +294,8 @@ static inline MemTxResult pci_dma_write(PCIDevice
+>> *dev, dma_addr_t addr,
+>> >                                                  uint##_bits##_t *val,=
+ \
+>> >                                                  MemTxAttrs attrs) \
+>> >       { \
+>> > +        attrs.unspecified =3D 0; \
+>> > +        attrs.requester_id =3D pci_requester_id(dev); \
+>> >           return ld##_l##_dma(pci_get_address_space(dev), addr, val,
+>> attrs); \
+>> >       } \
+>> >       static inline MemTxResult st##_s##_pci_dma(PCIDevice *dev, \
+>> > @@ -299,6 +303,8 @@ static inline MemTxResult pci_dma_write(PCIDevice
+>> *dev, dma_addr_t addr,
+>> >                                                  uint##_bits##_t val, =
+\
+>> >                                                  MemTxAttrs attrs) \
+>> >       { \
+>> > +        attrs.unspecified =3D 0; \
+>> > +        attrs.requester_id =3D pci_requester_id(dev); \
+>> >           return st##_s##_dma(pci_get_address_space(dev), addr, val,
+>> attrs); \
+>> >       }
+>> >
+>> > @@ -327,8 +333,8 @@ PCI_DMA_DEFINE_LDST(q_be, q_be, 64);
+>> >   static inline void *pci_dma_map(PCIDevice *dev, dma_addr_t addr,
+>> >                                   dma_addr_t *plen, DMADirection dir)
+>> >   {
+>> > -    return dma_memory_map(pci_get_address_space(dev), addr, plen, dir=
+,
+>> > -                          MEMTXATTRS_UNSPECIFIED);
+>> > +    MemTxAttrs attrs =3D {.requester_id =3D pci_requester_id(dev)};
+>> > +    return dma_memory_map(pci_get_address_space(dev), addr, plen, dir=
+,
+>> attrs);
+>> >   }
+>> >
+>> >   static inline void pci_dma_unmap(PCIDevice *dev, void *buffer,
+>> dma_addr_t len,
+>>
+>>
 
->   hw/riscv/virt.c | 2 ++
->   hw/uefi/Kconfig | 2 +-
->   2 files changed, 3 insertions(+), 1 deletion(-)
-> 
-> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-> index dae46f4733cd..e517002fdfc7 100644
-> --- a/hw/riscv/virt.c
-> +++ b/hw/riscv/virt.c
-> @@ -57,6 +57,7 @@
->   #include "hw/acpi/aml-build.h"
->   #include "qapi/qapi-visit-common.h"
->   #include "hw/virtio/virtio-iommu.h"
-> +#include "hw/uefi/var-service-api.h"
->   
->   /* KVM AIA only supports APLIC MSI. APLIC Wired is always emulated by QEMU. */
->   static bool virt_use_kvm_aia_aplic_imsic(RISCVVirtAIAType aia_type)
-> @@ -1935,6 +1936,7 @@ static void virt_machine_class_init(ObjectClass *oc, void *data)
->       hc->plug = virt_machine_device_plug_cb;
->   
->       machine_class_allow_dynamic_sysbus_dev(mc, TYPE_RAMFB_DEVICE);
-> +    machine_class_allow_dynamic_sysbus_dev(mc, TYPE_UEFI_VARS_SYSBUS);
->   #ifdef CONFIG_TPM
->       machine_class_allow_dynamic_sysbus_dev(mc, TYPE_TPM_TIS_SYSBUS);
->   #endif
-> diff --git a/hw/uefi/Kconfig b/hw/uefi/Kconfig
-> index ca6c2bc46a96..f139008b632b 100644
-> --- a/hw/uefi/Kconfig
-> +++ b/hw/uefi/Kconfig
-> @@ -1,3 +1,3 @@
->   config UEFI_VARS
->   	bool
-> -        default y if X86_64 || AARCH64
-> +        default y if X86_64 || AARCH64 || RISCV64
+--0000000000004d6dfa0630b4ade8
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
+<div dir=3D"ltr">Ping</div><br><div class=3D"gmail_quote gmail_quote_contai=
+ner"><div dir=3D"ltr" class=3D"gmail_attr">Jason Chien &lt;<a href=3D"mailt=
+o:jason.chien@sifive.com">jason.chien@sifive.com</a>&gt; =E6=96=BC 2025=E5=
+=B9=B43=E6=9C=8813=E6=97=A5 =E9=80=B1=E5=9B=9B =E4=B8=8A=E5=8D=8812:59=E5=
+=AF=AB=E9=81=93=EF=BC=9A<br></div><blockquote class=3D"gmail_quote" style=
+=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding=
+-left:1ex"><div dir=3D"ltr">Ping.<br><br>Michael/Marcel, would you mind tak=
+ing a look? Thanks!<br><br><br>Jason</div><br><div class=3D"gmail_quote"><d=
+iv dir=3D"ltr" class=3D"gmail_attr">Daniel Henrique Barboza &lt;<a href=3D"=
+mailto:dbarboza@ventanamicro.com" target=3D"_blank">dbarboza@ventanamicro.c=
+om</a>&gt; =E6=96=BC 2025=E5=B9=B43=E6=9C=887=E6=97=A5 =E9=80=B1=E4=BA=94 =
+=E4=B8=8B=E5=8D=888:40=E5=AF=AB=E9=81=93=EF=BC=9A<br></div><blockquote clas=
+s=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid r=
+gb(204,204,204);padding-left:1ex"><br>
+<br>
+On 3/2/25 6:12 AM, Jason Chien wrote:<br>
+&gt; This commit adds the BDF to the memory attributes for DMA operations.<=
+br>
+&gt; <br>
+&gt; Signed-off-by: Jason Chien &lt;<a href=3D"mailto:jason.chien@sifive.co=
+m" target=3D"_blank">jason.chien@sifive.com</a>&gt;<br>
+&gt; ---<br>
+<br>
+This looks sensible but I&#39;ll feel more comfortable if Michael/Marcel al=
+so<br>
+takes a look. Thanks,<br>
+<br>
+<br>
+Daniel<br>
+<br>
+&gt;=C2=A0 =C2=A0include/hw/pci/pci_device.h | 10 ++++++++--<br>
+&gt;=C2=A0 =C2=A01 file changed, 8 insertions(+), 2 deletions(-)<br>
+&gt; <br>
+&gt; diff --git a/include/hw/pci/pci_device.h b/include/hw/pci/pci_device.h=
+<br>
+&gt; index add208edfa..968f1ba3e9 100644<br>
+&gt; --- a/include/hw/pci/pci_device.h<br>
+&gt; +++ b/include/hw/pci/pci_device.h<br>
+&gt; @@ -244,6 +244,8 @@ static inline MemTxResult pci_dma_rw(PCIDevice *de=
+v, dma_addr_t addr,<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 void =
+*buf, dma_addr_t len,<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 DMADi=
+rection dir, MemTxAttrs attrs)<br>
+&gt;=C2=A0 =C2=A0{<br>
+&gt; +=C2=A0 =C2=A0 attrs.unspecified =3D 0;<br>
+&gt; +=C2=A0 =C2=A0 attrs.requester_id =3D pci_requester_id(dev);<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0return dma_memory_rw(pci_get_address_space(d=
+ev), addr, buf, len,<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 dir, attrs);<br>
+&gt;=C2=A0 =C2=A0}<br>
+&gt; @@ -292,6 +294,8 @@ static inline MemTxResult pci_dma_write(PCIDevice =
+*dev, dma_addr_t addr,<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 uint##_bits##_t *val, \<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 MemTxAttrs attrs) \<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0{ \<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 attrs.unspecified =3D 0; \<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 attrs.requester_id =3D pci_requester_id(d=
+ev); \<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0return ld##_l##_dma(pci_get_ad=
+dress_space(dev), addr, val, attrs); \<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0} \<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0static inline MemTxResult st##_s##_pci_dma(P=
+CIDevice *dev, \<br>
+&gt; @@ -299,6 +303,8 @@ static inline MemTxResult pci_dma_write(PCIDevice =
+*dev, dma_addr_t addr,<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 uint##_bits##_t val, \<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 MemTxAttrs attrs) \<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0{ \<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 attrs.unspecified =3D 0; \<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 attrs.requester_id =3D pci_requester_id(d=
+ev); \<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0return st##_s##_dma(pci_get_ad=
+dress_space(dev), addr, val, attrs); \<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0}<br>
+&gt;=C2=A0 =C2=A0<br>
+&gt; @@ -327,8 +333,8 @@ PCI_DMA_DEFINE_LDST(q_be, q_be, 64);<br>
+&gt;=C2=A0 =C2=A0static inline void *pci_dma_map(PCIDevice *dev, dma_addr_t=
+ addr,<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0dma_addr_t *plen, DM=
+ADirection dir)<br>
+&gt;=C2=A0 =C2=A0{<br>
+&gt; -=C2=A0 =C2=A0 return dma_memory_map(pci_get_address_space(dev), addr,=
+ plen, dir,<br>
+&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
+ =C2=A0 =C2=A0 =C2=A0 MEMTXATTRS_UNSPECIFIED);<br>
+&gt; +=C2=A0 =C2=A0 MemTxAttrs attrs =3D {.requester_id =3D pci_requester_i=
+d(dev)};<br>
+&gt; +=C2=A0 =C2=A0 return dma_memory_map(pci_get_address_space(dev), addr,=
+ plen, dir, attrs);<br>
+&gt;=C2=A0 =C2=A0}<br>
+&gt;=C2=A0 =C2=A0<br>
+&gt;=C2=A0 =C2=A0static inline void pci_dma_unmap(PCIDevice *dev, void *buf=
+fer, dma_addr_t len,<br>
+<br>
+</blockquote></div>
+</blockquote></div>
+
+--0000000000004d6dfa0630b4ade8--
 
