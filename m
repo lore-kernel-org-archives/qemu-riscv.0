@@ -4,98 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8984AC35FFA
-	for <qemu-riscv@archiver.kernel.org>; Wed, 19 Mar 2025 20:16:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 93D62C35FFB
+	for <qemu-riscv@archiver.kernel.org>; Wed, 19 Mar 2025 20:21:38 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tuzpP-0000NL-Oo; Wed, 19 Mar 2025 16:15:51 -0400
+	id 1tuyze-0007Nw-V5; Wed, 19 Mar 2025 15:22:22 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <pierrick.bouvier@linaro.org>)
- id 1tuzp4-0000Ho-QX
- for qemu-riscv@nongnu.org; Wed, 19 Mar 2025 16:15:31 -0400
-Received: from mail-pj1-x102e.google.com ([2607:f8b0:4864:20::102e])
+ (Exim 4.90_1) (envelope-from <jim.shu@sifive.com>)
+ id 1tuyzc-0007NX-Eu
+ for qemu-riscv@nongnu.org; Wed, 19 Mar 2025 15:22:20 -0400
+Received: from mail-pl1-x630.google.com ([2607:f8b0:4864:20::630])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <pierrick.bouvier@linaro.org>)
- id 1tuzp2-0005Go-Nk
- for qemu-riscv@nongnu.org; Wed, 19 Mar 2025 16:15:30 -0400
-Received: by mail-pj1-x102e.google.com with SMTP id
- 98e67ed59e1d1-3014ae35534so100868a91.0
- for <qemu-riscv@nongnu.org>; Wed, 19 Mar 2025 13:15:27 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <jim.shu@sifive.com>)
+ id 1tuyza-0002Cg-Re
+ for qemu-riscv@nongnu.org; Wed, 19 Mar 2025 15:22:20 -0400
+Received: by mail-pl1-x630.google.com with SMTP id
+ d9443c01a7336-224191d92e4so144852775ad.3
+ for <qemu-riscv@nongnu.org>; Wed, 19 Mar 2025 12:22:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1742415326; x=1743020126; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=jjJvlOnU49s+Zbb8733WbLiCItr7uaYdoO51OudCE6k=;
- b=R5qyguWcw7hqySeqyIZQXEWWynSM9cZSI+98CQqoN5mEiru0PSsSrsdTwKMnHD0mmw
- R/UdpYrWDJPxt+Dd20sLYM2ryFAQUUKw3wZ6Vh2hahKPppn1o/Aw/YFcFirLoyF0F5zQ
- 8cjNXf3MFY6tpo1oiFBDD0s9He1OmDclJ7Dni0vRICLhnDvw3MRCA3XWBzM7a/5M4qU5
- /t5QMXqUMLAK2j/6gaZOxK81e7n3vzC98AcQeRItQcyg4n4CTMlB5cGChdnBN1Ttzylv
- gKpen0LnlK5T7KS/H2CukF9L1MAfAHnvHXxNAz9VODSYDhwKDFsG6IDjPhLIxNNH0nmW
- jTGg==
+ d=sifive.com; s=google; t=1742412136; x=1743016936; darn=nongnu.org;
+ h=references:in-reply-to:message-id:date:subject:cc:to:from:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=jtptQpawWvWvvPo7p+5ePzZbn/0qrX0uFQnRGLb5OR8=;
+ b=VbyPscj/wVC6Z5xK2MdciGZdvTEbFiaTfxhyzVlhhvg6LtuHNHz9XTkMgRX1/h+fEo
+ DBuf+nzNGraxRfZOwcfkOuE8tqSedo+NI2D/+WhxCCRkctiqS8+WtQ35AdNf2C4YMhmF
+ OQ+kPb9Wqvzwcy4CVKQ2ujSR22m7pXbehl6r5Y2F8pfjsx44thtLEuLnX5bV7QpSnNqk
+ BQg9tWr7eYB9TlBqV87Kxjx/Rv3F5kW2f0O6hwze8Sqm3r8EpjgJCzQafUq0RQS+XbfQ
+ uracjuL0xuOMo60QUBfQ3gBVPiov3V/z7ld5v2ZhRQ66j4KrP3znRwOC4rCmGqdqieCe
+ zH0Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1742415326; x=1743020126;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
+ d=1e100.net; s=20230601; t=1742412136; x=1743016936;
+ h=references:in-reply-to:message-id:date:subject:cc:to:from
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=jjJvlOnU49s+Zbb8733WbLiCItr7uaYdoO51OudCE6k=;
- b=G1wh2wQL0FJvyUBwvRBBMjUjra0M7vlxhj0dTFzWfZtwPzT3B1WVq2izK7qjcBVxYF
- LgfjEcqo0X2ILknvaL1IgAXcglJp5ysOmqbltUVkHJoSeNk9GeoDIITcsR9YkMm3dPI+
- 7/+qu+1rBOPrxGA4JL+e7eqZLWB7pLsfi2BTKxtwPinT4ZXgSlOViXRyxc4iECys4Pjx
- YoVjFdcksKb0GTyVCQFubii3/9XQmQES498LFGk/rEotXB3EZ5HvFkjklM72BWij9AUt
- Sz6Yu8GlfdKwsacJ4WRLuoAhzIFsAwgacaC1B/R/ZV3xg8Q8I3CGjsiHqGgtLDBcrkaO
- qViQ==
+ bh=jtptQpawWvWvvPo7p+5ePzZbn/0qrX0uFQnRGLb5OR8=;
+ b=l5JUUO1E6kIJACEM1Oi18JcFV6H/KL4owiZ0/GcNv+Kj3VxOKfK/jo8PH+w3Jcq7p7
+ yGrqcpd98xtI11wS8mGj5Q7FFWYsACnI+hPBwr8daWsAY3bW8F0bSx2eOFJPY1owAqrl
+ a4FGm+oU6V7FZvBRIYk+Al2Lzk0+Y17pTi5EWyBNxrttbc+4AphlxiGdwags1tgRW6kq
+ JVJY8KHFLPTVYkF+oPVQSVGVJ1qxyiNbak6ymqan500SuFGUmq4AY81Dg7msXuGEUfo/
+ M06IKy4Y7Aq9GkTx2VXLUcTQzAj4+nRbKDfWhVvl4tZCIqTa0bIjwWwckGnywB/BYqeJ
+ 7qkw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUkTzpPBqph4CvvPiJ+a8ppG4/CiqSzcDPOjGapZHah9Q6t05VYeLwJmH1TgCTWqTd7cBuOpeKu5rMR@nongnu.org
-X-Gm-Message-State: AOJu0YyQAUOOemsDGYHzcNpgjQYwAAllkhbEA/KnYRa9Hm/iZZ1C4t49
- J4AW5D51VoIxNDl4go6+cuBybD7IZLC+mimsUel4vk/IkJyhwwgRsL6fapDaH5g=
-X-Gm-Gg: ASbGncvkKUjK36ZtkDGlcj8xpE3X5SGEkg1PZGGMPa0JwArTpYVrx0vp8OwBETrjvyf
- eC5HPWmHs4oCIATP8X09EiCdAG0hBifGXxP6vOccQamOluEDGlBfo/Tqi4ePv5Y+44YUCjSvM63
- lwR4GW9UJWW9w3+Qv0PfoICbgbkpDIW2b7I1sgeIlSi7yU7UVZJ50yQtQGcS5udZTsF5rMb1lfu
- 0yQ4jUiHqP2roh2if7ZHPWLCMUIFMalYCryJVVNYf4aFxuZD0ouMyMn0a6IDEubcxZlhjuloIq5
- 9ODiDK1YhWPQmK/mC7POhYccnE3xw+ktkzQQ+1GPxPbiZMYfodYhaqNf6g==
-X-Google-Smtp-Source: AGHT+IG/qfPdy626hThIYa/RsoZd8+ixXNZ5S+14ncTQSUR3/THRotw28A4RHNR31RiMxmmch69q8w==
-X-Received: by 2002:a17:90b:1a88:b0:2ff:7331:18bc with SMTP id
- 98e67ed59e1d1-301be202b7fmr5479737a91.26.1742415325934; 
- Wed, 19 Mar 2025 13:15:25 -0700 (PDT)
-Received: from [192.168.1.67] ([38.39.164.180])
+ AJvYcCXW8k5mLYxcVxjcVONR9AuJA3JTmPueDb/OmgiWI5b+ucOBFQLcnXroYqH6a0vEpnsb/Y1Y/MMSHUDH@nongnu.org
+X-Gm-Message-State: AOJu0YyPaRsGzT5Bb+oNDm9Jdxo1LQiAX/LVq/CWKZf/9L//2keAkRpc
+ hUSQ54X4vRgdDuqCxmQ3q5guRcbZvYNyza2TgTi4Yhou9hBl+cGiZNYlLUAUAi0=
+X-Gm-Gg: ASbGncvvDdXDH6f+EigLVlG2BfVVysT0IndurQ4U6jL5xVxqQkMibmWkxWXTHxojooS
+ IGn8eOG2BA3PwMUi5Nd7h+PyBweB20jt89M0lsZzx1o3Ks+pFzquWfa2gzyofI5rWDrtbw1Zhj2
+ 92FmUJ6DozSTggK+fdHLRMVKJ3A1S1miBheiOLxkDp/wLuDxnF+UltXyDLvsz6K8zUMvookpPO4
+ xAi/jovq8mkQKxXQObewOIu2rgZyQiUl9YkZrFX6rZqSDiow/ss88FCGrX8C1nC6WBLx89Levy8
+ +R3hGl7TDmdPfmIKIrXHc61CbI4fKhjbq1kuDx1NBHWeXfXSQAa0N9nBODq0fEz3a+I=
+X-Google-Smtp-Source: AGHT+IGb80ZN540wcGAg63HcRJ/3dRkHokXskLkNnkc7mEboWtJIlDoyAxzX5p7HEECTnvoHIXOkCA==
+X-Received: by 2002:a05:6a21:3989:b0:1f5:619a:8f73 with SMTP id
+ adf61e73a8af0-1fbecd41923mr6058469637.26.1742412136668; 
+ Wed, 19 Mar 2025 12:22:16 -0700 (PDT)
+Received: from hsinchu26.internal.sifive.com ([210.176.154.34])
  by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-301bf5b80b5sm2116351a91.38.2025.03.19.13.15.24
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 19 Mar 2025 13:15:25 -0700 (PDT)
-Message-ID: <9c48029e-1921-447e-8b38-4b171dce1210@linaro.org>
-Date: Wed, 19 Mar 2025 13:15:24 -0700
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v6 13/18] system/xen: remove inline stubs
-Content-Language: en-US
-To: Anthony PERARD <anthony.perard@vates.tech>
-Cc: qemu-devel@nongnu.org, Paul Durrant <paul@xen.org>,
- xen-devel@lists.xenproject.org, David Hildenbrand <david@redhat.com>,
- "Edgar E. Iglesias" <edgar.iglesias@gmail.com>, qemu-riscv@nongnu.org,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Paolo Bonzini <pbonzini@redhat.com>,
- Harsh Prateek Bora <harshpb@linux.ibm.com>, alex.bennee@linaro.org,
- manos.pitsidianakis@linaro.org,
- Daniel Henrique Barboza <danielhb413@gmail.com>,
- Richard Henderson <richard.henderson@linaro.org>,
- Alistair Francis <alistair.francis@wdc.com>, qemu-ppc@nongnu.org,
- =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Weiwei Li <liwei1518@gmail.com>, kvm@vger.kernel.org,
- Palmer Dabbelt <palmer@dabbelt.com>, Peter Xu <peterx@redhat.com>,
- Yoshinori Sato <ysato@users.sourceforge.jp>,
- Stefano Stabellini <sstabellini@kernel.org>,
- Nicholas Piggin <npiggin@gmail.com>
-References: <20250317183417.285700-1-pierrick.bouvier@linaro.org>
- <20250317183417.285700-14-pierrick.bouvier@linaro.org> <Z9rNBFsWR39czUGQ@l14>
-From: Pierrick Bouvier <pierrick.bouvier@linaro.org>
-In-Reply-To: <Z9rNBFsWR39czUGQ@l14>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: base64
-Received-SPF: pass client-ip=2607:f8b0:4864:20::102e;
- envelope-from=pierrick.bouvier@linaro.org; helo=mail-pj1-x102e.google.com
+ 41be03b00d2f7-af56ea947a4sm11432175a12.70.2025.03.19.12.22.14
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 19 Mar 2025 12:22:16 -0700 (PDT)
+From: Jim Shu <jim.shu@sifive.com>
+To: qemu-devel@nongnu.org,
+	qemu-riscv@nongnu.org
+Cc: Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Weiwei Li <liwei1518@gmail.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, Jim Shu <jim.shu@sifive.com>
+Subject: [PATCH 3/4] target/riscv: Fix VSTIP bit in sstc extension.
+Date: Thu, 20 Mar 2025 03:21:52 +0800
+Message-Id: <20250319192153.28549-4-jim.shu@sifive.com>
+X-Mailer: git-send-email 2.17.1
+In-Reply-To: <20250319192153.28549-1-jim.shu@sifive.com>
+References: <20250319192153.28549-1-jim.shu@sifive.com>
+Received-SPF: pass client-ip=2607:f8b0:4864:20::630;
+ envelope-from=jim.shu@sifive.com; helo=mail-pl1-x630.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -118,11 +101,35 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-T24gMy8xOS8yNSAwNjo1NiwgQW50aG9ueSBQRVJBUkQgd3JvdGU6DQo+IE9uIE1vbiwgTWFy
-IDE3LCAyMDI1IGF0IDExOjM0OjEyQU0gLTA3MDAsIFBpZXJyaWNrIEJvdXZpZXIgd3JvdGU6
-DQo+PiBSZXZpZXdlZC1ieTogUGhpbGlwcGUgTWF0aGlldS1EYXVkw6kgPHBoaWxtZEBsaW5h
-cm8ub3JnPg0KPj4gU2lnbmVkLW9mZi1ieTogUGllcnJpY2sgQm91dmllciA8cGllcnJpY2su
-Ym91dmllckBsaW5hcm8ub3JnPg0KPiANCg0KVGhpcyB3YXMgYSBiYWQgY29weS1wYXN0ZSwg
-dGhhbmtzLg0KDQo+IFJldmlld2VkLWJ5OiBBbnRob255IFBFUkFSRCA8YW50aG9ueS5wZXJh
-cmRAdmF0ZXMudGVjaD4NCj4gDQo+IFRoYW5rcywNCj4gDQoNCg==
+VSTIP is only writable when both [mh]envcfg.STCE is enabled, or it will
+revert it's defined behavior as if sstc extension is not implemented.
+
+Signed-off-by: Jim Shu <jim.shu@sifive.com>
+---
+ target/riscv/csr.c | 9 ++++++++-
+ 1 file changed, 8 insertions(+), 1 deletion(-)
+
+diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+index 49566d3c08..ba026dfc8e 100644
+--- a/target/riscv/csr.c
++++ b/target/riscv/csr.c
+@@ -3630,7 +3630,14 @@ static RISCVException rmw_mip64(CPURISCVState *env, int csrno,
+     if (riscv_cpu_cfg(env)->ext_sstc && (env->priv == PRV_M) &&
+         get_field(env->menvcfg, MENVCFG_STCE)) {
+         /* sstc extension forbids STIP & VSTIP to be writeable in mip */
+-        mask = mask & ~(MIP_STIP | MIP_VSTIP);
++
++        /* STIP is not writable when menvcfg.STCE is enabled. */
++        mask = mask & ~MIP_STIP;
++
++        /* VSTIP is not writable when both [mh]envcfg.STCE are enabled. */
++        if (get_field(env->henvcfg, HENVCFG_STCE)) {
++            mask = mask & ~MIP_VSTIP;
++        }
+     }
+ 
+     if (mask) {
+-- 
+2.17.1
+
 
