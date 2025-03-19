@@ -4,108 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4E697C36000
-	for <qemu-riscv@archiver.kernel.org>; Wed, 19 Mar 2025 17:43:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DCF95C35FFA
+	for <qemu-riscv@archiver.kernel.org>; Wed, 19 Mar 2025 19:23:03 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tuxRM-0006dx-1J; Wed, 19 Mar 2025 13:42:54 -0400
+	id 1tuyza-0007Mi-Rc; Wed, 19 Mar 2025 15:22:18 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <mst@redhat.com>) id 1tuxRJ-0006Za-0v
- for qemu-riscv@nongnu.org; Wed, 19 Mar 2025 13:42:49 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <mst@redhat.com>) id 1tuxRH-0007tu-BN
- for qemu-riscv@nongnu.org; Wed, 19 Mar 2025 13:42:48 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1742406165;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=xdHr+wV4v5xUcIHu4GW0sf3yXF4EP+1qdf38St8V2tE=;
- b=KahzDsYOsjZjS6tw5IFaL7vyyKVuCF80U7Qdhk9aQxvNMeCoLyUiF8T2u9/SiQUIWw8Kd1
- tT5Me1DHmo34eNtgdebtXkxeyKDOdvFaPu4Y5v4Ooqa1mJg1fir3Wdfnx+nnNSFCCfkmJ+
- T7LLvuSynlP02N2e6gfov1pmgZfMKC0=
-Received: from mail-wm1-f69.google.com (mail-wm1-f69.google.com
- [209.85.128.69]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-634-24VIJip_ND2UhGOnLU4ivg-1; Wed, 19 Mar 2025 13:42:44 -0400
-X-MC-Unique: 24VIJip_ND2UhGOnLU4ivg-1
-X-Mimecast-MFC-AGG-ID: 24VIJip_ND2UhGOnLU4ivg_1742406163
-Received: by mail-wm1-f69.google.com with SMTP id
- 5b1f17b1804b1-43cf172ffe1so40338285e9.3
- for <qemu-riscv@nongnu.org>; Wed, 19 Mar 2025 10:42:44 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <jim.shu@sifive.com>)
+ id 1tuyzY-0007LR-3A
+ for qemu-riscv@nongnu.org; Wed, 19 Mar 2025 15:22:16 -0400
+Received: from mail-pl1-x62d.google.com ([2607:f8b0:4864:20::62d])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <jim.shu@sifive.com>)
+ id 1tuyzW-0002Bg-8W
+ for qemu-riscv@nongnu.org; Wed, 19 Mar 2025 15:22:15 -0400
+Received: by mail-pl1-x62d.google.com with SMTP id
+ d9443c01a7336-225b5448519so142678185ad.0
+ for <qemu-riscv@nongnu.org>; Wed, 19 Mar 2025 12:22:13 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=sifive.com; s=google; t=1742412132; x=1743016932; darn=nongnu.org;
+ h=references:in-reply-to:message-id:date:subject:cc:to:from:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=JQssGOpztpWWFjOnWZYSMTHISmCvQCvOgUNRyvmYuFc=;
+ b=ArwVeVvFQYCFlTEHdHDucckQBFFTRjDdHXpZX47f/XGhqKFKRIHZvNXAnxJd0ycdUg
+ i9x+SdgrBc/rG5k6M5IX5/diSlN3iXh9qqfw5cxwByiZ9FCgKbdtBkLqDnt4fa5UjdQQ
+ DqpW7Tsyxju8cda8arNTFjCy0iPMt1ckmlqLm9bwg5gWBdjvxzW9MlDQvU7ToY5wsNGn
+ 5wAgvOKEekXe33YA8pmLXrEkL9oB4ILnj9IWwVkhiKuThxLgcs2bz2DO0rDgj6Pyr4Us
+ 4IhqKm2RhWzPqPesjB247FAfUozs8fp5R925Qc1CwmInDHhSRhraUWHupgWC2OLvXaPm
+ V9/w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1742406163; x=1743010963;
- h=in-reply-to:content-transfer-encoding:content-disposition
- :mime-version:references:message-id:subject:cc:to:from:date
+ d=1e100.net; s=20230601; t=1742412132; x=1743016932;
+ h=references:in-reply-to:message-id:date:subject:cc:to:from
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=xdHr+wV4v5xUcIHu4GW0sf3yXF4EP+1qdf38St8V2tE=;
- b=qKhPqv1pcgoeOfHYgAfpnQ2qd6KTmxXZ32eVlUk1C6QfSzTwmaKIhkXz3oKyQxvfac
- gE2lfAn7Lm+BzSMSdzmLUOV1hDZI7Gz470ZwpovfEFuK260dS3eVIxyUiGkObC6MV04Q
- v+DXDN18NxWjLkT7yUekcl+nnEJooSr3L7SymUZ6QL3jJmfSiwvudhM5mkDLEqZJhdoU
- goiRHTPliCEvnPswrskgq4MN7ueJ0FlcdOFHhdk7s/4e8I0RZFFAPUxw9Au2F4mz4zlS
- p84c4NqHYj9i64ZPLT2j0QhC6DzRw0o6dBTdK31aBkvoi2F7GupxDNgbwGcrRWiSCF0N
- cCvg==
+ bh=JQssGOpztpWWFjOnWZYSMTHISmCvQCvOgUNRyvmYuFc=;
+ b=St6YXRQ9xFe4APc92KBzRG3v1Mce5sRfWL6JDbrBGsYnPLDzJqH/o9EVk09BPIWCS7
+ liWfLKe7vsakDeXONFSxtyCCN8F7CRtB1BlcFyD/Oi7hyHiY8scXfH+wx0ELaITxHwMU
+ UUTqpPuiqsJDttsk88KyuRj+42tHx9jKbL2Bh4GUH363x84XgimGRRNjpsfaJStIwmaA
+ hT/71oOQHaaHVjK8g1iATPBcD1eNR4McX2Y9CDFuRezmV9D4zZv70TT5B/OahNZHaWVO
+ Ajimpf3fWKMf46xzeI/MUD9rheo/X0e7M1FOdqDFH+418H2DOFwIXa5b78OOjaS3FpEg
+ Qtnw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXpQV5ShhI2c39sHD+uNd7le+Gn7amYdNIAwQbfFzYMTgvCxqyiOOIlXjnDJTUMOYhm4lhcDGiSQPEI@nongnu.org
-X-Gm-Message-State: AOJu0Yy4tyuJkYqgY9fOkfA8QWMGWKELMxBwPCacRoIQ2O2HS6DbGMZ6
- UUFJYUvKNR8ktljte26TEFGWenBdo5mRLkCCyKF3w8mxMLfTAifTbEAev9PKqym5t4bSum8Ofab
- 7ZpDm0S/lPgo/3Hinr82uav51+nlRiZwMWrm9j2EYwWSjxh7C8Rwz
-X-Gm-Gg: ASbGncuNsxCspucTAe93IkIvBZwIjGJ+fynO/oVraoq0RidXxI8v9fOB+tHhltl7jy3
- mfhglWkp4REqohbI+D7nvYAHXhgHzdYlwjJzcv9LmdT8B02fjDCSQGZw+ajfqufH/63fx3XuaNi
- lDLRD39p3E2SjpqUoTseuY7mmNgn3DzgxHjQTlj4eSTKenKk984ld5ZNy0ZWng41H6+cjKCJZ9h
- aVH/1SflxE/R5sTYDR3PL5kTdxL3iztyEdhj6VnA6+LArqpz0cUNRj2VVDFA3lA2Xy4NqwrCsvL
- wxSXCXKQmw==
-X-Received: by 2002:a05:600c:4503:b0:43c:fffc:7855 with SMTP id
- 5b1f17b1804b1-43d437c3327mr41385155e9.15.1742406162862; 
- Wed, 19 Mar 2025 10:42:42 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IHNgvrH1XDPoaHVA3FhRRm+G50JCWH+9YtrEJR93aSB8OGvD8mjBEYiOqSs6Yh+YGE/qwsLLw==
-X-Received: by 2002:a05:600c:4503:b0:43c:fffc:7855 with SMTP id
- 5b1f17b1804b1-43d437c3327mr41384875e9.15.1742406162407; 
- Wed, 19 Mar 2025 10:42:42 -0700 (PDT)
-Received: from redhat.com ([2a0d:6fc0:1517:1000:ea83:8e5f:3302:3575])
+ AJvYcCUqISV00AnkJ3eHSNvXII/qj+NznwPAcBSDjc/xTz6QdiIcdgcQktxc9bj1wotn16A7gMljww8OwNfH@nongnu.org
+X-Gm-Message-State: AOJu0Ywgf3nwONk+0wmSKbiX9awnfH/wkxZ7j+HfOPc+gmAtqEbMbqzl
+ LKGwmzMMvy9mT04w2eiwGrdtIA3OpxxU4ZW2ic2AesWIMDT8pf2MyKxaqxXlbeI=
+X-Gm-Gg: ASbGncuuqRozRHn6KdRW3BDeBq8uajbEiRardLmKDylmyhPsBkOuGz8HwLDQh63XlgF
+ evk0+GMdzM1Mg69lzOzkE8z45FtqMwpkN32NWDQi6sJO86hFQJHJ/9UHW/GMXHNU1Q4VaqhycE8
+ 9d2y+ll1cdymo9QJ/IJMn7RLZibxq12pvKEtbuF12moLclB9YXYdtzLVsshdVRIimZc61ZDcHGC
+ K33AJ1enzMolVWo960s3eg4R1bVt52RDMFiijg15+QXs6qKGuRiHuw/Pm+jrGTFhxBHBqODzUGn
+ d4NxBonCrWHhE4+9WUdBVUGZWKMCykJ3NUKzydIAoAx9OiEYgfJeDCzhzCB+GVe3Nag=
+X-Google-Smtp-Source: AGHT+IFOBEEk6Zvcy0YZNa94DqJbNRt8nM7g2pXo7E0hp0OY+ylUnVnSde/3M7z7paZURqHpnqVpBQ==
+X-Received: by 2002:a05:6a21:48c:b0:1f5:7eb5:72dc with SMTP id
+ adf61e73a8af0-1fbeb1854b1mr6743816637.3.1742412132248; 
+ Wed, 19 Mar 2025 12:22:12 -0700 (PDT)
+Received: from hsinchu26.internal.sifive.com ([210.176.154.34])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-43d43f476a7sm24700675e9.9.2025.03.19.10.42.40
+ 41be03b00d2f7-af56ea947a4sm11432175a12.70.2025.03.19.12.22.10
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 19 Mar 2025 10:42:41 -0700 (PDT)
-Date: Wed, 19 Mar 2025 13:42:38 -0400
-From: "Michael S. Tsirkin" <mst@redhat.com>
-To: Jason Chien <jason.chien@sifive.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org,
- Peter Maydell <peter.maydell@linaro.org>,
- Andrey Smirnov <andrew.smirnov@gmail.com>,
- Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
- Palmer Dabbelt <palmer@dabbelt.com>,
+ Wed, 19 Mar 2025 12:22:11 -0700 (PDT)
+From: Jim Shu <jim.shu@sifive.com>
+To: qemu-devel@nongnu.org,
+	qemu-riscv@nongnu.org
+Cc: Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <alistair.francis@wdc.com>,
  Weiwei Li <liwei1518@gmail.com>,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- "open list:MCIMX7D SABRE / i..." <qemu-arm@nongnu.org>
-Subject: Re: [PATCH 0/4] Integrate IOMMUs with PCI hosts that have ATUs
-Message-ID: <20250319134141-mutt-send-email-mst@kernel.org>
-References: <20250307203952.13871-1-jason.chien@sifive.com>
- <CADr__8rgTBJW-KKAr55Y1wHLS7jRDyvQjx=vJCGAj4T1YZhUNA@mail.gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <CADr__8rgTBJW-KKAr55Y1wHLS7jRDyvQjx=vJCGAj4T1YZhUNA@mail.gmail.com>
-X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: pRWT4_1Okr0iROUXKkv_tPEGmT-UQoTWnvtub1q_zqw_1742406163
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=170.10.133.124; envelope-from=mst@redhat.com;
- helo=us-smtp-delivery-124.mimecast.com
-X-Spam_score_int: -23
-X-Spam_score: -2.4
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, Jim Shu <jim.shu@sifive.com>
+Subject: [PATCH 1/4] target/riscv: Add the checking into stimecmp write
+ function.
+Date: Thu, 20 Mar 2025 03:21:50 +0800
+Message-Id: <20250319192153.28549-2-jim.shu@sifive.com>
+X-Mailer: git-send-email 2.17.1
+In-Reply-To: <20250319192153.28549-1-jim.shu@sifive.com>
+References: <20250319192153.28549-1-jim.shu@sifive.com>
+Received-SPF: pass client-ip=2607:f8b0:4864:20::62d;
+ envelope-from=jim.shu@sifive.com; helo=mail-pl1-x62d.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
 X-Spam_bar: --
-X-Spam_report: (-2.4 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.337,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H2=0.001,
- RCVD_IN_VALIDITY_CERTIFIED_BLOCKED=0.001, RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -121,44 +102,46 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Thu, Mar 20, 2025 at 01:19:18AM +0800, Jason Chien wrote:
-> Ping
-> 
-> Jason Chien <jason.chien@sifive.com> 於 2025年3月8日週六上午4:40寫道：
-> 
->     The struct PCIIOMMUOps is designed for use by an IOMMU, but many PCI hosts
->     also utilize it to implement their ATUs, preventing coexistence with
->     IOMMUs.
->     Overwriting a PCI host’s PCIIOMMUOps disrupts its translation rules.
-> 
->     This patch series introduces a mechanism to route inbound transactions from
->     PCI hosts to the IOMMU, enabling proper integration.
-> 
->     The final patch depends on another patch series:
->     https://lists.nongnu.org/archive/html/qemu-riscv/2025-03/msg00003.html
-> 
->     Jason Chien (4):
->       include/hw/pci: Introduce a callback to set the downstream mr of PCI
->         hosts
->       hw/pci: Introduce an API to set PCI host downstream mr for IOMMU
->         integration
->       hw/pci-host/designware: Implement PCIIOMMUOps.set_downstream_mr()
->       hw/riscv/riscv-iommu: Connect the IOMMU with PCI hosts that have ATUs
-> 
->      hw/pci-host/designware.c         | 18 +++++++++++++++---
->      hw/pci/pci.c                     |  8 ++++++++
->      hw/riscv/riscv-iommu.c           | 15 ++++++++++-----
->      include/hw/pci-host/designware.h |  2 ++
->      include/hw/pci/pci.h             | 21 +++++++++++++++++++++
->      5 files changed, 56 insertions(+), 8 deletions(-)
+Preparation commit to let aclint timer to use stimecmp write function.
+Aclint timer doesn't call sstc() predicate so we need to check inside
+the stimecmp write function.
 
+Signed-off-by: Jim Shu <jim.shu@sifive.com>
+---
+ target/riscv/time_helper.c | 19 +++++++++++++++++--
+ 1 file changed, 17 insertions(+), 2 deletions(-)
 
-Hello!
-I tagged this for 10.1, as qemu entered code freeze.
-
->     --
->     2.43.2
-> 
-> 
+diff --git a/target/riscv/time_helper.c b/target/riscv/time_helper.c
+index bc0d9a0c4c..aebf0798d0 100644
+--- a/target/riscv/time_helper.c
++++ b/target/riscv/time_helper.c
+@@ -46,8 +46,23 @@ void riscv_timer_write_timecmp(CPURISCVState *env, QEMUTimer *timer,
+ {
+     uint64_t diff, ns_diff, next;
+     RISCVAclintMTimerState *mtimer = env->rdtime_fn_arg;
+-    uint32_t timebase_freq = mtimer->timebase_freq;
+-    uint64_t rtc_r = env->rdtime_fn(env->rdtime_fn_arg) + delta;
++    uint32_t timebase_freq;
++    uint64_t rtc_r;
++
++    if (!riscv_cpu_cfg(env)->ext_sstc || !env->rdtime_fn ||
++        !env->rdtime_fn_arg || !get_field(env->menvcfg, MENVCFG_STCE)) {
++        /* S/VS Timer IRQ depends on sstc extension, rdtime_fn(), and STCE. */
++        return;
++    }
++
++    if (timer_irq == MIP_VSTIP &&
++        (!riscv_has_ext(env, RVH) || !get_field(env->henvcfg, HENVCFG_STCE))) {
++        /* VS Timer IRQ also depends on RVH and henvcfg.STCE. */
++        return;
++    }
++
++    timebase_freq = mtimer->timebase_freq;
++    rtc_r = env->rdtime_fn(env->rdtime_fn_arg) + delta;
+ 
+     if (timecmp <= rtc_r) {
+         /*
+-- 
+2.17.1
 
 
