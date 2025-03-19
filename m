@@ -4,49 +4,48 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DDFC2C35FFC
-	for <qemu-riscv@archiver.kernel.org>; Wed, 19 Mar 2025 14:14:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E8513C36000
+	for <qemu-riscv@archiver.kernel.org>; Wed, 19 Mar 2025 14:16:16 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tuuAW-0001zA-Fa; Wed, 19 Mar 2025 10:13:16 -0400
+	id 1tuuAf-0002D5-E8; Wed, 19 Mar 2025 10:13:25 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <kraxel@redhat.com>) id 1tuuA3-0001f1-7b
- for qemu-riscv@nongnu.org; Wed, 19 Mar 2025 10:12:52 -0400
+ (Exim 4.90_1) (envelope-from <kraxel@redhat.com>) id 1tuuA9-0001hL-72
+ for qemu-riscv@nongnu.org; Wed, 19 Mar 2025 10:12:54 -0400
 Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <kraxel@redhat.com>) id 1tuu9o-0006ku-Mz
- for qemu-riscv@nongnu.org; Wed, 19 Mar 2025 10:12:42 -0400
+ (Exim 4.90_1) (envelope-from <kraxel@redhat.com>) id 1tuu9q-0006jt-Qb
+ for qemu-riscv@nongnu.org; Wed, 19 Mar 2025 10:12:50 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1742393538;
+ s=mimecast20190719; t=1742393533;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=+OMMrBdJVZeaiydw5/kpxjoxLOQi34o3C5q8EbZWnAY=;
- b=Ab0deU20eNE5HP5xtKon29IlVdO9eUoMl8HlrEB3cTarUSoowPe95hqCE9jGOz0t/vhhyO
- 7j3f169bjey658B02uoMHVcVR8BgoTxzBWsSrS+9OAt2GLgD68h88J/HsbIDeATDv5E4PF
- dtm5M3SyfVASpprPF43+XGHmnaQaxLk=
-Received: from mx-prod-mc-08.mail-002.prod.us-west-2.aws.redhat.com
- (ec2-35-165-154-97.us-west-2.compute.amazonaws.com [35.165.154.97]) by
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=fq+C1UDVsAf0N2mCiR2KYMdq+SKcB+nTYLn+R5EJ0no=;
+ b=Dc1ye0vl/mSCadBiDR4anm46W892gg+FM+FmHSb/AHb4Nrks1GcwRtYKAnQt73dDD8iKje
+ lx1+HO0E+7GRzGgq+ywhZX+NlsL7Ppe4y2Kv6XEZ5tbjXNgC9QU7kTlNZp/N9odeA8MjQH
+ Mz1XOerOs5oLHvJhVpa+aWOrGpp/yTI=
+Received: from mx-prod-mc-04.mail-002.prod.us-west-2.aws.redhat.com
+ (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
  relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-294-l-wgJGBVNk6ssKXS3QIZMQ-1; Wed,
- 19 Mar 2025 10:12:12 -0400
-X-MC-Unique: l-wgJGBVNk6ssKXS3QIZMQ-1
-X-Mimecast-MFC-AGG-ID: l-wgJGBVNk6ssKXS3QIZMQ_1742393531
-Received: from mx-prod-int-02.mail-002.prod.us-west-2.aws.redhat.com
- (mx-prod-int-02.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.15])
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-312-wJx7z7t6PfCyztdL_5foWg-1; Wed,
+ 19 Mar 2025 10:12:09 -0400
+X-MC-Unique: wJx7z7t6PfCyztdL_5foWg-1
+X-Mimecast-MFC-AGG-ID: wJx7z7t6PfCyztdL_5foWg_1742393527
+Received: from mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com
+ (mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.4])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by mx-prod-mc-08.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id DBF331801A00; Wed, 19 Mar 2025 14:12:10 +0000 (UTC)
+ by mx-prod-mc-04.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id 1A20119560B4; Wed, 19 Mar 2025 14:12:05 +0000 (UTC)
 Received: from sirius.home.kraxel.org (unknown [10.45.224.38])
- by mx-prod-int-02.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id 4A9DF1956094; Wed, 19 Mar 2025 14:12:10 +0000 (UTC)
+ by mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id A53A43001D17; Wed, 19 Mar 2025 14:12:01 +0000 (UTC)
 Received: by sirius.home.kraxel.org (Postfix, from userid 1000)
- id 7FE1B18003B7; Wed, 19 Mar 2025 15:11:59 +0100 (CET)
+ id 1FE4D18000AF; Wed, 19 Mar 2025 15:11:59 +0100 (CET)
 From: Gerd Hoffmann <kraxel@redhat.com>
 To: qemu-devel@nongnu.org
 Cc: Bibo Mao <maobibo@loongson.cn>, Kashyap Chamarthy <kchamart@redhat.com>,
@@ -58,14 +57,13 @@ Cc: Bibo Mao <maobibo@loongson.cn>, Kashyap Chamarthy <kchamart@redhat.com>,
  qemu-riscv@nongnu.org, Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
  Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, Weiwei Li <liwei1518@gmail.com>,
  Gerd Hoffmann <kraxel@redhat.com>, Palmer Dabbelt <palmer@dabbelt.com>
-Subject: [PATCH v3 5/6] hw/uefi-vars-sysbus: allow for loongarch virt
-Date: Wed, 19 Mar 2025 15:11:57 +0100
-Message-ID: <20250319141159.1461621-6-kraxel@redhat.com>
-In-Reply-To: <20250319141159.1461621-1-kraxel@redhat.com>
-References: <20250319141159.1461621-1-kraxel@redhat.com>
+Subject: [PATCH v3 0/6] [for-10.0] hw/uefi: some bugfixes
+Date: Wed, 19 Mar 2025 15:11:52 +0100
+Message-ID: <20250319141159.1461621-1-kraxel@redhat.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-X-Scanned-By: MIMEDefang 3.0 on 10.30.177.15
+X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.4
 Received-SPF: pass client-ip=170.10.133.124; envelope-from=kraxel@redhat.com;
  helo=us-smtp-delivery-124.mimecast.com
 X-Spam_score_int: -23
@@ -75,7 +73,7 @@ X-Spam_report: (-2.4 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.337,
  DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H2=0.001,
  RCVD_IN_VALIDITY_CERTIFIED_BLOCKED=0.001, RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -91,44 +89,26 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Allow the device being added to loongarch virt VMs.
+v3 changes:
+ - rename firmware.json flag, more verbose documentation.
+ - add support for riscv and loongarch.
 
-Signed-off-by: Gerd Hoffmann <kraxel@redhat.com>
----
- hw/loongarch/virt.c | 2 ++
- hw/uefi/Kconfig     | 2 +-
- 2 files changed, 3 insertions(+), 1 deletion(-)
+Gerd Hoffmann (6):
+  hw/uefi: flush variable store to disk in post load
+  hw/uefi: fix error handling in uefi_vars_json_save
+  hw/uefi: fix error handling in uefi_vars_json_load
+  hw/uefi-vars-sysbus: allow for riscv virt
+  hw/uefi-vars-sysbus: allow for loongarch virt
+  docs/firmware: add feature flag for host uefi variable store
 
-diff --git a/hw/loongarch/virt.c b/hw/loongarch/virt.c
-index a5840ff96857..b6f5f6a3b546 100644
---- a/hw/loongarch/virt.c
-+++ b/hw/loongarch/virt.c
-@@ -38,6 +38,7 @@
- #include "hw/mem/nvdimm.h"
- #include "hw/platform-bus.h"
- #include "hw/display/ramfb.h"
-+#include "hw/uefi/var-service-api.h"
- #include "hw/mem/pc-dimm.h"
- #include "system/tpm.h"
- #include "system/block-backend.h"
-@@ -1207,6 +1208,7 @@ static void virt_class_init(ObjectClass *oc, void *data)
-     object_class_property_set_description(oc, "v-eiointc",
-                             "Enable Virt Extend I/O Interrupt Controller.");
-     machine_class_allow_dynamic_sysbus_dev(mc, TYPE_RAMFB_DEVICE);
-+    machine_class_allow_dynamic_sysbus_dev(mc, TYPE_UEFI_VARS_SYSBUS);
- #ifdef CONFIG_TPM
-     machine_class_allow_dynamic_sysbus_dev(mc, TYPE_TPM_TIS_SYSBUS);
- #endif
-diff --git a/hw/uefi/Kconfig b/hw/uefi/Kconfig
-index f139008b632b..b55529fca137 100644
---- a/hw/uefi/Kconfig
-+++ b/hw/uefi/Kconfig
-@@ -1,3 +1,3 @@
- config UEFI_VARS
- 	bool
--        default y if X86_64 || AARCH64 || RISCV64
-+        default y if X86_64 || AARCH64 || RISCV64 || LOONGARCH64
-\ No newline at end of file
+ hw/loongarch/virt.c        |  2 ++
+ hw/riscv/virt.c            |  2 ++
+ hw/uefi/var-service-core.c |  1 +
+ hw/uefi/var-service-json.c | 24 +++++++++++++++++++-----
+ docs/interop/firmware.json | 12 +++++++++++-
+ hw/uefi/Kconfig            |  2 +-
+ 6 files changed, 36 insertions(+), 7 deletions(-)
+
 -- 
 2.48.1
 
