@@ -4,80 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7B2F6C282EC
-	for <qemu-riscv@archiver.kernel.org>; Wed, 19 Mar 2025 00:09:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 00B62C282EC
+	for <qemu-riscv@archiver.kernel.org>; Wed, 19 Mar 2025 01:40:44 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tugzU-00021V-Ma; Tue, 18 Mar 2025 20:09:00 -0400
+	id 1tuiPf-0002UJ-Dk; Tue, 18 Mar 2025 21:40:07 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1tugzS-00020a-Ar; Tue, 18 Mar 2025 20:08:58 -0400
-Received: from mail-ua1-x936.google.com ([2607:f8b0:4864:20::936])
+ id 1tuiPa-0002Tb-JI; Tue, 18 Mar 2025 21:40:03 -0400
+Received: from mail-ua1-x929.google.com ([2607:f8b0:4864:20::929])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1tugzQ-0004IY-Jo; Tue, 18 Mar 2025 20:08:58 -0400
-Received: by mail-ua1-x936.google.com with SMTP id
- a1e0cc1a2514c-86dddba7e0eso622634241.1; 
- Tue, 18 Mar 2025 17:08:55 -0700 (PDT)
+ id 1tuiPY-0008Ny-Od; Tue, 18 Mar 2025 21:40:02 -0400
+Received: by mail-ua1-x929.google.com with SMTP id
+ a1e0cc1a2514c-86d5a786c7cso2687469241.2; 
+ Tue, 18 Mar 2025 18:40:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1742342935; x=1742947735; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1742348399; x=1742953199; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=1jyROxbulUHy2fLiVnwa8hnyISXfFdawHvXRCA/ufbA=;
- b=kRD1u8UmkEIeSbqEHyVkowvH2BBljc7Iscg8xa0/QOHMzIJsQrct1iLfe7731MP2ub
- nU9cEmekTTwpCg1wNeSQgWnnkuNCJjRfTfooCwwQ9RgMHsrOQZeYupLYZEZMQHCO41uK
- FW6QcQG4zIbHR2Ol+KUnUq9U7hgX8MIQVIXjTxTEXNBhgQX/CUHDrd+1KUcEhm9/lQcm
- /JALXCs3FfFKuMclqBhsFH6k9m3tSlLkwGPdMEvk8K7tbIdonU+4yrLc0qXZjeZDr5Mg
- XutY/8VAUnzidiTIiG/issf/Ph3m9LST7xRyn5XoAWU7v1uuggE6N+lvJS9s6dbRAZ1E
- zwQw==
+ bh=kAsJkiLQoQFhjttu7+q7JwiD2QqI6oNCU+LxD4twIdw=;
+ b=BTYvLqN5rtOkUNtxndK3eO6nD2mqEDIJdSp3GcyPs90tpoXDiRr2OkECqQN2nzoa+F
+ HKmnUQdBGUUIiun5MZfX7W3emRho8PintbiamFfxVwlJVL8IBWB545OJ+SGnPjumQmbe
+ /mp2D7MxCr/FiFvjCuE7Liwch5HNANnvf1oGDvVBeRMBFydZebXLb4vwKI16mf+BngDy
+ MtSdeUHcTlIuP+8EU72wvyVT+K9s+cT0uo/riOvoHfHduvTb0XQH4OjwWXdiFoJ10wuV
+ V2ZBYEOCcO3oNdMfmV7O10YYqmqXH/r1nzSnbAfkIM/F747kc3xgV0PZSnnqI2hvg5hk
+ vebw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1742342935; x=1742947735;
+ d=1e100.net; s=20230601; t=1742348399; x=1742953199;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=1jyROxbulUHy2fLiVnwa8hnyISXfFdawHvXRCA/ufbA=;
- b=JGEyMd9SwIW6I1FXDGgC4aH+Jhb6IgvW+Z+VeHeYlcpY6dB9krTVBy1LNzapGaciuL
- AYw25pjj/KkQMB6EOEzHLjcJqfbrOBBcVatxhBzFsHy4NYoDUYOEP4ffcuQ2msGn+frH
- 7aKapGAaxtQwa/vzb6Zsdlfai1eM04qGauRu6s5TO2X2VphM+dhVY3RjJawlRXMMSUPu
- cIptZeFmFYsszvkwYE2OzY5AJgcNgLtq1DnWE24IqYpMKDr2H+d3CJ7xwWwKIMAtFgYb
- AmhjICZbdcNNZqS1PCfAJILaqvry5cNXMBrJQMrbcAbdpABgire30b29vjKjADASlyRf
- IKlw==
+ bh=kAsJkiLQoQFhjttu7+q7JwiD2QqI6oNCU+LxD4twIdw=;
+ b=DPzJr61jsu6DOicy0CWp5/HqPTcB7QtfhkyI1bua1YUEVH1atXRzK1ureAIZEAe4wd
+ qMLIk2H1rK9+Ra524anMp4pu9n3Ji27CQT0uK3UozkQf612G8UdH2S8750UFt6m0ZwRQ
+ ZRrpcPtBD1TKv+uCxzhwPBYrbNqPQpgh8F1XmgXLm0IpTeOBl6ZM5HVHz93DEp1uUp/o
+ NXexg8aI1LRgayJhOizOtkmMG/4gGgl6/hitt9uHolpudP/7pyFsP8X7xm5tFOC1KpNY
+ lcb9CSFqHm4EpuxjbaQIzoQ62LLSS2jdo18ZWroegVraMlG5m4NJgN3YmIXpKfn3KepE
+ ltXA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWqGJgu8wzSV5BL/MLop/bHUhVjDkOu2hIb/3825iBg0Vt1nTiPgkXjPF+Trc/9bqKw6dzRAT7sCpBq@nongnu.org,
- AJvYcCWrwvLBRIUe9Dpaf/tkmLtLBF2DT2Jt5DJ4RbFihU3vSRC/K5HO/AjZ9a7iHaFfPJYstlhIacfJz3PoOg==@nongnu.org
-X-Gm-Message-State: AOJu0Yx3oAYmRQ7f8P4DnHxK/2XQesv5oPpyA2FsO7Vb0GHuykXXHwAf
- pf6m8/YzkhCXVoHo1xybmMvm51eygIG9GfonazBiOlsGx3JcrDpz6n5u08VFcdBoRbJGeHAxTqO
- 51L05+b4X/St97CSpHmeewAv5JpRbPJzs
-X-Gm-Gg: ASbGnctIKOLXn0fwXuyKBJSzIvW5BSgzmVN2m3ycl/kySLYBN9b5CyfLtk06fEwtFld
- uWC5KOiPGwL7cLx5/nR6thzcK9rdZ6g2BE9CLCT3CTFSGDrG0wuxurFIF6rQwVqPQp4jLFj93AP
- 5HBfSDN85Kk6OnGnM7rMlYDD8ga+hwdi8qnSfKX6u7jpUkq6ya1LhY6JM=
-X-Google-Smtp-Source: AGHT+IEhxjNFs8G9kdYBw6JYf8SHnRgIhnblTzwfGy9YROb9IfcJ0WPYrzjf+8JdCqwMsDk8MD9/V0U49wz8bHIRxZY=
-X-Received: by 2002:a05:6102:3f46:b0:4c1:9695:c7c with SMTP id
- ada2fe7eead31-4c4ec854f11mr661248137.24.1742342935186; Tue, 18 Mar 2025
- 17:08:55 -0700 (PDT)
+ AJvYcCULXRtbbyEP+OJLP79wCVx99W563cm4cPdAuis3RVN/5o3DjOSueCMSYnDB/z2DPKWNwMCtFBg9NVDl@nongnu.org
+X-Gm-Message-State: AOJu0Yx3rqwXw20XT9XzFa7RDi+NzIm9tsRggqCUGAIYxKjOUu50Oj7O
+ oWDO1px2/c5PoeByNSYO/WlmIUKrTNGX43/TZls/6FXlaOYWF9RlSi0RBIJbRCq/OfQKYWkTKN9
+ BYmzEYE6V3wNnd28OOstUwpvP9Uw=
+X-Gm-Gg: ASbGncsDfj2f4LeGCj0uUJiCGV6J8PN5Eiy6uEBSJ8WeQzxRLPW6pBXBonRnoFXpwoZ
+ o1veogvvSPpPOPbKMrIgDBxqj8PeXCl243EGodaIBNfo5lVfpGgr7f67tQZKGAUCDVlZIyrus26
+ cqtKwTMFU7u5HoT64bKNFQTB+ek8mCLzLJvB9gr1u12IX8xvD1SpCTYUQ=
+X-Google-Smtp-Source: AGHT+IEjNHp7VlhhFI8vWGw013Hngf/+rr4Ok+NIzwT5sF0Q1y2cylVy9SkWiv45n4Re7oxURvjIgg1NUHnR8NKhR5M=
+X-Received: by 2002:a05:6102:50aa:b0:4bb:d394:46ce with SMTP id
+ ada2fe7eead31-4c4ec61480amr588959137.3.1742348399244; Tue, 18 Mar 2025
+ 18:39:59 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250307124602.1905754-1-dbarboza@ventanamicro.com>
- <CAFEAcA_P3XbJ-H9O=K-U7HtBAU9c=0TngEfV8fpQxcH0JRuGVA@mail.gmail.com>
- <c17a3e7e-9383-4f37-9fc5-b93afbf13bd3@ventanamicro.com>
-In-Reply-To: <c17a3e7e-9383-4f37-9fc5-b93afbf13bd3@ventanamicro.com>
+References: <20250312192215.318565-1-paolo.savini@embecosm.com>
+In-Reply-To: <20250312192215.318565-1-paolo.savini@embecosm.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Wed, 19 Mar 2025 10:08:27 +1000
-X-Gm-Features: AQ5f1JpC9u0tOV996i01ns5E3zhV-1AFL7do65-26qtS8XApRbPfbH0T5LUDvAg
-Message-ID: <CAKmqyKMLVvg_smq+Mije88C0a5wbMTA8F6XKbmd9gyQBwG9p3Q@mail.gmail.com>
-Subject: Re: [PATCH] target/riscv/csr.c: fix OVERFLOW_BEFORE_WIDEN in
- rmw_sctrdepth()
-To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Cc: Peter Maydell <peter.maydell@linaro.org>, qemu-devel@nongnu.org,
- qemu-riscv@nongnu.org, 
- alistair.francis@wdc.com, liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, 
- palmer@rivosinc.com
+Date: Wed, 19 Mar 2025 11:39:33 +1000
+X-Gm-Features: AQ5f1JrLOGsxraeKqxNhm_9SlBLjTG4AXSlRAxM93pw5Gkh31fNTpl4WJHSUzgU
+Message-ID: <CAKmqyKNTnPfbZzZd=iC9hAtJvGDrJRABsd1FD-z1xDaxq64LkA@mail.gmail.com>
+Subject: Re: [PATCH 0/1 v3] [RISC-V/RVV] optimize the memory probing for
+ vector fault-only-first loads.
+To: Paolo Savini <paolo.savini@embecosm.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, 
+ Richard Handerson <richard.henderson@linaro.org>,
+ Palmer Dabbelt <palmer@dabbelt.com>, 
+ Alistair Francis <alistair.francis@wdc.com>, Bin Meng <bmeng.cn@gmail.com>, 
+ Weiwei Li <liwei1518@gmail.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>, 
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Helene Chelin <helene.chelin@embecosm.com>, 
+ Nathan Egge <negge@google.com>, Max Chou <max.chou@sifive.com>, 
+ Jeremy Bennett <jeremy.bennett@embecosm.com>, 
+ Craig Blackmore <craig.blackmore@embecosm.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::936;
- envelope-from=alistair23@gmail.com; helo=mail-ua1-x936.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::929;
+ envelope-from=alistair23@gmail.com; helo=mail-ua1-x929.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -101,80 +105,46 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Wed, Mar 19, 2025 at 5:08=E2=80=AFAM Daniel Henrique Barboza
-<dbarboza@ventanamicro.com> wrote:
+On Thu, Mar 13, 2025 at 5:23=E2=80=AFAM Paolo Savini <paolo.savini@embecosm=
+.com> wrote:
 >
+> Adding reviewer information to the patch and rebasing on top of master.
 >
+> Previous versions:
 >
-> On 3/18/25 1:42 PM, Peter Maydell wrote:
-> > On Fri, 7 Mar 2025 at 12:46, Daniel Henrique Barboza
-> > <dbarboza@ventanamicro.com> wrote:
-> >>
-> >> Coverity found the following issue:
-> >>
-> >>    >>>     CID 1593156:  Integer handling issues  (OVERFLOW_BEFORE_WID=
-EN)
-> >>    >>>     Potentially overflowing expression "0x10 << depth" with typ=
-e
-> >>    "int" (32 bits, signed) is evaluated using 32-bit arithmetic, and t=
-hen
-> >>    used in a context that expects an expression of type "uint64_t" (64
-> >>    bits, unsigned).
-> >>    4299             depth =3D 16 << depth;
-> >>
-> >> Fix it by forcing the expression to be 64 bits wide by using '16ULL'.
-> >>
-> >> Resolves: Coverity CID 1593156
-> >> Fixes: c48bd18eae ("target/riscv: Add support for Control Transfer Rec=
-ords extension CSRs.")
-> >> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-> >> ---
-> >>   target/riscv/csr.c | 2 +-
-> >>   1 file changed, 1 insertion(+), 1 deletion(-)
-> >>
-> >> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-> >> index 0ebcca4597..e832ff3ca9 100644
-> >> --- a/target/riscv/csr.c
-> >> +++ b/target/riscv/csr.c
-> >> @@ -4296,7 +4296,7 @@ static RISCVException rmw_sctrdepth(CPURISCVStat=
-e *env, int csrno,
-> >>           }
-> >>
-> >>           /* Update sctrstatus.WRPTR with a legal value */
-> >> -        depth =3D 16 << depth;
-> >> +        depth =3D 16ULL << depth;
-> >>           env->sctrstatus =3D
-> >>               env->sctrstatus & (~SCTRSTATUS_WRPTR_MASK | (depth - 1))=
-;
-> >>       }
-> >
-> > This is a clear false-positive from Coverity, by the way: we just
-> > checked and enforced that depth is at most SCTRDEPTH_MAX, i.e. 4,
-> > and 16 << 4 cannot possibly overflow anything.
->
-> True. I wonder if we should keep this patch anyway due to the better code
-> pattern in using ULL when left shifting into a 64 bit var, regardless of
-> not fixing any overflows. There's a chance that we might copy/paste the
-> existing pattern into another situation where an overflow might actually
-> happen.
->
-> I'll leave to Alistair to decide whether to keep to drop this patch. Eith=
-er
-> way works for me. Thanks,
+> - v1: https://lore.kernel.org/all/20250129144435.82451-1-paolo.savini@emb=
+ecosm.com/
+> - v2: https://lore.kernel.org/all/20250221155320.59159-1-paolo.savini@emb=
+ecosm.com/
 
-Yeah, I figured it was a false positive with SCTRDEPTH_MAX being 4. It
-seemed easiest to just "fix" it to keep Coverity happy though. It
-doesn't cost us anything to fix it here.
+This is already in the RISC-V tree, you don't need to resend it
+
+https://github.com/alistair23/qemu/tree/riscv-to-apply.next
 
 Alistair
 
 >
+> Cc: Richard Handerson <richard.henderson@linaro.org>
+> Cc: Palmer Dabbelt <palmer@dabbelt.com>
+> Cc: Alistair Francis <alistair.francis@wdc.com>
+> Cc: Bin Meng <bmeng.cn@gmail.com>
+> Cc: Weiwei Li <liwei1518@gmail.com>
+> Cc: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+> Cc: Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
+> Cc: Helene Chelin <helene.chelin@embecosm.com>
+> Cc: Nathan Egge <negge@google.com>
+> Cc: Max Chou <max.chou@sifive.com>
+> Cc: Jeremy Bennett <jeremy.bennett@embecosm.com>
+> Cc: Craig Blackmore <craig.blackmore@embecosm.com>
 >
+> Paolo Savini (1):
+>   target/riscv: optimize the memory probing for vector fault-only-first
+>     loads.
 >
-> Daniel
+>  target/riscv/vector_helper.c | 103 ++++++++++++++++++++---------------
+>  1 file changed, 58 insertions(+), 45 deletions(-)
 >
-> >
-> > -- PMM
->
+> --
+> 2.34.1
 >
 
