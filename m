@@ -4,71 +4,102 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EA65BC35FFA
-	for <qemu-riscv@archiver.kernel.org>; Thu, 20 Mar 2025 00:28:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9B574C28B30
+	for <qemu-riscv@archiver.kernel.org>; Thu, 20 Mar 2025 14:26:02 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tv3lF-0008KN-Aw; Wed, 19 Mar 2025 20:27:49 -0400
+	id 1tvGqH-0004TB-KC; Thu, 20 Mar 2025 10:25:53 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <yfliu2008@qq.com>) id 1tv3lC-0008K7-L2
- for qemu-riscv@nongnu.org; Wed, 19 Mar 2025 20:27:47 -0400
-Received: from out203-205-221-239.mail.qq.com ([203.205.221.239])
+ (Exim 4.90_1) (envelope-from <abologna@redhat.com>)
+ id 1tvGpj-0004RT-Ps
+ for qemu-riscv@nongnu.org; Thu, 20 Mar 2025 10:25:26 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <yfliu2008@qq.com>) id 1tv3l8-0004wO-KA
- for qemu-riscv@nongnu.org; Wed, 19 Mar 2025 20:27:46 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qq.com; s=s201512;
- t=1742430440; bh=6+wizq2Ge5bAB2/0mg0tkKUs9qDwMTLQ36MUCak6bEU=;
- h=Subject:From:To:Cc:Date:In-Reply-To:References;
- b=h6XN1wteYwNh2eSa/8+SgFPLcsBwMU/wtOufsO3Ca+oKRA5SwJAEfrmfa/jfNdjQH
- 7pJhc1T4l87U4cGcZrSuCH6sSbwgy/QD9uvbkOt6z+39dqVVgcGumoDDht6WPataHz
- d+GU1+SIFxRU984W2hm/MY8v5Lg71egPONY5xctY=
-Received: from [192.168.1.13] ([218.89.199.104])
- by newxmesmtplogicsvrszc11-0.qq.com (NewEsmtp) with SMTP
- id 6D1B66DA; Thu, 20 Mar 2025 08:27:17 +0800
-X-QQ-mid: xmsmtpt1742430437t88p43d1v
-Message-ID: <tencent_A3914DBB3F3F204A55AC29202DCCEBF8D50A@qq.com>
-X-QQ-XMAILINFO: NioaTWkRhWwapXY4CK8odNtz9mR9o8GRn/q48WRBQSYKtGCxWSnk40uBQgWXmj
- HowI2UhYlp/vz0Xv9jPzp9g9y0eawNhb93y2kfW2FO1lR1/yKX1lckgyZ+9YlLUP7WaqpXlprWTb
- 5W5zjIl3veuU5Yhecw9CZjjtGgHjeDjgLB91+rZ1qu0up5GslBAOMma6O8cGz0m1zllNiTzqCp1z
- RDt43naUsi4nogeR+c3Gf3O7s5QmsHhassh86kqaSMQ9PNLbFMroUIF8SVciFyVt1DxB2pQVt7/m
- vAVp8TvEqijfVaBgbGeKS3qUqrkpApzGnuvmw6+yVHg4DQmNmIOsZfG1lrb7ZebHKRLm1Utkrrdc
- KdC3BeuQ0CNuHu4Nk/kaDZNAaIlq+gWOFlLZSWE3w0Y5T4BUhqH04D6rpnLjBs9/XuSLOZ4Q+ZlA
- Dsa+bXkY683GNHnEh/lpUFs5zfv2BRka7wKBlWA8XwN4RtOosainaOxskDGXWyoohFpma7l2whS0
- ERltiAAMAEgDQWB5FmvCHWDD42BFwKN3m1PSKag50VXpyWY9J29nbBepN6KFo3Zxm00AZL9qAfw/
- on+L4PLgHa+OotetnyddYw0AVYjHU/y/I/BYoP7hD7lDCzWf8m3HoWrbGviv6OjwDnX9xogcKdFc
- GCCVx1rx4xi+GGdcPJtx48Yoqmmflf47xdp8rpKVa/qRpH+UdocogVUywrE0b62yIwAvBxeug4IL
- uCIPaH8+LH3745EtoXrAfZZYZWMfd3Ie4WJJFe9GMECeFdz4B3NJ5DOnuOqWC0URJVLnahFas7p6
- qDw8JygWIlt/drUpRcB2CoZj8QDz/U23uJCsMNrFQZ67GXTHeSPN1HaFonAuHsGQGT2MeCc1oa50
- oZAJH/2yRksVHjm61ka68NCp+qXeFLKZCRyLl9/Af1boPRAzxD51Q=
-X-QQ-XMRINFO: NyFYKkN4Ny6FSmKK/uo/jdU=
-X-OQ-MSGID: <2ce6aa752dd10f1ad1cfbe52660b2e895584a5a0.camel@qq.com>
-Subject: Re: =?UTF-8?Q?=E5=9B=9E=E8=A6=86=3A?= emulated riscv PLIC
-From: Yanfeng Liu <yfliu2008@qq.com>
-To: Alvin Che-Chia =?UTF-8?Q?Chang=28=E5=BC=B5=E5=93=B2=E5=98=89=29?=
- <alvinga@andestech.com>, Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Cc: qemu-riscv <qemu-riscv@nongnu.org>
-Date: Thu, 20 Mar 2025 08:27:17 +0800
-In-Reply-To: <SEYPR03MB67004C8A706EC1F1BE648E23A8D92@SEYPR03MB6700.apcprd03.prod.outlook.com>
-References: <tencent_B08E6CCE1DE2E1580A782D03697B9EC40F05@qq.com>
- <a7ffa471-c5f6-4a80-9e2c-f1b4d0c19b64@ventanamicro.com>
- <SEYPR03MB67004C8A706EC1F1BE648E23A8D92@SEYPR03MB6700.apcprd03.prod.outlook.com>
+ (Exim 4.90_1) (envelope-from <abologna@redhat.com>)
+ id 1tvGph-0000bL-Sk
+ for qemu-riscv@nongnu.org; Thu, 20 Mar 2025 10:25:19 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1742480711;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=z2OQykFF8cebzqvWKf+PsxH0o9zBbY+/Y9eCVgtY8Rk=;
+ b=G2JyRqZqHCjarZ8rB3GbrftkW+nkPfyyWa+wf/VSZfSiJduHowG9vmyQKh9zSWI9FfKNDV
+ I3wSqP3W63ec541Zinqz9Jx4Ro5blsMAjTeU+6+0S7ESoNQSvKDiyPg3uHI9jhntFLOPHu
+ dUYdlCX26Do5DO2zVtOiSq6kzxXQKYw=
+Received: from mail-qt1-f198.google.com (mail-qt1-f198.google.com
+ [209.85.160.198]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-508-536R0wKPMX6cBUmfmFNlLQ-1; Thu, 20 Mar 2025 10:25:08 -0400
+X-MC-Unique: 536R0wKPMX6cBUmfmFNlLQ-1
+X-Mimecast-MFC-AGG-ID: 536R0wKPMX6cBUmfmFNlLQ_1742480708
+Received: by mail-qt1-f198.google.com with SMTP id
+ d75a77b69052e-4767816a48cso24004411cf.3
+ for <qemu-riscv@nongnu.org>; Thu, 20 Mar 2025 07:25:08 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1742480708; x=1743085508;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:in-reply-to
+ :mime-version:references:from:x-gm-message-state:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=z2OQykFF8cebzqvWKf+PsxH0o9zBbY+/Y9eCVgtY8Rk=;
+ b=Bm6ieYoLoiWzmZYsGL3ujSJ4az1PCJF8l2u/RxVcnRr2sdHcCZq/RhvWjLm8y0ITri
+ owouJVPXvWmFfY1tsrXhdt6u4GZylFlZY+cmHU1Mm+fE/1g5h1lF3bcFHbvBK73utqED
+ c0RGNDRvR6fo4m1Et0de+wNQ8iRwCmnyFQk1fPBXEfR78OihJx6dx79MdVhVTVR6d0LF
+ vVhxVgMqsVwzF5CU6kMHP5ZV64fSWC9Va3BjFpmdX0LfVdXxfGfFE4XpPiP27Iv99gnt
+ +nGbmbvDLdM+ot0eXu10QwC8B+4kefeDXZctHs1Avza8BtSSMRE20EcIxJwmxX1IYrYV
+ 0mdw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUjFyIDlLlJx3wHIDAQzCqwxtUsGpLYtoegucCIWIUNiCNRi3PGM2WhgviDfMu9XivRTGGOoGZ6FoPh@nongnu.org
+X-Gm-Message-State: AOJu0YyLuSfqLre1/PTR+eCYMN+Jr5SLVK+LUHVo8bRqV54W70Sbi6Rw
+ hPZH6LEAp4t9o2y+E4M6XEauFN2U+EmuABdXbaYXDoahdpCEaBbTdfXwiVqCwzjyw+d8eemhifK
+ eB07zOYNs6pNG/HZIMuTp/stz1XXx4TwpqdRYdelIOTEQ8sKyKfAByT2vC0wkPy+4r3mpBvaVP8
+ ArqX6FxpDmx+uYTZGO3hOrJm3EvBs=
+X-Gm-Gg: ASbGnctLuntpF0MB9W0O3WGZta+kQ4fJAy7mi8kgJofsxlOtMt1bGnrsLAwOYldg2sv
+ g5EcWY912m6VZYSMPhU7U/rpCaO42hOCci78WoFaMonfhtfTrmp+/NvM5McISR08iBn1XclNH
+X-Received: by 2002:a05:622a:4811:b0:476:8df3:640 with SMTP id
+ d75a77b69052e-4770835aca9mr95696701cf.7.1742480708237; 
+ Thu, 20 Mar 2025 07:25:08 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IGgBazF209Vlts8XuZplmFTdCgYI1Z4MeCy6pYSD0EjyOrHx6Qd48Izs62dCEIGuCgNfZgUuPjzDXpw0xl4dJ8=
+X-Received: by 2002:a05:622a:4811:b0:476:8df3:640 with SMTP id
+ d75a77b69052e-4770835aca9mr95696511cf.7.1742480708045; Thu, 20 Mar 2025
+ 07:25:08 -0700 (PDT)
+Received: from 744723338238 named unknown by gmailapi.google.com with
+ HTTPREST; Thu, 20 Mar 2025 07:25:07 -0700
+Received: from 744723338238 named unknown by gmailapi.google.com with
+ HTTPREST; Thu, 20 Mar 2025 07:25:07 -0700
+From: Andrea Bolognani <abologna@redhat.com>
+References: <20250224123120.1644186-1-dbarboza@ventanamicro.com>
+ <20250224123120.1644186-4-dbarboza@ventanamicro.com>
+ <CAKmqyKNmpRA8kphbWnA-AqTSUSGf+koSbCmuk6VgZEWde2NFBw@mail.gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <CAKmqyKNmpRA8kphbWnA-AqTSUSGf+koSbCmuk6VgZEWde2NFBw@mail.gmail.com>
+Date: Thu, 20 Mar 2025 07:25:07 -0700
+X-Gm-Features: AQ5f1JpK3Ho0OMGev6NvaU7y-tUnDjpZ4g8bJDkBe1SNjgqbdkUwKBvtVx9fgqQ
+Message-ID: <CABJz62OfUDHYkQ0T3rGHStQprf1c7_E0qBLbLKhfv=+jb0SYAw@mail.gmail.com>
+Subject: Re: [PATCH v3 3/3] target/riscv/kvm: add missing KVM CSRs
+To: Alistair Francis <alistair23@gmail.com>
+Cc: Daniel Henrique Barboza <dbarboza@ventanamicro.com>, qemu-devel@nongnu.org,
+ qemu-riscv@nongnu.org, 
+ alistair.francis@wdc.com, bmeng@tinylab.org, liwei1518@gmail.com, 
+ zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com, ajones@ventanamicro.com
+X-Mimecast-Spam-Score: 0
+X-Mimecast-MFC-PROC-ID: zieZhOYJQYM89ER5ea3uInDKhhAfx9Z0-sl_tzJFX0E_1742480708
+X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-User-Agent: Evolution 3.44.4-0ubuntu2 
-MIME-Version: 1.0
-Received-SPF: pass client-ip=203.205.221.239; envelope-from=yfliu2008@qq.com;
- helo=out203-205-221-239.mail.qq.com
-X-Spam_score_int: 11
-X-Spam_score: 1.1
-X-Spam_bar: +
-X-Spam_report: (1.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
- DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_ENVFROM_END_DIGIT=0.25,
- FREEMAIL_FROM=0.001, HELO_DYNAMIC_IPADDR=1.951, RCVD_IN_DNSWL_NONE=-0.0001,
+Received-SPF: pass client-ip=170.10.133.124; envelope-from=abologna@redhat.com;
+ helo=us-smtp-delivery-124.mimecast.com
+X-Spam_score_int: -23
+X-Spam_score: -2.4
+X-Spam_bar: --
+X-Spam_report: (-2.4 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.332,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H2=0.001,
  RCVD_IN_VALIDITY_CERTIFIED_BLOCKED=0.001, RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001,
- RDNS_DYNAMIC=0.982, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=no autolearn_force=no
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -84,90 +115,34 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Alvin and Daniel,
+On Mon, Mar 03, 2025 at 01:46:53PM +1000, Alistair Francis wrote:
+> On Mon, Feb 24, 2025 at 10:32=E2=80=AFPM Daniel Henrique Barboza <dbarboz=
+a@ventanamicro.com> wrote:
+> > We're missing scounteren and senvcfg CSRs, both already present in the
+> > KVM UAPI.
+> >
+> > Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+> > Reviewed-by: Andrew Jones <ajones@ventanamicro.com>
+>
+> Acked-by: Alistair Francis <alistair.francis@wdc.com>
 
-Thank you so much! Now I understand.
+This patch seems to have broken KVM acceleration for me:
 
-Can you teach if writing PLIC pending bits is allowed per RiscV standards? =
-Do
-real world RiscV devices support that?
+  $ ./build/qemu-system-riscv64 -display none -M virt,accel=3Dkvm -cpu host
+  qemu-system-riscv64: Failed to put registers after init: No such
+file or directory
 
-Regards,
-yf
+Reverting it makes QEMU work again.
 
+My host is a SiFive HiFive Premier P550 board running Fedora 41. Note
+that, since the upstreaming effort for this SoC has just recently
+started, I'm using the 6.6-based vendor kernel.
 
-On Wed, 2025-03-19 at 13:04 +0000, Alvin Che-Chia Chang(=E5=BC=B5=E5=93=B2=
-=E5=98=89) wrote:
-> If you are using sifive_plic device, the pending registers are read-only.
-> https://github.com/qemu/qemu/blob/master/hw/intc/sifive_plic.c#L213
-> [
-> https://opengraph.githubassets.com/330b9ad4759e334541fcb6e9e3108402f45472=
-5445d7
-> 013e75efa01fcf01429c/qemu/qemu]<
-> https://github.com/qemu/qemu/blob/master/hw/intc/sifive_plic.c#L213>
-> qemu/hw/intc/sifive_plic.c at master -
-> GitHub<https://github.com/qemu/qemu/blob/master/hw/intc/sifive_plic.c#L21=
-3>
-> You signed in with another tab or window. Reload to refresh your session.=
- You
-> signed out in another tab or window. Reload to refresh your session. You
-> switched accounts on another tab or window.
-> github.com
->=20
-> Regards,
-> Alvin
->=20
-> ________________________________
-> =E5=AF=84=E4=BB=B6=E8=80=85:
-> qemu-riscv-bounces+alvinga=3Dandestech.com@nongnu.org=C2=A0<qemu-riscv-bo=
-unces+alvinga=3Dandestech.com@nongnu.org
-> > =E4=BB=A3=E8=A1=A8 Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-> =E5=AF=84=E4=BB=B6=E6=97=A5=E6=9C=9F: 2025=E5=B9=B43=E6=9C=8819=E6=97=A5 =
-=E4=B8=8B=E5=8D=88 08:50
-> =E6=94=B6=E4=BB=B6=E8=80=85: Yanfeng Liu <yfliu2008@qq.com>; qemu-riscv <=
-qemu-riscv@nongnu.org>
-> =E4=B8=BB=E6=97=A8: Re: emulated riscv PLIC
->=20
-> [EXTERNAL MAIL]
->=20
-> On 3/19/25 4:55 AM, Yanfeng Liu wrote:
-> > Dear experts,
-> >=20
-> > I am wondering the emulated riscv PLIC in QEMU allows triggering an
-> > interrupt by
-> > writing directly to the memory mapped pending register?
-> >=20
-> > For example, to trigger PLIC interrupt 12, I wrote uint32_t (1 << 12) t=
-o
-> > 0xc001000. But with QEMU v6.2 this seems has no effect.
->=20
-> Can you test with a newer QEMU release? There were a lot of bug fixes and
-> changes that landed in the PLIC emulation in the last 3 years.
->=20
-> Thanks,
->=20
-> Daniel
->=20
-> >=20
-> > Regards,
-> > yf
-> >=20
-> >=20
->=20
->=20
-> CONFIDENTIALITY NOTICE:
->=20
-> This e-mail (and its attachments) may contain confidential and legally
-> privileged information or information protected from disclosure. If you a=
-re
-> not the intended recipient, you are hereby notified that any disclosure,
-> copying, distribution, or use of the information contained herein is stri=
-ctly
-> prohibited. In this case, please immediately notify the sender by return =
-e-
-> mail, delete the message (and any accompanying documents) and destroy all
-> printed hard copies. Thank you for your cooperation.
->=20
-> Copyright ANDES TECHNOLOGY CORPORATION - All Rights Reserved.
+Perhaps the KVM UAPI additions mentioned in the commit message are
+more recent than that, and we need to make QEMU's use of them
+conditional rather than unconditional?
+
+--=20
+Andrea Bolognani / Red Hat / Virtualization
 
 
