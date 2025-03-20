@@ -4,88 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 93D62C35FFB
-	for <qemu-riscv@archiver.kernel.org>; Wed, 19 Mar 2025 20:21:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EA65BC35FFA
+	for <qemu-riscv@archiver.kernel.org>; Thu, 20 Mar 2025 00:28:09 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tuyze-0007Nw-V5; Wed, 19 Mar 2025 15:22:22 -0400
+	id 1tv3lF-0008KN-Aw; Wed, 19 Mar 2025 20:27:49 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <jim.shu@sifive.com>)
- id 1tuyzc-0007NX-Eu
- for qemu-riscv@nongnu.org; Wed, 19 Mar 2025 15:22:20 -0400
-Received: from mail-pl1-x630.google.com ([2607:f8b0:4864:20::630])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <jim.shu@sifive.com>)
- id 1tuyza-0002Cg-Re
- for qemu-riscv@nongnu.org; Wed, 19 Mar 2025 15:22:20 -0400
-Received: by mail-pl1-x630.google.com with SMTP id
- d9443c01a7336-224191d92e4so144852775ad.3
- for <qemu-riscv@nongnu.org>; Wed, 19 Mar 2025 12:22:18 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1742412136; x=1743016936; darn=nongnu.org;
- h=references:in-reply-to:message-id:date:subject:cc:to:from:from:to
- :cc:subject:date:message-id:reply-to;
- bh=jtptQpawWvWvvPo7p+5ePzZbn/0qrX0uFQnRGLb5OR8=;
- b=VbyPscj/wVC6Z5xK2MdciGZdvTEbFiaTfxhyzVlhhvg6LtuHNHz9XTkMgRX1/h+fEo
- DBuf+nzNGraxRfZOwcfkOuE8tqSedo+NI2D/+WhxCCRkctiqS8+WtQ35AdNf2C4YMhmF
- OQ+kPb9Wqvzwcy4CVKQ2ujSR22m7pXbehl6r5Y2F8pfjsx44thtLEuLnX5bV7QpSnNqk
- BQg9tWr7eYB9TlBqV87Kxjx/Rv3F5kW2f0O6hwze8Sqm3r8EpjgJCzQafUq0RQS+XbfQ
- uracjuL0xuOMo60QUBfQ3gBVPiov3V/z7ld5v2ZhRQ66j4KrP3znRwOC4rCmGqdqieCe
- zH0Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1742412136; x=1743016936;
- h=references:in-reply-to:message-id:date:subject:cc:to:from
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=jtptQpawWvWvvPo7p+5ePzZbn/0qrX0uFQnRGLb5OR8=;
- b=l5JUUO1E6kIJACEM1Oi18JcFV6H/KL4owiZ0/GcNv+Kj3VxOKfK/jo8PH+w3Jcq7p7
- yGrqcpd98xtI11wS8mGj5Q7FFWYsACnI+hPBwr8daWsAY3bW8F0bSx2eOFJPY1owAqrl
- a4FGm+oU6V7FZvBRIYk+Al2Lzk0+Y17pTi5EWyBNxrttbc+4AphlxiGdwags1tgRW6kq
- JVJY8KHFLPTVYkF+oPVQSVGVJ1qxyiNbak6ymqan500SuFGUmq4AY81Dg7msXuGEUfo/
- M06IKy4Y7Aq9GkTx2VXLUcTQzAj4+nRbKDfWhVvl4tZCIqTa0bIjwWwckGnywB/BYqeJ
- 7qkw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXW8k5mLYxcVxjcVONR9AuJA3JTmPueDb/OmgiWI5b+ucOBFQLcnXroYqH6a0vEpnsb/Y1Y/MMSHUDH@nongnu.org
-X-Gm-Message-State: AOJu0YyPaRsGzT5Bb+oNDm9Jdxo1LQiAX/LVq/CWKZf/9L//2keAkRpc
- hUSQ54X4vRgdDuqCxmQ3q5guRcbZvYNyza2TgTi4Yhou9hBl+cGiZNYlLUAUAi0=
-X-Gm-Gg: ASbGncvvDdXDH6f+EigLVlG2BfVVysT0IndurQ4U6jL5xVxqQkMibmWkxWXTHxojooS
- IGn8eOG2BA3PwMUi5Nd7h+PyBweB20jt89M0lsZzx1o3Ks+pFzquWfa2gzyofI5rWDrtbw1Zhj2
- 92FmUJ6DozSTggK+fdHLRMVKJ3A1S1miBheiOLxkDp/wLuDxnF+UltXyDLvsz6K8zUMvookpPO4
- xAi/jovq8mkQKxXQObewOIu2rgZyQiUl9YkZrFX6rZqSDiow/ss88FCGrX8C1nC6WBLx89Levy8
- +R3hGl7TDmdPfmIKIrXHc61CbI4fKhjbq1kuDx1NBHWeXfXSQAa0N9nBODq0fEz3a+I=
-X-Google-Smtp-Source: AGHT+IGb80ZN540wcGAg63HcRJ/3dRkHokXskLkNnkc7mEboWtJIlDoyAxzX5p7HEECTnvoHIXOkCA==
-X-Received: by 2002:a05:6a21:3989:b0:1f5:619a:8f73 with SMTP id
- adf61e73a8af0-1fbecd41923mr6058469637.26.1742412136668; 
- Wed, 19 Mar 2025 12:22:16 -0700 (PDT)
-Received: from hsinchu26.internal.sifive.com ([210.176.154.34])
- by smtp.gmail.com with ESMTPSA id
- 41be03b00d2f7-af56ea947a4sm11432175a12.70.2025.03.19.12.22.14
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 19 Mar 2025 12:22:16 -0700 (PDT)
-From: Jim Shu <jim.shu@sifive.com>
-To: qemu-devel@nongnu.org,
-	qemu-riscv@nongnu.org
-Cc: Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Weiwei Li <liwei1518@gmail.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, Jim Shu <jim.shu@sifive.com>
-Subject: [PATCH 3/4] target/riscv: Fix VSTIP bit in sstc extension.
-Date: Thu, 20 Mar 2025 03:21:52 +0800
-Message-Id: <20250319192153.28549-4-jim.shu@sifive.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20250319192153.28549-1-jim.shu@sifive.com>
-References: <20250319192153.28549-1-jim.shu@sifive.com>
-Received-SPF: pass client-ip=2607:f8b0:4864:20::630;
- envelope-from=jim.shu@sifive.com; helo=mail-pl1-x630.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ (Exim 4.90_1) (envelope-from <yfliu2008@qq.com>) id 1tv3lC-0008K7-L2
+ for qemu-riscv@nongnu.org; Wed, 19 Mar 2025 20:27:47 -0400
+Received: from out203-205-221-239.mail.qq.com ([203.205.221.239])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <yfliu2008@qq.com>) id 1tv3l8-0004wO-KA
+ for qemu-riscv@nongnu.org; Wed, 19 Mar 2025 20:27:46 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qq.com; s=s201512;
+ t=1742430440; bh=6+wizq2Ge5bAB2/0mg0tkKUs9qDwMTLQ36MUCak6bEU=;
+ h=Subject:From:To:Cc:Date:In-Reply-To:References;
+ b=h6XN1wteYwNh2eSa/8+SgFPLcsBwMU/wtOufsO3Ca+oKRA5SwJAEfrmfa/jfNdjQH
+ 7pJhc1T4l87U4cGcZrSuCH6sSbwgy/QD9uvbkOt6z+39dqVVgcGumoDDht6WPataHz
+ d+GU1+SIFxRU984W2hm/MY8v5Lg71egPONY5xctY=
+Received: from [192.168.1.13] ([218.89.199.104])
+ by newxmesmtplogicsvrszc11-0.qq.com (NewEsmtp) with SMTP
+ id 6D1B66DA; Thu, 20 Mar 2025 08:27:17 +0800
+X-QQ-mid: xmsmtpt1742430437t88p43d1v
+Message-ID: <tencent_A3914DBB3F3F204A55AC29202DCCEBF8D50A@qq.com>
+X-QQ-XMAILINFO: NioaTWkRhWwapXY4CK8odNtz9mR9o8GRn/q48WRBQSYKtGCxWSnk40uBQgWXmj
+ HowI2UhYlp/vz0Xv9jPzp9g9y0eawNhb93y2kfW2FO1lR1/yKX1lckgyZ+9YlLUP7WaqpXlprWTb
+ 5W5zjIl3veuU5Yhecw9CZjjtGgHjeDjgLB91+rZ1qu0up5GslBAOMma6O8cGz0m1zllNiTzqCp1z
+ RDt43naUsi4nogeR+c3Gf3O7s5QmsHhassh86kqaSMQ9PNLbFMroUIF8SVciFyVt1DxB2pQVt7/m
+ vAVp8TvEqijfVaBgbGeKS3qUqrkpApzGnuvmw6+yVHg4DQmNmIOsZfG1lrb7ZebHKRLm1Utkrrdc
+ KdC3BeuQ0CNuHu4Nk/kaDZNAaIlq+gWOFlLZSWE3w0Y5T4BUhqH04D6rpnLjBs9/XuSLOZ4Q+ZlA
+ Dsa+bXkY683GNHnEh/lpUFs5zfv2BRka7wKBlWA8XwN4RtOosainaOxskDGXWyoohFpma7l2whS0
+ ERltiAAMAEgDQWB5FmvCHWDD42BFwKN3m1PSKag50VXpyWY9J29nbBepN6KFo3Zxm00AZL9qAfw/
+ on+L4PLgHa+OotetnyddYw0AVYjHU/y/I/BYoP7hD7lDCzWf8m3HoWrbGviv6OjwDnX9xogcKdFc
+ GCCVx1rx4xi+GGdcPJtx48Yoqmmflf47xdp8rpKVa/qRpH+UdocogVUywrE0b62yIwAvBxeug4IL
+ uCIPaH8+LH3745EtoXrAfZZYZWMfd3Ie4WJJFe9GMECeFdz4B3NJ5DOnuOqWC0URJVLnahFas7p6
+ qDw8JygWIlt/drUpRcB2CoZj8QDz/U23uJCsMNrFQZ67GXTHeSPN1HaFonAuHsGQGT2MeCc1oa50
+ oZAJH/2yRksVHjm61ka68NCp+qXeFLKZCRyLl9/Af1boPRAzxD51Q=
+X-QQ-XMRINFO: NyFYKkN4Ny6FSmKK/uo/jdU=
+X-OQ-MSGID: <2ce6aa752dd10f1ad1cfbe52660b2e895584a5a0.camel@qq.com>
+Subject: Re: =?UTF-8?Q?=E5=9B=9E=E8=A6=86=3A?= emulated riscv PLIC
+From: Yanfeng Liu <yfliu2008@qq.com>
+To: Alvin Che-Chia =?UTF-8?Q?Chang=28=E5=BC=B5=E5=93=B2=E5=98=89=29?=
+ <alvinga@andestech.com>, Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Cc: qemu-riscv <qemu-riscv@nongnu.org>
+Date: Thu, 20 Mar 2025 08:27:17 +0800
+In-Reply-To: <SEYPR03MB67004C8A706EC1F1BE648E23A8D92@SEYPR03MB6700.apcprd03.prod.outlook.com>
+References: <tencent_B08E6CCE1DE2E1580A782D03697B9EC40F05@qq.com>
+ <a7ffa471-c5f6-4a80-9e2c-f1b4d0c19b64@ventanamicro.com>
+ <SEYPR03MB67004C8A706EC1F1BE648E23A8D92@SEYPR03MB6700.apcprd03.prod.outlook.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+User-Agent: Evolution 3.44.4-0ubuntu2 
+MIME-Version: 1.0
+Received-SPF: pass client-ip=203.205.221.239; envelope-from=yfliu2008@qq.com;
+ helo=out203-205-221-239.mail.qq.com
+X-Spam_score_int: 11
+X-Spam_score: 1.1
+X-Spam_bar: +
+X-Spam_report: (1.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
+ DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_ENVFROM_END_DIGIT=0.25,
+ FREEMAIL_FROM=0.001, HELO_DYNAMIC_IPADDR=1.951, RCVD_IN_DNSWL_NONE=-0.0001,
+ RCVD_IN_VALIDITY_CERTIFIED_BLOCKED=0.001, RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001,
+ RDNS_DYNAMIC=0.982, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -101,35 +84,90 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-VSTIP is only writable when both [mh]envcfg.STCE is enabled, or it will
-revert it's defined behavior as if sstc extension is not implemented.
+Alvin and Daniel,
 
-Signed-off-by: Jim Shu <jim.shu@sifive.com>
----
- target/riscv/csr.c | 9 ++++++++-
- 1 file changed, 8 insertions(+), 1 deletion(-)
+Thank you so much! Now I understand.
 
-diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-index 49566d3c08..ba026dfc8e 100644
---- a/target/riscv/csr.c
-+++ b/target/riscv/csr.c
-@@ -3630,7 +3630,14 @@ static RISCVException rmw_mip64(CPURISCVState *env, int csrno,
-     if (riscv_cpu_cfg(env)->ext_sstc && (env->priv == PRV_M) &&
-         get_field(env->menvcfg, MENVCFG_STCE)) {
-         /* sstc extension forbids STIP & VSTIP to be writeable in mip */
--        mask = mask & ~(MIP_STIP | MIP_VSTIP);
-+
-+        /* STIP is not writable when menvcfg.STCE is enabled. */
-+        mask = mask & ~MIP_STIP;
-+
-+        /* VSTIP is not writable when both [mh]envcfg.STCE are enabled. */
-+        if (get_field(env->henvcfg, HENVCFG_STCE)) {
-+            mask = mask & ~MIP_VSTIP;
-+        }
-     }
- 
-     if (mask) {
--- 
-2.17.1
+Can you teach if writing PLIC pending bits is allowed per RiscV standards? =
+Do
+real world RiscV devices support that?
+
+Regards,
+yf
+
+
+On Wed, 2025-03-19 at 13:04 +0000, Alvin Che-Chia Chang(=E5=BC=B5=E5=93=B2=
+=E5=98=89) wrote:
+> If you are using sifive_plic device, the pending registers are read-only.
+> https://github.com/qemu/qemu/blob/master/hw/intc/sifive_plic.c#L213
+> [
+> https://opengraph.githubassets.com/330b9ad4759e334541fcb6e9e3108402f45472=
+5445d7
+> 013e75efa01fcf01429c/qemu/qemu]<
+> https://github.com/qemu/qemu/blob/master/hw/intc/sifive_plic.c#L213>
+> qemu/hw/intc/sifive_plic.c at master -
+> GitHub<https://github.com/qemu/qemu/blob/master/hw/intc/sifive_plic.c#L21=
+3>
+> You signed in with another tab or window. Reload to refresh your session.=
+ You
+> signed out in another tab or window. Reload to refresh your session. You
+> switched accounts on another tab or window.
+> github.com
+>=20
+> Regards,
+> Alvin
+>=20
+> ________________________________
+> =E5=AF=84=E4=BB=B6=E8=80=85:
+> qemu-riscv-bounces+alvinga=3Dandestech.com@nongnu.org=C2=A0<qemu-riscv-bo=
+unces+alvinga=3Dandestech.com@nongnu.org
+> > =E4=BB=A3=E8=A1=A8 Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+> =E5=AF=84=E4=BB=B6=E6=97=A5=E6=9C=9F: 2025=E5=B9=B43=E6=9C=8819=E6=97=A5 =
+=E4=B8=8B=E5=8D=88 08:50
+> =E6=94=B6=E4=BB=B6=E8=80=85: Yanfeng Liu <yfliu2008@qq.com>; qemu-riscv <=
+qemu-riscv@nongnu.org>
+> =E4=B8=BB=E6=97=A8: Re: emulated riscv PLIC
+>=20
+> [EXTERNAL MAIL]
+>=20
+> On 3/19/25 4:55 AM, Yanfeng Liu wrote:
+> > Dear experts,
+> >=20
+> > I am wondering the emulated riscv PLIC in QEMU allows triggering an
+> > interrupt by
+> > writing directly to the memory mapped pending register?
+> >=20
+> > For example, to trigger PLIC interrupt 12, I wrote uint32_t (1 << 12) t=
+o
+> > 0xc001000. But with QEMU v6.2 this seems has no effect.
+>=20
+> Can you test with a newer QEMU release? There were a lot of bug fixes and
+> changes that landed in the PLIC emulation in the last 3 years.
+>=20
+> Thanks,
+>=20
+> Daniel
+>=20
+> >=20
+> > Regards,
+> > yf
+> >=20
+> >=20
+>=20
+>=20
+> CONFIDENTIALITY NOTICE:
+>=20
+> This e-mail (and its attachments) may contain confidential and legally
+> privileged information or information protected from disclosure. If you a=
+re
+> not the intended recipient, you are hereby notified that any disclosure,
+> copying, distribution, or use of the information contained herein is stri=
+ctly
+> prohibited. In this case, please immediately notify the sender by return =
+e-
+> mail, delete the message (and any accompanying documents) and destroy all
+> printed hard copies. Thank you for your cooperation.
+>=20
+> Copyright ANDES TECHNOLOGY CORPORATION - All Rights Reserved.
 
 
