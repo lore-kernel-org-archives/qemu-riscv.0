@@ -4,62 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4A938C36002
-	for <qemu-riscv@archiver.kernel.org>; Fri, 21 Mar 2025 22:14:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E5700C35FFC
+	for <qemu-riscv@archiver.kernel.org>; Sat, 22 Mar 2025 04:32:01 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tvkcT-0007MB-Fw; Fri, 21 Mar 2025 18:13:37 -0400
+	id 1tvqWV-0006sc-NN; Sat, 22 Mar 2025 00:31:51 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <heinrich.schuchardt@canonical.com>)
- id 1tvkcQ-0007LY-UQ; Fri, 21 Mar 2025 18:13:35 -0400
-Received: from smtp-relay-canonical-0.canonical.com ([185.125.188.120])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <heinrich.schuchardt@canonical.com>)
- id 1tvkcN-0005Ca-PW; Fri, 21 Mar 2025 18:13:33 -0400
-Received: from LT2ubnt.. (dynamic-046-114-107-181.46.114.pool.telefonica.de
- [46.114.107.181])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-canonical-0.canonical.com (Postfix) with ESMTPSA id 7DD763F1A5; 
- Fri, 21 Mar 2025 22:13:27 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1742595207;
- bh=kx4VVxjwI+JrUSMAodWILioZHf+Ugp7uJC+tR1lSLWA=;
- h=From:To:Cc:Subject:Date:Message-ID:MIME-Version:Content-Type;
- b=GfeKaxe0YL0R9+FDiuJFmEzX9Orn36i0kiDAiXov3alBTmYHMGWbsvRzELXZZRJzI
- p1bILw0TTX3gttMfVXEtU82VaoEuArn/9GN1LQM0Ja2h19l18ENjkFDleI4j1PGPiI
- tKzfHg5fFT35oSLf+86GnLQNPV6Z9KXGHvmplHYl+c7bTkubGH0lomyY5EOVKevpAh
- mVBPTLsrCuQWrIbXaqBGsWqg+N0QacgEGGHZbCPwVP60q4OtMEyswKVfTRmlbfFFrG
- IkLwQW/MHFu2wpytVCorR0LQEAU/a6yskI2tomdzBaGwz08MuUgEnhh0WePmdEJ+nk
- HlzXGGwVsps5g==
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-To: Anup Patel <anup.patel@wdc.com>,
- Alistair Francis <Alistair.Francis@wdc.com>
-Cc: Frederik Du Toit Lotter <fred.lotter@canonical.com>,
- =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- qemu-riscv@nongnu.org, qemu-devel@nongnu.org, qemu-stable@nongnu.org,
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH v2 1/1] goldfish_rtc: keep time offset when resetting
-Date: Fri, 21 Mar 2025 23:12:48 +0100
-Message-ID: <20250321221248.17764-1-heinrich.schuchardt@canonical.com>
-X-Mailer: git-send-email 2.48.1
+ (Exim 4.90_1) (envelope-from <sunilvl@ventanamicro.com>)
+ id 1tvqWT-0006rQ-Vb
+ for qemu-riscv@nongnu.org; Sat, 22 Mar 2025 00:31:49 -0400
+Received: from mail-pl1-x62d.google.com ([2607:f8b0:4864:20::62d])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <sunilvl@ventanamicro.com>)
+ id 1tvqWS-0002Ww-Cc
+ for qemu-riscv@nongnu.org; Sat, 22 Mar 2025 00:31:49 -0400
+Received: by mail-pl1-x62d.google.com with SMTP id
+ d9443c01a7336-22409077c06so37099005ad.1
+ for <qemu-riscv@nongnu.org>; Fri, 21 Mar 2025 21:31:47 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=ventanamicro.com; s=google; t=1742617906; x=1743222706; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=OKPlB0EQf+q0uDhRPmBQYgAEjvOxTp2VlgjpWxK8K0k=;
+ b=d4lHUN7Qn8fis4aEbP111ccROkPGA2+Qnfjs9i29FZ4QpUtLxmHe8EmlUQPWhNfDt8
+ y3l7NNf+p/vm5jn/2ty0QPg5f9oWA6yd2lQ1hSDRMcFg/9ki15yWYbG1NmysW7l+1zF1
+ Xk6KNiA8bs/ic7SuiCkyop1f7LGxJz8a6guycxXMkXDFTSntYQiauerH2i7EENukNZVj
+ fyivU6UfU7rvF97I9CG+bdlD0J1uNZ+2FgVPZMtnd0MwJixRmccTjvUk+h7f56Szk3IE
+ WAX0DS5fv91bLT7apvG0OTr8TaOn7YhDrKOXKvMzs1oERWP/MZEtyWIqeUlxA5NNF5vf
+ fqdw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1742617906; x=1743222706;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=OKPlB0EQf+q0uDhRPmBQYgAEjvOxTp2VlgjpWxK8K0k=;
+ b=jpza17KzJ5QxmXCn5x9CNvB8uDCG6kpcqQB7BE9g2i4CzvdOhEz+8ge9t09AxLxXj7
+ /48Hj9+i4ACGi0LklwhrcDyo+94sNUeosXEJVqIYpy66Npy82RI25tyBH2HgqkL1lDCG
+ cnTa3CgJ2lgAwYZEwCXflVjMvdVJz3p3Sy3lIDjs1FGNkztLk/vkaEVajZP/3nSdGFdT
+ TZCUl6nMAuxHF9V+lxBuxKwOvYZ6n0ftVpgiuTj17S4g4vw/iESFw13XSyvEllnQz2du
+ BSeu5gXZOddMhN0KJBm2nRYmBF4Ra0fS2wBZg1sj8/yVlJ1+mNwRbJmQ6pDfSsS2qtSa
+ GR7g==
+X-Gm-Message-State: AOJu0YyncxKQlEZpy7Tj6LPo4BwEz8eNlR8JpP60adFn/KX8ncWAQSCa
+ VxZoRqo4GRbObWQnYcn29FHhK6qdv+dwLLRoAq3X5a+/5W4y1EccvxotPCUEgS1aY2aGtYDFsSX
+ bs+Q=
+X-Gm-Gg: ASbGncu4LYrw172d7v3cTPx8zuYfrHO+kFPlsXHPfnuhZtGTgojqKkFFaSA2wN6HJdz
+ p6ettGtAzec1323rdOTEIKsIvq9F+zaqnudWuO1VHQuqlmVx92EQp7gi2zTsB403XHkkPXDuyL0
+ Cr9JCQjR3MUv2K7PnRFylvNiDf3C2I+Hwgv7ja+qmj3kWtfKqIb8ZKqrdXKlzTZCZEelB8UzHZh
+ aVkry72Ogzy1yskDvDrLxNWU3fqgbYcy0BzvPBSgzPjUCQYFXhZbvx5GK+jA+WOo7IfUqNszGR4
+ rV+XJS/TUR7Cimx6W62qhbWS2u4uTgLo3uLgwsHNYe0RgK6OtyauSvg=
+X-Google-Smtp-Source: AGHT+IEBvHBLrpEcblsWPy049oHgchwNvkOnIs0UsJ5bTKW5kUjqiQPomXnfMfR2P3pLAhug2zhcOw==
+X-Received: by 2002:a17:902:d58b:b0:215:6e01:ad07 with SMTP id
+ d9443c01a7336-22780c551d0mr86504385ad.6.1742617905860; 
+ Fri, 21 Mar 2025 21:31:45 -0700 (PDT)
+Received: from sunil-pc.Dlink ([106.51.199.215])
+ by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-2278120a5b6sm26824645ad.252.2025.03.21.21.31.42
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 21 Mar 2025 21:31:45 -0700 (PDT)
+From: Sunil V L <sunilvl@ventanamicro.com>
+To: qemu-riscv@nongnu.org,
+	qemu-devel@nongnu.org
+Cc: Alistair Francis <alistair.francis@wdc.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>, Weiwei Li <liwei1518@gmail.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Andrew Jones <ajones@ventanamicro.com>,
+ Anup Patel <apatel@ventanamicro.com>, Atish Patra <atishp@rivosinc.com>,
+ Sunil V L <sunilvl@ventanamicro.com>
+Subject: [PATCH v2 0/2] RISC-V: ACPI: Add support for RIMT
+Date: Sat, 22 Mar 2025 10:01:36 +0530
+Message-ID: <20250322043139.2003479-1-sunilvl@ventanamicro.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=185.125.188.120;
- envelope-from=heinrich.schuchardt@canonical.com;
- helo=smtp-relay-canonical-0.canonical.com
-X-Spam_score_int: -46
-X-Spam_score: -4.7
-X-Spam_bar: ----
-X-Spam_report: (-4.7 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.332,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_MED=-2.3, RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001,
- RCVD_IN_VALIDITY_SAFE_BLOCKED=0.001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+Received-SPF: pass client-ip=2607:f8b0:4864:20::62d;
+ envelope-from=sunilvl@ventanamicro.com; helo=mail-pl1-x62d.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -75,69 +103,27 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Currently resetting the leads to resynchronizing the Goldfish RTC with the
-system clock of the host. In real hardware an RTC reset would not change
-the wall time. Other RTCs like pl031 do not show this behavior.
+RISC-V IO Mapping Table (RIMT) is a new static ACPI table used to
+communicate IOMMU and topology information to the OS. Add support for
+creating this table when the IOMMU is present. The specification is
+frozen and available at [1].
 
-Move the synchronization of the RTC with the system clock to the instance
-realization.
+[1] - https://github.com/riscv-non-isa/riscv-acpi-rimt/releases/download/v0.99/rimt-spec.pdf
 
-Cc: qemu-stable@nongnu.org
-Reported-by: Frederik Du Toit Lotter <fred.lotter@canonical.com>
-Fixes: 9a5b40b8427 ("hw: rtc: Add Goldfish RTC device")
-Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
----
-v2:
-	Remove a superfluous intialization to nul.
-	Add Cc:, Fixes:, and Reviewed-by: tags.
-v1:
-	https://lore.kernel.org/qemu-devel/CAAhSdy0-we9B19wRRqk_rRFkjY2LPPMRGaTdE=_4Ge_pCR4Y4Q@mail.gmail.com/T/
----
- hw/rtc/goldfish_rtc.c | 13 ++++++-------
- 1 file changed, 6 insertions(+), 7 deletions(-)
+Changes since v1:
+	1) Used g_autoptr as per Daniel's suggestion.
+	2) Added R-b tag from Daniel.
 
-diff --git a/hw/rtc/goldfish_rtc.c b/hw/rtc/goldfish_rtc.c
-index 0f1b53e0e4..d83cc26481 100644
---- a/hw/rtc/goldfish_rtc.c
-+++ b/hw/rtc/goldfish_rtc.c
-@@ -239,15 +239,8 @@ static const VMStateDescription goldfish_rtc_vmstate = {
- static void goldfish_rtc_reset(DeviceState *dev)
- {
-     GoldfishRTCState *s = GOLDFISH_RTC(dev);
--    struct tm tm;
- 
-     timer_del(s->timer);
--
--    qemu_get_timedate(&tm, 0);
--    s->tick_offset = mktimegm(&tm);
--    s->tick_offset *= NANOSECONDS_PER_SECOND;
--    s->tick_offset -= qemu_clock_get_ns(rtc_clock);
--    s->tick_offset_vmstate = 0;
-     s->alarm_next = 0;
-     s->alarm_running = 0;
-     s->irq_pending = 0;
-@@ -258,6 +251,7 @@ static void goldfish_rtc_realize(DeviceState *d, Error **errp)
- {
-     SysBusDevice *dev = SYS_BUS_DEVICE(d);
-     GoldfishRTCState *s = GOLDFISH_RTC(d);
-+    struct tm tm;
- 
-     memory_region_init_io(&s->iomem, OBJECT(s),
-                           &goldfish_rtc_ops[s->big_endian], s,
-@@ -267,6 +261,11 @@ static void goldfish_rtc_realize(DeviceState *d, Error **errp)
-     sysbus_init_irq(dev, &s->irq);
- 
-     s->timer = timer_new_ns(rtc_clock, goldfish_rtc_interrupt, s);
-+
-+    qemu_get_timedate(&tm, 0);
-+    s->tick_offset = mktimegm(&tm);
-+    s->tick_offset *= NANOSECONDS_PER_SECOND;
-+    s->tick_offset -= qemu_clock_get_ns(rtc_clock);
- }
- 
- static const Property goldfish_rtc_properties[] = {
+Sunil V L (2):
+  hw/riscv/virt: Add the BDF of IOMMU to RISCVVirtState structure
+  hw/riscv/virt-acpi-build: Add support for RIMT
+
+ hw/riscv/virt-acpi-build.c | 215 +++++++++++++++++++++++++++++++++++++
+ hw/riscv/virt.c            |   1 +
+ include/hw/riscv/virt.h    |   1 +
+ 3 files changed, 217 insertions(+)
+
 -- 
-2.48.1
+2.43.0
 
 
