@@ -4,96 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B1B97C36002
-	for <qemu-riscv@archiver.kernel.org>; Mon, 24 Mar 2025 11:18:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0B3B5C3600C
+	for <qemu-riscv@archiver.kernel.org>; Mon, 24 Mar 2025 13:23:44 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1twfpP-00062A-Al; Mon, 24 Mar 2025 07:18:47 -0400
+	id 1twhlR-0003D6-Ni; Mon, 24 Mar 2025 09:22:49 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1twfpN-00061f-EP
- for qemu-riscv@nongnu.org; Mon, 24 Mar 2025 07:18:45 -0400
-Received: from mail-pl1-x631.google.com ([2607:f8b0:4864:20::631])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1twfpL-0006bM-Kz
- for qemu-riscv@nongnu.org; Mon, 24 Mar 2025 07:18:45 -0400
-Received: by mail-pl1-x631.google.com with SMTP id
- d9443c01a7336-227aaa82fafso21170585ad.2
- for <qemu-riscv@nongnu.org>; Mon, 24 Mar 2025 04:18:42 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1742815121; x=1743419921; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=bElPtOoPd6bz5+Z61z6KsrnYhmnmbNko5W0M+/FgjwA=;
- b=crjWreAX6HS3HCmCZZDS1wx5aF6smWvfDGD6S2njec8wGuwPR2MIhp3kg0uCsF26ZJ
- CGEXVzs5dCizgNRXMe55toGjZeKxVqdgb870vLdWSIa/eo7rRH/M4MNuYq9o4cNT5vL2
- UslYUmcmLKBttXsYf2Gsgt5M2bHfBYbQhj2zUYfkFSZnzACWBKUntq6kipmwIF28Yv3H
- gNOtmeg50jaTADN0DjySN0KCBr0GpRjxmse1p+uLA6Z3rh5ANCGt4LRiyrmtaeXJh/PI
- uzqhG0UOL/COu3Mi0ZExkAdhaPd5bwsaVWG1iuq77iKDvDez0cCGVoeaG/5HjL4UbC+k
- uZxQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1742815121; x=1743419921;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=bElPtOoPd6bz5+Z61z6KsrnYhmnmbNko5W0M+/FgjwA=;
- b=SRKCs1A+wjaSMRZGKjEG1FxXyKzSFPKEPHwQuslbK1m4v+mgvInv+FTW4Z0q2LtgrR
- jvyGz6jMVxaSRiklN/YGv17Nx93LWYSbO/2sU5wPkyOgwGNRz3C7Cm8glKx4X4wd8hCa
- MukFNp3/zsoEchwS6MeCFwNusP6F9KhFLxIL2FvYhl8SseFpxMbKj3Bx74ImiH4HUgOx
- mSbRpfYXCAN3bsJm7VERzM3hMmmHT8FNVu3b2P6DzBe5fbDrFHIU1wA2m2l8aHouBMmn
- TMyIQtJI+t/USkrYimPEVMlMAJb5AMAxE358JrOzoKL4nTDkg4QXE6CYm7EfqvLIguVS
- A9Eg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCX2nErejKWbdz4/LNyk7wm/J4CN1zXl6TFfY7kroaY9II9FRE91iuDFl3Gy6UatSnle/nPXM/gPnzVa@nongnu.org
-X-Gm-Message-State: AOJu0Yy5KmBx0VmrGU8/VTYyjYOH9gyCnXwD1d/2JtgyDQNldEfgVr6c
- DL6g2J0HRgslIhRze41LRVMb43fWJoyPfmaynR75A2JnLSEPuqXdy5kNc9batZ8=
-X-Gm-Gg: ASbGncvXykDtFQ4FOCdaQUv3UuN5f6uppxV694UCN0tgMexunbvejvLgyoQNFGwUbeU
- /SqnzzLOEuvqxZQu0M0IY+Hs3LxT9juw3/32oFI7WahELiq91LFRpPLrLiVZR/7O5MBPfFMqLXN
- dHNcuavg7Z7H/PKxxbBPEHb5bZg8J8NthfYGUJ247iQ0WG9OkVNdfwgls3aZu+M9nuhH087mVme
- k2ta6x9Bba+7c4e+iHXZa3tZp4x5mbk3aNOizHtN+1KMvkco23/7VF3jIa9yvPT6NaHt2tGyCI3
- rXlmHTgUfVzVODKY201jifdsVkZlia+MbBE1+f7/OR4QYkK1nO7WgkCGEFZTWqoRbw6CbChlTu1
- vgbrLQ8LdT3KmpyXwtn1g
-X-Google-Smtp-Source: AGHT+IFm38LdfKYVcilHBwY2V7os7PQpqhq05pViY5a0hoIhu2sOluTPFqFkOpdEzw5E3qBLqt46AQ==
-X-Received: by 2002:a05:6a20:7347:b0:1f1:432:f4a3 with SMTP id
- adf61e73a8af0-1fe42f57916mr19531769637.23.1742815121216; 
- Mon, 24 Mar 2025 04:18:41 -0700 (PDT)
-Received: from [192.168.68.110] (201-69-66-189.dial-up.telesp.net.br.
- [201.69.66.189]) by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-73905fd517fsm7583655b3a.40.2025.03.24.04.18.37
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 24 Mar 2025 04:18:40 -0700 (PDT)
-Message-ID: <876d83fc-1651-4f6e-b7b2-38e9da34583a@ventanamicro.com>
-Date: Mon, 24 Mar 2025 08:18:35 -0300
+ (Exim 4.90_1) (envelope-from <stefanha@redhat.com>)
+ id 1twhka-0002t1-Rg
+ for qemu-riscv@nongnu.org; Mon, 24 Mar 2025 09:22:02 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <stefanha@redhat.com>)
+ id 1twhkX-0007Wb-Vp
+ for qemu-riscv@nongnu.org; Mon, 24 Mar 2025 09:21:55 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1742822512;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=/M6yvSO49qyolYnDoAGNj30Z0thsCPHDoVnPu7hyB0g=;
+ b=FAZ7qNRuPYxnPwqgOkM8K5aL5wdtg3Bi6VPkipGvxp91W+f63xHQatTbJBWitt/4D23vme
+ mkQ5P/ESAfqX4WzknijQOm3FAAOAQTpgpcLx/wM78MGRui5j4GVJUY41xRpcWi1O9Q7WH9
+ LwMYDWCbLLNrcqqcvXqyK4qidTMPvko=
+Received: from mx-prod-mc-08.mail-002.prod.us-west-2.aws.redhat.com
+ (ec2-35-165-154-97.us-west-2.compute.amazonaws.com [35.165.154.97]) by
+ relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-54-P6VZ0hKLOe2JM36zlFSMCQ-1; Mon,
+ 24 Mar 2025 09:21:49 -0400
+X-MC-Unique: P6VZ0hKLOe2JM36zlFSMCQ-1
+X-Mimecast-MFC-AGG-ID: P6VZ0hKLOe2JM36zlFSMCQ_1742822507
+Received: from mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com
+ (mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.111])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mx-prod-mc-08.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id AF7531801A1A; Mon, 24 Mar 2025 13:21:46 +0000 (UTC)
+Received: from localhost (unknown [10.2.16.139])
+ by mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
+ id 91DF618009BC; Mon, 24 Mar 2025 13:21:45 +0000 (UTC)
+Date: Sun, 23 Mar 2025 18:29:43 -0400
+From: Stefan Hajnoczi <stefanha@redhat.com>
+To: Gerd Hoffmann <kraxel@redhat.com>
+Cc: qemu-devel@nongnu.org, Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Kashyap Chamarthy <kchamart@redhat.com>,
+ Weiwei Li <liwei1518@gmail.com>, Bibo Mao <maobibo@loongson.cn>,
+ Jiaxun Yang <jiaxun.yang@flygoat.com>,
+ Philippe =?iso-8859-1?Q?Mathieu-Daud=E9?= <philmd@linaro.org>,
+ Paolo Bonzini <pbonzini@redhat.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>, qemu-riscv@nongnu.org,
+ Gerd Hoffmann <kraxel@redhat.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, Song Gao <gaosong@loongson.cn>,
+ Daniel =?iso-8859-1?Q?P=2E_Berrang=E9?= <berrange@redhat.com>
+Subject: Re: [PULL 0/6] Uefi 20250321 patches
+Message-ID: <20250323222943.GA41879@fedora>
+References: <20250321123604.2126923-1-kraxel@redhat.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 2/2] target/riscv: fix handling of nop for vstart >= vl
- in some vector instruction
-To: Michael Tokarev <mjt@tls.msk.ru>, Chao Liu <lc00631@tecorigin.com>,
- alistair23@gmail.com
-Cc: alistair.francis@wdc.com, bmeng.cn@gmail.com, liwei1518@gmail.com,
- palmer@dabbelt.com, qemu-devel@nongnu.org, qemu-riscv@nongnu.org,
- zhiwei_liu@linux.alibaba.com, zqz00548@tecorigin.com
-References: <cover.1741573286.git.lc00631@tecorigin.com>
- <b2649f14915150be4c602d63cd3ea4adf47e9d75.1741573286.git.lc00631@tecorigin.com>
- <e9992f04-869c-4485-a7f3-14538a872fa3@tls.msk.ru>
-Content-Language: en-US
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <e9992f04-869c-4485-a7f3-14538a872fa3@tls.msk.ru>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::631;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pl1-x631.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature"; boundary="7KWoSPt+NB/SRPX4"
+Content-Disposition: inline
+In-Reply-To: <20250321123604.2126923-1-kraxel@redhat.com>
+X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.111
+Received-SPF: pass client-ip=170.10.133.124; envelope-from=stefanha@redhat.com;
+ helo=us-smtp-delivery-124.mimecast.com
+X-Spam_score_int: -9
+X-Spam_score: -1.0
+X-Spam_bar: -
+X-Spam_report: (-1.0 / 5.0 requ) BAYES_00=-1.9, DATE_IN_PAST_12_24=1.049,
+ DKIMWL_WL_HIGH=-0.001, DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1,
+ DKIM_VALID_EF=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H2=0.001,
+ RCVD_IN_VALIDITY_CERTIFIED_BLOCKED=0.001, RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -110,39 +95,29 @@ Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 
+--7KWoSPt+NB/SRPX4
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-On 3/24/25 1:48 AM, Michael Tokarev wrote:
-> 10.03.2025 05:35, Chao Liu wrote:
->> Recently, when I was writing a RISCV test, I found that when VL is set to 0, the
->> instruction should be nop, but when I tested it, I found that QEMU will treat
->> all elements as tail elements, and in the case of VTA=1, write all elements
->> to 1.
->>
->> After troubleshooting, it was found that the vext_vx_rm_1 function was called in
->> the vext_vx_rm_2, and then the vext_set_elems_1s function was called to process
->> the tail element, but only VSTART >= vl was checked in the vext_vx_rm_1
->> function, which caused the tail element to still be processed even if it was
->> returned in advance.
->>
->> So I've made the following change:
->>
->> Put VSTART_CHECK_EARLY_EXIT(env) at the beginning of the vext_vx_rm_2 function,
->> so that the VSTART register is checked correctly.
->>
->> Fixes: df4252b2ec ("target/riscv/vector_helpers: do early exit when
->> vstart >= vl")
->> Signed-off-by: Chao Liu <lc00631@tecorigin.com>
->> Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-> 
-> Is this a qemu-stable material (9.2)?
+Applied, thanks.
 
-Yes. Go ahead. Thanks,
+Please update the changelog at https://wiki.qemu.org/ChangeLog/10.0 for any user-visible changes.
 
-Daniel
+--7KWoSPt+NB/SRPX4
+Content-Type: application/pgp-signature; name=signature.asc
 
-> 
-> Thanks,
-> 
-> /mjt
+-----BEGIN PGP SIGNATURE-----
+
+iQEzBAEBCAAdFiEEhpWov9P5fNqsNXdanKSrs4Grc8gFAmfgi1YACgkQnKSrs4Gr
+c8iP8Af7B/RWThqLB2Hr+I4uBXysGLMJlLb4xQby+U3HxHZ30sajEVYlFZngzQ5r
+vo3CbX7Sa7fjBs/YkYVDAxxk7gt78FQw8X2bpU2fMGZaD+tnfZ6x1nsykkQqmNMl
+hp4kSeI4SF17AdT3KA//t3R9XnwLks1ApRWB5XoUOMEItVMs0lm7FGROeH5noZzA
+hCNDS7AS5fzG9RuigLipU76wA3ewzGIF1lpHXrt0151liAf6c8OwSA2FWwCNSjHc
+9DgQVTsfoeqn7uAHLptaH3NlTNLPG3zBMYM2GbL3Lw7IUBVzC1upCFiAezardh36
+IeLr0IsYrY9N/HG/5zEBHgo4xrY2gQ==
+=FB1Y
+-----END PGP SIGNATURE-----
+
+--7KWoSPt+NB/SRPX4--
 
 
