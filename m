@@ -4,93 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DD162C35FFC
-	for <qemu-riscv@archiver.kernel.org>; Sat, 22 Mar 2025 04:32:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8F10BC28B30
+	for <qemu-riscv@archiver.kernel.org>; Sun, 23 Mar 2025 06:34:56 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tvqWd-0006xh-Px; Sat, 22 Mar 2025 00:31:59 -0400
+	id 1twEus-0001sL-WD; Sun, 23 Mar 2025 02:34:39 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <sunilvl@ventanamicro.com>)
- id 1tvqWb-0006x8-Nl
- for qemu-riscv@nongnu.org; Sat, 22 Mar 2025 00:31:57 -0400
-Received: from mail-pl1-x62c.google.com ([2607:f8b0:4864:20::62c])
+ (Exim 4.90_1) (envelope-from <hemanshu.khilari.foss@gmail.com>)
+ id 1twEuq-0001rf-QK; Sun, 23 Mar 2025 02:34:36 -0400
+Received: from mail-pj1-x1042.google.com ([2607:f8b0:4864:20::1042])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <sunilvl@ventanamicro.com>)
- id 1tvqWZ-0002YL-Hi
- for qemu-riscv@nongnu.org; Sat, 22 Mar 2025 00:31:57 -0400
-Received: by mail-pl1-x62c.google.com with SMTP id
- d9443c01a7336-2264aefc45dso30436335ad.0
- for <qemu-riscv@nongnu.org>; Fri, 21 Mar 2025 21:31:55 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <hemanshu.khilari.foss@gmail.com>)
+ id 1twEup-0000TQ-5s; Sun, 23 Mar 2025 02:34:36 -0400
+Received: by mail-pj1-x1042.google.com with SMTP id
+ 98e67ed59e1d1-2ff85fec403so9063287a91.1; 
+ Sat, 22 Mar 2025 23:34:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1742617914; x=1743222714; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=4UDuZZEvx52TYf4VWrZHlqnYHUptgGVGsYU0XYdLZzM=;
- b=Ov2BwwqZrK0Voq7D2gfAOEy5xWm6ZGqHRMRuGvTurzNWR65f9h+0IBicV/r0WDC3z/
- 5ZTzVpZhfu2LqiUFbA+Konsrwj0EDtm/7HZENmTB1SfqWr44Aqs2oX0PcqhjqRrX3nmn
- W0/r9jGsy7Yuns3DpKJHZerGG6cu3jPl1Ame2+AamMrSgJrKohAMLj/V0T3gPisw03i8
- XbpCm2DgdVFRB0rjLQTvOO7FO/1st+GoMLGPabJXiMiQinA0paakqjIeM8GUefhE739O
- h6XRW5JHjD3uVOLJrioKyhhuT9iEJWKKHw07/pDTLBdZaTq6l2eEEbaf09dUWXgThArr
- yIhg==
+ d=gmail.com; s=20230601; t=1742711672; x=1743316472; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=WwqhSpGVpYgAHl7lNT8uSfGBwD38nmoAMNw86OtCg9g=;
+ b=BgRs6nOW8Fw9q8pkGPG7UIEsjaXt0SsBevUzt2g5IuRDFra2pJROO4QY9CkJcRFpki
+ jNzcN9kIj6t+T6xSq3BVlLUK9nYQMz47qOK+gdLk2yFuzCILaOoqbJiRPs2T13cl/d8e
+ aeCRoD6F3GtqcgVbcsibNPx0Bj4j+w1sIuVQDM/naHZUPhZv/set7ELUsEoHtvJdieHq
+ bohLqrT0Mcf0mSyB2Hp+Ha9VZBq4q883f+uxsM08qhI08e0N0Kqcja5JPAuRgzwwC9v3
+ AUOGKCYyHzLCIStk+/S2zCrxUHwEvmiS70pO+V7ghgV2rsw/M51DOwfmAXen+4mL2npp
+ d8rg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1742617914; x=1743222714;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=4UDuZZEvx52TYf4VWrZHlqnYHUptgGVGsYU0XYdLZzM=;
- b=YMxy2ycJijAq3pSSM2M1h4jjXQ2N9u7Acnd0X+2pbxlDI8BRzTugK+OPs6j29gEQ02
- EgjadjiPU+9j7xJPOP2SuVJI2pfTEfKqvg9gCiCwKdqElbe7i12kAGyv/N3jE9mm4eBb
- jUilZ+0YBFxbrO9QyvC/kQHg6dTCAvHvhRlZLkba9n3ZoRNaC24QNX4+N7Bw5qHY5Ael
- 4noaHUsd77PZBwPvKluZeyTWzJ82VPqv3gVh9pbXqO6Dr34jm3XoTmgG+bymlpFekqFg
- 3Uq95Hhm4jETo9UW6Wd3M7GRyQ/0lPlGras8yjg+6tnZ0eWvmDfe95qWAcn2yxkSYq9Q
- ywOA==
-X-Gm-Message-State: AOJu0YyrRoRKoXXvUj/jl1dg8h34NIjvS7DktaRGlt+WmsbBZ4kgAXyZ
- 9lyty0NFcmJ6B/haxsJlthGEU9E2d/5OQMa49pvLEMVAXp73r5nFZwQap/VRQ3qWKILI10gKR+0
- Cnj8=
-X-Gm-Gg: ASbGncuKbawW6vj7VSdvB/wtQT0Mj8CGbqj1+7h33gUcmC0vMbSg5x4tKAx1cegg7Ii
- fZYJSu+piZ9aCgjo5NVzcpxb6G4Dp3hTkNQq+WcTC3dDffdipDcBWrL9YmlkmWhZNSuNYBrtlyM
- R+7ps6iINwir1j/8U+kTb9b5g4NlNU+62eo2B2J0IcBjpUMEpBGbP1PQ4gaskYvTjNBa1PRnbWM
- 4E6FBmCnxek1c6B6XoPC7yyNZutElb+ECVHZ016tdcvVb4ussnf1dIC+8JPS+8JMZCP1EHaJjxW
- 6v6PcW5BfMc+UTG2j4hYtm7Eu8JRNycvaTSYwd8yO3MRAIwIQLrNqx4=
-X-Google-Smtp-Source: AGHT+IH5JNv4ufMNsERTCd+u631Iq0qIpmi6A6i7ibP6FSElmT5iQ00ptU1/D/4P+c4HhCADil0GAA==
-X-Received: by 2002:a17:903:32c3:b0:224:1774:1ecd with SMTP id
- d9443c01a7336-22780c5599amr75325645ad.4.1742617913669; 
- Fri, 21 Mar 2025 21:31:53 -0700 (PDT)
-Received: from sunil-pc.Dlink ([106.51.199.215])
+ d=1e100.net; s=20230601; t=1742711672; x=1743316472;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=WwqhSpGVpYgAHl7lNT8uSfGBwD38nmoAMNw86OtCg9g=;
+ b=ktu4RFQ6ADmItPycdo9CMY6X5gLDWBPCvEst23lQ24Bxtcks3jZ0i63ccRR5mv6UZk
+ 5jjJpTUGVLQ0PC+8jKhJKWYKCjxS5XuiGgyCgNZhtYI3pcaqa1m3ZK2W1iOki1vAqr30
+ jBC+wim+RC5E7wiDsVZ5YnGSSHH+lVOKqaGobALWBaP2InZZpH2LS5kJoiwNkZUZIPiP
+ NcprhIkSro2N/ZtUM/Fp4UNaUB996QhQPGOColxtd+P13C80sx9P+6sCy3D0+hAiW/5i
+ KiUgDjriAXkAqGGzppMDKxnQQ41iQMfyu/d5Wje/hfCVMu1D7w531hfWgSDOQFl81OKt
+ Fsbw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWgd7mGjx3Zok05oM10VyQjt6kMt+AHTRQkh0k7UuqKs2FtR9khWlPm9sYGvXE8mD3i1IUHMcsjOLv9@nongnu.org
+X-Gm-Message-State: AOJu0Ywned+f3VhdrKbx9pFuC9isk96D1Odn6Rkd33Z6lXE5qXFEnMBc
+ aWaBtejB9EOTSbGiu9fm4OmVoXxMpRxz3+rHqQJ4kQbhOL3KhtKM6r56JHtt/dI=
+X-Gm-Gg: ASbGncvEuiMLRcUvcIAF/z7oa1bYwxxFiLwbyQxQ7DTTVBL3OnEJZhvW8H/TJrO2zLI
+ z3+kM/7c5az9UVks1sSTgZIbeYzek5eLi65TQQU5Ix8ooioNoKsR45uWVf626MhZyc14n+ulKlr
+ 8Teb9OEzfY+3HF1O0DI3EWXDwjJx+WtxXNhYEK6uc88b17QZXHwJojSLOuBrFxCOU5i7AqmP/c3
+ 1HJPZu3kH/9vmQsb49uvHO6HmaqaE2POUio4v2bTzVLmTID4v9x48ritBL2nLFasw0TLhE31Rcp
+ d9MLmvOYtCTR4b0VXWCZoFXneRFY3ExOdxn93eCdPpw8/h2m8XmJOv0/bt4OiYX9p4zwEpW0/Q=
+ =
+X-Google-Smtp-Source: AGHT+IF75habzKvnlrTfzjXbcAEEKspTjnUcAGOV0zqlweaAwSBRtbWeOBTt7N5eQlB8nCvBw4qBSg==
+X-Received: by 2002:a17:90b:2551:b0:2ee:9661:eafb with SMTP id
+ 98e67ed59e1d1-3030f38e57dmr14853447a91.12.1742711672387; 
+ Sat, 22 Mar 2025 23:34:32 -0700 (PDT)
+Received: from localhost.localdomain ([160.202.36.194])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-2278120a5b6sm26824645ad.252.2025.03.21.21.31.49
+ 98e67ed59e1d1-301bf635fc2sm9347937a91.46.2025.03.22.23.34.29
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 21 Mar 2025 21:31:53 -0700 (PDT)
-From: Sunil V L <sunilvl@ventanamicro.com>
-To: qemu-riscv@nongnu.org,
-	qemu-devel@nongnu.org
-Cc: Alistair Francis <alistair.francis@wdc.com>,
- Palmer Dabbelt <palmer@dabbelt.com>, Weiwei Li <liwei1518@gmail.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Andrew Jones <ajones@ventanamicro.com>,
- Anup Patel <apatel@ventanamicro.com>, Atish Patra <atishp@rivosinc.com>,
- Sunil V L <sunilvl@ventanamicro.com>
-Subject: [PATCH v2 2/2] hw/riscv/virt-acpi-build: Add support for RIMT
-Date: Sat, 22 Mar 2025 10:01:38 +0530
-Message-ID: <20250322043139.2003479-3-sunilvl@ventanamicro.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20250322043139.2003479-1-sunilvl@ventanamicro.com>
-References: <20250322043139.2003479-1-sunilvl@ventanamicro.com>
+ Sat, 22 Mar 2025 23:34:31 -0700 (PDT)
+From: "hemanshu.khilari.foss" <hemanshu.khilari.foss@gmail.com>
+To: qemu-devel@nongnu.org
+Cc: Alistair.Francis@wdc.com, qemu-riscv@nongnu.org,
+ "hemanshu.khilari.foss" <hemanshu.khilari.foss@gmail.com>
+Subject: [PATCH v3] docs/specs/riscv-iommu: Fixed broken link to external risv
+ iommu document
+Date: Sun, 23 Mar 2025 12:04:00 +0530
+Message-ID: <20250323063404.13206-1-hemanshu.khilari.foss@gmail.com>
+X-Mailer: git-send-email 2.42.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::62c;
- envelope-from=sunilvl@ventanamicro.com; helo=mail-pl1-x62c.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1042;
+ envelope-from=hemanshu.khilari.foss@gmail.com; helo=mail-pj1-x1042.google.com
+X-Spam_score_int: 12
+X-Spam_score: 1.2
+X-Spam_bar: +
+X-Spam_report: (1.2 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
+ DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_SBL_CSS=3.335, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -106,267 +98,48 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-RISC-V IO Mapping Table (RIMT) is a new static ACPI table used to
-communicate IOMMU information to the OS. Add support for creating this
-table when the IOMMU is present. The specification is frozen and
-available at [1].
+The links to riscv iommu specification document are incorrect. This patch
+updates all the said link to point to correct location.
 
-[1] - https://github.com/riscv-non-isa/riscv-acpi-rimt/releases/download/v0.99/rimt-spec.pdf
-
-Signed-off-by: Sunil V L <sunilvl@ventanamicro.com>
-Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Cc: qemu-riscv@nongnu.org
+Resolves: https://gitlab.com/qemu-project/qemu/-/issues/2808
+Signed-off-by: hemanshu.khilari.foss <hemanshu.khilari.foss@gmail.com>
 ---
- hw/riscv/virt-acpi-build.c | 215 +++++++++++++++++++++++++++++++++++++
- 1 file changed, 215 insertions(+)
+ docs/specs/riscv-iommu.rst | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/hw/riscv/virt-acpi-build.c b/hw/riscv/virt-acpi-build.c
-index 1ad6800508..1eef2fb4eb 100644
---- a/hw/riscv/virt-acpi-build.c
-+++ b/hw/riscv/virt-acpi-build.c
-@@ -198,6 +198,32 @@ acpi_dsdt_add_uart(Aml *scope, const MemMapEntry *uart_memmap,
-     aml_append(scope, dev);
- }
+diff --git a/docs/specs/riscv-iommu.rst b/docs/specs/riscv-iommu.rst
+index 000c7e1f57..991d376fdc 100644
+--- a/docs/specs/riscv-iommu.rst
++++ b/docs/specs/riscv-iommu.rst
+@@ -4,7 +4,7 @@ RISC-V IOMMU support for RISC-V machines
+ ========================================
  
-+/*
-+ * Add DSDT entry for the IOMMU platform device.
-+ * ACPI ID for IOMMU is defined in the section 6.2 of RISC-V BRS spec.
-+ * https://github.com/riscv-non-isa/riscv-brs/releases/download/v0.8/riscv-brs-spec.pdf
-+ */
-+static void acpi_dsdt_add_iommu_sys(Aml *scope, const MemMapEntry *iommu_memmap,
-+                                    uint32_t iommu_irq)
-+{
-+    uint32_t i;
-+
-+    Aml *dev = aml_device("IMU0");
-+    aml_append(dev, aml_name_decl("_HID", aml_string("RSCV0004")));
-+    aml_append(dev, aml_name_decl("_UID", aml_int(0)));
-+
-+    Aml *crs = aml_resource_template();
-+    aml_append(crs, aml_memory32_fixed(iommu_memmap->base,
-+                                       iommu_memmap->size, AML_READ_WRITE));
-+    for (i = iommu_irq; i < iommu_irq + 4; i++) {
-+        aml_append(crs, aml_interrupt(AML_CONSUMER, AML_EDGE, AML_ACTIVE_LOW,
-+                                      AML_EXCLUSIVE, &i, 1));
-+    }
-+
-+    aml_append(dev, aml_name_decl("_CRS", crs));
-+    aml_append(scope, dev);
-+}
-+
- /*
-  * Serial Port Console Redirection Table (SPCR)
-  * Rev: 1.10
-@@ -450,6 +476,9 @@ static void build_dsdt(GArray *table_data,
-     }
+ QEMU implements a RISC-V IOMMU emulation based on the RISC-V IOMMU spec
+-version 1.0 `iommu1.0`_.
++version 1.0 `iommu1.0.0`_.
  
-     acpi_dsdt_add_uart(scope, &memmap[VIRT_UART0], UART0_IRQ);
-+    if (virt_is_iommu_sys_enabled(s)) {
-+        acpi_dsdt_add_iommu_sys(scope, &memmap[VIRT_IOMMU_SYS], IOMMU_SYS_IRQ);
-+    }
+ The emulation includes a PCI reference device (riscv-iommu-pci) and a platform
+ bus device (riscv-iommu-sys) that QEMU RISC-V boards can use.  The 'virt'
+@@ -14,7 +14,7 @@ riscv-iommu-pci reference device
+ --------------------------------
  
-     if (socket_count == 1) {
-         virtio_acpi_dsdt_add(scope, memmap[VIRT_VIRTIO].base,
-@@ -602,6 +631,187 @@ static void build_madt(GArray *table_data,
-     acpi_table_end(linker, &table);
- }
+ This device implements the RISC-V IOMMU emulation as recommended by the section
+-"Integrating an IOMMU as a PCIe device" of `iommu1.0`_: a PCI device with base
++"Integrating an IOMMU as a PCIe device" of `iommu1.0.0`_: a PCI device with base
+ class 08h, sub-class 06h and programming interface 00h.
  
-+#define ID_MAPPING_ENTRY_SIZE        20
-+#define IOMMU_ENTRY_SIZE             40
-+#define RISCV_INTERRUPT_WIRE_OFFSSET 40
-+#define ROOT_COMPLEX_ENTRY_SIZE      20
-+#define RIMT_NODE_OFFSET             48
-+
-+/*
-+ * ID Mapping Structure
-+ */
-+static void build_rimt_id_mapping(GArray *table_data, uint32_t source_id_base,
-+                                  uint32_t num_ids, uint32_t dest_id_base)
-+{
-+    /* Source ID Base */
-+    build_append_int_noprefix(table_data, source_id_base, 4);
-+    /* Number of IDs */
-+    build_append_int_noprefix(table_data, num_ids, 4);
-+    /* Destination Device ID Base */
-+    build_append_int_noprefix(table_data, source_id_base, 4);
-+    /* Destination IOMMU Offset */
-+    build_append_int_noprefix(table_data, dest_id_base, 4);
-+    /* Flags */
-+    build_append_int_noprefix(table_data, 0, 4);
-+}
-+
-+struct AcpiRimtIdMapping {
-+    uint32_t source_id_base;
-+    uint32_t num_ids;
-+};
-+typedef struct AcpiRimtIdMapping AcpiRimtIdMapping;
-+
-+/* Build the rimt ID mapping to IOMMU for a given PCI host bridge */
-+static int rimt_host_bridges(Object *obj, void *opaque)
-+{
-+    GArray *idmap_blob = opaque;
-+
-+    if (object_dynamic_cast(obj, TYPE_PCI_HOST_BRIDGE)) {
-+        PCIBus *bus = PCI_HOST_BRIDGE(obj)->bus;
-+
-+        if (bus && !pci_bus_bypass_iommu(bus)) {
-+            int min_bus, max_bus;
-+
-+            pci_bus_range(bus, &min_bus, &max_bus);
-+
-+            AcpiRimtIdMapping idmap = {
-+                .source_id_base = min_bus << 8,
-+                .num_ids = (max_bus - min_bus + 1) << 8,
-+            };
-+            g_array_append_val(idmap_blob, idmap);
-+        }
-+    }
-+
-+    return 0;
-+}
-+
-+static int rimt_idmap_compare(gconstpointer a, gconstpointer b)
-+{
-+    AcpiRimtIdMapping *idmap_a = (AcpiRimtIdMapping *)a;
-+    AcpiRimtIdMapping *idmap_b = (AcpiRimtIdMapping *)b;
-+
-+    return idmap_a->source_id_base - idmap_b->source_id_base;
-+}
-+
-+/*
-+ * RISC-V IO Mapping Table (RIMT)
-+ * https://github.com/riscv-non-isa/riscv-acpi-rimt/releases/download/v0.99/rimt-spec.pdf
-+ */
-+static void build_rimt(GArray *table_data, BIOSLinker *linker,
-+                       RISCVVirtState *s)
-+{
-+    int i, nb_nodes, rc_mapping_count;
-+    size_t node_size, iommu_offset = 0;
-+    uint32_t id = 0;
-+    g_autoptr(GArray) iommu_idmaps = g_array_new(false, true,
-+                                                 sizeof(AcpiRimtIdMapping));
-+
-+    AcpiTable table = { .sig = "RIMT", .rev = 1, .oem_id = s->oem_id,
-+                        .oem_table_id = s->oem_table_id };
-+
-+    acpi_table_begin(&table, table_data);
-+
-+    object_child_foreach_recursive(object_get_root(),
-+                                   rimt_host_bridges, iommu_idmaps);
-+
-+    /* Sort the ID mapping  by Source ID Base*/
-+    g_array_sort(iommu_idmaps, rimt_idmap_compare);
-+
-+    nb_nodes = 2; /* RC, IOMMU */
-+    rc_mapping_count = iommu_idmaps->len;
-+    /* Number of RIMT Nodes */
-+    build_append_int_noprefix(table_data, nb_nodes, 4);
-+
-+    /* Offset to Array of RIMT Nodes */
-+    build_append_int_noprefix(table_data, RIMT_NODE_OFFSET, 4);
-+    build_append_int_noprefix(table_data, 0, 4); /* Reserved */
-+
-+    iommu_offset = table_data->len - table.table_offset;
-+    /*  IOMMU Device Structure */
-+    build_append_int_noprefix(table_data, 0, 1);         /* Type - IOMMU*/
-+    build_append_int_noprefix(table_data, 1, 1);         /* Revision */
-+    node_size =  IOMMU_ENTRY_SIZE;
-+    build_append_int_noprefix(table_data, node_size, 2); /* Length */
-+    build_append_int_noprefix(table_data, 0, 2);         /* Reserved */
-+    build_append_int_noprefix(table_data, id++, 2);      /* ID */
-+    if (virt_is_iommu_sys_enabled(s)) {
-+        /* Hardware ID */
-+        build_append_int_noprefix(table_data, 'R', 1);
-+        build_append_int_noprefix(table_data, 'S', 1);
-+        build_append_int_noprefix(table_data, 'C', 1);
-+        build_append_int_noprefix(table_data, 'V', 1);
-+        build_append_int_noprefix(table_data, '0', 1);
-+        build_append_int_noprefix(table_data, '0', 1);
-+        build_append_int_noprefix(table_data, '0', 1);
-+        build_append_int_noprefix(table_data, '4', 1);
-+        /* Base Address */
-+        build_append_int_noprefix(table_data,
-+                                  s->memmap[VIRT_IOMMU_SYS].base, 8);
-+        build_append_int_noprefix(table_data, 0, 4);   /* Flags */
-+    } else {
-+        /* Hardware ID */
-+        build_append_int_noprefix(table_data, '0', 1);
-+        build_append_int_noprefix(table_data, '0', 1);
-+        build_append_int_noprefix(table_data, '1', 1);
-+        build_append_int_noprefix(table_data, '0', 1);
-+        build_append_int_noprefix(table_data, '0', 1);
-+        build_append_int_noprefix(table_data, '0', 1);
-+        build_append_int_noprefix(table_data, '1', 1);
-+        build_append_int_noprefix(table_data, '4', 1);
-+
-+        build_append_int_noprefix(table_data, 0, 8);   /* Base Address */
-+        build_append_int_noprefix(table_data, 1, 4);   /* Flags */
-+    }
-+
-+    build_append_int_noprefix(table_data, 0, 4);       /* Proximity Domain */
-+    build_append_int_noprefix(table_data, 0, 2);       /* PCI Segment number */
-+    /* PCIe B/D/F */
-+    if (virt_is_iommu_sys_enabled(s)) {
-+        build_append_int_noprefix(table_data, 0, 2);
-+    } else {
-+        build_append_int_noprefix(table_data, s->pci_iommu_bdf, 2);
-+    }
-+    /* Number of interrupt wires */
-+    build_append_int_noprefix(table_data, 0, 2);
-+    /* Interrupt wire array offset */
-+    build_append_int_noprefix(table_data, RISCV_INTERRUPT_WIRE_OFFSSET, 2);
-+
-+    /*  PCIe Root Complex Node */
-+    build_append_int_noprefix(table_data, 1, 1);           /* Type */
-+    build_append_int_noprefix(table_data, 1, 1);           /* Revision */
-+    node_size =  ROOT_COMPLEX_ENTRY_SIZE +
-+                 ID_MAPPING_ENTRY_SIZE * rc_mapping_count;
-+    build_append_int_noprefix(table_data, node_size, 2);   /* Length */
-+    build_append_int_noprefix(table_data, 0, 2);           /* Reserved */
-+    build_append_int_noprefix(table_data, id++, 2);        /* ID */
-+    build_append_int_noprefix(table_data, 0, 4);           /* Flags */
-+    build_append_int_noprefix(table_data, 0, 2);           /* Reserved */
-+    /* PCI Segment number */
-+    build_append_int_noprefix(table_data, 0, 2);
-+    /* ID mapping array offset */
-+    build_append_int_noprefix(table_data, ROOT_COMPLEX_ENTRY_SIZE, 2);
-+    /* Number of ID mappings */
-+    build_append_int_noprefix(table_data, rc_mapping_count, 2);
-+
-+    /* Output Reference */
-+    AcpiRimtIdMapping *range;
-+
-+    /* ID mapping array */
-+    for (i = 0; i < iommu_idmaps->len; i++) {
-+        range = &g_array_index(iommu_idmaps, AcpiRimtIdMapping, i);
-+        if (virt_is_iommu_sys_enabled(s)) {
-+            range->source_id_base = 0;
-+        } else {
-+            range->source_id_base = s->pci_iommu_bdf + 1;
-+        }
-+        range->num_ids = 0xffff - s->pci_iommu_bdf;
-+        build_rimt_id_mapping(table_data, range->source_id_base,
-+                              range->num_ids, iommu_offset);
-+    }
-+
-+    acpi_table_end(linker, &table);
-+}
-+
- /*
-  * ACPI spec, Revision 6.5+
-  * 5.2.16 System Resource Affinity Table (SRAT)
-@@ -679,6 +889,11 @@ static void virt_acpi_build(RISCVVirtState *s, AcpiBuildTables *tables)
-     acpi_add_table(table_offsets, tables_blob);
-     build_rhct(tables_blob, tables->linker, s);
+ As a reference device it doesn't implement anything outside of the specification,
+@@ -109,7 +109,7 @@ riscv-iommu options:
+ - "s-stage": enabled
+ - "g-stage": enabled
  
-+    if (virt_is_iommu_sys_enabled(s) || s->pci_iommu_bdf) {
-+        acpi_add_table(table_offsets, tables_blob);
-+        build_rimt(tables_blob, tables->linker, s);
-+    }
-+
-     acpi_add_table(table_offsets, tables_blob);
-     spcr_setup(tables_blob, tables->linker, s);
+-.. _iommu1.0: https://github.com/riscv-non-isa/riscv-iommu/releases/download/v1.0/riscv-iommu.pdf
++.. _iommu1.0.0: https://github.com/riscv-non-isa/riscv-iommu/releases/download/v1.0.0/riscv-iommu.pdf
+ 
+ .. _linux-v8: https://lore.kernel.org/linux-riscv/cover.1718388908.git.tjeznach@rivosinc.com/
  
 -- 
-2.43.0
+2.42.0
 
 
