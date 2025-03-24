@@ -4,74 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A761FC28B30
-	for <qemu-riscv@archiver.kernel.org>; Mon, 24 Mar 2025 02:42:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 71419C28B30
+	for <qemu-riscv@archiver.kernel.org>; Mon, 24 Mar 2025 03:06:19 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1twXlV-0004oz-B9; Sun, 23 Mar 2025 22:42:13 -0400
+	id 1twY8Z-0000wr-Dp; Sun, 23 Mar 2025 23:06:03 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1twXlT-0004o8-Mn; Sun, 23 Mar 2025 22:42:11 -0400
-Received: from mail-vk1-xa2f.google.com ([2607:f8b0:4864:20::a2f])
+ id 1twY8P-0000vl-RD; Sun, 23 Mar 2025 23:05:57 -0400
+Received: from mail-ua1-x92c.google.com ([2607:f8b0:4864:20::92c])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1twXlR-0000no-NV; Sun, 23 Mar 2025 22:42:11 -0400
-Received: by mail-vk1-xa2f.google.com with SMTP id
- 71dfb90a1353d-525b44b7720so643810e0c.0; 
- Sun, 23 Mar 2025 19:42:08 -0700 (PDT)
+ id 1twY8O-0003qZ-9u; Sun, 23 Mar 2025 23:05:53 -0400
+Received: by mail-ua1-x92c.google.com with SMTP id
+ a1e0cc1a2514c-86d42f08219so1502317241.0; 
+ Sun, 23 Mar 2025 20:05:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1742784128; x=1743388928; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1742785551; x=1743390351; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=9MAEjp7Ar9/XStKkk6SdiYAmgEQt2fog4Ffv93nY/vY=;
- b=gRHRAIJFqQgG0phUjAcNGh7m/r2KSxzUiG6OIXfs9NnSv5RVbFTwNYTAPEN95buANk
- O6GSTNZnyS4whKOP/D6aX11SGFkQPUfmq0xHRiQi6lk86YoxUdb6K0M7xv7DFPhamVkR
- Huz21CYmYA4wsD3P6JxdZXz63nYn+q+EAaq8OWxslgPPWiyM1UAZCPTBnSQbAE4YtgO0
- WPgvorqacOFliJ1WxsYGxTlIbAuVowrduEF/m2o0Uph2Wv1+jJqBdcGnwYN6b1B2JfT/
- 3oDgJZ++VNsbSC3X0ANAlQPcaB3RJguv6G6BsGj8+sOY/MepKvq0ET4LPtCxQn6fcn/Y
- PVUg==
+ bh=TEYqHOa7/h0uCByt7ItyqRpjqfJCepGzXZEdZcTkBrU=;
+ b=lboHYMhvu2xznIoDJH2u7uw1JH6OJm4rj0LmJbmf5VusqbFm9nEYc4K5Q7K25PxiEi
+ 0RHXMrM+o90P3+5JrYG1TAUzxp5GzZO75A0CaJPZb14TlXNoHbeCHwe0tuvOLDtsIrVB
+ YOyj4kzHWz5A2uMKWabIg2XA5T2mZI6gFi8m9tmCqDGodILQBJ+Zk6UWZd4gCCiIMZHC
+ wYVFOoJCP9LBBCwcVIC3UzhQB8M1gI44iCYIrFpN4oy9gnoX5n1OYtD3WTJgj/zN7QzO
+ OMAPl6R+GWwPc+2k11sxFu476eYhBILd6tjaCblmp6X86dLiKhZca3BqaiAGY5N9y24N
+ X3lw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1742784128; x=1743388928;
+ d=1e100.net; s=20230601; t=1742785551; x=1743390351;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=9MAEjp7Ar9/XStKkk6SdiYAmgEQt2fog4Ffv93nY/vY=;
- b=f7ICyZWf4IRdFnfo3mwJDfH/DWxl4bgCQJhNlUF5lkW0xY7DSzD2miRwIY8Gqx+NtP
- +Tfdro4ZMgBTerDJLp+isuOHPJ2gIJJKBkSMwiOoHWFus97zq/BhuqNLSI6T8mOkbXXs
- 1JdfTTGLoi3fcPrXLn1GrFK3ZZTbn4eW0obtBrPQ192mmYwcfzHECcEZL2X1kk6ay//+
- r1GDIT3b+9UXIjldzz4sh2ebP/ZnEWvoA5Ml0aqvhWjgdAmVWS3L2+OLFOzlIn0jnuId
- LJOj8B7uHPpvXbkepjwZcrZTIhmSb7qgDFkAA9WjPO1LE14ogMUAilH1Ynf1Ef2roDPR
- dNUA==
+ bh=TEYqHOa7/h0uCByt7ItyqRpjqfJCepGzXZEdZcTkBrU=;
+ b=EPc//kuSXhzkqSgJfnK62ArMy1LoDfCYKG1OqPH7hNCSitrdrhO4NopDVu1YrkW5fb
+ oSFK5aTk5CA4OFVr/H0KKkUQi/9bAJpAgmhxhTr1rNiHd3h34Q7r0MS161ZnczNgKKQp
+ NpDhXhd2KTbvG3mKeOfydvCez4u3kbP4uXiTCE1lprM1LdnFlQpeqZYVYhaUoVp18/DC
+ KWWOcB+6vlKT8MsRhj1ey7kkXuKxj1Q4NZZQ9cZA4SaIG7Ms2dtc8pRZ2f3ODvRgdW1u
+ yMEmoDoL1b649Rkmx3dti5k/fvqqUwfKVmCXhag/YmmBIFpJ8s7Bq1OL1+x4gEHAEHSp
+ QSUQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWPxqvPcYR4YdQzsRuKLsPkW4gP4ffmwzhP0dDPElEQjS1+8eSrRWSypx/8WHjmHzc7+xfBihfJiFK/@nongnu.org
-X-Gm-Message-State: AOJu0YwZp6zZV96+lGMyP9/YDvX4srnvW0yfe+JfqGS6B0ph3/JSWClk
- FINRx68spgHA50fs5RQiDAuHyNyjYw8MRNU66qoTFiaRfRVu71I5DR4VmqA6ASOvbhhu84bf3mm
- Sla05jzbzhAIW6LlkvTGbq/b+J2I=
-X-Gm-Gg: ASbGnctxet34PBg4Q2o8qNjbY8HpyCZWyC5NO8s4TRJ11UTj7ll/XnjL5t/3hLgz2S/
- e3hY40qgf34zYzf3gfyg5sWCl7YKRGvrQPppe8cPn1IgLVwgSaxu/vm4S2jmf7KU6JO/P9guCac
- oC1z/dU1HNugLMMB4T4C6KUxUEOw2Tjs9I/LR35ZkpqDzLiLY97AIATYY=
-X-Google-Smtp-Source: AGHT+IFMAe3OXMyR9hc+PTqQ0FnXFTw9RCeD19JMLzV14ZoVbfNMdIfXX8HAMAYB7p+o1lsNQfGoVVJKJ4hkgysfGeo=
-X-Received: by 2002:a05:6122:3226:b0:520:3987:ce0b with SMTP id
- 71dfb90a1353d-525a82ebb2fmr8297580e0c.2.1742784128044; Sun, 23 Mar 2025
- 19:42:08 -0700 (PDT)
+ AJvYcCUfDVpWvzLLu6n0xm0qhEI4Zcg9Pu0CSj2LnQ4OYgUWPEngKQhk60jTb4T1h47IJpLmUtFd25UTscESag==@nongnu.org,
+ AJvYcCWT6Dofs7Mqwn0jr9cf8lfK3AxRjHYpA/eTzvBN/iMcDMyLqs+pj2u3ByhFxURGAV8otTcCtQHQy0Va@nongnu.org
+X-Gm-Message-State: AOJu0Yy5PWQ2Dws7kg2zbSbtAaU3cGliv3PGixAJYRHhe+Ta97akpY/y
+ vu53p2EV6bCHCLf1sRweIzJyDCKlOApBnXe6S7UyTSgylEaw7oC/ieHqK4BWEjbgG8NpGZ7hbMj
+ tYHQBKEUqdKOtKcjuRMt38OMe/EU=
+X-Gm-Gg: ASbGncvzkFV7UioMl0XmEv9B9RMEyoz02kK1/1Fnqv3K9lv9LiDGNU0XeOk2CrhzPKR
+ SFvz+VTnn09Ufo+hkpgNN9Tb4K/EdbCG58OsewPupog8cIQwFJSZf2K5hSjZDjc/JQRg13wF9Q3
+ tBriugzwTAQoJBdnbIStkqcMufQ7Zm633Sc0XGeCXCbs2+kgxF6CLQVOElcoljv+GY2Q==
+X-Google-Smtp-Source: AGHT+IGGJVt6JqxOmqxKrwEEECaJrQ8WFeuvSv0eAK4BrxzKx1X6SQ0XBJb9x7pXFZzBTRXWM6jqCaewVLYXwQoaG/o=
+X-Received: by 2002:a05:6102:cce:b0:4c1:a448:ac7d with SMTP id
+ ada2fe7eead31-4c50d4b8786mr6953723137.10.1742785550682; Sun, 23 Mar 2025
+ 20:05:50 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250323063404.13206-1-hemanshu.khilari.foss@gmail.com>
-In-Reply-To: <20250323063404.13206-1-hemanshu.khilari.foss@gmail.com>
+References: <20250306064636.452396-1-debug@rivosinc.com>
+ <b47fd8e8-f0dd-448f-ac9f-f6e23aead1bb@tls.msk.ru>
+In-Reply-To: <b47fd8e8-f0dd-448f-ac9f-f6e23aead1bb@tls.msk.ru>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 24 Mar 2025 12:41:41 +1000
-X-Gm-Features: AQ5f1JqY6fV7OY37SPRY4rL1vVadaazvgdyy8SeQGNHxUvWiGRslCWVs3obaKEY
-Message-ID: <CAKmqyKNKzQCNJS=vwvtOk0VC70jE8Qax7Trgw-cY-SFJ=rWWTQ@mail.gmail.com>
-Subject: Re: [PATCH v3] docs/specs/riscv-iommu: Fixed broken link to external
- risv iommu document
-To: "hemanshu.khilari.foss" <hemanshu.khilari.foss@gmail.com>
-Cc: qemu-devel@nongnu.org, Alistair.Francis@wdc.com, qemu-riscv@nongnu.org
+Date: Mon, 24 Mar 2025 13:05:24 +1000
+X-Gm-Features: AQ5f1Jr2pQ6F0ICfEnwQJSJl8nujR9Gx4LWHN2dq4FuORUnKxrB7NeZmzJMCGxY
+Message-ID: <CAKmqyKPEpYKOO8RmoMRxpF=GPt5W+c4RmfQdr70Prs6fv1cBvQ@mail.gmail.com>
+Subject: Re: [PATCH v2 1/2] target/riscv: fix access permission checks for
+ CSR_SSP
+To: Michael Tokarev <mjt@tls.msk.ru>
+Cc: Deepak Gupta <debug@rivosinc.com>, qemu-riscv@nongnu.org,
+ qemu-devel@nongnu.org, 
+ palmer@dabbelt.com, alistair.francis@wdc.com, bmeng.cn@gmail.com, 
+ liwei1518@gmail.com, dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com, 
+ Adam Zabrocki <azabrocki@nvidia.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::a2f;
- envelope-from=alistair23@gmail.com; helo=mail-vk1-xa2f.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::92c;
+ envelope-from=alistair23@gmail.com; helo=mail-ua1-x92c.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -95,67 +101,30 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Sun, Mar 23, 2025 at 4:36=E2=80=AFPM hemanshu.khilari.foss
-<hemanshu.khilari.foss@gmail.com> wrote:
+On Sat, Mar 22, 2025 at 4:03=E2=80=AFAM Michael Tokarev <mjt@tls.msk.ru> wr=
+ote:
 >
-> The links to riscv iommu specification document are incorrect. This patch
-> updates all the said link to point to correct location.
+> On 06.03.2025 09:46, Deepak Gupta wrote:
+> > Commit:8205bc1 ("target/riscv: introduce ssp and enabling controls for
+> > zicfiss") introduced CSR_SSP but it mis-interpreted the spec on access
+> > to CSR_SSP in M-mode. Gated to CSR_SSP is not gated via `xSSE`. But
+> > rather rules clearly specified in section "22.2.1. Shadow Stack Pointer
+> > (ssp) CSR access contr" in the priv spec.
+> >
+> > Fixes: 8205bc127a83 ("target/riscv: introduce ssp and enabling controls
+> > for zicfiss". Thanks to Adam Zabrocki for bringing this to attention.
 >
-> Cc: qemu-riscv@nongnu.org
-> Resolves: https://gitlab.com/qemu-project/qemu/-/issues/2808
-> Signed-off-by: hemanshu.khilari.foss <hemanshu.khilari.foss@gmail.com>
+> Is this patchset (including "[2/2] target/riscv: fixes a bug against
+> `ssamoswap` behavior in M-mode") applicable for stable qemu series?
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Yes, if it applies it is (it probably won't apply to older stables as
+it's a new-ish feature).
 
 Alistair
 
-> ---
->  docs/specs/riscv-iommu.rst | 6 +++---
->  1 file changed, 3 insertions(+), 3 deletions(-)
 >
-> diff --git a/docs/specs/riscv-iommu.rst b/docs/specs/riscv-iommu.rst
-> index 000c7e1f57..991d376fdc 100644
-> --- a/docs/specs/riscv-iommu.rst
-> +++ b/docs/specs/riscv-iommu.rst
-> @@ -4,7 +4,7 @@ RISC-V IOMMU support for RISC-V machines
->  =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> Thanks,
 >
->  QEMU implements a RISC-V IOMMU emulation based on the RISC-V IOMMU spec
-> -version 1.0 `iommu1.0`_.
-> +version 1.0 `iommu1.0.0`_.
->
->  The emulation includes a PCI reference device (riscv-iommu-pci) and a pl=
-atform
->  bus device (riscv-iommu-sys) that QEMU RISC-V boards can use.  The 'virt=
-'
-> @@ -14,7 +14,7 @@ riscv-iommu-pci reference device
->  --------------------------------
->
->  This device implements the RISC-V IOMMU emulation as recommended by the =
-section
-> -"Integrating an IOMMU as a PCIe device" of `iommu1.0`_: a PCI device wit=
-h base
-> +"Integrating an IOMMU as a PCIe device" of `iommu1.0.0`_: a PCI device w=
-ith base
->  class 08h, sub-class 06h and programming interface 00h.
->
->  As a reference device it doesn't implement anything outside of the speci=
-fication,
-> @@ -109,7 +109,7 @@ riscv-iommu options:
->  - "s-stage": enabled
->  - "g-stage": enabled
->
-> -.. _iommu1.0: https://github.com/riscv-non-isa/riscv-iommu/releases/down=
-load/v1.0/riscv-iommu.pdf
-> +.. _iommu1.0.0: https://github.com/riscv-non-isa/riscv-iommu/releases/do=
-wnload/v1.0.0/riscv-iommu.pdf
->
->  .. _linux-v8: https://lore.kernel.org/linux-riscv/cover.1718388908.git.t=
-jeznach@rivosinc.com/
->
-> --
-> 2.42.0
->
+> /mjt
 >
 
