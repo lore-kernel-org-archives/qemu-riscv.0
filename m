@@ -4,87 +4,95 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D234CC36001
-	for <qemu-riscv@archiver.kernel.org>; Mon, 24 Mar 2025 04:35:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 377C3C36008
+	for <qemu-riscv@archiver.kernel.org>; Mon, 24 Mar 2025 04:48:55 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1twZWh-0004GU-1F; Mon, 24 Mar 2025 00:35:03 -0400
+	id 1twZjq-0007VY-Uq; Mon, 24 Mar 2025 00:48:39 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1twZL9-0002Rp-4s; Mon, 24 Mar 2025 00:23:18 -0400
-Received: from mail-ua1-x933.google.com ([2607:f8b0:4864:20::933])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1twZL7-0005gf-GU; Mon, 24 Mar 2025 00:23:06 -0400
-Received: by mail-ua1-x933.google.com with SMTP id
- a1e0cc1a2514c-867129fdb0aso3726165241.1; 
- Sun, 23 Mar 2025 21:23:04 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1742790184; x=1743394984; darn=nongnu.org;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=IvSWp42Duoa5RTnudxQAgvBWWalfprx+TOQXJ0kOMlI=;
- b=Qkvy0ufiv08c72mmOuez4DeaLAT8Tar3hj1Kfau+xZYRi0EdFq81+mJUmpunB+mUOA
- +ocYZ/h6oQxm1cPl1UkOL9Pa7qlvuP12cn/oA1+g3UttqY+5LeiQLFxrfMZEtrborsz3
- ZVSvcAi6Zz9R+6LtQyvvDkpm9aIKa9X6F268xEsZuoligUPGM+5snGGBWcagK2buQsfR
- v58vMrH6JpoQL6ubYwUnYsUQxLU1ccR8kDuYIseNfY7jc7RnmBTB+XrAkTRjebwASNL9
- kwkI5vVcST64LpsfROg8XM2QVJBCSpLkN5pnDdeFRAMe0TehvWrvrFT2119amsNmu5Qv
- cxTw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1742790184; x=1743394984;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=IvSWp42Duoa5RTnudxQAgvBWWalfprx+TOQXJ0kOMlI=;
- b=Qzb+ctJgnUciuEJPJCudinQkcytJTNEsT5SLK2Ybryl3E8I8rQD9oE/YPVgMCA99zQ
- ECkceQFa+XyKlxzIwNEANZ/Biaq/b7z03Ak+qNv6nug5P8jcA0/jcH54w4sBCPI6yAz5
- O93Km+WBb0Ba5hW8x6jwScOTtFQMH8BOFDHOJptOebFkA8/hocZW1RMnS0Y3Mg/6tXpB
- SzgnapHLHB5H2dbTa2ZtrxquraJ8JZVoyalqI5qKw15Nb/Gy8HqFbXZn6+YjABrYsT7v
- C79Kmo9+4wBA6C0Z6r9Wi9kFLtuoRumNpF+vYzbkAXgfbWGUiS9aBx2lJrv07ekLNKjT
- ozEw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUVbjnnn9HyOvQWsgx0ZkamD7GoJZ5z9Heks/bueVYXEH6a+7o2o2hE0Adf0WLH2+eQpbiUxNZj/yoO@nongnu.org
-X-Gm-Message-State: AOJu0YxhRM3XszjfbgneXIJ6JlRZlHL/0qsTFPgmLprG9iYXj0EZ4knN
- IHXhkyJUr0IC+dNZesANJ5N32DFNduOW/LigbUFvQRmQ/0bGMy7GYPutMN2GRe8MQWHev9tkjRA
- cKrjKdE2QMAajfs9+PTXQgr3x99U=
-X-Gm-Gg: ASbGncuQoTjZX3J+91F1IFUI8UrfA/6FiKsHgCgs722lqj4Fb+EDzNUmgiZ/SdnUYnI
- SzfdRdrU0kUMdKc6xOs6vGQwp8tu+zbtGYh/IGVIWWGju836Iy49qJ+HAEuexs3z8p7aYrpChaK
- z5LB4zSr+NHmLL8/tLZDbwbQLHQOZ74/39F0vx59tYv/NSy54++NlWPMU=
-X-Google-Smtp-Source: AGHT+IFCIV3Qnjbt7WezaHzy6plCdsFNXti/YYp06mOrrxxg+9gW1DnXuof08tI66tXgDFG+gngIT9oNqgzlhft1R0Y=
-X-Received: by 2002:a05:6102:c92:b0:4bb:9b46:3f6f with SMTP id
- ada2fe7eead31-4c50d47badbmr8189062137.1.1742790183891; Sun, 23 Mar 2025
- 21:23:03 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <mjt@tls.msk.ru>)
+ id 1twZjc-0007T7-7j; Mon, 24 Mar 2025 00:48:24 -0400
+Received: from isrv.corpit.ru ([86.62.121.231])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <mjt@tls.msk.ru>)
+ id 1twZja-0000Et-90; Mon, 24 Mar 2025 00:48:23 -0400
+Received: from tsrv.corpit.ru (tsrv.tls.msk.ru [192.168.177.2])
+ by isrv.corpit.ru (Postfix) with ESMTP id 8FEAC107258;
+ Mon, 24 Mar 2025 07:47:02 +0300 (MSK)
+Received: from [192.168.177.130] (mjt.wg.tls.msk.ru [192.168.177.130])
+ by tsrv.corpit.ru (Postfix) with ESMTP id 5AD581D43E5;
+ Mon, 24 Mar 2025 07:48:10 +0300 (MSK)
+Message-ID: <e9992f04-869c-4485-a7f3-14538a872fa3@tls.msk.ru>
+Date: Mon, 24 Mar 2025 07:48:10 +0300
 MIME-Version: 1.0
-References: <20250322043139.2003479-1-sunilvl@ventanamicro.com>
-In-Reply-To: <20250322043139.2003479-1-sunilvl@ventanamicro.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 24 Mar 2025 14:22:37 +1000
-X-Gm-Features: AQ5f1Jo6lKoQs7ybgi9Ad_VnZH0O_PWMbKYwmT2tVGX4sZbcuFaiKfMu5P7CdUg
-Message-ID: <CAKmqyKOW7LScbMByr5VtQ4js+Li-Q_tUgsEO6KnL_ehY-mxnWQ@mail.gmail.com>
-Subject: Re: [PATCH v2 0/2] RISC-V: ACPI: Add support for RIMT
-To: Sunil V L <sunilvl@ventanamicro.com>
-Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, 
- Alistair Francis <alistair.francis@wdc.com>,
- Palmer Dabbelt <palmer@dabbelt.com>, Weiwei Li <liwei1518@gmail.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>, 
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Andrew Jones <ajones@ventanamicro.com>, 
- Anup Patel <apatel@ventanamicro.com>, Atish Patra <atishp@rivosinc.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::933;
- envelope-from=alistair23@gmail.com; helo=mail-ua1-x933.google.com
-X-Spam_score_int: -17
-X-Spam_score: -1.8
-X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v4 2/2] target/riscv: fix handling of nop for vstart >= vl
+ in some vector instruction
+To: Chao Liu <lc00631@tecorigin.com>, alistair23@gmail.com
+Cc: alistair.francis@wdc.com, bmeng.cn@gmail.com, dbarboza@ventanamicro.com,
+ liwei1518@gmail.com, palmer@dabbelt.com, qemu-devel@nongnu.org,
+ qemu-riscv@nongnu.org, zhiwei_liu@linux.alibaba.com, zqz00548@tecorigin.com,
+ qemu-devel <qemu-devel@nongnu.org>
+References: <cover.1741573286.git.lc00631@tecorigin.com>
+ <b2649f14915150be4c602d63cd3ea4adf47e9d75.1741573286.git.lc00631@tecorigin.com>
+Content-Language: en-US, ru-RU
+From: Michael Tokarev <mjt@tls.msk.ru>
+Autocrypt: addr=mjt@tls.msk.ru; keydata=
+ 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
+In-Reply-To: <b2649f14915150be4c602d63cd3ea4adf47e9d75.1741573286.git.lc00631@tecorigin.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=86.62.121.231; envelope-from=mjt@tls.msk.ru;
+ helo=isrv.corpit.ru
+X-Spam_score_int: -68
+X-Spam_score: -6.9
+X-Spam_bar: ------
+X-Spam_report: (-6.9 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_HI=-5,
+ RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001, RCVD_IN_VALIDITY_SAFE_BLOCKED=0.001,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -100,39 +108,31 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Sat, Mar 22, 2025 at 2:32=E2=80=AFPM Sunil V L <sunilvl@ventanamicro.com=
-> wrote:
->
-> RISC-V IO Mapping Table (RIMT) is a new static ACPI table used to
-> communicate IOMMU and topology information to the OS. Add support for
-> creating this table when the IOMMU is present. The specification is
-> frozen and available at [1].
->
-> [1] - https://github.com/riscv-non-isa/riscv-acpi-rimt/releases/download/=
-v0.99/rimt-spec.pdf
->
-> Changes since v1:
->         1) Used g_autoptr as per Daniel's suggestion.
->         2) Added R-b tag from Daniel.
->
-> Sunil V L (2):
->   hw/riscv/virt: Add the BDF of IOMMU to RISCVVirtState structure
->   hw/riscv/virt-acpi-build: Add support for RIMT
+10.03.2025 05:35, Chao Liu wrote:
+> Recently, when I was writing a RISCV test, I found that when VL is set to 0, the
+> instruction should be nop, but when I tested it, I found that QEMU will treat
+> all elements as tail elements, and in the case of VTA=1, write all elements
+> to 1.
+> 
+> After troubleshooting, it was found that the vext_vx_rm_1 function was called in
+> the vext_vx_rm_2, and then the vext_set_elems_1s function was called to process
+> the tail element, but only VSTART >= vl was checked in the vext_vx_rm_1
+> function, which caused the tail element to still be processed even if it was
+> returned in advance.
+> 
+> So I've made the following change:
+> 
+> Put VSTART_CHECK_EARLY_EXIT(env) at the beginning of the vext_vx_rm_2 function,
+> so that the VSTART register is checked correctly.
+> 
+> Fixes: df4252b2ec ("target/riscv/vector_helpers: do early exit when
+> vstart >= vl")
+> Signed-off-by: Chao Liu <lc00631@tecorigin.com>
+> Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 
-Thanks!
+Is this a qemu-stable material (9.2)?
 
-Applied to riscv-to-apply.next
+Thanks,
 
-Alistair
-
->
->  hw/riscv/virt-acpi-build.c | 215 +++++++++++++++++++++++++++++++++++++
->  hw/riscv/virt.c            |   1 +
->  include/hw/riscv/virt.h    |   1 +
->  3 files changed, 217 insertions(+)
->
-> --
-> 2.43.0
->
->
+/mjt
 
