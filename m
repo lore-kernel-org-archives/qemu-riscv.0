@@ -4,91 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 25405C3600B
-	for <qemu-riscv@archiver.kernel.org>; Tue, 25 Mar 2025 15:50:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 743F4C36005
+	for <qemu-riscv@archiver.kernel.org>; Wed, 26 Mar 2025 03:27:13 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tx6Wn-0003hb-In; Tue, 25 Mar 2025 11:49:21 -0400
+	id 1txHPi-0001U8-V5; Tue, 25 Mar 2025 23:26:46 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tx6Wl-0003gC-6A
- for qemu-riscv@nongnu.org; Tue, 25 Mar 2025 11:49:19 -0400
-Received: from mail-wr1-x435.google.com ([2a00:1450:4864:20::435])
+ (Exim 4.90_1) (envelope-from <jay.chang@sifive.com>)
+ id 1txHPd-0001Te-Pb
+ for qemu-riscv@nongnu.org; Tue, 25 Mar 2025 23:26:44 -0400
+Received: from mail-oo1-xc33.google.com ([2607:f8b0:4864:20::c33])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tx6Wj-0004uz-57
- for qemu-riscv@nongnu.org; Tue, 25 Mar 2025 11:49:18 -0400
-Received: by mail-wr1-x435.google.com with SMTP id
- ffacd0b85a97d-39127512371so3894330f8f.0
- for <qemu-riscv@nongnu.org>; Tue, 25 Mar 2025 08:49:16 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <jay.chang@sifive.com>)
+ id 1txHPb-0006Wy-NQ
+ for qemu-riscv@nongnu.org; Tue, 25 Mar 2025 23:26:41 -0400
+Received: by mail-oo1-xc33.google.com with SMTP id
+ 006d021491bc7-6025007e592so1234450eaf.1
+ for <qemu-riscv@nongnu.org>; Tue, 25 Mar 2025 20:26:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1742917755; x=1743522555; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=cA7Sj8Xho8bkcpSlMx62uWgy6fn6azFGlkA5hKrCWkg=;
- b=E4GVlyKpc8X4Ucw0XN3m46yYm5YvY6Q70fbgMbx8LU+nMHZX7v/4Ji1rrVwRjsEfMG
- iQZdxhuILsTigoEhqPwgzS4bx7RqYwqUHYN70EiGvqHehHoCnRHOywq1MlqR64KxwfW+
- ktBX+43mq+NQeBGydB2Ph95ZARgsyVw/KlSg2DgFhancyd6nYd1WRSCKcQzeqMBin41f
- w67OWyT5+JMu0vjb77WVS0oyMaavxhoniDT6jlg1WG8DsmWruLHg6Xz8kua1CoGhlKrZ
- r7nuy3jnxzuHSlFSe9gsvx6QUsZgRftnIRwmvYJ0mAFstNhco0+CbXo0JumM3Qy2mnNg
- Du6g==
+ d=sifive.com; s=google; t=1742959597; x=1743564397; darn=nongnu.org;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=x9igzxqMJAtjM6FYhJTJXDaNbz0GNfpXcZOZmvCUVGE=;
+ b=Qg+jcUlPYs+fBPP5vdnmi8RxkWHE0RvD2WcQlDUdGZhsDos+GFJlc+GN4I0qQgD137
+ 38PgaHd7GwFL5+RD7qCNKw402+A9VX/94161mqSj6xuGHaT+d0VA5e2flC2atYONcGlx
+ LWUg2FXsk1s30C3N1C+1+SioI2sxuq9Hrg6Jo1rpLBWD7kZ7PSPQAEqmJGhc9yn8POkO
+ XtGhcgkMfSyRG2nbR3PzY0fHreicvCL5KUQD4fdFNrvg3CgsiGNWigcLbqsOt8YMAesq
+ cM/HvT6TI+CLsU7A42uytaEzHdGhWb3UN478rxW6aAD6eLwUiMNSiO/ul+4m3FFB0EHs
+ i8zA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1742917755; x=1743522555;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1742959597; x=1743564397;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=cA7Sj8Xho8bkcpSlMx62uWgy6fn6azFGlkA5hKrCWkg=;
- b=R41adOBT5kZlvFA2lpPWQ/VAe5cXoHYRecmceKLNW2RFQs/1g4zSVgb9CnZFBJUtq4
- Mn9bTwnqQDCaooUwdh2DqqPnyTBDUsP8FgDr/ZghnLbJKCVOXAdLSu/AYw+DfqGHw0vM
- 2Fi8W132Nq4gmJRiE5KqzKRvJiqadfv1GidnOi0hLyge863H/VKhiJWDrzEtAqWQIA37
- iARtSKshSV/bLbnOK30flYs6jnSpDjqCuKKb3o2qm2W5q74nwMcaA/VQ4k/iGOvRufEO
- 5Qz56UvNjP0VMthDlzoaeTA21Xl4ujXaU50oDvcSP8374RibTrQoiMyq4ub8KKX0KCwm
- DY6A==
+ bh=x9igzxqMJAtjM6FYhJTJXDaNbz0GNfpXcZOZmvCUVGE=;
+ b=K8uotov93jqykaROBG3fvvz2vLTCsqVJar5MgjvLNmJqk6TEl2K4dvFf5TKuYCnHuk
+ nGaUEl4esZQOf7C98cwVqNGTBw+Ce3uBJ6OD8tSlXL9MtI56POQFhNqIwBBtIICzjRB0
+ hVrN4oZ06jdpqrQWOh5CVsTEJa5w4B+Q/g3NJvVebWrdtg3Hu5lp8xo8A2xNZ7GgC5A8
+ 0qFtWmGCCJji477TRYP6cifN57UzVYKkIB2yPSFbXUz7UxcSZLAvz1Vm3CcWg1VVOBNK
+ iIc1n+pXpfOTVQPOyAb+LH7qbmKcceoM1FLMBwsi2kVpKX0ANvNqQJPEvwu0ePK9X3bA
+ lq5A==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWnqxpyXaxc5+7+w0gNUroNloKu+jNNC0QdecF6lQUEfH8bf1rcfIk2yj1VAvEojevSjuAHvuhGx307@nongnu.org
-X-Gm-Message-State: AOJu0Yyw3NS2G/EJI92GKnbMEVjw54D/AnYCCOHz32CUyt5tnPae/xkX
- 6ibU+WE9uPn4nqFeBTJSG9TSQ8jsLTyqJ9D6vH3YzGHDOxFZ+L4Rez5lgXWCBDI=
-X-Gm-Gg: ASbGncvDyiJVYbTKD8JBOc/YvCDjRclVbumZ1XKeHib6GMtUXkqqc9KgGqL7twBWvWY
- +s1iDMvoqvS0RgpZZYb5dMEy6ERhj5/5db2e1/Sqj6defnn/lBQzddLRRL2y6H3GVr/6cKHEUgt
- sTV/ux53ZdkW+ayB1YVX9XdYnNczJNXwAYdLkkh7yXfwemelZ6B/UZfkd+rP7wrfao8Fsk8vhKt
- oYGOZjVYNvgfqp6qhdA39+xp+rPNBf7weQB0GnljL1Vm6mo8leN4T4sa9F9Ym4xvd+TgcYwsG/K
- MVkM0dxBBQpV5Kn29xzIHqAn0tD1zWV5E29eB5XstzRPRjxToicIcQNLWsrzxIyeKWsQo5TLFrj
- Fjxpmc+a4qqp2TSKItjM=
-X-Google-Smtp-Source: AGHT+IHesG14s1pmYGWVFpEUYG67zdjD8E5KGA8x5ZCYFeeUv3kRpxvWq6VMVqnAC83L4mo217cSzQ==
-X-Received: by 2002:a5d:59a2:0:b0:390:e535:8770 with SMTP id
- ffacd0b85a97d-3997f8fed26mr15880271f8f.14.1742917755234; 
- Tue, 25 Mar 2025 08:49:15 -0700 (PDT)
-Received: from localhost.localdomain (88-187-86-199.subs.proxad.net.
- [88.187.86.199]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-43d43f33237sm205735575e9.4.2025.03.25.08.49.14
- (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Tue, 25 Mar 2025 08:49:14 -0700 (PDT)
-From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-To: qemu-devel@nongnu.org
-Cc: Paolo Bonzini <pbonzini@redhat.com>, Zhao Liu <zhao1.liu@intel.com>,
- Alistair Francis <alistair.francis@wdc.com>, qemu-riscv@nongnu.org,
- Anton Johansson <anjo@rev.ng>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, Weiwei Li <liwei1518@gmail.com>,
- Pierrick Bouvier <pierrick.bouvier@linaro.org>,
- =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
- =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-Subject: [PATCH-for-10.1 v2] target/riscv/gdbstub: Replace ldtul_p() ->
- ldn_p(sizeof(target_ulong))
-Date: Tue, 25 Mar 2025 16:49:13 +0100
-Message-ID: <20250325154913.95283-1-philmd@linaro.org>
-X-Mailer: git-send-email 2.47.1
+ AJvYcCWmWKsSqOT1G62Hg6p6O/sDvrPDKflVLqIhrVDgMiw+9bXChWYwuiNtjYR8d1+kqy4tUUXT6C3JkgNE@nongnu.org
+X-Gm-Message-State: AOJu0YwgFB7bm8abum+/yHhOiOuqSbs50eSgA4N+vIm9Qm/VKAjo9052
+ 80azX0c7+bqftoGN4KkTN/LwNSVfkPX2Yc0WnQ4E/4vzbfEbvZQSTAktMjsxzgm7ORdNsa3E1WW
+ 9cY3grhlrOvhP0luyv8RlscVD0uYJ3pSziKqqCQ==
+X-Gm-Gg: ASbGncvKFPlqc3m0JGdpa9n90/IkjRY78SRzDCZLcmtugKyhElAcdcVtFLb9XC4it2k
+ dpYRfDsoy6CWi8EkoAJzzfZ1EbJkfmiOtK+xA4eb+Prn2TyuhXGZsZL1f/MU4Gy2hTXBRVU9wiB
+ Nc4VyTsfs0kfCCZTNAXchCJ7VkIHic
+X-Google-Smtp-Source: AGHT+IHQSJCXy9YClLaelpDEvv5A7PbQ5+2sHFeL4x6XGXLFVVxsfTj3/PH0sh3YItzWVrv0wQwEhr9UDOM13EWwVNQ=
+X-Received: by 2002:a05:6871:5812:b0:296:5928:7a42 with SMTP id
+ 586e51a60fabf-2c7802e74ffmr11507336fac.22.1742959596616; Tue, 25 Mar 2025
+ 20:26:36 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::435;
- envelope-from=philmd@linaro.org; helo=mail-wr1-x435.google.com
+References: <20250318070136.38898-1-jay.chang@sifive.com>
+ <20250318070136.38898-2-jay.chang@sifive.com>
+ <19189ed9-0459-4c7d-902a-fcacb2595f07@ventanamicro.com>
+In-Reply-To: <19189ed9-0459-4c7d-902a-fcacb2595f07@ventanamicro.com>
+From: Jay Chang <jay.chang@sifive.com>
+Date: Wed, 26 Mar 2025 11:26:24 +0800
+X-Gm-Features: AQ5f1JptqyggyUBJoa-VxCaY70EpdnUlDe8C17elF6v7ftfChfxG4ghcA1QpZpI
+Message-ID: <CACNNAjPrStVBHRFWj_+O68KqS6Mz_8brU5N2R39tsKeWZmPBKg@mail.gmail.com>
+Subject: Re: [PATCH 2/2] target/riscv: Restrict midelegh access to S-mode harts
+To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, 
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Weiwei Li <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
+ Frank Chang <frank.chang@sifive.com>
+Content-Type: multipart/alternative; boundary="0000000000009d5a9d063136671c"
+Received-SPF: pass client-ip=2607:f8b0:4864:20::c33;
+ envelope-from=jay.chang@sifive.com; helo=mail-oo1-xc33.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, HTML_MESSAGE=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -106,48 +99,222 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Replace the few ldtul_p() calls by a generic ldn_p() ones.
-No logical change.
+--0000000000009d5a9d063136671c
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
----
- target/riscv/gdbstub.c | 8 +++++---
- 1 file changed, 5 insertions(+), 3 deletions(-)
+Thanks for the feedback!
 
-diff --git a/target/riscv/gdbstub.c b/target/riscv/gdbstub.c
-index 18e88f416af..c1dc54e47d6 100644
---- a/target/riscv/gdbstub.c
-+++ b/target/riscv/gdbstub.c
-@@ -193,7 +193,7 @@ static int riscv_gdb_set_csr(CPUState *cs, uint8_t *mem_buf, int n)
-     CPURISCVState *env = &cpu->env;
- 
-     if (n < CSR_TABLE_SIZE) {
--        target_ulong val = ldtul_p(mem_buf);
-+        target_ulong val = ldn_p(mem_buf, sizeof(val));
-         int result;
- 
-         result = riscv_csrrw_debug(env, n, NULL, val, -1);
-@@ -229,15 +229,17 @@ static int riscv_gdb_set_virtual(CPUState *cs, uint8_t *mem_buf, int n)
-         RISCVCPU *cpu = RISCV_CPU(cs);
-         CPURISCVState *env = &cpu->env;
- 
--        target_ulong new_priv = ldtul_p(mem_buf) & 0x3;
-+        target_ulong new_priv;
-+        size_t regsize = sizeof(new_priv);
-         bool new_virt = 0;
- 
-+        new_priv = ldn_p(mem_buf, regsize) & 0x3;
-         if (new_priv == PRV_RESERVED) {
-             new_priv = PRV_S;
-         }
- 
-         if (new_priv != PRV_M) {
--            new_virt = (ldtul_p(mem_buf) & BIT(2)) >> 2;
-+            new_virt = (ldn_p(mem_buf, regsize) & BIT(2)) >> 2;
-         }
- 
-         if (riscv_has_ext(env, RVH) && new_virt != env->virt_enabled) {
--- 
-2.47.1
+You're right =E2=80=94 I missed initializing csr_priv.
+In this case, we only want to check for privilege M-mode CSRs along with
+the smaia condition.
+I=E2=80=99ll fix it by adding:
 
+"int csr_priv =3D get_field(csrno, 0x300);"
+
+Jay
+
+On Wed, Mar 19, 2025 at 8:59=E2=80=AFPM Daniel Henrique Barboza <
+dbarboza@ventanamicro.com> wrote:
+
+>
+>
+> On 3/18/25 4:01 AM, Jay Chang wrote:
+> > RISC-V AIA Spec states:
+> > "For a machine-level environment, extension Smaia encompasses all added
+> > CSRs and all modifications to interrupt response behavior that the AIA
+> > specifies for a hart, over all privilege levels. For a supervisor-level
+> > environment, extension Ssaia is essentially the same as Smaia except
+> > excluding the machine-level CSRs and behavior not directly visible to
+> > supervisor level."
+> >
+> > Since midelegh is an AIA machine-mode CSR, add Smaia extension check in
+> > aia_smode32 predicate.
+> >
+> > Reviewed-by: Frank Chang <frank.chang@sifive.com>
+> > Signed-off-by: Jay Chang <jay.chang@sifive.com>
+> > ---
+> >   target/riscv/csr.c | 7 +++++--
+> >   1 file changed, 5 insertions(+), 2 deletions(-)
+> >
+> > diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+> > index 975d6e307f..c3dd8e6cda 100644
+> > --- a/target/riscv/csr.c
+> > +++ b/target/riscv/csr.c
+> > @@ -372,8 +372,11 @@ static RISCVException aia_smode(CPURISCVState *env=
+,
+> int csrno)
+> >   static RISCVException aia_smode32(CPURISCVState *env, int csrno)
+> >   {
+> >       int ret;
+> > +    int csr_priv;
+> >
+> > -    if (!riscv_cpu_cfg(env)->ext_ssaia) {
+> > +    if (csr_priv =3D=3D PRV_M && !riscv_cpu_cfg(env)->ext_smaia) {
+> > +        return RISCV_EXCP_ILLEGAL_INST;
+> > +    } else if (!riscv_cpu_cfg(env)->ext_ssaia) {
+> >           return RISCV_EXCP_ILLEGAL_INST;
+> >       }
+>
+> I believe this won't compile:
+>
+> ../target/riscv/csr.c: In function =E2=80=98aia_smode32=E2=80=99:
+> ../target/riscv/csr.c:377:8: error: =E2=80=98csr_priv=E2=80=99 is used un=
+initialized
+> [-Werror=3Duninitialized]
+>    377 |     if (csr_priv =3D=3D PRV_M && !riscv_cpu_cfg(env)->ext_smaia)=
+ {
+>        |        ^
+> ../target/riscv/csr.c:375:9: note: =E2=80=98csr_priv=E2=80=99 was declare=
+d here
+>    375 |     int csr_priv;
+>        |         ^~~~~~~~
+> cc1: all warnings being treated as errors
+> [2171/2988] Compiling C object
+> libqemu-riscv64-softmmu.a.p/target_riscv_translate.c.o
+> ninja: build stopped: subcommand failed.
+>
+>
+> Perhaps the idea here is doing a "int csr_priv =3D env->priv;", but in th=
+at
+> case you
+> might as well just use env->priv directly. Thanks,
+>
+>
+> Daniel
+>
+> >
+> > @@ -5832,7 +5835,7 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] =3D =
+{
+> >       [CSR_MVIP]     =3D { "mvip",     aia_any, NULL, NULL, rmw_mvip   =
+ },
+> >
+> >       /* Machine-Level High-Half CSRs (AIA) */
+> > -    [CSR_MIDELEGH] =3D { "midelegh", aia_any32, NULL, NULL, rmw_midele=
+gh
+> },
+> > +    [CSR_MIDELEGH] =3D { "midelegh", aia_smode32, NULL, NULL,
+> rmw_midelegh },
+> >       [CSR_MIEH]     =3D { "mieh",     aia_any32, NULL, NULL, rmw_mieh
+>  },
+> >       [CSR_MVIENH]   =3D { "mvienh",   aia_any32, NULL, NULL, rmw_mvien=
+h
+>  },
+> >       [CSR_MVIPH]    =3D { "mviph",    aia_any32, NULL, NULL, rmw_mviph
+> },
+>
+>
+
+--0000000000009d5a9d063136671c
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><p class=3D"gmail-">Thanks for the feedback!</p>
+<p class=3D"gmail-">You&#39;re right =E2=80=94 I missed initializing <code>=
+csr_priv</code>.<br>
+In this case, we only want to check for privilege M-mode CSRs along with th=
+e <code>smaia</code> condition.<br>
+I=E2=80=99ll fix it by adding:</p><p class=3D"gmail-">&quot;int csr_priv =
+=3D get_field(csrno, 0x300);&quot;<br><br>Jay</p></div><br><div class=3D"gm=
+ail_quote gmail_quote_container"><div dir=3D"ltr" class=3D"gmail_attr">On W=
+ed, Mar 19, 2025 at 8:59=E2=80=AFPM Daniel Henrique Barboza &lt;<a href=3D"=
+mailto:dbarboza@ventanamicro.com">dbarboza@ventanamicro.com</a>&gt; wrote:<=
+br></div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8e=
+x;border-left:1px solid rgb(204,204,204);padding-left:1ex"><br>
+<br>
+On 3/18/25 4:01 AM, Jay Chang wrote:<br>
+&gt; RISC-V AIA Spec states:<br>
+&gt; &quot;For a machine-level environment, extension Smaia encompasses all=
+ added<br>
+&gt; CSRs and all modifications to interrupt response behavior that the AIA=
+<br>
+&gt; specifies for a hart, over all privilege levels. For a supervisor-leve=
+l<br>
+&gt; environment, extension Ssaia is essentially the same as Smaia except<b=
+r>
+&gt; excluding the machine-level CSRs and behavior not directly visible to<=
+br>
+&gt; supervisor level.&quot;<br>
+&gt; <br>
+&gt; Since midelegh is an AIA machine-mode CSR, add Smaia extension check i=
+n<br>
+&gt; aia_smode32 predicate.<br>
+&gt; <br>
+&gt; Reviewed-by: Frank Chang &lt;<a href=3D"mailto:frank.chang@sifive.com"=
+ target=3D"_blank">frank.chang@sifive.com</a>&gt;<br>
+&gt; Signed-off-by: Jay Chang &lt;<a href=3D"mailto:jay.chang@sifive.com" t=
+arget=3D"_blank">jay.chang@sifive.com</a>&gt;<br>
+&gt; ---<br>
+&gt;=C2=A0 =C2=A0target/riscv/csr.c | 7 +++++--<br>
+&gt;=C2=A0 =C2=A01 file changed, 5 insertions(+), 2 deletions(-)<br>
+&gt; <br>
+&gt; diff --git a/target/riscv/csr.c b/target/riscv/csr.c<br>
+&gt; index 975d6e307f..c3dd8e6cda 100644<br>
+&gt; --- a/target/riscv/csr.c<br>
+&gt; +++ b/target/riscv/csr.c<br>
+&gt; @@ -372,8 +372,11 @@ static RISCVException aia_smode(CPURISCVState *en=
+v, int csrno)<br>
+&gt;=C2=A0 =C2=A0static RISCVException aia_smode32(CPURISCVState *env, int =
+csrno)<br>
+&gt;=C2=A0 =C2=A0{<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0int ret;<br>
+&gt; +=C2=A0 =C2=A0 int csr_priv;<br>
+&gt;=C2=A0 =C2=A0<br>
+&gt; -=C2=A0 =C2=A0 if (!riscv_cpu_cfg(env)-&gt;ext_ssaia) {<br>
+&gt; +=C2=A0 =C2=A0 if (csr_priv =3D=3D PRV_M &amp;&amp; !riscv_cpu_cfg(env=
+)-&gt;ext_smaia) {<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 return RISCV_EXCP_ILLEGAL_INST;<br>
+&gt; +=C2=A0 =C2=A0 } else if (!riscv_cpu_cfg(env)-&gt;ext_ssaia) {<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0return RISCV_EXCP_ILLEGAL_INST=
+;<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0}<br>
+<br>
+I believe this won&#39;t compile:<br>
+<br>
+../target/riscv/csr.c: In function =E2=80=98aia_smode32=E2=80=99:<br>
+../target/riscv/csr.c:377:8: error: =E2=80=98csr_priv=E2=80=99 is used unin=
+itialized [-Werror=3Duninitialized]<br>
+=C2=A0 =C2=A0377 |=C2=A0 =C2=A0 =C2=A0if (csr_priv =3D=3D PRV_M &amp;&amp; =
+!riscv_cpu_cfg(env)-&gt;ext_smaia) {<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0|=C2=A0 =C2=A0 =C2=A0 =C2=A0 ^<br>
+../target/riscv/csr.c:375:9: note: =E2=80=98csr_priv=E2=80=99 was declared =
+here<br>
+=C2=A0 =C2=A0375 |=C2=A0 =C2=A0 =C2=A0int csr_priv;<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0|=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0^~~~~~~~<br>
+cc1: all warnings being treated as errors<br>
+[2171/2988] Compiling C object libqemu-riscv64-softmmu.a.p/target_riscv_tra=
+nslate.c.o<br>
+ninja: build stopped: subcommand failed.<br>
+<br>
+<br>
+Perhaps the idea here is doing a &quot;int csr_priv =3D env-&gt;priv;&quot;=
+, but in that case you<br>
+might as well just use env-&gt;priv directly. Thanks,<br>
+<br>
+<br>
+Daniel<br>
+<br>
+&gt;=C2=A0 =C2=A0<br>
+&gt; @@ -5832,7 +5835,7 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] =3D=
+ {<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0[CSR_MVIP]=C2=A0 =C2=A0 =C2=A0=3D { &quot;mv=
+ip&quot;,=C2=A0 =C2=A0 =C2=A0aia_any, NULL, NULL, rmw_mvip=C2=A0 =C2=A0 },<=
+br>
+&gt;=C2=A0 =C2=A0<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0/* Machine-Level High-Half CSRs (AIA) */<br>
+&gt; -=C2=A0 =C2=A0 [CSR_MIDELEGH] =3D { &quot;midelegh&quot;, aia_any32, N=
+ULL, NULL, rmw_midelegh },<br>
+&gt; +=C2=A0 =C2=A0 [CSR_MIDELEGH] =3D { &quot;midelegh&quot;, aia_smode32,=
+ NULL, NULL, rmw_midelegh },<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0[CSR_MIEH]=C2=A0 =C2=A0 =C2=A0=3D { &quot;mi=
+eh&quot;,=C2=A0 =C2=A0 =C2=A0aia_any32, NULL, NULL, rmw_mieh=C2=A0 =C2=A0 =
+=C2=A0},<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0[CSR_MVIENH]=C2=A0 =C2=A0=3D { &quot;mvienh&=
+quot;,=C2=A0 =C2=A0aia_any32, NULL, NULL, rmw_mvienh=C2=A0 =C2=A0},<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0[CSR_MVIPH]=C2=A0 =C2=A0 =3D { &quot;mviph&q=
+uot;,=C2=A0 =C2=A0 aia_any32, NULL, NULL, rmw_mviph=C2=A0 =C2=A0 },<br>
+<br>
+</blockquote></div>
+
+--0000000000009d5a9d063136671c--
 
