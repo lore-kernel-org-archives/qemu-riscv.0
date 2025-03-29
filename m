@@ -4,68 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 72946C36008
-	for <qemu-riscv@archiver.kernel.org>; Sat, 29 Mar 2025 14:47:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D113EC3600C
+	for <qemu-riscv@archiver.kernel.org>; Sat, 29 Mar 2025 14:48:12 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tyXQz-00081V-MX; Sat, 29 Mar 2025 10:45:17 -0400
+	id 1tyXRG-0008Ea-IY; Sat, 29 Mar 2025 10:45:34 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
- id 1tyXQr-0007uw-15
- for qemu-riscv@nongnu.org; Sat, 29 Mar 2025 10:45:12 -0400
-Received: from mail-pj1-x1033.google.com ([2607:f8b0:4864:20::1033])
+ id 1tyXRB-0008BG-UH
+ for qemu-riscv@nongnu.org; Sat, 29 Mar 2025 10:45:29 -0400
+Received: from mail-pj1-x102c.google.com ([2607:f8b0:4864:20::102c])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
- id 1tyXQo-0004It-5u
- for qemu-riscv@nongnu.org; Sat, 29 Mar 2025 10:45:08 -0400
-Received: by mail-pj1-x1033.google.com with SMTP id
- 98e67ed59e1d1-2ff6e91cff5so5483710a91.2
- for <qemu-riscv@nongnu.org>; Sat, 29 Mar 2025 07:45:04 -0700 (PDT)
+ id 1tyXR9-0004TZ-Tg
+ for qemu-riscv@nongnu.org; Sat, 29 Mar 2025 10:45:29 -0400
+Received: by mail-pj1-x102c.google.com with SMTP id
+ 98e67ed59e1d1-301e05b90caso5531108a91.2
+ for <qemu-riscv@nongnu.org>; Sat, 29 Mar 2025 07:45:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1743259503; x=1743864303; darn=nongnu.org;
+ d=sifive.com; s=google; t=1743259526; x=1743864326; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=7yiRTyvv8HDyh7DkIPVVEzeV4GFr++tl7EjdhkATDMY=;
- b=bSnQdckHBZ5kAITd14vRQdKRs2MVVDE35j/eOsLba6/OHYM23m3YZDwGujwwMrVqr2
- R0S5qVEgCW0Z/8zkoCVkeMSSW+4Iq0n1Cn321alJBBZVmYH/pDxfa7hgxPawqWWXaYyZ
- SaLCgjpjvhTBLpoHam8dWisVr4cj9vhsV4f/1pxvr5OtfPdnan5Svki1VfBDffgTYjvU
- 0ZoAyzRQ3zriGSM39hVzsBJ6oUwFMtneV1Ef3ahufOXj/GKxyCweFEkcPwkJTb9t+22Q
- my6GCJatB546qYk9qhs8J3JyFNa89jN72SBS5bYv82QqEh7hVR2mOUBfp5+Az62P7dxs
- +Egg==
+ bh=Lbs71pKdlN7MyNJTt4MNBTzM7Sw2d+gd3ctimJRhzq4=;
+ b=agSdIGM4/aulZ2qmGYc2/HaOCFUPsdr3bSlxZzW6coqtt2xDeSsySRh5+ueOnHDxxX
+ KAy5OEljgLDwDaRRadPfmIwz9dzOMaAT2Mu6xo+yPUK3mPmR+EmIxZdszmiMbx7kgepj
+ 6LzYUChkwRoycTTRa4wdOycKZCxBHdO44TMRuwgkiEjP/oHjQto0VRvuewHOsIrRqid3
+ VdVAUGBQ/urcQvnTFjhRFRDuOSRciAj3TUboU1rEz6t7X0euYbV7ldY5Z6C9TizqlHlu
+ +CGZW0xMVWnoCu2hFMiqGUmopeRyCaeI8SwZJ4h9O/SqZJc8VvRSEQfynYu768MegnnN
+ Lx7A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743259503; x=1743864303;
+ d=1e100.net; s=20230601; t=1743259526; x=1743864326;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=7yiRTyvv8HDyh7DkIPVVEzeV4GFr++tl7EjdhkATDMY=;
- b=SHbqUzJ1bOAukfY2xzAyXlPbZ2L9/4qfQVcXJgn0MwoW9GC6cxtsk/YxbdAwIallzg
- zptWnovp++/YDEINb3+0WfDaaEa8r7458sc+OEnkYG7WWIMCKDENDDcA4F+Kc3Yn1t7u
- 68gbrCvECWlaI39A0NC3K9LvQly23viCygPaT4cOkvyZ1CD4QzWXgVTTvQu+IJCkSNZp
- Q24+FXRae2O34SQ9oyO3p64v+EBIVogcGmtqmSFFONL1wpYP4uViLn4Ao6f9nECUl8eU
- k205qneWzUAZIGElyf9HXbTqL0wyYJ1Js3vz+CnON9JTDeOyNuqVzrVLlvcCSk/NIMdj
- 9KoA==
+ bh=Lbs71pKdlN7MyNJTt4MNBTzM7Sw2d+gd3ctimJRhzq4=;
+ b=Dj+QNk76m+dI9dq5wbe8y7udvJ9d5TJ5+CqjPbCweTcWxx5dbjql/SSMynex3b4tbx
+ 0yZNQpDBic0gUAz5z2dZ0F2fqGuO06OyrcnC4orbo8hAOvJKyfE6pnM1PjwlSGOGN76/
+ l91a7moFD4SQJKyBQZiaLve8/fjjjIPNE+UDiGwy/f2cTXthqqqkZovfg12ZqNCZZ5h9
+ hqHSiY85XQ9vbTPIcFLB4HaxQk/gqjVxKV7dbfO+wAqBy0ZL8WtzSe0r+wq3kRrYQiSq
+ QJlzpI3yYRnpa/iehrySUhnR0Ee+zbRVi199VDNzN+RONXAWrbQewBuTPI6Np3OCam6C
+ JCqQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWCF7LO01iL4avQmzuhvgP99bwKqsAL/OEo68sRbk3DU25rDw9vR9NcJzCZXAxAK6zEir4x/r2o9l3Y@nongnu.org
-X-Gm-Message-State: AOJu0Yyxth1Ua/a9OffRKao1puiuLVjuTNAFIihpXnX4zx45nIfsTCeG
- PHeguGHT3mo7wT7JFWCL2U8Erjj91lQg4pYhcCchwUPdcWFwQ7BaQHD1aOcpMJg=
-X-Gm-Gg: ASbGnctux+TZm/T0CrvRwSxxDBb90PIiWh1f7tjRKHiFhfpAIHsjwSv9r77mw2yDFoi
- nRH6qQu48Qz8kQHqlPwtuGqKPTASBRpuGP0gZJ/gPLGucS7D1oS1STYVSIhByZIhEliwsurIfdP
- 6lAmvTCwep8MVUnyRTZmYJADht8WeBhRBR1bRmH3tG2xUywD/iWpV0XD59s4FUmAsWc7xc6qkcH
- 06+jr5K1xY99kXm7G6W1RTbNU+2F5nKjcSwoXMzRFmWjzZ1qCBgEzT7oozIsYSEnqjEiBtj3jxz
- GzMDYva11KLDk96gzL+1nru86aCXGq7jgA2yR9LYkoAXZl7buZxCskih7Xki/lGFwsx94cE6P2D
- utwARmWqqgi+dIw==
-X-Google-Smtp-Source: AGHT+IGw+c4PFPemW8vVY9tNVQnFmnXdaN4ec9dlSXyp4/t2qx3uZ+7KYOOODn1UXd3GMF9zkxbdxw==
-X-Received: by 2002:a17:90b:2744:b0:2f1:2fa5:1924 with SMTP id
- 98e67ed59e1d1-30532147029mr3653314a91.26.1743259503031; 
- Sat, 29 Mar 2025 07:45:03 -0700 (PDT)
+ AJvYcCW6+BzD4iwByTYMam9CEvE++EvnwCqSg3ZSllM9VvKIyRRD8Rb4mbuOm1StaN/fNfn8SSi4NMskrObZ@nongnu.org
+X-Gm-Message-State: AOJu0YxeQfd5XRSa40HAeg/n+pmdfwFRFvz/16QAZ19sPzHcnYyuGthk
+ Dd2DsW7dnUQYdboimOn1TlPWpkTlLs0TBxPVA16XiHpefCBZ9QgnJJTtx/Cw0y4=
+X-Gm-Gg: ASbGnctxYDKkn7yWpTvFDw+aLo/Vi7kL8Xg166aQl8lo/IeyzU991WU41e4SbQqCQQt
+ hiAgspAPEU1CMHzTkvX5cV0vFtfN5ovap8DTcOhXYfnOBG0B53DD7EBKuCX9lpM48U7k4WnvHun
+ EwQbWjfx6msKrecYNkGG31Hiv0I7sURF88U4HO22bmGQ3tKfkRlWIij3/xsmXBvpb3EFUvhA48i
+ HlcM6x2BRYiS7qXw721AznyhTH1O7YbG/syyJ7y1CrxgKc8uju549sMZ/3fd+00wRaOqi44diPJ
+ MTDOWDYK1FWBvoTIAbU9EKJP5KTvM8jOWfxGRhjtLabyaA01PxVziVVNkuLUockQlPpuEI86M69
+ 6hgywReHWOZND1A==
+X-Google-Smtp-Source: AGHT+IGTo1qr2paOOCah2W0K6rQkW1qzZxLtzsmPAvfcasaosEiaoqCEWb1Rszoagg2KKBVjo+pAAg==
+X-Received: by 2002:a17:90b:5450:b0:2ee:8ea0:6b9c with SMTP id
+ 98e67ed59e1d1-30531fa13bbmr6268851a91.12.1743259526376; 
+ Sat, 29 Mar 2025 07:45:26 -0700 (PDT)
 Received: from duncan.localdomain (114-35-142-126.hinet-ip.hinet.net.
  [114.35.142.126]) by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-3039f6b6bcbsm6737196a91.45.2025.03.29.07.45.01
+ 98e67ed59e1d1-3039f6b6bcbsm6737196a91.45.2025.03.29.07.45.24
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 29 Mar 2025 07:45:02 -0700 (PDT)
+ Sat, 29 Mar 2025 07:45:26 -0700 (PDT)
 From: Max Chou <max.chou@sifive.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
@@ -75,17 +75,17 @@ Cc: Palmer Dabbelt <palmer@dabbelt.com>,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
  Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, antonb@tenstorrent.com,
  Max Chou <max.chou@sifive.com>
-Subject: [PATCH v2 03/12] target/riscv: Add vext_check_input_eew to check
- mismatched input EEWs encoding constraint
-Date: Sat, 29 Mar 2025 22:44:37 +0800
-Message-ID: <20250329144446.2619306-4-max.chou@sifive.com>
+Subject: [PATCH v2 11/12] target/riscv: rvv: Apply vext_check_input_eew to
+ vector indexed load/store instructions
+Date: Sat, 29 Mar 2025 22:44:45 +0800
+Message-ID: <20250329144446.2619306-12-max.chou@sifive.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250329144446.2619306-1-max.chou@sifive.com>
 References: <20250329144446.2619306-1-max.chou@sifive.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1033;
- envelope-from=max.chou@sifive.com; helo=mail-pj1-x1033.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::102c;
+ envelope-from=max.chou@sifive.com; helo=mail-pj1-x102c.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -108,54 +108,39 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-According to the v spec, a vector register cannot be used to provide source
-operands with more than one EEW for a single instruction.
+Handle the overlap of source registers with different EEWs.
 
+Co-authored-by: Anton Blanchard <antonb@tenstorrent.com>
+Co-authored-by: Max Chou <max.chou@sifive.com>
 Signed-off-by: Max Chou <max.chou@sifive.com>
 ---
- target/riscv/insn_trans/trans_rvv.c.inc | 29 +++++++++++++++++++++++++
- 1 file changed, 29 insertions(+)
+ target/riscv/insn_trans/trans_rvv.c.inc | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
 
 diff --git a/target/riscv/insn_trans/trans_rvv.c.inc b/target/riscv/insn_trans/trans_rvv.c.inc
-index e630f8661e1..70c19c49ae4 100644
+index d4d1ad055fa..3b36464176a 100644
 --- a/target/riscv/insn_trans/trans_rvv.c.inc
 +++ b/target/riscv/insn_trans/trans_rvv.c.inc
-@@ -379,6 +379,35 @@ static bool vext_check_ld_index(DisasContext *s, int vd, int vs2,
-     return ret;
+@@ -1044,7 +1044,8 @@ static bool ld_index_check(DisasContext *s, arg_rnfvm* a, uint8_t eew)
+ {
+     return require_rvv(s) &&
+            vext_check_isa_ill(s) &&
+-           vext_check_ld_index(s, a->rd, a->rs2, a->nf, a->vm, eew);
++           vext_check_ld_index(s, a->rd, a->rs2, a->nf, a->vm, eew) &&
++           vext_check_input_eew(s, -1, 0, a->rs2, eew, a->vm);
  }
  
-+/*
-+ * Check whether a vector register is used to provide source operands with
-+ * more than one EEW for the vector instruction.
-+ * Returns true if the instruction has valid encoding
-+ * Returns false if encoding violates the mismatched input EEWs constraint
-+ */
-+static bool vext_check_input_eew(DisasContext *s, int vs1, uint8_t eew_vs1,
-+                                 int vs2, uint8_t eew_vs2, int vm)
-+{
-+    bool is_valid = true;
-+    int8_t emul_vs1 = eew_vs1 - s->sew + s->lmul;
-+    int8_t emul_vs2 = eew_vs2 - s->sew + s->lmul;
-+
-+    /* When vm is 0, vs1 & vs2(EEW!=1) group can't overlap v0 (EEW=1) */
-+    if ((vs1 != -1 && !require_vm(vm, vs1)) ||
-+        (vs2 != -1 && !require_vm(vm, vs2))) {
-+        is_valid = false;
-+    }
-+
-+    /* When eew_vs1 != eew_vs2, check whether vs1 and vs2 are overlapped */
-+    if ((vs1 != -1 && vs2 != -1) && (eew_vs1 != eew_vs2) &&
-+        is_overlapped(vs1, 1 << MAX(emul_vs1, 0),
-+                      vs2, 1 << MAX(emul_vs2, 0))) {
-+        is_valid = false;
-+    }
-+
-+    return is_valid;
-+}
-+
- static bool vext_check_ss(DisasContext *s, int vd, int vs, int vm)
+ GEN_VEXT_TRANS(vlxei8_v,  MO_8,  rnfvm, ld_index_op, ld_index_check)
+@@ -1096,7 +1097,8 @@ static bool st_index_check(DisasContext *s, arg_rnfvm* a, uint8_t eew)
  {
-     return require_vm(vm, vd) &&
+     return require_rvv(s) &&
+            vext_check_isa_ill(s) &&
+-           vext_check_st_index(s, a->rd, a->rs2, a->nf, eew);
++           vext_check_st_index(s, a->rd, a->rs2, a->nf, eew) &&
++           vext_check_input_eew(s, a->rd, s->sew, a->rs2, eew, a->vm);
+ }
+ 
+ GEN_VEXT_TRANS(vsxei8_v,  MO_8,  rnfvm, st_index_op, st_index_check)
 -- 
 2.43.0
 
