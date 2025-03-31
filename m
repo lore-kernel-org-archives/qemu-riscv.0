@@ -4,100 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 83CD9C28B20
-	for <qemu-riscv@archiver.kernel.org>; Mon, 31 Mar 2025 01:39:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 15A9FC36011
+	for <qemu-riscv@archiver.kernel.org>; Mon, 31 Mar 2025 09:44:50 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tz446-0005zd-LZ; Sun, 30 Mar 2025 21:35:50 -0400
+	id 1tzBhB-00089S-QU; Mon, 31 Mar 2025 05:44:41 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dongli.zhang@oracle.com>)
- id 1tz43w-0005qz-Hv; Sun, 30 Mar 2025 21:35:40 -0400
-Received: from mx0b-00069f02.pphosted.com ([205.220.177.32])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dongli.zhang@oracle.com>)
- id 1tz43u-0005EP-OJ; Sun, 30 Mar 2025 21:35:40 -0400
-Received: from pps.filterd (m0246631.ppops.net [127.0.0.1])
- by mx0b-00069f02.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 52UNrDD9009451;
- Mon, 31 Mar 2025 01:34:57 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com; h=cc
- :content-transfer-encoding:date:from:in-reply-to:message-id
- :mime-version:references:subject:to; s=corp-2023-11-20; bh=F+QHF
- Jtjx+28JGhYXKrFILOpFgt9z1RkF42hhyzkpYU=; b=iOCveRkn3JgJJcxxBqOwN
- 6EOFPVD9um8rZLULSgYSwLBtJjfdueLboxG5hGWxqmwV778CW1bRR4DPDzj8azxC
- 2w/XI34639Nr1tefliNRm+2rFOLvB/6jwLsHtnO7Wa9NjR/ZzBj7RWBgGnpAEzwA
- oGuuNyOp2BSKfDamVTan05VN+eNMGM/EDPiV8sroQmk+XXq61mqtcj7pdArRvrB7
- WVaA09ajWTSC6aK1s7D7viz4LcVIYVnUmBkVH8KY6gnVjdyvpQgjzxl1c8eTA3UE
- VH7SKbhxX8OG7YNMi6XxcN3seRMYmpSD+DbTcxqEDXXVYVhyttq6fsy5U75xk94F
- g==
-Received: from phxpaimrmta03.imrmtpd1.prodappphxaev1.oraclevcn.com
- (phxpaimrmta03.appoci.oracle.com [138.1.37.129])
- by mx0b-00069f02.pphosted.com (PPS) with ESMTPS id 45p7n22fhb-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Mon, 31 Mar 2025 01:34:57 +0000 (GMT)
-Received: from pps.filterd
- (phxpaimrmta03.imrmtpd1.prodappphxaev1.oraclevcn.com [127.0.0.1])
- by phxpaimrmta03.imrmtpd1.prodappphxaev1.oraclevcn.com (8.18.1.2/8.18.1.2)
- with ESMTP id 52V0ELda033698; Mon, 31 Mar 2025 01:34:56 GMT
-Received: from pps.reinject (localhost [127.0.0.1])
- by phxpaimrmta03.imrmtpd1.prodappphxaev1.oraclevcn.com (PPS) with ESMTPS id
- 45p7a7ddsh-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Mon, 31 Mar 2025 01:34:56 +0000
-Received: from phxpaimrmta03.imrmtpd1.prodappphxaev1.oraclevcn.com
- (phxpaimrmta03.imrmtpd1.prodappphxaev1.oraclevcn.com [127.0.0.1])
- by pps.reinject (8.17.1.5/8.17.1.5) with ESMTP id 52V1YfxR015214;
- Mon, 31 Mar 2025 01:34:54 GMT
-Received: from localhost.localdomain (ca-dev80.us.oracle.com [10.211.9.80])
- by phxpaimrmta03.imrmtpd1.prodappphxaev1.oraclevcn.com (PPS) with ESMTP id
- 45p7a7ddms-7; Mon, 31 Mar 2025 01:34:54 +0000
-From: Dongli Zhang <dongli.zhang@oracle.com>
-To: qemu-devel@nongnu.org, kvm@vger.kernel.org, qemu-arm@nongnu.org,
- qemu-ppc@nongnu.org, qemu-riscv@nongnu.org, qemu-s390x@nongnu.org
-Cc: pbonzini@redhat.com, zhao1.liu@intel.com, mtosatti@redhat.com,
- sandipan.das@amd.com, babu.moger@amd.com, likexu@tencent.com,
- like.xu.linux@gmail.com, groug@kaod.org, khorenko@virtuozzo.com,
- alexander.ivanov@virtuozzo.com, den@virtuozzo.com,
- davydov-max@yandex-team.ru, xiaoyao.li@intel.com,
- dapeng1.mi@linux.intel.com, joe.jin@oracle.com,
- peter.maydell@linaro.org, gaosong@loongson.cn, chenhuacai@kernel.org,
- philmd@linaro.org, aurelien@aurel32.net, jiaxun.yang@flygoat.com,
- arikalo@gmail.com, npiggin@gmail.com, danielhb413@gmail.com,
- palmer@dabbelt.com, alistair.francis@wdc.com, liwei1518@gmail.com,
- zhiwei_liu@linux.alibaba.com, pasic@linux.ibm.com,
- borntraeger@linux.ibm.com, richard.henderson@linaro.org,
- david@redhat.com, iii@linux.ibm.com, thuth@redhat.com,
- flavra@baylibre.com, ewanhai-oc@zhaoxin.com, ewanhai@zhaoxin.com,
- cobechen@zhaoxin.com, louisqi@zhaoxin.com, liamni@zhaoxin.com,
- frankzhu@zhaoxin.com, silviazhao@zhaoxin.com
-Subject: [PATCH v3 06/10] target/i386/kvm: rename architectural PMU variables
-Date: Sun, 30 Mar 2025 18:32:25 -0700
-Message-ID: <20250331013307.11937-7-dongli.zhang@oracle.com>
-X-Mailer: git-send-email 2.43.5
-In-Reply-To: <20250331013307.11937-1-dongli.zhang@oracle.com>
-References: <20250331013307.11937-1-dongli.zhang@oracle.com>
+ (Exim 4.90_1) (envelope-from <loic@rivosinc.com>) id 1tzBh3-00088m-Ed
+ for qemu-riscv@nongnu.org; Mon, 31 Mar 2025 05:44:34 -0400
+Received: from mail-ej1-x635.google.com ([2a00:1450:4864:20::635])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <loic@rivosinc.com>) id 1tzBh0-0001or-VY
+ for qemu-riscv@nongnu.org; Mon, 31 Mar 2025 05:44:32 -0400
+Received: by mail-ej1-x635.google.com with SMTP id
+ a640c23a62f3a-ac289147833so734121966b.2
+ for <qemu-riscv@nongnu.org>; Mon, 31 Mar 2025 02:44:28 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1743414267; x=1744019067;
+ darn=nongnu.org; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=6WTvO7rp9XgapHjvxSmIjn3k+NKEuBzbaRfRdVRMOog=;
+ b=cX7/cpn5WAGp0oFk1d3m3rhbMiXyiquwC/nnZl/CMOai7IvuwXnHDEEap8osr8xARj
+ YhxbCE8tZ3MZN1fnQbYkmOjzpGTkzixSY8Ko9vJ7YwsvQx0su3tffY5crNks9tzaAi7G
+ wiPfl/AOZMmpTvpcurClOh8hTTVSD+7ADqeDskAl38w/1xc++XIaRxbeXytE18lgqdJZ
+ qcSTsU5ro4fHojD0Fn6oAHNq+50kWF3ODvPn5kmmBKUp0eZQ1at9Sl3YYqw9rmLqZHIC
+ bsql6Itq7a4SDpInZmm0+8OkiP+o5MT96KV3NYsU3Bonr4WIfS4P7i+f6bLkLnyiqXDj
+ i7tg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1743414267; x=1744019067;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=6WTvO7rp9XgapHjvxSmIjn3k+NKEuBzbaRfRdVRMOog=;
+ b=uDeOT0SqmwJYMKzSMS/LT/RUfxROiy9Z/EHES/BrgkT6Vs/17nhj7pIOlith/yWU1a
+ 5tMH8V3pJ4Fk96YsTGYzAqhVNRlUW8P6ORcejeMtM5UurBXL2noHva4Eq15zQqlV7qXg
+ oS+7fEr9jt8r1V6ads0HT1HRef2aIPFiI3Zl85sbB66ZPt0U/syxxTt+OYsoV/zc+eNe
+ mTZKaYY9pYtupwWBxgp6ZEuONFu7k671CTIyKdRry0eP23icra3NY28GJfGNBmt49RkC
+ 68p2WmaK1QT9i5jt6MpGHwPmW7AYtR2fuA8SclldXsgjpJHK+lkXpbWHX1MKietXa32V
+ ptzw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCU/NQWEqNynbkwiKvoZ8BnktlkVn8g5JjqYRz2O72WdGU9NuSMTdRNwXO1oLQHS6oUpHGzbINQh19DY@nongnu.org
+X-Gm-Message-State: AOJu0Yz1SpTUS0m08eaJWN//IosWmUgJxsZuSvn5frxQMaj5/vIfiD/c
+ +d05sCaCNjbZ2lMEoU/vnoLNELnguntKM79ao2ai+xisWVsbZb8wr9xYTd+pp+rsQRvr2a1NVT4
+ gAVpPQdpo2sPIbI8m1Apt48MARaS630MgyByh8w==
+X-Gm-Gg: ASbGncuSTfp5QXoClLzbOOCxxmQkY5Riu+r7ChvPINRBwl6xNO1nQxvADcgXrJFlP1b
+ IR8gPesd/rEspO3zzxeHTVC7HcPlBBUfIlt6mkFsME+W5P7xoHaDDjN41iU1Ht5vDb61BEwSjqq
+ c0LRBHctgYN3z+q1kQ7EuALIrk
+X-Google-Smtp-Source: AGHT+IHyD/DjNHvN+uC2XXbqIOggbio/jdhZRPkfPBk7W9esmMkAZrrycc6OwU9Ab5jKpedriI4rh+BnHduKXkrX2+0=
+X-Received: by 2002:a17:906:7955:b0:ac3:3f11:b49d with SMTP id
+ a640c23a62f3a-ac7386300f8mr769943666b.0.1743414267166; Mon, 31 Mar 2025
+ 02:44:27 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1095,Hydra:6.0.680,FMLib:17.12.68.34
- definitions=2025-03-30_11,2025-03-27_02,2024-11-22_01
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 adultscore=0
- phishscore=0
- suspectscore=0 mlxscore=0 malwarescore=0 spamscore=0 bulkscore=0
- mlxlogscore=999 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.12.0-2502280000 definitions=main-2503310009
-X-Proofpoint-ORIG-GUID: 9Ae6CC4bg6JV-j75qY7lfgliBnoQ10gA
-X-Proofpoint-GUID: 9Ae6CC4bg6JV-j75qY7lfgliBnoQ10gA
-Received-SPF: pass client-ip=205.220.177.32;
- envelope-from=dongli.zhang@oracle.com; helo=mx0b-00069f02.pphosted.com
-X-Spam_score_int: -41
-X-Spam_score: -4.2
-X-Spam_bar: ----
-X-Spam_report: (-4.2 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_MED=-0.368,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_LOW=-0.7, RCVD_IN_MSPIKE_H5=-1, RCVD_IN_MSPIKE_WL=-0.01,
- RCVD_IN_VALIDITY_CERTIFIED_BLOCKED=0.001, RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001,
+References: <20250313193011.720075-1-loic@rivosinc.com>
+ <20250313193011.720075-5-loic@rivosinc.com>
+ <3d3cf6a5-7ec2-427f-8f02-dc1e5a370996@linux.alibaba.com>
+In-Reply-To: <3d3cf6a5-7ec2-427f-8f02-dc1e5a370996@linux.alibaba.com>
+From: =?UTF-8?B?TG/Dr2MgTGVmb3J0?= <loic@rivosinc.com>
+Date: Mon, 31 Mar 2025 11:44:15 +0200
+X-Gm-Features: AQ5f1Jp8q6Rlh2x1oolTlkqnY_PJ9OgGkd4TROXsmpY3gQQ5BqSqPFQA-6afblQ
+Message-ID: <CAGKm2N+t4NH6vEswyGEmi3O_fCVvQ8p4qqReNu9rbD9x=wnCtQ@mail.gmail.com>
+Subject: Re: [PATCH v2 4/5] target/riscv: pmp: exit csr writes early if value
+ was not changed
+To: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
+Cc: qemu-devel@nongnu.org, Weiwei Li <liwei1518@gmail.com>,
+ qemu-riscv@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Content-Type: multipart/alternative; boundary="000000000000175d2d0631a044b3"
+Received-SPF: pass client-ip=2a00:1450:4864:20::635;
+ envelope-from=loic@rivosinc.com; helo=mail-ej1-x635.google.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, HTML_MESSAGE=0.001, RCVD_IN_DNSWL_NONE=-0.0001,
  SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -114,146 +97,198 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-AMD does not have what is commonly referred to as an architectural PMU.
-Therefore, we need to rename the following variables to be applicable for
-both Intel and AMD:
+--000000000000175d2d0631a044b3
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-- has_architectural_pmu_version
-- num_architectural_pmu_gp_counters
-- num_architectural_pmu_fixed_counters
+On Sat, Mar 29, 2025 at 10:03=E2=80=AFAM LIU Zhiwei <zhiwei_liu@linux.aliba=
+ba.com>
+wrote:
 
-For Intel processors, the meaning of pmu_version remains unchanged.
+>
+> On 2025/3/14 03:30, Lo=C3=AFc Lefort wrote:
+> > Signed-off-by: Lo=C3=AFc Lefort <loic@rivosinc.com>
+> > Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+> > ---
+> >   target/riscv/pmp.c | 22 +++++++++++++++-------
+> >   1 file changed, 15 insertions(+), 7 deletions(-)
+> >
+> > diff --git a/target/riscv/pmp.c b/target/riscv/pmp.c
+> > index c5f6cdaccb..845915e0c8 100644
+> > --- a/target/riscv/pmp.c
+> > +++ b/target/riscv/pmp.c
+> > @@ -141,6 +141,11 @@ static inline uint8_t pmp_read_cfg(CPURISCVState
+> *env, uint32_t pmp_index)
+> >   static bool pmp_write_cfg(CPURISCVState *env, uint32_t pmp_index,
+> uint8_t val)
+> >   {
+> >       if (pmp_index < MAX_RISCV_PMPS) {
+> > +        if (env->pmp_state.pmp[pmp_index].cfg_reg =3D=3D val) {
+> > +            /* no change */
+> > +            return false;
+> > +        }
+> > +
+> >           if (pmp_is_readonly(env, pmp_index)) {
+> >               qemu_log_mask(LOG_GUEST_ERROR,
+> >                             "ignoring pmpcfg write - read only\n");
+> > @@ -528,6 +533,11 @@ void pmpaddr_csr_write(CPURISCVState *env, uint32_=
+t
+> addr_index,
+> >       bool is_next_cfg_tor =3D false;
+> >
+> >       if (addr_index < MAX_RISCV_PMPS) {
+> > +        if (env->pmp_state.pmp[addr_index].addr_reg =3D=3D val) {
+> > +            /* no change */
+> > +            return;
+> > +        }
+> > +
+> >           /*
+> >            * In TOR mode, need to check the lock bit of the next pmp
+> >            * (if there is a next).
+> > @@ -544,14 +554,12 @@ void pmpaddr_csr_write(CPURISCVState *env,
+> uint32_t addr_index,
+> >           }
+> >
+> >           if (!pmp_is_readonly(env, addr_index)) {
+> > -            if (env->pmp_state.pmp[addr_index].addr_reg !=3D val) {
+>
+> Is there some benefit removing this if sentence?
+>
+>
+> The if is not removed, it's moved to the top of the function. The goal is
+to skip processing and warnings when the write would not change the value
+already present in the register.For pmp_write_cfg, each pmpcfg register
+contains 4 config values and some of them might be locked so we want to
+avoid warnings when writing with unchanged values.
+As you noted, the similar change in pmpaddr_csr_write has less benefit:
+it's only a minor optimization and is done for symmetry with pmp_write_cfg.
 
-For AMD processors:
+Lo=C3=AFc.
 
-pmu_version == 1 corresponds to versions before AMD PerfMonV2.
-pmu_version == 2 corresponds to AMD PerfMonV2.
+>
+> > -                env->pmp_state.pmp[addr_index].addr_reg =3D val;
+> > -                pmp_update_rule_addr(env, addr_index);
+> > -                if (is_next_cfg_tor) {
+> > -                    pmp_update_rule_addr(env, addr_index + 1);
+> > -                }
+> > -                tlb_flush(env_cpu(env));
+> > +            env->pmp_state.pmp[addr_index].addr_reg =3D val;
+> > +            pmp_update_rule_addr(env, addr_index);
+> > +            if (is_next_cfg_tor) {
+> > +                pmp_update_rule_addr(env, addr_index + 1);
+> >               }
+> > +            tlb_flush(env_cpu(env));
+> >           } else {
+> >               qemu_log_mask(LOG_GUEST_ERROR,
+> >                             "ignoring pmpaddr write - read only\n");
+>
 
-Signed-off-by: Dongli Zhang <dongli.zhang@oracle.com>
-Reviewed-by: Dapeng Mi <dapeng1.mi@linux.intel.com>
-Reviewed-by: Zhao Liu <zhao1.liu@intel.com>
----
-Changed since v2:
-  - Change has_pmu_version to pmu_version.
-  - Add Reviewed-by since the change is minor.
-  - As a reminder, there are some contextual change due to PATCH 05,
-    i.e., c->edx vs. edx.
+--000000000000175d2d0631a044b3
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
- target/i386/kvm/kvm.c | 49 ++++++++++++++++++++++++-------------------
- 1 file changed, 28 insertions(+), 21 deletions(-)
+<div dir=3D"ltr"><div dir=3D"ltr"><br></div><br><div class=3D"gmail_quote g=
+mail_quote_container"><div dir=3D"ltr" class=3D"gmail_attr">On Sat, Mar 29,=
+ 2025 at 10:03=E2=80=AFAM LIU Zhiwei &lt;<a href=3D"mailto:zhiwei_liu@linux=
+.alibaba.com">zhiwei_liu@linux.alibaba.com</a>&gt; wrote:<br></div><blockqu=
+ote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px=
+ solid rgb(204,204,204);padding-left:1ex"><br>
+On 2025/3/14 03:30, Lo=C3=AFc Lefort wrote:<br>
+&gt; Signed-off-by: Lo=C3=AFc Lefort &lt;<a href=3D"mailto:loic@rivosinc.co=
+m" target=3D"_blank">loic@rivosinc.com</a>&gt;<br>
+&gt; Reviewed-by: Daniel Henrique Barboza &lt;<a href=3D"mailto:dbarboza@ve=
+ntanamicro.com" target=3D"_blank">dbarboza@ventanamicro.com</a>&gt;<br>
+&gt; ---<br>
+&gt;=C2=A0 =C2=A0target/riscv/pmp.c | 22 +++++++++++++++-------<br>
+&gt;=C2=A0 =C2=A01 file changed, 15 insertions(+), 7 deletions(-)<br>
+&gt;<br>
+&gt; diff --git a/target/riscv/pmp.c b/target/riscv/pmp.c<br>
+&gt; index c5f6cdaccb..845915e0c8 100644<br>
+&gt; --- a/target/riscv/pmp.c<br>
+&gt; +++ b/target/riscv/pmp.c<br>
+&gt; @@ -141,6 +141,11 @@ static inline uint8_t pmp_read_cfg(CPURISCVState =
+*env, uint32_t pmp_index)<br>
+&gt;=C2=A0 =C2=A0static bool pmp_write_cfg(CPURISCVState *env, uint32_t pmp=
+_index, uint8_t val)<br>
+&gt;=C2=A0 =C2=A0{<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0if (pmp_index &lt; MAX_RISCV_PMPS) {<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 if (env-&gt;pmp_state.pmp[pmp_index].cfg_=
+reg =3D=3D val) {<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 /* no change */<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 return false;<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
+&gt; +<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0if (pmp_is_readonly(env, pmp_i=
+ndex)) {<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0qemu_log_mask(LO=
+G_GUEST_ERROR,<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0&quot;ignoring pmpcfg write - read only\n=
+&quot;);<br>
+&gt; @@ -528,6 +533,11 @@ void pmpaddr_csr_write(CPURISCVState *env, uint32=
+_t addr_index,<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0bool is_next_cfg_tor =3D false;<br>
+&gt;=C2=A0 =C2=A0<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0if (addr_index &lt; MAX_RISCV_PMPS) {<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 if (env-&gt;pmp_state.pmp[addr_index].add=
+r_reg =3D=3D val) {<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 /* no change */<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 return;<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
+&gt; +<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0/*<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 * In TOR mode, need to check =
+the lock bit of the next pmp<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 * (if there is a next).<br>
+&gt; @@ -544,14 +554,12 @@ void pmpaddr_csr_write(CPURISCVState *env, uint3=
+2_t addr_index,<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0}<br>
+&gt;=C2=A0 =C2=A0<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0if (!pmp_is_readonly(env, addr=
+_index)) {<br>
+&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 if (env-&gt;pmp_state.pmp[a=
+ddr_index].addr_reg !=3D val) {<br>
+<br>
+Is there some benefit removing this if sentence?<br>
+<br><br></blockquote><div>The if is not removed, it&#39;s moved to the top =
+of the function. The goal is to skip processing and warnings when the write=
+ would not change the value already present in the register.For pmp_write_c=
+fg, each pmpcfg register contains 4 config values and some of them might be=
+ locked so we want to avoid warnings when writing with unchanged values.</d=
+iv><div>As you noted, the similar change in pmpaddr_csr_write has less bene=
+fit: it&#39;s only a minor optimization and is done for symmetry with pmp_w=
+rite_cfg.</div><div><br></div><div>Lo=C3=AFc.</div><blockquote class=3D"gma=
+il_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,2=
+04,204);padding-left:1ex">
+<br>
+&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 env-&gt;pmp_s=
+tate.pmp[addr_index].addr_reg =3D val;<br>
+&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 pmp_update_ru=
+le_addr(env, addr_index);<br>
+&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 if (is_next_c=
+fg_tor) {<br>
+&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
+ pmp_update_rule_addr(env, addr_index + 1);<br>
+&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
+&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 tlb_flush(env=
+_cpu(env));<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 env-&gt;pmp_state.pmp[addr_=
+index].addr_reg =3D val;<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 pmp_update_rule_addr(env, a=
+ddr_index);<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 if (is_next_cfg_tor) {<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 pmp_update_ru=
+le_addr(env, addr_index + 1);<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0}<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 tlb_flush(env_cpu(env));<br=
+>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0} else {<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0qemu_log_mask(LO=
+G_GUEST_ERROR,<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0&quot;ignoring pmpaddr write - read only\=
+n&quot;);<br>
+</blockquote></div></div>
 
-diff --git a/target/i386/kvm/kvm.c b/target/i386/kvm/kvm.c
-index 4d86c08c6c..6b49549f1b 100644
---- a/target/i386/kvm/kvm.c
-+++ b/target/i386/kvm/kvm.c
-@@ -164,9 +164,16 @@ static bool has_msr_perf_capabs;
- static bool has_msr_pkrs;
- static bool has_msr_hwcr;
- 
--static uint32_t has_architectural_pmu_version;
--static uint32_t num_architectural_pmu_gp_counters;
--static uint32_t num_architectural_pmu_fixed_counters;
-+/*
-+ * For Intel processors, the meaning is the architectural PMU version
-+ * number.
-+ *
-+ * For AMD processors: 1 corresponds to the prior versions, and 2
-+ * corresponds to AMD PerfMonV2.
-+ */
-+static uint32_t pmu_version;
-+static uint32_t num_pmu_gp_counters;
-+static uint32_t num_pmu_fixed_counters;
- 
- static int has_xsave2;
- static int has_xcrs;
-@@ -2068,24 +2075,24 @@ static void kvm_init_pmu_info(struct kvm_cpuid2 *cpuid)
-         return;
-     }
- 
--    has_architectural_pmu_version = c->eax & 0xff;
--    if (has_architectural_pmu_version > 0) {
--        num_architectural_pmu_gp_counters = (c->eax & 0xff00) >> 8;
-+    pmu_version = c->eax & 0xff;
-+    if (pmu_version > 0) {
-+        num_pmu_gp_counters = (c->eax & 0xff00) >> 8;
- 
-         /*
-          * Shouldn't be more than 32, since that's the number of bits
-          * available in EBX to tell us _which_ counters are available.
-          * Play it safe.
-          */
--        if (num_architectural_pmu_gp_counters > MAX_GP_COUNTERS) {
--            num_architectural_pmu_gp_counters = MAX_GP_COUNTERS;
-+        if (num_pmu_gp_counters > MAX_GP_COUNTERS) {
-+            num_pmu_gp_counters = MAX_GP_COUNTERS;
-         }
- 
--        if (has_architectural_pmu_version > 1) {
--            num_architectural_pmu_fixed_counters = c->edx & 0x1f;
-+        if (pmu_version > 1) {
-+            num_pmu_fixed_counters = c->edx & 0x1f;
- 
--            if (num_architectural_pmu_fixed_counters > MAX_FIXED_COUNTERS) {
--                num_architectural_pmu_fixed_counters = MAX_FIXED_COUNTERS;
-+            if (num_pmu_fixed_counters > MAX_FIXED_COUNTERS) {
-+                num_pmu_fixed_counters = MAX_FIXED_COUNTERS;
-             }
-         }
-     }
-@@ -4037,25 +4044,25 @@ static int kvm_put_msrs(X86CPU *cpu, int level)
-             kvm_msr_entry_add(cpu, MSR_KVM_POLL_CONTROL, env->poll_control_msr);
-         }
- 
--        if (has_architectural_pmu_version > 0) {
--            if (has_architectural_pmu_version > 1) {
-+        if (pmu_version > 0) {
-+            if (pmu_version > 1) {
-                 /* Stop the counter.  */
-                 kvm_msr_entry_add(cpu, MSR_CORE_PERF_FIXED_CTR_CTRL, 0);
-                 kvm_msr_entry_add(cpu, MSR_CORE_PERF_GLOBAL_CTRL, 0);
-             }
- 
-             /* Set the counter values.  */
--            for (i = 0; i < num_architectural_pmu_fixed_counters; i++) {
-+            for (i = 0; i < num_pmu_fixed_counters; i++) {
-                 kvm_msr_entry_add(cpu, MSR_CORE_PERF_FIXED_CTR0 + i,
-                                   env->msr_fixed_counters[i]);
-             }
--            for (i = 0; i < num_architectural_pmu_gp_counters; i++) {
-+            for (i = 0; i < num_pmu_gp_counters; i++) {
-                 kvm_msr_entry_add(cpu, MSR_P6_PERFCTR0 + i,
-                                   env->msr_gp_counters[i]);
-                 kvm_msr_entry_add(cpu, MSR_P6_EVNTSEL0 + i,
-                                   env->msr_gp_evtsel[i]);
-             }
--            if (has_architectural_pmu_version > 1) {
-+            if (pmu_version > 1) {
-                 kvm_msr_entry_add(cpu, MSR_CORE_PERF_GLOBAL_STATUS,
-                                   env->msr_global_status);
-                 kvm_msr_entry_add(cpu, MSR_CORE_PERF_GLOBAL_OVF_CTRL,
-@@ -4515,17 +4522,17 @@ static int kvm_get_msrs(X86CPU *cpu)
-     if (env->features[FEAT_KVM] & CPUID_KVM_POLL_CONTROL) {
-         kvm_msr_entry_add(cpu, MSR_KVM_POLL_CONTROL, 1);
-     }
--    if (has_architectural_pmu_version > 0) {
--        if (has_architectural_pmu_version > 1) {
-+    if (pmu_version > 0) {
-+        if (pmu_version > 1) {
-             kvm_msr_entry_add(cpu, MSR_CORE_PERF_FIXED_CTR_CTRL, 0);
-             kvm_msr_entry_add(cpu, MSR_CORE_PERF_GLOBAL_CTRL, 0);
-             kvm_msr_entry_add(cpu, MSR_CORE_PERF_GLOBAL_STATUS, 0);
-             kvm_msr_entry_add(cpu, MSR_CORE_PERF_GLOBAL_OVF_CTRL, 0);
-         }
--        for (i = 0; i < num_architectural_pmu_fixed_counters; i++) {
-+        for (i = 0; i < num_pmu_fixed_counters; i++) {
-             kvm_msr_entry_add(cpu, MSR_CORE_PERF_FIXED_CTR0 + i, 0);
-         }
--        for (i = 0; i < num_architectural_pmu_gp_counters; i++) {
-+        for (i = 0; i < num_pmu_gp_counters; i++) {
-             kvm_msr_entry_add(cpu, MSR_P6_PERFCTR0 + i, 0);
-             kvm_msr_entry_add(cpu, MSR_P6_EVNTSEL0 + i, 0);
-         }
--- 
-2.39.3
-
+--000000000000175d2d0631a044b3--
 
