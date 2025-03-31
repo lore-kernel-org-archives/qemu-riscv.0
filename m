@@ -4,54 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F1A0AC36011
-	for <qemu-riscv@archiver.kernel.org>; Mon, 31 Mar 2025 01:37:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6C3E7C28B20
+	for <qemu-riscv@archiver.kernel.org>; Mon, 31 Mar 2025 01:38:43 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tz44W-0006GA-1n; Sun, 30 Mar 2025 21:36:17 -0400
+	id 1tz443-0005xm-9g; Sun, 30 Mar 2025 21:35:47 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dongli.zhang@oracle.com>)
- id 1tz44S-0006E6-0v; Sun, 30 Mar 2025 21:36:12 -0400
+ id 1tz43s-0005l9-0m; Sun, 30 Mar 2025 21:35:36 -0400
 Received: from mx0b-00069f02.pphosted.com ([205.220.177.32])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dongli.zhang@oracle.com>)
- id 1tz44Q-0005I3-1k; Sun, 30 Mar 2025 21:36:11 -0400
-Received: from pps.filterd (m0333520.ppops.net [127.0.0.1])
- by mx0b-00069f02.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 52UMFPsk029810;
- Mon, 31 Mar 2025 01:35:06 GMT
+ id 1tz43o-00059p-K5; Sun, 30 Mar 2025 21:35:35 -0400
+Received: from pps.filterd (m0246630.ppops.net [127.0.0.1])
+ by mx0b-00069f02.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 52UNZ2UF002741;
+ Mon, 31 Mar 2025 01:34:53 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com; h=cc
  :content-transfer-encoding:date:from:in-reply-to:message-id
- :mime-version:references:subject:to; s=corp-2023-11-20; bh=ks9XS
- JOP65MEaXjpEgcJryGfRqzAJHRu8wLXEsmLCVo=; b=IC5BxK1lZARMYlYl1rDH3
- h2926dV5oK/Tj5EOtlUemh3+LwOD7HtEQepErA+qS41eKLpYyiiVjx2bSlvKaFTc
- E6D17k4ZBjl3dJCJJnjZgMyaxg41QD3KhNvPBK6id/UzpZnFdg2TP/b6SY3WZT29
- uSh2oUe0kQDki1a2mSQQqUYJ6Bags6iJ0umliIx+UfYbtDNq1sKnedYkQGLb3Tbg
- aP5pmtXLu4LQLHzpQS7f/T7gT0sYosjbZA+ToED/9OQP+No8srtuinmppZ81B/Mr
- Pb1mD12Fp0XztPM43dpCDOy5evAixGTyeHpURIcv8LgqNrVrh1hkL1gZJ1DbGlx3
+ :mime-version:references:subject:to; s=corp-2023-11-20; bh=QEmFv
+ iGAK3HVPMhByP1bT/49mKbRwqTnouSzcbyuEfk=; b=jzNav93CoUSl4bywu8s5E
+ IdArw9Qr9mdgDLQiXyg8h7WzMuReKqSewNeH6DrNzl3xGXAeG6Zk2E1PHgdgzIoQ
+ O9ggBt3+G/yP54RpWhZGTadVFsANvUWEp0LffwiAEplo/IIh6T76c3CqcAvEI2rB
+ 0Ag2hrFzh/cJYdkatwEfO1KvMRER7jMbQBuo16n2yz7QSZTIkEY5lDql2CgBckhD
+ h6Ym9rqB1lLQIm2a0P641rSADUtKLo6loUjnSRDBGxy0ljaYOILsmu/2tbYV95w+
+ 0fFwNc7X41JfjH60NVxIl9x+1T4OEqQDy+1t6PBm1ByfWL3X1PFz39xnP4SjOILa
  A==
 Received: from phxpaimrmta03.imrmtpd1.prodappphxaev1.oraclevcn.com
  (phxpaimrmta03.appoci.oracle.com [138.1.37.129])
- by mx0b-00069f02.pphosted.com (PPS) with ESMTPS id 45p8wcaewa-1
+ by mx0b-00069f02.pphosted.com (PPS) with ESMTPS id 45p79c2eru-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Mon, 31 Mar 2025 01:35:06 +0000 (GMT)
+ Mon, 31 Mar 2025 01:34:52 +0000 (GMT)
 Received: from pps.filterd
  (phxpaimrmta03.imrmtpd1.prodappphxaev1.oraclevcn.com [127.0.0.1])
  by phxpaimrmta03.imrmtpd1.prodappphxaev1.oraclevcn.com (8.18.1.2/8.18.1.2)
- with ESMTP id 52V1BJJo033642; Mon, 31 Mar 2025 01:35:05 GMT
+ with ESMTP id 52UN247e032670; Mon, 31 Mar 2025 01:34:51 GMT
 Received: from pps.reinject (localhost [127.0.0.1])
  by phxpaimrmta03.imrmtpd1.prodappphxaev1.oraclevcn.com (PPS) with ESMTPS id
- 45p7a7ddvf-1
+ 45p7a7ddrk-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Mon, 31 Mar 2025 01:35:05 +0000
+ Mon, 31 Mar 2025 01:34:51 +0000
 Received: from phxpaimrmta03.imrmtpd1.prodappphxaev1.oraclevcn.com
  (phxpaimrmta03.imrmtpd1.prodappphxaev1.oraclevcn.com [127.0.0.1])
- by pps.reinject (8.17.1.5/8.17.1.5) with ESMTP id 52V1YfxZ015214;
- Mon, 31 Mar 2025 01:35:03 GMT
+ by pps.reinject (8.17.1.5/8.17.1.5) with ESMTP id 52V1YfxN015214;
+ Mon, 31 Mar 2025 01:34:50 GMT
 Received: from localhost.localdomain (ca-dev80.us.oracle.com [10.211.9.80])
  by phxpaimrmta03.imrmtpd1.prodappphxaev1.oraclevcn.com (PPS) with ESMTP id
- 45p7a7ddms-11; Mon, 31 Mar 2025 01:35:03 +0000
+ 45p7a7ddms-5; Mon, 31 Mar 2025 01:34:50 +0000
 From: Dongli Zhang <dongli.zhang@oracle.com>
 To: qemu-devel@nongnu.org, kvm@vger.kernel.org, qemu-arm@nongnu.org,
  qemu-ppc@nongnu.org, qemu-riscv@nongnu.org, qemu-s390x@nongnu.org
@@ -71,9 +71,10 @@ Cc: pbonzini@redhat.com, zhao1.liu@intel.com, mtosatti@redhat.com,
  flavra@baylibre.com, ewanhai-oc@zhaoxin.com, ewanhai@zhaoxin.com,
  cobechen@zhaoxin.com, louisqi@zhaoxin.com, liamni@zhaoxin.com,
  frankzhu@zhaoxin.com, silviazhao@zhaoxin.com
-Subject: [PATCH v3 10/10] target/i386/kvm: don't stop Intel PMU counters
-Date: Sun, 30 Mar 2025 18:32:29 -0700
-Message-ID: <20250331013307.11937-11-dongli.zhang@oracle.com>
+Subject: [PATCH v3 04/10] target/i386/kvm: set KVM_PMU_CAP_DISABLE if "-pmu"
+ is configured
+Date: Sun, 30 Mar 2025 18:32:23 -0700
+Message-ID: <20250331013307.11937-5-dongli.zhang@oracle.com>
 X-Mailer: git-send-email 2.43.5
 In-Reply-To: <20250331013307.11937-1-dongli.zhang@oracle.com>
 References: <20250331013307.11937-1-dongli.zhang@oracle.com>
@@ -87,8 +88,8 @@ X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 adultscore=0
  suspectscore=0 mlxscore=0 malwarescore=0 spamscore=0 bulkscore=0
  mlxlogscore=999 classifier=spam adjust=0 reason=mlx scancount=1
  engine=8.12.0-2502280000 definitions=main-2503310009
-X-Proofpoint-GUID: 37-REWe4adbPewXhfiex0uHxINcpNQyE
-X-Proofpoint-ORIG-GUID: 37-REWe4adbPewXhfiex0uHxINcpNQyE
+X-Proofpoint-GUID: 1utXdqAG6eZnea9mOCSXfz-YhYY6YzKV
+X-Proofpoint-ORIG-GUID: 1utXdqAG6eZnea9mOCSXfz-YhYY6YzKV
 Received-SPF: pass client-ip=205.220.177.32;
  envelope-from=dongli.zhang@oracle.com; helo=mx0b-00069f02.pphosted.com
 X-Spam_score_int: -41
@@ -114,54 +115,99 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-The kvm_put_msrs() sets the MSRs using KVM_SET_MSRS. The x86 KVM processes
-these MSRs one by one in a loop, only saving the config and triggering the
-KVM_REQ_PMU request. This approach does not immediately stop the event
-before updating PMC.
+Although AMD PERFCORE and PerfMonV2 are removed when "-pmu" is configured,
+there is no way to fully disable KVM AMD PMU virtualization. Neither
+"-cpu host,-pmu" nor "-cpu EPYC" achieves this.
 
-In additional, PMU MSRs are set only at levels >= KVM_PUT_RESET_STATE,
-excluding runtime. Therefore, updating these MSRs without stopping events
-should be acceptable.
+As a result, the following message still appears in the VM dmesg:
 
-Finally, KVM creates kernel perf events with host mode excluded
-(exclude_host = 1). While the events remain active, they don't increment
-the counter during QEMU vCPU userspace mode.
+[    0.263615] Performance Events: AMD PMU driver.
 
-No Fixed tag is going to be added for the commit 0d89436786b0 ("kvm:
-migrate vPMU state"), because this isn't a bugfix.
+However, the expected output should be:
+
+[    0.596381] Performance Events: PMU not available due to virtualization, using software events only.
+[    0.600972] NMI watchdog: Perf NMI watchdog permanently disabled
+
+This occurs because AMD does not use any CPUID bit to indicate PMU
+availability.
+
+To address this, KVM_CAP_PMU_CAPABILITY is used to set KVM_PMU_CAP_DISABLE
+when "-pmu" is configured.
 
 Signed-off-by: Dongli Zhang <dongli.zhang@oracle.com>
+Reviewed-by: Xiaoyao Li <xiaoyao.li@intel.com>
+Reviewed-by: Zhao Liu <zhao1.liu@intel.com>
 ---
- target/i386/kvm/kvm.c | 9 ---------
- 1 file changed, 9 deletions(-)
+Changed since v1:
+  - Switch back to the initial implementation with "-pmu".
+https://lore.kernel.org/all/20221119122901.2469-3-dongli.zhang@oracle.com
+  - Mention that "KVM_PMU_CAP_DISABLE doesn't change the PMU behavior on
+    Intel platform because current "pmu" property works as expected."
+Changed since v2:
+  - Change has_pmu_cap to pmu_cap.
+  - Use (pmu_cap & KVM_PMU_CAP_DISABLE) instead of only pmu_cap in if
+    statement.
+  - Add Reviewed-by from Xiaoyao and Zhao as the change is minor.
+
+ target/i386/kvm/kvm.c | 31 +++++++++++++++++++++++++++++++
+ 1 file changed, 31 insertions(+)
 
 diff --git a/target/i386/kvm/kvm.c b/target/i386/kvm/kvm.c
-index 4c3908e09e..d9c6c9905e 100644
+index f41e190fb8..579c0f7e0b 100644
 --- a/target/i386/kvm/kvm.c
 +++ b/target/i386/kvm/kvm.c
-@@ -4170,13 +4170,6 @@ static int kvm_put_msrs(X86CPU *cpu, int level)
-         }
+@@ -176,6 +176,8 @@ static int has_triple_fault_event;
  
-         if ((IS_INTEL_CPU(env) || IS_ZHAOXIN_CPU(env)) && pmu_version > 0) {
--            if (pmu_version > 1) {
--                /* Stop the counter.  */
--                kvm_msr_entry_add(cpu, MSR_CORE_PERF_FIXED_CTR_CTRL, 0);
--                kvm_msr_entry_add(cpu, MSR_CORE_PERF_GLOBAL_CTRL, 0);
--            }
--
--            /* Set the counter values.  */
-             for (i = 0; i < num_pmu_fixed_counters; i++) {
-                 kvm_msr_entry_add(cpu, MSR_CORE_PERF_FIXED_CTR0 + i,
-                                   env->msr_fixed_counters[i]);
-@@ -4192,8 +4185,6 @@ static int kvm_put_msrs(X86CPU *cpu, int level)
-                                   env->msr_global_status);
-                 kvm_msr_entry_add(cpu, MSR_CORE_PERF_GLOBAL_OVF_CTRL,
-                                   env->msr_global_ovf_ctrl);
--
--                /* Now start the PMU.  */
-                 kvm_msr_entry_add(cpu, MSR_CORE_PERF_FIXED_CTR_CTRL,
-                                   env->msr_fixed_ctr_ctrl);
-                 kvm_msr_entry_add(cpu, MSR_CORE_PERF_GLOBAL_CTRL,
+ static bool has_msr_mcg_ext_ctl;
+ 
++static int pmu_cap;
++
+ static struct kvm_cpuid2 *cpuid_cache;
+ static struct kvm_cpuid2 *hv_cpuid_cache;
+ static struct kvm_msr_list *kvm_feature_msrs;
+@@ -2053,6 +2055,33 @@ full:
+ 
+ int kvm_arch_pre_create_vcpu(CPUState *cpu, Error **errp)
+ {
++    static bool first = true;
++    int ret;
++
++    if (first) {
++        first = false;
++
++        /*
++         * Since Linux v5.18, KVM provides a VM-level capability to easily
++         * disable PMUs; however, QEMU has been providing PMU property per
++         * CPU since v1.6. In order to accommodate both, have to configure
++         * the VM-level capability here.
++         *
++         * KVM_PMU_CAP_DISABLE doesn't change the PMU
++         * behavior on Intel platform because current "pmu" property works
++         * as expected.
++         */
++        if ((pmu_cap & KVM_PMU_CAP_DISABLE) && !X86_CPU(cpu)->enable_pmu) {
++            ret = kvm_vm_enable_cap(kvm_state, KVM_CAP_PMU_CAPABILITY, 0,
++                                    KVM_PMU_CAP_DISABLE);
++            if (ret < 0) {
++                error_setg_errno(errp, -ret,
++                                 "Failed to set KVM_PMU_CAP_DISABLE");
++                return ret;
++            }
++        }
++    }
++
+     return 0;
+ }
+ 
+@@ -3351,6 +3380,8 @@ int kvm_arch_init(MachineState *ms, KVMState *s)
+         }
+     }
+ 
++    pmu_cap = kvm_check_extension(s, KVM_CAP_PMU_CAPABILITY);
++
+     return 0;
+ }
+ 
 -- 
 2.39.3
 
