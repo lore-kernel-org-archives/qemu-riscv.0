@@ -4,54 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F030FC3600B
-	for <qemu-riscv@archiver.kernel.org>; Mon, 31 Mar 2025 01:36:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7D8CBC28B20
+	for <qemu-riscv@archiver.kernel.org>; Mon, 31 Mar 2025 01:36:18 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tz43x-0005rS-QU; Sun, 30 Mar 2025 21:35:41 -0400
+	id 1tz43s-0005lG-EG; Sun, 30 Mar 2025 21:35:36 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dongli.zhang@oracle.com>)
- id 1tz43s-0005l8-0q; Sun, 30 Mar 2025 21:35:36 -0400
+ id 1tz43q-0005k1-Er; Sun, 30 Mar 2025 21:35:34 -0400
 Received: from mx0b-00069f02.pphosted.com ([205.220.177.32])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dongli.zhang@oracle.com>)
- id 1tz43o-0005BD-Td; Sun, 30 Mar 2025 21:35:35 -0400
-Received: from pps.filterd (m0246630.ppops.net [127.0.0.1])
- by mx0b-00069f02.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 52ULU1A0027670;
- Mon, 31 Mar 2025 01:34:55 GMT
+ id 1tz43o-0005Aq-9z; Sun, 30 Mar 2025 21:35:34 -0400
+Received: from pps.filterd (m0246632.ppops.net [127.0.0.1])
+ by mx0b-00069f02.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 52UN9IjA014929;
+ Mon, 31 Mar 2025 01:34:51 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com; h=cc
  :content-transfer-encoding:date:from:in-reply-to:message-id
- :mime-version:references:subject:to; s=corp-2023-11-20; bh=bsYY7
- 7sPLtgFVkJTIcaQuh9O11DwYpZxE2oJZPuuUSU=; b=owaWBiZaLoEXFJNDRqBDX
- OxRRHJmcQnTucL2fcT3zPcwuj836+9dFbA8s+3+AA5J5xDFt7AIDJJaEuARagL1k
- jkFO49bk6roAThyxjkfHeJ1Scvl2Qc00EEmcVuq0NvL4af8jJrP4I79I0szoWOnA
- zFdZku0Kfm7DsBTaC36Z9O1CSdcmlbHwTDUGKtsI6GMLi6AapM9O7eS8Cmxoc3VJ
- cbcAega3V2t5hab32tMh/bdOfcX+5m8An8Ycmq3GrOuXRCQWpTB5bGyTS22xtjoQ
- n0S8LX/eVn/s+kaUB0rUwE+F45IUEEVOPTVGb9jUb7KMD/7HfnRUcMZa1DaTBaY5
- w==
+ :mime-version:references:subject:to; s=corp-2023-11-20; bh=0EDp8
+ /O8chEXYfnRuxO7aZoAWTNGeHerTKEIocr4ftQ=; b=Xt2dEO2zBwlHAIWsTy1fS
+ rSPoaqtQXVzOve+QdzIBU9d/r7sB0uPGOJw73X1eJMWHyX85qpb7ippSDewpa/5h
+ EYbPiWHiXXO25MF3kESaNaSeOl+vN6bEphqcFZjN0Djoi28rLdEhZSOxlquHa5Pw
+ nB0je5Cjp7hGlg2jgZdTlABES6aSZqVoJ6XEAbAQp0DQWlpqtK8IOkjr+6uzgyjF
+ VCe2vRR37khkIjjJdEhp4MElBY6cSC82lPqneya+dSmenLJD+NBXmdgAt91F9LBe
+ i9Y27uk7pzApWvHwbCCBemjbYlt+VpJqdq3Dh+jpnqdhvdRE5sUxSVRTiRsUz3n3
+ Q==
 Received: from phxpaimrmta03.imrmtpd1.prodappphxaev1.oraclevcn.com
  (phxpaimrmta03.appoci.oracle.com [138.1.37.129])
- by mx0b-00069f02.pphosted.com (PPS) with ESMTPS id 45p79c2erv-1
+ by mx0b-00069f02.pphosted.com (PPS) with ESMTPS id 45p8fs2evj-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Mon, 31 Mar 2025 01:34:54 +0000 (GMT)
+ Mon, 31 Mar 2025 01:34:50 +0000 (GMT)
 Received: from pps.filterd
  (phxpaimrmta03.imrmtpd1.prodappphxaev1.oraclevcn.com [127.0.0.1])
  by phxpaimrmta03.imrmtpd1.prodappphxaev1.oraclevcn.com (8.18.1.2/8.18.1.2)
- with ESMTP id 52V0ELdZ033698; Mon, 31 Mar 2025 01:34:54 GMT
+ with ESMTP id 52V0g69C032802; Mon, 31 Mar 2025 01:34:49 GMT
 Received: from pps.reinject (localhost [127.0.0.1])
  by phxpaimrmta03.imrmtpd1.prodappphxaev1.oraclevcn.com (PPS) with ESMTPS id
- 45p7a7dds0-1
+ 45p7a7ddr1-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Mon, 31 Mar 2025 01:34:53 +0000
+ Mon, 31 Mar 2025 01:34:49 +0000
 Received: from phxpaimrmta03.imrmtpd1.prodappphxaev1.oraclevcn.com
  (phxpaimrmta03.imrmtpd1.prodappphxaev1.oraclevcn.com [127.0.0.1])
- by pps.reinject (8.17.1.5/8.17.1.5) with ESMTP id 52V1YfxP015214;
- Mon, 31 Mar 2025 01:34:52 GMT
+ by pps.reinject (8.17.1.5/8.17.1.5) with ESMTP id 52V1YfxL015214;
+ Mon, 31 Mar 2025 01:34:48 GMT
 Received: from localhost.localdomain (ca-dev80.us.oracle.com [10.211.9.80])
  by phxpaimrmta03.imrmtpd1.prodappphxaev1.oraclevcn.com (PPS) with ESMTP id
- 45p7a7ddms-6; Mon, 31 Mar 2025 01:34:52 +0000
+ 45p7a7ddms-4; Mon, 31 Mar 2025 01:34:48 +0000
 From: Dongli Zhang <dongli.zhang@oracle.com>
 To: qemu-devel@nongnu.org, kvm@vger.kernel.org, qemu-arm@nongnu.org,
  qemu-ppc@nongnu.org, qemu-riscv@nongnu.org, qemu-s390x@nongnu.org
@@ -71,10 +71,9 @@ Cc: pbonzini@redhat.com, zhao1.liu@intel.com, mtosatti@redhat.com,
  flavra@baylibre.com, ewanhai-oc@zhaoxin.com, ewanhai@zhaoxin.com,
  cobechen@zhaoxin.com, louisqi@zhaoxin.com, liamni@zhaoxin.com,
  frankzhu@zhaoxin.com, silviazhao@zhaoxin.com
-Subject: [PATCH v3 05/10] target/i386/kvm: extract unrelated code out of
- kvm_x86_build_cpuid()
-Date: Sun, 30 Mar 2025 18:32:24 -0700
-Message-ID: <20250331013307.11937-6-dongli.zhang@oracle.com>
+Subject: [PATCH v3 03/10] kvm: Introduce kvm_arch_pre_create_vcpu()
+Date: Sun, 30 Mar 2025 18:32:22 -0700
+Message-ID: <20250331013307.11937-4-dongli.zhang@oracle.com>
 X-Mailer: git-send-email 2.43.5
 In-Reply-To: <20250331013307.11937-1-dongli.zhang@oracle.com>
 References: <20250331013307.11937-1-dongli.zhang@oracle.com>
@@ -88,8 +87,8 @@ X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 adultscore=0
  suspectscore=0 mlxscore=0 malwarescore=0 spamscore=0 bulkscore=0
  mlxlogscore=999 classifier=spam adjust=0 reason=mlx scancount=1
  engine=8.12.0-2502280000 definitions=main-2503310009
-X-Proofpoint-GUID: CkD67ufuV0sL4g15oQOWxA2piRFtxYis
-X-Proofpoint-ORIG-GUID: CkD67ufuV0sL4g15oQOWxA2piRFtxYis
+X-Proofpoint-ORIG-GUID: lnlui7U5gyxdNAPQm5CLHCemFVHolOb3
+X-Proofpoint-GUID: lnlui7U5gyxdNAPQm5CLHCemFVHolOb3
 Received-SPF: pass client-ip=205.220.177.32;
  envelope-from=dongli.zhang@oracle.com; helo=mx0b-00069f02.pphosted.com
 X-Spam_score_int: -41
@@ -115,114 +114,173 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-The initialization of 'has_architectural_pmu_version',
-'num_architectural_pmu_gp_counters', and
-'num_architectural_pmu_fixed_counters' is unrelated to the process of
-building the CPUID.
+From: Xiaoyao Li <xiaoyao.li@intel.com>
 
-Extract them out of kvm_x86_build_cpuid().
+Introduce kvm_arch_pre_create_vcpu(), to perform arch-dependent
+work prior to create any vcpu. This is for i386 TDX because it needs
+call TDX_INIT_VM before creating any vcpu.
 
-In addition, use cpuid_find_entry() instead of cpu_x86_cpuid(), because
-CPUID has already been filled at this stage.
+The specific implemnet of i386 will be added in the future patch.
 
+Signed-off-by: Xiaoyao Li <xiaoyao.li@intel.com>
+Acked-by: Gerd Hoffmann <kraxel@redhat.com>
 Signed-off-by: Dongli Zhang <dongli.zhang@oracle.com>
+Reviewed-by: Zhao Liu <zhao1.liu@intel.com>
 ---
-Changed since v1:
-  - Still extract the code, but call them for all CPUs.
 Changed since v2:
-  - Use cpuid_find_entry() instead of cpu_x86_cpuid().
-  - Didn't add Reviewed-by from Dapeng as the change isn't minor.
+  - Add my Signed-off-by.
 
- target/i386/kvm/kvm.c | 62 ++++++++++++++++++++++++-------------------
- 1 file changed, 35 insertions(+), 27 deletions(-)
+ accel/kvm/kvm-all.c        | 5 +++++
+ include/system/kvm.h       | 1 +
+ target/arm/kvm.c           | 5 +++++
+ target/i386/kvm/kvm.c      | 5 +++++
+ target/loongarch/kvm/kvm.c | 5 +++++
+ target/mips/kvm.c          | 5 +++++
+ target/ppc/kvm.c           | 5 +++++
+ target/riscv/kvm/kvm-cpu.c | 5 +++++
+ target/s390x/kvm/kvm.c     | 5 +++++
+ 9 files changed, 41 insertions(+)
 
+diff --git a/accel/kvm/kvm-all.c b/accel/kvm/kvm-all.c
+index f89568bfa3..df9840e53a 100644
+--- a/accel/kvm/kvm-all.c
++++ b/accel/kvm/kvm-all.c
+@@ -540,6 +540,11 @@ int kvm_init_vcpu(CPUState *cpu, Error **errp)
+ 
+     trace_kvm_init_vcpu(cpu->cpu_index, kvm_arch_vcpu_id(cpu));
+ 
++    ret = kvm_arch_pre_create_vcpu(cpu, errp);
++    if (ret < 0) {
++        goto err;
++    }
++
+     ret = kvm_create_vcpu(cpu);
+     if (ret < 0) {
+         error_setg_errno(errp, -ret,
+diff --git a/include/system/kvm.h b/include/system/kvm.h
+index ab17c09a55..d7dfa25493 100644
+--- a/include/system/kvm.h
++++ b/include/system/kvm.h
+@@ -374,6 +374,7 @@ int kvm_arch_get_default_type(MachineState *ms);
+ 
+ int kvm_arch_init(MachineState *ms, KVMState *s);
+ 
++int kvm_arch_pre_create_vcpu(CPUState *cpu, Error **errp);
+ int kvm_arch_init_vcpu(CPUState *cpu);
+ int kvm_arch_destroy_vcpu(CPUState *cpu);
+ 
+diff --git a/target/arm/kvm.c b/target/arm/kvm.c
+index da30bdbb23..93f1a7245b 100644
+--- a/target/arm/kvm.c
++++ b/target/arm/kvm.c
+@@ -1874,6 +1874,11 @@ static int kvm_arm_sve_set_vls(ARMCPU *cpu)
+ 
+ #define ARM_CPU_ID_MPIDR       3, 0, 0, 0, 5
+ 
++int kvm_arch_pre_create_vcpu(CPUState *cpu, Error **errp)
++{
++    return 0;
++}
++
+ int kvm_arch_init_vcpu(CPUState *cs)
+ {
+     int ret;
 diff --git a/target/i386/kvm/kvm.c b/target/i386/kvm/kvm.c
-index 579c0f7e0b..4d86c08c6c 100644
+index 6c749d4ee8..f41e190fb8 100644
 --- a/target/i386/kvm/kvm.c
 +++ b/target/i386/kvm/kvm.c
-@@ -1959,33 +1959,6 @@ static uint32_t kvm_x86_build_cpuid(CPUX86State *env,
-         }
-     }
- 
--    if (limit >= 0x0a) {
--        uint32_t eax, edx;
--
--        cpu_x86_cpuid(env, 0x0a, 0, &eax, &unused, &unused, &edx);
--
--        has_architectural_pmu_version = eax & 0xff;
--        if (has_architectural_pmu_version > 0) {
--            num_architectural_pmu_gp_counters = (eax & 0xff00) >> 8;
--
--            /* Shouldn't be more than 32, since that's the number of bits
--             * available in EBX to tell us _which_ counters are available.
--             * Play it safe.
--             */
--            if (num_architectural_pmu_gp_counters > MAX_GP_COUNTERS) {
--                num_architectural_pmu_gp_counters = MAX_GP_COUNTERS;
--            }
--
--            if (has_architectural_pmu_version > 1) {
--                num_architectural_pmu_fixed_counters = edx & 0x1f;
--
--                if (num_architectural_pmu_fixed_counters > MAX_FIXED_COUNTERS) {
--                    num_architectural_pmu_fixed_counters = MAX_FIXED_COUNTERS;
--                }
--            }
--        }
--    }
--
-     cpu_x86_cpuid(env, 0x80000000, 0, &limit, &unused, &unused, &unused);
- 
-     for (i = 0x80000000; i <= limit; i++) {
-@@ -2085,6 +2058,39 @@ int kvm_arch_pre_create_vcpu(CPUState *cpu, Error **errp)
-     return 0;
+@@ -2051,6 +2051,11 @@ full:
+     abort();
  }
  
-+static void kvm_init_pmu_info(struct kvm_cpuid2 *cpuid)
++int kvm_arch_pre_create_vcpu(CPUState *cpu, Error **errp)
 +{
-+    struct kvm_cpuid_entry2 *c;
-+
-+    c = cpuid_find_entry(cpuid, 0xa, 0);
-+
-+    if (!c) {
-+        return;
-+    }
-+
-+    has_architectural_pmu_version = c->eax & 0xff;
-+    if (has_architectural_pmu_version > 0) {
-+        num_architectural_pmu_gp_counters = (c->eax & 0xff00) >> 8;
-+
-+        /*
-+         * Shouldn't be more than 32, since that's the number of bits
-+         * available in EBX to tell us _which_ counters are available.
-+         * Play it safe.
-+         */
-+        if (num_architectural_pmu_gp_counters > MAX_GP_COUNTERS) {
-+            num_architectural_pmu_gp_counters = MAX_GP_COUNTERS;
-+        }
-+
-+        if (has_architectural_pmu_version > 1) {
-+            num_architectural_pmu_fixed_counters = c->edx & 0x1f;
-+
-+            if (num_architectural_pmu_fixed_counters > MAX_FIXED_COUNTERS) {
-+                num_architectural_pmu_fixed_counters = MAX_FIXED_COUNTERS;
-+            }
-+        }
-+    }
++    return 0;
 +}
 +
  int kvm_arch_init_vcpu(CPUState *cs)
  {
      struct {
-@@ -2267,6 +2273,8 @@ int kvm_arch_init_vcpu(CPUState *cs)
-     cpuid_i = kvm_x86_build_cpuid(env, cpuid_data.entries, cpuid_i);
-     cpuid_data.cpuid.nent = cpuid_i;
+diff --git a/target/loongarch/kvm/kvm.c b/target/loongarch/kvm/kvm.c
+index 7f63e7c8fe..ed0ddf1cbf 100644
+--- a/target/loongarch/kvm/kvm.c
++++ b/target/loongarch/kvm/kvm.c
+@@ -1075,6 +1075,11 @@ static int kvm_cpu_check_pv_features(CPUState *cs, Error **errp)
+     return 0;
+ }
  
-+    kvm_init_pmu_info(&cpuid_data.cpuid);
++int kvm_arch_pre_create_vcpu(CPUState *cpu, Error **errp)
++{
++    return 0;
++}
 +
-     if (((env->cpuid_version >> 8)&0xF) >= 6
-         && (env->features[FEAT_1_EDX] & (CPUID_MCE | CPUID_MCA)) ==
-            (CPUID_MCE | CPUID_MCA)) {
+ int kvm_arch_init_vcpu(CPUState *cs)
+ {
+     uint64_t val;
+diff --git a/target/mips/kvm.c b/target/mips/kvm.c
+index d67b7c1a8e..ec53acb51a 100644
+--- a/target/mips/kvm.c
++++ b/target/mips/kvm.c
+@@ -61,6 +61,11 @@ int kvm_arch_irqchip_create(KVMState *s)
+     return 0;
+ }
+ 
++int kvm_arch_pre_create_vcpu(CPUState *cpu, Error **errp)
++{
++    return 0;
++}
++
+ int kvm_arch_init_vcpu(CPUState *cs)
+ {
+     CPUMIPSState *env = cpu_env(cs);
+diff --git a/target/ppc/kvm.c b/target/ppc/kvm.c
+index 992356cb75..20fabccecd 100644
+--- a/target/ppc/kvm.c
++++ b/target/ppc/kvm.c
+@@ -479,6 +479,11 @@ static void kvmppc_hw_debug_points_init(CPUPPCState *cenv)
+     }
+ }
+ 
++int kvm_arch_pre_create_vcpu(CPUState *cpu, Error **errp)
++{
++    return 0;
++}
++
+ int kvm_arch_init_vcpu(CPUState *cs)
+ {
+     PowerPCCPU *cpu = POWERPC_CPU(cs);
+diff --git a/target/riscv/kvm/kvm-cpu.c b/target/riscv/kvm/kvm-cpu.c
+index 4ffeeaa1c9..451c00f17c 100644
+--- a/target/riscv/kvm/kvm-cpu.c
++++ b/target/riscv/kvm/kvm-cpu.c
+@@ -1389,6 +1389,11 @@ static int kvm_vcpu_enable_sbi_dbcn(RISCVCPU *cpu, CPUState *cs)
+     return kvm_set_one_reg(cs, kvm_sbi_dbcn.kvm_reg_id, &reg);
+ }
+ 
++int kvm_arch_pre_create_vcpu(CPUState *cpu, Error **errp)
++{
++    return 0;
++}
++
+ int kvm_arch_init_vcpu(CPUState *cs)
+ {
+     int ret = 0;
+diff --git a/target/s390x/kvm/kvm.c b/target/s390x/kvm/kvm.c
+index 4d56e653dd..1f592733f4 100644
+--- a/target/s390x/kvm/kvm.c
++++ b/target/s390x/kvm/kvm.c
+@@ -404,6 +404,11 @@ unsigned long kvm_arch_vcpu_id(CPUState *cpu)
+     return cpu->cpu_index;
+ }
+ 
++int kvm_arch_pre_create_vcpu(CPUState *cpu, Error **errp)
++{
++    return 0;
++}
++
+ int kvm_arch_init_vcpu(CPUState *cs)
+ {
+     unsigned int max_cpus = MACHINE(qdev_get_machine())->smp.max_cpus;
 -- 
 2.39.3
 
