@@ -4,61 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 822F6C3600B
-	for <qemu-riscv@archiver.kernel.org>; Mon, 31 Mar 2025 11:32:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 788E9C3600B
+	for <qemu-riscv@archiver.kernel.org>; Mon, 31 Mar 2025 14:16:56 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tzDNI-0007cV-JX; Mon, 31 Mar 2025 07:32:19 -0400
+	id 1tzFw9-0005Pv-Mh; Mon, 31 Mar 2025 10:16:26 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
- id 1tzDMU-0007Xg-D7; Mon, 31 Mar 2025 07:31:28 -0400
-Received: from out30-110.freemail.mail.aliyun.com ([115.124.30.110])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
- id 1tzDMQ-0006sG-Uh; Mon, 31 Mar 2025 07:31:26 -0400
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tzFvz-0005OE-38
+ for qemu-riscv@nongnu.org; Mon, 31 Mar 2025 10:16:16 -0400
+Received: from mail-wm1-x332.google.com ([2a00:1450:4864:20::332])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tzFvx-0005Yh-9C
+ for qemu-riscv@nongnu.org; Mon, 31 Mar 2025 10:16:14 -0400
+Received: by mail-wm1-x332.google.com with SMTP id
+ 5b1f17b1804b1-4394345e4d5so28897065e9.0
+ for <qemu-riscv@nongnu.org>; Mon, 31 Mar 2025 07:16:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linux.alibaba.com; s=default;
- t=1743420672; h=Content-Type:Message-ID:Date:MIME-Version:Subject:To:From;
- bh=JIzvk0Jq1iJgYQ+hN/uUza2Z37gMfgvk+lWmawS+Pek=;
- b=Pk1to7dkOI2v5ZBu17fA4+K6T9Fh05KLgS3m8cmjC0K0Yosb6381ZhxsMJNMjFvIaVa1fT1EJzQbS6+QU7w3TxgWbruzUVR3TF4I3JRynywHxCqF87VgsXGNea605gTm02UVJY7lz/SGk9fhVkHOHAOFP6mPfYDVW9v7TO+18ps=
-Received: from 30.166.64.216(mailfrom:zhiwei_liu@linux.alibaba.com
- fp:SMTPD_---0WTZ23Vn_1743420670 cluster:ay36) by smtp.aliyun-inc.com;
- Mon, 31 Mar 2025 19:31:11 +0800
-Content-Type: multipart/alternative;
- boundary="------------QC239WoRnC5fgsZ8oy3c9Azo"
-Message-ID: <9aa2f708-1c40-45c4-8f39-03fb7a529e99@linux.alibaba.com>
-Date: Mon, 31 Mar 2025 19:31:09 +0800
+ d=linaro.org; s=google; t=1743430571; x=1744035371; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=I64BiwOIwbYPhS3F9PbebY8ATXDtTgB3BXvfnFWJZ8Y=;
+ b=GqrLYF+yfztxUNwedzlNM+FcsICvcD00MEwICwCUF/ACIK6/ODiVhlV5seBg5luc9c
+ 9/mYzJeKw8dy+YJPsvMLLF4Izbx8OR2wHKjHq8CdkGM5Mrln7fEWWQUOp/nBdONlmYpt
+ /8u2ITancLOuAsC/eiaCBJJoVSzGAJS8y21qC3WNYfJ5YDXxFvLsKRJIROJ5TwqcYEBu
+ jO9QNSzUqA9plWqs92l1hbEZC8EbcoOu9ritLBWz1z5QgtkUB+rNMLzRP1TIqYf6cCyE
+ 6FANyfNeH3VFPGHhwO98a3S9X2Kf69/sCAzRncoslh2D87VL3GzMeks7X1ai1sigKFQT
+ C7Gw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1743430571; x=1744035371;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=I64BiwOIwbYPhS3F9PbebY8ATXDtTgB3BXvfnFWJZ8Y=;
+ b=a2ig2FM32fx9xSYz6SEL8Y0Zu31pCRtUDPXizNMWZczIBHKoHzjz/+Aa3pcKTZt0Vz
+ 13CyS1FpwcH4iqLR5yGKH0t1r0D30DReha95LbSEIM2ZNiOIxN/VOjkyrv1RbTHMfrN1
+ ASMu8MMsvAbFsqXhsR/zPGI/NXZvLUyY7SQlEPavLd2QW+QRs1Opb8CtI5eyr0vxB8xB
+ kAyBObaale84M+EAp546Hc84ZhRVd/3JUN/jfLl59FvGi3ON2rC3iJX0A42rfQGBdMwS
+ GOAGtj6jmAgmAC7aMh8CmYz5NiV7dqLv7jGX73LQlRjDZ0krN6ZbrD5xalcF2fKPFpnS
+ ZGmA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUrT0Hbhw0HSP4h28x0kx74HXc9Qi/7Uts4botaTYdFFRj42RwTvxvgH+J8x89BSQ29plzZGW7D0s2o@nongnu.org
+X-Gm-Message-State: AOJu0Yy3dxXgxCD8ZyByhNpZbOIxI4McTTBmYD8VaAmzdUIzIbWWbXbA
+ R/NrFxnKjAR+ePQL/oHT4R1d3caKeD8+4yOEDFYM7VbuTySVRIKqVvAzebzm5zc=
+X-Gm-Gg: ASbGncs1mdZUbAh2RNs0eeM2CSN/Xp9mpl3dN+gEr2rLanChhmzcXbSbrwcLOKDy0sX
+ IOebI47Xu5mPVUkwV0kQ47CGUl6aueRjQWeWfGwwcPW0vH6Vik7vd0MiAPBvcWkSRLjrLhrgajD
+ 36BU+z3xW5wD3QPOtXcqf+x+wf+v/qks+cgnJhlG3Uvo5kRDtV8YRcMyGaCpSgkuTl46vWKomFy
+ N0xgyMEfMAZMWjHRbo148f0sd9hyezXQ6q5rak9zQ6vQd2r3CuzQ6drqiSvt77qedVy3CDaHbwt
+ Y9xC4WViDwmRYK9KM13rRKD7VaxMUOheeH45NwYPJo0M8yM2SPkIK4gNIubCTR4u51y7YxkLp7A
+ 78GQK9Y/k/FG5
+X-Google-Smtp-Source: AGHT+IF0sWtFMgOi9Wu1wkVWl6LqZ8G34vh3+nnBA++fx2Ke+JQhTAoUnfuRnzoGQD+iCNbL0Mximw==
+X-Received: by 2002:a05:600c:1912:b0:43b:c5a3:2e1a with SMTP id
+ 5b1f17b1804b1-43db61d75d3mr84762625e9.2.1743430571416; 
+ Mon, 31 Mar 2025 07:16:11 -0700 (PDT)
+Received: from [192.168.69.235] (88-187-86-199.subs.proxad.net.
+ [88.187.86.199]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-39c0b662bf9sm11065948f8f.29.2025.03.31.07.16.10
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 31 Mar 2025 07:16:10 -0700 (PDT)
+Message-ID: <102ba955-61c4-437b-b535-55e1c93b435f@linaro.org>
+Date: Mon, 31 Mar 2025 16:16:10 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 4/5] target/riscv: pmp: exit csr writes early if value
- was not changed
-To: =?UTF-8?Q?Lo=C3=AFc_Lefort?= <loic@rivosinc.com>
-Cc: qemu-devel@nongnu.org, Weiwei Li <liwei1518@gmail.com>,
- qemu-riscv@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-References: <20250313193011.720075-1-loic@rivosinc.com>
- <20250313193011.720075-5-loic@rivosinc.com>
- <3d3cf6a5-7ec2-427f-8f02-dc1e5a370996@linux.alibaba.com>
- <CAGKm2N+t4NH6vEswyGEmi3O_fCVvQ8p4qqReNu9rbD9x=wnCtQ@mail.gmail.com>
+Subject: Re: [PATCH v2 1/1] goldfish_rtc: keep time offset when resetting
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
+ Anup Patel <anup.patel@wdc.com>, Alistair Francis <Alistair.Francis@wdc.com>
+Cc: Frederik Du Toit Lotter <fred.lotter@canonical.com>,
+ qemu-riscv@nongnu.org, qemu-devel@nongnu.org, qemu-stable@nongnu.org
+References: <20250321221248.17764-1-heinrich.schuchardt@canonical.com>
 Content-Language: en-US
-From: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
-In-Reply-To: <CAGKm2N+t4NH6vEswyGEmi3O_fCVvQ8p4qqReNu9rbD9x=wnCtQ@mail.gmail.com>
-Received-SPF: pass client-ip=115.124.30.110;
- envelope-from=zhiwei_liu@linux.alibaba.com;
- helo=out30-110.freemail.mail.aliyun.com
-X-Spam_score_int: -174
-X-Spam_score: -17.5
-X-Spam_bar: -----------------
-X-Spam_report: (-17.5 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, ENV_AND_HDR_SPF_MATCH=-0.5,
- HTML_MESSAGE=0.001, RCVD_IN_DNSWL_NONE=-0.0001,
- RCVD_IN_VALIDITY_CERTIFIED_BLOCKED=0.001, RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001, UNPARSEABLE_RELAY=0.001,
- USER_IN_DEF_DKIM_WL=-7.5,
- USER_IN_DEF_SPF_WL=-7.5 autolearn=ham autolearn_force=no
+From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+In-Reply-To: <20250321221248.17764-1-heinrich.schuchardt@canonical.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::332;
+ envelope-from=philmd@linaro.org; helo=mail-wm1-x332.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -74,254 +103,28 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-This is a multi-part message in MIME format.
---------------QC239WoRnC5fgsZ8oy3c9Azo
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+On 21/3/25 23:12, Heinrich Schuchardt wrote:
+> Currently resetting the leads to resynchronizing the Goldfish RTC with the
+> system clock of the host. In real hardware an RTC reset would not change
+> the wall time. Other RTCs like pl031 do not show this behavior.
+> 
+> Move the synchronization of the RTC with the system clock to the instance
+> realization.
+> 
+> Cc: qemu-stable@nongnu.org
+> Reported-by: Frederik Du Toit Lotter <fred.lotter@canonical.com>
+> Fixes: 9a5b40b8427 ("hw: rtc: Add Goldfish RTC device")
+> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+> ---
+> v2:
+> 	Remove a superfluous intialization to nul.
+> 	Add Cc:, Fixes:, and Reviewed-by: tags.
+> v1:
+> 	https://lore.kernel.org/qemu-devel/CAAhSdy0-we9B19wRRqk_rRFkjY2LPPMRGaTdE=_4Ge_pCR4Y4Q@mail.gmail.com/T/
+> ---
+>   hw/rtc/goldfish_rtc.c | 13 ++++++-------
+>   1 file changed, 6 insertions(+), 7 deletions(-)
 
-
-On 2025/3/31 17:44, Loïc Lefort wrote:
->
->
-> On Sat, Mar 29, 2025 at 10:03 AM LIU Zhiwei 
-> <zhiwei_liu@linux.alibaba.com> wrote:
->
->
->     On 2025/3/14 03:30, Loïc Lefort wrote:
->     > Signed-off-by: Loïc Lefort <loic@rivosinc.com>
->     > Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
->     > ---
->     >   target/riscv/pmp.c | 22 +++++++++++++++-------
->     >   1 file changed, 15 insertions(+), 7 deletions(-)
->     >
->     > diff --git a/target/riscv/pmp.c b/target/riscv/pmp.c
->     > index c5f6cdaccb..845915e0c8 100644
->     > --- a/target/riscv/pmp.c
->     > +++ b/target/riscv/pmp.c
->     > @@ -141,6 +141,11 @@ static inline uint8_t
->     pmp_read_cfg(CPURISCVState *env, uint32_t pmp_index)
->     >   static bool pmp_write_cfg(CPURISCVState *env, uint32_t
->     pmp_index, uint8_t val)
->     >   {
->     >       if (pmp_index < MAX_RISCV_PMPS) {
->     > +        if (env->pmp_state.pmp[pmp_index].cfg_reg == val) {
->     > +            /* no change */
->     > +            return false;
->     > +        }
->     > +
->     >           if (pmp_is_readonly(env, pmp_index)) {
->     >               qemu_log_mask(LOG_GUEST_ERROR,
->     >                             "ignoring pmpcfg write - read only\n");
->     > @@ -528,6 +533,11 @@ void pmpaddr_csr_write(CPURISCVState *env,
->     uint32_t addr_index,
->     >       bool is_next_cfg_tor = false;
->     >
->     >       if (addr_index < MAX_RISCV_PMPS) {
->     > +        if (env->pmp_state.pmp[addr_index].addr_reg == val) {
->     > +            /* no change */
->     > +            return;
->     > +        }
->     > +
->     >           /*
->     >            * In TOR mode, need to check the lock bit of the next pmp
->     >            * (if there is a next).
->     > @@ -544,14 +554,12 @@ void pmpaddr_csr_write(CPURISCVState *env,
->     uint32_t addr_index,
->     >           }
->     >
->     >           if (!pmp_is_readonly(env, addr_index)) {
->     > -            if (env->pmp_state.pmp[addr_index].addr_reg != val) {
->
->     Is there some benefit removing this if sentence?
->
->
-> The if is not removed, it's moved to the top of the function.
-
-Oops! I miss it.
-
-Reviewed-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
-
-Thanks,
-Zhiwei
-
-> The goal is to skip processing and warnings when the write would not 
-> change the value already present in the register.For pmp_write_cfg, 
-> each pmpcfg register contains 4 config values and some of them might 
-> be locked so we want to avoid warnings when writing with unchanged values.
-> As you noted, the similar change in pmpaddr_csr_write has less 
-> benefit: it's only a minor optimization and is done for symmetry with 
-> pmp_write_cfg.
-
->
-> Loïc.
->
->
->     > - env->pmp_state.pmp[addr_index].addr_reg = val;
->     > -                pmp_update_rule_addr(env, addr_index);
->     > -                if (is_next_cfg_tor) {
->     > -                    pmp_update_rule_addr(env, addr_index + 1);
->     > -                }
->     > -                tlb_flush(env_cpu(env));
->     > +            env->pmp_state.pmp[addr_index].addr_reg = val;
->     > +            pmp_update_rule_addr(env, addr_index);
->     > +            if (is_next_cfg_tor) {
->     > +                pmp_update_rule_addr(env, addr_index + 1);
->     >               }
->     > +            tlb_flush(env_cpu(env));
->     >           } else {
->     >               qemu_log_mask(LOG_GUEST_ERROR,
->     >                             "ignoring pmpaddr write - read only\n");
->
---------------QC239WoRnC5fgsZ8oy3c9Azo
-Content-Type: text/html; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  </head>
-  <body>
-    <p><br>
-    </p>
-    <div class="moz-cite-prefix">On 2025/3/31 17:44, Loïc Lefort wrote:<br>
-    </div>
-    <blockquote type="cite"
-cite="mid:CAGKm2N+t4NH6vEswyGEmi3O_fCVvQ8p4qqReNu9rbD9x=wnCtQ@mail.gmail.com">
-      <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-      <div dir="ltr">
-        <div dir="ltr"><br>
-        </div>
-        <br>
-        <div class="gmail_quote gmail_quote_container">
-          <div dir="ltr" class="gmail_attr">On Sat, Mar 29, 2025 at
-            10:03 AM LIU Zhiwei &lt;<a
-              href="mailto:zhiwei_liu@linux.alibaba.com"
-              moz-do-not-send="true" class="moz-txt-link-freetext">zhiwei_liu@linux.alibaba.com</a>&gt;
-            wrote:<br>
-          </div>
-          <blockquote class="gmail_quote"
-style="margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex"><br>
-            On 2025/3/14 03:30, Loïc Lefort wrote:<br>
-            &gt; Signed-off-by: Loïc Lefort &lt;<a
-              href="mailto:loic@rivosinc.com" target="_blank"
-              moz-do-not-send="true" class="moz-txt-link-freetext">loic@rivosinc.com</a>&gt;<br>
-            &gt; Reviewed-by: Daniel Henrique Barboza &lt;<a
-              href="mailto:dbarboza@ventanamicro.com" target="_blank"
-              moz-do-not-send="true" class="moz-txt-link-freetext">dbarboza@ventanamicro.com</a>&gt;<br>
-            &gt; ---<br>
-            &gt;   target/riscv/pmp.c | 22 +++++++++++++++-------<br>
-            &gt;   1 file changed, 15 insertions(+), 7 deletions(-)<br>
-            &gt;<br>
-            &gt; diff --git a/target/riscv/pmp.c b/target/riscv/pmp.c<br>
-            &gt; index c5f6cdaccb..845915e0c8 100644<br>
-            &gt; --- a/target/riscv/pmp.c<br>
-            &gt; +++ b/target/riscv/pmp.c<br>
-            &gt; @@ -141,6 +141,11 @@ static inline uint8_t
-            pmp_read_cfg(CPURISCVState *env, uint32_t pmp_index)<br>
-            &gt;   static bool pmp_write_cfg(CPURISCVState *env,
-            uint32_t pmp_index, uint8_t val)<br>
-            &gt;   {<br>
-            &gt;       if (pmp_index &lt; MAX_RISCV_PMPS) {<br>
-            &gt; +        if (env-&gt;pmp_state.pmp[pmp_index].cfg_reg
-            == val) {<br>
-            &gt; +            /* no change */<br>
-            &gt; +            return false;<br>
-            &gt; +        }<br>
-            &gt; +<br>
-            &gt;           if (pmp_is_readonly(env, pmp_index)) {<br>
-            &gt;               qemu_log_mask(LOG_GUEST_ERROR,<br>
-            &gt;                             "ignoring pmpcfg write -
-            read only\n");<br>
-            &gt; @@ -528,6 +533,11 @@ void
-            pmpaddr_csr_write(CPURISCVState *env, uint32_t addr_index,<br>
-            &gt;       bool is_next_cfg_tor = false;<br>
-            &gt;   <br>
-            &gt;       if (addr_index &lt; MAX_RISCV_PMPS) {<br>
-            &gt; +        if (env-&gt;pmp_state.pmp[addr_index].addr_reg
-            == val) {<br>
-            &gt; +            /* no change */<br>
-            &gt; +            return;<br>
-            &gt; +        }<br>
-            &gt; +<br>
-            &gt;           /*<br>
-            &gt;            * In TOR mode, need to check the lock bit of
-            the next pmp<br>
-            &gt;            * (if there is a next).<br>
-            &gt; @@ -544,14 +554,12 @@ void
-            pmpaddr_csr_write(CPURISCVState *env, uint32_t addr_index,<br>
-            &gt;           }<br>
-            &gt;   <br>
-            &gt;           if (!pmp_is_readonly(env, addr_index)) {<br>
-            &gt; -            if
-            (env-&gt;pmp_state.pmp[addr_index].addr_reg != val) {<br>
-            <br>
-            Is there some benefit removing this if sentence?<br>
-            <br>
-            <br>
-          </blockquote>
-          <div>The if is not removed, it's moved to the top of the
-            function. </div>
-        </div>
-      </div>
-    </blockquote>
-    <p>Oops! I miss it.</p>
-    <p>Reviewed-by: LIU Zhiwei <a class="moz-txt-link-rfc2396E" href="mailto:zhiwei_liu@linux.alibaba.com">&lt;zhiwei_liu@linux.alibaba.com&gt;</a></p>
-    <p>Thanks,<br>
-      Zhiwei<br>
-    </p>
-    <blockquote type="cite"
-cite="mid:CAGKm2N+t4NH6vEswyGEmi3O_fCVvQ8p4qqReNu9rbD9x=wnCtQ@mail.gmail.com">
-      <div dir="ltr">
-        <div class="gmail_quote gmail_quote_container">
-          <div>The goal is to skip processing and warnings when the
-            write would not change the value already present in the
-            register.For pmp_write_cfg, each pmpcfg register contains 4
-            config values and some of them might be locked so we want to
-            avoid warnings when writing with unchanged values.</div>
-          <div>As you noted, the similar change in pmpaddr_csr_write has
-            less benefit: it's only a minor optimization and is done for
-            symmetry with pmp_write_cfg.</div>
-        </div>
-      </div>
-    </blockquote>
-    <br>
-    <blockquote type="cite"
-cite="mid:CAGKm2N+t4NH6vEswyGEmi3O_fCVvQ8p4qqReNu9rbD9x=wnCtQ@mail.gmail.com">
-      <div dir="ltr">
-        <div class="gmail_quote gmail_quote_container">
-          <div><br>
-          </div>
-          <div>Loïc.</div>
-          <blockquote class="gmail_quote"
-style="margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">
-            <br>
-            &gt; -               
-            env-&gt;pmp_state.pmp[addr_index].addr_reg = val;<br>
-            &gt; -                pmp_update_rule_addr(env, addr_index);<br>
-            &gt; -                if (is_next_cfg_tor) {<br>
-            &gt; -                    pmp_update_rule_addr(env,
-            addr_index + 1);<br>
-            &gt; -                }<br>
-            &gt; -                tlb_flush(env_cpu(env));<br>
-            &gt; +            env-&gt;pmp_state.pmp[addr_index].addr_reg
-            = val;<br>
-            &gt; +            pmp_update_rule_addr(env, addr_index);<br>
-            &gt; +            if (is_next_cfg_tor) {<br>
-            &gt; +                pmp_update_rule_addr(env, addr_index +
-            1);<br>
-            &gt;               }<br>
-            &gt; +            tlb_flush(env_cpu(env));<br>
-            &gt;           } else {<br>
-            &gt;               qemu_log_mask(LOG_GUEST_ERROR,<br>
-            &gt;                             "ignoring pmpaddr write -
-            read only\n");<br>
-          </blockquote>
-        </div>
-      </div>
-    </blockquote>
-  </body>
-</html>
-
---------------QC239WoRnC5fgsZ8oy3c9Azo--
+Thanks, patch queued!
 
