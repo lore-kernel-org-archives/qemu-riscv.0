@@ -4,54 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D4E40C28B20
-	for <qemu-riscv@archiver.kernel.org>; Mon, 31 Mar 2025 01:35:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F030FC3600B
+	for <qemu-riscv@archiver.kernel.org>; Mon, 31 Mar 2025 01:36:03 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tz43t-0005mm-2o; Sun, 30 Mar 2025 21:35:37 -0400
+	id 1tz43x-0005rS-QU; Sun, 30 Mar 2025 21:35:41 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dongli.zhang@oracle.com>)
- id 1tz43q-0005k0-Dv; Sun, 30 Mar 2025 21:35:34 -0400
+ id 1tz43s-0005l8-0q; Sun, 30 Mar 2025 21:35:36 -0400
 Received: from mx0b-00069f02.pphosted.com ([205.220.177.32])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dongli.zhang@oracle.com>)
- id 1tz43o-0005Au-Mo; Sun, 30 Mar 2025 21:35:34 -0400
-Received: from pps.filterd (m0246631.ppops.net [127.0.0.1])
- by mx0b-00069f02.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 52UNK1TK028644;
- Mon, 31 Mar 2025 01:34:46 GMT
+ id 1tz43o-0005BD-Td; Sun, 30 Mar 2025 21:35:35 -0400
+Received: from pps.filterd (m0246630.ppops.net [127.0.0.1])
+ by mx0b-00069f02.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 52ULU1A0027670;
+ Mon, 31 Mar 2025 01:34:55 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com; h=cc
  :content-transfer-encoding:date:from:in-reply-to:message-id
- :mime-version:references:subject:to; s=corp-2023-11-20; bh=26biS
- eKyClnKK7tVS05KxYECIm8bQH64xTAw4ai6yEU=; b=AMP5BHPd/PsMMkVDhV612
- YxuLbL38tNVM9mGC6uI2lDBSiim8QOAM2bqTfc46ySp+ctE/0GtRZIcJ8EJPemLP
- NYYDpZRihYdPcL+OXZ9sQVXOIk1+jY99MYdXNwVwslO9KK5ZgMzbMA4hKyUXjDdt
- K5/2BzW/zIYmxJMihUIsgJY8w3Ow/LrnX47ycDyQYDBb7IV93fa6TSIOc/blwtc5
- IJwNHcuKsdgGZljd2K0zViGQWw4dSRdbBHiJobeQdEPeeKmJII56C4KWZlIpsFGZ
- vFxEn8uxQb1BpyDKi1Aqmj5ZWrue9C146korwTOZ3y7+4reNob/mqhJmL51loQel
- A==
+ :mime-version:references:subject:to; s=corp-2023-11-20; bh=bsYY7
+ 7sPLtgFVkJTIcaQuh9O11DwYpZxE2oJZPuuUSU=; b=owaWBiZaLoEXFJNDRqBDX
+ OxRRHJmcQnTucL2fcT3zPcwuj836+9dFbA8s+3+AA5J5xDFt7AIDJJaEuARagL1k
+ jkFO49bk6roAThyxjkfHeJ1Scvl2Qc00EEmcVuq0NvL4af8jJrP4I79I0szoWOnA
+ zFdZku0Kfm7DsBTaC36Z9O1CSdcmlbHwTDUGKtsI6GMLi6AapM9O7eS8Cmxoc3VJ
+ cbcAega3V2t5hab32tMh/bdOfcX+5m8An8Ycmq3GrOuXRCQWpTB5bGyTS22xtjoQ
+ n0S8LX/eVn/s+kaUB0rUwE+F45IUEEVOPTVGb9jUb7KMD/7HfnRUcMZa1DaTBaY5
+ w==
 Received: from phxpaimrmta03.imrmtpd1.prodappphxaev1.oraclevcn.com
  (phxpaimrmta03.appoci.oracle.com [138.1.37.129])
- by mx0b-00069f02.pphosted.com (PPS) with ESMTPS id 45p7n22fh5-1
+ by mx0b-00069f02.pphosted.com (PPS) with ESMTPS id 45p79c2erv-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Mon, 31 Mar 2025 01:34:46 +0000 (GMT)
+ Mon, 31 Mar 2025 01:34:54 +0000 (GMT)
 Received: from pps.filterd
  (phxpaimrmta03.imrmtpd1.prodappphxaev1.oraclevcn.com [127.0.0.1])
  by phxpaimrmta03.imrmtpd1.prodappphxaev1.oraclevcn.com (8.18.1.2/8.18.1.2)
- with ESMTP id 52UMtMYT032819; Mon, 31 Mar 2025 01:34:45 GMT
+ with ESMTP id 52V0ELdZ033698; Mon, 31 Mar 2025 01:34:54 GMT
 Received: from pps.reinject (localhost [127.0.0.1])
  by phxpaimrmta03.imrmtpd1.prodappphxaev1.oraclevcn.com (PPS) with ESMTPS id
- 45p7a7ddp9-1
+ 45p7a7dds0-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Mon, 31 Mar 2025 01:34:45 +0000
+ Mon, 31 Mar 2025 01:34:53 +0000
 Received: from phxpaimrmta03.imrmtpd1.prodappphxaev1.oraclevcn.com
  (phxpaimrmta03.imrmtpd1.prodappphxaev1.oraclevcn.com [127.0.0.1])
- by pps.reinject (8.17.1.5/8.17.1.5) with ESMTP id 52V1YfxH015214;
- Mon, 31 Mar 2025 01:34:43 GMT
+ by pps.reinject (8.17.1.5/8.17.1.5) with ESMTP id 52V1YfxP015214;
+ Mon, 31 Mar 2025 01:34:52 GMT
 Received: from localhost.localdomain (ca-dev80.us.oracle.com [10.211.9.80])
  by phxpaimrmta03.imrmtpd1.prodappphxaev1.oraclevcn.com (PPS) with ESMTP id
- 45p7a7ddms-2; Mon, 31 Mar 2025 01:34:43 +0000
+ 45p7a7ddms-6; Mon, 31 Mar 2025 01:34:52 +0000
 From: Dongli Zhang <dongli.zhang@oracle.com>
 To: qemu-devel@nongnu.org, kvm@vger.kernel.org, qemu-arm@nongnu.org,
  qemu-ppc@nongnu.org, qemu-riscv@nongnu.org, qemu-s390x@nongnu.org
@@ -71,10 +71,10 @@ Cc: pbonzini@redhat.com, zhao1.liu@intel.com, mtosatti@redhat.com,
  flavra@baylibre.com, ewanhai-oc@zhaoxin.com, ewanhai@zhaoxin.com,
  cobechen@zhaoxin.com, louisqi@zhaoxin.com, liamni@zhaoxin.com,
  frankzhu@zhaoxin.com, silviazhao@zhaoxin.com
-Subject: [PATCH v3 01/10] target/i386: disable PerfMonV2 when PERFCORE
- unavailable
-Date: Sun, 30 Mar 2025 18:32:20 -0700
-Message-ID: <20250331013307.11937-2-dongli.zhang@oracle.com>
+Subject: [PATCH v3 05/10] target/i386/kvm: extract unrelated code out of
+ kvm_x86_build_cpuid()
+Date: Sun, 30 Mar 2025 18:32:24 -0700
+Message-ID: <20250331013307.11937-6-dongli.zhang@oracle.com>
 X-Mailer: git-send-email 2.43.5
 In-Reply-To: <20250331013307.11937-1-dongli.zhang@oracle.com>
 References: <20250331013307.11937-1-dongli.zhang@oracle.com>
@@ -88,8 +88,8 @@ X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 adultscore=0
  suspectscore=0 mlxscore=0 malwarescore=0 spamscore=0 bulkscore=0
  mlxlogscore=999 classifier=spam adjust=0 reason=mlx scancount=1
  engine=8.12.0-2502280000 definitions=main-2503310009
-X-Proofpoint-ORIG-GUID: fdBXOwDorZHqc51qL0PWU8uJIpssxPRs
-X-Proofpoint-GUID: fdBXOwDorZHqc51qL0PWU8uJIpssxPRs
+X-Proofpoint-GUID: CkD67ufuV0sL4g15oQOWxA2piRFtxYis
+X-Proofpoint-ORIG-GUID: CkD67ufuV0sL4g15oQOWxA2piRFtxYis
 Received-SPF: pass client-ip=205.220.177.32;
  envelope-from=dongli.zhang@oracle.com; helo=mx0b-00069f02.pphosted.com
 X-Spam_score_int: -41
@@ -115,57 +115,114 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-When the PERFCORE is disabled with "-cpu host,-perfctr-core", it is
-reflected in in guest dmesg.
+The initialization of 'has_architectural_pmu_version',
+'num_architectural_pmu_gp_counters', and
+'num_architectural_pmu_fixed_counters' is unrelated to the process of
+building the CPUID.
 
-[    0.285136] Performance Events: AMD PMU driver.
+Extract them out of kvm_x86_build_cpuid().
 
-However, the guest CPUID indicates the PerfMonV2 is still available.
+In addition, use cpuid_find_entry() instead of cpu_x86_cpuid(), because
+CPUID has already been filled at this stage.
 
-CPU:
-   Extended Performance Monitoring and Debugging (0x80000022):
-      AMD performance monitoring V2         = true
-      AMD LBR V2                            = false
-      AMD LBR stack & PMC freezing          = false
-      number of core perf ctrs              = 0x6 (6)
-      number of LBR stack entries           = 0x0 (0)
-      number of avail Northbridge perf ctrs = 0x0 (0)
-      number of available UMC PMCs          = 0x0 (0)
-      active UMCs bitmask                   = 0x0
-
-Disable PerfMonV2 in CPUID when PERFCORE is disabled.
-
-Suggested-by: Zhao Liu <zhao1.liu@intel.com>
-Fixes: 209b0ac12074 ("target/i386: Add PerfMonV2 feature bit")
 Signed-off-by: Dongli Zhang <dongli.zhang@oracle.com>
-Reviewed-by: Xiaoyao Li <xiaoyao.li@intel.com>
-Reviewed-by: Zhao Liu <zhao1.liu@intel.com>
-Reviewed-by: Sandipan Das <sandipan.das@amd.com>
 ---
 Changed since v1:
-  - Use feature_dependencies (suggested by Zhao Liu).
+  - Still extract the code, but call them for all CPUs.
 Changed since v2:
-  - Nothing. Zhao and Xiaoyao may move it to x86_cpu_expand_features()
-    later.
+  - Use cpuid_find_entry() instead of cpu_x86_cpuid().
+  - Didn't add Reviewed-by from Dapeng as the change isn't minor.
 
- target/i386/cpu.c | 4 ++++
- 1 file changed, 4 insertions(+)
+ target/i386/kvm/kvm.c | 62 ++++++++++++++++++++++++-------------------
+ 1 file changed, 35 insertions(+), 27 deletions(-)
 
-diff --git a/target/i386/cpu.c b/target/i386/cpu.c
-index 1b64ceaaba..2b87331be5 100644
---- a/target/i386/cpu.c
-+++ b/target/i386/cpu.c
-@@ -1808,6 +1808,10 @@ static FeatureDep feature_dependencies[] = {
-         .from = { FEAT_7_1_EDX,             CPUID_7_1_EDX_AVX10 },
-         .to = { FEAT_24_0_EBX,              ~0ull },
-     },
-+    {
-+        .from = { FEAT_8000_0001_ECX,       CPUID_EXT3_PERFCORE },
-+        .to = { FEAT_8000_0022_EAX,         CPUID_8000_0022_EAX_PERFMON_V2 },
-+    },
- };
+diff --git a/target/i386/kvm/kvm.c b/target/i386/kvm/kvm.c
+index 579c0f7e0b..4d86c08c6c 100644
+--- a/target/i386/kvm/kvm.c
++++ b/target/i386/kvm/kvm.c
+@@ -1959,33 +1959,6 @@ static uint32_t kvm_x86_build_cpuid(CPUX86State *env,
+         }
+     }
  
- typedef struct X86RegisterInfo32 {
+-    if (limit >= 0x0a) {
+-        uint32_t eax, edx;
+-
+-        cpu_x86_cpuid(env, 0x0a, 0, &eax, &unused, &unused, &edx);
+-
+-        has_architectural_pmu_version = eax & 0xff;
+-        if (has_architectural_pmu_version > 0) {
+-            num_architectural_pmu_gp_counters = (eax & 0xff00) >> 8;
+-
+-            /* Shouldn't be more than 32, since that's the number of bits
+-             * available in EBX to tell us _which_ counters are available.
+-             * Play it safe.
+-             */
+-            if (num_architectural_pmu_gp_counters > MAX_GP_COUNTERS) {
+-                num_architectural_pmu_gp_counters = MAX_GP_COUNTERS;
+-            }
+-
+-            if (has_architectural_pmu_version > 1) {
+-                num_architectural_pmu_fixed_counters = edx & 0x1f;
+-
+-                if (num_architectural_pmu_fixed_counters > MAX_FIXED_COUNTERS) {
+-                    num_architectural_pmu_fixed_counters = MAX_FIXED_COUNTERS;
+-                }
+-            }
+-        }
+-    }
+-
+     cpu_x86_cpuid(env, 0x80000000, 0, &limit, &unused, &unused, &unused);
+ 
+     for (i = 0x80000000; i <= limit; i++) {
+@@ -2085,6 +2058,39 @@ int kvm_arch_pre_create_vcpu(CPUState *cpu, Error **errp)
+     return 0;
+ }
+ 
++static void kvm_init_pmu_info(struct kvm_cpuid2 *cpuid)
++{
++    struct kvm_cpuid_entry2 *c;
++
++    c = cpuid_find_entry(cpuid, 0xa, 0);
++
++    if (!c) {
++        return;
++    }
++
++    has_architectural_pmu_version = c->eax & 0xff;
++    if (has_architectural_pmu_version > 0) {
++        num_architectural_pmu_gp_counters = (c->eax & 0xff00) >> 8;
++
++        /*
++         * Shouldn't be more than 32, since that's the number of bits
++         * available in EBX to tell us _which_ counters are available.
++         * Play it safe.
++         */
++        if (num_architectural_pmu_gp_counters > MAX_GP_COUNTERS) {
++            num_architectural_pmu_gp_counters = MAX_GP_COUNTERS;
++        }
++
++        if (has_architectural_pmu_version > 1) {
++            num_architectural_pmu_fixed_counters = c->edx & 0x1f;
++
++            if (num_architectural_pmu_fixed_counters > MAX_FIXED_COUNTERS) {
++                num_architectural_pmu_fixed_counters = MAX_FIXED_COUNTERS;
++            }
++        }
++    }
++}
++
+ int kvm_arch_init_vcpu(CPUState *cs)
+ {
+     struct {
+@@ -2267,6 +2273,8 @@ int kvm_arch_init_vcpu(CPUState *cs)
+     cpuid_i = kvm_x86_build_cpuid(env, cpuid_data.entries, cpuid_i);
+     cpuid_data.cpuid.nent = cpuid_i;
+ 
++    kvm_init_pmu_info(&cpuid_data.cpuid);
++
+     if (((env->cpuid_version >> 8)&0xF) >= 6
+         && (env->features[FEAT_1_EDX] & (CPUID_MCE | CPUID_MCA)) ==
+            (CPUID_MCE | CPUID_MCA)) {
 -- 
 2.39.3
 
