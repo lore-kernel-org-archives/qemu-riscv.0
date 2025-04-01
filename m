@@ -4,92 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8375FC36014
-	for <qemu-riscv@archiver.kernel.org>; Tue,  1 Apr 2025 06:19:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 17087C36014
+	for <qemu-riscv@archiver.kernel.org>; Tue,  1 Apr 2025 10:34:54 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tzUxZ-0004Hd-8v; Tue, 01 Apr 2025 02:18:53 -0400
+	id 1tzYxB-0008VB-HQ; Tue, 01 Apr 2025 06:34:45 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tzUxW-0004Gh-72
- for qemu-riscv@nongnu.org; Tue, 01 Apr 2025 02:18:50 -0400
-Received: from mail-wm1-x32a.google.com ([2a00:1450:4864:20::32a])
+ (Exim 4.90_1) (envelope-from <jay.chang@sifive.com>)
+ id 1tzYwl-0008SC-Tu
+ for qemu-riscv@nongnu.org; Tue, 01 Apr 2025 06:34:26 -0400
+Received: from mail-pl1-x629.google.com ([2607:f8b0:4864:20::629])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tzUxU-00011X-45
- for qemu-riscv@nongnu.org; Tue, 01 Apr 2025 02:18:49 -0400
-Received: by mail-wm1-x32a.google.com with SMTP id
- 5b1f17b1804b1-43cec5cd73bso32998885e9.3
- for <qemu-riscv@nongnu.org>; Mon, 31 Mar 2025 23:18:47 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <jay.chang@sifive.com>)
+ id 1tzYwh-0003py-G5
+ for qemu-riscv@nongnu.org; Tue, 01 Apr 2025 06:34:18 -0400
+Received: by mail-pl1-x629.google.com with SMTP id
+ d9443c01a7336-2255003f4c6so96545195ad.0
+ for <qemu-riscv@nongnu.org>; Tue, 01 Apr 2025 03:34:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1743488326; x=1744093126; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=zrBYSrQECCHHU7VRlWpCfOKFP6wJqZynf+6K7nNAk/A=;
- b=y+C4zO8VVp8h0mCHsGr2Sjj0c9K/7Nxz+hsBtkujigj5QEXFddBwKGoHBYKB1iQAp5
- upAHujwp8aD3/G+D6gACQ77n6O+FkBfYJA8FFNddp2Z1LmQWpDEEiHQZdIaONvrbhHVi
- qFM9KS8Hhvwosi6GsYlnCqfZlLLQuOMXwwSiTt+ckk8vMiPlaJ5urSq0x1W7LCt/cyFz
- LqcCTUKQkipCYwgq4bXl59HMo/KA836XW8/EE4U35k+oOpKWXX8rVLrIQXh4YkkZ2pT2
- R2F1Wvw5K/sZK8NvoPFhrWqMGqvgcqpfeTuHeNrNKdjQN6DoGHZfkv3vHsOpjXSlTHQs
- RTfA==
+ d=sifive.com; s=google; t=1743503651; x=1744108451; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=0edgTYoWHKRu92ltgEpm8dVjfH0ldEKXvt5V/yx46BU=;
+ b=hIIbjz1jl9SQvI6EMwEYhsy8vF13aBvzcn8zelPUEi12TxFfo36ttXT4gvBFHsySXU
+ TETWX0lZLhBE0Rrb/XZUaPPS0AeQJHzzfzuCA3lDcecPZDM/nME/VGaMLJHJY8unT6zH
+ NlpKM4hY22oo72QWxK3vveoGPKqU4S+dBz7bbGabHFb05gTPzJ/B7zDCZjGJeqPWk6CP
+ 24rQ5OIUe783OT8xv0GYGXhoXX1z33xL1VXtwx5fxqxnWvLtaRBxs45/D+7Hyhn/h66P
+ 96EUOeh2bN/KL3zjjmwk7LFiIfreiGXbR8+C6CmX27eaIDgOxkSSCNnwp0GR7r36tHht
+ BuRA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743488326; x=1744093126;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=zrBYSrQECCHHU7VRlWpCfOKFP6wJqZynf+6K7nNAk/A=;
- b=kthDC5RZ3ZuXkvFk3d+yWxHUMNGACuY38mLDSpsKaNvzCI7rEVqKcd/SQ5kcIpA2hb
- NsUn+kb5PpNLbwFG829TgpnC8GkeX/85lf5ELbVaFD56r+PPKwXs8ucmejUQ22MUlcmP
- sVi9YMs2XgyzV65aRKgw9hQ+xnDOO5Mtr/zhkhIW4gKm6jJtpP2/kvumKVbunae4uUUo
- YzNLy5tZbvVFkvcgTChFvLF9fD8SRH0BSFAsyjjHeGk4VbGllh0EzV5YpstDAg/zv1DN
- gHkQ0C1aAT3WLscVl3sHMOXXCckTbbetugr7yoH7fPDm5LWczWDZWGbsV1OPobQyWzVJ
- Y7Dg==
+ d=1e100.net; s=20230601; t=1743503651; x=1744108451;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=0edgTYoWHKRu92ltgEpm8dVjfH0ldEKXvt5V/yx46BU=;
+ b=Wh/5QbUp7WuOQqlO1gjV2gnRGJqdt5iOVQJfv0qY8RCUUG1XTZtT16Vj5rqT7oXMPy
+ BRgezBcyYbM3MFU0Z6SqbQwovIs74T+tDkl4v4+8qXxlYx1kI/X98CNvGzynMgIOkKMx
+ ivRFBCMHqYo+zEVbEj+EJgc6D2ef6nWb+EBTaeCyYMm3Pk/3Mr3DHs6ubjMry3j3J2pm
+ FMNbF1xTSTHaQO0MnKRc6Cku0JRfp9mafnpxXuZ9tO09AxKOm8y4ymZWLuJZeKRUBrkA
+ U33Ly9pPIAPgSUyUUukRvbm8LqRWW2DN2mwqAtNp2QRf1qzaAwbQzJ2XA1ZIQcmM7qSI
+ RtSQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWqXDKGV0zkUxfQzONPjbzTODMhKGOmXlT6mu7fH+XzDdREPbOEX0laqOcHsfvee2vCq4lI9KV6mTiq@nongnu.org
-X-Gm-Message-State: AOJu0YyXnx/DkBQ7VyNYsiORT+SgMVUGWcXQbexKdg6ngmaTFsGLnrE3
- V5Lyz7rSMz6EQkg14XD91fPGwGhOkpdAkkj8cdzkLwxiapag1ZNFRjnd4N9wgpUR/Xc3Faajw0l
- k
-X-Gm-Gg: ASbGncscAF9DiqzMjNv1k1bYjOvij8KVH4aO8gzy4vbpYX4DRH3JJFIxcT0ev+r7PCs
- wIEbYA2QLOcgkTROP/cMlt93tg1zae1j6gZyJF/p3XvbCz5RIzKjSC25jXDKrlXj0Z4fGgF6Sma
- RP+DL29/vAAHh9BmA7OE5hk2rLLc00AC91s3/7YL/oY0o2ulg/W5xPWbWBczohz9S6bpzmcTRjY
- aY947WnLHxixjtKRMu8CtUAKFOAk48eH/M3ZMFudVK/BIEjVFitxXXQ3yRfSj2+dwlrmaiDehIQ
- TeqNzqz9YooEWr1RTch0FjGVMR/53vTRiWfT43uTQff3iJLiGhknLqqzxS9p3eZs42UzOo1n4fH
- YfSsXcmj6qc7ansipEZqqgXE=
-X-Google-Smtp-Source: AGHT+IHEFcKR7QF74a23sK5/31lyy/w+za3XO2MYnXpQmlWSIhz402/KMJtUhwOAB7RJzht7BYgIeQ==
-X-Received: by 2002:a5d:47c8:0:b0:390:e48a:3869 with SMTP id
- ffacd0b85a97d-39c120cbacbmr8678800f8f.11.1743488326355; 
- Mon, 31 Mar 2025 23:18:46 -0700 (PDT)
-Received: from [192.168.69.235] (88-187-86-199.subs.proxad.net.
- [88.187.86.199]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-43d8fbc10e1sm144316795e9.12.2025.03.31.23.18.45
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 31 Mar 2025 23:18:45 -0700 (PDT)
-Message-ID: <c460aa3c-b953-4fd8-8675-6e9151971ad2@linaro.org>
-Date: Tue, 1 Apr 2025 08:18:45 +0200
+ AJvYcCXQ3g9FdaXqWO1dDxaLuUztswlQ1yiMxNLffIM9fNnWgUJLySSu8XT+GwBloh6KFN4Tdlc8PvF2tUYd@nongnu.org
+X-Gm-Message-State: AOJu0YwJQCSelwl7QgBcp4QLMEjlTRXqcjbeP4j0xhnTlmA4vs0DQYCK
+ FqapoiL+JuH0E2Yafy0+4t6Gx4WFIyCyptNq8XDxMjPXF5du+IAXDFpvN/2NYhk=
+X-Gm-Gg: ASbGncuow4c3hIo09PbFTdj+vWDcOjBqYUSNZ8e9dpiwGyZbgEOdPm6SWcmff6yws7u
+ feovYtJpyqxTWCCTUgl1JDpa9QRvvT1GTjDiK1QZHTtcwIDWzpklTT/n7wn27aPQgJ0XtNf7sU9
+ 7qWa2Ly+B1AOC6yD9MZJWjbzBX1IKMj0Zc499ket7RObi9pZzW7yjk3tjKiQZr9tWyn4T4vHnxp
+ KGhxXGHb4rt28V9IjVgca3zqOXwQMX1fIBOCrtDQTU+ZYeXn9u2taELbSbpG6Tl8r9bM7I5Dvp+
+ grUch+i2mPnsxBnrReE6hWo/oZJMb1tbCPYCnKI314dzPPzox400p/wm7kyN5p3TSeGKR1dm+XB
+ mZqZyt9Kx2wn6M9nqxhU=
+X-Google-Smtp-Source: AGHT+IFx73hADwyBHytLjOTTwy5RRB6FDicjyUgmPVy7yswo23nRaMQ52Ur3vBtT93/iLrCXlw1EaA==
+X-Received: by 2002:a17:902:e54e:b0:21a:8300:b9ce with SMTP id
+ d9443c01a7336-2295c12e596mr40803515ad.49.1743503651219; 
+ Tue, 01 Apr 2025 03:34:11 -0700 (PDT)
+Received: from jchang-1875.internal.sifive.com ([136.226.240.172])
+ by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-2291f1ded6asm85211795ad.184.2025.04.01.03.34.09
+ (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
+ Tue, 01 Apr 2025 03:34:10 -0700 (PDT)
+From: Jay Chang <jay.chang@sifive.com>
+To: qemu-devel@nongnu.org,
+	qemu-riscv@nongnu.org
+Cc: Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Weiwei Li <liwei1518@gmail.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Jay Chang <jay.chang@sifive.com>, Frank Chang <frank.chang@sifive.com>
+Subject: [PATCH v2 1/2] target/riscv: Restrict mideleg/medeleg/medelegh access
+ to S-mode harts
+Date: Tue,  1 Apr 2025 18:33:43 +0800
+Message-ID: <20250401103344.84257-1-jay.chang@sifive.com>
+X-Mailer: git-send-email 2.48.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 11/42] accel/tcg: Perform aligned atomic reads in
- translator_ld
-To: Richard Henderson <richard.henderson@linaro.org>, qemu-devel@nongnu.org
-Cc: pierrick.bouvier@linaro.org, Jim Shu <jim.shu@sifive.com>,
- Frank Chang <frank.chang@sifive.com>, qemu-riscv <qemu-riscv@nongnu.org>
-References: <20250318213209.2579218-1-richard.henderson@linaro.org>
- <20250318213209.2579218-12-richard.henderson@linaro.org>
-Content-Language: en-US
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-In-Reply-To: <20250318213209.2579218-12-richard.henderson@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::32a;
- envelope-from=philmd@linaro.org; helo=mail-wm1-x32a.google.com
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::629;
+ envelope-from=jay.chang@sifive.com; helo=mail-pl1-x629.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -105,83 +105,47 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Cc'ing Jim & Frank
+RISC-V Privileged Spec states:
+"In harts with S-mode, the medeleg and mideleg registers must exist, and
+setting a bit in medeleg or mideleg will delegate the corresponding trap
+, when occurring in S-mode or U-mode, to the S-mode trap handler. In
+harts without S-mode, the medeleg and mideleg registers should not
+exist."
 
-On 18/3/25 22:31, Richard Henderson wrote:
-> Perform aligned atomic reads in translator_ld, if possible.
-> According to
-> 
-> https://lore.kernel.org/qemu-devel/20240607101403.1109-1-jim.shu@sifive.com/
-> 
-> this is required for RISC-V Ziccif.
-> 
-> Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
-> ---
->   accel/tcg/translator.c | 42 ++++++++++++++++++++++++++++++++++++++----
->   1 file changed, 38 insertions(+), 4 deletions(-)
-> 
-> diff --git a/accel/tcg/translator.c b/accel/tcg/translator.c
-> index ef1538b4fc..157be33bf6 100644
-> --- a/accel/tcg/translator.c
-> +++ b/accel/tcg/translator.c
-> @@ -265,12 +265,14 @@ static bool translator_ld(CPUArchState *env, DisasContextBase *db,
->   
->       if (likely(((base ^ last) & TARGET_PAGE_MASK) == 0)) {
->           /* Entire read is from the first page. */
-> -        memcpy(dest, host + (pc - base), len);
-> -        return true;
-> +        goto do_read;
->       }
->   
->       if (unlikely(((base ^ pc) & TARGET_PAGE_MASK) == 0)) {
-> -        /* Read begins on the first page and extends to the second. */
-> +        /*
-> +         * Read begins on the first page and extends to the second.
-> +         * The unaligned read is never atomic.
-> +         */
->           size_t len0 = -(pc | TARGET_PAGE_MASK);
->           memcpy(dest, host + (pc - base), len0);
->           pc += len0;
-> @@ -329,7 +331,39 @@ static bool translator_ld(CPUArchState *env, DisasContextBase *db,
->           host = db->host_addr[1];
->       }
->   
-> -    memcpy(dest, host + (pc - base), len);
-> + do_read:
-> +    /*
-> +     * Assume aligned reads should be atomic, if possible.
-> +     * We're not in a position to jump out with EXCP_ATOMIC.
-> +     */
-> +    host += pc - base;
-> +    switch (len) {
-> +    case 2:
-> +        if (QEMU_IS_ALIGNED(pc, 2)) {
-> +            uint16_t t = qatomic_read((uint16_t *)host);
-> +            stw_he_p(dest, t);
-> +            return true;
-> +        }
-> +        break;
-> +    case 4:
-> +        if (QEMU_IS_ALIGNED(pc, 4)) {
-> +            uint32_t t = qatomic_read((uint32_t *)host);
-> +            stl_he_p(dest, t);
-> +            return true;
-> +        }
-> +        break;
-> +#ifdef CONFIG_ATOMIC64
-> +    case 8:
-> +        if (QEMU_IS_ALIGNED(pc, 8)) {
-> +            uint64_t t = qatomic_read__nocheck((uint64_t *)host);
-> +            stq_he_p(dest, t);
-> +            return true;
-> +        }
-> +        break;
-> +#endif
-> +    }
-> +    /* Unaligned or partial read from the second page is not atomic. */
-> +    memcpy(dest, host, len);
->       return true;
->   }
->   
+Add smode predicate to ensure these CSRs are only accessible when S-mode
+is supported.
+
+Reviewed-by: Frank Chang <frank.chang@sifive.com>
+Signed-off-by: Jay Chang <jay.chang@sifive.com>
+---
+ target/riscv/csr.c | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+index 7948188356..975d6e307f 100644
+--- a/target/riscv/csr.c
++++ b/target/riscv/csr.c
+@@ -5783,8 +5783,8 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] = {
+                           NULL,                read_mstatus_i128           },
+     [CSR_MISA]        = { "misa",       any,   read_misa,    write_misa,
+                           NULL,                read_misa_i128              },
+-    [CSR_MIDELEG]     = { "mideleg",    any,   NULL, NULL,   rmw_mideleg   },
+-    [CSR_MEDELEG]     = { "medeleg",    any,   read_medeleg, write_medeleg },
++    [CSR_MIDELEG]     = { "mideleg",    smode,   NULL, NULL,   rmw_mideleg   },
++    [CSR_MEDELEG]     = { "medeleg",    smode,   read_medeleg, write_medeleg },
+     [CSR_MIE]         = { "mie",        any,   NULL, NULL,   rmw_mie       },
+     [CSR_MTVEC]       = { "mtvec",      any,   read_mtvec,   write_mtvec   },
+     [CSR_MCOUNTEREN]  = { "mcounteren", umode, read_mcounteren,
+@@ -5792,7 +5792,7 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] = {
+ 
+     [CSR_MSTATUSH]    = { "mstatush",   any32, read_mstatush,
+                           write_mstatush                                   },
+-    [CSR_MEDELEGH]    = { "medelegh",   any32, read_zero, write_ignore,
++    [CSR_MEDELEGH]    = { "medelegh",   smode32, read_zero, write_ignore,
+                           .min_priv_ver = PRIV_VERSION_1_13_0              },
+     [CSR_HEDELEGH]    = { "hedelegh",   hmode32, read_hedelegh, write_hedelegh,
+                           .min_priv_ver = PRIV_VERSION_1_13_0              },
+-- 
+2.48.1
 
 
