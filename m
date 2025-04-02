@@ -4,97 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 87C7EC28B20
-	for <qemu-riscv@archiver.kernel.org>; Wed,  2 Apr 2025 14:40:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 20179C36018
+	for <qemu-riscv@archiver.kernel.org>; Wed,  2 Apr 2025 20:52:28 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1tzzGo-0006P0-Jd; Wed, 02 Apr 2025 10:40:47 -0400
+	id 1u0544-0001g3-Sh; Wed, 02 Apr 2025 16:52:01 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tzzGe-0006O4-Qi
- for qemu-riscv@nongnu.org; Wed, 02 Apr 2025 10:40:38 -0400
-Received: from mail-wm1-x32a.google.com ([2a00:1450:4864:20::32a])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1u0541-0001fC-7T
+ for qemu-riscv@nongnu.org; Wed, 02 Apr 2025 16:51:57 -0400
+Received: from mail-wm1-x332.google.com ([2a00:1450:4864:20::332])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1tzzGa-00040N-Ft
- for qemu-riscv@nongnu.org; Wed, 02 Apr 2025 10:40:36 -0400
-Received: by mail-wm1-x32a.google.com with SMTP id
- 5b1f17b1804b1-43cfe63c592so69557595e9.2
- for <qemu-riscv@nongnu.org>; Wed, 02 Apr 2025 07:40:30 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1u053z-0003VC-F2
+ for qemu-riscv@nongnu.org; Wed, 02 Apr 2025 16:51:56 -0400
+Received: by mail-wm1-x332.google.com with SMTP id
+ 5b1f17b1804b1-43ea40a6e98so1424495e9.1
+ for <qemu-riscv@nongnu.org>; Wed, 02 Apr 2025 13:51:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1743604829; x=1744209629; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:content-language:references
- :cc:to:from:subject:user-agent:mime-version:date:message-id:from:to
- :cc:subject:date:message-id:reply-to;
- bh=tvMjyOyyNNwjTWNo1fk6qGXnG8fPKOLFq2Z6zXy8Ma4=;
- b=LkSD+7ZXysa9xoNdpN97gMxGmqVa8ApI48RGl6iU8VvraG+m2lk5FPsx2/rOZ2IC1X
- 6Vx7Z//e22POyd71g+duSA5v1MLv4GriKt/3LnM8iUd/MTY26dDBsxV+I4HqnRUsW5Lg
- vgFCWOKW6cJnXkWt/XnmSvOJLPRGjbZjTDVvNv+YD9wMQu51gk44Upydl9F2NQUDfiAH
- FMXimCzo17A7ZmqlpkKFA+N4mouMxNbeAE2xcQr1oFkHuvfWBgJ4buMHkL7Igdv6FLN2
- g0uJfaM8eEWue0cs9gOP1Q1KzGaHiUs6pVMUwv57ZE2KvuN0SgoEDarArRoZ7AR9rOsj
- yR4A==
+ d=linaro.org; s=google; t=1743627113; x=1744231913; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=5N4L3guCN8JF+0GLyMHnBGKGYM6I3bXNhCG63p6xTsc=;
+ b=oYAgXKraP7OrMM0T8dmMXCExPZoXDiu0Juqo7oC1uEnsHsS5fQ6koOZg6EbFllNcJd
+ 3FvzX6r0vpIk4YLDXkm/EpwArMrakoD+DRsE4iGnwfqqCAkS0LmyiAIsYVAmZSTU4TKW
+ 7w4q/cWa5sgUEkvI/uKeskQ3GEkOiuk0/EyieA1L/IsZL9DjIgaCwLfKGK87PjWX9WyP
+ 3due3UdwWEFyQmTNdTGVGjq1wGRspas/rNJTs2eXacz9AES7wcHxhLeDwq8YQybyPkAc
+ 6D3Ncu+3weym39hGipolVXf6945h1vvvEfPwvoLznm/a4cWoXecORZk3ynHtsogJxCPX
+ Rn/Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743604829; x=1744209629;
- h=content-transfer-encoding:in-reply-to:content-language:references
- :cc:to:from:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=tvMjyOyyNNwjTWNo1fk6qGXnG8fPKOLFq2Z6zXy8Ma4=;
- b=QFBpiO6ZdWyC4QrFP4QdrH7GbSVxMA324B020mH+T5BkzNo9QpNHE6ej6PXYTCmgrm
- XhG5Z+EbP/dxmjioDUj7g0HG0m1V0CxHTTSn5uPySgp/J+HF/bjqFKWJSJ+o0Ow++Khx
- 4kfjHH3ddnDua1cptb7Cts60XHLm1az7EfuwQR20v/AuQxwOmtLZdh9A7krKQP1CQCVF
- r8kI/EeXwdkKmxVk9rHBGZ6UMycfXhr2WC0IEZfLTDaNwgHVRbGc/7Pp/qc5E7p581nq
- 1SM8seKb8sESmO9HQ2ZBYT2dOiBLww43XJ8ttyomu0wZkeuPXe31wnwIscq7dWxkteXF
- txPA==
+ d=1e100.net; s=20230601; t=1743627113; x=1744231913;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=5N4L3guCN8JF+0GLyMHnBGKGYM6I3bXNhCG63p6xTsc=;
+ b=ZqhNx0WJqvB0XMy87xqbBZ/y65tya3lPREZpST22umC21/PJLLyQ7NhIYko51VHCcw
+ ZxeUUnhIadJPYsvTDxmiSW9TU3GEkjsSCDxwvHgbWpHrG2cTxnzrmuGF5NzXngxi9Mxs
+ odFwa4gkA9X2eL+IwRuJjK2ydV0MK9p4UGsZs2Rlr8uZd8jx7VxxU1SljQqr0Gz9tx2F
+ FpCPIXEVqKojkQwSvc3Io6b3uI9Tpf1B36Xlb30IxESY11ZlcBO2eP+f2p13zEShNHGU
+ EBZBbA7d3gCZQQotgcsIDtUqDwA8h7LtS18kT5ee/thco3g7WNlhOw2OiVg+pPxDvUfn
+ u28A==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWrCl0WRroBfy/uzTKVqW2uIoEjEUzj7rgNHPmj+EMyJJdMB2dP+/3euRuUzYN3XMY1uuegCHpzwZJb@nongnu.org
-X-Gm-Message-State: AOJu0YxTmrRVmMTYQFQtyw2YqexmOR66eAvijtTVOu50MNKtXEMzWuo9
- HOcsaTWp/wCFLzy9gV9gTJ4SGSYEqeJZ7KAHVcAJ77HxC46o5V62gdcIJRtgLO0=
-X-Gm-Gg: ASbGncvm4CgVxaAhu0UOzyi1SL1Ekj52MiDqMiSpMj0wsPjwaQcWnoQuKuupmeNNc5x
- aAEUZzozdSsbpCPr1faLIFPNhHGNIoZzbEwot0tYREMoidi4qXlKnNTmeTImHCs4tFEs6xPac9H
- e+dLvfSgPpHPiZrPYeYjcn1MC8mC9YHX3zd8mLEppkMCaffE0FxJbaxSUt4p9gsoNpbzFnvDSvd
- b82qtPvYTcaqRtftWX/jUPRxxZrVSKl6fHGAFA9FtOZvBDIp78VXKtqN4UbZcIg5Kqn6bUhrX9V
- nNFIudS8AgQhYC5SEoIn0iCtSLbTnA3b9sbsVuAqz3np1/BksXOE+xAUz4v38o6tT9OxI6L1HuT
- ut5saLcGu1aWz
-X-Google-Smtp-Source: AGHT+IGsM2J2ZUE+TigT5GPiigBXYlUgFMk1vexz/bFmC1Pl4cDpkzJXrYz+Lj1hWeY5oIBeIt7Tjg==
-X-Received: by 2002:a05:600c:4f43:b0:43c:fad6:fa5a with SMTP id
- 5b1f17b1804b1-43db62b77acmr156577125e9.24.1743604829386; 
- Wed, 02 Apr 2025 07:40:29 -0700 (PDT)
-Received: from [192.168.69.235] (88-187-86-199.subs.proxad.net.
+ AJvYcCUwow8VChhJZqwjmnxaFSfMmzls1ibiqBqd+mTM2LvSD6Hhku9KRH/3m9eDGKQxFM7l3YCUDHogNJXr@nongnu.org
+X-Gm-Message-State: AOJu0Ywpy74s3kxYuTOdjleMGTH094q+Zym78gEGaKDe+TzCnQJxXW2p
+ RR0kkkjG/YGnBhMtpSLs54LMgI1BSLROS/dLQx1wjq1ppVVCWwGERQAji3ZXx3U=
+X-Gm-Gg: ASbGnctoQvYEHOY6TBtJFkXo4sC6uXkdqMvpiuzm+SsbGzeMzZx6BkZMYVTR3RSC43A
+ r7VWYX2Uv2ok1HptTOoF43RmEMUZSY57ioF9AhY19AEt3p9+V1YSq3hIJPS6/B0UWFAXBO3qigj
+ Jc7hruzaYEigqk0QxjqZHpQZ4YZru+R4AiKdzNEoqcjjbS0kVDsMiVaanmhHep/YvlzgL1Ujpmy
+ 9iD1symFFkJX1T3WMOOWVCSIqTWGcmcYWhjjgxQi3Z1lMXI9z3nttAnUmknUkrdsaDfg8YyQOSO
+ V3pipEhIRiCdiMTlLgAb0bD5YejGQ6SEl44elBdrYcyl0qvXRx270SvYej2boHHzTilC4O+ep+r
+ TNm/He16Ae4xHA2m/SJQ=
+X-Google-Smtp-Source: AGHT+IFPtgU9yf0blNaXTQBOlSi1ZLMzKm2T4Duf/kCz5GaSuMCjHofcHVWHPmkWcgu5ihaQF/AJTw==
+X-Received: by 2002:a05:600c:470f:b0:43c:e305:6d50 with SMTP id
+ 5b1f17b1804b1-43eb5c95bf9mr35185005e9.24.1743627113264; 
+ Wed, 02 Apr 2025 13:51:53 -0700 (PDT)
+Received: from localhost.localdomain (88-187-86-199.subs.proxad.net.
  [88.187.86.199]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-43eb60eae85sm22764335e9.26.2025.04.02.07.40.28
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 02 Apr 2025 07:40:28 -0700 (PDT)
-Message-ID: <90049822-b71a-4120-9537-7d43caf44f83@linaro.org>
-Date: Wed, 2 Apr 2025 16:40:27 +0200
+ 5b1f17b1804b1-43ec169b4e4sm1759465e9.20.2025.04.02.13.51.52
+ (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
+ Wed, 02 Apr 2025 13:51:52 -0700 (PDT)
+From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+To: qemu-devel@nongnu.org
+Cc: Weiwei Li <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ qemu-riscv@nongnu.org, Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
+ Richard Henderson <richard.henderson@linaro.org>
+Subject: [PATCH-for-10.0?] target/riscv: Do not expose rv128 CPU on user mode
+ emulation
+Date: Wed,  2 Apr 2025 22:51:51 +0200
+Message-ID: <20250402205151.51415-1-philmd@linaro.org>
+X-Mailer: git-send-email 2.47.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH-for-10.1 1/4] target/riscv: Restrict RV128 MTTCG check on
- system emulation
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-To: Richard Henderson <richard.henderson@linaro.org>, qemu-devel@nongnu.org,
- Alexandre Ghiti <alexghiti@rivosinc.com>
-Cc: Anton Johansson <anjo@rev.ng>,
- Pierrick Bouvier <pierrick.bouvier@linaro.org>,
- Paolo Bonzini <pbonzini@redhat.com>, qemu-riscv <qemu-riscv@nongnu.org>,
- Frank Chang <frank.chang@sifive.com>, Bin Meng <bmeng@tinylab.org>,
- Andrew Jones <ajones@ventanamicro.com>, Palmer Dabbelt <palmer@rivosinc.com>
-References: <20250321155925.96626-1-philmd@linaro.org>
- <20250321155925.96626-2-philmd@linaro.org>
- <2650b68f-e705-4994-9791-0bf8b2e01d74@linaro.org>
- <43e170ad-d4e3-489d-a049-22361cd34f13@linaro.org>
-Content-Language: en-US
-In-Reply-To: <43e170ad-d4e3-489d-a049-22361cd34f13@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::32a;
- envelope-from=philmd@linaro.org; helo=mail-wm1-x32a.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::332;
+ envelope-from=philmd@linaro.org; helo=mail-wm1-x332.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -110,83 +103,90 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 2/4/25 16:25, Philippe Mathieu-Daudé wrote:
-> On 23/3/25 19:08, Richard Henderson wrote:
->> On 3/21/25 08:59, Philippe Mathieu-Daudé wrote:
->>> Multi-threaded TCG only concerns system emulation.
->>
->> That's not really true.  User emulation simply has no option to
->> run in a single-threaded context.
->>
->> I really don't think we should allow RV128 in user-mode at all.
->> Certainly not until there's a kernel abi for it.
-> 
-> It seems to be safe since commit 905b9fcde1f ("target/riscv: Replace
-> is_32bit with get_xl/get_xlen"):
-> 
->   #ifdef TARGET_RISCV32
->   #define get_xl(ctx)    MXL_RV32
->   #elif defined(CONFIG_USER_ONLY)
->   #define get_xl(ctx)    MXL_RV64
->   #else
->   #define get_xl(ctx)    ((ctx)->xl)
->   #endif
-> 
-> Should we undefine MXL_RV128 on user-mode?
+As Richard mentioned:
 
-Indeed the CPU is exposed on user-mode...
+  We should allow RV128 in user-mode at all until there's a
+  kernel abi for it.
 
-$ qemu-riscv64 -cpu help
-Available CPUs:
-   max
-   rv64
-   rv64e
-   rv64i
-   rva22s64
-   rva22u64
-   rva23s64
-   rva23u64
-   shakti-c
-   sifive-e51
-   sifive-u54
-   thead-c906
-   tt-ascalon
-   veyron-v1
-   x-rv128           <---------
-   xiangshan-nanhu
+Remove the experimental 'x-rv128' CPU on user emulation
+(since it is experimental, no deprecation period is required).
 
-Per commit 6df3747a274 ("riscv: Introduce satp mode hw
-capabilities") I wonder if this is expected.
+Reported-by: Richard Henderson <richard.henderson@linaro.org>
+Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+---
+ target/riscv/cpu.c         | 10 ++++------
+ target/riscv/tcg/tcg-cpu.c |  5 +++--
+ 2 files changed, 7 insertions(+), 8 deletions(-)
 
-Anyhow, I'll post a patch disabling it as:
-
--- >8 --
 diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 430b02d2a58..33abcef0073 100644
+index 430b02d2a58..ad534cee51f 100644
 --- a/target/riscv/cpu.c
 +++ b/target/riscv/cpu.c
-@@ -699,3 +699,3 @@ static void rv64_xiangshan_nanhu_cpu_init(Object *obj)
-
+@@ -697,7 +697,7 @@ static void rv64_xiangshan_nanhu_cpu_init(Object *obj)
+ #endif
+ }
+ 
 -#ifdef CONFIG_TCG
 +#if defined(CONFIG_TCG) && !defined(CONFIG_USER_ONLY)
-  static void rv128_base_cpu_init(Object *obj)
-@@ -710,7 +710,6 @@ static void rv128_base_cpu_init(Object *obj)
-      env->priv_ver = PRIV_VERSION_LATEST;
+ static void rv128_base_cpu_init(Object *obj)
+ {
+     RISCVCPU *cpu = RISCV_CPU(obj);
+@@ -708,11 +708,9 @@ static void rv128_base_cpu_init(Object *obj)
+ 
+     /* Set latest version of privileged specification */
+     env->priv_ver = PRIV_VERSION_LATEST;
 -#ifndef CONFIG_USER_ONLY
-+
-      set_satp_mode_max_supported(RISCV_CPU(obj), VM_1_10_SV57);
+     set_satp_mode_max_supported(RISCV_CPU(obj), VM_1_10_SV57);
 -#endif
-  }
+ }
 -#endif /* CONFIG_TCG */
 +#endif /* CONFIG_TCG && !CONFIG_USER_ONLY */
-
-@@ -3257,3 +3256,3 @@ static const TypeInfo riscv_cpu_type_infos[] = {
-                                                   MXL_RV64, 
-rv64_xiangshan_nanhu_cpu_init),
+ 
+ static void rv64i_bare_cpu_init(Object *obj)
+ {
+@@ -3255,9 +3253,9 @@ static const TypeInfo riscv_cpu_type_infos[] = {
+     DEFINE_VENDOR_CPU(TYPE_RISCV_CPU_VEYRON_V1,  MXL_RV64,  rv64_veyron_v1_cpu_init),
+     DEFINE_VENDOR_CPU(TYPE_RISCV_CPU_XIANGSHAN_NANHU,
+                                                  MXL_RV64, rv64_xiangshan_nanhu_cpu_init),
 -#ifdef CONFIG_TCG
 +#if defined(CONFIG_TCG) && !defined(CONFIG_USER_ONLY)
-      DEFINE_DYNAMIC_CPU(TYPE_RISCV_CPU_BASE128,   MXL_RV128, 
-rv128_base_cpu_init),
+     DEFINE_DYNAMIC_CPU(TYPE_RISCV_CPU_BASE128,   MXL_RV128, rv128_base_cpu_init),
+-#endif /* CONFIG_TCG */
++#endif /* CONFIG_TCG && !CONFIG_USER_ONLY */
+     DEFINE_BARE_CPU(TYPE_RISCV_CPU_RV64I,        MXL_RV64,  rv64i_bare_cpu_init),
+     DEFINE_BARE_CPU(TYPE_RISCV_CPU_RV64E,        MXL_RV64,  rv64e_bare_cpu_init),
+     DEFINE_PROFILE_CPU(TYPE_RISCV_CPU_RVA22U64,  MXL_RV64,  rva22u64_profile_cpu_init),
+diff --git a/target/riscv/tcg/tcg-cpu.c b/target/riscv/tcg/tcg-cpu.c
+index 19ab324cb2a..50e81b2e521 100644
+--- a/target/riscv/tcg/tcg-cpu.c
++++ b/target/riscv/tcg/tcg-cpu.c
+@@ -1048,7 +1048,6 @@ static bool riscv_cpu_is_generic(Object *cpu_obj)
+ static bool riscv_tcg_cpu_realize(CPUState *cs, Error **errp)
+ {
+     RISCVCPU *cpu = RISCV_CPU(cs);
+-    RISCVCPUClass *mcc = RISCV_CPU_GET_CLASS(cpu);
+ 
+     if (!riscv_cpu_tcg_compatible(cpu)) {
+         g_autofree char *name = riscv_cpu_get_name(cpu);
+@@ -1057,6 +1056,9 @@ static bool riscv_tcg_cpu_realize(CPUState *cs, Error **errp)
+         return false;
+     }
+ 
++#ifndef CONFIG_USER_ONLY
++    RISCVCPUClass *mcc = RISCV_CPU_GET_CLASS(cpu);
++
+     if (mcc->misa_mxl_max >= MXL_RV128 && qemu_tcg_mttcg_enabled()) {
+         /* Missing 128-bit aligned atomics */
+         error_setg(errp,
+@@ -1065,7 +1067,6 @@ static bool riscv_tcg_cpu_realize(CPUState *cs, Error **errp)
+         return false;
+     }
+ 
+-#ifndef CONFIG_USER_ONLY
+     CPURISCVState *env = &cpu->env;
+ 
+     tcg_cflags_set(CPU(cs), CF_PCREL);
+-- 
+2.47.1
 
----
 
