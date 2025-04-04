@@ -4,69 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 834EEC3600C
-	for <qemu-riscv@archiver.kernel.org>; Fri,  4 Apr 2025 03:06:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 77336C3600C
+	for <qemu-riscv@archiver.kernel.org>; Fri,  4 Apr 2025 03:12:21 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1u0XNW-0008QI-SP; Thu, 03 Apr 2025 23:05:58 -0400
+	id 1u0XTe-0001wk-Fm; Thu, 03 Apr 2025 23:12:18 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1u0XNP-0008P0-AP; Thu, 03 Apr 2025 23:05:51 -0400
-Received: from mail-ua1-x934.google.com ([2607:f8b0:4864:20::934])
+ id 1u0XTd-0001wR-AV; Thu, 03 Apr 2025 23:12:17 -0400
+Received: from mail-ua1-x936.google.com ([2607:f8b0:4864:20::936])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1u0XNN-0000H4-R0; Thu, 03 Apr 2025 23:05:51 -0400
-Received: by mail-ua1-x934.google.com with SMTP id
- a1e0cc1a2514c-86b9d1f729eso770413241.3; 
- Thu, 03 Apr 2025 20:05:49 -0700 (PDT)
+ id 1u0XTb-00013t-PR; Thu, 03 Apr 2025 23:12:16 -0400
+Received: by mail-ua1-x936.google.com with SMTP id
+ a1e0cc1a2514c-86c29c0acdfso779943241.3; 
+ Thu, 03 Apr 2025 20:12:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1743735948; x=1744340748; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1743736334; x=1744341134; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=IWmnXqdlB0nFjCg5iRnM4KwJZslYg9snhPDyW07FDOU=;
- b=XHcd06iwThgBdTE02ZuNOPibmE4RmjJXZbK+5bcjyJdVJY7EarEVB+4/KrzDKn3o+b
- Wz2NNBbfkamdPG8Q6O7xItBOsa7nmICuUGPmUle+1kiB5KH6m4sC8+MSZJDxpwcqr+pf
- In+uwQfAP/ysN7VgTcOHmDiOSiStbB9WTM6NK1pMz4SkUwV1OMOHZcnT6QuoJ+0dWCDf
- bzF6j35wPb9c5UTIjupRs1lExLNt0xeqFcXQJnn8iutNvZOzq4z7H8Cht2oGx9SCh1W4
- IJvmUdCk/ExT7CCEbZVVN5b0vnXBk/JlrmOYnWO5KVSeTf0HAatSXQbb909543tmcpE1
- KVZw==
+ bh=F3YmNRA/bmmZ7jXysI2R5gi1Whw7OolM6Mcre3dbFTI=;
+ b=NnDrNeF+eh59JudNvdWKS81191RzQ1Im5nodYCzHPsyTCg7vu7N0GE+H9I9UMFvVsg
+ /AdzR31ORLJswpLfszemmX+e3cvu48sWk4fwDctCBTDU//GmTvbm2Ipvw28AxpjNy2lD
+ LLlkAMR3R0Cbba51z6Pt5MDIEJnwcn9jf2+ePh9pZhVR0NxnAOPZdRO+vAz3kZj9JXF5
+ 0N9y+FN9Opz6HWr5cqohyewJjfH1VM0raqQKs9UvzWMr17VtRiTTeFZLdbMkidOYs0tR
+ Y0cFolOL4cgvywOrVd7m0mP2BwF9E5sexH3D4Tm/fIx7LU9lDo09FrEzzWGhMHhdfaS3
+ VGyw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743735948; x=1744340748;
+ d=1e100.net; s=20230601; t=1743736334; x=1744341134;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=IWmnXqdlB0nFjCg5iRnM4KwJZslYg9snhPDyW07FDOU=;
- b=Wb0TRz2CUL40tJ+DTePOF4yl6UwXt0qmOaZ2igRX9o8ozWRjNSMlQ5ub42GbjdmqtY
- 2cOgsK3DcrOZEfbqr+lxQel1R1v3gerPB56N02xol8KyiJsTSPFLObiP2WT+WC/h0tGr
- Tte927yjFFC4Bf8OnRfrFbyWKD1IzQeDiYWbMqGXe585OjgpV/EJUeuBIaaLWVwWJZyG
- R89w65EH3hFupEP5bzFgXR3yFhfYxyfsqQO+s2WlrvPDJViDmZJyddVX3oBzuDbq1YH6
- tq4VMPHKmD2C/PGBojXGONhhaEmpyDqHhdd3gPRahl7T8VO7Yxu+ys6ivFj7GeyjkYJ9
- VSJg==
+ bh=F3YmNRA/bmmZ7jXysI2R5gi1Whw7OolM6Mcre3dbFTI=;
+ b=jpemqkIYo0C/CgN8CA4MW1lezKM1Bz25OVDaVS9Lqt8mB1oYYVQ9nuk/BzQHdw7wZm
+ fQdzk3LmQaLK3Mlx2Mm3EJHvCXjjv3W0FJDXbEEkVabPrf3J5q/Uu3kPweSEtlji/wpM
+ x/GO1gusVZX4Z4534sB3dWed4SZs4eJW2qyYpcys5GiyfdYGyeWsfCcqkVsJvDwhOKlE
+ Y/g/3Rg9tKDENeMLQT9nm8Vq4gIX6RhJawtHuWYRV2qHiLJpQnIEsThqyzXS7fd1D3rM
+ zslseFs8W+sr+FOI6Rs0kgE9OHHrPlNhAgxHwshWo/IlksEfgRA+YHitIAvG3sstNHpj
+ mrUQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCU4qTiuh4xFOiSAjmtNh9ju+ABeLKhSFvZNlBAs0Qx4BakhYFKEfPPAUEYVxLQ3Utq/dcQjBFQvLrvD@nongnu.org
-X-Gm-Message-State: AOJu0Yx35RdPn+jIAjeenU3XlgE4U1/y78oN1NgzeU34csDBRH5fTmIY
- VDH8A03lJ4pHvgMW2BqHkzJGkCvU6ce6zrDrF4kLp9WXg8VfhIf8Jvt7pQ7ikN1IFgZejDLogtG
- DMp852ENSPTBLZTadKbhQHCSkpiMqXA==
-X-Gm-Gg: ASbGncvM1DgxEbg0jB9p9+tib3B4ytov6M/ZGmQF5yRKNlDho6FKoc8mi0MxR0gFgPB
- weLpVXGhH3j9UTmbNLEz7G0LwtTlElqtSiPRdbQtcqy4FYEvEFHFNqM2pcKT0R/yiG12XT9dBeJ
- 2x71RJhnmSCebRM8RsZozP5VHviB8bzAMA0tW2EdqZ8ZP7fQ+9bgWzGz1w
-X-Google-Smtp-Source: AGHT+IGxi7hAhGEEeklXfIkN5yeytNfI9Pxn6+LB1mPa0QPDdDlAJLLE4Dj+sIidTI4QRiVdNLcu7+FxpqSvJQmhM7k=
-X-Received: by 2002:a05:6102:1481:b0:4c4:df5b:330f with SMTP id
- ada2fe7eead31-4c8554696f1mr1511662137.17.1743735948284; Thu, 03 Apr 2025
- 20:05:48 -0700 (PDT)
+ AJvYcCWO/v4A3yTHtiJm0s05j3UCtrgZoyUYi9g5GIw7V9FyxfTyBTJbdXr7fgyeTODNgQth4ukFSC7xwI9x@nongnu.org
+X-Gm-Message-State: AOJu0Yx+lDd4GCixfJijVYKH5hSboDnLHwEHcSH+WfPrDMXi74JKgFT3
+ mr4gDgjzXsbIewoJShoKe/DC2Dy7gFdDAT/BI/B3V99swf3DR8vzva1ns0kbAzb0xuw9bin9fL3
+ qVSqJdQxf8+8iF/x9QeCv/p1YX+I=
+X-Gm-Gg: ASbGncstVg4biKzifYLGxBhaB2N+ZPOSk3Low4FfcAJR1iL5JFAYjHxgptE5DXrG/+h
+ T3Cs6Ih44YWbH+zSUrS49aOxmvqZlkgzAre1OUI2V4McheHkzT7X6PBLgKt4afY1J73+M2McqZC
+ 0B0uoX/YDXZzYClWWs5AGR3YkX3TcXd0S4EmbQ3JC9+ewtPiMG0I0Y3rG9
+X-Google-Smtp-Source: AGHT+IHzcHKgVUKQAxMWe4yg9KXn3VsOpbhjN2kuISGPNHlLIs5MPISusnJ1Byxv0hak1HZvllJG5mdx3BYcIREakMs=
+X-Received: by 2002:a05:6102:418b:b0:4c1:b0ad:a0bd with SMTP id
+ ada2fe7eead31-4c8554acac7mr1375133137.23.1743736333977; Thu, 03 Apr 2025
+ 20:12:13 -0700 (PDT)
 MIME-Version: 1.0
 References: <20250319192153.28549-1-jim.shu@sifive.com>
- <20250319192153.28549-2-jim.shu@sifive.com>
-In-Reply-To: <20250319192153.28549-2-jim.shu@sifive.com>
+ <20250319192153.28549-3-jim.shu@sifive.com>
+In-Reply-To: <20250319192153.28549-3-jim.shu@sifive.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Fri, 4 Apr 2025 13:05:22 +1000
-X-Gm-Features: ATxdqUF-cQF2UYDxTUJi4TeCcUCCoG1eHiq6te7ZJcsm6t6aVxCzkkmULNrSEaI
-Message-ID: <CAKmqyKM5d7JZbkEfNtxGE8yXkgLfxpRkb+Bsn8b=gX_bkAoioQ@mail.gmail.com>
-Subject: Re: [PATCH 1/4] target/riscv: Add the checking into stimecmp write
- function.
+Date: Fri, 4 Apr 2025 13:11:47 +1000
+X-Gm-Features: ATxdqUFhNgpE60cw-yYHpxA4le3uHxjiIs2lRJ36rmdTtcN4EE7PfzgODjp6GEk
+Message-ID: <CAKmqyKPo4G3t32=uKbgYoY+nDJOEg+fLJ3yFC1hx2PJEqT=59A@mail.gmail.com>
+Subject: Re: [PATCH 2/4] hw/intc: riscv_aclint: Fix mtime write for sstc
+ extension
 To: Jim Shu <jim.shu@sifive.com>
 Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, 
  Palmer Dabbelt <palmer@dabbelt.com>,
@@ -76,8 +76,8 @@ Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org,
  Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::934;
- envelope-from=alistair23@gmail.com; helo=mail-ua1-x934.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::936;
+ envelope-from=alistair23@gmail.com; helo=mail-ua1-x936.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -101,55 +101,46 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Thu, Mar 20, 2025 at 5:22=E2=80=AFAM Jim Shu <jim.shu@sifive.com> wrote:
+On Thu, Mar 20, 2025 at 5:24=E2=80=AFAM Jim Shu <jim.shu@sifive.com> wrote:
 >
-> Preparation commit to let aclint timer to use stimecmp write function.
-> Aclint timer doesn't call sstc() predicate so we need to check inside
-> the stimecmp write function.
->
-> Signed-off-by: Jim Shu <jim.shu@sifive.com>
+> When changing the mtime value, the period of [s|vs]timecmp timers
+> should also be updated like the period of mtimecmp timer.
 
-Acked-by: Alistair Francis <alistair.francis@wdc.com>
+Why should they be updated?
 
 Alistair
 
+>
+> Signed-off-by: Jim Shu <jim.shu@sifive.com>
 > ---
->  target/riscv/time_helper.c | 19 +++++++++++++++++--
->  1 file changed, 17 insertions(+), 2 deletions(-)
+>  hw/intc/riscv_aclint.c | 5 +++++
+>  1 file changed, 5 insertions(+)
 >
-> diff --git a/target/riscv/time_helper.c b/target/riscv/time_helper.c
-> index bc0d9a0c4c..aebf0798d0 100644
-> --- a/target/riscv/time_helper.c
-> +++ b/target/riscv/time_helper.c
-> @@ -46,8 +46,23 @@ void riscv_timer_write_timecmp(CPURISCVState *env, QEM=
-UTimer *timer,
->  {
->      uint64_t diff, ns_diff, next;
->      RISCVAclintMTimerState *mtimer =3D env->rdtime_fn_arg;
-> -    uint32_t timebase_freq =3D mtimer->timebase_freq;
-> -    uint64_t rtc_r =3D env->rdtime_fn(env->rdtime_fn_arg) + delta;
-> +    uint32_t timebase_freq;
-> +    uint64_t rtc_r;
+> diff --git a/hw/intc/riscv_aclint.c b/hw/intc/riscv_aclint.c
+> index db374a7c2d..5f4a17e177 100644
+> --- a/hw/intc/riscv_aclint.c
+> +++ b/hw/intc/riscv_aclint.c
+> @@ -28,6 +28,7 @@
+>  #include "qemu/module.h"
+>  #include "hw/sysbus.h"
+>  #include "target/riscv/cpu.h"
+> +#include "target/riscv/time_helper.h"
+>  #include "hw/qdev-properties.h"
+>  #include "hw/intc/riscv_aclint.h"
+>  #include "qemu/timer.h"
+> @@ -240,6 +241,10 @@ static void riscv_aclint_mtimer_write(void *opaque, =
+hwaddr addr,
+>              riscv_aclint_mtimer_write_timecmp(mtimer, RISCV_CPU(cpu),
+>                                                mtimer->hartid_base + i,
+>                                                mtimer->timecmp[i]);
+> +            riscv_timer_write_timecmp(env, env->stimer, env->stimecmp, 0=
+, MIP_STIP);
+> +            riscv_timer_write_timecmp(env, env->vstimer, env->vstimecmp,
+> +                                      env->htimedelta, MIP_VSTIP);
 > +
-> +    if (!riscv_cpu_cfg(env)->ext_sstc || !env->rdtime_fn ||
-> +        !env->rdtime_fn_arg || !get_field(env->menvcfg, MENVCFG_STCE)) {
-> +        /* S/VS Timer IRQ depends on sstc extension, rdtime_fn(), and ST=
-CE. */
-> +        return;
-> +    }
-> +
-> +    if (timer_irq =3D=3D MIP_VSTIP &&
-> +        (!riscv_has_ext(env, RVH) || !get_field(env->henvcfg, HENVCFG_ST=
-CE))) {
-> +        /* VS Timer IRQ also depends on RVH and henvcfg.STCE. */
-> +        return;
-> +    }
-> +
-> +    timebase_freq =3D mtimer->timebase_freq;
-> +    rtc_r =3D env->rdtime_fn(env->rdtime_fn_arg) + delta;
->
->      if (timecmp <=3D rtc_r) {
->          /*
+>          }
+>          return;
+>      }
 > --
 > 2.17.1
 >
