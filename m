@@ -4,69 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3FB27C3601A
-	for <qemu-riscv@archiver.kernel.org>; Fri,  4 Apr 2025 01:06:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0EA51C3600C
+	for <qemu-riscv@archiver.kernel.org>; Fri,  4 Apr 2025 01:24:23 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1u0VW0-0006zX-EI; Thu, 03 Apr 2025 21:06:36 -0400
+	id 1u0Vmj-0006sA-Rs; Thu, 03 Apr 2025 21:23:53 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1u0VVy-0006yW-H2; Thu, 03 Apr 2025 21:06:34 -0400
-Received: from mail-vk1-xa32.google.com ([2607:f8b0:4864:20::a32])
+ id 1u0Vmf-0006rH-Kx; Thu, 03 Apr 2025 21:23:49 -0400
+Received: from mail-vk1-xa34.google.com ([2607:f8b0:4864:20::a34])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1u0VVx-0007g7-0Q; Thu, 03 Apr 2025 21:06:34 -0400
-Received: by mail-vk1-xa32.google.com with SMTP id
- 71dfb90a1353d-5242f137a1eso693527e0c.1; 
- Thu, 03 Apr 2025 18:06:31 -0700 (PDT)
+ id 1u0Vmd-0003Jb-Ux; Thu, 03 Apr 2025 21:23:49 -0400
+Received: by mail-vk1-xa34.google.com with SMTP id
+ 71dfb90a1353d-523f721bc63so2186845e0c.0; 
+ Thu, 03 Apr 2025 18:23:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1743728791; x=1744333591; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1743729826; x=1744334626; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=pTI2P2GLe9F/0v6fBX9O/GFysCKIWZ/L46PcvjWJJ4U=;
- b=Ix/Q969VRxMMiNCp+KrUTQKnEZuDuqDqDfZsGq6Mee1IUI4XyAGnGdB0JYwVafABpC
- 5Ykzh5khC5xqZjJz/S+etmFKNGufAgyOeaqHQLr4UFT94N11avfMra8TYdzrvQ9ddtaO
- CdJQJcD7JSFG/Mzbn1QzsxKuSUeMVPxkZxOoKr3VOcFy0SKKhbrXwNTNwwE9ac8b5MUQ
- pa9hdGxV0ytFo1Pb/381zqUFgoIXpKiWLJRQucmABAi+d0jOXwqeD2tlMWAOjta3XeOe
- 0LQAtYAy6nv7LJnR0eFzAowUpKKK9bc7fREDg+q7WhzbjWQWpCIen/pZQ4N3Vtk8jG//
- CddA==
+ bh=5K5pI9EGTaZiO0xDxyiaB79ANZnM1hl171ZvHp0IuCI=;
+ b=TYpaNTFQFaZ84A3pxioqAxTzvmjf3ClEb83IN6KpvjBFAIP3/kwarfBT+w6zBWVufx
+ //n+AZuO4+21aswVwoUJCaQ5ZORGcUoKi1QU/JFtycTxmD7FY296qK+zx8l254/GB/E4
+ tC7JJ2Bl7aLP1W3Di8DbkNaJSLGUxD9S6NVyAE/g3ZBJGD2cmRIP8UXHX4/iWjjkXJUl
+ bAv2qAGvCz+Cdlfg6gbxp+nOx0li6e+1Ty6e9Nu+7A3zl6BORdIaqLe9oaOXaUA9Pguc
+ 6n/Y1Gr4NGOXGA7FIDL+uYKYDRzg3ni/Pq/sOKMNlyc9vMz9oB3UPyZ5g7DRkoxpDvl5
+ QfTg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743728791; x=1744333591;
+ d=1e100.net; s=20230601; t=1743729826; x=1744334626;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=pTI2P2GLe9F/0v6fBX9O/GFysCKIWZ/L46PcvjWJJ4U=;
- b=gUcayfd0oEETLUZUnPTyAk2F2ncVwPFk6zUPpfIerwRtUok4+fBXGiYBR/B0xzKB9H
- H/i61XIft3ZXoKLOMiqmSy+ZlZllVvlUOg6XVlnSsGe53iwS2rEd0eGpV3DZmu+8b5Zo
- oP1TDFUg0HdJQyQYNr2GkH2mpfqgvEjiji86qBP07OfraC+P/DjHV2mzqxu93uLHE0+f
- nFiHdo4U/73d8A9XYO/A/VEbbbZpEaLUD0gh1AoEYN6uuxHVUnu2vHzyOS9tM/X+LoBQ
- 1jbR8TmtWLD9mjNZSpQymz+g+cz2evrrwg6HWZSXAZ87dSl5EZxTARBFEcofGZQ1mHxt
- Quyw==
+ bh=5K5pI9EGTaZiO0xDxyiaB79ANZnM1hl171ZvHp0IuCI=;
+ b=H2MCJS5xbSD5xeIwtadVwKKczqXYrhMFYuRIY1KsNPaFLIFjvkYFMium4edhVxDzhS
+ dkRayJ8h/JqOJLjzwzveawMzkYE7xXz7wIrA8WX9PUJgbf5HbcmfNVXjS+qic4Y936Vq
+ 0Yss0Sj+oRNzrfQVenejnJcvpQB7UmBOxG0+ZmhlkZgVvWNZa/efuw4luaxpQwnc0mJm
+ d3iEkXBlizIjdPBELzmwPVLC2UhcV+CxBQevdLJV2RpXpFuF29pMZZsQzScfScYT3FUi
+ edB44Z4G7xCCKS2dkZ/1JmgoqPlC/PNk3E03/KnNiWmRHDo7FOAej9eCqd1eC0qdibyk
+ grbw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVikP24do5EqCj+vFKOg7p+y471s9BhzBLFYJVopIrZl5FoVtRms/8DBLIAbmAgnKXc00r5bPxBlKbd@nongnu.org
-X-Gm-Message-State: AOJu0YxEMZuNiAp23Q8vFrY/JIGVUU/wv2PUG/Fgg5K/x4Cv4D9saPhu
- zXb2/6n83QpWzxpeCpDottU8ssRFfVRsUmmY2QiAPwDDW+GRmvwxG1G458PA3tINUbLpoEMKmV2
- j4BrB0Nj2fCbUKafIlU5/sD3B0g3+xw==
-X-Gm-Gg: ASbGncsM4LKO3gxkS8fNE7/xz5yUXsQdGKXqoqkDOV0kTr0bCiRfLmE5SXocgbDKWEW
- Mv8M19uX7XJ7q4z4HbPo00ZVyKMXohmOs7qyZcCpK6RhOJfXFDviv9ysSEEIrHu1pDaHkhigrZl
- miT1OyXXip3tJcAeyx/BfyUzhUwCKsjRPKKOwKGUwiRMbz37js6dbJtOIC
-X-Google-Smtp-Source: AGHT+IGdxmybhTAvvjHlK7qBiyK3DI1X5QI8h7rf69sflbd3WQwexW3OtVr/xbUhTyrjmmz452PtH1ojWuOFgs3P84Y=
-X-Received: by 2002:a05:6122:659c:b0:520:3987:ce0b with SMTP id
- 71dfb90a1353d-5276443fba4mr1649440e0c.2.1743728790837; Thu, 03 Apr 2025
- 18:06:30 -0700 (PDT)
+ AJvYcCXpAUPkgU47vXZIVB+ZOGNpd8kzcmQajGz9a2grXuN0Ga43j6yBvDLCRmi03dahzylfNSs7A40vsK2i@nongnu.org
+X-Gm-Message-State: AOJu0YwHQ7ELdG1l5+ZpWf+b0oHz3L54zDwL7bacGBMJwwQ5WqCjw0gS
+ AkAsl8lnR7ww91Td5fgz/AzYUgvCYfcw3fPKAX5V4hEikaEyFQlkPiVIJUsaNwR2cW8CIOyqOM0
+ LesJCFT7qhOZ9ulCAE5plRv1CTalbQg==
+X-Gm-Gg: ASbGncuwiOwx3DaCIy1amab2vd+NEOK66DJ2HsKfhzLLDMkYyt4eJjnwEMpt/XvX5H6
+ THJRotqoy0aMg15VsKzULfDk7/hwqeDWE4YIFjktsAb3bDbBaVYLqVp6mNB7DDSBvlwb770kMPy
+ MiRxqfbiZ+91jS5ciBWCpCSFsFcMrznlhNWbEjpmzxOSXdxLBOguOW9mRI
+X-Google-Smtp-Source: AGHT+IEC65zw/mYfZSBl0D3u0zGARRxGyFAPdUw93yAUSaFN6Ko3ELFR/57rZv0mqYn4sd7dgiQIxWVefYxl7m5MztM=
+X-Received: by 2002:a05:6102:514:b0:4c4:ebb1:4f6d with SMTP id
+ ada2fe7eead31-4c845b9936amr4706523137.11.1743729826320; Thu, 03 Apr 2025
+ 18:23:46 -0700 (PDT)
 MIME-Version: 1.0
 References: <20250313193011.720075-1-loic@rivosinc.com>
- <20250313193011.720075-6-loic@rivosinc.com>
-In-Reply-To: <20250313193011.720075-6-loic@rivosinc.com>
+In-Reply-To: <20250313193011.720075-1-loic@rivosinc.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Fri, 4 Apr 2025 11:06:04 +1000
-X-Gm-Features: ATxdqUHRylB0up0p1FsrDmDLBZZxAZDtoWBEWgCvPle0NKaPxXVAsO4Wue9hWAM
-Message-ID: <CAKmqyKPmu4D+_mbsG7U8yHtmH79ZoBuzkpTGBYVhUQ=QprJ_gg@mail.gmail.com>
-Subject: Re: [PATCH v2 5/5] target/riscv: pmp: remove redundant check in
- pmp_is_locked
+Date: Fri, 4 Apr 2025 11:23:20 +1000
+X-Gm-Features: ATxdqUGs5AOADheXfjmg8av1xbIrwcNWQGD3UDqHGQvRE-Ieh8-ckYM55jghCyY
+Message-ID: <CAKmqyKPER5Ab1N01iBDTgL490hW5eBkH4W==RGfJCzthamxUQw@mail.gmail.com>
+Subject: Re: [PATCH v2 0/5] target/riscv: Smepmp fixes to match specification
 To: =?UTF-8?B?TG/Dr2MgTGVmb3J0?= <loic@rivosinc.com>
 Cc: qemu-devel@nongnu.org, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
  Weiwei Li <liwei1518@gmail.com>, qemu-riscv@nongnu.org, 
@@ -75,8 +73,8 @@ Cc: qemu-devel@nongnu.org, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::a32;
- envelope-from=alistair23@gmail.com; helo=mail-vk1-xa32.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::a34;
+ envelope-from=alistair23@gmail.com; helo=mail-vk1-xa34.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -100,40 +98,47 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Fri, Mar 14, 2025 at 5:35=E2=80=AFAM Lo=C3=AFc Lefort <loic@rivosinc.com=
+On Fri, Mar 14, 2025 at 5:33=E2=80=AFAM Lo=C3=AFc Lefort <loic@rivosinc.com=
 > wrote:
 >
-> Remove useless check in pmp_is_locked, the function will return 0 in eith=
-er
-> case.
+> These patches fix Smepmp implementation to make it compliant with the spe=
+c.
 >
-> Signed-off-by: Lo=C3=AFc Lefort <loic@rivosinc.com>
-> Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+> First patch limits RLB to CSR changes since RLB should not affect privile=
+ge
+> evaluation. Patch 2 extracts some common code into a function (to be used=
+ in
+> patch 3). Patch 3 fixes validation of pmpcfg CSR writes in order to match=
+ Smepmp
+> specification. Patch 4 is a small optimization and last patch is just rem=
+oving
+> redundant code.
+>
+> ---
+> Changes in v2:
+> - rebased to latest riscv-to-apply.next
+> - addressed Daniel comments on patch 1
+>
+> Link to v1:
+> https://lore.kernel.org/qemu-riscv/20250225160052.39564-1-loic@rivosinc.c=
+om/
+>
+> Lo=C3=AFc Lefort (5):
+>   target/riscv: pmp: don't allow RLB to bypass rule privileges
+>   target/riscv: pmp: move Smepmp operation conversion into a function
+>   target/riscv: pmp: fix checks on writes to pmpcfg in Smepmp MML mode
+>   target/riscv: pmp: exit csr writes early if value was not changed
+>   target/riscv: pmp: remove redundant check in pmp_is_locked
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Thanks!
+
+Applied to riscv-to-apply.next
 
 Alistair
 
-> ---
->  target/riscv/pmp.c | 5 -----
->  1 file changed, 5 deletions(-)
 >
-> diff --git a/target/riscv/pmp.c b/target/riscv/pmp.c
-> index 845915e0c8..c685f7f2c5 100644
-> --- a/target/riscv/pmp.c
-> +++ b/target/riscv/pmp.c
-> @@ -58,11 +58,6 @@ static inline int pmp_is_locked(CPURISCVState *env, ui=
-nt32_t pmp_index)
->          return 1;
->      }
->
-> -    /* Top PMP has no 'next' to check */
-> -    if ((pmp_index + 1u) >=3D MAX_RISCV_PMPS) {
-> -        return 0;
-> -    }
-> -
->      return 0;
->  }
+>  target/riscv/pmp.c | 151 +++++++++++++++++++++++++--------------------
+>  1 file changed, 83 insertions(+), 68 deletions(-)
 >
 > --
 > 2.47.2
