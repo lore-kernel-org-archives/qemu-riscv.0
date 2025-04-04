@@ -4,78 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D17C1C36010
-	for <qemu-riscv@archiver.kernel.org>; Fri,  4 Apr 2025 04:41:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 138D0C36010
+	for <qemu-riscv@archiver.kernel.org>; Fri,  4 Apr 2025 05:51:28 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1u0Ys9-0008Ao-1X; Fri, 04 Apr 2025 00:41:41 -0400
+	id 1u0ZxB-0007eO-Po; Fri, 04 Apr 2025 01:50:57 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1u0Ys5-0008AJ-Vi; Fri, 04 Apr 2025 00:41:38 -0400
-Received: from mail-ua1-x92b.google.com ([2607:f8b0:4864:20::92b])
+ id 1u0Zx8-0007dn-D5; Fri, 04 Apr 2025 01:50:54 -0400
+Received: from mail-ua1-x930.google.com ([2607:f8b0:4864:20::930])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1u0Ys4-0005ML-6i; Fri, 04 Apr 2025 00:41:37 -0400
-Received: by mail-ua1-x92b.google.com with SMTP id
- a1e0cc1a2514c-86d377306ddso769690241.2; 
- Thu, 03 Apr 2025 21:41:34 -0700 (PDT)
+ id 1u0Zx5-00066D-8Z; Fri, 04 Apr 2025 01:50:53 -0400
+Received: by mail-ua1-x930.google.com with SMTP id
+ a1e0cc1a2514c-86d5a786c7cso800414241.2; 
+ Thu, 03 Apr 2025 22:50:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1743741694; x=1744346494; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1743745849; x=1744350649; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=g4UdtbtLUxvFSxPl6L3AVlYcdszBUWtCmPHWPS5yH5U=;
- b=d0WOASFyGUUisYjasC0Ho+s/c7MRgaw3C98DzCGrxeQs0qvuzUQhWJPPfXz8JuqKL/
- 1EgEUct1yan8jcQIFnpMM2tLumwzPWOlSoKd7K/4xeE93BL8ySqc9bXJeG9pLp3Hbw5M
- bLCFh62JzT9He94wZs8SzbXccuCSI+h0PudrE4nMxHgtu77iB/q3NPD9ZKvfSnTLLF68
- bfvnbHH21gCegRC7wLyNjQOczxRhB0eTXMcNh7rT7RF5MX8qfJrNZF6XH2zgnDIckrno
- y6A9+fsAAdu/EDh+ok5wuRpRYVttjbTXKhBYc50FnHHC0PJ6AOaGO6HJ2+ScJZ1AIPzk
- ynoA==
+ bh=2WtapgEIMKAfUTHOqTamO2rJh5a/YNNNWDh0+/jvBVU=;
+ b=YjwrR8BVWOQdS8qaMNCyU3bJRUEZSxhIY1utNZp4Df9cJj9E+e0xB/2jeoVvYpBGru
+ zB0CFSnFJ5X3bySjN57EpX7PS5wQPGIauGytWbbEVzMXXCkNNhMhrHUw2Tycg9J+myCi
+ lIHT+O8taKLk13Pkq1Jtlzau40oiBDPavvKyzMuDQj8Gbqg4lHqi95kGhCza003Pu0l3
+ jQWEw0Q5vDM8ZnWl7E+QcD5MR6sjTh3gDkBb+tQ9JsCH5GBZplverjDICjcrcFWvMikY
+ m//21B9tqV+hPmT2yWCuRJHk/Q3RNdv9ww/jE4GyQ3ukUno4Ijt3g+nIyOiz+AHz+amU
+ daug==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743741694; x=1744346494;
+ d=1e100.net; s=20230601; t=1743745849; x=1744350649;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=g4UdtbtLUxvFSxPl6L3AVlYcdszBUWtCmPHWPS5yH5U=;
- b=kFLfGUlHzenqBAYPhhacHsqf/7mKqJ/HWgZwKmkmERWZBJiK+lsc5rUXCx9KWXJMZQ
- 27qOu57PHbap7/6ZxVgyHlSBQFawLTGMhl+Pn/ZJAZGeYR+BOml1F3faiPB5o1GZxmb5
- mq/kiUPNBRs52S2Fi/irN36flsDdPBpJc84oybgFjDXvNxffdAVWRdonRL2UqMdehmD4
- JlkH4fgLLtzKE+fYKuQvFZLcEQYUN/BUlUSh19pUcAbw2V1+ZlD5sBMQtDcuc7vMbp0C
- 0bNH2B391Iekeh48yHun8Shr7iMUHRCO8NoAHb9FfkL5AS29cSYi6U0RYMXwqJLifAXZ
- wEBQ==
+ bh=2WtapgEIMKAfUTHOqTamO2rJh5a/YNNNWDh0+/jvBVU=;
+ b=mKV3raG0Y/wZa7qOpHEi68D5UaFS9OZkf9OdD8P+ZAYTRfV7TR7RRwsZ1wlZ0hmTr1
+ AbSn/FTKjpaqwRQYoCAbo905rR9pYM3x43tjNjryCCE8D4r/SryHqUZDCpTyT+ln7KTa
+ fwNzeYNzQQF/TA9yzhL+a8lKu3SrR6A76Zz/HVOBA4l7Z8E8Cuz1OFn3m8iom1NjS6Us
+ p245Fhm4aYfX+EzrcluwdjO22nKJ/4HMuei+8fbdTPjzB9/YfaUncyIRHjnswllZFWrr
+ 655FCs+5RF7VogZ8DMW/ZxSwlv19lSUEKq2Y7WUlt6s0XWO4FgTLFJD9UTWdKAY0+PQ9
+ CIdw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXGSfu/qhHqA+or0I0CMTloevAwTppz82mOGLyRCLWqZ/l1YFnQA6KCpSPHsB48y22ZhApwcCTRkA9C@nongnu.org
-X-Gm-Message-State: AOJu0Yz9EuTgcRcEMJelKx9hcTqnOcugfJxubqWlDilyqEiv8TmCHhHO
- 8/wTaF8vknRsrxP6ER6WqVar4aRAn6xH736vTNSitCRh1zJrZR52+nr22LxTmwFy1gFSx1DJoKz
- tz6X8+ZQwhjFpXvrruYuxYnClvcY=
-X-Gm-Gg: ASbGnctXeggki6ugSJvPs1/Fk7oaLxjXMLjbjFJoWJ89cUYvMnfvc/FG6e0UV8JLMwi
- +WH7qDxy3699d4mUaq3ImmZ6B3DVwOVWe4JftrLcQ3N3INovyTa8tIg5a0BLnAgJGQ6lNXTcdz/
- RP7LoLpRXCnXCO69YBGd3prR2jgpEDFBsldJ1WKh6aNXg3hVKFBm97Kvpi
-X-Google-Smtp-Source: AGHT+IHFX8AQ58FOCheXW7gCG4upm8oazZcOtR2qVEHi3UrKlG0543soPu72e4RbqNesgXYdwX4L3YoTzgB2xIAK9dc=
-X-Received: by 2002:a05:6102:3f93:b0:4c5:78ae:1e3a with SMTP id
- ada2fe7eead31-4c8554b42f7mr1584716137.23.1743741693793; Thu, 03 Apr 2025
- 21:41:33 -0700 (PDT)
+ AJvYcCVaXYk8A3YT+z9xjNOs1PVLdAQ8f6Lzz6Odddo9PREQOZAa7DCNlL/DyeCTrMwvv7oR2URZo33gFTmv@nongnu.org,
+ AJvYcCWA85C3PSvtvwIEi4TaUlNCXs5+AnIs1LwVDBpkg4MbX+PwRXbB7GgEVGkUwuT0iawcx6I6im0D1b+AQw==@nongnu.org
+X-Gm-Message-State: AOJu0YxrVytPXZR7vc5M55LRm53Zyu3DODbEtXb0m/s1cnfHQV7t8x/M
+ umSF83KVoiI39PhGz/lrg5sI8nM0OcTLZGZW+oiSpDeHjSsKICHL1gYm9bsFNlRz0vLobgK/aEX
+ ieLWnwK2Rwv12fyfe3LqmIY32yJg=
+X-Gm-Gg: ASbGncv2gfarkiK/ViqcU5Iko6qABh8lds2PmzOirDBSJ7XBWZJ/pWY0oN4iNasuhCS
+ h7FRMfrGEm8tE/h267NfLRZhl47HA85M4XXQbLEhEXzfEJWW2AkKhP+dctQY87OoBrYzSGVEfSv
+ zHbiI9jWieKAZZftJOee8Cu27xssnqxsl7mmxoK5mKCR97uHEBO3WDwq4j
+X-Google-Smtp-Source: AGHT+IFPFkNdmDiKFS+m4/HrqBbOXrN0PilZ8235jYZXEXe/ZjptKeMBc9t5Pm4oykeBntM8yL5sp2W58PdSYc6Wl0U=
+X-Received: by 2002:a05:6102:504c:b0:4b6:20a5:8a11 with SMTP id
+ ada2fe7eead31-4c8553714eamr1395868137.1.1743745849472; Thu, 03 Apr 2025
+ 22:50:49 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240607101403.1109-1-jim.shu@sifive.com>
-In-Reply-To: <20240607101403.1109-1-jim.shu@sifive.com>
+References: <20250327130256.653357-1-dbarboza@ventanamicro.com>
+ <19d7409d-35a0-486f-a626-9d382fb8a6bf@linaro.org>
+In-Reply-To: <19d7409d-35a0-486f-a626-9d382fb8a6bf@linaro.org>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Fri, 4 Apr 2025 14:41:07 +1000
-X-Gm-Features: ATxdqUGRI6CCesvZH3Heq_aXnqbI7Wr6vl7YPQdkxhGXAEAILJPO3xROYzrzIyk
-Message-ID: <CAKmqyKN4EwPHP0d=kBnk8DL9oZcr6gx_+VBveno947+2z6Cj=A@mail.gmail.com>
-Subject: Re: [PATCH] target/riscv: support atomic instruction fetch (Ziccif)
-To: Jim Shu <jim.shu@sifive.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, 
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, 
- Bin Meng <bmeng.cn@gmail.com>, Weiwei Li <liwei1518@gmail.com>, 
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
+Date: Fri, 4 Apr 2025 15:50:23 +1000
+X-Gm-Features: ATxdqUEnGno7frQwunVmNAoPrlM5NNfrq1RL-QvLjfm2QjuPJ6H1tVMREjICLnI
+Message-ID: <CAKmqyKPsRvaVztUdPRwf5h90rVdT9MOrvQz_=WvoEj-bWoTWVg@mail.gmail.com>
+Subject: Re: [PATCH for-10.1] hw/riscv: do not mark any machine as default
+To: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@linaro.org>
+Cc: Daniel Henrique Barboza <dbarboza@ventanamicro.com>, qemu-devel@nongnu.org,
+ qemu-riscv@nongnu.org, 
+ alistair.francis@wdc.com, liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, 
+ palmer@rivosinc.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::92b;
- envelope-from=alistair23@gmail.com; helo=mail-ua1-x92b.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::930;
+ envelope-from=alistair23@gmail.com; helo=mail-ua1-x930.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -99,133 +99,60 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Fri, Jun 7, 2024 at 8:15=E2=80=AFPM Jim Shu <jim.shu@sifive.com> wrote:
+On Fri, Mar 28, 2025 at 2:16=E2=80=AFAM Philippe Mathieu-Daud=C3=A9
+<philmd@linaro.org> wrote:
 >
-> Support 4-byte atomic instruction fetch when instruction is natural
-> aligned.
+> On 27/3/25 14:02, Daniel Henrique Barboza wrote:
+> > Commit 5b4beba124 ("RISC-V Spike Machines") added the Spike machine and
+> > made it default for qemu-system-riscv32/64. It was the first RISC-V
+> > machine added in QEMU so setting it as default was sensible.
+> >
+> > Today we have 7 risc64 and 6 riscv32 machines and having 'spike' as
+> > default machine is not intuitive. For example, [1] is a bug that was
+> > opened with the 'virt' board in mind, but given that the user didn't
+> > pass a '-machine' option, the user was using 'spike' without knowing.
+> >
+> > The QEMU archs that defines a default machine usually defines it as the
+> > most used machine, e.g. PowerPC uses 'pseries' as default. So in theory
+> > we could change the default to the 'virt' machine, but that would make
+> > existing command lines that don't specify a machine option to act
+> > weird: they would silently use 'virt' instead of 'spike'.
+> >
+> > Being explicit in the command line is desirable when we have a handful
+> > of boards available, so remove the default machine setting from RISC-V
+> > and make it obligatory to specify the board.
+> >
+> > After this patch we'll throw an error if no machine is specified:
+> >
+> > $ ./build/qemu-system-riscv64 --nographic qemu-system-riscv64: No
+> > machine specified, and there is no default Use -machine help to list
+> > supported machines
+> >
+> > 'spike' users that aren't specifying their machines in the command line
+> > will be impacted and will need to add '-M spike' in their scripts.
+> >
+> > [1] https://gitlab.com/qemu-project/qemu/-/issues/2467
+> >
+> > Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+> > ---
+> >   hw/riscv/spike.c | 1 -
+> >   1 file changed, 1 deletion(-)
 >
-> Current implementation is not atomic because it loads instruction twice
-> for first and last 2 bytes. We load 4 bytes at once to keep the
-> atomicity. This instruction preload method only applys when instruction
-> is 4-byte aligned. If instruction is unaligned, it could be across pages
-> so that preload will trigger additional page fault.
->
-> We encounter this issue when doing pressure test of enabling & disabling
-> Linux kernel ftrace. Ftrace with kernel preemption requires concurrent
-> modification and execution of instruction, so non-atomic instruction
-> fetch will cause the race condition. We may fetch the wrong instruction
-> which is the mixing of 2 instructions.
->
-> Also, RISC-V Profile wants to provide this feature by HW. RVA20U64
-> Ziccif protects the atomicity of instruction fetch when it is
-> natural aligned.
->
-> Signed-off-by: Jim Shu <jim.shu@sifive.com>
-> Reviewed-by: Frank Chang <frank.chang@sifive.com>
+> I'm in favor of this change, which I believe is the correct way to
+> go, so:
 
-Once https://patchwork.kernel.org/project/qemu-devel/list/?series=3D945333
-(specifically https://patchwork.kernel.org/project/qemu-devel/patch/2025031=
-8213209.2579218-12-richard.henderson@linaro.org/)
-is merged this should be good to go in as well.
+Agreed
+
+> Reviewed-by: Philippe Mathieu-Daud=C3=A9 <philmd@linaro.org>
+> but I'd rather we follow the deprecation process. Up to the maintainer.
+
+I agree, it is a breaking change, it would be nice to go through the
+deprecation process in case people are expecting Spike to be the
+default.
 
 Alistair
 
-> ---
->  target/riscv/translate.c | 45 ++++++++++++++++++++++++++++++----------
->  1 file changed, 34 insertions(+), 11 deletions(-)
 >
-> diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-> index 0569224e53..2be8ef63e6 100644
-> --- a/target/riscv/translate.c
-> +++ b/target/riscv/translate.c
-> @@ -1133,13 +1133,37 @@ const RISCVDecoder decoder_table[] =3D {
->
->  const size_t decoder_table_size =3D ARRAY_SIZE(decoder_table);
->
-> -static void decode_opc(CPURISCVState *env, DisasContext *ctx, uint16_t o=
-pcode)
-> +static void decode_opc(CPURISCVState *env, DisasContext *ctx)
->  {
->      ctx->virt_inst_excp =3D false;
-> +
-> +    uint32_t opcode;
-> +    bool is_4byte_align =3D false;
-> +
-> +    if ((ctx->base.pc_next % 4) =3D=3D 0) {
-> +        /*
-> +         * Load 4 bytes at once to make instruction fetch atomically.
-> +         *
-> +         * Note: When pc is 4-byte aligned, 4-byte instruction wouldn't =
-be
-> +         * across pages. We could preload 4 bytes instruction no matter
-> +         * real one is 2 or 4 bytes. Instruction preload wouldn't trigge=
-r
-> +         * additional page fault.
-> +         */
-> +        opcode =3D translator_ldl(env, &ctx->base, ctx->base.pc_next);
-> +        is_4byte_align =3D true;
-> +    } else {
-> +        /*
-> +         * For unaligned pc, instruction preload may trigger additional
-> +         * page fault so we only load 2 bytes here.
-> +         */
-> +        opcode =3D (uint32_t) translator_lduw(env, &ctx->base, ctx->base=
-.pc_next);
-> +    }
-> +    ctx->ol =3D ctx->xl;
-> +
->      ctx->cur_insn_len =3D insn_len(opcode);
->      /* Check for compressed insn */
->      if (ctx->cur_insn_len =3D=3D 2) {
-> -        ctx->opcode =3D opcode;
-> +        ctx->opcode =3D (uint16_t)opcode;
->          /*
->           * The Zca extension is added as way to refer to instructions in=
- the C
->           * extension that do not include the floating-point loads and st=
-ores
-> @@ -1149,15 +1173,16 @@ static void decode_opc(CPURISCVState *env, DisasC=
-ontext *ctx, uint16_t opcode)
->              return;
->          }
->      } else {
-> -        uint32_t opcode32 =3D opcode;
-> -        opcode32 =3D deposit32(opcode32, 16, 16,
-> -                             translator_lduw(env, &ctx->base,
-> -                                             ctx->base.pc_next + 2));
-> -        ctx->opcode =3D opcode32;
-> +        if (!is_4byte_align) {
-> +            /* Load last 2 bytes of instruction here */
-> +            opcode =3D deposit32(opcode, 16, 16,
-> +                               translator_lduw(env, &ctx->base,
-> +                                               ctx->base.pc_next + 2));
-> +        }
->
->          for (guint i =3D 0; i < ctx->decoders->len; ++i) {
->              riscv_cpu_decode_fn func =3D g_ptr_array_index(ctx->decoders=
-, i);
-> -            if (func(ctx, opcode32)) {
-> +            if (func(ctx, opcode)) {
->                  return;
->              }
->          }
-> @@ -1226,10 +1251,8 @@ static void riscv_tr_translate_insn(DisasContextBa=
-se *dcbase, CPUState *cpu)
->  {
->      DisasContext *ctx =3D container_of(dcbase, DisasContext, base);
->      CPURISCVState *env =3D cpu_env(cpu);
-> -    uint16_t opcode16 =3D translator_lduw(env, &ctx->base, ctx->base.pc_=
-next);
->
-> -    ctx->ol =3D ctx->xl;
-> -    decode_opc(env, ctx, opcode16);
-> +    decode_opc(env, ctx);
->      ctx->base.pc_next +=3D ctx->cur_insn_len;
->
->      /* Only the first insn within a TB is allowed to cross a page bounda=
-ry. */
-> --
-> 2.17.1
 >
 >
 
