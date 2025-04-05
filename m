@@ -4,73 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F2563C3601A
-	for <qemu-riscv@archiver.kernel.org>; Sat,  5 Apr 2025 09:19:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6AA0CC369A3
+	for <qemu-riscv@archiver.kernel.org>; Sat,  5 Apr 2025 09:19:10 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1u0zfe-0002Hi-7w; Sat, 05 Apr 2025 05:18:34 -0400
+	id 1u0zff-0002Kj-S4; Sat, 05 Apr 2025 05:18:36 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1u0zfS-0002BX-Tl
- for qemu-riscv@nongnu.org; Sat, 05 Apr 2025 05:18:24 -0400
-Received: from mail-pl1-x636.google.com ([2607:f8b0:4864:20::636])
+ id 1u0zfY-0002Dh-Ew
+ for qemu-riscv@nongnu.org; Sat, 05 Apr 2025 05:18:31 -0400
+Received: from mail-pl1-x634.google.com ([2607:f8b0:4864:20::634])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1u0zfI-0008Jc-Bj
- for qemu-riscv@nongnu.org; Sat, 05 Apr 2025 05:18:21 -0400
-Received: by mail-pl1-x636.google.com with SMTP id
- d9443c01a7336-223fd89d036so33040295ad.1
- for <qemu-riscv@nongnu.org>; Sat, 05 Apr 2025 02:18:10 -0700 (PDT)
+ id 1u0zfV-0008M8-Pt
+ for qemu-riscv@nongnu.org; Sat, 05 Apr 2025 05:18:27 -0400
+Received: by mail-pl1-x634.google.com with SMTP id
+ d9443c01a7336-223fb0f619dso28555015ad.1
+ for <qemu-riscv@nongnu.org>; Sat, 05 Apr 2025 02:18:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1743844689; x=1744449489; darn=nongnu.org;
+ d=ventanamicro.com; s=google; t=1743844702; x=1744449502; darn=nongnu.org;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=Yv2TWUYQLQeoiSpv6gKrRDNk/n3LqFS2id+9I6G8z/M=;
- b=RLEjovYC4tXSEw2ewHCS67I5jspvQfr4U7boFx1Fndt7huN41hJ+nwwJ3PITqOIDFD
- JOJdsj8FK7ZAc5rSv9jUiceyDOzcH8mj0DWWOZSDOHzeRF7uQQYlJ2oXJ0URvjwUsQHE
- 2UmfxZYniKDHpQx0XgRqZH6/0ZqW00ZgdV5y67TgHPV2oo8ExU6HI18KgI3lvB2Aye0y
- BLdRyNZokyUnBJjDNO9YR8pvl48jLQH6p70dcWScmeEagneOqk6GDXVDCsSFOu3QlJob
- FxQIfnGl7ieYcVCr7q7LUj8myoPNnF7VVex8CAfM1pi+al4k9rnrPx8GfhDiWzB45lQg
- czTg==
+ bh=CwDVB2zqCipfAqxeZiYPIYy9g2myx+HcuNJ5Z7jMIS8=;
+ b=Z53oxZUwSEqIY+F4GbRdyvwYXVaRTbPgAbKvtvtMDZS7sblmGCvXo+ZK7v6xsqvDiQ
+ jU7qmLusWfclHW4TbATLc6THDu4LnGX2GK8mBQhwJVoEiso50bfRP8oBayaLvrkjfZ9F
+ Eh83I+g2goEzYwd2XmHy9weBIVXcI/BWlBwvUu23PavJ/qFHOcd4zAxTtdo5kFNYbqrK
+ Xl8BzTgM+MxK5b3tBZGW5sFDpqeuRGPzujH+kalAWQcHpN+Muk2tQXhCAah2Ri4WRJKm
+ UhPVaToZ8C/gCl7Q93oYKN4IcdoxoRy3xYD9M+G1mUnVQ2I4sjUtB8/bvVfLkQrGcmTN
+ P0eg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743844689; x=1744449489;
+ d=1e100.net; s=20230601; t=1743844702; x=1744449502;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=Yv2TWUYQLQeoiSpv6gKrRDNk/n3LqFS2id+9I6G8z/M=;
- b=nhJ7NUaojG6vkIMGRIaM/QvnIq0d6QggulTNOJmpjffnP/mZw1rRnD/eLLUvt7wp+J
- SDpzeclbpEZCQpMN5TxCwYEb08ZVyTSbZphDrPKQjsBOdDIxzqWsog4iGe9VL6GE11SY
- s/aW7bQ9d7lUVmF4EwR3uHqibdPwmTZroabmvoHL/676ojfb2vK6NIvPa306E/oVDTlS
- 2WyLfFQ4kk/SzR2leuffyDx7ujp4UbsOQgr2uNuiODv+tbY0dIxlRFJpS5m/Ddl5D62M
- 6a/tgu7W9QAbk4mfWf2j+JAS9L90hgvGk5z60FKdUeWoqlWJfvpxnmLkhGuG0u7o0SjN
- X5CA==
+ bh=CwDVB2zqCipfAqxeZiYPIYy9g2myx+HcuNJ5Z7jMIS8=;
+ b=Fs96doQzN64yjhfhxMy70SHqCNynkNXnkDAFeC78P31jvGkpXhiTG0uHagWh4RIe59
+ cWtoKPJVhtwePNVQiHr3Ynx7Exn0U5Bh5+tQAncpSp8ha4PN7YFNNG7pzQxuFLrQqFSP
+ jQJSUML583YSi3YzMwW8eAnYNr3z1QRI8jIWNtsFUrk372kPbH64RmA4xwS9COflTuu7
+ FVwrcBitiNcoBSqnjbcp9A4YW6aDmRNtY1eTzNVHTIr54cKZpttBBz8viQxSlnTt1W1E
+ jxLJzYahF5tAEX4y8qZ3PnXr9vPRs4Ak7xeceRfsRSEw4Ikpb+6anCgRlXIzxlM9Uzrq
+ j1cw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWmIpWoi/ZdGdVPiKPIIZ499PO0XKqOS5AeaCLd3B7b0zGnzYxQYKGBhrHRqXgz7dAD0bheODC51lJ8@nongnu.org
-X-Gm-Message-State: AOJu0Yx+tLPpNiEVWWJKDaiTfMHgqEWsvPTTh61Nmy2YNM/JBd6ZXR9i
- GXVcQLuboQdxsH/mplPnGr9K2tSQO1E19eP8eAkARPeyxUtjmBvc9jqvvszUmSY=
-X-Gm-Gg: ASbGncswpG27CfcfqT0BBPKeTJBJ2BNbuuedBspjiMPS+LRUzb3xtv1O+AdA5yPDkZ8
- MwZpeufExirfP2VtOLKrOh9Np3/b0Z1FO4Cb2+P8FsQqIN02jtzjjo5UzG9v5RizzXQMbz2i2VO
- 8XcuSUA86nsXvcwR7mHQfnB9ACOD+0iU0tpZcO1k2IWDx+vQAgDQb2jSc/a/htZwjT5JasJEjEh
- bhOqyqcR9dcDvYavsZwzbR0NSfIphD+xkSHlYnPA+rUmn71aJRDAZKqNWukkvXeMI+KrIWtMvQI
- Kl5B1s5alr3VTGb/pJv/tcvFQejMG32FZ1RwqPMMlc5ap843gopynuiJszrrZODnVws09eU=
-X-Google-Smtp-Source: AGHT+IHTxUG7U40ve/RAH86Q537Elgt8Q/JR+DcaCWEnaXXXpLfF6sIH4l7H4vTKOf3n27ZE/MCHTg==
-X-Received: by 2002:a17:902:e552:b0:21f:3e2d:7d42 with SMTP id
- d9443c01a7336-22a8a06a041mr81996755ad.23.1743844689081; 
- Sat, 05 Apr 2025 02:18:09 -0700 (PDT)
+ AJvYcCX5jLinr/Rt1a+fJyDOSblrOmohrvEhNkrHUHp/xBBO9HFX/0+3zClwIMilWTmTMGJe4ssGzhith53e@nongnu.org
+X-Gm-Message-State: AOJu0YwgidhXIxDdbmZ/a1Gqlyazfx+dnlqV2tJBuZVaTQCYOBetxciw
+ KJNnjqCiZKWvvn08bS793FLkcuZptqnB9m4E17QoPk0bgsINrWXNA6p8eoddtCT1KgkWQ5k0wqg
+ w
+X-Gm-Gg: ASbGnctMPHoL1H4DyiUYLK3Z85CUeWkPAubgXX2YYpyzXlvsPj4oR/5MH37JIFUsr1/
+ 6+W/rVPOgrLwBO15O6jWrkbuPIC7e7XUkHnw4PF1GBSVdnr0gjxnE/E4Cdwr/GkY9J03lIim4vU
+ ABewKfPzKdlJtzSr1OMVPDoptVUfC3F+KX3mMvxMJUZ9maWZ2Lh3uxnLS/GA2fkIcVZHDrGRGYI
+ vwWs4NXpen8rIsKLMR11+CBri5sEgo7P1CnJPgJ5KHyOcnrlfiWLd6C/EUT2u9DhK2o4iAdk+ci
+ bDsJvi/e71WUdDb03JtEoKXpZ/2C6+AvS4abQT4i3tU40yClzxn0W2Gz7NNd
+X-Google-Smtp-Source: AGHT+IH2YvloWLMM6NZ2ws7N++/Y89ElHtyynUgzwUTCdsFTTFHmLuxyUIMLlvg5LN5BSti/36bJxw==
+X-Received: by 2002:a17:903:1209:b0:224:76f:9e4a with SMTP id
+ d9443c01a7336-22a8a05b5cdmr85417545ad.14.1743844702561; 
+ Sat, 05 Apr 2025 02:18:22 -0700 (PDT)
 Received: from [192.168.68.110] ([177.170.227.223])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-2297866cd1dsm45582705ad.159.2025.04.05.02.18.06
+ d9443c01a7336-2297866dcd6sm45788425ad.189.2025.04.05.02.18.19
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sat, 05 Apr 2025 02:18:08 -0700 (PDT)
-Message-ID: <b3e843db-91c7-4781-9de2-4f6cfa178da6@ventanamicro.com>
-Date: Sat, 5 Apr 2025 06:18:05 -0300
+ Sat, 05 Apr 2025 02:18:21 -0700 (PDT)
+Message-ID: <8ede9d37-1194-48ad-b053-9145dd414895@ventanamicro.com>
+Date: Sat, 5 Apr 2025 06:18:18 -0300
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 06/12] target/riscv: rvv: Apply vext_check_input_eew to
- OPIVV/OPFVV(vext_check_sss) instructions
+Subject: Re: [PATCH v2 07/12] target/riscv: rvv: Apply vext_check_input_eew to
+ vector slide instructions(OPIVI/OPIVX)
 To: Max Chou <max.chou@sifive.com>, qemu-devel@nongnu.org,
  qemu-riscv@nongnu.org
 Cc: Palmer Dabbelt <palmer@dabbelt.com>,
@@ -78,21 +79,21 @@ Cc: Palmer Dabbelt <palmer@dabbelt.com>,
  <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
  antonb@tenstorrent.com
 References: <20250329144446.2619306-1-max.chou@sifive.com>
- <20250329144446.2619306-7-max.chou@sifive.com>
+ <20250329144446.2619306-8-max.chou@sifive.com>
 Content-Language: en-US
 From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <20250329144446.2619306-7-max.chou@sifive.com>
+In-Reply-To: <20250329144446.2619306-8-max.chou@sifive.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::636;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pl1-x636.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::634;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pl1-x634.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -118,24 +119,28 @@ On 3/29/25 11:44 AM, Max Chou wrote:
 > Signed-off-by: Max Chou <max.chou@sifive.com>
 > ---
 
+
 With your co-authored-by tag removed:
 
 Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 
->   target/riscv/insn_trans/trans_rvv.c.inc | 1 +
->   1 file changed, 1 insertion(+)
+>   target/riscv/insn_trans/trans_rvv.c.inc | 4 +++-
+>   1 file changed, 3 insertions(+), 1 deletion(-)
 > 
 > diff --git a/target/riscv/insn_trans/trans_rvv.c.inc b/target/riscv/insn_trans/trans_rvv.c.inc
-> index 3d02a2f9ec8..2282b89801c 100644
+> index 2282b89801c..f397ae46446 100644
 > --- a/target/riscv/insn_trans/trans_rvv.c.inc
 > +++ b/target/riscv/insn_trans/trans_rvv.c.inc
-> @@ -433,6 +433,7 @@ static bool vext_check_ss(DisasContext *s, int vd, int vs, int vm)
->   static bool vext_check_sss(DisasContext *s, int vd, int vs1, int vs2, int vm)
+> @@ -639,7 +639,9 @@ static bool vext_check_slide(DisasContext *s, int vd, int vs2,
 >   {
->       return vext_check_ss(s, vd, vs2, vm) &&
-> +           vext_check_input_eew(s, vs1, s->sew, vs2, s->sew, vm) &&
->              require_align(vs1, s->lmul);
->   }
->   
+>       bool ret = require_align(vs2, s->lmul) &&
+>                  require_align(vd, s->lmul) &&
+> -               require_vm(vm, vd);
+> +               require_vm(vm, vd) &&
+> +               vext_check_input_eew(s, -1, 0, vs2, s->sew, vm);
+> +
+>       if (is_over) {
+>           ret &= (vd != vs2);
+>       }
 
 
