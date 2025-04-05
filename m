@@ -4,73 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 01099C36010
-	for <qemu-riscv@archiver.kernel.org>; Sat,  5 Apr 2025 08:59:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BBDBAC36010
+	for <qemu-riscv@archiver.kernel.org>; Sat,  5 Apr 2025 08:59:44 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1u0zMa-0005X1-Bv; Sat, 05 Apr 2025 04:58:52 -0400
+	id 1u0zMj-0005ZD-J9; Sat, 05 Apr 2025 04:59:01 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1u0zMR-0005W9-1f
- for qemu-riscv@nongnu.org; Sat, 05 Apr 2025 04:58:44 -0400
-Received: from mail-pl1-x62b.google.com ([2607:f8b0:4864:20::62b])
+ id 1u0zMh-0005Yf-KG
+ for qemu-riscv@nongnu.org; Sat, 05 Apr 2025 04:58:59 -0400
+Received: from mail-pl1-x635.google.com ([2607:f8b0:4864:20::635])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1u0zMN-0006BF-JY
- for qemu-riscv@nongnu.org; Sat, 05 Apr 2025 04:58:42 -0400
-Received: by mail-pl1-x62b.google.com with SMTP id
- d9443c01a7336-224100e9a5cso29612035ad.2
- for <qemu-riscv@nongnu.org>; Sat, 05 Apr 2025 01:58:37 -0700 (PDT)
+ id 1u0zMc-0006CO-V8
+ for qemu-riscv@nongnu.org; Sat, 05 Apr 2025 04:58:59 -0400
+Received: by mail-pl1-x635.google.com with SMTP id
+ d9443c01a7336-22401f4d35aso30318475ad.2
+ for <qemu-riscv@nongnu.org>; Sat, 05 Apr 2025 01:58:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1743843516; x=1744448316; darn=nongnu.org;
+ d=ventanamicro.com; s=google; t=1743843533; x=1744448333; darn=nongnu.org;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=1w/R73rngvU//tt+kQ5UI+yzw8vbeBJQY7PBWnqBBf4=;
- b=SKKNa4zK1MiEcMCd4mrBWYPJlu9LK9l555COvAr0A527PEjTqBmqqRLHXDcscQveWD
- QpMUrfA7L3XamhEpRgaTrwGUrXGZKtm/BDA/f/34/JzYmkRsFXt4MgoVcWKceVbwCmNg
- 6oIAZGibw85FDnjFteOo28l144DpE89lNJlw3utNoegDcNA8zDT0NOlgU8CkRv+1HNKk
- TisVYM5QQgPR7KpELNqxBpIpZJ49FsmkytVNlbfbhGrWHg79J3fJbs6YI2DmsOIaP1eC
- xyZOld5Q+H06b6kCsZ4o5tCh3FEh46aX+gCzcQul89j5jYGP8VbZ6ADIK4HP5LLVKT/e
- pGVg==
+ bh=67DYcBHee7/3xYSIKdYB6rMYy5HUKFBkyEAH4ydb0pw=;
+ b=X/ZdQwSLxrvF3Tofbzh/uMNzzx8kuf70v8ppF2g1kZ1yecHQt4d5Wc03zznHy4zmt7
+ PXQ2n+wS8uJT6+bPsfmUe4ujuxLsuoVIO5r5dVEvRF8YVC0/q6NTUw1rbT30rVTwtTVn
+ byQOMRGI8TXwJYOQMRYRaCc7pbq3LQU+xZqYFCCzC6RD9Igee6BuXXshI0JZ4oQRG5V6
+ uKZVPevQkxF2VTD3VcB12l7o/US6JgYPaxspkicl5NsmLbSDoPuYVE2wdM9gg+8HPJZk
+ OwLYHOthtsN3Ty2CdpxKExoWY073YamYHRipC+RbNykywyi/GLVW18nlu+cUBPLkHq5v
+ sXnw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743843516; x=1744448316;
+ d=1e100.net; s=20230601; t=1743843533; x=1744448333;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=1w/R73rngvU//tt+kQ5UI+yzw8vbeBJQY7PBWnqBBf4=;
- b=EZvkiVKSx63dDCGvM3ibVTlAY8oSV2Js94PrZGHCy7RQe/55mmG8GMigM9lzmmwPL0
- xHEfn//TJFk53EcuSnDP39kriOY0iQMXqLSaRoUlgfuqAWs2I45CGj0bNdAKKg4FdhuA
- JFuJvudxxf+wGn1EdLbVV4nbdzWNyC3XEyWwRQDMe+tP4N5aAJCCkN2RegZoHxP1/m0C
- i/5C1NTB7nQaL5bsI8di7pqXmSAy+bVTvSRaxAPq1iHwL7iCNw5XGf8U0WR5JOy4uRPO
- 2FxHua3wFJkhOL8RxOmGTQlRuxYqDlja3HuIWVW678DYITMfqRcvlnW4YfTS1E1LmR0Y
- QBuA==
+ bh=67DYcBHee7/3xYSIKdYB6rMYy5HUKFBkyEAH4ydb0pw=;
+ b=B+dqUdCCru7IeIyT9AgkzGEMIbnR81HhdBoadN9RZHUlttihlvi0zVpXHtzIsNCfHE
+ +tuJ7xbmsPHh2uhXVdquRVHD4Giz2gxQbFr1z0Nmn1FbF6DMyo84AxMpAyPmP5ppZhZh
+ XYG+EBQj8SxLi9roZtCVVazEkd5Je197vOagzlMXPetYk6YjIzCAZsuCYF40zs7gM0we
+ gbXsOEjOtzgtAoXyGmSXlXcyqAh6odPuDKthWCKQzwwF8MkYieVpqh0+LG7qnbD5JksQ
+ eFHjaTn7s60qc2f67HXxzBZ4I1ACfxtTPEFq/z5W5OsEvk2CDtJvh8mk9kfCfUaeO7i2
+ 0rQA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVAc2+qm0v+sHjQAUUpJKm5IpQGXZBZw+TPtZClA4FvhNQXU5uxHrT1EIF4GEDo/iJcY9U/u7WYFAU3@nongnu.org
-X-Gm-Message-State: AOJu0Yzebw/IbGcLCSAJxHzWeu/NGPYlKl5nwfCFwRKgyf+76ACLsJKs
- zLvI88hMV1oY/9MCFopNO02GkiaSakK7Axa8Q6c0QNJyVNGgy2tKVFAYLwxHNmk=
-X-Gm-Gg: ASbGncvRfqx0YwX2iUP7NFxXwkDuY/Gbe4AS/XTXI07XZGaWkM6h4h147oRW2HFeJQC
- cORNz7vDLkJEgcWgZYQMW3qAdtiBmqZsOjH0IhbbFcI8PoYL9dGOwAnJKQW5m5JQ8fAmKBvv2X4
- s8y2gLvkiWTJXP74a9sDveaCQdbfJYuaIb5y5Zw2oRI/LSf3Pl8LZ1SO6yJkctuFzZjYTW2LwjV
- CbiGh9amgUGVdNC247WQmF7WHdj3bg7z3k6vwZ40ZygHR/hNGfZM6WvewiAo0A7F0z6/C0NDzN/
- 3dKaojihJHz4HT/Tl/E0D1fBpqY954L4y4qTtRc71J7w/k4Sb2eHJRVYFqzc
-X-Google-Smtp-Source: AGHT+IEWCK/iRFz49W+/HhTPtQ+gFgT+e4CUwLN76rDBWPRP5Vt/wf/yoi4Eov0RlthCQFpoaqYrBw==
-X-Received: by 2002:a17:902:f54a:b0:220:bcc5:2845 with SMTP id
- d9443c01a7336-22a8a858fa5mr69174215ad.7.1743843516194; 
- Sat, 05 Apr 2025 01:58:36 -0700 (PDT)
+ AJvYcCWcxLiGix2Fuw35v8h0NOueEVbk6ep24vXmBoUbmwFT/aK3k5qPouD75YJ7vmiwt0fqFvZRE3DC9rec@nongnu.org
+X-Gm-Message-State: AOJu0Yw6EV81kuxDaI8dVU8z47lm/ZWrUl10pIQRQjOww8+66D5jBqkk
+ JyYkA3Eeu9rgMRVKBEbObOEsx0b3+8Amepx4e9LeDSnd/oiFFpM0wolmmNxNnsA=
+X-Gm-Gg: ASbGncuUWJ6Nlv7l/yPDwXQS5ayqzwv9E44gtu3BXxbcvo2/5zHj+BUqETm+uphfXfN
+ SJw72J3bA8fdG+KyUS+2XC4gcbWgSrBYJTXNiD3mkudZMJ49/jK+KEzbITDsdTt9ZVLAYonSmZR
+ 58tH+hWdva0+SNuNoo+A9dKBR3ZML92QYneao8WRU6bHgjYpIOnBA3m3559AG9vQVAyCPqhw7so
+ gsqepyqxS6Gk+0+ug510kISpfIvxVvyyTm+g51g8PiXD3a5aP5+tXVblgHndsYUEI6jfsLtMtvC
+ tWohfkTCHHVpxPnl6aGROZRz1H2oWMfV64sGk3BQo5v2CDU5hYjs0CT06HSDEvc2sb2POJE=
+X-Google-Smtp-Source: AGHT+IFoJpA9jnJLiy3QR50f/Qumum5uQS3Hle2H/3aownlJyB1BkH+duztLEve18xY/KvcM2OyxTg==
+X-Received: by 2002:a17:903:234f:b0:220:fe50:5b44 with SMTP id
+ d9443c01a7336-22a9553c0d1mr30513815ad.31.1743843533183; 
+ Sat, 05 Apr 2025 01:58:53 -0700 (PDT)
 Received: from [192.168.68.110] ([177.170.227.223])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-22978772ee4sm45162945ad.233.2025.04.05.01.58.32
+ d9443c01a7336-2297866cf04sm45224625ad.161.2025.04.05.01.58.50
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sat, 05 Apr 2025 01:58:35 -0700 (PDT)
-Message-ID: <79afb8d1-23bc-4bfe-800d-c341f13662f3@ventanamicro.com>
-Date: Sat, 5 Apr 2025 05:58:30 -0300
+ Sat, 05 Apr 2025 01:58:52 -0700 (PDT)
+Message-ID: <ff0aea2c-82dc-4b56-beb5-59decd3f4e4a@ventanamicro.com>
+Date: Sat, 5 Apr 2025 05:58:49 -0300
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 01/12] target/riscv: rvv: Source vector registers
- cannot overlap mask register
+Subject: Re: [PATCH v2 02/12] target/riscv: rvv: Add CHECK arg to
+ GEN_OPFVF_WIDEN_TRANS
 To: Max Chou <max.chou@sifive.com>, qemu-devel@nongnu.org,
  qemu-riscv@nongnu.org
 Cc: Palmer Dabbelt <palmer@dabbelt.com>,
@@ -78,14 +78,14 @@ Cc: Palmer Dabbelt <palmer@dabbelt.com>,
  <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
  antonb@tenstorrent.com
 References: <20250329144446.2619306-1-max.chou@sifive.com>
- <20250329144446.2619306-2-max.chou@sifive.com>
+ <20250329144446.2619306-3-max.chou@sifive.com>
 Content-Language: en-US
 From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <20250329144446.2619306-2-max.chou@sifive.com>
+In-Reply-To: <20250329144446.2619306-3-max.chou@sifive.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::62b;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pl1-x62b.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::635;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pl1-x635.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -113,59 +113,66 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 On 3/29/25 11:44 AM, Max Chou wrote:
 > From: Anton Blanchard <antonb@tenstorrent.com>
 > 
-> Add the relevant ISA paragraphs explaining why source (and destination)
-> registers cannot overlap the mask register.
-> 
 > Signed-off-by: Anton Blanchard <antonb@tenstorrent.com>
 > Signed-off-by: Max Chou <max.chou@sifive.com>
 > ---
 
-
 Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 
->   target/riscv/insn_trans/trans_rvv.c.inc | 29 ++++++++++++++++++++++---
->   1 file changed, 26 insertions(+), 3 deletions(-)
+>   target/riscv/insn_trans/trans_rvv.c.inc | 18 +++++++++---------
+>   1 file changed, 9 insertions(+), 9 deletions(-)
 > 
 > diff --git a/target/riscv/insn_trans/trans_rvv.c.inc b/target/riscv/insn_trans/trans_rvv.c.inc
-> index b9883a5d323..20b1cb127b4 100644
+> index 20b1cb127b4..e630f8661e1 100644
 > --- a/target/riscv/insn_trans/trans_rvv.c.inc
 > +++ b/target/riscv/insn_trans/trans_rvv.c.inc
-> @@ -100,10 +100,33 @@ static bool require_scale_rvfmin(DisasContext *s)
->       }
+> @@ -2403,10 +2403,10 @@ static bool opfvf_widen_check(DisasContext *s, arg_rmrr *a)
 >   }
 >   
-> -/* Destination vector register group cannot overlap source mask register. */
-> -static bool require_vm(int vm, int vd)
-> +/*
-> + * Source and destination vector register groups cannot overlap source mask
-> + * register:
-> + *
-> + * A vector register cannot be used to provide source operands with more than
-> + * one EEW for a single instruction. A mask register source is considered to
-> + * have EEW=1 for this constraint. An encoding that would result in the same
-> + * vector register being read with two or more different EEWs, including when
-> + * the vector register appears at different positions within two or more vector
-> + * register groups, is reserved.
-> + * (Section 5.2)
-> + *
-> + * A destination vector register group can overlap a source vector
-> + * register group only if one of the following holds:
-> + *  1. The destination EEW equals the source EEW.
-> + *  2. The destination EEW is smaller than the source EEW and the overlap
-> + *     is in the lowest-numbered part of the source register group.
-> + *  3. The destination EEW is greater than the source EEW, the source EMUL
-> + *     is at least 1, and the overlap is in the highest-numbered part of
-> + *     the destination register group.
-> + * For the purpose of determining register group overlap constraints, mask
-> + * elements have EEW=1.
-> + * (Section 5.2)
-> + */
-> +static bool require_vm(int vm, int v)
+>   /* OPFVF with WIDEN */
+> -#define GEN_OPFVF_WIDEN_TRANS(NAME)                              \
+> +#define GEN_OPFVF_WIDEN_TRANS(NAME, CHECK)                       \
+>   static bool trans_##NAME(DisasContext *s, arg_rmrr *a)           \
+>   {                                                                \
+> -    if (opfvf_widen_check(s, a)) {                               \
+> +    if (CHECK(s, a)) {                                           \
+>           uint32_t data = 0;                                       \
+>           static gen_helper_opfvf *const fns[2] = {                \
+>               gen_helper_##NAME##_h, gen_helper_##NAME##_w,        \
+> @@ -2422,8 +2422,8 @@ static bool trans_##NAME(DisasContext *s, arg_rmrr *a)           \
+>       return false;                                                \
+>   }
+>   
+> -GEN_OPFVF_WIDEN_TRANS(vfwadd_vf)
+> -GEN_OPFVF_WIDEN_TRANS(vfwsub_vf)
+> +GEN_OPFVF_WIDEN_TRANS(vfwadd_vf, opfvf_widen_check)
+> +GEN_OPFVF_WIDEN_TRANS(vfwsub_vf, opfvf_widen_check)
+>   
+>   static bool opfwv_widen_check(DisasContext *s, arg_rmrr *a)
 >   {
-> -    return (vm != 0 || vd != 0);
-> +    return (vm != 0 || v != 0);
->   }
+> @@ -2505,7 +2505,7 @@ GEN_OPFVF_TRANS(vfrdiv_vf,  opfvf_check)
 >   
->   static bool require_nf(int vd, int nf, int lmul)
+>   /* Vector Widening Floating-Point Multiply */
+>   GEN_OPFVV_WIDEN_TRANS(vfwmul_vv, opfvv_widen_check)
+> -GEN_OPFVF_WIDEN_TRANS(vfwmul_vf)
+> +GEN_OPFVF_WIDEN_TRANS(vfwmul_vf, opfvf_widen_check)
+>   
+>   /* Vector Single-Width Floating-Point Fused Multiply-Add Instructions */
+>   GEN_OPFVV_TRANS(vfmacc_vv, opfvv_check)
+> @@ -2530,10 +2530,10 @@ GEN_OPFVV_WIDEN_TRANS(vfwmacc_vv, opfvv_widen_check)
+>   GEN_OPFVV_WIDEN_TRANS(vfwnmacc_vv, opfvv_widen_check)
+>   GEN_OPFVV_WIDEN_TRANS(vfwmsac_vv, opfvv_widen_check)
+>   GEN_OPFVV_WIDEN_TRANS(vfwnmsac_vv, opfvv_widen_check)
+> -GEN_OPFVF_WIDEN_TRANS(vfwmacc_vf)
+> -GEN_OPFVF_WIDEN_TRANS(vfwnmacc_vf)
+> -GEN_OPFVF_WIDEN_TRANS(vfwmsac_vf)
+> -GEN_OPFVF_WIDEN_TRANS(vfwnmsac_vf)
+> +GEN_OPFVF_WIDEN_TRANS(vfwmacc_vf, opfvf_widen_check)
+> +GEN_OPFVF_WIDEN_TRANS(vfwnmacc_vf, opfvf_widen_check)
+> +GEN_OPFVF_WIDEN_TRANS(vfwmsac_vf, opfvf_widen_check)
+> +GEN_OPFVF_WIDEN_TRANS(vfwnmsac_vf, opfvf_widen_check)
+>   
+>   /* Vector Floating-Point Square-Root Instruction */
+>   
 
 
