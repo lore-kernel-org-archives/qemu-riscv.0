@@ -4,95 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 89EFAC36010
-	for <qemu-riscv@archiver.kernel.org>; Sat,  5 Apr 2025 09:21:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D47D5C36002
+	for <qemu-riscv@archiver.kernel.org>; Sun,  6 Apr 2025 18:25:31 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1u0zib-0006LT-8g; Sat, 05 Apr 2025 05:21:37 -0400
+	id 1u1UfZ-0006JZ-VC; Sun, 06 Apr 2025 14:24:33 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1u0ziX-0006DO-RG
- for qemu-riscv@nongnu.org; Sat, 05 Apr 2025 05:21:33 -0400
-Received: from mail-pg1-x52c.google.com ([2607:f8b0:4864:20::52c])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1u0ziS-0000TR-Rq
- for qemu-riscv@nongnu.org; Sat, 05 Apr 2025 05:21:33 -0400
-Received: by mail-pg1-x52c.google.com with SMTP id
- 41be03b00d2f7-ae727e87c26so1839147a12.0
- for <qemu-riscv@nongnu.org>; Sat, 05 Apr 2025 02:21:27 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1743844885; x=1744449685; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=j0Up7UPdKuhOzg6fS9fJPPPMNPyVnrY+sWKD9q1DERg=;
- b=WtLE8VttckxUIYGlxQ1MgqaMRMo6D5nFv+/Jfz+vcEab8Bq03TdcZsPMtra4aKyU8V
- GgpZT/l7IMyzqy9vI1PDUda/OVlSEWY58l5bm/IJfZPQzKFNw8iQgGIbI6YebMQiVR+B
- 6VXGj4o8FdI8Y7GUoGN38iBYO/I1SPd/Kw+ubKdk7mF5n0XJNFZZYc69rOxm1baNjdIK
- scADF8hR7+k5qXPMTmRLbELIwHaiUcaNDpJM8Wyncccp0WEnMZmH58e4SBJ7cs+pFo32
- YDVv74vCWKi3z1wGYWcvULUs2c+MkzT4UTZSUisOcRMUo0Z6kWs+Rc9AVcssublxVztI
- 1jXA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743844885; x=1744449685;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=j0Up7UPdKuhOzg6fS9fJPPPMNPyVnrY+sWKD9q1DERg=;
- b=PJ1/qlcDOluw/8qHxmnoS7W1hhppC9mIOZY6bWBCTSA4g/3s47ieOVC334ce/5oep1
- YyiqevB7kbli2V1kZ33aLqLfT4bytG81XSJuqv5JdVAU2IVPl6yyaVF3e/nkG03O8u8q
- tnWNbQAotFHMDrzLnxHTAjopUumCjjA1wz0hwhdUdp41labvFlMi9gtoY5HxtEM7oXp0
- nNF9r3L/wqNKE1p8rtqbWzvF8RcTABRqwAiUBfSME/KYgUNi8jERD/XeZmHIwebB+v6D
- 43WE9cZfjbjAEps2cAWjm+AQrWif5bwcKo3tO9xo0nPS0MzmuquNWUUk8+QBDoxf9z7F
- WPtg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCV+Fp42tU+g0wjPxs+FnQlHGPbyIKf8qx0wyWclBK267VfWVIeKwlGQv6YMWKYKvl52Y566doZI1mxc@nongnu.org
-X-Gm-Message-State: AOJu0YzOKtFk+c/AMfElfIwPDKK9R0UvLydV1kIGE3a48/aifzu19ERS
- Zv4WNpzs32TyocG1b54AmGb+IA6SqOtkn+YCsVWbFX4MFpl7uaiFhCy9vd2bP34=
-X-Gm-Gg: ASbGncuil6GDm+8sFxloLQhM1r/v2MqXznuMHcxs/HU77IszmuYP381ClAgr1Nc4olx
- 7lOp0dmNqkjpm5l1LDHwVX7ymIkmQyb1bjTTZrhVsVCucZ9oiqN9dJsb31BIIDxI3SU5ft8iF4o
- 0yvw559Frrqa1vljZVeby+bxrKKqV3knDw8bBQI4Xm+EsIC92+38A+JDLtqifZUpf3ml6b13Nd0
- M79sknog3pB2wztGVRYjv7RgH0X+5Y3u7Tag07TBVPFl6AgM/Wqf8lYC9APrQtBOCKLVTGNvClj
- EgOgwXpjSs2o4lEzD71Jf6YQTeYNGCTrpbaFVJM6WBPFAVrLnX8vqshNbaaW
-X-Google-Smtp-Source: AGHT+IH/kGOPpuJNO2uKxTjIpPuc0YbYxIzW83KOV7zzuE5Anb/9c6CYav+mvN8tsApOzJeh3hbjZw==
-X-Received: by 2002:a17:90b:2dc3:b0:305:5f25:fcf8 with SMTP id
- 98e67ed59e1d1-306a4822fb3mr8386373a91.5.1743844885708; 
- Sat, 05 Apr 2025 02:21:25 -0700 (PDT)
-Received: from [192.168.68.110] ([177.170.227.223])
- by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-305983da812sm4960991a91.46.2025.04.05.02.21.22
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sat, 05 Apr 2025 02:21:25 -0700 (PDT)
-Message-ID: <6c3b3613-00a2-4d94-9502-5f87b61d2bd6@ventanamicro.com>
-Date: Sat, 5 Apr 2025 06:21:20 -0300
+ (Exim 4.90_1)
+ (envelope-from <frederic.petrot@univ-grenoble-alpes.fr>)
+ id 1u1UfV-0006Iu-C8; Sun, 06 Apr 2025 14:24:29 -0400
+Received: from zm-mta-out-3.u-ga.fr ([152.77.200.56])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1)
+ (envelope-from <frederic.petrot@univ-grenoble-alpes.fr>)
+ id 1u1UfS-0007FN-En; Sun, 06 Apr 2025 14:24:28 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+ d=univ-grenoble-alpes.fr; s=2020; t=1743963860;
+ bh=/pOcoCgeS4hAxj68GngkeRVN+S8O8o+UHlsW9vdToxw=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=Gr8lIIuxLkY1ubDpiqf2UBIuS+jhZgFW5X89w3eOHw6sl7CqEqCWXyo6SKEeF81wF
+ O0H8ck69tPnn3AmwqCe7AlVfu9VoTya8TAqG1UHg7wOBArC00zjHJG1iRXpB2+/dXz
+ 6p0uCLY80yKQLxsUPo6QSqvUP3h7mtepDULzWpnksW7X9qQkOh6aqOfIC/jH8E5rmz
+ O8qgMXtV5tJFp0SnRm71oKOdjtaxIuH+PA+SnPGzH2GDNmZ00Tsl3eG4CllYgyNWc2
+ M1BNkyeSlGXHEaKlWF3jU3vSiNhSaSe9HWZQWq/6C0iKxp7NzrYqCzCeUsutim9uBy
+ SgZCD0y3P+OSw==
+Received: from mailhub-2.u-ga.fr (mailhub-2.u-ga.fr [129.88.178.102])
+ by zm-mta-out-3.u-ga.fr (Postfix) with ESMTP id 7A7B040212;
+ Sun,  6 Apr 2025 20:24:20 +0200 (CEST)
+Received: from smtps.univ-grenoble-alpes.fr (smtps2.u-ga.fr [152.77.18.2])
+ by mailhub-2.u-ga.fr (Postfix) with ESMTP id 7656AFF853;
+ Sun,  6 Apr 2025 20:24:20 +0200 (CEST)
+Received: from [192.168.1.62] (35.201.90.79.rev.sfr.net [79.90.201.35])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ (Authenticated sender: petrotf@univ-grenoble-alpes.fr)
+ by smtps.univ-grenoble-alpes.fr (Postfix) with ESMTPSA id 824551400B0;
+ Sun,  6 Apr 2025 20:24:19 +0200 (CEST)
+Message-ID: <9ae32149-fe18-49d3-a689-60ee6752c20d@univ-grenoble-alpes.fr>
+Date: Sun, 6 Apr 2025 20:24:20 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 12/12] target/riscv: Fix the rvv reserved encoding of
- unmasked instructions
-To: Max Chou <max.chou@sifive.com>, qemu-devel@nongnu.org,
- qemu-riscv@nongnu.org
-Cc: Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, Weiwei Li
- <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- antonb@tenstorrent.com
-References: <20250329144446.2619306-1-max.chou@sifive.com>
- <20250329144446.2619306-13-max.chou@sifive.com>
+Subject: Re: [PATCH v8 00/18] Adding partial support for 128-bit riscv target
+To: Alistair Francis <alistair23@gmail.com>,
+ =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, bin.meng@windriver.com,
+ richard.henderson@linaro.org, palmer@dabbelt.com,
+ fabien.portas@grenoble-inp.org, alistair.francis@wdc.com,
+ Pierrick Bouvier <pierrick.bouvier@linaro.org>, Anton Johansson <anjo@rev.ng>
+References: <20220106210108.138226-1-frederic.petrot@univ-grenoble-alpes.fr>
+ <c5c8566a-fd0d-48d1-8ed1-e52f0bb4f210@linaro.org>
+ <CAKmqyKN51+jriKkSL8V5EFc9hBSFoEHYKp-70uP6RvO_K6a=pg@mail.gmail.com>
 Content-Language: en-US
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <20250329144446.2619306-13-max.chou@sifive.com>
+From: =?UTF-8?B?RnLDqWTDqXJpYyBQw6l0cm90?=
+ <frederic.petrot@univ-grenoble-alpes.fr>
+In-Reply-To: <CAKmqyKN51+jriKkSL8V5EFc9hBSFoEHYKp-70uP6RvO_K6a=pg@mail.gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::52c;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pg1-x52c.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+Content-Transfer-Encoding: 8bit
+X-Greylist: Whitelist-UGA SMTP Authentifie (petrotf@univ-grenoble-alpes.fr)
+ via submission-587 ACL (41)
+Received-SPF: pass client-ip=152.77.200.56;
+ envelope-from=frederic.petrot@univ-grenoble-alpes.fr;
+ helo=zm-mta-out-3.u-ga.fr
+X-Spam_score_int: -43
+X-Spam_score: -4.4
+X-Spam_bar: ----
+X-Spam_report: (-4.4 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- T_SPF_TEMPERROR=0.01 autolearn=unavailable autolearn_force=no
+ RCVD_IN_DNSWL_MED=-2.3, RCVD_IN_MSPIKE_H2=-0.01,
+ RCVD_IN_VALIDITY_CERTIFIED_BLOCKED=0.001, RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -108,55 +91,85 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
+Hi Alistair, Phil,
+well, I'm trying to keep the thing alive, checking from time to time that
+the current QEMU still runs the 128-bit tests that I have, and on which
+I continue (slowly) to do stuffs.
+I hope this can stay upstream for experimental/research purposes, but the
+128-bit riscv community is, I follow you on that, scarce for now.
 
+So, your call.
+Cheers,
+Frédéric
 
-On 3/29/25 11:44 AM, Max Chou wrote:
-> According to the v spec, the encodings of vcomoress.vm and vector
-> mask-register logical instructions with vm=0 are reserved.
+Le 04/04/2025 à 05:26, Alistair Francis a écrit :
+> On Sat, Mar 22, 2025 at 1:09 AM Philippe Mathieu-Daudé
+> <philmd@linaro.org> wrote:
+>>
+>> Hi,
+>>
+>> On 6/1/22 22:00, Frédéric Pétrot wrote:
+>>> This series of patches provides partial 128-bit support for the riscv
+>>> target architecture, namely RVI and RVM, with minimal csr support.
+>>
+>>
+>>> Frédéric Pétrot (18):
+>>>     exec/memop: Adding signedness to quad definitions
+>>>     exec/memop: Adding signed quad and octo defines
+>>>     qemu/int128: addition of div/rem 128-bit operations
+>>>     target/riscv: additional macros to check instruction support
+>>>     target/riscv: separation of bitwise logic and arithmetic helpers
+>>>     target/riscv: array for the 64 upper bits of 128-bit registers
+>>>     target/riscv: setup everything for rv64 to support rv128 execution
+>>
+>>
+>> I see this series has been merged as commit afe33262585, with
+>> 332dab68785b describing:
+>>
+>>       This patch adds the support of the '-cpu rv128' option to
+>>       qemu-system-riscv64 so that we can indicate that we want to
+>>       run rv128 executables.
+>>
+>>       Still, there is no support for 128-bit insns at that stage
+>>       so qemu fails miserably (as expected) if launched with this
+>>       option.
+>>
+>> Is this code tested? 3 years passed so I wonder about possible
+>> code bitrot here.
 > 
-> Signed-off-by: Max Chou <max.chou@sifive.com>
-> ---
-
-Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-
->   target/riscv/insn32.decode | 18 +++++++++---------
->   1 file changed, 9 insertions(+), 9 deletions(-)
+>  From memory at the time there was some momentum for RV128. So this was
+> merged with the expectation that it would continue to improve.
 > 
-> diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
-> index 6d1a13c8260..cd23b1f3a9b 100644
-> --- a/target/riscv/insn32.decode
-> +++ b/target/riscv/insn32.decode
-> @@ -703,14 +703,14 @@ vfredmax_vs     000111 . ..... ..... 001 ..... 1010111 @r_vm
->   # Vector widening ordered and unordered float reduction sum
->   vfwredusum_vs   110001 . ..... ..... 001 ..... 1010111 @r_vm
->   vfwredosum_vs   110011 . ..... ..... 001 ..... 1010111 @r_vm
-> -vmand_mm        011001 - ..... ..... 010 ..... 1010111 @r
-> -vmnand_mm       011101 - ..... ..... 010 ..... 1010111 @r
-> -vmandn_mm       011000 - ..... ..... 010 ..... 1010111 @r
-> -vmxor_mm        011011 - ..... ..... 010 ..... 1010111 @r
-> -vmor_mm         011010 - ..... ..... 010 ..... 1010111 @r
-> -vmnor_mm        011110 - ..... ..... 010 ..... 1010111 @r
-> -vmorn_mm        011100 - ..... ..... 010 ..... 1010111 @r
-> -vmxnor_mm       011111 - ..... ..... 010 ..... 1010111 @r
-> +vmand_mm        011001 1 ..... ..... 010 ..... 1010111 @r
-> +vmnand_mm       011101 1 ..... ..... 010 ..... 1010111 @r
-> +vmandn_mm       011000 1 ..... ..... 010 ..... 1010111 @r
-> +vmxor_mm        011011 1 ..... ..... 010 ..... 1010111 @r
-> +vmor_mm         011010 1 ..... ..... 010 ..... 1010111 @r
-> +vmnor_mm        011110 1 ..... ..... 010 ..... 1010111 @r
-> +vmorn_mm        011100 1 ..... ..... 010 ..... 1010111 @r
-> +vmxnor_mm       011111 1 ..... ..... 010 ..... 1010111 @r
->   vcpop_m         010000 . ..... 10000 010 ..... 1010111 @r2_vm
->   vfirst_m        010000 . ..... 10001 010 ..... 1010111 @r2_vm
->   vmsbf_m         010100 . ..... 00001 010 ..... 1010111 @r2_vm
-> @@ -732,7 +732,7 @@ vrgather_vv     001100 . ..... ..... 000 ..... 1010111 @r_vm
->   vrgatherei16_vv 001110 . ..... ..... 000 ..... 1010111 @r_vm
->   vrgather_vx     001100 . ..... ..... 100 ..... 1010111 @r_vm
->   vrgather_vi     001100 . ..... ..... 011 ..... 1010111 @r_vm
-> -vcompress_vm    010111 - ..... ..... 010 ..... 1010111 @r
-> +vcompress_vm    010111 1 ..... ..... 010 ..... 1010111 @r
->   vmv1r_v         100111 1 ..... 00000 011 ..... 1010111 @r2rd
->   vmv2r_v         100111 1 ..... 00001 011 ..... 1010111 @r2rd
->   vmv4r_v         100111 1 ..... 00011 011 ..... 1010111 @r2rd
+> That doesn't seem to have happened, either software or spec wise though.
+> 
+>>
+>> (I reached this code by looking at targets not supporting MTTCG).
+> 
+> I'm happy to remove the CPU if it's blocking you, it's experimental so
+> it doesn't need to be deprecated or anything fancy.
+> 
+> Alistair
+> 
+>>
+>>>     target/riscv: moving some insns close to similar insns
+>>>     target/riscv: accessors to registers upper part and 128-bit load/store
+>>>     target/riscv: support for 128-bit bitwise instructions
+>>>     target/riscv: support for 128-bit U-type instructions
+>>>     target/riscv: support for 128-bit shift instructions
+>>>     target/riscv: support for 128-bit arithmetic instructions
+>>>     target/riscv: support for 128-bit M extension
+>>>     target/riscv: adding high part of some csrs
+>>>     target/riscv: helper functions to wrap calls to 128-bit csr insns
+>>>     target/riscv: modification of the trans_csrxx for 128-bit support
+>>>     target/riscv: actual functions to realize crs 128-bit insns
+>>
+>>
+
+-- 
++---------------------------------------------------------------------------+
+| Frédéric Pétrot,                        Pr. Grenoble INP-UGA@Ensimag/TIMA |
+| Mob/Pho: +33 6 74 57 99 65/+33 4 76 57 48 70      Ad augusta  per angusta |
+| http://tima.univ-grenoble-alpes.fr frederic.petrot@univ-grenoble-alpes.fr |
++---------------------------------------------------------------------------+
 
 
