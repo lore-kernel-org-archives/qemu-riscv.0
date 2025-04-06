@@ -4,78 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D47D5C36002
-	for <qemu-riscv@archiver.kernel.org>; Sun,  6 Apr 2025 18:25:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3B1DFC36002
+	for <qemu-riscv@archiver.kernel.org>; Sun,  6 Apr 2025 23:23:51 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1u1UfZ-0006JZ-VC; Sun, 06 Apr 2025 14:24:33 -0400
+	id 1u1ZKt-0006P9-ED; Sun, 06 Apr 2025 19:23:31 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1)
- (envelope-from <frederic.petrot@univ-grenoble-alpes.fr>)
- id 1u1UfV-0006Iu-C8; Sun, 06 Apr 2025 14:24:29 -0400
-Received: from zm-mta-out-3.u-ga.fr ([152.77.200.56])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1)
- (envelope-from <frederic.petrot@univ-grenoble-alpes.fr>)
- id 1u1UfS-0007FN-En; Sun, 06 Apr 2025 14:24:28 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=univ-grenoble-alpes.fr; s=2020; t=1743963860;
- bh=/pOcoCgeS4hAxj68GngkeRVN+S8O8o+UHlsW9vdToxw=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=Gr8lIIuxLkY1ubDpiqf2UBIuS+jhZgFW5X89w3eOHw6sl7CqEqCWXyo6SKEeF81wF
- O0H8ck69tPnn3AmwqCe7AlVfu9VoTya8TAqG1UHg7wOBArC00zjHJG1iRXpB2+/dXz
- 6p0uCLY80yKQLxsUPo6QSqvUP3h7mtepDULzWpnksW7X9qQkOh6aqOfIC/jH8E5rmz
- O8qgMXtV5tJFp0SnRm71oKOdjtaxIuH+PA+SnPGzH2GDNmZ00Tsl3eG4CllYgyNWc2
- M1BNkyeSlGXHEaKlWF3jU3vSiNhSaSe9HWZQWq/6C0iKxp7NzrYqCzCeUsutim9uBy
- SgZCD0y3P+OSw==
-Received: from mailhub-2.u-ga.fr (mailhub-2.u-ga.fr [129.88.178.102])
- by zm-mta-out-3.u-ga.fr (Postfix) with ESMTP id 7A7B040212;
- Sun,  6 Apr 2025 20:24:20 +0200 (CEST)
-Received: from smtps.univ-grenoble-alpes.fr (smtps2.u-ga.fr [152.77.18.2])
- by mailhub-2.u-ga.fr (Postfix) with ESMTP id 7656AFF853;
- Sun,  6 Apr 2025 20:24:20 +0200 (CEST)
-Received: from [192.168.1.62] (35.201.90.79.rev.sfr.net [79.90.201.35])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- (Authenticated sender: petrotf@univ-grenoble-alpes.fr)
- by smtps.univ-grenoble-alpes.fr (Postfix) with ESMTPSA id 824551400B0;
- Sun,  6 Apr 2025 20:24:19 +0200 (CEST)
-Message-ID: <9ae32149-fe18-49d3-a689-60ee6752c20d@univ-grenoble-alpes.fr>
-Date: Sun, 6 Apr 2025 20:24:20 +0200
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1u1ZKr-0006Nz-HI; Sun, 06 Apr 2025 19:23:29 -0400
+Received: from mail-vk1-xa2b.google.com ([2607:f8b0:4864:20::a2b])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1u1ZKp-0002Gd-KG; Sun, 06 Apr 2025 19:23:29 -0400
+Received: by mail-vk1-xa2b.google.com with SMTP id
+ 71dfb90a1353d-5240a432462so3371640e0c.1; 
+ Sun, 06 Apr 2025 16:23:25 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1743981805; x=1744586605; darn=nongnu.org;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=Hr9EMx8U3JNlx7/IJ5QZ/XgLO/Ufvgly9fazfM9uO3o=;
+ b=G8F5PZ4HI4Nc1Vf6ZjsbLAaPhUhfQqbTIUo3nfVA3j3IUh0IY5FR3U6c+c4lOMB7KT
+ TB9wlLxxODizRutFgimNGo4qR7gsCQViFO4YeCzNljnHNJVd9hZYa33qDh3NSIkE651g
+ CJIQNaCMR32qxSoOiygfKgZRWLaI23XwJv9+qTUgwHoGYGkeOaNUNRMkRJAq/WwFoRLU
+ Q8HWDR+0warbmIwnqswY6Zxhy66IcKCAFO3a+soW1MEn6xZrlI93clcXK4C30PuCnuXo
+ FkzSlE7VVvarWOdTCr9Rik5ffXFmP9aSay8zcxkT7Y3GpSwp4+UMQQnOmau/ymv00qVA
+ fswA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1743981805; x=1744586605;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=Hr9EMx8U3JNlx7/IJ5QZ/XgLO/Ufvgly9fazfM9uO3o=;
+ b=AEkhVMbKOT1TQeawtt0Qsr5zha0YDma1Qq2lmHfXcstAsYbGA5HpPKu8gUpvYCUV7o
+ 9StaW7ztsSXBOCkZFkZ6HLVHQYIxp0vmg9ui7PtXaNv8L5X4kwkcJhe0LDSvZgYHPEYW
+ LznJEl4ZaWd7O7JFgExAgFg08v/a9o2DyCBAA0jayju0lr0nC4aQjiQcp646A3EF3nM4
+ F7X8JiXUkgjeCWXInS38ba/OUnuTMNtkYZrR3e3ubdMsKK2sPHpU/yLpTQq4Wh7zkunk
+ bUjmSeqaVISo37YPS5UrNhO3OhZ3vzZInNzqPUiZu1iFkAE+DjPF07IAxDkOYWtYJADl
+ 4THg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUsuZwKZHkp38m44j3Ov4f4cU+bWfmpJ9AY2GV+Ow+eAyOGUdQQmoEhLAb36zPFmS5ZkXtN+8BXOPP7@nongnu.org
+X-Gm-Message-State: AOJu0YwACkiOneNn2ExbwVpOGhzwPq+zpLNpSpziP0h9FaJNlLSHzuJt
+ g3Rlrh4kEsleJm0x7WhuAnl+9YXD054HEjCyaiZd6dd47AGpu3q/GMtC4Jy9ov4QvsNX6jo8KVQ
+ XzNIV+xlbwgiFQG4A9Tbg6+v/rbc=
+X-Gm-Gg: ASbGncvAxy8ewO704D4S14IjgKYX1B/u2ZAZYYtwY1FkG1DPODFSh8kLgjUf/EtgAeh
+ KRPn9WBsB7MnVG65FX7NaczhEFFf1b6Vkv5RG3OTkqwRhRyaNWMm4uel5ChY93Xfzu+Lmb/qqmW
+ mdRqIDqk526lUUCQwsRrVe8JzhUZsEk2oNfE1jOQJNPdYMTFX196ODvNwPDweG9spBtEE=
+X-Google-Smtp-Source: AGHT+IEqS5/dJcZGOHV6XXjYU6rBjc+NuB2D4bd50NcDq/wzIoDZ49FWA/5CUbvPFMpYG69UfGFUk4abuTqI5bf0uN0=
+X-Received: by 2002:a05:6122:1c87:b0:523:e4c6:dddb with SMTP id
+ 71dfb90a1353d-527568cf121mr11239634e0c.0.1743981804966; Sun, 06 Apr 2025
+ 16:23:24 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v8 00/18] Adding partial support for 128-bit riscv target
-To: Alistair Francis <alistair23@gmail.com>,
- =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, bin.meng@windriver.com,
- richard.henderson@linaro.org, palmer@dabbelt.com,
- fabien.portas@grenoble-inp.org, alistair.francis@wdc.com,
- Pierrick Bouvier <pierrick.bouvier@linaro.org>, Anton Johansson <anjo@rev.ng>
-References: <20220106210108.138226-1-frederic.petrot@univ-grenoble-alpes.fr>
- <c5c8566a-fd0d-48d1-8ed1-e52f0bb4f210@linaro.org>
- <CAKmqyKN51+jriKkSL8V5EFc9hBSFoEHYKp-70uP6RvO_K6a=pg@mail.gmail.com>
-Content-Language: en-US
-From: =?UTF-8?B?RnLDqWTDqXJpYyBQw6l0cm90?=
- <frederic.petrot@univ-grenoble-alpes.fr>
-In-Reply-To: <CAKmqyKN51+jriKkSL8V5EFc9hBSFoEHYKp-70uP6RvO_K6a=pg@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Greylist: Whitelist-UGA SMTP Authentifie (petrotf@univ-grenoble-alpes.fr)
- via submission-587 ACL (41)
-Received-SPF: pass client-ip=152.77.200.56;
- envelope-from=frederic.petrot@univ-grenoble-alpes.fr;
- helo=zm-mta-out-3.u-ga.fr
-X-Spam_score_int: -43
-X-Spam_score: -4.4
-X-Spam_bar: ----
-X-Spam_report: (-4.4 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+References: <20250404122858.241598-1-dbarboza@ventanamicro.com>
+In-Reply-To: <20250404122858.241598-1-dbarboza@ventanamicro.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Mon, 7 Apr 2025 09:22:58 +1000
+X-Gm-Features: ATxdqUGt94DOF2yYri1Pw6lKv899od1QVQ54ik3wRAyCyixDjYWcqC_FFFQ6l1E
+Message-ID: <CAKmqyKOkCLLENZfdfCrNPsjrQq5WbBz6vgFs=-92zMn_du3iig@mail.gmail.com>
+Subject: Re: [PATCH for-10.0] docs: deprecate RISC-V default machine option
+To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
+ liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com, 
+ =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@linaro.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2607:f8b0:4864:20::a2b;
+ envelope-from=alistair23@gmail.com; helo=mail-vk1-xa2b.google.com
+X-Spam_score_int: -17
+X-Spam_score: -1.8
+X-Spam_bar: -
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_MED=-2.3, RCVD_IN_MSPIKE_H2=-0.01,
- RCVD_IN_VALIDITY_CERTIFIED_BLOCKED=0.001, RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -91,85 +96,67 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Hi Alistair, Phil,
-well, I'm trying to keep the thing alive, checking from time to time that
-the current QEMU still runs the 128-bit tests that I have, and on which
-I continue (slowly) to do stuffs.
-I hope this can stay upstream for experimental/research purposes, but the
-128-bit riscv community is, I follow you on that, scarce for now.
+On Fri, Apr 4, 2025 at 10:30=E2=80=AFPM Daniel Henrique Barboza
+<dbarboza@ventanamicro.com> wrote:
+>
+> Commit 5b4beba124 ("RISC-V Spike Machines") added the Spike machine and
+> made it default for qemu-system-riscv32/64. It was the first RISC-V
+> machine added in QEMU so setting it as default was sensible.
+>
+> Today we have 7 riscv64 and 6 riscv32 machines and having 'spike' as
+> default machine is not intuitive. For example, [1] is a bug that was
+> opened with the 'virt' board in mind, but given that the user didn't
+> pass a '-machine' option, the user was using 'spike' without knowing.
+>
+> Being explicit in the command line is desirable when we have a handful
+> of boards available, so deprecate the default machine setting from
+> RISC-V.
+>
+> [1] https://gitlab.com/qemu-project/qemu/-/issues/2467
+>
+> Suggested-by: Philippe Mathieu-Daud=C3=A9 <philmd@linaro.org>
+> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 
-So, your call.
-Cheers,
-Frédéric
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
-Le 04/04/2025 à 05:26, Alistair Francis a écrit :
-> On Sat, Mar 22, 2025 at 1:09 AM Philippe Mathieu-Daudé
-> <philmd@linaro.org> wrote:
->>
->> Hi,
->>
->> On 6/1/22 22:00, Frédéric Pétrot wrote:
->>> This series of patches provides partial 128-bit support for the riscv
->>> target architecture, namely RVI and RVM, with minimal csr support.
->>
->>
->>> Frédéric Pétrot (18):
->>>     exec/memop: Adding signedness to quad definitions
->>>     exec/memop: Adding signed quad and octo defines
->>>     qemu/int128: addition of div/rem 128-bit operations
->>>     target/riscv: additional macros to check instruction support
->>>     target/riscv: separation of bitwise logic and arithmetic helpers
->>>     target/riscv: array for the 64 upper bits of 128-bit registers
->>>     target/riscv: setup everything for rv64 to support rv128 execution
->>
->>
->> I see this series has been merged as commit afe33262585, with
->> 332dab68785b describing:
->>
->>       This patch adds the support of the '-cpu rv128' option to
->>       qemu-system-riscv64 so that we can indicate that we want to
->>       run rv128 executables.
->>
->>       Still, there is no support for 128-bit insns at that stage
->>       so qemu fails miserably (as expected) if launched with this
->>       option.
->>
->> Is this code tested? 3 years passed so I wonder about possible
->> code bitrot here.
-> 
->  From memory at the time there was some momentum for RV128. So this was
-> merged with the expectation that it would continue to improve.
-> 
-> That doesn't seem to have happened, either software or spec wise though.
-> 
->>
->> (I reached this code by looking at targets not supporting MTTCG).
-> 
-> I'm happy to remove the CPU if it's blocking you, it's experimental so
-> it doesn't need to be deprecated or anything fancy.
-> 
-> Alistair
-> 
->>
->>>     target/riscv: moving some insns close to similar insns
->>>     target/riscv: accessors to registers upper part and 128-bit load/store
->>>     target/riscv: support for 128-bit bitwise instructions
->>>     target/riscv: support for 128-bit U-type instructions
->>>     target/riscv: support for 128-bit shift instructions
->>>     target/riscv: support for 128-bit arithmetic instructions
->>>     target/riscv: support for 128-bit M extension
->>>     target/riscv: adding high part of some csrs
->>>     target/riscv: helper functions to wrap calls to 128-bit csr insns
->>>     target/riscv: modification of the trans_csrxx for 128-bit support
->>>     target/riscv: actual functions to realize crs 128-bit insns
->>
->>
+Alistair
 
--- 
-+---------------------------------------------------------------------------+
-| Frédéric Pétrot,                        Pr. Grenoble INP-UGA@Ensimag/TIMA |
-| Mob/Pho: +33 6 74 57 99 65/+33 4 76 57 48 70      Ad augusta  per angusta |
-| http://tima.univ-grenoble-alpes.fr frederic.petrot@univ-grenoble-alpes.fr |
-+---------------------------------------------------------------------------+
-
+> ---
+>  docs/about/deprecated.rst | 17 +++++++++++++++++
+>  1 file changed, 17 insertions(+)
+>
+> diff --git a/docs/about/deprecated.rst b/docs/about/deprecated.rst
+> index 76291fdfd6..0f41a99c67 100644
+> --- a/docs/about/deprecated.rst
+> +++ b/docs/about/deprecated.rst
+> @@ -304,6 +304,23 @@ online to check that this board did not completely b=
+itrot yet). It is
+>  recommended to use another MIPS machine for future MIPS code development
+>  instead.
+>
+> +RISC-V default machine option (since 10.0)
+> +''''''''''''''''''''''''''''''''''''''''''
+> +
+> +RISC-V defines ``spike`` as the default machine if no machine option is
+> +given in the command line.  This happens because ``spike`` is the first
+> +RISC-V machine implemented in QEMU and setting it as default was
+> +convenient at that time.  Now we have 7 riscv64 and 6 riscv32 machines
+> +and having ``spike`` as a default is no longer justified.  This default
+> +will also promote situations where users think they're running ``virt``
+> +(the most used RISC-V machine type in 10.0) when in fact they're
+> +running ``spike``.
+> +
+> +Removing the default machine option forces users to always set the machi=
+ne
+> +they want to use and avoids confusion.  Existing users of the ``spike``
+> +machine must ensure that they're setting the ``spike`` machine in the
+> +command line (``-M spike``).
+> +
+>
+>  Backend options
+>  ---------------
+> --
+> 2.49.0
+>
+>
 
