@@ -4,46 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7314CC36010
-	for <qemu-riscv@archiver.kernel.org>; Mon,  7 Apr 2025 09:22:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4DB2AC36010
+	for <qemu-riscv@archiver.kernel.org>; Mon,  7 Apr 2025 09:43:35 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1u1igF-0000zW-3R; Mon, 07 Apr 2025 05:22:12 -0400
+	id 1u1j0h-0005Mm-2S; Mon, 07 Apr 2025 05:43:19 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <huangborong@bosc.ac.cn>)
- id 1u1ifz-0000yz-2e
- for qemu-riscv@nongnu.org; Mon, 07 Apr 2025 05:21:57 -0400
-Received: from out28-53.mail.aliyun.com ([115.124.28.53])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <huangborong@bosc.ac.cn>)
- id 1u1ifs-00023L-Ei
- for qemu-riscv@nongnu.org; Mon, 07 Apr 2025 05:21:54 -0400
-Received: from DESKTOP-MLVKPO8.(mailfrom:huangborong@bosc.ac.cn
- fp:SMTPD_---.cFoG9e3_1744017694 cluster:ay29) by smtp.aliyun-inc.com;
- Mon, 07 Apr 2025 17:21:42 +0800
-From: Huang Borong <huangborong@bosc.ac.cn>
-To: qemu-riscv@nongnu.org
-Cc: wangran@bosc.ac.cn, pbonzini@redhat.com, palmer@dabbelt.com,
- alistair.francis@wdc.com, liwei1518@gmail.com, dbarboza@ventanamicro.com,
- zhiwei_liu@linux.alibaba.com, Huang Borong <huangborong@bosc.ac.cn>
-Subject: [PATCH v2 2/2] hw/riscv: Initial support for BOSC's Xiangshan
- Kunminghu FPGA prototype
-Date: Mon,  7 Apr 2025 17:21:08 +0800
-Message-Id: <20250407092108.274570-1-huangborong@bosc.ac.cn>
-X-Mailer: git-send-email 2.34.1
+ (Exim 4.90_1) (envelope-from <jim.shu@sifive.com>)
+ id 1u1j0e-0005Lm-Qj
+ for qemu-riscv@nongnu.org; Mon, 07 Apr 2025 05:43:16 -0400
+Received: from mail-ed1-x533.google.com ([2a00:1450:4864:20::533])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <jim.shu@sifive.com>)
+ id 1u1j0c-0004gF-4K
+ for qemu-riscv@nongnu.org; Mon, 07 Apr 2025 05:43:16 -0400
+Received: by mail-ed1-x533.google.com with SMTP id
+ 4fb4d7f45d1cf-5efe8d9eb1eso2248109a12.0
+ for <qemu-riscv@nongnu.org>; Mon, 07 Apr 2025 02:43:12 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=sifive.com; s=google; t=1744018991; x=1744623791; darn=nongnu.org;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=frAdG82IzSpKFdF9BYUPNXFXA1qcYxRah5S2vNxJgmQ=;
+ b=JcD6Tj1yiWReT3OBilrpoScp7rWVVvuC4NIovIS8P6FQMflAanftRcdJhDBJHh7HW9
+ oya0UNbUykCqE6BHmjg89YQRU459YGGnyAcKoN2x3BIv9qtW6GJcnGP/+digDct53w45
+ vpFaHcij8xPYLe5F7DJts+o8Yfi50m+jns9LQrV/xQJz9lB/n9RaXNl8iAEMxAypAqhB
+ 6NARsmc+fQPxM24zv4Q/4oyQdtMLyJHvoYuPFA3XpGTBndPREI6WmC92D/ovRQjbZpFB
+ qcZHroRjx62/cQCy0mJ0OmhwPiFbaTt2dY9AOh8/9nouBHKZX3V0SQWNkJH8BHbrdr+Z
+ AyMg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1744018991; x=1744623791;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=frAdG82IzSpKFdF9BYUPNXFXA1qcYxRah5S2vNxJgmQ=;
+ b=oEsoUHRqHI8z+GQad3Fcmd6+NpJeTGO6+QRROM+StLY1dt3RLRG5oWTRPnMr7BImBf
+ 64HQqBWKeZjY/1vVGWoohT/McjsU9vtwg++Kuz0hqHKcwXfAEtIqZfRA/2pfGvk3k2pX
+ Qzl6b0ufzmPGYoLcgPBQGlNL1T4T4wOR3EkPJbWkuM5dmOHTOG9AbczmWXAO3RAL5e9U
+ sgbzRgDk3tGG/ci4AVdYJ/mrRmpQDix9oheeW6LFZRl6e3dGDz2yaznV58ybshMto+SG
+ KHOF9rkb2DFXFTwNIpNSX7d5QROtMPraNDNXu/lPoYyWDZigfv51UMpay+ChR9L9wpT6
+ vyMA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVggQeEFsP5Fr45s8rug2uy1a9elKcotDIc4lTS03XYhSZ8RYPsnSTNuNQoOIKsoTWCKNKVut0oVkuV@nongnu.org
+X-Gm-Message-State: AOJu0YxRsbeY4OAA+MLVBeHoIQp1OLSYh0n/fkEbnIGM0KnhPzgu87iQ
+ 1rv9vKeA60D4MQ+cgad3YIC1WDKiYkWEVCioX4EGQJUiPEhjnqPvglenkjrTP5UPnowRb06dG6J
+ ob87fjVIdaWjfcVbSIMHr2HAcJoy1kLC/OsrVgg==
+X-Gm-Gg: ASbGncvyPY1J8BWzoSG/p+U05S0oqjh6Yhi/hkBju0N0QGTQSW5gG40NttNIFTtWpd0
+ D/1Va1+YjCvL4XbzSPTTY0l9BAQLMv7YP4OqMkFy+Ggu5MA5c7oEe54QPQAGXNB72Tr9UiG9hSy
+ PI/W7/+ERHShETkEKgbduFmxRcWVLu
+X-Google-Smtp-Source: AGHT+IHBT2QwPW67OF+XinZDo56beTyUPleiOhytNCHpyNHJwV4YB2uhfjjqh1dWzAz/CTjLdiskDXP2lRhwOYpqmkU=
+X-Received: by 2002:a05:6402:1d4e:b0:5e5:4807:545f with SMTP id
+ 4fb4d7f45d1cf-5f0b292ac40mr9554807a12.12.1744018990988; Mon, 07 Apr 2025
+ 02:43:10 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=115.124.28.53;
- envelope-from=huangborong@bosc.ac.cn; helo=out28-53.mail.aliyun.com
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_NONE=-0.0001,
- RCVD_IN_VALIDITY_CERTIFIED_BLOCKED=0.001, RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- UNPARSEABLE_RELAY=0.001 autolearn=ham autolearn_force=no
+References: <20250319192153.28549-1-jim.shu@sifive.com>
+ <20250319192153.28549-5-jim.shu@sifive.com>
+ <CAKmqyKPFBaGdEQeLewGyvhNcmzqO0gtRN=4BytoAH7QO5qm_Lw@mail.gmail.com>
+In-Reply-To: <CAKmqyKPFBaGdEQeLewGyvhNcmzqO0gtRN=4BytoAH7QO5qm_Lw@mail.gmail.com>
+From: Jim Shu <jim.shu@sifive.com>
+Date: Mon, 7 Apr 2025 17:42:59 +0800
+X-Gm-Features: ATxdqUHyOBVd4-RGovufR-Y10_ggCZ6GLHHsjBoOVbwpMa0MZmxCCeaOtycKv6g
+Message-ID: <CALw707ouoGcASSCd1ODHiqVw3XqtrdeRJw2k6b2kZZx8vpbWnQ@mail.gmail.com>
+Subject: Re: [PATCH 4/4] target/riscv: Enable/Disable S/VS-mode Timer when
+ STCE bit is changed
+To: Alistair Francis <alistair23@gmail.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, 
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Weiwei Li <liwei1518@gmail.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>, 
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2a00:1450:4864:20::533;
+ envelope-from=jim.shu@sifive.com; helo=mail-ed1-x533.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -59,440 +103,262 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-This implementation provides emulation for the Xiangshan Kunminghu
-FPGA prototype platform, including support for UART, CLINT, IMSIC,
-and APLIC devices. More details can be found at
-https://github.com/OpenXiangShan/XiangShan
+OK, I will fix it in the v2 patchset.
 
-Signed-off-by: qinshaoqing <qinshaoqing@bosc.ac.cn>
-Signed-off-by: Yang Wang <wangyang@bosc.ac.cn>
-Signed-off-by: Yu Hu <huyu@bosc.ac.cn>
-Signed-off-by: Ran Wang <wangran@bosc.ac.cn>
-Signed-off-by: Borong Huang <huangborong@bosc.ac.cn>
----
- MAINTAINERS                                 |   7 +
- configs/devices/riscv64-softmmu/default.mak |   1 +
- docs/system/riscv/xiangshan-kunminghu.rst   |  39 ++++
- hw/riscv/Kconfig                            |   9 +
- hw/riscv/meson.build                        |   1 +
- hw/riscv/xiangshan_kmh.c                    | 220 ++++++++++++++++++++
- include/hw/riscv/xiangshan_kmh.h            |  78 +++++++
- 7 files changed, 355 insertions(+)
- create mode 100644 docs/system/riscv/xiangshan-kunminghu.rst
- create mode 100644 hw/riscv/xiangshan_kmh.c
- create mode 100644 include/hw/riscv/xiangshan_kmh.h
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index 8f470a1c9b..746395b3b8 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -1653,6 +1653,13 @@ S: Maintained
- F: hw/riscv/microblaze-v-generic.c
- F: docs/system/riscv/microblaze-v-generic.rst
- 
-+Xiangshan Kunminghu
-+M: Ran Wang <wangran@bosc.ac.cn>
-+S: Maintained
-+F: docs/system/riscv/xiangshan-kunminghu.rst
-+F: hw/riscv/xiangshan_kmh.c
-+F: include/hw/riscv/xiangshan_kmh.h
-+
- RX Machines
- -----------
- rx-gdbsim
-diff --git a/configs/devices/riscv64-softmmu/default.mak b/configs/devices/riscv64-softmmu/default.mak
-index 39ed3a0061..e485bbd1a3 100644
---- a/configs/devices/riscv64-softmmu/default.mak
-+++ b/configs/devices/riscv64-softmmu/default.mak
-@@ -11,3 +11,4 @@
- # CONFIG_RISCV_VIRT=n
- # CONFIG_MICROCHIP_PFSOC=n
- # CONFIG_SHAKTI_C=n
-+# CONFIG_XIANGSHAN_KUNMINGHU=n
-diff --git a/docs/system/riscv/xiangshan-kunminghu.rst b/docs/system/riscv/xiangshan-kunminghu.rst
-new file mode 100644
-index 0000000000..46e7ceeda0
---- /dev/null
-+++ b/docs/system/riscv/xiangshan-kunminghu.rst
-@@ -0,0 +1,39 @@
-+BOSC Xiangshan Kunminghu FPGA prototype platform (``xiangshan-kunminghu``)
-+==========================================================================
-+The ``xiangshan-kunminghu`` machine is compatible with our FPGA prototype
-+platform.
-+
-+XiangShan is an open-source high-performance RISC-V processor project.
-+The third generation processor is called Kunminghu. Kunminghu is a 64-bit
-+RV64GCBSUHV processor core. More information can be found in our Github
-+repository:
-+https://github.com/OpenXiangShan/XiangShan
-+
-+Supported devices
-+-----------------
-+The ``xiangshan-kunminghu`` machine supports the following devices:
-+
-+* Up to 16 xiangshan-kunminghu cores
-+* Core Local Interruptor (CLINT)
-+* Incoming MSI Controller (IMSIC)
-+* Advanced Platform-Level Interrupt Controller (APLIC)
-+* 1 UART
-+
-+Boot options
-+------------
-+The ``xiangshan-kunminghu`` machine can start using the standard ``-bios``
-+functionality for loading the boot image. You need to compile and link
-+the firmware, kernel, and Device Tree (FDT) into a single binary file,
-+such as ``fw_payload.bin``.
-+
-+Running
-+-------
-+Below is an example command line for running the ``xiangshan-kunminghu``
-+machine:
-+
-+.. code-block:: bash
-+
-+   $ qemu-system-riscv64 -machine xiangshan-kunminghu \
-+      -smp 16 -m 16G \
-+      -bios path/to/opensbi/platform/generic/firmware/fw_payload.bin \
-+      -nographic
-diff --git a/hw/riscv/Kconfig b/hw/riscv/Kconfig
-index e6a0ac1fa1..fc9c35bd98 100644
---- a/hw/riscv/Kconfig
-+++ b/hw/riscv/Kconfig
-@@ -119,3 +119,12 @@ config SPIKE
-     select HTIF
-     select RISCV_ACLINT
-     select SIFIVE_PLIC
-+
-+config XIANGSHAN_KUNMINGHU
-+    bool
-+    default y
-+    depends on RISCV64
-+    select RISCV_ACLINT
-+    select RISCV_APLIC
-+    select RISCV_IMSIC
-+    select SERIAL_MM
-diff --git a/hw/riscv/meson.build b/hw/riscv/meson.build
-index c22f3a7216..2a8d5b136c 100644
---- a/hw/riscv/meson.build
-+++ b/hw/riscv/meson.build
-@@ -13,5 +13,6 @@ riscv_ss.add(when: 'CONFIG_ACPI', if_true: files('virt-acpi-build.c'))
- riscv_ss.add(when: 'CONFIG_RISCV_IOMMU', if_true: files(
- 	'riscv-iommu.c', 'riscv-iommu-pci.c', 'riscv-iommu-sys.c', 'riscv-iommu-hpm.c'))
- riscv_ss.add(when: 'CONFIG_MICROBLAZE_V', if_true: files('microblaze-v-generic.c'))
-+riscv_ss.add(when: 'CONFIG_XIANGSHAN_KUNMINGHU', if_true: files('xiangshan_kmh.c'))
- 
- hw_arch += {'riscv': riscv_ss}
-diff --git a/hw/riscv/xiangshan_kmh.c b/hw/riscv/xiangshan_kmh.c
-new file mode 100644
-index 0000000000..f7ae879d13
---- /dev/null
-+++ b/hw/riscv/xiangshan_kmh.c
-@@ -0,0 +1,220 @@
-+/*
-+ * QEMU RISC-V Board Compatible with the Xiangshan Kunminghu
-+ * FPGA prototype platform
-+ *
-+ * Copyright (c) 2025 Beijing Institute of Open Source Chip (BOSC)
-+ * SPDX-License-Identifier: GPL-2.0-or-later
-+ *
-+ * Provides a board compatible with the Xiangshan Kunminghu
-+ * FPGA prototype platform:
-+ *
-+ * 0) UART (16550A)
-+ * 1) CLINT (Core-Local Interruptor)
-+ * 2) IMSIC (Incoming MSI Controller)
-+ * 3) APLIC (Advanced Platform-Level Interrupt Controller)
-+ *
-+ * More information can be found in our Github repository:
-+ * https://github.com/OpenXiangShan/XiangShan
-+ *
-+ * This program is free software; you can redistribute it and/or modify it
-+ * under the terms and conditions of the GNU General Public License,
-+ * version 2 or later, as published by the Free Software Foundation.
-+ *
-+ * This program is distributed in the hope it will be useful, but WITHOUT
-+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
-+ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
-+ * more details.
-+ *
-+ * You should have received a copy of the GNU General Public License along with
-+ * this program.  If not, see <http://www.gnu.org/licenses/>.
-+ */
-+
-+#include "qemu/osdep.h"
-+#include "qapi/error.h"
-+#include "exec/address-spaces.h"
-+#include "hw/boards.h"
-+#include "hw/char/serial-mm.h"
-+#include "hw/intc/riscv_aclint.h"
-+#include "hw/intc/riscv_aplic.h"
-+#include "hw/intc/riscv_imsic.h"
-+#include "hw/qdev-properties.h"
-+#include "hw/riscv/boot.h"
-+#include "hw/riscv/xiangshan_kmh.h"
-+#include "hw/riscv/riscv_hart.h"
-+#include "system/system.h"
-+
-+static const MemMapEntry xiangshan_kmh_memmap[] = {
-+    [XIANGSHAN_KMH_ROM] =          {     0x1000,        0xF000 },
-+    [XIANGSHAN_KMH_UART0] =        { 0x310B0000,       0x10000 },
-+    [XIANGSHAN_KMH_CLINT] =        { 0x38000000,       0x10000 },
-+    [XIANGSHAN_KMH_APLIC_M] =      { 0x31100000,        0x4000 },
-+    [XIANGSHAN_KMH_APLIC_S] =      { 0x31120000,        0x4000 },
-+    [XIANGSHAN_KMH_IMSIC_M] =      { 0x3A800000,       0x10000 },
-+    [XIANGSHAN_KMH_IMSIC_S] =      { 0x3B000000,       0x80000 },
-+    [XIANGSHAN_KMH_DRAM] =         { 0x80000000,           0x0 },
-+};
-+
-+static DeviceState *xiangshan_kmh_create_aia(uint32_t num_harts)
-+{
-+    int i;
-+    const MemMapEntry *memmap = xiangshan_kmh_memmap;
-+    hwaddr addr = 0;
-+    DeviceState *aplic_m = NULL;
-+
-+    /* M-level IMSICs */
-+    addr = memmap[XIANGSHAN_KMH_IMSIC_M].base;
-+    for (i = 0; i < num_harts; i++) {
-+        riscv_imsic_create(addr + i * IMSIC_HART_SIZE(0), i, true,
-+                           1, XIANGSHAN_KMH_IMSIC_NUM_IDS);
-+    }
-+
-+    /* S-level IMSICs */
-+    addr = memmap[XIANGSHAN_KMH_IMSIC_S].base;
-+    for (i = 0; i < num_harts; i++) {
-+        riscv_imsic_create(addr +
-+                           i * IMSIC_HART_SIZE(XIANGSHAN_KMH_IMSIC_GUEST_BITS),
-+                           i, false, 1 + XIANGSHAN_KMH_IMSIC_GUEST_BITS,
-+                           XIANGSHAN_KMH_IMSIC_NUM_IDS);
-+    }
-+
-+    /* M-level APLIC */
-+    aplic_m = riscv_aplic_create(memmap[XIANGSHAN_KMH_APLIC_M].base,
-+                                 memmap[XIANGSHAN_KMH_APLIC_M].size,
-+                                 0, 0, XIANGSHAN_KMH_APLIC_NUM_SOURCES,
-+                                 1, true, true, NULL);
-+
-+    /* S-level APLIC */
-+    riscv_aplic_create(memmap[XIANGSHAN_KMH_APLIC_S].base,
-+                       memmap[XIANGSHAN_KMH_APLIC_S].size,
-+                       0, 0, XIANGSHAN_KMH_APLIC_NUM_SOURCES,
-+                       1, true, false, aplic_m);
-+
-+    return aplic_m;
-+}
-+
-+static void xiangshan_kmh_soc_realize(DeviceState *dev, Error **errp)
-+{
-+    MachineState *ms = MACHINE(qdev_get_machine());
-+    XiangshanKmhSoCState *s = XIANGSHAN_KMH_SOC(dev);
-+    const MemMapEntry *memmap = xiangshan_kmh_memmap;
-+    MemoryRegion *system_memory = get_system_memory();
-+    uint32_t num_harts = ms->smp.cpus;
-+
-+    qdev_prop_set_uint32(DEVICE(&s->cpus), "num-harts", num_harts);
-+    qdev_prop_set_uint32(DEVICE(&s->cpus), "hartid-base", 0);
-+    qdev_prop_set_string(DEVICE(&s->cpus), "cpu-type",
-+                         TYPE_RISCV_CPU_XIANGSHAN_KMH);
-+    sysbus_realize(SYS_BUS_DEVICE(&s->cpus), &error_fatal);
-+
-+    /* AIA */
-+    s->irqchip = xiangshan_kmh_create_aia(num_harts);
-+
-+    /* UART */
-+    serial_mm_init(system_memory, memmap[XIANGSHAN_KMH_UART0].base, 2,
-+                   qdev_get_gpio_in(s->irqchip, XIANGSHAN_KMH_UART0_IRQ),
-+                   115200, serial_hd(0), DEVICE_LITTLE_ENDIAN);
-+
-+    /* CLINT */
-+    riscv_aclint_swi_create(memmap[XIANGSHAN_KMH_CLINT].base,
-+                            0, num_harts, false);
-+    riscv_aclint_mtimer_create(memmap[XIANGSHAN_KMH_CLINT].base +
-+                               RISCV_ACLINT_SWI_SIZE,
-+                               RISCV_ACLINT_DEFAULT_MTIMER_SIZE,
-+                               0, num_harts, RISCV_ACLINT_DEFAULT_MTIMECMP,
-+                               RISCV_ACLINT_DEFAULT_MTIME,
-+                               XIANGSHAN_KMH_CLINT_TIMEBASE_FREQ, true);
-+
-+    /* ROM */
-+    memory_region_init_rom(&s->rom, OBJECT(dev), "xiangshan.kunminghu.rom",
-+                           memmap[XIANGSHAN_KMH_ROM].size, &error_fatal);
-+    memory_region_add_subregion(system_memory,
-+                                memmap[XIANGSHAN_KMH_ROM].base, &s->rom);
-+}
-+
-+static void xiangshan_kmh_soc_class_init(ObjectClass *klass, void *data)
-+{
-+    DeviceClass *dc = DEVICE_CLASS(klass);
-+
-+    dc->realize = xiangshan_kmh_soc_realize;
-+    dc->user_creatable = false;
-+}
-+
-+static void xiangshan_kmh_soc_instance_init(Object *obj)
-+{
-+    XiangshanKmhSoCState *s = XIANGSHAN_KMH_SOC(obj);
-+
-+    object_initialize_child(obj, "cpus", &s->cpus, TYPE_RISCV_HART_ARRAY);
-+}
-+
-+static const TypeInfo xiangshan_kmh_soc_info = {
-+    .name = TYPE_XIANGSHAN_KMH_SOC,
-+    .parent = TYPE_DEVICE,
-+    .instance_size = sizeof(XiangshanKmhSoCState),
-+    .instance_init = xiangshan_kmh_soc_instance_init,
-+    .class_init = xiangshan_kmh_soc_class_init,
-+};
-+
-+static void xiangshan_kmh_soc_register_types(void)
-+{
-+    type_register_static(&xiangshan_kmh_soc_info);
-+}
-+type_init(xiangshan_kmh_soc_register_types)
-+
-+static void xiangshan_kmh_machine_init(MachineState *machine)
-+{
-+    XiangshanKmhState *s = XIANGSHAN_KMH_MACHINE(machine);
-+    const MemMapEntry *memmap = xiangshan_kmh_memmap;
-+    MemoryRegion *system_memory = get_system_memory();
-+    hwaddr start_addr = memmap[XIANGSHAN_KMH_DRAM].base;
-+
-+    /* Initialize SoC */
-+    object_initialize_child(OBJECT(machine), "soc", &s->soc,
-+                            TYPE_XIANGSHAN_KMH_SOC);
-+    qdev_realize(DEVICE(&s->soc), NULL, &error_fatal);
-+
-+    /* Register RAM */
-+    memory_region_add_subregion(system_memory,
-+                                memmap[XIANGSHAN_KMH_DRAM].base,
-+                                machine->ram);
-+
-+    /* ROM reset vector */
-+    riscv_setup_rom_reset_vec(machine, &s->soc.cpus,
-+                              start_addr,
-+                              memmap[XIANGSHAN_KMH_ROM].base,
-+                              memmap[XIANGSHAN_KMH_ROM].size, 0, 0);
-+    if (machine->firmware) {
-+        riscv_load_firmware(machine->firmware, &start_addr, NULL);
-+    }
-+
-+    /* Note: dtb has been integrated into firmware(OpenSBI) when compiling */
-+}
-+
-+static void xiangshan_kmh_machine_class_init(ObjectClass *klass, void *data)
-+{
-+    MachineClass *mc = MACHINE_CLASS(klass);
-+    static const char *const valid_cpu_types[] = {
-+        TYPE_RISCV_CPU_XIANGSHAN_KMH,
-+        NULL
-+    };
-+
-+    mc->desc = "RISC-V Board compatible with the Xiangshan " \
-+               "Kunminghu FPGA prototype platform";
-+    mc->init = xiangshan_kmh_machine_init;
-+    mc->max_cpus = XIANGSHAN_KMH_MAX_CPUS;
-+    mc->default_cpu_type = TYPE_RISCV_CPU_XIANGSHAN_KMH;
-+    mc->valid_cpu_types = valid_cpu_types;
-+    mc->default_ram_id = "xiangshan.kunminghu.ram";
-+}
-+
-+static const TypeInfo xiangshan_kmh_machine_info = {
-+    .name = TYPE_XIANGSHAN_KMH_MACHINE,
-+    .parent = TYPE_MACHINE,
-+    .instance_size = sizeof(XiangshanKmhState),
-+    .class_init = xiangshan_kmh_machine_class_init,
-+};
-+
-+static void xiangshan_kmh_machine_register_types(void)
-+{
-+    type_register_static(&xiangshan_kmh_machine_info);
-+}
-+type_init(xiangshan_kmh_machine_register_types)
-diff --git a/include/hw/riscv/xiangshan_kmh.h b/include/hw/riscv/xiangshan_kmh.h
-new file mode 100644
-index 0000000000..952473fbb6
---- /dev/null
-+++ b/include/hw/riscv/xiangshan_kmh.h
-@@ -0,0 +1,78 @@
-+/*
-+ * QEMU RISC-V Board Compatible with the Xiangshan Kunminghu
-+ * FPGA prototype platform
-+ *
-+ * Copyright (c) 2025 Beijing Institute of Open Source Chip (BOSC)
-+ *
-+ * This program is free software; you can redistribute it and/or modify it
-+ * under the terms and conditions of the GNU General Public License,
-+ * version 2 or later, as published by the Free Software Foundation.
-+ *
-+ * This program is distributed in the hope it will be useful, but WITHOUT
-+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
-+ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
-+ * more details.
-+ *
-+ * You should have received a copy of the GNU General Public License along with
-+ * this program.  If not, see <http://www.gnu.org/licenses/>.
-+ */
-+
-+#ifndef HW_XIANGSHAN_KMH_H
-+#define HW_XIANGSHAN_KMH_H
-+
-+#include "hw/boards.h"
-+#include "hw/riscv/riscv_hart.h"
-+
-+#define XIANGSHAN_KMH_MAX_CPUS 16
-+
-+typedef struct XiangshanKmhSoCState {
-+    /*< private >*/
-+    DeviceState parent_obj;
-+
-+    /*< public >*/
-+    RISCVHartArrayState cpus;
-+    DeviceState *irqchip;
-+    MemoryRegion rom;
-+} XiangshanKmhSoCState;
-+
-+#define TYPE_XIANGSHAN_KMH_SOC "xiangshan.kunminghu.soc"
-+DECLARE_INSTANCE_CHECKER(XiangshanKmhSoCState, XIANGSHAN_KMH_SOC,
-+                         TYPE_XIANGSHAN_KMH_SOC)
-+
-+typedef struct XiangshanKmhState {
-+    /*< private >*/
-+    MachineState parent_obj;
-+
-+    /*< public >*/
-+    XiangshanKmhSoCState soc;
-+} XiangshanKmhState;
-+
-+#define TYPE_XIANGSHAN_KMH_MACHINE MACHINE_TYPE_NAME("xiangshan-kunminghu")
-+DECLARE_INSTANCE_CHECKER(XiangshanKmhState, XIANGSHAN_KMH_MACHINE,
-+                         TYPE_XIANGSHAN_KMH_MACHINE)
-+
-+enum {
-+    XIANGSHAN_KMH_ROM,
-+    XIANGSHAN_KMH_UART0,
-+    XIANGSHAN_KMH_CLINT,
-+    XIANGSHAN_KMH_APLIC_M,
-+    XIANGSHAN_KMH_APLIC_S,
-+    XIANGSHAN_KMH_IMSIC_M,
-+    XIANGSHAN_KMH_IMSIC_S,
-+    XIANGSHAN_KMH_DRAM,
-+};
-+
-+enum {
-+    XIANGSHAN_KMH_UART0_IRQ = 10,
-+};
-+
-+/* Indicating Timebase-freq (1MHZ) */
-+#define XIANGSHAN_KMH_CLINT_TIMEBASE_FREQ 1000000
-+
-+#define XIANGSHAN_KMH_IMSIC_NUM_IDS 255
-+#define XIANGSHAN_KMH_IMSIC_NUM_GUESTS 7
-+#define XIANGSHAN_KMH_IMSIC_GUEST_BITS 3
-+
-+#define XIANGSHAN_KMH_APLIC_NUM_SOURCES 96
-+
-+#endif
--- 
-2.34.1
+Jim Shu
 
+On Fri, Apr 4, 2025 at 2:03=E2=80=AFPM Alistair Francis <alistair23@gmail.c=
+om> wrote:
+>
+> On Thu, Mar 20, 2025 at 5:24=E2=80=AFAM Jim Shu <jim.shu@sifive.com> wrot=
+e:
+> >
+> > Updating STCE will enable/disable SSTC in S-mode or/and VS-mode, so we
+> > also need to update S/VS-mode Timer and S/VSTIP bits in $mip CSR.
+> >
+> > Signed-off-by: Jim Shu <jim.shu@sifive.com>
+> > ---
+> >  target/riscv/csr.c         | 44 ++++++++++++++++++++++++++++++++
+> >  target/riscv/time_helper.c | 51 ++++++++++++++++++++++++++++++++++++++
+> >  target/riscv/time_helper.h |  1 +
+> >  3 files changed, 96 insertions(+)
+> >
+> > diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+> > index ba026dfc8e..c954e49cae 100644
+> > --- a/target/riscv/csr.c
+> > +++ b/target/riscv/csr.c
+> > @@ -3156,6 +3156,7 @@ static RISCVException write_menvcfg(CPURISCVState=
+ *env, int csrno,
+> >      const RISCVCPUConfig *cfg =3D riscv_cpu_cfg(env);
+> >      uint64_t mask =3D MENVCFG_FIOM | MENVCFG_CBIE | MENVCFG_CBCFE |
+> >                      MENVCFG_CBZE | MENVCFG_CDE;
+> > +    bool stce_changed =3D false;
+> >
+> >      if (riscv_cpu_mxl(env) =3D=3D MXL_RV64) {
+> >          mask |=3D (cfg->ext_svpbmt ? MENVCFG_PBMTE : 0) |
+> > @@ -3181,10 +3182,19 @@ static RISCVException write_menvcfg(CPURISCVSta=
+te *env, int csrno,
+> >          if ((val & MENVCFG_DTE) =3D=3D 0) {
+> >              env->mstatus &=3D ~MSTATUS_SDT;
+> >          }
+> > +
+> > +        if (cfg->ext_sstc &&
+> > +            ((env->menvcfg & MENVCFG_STCE) !=3D (val & MENVCFG_STCE)))=
+ {
+> > +            stce_changed =3D true;
+> > +        }
+> >      }
+> >      env->menvcfg =3D (env->menvcfg & ~mask) | (val & mask);
+> >      write_henvcfg(env, CSR_HENVCFG, env->henvcfg);
+> >
+> > +    if (stce_changed) {
+> > +        riscv_timer_stce_changed(env, true, !!(val & MENVCFG_STCE));
+> > +    }
+> > +
+> >      return RISCV_EXCP_NONE;
+> >  }
+> >
+> > @@ -3207,6 +3217,12 @@ static RISCVException write_menvcfgh(CPURISCVSta=
+te *env, int csrno,
+> >                      (cfg->ext_smcdeleg ? MENVCFG_CDE : 0) |
+> >                      (cfg->ext_ssdbltrp ? MENVCFG_DTE : 0);
+> >      uint64_t valh =3D (uint64_t)val << 32;
+> > +    bool stce_changed =3D false;
+> > +
+> > +    if (cfg->ext_sstc &&
+> > +        ((env->menvcfg & MENVCFG_STCE) !=3D (valh & MENVCFG_STCE))) {
+> > +        stce_changed =3D true;
+> > +    }
+> >
+> >      if ((valh & MENVCFG_DTE) =3D=3D 0) {
+> >          env->mstatus &=3D ~MSTATUS_SDT;
+> > @@ -3215,6 +3231,10 @@ static RISCVException write_menvcfgh(CPURISCVSta=
+te *env, int csrno,
+> >      env->menvcfg =3D (env->menvcfg & ~mask) | (valh & mask);
+> >      write_henvcfgh(env, CSR_HENVCFGH, env->henvcfg >> 32);
+> >
+> > +    if (stce_changed) {
+> > +        riscv_timer_stce_changed(env, true, !!(valh & MENVCFG_STCE));
+> > +    }
+> > +
+> >      return RISCV_EXCP_NONE;
+> >  }
+> >
+> > @@ -3292,8 +3312,10 @@ static RISCVException read_henvcfg(CPURISCVState=
+ *env, int csrno,
+> >  static RISCVException write_henvcfg(CPURISCVState *env, int csrno,
+> >                                      target_ulong val)
+> >  {
+> > +    const RISCVCPUConfig *cfg =3D riscv_cpu_cfg(env);
+> >      uint64_t mask =3D HENVCFG_FIOM | HENVCFG_CBIE | HENVCFG_CBCFE | HE=
+NVCFG_CBZE;
+> >      RISCVException ret;
+> > +    bool stce_changed =3D false;
+> >
+> >      ret =3D smstateen_acc_ok(env, 0, SMSTATEEN0_HSENVCFG);
+> >      if (ret !=3D RISCV_EXCP_NONE) {
+> > @@ -3319,6 +3341,11 @@ static RISCVException write_henvcfg(CPURISCVStat=
+e *env, int csrno,
+> >              get_field(val, HENVCFG_PMM) !=3D PMM_FIELD_RESERVED) {
+> >              mask |=3D HENVCFG_PMM;
+> >          }
+> > +
+> > +        if (cfg->ext_sstc &&
+> > +            ((env->henvcfg & HENVCFG_STCE) !=3D (val & HENVCFG_STCE)))=
+ {
+> > +            stce_changed =3D true;
+> > +        }
+> >      }
+> >
+> >      env->henvcfg =3D val & mask;
+> > @@ -3326,6 +3353,10 @@ static RISCVException write_henvcfg(CPURISCVStat=
+e *env, int csrno,
+> >          env->vsstatus &=3D ~MSTATUS_SDT;
+> >      }
+> >
+> > +    if (stce_changed) {
+> > +        riscv_timer_stce_changed(env, false, !!(val & HENVCFG_STCE));
+> > +    }
+> > +
+> >      return RISCV_EXCP_NONE;
+> >  }
+> >
+> > @@ -3347,19 +3378,32 @@ static RISCVException read_henvcfgh(CPURISCVSta=
+te *env, int csrno,
+> >  static RISCVException write_henvcfgh(CPURISCVState *env, int csrno,
+> >                                       target_ulong val)
+> >  {
+> > +    const RISCVCPUConfig *cfg =3D riscv_cpu_cfg(env);
+> >      uint64_t mask =3D env->menvcfg & (HENVCFG_PBMTE | HENVCFG_STCE |
+> >                                      HENVCFG_ADUE | HENVCFG_DTE);
+> >      uint64_t valh =3D (uint64_t)val << 32;
+> >      RISCVException ret;
+> > +    bool stce_changed =3D false;
+> >
+> >      ret =3D smstateen_acc_ok(env, 0, SMSTATEEN0_HSENVCFG);
+> >      if (ret !=3D RISCV_EXCP_NONE) {
+> >          return ret;
+> >      }
+> > +
+> > +    if (cfg->ext_sstc &&
+> > +        ((env->henvcfg & HENVCFG_STCE) !=3D (valh & HENVCFG_STCE))) {
+> > +        stce_changed =3D true;
+> > +    }
+> > +
+> >      env->henvcfg =3D (env->henvcfg & 0xFFFFFFFF) | (valh & mask);
+> >      if ((env->henvcfg & HENVCFG_DTE) =3D=3D 0) {
+> >          env->vsstatus &=3D ~MSTATUS_SDT;
+> >      }
+> > +
+> > +    if (stce_changed) {
+> > +        riscv_timer_stce_changed(env, false, !!(val & HENVCFG_STCE));
+> > +    }
+> > +
+> >      return RISCV_EXCP_NONE;
+> >  }
+> >
+> > diff --git a/target/riscv/time_helper.c b/target/riscv/time_helper.c
+> > index aebf0798d0..c648c9fac7 100644
+> > --- a/target/riscv/time_helper.c
+> > +++ b/target/riscv/time_helper.c
+> > @@ -140,6 +140,57 @@ void riscv_timer_write_timecmp(CPURISCVState *env,=
+ QEMUTimer *timer,
+> >      timer_mod(timer, next);
+> >  }
+> >
+> > +/*
+> > + * When disabling xenvcfg.STCE, the S/VS Timer may be disabled at the =
+same time.
+> > + * It is safe to call this function regardless of whether the timer ha=
+s been
+> > + * deleted or not. timer_del() will do nothing if the timer has alread=
+y
+> > + * been deleted.
+> > + */
+> > +static void riscv_timer_disable_timecmp(CPURISCVState *env, QEMUTimer =
+*timer,
+> > +                                 uint32_t timer_irq)
+> > +{
+> > +    /* Disable S-mode Timer IRQ and HW-based STIP */
+> > +    if ((timer_irq =3D=3D MIP_STIP) && !get_field(env->menvcfg, MENVCF=
+G_STCE)) {
+> > +        riscv_cpu_update_mip(env, timer_irq, BOOL_TO_MASK(0));
+> > +        timer_del(timer);
+> > +        return;
+> > +    }
+> > +
+> > +    /* Disable VS-mode Timer IRQ and HW-based VSTIP */
+> > +    if ((timer_irq =3D=3D MIP_VSTIP) &&
+> > +        (!get_field(env->menvcfg, MENVCFG_STCE) ||
+> > +         !get_field(env->henvcfg, HENVCFG_STCE))) {
+> > +        env->vstime_irq =3D 0;
+> > +        riscv_cpu_update_mip(env, 0, BOOL_TO_MASK(0));
+> > +        timer_del(timer);
+> > +        return;
+> > +    }
+> > +}
+> > +
+> > +/* Enable or disable S/VS-mode Timer when xenvcfg.STCE is changed */
+> > +void riscv_timer_stce_changed(CPURISCVState *env, bool is_m_mode, bool=
+ enable)
+> > +{
+> > +    if (is_m_mode) {
+> > +        /* menvcfg.STCE changes */
+> > +        if (enable) {
+> > +            riscv_timer_write_timecmp(env, env->stimer, env->stimecmp,=
+ 0, MIP_STIP);
+> > +            riscv_timer_write_timecmp(env, env->vstimer, env->vstimecm=
+p,
+> > +                                      env->htimedelta, MIP_VSTIP);
+>
+> This line and ...
+>
+> > +        } else {
+> > +            riscv_timer_disable_timecmp(env, env->stimer, MIP_STIP);
+> > +            riscv_timer_disable_timecmp(env, env->vstimer, MIP_VSTIP);
+>
+> This line are duplicated below.
+>
+> > +        }
+> > +    } else {
+>
+> We can remove the else
+>
+> > +        /* henvcfg.STCE changes */
+> > +        if (enable) {
+> > +            riscv_timer_write_timecmp(env, env->vstimer, env->vstimecm=
+p,
+> > +                                      env->htimedelta, MIP_VSTIP);
+> > +        } else {
+> > +            riscv_timer_disable_timecmp(env, env->vstimer, MIP_VSTIP);
+> > +        }
+>
+> and always run this branch to remove the duplicated code above
+>
+> Alistair
+>
+> > +    }
+> > +}
+> > +
+> >  void riscv_timer_init(RISCVCPU *cpu)
+> >  {
+> >      CPURISCVState *env;
+> > diff --git a/target/riscv/time_helper.h b/target/riscv/time_helper.h
+> > index cacd79b80c..af1f634f89 100644
+> > --- a/target/riscv/time_helper.h
+> > +++ b/target/riscv/time_helper.h
+> > @@ -25,6 +25,7 @@
+> >  void riscv_timer_write_timecmp(CPURISCVState *env, QEMUTimer *timer,
+> >                                 uint64_t timecmp, uint64_t delta,
+> >                                 uint32_t timer_irq);
+> > +void riscv_timer_stce_changed(CPURISCVState *env, bool is_m_mode, bool=
+ enable);
+> >  void riscv_timer_init(RISCVCPU *cpu);
+> >
+> >  #endif
+> > --
+> > 2.17.1
+> >
+> >
 
