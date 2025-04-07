@@ -4,66 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4C23EC369A3
-	for <qemu-riscv@archiver.kernel.org>; Mon,  7 Apr 2025 15:16:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 12F22C36010
+	for <qemu-riscv@archiver.kernel.org>; Mon,  7 Apr 2025 15:16:28 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1u1oC0-0003mk-E7; Mon, 07 Apr 2025 11:15:20 -0400
+	id 1u1oCq-0004w7-2h; Mon, 07 Apr 2025 11:16:12 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <ktokunaga.mail@gmail.com>)
- id 1u1nkV-0001y0-Ro; Mon, 07 Apr 2025 10:46:55 -0400
-Received: from mail-pf1-x432.google.com ([2607:f8b0:4864:20::432])
+ id 1u1nm6-0002F4-PR; Mon, 07 Apr 2025 10:48:35 -0400
+Received: from mail-pf1-x42c.google.com ([2607:f8b0:4864:20::42c])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <ktokunaga.mail@gmail.com>)
- id 1u1nkT-0001We-Ll; Mon, 07 Apr 2025 10:46:55 -0400
-Received: by mail-pf1-x432.google.com with SMTP id
- d2e1a72fcca58-7369ce5d323so3481812b3a.1; 
- Mon, 07 Apr 2025 07:46:51 -0700 (PDT)
+ id 1u1nm4-0001jX-OA; Mon, 07 Apr 2025 10:48:34 -0400
+Received: by mail-pf1-x42c.google.com with SMTP id
+ d2e1a72fcca58-736e52948ebso5152082b3a.1; 
+ Mon, 07 Apr 2025 07:48:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1744037211; x=1744642011; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=7LIdU2kK//yLHKRwtXpESmYMpQAS4hvFafVc/W+LxT4=;
- b=hWOzyr1Gk5bTWjlHxlaJDZsd97gfpLlOzrhIjmYlQ/4g+TsPyvorR+fea7uytUbQYY
- Auml8zIsHRZiTCkPP/LK9P/Mwtj5SZMz9F8FH7RUEwlR7XOCyCfTKbxueYp++mJZg/Kk
- cHgCDw30VfpENid1prkHiW5qrRALD93WVwd1aMCBsf0EoceoPW80wgBVPrdXALaIdrpk
- DRXa/vdg8WeGxIFFCkCf8n5CtyQR2DvwQJ+ABf+/fYSnNH0QINuwExUB2bVdzqFLBiqb
- dPbMmqWTez2luP3JVyN/7FDYbB2StNdUQfU45G0kaBdgrR1zJaevgR7cYSV+lBn73tw5
- FOPw==
+ d=gmail.com; s=20230601; t=1744037310; x=1744642110; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=50grsCyUNExDjQBR3M1QLWMMiStdz5s3sePxgxhYNa4=;
+ b=BaQU72cvJCzWA0FjvYNiYXyG4u0MNKJ8L9scUsKDDXu0kTo9kQKrglyyCB2gfe4y+4
+ 7LtlAuqMJJ165dQuFf3wbVUHG6Z6FEH1cI/M8Hdl3/wc6uJr9RR4ljXKN3Ovrg7v6CuC
+ uo9G+q1OLCdLXXXBM9kANcZ6qiUl3gGqVpdMzICiCV0CmV6nU+vyYZAW25hkkTNo12Um
+ R0W7hWm8j7NaWk63JcafMJx9KIVRHZqR1t+Aigi6xmrLfg7iaEhNfGvzW6zR6vjUAOAm
+ k/L7c6iae+A97aVsbqwJhQyojLekmSDF1aUTZVgKxl0EjDoPmuGaFb7AupJKhPcd1Dhy
+ 0yaA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1744037211; x=1744642011;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=7LIdU2kK//yLHKRwtXpESmYMpQAS4hvFafVc/W+LxT4=;
- b=Sqy2itJTwlqUTC2LKE38cdDhfHkkvyZ3oLwQafxvd4wcMpmO8uMJM65Bieg9pC26WL
- eWqOW5Loj1XWmk2/5GVae1SwfEOa+pWYdrVIE6nXIsSKfoTFdoV/SRiJN2R+KINsvVWg
- 6g8PFXOtt0NSTKSsN1KoLMtfPQfeIZqU5/vc0XkincaB4HcW3heuFhxONndo7E+ccNF/
- 1xkCTSgsnNpAX7TDAmIjaIquqwNdJWYb4bii4Towd6fbpjGeV6Mx6y+QigoaGzLqPhDp
- RDtE6SNsn4Upm5J+hLhPCjmfaP9lIqfjpqdyGnPQuLbDjU7W5LqGn5rooLbKXPnRJSHl
- +JHw==
+ d=1e100.net; s=20230601; t=1744037310; x=1744642110;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=50grsCyUNExDjQBR3M1QLWMMiStdz5s3sePxgxhYNa4=;
+ b=QdX45uzZXKROnThFTzUKJ5zel28xMOqgt7EjM2UKGrB0A9srB5oxD8C7NHm6Gsp2W3
+ ERJX3pT4r5jApLOllhIUEw76mqEJGTIbgycJu5la5TAHD9MNujdX/6rxjYe/xLpLS2fJ
+ ma+Jd2Vp7qRaNscpyB9Nay7YUSmKFKtQ+disGlkSn1v7VQWpsXUavABId9SxWv6ch4Ag
+ Sg61y6RHx/aP3tqqa+0QpCv6p/2281Tvu0Ngcd/qIXXc2+WnDcdCWXKP41zIkGynDsqH
+ YelvFk0yTz04M6mVVNwEkrIRtt0cs1nPENUnYpSpIzrLcSgpO0AO4JUCYPsnfnwH26nQ
+ sLCQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCV+K/Xxg2CHIiaU2WyrOqmygTZ+2OUWoB2Dsq15lGiibc2H44vkIW7J/EAnG0eZuKZAX0nFnUTAZg==@nongnu.org,
- AJvYcCVJeuekPjcnm5eSMQN04OI3IqAg4u5t0fT82bBRWjcDtixslYwt2ARBcwE/bluTzmvCZRO8NHJRr07Q8w==@nongnu.org,
- AJvYcCXPfExvKUhOcKIrel+tpil8uRAIoGV6k5NJyJiy6grjkLEedqS5a0OJ7s87Sq3MGNJ7PntnUDY52PPydw==@nongnu.org
-X-Gm-Message-State: AOJu0YwOJ5/cxshkPo9Sx4LfJChVxW0oCnx9wDrps6mskJQek3k2X12Q
- VGeeW/enLStwlo+bOv5tkv8N1+K8U5vuZHuPOR+80tvDj5FPSM3e8wE2zUNy
-X-Gm-Gg: ASbGncu2MQ+dTcVvexQAeC8EePrVdXp4vT4xmRie2Mc0lalQLqEB7NXnp2D9bmQGJPH
- u1sHRYQwBFDoFt172PNQ38wrNBD/q8gBRTKeAb7418BH/7sfUqEcODy6yJ9PK2TAVkcF5Ir8iJh
- 0Jo7vSuL3Ja5Cg8FyjZbUfOEbgJ+4JmtInGZ/6VEzbPCFB9G2eyxUu1t9FFaqJedXvSQpm7THEs
- BMmOgZDDQnKmVH/DuHBArup0owsom72A27Uu/bp6/sPRqs40kWBQRweFB13AwK8ZjdFIh0QeL61
- SM4womsN/zu2X1Q7lNvScCcq+v2DstGZGcf2v7W+525ICT6n8rzTqOQsheXIyg==
-X-Google-Smtp-Source: AGHT+IGOpMd+zixBjwH+ZUX9bocsp8GVd//iJoCVWf/G57iHw/hiumEIqHCi5j6XW6VB9vzy8CNMlQ==
-X-Received: by 2002:a05:6a00:18a1:b0:736:4a5b:7f08 with SMTP id
- d2e1a72fcca58-739e716248amr14323576b3a.22.1744037210463; 
- Mon, 07 Apr 2025 07:46:50 -0700 (PDT)
+ AJvYcCUkSgwN42HPAlV3ALTqrqVPq0krNLNtqG9j/tvJjt78EKRfo2MsvOreDWHPLavjEpeZ1phcziT4WG6GuA==@nongnu.org,
+ AJvYcCWd1WAXEXqNQK8PvPEp7Rkr+CT2ftQpTBo8pwfTa5TBepCcAFKMaQOgPULo7tZtK+2kgy5jsgnC4g==@nongnu.org,
+ AJvYcCX/9UUjddouQQ0UQ9kkSKSJJlPhjS9P3PP8A+5fxVXR5HM6G8rKWD008aBtXUtdfweJ3RLGpggABuOJ0w==@nongnu.org
+X-Gm-Message-State: AOJu0YzOvqU+sOTuKzDDnhEYOijxbbId/rGwR24H85tHWwodg8i+VWR2
+ 522Gh6VoGrXV9drEput6hLBVYvjAkm8oYO/Qlylp//iN5h2MEWYpho+pgRpM
+X-Gm-Gg: ASbGnct1+BPlzA7XOxc0V9mxISwVnbBVRfAT+6lV9tbVV/1E/iPpb4z/RsLVmeEkWpi
+ RFW91As7TdMbWfOlauBxYpwBSfa7BBkyp7nsIXQB8SsnCKfn9rvg/9F0tWw4bbEF87w+ApP84N/
+ bKzP7m21GUtZi8sKJv+HxKP1jM8aSoQ/MNwaAj9UXXUInlw4t+0uCqz2D1yyEZZcFkvPeSMYzOt
+ PNv9VoN2uHiLy1dUhGvUwBUkcJ61A7Rk+4Vc81o1FH3EcHNN6CA0Hh9jItDIUXutq70f2fi6CrM
+ bi61cXqt6k0Ek8yV3aeIEbLNYr3eTmdnOOkXj57hgVzzxNpM5Mk69nZhwxisRQ==
+X-Google-Smtp-Source: AGHT+IEtdgebOWYfB7Ru5RkfAP3s2nGxPBFQ/5hJFI03pD4SFHdP8PDukDExTccgtz8IaaGtRQK4/Q==
+X-Received: by 2002:a05:6a00:398d:b0:736:ab49:a6e4 with SMTP id
+ d2e1a72fcca58-739e6fbf853mr16492428b3a.1.1744037310339; 
+ Mon, 07 Apr 2025 07:48:30 -0700 (PDT)
 Received: from localhost.localdomain ([240d:1a:3b6:8b00:8768:486:6a8e:e855])
  by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-739d97ef3c2sm8856960b3a.59.2025.04.07.07.46.44
+ d2e1a72fcca58-739d97ef3c2sm8856960b3a.59.2025.04.07.07.48.24
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 07 Apr 2025 07:46:49 -0700 (PDT)
+ Mon, 07 Apr 2025 07:48:29 -0700 (PDT)
 From: Kohei Tokunaga <ktokunaga.mail@gmail.com>
 To: qemu-devel@nongnu.org
 Cc: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
@@ -84,14 +85,16 @@ Cc: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
  Peter Maydell <peter.maydell@linaro.org>,
  Stefan Hajnoczi <stefanha@redhat.com>, qemu-block@nongnu.org,
  qemu-riscv@nongnu.org, qemu-arm@nongnu.org
-Subject: [PATCH 00/10] Enable QEMU to run on browsers
-Date: Mon,  7 Apr 2025 23:45:51 +0900
-Message-Id: <cover.1744032780.git.ktokunaga.mail@gmail.com>
+Subject: [PATCH 08/10] hw/9pfs: Allow using hw/9pfs with emscripten
+Date: Mon,  7 Apr 2025 23:45:59 +0900
+Message-Id: <16376e4b63fad6f847ceadb39b8f9780fc288198.1744032780.git.ktokunaga.mail@gmail.com>
 X-Mailer: git-send-email 2.25.1
+In-Reply-To: <cover.1744032780.git.ktokunaga.mail@gmail.com>
+References: <cover.1744032780.git.ktokunaga.mail@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::432;
- envelope-from=ktokunaga.mail@gmail.com; helo=mail-pf1-x432.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::42c;
+ envelope-from=ktokunaga.mail@gmail.com; helo=mail-pf1-x42c.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -100,7 +103,7 @@ X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
-X-Mailman-Approved-At: Mon, 07 Apr 2025 11:14:16 -0400
+X-Mailman-Approved-At: Mon, 07 Apr 2025 11:14:35 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -115,180 +118,203 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-This patch series enables QEMU's system emulator to run in a browser using
-Emscripten.
-It includes implementations and workarounds to address browser environment
-limitations, as shown in the following.
+Emscripten's fiber does not support submitting coroutines to other
+threads. So this commit modifies hw/9pfs/coth.h to disable this behavior
+when compiled with Emscripten.
 
-# New TCG Backend for Browsers
-
-A new TCG backend translates IR instructions into Wasm instructions and runs
-them using the browser's WebAssembly APIs (WebAssembly.Module and
-WebAssembly.instantiate). To minimize compilation overhead and avoid hitting
-the browser's limitation of the number of instances, this backend integrates
-a forked TCI. TBs run on TCI by default, with frequently executed TBs
-compiled into WebAssembly.
-
-# Workaround for Running 64-bit Guests
-
-The current implementation uses Wasm's 32-bit memory model, even though Wasm
-supports 64-bit variables and instructions. This patch explores implementing
-TCG 64-bit instructions while leveraging SoftMMU for address translation. To
-enable 64-bit guest support in Wasm today, it was necessary to partially
-revert recent changes that removed support for different pointer widths
-between the host and guest (e.g., commits
-a70af12addd9060fdf8f3dbd42b42e3072c3914f and
-bf455ec50b6fea15b4d2493059365bf94c706273) when compiling with
-Emscripten. While this serves as a temporary workaround, a long-term
-solution could involve adopting Wasm's 64-bit memory model once it gains
-broader support, as it is currently not widely adopted (e.g., unsupported by
-Safari and libffi). Feedback and suggestions on this approach are welcome.
-
-# Emscripten-Based Coroutine Backend
-
-Emscripten does not support couroutine methods currently used by QEMU but
-provides a coroutine implementation called "fiber". This patch series
-introduces a coroutine backend using fiber. However, fiber does not support
-submitting coroutines to other threads. So this patch series modifies
-hw/9pfs/coth.h to disable this behavior when compiled with Emscripten.
-
-# Overview of build process
-
-This section provides an overview of the build process for compiling QEMU
-using Emscripten. Full instructions are available in the sample
-repository[1].
-
-To compile QEMU with Emscripten, the following dependencies are required.
-The emsdk-wasm32-cross.docker environment includes all necessary components
-and can be used as the build environment:
-
-- Emscripten SDK (emsdk) v3.1.50
-- Libraries cross-compiled with Emscripten (refer to
-  emsdk-wasm32-cross.docker for build steps)
-  - GLib v2.84.0
-  - zlib v1.3.1
-  - libffi v3.4.7
-  - Pixman v0.44.2
-
-QEMU can be compiled using Emscripten's emconfigure and emmake, which
-automatically set environment variables such as CC for targeting Emscripten.
-
-emconfigure configure --static --disable-tools --target-list=x86_64-softmmu
-emmake make -j$(nproc)
-
-This process generates the following files:
-
-- qemu-system-x86_64.js
-- qemu-system-x86_64.wasm
-- qemu-system-x86_64.worker.js
-
-Guest images can be packaged using Emscripten's file_packager.py tool.
-For example, if the images are stored in a directory named "pack", the
-following command packages them, allowing QEMU to access them through
-Emscripten's virtual filesystem:
-
-/path/to/file_packager.py qemu-system-x86_64.data --preload pack > load.js
-
-This process generates the following files:
-
-- qemu-system-x86_64.data
-- load.js
-
-Emscripten allows passing arguments to the QEMU command via the Module
-object in JavaScript:
-
-Module['arguments'] = [
-    '-nographic', '-m', '512M', '-accel', 'tcg,tb-size=500',
-    '-L', 'pack/',
-    '-drive', 'if=virtio,format=raw,file=pack/rootfs.bin',
-    '-kernel', 'pack/bzImage',
-    '-append', 'earlyprintk=ttyS0 console=ttyS0 root=/dev/vda loglevel=7',
-];
-
-The sample repository[1] provides a complete setup, including an HTML file
-that implements a terminal UI.
-
-[1] https://github.com/ktock/qemu-wasm-sample
-
-# Additional references
-
-- A talk at FOSDEM 2025:
-  https://fosdem.org/2025/schedule/event/fosdem-2025-6290-running-qemu-inside-browser/
-- Demo page on GitHub Pages: https://ktock.github.io/qemu-wasm-demo/
-
-Kohei Tokunaga (10):
-  various: Fix type conflict of GLib function pointers
-  various: Define macros for dependencies on emscripten
-  util/mmap-alloc: Add qemu_ram_mmap implementation for emscripten
-  util: Add coroutine backend for emscripten
-  meson: Add wasm build in build scripts
-  include/exec: Allow using 64bit guest addresses on emscripten
-  tcg: Add a TCG backend for WebAssembly
-  hw/9pfs: Allow using hw/9pfs with emscripten
-  gitlab: Enable CI for wasm build
-  MAINTAINERS: Update MAINTAINERS file for wasm-related files
-
- .gitlab-ci.d/buildtest-template.yml           |   27 +
- .gitlab-ci.d/buildtest.yml                    |    9 +
- .gitlab-ci.d/container-cross.yml              |    5 +
- MAINTAINERS                                   |   11 +
- accel/tcg/cputlb.c                            |    8 +-
- block/file-posix.c                            |   18 +
- configs/meson/emscripten.txt                  |    6 +
- configure                                     |    7 +
- fsdev/file-op-9p.h                            |    3 +
- fsdev/meson.build                             |    2 +-
- hw/9pfs/9p-util-stub.c                        |   43 +
- hw/9pfs/9p-util.h                             |   18 +
- hw/9pfs/9p.c                                  |    3 +
- hw/9pfs/coth.h                                |   12 +
- hw/9pfs/meson.build                           |    2 +
- hw/riscv/riscv_hart.c                         |    9 +-
- include/accel/tcg/getpc.h                     |    2 +-
- include/exec/tlb-common.h                     |   14 +-
- include/exec/vaddr.h                          |   11 +
- include/qemu/atomic.h                         |    4 +
- include/qemu/cacheflush.h                     |    3 +-
- include/tcg/helper-info.h                     |    4 +-
- include/tcg/tcg.h                             |    2 +-
- meson.build                                   |   30 +-
- meson_options.txt                             |    2 +-
- os-posix.c                                    |    5 +
- qom/object.c                                  |    5 +-
- scripts/meson-buildoptions.sh                 |    2 +-
- target/arm/helper.c                           |    4 +-
- tcg/meson.build                               |    5 +
- tcg/tcg.c                                     |   26 +-
- tcg/wasm32.c                                  | 1260 +++++
- tcg/wasm32.h                                  |   39 +
- tcg/wasm32/tcg-target-con-set.h               |   18 +
- tcg/wasm32/tcg-target-con-str.h               |    8 +
- tcg/wasm32/tcg-target-has.h                   |  102 +
- tcg/wasm32/tcg-target-mo.h                    |   12 +
- tcg/wasm32/tcg-target-opc.h.inc               |    4 +
- tcg/wasm32/tcg-target-reg-bits.h              |   12 +
- tcg/wasm32/tcg-target.c.inc                   | 4484 +++++++++++++++++
- tcg/wasm32/tcg-target.h                       |   65 +
- .../dockerfiles/emsdk-wasm32-cross.docker     |  145 +
- util/cacheflush.c                             |    3 +-
- util/coroutine-fiber.c                        |  127 +
- util/mmap-alloc.c                             |   18 +
- 45 files changed, 6561 insertions(+), 38 deletions(-)
- create mode 100644 configs/meson/emscripten.txt
+Signed-off-by: Kohei Tokunaga <ktokunaga.mail@gmail.com>
+---
+ fsdev/file-op-9p.h     |  3 +++
+ fsdev/meson.build      |  2 +-
+ hw/9pfs/9p-util-stub.c | 43 ++++++++++++++++++++++++++++++++++++++++++
+ hw/9pfs/9p-util.h      | 18 ++++++++++++++++++
+ hw/9pfs/9p.c           |  3 +++
+ hw/9pfs/coth.h         | 12 ++++++++++++
+ hw/9pfs/meson.build    |  2 ++
+ meson.build            |  6 +++---
+ 8 files changed, 85 insertions(+), 4 deletions(-)
  create mode 100644 hw/9pfs/9p-util-stub.c
- create mode 100644 tcg/wasm32.c
- create mode 100644 tcg/wasm32.h
- create mode 100644 tcg/wasm32/tcg-target-con-set.h
- create mode 100644 tcg/wasm32/tcg-target-con-str.h
- create mode 100644 tcg/wasm32/tcg-target-has.h
- create mode 100644 tcg/wasm32/tcg-target-mo.h
- create mode 100644 tcg/wasm32/tcg-target-opc.h.inc
- create mode 100644 tcg/wasm32/tcg-target-reg-bits.h
- create mode 100644 tcg/wasm32/tcg-target.c.inc
- create mode 100644 tcg/wasm32/tcg-target.h
- create mode 100644 tests/docker/dockerfiles/emsdk-wasm32-cross.docker
- create mode 100644 util/coroutine-fiber.c
 
+diff --git a/fsdev/file-op-9p.h b/fsdev/file-op-9p.h
+index 4997677460..b7ca2640ce 100644
+--- a/fsdev/file-op-9p.h
++++ b/fsdev/file-op-9p.h
+@@ -26,6 +26,9 @@
+ # include <sys/param.h>
+ # include <sys/mount.h>
+ #endif
++#ifdef EMSCRIPTEN
++#include <sys/vfs.h>
++#endif
+ 
+ #define SM_LOCAL_MODE_BITS    0600
+ #define SM_LOCAL_DIR_MODE_BITS    0700
+diff --git a/fsdev/meson.build b/fsdev/meson.build
+index c751d8cb62..c3e92a29d7 100644
+--- a/fsdev/meson.build
++++ b/fsdev/meson.build
+@@ -5,6 +5,6 @@ fsdev_ss.add(when: ['CONFIG_FSDEV_9P'], if_true: files(
+   '9p-marshal.c',
+   'qemu-fsdev.c',
+ ), if_false: files('qemu-fsdev-dummy.c'))
+-if host_os in ['linux', 'darwin']
++if host_os in ['linux', 'darwin', 'emscripten']
+   system_ss.add_all(fsdev_ss)
+ endif
+diff --git a/hw/9pfs/9p-util-stub.c b/hw/9pfs/9p-util-stub.c
+new file mode 100644
+index 0000000000..57c89902ab
+--- /dev/null
++++ b/hw/9pfs/9p-util-stub.c
+@@ -0,0 +1,43 @@
++/*
++ * 9p utilities stub functions
++ *
++ * SPDX-License-Identifier: GPL-2.0-or-later
++ */
++
++#include "qemu/osdep.h"
++#include "9p-util.h"
++
++ssize_t fgetxattrat_nofollow(int dirfd, const char *path, const char *name,
++                             void *value, size_t size)
++{
++    return -1;
++}
++
++ssize_t flistxattrat_nofollow(int dirfd, const char *filename,
++                              char *list, size_t size)
++{
++    return -1;
++}
++
++ssize_t fremovexattrat_nofollow(int dirfd, const char *filename,
++                                const char *name)
++{
++    return -1;
++}
++
++int fsetxattrat_nofollow(int dirfd, const char *path, const char *name,
++                         void *value, size_t size, int flags)
++{
++    return -1;
++
++}
++
++int qemu_mknodat(int dirfd, const char *filename, mode_t mode, dev_t dev)
++{
++    return -1;
++}
++
++ssize_t fgetxattr(int fd, const char *name, void *value, size_t size)
++{
++    return -1;
++}
+diff --git a/hw/9pfs/9p-util.h b/hw/9pfs/9p-util.h
+index 7bc4ec8e85..8c5006fcdc 100644
+--- a/hw/9pfs/9p-util.h
++++ b/hw/9pfs/9p-util.h
+@@ -84,6 +84,24 @@ static inline int errno_to_dotl(int err) {
+     } else if (err == EOPNOTSUPP) {
+         err = 95; /* ==EOPNOTSUPP on Linux */
+     }
++#elif defined(EMSCRIPTEN)
++    /*
++     * FIXME: Only most important errnos translated here yet, this should be
++     * extended to as many errnos being translated as possible in future.
++     */
++    if (err == ENAMETOOLONG) {
++        err = 36; /* ==ENAMETOOLONG on Linux */
++    } else if (err == ENOTEMPTY) {
++        err = 39; /* ==ENOTEMPTY on Linux */
++    } else if (err == ELOOP) {
++        err = 40; /* ==ELOOP on Linux */
++    } else if (err == ENODATA) {
++        err = 61; /* ==ENODATA on Linux */
++    } else if (err == ENOTSUP) {
++        err = 95; /* ==EOPNOTSUPP on Linux */
++    } else if (err == EOPNOTSUPP) {
++        err = 95; /* ==EOPNOTSUPP on Linux */
++    }
+ #else
+ #error Missing errno translation to Linux for this host system
+ #endif
+diff --git a/hw/9pfs/9p.c b/hw/9pfs/9p.c
+index 7cad2bce62..4f45f0edd3 100644
+--- a/hw/9pfs/9p.c
++++ b/hw/9pfs/9p.c
+@@ -4013,6 +4013,9 @@ out_nofid:
+  * Linux guests.
+  */
+ #define P9_XATTR_SIZE_MAX 65536
++#elif defined(EMSCRIPTEN)
++/* No support for xattr */
++#define P9_XATTR_SIZE_MAX 0
+ #else
+ #error Missing definition for P9_XATTR_SIZE_MAX for this host system
+ #endif
+diff --git a/hw/9pfs/coth.h b/hw/9pfs/coth.h
+index 2c54249b35..7b0d05ba1b 100644
+--- a/hw/9pfs/coth.h
++++ b/hw/9pfs/coth.h
+@@ -19,6 +19,7 @@
+ #include "qemu/coroutine-core.h"
+ #include "9p.h"
+ 
++#ifndef EMSCRIPTEN
+ /*
+  * we want to use bottom half because we want to make sure the below
+  * sequence of events.
+@@ -57,6 +58,17 @@
+         /* re-enter back to qemu thread */                              \
+         qemu_coroutine_yield();                                         \
+     } while (0)
++#else
++/*
++ * FIXME: implement this on emscripten but emscripten's coroutine
++ * implementation (fiber) doesn't support submitting a coroutine to other
++ * threads.
++ */
++#define v9fs_co_run_in_worker(code_block)                               \
++    do {                                                                \
++        code_block;                                                     \
++    } while (0)
++#endif
+ 
+ void co_run_in_worker_bh(void *);
+ int coroutine_fn v9fs_co_readlink(V9fsPDU *, V9fsPath *, V9fsString *);
+diff --git a/hw/9pfs/meson.build b/hw/9pfs/meson.build
+index d35d4f44ff..04f85fb9e9 100644
+--- a/hw/9pfs/meson.build
++++ b/hw/9pfs/meson.build
+@@ -17,6 +17,8 @@ if host_os == 'darwin'
+   fs_ss.add(files('9p-util-darwin.c'))
+ elif host_os == 'linux'
+   fs_ss.add(files('9p-util-linux.c'))
++elif host_os == 'emscripten'
++  fs_ss.add(files('9p-util-stub.c'))
+ endif
+ fs_ss.add(when: 'CONFIG_XEN_BUS', if_true: files('xen-9p-backend.c'))
+ system_ss.add_all(when: 'CONFIG_FSDEV_9P', if_true: fs_ss)
+diff --git a/meson.build b/meson.build
+index ab84820bc5..a3aadf8b59 100644
+--- a/meson.build
++++ b/meson.build
+@@ -2356,11 +2356,11 @@ dbus_display = get_option('dbus_display') \
+   .allowed()
+ 
+ have_virtfs = get_option('virtfs') \
+-    .require(host_os == 'linux' or host_os == 'darwin',
++    .require(host_os == 'linux' or host_os == 'darwin' or host_os == 'emscripten',
+              error_message: 'virtio-9p (virtfs) requires Linux or macOS') \
+-    .require(host_os == 'linux' or cc.has_function('pthread_fchdir_np'),
++    .require(host_os == 'linux' or host_os == 'emscripten' or cc.has_function('pthread_fchdir_np'),
+              error_message: 'virtio-9p (virtfs) on macOS requires the presence of pthread_fchdir_np') \
+-    .require(host_os == 'darwin' or libattr.found(),
++    .require(host_os == 'darwin' or host_os == 'emscripten' or libattr.found(),
+              error_message: 'virtio-9p (virtfs) on Linux requires libattr-devel') \
+     .disable_auto_if(not have_tools and not have_system) \
+     .allowed()
 -- 
 2.25.1
 
