@@ -4,81 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AB87EC36002
-	for <qemu-riscv@archiver.kernel.org>; Sun,  6 Apr 2025 23:33:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 53512C36010
+	for <qemu-riscv@archiver.kernel.org>; Mon,  7 Apr 2025 08:32:56 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1u1ZUQ-0001yw-Kd; Sun, 06 Apr 2025 19:33:22 -0400
+	id 1u1huT-0000Qg-F1; Mon, 07 Apr 2025 04:32:49 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1u1ZUC-0001so-Ep; Sun, 06 Apr 2025 19:33:09 -0400
-Received: from mail-ua1-x92e.google.com ([2607:f8b0:4864:20::92e])
+ (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
+ id 1u1huA-00081M-Mn
+ for qemu-riscv@nongnu.org; Mon, 07 Apr 2025 04:32:32 -0400
+Received: from mail-pf1-x42a.google.com ([2607:f8b0:4864:20::42a])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1u1ZU9-0003yA-Id; Sun, 06 Apr 2025 19:33:07 -0400
-Received: by mail-ua1-x92e.google.com with SMTP id
- a1e0cc1a2514c-86fea8329cdso3522161241.1; 
- Sun, 06 Apr 2025 16:33:04 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
+ id 1u1hu8-0003e9-9c
+ for qemu-riscv@nongnu.org; Mon, 07 Apr 2025 04:32:30 -0400
+Received: by mail-pf1-x42a.google.com with SMTP id
+ d2e1a72fcca58-736c062b1f5so3159580b3a.0
+ for <qemu-riscv@nongnu.org>; Mon, 07 Apr 2025 01:32:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1743982383; x=1744587183; darn=nongnu.org;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=xEHpk+uwUJKXYrPGSL2apLgeD0u+rgmq8Nrxew6SfVM=;
- b=MPeoz/e89X02Lp3V7YfdT8jDa9+URUSKNs9k0QkxUxojI3IBt6LazmJA+duCeEmR3s
- 7YKMT38yzcEJRYgcT+tidjhyZV+aNKBRDrqFxvfYfiIrm3wAsxIFQm3KBxVIsRAYwIbB
- rcR8zHGtihBlqgbwCups+3TmN+VsQNY8UAs7FnpglxeuSrFLXh0FKeOmZMkkzw3X0ozB
- BlgyZQlgeUbUp1z66rF5aymySd42DXMZiEy6pTXtoVdSjU1Szhn2Q1RIfhDyKjVKK5mJ
- OTgRUdO5YgT06y5o32ueUJziT9svy8BcRa56L6fY+yNJ8v++0nNG546YYGd1+48FUEz1
- BEZA==
+ d=sifive.com; s=google; t=1744014744; x=1744619544; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=Py2YLOI/LR4P+ympkg5MHgMcFhTzlQZRVWRybkAr0+Y=;
+ b=HejS5lXdnzarfOkq5MwHTuVd0kJJWBkS8RmhNzNXf/RPKHb5R0pwUv/ok1pO2Zvuyr
+ IXgiNu8KEz09+r2IA3BezAaFLWY5PJ5Z2kONo0F6EAJAc+/1LCT8n/4eac13pHB5/r5q
+ Q7JAsr7WdY1lEAzUZTRBCxC7DpRrsynbqgFkFUGSxl4vPCMTFcNejnmgZm2MiW3FtXwT
+ DAKVpIU5KT97ZW1AvYR6Z0dTZo4hzaPrbYF2Wif6+2RtKDzNk2n16nbWMGenLZk4Xsc+
+ 3Ij+A3qNlKk+w35lVSJ6u25rEPyoMSO7QxKJXFbSSZ5KbaD87DV/8KLX5g7IjA0Gypz7
+ 8a9A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1743982383; x=1744587183;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=xEHpk+uwUJKXYrPGSL2apLgeD0u+rgmq8Nrxew6SfVM=;
- b=dp9i6A0n2YvfC5HynKADsk6IFHrlIKU29ZPn9u1KSjHZEDJ9lgxhR8+TbkC1ys4xdm
- S+TCDVtqUrgbSrDaoJQmpeGw5COjyoY2LNe3I92vVKCGHn5pS9u20gS7/dDC+kjQsTeE
- Hs/Q2odgtwwcflwNKIQGXkv5xrswoQHp88Vtd7pQTa0XZJV59h3wmuULOdKzslAjbScd
- GKy+XtfLSXzvOO/NNnSiqEZTfrtED83sC0JPC9ivp0fGH2/l56PIDPS8bAPybtC4VNYz
- OftOo0JI2DZm2IK4ReHcDxTWTOY51mRKQpS2VbTbqUbCPBBkxe6GelwgUki1V6ZdOEaL
- cE3g==
+ d=1e100.net; s=20230601; t=1744014744; x=1744619544;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=Py2YLOI/LR4P+ympkg5MHgMcFhTzlQZRVWRybkAr0+Y=;
+ b=PlML0DBN5NWNgUhzDNc37P0xeYb4LOhfneTeipkQ7t/Te/ew8lvdwzZ/3eEWXv4aj/
+ /g3EHMBXYLST8IONI+X1RzR2q27cDeFGig43EGRYJMsEUX3cnILe3sYbIHW3vPoWWSp4
+ xQbcF11AsHgv1thl9B/bcGuzoCi7r6DTm40uk95JZM8HJLWm6zkSSehVU2TQ7/iiltzm
+ vB1j5RNMflC0vZ88PNYtTWff8SlACVGjj0tjTEgi9Cs6j2zmh/2fpY7BC6F7mB22M3Lt
+ O923K6VE2POuXNJg1PftbDu5so4mlPCOlH3tN1GExXNSims0+x2q0qytdwodDXJjI2iZ
+ duSA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXdHEvN5vVR3SKxND3M6DBqb0UL1u9I3V8bL84U1mTHUmujaWgZkHXEBKApb/PAW8LErar1Ns6mJrfM@nongnu.org
-X-Gm-Message-State: AOJu0YzZ9J9rks17eJrC8igLsgO7ynZO3N5pOzDu/Cj8iZ9Q9TSeS/vp
- Z1aQSt5Xl5XZPAYQcb9jqpj1S+gaUdHfu9kqG7O6lvZrdFNHyL46LigSV4YgW0m9IvEgK/Gc/+s
- ZkF9ObMssfh2S9EDHrKHoTEvgrIM=
-X-Gm-Gg: ASbGncs3oRFsD1imOF8Gr5Cga5bgZ9bXw4oJg+dQJzZvAgV5qw6ujUAQwh7o0/J6dQr
- gF43VXDVDp7mD4EDuQ9L9YBSoAv5GUCvFbW5qN+2el1D7qA7GZyL0fKkIztwe2fbXi1TkqldwPc
- QKtYZ5EeYSCKyBc/9UDtP1KQMdGDwjuYUpYeSA421sb0fndVj5n0XkdRpd
-X-Google-Smtp-Source: AGHT+IHJiARim7fINCtwBz9h8txsxLL+q3WRAPZEFzKCidpYp1PyfVbUvHQRadmGbEKB634W0cOpGVeY/TIzoysyNDc=
-X-Received: by 2002:a05:6102:5719:b0:4bb:9b46:3f71 with SMTP id
- ada2fe7eead31-4c863687728mr4408705137.8.1743982383482; Sun, 06 Apr 2025
- 16:33:03 -0700 (PDT)
+ AJvYcCUYb2N1IAydIB4QkL0InsJsfvuSeHo/guOBqv0/9R/v3rtzNOjMWHhoISOHF6O9I7rmd7kp31hIJ+F2@nongnu.org
+X-Gm-Message-State: AOJu0Yy1FhKFGOLvZL2p1YiyKSxP5Zjt9qFX6IU3Sn0IoIcspHm7zqWK
+ FReLsU4yVnobulHD7p/kCxPCs/no3FzSpoLzg9cNJ7YpTDWriHWZKyIIcC8eV+o=
+X-Gm-Gg: ASbGncunlfvpzzexrRCLM/5xEcgxaP5SvjFChBpmguZJWIW28izKvq/6jX3a4ptuUzN
+ DOXn8c+PqO1UIwi0oMPwYgUefwsh+qMjCpBXshqetWgJWNDzkJcv6zROcN0fJ8ywapvS7tzj/U+
+ LTtpDQMz1e+2bkjC47NIOxpWqrDjUu0CxyzLBeFUBOrN3i+9C/dvkImC1NbjcsxEhYMlY7ZvKxC
+ WifMxBndfiMRZc1f/3IFxqnhj1qXnDsUJNjLDMEQinNSUvoW6TcUcx/CWs8Wm3RujJg6JkEAlup
+ 27uWbf/+pucA0AtBHaabDlQkKtMLRkQikBJzIePVBw1WxHZmzU7DhTq2Ww==
+X-Google-Smtp-Source: AGHT+IHP5AugSZa7VzLg138sYcDdJ7GpyAzon0gmfbp0IVMEhxMY2Z3scIVamTfESfLcKnaS7JNs1w==
+X-Received: by 2002:a05:6a00:2985:b0:736:69aa:112c with SMTP id
+ d2e1a72fcca58-739e6fdb491mr13908480b3a.9.1744014744212; 
+ Mon, 07 Apr 2025 01:32:24 -0700 (PDT)
+Received: from [100.64.0.1] ([147.161.192.170])
+ by smtp.gmail.com with ESMTPSA id
+ d2e1a72fcca58-739da0b2f71sm8124198b3a.130.2025.04.07.01.32.21
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 07 Apr 2025 01:32:23 -0700 (PDT)
+Message-ID: <114ae937-8e8c-433d-8958-2ba57346948e@sifive.com>
+Date: Mon, 7 Apr 2025 16:32:16 +0800
 MIME-Version: 1.0
-References: <20250404122858.241598-1-dbarboza@ventanamicro.com>
-In-Reply-To: <20250404122858.241598-1-dbarboza@ventanamicro.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 7 Apr 2025 09:32:37 +1000
-X-Gm-Features: ATxdqUHbqIJL5xEvbODzO9mtx81KNc3ze_GThkmw4kO4AO-_nm98CsdLsvO3NXI
-Message-ID: <CAKmqyKNMk1bEEPXsj-bQ76mE5T0k9DU0MF2dmTTuWb3rvfekzA@mail.gmail.com>
-Subject: Re: [PATCH for-10.0] docs: deprecate RISC-V default machine option
-To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
- liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com, 
- =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@linaro.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::92e;
- envelope-from=alistair23@gmail.com; helo=mail-ua1-x92e.google.com
-X-Spam_score_int: -17
-X-Spam_score: -1.8
-X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 03/12] target/riscv: Add vext_check_input_eew to check
+ mismatched input EEWs encoding constraint
+To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ qemu-devel@nongnu.org, qemu-riscv@nongnu.org
+Cc: Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, Weiwei Li
+ <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ antonb@tenstorrent.com
+References: <20250329144446.2619306-1-max.chou@sifive.com>
+ <20250329144446.2619306-4-max.chou@sifive.com>
+ <b554b45e-50c2-41e9-af73-5074bdfee0ee@ventanamicro.com>
+Content-Language: en-US
+From: Max Chou <max.chou@sifive.com>
+In-Reply-To: <b554b45e-50c2-41e9-af73-5074bdfee0ee@ventanamicro.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::42a;
+ envelope-from=max.chou@sifive.com; helo=mail-pf1-x42a.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -96,69 +109,97 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Fri, Apr 4, 2025 at 10:30=E2=80=AFPM Daniel Henrique Barboza
-<dbarboza@ventanamicro.com> wrote:
+On 2025/4/5 5:09 PM, Daniel Henrique Barboza wrote:
 >
-> Commit 5b4beba124 ("RISC-V Spike Machines") added the Spike machine and
-> made it default for qemu-system-riscv32/64. It was the first RISC-V
-> machine added in QEMU so setting it as default was sensible.
 >
-> Today we have 7 riscv64 and 6 riscv32 machines and having 'spike' as
-> default machine is not intuitive. For example, [1] is a bug that was
-> opened with the 'virt' board in mind, but given that the user didn't
-> pass a '-machine' option, the user was using 'spike' without knowing.
+> On 3/29/25 11:44 AM, Max Chou wrote:
+>> According to the v spec, a vector register cannot be used to provide 
+>> source
+>> operands with more than one EEW for a single instruction.
+>>
+>> Signed-off-by: Max Chou <max.chou@sifive.com>
+>> ---
+>>   target/riscv/insn_trans/trans_rvv.c.inc | 29 +++++++++++++++++++++++++
+>>   1 file changed, 29 insertions(+)
+>>
+>> diff --git a/target/riscv/insn_trans/trans_rvv.c.inc 
+>> b/target/riscv/insn_trans/trans_rvv.c.inc
+>> index e630f8661e1..70c19c49ae4 100644
+>> --- a/target/riscv/insn_trans/trans_rvv.c.inc
+>> +++ b/target/riscv/insn_trans/trans_rvv.c.inc
+>> @@ -379,6 +379,35 @@ static bool vext_check_ld_index(DisasContext *s, 
+>> int vd, int vs2,
+>>       return ret;
+>>   }
+>>   +/*
+>> + * Check whether a vector register is used to provide source 
+>> operands with
+>> + * more than one EEW for the vector instruction.
+>> + * Returns true if the instruction has valid encoding
+>> + * Returns false if encoding violates the mismatched input EEWs 
+>> constraint
+>> + */
+>> +static bool vext_check_input_eew(DisasContext *s, int vs1, uint8_t 
+>> eew_vs1,
+>> +                                 int vs2, uint8_t eew_vs2, int vm)
+>> +{
+>> +    bool is_valid = true;
+>> +    int8_t emul_vs1 = eew_vs1 - s->sew + s->lmul;
+>> +    int8_t emul_vs2 = eew_vs2 - s->sew + s->lmul;
+>> +
+>> +    /* When vm is 0, vs1 & vs2(EEW!=1) group can't overlap v0 
+>> (EEW=1) */
+>> +    if ((vs1 != -1 && !require_vm(vm, vs1)) ||
+>> +        (vs2 != -1 && !require_vm(vm, vs2))) {
+>> +        is_valid = false;
+>> +    }
+>> +
+>> +    /* When eew_vs1 != eew_vs2, check whether vs1 and vs2 are 
+>> overlapped */
+>> +    if ((vs1 != -1 && vs2 != -1) && (eew_vs1 != eew_vs2) &&
+>> +        is_overlapped(vs1, 1 << MAX(emul_vs1, 0),
+>> +                      vs2, 1 << MAX(emul_vs2, 0))) {
+>> +        is_valid = false;
+>> +    }
+>> +
+>> +    return is_valid;
+>> +}
+>> +
 >
-> Being explicit in the command line is desirable when we have a handful
-> of boards available, so deprecate the default machine setting from
-> RISC-V.
+> Code LGTM but the patch won't compile on its own because there's no 
+> callers for
+> it:
 >
-> [1] https://gitlab.com/qemu-project/qemu/-/issues/2467
 >
-> Suggested-by: Philippe Mathieu-Daud=C3=A9 <philmd@linaro.org>
-> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+> In file included from ../target/riscv/translate.c:1182:
+> ../target/riscv/insn_trans/trans_rvv.c.inc:388:13: error: 
+> ‘vext_check_input_eew’ defined but not used [-Werror=unused-function]
+>   388 | static bool vext_check_input_eew(DisasContext *s, int vs1, 
+> uint8_t eew_vs1,
+>       |             ^~~~~~~~~~~~~~~~~~~~
+> cc1: all warnings being treated as errors
+> ninja: build stopped: subcommand failed.
+>
+>
+> We want each patch to be "buildable" and with test passing to make our 
+> lives easier
+> when doing bisects.
+>
+> You can merge this patch with patch 4 to introduce the new function 
+> and add its first
+> callers. Thanks,
+>
+>
+> Daniel
+Thanks for the suggestion. Will fix this issue at v3.
 
-Thanks!
+Max
+>
+>
+>
+>>   static bool vext_check_ss(DisasContext *s, int vd, int vs, int vm)
+>>   {
+>>       return require_vm(vm, vd) &&
+>
 
-Applied to riscv-to-apply.next
-
-Alistair
-
-> ---
->  docs/about/deprecated.rst | 17 +++++++++++++++++
->  1 file changed, 17 insertions(+)
->
-> diff --git a/docs/about/deprecated.rst b/docs/about/deprecated.rst
-> index 76291fdfd6..0f41a99c67 100644
-> --- a/docs/about/deprecated.rst
-> +++ b/docs/about/deprecated.rst
-> @@ -304,6 +304,23 @@ online to check that this board did not completely b=
-itrot yet). It is
->  recommended to use another MIPS machine for future MIPS code development
->  instead.
->
-> +RISC-V default machine option (since 10.0)
-> +''''''''''''''''''''''''''''''''''''''''''
-> +
-> +RISC-V defines ``spike`` as the default machine if no machine option is
-> +given in the command line.  This happens because ``spike`` is the first
-> +RISC-V machine implemented in QEMU and setting it as default was
-> +convenient at that time.  Now we have 7 riscv64 and 6 riscv32 machines
-> +and having ``spike`` as a default is no longer justified.  This default
-> +will also promote situations where users think they're running ``virt``
-> +(the most used RISC-V machine type in 10.0) when in fact they're
-> +running ``spike``.
-> +
-> +Removing the default machine option forces users to always set the machi=
-ne
-> +they want to use and avoids confusion.  Existing users of the ``spike``
-> +machine must ensure that they're setting the ``spike`` machine in the
-> +command line (``-M spike``).
-> +
->
->  Backend options
->  ---------------
-> --
-> 2.49.0
->
->
 
