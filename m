@@ -4,83 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 94CFDC36010
-	for <qemu-riscv@archiver.kernel.org>; Mon,  7 Apr 2025 10:06:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2144DC36010
+	for <qemu-riscv@archiver.kernel.org>; Mon,  7 Apr 2025 13:58:01 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1u1jNC-0001dW-VK; Mon, 07 Apr 2025 06:06:34 -0400
+	id 1u1myc-0003Cs-7h; Mon, 07 Apr 2025 09:57:26 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <jim.shu@sifive.com>)
- id 1u1jNA-0001cv-UW
- for qemu-riscv@nongnu.org; Mon, 07 Apr 2025 06:06:32 -0400
-Received: from mail-ed1-x52f.google.com ([2a00:1450:4864:20::52f])
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1u1myZ-0003Bl-GJ
+ for qemu-riscv@nongnu.org; Mon, 07 Apr 2025 09:57:23 -0400
+Received: from mail-pf1-x42a.google.com ([2607:f8b0:4864:20::42a])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <jim.shu@sifive.com>)
- id 1u1jN7-0007ie-UA
- for qemu-riscv@nongnu.org; Mon, 07 Apr 2025 06:06:32 -0400
-Received: by mail-ed1-x52f.google.com with SMTP id
- 4fb4d7f45d1cf-5e5deb6482cso9706743a12.1
- for <qemu-riscv@nongnu.org>; Mon, 07 Apr 2025 03:06:29 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1u1myX-00025V-9p
+ for qemu-riscv@nongnu.org; Mon, 07 Apr 2025 09:57:23 -0400
+Received: by mail-pf1-x42a.google.com with SMTP id
+ d2e1a72fcca58-7369ce5d323so3379016b3a.1
+ for <qemu-riscv@nongnu.org>; Mon, 07 Apr 2025 06:57:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1744020388; x=1744625188; darn=nongnu.org;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=fOSl4UZ0taB9lE+3OurjdhwIwCTnKL5oIL1UkBg8vCs=;
- b=H8MP9gdacF5P9bQzVuq716odokSl2u/lNHR1M4lmJ4y5xl69EO+dSF9JqBuehBEffm
- KM3cdDTiyPJkwKrEpx3qi5eOXH9pnUA86UW4e1dCfAIR1eMMmEfzIeGRk/ruVzOO7n3w
- 76H0+yZowdrKeRRELPwpq2WkMe0IdAL/wowlS/oZU6335RtsMgSW012LXSQZDtVPrucA
- KmSRfMTwkY3QPqjhqpn8VHlCPrM5zF6KxScm7vbhL/Fs1j8U9PjPenJTqlEybd8QBC5L
- 09sjD5MfWoN/d0z2f9WvJM24otkvISrJ5mq8A1Gm1E9TnEr+mvZdq5rVEdmUXQaCBSjE
- 6qRQ==
+ d=ventanamicro.com; s=google; t=1744034239; x=1744639039; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=G67wC9qHxDdpxR9z8GHg5vvrlbf3CFkhfhpkUIL9s+w=;
+ b=RTxH25OyocfyvDxybYoEBFXRSAitlpJB2xs0aa14lVxj8iCdFd2C3Ebn42hSAOvm4h
+ Yc1vIzGN/xmPqb7S3TFt9q6uGXkMrrTzD16YfzVdNCxVUjLruyr3EWbJCoKxKlCQsqgv
+ P5Mr2HK19izVzApIHTr4o9Qd9GOL3fmg3oNDXCw42Y6i1DoOO1z4MLeAHHC11S8ch5ui
+ c1peiTuv8YzLzqzIHSvBiUlJqxi35IVziTBFiTZgFmIbc/2MbVEKA/LaAkdn24YkeFnH
+ BQLBsXA5lQaPfTyPSC5lWlfM5IS0L5do2GvShsi6B89ZEL6a0fulYfr9rZDTy5XmezTU
+ UHog==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1744020388; x=1744625188;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=fOSl4UZ0taB9lE+3OurjdhwIwCTnKL5oIL1UkBg8vCs=;
- b=sB2VeLLhHfUBzG10eayh0arzVWmNSOCGcNmqsR337lHNvLJXf8x+n3sKRsVlysEnSk
- D8rgGMptqDy7PKIMh/wF3Lo7gCVtrYSqgib798oHuoI6svhyXtHsjH7omduDauF7VGMS
- yE8zCzksRU8iSNRAzNw+GRNTJcWtQOgyXTOtXLYO+K+izklqp04asIIPmsO7EvSur9RH
- I9cmZDEbq7aPf/fsvKQkMNvXk7Rm/I7KmlhjEcgPKftSei+XicjdFFb49KSsY9q9i+GC
- cCqJa8eP3VQwR2pG88r0v8qtAFAVLRQdSCMamFZzbsUrO6088uwsFCzehLPqSyHxcDBA
- m1tA==
+ d=1e100.net; s=20230601; t=1744034239; x=1744639039;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=G67wC9qHxDdpxR9z8GHg5vvrlbf3CFkhfhpkUIL9s+w=;
+ b=oqXz8hCelUZ2bsz1ouIp65CRqzEfDvEKr6JayNJV9Tm1ADyjrGftTX3vyLrZcVEPoH
+ 9swpRIYwNuWiDWJ0paln65rjljyxYQqUhfOQpTt6XFSzVbjc8G1lyXukcSJknevVRR2c
+ QrM04zaxQ/o1asqlZOj/EdfQfx6SihkeRfZbfm0+cupQbqqi4PqAMbA9tlEcqf1xaeuV
+ WpDoy0PvYJYALYpMVmWRzchjDMEKw0uqszvThV4cDds/Rwk26luasNt26MDLDL/r6vsX
+ FAdztNuoCJJ7RAmRUzfu1Pesb/vU4LM6Mrnzs1Jj/Y4sO3kk3n0y+kXs7qlCcrKydjir
+ O/Mw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCURFprn4Vz88/1KPi2H2F/Gsoapg+vjHoPQNPTjwx96p8AnsnplDMUrL5Ki+NispLry6y52vWtTMnCS@nongnu.org
-X-Gm-Message-State: AOJu0YwX1dw8tgr62C9LmSw2ygvGbtG7J7NHXZN69y3XEkjwU/DK6F5D
- kJehCsaG5C/II0RlVPjgPb+HFue2lm+csKWTDW2uGI2YA/n9C4TRP+OJ2kXLolhJ79EMhRyOx+x
- 3DYvw6GDhytc78SMrXdnlcMX+UbG3CIJbmhzImQ==
-X-Gm-Gg: ASbGncthPKPhOblgYUf87ioDSpuD36pHKlWliiihWJt+YGOgWhu2Pdbst0r+63rGGNn
- rrCOMbkEQvwiH6wyybjUR3H2MJdHuJQS/kv1q/yDGUdtKAQeDDVa+UZgPNWxdmipSN1U/kiMqdI
- f2Fs015R3iUdKo/YIUcQrjG3pPYnSUXswR9uTxqaY=
-X-Google-Smtp-Source: AGHT+IGvSi1NZg0UiE5ML5LzUDt30zbumBVWx6kuNDunN8dZ51I+XZFQQm951c8dYEAV2FWMPeaycyXAhAXs9GZnBOU=
-X-Received: by 2002:a05:6402:26c5:b0:5ed:599a:3cbe with SMTP id
- 4fb4d7f45d1cf-5f0b284dc9amr11075226a12.4.1744020387132; Mon, 07 Apr 2025
- 03:06:27 -0700 (PDT)
+ AJvYcCXJE3dFRdvBVBNbJRdNybncRZM5C/EjhBm81/S1Y2iLpX1N0X7pEF7F4TvO7Gxexc2AMPg4ahrdqhTw@nongnu.org
+X-Gm-Message-State: AOJu0YwVxjiLppRLxU4GhjtOJU7V0kTGpCZAhETXFrGiJzXp5o9GtQPT
+ aHq4r2KfIDQvh/Jp3Yk5Ut6mLNv2r+ltgQkjunocavCEGmIw0KSYYc3t59E/ByvY5J+RM1nX4nJ
+ s
+X-Gm-Gg: ASbGncvc8evNaa3ME7IKZ/upETodK6JJxYmVReyd9A5sWZdWNjqMOsGdLJRZ1ZeqjbV
+ fGAqNHzZvl7zbNcW0Yd6eFA8pxYcjBYseQsXab64lVZ92B9OPaBIX2I5WOYpltrjppZTIPbiU3e
+ igvWMtf0cSk0aV5nmcTUDpUFul0syOg8wKpfZt4AWibmiQXKr63uR/4g36NE7SuLuLEkkwy1Jb7
+ hDsyEgr4hkUoU01QB3DdZ3Tl7pZ/61kmBMb/VUZg9lOMNGJwjUkmTd48yH7QDnMPKJpBDKavSHL
+ BAv4XpyFd8Egnc3OCrJT8DojRXNX+b8fCoboCFp8QtFcfTiUlpLOZllQuka+3NsFFnGAMQ==
+X-Google-Smtp-Source: AGHT+IFaxtju1dYKAfEVCxAKlwU4WvbY08Bqa1diSxU8gwf9xlZzHY4y8BbdBUOPK/Vew3noWDlVHg==
+X-Received: by 2002:a05:6a00:2187:b0:736:3fa8:cf7b with SMTP id
+ d2e1a72fcca58-739e7058e6bmr13943735b3a.13.1744034239271; 
+ Mon, 07 Apr 2025 06:57:19 -0700 (PDT)
+Received: from [192.168.68.110] ([177.170.117.33])
+ by smtp.gmail.com with ESMTPSA id
+ d2e1a72fcca58-739da0b41f1sm8685303b3a.147.2025.04.07.06.57.16
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 07 Apr 2025 06:57:18 -0700 (PDT)
+Message-ID: <cd9167de-e769-4d3c-98ab-8536df887e85@ventanamicro.com>
+Date: Mon, 7 Apr 2025 10:57:15 -0300
 MIME-Version: 1.0
-References: <20250319192153.28549-1-jim.shu@sifive.com>
- <20250319192153.28549-3-jim.shu@sifive.com>
- <CAKmqyKPo4G3t32=uKbgYoY+nDJOEg+fLJ3yFC1hx2PJEqT=59A@mail.gmail.com>
-In-Reply-To: <CAKmqyKPo4G3t32=uKbgYoY+nDJOEg+fLJ3yFC1hx2PJEqT=59A@mail.gmail.com>
-From: Jim Shu <jim.shu@sifive.com>
-Date: Mon, 7 Apr 2025 18:06:15 +0800
-X-Gm-Features: ATxdqUHb0LUdAwTsx9JrBjHKuAHHrcHNKzF2QxS1p9stQ0OqYyyZRBq-nHwG7jM
-Message-ID: <CALw707okY8SKmeb7Po-3KxF+CoE5tZGPASv1Tn4BpZB_7D4KMg@mail.gmail.com>
-Subject: Re: [PATCH 2/4] hw/intc: riscv_aclint: Fix mtime write for sstc
- extension
-To: Alistair Francis <alistair23@gmail.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, 
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, 
- Weiwei Li <liwei1518@gmail.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>, 
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2a00:1450:4864:20::52f;
- envelope-from=jim.shu@sifive.com; helo=mail-ed1-x52f.google.com
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 1/2] target/riscv: Add BOSC's Xiangshan Kunminghu CPU
+To: Huang Borong <huangborong@bosc.ac.cn>, qemu-riscv@nongnu.org
+Cc: palmer@dabbelt.com, alistair.francis@wdc.com, liwei1518@gmail.com,
+ zhiwei_liu@linux.alibaba.com, qemu-devel@nongnu.org, wangran@bosc.ac.cn
+References: <20250407091903.274038-1-huangborong@bosc.ac.cn>
+Content-Language: en-US
+From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+In-Reply-To: <20250407091903.274038-1-huangborong@bosc.ac.cn>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::42a;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pf1-x42a.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -103,79 +104,131 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-The period of the stimecmp timer is the time until the next S-mode
-timer IRQ. The value is calculated as "stimecmp - time". [1]
-It is equal to "stimecmp - mtime" since the time CSR is a read-only
-shadow of the memory-mapped mtime register.
-Thus, changing mtime value will update the period of stimecmp timer.
-
-Similarly, the period of vstimecmp timer is calculated as "vstimecmp -
-(mtime + htimedelta)" [2], so changing mtime value will update the
-period of vstimecmp timer.
-
-[1] RISC-V Priv spec ch 9.1.1. Supervisor Timer (stimecmp) Register
-A supervisor timer interrupt becomes pending, as reflected in the STIP
-bit in the mip and sip registers whenever time contains a value
-greater than or equal to stimecmp.
-[2] RISC-V Priv spec ch19.2.1. Virtual Supervisor Timer (vstimecmp) Registe=
-r
-A virtual supervisor timer interrupt becomes pending, as reflected in
-the VSTIP bit in the hip register, whenever (time + htimedelta),
-truncated to 64 bits, contains a value greater than or equal to
-vstimecmp
-
-I will add the explaination in the commit log in the v2 patchset, thanks.
 
 
-Jim Shu
+On 4/7/25 6:19 AM, Huang Borong wrote:
+> Add a CPU entry for the Xiangshan Kunminghu CPU, an open-source,
+> high-performance RISC-V processor. More details can be found at:
+> https://github.com/OpenXiangShan/XiangShan
+> 
+> Note: The ISA extensions supported by the Xiangshan Kunminghu CPU are
+> categorized based on four RISC-V specifications: Volume I: Unprivileged
+> Architecture, Volume II: Privileged Architecture, AIA, and RVA23. The
+> extensions within each category are organized according to the chapter
+> order in the specifications.
+> 
+> Signed-off-by: Yu Hu <huyu@bosc.ac.cn>
+> Signed-off-by: Ran Wang <wangran@bosc.ac.cn>
+> Signed-off-by: Borong Huang <huangborong@bosc.ac.cn>
+> ---
 
-On Fri, Apr 4, 2025 at 11:12=E2=80=AFAM Alistair Francis <alistair23@gmail.=
-com> wrote:
->
-> On Thu, Mar 20, 2025 at 5:24=E2=80=AFAM Jim Shu <jim.shu@sifive.com> wrot=
-e:
-> >
-> > When changing the mtime value, the period of [s|vs]timecmp timers
-> > should also be updated like the period of mtimecmp timer.
->
-> Why should they be updated?
->
-> Alistair
->
-> >
-> > Signed-off-by: Jim Shu <jim.shu@sifive.com>
-> > ---
-> >  hw/intc/riscv_aclint.c | 5 +++++
-> >  1 file changed, 5 insertions(+)
-> >
-> > diff --git a/hw/intc/riscv_aclint.c b/hw/intc/riscv_aclint.c
-> > index db374a7c2d..5f4a17e177 100644
-> > --- a/hw/intc/riscv_aclint.c
-> > +++ b/hw/intc/riscv_aclint.c
-> > @@ -28,6 +28,7 @@
-> >  #include "qemu/module.h"
-> >  #include "hw/sysbus.h"
-> >  #include "target/riscv/cpu.h"
-> > +#include "target/riscv/time_helper.h"
-> >  #include "hw/qdev-properties.h"
-> >  #include "hw/intc/riscv_aclint.h"
-> >  #include "qemu/timer.h"
-> > @@ -240,6 +241,10 @@ static void riscv_aclint_mtimer_write(void *opaque=
-, hwaddr addr,
-> >              riscv_aclint_mtimer_write_timecmp(mtimer, RISCV_CPU(cpu),
-> >                                                mtimer->hartid_base + i,
-> >                                                mtimer->timecmp[i]);
-> > +            riscv_timer_write_timecmp(env, env->stimer, env->stimecmp,=
- 0, MIP_STIP);
-> > +            riscv_timer_write_timecmp(env, env->vstimer, env->vstimecm=
-p,
-> > +                                      env->htimedelta, MIP_VSTIP);
-> > +
-> >          }
-> >          return;
-> >      }
-> > --
-> > 2.17.1
-> >
-> >
+Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+
+>   target/riscv/cpu-qom.h |  1 +
+>   target/riscv/cpu.c     | 72 ++++++++++++++++++++++++++++++++++++++++++
+>   2 files changed, 73 insertions(+)
+> 
+> diff --git a/target/riscv/cpu-qom.h b/target/riscv/cpu-qom.h
+> index 4cfdb74891..f2908939e7 100644
+> --- a/target/riscv/cpu-qom.h
+> +++ b/target/riscv/cpu-qom.h
+> @@ -53,6 +53,7 @@
+>   #define TYPE_RISCV_CPU_VEYRON_V1        RISCV_CPU_TYPE_NAME("veyron-v1")
+>   #define TYPE_RISCV_CPU_TT_ASCALON       RISCV_CPU_TYPE_NAME("tt-ascalon")
+>   #define TYPE_RISCV_CPU_XIANGSHAN_NANHU  RISCV_CPU_TYPE_NAME("xiangshan-nanhu")
+> +#define TYPE_RISCV_CPU_XIANGSHAN_KMH    RISCV_CPU_TYPE_NAME("xiangshan-kunminghu")
+>   #define TYPE_RISCV_CPU_HOST             RISCV_CPU_TYPE_NAME("host")
+>   
+>   OBJECT_DECLARE_CPU_TYPE(RISCVCPU, RISCVCPUClass, RISCV_CPU)
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index 09ded6829a..a076d9dc0c 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -697,6 +697,76 @@ static void rv64_xiangshan_nanhu_cpu_init(Object *obj)
+>   #endif
+>   }
+>   
+> +static void rv64_xiangshan_kmh_cpu_init(Object *obj)
+> +{
+> +    CPURISCVState *env = &RISCV_CPU(obj)->env;
+> +    RISCVCPU *cpu = RISCV_CPU(obj);
+> +
+> +    riscv_cpu_set_misa_ext(env, RVG | RVC | RVB | RVS | RVU | RVH | RVV);
+> +    env->priv_ver = PRIV_VERSION_1_13_0;
+> +
+> +    /* Enable ISA extensions */
+> +    cpu->cfg.mmu = true;
+> +    cpu->cfg.pmp = true;
+> +
+> +    /*
+> +     * The RISC-V Instruction Set Manual: Volume I
+> +     * Unprivileged Architecture
+> +     */
+> +    cpu->cfg.ext_zicntr = true;
+> +    cpu->cfg.ext_zihpm = true;
+> +    cpu->cfg.ext_zihintntl = true;
+> +    cpu->cfg.ext_zihintpause = true;
+> +    cpu->cfg.ext_zimop = true;
+> +    cpu->cfg.ext_zcmop = true;
+> +    cpu->cfg.ext_zicond = true;
+> +    cpu->cfg.ext_zawrs = true;
+> +    cpu->cfg.ext_zacas = true;
+> +    cpu->cfg.ext_zfh = true;
+> +    cpu->cfg.ext_zfa = true;
+> +    cpu->cfg.ext_zcb = true;
+> +    cpu->cfg.ext_zbc = true;
+> +    cpu->cfg.ext_zvfh = true;
+> +    cpu->cfg.ext_zkn = true;
+> +    cpu->cfg.ext_zks = true;
+> +    cpu->cfg.ext_zkt = true;
+> +    cpu->cfg.ext_zvbb = true;
+> +    cpu->cfg.ext_zvkt = true;
+> +
+> +    /*
+> +     * The RISC-V Instruction Set Manual: Volume II
+> +     * Privileged Architecture
+> +     */
+> +    cpu->cfg.ext_smstateen = true;
+> +    cpu->cfg.ext_smcsrind = true;
+> +    cpu->cfg.ext_sscsrind = true;
+> +    cpu->cfg.ext_svnapot = true;
+> +    cpu->cfg.ext_svpbmt = true;
+> +    cpu->cfg.ext_svinval = true;
+> +    cpu->cfg.ext_sstc = true;
+> +    cpu->cfg.ext_sscofpmf = true;
+> +    cpu->cfg.ext_ssdbltrp = true;
+> +    cpu->cfg.ext_ssnpm = true;
+> +    cpu->cfg.ext_smnpm = true;
+> +    cpu->cfg.ext_smmpm = true;
+> +    cpu->cfg.ext_sspm = true;
+> +    cpu->cfg.ext_supm = true;
+> +
+> +    /* The RISC-V Advanced Interrupt Architecture */
+> +    cpu->cfg.ext_smaia = true;
+> +    cpu->cfg.ext_ssaia = true;
+> +
+> +    /* RVA23 Profiles */
+> +    cpu->cfg.ext_zicbom = true;
+> +    cpu->cfg.ext_zicbop = true;
+> +    cpu->cfg.ext_zicboz = true;
+> +    cpu->cfg.ext_svade = true;
+> +
+> +#ifndef CONFIG_USER_ONLY
+> +    set_satp_mode_max_supported(cpu, VM_1_10_SV48);
+> +#endif
+> +}
+> +
+>   #ifdef CONFIG_TCG
+>   static void rv128_base_cpu_init(Object *obj)
+>   {
+> @@ -3261,6 +3331,8 @@ static const TypeInfo riscv_cpu_type_infos[] = {
+>       DEFINE_VENDOR_CPU(TYPE_RISCV_CPU_VEYRON_V1,  MXL_RV64,  rv64_veyron_v1_cpu_init),
+>       DEFINE_VENDOR_CPU(TYPE_RISCV_CPU_XIANGSHAN_NANHU,
+>                                                    MXL_RV64, rv64_xiangshan_nanhu_cpu_init),
+> +    DEFINE_VENDOR_CPU(TYPE_RISCV_CPU_XIANGSHAN_KMH,
+> +                                                 MXL_RV64,  rv64_xiangshan_kmh_cpu_init),
+>   #ifdef CONFIG_TCG
+>       DEFINE_DYNAMIC_CPU(TYPE_RISCV_CPU_BASE128,   MXL_RV128, rv128_base_cpu_init),
+>   #endif /* CONFIG_TCG */
+
 
