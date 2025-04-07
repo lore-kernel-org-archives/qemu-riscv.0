@@ -4,72 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4DB2AC36010
-	for <qemu-riscv@archiver.kernel.org>; Mon,  7 Apr 2025 09:43:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 94CFDC36010
+	for <qemu-riscv@archiver.kernel.org>; Mon,  7 Apr 2025 10:06:44 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1u1j0h-0005Mm-2S; Mon, 07 Apr 2025 05:43:19 -0400
+	id 1u1jNC-0001dW-VK; Mon, 07 Apr 2025 06:06:34 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <jim.shu@sifive.com>)
- id 1u1j0e-0005Lm-Qj
- for qemu-riscv@nongnu.org; Mon, 07 Apr 2025 05:43:16 -0400
-Received: from mail-ed1-x533.google.com ([2a00:1450:4864:20::533])
+ id 1u1jNA-0001cv-UW
+ for qemu-riscv@nongnu.org; Mon, 07 Apr 2025 06:06:32 -0400
+Received: from mail-ed1-x52f.google.com ([2a00:1450:4864:20::52f])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <jim.shu@sifive.com>)
- id 1u1j0c-0004gF-4K
- for qemu-riscv@nongnu.org; Mon, 07 Apr 2025 05:43:16 -0400
-Received: by mail-ed1-x533.google.com with SMTP id
- 4fb4d7f45d1cf-5efe8d9eb1eso2248109a12.0
- for <qemu-riscv@nongnu.org>; Mon, 07 Apr 2025 02:43:12 -0700 (PDT)
+ id 1u1jN7-0007ie-UA
+ for qemu-riscv@nongnu.org; Mon, 07 Apr 2025 06:06:32 -0400
+Received: by mail-ed1-x52f.google.com with SMTP id
+ 4fb4d7f45d1cf-5e5deb6482cso9706743a12.1
+ for <qemu-riscv@nongnu.org>; Mon, 07 Apr 2025 03:06:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1744018991; x=1744623791; darn=nongnu.org;
+ d=sifive.com; s=google; t=1744020388; x=1744625188; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=frAdG82IzSpKFdF9BYUPNXFXA1qcYxRah5S2vNxJgmQ=;
- b=JcD6Tj1yiWReT3OBilrpoScp7rWVVvuC4NIovIS8P6FQMflAanftRcdJhDBJHh7HW9
- oya0UNbUykCqE6BHmjg89YQRU459YGGnyAcKoN2x3BIv9qtW6GJcnGP/+digDct53w45
- vpFaHcij8xPYLe5F7DJts+o8Yfi50m+jns9LQrV/xQJz9lB/n9RaXNl8iAEMxAypAqhB
- 6NARsmc+fQPxM24zv4Q/4oyQdtMLyJHvoYuPFA3XpGTBndPREI6WmC92D/ovRQjbZpFB
- qcZHroRjx62/cQCy0mJ0OmhwPiFbaTt2dY9AOh8/9nouBHKZX3V0SQWNkJH8BHbrdr+Z
- AyMg==
+ bh=fOSl4UZ0taB9lE+3OurjdhwIwCTnKL5oIL1UkBg8vCs=;
+ b=H8MP9gdacF5P9bQzVuq716odokSl2u/lNHR1M4lmJ4y5xl69EO+dSF9JqBuehBEffm
+ KM3cdDTiyPJkwKrEpx3qi5eOXH9pnUA86UW4e1dCfAIR1eMMmEfzIeGRk/ruVzOO7n3w
+ 76H0+yZowdrKeRRELPwpq2WkMe0IdAL/wowlS/oZU6335RtsMgSW012LXSQZDtVPrucA
+ KmSRfMTwkY3QPqjhqpn8VHlCPrM5zF6KxScm7vbhL/Fs1j8U9PjPenJTqlEybd8QBC5L
+ 09sjD5MfWoN/d0z2f9WvJM24otkvISrJ5mq8A1Gm1E9TnEr+mvZdq5rVEdmUXQaCBSjE
+ 6qRQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1744018991; x=1744623791;
+ d=1e100.net; s=20230601; t=1744020388; x=1744625188;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=frAdG82IzSpKFdF9BYUPNXFXA1qcYxRah5S2vNxJgmQ=;
- b=oEsoUHRqHI8z+GQad3Fcmd6+NpJeTGO6+QRROM+StLY1dt3RLRG5oWTRPnMr7BImBf
- 64HQqBWKeZjY/1vVGWoohT/McjsU9vtwg++Kuz0hqHKcwXfAEtIqZfRA/2pfGvk3k2pX
- Qzl6b0ufzmPGYoLcgPBQGlNL1T4T4wOR3EkPJbWkuM5dmOHTOG9AbczmWXAO3RAL5e9U
- sgbzRgDk3tGG/ci4AVdYJ/mrRmpQDix9oheeW6LFZRl6e3dGDz2yaznV58ybshMto+SG
- KHOF9rkb2DFXFTwNIpNSX7d5QROtMPraNDNXu/lPoYyWDZigfv51UMpay+ChR9L9wpT6
- vyMA==
+ bh=fOSl4UZ0taB9lE+3OurjdhwIwCTnKL5oIL1UkBg8vCs=;
+ b=sB2VeLLhHfUBzG10eayh0arzVWmNSOCGcNmqsR337lHNvLJXf8x+n3sKRsVlysEnSk
+ D8rgGMptqDy7PKIMh/wF3Lo7gCVtrYSqgib798oHuoI6svhyXtHsjH7omduDauF7VGMS
+ yE8zCzksRU8iSNRAzNw+GRNTJcWtQOgyXTOtXLYO+K+izklqp04asIIPmsO7EvSur9RH
+ I9cmZDEbq7aPf/fsvKQkMNvXk7Rm/I7KmlhjEcgPKftSei+XicjdFFb49KSsY9q9i+GC
+ cCqJa8eP3VQwR2pG88r0v8qtAFAVLRQdSCMamFZzbsUrO6088uwsFCzehLPqSyHxcDBA
+ m1tA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVggQeEFsP5Fr45s8rug2uy1a9elKcotDIc4lTS03XYhSZ8RYPsnSTNuNQoOIKsoTWCKNKVut0oVkuV@nongnu.org
-X-Gm-Message-State: AOJu0YxRsbeY4OAA+MLVBeHoIQp1OLSYh0n/fkEbnIGM0KnhPzgu87iQ
- 1rv9vKeA60D4MQ+cgad3YIC1WDKiYkWEVCioX4EGQJUiPEhjnqPvglenkjrTP5UPnowRb06dG6J
- ob87fjVIdaWjfcVbSIMHr2HAcJoy1kLC/OsrVgg==
-X-Gm-Gg: ASbGncvyPY1J8BWzoSG/p+U05S0oqjh6Yhi/hkBju0N0QGTQSW5gG40NttNIFTtWpd0
- D/1Va1+YjCvL4XbzSPTTY0l9BAQLMv7YP4OqMkFy+Ggu5MA5c7oEe54QPQAGXNB72Tr9UiG9hSy
- PI/W7/+ERHShETkEKgbduFmxRcWVLu
-X-Google-Smtp-Source: AGHT+IHBT2QwPW67OF+XinZDo56beTyUPleiOhytNCHpyNHJwV4YB2uhfjjqh1dWzAz/CTjLdiskDXP2lRhwOYpqmkU=
-X-Received: by 2002:a05:6402:1d4e:b0:5e5:4807:545f with SMTP id
- 4fb4d7f45d1cf-5f0b292ac40mr9554807a12.12.1744018990988; Mon, 07 Apr 2025
- 02:43:10 -0700 (PDT)
+ AJvYcCURFprn4Vz88/1KPi2H2F/Gsoapg+vjHoPQNPTjwx96p8AnsnplDMUrL5Ki+NispLry6y52vWtTMnCS@nongnu.org
+X-Gm-Message-State: AOJu0YwX1dw8tgr62C9LmSw2ygvGbtG7J7NHXZN69y3XEkjwU/DK6F5D
+ kJehCsaG5C/II0RlVPjgPb+HFue2lm+csKWTDW2uGI2YA/n9C4TRP+OJ2kXLolhJ79EMhRyOx+x
+ 3DYvw6GDhytc78SMrXdnlcMX+UbG3CIJbmhzImQ==
+X-Gm-Gg: ASbGncthPKPhOblgYUf87ioDSpuD36pHKlWliiihWJt+YGOgWhu2Pdbst0r+63rGGNn
+ rrCOMbkEQvwiH6wyybjUR3H2MJdHuJQS/kv1q/yDGUdtKAQeDDVa+UZgPNWxdmipSN1U/kiMqdI
+ f2Fs015R3iUdKo/YIUcQrjG3pPYnSUXswR9uTxqaY=
+X-Google-Smtp-Source: AGHT+IGvSi1NZg0UiE5ML5LzUDt30zbumBVWx6kuNDunN8dZ51I+XZFQQm951c8dYEAV2FWMPeaycyXAhAXs9GZnBOU=
+X-Received: by 2002:a05:6402:26c5:b0:5ed:599a:3cbe with SMTP id
+ 4fb4d7f45d1cf-5f0b284dc9amr11075226a12.4.1744020387132; Mon, 07 Apr 2025
+ 03:06:27 -0700 (PDT)
 MIME-Version: 1.0
 References: <20250319192153.28549-1-jim.shu@sifive.com>
- <20250319192153.28549-5-jim.shu@sifive.com>
- <CAKmqyKPFBaGdEQeLewGyvhNcmzqO0gtRN=4BytoAH7QO5qm_Lw@mail.gmail.com>
-In-Reply-To: <CAKmqyKPFBaGdEQeLewGyvhNcmzqO0gtRN=4BytoAH7QO5qm_Lw@mail.gmail.com>
+ <20250319192153.28549-3-jim.shu@sifive.com>
+ <CAKmqyKPo4G3t32=uKbgYoY+nDJOEg+fLJ3yFC1hx2PJEqT=59A@mail.gmail.com>
+In-Reply-To: <CAKmqyKPo4G3t32=uKbgYoY+nDJOEg+fLJ3yFC1hx2PJEqT=59A@mail.gmail.com>
 From: Jim Shu <jim.shu@sifive.com>
-Date: Mon, 7 Apr 2025 17:42:59 +0800
-X-Gm-Features: ATxdqUHyOBVd4-RGovufR-Y10_ggCZ6GLHHsjBoOVbwpMa0MZmxCCeaOtycKv6g
-Message-ID: <CALw707ouoGcASSCd1ODHiqVw3XqtrdeRJw2k6b2kZZx8vpbWnQ@mail.gmail.com>
-Subject: Re: [PATCH 4/4] target/riscv: Enable/Disable S/VS-mode Timer when
- STCE bit is changed
+Date: Mon, 7 Apr 2025 18:06:15 +0800
+X-Gm-Features: ATxdqUHb0LUdAwTsx9JrBjHKuAHHrcHNKzF2QxS1p9stQ0OqYyyZRBq-nHwG7jM
+Message-ID: <CALw707okY8SKmeb7Po-3KxF+CoE5tZGPASv1Tn4BpZB_7D4KMg@mail.gmail.com>
+Subject: Re: [PATCH 2/4] hw/intc: riscv_aclint: Fix mtime write for sstc
+ extension
 To: Alistair Francis <alistair23@gmail.com>
 Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, 
  Palmer Dabbelt <palmer@dabbelt.com>,
@@ -79,8 +79,8 @@ Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org,
  Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2a00:1450:4864:20::533;
- envelope-from=jim.shu@sifive.com; helo=mail-ed1-x533.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::52f;
+ envelope-from=jim.shu@sifive.com; helo=mail-ed1-x52f.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -103,260 +103,77 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-OK, I will fix it in the v2 patchset.
+The period of the stimecmp timer is the time until the next S-mode
+timer IRQ. The value is calculated as "stimecmp - time". [1]
+It is equal to "stimecmp - mtime" since the time CSR is a read-only
+shadow of the memory-mapped mtime register.
+Thus, changing mtime value will update the period of stimecmp timer.
+
+Similarly, the period of vstimecmp timer is calculated as "vstimecmp -
+(mtime + htimedelta)" [2], so changing mtime value will update the
+period of vstimecmp timer.
+
+[1] RISC-V Priv spec ch 9.1.1. Supervisor Timer (stimecmp) Register
+A supervisor timer interrupt becomes pending, as reflected in the STIP
+bit in the mip and sip registers whenever time contains a value
+greater than or equal to stimecmp.
+[2] RISC-V Priv spec ch19.2.1. Virtual Supervisor Timer (vstimecmp) Registe=
+r
+A virtual supervisor timer interrupt becomes pending, as reflected in
+the VSTIP bit in the hip register, whenever (time + htimedelta),
+truncated to 64 bits, contains a value greater than or equal to
+vstimecmp
+
+I will add the explaination in the commit log in the v2 patchset, thanks.
 
 
 Jim Shu
 
-On Fri, Apr 4, 2025 at 2:03=E2=80=AFPM Alistair Francis <alistair23@gmail.c=
-om> wrote:
+On Fri, Apr 4, 2025 at 11:12=E2=80=AFAM Alistair Francis <alistair23@gmail.=
+com> wrote:
 >
 > On Thu, Mar 20, 2025 at 5:24=E2=80=AFAM Jim Shu <jim.shu@sifive.com> wrot=
 e:
 > >
-> > Updating STCE will enable/disable SSTC in S-mode or/and VS-mode, so we
-> > also need to update S/VS-mode Timer and S/VSTIP bits in $mip CSR.
+> > When changing the mtime value, the period of [s|vs]timecmp timers
+> > should also be updated like the period of mtimecmp timer.
+>
+> Why should they be updated?
+>
+> Alistair
+>
 > >
 > > Signed-off-by: Jim Shu <jim.shu@sifive.com>
 > > ---
-> >  target/riscv/csr.c         | 44 ++++++++++++++++++++++++++++++++
-> >  target/riscv/time_helper.c | 51 ++++++++++++++++++++++++++++++++++++++
-> >  target/riscv/time_helper.h |  1 +
-> >  3 files changed, 96 insertions(+)
+> >  hw/intc/riscv_aclint.c | 5 +++++
+> >  1 file changed, 5 insertions(+)
 > >
-> > diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-> > index ba026dfc8e..c954e49cae 100644
-> > --- a/target/riscv/csr.c
-> > +++ b/target/riscv/csr.c
-> > @@ -3156,6 +3156,7 @@ static RISCVException write_menvcfg(CPURISCVState=
- *env, int csrno,
-> >      const RISCVCPUConfig *cfg =3D riscv_cpu_cfg(env);
-> >      uint64_t mask =3D MENVCFG_FIOM | MENVCFG_CBIE | MENVCFG_CBCFE |
-> >                      MENVCFG_CBZE | MENVCFG_CDE;
-> > +    bool stce_changed =3D false;
-> >
-> >      if (riscv_cpu_mxl(env) =3D=3D MXL_RV64) {
-> >          mask |=3D (cfg->ext_svpbmt ? MENVCFG_PBMTE : 0) |
-> > @@ -3181,10 +3182,19 @@ static RISCVException write_menvcfg(CPURISCVSta=
-te *env, int csrno,
-> >          if ((val & MENVCFG_DTE) =3D=3D 0) {
-> >              env->mstatus &=3D ~MSTATUS_SDT;
-> >          }
-> > +
-> > +        if (cfg->ext_sstc &&
-> > +            ((env->menvcfg & MENVCFG_STCE) !=3D (val & MENVCFG_STCE)))=
- {
-> > +            stce_changed =3D true;
-> > +        }
-> >      }
-> >      env->menvcfg =3D (env->menvcfg & ~mask) | (val & mask);
-> >      write_henvcfg(env, CSR_HENVCFG, env->henvcfg);
-> >
-> > +    if (stce_changed) {
-> > +        riscv_timer_stce_changed(env, true, !!(val & MENVCFG_STCE));
-> > +    }
-> > +
-> >      return RISCV_EXCP_NONE;
-> >  }
-> >
-> > @@ -3207,6 +3217,12 @@ static RISCVException write_menvcfgh(CPURISCVSta=
-te *env, int csrno,
-> >                      (cfg->ext_smcdeleg ? MENVCFG_CDE : 0) |
-> >                      (cfg->ext_ssdbltrp ? MENVCFG_DTE : 0);
-> >      uint64_t valh =3D (uint64_t)val << 32;
-> > +    bool stce_changed =3D false;
-> > +
-> > +    if (cfg->ext_sstc &&
-> > +        ((env->menvcfg & MENVCFG_STCE) !=3D (valh & MENVCFG_STCE))) {
-> > +        stce_changed =3D true;
-> > +    }
-> >
-> >      if ((valh & MENVCFG_DTE) =3D=3D 0) {
-> >          env->mstatus &=3D ~MSTATUS_SDT;
-> > @@ -3215,6 +3231,10 @@ static RISCVException write_menvcfgh(CPURISCVSta=
-te *env, int csrno,
-> >      env->menvcfg =3D (env->menvcfg & ~mask) | (valh & mask);
-> >      write_henvcfgh(env, CSR_HENVCFGH, env->henvcfg >> 32);
-> >
-> > +    if (stce_changed) {
-> > +        riscv_timer_stce_changed(env, true, !!(valh & MENVCFG_STCE));
-> > +    }
-> > +
-> >      return RISCV_EXCP_NONE;
-> >  }
-> >
-> > @@ -3292,8 +3312,10 @@ static RISCVException read_henvcfg(CPURISCVState=
- *env, int csrno,
-> >  static RISCVException write_henvcfg(CPURISCVState *env, int csrno,
-> >                                      target_ulong val)
-> >  {
-> > +    const RISCVCPUConfig *cfg =3D riscv_cpu_cfg(env);
-> >      uint64_t mask =3D HENVCFG_FIOM | HENVCFG_CBIE | HENVCFG_CBCFE | HE=
-NVCFG_CBZE;
-> >      RISCVException ret;
-> > +    bool stce_changed =3D false;
-> >
-> >      ret =3D smstateen_acc_ok(env, 0, SMSTATEEN0_HSENVCFG);
-> >      if (ret !=3D RISCV_EXCP_NONE) {
-> > @@ -3319,6 +3341,11 @@ static RISCVException write_henvcfg(CPURISCVStat=
-e *env, int csrno,
-> >              get_field(val, HENVCFG_PMM) !=3D PMM_FIELD_RESERVED) {
-> >              mask |=3D HENVCFG_PMM;
-> >          }
-> > +
-> > +        if (cfg->ext_sstc &&
-> > +            ((env->henvcfg & HENVCFG_STCE) !=3D (val & HENVCFG_STCE)))=
- {
-> > +            stce_changed =3D true;
-> > +        }
-> >      }
-> >
-> >      env->henvcfg =3D val & mask;
-> > @@ -3326,6 +3353,10 @@ static RISCVException write_henvcfg(CPURISCVStat=
-e *env, int csrno,
-> >          env->vsstatus &=3D ~MSTATUS_SDT;
-> >      }
-> >
-> > +    if (stce_changed) {
-> > +        riscv_timer_stce_changed(env, false, !!(val & HENVCFG_STCE));
-> > +    }
-> > +
-> >      return RISCV_EXCP_NONE;
-> >  }
-> >
-> > @@ -3347,19 +3378,32 @@ static RISCVException read_henvcfgh(CPURISCVSta=
-te *env, int csrno,
-> >  static RISCVException write_henvcfgh(CPURISCVState *env, int csrno,
-> >                                       target_ulong val)
-> >  {
-> > +    const RISCVCPUConfig *cfg =3D riscv_cpu_cfg(env);
-> >      uint64_t mask =3D env->menvcfg & (HENVCFG_PBMTE | HENVCFG_STCE |
-> >                                      HENVCFG_ADUE | HENVCFG_DTE);
-> >      uint64_t valh =3D (uint64_t)val << 32;
-> >      RISCVException ret;
-> > +    bool stce_changed =3D false;
-> >
-> >      ret =3D smstateen_acc_ok(env, 0, SMSTATEEN0_HSENVCFG);
-> >      if (ret !=3D RISCV_EXCP_NONE) {
-> >          return ret;
-> >      }
-> > +
-> > +    if (cfg->ext_sstc &&
-> > +        ((env->henvcfg & HENVCFG_STCE) !=3D (valh & HENVCFG_STCE))) {
-> > +        stce_changed =3D true;
-> > +    }
-> > +
-> >      env->henvcfg =3D (env->henvcfg & 0xFFFFFFFF) | (valh & mask);
-> >      if ((env->henvcfg & HENVCFG_DTE) =3D=3D 0) {
-> >          env->vsstatus &=3D ~MSTATUS_SDT;
-> >      }
-> > +
-> > +    if (stce_changed) {
-> > +        riscv_timer_stce_changed(env, false, !!(val & HENVCFG_STCE));
-> > +    }
-> > +
-> >      return RISCV_EXCP_NONE;
-> >  }
-> >
-> > diff --git a/target/riscv/time_helper.c b/target/riscv/time_helper.c
-> > index aebf0798d0..c648c9fac7 100644
-> > --- a/target/riscv/time_helper.c
-> > +++ b/target/riscv/time_helper.c
-> > @@ -140,6 +140,57 @@ void riscv_timer_write_timecmp(CPURISCVState *env,=
- QEMUTimer *timer,
-> >      timer_mod(timer, next);
-> >  }
-> >
-> > +/*
-> > + * When disabling xenvcfg.STCE, the S/VS Timer may be disabled at the =
-same time.
-> > + * It is safe to call this function regardless of whether the timer ha=
-s been
-> > + * deleted or not. timer_del() will do nothing if the timer has alread=
-y
-> > + * been deleted.
-> > + */
-> > +static void riscv_timer_disable_timecmp(CPURISCVState *env, QEMUTimer =
-*timer,
-> > +                                 uint32_t timer_irq)
-> > +{
-> > +    /* Disable S-mode Timer IRQ and HW-based STIP */
-> > +    if ((timer_irq =3D=3D MIP_STIP) && !get_field(env->menvcfg, MENVCF=
-G_STCE)) {
-> > +        riscv_cpu_update_mip(env, timer_irq, BOOL_TO_MASK(0));
-> > +        timer_del(timer);
-> > +        return;
-> > +    }
-> > +
-> > +    /* Disable VS-mode Timer IRQ and HW-based VSTIP */
-> > +    if ((timer_irq =3D=3D MIP_VSTIP) &&
-> > +        (!get_field(env->menvcfg, MENVCFG_STCE) ||
-> > +         !get_field(env->henvcfg, HENVCFG_STCE))) {
-> > +        env->vstime_irq =3D 0;
-> > +        riscv_cpu_update_mip(env, 0, BOOL_TO_MASK(0));
-> > +        timer_del(timer);
-> > +        return;
-> > +    }
-> > +}
-> > +
-> > +/* Enable or disable S/VS-mode Timer when xenvcfg.STCE is changed */
-> > +void riscv_timer_stce_changed(CPURISCVState *env, bool is_m_mode, bool=
- enable)
-> > +{
-> > +    if (is_m_mode) {
-> > +        /* menvcfg.STCE changes */
-> > +        if (enable) {
+> > diff --git a/hw/intc/riscv_aclint.c b/hw/intc/riscv_aclint.c
+> > index db374a7c2d..5f4a17e177 100644
+> > --- a/hw/intc/riscv_aclint.c
+> > +++ b/hw/intc/riscv_aclint.c
+> > @@ -28,6 +28,7 @@
+> >  #include "qemu/module.h"
+> >  #include "hw/sysbus.h"
+> >  #include "target/riscv/cpu.h"
+> > +#include "target/riscv/time_helper.h"
+> >  #include "hw/qdev-properties.h"
+> >  #include "hw/intc/riscv_aclint.h"
+> >  #include "qemu/timer.h"
+> > @@ -240,6 +241,10 @@ static void riscv_aclint_mtimer_write(void *opaque=
+, hwaddr addr,
+> >              riscv_aclint_mtimer_write_timecmp(mtimer, RISCV_CPU(cpu),
+> >                                                mtimer->hartid_base + i,
+> >                                                mtimer->timecmp[i]);
 > > +            riscv_timer_write_timecmp(env, env->stimer, env->stimecmp,=
  0, MIP_STIP);
 > > +            riscv_timer_write_timecmp(env, env->vstimer, env->vstimecm=
 p,
 > > +                                      env->htimedelta, MIP_VSTIP);
->
-> This line and ...
->
-> > +        } else {
-> > +            riscv_timer_disable_timecmp(env, env->stimer, MIP_STIP);
-> > +            riscv_timer_disable_timecmp(env, env->vstimer, MIP_VSTIP);
->
-> This line are duplicated below.
->
-> > +        }
-> > +    } else {
->
-> We can remove the else
->
-> > +        /* henvcfg.STCE changes */
-> > +        if (enable) {
-> > +            riscv_timer_write_timecmp(env, env->vstimer, env->vstimecm=
-p,
-> > +                                      env->htimedelta, MIP_VSTIP);
-> > +        } else {
-> > +            riscv_timer_disable_timecmp(env, env->vstimer, MIP_VSTIP);
-> > +        }
->
-> and always run this branch to remove the duplicated code above
->
-> Alistair
->
-> > +    }
-> > +}
 > > +
-> >  void riscv_timer_init(RISCVCPU *cpu)
-> >  {
-> >      CPURISCVState *env;
-> > diff --git a/target/riscv/time_helper.h b/target/riscv/time_helper.h
-> > index cacd79b80c..af1f634f89 100644
-> > --- a/target/riscv/time_helper.h
-> > +++ b/target/riscv/time_helper.h
-> > @@ -25,6 +25,7 @@
-> >  void riscv_timer_write_timecmp(CPURISCVState *env, QEMUTimer *timer,
-> >                                 uint64_t timecmp, uint64_t delta,
-> >                                 uint32_t timer_irq);
-> > +void riscv_timer_stce_changed(CPURISCVState *env, bool is_m_mode, bool=
- enable);
-> >  void riscv_timer_init(RISCVCPU *cpu);
-> >
-> >  #endif
+> >          }
+> >          return;
+> >      }
 > > --
 > > 2.17.1
 > >
