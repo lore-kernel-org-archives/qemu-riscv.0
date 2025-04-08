@@ -4,68 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 90A84C369A4
-	for <qemu-riscv@archiver.kernel.org>; Tue,  8 Apr 2025 10:42:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F0569C3600C
+	for <qemu-riscv@archiver.kernel.org>; Tue,  8 Apr 2025 10:43:04 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1u26No-0005QL-HR; Tue, 08 Apr 2025 06:40:44 -0400
+	id 1u26Nn-0005O1-Gi; Tue, 08 Apr 2025 06:40:43 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
- id 1u26NO-00059M-Lf
- for qemu-riscv@nongnu.org; Tue, 08 Apr 2025 06:40:19 -0400
-Received: from mail-pf1-x435.google.com ([2607:f8b0:4864:20::435])
+ id 1u26NG-00057P-O7
+ for qemu-riscv@nongnu.org; Tue, 08 Apr 2025 06:40:14 -0400
+Received: from mail-pg1-x52d.google.com ([2607:f8b0:4864:20::52d])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
- id 1u26NK-0008RR-55
- for qemu-riscv@nongnu.org; Tue, 08 Apr 2025 06:40:16 -0400
-Received: by mail-pf1-x435.google.com with SMTP id
- d2e1a72fcca58-730517040a9so6233848b3a.0
- for <qemu-riscv@nongnu.org>; Tue, 08 Apr 2025 03:40:13 -0700 (PDT)
+ id 1u26NF-0008M4-3x
+ for qemu-riscv@nongnu.org; Tue, 08 Apr 2025 06:40:10 -0400
+Received: by mail-pg1-x52d.google.com with SMTP id
+ 41be03b00d2f7-af6a315b491so4759522a12.1
+ for <qemu-riscv@nongnu.org>; Tue, 08 Apr 2025 03:40:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1744108813; x=1744713613; darn=nongnu.org;
+ d=sifive.com; s=google; t=1744108807; x=1744713607; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=aTLtT4vDY352g4F75LFgIJisHzAnF4unEfl2dckYO0Y=;
- b=bn6sX5O04tfKNutERM0BGfQg/xKrNQQGUTQuTXApIM5BUf61uTKlF3jNUOegol3JVo
- IQr6fn5Kisfv7UYrXRcfufn49nz8gevWcNEyr5lSm5mdEg3JGvvZjl2hJRRjBNp7vM/C
- XG+h6bDZnRe3/9VLCEQ9dyjQyO85lKjGEKcTJDDl0l2KF5r0EbbeVLe5kfZbrl0bOEhA
- rQnjgi5aR6/r1kt7krwy2XGpJmI6QipYyDumB43+Ne7D2f5cig4e6c0ebr8ov7YLmgwn
- +gg+QICpxBErYRMWdPJqHmkGwdh9avEIFa7n6mEfp03WoDo3EMjvuHNRR1bkjVwhRU4w
- 8fxw==
+ bh=kVOueAS8b1eNLy2hm19ycvkuwS2jRMzUIYMrO4q2Iu0=;
+ b=jcXJ3wom7uPfC86x4QKCKbh7b5GseQ8Tf0+YwgcT1h0rDncg0EneDVCKq1nZdptg7/
+ oH7PNdar2U3dUCoCZGHhCCYkCSW4QoY4CxAqOxAbcyfvQBvUdnIZcUYWb7XHpya4Qrum
+ GVCrbQEKMWSuuuD0irgC6WahB4ySwDQPppCvQN3/fGsPKPUVcoHGRwbPL7fYk2X3pBQO
+ KZXsDl12eBtZr8sYbQZlCpVU/t25mhU/P+0HXtqz97G8ZObyLkGlasMPqeNhFRK2txPe
+ sYAO9EkhcyILYDhMB0ukj9UcmrGX/IDi/c/kBixMm6uyWxuNiwGsqDTS2mRR24IFXcyP
+ Sh1A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1744108813; x=1744713613;
+ d=1e100.net; s=20230601; t=1744108807; x=1744713607;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=aTLtT4vDY352g4F75LFgIJisHzAnF4unEfl2dckYO0Y=;
- b=CEvWjTP4v/6XNnjWaK1wb5MplD1+83WPWtjecJJ9ICg5s24Gnm0wGOeFNf1/uCErAR
- dlrI1QQ1RyAeCHqBq77EwgfnN0JmddKDg1dPG+ctT3lR8YdKNXwEODxTlLptJbBBuZ+7
- k75v9S6BtwDVR3IL/qGkLDe9QzlP3jx8Jh8sHdQJ4I7uKvdNlc7wwRT+X9fy/LReoVP8
- tk+Z5c+8xo2SeU2u5/QVkjZdv8QJ2rOoj7ZDuM924bDxrz9BwLoa+DnA+pofmDC83slL
- HNFypIXsSOPoGqzvCamoFSOI04DhP9FQV+t3zv+SEI96zYdTZ3z6V25caqnvTIrYr7X/
- 9DFA==
+ bh=kVOueAS8b1eNLy2hm19ycvkuwS2jRMzUIYMrO4q2Iu0=;
+ b=uJ+3LxWaRlAkLcRv3emin87yIvEV0p7sjHJbiVyc7y3x1tpm7Ovi2D23hFyCSqjNup
+ Jh+CLO7RUNzhBLiO7V/dn37eh7V4EvuYJ3XdRr5HeNeXHvO9RxVdMJYi/nEeDYwFQDvU
+ mCaIiO/fZMvDbhvOVD7PIOkXZefGxZRQhutXxZrVfWjRyfsMX2jg5QU3muEtV+xXjc1i
+ oFmpMMx/tctq2hRdWrN8qu3JlWT3uYiagRTo11qVKtWIfzGHkONXvpiUNZvQkzZvyAOr
+ S7rEhablymazveH8ClNMAKooK/Zac6Z89gK5klrgUu1+8ILi4rku3h+DylkDNEY4FNZV
+ 263w==
 X-Forwarded-Encrypted: i=1;
- AJvYcCU1GDlvZKe5h7ZIQYdkuGPcmCjUpdfe6fOxD8wOWsQv9Uss8IOpb1dqtw+pl0q6+oEZ3hsoQK/zA8wC@nongnu.org
-X-Gm-Message-State: AOJu0Yw8PB6N8iCtUNP+u4xGiKQOTLorAp3RZrF+Z+l/94xAQeNlizcu
- IvQI4tLOyISwf1l9Hj34IlI1F1hC7bjjxqbKzqBj33mSUpwC7FBUcCAdbXC0/6I=
-X-Gm-Gg: ASbGncvbzhTh3FqFMNXff9B9gB/PXwbN2xTFqFtMrApncPuba9nATD96X2wZ5v20rHK
- Vu6dw4QRGzEaHN47paBwgFqIa7sS/xlRXILZwt5dqOg7mDQeE5r3dV0pc6JODDW5r0TUKqB8azp
- oK7d2/Y2dmFY5Trhxe9kIQaekIVhG+PMHka4uxPSdq/tCK6dHCq4Mfc8mXnt5XTqiW3NGHTXsVm
- z45ao1UKJ26p2sdBtf3qBSBfQGAc4bmCaTURf9p5N8IUAKp50YFWq9y+cjzWlGHrjGyzSDH9M5l
- D3A8Y9s190sHefr5l6HwwgyilqvC6DVDqpq3oNxj5Uoq5pmT5oX4cYGIBM1lojfSKTkCXP3nHHX
- FMYiRmGWMnxrIOzpZX+jvy591
-X-Google-Smtp-Source: AGHT+IH5H8PeMhk6urA2FhG1MSe0NKi0Fx77i1TW0TGHgQKBYjOatUk6UKJwZZeYURNeaYRkCv+jaw==
-X-Received: by 2002:a05:6a00:3d52:b0:730:9502:d564 with SMTP id
- d2e1a72fcca58-739e485dabdmr17476255b3a.14.1744108812702; 
- Tue, 08 Apr 2025 03:40:12 -0700 (PDT)
+ AJvYcCV7L5E/ZRT88NU/nauqA6S+U214vcm+hq/LTehpD0Eu/802C5g+rR+D0To1sECcXXeF04rFJRmmIK2P@nongnu.org
+X-Gm-Message-State: AOJu0YyY8WMeEh1ImxnIJRUFhAh23Xj2fvBPvnIWaLBD4SuqMGWJ+Oz8
+ f6QToxMJPVTDnoGNEaoUdm45zZJVxX54jGRL5GIm9Lv9FgLLnUF1c34nawX7+YI=
+X-Gm-Gg: ASbGncvqgIkr8piKQCOcySGonD7ppYs1BrUwRkjQU2+VqQopcLak06ZMae5XET3vORt
+ 8UmWt+1QNTr1HkI6T8iD7codf4b3B0ZzKbikzG+28gA66koKki+rAIkPS57paJn4S+gUjYf9t4z
+ L/WqDYrRJMe9Z0nsdQs/BnXfzB1YtlkID3xaQ3gT8HQluLIho9HSBC8EcYz7SOL97wacbCTxbUH
+ horYvve87+2oW/yOlYLa1tlxTOOkHXKpH1Y2hOPFNh5cAeA05zUDeS19wysXcvHw3JKCc5yf4Re
+ i9gLFr6UgWKwwo5vhiCjS0sz9v+uI8p/s0l2CCogd+rKRsreAvat3RbOk4Z9NCWACl2Q3AHBuDt
+ 7Nk4Tb+yuvaMcMA==
+X-Google-Smtp-Source: AGHT+IG2QDoMYHkX1leJxK3Gb/VRvwe2ipbiiBHnWPbdT7TZnQ13gKi2Q+4I5WZeeF+q6ot2ZJbqVw==
+X-Received: by 2002:a05:6a20:2042:b0:1f5:9330:29fe with SMTP id
+ adf61e73a8af0-20104601e7fmr18359072637.17.1744108807309; 
+ Tue, 08 Apr 2025 03:40:07 -0700 (PDT)
 Received: from duncan.localdomain (114-35-142-126.hinet-ip.hinet.net.
  [114.35.142.126]) by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-739da0e3734sm10532380b3a.179.2025.04.08.03.40.10
+ d2e1a72fcca58-739da0e3734sm10532380b3a.179.2025.04.08.03.40.05
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 08 Apr 2025 03:40:12 -0700 (PDT)
+ Tue, 08 Apr 2025 03:40:07 -0700 (PDT)
 From: Max Chou <max.chou@sifive.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
@@ -75,17 +75,17 @@ Cc: Palmer Dabbelt <palmer@dabbelt.com>,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
  Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, antonb@tenstorrent.com,
  Max Chou <max.chou@sifive.com>
-Subject: [PATCH v3 08/10] target/riscv: rvv: Apply vext_check_input_eew to
- vector narrow/widen instructions
-Date: Tue,  8 Apr 2025 18:39:36 +0800
-Message-ID: <20250408103938.3623486-9-max.chou@sifive.com>
+Subject: [PATCH v3 06/10] target/riscv: rvv: Apply vext_check_input_eew to
+ vector slide instructions(OPIVI/OPIVX)
+Date: Tue,  8 Apr 2025 18:39:34 +0800
+Message-ID: <20250408103938.3623486-7-max.chou@sifive.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250408103938.3623486-1-max.chou@sifive.com>
 References: <20250408103938.3623486-1-max.chou@sifive.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::435;
- envelope-from=max.chou@sifive.com; helo=mail-pf1-x435.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::52d;
+ envelope-from=max.chou@sifive.com; helo=mail-pg1-x52d.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -109,209 +109,29 @@ Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 Handle the overlap of source registers with different EEWs.
-The vd of vector widening mul-add instructions is one of the input
-operands.
 
 Co-authored-by: Anton Blanchard <antonb@tenstorrent.com>
 Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 Signed-off-by: Max Chou <max.chou@sifive.com>
 ---
- target/riscv/insn_trans/trans_rvbf16.c.inc |  9 ++-
- target/riscv/insn_trans/trans_rvv.c.inc    | 77 +++++++++++++++++-----
- 2 files changed, 68 insertions(+), 18 deletions(-)
+ target/riscv/insn_trans/trans_rvv.c.inc | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
 
-diff --git a/target/riscv/insn_trans/trans_rvbf16.c.inc b/target/riscv/insn_trans/trans_rvbf16.c.inc
-index 0a9cd1ec315..066dc364c5b 100644
---- a/target/riscv/insn_trans/trans_rvbf16.c.inc
-+++ b/target/riscv/insn_trans/trans_rvbf16.c.inc
-@@ -119,8 +119,11 @@ static bool trans_vfwmaccbf16_vv(DisasContext *ctx, arg_vfwmaccbf16_vv *a)
-     REQUIRE_FPU;
-     REQUIRE_ZVFBFWMA(ctx);
- 
-+    uint8_t sew = ctx->sew;
-     if (require_rvv(ctx) && vext_check_isa_ill(ctx) && (ctx->sew == MO_16) &&
--        vext_check_dss(ctx, a->rd, a->rs1, a->rs2, a->vm)) {
-+        vext_check_dss(ctx, a->rd, a->rs1, a->rs2, a->vm) &&
-+        vext_check_input_eew(ctx, a->rd, sew + 1, a->rs1, sew, a->vm) &&
-+        vext_check_input_eew(ctx, a->rd, sew + 1, a->rs2, sew, a->vm)) {
-         uint32_t data = 0;
- 
-         gen_set_rm_chkfrm(ctx, RISCV_FRM_DYN);
-@@ -146,8 +149,10 @@ static bool trans_vfwmaccbf16_vf(DisasContext *ctx, arg_vfwmaccbf16_vf *a)
-     REQUIRE_FPU;
-     REQUIRE_ZVFBFWMA(ctx);
- 
-+    uint8_t sew = ctx->sew;
-     if (require_rvv(ctx) && (ctx->sew == MO_16) && vext_check_isa_ill(ctx) &&
--        vext_check_ds(ctx, a->rd, a->rs2, a->vm)) {
-+        vext_check_ds(ctx, a->rd, a->rs2, a->vm) &&
-+        vext_check_input_eew(ctx, a->rd, sew + 1, a->rs2, sew, a->vm)) {
-         uint32_t data = 0;
- 
-         gen_set_rm(ctx, RISCV_FRM_DYN);
 diff --git a/target/riscv/insn_trans/trans_rvv.c.inc b/target/riscv/insn_trans/trans_rvv.c.inc
-index 585ee98b27d..2d067a59e27 100644
+index 2a4bededd1e..d72792e46a7 100644
 --- a/target/riscv/insn_trans/trans_rvv.c.inc
 +++ b/target/riscv/insn_trans/trans_rvv.c.inc
-@@ -528,6 +528,7 @@ static bool vext_narrow_check_common(DisasContext *s, int vd, int vs2,
- static bool vext_check_ds(DisasContext *s, int vd, int vs, int vm)
+@@ -638,7 +638,9 @@ static bool vext_check_slide(DisasContext *s, int vd, int vs2,
  {
-     return vext_wide_check_common(s, vd, vm) &&
-+           vext_check_input_eew(s, vs, s->sew, -1, 0, vm) &&
-            require_align(vs, s->lmul) &&
-            require_noover(vd, s->lmul + 1, vs, s->lmul);
- }
-@@ -535,6 +536,7 @@ static bool vext_check_ds(DisasContext *s, int vd, int vs, int vm)
- static bool vext_check_dd(DisasContext *s, int vd, int vs, int vm)
- {
-     return vext_wide_check_common(s, vd, vm) &&
-+           vext_check_input_eew(s, vs, s->sew + 1, -1, 0, vm) &&
-            require_align(vs, s->lmul + 1);
- }
- 
-@@ -553,6 +555,7 @@ static bool vext_check_dd(DisasContext *s, int vd, int vs, int vm)
- static bool vext_check_dss(DisasContext *s, int vd, int vs1, int vs2, int vm)
- {
-     return vext_check_ds(s, vd, vs2, vm) &&
-+           vext_check_input_eew(s, vs1, s->sew, vs2, s->sew, vm) &&
-            require_align(vs1, s->lmul) &&
-            require_noover(vd, s->lmul + 1, vs1, s->lmul);
- }
-@@ -575,12 +578,14 @@ static bool vext_check_dss(DisasContext *s, int vd, int vs1, int vs2, int vm)
- static bool vext_check_dds(DisasContext *s, int vd, int vs1, int vs2, int vm)
- {
-     return vext_check_ds(s, vd, vs1, vm) &&
-+           vext_check_input_eew(s, vs1, s->sew, vs2, s->sew + 1, vm) &&
-            require_align(vs2, s->lmul + 1);
- }
- 
- static bool vext_check_sd(DisasContext *s, int vd, int vs, int vm)
- {
--    bool ret = vext_narrow_check_common(s, vd, vs, vm);
-+    bool ret = vext_narrow_check_common(s, vd, vs, vm) &&
-+               vext_check_input_eew(s, vs, s->sew + 1, -1, 0, vm);
-     if (vd != vs) {
-         ret &= require_noover(vd, s->lmul, vs, s->lmul + 1);
+     bool ret = require_align(vs2, s->lmul) &&
+                require_align(vd, s->lmul) &&
+-               require_vm(vm, vd);
++               require_vm(vm, vd) &&
++               vext_check_input_eew(s, -1, 0, vs2, s->sew, vm);
++
+     if (is_over) {
+         ret &= (vd != vs2);
      }
-@@ -603,6 +608,7 @@ static bool vext_check_sd(DisasContext *s, int vd, int vs, int vm)
- static bool vext_check_sds(DisasContext *s, int vd, int vs1, int vs2, int vm)
- {
-     return vext_check_sd(s, vd, vs2, vm) &&
-+           vext_check_input_eew(s, vs1, s->sew, vs2, s->sew + 1, vm) &&
-            require_align(vs1, s->lmul);
- }
- 
-@@ -1531,6 +1537,16 @@ static bool opivv_widen_check(DisasContext *s, arg_rmrr *a)
-            vext_check_dss(s, a->rd, a->rs1, a->rs2, a->vm);
- }
- 
-+/* OPIVV with overwrite and WIDEN */
-+static bool opivv_overwrite_widen_check(DisasContext *s, arg_rmrr *a)
-+{
-+    return require_rvv(s) &&
-+           vext_check_isa_ill(s) &&
-+           vext_check_dss(s, a->rd, a->rs1, a->rs2, a->vm) &&
-+           vext_check_input_eew(s, a->rd, s->sew + 1, a->rs1, s->sew, a->vm) &&
-+           vext_check_input_eew(s, a->rd, s->sew + 1, a->rs2, s->sew, a->vm);
-+}
-+
- static bool do_opivv_widen(DisasContext *s, arg_rmrr *a,
-                            gen_helper_gvec_4_ptr *fn,
-                            bool (*checkfn)(DisasContext *, arg_rmrr *))
-@@ -1578,6 +1594,14 @@ static bool opivx_widen_check(DisasContext *s, arg_rmrr *a)
-            vext_check_ds(s, a->rd, a->rs2, a->vm);
- }
- 
-+static bool opivx_overwrite_widen_check(DisasContext *s, arg_rmrr *a)
-+{
-+    return require_rvv(s) &&
-+           vext_check_isa_ill(s) &&
-+           vext_check_ds(s, a->rd, a->rs2, a->vm) &&
-+           vext_check_input_eew(s, a->rd, s->sew + 1, a->rs2, s->sew, a->vm);
-+}
-+
- #define GEN_OPIVX_WIDEN_TRANS(NAME, CHECK) \
- static bool trans_##NAME(DisasContext *s, arg_rmrr *a)                    \
- {                                                                         \
-@@ -2049,13 +2073,13 @@ GEN_OPIVX_TRANS(vmadd_vx, opivx_check)
- GEN_OPIVX_TRANS(vnmsub_vx, opivx_check)
- 
- /* Vector Widening Integer Multiply-Add Instructions */
--GEN_OPIVV_WIDEN_TRANS(vwmaccu_vv, opivv_widen_check)
--GEN_OPIVV_WIDEN_TRANS(vwmacc_vv, opivv_widen_check)
--GEN_OPIVV_WIDEN_TRANS(vwmaccsu_vv, opivv_widen_check)
--GEN_OPIVX_WIDEN_TRANS(vwmaccu_vx, opivx_widen_check)
--GEN_OPIVX_WIDEN_TRANS(vwmacc_vx, opivx_widen_check)
--GEN_OPIVX_WIDEN_TRANS(vwmaccsu_vx, opivx_widen_check)
--GEN_OPIVX_WIDEN_TRANS(vwmaccus_vx, opivx_widen_check)
-+GEN_OPIVV_WIDEN_TRANS(vwmaccu_vv, opivv_overwrite_widen_check)
-+GEN_OPIVV_WIDEN_TRANS(vwmacc_vv, opivv_overwrite_widen_check)
-+GEN_OPIVV_WIDEN_TRANS(vwmaccsu_vv, opivv_overwrite_widen_check)
-+GEN_OPIVX_WIDEN_TRANS(vwmaccu_vx, opivx_overwrite_widen_check)
-+GEN_OPIVX_WIDEN_TRANS(vwmacc_vx, opivx_overwrite_widen_check)
-+GEN_OPIVX_WIDEN_TRANS(vwmaccsu_vx, opivx_overwrite_widen_check)
-+GEN_OPIVX_WIDEN_TRANS(vwmaccus_vx, opivx_overwrite_widen_check)
- 
- /* Vector Integer Merge and Move Instructions */
- static bool trans_vmv_v_v(DisasContext *s, arg_vmv_v_v *a)
-@@ -2396,6 +2420,17 @@ static bool opfvv_widen_check(DisasContext *s, arg_rmrr *a)
-            vext_check_dss(s, a->rd, a->rs1, a->rs2, a->vm);
- }
- 
-+static bool opfvv_overwrite_widen_check(DisasContext *s, arg_rmrr *a)
-+{
-+    return require_rvv(s) &&
-+           require_rvf(s) &&
-+           require_scale_rvf(s) &&
-+           vext_check_isa_ill(s) &&
-+           vext_check_dss(s, a->rd, a->rs1, a->rs2, a->vm) &&
-+           vext_check_input_eew(s, a->rd, s->sew + 1, a->rs1, s->sew, a->vm) &&
-+           vext_check_input_eew(s, a->rd, s->sew + 1, a->rs2, s->sew, a->vm);
-+}
-+
- /* OPFVV with WIDEN */
- #define GEN_OPFVV_WIDEN_TRANS(NAME, CHECK)                       \
- static bool trans_##NAME(DisasContext *s, arg_rmrr *a)           \
-@@ -2435,6 +2470,16 @@ static bool opfvf_widen_check(DisasContext *s, arg_rmrr *a)
-            vext_check_ds(s, a->rd, a->rs2, a->vm);
- }
- 
-+static bool opfvf_overwrite_widen_check(DisasContext *s, arg_rmrr *a)
-+{
-+    return require_rvv(s) &&
-+           require_rvf(s) &&
-+           require_scale_rvf(s) &&
-+           vext_check_isa_ill(s) &&
-+           vext_check_ds(s, a->rd, a->rs2, a->vm) &&
-+           vext_check_input_eew(s, a->rd, s->sew + 1, a->rs2, s->sew, a->vm);
-+}
-+
- /* OPFVF with WIDEN */
- #define GEN_OPFVF_WIDEN_TRANS(NAME, CHECK)                       \
- static bool trans_##NAME(DisasContext *s, arg_rmrr *a)           \
-@@ -2559,14 +2604,14 @@ GEN_OPFVF_TRANS(vfmsub_vf, opfvf_check)
- GEN_OPFVF_TRANS(vfnmsub_vf, opfvf_check)
- 
- /* Vector Widening Floating-Point Fused Multiply-Add Instructions */
--GEN_OPFVV_WIDEN_TRANS(vfwmacc_vv, opfvv_widen_check)
--GEN_OPFVV_WIDEN_TRANS(vfwnmacc_vv, opfvv_widen_check)
--GEN_OPFVV_WIDEN_TRANS(vfwmsac_vv, opfvv_widen_check)
--GEN_OPFVV_WIDEN_TRANS(vfwnmsac_vv, opfvv_widen_check)
--GEN_OPFVF_WIDEN_TRANS(vfwmacc_vf, opfvf_widen_check)
--GEN_OPFVF_WIDEN_TRANS(vfwnmacc_vf, opfvf_widen_check)
--GEN_OPFVF_WIDEN_TRANS(vfwmsac_vf, opfvf_widen_check)
--GEN_OPFVF_WIDEN_TRANS(vfwnmsac_vf, opfvf_widen_check)
-+GEN_OPFVV_WIDEN_TRANS(vfwmacc_vv, opfvv_overwrite_widen_check)
-+GEN_OPFVV_WIDEN_TRANS(vfwnmacc_vv, opfvv_overwrite_widen_check)
-+GEN_OPFVV_WIDEN_TRANS(vfwmsac_vv, opfvv_overwrite_widen_check)
-+GEN_OPFVV_WIDEN_TRANS(vfwnmsac_vv, opfvv_overwrite_widen_check)
-+GEN_OPFVF_WIDEN_TRANS(vfwmacc_vf, opfvf_overwrite_widen_check)
-+GEN_OPFVF_WIDEN_TRANS(vfwnmacc_vf, opfvf_overwrite_widen_check)
-+GEN_OPFVF_WIDEN_TRANS(vfwmsac_vf, opfvf_overwrite_widen_check)
-+GEN_OPFVF_WIDEN_TRANS(vfwnmsac_vf, opfvf_overwrite_widen_check)
- 
- /* Vector Floating-Point Square-Root Instruction */
- 
 -- 
 2.43.0
 
