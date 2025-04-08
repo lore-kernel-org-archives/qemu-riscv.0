@@ -4,68 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0E262C3600C
-	for <qemu-riscv@archiver.kernel.org>; Tue,  8 Apr 2025 10:41:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3D2B9C3600C
+	for <qemu-riscv@archiver.kernel.org>; Tue,  8 Apr 2025 10:42:03 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1u26Nd-0005GB-Gw; Tue, 08 Apr 2025 06:40:33 -0400
+	id 1u26Nk-0005I5-75; Tue, 08 Apr 2025 06:40:40 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
- id 1u26NR-0005CD-SZ
+ id 1u26NT-0005CI-Af
  for qemu-riscv@nongnu.org; Tue, 08 Apr 2025 06:40:24 -0400
-Received: from mail-pf1-x430.google.com ([2607:f8b0:4864:20::430])
+Received: from mail-pf1-x42a.google.com ([2607:f8b0:4864:20::42a])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
- id 1u26NN-0008Ro-Jx
- for qemu-riscv@nongnu.org; Tue, 08 Apr 2025 06:40:19 -0400
-Received: by mail-pf1-x430.google.com with SMTP id
- d2e1a72fcca58-736b0c68092so4305320b3a.0
- for <qemu-riscv@nongnu.org>; Tue, 08 Apr 2025 03:40:16 -0700 (PDT)
+ id 1u26NR-0008SN-I7
+ for qemu-riscv@nongnu.org; Tue, 08 Apr 2025 06:40:23 -0400
+Received: by mail-pf1-x42a.google.com with SMTP id
+ d2e1a72fcca58-7390d21bb1cso5125427b3a.2
+ for <qemu-riscv@nongnu.org>; Tue, 08 Apr 2025 03:40:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1744108815; x=1744713615; darn=nongnu.org;
+ d=sifive.com; s=google; t=1744108818; x=1744713618; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=V3kIK3SPZ+6nNlN6c3rIDoA+sKT5kyUnVw4pY5gTecA=;
- b=BC3TBEVMoVoCxfCPlfSC1TPQukR+bh4D5h/JiJa/P95gfhkbuAHon2I0N+SASs+YMZ
- Ot74hJzTHdMswTCXgzf+HENR/cshyzoubLQUI7RXY07mWX5hgS2Bz7danIkOtKlF7vV7
- UfJDWweNOBWi/DhtzZNhR0Wf9yz9gCwGVFgaMuXvIY/G7gJksndjLfEtuYNOvtEhoYn7
- znD6TLonBKhtRZ4qF5Ag0N3SbvUmMdjMZTMmgwMKNhYepRJNsTDZ+rDjyElR+XDnKnna
- QOrIrkivq9DrRdDpVSXXsWZ6JqDDf6RHPyxm7Z8P/yWyIrBTkQbSfz0voC/iM1g5KRf9
- adyg==
+ bh=VovFIwccFz5ZNcTAzE7f9KTJbFEt9HWF4oT+EcZJzUM=;
+ b=f16Qq/+lZuneGcXSIuQCc1LWYInm+ao338AIk9LyENMX8MLjyvWMglI15GBUspc4nD
+ HL9WXJl1RCupUpG09lw46zcgZ4FjcGKhnV4FkzNQWZsV5o8UofqmgDVcqb+GEYcosXEe
+ gdBXH5yq6BI8vPsCEujhSgDHU+SzHBvk5r3bTVkE/TVJt2s41NkZU4T/TdlO5N0JiRSF
+ nzwT6hV2NZNhtUIEflUZRnpwAecK4HXRk+kQN2FTmcwO4O/QwA05QPKc8MmNEDCzV4ps
+ 9K1QzRcqCcjaYFl7oYEkj2zuhoQjP/vWhCgo+oA6oGYtoeKZXij6OPYKZnfnx5ThCb4G
+ oJVA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1744108815; x=1744713615;
+ d=1e100.net; s=20230601; t=1744108818; x=1744713618;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=V3kIK3SPZ+6nNlN6c3rIDoA+sKT5kyUnVw4pY5gTecA=;
- b=pguXlJfhs86nhZo7mJCkOJwAoJyQySSK8yXNkSqlb84t3KrjiO97N9jq7BJ0l4Yt+R
- V8bGlybPAFsGZA+YznU26ubydFYUj/wjKRF5iogNlyeNRX16srLgtrUDpEJ7Rrncx+8m
- rHu6AJJxeSbel+cwGvdRsOLq117lAmtPJaCxcP6xOhMcrrfajLna3YaFXm6Zg6CimPN/
- s3d8/bc3CGedm6pv6aOoSNnbNnW4DSTbOe2aDfKZPb6HJSEil9CfIXLJinZB4B9isDH+
- uqKlEX0O7Tn6yvJA6a9YYqwk4MRNgfXh2vLs+3DSXTEamG6mInfefw0SMs15N1nWRW7m
- Nz+g==
+ bh=VovFIwccFz5ZNcTAzE7f9KTJbFEt9HWF4oT+EcZJzUM=;
+ b=tg+Aon3SBpIaVAMV1S4J6bSY3JR4xwtD7Be0RunP5bzZtLQB2Q143QxOY4Vu+52aSM
+ xFDnRyCdxuuZXJYz+zpK5r4eKHrh+WBFeyM09VZ71yFITNtzRv3Xw9+3O5H5m1AijpQ/
+ k4lXQHN2/7p5byOw3IrEp8pOBHtyJ6jDQcwMc1oYxUwsRqujIE3h/o0jO311pxuotfxm
+ sqCRpEVus1vRkwEGignunMfuAAZaD+acsv472oJXhAzjJxyCflK7l7Fan+npKXu4ubmX
+ 2IkmBkkvfdIYJDx0XbqaQnmRRwhW+Urv39E01/CWZnPXHWzQ11g6w8m+N2N9srBkAZBQ
+ uUwA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWiGvPaou7AfwpcDOi9/fmUmlevOuT6fewhzpvQ/1uaKSawOcG1PyIhB3QCk08lacAPUN1IC+2HAEjL@nongnu.org
-X-Gm-Message-State: AOJu0YzG10PdlJvIJzobDUjUbreR8Rc2wnc6bGsl+WSuPsjKlbuAsq9b
- PSgawVFCKXWJb9zggwJCIN8ygD2cJ/t4ufy6BXuiWZUepuGYkbE9tYTwEqutmSk=
-X-Gm-Gg: ASbGncuwCnRrECIoF8FwdwnDsLMdBU5a3UWWXTaP0Sdu+14kFCS9J5bKVMyfdz9qxLk
- jIk0+/88QigjqQbohMuEWfSzk0BPYJMoXvV0KaFxocke2ws/EB5DFwULiBEBMd9sGz23ekzqv0Y
- mWhBIpsm0sdyUl5LNLFeOUWmkS87twEwUG7BB+VEdq/EwI2i+yFpnyawYua+1W+wt6Txnt088Ro
- xXj1eerSSuIaci9ckr1EMb3ljVaNhA3rMhu25yNlw+FKmpL/8yPXW9XQbFFH/tYyrzX/LRZ8v4o
- jqC5CljtDEmdCjVmL2jUi09PSVhBgRXcIA3j0Q/IFrg7hCyjScQyxw182Ssiy20VlKXKaycj73n
- K1Yr9Wjjvt+Tltw==
-X-Google-Smtp-Source: AGHT+IEvXWo0yvhk+JuMdsMB12/7jA6+6BVDdPzs0RuQQNvt3QjtzG+5W8qnFslMuCKwj2Wl79E1UA==
-X-Received: by 2002:a05:6a00:390a:b0:736:53bc:f1ab with SMTP id
- d2e1a72fcca58-739e4b49b9emr25589340b3a.12.1744108815396; 
- Tue, 08 Apr 2025 03:40:15 -0700 (PDT)
+ AJvYcCW7OriNa3mqVXApsUPPIbUs2hCYMin8G2ykoTpMvYZAzOzAW8YNVzNIuYFSCwCeg+c1sFZ9G8v++Ahm@nongnu.org
+X-Gm-Message-State: AOJu0YwD1viCCMpf+lhQfQNieEwjNcLuaVYq7+MyI4mGNTwFZ77KEQ5D
+ J/GwIwTH4SvGcgPJHTLaBLEL/rTILrOCtD29qbLPPHg5piRZ5xDFPxvuPIRIeOc=
+X-Gm-Gg: ASbGncsju1lZYkPbWytSIUTQ1W08Rz+TM69434koJn1iBj4o5go3BWF1ebFvydbs3nM
+ SMV4lEgekUQQzwKfS7noBn64mDdRjp6DXGTQvzUg369xqKcdY8QpL0FJaQKaKM/WNv5dROwQ7k2
+ qKJkhYSU3NuYoUq5f06vbt609k/VKsy/y1m4gwTi489YG1UGflaMN+UHnTwN5+BT8iZEXTaoqzi
+ jfxhi1/wHaiDJE8rSOSB1w1JPk28+6MCcXSWpYwOvlz7MrjMI2MXqkl2BZfVVRsPUbaj0TOq+wu
+ zSVeie2EIQPu3f/Nr6rKGDPjscM2yzbnjGJ+OX/8dGZz9tmSqGfc25aff744e2lpYPBxUuBe4X4
+ 3X7JGnRA1SRiijGdP4i8r9jZJ
+X-Google-Smtp-Source: AGHT+IEFW3BV82D1y7m5eF8LXuwTZ0X+m4w4T2ZUx25IvWUj5te7H+NjsQ0lfpOPj0sru9r7bjYYhg==
+X-Received: by 2002:a05:6a21:107:b0:1f5:873b:3d32 with SMTP id
+ adf61e73a8af0-2010474acc3mr24554087637.39.1744108818018; 
+ Tue, 08 Apr 2025 03:40:18 -0700 (PDT)
 Received: from duncan.localdomain (114-35-142-126.hinet-ip.hinet.net.
  [114.35.142.126]) by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-739da0e3734sm10532380b3a.179.2025.04.08.03.40.13
+ d2e1a72fcca58-739da0e3734sm10532380b3a.179.2025.04.08.03.40.16
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 08 Apr 2025 03:40:15 -0700 (PDT)
+ Tue, 08 Apr 2025 03:40:17 -0700 (PDT)
 From: Max Chou <max.chou@sifive.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
@@ -75,17 +75,17 @@ Cc: Palmer Dabbelt <palmer@dabbelt.com>,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
  Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, antonb@tenstorrent.com,
  Max Chou <max.chou@sifive.com>
-Subject: [PATCH v3 09/10] target/riscv: rvv: Apply vext_check_input_eew to
- vector indexed load/store instructions
-Date: Tue,  8 Apr 2025 18:39:37 +0800
-Message-ID: <20250408103938.3623486-10-max.chou@sifive.com>
+Subject: [PATCH v3 10/10] target/riscv: Fix the rvv reserved encoding of
+ unmasked instructions
+Date: Tue,  8 Apr 2025 18:39:38 +0800
+Message-ID: <20250408103938.3623486-11-max.chou@sifive.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250408103938.3623486-1-max.chou@sifive.com>
 References: <20250408103938.3623486-1-max.chou@sifive.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::430;
- envelope-from=max.chou@sifive.com; helo=mail-pf1-x430.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::42a;
+ envelope-from=max.chou@sifive.com; helo=mail-pf1-x42a.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -108,39 +108,51 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Handle the overlap of source registers with different EEWs.
+According to the v spec, the encodings of vcomoress.vm and vector
+mask-register logical instructions with vm=0 are reserved.
 
-Co-authored-by: Anton Blanchard <antonb@tenstorrent.com>
 Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 Signed-off-by: Max Chou <max.chou@sifive.com>
 ---
- target/riscv/insn_trans/trans_rvv.c.inc | 6 ++++--
- 1 file changed, 4 insertions(+), 2 deletions(-)
+ target/riscv/insn32.decode | 18 +++++++++---------
+ 1 file changed, 9 insertions(+), 9 deletions(-)
 
-diff --git a/target/riscv/insn_trans/trans_rvv.c.inc b/target/riscv/insn_trans/trans_rvv.c.inc
-index 2d067a59e27..445a0b72a56 100644
---- a/target/riscv/insn_trans/trans_rvv.c.inc
-+++ b/target/riscv/insn_trans/trans_rvv.c.inc
-@@ -1043,7 +1043,8 @@ static bool ld_index_check(DisasContext *s, arg_rnfvm* a, uint8_t eew)
- {
-     return require_rvv(s) &&
-            vext_check_isa_ill(s) &&
--           vext_check_ld_index(s, a->rd, a->rs2, a->nf, a->vm, eew);
-+           vext_check_ld_index(s, a->rd, a->rs2, a->nf, a->vm, eew) &&
-+           vext_check_input_eew(s, -1, 0, a->rs2, eew, a->vm);
- }
- 
- GEN_VEXT_TRANS(vlxei8_v,  MO_8,  rnfvm, ld_index_op, ld_index_check)
-@@ -1095,7 +1096,8 @@ static bool st_index_check(DisasContext *s, arg_rnfvm* a, uint8_t eew)
- {
-     return require_rvv(s) &&
-            vext_check_isa_ill(s) &&
--           vext_check_st_index(s, a->rd, a->rs2, a->nf, eew);
-+           vext_check_st_index(s, a->rd, a->rs2, a->nf, eew) &&
-+           vext_check_input_eew(s, a->rd, s->sew, a->rs2, eew, a->vm);
- }
- 
- GEN_VEXT_TRANS(vsxei8_v,  MO_8,  rnfvm, st_index_op, st_index_check)
+diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
+index 6d1a13c8260..cd23b1f3a9b 100644
+--- a/target/riscv/insn32.decode
++++ b/target/riscv/insn32.decode
+@@ -703,14 +703,14 @@ vfredmax_vs     000111 . ..... ..... 001 ..... 1010111 @r_vm
+ # Vector widening ordered and unordered float reduction sum
+ vfwredusum_vs   110001 . ..... ..... 001 ..... 1010111 @r_vm
+ vfwredosum_vs   110011 . ..... ..... 001 ..... 1010111 @r_vm
+-vmand_mm        011001 - ..... ..... 010 ..... 1010111 @r
+-vmnand_mm       011101 - ..... ..... 010 ..... 1010111 @r
+-vmandn_mm       011000 - ..... ..... 010 ..... 1010111 @r
+-vmxor_mm        011011 - ..... ..... 010 ..... 1010111 @r
+-vmor_mm         011010 - ..... ..... 010 ..... 1010111 @r
+-vmnor_mm        011110 - ..... ..... 010 ..... 1010111 @r
+-vmorn_mm        011100 - ..... ..... 010 ..... 1010111 @r
+-vmxnor_mm       011111 - ..... ..... 010 ..... 1010111 @r
++vmand_mm        011001 1 ..... ..... 010 ..... 1010111 @r
++vmnand_mm       011101 1 ..... ..... 010 ..... 1010111 @r
++vmandn_mm       011000 1 ..... ..... 010 ..... 1010111 @r
++vmxor_mm        011011 1 ..... ..... 010 ..... 1010111 @r
++vmor_mm         011010 1 ..... ..... 010 ..... 1010111 @r
++vmnor_mm        011110 1 ..... ..... 010 ..... 1010111 @r
++vmorn_mm        011100 1 ..... ..... 010 ..... 1010111 @r
++vmxnor_mm       011111 1 ..... ..... 010 ..... 1010111 @r
+ vcpop_m         010000 . ..... 10000 010 ..... 1010111 @r2_vm
+ vfirst_m        010000 . ..... 10001 010 ..... 1010111 @r2_vm
+ vmsbf_m         010100 . ..... 00001 010 ..... 1010111 @r2_vm
+@@ -732,7 +732,7 @@ vrgather_vv     001100 . ..... ..... 000 ..... 1010111 @r_vm
+ vrgatherei16_vv 001110 . ..... ..... 000 ..... 1010111 @r_vm
+ vrgather_vx     001100 . ..... ..... 100 ..... 1010111 @r_vm
+ vrgather_vi     001100 . ..... ..... 011 ..... 1010111 @r_vm
+-vcompress_vm    010111 - ..... ..... 010 ..... 1010111 @r
++vcompress_vm    010111 1 ..... ..... 010 ..... 1010111 @r
+ vmv1r_v         100111 1 ..... 00000 011 ..... 1010111 @r2rd
+ vmv2r_v         100111 1 ..... 00001 011 ..... 1010111 @r2rd
+ vmv4r_v         100111 1 ..... 00011 011 ..... 1010111 @r2rd
 -- 
 2.43.0
 
