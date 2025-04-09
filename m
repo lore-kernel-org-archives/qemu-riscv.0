@@ -4,77 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B4540C369A2
-	for <qemu-riscv@archiver.kernel.org>; Wed,  9 Apr 2025 10:59:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F2218C36002
+	for <qemu-riscv@archiver.kernel.org>; Wed,  9 Apr 2025 13:36:10 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1u2T8x-00041l-MO; Wed, 09 Apr 2025 06:58:55 -0400
+	id 1u2VaX-00018S-0B; Wed, 09 Apr 2025 09:35:33 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1u2T8q-0003qz-Mq
- for qemu-riscv@nongnu.org; Wed, 09 Apr 2025 06:58:51 -0400
-Received: from mail-wm1-x32e.google.com ([2a00:1450:4864:20::32e])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1u2T8n-0000zP-9w
- for qemu-riscv@nongnu.org; Wed, 09 Apr 2025 06:58:48 -0400
-Received: by mail-wm1-x32e.google.com with SMTP id
- 5b1f17b1804b1-43cfdc2c8c9so38182075e9.2
- for <qemu-riscv@nongnu.org>; Wed, 09 Apr 2025 03:58:44 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1744196323; x=1744801123; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=CM6GJHUe2MWUm47NGTkKsNCuck/2ZwQKCfLGM9K8E9I=;
- b=RrQidARPuliO1TZASvKHfCaBE2uuDvI3KMwkIdMEujU61OsaBJJ2Mj4t4kvhe5P4Yw
- g3hYQN7AttTdbxJrI4B1sj372IA7PkNv2azweeaSKDMqbHbrfYBrTsSk7T6sVo2RwLu5
- KlI0ch1Ob8SXWFMMX2nu6FG4njwFuTaziVroXQF7uTIGC5fCM1yflMRYg3P6BwmrhwUd
- m4j2yKzI5MmfZb1NTW2yDK8iY7ogmGb7vWVamteAe8jOSprJWnVuooKS5XosXRpx08RS
- w84o1wC2SC1rTIMLLpjzefoy40jxqKtuTmSDmC3V2asrmGFN8l7+ZKmxBt0jKkbDJ455
- RJ7A==
+ (Exim 4.90_1) (envelope-from <pbonzini@redhat.com>)
+ id 1u2VaP-00014E-Bl
+ for qemu-riscv@nongnu.org; Wed, 09 Apr 2025 09:35:25 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <pbonzini@redhat.com>)
+ id 1u2VaL-0003fz-SI
+ for qemu-riscv@nongnu.org; Wed, 09 Apr 2025 09:35:24 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1744205720;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
+ bh=1TMoOKh1qF7O83Nj4d6TCIOVoyS54jKotwsf9ZbPvoA=;
+ b=ReG7Mit0AwYjuZPIhwue8ux8iefDFUynIY2Z36NEJ3ti3cikYOuY9szh/tSTUxN5k9IMJ2
+ OMr4CfjeQIYK0eMLhOHZfMga82KpKoY1auWUNOwaYl64XgPmcRo11oeq4bH58jdosuTjeX
+ 3tTL4YnSI4t5+ZnT0Pu17EODvnivkJQ=
+Received: from mail-wm1-f72.google.com (mail-wm1-f72.google.com
+ [209.85.128.72]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-595-qPCeS03PMfW8cf-xqu9wxA-1; Wed, 09 Apr 2025 09:35:19 -0400
+X-MC-Unique: qPCeS03PMfW8cf-xqu9wxA-1
+X-Mimecast-MFC-AGG-ID: qPCeS03PMfW8cf-xqu9wxA_1744205718
+Received: by mail-wm1-f72.google.com with SMTP id
+ 5b1f17b1804b1-43d0a037f97so40901065e9.2
+ for <qemu-riscv@nongnu.org>; Wed, 09 Apr 2025 06:35:19 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1744196323; x=1744801123;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=CM6GJHUe2MWUm47NGTkKsNCuck/2ZwQKCfLGM9K8E9I=;
- b=p/TuC0FDj/vZRsfoFQVsLDcCMACKe7cYoovjDJxwdJydb7gleBO0q/L+Y6AgTZ2bjI
- cnLqCmu13D1ZRMpWgTJP6bfcXWA8oEFOejIHFf1fcFcJwOLuLAgiHxy0RKBN/8JMD/RA
- xDRp3N4RxtOO+MdJ3ZmcCW6pwRomut1K03LYZriJbNZcKiFbzutnon0fS7eRm0EwR9U/
- F2itxViIXnuYY20hn550lprhBNoJ5+hwJkRQFPcZDnrXuKHDsX1wV2vkTngX6HLCHwj6
- r3E1byaPA+sITkpo3GS8Xv06SOwfj0mW9Kgec7oaw9tYTfbmDEq8VXyqhbDuQ6qDD2wn
- /ktQ==
+ d=1e100.net; s=20230601; t=1744205718; x=1744810518;
+ h=content-transfer-encoding:in-reply-to:autocrypt:content-language
+ :from:references:cc:to:subject:user-agent:mime-version:date
+ :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=1TMoOKh1qF7O83Nj4d6TCIOVoyS54jKotwsf9ZbPvoA=;
+ b=K8m9LG9QUlwgScWgP/NmU8tkITluSLJV0KM14HrJJ15Jn2LVzH1CH4IhDdHGYJY+8R
+ S14FhbH+MmWpccoMNWj0ciNbCgw5aKzwhM5lYK6HA7HCq/DVeIIgDi0A4qp8YUE7WiWG
+ I0xgIfNzlvM/d8/UikKIXproLUi397Xk7q0ZL49EdP7CE+KSv0akjDXAsOIhqGDEYCYf
+ Mzo1XlRcQjpKyQvC+vkDc1CZsid4fwfKYCQMmH6HSOa1xXAZdiEFGJ3asCjwhRDC5GZd
+ XJSncWp49SNQfO8BVpPqKTLGhCXoqz8HIYcs3+LtuubJsq4w+AdsNhWpv895OnxWPehP
+ 5log==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWD98lUegYl545UVDNOMfXtXi519MAeab+F3j0Jbt0XA+H+J0SgV1IJLKlgT2Z5ptLPggaWORND92lO@nongnu.org
-X-Gm-Message-State: AOJu0YzOw1p55vyBtXKApQ1mP087t2/XpSmnaFt91gc30yc3Ajo0k0dt
- k4374uCw1mOYwcsfZNlWQqxPkElOxDA4LjtptBHhKFVklT0dB2XmhearlMYYXU8=
-X-Gm-Gg: ASbGnculeBeat5k1d5D9/tC9dUoNOp3tVzlM9yvpDOQ2wVklKc9SHl1550UwkhNL+vw
- Ftz8bJJ80nNTPDHvajavl/DD5BZpVV4K15ABVlcydl7mErFU6JVX5GZaLHBbuKL05bI3bKIqQvY
- 4ESpBoq/N/mToM2qYXpbTDt7FZMvrdZ9S5qNtSNQNj5TZNIMjmX3c7jGEzfevat3v/e1GIderzG
- PcWQcNke0sDGkxp45pQMarZVz+okkEv7mnKfLxGzAusXPZGLlKAdAZ/+tPVht/xkndcGG2rzfOM
- ySiRfxnjG05cfuEUttOWmchOVdxyZx8NFxmyKgTluLHk/oocqt/Scb3KvZ+WGZLzizrL/WvvKb1
- V0C/PX7wLsfU=
-X-Google-Smtp-Source: AGHT+IFFox61GKWj46seevPvRx2oEhJvCGdxwcCkrJrk9NKaEewyCfvcNP2h6dvtzHSMfbAtBRt4Pg==
-X-Received: by 2002:a05:6000:381:b0:39a:c80b:828a with SMTP id
- ffacd0b85a97d-39d87acd580mr2307449f8f.33.1744196323107; 
- Wed, 09 Apr 2025 03:58:43 -0700 (PDT)
-Received: from [192.168.1.74] (88-187-86-199.subs.proxad.net. [88.187.86.199])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-39d893f0d15sm1294700f8f.67.2025.04.09.03.58.41
+ AJvYcCXWYIFhth88rNan8QvitBWwo3IejfZ71vT+EPrG/L02c8nPXK7K2IUPM8HTzh7DVNGOGVpJAsQSfNRe@nongnu.org
+X-Gm-Message-State: AOJu0Yx2nLBwJXN+HaE3hPEZyka+7tDQSNesHkfqowCcLle52it2XGiu
+ 61LBIvdxfyuafrAnyzFcuP1VM1AUBioGQnGcsRiZVb0E+MFHSywE/eJiL2882Jywq5jkOykCY/+
+ XWsW8g7v+637wt86G1ylcrCGfPCN/w8wvGRaEw7zjVSF4C3HLixdh
+X-Gm-Gg: ASbGncvK5EfP1QViywGiDYxpzyNgoqZDxx+aEaxL1opw4JC++CeiaCyB1TlAjWXeNGx
+ SYiLPh5n1Al5WO17fjCtFVP8oRn4l9U51ia3gEE4BrTeEw/qNMZ0pRbsffoD15lBFDr5InNsdMp
+ ovyTyXsPpLLjrPE3b1vI/BdMc3K8udTvCEbIonE0Ak21JU/y2L40EMfZyKNQ4rwhBmlXQpeK2Yv
+ FhYWSfquE2FbayQJE2f6x6LaN+gViCw9R1dxG2iNLSZcav6mOiLMjn19/7zVF/eFPy6ZnmL+LZe
+ ueSLdP8J4c/JNTFzEg==
+X-Received: by 2002:a05:600c:1f16:b0:43d:649:4e50 with SMTP id
+ 5b1f17b1804b1-43f1fe01880mr25224485e9.13.1744205718183; 
+ Wed, 09 Apr 2025 06:35:18 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IEs/T3rc+Oybpr9Hz3Z1Z9IwIpyXN6CLcOUDPhz3kXoRdi0AugoRCSdiPxuMN63M9/se3Ek6Q==
+X-Received: by 2002:a05:600c:1f16:b0:43d:649:4e50 with SMTP id
+ 5b1f17b1804b1-43f1fe01880mr25224085e9.13.1744205717804; 
+ Wed, 09 Apr 2025 06:35:17 -0700 (PDT)
+Received: from [192.168.10.48] ([176.206.110.254])
+ by smtp.googlemail.com with ESMTPSA id
+ ffacd0b85a97d-39d8938b5e7sm1703373f8f.55.2025.04.09.06.35.15
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 09 Apr 2025 03:58:42 -0700 (PDT)
-Message-ID: <069ad872-5012-4f2a-8ba6-e2a22ce2bb49@linaro.org>
-Date: Wed, 9 Apr 2025 12:58:41 +0200
+ Wed, 09 Apr 2025 06:35:17 -0700 (PDT)
+Message-ID: <671805c9-f802-412b-998e-ba83719f1e72@redhat.com>
+Date: Wed, 9 Apr 2025 15:35:14 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 07/10] tcg: Add a TCG backend for WebAssembly
-To: Kohei Tokunaga <ktokunaga.mail@gmail.com>, qemu-devel@nongnu.org
+Subject: Re: [PATCH 05/10] meson: Add wasm build in build scripts
+To: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
+ Kohei Tokunaga <ktokunaga.mail@gmail.com>, qemu-devel@nongnu.org
 Cc: =?UTF-8?Q?Alex_Benn=C3=A9e?= <alex.bennee@linaro.org>,
  Thomas Huth <thuth@redhat.com>,
  Richard Henderson <richard.henderson@linaro.org>,
- Paolo Bonzini <pbonzini@redhat.com>, Kevin Wolf <kwolf@redhat.com>,
- Hanna Reitz <hreitz@redhat.com>,
+ Kevin Wolf <kwolf@redhat.com>, Hanna Reitz <hreitz@redhat.com>,
  Christian Schoenebeck <qemu_oss@crudebyte.com>, Greg Kurz <groug@kaod.org>,
  Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <alistair.francis@wdc.com>, Weiwei Li
@@ -85,22 +95,63 @@ Cc: =?UTF-8?Q?Alex_Benn=C3=A9e?= <alex.bennee@linaro.org>,
  Eduardo Habkost <eduardo@habkost.net>,
  Peter Maydell <peter.maydell@linaro.org>,
  Stefan Hajnoczi <stefanha@redhat.com>, qemu-block@nongnu.org,
- qemu-riscv@nongnu.org, qemu-arm@nongnu.org
+ qemu-riscv@nongnu.org, qemu-arm@nongnu.org,
+ Pierrick Bouvier <pierrick.bouvier@linaro.org>
 References: <cover.1744032780.git.ktokunaga.mail@gmail.com>
- <24b5ff124d70043aff97dc30aa45f8a502676989.1744032780.git.ktokunaga.mail@gmail.com>
+ <04b7137a464e0925e2ae533bbde4fcdfe0dfe069.1744032780.git.ktokunaga.mail@gmail.com>
+ <e0dcc4e6-1e8e-468f-83e5-36ffb014eeef@linaro.org>
+From: Paolo Bonzini <pbonzini@redhat.com>
+Autocrypt: addr=pbonzini@redhat.com; keydata=
+ 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
+In-Reply-To: <e0dcc4e6-1e8e-468f-83e5-36ffb014eeef@linaro.org>
+X-Mimecast-Spam-Score: 0
+X-Mimecast-MFC-PROC-ID: othOeihyBQ9vNyKzMb4qvjtjyr4aIeRV7UqF3aU883M_1744205718
+X-Mimecast-Originator: redhat.com
 Content-Language: en-US
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-In-Reply-To: <24b5ff124d70043aff97dc30aa45f8a502676989.1744032780.git.ktokunaga.mail@gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::32e;
- envelope-from=philmd@linaro.org; helo=mail-wm1-x32e.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=170.10.129.124; envelope-from=pbonzini@redhat.com;
+ helo=us-smtp-delivery-124.mimecast.com
+X-Spam_score_int: -25
+X-Spam_score: -2.6
 X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+X-Spam_report: (-2.6 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.505,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_VALIDITY_CERTIFIED_BLOCKED=0.001,
+ RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -117,76 +168,53 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 7/4/25 16:45, Kohei Tokunaga wrote:
-> A TB consists of a wasmTBHeader followed by the data listed below. The
-> wasmTBHeader contains pointers for each element:
+On 4/9/25 12:55, Philippe Mathieu-Daudé wrote:
+> Cc'ing Pierrick
 > 
-> - TCI code
-> - Wasm code
-> - Array of function indices imported into the Wasm instance
-> - Counter tracking the number of TB executions
-> - Pointer to the Wasm instance information
-> 
-> The Wasm backend (tcg/wasm32.c) and Wasm instances running on the same
-> thread share information, such as CPUArchState, through a wasmContext
-> structure. The Wasm backend defines tcg_qemu_tb_exec as a common entry point
-> for TBs, similar to the TCI backend. tcg_qemu_tb_exec runs TBs on a forked
-> TCI interpreter by default, while compiles and executes frequently executed
-> TBs as Wasm.
-> 
-> The code generator (tcg/wasm32) receives TCG IR and generates both Wasm and
-> TCI instructions. Since Wasm cannot directly jump to specific addresses,
-> labels are implemented using Wasm control flow instructions. As shown in the
-> pseudo-code below, a TB wraps instructions in a large loop, where codes are
-> placed within if blocks separated by labels. Branching is handled by
-> breaking from the current block and entering the target block.
-> 
-> loop
->    if
->      ... code after label1
->    end
->    if
->      ... code after label2
->    end
->    ...
-> end
-> 
-> Additionally, the Wasm backend differs from other backends in several ways:
-> 
-> - goto_tb and goto_ptr return control to tcg_qemu_tb_exec which runs the
->    target TB
-> - Helper function pointers are stored in an array in TB and imported into
->    the Wasm instance on execution
-> - Wasm TBs lack prologue and epilogue. TBs are executed via tcg_qemu_tb_exec
-> 
-> Browsers cause out of memory error if too many Wasm instances are
-> created. To prevent this, the Wasm backend tracks active instances using an
-> array. When instantiating a new instance risks exceeding the limit, the
-> backend removes older instances to avoid browser errors. These removed
-> instances are re-instantiated when needed.
-> 
-> Signed-off-by: Kohei Tokunaga <ktokunaga.mail@gmail.com>
-> ---
->   include/accel/tcg/getpc.h        |    2 +-
->   include/tcg/helper-info.h        |    4 +-
->   include/tcg/tcg.h                |    2 +-
->   meson.build                      |    2 +
->   tcg/meson.build                  |    5 +
->   tcg/tcg.c                        |   26 +-
->   tcg/wasm32.c                     | 1260 +++++++++
->   tcg/wasm32.h                     |   39 +
->   tcg/wasm32/tcg-target-con-set.h  |   18 +
->   tcg/wasm32/tcg-target-con-str.h  |    8 +
->   tcg/wasm32/tcg-target-has.h      |  102 +
->   tcg/wasm32/tcg-target-mo.h       |   12 +
->   tcg/wasm32/tcg-target-opc.h.inc  |    4 +
->   tcg/wasm32/tcg-target-reg-bits.h |   12 +
->   tcg/wasm32/tcg-target.c.inc      | 4484 ++++++++++++++++++++++++++++++
->   tcg/wasm32/tcg-target.h          |   65 +
->   16 files changed, 6035 insertions(+), 10 deletions(-)
+> On 7/4/25 16:45, Kohei Tokunaga wrote:
+>> has_int128_type is set to false on emscripten as of now to avoid errors by
+>> libffi.
 
-Eh TBH this is too much to review as a single patch.
+What is the error here?  How hard would it be to test for it?
 
-Do you already have an idea how different the wasm64 implementation can
-be?
+>> And tests aren't integrated with Wasm execution environment as of
+>> now so this commit disables tests.
+
+Perhaps it would be enough to add
+
+[binaries]
+exe_wrapper = 'node'
+
+to the emscripten.txt file?
+
+>> +[built-in options]
+>> +c_args = ['-Wno-unused-command-line-argument','-g','-O3','-pthread']
+>> +cpp_args = ['-Wno-unused-command-line-argument','-g','-O3','-pthread']
+>> +objc_args = ['-Wno-unused-command-line-argument','-g','-O3','-pthread']
+>> +c_link_args = ['-Wno-unused-command-line-argument','-g','-O3','- 
+>> pthread','-sASYNCIFY=1','-sPROXY_TO_PTHREAD=1','-sFORCE_FILESYSTEM','- 
+>> sALLOW_TABLE_GROWTH','-sTOTAL_MEMORY=2GB','-sWASM_BIGINT','- 
+>> sEXPORT_ES6=1','-sASYNCIFY_IMPORTS=ffi_call_js','- 
+>> sEXPORTED_RUNTIME_METHODS=addFunction,removeFunction,TTY,FS']
+>> +cpp_link_args = ['-Wno-unused-command-line-argument','-g','-O3','- 
+>> pthread','-sASYNCIFY=1','-sPROXY_TO_PTHREAD=1','-sFORCE_FILESYSTEM','- 
+>> sALLOW_TABLE_GROWTH','-sTOTAL_MEMORY=2GB','-sWASM_BIGINT','- 
+>> sEXPORT_ES6=1','-sASYNCIFY_IMPORTS=ffi_call_js','- 
+>> sEXPORTED_RUNTIME_METHODS=addFunction,removeFunction,TTY,FS']
+
+At least -g -O3 -pthread should not be necessary.
+
+For -Wno-unused-command-line-argument what are the warnings/errors that 
+you are getting?
+
+>> +elif host_os == 'emscripten'
+>> +  supported_backends += ['fiber']
+
+Can you rename the backend to 'wasm' since the 'windows' backend also 
+uses an API called Fibers?
+
+Otherwise the changes look good.
+
+Paolo
+
 
