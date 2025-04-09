@@ -4,71 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3B8D0C36002
-	for <qemu-riscv@archiver.kernel.org>; Wed,  9 Apr 2025 13:44:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E9333C36002
+	for <qemu-riscv@archiver.kernel.org>; Wed,  9 Apr 2025 13:53:58 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1u2Vio-00041u-7M; Wed, 09 Apr 2025 09:44:06 -0400
+	id 1u2VsF-0008R4-Ut; Wed, 09 Apr 2025 09:53:51 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <ktokunaga.mail@gmail.com>)
- id 1u2Vil-00040U-GG; Wed, 09 Apr 2025 09:44:03 -0400
-Received: from mail-pg1-x52b.google.com ([2607:f8b0:4864:20::52b])
+ id 1u2VsD-0008Nj-RK; Wed, 09 Apr 2025 09:53:49 -0400
+Received: from mail-pj1-x1032.google.com ([2607:f8b0:4864:20::1032])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <ktokunaga.mail@gmail.com>)
- id 1u2Vij-00054Q-QE; Wed, 09 Apr 2025 09:44:03 -0400
-Received: by mail-pg1-x52b.google.com with SMTP id
- 41be03b00d2f7-af5085f7861so4312634a12.3; 
- Wed, 09 Apr 2025 06:44:00 -0700 (PDT)
+ id 1u2VsC-0006Km-9G; Wed, 09 Apr 2025 09:53:49 -0400
+Received: by mail-pj1-x1032.google.com with SMTP id
+ 98e67ed59e1d1-3015001f862so4703681a91.3; 
+ Wed, 09 Apr 2025 06:53:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1744206239; x=1744811039; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1744206817; x=1744811617; darn=nongnu.org;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=7WRCxQ0fv6SIwvkMjGKsLDz17EPd/4X8bE5zQtlb7Dc=;
- b=NDStpoHaGJ4mkW6KkdYXHFiDbzaalbE9bKUSYkVeMFZc3g4wJc08XfkRT2qeBEsm9w
- fnp6uH1zG5zUJzRoapSNcEjMyhX7NJB3249aqtxW4AvxgkLvp2AlGs68Pb+nnU5no/5W
- qN9O6VEF/c9IdQ/WoJkvBqzGkFpRBEFsVQ0Uu3xgSdGBpKi7U52rV2pduVguEUWgv/Sj
- 6x0SUHvYw9ztztEnIFJ4qaUKGwWvASgbws0jwlnVWa+5EOExUrpQ7KVGQKAruikai+pg
- RZmOdrFY+r3pxddZCXb+VSXhWkLPt4rXPgESxCRa5+8hdkt63zVb+Q4b3AnFjwCzJ9zX
- TvcQ==
+ bh=fO86AUOVMEMkyzgCe3CigxfkEKJzkLkqDXYq/IelJEs=;
+ b=XKpPdfrdvg4aGDpU44o6LMElElvo+OHzGT8TxqzC1p2gznM2Tm9+1r0Lh68oeyGoZU
+ lUtzQtO+N6Ig7MSgxlboui9pbxQRDOCf2Omeve7JakgdAr/7e+yfQSguUhhgkmaPeRkW
+ H1boLIFB1urvPMzNr9xdUcH7BaIM3PWOiwyz+newZrTR2D+0qHFQ5hmV729tgg+FgyWP
+ /72gmcUT/R68JvYnbySeVAzpxD69o9COiYet806BbHu7PembRxG1sy+RFRRhvd/HZp0N
+ KFMDny7hbhdOTqC571gM4N1BI766ad7p+7WH0oZrDilBt2md1+ABQcLy8lmN2SKdz2z6
+ qwmg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1744206239; x=1744811039;
+ d=1e100.net; s=20230601; t=1744206817; x=1744811617;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=7WRCxQ0fv6SIwvkMjGKsLDz17EPd/4X8bE5zQtlb7Dc=;
- b=KO1NK5LDFUhaXefXMDfzH6hFRjXSd8lE/D2623nkuYfwp3t+ssGodkkNvb/UaZd1RD
- QNHG9/FBGyROyVEYE7Ljs80FArMnQwU7bK0s5zBOF5zNfozZDjoMNCzINgSg2Lw/YeEz
- S1VhQIX1FObWHOQBoDSibbTjYy/g1vC283qrEFKfw7Rm2m3nOi+v4+ayQVb4MrjUDTPl
- kel0SjzSbvrzsCEY733sk8Xg88nNQAjup/yIxn32usHvZSuNVNTbbcCb+Jx36ez8+GK3
- FQCMTOGf5n4yZtkSWVAodZfbeOuj+qlLSorRwdpTfs85LMekOKUdjY6sUpcwW1rFyc6x
- hFyA==
+ bh=fO86AUOVMEMkyzgCe3CigxfkEKJzkLkqDXYq/IelJEs=;
+ b=LAN9r4Ofx/hcUY3cBlG80Eqf0b0VN8T6p9wl8UkZhGTDUAJ56SjsV9ChGyvUI/FpBx
+ uqepLLMP3KBPh3WLKoGc6H86kJpYTuy03p5vh7u4P6ElDaR0y7S9/gnMllEVrs9viTwt
+ /SxpWYwXQIe7DI5ITeAgFTzG48I490qt15t3S1QlZ1tyatpxwowBjTzlpsZ0y+hnmF0h
+ BVsvbtcnxK8fYTe3ARbfhoLndO8uCw5tceqU/Ois/ftJvG2+ZsvBoQbtEWATRdfthkWf
+ RqxbZBUauRpb3rWNRWlzzh4jh2AyafBNVhyZfYAhxy/l3d0k9/sEp0S8pi4CTRZtZo0W
+ X5bw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCU5rPzluOX0gM8jkt/ZHYmsG2Fi2S6mBZ1MlGNcJLdE743K5xxE8IVCYtftvhvEEjMqSb9njX3kULlIHQ==@nongnu.org,
- AJvYcCV6UUTVMixw9yyu2M25zGS5LWQnJmsCWRRr4LrcnaA3nqWywzTaybVYLCRXlvCP9trqZJCrayBxaPc2+Q==@nongnu.org,
- AJvYcCXNqJDaI6tMggSxtq9eKAqBZwIMbLstp5a5ISmlNVfbMmNj1jXB1wcLEpF1qU0Gi0Yaw/hPoHwEUw==@nongnu.org,
- AJvYcCXk51l3ffEVNEpFWgE0QZQsAUNV4pRK8EKxB9c+D6we8reOm70XBKSeCOK6QacBih30Asv1MQzWSmDhAQ==@nongnu.org
-X-Gm-Message-State: AOJu0YwOk6tI0JFSszZ0JCB/6BZMHUAgOmp2IzPw9wQLKE1F5bqpB2O8
- 9KwQK8hbWkyJD3SfXZrFZzeNBEhGANt7hYPaozC9+Kks6KsJUWhIUvVcwcHVWIji0x2kvUU9u38
- Ist+LZ0o/X3FRLr0UMKQCVfOzfQo=
-X-Gm-Gg: ASbGncvJvNWBfm025ug4zFLk1d3Y8MyPCwtzPg4CMeJHL6AOs7LDSkQaT3rYwZc0Uvi
- YaOpTOU7j7LVbBQoAm3kxNjeq2puWk6y9n1857E9CIl7eLOxhEFawqp3ol7rLd2K/rvldN/r1ig
- vS6vHJZJEecRwqfCV4efaDE9fwbIVTssuNOjqV90Thc8nPpcVKsn4z
-X-Google-Smtp-Source: AGHT+IFXWzfqLakx9M6dZ4ALZPiTfKwNqyqk2jNeFcKr4bAQKWLoP0KEuP5C/HqKpuL+JFdqJZAecFQa35Kb/Axltl0=
-X-Received: by 2002:a17:90b:524c:b0:2ff:7031:e380 with SMTP id
- 98e67ed59e1d1-306dd51c1fbmr3380071a91.10.1744206238901; Wed, 09 Apr 2025
- 06:43:58 -0700 (PDT)
+ AJvYcCUx5shGTqmjnq5p7qV6l1Yn9XzKIgNmhmn0qUbLWPE41FfeYmTaRlF/V7X10ZhQ7Xz261+yGI1XCxKo9A==@nongnu.org,
+ AJvYcCVnAT8bXwDSYIRC+e4eNyYrMQls4ZVOEWW532hOLBs4z+dCMMFe9bCY2tATwOMsylSNsUbOUZWJ2w==@nongnu.org,
+ AJvYcCWhv9yypBDDWJe1VD4+mluDiQR0TLmKmnzHzrg1YZc1hPS3hzDqUn3Z1roomPj/SdbxgU7i16Nsn4wi1g==@nongnu.org,
+ AJvYcCXSrbbXIrk8BT3HlI4OgesW5EF/9NaYREgSNUcQ/NcJbn7uV8XUHbaq5JgWhu0KE8KIa3jFvhtIAizhlg==@nongnu.org
+X-Gm-Message-State: AOJu0Yy4clBGuV61N7t+OvsfAU/iqIF2RDBHAJqIY3V6AsIWLv92YzO7
+ ZR5bTBcXRhj2ZRJWRHhdTX7WDYtbmddAkia+6QZ8y0FkWAyBCEQstge6UdujQGtfesWr/pJQyIs
+ aoCUEos9GM5UdS2jGAYK6uCNaJ1et+A4VAjs=
+X-Gm-Gg: ASbGncvhf+Tzj8JWXahnyH4OO8h/37qVgVkXvT+uiYYQB3R7bh7EK8aaNMaL2lczwWT
+ l/e2Gytt09TLLZS1llJ0zIbnNUTyuqS0mhVvqn/xqJaqqyu/HfU5yezEHwXviZIX4SJlJylHHba
+ g+ZLaCC+w7lE0y/cl3Kj0dugrUhs5TBLcVG9ubi1dlNlMXwlnlQ/uZRYGUNoa3iTo=
+X-Google-Smtp-Source: AGHT+IEcFr5+7WmmB/L2Y3x0x3gjpCLcCsTZwB8iEN3nZHLGE5ZN9jnOSQr5GjgYEdphHNdpy5MVCHMb1sEwGjJb6G4=
+X-Received: by 2002:a17:90b:380a:b0:2ff:570d:88c5 with SMTP id
+ 98e67ed59e1d1-306dbb8e6f7mr3966680a91.9.1744206817553; Wed, 09 Apr 2025
+ 06:53:37 -0700 (PDT)
 MIME-Version: 1.0
 References: <cover.1744032780.git.ktokunaga.mail@gmail.com>
- <2be81d2f86704662c9fa33ceb46077804e34ac77.1744032780.git.ktokunaga.mail@gmail.com>
- <e6cbd3ae-356d-4805-bca1-90b0e98c4d0d@linaro.org>
-In-Reply-To: <e6cbd3ae-356d-4805-bca1-90b0e98c4d0d@linaro.org>
+ <24b5ff124d70043aff97dc30aa45f8a502676989.1744032780.git.ktokunaga.mail@gmail.com>
+ <069ad872-5012-4f2a-8ba6-e2a22ce2bb49@linaro.org>
+In-Reply-To: <069ad872-5012-4f2a-8ba6-e2a22ce2bb49@linaro.org>
 From: Kohei Tokunaga <ktokunaga.mail@gmail.com>
-Date: Wed, 9 Apr 2025 22:43:47 +0900
-X-Gm-Features: ATxdqUGJYbgVid8JPlWlvpIaqs2sT8XB3K0JkCxK41xJBRJFA261zBnrmDF4fJM
-Message-ID: <CAEDrbUZwvhV_kiAZEdnk4AwPfpspEOLfhMsOuf_A+u2C4JK8fQ@mail.gmail.com>
-Subject: Re: [PATCH 01/10] various: Fix type conflict of GLib function pointers
+Date: Wed, 9 Apr 2025 22:53:26 +0900
+X-Gm-Features: ATxdqUHcy7JpXUs-uTpIxaoiUmvJiw4LWXS3bgs3RLqnCgbLDwbNS6L7a6WJOo4
+Message-ID: <CAEDrbUYX+i908=QxmvSt6SHAK9O6cwu9cT+5NbCw1xbwz3Ja7w@mail.gmail.com>
+Subject: Re: [PATCH 07/10] tcg: Add a TCG backend for WebAssembly
 To: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@linaro.org>, 
  qemu-devel@nongnu.org
 Cc: =?UTF-8?B?QWxleCBCZW5uw6ll?= <alex.bennee@linaro.org>, 
@@ -87,9 +87,9 @@ Cc: =?UTF-8?B?QWxleCBCZW5uw6ll?= <alex.bennee@linaro.org>,
  Eduardo Habkost <eduardo@habkost.net>, Peter Maydell <peter.maydell@linaro.org>,
  Stefan Hajnoczi <stefanha@redhat.com>, qemu-block@nongnu.org,
  qemu-riscv@nongnu.org, qemu-arm@nongnu.org
-Content-Type: multipart/alternative; boundary="00000000000048f169063258a961"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::52b;
- envelope-from=ktokunaga.mail@gmail.com; helo=mail-pg1-x52b.google.com
+Content-Type: multipart/alternative; boundary="000000000000c67982063258cbc5"
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1032;
+ envelope-from=ktokunaga.mail@gmail.com; helo=mail-pj1-x1032.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -112,38 +112,34 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
---00000000000048f169063258a961
+--000000000000c67982063258cbc5
 Content-Type: text/plain; charset="UTF-8"
 
-Hi Philippe, thank you for the comments.
-
-> > +static gpointer g_qtest_set_command_cb(
-> > +    bool (*pc_cb)(CharBackend *chr, gchar **words))
-> > +{
+> Eh TBH this is too much to review as a single patch.
 >
-> Why not use a GThreadFunc prototype, casting the argument?
+> Do you already have an idea how different the wasm64 implementation can
+be?
 
-Sure, I'll fix this.
-
-> OK for the rest, but it might help to merge by corresponding maintainers
-> if split in 3 distinct patches.
-
-Thank you for the suggestion. I'll split it to distinct patches in the next
+Sorry for the large patch. I'll split it into smaller patches in the next
 version of the series.
 
---00000000000048f169063258a961
+With wasm64, instructions that manipulate pointers (e.g., ld/st, qemu_ld/st)
+will be updated to handle 64bit pointers. I believe wasm64 will not require
+large changes to other parts, such as label handling, goto_tb/goto_ptr, or
+the forked TCI.
+
+--000000000000c67982063258cbc5
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-<div dir=3D"ltr"><div dir=3D"ltr">Hi Philippe, thank you for the comments. =
-<br><br>&gt; &gt; +static gpointer g_qtest_set_command_cb(<br>&gt; &gt; + =
-=C2=A0 =C2=A0bool (*pc_cb)(CharBackend *chr, gchar **words))<br>&gt; &gt; +=
-{<br>&gt;<br>&gt; Why not use a GThreadFunc prototype, casting the argument=
-?<br><br>Sure, I&#39;ll fix this.<br><br>&gt; OK for the rest, but it might=
- help to merge by corresponding maintainers<br>&gt; if split in 3 distinct =
-patches.<br><br>Thank you for the suggestion. I&#39;ll split it to distinct=
- patches in the next<br>version of the series.</div>
-</div>
+<div dir=3D"ltr"><div dir=3D"ltr">&gt; Eh TBH this is too much to review as=
+ a single patch.<br>&gt; <br>&gt; Do you already have an idea how different=
+ the wasm64 implementation can be?<br><br>Sorry for the large patch. I&#39;=
+ll split it into smaller patches in the next<br>version of the series.<br><=
+br>With wasm64, instructions that manipulate pointers (e.g., ld/st, qemu_ld=
+/st)<br>will be updated to handle 64bit pointers. I believe wasm64 will not=
+ require<br>large changes to other parts, such as label handling, goto_tb/g=
+oto_ptr, or<br>the forked TCI.<br><br><br></div></div>
 
---00000000000048f169063258a961--
+--000000000000c67982063258cbc5--
 
