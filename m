@@ -4,155 +4,99 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F2218C36002
-	for <qemu-riscv@archiver.kernel.org>; Wed,  9 Apr 2025 13:36:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3B8D0C36002
+	for <qemu-riscv@archiver.kernel.org>; Wed,  9 Apr 2025 13:44:15 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1u2VaX-00018S-0B; Wed, 09 Apr 2025 09:35:33 -0400
+	id 1u2Vio-00041u-7M; Wed, 09 Apr 2025 09:44:06 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <pbonzini@redhat.com>)
- id 1u2VaP-00014E-Bl
- for qemu-riscv@nongnu.org; Wed, 09 Apr 2025 09:35:25 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <pbonzini@redhat.com>)
- id 1u2VaL-0003fz-SI
- for qemu-riscv@nongnu.org; Wed, 09 Apr 2025 09:35:24 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1744205720;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
- bh=1TMoOKh1qF7O83Nj4d6TCIOVoyS54jKotwsf9ZbPvoA=;
- b=ReG7Mit0AwYjuZPIhwue8ux8iefDFUynIY2Z36NEJ3ti3cikYOuY9szh/tSTUxN5k9IMJ2
- OMr4CfjeQIYK0eMLhOHZfMga82KpKoY1auWUNOwaYl64XgPmcRo11oeq4bH58jdosuTjeX
- 3tTL4YnSI4t5+ZnT0Pu17EODvnivkJQ=
-Received: from mail-wm1-f72.google.com (mail-wm1-f72.google.com
- [209.85.128.72]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-595-qPCeS03PMfW8cf-xqu9wxA-1; Wed, 09 Apr 2025 09:35:19 -0400
-X-MC-Unique: qPCeS03PMfW8cf-xqu9wxA-1
-X-Mimecast-MFC-AGG-ID: qPCeS03PMfW8cf-xqu9wxA_1744205718
-Received: by mail-wm1-f72.google.com with SMTP id
- 5b1f17b1804b1-43d0a037f97so40901065e9.2
- for <qemu-riscv@nongnu.org>; Wed, 09 Apr 2025 06:35:19 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <ktokunaga.mail@gmail.com>)
+ id 1u2Vil-00040U-GG; Wed, 09 Apr 2025 09:44:03 -0400
+Received: from mail-pg1-x52b.google.com ([2607:f8b0:4864:20::52b])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <ktokunaga.mail@gmail.com>)
+ id 1u2Vij-00054Q-QE; Wed, 09 Apr 2025 09:44:03 -0400
+Received: by mail-pg1-x52b.google.com with SMTP id
+ 41be03b00d2f7-af5085f7861so4312634a12.3; 
+ Wed, 09 Apr 2025 06:44:00 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1744206239; x=1744811039; darn=nongnu.org;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=7WRCxQ0fv6SIwvkMjGKsLDz17EPd/4X8bE5zQtlb7Dc=;
+ b=NDStpoHaGJ4mkW6KkdYXHFiDbzaalbE9bKUSYkVeMFZc3g4wJc08XfkRT2qeBEsm9w
+ fnp6uH1zG5zUJzRoapSNcEjMyhX7NJB3249aqtxW4AvxgkLvp2AlGs68Pb+nnU5no/5W
+ qN9O6VEF/c9IdQ/WoJkvBqzGkFpRBEFsVQ0Uu3xgSdGBpKi7U52rV2pduVguEUWgv/Sj
+ 6x0SUHvYw9ztztEnIFJ4qaUKGwWvASgbws0jwlnVWa+5EOExUrpQ7KVGQKAruikai+pg
+ RZmOdrFY+r3pxddZCXb+VSXhWkLPt4rXPgESxCRa5+8hdkt63zVb+Q4b3AnFjwCzJ9zX
+ TvcQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1744205718; x=1744810518;
- h=content-transfer-encoding:in-reply-to:autocrypt:content-language
- :from:references:cc:to:subject:user-agent:mime-version:date
- :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1744206239; x=1744811039;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=1TMoOKh1qF7O83Nj4d6TCIOVoyS54jKotwsf9ZbPvoA=;
- b=K8m9LG9QUlwgScWgP/NmU8tkITluSLJV0KM14HrJJ15Jn2LVzH1CH4IhDdHGYJY+8R
- S14FhbH+MmWpccoMNWj0ciNbCgw5aKzwhM5lYK6HA7HCq/DVeIIgDi0A4qp8YUE7WiWG
- I0xgIfNzlvM/d8/UikKIXproLUi397Xk7q0ZL49EdP7CE+KSv0akjDXAsOIhqGDEYCYf
- Mzo1XlRcQjpKyQvC+vkDc1CZsid4fwfKYCQMmH6HSOa1xXAZdiEFGJ3asCjwhRDC5GZd
- XJSncWp49SNQfO8BVpPqKTLGhCXoqz8HIYcs3+LtuubJsq4w+AdsNhWpv895OnxWPehP
- 5log==
+ bh=7WRCxQ0fv6SIwvkMjGKsLDz17EPd/4X8bE5zQtlb7Dc=;
+ b=KO1NK5LDFUhaXefXMDfzH6hFRjXSd8lE/D2623nkuYfwp3t+ssGodkkNvb/UaZd1RD
+ QNHG9/FBGyROyVEYE7Ljs80FArMnQwU7bK0s5zBOF5zNfozZDjoMNCzINgSg2Lw/YeEz
+ S1VhQIX1FObWHOQBoDSibbTjYy/g1vC283qrEFKfw7Rm2m3nOi+v4+ayQVb4MrjUDTPl
+ kel0SjzSbvrzsCEY733sk8Xg88nNQAjup/yIxn32usHvZSuNVNTbbcCb+Jx36ez8+GK3
+ FQCMTOGf5n4yZtkSWVAodZfbeOuj+qlLSorRwdpTfs85LMekOKUdjY6sUpcwW1rFyc6x
+ hFyA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXWYIFhth88rNan8QvitBWwo3IejfZ71vT+EPrG/L02c8nPXK7K2IUPM8HTzh7DVNGOGVpJAsQSfNRe@nongnu.org
-X-Gm-Message-State: AOJu0Yx2nLBwJXN+HaE3hPEZyka+7tDQSNesHkfqowCcLle52it2XGiu
- 61LBIvdxfyuafrAnyzFcuP1VM1AUBioGQnGcsRiZVb0E+MFHSywE/eJiL2882Jywq5jkOykCY/+
- XWsW8g7v+637wt86G1ylcrCGfPCN/w8wvGRaEw7zjVSF4C3HLixdh
-X-Gm-Gg: ASbGncvK5EfP1QViywGiDYxpzyNgoqZDxx+aEaxL1opw4JC++CeiaCyB1TlAjWXeNGx
- SYiLPh5n1Al5WO17fjCtFVP8oRn4l9U51ia3gEE4BrTeEw/qNMZ0pRbsffoD15lBFDr5InNsdMp
- ovyTyXsPpLLjrPE3b1vI/BdMc3K8udTvCEbIonE0Ak21JU/y2L40EMfZyKNQ4rwhBmlXQpeK2Yv
- FhYWSfquE2FbayQJE2f6x6LaN+gViCw9R1dxG2iNLSZcav6mOiLMjn19/7zVF/eFPy6ZnmL+LZe
- ueSLdP8J4c/JNTFzEg==
-X-Received: by 2002:a05:600c:1f16:b0:43d:649:4e50 with SMTP id
- 5b1f17b1804b1-43f1fe01880mr25224485e9.13.1744205718183; 
- Wed, 09 Apr 2025 06:35:18 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IEs/T3rc+Oybpr9Hz3Z1Z9IwIpyXN6CLcOUDPhz3kXoRdi0AugoRCSdiPxuMN63M9/se3Ek6Q==
-X-Received: by 2002:a05:600c:1f16:b0:43d:649:4e50 with SMTP id
- 5b1f17b1804b1-43f1fe01880mr25224085e9.13.1744205717804; 
- Wed, 09 Apr 2025 06:35:17 -0700 (PDT)
-Received: from [192.168.10.48] ([176.206.110.254])
- by smtp.googlemail.com with ESMTPSA id
- ffacd0b85a97d-39d8938b5e7sm1703373f8f.55.2025.04.09.06.35.15
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 09 Apr 2025 06:35:17 -0700 (PDT)
-Message-ID: <671805c9-f802-412b-998e-ba83719f1e72@redhat.com>
-Date: Wed, 9 Apr 2025 15:35:14 +0200
+ AJvYcCU5rPzluOX0gM8jkt/ZHYmsG2Fi2S6mBZ1MlGNcJLdE743K5xxE8IVCYtftvhvEEjMqSb9njX3kULlIHQ==@nongnu.org,
+ AJvYcCV6UUTVMixw9yyu2M25zGS5LWQnJmsCWRRr4LrcnaA3nqWywzTaybVYLCRXlvCP9trqZJCrayBxaPc2+Q==@nongnu.org,
+ AJvYcCXNqJDaI6tMggSxtq9eKAqBZwIMbLstp5a5ISmlNVfbMmNj1jXB1wcLEpF1qU0Gi0Yaw/hPoHwEUw==@nongnu.org,
+ AJvYcCXk51l3ffEVNEpFWgE0QZQsAUNV4pRK8EKxB9c+D6we8reOm70XBKSeCOK6QacBih30Asv1MQzWSmDhAQ==@nongnu.org
+X-Gm-Message-State: AOJu0YwOk6tI0JFSszZ0JCB/6BZMHUAgOmp2IzPw9wQLKE1F5bqpB2O8
+ 9KwQK8hbWkyJD3SfXZrFZzeNBEhGANt7hYPaozC9+Kks6KsJUWhIUvVcwcHVWIji0x2kvUU9u38
+ Ist+LZ0o/X3FRLr0UMKQCVfOzfQo=
+X-Gm-Gg: ASbGncvJvNWBfm025ug4zFLk1d3Y8MyPCwtzPg4CMeJHL6AOs7LDSkQaT3rYwZc0Uvi
+ YaOpTOU7j7LVbBQoAm3kxNjeq2puWk6y9n1857E9CIl7eLOxhEFawqp3ol7rLd2K/rvldN/r1ig
+ vS6vHJZJEecRwqfCV4efaDE9fwbIVTssuNOjqV90Thc8nPpcVKsn4z
+X-Google-Smtp-Source: AGHT+IFXWzfqLakx9M6dZ4ALZPiTfKwNqyqk2jNeFcKr4bAQKWLoP0KEuP5C/HqKpuL+JFdqJZAecFQa35Kb/Axltl0=
+X-Received: by 2002:a17:90b:524c:b0:2ff:7031:e380 with SMTP id
+ 98e67ed59e1d1-306dd51c1fbmr3380071a91.10.1744206238901; Wed, 09 Apr 2025
+ 06:43:58 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 05/10] meson: Add wasm build in build scripts
-To: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Kohei Tokunaga <ktokunaga.mail@gmail.com>, qemu-devel@nongnu.org
-Cc: =?UTF-8?Q?Alex_Benn=C3=A9e?= <alex.bennee@linaro.org>,
- Thomas Huth <thuth@redhat.com>,
- Richard Henderson <richard.henderson@linaro.org>,
- Kevin Wolf <kwolf@redhat.com>, Hanna Reitz <hreitz@redhat.com>,
- Christian Schoenebeck <qemu_oss@crudebyte.com>, Greg Kurz <groug@kaod.org>,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, Weiwei Li
- <liwei1518@gmail.com>, Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- =?UTF-8?Q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>,
- =?UTF-8?Q?Daniel_P_=2E_Berrang=C3=A9?= <berrange@redhat.com>,
- Eduardo Habkost <eduardo@habkost.net>,
- Peter Maydell <peter.maydell@linaro.org>,
- Stefan Hajnoczi <stefanha@redhat.com>, qemu-block@nongnu.org,
- qemu-riscv@nongnu.org, qemu-arm@nongnu.org,
- Pierrick Bouvier <pierrick.bouvier@linaro.org>
 References: <cover.1744032780.git.ktokunaga.mail@gmail.com>
- <04b7137a464e0925e2ae533bbde4fcdfe0dfe069.1744032780.git.ktokunaga.mail@gmail.com>
- <e0dcc4e6-1e8e-468f-83e5-36ffb014eeef@linaro.org>
-From: Paolo Bonzini <pbonzini@redhat.com>
-Autocrypt: addr=pbonzini@redhat.com; keydata=
- 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
-In-Reply-To: <e0dcc4e6-1e8e-468f-83e5-36ffb014eeef@linaro.org>
-X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: othOeihyBQ9vNyKzMb4qvjtjyr4aIeRV7UqF3aU883M_1744205718
-X-Mimecast-Originator: redhat.com
-Content-Language: en-US
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=170.10.129.124; envelope-from=pbonzini@redhat.com;
- helo=us-smtp-delivery-124.mimecast.com
-X-Spam_score_int: -25
-X-Spam_score: -2.6
+ <2be81d2f86704662c9fa33ceb46077804e34ac77.1744032780.git.ktokunaga.mail@gmail.com>
+ <e6cbd3ae-356d-4805-bca1-90b0e98c4d0d@linaro.org>
+In-Reply-To: <e6cbd3ae-356d-4805-bca1-90b0e98c4d0d@linaro.org>
+From: Kohei Tokunaga <ktokunaga.mail@gmail.com>
+Date: Wed, 9 Apr 2025 22:43:47 +0900
+X-Gm-Features: ATxdqUGJYbgVid8JPlWlvpIaqs2sT8XB3K0JkCxK41xJBRJFA261zBnrmDF4fJM
+Message-ID: <CAEDrbUZwvhV_kiAZEdnk4AwPfpspEOLfhMsOuf_A+u2C4JK8fQ@mail.gmail.com>
+Subject: Re: [PATCH 01/10] various: Fix type conflict of GLib function pointers
+To: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@linaro.org>, 
+ qemu-devel@nongnu.org
+Cc: =?UTF-8?B?QWxleCBCZW5uw6ll?= <alex.bennee@linaro.org>, 
+ Thomas Huth <thuth@redhat.com>,
+ Richard Henderson <richard.henderson@linaro.org>, 
+ Paolo Bonzini <pbonzini@redhat.com>, Kevin Wolf <kwolf@redhat.com>,
+ Hanna Reitz <hreitz@redhat.com>, 
+ Christian Schoenebeck <qemu_oss@crudebyte.com>, Greg Kurz <groug@kaod.org>, 
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Weiwei Li <liwei1518@gmail.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>, 
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
+ =?UTF-8?B?TWFyYy1BbmRyw6kgTHVyZWF1?= <marcandre.lureau@redhat.com>, 
+ =?UTF-8?Q?Daniel_P_=2E_Berrang=C3=A9?= <berrange@redhat.com>, 
+ Eduardo Habkost <eduardo@habkost.net>, Peter Maydell <peter.maydell@linaro.org>,
+ Stefan Hajnoczi <stefanha@redhat.com>, qemu-block@nongnu.org,
+ qemu-riscv@nongnu.org, qemu-arm@nongnu.org
+Content-Type: multipart/alternative; boundary="00000000000048f169063258a961"
+Received-SPF: pass client-ip=2607:f8b0:4864:20::52b;
+ envelope-from=ktokunaga.mail@gmail.com; helo=mail-pg1-x52b.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
 X-Spam_bar: --
-X-Spam_report: (-2.6 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.505,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_VALIDITY_CERTIFIED_BLOCKED=0.001,
- RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
+ HTML_MESSAGE=0.001, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -168,53 +112,38 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 4/9/25 12:55, Philippe Mathieu-Daudé wrote:
-> Cc'ing Pierrick
-> 
-> On 7/4/25 16:45, Kohei Tokunaga wrote:
->> has_int128_type is set to false on emscripten as of now to avoid errors by
->> libffi.
+--00000000000048f169063258a961
+Content-Type: text/plain; charset="UTF-8"
 
-What is the error here?  How hard would it be to test for it?
+Hi Philippe, thank you for the comments.
 
->> And tests aren't integrated with Wasm execution environment as of
->> now so this commit disables tests.
+> > +static gpointer g_qtest_set_command_cb(
+> > +    bool (*pc_cb)(CharBackend *chr, gchar **words))
+> > +{
+>
+> Why not use a GThreadFunc prototype, casting the argument?
 
-Perhaps it would be enough to add
+Sure, I'll fix this.
 
-[binaries]
-exe_wrapper = 'node'
+> OK for the rest, but it might help to merge by corresponding maintainers
+> if split in 3 distinct patches.
 
-to the emscripten.txt file?
+Thank you for the suggestion. I'll split it to distinct patches in the next
+version of the series.
 
->> +[built-in options]
->> +c_args = ['-Wno-unused-command-line-argument','-g','-O3','-pthread']
->> +cpp_args = ['-Wno-unused-command-line-argument','-g','-O3','-pthread']
->> +objc_args = ['-Wno-unused-command-line-argument','-g','-O3','-pthread']
->> +c_link_args = ['-Wno-unused-command-line-argument','-g','-O3','- 
->> pthread','-sASYNCIFY=1','-sPROXY_TO_PTHREAD=1','-sFORCE_FILESYSTEM','- 
->> sALLOW_TABLE_GROWTH','-sTOTAL_MEMORY=2GB','-sWASM_BIGINT','- 
->> sEXPORT_ES6=1','-sASYNCIFY_IMPORTS=ffi_call_js','- 
->> sEXPORTED_RUNTIME_METHODS=addFunction,removeFunction,TTY,FS']
->> +cpp_link_args = ['-Wno-unused-command-line-argument','-g','-O3','- 
->> pthread','-sASYNCIFY=1','-sPROXY_TO_PTHREAD=1','-sFORCE_FILESYSTEM','- 
->> sALLOW_TABLE_GROWTH','-sTOTAL_MEMORY=2GB','-sWASM_BIGINT','- 
->> sEXPORT_ES6=1','-sASYNCIFY_IMPORTS=ffi_call_js','- 
->> sEXPORTED_RUNTIME_METHODS=addFunction,removeFunction,TTY,FS']
+--00000000000048f169063258a961
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-At least -g -O3 -pthread should not be necessary.
+<div dir=3D"ltr"><div dir=3D"ltr">Hi Philippe, thank you for the comments. =
+<br><br>&gt; &gt; +static gpointer g_qtest_set_command_cb(<br>&gt; &gt; + =
+=C2=A0 =C2=A0bool (*pc_cb)(CharBackend *chr, gchar **words))<br>&gt; &gt; +=
+{<br>&gt;<br>&gt; Why not use a GThreadFunc prototype, casting the argument=
+?<br><br>Sure, I&#39;ll fix this.<br><br>&gt; OK for the rest, but it might=
+ help to merge by corresponding maintainers<br>&gt; if split in 3 distinct =
+patches.<br><br>Thank you for the suggestion. I&#39;ll split it to distinct=
+ patches in the next<br>version of the series.</div>
+</div>
 
-For -Wno-unused-command-line-argument what are the warnings/errors that 
-you are getting?
-
->> +elif host_os == 'emscripten'
->> +  supported_backends += ['fiber']
-
-Can you rename the backend to 'wasm' since the 'windows' backend also 
-uses an API called Fibers?
-
-Otherwise the changes look good.
-
-Paolo
-
+--00000000000048f169063258a961--
 
