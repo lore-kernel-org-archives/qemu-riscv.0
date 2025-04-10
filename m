@@ -4,47 +4,47 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B114CC3601E
-	for <qemu-riscv@archiver.kernel.org>; Thu, 10 Apr 2025 04:45:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F3B36C3601E
+	for <qemu-riscv@archiver.kernel.org>; Thu, 10 Apr 2025 07:24:03 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1u2jme-00028i-6O; Thu, 10 Apr 2025 00:45:00 -0400
+	id 1u2mGC-0002aW-PP; Thu, 10 Apr 2025 03:23:41 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhao1.liu@intel.com>)
- id 1u2jmQ-00027g-8T; Thu, 10 Apr 2025 00:44:47 -0400
-Received: from mgamail.intel.com ([198.175.65.9])
+ id 1u2mFv-0002ZA-98; Thu, 10 Apr 2025 03:23:25 -0400
+Received: from mgamail.intel.com ([192.198.163.13])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhao1.liu@intel.com>)
- id 1u2jmL-0002My-8h; Thu, 10 Apr 2025 00:44:44 -0400
+ id 1u2mFr-0001d0-Ee; Thu, 10 Apr 2025 03:23:22 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1744260282; x=1775796282;
+ t=1744269799; x=1775805799;
  h=date:from:to:cc:subject:message-id:references:
  mime-version:in-reply-to;
- bh=aTdHpc5rDqraycZTf4nOde0tkf7843YMHFrARQ0hu2s=;
- b=l15hMNxjUwQ3vRLclCDGaU9h1fRcMCyNTRMm0GruP4BpQBKFEA2yZGNs
- 2fpy6Dv5/d19tmEkaEutUkHWiok19w+GDO0ybSuZsEDf2GllRfGJRqrzu
- 5Ok4NyPWKPFhpp5vLLGvPfhkoyVF+YjWP8WzMwgTnClzVs3tLbezWz5yB
- fC+yEzZ1KFF5tAGgD6cMBlNvRNYteHVW6VfwYkAJ7EwCFSDqJn3UmOGbx
- neTymY2is79vzzzuthPdeH0bRH1U6vmH5FS06JRewJAXwVI3fyd2JXBSs
- kU/6ZazWFjkJxx5UnWcGDkJQMQTM69+vGV/0Ke5k7XGXhu5hMSyLLUHzJ A==;
-X-CSE-ConnectionGUID: 4brudUYCQlm5sIBfwohjkQ==
-X-CSE-MsgGUID: HT+NLh19RYq6nyrYBMk3Qg==
-X-IronPort-AV: E=McAfee;i="6700,10204,11399"; a="68245487"
-X-IronPort-AV: E=Sophos;i="6.15,202,1739865600"; d="scan'208";a="68245487"
-Received: from fmviesa009.fm.intel.com ([10.60.135.149])
- by orvoesa101.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 09 Apr 2025 21:44:36 -0700
-X-CSE-ConnectionGUID: qcSZQYFES12pOlD3NIbIBQ==
-X-CSE-MsgGUID: RIwOMItmTjud9lN6+3ArRQ==
+ bh=Lh9jXEP9tgVr78Y+bjPvBpsrVvBVBSu8yVPe3X6/PBk=;
+ b=nRSb0qd0mPvsnCA8UggK+s4HYDYYQqiZHFFKu2AgqgRgHa5OErudp0kh
+ dPSwh8QqCcAJzjAZEsnMMCnieQhOcVkL7ACndmJPk/WpbHJQhGBrDR7sN
+ Lysqx2d25eDSWh3e1Odxb/56DgVXlReueZ1Pg0v5Be7d9xtvp4MOPEJEG
+ Qsuo9TFSxOaYOmsezbLCMlPJUqGt28hi7VFvu6fmhmuzzNIKZVRx5hPmU
+ ZigwN8HYEdRwAxsQHegTcV+XcF7S1o03cSxSSZ5fHm1ZOim03DgidL94y
+ c74j86YTvk7wyg3UJbIoIelKTCqebbc9mxwqZtBYRfKHO0zEKxYN7L57+ Q==;
+X-CSE-ConnectionGUID: NOrZ43W/SsKlMPxVOpa4XA==
+X-CSE-MsgGUID: o8wDdkHJQ6+PtL+MBLCRVA==
+X-IronPort-AV: E=McAfee;i="6700,10204,11399"; a="48477565"
+X-IronPort-AV: E=Sophos;i="6.15,202,1739865600"; d="scan'208";a="48477565"
+Received: from fmviesa006.fm.intel.com ([10.60.135.146])
+ by fmvoesa107.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 10 Apr 2025 00:23:14 -0700
+X-CSE-ConnectionGUID: XUminAD6T0GYkRlVFemdzg==
+X-CSE-MsgGUID: pctWMc5OS/GsMX0hxH8+og==
 X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.15,202,1739865600"; d="scan'208";a="129620583"
+X-IronPort-AV: E=Sophos;i="6.15,202,1739865600"; d="scan'208";a="128681029"
 Received: from liuzhao-optiplex-7080.sh.intel.com (HELO localhost)
  ([10.239.160.39])
- by fmviesa009.fm.intel.com with ESMTP; 09 Apr 2025 21:44:26 -0700
-Date: Thu, 10 Apr 2025 13:05:15 +0800
+ by fmviesa006.fm.intel.com with ESMTP; 10 Apr 2025 00:23:05 -0700
+Date: Thu, 10 Apr 2025 15:43:53 +0800
 From: Zhao Liu <zhao1.liu@intel.com>
 To: Dongli Zhang <dongli.zhang@oracle.com>
 Cc: qemu-devel@nongnu.org, kvm@vger.kernel.org, qemu-arm@nongnu.org,
@@ -65,15 +65,16 @@ Cc: qemu-devel@nongnu.org, kvm@vger.kernel.org, qemu-arm@nongnu.org,
  thuth@redhat.com, flavra@baylibre.com, ewanhai-oc@zhaoxin.com,
  ewanhai@zhaoxin.com, cobechen@zhaoxin.com, louisqi@zhaoxin.com,
  liamni@zhaoxin.com, frankzhu@zhaoxin.com, silviazhao@zhaoxin.com
-Subject: Re: [PATCH v3 07/10] target/i386/kvm: query kvm.enable_pmu parameter
-Message-ID: <Z/dRiyGTxb8JBE8v@intel.com>
+Subject: Re: [PATCH v3 08/10] target/i386/kvm: reset AMD PMU registers during
+ VM reset
+Message-ID: <Z/d2ucu6Y5xlNh6S@intel.com>
 References: <20250331013307.11937-1-dongli.zhang@oracle.com>
- <20250331013307.11937-8-dongli.zhang@oracle.com>
+ <20250331013307.11937-9-dongli.zhang@oracle.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20250331013307.11937-8-dongli.zhang@oracle.com>
-Received-SPF: pass client-ip=198.175.65.9; envelope-from=zhao1.liu@intel.com;
+In-Reply-To: <20250331013307.11937-9-dongli.zhang@oracle.com>
+Received-SPF: pass client-ip=192.198.163.13; envelope-from=zhao1.liu@intel.com;
  helo=mgamail.intel.com
 X-Spam_score_int: -48
 X-Spam_score: -4.9
@@ -98,136 +99,99 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Hi Dongli,
+...
 
-The logic is fine for me :-) And thank you to take my previous
-suggestion. When I revisit here after these few weeks, I have some
-thoughts:
+> TODO:
+>   - This patch adds is_host_compat_vendor(), while there are something
+>     like is_host_cpu_intel() from target/i386/kvm/vmsr_energy.c. A rework
+>     may help move those helpers to target/i386/cpu*.
 
-> +        if (pmu_cap) {
-> +            if ((pmu_cap & KVM_PMU_CAP_DISABLE) &&
-> +                !X86_CPU(cpu)->enable_pmu) {
-> +                ret = kvm_vm_enable_cap(kvm_state, KVM_CAP_PMU_CAPABILITY, 0,
-> +                                        KVM_PMU_CAP_DISABLE);
-> +                if (ret < 0) {
-> +                    error_setg_errno(errp, -ret,
-> +                                     "Failed to set KVM_PMU_CAP_DISABLE");
-> +                    return ret;
-> +                }
-> +            }
+vmsr_energy emulates RAPL in user space...but RAPL is not architectural
+(no CPUID), so this case doesn't need to consider "compat" vendor.
 
-This case enhances vPMU disablement.
+>  target/i386/cpu.h     |   8 ++
+>  target/i386/kvm/kvm.c | 176 +++++++++++++++++++++++++++++++++++++++++-
+>  2 files changed, 180 insertions(+), 4 deletions(-)
 
-> +        } else {
-> +            /*
-> +             * KVM_CAP_PMU_CAPABILITY is introduced in Linux v5.18. For old
-> +             * linux, we have to check enable_pmu parameter for vPMU support.
-> +             */
-> +            g_autofree char *kvm_enable_pmu;
+...
+
+> +static bool is_host_compat_vendor(CPUX86State *env)
+> +{
+> +    char host_vendor[CPUID_VENDOR_SZ + 1];
+> +    uint32_t host_cpuid_vendor1;
+> +    uint32_t host_cpuid_vendor2;
+> +    uint32_t host_cpuid_vendor3;
+>
+> +    host_cpuid(0x0, 0, NULL, &host_cpuid_vendor1, &host_cpuid_vendor3,
+> +               &host_cpuid_vendor2);
 > +
-> +            /*
-> +             * The kvm.enable_pmu's permission is 0444. It does not change until
-> +             * a reload of the KVM module.
-> +             */
-> +            if (g_file_get_contents("/sys/module/kvm/parameters/enable_pmu",
-> +                                    &kvm_enable_pmu, NULL, NULL)) {
-> +                if (*kvm_enable_pmu == 'N' && X86_CPU(cpu)->enable_pmu) {
-> +                    error_setg(errp, "Failed to enable PMU since "
-> +                               "KVM's enable_pmu parameter is disabled");
-> +                    return -EPERM;
-> +                }
+> +    x86_cpu_vendor_words2str(host_vendor, host_cpuid_vendor1,
+> +                             host_cpuid_vendor2, host_cpuid_vendor3);
 
-And this case checks if vPMU could enable.
+We can use host_cpu_vendor_fms() (with a little change). If you like
+this idea, pls feel free to pick my cleanup patch into your series.
 
->              }
->          }
->      }
+> +    /*
+> +     * Intel and Zhaoxin are compatible.
+> +     */
+> +    if ((g_str_equal(host_vendor, CPUID_VENDOR_INTEL) ||
+> +         g_str_equal(host_vendor, CPUID_VENDOR_ZHAOXIN1) ||
+> +         g_str_equal(host_vendor, CPUID_VENDOR_ZHAOXIN2)) &&
+> +        (IS_INTEL_CPU(env) || IS_ZHAOXIN_CPU(env))) {
+> +        return true;
+> +    }
+> +
+> +    return env->cpuid_vendor1 == host_cpuid_vendor1 &&
+> +           env->cpuid_vendor2 == host_cpuid_vendor2 &&
+> +           env->cpuid_vendor3 == host_cpuid_vendor3;
 
-So I feel it's not good enough to check based on pmu_cap, we can
-re-split it into these two cases: enable_pmu and !enable_pmu. Then we
-can make the code path more clear!
+Checking AMD directly makes the "compat" rule clear:
 
-Just like:
+    return g_str_equal(host_vendor, CPUID_VENDOR_AMD) &&
+           IS_AMD_CPU(env);
 
-diff --git a/target/i386/kvm/kvm.c b/target/i386/kvm/kvm.c
-index f68d5a057882..d728fb5eaec6 100644
---- a/target/i386/kvm/kvm.c
-+++ b/target/i386/kvm/kvm.c
-@@ -2041,44 +2041,42 @@ int kvm_arch_pre_create_vcpu(CPUState *cpu, Error **errp)
-     if (first) {
-         first = false;
+> +}
 
--        /*
--         * Since Linux v5.18, KVM provides a VM-level capability to easily
--         * disable PMUs; however, QEMU has been providing PMU property per
--         * CPU since v1.6. In order to accommodate both, have to configure
--         * the VM-level capability here.
--         *
--         * KVM_PMU_CAP_DISABLE doesn't change the PMU
--         * behavior on Intel platform because current "pmu" property works
--         * as expected.
--         */
--        if (pmu_cap) {
--            if ((pmu_cap & KVM_PMU_CAP_DISABLE) &&
--                !X86_CPU(cpu)->enable_pmu) {
--                ret = kvm_vm_enable_cap(kvm_state, KVM_CAP_PMU_CAPABILITY, 0,
--                                        KVM_PMU_CAP_DISABLE);
--                if (ret < 0) {
--                    error_setg_errno(errp, -ret,
--                                     "Failed to set KVM_PMU_CAP_DISABLE");
--                    return ret;
--                }
--            }
--        } else {
--            /*
--             * KVM_CAP_PMU_CAPABILITY is introduced in Linux v5.18. For old
--             * linux, we have to check enable_pmu parameter for vPMU support.
--             */
-+        if (X86_CPU(cpu)->enable_pmu) {
-             g_autofree char *kvm_enable_pmu;
+...
 
-             /*
--             * The kvm.enable_pmu's permission is 0444. It does not change until
--             * a reload of the KVM module.
-+             * The enable_pmu parameter is introduced since Linux v5.17,
-+             * give a chance to provide more information about vPMU
-+             * enablement.
-+             *
-+             * The kvm.enable_pmu's permission is 0444. It does not change
-+             * until a reload of the KVM module.
-              */
-             if (g_file_get_contents("/sys/module/kvm/parameters/enable_pmu",
-                                     &kvm_enable_pmu, NULL, NULL)) {
--                if (*kvm_enable_pmu == 'N' && X86_CPU(cpu)->enable_pmu) {
--                    error_setg(errp, "Failed to enable PMU since "
-+                if (*kvm_enable_pmu == 'N') {
-+                    warn_report("Failed to enable PMU since "
-                                "KVM's enable_pmu parameter is disabled");
--                    return -EPERM;
-+                }
-+            }
-+        } else {
-+            /*
-+             * Since Linux v5.18, KVM provides a VM-level capability to easily
-+             * disable PMUs; however, QEMU has been providing PMU property per
-+             * CPU since v1.6. In order to accommodate both, have to configure
-+             * the VM-level capability here.
-+             *
-+             * KVM_PMU_CAP_DISABLE doesn't change the PMU
-+             * behavior on Intel platform because current "pmu" property works
-+             * as expected.
-+             */
-+            if ((pmu_cap & KVM_PMU_CAP_DISABLE)) {
-+                ret = kvm_vm_enable_cap(kvm_state, KVM_CAP_PMU_CAPABILITY, 0,
-+                                        KVM_PMU_CAP_DISABLE);
-+                if (ret < 0) {
-+                    error_setg_errno(errp, -ret,
-+                                     "Failed to set KVM_PMU_CAP_DISABLE");
-+                    return ret;
-                 }
-             }
-         }
+>      if (env->mcg_cap) {
+>          kvm_msr_entry_add(cpu, MSR_MCG_STATUS, 0);
+>          kvm_msr_entry_add(cpu, MSR_MCG_CTL, 0);
+> @@ -4871,6 +5024,21 @@ static int kvm_get_msrs(X86CPU *cpu)
+>          case MSR_P6_EVNTSEL0 ... MSR_P6_EVNTSEL0 + MAX_GP_COUNTERS - 1:
+>              env->msr_gp_evtsel[index - MSR_P6_EVNTSEL0] = msrs[i].data;
+>              break;
+> +        case MSR_K7_EVNTSEL0 ... MSR_K7_EVNTSEL0 + AMD64_NUM_COUNTERS - 1:
+> +            env->msr_gp_evtsel[index - MSR_K7_EVNTSEL0] = msrs[i].data;
+> +            break;
+> +        case MSR_K7_PERFCTR0 ... MSR_K7_PERFCTR0 + AMD64_NUM_COUNTERS - 1:
+> +            env->msr_gp_counters[index - MSR_K7_PERFCTR0] = msrs[i].data;
+> +            break;
+> +        case MSR_F15H_PERF_CTL0 ...
+> +             MSR_F15H_PERF_CTL0 + AMD64_NUM_COUNTERS_CORE * 2 - 1:
+> +            index = index - MSR_F15H_PERF_CTL0;
+> +            if (index & 0x1) {
+> +                env->msr_gp_counters[index] = msrs[i].data;
+> +            } else {
+> +                env->msr_gp_evtsel[index] = msrs[i].data;
 
+This msr_gp_evtsel[] array's size is 18:
 
+#define MAX_GP_COUNTERS    (MSR_IA32_PERF_STATUS - MSR_P6_EVNTSEL0)
+
+This formula is based on Intel's MSR, it's best to add a note that the
+current size also meets AMD's needs. (No need to adjust the size, as
+it will affect migration).
+
+> +            }
+> +            break;
+>          case HV_X64_MSR_HYPERCALL:
+>              env->msr_hv_hypercall = msrs[i].data;
+>              break;
+
+Others LGTM!
+
+Thanks,
+Zhao
 
 
