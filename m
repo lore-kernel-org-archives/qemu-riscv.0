@@ -4,47 +4,47 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 92E9AC3601E
-	for <qemu-riscv@archiver.kernel.org>; Thu, 10 Apr 2025 08:01:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EF1B2C3601E
+	for <qemu-riscv@archiver.kernel.org>; Thu, 10 Apr 2025 09:25:40 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1u2mqY-00060k-E9; Thu, 10 Apr 2025 04:01:14 -0400
+	id 1u2o9s-0006wI-Ap; Thu, 10 Apr 2025 05:25:16 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhao1.liu@intel.com>)
- id 1u2mqG-0005yO-U1; Thu, 10 Apr 2025 04:01:02 -0400
-Received: from mgamail.intel.com ([198.175.65.19])
+ id 1u2o9l-0006si-UX; Thu, 10 Apr 2025 05:25:10 -0400
+Received: from mgamail.intel.com ([192.198.163.12])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhao1.liu@intel.com>)
- id 1u2mqC-00073D-R2; Thu, 10 Apr 2025 04:00:56 -0400
+ id 1u2o9j-00026A-9F; Thu, 10 Apr 2025 05:25:09 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1744272053; x=1775808053;
+ t=1744277107; x=1775813107;
  h=date:from:to:cc:subject:message-id:references:
  mime-version:in-reply-to;
- bh=Fog4B6Qbd8u1Pqc/gI0bDG41NJadwivsKQhqgMevtPQ=;
- b=mzPuRRw891rlTsFM9OO202Ka3ZXrlJ91N6PXOSuruai/PJEW/HcKFgZU
- RmY8E3264DeRs8AUGl4vFnliNvRNt/kHVXfsMfOSY1PJpKRxyOdTEMR8D
- mWhfjd+NFEpNc53E2atNS+l+/juigl2GUBgOI4X5TSz8ZKRXsNJGdBoma
- fGfgQqQWz+sP8Q68pWNPFTQ9p2yhn89GFbtEPEYNxeoPUx1/r04Xh9EsP
- EUpLXUn2dORtSx2QiZyU3eZcF9SxYQvWO29JBSI27kg43vuCCUwQTDL9j
- uh2ZybZVUJhT0eVTad5YAPjn4E7QzRWZ1P4w2Qotv48tErYJQNizk/qEa g==;
-X-CSE-ConnectionGUID: rOTq+PxKToCFEqu+7R8Pgg==
-X-CSE-MsgGUID: 5nbWWZGTTr2nptxVLb7TFg==
-X-IronPort-AV: E=McAfee;i="6700,10204,11399"; a="45668210"
-X-IronPort-AV: E=Sophos;i="6.15,202,1739865600"; d="scan'208";a="45668210"
-Received: from orviesa005.jf.intel.com ([10.64.159.145])
- by orvoesa111.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 10 Apr 2025 01:00:39 -0700
-X-CSE-ConnectionGUID: GCO21CPgQjmbraiccL1yeA==
-X-CSE-MsgGUID: CwIZbOfJSLOTUfZSSHQyug==
+ bh=vWFTCAHyc4ZZSNblinRf0t8BBfuIQYEI8cO6hq8NbrA=;
+ b=CAGLPQl78R5F/0eb8DNCrhKsax4H8oLxcWT2JI5YQkfjoPvE6V3ZsJZs
+ z6DogORdau5iKKoShp6lla52jwJmoJPjtQ7uqxf+1nPyxt3JNrHHEzdP7
+ OIkum8zy1tUayGCMXP/NY6axmXrwUjjHoBhxooKmShKeatvnl5hzegPUG
+ F3katX1LpNIjL8ETP0+30y+R/SLTxC0OSxqZh0qlORH9BwUH3p/lMBl9U
+ n3vMKzwlJMmIbUmphPOQrtEKDYCtYTETaKAPTJGWC4MWJLq1eJiR/99jr
+ 8QIq0jIjVJa0ITghG3jyOYj5mX86KDQIvyydEc+VwrbOG+pG323l7xoIo A==;
+X-CSE-ConnectionGUID: Xx6nNb4dTQGIrOXlLCgZuA==
+X-CSE-MsgGUID: hE6bzLpVRNKkM6EHcckQPw==
+X-IronPort-AV: E=McAfee;i="6700,10204,11399"; a="49625375"
+X-IronPort-AV: E=Sophos;i="6.15,202,1739865600"; d="scan'208";a="49625375"
+Received: from fmviesa009.fm.intel.com ([10.60.135.149])
+ by fmvoesa106.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 10 Apr 2025 02:25:00 -0700
+X-CSE-ConnectionGUID: 7EFLD+8sQoiP2fdPZgk4+Q==
+X-CSE-MsgGUID: aiCRLBNDQsqVw5PNhNlRAg==
 X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.15,202,1739865600"; d="scan'208";a="134019949"
+X-IronPort-AV: E=Sophos;i="6.15,202,1739865600"; d="scan'208";a="129685784"
 Received: from liuzhao-optiplex-7080.sh.intel.com (HELO localhost)
  ([10.239.160.39])
- by orviesa005.jf.intel.com with ESMTP; 10 Apr 2025 01:00:28 -0700
-Date: Thu, 10 Apr 2025 16:21:18 +0800
+ by fmviesa009.fm.intel.com with ESMTP; 10 Apr 2025 02:24:51 -0700
+Date: Thu, 10 Apr 2025 17:45:41 +0800
 From: Zhao Liu <zhao1.liu@intel.com>
 To: Dongli Zhang <dongli.zhang@oracle.com>
 Cc: qemu-devel@nongnu.org, kvm@vger.kernel.org, qemu-arm@nongnu.org,
@@ -65,15 +65,15 @@ Cc: qemu-devel@nongnu.org, kvm@vger.kernel.org, qemu-arm@nongnu.org,
  thuth@redhat.com, flavra@baylibre.com, ewanhai-oc@zhaoxin.com,
  ewanhai@zhaoxin.com, cobechen@zhaoxin.com, louisqi@zhaoxin.com,
  liamni@zhaoxin.com, frankzhu@zhaoxin.com, silviazhao@zhaoxin.com
-Subject: Re: [PATCH v3 09/10] target/i386/kvm: support perfmon-v2 for reset
-Message-ID: <Z/d/ft0CufA8prwl@intel.com>
+Subject: Re: [PATCH v3 10/10] target/i386/kvm: don't stop Intel PMU counters
+Message-ID: <Z/eTRVSveNMwZBaa@intel.com>
 References: <20250331013307.11937-1-dongli.zhang@oracle.com>
- <20250331013307.11937-10-dongli.zhang@oracle.com>
+ <20250331013307.11937-11-dongli.zhang@oracle.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20250331013307.11937-10-dongli.zhang@oracle.com>
-Received-SPF: pass client-ip=198.175.65.19; envelope-from=zhao1.liu@intel.com;
+In-Reply-To: <20250331013307.11937-11-dongli.zhang@oracle.com>
+Received-SPF: pass client-ip=192.198.163.12; envelope-from=zhao1.liu@intel.com;
  helo=mgamail.intel.com
 X-Spam_score_int: -48
 X-Spam_score: -4.9
@@ -98,54 +98,38 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Sun, Mar 30, 2025 at 06:32:28PM -0700, Dongli Zhang wrote:
-> Date: Sun, 30 Mar 2025 18:32:28 -0700
+On Sun, Mar 30, 2025 at 06:32:29PM -0700, Dongli Zhang wrote:
+> Date: Sun, 30 Mar 2025 18:32:29 -0700
 > From: Dongli Zhang <dongli.zhang@oracle.com>
-> Subject: [PATCH v3 09/10] target/i386/kvm: support perfmon-v2 for reset
+> Subject: [PATCH v3 10/10] target/i386/kvm: don't stop Intel PMU counters
 > X-Mailer: git-send-email 2.43.5
 > 
-> Since perfmon-v2, the AMD PMU supports additional registers. This update
-> includes get/put functionality for these extra registers.
+> The kvm_put_msrs() sets the MSRs using KVM_SET_MSRS. The x86 KVM processes
+> these MSRs one by one in a loop, only saving the config and triggering the
+> KVM_REQ_PMU request. This approach does not immediately stop the event
+> before updating PMC.
+
+This is ture after KVM's 68fb4757e867 (v6.2). QEMU even supports v4.5
+(docs/system/target-i386.rst)... I'm not sure whether it is outdated,
+but it's better to mention the Linux version.
+
+> In additional, PMU MSRs are set only at levels >= KVM_PUT_RESET_STATE,
+> excluding runtime. Therefore, updating these MSRs without stopping events
+> should be acceptable.
+
+I agree.
+
+> Finally, KVM creates kernel perf events with host mode excluded
+> (exclude_host = 1). While the events remain active, they don't increment
+> the counter during QEMU vCPU userspace mode.
 > 
-> Similar to the implementation in KVM:
-> 
-> - MSR_CORE_PERF_GLOBAL_STATUS and MSR_AMD64_PERF_CNTR_GLOBAL_STATUS both
-> use env->msr_global_status.
-> - MSR_CORE_PERF_GLOBAL_CTRL and MSR_AMD64_PERF_CNTR_GLOBAL_CTL both use
-> env->msr_global_ctrl.
-> - MSR_CORE_PERF_GLOBAL_OVF_CTRL and MSR_AMD64_PERF_CNTR_GLOBAL_STATUS_CLR
-> both use env->msr_global_ovf_ctrl.
-> 
-> No changes are needed for vmstate_msr_architectural_pmu or
-> pmu_enable_needed().
+> No Fixed tag is going to be added for the commit 0d89436786b0 ("kvm:
+> migrate vPMU state"), because this isn't a bugfix.
 > 
 > Signed-off-by: Dongli Zhang <dongli.zhang@oracle.com>
 > ---
-
-...
-
-> diff --git a/target/i386/kvm/kvm.c b/target/i386/kvm/kvm.c
-> index 3a35fd741d..f4532e6f2a 100644
-> --- a/target/i386/kvm/kvm.c
-> +++ b/target/i386/kvm/kvm.c
-> @@ -2149,6 +2149,16 @@ static void kvm_init_pmu_info_amd(struct kvm_cpuid2 *cpuid, X86CPU *cpu)
->      }
->  
->      num_pmu_gp_counters = AMD64_NUM_COUNTERS_CORE;
-> +
-> +    c = cpuid_find_entry(cpuid, 0x80000022, 0);
-> +    if (c && (c->eax & CPUID_8000_0022_EAX_PERFMON_V2)) {
-> +        pmu_version = 2;
-> +        num_pmu_gp_counters = c->ebx & 0xf;
-> +
-> +        if (num_pmu_gp_counters > MAX_GP_COUNTERS) {
-> +            num_pmu_gp_counters = MAX_GP_COUNTERS;
-
-OK! KVM now supports 6 GP counters (KVM_MAX_NR_AMD_GP_COUNTERS).
-
-> +        }
-> +    }
->  }
+>  target/i386/kvm/kvm.c | 9 ---------
+>  1 file changed, 9 deletions(-)
 
 Fine for me,
 
