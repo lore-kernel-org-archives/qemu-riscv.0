@@ -4,82 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8B2FFC3601E
-	for <qemu-riscv@archiver.kernel.org>; Thu, 10 Apr 2025 15:54:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BBCE7C369A2
+	for <qemu-riscv@archiver.kernel.org>; Thu, 10 Apr 2025 15:59:19 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1u2uEJ-0004Iy-Ne; Thu, 10 Apr 2025 11:54:15 -0400
+	id 1u2uIw-0005kJ-8I; Thu, 10 Apr 2025 11:59:02 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <pbonzini@redhat.com>)
- id 1u2uDp-0004Cf-Ip
- for qemu-riscv@nongnu.org; Thu, 10 Apr 2025 11:53:47 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
+ id 1u2uIs-0005g2-1v
+ for qemu-riscv@nongnu.org; Thu, 10 Apr 2025 11:58:59 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <pbonzini@redhat.com>)
- id 1u2uDl-0001R2-Li
- for qemu-riscv@nongnu.org; Thu, 10 Apr 2025 11:53:43 -0400
+ id 1u2uIo-0001qi-VN
+ for qemu-riscv@nongnu.org; Thu, 10 Apr 2025 11:58:57 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1744300420;
+ s=mimecast20190719; t=1744300732;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
- bh=SdA1HWLoO2kXNuLxZ0pYMZg0KJtTsj5uujt/ImDbGME=;
- b=SLoDFLR/AxjLm35NrdW3jyc3DWu5la+w8pcKgXuxeJHrPADPEHxKvruiA4T1wTH3CRdCsw
- yPzSSqhKYXe/YXywfIB6qaMrZtBRHvo85fn0wZSv+v9izLARU/O0T99ajJPBqg3iGdRSyk
- hPGFhIf1tCDnvhTQERshzX93qmyFp/w=
-Received: from mail-ej1-f69.google.com (mail-ej1-f69.google.com
- [209.85.218.69]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=y7YNPVvDGegBMftMugeCjfwZ2qjrwxZyvKO7qoUnSKE=;
+ b=dt0AcqNPGvBmgLrVt3iahkdA+VQW68dRet8/FnSS4iiA3EDDNQ/X6fiAoiG06z+YxfGx+D
+ 9phjcKZoCtY9onuKVI/6NTJwbTo2FMVrXnlA5R4nOyEb4w5FWS79T5vA4lOT+4nKA7RakS
+ ooRvXJNk4qsqPATrCnRiq2c2APS7Xjs=
+Received: from mail-ed1-f69.google.com (mail-ed1-f69.google.com
+ [209.85.208.69]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-556-GWOQvthyMtiZE6lvvbLFmQ-1; Thu, 10 Apr 2025 11:53:36 -0400
-X-MC-Unique: GWOQvthyMtiZE6lvvbLFmQ-1
-X-Mimecast-MFC-AGG-ID: GWOQvthyMtiZE6lvvbLFmQ_1744300416
-Received: by mail-ej1-f69.google.com with SMTP id
- a640c23a62f3a-ac6ef2d1b7dso98023466b.0
- for <qemu-riscv@nongnu.org>; Thu, 10 Apr 2025 08:53:36 -0700 (PDT)
+ us-mta-647-SLuA9xe6NLSE3l3cLOu_Dg-1; Thu, 10 Apr 2025 11:58:51 -0400
+X-MC-Unique: SLuA9xe6NLSE3l3cLOu_Dg-1
+X-Mimecast-MFC-AGG-ID: SLuA9xe6NLSE3l3cLOu_Dg_1744300730
+Received: by mail-ed1-f69.google.com with SMTP id
+ 4fb4d7f45d1cf-5e6a340f8c7so992847a12.2
+ for <qemu-riscv@nongnu.org>; Thu, 10 Apr 2025 08:58:50 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1744300416; x=1744905216;
+ d=1e100.net; s=20230601; t=1744300730; x=1744905530;
  h=content-transfer-encoding:in-reply-to:autocrypt:content-language
  :from:references:cc:to:subject:user-agent:mime-version:date
  :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=SdA1HWLoO2kXNuLxZ0pYMZg0KJtTsj5uujt/ImDbGME=;
- b=GyenocFZXHuc6VMFv863gtX+ZC8JCltJGrDC6Zu4ythELSMpxNcrcByL+AyxX3b0z0
- 74+USrm1qg7TKB3XRvWI/BsRcNEYi94V9EDqOVWl0Vomq3U32n70vwsVnZ0fzTd/Vay/
- ip+We3SGJiUJsXRtslve0C6YZjk27jW541iauSduRyUEARqypjVRzrDzCbNluFlfiz/A
- X7GarQni+SFx5g/pDqLyHFAqPWSmukH+Up/NrbR4ANWpOQKZ4cr1SuH0uNadhM+PJ27e
- qINv1uhyFEyxzuvboS265vtKX0aYxHQHSvrbfcbirHXksbkErLsXqqpn4YjGckjZnZY9
- IIXA==
+ bh=y7YNPVvDGegBMftMugeCjfwZ2qjrwxZyvKO7qoUnSKE=;
+ b=QdCEZ8ah3sAqTBFqvl+Wwu7MF+2iD0a7RG60cjSI7Cl2vFjZpbsAw/tEf/qCY6+zNH
+ +zBG70pqZy6ZR399ueNHrSbPVzoVgUAhxq1a2YqdTd/f+0wqsiwBTtpz3dIGOcAeWQFE
+ KRk9zdzdZDf8ZVELAOjEmIoBfY16T2ZYvnnh+/rJBZ+fECbN3mJxIWa8scoWHc3Sw4LX
+ /WEReEqjKnGvSK36njklM2GorwlfErmReCkEeXFF8cODKIj01d4j0zkj03QSOVdk58p2
+ TC4IVnz9e8MuiY/Ht8PBemfdrtCiDROPBf3s5noNuVCNEpgoA9af7Boz8RKx0zp+yhIT
+ T6Vw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXwvPUkdMXIUNNEwd36/7LKmNQoBD3i3xzqamUdaVew6D2jy/9XArZkEuKrrFsF4Di00RLdZS6X9vcy@nongnu.org
-X-Gm-Message-State: AOJu0YwbV+jrxDrxGaoWn4u3vXYFLNyDC6xnOdXlK3i8RckDaBUvgEys
- oo95cYY30KWu0w5UMonLFQSmIRq7PsdrAPTA9OWt/2EAjhUHMO3P7x1gk2+GOwEtsebYB7+iYxk
- mZK9nbFXVrPedd8MSe226yNftiqKeWovTTC+RZRpHSv/2cqsxhruV
-X-Gm-Gg: ASbGnctQgOoGvBkjUX0R6UMpWM2V3ve1oq4iPg6KR3TnuQgulhieXZWq2BniAo+oJ9E
- q26NT6VU4GXaCoRlHCDtK2q1FX75WLhnNEI/Pb0BFdqrvR+DHQNto9t2Nj4aVAGqzO64DmWhqeZ
- YWNP5t4ZoZCxcut18AgK9/zyHG2eaEF6hyaQW3IEf9Doov0Y54FnQbegWMe+d/hYewIvCZ8W1Ms
- g56wSOHR/szR5GNrw2M8xxe+7qEdGKTArqcejJrzkDVfC/RVhTFMVJ8dja6pMzeZ1zaVV9PPmc6
- UIo7ZOvTY6GTGKczo/N4Ew07ksggxwmiEoBlGJhO7NO1FmaHng==
-X-Received: by 2002:a17:906:9fc5:b0:ac6:e42b:7556 with SMTP id
- a640c23a62f3a-acac0056156mr260831466b.11.1744300415618; 
- Thu, 10 Apr 2025 08:53:35 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IHPq9I117gRAxQnVppXPN//j0+rdWODWfsdFNSbNEf7zlN/YrLkuitMXr3B2aG/FD2+GfuB5g==
-X-Received: by 2002:a17:906:9fc5:b0:ac6:e42b:7556 with SMTP id
- a640c23a62f3a-acac0056156mr260828166b.11.1744300415150; 
- Thu, 10 Apr 2025 08:53:35 -0700 (PDT)
+ AJvYcCVgLs814W3Eb73fA6TTf4HPY6EibONFdEYlMI5cW6mzoiDZkvwcKKafRQRYdFi4xH5ePRIVn6dHnnOp@nongnu.org
+X-Gm-Message-State: AOJu0YyD9mXscLf0ZhDWNG23haEJGvckAI35XboWK35D9FQ9O2cE6EyM
+ p9OFtS7XhLjHcjmaGpe7HjerTur+JGGBrhed8d31HMiI0T76Sf3e3QXyI/+tzpM4fq2uWMhqlmg
+ WySAJuQ3tD4UzziXU26jGbGa+d9t245YgoZp5hPnKVLDSwBwk3YnB
+X-Gm-Gg: ASbGnct+YcxGjT5+LK6k5ZFuJxlHYhJRGsovxvzhMDQ7vBFrUbwNPIQiwOiEuaiIKoz
+ bYeormcHgbYldZIfXfCWlhurG1FX2F+QuVr5C6gRb1rPT1kzJh5zKF6c+t6i/Ph43HRq8MSjjiy
+ 5Csdg5nFdebDvq802zG16yCBqjCBpaHhF+s1+jtmwSeYbTWqB3bmRRj5uT2lfVRBazjjKP8Y4TM
+ kXD+Nw+NuyLG6srR4TlAh1FQRaxkGaH5Rl5dD2BkWjjKIW4e7gfQ4cjgiIXgOwzs0a1PYm6YTlt
+ cCxm/0yXLWvaRI58VmUqLL+y2dacz9rwQfyCSwiTFi7MBYIYAg==
+X-Received: by 2002:a05:6402:35c9:b0:5ed:c188:8e7e with SMTP id
+ 4fb4d7f45d1cf-5f32930f5eemr2740176a12.27.1744300729808; 
+ Thu, 10 Apr 2025 08:58:49 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IEFMjsYG4/orstB6BJBOAvCttKbWfA7npz4IEQdeqW9BNdRixHionFsRHi9LRtsDSwfojMVNQ==
+X-Received: by 2002:a05:6402:35c9:b0:5ed:c188:8e7e with SMTP id
+ 4fb4d7f45d1cf-5f32930f5eemr2740156a12.27.1744300729357; 
+ Thu, 10 Apr 2025 08:58:49 -0700 (PDT)
 Received: from [192.168.213.163] (93-33-70-196.ip43.fastwebnet.it.
  [93.33.70.196]) by smtp.googlemail.com with ESMTPSA id
- a640c23a62f3a-acaa1cb4104sm297000366b.99.2025.04.10.08.53.28
+ 4fb4d7f45d1cf-5f2fbd3d9e1sm2461618a12.76.2025.04.10.08.58.46
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 10 Apr 2025 08:53:34 -0700 (PDT)
-Message-ID: <5cc73887-1073-49d3-8267-0e84483bfc2b@redhat.com>
-Date: Thu, 10 Apr 2025 17:53:14 +0200
+ Thu, 10 Apr 2025 08:58:48 -0700 (PDT)
+Message-ID: <65a63820-e59d-47d4-883a-4affe40f9b38@redhat.com>
+Date: Thu, 10 Apr 2025 17:58:45 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 02/10] various: Define macros for dependencies on
- emscripten
+Subject: Re: [PATCH 01/10] various: Fix type conflict of GLib function pointers
 To: Kohei Tokunaga <ktokunaga.mail@gmail.com>, qemu-devel@nongnu.org
 Cc: =?UTF-8?Q?Alex_Benn=C3=A9e?= <alex.bennee@linaro.org>,
  =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
@@ -98,7 +97,7 @@ Cc: =?UTF-8?Q?Alex_Benn=C3=A9e?= <alex.bennee@linaro.org>,
  Stefan Hajnoczi <stefanha@redhat.com>, qemu-block@nongnu.org,
  qemu-riscv@nongnu.org, qemu-arm@nongnu.org
 References: <cover.1744032780.git.ktokunaga.mail@gmail.com>
- <5f2a8fa2d7116b1d65b79fbb3a95244096fb7308.1744032780.git.ktokunaga.mail@gmail.com>
+ <2be81d2f86704662c9fa33ceb46077804e34ac77.1744032780.git.ktokunaga.mail@gmail.com>
 From: Paolo Bonzini <pbonzini@redhat.com>
 Autocrypt: addr=pbonzini@redhat.com; keydata=
  xsEhBFRCcBIBDqDGsz4K0zZun3jh+U6Z9wNGLKQ0kSFyjN38gMqU1SfP+TUNQepFHb/Gc0E2
@@ -135,23 +134,23 @@ Autocrypt: addr=pbonzini@redhat.com; keydata=
  JBrdmNZSQDz0iKmSrx8xkoXYfA3bgtFN8WJH2xgFL28XnqY4M6dLhJwV3z08tPSRqYFm4NMP
  dRsn0/7oymhneL8RthIvjDDQ5ktUjMe8LtHr70OZE/TT88qvEdhiIVUogHdo4qBrk41+gGQh
  b906Dudw5YhTJFU3nC6bbF2nrLlB4C/XSiH76ZvqzV0Z/cAMBo5NF/w=
-In-Reply-To: <5f2a8fa2d7116b1d65b79fbb3a95244096fb7308.1744032780.git.ktokunaga.mail@gmail.com>
+In-Reply-To: <2be81d2f86704662c9fa33ceb46077804e34ac77.1744032780.git.ktokunaga.mail@gmail.com>
 X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: 7IScrnEl606_e5GndRWeO7As2p6umhQ_HyhYHIrqReQ_1744300416
+X-Mimecast-MFC-PROC-ID: 6wkpbqf9yGk--Oy1LVyG-dePs_9tHfYKDtAEFwzIjL8_1744300730
 X-Mimecast-Originator: redhat.com
 Content-Language: en-US
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=170.10.133.124; envelope-from=pbonzini@redhat.com;
+Received-SPF: pass client-ip=170.10.129.124; envelope-from=pbonzini@redhat.com;
  helo=us-smtp-delivery-124.mimecast.com
 X-Spam_score_int: -26
 X-Spam_score: -2.7
 X-Spam_bar: --
 X-Spam_report: (-2.7 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.593,
  DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H5=0.001, RCVD_IN_MSPIKE_WL=0.001,
- RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001, RCVD_IN_VALIDITY_SAFE_BLOCKED=0.001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001,
+ RCVD_IN_VALIDITY_SAFE_BLOCKED=0.001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -168,37 +167,98 @@ Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 On 4/7/25 16:45, Kohei Tokunaga wrote:
-> +#ifdef EMSCRIPTEN
-> +/*
-> + * emscripten exposes copy_file_range declaration but doesn't provide the
-> + * implementation in the final link. Define the stub here but avoid type
-> + * conflict with the emscripten's header.
-> + */
-> +ssize_t copy_file_range(int in_fd, off_t *in_off, int out_fd,
-> +                             off_t *out_off, size_t len, unsigned int flags)
-> +{
-> +    errno = ENOSYS;
-> +    return -1;
-> +}
+> On emscripten, function pointer casts can cause function call failure.
+> This commit fixes the function definition to match to the type of the
+> function call.
+> 
+> - qtest_set_command_cb passed to g_once should match to GThreadFunc
 
-Please add a file stubs/emscripten.c with this function, and add it to 
-the build in stubs/meson.build.
+Sending an alternative patch that doesn't use GOnce, this code runs in 
+the main thread.
 
-> +#ifdef EMSCRIPTEN
-> +            error_report("initgroups unsupported");
-> +            exit(1);
+> - object_class_cmp and cpreg_key_compare are passed to g_list_sort as
+>    GCopmareFunc but GLib cast them to GCompareDataFunc.
 
-I think it's best to add a new function os-wasm.c in addition to 
-os-posix.c and os-win32.c, and disable all the functionality of 
--run-with and -daemonize in vl.c via
-
--#if defined(CONFIG_POSIX)
-+#if defined(CONFIG_POSIX) && !defined(EMSCRIPTEN)
-
-(there are a couple occurrences).
-
-Thanks,
+Please use g_list_sort_with_data instead, and poison 
+g_slist_sort/g_list_sort in include/glib-compat.h, with a comment 
+explaining that it's done this way because of Emscripten.
 
 Paolo
+
+> Signed-off-by: Kohei Tokunaga <ktokunaga.mail@gmail.com>
+> ---
+>   hw/riscv/riscv_hart.c | 9 ++++++++-
+>   qom/object.c          | 5 +++--
+>   target/arm/helper.c   | 4 ++--
+>   3 files changed, 13 insertions(+), 5 deletions(-)
+> 
+> diff --git a/hw/riscv/riscv_hart.c b/hw/riscv/riscv_hart.c
+> index a55d156668..e37317dcbd 100644
+> --- a/hw/riscv/riscv_hart.c
+> +++ b/hw/riscv/riscv_hart.c
+> @@ -102,10 +102,17 @@ static bool csr_qtest_callback(CharBackend *chr, gchar **words)
+>       return false;
+>   }
+>   
+> +static gpointer g_qtest_set_command_cb(
+> +    bool (*pc_cb)(CharBackend *chr, gchar **words))
+> +{
+> +    qtest_set_command_cb(pc_cb);
+> +    return NULL;
+> +}
+> +
+>   static void riscv_cpu_register_csr_qtest_callback(void)
+>   {
+>       static GOnce once;
+> -    g_once(&once, (GThreadFunc)qtest_set_command_cb, csr_qtest_callback);
+> +    g_once(&once, (GThreadFunc)g_qtest_set_command_cb, csr_qtest_callback);
+>   }
+>   #endif
+>   
+> diff --git a/qom/object.c b/qom/object.c
+> index 01618d06bd..19698aae4c 100644
+> --- a/qom/object.c
+> +++ b/qom/object.c
+> @@ -1191,7 +1191,8 @@ GSList *object_class_get_list(const char *implements_type,
+>       return list;
+>   }
+>   
+> -static gint object_class_cmp(gconstpointer a, gconstpointer b)
+> +static gint object_class_cmp(gconstpointer a, gconstpointer b,
+> +                             gpointer user_data)
+>   {
+>       return strcasecmp(object_class_get_name((ObjectClass *)a),
+>                         object_class_get_name((ObjectClass *)b));
+> @@ -1201,7 +1202,7 @@ GSList *object_class_get_list_sorted(const char *implements_type,
+>                                        bool include_abstract)
+>   {
+>       return g_slist_sort(object_class_get_list(implements_type, include_abstract),
+> -                        object_class_cmp);
+> +                        (GCompareFunc)object_class_cmp);
+>   }
+>   
+>   Object *object_ref(void *objptr)
+> diff --git a/target/arm/helper.c b/target/arm/helper.c
+> index bb445e30cd..68f81fadfc 100644
+> --- a/target/arm/helper.c
+> +++ b/target/arm/helper.c
+> @@ -220,7 +220,7 @@ static void count_cpreg(gpointer key, gpointer opaque)
+>       }
+>   }
+>   
+> -static gint cpreg_key_compare(gconstpointer a, gconstpointer b)
+> +static gint cpreg_key_compare(gconstpointer a, gconstpointer b, void *d)
+>   {
+>       uint64_t aidx = cpreg_to_kvm_id((uintptr_t)a);
+>       uint64_t bidx = cpreg_to_kvm_id((uintptr_t)b);
+> @@ -244,7 +244,7 @@ void init_cpreg_list(ARMCPU *cpu)
+>       int arraylen;
+>   
+>       keys = g_hash_table_get_keys(cpu->cp_regs);
+> -    keys = g_list_sort(keys, cpreg_key_compare);
+> +    keys = g_list_sort(keys, (GCompareFunc)cpreg_key_compare);
+>   
+>       cpu->cpreg_array_len = 0;
+>   
 
 
