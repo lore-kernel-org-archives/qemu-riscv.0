@@ -4,78 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1162AC3601E
-	for <qemu-riscv@archiver.kernel.org>; Thu, 10 Apr 2025 16:48:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 50BDAC3601E
+	for <qemu-riscv@archiver.kernel.org>; Thu, 10 Apr 2025 16:53:58 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1u2v4J-0001aV-Gd; Thu, 10 Apr 2025 12:47:59 -0400
+	id 1u2v9j-0003AQ-5K; Thu, 10 Apr 2025 12:53:35 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <ktokunaga.mail@gmail.com>)
- id 1u2v4G-0001RL-0O; Thu, 10 Apr 2025 12:47:56 -0400
-Received: from mail-pj1-x102c.google.com ([2607:f8b0:4864:20::102c])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1u2v9h-0003A9-JZ
+ for qemu-riscv@nongnu.org; Thu, 10 Apr 2025 12:53:33 -0400
+Received: from mail-wm1-x32e.google.com ([2a00:1450:4864:20::32e])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <ktokunaga.mail@gmail.com>)
- id 1u2v4E-0000de-HQ; Thu, 10 Apr 2025 12:47:55 -0400
-Received: by mail-pj1-x102c.google.com with SMTP id
- 98e67ed59e1d1-3018e2d042bso748191a91.2; 
- Thu, 10 Apr 2025 09:47:53 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1u2v9f-0001OK-V9
+ for qemu-riscv@nongnu.org; Thu, 10 Apr 2025 12:53:33 -0400
+Received: by mail-wm1-x32e.google.com with SMTP id
+ 5b1f17b1804b1-43cec5cd73bso8468245e9.3
+ for <qemu-riscv@nongnu.org>; Thu, 10 Apr 2025 09:53:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1744303672; x=1744908472; darn=nongnu.org;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Si6z4SPJRpKpJ3XC/jBZK8XllF1BVz1y8DYFrGeTSbg=;
- b=LDYmEG+2Nznvczaakzj/5S+8K+l6sj62rAypslc5XL0HLTrllWWoSpA5JFOcClxHuR
- omcd1j7E3tXm0b8UPz17uEo3UMb4p+28WU2Ba1PAuBeGAu26Unz1aOmomwk+rdFmYWyH
- imJK5jxRppIyN1IgBzaekI5HyZo4GgdpK4F9vMHYal3YynJaQ+SO7+xY1Vy3wvK+K74q
- d4IR7TaNd6fhMPfhNj5CarUNn4frBi4rr0R42KWpe/12QelfFcb8BAXkxQhKanuUgmYG
- vIuohp70kY3lA9+2Lz2dybjGB5Zwqpmigq12p3zYnrXsC526LxaToU5POx/AqUIYVD3M
- XgGw==
+ d=linaro.org; s=google; t=1744304010; x=1744908810; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=C3eUraqFELd4BdV/LtOqGjXSYUf0SlECUuRQ7OTGl58=;
+ b=br/Ryt4l2So2WHviiWegDPmGGBlv70FPDz9uw3+XKM6uXrFn7ygI4Vnl3D+GN4/myA
+ RRr+UesHyMHSNCKCKQsxjTl6kWhefzy/3ETW1A+jtBUjecvI7FD1tvlLidsHILi6JLmF
+ sjhfyiydjbKodZLw3z7gd3gNkrlPevslnbxn7psFQ7lYlQOzjo9bU9TqZKA8iuoRrvY8
+ KYhbXmFprJ5wQA9PqAED6Hq353wcPwd9GGJ1XVukP8xRe3Tm1mAmmRB642naYZ3JCziY
+ mpoEqhmVQJY8RVm0bA77Lu3YXUXZjmlAHJp4ZTSn6IPs+kRmMpuiExnaqXewwGu5JK32
+ 6k0g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1744303672; x=1744908472;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=Si6z4SPJRpKpJ3XC/jBZK8XllF1BVz1y8DYFrGeTSbg=;
- b=iNkShCjgv7cw/yFt44dJTt8M26xSNqf8C+9NqE9ZooOq7cKkjTjywRn7nFY8Bs8zlM
- pVO+tca93DteJdJ2d5ZuXvQjHk645cUnjPWlkoL/izDCoqKgSd9lgBxavAMkFEa3RxhB
- ZwI3KHtUy0Y4XOc32Prsw0QIUwLNJ06xPfvjbWvgJ/S370SH5F5LfGj20bStbGLs0JNv
- rN5LUA67wKOwkF+Xt7cqPRTUAIHxKCG5qpZ7MNkZSryPYTzLZ6I1trqD9TPkVfs21Anx
- vnEgX/vTGMkyfncb0JSABx30dNHgcSeWmPsEtnC8zb24+Z36kq+Y2E3WLvBLZnAwWxxx
- Xfrw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXHS4iLRc6g5iWjBr61e+ROQwZijVC4BvSbKKm+8+p1+quebGkyWjsN3Wuc5YI09zW/M+MI9hwCTJRw@nongnu.org
-X-Gm-Message-State: AOJu0Yxfc6CB+RR6ome/2POrffwgCdzI4kNKYAYJ6BQYJAAi+zaT7nbn
- 25MMop0AYWY93vO/CPfA1vlwNqhjcFIlAVH1bRuY/3mFcJEpVwJgVAW6p3XDUhlZUyXjI1PT/3J
- H8K10/1O97urFEENWbMDOvcjxkML6LA/b7jQ=
-X-Gm-Gg: ASbGncvKBvnvc/7vliGTZrGG+18Zfq5UH1HB0AP8juusNoQ2nEnLdr3C+Fm3dvPTXFM
- xOIgteJ6MkVSv0EmKnQfriXbkri3XIRwhXhoj4kgpcRvqMnbhiGAenXFig9RJZyULQbVU8HtX4L
- rtk8rTxfWE321xc9gglBB9rWBMbyC58rJXs82DThxHHNselDsNaEM=
-X-Google-Smtp-Source: AGHT+IHqAZ3EGz3VuhUramcVMY61Sa/QZkz4k+gdiJZC+Ryim7ikiEYFEHLrT44xnM4B6uAI9OIsqegH3Dzt7WKbpe0=
-X-Received: by 2002:a17:90b:582b:b0:2ff:58c7:a71f with SMTP id
- 98e67ed59e1d1-3072ba2262cmr4228779a91.32.1744303672072; Thu, 10 Apr 2025
- 09:47:52 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1744304010; x=1744908810;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=C3eUraqFELd4BdV/LtOqGjXSYUf0SlECUuRQ7OTGl58=;
+ b=hIjSLYb1Cb0Kba+z74JrlPRnLdqhVqZ3SMoc+Ha6/VvLZOn3j3DMWdGBYL6TxQK7tI
+ sM5zHNjyZLrXoAOxymVexijumAptNTQ/LvfIhGqWnBBTLsj4I0NxTFOZ67WNGZK9hgrP
+ UJVE7DxjvhOuTRqdj46gHNfO9dy2jjj3Ml/aPJBhHa99yTX7Tg14agj0pnKBaV7eJuJ6
+ FExd6C2wxjEXUqvjZqUkeD/StMENMNvCjEUAfZG9ZHNuxcRRiRXu/hbrSxKbcB4k3lkP
+ hbAo0kVNRjZE0s2XejXBJN9OCiw7aeCoc/nTD4Wv3V0T3AkBwMrP99f8XzrNy1CpOHLQ
+ UOqg==
+X-Gm-Message-State: AOJu0YwcRqM32Dt3U59YZIyPoXKigxFVXUVgtgyRNd/ZxnjLZp3iBGOr
+ Vjt91rL0ShMjGC88ekPMAgzE+HoHbqbxOUpNCu8ps8YtChra3jlOjXKKdntc3vg=
+X-Gm-Gg: ASbGncuxlPi5XCnz+dMj1TwASQk5HT5lTyNvg8rFxvaku7cdbhQyLSQeJ2PLKVFNS6a
+ UWAA2shOBvkyz9TmAGEMTIx76p2NQDnV9hgpIllZWJLPqBZVpg+5a/HNgS5JHVpK5JSLmG97Q2i
+ G2g/zGD4lNPfh53sk7szDCKKhUYDc1z7nxY1b8MQexasqXwQOSh4mUhFPqhI0xb5WR1hkGkt3Ei
+ /xDqnc21yqAHxV7+vRxdEtlZs19XOQI13XAcvIIBvMrgVF25lYBEnY6/9LPjETPgtm8d8OVaILX
+ EyF0J8ILqA3RzehWrU/p2RD0UQHe69ygUNd/rTCmdsUB8EZA3Nswtvr/XTzmJFYyWEe0AUm43T3
+ ryjbnlABybAoLwxtnY4qN3uDk
+X-Google-Smtp-Source: AGHT+IEoBzhR6qco58Cftp/YQMaKqwvyxn2/rQX1pTIcRQbZT/zZVBR6D/avUrXeLBvGVxr2ioveFA==
+X-Received: by 2002:a05:600c:c0b:b0:43d:172:50b1 with SMTP id
+ 5b1f17b1804b1-43f2d97d4c7mr34561515e9.29.1744304010072; 
+ Thu, 10 Apr 2025 09:53:30 -0700 (PDT)
+Received: from [192.168.69.238] (88-187-86-199.subs.proxad.net.
+ [88.187.86.199]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-43f233c49f7sm56508515e9.17.2025.04.10.09.53.29
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 10 Apr 2025 09:53:29 -0700 (PDT)
+Message-ID: <9f950af3-57ed-481e-b753-83ee9691271f@linaro.org>
+Date: Thu, 10 Apr 2025 18:53:28 +0200
 MIME-Version: 1.0
-References: <20250410161722.595634-1-pbonzini@redhat.com>
-In-Reply-To: <20250410161722.595634-1-pbonzini@redhat.com>
-From: Kohei Tokunaga <ktokunaga.mail@gmail.com>
-Date: Fri, 11 Apr 2025 01:47:39 +0900
-X-Gm-Features: ATxdqUHsflm2OM-on5kmrxQAiAlKpYp4sNYJThRuP8t_gLGCsDmxDDFftQVT51I
-Message-ID: <CAEDrbUaMaGT-=M7qhQQqakzpGD57csZcs+xOjyAB-O9pY=v9gA@mail.gmail.com>
+User-Agent: Mozilla Thunderbird
 Subject: Re: [PATCH] hw/riscv: Fix type conflict of GLib function pointers
 To: Paolo Bonzini <pbonzini@redhat.com>, qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org
-Content-Type: multipart/alternative; boundary="000000000000c1213e06326f58bb"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::102c;
- envelope-from=ktokunaga.mail@gmail.com; helo=mail-pj1-x102c.google.com
+Cc: qemu-riscv@nongnu.org, Kohei Tokunaga <ktokunaga.mail@gmail.com>
+References: <20250410161722.595634-1-pbonzini@redhat.com>
+Content-Language: en-US
+From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+In-Reply-To: <20250410161722.595634-1-pbonzini@redhat.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::32e;
+ envelope-from=philmd@linaro.org; helo=mail-wm1-x32e.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
- HTML_MESSAGE=0.001, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -91,18 +99,40 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
---000000000000c1213e06326f58bb
-Content-Type: text/plain; charset="UTF-8"
+On 10/4/25 18:17, Paolo Bonzini wrote:
+> qtest_set_command_cb passed to g_once should match GThreadFunc,
+> which it does not.  But using g_once is actually unnecessary,
+> because the function is called by riscv_harts_realize() under
+> the Big QEMU Lock.
+> 
+> Reported-by: Kohei Tokunaga <ktokunaga.mail@gmail.com>
+> Signed-off-by: Paolo Bonzini <pbonzini@redhat.com>
+> ---
+>   hw/riscv/riscv_hart.c | 7 +++++--
+>   1 file changed, 5 insertions(+), 2 deletions(-)
+> 
+> diff --git a/hw/riscv/riscv_hart.c b/hw/riscv/riscv_hart.c
+> index a55d1566687..bb9104bae0b 100644
+> --- a/hw/riscv/riscv_hart.c
+> +++ b/hw/riscv/riscv_hart.c
+> @@ -104,8 +104,11 @@ static bool csr_qtest_callback(CharBackend *chr, gchar **words)
+>   
+>   static void riscv_cpu_register_csr_qtest_callback(void)
+>   {
+> -    static GOnce once;
+> -    g_once(&once, (GThreadFunc)qtest_set_command_cb, csr_qtest_callback);
+> +    static bool first = true;
 
-Hi Paolo,
-I appreciate you addressing this issue and submitting the fix.
+Preferably using 'qtest_cb_registered' boolean name,
 
-Reviewed-by: Kohei Tokunaga <ktokunaga.mail@gmail.com>
+Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 
---000000000000c1213e06326f58bb
-Content-Type: text/html; charset="UTF-8"
+> +    if (first) {
+> +        first = false;
+> +        qtest_set_command_cb(csr_qtest_callback);
+> +    }
+>   }
+>   #endif
+>   
 
-<div dir="ltr"><div>Hi Paolo,</div>I appreciate you addressing this issue and submitting the fix.<br><br>Reviewed-by: Kohei Tokunaga &lt;<a href="mailto:ktokunaga.mail@gmail.com">ktokunaga.mail@gmail.com</a>&gt;</div>
-
---000000000000c1213e06326f58bb--
 
