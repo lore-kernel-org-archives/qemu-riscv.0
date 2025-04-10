@@ -4,99 +4,154 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 576C8C3601E
-	for <qemu-riscv@archiver.kernel.org>; Thu, 10 Apr 2025 13:14:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8B2FFC3601E
+	for <qemu-riscv@archiver.kernel.org>; Thu, 10 Apr 2025 15:54:38 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1u2rjc-0001s6-UH; Thu, 10 Apr 2025 09:14:24 -0400
+	id 1u2uEJ-0004Iy-Ne; Thu, 10 Apr 2025 11:54:15 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <ktokunaga.mail@gmail.com>)
- id 1u2rjB-0001jZ-3y; Thu, 10 Apr 2025 09:13:58 -0400
-Received: from mail-pj1-x1029.google.com ([2607:f8b0:4864:20::1029])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <ktokunaga.mail@gmail.com>)
- id 1u2rj7-00061i-Tk; Thu, 10 Apr 2025 09:13:56 -0400
-Received: by mail-pj1-x1029.google.com with SMTP id
- 98e67ed59e1d1-2ff6a98c638so819026a91.0; 
- Thu, 10 Apr 2025 06:13:46 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1744290825; x=1744895625; darn=nongnu.org;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=udz9qh+QGhClyiDEnhuS+4N7zuIIA+8WZldsmLxEeaI=;
- b=J6q/MVo0XAf6Ahi0shRRHFb6Xhj7p1GSJkdV84kdhHK2cD+XGgMQENd0WRE1HgKq+S
- wmFtQ4E+BVsCGZs9QIqgO7IORSsMOzKwn8zvVEVxuCacKq12onztAAUgL2yi3AIf60mx
- Dy0SO6/LFXLLmEHJQVOFx0+RZlCcoSW7Cp8e2cnrUaeDQz/0bFBbKdJ7PI6ZIk7/E2Lv
- Vze7CDao7FD55aQjoEGPv9clyrdI6/hIWRfdlFvXlQi3KqqiEWYLrKuCoMgVZZrEu8mN
- MqiTYzSbqvh2f1kwP/BF3E3VWrXnYDuVWy1dbsE2j23CtWq5fVR6WxN8PJA21anw1rjK
- OdpA==
+ (Exim 4.90_1) (envelope-from <pbonzini@redhat.com>)
+ id 1u2uDp-0004Cf-Ip
+ for qemu-riscv@nongnu.org; Thu, 10 Apr 2025 11:53:47 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <pbonzini@redhat.com>)
+ id 1u2uDl-0001R2-Li
+ for qemu-riscv@nongnu.org; Thu, 10 Apr 2025 11:53:43 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1744300420;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
+ bh=SdA1HWLoO2kXNuLxZ0pYMZg0KJtTsj5uujt/ImDbGME=;
+ b=SLoDFLR/AxjLm35NrdW3jyc3DWu5la+w8pcKgXuxeJHrPADPEHxKvruiA4T1wTH3CRdCsw
+ yPzSSqhKYXe/YXywfIB6qaMrZtBRHvo85fn0wZSv+v9izLARU/O0T99ajJPBqg3iGdRSyk
+ hPGFhIf1tCDnvhTQERshzX93qmyFp/w=
+Received: from mail-ej1-f69.google.com (mail-ej1-f69.google.com
+ [209.85.218.69]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-556-GWOQvthyMtiZE6lvvbLFmQ-1; Thu, 10 Apr 2025 11:53:36 -0400
+X-MC-Unique: GWOQvthyMtiZE6lvvbLFmQ-1
+X-Mimecast-MFC-AGG-ID: GWOQvthyMtiZE6lvvbLFmQ_1744300416
+Received: by mail-ej1-f69.google.com with SMTP id
+ a640c23a62f3a-ac6ef2d1b7dso98023466b.0
+ for <qemu-riscv@nongnu.org>; Thu, 10 Apr 2025 08:53:36 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1744290825; x=1744895625;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1744300416; x=1744905216;
+ h=content-transfer-encoding:in-reply-to:autocrypt:content-language
+ :from:references:cc:to:subject:user-agent:mime-version:date
+ :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=udz9qh+QGhClyiDEnhuS+4N7zuIIA+8WZldsmLxEeaI=;
- b=LA5f1SkULIwNoppvPIXrtz6Gdx+hS/KvOpNngfJAyYzOTIyB+HKpd3Nr34sV743+Z+
- oR9sQZuR0Rv79SnKxz1rkLZYYS/DSZ8fPnpLhqckzf+c2tKLwgT5+l3p5DSoOKMuZN5u
- czQDVBqnmSyMBLzEEcunCQm6zgqTTCuwjkdNEjnpcYk5GT+LyT8WTXgtM/Ek6oy9cu+Q
- vrO51l4nV0tVggsUJINlcZ1f98uduMW0r8Q8RV8uWTVSSH1PNFnda4UBc3ZPfIB7J1QG
- j8HVP4l1wMXO/5VYkc8W7VIl92jcRr8bjAVICYVCVDQfZ8RS5j412xTMqP/AVViTlj/f
- +LAw==
+ bh=SdA1HWLoO2kXNuLxZ0pYMZg0KJtTsj5uujt/ImDbGME=;
+ b=GyenocFZXHuc6VMFv863gtX+ZC8JCltJGrDC6Zu4ythELSMpxNcrcByL+AyxX3b0z0
+ 74+USrm1qg7TKB3XRvWI/BsRcNEYi94V9EDqOVWl0Vomq3U32n70vwsVnZ0fzTd/Vay/
+ ip+We3SGJiUJsXRtslve0C6YZjk27jW541iauSduRyUEARqypjVRzrDzCbNluFlfiz/A
+ X7GarQni+SFx5g/pDqLyHFAqPWSmukH+Up/NrbR4ANWpOQKZ4cr1SuH0uNadhM+PJ27e
+ qINv1uhyFEyxzuvboS265vtKX0aYxHQHSvrbfcbirHXksbkErLsXqqpn4YjGckjZnZY9
+ IIXA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUWXmkgsoVCXWpbmHit38y2Lkd+lb2K6vCajvp/Mlmk1FNlMs9FxtLGsbEuTcEdt8jmJtcwMK3r3l6YuA==@nongnu.org,
- AJvYcCXMX8MgAjMHZSXrKsAwQrfgF/sxYdgNJzvhqWoL50bisHpazWCvHDmLX2yPLfk+JkXAO9PA2+9+mxf0iA==@nongnu.org,
- AJvYcCXYjd7PHF9wLuLtXPVg1nLh+lBz2fByO6nxo30aRW1gP0Lh/NthfNrIxAuCephPAxzYov8/Aw+HhP1S1Q==@nongnu.org,
- AJvYcCXwlizZKwMa1GXcUDbryf+VMpVrzlFIXmYoaqhZfueGVSWwYTDibKny5ezRnqJtaaoKqlAogB2s+w==@nongnu.org
-X-Gm-Message-State: AOJu0YxeLgqMACLTwOr1dnan6OJr/OQnI7WxUD5fvrVCp+z+VUWNOuIS
- lEl0QTonYXfMmr070LLxZOUt3Vg3dtuWCtKWfb3qR8tUZSpmraqdBy4kgJZdGesW1LrNUVrSJMF
- fP3rqYHgDIh6doi36OjYvStQBc/SJzTbcvOo=
-X-Gm-Gg: ASbGncvIhmCjmbw5eARaNYVaET8sGzzNj87//b+u6kPnfAezfexK+zMTy4hBrs64ZLT
- n6ZqUJgWm39wYHYKLxOL2BmgkGGj/vvin2SZHYPsFspdMNbDu2d/wPNJ6Ho0GwF9BCWlIMVyPuC
- VjXSKWOpEpLgHK1rfypP2aIQ5rJTJVR2/+P6CrsQWN9nmRT8oOSkk=
-X-Google-Smtp-Source: AGHT+IHA5DXV1VDngm6EMg4TX+jHyOpj7gQjHaUrbxc+wjrpGkmtyh7sngf76C1H6pvUi1ovpAomVHDyO9IzGi3fAxA=
-X-Received: by 2002:a17:90b:2d46:b0:305:2d27:7ca7 with SMTP id
- 98e67ed59e1d1-30718b82295mr4996389a91.16.1744290825050; Thu, 10 Apr 2025
- 06:13:45 -0700 (PDT)
+ AJvYcCXwvPUkdMXIUNNEwd36/7LKmNQoBD3i3xzqamUdaVew6D2jy/9XArZkEuKrrFsF4Di00RLdZS6X9vcy@nongnu.org
+X-Gm-Message-State: AOJu0YwbV+jrxDrxGaoWn4u3vXYFLNyDC6xnOdXlK3i8RckDaBUvgEys
+ oo95cYY30KWu0w5UMonLFQSmIRq7PsdrAPTA9OWt/2EAjhUHMO3P7x1gk2+GOwEtsebYB7+iYxk
+ mZK9nbFXVrPedd8MSe226yNftiqKeWovTTC+RZRpHSv/2cqsxhruV
+X-Gm-Gg: ASbGnctQgOoGvBkjUX0R6UMpWM2V3ve1oq4iPg6KR3TnuQgulhieXZWq2BniAo+oJ9E
+ q26NT6VU4GXaCoRlHCDtK2q1FX75WLhnNEI/Pb0BFdqrvR+DHQNto9t2Nj4aVAGqzO64DmWhqeZ
+ YWNP5t4ZoZCxcut18AgK9/zyHG2eaEF6hyaQW3IEf9Doov0Y54FnQbegWMe+d/hYewIvCZ8W1Ms
+ g56wSOHR/szR5GNrw2M8xxe+7qEdGKTArqcejJrzkDVfC/RVhTFMVJ8dja6pMzeZ1zaVV9PPmc6
+ UIo7ZOvTY6GTGKczo/N4Ew07ksggxwmiEoBlGJhO7NO1FmaHng==
+X-Received: by 2002:a17:906:9fc5:b0:ac6:e42b:7556 with SMTP id
+ a640c23a62f3a-acac0056156mr260831466b.11.1744300415618; 
+ Thu, 10 Apr 2025 08:53:35 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IHPq9I117gRAxQnVppXPN//j0+rdWODWfsdFNSbNEf7zlN/YrLkuitMXr3B2aG/FD2+GfuB5g==
+X-Received: by 2002:a17:906:9fc5:b0:ac6:e42b:7556 with SMTP id
+ a640c23a62f3a-acac0056156mr260828166b.11.1744300415150; 
+ Thu, 10 Apr 2025 08:53:35 -0700 (PDT)
+Received: from [192.168.213.163] (93-33-70-196.ip43.fastwebnet.it.
+ [93.33.70.196]) by smtp.googlemail.com with ESMTPSA id
+ a640c23a62f3a-acaa1cb4104sm297000366b.99.2025.04.10.08.53.28
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 10 Apr 2025 08:53:34 -0700 (PDT)
+Message-ID: <5cc73887-1073-49d3-8267-0e84483bfc2b@redhat.com>
+Date: Thu, 10 Apr 2025 17:53:14 +0200
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 02/10] various: Define macros for dependencies on
+ emscripten
+To: Kohei Tokunaga <ktokunaga.mail@gmail.com>, qemu-devel@nongnu.org
+Cc: =?UTF-8?Q?Alex_Benn=C3=A9e?= <alex.bennee@linaro.org>,
+ =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
+ Thomas Huth <thuth@redhat.com>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Kevin Wolf <kwolf@redhat.com>, Hanna Reitz <hreitz@redhat.com>,
+ Christian Schoenebeck <qemu_oss@crudebyte.com>, Greg Kurz <groug@kaod.org>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, Weiwei Li
+ <liwei1518@gmail.com>, Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ =?UTF-8?Q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>,
+ =?UTF-8?Q?Daniel_P_=2E_Berrang=C3=A9?= <berrange@redhat.com>,
+ Eduardo Habkost <eduardo@habkost.net>,
+ Peter Maydell <peter.maydell@linaro.org>,
+ Stefan Hajnoczi <stefanha@redhat.com>, qemu-block@nongnu.org,
+ qemu-riscv@nongnu.org, qemu-arm@nongnu.org
 References: <cover.1744032780.git.ktokunaga.mail@gmail.com>
- <20250409192115.GA5528@fedora>
- <dc36c24e-dc4a-4c24-97b7-8b812441ffce@linaro.org>
- <CAEDrbUZ4mbCT-npk8Nha4fDd9a5PGguAxS_RD0wG96gpQRUp+g@mail.gmail.com>
-In-Reply-To: <CAEDrbUZ4mbCT-npk8Nha4fDd9a5PGguAxS_RD0wG96gpQRUp+g@mail.gmail.com>
-From: Kohei Tokunaga <ktokunaga.mail@gmail.com>
-Date: Thu, 10 Apr 2025 22:13:33 +0900
-X-Gm-Features: ATxdqUEjYAQl__gpGILkSOZoqRiEYNdRUH2kWwRllWKDPgsh1gGixbU0w6jXpgQ
-Message-ID: <CAEDrbUYM3aK5ErvF=+oV=q-NVLO0uzxbYjHzcxPGvTLp7yNtwA@mail.gmail.com>
-Subject: Re: [PATCH 00/10] Enable QEMU to run on browsers
-To: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@linaro.org>, 
- qemu-devel@nongnu.org
-Cc: Stefan Hajnoczi <stefanha@redhat.com>,
- Richard Henderson <richard.henderson@linaro.org>, 
- =?UTF-8?B?QWxleCBCZW5uw6ll?= <alex.bennee@linaro.org>, 
- Thomas Huth <thuth@redhat.com>, Paolo Bonzini <pbonzini@redhat.com>,
- Kevin Wolf <kwolf@redhat.com>, 
- Hanna Reitz <hreitz@redhat.com>, Christian Schoenebeck <qemu_oss@crudebyte.com>,
- Greg Kurz <groug@kaod.org>, Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, 
- Weiwei Li <liwei1518@gmail.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>, 
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
- =?UTF-8?B?TWFyYy1BbmRyw6kgTHVyZWF1?= <marcandre.lureau@redhat.com>, 
- =?UTF-8?Q?Daniel_P=2E_Berrang=C3=A9?= <berrange@redhat.com>, 
- Eduardo Habkost <eduardo@habkost.net>, Peter Maydell <peter.maydell@linaro.org>,
- qemu-block@nongnu.org, qemu-riscv@nongnu.org, qemu-arm@nongnu.org
-Content-Type: multipart/alternative; boundary="00000000000003211406326c5bad"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1029;
- envelope-from=ktokunaga.mail@gmail.com; helo=mail-pj1-x1029.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
+ <5f2a8fa2d7116b1d65b79fbb3a95244096fb7308.1744032780.git.ktokunaga.mail@gmail.com>
+From: Paolo Bonzini <pbonzini@redhat.com>
+Autocrypt: addr=pbonzini@redhat.com; keydata=
+ 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
+In-Reply-To: <5f2a8fa2d7116b1d65b79fbb3a95244096fb7308.1744032780.git.ktokunaga.mail@gmail.com>
+X-Mimecast-Spam-Score: 0
+X-Mimecast-MFC-PROC-ID: 7IScrnEl606_e5GndRWeO7As2p6umhQ_HyhYHIrqReQ_1744300416
+X-Mimecast-Originator: redhat.com
+Content-Language: en-US
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=170.10.133.124; envelope-from=pbonzini@redhat.com;
+ helo=us-smtp-delivery-124.mimecast.com
+X-Spam_score_int: -26
+X-Spam_score: -2.7
 X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
- HTML_MESSAGE=0.001, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+X-Spam_report: (-2.7 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.593,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H5=0.001, RCVD_IN_MSPIKE_WL=0.001,
+ RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001, RCVD_IN_VALIDITY_SAFE_BLOCKED=0.001,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -112,113 +167,38 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
---00000000000003211406326c5bad
-Content-Type: text/plain; charset="UTF-8"
+On 4/7/25 16:45, Kohei Tokunaga wrote:
+> +#ifdef EMSCRIPTEN
+> +/*
+> + * emscripten exposes copy_file_range declaration but doesn't provide the
+> + * implementation in the final link. Define the stub here but avoid type
+> + * conflict with the emscripten's header.
+> + */
+> +ssize_t copy_file_range(int in_fd, off_t *in_off, int out_fd,
+> +                             off_t *out_off, size_t len, unsigned int flags)
+> +{
+> +    errno = ENOSYS;
+> +    return -1;
+> +}
 
-Hi Philippe,
+Please add a file stubs/emscripten.c with this function, and add it to 
+the build in stubs/meson.build.
 
-> On 9/4/25 21:21, Stefan Hajnoczi wrote:
-> > On Mon, Apr 07, 2025 at 11:45:51PM +0900, Kohei Tokunaga wrote:
-> >> This patch series enables QEMU's system emulator to run in a browser
-using
-> >> Emscripten.
-> >> It includes implementations and workarounds to address browser
-environment
-> >> limitations, as shown in the following.
-> >
-> > I think it would be great to merge this even if there are limitations
-> > once code review comments have been addressed. Developing WebAssembly
-> > support in-tree is likely to allow this effort to develop further than
-> > if done in personal repos (and with significant efforts required to
-> > rebase the code periodically).
-> >
-> >> # New TCG Backend for Browsers
-> >>
-> >> A new TCG backend translates IR instructions into Wasm instructions
-and runs
-> >> them using the browser's WebAssembly APIs (WebAssembly.Module and
-> >> WebAssembly.instantiate). To minimize compilation overhead and avoid
-hitting
-> >> the browser's limitation of the number of instances, this backend
-integrates
-> >> a forked TCI. TBs run on TCI by default, with frequently executed TBs
-> >> compiled into WebAssembly.
-> >>
-> >> # Workaround for Running 64-bit Guests
-> >>
-> >> The current implementation uses Wasm's 32-bit memory model, even
-though Wasm
-> >> supports 64-bit variables and instructions. This patch explores
-implementing
-> >> TCG 64-bit instructions while leveraging SoftMMU for address
-translation. To
-> >> enable 64-bit guest support in Wasm today, it was necessary to
-partially
-> >> revert recent changes that removed support for different pointer widths
-> >> between the host and guest (e.g., commits
-> >> a70af12addd9060fdf8f3dbd42b42e3072c3914f and
-> >> bf455ec50b6fea15b4d2493059365bf94c706273) when compiling with
-> >> Emscripten. While this serves as a temporary workaround, a long-term
-> >> solution could involve adopting Wasm's 64-bit memory model once it
-gains
-> >> broader support, as it is currently not widely adopted (e.g.,
-unsupported by
-> >> Safari and libffi). Feedback and suggestions on this approach are
-welcome.
->
-> The biggest problem I'm seeing is we no longer support 64-bit guests on
-> 32-bit hosts, and don't plan to revert that.
+> +#ifdef EMSCRIPTEN
+> +            error_report("initgroups unsupported");
+> +            exit(1);
 
-Yes, so the sixth patch ("[PATCH 06/10] include/exec: Allow using 64bit
-guest addresses on emscripten") should be considered as a temporary
-workaround, enabled only for Emsripten builds. It will be removed once
-wasm64 gains broader support and is adopted in the Wasm backend.
+I think it's best to add a new function os-wasm.c in addition to 
+os-posix.c and os-win32.c, and disable all the functionality of 
+-run-with and -daemonize in vl.c via
 
---00000000000003211406326c5bad
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+-#if defined(CONFIG_POSIX)
++#if defined(CONFIG_POSIX) && !defined(EMSCRIPTEN)
 
-<div dir=3D"ltr"><div dir=3D"ltr">Hi Philippe,</div><br>&gt; On 9/4/25 21:2=
-1, Stefan Hajnoczi wrote:<br>&gt; &gt; On Mon, Apr 07, 2025 at 11:45:51PM +=
-0900, Kohei Tokunaga wrote:<br>&gt; &gt;&gt; This patch series enables QEMU=
-&#39;s system emulator to run in a browser using<br>&gt; &gt;&gt; Emscripte=
-n.<br>&gt; &gt;&gt; It includes implementations and workarounds to address =
-browser environment<br>&gt; &gt;&gt; limitations, as shown in the following=
-.<br>&gt; &gt; <br>&gt; &gt; I think it would be great to merge this even i=
-f there are limitations<br>&gt; &gt; once code review comments have been ad=
-dressed. Developing WebAssembly<br>&gt; &gt; support in-tree is likely to a=
-llow this effort to develop further than<br>&gt; &gt; if done in personal r=
-epos (and with significant efforts required to<br>&gt; &gt; rebase the code=
- periodically).<br>&gt; &gt; <br>&gt; &gt;&gt; # New TCG Backend for Browse=
-rs<br>&gt; &gt;&gt;<br>&gt; &gt;&gt; A new TCG backend translates IR instru=
-ctions into Wasm instructions and runs<br>&gt; &gt;&gt; them using the brow=
-ser&#39;s WebAssembly APIs (WebAssembly.Module and<br>&gt; &gt;&gt; WebAsse=
-mbly.instantiate). To minimize compilation overhead and avoid hitting<br>&g=
-t; &gt;&gt; the browser&#39;s limitation of the number of instances, this b=
-ackend integrates<br>&gt; &gt;&gt; a forked TCI. TBs run on TCI by default,=
- with frequently executed TBs<br>&gt; &gt;&gt; compiled into WebAssembly.<b=
-r>&gt; &gt;&gt;<br>&gt; &gt;&gt; # Workaround for Running 64-bit Guests<br>=
-&gt; &gt;&gt;<br>&gt; &gt;&gt; The current implementation uses Wasm&#39;s 3=
-2-bit memory model, even though Wasm<br>&gt; &gt;&gt; supports 64-bit varia=
-bles and instructions. This patch explores implementing<br>&gt; &gt;&gt; TC=
-G 64-bit instructions while leveraging SoftMMU for address translation. To<=
-br>&gt; &gt;&gt; enable 64-bit guest support in Wasm today, it was necessar=
-y to partially<br>&gt; &gt;&gt; revert recent changes that removed support =
-for different pointer widths<br>&gt; &gt;&gt; between the host and guest (e=
-.g., commits<br>&gt; &gt;&gt; a70af12addd9060fdf8f3dbd42b42e3072c3914f and<=
-br>&gt; &gt;&gt; bf455ec50b6fea15b4d2493059365bf94c706273) when compiling w=
-ith<br>&gt; &gt;&gt; Emscripten. While this serves as a temporary workaroun=
-d, a long-term<br>&gt; &gt;&gt; solution could involve adopting Wasm&#39;s =
-64-bit memory model once it gains<br>&gt; &gt;&gt; broader support, as it i=
-s currently not widely adopted (e.g., unsupported by<br>&gt; &gt;&gt; Safar=
-i and libffi). Feedback and suggestions on this approach are welcome.<br>&g=
-t; <br>&gt; The biggest problem I&#39;m seeing is we no longer support 64-b=
-it guests on<br>&gt; 32-bit hosts, and don&#39;t plan to revert that.<br><b=
-r>Yes, so the sixth patch (&quot;[PATCH 06/10] include/exec: Allow using 64=
-bit<br>guest addresses on emscripten&quot;) should be considered as a tempo=
-rary<br>workaround, enabled only for Emsripten builds. It will be removed o=
-nce<br>wasm64 gains broader support and is adopted in the Wasm backend.<br>=
-<br></div>
+(there are a couple occurrences).
 
---00000000000003211406326c5bad--
+Thanks,
+
+Paolo
+
 
