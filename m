@@ -4,83 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4708EC36010
-	for <qemu-riscv@archiver.kernel.org>; Fri, 11 Apr 2025 14:37:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 842E8C36010
+	for <qemu-riscv@archiver.kernel.org>; Fri, 11 Apr 2025 14:42:34 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1u3FUd-0001iv-JU; Fri, 11 Apr 2025 10:36:31 -0400
+	id 1u3FaJ-0005VJ-2i; Fri, 11 Apr 2025 10:42:23 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <ktokunaga.mail@gmail.com>)
- id 1u3FUb-0001iD-Bz; Fri, 11 Apr 2025 10:36:29 -0400
-Received: from mail-ed1-x534.google.com ([2a00:1450:4864:20::534])
+ id 1u3FaB-0005UC-4T; Fri, 11 Apr 2025 10:42:15 -0400
+Received: from mail-ej1-x631.google.com ([2a00:1450:4864:20::631])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <ktokunaga.mail@gmail.com>)
- id 1u3FUZ-0001nK-By; Fri, 11 Apr 2025 10:36:29 -0400
-Received: by mail-ed1-x534.google.com with SMTP id
- 4fb4d7f45d1cf-5e5cded3e2eso3271176a12.0; 
- Fri, 11 Apr 2025 07:36:26 -0700 (PDT)
+ id 1u3Fa9-0002fQ-6y; Fri, 11 Apr 2025 10:42:14 -0400
+Received: by mail-ej1-x631.google.com with SMTP id
+ a640c23a62f3a-ac2a9a74d9cso392442766b.1; 
+ Fri, 11 Apr 2025 07:42:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1744382184; x=1744986984; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1744382530; x=1744987330; darn=nongnu.org;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=TlF6NDZu6E7cqFh7Nc+T41PatugtSHL1p7nnfIPlLdk=;
- b=fI8U9exj3KvkMK8FxiWNqjTZ39cE0eN34pep+s2z8Hr8jVWPI0qndzDAhSI8kXwVY3
- NQ41D5a6ugUSaSWMSqnE+xQsNAXA+PIH1aj6Pq7R1Bp5A8XGnlAIts+sV2J4WJpOzm4Z
- 1xuDcetKMzkMa9EqoPbXg2ks8/i4zljnX65Q1W/2tkqO70t1bf1LnV8ja/VwApD1ooVy
- MblECbNLxvHTmuSRBAAaneSNZWw+8uraTpDkGtQCza/KKY42ufhMv+vPqc+O/Y3cRww2
- 6iUp6gNpHeNb6YtnDBfMKD5j0hlLNc0+S1YDsgvp8rSId7FWSAS2Y48Q1lgSyLeZGqcm
- vGig==
+ bh=fSg6VV0S2nSlCQBls/gUcOoEnqiGB9k8fi2W1vxyUOk=;
+ b=U49n+gGuoRsSxwDUdB1tVZYZUrkHPuO6opkjXDrBo53K0EuFTywfBwFuXJM4XuN4BC
+ 4YZ8mnsD3jO7dFtdX3VGQo9EFdrsoTHTnbApZoJGapVoE2n9SVm1yhzUoW2QTptjB5b9
+ GUiZjcBuwc9utXlzR9AmvzNTohZ3bM3e1PKPh3jMsaUpJ2JziIKXdvZzoCaNgtkZhYAA
+ y86YGYQnLCmTg7AN0BJLSdjMSsFjBMMCFfsM6lwI0W937gBMj7G+vhIQ3PLsB028GuF0
+ dwT0VR0gUdUqxr6zm9sE7Nu7w1xXv2E1aiB1LA7fzrAJGXR8Pq1SKx5J/QWMH919UwWu
+ fdAQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1744382184; x=1744986984;
+ d=1e100.net; s=20230601; t=1744382530; x=1744987330;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=TlF6NDZu6E7cqFh7Nc+T41PatugtSHL1p7nnfIPlLdk=;
- b=wSJFS4KPYxTlFCYA7tRk1fJK/8iFlpbuZq3jAt1n/lS4wxhOIiZQD+6f8sscwrG106
- VBSM2hKQQ/Wvta6i6PQEUG2IvUEqr+GVpcMM81L/IWGgueWCuktGjcWb4SZ3IUB6GC3K
- zFlN0tYMMbH1cBKg4itOgDocRvbjY/0DUZfmVuPVxUVXVuDJzibjaPsk83f/KNWg5yaI
- F4D6yJGJOSZ9apJWkPtFgMNRKl0yzud0Mb/JdB+195FjYhDmQbCh00sTNMFT2LEPykf9
- HRwe5+ogtZ4fhG4oAvUTVIRd2uXN+o5cKaQ6UVLpCUnYcK1y3DpyvvDzBJVNUZC57LBR
- 8k0g==
+ bh=fSg6VV0S2nSlCQBls/gUcOoEnqiGB9k8fi2W1vxyUOk=;
+ b=pzKFtU/rog3AsEHcvHNR1cHkhCDICZ0cS4Gcjcn9nobH4NionEh4xr6YWFmWVQ+q2d
+ cKHQcMLD7nDsoPrg+kzSKfdhy27UF4X1Sn3l5UAaAb9nVD9CX339ahvvvXA1KEYjRESw
+ H0BH3UA9T8XCPfdal8LJVeS63En5YsgW4me+swngJtMQN77lQMkjLuH9dUdVAO2x9bpX
+ HejoziikBUSi0jV7lm2/lJFVgTzL0wFvWC5b1EbUiMclTH7uHj14VBqOKM3cnqao+Uae
+ ngljJ9I27lKC3LNwldNw7eReIG/QfoZnXWyO6ePjiVRBsblqo+drmhmrlQLlsvcQBHZN
+ beiw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCW7Y5NJfe9KIht0ses3EhAmty4kCVx+x1RbevAS1uQJUx+m0VouuerT5zbgL+5fKwzfYQs2IMoBLqxj/g==@nongnu.org,
- AJvYcCWn4Ew03mZzaC0yp14Q/QdaIrDsh8E73lxWGBM5loe9BmQWOkqafT+giwfZj+Cni60V9NFhsZrMaA==@nongnu.org,
- AJvYcCXOtmfa5VurI/3OCSYeSvfFENlUTM1mKMJYsjyf8UZ6FLaAnm2N+SGo8qlz8zEPTcC/sH1vSjCHwJvIFg==@nongnu.org,
- AJvYcCXo4TlJC4x0M5ewXswqPFv4smk/jXz92IZ5gUDeNOy4gyrk0z0z2cwVM+g7zGqL/Ez0eoPuEPZydqQcwA==@nongnu.org
-X-Gm-Message-State: AOJu0YxRV7RToOzN6m8EnuoHgoAGfXaoRLZlebkln6UaGPqEot5Hrf7d
- dVu7Y/RWuz07HiG2FsTh4bobS3yRIRSg676TRVkeUYAAAPEeYSjgoLDJkeinO5zKvmGY0sMe/p2
- G3Hy9eaxbBMsIFVIwGpDDGC+Y1HQ=
-X-Gm-Gg: ASbGncusPzVB7rXYhg4FEKrnvdZmI5mBT/TG/sCacXQEIx7oSgv1MJ+I/YlirC79tDO
- DzWp+1cOPXD4sdBLJbR7TMBWAQnpuqxOzmvX8hiRyfSs1MIf2S7GDG68KnyTB1gPTPI4NBnsJUC
- 85rX5gWjy/WpnBY4WpC4KVYOwaAlAATUQQ1e+WhG55ogboYDxLtsw=
-X-Google-Smtp-Source: AGHT+IEK4IlWPqik4XVDKLNC42CRTXGG0nCurAmChUtUb3OKn1+5+1bmiQVlarf1wzo4Olhm09ujK8nS6X9rvaZgqTI=
-X-Received: by 2002:a17:906:3551:b0:aca:d4f6:440d with SMTP id
- a640c23a62f3a-acad4f64472mr203284666b.17.1744382183784; Fri, 11 Apr 2025
- 07:36:23 -0700 (PDT)
+ AJvYcCVFYBtPQ0jm1jwv1EsOb+GmPokxzDuAjBreZjBD/KgWH5qf898/qQ47+po68wag/PPbPlt691ct2lwGtg==@nongnu.org,
+ AJvYcCVshit+X88fLEcRcvpx2ASkTFSFBS+o+nFoNFPRpACpP1xV05+n6mokX0JWsP6yfhR7uffU4Ym14CQicA==@nongnu.org,
+ AJvYcCWMBXGlcWWC8AmOe7gIXf2MRHGok9bjbOnQfDUz/njK7OnJfrgn8Ih6D+cuH0MngFhfh/rBUBTW5Rqf8w==@nongnu.org,
+ AJvYcCXBAllVZ7fDsJlJXk08/JQY3RpTXdSgyMbEeTSmyanyDjKLVY3DmYr+GQvu2bCQlNwEB0wG0j0qBw==@nongnu.org
+X-Gm-Message-State: AOJu0YxYMqNwBI1ktWa+MPP5u5xnrj6LxRdeJ60O1PP0XvSTUYilu1IZ
+ 4QhI1mP52T3C39ohZMhf1TzyVhL9wIZLg165+X30GyeNqRjRgEtCQrVmgSmaoHz6pJeIaCIcga9
+ xiBHxiiRdisoEhAyErAj41DbPmJw=
+X-Gm-Gg: ASbGnctSWZ0E07+38UpgpHJn4Irt8FZmC7msgysy+twIISjjp7BZD+j7A5g5cIxXwKO
+ iLXiSuXcR7nms52WLBXEWpUBJZIfpkl05w6CdSdRb8UiHn067Ty5UmtuPmvbA7L5fhA/Edxb2UL
+ wCJIld3g81KAn4geNGxN1CY/mPWB+sQBp8kuAhQLMpACjCVIkHHAQ=
+X-Google-Smtp-Source: AGHT+IGM/L1G5c/pGv0mWpPy9S2TrZVYAgbtjuqt00gDkNmv2LT9mD9EBklEQnolow+B7gZfjm/5nJqKbNTR9trnpjI=
+X-Received: by 2002:a17:907:7f0d:b0:ac3:bd68:24f0 with SMTP id
+ a640c23a62f3a-acad3457c9dmr311069566b.7.1744382529777; Fri, 11 Apr 2025
+ 07:42:09 -0700 (PDT)
 MIME-Version: 1.0
 References: <cover.1744032780.git.ktokunaga.mail@gmail.com>
  <20250409192115.GA5528@fedora>
  <dc36c24e-dc4a-4c24-97b7-8b812441ffce@linaro.org>
  <CAEDrbUZ4mbCT-npk8Nha4fDd9a5PGguAxS_RD0wG96gpQRUp+g@mail.gmail.com>
  <CAEDrbUYM3aK5ErvF=+oV=q-NVLO0uzxbYjHzcxPGvTLp7yNtwA@mail.gmail.com>
- <83f44749-0eea-48f0-8aa5-3882132e30d0@linaro.org>
-In-Reply-To: <83f44749-0eea-48f0-8aa5-3882132e30d0@linaro.org>
+ <26951ab5-cc40-465c-88d2-d70e98bae3f6@redhat.com>
+In-Reply-To: <26951ab5-cc40-465c-88d2-d70e98bae3f6@redhat.com>
 From: Kohei Tokunaga <ktokunaga.mail@gmail.com>
-Date: Fri, 11 Apr 2025 23:36:10 +0900
-X-Gm-Features: ATxdqUG2wUVfL0Bc-xKm6Ed3L3KzqObfzFH1fQHjiBHOvWTFvTqQyENfOv92ae8
-Message-ID: <CAEDrbUbjD0d-pP_s1oV7gSuFoDpKTDiXd7bQf6p5hQUcN_iT+g@mail.gmail.com>
+Date: Fri, 11 Apr 2025 23:41:55 +0900
+X-Gm-Features: ATxdqUHuiB3X5nnUlwjG9zchkT6JXAC7eww0fXhplrsQCQJM-9blRapTad2xPWE
+Message-ID: <CAEDrbUYj9362hWQuTNA28cMRLTrjd4MeqkN8BUpZUpEVbPcsTg@mail.gmail.com>
 Subject: Re: [PATCH 00/10] Enable QEMU to run on browsers
-To: Pierrick Bouvier <pierrick.bouvier@linaro.org>, qemu-devel@nongnu.org
+To: Paolo Bonzini <pbonzini@redhat.com>, qemu-devel@nongnu.org
 Cc: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@linaro.org>, 
  Stefan Hajnoczi <stefanha@redhat.com>,
  Richard Henderson <richard.henderson@linaro.org>, 
  =?UTF-8?B?QWxleCBCZW5uw6ll?= <alex.bennee@linaro.org>, 
- Thomas Huth <thuth@redhat.com>, Paolo Bonzini <pbonzini@redhat.com>,
- Kevin Wolf <kwolf@redhat.com>, 
- Hanna Reitz <hreitz@redhat.com>, Christian Schoenebeck <qemu_oss@crudebyte.com>,
- Greg Kurz <groug@kaod.org>, Palmer Dabbelt <palmer@dabbelt.com>,
+ Thomas Huth <thuth@redhat.com>, Kevin Wolf <kwolf@redhat.com>,
+ Hanna Reitz <hreitz@redhat.com>, 
+ Christian Schoenebeck <qemu_oss@crudebyte.com>, Greg Kurz <groug@kaod.org>, 
+ Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <alistair.francis@wdc.com>, 
  Weiwei Li <liwei1518@gmail.com>,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>, 
@@ -89,9 +89,9 @@ Cc: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@linaro.org>,
  =?UTF-8?Q?Daniel_P=2E_Berrang=C3=A9?= <berrange@redhat.com>, 
  Eduardo Habkost <eduardo@habkost.net>, Peter Maydell <peter.maydell@linaro.org>,
  qemu-block@nongnu.org, qemu-riscv@nongnu.org, qemu-arm@nongnu.org
-Content-Type: multipart/alternative; boundary="0000000000006acb94063281a09e"
-Received-SPF: pass client-ip=2a00:1450:4864:20::534;
- envelope-from=ktokunaga.mail@gmail.com; helo=mail-ed1-x534.google.com
+Content-Type: multipart/alternative; boundary="0000000000000a3dd7063281b5e4"
+Received-SPF: pass client-ip=2a00:1450:4864:20::631;
+ envelope-from=ktokunaga.mail@gmail.com; helo=mail-ej1-x631.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -114,85 +114,71 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
---0000000000006acb94063281a09e
+--0000000000000a3dd7063281b5e4
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 
-Hi Pierrick, thank you for the feedback.
+Hi Paolo,
 
-> first, congrats for this work!
-> It would be really nice to have this available upstream, starting with a
-> modest TCI port, before having the tcg backend also.
-
-Sure, I'll split the patch series, starting with the TCI port.
-
-> Do you have recent information about wasm64? It seems to be something
-> that has been discussed for several years, without really seeing any
-> progress.
-
-According to the adoption status=E2=80=AF[1], wasm64 is supported by recent=
- versions
-of Chrome and Firefox. Emscripten also supports wasm64=E2=80=AF[2]. However=
-, it is
-not yet supported by Safari or libffi=E2=80=AF[3], and I haven't found a ro=
-admap for
-the adoption.
-
-[1] https://webassembly.org/features/
-[2]
-https://emscripten.org/docs/tools_reference/settings_reference.html#memory6=
-4
-[3]
-https://github.com/libffi/libffi/blob/6a99edb8082f75e523e0d6ebaba42218b80e1=
-0c8/README.md#supported-platforms
-
-> As Philippe said, we can't really revert that (it's now an assumption
-> for our softmmu implementation, and would break code if we enabled it
-> again now.)
+> > > The biggest problem I'm seeing is we no longer support 64-bit guests
+on
+> > > 32-bit hosts, and don't plan to revert that.
+> >
+> > Yes, so the sixth patch ("[PATCH 06/10] include/exec: Allow using 64bit
+> > guest addresses on emscripten") should be considered as a temporary
+> > workaround, enabled only for Emsripten builds. It will be removed once
+> > wasm64 gains broader support and is adopted in the Wasm backend.
 >
-> That said, we can always have a first version supporting only 32 bits
-> targets. And later, when wasm64 will be available, we can extend this to
-> all remaining ones.
+> Maybe there's a way though. Currently we don't support 64-bit guests on
+> 32-bit hosts, but more precisely we don't support 64-bit guests with
+> 32-bit host word size.
+>
+>
+> The wasm TCG backend is able to compile with 64-bit words:
+>
+> +#define TCG_TARGET_HAS_div_i64          1
+> +#define TCG_TARGET_HAS_rem_i64          1
+> etc.
+>
+> and if x32 was a thing it would as well.  In fact the changes in patch
+> 6/10 are not a full revert, and the "#ifdef EMSCRIPTEN" could be changed
+to
+>
+> #if HOST_LONG_BITS >= TARGET_LONG_BITS
+> ... use uintptr_t
+> #else
+> ... use uint64_t
+> #endif
 
-The main challenge I'm seeing is that I couldn't find a clear timeline for
-wasm64 adoption so it's difficult to predict when it will be widely
-available.
+Thank you for the feedback.
 
-Regarding the revert, the wasm backend supports 64-bit words, so the revert
-introduced in patch 06/10 is partial, as also pointed out by Paolo.
+Yes, the Wasm backend can be compiled with 64-bit words. The change
+regarding the macro looks good to me.
 
---0000000000006acb94063281a09e
+--0000000000000a3dd7063281b5e4
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-<div dir=3D"ltr"><div dir=3D"ltr">Hi Pierrick, thank you for the feedback.<=
-/div><br>&gt; first, congrats for this work!<br>&gt; It would be really nic=
-e to have this available upstream, starting with a<br>&gt; modest TCI port,=
- before having the tcg backend also.<br><br>Sure, I&#39;ll split the patch =
-series, starting with the TCI port.<br><br>&gt; Do you have recent informat=
-ion about wasm64? It seems to be something<br>&gt; that has been discussed =
-for several years, without really seeing any<br>&gt; progress.<br><br>Accor=
-ding to the adoption status=E2=80=AF[1], wasm64 is supported by recent vers=
-ions<br>of Chrome and Firefox. Emscripten also supports wasm64=E2=80=AF[2].=
- However, it is<br>not yet supported by Safari or libffi=E2=80=AF[3], and I=
- haven&#39;t found a roadmap for<br>the adoption.<br><br>[1] <a href=3D"htt=
-ps://webassembly.org/features/">https://webassembly.org/features/</a><br>[2=
-] <a href=3D"https://emscripten.org/docs/tools_reference/settings_reference=
-.html#memory64">https://emscripten.org/docs/tools_reference/settings_refere=
-nce.html#memory64</a><br>[3] <a href=3D"https://github.com/libffi/libffi/bl=
-ob/6a99edb8082f75e523e0d6ebaba42218b80e10c8/README.md#supported-platforms">=
-https://github.com/libffi/libffi/blob/6a99edb8082f75e523e0d6ebaba42218b80e1=
-0c8/README.md#supported-platforms</a><br><br>&gt; As Philippe said, we can&=
-#39;t really revert that (it&#39;s now an assumption <br>&gt; for our softm=
-mu implementation, and would break code if we enabled it <br>&gt; again now=
-.)<br>&gt; <br>&gt; That said, we can always have a first version supportin=
-g only 32 bits <br>&gt; targets. And later, when wasm64 will be available, =
-we can extend this to <br>&gt; all remaining ones.<br><br>The main challeng=
-e I&#39;m seeing is that I couldn&#39;t find a clear timeline for<br>wasm64=
- adoption so it&#39;s difficult to predict when it will be widely<br>availa=
-ble.<br><br>Regarding the revert, the wasm backend supports 64-bit words, s=
-o the revert<br>introduced in patch 06/10 is partial, as also pointed out b=
-y Paolo.<br><br></div>
+<div dir=3D"ltr"><div dir=3D"ltr"><br></div>Hi Paolo,<br><br>&gt; &gt; &gt;=
+ The biggest problem I&#39;m seeing is we no longer support 64-bit guests o=
+n<br>&gt; &gt; &gt; 32-bit hosts, and don&#39;t plan to revert that.<br>&gt=
+; &gt; <br>&gt; &gt; Yes, so the sixth patch (&quot;[PATCH 06/10] include/e=
+xec: Allow using 64bit<br>&gt; &gt; guest addresses on emscripten&quot;) sh=
+ould be considered as a temporary<br>&gt; &gt; workaround, enabled only for=
+ Emsripten builds. It will be removed once<br>&gt; &gt; wasm64 gains broade=
+r support and is adopted in the Wasm backend.<br>&gt; <br>&gt; Maybe there&=
+#39;s a way though. Currently we don&#39;t support 64-bit guests on<br>&gt;=
+ 32-bit hosts, but more precisely we don&#39;t support 64-bit guests with<b=
+r>&gt; 32-bit host word size.<br>&gt; <br>&gt; <br>&gt; The wasm TCG backen=
+d is able to compile with 64-bit words:<br>&gt; <br>&gt; +#define TCG_TARGE=
+T_HAS_div_i64 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A01<br>&gt; +#define TCG_TARG=
+ET_HAS_rem_i64 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A01<br>&gt; etc.<br>&gt; <br=
+>&gt; and if x32 was a thing it would as well.=C2=A0 In fact the changes in=
+ patch<br>&gt; 6/10 are not a full revert, and the &quot;#ifdef EMSCRIPTEN&=
+quot; could be changed to<br>&gt; <br>&gt; #if HOST_LONG_BITS &gt;=3D TARGE=
+T_LONG_BITS<br>&gt; ... use uintptr_t<br>&gt; #else<br>&gt; ... use uint64_=
+t<br>&gt; #endif<br><br>Thank you for the feedback.<br><br>Yes, the Wasm ba=
+ckend can be compiled with 64-bit words. The change<br>regarding the macro =
+looks good to me.<br><br></div>
 
---0000000000006acb94063281a09e--
+--0000000000000a3dd7063281b5e4--
 
