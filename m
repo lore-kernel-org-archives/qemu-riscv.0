@@ -4,91 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 44A45C36010
-	for <qemu-riscv@archiver.kernel.org>; Fri, 11 Apr 2025 14:04:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4708EC36010
+	for <qemu-riscv@archiver.kernel.org>; Fri, 11 Apr 2025 14:37:25 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1u3Eyu-0006hJ-Bv; Fri, 11 Apr 2025 10:03:44 -0400
+	id 1u3FUd-0001iv-JU; Fri, 11 Apr 2025 10:36:31 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <ktokunaga.mail@gmail.com>)
- id 1u3Eyb-0006dZ-C8; Fri, 11 Apr 2025 10:03:26 -0400
-Received: from mail-pj1-x1033.google.com ([2607:f8b0:4864:20::1033])
+ id 1u3FUb-0001iD-Bz; Fri, 11 Apr 2025 10:36:29 -0400
+Received: from mail-ed1-x534.google.com ([2a00:1450:4864:20::534])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <ktokunaga.mail@gmail.com>)
- id 1u3EyZ-0004tv-K3; Fri, 11 Apr 2025 10:03:25 -0400
-Received: by mail-pj1-x1033.google.com with SMTP id
- 98e67ed59e1d1-301c4850194so1600919a91.2; 
- Fri, 11 Apr 2025 07:03:21 -0700 (PDT)
+ id 1u3FUZ-0001nK-By; Fri, 11 Apr 2025 10:36:29 -0400
+Received: by mail-ed1-x534.google.com with SMTP id
+ 4fb4d7f45d1cf-5e5cded3e2eso3271176a12.0; 
+ Fri, 11 Apr 2025 07:36:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1744380200; x=1744985000; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1744382184; x=1744986984; darn=nongnu.org;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=xFy6ACGlewwahJcQDdgO8c8GfCX47OEfeGyDlhNqeLA=;
- b=AhZpVDQ02F/MUa4jecJNQx/3FPNsbtwtNlQFQ2iQuFQ1lTIZJom6kWU+5ahVAgGubt
- 1TlO5zXAIsmr+0tOi+c9YKMntLSvA9B7mTZ4ifpiPQxDLETEKk2MzhEeujt1PXMm9ZWe
- MVUMG3fdd+GyHkX384+ltsmodTC6VYrR4FcamaVrcf3U+OIoS7wHl/OTiB7zHkjN+jiG
- bRjr7xdCAsjxlyKe1nrtYcd1m5A/wBcH5nQBNnH0FfTB0KA9UmkG7H6lKj16kj33pTQL
- X9jLaCilKGGDl4L5w+i/D9CiU0kFf3+nDFRV7cd3JJzkk4BKpHqc17ABbXyq9emWc4rU
- mang==
+ bh=TlF6NDZu6E7cqFh7Nc+T41PatugtSHL1p7nnfIPlLdk=;
+ b=fI8U9exj3KvkMK8FxiWNqjTZ39cE0eN34pep+s2z8Hr8jVWPI0qndzDAhSI8kXwVY3
+ NQ41D5a6ugUSaSWMSqnE+xQsNAXA+PIH1aj6Pq7R1Bp5A8XGnlAIts+sV2J4WJpOzm4Z
+ 1xuDcetKMzkMa9EqoPbXg2ks8/i4zljnX65Q1W/2tkqO70t1bf1LnV8ja/VwApD1ooVy
+ MblECbNLxvHTmuSRBAAaneSNZWw+8uraTpDkGtQCza/KKY42ufhMv+vPqc+O/Y3cRww2
+ 6iUp6gNpHeNb6YtnDBfMKD5j0hlLNc0+S1YDsgvp8rSId7FWSAS2Y48Q1lgSyLeZGqcm
+ vGig==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1744380200; x=1744985000;
+ d=1e100.net; s=20230601; t=1744382184; x=1744986984;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=xFy6ACGlewwahJcQDdgO8c8GfCX47OEfeGyDlhNqeLA=;
- b=hTnkzpXjcHjLKechMUaV7TIyN6F9z0yZcclObNUWExI2ixnOLRA8eTEGadOmocJbW6
- PiLf9IUFxeUAAXDFPKjsjpwL0o9Og8+xVLdNW3t1sT32GkOBe5ItqU1yuHKzP2cnfXZe
- 8lJtPBIxw/3Pymqt0pgOPQ9aO9RJvOEFze89b+krdDB8koWYdKEr8TNtna3LY68poTbi
- /AOsUJdKoULdNEbKpSegWmsrulYVYavHFXNwkIC3clEGW+9+4Mfx1X9n3wtol7hywAls
- 61CDpH81FnZVUiLTfEV7iTykSTf2TFTld+w+Qv3LFCV8qP449j5q2OT2JoV9Bkk4V1al
- W7OQ==
+ bh=TlF6NDZu6E7cqFh7Nc+T41PatugtSHL1p7nnfIPlLdk=;
+ b=wSJFS4KPYxTlFCYA7tRk1fJK/8iFlpbuZq3jAt1n/lS4wxhOIiZQD+6f8sscwrG106
+ VBSM2hKQQ/Wvta6i6PQEUG2IvUEqr+GVpcMM81L/IWGgueWCuktGjcWb4SZ3IUB6GC3K
+ zFlN0tYMMbH1cBKg4itOgDocRvbjY/0DUZfmVuPVxUVXVuDJzibjaPsk83f/KNWg5yaI
+ F4D6yJGJOSZ9apJWkPtFgMNRKl0yzud0Mb/JdB+195FjYhDmQbCh00sTNMFT2LEPykf9
+ HRwe5+ogtZ4fhG4oAvUTVIRd2uXN+o5cKaQ6UVLpCUnYcK1y3DpyvvDzBJVNUZC57LBR
+ 8k0g==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUaP1223P4ZSpa2+bvdIFDU4p530Hm3Mq3gJ1MXA0nNowy5llAI7VkJcLjOk+dW59B+B3JYtBfmlw==@nongnu.org,
- AJvYcCVLyc0Qt7E3WLuO4ZZ2wGtmkxzhz30Hqdcut2jIsBunbdKoFlL77iDsMuZgx12423dftXOhLIAKN5Obhg==@nongnu.org,
- AJvYcCWGx26u28xmSq2KqimuYjzae168WrKrXqHK+FgVcF5cdFZRib/RGxSz2bDilnCy1yeohbn8GUr/kraObQ==@nongnu.org,
- AJvYcCXwA+EFtZFwS5cHqngMhxkoXFOUZD9QVjMOgWg494SvCxSnUy1K3Ns+BH/qBfcxHLKMATWy+iavhFxRcA==@nongnu.org
-X-Gm-Message-State: AOJu0YzCPAf8MYeazqAgtlRy3cfVmxyIjsgR2ws6lqpkDpWbk/HhnHYJ
- atJAfqhdpJH/nr4vJq3I1VxEpCgkiHG2T9xYlxxr+xOi07eDlytvUAzydry9Doz71DykyosTurc
- x/9FIFvwncP8EEUK0vFTQzd7zLCg=
-X-Gm-Gg: ASbGncsQiWZVWRKR6z6RGB6OpzcWZEqDMguS6OPEiAx9gzDfWrmh7P01saXQzkMqARz
- Xlt+HuzzemfLKy/rP7LCqITb1yDqxN8q0PdY34PBz5sTgFWc/V8CdseU+fNME2Y63PYevHaKEwh
- HAvGyK116zNX7qXgisa5oDV6ethIqP+wWoBZvLavsRrUOCNpNtiJw=
-X-Google-Smtp-Source: AGHT+IHazCXxnMA+xyqZPveubVFBv52IbAgpmh1CjzAbeFtFPVX6/q3G/iRq8FPnP60DzPRxeHXfocU9HqCUX5JBXWc=
-X-Received: by 2002:a17:90a:d888:b0:2ee:f677:aa14 with SMTP id
- 98e67ed59e1d1-30823664084mr4622603a91.13.1744380199557; Fri, 11 Apr 2025
- 07:03:19 -0700 (PDT)
+ AJvYcCW7Y5NJfe9KIht0ses3EhAmty4kCVx+x1RbevAS1uQJUx+m0VouuerT5zbgL+5fKwzfYQs2IMoBLqxj/g==@nongnu.org,
+ AJvYcCWn4Ew03mZzaC0yp14Q/QdaIrDsh8E73lxWGBM5loe9BmQWOkqafT+giwfZj+Cni60V9NFhsZrMaA==@nongnu.org,
+ AJvYcCXOtmfa5VurI/3OCSYeSvfFENlUTM1mKMJYsjyf8UZ6FLaAnm2N+SGo8qlz8zEPTcC/sH1vSjCHwJvIFg==@nongnu.org,
+ AJvYcCXo4TlJC4x0M5ewXswqPFv4smk/jXz92IZ5gUDeNOy4gyrk0z0z2cwVM+g7zGqL/Ez0eoPuEPZydqQcwA==@nongnu.org
+X-Gm-Message-State: AOJu0YxRV7RToOzN6m8EnuoHgoAGfXaoRLZlebkln6UaGPqEot5Hrf7d
+ dVu7Y/RWuz07HiG2FsTh4bobS3yRIRSg676TRVkeUYAAAPEeYSjgoLDJkeinO5zKvmGY0sMe/p2
+ G3Hy9eaxbBMsIFVIwGpDDGC+Y1HQ=
+X-Gm-Gg: ASbGncusPzVB7rXYhg4FEKrnvdZmI5mBT/TG/sCacXQEIx7oSgv1MJ+I/YlirC79tDO
+ DzWp+1cOPXD4sdBLJbR7TMBWAQnpuqxOzmvX8hiRyfSs1MIf2S7GDG68KnyTB1gPTPI4NBnsJUC
+ 85rX5gWjy/WpnBY4WpC4KVYOwaAlAATUQQ1e+WhG55ogboYDxLtsw=
+X-Google-Smtp-Source: AGHT+IEK4IlWPqik4XVDKLNC42CRTXGG0nCurAmChUtUb3OKn1+5+1bmiQVlarf1wzo4Olhm09ujK8nS6X9rvaZgqTI=
+X-Received: by 2002:a17:906:3551:b0:aca:d4f6:440d with SMTP id
+ a640c23a62f3a-acad4f64472mr203284666b.17.1744382183784; Fri, 11 Apr 2025
+ 07:36:23 -0700 (PDT)
 MIME-Version: 1.0
 References: <cover.1744032780.git.ktokunaga.mail@gmail.com>
- <16376e4b63fad6f847ceadb39b8f9780fc288198.1744032780.git.ktokunaga.mail@gmail.com>
- <2e9cb17e-47a4-49d3-a815-612bcbdcc92d@redhat.com>
-In-Reply-To: <2e9cb17e-47a4-49d3-a815-612bcbdcc92d@redhat.com>
+ <20250409192115.GA5528@fedora>
+ <dc36c24e-dc4a-4c24-97b7-8b812441ffce@linaro.org>
+ <CAEDrbUZ4mbCT-npk8Nha4fDd9a5PGguAxS_RD0wG96gpQRUp+g@mail.gmail.com>
+ <CAEDrbUYM3aK5ErvF=+oV=q-NVLO0uzxbYjHzcxPGvTLp7yNtwA@mail.gmail.com>
+ <83f44749-0eea-48f0-8aa5-3882132e30d0@linaro.org>
+In-Reply-To: <83f44749-0eea-48f0-8aa5-3882132e30d0@linaro.org>
 From: Kohei Tokunaga <ktokunaga.mail@gmail.com>
-Date: Fri, 11 Apr 2025 23:03:07 +0900
-X-Gm-Features: ATxdqUGygzKUhd7MGEXS4tYylx2kmA9QydAJS9i_XTLSV_ewkssT5HpuuxRtrHA
-Message-ID: <CAEDrbUYDsZo_XO_prUnz8yZ_+gU1UgNiba48svDmANuqcTMyWw@mail.gmail.com>
-Subject: Re: [PATCH 08/10] hw/9pfs: Allow using hw/9pfs with emscripten
-To: Paolo Bonzini <pbonzini@redhat.com>, qemu-devel@nongnu.org
-Cc: =?UTF-8?B?QWxleCBCZW5uw6ll?= <alex.bennee@linaro.org>, 
- =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@linaro.org>, 
- Thomas Huth <thuth@redhat.com>,
+Date: Fri, 11 Apr 2025 23:36:10 +0900
+X-Gm-Features: ATxdqUG2wUVfL0Bc-xKm6Ed3L3KzqObfzFH1fQHjiBHOvWTFvTqQyENfOv92ae8
+Message-ID: <CAEDrbUbjD0d-pP_s1oV7gSuFoDpKTDiXd7bQf6p5hQUcN_iT+g@mail.gmail.com>
+Subject: Re: [PATCH 00/10] Enable QEMU to run on browsers
+To: Pierrick Bouvier <pierrick.bouvier@linaro.org>, qemu-devel@nongnu.org
+Cc: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@linaro.org>, 
+ Stefan Hajnoczi <stefanha@redhat.com>,
  Richard Henderson <richard.henderson@linaro.org>, 
- Kevin Wolf <kwolf@redhat.com>, Hanna Reitz <hreitz@redhat.com>, 
- Christian Schoenebeck <qemu_oss@crudebyte.com>, Greg Kurz <groug@kaod.org>, 
- Palmer Dabbelt <palmer@dabbelt.com>,
+ =?UTF-8?B?QWxleCBCZW5uw6ll?= <alex.bennee@linaro.org>, 
+ Thomas Huth <thuth@redhat.com>, Paolo Bonzini <pbonzini@redhat.com>,
+ Kevin Wolf <kwolf@redhat.com>, 
+ Hanna Reitz <hreitz@redhat.com>, Christian Schoenebeck <qemu_oss@crudebyte.com>,
+ Greg Kurz <groug@kaod.org>, Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <alistair.francis@wdc.com>, 
  Weiwei Li <liwei1518@gmail.com>,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>, 
  Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
  =?UTF-8?B?TWFyYy1BbmRyw6kgTHVyZWF1?= <marcandre.lureau@redhat.com>, 
- =?UTF-8?Q?Daniel_P_=2E_Berrang=C3=A9?= <berrange@redhat.com>, 
+ =?UTF-8?Q?Daniel_P=2E_Berrang=C3=A9?= <berrange@redhat.com>, 
  Eduardo Habkost <eduardo@habkost.net>, Peter Maydell <peter.maydell@linaro.org>,
- Stefan Hajnoczi <stefanha@redhat.com>, qemu-block@nongnu.org,
- qemu-riscv@nongnu.org, qemu-arm@nongnu.org
-Content-Type: multipart/alternative; boundary="00000000000025e5270632812a75"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1033;
- envelope-from=ktokunaga.mail@gmail.com; helo=mail-pj1-x1033.google.com
+ qemu-block@nongnu.org, qemu-riscv@nongnu.org, qemu-arm@nongnu.org
+Content-Type: multipart/alternative; boundary="0000000000006acb94063281a09e"
+Received-SPF: pass client-ip=2a00:1450:4864:20::534;
+ envelope-from=ktokunaga.mail@gmail.com; helo=mail-ed1-x534.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -111,75 +114,85 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
---00000000000025e5270632812a75
+--0000000000006acb94063281a09e
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-Hi Paolo,
+Hi Pierrick, thank you for the feedback.
 
-> > Emscripten's fiber does not support submitting coroutines to other
-> > threads.
+> first, congrats for this work!
+> It would be really nice to have this available upstream, starting with a
+> modest TCI port, before having the tcg backend also.
+
+Sure, I'll split the patch series, starting with the TCI port.
+
+> Do you have recent information about wasm64? It seems to be something
+> that has been discussed for several years, without really seeing any
+> progress.
+
+According to the adoption status=E2=80=AF[1], wasm64 is supported by recent=
+ versions
+of Chrome and Firefox. Emscripten also supports wasm64=E2=80=AF[2]. However=
+, it is
+not yet supported by Safari or libffi=E2=80=AF[3], and I haven't found a ro=
+admap for
+the adoption.
+
+[1] https://webassembly.org/features/
+[2]
+https://emscripten.org/docs/tools_reference/settings_reference.html#memory6=
+4
+[3]
+https://github.com/libffi/libffi/blob/6a99edb8082f75e523e0d6ebaba42218b80e1=
+0c8/README.md#supported-platforms
+
+> As Philippe said, we can't really revert that (it's now an assumption
+> for our softmmu implementation, and would break code if we enabled it
+> again now.)
 >
-> Does it work as long as the thread does not rewind?
+> That said, we can always have a first version supporting only 32 bits
+> targets. And later, when wasm64 will be available, we can extend this to
+> all remaining ones.
 
-The structure used by Fiber includes a thread-specific field related to
-rewind=E2=80=AF[1], which prevents it from being shared across threads. The=
- behavior
-of the remaining fields in multi-threaded contexts is not documented, so
-further experimentation is needed to determine whether they can be safely
-shared.
+The main challenge I'm seeing is that I couldn't find a clear timeline for
+wasm64 adoption so it's difficult to predict when it will be widely
+available.
 
-[1]
-https://emscripten.org/docs/api_reference/fiber.h.html#c.asyncify_data_t.re=
-wind_id
+Regarding the revert, the wasm backend supports 64-bit words, so the revert
+introduced in patch 06/10 is partial, as also pointed out by Paolo.
 
-> You can add all these to the stubs/emscripten.c file that I suggested
-> elsewhere.
-
-Sure, I'll apply this reorganization in the next verison of the series.
-
-> You could extracting v9fs_co_run_in_worker()'s bodies into separate
-> functions.  It is tedious but not hard; all you have to do is define
-> structs for the to parameters and return values of v9fs_co_*(), unpack
-> them in the callback functions, and retrieve the return value in
-> v9fs_co_*().  Many functions
->
-> The advantage is that, instead of all the bottom half and yielding dance
-> that is done by v9fs_co_run_in_worker() and co_run_in_worker_bh(), you
-> can just use thread_pool_submit_co().
-
-Thank you for the suggestion. I'll explore this approach, though it's still
-unclear whether thread_pool_submit_co() can be used with Emscripten's Fiber
-due to the limitations mentioned above.
-
---00000000000025e5270632812a75
+--0000000000006acb94063281a09e
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-<div dir=3D"ltr"><div>Hi Paolo,</div><div><br></div><div>&gt; &gt; Emscript=
-en&#39;s fiber does not support submitting coroutines to other<br>&gt; &gt;=
- threads.<br>&gt;<br>&gt; Does it work as long as the thread does not rewin=
-d?<br><br>The structure used by Fiber includes a thread-specific field rela=
-ted to<br>rewind=E2=80=AF[1], which prevents it from being shared across th=
-reads. The behavior<br>of the remaining fields in multi-threaded contexts i=
-s not documented, so<br>further experimentation is needed to determine whet=
-her they can be safely<br>shared.<br><br>[1] <a href=3D"https://emscripten.=
-org/docs/api_reference/fiber.h.html#c.asyncify_data_t.rewind_id">https://em=
-scripten.org/docs/api_reference/fiber.h.html#c.asyncify_data_t.rewind_id</a=
-><br><br>&gt; You can add all these to the stubs/emscripten.c file that I s=
-uggested<br>&gt; elsewhere.<br><br>Sure, I&#39;ll apply this reorganization=
- in the next verison of the series.<br><br>&gt; You could extracting v9fs_c=
-o_run_in_worker()&#39;s bodies into separate<br>&gt; functions.=C2=A0 It is=
- tedious but not hard; all you have to do is define<br>&gt; structs for the=
- to parameters and return values of v9fs_co_*(), unpack<br>&gt; them in the=
- callback functions, and retrieve the return value in<br>&gt; v9fs_co_*().=
-=C2=A0 Many functions<br>&gt;<br>&gt; The advantage is that, instead of all=
- the bottom half and yielding dance<br>&gt; that is done by v9fs_co_run_in_=
-worker() and co_run_in_worker_bh(), you<br>&gt; can just use thread_pool_su=
-bmit_co().<br><br>Thank you for the suggestion. I&#39;ll explore this appro=
-ach, though it&#39;s still<br>unclear whether thread_pool_submit_co() can b=
-e used with Emscripten&#39;s Fiber<br>due to the limitations mentioned abov=
-e.<br><br><br><br></div><br></div>
+<div dir=3D"ltr"><div dir=3D"ltr">Hi Pierrick, thank you for the feedback.<=
+/div><br>&gt; first, congrats for this work!<br>&gt; It would be really nic=
+e to have this available upstream, starting with a<br>&gt; modest TCI port,=
+ before having the tcg backend also.<br><br>Sure, I&#39;ll split the patch =
+series, starting with the TCI port.<br><br>&gt; Do you have recent informat=
+ion about wasm64? It seems to be something<br>&gt; that has been discussed =
+for several years, without really seeing any<br>&gt; progress.<br><br>Accor=
+ding to the adoption status=E2=80=AF[1], wasm64 is supported by recent vers=
+ions<br>of Chrome and Firefox. Emscripten also supports wasm64=E2=80=AF[2].=
+ However, it is<br>not yet supported by Safari or libffi=E2=80=AF[3], and I=
+ haven&#39;t found a roadmap for<br>the adoption.<br><br>[1] <a href=3D"htt=
+ps://webassembly.org/features/">https://webassembly.org/features/</a><br>[2=
+] <a href=3D"https://emscripten.org/docs/tools_reference/settings_reference=
+.html#memory64">https://emscripten.org/docs/tools_reference/settings_refere=
+nce.html#memory64</a><br>[3] <a href=3D"https://github.com/libffi/libffi/bl=
+ob/6a99edb8082f75e523e0d6ebaba42218b80e10c8/README.md#supported-platforms">=
+https://github.com/libffi/libffi/blob/6a99edb8082f75e523e0d6ebaba42218b80e1=
+0c8/README.md#supported-platforms</a><br><br>&gt; As Philippe said, we can&=
+#39;t really revert that (it&#39;s now an assumption <br>&gt; for our softm=
+mu implementation, and would break code if we enabled it <br>&gt; again now=
+.)<br>&gt; <br>&gt; That said, we can always have a first version supportin=
+g only 32 bits <br>&gt; targets. And later, when wasm64 will be available, =
+we can extend this to <br>&gt; all remaining ones.<br><br>The main challeng=
+e I&#39;m seeing is that I couldn&#39;t find a clear timeline for<br>wasm64=
+ adoption so it&#39;s difficult to predict when it will be widely<br>availa=
+ble.<br><br>Regarding the revert, the wasm backend supports 64-bit words, s=
+o the revert<br>introduced in patch 06/10 is partial, as also pointed out b=
+y Paolo.<br><br></div>
 
---00000000000025e5270632812a75--
+--0000000000006acb94063281a09e--
 
