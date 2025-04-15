@@ -4,90 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B9528C369B5
-	for <qemu-riscv@archiver.kernel.org>; Mon, 14 Apr 2025 21:30:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 03EC8C369AB
+	for <qemu-riscv@archiver.kernel.org>; Tue, 15 Apr 2025 04:32:37 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1u4RNp-0006D5-Fg; Mon, 14 Apr 2025 17:30:25 -0400
+	id 1u4XyD-0005gT-TT; Tue, 15 Apr 2025 00:32:25 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <antonb@tenstorrent.com>)
- id 1u4RNn-0006Ch-6q
- for qemu-riscv@nongnu.org; Mon, 14 Apr 2025 17:30:23 -0400
-Received: from mail-ot1-x32e.google.com ([2607:f8b0:4864:20::32e])
+ id 1u4XyC-0005fN-Kz
+ for qemu-riscv@nongnu.org; Tue, 15 Apr 2025 00:32:24 -0400
+Received: from mail-oa1-x33.google.com ([2001:4860:4864:20::33])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <antonb@tenstorrent.com>)
- id 1u4RNk-0001x7-W6
- for qemu-riscv@nongnu.org; Mon, 14 Apr 2025 17:30:22 -0400
-Received: by mail-ot1-x32e.google.com with SMTP id
- 46e09a7af769-72c14235af3so2820970a34.3
- for <qemu-riscv@nongnu.org>; Mon, 14 Apr 2025 14:30:19 -0700 (PDT)
+ id 1u4XyB-0007QC-4G
+ for qemu-riscv@nongnu.org; Tue, 15 Apr 2025 00:32:24 -0400
+Received: by mail-oa1-x33.google.com with SMTP id
+ 586e51a60fabf-2c1caacc1f7so3032693fac.3
+ for <qemu-riscv@nongnu.org>; Mon, 14 Apr 2025 21:32:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=tenstorrent.com; s=google; t=1744666218; x=1745271018; darn=nongnu.org;
+ d=tenstorrent.com; s=google; t=1744691541; x=1745296341; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=rSotBaFUmmKWr89h4uQGHoagPTJq+4FsRSbwdeSTqUo=;
- b=WVy2Q03j93QHzMKt+HPYP03TQRkjB+UOxhgxFvpCnOstqNecNGCYFGKMFWn5/hDDZm
- Ti5JNUCifgZQyjWSSLNf7uPJPjSLCXCeV/YhbzscE6RYAyiRDacXQ+8k8UC3wplqzsL8
- 9212qG4RzXvhXAAi06Jdc41uqL0bylqbBnVL3n2wzmT3gP8LbzDwum3zNldZgsJp5TuC
- eeKuCOpX+MqM7kLxTELbndOaJTqrdFSrl/C9oAmPbkwO1TAsaUjRj7hsHRUAh+R4Q652
- sh74J0il5zxfgNvow+obIWIgBsdJzuf1qstbnGHzzcLCbv2Xard6ftoI4jiK4QWvpS7s
- 401A==
+ bh=2ObnKcIJ284kbbZaP0rCwvkG59a2UZ5StXk2Y3mXSNE=;
+ b=fxVfa0/RKS4ckVGEaJ3MuV3bLn0PQ0cKETBlVufE1SufzwIC9H4kSKTxNoFcxdFFJb
+ FxZXrFKzNKfrnsoqEQMj8GwthxxWcLTQ4pkoedCP52+a4qUHNQpzbbyZLFL4GTiohcUn
+ Fm5yV/BopOM0LLermY/trJvTUDMZa/CgcA+wTjDxwGE9kGxN7XKZmdXL7P/dQQEJh0Aa
+ 1edcDXE+CaLvawj62RZvZfve72lBKdLcpnLvvqBain5ylQ6FMpAWgGtiZQDD5GVbfS4r
+ p0WvRd/lKeHQzpg7EQP58yxtt7Mkt6HRxpWoCvT08rd/xkKjd6r3N01p/5yqgtrS8ftS
+ WkiQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1744666218; x=1745271018;
+ d=1e100.net; s=20230601; t=1744691541; x=1745296341;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=rSotBaFUmmKWr89h4uQGHoagPTJq+4FsRSbwdeSTqUo=;
- b=c/QD0axuIpEHIQlnhh6sumGAY4kwy6+RtHawRUeku10F+USAe72Oya8+xVIBCxCjQa
- rMifjZNjwvLJoUPCnt1Fu6Yy/MeIaOn88hICsqsuJHzY/0LYAF6b3UBsAdonJX6xoXSX
- gFg7DeDZ2HnbfeiET/cPUh/EMyoqdEafDg2gzO+sH9pXAhZYF6bX5iFEUacE9BqTrzzm
- u+JvfYe9eA0fW3cD1iOLu+P6eU2MmBdt2mGLMVDgffP9mDDpzZ7CYEHltLBo84dlMS5i
- 1a+E6HgSAL9GsrC9nQDIkbnhoqgq0SFr8tt2haX0M9VUWvV9rtqYHkzh8Lns/efA3lyA
- HTrQ==
-X-Gm-Message-State: AOJu0YyF5eOymj0o7mDoldfNMLK6keaUYCpyniyMcsBSAIx+kEed4EAd
- MRq0t7UmzxNy92Dm6bk8VslZWf++S/eJJLGcRdYiDRB9vpK1W8HhA9JHR01HMVoXg/VuuxFQ6Si
- o5jg=
-X-Gm-Gg: ASbGncsR6rza5JROqSkzUf1Qlt1iekJQrpU0lObgghNxc2gxGTpo7zJLLyMtBAaStxK
- oESdpBtlOd5TSJuVv0avjSIpph4aE51a4dR6KtT8yARstj609rGwrcCn4DEGhMmk3/mnjceel7Y
- beXzVtnmrK419rpfDaV0Zvyn0GECJhEnk1AHAnZSHbqFAdzDOsugAPW0twSnbaR3tqsxs+kEJNk
- 1GXrVx4hIfxjo126mOA8vuXcfOWKBFcA/0yAPUOlk1teSA3QyG07imiIhwwP0ZaNY9aXrLiG7Xn
- 4T+SrXnQ0IpPEETlLRfX/neRlZdinzsoT6Oaa2+c6KoyXIdmiH3fONkws6WoQ04JmosfjMjMdGA
+ bh=2ObnKcIJ284kbbZaP0rCwvkG59a2UZ5StXk2Y3mXSNE=;
+ b=ndUgNHottElvXPn47NxuDWmEkkKo/wmW+BF5rYzNrtMV6zhkXPJSwQvreq8217UvTW
+ jKsDlxrHWsnKCTuUNjoZ3yt3V7tR0Egnh/GPnyPUSw6PpniGDEYSPZOaro7iepRFUiJQ
+ sMQFLVNbDI4fJXiti+J6AxcQdWu7yMGUU9Yj2ZMzRhTy3NqAix4dVZtRBtR1McendnHJ
+ IcQAidUf5LFPv05FqUvVu0KLCKz5ieoU5IvfwbjpTg5C3j1Y8YXDUhg6D06X9tyw08ES
+ Q4nofkVxNhQ/JtmR+UZK6vZjJzL/mlq9SXIXUjLSCJPkwI1L+FAs8BbXeGr9K91dOjQs
+ c+dg==
+X-Gm-Message-State: AOJu0Yxp2aA2hXuKrRzQKD2O+5va3szw3Yq9KYPEf/vmMHI5rJ645mOO
+ rorpqaxJDHLtMBq5s61Q3mfBAIueVh0I04sSK/eIWDwPsB0dVQaDybpDKOe08Gv2Cxen9rhMX2/
+ BCq0=
+X-Gm-Gg: ASbGnct8EyEN6Xo/p+QJU7slvV/G1P9mAUhRQb9s0Q9GLQhVRvxP05yoeJuH/ZreiBl
+ hjj5rKAr8Q0BUfW8A1Jlh/k1Nw85XO/26KLkznrkcDr0ZQx7IIsw2gvlPShOX9YQpMtKAqwr6k0
+ 4b6mCNekqXmTjph2gR+KrJX554nLHZcBU8TBzUl5XvJ2iQsgBs1iExoFGMfzVaDqDAMFKyOjNEt
+ 153lF/JRvrgOCviPXbewP4IOMzdW8VMQR4vCsCARxbCAafCXXA/EhBlMlG6D63frZm0y89YQc5c
+ GzkGe/qrNPbgyo3Pk+pzlyP5kNQZ/iixffWNcTpxI/813x7/4NqvTheT5ZwOeM5MtP1Y5xTcrI4
  =
-X-Google-Smtp-Source: AGHT+IEkVa2S+U01stfqgQn76gV6oe8pSub133NcxE+NMQ92oq8B9w+toXaXzmbKP5Xac8+7hE1RRw==
-X-Received: by 2002:a05:6830:6812:b0:727:3e60:b44b with SMTP id
- 46e09a7af769-72e86331a84mr7800038a34.14.1744666218315; 
- Mon, 14 Apr 2025 14:30:18 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IHoQ7sT8HPDW/y+Ad7krvgf7LF9YXWmKBX1U/m8xGvZuNTv+uBDYZWVUqsYqNQOS/S1YX3Lew==
+X-Received: by 2002:a05:6870:b024:b0:2c1:6735:4abb with SMTP id
+ 586e51a60fabf-2d0d5c01db1mr8987028fac.5.1744691540695; 
+ Mon, 14 Apr 2025 21:32:20 -0700 (PDT)
 Received: from ausc-rvsw-c-01-anton.tenstorrent.com ([38.104.49.66])
  by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-72e73e4d7e2sm2168999a34.45.2025.04.14.14.30.17
+ 586e51a60fabf-2d096d4af59sm2728816fac.46.2025.04.14.21.32.18
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 14 Apr 2025 14:30:17 -0700 (PDT)
+ Mon, 14 Apr 2025 21:32:19 -0700 (PDT)
 From: Anton Blanchard <antonb@tenstorrent.com>
 To: qemu-riscv@nongnu.org,
-	qemu-devel@nongnu.org
-Cc: Anton Blanchard <antonb@tenstorrent.com>,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Weiwei Li <liwei1518@gmail.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
-Subject: [PATCH] target/riscv: Fix vslidedown with rvv_ta_all_1s
-Date: Mon, 14 Apr 2025 21:30:06 +0000
-Message-Id: <20250414213006.3509058-1-antonb@tenstorrent.com>
+	qemu-devel@nongnu.or
+Cc: max.chou@sifive.com, dbarboza@ventanamicro.com, palmer@dabbelt.com,
+ alistair.francis@wdc.com, liwei1518@gmail.com,
+ zhiwei_liu@linux.alibaba.com, Anton Blanchard <antonb@tenstorrent.com>
+Subject: [PATCH 0/3] Fix some more RVV source overlap issues
+Date: Tue, 15 Apr 2025 04:32:04 +0000
+Message-Id: <20250415043207.3512209-1-antonb@tenstorrent.com>
 X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::32e;
- envelope-from=antonb@tenstorrent.com; helo=mail-ot1-x32e.google.com
+Received-SPF: pass client-ip=2001:4860:4864:20::33;
+ envelope-from=antonb@tenstorrent.com; helo=mail-oa1-x33.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -103,32 +100,26 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-vslidedown always zeroes elements past vl, where it should use the
-tail policy.
+Thanks Max and Daniel for helping to resolve the RVV source register
+overlap issues. I ran some random patterns against the Max's latest
+patch series (comparing QEMU to the Tenstorrent version of whisper)
+and spotted a couple more. Max: can you please check if the fixes I
+made look right?
 
-Signed-off-by: Anton Blanchard <antonb@tenstorrent.com>
----
- target/riscv/vector_helper.c | 6 ++++--
- 1 file changed, 4 insertions(+), 2 deletions(-)
+Anton
+--
 
-diff --git a/target/riscv/vector_helper.c b/target/riscv/vector_helper.c
-index 67b3bafebb..1012d38c8a 100644
---- a/target/riscv/vector_helper.c
-+++ b/target/riscv/vector_helper.c
-@@ -5113,9 +5113,11 @@ void HELPER(NAME)(void *vd, void *v0, target_ulong s1, void *vs2,         \
-     }                                                                     \
-                                                                           \
-     for (i = i_max; i < vl; ++i) {                                        \
--        if (vm || vext_elem_mask(v0, i)) {                                \
--            *((ETYPE *)vd + H(i)) = 0;                                    \
-+        if (!vm && !vext_elem_mask(v0, i)) {                              \
-+            vext_set_elems_1s(vd, vma, i * esz, (i + 1) * esz);           \
-+            continue;                                                     \
-         }                                                                 \
-+        *((ETYPE *)vd + H(i)) = 0;                                        \
-     }                                                                     \
-                                                                           \
-     env->vstart = 0;                                                      \
+Anton Blanchard (3):
+  target/riscv: rvv: Apply vext_check_input_eew to vector integer/fp
+    compare instructions
+  target/riscv: rvv: Apply vext_check_input_eew to vector reduction
+    instructions
+  target/riscv: vadc and vsbc are vm=0 instructions
+
+ target/riscv/insn32.decode              | 10 +++++-----
+ target/riscv/insn_trans/trans_rvv.c.inc | 23 +++++++++++++----------
+ 2 files changed, 18 insertions(+), 15 deletions(-)
+
 -- 
 2.34.1
 
