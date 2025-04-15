@@ -4,79 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2A7B2C369AB
-	for <qemu-riscv@archiver.kernel.org>; Tue, 15 Apr 2025 14:47:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D08D9C369AB
+	for <qemu-riscv@archiver.kernel.org>; Tue, 15 Apr 2025 16:39:57 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1u4hZS-0001nB-9B; Tue, 15 Apr 2025 10:47:30 -0400
+	id 1u4jJk-0000Ia-Ed; Tue, 15 Apr 2025 12:39:24 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <jim.shu@sifive.com>)
- id 1u4hZN-0001mV-8X
- for qemu-riscv@nongnu.org; Tue, 15 Apr 2025 10:47:25 -0400
-Received: from mail-ed1-x52a.google.com ([2a00:1450:4864:20::52a])
+ id 1u4jJZ-0000H6-Ux
+ for qemu-riscv@nongnu.org; Tue, 15 Apr 2025 12:39:15 -0400
+Received: from mail-ed1-x533.google.com ([2a00:1450:4864:20::533])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <jim.shu@sifive.com>)
- id 1u4hZK-0000Vm-JQ
- for qemu-riscv@nongnu.org; Tue, 15 Apr 2025 10:47:25 -0400
-Received: by mail-ed1-x52a.google.com with SMTP id
- 4fb4d7f45d1cf-5e614da8615so4663766a12.1
- for <qemu-riscv@nongnu.org>; Tue, 15 Apr 2025 07:47:22 -0700 (PDT)
+ id 1u4jJU-0008Oc-4g
+ for qemu-riscv@nongnu.org; Tue, 15 Apr 2025 12:39:12 -0400
+Received: by mail-ed1-x533.google.com with SMTP id
+ 4fb4d7f45d1cf-5e6167d0536so10629946a12.1
+ for <qemu-riscv@nongnu.org>; Tue, 15 Apr 2025 09:39:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1744728441; x=1745333241; darn=nongnu.org;
+ d=sifive.com; s=google; t=1744735145; x=1745339945; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=zHCpx0Do+1StcIGO1BmmGN4syHYS0QVMXi1Xbg377fo=;
- b=IFUkMOr6IaVuehkjoQh57fZ3HybbNwr0J3FPGgZ9FEeZYMUBoYvc66mAJprUMab9s9
- e7mPrzi17N+Pu+687YKPMFXTbaKMLjm6tm2ifEya918coiNrADDho3Cm9pTr5cMockM5
- FTbt/URCgvSMcgw9n0DQcwbdSDd0943aSfFeWHSAdT88xjBpwWpzOnfgTY/CQmpq01da
- vg329s6l7lTKc1srgOM6P6DCsMN1IiYsrxNdk/ibd+vtw7HigXj97FoH3jAGOiELjnHM
- zzOvM+ZWqsdDLnb1KuvqYaLTtfdoRdHrTumba9k37dRxL5uZaBQi9QQNLBK3I2gVgq6f
- xx8Q==
+ bh=8d8YrrFlUlJqcgR/DRRyk7FPdwEAP2C2mIktWa8UaM0=;
+ b=SnX+hS6uyZ/FtPHwuJjCmIwincRY4H0YZXkSUvnkiX6NBBI1Jm7wJ7jtMaSNCTnjc3
+ tip0R2pdieLszVfPikSAMiPHieQM05lbC9oQdN3h8F8IDCRaY0Iwn5rBPGWIbSrS7ELp
+ jeOHj8RT/+Zl0jjpuiFi2pH+NP7nVnUCFPE6fwOacGITuc5FDUrTmAJE9YtOsUHHV5Qt
+ KCf5ShTtiky6RUzwNjuEWzhNflee85KoQAo0tNQ9Juqm/pczUBztNFtKvYwURYEMTG0C
+ FMPxxOCbiRopxvLX254fA9eITtgeQkMp29NtZs06Nfxos9cTvV13EtS6oYornR3IEKrK
+ AP4g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1744728441; x=1745333241;
+ d=1e100.net; s=20230601; t=1744735145; x=1745339945;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=zHCpx0Do+1StcIGO1BmmGN4syHYS0QVMXi1Xbg377fo=;
- b=SlEZRf947YXLPxOK2nx0ODDlg3P0FYUILLYLfWIckYhnDzBWjZkQ3IzJK4Qa6qIgqe
- qcbNjOKuJBOnXNAb5B/ValWhbyeD1NXg7HIeZ8NqkgKPw6vX4AQ0bbMcb9aaKMDis90J
- /it2XEv5Wx69kmmc+K0emhMzvyOSkGebr3XDAyhheQE1hB6HgCaSkfGCetz92pidzrwL
- wDdN+BsPoItDHBYMa77IlIXOJN4dydwUzTafcuMRVJ9sh5lhl7f5E8DN6D+6jzK9RKBL
- oTdKvWfuLHBeTCR7Bskuc+BS+Lq2H5o53h4ihvm5bp4fzIfF+IMo2Wc89RCUvSWXFrhg
- /fAw==
+ bh=8d8YrrFlUlJqcgR/DRRyk7FPdwEAP2C2mIktWa8UaM0=;
+ b=vYXLhmmOPLjXMVUShtizVNw8NyAMicnGpd8PRiJhDsoioo9gNusKNU8awZZJqEpJ+V
+ rDVrTPUxJemJGRwCxab7n5YyrtfDFyMV2rZo8M4iJ/6f0dyoAt5jN9+mD6iSM8O5Rwlt
+ 7aKN/G7RPJPm/PKxo+TaIJUN5lns11OLoqrnQ+HSBRb+A1AuDjZoODvnW/qb97Wf2SzY
+ 3gjhBUgQk8EZpj9dgqL5jANfB2IQ1R+ijD0Ys2ZDML40ND0bfx5nrW7PiXZ/vz8yrVUK
+ 1c70+VCta+MTzXy/74nkcxprM7e57Ek+XdJEp6fQ1idYGwaZZPEYwfF1Jpa0orUqbzp4
+ 4ieA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVGHv8JrAyoU9nD7XwDEDS8I8kelfoOyyx7NXHzmRNhs6X7qGvBiv/L5YOK4HEsOOniEu46U6bSNnTR@nongnu.org
-X-Gm-Message-State: AOJu0YyG0ALBJ6icN2t+Pl02jJSA6O4ibWg9PhuJktk1LuB6eDB0ochh
- +9xGde+U5uhrfdmfMxgbAzNa6hDxCuz0sT+RazAWCLL2Y0jcc7jjNpLehah1KHyqfbG9dS244rT
- 2HL7tur3pSCIaf/6Nsith7QkeF4AbRYkkV3VLHA==
-X-Gm-Gg: ASbGncvb5EDd11SoQe8yxeiqvt7hW9uON9wSqh8gKyzcSGcUk9TiWb9hezn+Cqavs9N
- fm75WNvMvFR8RUPDmzKNeWtCeJnhSlh8APCwUrdQ7gTjk4wLP4SnOV+7DheVyVdC7+PJFB6ZZg9
- 1mwqPv2wsHDyqvusQ4Ne/knV84
-X-Google-Smtp-Source: AGHT+IFp/JkeTdFiPz8E/4sHx/T4g3XgEpZvji3YukOy8P7sNu0Cd2x0syUFA5JhA6rep2XOoOGvHsFiS3jaIFguCFg=
-X-Received: by 2002:a05:6402:4282:b0:5db:68bd:ab78 with SMTP id
- 4fb4d7f45d1cf-5f45dfc8ca3mr4070422a12.10.1744728440613; Tue, 15 Apr 2025
- 07:47:20 -0700 (PDT)
+ AJvYcCUOCkSE80X09MH+p6evqnlKsFvCfk4I+l06AIcv3UWCXGKUDMDgxvctVQQa885z1U4srwCj0G0TcnH4@nongnu.org
+X-Gm-Message-State: AOJu0YydF5QbtF/b1FTlIz68HRHRunhYqK83Ey6en0Lq8SWpXLIrtbzI
+ HHDuFc9ZNdYWzFlb5qysOmeOSYz7ySerl98DjvKu9UjslKtdeks8YZ+sMytBAc+93c72iTdPlu7
+ V9rB3/nuo+ndU+ykJQsSMsWYY373cOt+pVVWLQQ==
+X-Gm-Gg: ASbGncvIlOG2ROrLz9xON4XXEQJm0H+SnnQ4ZHwHiJZqFZbkDxXGvI8b2Hl9EiKpUQK
+ kVmONDtop6ayGj7qMBaxliRQvCo/tF8t+GdVsUZnunCpBoeiCIZgKhSMSLEmVfauJSjFW8wBz8K
+ B3oNk/99ua2a8xIhHwWI7EijQg
+X-Google-Smtp-Source: AGHT+IFRKtGZCjPosM7GBfhklF+gabkiYof1vyPKmOkYlTDWCuNNnHPEFIfgRIW1Y+5htdd0kaEFqkl1d1jy2H2sRGA=
+X-Received: by 2002:a05:6402:42c5:b0:5ed:2a1b:fd7d with SMTP id
+ 4fb4d7f45d1cf-5f36fee6a4amr14305561a12.19.1744735144888; Tue, 15 Apr 2025
+ 09:39:04 -0700 (PDT)
 MIME-Version: 1.0
 References: <20250415081231.21186-1-jim.shu@sifive.com>
- <20250415081231.21186-18-jim.shu@sifive.com>
- <253ef6eb-9aa1-4aba-9dd2-2d0490816199@ventanamicro.com>
-In-Reply-To: <253ef6eb-9aa1-4aba-9dd2-2d0490816199@ventanamicro.com>
+ <20250415081231.21186-2-jim.shu@sifive.com>
+ <2dd5952a93aca15bbae4b5624b680637@linux.ibm.com>
+In-Reply-To: <2dd5952a93aca15bbae4b5624b680637@linux.ibm.com>
 From: Jim Shu <jim.shu@sifive.com>
-Date: Tue, 15 Apr 2025 22:47:08 +0800
-X-Gm-Features: ATxdqUH64ZPtpZpmq8aPsugt0bw2RBsM_kSGLZJBJM0RVtmuQ_OUUUQlJc1VYb8
-Message-ID: <CALw707piJp2iK_Cs==UpYa2iGMGfLX6p5=3ik4+2P68gNogt8Q@mail.gmail.com>
-Subject: Re: [PATCH 17/17] hw/riscv: virt: Add WorldGuard support
-To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Date: Wed, 16 Apr 2025 00:38:52 +0800
+X-Gm-Features: ATxdqUE1bFY0OgeEVfSP6kxoXn-QXO1lP_eY0dZX40YG8IJXUxt68MW8ggAStAA
+Message-ID: <CALw707oxFXoZbBW73GKuJVa2SuH0RSiUyz6a2XfPrOWZM5jckQ@mail.gmail.com>
+Subject: Re: [PATCH 01/17] accel/tcg: Store section pointer in CPUTLBEntryFull
+To: Ilya Leoshkevich <iii@linux.ibm.com>
 Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, 
  Richard Henderson <richard.henderson@linaro.org>,
  Paolo Bonzini <pbonzini@redhat.com>, Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <alistair.francis@wdc.com>, 
- Weiwei Li <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
- Eduardo Habkost <eduardo@habkost.net>,
- Marcel Apfelbaum <marcel.apfelbaum@gmail.com>, 
+ Weiwei Li <liwei1518@gmail.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>, 
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Eduardo Habkost <eduardo@habkost.net>, 
+ Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
  =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@linaro.org>, 
  Yanan Wang <wangyanan55@huawei.com>, Zhao Liu <zhao1.liu@intel.com>, 
  Peter Xu <peterx@redhat.com>, David Hildenbrand <david@redhat.com>,
@@ -87,18 +89,16 @@ Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org,
  Aurelien Jarno <aurelien@aurel32.net>, 
  Jiaxun Yang <jiaxun.yang@flygoat.com>, Aleksandar Rikalo <arikalo@gmail.com>, 
  Stafford Horne <shorne@gmail.com>, Nicholas Piggin <npiggin@gmail.com>, 
- Yoshinori Sato <ysato@users.sourceforge.jp>,
- Ilya Leoshkevich <iii@linux.ibm.com>, Thomas Huth <thuth@redhat.com>,
- Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>, 
- Artyom Tarasenko <atar4qemu@gmail.com>,
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>, 
- Max Filippov <jcmvbkbc@gmail.com>,
- "open list:PowerPC TCG CPUs" <qemu-ppc@nongnu.org>, 
- "open list:S390 TCG CPUs" <qemu-s390x@nongnu.org>
+ Yoshinori Sato <ysato@users.sourceforge.jp>, Thomas Huth <thuth@redhat.com>, 
+ Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
+ Artyom Tarasenko <atar4qemu@gmail.com>, 
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+ Max Filippov <jcmvbkbc@gmail.com>, qemu-ppc@nongnu.org, 
+ qemu-s390x@nongnu.org
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2a00:1450:4864:20::52a;
- envelope-from=jim.shu@sifive.com; helo=mail-ed1-x52a.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::533;
+ envelope-from=jim.shu@sifive.com; helo=mail-ed1-x533.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -121,485 +121,63 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Thanks Daniel. I will fix the RST doc and typo issue in the v2 patch!
+Hi Ilya,
+
+My patch removes the use of `iotlb_to_section()`, so the section_index
+in the last 12-bit of `xlat_section` is no longer used. (Please
+correct me if I'm wrong!)
+Based on the comment of `phys_section_add()` and the commit log [1], I
+believe we can remove the assertion and support more than 4k sections.
+
+I think my commit should also remove the `iotlb_to_section()` function
+and rename `xlat_section` to `xlat`.
+I will fix it in the next patch.
+
+[1] https://github.com/qemu/qemu/commit/68f3f65b09a1ce8c82fac17911ffc3bb603=
+1ebe4
 
 Jim
 
-On Tue, Apr 15, 2025 at 9:20=E2=80=AFPM Daniel Henrique Barboza
-<dbarboza@ventanamicro.com> wrote:
+
+
+
+
+On Tue, Apr 15, 2025 at 5:13=E2=80=AFPM Ilya Leoshkevich <iii@linux.ibm.com=
+> wrote:
 >
->
->
-> On 4/15/25 5:12 AM, Jim Shu wrote:
-> > * Add 'wg=3Don' option to enable RISC-V WorldGuard
-> > * Add wgChecker to protect several resources:
-> >    DRAM, FLASH, UART.
+> On 2025-04-15 10:12, Jim Shu wrote:
+> > 'CPUTLBEntryFull.xlat_section' stores section_index in last 12 bits to
+> > find the correct section when CPU access the IO region over the IOTLB
+> > (iotlb_to_section()).
+> >
+> > However, section_index is only unique inside single AddressSpace. If
+> > address space translation is over IOMMUMemoryRegion, it could return
+> > section from other AddressSpace. 'iotlb_to_section()' API only finds
+> > the
+> > sections from CPU's AddressSpace so that it couldn't find section in
+> > other AddressSpace. Thus, using 'iotlb_to_section()' API will find the
+> > wrong section and QEMU will have wrong load/store access.
+> >
+> > To fix this bug, store complete MemoryRegionSection pointer in
+> > CPUTLBEntryFull instead of section_index.
+> >
+> > This bug occurs only when
+> > (1) IOMMUMemoryRegion is in the path of CPU access.
+> > (2) IOMMUMemoryRegion returns different target_as and the section is in
+> > the IO region.
+> >
+> > Common IOMMU devices don't have this issue since they are only in the
+> > path of DMA access. Currently, the bug only occurs when ARM MPC device
+> > (hw/misc/tz-mpc.c) returns 'blocked_io_as' to emulate blocked access
+> > handling. Upcoming RISC-V wgChecker device is also affected by this
+> > bug.
 > >
 > > Signed-off-by: Jim Shu <jim.shu@sifive.com>
 > > ---
-> >   docs/system/riscv/virt.rst |  20 +++++
-> >   hw/riscv/Kconfig           |   1 +
-> >   hw/riscv/virt.c            | 163 ++++++++++++++++++++++++++++++++++++=
--
-> >   include/hw/riscv/virt.h    |  15 +++-
-> >   4 files changed, 195 insertions(+), 4 deletions(-)
-> >
-> > diff --git a/docs/system/riscv/virt.rst b/docs/system/riscv/virt.rst
-> > index 60850970ce..d2bc65f71c 100644
-> > --- a/docs/system/riscv/virt.rst
-> > +++ b/docs/system/riscv/virt.rst
-> > @@ -146,6 +146,26 @@ The following machine-specific options are support=
-ed:
-> >
-> >     Enables the riscv-iommu-sys platform device. Defaults to 'off'.
-> >
-> > +- wg=3D[on|off]
-> > +
-> > +  When this option is "on", RISC-V WorldGuard will be enabled in the s=
-ystem
-> > +  to provide the isolation of multiple worlds. RISC-V HARTs will enabl=
-e WG
-> > +  extensions to have WID in memory transaction. wgCheckers in front of=
- RAMs
-> > +  and device MMIO will be enabled to provide the access control of res=
-ources
-> > +  if the transaction contains WID. When not specified, this option is =
-assumed
-> > +  to be "off".
-> > +
-> > +  The WG configuration of virt machine includes 4 worlds. For WG confi=
-guration
-> > +  of CPUs, the M-mode WID of CPU (`mwid`) is set to the largest WID nu=
-mber,
-> > +  and the authorized WID list of CPU (`mwidlist`) includes all WIDs. W=
-e can
-> > +  modify the configuration of all CPUs via `x-mwid` and `x-mwidlist`
+> >  accel/tcg/cputlb.c    | 19 +++++++++----------
+> >  include/hw/core/cpu.h |  3 +++
+> >  2 files changed, 12 insertions(+), 10 deletions(-)
 >
-> This change will break the doc build:
->
-> =3D=3D=3D=3D
->
-> [3002/3003] Generating docs/QEMU manual with a custom command
-> FAILED: docs/docs.stamp
-> /usr/bin/env CONFDIR=3Detc/qemu /home/danielhb/work/qemu/build/pyvenv/bin=
-/sphinx-build -q -W -Dkerneldoc_werror=3D1 -j auto -Dversion=3D9.2.92 -Drel=
-ease=3D -Ddepfile=3Ddocs/docs.d -Ddepfile_stamp=3Ddocs/docs.stamp -b html -=
-d /home/danielhb/work/qemu/build/docs/manual.p /home/danielhb/work/qemu/doc=
-s /home/danielhb/work/qemu/build/docs/manual
->
-> Warning, treated as error:
-> /home/danielhb/work/qemu/docs/system/riscv/virt.rst:158:'any' reference t=
-arget not found: mwid
-> ninja: build stopped: subcommand failed.
->
-> =3D=3D=3D=3D
->
-> This happens because you're wrapping words with a single back-quote, and =
-RST
-> thinks that you're referring to an internal page/link.
->
-> You need double back-quotes (``) in this case:
->
-> $ git diff
-> diff --git a/docs/system/riscv/virt.rst b/docs/system/riscv/virt.rst
-> index d2bc65f71c..69b028bd73 100644
-> --- a/docs/system/riscv/virt.rst
-> +++ b/docs/system/riscv/virt.rst
-> @@ -156,9 +156,9 @@ The following machine-specific options are supported:
->     to be "off".
->
->     The WG configuration of virt machine includes 4 worlds. For WG config=
-uration
-> -  of CPUs, the M-mode WID of CPU (`mwid`) is set to the largest WID numb=
-er,
-> -  and the authorized WID list of CPU (`mwidlist`) includes all WIDs. We =
-can
-> -  modify the configuration of all CPUs via `x-mwid` and `x-mwidlist`
-> +  of CPUs, the M-mode WID of CPU (``mwid``) is set to the largest WID nu=
-mber,
-> +  and the authorized WID list of CPU (``mwidlist``) includes all WIDs. W=
-e can
-> +  modify the configuration of all CPUs via ``x-mwid`` and ``x-mwidlist``
->     CPU options. There are 3 wgCheckers in the virt machine, which sepera=
-tely
->     protects DRAM, FLASH, and UART. Default WG configuration on the virt =
-machine
->     is enough to run the demo of dual OSes in the different worlds. For e=
-xample,
->
->
->
-> > +  CPU options. There are 3 wgCheckers in the virt machine, which seper=
-ately
->
-> s/seperately/separately
->
->
-> Code looks good otherwise. Thanks,
->
-> Daniel
->
-> > +  protects DRAM, FLASH, and UART. Default WG configuration on the virt=
- machine
-> > +  is enough to run the demo of dual OSes in the different worlds. For =
-example,
-> > +  running both Linux kernel and Secure OS (e.g. OP-TEE) in it's own wo=
-rld.
-> > +
-> > +  This option is restricted to the TCG accelerator.
-> > +
-> >   Running Linux kernel
-> >   --------------------
-> >
-> > diff --git a/hw/riscv/Kconfig b/hw/riscv/Kconfig
-> > index e6a0ac1fa1..5c3e7b3479 100644
-> > --- a/hw/riscv/Kconfig
-> > +++ b/hw/riscv/Kconfig
-> > @@ -68,6 +68,7 @@ config RISCV_VIRT
-> >       select PLATFORM_BUS
-> >       select ACPI
-> >       select ACPI_PCI
-> > +    select RISCV_WORLDGUARD
-> >
-> >   config SHAKTI_C
-> >       bool
-> > diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-> > index e517002fdf..da873bc8b8 100644
-> > --- a/hw/riscv/virt.c
-> > +++ b/hw/riscv/virt.c
-> > @@ -58,6 +58,7 @@
-> >   #include "qapi/qapi-visit-common.h"
-> >   #include "hw/virtio/virtio-iommu.h"
-> >   #include "hw/uefi/var-service-api.h"
-> > +#include "hw/misc/riscv_worldguard.h"
-> >
-> >   /* KVM AIA only supports APLIC MSI. APLIC Wired is always emulated by=
- QEMU. */
-> >   static bool virt_use_kvm_aia_aplic_imsic(RISCVVirtAIAType aia_type)
-> > @@ -89,6 +90,9 @@ static const MemMapEntry virt_memmap[] =3D {
-> >       [VIRT_PCIE_PIO] =3D     {  0x3000000,       0x10000 },
-> >       [VIRT_IOMMU_SYS] =3D    {  0x3010000,        0x1000 },
-> >       [VIRT_PLATFORM_BUS] =3D {  0x4000000,     0x2000000 },
-> > +    [VIRT_WGC_DRAM] =3D     {  0x6000000,        0x1000 },
-> > +    [VIRT_WGC_FLASH] =3D    {  0x6001000,        0x1000 },
-> > +    [VIRT_WGC_UART] =3D     {  0x6002000,        0x1000 },
-> >       [VIRT_PLIC] =3D         {  0xc000000, VIRT_PLIC_SIZE(VIRT_CPUS_MA=
-X * 2) },
-> >       [VIRT_APLIC_M] =3D      {  0xc000000, APLIC_SIZE(VIRT_CPUS_MAX) }=
-,
-> >       [VIRT_APLIC_S] =3D      {  0xd000000, APLIC_SIZE(VIRT_CPUS_MAX) }=
-,
-> > @@ -114,6 +118,38 @@ static MemMapEntry virt_high_pcie_memmap;
-> >
-> >   #define VIRT_FLASH_SECTOR_SIZE (256 * KiB)
-> >
-> > +/* wgChecker helpers */
-> > +typedef struct WGCInfo {
-> > +    int memmap_idx;
-> > +    uint32_t irq_num;
-> > +    uint32_t slot_count;
-> > +
-> > +    int num_of_child;
-> > +    MemoryRegion *c_region[WGC_NUM_REGIONS];
-> > +    uint64_t c_offset[WGC_NUM_REGIONS];
-> > +} WGCInfo;
-> > +
-> > +enum {
-> > +    WGC_DRAM,
-> > +    WGC_FLASH,
-> > +    WGC_UART,
-> > +    WGC_NUM,
-> > +};
-> > +
-> > +static WGCInfo virt_wgcinfo[] =3D {
-> > +    [WGC_DRAM]  =3D { VIRT_WGC_DRAM, WGC_DRAM_IRQ, 16 },
-> > +    [WGC_FLASH] =3D { VIRT_WGC_FLASH, WGC_FLASH_IRQ, 16 },
-> > +    [WGC_UART]  =3D { VIRT_WGC_UART, WGC_UART_IRQ, 1 },
-> > +};
-> > +
-> > +static void wgc_append_child(WGCInfo *info, MemoryRegion *region,
-> > +                             uint64_t offset)
-> > +{
-> > +    info->c_region[info->num_of_child] =3D region;
-> > +    info->c_offset[info->num_of_child] =3D offset;
-> > +    info->num_of_child +=3D 1;
-> > +}
-> > +
-> >   static PFlashCFI01 *virt_flash_create1(RISCVVirtState *s,
-> >                                          const char *name,
-> >                                          const char *alias_prop_name)
-> > @@ -164,7 +200,8 @@ static void virt_flash_map1(PFlashCFI01 *flash,
-> >   }
-> >
-> >   static void virt_flash_map(RISCVVirtState *s,
-> > -                           MemoryRegion *sysmem)
-> > +                           MemoryRegion *sysmem,
-> > +                           WGCInfo *info)
-> >   {
-> >       hwaddr flashsize =3D virt_memmap[VIRT_FLASH].size / 2;
-> >       hwaddr flashbase =3D virt_memmap[VIRT_FLASH].base;
-> > @@ -173,6 +210,15 @@ static void virt_flash_map(RISCVVirtState *s,
-> >                       sysmem);
-> >       virt_flash_map1(s->flash[1], flashbase + flashsize, flashsize,
-> >                       sysmem);
-> > +
-> > +    if (info) {
-> > +        wgc_append_child(info,
-> > +                         sysbus_mmio_get_region(SYS_BUS_DEVICE(s->flas=
-h[0]), 0),
-> > +                         flashbase);
-> > +        wgc_append_child(info,
-> > +                         sysbus_mmio_get_region(SYS_BUS_DEVICE(s->flas=
-h[1]), 0),
-> > +                         flashbase + flashsize);
-> > +    }
-> >   }
-> >
-> >   static void create_pcie_irq_map(RISCVVirtState *s, void *fdt, char *n=
-odename,
-> > @@ -1426,6 +1472,71 @@ static void virt_build_smbios(RISCVVirtState *s)
-> >       }
-> >   }
-> >
-> > +static DeviceState *create_wgc(WGCInfo *info, DeviceState *irqchip)
-> > +{
-> > +    MemoryRegion *system_memory =3D get_system_memory();
-> > +    DeviceState *wgc;
-> > +    MemoryRegion *upstream_mr, *downstream_mr;
-> > +    qemu_irq irq =3D qdev_get_gpio_in(irqchip, info->irq_num);
-> > +    hwaddr base, size;
-> > +
-> > +    /* Unmap downstream_mr from system_memory if it is already mapped.=
- */
-> > +    for (int i=3D0; i<info->num_of_child; i++) {
-> > +        downstream_mr =3D info->c_region[i];
-> > +
-> > +        g_assert(downstream_mr);
-> > +        if (downstream_mr->container =3D=3D system_memory) {
-> > +            memory_region_del_subregion(system_memory, downstream_mr);
-> > +        }
-> > +
-> > +        /*
-> > +         * Clear the offset of downstream_mr, so we could correctly do
-> > +         * address_space_init() to it in wgchecker.
-> > +         */
-> > +        memory_region_set_address(downstream_mr, 0);
-> > +    }
-> > +
-> > +    base =3D virt_memmap[info->memmap_idx].base;
-> > +    size =3D virt_memmap[info->memmap_idx].size;
-> > +
-> > +    wgc =3D riscv_wgchecker_create(
-> > +        base, size, irq, info->slot_count, 0, 0,
-> > +        info->num_of_child, info->c_region, info->c_offset, 0, NULL);
-> > +
-> > +    /* Map upstream_mr to system_memory */
-> > +    for (int i=3D0; i<info->num_of_child; i++) {
-> > +        upstream_mr =3D sysbus_mmio_get_region(SYS_BUS_DEVICE(wgc), i+=
-1);
-> > +        g_assert(upstream_mr);
-> > +        memory_region_add_subregion(system_memory, info->c_offset[i], =
-upstream_mr);
-> > +    }
-> > +
-> > +    return wgc;
-> > +}
-> > +
-> > +static void virt_create_worldguard(WGCInfo *wgcinfo, int wgc_num,
-> > +                                   DeviceState *irqchip)
-> > +{
-> > +    CPUState *cpu;
-> > +
-> > +    /* Global WG config */
-> > +    riscv_worldguard_create(VIRT_WG_NWORLDS,
-> > +                            VIRT_WG_TRUSTEDWID,
-> > +                            VIRT_WG_HWBYPASS,
-> > +                            VIRT_WG_TZCOMPAT);
-> > +
-> > +    /* Enable WG extension of each CPU */
-> > +    CPU_FOREACH(cpu) {
-> > +        CPURISCVState *env =3D cpu ? cpu_env(cpu) : NULL;
-> > +
-> > +        riscv_worldguard_apply_cpu(env->mhartid);
-> > +    }
-> > +
-> > +    /* Create all wgChecker devices */
-> > +    for (int i=3D0; i<wgc_num; i++) {
-> > +        create_wgc(&wgcinfo[i], DEVICE(irqchip));
-> > +    }
-> > +}
-> > +
-> >   static void virt_machine_done(Notifier *notifier, void *data)
-> >   {
-> >       RISCVVirtState *s =3D container_of(notifier, RISCVVirtState,
-> > @@ -1527,10 +1638,12 @@ static void virt_machine_done(Notifier *notifie=
-r, void *data)
-> >   static void virt_machine_init(MachineState *machine)
-> >   {
-> >       const MemMapEntry *memmap =3D virt_memmap;
-> > +    WGCInfo *wgcinfo =3D virt_wgcinfo;
-> >       RISCVVirtState *s =3D RISCV_VIRT_MACHINE(machine);
-> >       MemoryRegion *system_memory =3D get_system_memory();
-> >       MemoryRegion *mask_rom =3D g_new(MemoryRegion, 1);
-> >       DeviceState *mmio_irqchip, *virtio_irqchip, *pcie_irqchip;
-> > +    SerialMM *uart;
-> >       int i, base_hartid, hart_count;
-> >       int socket_count =3D riscv_socket_count(machine);
-> >
-> > @@ -1546,6 +1659,11 @@ static void virt_machine_init(MachineState *mach=
-ine)
-> >           exit(1);
-> >       }
-> >
-> > +    if (!tcg_enabled() && s->have_wg) {
-> > +        error_report("'wg' is only available with TCG acceleration");
-> > +        exit(1);
-> > +    }
-> > +
-> >       /* Initialize sockets */
-> >       mmio_irqchip =3D virtio_irqchip =3D pcie_irqchip =3D NULL;
-> >       for (i =3D 0; i < socket_count; i++) {
-> > @@ -1673,6 +1791,10 @@ static void virt_machine_init(MachineState *mach=
-ine)
-> >       memory_region_add_subregion(system_memory, memmap[VIRT_DRAM].base=
-,
-> >           machine->ram);
-> >
-> > +    if (tcg_enabled() && s->have_wg) {
-> > +        wgc_append_child(&wgcinfo[WGC_DRAM], machine->ram, memmap[VIRT=
-_DRAM].base);
-> > +    }
-> > +
-> >       /* boot rom */
-> >       memory_region_init_rom(mask_rom, NULL, "riscv_virt_board.mrom",
-> >                              memmap[VIRT_MROM].size, &error_fatal);
-> > @@ -1700,10 +1822,16 @@ static void virt_machine_init(MachineState *mac=
-hine)
-> >
-> >       create_platform_bus(s, mmio_irqchip);
-> >
-> > -    serial_mm_init(system_memory, memmap[VIRT_UART0].base,
-> > +    uart =3D serial_mm_init(system_memory, memmap[VIRT_UART0].base,
-> >           0, qdev_get_gpio_in(mmio_irqchip, UART0_IRQ), 399193,
-> >           serial_hd(0), DEVICE_LITTLE_ENDIAN);
-> >
-> > +    if (tcg_enabled() && s->have_wg) {
-> > +        wgc_append_child(&wgcinfo[WGC_UART],
-> > +                         sysbus_mmio_get_region(SYS_BUS_DEVICE(uart), =
-0),
-> > +                         memmap[VIRT_UART0].base);
-> > +    }
-> > +
-> >       sysbus_create_simple("goldfish_rtc", memmap[VIRT_RTC].base,
-> >           qdev_get_gpio_in(mmio_irqchip, RTC_IRQ));
-> >
-> > @@ -1712,7 +1840,16 @@ static void virt_machine_init(MachineState *mach=
-ine)
-> >           pflash_cfi01_legacy_drive(s->flash[i],
-> >                                     drive_get(IF_PFLASH, 0, i));
-> >       }
-> > -    virt_flash_map(s, system_memory);
-> > +
-> > +    if (tcg_enabled() && s->have_wg) {
-> > +        virt_flash_map(s, system_memory, &wgcinfo[WGC_FLASH]);
-> > +    } else {
-> > +        virt_flash_map(s, system_memory, NULL);
-> > +    }
-> > +
-> > +    if (tcg_enabled() && s->have_wg) {
-> > +        virt_create_worldguard(wgcinfo, WGC_NUM, mmio_irqchip);
-> > +    }
-> >
-> >       /* load/create device tree */
-> >       if (machine->dtb) {
-> > @@ -1757,6 +1894,20 @@ static void virt_machine_instance_init(Object *o=
-bj)
-> >       s->iommu_sys =3D ON_OFF_AUTO_AUTO;
-> >   }
-> >
-> > +static bool virt_get_wg(Object *obj, Error **errp)
-> > +{
-> > +    RISCVVirtState *s =3D RISCV_VIRT_MACHINE(obj);
-> > +
-> > +    return s->have_wg;
-> > +}
-> > +
-> > +static void virt_set_wg(Object *obj, bool value, Error **errp)
-> > +{
-> > +    RISCVVirtState *s =3D RISCV_VIRT_MACHINE(obj);
-> > +
-> > +    s->have_wg =3D value;
-> > +}
-> > +
-> >   static char *virt_get_aia_guests(Object *obj, Error **errp)
-> >   {
-> >       RISCVVirtState *s =3D RISCV_VIRT_MACHINE(obj);
-> > @@ -1977,6 +2128,12 @@ static void virt_machine_class_init(ObjectClass =
-*oc, void *data)
-> >                                 NULL, NULL);
-> >       object_class_property_set_description(oc, "iommu-sys",
-> >                                             "Enable IOMMU platform devi=
-ce");
-> > +
-> > +    object_class_property_add_bool(oc, "wg", virt_get_wg,
-> > +                                   virt_set_wg);
-> > +    object_class_property_set_description(oc, "wg",
-> > +                                              "Set on/off to enable/di=
-sable the "
-> > +                                              "RISC-V WorldGuard.");
-> >   }
-> >
-> >   static const TypeInfo virt_machine_typeinfo =3D {
-> > diff --git a/include/hw/riscv/virt.h b/include/hw/riscv/virt.h
-> > index 48a14bea2e..3a631a6a23 100644
-> > --- a/include/hw/riscv/virt.h
-> > +++ b/include/hw/riscv/virt.h
-> > @@ -57,6 +57,7 @@ struct RISCVVirtState {
-> >       bool have_aclint;
-> >       RISCVVirtAIAType aia_type;
-> >       int aia_guests;
-> > +    bool have_wg;
-> >       char *oem_id;
-> >       char *oem_table_id;
-> >       OnOffAuto acpi;
-> > @@ -87,11 +88,17 @@ enum {
-> >       VIRT_PLATFORM_BUS,
-> >       VIRT_PCIE_ECAM,
-> >       VIRT_IOMMU_SYS,
-> > +    VIRT_WGC_DRAM,
-> > +    VIRT_WGC_FLASH,
-> > +    VIRT_WGC_UART
-> >   };
-> >
-> >   enum {
-> >       UART0_IRQ =3D 10,
-> >       RTC_IRQ =3D 11,
-> > +    WGC_DRAM_IRQ =3D 15,
-> > +    WGC_FLASH_IRQ =3D 16,
-> > +    WGC_UART_IRQ =3D 17,
-> >       VIRTIO_IRQ =3D 1, /* 1 to 8 */
-> >       VIRTIO_COUNT =3D 8,
-> >       PCIE_IRQ =3D 0x20, /* 32 to 35 */
-> > @@ -102,7 +109,7 @@ enum {
-> >   #define VIRT_PLATFORM_BUS_NUM_IRQS 32
-> >
-> >   #define VIRT_IRQCHIP_NUM_MSIS 255
-> > -#define VIRT_IRQCHIP_NUM_SOURCES 96
-> > +#define VIRT_IRQCHIP_NUM_SOURCES 128
-> >   #define VIRT_IRQCHIP_NUM_PRIO_BITS 3
-> >   #define VIRT_IRQCHIP_MAX_GUESTS_BITS 3
-> >   #define VIRT_IRQCHIP_MAX_GUESTS ((1U << VIRT_IRQCHIP_MAX_GUESTS_BITS)=
- - 1U)
-> > @@ -158,4 +165,10 @@ uint32_t imsic_num_bits(uint32_t count);
-> >   #error "Can't accommodate all IMSIC groups in address space"
-> >   #endif
-> >
-> > +/* WorldGuard */
-> > +#define VIRT_WG_NWORLDS         4
-> > +#define VIRT_WG_TRUSTEDWID      3
-> > +#define VIRT_WG_HWBYPASS        true
-> > +#define VIRT_WG_TZCOMPAT        false
-> > +
-> >   #endif
->
+> Does this mean that there can be more than 4k sections now and the
+> assertion in phys_section_add() can be removed?
 
