@@ -4,65 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 39C4AC369AB
-	for <qemu-riscv@archiver.kernel.org>; Tue, 15 Apr 2025 08:19:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9388AC369B8
+	for <qemu-riscv@archiver.kernel.org>; Tue, 15 Apr 2025 08:19:15 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1u4bRH-0003jZ-Ud; Tue, 15 Apr 2025 04:14:40 -0400
+	id 1u4bSb-0000x5-PK; Tue, 15 Apr 2025 04:16:03 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <jim.shu@sifive.com>)
- id 1u4bQx-0001zo-1O
- for qemu-riscv@nongnu.org; Tue, 15 Apr 2025 04:14:20 -0400
+ id 1u4bR2-0002Fd-4Q
+ for qemu-riscv@nongnu.org; Tue, 15 Apr 2025 04:14:26 -0400
 Received: from mail-pl1-x62c.google.com ([2607:f8b0:4864:20::62c])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <jim.shu@sifive.com>)
- id 1u4bQo-00023x-55
- for qemu-riscv@nongnu.org; Tue, 15 Apr 2025 04:14:16 -0400
+ id 1u4bQx-000265-UP
+ for qemu-riscv@nongnu.org; Tue, 15 Apr 2025 04:14:23 -0400
 Received: by mail-pl1-x62c.google.com with SMTP id
- d9443c01a7336-2264aefc45dso77474805ad.0
- for <qemu-riscv@nongnu.org>; Tue, 15 Apr 2025 01:14:01 -0700 (PDT)
+ d9443c01a7336-227914acd20so49643585ad.1
+ for <qemu-riscv@nongnu.org>; Tue, 15 Apr 2025 01:14:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1744704841; x=1745309641; darn=nongnu.org;
+ d=sifive.com; s=google; t=1744704858; x=1745309658; darn=nongnu.org;
  h=references:in-reply-to:message-id:date:subject:cc:to:from:from:to
  :cc:subject:date:message-id:reply-to;
- bh=tIJ3izDwhM7rqWWbObHdV4Xt43nkxUxukpA0UtZRKQU=;
- b=PekJSOfMd/kyLB8Q3m2sU8/8eGidVs5ihCYBHWC156oN6Wopotcb4Ya5kAxkNO3KGH
- KUDgwITVFjooYxXfcjjoWoRzCfB9gpShORctjwmLwB2xgrRoXrk8K2F3xt8Fny/LZ6GQ
- RkxqDBPFZAxg26gxEIvCYGmAr/6WhjFO9aeybe/tbbEyzKH2CP+fapexo7xDItQ4/CjN
- 9amk7r8epV3o3I8GN0k4zA5wc8LT+NcvNEwHitsdyYse12tc72/WqG23kaRoRuvveICr
- z43t1WzHmUzVasHDEQEY1cNiAUtUawicC7++sGU9G0/GHLncVwpyVoKX39IS6++N1R6t
- RXMQ==
+ bh=zQPqjXYVy2MZpkzlsyhoG+MQg9fKVsZKI/VvPlBGP+g=;
+ b=N7mMyMdRGPQf0dIpQU/OVlwAMYxUxcV1n/OGIz+wrFwK93dW9069jOjTaaS0n52t+h
+ LEjVirUYggSviMMPEeijTH78VlXE0qJCQ9JxA1q5igSHUFyxJiUA63OsHooWQ1zXrh5r
+ QmiZlAgcbdEkdubWsYz5F9zLURccAig6GU4Q/oU2F2q3/WtJL7w/j2kdeCikpWI9q5NA
+ 7JN/mBTws5jlSqUZd2LspUskU25JGFcsRwJLAsRqFx/ZIq1Sv2h3fTZ4D72ExxiHbIRL
+ HD/xMib3x8kHW/EgOnxfz6EeYUToQuzNIIPxvvsTUJuFnw2BMXfuITXXccwHEahfaIou
+ NbdA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1744704841; x=1745309641;
+ d=1e100.net; s=20230601; t=1744704858; x=1745309658;
  h=references:in-reply-to:message-id:date:subject:cc:to:from
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=tIJ3izDwhM7rqWWbObHdV4Xt43nkxUxukpA0UtZRKQU=;
- b=JqrTy26C2KqL+r96c1BNjqMtdaOh0OJGF2hph/6pys3pYZR3/EUd6maA64bVrAZ5La
- MxK8kcqI1xDkfA9fkCjO9LZ1unhM2F/1oKOph10pQsltmTVCu6DVJcrEEIYbzLDEBTay
- MqOyM8bmBVoRhfMqlk+Y3YOFt9gBOioqh74MaTTKh5UNBRg1rvryHYrykFo8PYW1Wtl4
- cxVFonaAJK7vykIofqrfbMqk/as9OqZTyVpov7+7Y9N2gUtDrL+7pFfT8Po22wssMeUG
- owu/cRkjolgI7/G+jXTx72xF6RXaS6OoFpML2SD+RIAS/HBdDEWZhWqoxGR6PVStfuKS
- ZtoA==
+ bh=zQPqjXYVy2MZpkzlsyhoG+MQg9fKVsZKI/VvPlBGP+g=;
+ b=GstOX7VZ8GDgt7k2aItqhKUPew0F1wEk2CWnWE/dBPnMHadUYgSpYt0RyBMsEoi/CY
+ 4jeLMV1CX1WIvCnv/mHBrUhQyV4ADx4yrDlf+MSyiBuRNWmnINgUEJaT174oeGI+XeC3
+ N0TWfSQpaRnt3mWtFf2J7wy1Fw+dz+852GY6YRV/v/VXzrIKc57diGCpPmz1s0Esbhq5
+ +LvWrJ+ErhtuSBdZhqPRIrbBH5W3y+luRYvWhK/5XbvLs4xNOFT+RpFO8NWZ36/dTKen
+ 92TUgjU8lPkrWIv8DpvrZkWlY9fO+Vo4SSS9EyrnjCaVdfP+TSC9lz0S17pX9UpZ5wbD
+ EGAQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVTIgM4QD9MqFq3nd6NF6aCMOIGfswgZW6laaN/8L51TyjEuh4QYy+4LGylfRTEPggZ1lj6R1J8INqO@nongnu.org
-X-Gm-Message-State: AOJu0YwwjXiD/xaHxYJWPXbe1VtZDz7+WBELPwQjxGVvWO7aQtEpQgUh
- dQ/VkByDHPvBP6IRMwgREI0VqH98rmMZ4ziim5DX0BnpZ/sPHgYqq4cZIa0hlR4=
-X-Gm-Gg: ASbGncuzipcK7WRXfUSSfbMV/a5MmzMYSC+H5hQEl5Urq5V2KvSlLWt/qG5rktW/PM5
- NpZlEiVveJ9ZrCO5dbW7LVKnxCW4CmeLG+A+k9by4mCvQbJIUqZkjKCBXQgn/PjIHNEgIm5TCsM
- DZuYElitVCmxOVNNRZC0koGbhD/h9dX4oygLx4xA3/j4TXcd450ebdASiWAV9Q4uPaIVfxG8GeS
- me0j+REwyDLpgL3AEG/NY35xUIT96KGsd6T6zk5hA0Tf5vYvet/bJ9qU8VkRg4RYk7pMQd1J64Z
- Due7wMXdH4qoZ+splxZuI1/ud9aBE8fNUAdAOZuFRI7S02zzyNDaAC8GjP4xqZM=
-X-Google-Smtp-Source: AGHT+IG425OyFrl53O+meDfAi876+qS9LMFgjuJjRzBY5VT4OuYk4d3zjDoEmsc6f/h1ub98M3DaNg==
-X-Received: by 2002:a17:903:244d:b0:223:8256:533d with SMTP id
- d9443c01a7336-22bea4fdffdmr201958115ad.46.1744704840690; 
- Tue, 15 Apr 2025 01:14:00 -0700 (PDT)
+ AJvYcCWkpEhhx0ZGGYo5Z5oaucye1ygM4xbMev+7PguIYvpDOrs47dZx0MUHM1uMqFdJ8v85NtJW3WWerq3b@nongnu.org
+X-Gm-Message-State: AOJu0YxyHoQN8wYD3VJuGmdlWQGS5ZhRv7pJ45kingX7cN0ie7duHz4Y
+ uQh75g7ivi+Eb1QzmW6RXz5ct7Tj151ta3B3gQnkgV1/n123J8Mcv3ItUeQvpps=
+X-Gm-Gg: ASbGncvEDkEgByTK4rh5rNBMR+6PMCK+Mxaa2d2L5G5KiZeCBO3OPMG44fyRqUBhRH5
+ +wH7MvUt+cqHOOEvjaHJixYygeCCumrmo5sAj2k7cAK2d+CaYRofitd7O4D0DI5CvmWameWBnwa
+ 36LR8WYB6TVODoaOwqNip96aFIEeoy174t7GtM+dgvw78vkJqmzUWMoAFv8oSZnHMygmthRwqw9
+ LGtu1yuuyjqHclRaeA83ZAzSyX0FsGtBWXA6XJhB0qomL4aYdkDSHFZ4Ck6sMky/OuqB8gITZnT
+ wFPYEAXZZqivbNmNv0S9vI/XijtSsvPfDaony6WuGRJgo8/ZGwk1qxq9Xn35sFw=
+X-Google-Smtp-Source: AGHT+IEJg5jW4QGqUiG5bxHCIDAmrdq674y5ICzayPjEgScWyAIJNmh/JIegAJbkrErhimbC448xmA==
+X-Received: by 2002:a17:902:fc8d:b0:220:cfb7:56eb with SMTP id
+ d9443c01a7336-22c249da9a8mr33204635ad.26.1744704857666; 
+ Tue, 15 Apr 2025 01:14:17 -0700 (PDT)
 Received: from hsinchu26.internal.sifive.com ([210.176.154.34])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-22ac7c95cd1sm111082335ad.150.2025.04.15.01.13.55
+ d9443c01a7336-22ac7c95cd1sm111082335ad.150.2025.04.15.01.14.12
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 15 Apr 2025 01:14:00 -0700 (PDT)
+ Tue, 15 Apr 2025 01:14:17 -0700 (PDT)
 From: Jim Shu <jim.shu@sifive.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
@@ -93,10 +93,10 @@ Cc: Richard Henderson <richard.henderson@linaro.org>,
  qemu-ppc@nongnu.org (open list:PowerPC TCG CPUs),
  qemu-s390x@nongnu.org (open list:S390 TCG CPUs),
  Jim Shu <jim.shu@sifive.com>
-Subject: [PATCH 13/17] hw/misc: riscv_wgchecker: Implement RISC-V WorldGuard
- Checker
-Date: Tue, 15 Apr 2025 16:12:27 +0800
-Message-Id: <20250415081231.21186-14-jim.shu@sifive.com>
+Subject: [PATCH 16/17] hw/misc: riscv_wgchecker: Check the slot settings in
+ translate
+Date: Tue, 15 Apr 2025 16:12:30 +0800
+Message-Id: <20250415081231.21186-17-jim.shu@sifive.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20250415081231.21186-1-jim.shu@sifive.com>
 References: <20250415081231.21186-1-jim.shu@sifive.com>
@@ -124,739 +124,151 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Implement the RISC-V WorldGuard Checker, which sits in front of RAM or
-device MMIO and allow software to configure it to either pass through or
-reject transactions.
+The final part of wgChecker we need to implement is actually using the
+wgChecker slots programmed by guest to determine whether to block the
+transaction or not.
 
-We implement the wgChecker as a QEMU IOMMU, which will direct transactions
-either through to the devices and memory behind it or to a special
-"never works" AddressSpace if they are blocked.
+Since this means we now change transaction mappings when
+the guest writes to wgChecker slots, we must also call the IOMMU
+notifiers at that point.
 
-This initial commit implements the skeleton of the device:
- * it always permits accesses
- * it doesn't implement wgChecker's slot registers
- * it doesn't implement the interrupt or other behaviour
-   for blocked transactions
+One tricky part here is that the perm of 'blocked_io_as' is the
+condition of deny access. For example, if wgChecker only permits RO
+access, the perm of 'downstream_as' will be IOMMU_RO and the perm of
+'blocked_io_as' will be IOMMU_WO.
 
 Signed-off-by: Jim Shu <jim.shu@sifive.com>
 ---
- hw/misc/meson.build                |   2 +-
- hw/misc/riscv_wgchecker.c          | 603 +++++++++++++++++++++++++++++
- hw/misc/trace-events               |   8 +
- include/hw/misc/riscv_worldguard.h |  63 +++
- 4 files changed, 675 insertions(+), 1 deletion(-)
- create mode 100644 hw/misc/riscv_wgchecker.c
+ hw/misc/riscv_wgchecker.c | 70 ++++++++++++++++++++++++++++++++++++---
+ hw/misc/trace-events      |  1 +
+ 2 files changed, 67 insertions(+), 4 deletions(-)
 
-diff --git a/hw/misc/meson.build b/hw/misc/meson.build
-index 3d2f4bb6a3..73c11bc7c9 100644
---- a/hw/misc/meson.build
-+++ b/hw/misc/meson.build
-@@ -34,7 +34,7 @@ system_ss.add(when: 'CONFIG_SIFIVE_E_PRCI', if_true: files('sifive_e_prci.c'))
- system_ss.add(when: 'CONFIG_SIFIVE_E_AON', if_true: files('sifive_e_aon.c'))
- system_ss.add(when: 'CONFIG_SIFIVE_U_OTP', if_true: files('sifive_u_otp.c'))
- system_ss.add(when: 'CONFIG_SIFIVE_U_PRCI', if_true: files('sifive_u_prci.c'))
--specific_ss.add(when: 'CONFIG_RISCV_WORLDGUARD', if_true: files('riscv_worldguard.c'))
-+specific_ss.add(when: 'CONFIG_RISCV_WORLDGUARD', if_true: files('riscv_worldguard.c', 'riscv_wgchecker.c'))
- 
- subdir('macio')
- 
 diff --git a/hw/misc/riscv_wgchecker.c b/hw/misc/riscv_wgchecker.c
-new file mode 100644
-index 0000000000..ea50f4f53a
---- /dev/null
+index 5d2af7946f..5a70231837 100644
+--- a/hw/misc/riscv_wgchecker.c
 +++ b/hw/misc/riscv_wgchecker.c
-@@ -0,0 +1,603 @@
-+/*
-+ * RISC-V WorldGuard Checker Device
-+ *
-+ * Copyright (c) 2022 SiFive, Inc.
-+ *
-+ * This provides WorldGuard Checker model.
-+ *
-+ * This program is free software; you can redistribute it and/or modify it
-+ * under the terms and conditions of the GNU General Public License,
-+ * version 2 or later, as published by the Free Software Foundation.
-+ *
-+ * This program is distributed in the hope it will be useful, but WITHOUT
-+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
-+ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
-+ * more details.
-+ *
-+ * You should have received a copy of the GNU General Public License along with
-+ * this program.  If not, see <http://www.gnu.org/licenses/>.
-+ */
-+
-+#include "qemu/osdep.h"
-+#include "qapi/error.h"
-+#include "qemu/log.h"
-+#include "exec/hwaddr.h"
-+#include "exec/exec-all.h"
-+#include "hw/irq.h"
-+#include "hw/registerfields.h"
-+#include "hw/sysbus.h"
-+#include "hw/hw.h"
-+#include "hw/qdev-properties.h"
-+#include "hw/misc/riscv_worldguard.h"
-+#include "target/riscv/cpu.h"
-+#include "trace.h"
-+
-+/* Common */
-+REG32(VENDOR,               0x000)
-+REG32(IMPID,                0x004)
-+
-+/* wgChecker */
-+REG32(NSLOTS,               0x008)
-+REG64(ERRCAUSE,             0x010)
-+    FIELD(ERRCAUSE, WID,        0,  8)
-+    FIELD(ERRCAUSE, R,          8,  1)
-+    FIELD(ERRCAUSE, W,          9,  1)
-+    FIELD(ERRCAUSE, BE,         62, 1)
-+    FIELD(ERRCAUSE, IP,         63, 1)
-+
-+#define ERRCAUSE_MASK   \
-+    (R_ERRCAUSE_WID_MASK | \
-+     R_ERRCAUSE_R_MASK   | \
-+     R_ERRCAUSE_W_MASK   | \
-+     R_ERRCAUSE_BE_MASK  | \
-+     R_ERRCAUSE_IP_MASK)
-+
-+REG64(ERRADDR,              0x018)
-+
-+/*
-+ * Accesses only reach these read and write functions if the wgChecker
-+ * is blocking them; non-blocked accesses go directly to the downstream
-+ * memory region without passing through this code.
-+ */
-+static MemTxResult riscv_wgc_mem_blocked_read(void *opaque, hwaddr addr,
-+                                               uint64_t *pdata,
-+                                               unsigned size, MemTxAttrs attrs)
+@@ -100,6 +100,52 @@ REG32(SLOT_CFG,             0x010)
+ #define P_READ                  (1 << 0)
+ #define P_WRITE                 (1 << 1)
+ 
++static IOMMUAccessFlags wgc_perm_to_iommu_flags(int wgc_perm)
 +{
-+    uint32_t wid = mem_attrs_to_wid(attrs);
-+
-+    trace_riscv_wgc_mem_blocked_read(addr, size, wid);
-+
-+    *pdata = 0;
-+    return MEMTX_OK;
++    if (wgc_perm == (P_READ | P_WRITE)) {
++        return IOMMU_RW;
++    } else if (wgc_perm & P_WRITE) {
++        return IOMMU_WO;
++    } else if (wgc_perm & P_READ) {
++        return IOMMU_RO;
++    } else {
++        return IOMMU_NONE;
++    }
 +}
 +
-+static MemTxResult riscv_wgc_mem_blocked_write(void *opaque, hwaddr addr,
-+                                               uint64_t value,
-+                                               unsigned size, MemTxAttrs attrs)
++static void wgchecker_iommu_notify_all(RISCVWgCheckerState *s)
 +{
-+    uint32_t wid = mem_attrs_to_wid(attrs);
++    /*
++     * Do tlb_flush() to whole address space via memory_region_notify_iommu()
++     * when wgChecker changes it's config.
++     */
 +
-+    trace_riscv_wgc_mem_blocked_write(addr, value, size, wid);
-+
-+    return MEMTX_OK;
-+}
-+
-+static const MemoryRegionOps riscv_wgc_mem_blocked_ops = {
-+    .read_with_attrs = riscv_wgc_mem_blocked_read,
-+    .write_with_attrs = riscv_wgc_mem_blocked_write,
-+    .endianness = DEVICE_LITTLE_ENDIAN,
-+    .valid.min_access_size = 1,
-+    .valid.max_access_size = 8,
-+    .impl.min_access_size = 1,
-+    .impl.max_access_size = 8,
-+};
-+
-+static IOMMUTLBEntry riscv_wgc_translate(IOMMUMemoryRegion *iommu,
-+                                          hwaddr addr, IOMMUAccessFlags flags,
-+                                          int iommu_idx)
-+{
-+    WgCheckerRegion *region = container_of(iommu, WgCheckerRegion, upstream);
-+    RISCVWgCheckerState *s = RISCV_WGCHECKER(region->wgchecker);
-+    hwaddr phys_addr;
-+    uint64_t region_size;
-+
-+    IOMMUTLBEntry ret = {
-+        .iova = addr & ~WG_ALIGNED_MASK,
-+        .translated_addr = addr & ~WG_ALIGNED_MASK,
-+        .addr_mask = WG_ALIGNED_MASK,
-+        .perm = IOMMU_RW,
++    IOMMUTLBEvent event = {
++        .entry = {
++            .addr_mask = -1ULL,
++        }
 +    };
 +
-+    /* addr shouldn't exceed region size of down/upstream. */
-+    region_size = memory_region_size(region->downstream);
-+    g_assert(addr < region_size);
-+
-+    /*
-+     * Look at the wgChecker configuration for this address, and
-+     * return a TLB entry directing the transaction at either
-+     * downstream_as or blocked_io_as, as appropriate.
-+     * For the moment, always permit accesses.
-+     */
-+
-+    /* Use physical address instead of offset */
-+    phys_addr = addr + region->region_offset;
-+
-+    is_success = true;
-+
-+    trace_riscv_wgc_translate(phys_addr, flags,
-+        iommu_idx, is_success ? "pass" : "block");
-+
-+    ret.target_as = is_success ? &region->downstream_as : &region->blocked_io_as;
-+    return ret;
-+}
-+
-+static int riscv_wgc_attrs_to_index(IOMMUMemoryRegion *iommu, MemTxAttrs attrs)
-+{
-+    return mem_attrs_to_wid(attrs);
-+}
-+
-+static int riscv_wgc_num_indexes(IOMMUMemoryRegion *iommu)
-+{
-+    return worldguard_config->nworlds;
-+}
-+
-+static uint64_t riscv_wgchecker_readq(void *opaque, hwaddr addr)
-+{
-+    RISCVWgCheckerState *s = RISCV_WGCHECKER(opaque);
-+    uint64_t val = 0;
-+
-+    switch (addr) {
-+    case A_ERRCAUSE:
-+        val = s->errcause & ERRCAUSE_MASK;
-+        break;
-+    case A_ERRADDR:
-+        val = s->erraddr;
-+        break;
-+    case A_NSLOTS:
-+        val = s->slot_count;
-+        break;
-+    default:
-+        qemu_log_mask(LOG_GUEST_ERROR,
-+                      "%s: Unexpected memory access to (0x%" HWADDR_PRIX ", %u) \n",
-+                      __func__, addr, 8);
-+        break;
-+    }
-+
-+    return val;
-+}
-+
-+static uint64_t riscv_wgchecker_readl(void *opaque, hwaddr addr)
-+{
-+    RISCVWgCheckerState *s = RISCV_WGCHECKER(opaque);
-+    uint64_t val = 0;
-+
-+    switch (addr) {
-+    case A_VENDOR:
-+        val = 0;
-+        break;
-+    case A_IMPID:
-+        val = 0;
-+        break;
-+    case A_NSLOTS:
-+        val = extract64(s->slot_count, 0, 32);
-+        break;
-+    case A_NSLOTS + 4:
-+        val = extract64(s->slot_count, 0, 32);
-+        break;
-+    case A_ERRCAUSE:
-+        val = s->errcause & ERRCAUSE_MASK;
-+        val = extract64(val, 0, 32);
-+        break;
-+    case A_ERRCAUSE + 4:
-+        val = s->errcause & ERRCAUSE_MASK;
-+        val = extract64(val, 32, 32);
-+        break;
-+    case A_ERRADDR:
-+        val = extract64(s->erraddr, 0, 32);
-+        break;
-+    case A_ERRADDR + 4:
-+        val = extract64(s->erraddr, 32, 32);
-+        break;
-+    default:
-+        qemu_log_mask(LOG_GUEST_ERROR,
-+                      "%s: Unexpected memory access to (0x%" HWADDR_PRIX ", %u) \n",
-+                      __func__, addr, 4);
-+        break;
-+    }
-+
-+    return val;
-+}
-+
-+static uint64_t riscv_wgchecker_read(void *opaque, hwaddr addr, unsigned size)
-+{
-+    uint64_t val = 0;
-+
-+    switch (size) {
-+    case 8:
-+        val = riscv_wgchecker_readq(opaque, addr);
-+        break;
-+    case 4:
-+        val = riscv_wgchecker_readl(opaque, addr);
-+        break;
-+    default:
-+        qemu_log_mask(LOG_GUEST_ERROR, "%s: Invalid read size %u to wgChecker\n",
-+                      __func__, size);
-+        return 0;
-+    }
-+
-+    return val;
-+}
-+
-+static void riscv_wgchecker_writeq(void *opaque, hwaddr addr,
-+                                    uint64_t value)
-+{
-+    RISCVWgCheckerState *s = RISCV_WGCHECKER(opaque);
-+
-+    switch (addr) {
-+    case A_ERRCAUSE:
-+        s->errcause = value & ERRCAUSE_MASK;
-+        break;
-+    case A_ERRADDR:
-+        s->erraddr = value;
-+        break;
-+    default:
-+        qemu_log_mask(LOG_GUEST_ERROR,
-+                      "%s: Unexpected memory access to (0x%" HWADDR_PRIX ", %u) \n",
-+                      __func__, addr, 8);
-+        break;
-+    }
-+}
-+
-+static void riscv_wgchecker_writel(void *opaque, hwaddr addr,
-+                                    uint64_t value)
-+{
-+    RISCVWgCheckerState *s = RISCV_WGCHECKER(opaque);
-+
-+    switch (addr) {
-+    case A_ERRCAUSE:
-+        value &= extract64(ERRCAUSE_MASK, 0, 32);
-+        s->errcause = deposit64(s->errcause, 0, 32, value);
-+        break;
-+    case A_ERRCAUSE + 4:
-+        value &= extract64(ERRCAUSE_MASK, 32, 32);
-+        s->errcause = deposit64(s->errcause, 32, 32, value);
-+        break;
-+    case A_ERRADDR:
-+        s->erraddr = deposit64(s->erraddr, 0, 32, value);
-+        break;
-+    case A_ERRADDR + 4:
-+        s->erraddr = deposit64(s->erraddr, 32, 32, value);
-+        break;
-+    default:
-+        qemu_log_mask(LOG_GUEST_ERROR,
-+                      "%s: Unexpected memory access to (0x%" HWADDR_PRIX ", %u) \n",
-+                      __func__, addr, 4);
-+        break;
-+    }
-+}
-+
-+static void riscv_wgchecker_write(void *opaque, hwaddr addr,
-+                                   uint64_t value, unsigned size)
-+{
-+    switch (size) {
-+    case 8:
-+        riscv_wgchecker_writeq(opaque, addr, value);
-+        break;
-+    case 4:
-+        riscv_wgchecker_writel(opaque, addr, value);
-+        break;
-+    default:
-+        qemu_log_mask(LOG_GUEST_ERROR, "%s: Invalid write size %u to wgChecker\n",
-+                      __func__, size);
-+        break;
-+    }
-+}
-+
-+static MemTxResult riscv_wgchecker_read_with_attrs(
-+    void *opaque, hwaddr addr, uint64_t *pdata, unsigned size,
-+    MemTxAttrs attrs)
-+{
-+    SysBusDevice *dev = SYS_BUS_DEVICE(opaque);
-+
-+    trace_riscv_wgchecker_mmio_read(dev->mmio[0].addr, addr, size);
-+
-+    *pdata = 0;
-+    if (could_access_wgblocks(attrs, "wgChecker")) {
-+        *pdata = riscv_wgchecker_read(opaque, addr, size);
-+    }
-+
-+    return MEMTX_OK;
-+}
-+
-+static MemTxResult riscv_wgchecker_write_with_attrs(
-+    void *opaque, hwaddr addr, uint64_t data, unsigned size,
-+    MemTxAttrs attrs)
-+{
-+    SysBusDevice *dev = SYS_BUS_DEVICE(opaque);
-+
-+    trace_riscv_wgchecker_mmio_write(dev->mmio[0].addr, addr, size, data);
-+
-+    if (could_access_wgblocks(attrs, "wgChecker")) {
-+        riscv_wgchecker_write(opaque, addr, data, size);
-+    }
-+
-+    return MEMTX_OK;
-+}
-+
-+static const MemoryRegionOps riscv_wgchecker_ops = {
-+    .read_with_attrs = riscv_wgchecker_read_with_attrs,
-+    .write_with_attrs = riscv_wgchecker_write_with_attrs,
-+    .endianness = DEVICE_NATIVE_ENDIAN,
-+    .valid = {
-+        .min_access_size = 4,
-+        .max_access_size = 8
-+    },
-+    .impl = {
-+        .min_access_size = 4,
-+        .max_access_size = 8
-+    }
-+};
-+
-+static void riscv_wgc_iommu_memory_region_class_init(ObjectClass *klass,
-+                                                  void *data)
-+{
-+    IOMMUMemoryRegionClass *imrc = IOMMU_MEMORY_REGION_CLASS(klass);
-+
-+    imrc->translate = riscv_wgc_translate;
-+    imrc->attrs_to_index = riscv_wgc_attrs_to_index;
-+    imrc->num_indexes = riscv_wgc_num_indexes;
-+}
-+
-+static const TypeInfo riscv_wgc_iommu_memory_region_info = {
-+    .name = TYPE_RISCV_WGC_IOMMU_MEMORY_REGION,
-+    .parent = TYPE_IOMMU_MEMORY_REGION,
-+    .class_init = riscv_wgc_iommu_memory_region_class_init,
-+};
-+
-+
-+#define DEFINE_REGION(N)                                                \
-+    DEFINE_PROP_LINK("downstream-mr[" #N "]", RISCVWgCheckerState,     \
-+                     mem_regions[N].downstream,                         \
-+                     TYPE_MEMORY_REGION, MemoryRegion *),               \
-+    DEFINE_PROP_UINT64("region-offset[" #N "]", RISCVWgCheckerState,   \
-+                       mem_regions[N].region_offset, 0)                 \
-+
-+static Property riscv_wgchecker_properties[] = {
-+    DEFINE_PROP_UINT32("slot-count", RISCVWgCheckerState, slot_count, 0x1),
-+    DEFINE_PROP_UINT32("mmio-size", RISCVWgCheckerState, mmio_size, 0x1000),
-+
-+    /* Assume 1 wgChecker has 16 regions at maximum (WGC_NUM_REGIONS). */
-+    DEFINE_REGION(0), DEFINE_REGION(1), DEFINE_REGION(2), DEFINE_REGION(3),
-+    DEFINE_REGION(4), DEFINE_REGION(5), DEFINE_REGION(6), DEFINE_REGION(7),
-+    DEFINE_REGION(8), DEFINE_REGION(9), DEFINE_REGION(10), DEFINE_REGION(11),
-+    DEFINE_REGION(12), DEFINE_REGION(13), DEFINE_REGION(14), DEFINE_REGION(15),
-+
-+    DEFINE_PROP_UINT64("addr-range-start", RISCVWgCheckerState, addr_range_start, 0),
-+    DEFINE_PROP_UINT64("addr-range-size", RISCVWgCheckerState, addr_range_size, UINT64_MAX),
-+
-+    /*
-+     * We could only set individual wgChecker to hw-bypass mode. It is
-+     * usually used in wgChecker of BootROM, since SW has no way to enable
-+     * the permission of it.
-+     */
-+    DEFINE_PROP_BOOL("hw-bypass", RISCVWgCheckerState, hw_bypass, false),
-+};
-+
-+static int int_log2_down(int n)
-+{
-+    int i = 0;
-+
-+    n >>= 1;
-+
-+    while (n) {
-+        i++;
-+        n >>= 1;
-+    }
-+
-+    return i;
-+}
-+
-+static int int_log2_up(int n)
-+{
-+    return int_log2_down(n - 1) + 1;
-+}
-+
-+/*
-+ * Change the address range to be NAPOT alignment.
-+ *
-+ * New address range should totally cover the origin range, but new range
-+ * should be configured by 1 NAPOT region (slot).
-+ */
-+static void address_range_align_napot(RISCVWgCheckerState *s)
-+{
-+    uint64_t start, end, size, new_size;
-+
-+    start = s->addr_range_start;
-+    end = s->addr_range_start + s->addr_range_size;
-+    size = s->addr_range_size;
-+
-+    if (size == UINT64_MAX) {
-+        /* Full address range. No need of NAPOT alignment. */
-+        return;
-+    }
-+
-+    /* Size is the next power-of-2 number. */
-+    size = 1 << (int_log2_up(size));
-+    start = QEMU_ALIGN_DOWN(start, size);
-+    end = QEMU_ALIGN_UP(end, size);
-+    new_size = end - start;
-+
-+    /*
-+     * If base is not aligned to region size (new_size),
-+     * double the region size and try it again.
-+     */
-+    while ((new_size != size) && (size != 1ULL << 63)) {
-+        size *= 2;
-+        start = QEMU_ALIGN_DOWN(start, size);
-+        end = QEMU_ALIGN_UP(end, size);
-+        new_size = end - start;
-+    }
-+
-+    s->addr_range_start = start;
-+    s->addr_range_size = size;
-+}
-+
-+static void riscv_wgchecker_realize(DeviceState *dev, Error **errp)
-+{
-+    Object *obj = OBJECT(dev);
-+    RISCVWgCheckerState *s = RISCV_WGCHECKER(dev);
-+    uint64_t size;
-+
-+    if (worldguard_config == NULL) {
-+        error_setg(errp, "Couldn't find global WorldGuard configs. "
-+                   "Please realize %s device at first.",
-+                   TYPE_RISCV_WORLDGUARD);
-+        return;
-+    }
-+
-+    if (s->slot_count == 0) {
-+        error_setg(errp, "wgChecker slot-count couldn't be zero.");
-+        return;
-+    }
-+
-+    memory_region_init_io(&s->mmio, OBJECT(dev), &riscv_wgchecker_ops, s,
-+                          TYPE_RISCV_WGCHECKER, s->mmio_size);
-+    sysbus_init_mmio(SYS_BUS_DEVICE(dev), &s->mmio);
-+    sysbus_init_irq(SYS_BUS_DEVICE(dev), &s->irq);
-+
-+    /* Address range should be NAPOT alignment */
-+    address_range_align_napot(s);
++    trace_riscv_wgc_iommu_notify_all();
 +
 +    for (int i=0; i<WGC_NUM_REGIONS; i++) {
 +        WgCheckerRegion *region = &s->mem_regions[i];
++        uint32_t nworlds = worldguard_config->nworlds;
 +
 +        if (!region->downstream) {
 +            continue;
 +        }
-+        region->wgchecker = s;
++        event.entry.iova = 0;
++        event.entry.translated_addr = 0;
++        event.type = IOMMU_NOTIFIER_UNMAP;
++        event.entry.perm = IOMMU_NONE;
 +
-+        const char *upstream_name = g_strdup_printf(
-+            "wgchecker-upstream-%"HWADDR_PRIx, region->region_offset);
-+        const char *downstream_name = g_strdup_printf(
-+            "wgchecker-downstream-%"HWADDR_PRIx, region->region_offset);
-+
-+        size = memory_region_size(region->downstream);
-+        memory_region_init_iommu(&region->upstream, sizeof(region->upstream),
-+                                 TYPE_RISCV_WGC_IOMMU_MEMORY_REGION,
-+                                 obj, upstream_name, size);
-+
-+        /* upstream MRs are 2nd ~ (n+1)th MemoryRegion. */
-+        sysbus_init_mmio(SYS_BUS_DEVICE(dev), MEMORY_REGION(&region->upstream));
-+
-+        /*
-+         * This memory region is not exposed to users of this device as a
-+         * sysbus MMIO region, but is instead used internally as something
-+         * that our IOMMU translate function might direct accesses to.
-+         */
-+        memory_region_init_io(&region->blocked_io, obj, &riscv_wgc_mem_blocked_ops,
-+                              region, "wgchecker-blocked-io", size);
-+
-+        address_space_init(&region->downstream_as, region->downstream,
-+                           downstream_name);
-+        address_space_init(&region->blocked_io_as, &region->blocked_io,
-+                           "wgchecker-blocked-io");
++        for (int wid=0; wid<nworlds; wid++) {
++            memory_region_notify_iommu(&region->upstream, wid, event);
++        }
 +    }
 +}
 +
-+static void riscv_wgchecker_unrealize(DeviceState *dev)
-+{
-+    RISCVWgCheckerState *s = RISCV_WGCHECKER(dev);
-+
-+    g_free(s->slots);
-+    if (s->num_default_slots && s->default_slots) {
-+        g_free(s->default_slots);
+ static void decode_napot(hwaddr a, hwaddr *sa, hwaddr *ea)
+ {
+     /*
+@@ -309,6 +355,9 @@ static IOMMUTLBEntry riscv_wgc_translate(IOMMUMemoryRegion *iommu,
+ {
+     WgCheckerRegion *region = container_of(iommu, WgCheckerRegion, upstream);
+     RISCVWgCheckerState *s = RISCV_WGCHECKER(region->wgchecker);
++    bool is_write;
++    WgAccessResult result;
++    int wgc_perm;
+     hwaddr phys_addr;
+     uint64_t region_size;
+ 
+@@ -327,18 +376,25 @@ static IOMMUTLBEntry riscv_wgc_translate(IOMMUMemoryRegion *iommu,
+      * Look at the wgChecker configuration for this address, and
+      * return a TLB entry directing the transaction at either
+      * downstream_as or blocked_io_as, as appropriate.
+-     * For the moment, always permit accesses.
+      */
+ 
+     /* Use physical address instead of offset */
+     phys_addr = addr + region->region_offset;
++    is_write = (flags == IOMMU_WO);
+ 
+-    is_success = true;
++    result = wgc_check_access(s, phys_addr, iommu_idx, is_write);
+ 
+     trace_riscv_wgc_translate(phys_addr, flags,
+-        iommu_idx, is_success ? "pass" : "block");
++        iommu_idx, result.is_success ? "pass" : "block");
+ 
+-    ret.target_as = is_success ? &region->downstream_as : &region->blocked_io_as;
++    wgc_perm = result.perm;
++    if (!result.is_success) {
++        /* if target_as is blocked_io_as, the perm is the condition of deny access. */
++        wgc_perm ^= (P_READ | P_WRITE);
 +    }
-+}
++    ret.perm = wgc_perm_to_iommu_flags(wgc_perm);
 +
-+static void riscv_wgchecker_reset_enter(Object *obj, ResetType type)
-+{
-+    RISCVWgCheckerState *s = RISCV_WGCHECKER(obj);
-+    uint64_t start = s->addr_range_start;
-+    uint64_t end = s->addr_range_start + s->addr_range_size;
-+    int nslots = s->slot_count;
++    ret.target_as = result.is_success ? &region->downstream_as : &region->blocked_io_as;
+     return ret;
+ }
+ 
+@@ -604,6 +660,9 @@ static void riscv_wgchecker_writeq(void *opaque, hwaddr addr,
+             break;
+         }
+ 
++        /* Flush softmmu TLB when wgChecker changes config. */
++        wgchecker_iommu_notify_all(s);
 +
-+    s->errcause = 0;
-+    s->erraddr = 0;
-+}
+         return;
+     }
+ 
+@@ -699,6 +758,9 @@ static void riscv_wgchecker_writel(void *opaque, hwaddr addr,
+             break;
+         }
+ 
++        /* Flush softmmu TLB when wgChecker changes config. */
++        wgchecker_iommu_notify_all(s);
 +
-+static void riscv_wgchecker_class_init(ObjectClass *klass, void *data)
-+{
-+    DeviceClass *dc = DEVICE_CLASS(klass);
-+
-+    device_class_set_props(dc, riscv_wgchecker_properties);
-+    dc->user_creatable = true;
-+    dc->realize = riscv_wgchecker_realize;
-+    dc->unrealize = riscv_wgchecker_unrealize;
-+    ResettableClass *rc = RESETTABLE_CLASS(klass);
-+    rc->phases.enter = riscv_wgchecker_reset_enter;
-+}
-+
-+static void riscv_wgchecker_instance_init(Object *obj)
-+{
-+    RISCVWgCheckerState *s = RISCV_WGCHECKER(obj);
-+
-+    s->num_default_slots = 0;
-+}
-+
-+static const TypeInfo riscv_wgchecker_info = {
-+    .name          = TYPE_RISCV_WGCHECKER,
-+    .parent        = TYPE_SYS_BUS_DEVICE,
-+    .instance_init = riscv_wgchecker_instance_init,
-+    .instance_size = sizeof(RISCVWgCheckerState),
-+    .class_init    = riscv_wgchecker_class_init,
-+};
-+
-+static void riscv_wgchecker_register_types(void)
-+{
-+    type_register_static(&riscv_wgchecker_info);
-+    type_register_static(&riscv_wgc_iommu_memory_region_info);
-+}
-+
-+type_init(riscv_wgchecker_register_types)
-+
-+/*
-+ * Create WgChecker device
-+ */
-+DeviceState *riscv_wgchecker_create(hwaddr addr, uint32_t size,
-+                                    qemu_irq irq, uint32_t slot_count,
-+                                    uint64_t addr_range_start,
-+                                    uint64_t addr_range_size,
-+                                    uint32_t num_of_region,
-+                                    MemoryRegion **downstream,
-+                                    uint64_t *region_offset,
-+                                    uint32_t num_default_slots,
-+                                    WgCheckerSlot *default_slots)
-+{
-+    DeviceState *dev = qdev_new(TYPE_RISCV_WGCHECKER);
-+    RISCVWgCheckerState *s = RISCV_WGCHECKER(dev);
-+    char name_mr[32];
-+    char name_offset[32];
-+    int i;
-+
-+    qdev_prop_set_uint32(dev, "slot-count", slot_count);
-+    qdev_prop_set_uint32(dev, "mmio-size", size);
-+    qdev_prop_set_uint64(dev, "addr-range-start", addr_range_start);
-+    if (addr_range_size) {
-+        qdev_prop_set_uint64(dev, "addr-range-size", addr_range_size);
-+    }
-+
-+    g_assert(num_of_region <= WGC_NUM_REGIONS);
-+    for (i=0; i<num_of_region; i++) {
-+        snprintf(name_mr, 32, "downstream-mr[%d]", i);
-+        snprintf(name_offset, 32, "region-offset[%d]", i);
-+
-+        object_property_set_link(OBJECT(dev), name_mr,
-+                                 OBJECT(downstream[i]), &error_fatal);
-+        qdev_prop_set_uint64(dev, name_offset, region_offset[i]);
-+    }
-+
-+    sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
-+    sysbus_mmio_map(SYS_BUS_DEVICE(dev), 0, addr);
-+    sysbus_connect_irq(SYS_BUS_DEVICE(dev), 0, irq);
-+    return dev;
-+}
+         return;
+     }
+ 
 diff --git a/hw/misc/trace-events b/hw/misc/trace-events
-index 4383808d7a..b1d8538220 100644
+index b1d8538220..54dfcd50a1 100644
 --- a/hw/misc/trace-events
 +++ b/hw/misc/trace-events
-@@ -395,3 +395,11 @@ ivshmem_flat_interrupt_peer(uint16_t peer_id, uint16_t vector_id) "Interrupting
- i2c_echo_event(const char *id, const char *event) "%s: %s"
- i2c_echo_recv(const char *id, uint8_t data) "%s: recv 0x%02" PRIx8
- i2c_echo_send(const char *id, uint8_t data) "%s: send 0x%02" PRIx8
-+
-+# riscv_worldguard.c
-+riscv_wgchecker_mmio_read(uint64_t base, uint64_t offset, unsigned int size) "base = 0x%"PRIx64", offset = 0x%"PRIx64", size = 0x%x"
-+riscv_wgchecker_mmio_write(uint64_t base, uint64_t offset, unsigned int size, uint64_t val) "base = 0x%"PRIx64", offset = 0x%"PRIx64", size = 0x%x, val = 0x%"PRIx64
-+
-+riscv_wgc_mem_blocked_read(uint64_t addr, unsigned size, uint32_t wid) "wgChecker blocked read: offset 0x%" PRIx64 " size %u wid %" PRIu32
-+riscv_wgc_mem_blocked_write(uint64_t addr, uint64_t data, unsigned size, uint32_t wid) "wgChecker blocked write: offset 0x%" PRIx64 " data 0x%" PRIx64 " size %u wid %" PRIu32
-+riscv_wgc_translate(uint64_t addr, int flags, int wid, const char *res) "wgChecker translate: addr 0x%016" PRIx64 " flags 0x%x wid %d: %s"
-diff --git a/include/hw/misc/riscv_worldguard.h b/include/hw/misc/riscv_worldguard.h
-index 211a72e438..7b5aae866a 100644
---- a/include/hw/misc/riscv_worldguard.h
-+++ b/include/hw/misc/riscv_worldguard.h
-@@ -53,4 +53,67 @@ void riscv_worldguard_apply_cpu(uint32_t hartid);
- uint32_t mem_attrs_to_wid(MemTxAttrs attrs);
- bool could_access_wgblocks(MemTxAttrs attrs, const char *wgblock);
- 
-+#define TYPE_RISCV_WGCHECKER  "riscv.wgchecker"
-+
-+typedef struct RISCVWgCheckerState RISCVWgCheckerState;
-+DECLARE_INSTANCE_CHECKER(RISCVWgCheckerState, RISCV_WGCHECKER,
-+                         TYPE_RISCV_WGCHECKER)
-+
-+#define TYPE_RISCV_WGC_IOMMU_MEMORY_REGION    "riscv-wgc-iommu-memory-region"
-+
-+typedef struct WgCheckerSlot WgCheckerSlot;
-+struct WgCheckerSlot {
-+    uint64_t addr;
-+    uint64_t perm;
-+    uint32_t cfg;
-+};
-+
-+typedef struct WgCheckerRegion WgCheckerRegion;
-+struct WgCheckerRegion {
-+    MemoryRegion *downstream;
-+    uint64_t region_offset;
-+
-+    IOMMUMemoryRegion upstream;
-+    MemoryRegion blocked_io;
-+    AddressSpace downstream_as;
-+    AddressSpace blocked_io_as;
-+
-+    RISCVWgCheckerState *wgchecker;
-+};
-+
-+#define WGC_NUM_REGIONS     16
-+
-+struct RISCVWgCheckerState {
-+    /*< private >*/
-+    SysBusDevice parent_obj;
-+
-+    /*< public >*/
-+    MemoryRegion mmio;
-+    qemu_irq irq;
-+
-+    /* error reg */
-+    uint64_t errcause;
-+    uint64_t erraddr;
-+
-+    /* Memory regions protected by wgChecker */
-+    WgCheckerRegion mem_regions[WGC_NUM_REGIONS];
-+
-+    /* Property */
-+    uint32_t slot_count; /* nslots */
-+    uint32_t mmio_size;
-+    uint64_t addr_range_start;
-+    uint64_t addr_range_size;
-+    bool hw_bypass;
-+};
-+
-+DeviceState *riscv_wgchecker_create(hwaddr addr, uint32_t size,
-+                                    qemu_irq irq, uint32_t slot_count,
-+                                    uint64_t addr_range_start,
-+                                    uint64_t addr_range_size,
-+                                    uint32_t num_of_region,
-+                                    MemoryRegion **downstream,
-+                                    uint64_t *region_offset,
-+                                    uint32_t num_default_slots,
-+                                    WgCheckerSlot *default_slots);
-+
- #endif
+@@ -403,3 +403,4 @@ riscv_wgchecker_mmio_write(uint64_t base, uint64_t offset, unsigned int size, ui
+ riscv_wgc_mem_blocked_read(uint64_t addr, unsigned size, uint32_t wid) "wgChecker blocked read: offset 0x%" PRIx64 " size %u wid %" PRIu32
+ riscv_wgc_mem_blocked_write(uint64_t addr, uint64_t data, unsigned size, uint32_t wid) "wgChecker blocked write: offset 0x%" PRIx64 " data 0x%" PRIx64 " size %u wid %" PRIu32
+ riscv_wgc_translate(uint64_t addr, int flags, int wid, const char *res) "wgChecker translate: addr 0x%016" PRIx64 " flags 0x%x wid %d: %s"
++riscv_wgc_iommu_notify_all(void) "wgChecker iommu: notifying UNMAP for all"
 -- 
 2.17.1
 
