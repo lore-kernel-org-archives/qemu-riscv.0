@@ -4,23 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 000A5C369BA
-	for <qemu-riscv@archiver.kernel.org>; Wed, 16 Apr 2025 04:58:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4D6EFC369B1
+	for <qemu-riscv@archiver.kernel.org>; Wed, 16 Apr 2025 05:20:57 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1u4upv-0008Jj-Ta; Wed, 16 Apr 2025 00:57:23 -0400
+	id 1u4vCJ-0006uj-EP; Wed, 16 Apr 2025 01:20:31 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <lc00631@tecorigin.com>)
- id 1u4upu-0008HV-1P; Wed, 16 Apr 2025 00:57:22 -0400
-Received: from out28-125.mail.aliyun.com ([115.124.28.125])
+ id 1u4vCF-0006sP-OR; Wed, 16 Apr 2025 01:20:27 -0400
+Received: from out28-171.mail.aliyun.com ([115.124.28.171])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <lc00631@tecorigin.com>)
- id 1u4upq-0008CB-Hz; Wed, 16 Apr 2025 00:57:21 -0400
+ id 1u4vCB-0003hF-51; Wed, 16 Apr 2025 01:20:27 -0400
 Received: from TC-DZ-03-0020.tc.local(mailfrom:lc00631@tecorigin.com
- fp:SMTPD_---.cNtMeik_1744779426 cluster:ay29) by smtp.aliyun-inc.com;
- Wed, 16 Apr 2025 12:57:09 +0800
+ fp:SMTPD_---.cNuP0He_1744780811 cluster:ay29) by smtp.aliyun-inc.com;
+ Wed, 16 Apr 2025 13:20:13 +0800
 From: Chao Liu <lc00631@tecorigin.com>
 To: palmer@dabbelt.com,
 	alistair23@gmail.com
@@ -28,15 +28,15 @@ Cc: zhiwei_liu@linux.alibaba.com, alistair.francis@wdc.com,
  dbarboza@ventanamicro.com, liwei1518@gmail.com, zhangtj@tecorigin.com,
  zqz00548@tecorigin.com, lc00631@tecorigin.com, qemu-devel@nongnu.org,
  qemu-riscv@nongnu.org
-Subject: [PATCH v2 0/1] fix the way riscv_plic_hart_config_string() gets the
+Subject: [PATCH v3 0/1] fix the way riscv_plic_hart_config_string() gets the
  CPUState
-Date: Wed, 16 Apr 2025 12:53:57 +0800
-Message-ID: <cover.1744776027.git.lc00631@tecorigin.com>
+Date: Wed, 16 Apr 2025 13:17:02 +0800
+Message-ID: <cover.1744779826.git.lc00631@tecorigin.com>
 X-Mailer: git-send-email 2.47.0.windows.2
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=115.124.28.125;
- envelope-from=lc00631@tecorigin.com; helo=out28-125.mail.aliyun.com
+Received-SPF: pass client-ip=115.124.28.171;
+ envelope-from=lc00631@tecorigin.com; helo=out28-171.mail.aliyun.com
 X-Spam_score_int: -18
 X-Spam_score: -1.9
 X-Spam_bar: -
@@ -61,13 +61,20 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 Hi, all:
 
-I made the following changes in version 2 of the patch:
+PATCH v3:
 
-Regarding the plic initialization phase to get CPUState by traversing
-qemu_get_cpu(), this is an early design flaw, a better approach would be to use
-riscv's hartid for indexing via the interface cpu_by_arch_id().
+Use cpu_by_arch_id() instead of qemu_get_cpu(), when registering gpio in
+sifive_plic_create().
 
-PATCH v1: 
+PATCH v2:
+
+During plic initialization, CPUSate is obtained by traversing qemu_get_cpu(),
+which was an early design flaw (see PATCH v1 reviewed).
+
+A better approach is to use riscv's hartid for indexing via the cpu_by_arch_id()
+interface.
+
+PATCH v1 (Reviewed):
 https://lore.kernel.org/qemu-riscv/416e68f4-bf12-4218-ae2d-0246cc8ea8ec@linaro.org/T/#u
 
 --
@@ -79,13 +86,13 @@ Chao Liu (1):
   hw/riscv: fix PLIC hart topology configuration string when not getting
     CPUState correctly
 
- hw/intc/sifive_plic.c      | 2 +-
+ hw/intc/sifive_plic.c      | 4 ++--
  hw/riscv/boot.c            | 4 ++--
  hw/riscv/microchip_pfsoc.c | 2 +-
  hw/riscv/sifive_u.c        | 5 +++--
  hw/riscv/virt.c            | 2 +-
  include/hw/riscv/boot.h    | 2 +-
- 6 files changed, 9 insertions(+), 8 deletions(-)
+ 6 files changed, 10 insertions(+), 9 deletions(-)
 
 -- 
 2.48.1
