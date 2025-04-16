@@ -4,80 +4,103 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 97D44C369BA
-	for <qemu-riscv@archiver.kernel.org>; Wed, 16 Apr 2025 08:29:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EE7C2C369C2
+	for <qemu-riscv@archiver.kernel.org>; Wed, 16 Apr 2025 21:58:29 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1u4y98-00004u-AT; Wed, 16 Apr 2025 04:29:26 -0400
+	id 1u5AlW-00035c-AV; Wed, 16 Apr 2025 17:57:54 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
- id 1u4y92-0008Gt-45
- for qemu-riscv@nongnu.org; Wed, 16 Apr 2025 04:29:20 -0400
-Received: from mail-vk1-xa32.google.com ([2607:f8b0:4864:20::a32])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
- id 1u4y8z-0008NC-ML
- for qemu-riscv@nongnu.org; Wed, 16 Apr 2025 04:29:19 -0400
-Received: by mail-vk1-xa32.google.com with SMTP id
- 71dfb90a1353d-5259327a937so2614130e0c.0
- for <qemu-riscv@nongnu.org>; Wed, 16 Apr 2025 01:29:14 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1744792153; x=1745396953; darn=nongnu.org;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=jteE/slCOTpGgvDFX4KPSwiat3jPOkuFeCsESh8Dhm4=;
- b=aUScvrhJhSCNwIRsebqD6ta7//tYyySG9OAMqeUMa4FkNj/ccnWeFUSUcoBceXFijW
- eMHFD+nXsah173g9Wx/g9MRlmzf17NYEko2rL2xlKXJdyYElXtwhvuvl1DKc9jC1VtzL
- REv5eCTw9eQK0YyulnqGUgumQl/r2QLATfw2OrmhM4ElNqSkUhccTCKjTjm+NKo3QJZn
- 6NVNugdJlVUTRdwIg0JykHxsy8ubMeaGTz1tLfdM+NmJInJJlNm83q5RM+Gh0wygDTmH
- KQ/ma86c5JUr+HA84RCPQAumPHIfmrFo3m+zoqjReQEcJqGMC1EuQKyimIeIDimcpS0N
- nl3g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1744792153; x=1745396953;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=jteE/slCOTpGgvDFX4KPSwiat3jPOkuFeCsESh8Dhm4=;
- b=mEDAvLl55RvEQ2c9RYwqMdHnV/xkhBb0OTM/e82qMVSnlmIU8VSgZyJ61hPdt1+nrh
- p7kho45RBxpV7v1rwjWsorqz+zJkqxDnA9ntZm16xoL+XjrmUvcSS0SsXAioLv4jDz65
- PNMN0kZUX0JONPfIqofJPbGN+rh0mILXfEmJBp7kv9Hh51mTH5n6d+G5SeiYX+Hkk3PP
- /NsASU46AYHsT2nir8KT2URsh8JK/bptJKMfm4OPiRvxLoxgY3NxbZhCmumACDRt9W7J
- U7tWwwSmUT3aJXxCefzelaijxZ7qtyxrf1IEjUFSQjngDwnP4dImMJnSGrzOu2C1NkpV
- YApw==
-X-Gm-Message-State: AOJu0YxrnsWe2L9GeDBtCtW0fad2PKtb5Bw8oWZTmjdQdCddF6hF0Agx
- qXiz5GuWRIRVJiNzcFDd8vdfIh5yzdZLUdx9gDvBz8fYZgUU7hjnqLrM7dVFR/kyXuqzu1IXRSk
- N0+qpWNqG+sX3AUS/0/4mt2nvG0jQjQKRD2fthw==
-X-Gm-Gg: ASbGnctot40IE6Prmb08hPDKA6qKvpGxAAaZ1in+79GxlDLFfzhd6WlCJqrl0CKBJow
- 2fk4bUBGubwdO2xlGnnY1wo7LcAZDw7OBq3SW22J0tLCcsVTFiyuMgA2RgaU7B2WdLUmjsbKaE/
- ccXGRI3xaJXtK5IiITd7xbE7hV
-X-Google-Smtp-Source: AGHT+IFSg5JMhAEEpoCveXjAK3HO69F7+jtk3lCp3HgSAWfDOCYe5M+gcvy4xTcM06NVFskuUrfHIiT8cHUm12eBvHo=
-X-Received: by 2002:a05:6122:2a13:b0:51f:fc9d:875d with SMTP id
- 71dfb90a1353d-5290e1c8689mr302930e0c.8.1744792153574; Wed, 16 Apr 2025
- 01:29:13 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <dongli.zhang@oracle.com>)
+ id 1u5AlS-0002yp-CT; Wed, 16 Apr 2025 17:57:50 -0400
+Received: from mx0b-00069f02.pphosted.com ([205.220.177.32])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <dongli.zhang@oracle.com>)
+ id 1u5AlQ-000846-Cp; Wed, 16 Apr 2025 17:57:50 -0400
+Received: from pps.filterd (m0246630.ppops.net [127.0.0.1])
+ by mx0b-00069f02.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 53GLO91V029004;
+ Wed, 16 Apr 2025 21:57:16 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com; h=cc
+ :content-transfer-encoding:date:from:in-reply-to:message-id
+ :mime-version:references:subject:to; s=corp-2023-11-20; bh=QEmFv
+ iGAK3HVPMhByP1bT/49mKbRwqTnouSzcbyuEfk=; b=UqApqTcWzyajkceRgYXBP
+ QhINx4JTKbxy358FhiPUs8Lbk1URA0cONerns1Au55qJ8ZMcMBVUh+JN/0PV8d6k
+ s/Nk8GtD+6peKGUiyimOQ5jbk+HptYW9rOuzjzVQmivy0QQeaFSHr4ipYO3+KjHx
+ q+a5IcHKhaN9m4p88IR6YGZysTpYdPnMEUXD/GSptGdRbpvuTKwpL8QcWQ1zQOzj
+ JyvyBPEyYwk4uL+P40VbbICFrmAf9Ey4m/x4Aocb9UlkhKII0o5GtmBwpV4ukibb
+ kACBEEIgC4tUHPRApZAE2m7h9G68dlmkLk9G4MExnWmGnrcDI9oBod4leKAG71Q9
+ A==
+Received: from phxpaimrmta02.imrmtpd1.prodappphxaev1.oraclevcn.com
+ (phxpaimrmta02.appoci.oracle.com [147.154.114.232])
+ by mx0b-00069f02.pphosted.com (PPS) with ESMTPS id 46185mw1js-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Wed, 16 Apr 2025 21:57:15 +0000 (GMT)
+Received: from pps.filterd
+ (phxpaimrmta02.imrmtpd1.prodappphxaev1.oraclevcn.com [127.0.0.1])
+ by phxpaimrmta02.imrmtpd1.prodappphxaev1.oraclevcn.com (8.18.1.2/8.18.1.2)
+ with ESMTP id 53GKOZ8j005739; Wed, 16 Apr 2025 21:57:14 GMT
+Received: from pps.reinject (localhost [127.0.0.1])
+ by phxpaimrmta02.imrmtpd1.prodappphxaev1.oraclevcn.com (PPS) with ESMTPS id
+ 460d5xhvkb-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Wed, 16 Apr 2025 21:57:14 +0000
+Received: from phxpaimrmta02.imrmtpd1.prodappphxaev1.oraclevcn.com
+ (phxpaimrmta02.imrmtpd1.prodappphxaev1.oraclevcn.com [127.0.0.1])
+ by pps.reinject (8.17.1.5/8.17.1.5) with ESMTP id 53GLv1qY036583;
+ Wed, 16 Apr 2025 21:57:13 GMT
+Received: from localhost.localdomain (ca-dev80.us.oracle.com [10.211.9.80])
+ by phxpaimrmta02.imrmtpd1.prodappphxaev1.oraclevcn.com (PPS) with ESMTP id
+ 460d5xhvcp-6; Wed, 16 Apr 2025 21:57:13 +0000
+From: Dongli Zhang <dongli.zhang@oracle.com>
+To: qemu-devel@nongnu.org, kvm@vger.kernel.org, qemu-arm@nongnu.org,
+ qemu-ppc@nongnu.org, qemu-riscv@nongnu.org, qemu-s390x@nongnu.org
+Cc: pbonzini@redhat.com, zhao1.liu@intel.com, mtosatti@redhat.com,
+ sandipan.das@amd.com, babu.moger@amd.com, likexu@tencent.com,
+ like.xu.linux@gmail.com, groug@kaod.org, khorenko@virtuozzo.com,
+ alexander.ivanov@virtuozzo.com, den@virtuozzo.com,
+ davydov-max@yandex-team.ru, xiaoyao.li@intel.com,
+ dapeng1.mi@linux.intel.com, joe.jin@oracle.com,
+ peter.maydell@linaro.org, gaosong@loongson.cn, chenhuacai@kernel.org,
+ philmd@linaro.org, aurelien@aurel32.net, jiaxun.yang@flygoat.com,
+ arikalo@gmail.com, npiggin@gmail.com, danielhb413@gmail.com,
+ palmer@dabbelt.com, alistair.francis@wdc.com, liwei1518@gmail.com,
+ zhiwei_liu@linux.alibaba.com, pasic@linux.ibm.com,
+ borntraeger@linux.ibm.com, richard.henderson@linaro.org,
+ david@redhat.com, iii@linux.ibm.com, thuth@redhat.com,
+ flavra@baylibre.com, ewanhai-oc@zhaoxin.com, ewanhai@zhaoxin.com,
+ cobechen@zhaoxin.com, louisqi@zhaoxin.com, liamni@zhaoxin.com,
+ frankzhu@zhaoxin.com, silviazhao@zhaoxin.com, kraxel@redhat.com,
+ berrange@redhat.com
+Subject: [PATCH v4 05/11] target/i386/kvm: set KVM_PMU_CAP_DISABLE if "-pmu"
+ is configured
+Date: Wed, 16 Apr 2025 14:52:30 -0700
+Message-ID: <20250416215306.32426-6-dongli.zhang@oracle.com>
+X-Mailer: git-send-email 2.43.5
+In-Reply-To: <20250416215306.32426-1-dongli.zhang@oracle.com>
+References: <20250416215306.32426-1-dongli.zhang@oracle.com>
 MIME-Version: 1.0
-References: <20250415043207.3512209-1-antonb@tenstorrent.com>
-In-Reply-To: <20250415043207.3512209-1-antonb@tenstorrent.com>
-From: Max Chou <max.chou@sifive.com>
-Date: Wed, 16 Apr 2025 16:29:02 +0800
-X-Gm-Features: ATxdqUGVngf-6a4dS2GDQDL1TXmy04zwZ2wTAHBfR4_1P7pWOGzqI_IxSCIJn9Y
-Message-ID: <CANiaA1tWuvkj3L-PE6=UGaYqxPp0GP4357VPjgHFgpQOKUb_kQ@mail.gmail.com>
-Subject: Re: [PATCH 0/3] Fix some more RVV source overlap issues
-To: Anton Blanchard <antonb@tenstorrent.com>
-Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.or, dbarboza@ventanamicro.com, 
- palmer@dabbelt.com, alistair.francis@wdc.com, liwei1518@gmail.com, 
- zhiwei_liu@linux.alibaba.com
-Content-Type: multipart/alternative; boundary="000000000000856ab80632e114cb"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::a32;
- envelope-from=max.chou@sifive.com; helo=mail-vk1-xa32.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, HTML_MESSAGE=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+Content-Transfer-Encoding: 8bit
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1095,Hydra:6.0.680,FMLib:17.12.68.34
+ definitions=2025-04-16_08,2025-04-15_01,2024-11-22_01
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 phishscore=0
+ mlxlogscore=999
+ suspectscore=0 spamscore=0 bulkscore=0 malwarescore=0 adultscore=0
+ mlxscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.12.0-2502280000 definitions=main-2504160177
+X-Proofpoint-ORIG-GUID: RreVuBpeFHqwjxbg7pI-tXXgHoOworyK
+X-Proofpoint-GUID: RreVuBpeFHqwjxbg7pI-tXXgHoOworyK
+Received-SPF: pass client-ip=205.220.177.32;
+ envelope-from=dongli.zhang@oracle.com; helo=mx0b-00069f02.pphosted.com
+X-Spam_score_int: -30
+X-Spam_score: -3.1
+X-Spam_bar: ---
+X-Spam_report: (-3.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_MED=-0.268,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_LOW=-0.7, RCVD_IN_MSPIKE_H5=0.001, RCVD_IN_MSPIKE_WL=0.001,
+ RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001, RCVD_IN_VALIDITY_SAFE_BLOCKED=0.001,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -93,87 +116,100 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
---000000000000856ab80632e114cb
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Although AMD PERFCORE and PerfMonV2 are removed when "-pmu" is configured,
+there is no way to fully disable KVM AMD PMU virtualization. Neither
+"-cpu host,-pmu" nor "-cpu EPYC" achieves this.
 
-Hi Anton,
+As a result, the following message still appears in the VM dmesg:
 
-Sure, I'll check this patchset.
+[    0.263615] Performance Events: AMD PMU driver.
 
-Thanks,
-Max
+However, the expected output should be:
 
+[    0.596381] Performance Events: PMU not available due to virtualization, using software events only.
+[    0.600972] NMI watchdog: Perf NMI watchdog permanently disabled
 
-On Tue, Apr 15, 2025 at 12:32=E2=80=AFPM Anton Blanchard <antonb@tenstorren=
-t.com>
-wrote:
+This occurs because AMD does not use any CPUID bit to indicate PMU
+availability.
 
-> Thanks Max and Daniel for helping to resolve the RVV source register
-> overlap issues. I ran some random patterns against the Max's latest
-> patch series (comparing QEMU to the Tenstorrent version of whisper)
-> and spotted a couple more. Max: can you please check if the fixes I
-> made look right?
->
-> Anton
-> --
->
-> Anton Blanchard (3):
->   target/riscv: rvv: Apply vext_check_input_eew to vector integer/fp
->     compare instructions
->   target/riscv: rvv: Apply vext_check_input_eew to vector reduction
->     instructions
->   target/riscv: vadc and vsbc are vm=3D0 instructions
->
->  target/riscv/insn32.decode              | 10 +++++-----
->  target/riscv/insn_trans/trans_rvv.c.inc | 23 +++++++++++++----------
->  2 files changed, 18 insertions(+), 15 deletions(-)
->
-> --
-> 2.34.1
->
->
+To address this, KVM_CAP_PMU_CAPABILITY is used to set KVM_PMU_CAP_DISABLE
+when "-pmu" is configured.
 
---000000000000856ab80632e114cb
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Signed-off-by: Dongli Zhang <dongli.zhang@oracle.com>
+Reviewed-by: Xiaoyao Li <xiaoyao.li@intel.com>
+Reviewed-by: Zhao Liu <zhao1.liu@intel.com>
+---
+Changed since v1:
+  - Switch back to the initial implementation with "-pmu".
+https://lore.kernel.org/all/20221119122901.2469-3-dongli.zhang@oracle.com
+  - Mention that "KVM_PMU_CAP_DISABLE doesn't change the PMU behavior on
+    Intel platform because current "pmu" property works as expected."
+Changed since v2:
+  - Change has_pmu_cap to pmu_cap.
+  - Use (pmu_cap & KVM_PMU_CAP_DISABLE) instead of only pmu_cap in if
+    statement.
+  - Add Reviewed-by from Xiaoyao and Zhao as the change is minor.
 
-<div dir=3D"ltr"><div>Hi Anton,<br><br>Sure, I&#39;ll check this patchset.<=
-br><br></div><div><div dir=3D"ltr" class=3D"gmail_signature" data-smartmail=
-=3D"gmail_signature"><div dir=3D"ltr">Thanks,<br>Max</div></div></div><br><=
-/div><br><div class=3D"gmail_quote gmail_quote_container"><div dir=3D"ltr" =
-class=3D"gmail_attr">On Tue, Apr 15, 2025 at 12:32=E2=80=AFPM Anton Blancha=
-rd &lt;<a href=3D"mailto:antonb@tenstorrent.com">antonb@tenstorrent.com</a>=
-&gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0px =
-0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">Than=
-ks Max and Daniel for helping to resolve the RVV source register<br>
-overlap issues. I ran some random patterns against the Max&#39;s latest<br>
-patch series (comparing QEMU to the Tenstorrent version of whisper)<br>
-and spotted a couple more. Max: can you please check if the fixes I<br>
-made look right?<br>
-<br>
-Anton<br>
---<br>
-<br>
-Anton Blanchard (3):<br>
-=C2=A0 target/riscv: rvv: Apply vext_check_input_eew to vector integer/fp<b=
-r>
-=C2=A0 =C2=A0 compare instructions<br>
-=C2=A0 target/riscv: rvv: Apply vext_check_input_eew to vector reduction<br=
->
-=C2=A0 =C2=A0 instructions<br>
-=C2=A0 target/riscv: vadc and vsbc are vm=3D0 instructions<br>
-<br>
-=C2=A0target/riscv/insn32.decode=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 | 10 +++++-----<br>
-=C2=A0target/riscv/insn_trans/trans_rvv.c.inc | 23 +++++++++++++----------<=
-br>
-=C2=A02 files changed, 18 insertions(+), 15 deletions(-)<br>
-<br>
--- <br>
-2.34.1<br>
-<br>
-</blockquote></div>
+ target/i386/kvm/kvm.c | 31 +++++++++++++++++++++++++++++++
+ 1 file changed, 31 insertions(+)
 
---000000000000856ab80632e114cb--
+diff --git a/target/i386/kvm/kvm.c b/target/i386/kvm/kvm.c
+index f41e190fb8..579c0f7e0b 100644
+--- a/target/i386/kvm/kvm.c
++++ b/target/i386/kvm/kvm.c
+@@ -176,6 +176,8 @@ static int has_triple_fault_event;
+ 
+ static bool has_msr_mcg_ext_ctl;
+ 
++static int pmu_cap;
++
+ static struct kvm_cpuid2 *cpuid_cache;
+ static struct kvm_cpuid2 *hv_cpuid_cache;
+ static struct kvm_msr_list *kvm_feature_msrs;
+@@ -2053,6 +2055,33 @@ full:
+ 
+ int kvm_arch_pre_create_vcpu(CPUState *cpu, Error **errp)
+ {
++    static bool first = true;
++    int ret;
++
++    if (first) {
++        first = false;
++
++        /*
++         * Since Linux v5.18, KVM provides a VM-level capability to easily
++         * disable PMUs; however, QEMU has been providing PMU property per
++         * CPU since v1.6. In order to accommodate both, have to configure
++         * the VM-level capability here.
++         *
++         * KVM_PMU_CAP_DISABLE doesn't change the PMU
++         * behavior on Intel platform because current "pmu" property works
++         * as expected.
++         */
++        if ((pmu_cap & KVM_PMU_CAP_DISABLE) && !X86_CPU(cpu)->enable_pmu) {
++            ret = kvm_vm_enable_cap(kvm_state, KVM_CAP_PMU_CAPABILITY, 0,
++                                    KVM_PMU_CAP_DISABLE);
++            if (ret < 0) {
++                error_setg_errno(errp, -ret,
++                                 "Failed to set KVM_PMU_CAP_DISABLE");
++                return ret;
++            }
++        }
++    }
++
+     return 0;
+ }
+ 
+@@ -3351,6 +3380,8 @@ int kvm_arch_init(MachineState *ms, KVMState *s)
+         }
+     }
+ 
++    pmu_cap = kvm_check_extension(s, KVM_CAP_PMU_CAPABILITY);
++
+     return 0;
+ }
+ 
+-- 
+2.39.3
+
 
