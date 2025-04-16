@@ -4,108 +4,48 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D08D9C369AB
-	for <qemu-riscv@archiver.kernel.org>; Tue, 15 Apr 2025 16:39:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BCF1DC369B1
+	for <qemu-riscv@archiver.kernel.org>; Wed, 16 Apr 2025 04:58:07 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1u4jJk-0000Ia-Ed; Tue, 15 Apr 2025 12:39:24 -0400
+	id 1u4upw-0008Jt-4H; Wed, 16 Apr 2025 00:57:24 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <jim.shu@sifive.com>)
- id 1u4jJZ-0000H6-Ux
- for qemu-riscv@nongnu.org; Tue, 15 Apr 2025 12:39:15 -0400
-Received: from mail-ed1-x533.google.com ([2a00:1450:4864:20::533])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <jim.shu@sifive.com>)
- id 1u4jJU-0008Oc-4g
- for qemu-riscv@nongnu.org; Tue, 15 Apr 2025 12:39:12 -0400
-Received: by mail-ed1-x533.google.com with SMTP id
- 4fb4d7f45d1cf-5e6167d0536so10629946a12.1
- for <qemu-riscv@nongnu.org>; Tue, 15 Apr 2025 09:39:06 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1744735145; x=1745339945; darn=nongnu.org;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=8d8YrrFlUlJqcgR/DRRyk7FPdwEAP2C2mIktWa8UaM0=;
- b=SnX+hS6uyZ/FtPHwuJjCmIwincRY4H0YZXkSUvnkiX6NBBI1Jm7wJ7jtMaSNCTnjc3
- tip0R2pdieLszVfPikSAMiPHieQM05lbC9oQdN3h8F8IDCRaY0Iwn5rBPGWIbSrS7ELp
- jeOHj8RT/+Zl0jjpuiFi2pH+NP7nVnUCFPE6fwOacGITuc5FDUrTmAJE9YtOsUHHV5Qt
- KCf5ShTtiky6RUzwNjuEWzhNflee85KoQAo0tNQ9Juqm/pczUBztNFtKvYwURYEMTG0C
- FMPxxOCbiRopxvLX254fA9eITtgeQkMp29NtZs06Nfxos9cTvV13EtS6oYornR3IEKrK
- AP4g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1744735145; x=1745339945;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=8d8YrrFlUlJqcgR/DRRyk7FPdwEAP2C2mIktWa8UaM0=;
- b=vYXLhmmOPLjXMVUShtizVNw8NyAMicnGpd8PRiJhDsoioo9gNusKNU8awZZJqEpJ+V
- rDVrTPUxJemJGRwCxab7n5YyrtfDFyMV2rZo8M4iJ/6f0dyoAt5jN9+mD6iSM8O5Rwlt
- 7aKN/G7RPJPm/PKxo+TaIJUN5lns11OLoqrnQ+HSBRb+A1AuDjZoODvnW/qb97Wf2SzY
- 3gjhBUgQk8EZpj9dgqL5jANfB2IQ1R+ijD0Ys2ZDML40ND0bfx5nrW7PiXZ/vz8yrVUK
- 1c70+VCta+MTzXy/74nkcxprM7e57Ek+XdJEp6fQ1idYGwaZZPEYwfF1Jpa0orUqbzp4
- 4ieA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUOCkSE80X09MH+p6evqnlKsFvCfk4I+l06AIcv3UWCXGKUDMDgxvctVQQa885z1U4srwCj0G0TcnH4@nongnu.org
-X-Gm-Message-State: AOJu0YydF5QbtF/b1FTlIz68HRHRunhYqK83Ey6en0Lq8SWpXLIrtbzI
- HHDuFc9ZNdYWzFlb5qysOmeOSYz7ySerl98DjvKu9UjslKtdeks8YZ+sMytBAc+93c72iTdPlu7
- V9rB3/nuo+ndU+ykJQsSMsWYY373cOt+pVVWLQQ==
-X-Gm-Gg: ASbGncvIlOG2ROrLz9xON4XXEQJm0H+SnnQ4ZHwHiJZqFZbkDxXGvI8b2Hl9EiKpUQK
- kVmONDtop6ayGj7qMBaxliRQvCo/tF8t+GdVsUZnunCpBoeiCIZgKhSMSLEmVfauJSjFW8wBz8K
- B3oNk/99ua2a8xIhHwWI7EijQg
-X-Google-Smtp-Source: AGHT+IFRKtGZCjPosM7GBfhklF+gabkiYof1vyPKmOkYlTDWCuNNnHPEFIfgRIW1Y+5htdd0kaEFqkl1d1jy2H2sRGA=
-X-Received: by 2002:a05:6402:42c5:b0:5ed:2a1b:fd7d with SMTP id
- 4fb4d7f45d1cf-5f36fee6a4amr14305561a12.19.1744735144888; Tue, 15 Apr 2025
- 09:39:04 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <lc00631@tecorigin.com>)
+ id 1u4upu-0008Hk-5a; Wed, 16 Apr 2025 00:57:22 -0400
+Received: from out28-148.mail.aliyun.com ([115.124.28.148])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <lc00631@tecorigin.com>)
+ id 1u4upq-0008CE-LJ; Wed, 16 Apr 2025 00:57:21 -0400
+Received: from TC-DZ-03-0020.tc.local(mailfrom:lc00631@tecorigin.com
+ fp:SMTPD_---.cNtMemJ_1744779430 cluster:ay29) by smtp.aliyun-inc.com;
+ Wed, 16 Apr 2025 12:57:10 +0800
+From: Chao Liu <lc00631@tecorigin.com>
+To: palmer@dabbelt.com,
+	alistair23@gmail.com
+Cc: zhiwei_liu@linux.alibaba.com, alistair.francis@wdc.com,
+ dbarboza@ventanamicro.com, liwei1518@gmail.com, zhangtj@tecorigin.com,
+ zqz00548@tecorigin.com, lc00631@tecorigin.com, qemu-devel@nongnu.org,
+ qemu-riscv@nongnu.org
+Subject: [PATCH v2 1/1] hw/riscv: fix PLIC hart topology configuration string
+ when not getting CPUState correctly
+Date: Wed, 16 Apr 2025 12:53:58 +0800
+Message-ID: <07d62c9297d69d3330c8c75d54632d3a7f10cecb.1744776027.git.lc00631@tecorigin.com>
+X-Mailer: git-send-email 2.47.0.windows.2
+In-Reply-To: <cover.1744776027.git.lc00631@tecorigin.com>
+References: <cover.1744776027.git.lc00631@tecorigin.com>
 MIME-Version: 1.0
-References: <20250415081231.21186-1-jim.shu@sifive.com>
- <20250415081231.21186-2-jim.shu@sifive.com>
- <2dd5952a93aca15bbae4b5624b680637@linux.ibm.com>
-In-Reply-To: <2dd5952a93aca15bbae4b5624b680637@linux.ibm.com>
-From: Jim Shu <jim.shu@sifive.com>
-Date: Wed, 16 Apr 2025 00:38:52 +0800
-X-Gm-Features: ATxdqUE1bFY0OgeEVfSP6kxoXn-QXO1lP_eY0dZX40YG8IJXUxt68MW8ggAStAA
-Message-ID: <CALw707oxFXoZbBW73GKuJVa2SuH0RSiUyz6a2XfPrOWZM5jckQ@mail.gmail.com>
-Subject: Re: [PATCH 01/17] accel/tcg: Store section pointer in CPUTLBEntryFull
-To: Ilya Leoshkevich <iii@linux.ibm.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, 
- Richard Henderson <richard.henderson@linaro.org>,
- Paolo Bonzini <pbonzini@redhat.com>, Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, 
- Weiwei Li <liwei1518@gmail.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>, 
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Eduardo Habkost <eduardo@habkost.net>, 
- Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
- =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@linaro.org>, 
- Yanan Wang <wangyanan55@huawei.com>, Zhao Liu <zhao1.liu@intel.com>, 
- Peter Xu <peterx@redhat.com>, David Hildenbrand <david@redhat.com>,
- Michael Rolnik <mrolnik@gmail.com>, 
- Helge Deller <deller@gmx.de>, Song Gao <gaosong@loongson.cn>,
- Laurent Vivier <laurent@vivier.eu>, 
- "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
- Aurelien Jarno <aurelien@aurel32.net>, 
- Jiaxun Yang <jiaxun.yang@flygoat.com>, Aleksandar Rikalo <arikalo@gmail.com>, 
- Stafford Horne <shorne@gmail.com>, Nicholas Piggin <npiggin@gmail.com>, 
- Yoshinori Sato <ysato@users.sourceforge.jp>, Thomas Huth <thuth@redhat.com>, 
- Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
- Artyom Tarasenko <atar4qemu@gmail.com>, 
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- Max Filippov <jcmvbkbc@gmail.com>, qemu-ppc@nongnu.org, 
- qemu-s390x@nongnu.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2a00:1450:4864:20::533;
- envelope-from=jim.shu@sifive.com; helo=mail-ed1-x533.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=115.124.28.148;
+ envelope-from=lc00631@tecorigin.com; helo=out28-148.mail.aliyun.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_NONE=-0.0001,
+ RCVD_IN_MSPIKE_H2=0.001, RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001,
+ RCVD_IN_VALIDITY_SAFE_BLOCKED=0.001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ UNPARSEABLE_RELAY=0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -121,63 +61,126 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Hi Ilya,
+riscv_plic_hart_config_string() when getting CPUState via qemu_get_cpu()
+should be consistent with keeping sifive_plic_realize()
+by hartid_base + cpu_index.
 
-My patch removes the use of `iotlb_to_section()`, so the section_index
-in the last 12-bit of `xlat_section` is no longer used. (Please
-correct me if I'm wrong!)
-Based on the comment of `phys_section_add()` and the commit log [1], I
-believe we can remove the assertion and support more than 4k sections.
+A better approach is to use cpu_by_arch_id() instead of qemu_get_cpu(),
+in riscv cpu_by_arch_id() uses the mhartid.
 
-I think my commit should also remove the `iotlb_to_section()` function
-and rename `xlat_section` to `xlat`.
-I will fix it in the next patch.
+For non-numa or single-cluster machines, hartid_base should be 0.
 
-[1] https://github.com/qemu/qemu/commit/68f3f65b09a1ce8c82fac17911ffc3bb603=
-1ebe4
+Signed-off-by: Chao Liu <lc00631@tecorigin.com>
+Reviewed-by: Qingze Zhao <zqz00548@tecorigin.com>
+Reviewed-by: Tingjian Zhang <zhangtj@tecorigin.com>
+---
+ hw/intc/sifive_plic.c      | 2 +-
+ hw/riscv/boot.c            | 4 ++--
+ hw/riscv/microchip_pfsoc.c | 2 +-
+ hw/riscv/sifive_u.c        | 5 +++--
+ hw/riscv/virt.c            | 2 +-
+ include/hw/riscv/boot.h    | 2 +-
+ 6 files changed, 9 insertions(+), 8 deletions(-)
 
-Jim
+diff --git a/hw/intc/sifive_plic.c b/hw/intc/sifive_plic.c
+index a5b0f6ef1b..0a91c5dca7 100644
+--- a/hw/intc/sifive_plic.c
++++ b/hw/intc/sifive_plic.c
+@@ -399,7 +399,7 @@ static void sifive_plic_realize(DeviceState *dev, Error **errp)
+      * hardware controlled when a PLIC is attached.
+      */
+     for (i = 0; i < s->num_harts; i++) {
+-        RISCVCPU *cpu = RISCV_CPU(qemu_get_cpu(s->hartid_base + i));
++        RISCVCPU *cpu = RISCV_CPU(cpu_by_arch_id(s->hartid_base + i));
+         if (riscv_cpu_claim_interrupts(cpu, MIP_SEIP) < 0) {
+             error_setg(errp, "SEIP already claimed");
+             return;
+diff --git a/hw/riscv/boot.c b/hw/riscv/boot.c
+index 765b9e2b1a..4cd29221c2 100644
+--- a/hw/riscv/boot.c
++++ b/hw/riscv/boot.c
+@@ -44,13 +44,13 @@ bool riscv_is_32bit(RISCVHartArrayState *harts)
+  * Return the per-socket PLIC hart topology configuration string
+  * (caller must free with g_free())
+  */
+-char *riscv_plic_hart_config_string(int hart_count)
++char *riscv_plic_hart_config_string(int hart_base, int hart_count)
+ {
+     g_autofree const char **vals = g_new(const char *, hart_count + 1);
+     int i;
+ 
+     for (i = 0; i < hart_count; i++) {
+-        CPUState *cs = qemu_get_cpu(i);
++        CPUState *cs = cpu_by_arch_id(hart_base + i);
+         CPURISCVState *env = &RISCV_CPU(cs)->env;
+ 
+         if (kvm_enabled()) {
+diff --git a/hw/riscv/microchip_pfsoc.c b/hw/riscv/microchip_pfsoc.c
+index 9c846f9b5b..5269336346 100644
+--- a/hw/riscv/microchip_pfsoc.c
++++ b/hw/riscv/microchip_pfsoc.c
+@@ -275,7 +275,7 @@ static void microchip_pfsoc_soc_realize(DeviceState *dev, Error **errp)
+                                 l2lim_mem);
+ 
+     /* create PLIC hart topology configuration string */
+-    plic_hart_config = riscv_plic_hart_config_string(ms->smp.cpus);
++    plic_hart_config = riscv_plic_hart_config_string(0, ms->smp.cpus);
+ 
+     /* PLIC */
+     s->plic = sifive_plic_create(memmap[MICROCHIP_PFSOC_PLIC].base,
+diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
+index 679f2024bc..516912c4f4 100644
+--- a/hw/riscv/sifive_u.c
++++ b/hw/riscv/sifive_u.c
+@@ -790,10 +790,11 @@ static void sifive_u_soc_realize(DeviceState *dev, Error **errp)
+     MemoryRegion *mask_rom = g_new(MemoryRegion, 1);
+     MemoryRegion *l2lim_mem = g_new(MemoryRegion, 1);
+     char *plic_hart_config;
++    int hartid_base = 1;
+     int i, j;
+ 
+     qdev_prop_set_uint32(DEVICE(&s->u_cpus), "num-harts", ms->smp.cpus - 1);
+-    qdev_prop_set_uint32(DEVICE(&s->u_cpus), "hartid-base", 1);
++    qdev_prop_set_uint32(DEVICE(&s->u_cpus), "hartid-base", hartid_base);
+     qdev_prop_set_string(DEVICE(&s->u_cpus), "cpu-type", s->cpu_type);
+     qdev_prop_set_uint64(DEVICE(&s->u_cpus), "resetvec", 0x1004);
+ 
+@@ -829,7 +830,7 @@ static void sifive_u_soc_realize(DeviceState *dev, Error **errp)
+                                 l2lim_mem);
+ 
+     /* create PLIC hart topology configuration string */
+-    plic_hart_config = riscv_plic_hart_config_string(ms->smp.cpus);
++    plic_hart_config = riscv_plic_hart_config_string(hartid_base, ms->smp.cpus);
+ 
+     /* MMIO */
+     s->plic = sifive_plic_create(memmap[SIFIVE_U_DEV_PLIC].base,
+diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+index e517002fdf..41fdfd2bc8 100644
+--- a/hw/riscv/virt.c
++++ b/hw/riscv/virt.c
+@@ -1280,7 +1280,7 @@ static DeviceState *virt_create_plic(const MemMapEntry *memmap, int socket,
+     g_autofree char *plic_hart_config = NULL;
+ 
+     /* Per-socket PLIC hart topology configuration string */
+-    plic_hart_config = riscv_plic_hart_config_string(hart_count);
++    plic_hart_config = riscv_plic_hart_config_string(base_hartid, hart_count);
+ 
+     /* Per-socket PLIC */
+     ret = sifive_plic_create(
+diff --git a/include/hw/riscv/boot.h b/include/hw/riscv/boot.h
+index 7d59b2e6c6..5937298646 100644
+--- a/include/hw/riscv/boot.h
++++ b/include/hw/riscv/boot.h
+@@ -40,7 +40,7 @@ typedef struct RISCVBootInfo {
+ 
+ bool riscv_is_32bit(RISCVHartArrayState *harts);
+ 
+-char *riscv_plic_hart_config_string(int hart_count);
++char *riscv_plic_hart_config_string(int hart_base, int hart_count);
+ 
+ void riscv_boot_info_init(RISCVBootInfo *info, RISCVHartArrayState *harts);
+ target_ulong riscv_calc_kernel_start_addr(RISCVBootInfo *info,
+-- 
+2.48.1
 
-
-
-
-
-On Tue, Apr 15, 2025 at 5:13=E2=80=AFPM Ilya Leoshkevich <iii@linux.ibm.com=
-> wrote:
->
-> On 2025-04-15 10:12, Jim Shu wrote:
-> > 'CPUTLBEntryFull.xlat_section' stores section_index in last 12 bits to
-> > find the correct section when CPU access the IO region over the IOTLB
-> > (iotlb_to_section()).
-> >
-> > However, section_index is only unique inside single AddressSpace. If
-> > address space translation is over IOMMUMemoryRegion, it could return
-> > section from other AddressSpace. 'iotlb_to_section()' API only finds
-> > the
-> > sections from CPU's AddressSpace so that it couldn't find section in
-> > other AddressSpace. Thus, using 'iotlb_to_section()' API will find the
-> > wrong section and QEMU will have wrong load/store access.
-> >
-> > To fix this bug, store complete MemoryRegionSection pointer in
-> > CPUTLBEntryFull instead of section_index.
-> >
-> > This bug occurs only when
-> > (1) IOMMUMemoryRegion is in the path of CPU access.
-> > (2) IOMMUMemoryRegion returns different target_as and the section is in
-> > the IO region.
-> >
-> > Common IOMMU devices don't have this issue since they are only in the
-> > path of DMA access. Currently, the bug only occurs when ARM MPC device
-> > (hw/misc/tz-mpc.c) returns 'blocked_io_as' to emulate blocked access
-> > handling. Upcoming RISC-V wgChecker device is also affected by this
-> > bug.
-> >
-> > Signed-off-by: Jim Shu <jim.shu@sifive.com>
-> > ---
-> >  accel/tcg/cputlb.c    | 19 +++++++++----------
-> >  include/hw/core/cpu.h |  3 +++
-> >  2 files changed, 12 insertions(+), 10 deletions(-)
->
-> Does this mean that there can be more than 4k sections now and the
-> assertion in phys_section_add() can be removed?
 
