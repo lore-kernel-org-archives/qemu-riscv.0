@@ -4,54 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 177B0C369C2
-	for <qemu-riscv@archiver.kernel.org>; Wed, 16 Apr 2025 21:59:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ACE22C369C2
+	for <qemu-riscv@archiver.kernel.org>; Wed, 16 Apr 2025 21:59:47 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1u5AlS-0002zd-UM; Wed, 16 Apr 2025 17:57:50 -0400
+	id 1u5Alh-0003C5-UW; Wed, 16 Apr 2025 17:58:06 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dongli.zhang@oracle.com>)
- id 1u5AlO-0002xM-Rq; Wed, 16 Apr 2025 17:57:47 -0400
+ id 1u5AlT-000318-Sj; Wed, 16 Apr 2025 17:57:51 -0400
 Received: from mx0a-00069f02.pphosted.com ([205.220.165.32])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dongli.zhang@oracle.com>)
- id 1u5AlM-000831-Lu; Wed, 16 Apr 2025 17:57:46 -0400
-Received: from pps.filterd (m0246627.ppops.net [127.0.0.1])
- by mx0b-00069f02.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 53GLNCqs025168;
- Wed, 16 Apr 2025 21:57:06 GMT
+ id 1u5AlR-00084O-2y; Wed, 16 Apr 2025 17:57:51 -0400
+Received: from pps.filterd (m0333521.ppops.net [127.0.0.1])
+ by mx0b-00069f02.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 53GLN0B0019727;
+ Wed, 16 Apr 2025 21:57:19 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com; h=cc
  :content-transfer-encoding:date:from:in-reply-to:message-id
- :mime-version:references:subject:to; s=corp-2023-11-20; bh=rTtC5
- HX+LFK2aqM+GF1UaLiudQLeAADMm0hU7G6YEPw=; b=WQYFbBtHSlbhwZhRQeXsy
- lnNuL2mijQ8eJ5ggW7z+4WfYekgtuIWLuuOK/7Rl8oOzRvjbX/Tx9kAk9UMVAxFs
- 2pMzNNStF4Z34GlKGpLbGnx006/LVtnEuubDsStynES7rXpEvjErDt4ON3Q8MIgi
- XkSj1qL0E1mvV1XLcNVJFwGpZg1etoWU2EILMyJNbu8Wdx39JlyKJH95pOV5nv+S
- WVSSC/ky6WWmRVnLMTCq9C5pmwMcBcBGog/nmC04SqnAlaG9bKwlSo81fNbhA05u
- Kkv8w/yoPxT9J0GpuXgE+rVjw7f2cDdY/XPqyqwj/bPV1NclaMlqas3jEFIxSkT0
- Q==
+ :mime-version:references:subject:to; s=corp-2023-11-20; bh=8MiQK
+ OWBJPUnuQbzB9mWg2ZXmXCdDXNgaggCFWA/Z1Q=; b=UrYd8R1A8kWZj+XhW7DcE
+ I6FnsAqh70UmcHiSljLNH/AOYVagdmvrWzCSx74OE+0nIUkGRx8a5zM1VtX9k+kL
+ klrvvU8emdamFAeLvyleawtPD6fas53SUy98mgbI0w9zA/qaxoLlRhaZMhKOGstM
+ Db/GnLawPE8yWep8Npdk6wPv5qNNQpgvj8okNhCVG1xdRW609QcOkcg23KkWXq/g
+ p4FYlsIjGL1vxW9dJXYS78kMZmiwLg1Vy5lfRVe2PAKv8ec9n8E3IRcYly/doMcX
+ ReFaSxL51O78RM4AZJWDhVaqYxS3ruXrVl4Spam13FR0V7c201p31HpxsQdLjl6H
+ g==
 Received: from phxpaimrmta02.imrmtpd1.prodappphxaev1.oraclevcn.com
  (phxpaimrmta02.appoci.oracle.com [147.154.114.232])
- by mx0b-00069f02.pphosted.com (PPS) with ESMTPS id 4616uf5acv-1
+ by mx0b-00069f02.pphosted.com (PPS) with ESMTPS id 4619444xqa-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Wed, 16 Apr 2025 21:57:06 +0000 (GMT)
+ Wed, 16 Apr 2025 21:57:18 +0000 (GMT)
 Received: from pps.filterd
  (phxpaimrmta02.imrmtpd1.prodappphxaev1.oraclevcn.com [127.0.0.1])
  by phxpaimrmta02.imrmtpd1.prodappphxaev1.oraclevcn.com (8.18.1.2/8.18.1.2)
- with ESMTP id 53GK1BOt005662; Wed, 16 Apr 2025 21:57:05 GMT
+ with ESMTP id 53GK51Uo005725; Wed, 16 Apr 2025 21:57:18 GMT
 Received: from pps.reinject (localhost [127.0.0.1])
  by phxpaimrmta02.imrmtpd1.prodappphxaev1.oraclevcn.com (PPS) with ESMTPS id
- 460d5xhvf0-1
+ 460d5xhvmw-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Wed, 16 Apr 2025 21:57:05 +0000
+ Wed, 16 Apr 2025 21:57:18 +0000
 Received: from phxpaimrmta02.imrmtpd1.prodappphxaev1.oraclevcn.com
  (phxpaimrmta02.imrmtpd1.prodappphxaev1.oraclevcn.com [127.0.0.1])
- by pps.reinject (8.17.1.5/8.17.1.5) with ESMTP id 53GLv1qQ036583;
- Wed, 16 Apr 2025 21:57:03 GMT
+ by pps.reinject (8.17.1.5/8.17.1.5) with ESMTP id 53GLv1qa036583;
+ Wed, 16 Apr 2025 21:57:17 GMT
 Received: from localhost.localdomain (ca-dev80.us.oracle.com [10.211.9.80])
  by phxpaimrmta02.imrmtpd1.prodappphxaev1.oraclevcn.com (PPS) with ESMTP id
- 460d5xhvcp-2; Wed, 16 Apr 2025 21:57:03 +0000
+ 460d5xhvcp-7; Wed, 16 Apr 2025 21:57:17 +0000
 From: Dongli Zhang <dongli.zhang@oracle.com>
 To: qemu-devel@nongnu.org, kvm@vger.kernel.org, qemu-arm@nongnu.org,
  qemu-ppc@nongnu.org, qemu-riscv@nongnu.org, qemu-s390x@nongnu.org
@@ -72,10 +72,10 @@ Cc: pbonzini@redhat.com, zhao1.liu@intel.com, mtosatti@redhat.com,
  cobechen@zhaoxin.com, louisqi@zhaoxin.com, liamni@zhaoxin.com,
  frankzhu@zhaoxin.com, silviazhao@zhaoxin.com, kraxel@redhat.com,
  berrange@redhat.com
-Subject: [PATCH v4 01/11] [DO NOT MERGE] i386/cpu: Consolidate the helper to
- get Host's vendor
-Date: Wed, 16 Apr 2025 14:52:26 -0700
-Message-ID: <20250416215306.32426-2-dongli.zhang@oracle.com>
+Subject: [PATCH v4 06/11] target/i386/kvm: extract unrelated code out of
+ kvm_x86_build_cpuid()
+Date: Wed, 16 Apr 2025 14:52:31 -0700
+Message-ID: <20250416215306.32426-7-dongli.zhang@oracle.com>
 X-Mailer: git-send-email 2.43.5
 In-Reply-To: <20250416215306.32426-1-dongli.zhang@oracle.com>
 References: <20250416215306.32426-1-dongli.zhang@oracle.com>
@@ -89,8 +89,8 @@ X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 phishscore=0
  suspectscore=0 spamscore=0 bulkscore=0 malwarescore=0 adultscore=0
  mlxscore=0 classifier=spam adjust=0 reason=mlx scancount=1
  engine=8.12.0-2502280000 definitions=main-2504160177
-X-Proofpoint-GUID: PtTCavTn841i6Bel1apKzzDvO2A0KHHl
-X-Proofpoint-ORIG-GUID: PtTCavTn841i6Bel1apKzzDvO2A0KHHl
+X-Proofpoint-GUID: Sytf9wIJ_bDojv6Sta1nfUN0xmbXSRHM
+X-Proofpoint-ORIG-GUID: Sytf9wIJ_bDojv6Sta1nfUN0xmbXSRHM
 Received-SPF: pass client-ip=205.220.165.32;
  envelope-from=dongli.zhang@oracle.com; helo=mx0a-00069f02.pphosted.com
 X-Spam_score_int: -30
@@ -116,70 +116,115 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Zhao Liu <zhao1.liu@intel.com>
+The initialization of 'has_architectural_pmu_version',
+'num_architectural_pmu_gp_counters', and
+'num_architectural_pmu_fixed_counters' is unrelated to the process of
+building the CPUID.
 
-Extend host_cpu_vendor_fms() to help more cases to get Host's vendor
-information.
+Extract them out of kvm_x86_build_cpuid().
 
-Cc: Dongli Zhang <dongli.zhang@oracle.com>
-Signed-off-by: Zhao Liu <zhao1.liu@intel.com>
+In addition, use cpuid_find_entry() instead of cpu_x86_cpuid(), because
+CPUID has already been filled at this stage.
+
+Signed-off-by: Dongli Zhang <dongli.zhang@oracle.com>
+Reviewed-by: Zhao Liu <zhao1.liu@intel.com>
 ---
-This patch is already queued by Paolo.
-https://lore.kernel.org/all/20250410075619.145792-1-zhao1.liu@intel.com/
-I don't need to add my Signed-off-by.
+Changed since v1:
+  - Still extract the code, but call them for all CPUs.
+Changed since v2:
+  - Use cpuid_find_entry() instead of cpu_x86_cpuid().
+  - Didn't add Reviewed-by from Dapeng as the change isn't minor.
 
- target/i386/host-cpu.c        | 10 ++++++----
- target/i386/kvm/vmsr_energy.c |  3 +--
- 2 files changed, 7 insertions(+), 6 deletions(-)
+ target/i386/kvm/kvm.c | 62 ++++++++++++++++++++++++-------------------
+ 1 file changed, 35 insertions(+), 27 deletions(-)
 
-diff --git a/target/i386/host-cpu.c b/target/i386/host-cpu.c
-index 3e4e85e729..072731a4dd 100644
---- a/target/i386/host-cpu.c
-+++ b/target/i386/host-cpu.c
-@@ -109,9 +109,13 @@ void host_cpu_vendor_fms(char *vendor, int *family, int *model, int *stepping)
- {
-     uint32_t eax, ebx, ecx, edx;
+diff --git a/target/i386/kvm/kvm.c b/target/i386/kvm/kvm.c
+index 579c0f7e0b..4d86c08c6c 100644
+--- a/target/i386/kvm/kvm.c
++++ b/target/i386/kvm/kvm.c
+@@ -1959,33 +1959,6 @@ static uint32_t kvm_x86_build_cpuid(CPUX86State *env,
+         }
+     }
  
--    host_cpuid(0x0, 0, &eax, &ebx, &ecx, &edx);
-+    host_cpuid(0x0, 0, NULL, &ebx, &ecx, &edx);
-     x86_cpu_vendor_words2str(vendor, ebx, edx, ecx);
+-    if (limit >= 0x0a) {
+-        uint32_t eax, edx;
+-
+-        cpu_x86_cpuid(env, 0x0a, 0, &eax, &unused, &unused, &edx);
+-
+-        has_architectural_pmu_version = eax & 0xff;
+-        if (has_architectural_pmu_version > 0) {
+-            num_architectural_pmu_gp_counters = (eax & 0xff00) >> 8;
+-
+-            /* Shouldn't be more than 32, since that's the number of bits
+-             * available in EBX to tell us _which_ counters are available.
+-             * Play it safe.
+-             */
+-            if (num_architectural_pmu_gp_counters > MAX_GP_COUNTERS) {
+-                num_architectural_pmu_gp_counters = MAX_GP_COUNTERS;
+-            }
+-
+-            if (has_architectural_pmu_version > 1) {
+-                num_architectural_pmu_fixed_counters = edx & 0x1f;
+-
+-                if (num_architectural_pmu_fixed_counters > MAX_FIXED_COUNTERS) {
+-                    num_architectural_pmu_fixed_counters = MAX_FIXED_COUNTERS;
+-                }
+-            }
+-        }
+-    }
+-
+     cpu_x86_cpuid(env, 0x80000000, 0, &limit, &unused, &unused, &unused);
  
-+    if (!family && !model && !stepping) {
+     for (i = 0x80000000; i <= limit; i++) {
+@@ -2085,6 +2058,39 @@ int kvm_arch_pre_create_vcpu(CPUState *cpu, Error **errp)
+     return 0;
+ }
+ 
++static void kvm_init_pmu_info(struct kvm_cpuid2 *cpuid)
++{
++    struct kvm_cpuid_entry2 *c;
++
++    c = cpuid_find_entry(cpuid, 0xa, 0);
++
++    if (!c) {
 +        return;
 +    }
 +
-     host_cpuid(0x1, 0, &eax, &ebx, &ecx, &edx);
-     if (family) {
-         *family = ((eax >> 8) & 0x0F) + ((eax >> 20) & 0xFF);
-@@ -129,11 +133,9 @@ void host_cpu_instance_init(X86CPU *cpu)
-     X86CPUClass *xcc = X86_CPU_GET_CLASS(cpu);
- 
-     if (xcc->model) {
--        uint32_t ebx = 0, ecx = 0, edx = 0;
-         char vendor[CPUID_VENDOR_SZ + 1];
- 
--        host_cpuid(0, 0, NULL, &ebx, &ecx, &edx);
--        x86_cpu_vendor_words2str(vendor, ebx, edx, ecx);
-+        host_cpu_vendor_fms(vendor, NULL, NULL, NULL);
-         object_property_set_str(OBJECT(cpu), "vendor", vendor, &error_abort);
-     }
- }
-diff --git a/target/i386/kvm/vmsr_energy.c b/target/i386/kvm/vmsr_energy.c
-index 31508d4e77..f499ec6e8b 100644
---- a/target/i386/kvm/vmsr_energy.c
-+++ b/target/i386/kvm/vmsr_energy.c
-@@ -29,10 +29,9 @@ char *vmsr_compute_default_paths(void)
- 
- bool is_host_cpu_intel(void)
++    has_architectural_pmu_version = c->eax & 0xff;
++    if (has_architectural_pmu_version > 0) {
++        num_architectural_pmu_gp_counters = (c->eax & 0xff00) >> 8;
++
++        /*
++         * Shouldn't be more than 32, since that's the number of bits
++         * available in EBX to tell us _which_ counters are available.
++         * Play it safe.
++         */
++        if (num_architectural_pmu_gp_counters > MAX_GP_COUNTERS) {
++            num_architectural_pmu_gp_counters = MAX_GP_COUNTERS;
++        }
++
++        if (has_architectural_pmu_version > 1) {
++            num_architectural_pmu_fixed_counters = c->edx & 0x1f;
++
++            if (num_architectural_pmu_fixed_counters > MAX_FIXED_COUNTERS) {
++                num_architectural_pmu_fixed_counters = MAX_FIXED_COUNTERS;
++            }
++        }
++    }
++}
++
+ int kvm_arch_init_vcpu(CPUState *cs)
  {
--    int family, model, stepping;
-     char vendor[CPUID_VENDOR_SZ + 1];
+     struct {
+@@ -2267,6 +2273,8 @@ int kvm_arch_init_vcpu(CPUState *cs)
+     cpuid_i = kvm_x86_build_cpuid(env, cpuid_data.entries, cpuid_i);
+     cpuid_data.cpuid.nent = cpuid_i;
  
--    host_cpu_vendor_fms(vendor, &family, &model, &stepping);
-+    host_cpu_vendor_fms(vendor, NULL, NULL, NULL);
- 
-     return g_str_equal(vendor, CPUID_VENDOR_INTEL);
- }
++    kvm_init_pmu_info(&cpuid_data.cpuid);
++
+     if (((env->cpuid_version >> 8)&0xF) >= 6
+         && (env->features[FEAT_1_EDX] & (CPUID_MCE | CPUID_MCA)) ==
+            (CPUID_MCE | CPUID_MCA)) {
 -- 
 2.39.3
 
