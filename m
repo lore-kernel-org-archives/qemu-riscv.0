@@ -4,65 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6AC7DC369B2
-	for <qemu-riscv@archiver.kernel.org>; Thu, 17 Apr 2025 10:53:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1AFBFC369CB
+	for <qemu-riscv@archiver.kernel.org>; Thu, 17 Apr 2025 10:53:43 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1u5Ms0-0007JY-4q; Thu, 17 Apr 2025 06:53:24 -0400
+	id 1u5Ms0-0007JT-4T; Thu, 17 Apr 2025 06:53:24 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <jim.shu@sifive.com>)
- id 1u5Mrl-0007EW-AB
- for qemu-riscv@nongnu.org; Thu, 17 Apr 2025 06:53:09 -0400
-Received: from mail-pf1-x42c.google.com ([2607:f8b0:4864:20::42c])
+ id 1u5Mrp-0007GT-MH
+ for qemu-riscv@nongnu.org; Thu, 17 Apr 2025 06:53:14 -0400
+Received: from mail-pl1-x629.google.com ([2607:f8b0:4864:20::629])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <jim.shu@sifive.com>)
- id 1u5Mri-0003Es-6p
- for qemu-riscv@nongnu.org; Thu, 17 Apr 2025 06:53:09 -0400
-Received: by mail-pf1-x42c.google.com with SMTP id
- d2e1a72fcca58-736ad42dfd6so454754b3a.3
- for <qemu-riscv@nongnu.org>; Thu, 17 Apr 2025 03:53:05 -0700 (PDT)
+ id 1u5Mrn-0003Gu-1x
+ for qemu-riscv@nongnu.org; Thu, 17 Apr 2025 06:53:13 -0400
+Received: by mail-pl1-x629.google.com with SMTP id
+ d9443c01a7336-22928d629faso6402475ad.3
+ for <qemu-riscv@nongnu.org>; Thu, 17 Apr 2025 03:53:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1744887184; x=1745491984; darn=nongnu.org;
- h=message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=lzKpgeqR4fqb0La7VqTwMdcnh2eNwttopn7tCkVVrIE=;
- b=dZ7pB5r/2UbCwJdGXh49fgl1LU8AJpLQHwYQs+9etDSLj6iNMsludWtny7sMReyyEq
- Ko0h+9Mx2nDZxVVroec3EZ/aOFYU2WBrZRxmjRNIeYvhpWmKP9+KSNkXYOLsOIdVvpyO
- wisnzzjzK3gwmTkrUSuCWwCBYIzYbpcS/ca0ytnEiVNkToq9JWOwkAM1otRaeNG62IvN
- nfi9PkpES3ToMKX4kV7vDVTE4hG9etHTniJH/l3G2dPlGh1nv14+QAjB1S1tyYtJ2Ovd
- lmdqLTKtmCvjqdT0ocpDoKscWpsKzUyxheGDoctJqZbQxWLMEVVtxkHfaqXVYTIEqFtc
- MWNA==
+ d=sifive.com; s=google; t=1744887189; x=1745491989; darn=nongnu.org;
+ h=references:in-reply-to:message-id:date:subject:cc:to:from:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=1OzcF3/O35O63aAFZJRPLEZk5T/555tjIU+685rxziI=;
+ b=EBsqLana2cNM2tSCf+xoqLUL5YD10ksM3Nop7K/ZLvr0VyTg6pO7f1jldMayqQA2k7
+ aHJGCRbCo+96tvaCRRawyPemW7GF9c9u1A9M+MU8adsv64EHp8qZFbcPIPu2t3YNrOC/
+ YHYIbD9ljQgDohfq8b/knBuGdIf7600Fq3ZfF63KxfoL3WkyBlvgv85QtTuLqPS8omZg
+ dv16St51o/qGBLA3gt0OZA6rLkVoUYDNw+ivnyC0rP9HqKMNAEgZXToiZJslFu/2xGGr
+ eHmcUTv2Dd17AyRpNX9PwvcdRgaNELSHD4KXUtmjjq0OigA9TSZgIZ+EKgxTuFatnJkf
+ fXvw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1744887184; x=1745491984;
- h=message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=lzKpgeqR4fqb0La7VqTwMdcnh2eNwttopn7tCkVVrIE=;
- b=mAESh5sddSjN8qS/yMG2jlZh4g3EHS//VcwUAtyoBsptpAOunTnVosORWMb9RcYsOI
- 8UNgtorLEEB6ZvK4sL3TDjyUFAKpyAptZkC50JMNBzXdEgNCYq7JnJp7c9HP+vq8pZIf
- 41CiW3vcs2qutyWhrp8WQLYNi22mVT0kInGWEGCS6WjS1isDmFj65DcqkLWEaZm6Gnxq
- ut7V2ZVg2nf2VmknTiTDixOhzWdXB+YgY7rZUELZkbeNrkZXLU/RlRWar0sRgApNYnfp
- Qj4GvNXlQwMWO9XuKbzBl18GvDmeZb5eK3hzfc72yexRYwmlHmYlpCmvZvDVnoaHYpCm
- Zo/w==
+ d=1e100.net; s=20230601; t=1744887189; x=1745491989;
+ h=references:in-reply-to:message-id:date:subject:cc:to:from
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=1OzcF3/O35O63aAFZJRPLEZk5T/555tjIU+685rxziI=;
+ b=JywJAQK20oUv3GQiqUR21V3B12QNZPHamifQ4KHHLjN7OM/cyqb26fto0vMM5RajT1
+ oaoqccsWj3FJLTSEEsSSRlJMPYJW3l5eugR1C4FspxVpGXlHSlQJOWN9AnU1K0Un3hnw
+ POJVqJpcaPF3JgE7w4WBAKxnBUl1KV6pjU1aOtYpTyY6bB971ahiDkmiIBVx26nX75Fr
+ A/cHMMx9x9dO2tUyiThxhGO8y6Tdk7njjYnCAKhTJqCArGdH0nWlPV6DDA/8c470Zf9T
+ NVguVHUj+ZDP5zjfUl6bcnKaTNTtJ2oRRmpTsrfGRLS26kL8mG647zWuIiasHnpg0dnu
+ XLRA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVf7O0ULumW9/2kmd+lkR88DIno/4iG6E2N8LvBEsr7/voCexaovyMCEb9l5RTYKiLDw7mzT3snzCdO@nongnu.org
-X-Gm-Message-State: AOJu0Yy0e1e7fKd357KB0XHGFp4qO8ni/URy/GIpRUQKjTI+W8EK63QK
- VbzkeYxIJHVYOkimxlEuvCMBx/gnlDY6nkdtCow4ecZibwRc7k3x2hCj6+KYTok=
-X-Gm-Gg: ASbGncscULd439HAYmvSTl2DxUf8Fc3WXA5tFVPZOm9gQVgsMNRAW+Dwme4Bvv2om92
- XYjR9tw8C1xdCxDLhl7Hs6WlEFgGJIDLft3RSwzJWMHjoboxLWIt4U6GBl6eb70F5RP/BpRre94
- Eue/Jc/tYelFcq4wCqo3YaKsTvepPRptfKMn/tOQpQHHPFxARLUEZcSicidernBFAnV0AiChv2s
- 3Qx6cF3/zSx5A30ZrIFhG8LyMZaQT1tQ4Q57dqCjhzzvlWxFMCPVDGDq6dDMsnaTBMWEETMPA/Z
- 0cdgahv4Z7kGrcmWXlJgT/4JxNirjlxUrGxWa9LTKYCVo/WQRuiKKyC89QdaaRM=
-X-Google-Smtp-Source: AGHT+IHrzDlXhc6gVN4UXa/drR+YxSgFVwbZ5+Vwfao1KqvjZdbfyBoQ7EM7kjdi3Fc/RgAIJUlzVw==
-X-Received: by 2002:a05:6a21:3181:b0:1f5:790c:947 with SMTP id
- adf61e73a8af0-203b3ee3a10mr7187435637.19.1744887183942; 
- Thu, 17 Apr 2025 03:53:03 -0700 (PDT)
+ AJvYcCWt8ot5QvFE6/UTpK64iWZw72jRdrANUOsj3EMI8ZewoQXT5/Q6QGZZYUh+CymBrthVuU3jVWCsWoSo@nongnu.org
+X-Gm-Message-State: AOJu0YxCWVZRJNfHLRXX40XcDzilCSsKbEifwYOhVx/pVJ5uNWGgJ1lR
+ tmWY232QZt0PllKYIT4GSi1/O0xQEOYjSqk+EhiHL4LzC6G1MjRA+6JdCiCUezU=
+X-Gm-Gg: ASbGncs+HrzZrQJWevUCyVDFT1D7QbIyoTI+MbC5upOvJFALsxhT5PGkpqS5OL3q331
+ IOkNT8kiJikAGPzO7NolcUKZplhZfi1cs7p/i4FBeLbcCgrK7XuNNY8vTcfk+B6Agfua9KQrd1R
+ qPe+ceCCwQKdfpL9njYGVILXrVtzZNX3HeNjqg9QcjXA0M/Lf1BuP6aJiczjUI9ndIawyJKocT+
+ 1Vl3/eYqYm9B4OWcfGewnD44OnnhB/i+i+xLO+kow7YiHcg9MObjSP1yvvuBi1PFOEs3JGf16Yc
+ qkE3u/jGT1AeJE4ixCmMyhZj2fexESHUw95AHnH1K1HfbIn/35NGNQxW2Zy8frs=
+X-Google-Smtp-Source: AGHT+IFB/VVpLc+3fkHQfajBQ7jQxp0K8fblft9XqyOnAuEWmcwRwAPFM/93cv/unN9ImTu7vLiK/g==
+X-Received: by 2002:a17:902:ef08:b0:220:bcc5:2845 with SMTP id
+ d9443c01a7336-22c358bb4acmr75104785ad.7.1744887189383; 
+ Thu, 17 Apr 2025 03:53:09 -0700 (PDT)
 Received: from hsinchu26.internal.sifive.com ([210.176.154.34])
  by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-73bd230ddaasm12366251b3a.138.2025.04.17.03.52.58
+ d2e1a72fcca58-73bd230ddaasm12366251b3a.138.2025.04.17.03.53.04
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 17 Apr 2025 03:53:03 -0700 (PDT)
+ Thu, 17 Apr 2025 03:53:08 -0700 (PDT)
 From: Jim Shu <jim.shu@sifive.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
@@ -92,12 +92,14 @@ Cc: Richard Henderson <richard.henderson@linaro.org>,
  qemu-ppc@nongnu.org (open list:PowerPC TCG CPUs),
  qemu-s390x@nongnu.org (open list:S390 TCG CPUs),
  Jim Shu <jim.shu@sifive.com>
-Subject: [PATCH v2 00/18] Implements RISC-V WorldGuard extension v0.4
-Date: Thu, 17 Apr 2025 18:52:31 +0800
-Message-Id: <20250417105249.18232-1-jim.shu@sifive.com>
+Subject: [PATCH v2 01/18] accel/tcg: Store section pointer in CPUTLBEntryFull
+Date: Thu, 17 Apr 2025 18:52:32 +0800
+Message-Id: <20250417105249.18232-2-jim.shu@sifive.com>
 X-Mailer: git-send-email 2.17.1
-Received-SPF: pass client-ip=2607:f8b0:4864:20::42c;
- envelope-from=jim.shu@sifive.com; helo=mail-pf1-x42c.google.com
+In-Reply-To: <20250417105249.18232-1-jim.shu@sifive.com>
+References: <20250417105249.18232-1-jim.shu@sifive.com>
+Received-SPF: pass client-ip=2607:f8b0:4864:20::629;
+ envelope-from=jim.shu@sifive.com; helo=mail-pl1-x629.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -120,105 +122,246 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-This patchset implements Smwg/Smwgd/Sswg CPU extension and wgChecker
-device defined in WorldGuard spec v0.4.
+To fix the bug of iotlb_to_section(), store complete MemoryRegionSection
+pointer in CPUTLBEntryFull to replace the section_index in xlat_section.
+Rename 'xlat_section' to 'xlat' as we remove last 12 bits section_index
+inside. Remove iotlb_to_section() as we directly use section pointer in
+the CPUTLBEntryFull (full->section).
 
-The WG v0.4 spec could be found here:
-https://lists.riscv.org/g/security/attachment/711/0/worldguard_rvia_spec-v0.4.pdf
+iotlb_to_section() bug description:
+'CPUTLBEntryFull.xlat_section' stores section_index in last 12 bits to
+find the correct section when CPU access the IO region over the IOTLB.
+However, section_index is only unique inside single AddressSpace. If
+address space translation is over IOMMUMemoryRegion, it could return
+section from other AddressSpace. 'iotlb_to_section()' API only finds the
+sections from CPU's AddressSpace so that it couldn't find section in
+other AddressSpace. Thus, using 'iotlb_to_section()' API will find the
+wrong section and QEMU will have wrong load/store access.
 
-To enable WG in QEMU, pass "wg=on" as machine parameter to virt machine.
-It enables both WG CPU CSRs to apply WID of CPU and wgCheckers on
-the DRAM, FLASH, and UART to protect these resources.
+This bug occurs only when
+(1) IOMMUMemoryRegion is in the path of CPU access.
+(2) IOMMUMemoryRegion returns different target_as and the section is in
+the IO region.
 
-This patchset contains 5 parts:
+Common IOMMU devices don't have this issue since they are only in the
+path of DMA access. Currently, the bug only occurs when ARM MPC device
+(hw/misc/tz-mpc.c) returns 'blocked_io_as' to emulate blocked access
+handling. Upcoming RISC-V wgChecker device is also affected by this bug.
 
-1. Commit  1 ~ 2: Bugfix of IOMMUMemoryRegion
-2. Commit  3 ~ 4: Extend IOMMUMemoryRegion and MemTxAttr for WG support
-3. Commit  5 ~ 13: Add WG global device and CPU extensions
-4. Commit 14 ~ 17: Add WG checker device
-5. Commit 18: Add WG support to the virt machine
+Signed-off-by: Jim Shu <jim.shu@sifive.com>
+---
+ accel/tcg/cputlb.c      | 32 +++++++++++++++-----------------
+ include/exec/cputlb.h   |  2 +-
+ include/exec/exec-all.h | 15 ---------------
+ include/hw/core/cpu.h   | 12 +++++++-----
+ system/physmem.c        | 17 -----------------
+ 5 files changed, 23 insertions(+), 55 deletions(-)
 
-QEMU code can be found at [1]
-
-[1] https://github.com/cwshu/qemu/tree/riscv-wg-v2
-
-Changed since v1:
-- Remove the assertion of 4k sections limitation. Remove
-  iotlb_to_section() and rename 'xlat_section' to 'xlat'.
-- Fix RST issue and typo in virt machine doc
-
-Changed since RFCv1:
-- Rebase to latest QEMU (v10.0.0-rc3)
-- Add the description of HW config and CPU option of WG in the
-  virt machine documentation
-- Expose CPU options of WG after WG CPU code has been implemented
-- Change 'mwid' and 'mwidlist' options to experimental options
-- Change 'world_id' to unsigned int type + bit field.
-
-Jim Shu (18):
-  accel/tcg: Store section pointer in CPUTLBEntryFull
-  system/physmem: Remove the assertion of page-aligned section number
-  accel/tcg: memory access from CPU will pass access_type to IOMMU
-  exec: Add RISC-V WorldGuard WID to MemTxAttrs
-  hw/misc: riscv_worldguard: Add RISC-V WorldGuard global config
-  target/riscv: Add CPU options of WorldGuard CPU extension
-  target/riscv: Add hard-coded CPU state of WG extension
-  target/riscv: Add defines for WorldGuard CSRs
-  target/riscv: Allow global WG config to set WG CPU callbacks
-  target/riscv: Implement WorldGuard CSRs
-  target/riscv: Add WID to MemTxAttrs of CPU memory transactions
-  target/riscv: Expose CPU options of WorldGuard
-  hw/misc: riscv_worldguard: Add API to enable WG extension of CPU
-  hw/misc: riscv_wgchecker: Implement RISC-V WorldGuard Checker
-  hw/misc: riscv_wgchecker: Implement wgchecker slot registers
-  hw/misc: riscv_wgchecker: Implement correct block-access behavior
-  hw/misc: riscv_wgchecker: Check the slot settings in translate
-  hw/riscv: virt: Add WorldGuard support
-
- accel/tcg/cputlb.c                   |   49 +-
- docs/system/riscv/virt.rst           |   20 +
- hw/misc/Kconfig                      |    3 +
- hw/misc/meson.build                  |    1 +
- hw/misc/riscv_wgchecker.c            | 1160 ++++++++++++++++++++++++++
- hw/misc/riscv_worldguard.c           |  272 ++++++
- hw/misc/trace-events                 |    9 +
- hw/riscv/Kconfig                     |    1 +
- hw/riscv/virt.c                      |  163 +++-
- include/exec/cputlb.h                |   13 +-
- include/exec/exec-all.h              |   18 +-
- include/exec/memattrs.h              |    8 +-
- include/hw/core/cpu.h                |   12 +-
- include/hw/misc/riscv_worldguard.h   |  123 +++
- include/hw/riscv/virt.h              |   15 +-
- system/physmem.c                     |   39 +-
- target/alpha/helper.c                |    2 +-
- target/avr/helper.c                  |    2 +-
- target/hppa/mem_helper.c             |    1 -
- target/i386/tcg/system/excp_helper.c |    3 +-
- target/loongarch/tcg/tlb_helper.c    |    2 +-
- target/m68k/helper.c                 |   10 +-
- target/microblaze/helper.c           |    8 +-
- target/mips/tcg/system/tlb_helper.c  |    4 +-
- target/openrisc/mmu.c                |    2 +-
- target/ppc/mmu_helper.c              |    2 +-
- target/riscv/cpu.c                   |   17 +-
- target/riscv/cpu.h                   |   12 +
- target/riscv/cpu_bits.h              |    5 +
- target/riscv/cpu_cfg.h               |    5 +
- target/riscv/cpu_helper.c            |   69 +-
- target/riscv/csr.c                   |  107 +++
- target/riscv/tcg/tcg-cpu.c           |   11 +
- target/rx/cpu.c                      |    3 +-
- target/s390x/tcg/excp_helper.c       |    2 +-
- target/sh4/helper.c                  |    2 +-
- target/sparc/mmu_helper.c            |    6 +-
- target/tricore/helper.c              |    2 +-
- target/xtensa/helper.c               |    3 +-
- 39 files changed, 2074 insertions(+), 112 deletions(-)
- create mode 100644 hw/misc/riscv_wgchecker.c
- create mode 100644 hw/misc/riscv_worldguard.c
- create mode 100644 include/hw/misc/riscv_worldguard.h
-
+diff --git a/accel/tcg/cputlb.c b/accel/tcg/cputlb.c
+index fb22048876..d51bfc19c1 100644
+--- a/accel/tcg/cputlb.c
++++ b/accel/tcg/cputlb.c
+@@ -1085,7 +1085,7 @@ void tlb_set_page_full(CPUState *cpu, int mmu_idx,
+         }
+     } else {
+         /* I/O or ROMD */
+-        iotlb = memory_region_section_get_iotlb(cpu, section) + xlat;
++        iotlb = xlat;
+         /*
+          * Writes to romd devices must go through MMIO to enable write.
+          * Reads to romd devices go through the ram_ptr found above,
+@@ -1136,10 +1136,9 @@ void tlb_set_page_full(CPUState *cpu, int mmu_idx,
+     /*
+      * When memory region is ram, iotlb contains a TARGET_PAGE_BITS
+      * aligned ram_addr_t of the page base of the target RAM.
+-     * Otherwise, iotlb contains
+-     *  - a physical section number in the lower TARGET_PAGE_BITS
+-     *  - the offset within section->mr of the page base (I/O, ROMD) with the
+-     *    TARGET_PAGE_BITS masked off.
++     * Otherwise, iotlb contains a TARGET_PAGE_BITS aligned
++     * offset within section->mr of the page base (I/O, ROMD)
++     *
+      * We subtract addr_page (which is page aligned and thus won't
+      * disturb the low bits) to give an offset which can be added to the
+      * (non-page-aligned) vaddr of the eventual memory access to get
+@@ -1149,7 +1148,8 @@ void tlb_set_page_full(CPUState *cpu, int mmu_idx,
+      */
+     desc->fulltlb[index] = *full;
+     full = &desc->fulltlb[index];
+-    full->xlat_section = iotlb - addr_page;
++    full->xlat = iotlb - addr_page;
++    full->section = section;
+     full->phys_addr = paddr_page;
+ 
+     /* Now calculate the new entry */
+@@ -1265,14 +1265,14 @@ static inline void cpu_unaligned_access(CPUState *cpu, vaddr addr,
+ }
+ 
+ static MemoryRegionSection *
+-io_prepare(hwaddr *out_offset, CPUState *cpu, hwaddr xlat,
++io_prepare(hwaddr *out_offset, CPUState *cpu, CPUTLBEntryFull *full,
+            MemTxAttrs attrs, vaddr addr, uintptr_t retaddr)
+ {
+     MemoryRegionSection *section;
+     hwaddr mr_offset;
+ 
+-    section = iotlb_to_section(cpu, xlat, attrs);
+-    mr_offset = (xlat & TARGET_PAGE_MASK) + addr;
++    section = full->section;
++    mr_offset = full->xlat + addr;
+     cpu->mem_io_pc = retaddr;
+     if (!cpu->neg.can_do_io) {
+         cpu_io_recompile(cpu, retaddr);
+@@ -1331,7 +1331,7 @@ static bool victim_tlb_hit(CPUState *cpu, size_t mmu_idx, size_t index,
+ static void notdirty_write(CPUState *cpu, vaddr mem_vaddr, unsigned size,
+                            CPUTLBEntryFull *full, uintptr_t retaddr)
+ {
+-    ram_addr_t ram_addr = mem_vaddr + full->xlat_section;
++    ram_addr_t ram_addr = mem_vaddr + full->xlat;
+ 
+     trace_memory_notdirty_write_access(mem_vaddr, ram_addr, size);
+ 
+@@ -1588,9 +1588,7 @@ bool tlb_plugin_lookup(CPUState *cpu, vaddr addr, int mmu_idx,
+ 
+     /* We must have an iotlb entry for MMIO */
+     if (tlb_addr & TLB_MMIO) {
+-        MemoryRegionSection *section =
+-            iotlb_to_section(cpu, full->xlat_section & ~TARGET_PAGE_MASK,
+-                             full->attrs);
++        MemoryRegionSection *section = full->section;
+         data->is_io = true;
+         data->mr = section->mr;
+     } else {
+@@ -1980,7 +1978,7 @@ static uint64_t do_ld_mmio_beN(CPUState *cpu, CPUTLBEntryFull *full,
+     tcg_debug_assert(size > 0 && size <= 8);
+ 
+     attrs = full->attrs;
+-    section = io_prepare(&mr_offset, cpu, full->xlat_section, attrs, addr, ra);
++    section = io_prepare(&mr_offset, cpu, full, attrs, addr, ra);
+     mr = section->mr;
+ 
+     BQL_LOCK_GUARD();
+@@ -2001,7 +1999,7 @@ static Int128 do_ld16_mmio_beN(CPUState *cpu, CPUTLBEntryFull *full,
+     tcg_debug_assert(size > 8 && size <= 16);
+ 
+     attrs = full->attrs;
+-    section = io_prepare(&mr_offset, cpu, full->xlat_section, attrs, addr, ra);
++    section = io_prepare(&mr_offset, cpu, full, attrs, addr, ra);
+     mr = section->mr;
+ 
+     BQL_LOCK_GUARD();
+@@ -2521,7 +2519,7 @@ static uint64_t do_st_mmio_leN(CPUState *cpu, CPUTLBEntryFull *full,
+     tcg_debug_assert(size > 0 && size <= 8);
+ 
+     attrs = full->attrs;
+-    section = io_prepare(&mr_offset, cpu, full->xlat_section, attrs, addr, ra);
++    section = io_prepare(&mr_offset, cpu, full, attrs, addr, ra);
+     mr = section->mr;
+ 
+     BQL_LOCK_GUARD();
+@@ -2541,7 +2539,7 @@ static uint64_t do_st16_mmio_leN(CPUState *cpu, CPUTLBEntryFull *full,
+     tcg_debug_assert(size > 8 && size <= 16);
+ 
+     attrs = full->attrs;
+-    section = io_prepare(&mr_offset, cpu, full->xlat_section, attrs, addr, ra);
++    section = io_prepare(&mr_offset, cpu, full, attrs, addr, ra);
+     mr = section->mr;
+ 
+     BQL_LOCK_GUARD();
+diff --git a/include/exec/cputlb.h b/include/exec/cputlb.h
+index 8125f6809c..fea0474cf6 100644
+--- a/include/exec/cputlb.h
++++ b/include/exec/cputlb.h
+@@ -43,7 +43,7 @@ void tlb_reset_dirty_range_all(ram_addr_t start, ram_addr_t length);
+  * @full: the details of the tlb entry
+  *
+  * Add an entry to @cpu tlb index @mmu_idx.  All of the fields of
+- * @full must be filled, except for xlat_section, and constitute
++ * @full must be filled, except for xlat, and constitute
+  * the complete description of the translated page.
+  *
+  * This is generally called by the target tlb_fill function after
+diff --git a/include/exec/exec-all.h b/include/exec/exec-all.h
+index dd5c40f223..46be330d99 100644
+--- a/include/exec/exec-all.h
++++ b/include/exec/exec-all.h
+@@ -178,21 +178,6 @@ void tb_phys_invalidate(TranslationBlock *tb, tb_page_addr_t page_addr);
+ void tb_invalidate_phys_range(tb_page_addr_t start, tb_page_addr_t last);
+ void tb_set_jmp_target(TranslationBlock *tb, int n, uintptr_t addr);
+ 
+-#if !defined(CONFIG_USER_ONLY)
+-
+-/**
+- * iotlb_to_section:
+- * @cpu: CPU performing the access
+- * @index: TCG CPU IOTLB entry
+- *
+- * Given a TCG CPU IOTLB entry, return the MemoryRegionSection that
+- * it refers to. @index will have been initially created and returned
+- * by memory_region_section_get_iotlb().
+- */
+-struct MemoryRegionSection *iotlb_to_section(CPUState *cpu,
+-                                             hwaddr index, MemTxAttrs attrs);
+-#endif
+-
+ /**
+  * get_page_addr_code_hostp()
+  * @env: CPUArchState
+diff --git a/include/hw/core/cpu.h b/include/hw/core/cpu.h
+index abd8764e83..da9011e2c5 100644
+--- a/include/hw/core/cpu.h
++++ b/include/hw/core/cpu.h
+@@ -208,15 +208,17 @@ struct CPUClass {
+  */
+ struct CPUTLBEntryFull {
+     /*
+-     * @xlat_section contains:
+-     *  - in the lower TARGET_PAGE_BITS, a physical section number
+-     *  - with the lower TARGET_PAGE_BITS masked off, an offset which
+-     *    must be added to the virtual address to obtain:
++     * @xlat contains:
++     *  - a TARGET_PAGE_BITS aligned offset which must be added to
++     *    the virtual address to obtain:
+      *     + the ram_addr_t of the target RAM (if the physical section
+      *       number is PHYS_SECTION_NOTDIRTY or PHYS_SECTION_ROM)
+      *     + the offset within the target MemoryRegion (otherwise)
+      */
+-    hwaddr xlat_section;
++    hwaddr xlat;
++
++    /* @section contains physical section. */
++    MemoryRegionSection *section;
+ 
+     /*
+      * @phys_addr contains the physical address in the address space
+diff --git a/system/physmem.c b/system/physmem.c
+index 333a5eb94d..70a6dd1962 100644
+--- a/system/physmem.c
++++ b/system/physmem.c
+@@ -2668,23 +2668,6 @@ static uint16_t dummy_section(PhysPageMap *map, FlatView *fv, MemoryRegion *mr)
+     return phys_section_add(map, &section);
+ }
+ 
+-MemoryRegionSection *iotlb_to_section(CPUState *cpu,
+-                                      hwaddr index, MemTxAttrs attrs)
+-{
+-    int asidx = cpu_asidx_from_attrs(cpu, attrs);
+-    CPUAddressSpace *cpuas = &cpu->cpu_ases[asidx];
+-    AddressSpaceDispatch *d = cpuas->memory_dispatch;
+-    int section_index = index & ~TARGET_PAGE_MASK;
+-    MemoryRegionSection *ret;
+-
+-    assert(section_index < d->map.sections_nb);
+-    ret = d->map.sections + section_index;
+-    assert(ret->mr);
+-    assert(ret->mr->ops);
+-
+-    return ret;
+-}
+-
+ static void io_mem_init(void)
+ {
+     memory_region_init_io(&io_mem_unassigned, NULL, &unassigned_mem_ops, NULL,
 -- 
 2.17.1
 
