@@ -4,102 +4,107 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C6166C369CA
-	for <qemu-riscv@archiver.kernel.org>; Wed, 16 Apr 2025 22:01:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6AC7DC369B2
+	for <qemu-riscv@archiver.kernel.org>; Thu, 17 Apr 2025 10:53:41 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1u5AlX-00037g-UX; Wed, 16 Apr 2025 17:57:55 -0400
+	id 1u5Ms0-0007JY-4q; Thu, 17 Apr 2025 06:53:24 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dongli.zhang@oracle.com>)
- id 1u5AlU-00031X-2L; Wed, 16 Apr 2025 17:57:52 -0400
-Received: from mx0b-00069f02.pphosted.com ([205.220.177.32])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dongli.zhang@oracle.com>)
- id 1u5AlR-00084b-K2; Wed, 16 Apr 2025 17:57:51 -0400
-Received: from pps.filterd (m0246631.ppops.net [127.0.0.1])
- by mx0b-00069f02.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 53GLNiUT028808;
- Wed, 16 Apr 2025 21:57:24 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com; h=cc
- :content-transfer-encoding:date:from:in-reply-to:message-id
- :mime-version:references:subject:to; s=corp-2023-11-20; bh=zrsW9
- B0Kw+566H0LzTSEW67Xu8nF2NC7lmctRBkvIos=; b=KJMmpWuAepLM76Lsi3SHm
- qVU8FSs1+8B1j82MQqiz4myRjQKx6VwDb3n8trKy5++7u2E9Dy9dCUN/b8ZO9AAy
- IFY6AwzmlINVTfDG21p7dzEchusgYdbo6Hrqjz28xKteK/kVnP6QmaUbvDsyTI06
- 9Vx65D6GTQkav3gWknaWaf1KdXEPnNeeBqNLDgj9k9u6wLp2Vl140hIpPG/sTySh
- flFlBSPGKjGdAHV7cuKmTAGbCrE2Pi00fNVboPvQUX+6Vw1FeHTw5oezDEHFmr/S
- DWT/CgDZNYrJCeiv5BBn80L+JkP1rC1Qz7Z5l1KFHBrLsbQkSErFGSVEbGUR5ZYW
- A==
-Received: from phxpaimrmta02.imrmtpd1.prodappphxaev1.oraclevcn.com
- (phxpaimrmta02.appoci.oracle.com [147.154.114.232])
- by mx0b-00069f02.pphosted.com (PPS) with ESMTPS id 4617jud6jq-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Wed, 16 Apr 2025 21:57:23 +0000 (GMT)
-Received: from pps.filterd
- (phxpaimrmta02.imrmtpd1.prodappphxaev1.oraclevcn.com [127.0.0.1])
- by phxpaimrmta02.imrmtpd1.prodappphxaev1.oraclevcn.com (8.18.1.2/8.18.1.2)
- with ESMTP id 53GKVvPX005651; Wed, 16 Apr 2025 21:57:22 GMT
-Received: from pps.reinject (localhost [127.0.0.1])
- by phxpaimrmta02.imrmtpd1.prodappphxaev1.oraclevcn.com (PPS) with ESMTPS id
- 460d5xhvq7-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Wed, 16 Apr 2025 21:57:22 +0000
-Received: from phxpaimrmta02.imrmtpd1.prodappphxaev1.oraclevcn.com
- (phxpaimrmta02.imrmtpd1.prodappphxaev1.oraclevcn.com [127.0.0.1])
- by pps.reinject (8.17.1.5/8.17.1.5) with ESMTP id 53GLv1qe036583;
- Wed, 16 Apr 2025 21:57:21 GMT
-Received: from localhost.localdomain (ca-dev80.us.oracle.com [10.211.9.80])
- by phxpaimrmta02.imrmtpd1.prodappphxaev1.oraclevcn.com (PPS) with ESMTP id
- 460d5xhvcp-9; Wed, 16 Apr 2025 21:57:21 +0000
-From: Dongli Zhang <dongli.zhang@oracle.com>
-To: qemu-devel@nongnu.org, kvm@vger.kernel.org, qemu-arm@nongnu.org,
- qemu-ppc@nongnu.org, qemu-riscv@nongnu.org, qemu-s390x@nongnu.org
-Cc: pbonzini@redhat.com, zhao1.liu@intel.com, mtosatti@redhat.com,
- sandipan.das@amd.com, babu.moger@amd.com, likexu@tencent.com,
- like.xu.linux@gmail.com, groug@kaod.org, khorenko@virtuozzo.com,
- alexander.ivanov@virtuozzo.com, den@virtuozzo.com,
- davydov-max@yandex-team.ru, xiaoyao.li@intel.com,
- dapeng1.mi@linux.intel.com, joe.jin@oracle.com,
- peter.maydell@linaro.org, gaosong@loongson.cn, chenhuacai@kernel.org,
- philmd@linaro.org, aurelien@aurel32.net, jiaxun.yang@flygoat.com,
- arikalo@gmail.com, npiggin@gmail.com, danielhb413@gmail.com,
- palmer@dabbelt.com, alistair.francis@wdc.com, liwei1518@gmail.com,
- zhiwei_liu@linux.alibaba.com, pasic@linux.ibm.com,
- borntraeger@linux.ibm.com, richard.henderson@linaro.org,
- david@redhat.com, iii@linux.ibm.com, thuth@redhat.com,
- flavra@baylibre.com, ewanhai-oc@zhaoxin.com, ewanhai@zhaoxin.com,
- cobechen@zhaoxin.com, louisqi@zhaoxin.com, liamni@zhaoxin.com,
- frankzhu@zhaoxin.com, silviazhao@zhaoxin.com, kraxel@redhat.com,
- berrange@redhat.com
-Subject: [PATCH v4 08/11] target/i386/kvm: query kvm.enable_pmu parameter
-Date: Wed, 16 Apr 2025 14:52:33 -0700
-Message-ID: <20250416215306.32426-9-dongli.zhang@oracle.com>
-X-Mailer: git-send-email 2.43.5
-In-Reply-To: <20250416215306.32426-1-dongli.zhang@oracle.com>
-References: <20250416215306.32426-1-dongli.zhang@oracle.com>
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1095,Hydra:6.0.680,FMLib:17.12.68.34
- definitions=2025-04-16_08,2025-04-15_01,2024-11-22_01
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 phishscore=0
- mlxlogscore=999
- suspectscore=0 spamscore=0 bulkscore=0 malwarescore=0 adultscore=0
- mlxscore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.12.0-2502280000 definitions=main-2504160177
-X-Proofpoint-GUID: 1bGCwNLmTZdfXa36pPFKeM7BYF21nKgx
-X-Proofpoint-ORIG-GUID: 1bGCwNLmTZdfXa36pPFKeM7BYF21nKgx
-Received-SPF: pass client-ip=205.220.177.32;
- envelope-from=dongli.zhang@oracle.com; helo=mx0b-00069f02.pphosted.com
-X-Spam_score_int: -30
-X-Spam_score: -3.1
-X-Spam_bar: ---
-X-Spam_report: (-3.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_MED=-0.268,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_LOW=-0.7, RCVD_IN_MSPIKE_H5=0.001, RCVD_IN_MSPIKE_WL=0.001,
- RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001, RCVD_IN_VALIDITY_SAFE_BLOCKED=0.001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ (Exim 4.90_1) (envelope-from <jim.shu@sifive.com>)
+ id 1u5Mrl-0007EW-AB
+ for qemu-riscv@nongnu.org; Thu, 17 Apr 2025 06:53:09 -0400
+Received: from mail-pf1-x42c.google.com ([2607:f8b0:4864:20::42c])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <jim.shu@sifive.com>)
+ id 1u5Mri-0003Es-6p
+ for qemu-riscv@nongnu.org; Thu, 17 Apr 2025 06:53:09 -0400
+Received: by mail-pf1-x42c.google.com with SMTP id
+ d2e1a72fcca58-736ad42dfd6so454754b3a.3
+ for <qemu-riscv@nongnu.org>; Thu, 17 Apr 2025 03:53:05 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=sifive.com; s=google; t=1744887184; x=1745491984; darn=nongnu.org;
+ h=message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=lzKpgeqR4fqb0La7VqTwMdcnh2eNwttopn7tCkVVrIE=;
+ b=dZ7pB5r/2UbCwJdGXh49fgl1LU8AJpLQHwYQs+9etDSLj6iNMsludWtny7sMReyyEq
+ Ko0h+9Mx2nDZxVVroec3EZ/aOFYU2WBrZRxmjRNIeYvhpWmKP9+KSNkXYOLsOIdVvpyO
+ wisnzzjzK3gwmTkrUSuCWwCBYIzYbpcS/ca0ytnEiVNkToq9JWOwkAM1otRaeNG62IvN
+ nfi9PkpES3ToMKX4kV7vDVTE4hG9etHTniJH/l3G2dPlGh1nv14+QAjB1S1tyYtJ2Ovd
+ lmdqLTKtmCvjqdT0ocpDoKscWpsKzUyxheGDoctJqZbQxWLMEVVtxkHfaqXVYTIEqFtc
+ MWNA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1744887184; x=1745491984;
+ h=message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=lzKpgeqR4fqb0La7VqTwMdcnh2eNwttopn7tCkVVrIE=;
+ b=mAESh5sddSjN8qS/yMG2jlZh4g3EHS//VcwUAtyoBsptpAOunTnVosORWMb9RcYsOI
+ 8UNgtorLEEB6ZvK4sL3TDjyUFAKpyAptZkC50JMNBzXdEgNCYq7JnJp7c9HP+vq8pZIf
+ 41CiW3vcs2qutyWhrp8WQLYNi22mVT0kInGWEGCS6WjS1isDmFj65DcqkLWEaZm6Gnxq
+ ut7V2ZVg2nf2VmknTiTDixOhzWdXB+YgY7rZUELZkbeNrkZXLU/RlRWar0sRgApNYnfp
+ Qj4GvNXlQwMWO9XuKbzBl18GvDmeZb5eK3hzfc72yexRYwmlHmYlpCmvZvDVnoaHYpCm
+ Zo/w==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVf7O0ULumW9/2kmd+lkR88DIno/4iG6E2N8LvBEsr7/voCexaovyMCEb9l5RTYKiLDw7mzT3snzCdO@nongnu.org
+X-Gm-Message-State: AOJu0Yy0e1e7fKd357KB0XHGFp4qO8ni/URy/GIpRUQKjTI+W8EK63QK
+ VbzkeYxIJHVYOkimxlEuvCMBx/gnlDY6nkdtCow4ecZibwRc7k3x2hCj6+KYTok=
+X-Gm-Gg: ASbGncscULd439HAYmvSTl2DxUf8Fc3WXA5tFVPZOm9gQVgsMNRAW+Dwme4Bvv2om92
+ XYjR9tw8C1xdCxDLhl7Hs6WlEFgGJIDLft3RSwzJWMHjoboxLWIt4U6GBl6eb70F5RP/BpRre94
+ Eue/Jc/tYelFcq4wCqo3YaKsTvepPRptfKMn/tOQpQHHPFxARLUEZcSicidernBFAnV0AiChv2s
+ 3Qx6cF3/zSx5A30ZrIFhG8LyMZaQT1tQ4Q57dqCjhzzvlWxFMCPVDGDq6dDMsnaTBMWEETMPA/Z
+ 0cdgahv4Z7kGrcmWXlJgT/4JxNirjlxUrGxWa9LTKYCVo/WQRuiKKyC89QdaaRM=
+X-Google-Smtp-Source: AGHT+IHrzDlXhc6gVN4UXa/drR+YxSgFVwbZ5+Vwfao1KqvjZdbfyBoQ7EM7kjdi3Fc/RgAIJUlzVw==
+X-Received: by 2002:a05:6a21:3181:b0:1f5:790c:947 with SMTP id
+ adf61e73a8af0-203b3ee3a10mr7187435637.19.1744887183942; 
+ Thu, 17 Apr 2025 03:53:03 -0700 (PDT)
+Received: from hsinchu26.internal.sifive.com ([210.176.154.34])
+ by smtp.gmail.com with ESMTPSA id
+ d2e1a72fcca58-73bd230ddaasm12366251b3a.138.2025.04.17.03.52.58
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 17 Apr 2025 03:53:03 -0700 (PDT)
+From: Jim Shu <jim.shu@sifive.com>
+To: qemu-devel@nongnu.org,
+	qemu-riscv@nongnu.org
+Cc: Richard Henderson <richard.henderson@linaro.org>,
+ Paolo Bonzini <pbonzini@redhat.com>, Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Weiwei Li <liwei1518@gmail.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Eduardo Habkost <eduardo@habkost.net>,
+ Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
+ Yanan Wang <wangyanan55@huawei.com>, Zhao Liu <zhao1.liu@intel.com>,
+ Peter Xu <peterx@redhat.com>, David Hildenbrand <david@redhat.com>,
+ Michael Rolnik <mrolnik@gmail.com>, Helge Deller <deller@gmx.de>,
+ Song Gao <gaosong@loongson.cn>, Laurent Vivier <laurent@vivier.eu>,
+ "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
+ Aurelien Jarno <aurelien@aurel32.net>,
+ Jiaxun Yang <jiaxun.yang@flygoat.com>,
+ Aleksandar Rikalo <arikalo@gmail.com>, Stafford Horne <shorne@gmail.com>,
+ Nicholas Piggin <npiggin@gmail.com>, Ilya Leoshkevich <iii@linux.ibm.com>,
+ Thomas Huth <thuth@redhat.com>,
+ Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
+ Artyom Tarasenko <atar4qemu@gmail.com>,
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+ Max Filippov <jcmvbkbc@gmail.com>,
+ qemu-ppc@nongnu.org (open list:PowerPC TCG CPUs),
+ qemu-s390x@nongnu.org (open list:S390 TCG CPUs),
+ Jim Shu <jim.shu@sifive.com>
+Subject: [PATCH v2 00/18] Implements RISC-V WorldGuard extension v0.4
+Date: Thu, 17 Apr 2025 18:52:31 +0800
+Message-Id: <20250417105249.18232-1-jim.shu@sifive.com>
+X-Mailer: git-send-email 2.17.1
+Received-SPF: pass client-ip=2607:f8b0:4864:20::42c;
+ envelope-from=jim.shu@sifive.com; helo=mail-pf1-x42c.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -115,125 +120,106 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-When PMU is enabled in QEMU, there is a chance that PMU virtualization is
-completely disabled by the KVM module parameter kvm.enable_pmu=N.
+This patchset implements Smwg/Smwgd/Sswg CPU extension and wgChecker
+device defined in WorldGuard spec v0.4.
 
-The kvm.enable_pmu parameter is introduced since Linux v5.17.
-Its permission is 0444. It does not change until a reload of the KVM
-module.
+The WG v0.4 spec could be found here:
+https://lists.riscv.org/g/security/attachment/711/0/worldguard_rvia_spec-v0.4.pdf
 
-Read the kvm.enable_pmu value from the module sysfs to give a chance to
-provide more information about vPMU enablement.
+To enable WG in QEMU, pass "wg=on" as machine parameter to virt machine.
+It enables both WG CPU CSRs to apply WID of CPU and wgCheckers on
+the DRAM, FLASH, and UART to protect these resources.
 
-Signed-off-by: Dongli Zhang <dongli.zhang@oracle.com>
----
-Changed since v2:
-  - Rework the code flow following Zhao's suggestion.
-  - Return error when:
-    (*kvm_enable_pmu == 'N' && X86_CPU(cpu)->enable_pmu)
-Changed since v3:
-  - Re-split the cases into enable_pmu and !enable_pmu, following Zhao's
-    suggestion.
-  - Rework the commit messages.
-  - Bring back global static variable 'kvm_pmu_disabled' from v2.
+This patchset contains 5 parts:
 
- target/i386/kvm/kvm.c | 61 +++++++++++++++++++++++++++++++------------
- 1 file changed, 44 insertions(+), 17 deletions(-)
+1. Commit  1 ~ 2: Bugfix of IOMMUMemoryRegion
+2. Commit  3 ~ 4: Extend IOMMUMemoryRegion and MemTxAttr for WG support
+3. Commit  5 ~ 13: Add WG global device and CPU extensions
+4. Commit 14 ~ 17: Add WG checker device
+5. Commit 18: Add WG support to the virt machine
 
-diff --git a/target/i386/kvm/kvm.c b/target/i386/kvm/kvm.c
-index 6b49549f1b..38cc1a5f43 100644
---- a/target/i386/kvm/kvm.c
-+++ b/target/i386/kvm/kvm.c
-@@ -184,6 +184,10 @@ static int has_triple_fault_event;
- static bool has_msr_mcg_ext_ctl;
- 
- static int pmu_cap;
-+/*
-+ * Read from /sys/module/kvm/parameters/enable_pmu.
-+ */
-+static bool kvm_pmu_disabled;
- 
- static struct kvm_cpuid2 *cpuid_cache;
- static struct kvm_cpuid2 *hv_cpuid_cache;
-@@ -2041,23 +2045,30 @@ int kvm_arch_pre_create_vcpu(CPUState *cpu, Error **errp)
-     if (first) {
-         first = false;
- 
--        /*
--         * Since Linux v5.18, KVM provides a VM-level capability to easily
--         * disable PMUs; however, QEMU has been providing PMU property per
--         * CPU since v1.6. In order to accommodate both, have to configure
--         * the VM-level capability here.
--         *
--         * KVM_PMU_CAP_DISABLE doesn't change the PMU
--         * behavior on Intel platform because current "pmu" property works
--         * as expected.
--         */
--        if ((pmu_cap & KVM_PMU_CAP_DISABLE) && !X86_CPU(cpu)->enable_pmu) {
--            ret = kvm_vm_enable_cap(kvm_state, KVM_CAP_PMU_CAPABILITY, 0,
--                                    KVM_PMU_CAP_DISABLE);
--            if (ret < 0) {
--                error_setg_errno(errp, -ret,
--                                 "Failed to set KVM_PMU_CAP_DISABLE");
--                return ret;
-+        if (X86_CPU(cpu)->enable_pmu) {
-+            if (kvm_pmu_disabled) {
-+                warn_report("Failed to enable PMU since "
-+                            "KVM's enable_pmu parameter is disabled");
-+            }
-+        } else {
-+            /*
-+             * Since Linux v5.18, KVM provides a VM-level capability to easily
-+             * disable PMUs; however, QEMU has been providing PMU property per
-+             * CPU since v1.6. In order to accommodate both, have to configure
-+             * the VM-level capability here.
-+             *
-+             * KVM_PMU_CAP_DISABLE doesn't change the PMU
-+             * behavior on Intel platform because current "pmu" property works
-+             * as expected.
-+             */
-+            if (pmu_cap & KVM_PMU_CAP_DISABLE) {
-+                ret = kvm_vm_enable_cap(kvm_state, KVM_CAP_PMU_CAPABILITY, 0,
-+                                        KVM_PMU_CAP_DISABLE);
-+                if (ret < 0) {
-+                    error_setg_errno(errp, -ret,
-+                                     "Failed to set KVM_PMU_CAP_DISABLE");
-+                    return ret;
-+                }
-             }
-         }
-     }
-@@ -3252,6 +3263,7 @@ int kvm_arch_init(MachineState *ms, KVMState *s)
-     int ret;
-     struct utsname utsname;
-     Error *local_err = NULL;
-+    g_autofree char *kvm_enable_pmu;
- 
-     /*
-      * Initialize SEV context, if required
-@@ -3397,6 +3409,21 @@ int kvm_arch_init(MachineState *ms, KVMState *s)
- 
-     pmu_cap = kvm_check_extension(s, KVM_CAP_PMU_CAPABILITY);
- 
-+    /*
-+     * The enable_pmu parameter is introduced since Linux v5.17,
-+     * give a chance to provide more information about vPMU
-+     * enablement.
-+     *
-+     * The kvm.enable_pmu's permission is 0444. It does not change
-+     * until a reload of the KVM module.
-+     */
-+    if (g_file_get_contents("/sys/module/kvm/parameters/enable_pmu",
-+                            &kvm_enable_pmu, NULL, NULL)) {
-+        if (*kvm_enable_pmu == 'N') {
-+            kvm_pmu_disabled = true;
-+        }
-+    }
-+
-     return 0;
- }
- 
+QEMU code can be found at [1]
+
+[1] https://github.com/cwshu/qemu/tree/riscv-wg-v2
+
+Changed since v1:
+- Remove the assertion of 4k sections limitation. Remove
+  iotlb_to_section() and rename 'xlat_section' to 'xlat'.
+- Fix RST issue and typo in virt machine doc
+
+Changed since RFCv1:
+- Rebase to latest QEMU (v10.0.0-rc3)
+- Add the description of HW config and CPU option of WG in the
+  virt machine documentation
+- Expose CPU options of WG after WG CPU code has been implemented
+- Change 'mwid' and 'mwidlist' options to experimental options
+- Change 'world_id' to unsigned int type + bit field.
+
+Jim Shu (18):
+  accel/tcg: Store section pointer in CPUTLBEntryFull
+  system/physmem: Remove the assertion of page-aligned section number
+  accel/tcg: memory access from CPU will pass access_type to IOMMU
+  exec: Add RISC-V WorldGuard WID to MemTxAttrs
+  hw/misc: riscv_worldguard: Add RISC-V WorldGuard global config
+  target/riscv: Add CPU options of WorldGuard CPU extension
+  target/riscv: Add hard-coded CPU state of WG extension
+  target/riscv: Add defines for WorldGuard CSRs
+  target/riscv: Allow global WG config to set WG CPU callbacks
+  target/riscv: Implement WorldGuard CSRs
+  target/riscv: Add WID to MemTxAttrs of CPU memory transactions
+  target/riscv: Expose CPU options of WorldGuard
+  hw/misc: riscv_worldguard: Add API to enable WG extension of CPU
+  hw/misc: riscv_wgchecker: Implement RISC-V WorldGuard Checker
+  hw/misc: riscv_wgchecker: Implement wgchecker slot registers
+  hw/misc: riscv_wgchecker: Implement correct block-access behavior
+  hw/misc: riscv_wgchecker: Check the slot settings in translate
+  hw/riscv: virt: Add WorldGuard support
+
+ accel/tcg/cputlb.c                   |   49 +-
+ docs/system/riscv/virt.rst           |   20 +
+ hw/misc/Kconfig                      |    3 +
+ hw/misc/meson.build                  |    1 +
+ hw/misc/riscv_wgchecker.c            | 1160 ++++++++++++++++++++++++++
+ hw/misc/riscv_worldguard.c           |  272 ++++++
+ hw/misc/trace-events                 |    9 +
+ hw/riscv/Kconfig                     |    1 +
+ hw/riscv/virt.c                      |  163 +++-
+ include/exec/cputlb.h                |   13 +-
+ include/exec/exec-all.h              |   18 +-
+ include/exec/memattrs.h              |    8 +-
+ include/hw/core/cpu.h                |   12 +-
+ include/hw/misc/riscv_worldguard.h   |  123 +++
+ include/hw/riscv/virt.h              |   15 +-
+ system/physmem.c                     |   39 +-
+ target/alpha/helper.c                |    2 +-
+ target/avr/helper.c                  |    2 +-
+ target/hppa/mem_helper.c             |    1 -
+ target/i386/tcg/system/excp_helper.c |    3 +-
+ target/loongarch/tcg/tlb_helper.c    |    2 +-
+ target/m68k/helper.c                 |   10 +-
+ target/microblaze/helper.c           |    8 +-
+ target/mips/tcg/system/tlb_helper.c  |    4 +-
+ target/openrisc/mmu.c                |    2 +-
+ target/ppc/mmu_helper.c              |    2 +-
+ target/riscv/cpu.c                   |   17 +-
+ target/riscv/cpu.h                   |   12 +
+ target/riscv/cpu_bits.h              |    5 +
+ target/riscv/cpu_cfg.h               |    5 +
+ target/riscv/cpu_helper.c            |   69 +-
+ target/riscv/csr.c                   |  107 +++
+ target/riscv/tcg/tcg-cpu.c           |   11 +
+ target/rx/cpu.c                      |    3 +-
+ target/s390x/tcg/excp_helper.c       |    2 +-
+ target/sh4/helper.c                  |    2 +-
+ target/sparc/mmu_helper.c            |    6 +-
+ target/tricore/helper.c              |    2 +-
+ target/xtensa/helper.c               |    3 +-
+ 39 files changed, 2074 insertions(+), 112 deletions(-)
+ create mode 100644 hw/misc/riscv_wgchecker.c
+ create mode 100644 hw/misc/riscv_worldguard.c
+ create mode 100644 include/hw/misc/riscv_worldguard.h
+
 -- 
-2.39.3
+2.17.1
 
 
