@@ -4,65 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B07FCC369B2
-	for <qemu-riscv@archiver.kernel.org>; Thu, 17 Apr 2025 10:57:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 30EB1C369B2
+	for <qemu-riscv@archiver.kernel.org>; Thu, 17 Apr 2025 10:57:44 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1u5MtD-0000PA-6U; Thu, 17 Apr 2025 06:54:39 -0400
+	id 1u5Msf-0007fh-9K; Thu, 17 Apr 2025 06:54:05 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <jim.shu@sifive.com>)
- id 1u5Mt9-0000M9-Ra
- for qemu-riscv@nongnu.org; Thu, 17 Apr 2025 06:54:36 -0400
+ id 1u5MsL-0007Vq-RD
+ for qemu-riscv@nongnu.org; Thu, 17 Apr 2025 06:53:45 -0400
 Received: from mail-pf1-x42b.google.com ([2607:f8b0:4864:20::42b])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <jim.shu@sifive.com>)
- id 1u5Mt6-0003ho-4Q
- for qemu-riscv@nongnu.org; Thu, 17 Apr 2025 06:54:35 -0400
+ id 1u5MsJ-0003Od-NG
+ for qemu-riscv@nongnu.org; Thu, 17 Apr 2025 06:53:45 -0400
 Received: by mail-pf1-x42b.google.com with SMTP id
- d2e1a72fcca58-739b3fe7ce8so486377b3a.0
- for <qemu-riscv@nongnu.org>; Thu, 17 Apr 2025 03:54:31 -0700 (PDT)
+ d2e1a72fcca58-736c062b1f5so454745b3a.0
+ for <qemu-riscv@nongnu.org>; Thu, 17 Apr 2025 03:53:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1744887270; x=1745492070; darn=nongnu.org;
+ d=sifive.com; s=google; t=1744887222; x=1745492022; darn=nongnu.org;
  h=references:in-reply-to:message-id:date:subject:cc:to:from:from:to
  :cc:subject:date:message-id:reply-to;
- bh=r8MkLirfRd+1eYBUne8MUcSIMDu4+B+icN4ZLFGI96k=;
- b=c4WQwhUkfKkBKJnl7u/qpGOh0oHCvCeJ1A+V7499vqJHEQ5nKifWT7WLvrEOrybB7/
- TDqntR8TXtFosRFYQZ4XGkOVjevPKMbY1CuFwTKdrArtPWEFHIKcC6mj1sH9uC540dpx
- COyRCh6QehHQvaFz3cJD7nvZrcfTdVm3mXl8ShwAiedTDVD9sdZakGb4Z8h0EfY2Gmb7
- O6CdWxmeXbDU08lw1i51s4bGcO0iENgLX0YnfAG5yiNGUsHLg6R8l3XoWGBDiZmlzKJz
- 9vv9+6ncu5fpAShrNjh160HqQ9XwujQocAKXnhkgGWBAt2jQpZ5WR5uD1u0JYRdEUqEz
- wwWw==
+ bh=nwKYDLJebV8nfrFMI0a6Dc+oBkaaAbOXeXeNO1BXXr4=;
+ b=IuVNSOsKQ6zMRtyTx8/XKs+2edbSXgt++x/xSJZR15pqzdAqh0IBguK7AT93tjrI9N
+ 7NGWV33JlCcIADUNLeuYn1rPqNNyV+uyRcN1DbyyNWSScJVdWuK1hcB6K/IYOkRjFgaJ
+ xgzmkQRTIFsNijS6TxUTSUhqgsOT7pYrNXWDIQKf+6iVj6PH3erb49vulv0msuOTgaoB
+ xSuNTV1NJDWt1IHKSp4GndzayiROXW6iP+ooPIUzcajjvhYqmitFznMKL9hoOT3z8BaS
+ peCQDtQ/Mfa5mRg8OF5I4oXkguf4vtyi+c/SmS+CVWu4zwqvdZkTqJhcncTdo87Lj2QJ
+ Swuw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1744887270; x=1745492070;
+ d=1e100.net; s=20230601; t=1744887222; x=1745492022;
  h=references:in-reply-to:message-id:date:subject:cc:to:from
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=r8MkLirfRd+1eYBUne8MUcSIMDu4+B+icN4ZLFGI96k=;
- b=Eodfh47k3A+3LUgMqY279StN0QjRII3EN56KOsIBaXZZTzCwM1xPaHC7Zla03v4UQ/
- O6URbxSh4Z87knIi3/Isger7ODbxY/XfNpN9BiSKEQWHvX4EJOZlkZ2s5J6LHzh1HQj1
- XIkTdYAYOEV8YXf6cwCyk3l4D62WvFdIvkoUT1Cx3CETt2sbFbnYfuomWzy/gYxWSIX/
- lU1amJHU5DmgPhXSoHqJvT/Vj7G1YUXRSUuK50ylEIt+3kasDzJe1stwUfXm72TtWTc0
- gNaMtGUwnGd5O4R7orXF/47Z+hAlNinqbwudLZeK7R+2lcXtdL5BqVTkjZ1DZjq6FVQS
- u+Jg==
+ bh=nwKYDLJebV8nfrFMI0a6Dc+oBkaaAbOXeXeNO1BXXr4=;
+ b=Zt1AJNMDGdyjKAEtNu73rDHRGnsB7HgIm4+NAdBMv46flVTmPYYmAFJp3d0fEIRgxD
+ RZH1zlnwarWMgG0BHeXbRcufrtK6gMHjZwbGvaNeOTQf8XPdTtm1i/1MusxJekyanFIA
+ l9WHm+St9YP61VcYZ8HcbKM4SKlWpzpF35jdPX6U2QjBGmemYxSgLlq4mjbRBxpoyelO
+ XiQXCcVppSYyXH7mnrDlqB/r68sEH2OA/5XPPinGg515gEYfChVuzLIZncUPCgVtmat9
+ Y2HS4OcvIgOYUAFLQQ8b1SS+9NeUYaTbJ7E/ex47ZYD+tueu7zshNWod7ATqh0k0jaGd
+ MyhA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUDc0uJnTWVa6eEsjx4UjKiwHzPoxMx3mAbFf/YgSKLzob2CHyBRnR3WdvMS0i2SC+8RDE5rw4PBCqf@nongnu.org
-X-Gm-Message-State: AOJu0YyaPupOf9wLD844E3EAf3ZvnM5FZMMr0eaweB4J2MK51vnn+aum
- teLdNxh/KAgyjctrmRJCTf8rQbi84Z771IJXolCbGscQqdhFVljX99XjOQO47ZE=
-X-Gm-Gg: ASbGncuHFvda0C8RFwt0Tj27VP6YegTHmBD8hCpDwVd+0e27OUzHtSeLNm+lc3Zs3Ir
- KYFMaOo0MWnPPJaOFsxqUMHCRoxxFEDOCy1N/p6HEWk0HWeGHakzNoteeN2WDK6wG6HX1A3hKft
- bVJs5cUGj1PVekVrmWSkHJfBhy1uL8ap2TfgoAWHudWwtnLkHRgR7/8p81tu7p4Cz+igpzDHTtw
- p2lL3ZMx9l+O1m+/yygGNNTLZGGLGqQ50rGUuzcZyHDPDxNA9lTz5r8HjXlnWJJT7br3y011lE8
- pM08aNgm+MFYqThVdCIC9ykZYqYDfZV9adzlEHVQ8BKSy1YWGgp4hAbGXoxfx0g=
-X-Google-Smtp-Source: AGHT+IElia6RPXyh3KzKaXLcl6TnKXDgngxoI7YijmJNyiQlaxFIOp7ANOpA1cM15IoLDVGO9WH/AA==
-X-Received: by 2002:a05:6a20:d709:b0:1f5:59e5:8ad2 with SMTP id
- adf61e73a8af0-203b3ee9a1dmr8408810637.24.1744887270404; 
- Thu, 17 Apr 2025 03:54:30 -0700 (PDT)
+ AJvYcCVox2BPpfThUbzhi6zRwfmn4PNKiB0CVdgk/UdoE7NoekZZUAVzVTcJWP6oBUhpsm0vHrXryoBku4mU@nongnu.org
+X-Gm-Message-State: AOJu0YwrYQyOtH0tyVsEgrHS7CGI3vv62q3+m5SFBF35vmnty6qIAH0a
+ ajZdZGiGNvgmcoB2Mnx3BuqMY0t5V9JeO2fE3/IQWU1DCJis1DwnLm/eItiV/jI=
+X-Gm-Gg: ASbGncv9OiX0Q8qnZ5YyK1+ZFzVLpHWh1dwBW4gxvzJtiF8K1WcLh/isUHxxzFdTi7a
+ BT3j4HbuOyZMiJA4XROZuU96B4P7NU+pR9Tg+zdmulIvrD9ruVg3yS8PXd2ZGeLSjB9p3i7PiCT
+ yfWa7fLhYF0Zsi94+x5MKXtWUGA2fcpe4A4l64ATb73dkcQqecm+k81dAThqyMuc14tQ+4dvHWR
+ P65w4dodN/LRsYcsb/mjJ8W7W/pld9qfCHNB9ZWqtJuSwBDEBQ0o1alluAmjnUCZfQ003GOHANn
+ wBwFzg05wmjYqvumXodlb2zErHxCpVsuijpABhDz7+IB+07ktLJ9NPbjD2A9hWk=
+X-Google-Smtp-Source: AGHT+IEtAT+0wGCf8mT+gDNa+Ynb8Ljy3iul0+oHiooH2s8FGiapW9pti1/nUioVpzgnp2NNFNq2IQ==
+X-Received: by 2002:a05:6a00:4501:b0:737:6d4b:f5f8 with SMTP id
+ d2e1a72fcca58-73c267d36bdmr7470882b3a.17.1744887221840; 
+ Thu, 17 Apr 2025 03:53:41 -0700 (PDT)
 Received: from hsinchu26.internal.sifive.com ([210.176.154.34])
  by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-73bd230ddaasm12366251b3a.138.2025.04.17.03.54.25
+ d2e1a72fcca58-73bd230ddaasm12366251b3a.138.2025.04.17.03.53.36
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 17 Apr 2025 03:54:30 -0700 (PDT)
+ Thu, 17 Apr 2025 03:53:41 -0700 (PDT)
 From: Jim Shu <jim.shu@sifive.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
@@ -92,15 +92,23 @@ Cc: Richard Henderson <richard.henderson@linaro.org>,
  qemu-ppc@nongnu.org (open list:PowerPC TCG CPUs),
  qemu-s390x@nongnu.org (open list:S390 TCG CPUs),
  Jim Shu <jim.shu@sifive.com>
-Subject: [PATCH v2 16/18] hw/misc: riscv_wgchecker: Implement correct
- block-access behavior
-Date: Thu, 17 Apr 2025 18:52:47 +0800
-Message-Id: <20250417105249.18232-17-jim.shu@sifive.com>
+Subject: [PATCH v2 07/18] target/riscv: Add hard-coded CPU state of WG
+ extension
+Date: Thu, 17 Apr 2025 18:52:38 +0800
+Message-Id: <20250417105249.18232-8-jim.shu@sifive.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20250417105249.18232-1-jim.shu@sifive.com>
 References: <20250417105249.18232-1-jim.shu@sifive.com>
 Received-SPF: pass client-ip=2607:f8b0:4864:20::42b;
  envelope-from=jim.shu@sifive.com; helo=mail-pf1-x42b.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -115,217 +123,75 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-The wgChecker is configurable for whether blocked accesses:
-* should cause a bus error or just read return zero and write ignore
-* should generate the interrupt or not
+Add hard-coded state of WG extension. 'mwid' is the M-mode WID of CPU.
+'mwidlist' is the list of allowed WID value of 'mlwid' CSR.
+
+These CPU states can be set by CPU option, or can be set by machine code
+via newly added APIs. If we want different WG configs of CPUs, we should
+set it by machine code.
 
 Signed-off-by: Jim Shu <jim.shu@sifive.com>
 ---
- hw/misc/riscv_wgchecker.c | 169 +++++++++++++++++++++++++++++++++++++-
- 1 file changed, 167 insertions(+), 2 deletions(-)
+ target/riscv/cpu.h        |  2 ++
+ target/riscv/cpu_cfg.h    |  2 ++
+ target/riscv/cpu_helper.c | 18 ++++++++++++++++++
+ 3 files changed, 22 insertions(+)
 
-diff --git a/hw/misc/riscv_wgchecker.c b/hw/misc/riscv_wgchecker.c
-index 8839d898c9..5d2af7946f 100644
---- a/hw/misc/riscv_wgchecker.c
-+++ b/hw/misc/riscv_wgchecker.c
-@@ -100,6 +100,169 @@ REG32(SLOT_CFG,             0x010)
- #define P_READ                  (1 << 0)
- #define P_WRITE                 (1 << 1)
+diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+index 51e49e03de..ac50928b57 100644
+--- a/target/riscv/cpu.h
++++ b/target/riscv/cpu.h
+@@ -613,6 +613,8 @@ void riscv_cpu_set_aia_ireg_rmw_fn(CPURISCVState *env, uint32_t priv,
+                                    void *rmw_fn_arg);
  
-+static void decode_napot(hwaddr a, hwaddr *sa, hwaddr *ea)
-+{
-+    /*
-+     * aaaa...aaa0   8-byte NAPOT range
-+     * aaaa...aa01   16-byte NAPOT range
-+     * aaaa...a011   32-byte NAPOT range
-+     * ...
-+     * aa01...1111   2^XLEN-byte NAPOT range
-+     * a011...1111   2^(XLEN+1)-byte NAPOT range
-+     * 0111...1111   2^(XLEN+2)-byte NAPOT range
-+     * 1111...1111   Reserved
-+     */
-+
-+    a = FROM_SLOT_ADDR(a) | 0x3;
-+
-+    if (sa) {
-+        *sa = a & (a + 1);
-+    }
-+    if (ea) {
-+        *ea = a | (a + 1);
-+    }
-+}
-+
-+typedef struct WgAccessResult WgAccessResult;
-+struct WgAccessResult {
-+    bool is_success;
-+    bool has_bus_error;
-+    bool has_interrupt;
-+    uint8_t perm:2;
-+};
-+
-+static WgAccessResult wgc_check_access(
-+    RISCVWgCheckerState *s, hwaddr phys_addr, uint32_t wid, bool is_write)
-+{
-+    WgCheckerSlot *slot, *prev_slot;
-+    uint32_t cfg_a, prev_cfg_a;
-+    uint64_t start, end;
-+    int slot_id, wgc_perm = 0;
-+    WgAccessResult result = { 0 };
-+
-+    bool is_matching = false;
-+    bool slot0_be, slot0_ip;
-+    bool matched_slot_be = false, matched_slot_ip = false;
-+
-+    for (slot_id = 0; slot_id < s->slot_count; slot_id++) {
-+        slot = &s->slots[slot_id + 1];
-+        cfg_a = FIELD_EX32(slot->cfg, SLOT_CFG, A);
-+
-+        if (cfg_a == A_TOR) {
-+            prev_slot = &s->slots[slot_id];
-+
-+            prev_cfg_a = FIELD_EX32(prev_slot->cfg, SLOT_CFG, A);
-+            if (prev_cfg_a == A_NA4) {
-+                start = FROM_SLOT_ADDR(prev_slot->addr) + 4;
-+            } else if (prev_cfg_a == A_NAPOT) {
-+                decode_napot(prev_slot->addr, NULL, &start);
-+                start += 1;
-+            } else { /* A_TOR or A_OFF */
-+                start = FROM_SLOT_ADDR(prev_slot->addr);
-+            }
-+            end = FROM_SLOT_ADDR(slot->addr);
-+        } else if (cfg_a == A_NA4) {
-+            start = FROM_SLOT_ADDR(slot->addr);
-+            end = start + 4;
-+        } else if (cfg_a == A_NAPOT) {
-+            decode_napot(slot->addr, &start, &end);
-+            end += 1;
-+        } else {
-+            /* A_OFF: not in slot range. */
-+            continue;
-+        }
-+
-+        /* wgChecker slot range is between start to (end - 1). */
-+        if ((start <= phys_addr) && (phys_addr < end)) {
-+            /* Match the wgC slot */
-+            int perm = ((slot->perm >> (wid * 2)) & 0x3);
-+
-+            /* If any matching rule permits access, the access is permitted. */
-+            wgc_perm |= perm;
-+
-+            /*
-+             * If any matching rule wants to report error (IRQ or Bus Error),
-+             * the denied access should report error.
-+             */
-+            is_matching = true;
-+            if (is_write) {
-+                matched_slot_be |= FIELD_EX64(slot->cfg, SLOT_CFG, EW);
-+                matched_slot_ip |= FIELD_EX64(slot->cfg, SLOT_CFG, IW);
-+            } else {
-+                matched_slot_be |= FIELD_EX64(slot->cfg, SLOT_CFG, ER);
-+                matched_slot_ip |= FIELD_EX64(slot->cfg, SLOT_CFG, IR);
-+            }
-+        }
-+    }
-+
-+    /* If no matching rule, error reporting depends on the slot0's config. */
-+    if (is_write) {
-+        slot0_be = FIELD_EX64(s->slots[0].cfg, SLOT_CFG, EW);
-+        slot0_ip = FIELD_EX64(s->slots[0].cfg, SLOT_CFG, IW);
-+    } else {
-+        slot0_be = FIELD_EX64(s->slots[0].cfg, SLOT_CFG, ER);
-+        slot0_ip = FIELD_EX64(s->slots[0].cfg, SLOT_CFG, IR);
-+    }
-+
-+    result.is_success = is_write ? (wgc_perm & P_WRITE) : (wgc_perm & P_READ);
-+    result.perm = wgc_perm;
-+    if (!result.is_success) {
-+        if (is_matching) {
-+            result.has_bus_error = matched_slot_be;
-+            result.has_interrupt = matched_slot_ip;
-+        } else {
-+            result.has_bus_error = slot0_be;
-+            result.has_interrupt = slot0_ip;
-+        }
-+    }
-+
-+    return result;
-+}
-+
-+static MemTxResult riscv_wgc_handle_blocked_access(
-+    WgCheckerRegion *region, hwaddr addr, uint32_t wid, bool is_write)
-+{
-+    RISCVWgCheckerState *s = RISCV_WGCHECKER(region->wgchecker);
-+    bool be, ip;
-+    WgAccessResult result;
-+    hwaddr phys_addr;
-+
-+    be = FIELD_EX64(s->errcause, ERRCAUSE, BE);
-+    ip = FIELD_EX64(s->errcause, ERRCAUSE, IP);
-+    phys_addr = addr + region->region_offset;
-+
-+    /*
-+     * Check if this blocked access trigger IRQ (Bus Error) or not.
-+     * It depends on wgChecker slot config (cfg.IR/IW/ER/EW bits).
-+     */
-+    result = wgc_check_access(s, phys_addr, wid, is_write);
-+
-+    if (!be && !ip) {
-+        /*
-+         * With either of the be or ip bits is set, further violations do not
-+         * update the errcause or erraddr registers. Also, new interrupts
-+         * cannot be generated until the be and ip fields are cleared.
-+         */
-+        if (result.has_interrupt || result.has_bus_error) {
-+            s->errcause = FIELD_DP64(s->errcause, ERRCAUSE, WID, wid);
-+            s->errcause = FIELD_DP64(s->errcause, ERRCAUSE, R, !is_write);
-+            s->errcause = FIELD_DP64(s->errcause, ERRCAUSE, W, is_write);
-+            s->erraddr = TO_SLOT_ADDR(phys_addr);
-+        }
-+
-+        if (result.has_interrupt) {
-+            s->errcause = FIELD_DP64(s->errcause, ERRCAUSE, IP, 1);
-+            qemu_irq_raise(s->irq);
-+        }
-+
-+        if (result.has_bus_error) {
-+            s->errcause = FIELD_DP64(s->errcause, ERRCAUSE, BE, 1);
-+        }
-+    }
-+
-+    return result.has_bus_error ? MEMTX_ERROR : MEMTX_OK;
-+}
-+
- /*
-  * Accesses only reach these read and write functions if the wgChecker
-  * is blocking them; non-blocked accesses go directly to the downstream
-@@ -109,23 +272,25 @@ static MemTxResult riscv_wgc_mem_blocked_read(void *opaque, hwaddr addr,
-                                                uint64_t *pdata,
-                                                unsigned size, MemTxAttrs attrs)
- {
-+    WgCheckerRegion *region = opaque;
-     uint32_t wid = mem_attrs_to_wid(attrs);
+ RISCVException smstateen_acc_ok(CPURISCVState *env, int index, uint64_t bit);
++void riscv_cpu_set_wg_mwid(CPURISCVState *env, uint32_t mwid);
++void riscv_cpu_set_wg_mwidlist(CPURISCVState *env, uint32_t mwidlist);
+ #endif /* !CONFIG_USER_ONLY */
  
-     trace_riscv_wgc_mem_blocked_read(addr, size, wid);
+ void riscv_cpu_set_mode(CPURISCVState *env, target_ulong newpriv, bool virt_en);
+diff --git a/target/riscv/cpu_cfg.h b/target/riscv/cpu_cfg.h
+index a5b045aa2f..86b6240989 100644
+--- a/target/riscv/cpu_cfg.h
++++ b/target/riscv/cpu_cfg.h
+@@ -196,6 +196,8 @@ struct RISCVCPUConfig {
+     bool pmp;
+     bool debug;
+     bool misa_w;
++    uint32_t mwid;
++    uint32_t mwidlist;
  
-     *pdata = 0;
--    return MEMTX_OK;
-+    return riscv_wgc_handle_blocked_access(region, addr, wid, false);
+     bool short_isa_string;
+ 
+diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+index f4c4b69a3c..2c3a0d903b 100644
+--- a/target/riscv/cpu_helper.c
++++ b/target/riscv/cpu_helper.c
+@@ -231,6 +231,24 @@ void cpu_get_tb_cpu_state(CPURISCVState *env, vaddr *pc,
+     *pflags = flags;
  }
  
- static MemTxResult riscv_wgc_mem_blocked_write(void *opaque, hwaddr addr,
-                                                uint64_t value,
-                                                unsigned size, MemTxAttrs attrs)
++#ifndef CONFIG_USER_ONLY
++void riscv_cpu_set_wg_mwid(CPURISCVState *env, uint32_t mwid)
++{
++    CPUState *cs = env_cpu(env);
++    RISCVCPU *cpu = RISCV_CPU(cs);
++
++    cpu->cfg.mwid = mwid;
++}
++
++void riscv_cpu_set_wg_mwidlist(CPURISCVState *env, uint32_t mwidlist)
++{
++    CPUState *cs = env_cpu(env);
++    RISCVCPU *cpu = RISCV_CPU(cs);
++
++    cpu->cfg.mwidlist = mwidlist;
++}
++#endif /* CONFIG_USER_ONLY */
++
+ RISCVPmPmm riscv_pm_get_pmm(CPURISCVState *env)
  {
-+    WgCheckerRegion *region = opaque;
-     uint32_t wid = mem_attrs_to_wid(attrs);
- 
-     trace_riscv_wgc_mem_blocked_write(addr, value, size, wid);
- 
--    return MEMTX_OK;
-+    return riscv_wgc_handle_blocked_access(region, addr, wid, true);
- }
- 
- static const MemoryRegionOps riscv_wgc_mem_blocked_ops = {
+ #ifndef CONFIG_USER_ONLY
 -- 
 2.17.1
 
