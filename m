@@ -4,90 +4,98 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0B859C369C2
-	for <qemu-riscv@archiver.kernel.org>; Tue, 22 Apr 2025 07:13:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 90821C369C2
+	for <qemu-riscv@archiver.kernel.org>; Tue, 22 Apr 2025 08:01:10 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1u77oQ-0003U8-8Z; Tue, 22 Apr 2025 03:12:58 -0400
+	id 1u78YM-0002oh-AN; Tue, 22 Apr 2025 04:00:26 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1u77oM-0003T2-Cv
- for qemu-riscv@nongnu.org; Tue, 22 Apr 2025 03:12:54 -0400
-Received: from mail-wm1-x32b.google.com ([2a00:1450:4864:20::32b])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1u78YK-0002oM-Se
+ for qemu-riscv@nongnu.org; Tue, 22 Apr 2025 04:00:25 -0400
+Received: from mail-wm1-x333.google.com ([2a00:1450:4864:20::333])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1u77oK-0002hL-8R
- for qemu-riscv@nongnu.org; Tue, 22 Apr 2025 03:12:54 -0400
-Received: by mail-wm1-x32b.google.com with SMTP id
- 5b1f17b1804b1-43cf05f0c3eso34672145e9.0
- for <qemu-riscv@nongnu.org>; Tue, 22 Apr 2025 00:12:51 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1u78YI-0007TH-VR
+ for qemu-riscv@nongnu.org; Tue, 22 Apr 2025 04:00:24 -0400
+Received: by mail-wm1-x333.google.com with SMTP id
+ 5b1f17b1804b1-43cf257158fso31777475e9.2
+ for <qemu-riscv@nongnu.org>; Tue, 22 Apr 2025 01:00:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1745305970; x=1745910770; darn=nongnu.org;
+ d=linaro.org; s=google; t=1745308821; x=1745913621; darn=nongnu.org;
  h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=Docl5Hj1KGZuFaVssYnNvSeAQHUBkOQcmY8C4dhJquM=;
- b=phe074qiSMLkSw+cHxAkL8NpCL2/YqdfpZr+kB8x2pAR+qHd3Fe2x2Nttc5DGPNPcu
- hv7nutTWrsO/JQ3fdJ6KcGqG2RObN4a/LmUXBEVp1xo5nwhhESsua9p7UQH3/XkQhyUH
- aEBCs4zRjbpPG/BxJUeaIyKaGJVAE12pwfZKruIovGTYDVPzPU6X7DfDOLQsJOxJKuSX
- Yx0qxypUCEbPwJW2fZypeAY7swSHkC4xHCr1giBKssMlYGh91OqTsc9OPuUWKgQdaJQK
- ohPJ3nVu5MlGEs8f56jwZtksUuVv2DJlHmxOSm/9cEyK63mBSweNZt6D6+iZZ755WHmq
- R7Qw==
+ :references:to:subject:user-agent:mime-version:date:message-id:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=XQhecFhUt0uSRhihZ4E1MU1NFxNs2sSpQDUgPh/erBs=;
+ b=VQG0AXW29ABVSvwgTuE4qoPGWPnyvLEx+m6wo4sJ6d2k5Py+CkGabkqWV/TLZOIABL
+ 6kyAmetnVeSU4Q+ZAsgUTFIUZzdyPgjhmbQR8/+8xFoomb8c9QGcgDPFjx4ify7l9GWa
+ I57B5Gtnu+nJbzDyEZ2mek6rikLiCtG4IvcQJmLHgXN3KvJSAFkejq3v8OBFFKmeL486
+ tvtuKhZgT0KQKYnnpx/z4wIquopxnopwUU+Vpc0VYfJfnnariw03xu3E7dV3cpYDl3T0
+ ua7C4FU5WIQXk4jUoYqsZ0V1WfKksh5SUZRi00o/yegFh02xWXkxRoYoOvn4IRr9cv7k
+ VIbA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1745305970; x=1745910770;
+ d=1e100.net; s=20230601; t=1745308821; x=1745913621;
  h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :references:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=Docl5Hj1KGZuFaVssYnNvSeAQHUBkOQcmY8C4dhJquM=;
- b=wPgpw3fdQheXQF30Kf9chQsvwPwBOrxRMyXYg8MKcD9R3W5nlsdH/m9isotAeMC6Y7
- H+Uqhkp3P0THZL1BHWBdcH6YXvl0VbPuukl3q1SvFwR7KgZPlE2yGwkkrl4tj5QIYXv2
- GTs6Wg0K1yIcLhX44ahrDIoXNG2TMpsNbXqn7hjEoSPRXP0gT8ZE4gvLxYGPLtC2vN/6
- dUw+OTEC3nv2A20ZnFQAAseIUFljQVo1/q5dmsS4DQdqUKD7449JRxPmDrE0S/yrMYdJ
- 36z6eB6J6s2+w3n7FsX8tDZ6fiQlWTr6yBH6q0f+WU1XqmgCzSMfPUkNvdo9BdzAHT6V
- kX3Q==
+ bh=XQhecFhUt0uSRhihZ4E1MU1NFxNs2sSpQDUgPh/erBs=;
+ b=WLv3sssTrb8MjDhsnGeZTdV9eCLBeuVi+rBK33101fpfaLArPMwbicRr50YhwEUvTs
+ CLmqEYIUwnX0o7wxCnwt3KOlLsq52YG6gpkqYZIpUm+prPc2SnmfMe/ai8KUfnZzHMWu
+ PhcJ4GaS1Vy/AYs0UiMmmYtsegN2Oy6oHjvpt790O700ITpHG6oWSv91SkVMEt+ruYcI
+ Qm1qfYudQ8O0b5DKqxLKSC7ol3QfSOSEB97pSrn3TwCaf8uwZ2gJDfKK2udjWI4cfvDq
+ BB4l3JswtYYbxPD2OpjKfOs7k8S2dqqpiI3X5O4tRpt4E1d5e7ZhnWRXHr5MWV8xXRqD
+ 7oJA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUsc+XDbvmBIr6iebAu4x7hQuPQGeSiY/JVbNOnhdIFlBnMdaWZD/lSFtlhXsdh7JqVDom6Nj925Ft6@nongnu.org
-X-Gm-Message-State: AOJu0YyToPw+x3HRMYjX5hkb0Upqwqlv3+x3Po29CA0iRDKXtd8bHDJw
- 4VLDJw8V5utidrmwAFK986iuj0o5XpwW55tFoo3wKIB2FxMWquv4B6EFr9pdf6c=
-X-Gm-Gg: ASbGncuu/KkwkZOYd3cgiudx8wOC5UWx6GzdpsXgY9xbMqBTmzhorz7OIA/k0ZWq0kn
- S7Ek7YCMY93j6ob6xAPJcFeOzUnLft07mI131QYc1NEOr/3Umg6NK71HJnOzDQNdRrEwjLmRo+i
- 1MySjRZQqdpKPeAkHmto9/C06Ax20qc5uqJkN3nYBsxBtWo55qDrhLLO5WK3731GfYy2Uaj6XpH
- 5Z1OKKnKZ2xzcLksJhai9cm8ZXSAid0LHN+MFytd7F+mwQEIXsXn8OnoN6qzCuTA1vudXycjXBt
- qBccw73I2X/wO6Sjk4hiO/q/2cKuVkdTX+X2LuyxPbctHJ3NgEvRp/Vq0BcEOaLJWtMym5tPWIn
- RA3kQxKRI
-X-Google-Smtp-Source: AGHT+IElL/tFb1ynYyULmMOE8McfBaRUjjkA+SXaPmkXPnaeuUoq8ct1nQZM8d0rnWA/qctYNwbJpQ==
-X-Received: by 2002:a05:600c:3555:b0:43c:fa3f:8e5d with SMTP id
- 5b1f17b1804b1-4406ab7efd0mr134064745e9.2.1745305970025; 
- Tue, 22 Apr 2025 00:12:50 -0700 (PDT)
+ AJvYcCX9KIWvaGKfR29lxkFXMmNYRtOwzI4RJKDCUNBr6qPYv1SLmXZpzto790lZQ3wWmE7rC0MyugaPj3hG@nongnu.org
+X-Gm-Message-State: AOJu0YzLdCPQUpAg+/iuyc0rAV1gVJx0WuMFHv7ZGUO7CneVobMq1eUC
+ AK7hEpA+uaUbNK3UJNMPxWXQs2LmstEF/fjG+mIbJA8QwRHjQ8UWkZchyNftHzk=
+X-Gm-Gg: ASbGncupFUdyIcg130Zb6WM9IM81f5Mtp+8T4zICbu6CYhZ3KuNuy94xd1i47BzsrJ/
+ rfx6aQVYtRDsTaAhe2FbMyW3GyNRJoglKhEuITpMaT0E+3e5n+/uy38IT/NVAFlSarf50ZvCEcG
+ UQ0rKZ7rCKeddh0xTtnr/K8Rr04okX9uUe0vtcvXXJsbQIFG7GYASJOXeHA8c6wp2cdaUM6ziGf
+ PGUtiGicNBgKJ53TOOzsGxdei8DmT3CfJdb6Nyr+5UOKRHlOtBuq8XiGwxQzD5CdfdNu6f7Mqgs
+ SsTkymuofFQM6S7agfITIb783cNtNXb//w98/d9ZNWUfIlp4l33nmwSwsChqX4/woZ7dbwiVRdu
+ c14UEoPgo
+X-Google-Smtp-Source: AGHT+IFfJp4Bc6zt4wTIvHO/z4cA5Qhg+02hJvNDChtgMI3w3TKC6EGRgLVN/9qGkeBz0z2r/QmpYg==
+X-Received: by 2002:a05:600c:5395:b0:43d:db5:7b1a with SMTP id
+ 5b1f17b1804b1-4406ab96f63mr135440195e9.12.1745308820916; 
+ Tue, 22 Apr 2025 01:00:20 -0700 (PDT)
 Received: from [192.168.69.169] (88-187-86-199.subs.proxad.net.
  [88.187.86.199]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4406d5cf2easm161743415e9.31.2025.04.22.00.12.48
+ ffacd0b85a97d-39efa4a4be2sm14065833f8f.83.2025.04.22.01.00.19
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 22 Apr 2025 00:12:48 -0700 (PDT)
-Message-ID: <a2f973a8-e0c4-4eb5-9f4c-bc0f0d1ce123@linaro.org>
-Date: Tue, 22 Apr 2025 09:12:48 +0200
+ Tue, 22 Apr 2025 01:00:20 -0700 (PDT)
+Message-ID: <2b3ca5a6-a2fb-414b-bbcf-f2ec9ce2df28@linaro.org>
+Date: Tue, 22 Apr 2025 10:00:19 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] MAINTAINERS: Add common-user/host/riscv to RISC-V section
-To: Alistair Francis <alistair23@gmail.com>, palmer@dabbelt.com,
- liwei1518@gmail.com, dbarboza@ventanamicro.com,
- zhiwei_liu@linux.alibaba.com, qemu-riscv@nongnu.org, uwu@icenowy.me
-Cc: qemu-devel@nongnu.org, Alistair Francis <alistair.francis@wdc.com>
-References: <20250422024752.2060289-1-alistair.francis@wdc.com>
+Subject: Re: [PATCH] acpi: Add machine option to disable SPCR table
+To: Li Chen <me@linux.beauty>, Peter Maydell <peter.maydell@linaro.org>,
+ Shannon Zhao <shannon.zhaosl@gmail.com>, "Michael S. Tsirkin"
+ <mst@redhat.com>, Igor Mammedov <imammedo@redhat.com>,
+ Ani Sinha <anisinha@redhat.com>, Eduardo Habkost <eduardo@habkost.net>,
+ Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
+ Yanan Wang <wangyanan55@huawei.com>, Zhao Liu <zhao1.liu@intel.com>,
+ Song Gao <gaosong@loongson.cn>, Bibo Mao <maobibo@loongson.cn>,
+ Jiaxun Yang <jiaxun.yang@flygoat.com>, Sunil V L <sunilvl@ventanamicro.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, Weiwei Li
+ <liwei1518@gmail.com>, qemu-arm@nongnu.org, qemu-devel@nongnu.org,
+ qemu-riscv@nongnu.org
+References: <87a588wsc9.wl-me@linux.beauty>
 Content-Language: en-US
 From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-In-Reply-To: <20250422024752.2060289-1-alistair.francis@wdc.com>
+In-Reply-To: <87a588wsc9.wl-me@linux.beauty>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::32b;
- envelope-from=philmd@linaro.org; helo=mail-wm1-x32b.google.com
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::333;
+ envelope-from=philmd@linaro.org; helo=mail-wm1-x333.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -103,12 +111,43 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 22/4/25 04:47, Alistair Francis wrote:
-> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
-> ---
->   MAINTAINERS | 1 +
->   1 file changed, 1 insertion(+)
+Hi,
 
-Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+On 22/4/25 09:47, Li Chen wrote:
+> From: Li Chen <chenl311@chinatelecom.cn>
+> 
+> The ACPI SPCR (Serial Port Console Redirection) table allows firmware
+> to specify a preferred serial console device to the operating system.
+> On ARM64 systems, Linux by default respects this table: even if the
+> kernel command line does not include a hardware serial console (e.g.,
+> "console=ttyAMA0"), the kernel still register the serial device
+> referenced by SPCR as a printk console.
+> 
+> While this behavior is standard-compliant, it can lead to situations
+> where guest console behavior is influenced by platform firmware rather
+> than user-specified configuration. To make guest console behavior more
+> predictable and under user control, this patch introduces a machine
+> option to explicitly disable SPCR table exposure:
+> 
+>      -machine spcr=off
+
+Please add some tests in tests/qtest/bios-tables-test.c.
+
+> 
+> By default, the option is enabled (spcr=on), preserving existing
+> behavior. When disabled, QEMU will omit the SPCR table from the guest's
+> ACPI namespace, ensuring that only consoles explicitly declared in the
+> kernel command line are registered.
+> 
+> Signed-off-by: Li Chen <chenl311@chinatelecom.cn>
+> ---
+>   hw/arm/virt-acpi-build.c       |  5 ++++-
+>   hw/core/machine.c              | 22 ++++++++++++++++++++++
+>   hw/loongarch/virt-acpi-build.c |  4 +++-
+>   hw/riscv/virt-acpi-build.c     |  5 ++++-
+>   include/hw/boards.h            |  1 +
+>   qemu-options.hx                |  5 +++++
+>   6 files changed, 39 insertions(+), 3 deletions(-)
+
 
 
