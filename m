@@ -4,81 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B4F63C369C2
-	for <qemu-riscv@archiver.kernel.org>; Tue, 22 Apr 2025 15:26:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 82C85C369C2
+	for <qemu-riscv@archiver.kernel.org>; Tue, 22 Apr 2025 22:35:47 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1u7FVe-0007fJ-Df; Tue, 22 Apr 2025 11:26:06 -0400
+	id 1u7MDG-0004VB-GL; Tue, 22 Apr 2025 18:35:34 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <me@linux.beauty>)
- id 1u7FVT-0007cS-Fu; Tue, 22 Apr 2025 11:25:58 -0400
-Received: from sender4-op-o12.zoho.com ([136.143.188.12])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <me@linux.beauty>)
- id 1u7FVR-0000rj-42; Tue, 22 Apr 2025 11:25:54 -0400
-ARC-Seal: i=1; a=rsa-sha256; t=1745335519; cv=none; 
- d=zohomail.com; s=zohoarc; 
- b=JVWoWIJfxZjZI3v/+vk0fOJ5JBn689G3Z/mFyadR8aQ5Uc7TUan2YPp9kG0q96Tkv0I6zv7TpWTf0ZN2W27jGKLgPpNDfsAsGNOMCRTnyojN5RYZBBfSzFFzzFbBn8RoT7yYgXjBuA4Bjtb9dpYZWzsQaaq9E5Z4tIlUmiwC8Oo=
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com;
- s=zohoarc; t=1745335519;
- h=Content-Type:Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To;
- bh=8TUOAK4dfw6psyhRy6BzmcaE9jy5HibvFtdX8sbr7os=; 
- b=I5OzcM/Tv3BxrZ5rpTJfKYny6Z+3DKJ0MHSDxsQ/WoNYEJO2sHAe9Dv1viDLQpELLujlXPWkyw3lLYaJUjZvGVKhFW4LTWylsWfD3BFNO+/AgC+FqJYoXDhfzKRevzOc6UUN7HtCJvzjpMkzUmfEN20HPAy5GJW5IwtDD34kk0E=
-ARC-Authentication-Results: i=1; mx.zohomail.com;
- dkim=pass  header.i=linux.beauty;
- spf=pass  smtp.mailfrom=me@linux.beauty;
- dmarc=pass header.from=<me@linux.beauty>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1745335519; 
- s=zmail; d=linux.beauty; i=me@linux.beauty;
- h=Date:Date:From:From:To:To:Cc:Cc:Message-ID:In-Reply-To:References:Subject:Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:Reply-To;
- bh=8TUOAK4dfw6psyhRy6BzmcaE9jy5HibvFtdX8sbr7os=;
- b=EcRIdbZf06OSmwXgSDT1vEHTaY5ETM/lz1xw2LaCLIaLIeavhp0j9tHH1/hBvAXG
- ZJOlWOczRwJRVmcCUVpFXF/oMiAlTzGMisy53ZqsqMbIaRqGlagyO12GI9Yrhp7jJ7B
- gRtI74imOtjfdgALrXOZKyy7IHwoaefC0Z4ucAVc=
-Received: from mail.zoho.com by mx.zohomail.com
- with SMTP id 1745335518281881.1837526050226;
- Tue, 22 Apr 2025 08:25:18 -0700 (PDT)
-Date: Tue, 22 Apr 2025 23:25:18 +0800
-From: Li Chen <me@linux.beauty>
-To: =?UTF-8?Q?=22Philippe_Mathieu-Daud=C3=A9=22?= <philmd@linaro.org>
-Cc: "Peter Maydell" <peter.maydell@linaro.org>,
- "Shannon Zhao" <shannon.zhaosl@gmail.com>,
- "Michael S. Tsirkin" <mst@redhat.com>,
- "Igor Mammedov" <imammedo@redhat.com>, "Ani Sinha" <anisinha@redhat.com>,
- "Eduardo Habkost" <eduardo@habkost.net>,
- "Marcel Apfelbaum" <marcel.apfelbaum@gmail.com>,
- "Yanan Wang" <wangyanan55@huawei.com>,
- "Zhao Liu" <zhao1.liu@intel.com>, "Song Gao" <gaosong@loongson.cn>,
- "Jiaxun Yang" <jiaxun.yang@flygoat.com>,
- "Sunil V L" <sunilvl@ventanamicro.com>,
- "Palmer Dabbelt" <palmer@dabbelt.com>,
- "Alistair Francis" <alistair.francis@wdc.com>,
- "Weiwei Li" <liwei1518@gmail.com>, "qemu-arm" <qemu-arm@nongnu.org>,
- "qemu-devel" <qemu-devel@nongnu.org>, "qemu-riscv" <qemu-riscv@nongnu.org>
-Message-ID: <1965e1a8431.cb206d1e1037721.7771287202770929929@linux.beauty>
-In-Reply-To: <c67391b9-297f-478b-aea5-c27b0dba6cfd@linaro.org>
-References: <1965d621e25.fafa759e911037.825810937022699867@linux.beauty>
- <1965d6357a1.dfa9d35b911644.778874035603636753@linux.beauty>
- <c67391b9-297f-478b-aea5-c27b0dba6cfd@linaro.org>
-Subject: Re: [PATCH V2 1/3] acpi: Add machine option to disable SPCR table
+ (Exim 4.90_1) (envelope-from <debug@rivosinc.com>)
+ id 1u7MD6-0004TL-JY
+ for qemu-riscv@nongnu.org; Tue, 22 Apr 2025 18:35:28 -0400
+Received: from mail-pg1-x52a.google.com ([2607:f8b0:4864:20::52a])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <debug@rivosinc.com>)
+ id 1u7MD2-00024Z-Nc
+ for qemu-riscv@nongnu.org; Tue, 22 Apr 2025 18:35:24 -0400
+Received: by mail-pg1-x52a.google.com with SMTP id
+ 41be03b00d2f7-af5085f7861so3985112a12.3
+ for <qemu-riscv@nongnu.org>; Tue, 22 Apr 2025 15:35:19 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1745361317; x=1745966117;
+ darn=nongnu.org; 
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=Nm9FPhOGujzcuwc0fqA5mk8oSCUhAkJUmvwSiBQ8E6k=;
+ b=wLmuMwsXHs7t/s754vJMbMxv3/4kWqyDR3oPwkQje7voZerbTl9k5gxzadZEcXrssL
+ Y2bAoFn9BcM8zcqQVnvAmWzDVCzxhTQVEfiBX2/AiJNqeVk/3Be3/MqfP1ns2a94A/ms
+ yNzigb34aAUqyBiMnkMTk8oVnPYQk+pqjbE/eypToKLacSqjHG3oL/Rs/OJbNvdryFFj
+ 5gsjNMg/DGok7jzQN0woYYckiJ3BXM7OSBI6LIMnrG3AEXtEZkYpFbrblfB551KdO219
+ l7HJQP5X3vTBbN0DsKE2Oj3hOyFwAz+bJzrMcgOQq+xaDHds+Q14PUcn/YYcm9JgiZdd
+ FaAQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1745361317; x=1745966117;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=Nm9FPhOGujzcuwc0fqA5mk8oSCUhAkJUmvwSiBQ8E6k=;
+ b=MybF5DLt7he0hRGtw1hLz8k9ACtfX9y9J+34VlB6fAMi+WRi/3lXXKFF+yvbBI4z72
+ mMa9NZF2IAphIzzfK98CjDUypZWyzL9mbWp4otDvyfdipVCCPVZ2I7S9a+5wMD3lCsop
+ bIrrav4ujRn+5ewhEczAwOwfTtehtt/azmGwelCkmBZRuGV5EwuqtnMojRFJCQUFpELs
+ p7csOjqrphNiiUuysZiasoo0Ws8oFmne7VAZambv+GqV6Z46g3ExHesLDDjo6ZDfutpR
+ oR3VZGIK01T9TSe2cja/5U99ytQJzv9iUb8B8/Pl1ARNbd4b2pBAKJ1yJOeEwRqfSMaO
+ qnIQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXisW89H8qBsN4RmF74G6vGpCI+TV7HIScxxRWjJvDHCYQT2nskw2a8M+elTqaDrGRrTtkCa3v+J6He@nongnu.org
+X-Gm-Message-State: AOJu0Yw51F71YYfv2gZv3xhUyLn2qsWqm2+yr0rRcVZDqgWCtkS/A2Vr
+ pjWktbHT0yIp3S2Q1fo/cButbw7MZEAIeSVJiCzIEZJ3MNN1pH999NthORpXows=
+X-Gm-Gg: ASbGncvGO8w1PZMCspFOE5vO+F7un2zokUZuBXSkrVWzFID6U3ODR619z28SpCVUdv5
+ ECAkvEHwoRpo8LGel/Nzi6gURmb1x/kzI338mb+MvnmxShaSZus+P0BZWt9DpcoVRY5Tk67J4kl
+ nQKgyJ0983IGzbBVXI1THV8uLKOpUeY1sSb9hB8nVG8pV6U0pvnFywoSazEYpDSIiMmCu3AFYZp
+ 0hrSOFcfTjyNwBP8iUAve3rPDhFB/HlMDJSZXQHqz2TprdNwffdcSWnBC3vWWW2njukZG2YWzLR
+ EgNDkOPMZ8LVIxfhRo8Bl90zucYEi9/KvHFIuVCqTe6hyO2YCmd7n62lW86SiA==
+X-Google-Smtp-Source: AGHT+IGRtNpcl084SxWJilu3P0E37ULqbnojQ/fPwBeTCEGXrb+sfYtrDiO3cdjyXzbI3RkIBLZUPQ==
+X-Received: by 2002:a17:902:f681:b0:224:18bb:44c2 with SMTP id
+ d9443c01a7336-22c53472982mr209857705ad.6.1745361317619; 
+ Tue, 22 Apr 2025 15:35:17 -0700 (PDT)
+Received: from debug.ba.rivosinc.com ([64.71.180.162])
+ by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-22c50eb491asm90813795ad.116.2025.04.22.15.35.16
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 22 Apr 2025 15:35:17 -0700 (PDT)
+Date: Tue, 22 Apr 2025 15:35:15 -0700
+From: Deepak Gupta <debug@rivosinc.com>
+To: Alexandre Ghiti <alexghiti@rivosinc.com>
+Cc: Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Bin Meng <bin.meng@windriver.com>, Weiwei Li <liwei1518@gmail.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, qemu-riscv@nongnu.org,
+ qemu-devel@nongnu.org
+Subject: Re: [PATCH RFC] target: riscv: Add Svrsw60b59b extension support
+Message-ID: <aAgZo68nLYdm186S@debug.ba.rivosinc.com>
+References: <20250314104833.369365-1-alexghiti@rivosinc.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Importance: Medium
-User-Agent: Zoho Mail
-X-Mailer: Zoho Mail
-Received-SPF: pass client-ip=136.143.188.12; envelope-from=me@linux.beauty;
- helo=sender4-op-o12.zoho.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_VALIDITY_CERTIFIED_BLOCKED=0.001,
- RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+Content-Type: text/plain; charset=us-ascii; format=flowed
+Content-Disposition: inline
+In-Reply-To: <20250314104833.369365-1-alexghiti@rivosinc.com>
+Received-SPF: pass client-ip=2607:f8b0:4864:20::52a;
+ envelope-from=debug@rivosinc.com; helo=mail-pg1-x52a.google.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -94,54 +104,96 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Hi Philippe Mathieu-Daud=C3=A9,
+On Fri, Mar 14, 2025 at 11:48:33AM +0100, Alexandre Ghiti wrote:
+>The Svrsw60b59b extension allows to free the PTE reserved bits 60 and 59
+>for software to use.
 
-Thanks for your review!
+Apart from what you already caught.
+Extension is dependnet on Sv39. So it should be validated somewhere.
+Perhaps in `riscv_cpu_validate_set_extensions` (target/riscv/tcg/tcg-cpu.c).
 
- ---- On Tue, 22 Apr 2025 21:18:46 +0800  Philippe Mathieu-Daud=C3=A9 <phil=
-md@linaro.org> wrote ---=20
- > Hi,
- >=20
- > On 22/4/25 14:05, Li Chen wrote:
- > > diff --git a/include/hw/boards.h b/include/hw/boards.h
- > > index f22b2e7fc7..cdf2791a50 100644
- > > --- a/include/hw/boards.h
- > > +++ b/include/hw/boards.h
- > > @@ -444,6 +444,7 @@ struct MachineState {
- > >       SmpCache smp_cache;
- > >       struct NVDIMMState *nvdimms_state;
- > >       struct NumaState *numa_state;
- > > +    bool enable_spcr;
- >=20
- > I'm a bit reluctant to add a field used by 3 virt machines as
- > generic in MachineState. Shouldn't it be for each machine state?
-
-I looked for alternative locations for this field before submitting v1 but =
-couldn't find any.
-I re-evaluated potential locations, like struct AcpiBuildState, but ARM, Lo=
-ongArch, and RISC-V=20
-just use their own AcpiBuildState.
-
-BTW, ACPI-supporting virtual machines may eventually adopt SPCR. Although c=
-urrent there=20
-are just three users, future adoption is probable, making it a suitable fie=
-ld for each machine state.
-
-Feel free to tell me if you have any other suggestions.
-
- >=20
- > Also I'm surprised we announce the SPCR table regardless a virt
- > serial exists. Shouldn't we have a disabled default and only
- > enable on virt machines, preferably checking the serial port
- > availability?
-
-So you mean we should avoid building SPCR for cases like "-serial none"? If=
- so, I can add a patch to check serial
-device availability before doing spcr_setup in  ARM/RISC-V/LoongArch codes.=
-=20
-Should this change be the first patch in this series, or just a separate se=
-ries?
-
-Regards,
-Li
+>
+>Signed-off-by: Alexandre Ghiti <alexghiti@rivosinc.com>
+>---
+>
+>I tested it by always setting the bits 60 and 59 in Linux which booted
+>fine.
+>
+> target/riscv/cpu.c        | 2 ++
+> target/riscv/cpu_bits.h   | 3 ++-
+> target/riscv/cpu_cfg.h    | 1 +
+> target/riscv/cpu_helper.c | 3 ++-
+> 4 files changed, 7 insertions(+), 2 deletions(-)
+>
+>diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+>index 3d4bd157d2..ee89cdef46 100644
+>--- a/target/riscv/cpu.c
+>+++ b/target/riscv/cpu.c
+>@@ -219,6 +219,7 @@ const RISCVIsaExtData isa_edata_arr[] = {
+>     ISA_EXT_DATA_ENTRY(svinval, PRIV_VERSION_1_12_0, ext_svinval),
+>     ISA_EXT_DATA_ENTRY(svnapot, PRIV_VERSION_1_12_0, ext_svnapot),
+>     ISA_EXT_DATA_ENTRY(svpbmt, PRIV_VERSION_1_12_0, ext_svpbmt),
+>+    ISA_EXT_DATA_ENTRY(svrsw60b59b, PRIV_VERSION_1_13_0, ext_svrsw60b59b),
+>     ISA_EXT_DATA_ENTRY(svukte, PRIV_VERSION_1_13_0, ext_svukte),
+>     ISA_EXT_DATA_ENTRY(svvptc, PRIV_VERSION_1_13_0, ext_svvptc),
+>     ISA_EXT_DATA_ENTRY(xtheadba, PRIV_VERSION_1_11_0, ext_xtheadba),
+>@@ -1644,6 +1645,7 @@ const RISCVCPUMultiExtConfig riscv_cpu_extensions[] = {
+>     MULTI_EXT_CFG_BOOL("svinval", ext_svinval, false),
+>     MULTI_EXT_CFG_BOOL("svnapot", ext_svnapot, false),
+>     MULTI_EXT_CFG_BOOL("svpbmt", ext_svpbmt, false),
+>+    MULTI_EXT_CFG_BOOL("svrsw60b59b", ext_svrsw60b59b, false),
+>     MULTI_EXT_CFG_BOOL("svvptc", ext_svvptc, true),
+>
+>     MULTI_EXT_CFG_BOOL("zicntr", ext_zicntr, true),
+>diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
+>index f97c48a394..71f9e603c5 100644
+>--- a/target/riscv/cpu_bits.h
+>+++ b/target/riscv/cpu_bits.h
+>@@ -663,7 +663,8 @@ typedef enum {
+> #define PTE_SOFT            0x300 /* Reserved for Software */
+> #define PTE_PBMT            0x6000000000000000ULL /* Page-based memory types */
+> #define PTE_N               0x8000000000000000ULL /* NAPOT translation */
+>-#define PTE_RESERVED        0x1FC0000000000000ULL /* Reserved bits */
+>+#define PTE_RESERVED(svrsw60b59b)		\
+>+		(svrsw60b59b ? 0x07C0000000000000ULL : 0x1FC0000000000000ULL) /* Reserved bits */
+> #define PTE_ATTR            (PTE_N | PTE_PBMT) /* All attributes bits */
+>
+> /* Page table PPN shift amount */
+>diff --git a/target/riscv/cpu_cfg.h b/target/riscv/cpu_cfg.h
+>index b410b1e603..f6e4b0068a 100644
+>--- a/target/riscv/cpu_cfg.h
+>+++ b/target/riscv/cpu_cfg.h
+>@@ -89,6 +89,7 @@ struct RISCVCPUConfig {
+>     bool ext_svinval;
+>     bool ext_svnapot;
+>     bool ext_svpbmt;
+>+    bool ext_svrsw60b59b;
+>     bool ext_svvptc;
+>     bool ext_svukte;
+>     bool ext_zdinx;
+>diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+>index e1dfc4ecbf..6546cea403 100644
+>--- a/target/riscv/cpu_helper.c
+>+++ b/target/riscv/cpu_helper.c
+>@@ -1156,6 +1156,7 @@ static int get_physical_address(CPURISCVState *env, hwaddr *physical,
+>     bool svade = riscv_cpu_cfg(env)->ext_svade;
+>     bool svadu = riscv_cpu_cfg(env)->ext_svadu;
+>     bool adue = svadu ? env->menvcfg & MENVCFG_ADUE : !svade;
+>+    bool svrsw60b59b = riscv_cpu_cfg(env)->ext_svrsw60b59b;
+>
+>     if (first_stage && two_stage && env->virt_enabled) {
+>         pbmte = pbmte && (env->henvcfg & HENVCFG_PBMTE);
+>@@ -1225,7 +1226,7 @@ restart:
+>         if (riscv_cpu_sxl(env) == MXL_RV32) {
+>             ppn = pte >> PTE_PPN_SHIFT;
+>         } else {
+>-            if (pte & PTE_RESERVED) {
+>+            if (pte & PTE_RESERVED(svrsw60b59b)) {
+>                 return TRANSLATE_FAIL;
+>             }
+>
+>-- 
+>2.39.2
+>
+>
 
