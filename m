@@ -4,45 +4,45 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2BD8DC369CB
-	for <qemu-riscv@archiver.kernel.org>; Wed, 23 Apr 2025 08:29:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8CE8CC369D3
+	for <qemu-riscv@archiver.kernel.org>; Wed, 23 Apr 2025 08:38:17 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1u7VT3-0007Lh-4x; Wed, 23 Apr 2025 04:28:29 -0400
+	id 1u7Vbr-0004Nf-Uz; Wed, 23 Apr 2025 04:37:36 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <me@linux.beauty>)
- id 1u7VSr-0007Gw-5Q; Wed, 23 Apr 2025 04:28:17 -0400
-Received: from sender4-op-o12.zoho.com ([136.143.188.12])
+ id 1u7Vbm-0004Lz-OP; Wed, 23 Apr 2025 04:37:30 -0400
+Received: from sender3-op-o12.zoho.com ([136.143.184.12])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <me@linux.beauty>)
- id 1u7VSo-0000WS-Lv; Wed, 23 Apr 2025 04:28:16 -0400
-ARC-Seal: i=1; a=rsa-sha256; t=1745396851; cv=none; 
+ id 1u7Vbk-0001UK-ET; Wed, 23 Apr 2025 04:37:30 -0400
+ARC-Seal: i=1; a=rsa-sha256; t=1745397416; cv=none; 
  d=zohomail.com; s=zohoarc; 
- b=YdzEuxqFMoPtVxAGLjnyV74uP/wVJDnew7k4ogiZYiB7fyB5XHOJ4uDjIIIKv5DKzLUARxuaYQGIaVTUgrnRGTM1F+oaJACCd4Du8O9fmWdVDsf9oHxr/J7AN0MU2L/4mzmCwDiKdo4pnkysgK2cIb7UG+bh2AhQ7NFZmMxBZgs=
+ b=YtF4t0iDxtwaNOQIXHKE7ymALitrDIsAjyAZQSGge9wSAuckqFrZys1R0GY5dt9a1i/iYYT3+OlNK6pCxEe1sYO3DBlr9O7EVHDwJmMr3tBC/oVrc8/UVsgEv0ip1nrBg9uyQ+7SJKi6nlqcKYNSsPRcc2eP5ih3apSSU5K4CKQ=
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com;
- s=zohoarc; t=1745396851;
+ s=zohoarc; t=1745397416;
  h=Content-Type:Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To;
- bh=3qxON4cikCwnWixyHU7Gsc9w5gqqY/duKNxswVYWL5Y=; 
- b=QK5mDNiAdtaFYvjX4NhMhki10aNTF2vBQldIkyiPhLWtFTSa5ZEVCoc7raN+B/sBd3bGc9EInkE2Wu07ChT2z5qbobZaG+4dR5RzWwUIMz8T2POeGJw7sMukU17wFTFGGm4T8I0PKW1djVnphTAA8aJlewg22babp9md5acZmQE=
+ bh=DLiG68aWG2qKmHUEF0B4qSFIJB1PTuOxaDN+OdB1NFc=; 
+ b=kJIhQaXyIW1TOpoHHE7/Pil4IIyTVHVy7/vu0/wxAFbJdwOoYPGKjv3300WSeHmZIfH6Rl0UcJbd7xs5CSErRw6luKPMqusi8O/TKV2zDDi9ToYb5XXPaKD3xwtdWFNQMjOV7M+1rVEbYEvn/xONG0ilBkvNImrOKy7SeNOT9a4=
 ARC-Authentication-Results: i=1; mx.zohomail.com;
  dkim=pass  header.i=linux.beauty;
  spf=pass  smtp.mailfrom=me@linux.beauty;
  dmarc=pass header.from=<me@linux.beauty>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1745396851; 
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1745397416; 
  s=zmail; d=linux.beauty; i=me@linux.beauty;
  h=Date:Date:From:From:To:To:Cc:Cc:Message-ID:In-Reply-To:References:Subject:Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:Reply-To;
- bh=3qxON4cikCwnWixyHU7Gsc9w5gqqY/duKNxswVYWL5Y=;
- b=s9KKbNJAtShv4+yPYxiPzBqPxSdtQkjOAuuoM4tN3rbfN85s/1T7pG5Eedx+owu9
- SShTFgLcnrjnvD9cj92Q3OEEITWdYdneIoYvcnmw5Yp+oLYnJAuehVqW0DcihfVKzza
- O4Mk8Xa+WekyavZvKMAiHmlFXvaFzIB3ZUaGDWD8=
+ bh=DLiG68aWG2qKmHUEF0B4qSFIJB1PTuOxaDN+OdB1NFc=;
+ b=oyPjF0UR4TCVL8GBfQ3v3tLbsLTb6SA8/G8L88fwDZpSEsY+rLH0g0L46A1XJgzB
+ KZxV4YiYykTSLo9er0U+anUjF2BC3Sjo63H8h/5AM/NK5lHL5pAOXElPpG1qarwYCGx
+ 5MOaHNIpYLB99PnCrFHxcqUlmsdjZ6fwighvQLDw=
 Received: from mail.zoho.com by mx.zohomail.com
- with SMTP id 1745396846882271.25102254364424;
- Wed, 23 Apr 2025 01:27:26 -0700 (PDT)
-Date: Wed, 23 Apr 2025 16:27:26 +0800
+ with SMTP id 1745397413734890.1693772533544;
+ Wed, 23 Apr 2025 01:36:53 -0700 (PDT)
+Date: Wed, 23 Apr 2025 16:36:53 +0800
 From: Li Chen <me@linux.beauty>
-To: "Gavin Shan" <gshan@redhat.com>
+To: "bibo mao" <maobibo@loongson.cn>
 Cc: "Peter Maydell" <peter.maydell@linaro.org>,
  "Shannon Zhao" <shannon.zhaosl@gmail.com>,
  "Michael S. Tsirkin" <mst@redhat.com>,
@@ -58,28 +58,26 @@ Cc: "Peter Maydell" <peter.maydell@linaro.org>,
  "Alistair Francis" <alistair.francis@wdc.com>,
  "Weiwei Li" <liwei1518@gmail.com>, "qemu-arm" <qemu-arm@nongnu.org>,
  "qemu-devel" <qemu-devel@nongnu.org>, "qemu-riscv" <qemu-riscv@nongnu.org>
-Message-ID: <19661c250ff.e53d27651300291.7831062716952492543@linux.beauty>
-In-Reply-To: <2bbfd5d1-be8a-41aa-822f-4c38449b79a7@redhat.com>
+Message-ID: <19661caf736.1119e56341303707.7495372918825001957@linux.beauty>
+In-Reply-To: <dea44766-af4a-98ad-54fb-bee8fe647d3f@loongson.cn>
 References: <1965d621e25.fafa759e911037.825810937022699867@linux.beauty>
- <1965d6357a1.dfa9d35b911644.778874035603636753@linux.beauty>
- <2bbfd5d1-be8a-41aa-822f-4c38449b79a7@redhat.com>
-Subject: Re: [PATCH V2 1/3] acpi: Add machine option to disable SPCR table
+ <dea44766-af4a-98ad-54fb-bee8fe647d3f@loongson.cn>
+Subject: Re: [PATCH V2 0/3] acpi: Add machine option to disable SPCR table
 MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: quoted-printable
 Importance: Medium
 User-Agent: Zoho Mail
 X-Mailer: Zoho Mail
-Received-SPF: pass client-ip=136.143.188.12; envelope-from=me@linux.beauty;
- helo=sender4-op-o12.zoho.com
+Received-SPF: pass client-ip=136.143.184.12; envelope-from=me@linux.beauty;
+ helo=sender3-op-o12.zoho.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_VALIDITY_CERTIFIED_BLOCKED=0.001,
- RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ RCVD_IN_VALIDITY_CERTIFIED_BLOCKED=0.001, RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -95,53 +93,38 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Hi Gavin,
+Hi Bibo,
 
- ---- On Wed, 23 Apr 2025 08:11:24 +0800  Gavin Shan <gshan@redhat.com> wrote --- 
- > On 4/22/25 10:05 PM, Li Chen wrote:
- > > From: Li Chen <chenl311@chinatelecom.cn>
- > > 
- > > The ACPI SPCR (Serial Port Console Redirection) table allows firmware
- > > to specify a preferred serial console device to the operating system.
- > > On ARM64 systems, Linux by default respects this table: even if the
- > > kernel command line does not include a hardware serial console (e.g.,
- > > "console=ttyAMA0"), the kernel still register the serial device
- > > referenced by SPCR as a printk console.
- > > 
- > > While this behavior is standard-compliant, it can lead to situations
- > > where guest console behavior is influenced by platform firmware rather
- > > than user-specified configuration. To make guest console behavior more
- > > predictable and under user control, this patch introduces a machine
- > > option to explicitly disable SPCR table exposure:
- > > 
- > >      -machine spcr=off
- > > 
- > > By default, the option is enabled (spcr=on), preserving existing
- > > behavior. When disabled, QEMU will omit the SPCR table from the guest's
- > > ACPI namespace, ensuring that only consoles explicitly declared in the
- > > kernel command line are registered.
- > > 
- > > Signed-off-by: Li Chen <chenl311@chinatelecom.cn>
- > > Reviewed-by: Bibo Mao <maobibo@loongson.cn>
- > > Acked-by: Michael S. Tsirkin <mst@redhat.com>
- > > ---
- > > 
- > > Changes since V1: add Reviewed-by and Acked-by
- > > 
- > >   hw/arm/virt-acpi-build.c       |  5 ++++-
- > >   hw/core/machine.c              | 22 ++++++++++++++++++++++
- > >   hw/loongarch/virt-acpi-build.c |  4 +++-
- > >   hw/riscv/virt-acpi-build.c     |  5 ++++-
- > >   include/hw/boards.h            |  1 +
- > >   qemu-options.hx                |  5 +++++
- > >   6 files changed, 39 insertions(+), 3 deletions(-)
- > > 
- > 
- > One coding style issue below. With it fixed:
- > 
- > Reviewed-by: Gavin Shan <gshan@redhat.com>
+ ---- On Wed, 23 Apr 2025 14:27:36 +0800  bibo mao <maobibo@loongson.cn> wr=
+ote ---=20
+ >=20
+ >=20
+ > On 2025/4/22 =E4=B8=8B=E5=8D=888:03, Li Chen wrote:
+ > > This series introduces a new machine option, spcr=3Don|off, allowing u=
+sers
+ > > to disable the ACPI SPCR (Serial Port Console Redirection) table.
+ > > By default, SPCR is enabled. Disabling it can help ensure that the gue=
+st > console behavior is determined solely by kernel command-line parameter=
+s
+ > Hi Li,
+ >=20
+ > SPCR only provides serial port HW description information.
+ >=20
+ > However how to use is determined by Linux kernel, Can you describe the=
+=20
+ > detailed scenario which is unintended serial console configurations=20
+ > imposed by firmware?
 
-Thanks for your catch! I would fix it in the next version.
+Yes, it is decided by the kernel, more specifically, by how architecture-sp=
+ecific code utilizes acpi_parse_spcr. For example, in the 5.10 arm64 kernel=
+=20
+https://elixir.bootlin.com/linux/v5.10.236/source/arch/arm64/kernel/acpi.c#=
+L236,  it passes true to acpi_parse_spcr's param enable_console.
+
+So, SPCR consoles are respected by Arm64 Linux by default. Therefore, even =
+without a console=3DttyAMA0 configuration, ttyAMA0 is still added as a pref=
+erred console
+and used by printk.
 
 Regards,
 Li
