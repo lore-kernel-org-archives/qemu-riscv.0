@@ -4,82 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BC7F8C369CB
-	for <qemu-riscv@archiver.kernel.org>; Wed, 23 Apr 2025 15:28:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D517DC369CB
+	for <qemu-riscv@archiver.kernel.org>; Wed, 23 Apr 2025 15:46:38 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1u7c1a-0000sB-0J; Wed, 23 Apr 2025 11:28:34 -0400
+	id 1u7cIx-0001aZ-5Q; Wed, 23 Apr 2025 11:46:31 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1u7c1Y-0000rw-2n
- for qemu-riscv@nongnu.org; Wed, 23 Apr 2025 11:28:32 -0400
-Received: from mail-ed1-x534.google.com ([2a00:1450:4864:20::534])
+ id 1u7cIo-0001Y1-BA
+ for qemu-riscv@nongnu.org; Wed, 23 Apr 2025 11:46:22 -0400
+Received: from mail-ed1-x52e.google.com ([2a00:1450:4864:20::52e])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1u7c1S-0001fG-SJ
- for qemu-riscv@nongnu.org; Wed, 23 Apr 2025 11:28:31 -0400
-Received: by mail-ed1-x534.google.com with SMTP id
- 4fb4d7f45d1cf-5e5e8274a74so9928387a12.1
- for <qemu-riscv@nongnu.org>; Wed, 23 Apr 2025 08:28:26 -0700 (PDT)
+ id 1u7cIm-0005Dn-3n
+ for qemu-riscv@nongnu.org; Wed, 23 Apr 2025 11:46:22 -0400
+Received: by mail-ed1-x52e.google.com with SMTP id
+ 4fb4d7f45d1cf-5e8be1bdb7bso10264098a12.0
+ for <qemu-riscv@nongnu.org>; Wed, 23 Apr 2025 08:46:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1745422105; x=1746026905; darn=nongnu.org;
+ d=ventanamicro.com; s=google; t=1745423178; x=1746027978; darn=nongnu.org;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=cCLtZH3yIAfLfv91Tw9IjFXviCCLe4P5y5XxLIxfQkI=;
- b=lfnysI7fFGzwg2Pz6Kcyl2eBOiaHs3H1c/6lBWDIl5+3133QSDjQQpAtLINlYb3LY1
- ltWVEL1dl4Ukrlnuf2pxdl+NCHXs8/soTLp/NyTpfQm6hcwB4QgoZ/j/8m5jjJTdFJB7
- ouHr7ffZDx7K4CcRK79o6k+oN8OP/71hb30PG9uSqRVkNYne7tW5GMCVJ5uOm9uy0iPk
- rfKhTHAFvELPbwdNn44RWnhJ181SY6/aVdxFikqIjE9T+E04kyCflhh2WwHh3JCnrzQN
- sR29Pnf0JaY+B/rN7icDYIvV4yInzlWO6jQG7Vkp+bTe+KKknOVUapg/qFnx1VHnjwaH
- RrDA==
+ bh=JTj75WtDoLFx3vzMsRRH8+ZaRdR8VWsRj2KyFDl+Sk0=;
+ b=bbz8qbxHxmY8x28XTnVVEE+jJDafsu1zpIhHbo8+hiYhnczRNSjqU4nRgTUcpcW6X8
+ D0NJUp2IraS6hXgyrmyPhhpv6Y78VL1pTPnfgZ0wMUYmNrUEsTaq4BYQWAaeOtxx2jxp
+ ljnEHOfxnNRsldnFAFi2Hy0QQCifgcjOsqB+GK/4YzZf8va1QVncSGD7MH9kmY/zhTIK
+ nQS2PsVs7cUDw+i9WdJvIh7OrDbGni6DiIoO4oy8JS8LANsELGQ9fZS+1faN57cRxdym
+ FUwOXNxYYn69LJIdscihUDYc7XhUv7Twiw9V6TH3PkA2S22RP/1KSv6BiCWluSA1Y36o
+ pY8w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1745422105; x=1746026905;
+ d=1e100.net; s=20230601; t=1745423178; x=1746027978;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=cCLtZH3yIAfLfv91Tw9IjFXviCCLe4P5y5XxLIxfQkI=;
- b=cI0OIFQZnd3qXZenGu1V1cRorRlsExgumEGSjEx+NQRR9AleQ8q/EfSfzX6L8BO/fB
- TaGxOVqS97TkqhlZqqoCnk4PCsOOm6ypSAMmOwQbrp92MJpgkl5vTCRaZOfP3Bg2SRyL
- /7NSlLZtUHlHSasC5Glx3Qs0/den5L1ofmWcaz1N9+kAbRMw8dOmU3q6vJLrrngICRzJ
- cbQetMPZtrO3eB/l2enKd5TGalMgkFusBjjdbT0JUgn5qCYgeVznyVXqqQSJbFvwdnHT
- WUUHXW/7O01dKABiC0qKbIj8xaTU7lh0SzLezGTYalfIsid2Pcnv4pDspxMt4cFtPotR
- QOQg==
+ bh=JTj75WtDoLFx3vzMsRRH8+ZaRdR8VWsRj2KyFDl+Sk0=;
+ b=BBKUIQMPROJ6VfxdaJbI4UOUx46GNhcbG9D/Jr0/NCH14yNtVO22+DKVT3bXtR2c/Z
+ a91mRm+Gw8m88DWwbdxDvR0yM/y+M4mvpMwnI2bVfgWuHJd+S+s2Jwwjiz9k7yzbQ1jo
+ //S3ww0ruusTD7fA097ssCgJLOLQsBKGqndVFl2ImCJ561NYG2tzx71VS9RvxMSUtZ7X
+ x7eFm4kY/pIcVkz81HQ9xSGNBzYzVSLAEeUtt98aU5EoaIndfKUO3B7zzNNsmjaRf4Pb
+ y2UAXYIsnwdlkcxhqihgn+8ci0aEx2vdPICrxA9n25XoDkQQyEf7A09rvZ5KfMwsi2uV
+ 3FDQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXVvPlywrpIuQfD0nJAXT5Sakn6mzGCLfxwaVO3xRXrZn64/jOXsHAybr9Eto4rdqSVqUzdM0fr3uhm@nongnu.org
-X-Gm-Message-State: AOJu0YzqxDnrVVi3mz67A6k++DkdKHmsfFnNPGaXQSdgqbekp0OECcsn
- 7ZjQ0McMq0TH9ky4cv8jAQqY0nap4bSmasfMBZwpKZ6ethQIJ8Vv/8P7mEw1UO0=
-X-Gm-Gg: ASbGnctgl47Es3YCe6ftETFv8auFPOeHN6r1mKSLx+1m4bnvQpOX6ckAcHjxaBrakeB
- dfC5uZdJocm7Qo8tRNDKJzBxst04yQhY3EDS7uQqZxbsRacKC/N0NO0q1XrpVhBn7z0UhnmLjRc
- L+E/oX+h0ohaNnDW5VqkYdj3mkJq2JRjDTd8k/78RRkdySeGsATcvSg+h7A3HI3T3wg3mLR6NW9
- b23y6UQGAevUVsX6gf8+A5RnsRAJhNVkYzg2JgLKREmRbd4mcHgS5njpxhqL84uIpT4b2c3otiL
- CFaavKkkgeuc0YsHATvpaCreLjcTAK0R9j3Jxp4=
-X-Google-Smtp-Source: AGHT+IGIwFfGhorM4HBPVRXwlnI/z+Yj9X/ZhPqpsEK4noaxXRtCYCDG3YR9fygStol4b4Xpe9brOA==
-X-Received: by 2002:a05:6402:5110:b0:5dc:74fd:abf1 with SMTP id
- 4fb4d7f45d1cf-5f62854878bmr17576465a12.15.1745422105191; 
- Wed, 23 Apr 2025 08:28:25 -0700 (PDT)
+ AJvYcCWB1gUtTzc2SNP2ZziBLYSBySQ7sv8AD8ZZdGRqQhTYg15+BBB3Rni0xriBNtdZXTtjX1pBwAZY+iei@nongnu.org
+X-Gm-Message-State: AOJu0Yy1oFN8aDMJ0hGoaF7XbwGzS+tR7utaiGUiOJQc2pADyaHCDGYP
+ WNplrDK1wpDy/DnUc0ZjaK6yNb3icdMPpXShxbBgED8tR9q6lcj6ZS6KDzUG/jOdCmzRjoPGF8K
+ rFfc=
+X-Gm-Gg: ASbGncsqGWxZTdUJcG/HzUGZYieUi3ZDG6RZmPBnMo03hZQHizs7HMcQ9e/0jXIcCPW
+ YJVvz/yGH/GAz2qtxEfgEYfZ+/+YpsrRgugK/t04GCGhwz8YnOg0I5STNIFlX2fz0eHtEoq3Sdz
+ yf7vElhJqrWZ/kUVEg7MfnrWShlqo/7BnWGFizXAWmQT2MYm6VoqPnv/dDKStDOSeJiwTVJv8nP
+ bciteeTjpSGaZ5nQL3Hn42WNg+Jp2rUHLY1sNPhEKj7Qc3LlG7+zjKuRsiJ8/vmgJNyPbUndrwG
+ sens0zgk0l8Uu0GXMZ7YfUJ2lRcNwbnZWiE8HZQ=
+X-Google-Smtp-Source: AGHT+IHPTD3C0jMp2SAnw/ZpnYKUa3Dd7VgIOjzKoAnWL5Cdxj9cc61hcLjhKztvTVB8PALwNdqbiQ==
+X-Received: by 2002:a05:6402:354a:b0:5ed:2e84:4f1f with SMTP id
+ 4fb4d7f45d1cf-5f6285fbbe1mr19680782a12.22.1745423178227; 
+ Wed, 23 Apr 2025 08:46:18 -0700 (PDT)
 Received: from localhost ([2a02:8308:a00c:e200::f716])
  by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5f632be9742sm7148212a12.52.2025.04.23.08.28.24
+ 4fb4d7f45d1cf-5f6255955a6sm7763939a12.43.2025.04.23.08.46.16
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 23 Apr 2025 08:28:24 -0700 (PDT)
-Date: Wed, 23 Apr 2025 17:28:24 +0200
+ Wed, 23 Apr 2025 08:46:16 -0700 (PDT)
+Date: Wed, 23 Apr 2025 17:46:16 +0200
 From: Andrew Jones <ajones@ventanamicro.com>
 To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
  liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com, 
  abologna@redhat.com
-Subject: Re: [PATCH 6/7] target/riscv/kvm: add missing KVM CSRs
-Message-ID: <20250423-d3ca1926d6eb9b1d273b1367@orel>
+Subject: Re: [PATCH 7/7] target/riscv/kvm: reset 'scounteren' with host val
+Message-ID: <20250423-7d7e348ed0ec6cadb1efe399@orel>
 References: <20250417124839.1870494-1-dbarboza@ventanamicro.com>
- <20250417124839.1870494-7-dbarboza@ventanamicro.com>
+ <20250417124839.1870494-8-dbarboza@ventanamicro.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20250417124839.1870494-7-dbarboza@ventanamicro.com>
-Received-SPF: pass client-ip=2a00:1450:4864:20::534;
- envelope-from=ajones@ventanamicro.com; helo=mail-ed1-x534.google.com
+In-Reply-To: <20250417124839.1870494-8-dbarboza@ventanamicro.com>
+Received-SPF: pass client-ip=2a00:1450:4864:20::52e;
+ envelope-from=ajones@ventanamicro.com; helo=mail-ed1-x52e.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -102,53 +103,210 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Thu, Apr 17, 2025 at 09:48:38AM -0300, Daniel Henrique Barboza wrote:
-> We're missing scounteren and senvcfg CSRs, both already present in the
-> KVM UAPI.
+On Thu, Apr 17, 2025 at 09:48:39AM -0300, Daniel Henrique Barboza wrote:
+> The Linux kernel, up until at least version 6.12, has issues with a KVM
+> guest setting scounteren to 0 during reset. No error will be thrown
+> during boot, but trying to use rdtime in the guest (by executing 'ping'
+> for example) will result in a stack trace and an illegal instruction
+> error:
 > 
+> / # ping 8.8.8.8
+> PING 3.33.130.190 (8.8.8.8): 56 data bytes
+> [   19.464484] ping[56]: unhandled signal 4 code 0x1 at 0x00007fffae0665f4
+> [   19.493332] CPU: 0 PID: 56 Comm: ping Not tainted 6.9.0-rc3-dbarboza #7
+> [   19.523249] Hardware name: riscv-virtio,qemu (DT)
+> [   19.546641] epc : 00007fffae0665f4 ra : 00000000000c6316 sp : 00007fffc7cfd9f0
+> [   19.576214]  gp : 0000000000172408 tp : 00000000001767a0 t0 : 0000000000000000
+> [   19.606719]  t1 : 0000000000000020 t2 : 0000000000000000 s0 : 00007fffc7cfda00
+> [   19.640938]  s1 : 00007fffc7cfda30 a0 : 0000000000000001 a1 : 00007fffc7cfda30
+> [   19.676698]  a2 : 0000000000000000 a3 : 00000000000009ee a4 : 00007fffae064000
+> [   19.721036]  a5 : 0000000000000001 a6 : 0000000000000000 a7 : 00000000001784d0
+> [   19.765061]  s2 : 00000000001784d0 s3 : 000000000011ca38 s4 : 000000000011d000
+> [   19.801985]  s5 : 0000000000000001 s6 : 0000000000000000 s7 : 0000000000000000
+> [   19.841235]  s8 : 0000000000177788 s9 : 0000000000176828 s10: 0000000000000000
+> [   19.882479]  s11: 00000000001777a8 t3 : ffffffffffffffff t4 : 0000000000172f60
+> [   19.923651]  t5 : 0000000000000020 t6 : 000000000000000a
+> [   19.950491] status: 0000000200004020 badaddr: 00000000c01027f3 cause: 0000000000000002
+> [   19.995864] Code: 431c f613 0017 869b 0007 ea59 000f 0220 435c cfbd (27f3) c010
+> Illegal instruction
+> / #
+> 
+> Reading the host scounteren val and using it during reset, instead of
+> zeroing it, will prevent this error. It is worth noting that scounteren
+> is a WARL reg according to the RISC-V ISA spec, and in theory the kernel
+> should accept a zero val and convert it to something that won't break
+> the guest.
+
+0 is legal, so the kernel (KVM) shouldn't change what userspace selects.
+Userspace, which includes user policy knowledge, knows best and indeed 0
+is the best selection when no other policy is provided. Changing from 0
+to whatever KVM has put there is wrong.
+
+> 
+> We can't tell from userspace if the host kernel handles scounteren = 0
+> during reset accordingly, so to prevent this error we'll assume that it
+> won't. Read the reg from the host and use it as reset value.
+
+It's not the host kernel that needs to change how it handles things. It's
+the guest kernel. When the guest uses ping, which likely calls gtod, which
+uses rdtime, or if the guest uses anything that results in an rdtime use,
+then it'll hit this issue if the host doesn't support sscofpmf (which the
+QEMU rv64 cpu type doesn't). The reason is because KVM won't expose the
+SBI PMU without sscofpmf and then the guest kernel pmu driver won't run,
+and currently the only place scounteren is getting set up is in the pmu
+driver. The guest kernel should unconditionally set up scounteren to
+match what it expects userspace to use (like enable rdtime, since the
+guest kernel actually implements gtod in vdso with it)
+
+> 
+> We'll end up repeating code from kvm_riscv_get_regs_csr() to do that.
+> Create a helper that will get a single CSR and use it in get_regs_csr()
+> and in kvm_riscv_reset_regs_csr() to avoid code duplication.
+> 
+> Fixes: 4db19d5b21 ("target/riscv/kvm: add missing KVM CSRs")
+
+This isn't the right tag since that is already fixed by checking
+get-reg-list in a previous patch. This patch is trying to fix a guest
+kernel bug, which it shouldn't be doing, at least not without some user
+toggle allowing the workaround to be turned on/off.
+
 > Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-> Reviewed-by: Andrew Jones <ajones@ventanamicro.com>
-
-The patch changed enough that it's not an r-b anymore, but it probably
-should have been a reported-by in the first place anyway.
-
-> Acked-by: Alistair Francis <alistair.francis@wdc.com>
-> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
 > ---
->  target/riscv/kvm/kvm-cpu.c | 7 +++++++
->  1 file changed, 7 insertions(+)
+>  target/riscv/kvm/kvm-cpu.c | 73 ++++++++++++++++++++++++++++----------
+>  1 file changed, 55 insertions(+), 18 deletions(-)
 > 
 > diff --git a/target/riscv/kvm/kvm-cpu.c b/target/riscv/kvm/kvm-cpu.c
-> index ec74520872..a91a87b175 100644
+> index a91a87b175..918fe51257 100644
 > --- a/target/riscv/kvm/kvm-cpu.c
 > +++ b/target/riscv/kvm/kvm-cpu.c
-> @@ -251,6 +251,11 @@ static KVMCPUConfig kvm_csr_cfgs[] = {
->      KVM_CSR_CFG("stval", stval, sizeof(target_ulong), RISCV_CSR_REG(stval)),
->      KVM_CSR_CFG("sip", mip, sizeof(uint64_t), RISCV_CSR_REG(sip)),
->      KVM_CSR_CFG("satp", satp, sizeof(target_ulong), RISCV_CSR_REG(satp)),
-> +    KVM_CSR_CFG("scounteren", scounteren, sizeof(uint32_t),
-> +                RISCV_CSR_REG(scounteren)),
-> +    KVM_CSR_CFG("senvcfg", senvcfg, sizeof(target_ulong),
-> +                RISCV_CSR_REG(senvcfg)),
-> +
-
-Extra blank here and the sizeof() stuff should go away.
-
->  };
+> @@ -634,29 +634,40 @@ static int kvm_riscv_put_regs_core(CPUState *cs)
+>      return ret;
+>  }
 >  
->  static void *kvmconfig_get_env_addr(RISCVCPU *cpu, KVMCPUConfig *csr_cfg)
-> @@ -696,6 +701,8 @@ static void kvm_riscv_reset_regs_csr(CPURISCVState *env)
+> -static int kvm_riscv_get_regs_csr(CPUState *cs)
+> +static int kvm_riscv_get_reg_csr(CPUState *cs,
+> +                                 KVMCPUConfig *csr_cfg)
+>  {
+>      RISCVCPU *cpu = RISCV_CPU(cs);
+>      uint64_t reg;
+> -    int i, ret;
+> +    int ret;
+>  
+> -    for (i = 0; i < ARRAY_SIZE(kvm_csr_cfgs); i++) {
+> -        KVMCPUConfig *csr_cfg = &kvm_csr_cfgs[i];
+> +    if (!csr_cfg->supported) {
+> +        return 0;
+> +    }
+>  
+> -        if (!csr_cfg->supported) {
+> -            continue;
+> -        }
+> +    ret = kvm_get_one_reg(cs, csr_cfg->kvm_reg_id, &reg);
+> +    if (ret) {
+> +        return ret;
+> +    }
+> +
+> +    if (csr_cfg->prop_size == sizeof(uint32_t)) {
+> +        kvm_cpu_csr_set_u32(cpu, csr_cfg, reg);
+> +    } else {
+> +        kvm_cpu_csr_set_u64(cpu, csr_cfg, reg);
+> +    }
+> +
+> +    return 0;
+> +}
+> +
+> +static int kvm_riscv_get_regs_csr(CPUState *cs)
+> +{
+> +    int i, ret;
+>  
+> -        ret = kvm_get_one_reg(cs, csr_cfg->kvm_reg_id, &reg);
+> +    for (i = 0; i < ARRAY_SIZE(kvm_csr_cfgs); i++) {
+> +        ret = kvm_riscv_get_reg_csr(cs, &kvm_csr_cfgs[i]);
+>          if (ret) {
+>              return ret;
+>          }
+> -
+> -        if (csr_cfg->prop_size == sizeof(uint32_t)) {
+> -            kvm_cpu_csr_set_u32(cpu, csr_cfg, reg);
+> -        } else {
+> -            kvm_cpu_csr_set_u64(cpu, csr_cfg, reg);
+> -        }
+>      }
+>  
+>      return 0;
+> @@ -690,8 +701,11 @@ static int kvm_riscv_put_regs_csr(CPUState *cs)
+>      return 0;
+>  }
+>  
+> -static void kvm_riscv_reset_regs_csr(CPURISCVState *env)
+> +static void kvm_riscv_reset_regs_csr(CPUState *cs, CPURISCVState *env)
+>  {
+> +    uint64_t scounteren_kvm_id = RISCV_CSR_REG(scounteren);
+> +    int ret;
+> +
+>      env->mstatus = 0;
+>      env->mie = 0;
+>      env->stvec = 0;
+> @@ -701,8 +715,30 @@ static void kvm_riscv_reset_regs_csr(CPURISCVState *env)
 >      env->stval = 0;
 >      env->mip = 0;
 >      env->satp = 0;
-> +    env->scounteren = 0;
-> +    env->senvcfg = 0;
+> -    env->scounteren = 0;
+>      env->senvcfg = 0;
+> +
+> +    /*
+> +     * Some kernels will take issue with env->scounteren = 0
+> +     * causing problems inside the KVM guest with 'rdtime'.
+> +     * Read 'scounteren' from the host and use it.
+> +     */
+> +    for (int i = 0; i < ARRAY_SIZE(kvm_csr_cfgs); i++) {
+> +        KVMCPUConfig *csr_cfg = &kvm_csr_cfgs[i];
+> +
+> +        if (csr_cfg->kvm_reg_id != scounteren_kvm_id) {
+> +            continue;
+> +        }
+> +
+> +        if (!csr_cfg->supported) {
+> +            break;
+> +        }
+> +
+> +        ret = kvm_riscv_get_reg_csr(cs, &kvm_csr_cfgs[i]);
+> +        if (ret) {
+> +            error_report("Unable to retrieve scounteren from host ,"
+> +                         "error %d", ret);
+> +        }
+> +    }
 >  }
 >  
 >  static int kvm_riscv_get_regs_fp(CPUState *cs)
+> @@ -1711,16 +1747,17 @@ int kvm_arch_handle_exit(CPUState *cs, struct kvm_run *run)
+>  void kvm_riscv_reset_vcpu(RISCVCPU *cpu)
+>  {
+>      CPURISCVState *env = &cpu->env;
+> +    CPUState *cs = CPU(cpu);
+>      int i;
+>  
+>      for (i = 0; i < 32; i++) {
+>          env->gpr[i] = 0;
+>      }
+>      env->pc = cpu->env.kernel_addr;
+> -    env->gpr[10] = kvm_arch_vcpu_id(CPU(cpu)); /* a0 */
+> +    env->gpr[10] = kvm_arch_vcpu_id(cs);       /* a0 */
+>      env->gpr[11] = cpu->env.fdt_addr;          /* a1 */
+>  
+> -    kvm_riscv_reset_regs_csr(env);
+> +    kvm_riscv_reset_regs_csr(cs, env);
+>  }
+>  
+>  void kvm_riscv_set_irq(RISCVCPU *cpu, int irq, int level)
 > -- 
 > 2.49.0
+> 
 >
+
+I would just drop this patch and make the default 'virt' cpu type 'max',
+then nobody will hit the issue. We should also fix the [guest] kernel,
+which I'll try to do soon.
 
 Thanks,
 drew
