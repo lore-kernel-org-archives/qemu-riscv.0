@@ -4,90 +4,99 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D517DC369CB
-	for <qemu-riscv@archiver.kernel.org>; Wed, 23 Apr 2025 15:46:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BF1A0C369CB
+	for <qemu-riscv@archiver.kernel.org>; Wed, 23 Apr 2025 18:07:36 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1u7cIx-0001aZ-5Q; Wed, 23 Apr 2025 11:46:31 -0400
+	id 1u7eUb-0000X9-FS; Wed, 23 Apr 2025 14:06:41 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1u7cIo-0001Y1-BA
- for qemu-riscv@nongnu.org; Wed, 23 Apr 2025 11:46:22 -0400
-Received: from mail-ed1-x52e.google.com ([2a00:1450:4864:20::52e])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1u7cIm-0005Dn-3n
- for qemu-riscv@nongnu.org; Wed, 23 Apr 2025 11:46:22 -0400
-Received: by mail-ed1-x52e.google.com with SMTP id
- 4fb4d7f45d1cf-5e8be1bdb7bso10264098a12.0
- for <qemu-riscv@nongnu.org>; Wed, 23 Apr 2025 08:46:19 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1745423178; x=1746027978; darn=nongnu.org;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=JTj75WtDoLFx3vzMsRRH8+ZaRdR8VWsRj2KyFDl+Sk0=;
- b=bbz8qbxHxmY8x28XTnVVEE+jJDafsu1zpIhHbo8+hiYhnczRNSjqU4nRgTUcpcW6X8
- D0NJUp2IraS6hXgyrmyPhhpv6Y78VL1pTPnfgZ0wMUYmNrUEsTaq4BYQWAaeOtxx2jxp
- ljnEHOfxnNRsldnFAFi2Hy0QQCifgcjOsqB+GK/4YzZf8va1QVncSGD7MH9kmY/zhTIK
- nQS2PsVs7cUDw+i9WdJvIh7OrDbGni6DiIoO4oy8JS8LANsELGQ9fZS+1faN57cRxdym
- FUwOXNxYYn69LJIdscihUDYc7XhUv7Twiw9V6TH3PkA2S22RP/1KSv6BiCWluSA1Y36o
- pY8w==
+ (Exim 4.90_1) (envelope-from <abologna@redhat.com>)
+ id 1u7eUZ-0000WO-IX
+ for qemu-riscv@nongnu.org; Wed, 23 Apr 2025 14:06:39 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <abologna@redhat.com>)
+ id 1u7eUX-0005wZ-IK
+ for qemu-riscv@nongnu.org; Wed, 23 Apr 2025 14:06:39 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1745431594;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=myCDdcqniXC3srlIWAAe0gy7O8yWyWlg+CPTXt6oQUI=;
+ b=hAiNWOiLKF1mN5eP6QYjioJFX5/riI/bkhRkO9vqwVTvUD1M8bEv7HHnJ9gPQ5h/rSMLtA
+ ORHan5DRGEJ5t7G3NG9Y6scQQFPFn4reaOjbtJkgZod6C7xj82p5Gk0s3f6Mx+BYnBh52F
+ jCwiysG9EKqOjIdK0cP/EqU5UsFNswo=
+Received: from mail-qt1-f198.google.com (mail-qt1-f198.google.com
+ [209.85.160.198]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-8-TbryBqbuMMS39OpOeXr2dw-1; Wed, 23 Apr 2025 14:06:33 -0400
+X-MC-Unique: TbryBqbuMMS39OpOeXr2dw-1
+X-Mimecast-MFC-AGG-ID: TbryBqbuMMS39OpOeXr2dw_1745431593
+Received: by mail-qt1-f198.google.com with SMTP id
+ d75a77b69052e-476623ba226so2060441cf.0
+ for <qemu-riscv@nongnu.org>; Wed, 23 Apr 2025 11:06:33 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1745423178; x=1746027978;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=JTj75WtDoLFx3vzMsRRH8+ZaRdR8VWsRj2KyFDl+Sk0=;
- b=BBKUIQMPROJ6VfxdaJbI4UOUx46GNhcbG9D/Jr0/NCH14yNtVO22+DKVT3bXtR2c/Z
- a91mRm+Gw8m88DWwbdxDvR0yM/y+M4mvpMwnI2bVfgWuHJd+S+s2Jwwjiz9k7yzbQ1jo
- //S3ww0ruusTD7fA097ssCgJLOLQsBKGqndVFl2ImCJ561NYG2tzx71VS9RvxMSUtZ7X
- x7eFm4kY/pIcVkz81HQ9xSGNBzYzVSLAEeUtt98aU5EoaIndfKUO3B7zzNNsmjaRf4Pb
- y2UAXYIsnwdlkcxhqihgn+8ci0aEx2vdPICrxA9n25XoDkQQyEf7A09rvZ5KfMwsi2uV
- 3FDQ==
+ d=1e100.net; s=20230601; t=1745431593; x=1746036393;
+ h=cc:to:subject:message-id:date:in-reply-to:mime-version:references
+ :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=myCDdcqniXC3srlIWAAe0gy7O8yWyWlg+CPTXt6oQUI=;
+ b=VxDA4bVJRvUbHEs8iCXKi3ami823YOr/sV14k9VYTkvSn6hv4mGSOQcY6ONAitoshL
+ 6yrEqhZE1np40KAsZMabT8t8sZH+vlkfm5cWt3r+eQtoLmdLt1MgFQZ+qrKbmYSB1piS
+ W4+memsPl1LacyBkrTZagWrvCMSU655NQ+SOa2gMzmhxJBFLN+VxeB9eFqwRZK5RI65X
+ aqK89wasCWZ9rZRN7ecEkMiLsPWIbhOx9mLiLEzgaI1G4qA1oiS39dmz2JXnuZBZSkTD
+ OdGDtlHBBwqm3yXsn+Mvg9BON9RUHtXI4ZXZuJGE3iJ+TrvKXjPWD2M434e1HZcOTvCO
+ zEdg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWB1gUtTzc2SNP2ZziBLYSBySQ7sv8AD8ZZdGRqQhTYg15+BBB3Rni0xriBNtdZXTtjX1pBwAZY+iei@nongnu.org
-X-Gm-Message-State: AOJu0Yy1oFN8aDMJ0hGoaF7XbwGzS+tR7utaiGUiOJQc2pADyaHCDGYP
- WNplrDK1wpDy/DnUc0ZjaK6yNb3icdMPpXShxbBgED8tR9q6lcj6ZS6KDzUG/jOdCmzRjoPGF8K
- rFfc=
-X-Gm-Gg: ASbGncsqGWxZTdUJcG/HzUGZYieUi3ZDG6RZmPBnMo03hZQHizs7HMcQ9e/0jXIcCPW
- YJVvz/yGH/GAz2qtxEfgEYfZ+/+YpsrRgugK/t04GCGhwz8YnOg0I5STNIFlX2fz0eHtEoq3Sdz
- yf7vElhJqrWZ/kUVEg7MfnrWShlqo/7BnWGFizXAWmQT2MYm6VoqPnv/dDKStDOSeJiwTVJv8nP
- bciteeTjpSGaZ5nQL3Hn42WNg+Jp2rUHLY1sNPhEKj7Qc3LlG7+zjKuRsiJ8/vmgJNyPbUndrwG
- sens0zgk0l8Uu0GXMZ7YfUJ2lRcNwbnZWiE8HZQ=
-X-Google-Smtp-Source: AGHT+IHPTD3C0jMp2SAnw/ZpnYKUa3Dd7VgIOjzKoAnWL5Cdxj9cc61hcLjhKztvTVB8PALwNdqbiQ==
-X-Received: by 2002:a05:6402:354a:b0:5ed:2e84:4f1f with SMTP id
- 4fb4d7f45d1cf-5f6285fbbe1mr19680782a12.22.1745423178227; 
- Wed, 23 Apr 2025 08:46:18 -0700 (PDT)
-Received: from localhost ([2a02:8308:a00c:e200::f716])
- by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5f6255955a6sm7763939a12.43.2025.04.23.08.46.16
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 23 Apr 2025 08:46:16 -0700 (PDT)
-Date: Wed, 23 Apr 2025 17:46:16 +0200
-From: Andrew Jones <ajones@ventanamicro.com>
-To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
- liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com, 
- abologna@redhat.com
-Subject: Re: [PATCH 7/7] target/riscv/kvm: reset 'scounteren' with host val
-Message-ID: <20250423-7d7e348ed0ec6cadb1efe399@orel>
+ AJvYcCVgic9sKZaABabKZz08D6e5vgADMbYYVvFKUUjaEIzt2I0MD6a9dClVSv6bZdHIqbKlcm2GYpP6q4Yt@nongnu.org
+X-Gm-Message-State: AOJu0YwefzuwNlZrBjeryqln66hdsj7XD+okBVdoHG7uybxGCFaE48T0
+ bKylp+nCQPRtOagD5HuVfUPi9BAfoIOyuBxowhvt1hreOht+3hyN4Jf9sTvAs6Ga8Rnc5R+Lq35
+ bn3pj8T5cY2FFNjHDI+PSdrt2gR2gGzcYg+FDlTmhXLeVXQ8/40+UQm3Cn9EXwZ3AKbtaQrkjIc
+ q4hUx77a2vBAodWoPXaPfDe1IlVcQ=
+X-Gm-Gg: ASbGncuzSWsa7NkWNQVmO75nQI3p5cuz9Nv2oROt/j1A8kDmGosQZk9na2wkj6PD+qe
+ rQTrcQYUt88ajEMGeXbzhMgZ3l64qq69dR30eNT09kyxkVR7DXgJwr90CQXMbFmt+DsLO8w==
+X-Received: by 2002:ac8:7e89:0:b0:476:91a5:c832 with SMTP id
+ d75a77b69052e-47e77ca9fbbmr2526331cf.32.1745431592866; 
+ Wed, 23 Apr 2025 11:06:32 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IEYArIOfVgc3Ow8oA3HkIQHw262mp5pDAZw1DnyCRp2OIl7CK5M1FNAu14g7sb7KJA7bIDcC+caiD2UW+lY0Q4=
+X-Received: by 2002:ac8:7e89:0:b0:476:91a5:c832 with SMTP id
+ d75a77b69052e-47e77ca9fbbmr2525891cf.32.1745431592434; Wed, 23 Apr 2025
+ 11:06:32 -0700 (PDT)
+Received: from 744723338238 named unknown by gmailapi.google.com with
+ HTTPREST; Wed, 23 Apr 2025 14:06:31 -0400
+Received: from 744723338238 named unknown by gmailapi.google.com with
+ HTTPREST; Wed, 23 Apr 2025 14:06:31 -0400
+From: Andrea Bolognani <abologna@redhat.com>
 References: <20250417124839.1870494-1-dbarboza@ventanamicro.com>
  <20250417124839.1870494-8-dbarboza@ventanamicro.com>
+ <20250423-7d7e348ed0ec6cadb1efe399@orel>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20250417124839.1870494-8-dbarboza@ventanamicro.com>
-Received-SPF: pass client-ip=2a00:1450:4864:20::52e;
- envelope-from=ajones@ventanamicro.com; helo=mail-ed1-x52e.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
+In-Reply-To: <20250423-7d7e348ed0ec6cadb1efe399@orel>
+Date: Wed, 23 Apr 2025 14:06:31 -0400
+X-Gm-Features: ATxdqUHC7WKWWSAaVnA1qrTj3VbEi455gE6LUEJ1xhAg_l3NTVRokwwmjiDaZUA
+Message-ID: <CABJz62NKOzO=aE-fz9Ad2gxLnSNvU41xnfhOS0EKLim0SnYOtA@mail.gmail.com>
+Subject: Re: [PATCH 7/7] target/riscv/kvm: reset 'scounteren' with host val
+To: Andrew Jones <ajones@ventanamicro.com>
+Cc: Daniel Henrique Barboza <dbarboza@ventanamicro.com>, qemu-devel@nongnu.org,
+ qemu-riscv@nongnu.org, 
+ alistair.francis@wdc.com, liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, 
+ palmer@rivosinc.com
+X-Mimecast-Spam-Score: 0
+X-Mimecast-MFC-PROC-ID: D-XUUL-d1wJMW2T-AZzXw7YKO66ILxHxn9oJXI6fSwk_1745431593
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset="UTF-8"
+Received-SPF: pass client-ip=170.10.133.124; envelope-from=abologna@redhat.com;
+ helo=us-smtp-delivery-124.mimecast.com
+X-Spam_score_int: -23
+X-Spam_score: -2.4
 X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+X-Spam_report: (-2.4 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.294,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H5=0.001, RCVD_IN_MSPIKE_WL=0.001,
+ RCVD_IN_VALIDITY_CERTIFIED_BLOCKED=0.001, RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -103,211 +112,15 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Thu, Apr 17, 2025 at 09:48:39AM -0300, Daniel Henrique Barboza wrote:
-> The Linux kernel, up until at least version 6.12, has issues with a KVM
-> guest setting scounteren to 0 during reset. No error will be thrown
-> during boot, but trying to use rdtime in the guest (by executing 'ping'
-> for example) will result in a stack trace and an illegal instruction
-> error:
-> 
-> / # ping 8.8.8.8
-> PING 3.33.130.190 (8.8.8.8): 56 data bytes
-> [   19.464484] ping[56]: unhandled signal 4 code 0x1 at 0x00007fffae0665f4
-> [   19.493332] CPU: 0 PID: 56 Comm: ping Not tainted 6.9.0-rc3-dbarboza #7
-> [   19.523249] Hardware name: riscv-virtio,qemu (DT)
-> [   19.546641] epc : 00007fffae0665f4 ra : 00000000000c6316 sp : 00007fffc7cfd9f0
-> [   19.576214]  gp : 0000000000172408 tp : 00000000001767a0 t0 : 0000000000000000
-> [   19.606719]  t1 : 0000000000000020 t2 : 0000000000000000 s0 : 00007fffc7cfda00
-> [   19.640938]  s1 : 00007fffc7cfda30 a0 : 0000000000000001 a1 : 00007fffc7cfda30
-> [   19.676698]  a2 : 0000000000000000 a3 : 00000000000009ee a4 : 00007fffae064000
-> [   19.721036]  a5 : 0000000000000001 a6 : 0000000000000000 a7 : 00000000001784d0
-> [   19.765061]  s2 : 00000000001784d0 s3 : 000000000011ca38 s4 : 000000000011d000
-> [   19.801985]  s5 : 0000000000000001 s6 : 0000000000000000 s7 : 0000000000000000
-> [   19.841235]  s8 : 0000000000177788 s9 : 0000000000176828 s10: 0000000000000000
-> [   19.882479]  s11: 00000000001777a8 t3 : ffffffffffffffff t4 : 0000000000172f60
-> [   19.923651]  t5 : 0000000000000020 t6 : 000000000000000a
-> [   19.950491] status: 0000000200004020 badaddr: 00000000c01027f3 cause: 0000000000000002
-> [   19.995864] Code: 431c f613 0017 869b 0007 ea59 000f 0220 435c cfbd (27f3) c010
-> Illegal instruction
-> / #
-> 
-> Reading the host scounteren val and using it during reset, instead of
-> zeroing it, will prevent this error. It is worth noting that scounteren
-> is a WARL reg according to the RISC-V ISA spec, and in theory the kernel
-> should accept a zero val and convert it to something that won't break
-> the guest.
+On Wed, Apr 23, 2025 at 05:46:16PM +0200, Andrew Jones wrote:
+> I would just drop this patch and make the default 'virt' cpu type 'max',
+> then nobody will hit the issue.
 
-0 is legal, so the kernel (KVM) shouldn't change what userspace selects.
-Userspace, which includes user policy knowledge, knows best and indeed 0
-is the best selection when no other policy is provided. Changing from 0
-to whatever KVM has put there is wrong.
+FWIW virt-manager has recently started doing just that:
 
-> 
-> We can't tell from userspace if the host kernel handles scounteren = 0
-> during reset accordingly, so to prevent this error we'll assume that it
-> won't. Read the reg from the host and use it as reset value.
+  https://github.com/virt-manager/virt-manager/pull/784
 
-It's not the host kernel that needs to change how it handles things. It's
-the guest kernel. When the guest uses ping, which likely calls gtod, which
-uses rdtime, or if the guest uses anything that results in an rdtime use,
-then it'll hit this issue if the host doesn't support sscofpmf (which the
-QEMU rv64 cpu type doesn't). The reason is because KVM won't expose the
-SBI PMU without sscofpmf and then the guest kernel pmu driver won't run,
-and currently the only place scounteren is getting set up is in the pmu
-driver. The guest kernel should unconditionally set up scounteren to
-match what it expects userspace to use (like enable rdtime, since the
-guest kernel actually implements gtod in vdso with it)
+-- 
+Andrea Bolognani / Red Hat / Virtualization
 
-> 
-> We'll end up repeating code from kvm_riscv_get_regs_csr() to do that.
-> Create a helper that will get a single CSR and use it in get_regs_csr()
-> and in kvm_riscv_reset_regs_csr() to avoid code duplication.
-> 
-> Fixes: 4db19d5b21 ("target/riscv/kvm: add missing KVM CSRs")
-
-This isn't the right tag since that is already fixed by checking
-get-reg-list in a previous patch. This patch is trying to fix a guest
-kernel bug, which it shouldn't be doing, at least not without some user
-toggle allowing the workaround to be turned on/off.
-
-> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-> ---
->  target/riscv/kvm/kvm-cpu.c | 73 ++++++++++++++++++++++++++++----------
->  1 file changed, 55 insertions(+), 18 deletions(-)
-> 
-> diff --git a/target/riscv/kvm/kvm-cpu.c b/target/riscv/kvm/kvm-cpu.c
-> index a91a87b175..918fe51257 100644
-> --- a/target/riscv/kvm/kvm-cpu.c
-> +++ b/target/riscv/kvm/kvm-cpu.c
-> @@ -634,29 +634,40 @@ static int kvm_riscv_put_regs_core(CPUState *cs)
->      return ret;
->  }
->  
-> -static int kvm_riscv_get_regs_csr(CPUState *cs)
-> +static int kvm_riscv_get_reg_csr(CPUState *cs,
-> +                                 KVMCPUConfig *csr_cfg)
->  {
->      RISCVCPU *cpu = RISCV_CPU(cs);
->      uint64_t reg;
-> -    int i, ret;
-> +    int ret;
->  
-> -    for (i = 0; i < ARRAY_SIZE(kvm_csr_cfgs); i++) {
-> -        KVMCPUConfig *csr_cfg = &kvm_csr_cfgs[i];
-> +    if (!csr_cfg->supported) {
-> +        return 0;
-> +    }
->  
-> -        if (!csr_cfg->supported) {
-> -            continue;
-> -        }
-> +    ret = kvm_get_one_reg(cs, csr_cfg->kvm_reg_id, &reg);
-> +    if (ret) {
-> +        return ret;
-> +    }
-> +
-> +    if (csr_cfg->prop_size == sizeof(uint32_t)) {
-> +        kvm_cpu_csr_set_u32(cpu, csr_cfg, reg);
-> +    } else {
-> +        kvm_cpu_csr_set_u64(cpu, csr_cfg, reg);
-> +    }
-> +
-> +    return 0;
-> +}
-> +
-> +static int kvm_riscv_get_regs_csr(CPUState *cs)
-> +{
-> +    int i, ret;
->  
-> -        ret = kvm_get_one_reg(cs, csr_cfg->kvm_reg_id, &reg);
-> +    for (i = 0; i < ARRAY_SIZE(kvm_csr_cfgs); i++) {
-> +        ret = kvm_riscv_get_reg_csr(cs, &kvm_csr_cfgs[i]);
->          if (ret) {
->              return ret;
->          }
-> -
-> -        if (csr_cfg->prop_size == sizeof(uint32_t)) {
-> -            kvm_cpu_csr_set_u32(cpu, csr_cfg, reg);
-> -        } else {
-> -            kvm_cpu_csr_set_u64(cpu, csr_cfg, reg);
-> -        }
->      }
->  
->      return 0;
-> @@ -690,8 +701,11 @@ static int kvm_riscv_put_regs_csr(CPUState *cs)
->      return 0;
->  }
->  
-> -static void kvm_riscv_reset_regs_csr(CPURISCVState *env)
-> +static void kvm_riscv_reset_regs_csr(CPUState *cs, CPURISCVState *env)
->  {
-> +    uint64_t scounteren_kvm_id = RISCV_CSR_REG(scounteren);
-> +    int ret;
-> +
->      env->mstatus = 0;
->      env->mie = 0;
->      env->stvec = 0;
-> @@ -701,8 +715,30 @@ static void kvm_riscv_reset_regs_csr(CPURISCVState *env)
->      env->stval = 0;
->      env->mip = 0;
->      env->satp = 0;
-> -    env->scounteren = 0;
->      env->senvcfg = 0;
-> +
-> +    /*
-> +     * Some kernels will take issue with env->scounteren = 0
-> +     * causing problems inside the KVM guest with 'rdtime'.
-> +     * Read 'scounteren' from the host and use it.
-> +     */
-> +    for (int i = 0; i < ARRAY_SIZE(kvm_csr_cfgs); i++) {
-> +        KVMCPUConfig *csr_cfg = &kvm_csr_cfgs[i];
-> +
-> +        if (csr_cfg->kvm_reg_id != scounteren_kvm_id) {
-> +            continue;
-> +        }
-> +
-> +        if (!csr_cfg->supported) {
-> +            break;
-> +        }
-> +
-> +        ret = kvm_riscv_get_reg_csr(cs, &kvm_csr_cfgs[i]);
-> +        if (ret) {
-> +            error_report("Unable to retrieve scounteren from host ,"
-> +                         "error %d", ret);
-> +        }
-> +    }
->  }
->  
->  static int kvm_riscv_get_regs_fp(CPUState *cs)
-> @@ -1711,16 +1747,17 @@ int kvm_arch_handle_exit(CPUState *cs, struct kvm_run *run)
->  void kvm_riscv_reset_vcpu(RISCVCPU *cpu)
->  {
->      CPURISCVState *env = &cpu->env;
-> +    CPUState *cs = CPU(cpu);
->      int i;
->  
->      for (i = 0; i < 32; i++) {
->          env->gpr[i] = 0;
->      }
->      env->pc = cpu->env.kernel_addr;
-> -    env->gpr[10] = kvm_arch_vcpu_id(CPU(cpu)); /* a0 */
-> +    env->gpr[10] = kvm_arch_vcpu_id(cs);       /* a0 */
->      env->gpr[11] = cpu->env.fdt_addr;          /* a1 */
->  
-> -    kvm_riscv_reset_regs_csr(env);
-> +    kvm_riscv_reset_regs_csr(cs, env);
->  }
->  
->  void kvm_riscv_set_irq(RISCVCPU *cpu, int irq, int level)
-> -- 
-> 2.49.0
-> 
->
-
-I would just drop this patch and make the default 'virt' cpu type 'max',
-then nobody will hit the issue. We should also fix the [guest] kernel,
-which I'll try to do soon.
-
-Thanks,
-drew
 
