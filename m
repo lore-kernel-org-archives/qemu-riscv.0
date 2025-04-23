@@ -4,80 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F2DB1C369D7
-	for <qemu-riscv@archiver.kernel.org>; Wed, 23 Apr 2025 11:09:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 51BE6C369CB
+	for <qemu-riscv@archiver.kernel.org>; Wed, 23 Apr 2025 11:09:39 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1u7Xwg-0004Wv-MF; Wed, 23 Apr 2025 07:07:14 -0400
+	id 1u7XwZ-0004T1-K5; Wed, 23 Apr 2025 07:07:07 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1u7XwY-0004T3-Qh
- for qemu-riscv@nongnu.org; Wed, 23 Apr 2025 07:07:07 -0400
-Received: from mail-pl1-x62a.google.com ([2607:f8b0:4864:20::62a])
+ id 1u7XwQ-0004OT-Sn
+ for qemu-riscv@nongnu.org; Wed, 23 Apr 2025 07:07:00 -0400
+Received: from mail-pl1-x62b.google.com ([2607:f8b0:4864:20::62b])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1u7XwW-0000NW-Bu
- for qemu-riscv@nongnu.org; Wed, 23 Apr 2025 07:07:06 -0400
-Received: by mail-pl1-x62a.google.com with SMTP id
- d9443c01a7336-227cf12df27so7964315ad.0
- for <qemu-riscv@nongnu.org>; Wed, 23 Apr 2025 04:07:03 -0700 (PDT)
+ id 1u7XwO-0000M8-2b
+ for qemu-riscv@nongnu.org; Wed, 23 Apr 2025 07:06:58 -0400
+Received: by mail-pl1-x62b.google.com with SMTP id
+ d9443c01a7336-22438c356c8so64960185ad.1
+ for <qemu-riscv@nongnu.org>; Wed, 23 Apr 2025 04:06:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1745406423; x=1746011223; darn=nongnu.org;
+ d=ventanamicro.com; s=google; t=1745406414; x=1746011214; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=OdcOyewnTvJazzD+Fddzlx2JrIw4waD2caMO8u8vjDY=;
- b=QGeMq5mbY+RaBXrD3sMHWirA8ORe/8zV+HbyCSwBPJsK4KI63uUl21FW/5qAU9KrQB
- R+zXpgS0COG2zO431KpfJPb4077gVwO0aEcj+mjvUceqgqSaCKpBpmiPBq6i12XulGqP
- YcLD0NdXVkQDkaihL4Cnf69IGwvkePpjnlkswQLMry5DWQOfGrmVsveE7EMUazAn0MbL
- Me0RIzdd8PoZfekEjni1PrW9hxRoLttN/QRLCKqMymdRohUR+bv2rur1xYLEsdmQk5vR
- cCEY/UqBYer9wBpS7kcnr7zotqfRlVsX0hq1oOGEM4yoLB8/HrmzQCx9PbG2XyKySSA7
- so2A==
+ bh=kOYMdiojT2/r6R0mXFsFLmQO6pzYznGqc+aniPhJJNA=;
+ b=eGZaBWPAr6HA++UYCudnGRJ/Xk+I8voQb5XIuz6L1n5goX9ZTcZvCH3GYKa/t/3S3r
+ sE9GZ9Cl6NHz/KEG9qoGaFtE1BmkmAgVxtMlhR4Z59oeDXF16xZH8b1CsisJbuv2/ypg
+ jgjwApruR9/qPq1EMGkDlk7bcOX/u5Xkj7IXAJlukQjGQBSx4sR5FwFq6ftxPJmgxCtm
+ wER7pzbGL4Det8W6RIZ3i783WFEEx7Pi1u0/LFC//hoQo3gOOsxGNvAnl7oPA6WNuGen
+ ADkPTiPh4u0m/yxLFs9MpdR0HMPuJF7jwe4i7IcHltHP0D/1g5Rho5efzBbxpLj9pvy2
+ +9tQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1745406423; x=1746011223;
+ d=1e100.net; s=20230601; t=1745406414; x=1746011214;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=OdcOyewnTvJazzD+Fddzlx2JrIw4waD2caMO8u8vjDY=;
- b=fCunYXJGMEiAQgzOGfXb/7AnVlf9JlrQozNuDt4v3pDSg2vj2vNml9ve88PJ4/aeP+
- purGXoJOOJUN3ai5QVJ7P3DvoBBmc+XGeBYxifJ+e1doQSnwwyCB3qLoX9R5QlWeFz3F
- hc82ubo+VBw+wtmWP/zBFvJFIhff6/Uuvf6W6TKhe8k3pYP53j3y8WEoqXYRgOoBke9B
- g26PVBV5OeJcBbTC1jH5MUq+AN+WOJiZDJnsdBEP34RSjZf+WAiF778HT24btcmcNjON
- TwUU2kKYQbxmzcvzonq4vMwb6vqHsxY7hIFd97fZiTOnHYbkGSeGkNbonwFwEdJIvUp4
- xtVg==
-X-Gm-Message-State: AOJu0Yxqj7QyYDecNJGr+D9r9koTNy8SOWTAICMnQxaRDXdbGvnwKqkU
- BH8fXDu6jJ1fA+1KlWdR9YGNJLokIsXxj02tP+X8vt6GzVeL5XUmfLhc5K9YZ3E=
-X-Gm-Gg: ASbGncsV16+aTmiz9Otd3sWGAKRyo1rEUS3A5J4eIpjNAsiiOlxGxD+FI7g11T1oQAc
- NmZZh7OL6XpTAx+QOilp0Sb+zH5PrLlhR776ZdQOUTXzmvsMIyuwkKxSaPpefctUdb3QrF0uxB8
- orYvBcW98rghRH8BvAJqGEwvaQYc4Wgwjk1LRBAMJb1E+ZiVTfV085FueV05t31hbbAY00JqOqZ
- u5TTP8Aw2aLXp3KDRI1JaKs5g7bCj393rmS0ujGRGCDG0HFvYQa1cnDzSSKSRc7rMcRUNAvR8Yq
- i8GGkgsZQX85uffmMiHQB4EyKb6vRZj4Gf9VxF1g5fVjI3kDumzSVjnkN/6YVAI=
-X-Google-Smtp-Source: AGHT+IG6d6AZdrHlc/b587VHfbByT8/6ZAAM+B+qFaLNq7JW8WdHmqXE5Br4VX0x9mcEAbKmWTP0WQ==
-X-Received: by 2002:a17:903:1aa8:b0:223:607c:1d99 with SMTP id
- d9443c01a7336-22da304bff3mr41374475ad.0.1745406422874; 
- Wed, 23 Apr 2025 04:07:02 -0700 (PDT)
+ bh=kOYMdiojT2/r6R0mXFsFLmQO6pzYznGqc+aniPhJJNA=;
+ b=q7f1okjLm8T7aOWjdx7HRTYcqEGSV99KXO3RfFLjeZAlqYqQjF6hWItov1UzlABPDY
+ GBOz2KLjEIusHnNQvG9wLT/nd8N2ZfuRwGOpUqB4En+b+NLExUUzDiUZon09jUg81s6q
+ SZXTcukiacxorbtq0/tqjzFQF1Vr+xOIMpb5J487G5hZ/UbfCqcUC06C8OKI78X4HbU/
+ u3J2p1ltQORiulU4FtJSdMflzzGMnEcisVDZVULeB6PAcOLJRAviiKE+RY1yeZs4sAv4
+ BmztlnsPbyAZDljjW4c7UB4XeDMcHvTA3omQc0al5RjTDCUbkaLMMyU266GNGO6js8QB
+ urRw==
+X-Gm-Message-State: AOJu0Yzwm6IYopZMoJ6Z7n0BL6huFznT4Miy7/F3z6Ml9Y2d7Tg1RCgd
+ m+Iyu/9Ol837/k7/gZtoxG0uAs+xIUlBz8QdKGJrRV+EgAgp1kOVyRLRbuRlaY8=
+X-Gm-Gg: ASbGnct7FQuLnto3BSGetzSUpVEcUrNF+ANrE36e3pd3SE12S5l4rxuLahOWHikeq94
+ dCr19lp1Q4c4yb5BV5R5U0hOqv3Iwf2RyuuT3gCPR5S9Td95z/TOrANjBsNwVS10hKEetbM7ItO
+ ATs9HA6ndPEkFrbepO2KC+2WUpYuYH10i3XOP4TUypiu+ST+1C4NrUdBmiEQG2k9/8oLxz+Mps7
+ NwuHsKyVa8u2G1fTbfYvQrxs3I7p/ERXYQdfdRr8NZTKJigvNMsFSUIP1Npjf1lOnKAk/Bt+6RX
+ n92fWalhJgHgOJaYzYayNy7dmVxVyCzmc5CcC70Vfa9A/qa2KeX+T7goHDbHmIU=
+X-Google-Smtp-Source: AGHT+IHUL7oP7Mv9XUEcApwneT9S834LfOh7h9WJDSU09Smg+MkhC+AApzzdFRnmF2v5BfUOSLHXrA==
+X-Received: by 2002:a17:903:2383:b0:215:b9a6:5cb9 with SMTP id
+ d9443c01a7336-22c53573d04mr314210705ad.5.1745406414266; 
+ Wed, 23 Apr 2025 04:06:54 -0700 (PDT)
 Received: from localhost.localdomain ([2804:7f0:bcc0:89f4:3b90:a265:963d:8357])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-22c50fdf3b1sm101509895ad.248.2025.04.23.04.07.00
+ d9443c01a7336-22c50fdf3b1sm101509895ad.248.2025.04.23.04.06.51
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 23 Apr 2025 04:07:02 -0700 (PDT)
+ Wed, 23 Apr 2025 04:06:53 -0700 (PDT)
 From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, liwei1518@gmail.com,
  zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Subject: [PATCH 8/9] hw/riscv/virt.c: use s->memmap in finalize_fdt() functions
-Date: Wed, 23 Apr 2025 08:06:29 -0300
-Message-ID: <20250423110630.2249904-9-dbarboza@ventanamicro.com>
+Subject: [PATCH 5/9] hw/riscv/virt.c: use s->memmap in create_fdt() path
+Date: Wed, 23 Apr 2025 08:06:26 -0300
+Message-ID: <20250423110630.2249904-6-dbarboza@ventanamicro.com>
 X-Mailer: git-send-email 2.49.0
 In-Reply-To: <20250423110630.2249904-1-dbarboza@ventanamicro.com>
 References: <20250423110630.2249904-1-dbarboza@ventanamicro.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::62a;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pl1-x62a.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::62b;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pl1-x62b.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -100,154 +100,81 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Change create_fdt_pcie(), create_fdt_reset(), create_fdt_uart() and
-create_fdt_rtc() to use s->memmap in their logic.
+create_fdt(), create_fdt_flash() and create_fdt_fw_cfg() can access the
+memmap via their RISCVVirtState pointers.
 
 Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 ---
- hw/riscv/virt.c | 44 ++++++++++++++++++++++----------------------
- 1 file changed, 22 insertions(+), 22 deletions(-)
+ hw/riscv/virt.c | 19 ++++++++++---------
+ 1 file changed, 10 insertions(+), 9 deletions(-)
 
 diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-index 07ee8e144f..036a0a9bfb 100644
+index 77ebb517f2..02f3659d38 100644
 --- a/hw/riscv/virt.c
 +++ b/hw/riscv/virt.c
-@@ -872,7 +872,7 @@ static void create_fdt_virtio(RISCVVirtState *s, uint32_t irq_virtio_phandle)
+@@ -996,7 +996,7 @@ static void create_fdt_rtc(RISCVVirtState *s, const MemMapEntry *memmap,
      }
  }
  
--static void create_fdt_pcie(RISCVVirtState *s, const MemMapEntry *memmap,
-+static void create_fdt_pcie(RISCVVirtState *s,
-                             uint32_t irq_pcie_phandle,
-                             uint32_t msi_pcie_phandle,
-                             uint32_t iommu_sys_phandle)
-@@ -881,7 +881,7 @@ static void create_fdt_pcie(RISCVVirtState *s, const MemMapEntry *memmap,
-     MachineState *ms = MACHINE(s);
- 
-     name = g_strdup_printf("/soc/pci@%lx",
--        (long) memmap[VIRT_PCIE_ECAM].base);
-+        (long) s->memmap[VIRT_PCIE_ECAM].base);
-     qemu_fdt_setprop_cell(ms->fdt, name, "#address-cells",
-         FDT_PCI_ADDR_CELLS);
-     qemu_fdt_setprop_cell(ms->fdt, name, "#interrupt-cells",
-@@ -892,19 +892,19 @@ static void create_fdt_pcie(RISCVVirtState *s, const MemMapEntry *memmap,
-     qemu_fdt_setprop_string(ms->fdt, name, "device_type", "pci");
-     qemu_fdt_setprop_cell(ms->fdt, name, "linux,pci-domain", 0);
-     qemu_fdt_setprop_cells(ms->fdt, name, "bus-range", 0,
--        memmap[VIRT_PCIE_ECAM].size / PCIE_MMCFG_SIZE_MIN - 1);
-+        s->memmap[VIRT_PCIE_ECAM].size / PCIE_MMCFG_SIZE_MIN - 1);
-     qemu_fdt_setprop(ms->fdt, name, "dma-coherent", NULL, 0);
-     if (s->aia_type == VIRT_AIA_TYPE_APLIC_IMSIC) {
-         qemu_fdt_setprop_cell(ms->fdt, name, "msi-parent", msi_pcie_phandle);
-     }
-     qemu_fdt_setprop_cells(ms->fdt, name, "reg", 0,
--        memmap[VIRT_PCIE_ECAM].base, 0, memmap[VIRT_PCIE_ECAM].size);
-+        s->memmap[VIRT_PCIE_ECAM].base, 0, s->memmap[VIRT_PCIE_ECAM].size);
-     qemu_fdt_setprop_sized_cells(ms->fdt, name, "ranges",
-         1, FDT_PCI_RANGE_IOPORT, 2, 0,
--        2, memmap[VIRT_PCIE_PIO].base, 2, memmap[VIRT_PCIE_PIO].size,
-+        2, s->memmap[VIRT_PCIE_PIO].base, 2, s->memmap[VIRT_PCIE_PIO].size,
-         1, FDT_PCI_RANGE_MMIO,
--        2, memmap[VIRT_PCIE_MMIO].base,
--        2, memmap[VIRT_PCIE_MMIO].base, 2, memmap[VIRT_PCIE_MMIO].size,
-+        2, s->memmap[VIRT_PCIE_MMIO].base,
-+        2, s->memmap[VIRT_PCIE_MMIO].base, 2, s->memmap[VIRT_PCIE_MMIO].size,
-         1, FDT_PCI_RANGE_MMIO_64BIT,
-         2, virt_high_pcie_memmap.base,
-         2, virt_high_pcie_memmap.base, 2, virt_high_pcie_memmap.size);
-@@ -918,8 +918,7 @@ static void create_fdt_pcie(RISCVVirtState *s, const MemMapEntry *memmap,
-     create_pcie_irq_map(s, ms->fdt, name, irq_pcie_phandle);
- }
- 
--static void create_fdt_reset(RISCVVirtState *s, const MemMapEntry *memmap,
--                             uint32_t *phandle)
-+static void create_fdt_reset(RISCVVirtState *s, uint32_t *phandle)
+-static void create_fdt_flash(RISCVVirtState *s, const MemMapEntry *memmap)
++static void create_fdt_flash(RISCVVirtState *s)
  {
-     char *name;
-     uint32_t test_phandle;
-@@ -927,7 +926,7 @@ static void create_fdt_reset(RISCVVirtState *s, const MemMapEntry *memmap,
- 
-     test_phandle = (*phandle)++;
-     name = g_strdup_printf("/soc/test@%lx",
--        (long)memmap[VIRT_TEST].base);
-+        (long)s->memmap[VIRT_TEST].base);
-     qemu_fdt_add_subnode(ms->fdt, name);
-     {
-         static const char * const compat[3] = {
-@@ -937,7 +936,7 @@ static void create_fdt_reset(RISCVVirtState *s, const MemMapEntry *memmap,
-                                       (char **)&compat, ARRAY_SIZE(compat));
-     }
-     qemu_fdt_setprop_cells(ms->fdt, name, "reg",
--        0x0, memmap[VIRT_TEST].base, 0x0, memmap[VIRT_TEST].size);
-+        0x0, s->memmap[VIRT_TEST].base, 0x0, s->memmap[VIRT_TEST].size);
-     qemu_fdt_setprop_cell(ms->fdt, name, "phandle", test_phandle);
-     test_phandle = qemu_fdt_get_phandle(ms->fdt, name);
-     g_free(name);
-@@ -959,18 +958,19 @@ static void create_fdt_reset(RISCVVirtState *s, const MemMapEntry *memmap,
-     g_free(name);
- }
- 
--static void create_fdt_uart(RISCVVirtState *s, const MemMapEntry *memmap,
-+static void create_fdt_uart(RISCVVirtState *s,
-                             uint32_t irq_mmio_phandle)
- {
-     g_autofree char *name = NULL;
      MachineState *ms = MACHINE(s);
- 
--    name = g_strdup_printf("/soc/serial@%lx", (long)memmap[VIRT_UART0].base);
-+    name = g_strdup_printf("/soc/serial@%lx",
-+                           (long)s->memmap[VIRT_UART0].base);
-     qemu_fdt_add_subnode(ms->fdt, name);
-     qemu_fdt_setprop_string(ms->fdt, name, "compatible", "ns16550a");
-     qemu_fdt_setprop_cells(ms->fdt, name, "reg",
--        0x0, memmap[VIRT_UART0].base,
--        0x0, memmap[VIRT_UART0].size);
-+        0x0, s->memmap[VIRT_UART0].base,
-+        0x0, s->memmap[VIRT_UART0].size);
-     qemu_fdt_setprop_cell(ms->fdt, name, "clock-frequency", 3686400);
-     qemu_fdt_setprop_cell(ms->fdt, name, "interrupt-parent", irq_mmio_phandle);
-     if (s->aia_type == VIRT_AIA_TYPE_NONE) {
-@@ -983,18 +983,18 @@ static void create_fdt_uart(RISCVVirtState *s, const MemMapEntry *memmap,
-     qemu_fdt_setprop_string(ms->fdt, "/aliases", "serial0", name);
+     hwaddr flashsize = s->memmap[VIRT_FLASH].size / 2;
+@@ -1011,11 +1011,11 @@ static void create_fdt_flash(RISCVVirtState *s, const MemMapEntry *memmap)
+     qemu_fdt_setprop_cell(ms->fdt, name, "bank-width", 4);
  }
  
--static void create_fdt_rtc(RISCVVirtState *s, const MemMapEntry *memmap,
-+static void create_fdt_rtc(RISCVVirtState *s,
-                            uint32_t irq_mmio_phandle)
+-static void create_fdt_fw_cfg(RISCVVirtState *s, const MemMapEntry *memmap)
++static void create_fdt_fw_cfg(RISCVVirtState *s)
  {
-     g_autofree char *name = NULL;
      MachineState *ms = MACHINE(s);
+-    hwaddr base = memmap[VIRT_FW_CFG].base;
+-    hwaddr size = memmap[VIRT_FW_CFG].size;
++    hwaddr base = s->memmap[VIRT_FW_CFG].base;
++    hwaddr size = s->memmap[VIRT_FW_CFG].size;
+     g_autofree char *nodename = g_strdup_printf("/fw-cfg@%" PRIx64, base);
  
--    name = g_strdup_printf("/soc/rtc@%lx", (long)memmap[VIRT_RTC].base);
-+    name = g_strdup_printf("/soc/rtc@%lx", (long)s->memmap[VIRT_RTC].base);
-     qemu_fdt_add_subnode(ms->fdt, name);
-     qemu_fdt_setprop_string(ms->fdt, name, "compatible",
-         "google,goldfish-rtc");
-     qemu_fdt_setprop_cells(ms->fdt, name, "reg",
--        0x0, memmap[VIRT_RTC].base, 0x0, memmap[VIRT_RTC].size);
-+        0x0, s->memmap[VIRT_RTC].base, 0x0, s->memmap[VIRT_RTC].size);
-     qemu_fdt_setprop_cell(ms->fdt, name, "interrupt-parent",
-         irq_mmio_phandle);
-     if (s->aia_type == VIRT_AIA_TYPE_NONE) {
-@@ -1144,14 +1144,14 @@ static void finalize_fdt(RISCVVirtState *s)
-         create_fdt_iommu_sys(s, irq_mmio_phandle, msi_pcie_phandle,
-                              &iommu_sys_phandle);
-     }
--    create_fdt_pcie(s, s->memmap, irq_pcie_phandle, msi_pcie_phandle,
-+    create_fdt_pcie(s, irq_pcie_phandle, msi_pcie_phandle,
-                     iommu_sys_phandle);
- 
--    create_fdt_reset(s, s->memmap, &phandle);
-+    create_fdt_reset(s, &phandle);
- 
--    create_fdt_uart(s, s->memmap, irq_mmio_phandle);
-+    create_fdt_uart(s, irq_mmio_phandle);
- 
--    create_fdt_rtc(s, s->memmap, irq_mmio_phandle);
-+    create_fdt_rtc(s, irq_mmio_phandle);
+     qemu_fdt_add_subnode(ms->fdt, nodename);
+@@ -1146,7 +1146,7 @@ static void finalize_fdt(RISCVVirtState *s)
+     create_fdt_rtc(s, s->memmap, irq_mmio_phandle);
  }
  
- static void create_fdt(RISCVVirtState *s)
+-static void create_fdt(RISCVVirtState *s, const MemMapEntry *memmap)
++static void create_fdt(RISCVVirtState *s)
+ {
+     MachineState *ms = MACHINE(s);
+     uint8_t rng_seed[32];
+@@ -1173,7 +1173,8 @@ static void create_fdt(RISCVVirtState *s, const MemMapEntry *memmap)
+      * The "/soc/pci@..." node is needed for PCIE hotplugs
+      * that might happen before finalize_fdt().
+      */
+-    name = g_strdup_printf("/soc/pci@%lx", (long) memmap[VIRT_PCIE_ECAM].base);
++    name = g_strdup_printf("/soc/pci@%lx",
++                           (long) s->memmap[VIRT_PCIE_ECAM].base);
+     qemu_fdt_add_subnode(ms->fdt, name);
+ 
+     qemu_fdt_add_subnode(ms->fdt, "/chosen");
+@@ -1185,8 +1186,8 @@ static void create_fdt(RISCVVirtState *s, const MemMapEntry *memmap)
+ 
+     qemu_fdt_add_subnode(ms->fdt, "/aliases");
+ 
+-    create_fdt_flash(s, memmap);
+-    create_fdt_fw_cfg(s, memmap);
++    create_fdt_flash(s);
++    create_fdt_fw_cfg(s);
+     create_fdt_pmu(s);
+ }
+ 
+@@ -1720,7 +1721,7 @@ static void virt_machine_init(MachineState *machine)
+             exit(1);
+         }
+     } else {
+-        create_fdt(s, s->memmap);
++        create_fdt(s);
+     }
+ 
+     if (virt_is_iommu_sys_enabled(s)) {
 -- 
 2.49.0
 
