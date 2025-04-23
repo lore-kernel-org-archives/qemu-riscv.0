@@ -4,117 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 41FEFC369CB
-	for <qemu-riscv@archiver.kernel.org>; Wed, 23 Apr 2025 14:03:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CB402C369CB
+	for <qemu-riscv@archiver.kernel.org>; Wed, 23 Apr 2025 15:16:25 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1u7agc-0008LJ-Rp; Wed, 23 Apr 2025 10:02:50 -0400
+	id 1u7bpf-0005zD-Qs; Wed, 23 Apr 2025 11:16:15 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <pbonzini@redhat.com>)
- id 1u7agY-0008Kf-NF
- for qemu-riscv@nongnu.org; Wed, 23 Apr 2025 10:02:46 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <pbonzini@redhat.com>)
- id 1u7agW-0006zg-FP
- for qemu-riscv@nongnu.org; Wed, 23 Apr 2025 10:02:46 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1745416962;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=dmde6222cFgAKhSQtACGe2YpbOe2HQ7ONpMZDtRR7n4=;
- b=NtQ9vt/sxBSu1oGxL1b71VLOajw4jo0iZ1m41bMkgCQffI1oFWexx4AOR90FpmaLa3wHcO
- 0F1eftrxlR7+i/CmorA805EYkMlo0czK5m8Bt5gi6LnpiR0+DMIw8lyh9146M0k7zVKoF9
- AqF3fSQ1j/bKPYU50fw3UOGY/Bsctc8=
-Received: from mail-wm1-f72.google.com (mail-wm1-f72.google.com
- [209.85.128.72]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-74-EIKEPUmOMsmnpW85oFWIfg-1; Wed, 23 Apr 2025 10:02:39 -0400
-X-MC-Unique: EIKEPUmOMsmnpW85oFWIfg-1
-X-Mimecast-MFC-AGG-ID: EIKEPUmOMsmnpW85oFWIfg_1745416958
-Received: by mail-wm1-f72.google.com with SMTP id
- 5b1f17b1804b1-43d08915f61so35275845e9.2
- for <qemu-riscv@nongnu.org>; Wed, 23 Apr 2025 07:02:39 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
+ id 1u7bpU-0005y7-IA
+ for qemu-riscv@nongnu.org; Wed, 23 Apr 2025 11:16:05 -0400
+Received: from mail-ej1-x62c.google.com ([2a00:1450:4864:20::62c])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
+ id 1u7bpR-0000Go-OA
+ for qemu-riscv@nongnu.org; Wed, 23 Apr 2025 11:16:04 -0400
+Received: by mail-ej1-x62c.google.com with SMTP id
+ a640c23a62f3a-ac28e66c0e1so814587766b.0
+ for <qemu-riscv@nongnu.org>; Wed, 23 Apr 2025 08:16:00 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=ventanamicro.com; s=google; t=1745421359; x=1746026159; darn=nongnu.org;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=rbat1DK4qQopIKLfx3o5jXTbNufsSPfKfedcZCpmQD8=;
+ b=kNt+XwJrxEbR6KD0HQcgiAf7BKvMLoD5+rQe9LCpFmXTiQLwGJUvcJrpMkJDmyF2ny
+ eBJt6a3FRDKCxtGFI/IrR71p9FB5wNYViRL0wIY4/pQefQ7nik9iPEHF8qe/XObtQ30E
+ SDLsER1sglTmRwxtiwW1l3MUbKqgHVhNHzb4IBp7uaLmytf4VPjp55IkdxbewPipa3ou
+ O/wNymVH2ZvWqZpQboh0XPQ+P/uLhnlLNcgujk8vg5QH6GdQnPW4Ozdsoq2B0WP4PcFJ
+ pHJNlmKZJTOedmocsKUEsi2z6O3XyLE+ex2jtOxvWpcW1hiK/E+DRXJq6t0fH2MB/RSx
+ Kjyg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1745416958; x=1746021758;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=dmde6222cFgAKhSQtACGe2YpbOe2HQ7ONpMZDtRR7n4=;
- b=OLnR5cvh38BPMvHUy4nzt0XpBNmlr67xYuFKNov8PNLxvelvTTZlOEtRihAXrudfxx
- FtRLYexcTTF/wFXvuWLwkkTq/gZO9BFDCleLPPS954TWOMvCPDWvh5Z8BPph88Wwx4CT
- /kkX0y9pccWbrtBWu4X+UfQ+sulmQjur0pw0mTUm7nm3E+h28hOxitSrN56tgU0uiawx
- ZlMED5gGPRoAf8bd4jaey6XDPMcpT6oJz5JPkm/6S4Gq0lPPX9KtFRFkLVCjy3A43ryi
- otHCWaCttIlefgPVbLLBscUazJyPpr/VXw+nVgCH6sVevf8gn/bVSkyzZVTa/OxLJmnu
- kygg==
+ d=1e100.net; s=20230601; t=1745421359; x=1746026159;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=rbat1DK4qQopIKLfx3o5jXTbNufsSPfKfedcZCpmQD8=;
+ b=UEivjTjXs+quHOW+dhqyMMovJOzAgVK5rea5UmKGpFbl2CY6fxU0yLb5ZZ8ffw/V/4
+ Uleug15MZ5nXxGeVL/o73bCt5JTvkdYCNvViOt6Jsr2SfC1evEnfmiiACW07xGkKd3kb
+ tCHrlDOLVOYSlO2v3FsOeYoh7qSkzUxqch5TOjUOJmIIXew00GdlC8uFGYkMjxBiBaDm
+ kS2T8OmcLE0YhDmK2k9c2jkhaEDK3V04NUxWSNnw4r93YpldsOkfBVUXVzobXuQhAJhi
+ w1OlIYbsmGhdvV7E/tLUIwtleCKegmgQ0JF5PobHgNnon7XHrE8Ld7ZFN2Pnxf8mNpSV
+ TUTQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCX0UlmyBTDa15G+k5hFJhyrCRsKK2lSUL/Z+qb6VhioxQKCUac1dc/Xy5+4sG/XL+49xwC7McttRzzC@nongnu.org
-X-Gm-Message-State: AOJu0YxIy2QLqB8WZr+vgmqR+6/YaaIhX+A2qF2xnC7x22DG3YIGAaed
- iAOl6JMV/2Z0qy+Nm/V5OXO0y0lV24SuLG3R87p4ML41o3+U5X5Xk2Up7NxbCQYg/8Bg5WJ5kNv
- 409Xzbc//hOtkxKxPcUMWmj5/8/FmHIEIVXKtaoHJceUXIktf2NxZ3OQDSYui09mZmMSztukLfr
- 6lP1SW1Hy5/x4EEiBOL66UFzJ76I8=
-X-Gm-Gg: ASbGncv5MWGqCbRwnTVa28R5Rc3hmoRJOeg4gnyntuz8qDAenf6xGko1zmYJddlZE6d
- 60JoT5IzLm3KQ4XssQpeb2g7eyxdnY3en+BB/DvPnklKntcL5B4nfkmpc8bfqLTQJqHs5Hg==
-X-Received: by 2002:a05:600c:4690:b0:43d:17f1:2640 with SMTP id
- 5b1f17b1804b1-4406ac0ed7emr160624385e9.26.1745416957647; 
- Wed, 23 Apr 2025 07:02:37 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IFYebq++udcG39wAHr8+DRjVNNUkKP66/tk8qIiqSBWgT+E67IxSwktYmXYW0xWM5aa8PmI7QYr09Lwa60pW/k=
-X-Received: by 2002:a05:600c:4690:b0:43d:17f1:2640 with SMTP id
- 5b1f17b1804b1-4406ac0ed7emr160622395e9.26.1745416955580; Wed, 23 Apr 2025
- 07:02:35 -0700 (PDT)
+ AJvYcCXZfawiLZXvrrhuKj4RTcBcemnlDXS17xrNYbFAU0aLK10Jc/q2pjbnaocBsFtRG24MbTsklmAJ+i2K@nongnu.org
+X-Gm-Message-State: AOJu0YycA5tPGL0Y0nYKvN2J7d6YtMD8qtK5l2a3zfvTeOhfKB0zxHM3
+ Qb0pfaC54fYraiYR8m6BOQSil51/2gbMAFk2ifgRrLq3GV7yXUvawv9sBUVPjHE=
+X-Gm-Gg: ASbGncu8eo7fxsLMzRwpgrT1jECc1t17S+IgSKNjKeZj8sIaMd1QyRv4kcr3+irKdpk
+ 6YSvn+X6FPDqlIwMedL0xaWj22n8/mOb9WbM2bb0W4koaFiL3by5sZfcCgSLC8dDwaAOf4HsCLJ
+ 3+7w7QEb61dczX+vtGAarkaYrz5GgpD3GkswZmOznYHqMISaQ+w/1uU83WrIEk+j1R61JPvegPO
+ qPSJ8rHxsVU/lDWEcWGFVmmXS6BmQImaHvDjFPZCOahiVwl/LFRnLGKVX48r+WW7xqdWqjuIeGT
+ PYHdWCE2HmtguL6YvJvj/ixlL9aVfikPVgXsTcg=
+X-Google-Smtp-Source: AGHT+IFtU/gppMKdmjnZcIxr6qu1QktTAF09JRVzV+COtc8gT3HxWTqfjSC0Z5RKzH4chDlnvOnEjQ==
+X-Received: by 2002:a17:906:478f:b0:ab7:bac4:b321 with SMTP id
+ a640c23a62f3a-acb74b80e1fmr1581541466b.29.1745421358564; 
+ Wed, 23 Apr 2025 08:15:58 -0700 (PDT)
+Received: from localhost ([2a02:8308:a00c:e200::f716])
+ by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-acb6ec4a1ecsm808584466b.48.2025.04.23.08.15.57
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 23 Apr 2025 08:15:57 -0700 (PDT)
+Date: Wed, 23 Apr 2025 17:15:56 +0200
+From: Andrew Jones <ajones@ventanamicro.com>
+To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
+ liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com, 
+ abologna@redhat.com
+Subject: Re: [PATCH 4/7] target/riscv/kvm: add kvm_csr_cfgs[]
+Message-ID: <20250423-9623c5901480c9e7be10d9e5@orel>
+References: <20250417124839.1870494-1-dbarboza@ventanamicro.com>
+ <20250417124839.1870494-5-dbarboza@ventanamicro.com>
 MIME-Version: 1.0
-References: <20250423100949.2047161-1-ben.dooks@codethink.co.uk>
- <275dd8a6-c4f7-47de-ac45-64612e14b8a7@redhat.com>
- <ee7e6775-9dd7-48b4-a5f3-9189b1386deb@codethink.co.uk>
-In-Reply-To: <ee7e6775-9dd7-48b4-a5f3-9189b1386deb@codethink.co.uk>
-From: Paolo Bonzini <pbonzini@redhat.com>
-Date: Wed, 23 Apr 2025 16:02:23 +0200
-X-Gm-Features: ATxdqUFLzn0NKCyrCjhBBVA_N-b7QxsqYrQIfTMZHLryyfVCAsIKfEB-Z7gK2VI
-Message-ID: <CABgObfay=FyP=nQKGReCRZgVL4HaDF4Lb8Gan9OACtJ4bVDbog@mail.gmail.com>
-Subject: Re: [RFC PATCH] tcg: allow tb_flags to be larger than 32bit
-To: Ben Dooks <ben.dooks@codethink.co.uk>
-Cc: Richard Henderson <richard.henderson@linaro.org>, 
- "Maydell, Peter" <peter.maydell@linaro.org>, Michael Rolnik <mrolnik@gmail.com>,
- brian.cain@oss.qualcomm.com, Helge Deller <deller@gmx.de>,
- Zhao Liu <zhao1.liu@intel.com>, 
- Song Gao <gaosong@loongson.cn>, Laurent Vivier <laurent@vivier.eu>, 
- "Iglesias, Edgar" <edgar.iglesias@gmail.com>,
- =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@linaro.org>, 
- "Jarno, Aurelien" <aurelien@aurel32.net>, Jiaxun Yang <jiaxun.yang@flygoat.com>,
- Aleksandar Rikalo <arikalo@gmail.com>, Stafford Horne <shorne@gmail.com>, 
- Nicholas Piggin <npiggin@gmail.com>,
- Daniel Henrique Barboza <danielhb413@gmail.com>, 
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, 
- Weiwei Li <liwei1518@gmail.com>, LIU Zhiwei <zhiwei_liu@linux.alibaba.com>, 
- Yoshinori Sato <ysato@users.sourceforge.jp>,
- David Hildenbrand <david@redhat.com>, 
- Ilya Leoshkevich <iii@linux.ibm.com>, Thomas Huth <thuth@redhat.com>, 
- Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
- Artyom Tarasenko <atar4qemu@gmail.com>, 
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- Max Filippov <jcmvbkbc@gmail.com>, 
- qemu-devel <qemu-devel@nongnu.org>, qemu-arm <qemu-arm@nongnu.org>, 
- "zmta06.collab.prod.int.phx2.redhat.com, list@suse.de" <qemu-ppc@nongnu.org>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>, 
- qemu-s390x <qemu-s390x@nongnu.org>
-X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: UVPtbvSwXCm6UZgWmrrXT7GhBnd78ZxV73gJukcjL2c_1745416958
-X-Mimecast-Originator: redhat.com
-Content-Type: multipart/alternative; boundary="0000000000009f72940633728dbf"
-Received-SPF: pass client-ip=170.10.133.124; envelope-from=pbonzini@redhat.com;
- helo=us-smtp-delivery-124.mimecast.com
-X-Spam_score_int: -23
-X-Spam_score: -2.4
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20250417124839.1870494-5-dbarboza@ventanamicro.com>
+Received-SPF: pass client-ip=2a00:1450:4864:20::62c;
+ envelope-from=ajones@ventanamicro.com; helo=mail-ej1-x62c.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
 X-Spam_bar: --
-X-Spam_report: (-2.4 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.294,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- HTML_MESSAGE=0.001, RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H5=0.001,
- RCVD_IN_MSPIKE_WL=0.001, RCVD_IN_VALIDITY_CERTIFIED_BLOCKED=0.001,
- RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001, SPF_HELO_NONE=0.001,
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -131,229 +102,236 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
---0000000000009f72940633728dbf
-Content-Type: text/plain; charset="UTF-8"
+On Thu, Apr 17, 2025 at 09:48:36AM -0300, Daniel Henrique Barboza wrote:
+> At this moment we're not checking if the host has support for any
+> specific CSR before doing get/put regs. This will cause problems if the
+> host KVM doesn't support it (see [1] as an example).
+> 
+> We'll use the same approach done with the CPU extensions: read all known
+> KVM CSRs during init() to check for availability, then read/write them
+> if they are present. This will be made by either using get-reglist or by
+> directly reading the CSRs.
+> 
+> For now we'll just convert the CSRs to use a kvm_csr_cfg[] array,
+> reusing the same KVMCPUConfig abstraction we use for extensions, and use
+> the array in (get|put)_csr_regs() instead of manually listing them. A
+> lot of boilerplate will be added but at least we'll automate the get/put
+> procedure for CSRs, i.e. adding a new CSR in the future will be a matter
+> of adding it in kvm_csr_regs[] and everything else will be taken care
+> of.
+> 
+> Despite all the code changes no behavioral change is made.
+> 
+> [1] https://lore.kernel.org/qemu-riscv/CABJz62OfUDHYkQ0T3rGHStQprf1c7_E0qBLbLKhfv=+jb0SYAw@mail.gmail.com/
+> 
+> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+> ---
+>  target/riscv/cpu.h         |   1 +
+>  target/riscv/kvm/kvm-cpu.c | 119 ++++++++++++++++++++++++++-----------
+>  2 files changed, 84 insertions(+), 36 deletions(-)
+> 
+> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+> index 51e49e03de..7a56666f9a 100644
+> --- a/target/riscv/cpu.h
+> +++ b/target/riscv/cpu.h
+> @@ -79,6 +79,7 @@ const char *riscv_get_misa_ext_name(uint32_t bit);
+>  const char *riscv_get_misa_ext_description(uint32_t bit);
+>  
+>  #define CPU_CFG_OFFSET(_prop) offsetof(struct RISCVCPUConfig, _prop)
+> +#define ENV_CSR_OFFSET(_csr) offsetof(CPURISCVState, _csr)
+>  
+>  typedef struct riscv_cpu_profile {
+>      struct riscv_cpu_profile *u_parent;
+> diff --git a/target/riscv/kvm/kvm-cpu.c b/target/riscv/kvm/kvm-cpu.c
+> index 0bcadab977..99a4f01b15 100644
+> --- a/target/riscv/kvm/kvm-cpu.c
+> +++ b/target/riscv/kvm/kvm-cpu.c
+> @@ -114,22 +114,6 @@ static uint64_t kvm_riscv_vector_reg_id(RISCVCPU *cpu,
+>      KVM_RISCV_REG_ID_ULONG(KVM_REG_RISCV_VECTOR, \
+>                             KVM_REG_RISCV_VECTOR_CSR_REG(name))
+>  
+> -#define KVM_RISCV_GET_CSR(cs, env, csr, reg) \
+> -    do { \
+> -        int _ret = kvm_get_one_reg(cs, RISCV_CSR_REG(csr), &reg); \
+> -        if (_ret) { \
+> -            return _ret; \
+> -        } \
+> -    } while (0)
+> -
+> -#define KVM_RISCV_SET_CSR(cs, env, csr, reg) \
+> -    do { \
+> -        int _ret = kvm_set_one_reg(cs, RISCV_CSR_REG(csr), &reg); \
+> -        if (_ret) { \
+> -            return _ret; \
+> -        } \
+> -    } while (0)
+> -
+>  #define KVM_RISCV_GET_TIMER(cs, name, reg) \
+>      do { \
+>          int ret = kvm_get_one_reg(cs, RISCV_TIMER_REG(name), &reg); \
+> @@ -150,6 +134,7 @@ typedef struct KVMCPUConfig {
+>      const char *name;
+>      const char *description;
+>      target_ulong offset;
+> +    uint32_t prop_size;
+>      uint64_t kvm_reg_id;
+>      bool user_set;
+>      bool supported;
+> @@ -251,6 +236,54 @@ static void kvm_riscv_update_cpu_misa_ext(RISCVCPU *cpu, CPUState *cs)
+>      }
+>  }
+>  
+> +#define KVM_CSR_CFG(_name, _env_prop, _env_prop_size, reg_id) \
+> +    {.name = _name, .offset = ENV_CSR_OFFSET(_env_prop), \
+> +     .prop_size = _env_prop_size, .kvm_reg_id = reg_id}
+> +
+> +static KVMCPUConfig kvm_csr_cfgs[] = {
+> +    KVM_CSR_CFG("sstatus", mstatus, sizeof(uint64_t), RISCV_CSR_REG(sstatus)),
+> +    KVM_CSR_CFG("sie", mie, sizeof(uint64_t), RISCV_CSR_REG(sie)),
+> +    KVM_CSR_CFG("stvec", stvec, sizeof(target_ulong), RISCV_CSR_REG(stvec)),
+> +    KVM_CSR_CFG("sscratch", sscratch, sizeof(target_ulong),
+> +                RISCV_CSR_REG(sscratch)),
+> +    KVM_CSR_CFG("sepc", sepc, sizeof(target_ulong), RISCV_CSR_REG(sepc)),
+> +    KVM_CSR_CFG("scause", scause, sizeof(target_ulong), RISCV_CSR_REG(scause)),
+> +    KVM_CSR_CFG("stval", stval, sizeof(target_ulong), RISCV_CSR_REG(stval)),
+> +    KVM_CSR_CFG("sip", mip, sizeof(uint64_t), RISCV_CSR_REG(sip)),
+> +    KVM_CSR_CFG("satp", satp, sizeof(target_ulong), RISCV_CSR_REG(satp)),
 
-Il mer 23 apr 2025, 15:54 Ben Dooks <ben.dooks@codethink.co.uk> ha scritto:
+We don't need to pass in sizeof(env_prop). We can just define KVM_CSR_CFG
+to do it for us.
 
-> > Leaving aside your patch I think you can improve the density of the
-> > tbflags a bit too:
-> >
-> > - PM_MASK_ENABLED, PM_BASE_ENABLED and AXL are unused, which gives you
-> > back 4 bits.
+ #define KVM_CSR_CFG(_name, csr, reg_id) \
+     { .name = _name, .offset = ENV_CSR_OFFSET(csr), \
+       .prop_size = sizeof(((CPURISCVState *)0)->csr), \
+       .kvm_reg_id = reg_id, }
+
+But I don't think we need it at all. See below.
+
+> +};
+> +
+> +static void *kvmconfig_get_env_addr(RISCVCPU *cpu, KVMCPUConfig *csr_cfg)
+> +{
+> +    return (void *)&cpu->env + csr_cfg->offset;
+> +}
+> +
+> +static uint64_t kvm_cpu_csr_get_u32(RISCVCPU *cpu, KVMCPUConfig *csr_cfg)
+
+This should return a uint32_t.
+
+> +{
+> +    uint32_t *val32 = kvmconfig_get_env_addr(cpu, csr_cfg);
+> +    return *val32;
+> +}
+> +
+> +static uint64_t kvm_cpu_csr_get_u64(RISCVCPU *cpu, KVMCPUConfig *csr_cfg)
+> +{
+> +    uint64_t *val64 = kvmconfig_get_env_addr(cpu, csr_cfg);
+> +    return *val64;
+> +}
+> +
+> +static void kvm_cpu_csr_set_u32(RISCVCPU *cpu, KVMCPUConfig *csr_cfg,
+> +                                uint32_t val)
+> +{
+> +    uint32_t *val32 = kvmconfig_get_env_addr(cpu, csr_cfg);
+> +    *val32 = val;
+> +}
+> +
+> +static void kvm_cpu_csr_set_u64(RISCVCPU *cpu, KVMCPUConfig *csr_cfg,
+> +                                uint64_t val)
+> +{
+> +    uint64_t *val64 = kvmconfig_get_env_addr(cpu, csr_cfg);
+> +    *val64 = val;
+> +}
+> +
+>  #define KVM_EXT_CFG(_name, _prop, _reg_id) \
+>      {.name = _name, .offset = CPU_CFG_OFFSET(_prop), \
+>       .kvm_reg_id = _reg_id}
+> @@ -598,34 +631,48 @@ static int kvm_riscv_put_regs_core(CPUState *cs)
+>  
+>  static int kvm_riscv_get_regs_csr(CPUState *cs)
+>  {
+> -    CPURISCVState *env = &RISCV_CPU(cs)->env;
+> +    RISCVCPU *cpu = RISCV_CPU(cs);
+> +    uint64_t reg;
+> +    int i, ret;
+> +
+> +    for (i = 0; i < ARRAY_SIZE(kvm_csr_cfgs); i++) {
+> +        KVMCPUConfig *csr_cfg = &kvm_csr_cfgs[i];
+>  
+> -    KVM_RISCV_GET_CSR(cs, env, sstatus, env->mstatus);
+> -    KVM_RISCV_GET_CSR(cs, env, sie, env->mie);
+> -    KVM_RISCV_GET_CSR(cs, env, stvec, env->stvec);
+> -    KVM_RISCV_GET_CSR(cs, env, sscratch, env->sscratch);
+> -    KVM_RISCV_GET_CSR(cs, env, sepc, env->sepc);
+> -    KVM_RISCV_GET_CSR(cs, env, scause, env->scause);
+> -    KVM_RISCV_GET_CSR(cs, env, stval, env->stval);
+> -    KVM_RISCV_GET_CSR(cs, env, sip, env->mip);
+> -    KVM_RISCV_GET_CSR(cs, env, satp, env->satp);
+> +        ret = kvm_get_one_reg(cs, csr_cfg->kvm_reg_id, &reg);
+> +        if (ret) {
+> +            return ret;
+> +        }
+> +
+> +        if (csr_cfg->prop_size == sizeof(uint32_t)) {
+
+ if (KVM_REG_SIZE(csr_cfg->kvm_reg_id) == sizeof(uint32_t)) {
+     kvm_cpu_csr_set_u32(cpu, csr_cfg, reg);
+ } else if (KVM_REG_SIZE(csr_cfg->kvm_reg_id) == sizeof(uint64_t)) {
+     kvm_cpu_csr_set_u64(cpu, csr_cfg, reg);
+ } else {
+     uh, oh...
+ }
+
+> +            kvm_cpu_csr_set_u32(cpu, csr_cfg, reg);
+> +        } else {
+> +            kvm_cpu_csr_set_u64(cpu, csr_cfg, reg);
+> +        }
+> +    }
+>  
+>      return 0;
+>  }
+>  
+>  static int kvm_riscv_put_regs_csr(CPUState *cs)
+>  {
+> -    CPURISCVState *env = &RISCV_CPU(cs)->env;
+> +    RISCVCPU *cpu = RISCV_CPU(cs);
+> +    uint64_t reg;
+> +    int i, ret;
+> +
+> +    for (i = 0; i < ARRAY_SIZE(kvm_csr_cfgs); i++) {
+> +        KVMCPUConfig *csr_cfg = &kvm_csr_cfgs[i];
+> +
+> +        if (csr_cfg->prop_size == sizeof(uint32_t)) {
+> +            reg = kvm_cpu_csr_get_u32(cpu, csr_cfg);
+> +        } else {
+> +            reg = kvm_cpu_csr_get_u64(cpu, csr_cfg);
+> +        }
+
+same comment as above
+
+>  
+> -    KVM_RISCV_SET_CSR(cs, env, sstatus, env->mstatus);
+> -    KVM_RISCV_SET_CSR(cs, env, sie, env->mie);
+> -    KVM_RISCV_SET_CSR(cs, env, stvec, env->stvec);
+> -    KVM_RISCV_SET_CSR(cs, env, sscratch, env->sscratch);
+> -    KVM_RISCV_SET_CSR(cs, env, sepc, env->sepc);
+> -    KVM_RISCV_SET_CSR(cs, env, scause, env->scause);
+> -    KVM_RISCV_SET_CSR(cs, env, stval, env->stval);
+> -    KVM_RISCV_SET_CSR(cs, env, sip, env->mip);
+> -    KVM_RISCV_SET_CSR(cs, env, satp, env->satp);
+> +        ret = kvm_set_one_reg(cs, csr_cfg->kvm_reg_id, &reg);
+> +        if (ret) {
+> +            return ret;
+> +        }
+> +    }
+>  
+>      return 0;
+>  }
+> -- 
+> 2.49.0
+> 
 >
-> Hmm, the PM_MASK_ENABLED, PM_BASE_ENABLED are also used by VMA and VTA
->
 
-Ah, indeed they were reused without removing the old ones. So those are
-out...
-
-> - VLMUL == 4 is invalid, and you can use that to get rid of VILL
-
-> - SEW reserves 3 bits, but TCG only supports 8/16/32/64; that could be
-> > one more bit if you can live with the limitation
->
-
-... and any of these two is the easiest in the short term if you need to
-recoup one bit.
-
-Paolo
-
-> This is already 6 bits, but for FS and VS it may be efficient enough to
-> > have just one bit (dirty vs. everything else): for all cases other than
-> > dirty, REQUIRE_FPU and require_rv* can call a helper to look at the
-> > actual MSTATUS and generate the exception if the extension is disabled;
-> > then the caller always proceeds with translation into TCG ops(*).  The
-> > overhead for the DISABLED/INITIAL/CLEAN cases is minimal and it gives
-> > back 2 more bits.
-> >
-> > Finally, in many cases it makes sense to do a full TB flush when CSRs
-> > change.  However I am not sure if this could be done for RISC-V, maybe
-> > for the CFI enabled bits?
->
-> I'll have a look at those, but for now I'm going back to 9.1
->
->
-> > Thanks,
-> >
-> > Paolo
-> >
-> > (*) that is:
-> >
-> > static bool require_rvv(DisasContext *s)
-> > {
-> >      REQUIRE_EXT(s, RVV);
-> >      if (!s->mstatus_vs_dirty) {
-> >          gen_helper_require_rvv(tcg_env);
-> >      }
-> >      return true;
-> > }
-> >
-> > static bool require_rvf(DisasContext *s)
-> > {
-> >      switch (s->sew) {
-> >      case MO_16:
-> >          if (!s->cfg_ptr->ext_zvfh) {
-> >              return false;
-> >          }
-> >          break;
-> >      case MO_32:
-> >          if (s->cfg_ptr->ext_zve32f) {
-> >              return false;
-> >          }
-> >          break;
-> >      case MO_64:
-> >          if (s->cfg_ptr->ext_zve64d) {
-> >              return false;
-> >          }
-> >          break;
-> >      default:
-> >          return false;
-> >      }
-> >
-> >      if (!s->mstatus_fs_dirty) {
-> >          gen_helper_require_rvf(tcg_env);
-> >      }
-> >      return true;
-> > }
-> >
-> >
->
->
-> --
-> Ben Dooks                               http://www.codethink.co.uk/
-> Senior Engineer                         Codethink - Providing Genius
->
-> https://www.codethink.co.uk/privacy.html
->
->
-
---0000000000009f72940633728dbf
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"auto"><div><br><br><div class=3D"gmail_quote gmail_quote_contai=
-ner"><div dir=3D"ltr" class=3D"gmail_attr">Il mer 23 apr 2025, 15:54 Ben Do=
-oks &lt;<a href=3D"mailto:ben.dooks@codethink.co.uk">ben.dooks@codethink.co=
-.uk</a>&gt; ha scritto:<br></div><blockquote class=3D"gmail_quote" style=3D=
-"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-le=
-ft:1ex">&gt; Leaving aside your patch I think you can improve the density o=
-f the <br>
-&gt; tbflags a bit too:<br>
-&gt; <br>
-&gt; - PM_MASK_ENABLED, PM_BASE_ENABLED and AXL are unused, which gives you=
- <br>
-&gt; back 4 bits.<br>
-<br>
-Hmm, the PM_MASK_ENABLED, PM_BASE_ENABLED are also used by VMA and VTA<br><=
-/blockquote></div></div><div dir=3D"auto"><br></div><div dir=3D"auto">Ah, i=
-ndeed they were reused without removing the old ones. So those are out...</=
-div><div dir=3D"auto"><br></div><div dir=3D"auto"><div class=3D"gmail_quote=
- gmail_quote_container"><blockquote class=3D"gmail_quote" style=3D"margin:0=
-px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">
-&gt; - VLMUL =3D=3D 4 is invalid, and you can use that to get rid of VILL</=
-blockquote></div></div><div dir=3D"auto"><div class=3D"gmail_quote gmail_qu=
-ote_container"><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0p=
-x 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">
-&gt; - SEW reserves 3 bits, but TCG only supports 8/16/32/64; that could be=
- <br>
-&gt; one more bit if you can live with the limitation<br></blockquote></div=
-></div><div dir=3D"auto"><br></div><div dir=3D"auto">... and any of these t=
-wo is the easiest in the short term if you need to recoup one bit.</div><di=
-v dir=3D"auto"><br></div><div dir=3D"auto">Paolo</div><div dir=3D"auto"><br=
-></div><div dir=3D"auto"><div class=3D"gmail_quote gmail_quote_container"><=
-blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-l=
-eft:1px solid rgb(204,204,204);padding-left:1ex">
-&gt; This is already 6 bits, but for FS and VS it may be efficient enough t=
-o <br>
-&gt; have just one bit (dirty vs. everything else): for all cases other tha=
-n <br>
-&gt; dirty, REQUIRE_FPU and require_rv* can call a helper to look at the <b=
-r>
-&gt; actual MSTATUS and generate the exception if the extension is disabled=
-; <br>
-&gt; then the caller always proceeds with translation into TCG ops(*).=C2=
-=A0 The <br>
-&gt; overhead for the DISABLED/INITIAL/CLEAN cases is minimal and it gives =
-<br>
-&gt; back 2 more bits.<br>
-&gt; <br>
-&gt; Finally, in many cases it makes sense to do a full TB flush when CSRs<=
-br>
-&gt; change.=C2=A0 However I am not sure if this could be done for RISC-V, =
-maybe <br>
-&gt; for the CFI enabled bits?<br>
-<br>
-I&#39;ll have a look at those, but for now I&#39;m going back to 9.1<br>
-<br>
-<br>
-&gt; Thanks,<br>
-&gt; <br>
-&gt; Paolo<br>
-&gt; <br>
-&gt; (*) that is:<br>
-&gt; <br>
-&gt; static bool require_rvv(DisasContext *s)<br>
-&gt; {<br>
-&gt;=C2=A0 =C2=A0=C2=A0=C2=A0 REQUIRE_EXT(s, RVV);<br>
-&gt;=C2=A0 =C2=A0=C2=A0=C2=A0 if (!s-&gt;mstatus_vs_dirty) {<br>
-&gt;=C2=A0 =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 gen_helper_require_rv=
-v(tcg_env);<br>
-&gt;=C2=A0 =C2=A0=C2=A0=C2=A0 }<br>
-&gt;=C2=A0 =C2=A0=C2=A0=C2=A0 return true;<br>
-&gt; }<br>
-&gt; <br>
-&gt; static bool require_rvf(DisasContext *s)<br>
-&gt; {<br>
-&gt;=C2=A0 =C2=A0=C2=A0=C2=A0 switch (s-&gt;sew) {<br>
-&gt;=C2=A0 =C2=A0=C2=A0=C2=A0 case MO_16:<br>
-&gt;=C2=A0 =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 if (!s-&gt;cfg_ptr-&g=
-t;ext_zvfh) {<br>
-&gt;=C2=A0 =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0 return false;<br>
-&gt;=C2=A0 =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 }<br>
-&gt;=C2=A0 =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 break;<br>
-&gt;=C2=A0 =C2=A0=C2=A0=C2=A0 case MO_32:<br>
-&gt;=C2=A0 =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 if (s-&gt;cfg_ptr-&gt=
-;ext_zve32f) {<br>
-&gt;=C2=A0 =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0 return false;<br>
-&gt;=C2=A0 =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 }<br>
-&gt;=C2=A0 =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 break;<br>
-&gt;=C2=A0 =C2=A0=C2=A0=C2=A0 case MO_64:<br>
-&gt;=C2=A0 =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 if (s-&gt;cfg_ptr-&gt=
-;ext_zve64d) {<br>
-&gt;=C2=A0 =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0 return false;<br>
-&gt;=C2=A0 =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 }<br>
-&gt;=C2=A0 =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 break;<br>
-&gt;=C2=A0 =C2=A0=C2=A0=C2=A0 default:<br>
-&gt;=C2=A0 =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 return false;<br>
-&gt;=C2=A0 =C2=A0=C2=A0=C2=A0 }<br>
-&gt; <br>
-&gt;=C2=A0 =C2=A0=C2=A0=C2=A0 if (!s-&gt;mstatus_fs_dirty) {<br>
-&gt;=C2=A0 =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 gen_helper_require_rv=
-f(tcg_env);<br>
-&gt;=C2=A0 =C2=A0=C2=A0=C2=A0 }<br>
-&gt;=C2=A0 =C2=A0=C2=A0=C2=A0 return true;<br>
-&gt; }<br>
-&gt; <br>
-&gt; <br>
-<br>
-<br>
--- <br>
-Ben Dooks=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0<a href=3D"http://www.codethin=
-k.co.uk/" rel=3D"noreferrer noreferrer" target=3D"_blank">http://www.codeth=
-ink.co.uk/</a><br>
-Senior Engineer=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0Codethink - Providing Genius<br>
-<br>
-<a href=3D"https://www.codethink.co.uk/privacy.html" rel=3D"noreferrer nore=
-ferrer" target=3D"_blank">https://www.codethink.co.uk/privacy.html</a><br>
-<br>
-</blockquote></div></div></div>
-
---0000000000009f72940633728dbf--
-
+Thanks,
+drew
 
