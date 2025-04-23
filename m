@@ -4,89 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8C513C369CB
-	for <qemu-riscv@archiver.kernel.org>; Wed, 23 Apr 2025 11:07:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 414D0C369CB
+	for <qemu-riscv@archiver.kernel.org>; Wed, 23 Apr 2025 11:08:11 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1u7XwV-0004QJ-IT; Wed, 23 Apr 2025 07:07:04 -0400
+	id 1u7Xwb-0004VA-BT; Wed, 23 Apr 2025 07:07:10 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1u7XwH-0004Lj-0d
- for qemu-riscv@nongnu.org; Wed, 23 Apr 2025 07:06:50 -0400
-Received: from mail-pl1-x631.google.com ([2607:f8b0:4864:20::631])
+ id 1u7XwT-0004Q0-Mn
+ for qemu-riscv@nongnu.org; Wed, 23 Apr 2025 07:07:02 -0400
+Received: from mail-pl1-x62d.google.com ([2607:f8b0:4864:20::62d])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1u7XwD-0000KL-DO
- for qemu-riscv@nongnu.org; Wed, 23 Apr 2025 07:06:47 -0400
-Received: by mail-pl1-x631.google.com with SMTP id
- d9443c01a7336-22435603572so66944375ad.1
- for <qemu-riscv@nongnu.org>; Wed, 23 Apr 2025 04:06:44 -0700 (PDT)
+ id 1u7XwR-0000MV-2f
+ for qemu-riscv@nongnu.org; Wed, 23 Apr 2025 07:07:01 -0400
+Received: by mail-pl1-x62d.google.com with SMTP id
+ d9443c01a7336-2243803b776so97151335ad.0
+ for <qemu-riscv@nongnu.org>; Wed, 23 Apr 2025 04:06:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1745406403; x=1746011203; darn=nongnu.org;
+ d=ventanamicro.com; s=google; t=1745406417; x=1746011217; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=EYmpMs/o04+SEBZ1SRQFaE1GuD9MT41yqQ25wxrcfqg=;
- b=ojslz7Yob5reYLL7SqZewC3PLhwmN7pOHaTVLj0jE/4Ycrm8jvXJSCKEAl88r/DRjG
- 8EXbjnzj5Y9qqOQrNBC4HA4zDK6eo7/K+ujgWieBbuSnTA1hWiZbi4RTKNXuQ0jB5Xzr
- l/EpZVtjoffCmbYMNTcVztVl+gK4PP/mfuvw12l0GK2fmYpUJV+f/lpsFSbBt89J2URE
- eFRV7WmdMHFXl19Y9BeqlMwX5maCLrrVxvWm7jsX2dMgyqZVTvpO/B4f00SaV1Rgr8m9
- nz5m+h7qQyceMDS3vFfVpF+WQUHG9leAoJHtOKwqtfwzPQnsl35vbuj4+fHvVEeSGNJQ
- inoQ==
+ bh=Cr0Gf4k6g9qYz+9x5ZLTfRCeFjNoU92UFjwLG9yy81g=;
+ b=PKVW0TrAWidPsVAOMGpyiiX2DBSfreJfMHs0KQ0wrrWjYDSR1J0D8eNz778gDsTQAQ
+ 3qH3Jfough5f2DYW/GYBWc3DpWJ+3jeWSJUcqmQQcRtTt4HpobK9G4Eya/rD0df3Hmlm
+ OLnt+e6nq5ilZ1w0HWEIkpEaAKdQXLZi3TICNk/K90GrVqu2azst3jKPjHDwEQKQzgwX
+ s2q33M+72qS3vR0ssNqgvNy96GrrGph1CosjX4Xk1jVQJbGq7SNeZJP0LVAnZgUFVdDJ
+ GV55isP9cn4QKwPBDkhFBgJTAbOWNnF0LeWuRSAgaMMD146Cv11xHjATiwS9cUg1QySm
+ oTFw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1745406403; x=1746011203;
+ d=1e100.net; s=20230601; t=1745406417; x=1746011217;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=EYmpMs/o04+SEBZ1SRQFaE1GuD9MT41yqQ25wxrcfqg=;
- b=gEBYSqAssB1d/rJhCuKY8469+6eWqN3Q+w03XVYxcmRhjqRCnz/3GEtdQfqRFw9DyR
- rd2IgsghP052az3ZmGzIU6R9bqV+gjyW0sug+EO4dojRi4XaqnzGCNhkDsnGbJ7G+Vve
- 4Bz6GjgZG1IdMSXv8kz6QjCBLMKqJzkI9ztiuZ6jE3Qs5lgd/DDwc3m/U5c+wjUq0G7r
- WBe4sHq/xxyiRZyKdzJ3HOnq8/SAmNNbjWjhnuEpeqXCZej5fcVwmGandKoHD6xT36Oh
- z01sYCqAUqan8zA0IYsIR6cAiuDxL2YBq9OWpGKzQfVxSnj/3oAIWmFIgd0E/o9Pk71t
- TeMg==
-X-Gm-Message-State: AOJu0Yxcuifvhc2faY3mnbf5T8dh/oLfjxrq+EMb6BAGGEoupkaurnKs
- QXe75bCHSehb7oOLWdScHf8ZFwNE1+LNFKb3TQ6PFHQ2AwrAsXfb+4vj4HcrG+kjSICkLe0KeV5
- h
-X-Gm-Gg: ASbGncuBaZYxhomSE1HvW5ZTAU3YomGSXrfV2OHLYQ8hi2X5amETCpRVXfsteMh4vzN
- BukyBOoZLFNxwAzd4FWgMz4A2kqgQ/+3B3j7vLAqnbr25ezYVS0/lWwbW6fr+9OnCMnY0MXvAw9
- AhpPDqAbIXbHtQbm3tvY2ItRQRtSPqfShWWuvYiK+F6/cyqKE7NU+KG7UKu320voORNaBGw9ZPv
- D4MX2y5RXf5Xp9z2nGxvWFerfcQuTP3BdGcBmsSohfjgcnfPI31yKsHAhx1RrWzZZwTyGMHw7/s
- Mhf8G1f9O4IS+xexEKDQJUbBHwvZgfbyrSSUonXs6sLDatF2GaMc2YpCocKzKmO7HfFue/Xo2A=
- =
-X-Google-Smtp-Source: AGHT+IEBo93Is7EqVzGUYuc5avELRwWWgrXKiWq/EExEM0bhAp8VK8XtwQeGaZGJ5Ldhw3KO5a19gg==
-X-Received: by 2002:a17:903:1ce:b0:223:f9a4:3f9c with SMTP id
- d9443c01a7336-22c5337ca0cmr252056435ad.9.1745406403363; 
- Wed, 23 Apr 2025 04:06:43 -0700 (PDT)
+ bh=Cr0Gf4k6g9qYz+9x5ZLTfRCeFjNoU92UFjwLG9yy81g=;
+ b=JuBFNXyr5FKhzr1jjMnoyIboLYPff/ptlKwWku17GSGASlhBeFHzgr28815DAvXWdT
+ Gpr8EJOSW9Figmn38d0EzhC6jJcOqGzE5/GdUbfRlt1HIlEVL8KfLWIOAu97Qa6Qkp2D
+ br+/s+mN7ETduGnONCUfIBgCZHmvk6OGfwx1buYnaVG8va3U5lSmdhXI/TF+KuasDuZ/
+ esIvYQ5M35LtotIicW1iPX/jFgjEiDF3piLI3ck7o0mURbzj+BvtuUC5C9IqviHQ2m5Y
+ iZFE+An+MvnCMtDBP5y5AwddR8DvxbWjSIACvivKoaGQwb9SP6AYxedC0yM3RcmAMKah
+ ifJQ==
+X-Gm-Message-State: AOJu0Yx3bDfG5xQo+T9pwmQeujK1Uaweh982Wq0H3n4U+PWW6hGouuRM
+ R5KL3PsJaLi20hCeA59/YVq/kirS/EQEg2v5umc6VLpkCmhyMRrdIFBKiMd2SpU=
+X-Gm-Gg: ASbGncsCa1ZN4Qavrlwjo9uM81TxJcwS7PugeUpixcglPv2K3LbFfKKqc2l5djQxDOF
+ hYFTvX7JzPzUpB3Kbny6EfgL//R5+sw8Q3YVn+9BAs432EoaspD4lHAVJdzbctFvM9eH9lmto+4
+ t/ftM2WARAVhoB/2xb45rP1C8RdMwfUcNeB+2V/QbxQzA4r9q7jCAqGo4VhcG1BM9Su2fzQGkpR
+ EEklP6NAMQwDupf+UyE4XIgDOE5ol5RitKsYkSuLAr/h7LYbguQVDa9KlvOEdHZDy6FhW7mz/NW
+ g5GTDOxy1sraqBarbu+13NInjbBnRXqyEi9apWLxmyOn4XO/3xpF+1fDqVxGL/Y=
+X-Google-Smtp-Source: AGHT+IFzq6UOCzcyvBlecYcIr4Vblw1o5wR1C7wTpMko07+6wiW9jcnSom2h7DZT40JBHU9PYVx1Bg==
+X-Received: by 2002:a17:902:d48f:b0:220:ff3f:6cba with SMTP id
+ d9443c01a7336-22c53618d09mr287159115ad.38.1745406417221; 
+ Wed, 23 Apr 2025 04:06:57 -0700 (PDT)
 Received: from localhost.localdomain ([2804:7f0:bcc0:89f4:3b90:a265:963d:8357])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-22c50fdf3b1sm101509895ad.248.2025.04.23.04.06.40
+ d9443c01a7336-22c50fdf3b1sm101509895ad.248.2025.04.23.04.06.54
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 23 Apr 2025 04:06:42 -0700 (PDT)
+ Wed, 23 Apr 2025 04:06:56 -0700 (PDT)
 From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, liwei1518@gmail.com,
  zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Subject: [PATCH 1/9] hw/riscv/virt.c: enforce s->memmap use in machine_init()
-Date: Wed, 23 Apr 2025 08:06:22 -0300
-Message-ID: <20250423110630.2249904-2-dbarboza@ventanamicro.com>
+Subject: [PATCH 6/9] hw/riscv/virt.c: use s->memmap in create_fdt_sockets()
+ path
+Date: Wed, 23 Apr 2025 08:06:27 -0300
+Message-ID: <20250423110630.2249904-7-dbarboza@ventanamicro.com>
 X-Mailer: git-send-email 2.49.0
 In-Reply-To: <20250423110630.2249904-1-dbarboza@ventanamicro.com>
 References: <20250423110630.2249904-1-dbarboza@ventanamicro.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::631;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pl1-x631.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::62d;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pl1-x62d.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ T_FILL_THIS_FORM_SHORT=0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -102,191 +101,297 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Throughout the code we're accessing the board memmap, most of the time,
-by accessing it statically via 'virt_memmap'. This static map is also
-assigned in the machine state in s->memmap.
-
-We're also passing it as a variable to some fdt functions, which is
-unorthodox since we can spare a function argument by accessing it
-statically or via the machine state.
-
-All the current forms are valid but not all of the are scalable. In the
-future we will version this board, and then all this code will need
-rework because it should point to the updated memmap. In this case,
-we'll want to assign the adequate versioned memmap once during init,
-in s->memmap like it is being done today, and the rest of the code
-will access the updated map via s->memmap.
-
-We're also enforcing the pattern of using s->memmap instead of assigning
-it to a temp variable 'memmap'. Code is copy/pasted around all the time
-and being consistent is important.
-
-We'll start these rather mechanical changes with virt_machine_init().
+create_fdt_sockets() and all its fdt helpers (create_fdt_socket_aplic(),
+create_fdt_imsic(), create_fdt_socket_plic(), create_fdt_socket_aclint()
+and create_fdt_socket_memory()) can use s->memmap from their
+RISCVVirtState pointer instead of having an extra memmap argument.
 
 Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 ---
- hw/riscv/virt.c | 54 ++++++++++++++++++++++++-------------------------
- 1 file changed, 27 insertions(+), 27 deletions(-)
+ hw/riscv/virt.c | 89 ++++++++++++++++++++++++++-----------------------
+ 1 file changed, 47 insertions(+), 42 deletions(-)
 
 diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-index c9d255d8a8..6e3e34879f 100644
+index 02f3659d38..dcaf28d1a4 100644
 --- a/hw/riscv/virt.c
 +++ b/hw/riscv/virt.c
-@@ -1527,7 +1527,6 @@ static void virt_machine_done(Notifier *notifier, void *data)
+@@ -301,14 +301,13 @@ static void create_fdt_socket_cpus(RISCVVirtState *s, int socket,
+     }
+ }
  
- static void virt_machine_init(MachineState *machine)
+-static void create_fdt_socket_memory(RISCVVirtState *s,
+-                                     const MemMapEntry *memmap, int socket)
++static void create_fdt_socket_memory(RISCVVirtState *s, int socket)
  {
--    const MemMapEntry *memmap = virt_memmap;
-     RISCVVirtState *s = RISCV_VIRT_MACHINE(machine);
-     MemoryRegion *system_memory = get_system_memory();
-     MemoryRegion *mask_rom = g_new(MemoryRegion, 1);
-@@ -1535,6 +1534,8 @@ static void virt_machine_init(MachineState *machine)
-     int i, base_hartid, hart_count;
-     int socket_count = riscv_socket_count(machine);
+     g_autofree char *mem_name = NULL;
+     uint64_t addr, size;
+     MachineState *ms = MACHINE(s);
  
-+    s->memmap = virt_memmap;
+-    addr = memmap[VIRT_DRAM].base + riscv_socket_mem_offset(ms, socket);
++    addr = s->memmap[VIRT_DRAM].base + riscv_socket_mem_offset(ms, socket);
+     size = riscv_socket_mem_size(ms, socket);
+     mem_name = g_strdup_printf("/memory@%lx", (long)addr);
+     qemu_fdt_add_subnode(ms->fdt, mem_name);
+@@ -319,7 +318,7 @@ static void create_fdt_socket_memory(RISCVVirtState *s,
+ }
+ 
+ static void create_fdt_socket_clint(RISCVVirtState *s,
+-                                    const MemMapEntry *memmap, int socket,
++                                    int socket,
+                                     uint32_t *intc_phandles)
+ {
+     int cpu;
+@@ -340,21 +339,22 @@ static void create_fdt_socket_clint(RISCVVirtState *s,
+         clint_cells[cpu * 4 + 3] = cpu_to_be32(IRQ_M_TIMER);
+     }
+ 
+-    clint_addr = memmap[VIRT_CLINT].base + (memmap[VIRT_CLINT].size * socket);
++    clint_addr = s->memmap[VIRT_CLINT].base +
++                 (s->memmap[VIRT_CLINT].size * socket);
+     clint_name = g_strdup_printf("/soc/clint@%lx", clint_addr);
+     qemu_fdt_add_subnode(ms->fdt, clint_name);
+     qemu_fdt_setprop_string_array(ms->fdt, clint_name, "compatible",
+                                   (char **)&clint_compat,
+                                   ARRAY_SIZE(clint_compat));
+     qemu_fdt_setprop_cells(ms->fdt, clint_name, "reg",
+-        0x0, clint_addr, 0x0, memmap[VIRT_CLINT].size);
++        0x0, clint_addr, 0x0, s->memmap[VIRT_CLINT].size);
+     qemu_fdt_setprop(ms->fdt, clint_name, "interrupts-extended",
+         clint_cells, s->soc[socket].num_harts * sizeof(uint32_t) * 4);
+     riscv_socket_fdt_write_id(ms, clint_name, socket);
+ }
+ 
+ static void create_fdt_socket_aclint(RISCVVirtState *s,
+-                                     const MemMapEntry *memmap, int socket,
++                                     int socket,
+                                      uint32_t *intc_phandles)
+ {
+     int cpu;
+@@ -381,8 +381,10 @@ static void create_fdt_socket_aclint(RISCVVirtState *s,
+     aclint_cells_size = s->soc[socket].num_harts * sizeof(uint32_t) * 2;
+ 
+     if (s->aia_type != VIRT_AIA_TYPE_APLIC_IMSIC) {
+-        addr = memmap[VIRT_CLINT].base + (memmap[VIRT_CLINT].size * socket);
++        addr = s->memmap[VIRT_CLINT].base +
++               (s->memmap[VIRT_CLINT].size * socket);
+         name = g_strdup_printf("/soc/mswi@%lx", addr);
 +
-     /* Check socket count limit */
-     if (VIRT_SOCKETS_MAX < socket_count) {
-         error_report("number of sockets/nodes should be less than %d",
-@@ -1582,7 +1583,7 @@ static void virt_machine_init(MachineState *machine)
+         qemu_fdt_add_subnode(ms->fdt, name);
+         qemu_fdt_setprop_string(ms->fdt, name, "compatible",
+             "riscv,aclint-mswi");
+@@ -397,13 +399,13 @@ static void create_fdt_socket_aclint(RISCVVirtState *s,
+     }
+ 
+     if (s->aia_type == VIRT_AIA_TYPE_APLIC_IMSIC) {
+-        addr = memmap[VIRT_CLINT].base +
++        addr = s->memmap[VIRT_CLINT].base +
+                (RISCV_ACLINT_DEFAULT_MTIMER_SIZE * socket);
+         size = RISCV_ACLINT_DEFAULT_MTIMER_SIZE;
+     } else {
+-        addr = memmap[VIRT_CLINT].base + RISCV_ACLINT_SWI_SIZE +
+-            (memmap[VIRT_CLINT].size * socket);
+-        size = memmap[VIRT_CLINT].size - RISCV_ACLINT_SWI_SIZE;
++        addr = s->memmap[VIRT_CLINT].base + RISCV_ACLINT_SWI_SIZE +
++               (s->memmap[VIRT_CLINT].size * socket);
++        size = s->memmap[VIRT_CLINT].size - RISCV_ACLINT_SWI_SIZE;
+     }
+     name = g_strdup_printf("/soc/mtimer@%lx", addr);
+     qemu_fdt_add_subnode(ms->fdt, name);
+@@ -420,14 +422,15 @@ static void create_fdt_socket_aclint(RISCVVirtState *s,
+     g_free(name);
+ 
+     if (s->aia_type != VIRT_AIA_TYPE_APLIC_IMSIC) {
+-        addr = memmap[VIRT_ACLINT_SSWI].base +
+-            (memmap[VIRT_ACLINT_SSWI].size * socket);
++        addr = s->memmap[VIRT_ACLINT_SSWI].base +
++               (s->memmap[VIRT_ACLINT_SSWI].size * socket);
++
+         name = g_strdup_printf("/soc/sswi@%lx", addr);
+         qemu_fdt_add_subnode(ms->fdt, name);
+         qemu_fdt_setprop_string(ms->fdt, name, "compatible",
+             "riscv,aclint-sswi");
+         qemu_fdt_setprop_cells(ms->fdt, name, "reg",
+-            0x0, addr, 0x0, memmap[VIRT_ACLINT_SSWI].size);
++            0x0, addr, 0x0, s->memmap[VIRT_ACLINT_SSWI].size);
+         qemu_fdt_setprop(ms->fdt, name, "interrupts-extended",
+             aclint_sswi_cells, aclint_cells_size);
+         qemu_fdt_setprop(ms->fdt, name, "interrupt-controller", NULL, 0);
+@@ -438,7 +441,7 @@ static void create_fdt_socket_aclint(RISCVVirtState *s,
+ }
+ 
+ static void create_fdt_socket_plic(RISCVVirtState *s,
+-                                   const MemMapEntry *memmap, int socket,
++                                   int socket,
+                                    uint32_t *phandle, uint32_t *intc_phandles,
+                                    uint32_t *plic_phandles)
+ {
+@@ -452,7 +455,8 @@ static void create_fdt_socket_plic(RISCVVirtState *s,
+     };
+ 
+     plic_phandles[socket] = (*phandle)++;
+-    plic_addr = memmap[VIRT_PLIC].base + (memmap[VIRT_PLIC].size * socket);
++    plic_addr = s->memmap[VIRT_PLIC].base +
++                (s->memmap[VIRT_PLIC].size * socket);
+     plic_name = g_strdup_printf("/soc/plic@%lx", plic_addr);
+     qemu_fdt_add_subnode(ms->fdt, plic_name);
+     qemu_fdt_setprop_cell(ms->fdt, plic_name,
+@@ -491,7 +495,7 @@ static void create_fdt_socket_plic(RISCVVirtState *s,
+     }
+ 
+     qemu_fdt_setprop_cells(ms->fdt, plic_name, "reg",
+-        0x0, plic_addr, 0x0, memmap[VIRT_PLIC].size);
++        0x0, plic_addr, 0x0, s->memmap[VIRT_PLIC].size);
+     qemu_fdt_setprop_cell(ms->fdt, plic_name, "riscv,ndev",
+                           VIRT_IRQCHIP_NUM_SOURCES - 1);
+     riscv_socket_fdt_write_id(ms, plic_name, socket);
+@@ -500,8 +504,8 @@ static void create_fdt_socket_plic(RISCVVirtState *s,
+ 
+     if (!socket) {
+         platform_bus_add_all_fdt_nodes(ms->fdt, plic_name,
+-                                       memmap[VIRT_PLATFORM_BUS].base,
+-                                       memmap[VIRT_PLATFORM_BUS].size,
++                                       s->memmap[VIRT_PLATFORM_BUS].base,
++                                       s->memmap[VIRT_PLATFORM_BUS].size,
+                                        VIRT_PLATFORM_BUS_IRQ);
+     }
+ }
+@@ -588,7 +592,7 @@ static void create_fdt_one_imsic(RISCVVirtState *s, hwaddr base_addr,
+     qemu_fdt_setprop_cell(ms->fdt, imsic_name, "phandle", msi_phandle);
+ }
+ 
+-static void create_fdt_imsic(RISCVVirtState *s, const MemMapEntry *memmap,
++static void create_fdt_imsic(RISCVVirtState *s,
+                              uint32_t *phandle, uint32_t *intc_phandles,
+                              uint32_t *msi_m_phandle, uint32_t *msi_s_phandle)
+ {
+@@ -597,12 +601,12 @@ static void create_fdt_imsic(RISCVVirtState *s, const MemMapEntry *memmap,
+ 
+     if (!kvm_enabled()) {
+         /* M-level IMSIC node */
+-        create_fdt_one_imsic(s, memmap[VIRT_IMSIC_M].base, intc_phandles,
++        create_fdt_one_imsic(s, s->memmap[VIRT_IMSIC_M].base, intc_phandles,
+                              *msi_m_phandle, true, 0);
+     }
+ 
+     /* S-level IMSIC node */
+-    create_fdt_one_imsic(s, memmap[VIRT_IMSIC_S].base, intc_phandles,
++    create_fdt_one_imsic(s, s->memmap[VIRT_IMSIC_S].base, intc_phandles,
+                          *msi_s_phandle, false,
+                          imsic_num_bits(s->aia_guests + 1));
+ 
+@@ -679,7 +683,7 @@ static void create_fdt_one_aplic(RISCVVirtState *s, int socket,
+ }
+ 
+ static void create_fdt_socket_aplic(RISCVVirtState *s,
+-                                    const MemMapEntry *memmap, int socket,
++                                    int socket,
+                                     uint32_t msi_m_phandle,
+                                     uint32_t msi_s_phandle,
+                                     uint32_t *phandle,
+@@ -696,18 +700,19 @@ static void create_fdt_socket_aplic(RISCVVirtState *s,
+ 
+     if (!kvm_enabled()) {
+         /* M-level APLIC node */
+-        aplic_addr = memmap[VIRT_APLIC_M].base +
+-                     (memmap[VIRT_APLIC_M].size * socket);
+-        create_fdt_one_aplic(s, socket, aplic_addr, memmap[VIRT_APLIC_M].size,
++        aplic_addr = s->memmap[VIRT_APLIC_M].base +
++                     (s->memmap[VIRT_APLIC_M].size * socket);
++        create_fdt_one_aplic(s, socket, aplic_addr,
++                             s->memmap[VIRT_APLIC_M].size,
+                              msi_m_phandle, intc_phandles,
+                              aplic_m_phandle, aplic_s_phandle,
+                              true, num_harts);
+     }
+ 
+     /* S-level APLIC node */
+-    aplic_addr = memmap[VIRT_APLIC_S].base +
+-                 (memmap[VIRT_APLIC_S].size * socket);
+-    create_fdt_one_aplic(s, socket, aplic_addr, memmap[VIRT_APLIC_S].size,
++    aplic_addr = s->memmap[VIRT_APLIC_S].base +
++                 (s->memmap[VIRT_APLIC_S].size * socket);
++    create_fdt_one_aplic(s, socket, aplic_addr, s->memmap[VIRT_APLIC_S].size,
+                          msi_s_phandle, intc_phandles,
+                          aplic_s_phandle, 0,
+                          false, num_harts);
+@@ -715,8 +720,8 @@ static void create_fdt_socket_aplic(RISCVVirtState *s,
+     if (!socket) {
+         g_autofree char *aplic_name = fdt_get_aplic_nodename(aplic_addr);
+         platform_bus_add_all_fdt_nodes(ms->fdt, aplic_name,
+-                                       memmap[VIRT_PLATFORM_BUS].base,
+-                                       memmap[VIRT_PLATFORM_BUS].size,
++                                       s->memmap[VIRT_PLATFORM_BUS].base,
++                                       s->memmap[VIRT_PLATFORM_BUS].size,
+                                        VIRT_PLATFORM_BUS_IRQ);
+     }
+ 
+@@ -734,7 +739,7 @@ static void create_fdt_pmu(RISCVVirtState *s)
+     riscv_pmu_generate_fdt_node(ms->fdt, hart.pmu_avail_ctrs, pmu_name);
+ }
+ 
+-static void create_fdt_sockets(RISCVVirtState *s, const MemMapEntry *memmap,
++static void create_fdt_sockets(RISCVVirtState *s,
+                                uint32_t *phandle,
+                                uint32_t *irq_mmio_phandle,
+                                uint32_t *irq_pcie_phandle,
+@@ -770,20 +775,20 @@ static void create_fdt_sockets(RISCVVirtState *s, const MemMapEntry *memmap,
+         create_fdt_socket_cpus(s, socket, clust_name, phandle,
+                                &intc_phandles[phandle_pos]);
+ 
+-        create_fdt_socket_memory(s, memmap, socket);
++        create_fdt_socket_memory(s, socket);
+ 
          if (virt_aclint_allowed() && s->have_aclint) {
-             if (s->aia_type == VIRT_AIA_TYPE_APLIC_IMSIC) {
-                 /* Per-socket ACLINT MTIMER */
--                riscv_aclint_mtimer_create(memmap[VIRT_CLINT].base +
-+                riscv_aclint_mtimer_create(s->memmap[VIRT_CLINT].base +
-                             i * RISCV_ACLINT_DEFAULT_MTIMER_SIZE,
-                         RISCV_ACLINT_DEFAULT_MTIMER_SIZE,
-                         base_hartid, hart_count,
-@@ -1591,28 +1592,28 @@ static void virt_machine_init(MachineState *machine)
-                         RISCV_ACLINT_DEFAULT_TIMEBASE_FREQ, true);
-             } else {
-                 /* Per-socket ACLINT MSWI, MTIMER, and SSWI */
--                riscv_aclint_swi_create(memmap[VIRT_CLINT].base +
--                            i * memmap[VIRT_CLINT].size,
-+                riscv_aclint_swi_create(s->memmap[VIRT_CLINT].base +
-+                            i * s->memmap[VIRT_CLINT].size,
-                         base_hartid, hart_count, false);
--                riscv_aclint_mtimer_create(memmap[VIRT_CLINT].base +
--                            i * memmap[VIRT_CLINT].size +
-+                riscv_aclint_mtimer_create(s->memmap[VIRT_CLINT].base +
-+                            i * s->memmap[VIRT_CLINT].size +
-                             RISCV_ACLINT_SWI_SIZE,
-                         RISCV_ACLINT_DEFAULT_MTIMER_SIZE,
-                         base_hartid, hart_count,
-                         RISCV_ACLINT_DEFAULT_MTIMECMP,
-                         RISCV_ACLINT_DEFAULT_MTIME,
-                         RISCV_ACLINT_DEFAULT_TIMEBASE_FREQ, true);
--                riscv_aclint_swi_create(memmap[VIRT_ACLINT_SSWI].base +
--                            i * memmap[VIRT_ACLINT_SSWI].size,
-+                riscv_aclint_swi_create(s->memmap[VIRT_ACLINT_SSWI].base +
-+                            i * s->memmap[VIRT_ACLINT_SSWI].size,
-                         base_hartid, hart_count, true);
-             }
+-            create_fdt_socket_aclint(s, memmap, socket,
++            create_fdt_socket_aclint(s, socket,
+                                      &intc_phandles[phandle_pos]);
          } else if (tcg_enabled()) {
-             /* Per-socket SiFive CLINT */
-             riscv_aclint_swi_create(
--                    memmap[VIRT_CLINT].base + i * memmap[VIRT_CLINT].size,
-+                    s->memmap[VIRT_CLINT].base + i * s->memmap[VIRT_CLINT].size,
-                     base_hartid, hart_count, false);
--            riscv_aclint_mtimer_create(memmap[VIRT_CLINT].base +
--                        i * memmap[VIRT_CLINT].size + RISCV_ACLINT_SWI_SIZE,
-+            riscv_aclint_mtimer_create(s->memmap[VIRT_CLINT].base +
-+                    i * s->memmap[VIRT_CLINT].size + RISCV_ACLINT_SWI_SIZE,
-                     RISCV_ACLINT_DEFAULT_MTIMER_SIZE, base_hartid, hart_count,
-                     RISCV_ACLINT_DEFAULT_MTIMECMP, RISCV_ACLINT_DEFAULT_MTIME,
-                     RISCV_ACLINT_DEFAULT_TIMEBASE_FREQ, true);
-@@ -1620,11 +1621,11 @@ static void virt_machine_init(MachineState *machine)
- 
-         /* Per-socket interrupt controller */
-         if (s->aia_type == VIRT_AIA_TYPE_NONE) {
--            s->irqchip[i] = virt_create_plic(memmap, i,
-+            s->irqchip[i] = virt_create_plic(s->memmap, i,
-                                              base_hartid, hart_count);
-         } else {
-             s->irqchip[i] = virt_create_aia(s->aia_type, s->aia_guests,
--                                            memmap, i, base_hartid,
-+                                            s->memmap, i, base_hartid,
-                                             hart_count);
+-            create_fdt_socket_clint(s, memmap, socket,
++            create_fdt_socket_clint(s, socket,
+                                     &intc_phandles[phandle_pos]);
          }
- 
-@@ -1646,8 +1647,8 @@ static void virt_machine_init(MachineState *machine)
-     if (kvm_enabled() && virt_use_kvm_aia_aplic_imsic(s->aia_type)) {
-         kvm_riscv_aia_create(machine, IMSIC_MMIO_GROUP_MIN_SHIFT,
-                              VIRT_IRQCHIP_NUM_SOURCES, VIRT_IRQCHIP_NUM_MSIS,
--                             memmap[VIRT_APLIC_S].base,
--                             memmap[VIRT_IMSIC_S].base,
-+                             s->memmap[VIRT_APLIC_S].base,
-+                             s->memmap[VIRT_IMSIC_S].base,
-                              s->aia_guests);
      }
  
-@@ -1663,21 +1664,20 @@ static void virt_machine_init(MachineState *machine)
-         virt_high_pcie_memmap.size = VIRT32_HIGH_PCIE_MMIO_SIZE;
-     } else {
-         virt_high_pcie_memmap.size = VIRT64_HIGH_PCIE_MMIO_SIZE;
--        virt_high_pcie_memmap.base = memmap[VIRT_DRAM].base + machine->ram_size;
-+        virt_high_pcie_memmap.base = s->memmap[VIRT_DRAM].base +
-+                                     machine->ram_size;
-         virt_high_pcie_memmap.base =
-             ROUND_UP(virt_high_pcie_memmap.base, virt_high_pcie_memmap.size);
+     if (s->aia_type == VIRT_AIA_TYPE_APLIC_IMSIC) {
+-        create_fdt_imsic(s, memmap, phandle, intc_phandles,
+-            &msi_m_phandle, &msi_s_phandle);
++        create_fdt_imsic(s, phandle, intc_phandles,
++                         &msi_m_phandle, &msi_s_phandle);
+         *msi_pcie_phandle = msi_s_phandle;
      }
  
--    s->memmap = virt_memmap;
--
-     /* register system main memory (actual RAM) */
--    memory_region_add_subregion(system_memory, memmap[VIRT_DRAM].base,
--        machine->ram);
-+    memory_region_add_subregion(system_memory, s->memmap[VIRT_DRAM].base,
-+                                machine->ram);
+@@ -792,7 +797,7 @@ static void create_fdt_sockets(RISCVVirtState *s, const MemMapEntry *memmap,
+      * mode, we'll use only one APLIC instance.
+      */
+     if (!virt_use_emulated_aplic(s->aia_type)) {
+-        create_fdt_socket_aplic(s, memmap, 0,
++        create_fdt_socket_aplic(s, 0,
+                                 msi_m_phandle, msi_s_phandle, phandle,
+                                 &intc_phandles[0], xplic_phandles,
+                                 ms->smp.cpus);
+@@ -806,11 +811,11 @@ static void create_fdt_sockets(RISCVVirtState *s, const MemMapEntry *memmap,
+             phandle_pos -= s->soc[socket].num_harts;
  
-     /* boot rom */
-     memory_region_init_rom(mask_rom, NULL, "riscv_virt_board.mrom",
--                           memmap[VIRT_MROM].size, &error_fatal);
--    memory_region_add_subregion(system_memory, memmap[VIRT_MROM].base,
-+                           s->memmap[VIRT_MROM].size, &error_fatal);
-+    memory_region_add_subregion(system_memory, s->memmap[VIRT_MROM].base,
-                                 mask_rom);
+             if (s->aia_type == VIRT_AIA_TYPE_NONE) {
+-                create_fdt_socket_plic(s, memmap, socket, phandle,
++                create_fdt_socket_plic(s, socket, phandle,
+                                        &intc_phandles[phandle_pos],
+                                        xplic_phandles);
+             } else {
+-                create_fdt_socket_aplic(s, memmap, socket,
++                create_fdt_socket_aplic(s, socket,
+                                         msi_m_phandle, msi_s_phandle, phandle,
+                                         &intc_phandles[phandle_pos],
+                                         xplic_phandles,
+@@ -1126,7 +1131,7 @@ static void finalize_fdt(RISCVVirtState *s)
+     uint32_t irq_pcie_phandle = 1, irq_virtio_phandle = 1;
+     uint32_t iommu_sys_phandle = 1;
  
-     /*
-@@ -1688,12 +1688,12 @@ static void virt_machine_init(MachineState *machine)
-     rom_set_fw(s->fw_cfg);
+-    create_fdt_sockets(s, s->memmap, &phandle, &irq_mmio_phandle,
++    create_fdt_sockets(s, &phandle, &irq_mmio_phandle,
+                        &irq_pcie_phandle, &irq_virtio_phandle,
+                        &msi_pcie_phandle);
  
-     /* SiFive Test MMIO device */
--    sifive_test_create(memmap[VIRT_TEST].base);
-+    sifive_test_create(s->memmap[VIRT_TEST].base);
- 
-     /* VirtIO MMIO devices */
-     for (i = 0; i < VIRTIO_COUNT; i++) {
-         sysbus_create_simple("virtio-mmio",
--            memmap[VIRT_VIRTIO].base + i * memmap[VIRT_VIRTIO].size,
-+            s->memmap[VIRT_VIRTIO].base + i * s->memmap[VIRT_VIRTIO].size,
-             qdev_get_gpio_in(virtio_irqchip, VIRTIO_IRQ + i));
-     }
- 
-@@ -1701,11 +1701,11 @@ static void virt_machine_init(MachineState *machine)
- 
-     create_platform_bus(s, mmio_irqchip);
- 
--    serial_mm_init(system_memory, memmap[VIRT_UART0].base,
-+    serial_mm_init(system_memory, s->memmap[VIRT_UART0].base,
-         0, qdev_get_gpio_in(mmio_irqchip, UART0_IRQ), 399193,
-         serial_hd(0), DEVICE_LITTLE_ENDIAN);
- 
--    sysbus_create_simple("goldfish_rtc", memmap[VIRT_RTC].base,
-+    sysbus_create_simple("goldfish_rtc", s->memmap[VIRT_RTC].base,
-         qdev_get_gpio_in(mmio_irqchip, RTC_IRQ));
- 
-     for (i = 0; i < ARRAY_SIZE(s->flash); i++) {
-@@ -1723,7 +1723,7 @@ static void virt_machine_init(MachineState *machine)
-             exit(1);
-         }
-     } else {
--        create_fdt(s, memmap);
-+        create_fdt(s, s->memmap);
-     }
- 
-     if (virt_is_iommu_sys_enabled(s)) {
 -- 
 2.49.0
 
