@@ -4,41 +4,41 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D2A3DC369CB
-	for <qemu-riscv@archiver.kernel.org>; Wed, 23 Apr 2025 13:11:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0B7D5C369CB
+	for <qemu-riscv@archiver.kernel.org>; Wed, 23 Apr 2025 13:56:20 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1u7ZsB-0001hI-21; Wed, 23 Apr 2025 09:10:43 -0400
+	id 1u7aZg-00045d-QP; Wed, 23 Apr 2025 09:55:40 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <ben.dooks@codethink.co.uk>)
- id 1u7Zrd-0001Ux-3B; Wed, 23 Apr 2025 09:10:13 -0400
+ id 1u7aZd-000447-VE; Wed, 23 Apr 2025 09:55:37 -0400
 Received: from imap4.hz.codethink.co.uk ([188.40.203.114])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <ben.dooks@codethink.co.uk>)
- id 1u7Zra-00004q-HN; Wed, 23 Apr 2025 09:10:08 -0400
+ id 1u7aZb-0006G6-FD; Wed, 23 Apr 2025 09:55:37 -0400
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=codethink.co.uk; s=imap4-20230908; h=Sender:Content-Transfer-Encoding:
  Content-Type:In-Reply-To:From:References:To:Subject:MIME-Version:Date:
  Message-ID:Reply-To:Cc:Content-ID:Content-Description:Resent-Date:Resent-From
  :Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:
  List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=548glwDwT3gf3W/atNFlp97rN1ZgX6DbG9TIWRiaags=; b=JEANxF7de6Dfhy7fikrBLu4V4g
- EffgbXomWZYUGzJFNAEnpE2Ipn9hajnWxLHTT7Le3qqvKBNutr3yRvilOP5TwkmDgkKJsvtiOVecK
- fwZlcLPf5SOI4UofNltqwyg0lqE9uk5mZq+6c0iZ6t+gL/JCD/jUNdZ2H9LLG9XGqD6vrnt050YrA
- z8jBRPlLpnsrDjwRGuHVVHI3ueEhk8N2Vdf74P19AoXug7BnBOlqMo3JGTWKpwyDzCj/hOsydwArL
- vXYVJC+1wiWJ0dx1h4LZLOPcDh6BsVT0i8sP4c6q9XzKbnm05oNk+WpnuS1qSewtJZGJazoV6MDJw
- vCcrOmvQ==;
+ bh=mJWfKt3Nzg2uxMFT7GSfrs8BrAsmmHaSQ9gT2O7SMdo=; b=RsAZE77hMl6fZJmeIwZWtxrwag
+ dasREMyEIYQJiMVvdj5X+A8KlPbrLQRgS0WY3Ac++5EHFusHlS3JRBfomFkaBwK+RtjKJY3loPSEK
+ lgdWkB0iT/CfTPd74rSwqTH90VG1IOI7Kgu2OnB3moV3jVIlqq198QgbJWe6uHlTh8GrqTXbd168t
+ 9igKs9nlaQTuar3TUQx8Eu+whXP8BeHEAQxQlbYfyvQJ6tEm8Jl71bw3ZUTOncfkBx/tmuUeIxVXy
+ kdM2WSkrrrT3t2vY6jiqpv8KtbQlnlEZxBEqLyawd5+vD+Zqy/axYpn9ikjJxAZNXiUZNnC4g33Io
+ ck+Le3pQ==;
 Received: from [167.98.27.226] (helo=[10.35.6.194])
  by imap4.hz.codethink.co.uk with esmtpsa  (Exim 4.94.2 #2 (Debian))
- id 1u7Zqd-001ICB-Te; Wed, 23 Apr 2025 14:09:08 +0100
-Message-ID: <251b8459-3007-4fc2-85b8-aea81e16bc2a@codethink.co.uk>
-Date: Wed, 23 Apr 2025 14:09:06 +0100
+ id 1u7aYl-001JoX-0L; Wed, 23 Apr 2025 14:54:43 +0100
+Message-ID: <ee7e6775-9dd7-48b4-a5f3-9189b1386deb@codethink.co.uk>
+Date: Wed, 23 Apr 2025 14:54:41 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 Subject: Re: [RFC PATCH] tcg: allow tb_flags to be larger than 32bit
-To: richard.henderson@linaro.org, pbonzini@redhat.com,
+To: Paolo Bonzini <pbonzini@redhat.com>, richard.henderson@linaro.org,
  peter.maydell@linaro.org, mrolnik@gmail.com, brian.cain@oss.qualcomm.com,
  deller@gmx.de, zhao1.liu@intel.com, gaosong@loongson.cn, laurent@vivier.eu,
  edgar.iglesias@gmail.com, philmd@linaro.org, aurelien@aurel32.net,
@@ -51,12 +51,13 @@ To: richard.henderson@linaro.org, pbonzini@redhat.com,
  qemu-arm@nongnu.org, qemu-ppc@nongnu.org, qemu-riscv@nongnu.org,
  qemu-s390x@nongnu.org
 References: <20250423100949.2047161-1-ben.dooks@codethink.co.uk>
+ <275dd8a6-c4f7-47de-ac45-64612e14b8a7@redhat.com>
 Content-Language: en-GB
 From: Ben Dooks <ben.dooks@codethink.co.uk>
 Organization: Codethink Limited.
-In-Reply-To: <20250423100949.2047161-1-ben.dooks@codethink.co.uk>
+In-Reply-To: <275dd8a6-c4f7-47de-ac45-64612e14b8a7@redhat.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 Received-SPF: pass client-ip=188.40.203.114;
  envelope-from=ben.dooks@codethink.co.uk; helo=imap4.hz.codethink.co.uk
 X-Spam_score_int: -20
@@ -81,42 +82,102 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 23/04/2025 11:09, Ben Dooks wrote:
-> In adding a new feature to the riscv target, it turns out the tb_flags
-> had already got to the 32-bit limit. Everyone other target has been
-> fine with uint32_t (except perhaps arm which does somethng strange to
-> extend tb_flags, I think).
+On 23/04/2025 14:08, Paolo Bonzini wrote:
+> On 4/23/25 12:09, Ben Dooks wrote:
+>> In adding a new feature to the riscv target, it turns out the
+>> tb_flags had already got to the 32-bit limit. Everyone other target
+>> has been fine with uint32_t (except perhaps arm which does somethng
+>> strange to extend tb_flags, I think).
+>>
+>> To allow extending of tb_flags to be bigger, change the uint32_t to a 
+>> tb_flags_t which a target can define to be bigger (and do this for 
+>> riscv as having tb_flags_t be uint64_t somewhere is necessary to
+>> pick out bugs in this translation).
+>>
+>> This method of extension also stops having to go through each arch 
+>> fixing field usage and anything else that may arise, and given this is 
+>> currently only affecting the tcg, it can be done per target arch.
+>>
+>> Note, target/riscv does not currently use any of the other flag bits 
+>> yet. The work is done as we would like to try the big-endian riscv 
+>> again and someone has already taken the last bit we where using at 
+>> (target/riscv/cpu.h#L666 adding PM_SIGNEXTEND where we had BE_DATA)
 > 
-> To allow extending of tb_flags to be bigger, change the uint32_t to
-> a tb_flags_t which a target can define to be bigger (and do this for
-> riscv as having tb_flags_t be uint64_t somewhere is necessary to pick
-> out bugs in this translation).
+> Leaving aside your patch I think you can improve the density of the 
+> tbflags a bit too:
 > 
-> This method of extension also stops having to go through each arch
-> fixing field usage and anything else that may arise, and given this
-> is currently only affecting the tcg, it can be done per target arch.
-> 
-> Note, target/riscv does not currently use any of the other flag bits
-> yet. The work is done as we would like to try the big-endian riscv
-> again and someone has already taken the last bit we where using at
-> (target/riscv/cpu.h#L666 adding PM_SIGNEXTEND where we had BE_DATA)
-> 
-> Q: Do the cpu_get_tb_state calls need uint32_t changing to the
-> tb_flag_t as part of this?
-> 
-> Q: As part of this, should we also define a FLAG_DP_TB or similar
-> wrapper for the relevant change?
-> 
-> Signed-off-by: Ben Dooks <ben.dooks@codethink.co.uk>
-> ---
+> - PM_MASK_ENABLED, PM_BASE_ENABLED and AXL are unused, which gives you 
+> back 4 bits.
 
-So after trying this, it looks like the struct TranslationBlock also
-has a flags field in it and we missed updating that which had a follow
-on issue of causing failures elsewhere.
+Hmm, the PM_MASK_ENABLED, PM_BASE_ENABLED are also used by VMA and VTA
+which i've not checked if they're actually used from the ctx.
 
-Need to look into whether we should add a config and a global
-tb_flags_t or if the TranslationBlock can include something that
-defines tb_flags_t
+> 
+> - VLMUL == 4 is invalid, and you can use that to get rid of VILL
+> 
+> - SEW reserves 3 bits, but TCG only supports 8/16/32/64; that could be 
+> one more bit if you can live with the limitation
+> 
+> This is already 6 bits, but for FS and VS it may be efficient enough to 
+> have just one bit (dirty vs. everything else): for all cases other than 
+> dirty, REQUIRE_FPU and require_rv* can call a helper to look at the 
+> actual MSTATUS and generate the exception if the extension is disabled; 
+> then the caller always proceeds with translation into TCG ops(*).  The 
+> overhead for the DISABLED/INITIAL/CLEAN cases is minimal and it gives 
+> back 2 more bits.
+> 
+> Finally, in many cases it makes sense to do a full TB flush when CSRs
+> change.  However I am not sure if this could be done for RISC-V, maybe 
+> for the CFI enabled bits?
+
+I'll have a look at those, but for now I'm going back to 9.1
+
+
+> Thanks,
+> 
+> Paolo
+> 
+> (*) that is:
+> 
+> static bool require_rvv(DisasContext *s)
+> {
+>      REQUIRE_EXT(s, RVV);
+>      if (!s->mstatus_vs_dirty) {
+>          gen_helper_require_rvv(tcg_env);
+>      }
+>      return true;
+> }
+> 
+> static bool require_rvf(DisasContext *s)
+> {
+>      switch (s->sew) {
+>      case MO_16:
+>          if (!s->cfg_ptr->ext_zvfh) {
+>              return false;
+>          }
+>          break;
+>      case MO_32:
+>          if (s->cfg_ptr->ext_zve32f) {
+>              return false;
+>          }
+>          break;
+>      case MO_64:
+>          if (s->cfg_ptr->ext_zve64d) {
+>              return false;
+>          }
+>          break;
+>      default:
+>          return false;
+>      }
+> 
+>      if (!s->mstatus_fs_dirty) {
+>          gen_helper_require_rvf(tcg_env);
+>      }
+>      return true;
+> }
+> 
+> 
+
 
 -- 
 Ben Dooks				http://www.codethink.co.uk/
