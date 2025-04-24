@@ -4,70 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 11BC0C369AB
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1468EC369C2
 	for <qemu-riscv@archiver.kernel.org>; Thu, 24 Apr 2025 12:58:40 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1u7w9y-0001Ow-Jd; Thu, 24 Apr 2025 08:58:34 -0400
+	id 1u7w9y-0001PV-UV; Thu, 24 Apr 2025 08:58:35 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <joel.stan@gmail.com>)
- id 1u7t5p-0005TK-7Z; Thu, 24 Apr 2025 05:42:05 -0400
-Received: from mail-ej1-x62f.google.com ([2a00:1450:4864:20::62f])
+ id 1u7tEq-0000Qq-AS; Thu, 24 Apr 2025 05:51:25 -0400
+Received: from mail-ej1-x629.google.com ([2a00:1450:4864:20::629])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <joel.stan@gmail.com>)
- id 1u7t5n-00024m-C4; Thu, 24 Apr 2025 05:42:04 -0400
-Received: by mail-ej1-x62f.google.com with SMTP id
- a640c23a62f3a-ac6ed4ab410so131384066b.1; 
- Thu, 24 Apr 2025 02:42:01 -0700 (PDT)
+ id 1u7tEn-0002zR-Vo; Thu, 24 Apr 2025 05:51:24 -0400
+Received: by mail-ej1-x629.google.com with SMTP id
+ a640c23a62f3a-acb415dd8faso122142266b.2; 
+ Thu, 24 Apr 2025 02:51:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=jms.id.au; s=google; t=1745487720; x=1746092520; darn=nongnu.org;
+ d=jms.id.au; s=google; t=1745488280; x=1746093080; darn=nongnu.org;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=JBgcF66bAes2tdC/cppNINK64ZI/vVeNg3Xt/eFhDXs=;
- b=R5KdbQVPK9JVbH+gyCNVCmalRSMMahWEdihfcFF9EZUoLEfYRkR/W9RCvqW6WR8mg7
- rxR5NLeh7yY1HWbGGsHdhkIwcTQdPBiO41Y1kTUSM+9fKUiNMdqxeoOJsyybqO/qH99a
- OsxS3fWpFBeGbpPNMsWfQoWZhblWkUaubTW38=
+ bh=pdeNaUx0YAovtOzfXHmWEHPybZDJQR7lFOpaCZFQHY8=;
+ b=EhCCZoMs9olvZhdmrN1KVi/v1G37AtAsZMQ121zIcAKXko9+nHnkArbRSasAo+mtUz
+ lfNvqaeZihT2kVX1RIBE05k5JCiSWjM/Hc4WQpozBCBQNh4xFB5fHzqTujcu9isQLA1o
+ v70B5JRbDHsbijrYNzNyNR+WJGHkUTjTiEEdg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1745487720; x=1746092520;
+ d=1e100.net; s=20230601; t=1745488280; x=1746093080;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=JBgcF66bAes2tdC/cppNINK64ZI/vVeNg3Xt/eFhDXs=;
- b=M5IcWICZ2LaNC1iZyxOj0U2mAOJ44cXxXqoUD5YR2rPrc47WlxBrktgnNhxVInpH34
- 4BChw2ln5iGgd61/085jn3nyf1yc37NPXECiJNFYJWZuxQPPxgGM1etLmrRJQ5xcb5LJ
- 4XsoKbqN5iLzY71YHkrpgVgwmSD6aWRFNkwNyRMO5zg8mxhAi3s1Z0uHUTY0WPFwQJy5
- 6/JJtsOREEaWJSMIplPXupSpvXoDHB10o2Agcz/oRTVr/C3BIj0591V14BUX/TrvDWoA
- QGbe0NqYavHhD0rdHjwFBJrAkqdDBLNOSGbyPctQFeWuhxKQbUfY8D0ajK/WZ1oLonG3
- dxEQ==
+ bh=pdeNaUx0YAovtOzfXHmWEHPybZDJQR7lFOpaCZFQHY8=;
+ b=a7i5/sTTDhEmd2LpBNpbrN+VR+9BNmzZpqehppR7t59hrUyVagDdF30FEOUdnZLOBf
+ RUg3mkit/TntcYyxgnay4Ba9fo8UXmfFcJnmhhu81LTzpOpCjuaJfE+DWXk1SidCtJaW
+ b573xoMVJolGeEvbf+6Ofd+aoD2rC9xaByb8R7QabOs3ITzhytJvt/Vz90PlPUcyJGJa
+ 6uQJnvQBYm/qGGifngImC68DXWEUo7NEiOLS10gZEv20K103TpotXYqzEHsErOQAyE8Q
+ xfKU7XsnzDWbssIRO/hL6O9aeuGDtWnaS36LLiGy742d1JHi0GPAGGZtTOYgzpa5XiQY
+ Clrw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUJW0JPWeC7cPjSDvWZztTZvB9p1jFWJ1XHzfXQnHg3aLltg0jyhK/hz4dDOLYQlQPzDOo+fE1CzDTD@nongnu.org
-X-Gm-Message-State: AOJu0YzzF+oTN8UVtfCbn2ZZFmqE8EMqACSPvUEn1DljiMqH6Sk5E/iQ
- BGbxsbk9wiJEBkIEkw30geH34xYomhiA2hzBC/580gkfOfiN/iJVnB5+tXMzG3xkea9LpN+4gXC
- Cb8/rv//1n7DJZi6m8pf2XyXXhHHpBiFv
-X-Gm-Gg: ASbGncu41q2yQW/7Mq0DpmrdxYEK31EyPbQSgwqgL2WRKu+rJeBwrMr/QcEunzjk4cL
- BiwYFFCg7NAqYq3/Y/Jaa3msfA2wZpQ06qW8m5Wreh3WYGx5IjxBQ1Jy+766YYUea3N7tfyJWE8
- cbUkMmw4AMnaS64btgo0W6
-X-Google-Smtp-Source: AGHT+IFW/6xZKY6SZvyON9tDvosbGBxLEd7NPvWo1i2z+GH7bL8TfVF6jl3GL2ZZrUTt/8oV8sMAVTIr5wCtBnkdu1k=
-X-Received: by 2002:a17:907:9717:b0:ac7:971b:ffd with SMTP id
- a640c23a62f3a-ace570e7e04mr196665366b.10.1745487720236; Thu, 24 Apr 2025
- 02:42:00 -0700 (PDT)
+ AJvYcCXWaoTmHWiL+OYCrnyCQmCa9CK0gM0ScAFTIb/Ddc94ADM1csYhIj7RAEg5IA/w1I635fMP8UojpPR3@nongnu.org
+X-Gm-Message-State: AOJu0Yzs3mNEkyjh+PZFLPbAVcQbAIonA6RCx1e4eZ55Munf6YKMyH+h
+ lELP/pGiZ/6c1mGwiEmrmAfFJEyu7thvToZ+yCdqF82VLyA10aEb1yDNGy4X6raxIMXUtHSPvPh
+ 7aW2zaURwaB4zbQtyu1l4VUaEo+w=
+X-Gm-Gg: ASbGncsHX4K5/yxs4CUHABPUPBHIj7ylQon6XkTMQvnIftlhoM05QyTPvJTmXV1l81R
+ yX+2dGhJi2TMbNoGV0cK9sihHjQzSQcOUPi9X3Td9+W7bV0OOJ+/71/1fbc1lgmJtKKNonXcM3P
+ TO0ZPqAEDC3yO0tecbbaWp
+X-Google-Smtp-Source: AGHT+IGeGeI5B4njJvBnvhpWzw62TQbOREO9QrxTlivOjDfHnr6bBFeJvIxr56gwQVbSHb6mvz5Kc0KWeqasAA3qxao=
+X-Received: by 2002:a17:907:9725:b0:acb:32c5:43ff with SMTP id
+ a640c23a62f3a-ace56e46911mr178563366b.0.1745488279475; Thu, 24 Apr 2025
+ 02:51:19 -0700 (PDT)
 MIME-Version: 1.0
 References: <20250423110630.2249904-1-dbarboza@ventanamicro.com>
- <20250423110630.2249904-10-dbarboza@ventanamicro.com>
-In-Reply-To: <20250423110630.2249904-10-dbarboza@ventanamicro.com>
+ <20250423110630.2249904-2-dbarboza@ventanamicro.com>
+In-Reply-To: <20250423110630.2249904-2-dbarboza@ventanamicro.com>
 From: Joel Stanley <joel@jms.id.au>
-Date: Thu, 24 Apr 2025 19:11:47 +0930
-X-Gm-Features: ATxdqUE8YufjUrf9n9XYZpp_BLp_ngoi5NYffiCfmTYWZCXkBTFHhlcDnw3BBNY
-Message-ID: <CACPK8Xei9L_82YV7+wPmTacEh2MNLFticOEny_6kSM9miCAt2w@mail.gmail.com>
-Subject: Re: [PATCH 9/9] hw/riscv/virt.c: remove 'long' casts in fmt strings
+Date: Thu, 24 Apr 2025 19:21:06 +0930
+X-Gm-Features: ATxdqUHtJzJ95Jbgzlb4Xd2a-JkMSb4SegQ8o2JTaQo_y25P2qXH9w_e8vDgOhM
+Message-ID: <CACPK8XfF74wHqdBBz=qPLefAD8pKT-0C8e=kfFtTeMH+teF-7A@mail.gmail.com>
+Subject: Re: [PATCH 1/9] hw/riscv/virt.c: enforce s->memmap use in
+ machine_init()
 To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
  liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com
 Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2a00:1450:4864:20::62f;
- envelope-from=joel.stan@gmail.com; helo=mail-ej1-x62f.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::629;
+ envelope-from=joel.stan@gmail.com; helo=mail-ej1-x629.google.com
 X-Spam_score_int: -19
 X-Spam_score: -2.0
 X-Spam_bar: --
@@ -92,32 +93,40 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Wed, 23 Apr 2025 at 20:39, Daniel Henrique Barboza
+On Wed, 23 Apr 2025 at 20:37, Daniel Henrique Barboza
 <dbarboza@ventanamicro.com> wrote:
 >
-> We can avoid the 'long' casts by using PRIx64 and HWADDR_PRIx on the fmt
-> strings for uint64_t and hwaddr types.
+> Throughout the code we're accessing the board memmap, most of the time,
+> by accessing it statically via 'virt_memmap'. This static map is also
+> assigned in the machine state in s->memmap.
 >
-> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-> ---
->  hw/riscv/virt.c | 29 +++++++++++++++--------------
->  1 file changed, 15 insertions(+), 14 deletions(-)
+> We're also passing it as a variable to some fdt functions, which is
+> unorthodox since we can spare a function argument by accessing it
+> statically or via the machine state.
 >
-> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-> index 036a0a9bfb..075c035f25 100644
-> --- a/hw/riscv/virt.c
-> +++ b/hw/riscv/virt.c
-> @@ -309,7 +309,7 @@ static void create_fdt_socket_memory(RISCVVirtState *s, int socket)
->
->      addr = s->memmap[VIRT_DRAM].base + riscv_socket_mem_offset(ms, socket);
->      size = riscv_socket_mem_size(ms, socket);
-> -    mem_name = g_strdup_printf("/memory@%lx", (long)addr);
-> +    mem_name = g_strdup_printf("/memory@%"PRIx64, addr);
+> All the current forms are valid but not all of the are scalable. In the
+> future we will version this board, and then all this code will need
+> rework because it should point to the updated memmap. In this case,
+> we'll want to assign the adequate versioned memmap once during init,
+> in s->memmap like it is being done today, and the rest of the code
+> will access the updated map via s->memmap.
 
-I wondered why this wasn't a HWADDR_PRIx.
+I was writing a patch for a machine and came across the same
+inconsistencies. Nice clean up.
 
-addr (and NodeInfo::node_mem?) could be a hwaddr? That would make
-everything more consistent.
+Some of the device initlisation code could be refactored out to be
+shared by other machines within the riscv directory. Related, parts of
+the device tree creation could belong to the model, instead of to the
+machine, as the properties are a property (!) of the device.
+
+With that in mind we should consider passing the eg. fdt pointer and
+the MemMap pointer instead of machine state, where practical.
+
+> We're also enforcing the pattern of using s->memmap instead of assigning
+> it to a temp variable 'memmap'. Code is copy/pasted around all the time
+> and being consistent is important.
+
+Reviewed-by: Joel Stanley <joel@jms.id.au>
 
 Cheers,
 
