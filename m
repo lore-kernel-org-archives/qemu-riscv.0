@@ -4,91 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C0ADAC369AB
-	for <qemu-riscv@archiver.kernel.org>; Thu, 24 Apr 2025 08:19:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 27CC1C369AB
+	for <qemu-riscv@archiver.kernel.org>; Thu, 24 Apr 2025 08:21:45 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1u7rnp-0008HC-3u; Thu, 24 Apr 2025 04:19:25 -0400
+	id 1u7rpY-0001UD-4y; Thu, 24 Apr 2025 04:21:12 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1u7rnm-0008DI-Bx
- for qemu-riscv@nongnu.org; Thu, 24 Apr 2025 04:19:22 -0400
-Received: from mail-wm1-x32b.google.com ([2a00:1450:4864:20::32b])
+ id 1u7rpL-0001T2-Eg
+ for qemu-riscv@nongnu.org; Thu, 24 Apr 2025 04:21:00 -0400
+Received: from mail-wm1-x32d.google.com ([2a00:1450:4864:20::32d])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1u7rnk-0001PE-8z
- for qemu-riscv@nongnu.org; Thu, 24 Apr 2025 04:19:21 -0400
-Received: by mail-wm1-x32b.google.com with SMTP id
- 5b1f17b1804b1-43cf3192f3bso5927465e9.1
- for <qemu-riscv@nongnu.org>; Thu, 24 Apr 2025 01:19:19 -0700 (PDT)
+ id 1u7rpG-0001n7-TD
+ for qemu-riscv@nongnu.org; Thu, 24 Apr 2025 04:20:59 -0400
+Received: by mail-wm1-x32d.google.com with SMTP id
+ 5b1f17b1804b1-43ea40a6e98so6533955e9.1
+ for <qemu-riscv@nongnu.org>; Thu, 24 Apr 2025 01:20:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1745482758; x=1746087558; darn=nongnu.org;
+ d=ventanamicro.com; s=google; t=1745482851; x=1746087651; darn=nongnu.org;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=+1QqK4SKf6guRfgcOnlG5x/BzIBC5P5X5as31OIbj7k=;
- b=BmEtvFqUnhnLub6oVuCQMDo1aTr3Ol5pLn9ow8wyNyf/7OPr57bx2J7nnda/rZRVdb
- LyWsU7nqyscGj3ZkcuqlBT5aroS4ipJYHT6CPDPstHt1IZ2GmvkOPahq98SsduNp69Cf
- FKV2t7GesCsguOBdN6fT8XP6k3lHIJ3Uin8b7c3avcpwJaeMBh3wo4NKJUQSNADT6+37
- 1VmC62U4UpOpQBKjvk2kt/ZHqlhk0/rF468mao6eZX34lVSTcjNMT1xnYPf79Em8xOE8
- EvCU06A+2N7RA2z4oOK/MQQl8mXteXGXgBcp3v0DUGOP5puitBHjyXunRLeLiS+/LuPd
- aH8g==
+ bh=ytGDBpv1pt6SUN7d+5+FAkGcFAfGT6omdrFsqWjZC+U=;
+ b=HO1Y8pUAuZIlefLu3lW1YJ+kwOnNtgBQyXkZJdwEOnlYmR6bZPp2HiWuq6/n/b9BtT
+ KLYClBMiS48543gQrhM+wtLahm1GfO6ymMaM5NrG1qwPay+u5GvBaovfRggylwd4JAPf
+ lR8uqzKVLir2G8FLBZ/mh0c8+X4+dVLXWVsqboRcTxT4YMcveJ+CiQtZ5YSnEugmiVpN
+ yfGFOASKoV7tMpGHeAfdF3esHa9/ybL8iXOxnGtXHUQswrj463qiyEVoG3F9xalfoHzu
+ 911FZJPCBK44ZWbib/ulZDetrN1wR+OOTAOZgOuuxiZN4n1qJVWgqnDJXJLrCWHNTX3F
+ 4u3g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1745482758; x=1746087558;
+ d=1e100.net; s=20230601; t=1745482851; x=1746087651;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=+1QqK4SKf6guRfgcOnlG5x/BzIBC5P5X5as31OIbj7k=;
- b=Vn6xVD29pPkPzJ/VZ5aYcC4g9NmPFsUqxCY0YkXAlLEbo4kZNxGArIYZDjXiRWJWED
- P+j+el/o5k+IJ9xHv5qhfTdt6MxANrcvCxEw5uZRKWo2jQBTu1IdzLg0HhxFr72Q81pn
- vqa5e0c2TxPi2ugOPExJfsfMb/KBseqCJYiPbQz979uEz1G7yDND2V8KaNqIGQprf4M+
- 6nBCdKBTrI1te3pIvpZom/GPJncLiMevfdvGtuMX7QoVZshg/jTv96+JGckqzI6aljY8
- vNyNB0wbtk8cw690hj3DaVDk7sLndiJbGoNGRSBY0nlqmrwzxb80v9pBFo7MPeRG5F6F
- mxdQ==
+ bh=ytGDBpv1pt6SUN7d+5+FAkGcFAfGT6omdrFsqWjZC+U=;
+ b=D3WxOvOHrUTDnr0Rj5lXCbtc4big0qkNUjqARBxLCvjGLirhndBrS4w4uI+hO8IXaw
+ eS9/KPdntDVQqUkr4iKhuZqvIn37KIxu0+PtqhuuW7XRUM/7jQ40QesqFWZzrbO9Hbw0
+ k9V9noW4rYrflvaYsJ8rvydq+au6WK1Zfm4R1ahHUqt0z0PdbqSiVmwusarLRYQlOse0
+ 4P5COShXJannF2UKpuYPBgASwUkMumTqmvwXLcSPdIp8aflYNseo2zKG/HN+/T67SedK
+ /15f4H04m2Zk8FMwz9+bQ15c+rfbaFEAjfZz2grP/huynPcrVvrK1ZGJ+7/A6p1iw0i3
+ KJsA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUbbDIO3jubPe1T471EF3vUD1xUexKTWZsVL+JXpp0SLfgabCIZs/k5iy5zYpbs5tX51i/ySVgdB0I+@nongnu.org
-X-Gm-Message-State: AOJu0YzOcZ46mFJbnW91c8Awr2o+i/z1WQh78UOcZBe/tKbpbde0nFrG
- jvuCHCo4bmhvmRAQFWxJHLBeB5Yrukpk83FAGSdCe2dcZ2yZwuGIfi9ugnA1cU0=
-X-Gm-Gg: ASbGncsI9hrDNGVi52fwfJYebKc99Bkwfa8ML8XG4ocibhBbAl9ZEfDeQNi7QAXlxxC
- HO7RmtYqpAuOor+/7iIegmzU6Vrp5GI5SreIcjWJkvinZLEohhvqoR/2BNWPrkyQFX3MijfyTqJ
- CxmBYvmqbXyMbWTWbf24PgzkFWCCmNhAvImUrdIQc2QCV+oWwphQNkWI/I2y+fjRX5BnoRMrG/P
- kb8CGoulUukIR69gbbB/Gpleo59vnI5nAUBF+yrDfFH2uRcGui+Ui08OLAI9CE9svwSR+A0mpxk
- JBQefLetTvDJNCrpX6YtudrnLhPkpwIGrHjN4LM=
-X-Google-Smtp-Source: AGHT+IHqP5o3lBSERpKKsqD4kvcgfqMsNXq70A+b8ZolIDYsjWPWrYH3bZny3+sWUXZbYqPfJDSOZw==
-X-Received: by 2002:a05:600c:1d02:b0:43d:738:4a9 with SMTP id
- 5b1f17b1804b1-4409bdae980mr14514245e9.27.1745482757653; 
- Thu, 24 Apr 2025 01:19:17 -0700 (PDT)
+ AJvYcCVYekE/M2f10KH5MLNyg3ROwc/dqmPXlJtsABeaPFltc2skjxypVMpodCXlXLtZzKAJxAo418ycnZRS@nongnu.org
+X-Gm-Message-State: AOJu0YzpyldvCCXToMNdiRkeiNb2mC8SmLNsZF/ZPGghl47RKu/bUpK4
+ HYGbdSzymNe61y9tjGT1TJHxQbKD2n8PnrI6/hFCcAaMAbEbE4d0530wI8funCs=
+X-Gm-Gg: ASbGncsiPki0K4uq8bOYNzpr4o4CzZT2ePBW9D+ATs/pQmy3+RO2sXSfd12WkZOiXM2
+ tJCaNylKvORlw5mh6bni15mS2cmkW326iReDlSdo4lDNHKzb/pIPZh/liMTBf0VKkrughJMrbUL
+ GmwtPVWRav7lBoIhkX0k06WBlorYitp6ndGx0FaeI5/+arWBtcCJ0SOxiXdUrzI2Fbc4KvM22xp
+ ZzPbcawN+hqzDnBzO7JpVoBAjHBMmbVtrLeDhz2YlXKI/9K//A8mWDbUVuLpyJyzoWHMvKXh0gp
+ xZcMrwNwbz9YX7hTJATyOl3F5ywi
+X-Google-Smtp-Source: AGHT+IFlEpPyy0nmcW6ED6vjaCCnHKIbcWbPwHBz63xcqFQAViW/rhuZ6OVSiG/QeWdySasLr4x2Yw==
+X-Received: by 2002:a05:600c:4e07:b0:439:9b2a:1b2f with SMTP id
+ 5b1f17b1804b1-4409bcfa390mr16332575e9.3.1745482851025; 
+ Thu, 24 Apr 2025 01:20:51 -0700 (PDT)
 Received: from localhost ([2a02:8308:a00c:e200::f716])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3a06d4bc3c8sm1257348f8f.34.2025.04.24.01.19.16
+ 5b1f17b1804b1-4409d2d88cdsm10638865e9.25.2025.04.24.01.20.50
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 24 Apr 2025 01:19:17 -0700 (PDT)
-Date: Thu, 24 Apr 2025 10:19:16 +0200
+ Thu, 24 Apr 2025 01:20:50 -0700 (PDT)
+Date: Thu, 24 Apr 2025 10:20:49 +0200
 From: Andrew Jones <ajones@ventanamicro.com>
 To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
- liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com, 
- abologna@redhat.com
-Subject: Re: [PATCH 4/7] target/riscv/kvm: add kvm_csr_cfgs[]
-Message-ID: <20250424-f2728ec04e66fdbb602fed90@orel>
-References: <20250417124839.1870494-1-dbarboza@ventanamicro.com>
- <20250417124839.1870494-5-dbarboza@ventanamicro.com>
- <20250423-9623c5901480c9e7be10d9e5@orel>
- <6f1cfe50-3261-4121-8b5b-6f69456f1257@ventanamicro.com>
+ liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com
+Subject: Re: [PATCH 2/2] hw/riscv/virt.c: change default CPU to 'max'
+Message-ID: <20250424-6351b8780f6887b09c2c655f@orel>
+References: <20250404152750.332791-1-dbarboza@ventanamicro.com>
+ <20250404152750.332791-3-dbarboza@ventanamicro.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <6f1cfe50-3261-4121-8b5b-6f69456f1257@ventanamicro.com>
-Received-SPF: pass client-ip=2a00:1450:4864:20::32b;
- envelope-from=ajones@ventanamicro.com; helo=mail-wm1-x32b.google.com
+In-Reply-To: <20250404152750.332791-3-dbarboza@ventanamicro.com>
+Received-SPF: pass client-ip=2a00:1450:4864:20::32d;
+ envelope-from=ajones@ventanamicro.com; helo=mail-wm1-x32d.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -104,79 +101,51 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Wed, Apr 23, 2025 at 04:45:29PM -0300, Daniel Henrique Barboza wrote:
+On Fri, Apr 04, 2025 at 12:27:50PM -0300, Daniel Henrique Barboza wrote:
+> In [1], minute 44, we have a hint from a Canonical kernel developer that
+> the next Ubuntu LTS will be RVA23 compliant. If this really comes to
+> pass, the 'virt' CPU won't run it by default - we'll need to either use
+> 'rva23s64' or 'max' CPUs instead because rv64 is not RVA23 compliant.
+> Other distros will follow suit eventually, given that RISC-V profiles
+> provides the most stable ABI to build a distro in the RISC-V land.
 > 
+> This exposes a long standing issue with the current rv64 CPU: it doesn't
+> represent anything in particular. Extensions were added in it as time
+> went by and we ended up with a CPU that has a random set of extensions.
 > 
-> On 4/23/25 12:15 PM, Andrew Jones wrote:
-...
-> >   if (KVM_REG_SIZE(csr_cfg->kvm_reg_id) == sizeof(uint32_t)) {
-> >       kvm_cpu_csr_set_u32(cpu, csr_cfg, reg);
-> >   } else if (KVM_REG_SIZE(csr_cfg->kvm_reg_id) == sizeof(uint64_t)) {
-> >       kvm_cpu_csr_set_u64(cpu, csr_cfg, reg);
-> >   } else {
-> >       uh, oh...
-> >   }
+> Changing the default 'virt' CPU to 'max' gives users a guarantee that
+> the board will always run with the latest features/profile available in
+> QEMU, which is the intention of most regular users. Using 'max' as
+> default CPU is done by other QEMU archs like aarch64 so we'll be more
+> compatible with everyone else.
 > 
-> The idea with this logic is to handle the cases where there is a mismatch
-> between the size of the KVM reg and the size of the flag we're using to
-> store it. All CSR regs are of size target_ulong but not all CPURISCVState
-> flags we're using are target_ulong. We're not storing the size of the KVM
-> CSR, we're storing the flag size.
+> Note that this change does not affect existing scripts that are using
+> the rv64 CPU, e.g. a command line like "-cpu rv64,v=true" will work the
+> same after this patch.
 > 
-> E.g:
+> [1] https://fosdem.org/2025/schedule/event/fosdem-2025-6031-risc-v-hardware-where-are-we-/
 > 
-> KVM_CSR_CFG("sstatus", mstatus, sizeof(uint64_t), RISCV_CSR_REG(sstatus)),
+> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+> ---
+>  hw/riscv/virt.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
 > 
-> For a 32 bit CPU we're writing a 32 bit ulong sstatus into the 64 bit mstatus
-> field. If we assume that they're the same size we'll be read/writing a 32 bit val
-> inside a 64 bit field, i.e. we'll be reading/writing the upper words only.
+> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+> index c9d255d8a8..ff7a122bef 100644
+> --- a/hw/riscv/virt.c
+> +++ b/hw/riscv/virt.c
+> @@ -1920,7 +1920,7 @@ static void virt_machine_class_init(ObjectClass *oc, void *data)
+>      mc->desc = "RISC-V VirtIO board";
+>      mc->init = virt_machine_init;
+>      mc->max_cpus = VIRT_CPUS_MAX;
+> -    mc->default_cpu_type = TYPE_RISCV_CPU_BASE;
+> +    mc->default_cpu_type = TYPE_RISCV_CPU_MAX;
+>      mc->block_default_type = IF_VIRTIO;
+>      mc->no_cdrom = 1;
+>      mc->pci_allow_0_address = true;
+> -- 
+> 2.49.0
+>
 
-Hmm. I don't think this should be a problem since we're writing the field
-offset, which is the low word. A problem may be that we don't clear the
-upper word with the write, but it should have been initialized to zero and
-never touched.
-
-> 
-> In theory this would be ok if we always read/write the same way but it can be
-> a nuisance when trying to debug the value inside CPURISCVState.
-> 
-> One may argue whether we should change the type of these fields to match what
-> Linux/ISA expect of them. Not sure how much work that is.
-
-It shouldn't be a problem to use wider fields, we just need to ensure our
-framework will be able to write the upper words when necessary, i.e. when
-there's an *H counterpart CSR that needs to be written there or when the
-upper word should be zeroed out.
-
-> 
-> 
-> scounteren is a more serious case because we're writing an ulong KVM reg into
-> a 32 bit field:
-
-Sigh... it is a problem to use narrower fields... KVM should have defined
-that as a __u32.
-
-> 
->     KVM_CSR_CFG("scounteren", scounteren, sizeof(uint32_t),
->                 RISCV_CSR_REG(scounteren)),
-> 
-> struct CPUArchState {
->     target_ulong gpr[32];
->     (...)
->     uint32_t scounteren;
->     uint32_t mcounteren;
->     (...)
-> 
-> 
-> Perhaps it's a good idea to change this CPURISCVState field to ulong before
-> adding support for the scouteren KVM CSR.
-
-Yes, I think we have to now. QEMU's fields need to have widths >= what
-KVM says the register sizes are and we should write the amount of bytes
-that KVM says we should write (even if we know it's wrong, like in the
-case of scounteren). We'll just have to ignore the upper word that
-shouldn't be there.
-
-Thanks,
-drew
+Reviewed-by: Andrew Jones <ajones@ventanamicro.com>
 
