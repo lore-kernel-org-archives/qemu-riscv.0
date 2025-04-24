@@ -4,74 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9548DC369AB
-	for <qemu-riscv@archiver.kernel.org>; Thu, 24 Apr 2025 10:48:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DDC1FC369AB
+	for <qemu-riscv@archiver.kernel.org>; Thu, 24 Apr 2025 10:50:58 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1u7u7X-0007Qm-As; Thu, 24 Apr 2025 06:47:55 -0400
+	id 1u7uAR-0000VQ-QV; Thu, 24 Apr 2025 06:50:56 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1u7u7V-0007QJ-Dj; Thu, 24 Apr 2025 06:47:53 -0400
-Received: from mail-ua1-x932.google.com ([2607:f8b0:4864:20::932])
+ id 1u7uA2-0000Tk-Jm; Thu, 24 Apr 2025 06:50:33 -0400
+Received: from mail-ua1-x936.google.com ([2607:f8b0:4864:20::936])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1u7u7P-0000YJ-4P; Thu, 24 Apr 2025 06:47:53 -0400
-Received: by mail-ua1-x932.google.com with SMTP id
- a1e0cc1a2514c-86d69774081so423026241.0; 
- Thu, 24 Apr 2025 03:47:44 -0700 (PDT)
+ id 1u7uA0-0000u2-FH; Thu, 24 Apr 2025 06:50:30 -0400
+Received: by mail-ua1-x936.google.com with SMTP id
+ a1e0cc1a2514c-86dc3482b3dso2279108241.0; 
+ Thu, 24 Apr 2025 03:50:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1745491664; x=1746096464; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1745491827; x=1746096627; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=AcdLTDZKdD21fz88Km10UC4/+wQCjjJ76rvL4NQUY98=;
- b=dadTPDRaab7WZl4772jfCL6lfv+o+9EkD3ipqKsb900930FdQ12DbMfDCBAMs/1VwU
- lZ+GXpSF5At/ZIe+wKAo+rXNQE9ZANtmTHzHHYbGtIUn06cuv7dbAUtrWbOywtuyA6qt
- EeFrcDjJxCziYwoyyON8deVfeHZJNUrIGWH1HvhLjlIMeHci1r0iPtbRuE4VZkEgEA/n
- uQ4wz4eMbZbJwx77QBXmaRgE2SqUpq7JQOVMtrKGgVFOv0Oa7p1FZrj1C5CNg7xRC01H
- Bl/gd6c20X6YPZ7ytsLT41q+7fIVnlBITd90r4IH69Ol/oh5Qg/geNjsq3oODLCB6Hlh
- qeSQ==
+ bh=R7AlI3C+LjjGhHkNYleiXqOdDuGD5iVehVUi/xQsgYQ=;
+ b=H7gifleQnXbUCHHqkaPwC7aN7J+AaG4gs3ZkR9ZXRU5gUiw2Sahmmcn3gukG4wnLn+
+ sCKgrT61Y761/5Z2lny2/54r5hQlH7cR+5G+7C4B0Gr8rgWsxhRoU7XVRqOnHgdLQrjZ
+ ca/B/d8Yw1Rxm1ktv+QnV6cHTtuewMnqlDWB4SI4cn0oLjLBrJSTiOLNvQ75gqC2dZ3v
+ 6UXgxKu6Ha53hw5CkscEeROCMZ2lVGnYYERJwykkVN5jv7/bkGwfr9HUL9SSb3rUb2Hk
+ 2DiTnQh4tLKz3pgMCImY5PCZmW8EI3pJ9gvE/HPeNESfaCTNrTgc3g9GUIT0gc46PgxB
+ URmg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1745491664; x=1746096464;
+ d=1e100.net; s=20230601; t=1745491827; x=1746096627;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=AcdLTDZKdD21fz88Km10UC4/+wQCjjJ76rvL4NQUY98=;
- b=Uo+Q2kLRPCgoVcD4X7TfXtlfiDSc3JO/v6YtY2aRyHcyRuPcb5sf2kCVVeFBjg2EDS
- D1iuO9l1pmkgjhEGVHPdPSacwbHFfnCxg7xJ454m30o3aUR8TxpeYMGTY2gA6HSe9pDr
- eSmcjMZyYJGrq28SHeNE/yK1IHrz2F1eg24ejtZmSVEtSJE5x0My0sVPUpQpB0xsB8QM
- KK+oiudmt9kp+RcH9Mv629rqMKonwHxeAiH9gkKeda8prHKOguR/euGQj5ZteDXhgYTq
- IwEPD1A72bA+6/tKxNTmJ0hBB4eKJ+NySjvBT9GuXtZ3Di/0W6D6Z8pr1ttoAZyTKZcf
- hjFA==
+ bh=R7AlI3C+LjjGhHkNYleiXqOdDuGD5iVehVUi/xQsgYQ=;
+ b=JRfe8cM2vfA72cuJGBYivtqkjCq3LW261lrbI4tP9eXJUAcT7hM1GDRRhB4ZIbFDvy
+ Vzlp3BMllsTRxOPIHHDYNM32ALrXT6RnrdxcUL4H9g0wh/Hb9kuYfMo6vQbKqbpHD/ly
+ wr8qTp2oV5ZtqnnbtgIhugAseCEAE3b33gD8rf/7pQO/9aD5SZ8OgTSVtmMVr0j9qSK8
+ NO6LfNapCMHlxQbqpzOAspCD7g0CKtQNoxNNEd3kdpeGORsiqbtGx6/MHpGh93BRjWNs
+ QECZj2RF/Qx2HRt5vkbg8sZO80wF4DcUGI6Itr7bfec28Grz3Gqbn5F2so5EBLlp35GH
+ 9UuA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVD2TOPF9/y+lGyAOXBEgFuLxVr36v/15vjjT8di5vN3Kpif2oBWCQPnVkelW5TW3zYxjknp0m16LCI@nongnu.org
-X-Gm-Message-State: AOJu0YzhEV5obQDQhaYXZsfbIrK3VjQZyInOwtMjONMbQnG3dwoUd3GY
- y4XhmgBIDqUTqNgRIChc3qNiygERCGWKcvtqCB1f12L9Hw+fiJPZyW2uf0bMWXfBckbSIcU4ooP
- y3QDrBaziN888PlFYTHGwCmil3O0=
-X-Gm-Gg: ASbGncsrHf13JE1v61O8mptCFsXcck6RV+i/eHY//FIQBX02pE5bS7lnsHqJ/kTBRs1
- Cu+1uo5G6XB6gfkfRWxS2JVXI+4Z1s/Ng1f3D/sB2Aq/jlRFZgKqQllz09A8EA4ghMRsC6qBPh7
- mxJN9qpWc6Xiw2JB2SJGgLFsuKh2uOx783MYSEehb1qA4G1/ymQEsc
-X-Google-Smtp-Source: AGHT+IGalIyOdsHHTd1mamzQkl0iIv12aetniSOVUnpCVkCTQTnUCTD5RdxTgpiVdSslnqPm7RTiN0Wwx3j+apii50E=
-X-Received: by 2002:a05:6102:f06:b0:4c8:55b8:6fad with SMTP id
- ada2fe7eead31-4d38eef41d9mr1420374137.17.1745491664006; Thu, 24 Apr 2025
- 03:47:44 -0700 (PDT)
+ AJvYcCVC4MAz7A1wXYf82SmDPk12mHcVBZehp6nP6za2AsZYSGm91IOGseTyjuBTL2w/sC8PzkDDIwHiSCnX@nongnu.org
+X-Gm-Message-State: AOJu0Ywqpe00WWAwx6uQBGIXsvE9Pdqh2bCni7qh4N8+uWX80R9ygIVF
+ V+wrZMhhyW+DRZExR1OwaoSu6sI6Ntw5LRupizReWGmeud52buHxkgJHLrS0qbJ/GRHiYhBe1tu
+ goB6dRX4wk6IlOONm7fwHMSH7QrM=
+X-Gm-Gg: ASbGncvAHXVtOjpCI0RSZsH+99Q2FUr82mCx5LRCQq1H/8wURP1+f6+qp/UpJ+FMV+Z
+ AkpFmvhDEl2upk5lsbYMYZkPWFpXNVQWRHFxNlUcvf1B3torJK968tmeB7eamgCly9NrwGJnI8w
+ e7eW5KtN2Zg0sCbspUADsiw+MjXO9UcY+jbpVugdQfeN+/PsjAvmWK
+X-Google-Smtp-Source: AGHT+IEpNZqTQEK1e/kOtUwWtmwhUNa5dxy15CFlXjOzN5JlDNNkaPdso5+S/iWpqboVtEdYX2PfiuPJwPz7VR5Sqz8=
+X-Received: by 2002:a05:6102:161e:b0:4c3:64c0:8b14 with SMTP id
+ ada2fe7eead31-4d3c73f1c0amr831771137.3.1745491826535; Thu, 24 Apr 2025
+ 03:50:26 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250422024752.2060289-1-alistair.francis@wdc.com>
-In-Reply-To: <20250422024752.2060289-1-alistair.francis@wdc.com>
+References: <20250408022121.173531-1-huangborong@bosc.ac.cn>
+In-Reply-To: <20250408022121.173531-1-huangborong@bosc.ac.cn>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Thu, 24 Apr 2025 20:47:18 +1000
-X-Gm-Features: ATxdqUHaGKxq2l_wpOZ335bVIqAK5wt2dOYqbba8vqZP6HEWs6NnNpwjOUXsgTg
-Message-ID: <CAKmqyKP0CJpum7ffKvoZnJeDUigzvi-FM0YTAj4o3hgnoB5_9g@mail.gmail.com>
-Subject: Re: [PATCH] MAINTAINERS: Add common-user/host/riscv to RISC-V section
-To: palmer@dabbelt.com, liwei1518@gmail.com, dbarboza@ventanamicro.com, 
- zhiwei_liu@linux.alibaba.com, qemu-riscv@nongnu.org, uwu@icenowy.me
-Cc: qemu-devel@nongnu.org, Alistair Francis <alistair.francis@wdc.com>
+Date: Thu, 24 Apr 2025 20:49:59 +1000
+X-Gm-Features: ATxdqUG_-rriHUqaJ_R8HY3BeswBWj6YDhMGoIY9Ad4qjWkw4XiBhUurVUYlvUo
+Message-ID: <CAKmqyKOwbLJrRTkVrGO8+Kd-5SAEj1GU7ToytB8b66b_gbADHg@mail.gmail.com>
+Subject: Re: [PATCH v3 1/2] target/riscv: Add BOSC's Xiangshan Kunminghu CPU
+To: Huang Borong <huangborong@bosc.ac.cn>
+Cc: qemu-riscv@nongnu.org, palmer@dabbelt.com, alistair.francis@wdc.com, 
+ liwei1518@gmail.com, dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com, 
+ qemu-devel@nongnu.org, wangran@bosc.ac.cn
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::932;
- envelope-from=alistair23@gmail.com; helo=mail-ua1-x932.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::936;
+ envelope-from=alistair23@gmail.com; helo=mail-ua1-x936.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -95,34 +96,153 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Tue, Apr 22, 2025 at 12:48=E2=80=AFPM Alistair Francis <alistair23@gmail=
-.com> wrote:
+On Tue, Apr 8, 2025 at 12:23=E2=80=AFPM Huang Borong <huangborong@bosc.ac.c=
+n> wrote:
 >
-> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+> Add a CPU entry for the Xiangshan Kunminghu CPU, an open-source,
+> high-performance RISC-V processor. More details can be found at:
+> https://github.com/OpenXiangShan/XiangShan
+>
+> Note: The ISA extensions supported by the Xiangshan Kunminghu CPU are
+> categorized based on four RISC-V specifications: Volume I: Unprivileged
+> Architecture, Volume II: Privileged Architecture, AIA, and RVA23. The
+> extensions within each category are organized according to the chapter
+> order in the specifications.
+>
+> Signed-off-by: Yu Hu <huyu@bosc.ac.cn>
+> Signed-off-by: Ran Wang <wangran@bosc.ac.cn>
+> Signed-off-by: Borong Huang <huangborong@bosc.ac.cn>
+> ---
+>  target/riscv/cpu-qom.h |  1 +
+>  target/riscv/cpu.c     | 72 ++++++++++++++++++++++++++++++++++++++++++
+>  2 files changed, 73 insertions(+)
+>
+> diff --git a/target/riscv/cpu-qom.h b/target/riscv/cpu-qom.h
+> index 4cfdb74891..f2908939e7 100644
+> --- a/target/riscv/cpu-qom.h
+> +++ b/target/riscv/cpu-qom.h
+> @@ -53,6 +53,7 @@
+>  #define TYPE_RISCV_CPU_VEYRON_V1        RISCV_CPU_TYPE_NAME("veyron-v1")
+>  #define TYPE_RISCV_CPU_TT_ASCALON       RISCV_CPU_TYPE_NAME("tt-ascalon"=
+)
+>  #define TYPE_RISCV_CPU_XIANGSHAN_NANHU  RISCV_CPU_TYPE_NAME("xiangshan-n=
+anhu")
+> +#define TYPE_RISCV_CPU_XIANGSHAN_KMH    RISCV_CPU_TYPE_NAME("xiangshan-k=
+unminghu")
+>  #define TYPE_RISCV_CPU_HOST             RISCV_CPU_TYPE_NAME("host")
+>
+>  OBJECT_DECLARE_CPU_TYPE(RISCVCPU, RISCVCPUClass, RISCV_CPU)
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index 09ded6829a..a076d9dc0c 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -697,6 +697,76 @@ static void rv64_xiangshan_nanhu_cpu_init(Object *ob=
+j)
+>  #endif
+>  }
+>
+> +static void rv64_xiangshan_kmh_cpu_init(Object *obj)
+> +{
+> +    CPURISCVState *env =3D &RISCV_CPU(obj)->env;
+> +    RISCVCPU *cpu =3D RISCV_CPU(obj);
+> +
+> +    riscv_cpu_set_misa_ext(env, RVG | RVC | RVB | RVS | RVU | RVH | RVV)=
+;
+> +    env->priv_ver =3D PRIV_VERSION_1_13_0;
+> +
+> +    /* Enable ISA extensions */
+> +    cpu->cfg.mmu =3D true;
+> +    cpu->cfg.pmp =3D true;
+> +
+> +    /*
+> +     * The RISC-V Instruction Set Manual: Volume I
+> +     * Unprivileged Architecture
+> +     */
+> +    cpu->cfg.ext_zicntr =3D true;
+> +    cpu->cfg.ext_zihpm =3D true;
+> +    cpu->cfg.ext_zihintntl =3D true;
+> +    cpu->cfg.ext_zihintpause =3D true;
+> +    cpu->cfg.ext_zimop =3D true;
+> +    cpu->cfg.ext_zcmop =3D true;
+> +    cpu->cfg.ext_zicond =3D true;
+> +    cpu->cfg.ext_zawrs =3D true;
+> +    cpu->cfg.ext_zacas =3D true;
+> +    cpu->cfg.ext_zfh =3D true;
+> +    cpu->cfg.ext_zfa =3D true;
+> +    cpu->cfg.ext_zcb =3D true;
+> +    cpu->cfg.ext_zbc =3D true;
+> +    cpu->cfg.ext_zvfh =3D true;
+> +    cpu->cfg.ext_zkn =3D true;
+> +    cpu->cfg.ext_zks =3D true;
+> +    cpu->cfg.ext_zkt =3D true;
+> +    cpu->cfg.ext_zvbb =3D true;
+> +    cpu->cfg.ext_zvkt =3D true;
+> +
+> +    /*
+> +     * The RISC-V Instruction Set Manual: Volume II
+> +     * Privileged Architecture
+> +     */
+> +    cpu->cfg.ext_smstateen =3D true;
+> +    cpu->cfg.ext_smcsrind =3D true;
+> +    cpu->cfg.ext_sscsrind =3D true;
+> +    cpu->cfg.ext_svnapot =3D true;
+> +    cpu->cfg.ext_svpbmt =3D true;
+> +    cpu->cfg.ext_svinval =3D true;
+> +    cpu->cfg.ext_sstc =3D true;
+> +    cpu->cfg.ext_sscofpmf =3D true;
+> +    cpu->cfg.ext_ssdbltrp =3D true;
+> +    cpu->cfg.ext_ssnpm =3D true;
+> +    cpu->cfg.ext_smnpm =3D true;
+> +    cpu->cfg.ext_smmpm =3D true;
+> +    cpu->cfg.ext_sspm =3D true;
+> +    cpu->cfg.ext_supm =3D true;
+> +
+> +    /* The RISC-V Advanced Interrupt Architecture */
+> +    cpu->cfg.ext_smaia =3D true;
+> +    cpu->cfg.ext_ssaia =3D true;
+> +
+> +    /* RVA23 Profiles */
+> +    cpu->cfg.ext_zicbom =3D true;
+> +    cpu->cfg.ext_zicbop =3D true;
+> +    cpu->cfg.ext_zicboz =3D true;
+> +    cpu->cfg.ext_svade =3D true;
+> +
+> +#ifndef CONFIG_USER_ONLY
+> +    set_satp_mode_max_supported(cpu, VM_1_10_SV48);
+> +#endif
+> +}
+> +
 
-Thanks!
+Sorry about this, but we just merged a new way of defining CPU types.
+Can you please rebase on
+https://github.com/alistair23/qemu/tree/riscv-to-apply.next to use the
+new macros? It shouldn't be much work, just a little restructuring.
 
-Applied to riscv-to-apply.next
+When sending a new version can you also include a cover letter [1]
+
+1: https://www.qemu.org/docs/master/devel/submitting-a-patch.html#include-a=
+-meaningful-cover-letter
 
 Alistair
 
-> ---
->  MAINTAINERS | 1 +
->  1 file changed, 1 insertion(+)
->
-> diff --git a/MAINTAINERS b/MAINTAINERS
-> index d54b5578f8..d1551d9cc6 100644
-> --- a/MAINTAINERS
-> +++ b/MAINTAINERS
-> @@ -328,6 +328,7 @@ F: include/hw/char/riscv_htif.h
->  F: include/hw/riscv/
->  F: linux-user/host/riscv32/
->  F: linux-user/host/riscv64/
-> +F: common-user/host/riscv*
->  F: tests/functional/test_riscv*
->  F: tests/tcg/riscv64/
->
+>  #ifdef CONFIG_TCG
+>  static void rv128_base_cpu_init(Object *obj)
+>  {
+> @@ -3261,6 +3331,8 @@ static const TypeInfo riscv_cpu_type_infos[] =3D {
+>      DEFINE_VENDOR_CPU(TYPE_RISCV_CPU_VEYRON_V1,  MXL_RV64,  rv64_veyron_=
+v1_cpu_init),
+>      DEFINE_VENDOR_CPU(TYPE_RISCV_CPU_XIANGSHAN_NANHU,
+>                                                   MXL_RV64, rv64_xiangsha=
+n_nanhu_cpu_init),
+> +    DEFINE_VENDOR_CPU(TYPE_RISCV_CPU_XIANGSHAN_KMH,
+> +                                                 MXL_RV64,  rv64_xiangsh=
+an_kmh_cpu_init),
+>  #ifdef CONFIG_TCG
+>      DEFINE_DYNAMIC_CPU(TYPE_RISCV_CPU_BASE128,   MXL_RV128, rv128_base_c=
+pu_init),
+>  #endif /* CONFIG_TCG */
 > --
-> 2.49.0
+> 2.34.1
+>
 >
 
