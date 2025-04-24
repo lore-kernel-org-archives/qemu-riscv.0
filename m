@@ -4,75 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DDC1FC369AB
-	for <qemu-riscv@archiver.kernel.org>; Thu, 24 Apr 2025 10:50:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ADED7C369D1
+	for <qemu-riscv@archiver.kernel.org>; Thu, 24 Apr 2025 10:54:28 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1u7uAR-0000VQ-QV; Thu, 24 Apr 2025 06:50:56 -0400
+	id 1u7uDT-0001Om-V2; Thu, 24 Apr 2025 06:54:03 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1u7uA2-0000Tk-Jm; Thu, 24 Apr 2025 06:50:33 -0400
-Received: from mail-ua1-x936.google.com ([2607:f8b0:4864:20::936])
+ id 1u7uDO-0001Ni-0V; Thu, 24 Apr 2025 06:53:58 -0400
+Received: from mail-vk1-xa2c.google.com ([2607:f8b0:4864:20::a2c])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1u7uA0-0000u2-FH; Thu, 24 Apr 2025 06:50:30 -0400
-Received: by mail-ua1-x936.google.com with SMTP id
- a1e0cc1a2514c-86dc3482b3dso2279108241.0; 
- Thu, 24 Apr 2025 03:50:27 -0700 (PDT)
+ id 1u7uDL-00019M-9V; Thu, 24 Apr 2025 06:53:57 -0400
+Received: by mail-vk1-xa2c.google.com with SMTP id
+ 71dfb90a1353d-523dc190f95so485747e0c.1; 
+ Thu, 24 Apr 2025 03:53:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1745491827; x=1746096627; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1745492033; x=1746096833; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=R7AlI3C+LjjGhHkNYleiXqOdDuGD5iVehVUi/xQsgYQ=;
- b=H7gifleQnXbUCHHqkaPwC7aN7J+AaG4gs3ZkR9ZXRU5gUiw2Sahmmcn3gukG4wnLn+
- sCKgrT61Y761/5Z2lny2/54r5hQlH7cR+5G+7C4B0Gr8rgWsxhRoU7XVRqOnHgdLQrjZ
- ca/B/d8Yw1Rxm1ktv+QnV6cHTtuewMnqlDWB4SI4cn0oLjLBrJSTiOLNvQ75gqC2dZ3v
- 6UXgxKu6Ha53hw5CkscEeROCMZ2lVGnYYERJwykkVN5jv7/bkGwfr9HUL9SSb3rUb2Hk
- 2DiTnQh4tLKz3pgMCImY5PCZmW8EI3pJ9gvE/HPeNESfaCTNrTgc3g9GUIT0gc46PgxB
- URmg==
+ bh=7smriITpd07OS2hVuBjb+oG3iwe+LUChObDGpmoZQ4E=;
+ b=B9BKe23PJslXjSND9VXpLUU6Rz+PCWALVcOh/KxB7QGSiXt5jo6tZniZQbIAbb88hR
+ 66WQkCxqWZaFrZ8EA8H4M+INgkLEd/QpRwrQKN7thliT7iXBgxilDzka2cfdzZDJ6Dfi
+ /KIf9SBqThjnsmqnC0UIjzxqqqVDOZ2X3QpR6WOdUSATFJZpN66ADy3K8RDO13jbnVP1
+ /kNDjvRWXDzrS2RGG0YjHC51fbn7bOBswQKd/X70ECb79H0sp1ZlJHu8o5nTg1JIT3FG
+ WVEuSWOxTH3ifen2q2lC0A/6jKfmHJS5mfSdZTOLZ5kDaDonog2YechGVKD3sR3qlq7V
+ DbeA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1745491827; x=1746096627;
+ d=1e100.net; s=20230601; t=1745492033; x=1746096833;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=R7AlI3C+LjjGhHkNYleiXqOdDuGD5iVehVUi/xQsgYQ=;
- b=JRfe8cM2vfA72cuJGBYivtqkjCq3LW261lrbI4tP9eXJUAcT7hM1GDRRhB4ZIbFDvy
- Vzlp3BMllsTRxOPIHHDYNM32ALrXT6RnrdxcUL4H9g0wh/Hb9kuYfMo6vQbKqbpHD/ly
- wr8qTp2oV5ZtqnnbtgIhugAseCEAE3b33gD8rf/7pQO/9aD5SZ8OgTSVtmMVr0j9qSK8
- NO6LfNapCMHlxQbqpzOAspCD7g0CKtQNoxNNEd3kdpeGORsiqbtGx6/MHpGh93BRjWNs
- QECZj2RF/Qx2HRt5vkbg8sZO80wF4DcUGI6Itr7bfec28Grz3Gqbn5F2so5EBLlp35GH
- 9UuA==
+ bh=7smriITpd07OS2hVuBjb+oG3iwe+LUChObDGpmoZQ4E=;
+ b=sZ46opmNvbajX4MM56E1Xcdy2ZUx0CFafvMiNnWXAeSle10F0Hd9IYtvxzNCV3mY9n
+ 1B2/R8GoIhRcaHQavQVssVRBRQl/DUBDm5J0gmuHjnHHPyAhrT+Sb89I0+MkErGgV+HB
+ USNWypixWot0K4iLqkEZjVEezZ6Z7qqr6sx9vS3DqAXY3H5Nig+8F6q3G4TXoitJiOni
+ pcgOfd6umhvKjkEFsr6LlS+t2u58gotYNaH9Cz7snZwIXvwWUvnHs/TGFjw5aYJj5thY
+ HagF64+lE8abffVTM1Tm55Pi1zpiGE7d3mgLZGGnCaonLEQz34yZXsLETtuVH4pvC4nK
+ HLXA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVC4MAz7A1wXYf82SmDPk12mHcVBZehp6nP6za2AsZYSGm91IOGseTyjuBTL2w/sC8PzkDDIwHiSCnX@nongnu.org
-X-Gm-Message-State: AOJu0Ywqpe00WWAwx6uQBGIXsvE9Pdqh2bCni7qh4N8+uWX80R9ygIVF
- V+wrZMhhyW+DRZExR1OwaoSu6sI6Ntw5LRupizReWGmeud52buHxkgJHLrS0qbJ/GRHiYhBe1tu
- goB6dRX4wk6IlOONm7fwHMSH7QrM=
-X-Gm-Gg: ASbGncvAHXVtOjpCI0RSZsH+99Q2FUr82mCx5LRCQq1H/8wURP1+f6+qp/UpJ+FMV+Z
- AkpFmvhDEl2upk5lsbYMYZkPWFpXNVQWRHFxNlUcvf1B3torJK968tmeB7eamgCly9NrwGJnI8w
- e7eW5KtN2Zg0sCbspUADsiw+MjXO9UcY+jbpVugdQfeN+/PsjAvmWK
-X-Google-Smtp-Source: AGHT+IEpNZqTQEK1e/kOtUwWtmwhUNa5dxy15CFlXjOzN5JlDNNkaPdso5+S/iWpqboVtEdYX2PfiuPJwPz7VR5Sqz8=
-X-Received: by 2002:a05:6102:161e:b0:4c3:64c0:8b14 with SMTP id
- ada2fe7eead31-4d3c73f1c0amr831771137.3.1745491826535; Thu, 24 Apr 2025
- 03:50:26 -0700 (PDT)
+ AJvYcCW6CyTH7fAQsK1hHdhHSSq9GbZ4Pird7f5CduDTXhQxx2a2i8x3Rv7G6TjnB+/xZyVtWdLLFeDZurXZ@nongnu.org
+X-Gm-Message-State: AOJu0YzWs9Gw+vvVNHk1odRu8nf8lrCQRbfZbwGVYx7e1JSzdertC1c5
+ TS5L4leHajrZ8onuuf4RIklHWEBrTwLW6fciR5msc1wCOuzvFg1snBzsSB+anvHBPsuKn0qvKrf
+ najUcK1tKwx8mQPh6tf/99C0uBPBTMw==
+X-Gm-Gg: ASbGncsIbmERT/bKL//gJPWXpoEdeluePRQX0uhO3exyiTAe5UgKEWPF2hH5JHbg/Q5
+ 2cTmLNznToccDX0nCQ9NUGRGQZGgo+MRrTuRDLPJg3nni1cADD4UGRGuB4j8RKtBruXNEIPZa+h
+ nY7Qq2tLksFBrfjvm1nZiTFnj4CMZJHZ7IihKWHzchLbhKyBO7tssk9fpjj0lLAZI=
+X-Google-Smtp-Source: AGHT+IH7bqzsHcQSCuGH7Fe1P4hy88g1bGZxbpA4y+lJ/yhTab7CiXvP1UgAh8w9c398/pqawddLkBbZbC3SYDfr1eg=
+X-Received: by 2002:a05:6102:943:b0:4bb:d062:438 with SMTP id
+ ada2fe7eead31-4d38cf2a471mr1542061137.1.1745492033147; Thu, 24 Apr 2025
+ 03:53:53 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250408022121.173531-1-huangborong@bosc.ac.cn>
-In-Reply-To: <20250408022121.173531-1-huangborong@bosc.ac.cn>
+References: <20250421094656.48997-1-jay.chang@sifive.com>
+ <20250421094656.48997-2-jay.chang@sifive.com>
+In-Reply-To: <20250421094656.48997-2-jay.chang@sifive.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Thu, 24 Apr 2025 20:49:59 +1000
-X-Gm-Features: ATxdqUG_-rriHUqaJ_R8HY3BeswBWj6YDhMGoIY9Ad4qjWkw4XiBhUurVUYlvUo
-Message-ID: <CAKmqyKOwbLJrRTkVrGO8+Kd-5SAEj1GU7ToytB8b66b_gbADHg@mail.gmail.com>
-Subject: Re: [PATCH v3 1/2] target/riscv: Add BOSC's Xiangshan Kunminghu CPU
-To: Huang Borong <huangborong@bosc.ac.cn>
-Cc: qemu-riscv@nongnu.org, palmer@dabbelt.com, alistair.francis@wdc.com, 
- liwei1518@gmail.com, dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com, 
- qemu-devel@nongnu.org, wangran@bosc.ac.cn
+Date: Thu, 24 Apr 2025 20:53:27 +1000
+X-Gm-Features: ATxdqUEv2AEF6ZYAW1q5xyeBFbZKODXp01McB0LtUv8ltEaIPcyyrZJ5LSEC8Fs
+Message-ID: <CAKmqyKNFdSezDH_zzpZF7AiKvJ2W06=Tom3Quqnri00K4+LKwA@mail.gmail.com>
+Subject: Re: [PATCH 1/2] target/riscv: Extend PMP region up to 64
+To: Jay Chang <jay.chang@sifive.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, 
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Weiwei Li <liwei1518@gmail.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>, 
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, Frank Chang <frank.chang@sifive.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::936;
- envelope-from=alistair23@gmail.com; helo=mail-ua1-x936.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::a2c;
+ envelope-from=alistair23@gmail.com; helo=mail-vk1-xa2c.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -96,153 +100,371 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Tue, Apr 8, 2025 at 12:23=E2=80=AFPM Huang Borong <huangborong@bosc.ac.c=
-n> wrote:
+On Mon, Apr 21, 2025 at 7:48=E2=80=AFPM Jay Chang <jay.chang@sifive.com> wr=
+ote:
 >
-> Add a CPU entry for the Xiangshan Kunminghu CPU, an open-source,
-> high-performance RISC-V processor. More details can be found at:
-> https://github.com/OpenXiangShan/XiangShan
+> According to the RISC-V Privileged Specification (version >1.12),
+> RV32 supports 16 CSRs (pmpcfg0=E2=80=93pmpcfg15) to configure 64 PMP regi=
+ons
+> (pmpaddr0=E2=80=93pmpaddr63).
 >
-> Note: The ISA extensions supported by the Xiangshan Kunminghu CPU are
-> categorized based on four RISC-V specifications: Volume I: Unprivileged
-> Architecture, Volume II: Privileged Architecture, AIA, and RVA23. The
-> extensions within each category are organized according to the chapter
-> order in the specifications.
->
-> Signed-off-by: Yu Hu <huyu@bosc.ac.cn>
-> Signed-off-by: Ran Wang <wangran@bosc.ac.cn>
-> Signed-off-by: Borong Huang <huangborong@bosc.ac.cn>
-> ---
->  target/riscv/cpu-qom.h |  1 +
->  target/riscv/cpu.c     | 72 ++++++++++++++++++++++++++++++++++++++++++
->  2 files changed, 73 insertions(+)
->
-> diff --git a/target/riscv/cpu-qom.h b/target/riscv/cpu-qom.h
-> index 4cfdb74891..f2908939e7 100644
-> --- a/target/riscv/cpu-qom.h
-> +++ b/target/riscv/cpu-qom.h
-> @@ -53,6 +53,7 @@
->  #define TYPE_RISCV_CPU_VEYRON_V1        RISCV_CPU_TYPE_NAME("veyron-v1")
->  #define TYPE_RISCV_CPU_TT_ASCALON       RISCV_CPU_TYPE_NAME("tt-ascalon"=
-)
->  #define TYPE_RISCV_CPU_XIANGSHAN_NANHU  RISCV_CPU_TYPE_NAME("xiangshan-n=
-anhu")
-> +#define TYPE_RISCV_CPU_XIANGSHAN_KMH    RISCV_CPU_TYPE_NAME("xiangshan-k=
-unminghu")
->  #define TYPE_RISCV_CPU_HOST             RISCV_CPU_TYPE_NAME("host")
->
->  OBJECT_DECLARE_CPU_TYPE(RISCVCPU, RISCVCPUClass, RISCV_CPU)
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index 09ded6829a..a076d9dc0c 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -697,6 +697,76 @@ static void rv64_xiangshan_nanhu_cpu_init(Object *ob=
-j)
->  #endif
->  }
->
-> +static void rv64_xiangshan_kmh_cpu_init(Object *obj)
-> +{
-> +    CPURISCVState *env =3D &RISCV_CPU(obj)->env;
-> +    RISCVCPU *cpu =3D RISCV_CPU(obj);
-> +
-> +    riscv_cpu_set_misa_ext(env, RVG | RVC | RVB | RVS | RVU | RVH | RVV)=
-;
-> +    env->priv_ver =3D PRIV_VERSION_1_13_0;
-> +
-> +    /* Enable ISA extensions */
-> +    cpu->cfg.mmu =3D true;
-> +    cpu->cfg.pmp =3D true;
-> +
-> +    /*
-> +     * The RISC-V Instruction Set Manual: Volume I
-> +     * Unprivileged Architecture
-> +     */
-> +    cpu->cfg.ext_zicntr =3D true;
-> +    cpu->cfg.ext_zihpm =3D true;
-> +    cpu->cfg.ext_zihintntl =3D true;
-> +    cpu->cfg.ext_zihintpause =3D true;
-> +    cpu->cfg.ext_zimop =3D true;
-> +    cpu->cfg.ext_zcmop =3D true;
-> +    cpu->cfg.ext_zicond =3D true;
-> +    cpu->cfg.ext_zawrs =3D true;
-> +    cpu->cfg.ext_zacas =3D true;
-> +    cpu->cfg.ext_zfh =3D true;
-> +    cpu->cfg.ext_zfa =3D true;
-> +    cpu->cfg.ext_zcb =3D true;
-> +    cpu->cfg.ext_zbc =3D true;
-> +    cpu->cfg.ext_zvfh =3D true;
-> +    cpu->cfg.ext_zkn =3D true;
-> +    cpu->cfg.ext_zks =3D true;
-> +    cpu->cfg.ext_zkt =3D true;
-> +    cpu->cfg.ext_zvbb =3D true;
-> +    cpu->cfg.ext_zvkt =3D true;
-> +
-> +    /*
-> +     * The RISC-V Instruction Set Manual: Volume II
-> +     * Privileged Architecture
-> +     */
-> +    cpu->cfg.ext_smstateen =3D true;
-> +    cpu->cfg.ext_smcsrind =3D true;
-> +    cpu->cfg.ext_sscsrind =3D true;
-> +    cpu->cfg.ext_svnapot =3D true;
-> +    cpu->cfg.ext_svpbmt =3D true;
-> +    cpu->cfg.ext_svinval =3D true;
-> +    cpu->cfg.ext_sstc =3D true;
-> +    cpu->cfg.ext_sscofpmf =3D true;
-> +    cpu->cfg.ext_ssdbltrp =3D true;
-> +    cpu->cfg.ext_ssnpm =3D true;
-> +    cpu->cfg.ext_smnpm =3D true;
-> +    cpu->cfg.ext_smmpm =3D true;
-> +    cpu->cfg.ext_sspm =3D true;
-> +    cpu->cfg.ext_supm =3D true;
-> +
-> +    /* The RISC-V Advanced Interrupt Architecture */
-> +    cpu->cfg.ext_smaia =3D true;
-> +    cpu->cfg.ext_ssaia =3D true;
-> +
-> +    /* RVA23 Profiles */
-> +    cpu->cfg.ext_zicbom =3D true;
-> +    cpu->cfg.ext_zicbop =3D true;
-> +    cpu->cfg.ext_zicboz =3D true;
-> +    cpu->cfg.ext_svade =3D true;
-> +
-> +#ifndef CONFIG_USER_ONLY
-> +    set_satp_mode_max_supported(cpu, VM_1_10_SV48);
-> +#endif
-> +}
-> +
+> Reviewed-by: Frank Chang <frank.chang@sifive.com>
+> Signed-off-by: Jay Chang <jay.chang@sifive.com>
 
-Sorry about this, but we just merged a new way of defining CPU types.
-Can you please rebase on
-https://github.com/alistair23/qemu/tree/riscv-to-apply.next to use the
-new macros? It shouldn't be much work, just a little restructuring.
-
-When sending a new version can you also include a cover letter [1]
-
-1: https://www.qemu.org/docs/master/devel/submitting-a-patch.html#include-a=
--meaningful-cover-letter
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
->  #ifdef CONFIG_TCG
->  static void rv128_base_cpu_init(Object *obj)
->  {
-> @@ -3261,6 +3331,8 @@ static const TypeInfo riscv_cpu_type_infos[] =3D {
->      DEFINE_VENDOR_CPU(TYPE_RISCV_CPU_VEYRON_V1,  MXL_RV64,  rv64_veyron_=
-v1_cpu_init),
->      DEFINE_VENDOR_CPU(TYPE_RISCV_CPU_XIANGSHAN_NANHU,
->                                                   MXL_RV64, rv64_xiangsha=
-n_nanhu_cpu_init),
-> +    DEFINE_VENDOR_CPU(TYPE_RISCV_CPU_XIANGSHAN_KMH,
-> +                                                 MXL_RV64,  rv64_xiangsh=
-an_kmh_cpu_init),
->  #ifdef CONFIG_TCG
->      DEFINE_DYNAMIC_CPU(TYPE_RISCV_CPU_BASE128,   MXL_RV128, rv128_base_c=
-pu_init),
->  #endif /* CONFIG_TCG */
+> ---
+>  target/riscv/cpu_bits.h |  60 +++++++++++++++++++
+>  target/riscv/csr.c      | 124 +++++++++++++++++++++++++++++++++++++++-
+>  2 files changed, 182 insertions(+), 2 deletions(-)
+>
+> diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
+> index a30317c617..e6b3e28386 100644
+> --- a/target/riscv/cpu_bits.h
+> +++ b/target/riscv/cpu_bits.h
+> @@ -372,6 +372,18 @@
+>  #define CSR_PMPCFG1         0x3a1
+>  #define CSR_PMPCFG2         0x3a2
+>  #define CSR_PMPCFG3         0x3a3
+> +#define CSR_PMPCFG4         0x3a4
+> +#define CSR_PMPCFG5         0x3a5
+> +#define CSR_PMPCFG6         0x3a6
+> +#define CSR_PMPCFG7         0x3a7
+> +#define CSR_PMPCFG8         0x3a8
+> +#define CSR_PMPCFG9         0x3a9
+> +#define CSR_PMPCFG10        0x3aa
+> +#define CSR_PMPCFG11        0x3ab
+> +#define CSR_PMPCFG12        0x3ac
+> +#define CSR_PMPCFG13        0x3ad
+> +#define CSR_PMPCFG14        0x3ae
+> +#define CSR_PMPCFG15        0x3af
+>  #define CSR_PMPADDR0        0x3b0
+>  #define CSR_PMPADDR1        0x3b1
+>  #define CSR_PMPADDR2        0x3b2
+> @@ -388,6 +400,54 @@
+>  #define CSR_PMPADDR13       0x3bd
+>  #define CSR_PMPADDR14       0x3be
+>  #define CSR_PMPADDR15       0x3bf
+> +#define CSR_PMPADDR16       0x3c0
+> +#define CSR_PMPADDR17       0x3c1
+> +#define CSR_PMPADDR18       0x3c2
+> +#define CSR_PMPADDR19       0x3c3
+> +#define CSR_PMPADDR20       0x3c4
+> +#define CSR_PMPADDR21       0x3c5
+> +#define CSR_PMPADDR22       0x3c6
+> +#define CSR_PMPADDR23       0x3c7
+> +#define CSR_PMPADDR24       0x3c8
+> +#define CSR_PMPADDR25       0x3c9
+> +#define CSR_PMPADDR26       0x3ca
+> +#define CSR_PMPADDR27       0x3cb
+> +#define CSR_PMPADDR28       0x3cc
+> +#define CSR_PMPADDR29       0x3cd
+> +#define CSR_PMPADDR30       0x3ce
+> +#define CSR_PMPADDR31       0x3cf
+> +#define CSR_PMPADDR32       0x3d0
+> +#define CSR_PMPADDR33       0x3d1
+> +#define CSR_PMPADDR34       0x3d2
+> +#define CSR_PMPADDR35       0x3d3
+> +#define CSR_PMPADDR36       0x3d4
+> +#define CSR_PMPADDR37       0x3d5
+> +#define CSR_PMPADDR38       0x3d6
+> +#define CSR_PMPADDR39       0x3d7
+> +#define CSR_PMPADDR40       0x3d8
+> +#define CSR_PMPADDR41       0x3d9
+> +#define CSR_PMPADDR42       0x3da
+> +#define CSR_PMPADDR43       0x3db
+> +#define CSR_PMPADDR44       0x3dc
+> +#define CSR_PMPADDR45       0x3dd
+> +#define CSR_PMPADDR46       0x3de
+> +#define CSR_PMPADDR47       0x3df
+> +#define CSR_PMPADDR48       0x3e0
+> +#define CSR_PMPADDR49       0x3e1
+> +#define CSR_PMPADDR50       0x3e2
+> +#define CSR_PMPADDR51       0x3e3
+> +#define CSR_PMPADDR52       0x3e4
+> +#define CSR_PMPADDR53       0x3e5
+> +#define CSR_PMPADDR54       0x3e6
+> +#define CSR_PMPADDR55       0x3e7
+> +#define CSR_PMPADDR56       0x3e8
+> +#define CSR_PMPADDR57       0x3e9
+> +#define CSR_PMPADDR58       0x3ea
+> +#define CSR_PMPADDR59       0x3eb
+> +#define CSR_PMPADDR60       0x3ec
+> +#define CSR_PMPADDR61       0x3ed
+> +#define CSR_PMPADDR62       0x3ee
+> +#define CSR_PMPADDR63       0x3ef
+>
+>  /* RNMI */
+>  #define CSR_MNSCRATCH       0x740
+> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+> index 7948188356..f8f61ffff5 100644
+> --- a/target/riscv/csr.c
+> +++ b/target/riscv/csr.c
+> @@ -6088,6 +6088,30 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] =3D {
+>      [CSR_PMPCFG1]    =3D { "pmpcfg1",   pmp, read_pmpcfg,  write_pmpcfg =
+ },
+>      [CSR_PMPCFG2]    =3D { "pmpcfg2",   pmp, read_pmpcfg,  write_pmpcfg =
+ },
+>      [CSR_PMPCFG3]    =3D { "pmpcfg3",   pmp, read_pmpcfg,  write_pmpcfg =
+ },
+> +    [CSR_PMPCFG4]    =3D { "pmpcfg4",   pmp, read_pmpcfg,  write_pmpcfg,
+> +                         .min_priv_ver =3D PRIV_VERSION_1_12_0          =
+ },
+> +    [CSR_PMPCFG5]    =3D { "pmpcfg5",   pmp, read_pmpcfg,  write_pmpcfg,
+> +                         .min_priv_ver =3D PRIV_VERSION_1_12_0          =
+ },
+> +    [CSR_PMPCFG6]    =3D { "pmpcfg6",   pmp, read_pmpcfg,  write_pmpcfg,
+> +                         .min_priv_ver =3D PRIV_VERSION_1_12_0          =
+ },
+> +    [CSR_PMPCFG7]    =3D { "pmpcfg7",   pmp, read_pmpcfg,  write_pmpcfg,
+> +                         .min_priv_ver =3D PRIV_VERSION_1_12_0          =
+ },
+> +    [CSR_PMPCFG8]    =3D { "pmpcfg8",   pmp, read_pmpcfg,  write_pmpcfg,
+> +                         .min_priv_ver =3D PRIV_VERSION_1_12_0          =
+ },
+> +    [CSR_PMPCFG9]    =3D { "pmpcfg9",   pmp, read_pmpcfg,  write_pmpcfg,
+> +                         .min_priv_ver =3D PRIV_VERSION_1_12_0          =
+ },
+> +    [CSR_PMPCFG10]   =3D { "pmpcfg10",  pmp, read_pmpcfg,  write_pmpcfg,
+> +                         .min_priv_ver =3D PRIV_VERSION_1_12_0          =
+ },
+> +    [CSR_PMPCFG11]   =3D { "pmpcfg11",  pmp, read_pmpcfg,  write_pmpcfg,
+> +                         .min_priv_ver =3D PRIV_VERSION_1_12_0          =
+ },
+> +    [CSR_PMPCFG12]   =3D { "pmpcfg12",  pmp, read_pmpcfg,  write_pmpcfg,
+> +                         .min_priv_ver =3D PRIV_VERSION_1_12_0          =
+ },
+> +    [CSR_PMPCFG13]   =3D { "pmpcfg13",  pmp, read_pmpcfg,  write_pmpcfg,
+> +                         .min_priv_ver =3D PRIV_VERSION_1_12_0          =
+ },
+> +    [CSR_PMPCFG14]   =3D { "pmpcfg14",  pmp, read_pmpcfg,  write_pmpcfg,
+> +                         .min_priv_ver =3D PRIV_VERSION_1_12_0          =
+ },
+> +    [CSR_PMPCFG15]   =3D { "pmpcfg15",  pmp, read_pmpcfg,  write_pmpcfg,
+> +                         .min_priv_ver =3D PRIV_VERSION_1_12_0          =
+ },
+>      [CSR_PMPADDR0]   =3D { "pmpaddr0",  pmp, read_pmpaddr, write_pmpaddr=
+ },
+>      [CSR_PMPADDR1]   =3D { "pmpaddr1",  pmp, read_pmpaddr, write_pmpaddr=
+ },
+>      [CSR_PMPADDR2]   =3D { "pmpaddr2",  pmp, read_pmpaddr, write_pmpaddr=
+ },
+> @@ -6102,8 +6126,104 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] =3D =
+{
+>      [CSR_PMPADDR11]  =3D { "pmpaddr11", pmp, read_pmpaddr, write_pmpaddr=
+ },
+>      [CSR_PMPADDR12]  =3D { "pmpaddr12", pmp, read_pmpaddr, write_pmpaddr=
+ },
+>      [CSR_PMPADDR13]  =3D { "pmpaddr13", pmp, read_pmpaddr, write_pmpaddr=
+ },
+> -    [CSR_PMPADDR14] =3D  { "pmpaddr14", pmp, read_pmpaddr, write_pmpaddr=
+ },
+> -    [CSR_PMPADDR15] =3D  { "pmpaddr15", pmp, read_pmpaddr, write_pmpaddr=
+ },
+> +    [CSR_PMPADDR14]  =3D { "pmpaddr14", pmp, read_pmpaddr, write_pmpaddr=
+ },
+> +    [CSR_PMPADDR15]  =3D { "pmpaddr15", pmp, read_pmpaddr, write_pmpaddr=
+ },
+> +    [CSR_PMPADDR16]  =3D { "pmpaddr16", pmp, read_pmpaddr, write_pmpaddr=
+,
+> +                         .min_priv_ver =3D PRIV_VERSION_1_12_0          =
+ },
+> +    [CSR_PMPADDR17]  =3D { "pmpaddr17", pmp, read_pmpaddr, write_pmpaddr=
+,
+> +                         .min_priv_ver =3D PRIV_VERSION_1_12_0          =
+ },
+> +    [CSR_PMPADDR18]  =3D { "pmpaddr18", pmp, read_pmpaddr, write_pmpaddr=
+,
+> +                         .min_priv_ver =3D PRIV_VERSION_1_12_0          =
+ },
+> +    [CSR_PMPADDR19]  =3D { "pmpaddr19", pmp, read_pmpaddr, write_pmpaddr=
+,
+> +                         .min_priv_ver =3D PRIV_VERSION_1_12_0          =
+ },
+> +    [CSR_PMPADDR20]  =3D { "pmpaddr20", pmp, read_pmpaddr, write_pmpaddr=
+,
+> +                         .min_priv_ver =3D PRIV_VERSION_1_12_0          =
+ },
+> +    [CSR_PMPADDR21]  =3D { "pmpaddr21", pmp, read_pmpaddr, write_pmpaddr=
+,
+> +                         .min_priv_ver =3D PRIV_VERSION_1_12_0          =
+ },
+> +    [CSR_PMPADDR22]  =3D { "pmpaddr22", pmp, read_pmpaddr, write_pmpaddr=
+,
+> +                         .min_priv_ver =3D PRIV_VERSION_1_12_0          =
+ },
+> +    [CSR_PMPADDR23]  =3D { "pmpaddr23", pmp, read_pmpaddr, write_pmpaddr=
+,
+> +                         .min_priv_ver =3D PRIV_VERSION_1_12_0          =
+ },
+> +    [CSR_PMPADDR24]  =3D { "pmpaddr24", pmp, read_pmpaddr, write_pmpaddr=
+,
+> +                         .min_priv_ver =3D PRIV_VERSION_1_12_0          =
+ },
+> +    [CSR_PMPADDR25]  =3D { "pmpaddr25", pmp, read_pmpaddr, write_pmpaddr=
+,
+> +                         .min_priv_ver =3D PRIV_VERSION_1_12_0          =
+ },
+> +    [CSR_PMPADDR26]  =3D { "pmpaddr26", pmp, read_pmpaddr, write_pmpaddr=
+,
+> +                         .min_priv_ver =3D PRIV_VERSION_1_12_0          =
+ },
+> +    [CSR_PMPADDR27]  =3D { "pmpaddr27", pmp, read_pmpaddr, write_pmpaddr=
+,
+> +                         .min_priv_ver =3D PRIV_VERSION_1_12_0          =
+ },
+> +    [CSR_PMPADDR28]  =3D { "pmpaddr28", pmp, read_pmpaddr, write_pmpaddr=
+,
+> +                         .min_priv_ver =3D PRIV_VERSION_1_12_0          =
+ },
+> +    [CSR_PMPADDR29]  =3D { "pmpaddr29", pmp, read_pmpaddr, write_pmpaddr=
+,
+> +                         .min_priv_ver =3D PRIV_VERSION_1_12_0          =
+ },
+> +    [CSR_PMPADDR30]  =3D { "pmpaddr30", pmp, read_pmpaddr, write_pmpaddr=
+,
+> +                         .min_priv_ver =3D PRIV_VERSION_1_12_0          =
+ },
+> +    [CSR_PMPADDR31]  =3D { "pmpaddr31", pmp, read_pmpaddr, write_pmpaddr=
+,
+> +                         .min_priv_ver =3D PRIV_VERSION_1_12_0          =
+ },
+> +    [CSR_PMPADDR32]  =3D { "pmpaddr32", pmp, read_pmpaddr, write_pmpaddr=
+,
+> +                         .min_priv_ver =3D PRIV_VERSION_1_12_0          =
+ },
+> +    [CSR_PMPADDR33]  =3D { "pmpaddr33", pmp, read_pmpaddr, write_pmpaddr=
+,
+> +                         .min_priv_ver =3D PRIV_VERSION_1_12_0          =
+ },
+> +    [CSR_PMPADDR34]  =3D { "pmpaddr34", pmp, read_pmpaddr, write_pmpaddr=
+,
+> +                         .min_priv_ver =3D PRIV_VERSION_1_12_0          =
+ },
+> +    [CSR_PMPADDR35]  =3D { "pmpaddr35", pmp, read_pmpaddr, write_pmpaddr=
+,
+> +                         .min_priv_ver =3D PRIV_VERSION_1_12_0          =
+ },
+> +    [CSR_PMPADDR36]  =3D { "pmpaddr36", pmp, read_pmpaddr, write_pmpaddr=
+,
+> +                         .min_priv_ver =3D PRIV_VERSION_1_12_0          =
+ },
+> +    [CSR_PMPADDR37]  =3D { "pmpaddr37", pmp, read_pmpaddr, write_pmpaddr=
+,
+> +                         .min_priv_ver =3D PRIV_VERSION_1_12_0          =
+ },
+> +    [CSR_PMPADDR38]  =3D { "pmpaddr38", pmp, read_pmpaddr, write_pmpaddr=
+,
+> +                         .min_priv_ver =3D PRIV_VERSION_1_12_0          =
+ },
+> +    [CSR_PMPADDR39]  =3D { "pmpaddr39", pmp, read_pmpaddr, write_pmpaddr=
+,
+> +                         .min_priv_ver =3D PRIV_VERSION_1_12_0          =
+ },
+> +    [CSR_PMPADDR40]  =3D { "pmpaddr40", pmp, read_pmpaddr, write_pmpaddr=
+,
+> +                         .min_priv_ver =3D PRIV_VERSION_1_12_0          =
+ },
+> +    [CSR_PMPADDR41]  =3D { "pmpaddr41", pmp, read_pmpaddr, write_pmpaddr=
+,
+> +                         .min_priv_ver =3D PRIV_VERSION_1_12_0          =
+ },
+> +    [CSR_PMPADDR42]  =3D { "pmpaddr42", pmp, read_pmpaddr, write_pmpaddr=
+,
+> +                         .min_priv_ver =3D PRIV_VERSION_1_12_0          =
+ },
+> +    [CSR_PMPADDR43]  =3D { "pmpaddr43", pmp, read_pmpaddr, write_pmpaddr=
+,
+> +                         .min_priv_ver =3D PRIV_VERSION_1_12_0          =
+ },
+> +    [CSR_PMPADDR44]  =3D { "pmpaddr44", pmp, read_pmpaddr, write_pmpaddr=
+,
+> +                         .min_priv_ver =3D PRIV_VERSION_1_12_0          =
+ },
+> +    [CSR_PMPADDR45]  =3D { "pmpaddr45", pmp, read_pmpaddr, write_pmpaddr=
+,
+> +                         .min_priv_ver =3D PRIV_VERSION_1_12_0          =
+ },
+> +    [CSR_PMPADDR46]  =3D { "pmpaddr46", pmp, read_pmpaddr, write_pmpaddr=
+,
+> +                         .min_priv_ver =3D PRIV_VERSION_1_12_0          =
+ },
+> +    [CSR_PMPADDR47]  =3D { "pmpaddr47", pmp, read_pmpaddr, write_pmpaddr=
+,
+> +                         .min_priv_ver =3D PRIV_VERSION_1_12_0          =
+ },
+> +    [CSR_PMPADDR48]  =3D { "pmpaddr48", pmp, read_pmpaddr, write_pmpaddr=
+,
+> +                         .min_priv_ver =3D PRIV_VERSION_1_12_0          =
+ },
+> +    [CSR_PMPADDR49]  =3D { "pmpaddr49", pmp, read_pmpaddr, write_pmpaddr=
+,
+> +                         .min_priv_ver =3D PRIV_VERSION_1_12_0          =
+ },
+> +    [CSR_PMPADDR50]  =3D { "pmpaddr50", pmp, read_pmpaddr, write_pmpaddr=
+,
+> +                         .min_priv_ver =3D PRIV_VERSION_1_12_0          =
+ },
+> +    [CSR_PMPADDR51]  =3D { "pmpaddr51", pmp, read_pmpaddr, write_pmpaddr=
+,
+> +                         .min_priv_ver =3D PRIV_VERSION_1_12_0          =
+ },
+> +    [CSR_PMPADDR52]  =3D { "pmpaddr52", pmp, read_pmpaddr, write_pmpaddr=
+,
+> +                         .min_priv_ver =3D PRIV_VERSION_1_12_0          =
+ },
+> +    [CSR_PMPADDR53]  =3D { "pmpaddr53", pmp, read_pmpaddr, write_pmpaddr=
+,
+> +                         .min_priv_ver =3D PRIV_VERSION_1_12_0          =
+ },
+> +    [CSR_PMPADDR54]  =3D { "pmpaddr54", pmp, read_pmpaddr, write_pmpaddr=
+,
+> +                         .min_priv_ver =3D PRIV_VERSION_1_12_0          =
+ },
+> +    [CSR_PMPADDR55]  =3D { "pmpaddr55", pmp, read_pmpaddr, write_pmpaddr=
+,
+> +                         .min_priv_ver =3D PRIV_VERSION_1_12_0          =
+ },
+> +    [CSR_PMPADDR56]  =3D { "pmpaddr56", pmp, read_pmpaddr, write_pmpaddr=
+,
+> +                         .min_priv_ver =3D PRIV_VERSION_1_12_0          =
+ },
+> +    [CSR_PMPADDR57]  =3D { "pmpaddr57", pmp, read_pmpaddr, write_pmpaddr=
+,
+> +                         .min_priv_ver =3D PRIV_VERSION_1_12_0          =
+ },
+> +    [CSR_PMPADDR58]  =3D { "pmpaddr58", pmp, read_pmpaddr, write_pmpaddr=
+,
+> +                         .min_priv_ver =3D PRIV_VERSION_1_12_0          =
+ },
+> +    [CSR_PMPADDR59]  =3D { "pmpaddr59", pmp, read_pmpaddr, write_pmpaddr=
+,
+> +                         .min_priv_ver =3D PRIV_VERSION_1_12_0          =
+ },
+> +    [CSR_PMPADDR60]  =3D { "pmpaddr60", pmp, read_pmpaddr, write_pmpaddr=
+,
+> +                         .min_priv_ver =3D PRIV_VERSION_1_12_0          =
+ },
+> +    [CSR_PMPADDR61]  =3D { "pmpaddr61", pmp, read_pmpaddr, write_pmpaddr=
+,
+> +                         .min_priv_ver =3D PRIV_VERSION_1_12_0          =
+ },
+> +    [CSR_PMPADDR62]  =3D { "pmpaddr62", pmp, read_pmpaddr, write_pmpaddr=
+,
+> +                         .min_priv_ver =3D PRIV_VERSION_1_12_0          =
+ },
+> +    [CSR_PMPADDR63]  =3D { "pmpaddr63", pmp, read_pmpaddr, write_pmpaddr=
+,
+> +                         .min_priv_ver =3D PRIV_VERSION_1_12_0          =
+ },
+>
+>      /* Debug CSRs */
+>      [CSR_TSELECT]   =3D  { "tselect",  debug, read_tselect,  write_tsele=
+ct  },
 > --
-> 2.34.1
+> 2.48.1
 >
 >
 
