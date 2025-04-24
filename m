@@ -4,94 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 37FD2C369CB
-	for <qemu-riscv@archiver.kernel.org>; Wed, 23 Apr 2025 19:46:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 189E4C369D1
+	for <qemu-riscv@archiver.kernel.org>; Thu, 24 Apr 2025 07:57:50 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1u7g2R-0005NV-50; Wed, 23 Apr 2025 15:45:43 -0400
+	id 1u7rSq-0008IP-SL; Thu, 24 Apr 2025 03:57:44 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1u7g2N-0005Mm-Ut
- for qemu-riscv@nongnu.org; Wed, 23 Apr 2025 15:45:40 -0400
-Received: from mail-pf1-x430.google.com ([2607:f8b0:4864:20::430])
+ (Exim 4.90_1) (envelope-from <jason.chien@sifive.com>)
+ id 1u7rSm-0008FZ-Kb
+ for qemu-riscv@nongnu.org; Thu, 24 Apr 2025 03:57:40 -0400
+Received: from mail-ed1-x52b.google.com ([2a00:1450:4864:20::52b])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1u7g2L-0001F1-Eo
- for qemu-riscv@nongnu.org; Wed, 23 Apr 2025 15:45:39 -0400
-Received: by mail-pf1-x430.google.com with SMTP id
- d2e1a72fcca58-73bb647eb23so161904b3a.0
- for <qemu-riscv@nongnu.org>; Wed, 23 Apr 2025 12:45:36 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <jason.chien@sifive.com>)
+ id 1u7rSk-0007Jv-0c
+ for qemu-riscv@nongnu.org; Thu, 24 Apr 2025 03:57:39 -0400
+Received: by mail-ed1-x52b.google.com with SMTP id
+ 4fb4d7f45d1cf-5f4d28d9fd8so930869a12.3
+ for <qemu-riscv@nongnu.org>; Thu, 24 Apr 2025 00:57:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1745437534; x=1746042334; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=1x2XXU6HyrQO/CrcNvsBVXdueGe/bg1VZLdlryJ27So=;
- b=WokbZCJ6Oo1HMtUALLgmG0GGs/5ui3Hdf/uTIsuJ5YZ9QhTRMq1hAbx85ftVxm/oA4
- PfRaQHYGnzbE6HhtDfwL+l2hqpL4+0ZNM7jYyEvTX9nwHer7qwUBWk+f319Ai338WEnF
- MnMtTSpsPMjsxp4KNGHC7BCS+ZICTNrroiwGOCUQlFGu5BD3s1s6gQBpF2T1QjVjJeGK
- KPCW8LnPmgPdLESySg1fuIlm5BTBH8ZlMszCTS6/7Rb8efRQSKCQ/yi9CHUImLZjuJuU
- 35SQQeyg8eltq0TYcZvp70zqIVQUua5t9sfK/RXDUsuvyOpUs2qBYbrXR2IlJ+K4Dlgz
- OJ+A==
+ d=sifive.com; s=google; t=1745481455; x=1746086255; darn=nongnu.org;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=nr6tgeCJH6Yvebf5yA+n4OxrfzRHl8dGiR49C15x2+E=;
+ b=d4MDE5G8u10OaaYJCZ8rVan4xDwnKlaoZj9E9s0FOiEs5whTYH5jAhxS1f0shPMO5C
+ BdUvYsQJkAGbb8rDln//7K26fmrxwcd+4t4pUUoUzA0KyZHsM95WizEbRsXXul2bqUjR
+ Ysn5nV0za3K6C4S1PWx9xamWGFa6InZ6qwvbLRFNLykuDxI/xxzVYIF/HPggRSUolrrP
+ uGKbeEQrcFRSg9Ro8O3/JYO66+84kDxfQ1NYigrhb8Yh/Fmz2LUC5Hv4msh5xcJV+MJs
+ DRhclzpEXsbmVDEm/4V4SRNzTX0Lgw1fMuhb0hQ7kGyCX3oCfuvQpgJCCtdcB0bTXHAN
+ 753A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1745437534; x=1746042334;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=1x2XXU6HyrQO/CrcNvsBVXdueGe/bg1VZLdlryJ27So=;
- b=tN76WWsgkyL+x+6B9VAOXOl+cemqw0Ev3ME9BoqA9ZQXrSwOd2D5HIJHF8oDes3Fo0
- +gZFbXI4SbRXJZV9uWO1+PzuQ1vY911Mv8099y8wmYK7NuKy0Z40e5iRe6b68yQHC5fh
- yaHwN16xltYkBMzOuKAndSYjkg+8pfK/i9ZXJgq87I2TpZVmxLaVq5XaQCc1pQsNdub+
- 8woNradzL1NNR3H8E11HkYhWhpv/Ez0LDY1VGCwDqtO5k0g5FOrfQSw/BHSE7+6qjAET
- ljhzdo5XsmsjVovGY2szrByPykoSzkP9hmN0bNcknSzTkYE57/6IUkOHvdRopZyylBD5
- /WCQ==
+ d=1e100.net; s=20230601; t=1745481455; x=1746086255;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=nr6tgeCJH6Yvebf5yA+n4OxrfzRHl8dGiR49C15x2+E=;
+ b=twzdaWlmKy7klLqSRPHTGZWGj2Wp5l0lH4yTZAcI43sLHHGLVYEjpaF3mbEHTl3wxE
+ L6p8xx1ijag1qnVZRgmba9xZt94HswQ2I08WAINFGau6ScpWhMHwORocumNOVO/k+8cK
+ JdjtemfPJro8jgXaRcXggDUDyFUhypxlUiwahJq58BgD9w+utYy7hx0UhgvbOVbjVWph
+ 7oqQrGU65hiQU4mBJgHs9sMdCh9roPGcSeIHONjdYS54YCe3GV4Prj3evKcvAYFivcZV
+ Zw5c2gJPa7WDoihwJj2wlVNHVtk/43J4znfGF3LKMej8Yvulc4TLKtzryzw2z5z4fvx1
+ edvQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVxqeAd3aFzd5AXjTb4PhVQmdTT2EwH9JwRFf5CPuYLt9jN1byEzvGHJIc5mLQ6fCuEQl7OHSe+66b0@nongnu.org
-X-Gm-Message-State: AOJu0YxIvJwqnNngrLBvA1ZDNn6KxNILUvI4z0sxGV8fBot1UYHSZAJC
- wLT0oW2cYuoPbImn9LDXjQAkha7D8pHiTpG0zkD7T9rgHlyeo14BvLvgncidiSHO4kgkq/MXNAz
- Z
-X-Gm-Gg: ASbGncsD6DxigGR6d11m9qPbQXqA8Qr6LVaR8R2BsR7r3hHCS8u4nCTdcBAnKRnrDK7
- 9WkSSplNN1xpISPzy4nvTIvfA+rDuvm3UqbocEWzIamYNl2PovokXWNSeO7Q68D5ag47aTBcb1V
- aiflruoatXcrGrJUYYpmzqab4Yhmwu3xDZEe1pjnxfGuJNPKOhSmJDmUHb4SZFEygX2Uxbh+j1c
- yaaixm4brksP+bO90mI+FtI7Z0JW0zbYVm3XOaxNdGXLlDDH2eyCCuz3bOUdXb3sZkDK3RreYea
- G8GvGszE7cbODvM6bYEhWRfpafaZny9hIita//h558ZlmcqpEh2lUg8=
-X-Google-Smtp-Source: AGHT+IG8JqVWxVGvLmHbDcXm8d33VsoFKH9624F9+oKlq67JhjSKRXrfJKe9CHwumGHVuW7s+DeMCA==
-X-Received: by 2002:a05:6a20:9f07:b0:1f5:8e33:c417 with SMTP id
- adf61e73a8af0-203cbc25fe7mr33070795637.2.1745437534086; 
- Wed, 23 Apr 2025 12:45:34 -0700 (PDT)
-Received: from [192.168.68.110] ([152.234.125.33])
- by smtp.gmail.com with ESMTPSA id
- 41be03b00d2f7-b0db14488casm9441855a12.56.2025.04.23.12.45.31
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 23 Apr 2025 12:45:33 -0700 (PDT)
-Message-ID: <6f1cfe50-3261-4121-8b5b-6f69456f1257@ventanamicro.com>
-Date: Wed, 23 Apr 2025 16:45:29 -0300
+ AJvYcCUIOcxK0LXuXU5Eh+0uvRXeCfDj9lWl44ezbwnlRTMKNVrbO/ZecN/I1VXBuwWFM3Ttyu3tiqf6lBBN@nongnu.org
+X-Gm-Message-State: AOJu0YwmzDFS2eKFOC2Hva6zRCUPfmcSlNh3AZB+vC/6bIvRWp9f1O5X
+ VMe95uvNVZKmBV/OBA9Rr+oEbQfjJbg88YGxpAWkEyx97wfDaQF3BeuQw4X0jZUGe5jYtfC5oP6
+ kvQlKfyFxIOcE8QbK60+WlrOzp0PZdAuq2mhf/qakgqbWVuzYjPM=
+X-Gm-Gg: ASbGncsA9DD53OktDUEh6/I6oeVLtmSshNtao8VR11/6KA5P4MbXrEbHeX0m02KBrhp
+ ykle09C7u4ZV3+vtfrWD9Wpxr1q+P9ou/g0R/mLV2py7ZSA0U6d9f23V7+dG+fu+BjmpLEYGQoH
+ mUTXJWtbgfa+PeZOM2TcV82tAp
+X-Google-Smtp-Source: AGHT+IHkAejoE/50SwmX/ikiKVLNkyeXuF4UmOWZrqvJ4YMrzr91sYtUGpUPPmRnX6LM/iZ3/+nA3+wbvjxVXraprUA=
+X-Received: by 2002:a17:907:26c3:b0:ac6:fc40:c996 with SMTP id
+ a640c23a62f3a-ace5729b5d0mr151960166b.23.1745481454701; Thu, 24 Apr 2025
+ 00:57:34 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 4/7] target/riscv/kvm: add kvm_csr_cfgs[]
-To: Andrew Jones <ajones@ventanamicro.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com,
- liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com,
- abologna@redhat.com
-References: <20250417124839.1870494-1-dbarboza@ventanamicro.com>
- <20250417124839.1870494-5-dbarboza@ventanamicro.com>
- <20250423-9623c5901480c9e7be10d9e5@orel>
-Content-Language: en-US
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <20250423-9623c5901480c9e7be10d9e5@orel>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::430;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pf1-x430.google.com
+References: <20250302091209.20063-1-jason.chien@sifive.com>
+ <20250302091209.20063-2-jason.chien@sifive.com>
+ <20250414112346-mutt-send-email-mst@kernel.org>
+In-Reply-To: <20250414112346-mutt-send-email-mst@kernel.org>
+From: Jason Chien <jason.chien@sifive.com>
+Date: Thu, 24 Apr 2025 15:57:23 +0800
+X-Gm-Features: ATxdqUEENOOVfKAb-dvZiJWCkfjpifuQ2EvBz276dh5c4dU78k-YoLHVgK9cY60
+Message-ID: <CADr__8pZ4RZ3Ny9oWx2noeUZAvVwSMAfwhWJOm+46cFbJPQ41A@mail.gmail.com>
+Subject: Re: [PATCH 1/3] include/hw/pci: Attach BDF to Memory Attributes
+To: "Michael S. Tsirkin" <mst@redhat.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, 
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Weiwei Li <liwei1518@gmail.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>, 
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
+ Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
+ Paolo Bonzini <pbonzini@redhat.com>, 
+ Fam Zheng <fam@euphon.net>, Hannes Reinecke <hare@suse.com>,
+ qemu-block@nongnu.org
+Content-Type: multipart/alternative; boundary="00000000000011e56b0633819213"
+Received-SPF: pass client-ip=2a00:1450:4864:20::52b;
+ envelope-from=jason.chien@sifive.com; helo=mail-ed1-x52b.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, HTML_MESSAGE=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -107,285 +104,211 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
+--00000000000011e56b0633819213
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
+Adding requester_id here does not break anything, since pci_dma_map()
+passes MEMTXATTRS_UNSPECIFIED to dma_memory_map() and requester_id is
+unused.
 
-On 4/23/25 12:15 PM, Andrew Jones wrote:
-> On Thu, Apr 17, 2025 at 09:48:36AM -0300, Daniel Henrique Barboza wrote:
->> At this moment we're not checking if the host has support for any
->> specific CSR before doing get/put regs. This will cause problems if the
->> host KVM doesn't support it (see [1] as an example).
->>
->> We'll use the same approach done with the CPU extensions: read all known
->> KVM CSRs during init() to check for availability, then read/write them
->> if they are present. This will be made by either using get-reglist or by
->> directly reading the CSRs.
->>
->> For now we'll just convert the CSRs to use a kvm_csr_cfg[] array,
->> reusing the same KVMCPUConfig abstraction we use for extensions, and use
->> the array in (get|put)_csr_regs() instead of manually listing them. A
->> lot of boilerplate will be added but at least we'll automate the get/put
->> procedure for CSRs, i.e. adding a new CSR in the future will be a matter
->> of adding it in kvm_csr_regs[] and everything else will be taken care
->> of.
->>
->> Despite all the code changes no behavioral change is made.
->>
->> [1] https://lore.kernel.org/qemu-riscv/CABJz62OfUDHYkQ0T3rGHStQprf1c7_E0qBLbLKhfv=+jb0SYAw@mail.gmail.com/
->>
->> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
->> ---
->>   target/riscv/cpu.h         |   1 +
->>   target/riscv/kvm/kvm-cpu.c | 119 ++++++++++++++++++++++++++-----------
->>   2 files changed, 84 insertions(+), 36 deletions(-)
->>
->> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
->> index 51e49e03de..7a56666f9a 100644
->> --- a/target/riscv/cpu.h
->> +++ b/target/riscv/cpu.h
->> @@ -79,6 +79,7 @@ const char *riscv_get_misa_ext_name(uint32_t bit);
->>   const char *riscv_get_misa_ext_description(uint32_t bit);
->>   
->>   #define CPU_CFG_OFFSET(_prop) offsetof(struct RISCVCPUConfig, _prop)
->> +#define ENV_CSR_OFFSET(_csr) offsetof(CPURISCVState, _csr)
->>   
->>   typedef struct riscv_cpu_profile {
->>       struct riscv_cpu_profile *u_parent;
->> diff --git a/target/riscv/kvm/kvm-cpu.c b/target/riscv/kvm/kvm-cpu.c
->> index 0bcadab977..99a4f01b15 100644
->> --- a/target/riscv/kvm/kvm-cpu.c
->> +++ b/target/riscv/kvm/kvm-cpu.c
->> @@ -114,22 +114,6 @@ static uint64_t kvm_riscv_vector_reg_id(RISCVCPU *cpu,
->>       KVM_RISCV_REG_ID_ULONG(KVM_REG_RISCV_VECTOR, \
->>                              KVM_REG_RISCV_VECTOR_CSR_REG(name))
->>   
->> -#define KVM_RISCV_GET_CSR(cs, env, csr, reg) \
->> -    do { \
->> -        int _ret = kvm_get_one_reg(cs, RISCV_CSR_REG(csr), &reg); \
->> -        if (_ret) { \
->> -            return _ret; \
->> -        } \
->> -    } while (0)
->> -
->> -#define KVM_RISCV_SET_CSR(cs, env, csr, reg) \
->> -    do { \
->> -        int _ret = kvm_set_one_reg(cs, RISCV_CSR_REG(csr), &reg); \
->> -        if (_ret) { \
->> -            return _ret; \
->> -        } \
->> -    } while (0)
->> -
->>   #define KVM_RISCV_GET_TIMER(cs, name, reg) \
->>       do { \
->>           int ret = kvm_get_one_reg(cs, RISCV_TIMER_REG(name), &reg); \
->> @@ -150,6 +134,7 @@ typedef struct KVMCPUConfig {
->>       const char *name;
->>       const char *description;
->>       target_ulong offset;
->> +    uint32_t prop_size;
->>       uint64_t kvm_reg_id;
->>       bool user_set;
->>       bool supported;
->> @@ -251,6 +236,54 @@ static void kvm_riscv_update_cpu_misa_ext(RISCVCPU *cpu, CPUState *cs)
->>       }
->>   }
->>   
->> +#define KVM_CSR_CFG(_name, _env_prop, _env_prop_size, reg_id) \
->> +    {.name = _name, .offset = ENV_CSR_OFFSET(_env_prop), \
->> +     .prop_size = _env_prop_size, .kvm_reg_id = reg_id}
->> +
->> +static KVMCPUConfig kvm_csr_cfgs[] = {
->> +    KVM_CSR_CFG("sstatus", mstatus, sizeof(uint64_t), RISCV_CSR_REG(sstatus)),
->> +    KVM_CSR_CFG("sie", mie, sizeof(uint64_t), RISCV_CSR_REG(sie)),
->> +    KVM_CSR_CFG("stvec", stvec, sizeof(target_ulong), RISCV_CSR_REG(stvec)),
->> +    KVM_CSR_CFG("sscratch", sscratch, sizeof(target_ulong),
->> +                RISCV_CSR_REG(sscratch)),
->> +    KVM_CSR_CFG("sepc", sepc, sizeof(target_ulong), RISCV_CSR_REG(sepc)),
->> +    KVM_CSR_CFG("scause", scause, sizeof(target_ulong), RISCV_CSR_REG(scause)),
->> +    KVM_CSR_CFG("stval", stval, sizeof(target_ulong), RISCV_CSR_REG(stval)),
->> +    KVM_CSR_CFG("sip", mip, sizeof(uint64_t), RISCV_CSR_REG(sip)),
->> +    KVM_CSR_CFG("satp", satp, sizeof(target_ulong), RISCV_CSR_REG(satp)),
-> 
-> We don't need to pass in sizeof(env_prop). We can just define KVM_CSR_CFG
-> to do it for us.
-> 
->   #define KVM_CSR_CFG(_name, csr, reg_id) \
->       { .name = _name, .offset = ENV_CSR_OFFSET(csr), \
->         .prop_size = sizeof(((CPURISCVState *)0)->csr), \
->         .kvm_reg_id = reg_id, }
-> 
-> But I don't think we need it at all. See below.
-> 
->> +};
->> +
->> +static void *kvmconfig_get_env_addr(RISCVCPU *cpu, KVMCPUConfig *csr_cfg)
->> +{
->> +    return (void *)&cpu->env + csr_cfg->offset;
->> +}
->> +
->> +static uint64_t kvm_cpu_csr_get_u32(RISCVCPU *cpu, KVMCPUConfig *csr_cfg)
-> 
-> This should return a uint32_t.
-> 
->> +{
->> +    uint32_t *val32 = kvmconfig_get_env_addr(cpu, csr_cfg);
->> +    return *val32;
->> +}
->> +
->> +static uint64_t kvm_cpu_csr_get_u64(RISCVCPU *cpu, KVMCPUConfig *csr_cfg)
->> +{
->> +    uint64_t *val64 = kvmconfig_get_env_addr(cpu, csr_cfg);
->> +    return *val64;
->> +}
->> +
->> +static void kvm_cpu_csr_set_u32(RISCVCPU *cpu, KVMCPUConfig *csr_cfg,
->> +                                uint32_t val)
->> +{
->> +    uint32_t *val32 = kvmconfig_get_env_addr(cpu, csr_cfg);
->> +    *val32 = val;
->> +}
->> +
->> +static void kvm_cpu_csr_set_u64(RISCVCPU *cpu, KVMCPUConfig *csr_cfg,
->> +                                uint64_t val)
->> +{
->> +    uint64_t *val64 = kvmconfig_get_env_addr(cpu, csr_cfg);
->> +    *val64 = val;
->> +}
->> +
->>   #define KVM_EXT_CFG(_name, _prop, _reg_id) \
->>       {.name = _name, .offset = CPU_CFG_OFFSET(_prop), \
->>        .kvm_reg_id = _reg_id}
->> @@ -598,34 +631,48 @@ static int kvm_riscv_put_regs_core(CPUState *cs)
->>   
->>   static int kvm_riscv_get_regs_csr(CPUState *cs)
->>   {
->> -    CPURISCVState *env = &RISCV_CPU(cs)->env;
->> +    RISCVCPU *cpu = RISCV_CPU(cs);
->> +    uint64_t reg;
->> +    int i, ret;
->> +
->> +    for (i = 0; i < ARRAY_SIZE(kvm_csr_cfgs); i++) {
->> +        KVMCPUConfig *csr_cfg = &kvm_csr_cfgs[i];
->>   
->> -    KVM_RISCV_GET_CSR(cs, env, sstatus, env->mstatus);
->> -    KVM_RISCV_GET_CSR(cs, env, sie, env->mie);
->> -    KVM_RISCV_GET_CSR(cs, env, stvec, env->stvec);
->> -    KVM_RISCV_GET_CSR(cs, env, sscratch, env->sscratch);
->> -    KVM_RISCV_GET_CSR(cs, env, sepc, env->sepc);
->> -    KVM_RISCV_GET_CSR(cs, env, scause, env->scause);
->> -    KVM_RISCV_GET_CSR(cs, env, stval, env->stval);
->> -    KVM_RISCV_GET_CSR(cs, env, sip, env->mip);
->> -    KVM_RISCV_GET_CSR(cs, env, satp, env->satp);
->> +        ret = kvm_get_one_reg(cs, csr_cfg->kvm_reg_id, &reg);
->> +        if (ret) {
->> +            return ret;
->> +        }
->> +
->> +        if (csr_cfg->prop_size == sizeof(uint32_t)) {
-> 
->   if (KVM_REG_SIZE(csr_cfg->kvm_reg_id) == sizeof(uint32_t)) {
->       kvm_cpu_csr_set_u32(cpu, csr_cfg, reg);
->   } else if (KVM_REG_SIZE(csr_cfg->kvm_reg_id) == sizeof(uint64_t)) {
->       kvm_cpu_csr_set_u64(cpu, csr_cfg, reg);
->   } else {
->       uh, oh...
->   }
+I'll add the below for the comment:
+Attach BDF here for use during subsequent IOMMU translation.
 
-The idea with this logic is to handle the cases where there is a mismatch
-between the size of the KVM reg and the size of the flag we're using to
-store it. All CSR regs are of size target_ulong but not all CPURISCVState
-flags we're using are target_ulong. We're not storing the size of the KVM
-CSR, we're storing the flag size.
+Michael S. Tsirkin <mst@redhat.com> =E6=96=BC 2025=E5=B9=B44=E6=9C=8814=E6=
+=97=A5 =E9=80=B1=E4=B8=80 =E4=B8=8B=E5=8D=8811:28=E5=AF=AB=E9=81=93=EF=BC=
+=9A
 
-E.g:
+> On Sun, Mar 02, 2025 at 05:12:07PM +0800, Jason Chien wrote:
+> > This commit adds the BDF to the memory attributes for DMA operations.
+> >
+> > Signed-off-by: Jason Chien <jason.chien@sifive.com>
+> > ---
+> >  include/hw/pci/pci_device.h | 10 ++++++++--
+> >  1 file changed, 8 insertions(+), 2 deletions(-)
+> >
+> > diff --git a/include/hw/pci/pci_device.h b/include/hw/pci/pci_device.h
+> > index add208edfa..968f1ba3e9 100644
+> > --- a/include/hw/pci/pci_device.h
+> > +++ b/include/hw/pci/pci_device.h
+> > @@ -244,6 +244,8 @@ static inline MemTxResult pci_dma_rw(PCIDevice *dev=
+,
+> dma_addr_t addr,
+> >                                       void *buf, dma_addr_t len,
+> >                                       DMADirection dir, MemTxAttrs attr=
+s)
+> >  {
+> > +    attrs.unspecified =3D 0;
+> > +    attrs.requester_id =3D pci_requester_id(dev);
+> >      return dma_memory_rw(pci_get_address_space(dev), addr, buf, len,
+> >                           dir, attrs);
+> >  }
+> > @@ -292,6 +294,8 @@ static inline MemTxResult pci_dma_write(PCIDevice
+> *dev, dma_addr_t addr,
+> >                                                 uint##_bits##_t *val, \
+> >                                                 MemTxAttrs attrs) \
+> >      { \
+> > +        attrs.unspecified =3D 0; \
+> > +        attrs.requester_id =3D pci_requester_id(dev); \
+> >          return ld##_l##_dma(pci_get_address_space(dev), addr, val,
+> attrs); \
+> >      } \
+> >      static inline MemTxResult st##_s##_pci_dma(PCIDevice *dev, \
+> > @@ -299,6 +303,8 @@ static inline MemTxResult pci_dma_write(PCIDevice
+> *dev, dma_addr_t addr,
+> >                                                 uint##_bits##_t val, \
+> >                                                 MemTxAttrs attrs) \
+> >      { \
+> > +        attrs.unspecified =3D 0; \
+> > +        attrs.requester_id =3D pci_requester_id(dev); \
+> >          return st##_s##_dma(pci_get_address_space(dev), addr, val,
+> attrs); \
+> >      }
+> >
+> > @@ -327,8 +333,8 @@ PCI_DMA_DEFINE_LDST(q_be, q_be, 64);
+> >  static inline void *pci_dma_map(PCIDevice *dev, dma_addr_t addr,
+> >                                  dma_addr_t *plen, DMADirection dir)
+> >  {
+> > -    return dma_memory_map(pci_get_address_space(dev), addr, plen, dir,
+> > -                          MEMTXATTRS_UNSPECIFIED);
+> > +    MemTxAttrs attrs =3D {.requester_id =3D pci_requester_id(dev)};
+> > +    return dma_memory_map(pci_get_address_space(dev), addr, plen, dir,
+> attrs);
+> >  }
+>
+>
+> Map is the only issue  - bdf can technically change between map and
+> unmap.
+> The use in hw/net/net_tx_pkt.c is fine as it's under BQL.
+> I don't know about the use in megasas though.
+> I think it is probably fine as it seems to deal with commands
+> and I think any driver would flush these if changing BDF.
+> Cc megasas maintainers just to make sure though.
+>
+> Also, adding a code comment here can't hurt.
+>
+>
+> >  static inline void pci_dma_unmap(PCIDevice *dev, void *buffer,
+> dma_addr_t len,
+> > --
+> > 2.43.2
+>
+>
 
-KVM_CSR_CFG("sstatus", mstatus, sizeof(uint64_t), RISCV_CSR_REG(sstatus)),
+--00000000000011e56b0633819213
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-For a 32 bit CPU we're writing a 32 bit ulong sstatus into the 64 bit mstatus
-field. If we assume that they're the same size we'll be read/writing a 32 bit val
-inside a 64 bit field, i.e. we'll be reading/writing the upper words only.
+<div dir=3D"ltr">Adding requester_id here does not break anything, since pc=
+i_dma_map() passes MEMTXATTRS_UNSPECIFIED to dma_memory_map() and requester=
+_id is unused.<div><br></div><div>I&#39;ll add the below for the comment:<b=
+r>Attach BDF here for use during subsequent IOMMU translation.</div></div><=
+br><div class=3D"gmail_quote gmail_quote_container"><div dir=3D"ltr" class=
+=3D"gmail_attr">Michael S. Tsirkin &lt;<a href=3D"mailto:mst@redhat.com">ms=
+t@redhat.com</a>&gt; =E6=96=BC 2025=E5=B9=B44=E6=9C=8814=E6=97=A5 =E9=80=B1=
+=E4=B8=80 =E4=B8=8B=E5=8D=8811:28=E5=AF=AB=E9=81=93=EF=BC=9A<br></div><bloc=
+kquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:=
+1px solid rgb(204,204,204);padding-left:1ex">On Sun, Mar 02, 2025 at 05:12:=
+07PM +0800, Jason Chien wrote:<br>
+&gt; This commit adds the BDF to the memory attributes for DMA operations.<=
+br>
+&gt; <br>
+&gt; Signed-off-by: Jason Chien &lt;<a href=3D"mailto:jason.chien@sifive.co=
+m" target=3D"_blank">jason.chien@sifive.com</a>&gt;<br>
+&gt; ---<br>
+&gt;=C2=A0 include/hw/pci/pci_device.h | 10 ++++++++--<br>
+&gt;=C2=A0 1 file changed, 8 insertions(+), 2 deletions(-)<br>
+&gt; <br>
+&gt; diff --git a/include/hw/pci/pci_device.h b/include/hw/pci/pci_device.h=
+<br>
+&gt; index add208edfa..968f1ba3e9 100644<br>
+&gt; --- a/include/hw/pci/pci_device.h<br>
+&gt; +++ b/include/hw/pci/pci_device.h<br>
+&gt; @@ -244,6 +244,8 @@ static inline MemTxResult pci_dma_rw(PCIDevice *de=
+v, dma_addr_t addr,<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0void *=
+buf, dma_addr_t len,<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0DMADir=
+ection dir, MemTxAttrs attrs)<br>
+&gt;=C2=A0 {<br>
+&gt; +=C2=A0 =C2=A0 attrs.unspecified =3D 0;<br>
+&gt; +=C2=A0 =C2=A0 attrs.requester_id =3D pci_requester_id(dev);<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 return dma_memory_rw(pci_get_address_space(dev), a=
+ddr, buf, len,<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0dir, attrs);<br>
+&gt;=C2=A0 }<br>
+&gt; @@ -292,6 +294,8 @@ static inline MemTxResult pci_dma_write(PCIDevice =
+*dev, dma_addr_t addr,<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0uint##_bits##_t *val, \<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0MemTxAttrs attrs) \<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 { \<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 attrs.unspecified =3D 0; \<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 attrs.requester_id =3D pci_requester_id(d=
+ev); \<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 return ld##_l##_dma(pci_get_address_=
+space(dev), addr, val, attrs); \<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 } \<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 static inline MemTxResult st##_s##_pci_dma(PCIDevi=
+ce *dev, \<br>
+&gt; @@ -299,6 +303,8 @@ static inline MemTxResult pci_dma_write(PCIDevice =
+*dev, dma_addr_t addr,<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0uint##_bits##_t val, \<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0MemTxAttrs attrs) \<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 { \<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 attrs.unspecified =3D 0; \<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 attrs.requester_id =3D pci_requester_id(d=
+ev); \<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 return st##_s##_dma(pci_get_address_=
+space(dev), addr, val, attrs); \<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 }<br>
+&gt;=C2=A0 <br>
+&gt; @@ -327,8 +333,8 @@ PCI_DMA_DEFINE_LDST(q_be, q_be, 64);<br>
+&gt;=C2=A0 static inline void *pci_dma_map(PCIDevice *dev, dma_addr_t addr,=
+<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 dma_addr_t *plen, DMADirec=
+tion dir)<br>
+&gt;=C2=A0 {<br>
+&gt; -=C2=A0 =C2=A0 return dma_memory_map(pci_get_address_space(dev), addr,=
+ plen, dir,<br>
+&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
+ =C2=A0 =C2=A0 =C2=A0 MEMTXATTRS_UNSPECIFIED);<br>
+&gt; +=C2=A0 =C2=A0 MemTxAttrs attrs =3D {.requester_id =3D pci_requester_i=
+d(dev)};<br>
+&gt; +=C2=A0 =C2=A0 return dma_memory_map(pci_get_address_space(dev), addr,=
+ plen, dir, attrs);<br>
+&gt;=C2=A0 }<br>
+<br>
+<br>
+Map is the only issue=C2=A0 - bdf can technically change between map and<br=
+>
+unmap.<br>
+The use in hw/net/net_tx_pkt.c is fine as it&#39;s under BQL.<br>
+I don&#39;t know about the use in megasas though.<br>
+I think it is probably fine as it seems to deal with commands<br>
+and I think any driver would flush these if changing BDF.<br>
+Cc megasas maintainers just to make sure though.<br>
+<br>
+Also, adding a code comment here can&#39;t hurt.<br>
+<br>
+<br>
+&gt;=C2=A0 static inline void pci_dma_unmap(PCIDevice *dev, void *buffer, d=
+ma_addr_t len,<br>
+&gt; -- <br>
+&gt; 2.43.2<br>
+<br>
+</blockquote></div>
 
-In theory this would be ok if we always read/write the same way but it can be
-a nuisance when trying to debug the value inside CPURISCVState.
-
-One may argue whether we should change the type of these fields to match what
-Linux/ISA expect of them. Not sure how much work that is.
-
-
-scounteren is a more serious case because we're writing an ulong KVM reg into
-a 32 bit field:
-
-     KVM_CSR_CFG("scounteren", scounteren, sizeof(uint32_t),
-                 RISCV_CSR_REG(scounteren)),
-
-struct CPUArchState {
-     target_ulong gpr[32];
-     (...)
-     uint32_t scounteren;
-     uint32_t mcounteren;
-     (...)
-
-
-Perhaps it's a good idea to change this CPURISCVState field to ulong before
-adding support for the scouteren KVM CSR.
-
-
-Thanks,
-
-Daniel
-
-
-> 
->> +            kvm_cpu_csr_set_u32(cpu, csr_cfg, reg);
->> +        } else {
->> +            kvm_cpu_csr_set_u64(cpu, csr_cfg, reg);
->> +        }
->> +    }
->>   
->>       return 0;
->>   }
->>   
->>   static int kvm_riscv_put_regs_csr(CPUState *cs)
->>   {
->> -    CPURISCVState *env = &RISCV_CPU(cs)->env;
->> +    RISCVCPU *cpu = RISCV_CPU(cs);
->> +    uint64_t reg;
->> +    int i, ret;
->> +
->> +    for (i = 0; i < ARRAY_SIZE(kvm_csr_cfgs); i++) {
->> +        KVMCPUConfig *csr_cfg = &kvm_csr_cfgs[i];
->> +
->> +        if (csr_cfg->prop_size == sizeof(uint32_t)) {
->> +            reg = kvm_cpu_csr_get_u32(cpu, csr_cfg);
->> +        } else {
->> +            reg = kvm_cpu_csr_get_u64(cpu, csr_cfg);
->> +        }
-> 
-> same comment as above
-> 
->>   
->> -    KVM_RISCV_SET_CSR(cs, env, sstatus, env->mstatus);
->> -    KVM_RISCV_SET_CSR(cs, env, sie, env->mie);
->> -    KVM_RISCV_SET_CSR(cs, env, stvec, env->stvec);
->> -    KVM_RISCV_SET_CSR(cs, env, sscratch, env->sscratch);
->> -    KVM_RISCV_SET_CSR(cs, env, sepc, env->sepc);
->> -    KVM_RISCV_SET_CSR(cs, env, scause, env->scause);
->> -    KVM_RISCV_SET_CSR(cs, env, stval, env->stval);
->> -    KVM_RISCV_SET_CSR(cs, env, sip, env->mip);
->> -    KVM_RISCV_SET_CSR(cs, env, satp, env->satp);
->> +        ret = kvm_set_one_reg(cs, csr_cfg->kvm_reg_id, &reg);
->> +        if (ret) {
->> +            return ret;
->> +        }
->> +    }
->>   
->>       return 0;
->>   }
->> -- 
->> 2.49.0
->>
->>
-> 
-> Thanks,
-> drew
-
+--00000000000011e56b0633819213--
 
