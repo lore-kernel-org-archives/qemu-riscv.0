@@ -4,88 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 614C5C369C2
-	for <qemu-riscv@archiver.kernel.org>; Fri, 25 Apr 2025 16:05:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7ED6EC369C2
+	for <qemu-riscv@archiver.kernel.org>; Fri, 25 Apr 2025 16:43:42 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1u8LVX-00066q-Bu; Fri, 25 Apr 2025 12:02:31 -0400
+	id 1u8M93-00021k-Io; Fri, 25 Apr 2025 12:43:21 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1u8LVO-0005sR-0Z
- for qemu-riscv@nongnu.org; Fri, 25 Apr 2025 12:02:23 -0400
-Received: from mail-pg1-x535.google.com ([2607:f8b0:4864:20::535])
+ (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
+ id 1u8M8y-0001vD-Rd
+ for qemu-riscv@nongnu.org; Fri, 25 Apr 2025 12:43:16 -0400
+Received: from mail-wr1-x42c.google.com ([2a00:1450:4864:20::42c])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1u8LVM-0008Lm-5r
- for qemu-riscv@nongnu.org; Fri, 25 Apr 2025 12:02:21 -0400
-Received: by mail-pg1-x535.google.com with SMTP id
- 41be03b00d2f7-af548cb1f83so2540333a12.3
- for <qemu-riscv@nongnu.org>; Fri, 25 Apr 2025 09:02:18 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
+ id 1u8M8w-0005wK-Jk
+ for qemu-riscv@nongnu.org; Fri, 25 Apr 2025 12:43:16 -0400
+Received: by mail-wr1-x42c.google.com with SMTP id
+ ffacd0b85a97d-39ee651e419so1440281f8f.3
+ for <qemu-riscv@nongnu.org>; Fri, 25 Apr 2025 09:43:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1745596937; x=1746201737; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=mysvDSm/Jc56rhNUm6asG4M9/OvRcpOng4mCRfmCeZk=;
- b=oHx4zR/b7GJclGSbtTByGFOK1679ePdkOmWEUlW08eMJob1HKroH7pfMZTcH2uqett
- BkQKJSzhFs4ri8LarAvO8EJ4jS8G9sRBqRo/swoRYJofhLJXv1Hyo/H/qZlXICN80l6D
- TDSQUaztcX6f+UNIUjNEwA7j35LKLj6Bb0dVUl/cMvr2C6sGkv69x7cmpG2oZDqXDfnL
- idr85PnVNAQr2Jax3IqDr3ZHj2ar7nLn6HxO8rbhTIabT8TxMJn1xPF+H4vkOpuqI3ib
- n4wlcmNhqqTgU4hxG68lGaHIOtYjds8rVBoA9b0KSvw86Rdi3heWJMli9YWjlJsybR0V
- dI+A==
+ d=ventanamicro.com; s=google; t=1745599393; x=1746204193; darn=nongnu.org;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=MJojtPWYq6owKnYgBwlGB6E/22rq46E+3UWcvTNHAqY=;
+ b=J3DsTcNbzbMpflyVyQDmqk2npUd5A9PqoIAXeoSC5XmtxKAHk3c9Xdvy4lH1QcHUZL
+ JF1Of2Tune76WvjGCbxmP9uEQ0Rxe3t+molH7dhJyURf1iZGjWyh8jfYFSCd3/HO0zUZ
+ NZJO5ROqhwOkqGvTDwqIZ11ZhMUPls2baIH35h0pO2b31S0ba/kMH2vvVjRdqkYKzfIN
+ i7QX5I3ztlUs1EaWJhz2yaq4ktWRNTdFP3xTv6xybeLziX6GY/67IGhWtSwVgcUn35WB
+ qvBCpObjqNo8ZJe+usceiComun32Hvowjl3TJ6ihbpmCHvT3ozbxsziKF0kHv9bgpbtI
+ 2Hnw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1745596937; x=1746201737;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=mysvDSm/Jc56rhNUm6asG4M9/OvRcpOng4mCRfmCeZk=;
- b=GOGokmLhspxW4UKtySplUeYPjJb8n2Q8TJrTmvJkRD/v6iY0L9LqmK8tnApDWWM+9Y
- zF7sahMijkxbEBkS2NDmAV9hUskMStWXS2T5+A36EUbiLiINFMn0xS+N88FPRa3aVApG
- bcSwKZhU0q+7zLLTprFJNZSjBl4BPgkdHw+XBtVhxQ+0bi05yLXj8CNXHsxvaE4qkXr8
- vibA/xZPmW9WYkGh7o5RkDOwU4kcl+Igrc4/mY47HCdYzXJrwJtUxJVNtwuZhEsWsU8T
- 6VVv2N74NEIMjlCRAHAmK81A62cW339E6iwlwWfD6M8H+DllV1S7P0AWuGRrXB0/2tf/
- 375A==
-X-Gm-Message-State: AOJu0YzwIoGhI6z/jXs+9It7NdnqXzmJVzzzoJMdHP0Rb8eWwt4i83GB
- jLwP5cwX+DI1xQ5l3mkGkXGZcBsT0bk7JFlsNp8mE6Rp+iSePYXz7rgSVUX8PAQ=
-X-Gm-Gg: ASbGncsbvy7kObF5ET/FldsdvznauhoIGVYfOOq186SPy9rkESssusCtNZds0LjVR6R
- v2iX0qhQTZGcgWY41F4v4PBmaPl7HnLSKtxO6ajnt6GV5QssjgdAePlOYFTVj3KQQlQ2Dp5Mj4e
- kkk7tJU+8sHrq/xo+POzgS08XdYQg6zr0uVCr1OgJgb1tui9PKwmQatan8lF66ABpE8K4WO0ZRq
- B3c0ChBya/eJO32gwoeYc1XHZQOp59/w+YTWtBjluAeblB+2QHRKE9jHvtldbnHMlD0zIhcLiYm
- EKjNxYvzKVPX2BJ7CzlG3w2epeXO/jkYkLVyyoBzH0UvpGyMCH3pd8qb66ZKHgUQirp0
-X-Google-Smtp-Source: AGHT+IHB4mUcuFm+GKhG7QrzRS48FcS5IkaNzF9uvLcHu3c9ZyoKZkjpaOJ4eHd0Fcb5YKKy8wnp0A==
-X-Received: by 2002:a17:90b:48:b0:2ee:b8ac:73b0 with SMTP id
- 98e67ed59e1d1-30a01300dddmr205836a91.2.1745596937323; 
- Fri, 25 Apr 2025 09:02:17 -0700 (PDT)
-Received: from grind.dc1.ventanamicro.com ([152.234.125.33])
+ d=1e100.net; s=20230601; t=1745599393; x=1746204193;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=MJojtPWYq6owKnYgBwlGB6E/22rq46E+3UWcvTNHAqY=;
+ b=qAPTTHJum2jP1Z8gFws5E3U5QRthvr8dkYr8uM57g33Lvkz4DRJhpW+TOCOKVnwe+p
+ IeEF7oPHbxT6rKqpvE6HOdBpNwAy4Zs1ulZMYgoJsBFdjxKsSwLp9VupxeDqN5xFXYs2
+ cYv9b44uIoMnOTuYKHBsB1XlB0cS8BYGU7TIbkgEUMFxWCSz0GTBeTuMW1kcv6UN0nzx
+ pxelydZyT8QYfad0HIC2inxjyjsQc83u4Ymi32RHShoDqM1gJSeKERR3qm1m6IMlKeYy
+ DE4BDT4h4REoUHFYiPCYxKnh/k2Hdi6a9ocQIFNegTjcPQg/moa2p9EjImTh2eoNXUcA
+ ziYg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCW8cFJdTvSrtmPxPVN+KUKgYBBKuSFuuN1TufSMygAAiZZCfQ7o74i40263Me7UGmFBsbnfopmlyqvd@nongnu.org
+X-Gm-Message-State: AOJu0YwvPOJKZ5zZS5VP36vHR/gK2dTc6BP2DOzkn4J0oXK/Cj6QqsTm
+ 4m0LgPjAOYQaea3ZrzZXBMsevR5aq82pl6Tr+YXj4sIVRjk/sHmFGjSIlzJc31c=
+X-Gm-Gg: ASbGncudyfvwCz1xVsFzJQlMpfAxIBwK8HFJgyXewaxuNBEjzuRkeFq+ioUFf3StYlv
+ KaWmZa2Q79flDcN4evw1esnZsZn+zve+2wzYjX0rQ9N1vJKPsdX1E6nsO+3BFcdSjV5YQmtgSXa
+ 3rTvbGya7Wj0a9Qjwm6I04hOLmaRX1hnY50qrQqMs2zh+ZWId1rvlUdKMmgW4jlqcTCiGVR5U+7
+ G88ioso9ec7amXlcRsVyYRoSDkk+jbCLWLiPbb+Q0hhQFaykxHJVM+9POM2rGAOIidRzoK8E7Rq
+ +yB4GPPuACj7hEypFL4wCFWT6i2d
+X-Google-Smtp-Source: AGHT+IH8w5UF3AsN5V9fOr4Ni19fKuRf/qdHeSDWqGt7q9tz8CO7tqpbABG+UhyZBlcQeF3v8OT2lg==
+X-Received: by 2002:a5d:64a6:0:b0:38d:cf33:31d6 with SMTP id
+ ffacd0b85a97d-3a074e10426mr2498722f8f.3.1745599392792; 
+ Fri, 25 Apr 2025 09:43:12 -0700 (PDT)
+Received: from localhost ([2a02:8308:a00c:e200::f716])
  by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-309f774e534sm1820005a91.17.2025.04.25.09.02.14
+ ffacd0b85a97d-3a073e5d264sm2871271f8f.95.2025.04.25.09.43.12
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 25 Apr 2025 09:02:16 -0700 (PDT)
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-To: qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, liwei1518@gmail.com,
- zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com, ajones@ventanamicro.com,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Subject: [PATCH v3 3/9] target/riscv/kvm: turn u32/u64 reg functions into
- macros
-Date: Fri, 25 Apr 2025 13:01:57 -0300
-Message-ID: <20250425160203.2774835-4-dbarboza@ventanamicro.com>
-X-Mailer: git-send-email 2.49.0
-In-Reply-To: <20250425160203.2774835-1-dbarboza@ventanamicro.com>
+ Fri, 25 Apr 2025 09:43:12 -0700 (PDT)
+Date: Fri, 25 Apr 2025 18:43:11 +0200
+From: Andrew Jones <ajones@ventanamicro.com>
+To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
+ liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com
+Subject: Re: [PATCH v3 8/9] target/riscv: widen scounteren to target_ulong
+Message-ID: <20250425-14cba750e7a8932b576b69d9@orel>
 References: <20250425160203.2774835-1-dbarboza@ventanamicro.com>
+ <20250425160203.2774835-9-dbarboza@ventanamicro.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::535;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pg1-x535.google.com
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20250425160203.2774835-9-dbarboza@ventanamicro.com>
+Received-SPF: pass client-ip=2a00:1450:4864:20::42c;
+ envelope-from=ajones@ventanamicro.com; helo=mail-wr1-x42c.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -101,79 +101,32 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-This change is motivated by a future change w.r.t CSRs management. We
-want to handle them the same way as KVM extensions, i.e. a static array
-with KVMCPUConfig objs that will be read/write during init and so on.
-But to do that properly we must be able to declare a static array that
-hold KVM regs.
+On Fri, Apr 25, 2025 at 01:02:02PM -0300, Daniel Henrique Barboza wrote:
+> We want to support scounteren as a KVM CSR. The KVM UAPI defines every
+> CSR size as target_ulong, and our env->scounteren is fixed at 32 bits.
+> 
+> The other existing cases where the property size does not match the KVM
+> reg size happens with uint64_t properties, like 'mstatus'. When running
+> a 32 bit CPU we'll write a 32 bit 'sstatus' KVM reg into the 64 bit
+> 'mstatus' field. As long as we're consistent, i.e. we're always
+> reading/writing the same words, this is ok.
+> 
+> For scounteren, a KVM guest running in a 64 bit CPU will end up writing
+> a 64 bit reg in a 32 bit field. This will have all sort of funny side
+> effects in the KVM guest that we would rather avoid.
+> 
+> Increase scounteren to target_ulong to allow KVM to read/write the
+> scounteren CSR without any surprises.
+> 
+> Aside from bumping the version of the RISCVCPU vmstate no other
+> behavioral changes are expected.
+> 
+> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+> ---
+>  target/riscv/cpu.h     | 9 ++++++++-
+>  target/riscv/machine.c | 6 +++---
+>  2 files changed, 11 insertions(+), 4 deletions(-)
+>
 
-C does not allow to init static arrays and use functions as
-initializers, e.g. we can't do:
-
-.kvm_reg_id = kvm_riscv_reg_id_ulong(...)
-
-When instantiating the array. We can do that with macros though, so our
-goal is turn kvm_riscv_reg_ulong() in a macro. It is cleaner to turn
-every other reg_id_*() function in macros, and ulong will end up using
-the macros for u32 and u64, so we'll start with them.
-
-Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 Reviewed-by: Andrew Jones <ajones@ventanamicro.com>
----
- target/riscv/kvm/kvm-cpu.c | 22 +++++++++-------------
- 1 file changed, 9 insertions(+), 13 deletions(-)
-
-diff --git a/target/riscv/kvm/kvm-cpu.c b/target/riscv/kvm/kvm-cpu.c
-index 6ba122f360..c91ecdfe59 100644
---- a/target/riscv/kvm/kvm-cpu.c
-+++ b/target/riscv/kvm/kvm-cpu.c
-@@ -58,6 +58,12 @@ void riscv_kvm_aplic_request(void *opaque, int irq, int level)
- 
- static bool cap_has_mp_state;
- 
-+#define KVM_RISCV_REG_ID_U32(type, idx) (KVM_REG_RISCV | KVM_REG_SIZE_U32 | \
-+                                         type | idx)
-+
-+#define KVM_RISCV_REG_ID_U64(type, idx) (KVM_REG_RISCV | KVM_REG_SIZE_U64 | \
-+                                         type | idx)
-+
- static uint64_t kvm_riscv_reg_id_ulong(CPURISCVState *env, uint64_t type,
-                                  uint64_t idx)
- {
-@@ -76,16 +82,6 @@ static uint64_t kvm_riscv_reg_id_ulong(CPURISCVState *env, uint64_t type,
-     return id;
- }
- 
--static uint64_t kvm_riscv_reg_id_u32(uint64_t type, uint64_t idx)
--{
--    return KVM_REG_RISCV | KVM_REG_SIZE_U32 | type | idx;
--}
--
--static uint64_t kvm_riscv_reg_id_u64(uint64_t type, uint64_t idx)
--{
--    return KVM_REG_RISCV | KVM_REG_SIZE_U64 | type | idx;
--}
--
- static uint64_t kvm_encode_reg_size_id(uint64_t id, size_t size_b)
- {
-     uint64_t size_ctz = __builtin_ctz(size_b);
-@@ -119,12 +115,12 @@ static uint64_t kvm_riscv_vector_reg_id(RISCVCPU *cpu,
-     kvm_riscv_reg_id_ulong(env, KVM_REG_RISCV_CONFIG, \
-                            KVM_REG_RISCV_CONFIG_REG(name))
- 
--#define RISCV_TIMER_REG(name)  kvm_riscv_reg_id_u64(KVM_REG_RISCV_TIMER, \
-+#define RISCV_TIMER_REG(name)  KVM_RISCV_REG_ID_U64(KVM_REG_RISCV_TIMER, \
-                  KVM_REG_RISCV_TIMER_REG(name))
- 
--#define RISCV_FP_F_REG(idx)  kvm_riscv_reg_id_u32(KVM_REG_RISCV_FP_F, idx)
-+#define RISCV_FP_F_REG(idx)  KVM_RISCV_REG_ID_U32(KVM_REG_RISCV_FP_F, idx)
- 
--#define RISCV_FP_D_REG(idx)  kvm_riscv_reg_id_u64(KVM_REG_RISCV_FP_D, idx)
-+#define RISCV_FP_D_REG(idx)  KVM_RISCV_REG_ID_U64(KVM_REG_RISCV_FP_D, idx)
- 
- #define RISCV_VECTOR_CSR_REG(env, name) \
-     kvm_riscv_reg_id_ulong(env, KVM_REG_RISCV_VECTOR, \
--- 
-2.49.0
-
 
