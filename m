@@ -4,90 +4,50 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3A340C369D1
-	for <qemu-riscv@archiver.kernel.org>; Fri, 25 Apr 2025 11:44:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5F1EFC369C2
+	for <qemu-riscv@archiver.kernel.org>; Fri, 25 Apr 2025 11:45:19 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1u8HTY-0000Hx-Ca; Fri, 25 Apr 2025 07:44:12 -0400
+	id 1u8HUS-0002Fn-6a; Fri, 25 Apr 2025 07:45:08 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1u8HTS-0008U1-JL
- for qemu-riscv@nongnu.org; Fri, 25 Apr 2025 07:44:06 -0400
-Received: from mail-wr1-x433.google.com ([2a00:1450:4864:20::433])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1u8HTQ-0007Jc-59
- for qemu-riscv@nongnu.org; Fri, 25 Apr 2025 07:44:05 -0400
-Received: by mail-wr1-x433.google.com with SMTP id
- ffacd0b85a97d-3a064a3e143so1045548f8f.3
- for <qemu-riscv@nongnu.org>; Fri, 25 Apr 2025 04:44:03 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1745581442; x=1746186242; darn=nongnu.org;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=cCzXr/y6JsqwWuOJ7YF76cv/0ZvqUOF0VgvBEebNKzo=;
- b=Ad+OetMhm4xnhfgf5JsYFBVTFqArLkBJXdD7vnytwHbuBMz+R7KrpJORweL1t62r6g
- 1QwZA56xS29HsVeF0Qzc5Y3+jxS+CHVPiyXutHYL3QDDw+DnBUVCPzgXKbMY2uvObEc5
- uFSJ8H7sK9ZtR1BCYPbS6/2IUnvc5VtE+8q1gOtf6mFxBQX6qJUSIp0pn/Nzfz3mAfVf
- AA6RhCIfJHHL8dN6oZN5MvGd7A/SKpeACxEkxO3Wsg9JdAb8Ig9sJdC5jlN3wrL2ubgL
- eP33afb2G4QIYxKuZVZCe97N0nFuX+eIds4OPjj4SCeeNSxw2VKRPoObf70etTuYyP3O
- X7NQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1745581442; x=1746186242;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=cCzXr/y6JsqwWuOJ7YF76cv/0ZvqUOF0VgvBEebNKzo=;
- b=T+I+7DV1vHeFv/HPrTVqB4CzNVniz0ju0/DiOrBIVdyavRG/8IOsMNBF3kEYTrcBWO
- Jbm3Bxbe3tiljAAz4/TP4BEkBUFfOIl/gryy3JNkYd/TyqNOMvBuGHNegqFSjlccPgrR
- BphFjEE1rYFAwrk/J4VtG5MpULHQjAuX/sf5+9AjsH1s3vGZgellZjtnbQRmWsBRBIxv
- 9tNdFZQwqOEvxadSjvrKVgF9XgRTL9M29cVeYVXUkt23SF/smXMzW8Jgs9n9JmlRKnAu
- 1CfF4YtIOyWA+t8Ua/T5UJF2SbiiOgZ9yWDZ/xFbn9uhf0h59AuioLkyBmA6oFBC1qyP
- UySw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXU+0Ree7t2RRWLtWQVJ8VeVVPmQcXjiuJPNJ0sd8MxyXWP2Ai95VdH3ei6fGHx8PcVB7Sv7pgFIVqW@nongnu.org
-X-Gm-Message-State: AOJu0YyDcuMvYaOMOeknoRL0kt0d9xPwY7z1I0FpGe7Z/Y3XZcr5LNGZ
- MhHsbHd0lGTetTwAhrUvdIVSa5aLgK9gYlsmRWJvvrNs7wWOwA7Mvstc418+Qgs=
-X-Gm-Gg: ASbGnct1naHD0nhjx+ftLnHxrVEAkkx61yuiTuN7E0RL1g4igwTx7eLDmkwamlTzOs0
- 5JMfcawu+gcaXFRDfkxVsVN44u17AXtIO8qnhf68UubSPw5zqLd2sbnJLI/QRpZHvSwJHcfniS/
- RT6rRm7UU9HuZKJztqNThnZtZ9DxbilEf2t3HAOv0WWSrH5/QzX/9tL7VPvcp6VtcLg2h5Ebn9x
- MVVBMaBam1CzxXwmo40U0Q8fq78COA4tHvDcWBGnhYEZijKJxqvAfLzACh5nuq+zPeUKb5a6iBX
- mPgVDYaWyBjzJthtP7l/J+CAaJTT
-X-Google-Smtp-Source: AGHT+IHApvV06442Ez+WTsOFOtJpYxo1DjAPthyQ0T3z4X0S3ar94mjYlVEgtwL3JaNpoVPA4ddGRg==
-X-Received: by 2002:a05:6000:4310:b0:39c:30d8:ef9c with SMTP id
- ffacd0b85a97d-3a074e1f56amr1507024f8f.24.1745581442443; 
- Fri, 25 Apr 2025 04:44:02 -0700 (PDT)
-Received: from localhost ([2a02:8308:a00c:e200::f716])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3a073cbdb78sm2097926f8f.41.2025.04.25.04.44.01
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 25 Apr 2025 04:44:02 -0700 (PDT)
-Date: Fri, 25 Apr 2025 13:44:01 +0200
-From: Andrew Jones <ajones@ventanamicro.com>
-To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
- liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com
-Subject: Re: [PATCH v2 2/9] target/riscv/kvm: fix leak in
- kvm_riscv_init_multiext_cfg()
-Message-ID: <20250425-bb49293340060a72a32d6d5a@orel>
-References: <20250425113705.2741457-1-dbarboza@ventanamicro.com>
- <20250425113705.2741457-3-dbarboza@ventanamicro.com>
+ (Exim 4.90_1) (envelope-from <wangran@bosc.ac.cn>)
+ id 1u8D9R-0000hz-PJ; Fri, 25 Apr 2025 03:07:09 -0400
+Received: from out28-121.mail.aliyun.com ([115.124.28.121])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <wangran@bosc.ac.cn>)
+ id 1u8D9N-000890-63; Fri, 25 Apr 2025 03:07:09 -0400
+Received: from 172.38.29.63(mailfrom:wangran@bosc.ac.cn
+ fp:SMTPD_---.cWQHKaY_1745564503 cluster:ay29) by smtp.aliyun-inc.com;
+ Fri, 25 Apr 2025 15:01:44 +0800
+Message-ID: <f39a07eb-e63d-4373-ab7a-fd83fab37c68@bosc.ac.cn>
+Date: Fri, 25 Apr 2025 15:01:42 +0800
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20250425113705.2741457-3-dbarboza@ventanamicro.com>
-Received-SPF: pass client-ip=2a00:1450:4864:20::433;
- envelope-from=ajones@ventanamicro.com; helo=mail-wr1-x433.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 1/2] target/riscv: Add BOSC's Xiangshan Kunminghu CPU
+To: Alistair Francis <alistair23@gmail.com>, Huang Borong <3543977024@qq.com>
+Cc: qemu-riscv@nongnu.org, palmer@dabbelt.com, alistair.francis@wdc.com,
+ liwei1518@gmail.com, dbarboza@ventanamicro.com,
+ zhiwei_liu@linux.alibaba.com, qemu-devel@nongnu.org
+References: <20250408022121.173531-1-huangborong@bosc.ac.cn>
+ <CAKmqyKOwbLJrRTkVrGO8+Kd-5SAEj1GU7ToytB8b66b_gbADHg@mail.gmail.com>
+From: Ran Wang <wangran@bosc.ac.cn>
+In-Reply-To: <CAKmqyKOwbLJrRTkVrGO8+Kd-5SAEj1GU7ToytB8b66b_gbADHg@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=115.124.28.121; envelope-from=wangran@bosc.ac.cn;
+ helo=out28-121.mail.aliyun.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_NONE=-0.0001,
+ RCVD_IN_MSPIKE_H5=0.001, RCVD_IN_MSPIKE_WL=0.001,
+ RCVD_IN_VALIDITY_CERTIFIED_BLOCKED=0.001, RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ UNPARSEABLE_RELAY=0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
+X-Mailman-Approved-At: Fri, 25 Apr 2025 07:45:03 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -102,38 +62,63 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Fri, Apr 25, 2025 at 08:36:58AM -0300, Daniel Henrique Barboza wrote:
-> 'reglist' is being g+malloc'ed but never freed.
-                     g_malloc'ed
+Hi Alistair
 
+On 2025/4/24 18:49, Alistair Francis wrote:
+> On Tue, Apr 8, 2025 at 12:23 PM Huang Borong <huangborong@bosc.ac.cn> wrote:
+>>
+>> Add a CPU entry for the Xiangshan Kunminghu CPU, an open-source,
+>> high-performance RISC-V processor. More details can be found at:
+
+<snip>
+
+>> +    cpu->cfg.ext_ssaia = true;
+>> +
+>> +    /* RVA23 Profiles */
+>> +    cpu->cfg.ext_zicbom = true;
+>> +    cpu->cfg.ext_zicbop = true;
+>> +    cpu->cfg.ext_zicboz = true;
+>> +    cpu->cfg.ext_svade = true;
+>> +
+>> +#ifndef CONFIG_USER_ONLY
+>> +    set_satp_mode_max_supported(cpu, VM_1_10_SV48);
+>> +#endif
+>> +}
+>> +
 > 
-> Reported-by: Andrew Jones <ajones@ventanamicro.com>
-> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-> ---
->  target/riscv/kvm/kvm-cpu.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
+> Sorry about this, but we just merged a new way of defining CPU types.
+> Can you please rebase on
+> https://github.com/alistair23/qemu/tree/riscv-to-apply.next to use the
+> new macros? It shouldn't be much work, just a little restructuring.
 > 
-> diff --git a/target/riscv/kvm/kvm-cpu.c b/target/riscv/kvm/kvm-cpu.c
-> index accad4c28e..6ba122f360 100644
-> --- a/target/riscv/kvm/kvm-cpu.c
-> +++ b/target/riscv/kvm/kvm-cpu.c
-> @@ -1119,10 +1119,10 @@ static void kvm_riscv_read_vlenb(RISCVCPU *cpu, KVMScratchCPU *kvmcpu,
->  
->  static void kvm_riscv_init_multiext_cfg(RISCVCPU *cpu, KVMScratchCPU *kvmcpu)
->  {
-> +    g_autofree struct kvm_reg_list *reglist = NULL;
->      KVMCPUConfig *multi_ext_cfg;
->      struct kvm_one_reg reg;
->      struct kvm_reg_list rl_struct;
-> -    struct kvm_reg_list *reglist;
->      uint64_t val, reg_id, *reg_search;
->      int i, ret;
->  
-> -- 
-> 2.49.0
->
+> When sending a new version can you also include a cover letter [1]
+> 
+> 1: https://www.qemu.org/docs/master/devel/submitting-a-patch.html#include-a-meaningful-cover-letter
 
-Otherwise,
+Sure, Borong just left BOSC and I will take over his job and send out 
+next version patch mail later.
 
-Reviewed-by: Andrew Jones <ajones@ventanamicro.com>
+Thanks & Regards,
+
+Ran
+
+> Alistair
+> 
+>>   #ifdef CONFIG_TCG
+>>   static void rv128_base_cpu_init(Object *obj)
+>>   {
+>> @@ -3261,6 +3331,8 @@ static const TypeInfo riscv_cpu_type_infos[] = {
+>>       DEFINE_VENDOR_CPU(TYPE_RISCV_CPU_VEYRON_V1,  MXL_RV64,  rv64_veyron_v1_cpu_init),
+>>       DEFINE_VENDOR_CPU(TYPE_RISCV_CPU_XIANGSHAN_NANHU,
+>>                                                    MXL_RV64, rv64_xiangshan_nanhu_cpu_init),
+>> +    DEFINE_VENDOR_CPU(TYPE_RISCV_CPU_XIANGSHAN_KMH,
+>> +                                                 MXL_RV64,  rv64_xiangshan_kmh_cpu_init),
+>>   #ifdef CONFIG_TCG
+>>       DEFINE_DYNAMIC_CPU(TYPE_RISCV_CPU_BASE128,   MXL_RV128, rv128_base_cpu_init),
+>>   #endif /* CONFIG_TCG */
+>> --
+>> 2.34.1
+>>
+>>
+
 
