@@ -4,81 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B0FE9C369C2
-	for <qemu-riscv@archiver.kernel.org>; Fri, 25 Apr 2025 12:11:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 43A36C369C2
+	for <qemu-riscv@archiver.kernel.org>; Fri, 25 Apr 2025 12:13:15 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1u8Hty-0006RE-Mw; Fri, 25 Apr 2025 08:11:30 -0400
+	id 1u8HvN-0007P8-GL; Fri, 25 Apr 2025 08:12:57 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1u8Htw-0006PD-UC
- for qemu-riscv@nongnu.org; Fri, 25 Apr 2025 08:11:29 -0400
-Received: from mail-wr1-x435.google.com ([2a00:1450:4864:20::435])
+ id 1u8HvK-0007OU-LU
+ for qemu-riscv@nongnu.org; Fri, 25 Apr 2025 08:12:55 -0400
+Received: from mail-wr1-x42a.google.com ([2a00:1450:4864:20::42a])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1u8Htu-0002hx-Vv
- for qemu-riscv@nongnu.org; Fri, 25 Apr 2025 08:11:28 -0400
-Received: by mail-wr1-x435.google.com with SMTP id
- ffacd0b85a97d-3913958ebf2so1686322f8f.3
- for <qemu-riscv@nongnu.org>; Fri, 25 Apr 2025 05:11:26 -0700 (PDT)
+ id 1u8HvI-0002mu-54
+ for qemu-riscv@nongnu.org; Fri, 25 Apr 2025 08:12:54 -0400
+Received: by mail-wr1-x42a.google.com with SMTP id
+ ffacd0b85a97d-3912fdddf8fso2220077f8f.1
+ for <qemu-riscv@nongnu.org>; Fri, 25 Apr 2025 05:12:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1745583085; x=1746187885; darn=nongnu.org;
+ d=ventanamicro.com; s=google; t=1745583170; x=1746187970; darn=nongnu.org;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=1kScVoLyjKlBL6tKudOwB4udef7cfYVq7fLgZ2bYekA=;
- b=QcsrEns2ide2jVtBHcuYWBSbIXVv9UhkR0t6/sWrT5WgGbLUDx25VVCOei161r1P+d
- RqsmS8jF/2nq9MZjucHMq4sIZBnkZNXv8mTUSAXUsBYB+RvW7nJuf9vMEwZ4+EM+POfk
- 0RYs5lYVhWv0vzHuNwpOSosg5qZRpLN273FtsZJZQmWjhFSnuZjR+XUh0bj96jl1lAhM
- qeIuPkyTOTx3OEtaQ4SgQK5U5Wdmf4ksZiZYTKe42qEAEKBYfWsgmZI0yheituyE1hts
- jWDfbcs+biqbdKhcD7B7YynTRr58xyXRDCWnXVMK9lNdAoqwTTjhm3pyFYiz1bLB9PCx
- uQbQ==
+ bh=KsZbVntz61oea4I9vKgPtHvh0FZUfeKMD9DSBLAI6Jg=;
+ b=ERuzZmnDjR2BoSvJvgbps67mhQ6D3ykdfp1kFkFnM7AcR4EFd3GlHk6X+qucYgRfLB
+ J5sOfIU5IIUXKg/l+Lh4ML7YwEyhbxxARP3EdHvQUKmg1IIkRP/POFBHMpkwVFalfimv
+ F2T3FZWLDeSDG663iXkA8wxJTM8Y85ddOL1CbnfUpD+OczUxoXVsLqXnSICfkxzNkA1H
+ 6AnMZSwZdR4xbqBNtkHX0Pw0221iFkHm2Cy1gZMt3bJVGz4Gu5Dq96rW1oj/hxnQVAt6
+ b2MYZlg2uFO6vR7zRC2ROVMMOWMiF8m76A4GBHkBLQDX8gjIWhR4gZoDHuhHxnbeII6r
+ ed1Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1745583085; x=1746187885;
+ d=1e100.net; s=20230601; t=1745583170; x=1746187970;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=1kScVoLyjKlBL6tKudOwB4udef7cfYVq7fLgZ2bYekA=;
- b=jfyDDlCous7Z4ipNEnyEo4Au97jgEyDjn5FktcW8Qd7mb/Dzh1gAOXNsDly1LMS2wW
- jGgPHXzZBk8Y7kZB+Yl+kB3La3++yfnPslB7Bdbo2mtPrsDr0g4Y0KCSCrw2kVh+XadU
- 9qqsMyIYPeXkp0R9gy99rjD0T28eEfIa/UcLOxpCuam96wEZtQUzjPwRlmbwtgXXTjI3
- 94YmBSLxl7lGRPh/u3ZMz0LuzZzMVGzE9TnA6uMPhZUzG4O9Bl+zijrLnxdHvOhtTao2
- W9fK3DAwx/Nkk2jy8QmxeyA33mL+PTRq3GlK4faFLD8gw6iwu3Ss4lBrD0UCifA+h28V
- oNeQ==
+ bh=KsZbVntz61oea4I9vKgPtHvh0FZUfeKMD9DSBLAI6Jg=;
+ b=BLSbCp7QpRxmU79urJkeggnIqqhP4df9EvSdZ/D+rcFgeO/R0IjD02iv5a/r8htKHk
+ p6afghWwa37s9liuC1RHJFcgwkXPvUdU0rqRUr3Y2Y8y3H1ClB28R/8qbt42CN5c1xM1
+ Q9+EIOzbR5WWR7Y4FcUNxDNxV623SC+nlV4USmTaCEXHLVk9xw8iMyaqtKmaOtj3C3ma
+ gvqRvhRW1FusaElefUve+2e5NqEYi7tGpJajGdquaO+jcGCdgxbX4jbytKn02aZaqt/3
+ 6JHAovBPFqOq7PfAzumKBx1lTTQ9n8PpH5sM4lUmiNTvbFUPv8LW4RSKecpwHKwk1+i+
+ keXg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCW9TTLBS6lsRSGKEXVhqinlgBebc/O35NIYT02aNP2Z09g20+tTPAoM+8MQw+zTsUgxawM+ZFmJh6dF@nongnu.org
-X-Gm-Message-State: AOJu0YxGgFOSnCB0908XPuunZje8lFquxvii814bLUBvPbHOX4lBxOJS
- Tlcfv0/MeJ4deCsI4ybwCAy03tmpO8xsT3sMCbvHhRAsBRq5e9DAi5tHuKvFtj0=
-X-Gm-Gg: ASbGncvosCrru2JpnActeAJLAt19Yf6+0jAE62jeQqi7cshx8AigQxcH4b8uan/CsuL
- AnCGoSJfKVNdWT0HOUSjx6PLQNtC/DHDEGFSeYOEERszXh0UET0isYq+aR+RRi171AvtFxp4cxC
- 7U1NK5RPnST5ECtb6Kicd/as8VedfWcYkzemmDMVtxhfeSAbTjKYaOLcc+3aQMKgD/lsaMhMmjt
- 7Vbo2SgBsCuZ1QPFOO58q4QJYAK/Z5LAjMo4dIhrF3AX6sH/6sm6tAREBb4y0BbdEaLWWm14XSH
- 5Hfnp9i4Lmc7ZNC10l6QVRWLSyVg
-X-Google-Smtp-Source: AGHT+IEOMsnPi0/qmEEe9UU2t/HQJXERPrlMVjaye1AX/0qgHDLa/RL4oA08DcN6MDeujs23NTlmJQ==
-X-Received: by 2002:a05:6000:2283:b0:39c:f0d:9146 with SMTP id
- ffacd0b85a97d-3a074f11d7fmr1610276f8f.45.1745583084938; 
- Fri, 25 Apr 2025 05:11:24 -0700 (PDT)
+ AJvYcCU1OWXY2zezC0i9n+0W8yyYdVYoZfzB5BW8GQdd7KvBdSAxYirKfcqxUpeYyrEaY+q4aqmRr07k2/UD@nongnu.org
+X-Gm-Message-State: AOJu0YyTAldzENOo8EIuP6Nb8q5lmR/VPGn5YzhEgQThJzZh3SEHlEOV
+ qE0MDMJQmFFOvRmNUrucWu9PnNQMZFwVwA9D7W2k7I2o+WnZSALf4rLojfqGbxE=
+X-Gm-Gg: ASbGnctoo0kf23MD95JaqMS8eSreVoRKe7rqds4kvsMEnKYFsN+8OZIlWL5Uso02fZ/
+ Rf0nmpA6D8HSw2ZL9RabvaV0hnkZEeKPVIvsex5OpzhOHOiz1oI1kYEHPZJDNme7FaBVdLIBqe4
+ ikGzhiUDRr/i+3qthMvh9wxf+yoi+bOAbkfvj5i/ZTOmQPY/qzVqDQsUE6KtGwd8qZ7o+Dhb8tR
+ PmLFtSq91kArJafJ74sfVZsJQSFhnOStSrNK8Lw8sTU8ZhpNfbFaLW2YPyoaqAv90QAvVCqfYAP
+ XlxzsxxPqkwQue2aqtJvoxfDW3RA
+X-Google-Smtp-Source: AGHT+IFltgaSnu+NQRT8JQTVq/kPwuQUiuq4uDFdzKtnx9c66sFgwltEZpiXzqtTHawaPCsNHclKOQ==
+X-Received: by 2002:a05:6000:22ca:b0:38d:ba8e:7327 with SMTP id
+ ffacd0b85a97d-3a074cf18aamr1529689f8f.8.1745583170182; 
+ Fri, 25 Apr 2025 05:12:50 -0700 (PDT)
 Received: from localhost ([2a02:8308:a00c:e200::f716])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3a073e461bfsm2191386f8f.79.2025.04.25.05.11.24
+ ffacd0b85a97d-3a073e46538sm2193295f8f.64.2025.04.25.05.12.49
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 25 Apr 2025 05:11:24 -0700 (PDT)
-Date: Fri, 25 Apr 2025 14:11:23 +0200
+ Fri, 25 Apr 2025 05:12:49 -0700 (PDT)
+Date: Fri, 25 Apr 2025 14:12:48 +0200
 From: Andrew Jones <ajones@ventanamicro.com>
 To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
  liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com
-Subject: Re: [PATCH v2 8/9] target/riscv: widen (m|s)counteren to target_ulong
-Message-ID: <20250425-d3897a3163a3fb2853763a8e@orel>
+Subject: Re: [PATCH v2 9/9] target/riscv/kvm: add scounteren CSR
+Message-ID: <20250425-6bc102914dd39e7896cefdff@orel>
 References: <20250425113705.2741457-1-dbarboza@ventanamicro.com>
- <20250425113705.2741457-9-dbarboza@ventanamicro.com>
+ <20250425113705.2741457-10-dbarboza@ventanamicro.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20250425113705.2741457-9-dbarboza@ventanamicro.com>
-Received-SPF: pass client-ip=2a00:1450:4864:20::435;
- envelope-from=ajones@ventanamicro.com; helo=mail-wr1-x435.google.com
+In-Reply-To: <20250425113705.2741457-10-dbarboza@ventanamicro.com>
+Received-SPF: pass client-ip=2a00:1450:4864:20::42a;
+ envelope-from=ajones@ventanamicro.com; helo=mail-wr1-x42a.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -101,88 +101,45 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Fri, Apr 25, 2025 at 08:37:04AM -0300, Daniel Henrique Barboza wrote:
-> We want to support scounteren as a KVM CSR. The KVM UAPI defines every
-> CSR size as target_ulong, and our env->scounteren is fixed at 32 bits.
+On Fri, Apr 25, 2025 at 08:37:05AM -0300, Daniel Henrique Barboza wrote:
+> Now that CPURISCVState::scounteren is a target_ulong, add support for
+> the scounteren KVM CSR.
 > 
-> The other existing cases where the property size does not match the KVM
-> reg size happens with uint64_t properties, like 'mstatus'. When running
-> a 32 bit CPU we'll write a 32 bit 'sstatus' KVM reg into the 64 bit
-> 'mstatus' field. As long as we're consistent, i.e. we're always
-> reading/writing the same words, this is ok.
-> 
-> For scounteren, a KVM guest running in a 64 bit CPU will end up writing
-> a 64 bit reg in a 32 bit field. This will have all sort of funny side
-> effects in the KVM guest that we would rather avoid.
-> 
-> Increase scounteren to target_ulong to allow KVM to read/write the
-> scounteren CSR without any surprises. 'mcounteren' is being changed to
-> target_ulong for consistency.
-> 
-> Aside from bumping the version of the RISCVCPU vmstate no other
-> behavioral changes are expected.
-> 
+> Reported-by: Andrew Jones <ajones@ventanamicro.com>
 > Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 > ---
->  target/riscv/cpu.h     | 4 ++--
->  target/riscv/machine.c | 8 ++++----
->  2 files changed, 6 insertions(+), 6 deletions(-)
+>  target/riscv/kvm/kvm-cpu.c | 2 ++
+>  1 file changed, 2 insertions(+)
 > 
-> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> index f5a60d0c52..0623c3187b 100644
-> --- a/target/riscv/cpu.h
-> +++ b/target/riscv/cpu.h
-> @@ -400,8 +400,8 @@ struct CPUArchState {
->       */
->      bool two_stage_indirect_lookup;
+> diff --git a/target/riscv/kvm/kvm-cpu.c b/target/riscv/kvm/kvm-cpu.c
+> index e37fa38c07..5db63e78e2 100644
+> --- a/target/riscv/kvm/kvm-cpu.c
+> +++ b/target/riscv/kvm/kvm-cpu.c
+> @@ -250,6 +250,7 @@ static KVMCPUConfig kvm_csr_cfgs[] = {
+>      KVM_CSR_CFG("sip", mip, RISCV_CSR_REG(sip)),
+>      KVM_CSR_CFG("satp", satp, RISCV_CSR_REG(satp)),
+>      KVM_CSR_CFG("senvcfg", senvcfg, RISCV_CSR_REG(senvcfg)),
+> +    KVM_CSR_CFG("scounteren", scounteren, RISCV_CSR_REG(scounteren)),
+>  };
 >  
-> -    uint32_t scounteren;
-> -    uint32_t mcounteren;
-> +    target_ulong scounteren;
-> +    target_ulong mcounteren;
+>  static void *kvmconfig_get_env_addr(RISCVCPU *cpu, KVMCPUConfig *csr_cfg)
+> @@ -700,6 +701,7 @@ static void kvm_riscv_reset_regs_csr(CPURISCVState *env)
+>      env->mip = 0;
+>      env->satp = 0;
+>      env->senvcfg = 0;
+> +    env->scounteren = 0;
 
-Let's leave mcounteren a u32 and write a comment above scounteren
-explaining that it's supposed to be a u32 (as the spec says) but
-we're using a ulong instead to support KVM's get/put due to how
-it's defined in struct kvm_riscv_csr.
+Let's keep these in struct kvm_riscv_csr order here and everywhere else
+they get listed, like in kvm_csr_cfgs[]
 
+>  }
 >  
->      uint32_t scountinhibit;
->      uint32_t mcountinhibit;
-> diff --git a/target/riscv/machine.c b/target/riscv/machine.c
-> index df2d5bad8d..4b11b203fb 100644
-> --- a/target/riscv/machine.c
-> +++ b/target/riscv/machine.c
-> @@ -401,8 +401,8 @@ static const VMStateDescription vmstate_ssp = {
->  
->  const VMStateDescription vmstate_riscv_cpu = {
->      .name = "cpu",
-> -    .version_id = 10,
-> -    .minimum_version_id = 10,
-> +    .version_id = 11,
-> +    .minimum_version_id = 11,
->      .post_load = riscv_cpu_post_load,
->      .fields = (const VMStateField[]) {
->          VMSTATE_UINTTL_ARRAY(env.gpr, RISCVCPU, 32),
-> @@ -445,8 +445,8 @@ const VMStateDescription vmstate_riscv_cpu = {
->          VMSTATE_UINTTL(env.mtval, RISCVCPU),
->          VMSTATE_UINTTL(env.miselect, RISCVCPU),
->          VMSTATE_UINTTL(env.siselect, RISCVCPU),
-> -        VMSTATE_UINT32(env.scounteren, RISCVCPU),
-> -        VMSTATE_UINT32(env.mcounteren, RISCVCPU),
-> +        VMSTATE_UINTTL(env.scounteren, RISCVCPU),
-> +        VMSTATE_UINTTL(env.mcounteren, RISCVCPU),
-
-Since we only expect the lower 32 bits to ever be written, then do we need
-to make this change?
-
->          VMSTATE_UINT32(env.scountinhibit, RISCVCPU),
->          VMSTATE_UINT32(env.mcountinhibit, RISCVCPU),
->          VMSTATE_STRUCT_ARRAY(env.pmu_ctrs, RISCVCPU, RV_MAX_MHPMCOUNTERS, 0,
+>  static int kvm_riscv_get_regs_fp(CPUState *cs)
 > -- 
 > 2.49.0
-> 
+>
 
-Thanks,
-drew
+Otherwise,
+
+Reviewed-by: Andrew Jones <ajones@ventanamicro.com>
 
