@@ -4,45 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3D3ABC369D7
-	for <qemu-riscv@archiver.kernel.org>; Fri, 25 Apr 2025 14:07:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D3925C369C2
+	for <qemu-riscv@archiver.kernel.org>; Fri, 25 Apr 2025 15:23:26 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1u8Jg1-0004NW-7I; Fri, 25 Apr 2025 10:05:13 -0400
+	id 1u8Ktc-0001dF-Jj; Fri, 25 Apr 2025 11:23:20 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <wangran@bosc.ac.cn>)
- id 1u8I4d-0003n8-Mg; Fri, 25 Apr 2025 08:22:31 -0400
-Received: from out28-75.mail.aliyun.com ([115.124.28.75])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <wangran@bosc.ac.cn>)
- id 1u8I4b-0004G5-27; Fri, 25 Apr 2025 08:22:31 -0400
-Received: from localhost.localdomain(mailfrom:wangran@bosc.ac.cn
- fp:SMTPD_---.cWiD-Y1_1745583737 cluster:ay29) by smtp.aliyun-inc.com;
- Fri, 25 Apr 2025 20:22:21 +0800
-From: Ran Wang <wangran@bosc.ac.cn>
-To: alistair23@gmail.com
-Cc: 3543977024@qq.com, palmer@dabbelt.com, alistair.francis@wdc.com,
- liwei1518@gmail.com, dbarboza@ventanamicro.com,
- zhiwei_liu@linux.alibaba.com, qemu-riscv@nongnu.org, qemu-devel@nongnu.org
-Subject: [PATCH v4 1/2] target/riscv: Add BOSC's Xiangshan Kunminghu CPU
-Date: Fri, 25 Apr 2025 20:22:12 +0800
-Message-Id: <20250425122212.364-1-wangran@bosc.ac.cn>
-X-Mailer: git-send-email 2.34.1
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1u8Kta-0001cQ-Pa
+ for qemu-riscv@nongnu.org; Fri, 25 Apr 2025 11:23:18 -0400
+Received: from mail-pf1-x42e.google.com ([2607:f8b0:4864:20::42e])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1u8KtY-0002og-5e
+ for qemu-riscv@nongnu.org; Fri, 25 Apr 2025 11:23:18 -0400
+Received: by mail-pf1-x42e.google.com with SMTP id
+ d2e1a72fcca58-7399a2dc13fso3285684b3a.2
+ for <qemu-riscv@nongnu.org>; Fri, 25 Apr 2025 08:23:15 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1745594595; x=1746199395; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=8BkGqEuOn61y/rqWawhxPHU+tldQWor40BhhDmmwEXQ=;
+ b=SsBbCtFIw5iTUa0ymAkHo66jiTp5kKdO9N01HHUXtHnfwNJbkNqI6i6RstPmmyFDnT
+ aSVhvlbHW+Yjt6NdJk8So55h0cY17MRmT5B01w4ASRm8ZGW1PF6FAnOlqYXLk5I/8JWZ
+ n2iVgKNrT7QY26YPJIb/7YQhueq07XsxJ/X3gBSl/y0X/HO5KDB2u7NYEPGrzIrpxJAO
+ 4rEcKHqPR/Y0GuFP89jO+rSk6ON4PnwFiASILyr4kLbXVXE3kKk6siau7SyeESE98C8U
+ jer68v5Wyay7R5YruE6m0dRjflcSj70vgvtu9N9yJa42SRE0SWuBTTnCkjgHt07POKQP
+ X6sQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1745594595; x=1746199395;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=8BkGqEuOn61y/rqWawhxPHU+tldQWor40BhhDmmwEXQ=;
+ b=JMPR2YRj1F+kx2QMutClCNK+N+0DfQkxArcKqNpo0wtmh1Htw80inKkFu4HnkgMMkK
+ zj44gyi6BkulAmvyktJ3Hxazjw9HFDhcBoFRFNy53LbBZH4wO4mHPAQJ7tDM8nDNxaG2
+ FtbdOYEPitofmgad94WUpos5z27Ub7yBz6Bt6QznlxJTSR3LR3s/zwbDHgqgW95RYLYH
+ nT44NKMBDz7FJfG/Oc8RvrJK+I1R9ssrNgzGgFOPw7asoLYwXF5tjhRL9AqSKzbmk/zr
+ BaAFSxNI4YjqcbAd2DjzzwjzlpQARzKPaZeWxJiRduYnt8RlsfQajJs/JEN84eSCT9gw
+ bpVw==
+X-Gm-Message-State: AOJu0Yw+KQY2CK6PYaPXvSMkAsDe7L8QzzBSAexScrLKsBWmEzk8J/xb
+ +95LY24ty0o+SqGY8pe4s+JRg4b0Oxun0lvZvYpJZYNIXUy0ynSJeKCGYFm/v3g=
+X-Gm-Gg: ASbGnctoPkq72+5liREgnWhAYbB+lnlJfZFmguFPOEzUgwjW2A5q/SOM7iySRp6EsoF
+ U2H5N/K87BGcuR0u74Wo4Vze+i44i4H13Ud5p/nSOGu8vxt8gN4zrf6iRX+L0+/6GVrrBfpMKF3
+ quLg3jRN3nZcFsCJvUjx4f1WoFvMRtSxQ4qV56j5vDRp3Ou8C35qJq93YOOWsr5/wyZs1Dl18MG
+ mt7f8hDq5ZR3zWONCZFSwwiz+PzKwX0rIT4SAecd2LIwhNUusvwMco0U5SQp+TsapbgGDGSFX0f
+ ll4kgCunKJBJem+RefzTC04itl/PbV5n4DUMsGZ8yGUKCXcSiR29mz0OSZM6FIUT+W0IovSqte0
+ =
+X-Google-Smtp-Source: AGHT+IELV9pyia/nUpY3IQu+MOC4wI1IVoRqDgI26PXiGTuNeLoObFH+TkGyiarZXK4cngWJ0SvQ9w==
+X-Received: by 2002:a05:6a00:18a2:b0:73e:598:7e5b with SMTP id
+ d2e1a72fcca58-73fd6af4105mr3402564b3a.1.1745594594677; 
+ Fri, 25 Apr 2025 08:23:14 -0700 (PDT)
+Received: from stoup.. (71-212-47-143.tukw.qwest.net. [71.212.47.143])
+ by smtp.gmail.com with ESMTPSA id
+ d2e1a72fcca58-73e25a6a49esm3390466b3a.106.2025.04.25.08.23.14
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 25 Apr 2025 08:23:14 -0700 (PDT)
+From: Richard Henderson <richard.henderson@linaro.org>
+To: qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, dbarboza@ventanamicro.com
+Subject: [PATCH 2/7] target/riscv: Pass ra to riscv_csrrw_do64
+Date: Fri, 25 Apr 2025 08:23:06 -0700
+Message-ID: <20250425152311.804338-3-richard.henderson@linaro.org>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20250425152311.804338-1-richard.henderson@linaro.org>
+References: <20250425152311.804338-1-richard.henderson@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=115.124.28.75; envelope-from=wangran@bosc.ac.cn;
- helo=out28-75.mail.aliyun.com
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_NONE=-0.0001,
- RCVD_IN_VALIDITY_CERTIFIED_BLOCKED=0.001, RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- UNPARSEABLE_RELAY=0.001 autolearn=ham autolearn_force=no
+Received-SPF: pass client-ip=2607:f8b0:4864:20::42e;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pf1-x42e.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
-X-Mailman-Approved-At: Fri, 25 Apr 2025 10:05:04 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -57,115 +99,73 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Huang Borong <3543977024@qq.com>
-
-Add a CPU entry for the Xiangshan Kunminghu CPU, an open-source,
-high-performance RISC-V processor. More details can be found at:
-https://github.com/OpenXiangShan/XiangShan
-
-Note: The ISA extensions supported by the Xiangshan Kunminghu CPU are
-categorized based on four RISC-V specifications: Volume I: Unprivileged
-Architecture, Volume II: Privileged Architecture, AIA, and RVA23. The
-extensions within each category are organized according to the chapter
-order in the specifications.
-
-Signed-off-by: Yu Hu <huyu@bosc.ac.cn>
-Signed-off-by: Ran Wang <wangran@bosc.ac.cn>
-Signed-off-by: Borong Huang <3543977024@qq.com>
-Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
 ---
- target/riscv/cpu-qom.h |  1 +
- target/riscv/cpu.c     | 64 ++++++++++++++++++++++++++++++++++++++++++
- 2 files changed, 65 insertions(+)
+ target/riscv/csr.c | 15 +++++++--------
+ 1 file changed, 7 insertions(+), 8 deletions(-)
 
-diff --git a/target/riscv/cpu-qom.h b/target/riscv/cpu-qom.h
-index 1ee05eb393..75f4e43408 100644
---- a/target/riscv/cpu-qom.h
-+++ b/target/riscv/cpu-qom.h
-@@ -55,6 +55,7 @@
- #define TYPE_RISCV_CPU_VEYRON_V1        RISCV_CPU_TYPE_NAME("veyron-v1")
- #define TYPE_RISCV_CPU_TT_ASCALON       RISCV_CPU_TYPE_NAME("tt-ascalon")
- #define TYPE_RISCV_CPU_XIANGSHAN_NANHU  RISCV_CPU_TYPE_NAME("xiangshan-nanhu")
-+#define TYPE_RISCV_CPU_XIANGSHAN_KMH    RISCV_CPU_TYPE_NAME("xiangshan-kunminghu")
- #define TYPE_RISCV_CPU_HOST             RISCV_CPU_TYPE_NAME("host")
+diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+index 6f1f69eba6..e9c2f95b6e 100644
+--- a/target/riscv/csr.c
++++ b/target/riscv/csr.c
+@@ -5516,7 +5516,8 @@ static inline RISCVException riscv_csrrw_check(CPURISCVState *env,
+ static RISCVException riscv_csrrw_do64(CPURISCVState *env, int csrno,
+                                        target_ulong *ret_value,
+                                        target_ulong new_value,
+-                                       target_ulong write_mask)
++                                       target_ulong write_mask,
++                                       uintptr_t ra)
+ {
+     RISCVException ret;
+     target_ulong old_value = 0;
+@@ -5546,7 +5547,7 @@ static RISCVException riscv_csrrw_do64(CPURISCVState *env, int csrno,
+     if (write_mask) {
+         new_value = (old_value & ~write_mask) | (new_value & write_mask);
+         if (csr_ops[csrno].write) {
+-            ret = csr_ops[csrno].write(env, csrno, new_value, 0);
++            ret = csr_ops[csrno].write(env, csrno, new_value, ra);
+             if (ret != RISCV_EXCP_NONE) {
+                 return ret;
+             }
+@@ -5569,7 +5570,7 @@ RISCVException riscv_csrr(CPURISCVState *env, int csrno,
+         return ret;
+     }
  
- OBJECT_DECLARE_CPU_TYPE(RISCVCPU, RISCVCPUClass, RISCV_CPU)
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index ee20bd7ca2..1fde2769bf 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -3171,6 +3171,70 @@ static const TypeInfo riscv_cpu_type_infos[] = {
-         .cfg.max_satp_mode = VM_1_10_SV39,
-     ),
+-    return riscv_csrrw_do64(env, csrno, ret_value, 0, 0);
++    return riscv_csrrw_do64(env, csrno, ret_value, 0, 0, 0);
+ }
  
-+    DEFINE_RISCV_CPU(TYPE_RISCV_CPU_XIANGSHAN_KMH, TYPE_RISCV_VENDOR_CPU,
-+        .misa_mxl_max = MXL_RV64,
-+        .misa_ext = RVG | RVC | RVB | RVS | RVU | RVH | RVV,
-+        .priv_spec = PRIV_VERSION_1_13_0,
-+
-+	/*
-+	 * The RISC-V Instruction Set Manual: Volume I
-+	 * Unprivileged Architecture
-+	 */
-+	.cfg.ext_zicntr = true,
-+	.cfg.ext_zihpm = true,
-+	.cfg.ext_zihintntl = true,
-+	.cfg.ext_zihintpause = true,
-+	.cfg.ext_zimop = true,
-+	.cfg.ext_zcmop = true,
-+	.cfg.ext_zicond = true,
-+	.cfg.ext_zawrs = true,
-+	.cfg.ext_zacas = true,
-+	.cfg.ext_zfh = true,
-+	.cfg.ext_zfa = true,
-+	.cfg.ext_zcb = true,
-+	.cfg.ext_zbc = true,
-+	.cfg.ext_zvfh = true,
-+	.cfg.ext_zkn = true,
-+	.cfg.ext_zks = true,
-+	.cfg.ext_zkt = true,
-+	.cfg.ext_zvbb = true,
-+	.cfg.ext_zvkt = true,
-+
-+	/*
-+	 * The RISC-V Instruction Set Manual: Volume II
-+	 * Privileged Architecture
-+	 */
-+	.cfg.ext_smstateen = true,
-+	.cfg.ext_smcsrind = true,
-+	.cfg.ext_sscsrind = true,
-+	.cfg.ext_svnapot = true,
-+	.cfg.ext_svpbmt = true,
-+	.cfg.ext_svinval = true,
-+	.cfg.ext_sstc = true,
-+	.cfg.ext_sscofpmf = true,
-+	.cfg.ext_ssdbltrp = true,
-+	.cfg.ext_ssnpm = true,
-+	.cfg.ext_smnpm = true,
-+	.cfg.ext_smmpm = true,
-+	.cfg.ext_sspm = true,
-+	.cfg.ext_supm = true,
-+
-+	/* The RISC-V Advanced Interrupt Architecture */
-+	.cfg.ext_smaia = true,
-+	.cfg.ext_ssaia = true,
-+
-+	/* RVA23 Profiles */
-+	.cfg.ext_zicbom = true,
-+	.cfg.ext_zicbop = true,
-+	.cfg.ext_zicboz = true,
-+	.cfg.ext_svade = true,
-+
-+        .cfg.mmu = true,
-+        .cfg.pmp = true,
-+
-+        .cfg.max_satp_mode = VM_1_10_SV48,
-+    ),
-+
- #ifdef CONFIG_TCG
-     DEFINE_RISCV_CPU(TYPE_RISCV_CPU_BASE128, TYPE_RISCV_DYNAMIC_CPU,
-         .cfg.max_satp_mode = VM_1_10_SV57,
+ RISCVException riscv_csrrw(CPURISCVState *env, int csrno,
+@@ -5581,7 +5582,7 @@ RISCVException riscv_csrrw(CPURISCVState *env, int csrno,
+         return ret;
+     }
+ 
+-    return riscv_csrrw_do64(env, csrno, ret_value, new_value, write_mask);
++    return riscv_csrrw_do64(env, csrno, ret_value, new_value, write_mask, 0);
+ }
+ 
+ static RISCVException riscv_csrrw_do128(CPURISCVState *env, int csrno,
+@@ -5647,9 +5648,7 @@ RISCVException riscv_csrr_i128(CPURISCVState *env, int csrno,
+      * accesses
+      */
+     target_ulong old_value;
+-    ret = riscv_csrrw_do64(env, csrno, &old_value,
+-                           (target_ulong)0,
+-                           (target_ulong)0);
++    ret = riscv_csrrw_do64(env, csrno, &old_value, 0, 0, 0);
+     if (ret == RISCV_EXCP_NONE && ret_value) {
+         *ret_value = int128_make64(old_value);
+     }
+@@ -5681,7 +5680,7 @@ RISCVException riscv_csrrw_i128(CPURISCVState *env, int csrno,
+     target_ulong old_value;
+     ret = riscv_csrrw_do64(env, csrno, &old_value,
+                            int128_getlo(new_value),
+-                           int128_getlo(write_mask));
++                           int128_getlo(write_mask), 0);
+     if (ret == RISCV_EXCP_NONE && ret_value) {
+         *ret_value = int128_make64(old_value);
+     }
 -- 
-2.34.1
+2.43.0
 
 
