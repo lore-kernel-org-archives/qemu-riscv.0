@@ -4,79 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7377CC369D7
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5782BC369C2
 	for <qemu-riscv@archiver.kernel.org>; Fri, 25 Apr 2025 15:24:33 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1u8Kte-0001eb-D6; Fri, 25 Apr 2025 11:23:22 -0400
+	id 1u8Kti-0001ip-TX; Fri, 25 Apr 2025 11:23:26 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1u8Ktc-0001dS-GJ
- for qemu-riscv@nongnu.org; Fri, 25 Apr 2025 11:23:20 -0400
-Received: from mail-pg1-x52f.google.com ([2607:f8b0:4864:20::52f])
+ id 1u8Kte-0001ed-97
+ for qemu-riscv@nongnu.org; Fri, 25 Apr 2025 11:23:22 -0400
+Received: from mail-pf1-x429.google.com ([2607:f8b0:4864:20::429])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1u8KtZ-0002oz-Fs
- for qemu-riscv@nongnu.org; Fri, 25 Apr 2025 11:23:20 -0400
-Received: by mail-pg1-x52f.google.com with SMTP id
- 41be03b00d2f7-b0b2ce7cc81so2355588a12.3
- for <qemu-riscv@nongnu.org>; Fri, 25 Apr 2025 08:23:16 -0700 (PDT)
+ id 1u8Kta-0002pe-QW
+ for qemu-riscv@nongnu.org; Fri, 25 Apr 2025 11:23:21 -0400
+Received: by mail-pf1-x429.google.com with SMTP id
+ d2e1a72fcca58-7376dd56eccso2570932b3a.0
+ for <qemu-riscv@nongnu.org>; Fri, 25 Apr 2025 08:23:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1745594595; x=1746199395; darn=nongnu.org;
+ d=linaro.org; s=google; t=1745594597; x=1746199397; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=DFIjN5FugvOLKOwxhVcNRX7EfVOZPbGYkwA/+pKFgdA=;
- b=oOeCT9xFE3Eq5oxqEdjHH4jqrIZUsaWlxl1zXzFGDxtyiXdNk0b5RD20mzqkZiDVrV
- 2V9VCsC/Pv+TwgA0IQM8KCAV4wxj53ZQXLpNDG3bha7xiO1QudCqlj7X2vMmVUxyrNIg
- GTUW5dp3VlrlseHjHh2suKvr8liLCynXPpdol++hIUFSuwnp8JhEegMfANqYhIIFnESa
- ahCcxmPBKDvLJ71cyk2STd1k/Dn4vIecscgkjKw0EizOAUJdykQcxIV8phERBHYtGNNO
- 8fGJLdmXGbQ9kotBg295lRf5Oooi17M5Khm57dcQLa0y5YcXxweDuUcRT+xduUuwtndK
- CfwQ==
+ bh=xNi29cUmvbhQyUeV6Au09yg4HVFM1Boo5sSDPMUFN5U=;
+ b=rx9gA6NV10zGWYMDPQU5OVoiUC+3/KcF6utX5+3pkPZlD1rFMnV9NpOGNWsX0fOLpZ
+ DfDB+3KyFQe15xQGzUquIiio7rnMCdJucRujH7MJhWGDN92rD9ahRFyBH7SISCKSb0QF
+ /MnWQtKL9cCi4vPNwEASYvnY1ZcWckaJFBTCEsZAnCUA6/e4y4UNU9enfCYNhz+86/jb
+ TrlOd9KRaaUMPMfWWeHM+3ugAvYIhxQYSpEz9wdm1eqD+QWNR6ZOOpx/PDBMwEuYn5bv
+ RlZJGNevGD7Y2Kdi7pHvufXD8uye6K6ZesIbJVhUhl3f1UEa2Ex206MHw5rEqLh/tWFU
+ tSsA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1745594595; x=1746199395;
+ d=1e100.net; s=20230601; t=1745594597; x=1746199397;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=DFIjN5FugvOLKOwxhVcNRX7EfVOZPbGYkwA/+pKFgdA=;
- b=Ib6joR24YTMGW98UuysZZ2zqSRIgnroQV+BZgS755vurWxT9REoCsy1A0XwB+Cykk5
- GxJkNDd7PIARsonwAMDt/JNtv+izpo3t2RtAgPsECDkhLsyWyLnIKLoveDFgE2hznGFv
- nvO8rEKMEZ8fXyctjKKFepi/2eD8dJPWXUs5KmAT1yEnG0cfpYfBOrsmBH1gdwOq9Fxe
- exRlEHiKOgyLfHij9M/hTXFWLXRzy4iMN8UccmL3TvGOLmg1Q+SHcgWttUTXJb+8tdCn
- wMZotTh/Vfs79jcw8JGGdDse2d2x0A1zivcj7dhhcmWEwkc8v2bJfxJnGNyCTSKmqIlI
- Mweg==
-X-Gm-Message-State: AOJu0YyCQWGM8+YV5XakDkkC4f9GIXxZSeOYbzKmL89rJpWmOlSa6qJz
- EoOJlJ4NZYpff63D4hMxVfhk7CNnKPh2Kjtnnx3z4rKwASiqtMRaWWwkBeo1v2Y=
-X-Gm-Gg: ASbGncukX+v+aowAzw5HDKB9CyNVd1BQ0MyAepi2gmdT/khUnF8wYRd2XX4hqVOlL0G
- IgljfDQ0EEJXnPQGgVq0TC5hhaA5+Was2/NRWZeMH7U5WeJ+VQlQqeh9XKoH7X2HGo3iMHp2MLK
- xVaqnSFK/ugmiK4gzBUk9rH5TsIizlwItbhXEdTrXiQoo54WDeJCyTUEz+LnPF1v7pl1D1hBqjG
- HtJE3AQtcprgZqbSyaEc4luqOOFUe0zzG7LIHst/pEXxZtaQyGFNJNwjsa5ptP+WopZYNuNJOJK
- GuZM8d3Tz3mYq4POZQHZWIVgfdpOtA8C4Cyh0i2ZCQzQAsOFWt+WM0kVO3ez3toh614TSRxjqxc
+ bh=xNi29cUmvbhQyUeV6Au09yg4HVFM1Boo5sSDPMUFN5U=;
+ b=Phsyp13U9bwNNBpLyoSoSDacGqJGl+WU2+9dYk5D5pU1IYOwuDU0FqACFo0gQNDToE
+ iPeZ5gyhZCmzuixJmfpuo685cct5KsP0W5aHjm1RQrXLDv/42kvDLjsH4MNOwm3jR1+/
+ Ym0kYoZ1QWZuyRxFGhoRlIw31Wxc08zi1JnoG07TVqGSS8AgYRTuYL63AOmZI4Tqe7qx
+ 3iRICjIxdWm9PbzOuj4nAUqk7ZF+xw5fOX+7EzxcXGTI/4OQJ3Ok94S6DWnwtin2MtKA
+ 3o3Z7jwBbQtLeF/o/LiCb+FfL0hNKbK72GQhug3seV9t7LQC+UPZT8KJihAsdLtAQcs+
+ nq+A==
+X-Gm-Message-State: AOJu0YzHh5I5H+eTR+4vmG6s5QaPEwFxNUhEoB1oFeUFIHTiDLkeRwc/
+ dHZZSDdsIO5SMbKa9liF8saNEl9Hoi+UdHydr5iVeBoVU08O8EhQan284/YGnmaqKqKCz0C6D4N
+ y
+X-Gm-Gg: ASbGnctMa3EeL7o0dnGQR8kKVl9Webv6S2ahq5ZWnCMfpOxuga5mQVPmTMFsEWWz/vf
+ IN6tk9yYVR7RpaL/JVrcx2X1FOplczDzYaHHpssRypwir0GOObNyNRcbkuqL770fsXgJs4St+gR
+ fG2F+Bznlevw0NeqzYjVSWvU8AmCqE7fRxQ0tyVFJhhDII20VSvk0ec6PQyXrDyKOltUrIvJViX
+ h1ngDguDDoXJ9VjvTY77TLS8OA2OVJphWj3jGFKzQG8n0fbdyHlTJAbtPh9C+xsVwyJ0oi5gJcW
+ 1kH5kBsGXL/d4RXVM/FVJ55dwpXEGPXfmcwIoy3M5lbFBIBUk4ttn2G3qykuCSMMBccx6Vl2Y5g
  =
-X-Google-Smtp-Source: AGHT+IEpk8B8DIMRg7LZdaT1jRwYovqQYpTETxvBjIOWMDh0QZoc/IHxM4cPzs8We/hqxH1VxC0xDg==
-X-Received: by 2002:a05:6a21:920b:b0:1f5:8655:3287 with SMTP id
- adf61e73a8af0-2045b9f6f37mr4592429637.40.1745594595499; 
- Fri, 25 Apr 2025 08:23:15 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IFYaA7OEpPoQ1dhQ7EJLs6ZVzHDkNu2pzIww5etqOZVJsTnSgdHSR5GwpIQAjxKanG2ydS0yQ==
+X-Received: by 2002:a05:6a00:1150:b0:736:692e:129 with SMTP id
+ d2e1a72fcca58-73fd8f4f0a7mr4483681b3a.24.1745594596919; 
+ Fri, 25 Apr 2025 08:23:16 -0700 (PDT)
 Received: from stoup.. (71-212-47-143.tukw.qwest.net. [71.212.47.143])
  by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-73e25a6a49esm3390466b3a.106.2025.04.25.08.23.15
+ d2e1a72fcca58-73e25a6a49esm3390466b3a.106.2025.04.25.08.23.16
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 25 Apr 2025 08:23:15 -0700 (PDT)
+ Fri, 25 Apr 2025 08:23:16 -0700 (PDT)
 From: Richard Henderson <richard.henderson@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, dbarboza@ventanamicro.com
-Subject: [PATCH 3/7] target/riscv: Pass ra to riscv_csrrw_do128
-Date: Fri, 25 Apr 2025 08:23:07 -0700
-Message-ID: <20250425152311.804338-4-richard.henderson@linaro.org>
+Subject: [PATCH 5/7] target/riscv: Pass ra to riscv_csrrw_i128
+Date: Fri, 25 Apr 2025 08:23:09 -0700
+Message-ID: <20250425152311.804338-6-richard.henderson@linaro.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250425152311.804338-1-richard.henderson@linaro.org>
 References: <20250425152311.804338-1-richard.henderson@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::52f;
- envelope-from=richard.henderson@linaro.org; helo=mail-pg1-x52f.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::429;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pf1-x429.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -101,50 +102,90 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
 ---
- target/riscv/csr.c | 9 +++++----
- 1 file changed, 5 insertions(+), 4 deletions(-)
+ target/riscv/cpu.h       | 4 ++--
+ target/riscv/csr.c       | 8 ++++----
+ target/riscv/op_helper.c | 9 +++++----
+ 3 files changed, 11 insertions(+), 10 deletions(-)
 
+diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+index 2c0524d0be..8b84793b15 100644
+--- a/target/riscv/cpu.h
++++ b/target/riscv/cpu.h
+@@ -851,8 +851,8 @@ typedef RISCVException (*riscv_csr_op_fn)(CPURISCVState *env, int csrno,
+ RISCVException riscv_csrr_i128(CPURISCVState *env, int csrno,
+                                Int128 *ret_value);
+ RISCVException riscv_csrrw_i128(CPURISCVState *env, int csrno,
+-                                Int128 *ret_value,
+-                                Int128 new_value, Int128 write_mask);
++                                Int128 *ret_value, Int128 new_value,
++                                Int128 write_mask, uintptr_t ra);
+ 
+ typedef RISCVException (*riscv_csr_read128_fn)(CPURISCVState *env, int csrno,
+                                                Int128 *ret_value);
 diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-index e9c2f95b6e..d62d1aaaee 100644
+index 097640e25d..a663f527a4 100644
 --- a/target/riscv/csr.c
 +++ b/target/riscv/csr.c
-@@ -5588,7 +5588,7 @@ RISCVException riscv_csrrw(CPURISCVState *env, int csrno,
- static RISCVException riscv_csrrw_do128(CPURISCVState *env, int csrno,
-                                         Int128 *ret_value,
-                                         Int128 new_value,
--                                        Int128 write_mask)
-+                                        Int128 write_mask, uintptr_t ra)
+@@ -5656,8 +5656,8 @@ RISCVException riscv_csrr_i128(CPURISCVState *env, int csrno,
+ }
+ 
+ RISCVException riscv_csrrw_i128(CPURISCVState *env, int csrno,
+-                                Int128 *ret_value,
+-                                Int128 new_value, Int128 write_mask)
++                                Int128 *ret_value, Int128 new_value,
++                                Int128 write_mask, uintptr_t ra)
  {
      RISCVException ret;
-     Int128 old_value;
-@@ -5610,7 +5610,7 @@ static RISCVException riscv_csrrw_do128(CPURISCVState *env, int csrno,
-             }
-         } else if (csr_ops[csrno].write) {
-             /* avoids having to write wrappers for all registers */
--            ret = csr_ops[csrno].write(env, csrno, int128_getlo(new_value), 0);
-+            ret = csr_ops[csrno].write(env, csrno, int128_getlo(new_value), ra);
-             if (ret != RISCV_EXCP_NONE) {
-                 return ret;
-             }
-@@ -5637,7 +5637,7 @@ RISCVException riscv_csrr_i128(CPURISCVState *env, int csrno,
+ 
+@@ -5668,7 +5668,7 @@ RISCVException riscv_csrrw_i128(CPURISCVState *env, int csrno,
  
      if (csr_ops[csrno].read128) {
          return riscv_csrrw_do128(env, csrno, ret_value,
--                                 int128_zero(), int128_zero());
-+                                 int128_zero(), int128_zero(), 0);
+-                                 new_value, write_mask, 0);
++                                 new_value, write_mask, ra);
      }
  
      /*
-@@ -5667,7 +5667,8 @@ RISCVException riscv_csrrw_i128(CPURISCVState *env, int csrno,
+@@ -5681,7 +5681,7 @@ RISCVException riscv_csrrw_i128(CPURISCVState *env, int csrno,
+     target_ulong old_value;
+     ret = riscv_csrrw_do64(env, csrno, &old_value,
+                            int128_getlo(new_value),
+-                           int128_getlo(write_mask), 0);
++                           int128_getlo(write_mask), ra);
+     if (ret == RISCV_EXCP_NONE && ret_value) {
+         *ret_value = int128_make64(old_value);
      }
+diff --git a/target/riscv/op_helper.c b/target/riscv/op_helper.c
+index aee16e2e3a..e3770a2655 100644
+--- a/target/riscv/op_helper.c
++++ b/target/riscv/op_helper.c
+@@ -108,7 +108,7 @@ void helper_csrw_i128(CPURISCVState *env, int csr,
+ {
+     RISCVException ret = riscv_csrrw_i128(env, csr, NULL,
+                                           int128_make128(srcl, srch),
+-                                          UINT128_MAX);
++                                          UINT128_MAX, GETPC());
  
-     if (csr_ops[csrno].read128) {
--        return riscv_csrrw_do128(env, csrno, ret_value, new_value, write_mask);
-+        return riscv_csrrw_do128(env, csrno, ret_value,
-+                                 new_value, write_mask, 0);
-     }
+     if (ret != RISCV_EXCP_NONE) {
+         riscv_raise_exception(env, ret, GETPC());
+@@ -116,13 +116,14 @@ void helper_csrw_i128(CPURISCVState *env, int csr,
+ }
  
-     /*
+ target_ulong helper_csrrw_i128(CPURISCVState *env, int csr,
+-                       target_ulong srcl, target_ulong srch,
+-                       target_ulong maskl, target_ulong maskh)
++                               target_ulong srcl, target_ulong srch,
++                               target_ulong maskl, target_ulong maskh)
+ {
+     Int128 rv = int128_zero();
+     RISCVException ret = riscv_csrrw_i128(env, csr, &rv,
+                                           int128_make128(srcl, srch),
+-                                          int128_make128(maskl, maskh));
++                                          int128_make128(maskl, maskh),
++                                          GETPC());
+ 
+     if (ret != RISCV_EXCP_NONE) {
+         riscv_raise_exception(env, ret, GETPC());
 -- 
 2.43.0
 
