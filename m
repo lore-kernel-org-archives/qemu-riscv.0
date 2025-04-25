@@ -4,110 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 93BDEC369D1
-	for <qemu-riscv@archiver.kernel.org>; Fri, 25 Apr 2025 21:37:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2B900C369C2
+	for <qemu-riscv@archiver.kernel.org>; Fri, 25 Apr 2025 22:05:53 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1u8Qfn-0007yp-I1; Fri, 25 Apr 2025 17:33:27 -0400
+	id 1u8R9z-0001Pe-Np; Fri, 25 Apr 2025 18:04:40 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dongli.zhang@oracle.com>)
- id 1u8QfS-0007bF-Dm; Fri, 25 Apr 2025 17:33:06 -0400
-Received: from mx0b-00069f02.pphosted.com ([205.220.177.32])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dongli.zhang@oracle.com>)
- id 1u8QfO-0005qf-VE; Fri, 25 Apr 2025 17:33:05 -0400
-Received: from pps.filterd (m0246631.ppops.net [127.0.0.1])
- by mx0b-00069f02.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 53PLC3Ht003783;
- Fri, 25 Apr 2025 21:32:30 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com; h=cc
- :content-transfer-encoding:date:from:in-reply-to:message-id
- :mime-version:references:subject:to; s=corp-2023-11-20; bh=s5E//
- iB0b4Yapww9C3bE3ogTgsNjZn0ERO1byse93AA=; b=aUUUZdGdbofsm/nQX4V/t
- /q1N1ua2osWBkDrvq0GZ+uGvBomkwfm9nEnE611ER6AczHNe9gcLY/pD9esxRcEN
- mVRcj/i1SaYsKm0BlfYharXAHX/CtasCwOQ8MncKtyK45L7qMrjEyNCE65UV6bvr
- NHBfwfQfwzgDgC4/4sW2Bkj/aDsX8ekax2kiqdn4bR7fUiuHbS8LirFj/+rZaldI
- YrOI/cyDMkdfGs1v7+e3S5qgVMTVjKc+Of+dpoIIZIw/ca4NjGRfjZcxmneTsOel
- 7NvAQKtSsf9mlSYk0jEr74h7jKDpHY2qx7BuzRx4byIFhI5HssOyN+zGHEU64Zgb
- A==
-Received: from phxpaimrmta02.imrmtpd1.prodappphxaev1.oraclevcn.com
- (phxpaimrmta02.appoci.oracle.com [147.154.114.232])
- by mx0b-00069f02.pphosted.com (PPS) with ESMTPS id 468j3hg4hu-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Fri, 25 Apr 2025 21:32:28 +0000 (GMT)
-Received: from pps.filterd
- (phxpaimrmta02.imrmtpd1.prodappphxaev1.oraclevcn.com [127.0.0.1])
- by phxpaimrmta02.imrmtpd1.prodappphxaev1.oraclevcn.com (8.18.1.2/8.18.1.2)
- with ESMTP id 53PLE4Do030989; Fri, 25 Apr 2025 21:31:53 GMT
-Received: from pps.reinject (localhost [127.0.0.1])
- by phxpaimrmta02.imrmtpd1.prodappphxaev1.oraclevcn.com (PPS) with ESMTPS id
- 466k095v86-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Fri, 25 Apr 2025 21:31:53 +0000
-Received: from phxpaimrmta02.imrmtpd1.prodappphxaev1.oraclevcn.com
- (phxpaimrmta02.imrmtpd1.prodappphxaev1.oraclevcn.com [127.0.0.1])
- by pps.reinject (8.17.1.5/8.17.1.5) with ESMTP id 53PLVdAf039597;
- Fri, 25 Apr 2025 21:31:52 GMT
-Received: from localhost.localdomain (ca-dev80.us.oracle.com [10.211.9.80])
- by phxpaimrmta02.imrmtpd1.prodappphxaev1.oraclevcn.com (PPS) with ESMTP id
- 466k095v2d-6; Fri, 25 Apr 2025 21:31:52 +0000
-From: Dongli Zhang <dongli.zhang@oracle.com>
-To: qemu-devel@nongnu.org, kvm@vger.kernel.org, qemu-arm@nongnu.org,
- qemu-ppc@nongnu.org, qemu-riscv@nongnu.org, qemu-s390x@nongnu.org
-Cc: pbonzini@redhat.com, zhao1.liu@intel.com, mtosatti@redhat.com,
- sandipan.das@amd.com, babu.moger@amd.com, likexu@tencent.com,
- like.xu.linux@gmail.com, groug@kaod.org, khorenko@virtuozzo.com,
- alexander.ivanov@virtuozzo.com, den@virtuozzo.com,
- davydov-max@yandex-team.ru, xiaoyao.li@intel.com,
- dapeng1.mi@linux.intel.com, joe.jin@oracle.com,
- peter.maydell@linaro.org, gaosong@loongson.cn, chenhuacai@kernel.org,
- philmd@linaro.org, aurelien@aurel32.net, jiaxun.yang@flygoat.com,
- arikalo@gmail.com, npiggin@gmail.com, danielhb413@gmail.com,
- palmer@dabbelt.com, alistair.francis@wdc.com, liwei1518@gmail.com,
- zhiwei_liu@linux.alibaba.com, pasic@linux.ibm.com,
- borntraeger@linux.ibm.com, richard.henderson@linaro.org,
- david@redhat.com, iii@linux.ibm.com, thuth@redhat.com,
- flavra@baylibre.com, ewanhai-oc@zhaoxin.com, ewanhai@zhaoxin.com,
- cobechen@zhaoxin.com, louisqi@zhaoxin.com, liamni@zhaoxin.com,
- frankzhu@zhaoxin.com, silviazhao@zhaoxin.com, kraxel@redhat.com,
- berrange@redhat.com
-Subject: [PATCH v5 05/10] target/i386/kvm: extract unrelated code out of
- kvm_x86_build_cpuid()
-Date: Fri, 25 Apr 2025 14:30:02 -0700
-Message-ID: <20250425213037.8137-6-dongli.zhang@oracle.com>
-X-Mailer: git-send-email 2.43.5
-In-Reply-To: <20250425213037.8137-1-dongli.zhang@oracle.com>
-References: <20250425213037.8137-1-dongli.zhang@oracle.com>
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1u8R7z-0006DU-R7
+ for qemu-riscv@nongnu.org; Fri, 25 Apr 2025 18:02:36 -0400
+Received: from mail-pf1-x432.google.com ([2607:f8b0:4864:20::432])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1u8R7x-0001RG-N1
+ for qemu-riscv@nongnu.org; Fri, 25 Apr 2025 18:02:35 -0400
+Received: by mail-pf1-x432.google.com with SMTP id
+ d2e1a72fcca58-739525d4e12so2514525b3a.3
+ for <qemu-riscv@nongnu.org>; Fri, 25 Apr 2025 15:02:32 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=ventanamicro.com; s=google; t=1745618552; x=1746223352; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=axez90JHWERTG5QTyuIzr6EezXEXtdJEqVd26XET/xU=;
+ b=bJD5DQMr5WVxh9Bu94NZw5vSb4WczJg/OFWMpqj36opfh0323oPstxddQk0sqna1q0
+ Hd4bYfAdf+m1ktqrA4z+jP4CFsG7JdEFvGai7Ne2Ga9R4mHtE5kxFuuN8kg4eR4YzJUI
+ nQ/9y1cX4CYoBLpFLeV1psVWIYhX9W/X9ktAxMNQ23WCTpxZgVagM7SyQob13EQ3gapg
+ HlZe/H4jd5GFszEQoJlNZxdA4+TMBKO0trIUD+EgfbmAXbPzkHr8ZoqkXfbxhVRAk8aR
+ oN/pyQJr2JzHsbvFtsSesCrtm7wV9bSDxTxLaOLA5BnSy9RWnyqKJO8jaCkt6zrdK4nR
+ S8Iw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1745618552; x=1746223352;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=axez90JHWERTG5QTyuIzr6EezXEXtdJEqVd26XET/xU=;
+ b=ImF0EmCj7fMNaglyxcro0mPuQ+Z1rGOCmSyGP9isIj9sj9gqLwkwwLzEMGygr822Tf
+ a9Emom2N2IWHJwsGvSh0YZQYZNfNiw2skZLg/nLPxkCjOjElKq6bGnyo3ctf+pFU4E4y
+ o2qJFnu6/AwtYwVvcnaTKK+YChg+gBr2uqEB8aR4xILEpdwsXzVwSORu2+NHOUJzJiEU
+ pxrVvyZvgd6Z2wb8aNOsnsnlWGfc9LLaQjAx6q7fsvxr3WhiBnWp6hCURDuPf8bGLImz
+ 8acuQ9Zg7SZdbqMUu4eAA4JO0HX7LXwEorkafhp9w3iZZAfA2jNFMlBYvPoL+NU5I6dd
+ GssQ==
+X-Gm-Message-State: AOJu0YxzvoSFg9JeHIdwqKhrT/GWO8X5tbt1w2ESumL0yDvES0nZ+vR4
+ lhjtTJZN9h3H89G5I8DgFxnmzsy9HkO2MfTk6sZ9BEVOanVhUGl1e5NZozai8Lo=
+X-Gm-Gg: ASbGncsL3wbYCDLid3rl4ajvyeoxVwghYoK92rkdTUwZi6VzmtDFSaMj+75DtoLMPmH
+ dM82vfy1nywfYk/zif22ldl2MEFYbHh0PeUKy7KTcpu0gnv31a7herqO9bwK+YmYadE9+DUHKi/
+ /9Afcnc0iv0SK0kZQaX3attfUAIvcuh5x9JcemLtVlSZVEtActiz1+79uiT1gX/Gb8+dAI0hX14
+ GxfeaWgw9hZ1N7Q3OJITqUjqXDf/9MaRdekv8prlgS25OFYNoX5VKkanry6Rs/jFvpGNRA4zOMT
+ WWrrDARgFokDH70S4PKeR1slUzPsYbrptpQPAUh/ZImDFxrYbpv0idVba7mPocuRZA==
+X-Google-Smtp-Source: AGHT+IHKaNShR2wnFVQclSPv5yDMKKNgRbAykYIPQrHuL4CmEKcox8ETr6vQCniGOWEyk2IM+BsAaQ==
+X-Received: by 2002:a05:6a00:4644:b0:73d:fefb:325 with SMTP id
+ d2e1a72fcca58-73fd6af5a42mr4928354b3a.5.1745618551617; 
+ Fri, 25 Apr 2025 15:02:31 -0700 (PDT)
+Received: from [192.168.68.110] ([152.234.125.33])
+ by smtp.gmail.com with ESMTPSA id
+ d2e1a72fcca58-73e25941387sm3683725b3a.70.2025.04.25.15.02.29
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 25 Apr 2025 15:02:31 -0700 (PDT)
+Message-ID: <451616c2-5594-4d12-82ea-63ef7bbecd22@ventanamicro.com>
+Date: Fri, 25 Apr 2025 19:02:28 -0300
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.0.736,FMLib:17.12.80.40
- definitions=2025-04-25_07,2025-04-24_02,2025-02-21_01
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 phishscore=0
- bulkscore=0 mlxscore=0
- spamscore=0 malwarescore=0 mlxlogscore=999 suspectscore=0 adultscore=0
- classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2504070000
- definitions=main-2504250154
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwNDI1MDE1NSBTYWx0ZWRfX6szthY6x5CKk
- t9+dWs4dhwasznKuD9gaoHcJvaDJXGu241ACDaT5ZkiN5zB154NMyJOMTgKHR5//u42wQUhFij4
- nyDIhmEPq4vQKK3x5IenTEoS5G03cBv4WjnqezjZsc4io1vERz3/c7s/gBA1rqM3f5XeNAddMh5
- D5zezizAbJHtr+bZAJEvMECj11S0nLRVRh7wW2fa3kyd+322fbHXzCqVhy6cHVVrV5xrDLC5Q//
- mzySH2716MsVLOuWRKItWPQ35wnwL7tPlW1yB80bQdaed+17izP1k29ypJW9oAyWTaOaEYq0OAh
- grHsrx35KqQ0oRzKGtULO+ypKVTtAyy/NgRnU9vD9KXh+6CVS25j9yO2ktzGqMkq0jrF/1XOdp6
- eD/nX1DO
-X-Proofpoint-ORIG-GUID: 3v2FkPGWNa-a0hRv7Vjh6Yvgodnv17zp
-X-Proofpoint-GUID: 3v2FkPGWNa-a0hRv7Vjh6Yvgodnv17zp
-Received-SPF: pass client-ip=205.220.177.32;
- envelope-from=dongli.zhang@oracle.com; helo=mx0b-00069f02.pphosted.com
-X-Spam_score_int: -32
-X-Spam_score: -3.3
-X-Spam_bar: ---
-X-Spam_report: (-3.3 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_MED=-0.5,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_LOW=-0.7, RCVD_IN_MSPIKE_H5=0.001, RCVD_IN_MSPIKE_WL=0.001,
- RCVD_IN_VALIDITY_CERTIFIED_BLOCKED=0.001, RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH alternate 1/2] target/riscv: Update pc before csrw, csrrw
+To: Richard Henderson <richard.henderson@linaro.org>, qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com
+References: <20250425165055.807801-1-richard.henderson@linaro.org>
+ <20250425165055.807801-2-richard.henderson@linaro.org>
+Content-Language: en-US
+From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+In-Reply-To: <20250425165055.807801-2-richard.henderson@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::432;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pf1-x432.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -123,116 +101,52 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-The initialization of 'has_architectural_pmu_version',
-'num_architectural_pmu_gp_counters', and
-'num_architectural_pmu_fixed_counters' is unrelated to the process of
-building the CPUID.
 
-Extract them out of kvm_x86_build_cpuid().
 
-In addition, use cpuid_find_entry() instead of cpu_x86_cpuid(), because
-CPUID has already been filled at this stage.
+On 4/25/25 1:50 PM, Richard Henderson wrote:
+> Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
+> ---
 
-Signed-off-by: Dongli Zhang <dongli.zhang@oracle.com>
-Reviewed-by: Zhao Liu <zhao1.liu@intel.com>
----
-Changed since v1:
-  - Still extract the code, but call them for all CPUs.
-Changed since v2:
-  - Use cpuid_find_entry() instead of cpu_x86_cpuid().
-  - Didn't add Reviewed-by from Dapeng as the change isn't minor.
+Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 
- target/i386/kvm/kvm.c | 62 ++++++++++++++++++++++++-------------------
- 1 file changed, 35 insertions(+), 27 deletions(-)
-
-diff --git a/target/i386/kvm/kvm.c b/target/i386/kvm/kvm.c
-index 96d87821a3..bacb1c17f5 100644
---- a/target/i386/kvm/kvm.c
-+++ b/target/i386/kvm/kvm.c
-@@ -1960,33 +1960,6 @@ static uint32_t kvm_x86_build_cpuid(CPUX86State *env,
-         }
-     }
- 
--    if (limit >= 0x0a) {
--        uint32_t eax, edx;
--
--        cpu_x86_cpuid(env, 0x0a, 0, &eax, &unused, &unused, &edx);
--
--        has_architectural_pmu_version = eax & 0xff;
--        if (has_architectural_pmu_version > 0) {
--            num_architectural_pmu_gp_counters = (eax & 0xff00) >> 8;
--
--            /* Shouldn't be more than 32, since that's the number of bits
--             * available in EBX to tell us _which_ counters are available.
--             * Play it safe.
--             */
--            if (num_architectural_pmu_gp_counters > MAX_GP_COUNTERS) {
--                num_architectural_pmu_gp_counters = MAX_GP_COUNTERS;
--            }
--
--            if (has_architectural_pmu_version > 1) {
--                num_architectural_pmu_fixed_counters = edx & 0x1f;
--
--                if (num_architectural_pmu_fixed_counters > MAX_FIXED_COUNTERS) {
--                    num_architectural_pmu_fixed_counters = MAX_FIXED_COUNTERS;
--                }
--            }
--        }
--    }
--
-     cpu_x86_cpuid(env, 0x80000000, 0, &limit, &unused, &unused, &unused);
- 
-     for (i = 0x80000000; i <= limit; i++) {
-@@ -2086,6 +2059,39 @@ int kvm_arch_pre_create_vcpu(CPUState *cpu, Error **errp)
-     return 0;
- }
- 
-+static void kvm_init_pmu_info(struct kvm_cpuid2 *cpuid)
-+{
-+    struct kvm_cpuid_entry2 *c;
-+
-+    c = cpuid_find_entry(cpuid, 0xa, 0);
-+
-+    if (!c) {
-+        return;
-+    }
-+
-+    has_architectural_pmu_version = c->eax & 0xff;
-+    if (has_architectural_pmu_version > 0) {
-+        num_architectural_pmu_gp_counters = (c->eax & 0xff00) >> 8;
-+
-+        /*
-+         * Shouldn't be more than 32, since that's the number of bits
-+         * available in EBX to tell us _which_ counters are available.
-+         * Play it safe.
-+         */
-+        if (num_architectural_pmu_gp_counters > MAX_GP_COUNTERS) {
-+            num_architectural_pmu_gp_counters = MAX_GP_COUNTERS;
-+        }
-+
-+        if (has_architectural_pmu_version > 1) {
-+            num_architectural_pmu_fixed_counters = c->edx & 0x1f;
-+
-+            if (num_architectural_pmu_fixed_counters > MAX_FIXED_COUNTERS) {
-+                num_architectural_pmu_fixed_counters = MAX_FIXED_COUNTERS;
-+            }
-+        }
-+    }
-+}
-+
- int kvm_arch_init_vcpu(CPUState *cs)
- {
-     struct {
-@@ -2268,6 +2274,8 @@ int kvm_arch_init_vcpu(CPUState *cs)
-     cpuid_i = kvm_x86_build_cpuid(env, cpuid_data.entries, cpuid_i);
-     cpuid_data.cpuid.nent = cpuid_i;
- 
-+    kvm_init_pmu_info(&cpuid_data.cpuid);
-+
-     if (((env->cpuid_version >> 8)&0xF) >= 6
-         && (env->features[FEAT_1_EDX] & (CPUID_MCE | CPUID_MCA)) ==
-            (CPUID_MCE | CPUID_MCA)) {
--- 
-2.39.3
+>   target/riscv/insn_trans/trans_rvi.c.inc | 4 ++++
+>   1 file changed, 4 insertions(+)
+> 
+> diff --git a/target/riscv/insn_trans/trans_rvi.c.inc b/target/riscv/insn_trans/trans_rvi.c.inc
+> index b9c7160468..a367fecf7e 100644
+> --- a/target/riscv/insn_trans/trans_rvi.c.inc
+> +++ b/target/riscv/insn_trans/trans_rvi.c.inc
+> @@ -992,6 +992,7 @@ static bool do_csrw(DisasContext *ctx, int rc, TCGv src)
+>       TCGv_i32 csr = tcg_constant_i32(rc);
+>   
+>       translator_io_start(&ctx->base);
+> +    gen_update_pc(ctx, 0);
+>       gen_helper_csrw(tcg_env, csr, src);
+>       return do_csr_post(ctx);
+>   }
+> @@ -1002,6 +1003,7 @@ static bool do_csrrw(DisasContext *ctx, int rd, int rc, TCGv src, TCGv mask)
+>       TCGv_i32 csr = tcg_constant_i32(rc);
+>   
+>       translator_io_start(&ctx->base);
+> +    gen_update_pc(ctx, 0);
+>       gen_helper_csrrw(dest, tcg_env, csr, src, mask);
+>       gen_set_gpr(ctx, rd, dest);
+>       return do_csr_post(ctx);
+> @@ -1025,6 +1027,7 @@ static bool do_csrw_i128(DisasContext *ctx, int rc, TCGv srcl, TCGv srch)
+>       TCGv_i32 csr = tcg_constant_i32(rc);
+>   
+>       translator_io_start(&ctx->base);
+> +    gen_update_pc(ctx, 0);
+>       gen_helper_csrw_i128(tcg_env, csr, srcl, srch);
+>       return do_csr_post(ctx);
+>   }
+> @@ -1037,6 +1040,7 @@ static bool do_csrrw_i128(DisasContext *ctx, int rd, int rc,
+>       TCGv_i32 csr = tcg_constant_i32(rc);
+>   
+>       translator_io_start(&ctx->base);
+> +    gen_update_pc(ctx, 0);
+>       gen_helper_csrrw_i128(destl, tcg_env, csr, srcl, srch, maskl, maskh);
+>       tcg_gen_ld_tl(desth, tcg_env, offsetof(CPURISCVState, retxh));
+>       gen_set_gpr128(ctx, rd, destl, desth);
 
 
