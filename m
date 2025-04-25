@@ -4,81 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A9496C369C2
-	for <qemu-riscv@archiver.kernel.org>; Fri, 25 Apr 2025 11:38:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8C6CBC369D1
+	for <qemu-riscv@archiver.kernel.org>; Fri, 25 Apr 2025 11:38:32 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1u8HNT-0001He-QM; Fri, 25 Apr 2025 07:37:55 -0400
+	id 1u8HNJ-0001Bo-0A; Fri, 25 Apr 2025 07:37:45 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1u8HNO-0001Er-GI
- for qemu-riscv@nongnu.org; Fri, 25 Apr 2025 07:37:50 -0400
-Received: from mail-pl1-x62f.google.com ([2607:f8b0:4864:20::62f])
+ id 1u8HNG-0001BN-Vl
+ for qemu-riscv@nongnu.org; Fri, 25 Apr 2025 07:37:43 -0400
+Received: from mail-pl1-x633.google.com ([2607:f8b0:4864:20::633])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1u8HNM-0006ZL-4Q
- for qemu-riscv@nongnu.org; Fri, 25 Apr 2025 07:37:50 -0400
-Received: by mail-pl1-x62f.google.com with SMTP id
- d9443c01a7336-2254e0b4b79so32665825ad.2
- for <qemu-riscv@nongnu.org>; Fri, 25 Apr 2025 04:37:47 -0700 (PDT)
+ id 1u8HN9-0006Wf-Ge
+ for qemu-riscv@nongnu.org; Fri, 25 Apr 2025 07:37:42 -0400
+Received: by mail-pl1-x633.google.com with SMTP id
+ d9443c01a7336-22409077c06so32696555ad.1
+ for <qemu-riscv@nongnu.org>; Fri, 25 Apr 2025 04:37:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1745581066; x=1746185866; darn=nongnu.org;
+ d=ventanamicro.com; s=google; t=1745581051; x=1746185851; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=j1w8u6svcQru1pIlMWqNvHitq2SXpUDJnfU1RyWgJhw=;
- b=U2HYJtHU/ka0omBsUHGNaiFYVtvYz0m5WsxG4HGi+tSX6AVUcYA+yjup5GwMW7N3RW
- 5mV+dxTzXijd0EwfV6GFMtqCFQ4pd3fsEW4i415XZy3pQkBw7TvgcODdGvtGJVkzD1LY
- ZHfCReqg/ZeRZqDN09ccmlEIEQ8Tah6umrkcGCORUYHfbUC2OaSRPPBJF7bo8n+TFILq
- dInq56n3PU2BVCdszyshQxCht80KPf6PQ1wE468PCJB3vDXgewCnGz9+bZm1mJkz0sew
- gIj2isPvLAhP+RFb4YWxBe2Slo0zt15yebs1y/lkaLRV1opNDJ8GHm7PgbbUaNJFZibK
- uHaQ==
+ bh=5neQGzLPcsmIj+eh2EIpFmSDwCQhG6xSq9AiQ9ifoDM=;
+ b=kYaacMHDvK0JfDSwft12zqklR43i1lbXTpEOTIE8Nhg/96FiJrnBEMJ44AQN2M1EXF
+ ju56R3DuyOt24dZBXzHVBC5gzD9QkZNjnc/52m5cTRTH6HUXmL6cTLXy79CzwjwZRfSl
+ mjhaKWEbfDHcm6vvclxHM4M0jrO9Fg5WDm0QBK2SaUco/GUTa/f1W4j3Cmzfm64PcZQT
+ E+lrZ8rBT5NvlpZCi4R7HLnJ5WGZaRyqjTI0805MzIwF2mrvcMVgs9tKHQtGyi7hmE+x
+ SN0aaLx4H9ZA49OVW6RDk72E5PUPs+1/2Pjfc6v+xJQNhHh1CFNZGHxdABrW1VYYSLAw
+ m8Iw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1745581066; x=1746185866;
+ d=1e100.net; s=20230601; t=1745581051; x=1746185851;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=j1w8u6svcQru1pIlMWqNvHitq2SXpUDJnfU1RyWgJhw=;
- b=HToK29J+rIDWBeypMoRvqB1O8jRrfDBMynPww0n4GEnmLEMm3zp4g45HJV5erxVT/9
- CJFHFfDh1BDg19EpuUlvJLIareVT4oBpdWXgh8I2AdYojWCqBQcZRSY4V5YtkdnAigb+
- S4Bz8hapVqb35nsTdn4iWy6gRn7t8qonY01gvSLKLDtcQk+mKOO/tvIX7Yl1dUB2gATC
- OFGD/sDYyfzWgBqaBWJq4+jBbtdh6EBG0bpDQR4eO3ILOeYx/MD89auGcI2hdkGDGaCH
- 5EcF//lxVh9ev4xSytQzFYUeH0qP0hSfslmL2zRkupD3w9xXuE7VLHXicDx/oHdFlj3H
- o4Pg==
-X-Gm-Message-State: AOJu0YwfHUKsisCvPW9JUkWrVV20UfHAVsKrrDGd38rnsA8p+W1F2EIM
- AWlxKk8CLXC759bNQ38KXTlG7ObnlA19pVZI6EuX7j9RQrEsfRc5vjFkjGxSdY6SsHE4+/wwG3n
- 5
-X-Gm-Gg: ASbGncu9o4zNjfcFEFkg6pXK8jB8Ij5CdqhN0G15Y/CRJN4jGtZ326FU7eaoMsnyHDX
- XteUuPTVtNOs8vMUXR2RV3mPK1fzURFYG1wz1vzvCfpJrTPCBZPOnJEWHs1bpMhs4fe1/MKz1Ry
- yp7oBbKZnuifpRj6Qq98XOF9djWkbtB2RowznAd9BBHwadIym5PC511XMmY+0xWKeNX54fcKMKp
- jLYSBKzy0u1xIATxbJumLZh3ir+Otm+KVr/AUbAzg8qtGl3oBFcH0AHGWaVK54nKnOMmJEUuugS
- +nnH+wuS5zTXuIUfBxMtDC+3SfnOdyeolo2mMIiIY2T2L6gMH5os04tZqrijtZJ4XyfW
-X-Google-Smtp-Source: AGHT+IFlce0m4rWNSwhxYRVKUUAk+vjcKfE4HvD8JjzcbX20Z1DOSsYj/BmE8Fo48wyLYORtxCJV2A==
-X-Received: by 2002:a17:903:32c8:b0:224:1c41:a4bc with SMTP id
- d9443c01a7336-22dbf5ee6bdmr32105685ad.12.1745581066044; 
- Fri, 25 Apr 2025 04:37:46 -0700 (PDT)
+ bh=5neQGzLPcsmIj+eh2EIpFmSDwCQhG6xSq9AiQ9ifoDM=;
+ b=kxv/2ZuxsO5+T2aQYn4L77WraVDit//HmuoQFyvK+cBByIvY1909I7GyoztR/9DOgU
+ OEYo5YnPqXSt/+2OZcDPmvHPgs9LdAvHxjbjHHja/IVaNexuBCrx3jJEa8ASX5NgZG75
+ YhsSsc/AbW9QDcYk6faYnd+j7lS8P43GJ3qhySob2RGDUx5eJZaqkkjQOBknC/DTe0HY
+ L9Y8CVz3Y48HPRDs+IjGrcDTNhOYvbdhtcISHNCGyv9lY7pwXiJit9KS6hqSGdp7TPye
+ ++gq9MgQpT2YecsltlfOYAqrNQtqwJf83JAu71hrU2OHSmkQZSSa7eaZK5PJjVAVSIlf
+ gqzw==
+X-Gm-Message-State: AOJu0YyWPAyqqW0xT1wX4PqOr+mQF/WWwhIRDUVL1n1VmMq23NMXfVMZ
+ B/BVIKhIh5vLOyHj7n4kSE2UP0wjqPxuva80UOThJUh0Rkaj0WhzMoFqrrEPtII=
+X-Gm-Gg: ASbGncs32UBFUJ/5CNHf9Irg5jpnkk34rUf/H2rwMsopueRstpp5bomd5GBxx9qreoL
+ QheVapJxhNGNrfnVUXqT45a4cTPwfDlr+Al3yq++gWFnyMqqDGqvfCGUwUjmd3XN9vocplwtHC8
+ lyzD98bmEp+pt6Cu7+YYxNLI4O5c3ZFdOuFrGbNvJaZ0+P5N7G3Zj9DX2tN8Pu1FyiZPssHujqO
+ GgCpl1X+oVbpjzKwQlO0OvJ0BTUkWGXkn/2sJJb5uidqoB/x63wdZuqmaLQdkGTlDZjHCpruRl0
+ qiL6OlRQru5DYfiSsV7Lc1rFM5Hk5iMOLcVWOhom/qEZUS+hBTSK+S+0EifJalqH0gFYiMFOoki
+ 1SLI=
+X-Google-Smtp-Source: AGHT+IE09FD0cMsBA13zqSe/F/Y43aUMRL01g/uuovEtGNz0oaczZm+0oMmgf5I5WHhOjP9AdOPPXw==
+X-Received: by 2002:a17:903:1c6:b0:224:192a:9154 with SMTP id
+ d9443c01a7336-22dbf5fa834mr28954235ad.26.1745581051402; 
+ Fri, 25 Apr 2025 04:37:31 -0700 (PDT)
 Received: from grind.dc1.ventanamicro.com ([152.234.125.33])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-22db50e7a40sm29881055ad.147.2025.04.25.04.37.43
+ d9443c01a7336-22db50e7a40sm29881055ad.147.2025.04.25.04.37.28
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 25 Apr 2025 04:37:45 -0700 (PDT)
+ Fri, 25 Apr 2025 04:37:30 -0700 (PDT)
 From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, liwei1518@gmail.com,
  zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com, ajones@ventanamicro.com,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Subject: [PATCH v2 9/9] target/riscv/kvm: add scounteren CSR
-Date: Fri, 25 Apr 2025 08:37:05 -0300
-Message-ID: <20250425113705.2741457-10-dbarboza@ventanamicro.com>
+Subject: [PATCH v2 4/9] target/riscv/kvm: turn kvm_riscv_reg_id_ulong() in a
+ macro
+Date: Fri, 25 Apr 2025 08:37:00 -0300
+Message-ID: <20250425113705.2741457-5-dbarboza@ventanamicro.com>
 X-Mailer: git-send-email 2.49.0
 In-Reply-To: <20250425113705.2741457-1-dbarboza@ventanamicro.com>
 References: <20250425113705.2741457-1-dbarboza@ventanamicro.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::62f;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pl1-x62f.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::633;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pl1-x633.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -101,35 +102,351 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Now that CPURISCVState::scounteren is a target_ulong, add support for
-the scounteren KVM CSR.
+We need the reg_id_ulong() helper to be a macro to be able to create a
+static array of KVMCPUConfig that will hold CSR information.
 
-Reported-by: Andrew Jones <ajones@ventanamicro.com>
+Despite the amount of changes all of them are tedious/trivial:
+
+- replace instances of "kvm_riscv_reg_id_ulong" with
+  "KVM_RISCV_REG_ID_ULONG";
+
+- RISCV_CORE_REG(), RISCV_CSR_REG(), RISCV_CONFIG_REG() and
+  RISCV_VECTOR_CSR_REG() only receives one 'name' arg. Remove unneeded
+  'env' variables when applicable.
+
 Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 ---
- target/riscv/kvm/kvm-cpu.c | 2 ++
- 1 file changed, 2 insertions(+)
+ target/riscv/kvm/kvm-cpu.c | 99 ++++++++++++++++----------------------
+ 1 file changed, 41 insertions(+), 58 deletions(-)
 
 diff --git a/target/riscv/kvm/kvm-cpu.c b/target/riscv/kvm/kvm-cpu.c
-index e37fa38c07..5db63e78e2 100644
+index c91ecdfe59..fd66bc1759 100644
 --- a/target/riscv/kvm/kvm-cpu.c
 +++ b/target/riscv/kvm/kvm-cpu.c
-@@ -250,6 +250,7 @@ static KVMCPUConfig kvm_csr_cfgs[] = {
-     KVM_CSR_CFG("sip", mip, RISCV_CSR_REG(sip)),
-     KVM_CSR_CFG("satp", satp, RISCV_CSR_REG(satp)),
-     KVM_CSR_CFG("senvcfg", senvcfg, RISCV_CSR_REG(senvcfg)),
-+    KVM_CSR_CFG("scounteren", scounteren, RISCV_CSR_REG(scounteren)),
- };
+@@ -64,23 +64,11 @@ static bool cap_has_mp_state;
+ #define KVM_RISCV_REG_ID_U64(type, idx) (KVM_REG_RISCV | KVM_REG_SIZE_U64 | \
+                                          type | idx)
  
- static void *kvmconfig_get_env_addr(RISCVCPU *cpu, KVMCPUConfig *csr_cfg)
-@@ -700,6 +701,7 @@ static void kvm_riscv_reset_regs_csr(CPURISCVState *env)
-     env->mip = 0;
-     env->satp = 0;
-     env->senvcfg = 0;
-+    env->scounteren = 0;
+-static uint64_t kvm_riscv_reg_id_ulong(CPURISCVState *env, uint64_t type,
+-                                 uint64_t idx)
+-{
+-    uint64_t id = KVM_REG_RISCV | type | idx;
+-
+-    switch (riscv_cpu_mxl(env)) {
+-    case MXL_RV32:
+-        id |= KVM_REG_SIZE_U32;
+-        break;
+-    case MXL_RV64:
+-        id |= KVM_REG_SIZE_U64;
+-        break;
+-    default:
+-        g_assert_not_reached();
+-    }
+-    return id;
+-}
++#if defined(TARGET_RISCV64)
++#define KVM_RISCV_REG_ID_ULONG(type, idx) KVM_RISCV_REG_ID_U64(type, idx)
++#else
++#define KVM_RISCV_REG_ID_ULONG(type, idx) KVM_RISCV_REG_ID_U32(type, idx)
++#endif
+ 
+ static uint64_t kvm_encode_reg_size_id(uint64_t id, size_t size_b)
+ {
+@@ -103,16 +91,16 @@ static uint64_t kvm_riscv_vector_reg_id(RISCVCPU *cpu,
+     return kvm_encode_reg_size_id(id, size_b);
  }
  
- static int kvm_riscv_get_regs_fp(CPUState *cs)
+-#define RISCV_CORE_REG(env, name) \
+-    kvm_riscv_reg_id_ulong(env, KVM_REG_RISCV_CORE, \
++#define RISCV_CORE_REG(name) \
++    KVM_RISCV_REG_ID_ULONG(KVM_REG_RISCV_CORE, \
+                            KVM_REG_RISCV_CORE_REG(name))
+ 
+-#define RISCV_CSR_REG(env, name) \
+-    kvm_riscv_reg_id_ulong(env, KVM_REG_RISCV_CSR, \
++#define RISCV_CSR_REG(name) \
++    KVM_RISCV_REG_ID_ULONG(KVM_REG_RISCV_CSR, \
+                            KVM_REG_RISCV_CSR_REG(name))
+ 
+-#define RISCV_CONFIG_REG(env, name) \
+-    kvm_riscv_reg_id_ulong(env, KVM_REG_RISCV_CONFIG, \
++#define RISCV_CONFIG_REG(name) \
++    KVM_RISCV_REG_ID_ULONG(KVM_REG_RISCV_CONFIG, \
+                            KVM_REG_RISCV_CONFIG_REG(name))
+ 
+ #define RISCV_TIMER_REG(name)  KVM_RISCV_REG_ID_U64(KVM_REG_RISCV_TIMER, \
+@@ -122,13 +110,13 @@ static uint64_t kvm_riscv_vector_reg_id(RISCVCPU *cpu,
+ 
+ #define RISCV_FP_D_REG(idx)  KVM_RISCV_REG_ID_U64(KVM_REG_RISCV_FP_D, idx)
+ 
+-#define RISCV_VECTOR_CSR_REG(env, name) \
+-    kvm_riscv_reg_id_ulong(env, KVM_REG_RISCV_VECTOR, \
++#define RISCV_VECTOR_CSR_REG(name) \
++    KVM_RISCV_REG_ID_ULONG(KVM_REG_RISCV_VECTOR, \
+                            KVM_REG_RISCV_VECTOR_CSR_REG(name))
+ 
+ #define KVM_RISCV_GET_CSR(cs, env, csr, reg) \
+     do { \
+-        int _ret = kvm_get_one_reg(cs, RISCV_CSR_REG(env, csr), &reg); \
++        int _ret = kvm_get_one_reg(cs, RISCV_CSR_REG(csr), &reg); \
+         if (_ret) { \
+             return _ret; \
+         } \
+@@ -136,7 +124,7 @@ static uint64_t kvm_riscv_vector_reg_id(RISCVCPU *cpu,
+ 
+ #define KVM_RISCV_SET_CSR(cs, env, csr, reg) \
+     do { \
+-        int _ret = kvm_set_one_reg(cs, RISCV_CSR_REG(env, csr), &reg); \
++        int _ret = kvm_set_one_reg(cs, RISCV_CSR_REG(csr), &reg); \
+         if (_ret) { \
+             return _ret; \
+         } \
+@@ -244,7 +232,7 @@ static void kvm_riscv_update_cpu_misa_ext(RISCVCPU *cpu, CPUState *cs)
+ 
+         /* If we're here we're going to disable the MISA bit */
+         reg = 0;
+-        id = kvm_riscv_reg_id_ulong(env, KVM_REG_RISCV_ISA_EXT,
++        id = KVM_RISCV_REG_ID_ULONG(KVM_REG_RISCV_ISA_EXT,
+                                     misa_cfg->kvm_reg_id);
+         ret = kvm_set_one_reg(cs, id, &reg);
+         if (ret != 0) {
+@@ -430,7 +418,6 @@ static KVMCPUConfig kvm_sbi_dbcn = {
+ 
+ static void kvm_riscv_update_cpu_cfg_isa_ext(RISCVCPU *cpu, CPUState *cs)
+ {
+-    CPURISCVState *env = &cpu->env;
+     uint64_t id, reg;
+     int i, ret;
+ 
+@@ -441,7 +428,7 @@ static void kvm_riscv_update_cpu_cfg_isa_ext(RISCVCPU *cpu, CPUState *cs)
+             continue;
+         }
+ 
+-        id = kvm_riscv_reg_id_ulong(env, KVM_REG_RISCV_ISA_EXT,
++        id = KVM_RISCV_REG_ID_ULONG(KVM_REG_RISCV_ISA_EXT,
+                                     multi_ext_cfg->kvm_reg_id);
+         reg = kvm_cpu_cfg_get(cpu, multi_ext_cfg);
+         ret = kvm_set_one_reg(cs, id, &reg);
+@@ -566,14 +553,14 @@ static int kvm_riscv_get_regs_core(CPUState *cs)
+     target_ulong reg;
+     CPURISCVState *env = &RISCV_CPU(cs)->env;
+ 
+-    ret = kvm_get_one_reg(cs, RISCV_CORE_REG(env, regs.pc), &reg);
++    ret = kvm_get_one_reg(cs, RISCV_CORE_REG(regs.pc), &reg);
+     if (ret) {
+         return ret;
+     }
+     env->pc = reg;
+ 
+     for (i = 1; i < 32; i++) {
+-        uint64_t id = kvm_riscv_reg_id_ulong(env, KVM_REG_RISCV_CORE, i);
++        uint64_t id = KVM_RISCV_REG_ID_ULONG(KVM_REG_RISCV_CORE, i);
+         ret = kvm_get_one_reg(cs, id, &reg);
+         if (ret) {
+             return ret;
+@@ -592,13 +579,13 @@ static int kvm_riscv_put_regs_core(CPUState *cs)
+     CPURISCVState *env = &RISCV_CPU(cs)->env;
+ 
+     reg = env->pc;
+-    ret = kvm_set_one_reg(cs, RISCV_CORE_REG(env, regs.pc), &reg);
++    ret = kvm_set_one_reg(cs, RISCV_CORE_REG(regs.pc), &reg);
+     if (ret) {
+         return ret;
+     }
+ 
+     for (i = 1; i < 32; i++) {
+-        uint64_t id = kvm_riscv_reg_id_ulong(env, KVM_REG_RISCV_CORE, i);
++        uint64_t id = KVM_RISCV_REG_ID_ULONG(KVM_REG_RISCV_CORE, i);
+         reg = env->gpr[i];
+         ret = kvm_set_one_reg(cs, id, &reg);
+         if (ret) {
+@@ -796,26 +783,26 @@ static int kvm_riscv_get_regs_vector(CPUState *cs)
+         return 0;
+     }
+ 
+-    ret = kvm_get_one_reg(cs, RISCV_VECTOR_CSR_REG(env, vstart), &reg);
++    ret = kvm_get_one_reg(cs, RISCV_VECTOR_CSR_REG(vstart), &reg);
+     if (ret) {
+         return ret;
+     }
+     env->vstart = reg;
+ 
+-    ret = kvm_get_one_reg(cs, RISCV_VECTOR_CSR_REG(env, vl), &reg);
++    ret = kvm_get_one_reg(cs, RISCV_VECTOR_CSR_REG(vl), &reg);
+     if (ret) {
+         return ret;
+     }
+     env->vl = reg;
+ 
+-    ret = kvm_get_one_reg(cs, RISCV_VECTOR_CSR_REG(env, vtype), &reg);
++    ret = kvm_get_one_reg(cs, RISCV_VECTOR_CSR_REG(vtype), &reg);
+     if (ret) {
+         return ret;
+     }
+     env->vtype = reg;
+ 
+     if (kvm_v_vlenb.supported) {
+-        ret = kvm_get_one_reg(cs, RISCV_VECTOR_CSR_REG(env, vlenb), &reg);
++        ret = kvm_get_one_reg(cs, RISCV_VECTOR_CSR_REG(vlenb), &reg);
+         if (ret) {
+             return ret;
+         }
+@@ -853,26 +840,26 @@ static int kvm_riscv_put_regs_vector(CPUState *cs)
+     }
+ 
+     reg = env->vstart;
+-    ret = kvm_set_one_reg(cs, RISCV_VECTOR_CSR_REG(env, vstart), &reg);
++    ret = kvm_set_one_reg(cs, RISCV_VECTOR_CSR_REG(vstart), &reg);
+     if (ret) {
+         return ret;
+     }
+ 
+     reg = env->vl;
+-    ret = kvm_set_one_reg(cs, RISCV_VECTOR_CSR_REG(env, vl), &reg);
++    ret = kvm_set_one_reg(cs, RISCV_VECTOR_CSR_REG(vl), &reg);
+     if (ret) {
+         return ret;
+     }
+ 
+     reg = env->vtype;
+-    ret = kvm_set_one_reg(cs, RISCV_VECTOR_CSR_REG(env, vtype), &reg);
++    ret = kvm_set_one_reg(cs, RISCV_VECTOR_CSR_REG(vtype), &reg);
+     if (ret) {
+         return ret;
+     }
+ 
+     if (kvm_v_vlenb.supported) {
+         reg = cpu->cfg.vlenb;
+-        ret = kvm_set_one_reg(cs, RISCV_VECTOR_CSR_REG(env, vlenb), &reg);
++        ret = kvm_set_one_reg(cs, RISCV_VECTOR_CSR_REG(vlenb), &reg);
+ 
+         for (int i = 0; i < 32; i++) {
+             /*
+@@ -951,25 +938,24 @@ static void kvm_riscv_destroy_scratch_vcpu(KVMScratchCPU *scratch)
+ 
+ static void kvm_riscv_init_machine_ids(RISCVCPU *cpu, KVMScratchCPU *kvmcpu)
+ {
+-    CPURISCVState *env = &cpu->env;
+     struct kvm_one_reg reg;
+     int ret;
+ 
+-    reg.id = RISCV_CONFIG_REG(env, mvendorid);
++    reg.id = RISCV_CONFIG_REG(mvendorid);
+     reg.addr = (uint64_t)&cpu->cfg.mvendorid;
+     ret = ioctl(kvmcpu->cpufd, KVM_GET_ONE_REG, &reg);
+     if (ret != 0) {
+         error_report("Unable to retrieve mvendorid from host, error %d", ret);
+     }
+ 
+-    reg.id = RISCV_CONFIG_REG(env, marchid);
++    reg.id = RISCV_CONFIG_REG(marchid);
+     reg.addr = (uint64_t)&cpu->cfg.marchid;
+     ret = ioctl(kvmcpu->cpufd, KVM_GET_ONE_REG, &reg);
+     if (ret != 0) {
+         error_report("Unable to retrieve marchid from host, error %d", ret);
+     }
+ 
+-    reg.id = RISCV_CONFIG_REG(env, mimpid);
++    reg.id = RISCV_CONFIG_REG(mimpid);
+     reg.addr = (uint64_t)&cpu->cfg.mimpid;
+     ret = ioctl(kvmcpu->cpufd, KVM_GET_ONE_REG, &reg);
+     if (ret != 0) {
+@@ -984,7 +970,7 @@ static void kvm_riscv_init_misa_ext_mask(RISCVCPU *cpu,
+     struct kvm_one_reg reg;
+     int ret;
+ 
+-    reg.id = RISCV_CONFIG_REG(env, isa);
++    reg.id = RISCV_CONFIG_REG(isa);
+     reg.addr = (uint64_t)&env->misa_ext_mask;
+     ret = ioctl(kvmcpu->cpufd, KVM_GET_ONE_REG, &reg);
+ 
+@@ -1001,11 +987,10 @@ static void kvm_riscv_init_misa_ext_mask(RISCVCPU *cpu,
+ static void kvm_riscv_read_cbomz_blksize(RISCVCPU *cpu, KVMScratchCPU *kvmcpu,
+                                          KVMCPUConfig *cbomz_cfg)
+ {
+-    CPURISCVState *env = &cpu->env;
+     struct kvm_one_reg reg;
+     int ret;
+ 
+-    reg.id = kvm_riscv_reg_id_ulong(env, KVM_REG_RISCV_CONFIG,
++    reg.id = KVM_RISCV_REG_ID_ULONG(KVM_REG_RISCV_CONFIG,
+                                     cbomz_cfg->kvm_reg_id);
+     reg.addr = (uint64_t)kvmconfig_get_cfg_addr(cpu, cbomz_cfg);
+     ret = ioctl(kvmcpu->cpufd, KVM_GET_ONE_REG, &reg);
+@@ -1019,7 +1004,6 @@ static void kvm_riscv_read_cbomz_blksize(RISCVCPU *cpu, KVMScratchCPU *kvmcpu,
+ static void kvm_riscv_read_multiext_legacy(RISCVCPU *cpu,
+                                            KVMScratchCPU *kvmcpu)
+ {
+-    CPURISCVState *env = &cpu->env;
+     uint64_t val;
+     int i, ret;
+ 
+@@ -1027,7 +1011,7 @@ static void kvm_riscv_read_multiext_legacy(RISCVCPU *cpu,
+         KVMCPUConfig *multi_ext_cfg = &kvm_multi_ext_cfgs[i];
+         struct kvm_one_reg reg;
+ 
+-        reg.id = kvm_riscv_reg_id_ulong(env, KVM_REG_RISCV_ISA_EXT,
++        reg.id = KVM_RISCV_REG_ID_ULONG(KVM_REG_RISCV_ISA_EXT,
+                                         multi_ext_cfg->kvm_reg_id);
+         reg.addr = (uint64_t)&val;
+         ret = ioctl(kvmcpu->cpufd, KVM_GET_ONE_REG, &reg);
+@@ -1159,7 +1143,7 @@ static void kvm_riscv_init_multiext_cfg(RISCVCPU *cpu, KVMScratchCPU *kvmcpu)
+ 
+     for (i = 0; i < ARRAY_SIZE(kvm_multi_ext_cfgs); i++) {
+         multi_ext_cfg = &kvm_multi_ext_cfgs[i];
+-        reg_id = kvm_riscv_reg_id_ulong(&cpu->env, KVM_REG_RISCV_ISA_EXT,
++        reg_id = KVM_RISCV_REG_ID_ULONG(KVM_REG_RISCV_ISA_EXT,
+                                         multi_ext_cfg->kvm_reg_id);
+         reg_search = bsearch(&reg_id, reglist->reg, reglist->n,
+                              sizeof(uint64_t), uint64_cmp);
+@@ -1338,12 +1322,11 @@ void kvm_arch_init_irq_routing(KVMState *s)
+ 
+ static int kvm_vcpu_set_machine_ids(RISCVCPU *cpu, CPUState *cs)
+ {
+-    CPURISCVState *env = &cpu->env;
+     target_ulong reg;
+     uint64_t id;
+     int ret;
+ 
+-    id = RISCV_CONFIG_REG(env, mvendorid);
++    id = RISCV_CONFIG_REG(mvendorid);
+     /*
+      * cfg.mvendorid is an uint32 but a target_ulong will
+      * be written. Assign it to a target_ulong var to avoid
+@@ -1355,13 +1338,13 @@ static int kvm_vcpu_set_machine_ids(RISCVCPU *cpu, CPUState *cs)
+         return ret;
+     }
+ 
+-    id = RISCV_CONFIG_REG(env, marchid);
++    id = RISCV_CONFIG_REG(marchid);
+     ret = kvm_set_one_reg(cs, id, &cpu->cfg.marchid);
+     if (ret != 0) {
+         return ret;
+     }
+ 
+-    id = RISCV_CONFIG_REG(env, mimpid);
++    id = RISCV_CONFIG_REG(mimpid);
+     ret = kvm_set_one_reg(cs, id, &cpu->cfg.mimpid);
+ 
+     return ret;
+@@ -1911,7 +1894,7 @@ void riscv_kvm_cpu_finalize_features(RISCVCPU *cpu, Error **errp)
+     if (cpu->cfg.ext_zicbom &&
+         riscv_cpu_option_set(kvm_cbom_blocksize.name)) {
+ 
+-        reg.id = kvm_riscv_reg_id_ulong(env, KVM_REG_RISCV_CONFIG,
++        reg.id = KVM_RISCV_REG_ID_ULONG(KVM_REG_RISCV_CONFIG,
+                                         kvm_cbom_blocksize.kvm_reg_id);
+         reg.addr = (uint64_t)&val;
+         ret = ioctl(kvmcpu.cpufd, KVM_GET_ONE_REG, &reg);
+@@ -1930,7 +1913,7 @@ void riscv_kvm_cpu_finalize_features(RISCVCPU *cpu, Error **errp)
+     if (cpu->cfg.ext_zicboz &&
+         riscv_cpu_option_set(kvm_cboz_blocksize.name)) {
+ 
+-        reg.id = kvm_riscv_reg_id_ulong(env, KVM_REG_RISCV_CONFIG,
++        reg.id = KVM_RISCV_REG_ID_ULONG(KVM_REG_RISCV_CONFIG,
+                                         kvm_cboz_blocksize.kvm_reg_id);
+         reg.addr = (uint64_t)&val;
+         ret = ioctl(kvmcpu.cpufd, KVM_GET_ONE_REG, &reg);
 -- 
 2.49.0
 
