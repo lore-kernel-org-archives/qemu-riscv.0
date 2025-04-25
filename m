@@ -4,47 +4,47 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 94A93C369C2
-	for <qemu-riscv@archiver.kernel.org>; Fri, 25 Apr 2025 08:08:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AE5BDC369C2
+	for <qemu-riscv@archiver.kernel.org>; Fri, 25 Apr 2025 08:36:20 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1u8E6n-0007e2-VW; Fri, 25 Apr 2025 04:08:30 -0400
+	id 1u8EX6-00084x-3C; Fri, 25 Apr 2025 04:35:40 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhao1.liu@intel.com>)
- id 1u8E6c-0007b5-Q1; Fri, 25 Apr 2025 04:08:20 -0400
-Received: from mgamail.intel.com ([198.175.65.17])
+ id 1u8EWz-00082f-K1; Fri, 25 Apr 2025 04:35:33 -0400
+Received: from mgamail.intel.com ([198.175.65.10])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhao1.liu@intel.com>)
- id 1u8E6Z-00076N-Q5; Fri, 25 Apr 2025 04:08:18 -0400
+ id 1u8EWw-0001nb-MR; Fri, 25 Apr 2025 04:35:33 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1745568496; x=1777104496;
+ t=1745570131; x=1777106131;
  h=date:from:to:cc:subject:message-id:references:
  mime-version:in-reply-to;
- bh=5KRtg0VP7RhePb2K1+43zCTF9YsbA4O/PrqeshZCb4w=;
- b=PK8aNYUoJuEx4LxX7TElVXurQieQYMXXBpZ3RGL36kmUPFlTlYXN4Mha
- HMVqFPQXubFI594kxQ97k+LFMGdCIHDb+Xb/y8ITMc6CJUMRWD74YDUbd
- iW9OWls00TXQpyvBYEcJrBWo7CMsa/2Q5XFn/t2502em5xy8USXgPurWK
- 7WsY72cp9g4Eeq7Kzr2Vd6RU6ggLwFgB3Wbc8E7h8HnJI0ezB4QzlP5CL
- wwVmSzAWMROfubCWVicGrSF6QgL0AlEBV2K1X1yQwj87JAJvlidq7xinW
- pW/fOUMix+HS2QJKWLEJtDpj5bRGBLJ9mS0g3QX5To1nBbhbm8RTbhkyQ w==;
-X-CSE-ConnectionGUID: du0OzITwRR+C1HZ2bU/X4g==
-X-CSE-MsgGUID: e94w0k4vTQm5BU4pp/Z1lg==
-X-IronPort-AV: E=McAfee;i="6700,10204,11413"; a="47240146"
-X-IronPort-AV: E=Sophos;i="6.15,238,1739865600"; d="scan'208";a="47240146"
-Received: from orviesa002.jf.intel.com ([10.64.159.142])
- by orvoesa109.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 25 Apr 2025 01:08:09 -0700
-X-CSE-ConnectionGUID: 2BKS4ujcSP2OGoMmWUBd1w==
-X-CSE-MsgGUID: BElnjdbdSySYVUcokWJU+A==
+ bh=RwMNTg3WBWQ4a8WIx76dSHsYi7CDIjlLKh74S0G5rbQ=;
+ b=T/Yj7Lg5q4oeLJERXoGmrqXl+nfnt/t/fr9hOHN1Emaz/7SM15Ktov5C
+ Zz6iBuegh1R4O26wbmH1cL00e88Lxir5OyuzTeyp95S+tMvJ81OZa6pWR
+ MKe/a4KfIywGHxVV8AyG9h/CG7Yx+EP8rJPn/ftOjwUQHHcWl+PPzeKHW
+ kZWug683c8dFgoZOM4kgxNWMcD4qUOEZ6Mf1MqdMpFcmpIsQZYjCpEQ2c
+ 0oxeY6asrYtZbH56BXFtYSw/XxItevm0wRtnFdX5dOkwmWSKHa1ioVfl6
+ 2/RVf5DB59RW1shWbCHtpDFKVmJJibAUkbp3HV7DnolKPJ8i+bG+5dlT5 Q==;
+X-CSE-ConnectionGUID: xFcDNXcBRE+dXNFmDmAfAg==
+X-CSE-MsgGUID: HYmCwiU5Snm22pW8vaIsiw==
+X-IronPort-AV: E=McAfee;i="6700,10204,11413"; a="64643809"
+X-IronPort-AV: E=Sophos;i="6.15,238,1739865600"; d="scan'208";a="64643809"
+Received: from orviesa010.jf.intel.com ([10.64.159.150])
+ by orvoesa102.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 25 Apr 2025 01:35:26 -0700
+X-CSE-ConnectionGUID: cqhfZVHdRK+lj3h0O7mKlQ==
+X-CSE-MsgGUID: 419sEBXVT3GtDZNwsfRe7Q==
 X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.15,238,1739865600"; d="scan'208";a="163808291"
+X-IronPort-AV: E=Sophos;i="6.15,238,1739865600"; d="scan'208";a="132730130"
 Received: from liuzhao-optiplex-7080.sh.intel.com (HELO localhost)
  ([10.239.160.39])
- by orviesa002.jf.intel.com with ESMTP; 25 Apr 2025 01:07:59 -0700
-Date: Fri, 25 Apr 2025 16:28:54 +0800
+ by orviesa010.jf.intel.com with ESMTP; 25 Apr 2025 01:35:12 -0700
+Date: Fri, 25 Apr 2025 16:56:10 +0800
 From: Zhao Liu <zhao1.liu@intel.com>
 To: Dongli Zhang <dongli.zhang@oracle.com>
 Cc: qemu-devel@nongnu.org, kvm@vger.kernel.org, qemu-arm@nongnu.org,
@@ -66,16 +66,15 @@ Cc: qemu-devel@nongnu.org, kvm@vger.kernel.org, qemu-arm@nongnu.org,
  ewanhai@zhaoxin.com, cobechen@zhaoxin.com, louisqi@zhaoxin.com,
  liamni@zhaoxin.com, frankzhu@zhaoxin.com, silviazhao@zhaoxin.com,
  kraxel@redhat.com, berrange@redhat.com
-Subject: Re: [PATCH v4 01/11] [DO NOT MERGE] i386/cpu: Consolidate the helper
- to get Host's vendor
-Message-ID: <aAtHxmpV7ka1lseC@intel.com>
+Subject: Re: [PATCH v4 08/11] target/i386/kvm: query kvm.enable_pmu parameter
+Message-ID: <aAtOKvlY+X8ERZ/S@intel.com>
 References: <20250416215306.32426-1-dongli.zhang@oracle.com>
- <20250416215306.32426-2-dongli.zhang@oracle.com>
+ <20250416215306.32426-9-dongli.zhang@oracle.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20250416215306.32426-2-dongli.zhang@oracle.com>
-Received-SPF: pass client-ip=198.175.65.17; envelope-from=zhao1.liu@intel.com;
+In-Reply-To: <20250416215306.32426-9-dongli.zhang@oracle.com>
+Received-SPF: pass client-ip=198.175.65.10; envelope-from=zhao1.liu@intel.com;
  helo=mgamail.intel.com
 X-Spam_score_int: -51
 X-Spam_score: -5.2
@@ -100,29 +99,37 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Wed, Apr 16, 2025 at 02:52:26PM -0700, Dongli Zhang wrote:
-> Date: Wed, 16 Apr 2025 14:52:26 -0700
+On Wed, Apr 16, 2025 at 02:52:33PM -0700, Dongli Zhang wrote:
+> Date: Wed, 16 Apr 2025 14:52:33 -0700
 > From: Dongli Zhang <dongli.zhang@oracle.com>
-> Subject: [PATCH v4 01/11] [DO NOT MERGE] i386/cpu: Consolidate the helper
->  to get Host's vendor
+> Subject: [PATCH v4 08/11] target/i386/kvm: query kvm.enable_pmu parameter
 > X-Mailer: git-send-email 2.43.5
 > 
-> From: Zhao Liu <zhao1.liu@intel.com>
+> When PMU is enabled in QEMU, there is a chance that PMU virtualization is
+> completely disabled by the KVM module parameter kvm.enable_pmu=N.
 > 
-> Extend host_cpu_vendor_fms() to help more cases to get Host's vendor
-> information.
+> The kvm.enable_pmu parameter is introduced since Linux v5.17.
+> Its permission is 0444. It does not change until a reload of the KVM
+> module.
 > 
-> Cc: Dongli Zhang <dongli.zhang@oracle.com>
-> Signed-off-by: Zhao Liu <zhao1.liu@intel.com>
+> Read the kvm.enable_pmu value from the module sysfs to give a chance to
+> provide more information about vPMU enablement.
+> 
+> Signed-off-by: Dongli Zhang <dongli.zhang@oracle.com>
 > ---
-> This patch is already queued by Paolo.
-> https://lore.kernel.org/all/20250410075619.145792-1-zhao1.liu@intel.com/
-> I don't need to add my Signed-off-by.
+> Changed since v2:
+>   - Rework the code flow following Zhao's suggestion.
+>   - Return error when:
+>     (*kvm_enable_pmu == 'N' && X86_CPU(cpu)->enable_pmu)
+> Changed since v3:
+>   - Re-split the cases into enable_pmu and !enable_pmu, following Zhao's
+>     suggestion.
+>   - Rework the commit messages.
+>   - Bring back global static variable 'kvm_pmu_disabled' from v2.
 > 
->  target/i386/host-cpu.c        | 10 ++++++----
->  target/i386/kvm/vmsr_energy.c |  3 +--
->  2 files changed, 7 insertions(+), 6 deletions(-)
+>  target/i386/kvm/kvm.c | 61 +++++++++++++++++++++++++++++++------------
+>  1 file changed, 44 insertions(+), 17 deletions(-)
 
-Thanks. It has been merged as commit ae39acef49e2916 now.
+Reviewed-by: Zhao Liu <zhao1.liu@intel.com>
 
 
