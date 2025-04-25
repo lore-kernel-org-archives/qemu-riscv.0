@@ -4,72 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D3925C369C2
-	for <qemu-riscv@archiver.kernel.org>; Fri, 25 Apr 2025 15:23:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3CEE3C369C2
+	for <qemu-riscv@archiver.kernel.org>; Fri, 25 Apr 2025 15:24:10 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1u8Ktc-0001dF-Jj; Fri, 25 Apr 2025 11:23:20 -0400
+	id 1u8Ktk-0001kF-6e; Fri, 25 Apr 2025 11:23:28 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1u8Kta-0001cQ-Pa
- for qemu-riscv@nongnu.org; Fri, 25 Apr 2025 11:23:18 -0400
+ id 1u8Ktg-0001go-FR
+ for qemu-riscv@nongnu.org; Fri, 25 Apr 2025 11:23:24 -0400
 Received: from mail-pf1-x42e.google.com ([2607:f8b0:4864:20::42e])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1u8KtY-0002og-5e
- for qemu-riscv@nongnu.org; Fri, 25 Apr 2025 11:23:18 -0400
+ id 1u8Ktd-0002qR-R6
+ for qemu-riscv@nongnu.org; Fri, 25 Apr 2025 11:23:24 -0400
 Received: by mail-pf1-x42e.google.com with SMTP id
- d2e1a72fcca58-7399a2dc13fso3285684b3a.2
- for <qemu-riscv@nongnu.org>; Fri, 25 Apr 2025 08:23:15 -0700 (PDT)
+ d2e1a72fcca58-7399838db7fso2584220b3a.0
+ for <qemu-riscv@nongnu.org>; Fri, 25 Apr 2025 08:23:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1745594595; x=1746199395; darn=nongnu.org;
+ d=linaro.org; s=google; t=1745594598; x=1746199398; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=8BkGqEuOn61y/rqWawhxPHU+tldQWor40BhhDmmwEXQ=;
- b=SsBbCtFIw5iTUa0ymAkHo66jiTp5kKdO9N01HHUXtHnfwNJbkNqI6i6RstPmmyFDnT
- aSVhvlbHW+Yjt6NdJk8So55h0cY17MRmT5B01w4ASRm8ZGW1PF6FAnOlqYXLk5I/8JWZ
- n2iVgKNrT7QY26YPJIb/7YQhueq07XsxJ/X3gBSl/y0X/HO5KDB2u7NYEPGrzIrpxJAO
- 4rEcKHqPR/Y0GuFP89jO+rSk6ON4PnwFiASILyr4kLbXVXE3kKk6siau7SyeESE98C8U
- jer68v5Wyay7R5YruE6m0dRjflcSj70vgvtu9N9yJa42SRE0SWuBTTnCkjgHt07POKQP
- X6sQ==
+ bh=Gj1TznuRCvGs0CqAqeiTcoQslN5U+5zXVdqj/kfvErI=;
+ b=KB1mvoOpcahpai4bRzMx2zi3n+pKeW82PlJawGwMV7yXEYgnPB5u6q2wLkTT9i/O/Z
+ EVEZDfAEcQwIO51tF527kmhU8T9gO1JBnA0N0+9saNJGCICPog7R9ONsWHuejILn6DI/
+ Ez5Ai1Xfz/kyUPMLFlhGMXH2okXPcYmDbeRRdOd248reC8bbwytnsS0qOJcphg0+JLt6
+ x8n2tF4ZtFWUkR3H+q1XYMzEr2LflNP2MoC4sO6QdIQwZqIfxqJUmAGsiZY27qtQi6bc
+ Tt4aMSKKqyQPHXvHM2A3R7HUWYx42K620n4Tzf/oDF151Q2Cz0lbLkKRLfCKyD1AMzwZ
+ kt0Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1745594595; x=1746199395;
+ d=1e100.net; s=20230601; t=1745594598; x=1746199398;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=8BkGqEuOn61y/rqWawhxPHU+tldQWor40BhhDmmwEXQ=;
- b=JMPR2YRj1F+kx2QMutClCNK+N+0DfQkxArcKqNpo0wtmh1Htw80inKkFu4HnkgMMkK
- zj44gyi6BkulAmvyktJ3Hxazjw9HFDhcBoFRFNy53LbBZH4wO4mHPAQJ7tDM8nDNxaG2
- FtbdOYEPitofmgad94WUpos5z27Ub7yBz6Bt6QznlxJTSR3LR3s/zwbDHgqgW95RYLYH
- nT44NKMBDz7FJfG/Oc8RvrJK+I1R9ssrNgzGgFOPw7asoLYwXF5tjhRL9AqSKzbmk/zr
- BaAFSxNI4YjqcbAd2DjzzwjzlpQARzKPaZeWxJiRduYnt8RlsfQajJs/JEN84eSCT9gw
- bpVw==
-X-Gm-Message-State: AOJu0Yw+KQY2CK6PYaPXvSMkAsDe7L8QzzBSAexScrLKsBWmEzk8J/xb
- +95LY24ty0o+SqGY8pe4s+JRg4b0Oxun0lvZvYpJZYNIXUy0ynSJeKCGYFm/v3g=
-X-Gm-Gg: ASbGnctoPkq72+5liREgnWhAYbB+lnlJfZFmguFPOEzUgwjW2A5q/SOM7iySRp6EsoF
- U2H5N/K87BGcuR0u74Wo4Vze+i44i4H13Ud5p/nSOGu8vxt8gN4zrf6iRX+L0+/6GVrrBfpMKF3
- quLg3jRN3nZcFsCJvUjx4f1WoFvMRtSxQ4qV56j5vDRp3Ou8C35qJq93YOOWsr5/wyZs1Dl18MG
- mt7f8hDq5ZR3zWONCZFSwwiz+PzKwX0rIT4SAecd2LIwhNUusvwMco0U5SQp+TsapbgGDGSFX0f
- ll4kgCunKJBJem+RefzTC04itl/PbV5n4DUMsGZ8yGUKCXcSiR29mz0OSZM6FIUT+W0IovSqte0
+ bh=Gj1TznuRCvGs0CqAqeiTcoQslN5U+5zXVdqj/kfvErI=;
+ b=oiQVwnftf4Xmr9swRAu06cW1XoK9/o4GDonGfppHTKj0BXGVCAMZTjzEggiCwDsro9
+ JFa2wGaePByoBx12yqHm8CCCxEeAC29B8E5w4GdPM18tRDJWVQ2HBMtFnZtoTlfXRPm6
+ tSr71UMosDx4Bb2Jf1MtGB2aueGWJEvk5JwAA9z6LBri9Q/ueRT6i/6nEeQDKUQFqvGW
+ 9rUVHTCXegZ5IUmUM+52BJ8JVRKK1AJ79WMeey1AsSOmuet26pAZyOGG/Dy7ro3WlWaJ
+ yxINJ6X0RtPbEkIv3gGS0hcLxlO5VmivWZVBfLXJe+VOcVDqxhf/gkfXVzp0XIJyYWSh
+ IyWQ==
+X-Gm-Message-State: AOJu0YzhnC+pkOJS0IobEW94tixr8R0CTARhXYnIuJzRldvf3LecKBsl
+ 5kJiCgWbk+Gyu8NNSwdu11+EdtrSqap5j/DCLl0gqdi4Py69Vu4TTSODDc62Sag=
+X-Gm-Gg: ASbGncusLsJAw5E1YvqmZDMC9hn+1fZia3vgS6K3YS97qnVIa5PZ1acYDPNpEDjQrgA
+ +6syidNpVPCpENyQqfp3jbLjVcdbs7LfOgcAUQiyB47byGlhTGCXULriQDJ5u07jS8EC08QbTJu
+ IfDJvP72hUexx7R0Pb8d8rkq95aHcI1Gay02RSNOA33PmGBR39pwYtQnJyzzZJ3uSKlI/1NR21U
+ /X7DN6opfgKJLgMIHJYhUQrGEIANXueHppDrqKlyeV4fyrzoDN2wDarcChJaH/ZwGj4dRPInI+i
+ GT/4BiegiTlEN8NXcnG+SBw8k4Jwm5Pt3CboAT2IZVxN//x5Ks7HZUCZWwZPzruz6MnF9JBOehI
  =
-X-Google-Smtp-Source: AGHT+IELV9pyia/nUpY3IQu+MOC4wI1IVoRqDgI26PXiGTuNeLoObFH+TkGyiarZXK4cngWJ0SvQ9w==
-X-Received: by 2002:a05:6a00:18a2:b0:73e:598:7e5b with SMTP id
- d2e1a72fcca58-73fd6af4105mr3402564b3a.1.1745594594677; 
- Fri, 25 Apr 2025 08:23:14 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IHlpTJ5GWn6gG2zhioZwB3wxKSuwTAio2KDzURoJmoOdGD1WB6S+fGML5Si6lQzViQU+sr9yg==
+X-Received: by 2002:aa7:880a:0:b0:736:b923:5323 with SMTP id
+ d2e1a72fcca58-73e268ef417mr8849538b3a.10.1745594598552; 
+ Fri, 25 Apr 2025 08:23:18 -0700 (PDT)
 Received: from stoup.. (71-212-47-143.tukw.qwest.net. [71.212.47.143])
  by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-73e25a6a49esm3390466b3a.106.2025.04.25.08.23.14
+ d2e1a72fcca58-73e25a6a49esm3390466b3a.106.2025.04.25.08.23.17
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 25 Apr 2025 08:23:14 -0700 (PDT)
+ Fri, 25 Apr 2025 08:23:18 -0700 (PDT)
 From: Richard Henderson <richard.henderson@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, dbarboza@ventanamicro.com
-Subject: [PATCH 2/7] target/riscv: Pass ra to riscv_csrrw_do64
-Date: Fri, 25 Apr 2025 08:23:06 -0700
-Message-ID: <20250425152311.804338-3-richard.henderson@linaro.org>
+Subject: [PATCH 7/7] target/riscv: Fix write_misa vs aligned next_pc
+Date: Fri, 25 Apr 2025 08:23:11 -0700
+Message-ID: <20250425152311.804338-8-richard.henderson@linaro.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250425152311.804338-1-richard.henderson@linaro.org>
 References: <20250425152311.804338-1-richard.henderson@linaro.org>
@@ -83,7 +83,7 @@ X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -99,72 +99,62 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
+Do not examine a random host return address, but
+properly compute the next pc for the guest cpu.
+
+Fixes: f18637cd611 ("RISC-V: Add misa runtime write support")
 Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
 ---
- target/riscv/csr.c | 15 +++++++--------
- 1 file changed, 7 insertions(+), 8 deletions(-)
+ target/riscv/csr.c | 22 +++++++++++++++++-----
+ 1 file changed, 17 insertions(+), 5 deletions(-)
 
 diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-index 6f1f69eba6..e9c2f95b6e 100644
+index a663f527a4..85f9b4c3d2 100644
 --- a/target/riscv/csr.c
 +++ b/target/riscv/csr.c
-@@ -5516,7 +5516,8 @@ static inline RISCVException riscv_csrrw_check(CPURISCVState *env,
- static RISCVException riscv_csrrw_do64(CPURISCVState *env, int csrno,
-                                        target_ulong *ret_value,
-                                        target_ulong new_value,
--                                       target_ulong write_mask)
-+                                       target_ulong write_mask,
-+                                       uintptr_t ra)
+@@ -30,6 +30,8 @@
+ #include "exec/icount.h"
+ #include "qemu/guest-random.h"
+ #include "qapi/error.h"
++#include "tcg/insn-start-words.h"
++#include "internals.h"
+ #include <stdbool.h>
+ 
+ /* CSR function table public API */
+@@ -2099,6 +2101,19 @@ static RISCVException read_misa(CPURISCVState *env, int csrno,
+     return RISCV_EXCP_NONE;
+ }
+ 
++static target_ulong get_next_pc(CPURISCVState *env, uintptr_t ra)
++{
++    uint64_t data[TARGET_INSN_START_WORDS];
++
++    /* Outside of a running cpu, env contains the next pc. */
++    if (ra == 0 || !cpu_unwind_state_data(env_cpu(env), ra, data)) {
++        return env->pc;
++    }
++
++    /* Within unwind data, [0] is pc and [1] is the opcode. */
++    return data[0] + insn_len(data[1]);
++}
++
+ static RISCVException write_misa(CPURISCVState *env, int csrno,
+                                  target_ulong val, uintptr_t ra)
  {
-     RISCVException ret;
-     target_ulong old_value = 0;
-@@ -5546,7 +5547,7 @@ static RISCVException riscv_csrrw_do64(CPURISCVState *env, int csrno,
-     if (write_mask) {
-         new_value = (old_value & ~write_mask) | (new_value & write_mask);
-         if (csr_ops[csrno].write) {
--            ret = csr_ops[csrno].write(env, csrno, new_value, 0);
-+            ret = csr_ops[csrno].write(env, csrno, new_value, ra);
-             if (ret != RISCV_EXCP_NONE) {
-                 return ret;
-             }
-@@ -5569,7 +5570,7 @@ RISCVException riscv_csrr(CPURISCVState *env, int csrno,
-         return ret;
+@@ -2114,11 +2129,8 @@ static RISCVException write_misa(CPURISCVState *env, int csrno,
+     /* Mask extensions that are not supported by this hart */
+     val &= env->misa_ext_mask;
+ 
+-    /*
+-     * Suppress 'C' if next instruction is not aligned
+-     * TODO: this should check next_pc
+-     */
+-    if ((val & RVC) && (GETPC() & ~3) != 0) {
++    /* Suppress 'C' if next instruction is not aligned. */
++    if ((val & RVC) && (get_next_pc(env, ra) & ~3) != 0) {
+         val &= ~RVC;
      }
  
--    return riscv_csrrw_do64(env, csrno, ret_value, 0, 0);
-+    return riscv_csrrw_do64(env, csrno, ret_value, 0, 0, 0);
- }
- 
- RISCVException riscv_csrrw(CPURISCVState *env, int csrno,
-@@ -5581,7 +5582,7 @@ RISCVException riscv_csrrw(CPURISCVState *env, int csrno,
-         return ret;
-     }
- 
--    return riscv_csrrw_do64(env, csrno, ret_value, new_value, write_mask);
-+    return riscv_csrrw_do64(env, csrno, ret_value, new_value, write_mask, 0);
- }
- 
- static RISCVException riscv_csrrw_do128(CPURISCVState *env, int csrno,
-@@ -5647,9 +5648,7 @@ RISCVException riscv_csrr_i128(CPURISCVState *env, int csrno,
-      * accesses
-      */
-     target_ulong old_value;
--    ret = riscv_csrrw_do64(env, csrno, &old_value,
--                           (target_ulong)0,
--                           (target_ulong)0);
-+    ret = riscv_csrrw_do64(env, csrno, &old_value, 0, 0, 0);
-     if (ret == RISCV_EXCP_NONE && ret_value) {
-         *ret_value = int128_make64(old_value);
-     }
-@@ -5681,7 +5680,7 @@ RISCVException riscv_csrrw_i128(CPURISCVState *env, int csrno,
-     target_ulong old_value;
-     ret = riscv_csrrw_do64(env, csrno, &old_value,
-                            int128_getlo(new_value),
--                           int128_getlo(write_mask));
-+                           int128_getlo(write_mask), 0);
-     if (ret == RISCV_EXCP_NONE && ret_value) {
-         *ret_value = int128_make64(old_value);
-     }
 -- 
 2.43.0
 
