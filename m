@@ -4,87 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 87BE5C369C2
-	for <qemu-riscv@archiver.kernel.org>; Fri, 25 Apr 2025 22:45:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1DFBFC369CB
+	for <qemu-riscv@archiver.kernel.org>; Sat, 26 Apr 2025 08:26:05 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1u8RXa-0004o8-2w; Fri, 25 Apr 2025 18:29:02 -0400
+	id 1u8aqs-0001D1-3J; Sat, 26 Apr 2025 04:25:34 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1u8RXP-0004Z1-J1
- for qemu-riscv@nongnu.org; Fri, 25 Apr 2025 18:28:53 -0400
-Received: from mail-wr1-x42e.google.com ([2a00:1450:4864:20::42e])
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1u8aqp-0001Bo-Mn
+ for qemu-riscv@nongnu.org; Sat, 26 Apr 2025 04:25:31 -0400
+Received: from mail-pj1-x1036.google.com ([2607:f8b0:4864:20::1036])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1u8RXN-0005HR-RH
- for qemu-riscv@nongnu.org; Fri, 25 Apr 2025 18:28:51 -0400
-Received: by mail-wr1-x42e.google.com with SMTP id
- ffacd0b85a97d-39ee5ac4321so2712289f8f.1
- for <qemu-riscv@nongnu.org>; Fri, 25 Apr 2025 15:28:49 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1u8aqo-0003fg-2V
+ for qemu-riscv@nongnu.org; Sat, 26 Apr 2025 04:25:31 -0400
+Received: by mail-pj1-x1036.google.com with SMTP id
+ 98e67ed59e1d1-2ff694d2d4dso2751073a91.0
+ for <qemu-riscv@nongnu.org>; Sat, 26 Apr 2025 01:25:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1745620128; x=1746224928; darn=nongnu.org;
+ d=ventanamicro.com; s=google; t=1745655928; x=1746260728; darn=nongnu.org;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=9K2adlDERUKAGQusZJV0eZ+4nBvLz6xU1dC/kv9W3+8=;
- b=Op5JyjHFAQgnYsDN7843aFLVMo9UQN1KxE8UQJzpcmh63HePVoMBz64YpqP88LqyQy
- WK1kF5An3XL1Icyz9cHX2anQGhMdeJp1ERZBiRcrf3WFBl2ehsGzuw6kQNFFp+ygcg7H
- gcctM7EygxikoQOhyS61jRTT8daoFO2EHi370Ya3/sOm2LkauupdH2ZdLWEMPkz/zs6Y
- lPjaA/UlKS5qERgauTb/3d8eq/h/KBKMC9y9NcxdkLIenLuyA1rQPYtlVM0jzJaO2vbU
- yxVl3HgNpy06h6ytBluka6oPzOLatlrFZUbxWJa2L15zoR8SDerduZWDoV5S9FHebzyh
- IBWQ==
+ bh=MJbb4+hSkt4RHYhhwAGL8sPw3IdMVtm60UXZ2B4P7oY=;
+ b=fCtOWh/3cmzoHXNLYH2Ekp35oLBrth4YvAVuRdSYdCCml957cG8zhedvyrIdbix1Lu
+ DlkDUPi2JwPbRS6EB07qnFEL3BMcInLYodImFhSz2peLugL6uP6QK0Q6cSyIYb5SD1H3
+ 9BQoiGzROVxHU4GjVarxkzTl+BdU9Ydqh8CauFWbMRRQwhcYXncEqppNbif1ke4JH5RU
+ CtqGWjLKjQjTh0QW1yPVk9fpOHhqtSWwDbpgTQEgmNytZJTm4lKJ9z9N7MeIXGrFfMwd
+ O5SjP1yZldjPTKzArXQXCSzTpGlQ35+blieRMrA3izkdRJyW2e0AhMUshhuDaAkNWpaY
+ 9Xyw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1745620128; x=1746224928;
+ d=1e100.net; s=20230601; t=1745655928; x=1746260728;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=9K2adlDERUKAGQusZJV0eZ+4nBvLz6xU1dC/kv9W3+8=;
- b=TYywEYjJA/dfYNqxzH2n7C1i77Bax/Nd6I9Mew6/fFedlm5OC3BUmuowbq6/TgTKWc
- nYPf7Twp2Rl3ilmM8jaJkrACXaVE7O+mK22Cr7CmYVcHV60CKPB721lahWHeU+HwDKAe
- B+F1xT8XfEA1sGmGhXLxw8F3G4xZClhzNfKQaKyXFsSvcK5Wbo1upk1XChIYI1XOlKJP
- t85Z5UkKueFJpLOFFd2FRVqqR67qJyrxoNOtgdSHAQhAyA+DBg8juHup4PC2v1BrMt6u
- a7eLbPJY4RRllB5ZULMsW+rNMmBReYRl1mdmLKU3Xb7o/Q5Yi+3rAtFARQR1GjWdVfR9
- vY4g==
-X-Gm-Message-State: AOJu0Yxc+ztxqxgMOQQoxJG9gfqiyuja6k4u/kggH3LPFXK36GgChXGJ
- xp/wO4D01NGmo5S4pUqlJl/Qn+IPqXojImii4hsinzp5NU2U3M1tsIIqhdjCBaM=
-X-Gm-Gg: ASbGncvZez6jKgb6LzWd3ubOTUvmaa9KENlpn/NOMTSbVA9SYhPOJHnOYeSOTMy8IYp
- 4JHMTL1ciskbTnhdYSkPPRQO+ogywTXZdeYqQyY4zdrQJxHi0zGZpxbfX0u+QK1MI+QIOttJ1Lr
- +nrDcrClMMoNvlLF5gnBcbNaDEAoOAEVmFMxRC9aX+iq0vyTR4Jv/9CcYmnZdqJhLBTEKE2Imfb
- Wpofnizkvt+/MIN0OMoSa2sa2JYas5uurCBb7VYAfCsjF5CyYJdBnI0GjYgQl4J/UKY32OXibIp
- yn4FybhPwg467+rEbikd2IgHTBdI8KdX7z+XvBtpliZzzRLZgT0dr4zX2IWB6G1VoBWRpIyOhbB
- X1oRnOzXH
-X-Google-Smtp-Source: AGHT+IHUJknV4Da3OUOLrrhpzlSCOsZ9tfeizxbaArg6FSLBJXujPAek2/IG/4mh31a5IEcGHULw+A==
-X-Received: by 2002:a05:6000:18a2:b0:391:3d12:9afa with SMTP id
- ffacd0b85a97d-3a074e2f0a0mr3135119f8f.21.1745620127876; 
- Fri, 25 Apr 2025 15:28:47 -0700 (PDT)
-Received: from [192.168.69.169] (88-187-86-199.subs.proxad.net.
- [88.187.86.199]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3a073c8d67esm3611709f8f.17.2025.04.25.15.28.46
+ bh=MJbb4+hSkt4RHYhhwAGL8sPw3IdMVtm60UXZ2B4P7oY=;
+ b=RDo36W/5g/kKPktTzU/rKsd8AiX9+rKoCMdsv417y3b6wPcYhD65QrHvicZKLT2pFl
+ pMdFz5IgPu2YwipbNOZ95el1eWX4C31JP8a/IigjyA+9soCIOha9c0U5DFNW0hBYhHO+
+ TnvcmFXA4VGeHP5HpwRLaNffH9tEDVfq0mzGsy2w9gLvjWPT0haGfv5SiT+SYaEgSctS
+ rkIbKICmN6nfmOIqFCwiHUbKNO+rH0EmUmUTlmg95BDgyT70OhtyGd0+2e2lUKhW/qcL
+ gOcie5iS4X6ULSCuRaItNpAuZsEBkrB/OoFOpzcnOFNOHUouonjtjkNdaqzQsCGwIeFf
+ 39Lg==
+X-Gm-Message-State: AOJu0YykTiw17Tqwc9MKIGoXx8j+1jsx9O3azdATK0+Vp3UlHB+QH5EN
+ 0t4VvK/hjIRQK61ZQpzV5m5xI0Maw5OcQTDpDk5TDn9H2uFm/VnEmQ5nyFpODU8=
+X-Gm-Gg: ASbGncvtWAZTZGSRFMIGvP6OCjJve96er1iYsd/7XzGRHGgQFxWbzgISyvImCL8rtrg
+ Ixvei1OKOfgbpRQnm2VKLlR9rNYSSXxoXj2p4EZ0GAgOYZH0QDmpUF5BMIDvwygeamA8EV4h/m8
+ PBklg2U6QejI7cj8sa59B1jsxNHDFbkhDvRcjdHAVIiu2J87Wdt1oKcCC35F9vihQSW/pIgq+hS
+ ZS9oHtEW80+PFcZm25XbnDV0f8+8uYmOiInhwBP8E8JDfL4lghalAbD5xFQ24y7K9J+Hum8N5Kh
+ 6XsCetGEdwlioqYVNaVz5BCefzr6I1unzsZ4FgB49HYqMY6eJI+NJLc=
+X-Google-Smtp-Source: AGHT+IGH+mBV3pXLErxkR1zZ/9mp0TuWQsoypui8DmRK0Yq5Buy90yUN1vfhywKLdO2Mn0gAQEL3bQ==
+X-Received: by 2002:a17:90a:d64b:b0:2ea:5dea:eb0a with SMTP id
+ 98e67ed59e1d1-309f7d87c12mr7356160a91.4.1745655928083; 
+ Sat, 26 Apr 2025 01:25:28 -0700 (PDT)
+Received: from [192.168.68.110] ([152.234.125.33])
+ by smtp.gmail.com with ESMTPSA id
+ 98e67ed59e1d1-309ef14a190sm5358262a91.47.2025.04.26.01.25.26
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 25 Apr 2025 15:28:46 -0700 (PDT)
-Message-ID: <14432b9f-d1a9-444c-9372-90541cf1de04@linaro.org>
-Date: Sat, 26 Apr 2025 00:28:46 +0200
+ Sat, 26 Apr 2025 01:25:27 -0700 (PDT)
+Message-ID: <9ce04866-e6b9-4fe6-9a60-21c0084cda84@ventanamicro.com>
+Date: Sat, 26 Apr 2025 05:25:24 -0300
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/7] target/riscv: Pass ra to riscv_csr_write_fn
+Subject: Re: [PATCH 0/7] target/riscv: Fix write_misa vs aligned next_pc
 To: Richard Henderson <richard.henderson@linaro.org>, qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, dbarboza@ventanamicro.com
+Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com
 References: <20250425152311.804338-1-richard.henderson@linaro.org>
- <20250425152311.804338-2-richard.henderson@linaro.org>
 Content-Language: en-US
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-In-Reply-To: <20250425152311.804338-2-richard.henderson@linaro.org>
+From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+In-Reply-To: <20250425152311.804338-1-richard.henderson@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::42e;
- envelope-from=philmd@linaro.org; helo=mail-wr1-x42e.google.com
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1036;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pj1-x1036.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -100,49 +100,42 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 25/4/25 17:23, Richard Henderson wrote:
-> Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
-> ---
->   target/riscv/cpu.h |   3 +-
->   target/riscv/csr.c | 226 +++++++++++++++++++++++----------------------
->   2 files changed, 118 insertions(+), 111 deletions(-)
+
+
+On 4/25/25 12:23 PM, Richard Henderson wrote:
+> As discussed, the use of GETPC() within write_misa is wrong.
+> I've done just enough plumbing to get the helper return address
+> piped down to write_misa, so that we can make use of unwind data.
 > 
-> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> index 167909c89b..4d41a66d72 100644
-> --- a/target/riscv/cpu.h
-> +++ b/target/riscv/cpu.h
-> @@ -841,7 +841,8 @@ typedef RISCVException (*riscv_csr_predicate_fn)(CPURISCVState *env,
->   typedef RISCVException (*riscv_csr_read_fn)(CPURISCVState *env, int csrno,
->                                               target_ulong *ret_value);
->   typedef RISCVException (*riscv_csr_write_fn)(CPURISCVState *env, int csrno,
-> -                                             target_ulong new_value);
-> +                                             target_ulong new_value,
-> +                                             uintptr_t ra);
->   typedef RISCVException (*riscv_csr_op_fn)(CPURISCVState *env, int csrno,
->                                             target_ulong *ret_value,
->                                             target_ulong new_value,
-> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-> index c52c87faae..6f1f69eba6 100644
-> --- a/target/riscv/csr.c
-> +++ b/target/riscv/csr.c
-> @@ -830,13 +830,15 @@ static RISCVException seed(CPURISCVState *env, int csrno)
->   }
->   
->   /* zicfiss CSR_SSP read and write */
-> -static int read_ssp(CPURISCVState *env, int csrno, target_ulong *val)
-> +static RISCVException read_ssp(CPURISCVState *env, int csrno,
-> +                               target_ulong *val)
->   {
->       *val = env->ssp;
->       return RISCV_EXCP_NONE;
->   }
->   
-> -static int write_ssp(CPURISCVState *env, int csrno, target_ulong val)
-> +static RISCVException write_ssp(CPURISCVState *env, int csrno,
-> +                                target_ulong val, uintptr_t ra)
+> AFAIK, nothing in check-tcg or check-functional would test this.
+> It shouldn't be too hard to write a test akin to issue1060.S,
+> but I'm going to leave that to someone else.
 
-I like the RISCVException type correction.
+All patches:
 
-Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+
+> 
+> 
+> r~
+> 
+> 
+> Richard Henderson (7):
+>    target/riscv: Pass ra to riscv_csr_write_fn
+>    target/riscv: Pass ra to riscv_csrrw_do64
+>    target/riscv: Pass ra to riscv_csrrw_do128
+>    target/riscv: Pass ra to riscv_csrrw
+>    target/riscv: Pass ra to riscv_csrrw_i128
+>    target/riscv: Move insn_len to internals.h
+>    target/riscv: Fix write_misa vs aligned next_pc
+> 
+>   target/riscv/cpu.h       |  15 ++-
+>   target/riscv/internals.h |   5 +
+>   hw/riscv/riscv_hart.c    |   2 +-
+>   target/riscv/csr.c       | 278 +++++++++++++++++++++------------------
+>   target/riscv/op_helper.c |  13 +-
+>   target/riscv/translate.c |   5 -
+>   6 files changed, 169 insertions(+), 149 deletions(-)
+> 
 
 
