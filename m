@@ -4,90 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 95B74C369DC
-	for <qemu-riscv@archiver.kernel.org>; Mon, 28 Apr 2025 15:37:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3FA66C369D5
+	for <qemu-riscv@archiver.kernel.org>; Mon, 28 Apr 2025 19:23:46 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1u9QXn-00048w-WA; Mon, 28 Apr 2025 11:37:20 -0400
+	id 1u9U4o-0003Z5-OY; Mon, 28 Apr 2025 15:23:38 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1u9QXW-00041V-Al
- for qemu-riscv@nongnu.org; Mon, 28 Apr 2025 11:37:04 -0400
-Received: from mail-wr1-x436.google.com ([2a00:1450:4864:20::436])
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1u9U4m-0003YA-3Q
+ for qemu-riscv@nongnu.org; Mon, 28 Apr 2025 15:23:36 -0400
+Received: from mail-pg1-x533.google.com ([2607:f8b0:4864:20::533])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
- id 1u9QXS-0002NR-5D
- for qemu-riscv@nongnu.org; Mon, 28 Apr 2025 11:37:01 -0400
-Received: by mail-wr1-x436.google.com with SMTP id
- ffacd0b85a97d-39c14016868so4863553f8f.1
- for <qemu-riscv@nongnu.org>; Mon, 28 Apr 2025 08:36:55 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1u9U4k-0007Ke-Bm
+ for qemu-riscv@nongnu.org; Mon, 28 Apr 2025 15:23:35 -0400
+Received: by mail-pg1-x533.google.com with SMTP id
+ 41be03b00d2f7-b1a1930a922so2666227a12.3
+ for <qemu-riscv@nongnu.org>; Mon, 28 Apr 2025 12:23:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1745854614; x=1746459414; darn=nongnu.org;
- h=in-reply-to:content-transfer-encoding:content-disposition
- :mime-version:references:message-id:subject:cc:to:from:date:from:to
- :cc:subject:date:message-id:reply-to;
- bh=OCGJMNCZ/fqqw/GUEMkreeTFhMnnnCHvM4H6nBWrE2k=;
- b=TfQ4vtQMuPyG1OV55cZPgYeJffXxlO/Sxsw5iwfXF4O0AyV1Z/qof7zWo8dfj2H0dj
- Xn1W6YsX7rjtrClN4HtWNzVhYkum1UowCPUxWl3XgqYHpCHSsf0waY59KAUm41cm6vZ6
- Bn3Jpo4cFiHqvlVQzrO15MJGGGZl9VLz4f9wv9oLMI2ZLsu+2kbbZ6J2r450ihNkAxAu
- yya5XYe0KxbggDflaDXKL+bgyH7ch0QEon/g0RmcRLbOa662wHXOYO8wfrotzjPrpNFv
- FmTiEjsi+WPbvwoyhHUEXHocBpDVPKICGpuq+7Pjy4TqAmL9HHlvgTiEAvZqOnOSFe3/
- b08g==
+ d=ventanamicro.com; s=google; t=1745868212; x=1746473012; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=mWa8M+jcdIj4I+o7cJgNjEFcfy2rtqk3rV3yk5pofAg=;
+ b=byDM/WtG7aP0pYo6gBtubZYpk888JaTjQ6QCuzHteUf6JjBtAkCk86Ms5b1b4tkvxw
+ n81Y+ZHKyZNNvi4LtFLGA/5vE+K01GIkWH2YjO6WnTYizYRZ1rvuM8mB5rVspLyZI5Du
+ UaIwHDVNGWtFH0QPLxxBZEmqivw+e6Jj3QeDgSdpP2E4VeUkiuOVumSxb5w95FmsRs6v
+ ga6sxhMFcZRpQF/wAdPbIVqXODV6d0LYkUQ+DqfoWbLrV72hIhUxyV0+tcx5ItM369ld
+ sePP/Ol41B76SlxGZiLfKVthEtVmzH8M7HciNHlaAUh1IvrP+weyOkJXpODhb9dunhDe
+ kFyA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1745854614; x=1746459414;
- h=in-reply-to:content-transfer-encoding:content-disposition
- :mime-version:references:message-id:subject:cc:to:from:date
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=OCGJMNCZ/fqqw/GUEMkreeTFhMnnnCHvM4H6nBWrE2k=;
- b=jf7VZ/e8+mK7Q67RculK+7DEXmSk10xAjEJqTSVFlDk00TgYW0o9udtru58XkblSjG
- YH8s54CtAemoQFVbiJ1d2+NQ2kjthOpZ9GB846C8xWpiijd0kiN9xYMCpyCCkqZubBQ1
- kQ7tDW4513JvtdYv1u9EKWVl1nClREvAtkw+281Y0O20EADvJRvvEbPvyK8cbS9f4XUR
- kzhA7il7sOTz0vuk644Fbsr73pQrVGBzVaAUQUQqyw5yYe3XN++YpnzM8Dd0AdHygrNg
- fC41zjijKAxNq/9yFTQUySXP6/XfA5ymRedLOn6HkcDnuhjvuHvxFwLQnOoBmgVkX3W8
- pRFQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWmmaKcDPFLTwtceEEDg1bzxP0vYW9YEIaC+h4kL3/leEmiRV7A3yd6oqAfxxZqrEtLnzzf2F/UB2CC@nongnu.org
-X-Gm-Message-State: AOJu0YxVjyAalwrgR02fcE5Wk0THvnf/1ngr9GtelLUfgERGMv2Pm4Dd
- 4OuklP3rjZx+Wy9LVpe5EyEI/x5nLgftJuJ/To6uvBZTjBbmTk8pHlVVoY76CHs=
-X-Gm-Gg: ASbGncsyt6+zpGvO3i0XWmKLeN0eLz5YHMgHV7a3N0OXjmAhFtyiFg7Z/69PAUAtLaz
- P3evsPU6wQ2a9uawr8NAWcZNMDYBudDQu7FhU0rVH4/4HkeItRbDBpPknNsK+C1Uw4bMSI8K66S
- g32pdxUS78fFBlG2Gmsn6WOReIoeLoyA/9qvGuIigjyEAQLx2OyliUJ0Z1ykmBAFFUxUzx7bx7r
- uCbj/nB26YkggF9QdfVF1tC1k4B/u0oWw+8gtzg8FtGinCLYljWW43REmdmKHupPwBEck5lSL3y
- q0dHYQvcQIe9W3SWXNo0e+yDtayn
-X-Google-Smtp-Source: AGHT+IGwoQRUG7ti2SoENQDkodAbIuixv4O2EFuC6BJZf2c945ndlNGF+gYMCyCKgGQINYS83AL7Og==
-X-Received: by 2002:a05:6000:196e:b0:39a:c9fe:f069 with SMTP id
- ffacd0b85a97d-3a0891abea9mr173740f8f.30.1745854613706; 
- Mon, 28 Apr 2025 08:36:53 -0700 (PDT)
-Received: from localhost ([2a02:8308:a00c:e200::f716])
+ d=1e100.net; s=20230601; t=1745868212; x=1746473012;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=mWa8M+jcdIj4I+o7cJgNjEFcfy2rtqk3rV3yk5pofAg=;
+ b=DdIsFlEiGNhL19fr4CaV0Lzo1InkoZDLcMjj0Yf9sE51J6mybWLwF7f3IPpXQBXWYx
+ ttZ7tbzrqX9V9h86oKZsJ4B+z6GmtfdlVcuRKzJ7ekO1hsUPPRdbw8m4Z086TNlsxzaU
+ SfS4PeM8DFZnLoX2U8KLQmEWfKLmN0ot3UtAjY/X0YoLkW8YKKFwyBwDsmlOyyo4tj+f
+ 6wIrnZqNtbCV6hY2f/S7q/sF+TIihFVsBemq6/Ay5+Ahlc/1LNMZoS1DcMyKUoL0LmoA
+ aTTTdaTJGXaRDim3yIVU3jeMZ5AfUqHlZrHfpEb9PT3DCD+7jQYDwe1UzZvYK+00WVho
+ VXSg==
+X-Gm-Message-State: AOJu0YzhOHbmAFIun1MDoTkRkGJzhFtBoeUROHHNhKqZCGcEVPM5tqco
+ 4vOeJ+7TOnXyDD7tNzbmTUBcTuqfSGNR4uhrlsolnYIgqK3dx7iVdRFpSA4l8Y4=
+X-Gm-Gg: ASbGnct0BiRDZaY2Ar/NTJ33zUaoJ9nGZn5GOFEmPmjKwiKTeC5ItmKIFoenjXmdxIi
+ s5j+lyTW7ztFTPGT1c8W4gXOwGEuFoYA1UbcKGoYtrlNuXG5GUvQAbmNQHH7pjgGRL3gE42nplj
+ 1n/zEyB9+xgLcJZfwNwbxQW1pxd6aaYfwsxArWV4XhKfyiGyCh7Xl873qWod3flWpuR3iZ6dg7h
+ blhKncVMACqnF5cZkmNwQpkLBUcUfi5lRaw474gO2OJaqws7pywPbIh8bBbAn0qobWVP29bqlac
+ htGSIXfJtp/tgMF79TdQDeUCtbkgXgEkjjS2RHryfhJW
+X-Google-Smtp-Source: AGHT+IGntd4aw4O12QiSFQ17+t8ziQKbMdORJCVtZLcg6PpVSzkIEa0UPk+hkhlUs3g2lt6eezsyvg==
+X-Received: by 2002:a17:90b:270e:b0:2ff:4e90:3c55 with SMTP id
+ 98e67ed59e1d1-30a22142cc6mr656630a91.27.1745868211984; 
+ Mon, 28 Apr 2025 12:23:31 -0700 (PDT)
+Received: from grind.. ([2804:7f0:bcc0:906e:57d5:dca2:1ab3:20de])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3a089debe62sm66650f8f.40.2025.04.28.08.36.53
+ d9443c01a7336-22db4db99d3sm87300565ad.53.2025.04.28.12.23.29
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 28 Apr 2025 08:36:53 -0700 (PDT)
-Date: Mon, 28 Apr 2025 17:36:52 +0200
-From: Andrew Jones <ajones@ventanamicro.com>
-To: Radim =?utf-8?B?S3LEjW3DocWZ?= <rkrcmar@ventanamicro.com>
-Cc: Meng Zhuo <mengzhuo@iscas.ac.cn>, qemu-devel@nongnu.org, 
- qemu-riscv@nongnu.org, Alistair Francis <alistair.francis@wdc.com>, 
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, Weiwei Li <liwei1518@gmail.com>, 
- Palmer Dabbelt <palmer@dabbelt.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>, 
- qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
-Subject: Re: [PATCH] target/riscv: add satp mode for kvm host cpu
-Message-ID: <20250428-c071a9089f070c2e6f001d9b@orel>
-References: <20250427132557.1589276-1-mengzhuo@iscas.ac.cn>
- <20250428-00fc862d2d2d628ffa4c8547@orel>
- <D9I60P8TG036.2ZHSS9EHW4W8N@ventanamicro.com>
- <20250428-4cb96c7f0226e15a40006dee@orel>
- <D9IB9OMTGUZ7.8UBDDIX7RW0J@ventanamicro.com>
+ Mon, 28 Apr 2025 12:23:31 -0700 (PDT)
+From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+To: qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, liwei1518@gmail.com,
+ zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com, ajones@ventanamicro.com,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Subject: [PATCH v4 0/9] target/riscv/kvm: CSR related fixes
+Date: Mon, 28 Apr 2025 16:23:14 -0300
+Message-ID: <20250428192323.84992-1-dbarboza@ventanamicro.com>
+X-Mailer: git-send-email 2.49.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <D9IB9OMTGUZ7.8UBDDIX7RW0J@ventanamicro.com>
-Received-SPF: pass client-ip=2a00:1450:4864:20::436;
- envelope-from=ajones@ventanamicro.com; helo=mail-wr1-x436.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::533;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pg1-x533.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -110,109 +97,45 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Mon, Apr 28, 2025 at 03:37:26PM +0200, Radim Krčmář wrote:
-> 2025-04-28T14:08:59+02:00, Andrew Jones <ajones@ventanamicro.com>:
-> > On Mon, Apr 28, 2025 at 11:30:36AM +0200, Radim Krčmář wrote:
-> >> 2025-04-28T09:00:55+02:00, Andrew Jones <ajones@ventanamicro.com>:
-> >> > On Sun, Apr 27, 2025 at 09:25:57PM +0800, Meng Zhuo wrote:
-> >> >> This patch adds host satp mode while kvm/host cpu satp mode is not
-> >> >> set.
-> >> >
-> >> > Huh, the KVM side[1] was written for this purpose, but it appears we never
-> >> > got a QEMU side merged.
-> >> >
-> >> > [1] commit 2776421e6839 ("RISC-V: KVM: provide UAPI for host SATP mode")
-> >> 
-> >> KVM satp_mode is the current SATP.mode and I don't think the other
-> >> SATP.modes can generally be guessed from the host SATP mode.
-> >> 
-> >> Can't QEMU use the host capabilities from cpuinfo or something?
-> >> 
-> >> Do we need to return a bitmask from KVM?
-> >> (e.g. WARL all modes in vsatp and return what sticks.)
-> >>
-> >
-> > The widest supported is sufficient because all narrower must also be
-> > supported. Linux should be figuring out the widest and capturing that
-> > at boot time and we should be returing that info for the KVM satp_mode
-> > get-one-reg call.
-> 
-> Linux has command line overrides for the mode (no4lvl and no5vlv), so
-> the active mode in Linux might not be the widest supported by the cpu.
-> 
-> Let's say Linux decides to use 9 on a host cpu that has 0,8,9,10.
-> set_satp_mode_max_supported() will set supported vcpu modes to 0,8,9.
-> 
-> Should "-cpu host" contain the 10?
+Hi,
 
-If the architecture allows it and the host kernel/KVM is aware of it. If,
-OTOH, the boot options / hardware description has hidden the platform's
-capabilities from KVM, then it won't know 10 is supported, so it won't
-tell the vmm it is and the vmm shouldn't second guess that.
+In this new version a change was made in patch 8. Instead of changing
+scounteren to target_ulong, change the current logic to honor the QEMU
+env storage instead of the KVM reg size. 
 
-> 
-> > If the satp_mode we're currently returning isn't the widest possible,
-> > then we should fix that in KVM.
-> 
-> The numbers are even more complicated... Pasting the values from manual:
-> 
->   0      Bare
->   1-7    Reserved for standard use
->   8      Sv39
->   9      Sv48
->   10     Sv57
->   11     Reserved for Sv64
->   12-13  Reserved for standard use
->   14-15  Designated for custom use
-> 
-> The reserved values make this extra juicy, let's say Linux uses 14 on
-> machine that has 0,8,9,14.  QEMU sees 14 and sets the vcpu modes to
-> 0,8,9,10 -- it's not even a subset of the host CPU.
-> (There might be similar problems even with future standard extensions.)
+This will make QEMU the authority when deciding how to read/write the
+CSRs in the env flags instead of KVM.
 
-Currently QEMU won't recognize anything higher than 10 and it knows how
-to skip 1-7. If we need to add more standard support (or custom support)
-we'll have to modify set_satp_mode_max_supported(). But let's burn that
-bridge later. We should probably sanity check the input to that function
-with something like the (untested) diff below, though.
+We're doing this change in patch 8 but it could also be squashed into
+patch 4. If the code in patch 8 is good to go I don't oppose merging it
+with patch 4 if desired.
 
-Thanks,
-drew
+No other changes made. 
 
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 09ded6829a2c..a9088c7b1770 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -435,10 +435,18 @@ const char *satp_mode_str(uint8_t satp_mode, bool is_32_bit)
- }
- 
- static void set_satp_mode_max_supported(RISCVCPU *cpu,
--                                        uint8_t satp_mode)
-+                                        uint8_t satp_mode,
-+                                        Error **errp)
- {
-     bool rv32 = riscv_cpu_mxl(&cpu->env) == MXL_RV32;
-     const bool *valid_vm = rv32 ? valid_vm_1_10_32 : valid_vm_1_10_64;
-+    int satp_max = rv32 ? VM_1_10_SV32 : VM_1_10_MAX;
-+
-+    if (satp_mode > satp_max) {
-+        error_setg(errp, "satp_mode %s is higher than the supported max %s",
-+                   satp_mode_str(satp_max, rv32),
-+                   satp_mode_str(satp_max, rv32));
-+    }
- 
-     for (int i = 0; i <= satp_mode; ++i) {
-         if (valid_vm[i]) {
-diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
-index a30317c61781..46d206abba97 100644
---- a/target/riscv/cpu_bits.h
-+++ b/target/riscv/cpu_bits.h
-@@ -662,6 +662,7 @@ typedef enum {
- #define VM_1_10_SV48        9
- #define VM_1_10_SV57        10
- #define VM_1_10_SV64        11
-+#define VM_1_10_MAX         VM_1_10_SV64
- 
- /* Page table entry (PTE) fields */
- #define PTE_V               0x001 /* Valid */
+Patches missing acks/review: patch 8.
+
+Changes from v3:
+- patch 8:
+  - instead of widening scounteren, use the QEMU storage size instead of
+    KVM reg size when reading/writing KVM CSRs
+- v3 link: https://lore.kernel.org/qemu-riscv/20250425160203.2774835-1-dbarboza@ventanamicro.com/
+
+Daniel Henrique Barboza (9):
+  target/riscv/kvm: minor fixes/tweaks
+  target/riscv/kvm: fix leak in kvm_riscv_init_multiext_cfg()
+  target/riscv/kvm: turn u32/u64 reg functions into macros
+  target/riscv/kvm: turn kvm_riscv_reg_id_ulong() into a macro
+  target/riscv/kvm: add kvm_csr_cfgs[]
+  target/riscv/kvm: do not read unavailable CSRs
+  target/riscv/kvm: add senvcfg CSR
+  target/riscv/kvm: read/write KVM regs via env size
+  target/riscv/kvm: add scounteren CSR
+
+ target/riscv/cpu.h         |   1 +
+ target/riscv/kvm/kvm-cpu.c | 335 +++++++++++++++++++++++--------------
+ 2 files changed, 214 insertions(+), 122 deletions(-)
+
+-- 
+2.49.0
+
 
