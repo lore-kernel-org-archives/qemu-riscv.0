@@ -4,82 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 69E65C369DC
-	for <qemu-riscv@archiver.kernel.org>; Mon, 28 Apr 2025 11:45:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AC30AC369DC
+	for <qemu-riscv@archiver.kernel.org>; Mon, 28 Apr 2025 12:09:58 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1u9Mux-0004Zx-S7; Mon, 28 Apr 2025 07:44:59 -0400
+	id 1u9NIm-0004rR-21; Mon, 28 Apr 2025 08:09:36 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1u9Muv-0004ZG-7t; Mon, 28 Apr 2025 07:44:57 -0400
-Received: from mail-ua1-x92b.google.com ([2607:f8b0:4864:20::92b])
+ (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
+ id 1u9NIG-0004gf-VU
+ for qemu-riscv@nongnu.org; Mon, 28 Apr 2025 08:09:08 -0400
+Received: from mail-ej1-x633.google.com ([2a00:1450:4864:20::633])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1u9Mus-0000Dv-Q4; Mon, 28 Apr 2025 07:44:56 -0400
-Received: by mail-ua1-x92b.google.com with SMTP id
- a1e0cc1a2514c-86715793b1fso1920903241.0; 
- Mon, 28 Apr 2025 04:44:53 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
+ id 1u9NIE-00049s-9B
+ for qemu-riscv@nongnu.org; Mon, 28 Apr 2025 08:09:04 -0400
+Received: by mail-ej1-x633.google.com with SMTP id
+ a640c23a62f3a-ac345bd8e13so655083166b.0
+ for <qemu-riscv@nongnu.org>; Mon, 28 Apr 2025 05:09:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1745840693; x=1746445493; darn=nongnu.org;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=+nMNAx0FIGNCynJv/U/EJMmNHcembZk6vk7eNGPV+Vw=;
- b=VxO5WlwABYFaWe3b8deCQ+GRng5LTP0vxyCOEWr7UY46b6CFARu1KkVC11hvyPemZT
- BjkA1a6F2mdC9SdpZdgv/55f6urTgqgzf4qM36A27kJSVNzPRpPQGlaIqQToE6f7acAS
- AOizITUddfPSxTupirL2ypCgvpAOkax9wZW0DRB4MWJ2/VgMs1KnBbrYzTAoVUU/zeea
- /pAxa18WVT4lZLcabgZPfdVcCr640y/ukVXTVJp+F7tspZ0tWHm2cqdTKBPeOTe8o4Vh
- jFTYb02R1ij3TriIk+AXUAKdGzlflSi5+8rUOvzEcN++Vdfts83wxaV1IXPxXovQSWxz
- +5sw==
+ d=ventanamicro.com; s=google; t=1745842140; x=1746446940; darn=nongnu.org;
+ h=in-reply-to:content-transfer-encoding:content-disposition
+ :mime-version:references:message-id:subject:cc:to:from:date:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=FA2ZsBdIEmHGu+jH72qeTS4Hoi5VWo3/b7hKS4mvRWU=;
+ b=gd0HcVt14XAZ+USqUXEzM83KtOIUTU3l739blhtgPeTICR0N9gKB7e1C1YVOfrerwx
+ zhjAj8JdDzN/U12Qpjw/1WqAV/9Vjk92IRpwDC+kyY+LCpnLd8991HnisKJJ9aTwWNmr
+ y6qtVJ/pM3EU8QpDG1oQyv5C+bmmzr/XihuH6N8EjQ6AQp6rNZmaoQKEfuusVcEC++1S
+ VAfg09XDTIPbkMxeC3IloACvIb3IjDERUtl49xVdLksMBFunPh201MRZML/YUQc5tPKY
+ GfR7i1ziSZT/RaC0RhRnfR9AMOJjEU+JI722gyX6BKNnHv+/dITEkh9z4hJk67agYeM3
+ xRPQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1745840693; x=1746445493;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=+nMNAx0FIGNCynJv/U/EJMmNHcembZk6vk7eNGPV+Vw=;
- b=KENcE60isjftwbfgZnN0MQHZXfKv/1bOBygptVIfAyvblT2UkqNcEThxZbOA7EtdFH
- 10SLf1+iKjii5gwr21bo/9JelD7r+DWR5WK0UvYz7AeQi3ylJPRsAq4Jic1q6zggKvpu
- S02daC0EWl5iN0M+2gakV9mG2Rcszch7q7bVaqI1Q2ql3mhchfxAj7fVDQ7bddKxDACz
- zzM8f0g5vw7s9Wr49Xr8cE8rIMsnQqx/k/5w8P6ofkgYkNZwyNdVWo0kck8nkeIaFI/Q
- 5dK69u1LDauMwPro9nIRhqTVQBvw1DNdFn09hSsJJBKznP/lANkKofoxdNyuY1fXClxI
- 0QlA==
+ d=1e100.net; s=20230601; t=1745842140; x=1746446940;
+ h=in-reply-to:content-transfer-encoding:content-disposition
+ :mime-version:references:message-id:subject:cc:to:from:date
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=FA2ZsBdIEmHGu+jH72qeTS4Hoi5VWo3/b7hKS4mvRWU=;
+ b=qS8O/2poFSlwLO/FSEUtsk9P5aVMK5p2bREIU/hKzzEOfqL8cMn4hrMbcsy8OB9rw1
+ pBQ4ael5p/NnsndX4JWNLT8VmXB2VsguWkVImsgjs1vdQqvkXktO7n42wknwpxE+6fvG
+ VS03s32j/bXr4WaV2pbWWnjOwwDW73ANhFShX2IJ6pzZIsejlVNNl/+4sDMdB6jMX2b0
+ QOdRxXClRRN0q13++taalvCuAcu2CNPpa9gTLBcVGf4grIFvLIcHC24+chU41cxlBaxL
+ rIZjQ3xtaTsgWRLU+Mfkr3XTJeZStGTf42mHK0Vg2XuwzHaWUOPrBBgfEs13xEs+2Yxu
+ lVIw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUUUI0H+N9wn02/r/zJA2GGattLEFJFvT+5AsOQPFdaCTC27VlYRlteRwmLCChRRn5R8JIUk8jfCVZF@nongnu.org
-X-Gm-Message-State: AOJu0YzPA8fom8Yv968jrjR2HfJFqcBUFvJaNMQlUfT3yVnWA/pSVZyT
- +DTBEEEe9ULYB2CxFiPpWlBDHyT0fGGf2RWIh0ypVpsDVEdTiiMgOJtOT2mPnFbJg4kXRmF8hOa
- vJd2xOSBhefUr3TGRyDVUdwiV8LI=
-X-Gm-Gg: ASbGnct7+HnyriwPQIGq5SMw9IFJIK3WHykXnodNDDh3EuaPyaMTs71JznzcK36b9ru
- etWchKUL373XkfM4BBs8+kbPmmbB78lhuk9YIHTRDqZEbzThyOkXQ/37OZkLtSmA6/i9zFwrU4T
- aeS74sjbpIY7m9SLT/Lx9rEBs290HT0+5Gqm/LplaBJR/l7tGccVR+j46mMyXPt3A=
-X-Google-Smtp-Source: AGHT+IFS4aeXaI+uTL4gowhyhMAm5FWd9tJX1LE2TiXZXDlWkAEw0Wz5/8AYyt2SK2LVolnE96SzgsseaKPMKFZlaBc=
-X-Received: by 2002:a05:6102:3e08:b0:4c3:6393:8448 with SMTP id
- ada2fe7eead31-4d6400a6885mr4691186137.1.1745840692913; Mon, 28 Apr 2025
- 04:44:52 -0700 (PDT)
+ AJvYcCXPIC0L63kwoWH3fo3CIOBVkYDUUfvuc9jCqTZqtZ60X9SB933YVpuexRnLuEXuupnN9bdSQ/Bp6AjY@nongnu.org
+X-Gm-Message-State: AOJu0YyvN/wWUZyWHYhNSSxwK+BGdw1Jhs1Wp+p1P8mcVcsU5y3EcM1Z
+ J1Ukhy/EEtaw/tvkBBSKp+7RdtqzTmPpnP6h3/fax/Suyp37Tgx88Jrgxp2BSvc=
+X-Gm-Gg: ASbGncsnpAUP+Kf80w4EHhWQNpSHuRMRMObha5bSgTGNwLevRV/m0f6HHzyvBuxAhUn
+ vr6T2qC+8VuHzS624n0w69TfSwS0BmwIcqxyrBwOoMe1XTbyCDhKFn6WQPUwMWotloGuGpqh+Lh
+ GBW4KrqB0OhrSXbdjQjWJLt970cZQTjvGEZu3ieL9mBwpX8KaJA3scZhbnfzOu8wzBF91Yi6Uu5
+ 6hFKiirHzyER/owL9wl0xIc/coFcTfQSNbxCVcXbUyCbId6Mzc7guEGfcjUwxJ/5npsBhNfWgSi
+ 4i6G49Qe29AgvvPARoT0niLvDzcvyJBmq/v5F86oPViQzqLKqwG+7xdcoX8zFcic6csm2g==
+X-Google-Smtp-Source: AGHT+IGgejT+RtvNhROxzGnVNBzcSelFfL93tyQ4FI3RvCeDuuEEOxqUlY/nFqrI4nY1Fhjnj2uvSQ==
+X-Received: by 2002:a17:907:2dab:b0:ac6:fec7:34dd with SMTP id
+ a640c23a62f3a-ace713fb7d0mr1079370066b.52.1745842140398; 
+ Mon, 28 Apr 2025 05:09:00 -0700 (PDT)
+Received: from localhost (cst2-173-28.cust.vodafone.cz. [31.30.173.28])
+ by smtp.gmail.com with ESMTPSA id
+ 4fb4d7f45d1cf-5f7fbcfc090sm819462a12.20.2025.04.28.05.08.59
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 28 Apr 2025 05:08:59 -0700 (PDT)
+Date: Mon, 28 Apr 2025 14:08:59 +0200
+From: Andrew Jones <ajones@ventanamicro.com>
+To: Radim =?utf-8?B?S3LEjW3DocWZ?= <rkrcmar@ventanamicro.com>
+Cc: Meng Zhuo <mengzhuo@iscas.ac.cn>, qemu-devel@nongnu.org, 
+ qemu-riscv@nongnu.org, Alistair Francis <alistair.francis@wdc.com>, 
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, Weiwei Li <liwei1518@gmail.com>, 
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>, 
+ qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
+Subject: Re: [PATCH] target/riscv: add satp mode for kvm host cpu
+Message-ID: <20250428-4cb96c7f0226e15a40006dee@orel>
+References: <20250427132557.1589276-1-mengzhuo@iscas.ac.cn>
+ <20250428-00fc862d2d2d628ffa4c8547@orel>
+ <D9I60P8TG036.2ZHSS9EHW4W8N@ventanamicro.com>
 MIME-Version: 1.0
-References: <20250425160203.2774835-1-dbarboza@ventanamicro.com>
- <20250425160203.2774835-6-dbarboza@ventanamicro.com>
-In-Reply-To: <20250425160203.2774835-6-dbarboza@ventanamicro.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 28 Apr 2025 21:44:25 +1000
-X-Gm-Features: ATxdqUHe72AihwhlPmZf1dzRi4wNUyPt3MBoGXEtZ_Zx3sD5xXNjLWcJPKK3Lk8
-Message-ID: <CAKmqyKNKGiTOp1WhPo_8f6AOwTacJPMQNwZE8f-unJ3VvD8e8w@mail.gmail.com>
-Subject: Re: [PATCH v3 5/9] target/riscv/kvm: add kvm_csr_cfgs[]
-To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
- liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com, 
- ajones@ventanamicro.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::92b;
- envelope-from=alistair23@gmail.com; helo=mail-ua1-x92b.google.com
-X-Spam_score_int: -17
-X-Spam_score: -1.8
-X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <D9I60P8TG036.2ZHSS9EHW4W8N@ventanamicro.com>
+Received-SPF: pass client-ip=2a00:1450:4864:20::633;
+ envelope-from=ajones@ventanamicro.com; helo=mail-ej1-x633.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -97,218 +108,34 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Sat, Apr 26, 2025 at 2:04=E2=80=AFAM Daniel Henrique Barboza
-<dbarboza@ventanamicro.com> wrote:
+On Mon, Apr 28, 2025 at 11:30:36AM +0200, Radim Krčmář wrote:
+> 2025-04-28T09:00:55+02:00, Andrew Jones <ajones@ventanamicro.com>:
+> > On Sun, Apr 27, 2025 at 09:25:57PM +0800, Meng Zhuo wrote:
+> >> This patch adds host satp mode while kvm/host cpu satp mode is not
+> >> set.
+> >
+> > Huh, the KVM side[1] was written for this purpose, but it appears we never
+> > got a QEMU side merged.
+> >
+> > [1] commit 2776421e6839 ("RISC-V: KVM: provide UAPI for host SATP mode")
+> 
+> KVM satp_mode is the current SATP.mode and I don't think the other
+> SATP.modes can generally be guessed from the host SATP mode.
+> 
+> Can't QEMU use the host capabilities from cpuinfo or something?
+> 
+> Do we need to return a bitmask from KVM?
+> (e.g. WARL all modes in vsatp and return what sticks.)
 >
-> At this moment we're not checking if the host has support for any
-> specific CSR before doing get/put regs. This will cause problems if the
-> host KVM doesn't support it (see [1] as an example).
->
-> We'll use the same approach done with the CPU extensions: read all known
-> KVM CSRs during init() to check for availability, then read/write them
-> if they are present. This will be made by either using get-reglist or by
-> directly reading the CSRs.
->
-> For now we'll just convert the CSRs to use a kvm_csr_cfg[] array,
-> reusing the same KVMCPUConfig abstraction we use for extensions, and use
-> the array in (get|put)_csr_regs() instead of manually listing them. A
-> lot of boilerplate will be added but at least we'll automate the get/put
-> procedure for CSRs, i.e. adding a new CSR in the future will be a matter
-> of adding it in kvm_csr_regs[] and everything else will be taken care
-> of.
->
-> Despite all the code changes no behavioral change is made.
->
-> [1] https://lore.kernel.org/qemu-riscv/CABJz62OfUDHYkQ0T3rGHStQprf1c7_E0q=
-BLbLKhfv=3D+jb0SYAw@mail.gmail.com/
->
-> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-> Reviewed-by: Andrew Jones <ajones@ventanamicro.com>
 
-Acked-by: Alistair Francis <alistair.francis@wdc.com>
+The widest supported is sufficient because all narrower must also be
+supported. Linux should be figuring out the widest and capturing that
+at boot time and we should be returing that info for the KVM satp_mode
+get-one-reg call.
 
-Alistair
+If the satp_mode we're currently returning isn't the widest possible,
+then we should fix that in KVM.
 
-> ---
->  target/riscv/cpu.h         |   1 +
->  target/riscv/kvm/kvm-cpu.c | 121 ++++++++++++++++++++++++++-----------
->  2 files changed, 86 insertions(+), 36 deletions(-)
->
-> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> index 679f417336..f5a60d0c52 100644
-> --- a/target/riscv/cpu.h
-> +++ b/target/riscv/cpu.h
-> @@ -79,6 +79,7 @@ const char *riscv_get_misa_ext_name(uint32_t bit);
->  const char *riscv_get_misa_ext_description(uint32_t bit);
->
->  #define CPU_CFG_OFFSET(_prop) offsetof(struct RISCVCPUConfig, _prop)
-> +#define ENV_CSR_OFFSET(_csr) offsetof(CPURISCVState, _csr)
->
->  typedef struct riscv_cpu_profile {
->      struct riscv_cpu_profile *u_parent;
-> diff --git a/target/riscv/kvm/kvm-cpu.c b/target/riscv/kvm/kvm-cpu.c
-> index fd66bc1759..f881e7eb5d 100644
-> --- a/target/riscv/kvm/kvm-cpu.c
-> +++ b/target/riscv/kvm/kvm-cpu.c
-> @@ -114,22 +114,6 @@ static uint64_t kvm_riscv_vector_reg_id(RISCVCPU *cp=
-u,
->      KVM_RISCV_REG_ID_ULONG(KVM_REG_RISCV_VECTOR, \
->                             KVM_REG_RISCV_VECTOR_CSR_REG(name))
->
-> -#define KVM_RISCV_GET_CSR(cs, env, csr, reg) \
-> -    do { \
-> -        int _ret =3D kvm_get_one_reg(cs, RISCV_CSR_REG(csr), &reg); \
-> -        if (_ret) { \
-> -            return _ret; \
-> -        } \
-> -    } while (0)
-> -
-> -#define KVM_RISCV_SET_CSR(cs, env, csr, reg) \
-> -    do { \
-> -        int _ret =3D kvm_set_one_reg(cs, RISCV_CSR_REG(csr), &reg); \
-> -        if (_ret) { \
-> -            return _ret; \
-> -        } \
-> -    } while (0)
-> -
->  #define KVM_RISCV_GET_TIMER(cs, name, reg) \
->      do { \
->          int ret =3D kvm_get_one_reg(cs, RISCV_TIMER_REG(name), &reg); \
-> @@ -251,6 +235,53 @@ static void kvm_riscv_update_cpu_misa_ext(RISCVCPU *=
-cpu, CPUState *cs)
->      }
->  }
->
-> +#define KVM_CSR_CFG(_name, _env_prop, reg_id) \
-> +    {.name =3D _name, .offset =3D ENV_CSR_OFFSET(_env_prop), \
-> +     .kvm_reg_id =3D reg_id}
-> +
-> +static KVMCPUConfig kvm_csr_cfgs[] =3D {
-> +    KVM_CSR_CFG("sstatus",    mstatus,    RISCV_CSR_REG(sstatus)),
-> +    KVM_CSR_CFG("sie",        mie,        RISCV_CSR_REG(sie)),
-> +    KVM_CSR_CFG("stvec",      stvec,      RISCV_CSR_REG(stvec)),
-> +    KVM_CSR_CFG("sscratch",   sscratch,   RISCV_CSR_REG(sscratch)),
-> +    KVM_CSR_CFG("sepc",       sepc,       RISCV_CSR_REG(sepc)),
-> +    KVM_CSR_CFG("scause",     scause,     RISCV_CSR_REG(scause)),
-> +    KVM_CSR_CFG("stval",      stval,      RISCV_CSR_REG(stval)),
-> +    KVM_CSR_CFG("sip",        mip,        RISCV_CSR_REG(sip)),
-> +    KVM_CSR_CFG("satp",       satp,       RISCV_CSR_REG(satp)),
-> +};
-> +
-> +static void *kvmconfig_get_env_addr(RISCVCPU *cpu, KVMCPUConfig *csr_cfg=
-)
-> +{
-> +    return (void *)&cpu->env + csr_cfg->offset;
-> +}
-> +
-> +static uint32_t kvm_cpu_csr_get_u32(RISCVCPU *cpu, KVMCPUConfig *csr_cfg=
-)
-> +{
-> +    uint32_t *val32 =3D kvmconfig_get_env_addr(cpu, csr_cfg);
-> +    return *val32;
-> +}
-> +
-> +static uint64_t kvm_cpu_csr_get_u64(RISCVCPU *cpu, KVMCPUConfig *csr_cfg=
-)
-> +{
-> +    uint64_t *val64 =3D kvmconfig_get_env_addr(cpu, csr_cfg);
-> +    return *val64;
-> +}
-> +
-> +static void kvm_cpu_csr_set_u32(RISCVCPU *cpu, KVMCPUConfig *csr_cfg,
-> +                                uint32_t val)
-> +{
-> +    uint32_t *val32 =3D kvmconfig_get_env_addr(cpu, csr_cfg);
-> +    *val32 =3D val;
-> +}
-> +
-> +static void kvm_cpu_csr_set_u64(RISCVCPU *cpu, KVMCPUConfig *csr_cfg,
-> +                                uint64_t val)
-> +{
-> +    uint64_t *val64 =3D kvmconfig_get_env_addr(cpu, csr_cfg);
-> +    *val64 =3D val;
-> +}
-> +
->  #define KVM_EXT_CFG(_name, _prop, _reg_id) \
->      {.name =3D _name, .offset =3D CPU_CFG_OFFSET(_prop), \
->       .kvm_reg_id =3D _reg_id}
-> @@ -598,34 +629,52 @@ static int kvm_riscv_put_regs_core(CPUState *cs)
->
->  static int kvm_riscv_get_regs_csr(CPUState *cs)
->  {
-> -    CPURISCVState *env =3D &RISCV_CPU(cs)->env;
-> +    RISCVCPU *cpu =3D RISCV_CPU(cs);
-> +    uint64_t reg;
-> +    int i, ret;
-> +
-> +    for (i =3D 0; i < ARRAY_SIZE(kvm_csr_cfgs); i++) {
-> +        KVMCPUConfig *csr_cfg =3D &kvm_csr_cfgs[i];
->
-> -    KVM_RISCV_GET_CSR(cs, env, sstatus, env->mstatus);
-> -    KVM_RISCV_GET_CSR(cs, env, sie, env->mie);
-> -    KVM_RISCV_GET_CSR(cs, env, stvec, env->stvec);
-> -    KVM_RISCV_GET_CSR(cs, env, sscratch, env->sscratch);
-> -    KVM_RISCV_GET_CSR(cs, env, sepc, env->sepc);
-> -    KVM_RISCV_GET_CSR(cs, env, scause, env->scause);
-> -    KVM_RISCV_GET_CSR(cs, env, stval, env->stval);
-> -    KVM_RISCV_GET_CSR(cs, env, sip, env->mip);
-> -    KVM_RISCV_GET_CSR(cs, env, satp, env->satp);
-> +        ret =3D kvm_get_one_reg(cs, csr_cfg->kvm_reg_id, &reg);
-> +        if (ret) {
-> +            return ret;
-> +        }
-> +
-> +        if (KVM_REG_SIZE(csr_cfg->kvm_reg_id) =3D=3D sizeof(uint32_t)) {
-> +            kvm_cpu_csr_set_u32(cpu, csr_cfg, reg);
-> +        } else if (KVM_REG_SIZE(csr_cfg->kvm_reg_id) =3D=3D sizeof(uint6=
-4_t)) {
-> +            kvm_cpu_csr_set_u64(cpu, csr_cfg, reg);
-> +        } else {
-> +            g_assert_not_reached();
-> +        }
-> +    }
->
->      return 0;
->  }
->
->  static int kvm_riscv_put_regs_csr(CPUState *cs)
->  {
-> -    CPURISCVState *env =3D &RISCV_CPU(cs)->env;
-> +    RISCVCPU *cpu =3D RISCV_CPU(cs);
-> +    uint64_t reg;
-> +    int i, ret;
-> +
-> +    for (i =3D 0; i < ARRAY_SIZE(kvm_csr_cfgs); i++) {
-> +        KVMCPUConfig *csr_cfg =3D &kvm_csr_cfgs[i];
-> +
-> +        if (KVM_REG_SIZE(csr_cfg->kvm_reg_id) =3D=3D sizeof(uint32_t)) {
-> +            reg =3D kvm_cpu_csr_get_u32(cpu, csr_cfg);
-> +        } else if (KVM_REG_SIZE(csr_cfg->kvm_reg_id) =3D=3D sizeof(uint6=
-4_t)) {
-> +            reg =3D kvm_cpu_csr_get_u64(cpu, csr_cfg);
-> +        } else {
-> +            g_assert_not_reached();
-> +        }
->
-> -    KVM_RISCV_SET_CSR(cs, env, sstatus, env->mstatus);
-> -    KVM_RISCV_SET_CSR(cs, env, sie, env->mie);
-> -    KVM_RISCV_SET_CSR(cs, env, stvec, env->stvec);
-> -    KVM_RISCV_SET_CSR(cs, env, sscratch, env->sscratch);
-> -    KVM_RISCV_SET_CSR(cs, env, sepc, env->sepc);
-> -    KVM_RISCV_SET_CSR(cs, env, scause, env->scause);
-> -    KVM_RISCV_SET_CSR(cs, env, stval, env->stval);
-> -    KVM_RISCV_SET_CSR(cs, env, sip, env->mip);
-> -    KVM_RISCV_SET_CSR(cs, env, satp, env->satp);
-> +        ret =3D kvm_set_one_reg(cs, csr_cfg->kvm_reg_id, &reg);
-> +        if (ret) {
-> +            return ret;
-> +        }
-> +    }
->
->      return 0;
->  }
-> --
-> 2.49.0
->
->
+Thanks,
+drew
 
