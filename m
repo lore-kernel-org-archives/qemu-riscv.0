@@ -4,84 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 166A3C369DC
-	for <qemu-riscv@archiver.kernel.org>; Tue, 29 Apr 2025 14:34:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 68DEDC369DC
+	for <qemu-riscv@archiver.kernel.org>; Tue, 29 Apr 2025 17:12:05 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1u9m22-0000if-4F; Tue, 29 Apr 2025 10:33:59 -0400
+	id 1u9oUt-0008Gr-8o; Tue, 29 Apr 2025 13:11:55 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1u9m1r-0000W3-9l
- for qemu-riscv@nongnu.org; Tue, 29 Apr 2025 10:33:49 -0400
-Received: from mail-pg1-x532.google.com ([2607:f8b0:4864:20::532])
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1u9oUl-0008Ew-TV
+ for qemu-riscv@nongnu.org; Tue, 29 Apr 2025 13:11:48 -0400
+Received: from mail-pl1-x62c.google.com ([2607:f8b0:4864:20::62c])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1u9m1n-0003eN-8M
- for qemu-riscv@nongnu.org; Tue, 29 Apr 2025 10:33:44 -0400
-Received: by mail-pg1-x532.google.com with SMTP id
- 41be03b00d2f7-aee773df955so5979214a12.1
- for <qemu-riscv@nongnu.org>; Tue, 29 Apr 2025 07:33:42 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1u9oUj-0006ck-J8
+ for qemu-riscv@nongnu.org; Tue, 29 Apr 2025 13:11:47 -0400
+Received: by mail-pl1-x62c.google.com with SMTP id
+ d9443c01a7336-224191d92e4so68978045ad.3
+ for <qemu-riscv@nongnu.org>; Tue, 29 Apr 2025 10:11:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1745937221; x=1746542021; darn=nongnu.org;
+ d=ventanamicro.com; s=google; t=1745946704; x=1746551504; darn=nongnu.org;
  h=content-transfer-encoding:in-reply-to:content-language:references
  :cc:to:from:subject:user-agent:mime-version:date:message-id:from:to
  :cc:subject:date:message-id:reply-to;
- bh=lCvd/jEvoH4uS8fiQaq7q1KoXJTfiBIxoFTatV/aPGA=;
- b=md/3MkBgXjivZIA/lIkZmZB2YlgAumDBGgqcwAqWMgJ23xVlAVII8Ze+kD0dQitgzo
- lQDg+T90IPZiy9Eud+p+zhrnlBTLj87e9gayvwfoBcpT51maLgmV5jCWDHBJ2ilu8DEU
- /JXO+ckvUMi+GDKUzS5kqBAD989UTUV+tO8tT1LBZXiO6Fp3iDUIb4HeAMkFY+jH2UZI
- 61YJ7lYNR56PQY7n8sJJLviG46do+FXv/myCFoW1KSODILtLKVkatT1byl/oXvJIM9aO
- UbyShyZgF3fwrGI11RDoLJfQGMpSb9bZUIfXU3WnUgiDSbLQ6rQjFeMHwWH6GAhk1aiK
- Iaig==
+ bh=6CaCUpqk+9FSZbThzpVRvIPtToFP6IsxF0amHL3mChY=;
+ b=fyltm2veyKnXqgZIdlu8RjRjYT3Axc8gUvICWCwqXo1CVZEAikjJAhzgLqUHCJkRhC
+ GcD6Y6jAJXcUrUCz5DpdWypmCOIsuza87PMRgm4m0wjKXlAynydzxdhmbscKs3CGnc8C
+ tcz9FGNiLXlSQhsSBko0PdPy56KyaWYK7NU4wcSMe7I4fiKgo31/TBLzEK/YUk4UiMQu
+ Ac87MkKnDgG2nesa7Wx/hl0eMRgNXivkN2Q8/R/KlKL/p3uRZWPckCErdAJZQR//W9mp
+ Y52dTBbICt+LrROi3qkzpLPINoJnTXeeLh0zORVYqadOYPaJLdLWttYuuRjgnUuCIozu
+ X8QQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1745937221; x=1746542021;
+ d=1e100.net; s=20230601; t=1745946704; x=1746551504;
  h=content-transfer-encoding:in-reply-to:content-language:references
  :cc:to:from:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=lCvd/jEvoH4uS8fiQaq7q1KoXJTfiBIxoFTatV/aPGA=;
- b=ofAzk/mFqjcPYyXPPyoKfCeo6QIcB4gvFSZ+mWKPzFPJC4JzaZF2ctTfGPIBtBdXGs
- RhBi0ub6bpd1cmr3So4EvIXnm7BD0DRwGzQU1Wbliw7qMAorEp3n/zQcEz/iTeWPYJ3G
- NmyEDMhOUJ/UZxpE5UzDa+IvZFNEOuj95UIzW0w1zq/UoSFzpMlqsxeo0Xekqfrjbd0J
- svO7wW8O14PfutTrxEN7CA/yE++ekdwfSPVXhXYFR443baz7M7gzCUroAGL74ACaMv97
- IYhxqEMFCKEUzeaNRorsrlRSmyP9igRG9COoFcXN5HFcJ88+1WkSTtjIeoo0oWz6MOyq
- Ymsg==
-X-Gm-Message-State: AOJu0Yyg+Fu1mQyJ+6gn7bPwqsTtFTR4MKJeY7X5CJTa9Jepzc6WHOuz
- ZIlCbPaDsOldN0WLDEeXjuobSzKwaRmJ3HD7MTRC4vn5SUD//QMWFgvZgQoXP0SqYGtKBhVNA6i
- 4
-X-Gm-Gg: ASbGncu1xWUn4GKtqeEk2mcEjcmZH9VI0/ix/GCMC9rOxE7qxoqINL/un4/ny5y4KtU
- WRPPAHCMFx/phxkO/WDBSAP8mVwJAyMyKggNAK66m52Cxd12faSmh7FmMSEwBrDoDvJAJyM7mIe
- DgxT4gNcIXa9bUqoFI9uKnqkOTq54cj/uuPKKnhVO+B6hiWhSJ81P0GHxtkDPAjGoOTqzyfIzBF
- 7CE+o7lvz2br3dPUwTs2OS81jE6BUArdQ2E3yZ5YHW1ACtA3Ux7sPnFePFNwkd0eXx7XTOhobd5
- FnUJ09W1Ht1dxzoQNHAAAUW46Ytvv0fvjcKDgDQzCxyiV+3hJx7yAJ63TU+1pioPyPLXnXVt2PW
- V4wJWWY0=
-X-Google-Smtp-Source: AGHT+IEx49tIljXSY/B7J5gw1YeaezdqeGO9k44bFknnMMilR55hKzD+EYhBLaNLCYuHaAKyjjblJQ==
-X-Received: by 2002:a17:902:e551:b0:21f:40de:ae4e with SMTP id
- d9443c01a7336-22de6bff5b3mr43769385ad.9.1745937221103; 
- Tue, 29 Apr 2025 07:33:41 -0700 (PDT)
-Received: from [192.168.0.4] (71-212-47-143.tukw.qwest.net. [71.212.47.143])
+ bh=6CaCUpqk+9FSZbThzpVRvIPtToFP6IsxF0amHL3mChY=;
+ b=Gq7+BIv+OozLVBv4JXXcQCn7ROEzBRhH9UjGBZt033PrE7JXkQPu5/YIOTs2pf4/vs
+ hPTq7OctgIT+QGc2PJzU1Hbs8wMxeQFoCdHdbV1yJ2EuE3yfl35PihuOJ3tIJL4kn9+9
+ HPDUHrfuBOwrJaG2sDkovTiC28sFGxi0/rQ6zIWuaU0MSVVje+NYqYQndOMjDcNPF9OD
+ 8zAc+pGlzmWVaZIh+o19YWubp6kcBT9HyiZuOF/dkgSKZvk0uqrFhpSkotLFFYgLo+qh
+ Joj4q7I/crHe+Cu+zFAcLxZ6hC1NkZ0JaivHUk8f2BorVttT16sRWjSTS9L6FJg7CgRy
+ iJzw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXtTfrRc9JfZljJvlRH7tsb8nql/tv0Ok4fO0UvSA2BfNcBL8dNBBwKAf1kIuBeIp2jQrEEnsyOsDFm@nongnu.org
+X-Gm-Message-State: AOJu0YwkqCuxmmEEBOHLITC1L1oXAvRAAPyA7cOUQ/u3NeUKyAQHWufi
+ 0fdxPYak2GfOwq1QDoTN6Kxi4v2wUlmpAG03Ax+mUHmpNH0Ir353s7oXjU3DAXk=
+X-Gm-Gg: ASbGncuk7h8xrdAHhL9S0oueTZQja8MPrmK/tCorTjZTX6TKqDcnUMQKN9rDAOn2sR9
+ B9Dvop/ZcYgqNQJWiaTnp4hfXd9pBKBXb/iwa6ui4/EaU421IBg35JOruPLj/s9S2EFNgmkDojy
+ zst1fMJ5Mh7ecDJiqIRfsyIxDhcHVYLDapm7TSf0mzX/GC6Amsl3Fmyeb8RWdyJYcfIQ3g3w/cd
+ dVHcCWMYh+Vs0blqdl5Z+3Z9HiqfO75wmsObM8DKd2Oetk4n0m/YxlQYC0GFES9hdGVDRIkQlFQ
+ IkY88oZFtZ9lN8bZLHDWg9XtrhmDfw/wZbms/7NGCeJRI7q7UOvqR14=
+X-Google-Smtp-Source: AGHT+IFMEBJtPgNb1DpLL8WYgeOjwjmFLqaAfM3eJ2gHJDyyIGTJs3VNmn/Q1POVvRR51jLv4WkgAg==
+X-Received: by 2002:a17:903:19c6:b0:227:eb61:34b8 with SMTP id
+ d9443c01a7336-22df34e9148mr2491075ad.25.1745946703845; 
+ Tue, 29 Apr 2025 10:11:43 -0700 (PDT)
+Received: from [192.168.68.110] ([152.234.125.33])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-22db4dbe375sm102905495ad.96.2025.04.29.07.33.40
+ d9443c01a7336-22db4dbe58csm105647575ad.97.2025.04.29.10.11.41
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 29 Apr 2025 07:33:40 -0700 (PDT)
-Message-ID: <5b298186-50c8-4473-8eaf-d0bc6f6793ce@linaro.org>
-Date: Tue, 29 Apr 2025 07:33:38 -0700
+ Tue, 29 Apr 2025 10:11:43 -0700 (PDT)
+Message-ID: <45b9b66d-1aa7-47da-9458-04ab726d5aae@ventanamicro.com>
+Date: Tue, 29 Apr 2025 14:11:39 -0300
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 7/7] target/riscv: Fix write_misa vs aligned next_pc
-From: Richard Henderson <richard.henderson@linaro.org>
-To: qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com,
- dbarboza@ventanamicro.com, Alistair Francis <Alistair.Francis@wdc.com>
-References: <20250425152311.804338-1-richard.henderson@linaro.org>
- <20250425152311.804338-8-richard.henderson@linaro.org>
+Subject: Re: [PATCH 9/9] hw/riscv/virt.c: remove 'long' casts in fmt strings
+From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+To: Joel Stanley <joel@jms.id.au>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com,
+ liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com
+References: <20250423110630.2249904-1-dbarboza@ventanamicro.com>
+ <20250423110630.2249904-10-dbarboza@ventanamicro.com>
+ <CACPK8Xei9L_82YV7+wPmTacEh2MNLFticOEny_6kSM9miCAt2w@mail.gmail.com>
+ <d404d535-fc04-43ac-a7a7-2f216cad993c@ventanamicro.com>
 Content-Language: en-US
-In-Reply-To: <20250425152311.804338-8-richard.henderson@linaro.org>
+In-Reply-To: <d404d535-fc04-43ac-a7a7-2f216cad993c@ventanamicro.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::532;
- envelope-from=richard.henderson@linaro.org; helo=mail-pg1-x532.google.com
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::62c;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pl1-x62c.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -104,13 +106,88 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 4/25/25 08:23, Richard Henderson wrote:
-> -    if ((val & RVC) && (GETPC() & ~3) != 0) {
-> +    /* Suppress 'C' if next instruction is not aligned. */
-> +    if ((val & RVC) && (get_next_pc(env, ra) & ~3) != 0) {
-
-Bah.  I preserved a second bug here: not "& ~3" but "& 3".
 
 
-r~
+On 4/29/25 9:40 AM, Daniel Henrique Barboza wrote:
+> Joel,
+> 
+> I'll make these changes in this patch to be consistent with what we've
+> been discussing:
+> 
+> - change addr to hwaddr
+> - use HWADDR_PRIx instead of PRIx64
+> 
+> i.e. this diff:
+> 
+> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+> index 1eae84db15..0020d8f404 100644
+> --- a/hw/riscv/virt.c
+> +++ b/hw/riscv/virt.c
+> @@ -303,12 +303,13 @@ static void create_fdt_socket_cpus(RISCVVirtState *s, int socket,
+>   static void create_fdt_socket_memory(RISCVVirtState *s, int socket)
+>   {
+>       g_autofree char *mem_name = NULL;
+> -    uint64_t addr, size;
+> +    hwaddr addr;
+> +    uint64_t size;
+>       MachineState *ms = MACHINE(s);
+> 
+>       addr = s->memmap[VIRT_DRAM].base + riscv_socket_mem_offset(ms, socket);
+>       size = riscv_socket_mem_size(ms, socket);
+> -    mem_name = g_strdup_printf("/memory@%"PRIx64, addr);
+> +    mem_name = g_strdup_printf("/memory@%"HWADDR_PRIx, addr);
+>       qemu_fdt_add_subnode(ms->fdt, mem_name);
+>       qemu_fdt_setprop_cells(ms->fdt, mem_name, "reg",
+>           addr >> 32, addr, size >> 32, size);
+> 
+> 
+> I did this change and applied your "hw/riscv/virt: device tree reg cleanups" series on top
+> of it, and there are no conflicts. No change needed in your side.
+
+It seems I was wrong. The v2 will conflict with your patch 03. I think a rebase from
+your series can't be avoided ...
+
+Daniel
+
+> 
+> 
+> Thanks,
+> 
+> Daniel
+> 
+> 
+> 
+> On 4/24/25 6:41 AM, Joel Stanley wrote:
+>> On Wed, 23 Apr 2025 at 20:39, Daniel Henrique Barboza
+>> <dbarboza@ventanamicro.com> wrote:
+>>>
+>>> We can avoid the 'long' casts by using PRIx64 and HWADDR_PRIx on the fmt
+>>> strings for uint64_t and hwaddr types.
+>>>
+>>> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+>>> ---
+>>>   hw/riscv/virt.c | 29 +++++++++++++++--------------
+>>>   1 file changed, 15 insertions(+), 14 deletions(-)
+>>>
+>>> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+>>> index 036a0a9bfb..075c035f25 100644
+>>> --- a/hw/riscv/virt.c
+>>> +++ b/hw/riscv/virt.c
+>>> @@ -309,7 +309,7 @@ static void create_fdt_socket_memory(RISCVVirtState *s, int socket)
+>>>
+>>>       addr = s->memmap[VIRT_DRAM].base + riscv_socket_mem_offset(ms, socket);
+>>>       size = riscv_socket_mem_size(ms, socket);
+>>> -    mem_name = g_strdup_printf("/memory@%lx", (long)addr);
+>>> +    mem_name = g_strdup_printf("/memory@%"PRIx64, addr);
+>>
+>> I wondered why this wasn't a HWADDR_PRIx.
+>>
+>> addr (and NodeInfo::node_mem?) could be a hwaddr? That would make
+>> everything more consistent.
+>>
+>> Cheers,
+>>
+>> Joel
+> 
+
 
