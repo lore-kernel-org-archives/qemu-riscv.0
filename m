@@ -4,82 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 29E1AC3ABA9
-	for <qemu-riscv@archiver.kernel.org>; Tue, 29 Apr 2025 12:26:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7045CC3ABA5
+	for <qemu-riscv@archiver.kernel.org>; Tue, 29 Apr 2025 12:41:28 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1u9k2T-0004A8-4c; Tue, 29 Apr 2025 08:26:17 -0400
+	id 1u9kGj-0006o5-1w; Tue, 29 Apr 2025 08:41:01 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1u9k2R-00049X-1I
- for qemu-riscv@nongnu.org; Tue, 29 Apr 2025 08:26:15 -0400
-Received: from mail-pg1-x533.google.com ([2607:f8b0:4864:20::533])
+ id 1u9kGh-0006na-95
+ for qemu-riscv@nongnu.org; Tue, 29 Apr 2025 08:40:59 -0400
+Received: from mail-pf1-x431.google.com ([2607:f8b0:4864:20::431])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1u9k2N-0001WS-GL
- for qemu-riscv@nongnu.org; Tue, 29 Apr 2025 08:26:14 -0400
-Received: by mail-pg1-x533.google.com with SMTP id
- 41be03b00d2f7-af548cb1f83so6025579a12.3
- for <qemu-riscv@nongnu.org>; Tue, 29 Apr 2025 05:26:09 -0700 (PDT)
+ id 1u9kGf-0003wp-DU
+ for qemu-riscv@nongnu.org; Tue, 29 Apr 2025 08:40:59 -0400
+Received: by mail-pf1-x431.google.com with SMTP id
+ d2e1a72fcca58-736b98acaadso5637722b3a.1
+ for <qemu-riscv@nongnu.org>; Tue, 29 Apr 2025 05:40:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1745929568; x=1746534368; darn=nongnu.org;
+ d=ventanamicro.com; s=google; t=1745930456; x=1746535256; darn=nongnu.org;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=PwHLNqHV1p2YGF0jQBhoTy8nyeKgkUjSl0ezZ7PMGYM=;
- b=n8YPMxDGY0DAtUxH4LQ2IsFX0zXlNdCIr2Dls18Jp+R3/OcFFcn1WR0Rm4xtPT8J84
- Yge8YM99QVVarXXjH7NkZL/+vFatc4OoVL+HreLcwhadLDvyThzIGHEQL5EeRus12p6d
- kfmf6dDDi66/+NKn8yHi9fIJHIPvCHLYI+bWs92WZYTwHrsAA8HKSRosD7cSSVZV6WqW
- dxtzl4xtDrt6p+qYJwmeBo/c0Fy5m+3Tdu2oV9pD0j4Ud9os2FrY0Nxpm01nWeqTqK6Q
- yA+AAchSB7pOJpvGS+bgakdd+omhK/KnFq2eNry+yxDGc/ukeo7gazvEN4yf5Sbo7F/H
- QJMQ==
+ bh=Sq50ctwyHptMMLZK82LSC9HXtys8NmboWESfD0xculs=;
+ b=YjxSUNs1Y74I/HgsItmtczrGG/4f5p5mkTPTgxrtHkkE7yQtZO0vzhra71B+uOMmDs
+ i1xuF1YaoFHE7uk8g2+UThrXzs49bpXKpGtxYLCSPl+ExoxKCTBLuQgRxdoZyLELNsxn
+ FtJTsnF7yFKgVa9U1dEiVoDl8p2pDnj+YDt/r1JHrF+20rN/sCwnydp7x6FL+mT0PnWY
+ KP+7MM3f7RrXBvxCUpAxIQwSmM1z7Evc7500ZjwOES/LrNreMyqFu87a46GdOucGQMDo
+ GsJRSrHkmIS9sXoMAXqZK6Zc8488thookBhAS5nZh5+88sana+qtOsKeSGGgHllaYaRU
+ Uxjw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1745929568; x=1746534368;
+ d=1e100.net; s=20230601; t=1745930456; x=1746535256;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=PwHLNqHV1p2YGF0jQBhoTy8nyeKgkUjSl0ezZ7PMGYM=;
- b=M3Wm5VBIGgNzgWkXWExOy1l67qXVR4VOFT8SUkl7Z4CQf0WUabBoujXpYHNseQYnPw
- RYgMlx5Q+YlxkwIXo40ikn0c65lNXz6lUxxufx8AMOS8m0bKUQ2tPeN1RRe1xHQTAMvd
- evKlyC0tE0Q8jEUnDwFD/zizv2fdzg4pjBc3zr2VKE6pSCgvzEeF4a43gbqJ64ACCGW9
- WoyHBHWv0TK4uZWYEog3TExBPJxhswwbU5fJrIjmNOd7r2R1cSmmjF90HMq7HrFHBM3q
- qEtsOU72FwXGRf2rI/GennLjePUaWJLXA7lIpo4b9ImTwx8kp0svx1FgmGs9H1xWPjGk
- CLLg==
-X-Gm-Message-State: AOJu0Yzu2iY9t275DDzw7BMOm4FUr+5hxsJlgmT9rUmsm31/xyI3cbVH
- USMmkZbVYKktVMGqWNu+sALZRZd/mNMdeOHXOFdrwfdMRFjuZ5NyA1QKomoN6qU=
-X-Gm-Gg: ASbGnctK6eGF35udcl5TTQQpkYmQNq6GvlUTW7trPfiwawLtGQB2mDVp5zMbOcpsPd9
- nHNjXctLkEkX2tjHyj4hXJ9JBXIlH3otk2rS2e0+yPIRLoVT9ipylnJT6IGK1iZ2YdheCVOHQF1
- Gbob+LOmEhIiaDZmo3xunTXpt8Na0ptTitNJjWZtdLzV64MaxcXkgP95Iu16yY9OkkkNVXZLNWE
- NvzXPeM6k09/8yFox8AhnAe2uYmIIVMBhzo5Zp55Ib2Orv8IcC8oY1ajfbHzfYOuWuMQjnimkqO
- lGn8zuCPHRynwvTJwDExHA3k267Yh9yFStjb7MBgjCvYpXRmTh1sFIM=
-X-Google-Smtp-Source: AGHT+IGFGG6sqBgt5Zssh2d6NOQOAZgcAl7i0cFLDLYooeu+8D66hMTPrFRUjXoPufCP8c8tmIwSjA==
-X-Received: by 2002:a17:90a:d607:b0:309:f53c:b0a0 with SMTP id
- 98e67ed59e1d1-30a013b16d9mr18851934a91.24.1745929567866; 
- Tue, 29 Apr 2025 05:26:07 -0700 (PDT)
+ bh=Sq50ctwyHptMMLZK82LSC9HXtys8NmboWESfD0xculs=;
+ b=wP6Ani0hIdeBuRsLzcTAMg446Bn1Bl40tNg4soff8stO7QY40v43Beact9NRnQ5uN0
+ RjKDNLEYj0OvnE0kYkNC/rfU3uNy6wy6/+1ZR2dx2rioieTii8ArG21KuLwa+JdW3hLi
+ bMQqiHLxMaDjBOtLQf9GXxnOD6KxVrZnBEjNhzJAw9JLNDbdOEYxkAaz2zjeeKmyxJ27
+ 55XLoK9Q4/nMhvNnLRXtgsdR6i/bcIvBB+QYn6CKDyx7MRnKy+Q4EXFam3aQt+ibihH5
+ u28y7laXxL2nTbhKL+SVR8JdZgh7py99gowAAt0ZGXx4fGyx5aGZ1mTCMgiRVr46ZAL6
+ M1iQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXUPEZa29q9RcX5rfc9kLIcpZxHuwC8RvECQ/ihSLA8bNL6o1iRX6ZLZ6i1aqKPXoHFbn6doGw/WhhM@nongnu.org
+X-Gm-Message-State: AOJu0YxIjSApgi/pnWKiWOd4h6InK/cpQocRelM2a4YsIJ1dU5tsVABi
+ ORAxhbBr8+UhUgMH3KsP8UcuUKLGZtYydYGbLclKzhvSY+OLYcoNqM8O6vRDC70=
+X-Gm-Gg: ASbGncv7d1KFCd8ohzSVoZDonGBqNbeSa4GSwqN43liCdoe4gDvJHQIvHno/GvRXU4I
+ apbi/iMcBfqmKOk82FfTf0AeR3D0Y9+NjRuqtD6s4lkbp9BfN0NcL8llT88TH1HPZr3n9CUEYIJ
+ Ksq0MYcZrt46GqDAm36VvvlGE67nA0etKjZ8tGxPoBVwXTX3RwlhlRi8opgSCPqXj2MEuw2qGay
+ HK3POZ9myZtJW9EaywhgV70FPWlHCfjr4GNK9JiS6e3GfQaJpcdV3po4IMV1KiYLLqxxv0uFDUa
+ unZx43dGV57HkECSzn5HKKzUQVB5AAIuUq3WOH/i1zEOBJcmxRpAIJg=
+X-Google-Smtp-Source: AGHT+IGZ64wZZ8x1oVI5b42HlyTAyAnPJ9FEnoI8EzeKJZ5lBo2YQnFjdgJf0j7VegeZ8P+JFGHz4Q==
+X-Received: by 2002:a05:6a21:1645:b0:1fe:90c5:7cfb with SMTP id
+ adf61e73a8af0-2095cec9725mr3923141637.27.1745930455636; 
+ Tue, 29 Apr 2025 05:40:55 -0700 (PDT)
 Received: from [192.168.68.110] ([152.234.125.33])
  by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-309ef03ca86sm11042095a91.3.2025.04.29.05.26.06
+ d2e1a72fcca58-73e25962f61sm9749874b3a.74.2025.04.29.05.40.53
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 29 Apr 2025 05:26:07 -0700 (PDT)
-Message-ID: <c93ffa82-8ed6-4a1e-ad1a-9d4fc8940165@ventanamicro.com>
-Date: Tue, 29 Apr 2025 09:26:04 -0300
+ Tue, 29 Apr 2025 05:40:55 -0700 (PDT)
+Message-ID: <d404d535-fc04-43ac-a7a7-2f216cad993c@ventanamicro.com>
+Date: Tue, 29 Apr 2025 09:40:51 -0300
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 01/13] riscv/virt: Fix address type in
- create_fdt_socket_clint
+Subject: Re: [PATCH 9/9] hw/riscv/virt.c: remove 'long' casts in fmt strings
 To: Joel Stanley <joel@jms.id.au>
-Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org
-References: <20250429061223.1457166-1-joel@jms.id.au>
- <20250429061223.1457166-3-joel@jms.id.au>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com,
+ liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com
+References: <20250423110630.2249904-1-dbarboza@ventanamicro.com>
+ <20250423110630.2249904-10-dbarboza@ventanamicro.com>
+ <CACPK8Xei9L_82YV7+wPmTacEh2MNLFticOEny_6kSM9miCAt2w@mail.gmail.com>
 Content-Language: en-US
 From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <20250429061223.1457166-3-joel@jms.id.au>
+In-Reply-To: <CACPK8Xei9L_82YV7+wPmTacEh2MNLFticOEny_6kSM9miCAt2w@mail.gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::533;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pg1-x533.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::431;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pf1-x431.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -102,56 +105,78 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
+Joel,
+
+I'll make these changes in this patch to be consistent with what we've
+been discussing:
+
+- change addr to hwaddr
+- use HWADDR_PRIx instead of PRIx64
+
+i.e. this diff:
+
+diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+index 1eae84db15..0020d8f404 100644
+--- a/hw/riscv/virt.c
++++ b/hw/riscv/virt.c
+@@ -303,12 +303,13 @@ static void create_fdt_socket_cpus(RISCVVirtState *s, int socket,
+  static void create_fdt_socket_memory(RISCVVirtState *s, int socket)
+  {
+      g_autofree char *mem_name = NULL;
+-    uint64_t addr, size;
++    hwaddr addr;
++    uint64_t size;
+      MachineState *ms = MACHINE(s);
+  
+      addr = s->memmap[VIRT_DRAM].base + riscv_socket_mem_offset(ms, socket);
+      size = riscv_socket_mem_size(ms, socket);
+-    mem_name = g_strdup_printf("/memory@%"PRIx64, addr);
++    mem_name = g_strdup_printf("/memory@%"HWADDR_PRIx, addr);
+      qemu_fdt_add_subnode(ms->fdt, mem_name);
+      qemu_fdt_setprop_cells(ms->fdt, mem_name, "reg",
+          addr >> 32, addr, size >> 32, size);
 
 
-On 4/29/25 3:12 AM, Joel Stanley wrote:
-> The address is a hardware address, so use hwaddr for consistency with
-> the rest of the machine.
-> 
-> Signed-off-by: Joel Stanley <joel@jms.id.au>
-> ---
+I did this change and applied your "hw/riscv/virt: device tree reg cleanups" series on top
+of it, and there are no conflicts. No change needed in your side.
 
-I believe you have 2 patches #1 in this series:
 
-[PATCH 01/13] hw/riscv/virt: Fix clint base address type
-[PATCH 01/13] riscv/virt: Fix address type in create_fdt_socket_clint
-
-You probably renamed the commit subject to "hw/riscv/virt" and forgot to remove
-the generated patch, since both patches do the same changes.
-
-I believe we can ignore this patch and stick withe the first #1. Thanks,
-
+Thanks,
 
 Daniel
 
 
 
->   hw/riscv/virt.c | 6 +++---
->   1 file changed, 3 insertions(+), 3 deletions(-)
+On 4/24/25 6:41 AM, Joel Stanley wrote:
+> On Wed, 23 Apr 2025 at 20:39, Daniel Henrique Barboza
+> <dbarboza@ventanamicro.com> wrote:
+>>
+>> We can avoid the 'long' casts by using PRIx64 and HWADDR_PRIx on the fmt
+>> strings for uint64_t and hwaddr types.
+>>
+>> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+>> ---
+>>   hw/riscv/virt.c | 29 +++++++++++++++--------------
+>>   1 file changed, 15 insertions(+), 14 deletions(-)
+>>
+>> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+>> index 036a0a9bfb..075c035f25 100644
+>> --- a/hw/riscv/virt.c
+>> +++ b/hw/riscv/virt.c
+>> @@ -309,7 +309,7 @@ static void create_fdt_socket_memory(RISCVVirtState *s, int socket)
+>>
+>>       addr = s->memmap[VIRT_DRAM].base + riscv_socket_mem_offset(ms, socket);
+>>       size = riscv_socket_mem_size(ms, socket);
+>> -    mem_name = g_strdup_printf("/memory@%lx", (long)addr);
+>> +    mem_name = g_strdup_printf("/memory@%"PRIx64, addr);
 > 
-> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-> index 17a790821484..e4c0ac8a2a9a 100644
-> --- a/hw/riscv/virt.c
-> +++ b/hw/riscv/virt.c
-> @@ -324,7 +324,7 @@ static void create_fdt_socket_clint(RISCVVirtState *s,
->       int cpu;
->       g_autofree char *clint_name = NULL;
->       g_autofree uint32_t *clint_cells = NULL;
-> -    unsigned long clint_addr;
-> +    hwaddr clint_addr;
->       MachineState *ms = MACHINE(s);
->       static const char * const clint_compat[2] = {
->           "sifive,clint0", "riscv,clint0"
-> @@ -340,8 +340,8 @@ static void create_fdt_socket_clint(RISCVVirtState *s,
->       }
->   
->       clint_addr = s->memmap[VIRT_CLINT].base +
-> -                 (s->memmap[VIRT_CLINT].size * socket);
-> -    clint_name = g_strdup_printf("/soc/clint@%lx", clint_addr);
-> +                 s->memmap[VIRT_CLINT].size * socket;
-> +    clint_name = g_strdup_printf("/soc/clint@%"HWADDR_PRIx, clint_addr);
->       qemu_fdt_add_subnode(ms->fdt, clint_name);
->       qemu_fdt_setprop_string_array(ms->fdt, clint_name, "compatible",
->                                     (char **)&clint_compat,
+> I wondered why this wasn't a HWADDR_PRIx.
+> 
+> addr (and NodeInfo::node_mem?) could be a hwaddr? That would make
+> everything more consistent.
+> 
+> Cheers,
+> 
+> Joel
 
 
