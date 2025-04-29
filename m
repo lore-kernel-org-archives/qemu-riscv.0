@@ -4,79 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BE545C369CB
-	for <qemu-riscv@archiver.kernel.org>; Tue, 29 Apr 2025 06:17:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0E408C369CB
+	for <qemu-riscv@archiver.kernel.org>; Tue, 29 Apr 2025 06:17:32 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1u9eDq-00034v-Tt; Tue, 29 Apr 2025 02:13:39 -0400
+	id 1u9eDr-00036L-FB; Tue, 29 Apr 2025 02:13:39 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <joel.stan@gmail.com>)
- id 1u9eDg-0002dn-Vt; Tue, 29 Apr 2025 02:13:30 -0400
-Received: from mail-pl1-x62a.google.com ([2607:f8b0:4864:20::62a])
+ id 1u9eDb-0002Tl-6Y; Tue, 29 Apr 2025 02:13:26 -0400
+Received: from mail-pl1-x634.google.com ([2607:f8b0:4864:20::634])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <joel.stan@gmail.com>)
- id 1u9eDd-0005Ro-Vn; Tue, 29 Apr 2025 02:13:28 -0400
-Received: by mail-pl1-x62a.google.com with SMTP id
- d9443c01a7336-2260c91576aso47211765ad.3; 
- Mon, 28 Apr 2025 23:13:25 -0700 (PDT)
+ id 1u9eDX-0005Qy-Ka; Tue, 29 Apr 2025 02:13:22 -0400
+Received: by mail-pl1-x634.google.com with SMTP id
+ d9443c01a7336-223fd89d036so69602785ad.1; 
+ Mon, 28 Apr 2025 23:13:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1745907204; x=1746512004; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1745907196; x=1746511996; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:sender:from:to:cc:subject:date
  :message-id:reply-to;
- bh=gWxHh/yKpF2zaOUrrsaau/2srMsb179Ya0dY8ENIKYo=;
- b=ZhOTBG/qP8anJMD/ULvya+H5R54crvcaMAx644M+Uha6PpBKU6WAv1hTjv7EUKYYmG
- /FjrhYjPTALl0ZwbsfqN9mwI3xPIanSdHytzGp6L+qLfE35rugCwbPwsCKkGVPbsGhJg
- yTTMIMKvPWej+z8SoM6HBOoEeqkFkaD1zivO+Hn3IPrqa9+A7Su50u0KKm3RvgaYUVML
- Uc3ZqREdZOSVhJ25YxSgpHWR8sYKWmEJ07qvXlM7STwXzCy+Rm0hRMhGyBtVyK8pQkEo
- oLj1ogvftQVSvn50h7lzlWTr3n/9o6/SprMHt/M0+Z4k4EjjW8RSo2gQeOBLayKFal8A
- cing==
+ bh=i5jQ6wutrbKpg8Tugc42Fb3JNM9evspVPMNApKKkwn0=;
+ b=DPSH8weerqDMwgHNJqmmFwaQwALgCboqnuG8Y6GrO8IdwB4ApwoioX5fKVjyVt71N7
+ Ryt0rcWPecNVbMD/4nk1n1qFZh+9SqxT02HWd4mTG4EihHNiX2lxwFb3HADOJCBTS4g4
+ +GzrUnVbq922j4yepjwELryVbmAWAPpT51M8b+e89JhL+iLlTsFtkpLtRdYOsmU8O9dh
+ kwdCxnKI2Pc6OpWilUoIa8/mnmhas+E/EIB+D3tPMPM3Yp9My+0kP/+3FixxLNVJJz17
+ 64FiU1efMhskwN9Q6ByhDgFEWlvzLd/Jc9/0rGCu5XCby9hqtLGIw5mBAU5IaaqMwBma
+ FJCQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1745907204; x=1746512004;
+ d=1e100.net; s=20230601; t=1745907196; x=1746511996;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:sender:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=gWxHh/yKpF2zaOUrrsaau/2srMsb179Ya0dY8ENIKYo=;
- b=bKYiYVH8WCM4UlIjeRB1zgYkyWyGOgoTF0Ktypaktd3YfscSZhW8+NKoCFmk3ffqc7
- rQIyNoA9t50M4x0XrJ3vB5SoFmOJ/PDFouvmSAu/47A+Ev/b2gumB3+wOfJIWwgHV4Kn
- WsHzZmIHjDxsFFQl9O9PA8jstsiKrUfTw4ZsRdXwV98+YSPF5KZoIy5qyVgBVrHd/OOz
- Jh1wDCi+zzgRx24tyIM0Ge/Pj4ubmDx0AyqBET5Jl/X2Trm7+GCMsNIlWWVPMrOQJPWS
- KhLAIMAkxMBNJPqbVQ4g+32W4tCy6jW/Wqts8NL1lct0gw2Cobl/QfdsdZsDLdTiyIUr
- Sv9A==
+ bh=i5jQ6wutrbKpg8Tugc42Fb3JNM9evspVPMNApKKkwn0=;
+ b=aO8FEeVAqGSWyNZwjUYF5zENR7nx/Nv/lVbUS3Y7lt42wPi+33vi3g7ArdbO7nATsK
+ 8zVdrXww7URTgwxIJooLW5pBX6mlydCCzhooN97BDHT6aQe8MjxGwrjJlYmvF5uvEalR
+ 7oPv069RWcjnVWbmJFg5NJieHtc8EtpJNCkvtr82vS9S0OcyG8GTVZG7fzH22JfadSYy
+ DjKO6wLX3gguvGs7+HjtRAHZv2T1cTUgOFM32YRydGDxm+g+SIJioYioV1nfrhiWI3H7
+ MQO+pRZAc7w5wAgBCX9SOb5RurUE7mWMaZVrlEqM+YBlHurtCm5EldebrmybuAxSA15P
+ RByg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWOmcNtE0jUUKCXVBxPT5tl/g6BBsJGvY9Bhiioteb/qLK7D34eQE1VGbdfqAnvXNtshCbydmxVEBKg@nongnu.org
-X-Gm-Message-State: AOJu0YyRmc6BHleByU4vCHQelWd9YSmYjFjiWqQgzrASe0zOyYsIGajX
- PRf6xMT0hYd/Rn6hHr6m6ZPFJ9ZkVf+HiSNXs9OYttnLPxMpw6TOynaRAA==
-X-Gm-Gg: ASbGncvip5PjE/GHbDGtIF+kJVtcpHOnYMGcpfCgtSeDtfJ3632KCZ51RU2lb3iPUMi
- TlZtELI4PMgiPE3E6mNga6GrcD4L3oMV07Bk5C9JAbGMACJEktWZP4yyZ++EJXXHZxdKqphIgUB
- XFzznNd74XIOhBIak9NKLBwBV5b1h9s9j35Latn+8LY7ujcAKXeO/s0ezzL5ZhGFhfBB24cNt9h
- uswztfO7C8FnfHu3XPDeT44U1PBXaVbEte/iSG7h6gzkbh6fEOvWikRkJq+UjdWquvCItJVELDA
- b3h29FtqEzxRM+Z2EKVMOATE2FkQRXbf6VB4uysrDgGC0+zpmv4=
-X-Google-Smtp-Source: AGHT+IF+LIV7Qk6S59MyOpf6NVddImk7M0oT/AC9cEZT3KEIqLTiBEFRonoIY990a8Z+mduVgI/NKA==
-X-Received: by 2002:a17:902:dcd4:b0:22d:e458:96a5 with SMTP id
- d9443c01a7336-22de45897f3mr39932765ad.38.1745907204306; 
- Mon, 28 Apr 2025 23:13:24 -0700 (PDT)
+ AJvYcCUvRvhTsSQEC+CluNLDMf7QxBLsjIxCOGYiHRi2+fxso1zbL/PvhoT58NO2SYxHAG5xQ9FT3A+b4IBE@nongnu.org
+X-Gm-Message-State: AOJu0Yzz8yWtAhMQMVjF8tAqmdk8ie+9JX03PiuusEqqzpRqCGw0Hu+c
+ XtI2Qqm/gbEemfYHWzUtCTUPDY+6XDk1GTrxS/j++ZiRL3ulYVwzc/bmtQ==
+X-Gm-Gg: ASbGncvsh35YniiaaZuQbPiuVTvuqngc30SeZOY3ppsIQPUpPCapC+Arb5T7e/BNQ1L
+ lZkWovHbVUvYblaw6tIMqRWcXgQs/RwUY43ubXTYiga5Z8Gw7M9W4qItZShlJcFgxAX8kNK/Tv3
+ kBv1EYcrUOuKo4tqM5zNTpWx+8Uj0+IuV/IsEw1UMpIVK6N0oJgoXWq4NiTLyLT8+Y+DlqHqbMw
+ nLPGVNPa/KEcLsadQ6BOY7BSPpoaSMuL2NOnphUXG6bKDqK6nJQG7OQh6patV6eD0mqkaLySuYg
+ mOSddS3KuldYkfgRwZDTrqV7zpQkFyA2wm6+1qT5dnqIq/wcDgA=
+X-Google-Smtp-Source: AGHT+IFO6ZhzVehfjitzSOHJLmRRXTnSuJfRp7PiCXE4Bnf8xHb44Lp/5kbNdEsdvFN+GyzIGPS//Q==
+X-Received: by 2002:a17:903:2ec8:b0:216:6901:d588 with SMTP id
+ d9443c01a7336-22dc69ffb69mr178117665ad.15.1745907196493; 
+ Mon, 28 Apr 2025 23:13:16 -0700 (PDT)
 Received: from donnager-debian.. ([45.124.203.19])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-22db52169casm93947765ad.238.2025.04.28.23.13.22
+ d9443c01a7336-22db52169casm93947765ad.238.2025.04.28.23.13.14
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 28 Apr 2025 23:13:23 -0700 (PDT)
+ Mon, 28 Apr 2025 23:13:15 -0700 (PDT)
 From: Joel Stanley <joel@jms.id.au>
 To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 Cc: qemu-riscv@nongnu.org,
 	qemu-devel@nongnu.org
-Subject: [PATCH 11/13] hw/riscv/virt: Use setprop_sized_cells for iommu
-Date: Tue, 29 Apr 2025 15:42:20 +0930
-Message-ID: <20250429061223.1457166-13-joel@jms.id.au>
+Subject: [PATCH 08/13] hw/riscv/virt: Use setprop_sized_cells for reset
+Date: Tue, 29 Apr 2025 15:42:17 +0930
+Message-ID: <20250429061223.1457166-10-joel@jms.id.au>
 X-Mailer: git-send-email 2.47.2
 In-Reply-To: <20250429061223.1457166-1-joel@jms.id.au>
 References: <20250429061223.1457166-1-joel@jms.id.au>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::62a;
- envelope-from=joel.stan@gmail.com; helo=mail-pl1-x62a.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::634;
+ envelope-from=joel.stan@gmail.com; helo=mail-pl1-x634.google.com
 X-Spam_score_int: -19
 X-Spam_score: -2.0
 X-Spam_bar: --
@@ -109,23 +109,25 @@ and lower 32 bits across cells.
 
 Signed-off-by: Joel Stanley <joel@jms.id.au>
 ---
- hw/riscv/virt.c | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
+ hw/riscv/virt.c | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
 
 diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-index 823ef7cbe447..f8943f81790c 100644
+index cf7e16cc6678..baa894b11aa6 100644
 --- a/hw/riscv/virt.c
 +++ b/hw/riscv/virt.c
-@@ -1088,8 +1088,7 @@ static void create_fdt_iommu_sys(RISCVVirtState *s, uint32_t irq_chip,
-     qemu_fdt_setprop_cell(fdt, iommu_node, "#iommu-cells", 1);
-     qemu_fdt_setprop_cell(fdt, iommu_node, "phandle", iommu_phandle);
- 
--    qemu_fdt_setprop_cells(fdt, iommu_node, "reg",
--                           addr >> 32, addr, size >> 32, size);
-+    qemu_fdt_setprop_sized_cells(fdt, iommu_node, "reg", 2, addr, 2, size);
-     qemu_fdt_setprop_cell(fdt, iommu_node, "interrupt-parent", irq_chip);
- 
-     qemu_fdt_setprop_cells(fdt, iommu_node, "interrupts",
+@@ -932,8 +932,9 @@ static void create_fdt_reset(RISCVVirtState *s, uint32_t *phandle)
+         qemu_fdt_setprop_string_array(ms->fdt, name, "compatible",
+                                       (char **)&compat, ARRAY_SIZE(compat));
+     }
+-    qemu_fdt_setprop_cells(ms->fdt, name, "reg",
+-        0x0, s->memmap[VIRT_TEST].base, 0x0, s->memmap[VIRT_TEST].size);
++    qemu_fdt_setprop_sized_cells(ms->fdt, name, "reg",
++                                 2, s->memmap[VIRT_TEST].base,
++                                 2, s->memmap[VIRT_TEST].size);
+     qemu_fdt_setprop_cell(ms->fdt, name, "phandle", test_phandle);
+     test_phandle = qemu_fdt_get_phandle(ms->fdt, name);
+     g_free(name);
 -- 
 2.47.2
 
