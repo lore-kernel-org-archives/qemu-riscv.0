@@ -4,81 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5C3CEC3ABA9
-	for <qemu-riscv@archiver.kernel.org>; Tue, 29 Apr 2025 10:30:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 02D3FC369DC
+	for <qemu-riscv@archiver.kernel.org>; Tue, 29 Apr 2025 10:39:32 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1u9iDb-0005au-0N; Tue, 29 Apr 2025 06:29:39 -0400
+	id 1u9iMt-0005of-DN; Tue, 29 Apr 2025 06:39:15 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1)
- (envelope-from <prvs=207e857d8=Conor.Dooley@microchip.com>)
- id 1u9iDX-0005OI-4s; Tue, 29 Apr 2025 06:29:35 -0400
-Received: from esa.microchip.iphmx.com ([68.232.153.233])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1)
- (envelope-from <prvs=207e857d8=Conor.Dooley@microchip.com>)
- id 1u9iDU-0006nX-1c; Tue, 29 Apr 2025 06:29:34 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=microchip.com; i=@microchip.com; q=dns/txt; s=mchp;
- t=1745922572; x=1777458572;
- h=date:from:to:cc:subject:message-id:references:
- mime-version:in-reply-to;
- bh=2L111cUMUqGui8Fl98+XIAo/sLYJ08jdrumgOj04yME=;
- b=pyEGRgT0EX9rvgl3PgogtNIyWHWr449JMy+xn2ZW8V291i9drRbDF76i
- +0r6fJGik9k5gWf/daDjQX2JY9RUzwdxN+0kJeWXhvaN3jT3sUn2K5aCZ
- Zpyfd+LwDRK4ulBNJ8WLMrMHb9nvG14Nb/r3aB6/mETpP0bKPhMFE0UdO
- cyyNrYTddh+xHZSyW4VXItSatpPK7yhDBRXfN799TLoWpDJ2kx2QNURIl
- Rsq4S1Ki3rYEKG8UsmK9JisY9r41fdxpUtJi9Dg6ty0rq6BI69p3aQVNn
- +Tvast8sPSbOLy0MLFTZPQJtVjWcA3/4cdsD4GrhMj+5o9gg6PO9YlSW+ g==;
-X-CSE-ConnectionGUID: ZrcFWR+oTB2sWAO1m7RPDg==
-X-CSE-MsgGUID: WeRNPDHBSjGjuzy2gCVBqg==
-X-IronPort-AV: E=Sophos;i="6.15,248,1739862000"; 
- d="asc'?scan'208";a="272377144"
-X-Amp-Result: UNKNOWN
-X-Amp-Original-Verdict: FILE UNKNOWN
-Received: from unknown (HELO email.microchip.com) ([170.129.1.10])
- by esa5.microchip.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES128-GCM-SHA256;
- 29 Apr 2025 03:29:25 -0700
-Received: from chn-vm-ex03.mchp-main.com (10.10.85.151) by
- chn-vm-ex04.mchp-main.com (10.10.85.152) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.44; Tue, 29 Apr 2025 03:28:54 -0700
-Received: from wendy (10.10.85.11) by chn-vm-ex03.mchp-main.com (10.10.85.151)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.44 via Frontend
- Transport; Tue, 29 Apr 2025 03:28:52 -0700
-Date: Tue, 29 Apr 2025 11:27:55 +0100
-From: Conor Dooley <conor.dooley@microchip.com>
-To: Joel Stanley <joel@jms.id.au>
-CC: Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- <qemu-devel@nongnu.org>, <qemu-riscv@nongnu.org>, <alistair.francis@wdc.com>, 
- <liwei1518@gmail.com>, <zhiwei_liu@linux.alibaba.com>, <palmer@rivosinc.com>, 
- Conor Dooley <conor@kernel.org>
-Subject: Re: [PATCH 1/9] hw/riscv/virt.c: enforce s->memmap use in
- machine_init()
-Message-ID: <20250429-lend-voucher-2c02499dcb59@wendy>
-References: <20250423110630.2249904-1-dbarboza@ventanamicro.com>
- <20250423110630.2249904-2-dbarboza@ventanamicro.com>
- <CACPK8XfF74wHqdBBz=qPLefAD8pKT-0C8e=kfFtTeMH+teF-7A@mail.gmail.com>
- <7d5181de-eb42-44b0-80cb-b2f8a3aed47c@ventanamicro.com>
- <CACPK8Xc5Av4QnHwcfe5JhcHUYmdLxm6P+vDh=_zze7UvbaaJ8w@mail.gmail.com>
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1u9iMq-0005oJ-4J
+ for qemu-riscv@nongnu.org; Tue, 29 Apr 2025 06:39:12 -0400
+Received: from mail-pl1-x634.google.com ([2607:f8b0:4864:20::634])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1u9iMn-0008Dn-GY
+ for qemu-riscv@nongnu.org; Tue, 29 Apr 2025 06:39:11 -0400
+Received: by mail-pl1-x634.google.com with SMTP id
+ d9443c01a7336-22c33677183so60308825ad.2
+ for <qemu-riscv@nongnu.org>; Tue, 29 Apr 2025 03:39:08 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=ventanamicro.com; s=google; t=1745923148; x=1746527948; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=mX0gkXHGLlLQRmIkMaRRFU+x9lRowO7aLqDiYuJ/0u4=;
+ b=FYbQz53vT/lDIlDwDTPV1jejwj4eJVnJIMyyRvD9xBBynotRghuWw9oarTF8nqVwxO
+ DcgX6lZEswVcG+GbftkAJGuKX4m/sDXjbtOb36kUm0MurpOUUs3hJgZwYQatw1V1ZRAJ
+ AJj4/hRfUd1Db7L9H9oleesUMzLSb/HyIUum2+BaujzzEndx1WkPhGC8NZVQlGLfn7Vq
+ GE7JvVwyppXTA3IzGSNxj593G0bPft8mYEhwL9gGpIX5KfmhmhRdZviXg7J63J6u0Gll
+ R4LZUbsqS4Z6xwB26VCeaRgfQBhn+Y35xJ2nIDK2ldEW5N5au1SwSHr5YulLn6KDjmLg
+ Vhww==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1745923148; x=1746527948;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=mX0gkXHGLlLQRmIkMaRRFU+x9lRowO7aLqDiYuJ/0u4=;
+ b=ZH/JVJJJtPiMiXqxPFqphBTFtpch3RV5P89ykehx6YdQbHe6ITXwyL8ofG3QKJPqEG
+ UgN3q4s9JRfhx9k5Ozh6dShde5anefwZGgNFkbYh/3B/XgiSs1zyhpeCYSQ8M057Za0T
+ z7P5qZUtWYibo0lqVv3/yfqe6MT08Fd736Btvpwm4NsJ+W6ob4x1dGyhiY9hJJWAD9Mo
+ EK8UkU85x2qRMAR5qM01RR/xCIAhBWV6Kl6qmYQA6OCfDEtRIVD0k4u4jw9mb1PP6pM2
+ VsddzQn5Sy36s1GsUZU/S3cjuKYb8xIC8+JSMcOyEunXiO/zSz7gLQEHsgB/LxQkhEwB
+ IAIg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXf0TcBnnWPIdNAzZrMG6EwLH6g1Kzp28piPX7Hj0DPMZ7pFDL1T4fLNHYn4FRWx6StawcbOpBal27O@nongnu.org
+X-Gm-Message-State: AOJu0YxmEQYUj1k0+7rTVnI1nC67QwWG0yPj8X6R00y+XClrO2ZOOLRq
+ dHYYEKzSKxR8ywwxJw+xuUNPW6mSxYttzrI9a7wbB4T9AM1ULiJTSsMEH5DRoUY=
+X-Gm-Gg: ASbGncsFh6bLl0MZNR+3XaslVQNj/KMSE9HN69di6MqqBUoTmPWDqQBjzTDU6ukwArI
+ GuR4FrK+/6zXEvQ6dSq7TPdEF18X+d/aZLMG8L3arU0DvzIbLB6DI5ahNb0zeW1/hSFl8ABjvp8
+ 27zbHXWw9BLlZE10rHKWKcJCNLJpGaZA1uPLlOoT57uTc8YdFsFzE0cs5myzYKMl4f/v0Edx9A9
+ 0YZLXEG2DGi4SKYmk8VY6//RoM78r/EeKqSuVfAIg518m1CuXrKXtOPM6BdgGxp9IG5Qj1kahoA
+ HsHGKzVk+NL3cXy0buIPmdeEV+InbvSpUY1t23GmBksAG+sdcSXiJ84=
+X-Google-Smtp-Source: AGHT+IEi9nHbk//7ZmpgnECGVUmbVE/BT9dZwY30oN/aKvROIpPcg9hOpFgodzkUBhW4QQ26Hp7BKw==
+X-Received: by 2002:a17:902:e841:b0:223:619e:71e9 with SMTP id
+ d9443c01a7336-22dc69f3b71mr187575525ad.11.1745923147737; 
+ Tue, 29 Apr 2025 03:39:07 -0700 (PDT)
+Received: from [192.168.68.110] ([152.234.125.33])
+ by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-22db4dc7b7asm99662495ad.102.2025.04.29.03.39.05
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 29 Apr 2025 03:39:07 -0700 (PDT)
+Message-ID: <bb6ee987-089e-4940-8e11-1b61d1e0b2e9@ventanamicro.com>
+Date: Tue, 29 Apr 2025 07:39:03 -0300
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature"; boundary="qBVCxkIib9Ir8MMb"
-Content-Disposition: inline
-In-Reply-To: <CACPK8Xc5Av4QnHwcfe5JhcHUYmdLxm6P+vDh=_zze7UvbaaJ8w@mail.gmail.com>
-Received-SPF: pass client-ip=68.232.153.233;
- envelope-from=prvs=207e857d8=Conor.Dooley@microchip.com;
- helo=esa.microchip.iphmx.com
-X-Spam_score_int: -48
-X-Spam_score: -4.9
-X-Spam_bar: ----
-X-Spam_report: (-4.9 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.484,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_MED=-2.3, RCVD_IN_VALIDITY_CERTIFIED_BLOCKED=0.001,
- RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001, SPF_HELO_PASS=-0.001,
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v4 8/9] target/riscv/kvm: read/write KVM regs via env size
+To: Andrew Jones <ajones@ventanamicro.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com,
+ liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com
+References: <20250428192323.84992-1-dbarboza@ventanamicro.com>
+ <20250428192323.84992-9-dbarboza@ventanamicro.com>
+ <20250429-cfab3ab0131af8d6da2f0a14@orel>
+Content-Language: en-US
+From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+In-Reply-To: <20250429-cfab3ab0131af8d6da2f0a14@orel>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::634;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pl1-x634.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -95,133 +105,106 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
---qBVCxkIib9Ir8MMb
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
 
-Yo,
 
-On Tue, Apr 29, 2025 at 02:55:44PM +0930, Joel Stanley wrote:
-> On Fri, 25 Apr 2025 at 21:23, Daniel Henrique Barboza
-> <dbarboza@ventanamicro.com> wrote:
-> > On 4/24/25 6:51 AM, Joel Stanley wrote:
-> > > On Wed, 23 Apr 2025 at 20:37, Daniel Henrique Barboza
-> > > <dbarboza@ventanamicro.com> wrote:
-> > >>
-> > >> Throughout the code we're accessing the board memmap, most of the ti=
-me,
-> > >> by accessing it statically via 'virt_memmap'. This static map is also
-> > >> assigned in the machine state in s->memmap.
-> > >>
-> > >> We're also passing it as a variable to some fdt functions, which is
-> > >> unorthodox since we can spare a function argument by accessing it
-> > >> statically or via the machine state.
-> > >>
-> > >> All the current forms are valid but not all of the are scalable. In =
-the
-> > >> future we will version this board, and then all this code will need
-> > >> rework because it should point to the updated memmap. In this case,
-> > >> we'll want to assign the adequate versioned memmap once during init,
-> > >> in s->memmap like it is being done today, and the rest of the code
-> > >> will access the updated map via s->memmap.
-> > >
-> > > I was writing a patch for a machine and came across the same
-> > > inconsistencies. Nice clean up.
-> > >
-> > > Some of the device initlisation code could be refactored out to be
-> > > shared by other machines within the riscv directory. Related, parts of
-> > > the device tree creation could belong to the model, instead of to the
-> > > machine, as the properties are a property (!) of the device.
-> >
-> > Yes, delegating the FDT creation to the device, instead of having each =
-machine
-> > to create the (mostly) same FDT code over and over again, is something =
-that
-> > I've considering for awhile.
-> >
-> > I keep postponing it mainly because I would like to verify with the DT =
-folks if
-> > there's a guarantee that a given device/CPU DT is always the same, i.e.=
- a device
-> > DT is always the same regardless of the machine. I have a guess that th=
-at this is
-> > indeed the case but a confirmation would be nice .... Conor, care to co=
-mment?
+On 4/29/25 6:02 AM, Andrew Jones wrote:
+> On Mon, Apr 28, 2025 at 04:23:22PM -0300, Daniel Henrique Barboza wrote:
+>> We're going to add support for scounteren in the next patch. KVM defines
+>> as a target_ulong CSR, while QEMU defines env->scounteren as a 32 bit
+>> field. This will cause the current code to read/write a 64 bit CSR in a
+>> 32 bit field when running in a 64 bit CPU.
+>>
+>> To prevent that, change the current logic to honor the size of the QEMU
+>> storage instead of the KVM CSR reg.
+>>
+>> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+>> Suggested-by: Andrew Jones <ajones@ventanamicro.com>
+>> ---
+>>   target/riscv/kvm/kvm-cpu.c | 14 +++++++++-----
+>>   1 file changed, 9 insertions(+), 5 deletions(-)
+>>
+>> diff --git a/target/riscv/kvm/kvm-cpu.c b/target/riscv/kvm/kvm-cpu.c
+>> index 5efee8adb2..53c34b43a2 100644
+>> --- a/target/riscv/kvm/kvm-cpu.c
+>> +++ b/target/riscv/kvm/kvm-cpu.c
+>> @@ -135,6 +135,7 @@ typedef struct KVMCPUConfig {
+>>       const char *description;
+>>       target_ulong offset;
+>>       uint64_t kvm_reg_id;
+>> +    uint32_t prop_size;
+>>       bool user_set;
+>>       bool supported;
+>>   } KVMCPUConfig;
+>> @@ -237,6 +238,7 @@ static void kvm_riscv_update_cpu_misa_ext(RISCVCPU *cpu, CPUState *cs)
+>>   
+>>   #define KVM_CSR_CFG(_name, _env_prop, reg_id) \
+>>       {.name = _name, .offset = ENV_CSR_OFFSET(_env_prop), \
+>> +     .prop_size = sizeof(((CPURISCVState *)0)->_env_prop), \
+>>        .kvm_reg_id = reg_id}
+>>   
+>>   static KVMCPUConfig kvm_csr_cfgs[] = {
+>> @@ -632,6 +634,7 @@ static int kvm_riscv_get_regs_csr(CPUState *cs)
+>>   {
+>>       RISCVCPU *cpu = RISCV_CPU(cs);
+>>       uint64_t reg;
+>> +    uint32_t reg32;
+> 
+> We don't need this variable.
+> 
+>>       int i, ret;
+>>   
+>>       for (i = 0; i < ARRAY_SIZE(kvm_csr_cfgs); i++) {
+>> @@ -646,9 +649,10 @@ static int kvm_riscv_get_regs_csr(CPUState *cs)
+>>               return ret;
+>>           }
+>>   
+>> -        if (KVM_REG_SIZE(csr_cfg->kvm_reg_id) == sizeof(uint32_t)) {
+>> -            kvm_cpu_csr_set_u32(cpu, csr_cfg, reg);
+>> -        } else if (KVM_REG_SIZE(csr_cfg->kvm_reg_id) == sizeof(uint64_t)) {
+>> +        if (csr_cfg->prop_size == sizeof(uint32_t)) {
+>> +            reg32 = reg & 0xFFFF;
+> 
+> This is masking off too many bits. We want the lower 32, not just the
+> lower 16.
 
-Uhm, if the device node was always the same, regardless of "machine"
-then there'd be no need for any properties other than
-compatible/reg/links to provider nodes! But unfortunately that's not what
-properties are limited to, there's properties for a whole host of other
-elements of device configuration.
+ooops ....
 
-Generally speaking, properties will be fixed for a given "machine"/board,
-but some could change depending on things like AMP affecting which
-mailbox channel you're permitted to use or using a different firmware
-(or version of said firmware) can change a node. For example, the
-extensions supported by a CPU can change based on what version of OpenSBI
-you're running. The latter might not affect QEMU, because you're providing
-a DT for the firmware to edit, but from the OS point of view there's
-different, but valid and complete, descriptions for the same physical
-hardware.
+> 
+>> +            kvm_cpu_csr_set_u32(cpu, csr_cfg, reg32);
+> 
+> If the compiler warns when giving this function reg, then we can cast it.
+> 
+>   kvm_cpu_csr_set_u32(cpu, csr_cfg, (uint32_t)reg);
+> 
+> otherwise we don't need to do anything special.
 
-Also, on the same machine you might have variation between two instances
-of the same IP, other than just the reg/provider links changing, for
-example if there's two different dwmac ethernet controllers configured
-to provide different maximum speeds.
+I'll remove the extra var and let the compiler do its thing. I'll add a cast
+for extra clarity since some toolchains might nag about it.
 
-So yeah, I can't give you any assurance that even one specific IP/CPU on
-a specific SoC on a specific machine/board will have the same device
-node unfortunately.
+Daniel
 
-> My understanding is bindings strive to specify the hardware
-> independent of the machine it's part of. We have bindings in the
-> kernel tree, and associated drivers that use those bindings, that work
-> fine on different machines. The litex peripherals are an extreme case
-> of this; peripherals defined in python that are attached to soft cores
-> often running on a FPGA.
+> 
+>> +        } else if (csr_cfg->prop_size == sizeof(uint64_t)) {
+>>               kvm_cpu_csr_set_u64(cpu, csr_cfg, reg);
+>>           } else {
+>>               g_assert_not_reached();
+>> @@ -671,9 +675,9 @@ static int kvm_riscv_put_regs_csr(CPUState *cs)
+>>               continue;
+>>           }
+>>   
+>> -        if (KVM_REG_SIZE(csr_cfg->kvm_reg_id) == sizeof(uint32_t)) {
+>> +        if (csr_cfg->prop_size == sizeof(uint32_t)) {
+>>               reg = kvm_cpu_csr_get_u32(cpu, csr_cfg);
+>> -        } else if (KVM_REG_SIZE(csr_cfg->kvm_reg_id) == sizeof(uint64_t)) {
+>> +        } else if (csr_cfg->prop_size == sizeof(uint64_t)) {
+>>               reg = kvm_cpu_csr_get_u64(cpu, csr_cfg);
+>>           } else {
+>>               g_assert_not_reached();
+>> -- 
+>> 2.49.0
+>>
+> 
+> Thanks,
+> drew
 
-Yeah, FPGA stuff is an extreme case, but a great thing to use as a test
-for the idea, since you could have properties that change from
-compilation to compilation. Take a look at something like snps,dwmac.yaml
-where there's about seven thousand different properties, many of which
-could be varied if it were in an FPGA design rather than an ASIC..
-
-The other kinda extreme case in variability is the stuff that's on a
-board rather than an SoC, for example the same mmc/sd card controller
-on an SoC can have different device nodes depending on how a board has
-been designed. What Linux calls "IIO" devices are also impacted
-massively by how a board is configured or use-case, since they're often
-measurement devices with different analogue circuitry connected to them.
-
-I'm not 100% sure how all that translates to a machine in QEMU, dunno if
-running a different AMP context would require a different machine etc,
-but I hope that gives a general impression of what could potentially
-vary? LMK if not.
-Conor.
-
-> At a practical level generating the device tree for a given device
-> does need to take into account specifics of the machine.
->=20
-> Things like interrupt properties depend on the interrupt device you're
-> delivering to (some have two cells to provide a 'flags' parameter
-> alongside the irq number). In general anything that contains phandles
-> could end up being machine specific. Another case is the number of
-> cells in reg properties, which depend on the bus the device is
-> described to be on.
-
->=20
-
---qBVCxkIib9Ir8MMb
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYIAB0WIQRh246EGq/8RLhDjO14tDGHoIJi0gUCaBCpmwAKCRB4tDGHoIJi
-0vv1AQDwLR5prT12xcT35XPHv12hQ9x5o0pSWqAVXHwAdPR7JQEA6VLKvgB60p9k
-iLa3Fp3T7Q9pV5FST/+qqrDTjruOVwk=
-=fshN
------END PGP SIGNATURE-----
-
---qBVCxkIib9Ir8MMb--
 
