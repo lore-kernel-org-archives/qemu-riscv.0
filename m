@@ -4,88 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6AAAAC369DC
-	for <qemu-riscv@archiver.kernel.org>; Tue, 29 Apr 2025 13:01:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 166A3C369DC
+	for <qemu-riscv@archiver.kernel.org>; Tue, 29 Apr 2025 14:34:04 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1u9kYR-00033A-5Z; Tue, 29 Apr 2025 08:59:19 -0400
+	id 1u9m22-0000if-4F; Tue, 29 Apr 2025 10:33:59 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1u9kYO-0002uH-TC
- for qemu-riscv@nongnu.org; Tue, 29 Apr 2025 08:59:17 -0400
-Received: from mail-pj1-x102b.google.com ([2607:f8b0:4864:20::102b])
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1u9m1r-0000W3-9l
+ for qemu-riscv@nongnu.org; Tue, 29 Apr 2025 10:33:49 -0400
+Received: from mail-pg1-x532.google.com ([2607:f8b0:4864:20::532])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1u9kYM-0000Lo-PH
- for qemu-riscv@nongnu.org; Tue, 29 Apr 2025 08:59:16 -0400
-Received: by mail-pj1-x102b.google.com with SMTP id
- 98e67ed59e1d1-306b78ae2d1so4909404a91.3
- for <qemu-riscv@nongnu.org>; Tue, 29 Apr 2025 05:59:14 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1u9m1n-0003eN-8M
+ for qemu-riscv@nongnu.org; Tue, 29 Apr 2025 10:33:44 -0400
+Received: by mail-pg1-x532.google.com with SMTP id
+ 41be03b00d2f7-aee773df955so5979214a12.1
+ for <qemu-riscv@nongnu.org>; Tue, 29 Apr 2025 07:33:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1745931553; x=1746536353; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=uVo4dne972nTKadziczb2hv8dPAzjuCHEpOiobx/orI=;
- b=E6mexcbrZMfpk0dTjRATbIX386M4LFRXA/hHYrjm5/+uqn25CwjPcjl16rrwrzZZ0J
- rSgv8Dp5l3K9u5VTy9nEK7qsIi5IC1pCTb4+yG9DUXH7Krn4mTEZ63DarJaRbV01p409
- bm0QMT9bDxLG9H+GQmSnL/3x3dbLANkikwe5yAHpDbhRSEYICdrRlc9rW4S7AS6seRFM
- re+F6S2oim/eSzcMpMNsGkbdrmOiFBpWktdtWFFKofUXU1r8NsRlQhPiesT2+kKn+BIs
- dak/eS6QdfXBp2ZgGnu4XI6jgijgGS38+TvjhL3Jk+O31FY0Oz9Rwt4/E+bC//sVdfuu
- 7rIQ==
+ d=linaro.org; s=google; t=1745937221; x=1746542021; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:content-language:references
+ :cc:to:from:subject:user-agent:mime-version:date:message-id:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=lCvd/jEvoH4uS8fiQaq7q1KoXJTfiBIxoFTatV/aPGA=;
+ b=md/3MkBgXjivZIA/lIkZmZB2YlgAumDBGgqcwAqWMgJ23xVlAVII8Ze+kD0dQitgzo
+ lQDg+T90IPZiy9Eud+p+zhrnlBTLj87e9gayvwfoBcpT51maLgmV5jCWDHBJ2ilu8DEU
+ /JXO+ckvUMi+GDKUzS5kqBAD989UTUV+tO8tT1LBZXiO6Fp3iDUIb4HeAMkFY+jH2UZI
+ 61YJ7lYNR56PQY7n8sJJLviG46do+FXv/myCFoW1KSODILtLKVkatT1byl/oXvJIM9aO
+ UbyShyZgF3fwrGI11RDoLJfQGMpSb9bZUIfXU3WnUgiDSbLQ6rQjFeMHwWH6GAhk1aiK
+ Iaig==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1745931553; x=1746536353;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
+ d=1e100.net; s=20230601; t=1745937221; x=1746542021;
+ h=content-transfer-encoding:in-reply-to:content-language:references
+ :cc:to:from:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=uVo4dne972nTKadziczb2hv8dPAzjuCHEpOiobx/orI=;
- b=iNYaygIJIBiJyZ8fBXm6ZG9kbnZlqV8GyI/b4jLRndAmVfcCwEy1ZKtKQ58fR1KF7N
- VMxVzRiaQT1QfxnB49yTqD11fpp/mrYozmr4LTsUV2wQQmvBBkVHNssyVB3u3v3june0
- N3gLfpgzirl3bfpv441AfBdFvHCavQSwGp1DPZpyOYLyiIH7wXpkPcpvSOWJ/iXKHvYR
- NQjcHXc1YFcCe/Px/FFCtL/4BZSzGxCaq4EJy98VM4m5FRSWmpokyZ9qOOVN7RIILl9B
- AYFTflaBVfkvH0eEasjdUmntzJ8lmtJldd6FvAZiMS+YnTEsJv91gaw8xSyUYkhDqHvq
- 9y3w==
-X-Gm-Message-State: AOJu0YxcvKT9XXbt7/wsDgNvewGwUvt7K9GzAufXAXjOYwkaQW6LxYtq
- zZ4L7XMwJD+bNhZnnEkAsgY3XlV1tes/TOwAGkhNxI5o+v1MAsJ9boRpqXACd60=
-X-Gm-Gg: ASbGnctaPwzcitOqySmSb/2mJXrQ2pGSX+kLnHHaAtIyS2Ga5+SBqFLp5VK2cV9q1p1
- eLnKN5s46NiyJzTtLfiRTWElHbESKOS5WDN/IvZDHr7k9DeosYM6UjViO5fEVolBxEnAWhJ2IC3
- YHa7Y2YtEMqHHnkGpKA+khpTJjzJrVlbmQvpLSqGWH9QlE6jdGEiB7Ag0JWBYUcEfmjnqhxscTb
- qyK7m0ehFvSxBPd4m6fg6d9rX8xRp0K5+Ao0BAF7UtpATPmEgi0/nHtcVvM1l4KQ/VxSVLQYsAJ
- 3/U2mXiGfU2sPTs1HGj44WZxcWdiykJDvYwFafb3SDYasdXaUfobBjg=
-X-Google-Smtp-Source: AGHT+IHyDdNdsq/V/N3ZhboTWyaqfrAvDU4XeKVhDrxh/SIAY/tJdl51HtBULVyehbK10HFp0i6GyQ==
-X-Received: by 2002:a17:90b:5249:b0:2f1:3355:4a8f with SMTP id
- 98e67ed59e1d1-30a012ed05dmr16128208a91.4.1745931553151; 
- Tue, 29 Apr 2025 05:59:13 -0700 (PDT)
-Received: from [192.168.68.110] ([152.234.125.33])
+ bh=lCvd/jEvoH4uS8fiQaq7q1KoXJTfiBIxoFTatV/aPGA=;
+ b=ofAzk/mFqjcPYyXPPyoKfCeo6QIcB4gvFSZ+mWKPzFPJC4JzaZF2ctTfGPIBtBdXGs
+ RhBi0ub6bpd1cmr3So4EvIXnm7BD0DRwGzQU1Wbliw7qMAorEp3n/zQcEz/iTeWPYJ3G
+ NmyEDMhOUJ/UZxpE5UzDa+IvZFNEOuj95UIzW0w1zq/UoSFzpMlqsxeo0Xekqfrjbd0J
+ svO7wW8O14PfutTrxEN7CA/yE++ekdwfSPVXhXYFR443baz7M7gzCUroAGL74ACaMv97
+ IYhxqEMFCKEUzeaNRorsrlRSmyP9igRG9COoFcXN5HFcJ88+1WkSTtjIeoo0oWz6MOyq
+ Ymsg==
+X-Gm-Message-State: AOJu0Yyg+Fu1mQyJ+6gn7bPwqsTtFTR4MKJeY7X5CJTa9Jepzc6WHOuz
+ ZIlCbPaDsOldN0WLDEeXjuobSzKwaRmJ3HD7MTRC4vn5SUD//QMWFgvZgQoXP0SqYGtKBhVNA6i
+ 4
+X-Gm-Gg: ASbGncu1xWUn4GKtqeEk2mcEjcmZH9VI0/ix/GCMC9rOxE7qxoqINL/un4/ny5y4KtU
+ WRPPAHCMFx/phxkO/WDBSAP8mVwJAyMyKggNAK66m52Cxd12faSmh7FmMSEwBrDoDvJAJyM7mIe
+ DgxT4gNcIXa9bUqoFI9uKnqkOTq54cj/uuPKKnhVO+B6hiWhSJ81P0GHxtkDPAjGoOTqzyfIzBF
+ 7CE+o7lvz2br3dPUwTs2OS81jE6BUArdQ2E3yZ5YHW1ACtA3Ux7sPnFePFNwkd0eXx7XTOhobd5
+ FnUJ09W1Ht1dxzoQNHAAAUW46Ytvv0fvjcKDgDQzCxyiV+3hJx7yAJ63TU+1pioPyPLXnXVt2PW
+ V4wJWWY0=
+X-Google-Smtp-Source: AGHT+IEx49tIljXSY/B7J5gw1YeaezdqeGO9k44bFknnMMilR55hKzD+EYhBLaNLCYuHaAKyjjblJQ==
+X-Received: by 2002:a17:902:e551:b0:21f:40de:ae4e with SMTP id
+ d9443c01a7336-22de6bff5b3mr43769385ad.9.1745937221103; 
+ Tue, 29 Apr 2025 07:33:41 -0700 (PDT)
+Received: from [192.168.0.4] (71-212-47-143.tukw.qwest.net. [71.212.47.143])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-22db5219ebfsm101206465ad.245.2025.04.29.05.59.11
+ d9443c01a7336-22db4dbe375sm102905495ad.96.2025.04.29.07.33.40
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 29 Apr 2025 05:59:12 -0700 (PDT)
-Message-ID: <4bf4345b-55f7-4d6f-b7ef-985accdd60a9@ventanamicro.com>
-Date: Tue, 29 Apr 2025 09:59:10 -0300
+ Tue, 29 Apr 2025 07:33:40 -0700 (PDT)
+Message-ID: <5b298186-50c8-4473-8eaf-d0bc6f6793ce@linaro.org>
+Date: Tue, 29 Apr 2025 07:33:38 -0700
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 01/13] hw/riscv/virt: Fix clint base address type
-To: Joel Stanley <joel@jms.id.au>
-Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org
-References: <20250429061223.1457166-1-joel@jms.id.au>
- <20250429061223.1457166-2-joel@jms.id.au>
+Subject: Re: [PATCH 7/7] target/riscv: Fix write_misa vs aligned next_pc
+From: Richard Henderson <richard.henderson@linaro.org>
+To: qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com,
+ dbarboza@ventanamicro.com, Alistair Francis <Alistair.Francis@wdc.com>
+References: <20250425152311.804338-1-richard.henderson@linaro.org>
+ <20250425152311.804338-8-richard.henderson@linaro.org>
 Content-Language: en-US
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <20250429061223.1457166-2-joel@jms.id.au>
+In-Reply-To: <20250425152311.804338-8-richard.henderson@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::102b;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pj1-x102b.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::532;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pg1-x532.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -101,43 +104,13 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
+On 4/25/25 08:23, Richard Henderson wrote:
+> -    if ((val & RVC) && (GETPC() & ~3) != 0) {
+> +    /* Suppress 'C' if next instruction is not aligned. */
+> +    if ((val & RVC) && (get_next_pc(env, ra) & ~3) != 0) {
+
+Bah.  I preserved a second bug here: not "& ~3" but "& 3".
 
 
-On 4/29/25 3:12 AM, Joel Stanley wrote:
-> The address is a hardware address, so use hwaddr for consistency with
-> the rest of the machine.
-> 
-> Signed-off-by: Joel Stanley <joel@jms.id.au>
-> ---
-
-Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-
->   hw/riscv/virt.c | 6 +++---
->   1 file changed, 3 insertions(+), 3 deletions(-)
-> 
-> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-> index 17a790821484..e4c0ac8a2a9a 100644
-> --- a/hw/riscv/virt.c
-> +++ b/hw/riscv/virt.c
-> @@ -324,7 +324,7 @@ static void create_fdt_socket_clint(RISCVVirtState *s,
->       int cpu;
->       g_autofree char *clint_name = NULL;
->       g_autofree uint32_t *clint_cells = NULL;
-> -    unsigned long clint_addr;
-> +    hwaddr clint_addr;
->       MachineState *ms = MACHINE(s);
->       static const char * const clint_compat[2] = {
->           "sifive,clint0", "riscv,clint0"
-> @@ -340,8 +340,8 @@ static void create_fdt_socket_clint(RISCVVirtState *s,
->       }
->   
->       clint_addr = s->memmap[VIRT_CLINT].base +
-> -                 (s->memmap[VIRT_CLINT].size * socket);
-> -    clint_name = g_strdup_printf("/soc/clint@%lx", clint_addr);
-> +                 s->memmap[VIRT_CLINT].size * socket;
-> +    clint_name = g_strdup_printf("/soc/clint@%"HWADDR_PRIx, clint_addr);
->       qemu_fdt_add_subnode(ms->fdt, clint_name);
->       qemu_fdt_setprop_string_array(ms->fdt, clint_name, "compatible",
->                                     (char **)&clint_compat,
-
+r~
 
