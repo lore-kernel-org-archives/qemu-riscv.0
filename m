@@ -4,80 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 35C51C369DC
-	for <qemu-riscv@archiver.kernel.org>; Tue, 29 Apr 2025 12:58:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 04206C369DC
+	for <qemu-riscv@archiver.kernel.org>; Tue, 29 Apr 2025 12:59:34 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1u9kXZ-0002PE-M1; Tue, 29 Apr 2025 08:58:25 -0400
+	id 1u9kXi-0002Rr-Ji; Tue, 29 Apr 2025 08:58:34 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1u9kXY-0002Ou-Kl
- for qemu-riscv@nongnu.org; Tue, 29 Apr 2025 08:58:24 -0400
-Received: from mail-pg1-x52a.google.com ([2607:f8b0:4864:20::52a])
+ id 1u9kXg-0002Rb-Ri
+ for qemu-riscv@nongnu.org; Tue, 29 Apr 2025 08:58:32 -0400
+Received: from mail-pf1-x42a.google.com ([2607:f8b0:4864:20::42a])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1u9kXW-00007k-Ct
- for qemu-riscv@nongnu.org; Tue, 29 Apr 2025 08:58:24 -0400
-Received: by mail-pg1-x52a.google.com with SMTP id
- 41be03b00d2f7-b03bc416962so4192777a12.0
- for <qemu-riscv@nongnu.org>; Tue, 29 Apr 2025 05:58:21 -0700 (PDT)
+ id 1u9kXf-00009t-7x
+ for qemu-riscv@nongnu.org; Tue, 29 Apr 2025 08:58:32 -0400
+Received: by mail-pf1-x42a.google.com with SMTP id
+ d2e1a72fcca58-736a7e126c7so5384169b3a.3
+ for <qemu-riscv@nongnu.org>; Tue, 29 Apr 2025 05:58:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1745931500; x=1746536300; darn=nongnu.org;
+ d=ventanamicro.com; s=google; t=1745931510; x=1746536310; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Kk7W7DjCSyMwi4lFsEoEOcfFm5Zhop6VnxfXbIaEzIE=;
- b=Ms5rmfeSR7GmFe9X+qvp3LAIkSxx6iafb9KhfJ9U/mz1upB8HQuzlt+I/QYE+Trq5a
- DtLGJm61vx/2Mqdw1Ui9hJ4fO9YzJ+vc1COUNhj7w3keCtEBcFPsYJPzHGWrZWQ/dNIh
- s0JpS0ADGb4zWvXQOZ6sAE40i0/qTKLmU6BlWXTw0TUgntYp9wcdrZpv+ycKlUdhzusm
- +IbgCV6aJR9f33F41yZqS4CjO72z4nIz4ZGEpUTbagHaz5vIMLK/FQuG48JHto/V69WC
- FSa79WqNacqxqRSvb/0it1ZBcujs/lw9ekZ9SpmG61bZW7BVOXAynfElwNMLftbaChmK
- Z5ow==
+ bh=Po6sO0gMdcjpyAu8oFiuPraREHUM/ABLiVfLZFw/jCY=;
+ b=ksYVRDK4OAhixMVmAY9zKhbEAr/7YHRd04fXBhGQVOj+khNwpD2wFOnfd6GMIeKLmr
+ 6Bay/lFmZoComI7uBREUmiP9Ig4LmLjNhyAXcG7B80VliGBnBHQdrl9jG1/QfBtenVNR
+ 1RnJpF8DqV5qdLWPscVi1iO+x43PgZOViqa2af+bF/gYh0AMZIALZEcod7X3PhEUPcbS
+ m7tCDGIcxwpheUHCpyPUINmf7CKvyGxUXMJcwwmfCn4yLlSgYSR3JS/uVj8oT42DZRmG
+ hPcEa2y7Az1xotmwvwG6c0X1k6MXrv7WXovYiOt3gUqyUCHa46JcCxU2XhidyZdRYce3
+ lrYA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1745931500; x=1746536300;
+ d=1e100.net; s=20230601; t=1745931510; x=1746536310;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Kk7W7DjCSyMwi4lFsEoEOcfFm5Zhop6VnxfXbIaEzIE=;
- b=D3S6KCiLgLEfbjlbpo8aOGFAIMxOuYf3jxSwQN2+9zckQx1CTIsSOQriWSED+ubcfe
- RATT0UQ8kmW40lfSNgVtlGgtKplVUrdF0CJPUxrFO9s6EU7+Z4DXTTUh9AxsAOmje7Ix
- FSjw24O8VYMfo7e3nFOvAff4aG9L+2zdaPlQAC4RAG/fetOvad2Q4aRgBIpCvF5Cb4HS
- W1IeeTcqziaD28B0ZzQ1pDdlCGgs15Zfsc+lo7aNnd6g7M6D1rTS1afLIdJMLM2jAWca
- GAITXXxmSF442zkv5FVxofPhD7e6U4qkpYrJ/61Eyafl6doox9VMOBFFgkSI1XO1mlN6
- X3Dg==
-X-Gm-Message-State: AOJu0YyQwuxQ4xM2YLTLNDqejSgqW6np7YtFlANfEhXwGgLFzLEKQREM
- LhIEiI4GoEx8KNCrQ+fkr/kyzhfNkzcQQ9+OlxwM648u6fO3HrN3swRURI8OYKo=
-X-Gm-Gg: ASbGncv8XrI2/kg1Y6wVHO6UKNvALdjT75Ke6BxtjsQpVHxqgGr25jIE/mkmRoREi8D
- NWQOZKLymbyKEVmKIUpdmtHSk0aH4AOF3FyzVIZ6seJnTch9LotBc1vG4Xic3rwKMzIbJS7+zOe
- aZ0nz//HQVnsSLhxM36sU2SkkZA0d6/RTX5YXmxDt13a4uJE8md6rnGzqwd7eACH5J2i1uJY4E/
- jgGZu6hzXvwOQUXLwmFnxvbHE94N1R24F1YTpWHGWGceWTaVPoOa892UMCE0VgwjkLn10m0CaVa
- UbGcytH2mYFE7m7h79l4RNF3jwhWHHhMydKQA1F8tWY=
-X-Google-Smtp-Source: AGHT+IFPiWAwbJJYeBIyIlYJXNgVomBTqmX5HFS1b4uqsWLMvB/dxtVMnIgFyVLq8kVNthLzA7M/EA==
-X-Received: by 2002:a05:6a20:d706:b0:1f5:9098:e42e with SMTP id
- adf61e73a8af0-2046a3abbb6mr21070608637.7.1745931500548; 
- Tue, 29 Apr 2025 05:58:20 -0700 (PDT)
+ bh=Po6sO0gMdcjpyAu8oFiuPraREHUM/ABLiVfLZFw/jCY=;
+ b=ebp2iV0Mu/Af2GdcSWAcOkzFZlhoDtqQ33AydlmBuxhaJA1HlrrqMZGnEyXqv2hYtz
+ 5zy+TQKB/O37k6SdvcknMIQwcOcJflJSB7qGNS+QgErZICgRhlsVCYn0n823DYjpHuaM
+ RUqrUDYmcwzPnQRgjlNpoootoH1t50c1C0PSnxZvo7uFaGHWWYnnlDno8KbbaACbwy/M
+ jZtYtk+PkFBwhcqzIuUEeJ9AsibLeWdPSBBxpDo9YYcQWAP9t8wSoxO5Sp/Kgf6ubgXD
+ XXcQiAqk4eczfiyG/8IMnVk2jWEctfzS37Ewd6F5mnlnWTgDMPzCfxS+4rBPZNkwSG6o
+ be+Q==
+X-Gm-Message-State: AOJu0YwuGfW/BFubpI9WyJiS6WcwNPDhjPIUA6GWPYr5pKZbpHhRDVSQ
+ OSA4VJS8FU2vU7plnvEEo3qXnAKcFATzaKrWiLzgQYLAYdvi186Vnr5PLAmTZn8=
+X-Gm-Gg: ASbGncucnEnsBGwpNBaodwyr/UwAlfTqpPA9zACdQtZWQPZQtgs/n6zP1E1pY7tmoy/
+ ieMi0pQDqUyO2d5FPLCrg05JN7ziTXrXwCR9TBU5+bClrv3GoJayRU2ZNIWERP5XUtHCVrMi0Zn
+ ZzNxvbG8etXxWGhSV0Wr8Vv8JiI/LAQmEfCe2gxP75mdNIYbC1fNp7DPKmB0gPEhT1pcWtJEYZK
+ l8KwJ85/wxDCZIX2uU7szoMd72MD+n51a5X//qx9Aw0M0aShv2y5nvJ3ieHHD3dPZv9M2vViyjd
+ kybbJlxC1+RLWnjimM9wGhLYyO1CFgw4nhQwWcS9tXg=
+X-Google-Smtp-Source: AGHT+IEySsDH+ilLLr16GfMw06miBjyLp5gAEg7hyplSVqPyKfi5TzvbhsnJg84x9EmTkUBisAuPbQ==
+X-Received: by 2002:a05:6a00:2403:b0:736:34a2:8a20 with SMTP id
+ d2e1a72fcca58-73ff7396a96mr18565364b3a.21.1745931509756; 
+ Tue, 29 Apr 2025 05:58:29 -0700 (PDT)
 Received: from grind.. ([152.234.125.33]) by smtp.gmail.com with ESMTPSA id
- 41be03b00d2f7-b15f7fb7e54sm8889440a12.30.2025.04.29.05.58.17
+ 41be03b00d2f7-b15f7fb7e54sm8889440a12.30.2025.04.29.05.58.26
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 29 Apr 2025 05:58:20 -0700 (PDT)
+ Tue, 29 Apr 2025 05:58:29 -0700 (PDT)
 From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, liwei1518@gmail.com,
  zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com, joel@jms.id.au,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Subject: [PATCH v2 1/9] hw/riscv/virt.c: enforce s->memmap use in
- machine_init()
-Date: Tue, 29 Apr 2025 09:58:03 -0300
-Message-ID: <20250429125811.224803-2-dbarboza@ventanamicro.com>
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+Subject: [PATCH v2 4/9] hw/riscv/virt.c: add 'base' arg in create_fw_cfg()
+Date: Tue, 29 Apr 2025 09:58:06 -0300
+Message-ID: <20250429125811.224803-5-dbarboza@ventanamicro.com>
 X-Mailer: git-send-email 2.49.0
 In-Reply-To: <20250429125811.224803-1-dbarboza@ventanamicro.com>
 References: <20250429125811.224803-1-dbarboza@ventanamicro.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::52a;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pg1-x52a.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::42a;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pf1-x42a.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -100,193 +101,39 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Throughout the code we're accessing the board memmap, most of the time,
-by accessing it statically via 'virt_memmap'. This static map is also
-assigned in the machine state in s->memmap.
-
-We're also passing it as a variable to some fdt functions, which is
-unorthodox since we can spare a function argument by accessing it
-statically or via the machine state.
-
-All the current forms are valid but not all of the are scalable. In the
-future we will version this board, and then all this code will need
-rework because it should point to the updated memmap. In this case,
-we'll want to assign the adequate versioned memmap once during init,
-in s->memmap like it is being done today, and the rest of the code
-will access the updated map via s->memmap.
-
-We're also enforcing the pattern of using s->memmap instead of assigning
-it to a temp variable 'memmap'. Code is copy/pasted around all the time
-and being consistent is important.
-
-We'll start these rather mechanical changes with virt_machine_init().
+The function can receive the value via s->memmap[VIRT_FW_CFG].base from
+the caller, avoiding the use of virt_memmap.
 
 Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
-Reviewed-by: Joel Stanley <joel@jms.id.au>
+Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 ---
- hw/riscv/virt.c | 54 ++++++++++++++++++++++++-------------------------
- 1 file changed, 27 insertions(+), 27 deletions(-)
+ hw/riscv/virt.c | 5 ++---
+ 1 file changed, 2 insertions(+), 3 deletions(-)
 
 diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-index 0ac9d63888..bcf0ddd6c6 100644
+index f324777161..37f8abdd1c 100644
 --- a/hw/riscv/virt.c
 +++ b/hw/riscv/virt.c
-@@ -1526,7 +1526,6 @@ static void virt_machine_done(Notifier *notifier, void *data)
+@@ -1261,9 +1261,8 @@ static inline DeviceState *gpex_pcie_init(MemoryRegion *sys_mem,
+     return dev;
+ }
  
- static void virt_machine_init(MachineState *machine)
+-static FWCfgState *create_fw_cfg(const MachineState *ms)
++static FWCfgState *create_fw_cfg(const MachineState *ms, hwaddr base)
  {
--    const MemMapEntry *memmap = virt_memmap;
-     RISCVVirtState *s = RISCV_VIRT_MACHINE(machine);
-     MemoryRegion *system_memory = get_system_memory();
-     MemoryRegion *mask_rom = g_new(MemoryRegion, 1);
-@@ -1534,6 +1533,8 @@ static void virt_machine_init(MachineState *machine)
-     int i, base_hartid, hart_count;
-     int socket_count = riscv_socket_count(machine);
+-    hwaddr base = virt_memmap[VIRT_FW_CFG].base;
+     FWCfgState *fw_cfg;
  
-+    s->memmap = virt_memmap;
-+
-     /* Check socket count limit */
-     if (VIRT_SOCKETS_MAX < socket_count) {
-         error_report("number of sockets/nodes should be less than %d",
-@@ -1581,7 +1582,7 @@ static void virt_machine_init(MachineState *machine)
-         if (virt_aclint_allowed() && s->have_aclint) {
-             if (s->aia_type == VIRT_AIA_TYPE_APLIC_IMSIC) {
-                 /* Per-socket ACLINT MTIMER */
--                riscv_aclint_mtimer_create(memmap[VIRT_CLINT].base +
-+                riscv_aclint_mtimer_create(s->memmap[VIRT_CLINT].base +
-                             i * RISCV_ACLINT_DEFAULT_MTIMER_SIZE,
-                         RISCV_ACLINT_DEFAULT_MTIMER_SIZE,
-                         base_hartid, hart_count,
-@@ -1590,28 +1591,28 @@ static void virt_machine_init(MachineState *machine)
-                         RISCV_ACLINT_DEFAULT_TIMEBASE_FREQ, true);
-             } else {
-                 /* Per-socket ACLINT MSWI, MTIMER, and SSWI */
--                riscv_aclint_swi_create(memmap[VIRT_CLINT].base +
--                            i * memmap[VIRT_CLINT].size,
-+                riscv_aclint_swi_create(s->memmap[VIRT_CLINT].base +
-+                            i * s->memmap[VIRT_CLINT].size,
-                         base_hartid, hart_count, false);
--                riscv_aclint_mtimer_create(memmap[VIRT_CLINT].base +
--                            i * memmap[VIRT_CLINT].size +
-+                riscv_aclint_mtimer_create(s->memmap[VIRT_CLINT].base +
-+                            i * s->memmap[VIRT_CLINT].size +
-                             RISCV_ACLINT_SWI_SIZE,
-                         RISCV_ACLINT_DEFAULT_MTIMER_SIZE,
-                         base_hartid, hart_count,
-                         RISCV_ACLINT_DEFAULT_MTIMECMP,
-                         RISCV_ACLINT_DEFAULT_MTIME,
-                         RISCV_ACLINT_DEFAULT_TIMEBASE_FREQ, true);
--                riscv_aclint_swi_create(memmap[VIRT_ACLINT_SSWI].base +
--                            i * memmap[VIRT_ACLINT_SSWI].size,
-+                riscv_aclint_swi_create(s->memmap[VIRT_ACLINT_SSWI].base +
-+                            i * s->memmap[VIRT_ACLINT_SSWI].size,
-                         base_hartid, hart_count, true);
-             }
-         } else if (tcg_enabled()) {
-             /* Per-socket SiFive CLINT */
-             riscv_aclint_swi_create(
--                    memmap[VIRT_CLINT].base + i * memmap[VIRT_CLINT].size,
-+                    s->memmap[VIRT_CLINT].base + i * s->memmap[VIRT_CLINT].size,
-                     base_hartid, hart_count, false);
--            riscv_aclint_mtimer_create(memmap[VIRT_CLINT].base +
--                        i * memmap[VIRT_CLINT].size + RISCV_ACLINT_SWI_SIZE,
-+            riscv_aclint_mtimer_create(s->memmap[VIRT_CLINT].base +
-+                    i * s->memmap[VIRT_CLINT].size + RISCV_ACLINT_SWI_SIZE,
-                     RISCV_ACLINT_DEFAULT_MTIMER_SIZE, base_hartid, hart_count,
-                     RISCV_ACLINT_DEFAULT_MTIMECMP, RISCV_ACLINT_DEFAULT_MTIME,
-                     RISCV_ACLINT_DEFAULT_TIMEBASE_FREQ, true);
-@@ -1619,11 +1620,11 @@ static void virt_machine_init(MachineState *machine)
- 
-         /* Per-socket interrupt controller */
-         if (s->aia_type == VIRT_AIA_TYPE_NONE) {
--            s->irqchip[i] = virt_create_plic(memmap, i,
-+            s->irqchip[i] = virt_create_plic(s->memmap, i,
-                                              base_hartid, hart_count);
-         } else {
-             s->irqchip[i] = virt_create_aia(s->aia_type, s->aia_guests,
--                                            memmap, i, base_hartid,
-+                                            s->memmap, i, base_hartid,
-                                             hart_count);
-         }
- 
-@@ -1645,8 +1646,8 @@ static void virt_machine_init(MachineState *machine)
-     if (kvm_enabled() && virt_use_kvm_aia_aplic_imsic(s->aia_type)) {
-         kvm_riscv_aia_create(machine, IMSIC_MMIO_GROUP_MIN_SHIFT,
-                              VIRT_IRQCHIP_NUM_SOURCES, VIRT_IRQCHIP_NUM_MSIS,
--                             memmap[VIRT_APLIC_S].base,
--                             memmap[VIRT_IMSIC_S].base,
-+                             s->memmap[VIRT_APLIC_S].base,
-+                             s->memmap[VIRT_IMSIC_S].base,
-                              s->aia_guests);
-     }
- 
-@@ -1662,21 +1663,20 @@ static void virt_machine_init(MachineState *machine)
-         virt_high_pcie_memmap.size = VIRT32_HIGH_PCIE_MMIO_SIZE;
-     } else {
-         virt_high_pcie_memmap.size = VIRT64_HIGH_PCIE_MMIO_SIZE;
--        virt_high_pcie_memmap.base = memmap[VIRT_DRAM].base + machine->ram_size;
-+        virt_high_pcie_memmap.base = s->memmap[VIRT_DRAM].base +
-+                                     machine->ram_size;
-         virt_high_pcie_memmap.base =
-             ROUND_UP(virt_high_pcie_memmap.base, virt_high_pcie_memmap.size);
-     }
- 
--    s->memmap = virt_memmap;
--
-     /* register system main memory (actual RAM) */
--    memory_region_add_subregion(system_memory, memmap[VIRT_DRAM].base,
--        machine->ram);
-+    memory_region_add_subregion(system_memory, s->memmap[VIRT_DRAM].base,
-+                                machine->ram);
- 
-     /* boot rom */
-     memory_region_init_rom(mask_rom, NULL, "riscv_virt_board.mrom",
--                           memmap[VIRT_MROM].size, &error_fatal);
--    memory_region_add_subregion(system_memory, memmap[VIRT_MROM].base,
-+                           s->memmap[VIRT_MROM].size, &error_fatal);
-+    memory_region_add_subregion(system_memory, s->memmap[VIRT_MROM].base,
-                                 mask_rom);
- 
-     /*
-@@ -1687,12 +1687,12 @@ static void virt_machine_init(MachineState *machine)
+     fw_cfg = fw_cfg_init_mem_wide(base + 8, base, 8, base + 16,
+@@ -1681,7 +1680,7 @@ static void virt_machine_init(MachineState *machine)
+      * Init fw_cfg. Must be done before riscv_load_fdt, otherwise the
+      * device tree cannot be altered and we get FDT_ERR_NOSPACE.
+      */
+-    s->fw_cfg = create_fw_cfg(machine);
++    s->fw_cfg = create_fw_cfg(machine, s->memmap[VIRT_FW_CFG].base);
      rom_set_fw(s->fw_cfg);
  
      /* SiFive Test MMIO device */
--    sifive_test_create(memmap[VIRT_TEST].base);
-+    sifive_test_create(s->memmap[VIRT_TEST].base);
- 
-     /* VirtIO MMIO devices */
-     for (i = 0; i < VIRTIO_COUNT; i++) {
-         sysbus_create_simple("virtio-mmio",
--            memmap[VIRT_VIRTIO].base + i * memmap[VIRT_VIRTIO].size,
-+            s->memmap[VIRT_VIRTIO].base + i * s->memmap[VIRT_VIRTIO].size,
-             qdev_get_gpio_in(virtio_irqchip, VIRTIO_IRQ + i));
-     }
- 
-@@ -1700,11 +1700,11 @@ static void virt_machine_init(MachineState *machine)
- 
-     create_platform_bus(s, mmio_irqchip);
- 
--    serial_mm_init(system_memory, memmap[VIRT_UART0].base,
-+    serial_mm_init(system_memory, s->memmap[VIRT_UART0].base,
-         0, qdev_get_gpio_in(mmio_irqchip, UART0_IRQ), 399193,
-         serial_hd(0), DEVICE_LITTLE_ENDIAN);
- 
--    sysbus_create_simple("goldfish_rtc", memmap[VIRT_RTC].base,
-+    sysbus_create_simple("goldfish_rtc", s->memmap[VIRT_RTC].base,
-         qdev_get_gpio_in(mmio_irqchip, RTC_IRQ));
- 
-     for (i = 0; i < ARRAY_SIZE(s->flash); i++) {
-@@ -1722,7 +1722,7 @@ static void virt_machine_init(MachineState *machine)
-             exit(1);
-         }
-     } else {
--        create_fdt(s, memmap);
-+        create_fdt(s, s->memmap);
-     }
- 
-     if (virt_is_iommu_sys_enabled(s)) {
 -- 
 2.49.0
 
