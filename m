@@ -4,82 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6FEE9C369D5
-	for <qemu-riscv@archiver.kernel.org>; Mon, 28 Apr 2025 22:47:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9923FC369D5
+	for <qemu-riscv@archiver.kernel.org>; Tue, 29 Apr 2025 02:28:30 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1u9XFj-0006Qk-GY; Mon, 28 Apr 2025 18:47:07 -0400
+	id 1u9ahQ-0003Cx-JI; Mon, 28 Apr 2025 22:27:56 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1u9XFV-0006NN-Eb; Mon, 28 Apr 2025 18:46:56 -0400
-Received: from mail-vk1-xa32.google.com ([2607:f8b0:4864:20::a32])
+ (Exim 4.90_1) (envelope-from <jim.shu@sifive.com>)
+ id 1u9ahN-000395-9Y
+ for qemu-riscv@nongnu.org; Mon, 28 Apr 2025 22:27:53 -0400
+Received: from mail-ed1-x535.google.com ([2a00:1450:4864:20::535])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1u9XFJ-0002sD-Nw; Mon, 28 Apr 2025 18:46:52 -0400
-Received: by mail-vk1-xa32.google.com with SMTP id
- 71dfb90a1353d-525da75d902so2085364e0c.3; 
- Mon, 28 Apr 2025 15:46:40 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <jim.shu@sifive.com>)
+ id 1u9ahJ-0004Ln-Ex
+ for qemu-riscv@nongnu.org; Mon, 28 Apr 2025 22:27:52 -0400
+Received: by mail-ed1-x535.google.com with SMTP id
+ 4fb4d7f45d1cf-5f3f04b5dbcso8769427a12.1
+ for <qemu-riscv@nongnu.org>; Mon, 28 Apr 2025 19:27:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1745880394; x=1746485194; darn=nongnu.org;
+ d=sifive.com; s=google; t=1745893666; x=1746498466; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=CIVm3iAq+Dg6srXQN3632I3HvEPBq1ySo56wYh4HuGk=;
- b=hqWrdhXwqAbBFlpHCsciZXpZOHffDgVioqYv5Zq0FIMvP7hDFfkHSsNLdkWrhMpbcE
- rQHBNLuIPkNNSL//xLNrm7DZkNleiT1DLKr8yYOmGcf2yCv0ajbVi1sTGZaf1AUD9zHI
- I0nJb7Bc1QyeQ+ADnO1GwlzFeUDPFToVrLNs/s9i47k2Fn3Ywla0V7RHpKChovUkHu7s
- sYgkGX3zHn+SimgDD+aUcHIQSNSGerCzuwAN74j2hBCnW1mgwrm2lqzBtpn6CXcy4IZd
- j7LF2MCx8PCFcfOCtnZ0zAMAaQ3qTCWlRTzwPbSOVC1t91YmsHiE+YxUO4hx8TbrjSZi
- BZUg==
+ bh=jl/4sSEJTGo3BJOin8dUOd1ajyiTYdgwqywjjk3cQf0=;
+ b=ma21rwRLt9yQIgdQdxVO9parDzitXQH+ilx9fWUl56DR0T3wiienhvqPCpCzRdu2zj
+ YmZRlEPIUUS5Z3BQe6KKwFfaXvJ5mTcI0/gmhvT92DuLpxUx6vZ6cWke3osszfRlzwU6
+ vBOspaoVjluj753wtCXNWe+WKfspmE7kFPKRGf7mIELvBEo8x5XqD534DRMRPLc66Zmx
+ KOanXSZYaj7pwvggSxAQEnytm2LavLQlJ/WleRWC6IBMLGFu+VEtsASHIdWqznqTQmeB
+ PkpxIw2k3IGJxRsgCz9cz9dA676XRo6Gx4oFULr3WVrAncG7ymnFlykc53iWbskBilcI
+ aIrg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1745880394; x=1746485194;
+ d=1e100.net; s=20230601; t=1745893666; x=1746498466;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=CIVm3iAq+Dg6srXQN3632I3HvEPBq1ySo56wYh4HuGk=;
- b=weSgOcaDMAvIouWJoPN6pOCZSepKAN5TitgyxHWPpcr2J1HNa3CZv3de4bU83IKaCK
- 73kUrHx5eX/39o632D4PsiyBxL75d79bpYsVrn1QwcpgcFkKZZzMX2OntA7YBLNj9pHN
- i5dX7LCif2vmlw/Qbyw4L4L97bZUO7rtWkgxRl4l63fEr2AkXtczbRh2U90qf9uW4b/3
- PZAtP2HBpQPhOF8WHkL+hdhb7O+70ozsXYEzwbrjGRJpzwfMdMbNBjBP2qUVH+4QPBKE
- v9NeHRLUAjX2Cx5P4zaZqbT4I6Bm2CCA0dbK5Kys6mGj3+lz9Zug2XsWfqAogQGzoMpo
- rqXA==
+ bh=jl/4sSEJTGo3BJOin8dUOd1ajyiTYdgwqywjjk3cQf0=;
+ b=Dkek2pjaffYCDYKV1JOzn9Xh+ABi1KFAFzkp/WDWFstu+teJLWdFqaaSjTnIfoe/UI
+ g5nr+gYcA084oQljq5yynxHWu1ZsMNffQGRmwdo3xkBXWB9uGKB+UhOhbw91SQi6I7zB
+ 2tu1bOPVIkpP0nc4a5MAknBepBsocw4mjsJABdYcrAHOL/ihu4u63glgAi/mHnblWPUC
+ +yuIA3ydGaDMaO0CnH3d1bqZfBCfPDZY05F+msNbLkLeD7Revm0n5UWu7gnuNjPaIMVZ
+ w5FX1nBHy0mkMlYw21mOzxCTmmOieOuKP3AvWY09pCkJlY1ZUy9MAuEYU2Uxww2Z0Eay
+ bBeg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCU+l+HVqkXfYYMHk1KNJ5nkyLk+dA1vxdSbIypMN6W48Z/VxRkAJoL9Go12lm6g3C6nP6r0FZzFGeaJ@nongnu.org
-X-Gm-Message-State: AOJu0Yw2jSzDI9dY279MnRp0Y0oHHccokR5SgYlF5OSBcFqiI5KVvJ04
- Jk8EfgguNQygls2U4NuRXdd9jsz8zMeBeEkAldI1GsT9INwhup8SvRXK8sKPmwvjRultHhK1Fsk
- y6rwW0aIae9WORQweKMN131tcXis=
-X-Gm-Gg: ASbGncurmSOXxQrR/5s4ycrysvYAqDjQso/Yssd1Mzi0u/Xs0X1tasXiD/5UebAn+Y6
- TdsKx0FcudawXRUsVSCPV2kzhDAUOkvtD42UGnsq0Z7trFxE+CgV6SOB+YKNgsIuDJPnw2QspNt
- gr3SCDpy9erqPzDwELV736t/7oUM/sJL2N21I/bgK6Cp43BsPGRJli
-X-Google-Smtp-Source: AGHT+IHXNSMxeA6TEer7r7srJdR/TAfkHYOpVRCIi1UTU5wS8oQvda7taOPM0isApkfBwM72EZ58J+67CYdVmw+8qBI=
-X-Received: by 2002:a05:6122:2207:b0:51f:fc9d:875d with SMTP id
- 71dfb90a1353d-52ac0aeb2c9mr357429e0c.8.1745880393756; Mon, 28 Apr 2025
- 15:46:33 -0700 (PDT)
+ AJvYcCXx7Oo2+V+VVzfYV/RAo0OZxbvRAKLPG9hQFnMuMCNzDCM7NkaSzQSzbtlTI8NRGR2OIhi4IwtSHl8J@nongnu.org
+X-Gm-Message-State: AOJu0Yz1KWJTDp66i7Oa0tI9u8NAQANc3n4a36odRIL5VmTXjZoS4ARa
+ 0lwBAaSGf8z7QAy63xEDKjXMBh0IeQBurU6phmssSfGhPf8sIMZR0fr4YAhRNIOlj46y41CFJkX
+ +ckKF9yN8KG7WSOkQO3ewn+lmBvr/PAnrZ1DOiT6RKt+HZjI1HqU=
+X-Gm-Gg: ASbGnctdCMnj0J4sbKaYcO4hMjE0WK65ZTpj8RWBaahcqQQXBtAcDd9H/4AFV/RYknL
+ Tr6nxMrwAj5q/R+ATzfJrq4B5JRoBoBT4QhTnNy+N7MQgrLLC9CDfKWtEt57R1SlQCelelzvkK9
+ 7nSQYDrTL6+Lj9xELaSrLglsSiCJCaR/xlC2I=
+X-Google-Smtp-Source: AGHT+IGuEAyu7UEwIL7VXVTKmcXJ3BbPnbZjOCnaxOpqtDjCTkqo9wsbOPo36p3c7cPkyXqSjabNCNwbpPwgectn/S4=
+X-Received: by 2002:a17:907:6d23:b0:ace:6f45:b5c6 with SMTP id
+ a640c23a62f3a-acec84f8058mr86737766b.22.1745893666505; Mon, 28 Apr 2025
+ 19:27:46 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250425152311.804338-1-richard.henderson@linaro.org>
-In-Reply-To: <20250425152311.804338-1-richard.henderson@linaro.org>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Tue, 29 Apr 2025 08:46:07 +1000
-X-Gm-Features: ATxdqUES0us4iyOs_fRq7XxWfeTjvH4MGt0Y6hyvGbz2LxzV_xfErajDjWyEa8U
-Message-ID: <CAKmqyKM5KDw9U8gY2VkNq6vSQapN+1g=i-A_=gaqY-XVLVpS4g@mail.gmail.com>
-Subject: Re: [PATCH 0/7] target/riscv: Fix write_misa vs aligned next_pc
-To: Richard Henderson <richard.henderson@linaro.org>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
- dbarboza@ventanamicro.com
+References: <20250409025131.3670-1-jim.shu@sifive.com>
+ <CALw707qbE1wRhPkWw3dXWj0gvtvzqhUH73m98LpfFPFgVhkaGw@mail.gmail.com>
+In-Reply-To: <CALw707qbE1wRhPkWw3dXWj0gvtvzqhUH73m98LpfFPFgVhkaGw@mail.gmail.com>
+From: Jim Shu <jim.shu@sifive.com>
+Date: Tue, 29 Apr 2025 10:27:34 +0800
+X-Gm-Features: ATxdqUHviN3FJDRaqxjE22DL1BCtk1eYmQ5CNvP4-wXuA5u3PDoMZkpDcFAmMVQ
+Message-ID: <CALw707pHE6b7Rr1289+E0Ef7gPS2kx4j3swBApruHqfjnq=niw@mail.gmail.com>
+Subject: Re: [PATCH v2 0/4] Several sstc extension fixes
+To: qemu-devel@nongnu.org, qemu-riscv@nongnu.org
+Cc: Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Weiwei Li <liwei1518@gmail.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>, 
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::a32;
- envelope-from=alistair23@gmail.com; helo=mail-vk1-xa32.google.com
-X-Spam_score_int: -17
-X-Spam_score: -1.8
-X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+Received-SPF: pass client-ip=2a00:1450:4864:20::535;
+ envelope-from=jim.shu@sifive.com; helo=mail-ed1-x535.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -95,48 +100,47 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Sat, Apr 26, 2025 at 1:25=E2=80=AFAM Richard Henderson
-<richard.henderson@linaro.org> wrote:
->
-> As discussed, the use of GETPC() within write_misa is wrong.
-> I've done just enough plumbing to get the helper return address
-> piped down to write_misa, so that we can make use of unwind data.
+Hi,
 
-Thanks Richard!
+Gentle ping on this patch.
 
->
-> AFAIK, nothing in check-tcg or check-functional would test this.
-> It shouldn't be too hard to write a test akin to issue1060.S,
-> but I'm going to leave that to someone else.
->
->
-> r~
->
->
-> Richard Henderson (7):
->   target/riscv: Pass ra to riscv_csr_write_fn
->   target/riscv: Pass ra to riscv_csrrw_do64
->   target/riscv: Pass ra to riscv_csrrw_do128
->   target/riscv: Pass ra to riscv_csrrw
->   target/riscv: Pass ra to riscv_csrrw_i128
->   target/riscv: Move insn_len to internals.h
->   target/riscv: Fix write_misa vs aligned next_pc
+Thanks,
+Jim
 
-Applied to riscv-to-apply.next
-
-Alistair
-
+On Wed, Apr 9, 2025 at 10:58=E2=80=AFAM Jim Shu <jim.shu@sifive.com> wrote:
 >
->  target/riscv/cpu.h       |  15 ++-
->  target/riscv/internals.h |   5 +
->  hw/riscv/riscv_hart.c    |   2 +-
->  target/riscv/csr.c       | 278 +++++++++++++++++++++------------------
->  target/riscv/op_helper.c |  13 +-
->  target/riscv/translate.c |   5 -
->  6 files changed, 169 insertions(+), 149 deletions(-)
+> Sorry, I forgot to write v2 changes in cover-letter.
 >
-> --
-> 2.43.0
+> Changes in v2:
+> - Remove duplicated code in riscv_timer_stce_changed() function
+> - Add sstc spec description in the commit log
 >
 >
+> On Wed, Apr 9, 2025 at 10:51=E2=80=AFAM Jim Shu <jim.shu@sifive.com> wrot=
+e:
+> >
+> > This patch series contains several sstc fixes:
+> >
+> > (1) Writing to ACLINT mtime should also update the period of S/VS-mode
+> >     timer, just like M-mode timer.
+> > (2) VSTIP bit of $mip CSR should check both M-mode and H-mode STCE.
+> > (3) Writing to STCE bit may enable/disable sstc extension in S/VS-mode,
+> >     which should update the timer and IRQ pending bits.
+> >
+> >
+> > Jim Shu (4):
+> >   target/riscv: Add the checking into stimecmp write function.
+> >   hw/intc: riscv_aclint: Fix mtime write for sstc extension
+> >   target/riscv: Fix VSTIP bit in sstc extension.
+> >   target/riscv: Enable/Disable S/VS-mode Timer when STCE bit is changed
+> >
+> >  hw/intc/riscv_aclint.c     |  5 +++
+> >  target/riscv/csr.c         | 53 ++++++++++++++++++++++++++++++-
+> >  target/riscv/time_helper.c | 65 ++++++++++++++++++++++++++++++++++++--
+> >  target/riscv/time_helper.h |  1 +
+> >  4 files changed, 121 insertions(+), 3 deletions(-)
+> >
+> > --
+> > 2.17.1
+> >
 
