@@ -4,85 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 02D3FC369DC
-	for <qemu-riscv@archiver.kernel.org>; Tue, 29 Apr 2025 10:39:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 29E1AC3ABA9
+	for <qemu-riscv@archiver.kernel.org>; Tue, 29 Apr 2025 12:26:49 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1u9iMt-0005of-DN; Tue, 29 Apr 2025 06:39:15 -0400
+	id 1u9k2T-0004A8-4c; Tue, 29 Apr 2025 08:26:17 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1u9iMq-0005oJ-4J
- for qemu-riscv@nongnu.org; Tue, 29 Apr 2025 06:39:12 -0400
-Received: from mail-pl1-x634.google.com ([2607:f8b0:4864:20::634])
+ id 1u9k2R-00049X-1I
+ for qemu-riscv@nongnu.org; Tue, 29 Apr 2025 08:26:15 -0400
+Received: from mail-pg1-x533.google.com ([2607:f8b0:4864:20::533])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1u9iMn-0008Dn-GY
- for qemu-riscv@nongnu.org; Tue, 29 Apr 2025 06:39:11 -0400
-Received: by mail-pl1-x634.google.com with SMTP id
- d9443c01a7336-22c33677183so60308825ad.2
- for <qemu-riscv@nongnu.org>; Tue, 29 Apr 2025 03:39:08 -0700 (PDT)
+ id 1u9k2N-0001WS-GL
+ for qemu-riscv@nongnu.org; Tue, 29 Apr 2025 08:26:14 -0400
+Received: by mail-pg1-x533.google.com with SMTP id
+ 41be03b00d2f7-af548cb1f83so6025579a12.3
+ for <qemu-riscv@nongnu.org>; Tue, 29 Apr 2025 05:26:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1745923148; x=1746527948; darn=nongnu.org;
+ d=ventanamicro.com; s=google; t=1745929568; x=1746534368; darn=nongnu.org;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=mX0gkXHGLlLQRmIkMaRRFU+x9lRowO7aLqDiYuJ/0u4=;
- b=FYbQz53vT/lDIlDwDTPV1jejwj4eJVnJIMyyRvD9xBBynotRghuWw9oarTF8nqVwxO
- DcgX6lZEswVcG+GbftkAJGuKX4m/sDXjbtOb36kUm0MurpOUUs3hJgZwYQatw1V1ZRAJ
- AJj4/hRfUd1Db7L9H9oleesUMzLSb/HyIUum2+BaujzzEndx1WkPhGC8NZVQlGLfn7Vq
- GE7JvVwyppXTA3IzGSNxj593G0bPft8mYEhwL9gGpIX5KfmhmhRdZviXg7J63J6u0Gll
- R4LZUbsqS4Z6xwB26VCeaRgfQBhn+Y35xJ2nIDK2ldEW5N5au1SwSHr5YulLn6KDjmLg
- Vhww==
+ bh=PwHLNqHV1p2YGF0jQBhoTy8nyeKgkUjSl0ezZ7PMGYM=;
+ b=n8YPMxDGY0DAtUxH4LQ2IsFX0zXlNdCIr2Dls18Jp+R3/OcFFcn1WR0Rm4xtPT8J84
+ Yge8YM99QVVarXXjH7NkZL/+vFatc4OoVL+HreLcwhadLDvyThzIGHEQL5EeRus12p6d
+ kfmf6dDDi66/+NKn8yHi9fIJHIPvCHLYI+bWs92WZYTwHrsAA8HKSRosD7cSSVZV6WqW
+ dxtzl4xtDrt6p+qYJwmeBo/c0Fy5m+3Tdu2oV9pD0j4Ud9os2FrY0Nxpm01nWeqTqK6Q
+ yA+AAchSB7pOJpvGS+bgakdd+omhK/KnFq2eNry+yxDGc/ukeo7gazvEN4yf5Sbo7F/H
+ QJMQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1745923148; x=1746527948;
+ d=1e100.net; s=20230601; t=1745929568; x=1746534368;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=mX0gkXHGLlLQRmIkMaRRFU+x9lRowO7aLqDiYuJ/0u4=;
- b=ZH/JVJJJtPiMiXqxPFqphBTFtpch3RV5P89ykehx6YdQbHe6ITXwyL8ofG3QKJPqEG
- UgN3q4s9JRfhx9k5Ozh6dShde5anefwZGgNFkbYh/3B/XgiSs1zyhpeCYSQ8M057Za0T
- z7P5qZUtWYibo0lqVv3/yfqe6MT08Fd736Btvpwm4NsJ+W6ob4x1dGyhiY9hJJWAD9Mo
- EK8UkU85x2qRMAR5qM01RR/xCIAhBWV6Kl6qmYQA6OCfDEtRIVD0k4u4jw9mb1PP6pM2
- VsddzQn5Sy36s1GsUZU/S3cjuKYb8xIC8+JSMcOyEunXiO/zSz7gLQEHsgB/LxQkhEwB
- IAIg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXf0TcBnnWPIdNAzZrMG6EwLH6g1Kzp28piPX7Hj0DPMZ7pFDL1T4fLNHYn4FRWx6StawcbOpBal27O@nongnu.org
-X-Gm-Message-State: AOJu0YxmEQYUj1k0+7rTVnI1nC67QwWG0yPj8X6R00y+XClrO2ZOOLRq
- dHYYEKzSKxR8ywwxJw+xuUNPW6mSxYttzrI9a7wbB4T9AM1ULiJTSsMEH5DRoUY=
-X-Gm-Gg: ASbGncsFh6bLl0MZNR+3XaslVQNj/KMSE9HN69di6MqqBUoTmPWDqQBjzTDU6ukwArI
- GuR4FrK+/6zXEvQ6dSq7TPdEF18X+d/aZLMG8L3arU0DvzIbLB6DI5ahNb0zeW1/hSFl8ABjvp8
- 27zbHXWw9BLlZE10rHKWKcJCNLJpGaZA1uPLlOoT57uTc8YdFsFzE0cs5myzYKMl4f/v0Edx9A9
- 0YZLXEG2DGi4SKYmk8VY6//RoM78r/EeKqSuVfAIg518m1CuXrKXtOPM6BdgGxp9IG5Qj1kahoA
- HsHGKzVk+NL3cXy0buIPmdeEV+InbvSpUY1t23GmBksAG+sdcSXiJ84=
-X-Google-Smtp-Source: AGHT+IEi9nHbk//7ZmpgnECGVUmbVE/BT9dZwY30oN/aKvROIpPcg9hOpFgodzkUBhW4QQ26Hp7BKw==
-X-Received: by 2002:a17:902:e841:b0:223:619e:71e9 with SMTP id
- d9443c01a7336-22dc69f3b71mr187575525ad.11.1745923147737; 
- Tue, 29 Apr 2025 03:39:07 -0700 (PDT)
+ bh=PwHLNqHV1p2YGF0jQBhoTy8nyeKgkUjSl0ezZ7PMGYM=;
+ b=M3Wm5VBIGgNzgWkXWExOy1l67qXVR4VOFT8SUkl7Z4CQf0WUabBoujXpYHNseQYnPw
+ RYgMlx5Q+YlxkwIXo40ikn0c65lNXz6lUxxufx8AMOS8m0bKUQ2tPeN1RRe1xHQTAMvd
+ evKlyC0tE0Q8jEUnDwFD/zizv2fdzg4pjBc3zr2VKE6pSCgvzEeF4a43gbqJ64ACCGW9
+ WoyHBHWv0TK4uZWYEog3TExBPJxhswwbU5fJrIjmNOd7r2R1cSmmjF90HMq7HrFHBM3q
+ qEtsOU72FwXGRf2rI/GennLjePUaWJLXA7lIpo4b9ImTwx8kp0svx1FgmGs9H1xWPjGk
+ CLLg==
+X-Gm-Message-State: AOJu0Yzu2iY9t275DDzw7BMOm4FUr+5hxsJlgmT9rUmsm31/xyI3cbVH
+ USMmkZbVYKktVMGqWNu+sALZRZd/mNMdeOHXOFdrwfdMRFjuZ5NyA1QKomoN6qU=
+X-Gm-Gg: ASbGnctK6eGF35udcl5TTQQpkYmQNq6GvlUTW7trPfiwawLtGQB2mDVp5zMbOcpsPd9
+ nHNjXctLkEkX2tjHyj4hXJ9JBXIlH3otk2rS2e0+yPIRLoVT9ipylnJT6IGK1iZ2YdheCVOHQF1
+ Gbob+LOmEhIiaDZmo3xunTXpt8Na0ptTitNJjWZtdLzV64MaxcXkgP95Iu16yY9OkkkNVXZLNWE
+ NvzXPeM6k09/8yFox8AhnAe2uYmIIVMBhzo5Zp55Ib2Orv8IcC8oY1ajfbHzfYOuWuMQjnimkqO
+ lGn8zuCPHRynwvTJwDExHA3k267Yh9yFStjb7MBgjCvYpXRmTh1sFIM=
+X-Google-Smtp-Source: AGHT+IGFGG6sqBgt5Zssh2d6NOQOAZgcAl7i0cFLDLYooeu+8D66hMTPrFRUjXoPufCP8c8tmIwSjA==
+X-Received: by 2002:a17:90a:d607:b0:309:f53c:b0a0 with SMTP id
+ 98e67ed59e1d1-30a013b16d9mr18851934a91.24.1745929567866; 
+ Tue, 29 Apr 2025 05:26:07 -0700 (PDT)
 Received: from [192.168.68.110] ([152.234.125.33])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-22db4dc7b7asm99662495ad.102.2025.04.29.03.39.05
+ 98e67ed59e1d1-309ef03ca86sm11042095a91.3.2025.04.29.05.26.06
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 29 Apr 2025 03:39:07 -0700 (PDT)
-Message-ID: <bb6ee987-089e-4940-8e11-1b61d1e0b2e9@ventanamicro.com>
-Date: Tue, 29 Apr 2025 07:39:03 -0300
+ Tue, 29 Apr 2025 05:26:07 -0700 (PDT)
+Message-ID: <c93ffa82-8ed6-4a1e-ad1a-9d4fc8940165@ventanamicro.com>
+Date: Tue, 29 Apr 2025 09:26:04 -0300
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 8/9] target/riscv/kvm: read/write KVM regs via env size
-To: Andrew Jones <ajones@ventanamicro.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com,
- liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com
-References: <20250428192323.84992-1-dbarboza@ventanamicro.com>
- <20250428192323.84992-9-dbarboza@ventanamicro.com>
- <20250429-cfab3ab0131af8d6da2f0a14@orel>
+Subject: Re: [PATCH 01/13] riscv/virt: Fix address type in
+ create_fdt_socket_clint
+To: Joel Stanley <joel@jms.id.au>
+Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org
+References: <20250429061223.1457166-1-joel@jms.id.au>
+ <20250429061223.1457166-3-joel@jms.id.au>
 Content-Language: en-US
 From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <20250429-cfab3ab0131af8d6da2f0a14@orel>
+In-Reply-To: <20250429061223.1457166-3-joel@jms.id.au>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::634;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pl1-x634.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::533;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pg1-x533.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -107,104 +104,54 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 
 
-On 4/29/25 6:02 AM, Andrew Jones wrote:
-> On Mon, Apr 28, 2025 at 04:23:22PM -0300, Daniel Henrique Barboza wrote:
->> We're going to add support for scounteren in the next patch. KVM defines
->> as a target_ulong CSR, while QEMU defines env->scounteren as a 32 bit
->> field. This will cause the current code to read/write a 64 bit CSR in a
->> 32 bit field when running in a 64 bit CPU.
->>
->> To prevent that, change the current logic to honor the size of the QEMU
->> storage instead of the KVM CSR reg.
->>
->> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
->> Suggested-by: Andrew Jones <ajones@ventanamicro.com>
->> ---
->>   target/riscv/kvm/kvm-cpu.c | 14 +++++++++-----
->>   1 file changed, 9 insertions(+), 5 deletions(-)
->>
->> diff --git a/target/riscv/kvm/kvm-cpu.c b/target/riscv/kvm/kvm-cpu.c
->> index 5efee8adb2..53c34b43a2 100644
->> --- a/target/riscv/kvm/kvm-cpu.c
->> +++ b/target/riscv/kvm/kvm-cpu.c
->> @@ -135,6 +135,7 @@ typedef struct KVMCPUConfig {
->>       const char *description;
->>       target_ulong offset;
->>       uint64_t kvm_reg_id;
->> +    uint32_t prop_size;
->>       bool user_set;
->>       bool supported;
->>   } KVMCPUConfig;
->> @@ -237,6 +238,7 @@ static void kvm_riscv_update_cpu_misa_ext(RISCVCPU *cpu, CPUState *cs)
->>   
->>   #define KVM_CSR_CFG(_name, _env_prop, reg_id) \
->>       {.name = _name, .offset = ENV_CSR_OFFSET(_env_prop), \
->> +     .prop_size = sizeof(((CPURISCVState *)0)->_env_prop), \
->>        .kvm_reg_id = reg_id}
->>   
->>   static KVMCPUConfig kvm_csr_cfgs[] = {
->> @@ -632,6 +634,7 @@ static int kvm_riscv_get_regs_csr(CPUState *cs)
->>   {
->>       RISCVCPU *cpu = RISCV_CPU(cs);
->>       uint64_t reg;
->> +    uint32_t reg32;
+On 4/29/25 3:12 AM, Joel Stanley wrote:
+> The address is a hardware address, so use hwaddr for consistency with
+> the rest of the machine.
 > 
-> We don't need this variable.
-> 
->>       int i, ret;
->>   
->>       for (i = 0; i < ARRAY_SIZE(kvm_csr_cfgs); i++) {
->> @@ -646,9 +649,10 @@ static int kvm_riscv_get_regs_csr(CPUState *cs)
->>               return ret;
->>           }
->>   
->> -        if (KVM_REG_SIZE(csr_cfg->kvm_reg_id) == sizeof(uint32_t)) {
->> -            kvm_cpu_csr_set_u32(cpu, csr_cfg, reg);
->> -        } else if (KVM_REG_SIZE(csr_cfg->kvm_reg_id) == sizeof(uint64_t)) {
->> +        if (csr_cfg->prop_size == sizeof(uint32_t)) {
->> +            reg32 = reg & 0xFFFF;
-> 
-> This is masking off too many bits. We want the lower 32, not just the
-> lower 16.
+> Signed-off-by: Joel Stanley <joel@jms.id.au>
+> ---
 
-ooops ....
+I believe you have 2 patches #1 in this series:
 
-> 
->> +            kvm_cpu_csr_set_u32(cpu, csr_cfg, reg32);
-> 
-> If the compiler warns when giving this function reg, then we can cast it.
-> 
->   kvm_cpu_csr_set_u32(cpu, csr_cfg, (uint32_t)reg);
-> 
-> otherwise we don't need to do anything special.
+[PATCH 01/13] hw/riscv/virt: Fix clint base address type
+[PATCH 01/13] riscv/virt: Fix address type in create_fdt_socket_clint
 
-I'll remove the extra var and let the compiler do its thing. I'll add a cast
-for extra clarity since some toolchains might nag about it.
+You probably renamed the commit subject to "hw/riscv/virt" and forgot to remove
+the generated patch, since both patches do the same changes.
+
+I believe we can ignore this patch and stick withe the first #1. Thanks,
+
 
 Daniel
 
+
+
+>   hw/riscv/virt.c | 6 +++---
+>   1 file changed, 3 insertions(+), 3 deletions(-)
 > 
->> +        } else if (csr_cfg->prop_size == sizeof(uint64_t)) {
->>               kvm_cpu_csr_set_u64(cpu, csr_cfg, reg);
->>           } else {
->>               g_assert_not_reached();
->> @@ -671,9 +675,9 @@ static int kvm_riscv_put_regs_csr(CPUState *cs)
->>               continue;
->>           }
->>   
->> -        if (KVM_REG_SIZE(csr_cfg->kvm_reg_id) == sizeof(uint32_t)) {
->> +        if (csr_cfg->prop_size == sizeof(uint32_t)) {
->>               reg = kvm_cpu_csr_get_u32(cpu, csr_cfg);
->> -        } else if (KVM_REG_SIZE(csr_cfg->kvm_reg_id) == sizeof(uint64_t)) {
->> +        } else if (csr_cfg->prop_size == sizeof(uint64_t)) {
->>               reg = kvm_cpu_csr_get_u64(cpu, csr_cfg);
->>           } else {
->>               g_assert_not_reached();
->> -- 
->> 2.49.0
->>
-> 
-> Thanks,
-> drew
+> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+> index 17a790821484..e4c0ac8a2a9a 100644
+> --- a/hw/riscv/virt.c
+> +++ b/hw/riscv/virt.c
+> @@ -324,7 +324,7 @@ static void create_fdt_socket_clint(RISCVVirtState *s,
+>       int cpu;
+>       g_autofree char *clint_name = NULL;
+>       g_autofree uint32_t *clint_cells = NULL;
+> -    unsigned long clint_addr;
+> +    hwaddr clint_addr;
+>       MachineState *ms = MACHINE(s);
+>       static const char * const clint_compat[2] = {
+>           "sifive,clint0", "riscv,clint0"
+> @@ -340,8 +340,8 @@ static void create_fdt_socket_clint(RISCVVirtState *s,
+>       }
+>   
+>       clint_addr = s->memmap[VIRT_CLINT].base +
+> -                 (s->memmap[VIRT_CLINT].size * socket);
+> -    clint_name = g_strdup_printf("/soc/clint@%lx", clint_addr);
+> +                 s->memmap[VIRT_CLINT].size * socket;
+> +    clint_name = g_strdup_printf("/soc/clint@%"HWADDR_PRIx, clint_addr);
+>       qemu_fdt_add_subnode(ms->fdt, clint_name);
+>       qemu_fdt_setprop_string_array(ms->fdt, clint_name, "compatible",
+>                                     (char **)&clint_compat,
 
 
