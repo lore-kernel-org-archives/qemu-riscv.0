@@ -4,87 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9923FC369D5
-	for <qemu-riscv@archiver.kernel.org>; Tue, 29 Apr 2025 02:28:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 97118C3ABA5
+	for <qemu-riscv@archiver.kernel.org>; Tue, 29 Apr 2025 05:26:23 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1u9ahQ-0003Cx-JI; Mon, 28 Apr 2025 22:27:56 -0400
+	id 1u9dTo-0006pp-Bs; Tue, 29 Apr 2025 01:26:04 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <jim.shu@sifive.com>)
- id 1u9ahN-000395-9Y
- for qemu-riscv@nongnu.org; Mon, 28 Apr 2025 22:27:53 -0400
-Received: from mail-ed1-x535.google.com ([2a00:1450:4864:20::535])
+ (Exim 4.90_1) (envelope-from <joel.stan@gmail.com>)
+ id 1u9dTl-0006pD-ES; Tue, 29 Apr 2025 01:26:01 -0400
+Received: from mail-ej1-x630.google.com ([2a00:1450:4864:20::630])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <jim.shu@sifive.com>)
- id 1u9ahJ-0004Ln-Ex
- for qemu-riscv@nongnu.org; Mon, 28 Apr 2025 22:27:52 -0400
-Received: by mail-ed1-x535.google.com with SMTP id
- 4fb4d7f45d1cf-5f3f04b5dbcso8769427a12.1
- for <qemu-riscv@nongnu.org>; Mon, 28 Apr 2025 19:27:48 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <joel.stan@gmail.com>)
+ id 1u9dTj-0000kH-Aq; Tue, 29 Apr 2025 01:26:01 -0400
+Received: by mail-ej1-x630.google.com with SMTP id
+ a640c23a62f3a-acacb8743a7so940573866b.1; 
+ Mon, 28 Apr 2025 22:25:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1745893666; x=1746498466; darn=nongnu.org;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=jl/4sSEJTGo3BJOin8dUOd1ajyiTYdgwqywjjk3cQf0=;
- b=ma21rwRLt9yQIgdQdxVO9parDzitXQH+ilx9fWUl56DR0T3wiienhvqPCpCzRdu2zj
- YmZRlEPIUUS5Z3BQe6KKwFfaXvJ5mTcI0/gmhvT92DuLpxUx6vZ6cWke3osszfRlzwU6
- vBOspaoVjluj753wtCXNWe+WKfspmE7kFPKRGf7mIELvBEo8x5XqD534DRMRPLc66Zmx
- KOanXSZYaj7pwvggSxAQEnytm2LavLQlJ/WleRWC6IBMLGFu+VEtsASHIdWqznqTQmeB
- PkpxIw2k3IGJxRsgCz9cz9dA676XRo6Gx4oFULr3WVrAncG7ymnFlykc53iWbskBilcI
- aIrg==
+ d=jms.id.au; s=google; t=1745904357; x=1746509157; darn=nongnu.org;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=UULEW/KaWm2jHs9sP0tHkXnBwnbTPDhkgpLa7XVbG8s=;
+ b=jSQlYPOOIeW/+B0cXoMo8XUJ7EeacTiv0EgSDmDOFZ8NkQQvnii2BuLOgvVL7Q+kW0
+ MFf6Jc5X9NlZGAZfQLW/8X436PJ64GzONBkwlwmGBswcVZ6thI0ngOVEtwmzDhFIcyiP
+ zV683ZLGFuUdhzG1UMhiv2E8skaLMnmgGUHMM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1745893666; x=1746498466;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=jl/4sSEJTGo3BJOin8dUOd1ajyiTYdgwqywjjk3cQf0=;
- b=Dkek2pjaffYCDYKV1JOzn9Xh+ABi1KFAFzkp/WDWFstu+teJLWdFqaaSjTnIfoe/UI
- g5nr+gYcA084oQljq5yynxHWu1ZsMNffQGRmwdo3xkBXWB9uGKB+UhOhbw91SQi6I7zB
- 2tu1bOPVIkpP0nc4a5MAknBepBsocw4mjsJABdYcrAHOL/ihu4u63glgAi/mHnblWPUC
- +yuIA3ydGaDMaO0CnH3d1bqZfBCfPDZY05F+msNbLkLeD7Revm0n5UWu7gnuNjPaIMVZ
- w5FX1nBHy0mkMlYw21mOzxCTmmOieOuKP3AvWY09pCkJlY1ZUy9MAuEYU2Uxww2Z0Eay
- bBeg==
+ d=1e100.net; s=20230601; t=1745904357; x=1746509157;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=UULEW/KaWm2jHs9sP0tHkXnBwnbTPDhkgpLa7XVbG8s=;
+ b=PbElT4lCuO2i3TNH20Xp+PqztWY9Z/VnPtX7Mw75rYXHtIZNAXAHp3592Vs+ABNuEF
+ 3ZR9dFNbJfMvWwiPRtDszdREaN5RgfuwN0vUZq62v7u0cJYJqLEPNen2DV9PglUjKDHD
+ OETcXLjrDqPlivo5ApjV1lNkFyuTN3z2GYIuvdxGN76//P58YgxecOimUSWoSsFOV164
+ CSCYPI10hXCQcFIy089UAA0BL+97fGZJe/t2v2SH/fBnHRmLIH5uySHXenCU3SGNT/0r
+ jDNR55qsvUUaxOqGYCkeSY77Vd7ioe5sWmGUWDMgsaxTkKMBvl2uv1cn0hZew9XbDKQW
+ FjGg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXx7Oo2+V+VVzfYV/RAo0OZxbvRAKLPG9hQFnMuMCNzDCM7NkaSzQSzbtlTI8NRGR2OIhi4IwtSHl8J@nongnu.org
-X-Gm-Message-State: AOJu0Yz1KWJTDp66i7Oa0tI9u8NAQANc3n4a36odRIL5VmTXjZoS4ARa
- 0lwBAaSGf8z7QAy63xEDKjXMBh0IeQBurU6phmssSfGhPf8sIMZR0fr4YAhRNIOlj46y41CFJkX
- +ckKF9yN8KG7WSOkQO3ewn+lmBvr/PAnrZ1DOiT6RKt+HZjI1HqU=
-X-Gm-Gg: ASbGnctdCMnj0J4sbKaYcO4hMjE0WK65ZTpj8RWBaahcqQQXBtAcDd9H/4AFV/RYknL
- Tr6nxMrwAj5q/R+ATzfJrq4B5JRoBoBT4QhTnNy+N7MQgrLLC9CDfKWtEt57R1SlQCelelzvkK9
- 7nSQYDrTL6+Lj9xELaSrLglsSiCJCaR/xlC2I=
-X-Google-Smtp-Source: AGHT+IGuEAyu7UEwIL7VXVTKmcXJ3BbPnbZjOCnaxOpqtDjCTkqo9wsbOPo36p3c7cPkyXqSjabNCNwbpPwgectn/S4=
-X-Received: by 2002:a17:907:6d23:b0:ace:6f45:b5c6 with SMTP id
- a640c23a62f3a-acec84f8058mr86737766b.22.1745893666505; Mon, 28 Apr 2025
- 19:27:46 -0700 (PDT)
+ AJvYcCWqOosv3GS6ZP6IVlUsaRAu3sPgfekcmmQ8ckETpNFSdK2D+AH9Sm6l5wWPPTIumW5jxmzMV7354HG9@nongnu.org
+X-Gm-Message-State: AOJu0YyKb2JXLxd456qtVD0f5OSLbtEZdCmpFDmbdHBLzvj4HbjSueof
+ lZBojiM3WX2hiQM1oEzYwJtcw1kuJ3KwD1sNQLxaru9wWXpgsB8oCLtEVfeMTZK+Z085WHleMza
+ iL+jAQKRh0/A1dofOEdHM8Q5PJy39Jg==
+X-Gm-Gg: ASbGncs63oEg8PeQGhu9cBdIiApFHRbAuixJtjhN4kFJR6pdCxki/d84i7MQKRZWGM/
+ kJMZtlBmrNE5l/m64C+AISnqYSrpZGZnu0XlHXZuCONjN7oj94th39TmSMkMEo0AFVu+K8F8lMB
+ NYiv7Czz3iFnnrWVxOhnLFTw==
+X-Google-Smtp-Source: AGHT+IHwInmrQ99CC5fXl+RJmPAd3a1co+2sk+ZRtvp5tGYk1gaBMBg8DNUSG6zrzvrKAlW45RQsbOF3adyW6CkaPvQ=
+X-Received: by 2002:a17:907:3e26:b0:acb:124e:81fa with SMTP id
+ a640c23a62f3a-acec69cfafbmr174269966b.5.1745904357043; Mon, 28 Apr 2025
+ 22:25:57 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250409025131.3670-1-jim.shu@sifive.com>
- <CALw707qbE1wRhPkWw3dXWj0gvtvzqhUH73m98LpfFPFgVhkaGw@mail.gmail.com>
-In-Reply-To: <CALw707qbE1wRhPkWw3dXWj0gvtvzqhUH73m98LpfFPFgVhkaGw@mail.gmail.com>
-From: Jim Shu <jim.shu@sifive.com>
-Date: Tue, 29 Apr 2025 10:27:34 +0800
-X-Gm-Features: ATxdqUHviN3FJDRaqxjE22DL1BCtk1eYmQ5CNvP4-wXuA5u3PDoMZkpDcFAmMVQ
-Message-ID: <CALw707pHE6b7Rr1289+E0Ef7gPS2kx4j3swBApruHqfjnq=niw@mail.gmail.com>
-Subject: Re: [PATCH v2 0/4] Several sstc extension fixes
-To: qemu-devel@nongnu.org, qemu-riscv@nongnu.org
-Cc: Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, 
- Weiwei Li <liwei1518@gmail.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>, 
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
+References: <20250423110630.2249904-1-dbarboza@ventanamicro.com>
+ <20250423110630.2249904-2-dbarboza@ventanamicro.com>
+ <CACPK8XfF74wHqdBBz=qPLefAD8pKT-0C8e=kfFtTeMH+teF-7A@mail.gmail.com>
+ <7d5181de-eb42-44b0-80cb-b2f8a3aed47c@ventanamicro.com>
+In-Reply-To: <7d5181de-eb42-44b0-80cb-b2f8a3aed47c@ventanamicro.com>
+From: Joel Stanley <joel@jms.id.au>
+Date: Tue, 29 Apr 2025 14:55:44 +0930
+X-Gm-Features: ATxdqUGqqgq0pkLWP1GWf5c5uX3f6AlSA4y8QdT2ntMam8_fIKmLE6P8rI51ToU
+Message-ID: <CACPK8Xc5Av4QnHwcfe5JhcHUYmdLxm6P+vDh=_zze7UvbaaJ8w@mail.gmail.com>
+Subject: Re: [PATCH 1/9] hw/riscv/virt.c: enforce s->memmap use in
+ machine_init()
+To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
+ liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com, 
+ Conor Dooley <conor@kernel.org>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2a00:1450:4864:20::535;
- envelope-from=jim.shu@sifive.com; helo=mail-ed1-x535.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
+Received-SPF: pass client-ip=2a00:1450:4864:20::630;
+ envelope-from=joel.stan@gmail.com; helo=mail-ej1-x630.google.com
+X-Spam_score_int: -19
+X-Spam_score: -2.0
 X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+X-Spam_report: (-2.0 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, FREEMAIL_FORGED_FROMDOMAIN=0.001,
+ FREEMAIL_FROM=0.001, HEADER_FROM_DIFFERENT_DOMAINS=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -100,47 +95,80 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Hi,
+On Fri, 25 Apr 2025 at 21:23, Daniel Henrique Barboza
+<dbarboza@ventanamicro.com> wrote:
+>
+>
+>
+> On 4/24/25 6:51 AM, Joel Stanley wrote:
+> > On Wed, 23 Apr 2025 at 20:37, Daniel Henrique Barboza
+> > <dbarboza@ventanamicro.com> wrote:
+> >>
+> >> Throughout the code we're accessing the board memmap, most of the time,
+> >> by accessing it statically via 'virt_memmap'. This static map is also
+> >> assigned in the machine state in s->memmap.
+> >>
+> >> We're also passing it as a variable to some fdt functions, which is
+> >> unorthodox since we can spare a function argument by accessing it
+> >> statically or via the machine state.
+> >>
+> >> All the current forms are valid but not all of the are scalable. In the
+> >> future we will version this board, and then all this code will need
+> >> rework because it should point to the updated memmap. In this case,
+> >> we'll want to assign the adequate versioned memmap once during init,
+> >> in s->memmap like it is being done today, and the rest of the code
+> >> will access the updated map via s->memmap.
+> >
+> > I was writing a patch for a machine and came across the same
+> > inconsistencies. Nice clean up.
+> >
+> > Some of the device initlisation code could be refactored out to be
+> > shared by other machines within the riscv directory. Related, parts of
+> > the device tree creation could belong to the model, instead of to the
+> > machine, as the properties are a property (!) of the device.
+>
+>
+> Yes, delegating the FDT creation to the device, instead of having each machine
+> to create the (mostly) same FDT code over and over again, is something that
+> I've considering for awhile.
+>
+> I keep postponing it mainly because I would like to verify with the DT folks if
+> there's a guarantee that a given device/CPU DT is always the same, i.e. a device
+> DT is always the same regardless of the machine. I have a guess that that this is
+> indeed the case but a confirmation would be nice .... Conor, care to comment?
 
-Gentle ping on this patch.
+I'd be interested in Coner's thoughts on this.
 
-Thanks,
-Jim
+My understanding is bindings strive to specify the hardware
+independent of the machine it's part of. We have bindings in the
+kernel tree, and associated drivers that use those bindings, that work
+fine on different machines. The litex peripherals are an extreme case
+of this; peripherals defined in python that are attached to soft cores
+often running on a FPGA.
 
-On Wed, Apr 9, 2025 at 10:58=E2=80=AFAM Jim Shu <jim.shu@sifive.com> wrote:
+At a practical level generating the device tree for a given device
+does need to take into account specifics of the machine.
+
+Things like interrupt properties depend on the interrupt device you're
+delivering to (some have two cells to provide a 'flags' parameter
+alongside the irq number). In general anything that contains phandles
+could end up being machine specific. Another case is the number of
+cells in reg properties, which depend on the bus the device is
+described to be on.
+
+These are things that some common code would need to handle, not show
+stoppers for the idea.
+
+> In this refactor we could then create FDTs by passing along a memmap pointer and
+> a fdt pointer, as you've suggested.
 >
-> Sorry, I forgot to write v2 changes in cover-letter.
->
-> Changes in v2:
-> - Remove duplicated code in riscv_timer_stce_changed() function
-> - Add sstc spec description in the commit log
->
->
-> On Wed, Apr 9, 2025 at 10:51=E2=80=AFAM Jim Shu <jim.shu@sifive.com> wrot=
-e:
-> >
-> > This patch series contains several sstc fixes:
-> >
-> > (1) Writing to ACLINT mtime should also update the period of S/VS-mode
-> >     timer, just like M-mode timer.
-> > (2) VSTIP bit of $mip CSR should check both M-mode and H-mode STCE.
-> > (3) Writing to STCE bit may enable/disable sstc extension in S/VS-mode,
-> >     which should update the timer and IRQ pending bits.
-> >
-> >
-> > Jim Shu (4):
-> >   target/riscv: Add the checking into stimecmp write function.
-> >   hw/intc: riscv_aclint: Fix mtime write for sstc extension
-> >   target/riscv: Fix VSTIP bit in sstc extension.
-> >   target/riscv: Enable/Disable S/VS-mode Timer when STCE bit is changed
-> >
-> >  hw/intc/riscv_aclint.c     |  5 +++
-> >  target/riscv/csr.c         | 53 ++++++++++++++++++++++++++++++-
-> >  target/riscv/time_helper.c | 65 ++++++++++++++++++++++++++++++++++++--
-> >  target/riscv/time_helper.h |  1 +
-> >  4 files changed, 121 insertions(+), 3 deletions(-)
-> >
-> > --
-> > 2.17.1
-> >
+> All this said, there's no need to do such FDT refactory all at once. I think I'll
+> start with the most common devices between RISC-V boards and go from there.
+
+Agreed! It was just something to keep in mind when deciding what
+pointers to pass around.
+
+Cheers,
+
+Joel
 
