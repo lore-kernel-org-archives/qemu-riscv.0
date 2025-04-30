@@ -4,76 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EC1C4C369D9
-	for <qemu-riscv@archiver.kernel.org>; Wed, 30 Apr 2025 22:45:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 133F7C369D9
+	for <qemu-riscv@archiver.kernel.org>; Wed, 30 Apr 2025 23:58:57 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uAGBV-0003Qm-U5; Wed, 30 Apr 2025 18:45:46 -0400
+	id 1uAHK3-0007VZ-Iz; Wed, 30 Apr 2025 19:58:39 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1uAGAs-0002Zh-2b; Wed, 30 Apr 2025 18:45:09 -0400
-Received: from mail-ej1-x62c.google.com ([2a00:1450:4864:20::62c])
+ id 1uAHK2-0007VI-FP; Wed, 30 Apr 2025 19:58:38 -0400
+Received: from mail-ua1-x92f.google.com ([2607:f8b0:4864:20::92f])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1uAGAn-00036M-Ia; Wed, 30 Apr 2025 18:45:03 -0400
-Received: by mail-ej1-x62c.google.com with SMTP id
- a640c23a62f3a-ac2c663a3daso66523566b.2; 
- Wed, 30 Apr 2025 15:44:56 -0700 (PDT)
+ id 1uAHK0-0000q3-Tv; Wed, 30 Apr 2025 19:58:38 -0400
+Received: by mail-ua1-x92f.google.com with SMTP id
+ a1e0cc1a2514c-86dddba7e0eso109212241.1; 
+ Wed, 30 Apr 2025 16:58:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1746053095; x=1746657895; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1746057515; x=1746662315; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=tk2FYkcbjKhZkaXcrUcRpZBO4gSLNUW6gGqhuPngwSI=;
- b=IGfvNeyoWgbZHn5kj6hgeQX3BGL6gNYtRq9ZQplSfR0MrGTXjKk9uSDH5yrx/+LyHD
- B6DvvYh3ynzh6nNvRNyxkUcaNmh/a979WeOKssZ5kusDm65M5GipDGhp+4aQe2+7ItG+
- xF6ZXWOBvBAJYtrWwVY4/h+bi3HV1ltOlGr2guhFym1zN0YiYaoNZfowwEu3M3T9xyAa
- 6Pt7mmaLvYX/q3ZaiPKhuekPA9U2HlwKGJctaGJCbMRO91a8cSZkpag8ugBPvUvfqcbZ
- dk/Wbz6e9fcmPKoCx6VIkj4BRL1mQJhwRyooUpTiwTJYnzEWA/cEBwXuha+fjH5QTsPy
- ePmQ==
+ bh=qjUsHPlXLPg22dIGhPPmvBlqIs5q79G6Kgt8Lyn/YCQ=;
+ b=HbDCuoxJwRV3FCiz7/Rm5MVUG93HkQqDfMjBgHAplb3wNzG609G0TPzKVlzpAotqXp
+ pI4h6isWsDund4R3IEOOG1sxO/CkIpcKNOFrNaXUc3ARvmezyv2/KLsOig7rrLOhVUnY
+ ANd0EoemAgraiHW1IcHNDlrpKjSYEzh31sMJ0TSq1r5OTeiu8zBEz/HIruC6B9tnoBV6
+ JST3t5CvKnIWxTWp5CmO03aRe9+hgigq8+hLipCVxHzrBTwpUaX8hXMkyffLbW7IAe0s
+ hwpXSnQ4RcNuVpGa+O2qFQdpK5enhKiATWeAjNVT2Dwn6PxNo17wqoRFEl+9/iHh5hnr
+ INoQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1746053095; x=1746657895;
+ d=1e100.net; s=20230601; t=1746057515; x=1746662315;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=tk2FYkcbjKhZkaXcrUcRpZBO4gSLNUW6gGqhuPngwSI=;
- b=nwqJ6N/gaJ1fx8yeUyPfiDP6EbwTS94rSrpA7Oz1RhiQruI1KSnJ+We21dvnw1nGj+
- pGzIFoyo+E3kMTKK0REZnTfmQIzgFvG5scEWXtPLL1no9tUGw5i61r0rNnFa8pl7xfTB
- I1vgUHnj3q3yX5yXouvvOxZUT50KdmJLTB1mvN64nTQpxSAKT+aWXp3tXe95CF+1x3eZ
- EHlL/ICK5nREwZtF+CQdNKB+5oLlwtVunf2W+8Q+SOKY1VSrGHPVvtf8udSrdHsh/t4x
- OOF6qpDjfslUjhhge5TSKhTTcIDKaQ/jpwdBbarbn6bREMvjXY+5wbUTzufnUvQrvsIa
- K2lw==
+ bh=qjUsHPlXLPg22dIGhPPmvBlqIs5q79G6Kgt8Lyn/YCQ=;
+ b=fwrILDDs6lMv/aRoD954Czq5vlHwwZhJae1q3rNnCu+Py2R56bsF1Ao4jmmM5n1RKK
+ j6YbBIdlA551pn/z0Y5sH8LOwanQGzH4qAiIOF6O+2ORLymo2sU481JQypNF0kvShtDm
+ HJ7AAb6IFwZfaZmGXuqD/RUVQWv3z7yhOcXUUlSJk57EvAxi8QDPU1GjUIb0kk4dlWgg
+ 29fQtU4hBHhmHm0Rhm0D2vsxptm2ai7lEXaAbUlcTevb3tqh6NlbCCouYXA+KfqdS5Yq
+ e80WwFc0+gCQhDhTr/maFVznx+QHj2KBobInB2HkXiyXblm+PMNWUtV+IPbre7/NazJJ
+ FKWw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUUTQO/kbAIQlRBeFP9Z78Gi/IY2qpnhbr+8VckCJBowLuQMGUEbpBzYv/xt/bD/aFIHtcjH5akrBa4@nongnu.org
-X-Gm-Message-State: AOJu0YyFNCasUrx3iH3eYbqbOmDEhIwSG7E4MEG9EUK5BslI7mkPt+F5
- BkSpdKhT563V8xVhK/kM/AYsQ/IUMqvqnGS2CvDN8dcvxXh/ZoumI1Q37XCWAsWK8g+YNdwFWpq
- i98iGD/CSXlVTyAtwEPuo80jXhTY=
-X-Gm-Gg: ASbGnctQ62vseRNFqRzK/4Bhrd65KqzOy2qo8So3eDq0uP+rDhCel/dV/6LMS/q0DIj
- 7VXmSRocItV0B5V47FB+KQhODBCbbch4yTdwewC0vI/Fj4SuoNsuonW+o3edZGO+quqlezDRnhp
- YJ/LFE0MkBxDvI7D6/Zm4ExhmuEpteKspEA6/YbXphhKzivQEoUkEf
-X-Google-Smtp-Source: AGHT+IGRvxDAJAdFIG888Vb6S33MXGpBfTACDRs/XPRmd3CP4WtKrmgk3ludhRgeXHtDoddgPSTY3nZgEwYiviR9/kQ=
-X-Received: by 2002:a17:907:9494:b0:acb:4cd7:2963 with SMTP id
- a640c23a62f3a-acef42adea1mr103805166b.33.1746053094537; Wed, 30 Apr 2025
- 15:44:54 -0700 (PDT)
+ AJvYcCXT6tJlViiRA0BimXYn5Mk/BXyEs/QEWwf6RwdHcONjZER1kKwibNzo5DUcGocGuQTfMYRrNv7UERTO@nongnu.org
+X-Gm-Message-State: AOJu0Yzdi17ePr13/i/4kqPRBXHcIa444DFMjwtI86f+gFVRr57rTUEB
+ jeW4uGEJwEzPRGzPIneysOkMF95UtpXIpAvnijjzsY60Kr6uyD6YRESozvPYxgr5Hp6U3LbboBN
+ 7RN1JgvY68FxwA3Q4xdlEL34bYzQ=
+X-Gm-Gg: ASbGncsvfmfZ/cKNd1/MUzhe0cwkF10SWGvNHX3BaluB5VXx8ZoqQqlCoWiHzi8N7IK
+ pHnDxeEExEJUZHm58miKazkC5RBILpTrHkg5Jm9j6mhkycd4mT5g2SjOVgd+jiXtZHsTr3g/oJa
+ Gv7ekYqDXkuy/eTLE/2PPy19ekEjk91ahdYu3ObveG/dJPlyBuirso
+X-Google-Smtp-Source: AGHT+IH+R2TtKNDUYckgCtQAwvw+1g4q3bMgiCx8dsx6VyK+8qFfoRqDpjBfckBT6L4NDkcDuI97slwvxki6PjhslfA=
+X-Received: by 2002:a05:6102:390d:b0:4c4:e3fe:4af9 with SMTP id
+ ada2fe7eead31-4dae9184cc5mr229284137.12.1746057515521; Wed, 30 Apr 2025
+ 16:58:35 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250425152311.804338-1-richard.henderson@linaro.org>
- <20250425152311.804338-8-richard.henderson@linaro.org>
- <5b298186-50c8-4473-8eaf-d0bc6f6793ce@linaro.org>
-In-Reply-To: <5b298186-50c8-4473-8eaf-d0bc6f6793ce@linaro.org>
+References: <20250430082213.1418201-1-antonb@tenstorrent.com>
+In-Reply-To: <20250430082213.1418201-1-antonb@tenstorrent.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Thu, 1 May 2025 08:44:20 +1000
-X-Gm-Features: ATxdqUFkktLHd-pq3jmusM_fOWWttg_d8TakmmDwIi353_2XjbOioWpt7P9E01s
-Message-ID: <CAKmqyKPxSrLkRCjiwcKHHPBapLyk50R5DLtRFSmfVRxYq0ec_Q@mail.gmail.com>
-Subject: Re: [PATCH 7/7] target/riscv: Fix write_misa vs aligned next_pc
-To: Richard Henderson <richard.henderson@linaro.org>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
- dbarboza@ventanamicro.com
+Date: Thu, 1 May 2025 09:58:08 +1000
+X-Gm-Features: ATxdqUG8cfs3YB7fVnj1VUm1jwO-h6cbLVFXOzdEcEEuXRBE3V6WNaJHadBZA2Q
+Message-ID: <CAKmqyKPz8cw=XN5D--aw2XBEEBSdpVNh0k_18H0-j6ea466fKw@mail.gmail.com>
+Subject: Re: [PATCH] target/riscv: Fix fcvt.s.bf16 NaN box checking
+To: Anton Blanchard <antonb@tenstorrent.com>
+Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org, 
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Weiwei Li <liwei1518@gmail.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>, 
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2a00:1450:4864:20::62c;
- envelope-from=alistair23@gmail.com; helo=mail-ej1-x62c.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::92f;
+ envelope-from=alistair23@gmail.com; helo=mail-ua1-x92f.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -97,24 +99,64 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Wed, Apr 30, 2025 at 12:34=E2=80=AFAM Richard Henderson
-<richard.henderson@linaro.org> wrote:
+On Wed, Apr 30, 2025 at 6:23=E2=80=AFPM Anton Blanchard <antonb@tenstorrent=
+.com> wrote:
 >
-> On 4/25/25 08:23, Richard Henderson wrote:
-> > -    if ((val & RVC) && (GETPC() & ~3) !=3D 0) {
-> > +    /* Suppress 'C' if next instruction is not aligned. */
-> > +    if ((val & RVC) && (get_next_pc(env, ra) & ~3) !=3D 0) {
->
-> Bah.  I preserved a second bug here: not "& ~3" but "& 3".
+> fcvt.s.bf16 uses the FP16 check_nanbox_h() which returns an FP16
+> quiet NaN. Add check_nanbox_bf16() which returns a BF16 quiet NaN.
 
-Good catch
-
-I squashed this fix into the patch
+You are missing a Signed-off-by line
 
 Alistair
 
+> ---
+>  target/riscv/fpu_helper.c |  2 +-
+>  target/riscv/internals.h  | 16 ++++++++++++++++
+>  2 files changed, 17 insertions(+), 1 deletion(-)
 >
+> diff --git a/target/riscv/fpu_helper.c b/target/riscv/fpu_helper.c
+> index 91b1a56d10..31c17399fc 100644
+> --- a/target/riscv/fpu_helper.c
+> +++ b/target/riscv/fpu_helper.c
+> @@ -756,6 +756,6 @@ uint64_t helper_fcvt_bf16_s(CPURISCVState *env, uint6=
+4_t rs1)
 >
-> r~
+>  uint64_t helper_fcvt_s_bf16(CPURISCVState *env, uint64_t rs1)
+>  {
+> -    float16 frs1 =3D check_nanbox_h(env, rs1);
+> +    float16 frs1 =3D check_nanbox_bf16(env, rs1);
+>      return nanbox_s(env, bfloat16_to_float32(frs1, &env->fp_status));
+>  }
+> diff --git a/target/riscv/internals.h b/target/riscv/internals.h
+> index 213aff31d8..794c81bf7c 100644
+> --- a/target/riscv/internals.h
+> +++ b/target/riscv/internals.h
+> @@ -142,6 +142,22 @@ static inline float16 check_nanbox_h(CPURISCVState *=
+env, uint64_t f)
+>      }
+>  }
+>
+> +static inline float16 check_nanbox_bf16(CPURISCVState *env, uint64_t f)
+> +{
+> +    /* Disable nanbox check when enable zfinx */
+> +    if (env_archcpu(env)->cfg.ext_zfinx) {
+> +        return (uint16_t)f;
+> +    }
+> +
+> +    uint64_t mask =3D MAKE_64BIT_MASK(16, 48);
+> +
+> +    if (likely((f & mask) =3D=3D mask)) {
+> +        return (uint16_t)f;
+> +    } else {
+> +        return 0x7FC0u; /* default qnan */
+> +    }
+> +}
+> +
+>  #ifndef CONFIG_USER_ONLY
+>  /* Our implementation of SysemuCPUOps::has_work */
+>  bool riscv_cpu_has_work(CPUState *cs);
+> --
+> 2.34.1
+>
 >
 
