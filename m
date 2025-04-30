@@ -4,88 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A1BACC369D9
-	for <qemu-riscv@archiver.kernel.org>; Wed, 30 Apr 2025 08:23:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BD654C369D9
+	for <qemu-riscv@archiver.kernel.org>; Wed, 30 Apr 2025 11:28:57 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uA2iT-0008Vv-BS; Wed, 30 Apr 2025 04:22:53 -0400
+	id 1uA5c6-000055-HQ; Wed, 30 Apr 2025 07:28:31 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <antonb@tenstorrent.com>)
- id 1uA2iQ-0008Vc-3k
- for qemu-riscv@nongnu.org; Wed, 30 Apr 2025 04:22:50 -0400
-Received: from mail-oa1-x36.google.com ([2001:4860:4864:20::36])
+ (Exim 4.90_1) (envelope-from <joel.stan@gmail.com>)
+ id 1uA5by-0008Vi-PD; Wed, 30 Apr 2025 07:28:22 -0400
+Received: from mail-ed1-x532.google.com ([2a00:1450:4864:20::532])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <antonb@tenstorrent.com>)
- id 1uA2iO-0002ez-3c
- for qemu-riscv@nongnu.org; Wed, 30 Apr 2025 04:22:49 -0400
-Received: by mail-oa1-x36.google.com with SMTP id
- 586e51a60fabf-2d0d25cebfeso4743777fac.2
- for <qemu-riscv@nongnu.org>; Wed, 30 Apr 2025 01:22:47 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <joel.stan@gmail.com>)
+ id 1uA5bv-00029v-Ol; Wed, 30 Apr 2025 07:28:22 -0400
+Received: by mail-ed1-x532.google.com with SMTP id
+ 4fb4d7f45d1cf-5e8be1c6ff8so2236501a12.1; 
+ Wed, 30 Apr 2025 04:28:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=tenstorrent.com; s=google; t=1746001365; x=1746606165; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=9p+M3a0+ZrpBZKw9HCYA3LwNf/EjFyeiq9XhHUkp/SI=;
- b=egZmbGfRBWr6ZVn61dHLMxY3JswZuCJ0+e2u4YOrm+IGXeCUuamx2F2B7mpoiDtXvR
- e2GZEmlVUUJCnndDETmXDe3nK4BecxIfrz2lAGhUjx+UsTP87ztRlMr/fC43PIhH03De
- tus/fzEIMD1iNFfzPmzBf55N16RYKXJT9BtRl3xSJDxO2Lq3zTWdEWBWjxXJAM5X8P9H
- Ca0VPZv6iVse+l1i2vdt+n6VCesmaETSFaYva4OqCzjU6zy/cf7Xv4zZ4VuvuXRjnZ7M
- lMYzoy83NsH+cf1A9CpOweV7xbcCcdSdBlfSO4agFCXGl7n+BFO1pEC0KTMqXJYy/3RC
- ROXw==
+ d=jms.id.au; s=google; t=1746012494; x=1746617294; darn=nongnu.org;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=LVa3YGDj/E1kBeDxbPLDNCVCnHYwLw/UNBTD+VzzjLs=;
+ b=TmND7TSwXAKB0gx25AaKBUfMylYABjindaJrly8rSwK3aVfR5Ixc6bn37i5mvY93wH
+ Y7HDBGlOrcHb/gwYDm8Y4mS0F2AADL+PAfnQFKXHYjBbIcQvoJ0LUjPOzQ2u+P9Q4GVH
+ 5hke3GL9I6Lae+EfLZyDXj5WZGl0YI7+3TJ90=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1746001365; x=1746606165;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1746012494; x=1746617294;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=9p+M3a0+ZrpBZKw9HCYA3LwNf/EjFyeiq9XhHUkp/SI=;
- b=clCzYhUhYuy+yDt3rUNN+pi7CLgnL7Phgx91oq1Ct8hu423/bQ/+HAwMvb9gl/E+r5
- +KvCsB81WxdlO6U7f3PsoSYh1vu9yRYivSKsYq8y0O2FQwFm61x45z1dGn/1fRk4pC2l
- VuX+LG8a0hROMbOScwfBEBI92K9LVg2/2kcgar3fAvv0Cb9a3kE8oIvyY7xp3ZeP8O9R
- QbZ3OODkmgwiSxFhl1MjTMgr6Rk0jne0QFfPBgzqzKfCUQQSzwJz+R1BzKuo8qHQ8RYv
- ZxJ+UcKdjbUKNJSIta8KZjK7+Vt9nd40jwAj9vOkx9Gmfiipv0vMJhtp7JpD0BoSzsIc
- RLoQ==
-X-Gm-Message-State: AOJu0YzxR/H8RMTGppWXKARMW/XTWK/6SD4HQVYj0O6ePSWD0p58+JGG
- B+/BGWjpu9euCsvXopUQXyY7LLgQ9KhpbeuYmeLu8/b516KMp5ARbEl7NogqSC9x19enh0L+c1H
- W5hM=
-X-Gm-Gg: ASbGncvbAI7+dUcxlg+JuJzJ1ycvWeI/r4wMATAaoSuHmO9oMSJcfUAUCshCfsF8nei
- sClaaGAK80MEf2wJCq04yR2MXglCnl0tkA9xTyl5yDpUbd0qvBlCqeijYzYGOeKiyHNCQNnhKMo
- ILfxDgJsmTBm11s+Ng71cnGLhpHODfbNHEW8rbn/NSUT1qFYG5G+y+fUNxvU4sgAwdMLNEJcdij
- KoZ1+r5KoUTALvU6CR0B/h5gUSNPHdLfkwy372MRV1atlce6zclaBd9rpUNSNtgq+sDIqV3pYNt
- Jl4BHY7LAKtQYrFhMRMU1u+ag9Mvb9EsjMzvTQ2CJaDyxLWIDfBMCTmh96iRaeGwTiKNfP1ZIbo
- =
-X-Google-Smtp-Source: AGHT+IG5YDY3gZZSC8W9a1bK/GX0lb3ui9tAXgtAMc39X5w1OCcKetwffT6JwXD7XcHRwT9Tn/JoMA==
-X-Received: by 2002:a05:6870:4149:b0:2b8:fab0:33c with SMTP id
- 586e51a60fabf-2da69f2a015mr1154476fac.23.1746001365461; 
- Wed, 30 Apr 2025 01:22:45 -0700 (PDT)
-Received: from ausc-rvsw-c-01-anton.tenstorrent.com ([38.104.49.66])
- by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-2da6e0523d6sm308556fac.6.2025.04.30.01.22.42
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 30 Apr 2025 01:22:43 -0700 (PDT)
-From: Anton Blanchard <antonb@tenstorrent.com>
-To: qemu-riscv@nongnu.org,
-	qemu-devel@nongnu.org
-Cc: Anton Blanchard <antonb@tenstorrent.com>,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Weiwei Li <liwei1518@gmail.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
-Subject: [PATCH] target/riscv: Fix fcvt.s.bf16 NaN box checking
-Date: Wed, 30 Apr 2025 08:22:13 +0000
-Message-Id: <20250430082213.1418201-1-antonb@tenstorrent.com>
-X-Mailer: git-send-email 2.34.1
+ bh=LVa3YGDj/E1kBeDxbPLDNCVCnHYwLw/UNBTD+VzzjLs=;
+ b=HtM7jRuw2jX1vWNvlW43/GEPQeMEtK6XJ9+agHLkfNLzqoybTjuBhyT+ogIg23z9hG
+ Op3gXDgLOkHagm7Z+HR/xPKajDS/dXrJE8QnY6TTkzA//czIYvbvQQD5INzadDZjfm0B
+ Ab2padalOfmiGZfVF8lQFRC5YTRGHO3W/VjnW+jyXPgvKA8VT0L4lA11uHBv99lfnFRB
+ mpdprYBCjju8DEBnd0aZwXGuJRSAbccs+5ZdaRxz3eSu6HfK4PuB61RNPOso0fehx6QI
+ /clPJAgBQyfCXx797AeiTPN9nc/4VbrW32hlyzkM3kCNKcFjNyChbtcaPRmd7IbDvSiA
+ cCMg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUOtA/rlSzDAIER9KM87T3dFlW1YinVKfaLR8QCYP3taXamwi9iH0CUYD8+vJ4JbF3AhGHCtDOOfdr/@nongnu.org
+X-Gm-Message-State: AOJu0YzvOja1Mtb5l/060vUXdcWUvB1KYta9cX0h+V5knGViMzStXI/i
+ GlPoFoTe3iuFUZjV62B3pLxrsmvq5Pch3E7vfOGEfe3VkR6zxpit5IECykCxj7pbuk3Vr+AYXjG
+ 1t3j9VPj+EvArHBlgLyZSjbd1SyQ=
+X-Gm-Gg: ASbGncv3vifsoNG1A25f8xoLCz/PAgHMI4ouiuGX2yV3i8b5izw8kwf9QmaEVFlSMzc
+ cIW/SxV4uJaX0D1skjilQ4IoArJX8rekLH2inp9gBuxDYxod4Udw6ALgYrQpk1Wj4GrWp5opoPr
+ n5q8IkXoMsBrEfteoVinwAfA==
+X-Google-Smtp-Source: AGHT+IGCOkFGd/x1CSuEIdoH2xnPAeAtcuGQ0gCVP/TtcGXH9wSeb8SKkAmArDXBWR8wgtrCCeKq4mTeH3IJf7u7VsA=
+X-Received: by 2002:a17:907:6d0b:b0:ac1:df32:ac27 with SMTP id
+ a640c23a62f3a-acedc79d656mr300561566b.53.1746012494213; Wed, 30 Apr 2025
+ 04:28:14 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2001:4860:4864:20::36;
- envelope-from=antonb@tenstorrent.com; helo=mail-oa1-x36.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
+References: <20250423110630.2249904-1-dbarboza@ventanamicro.com>
+ <20250423110630.2249904-10-dbarboza@ventanamicro.com>
+ <CACPK8Xei9L_82YV7+wPmTacEh2MNLFticOEny_6kSM9miCAt2w@mail.gmail.com>
+ <d404d535-fc04-43ac-a7a7-2f216cad993c@ventanamicro.com>
+ <45b9b66d-1aa7-47da-9458-04ab726d5aae@ventanamicro.com>
+In-Reply-To: <45b9b66d-1aa7-47da-9458-04ab726d5aae@ventanamicro.com>
+From: Joel Stanley <joel@jms.id.au>
+Date: Wed, 30 Apr 2025 20:58:00 +0930
+X-Gm-Features: ATxdqUFxslx806NASeu219TBnPAq6jGGVTUJsQSzmU7_Smc9HYYofrQpmXqoxYs
+Message-ID: <CACPK8Xe5Aqm-7vjTGk6rUPZp50beue6wZeH_EqTQ50TDmNkzqA@mail.gmail.com>
+Subject: Re: [PATCH 9/9] hw/riscv/virt.c: remove 'long' casts in fmt strings
+To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
+ liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com
+Content-Type: text/plain; charset="UTF-8"
+Received-SPF: pass client-ip=2a00:1450:4864:20::532;
+ envelope-from=joel.stan@gmail.com; helo=mail-ed1-x532.google.com
+X-Spam_score_int: -19
+X-Spam_score: -2.0
 X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+X-Spam_report: (-2.0 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, FREEMAIL_FORGED_FROMDOMAIN=0.001,
+ FREEMAIL_FROM=0.001, HEADER_FROM_DIFFERENT_DOMAINS=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -103,53 +94,60 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-fcvt.s.bf16 uses the FP16 check_nanbox_h() which returns an FP16
-quiet NaN. Add check_nanbox_bf16() which returns a BF16 quiet NaN.
----
- target/riscv/fpu_helper.c |  2 +-
- target/riscv/internals.h  | 16 ++++++++++++++++
- 2 files changed, 17 insertions(+), 1 deletion(-)
+On Wed, 30 Apr 2025 at 02:41, Daniel Henrique Barboza
+<dbarboza@ventanamicro.com> wrote:
+>
+>
+>
+> On 4/29/25 9:40 AM, Daniel Henrique Barboza wrote:
+> > Joel,
+> >
+> > I'll make these changes in this patch to be consistent with what we've
+> > been discussing:
+> >
+> > - change addr to hwaddr
+> > - use HWADDR_PRIx instead of PRIx64
+> >
+> > i.e. this diff:
+> >
+> > diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+> > index 1eae84db15..0020d8f404 100644
+> > --- a/hw/riscv/virt.c
+> > +++ b/hw/riscv/virt.c
+> > @@ -303,12 +303,13 @@ static void create_fdt_socket_cpus(RISCVVirtState *s, int socket,
+> >   static void create_fdt_socket_memory(RISCVVirtState *s, int socket)
+> >   {
+> >       g_autofree char *mem_name = NULL;
+> > -    uint64_t addr, size;
+> > +    hwaddr addr;
+> > +    uint64_t size;
 
-diff --git a/target/riscv/fpu_helper.c b/target/riscv/fpu_helper.c
-index 91b1a56d10..31c17399fc 100644
---- a/target/riscv/fpu_helper.c
-+++ b/target/riscv/fpu_helper.c
-@@ -756,6 +756,6 @@ uint64_t helper_fcvt_bf16_s(CPURISCVState *env, uint64_t rs1)
- 
- uint64_t helper_fcvt_s_bf16(CPURISCVState *env, uint64_t rs1)
- {
--    float16 frs1 = check_nanbox_h(env, rs1);
-+    float16 frs1 = check_nanbox_bf16(env, rs1);
-     return nanbox_s(env, bfloat16_to_float32(frs1, &env->fp_status));
- }
-diff --git a/target/riscv/internals.h b/target/riscv/internals.h
-index 213aff31d8..794c81bf7c 100644
---- a/target/riscv/internals.h
-+++ b/target/riscv/internals.h
-@@ -142,6 +142,22 @@ static inline float16 check_nanbox_h(CPURISCVState *env, uint64_t f)
-     }
- }
- 
-+static inline float16 check_nanbox_bf16(CPURISCVState *env, uint64_t f)
-+{
-+    /* Disable nanbox check when enable zfinx */
-+    if (env_archcpu(env)->cfg.ext_zfinx) {
-+        return (uint16_t)f;
-+    }
-+
-+    uint64_t mask = MAKE_64BIT_MASK(16, 48);
-+
-+    if (likely((f & mask) == mask)) {
-+        return (uint16_t)f;
-+    } else {
-+        return 0x7FC0u; /* default qnan */
-+    }
-+}
-+
- #ifndef CONFIG_USER_ONLY
- /* Our implementation of SysemuCPUOps::has_work */
- bool riscv_cpu_has_work(CPUState *cs);
--- 
-2.34.1
+Size should be a hwaddr too. This would be consistent with how
+MemMapEntry describes the base/size pairs.
 
+> >       MachineState *ms = MACHINE(s);
+> >
+> >       addr = s->memmap[VIRT_DRAM].base + riscv_socket_mem_offset(ms, socket);
+> >       size = riscv_socket_mem_size(ms, socket);
+> > -    mem_name = g_strdup_printf("/memory@%"PRIx64, addr);
+> > +    mem_name = g_strdup_printf("/memory@%"HWADDR_PRIx, addr);
+> >       qemu_fdt_add_subnode(ms->fdt, mem_name);
+> >       qemu_fdt_setprop_cells(ms->fdt, mem_name, "reg",
+> >           addr >> 32, addr, size >> 32, size);
+> >
+> >
+> > I did this change and applied your "hw/riscv/virt: device tree reg cleanups" series on top
+> > of it, and there are no conflicts. No change needed in your side.
+>
+> It seems I was wrong. The v2 will conflict with your patch 03. I think a rebase from
+> your series can't be avoided ...
+
+If you want to pick them up as part of your series, and send them as a
+big patch set then that's fine with me.
+
+Otherwise I'll wait until we've got yours staged and send a new version out.
+
+Thanks!
+
+Joel
 
