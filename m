@@ -4,77 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 36975C369DC
-	for <qemu-riscv@archiver.kernel.org>; Wed, 30 Apr 2025 11:36:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8117BC369D9
+	for <qemu-riscv@archiver.kernel.org>; Wed, 30 Apr 2025 19:38:22 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uA5jp-0003Ci-SQ; Wed, 30 Apr 2025 07:36:30 -0400
+	id 1uADFr-0005rw-DL; Wed, 30 Apr 2025 15:38:03 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <joel.stan@gmail.com>)
- id 1uA5jj-0003C3-VF; Wed, 30 Apr 2025 07:36:24 -0400
-Received: from mail-ej1-x630.google.com ([2a00:1450:4864:20::630])
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1uADFp-0005rW-U7
+ for qemu-riscv@nongnu.org; Wed, 30 Apr 2025 15:38:01 -0400
+Received: from mail-pl1-x630.google.com ([2607:f8b0:4864:20::630])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <joel.stan@gmail.com>)
- id 1uA5jh-0002zQ-9f; Wed, 30 Apr 2025 07:36:23 -0400
-Received: by mail-ej1-x630.google.com with SMTP id
- a640c23a62f3a-ac2af2f15d1so897398666b.1; 
- Wed, 30 Apr 2025 04:36:20 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1uADFo-0005Oh-BR
+ for qemu-riscv@nongnu.org; Wed, 30 Apr 2025 15:38:01 -0400
+Received: by mail-pl1-x630.google.com with SMTP id
+ d9443c01a7336-22c33677183so2547535ad.2
+ for <qemu-riscv@nongnu.org>; Wed, 30 Apr 2025 12:37:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=jms.id.au; s=google; t=1746012979; x=1746617779; darn=nongnu.org;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=U5LZ4IdMUrGAbmNWxjJYELXAVSH7/QfIsGDyAraRwQw=;
- b=Pf0NxVX52BPw19D2xDecMATTMyjrJ74Dp0EEFVroaWfEUol+tplBuEbHbKZyk+LPQB
- OsTOBNYbOaPWJ2tXtzTzLdSbxEs9NNkjFpMdhV+ux4uEYarFFqgK0sjok7qhVbTzJ8Ku
- cO1Waq7GE/t5UzLng+5itGeSn6HKsOpK13BC4=
+ d=linaro.org; s=google; t=1746041878; x=1746646678; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=46CMMv13dD0wFfCACL3VvnbxJth6Z8s15blazSb5v24=;
+ b=LDE1XqDR5t9V6TtH7m/q6tPeKpkzIh85BznyhgdqMxGNarS64wnh541cojpBSaxnn9
+ mPEytFeNSsR10Mvn2N3W1JrYasti0XDfGfX0ESY+5EWjzsi6LW8KR9RQqxUDam4PYdtu
+ ik+jbNgMK+uXN5Mmueuyg9dzya9N0Z8NzKNMEhaZlwA3zqYH7OqVKNehVmC34GTJBNws
+ 3tedZ3g+Yd5b9mXSO5QtVMwpSyppy3Lo4sIwn8o1HTUaO/GzEj1OEfQxkGIw8U4KOGXq
+ 1jH5VMZRhv8V1FPo05ew0AvwPEaoVkOnz4PgV6ybhjiwzHPDpx1g12MEN2ywjkOamukU
+ eU6Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1746012979; x=1746617779;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=U5LZ4IdMUrGAbmNWxjJYELXAVSH7/QfIsGDyAraRwQw=;
- b=CAdAx2wX4dLoXPJtD7SNCYjMJPvSQTltcuLcL5VDwuIJM4K0e1IDa/PQ8LdaehHG6C
- L4JQauPqHJSzX+7glg79JNhEeaFWiDMDAq+8pJ34y8PG5/hHwnfBgPGzlAmm/L1Ofc1w
- lmJRPA/F/uZ/eQ/4hNMC5N2CTS5igrohKSpiPQKcCmAov7KzLtKPnroKnjc3HAqo2Mnu
- QyoNesD6kn3L6eifl4onSUmdnJvnkbeJ66wY8IEw/IOY+/zsX/04qoLQaZHB/kj1LH81
- ZPD4rmx7L87IQtTlrqYpvVFOJxgfx2jItvM7qUgEo/Z05vEYR/TwzgHOsVAmhYssa6VI
- 6EEQ==
+ d=1e100.net; s=20230601; t=1746041878; x=1746646678;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=46CMMv13dD0wFfCACL3VvnbxJth6Z8s15blazSb5v24=;
+ b=LpoRJlOdc7WmmYtm+Uo8yn6D8Oofzxx8LO9Fkq3XDcOZBKUyr3TEMScee0R9tEgOQb
+ vXsH4h5jI9P3uLAtUzzrFSFPrrmeQbgd9mZB6FbvrqV3VzwxXk73Hiw5XEdanA0t8auA
+ Fx7cUALd1cljfCNiGGLhKwdh0Wu0V0ZQA68XWGKwD9K2RJHfBsCA+mCYc6VamTJRqj3P
+ VCnxo5TGpHCFK7g+128Nhr9dxPTe4jPmO2rtBNmTaIIJdGGGYVRnpot2smb1jNoPLkfO
+ oVur8Jo9oQtyXgEFKKqlehGUNRK7IDP08Zd6OpImys8I8FfpuVeKPsFANo63qTwuTz1B
+ ARUg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCX/VeaRzeaR/ExYYsSYrw6DRzEn6UTTPa8jaOz5icDJ0Q0MEZ54uTuGWl7LGapyY6tUi9j7gAM/8V00@nongnu.org
-X-Gm-Message-State: AOJu0Yys8SzgL/GBNCSt0ljj+LQHxSBLHXs0ij6xplSzvXNxDVmqtjRc
- bPSkYQpY6FRtTKOPxDH5xtMsmQxT0PtaFnofmFMZwBbpG28Z8xXcRBZVj9CECrIPg8wWCbYyO3N
- NdTWsfJulttdMlSiSSeNt6qVsC08=
-X-Gm-Gg: ASbGnctnS9LhsjbvOK/k5K2J0K32VjR5QO19sYtCNOPjwT0xbdKNvKeMw3R1LpbXOM9
- yO0IV2LNExhjhzuR6mKuMWtuNyVlMNKsRtJfNNNvM4gwcRc+JkBatExfbkr9nwqGX6vSzuGKD4p
- BvAluRI1govzIpvcqxIWtf3A==
-X-Google-Smtp-Source: AGHT+IExfhm2Wx1Et4p4EzwmKhzcRT+wLhE9Iu+jqKbZP+Ivr41eNp4WkHlmLiKolnHPvnddA8KExf8T1gn/Jm11b50=
-X-Received: by 2002:a17:907:78b:b0:aca:b72b:4576 with SMTP id
- a640c23a62f3a-acedc62100dmr334111266b.33.1746012978603; Wed, 30 Apr 2025
- 04:36:18 -0700 (PDT)
+ AJvYcCV1i/pYGYnUUEzpy5a7fopQfH53tPoxjAZBnvxZu4y6ZqGnzRc90mE7lcEXZgqXdr+urtXcSGZ0n1Yn@nongnu.org
+X-Gm-Message-State: AOJu0YwAgwnNT96Og+3t68w6smQ1W5nrOYk5OkbKg2OXMulq2QWSOUFK
+ awVIVIpUMRpgb8uWrTWpHnxyRKmoCQPmfkLj6/tE3Km7hvxgOjzeXC7t8m6nTkI=
+X-Gm-Gg: ASbGncuUU0uvQ/ZW9M6A/O0YFR2BZy9NL5jWcWKHT5xjbgCNj3uZgsvfWsMfszjE9Pi
+ HEuaY8E3yi9JC325UpCp2xWr+BABXKVmrGLRuN8VLuDVhRT4HW0Be1KKhADNxuaHW8m6Hl8f02u
+ FCgQDvmpVGP6xchJjJgt0JvOYb0WpccpI37BzG2OeRpyuo8XNbv13TkPGfQGlzJGcyN6b1A87I+
+ QWbVyBXvCmE9wD7/9tkMrw5qiJ7zlapVxzlN9vCR+Tc5f+jW/mbyW5Fd9c9NxNqB/RCr3P4nPGI
+ Eh304xvXiOTxMLdUclhr4ySpntCo+FygE+RZ7xA8/8UqiYdMtCWvsZE7lZeE4I94v6XPqg76sCa
+ 2mvuGgys=
+X-Google-Smtp-Source: AGHT+IFSyb/O5R1D0FrH/3mqO+Zu6tZQP0SvzElaSlsbpqRHa9Obggj09oe2OF5Cj6givspeskY3Tg==
+X-Received: by 2002:a17:90b:1f8b:b0:308:1ee5:4247 with SMTP id
+ 98e67ed59e1d1-30a4012eda4mr286125a91.32.1746041878229; 
+ Wed, 30 Apr 2025 12:37:58 -0700 (PDT)
+Received: from [192.168.0.4] (71-212-47-143.tukw.qwest.net. [71.212.47.143])
+ by smtp.gmail.com with ESMTPSA id
+ 98e67ed59e1d1-30a349fff13sm2258979a91.14.2025.04.30.12.37.57
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 30 Apr 2025 12:37:57 -0700 (PDT)
+Message-ID: <96559e9d-e610-433c-8ce6-3220e569fee4@linaro.org>
+Date: Wed, 30 Apr 2025 12:37:55 -0700
 MIME-Version: 1.0
-References: <20250429061223.1457166-1-joel@jms.id.au>
- <20250429061223.1457166-3-joel@jms.id.au>
- <c93ffa82-8ed6-4a1e-ad1a-9d4fc8940165@ventanamicro.com>
-In-Reply-To: <c93ffa82-8ed6-4a1e-ad1a-9d4fc8940165@ventanamicro.com>
-From: Joel Stanley <joel@jms.id.au>
-Date: Wed, 30 Apr 2025 21:06:04 +0930
-X-Gm-Features: ATxdqUFFq7MM39YiS0O6e6A-uWahlTlHmcIw_i9ao_flHDDdghLBBfCG4ozPp1k
-Message-ID: <CACPK8XdNyahg9z27uVQvAJ+czM6Vup+tuEWgybumiA7smCWw0A@mail.gmail.com>
-Subject: Re: [PATCH 01/13] riscv/virt: Fix address type in
- create_fdt_socket_clint
-To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.org
-Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2a00:1450:4864:20::630;
- envelope-from=joel.stan@gmail.com; helo=mail-ej1-x630.google.com
-X-Spam_score_int: -19
-X-Spam_score: -2.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH qemu v2 1/2] accel/tcg: Fixed cross-page overflow for 32
+ bit guest
+To: ~percival_foss <foss@percivaleng.com>, qemu-devel <qemu-devel@nongnu.org>
+Cc: Paolo Bonzini <pbonzini@redhat.com>,
+ "qemu-ppc@nongnu.org" <qemu-ppc@nongnu.org>,
+ "open list:S390" <qemu-s390x@nongnu.org>,
+ "qemu-riscv@nongnu.org" <qemu-riscv@nongnu.org>
+References: <174595764300.3422.13156465553505851834-1@git.sr.ht>
+Content-Language: en-US
+From: Richard Henderson <richard.henderson@linaro.org>
+In-Reply-To: <174595764300.3422.13156465553505851834-1@git.sr.ht>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::630;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pl1-x630.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
 X-Spam_bar: --
-X-Spam_report: (-2.0 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, FREEMAIL_FORGED_FROMDOMAIN=0.001,
- FREEMAIL_FROM=0.001, HEADER_FROM_DIFFERENT_DOMAINS=0.001,
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -92,32 +107,62 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Tue, 29 Apr 2025 at 21:56, Daniel Henrique Barboza
-<dbarboza@ventanamicro.com> wrote:
->
->
->
-> On 4/29/25 3:12 AM, Joel Stanley wrote:
-> > The address is a hardware address, so use hwaddr for consistency with
-> > the rest of the machine.
-> >
-> > Signed-off-by: Joel Stanley <joel@jms.id.au>
-> > ---
->
-> I believe you have 2 patches #1 in this series:
->
-> [PATCH 01/13] hw/riscv/virt: Fix clint base address type
-> [PATCH 01/13] riscv/virt: Fix address type in create_fdt_socket_clint
->
-> You probably renamed the commit subject to "hw/riscv/virt" and forgot to remove
-> the generated patch, since both patches do the same changes.
->
-> I believe we can ignore this patch and stick withe the first #1. Thanks,
+On 4/29/25 09:03, ~percival_foss wrote:
+> From: Percival Foss <foss@percivaleng.com>
+> 
+> The bug being resolved is that the current code in mmu_lookup() assumes
+> a valid 64-bit address space. If a guest has a 32-bit address space, a
+> page translation that crosses beyond the last page in the address space
+> will overflow out of the allocated guest virtual memory space in the
+> QEMU application and cause it to crash. In this case the first page will
+> be the last of the 32-bit address space (for example 0xFFFFF000 for 4K
+> page sizes) and the second page will overflow to a page beyond the
+> 32-bit address space (0x100000000 in the very same example). An invalid
+> translation will be added to the cpu translation table from the second
+> page. Thought the translation will be for page address 0x100000000,
+> checks in other parts of the codebase actually enforce using only 32
+> bits, and will match this translation. Part of the stored translation is
+> the effective address, and another part is the addend to be used to
+> offset into the QEMU process's virtual memory space. The addend will
+> incorporate the 0x100000000 and offset into likely invalid virtual
+> address space.
+> 
+> The fix in the diff checks if the target is 32 bits and wraps the second
+> page address to the beginning of the memory space.
+> 
+> Signed off by: Percival Engineering <foss@percivaleng.com>
+> ---
+>   accel/tcg/cputlb.c | 7 +++++++
+>   1 file changed, 7 insertions(+)
+> 
+> diff --git a/accel/tcg/cputlb.c b/accel/tcg/cputlb.c
+> index fb22048876..457b3f8ec7 100644
+> --- a/accel/tcg/cputlb.c
+> +++ b/accel/tcg/cputlb.c
+> @@ -1767,6 +1767,13 @@ static bool mmu_lookup(CPUState *cpu, vaddr addr, MemOpIdx oi,
+>           l->page[1].size = l->page[0].size - size0;
+>           l->page[0].size = size0;
+>   
+> +        /* check for wrapping address space on page crossing if target is 32 bit */
+> +        #if TARGET_LONG_BITS == 32
+> +        if (l->page[1].addr >= (1UL << TARGET_LONG_BITS)) {
+> +            l->page[1].addr %= (1UL << TARGET_LONG_BITS);
+> +        }
+> +        # endif
 
-Guilty! Thanks for the close review.
+I agree something needs doing, but this isn't it.
 
-You're correct, the first one is the correct one. I pushed a branch
-here if it helps:
+This needs some sort of per-mmu mask, set when the cpu changes modes.  For instance, you 
+test ppc32, but the same thing can happen with ppc64 when MSR[SF] is clear.
 
- https://gitlab.com/shenki/qemu/-/tree/riscv-dt-props-v1
+There are a fair number of other targets which can see the same issue, some more 
+complicated than this.  For instance, s390x in 24-bit mode or RISC-V with the pointer 
+masking extension.
+
+This needs some sort of extension to CPUTLBDesc, and a new variation on 
+tlb_flush_by_mmuidx in order for the target to clear the tlb while changing the mask 
+whenever the target cpu changes modes.
+
+
+r~
 
