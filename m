@@ -4,83 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8D771C369D9
-	for <qemu-riscv@archiver.kernel.org>; Thu,  1 May 2025 00:34:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AF181C369DC
+	for <qemu-riscv@archiver.kernel.org>; Thu,  1 May 2025 11:43:53 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uAHsI-0001xd-3q; Wed, 30 Apr 2025 20:34:02 -0400
+	id 1uASK6-0001Fz-Or; Thu, 01 May 2025 07:43:26 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1uAHrw-0001t5-Pd; Wed, 30 Apr 2025 20:33:41 -0400
-Received: from mail-vs1-xe33.google.com ([2607:f8b0:4864:20::e33])
+ (Exim 4.90_1) (envelope-from <antonb@tenstorrent.com>)
+ id 1uASK3-0001FB-PG
+ for qemu-riscv@nongnu.org; Thu, 01 May 2025 07:43:23 -0400
+Received: from mail-ot1-x32f.google.com ([2607:f8b0:4864:20::32f])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1uAHrs-00076J-8Y; Wed, 30 Apr 2025 20:33:40 -0400
-Received: by mail-vs1-xe33.google.com with SMTP id
- ada2fe7eead31-4c301b1df82so346083137.0; 
- Wed, 30 Apr 2025 17:33:35 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <antonb@tenstorrent.com>)
+ id 1uASK2-0003pe-97
+ for qemu-riscv@nongnu.org; Thu, 01 May 2025 07:43:23 -0400
+Received: by mail-ot1-x32f.google.com with SMTP id
+ 46e09a7af769-72c14138668so184550a34.2
+ for <qemu-riscv@nongnu.org>; Thu, 01 May 2025 04:43:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1746059614; x=1746664414; darn=nongnu.org;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=jsUjrD2IMjq+CO72OoPxDEvyMQ9+4C8/FPL+jaEDXdY=;
- b=YRdPCCzl5JATRS+HW7BCV/g9rjCb86b7o11SvuCV1D14ansYe8UoC8cHbqVJgBMEP3
- SNK5cghzpb3Q8nXtXowxksw2/vahEhxsMvXhsbExVX+gmPpJk1ZYC9+gDAr2Qe38bt6a
- vzfU7QNi0gZXqkeDRy+8t2D/nL7jEca8G05W6YtHqteJ7vAvUmZm0+ors+D8OI1RFK/I
- ZY9JtB/m4FmTHz83hyzlauRzgxMi/hL8wZJuB3Tblr9s5HHDBQ2EjEwI0O3sujuibo3N
- jZAcXcPRVHvBpAimNk+ldQckuj2Tt+bXjKHXWMmHHK42ZZ7S3dwVfVrTm9lP2YwNzI0r
- Cqsw==
+ d=tenstorrent.com; s=google; t=1746099800; x=1746704600; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=Vt0jVrSyerxshL5eCuQqtXgeeRWNi9BNM7IDf17MV90=;
+ b=O6DHIf40nvjl4R0m0kbWhg1GerCRGC/qnTCNzrh1osBgSF6UuZlkHkPrTpMZF/PEC7
+ cF+J9H57bTBBUMbkiIH8RzRqMPQk2Xt2avLHK5B6CKJD9iGFh5WUxl46mbqFuKb6AFPM
+ TWuIqHkIBqjzQJeYCkDjLGZCJaRJvwvi7s8LehOF6l7DobDjBPhdVxaJLJoqLJRF/rhf
+ AvyVV58VLJ00y9XdGJLd2yhxtXdj5wo1heXJYcFgtjzaMuKyMZWGOWcjH6vEMbFpqyzu
+ QQgnaJn0/pgPM16GVaH6Lu4GNKN8bQgJFLkUN+7sh6GAggVPwedNQIPWLAasjL3eJDfv
+ gedQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1746059614; x=1746664414;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=jsUjrD2IMjq+CO72OoPxDEvyMQ9+4C8/FPL+jaEDXdY=;
- b=i0G1bQu3XsWU3hLmYxUa3c07mY6/EuqI8+GMJqtrs2QBGo1amuu5DbHzNgwZBlCR+/
- fo0HxzEYP6S9notRTV5aCQjZ0mtcdtxm1qWUYwdSuCk2Ul6dNCw4gyM+VlYApbhCENDF
- 4PzyhXOun9jBTvExtW/lSY7q49PoyGXc1ra96y1w3sYUGZ+R7WY95akIE7GWd8o1k1JA
- cr4Rju1nn0/q+Ma/1879oVza5SDzoP2ZqtopVWDu9Kbd888s4ctqh3c8VnU6pMQEas5v
- V8lvxznpl9KJOcr9kv/xlI46g2J7S88UhvNSoFLoi2+vm4Fp7YByMPOxaucjhcwGCkQk
- Dmgg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVP4zSBnwXxc3STUy6ubXxpDQ5/lH1DAGe2lybCdbAdbuvpL2OpUZ7TVcbGSLY6IgZDeNbm9Clxvgxa@nongnu.org
-X-Gm-Message-State: AOJu0Ywx+YYGC85YI+bweyBjh7bGDah56vKrGoLE9gcPSnmETpvCBj8Y
- sIj5r34qcD1AalmNwxV0Xh5D9z4mbS6OwzGsLH31SIErVNgLxTS7eIjnBhk66nK7fo9OQr9CKj1
- IRZZ0Azv1AdMosCRaABnf+kgux/Y=
-X-Gm-Gg: ASbGnctPxdEKvtKSmOzRIUxlg3tKfKMba+/00fCbHQlFqK2NtDSsLpAo9mOZD+g9/IW
- CNl1m1SbTCl6NMrkWog6VhX/5zYgE+vORxV3xoSW2KbLvSqE5CwQQUjMk/y/HlFnYaQjT+/ztmh
- OD3KOAMzxpQ5IvmJEAW+sRSHHZo9WFQL9fsA2vCr0DqZaayHpaY6KT
-X-Google-Smtp-Source: AGHT+IG+IRPNryZhE1KSda4EbPTbvqJ6mFJS0DV95euWqwHRNl96GJY4sdDVP5Rqauu6mZzz6xwsbEaa16cxxnIQxfg=
-X-Received: by 2002:a05:6102:5093:b0:4bb:dc3c:1b47 with SMTP id
- ada2fe7eead31-4dae91a2802mr315082137.14.1746059614624; Wed, 30 Apr 2025
- 17:33:34 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1746099800; x=1746704600;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=Vt0jVrSyerxshL5eCuQqtXgeeRWNi9BNM7IDf17MV90=;
+ b=VoJiyfh4mQx7uHR03OyR8G3+yCBuT3v9lYAO7tUGDyVnDUNCK/dO6Wyy3ioMNOm+UP
+ p2mVSOuNX9gJW99iMQWN6AhafTQvchPZhyDCFpoZUXl6AhpoFI+SPVS9wdOA59+9LNyx
+ PXAffyuaDN48VEbm/HLRQI+N6hIYkyiP9K4/HHl06TIeaBzPVrjt9qStJjwr+ADoXvrf
+ TRV0wNTBsERjB8BAx9EqLdr9Z88dk9ADh+o3xLtWFkgFZQbXubtLuOVTD5THKIJSDrPA
+ tvztrUgn454Y+JfY6KcBl7XlGV//9Q/v+ZZLxaAByW9PUhy/mD56aBi64eYZ1YFoByJS
+ GBlA==
+X-Gm-Message-State: AOJu0Yzmprb6B5qXjzpOmH3AZ3dLqpjVYJfyc/p9G2VQcdJ1ygM9iP1f
+ SLYrVhpL0wF/bt9kLjMdK3I/8KnniUSiBJxFkFOSFzx9iF63QfB17gaVfz5uLR8BURRjx5ZPavT
+ p
+X-Gm-Gg: ASbGncs93cZj3qZd3Ke3+NidX4MCF9pg1NpxTyI0GGWAcyn9V9i7MkIivcvIH1A28mT
+ MksZCkSy59Jpicjv5DGRV5o5z6pG5xckR87+OjOT85x8Gvoyz3ZqFHNYpBYn+RHe6BOADhLiNGp
+ ybY2j5ujH+KeNxXmSLBOg467zJY2bAof01MKQCdLvjUZmxgxUtUUK629HGmJcjjwSUisExhOhiD
+ GXc3kz3S0XIj8f4vSWPnTKYDK0nCJI70EK8dqh/cVxnhHuNKUssVX09yegYZnU7gzt6SbRvuEhs
+ Y3fJoYoMn9aZARJa90Mqu6/LcgdmuQMWQ4fUyq7UJyQ9Ax0CzYNwjk4zx1TGe+mfxKrtNAYjE28
+ =
+X-Google-Smtp-Source: AGHT+IELqpAryeCKVABW5WXiDDONm9PRkn8Yyo1JcI2yisPFUnKadySjl8th6sSglcz6avqsSLVU1A==
+X-Received: by 2002:a05:6830:670f:b0:72b:a020:a2c0 with SMTP id
+ 46e09a7af769-731ccc8d4c7mr1580942a34.17.1746099799749; 
+ Thu, 01 May 2025 04:43:19 -0700 (PDT)
+Received: from ausc-rvsw-c-01-anton.tenstorrent.com ([38.104.49.66])
+ by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-731d31cb976sm62964a34.28.2025.05.01.04.43.17
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 01 May 2025 04:43:18 -0700 (PDT)
+From: Anton Blanchard <antonb@tenstorrent.com>
+To: qemu-riscv@nongnu.org,
+	qemu-devel@nongnu.org
+Cc: Anton Blanchard <antonb@tenstorrent.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Weiwei Li <liwei1518@gmail.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
+Subject: [PATCH v2] target/riscv: Fix fcvt.s.bf16 NaN box checking
+Date: Thu,  1 May 2025 11:42:53 +0000
+Message-Id: <20250501114253.594887-1-antonb@tenstorrent.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-References: <20250429125811.224803-1-dbarboza@ventanamicro.com>
-In-Reply-To: <20250429125811.224803-1-dbarboza@ventanamicro.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Thu, 1 May 2025 10:33:08 +1000
-X-Gm-Features: ATxdqUEyRgXtWEHc_cTTOyrDprFKM6CstQYqX4KoLslo457KOL7uj7OszVzyRHo
-Message-ID: <CAKmqyKOc+X4ZgPq3SDfUEKPGksOJaaC8UfbrnqNptFv+yv2AmA@mail.gmail.com>
-Subject: Re: [PATCH v2 0/9] hw/riscv/virt.c: memmap usage cleanup
-To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
- liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com, 
- joel@jms.id.au
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::e33;
- envelope-from=alistair23@gmail.com; helo=mail-vs1-xe33.google.com
-X-Spam_score_int: -17
-X-Spam_score: -1.8
-X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::32f;
+ envelope-from=antonb@tenstorrent.com; helo=mail-ot1-x32f.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -96,56 +103,55 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Tue, Apr 29, 2025 at 11:00=E2=80=AFPM Daniel Henrique Barboza
-<dbarboza@ventanamicro.com> wrote:
->
-> Hi,
->
-> In this new version a small change was made in patch 9 after
-> discussions with Joel during v1 [1]. The idea is that we want to be
-> consistent (as close as we can) with the idea that a
-> memory address is a hwaddr type.
->
-> This new version does not conflict with "hw/riscv/virt: device tree reg
-> cleanups" from Joel [2].
->
-> No other changes made. Patches based on alistair/riscv-to-apply.next.
->
-> Changes from v2:
-> - patch 9:
->   - in create_fdt_socket_memory(), change 'addr' to hwaddr and use the
->     HWADDR_PRIx fmt type
-> - v1 link: https://lore.kernel.org/qemu-riscv/20250423110630.2249904-1-db=
-arboza@ventanamicro.com/
->
-> [1] https://lore.kernel.org/qemu-riscv/d404d535-fc04-43ac-a7a7-2f216cad99=
-3c@ventanamicro.com/
-> [2] https://lore.kernel.org/qemu-riscv/20250429061223.1457166-1-joel@jms.=
-id.au/
->
-> Daniel Henrique Barboza (9):
->   hw/riscv/virt.c: enforce s->memmap use in machine_init()
->   hw/riscv/virt.c: remove trivial virt_memmap references
->   hw/riscv/virt.c: use s->memmap in virt_machine_done()
->   hw/riscv/virt.c: add 'base' arg in create_fw_cfg()
->   hw/riscv/virt.c: use s->memmap in create_fdt() path
->   hw/riscv/virt.c: use s->memmap in create_fdt_sockets() path
->   hw/riscv/virt.c: use s->memmap in create_fdt_virtio()
->   hw/riscv/virt.c: use s->memmap in finalize_fdt() functions
->   hw/riscv/virt.c: remove 'long' casts in fmt strings
+fcvt.s.bf16 uses the FP16 check_nanbox_h() which returns an FP16
+quiet NaN. Add check_nanbox_bf16() which returns a BF16 quiet NaN.
 
-Thanks!
+Signed-off-by: Anton Blanchard <antonb@tenstorrent.com>
+---
+ target/riscv/fpu_helper.c |  2 +-
+ target/riscv/internals.h  | 16 ++++++++++++++++
+ 2 files changed, 17 insertions(+), 1 deletion(-)
 
-Applied to riscv-to-apply.next
+diff --git a/target/riscv/fpu_helper.c b/target/riscv/fpu_helper.c
+index 91b1a56d10..31c17399fc 100644
+--- a/target/riscv/fpu_helper.c
++++ b/target/riscv/fpu_helper.c
+@@ -756,6 +756,6 @@ uint64_t helper_fcvt_bf16_s(CPURISCVState *env, uint64_t rs1)
+ 
+ uint64_t helper_fcvt_s_bf16(CPURISCVState *env, uint64_t rs1)
+ {
+-    float16 frs1 = check_nanbox_h(env, rs1);
++    float16 frs1 = check_nanbox_bf16(env, rs1);
+     return nanbox_s(env, bfloat16_to_float32(frs1, &env->fp_status));
+ }
+diff --git a/target/riscv/internals.h b/target/riscv/internals.h
+index 213aff31d8..794c81bf7c 100644
+--- a/target/riscv/internals.h
++++ b/target/riscv/internals.h
+@@ -142,6 +142,22 @@ static inline float16 check_nanbox_h(CPURISCVState *env, uint64_t f)
+     }
+ }
+ 
++static inline float16 check_nanbox_bf16(CPURISCVState *env, uint64_t f)
++{
++    /* Disable nanbox check when enable zfinx */
++    if (env_archcpu(env)->cfg.ext_zfinx) {
++        return (uint16_t)f;
++    }
++
++    uint64_t mask = MAKE_64BIT_MASK(16, 48);
++
++    if (likely((f & mask) == mask)) {
++        return (uint16_t)f;
++    } else {
++        return 0x7FC0u; /* default qnan */
++    }
++}
++
+ #ifndef CONFIG_USER_ONLY
+ /* Our implementation of SysemuCPUOps::has_work */
+ bool riscv_cpu_has_work(CPUState *cs);
+-- 
+2.34.1
 
-Alistair
-
->
->  hw/riscv/virt.c | 272 +++++++++++++++++++++++++-----------------------
->  1 file changed, 140 insertions(+), 132 deletions(-)
->
-> --
-> 2.49.0
->
->
 
