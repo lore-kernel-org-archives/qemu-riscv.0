@@ -4,83 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AF181C369DC
-	for <qemu-riscv@archiver.kernel.org>; Thu,  1 May 2025 11:43:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 991CAC369DC
+	for <qemu-riscv@archiver.kernel.org>; Sun,  4 May 2025 20:58:34 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uASK6-0001Fz-Or; Thu, 01 May 2025 07:43:26 -0400
+	id 1uBgOz-0008Qe-KH; Sun, 04 May 2025 16:57:33 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <antonb@tenstorrent.com>)
- id 1uASK3-0001FB-PG
- for qemu-riscv@nongnu.org; Thu, 01 May 2025 07:43:23 -0400
-Received: from mail-ot1-x32f.google.com ([2607:f8b0:4864:20::32f])
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1uBgOt-0008Ni-GT
+ for qemu-riscv@nongnu.org; Sun, 04 May 2025 16:57:27 -0400
+Received: from mail-pf1-x42b.google.com ([2607:f8b0:4864:20::42b])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <antonb@tenstorrent.com>)
- id 1uASK2-0003pe-97
- for qemu-riscv@nongnu.org; Thu, 01 May 2025 07:43:23 -0400
-Received: by mail-ot1-x32f.google.com with SMTP id
- 46e09a7af769-72c14138668so184550a34.2
- for <qemu-riscv@nongnu.org>; Thu, 01 May 2025 04:43:21 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
+ id 1uBgOr-0006xA-JE
+ for qemu-riscv@nongnu.org; Sun, 04 May 2025 16:57:27 -0400
+Received: by mail-pf1-x42b.google.com with SMTP id
+ d2e1a72fcca58-736c3e7b390so4222774b3a.2
+ for <qemu-riscv@nongnu.org>; Sun, 04 May 2025 13:57:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=tenstorrent.com; s=google; t=1746099800; x=1746704600; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=Vt0jVrSyerxshL5eCuQqtXgeeRWNi9BNM7IDf17MV90=;
- b=O6DHIf40nvjl4R0m0kbWhg1GerCRGC/qnTCNzrh1osBgSF6UuZlkHkPrTpMZF/PEC7
- cF+J9H57bTBBUMbkiIH8RzRqMPQk2Xt2avLHK5B6CKJD9iGFh5WUxl46mbqFuKb6AFPM
- TWuIqHkIBqjzQJeYCkDjLGZCJaRJvwvi7s8LehOF6l7DobDjBPhdVxaJLJoqLJRF/rhf
- AvyVV58VLJ00y9XdGJLd2yhxtXdj5wo1heXJYcFgtjzaMuKyMZWGOWcjH6vEMbFpqyzu
- QQgnaJn0/pgPM16GVaH6Lu4GNKN8bQgJFLkUN+7sh6GAggVPwedNQIPWLAasjL3eJDfv
- gedQ==
+ d=linaro.org; s=google; t=1746392243; x=1746997043; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=TIQELB2tRYMc57jWwkjeMWxsQZONjOqCuvRT3H/S0gQ=;
+ b=GAZluYBCncTuczWvE4cR417NM6PCdrwlFl4Q4DRzu1w9PwzhzgzYniqJ65+2D2PbnY
+ sE3BHBga0e4Z18GDsxK+xextGbzghbcGjnKt4lC8doe17n6VnxTOhotNNlSj0OvXFYwU
+ bZK7BwrpbVFlo70kuMlv5EgnxLTJoo0vgVshnvOmN6zf55eiQXhCpyaBkzsR8P7SX9Nc
+ 0GQnNad+GNJNqGKOiL3taDAZ/CQHWXAcKeh3YyWkE9rWdMnEgSzTa+EJBTRAS/C7IuhH
+ qF5R7yaWV5fH5Ur6jrlIvixuH0TzHurdnbcE+bIXDnNG/iOUY4esE4D1O2dGmL5C2Kjd
+ 0AJQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1746099800; x=1746704600;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=Vt0jVrSyerxshL5eCuQqtXgeeRWNi9BNM7IDf17MV90=;
- b=VoJiyfh4mQx7uHR03OyR8G3+yCBuT3v9lYAO7tUGDyVnDUNCK/dO6Wyy3ioMNOm+UP
- p2mVSOuNX9gJW99iMQWN6AhafTQvchPZhyDCFpoZUXl6AhpoFI+SPVS9wdOA59+9LNyx
- PXAffyuaDN48VEbm/HLRQI+N6hIYkyiP9K4/HHl06TIeaBzPVrjt9qStJjwr+ADoXvrf
- TRV0wNTBsERjB8BAx9EqLdr9Z88dk9ADh+o3xLtWFkgFZQbXubtLuOVTD5THKIJSDrPA
- tvztrUgn454Y+JfY6KcBl7XlGV//9Q/v+ZZLxaAByW9PUhy/mD56aBi64eYZ1YFoByJS
- GBlA==
-X-Gm-Message-State: AOJu0Yzmprb6B5qXjzpOmH3AZ3dLqpjVYJfyc/p9G2VQcdJ1ygM9iP1f
- SLYrVhpL0wF/bt9kLjMdK3I/8KnniUSiBJxFkFOSFzx9iF63QfB17gaVfz5uLR8BURRjx5ZPavT
- p
-X-Gm-Gg: ASbGncs93cZj3qZd3Ke3+NidX4MCF9pg1NpxTyI0GGWAcyn9V9i7MkIivcvIH1A28mT
- MksZCkSy59Jpicjv5DGRV5o5z6pG5xckR87+OjOT85x8Gvoyz3ZqFHNYpBYn+RHe6BOADhLiNGp
- ybY2j5ujH+KeNxXmSLBOg467zJY2bAof01MKQCdLvjUZmxgxUtUUK629HGmJcjjwSUisExhOhiD
- GXc3kz3S0XIj8f4vSWPnTKYDK0nCJI70EK8dqh/cVxnhHuNKUssVX09yegYZnU7gzt6SbRvuEhs
- Y3fJoYoMn9aZARJa90Mqu6/LcgdmuQMWQ4fUyq7UJyQ9Ax0CzYNwjk4zx1TGe+mfxKrtNAYjE28
- =
-X-Google-Smtp-Source: AGHT+IELqpAryeCKVABW5WXiDDONm9PRkn8Yyo1JcI2yisPFUnKadySjl8th6sSglcz6avqsSLVU1A==
-X-Received: by 2002:a05:6830:670f:b0:72b:a020:a2c0 with SMTP id
- 46e09a7af769-731ccc8d4c7mr1580942a34.17.1746099799749; 
- Thu, 01 May 2025 04:43:19 -0700 (PDT)
-Received: from ausc-rvsw-c-01-anton.tenstorrent.com ([38.104.49.66])
+ d=1e100.net; s=20230601; t=1746392243; x=1746997043;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=TIQELB2tRYMc57jWwkjeMWxsQZONjOqCuvRT3H/S0gQ=;
+ b=bbFNb5GbA6eHhbZ1Xv9iucyEKTrrHLky/SoLvw218vsThrJ5ShP2hR4ih1x6KJpQwB
+ x2Ihhi32mnFba/qU1ljcQS7mqk1MMUMr2PJpv58XY3+ur/scKv/5TlAZe04+6qeZbs0R
+ v9FCyPtfehsULgRUVuKzv/X01NUrQBAOB6tfs5SzvtbhYjA9+zuN0zTgLqZzUh2SiQV1
+ ubvU1WlU0bo1V0BlHauf4DaMZcCd0ttFNqgUr8B3M8w/3am9Hpc2H8G+jQZ1QsbdrmhR
+ ksw4xayg/hFNerRCFelOqxhTK7NVDjw6aM6aQpqxD6emxEuJNMsdhMT/GGI4ACPT8Psn
+ MJZg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCX5Ksnntc04trkXv2CDqzbddGS7fRjnjmsiLv8qCifQY7Qr+hS5bH8b/0CPQS8x4UiMAoi2Y4tdS6fr@nongnu.org
+X-Gm-Message-State: AOJu0YzSMmpJW7xYO4SEE4hY/GRIupnFED9AdCLcecp8W1NQNIrOwjHl
+ Y6WpJAfZJrIby2EYX6QdcSHV2HUiS3LwKQ8xtvxWlfQf4a+CAjtYt0GHq8IId4w=
+X-Gm-Gg: ASbGnct3y6hMrzx0HKQhWmIBem9iUrYHiTvlqkyCgDIg552/DxsbAlIzkXn5uOiXrKU
+ UX9a3y5CB2HmQUsng4QXgfMN2mvfY2e5o3MdmI/ENbhOodB3C0tNds2Y+P5wRkk0Ry9yV5H2wJW
+ 4F62eoxp5fC9TmhLt1e1uwvmrwEyRmyIq4kPH/JYAt8STpwKA9yKhhYIWuYqWtJSqwBO7Bdg5q5
+ XP6WQgadraSUfEUHVrXiCj/vHj8votO2pQO0cHSqFFVfw3we7Td37sP9DiMYTsALaNHw4oUNe43
+ 5MUhw7YJRERm5azlw3DM6iyuj6dEvhxsXOdnemUHCnXin13q8abNJ5IoqqB+bVPILRZNoJmkB+m
+ bvero7B09Gg==
+X-Google-Smtp-Source: AGHT+IGiSjkXytY1Cg6vGzsn2xbomthAKGNmZRcrP49T+TKpnUIiJFeqJTYknXQEL19xxMCfWdJS8Q==
+X-Received: by 2002:a17:90b:578f:b0:2ee:f076:20f1 with SMTP id
+ 98e67ed59e1d1-30a6174fda0mr9082464a91.0.1746392242797; 
+ Sun, 04 May 2025 13:57:22 -0700 (PDT)
+Received: from stoup.. (71-212-47-143.tukw.qwest.net. [71.212.47.143])
  by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-731d31cb976sm62964a34.28.2025.05.01.04.43.17
+ d9443c01a7336-22e150eadfcsm41346425ad.32.2025.05.04.13.57.22
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 01 May 2025 04:43:18 -0700 (PDT)
-From: Anton Blanchard <antonb@tenstorrent.com>
-To: qemu-riscv@nongnu.org,
-	qemu-devel@nongnu.org
-Cc: Anton Blanchard <antonb@tenstorrent.com>,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Weiwei Li <liwei1518@gmail.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
-Subject: [PATCH v2] target/riscv: Fix fcvt.s.bf16 NaN box checking
-Date: Thu,  1 May 2025 11:42:53 +0000
-Message-Id: <20250501114253.594887-1-antonb@tenstorrent.com>
-X-Mailer: git-send-email 2.34.1
+ Sun, 04 May 2025 13:57:22 -0700 (PDT)
+From: Richard Henderson <richard.henderson@linaro.org>
+To: qemu-devel@nongnu.org
+Cc: foss@percivaleng.com,
+	qemu-riscv@nongnu.org
+Subject: [PATCH 09/12] target/riscv: Fill in TCGCPUOps.pointer_wrap
+Date: Sun,  4 May 2025 13:57:10 -0700
+Message-ID: <20250504205714.3432096-10-richard.henderson@linaro.org>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20250504205714.3432096-1-richard.henderson@linaro.org>
+References: <20250504205714.3432096-1-richard.henderson@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::32f;
- envelope-from=antonb@tenstorrent.com; helo=mail-ot1-x32f.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::42b;
+ envelope-from=richard.henderson@linaro.org; helo=mail-pf1-x42b.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -103,55 +102,59 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-fcvt.s.bf16 uses the FP16 check_nanbox_h() which returns an FP16
-quiet NaN. Add check_nanbox_bf16() which returns a BF16 quiet NaN.
+Check 32 vs 64-bit and pointer masking state.
 
-Signed-off-by: Anton Blanchard <antonb@tenstorrent.com>
+Cc: qemu-riscv@nongnu.org
+Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
 ---
- target/riscv/fpu_helper.c |  2 +-
- target/riscv/internals.h  | 16 ++++++++++++++++
- 2 files changed, 17 insertions(+), 1 deletion(-)
+ target/riscv/tcg/tcg-cpu.c | 26 ++++++++++++++++++++++++++
+ 1 file changed, 26 insertions(+)
 
-diff --git a/target/riscv/fpu_helper.c b/target/riscv/fpu_helper.c
-index 91b1a56d10..31c17399fc 100644
---- a/target/riscv/fpu_helper.c
-+++ b/target/riscv/fpu_helper.c
-@@ -756,6 +756,6 @@ uint64_t helper_fcvt_bf16_s(CPURISCVState *env, uint64_t rs1)
- 
- uint64_t helper_fcvt_s_bf16(CPURISCVState *env, uint64_t rs1)
- {
--    float16 frs1 = check_nanbox_h(env, rs1);
-+    float16 frs1 = check_nanbox_bf16(env, rs1);
-     return nanbox_s(env, bfloat16_to_float32(frs1, &env->fp_status));
- }
-diff --git a/target/riscv/internals.h b/target/riscv/internals.h
-index 213aff31d8..794c81bf7c 100644
---- a/target/riscv/internals.h
-+++ b/target/riscv/internals.h
-@@ -142,6 +142,22 @@ static inline float16 check_nanbox_h(CPURISCVState *env, uint64_t f)
-     }
+diff --git a/target/riscv/tcg/tcg-cpu.c b/target/riscv/tcg/tcg-cpu.c
+index 55e00972b7..267186e5e3 100644
+--- a/target/riscv/tcg/tcg-cpu.c
++++ b/target/riscv/tcg/tcg-cpu.c
+@@ -237,6 +237,31 @@ static void riscv_restore_state_to_opc(CPUState *cs,
+     env->excp_uw2 = data[2];
  }
  
-+static inline float16 check_nanbox_bf16(CPURISCVState *env, uint64_t f)
++#ifndef CONFIG_USER_ONLY
++static vaddr riscv_pointer_wrap(CPUState *cs, int mmu_idx,
++                                vaddr result, vaddr base)
 +{
-+    /* Disable nanbox check when enable zfinx */
-+    if (env_archcpu(env)->cfg.ext_zfinx) {
-+        return (uint16_t)f;
++    CPURISCVState *env = cpu_env(cs);
++    uint32_t pm_len;
++    bool pm_signext;
++
++    if (cpu_address_xl(env) == MXL_RV32) {
++        return (uint32_t)result;
 +    }
 +
-+    uint64_t mask = MAKE_64BIT_MASK(16, 48);
-+
-+    if (likely((f & mask) == mask)) {
-+        return (uint16_t)f;
-+    } else {
-+        return 0x7FC0u; /* default qnan */
++    pm_len = riscv_pm_get_pmlen(riscv_pm_get_pmm(env));
++    if (pm_len == 0) {
++        return result;
 +    }
++
++    pm_signext = riscv_cpu_virt_mem_enabled(env);
++    if (pm_signext) {
++        return sextract64(result, 0, 64 - pm_len);
++    }
++    return extract64(result, 0, 64 - pm_len);
 +}
++#endif
 +
+ const TCGCPUOps riscv_tcg_ops = {
+     .mttcg_supported = true,
+     .guest_default_memory_order = 0,
+@@ -250,6 +275,7 @@ const TCGCPUOps riscv_tcg_ops = {
+ 
  #ifndef CONFIG_USER_ONLY
- /* Our implementation of SysemuCPUOps::has_work */
- bool riscv_cpu_has_work(CPUState *cs);
+     .tlb_fill = riscv_cpu_tlb_fill,
++    .pointer_wrap = riscv_pointer_wrap,
+     .cpu_exec_interrupt = riscv_cpu_exec_interrupt,
+     .cpu_exec_halt = riscv_cpu_has_work,
+     .cpu_exec_reset = cpu_reset,
 -- 
-2.34.1
+2.43.0
 
 
