@@ -4,94 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3B962C3ABBC
-	for <qemu-riscv@archiver.kernel.org>; Mon,  5 May 2025 18:59:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CAB95C3ABBF
+	for <qemu-riscv@archiver.kernel.org>; Mon,  5 May 2025 22:47:33 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uC12O-0000dR-Md; Mon, 05 May 2025 14:59:36 -0400
+	id 1uC4aI-0004ML-RI; Mon, 05 May 2025 18:46:50 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1uC12L-0000cF-VL
- for qemu-riscv@nongnu.org; Mon, 05 May 2025 14:59:35 -0400
-Received: from mail-pf1-x430.google.com ([2607:f8b0:4864:20::430])
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1uC4aD-0004LC-PV
+ for qemu-riscv@nongnu.org; Mon, 05 May 2025 18:46:47 -0400
+Received: from mail-pl1-x632.google.com ([2607:f8b0:4864:20::632])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1uC12I-0007u7-OA
- for qemu-riscv@nongnu.org; Mon, 05 May 2025 14:59:33 -0400
-Received: by mail-pf1-x430.google.com with SMTP id
- d2e1a72fcca58-7390d21bb1cso5081019b3a.2
- for <qemu-riscv@nongnu.org>; Mon, 05 May 2025 11:59:30 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1uC4aB-0008V9-37
+ for qemu-riscv@nongnu.org; Mon, 05 May 2025 18:46:45 -0400
+Received: by mail-pl1-x632.google.com with SMTP id
+ d9443c01a7336-223fd89d036so55837525ad.1
+ for <qemu-riscv@nongnu.org>; Mon, 05 May 2025 15:46:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1746471569; x=1747076369; darn=nongnu.org;
+ d=ventanamicro.com; s=google; t=1746485199; x=1747089999; darn=nongnu.org;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=A7CuY77gO+ycPjhJR+jqTUZ/MuIElViaSpNHT9rkCNo=;
- b=dkwcPCrEKLzyCJPqJdnRSHbzv93vjgitQ69og6M3ILYGelkzNbWv7PvQRdg4lric7e
- IrgYQAqDEPFyo4jLi8pJ+/8gq8FLw5NaooROeAcDyH2hqpNn9udC5yoGHGdOvLPt4kmi
- Qr0mzorI7tJX9oWjcVahJONcQS36EiycsEzkAKcyQAc5WUQWMZDrg4nPYmK500UAAatG
- IRUO8LLmu0z+nWUEp+cS35v5paY3qLimNsiSBiw8pf92+12iGljJgsoFDul+DmbOh/1Z
- W9b+oLIiM4aNx+5Akaltlbga6Uo+Ez3pcAlKuUfEXVhasNhiYiiQ6QqOSQA8ydj6pKi3
- jGnA==
+ bh=2KwTryLmEqksUJDIgZll0D60lMMx29gqtSbxh/p9gkE=;
+ b=k4WwuJAZF7Frn++b4S3+/ViqNDcY5FAdkogCLNaCWiyRh6GxLhEIVjEcEE4EIWl27M
+ UhIjmoBKcvhadcGf6ijw94VgF2DMN0FN32li9i5M5VmOTP/hhJK1yB2i4eriHWsfgZDV
+ kni6QEdjElqfQALMSvpxo+WDO3rPSrdKF0H8VLPQ5BgV1URCz4jAey9uBbXRyMj4xFHK
+ KNjD4gK3AU0mG5Fq7jJdsFIs4JM0qxAgxyZrwE+NFsh5GI67j4cndqKBsnb+giLxqaKp
+ 4g9q9/m9pwqsNYBu6ele7+Xg8W5qm8jcJrZXI3sU0Qf7V2MMcqKCcish+bgsCcRRo8m9
+ Ldfg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1746471569; x=1747076369;
+ d=1e100.net; s=20230601; t=1746485199; x=1747089999;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=A7CuY77gO+ycPjhJR+jqTUZ/MuIElViaSpNHT9rkCNo=;
- b=wIVE+q0KAo4e+Jdvm2fy7j6WIZOZJq2AqR5PYYPIqpBq78PCq++OYBcVu9Xx8+HW10
- wNLFUeM7vduF21LE3bkIVvQQZdz5x0Q7D6xPLVCUgZ1bXKxLzaxjwm7Vd52tWm871Axj
- p7PfHPC9dK0jEVwzNg/2dLCt6zkEirXxgDi/m6VBZ0Jsw5GGbtvn5wOr2zCKYxZMBGK6
- xk+/U96kD7C9kIce8nNnmB2yjyUqdYdvqMupiBgQ3mYMi8kJsMQGeABhdo0QzqedC3XQ
- y6VX7uFvbrsoQsSZ1JL13W8wts48eZBxj8juyA91bJFNQd1ZAN6UPcpVcgni38yOnLiQ
- 6XAQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXaHBSvobbVECDya0N6RY75ile9kch80QqMqEwANUCUGWO+lhZsWgicb5QG2oVefYPMX1FuVc2xxoVf@nongnu.org
-X-Gm-Message-State: AOJu0YyVR44K9OY6aERy9sD/Pl71+kgsw3ey8TTczsrsGj2it0rxU1wb
- SICxZuYlj6d5pMmewUxvXG2RbVqvBN4M6pOS51X4ApdLUZ0iIkRpKpvysAXAqy7tFy77+w+orAF
- J
-X-Gm-Gg: ASbGncuLEwLszHLBYIF/ysMMNwXL3jY4ZtEBDEa9I64tXq3zypdkTJNBGFf9vjIEymn
- hz3G9NWsXcbq12fGIDI/qXYMDiiJslwoHtvBsKeLUF9FHYmNfEeFriQt/smB25/TjixeiPP+wtL
- j2aKNllSSgNolnDB7D1Y3Ed7+DldR1reHe1c3Qlwbi60+sI274dBKetXCJOXpDgIgCEyrCpe/nK
- POOs5FA5Tdz3B8E4hAJgFNOx4l4f9skV0IQNQmLoiAo6WlfbdHLti0CJNwiFXWvAXCcIx0oyW5e
- bOpRw1/dtuDK2azP9tm6JxRYAc5xpHODeh42ygWCiR/q6m6ma8FP+J/lvl/7IbOdHxWbgYScVpn
- SEXi1Oe3lR7gCUaEopA==
-X-Google-Smtp-Source: AGHT+IFtx/Xz3ZHyZJ9pqB72YEver0dszK8ydQaxSDRWE6dCehUNlZnNCnmh+KYwqNRHT8NIGtvzkw==
-X-Received: by 2002:a05:6a00:420c:b0:736:5e28:cfba with SMTP id
- d2e1a72fcca58-74058ae70aemr20715150b3a.18.1746471568944; 
- Mon, 05 May 2025 11:59:28 -0700 (PDT)
-Received: from [192.168.0.4] (71-212-47-143.tukw.qwest.net. [71.212.47.143])
+ bh=2KwTryLmEqksUJDIgZll0D60lMMx29gqtSbxh/p9gkE=;
+ b=hSFu1w+0UXgJc+yQKYVNvE1rr1zIp2lu/Vgeigrfc/RQQjhE/8QznuGWOcuDqMHbzK
+ MjwmSi23OkYTHLEuUAJ6qsw+k0DKGK3WLJjjysoCpBF8PJaHh8N14W7bXnefNOsaZVCg
+ f/LkM7OYQjJ2ORT0Fh7vXQQoTjPdMHlkO48DYXOQf/t+LNtSvNWVQhjVP2ECJyTBA+S6
+ 4Jbn7VbSvaj4J57z1icdvDRWMbwXMLM/AIsl4DCPGu9NJt4x1QWf4GlTmDoHUzL5+uY+
+ l7hkonyNkEgRJ0qBigJO54DMGVUrqa4gd6ZaijlrpIt46oMj3yLu9axSOF3I46yfqf6C
+ TM3A==
+X-Gm-Message-State: AOJu0Yz4j5h7fqEwzuiuJEk3igfIwcKqcr2ulOCiPKjiQXooW+AVr8lP
+ L/LvcsWSn4d4C8g2nVbHeoIm5nMu4uoh8zrtU9B/8LhvifBpIR8PQDXxk5ot6V4=
+X-Gm-Gg: ASbGnctIjOP1TTVjABjGYxoxcLbLyzcVLvT2xi184yQLvtKN1V495r2m75xp2UA7tQX
+ s5OK/Cuv1/fK7/rNhUdN/9IWdVlS9Ri1SqiA//6Je2acgZTtLzEU+IXU+PL1zGLGHiajLpF7QCp
+ MFXMH5t+t3t9uir4LIhS5KFK/g2+kWjYpJaPRPvaTJ1PdgPNJXXn8Hy+4fkA/erAufH/eXWKGDO
+ JUEnHg4NBo7VzeSXMDTNiLPIXBWdmk+THjFqiiSjkwuxRuY8g9JHgN9AG0iRFIobhUncI2Xyn5x
+ CmaqHQjaTXux/zJYscahJrmQhtUhTDYlOTNeBejTjleQEwe27D6zqFI=
+X-Google-Smtp-Source: AGHT+IFn59gU80SCvXAwTG7A7Pm9vFPyAmtbUf0C1Yt+15LYhmTD3Y+bxUNsXsq/dZZPeHPz85ufpg==
+X-Received: by 2002:a17:902:f649:b0:216:794f:6d7d with SMTP id
+ d9443c01a7336-22e33136152mr17017485ad.48.1746485199476; 
+ Mon, 05 May 2025 15:46:39 -0700 (PDT)
+Received: from [192.168.68.110] ([152.234.125.33])
  by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-74058d7a3a6sm7193733b3a.2.2025.05.05.11.59.27
+ d9443c01a7336-22e152204fesm60652855ad.137.2025.05.05.15.46.36
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 05 May 2025 11:59:27 -0700 (PDT)
-Message-ID: <702b4c82-653d-4782-8805-c4ff9a1155ae@linaro.org>
-Date: Mon, 5 May 2025 11:59:26 -0700
+ Mon, 05 May 2025 15:46:38 -0700 (PDT)
+Message-ID: <c969d9ce-626a-4928-b050-7b7fbd8f7981@ventanamicro.com>
+Date: Mon, 5 May 2025 19:46:35 -0300
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 09/12] target/riscv: Fill in TCGCPUOps.pointer_wrap
-To: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- qemu-devel@nongnu.org
-Cc: foss@percivaleng.com, qemu-riscv@nongnu.org
-References: <20250504205714.3432096-1-richard.henderson@linaro.org>
- <20250504205714.3432096-10-richard.henderson@linaro.org>
- <e8db1ec3-fcb3-42d1-a488-cf55d6060904@linaro.org>
+Subject: Re: [PATCH 0/2] hw/riscv/virt.c: change default CPU to 'max'
+To: qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, liwei1518@gmail.com,
+ zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com, ajones@ventanamicro.com
+References: <20250404152750.332791-1-dbarboza@ventanamicro.com>
 Content-Language: en-US
-From: Richard Henderson <richard.henderson@linaro.org>
-In-Reply-To: <e8db1ec3-fcb3-42d1-a488-cf55d6060904@linaro.org>
+From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+In-Reply-To: <20250404152750.332791-1-dbarboza@ventanamicro.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::430;
- envelope-from=richard.henderson@linaro.org; helo=mail-pf1-x430.google.com
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::632;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pl1-x632.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -107,50 +101,53 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 5/5/25 09:47, Philippe Mathieu-Daudé wrote:
-> On 4/5/25 22:57, Richard Henderson wrote:
->> Check 32 vs 64-bit and pointer masking state.
->>
->> Cc: qemu-riscv@nongnu.org
->> Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
->> ---
->>   target/riscv/tcg/tcg-cpu.c | 26 ++++++++++++++++++++++++++
->>   1 file changed, 26 insertions(+)
->>
->> diff --git a/target/riscv/tcg/tcg-cpu.c b/target/riscv/tcg/tcg-cpu.c
->> index 55e00972b7..267186e5e3 100644
->> --- a/target/riscv/tcg/tcg-cpu.c
->> +++ b/target/riscv/tcg/tcg-cpu.c
->> @@ -237,6 +237,31 @@ static void riscv_restore_state_to_opc(CPUState *cs,
->>       env->excp_uw2 = data[2];
->>   }
->> +#ifndef CONFIG_USER_ONLY
->> +static vaddr riscv_pointer_wrap(CPUState *cs, int mmu_idx,
->> +                                vaddr result, vaddr base)
->> +{
->> +    CPURISCVState *env = cpu_env(cs);
->> +    uint32_t pm_len;
->> +    bool pm_signext;
->> +
->> +    if (cpu_address_xl(env) == MXL_RV32) {
->> +        return (uint32_t)result;
->> +    }
->> +
->> +    pm_len = riscv_pm_get_pmlen(riscv_pm_get_pmm(env));
->> +    if (pm_len == 0) {
->> +        return result;
->> +    }
->> +
->> +    pm_signext = riscv_cpu_virt_mem_enabled(env);
->> +    if (pm_signext) {
->> +        return sextract64(result, 0, 64 - pm_len);
->> +    }
->> +    return extract64(result, 0, 64 - pm_len);
+Hi Alistair,
+
+
+I think we should push this upstream and see what happens. We'll have a
+full release cycle to undo the change in case we find unintended side
+effects. I'm fairly optimistic that this change will be a no-op for most
+users and will benefit us when we'll have to deal with RVA23 specific
+software.
+
+
+Thanks,
+
+Daniel
+
+On 4/4/25 12:27 PM, Daniel Henrique Barboza wrote:
+> Hi,
 > 
-> Is this safe for MXL_RV128?
+> The 'rv64' CPU, the default CPU for the 'virt' machine, is a strange
+> CPU. It is a collection of extensions that were enabled/disabled as
+> extensions were being added in TCG, and in the end we ended up with a
+> CPU that we can't say exactly what it does.
+> 
+> This is further aggravated by the distros move to support the RVA23
+> profile. Patch 2 has more details, but long story short: distros uses
+> the 'virt' machine, and they'll start building on top of RVA23, and rv64
+> does not have RVA23 support. In short, distros will start to break in
+> the default 'virt' CPU.
+> 
+> Changing the default CPU to 'max' will not cause (intentional) user
+> regressions: if the software runs in rv64 it will run in 'max' too given
+> that we're adding more extensions as default instead of removing them.
+> In my opinion this might be enough to avoid a deprecation cycle and we
+> can do the change for 10.1.
+> 
+> And yeah, patch 2 mentions the already old trope "and ARM does the
+> same". This is intentional: I want RISC-V code and usability to be as
+> close as possible to ARM and other archs to promote a more homogeneous
+> experience when developing and using QEMU.
+> 
+> 
+> Daniel Henrique Barboza (2):
+>    target/riscv/tcg: make 'max' cpu rva23s64 compliant
+>    hw/riscv/virt.c: change default CPU to 'max'
+> 
+>   hw/riscv/virt.c            | 2 +-
+>   target/riscv/tcg/tcg-cpu.c | 2 ++
+>   2 files changed, 3 insertions(+), 1 deletion(-)
+> 
 
-The RV128 implementation only uses 64-bit pointers, so, yes.
-
-
-r~
 
