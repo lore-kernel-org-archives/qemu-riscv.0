@@ -4,89 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 991CAC369DC
-	for <qemu-riscv@archiver.kernel.org>; Sun,  4 May 2025 20:58:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DF899C3ABBC
+	for <qemu-riscv@archiver.kernel.org>; Mon,  5 May 2025 16:47:35 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uBgOz-0008Qe-KH; Sun, 04 May 2025 16:57:33 -0400
+	id 1uByyY-0004PQ-Br; Mon, 05 May 2025 12:47:30 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1uBgOt-0008Ni-GT
- for qemu-riscv@nongnu.org; Sun, 04 May 2025 16:57:27 -0400
-Received: from mail-pf1-x42b.google.com ([2607:f8b0:4864:20::42b])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1uByyP-0004N8-3f
+ for qemu-riscv@nongnu.org; Mon, 05 May 2025 12:47:24 -0400
+Received: from mail-ej1-x62c.google.com ([2a00:1450:4864:20::62c])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1uBgOr-0006xA-JE
- for qemu-riscv@nongnu.org; Sun, 04 May 2025 16:57:27 -0400
-Received: by mail-pf1-x42b.google.com with SMTP id
- d2e1a72fcca58-736c3e7b390so4222774b3a.2
- for <qemu-riscv@nongnu.org>; Sun, 04 May 2025 13:57:23 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1uByyM-0001gl-7q
+ for qemu-riscv@nongnu.org; Mon, 05 May 2025 12:47:20 -0400
+Received: by mail-ej1-x62c.google.com with SMTP id
+ a640c23a62f3a-ac2af2f15d1so638085066b.1
+ for <qemu-riscv@nongnu.org>; Mon, 05 May 2025 09:47:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1746392243; x=1746997043; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=TIQELB2tRYMc57jWwkjeMWxsQZONjOqCuvRT3H/S0gQ=;
- b=GAZluYBCncTuczWvE4cR417NM6PCdrwlFl4Q4DRzu1w9PwzhzgzYniqJ65+2D2PbnY
- sE3BHBga0e4Z18GDsxK+xextGbzghbcGjnKt4lC8doe17n6VnxTOhotNNlSj0OvXFYwU
- bZK7BwrpbVFlo70kuMlv5EgnxLTJoo0vgVshnvOmN6zf55eiQXhCpyaBkzsR8P7SX9Nc
- 0GQnNad+GNJNqGKOiL3taDAZ/CQHWXAcKeh3YyWkE9rWdMnEgSzTa+EJBTRAS/C7IuhH
- qF5R7yaWV5fH5Ur6jrlIvixuH0TzHurdnbcE+bIXDnNG/iOUY4esE4D1O2dGmL5C2Kjd
- 0AJQ==
+ d=linaro.org; s=google; t=1746463636; x=1747068436; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=S4bVQBqy5WbVd5CKOxzKRJHSi3jSTIVWjAUu/SPA/1o=;
+ b=rtp18yPDzejE27QpgbK0lzF3N//myeIb9hpj/Y5L0B8fQVACxaw8EwFm6+/ZSjVjRh
+ PWKqCzPFX7dECMIMRuhxCUW88ngdEvH3Zj1UMiCH3qfCYEd5Mt0Ye+UbUIBjZRi63zrx
+ BLZE7jNNG2eF3FtEK9MHxGE77rmCJnehseOlh6AI3qDgQLfGcj3mBYB7xLVI0+aWlbXY
+ FQhIGhmVCAtkPBaqPoFW96yjX1xfWAdxXod/SqitaJyz7FORwvMQToBKyG0+cH2tZm98
+ nbS6CrN6fS/LcoVB2G6JWaQn+RSRShIhywLNSmUe5csmtX7AdZ923wxskaafxI2rI/v7
+ q2gQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1746392243; x=1746997043;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=TIQELB2tRYMc57jWwkjeMWxsQZONjOqCuvRT3H/S0gQ=;
- b=bbFNb5GbA6eHhbZ1Xv9iucyEKTrrHLky/SoLvw218vsThrJ5ShP2hR4ih1x6KJpQwB
- x2Ihhi32mnFba/qU1ljcQS7mqk1MMUMr2PJpv58XY3+ur/scKv/5TlAZe04+6qeZbs0R
- v9FCyPtfehsULgRUVuKzv/X01NUrQBAOB6tfs5SzvtbhYjA9+zuN0zTgLqZzUh2SiQV1
- ubvU1WlU0bo1V0BlHauf4DaMZcCd0ttFNqgUr8B3M8w/3am9Hpc2H8G+jQZ1QsbdrmhR
- ksw4xayg/hFNerRCFelOqxhTK7NVDjw6aM6aQpqxD6emxEuJNMsdhMT/GGI4ACPT8Psn
- MJZg==
+ d=1e100.net; s=20230601; t=1746463636; x=1747068436;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=S4bVQBqy5WbVd5CKOxzKRJHSi3jSTIVWjAUu/SPA/1o=;
+ b=wf7L+SJgqF8BBqmCu1mhD9ZeM4pLfsRZHZQpzALxZ1I4CzroOh6dfQ9+iXoi5v8C+9
+ cZVI/8xEmOHvUdXxrZ3Dg2TLxyiTlKVv7SgFaDEArt6Vmc+oBVhYFBw6C/beCDupm/3M
+ 8mzk3oNjL+sKlDGbd0DjL+43XTW6iolZPLyNyM839G8dZ2qj/RxVf6SnXpsvgV8T5XBp
+ GEDBhDzTyf3V+2GV+XHy0Cm1q382xykHJRPs4mscB8jM5Lzom+vjrEGxgF2vM8tx7wld
+ H/+7Fy3UBY5BkcJonRqcOfrO2Fht8dBkxXx58015qkz94IMrJdGGz7BNd6KnwirzjvLI
+ pTMg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCX5Ksnntc04trkXv2CDqzbddGS7fRjnjmsiLv8qCifQY7Qr+hS5bH8b/0CPQS8x4UiMAoi2Y4tdS6fr@nongnu.org
-X-Gm-Message-State: AOJu0YzSMmpJW7xYO4SEE4hY/GRIupnFED9AdCLcecp8W1NQNIrOwjHl
- Y6WpJAfZJrIby2EYX6QdcSHV2HUiS3LwKQ8xtvxWlfQf4a+CAjtYt0GHq8IId4w=
-X-Gm-Gg: ASbGnct3y6hMrzx0HKQhWmIBem9iUrYHiTvlqkyCgDIg552/DxsbAlIzkXn5uOiXrKU
- UX9a3y5CB2HmQUsng4QXgfMN2mvfY2e5o3MdmI/ENbhOodB3C0tNds2Y+P5wRkk0Ry9yV5H2wJW
- 4F62eoxp5fC9TmhLt1e1uwvmrwEyRmyIq4kPH/JYAt8STpwKA9yKhhYIWuYqWtJSqwBO7Bdg5q5
- XP6WQgadraSUfEUHVrXiCj/vHj8votO2pQO0cHSqFFVfw3we7Td37sP9DiMYTsALaNHw4oUNe43
- 5MUhw7YJRERm5azlw3DM6iyuj6dEvhxsXOdnemUHCnXin13q8abNJ5IoqqB+bVPILRZNoJmkB+m
- bvero7B09Gg==
-X-Google-Smtp-Source: AGHT+IGiSjkXytY1Cg6vGzsn2xbomthAKGNmZRcrP49T+TKpnUIiJFeqJTYknXQEL19xxMCfWdJS8Q==
-X-Received: by 2002:a17:90b:578f:b0:2ee:f076:20f1 with SMTP id
- 98e67ed59e1d1-30a6174fda0mr9082464a91.0.1746392242797; 
- Sun, 04 May 2025 13:57:22 -0700 (PDT)
-Received: from stoup.. (71-212-47-143.tukw.qwest.net. [71.212.47.143])
+ AJvYcCU/+JdItG9ZMj8+zjppn6dyARONJNDTpGtxEoJhZgWrmt/V5SMC3exr9sSR5FShRQ0eHP9jDpLOgNf8@nongnu.org
+X-Gm-Message-State: AOJu0YwkXFSj59KdZ4uzeHWCNJ4+k1bCjwaEHfnAuUYMVjTVNRrDRgYo
+ q4VOuTdTStyZLrjlB6Z68j+mSSTOo/e4iFCLnhM8PneKEEc98zy4Rn39VGN22GI=
+X-Gm-Gg: ASbGncsYvEriM88wML57CYXOnvstWCCvMyG87hrPY1r7l2pfdpu1oJ+XUGcsR9UN9hj
+ N7ikZwqisqu8asQx9o5jc804XSJdN4pOo44cg3KjrUqu8jUW02VfdrCa+J7LV7dytftffTzgQoC
+ vpp0KPR+E9+eLLxDT947Gre1kxlpito1BDbhhwh7bKeyzbZo4gDef6BLxyViyVqP1hMcFMyrDMq
+ oH1C2S8Vmk5pwWEkfEKfKCfAppz7DZfbNpsZLUV8d87k6QQq+CVDXGijMy5grUIIxx9MrgOonGz
+ PPlN6WuqIkBEqFMxz4sCangmdGrlM8ZgN1ZK03tXE2Na16EOi/0sWixDn5qunBYBZsVbY/c3g+I
+ nLCcm/0x3XDw=
+X-Google-Smtp-Source: AGHT+IEgypn/eACiUFAayFoR46H48HADz2u33jK26xI1eZrrPXV3Z+BUVXMOAeEX5AjN2Xqvw3rekg==
+X-Received: by 2002:a17:906:6a24:b0:ace:c540:ffda with SMTP id
+ a640c23a62f3a-ad1906a0036mr880040566b.26.1746463635918; 
+ Mon, 05 May 2025 09:47:15 -0700 (PDT)
+Received: from [10.194.152.213] (69.21.205.77.rev.sfr.net. [77.205.21.69])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-22e150eadfcsm41346425ad.32.2025.05.04.13.57.22
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 04 May 2025 13:57:22 -0700 (PDT)
-From: Richard Henderson <richard.henderson@linaro.org>
-To: qemu-devel@nongnu.org
-Cc: foss@percivaleng.com,
-	qemu-riscv@nongnu.org
-Subject: [PATCH 09/12] target/riscv: Fill in TCGCPUOps.pointer_wrap
-Date: Sun,  4 May 2025 13:57:10 -0700
-Message-ID: <20250504205714.3432096-10-richard.henderson@linaro.org>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20250504205714.3432096-1-richard.henderson@linaro.org>
-References: <20250504205714.3432096-1-richard.henderson@linaro.org>
+ a640c23a62f3a-ad1894c3853sm519939166b.94.2025.05.05.09.47.14
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 05 May 2025 09:47:15 -0700 (PDT)
+Message-ID: <e8db1ec3-fcb3-42d1-a488-cf55d6060904@linaro.org>
+Date: Mon, 5 May 2025 18:47:13 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::42b;
- envelope-from=richard.henderson@linaro.org; helo=mail-pf1-x42b.google.com
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 09/12] target/riscv: Fill in TCGCPUOps.pointer_wrap
+To: Richard Henderson <richard.henderson@linaro.org>, qemu-devel@nongnu.org
+Cc: foss@percivaleng.com, qemu-riscv@nongnu.org
+References: <20250504205714.3432096-1-richard.henderson@linaro.org>
+ <20250504205714.3432096-10-richard.henderson@linaro.org>
+Content-Language: en-US
+From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+In-Reply-To: <20250504205714.3432096-10-richard.henderson@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::62c;
+ envelope-from=philmd@linaro.org; helo=mail-ej1-x62c.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -102,59 +102,61 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Check 32 vs 64-bit and pointer masking state.
+On 4/5/25 22:57, Richard Henderson wrote:
+> Check 32 vs 64-bit and pointer masking state.
+> 
+> Cc: qemu-riscv@nongnu.org
+> Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
+> ---
+>   target/riscv/tcg/tcg-cpu.c | 26 ++++++++++++++++++++++++++
+>   1 file changed, 26 insertions(+)
+> 
+> diff --git a/target/riscv/tcg/tcg-cpu.c b/target/riscv/tcg/tcg-cpu.c
+> index 55e00972b7..267186e5e3 100644
+> --- a/target/riscv/tcg/tcg-cpu.c
+> +++ b/target/riscv/tcg/tcg-cpu.c
+> @@ -237,6 +237,31 @@ static void riscv_restore_state_to_opc(CPUState *cs,
+>       env->excp_uw2 = data[2];
+>   }
+>   
+> +#ifndef CONFIG_USER_ONLY
+> +static vaddr riscv_pointer_wrap(CPUState *cs, int mmu_idx,
+> +                                vaddr result, vaddr base)
+> +{
+> +    CPURISCVState *env = cpu_env(cs);
+> +    uint32_t pm_len;
+> +    bool pm_signext;
+> +
+> +    if (cpu_address_xl(env) == MXL_RV32) {
+> +        return (uint32_t)result;
+> +    }
+> +
+> +    pm_len = riscv_pm_get_pmlen(riscv_pm_get_pmm(env));
+> +    if (pm_len == 0) {
+> +        return result;
+> +    }
+> +
+> +    pm_signext = riscv_cpu_virt_mem_enabled(env);
+> +    if (pm_signext) {
+> +        return sextract64(result, 0, 64 - pm_len);
+> +    }
+> +    return extract64(result, 0, 64 - pm_len);
 
-Cc: qemu-riscv@nongnu.org
-Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
----
- target/riscv/tcg/tcg-cpu.c | 26 ++++++++++++++++++++++++++
- 1 file changed, 26 insertions(+)
+Is this safe for MXL_RV128?
 
-diff --git a/target/riscv/tcg/tcg-cpu.c b/target/riscv/tcg/tcg-cpu.c
-index 55e00972b7..267186e5e3 100644
---- a/target/riscv/tcg/tcg-cpu.c
-+++ b/target/riscv/tcg/tcg-cpu.c
-@@ -237,6 +237,31 @@ static void riscv_restore_state_to_opc(CPUState *cs,
-     env->excp_uw2 = data[2];
- }
- 
-+#ifndef CONFIG_USER_ONLY
-+static vaddr riscv_pointer_wrap(CPUState *cs, int mmu_idx,
-+                                vaddr result, vaddr base)
-+{
-+    CPURISCVState *env = cpu_env(cs);
-+    uint32_t pm_len;
-+    bool pm_signext;
-+
-+    if (cpu_address_xl(env) == MXL_RV32) {
-+        return (uint32_t)result;
-+    }
-+
-+    pm_len = riscv_pm_get_pmlen(riscv_pm_get_pmm(env));
-+    if (pm_len == 0) {
-+        return result;
-+    }
-+
-+    pm_signext = riscv_cpu_virt_mem_enabled(env);
-+    if (pm_signext) {
-+        return sextract64(result, 0, 64 - pm_len);
-+    }
-+    return extract64(result, 0, 64 - pm_len);
-+}
-+#endif
-+
- const TCGCPUOps riscv_tcg_ops = {
-     .mttcg_supported = true,
-     .guest_default_memory_order = 0,
-@@ -250,6 +275,7 @@ const TCGCPUOps riscv_tcg_ops = {
- 
- #ifndef CONFIG_USER_ONLY
-     .tlb_fill = riscv_cpu_tlb_fill,
-+    .pointer_wrap = riscv_pointer_wrap,
-     .cpu_exec_interrupt = riscv_cpu_exec_interrupt,
-     .cpu_exec_halt = riscv_cpu_has_work,
-     .cpu_exec_reset = cpu_reset,
--- 
-2.43.0
+> +}
+> +#endif
+> +
+>   const TCGCPUOps riscv_tcg_ops = {
+>       .mttcg_supported = true,
+>       .guest_default_memory_order = 0,
+> @@ -250,6 +275,7 @@ const TCGCPUOps riscv_tcg_ops = {
+>   
+>   #ifndef CONFIG_USER_ONLY
+>       .tlb_fill = riscv_cpu_tlb_fill,
+> +    .pointer_wrap = riscv_pointer_wrap,
+>       .cpu_exec_interrupt = riscv_cpu_exec_interrupt,
+>       .cpu_exec_halt = riscv_cpu_has_work,
+>       .cpu_exec_reset = cpu_reset,
 
 
