@@ -4,66 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 09583C3ABC0
-	for <qemu-riscv@archiver.kernel.org>; Thu,  8 May 2025 13:40:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 733DFC3ABBE
+	for <qemu-riscv@archiver.kernel.org>; Thu,  8 May 2025 13:40:36 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uD1Tr-00052l-7L; Thu, 08 May 2025 09:40:11 -0400
+	id 1uD1UI-0005vA-Iu; Thu, 08 May 2025 09:40:34 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1uD1Tb-0004ho-BR
- for qemu-riscv@nongnu.org; Thu, 08 May 2025 09:39:52 -0400
-Received: from mail-pg1-x533.google.com ([2607:f8b0:4864:20::533])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1uD1Ty-0005I4-IG
+ for qemu-riscv@nongnu.org; Thu, 08 May 2025 09:40:21 -0400
+Received: from mail-pl1-x631.google.com ([2607:f8b0:4864:20::631])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1uD1TY-00048U-Rb
- for qemu-riscv@nongnu.org; Thu, 08 May 2025 09:39:50 -0400
-Received: by mail-pg1-x533.google.com with SMTP id
- 41be03b00d2f7-af51596da56so730278a12.0
- for <qemu-riscv@nongnu.org>; Thu, 08 May 2025 06:39:48 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1uD1Tv-0004Ra-7d
+ for qemu-riscv@nongnu.org; Thu, 08 May 2025 09:40:13 -0400
+Received: by mail-pl1-x631.google.com with SMTP id
+ d9443c01a7336-22fa48f7cb2so5971155ad.1
+ for <qemu-riscv@nongnu.org>; Thu, 08 May 2025 06:40:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1746711587; x=1747316387; darn=nongnu.org;
+ d=linaro.org; s=google; t=1746711609; x=1747316409; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=LkeIBMUss+wtjS4ebn41wnF/9BG8kxWBr1hV0emyy84=;
- b=e+FyG83aASK38W0I6CSA7bE9Z92uGQYCgsjhayAqtQFlw4JPT4toGZ50V8Ao9jZlJF
- 47scVdKKg0upu89pj2NL2hoN8CCQHI/1fPC1B5b4pzZGQvyXuKAVqP545IPxPx9vVDxo
- 4RO1dOLRBdc8qrUd7KeSkE9Lh2hsCxApuMuG9upfXwAkDckDU/GQJx+sLt99Q4Lv8XyM
- it+G1OiaJ5Xj6M1n89dubp6Tm6iQnRmxi2sTtkuAftNETGmTAx01BkIJ+P10hXVEMbc8
- DQTwjl6E4FDUcIgQsTyNYc22UBG+KfQ4vT2jeHgv8/72w/w8y2hPIE5SxQY3ZOnyJiAY
- c2vA==
+ bh=p8Pwvw+j4e5J09FPHtAsan2JUEBLBE3y7JNJd5PTK2A=;
+ b=FIr8rXowpQIUXzOEZdUGYb58XXuwzHw4cT0VouJvTE324WZ94CAzqFN4BH2oJ3V5UB
+ /1DzrTBfgVqBejhToh4NTs/v9uC8Io1py9wOX2dMoK3hEAMXwc8RfsuJwZyIkpGUscup
+ VRzeCG1T6YcPgFF/kUiYvWjTDZk2FkokiAQA1/KnUXx6RXthXV2bO/uLk3jozNiSdvL5
+ g09eKet8+l/rJ+QxhOufHii//S/HDHNwsguHw7CxjvSn4J+5hMM5h4/RUpfUx8aOVUtu
+ SupR/q/RhddYpAFviWn9IeNMnX0t4uIwJuwsa3Bf9VYTiW7xD68UpXJ9af1j8ItVhQ84
+ rXMA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1746711587; x=1747316387;
+ d=1e100.net; s=20230601; t=1746711609; x=1747316409;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=LkeIBMUss+wtjS4ebn41wnF/9BG8kxWBr1hV0emyy84=;
- b=VbG6ixYXhkBSyTktRRQbkifn8816oCozN59PgWg0G6BYXncoeHLbYuXG0cDTxs1zef
- pWycGd8yASCgHr79mtaODgk7xrwCtY8GWUcHbPLibDXwggWV5KWXmWKc1LVYHhvnqCZn
- bdApf989GX/fTVYnBAwqFpUbnBeuhakzH3tLrSsfSVbTvvuMqflIsKxgYwDFJjqmf4oz
- obqS8hPXWo23BRZELcZ81IRTJ7SYO2j/a3WXNDmhT6TwWxntpvBoIK3M08U2LhVLXsp5
- 8hPszvdTdAXxrDMHYAkJLmgGKXJ64G9H1YXP9rSsO/ZklxUTKwrXNCZnNSErZZGzRHDZ
- 1s4A==
+ bh=p8Pwvw+j4e5J09FPHtAsan2JUEBLBE3y7JNJd5PTK2A=;
+ b=wdZbWaH8ILf0XquPviuM7hP63w+JQIBtOemnjEkHYxtXGl1dTMz6DRMeXhj2MjQrj+
+ EpGk0OlSzfca/by9nj5hTX52qN37kSL944mrK79mevqobMHLRDUXVyv+5qP3+NkXSl9y
+ jSA4sQFLcwd261BJqKkSxg0o037NwSVNW45g1MynsgjXS+VrDayGRBHeW8+yK2oEcgyr
+ Bi09CQEqZSV4lXSwdbihD8/zx7c9uAXK7p5q6KsLtsiC43GxaH4bYi3NMpLrKGfe823w
+ 62khFmQ2rMy4zFmi4LjGwEZ+VErbGIUuP57v74e2Rmzf5zp6xm8qRGUPGcezeiMhJuM/
+ P2Zg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUDWK9R8Yi7lNy4kyIdwoD99fun6tOsB/ayHlaWPQgJiqKj6NCCNIEZxdDP7S0ghPy3l6t54pQ80/HQ@nongnu.org
-X-Gm-Message-State: AOJu0Ywdew7JOkx4kH1of1nwk3MDnqh5qguzpm34R07IPzuCv4KqSQqh
- 6YnndZJjteshrUphsZxvlP5YcHcx/dJJMwDeOzNJD8MgTXhaK1n3aA0O+GrrkhA=
-X-Gm-Gg: ASbGnctB9lIxSBfoqUG7TMwOghlvT8HV2eOH/cSLCdNBoN53dd2TH6ur6xYKj/GSLiH
- ztWbEyQcu/qREPWN+iycjODRSqxnf6544PxA93/mcL3oOfxLMGgix8uLo1v89hKXoBZWqkKeiAY
- IGFFrOQw4zfFa1opBmcgaNtK9wmbTIKhUJyuW7x4eNnLsTq7dLK2fJDPxYZp97SJiD94nH64mhq
- zt//h35d0pAYR60uYQho+iauV9dQplMRo34EdlYch7C584jtvPTpz640TYfsCUxdv4zbt0yfpVB
- PbZPTlWCDxH+LrP0aS14nDsubWioMk9NSVvS1hdOyvLVR6JXcGKTU0GPbUnEoJugo4FBd9NSOKt
- UgDdm4L2Hniyp0AM=
-X-Google-Smtp-Source: AGHT+IEb+XvkV5eLr6ZekeS+qXcEJ9g0pF4pUOL46KSFBDzr+sgJmqbyPKXhnQX7SMjFaB4MIczeaw==
-X-Received: by 2002:a17:90b:3803:b0:2fe:9783:afd3 with SMTP id
- 98e67ed59e1d1-30b28cec4d7mr5237370a91.2.1746711586707; 
- Thu, 08 May 2025 06:39:46 -0700 (PDT)
+ AJvYcCXYTt2RcHLdHIta1T18c1sJOWg+H98dRHSIeYIjdIHXprQ9SZWxX3t+KmV0JmwqhmD5HMJbHvDxvb3E@nongnu.org
+X-Gm-Message-State: AOJu0YylgkSiK4bfyEQOq66Ptq2BFToG70bMZlW0x0gRgmFfIXLTda6W
+ S4qbmlvUX/dWYVzMJt8We3EBHm2zlfwdM+at7i/TBSMzJjbRtXsP3q/49vyFrto=
+X-Gm-Gg: ASbGncsGu05SGSJ5gi8zO7YWz93olLakJIFIqQxWnJkkEoOiA8cjf+n16KWiTlr74Hr
+ L+xR2GCjr56scEeK+a+okkh4r6iC0Hmt7FHAxpaMnVcYTH3MwPbyQxw+821o3UcnW/lnceX7CK/
+ UWFHrWhxvX3UT33oiRe2nly6GbVrT0kWzhhFriZLcxd0ZKm0Jwl/UUhUKY+XEIDOfnRn/PNlRLi
+ x7nAHtBmUtR3cLFbLgY4APJD8s2GbgyDnmwNO/kvxScKmVTR4alYyL840M4O3sS/J6tjcvhrEZK
+ JsS/Lul4SQ9w7zp8bikDZKC2vx9214IGHeQotXduHD+8xlnu6k/w0mP/+84p7aYcmJGd//KmLK1
+ LiHPbkjlk2i5lkOI=
+X-Google-Smtp-Source: AGHT+IEHNU51J756smrG33Ll3fKAa4cINEE9vVGIcVFbaMYD4LmaTKtFYWOJts/yoYULQ+dhKo+C6Q==
+X-Received: by 2002:a17:902:d50d:b0:221:78a1:27fb with SMTP id
+ d9443c01a7336-22e5ea38b30mr113474455ad.11.1746711609535; 
+ Thu, 08 May 2025 06:40:09 -0700 (PDT)
 Received: from localhost.localdomain (88-187-86-199.subs.proxad.net.
  [88.187.86.199]) by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-30ad4d5341dsm2150592a91.21.2025.05.08.06.39.33
+ 41be03b00d2f7-b1fb3b62502sm11305764a12.32.2025.05.08.06.39.55
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Thu, 08 May 2025 06:39:46 -0700 (PDT)
+ Thu, 08 May 2025 06:40:09 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Richard Henderson <richard.henderson@linaro.org>, kvm@vger.kernel.org,
@@ -87,23 +87,24 @@ Cc: Richard Henderson <richard.henderson@linaro.org>, kvm@vger.kernel.org,
  qemu-arm@nongnu.org,
  =?UTF-8?q?Marc-Andr=C3=A9=20Lureau?= <marcandre.lureau@redhat.com>,
  Huacai Chen <chenhuacai@kernel.org>, Jason Wang <jasowang@redhat.com>,
+ Mark Cave-Ayland <mark.caveayland@nutanix.com>,
  Thomas Huth <thuth@redhat.com>
-Subject: [PATCH v4 10/27] hw/i386/pc: Remove linuxboot.bin
-Date: Thu,  8 May 2025 15:35:33 +0200
-Message-ID: <20250508133550.81391-11-philmd@linaro.org>
+Subject: [PATCH v4 11/27] hw/i386/pc: Remove pc_compat_2_6[] array
+Date: Thu,  8 May 2025 15:35:34 +0200
+Message-ID: <20250508133550.81391-12-philmd@linaro.org>
 X-Mailer: git-send-email 2.47.1
 In-Reply-To: <20250508133550.81391-1-philmd@linaro.org>
 References: <20250508133550.81391-1-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::533;
- envelope-from=philmd@linaro.org; helo=mail-pg1-x533.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::631;
+ envelope-from=philmd@linaro.org; helo=mail-pl1-x631.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, LOTS_OF_MONEY=0.001,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
@@ -121,259 +122,51 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-All PC machines now use the linuxboot_dma.bin binary,
-we can remove the non-DMA version (linuxboot.bin).
+The pc_compat_2_6[] array was only used by the pc-q35-2.6
+and pc-i440fx-2.6 machines, which got removed. Remove it.
 
-Suggested-by: Thomas Huth <thuth@redhat.com>
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+Reviewed-by: Mark Cave-Ayland <mark.caveayland@nutanix.com>
+Reviewed-by: Thomas Huth <thuth@redhat.com>
+Reviewed-by: Zhao Liu <zhao1.liu@intel.com>
 ---
- hw/i386/pc.c                  |   3 +-
- pc-bios/meson.build           |   1 -
- pc-bios/optionrom/Makefile    |   2 +-
- pc-bios/optionrom/linuxboot.S | 195 ----------------------------------
- 4 files changed, 2 insertions(+), 199 deletions(-)
- delete mode 100644 pc-bios/optionrom/linuxboot.S
+ include/hw/i386/pc.h | 3 ---
+ hw/i386/pc.c         | 8 --------
+ 2 files changed, 11 deletions(-)
 
+diff --git a/include/hw/i386/pc.h b/include/hw/i386/pc.h
+index a3de3e9560d..4fb2033bc54 100644
+--- a/include/hw/i386/pc.h
++++ b/include/hw/i386/pc.h
+@@ -292,9 +292,6 @@ extern const size_t pc_compat_2_8_len;
+ extern GlobalProperty pc_compat_2_7[];
+ extern const size_t pc_compat_2_7_len;
+ 
+-extern GlobalProperty pc_compat_2_6[];
+-extern const size_t pc_compat_2_6_len;
+-
+ #define DEFINE_PC_MACHINE(suffix, namestr, initfn, optsfn) \
+     static void pc_machine_##suffix##_class_init(ObjectClass *oc, \
+                                                  const void *data) \
 diff --git a/hw/i386/pc.c b/hw/i386/pc.c
-index 524d2fd98e8..4e6fe68e2e0 100644
+index 4e6fe68e2e0..65a11ea8f99 100644
 --- a/hw/i386/pc.c
 +++ b/hw/i386/pc.c
-@@ -654,8 +654,7 @@ void xen_load_linux(PCMachineState *pcms)
+@@ -251,14 +251,6 @@ GlobalProperty pc_compat_2_7[] = {
+ };
+ const size_t pc_compat_2_7_len = G_N_ELEMENTS(pc_compat_2_7);
  
-     x86_load_linux(x86ms, fw_cfg, PC_FW_DATA, pcmc->pvh_enabled);
-     for (i = 0; i < nb_option_roms; i++) {
--        assert(!strcmp(option_rom[i].name, "linuxboot.bin") ||
--               !strcmp(option_rom[i].name, "linuxboot_dma.bin") ||
-+        assert(!strcmp(option_rom[i].name, "linuxboot_dma.bin") ||
-                !strcmp(option_rom[i].name, "pvh.bin") ||
-                !strcmp(option_rom[i].name, "multiboot_dma.bin"));
-         rom_add_option(option_rom[i].name, option_rom[i].bootindex);
-diff --git a/pc-bios/meson.build b/pc-bios/meson.build
-index f2d4dc416a4..39a7fea332e 100644
---- a/pc-bios/meson.build
-+++ b/pc-bios/meson.build
-@@ -63,7 +63,6 @@ blobs = [
-   'efi-vmxnet3.rom',
-   'qemu-nsis.bmp',
-   'multiboot_dma.bin',
--  'linuxboot.bin',
-   'linuxboot_dma.bin',
-   'kvmvapic.bin',
-   'pvh.bin',
-diff --git a/pc-bios/optionrom/Makefile b/pc-bios/optionrom/Makefile
-index 1183ef88922..e694c7aac00 100644
---- a/pc-bios/optionrom/Makefile
-+++ b/pc-bios/optionrom/Makefile
-@@ -2,7 +2,7 @@ include config.mak
- SRC_DIR := $(TOPSRC_DIR)/pc-bios/optionrom
- VPATH = $(SRC_DIR)
- 
--all: multiboot_dma.bin linuxboot.bin linuxboot_dma.bin kvmvapic.bin pvh.bin
-+all: multiboot_dma.bin linuxboot_dma.bin kvmvapic.bin pvh.bin
- # Dummy command so that make thinks it has done something
- 	@true
- 
-diff --git a/pc-bios/optionrom/linuxboot.S b/pc-bios/optionrom/linuxboot.S
-deleted file mode 100644
-index ba821ab922d..00000000000
---- a/pc-bios/optionrom/linuxboot.S
-+++ /dev/null
-@@ -1,195 +0,0 @@
--/*
-- * Linux Boot Option ROM
-- *
-- * This program is free software; you can redistribute it and/or modify
-- * it under the terms of the GNU General Public License as published by
-- * the Free Software Foundation; either version 2 of the License, or
-- * (at your option) any later version.
-- *
-- * This program is distributed in the hope that it will be useful,
-- * but WITHOUT ANY WARRANTY; without even the implied warranty of
-- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-- * GNU General Public License for more details.
-- *
-- * You should have received a copy of the GNU General Public License
-- * along with this program; if not, see <http://www.gnu.org/licenses/>.
-- *
-- * Copyright Novell Inc, 2009
-- *   Authors: Alexander Graf <agraf@suse.de>
-- *
-- * Based on code in hw/pc.c.
-- */
+-GlobalProperty pc_compat_2_6[] = {
+-    { TYPE_X86_CPU, "cpuid-0xb", "off" },
+-    { "vmxnet3", "romfile", "" },
+-    { TYPE_X86_CPU, "fill-mtrr-mask", "off" },
+-    { "apic-common", "legacy-instance-id", "on", }
+-};
+-const size_t pc_compat_2_6_len = G_N_ELEMENTS(pc_compat_2_6);
 -
--#include "optionrom.h"
--
--#define BOOT_ROM_PRODUCT "Linux loader"
--
--BOOT_ROM_START
--
--run_linuxboot:
--
--	cli
--	cld
--
--	jmp		copy_kernel
--boot_kernel:
--
--	read_fw		FW_CFG_SETUP_ADDR
--
--	mov		%eax, %ebx
--	shr		$4, %ebx
--
--	/* All segments contain real_addr */
--	mov		%bx, %ds
--	mov		%bx, %es
--	mov		%bx, %fs
--	mov		%bx, %gs
--	mov		%bx, %ss
--
--	/* CX = CS we want to jump to */
--	add		$0x20, %bx
--	mov		%bx, %cx
--
--	/* SP = cmdline_addr-real_addr-16 */
--	read_fw		FW_CFG_CMDLINE_ADDR
--	mov		%eax, %ebx
--	read_fw		FW_CFG_SETUP_ADDR
--	sub		%eax, %ebx
--	sub		$16, %ebx
--	mov		%ebx, %esp
--
--	/* Build indirect lret descriptor */
--	pushw		%cx		/* CS */
--	xor		%ax, %ax
--	pushw		%ax		/* IP = 0 */
--
--	/* Clear registers */
--	xor		%eax, %eax
--	xor		%ebx, %ebx
--	xor		%ecx, %ecx
--	xor		%edx, %edx
--	xor		%edi, %edi
--	xor		%ebp, %ebp
--
--	/* Jump to Linux */
--	lret
--
--
--copy_kernel:
--	/* Read info block in low memory (0x10000 or 0x90000) */
--	read_fw		FW_CFG_SETUP_ADDR
--	shr		$4, %eax
--	mov		%eax, %es
--	xor		%edi, %edi
--	read_fw_blob_addr32_edi(FW_CFG_SETUP)
--
--	cmpw            $0x203, %es:0x206      // if protocol >= 0x203
--	jae             1f                     // have initrd_max
--	movl            $0x37ffffff, %es:0x22c // else assume 0x37ffffff
--1:
--
--	/* Check if using kernel-specified initrd address */
--	read_fw		FW_CFG_INITRD_ADDR
--	mov		%eax, %edi             // (load_kernel wants it in %edi)
--	read_fw		FW_CFG_INITRD_SIZE     // find end of initrd
--	add		%edi, %eax
--	xor		%es:0x22c, %eax        // if it matches es:0x22c
--	and		$-4096, %eax           // (apart from padding for page)
--	jz		load_kernel            // then initrd is not at top
--					       // of memory
--
--	/* pc.c placed the initrd at end of memory.  Compute a better
--	 * initrd address based on e801 data.
--	 */
--	mov		$0xe801, %ax
--	xor		%cx, %cx
--	xor		%dx, %dx
--	int		$0x15
--
--	/* Output could be in AX/BX or CX/DX */
--	or		%cx, %cx
--	jnz		1f
--	or		%dx, %dx
--	jnz		1f
--	mov		%ax, %cx
--	mov		%bx, %dx
--1:
--
--	or		%dx, %dx
--	jnz		2f
--	addw		$1024, %cx            /* add 1 MB */
--	movzwl		%cx, %edi
--	shll		$10, %edi             /* convert to bytes */
--	jmp		3f
--
--2:
--	addw		$16777216 >> 16, %dx  /* add 16 MB */
--	movzwl		%dx, %edi
--	shll		$16, %edi             /* convert to bytes */
--
--3:
--	read_fw         FW_CFG_INITRD_SIZE
--	subl            %eax, %edi
--	andl            $-4096, %edi          /* EDI = start of initrd */
--	movl		%edi, %es:0x218       /* put it in the header */
--
--load_kernel:
--	/* We need to load the kernel into memory we can't access in 16 bit
--	   mode, so let's get into 32 bit mode, write the kernel and jump
--	   back again. */
--
--	/* Reserve space on the stack for our GDT descriptor. */
--	mov             %esp, %ebp
--	sub             $16, %esp
--
--	/* Now create the GDT descriptor */
--	movw		$((3 * 8) - 1), -16(%bp)
--	mov		%cs, %eax
--	movzwl		%ax, %eax
--	shl		$4, %eax
--	addl		$gdt, %eax
--	movl		%eax, -14(%bp)
--
--	/* And load the GDT */
--	data32 lgdt	-16(%bp)
--	mov		%ebp, %esp
--
--	/* Get us to protected mode now */
--	mov		$1, %eax
--	mov		%eax, %cr0
--
--	/* So we can set ES to a 32-bit segment */
--	mov		$0x10, %eax
--	mov		%eax, %es
--
--	/* We're now running in 16-bit CS, but 32-bit ES! */
--
--	/* Load kernel and initrd */
--	read_fw_blob_addr32_edi(FW_CFG_INITRD)
--	read_fw_blob_addr32(FW_CFG_KERNEL)
--	read_fw_blob_addr32(FW_CFG_CMDLINE)
--
--	/* And now jump into Linux! */
--	mov		$0, %eax
--	mov		%eax, %cr0
--
--	/* ES = CS */
--	mov		%cs, %ax
--	mov		%ax, %es
--
--	jmp		boot_kernel
--
--/* Variables */
--
--.align 4, 0
--gdt:
--	/* 0x00 */
--.byte	0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
--
--	/* 0x08: code segment (base=0, limit=0xfffff, type=32bit code exec/read, DPL=0, 4k) */
--.byte	0xff, 0xff, 0x00, 0x00, 0x00, 0x9a, 0xcf, 0x00
--
--	/* 0x10: data segment (base=0, limit=0xfffff, type=32bit data read/write, DPL=0, 4k) */
--.byte	0xff, 0xff, 0x00, 0x00, 0x00, 0x92, 0xcf, 0x00
--
--BOOT_ROM_END
+ /*
+  * @PC_FW_DATA:
+  * Size of the chunk of memory at the top of RAM for the BIOS ACPI tables
 -- 
 2.47.1
 
