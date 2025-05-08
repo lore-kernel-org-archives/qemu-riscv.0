@@ -4,86 +4,110 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C6E75C3ABC0
-	for <qemu-riscv@archiver.kernel.org>; Thu,  8 May 2025 09:49:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CF7F4C3ABC0
+	for <qemu-riscv@archiver.kernel.org>; Thu,  8 May 2025 13:37:11 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uCxs7-0000Br-WB; Thu, 08 May 2025 05:48:56 -0400
+	id 1uD1QV-0006B6-H1; Thu, 08 May 2025 09:36:39 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <jim.shu@sifive.com>)
- id 1uCxs6-0000B4-4o
- for qemu-riscv@nongnu.org; Thu, 08 May 2025 05:48:54 -0400
-Received: from mail-pj1-x1036.google.com ([2607:f8b0:4864:20::1036])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1uD1QS-0006AA-En
+ for qemu-riscv@nongnu.org; Thu, 08 May 2025 09:36:36 -0400
+Received: from mail-pg1-x532.google.com ([2607:f8b0:4864:20::532])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <jim.shu@sifive.com>)
- id 1uCxs4-0000YO-Av
- for qemu-riscv@nongnu.org; Thu, 08 May 2025 05:48:53 -0400
-Received: by mail-pj1-x1036.google.com with SMTP id
- 98e67ed59e1d1-30aa3980af5so1064073a91.0
- for <qemu-riscv@nongnu.org>; Thu, 08 May 2025 02:48:51 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1uD1QP-0003iN-BZ
+ for qemu-riscv@nongnu.org; Thu, 08 May 2025 09:36:36 -0400
+Received: by mail-pg1-x532.google.com with SMTP id
+ 41be03b00d2f7-b200178c011so392792a12.3
+ for <qemu-riscv@nongnu.org>; Thu, 08 May 2025 06:36:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1746697730; x=1747302530; darn=nongnu.org;
- h=message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ d=linaro.org; s=google; t=1746711391; x=1747316191; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=HPZEa3YzDTFrkeSvop+B/Cvd4GOwtfD9tuIAMpr1/ys=;
- b=PbQ3O5Q4UXcTDWQAZ+7u6h3ofvaHbvmKSxN/IUV3FEhoMRtHjiFx0VZScjE7b9NiBT
- VUVRIAHN0Niv9CUlR1GfEN4bAnc+G0JRnvXz5AAUJLQuSuCWr+j60zK/z0/05sN4dWGZ
- RlO5XhWajp6AKz3T/wpWJFRcW3HOfP2+vkR35hpbJ2ejiKGXEB8EUifVRy6rRir85kT7
- W5wJeRNjTs+SCsdyh9i+oywQJOltF+jFAHqdOY2BSUbrz8uBBEAaoNKJsIuw6pglbDbd
- hmv7bN0tvZlwzS4XWuh0Jlk8lDIyw/9AND53SIamgCMU9MSTQTS/lLP6mxfLE7Y2PPsQ
- PYhg==
+ bh=XP+ZGWOYnOiwfrA3/LUhv7eqSLRqDyC8l2H8ehhMIaA=;
+ b=aE/K7ScaiJjh+A9fvZjiGuJUAI0/3374/OqP+zRb/9Td+ff6F49YmgMs5dheZ1rZub
+ WNv+ZhwMv2j4C5SJdDlAxbbYzLWgbsbSFUPV3bA3ju7Czww3H6ypoTkO1QNFFHXR0U6w
+ v7EzyKr+ePKxDleGqpHqKM09JufYAiQPQ8vdDYnWXwgLeSqoeTziHlD6BlGCGQn39hA8
+ SZNyEvhoD7vyqpJI+faHBjgtfxU0JsiAlAZiqoUxHAiSxmu2pPmaLU2QRIrb5/Eag/h8
+ eV3fI7Y/R+7AqFsTu9ZYs8RQlwvoOR4kiyvv3nuBpq0LR5Ko71rRIRjilLF6ymMrQdKf
+ STtA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1746697730; x=1747302530;
- h=message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ d=1e100.net; s=20230601; t=1746711391; x=1747316191;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=HPZEa3YzDTFrkeSvop+B/Cvd4GOwtfD9tuIAMpr1/ys=;
- b=piB3UEIbZb0Ixa9pdaC+bhKwAbHlVJan/DGlgaSO0i0IamEyFFtkX2GuVNPtzg7KYd
- EuzrHmVM0vXk5yMA40/LcIv7zV5a5nlj+OFTQj5c2C4RtVDUIbMQTZDW16TT4SqINIuc
- SOWH1PUK9WXt3FaryBgfFJ5NqsgKaOh6+6HJxh1FEeRD/SxhD7ZhcK5nTdwDyZeqmFQ8
- 6DNHy3l0fF2Zkwe5oNP409WoYIKHAkELWh5g9dQJ1iKdXOyRHih+Jk5fEjR0a846AoKt
- +arOo4RRKvov1k9NiRDU/uuDqLEwLdF2yjFuqrDf5zx9pljSz1IS15vztNN88cixJ8G5
- kVkQ==
+ bh=XP+ZGWOYnOiwfrA3/LUhv7eqSLRqDyC8l2H8ehhMIaA=;
+ b=Ix1Onk0Xi0EUN7DPYt/93lbKvBQniEucGkHHeeO8Ur0o6R0nB436KnZ/gYIy2i3G1y
+ OkNAib43TAK9A00SuybYv520K4/RQ44GGCNv4zzjcNsBaXA6afqf2ECFdwKUUQlFd8lw
+ P8mvp52kjEJC2GiNAPb6xD57mFmv5t6qpghvmyNvjqqYan9MF1BsyhDMDe/jQ+bPZ6Vm
+ qHQCf+s0Vpn7S9mP6kFeWWXHIethNnqS46nvdBr6Y3tK6Nqf4CW/KJ4bhzUloybaDLYZ
+ 9BFUN07kv9CcWDNojHKGuk9t2i4+g/oMrNDtqygat+ZcMQpsAOBs1UAHT5p3Wm8QqlZ5
+ nPaw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWIblF3QY/BXROaqjpId+OyX1s+D1N/CZWy+lHztjTTVfBHt5wFb5dTl9JI4we1iwKUFAJlM6WJVv6U@nongnu.org
-X-Gm-Message-State: AOJu0YwRpDZ74hY+m10T7RrDsQzF8sdgDOH18V0e8+qI1w4OIa3dw3uh
- 3Ygw2hYiRD+ryHj/9oRm1gdIrAlca+c5XdpT+stkFb0hAbxUc7lQ3653Cz3+icg=
-X-Gm-Gg: ASbGncuYnS2/GUz43Xku86vFb/yuUzk9lzgjjjwV5eP2SrqO2ZTViJN5pqSy49j9i3X
- UPo/9EqvE7CDd8cR5p9VdZjaSIB0G+WqkQmO5JRsNHblyrBy9gPAave8O2F7xlS5lsZZ082a72W
- zSvPnEUi4o1EpI0uQAJ3ElIjtKsZnM+4WBveW1lS+4Ih/r7qL6dGmy3WcD+EV1hwLNaqS3NmTr2
- X8kU0uHOy6JhlCCWUAbMrvKeHxBXs36hflQJJm2HeStzJ6FhP2Ab5zucahc+awpgjGfELbykyZu
- qaHg0sY+nAHbbaQTm8hvkf84vYpInAOBBOpBpt8KuaDgtmiCxRungjORHs/8oag=
-X-Google-Smtp-Source: AGHT+IEL5cv2g4mPZjisZ7tTok6cMB4BxU5V9aGj/fIibPpAhPLaHRqmMDDU9Z9Ll/+FOagFPQwHlQ==
-X-Received: by 2002:a17:90a:da87:b0:2ff:72f8:3708 with SMTP id
- 98e67ed59e1d1-30aac1adc25mr11354915a91.17.1746697730103; 
- Thu, 08 May 2025 02:48:50 -0700 (PDT)
-Received: from hsinchu26.internal.sifive.com ([210.176.154.34])
- by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-30ad4fe1f47sm1730688a91.38.2025.05.08.02.48.48
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 08 May 2025 02:48:49 -0700 (PDT)
-From: Jim Shu <jim.shu@sifive.com>
-To: qemu-devel@nongnu.org,
-	qemu-riscv@nongnu.org
-Cc: Palmer Dabbelt <palmer@dabbelt.com>,
+ AJvYcCWPj24T7z/9Ox8KK01ENEfT3YBes6saj+Jib+BEHy0yypU6IhQuwEuVn7a6DlxEKa0n8LO2HZMzlmor@nongnu.org
+X-Gm-Message-State: AOJu0Yx9guymzlpWNVK1XXUGcXRQKeVaUG3LKQegKGp/ZTdCxS7PQ7Su
+ v5Zvaq2vqiuJThpbdISLCvxw7LIw5OafqaAFOE/8YE3Vwgxjf6rz/Cv+2+guCqw=
+X-Gm-Gg: ASbGncvyzkUjz21T3NsxQxTAmRWiYOVmxZRIQPEzO/a0BTQWSeuG2BHi3EJXagtTt9X
+ yg69nG6gZii75Ypw/ZxV5QK1XKh3VpeHWIuyQXa5J0jZij3eyQvnPX7RV0yvKNxPm5pIeQnBN6X
+ bz9ccSxztbnNTKYEtm0pfNjVGPQDiV1pmRniMvTJMJMLWnpL1aT63/52axXEi76xN8yuXo5npbe
+ BLUBAhp2lGi8cQl/cwlODirOroiwnuT9xuN8Mal0o5JyaSgNO7XOBKBMgnDfAde3aXGZDcXiSkV
+ uhdO+Jfckb7fh6mt5sZezWT/NCzxuuu87vY4HEfo3aOb0YFKEl7u5NTy/derr4udZuKp6WI5XM/
+ IpV67IYyP1i3O5Pw=
+X-Google-Smtp-Source: AGHT+IERcd0wpsVEg7UAq/VxS+1i8htfAwkqBnDOgXkJzjD1MEkNI1SisofAeEu+2dRvjUVX/IEO2A==
+X-Received: by 2002:a05:6a20:9f48:b0:1f5:535c:82dc with SMTP id
+ adf61e73a8af0-2148d3124f5mr10576405637.42.1746711390803; 
+ Thu, 08 May 2025 06:36:30 -0700 (PDT)
+Received: from localhost.localdomain (88-187-86-199.subs.proxad.net.
+ [88.187.86.199]) by smtp.gmail.com with ESMTPSA id
+ 41be03b00d2f7-b1fb3c6a590sm11373659a12.66.2025.05.08.06.36.16
+ (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
+ Thu, 08 May 2025 06:36:30 -0700 (PDT)
+From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+To: qemu-devel@nongnu.org
+Cc: Richard Henderson <richard.henderson@linaro.org>, kvm@vger.kernel.org,
+ Sergio Lopez <slp@redhat.com>, Gerd Hoffmann <kraxel@redhat.com>,
+ Peter Maydell <peter.maydell@linaro.org>,
+ Laurent Vivier <lvivier@redhat.com>, Jiaxun Yang <jiaxun.yang@flygoat.com>,
+ Yi Liu <yi.l.liu@intel.com>, "Michael S. Tsirkin" <mst@redhat.com>,
+ Eduardo Habkost <eduardo@habkost.net>,
+ Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
  Alistair Francis <alistair.francis@wdc.com>,
- Weiwei Li <liwei1518@gmail.com>,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, Jim Shu <jim.shu@sifive.com>
-Subject: [PATCH v2] target/riscv: support atomic instruction fetch (Ziccif)
-Date: Thu,  8 May 2025 17:48:38 +0800
-Message-Id: <20250508094838.19394-1-jim.shu@sifive.com>
-X-Mailer: git-send-email 2.17.1
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1036;
- envelope-from=jim.shu@sifive.com; helo=mail-pj1-x1036.google.com
+ Marcelo Tosatti <mtosatti@redhat.com>, qemu-riscv@nongnu.org,
+ Weiwei Li <liwei1518@gmail.com>, Amit Shah <amit@kernel.org>,
+ Zhao Liu <zhao1.liu@intel.com>, Yanan Wang <wangyanan55@huawei.com>,
+ Helge Deller <deller@gmx.de>, Palmer Dabbelt <palmer@dabbelt.com>,
+ Ani Sinha <anisinha@redhat.com>, Igor Mammedov <imammedo@redhat.com>,
+ Fabiano Rosas <farosas@suse.de>, Paolo Bonzini <pbonzini@redhat.com>,
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ =?UTF-8?q?Cl=C3=A9ment=20Mathieu--Drif?= <clement.mathieu--drif@eviden.com>,
+ qemu-arm@nongnu.org,
+ =?UTF-8?q?Marc-Andr=C3=A9=20Lureau?= <marcandre.lureau@redhat.com>,
+ Huacai Chen <chenhuacai@kernel.org>, Jason Wang <jasowang@redhat.com>,
+ Mark Cave-Ayland <mark.caveayland@nutanix.com>,
+ Thomas Huth <thuth@redhat.com>
+Subject: [PATCH v4 01/27] hw/i386/pc: Remove deprecated pc-q35-2.6 and
+ pc-i440fx-2.6 machines
+Date: Thu,  8 May 2025 15:35:24 +0200
+Message-ID: <20250508133550.81391-2-philmd@linaro.org>
+X-Mailer: git-send-email 2.47.1
+In-Reply-To: <20250508133550.81391-1-philmd@linaro.org>
+References: <20250508133550.81391-1-philmd@linaro.org>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::532;
+ envelope-from=philmd@linaro.org; helo=mail-pg1-x532.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -99,114 +123,68 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Support 4-byte atomic instruction fetch when instruction is natural
-aligned.
+These machines has been supported for a period of more than 6 years.
+According to our versioned machine support policy (see commit
+ce80c4fa6ff "docs: document special exception for machine type
+deprecation & removal") they can now be removed.
 
-Current implementation is not atomic because it loads instruction twice
-for first and last 2 bytes. We load 4 bytes at once to keep the
-atomicity. This instruction preload method only applys when instruction
-is 4-byte aligned. If instruction is unaligned, it could be across pages
-so that preload will trigger additional page fault.
-
-We encounter this issue when doing pressure test of enabling & disabling
-Linux kernel ftrace. Ftrace with kernel preemption requires concurrent
-modification and execution of instruction, so non-atomic instruction
-fetch will cause the race condition. We may fetch the wrong instruction
-which is the mixing of 2 instructions.
-
-Also, RISC-V Profile wants to provide this feature by HW. RVA20U64
-Ziccif protects the atomicity of instruction fetch when it is
-natural aligned.
-
-This commit depends on the atomic read support of translator_ld in
-the commit 6a9dfe1984b0c593fb0ddb52d4e70832e6201dd6.
-
-Signed-off-by: Jim Shu <jim.shu@sifive.com>
-Reviewed-by: Frank Chang <frank.chang@sifive.com>
+Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+Reviewed-by: Mark Cave-Ayland <mark.caveayland@nutanix.com>
+Reviewed-by: Thomas Huth <thuth@redhat.com>
+Reviewed-by: Zhao Liu <zhao1.liu@intel.com>
 ---
- target/riscv/translate.c | 46 +++++++++++++++++++++++++++++-----------
- 1 file changed, 34 insertions(+), 12 deletions(-)
+ hw/i386/pc_piix.c | 14 --------------
+ hw/i386/pc_q35.c  | 14 --------------
+ 2 files changed, 28 deletions(-)
 
-diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-index 85128f997b..77edf04803 100644
---- a/target/riscv/translate.c
-+++ b/target/riscv/translate.c
-@@ -1222,13 +1222,35 @@ const RISCVDecoder decoder_table[] = {
+diff --git a/hw/i386/pc_piix.c b/hw/i386/pc_piix.c
+index 7a62bb06500..98a118fd4a0 100644
+--- a/hw/i386/pc_piix.c
++++ b/hw/i386/pc_piix.c
+@@ -764,20 +764,6 @@ static void pc_i440fx_machine_2_7_options(MachineClass *m)
  
- const size_t decoder_table_size = ARRAY_SIZE(decoder_table);
+ DEFINE_I440FX_MACHINE(2, 7);
  
--static void decode_opc(CPURISCVState *env, DisasContext *ctx, uint16_t opcode)
-+static void decode_opc(CPURISCVState *env, DisasContext *ctx)
+-static void pc_i440fx_machine_2_6_options(MachineClass *m)
+-{
+-    X86MachineClass *x86mc = X86_MACHINE_CLASS(m);
+-    PCMachineClass *pcmc = PC_MACHINE_CLASS(m);
+-
+-    pc_i440fx_machine_2_7_options(m);
+-    pcmc->legacy_cpu_hotplug = true;
+-    x86mc->fwcfg_dma_enabled = false;
+-    compat_props_add(m->compat_props, hw_compat_2_6, hw_compat_2_6_len);
+-    compat_props_add(m->compat_props, pc_compat_2_6, pc_compat_2_6_len);
+-}
+-
+-DEFINE_I440FX_MACHINE(2, 6);
+-
+ #ifdef CONFIG_ISAPC
+ static void isapc_machine_options(MachineClass *m)
  {
-+    uint32_t opcode;
-+    bool pc_is_4byte_align = ((ctx->base.pc_next % 4) == 0);
-+
-     ctx->virt_inst_excp = false;
--    ctx->cur_insn_len = insn_len(opcode);
-+    if (pc_is_4byte_align) {
-+        /*
-+         * Load 4 bytes at once to make instruction fetch atomically.
-+         *
-+         * Note: When pc is 4-byte aligned, 4-byte instruction wouldn't be
-+         * across pages. We could preload 4 bytes instruction no matter
-+         * real one is 2 or 4 bytes. Instruction preload wouldn't trigger
-+         * additional page fault.
-+         */
-+        opcode = translator_ldl(env, &ctx->base, ctx->base.pc_next);
-+    } else {
-+        /*
-+         * For unaligned pc, instruction preload may trigger additional
-+         * page fault so we only load 2 bytes here.
-+         */
-+        opcode = (uint32_t) translator_lduw(env, &ctx->base, ctx->base.pc_next);
-+    }
-+    ctx->ol = ctx->xl;
-+
-+    ctx->cur_insn_len = insn_len((uint16_t)opcode);
-     /* Check for compressed insn */
-     if (ctx->cur_insn_len == 2) {
--        ctx->opcode = opcode;
-+        ctx->opcode = (uint16_t)opcode;
-         /*
-          * The Zca extension is added as way to refer to instructions in the C
-          * extension that do not include the floating-point loads and stores
-@@ -1238,15 +1260,17 @@ static void decode_opc(CPURISCVState *env, DisasContext *ctx, uint16_t opcode)
-             return;
-         }
-     } else {
--        uint32_t opcode32 = opcode;
--        opcode32 = deposit32(opcode32, 16, 16,
--                             translator_lduw(env, &ctx->base,
--                                             ctx->base.pc_next + 2));
--        ctx->opcode = opcode32;
-+        if (!pc_is_4byte_align) {
-+            /* Load last 2 bytes of instruction here */
-+            opcode = deposit32(opcode, 16, 16,
-+                               translator_lduw(env, &ctx->base,
-+                                               ctx->base.pc_next + 2));
-+        }
-+        ctx->opcode = opcode;
+diff --git a/hw/i386/pc_q35.c b/hw/i386/pc_q35.c
+index 33211b1876f..b7ffb5f1216 100644
+--- a/hw/i386/pc_q35.c
++++ b/hw/i386/pc_q35.c
+@@ -658,17 +658,3 @@ static void pc_q35_machine_2_7_options(MachineClass *m)
+ }
  
-         for (guint i = 0; i < ctx->decoders->len; ++i) {
-             riscv_cpu_decode_fn func = g_ptr_array_index(ctx->decoders, i);
--            if (func(ctx, opcode32)) {
-+            if (func(ctx, opcode)) {
-                 return;
-             }
-         }
-@@ -1324,10 +1348,8 @@ static void riscv_tr_translate_insn(DisasContextBase *dcbase, CPUState *cpu)
- {
-     DisasContext *ctx = container_of(dcbase, DisasContext, base);
-     CPURISCVState *env = cpu_env(cpu);
--    uint16_t opcode16 = translator_lduw(env, &ctx->base, ctx->base.pc_next);
- 
--    ctx->ol = ctx->xl;
--    decode_opc(env, ctx, opcode16);
-+    decode_opc(env, ctx);
-     ctx->base.pc_next += ctx->cur_insn_len;
- 
-     /*
+ DEFINE_Q35_MACHINE(2, 7);
+-
+-static void pc_q35_machine_2_6_options(MachineClass *m)
+-{
+-    X86MachineClass *x86mc = X86_MACHINE_CLASS(m);
+-    PCMachineClass *pcmc = PC_MACHINE_CLASS(m);
+-
+-    pc_q35_machine_2_7_options(m);
+-    pcmc->legacy_cpu_hotplug = true;
+-    x86mc->fwcfg_dma_enabled = false;
+-    compat_props_add(m->compat_props, hw_compat_2_6, hw_compat_2_6_len);
+-    compat_props_add(m->compat_props, pc_compat_2_6, pc_compat_2_6_len);
+-}
+-
+-DEFINE_Q35_MACHINE(2, 6);
 -- 
-2.17.1
+2.47.1
 
 
