@@ -4,66 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0533FC3ABC0
-	for <qemu-riscv@archiver.kernel.org>; Thu,  8 May 2025 13:44:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CB1AFC3ABC0
+	for <qemu-riscv@archiver.kernel.org>; Thu,  8 May 2025 13:44:20 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uD1Xa-0007db-TK; Thu, 08 May 2025 09:43:59 -0400
+	id 1uD1Xv-0000cW-NJ; Thu, 08 May 2025 09:44:19 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1uD1XZ-0007XX-0i
- for qemu-riscv@nongnu.org; Thu, 08 May 2025 09:43:57 -0400
-Received: from mail-pf1-x435.google.com ([2607:f8b0:4864:20::435])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1uD1Xu-0000VQ-Id
+ for qemu-riscv@nongnu.org; Thu, 08 May 2025 09:44:18 -0400
+Received: from mail-pg1-x529.google.com ([2607:f8b0:4864:20::529])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1uD1XW-0004uE-Kz
- for qemu-riscv@nongnu.org; Thu, 08 May 2025 09:43:56 -0400
-Received: by mail-pf1-x435.google.com with SMTP id
- d2e1a72fcca58-736c3e7b390so954879b3a.2
- for <qemu-riscv@nongnu.org>; Thu, 08 May 2025 06:43:53 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1uD1Xs-0004ww-FQ
+ for qemu-riscv@nongnu.org; Thu, 08 May 2025 09:44:18 -0400
+Received: by mail-pg1-x529.google.com with SMTP id
+ 41be03b00d2f7-b074d908e56so613702a12.2
+ for <qemu-riscv@nongnu.org>; Thu, 08 May 2025 06:44:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1746711832; x=1747316632; darn=nongnu.org;
+ d=linaro.org; s=google; t=1746711855; x=1747316655; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Iz56OqXDxt7nqC4LwA+a7OYiuZlEyLYttSp20fJi6+I=;
- b=RYMclTj9lOI1cUlMD3feG4ufuIXaaBlvI0giA9qYKpOCsUval6rcNOdTDHw8tC23RP
- d8J0PTMhRaie4r6CEVA/osf2C8RzHcKs1Rl5bQ8heX/vXh+EoW9DTqTVajkDt17Gw4E/
- nXDVGIX3QGR+xYFYa0P/PDObQYf/ZPqzEP6sYe+sZtJucVJT2o17ALVBVmWC8wff7lXJ
- VJDlZ3xKQAvI+R/jxb7Zq51gvYsj7Keg9B8eWr1woVvvNCMB73xnukJakGZhEKCaqMD8
- CpZ3mYMjQ9DNg4fdvshJTpXa+DWz3Alkylx56utGoxZjTmQqLww9yFZqt80XVQrbJydg
- 951w==
+ bh=gMLC32cD5rQa4ngqh9n69biVbtvyYihadQEH/qk7LQg=;
+ b=dTWvQ8bjrLumrHb0Cg/sgd0tPT7FLfbCLx5UwPeoOKUxxcgM6Zg0hVNtW2fj61CmMh
+ Pt4aMkvbBJ/DzW5apd3hv5W6yTmUe7bw+JTMutNIgXxTCyusKWjwR1u8L8zA48dJP7aH
+ +IPK04VXLkQzBv5l50a/ue/CwL398lkL7EjEXgh8zQukJSwcylfbUld/42kpbzhgtmX4
+ tZ3PHvyQTJWL4EFuHPfoVv8bWTowfb3ixt6QCLqHhZMKFr4WSXbWl5fCc7fXlidLlRXA
+ jrGQNKfQUsmIgDeh9uvseMR+l6N1dzwQrlY8wxX6EDeuw7DSIDgCxpUxSfCTA9zQOBRa
+ FnJw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1746711832; x=1747316632;
+ d=1e100.net; s=20230601; t=1746711855; x=1747316655;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Iz56OqXDxt7nqC4LwA+a7OYiuZlEyLYttSp20fJi6+I=;
- b=rKmIIA9yuRv+aTo8jaQqC92xD9TuAXplWVHG3acukqrn2GwsBmqvddwtredszQmXdR
- KpAI2wpkh8IsX2fGSsDyELekxfy/0SWrsFpj2U/ZTDzvg2tGeNh5WPJP2wer346V1Tkh
- MKbP9v6HSqKC8Kp7LZPGZ5xqQOidlgxidB7RZP0Ed3fMHgviLvr3hOiUDn4H6vwqZIyq
- xTqsZbf8EPEhxxHDPiUbSZWBLTdTA596yuWRzjfaALeZFQzlkHk7zNKEZM/eMMbW756e
- r4G30n/QlIUrKi7C1r36ckOSdXzFh5+lvq4hCX5l2ZUtO0l6EiHYq+pSUte4AVrVP0v8
- XoOQ==
+ bh=gMLC32cD5rQa4ngqh9n69biVbtvyYihadQEH/qk7LQg=;
+ b=AO0SR8wrKAai7tn4bfpzs1/AXDbNRxidItmB38FCsFEq3H8hYhSl8wPMQl2FQoB3tZ
+ YKKK5EZ8VuuhEEwb2bE4l5P8q469vC2baE2Coxm90JI2NZY95fizij+6FMTotXmQSRZI
+ 36qBhKjp/59iexSdgd01Kz5Rcj5y8/vqQBfRrxMOv16tFjp8qsp5TK348kUmttaBDJeS
+ r21XkKh/9OdFTRDZlTDUUj0ZWAFqrNuVybrCh1vkNfHwWI3nETC5haX7HzOldzuoIxSX
+ y5A39Mlr9QT0ZvWGOYu7x+pXHIWps8H5//VU8Xjwmzkv8GzixU4+cDrQU3V0HpUcMLkB
+ Ic4A==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXc2LWBA9Zo7EJHymBa7DpB+pktdqf/Gy9U+GpigFJWgu9shy1FuWiy4EaReLBFUvSWCjYTG9oBXcMV@nongnu.org
-X-Gm-Message-State: AOJu0YzPfg7pV8CvaxYK9INR6br9/08+OMbWzP21N0uf7PLRPTZRDkqP
- mJoTFsfTuTnlRWRqr5Y6P8HG74NvHff0gzwWv7BYX8o+WgrRLYsGlTy9gheHdJY=
-X-Gm-Gg: ASbGncvWXtk67jiCUqZQzN/8mPkUGQGLusmzbH6PUY2KcwdXQXQIoYVJo2PbwDZqdvu
- +/W/hAJ170oFcn34yhABnpnZEWhF5skzOuXsNbJIB92AkWxOZe+OPf0eqant6MEBFLViVk5ZeYR
- juIKBWHNDUApjOoO3cr2IVUdikq/y8vkRZ97o0pPJb+7Cnv7JXaGtT7IRnCzGCixFa7ZZxDGaZx
- P6vRchLx/JGJkO4/l7+jfvgivuAtFDn1kObMfFHXeCQsF9LBRzGX86naO4qu6vK9eWb6FcDHN9X
- lFE9tpl4XbfFp8sYoIpzPdPmilpOnOOQU1GKpOpjUOh/vxjmm2FnmJBQ29F+7gyNnkIM4h+ti9O
- y4MmMOqrD8FKal4I=
-X-Google-Smtp-Source: AGHT+IHYW6laMjiHc6hZ9CXPvMKDRBiIggZW6kdWUwxA5qsOS+e0Hn9w40Bkb0wK958QO+bMwwTmhQ==
-X-Received: by 2002:a05:6a00:418d:b0:736:4e0a:7e82 with SMTP id
- d2e1a72fcca58-740a99ab539mr4600433b3a.10.1746711832328; 
- Thu, 08 May 2025 06:43:52 -0700 (PDT)
+ AJvYcCXZb6BdeDR75xuXJJUHtYjxMYW0y/34sBZm+3qIfeB32uH2cW4Zpb1JQ9ITcy+DOvDe4onLDKa7LuN/@nongnu.org
+X-Gm-Message-State: AOJu0YxhXgxDPlIZiCxI2mQQnuFyF7Yyto8ys8z2M1GzZ0ivX3qg/fEa
+ Ku850BhfeE/M8+iWCWMPLUyy0jE9FMIzBlAOrThtM5uiVxm/5C5gJc8hcS6+XPo=
+X-Gm-Gg: ASbGncvOAXC9U8EoVaYKktrOY+iy2rz6nFipjuPYLtLlARWLJdT54IS/I17X7iQqccp
+ QvbKsliuC4vkdpjuJdfnpwt0JkT0rL5QkxIVd4LUzIJ525rzFT3YpbHFZzy/K6G00n3XIHlIGUL
+ 301tbllh/o9iAM+pKue2TW7kPAve+4VQcGsPScjNYpGGmeI8zZSXnxtLC5cBOUy/6JKpH9Qw8jH
+ a6fRex7vcekQplW54h4LhXa57DuMZ4iDAWQ6dA+aYf+qwDG1bjkO74CLGYgmpwE+LDlEFY/Mvbf
+ dwESvT38oo80LQLw5sczY+wV5e3qJSIH6m+01xC8TBxXuqL44O6odmzRzdGRX7B6Rx/H1cyhq7N
+ PN7TC81UzQle4ogU=
+X-Google-Smtp-Source: AGHT+IHMW98LKLrBk/HrYfcCCVQ80r3nhlUHxeo5FoUvbXLo766SGUMibKHsMA0gfPKgCoMTxObdMg==
+X-Received: by 2002:a05:6a21:6e41:b0:1f5:852a:dd81 with SMTP id
+ adf61e73a8af0-2148d52bbe3mr13246245637.34.1746711854843; 
+ Thu, 08 May 2025 06:44:14 -0700 (PDT)
 Received: from localhost.localdomain (88-187-86-199.subs.proxad.net.
  [88.187.86.199]) by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-7405902154dsm13751300b3a.90.2025.05.08.06.43.37
+ d2e1a72fcca58-74058df2a6csm13272789b3a.81.2025.05.08.06.44.00
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Thu, 08 May 2025 06:43:51 -0700 (PDT)
+ Thu, 08 May 2025 06:44:14 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Richard Henderson <richard.henderson@linaro.org>, kvm@vger.kernel.org,
@@ -87,19 +87,18 @@ Cc: Richard Henderson <richard.henderson@linaro.org>, kvm@vger.kernel.org,
  qemu-arm@nongnu.org,
  =?UTF-8?q?Marc-Andr=C3=A9=20Lureau?= <marcandre.lureau@redhat.com>,
  Huacai Chen <chenhuacai@kernel.org>, Jason Wang <jasowang@redhat.com>,
- Mark Cave-Ayland <mark.caveayland@nutanix.com>,
- Thomas Huth <thuth@redhat.com>
-Subject: [PATCH v4 21/27] hw/audio/pcspk: Remove PCSpkState::migrate field
-Date: Thu,  8 May 2025 15:35:44 +0200
-Message-ID: <20250508133550.81391-22-philmd@linaro.org>
+ Mark Cave-Ayland <mark.caveayland@nutanix.com>
+Subject: [PATCH v4 22/27] hw/core/machine: Remove hw_compat_2_7[] array
+Date: Thu,  8 May 2025 15:35:45 +0200
+Message-ID: <20250508133550.81391-23-philmd@linaro.org>
 X-Mailer: git-send-email 2.47.1
 In-Reply-To: <20250508133550.81391-1-philmd@linaro.org>
 References: <20250508133550.81391-1-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::435;
- envelope-from=philmd@linaro.org; helo=mail-pf1-x435.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::529;
+ envelope-from=philmd@linaro.org; helo=mail-pg1-x529.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -122,57 +121,48 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-The PCSpkState::migrate boolean was only set in the
-pc_compat_2_7[] array, via the 'migrate=off' property.
-We removed all machines using that array, lets remove
-that property, simplifying vmstate_spk[].
+The hw_compat_2_7[] array was only used by the pc-q35-2.7 and
+pc-i440fx-2.7 machines, which got removed. Remove it.
 
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 Reviewed-by: Mark Cave-Ayland <mark.caveayland@nutanix.com>
-Reviewed-by: Thomas Huth <thuth@redhat.com>
 ---
- hw/audio/pcspk.c | 10 ----------
- 1 file changed, 10 deletions(-)
+ include/hw/boards.h | 3 ---
+ hw/core/machine.c   | 9 ---------
+ 2 files changed, 12 deletions(-)
 
-diff --git a/hw/audio/pcspk.c b/hw/audio/pcspk.c
-index a419161b5b1..0e83ba0bf73 100644
---- a/hw/audio/pcspk.c
-+++ b/hw/audio/pcspk.c
-@@ -56,7 +56,6 @@ struct PCSpkState {
-     unsigned int play_pos;
-     uint8_t data_on;
-     uint8_t dummy_refresh_clock;
--    bool migrate;
- };
+diff --git a/include/hw/boards.h b/include/hw/boards.h
+index a881db8e7d6..77707c4376a 100644
+--- a/include/hw/boards.h
++++ b/include/hw/boards.h
+@@ -838,7 +838,4 @@ extern const size_t hw_compat_2_9_len;
+ extern GlobalProperty hw_compat_2_8[];
+ extern const size_t hw_compat_2_8_len;
  
- static const char *s_spk = "pcspk";
-@@ -196,18 +195,10 @@ static void pcspk_realizefn(DeviceState *dev, Error **errp)
-     pcspk_state = s;
- }
- 
--static bool migrate_needed(void *opaque)
--{
--    PCSpkState *s = opaque;
+-extern GlobalProperty hw_compat_2_7[];
+-extern const size_t hw_compat_2_7_len;
 -
--    return s->migrate;
--}
--
- static const VMStateDescription vmstate_spk = {
-     .name = "pcspk",
-     .version_id = 1,
-     .minimum_version_id = 1,
--    .needed = migrate_needed,
-     .fields = (const VMStateField[]) {
-         VMSTATE_UINT8(data_on, PCSpkState),
-         VMSTATE_UINT8(dummy_refresh_clock, PCSpkState),
-@@ -218,7 +209,6 @@ static const VMStateDescription vmstate_spk = {
- static const Property pcspk_properties[] = {
-     DEFINE_AUDIO_PROPERTIES(PCSpkState, card),
-     DEFINE_PROP_UINT32("iobase", PCSpkState, iobase,  0x61),
--    DEFINE_PROP_BOOL("migrate", PCSpkState, migrate,  true),
+ #endif
+diff --git a/hw/core/machine.c b/hw/core/machine.c
+index ce98820f277..bde19a2ff67 100644
+--- a/hw/core/machine.c
++++ b/hw/core/machine.c
+@@ -266,15 +266,6 @@ GlobalProperty hw_compat_2_8[] = {
  };
+ const size_t hw_compat_2_8_len = G_N_ELEMENTS(hw_compat_2_8);
  
- static void pcspk_class_initfn(ObjectClass *klass, const void *data)
+-GlobalProperty hw_compat_2_7[] = {
+-    { "virtio-pci", "page-per-vq", "on" },
+-    { "virtio-serial-device", "emergency-write", "off" },
+-    { "ioapic", "version", "0x11" },
+-    { "intel-iommu", "x-buggy-eim", "true" },
+-    { "virtio-pci", "x-ignore-backend-features", "on" },
+-};
+-const size_t hw_compat_2_7_len = G_N_ELEMENTS(hw_compat_2_7);
+-
+ MachineState *current_machine;
+ 
+ static char *machine_get_kernel(Object *obj, Error **errp)
 -- 
 2.47.1
 
