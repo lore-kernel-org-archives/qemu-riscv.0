@@ -4,66 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1B5E7C3ABC0
-	for <qemu-riscv@archiver.kernel.org>; Thu,  8 May 2025 13:42:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B5B70C3ABC0
+	for <qemu-riscv@archiver.kernel.org>; Thu,  8 May 2025 13:42:55 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uD1Vq-0002ka-NP; Thu, 08 May 2025 09:42:10 -0400
+	id 1uD1WK-0003rE-6H; Thu, 08 May 2025 09:42:40 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1uD1Vp-0002jr-HZ
- for qemu-riscv@nongnu.org; Thu, 08 May 2025 09:42:09 -0400
-Received: from mail-pg1-x532.google.com ([2607:f8b0:4864:20::532])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1uD1W8-0003kg-Q8
+ for qemu-riscv@nongnu.org; Thu, 08 May 2025 09:42:31 -0400
+Received: from mail-pj1-x1032.google.com ([2607:f8b0:4864:20::1032])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1uD1Vj-0004eb-Gi
- for qemu-riscv@nongnu.org; Thu, 08 May 2025 09:42:09 -0400
-Received: by mail-pg1-x532.google.com with SMTP id
- 41be03b00d2f7-af548cb1f83so786249a12.3
- for <qemu-riscv@nongnu.org>; Thu, 08 May 2025 06:42:02 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1uD1W5-0004gZ-JO
+ for qemu-riscv@nongnu.org; Thu, 08 May 2025 09:42:27 -0400
+Received: by mail-pj1-x1032.google.com with SMTP id
+ 98e67ed59e1d1-30a9cd61159so966919a91.1
+ for <qemu-riscv@nongnu.org>; Thu, 08 May 2025 06:42:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1746711721; x=1747316521; darn=nongnu.org;
+ d=linaro.org; s=google; t=1746711744; x=1747316544; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=fvLizXjiSVqZDvieXMhXwGlqnaF81TYck8XbLuFhLlo=;
- b=mXVvzg6HqhzKM+DmrgHd8/SaaSWYIvtsXGxk1NUpcVOIFdOKzY3MLKdgtLMPUdpM5v
- j8CPSG4ACkXcdCQ18Xxvu2hbC9aJhFFXA/h5yuu3wBacOJQcni0OMS7iToZBHlOmrxUh
- 8j8wgukB7h4UjGeOJwqNBrUpDPXWI3EX19gfwQHJ5z3al3ItDk4txOHB8BEA+Ckii4mK
- mRGu9eXt5cJxz7anCexeSlYt7vrSsCBe0iatPfUFBA5iTbOzoYYrQBQbLZUzqZG7mS0s
- 4LzLtKOFKsWAffrsxI/wvRFEkWCEz54i8bm8I5M41PM8avRR5CpEuCxFY5/Bq3Ct/5Hw
- skpw==
+ bh=zEKZAR/VZgMFUr6PYFqtHtppbGxXvaRql4Q5kTcH03k=;
+ b=QDlobytFiUCP5MMBsbHeXpXcF3D7zGK+ybfv/zzhMfY86T0316LdO8RMI8Ak45i26U
+ a6sE/C8hEGADJni5eQ3J81k6AvANmlGEru1ID3fKcJ2N/+Mk2j9vn7a0FUD/L7uhTKfM
+ rCkHjqMhLDUHE2kVATpmEd0h80dK1YqfuWK8WBYe0XZSKrH1TGDKYhz9JGdr2OxvYM41
+ iipdGn+1oP/RDRhnbgJxqKPz9irTeON9Xt66BFO5UEO6b+FWqz2Si0Zf69k6FLeKKCou
+ PMhsmZ1N4KzHrRebgn3UKIiRwcUyA0aqQtSghMIt9ctZkZeF9tn/Y6DMQ4z2RUlJHDTO
+ 3hog==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1746711721; x=1747316521;
+ d=1e100.net; s=20230601; t=1746711744; x=1747316544;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=fvLizXjiSVqZDvieXMhXwGlqnaF81TYck8XbLuFhLlo=;
- b=jQgrSRHkwQusAa8kI7d4YvYyJt6HAC13SG8zGYMpKoXD31hZfdswcQdhb1/eOJR8pk
- CchdsshbL2VWCD1B4iQfJw8ho4BkZIbDhaT56DX/KLScDafz8tRcXeAGnX5RzUaEWBOp
- ZQDsIyghIwnpYnZPy4L9WjwkeJJGgECCDAmPCXm6uy9EFiEFSHr6vrpVwYGOxkorj2kF
- PQ0iWR7tL8nP/qQ3tFWP4DsxiaQb4hj728tFBvy6HJHpxr3gkGiwzCXgMTUkLmPh0Nud
- CXcl6aJOP+k2uHuYSe55OSOUuTikXcYd+QwVWq/uhH8AQ5p59lJ1ViiVx9U/IO1+JJ9B
- K83w==
+ bh=zEKZAR/VZgMFUr6PYFqtHtppbGxXvaRql4Q5kTcH03k=;
+ b=o7r0M19oAfwLuizrCkB+FqMzYp3tSi4nd7af0IaiS6g649qU0RKwNfQr4dYC+F5QXR
+ xBmFjF152lTaHoV/lVmA3Esjfu5bWXPe+WixAMYJiAMwxpvvy2n4vc4NOsWT66QOHBe1
+ 6DTNqMJu4A6A6sRqgVXLGO3X1tj2EjBbccGHIHTC9S7sE9GaXuZnB5GmemZKVMdfVNuP
+ dPdRa8x/v/ZpOC7Cu7/39LOlgHg3pgQF8fE5gbZPT+W+/kOFaZ3V+1uIMxtUJ4PHM/h/
+ SkLBN6YSiPHqgNaslK9243ttgo3yN3H657IZ3O427hv9J3/3fpELqtHVVyix3c/pVamJ
+ ALKQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCX7ysIW3BaWEMb10rvxQz/t0ks+lL+Hh1TaID2DOAhMhvbHJE/V8YIio9dGLKFjZ9c4j4cDaeObeUIb@nongnu.org
-X-Gm-Message-State: AOJu0YwJGxmO97tsGzWbvnICO1ndLWJMGnjaXSR7BKf3COZ3Z3ciPe0r
- IhH6qXy2QojCanl/WBAjw++0ndBVaNrubY5KCPpTQtpJsEd9zp6Uc3U1bkncaHQ=
-X-Gm-Gg: ASbGncuuq1y7kjNZ1jm3D5wPBgzk/mBETF0T4lt3+sOz838l1SbmG2/qHRL6avqWGH9
- goUd8C3SDhOModp9fTF9zl89M3IgRyXwtlXKtGDIv3yZfNVWr6sqShXaMqIQWyHJerI6A+2LwJf
- pat2TLbYh/YkatzjkPWj8UrGK4NWpxMOIsFhbbSElBmIPs2bkuM0Hf3qxgoWeuBDEfzLiEY5SYe
- TyQVnjLDy1u9V5iv9rSIXe+tDHK2Yms04d3mFkdv1d+wydGCuSAaqrDgvJTlKh9PAbbYowanWyP
- hiKV3ena0Sp869wyX26l/hbI4ufWcrt9zce2ZMlDLGtAli/zRZT/1M2Q4IIo22cCFODIcfsTbBV
- V3bc4XtIgtcWTV58=
-X-Google-Smtp-Source: AGHT+IH5BYgtEVsF3UjuNdxEmc61R/ao7c1/1iBgmrXnG9lSYRtLalmf3eGNlXKix7bxAIso/rU7wQ==
-X-Received: by 2002:a17:902:e38a:b0:22e:634b:14cd with SMTP id
- d9443c01a7336-22e634b171emr74212065ad.39.1746711721364; 
- Thu, 08 May 2025 06:42:01 -0700 (PDT)
+ AJvYcCVt5ztcqBZmS7dgwouRDvcx0/z3+KMktHaxiCCamtwLpbWu0z8mZaUtDMW1fxc3njpM+aumXc++S6tb@nongnu.org
+X-Gm-Message-State: AOJu0YwEDtIjJgXN8ZI7zxbypRA1q2kuJoegERkc8LdS+LtbG4H+LTKb
+ ounetFAKnekeQn6myYvssOKV6jHDiyGvK2MKNHaDU9eUg3W36Tiju/D6D0SVMCI=
+X-Gm-Gg: ASbGncs+diu7FWUk4kxVRjyr/9Sb35+oTegVAt5OJ04w02hsbMcRN1LBdf+NYGSRkny
+ bA+SKDm+D9V/QszEdLKZNBmt2SR6Q5pbYbbDg3anLU+Irpd8mFvq9msSYGBKw6pYBKOBmrI2MZJ
+ 4x3mIYzp4Q3dmD1NKW8Pg3WccKjdpTk4JQTF3H5qwV1Baxm7fjxJe1ldiWd1BH22LXac7pCI/Jd
+ /aBO7JRLnXiAF9QApb4W/0cFuxBPVQ140qzt1T0nu2CoNnXv68zdllnyJue+tm0I0D/YdGEUsl+
+ 3OlqBT9TNNz/4svDauj8o+aw4JVnN7A1+G5bcKcGTGda0lAIVI6wK8+SXtAA9GqxDPlyttZLeRD
+ Rf1QmGXOPU8SzyA8=
+X-Google-Smtp-Source: AGHT+IH1WVEL7CuYnhcuoeZe0dF5ZImTjMBcZgMJJlYHkrELO77MU8NVhB0RggY4VqZxOdLZ04ngFQ==
+X-Received: by 2002:a17:90b:3b91:b0:2ee:8cbb:de28 with SMTP id
+ 98e67ed59e1d1-30adbf18acamr5563077a91.8.1746711743871; 
+ Thu, 08 May 2025 06:42:23 -0700 (PDT)
 Received: from localhost.localdomain (88-187-86-199.subs.proxad.net.
  [88.187.86.199]) by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-22e1522911bsm112537925ad.191.2025.05.08.06.41.47
+ 98e67ed59e1d1-30ad4d2f15dsm2382033a91.18.2025.05.08.06.42.09
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Thu, 08 May 2025 06:42:00 -0700 (PDT)
+ Thu, 08 May 2025 06:42:23 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Richard Henderson <richard.henderson@linaro.org>, kvm@vger.kernel.org,
@@ -89,25 +89,25 @@ Cc: Richard Henderson <richard.henderson@linaro.org>, kvm@vger.kernel.org,
  Huacai Chen <chenhuacai@kernel.org>, Jason Wang <jasowang@redhat.com>,
  Mark Cave-Ayland <mark.caveayland@nutanix.com>,
  Thomas Huth <thuth@redhat.com>
-Subject: [PATCH v4 16/27] hw/virtio/virtio-mmio: Remove
- VirtIOMMIOProxy::format_transport_address field
-Date: Thu,  8 May 2025 15:35:39 +0200
-Message-ID: <20250508133550.81391-17-philmd@linaro.org>
+Subject: [PATCH v4 17/27] hw/i386/pc: Remove deprecated pc-q35-2.7 and
+ pc-i440fx-2.7 machines
+Date: Thu,  8 May 2025 15:35:40 +0200
+Message-ID: <20250508133550.81391-18-philmd@linaro.org>
 X-Mailer: git-send-email 2.47.1
 In-Reply-To: <20250508133550.81391-1-philmd@linaro.org>
 References: <20250508133550.81391-1-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::532;
- envelope-from=philmd@linaro.org; helo=mail-pg1-x532.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1032;
+ envelope-from=philmd@linaro.org; helo=mail-pj1-x1032.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -123,64 +123,81 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-The VirtIOMMIOProxy::format_transport_address boolean was only set
-in the hw_compat_2_6[] array, via the 'format_transport_address=off'
-property. We removed all machines using that array, lets remove
-that property, simplifying virtio_mmio_bus_get_dev_path().
+These machines has been supported for a period of more than 6 years.
+According to our versioned machine support policy (see commit
+ce80c4fa6ff "docs: document special exception for machine type
+deprecation & removal") they can now be removed.  Remove the qtest
+in test-x86-cpuid-compat.c file.
 
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 Reviewed-by: Mark Cave-Ayland <mark.caveayland@nutanix.com>
 Reviewed-by: Thomas Huth <thuth@redhat.com>
 ---
- include/hw/virtio/virtio-mmio.h |  1 -
- hw/virtio/virtio-mmio.c         | 15 ---------------
- 2 files changed, 16 deletions(-)
+ hw/i386/pc_piix.c                   |  9 ---------
+ hw/i386/pc_q35.c                    | 10 ----------
+ tests/qtest/test-x86-cpuid-compat.c | 11 -----------
+ 3 files changed, 30 deletions(-)
 
-diff --git a/include/hw/virtio/virtio-mmio.h b/include/hw/virtio/virtio-mmio.h
-index aa492620228..8b19ec2291a 100644
---- a/include/hw/virtio/virtio-mmio.h
-+++ b/include/hw/virtio/virtio-mmio.h
-@@ -66,7 +66,6 @@ struct VirtIOMMIOProxy {
-     uint32_t guest_page_shift;
-     /* virtio-bus */
-     VirtioBusState bus;
--    bool format_transport_address;
-     /* Fields only used for non-legacy (v2) devices */
-     uint32_t guest_features[2];
-     VirtIOMMIOQueue vqs[VIRTIO_QUEUE_MAX];
-diff --git a/hw/virtio/virtio-mmio.c b/hw/virtio/virtio-mmio.c
-index 532c67107ba..b7ee115b990 100644
---- a/hw/virtio/virtio-mmio.c
-+++ b/hw/virtio/virtio-mmio.c
-@@ -752,8 +752,6 @@ static void virtio_mmio_pre_plugged(DeviceState *d, Error **errp)
- /* virtio-mmio device */
+diff --git a/hw/i386/pc_piix.c b/hw/i386/pc_piix.c
+index 98a118fd4a0..98bd8d0e67b 100644
+--- a/hw/i386/pc_piix.c
++++ b/hw/i386/pc_piix.c
+@@ -755,15 +755,6 @@ static void pc_i440fx_machine_2_8_options(MachineClass *m)
  
- static const Property virtio_mmio_properties[] = {
--    DEFINE_PROP_BOOL("format_transport_address", VirtIOMMIOProxy,
--                     format_transport_address, true),
-     DEFINE_PROP_BOOL("force-legacy", VirtIOMMIOProxy, legacy, true),
-     DEFINE_PROP_BIT("ioeventfd", VirtIOMMIOProxy, flags,
-                     VIRTIO_IOMMIO_FLAG_USE_IOEVENTFD_BIT, true),
-@@ -815,19 +813,6 @@ static char *virtio_mmio_bus_get_dev_path(DeviceState *dev)
-     virtio_mmio_proxy = VIRTIO_MMIO(virtio_mmio_bus->parent);
-     proxy_path = qdev_get_dev_path(DEVICE(virtio_mmio_proxy));
+ DEFINE_I440FX_MACHINE(2, 8);
  
--    /*
--     * If @format_transport_address is false, then we just perform the same as
--     * virtio_bus_get_dev_path(): we delegate the address formatting for the
--     * device on the virtio-mmio bus to the bus that the virtio-mmio proxy
--     * (i.e., the device that implements the virtio-mmio bus) resides on. In
--     * this case the base address of the virtio-mmio transport will be
--     * invisible.
--     */
--    if (!virtio_mmio_proxy->format_transport_address) {
--        return proxy_path;
--    }
+-static void pc_i440fx_machine_2_7_options(MachineClass *m)
+-{
+-    pc_i440fx_machine_2_8_options(m);
+-    compat_props_add(m->compat_props, hw_compat_2_7, hw_compat_2_7_len);
+-    compat_props_add(m->compat_props, pc_compat_2_7, pc_compat_2_7_len);
+-}
 -
--    /* Otherwise, we append the base address of the transport. */
-     section = memory_region_find(&virtio_mmio_proxy->iomem, 0, 0x200);
-     assert(section.mr);
+-DEFINE_I440FX_MACHINE(2, 7);
+-
+ #ifdef CONFIG_ISAPC
+ static void isapc_machine_options(MachineClass *m)
+ {
+diff --git a/hw/i386/pc_q35.c b/hw/i386/pc_q35.c
+index b7ffb5f1216..a1f46cd8f03 100644
+--- a/hw/i386/pc_q35.c
++++ b/hw/i386/pc_q35.c
+@@ -648,13 +648,3 @@ static void pc_q35_machine_2_8_options(MachineClass *m)
+ }
  
+ DEFINE_Q35_MACHINE(2, 8);
+-
+-static void pc_q35_machine_2_7_options(MachineClass *m)
+-{
+-    pc_q35_machine_2_8_options(m);
+-    m->max_cpus = 255;
+-    compat_props_add(m->compat_props, hw_compat_2_7, hw_compat_2_7_len);
+-    compat_props_add(m->compat_props, pc_compat_2_7, pc_compat_2_7_len);
+-}
+-
+-DEFINE_Q35_MACHINE(2, 7);
+diff --git a/tests/qtest/test-x86-cpuid-compat.c b/tests/qtest/test-x86-cpuid-compat.c
+index 456e2af6657..5e0547e81b7 100644
+--- a/tests/qtest/test-x86-cpuid-compat.c
++++ b/tests/qtest/test-x86-cpuid-compat.c
+@@ -345,17 +345,6 @@ int main(int argc, char **argv)
+ 
+     /* Check compatibility of old machine-types that didn't
+      * auto-increase level/xlevel/xlevel2: */
+-    if (qtest_has_machine("pc-i440fx-2.7")) {
+-        add_cpuid_test("x86/cpuid/auto-level/pc-2.7",
+-                       "486", "arat=on,avx512vbmi=on,xsaveopt=on",
+-                       "pc-i440fx-2.7", "level", 1);
+-        add_cpuid_test("x86/cpuid/auto-xlevel/pc-2.7",
+-                       "486", "3dnow=on,sse4a=on,invtsc=on,npt=on,svm=on",
+-                       "pc-i440fx-2.7", "xlevel", 0);
+-        add_cpuid_test("x86/cpuid/auto-xlevel2/pc-2.7",
+-                       "486", "xstore=on", "pc-i440fx-2.7",
+-                       "xlevel2", 0);
+-    }
+     if (qtest_has_machine("pc-i440fx-2.9")) {
+         add_cpuid_test("x86/cpuid/auto-level7/pc-i440fx-2.9/off",
+                        "Conroe", NULL, "pc-i440fx-2.9",
 -- 
 2.47.1
 
