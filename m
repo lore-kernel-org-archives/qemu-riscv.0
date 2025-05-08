@@ -4,66 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7EFB2C3ABC0
-	for <qemu-riscv@archiver.kernel.org>; Thu,  8 May 2025 13:41:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 81CC4C3ABC0
+	for <qemu-riscv@archiver.kernel.org>; Thu,  8 May 2025 13:41:26 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uD1Uj-0007SO-Bd; Thu, 08 May 2025 09:41:01 -0400
+	id 1uD1V6-000164-GZ; Thu, 08 May 2025 09:41:24 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1uD1Ug-0007AK-Br
- for qemu-riscv@nongnu.org; Thu, 08 May 2025 09:40:58 -0400
-Received: from mail-pl1-x62d.google.com ([2607:f8b0:4864:20::62d])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1uD1V3-0000zC-GY
+ for qemu-riscv@nongnu.org; Thu, 08 May 2025 09:41:21 -0400
+Received: from mail-pg1-x534.google.com ([2607:f8b0:4864:20::534])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1uD1Ud-0004X5-EG
- for qemu-riscv@nongnu.org; Thu, 08 May 2025 09:40:58 -0400
-Received: by mail-pl1-x62d.google.com with SMTP id
- d9443c01a7336-22e4d235811so14905595ad.2
- for <qemu-riscv@nongnu.org>; Thu, 08 May 2025 06:40:54 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1uD1Uz-0004Yh-UC
+ for qemu-riscv@nongnu.org; Thu, 08 May 2025 09:41:21 -0400
+Received: by mail-pg1-x534.google.com with SMTP id
+ 41be03b00d2f7-b200178c011so404333a12.3
+ for <qemu-riscv@nongnu.org>; Thu, 08 May 2025 06:41:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1746711653; x=1747316453; darn=nongnu.org;
+ d=linaro.org; s=google; t=1746711676; x=1747316476; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=mAafb+dHM0R7U2T8OMZzAcuOcBI3QoaSzAwGll5ygQs=;
- b=O+JrDn7MLNTxze7nteuj+q6kgqyFdjSXaG1BrCcNTkeRrBUIZ2hNFJKS2CdNehcCrZ
- RbSASv9Dw/VZiK+bhEj8qj7qvqyR9aZ4fqetfbjXOTth3F1s6mJsz2QZFd8UQGcDE/Bb
- tJeEE7MuSpqQQQ4Nj3r/+27OQWohhQiCfxnTMWmsNqxLdEALd9PGAxcmPVbGQwcWBGHs
- FMgNbLkod6MBjYFl7JcAip+VRUNSq6cdHa6yJuG/kt01/RE7dASjK+odVxM7vx6vHEyS
- jdglCqb3h53kyM3GqEQci/XRPQOhpbrwmMMlmn5jXp/1dyE1d70rtkLof6wJMAukAiRj
- YRbg==
+ bh=GfnNMh8um2i71NVQR7Vo7AAo9gkZrP7mDUQkPEIxOEM=;
+ b=HPKYNVL/Oo3D9bI81bb6wIyVbcgPC0g8Qdd4/aj+veIe0nnneDIBgm0zxzhNlEdmHF
+ QhA+uAdq7HzTNb9kdyNWfPEYDIajoWakuUrrI6Q+28+Z0U+zxjMErE+MCzp9OuhEhS4r
+ EvoCxDiW3iVND21Fnu2v/BDy1GHZz7g28CpcmdFgPSFuhDxReM62i1p1KA04Y839355y
+ XAiCsW14q56WCviGKwrfgmsWQ4jfUPaCnxT4v9iNNuGqEp2jztLzOxkKHkmDhxjnbnqM
+ NUWQo60rCgPvLyGzauGTNA0qjEhz2X9eG90YNAPotdwpuKbEixlS9i2XCf7qLOQMwlmU
+ oYRQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1746711653; x=1747316453;
+ d=1e100.net; s=20230601; t=1746711676; x=1747316476;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=mAafb+dHM0R7U2T8OMZzAcuOcBI3QoaSzAwGll5ygQs=;
- b=qH5bp1WRTlzPVBLCuDPNrkDA/8rJDB2Wr9i5gPoOSy02Hxc5d0jbRM58JA8VvkelFV
- y0PtZSsMPDkzx8/LFZnh0NhUeDGvbOnaS3/jzr/1bV4sRacUeiiUvSpyse2b9yzZaAV0
- BuHC2a1ouSo5uCgDA7IELmyq+AChUWTPSaPIgSlMHTr6zONgiqFD+c8dwCdJy4L/joI1
- YvtVT/U7hhJlS7qvHYl0eRmUZC/Od3uCecM8EQ80FOmKqwOCbPoP7OFbf0woA5TTlTsx
- keTRxSTELLtjZDgeu8Ju1oZEzFiqk67N6N7Wjh38E2LzYf8I6mlLNnlQlzCaGOxV45J8
- Ts3g==
+ bh=GfnNMh8um2i71NVQR7Vo7AAo9gkZrP7mDUQkPEIxOEM=;
+ b=YCVXF3CDcbfaNsSJecS9UPrq534K4EpyC7qzpyovYM/BBLcjoYulaaG7Iay1b+NPeO
+ tXGmJ4g/kHAeQQa6di/fjZAK32j3MQUXjuMlJKd+yHetDpyDqGYdY/aEh7MykkRUdaWb
+ zOhE/KGvBXqF490tdkC7YTbwCfiUxM7x6Q0tQBd5U+dzmVj6bLN4/E4y5Yic14voVVvs
+ y1S/NuYyXDeUcSppzpksPuZ5SN+ZaGQNKCtnAqJa8Gn62ddUPTJEnVGRuYxq4qeowsVa
+ 5Jr0mPrNyxIV9uptXr2I9LcCZRs+eNABgKRmxOgwqlT0uyPLdfM/PF9vkigf0wKptx2H
+ NMXA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWQGljjHxM4ljxLF3NYKCLs1PneSlPpu777WhR8/0iSV1bRXvj2zqxwf6yVdRIHzf7IMllZLLmUpSv0@nongnu.org
-X-Gm-Message-State: AOJu0YwHqqi3kuYE/tN0/OA1N+t50hVw0HeGu9AeYkhVwfwlRckLz8Dj
- TuhuAZ8X3CI/wdS29SxndSUYe4c4rzvQ/OHa21Ybz1ElA7aOUETpAyZPuzd0sFw=
-X-Gm-Gg: ASbGncsj6isdBly+9x+k9N8vr/dSIxEBP1YaMsTIBvW8pPSgqS8zf4CLGPrbCuWK3T/
- gTRVd3bA9gPsninShbcX0iqZ1WDDsR9xahnpTGJS0nmRRrFUqvCyFh/kSqbn7vpmGfW5Ua4Z+TO
- QWG6uTyZkt5UrKqMzz2X3JyzF0g5SKqPPwtnzkbcFh29v87MSntuTC4KgQI6Pm2mjK5oJP141eJ
- Qip120Zqy3X/6ljVPoKs1EAgTsUP/qQyQBHrXTxxlBbULtLZ8+x1LLOph0p/WVu3BCzeERfDkAY
- jAKhWCs4clClZBzFtonQBW7WEbJabyGq4FbFxw5EKD0en80fFjuA8hJ0gyMRTAcfNw/B3IFcq+g
- c5me50YuVgFZK5js=
-X-Google-Smtp-Source: AGHT+IH2y/VUfyrC8R22FpXXRo/ODUgoWXOAiZYF8dEokDeUe9aZgmQXy0YOuspLaJeraSPMUSaU9w==
-X-Received: by 2002:a17:903:194e:b0:224:f12:3734 with SMTP id
- d9443c01a7336-22e8660509bmr47849675ad.30.1746711653500; 
- Thu, 08 May 2025 06:40:53 -0700 (PDT)
+ AJvYcCV2CPX2bZJLnfBCdZpLRInEJu+tfZJXJXIZsVgZmOu2R6h+Afuahho/D3x+0wmCAe9BrvkQY4lbkxuX@nongnu.org
+X-Gm-Message-State: AOJu0YxQ21BX+Bqgtyi2w9GEHaQP8Ki99eltPaE2Z8eZwZcHr5qp3Mzx
+ E13eW1kcDknott3Rxv4CxwTTB5kBMRTH2Nc/o0aqYU3XR7JKaYTOeBRnvtmGPkE=
+X-Gm-Gg: ASbGnctI3eAF067SxY+FHM5SPS45hnthCiVxwc30AiJi0intJwE8JX7ibxZ6aZUBR+L
+ 9zwZObxjEAc+7geHlD+G9HfnfBujsTx+/XvI2CQiL6FWYKCxowhwuzVLP6fRqog+Ce0PIUpNzS/
+ hXR4qoriLgzdZ4vR4sWfd561oi6EnzwbLC3oUoaZ2dxCYx5aGdZkFQDQCMe8hdCkQBVhsBnu8um
+ KHMNXmMN+nfEhrOrVbSzBKbWPurxQYBBXpyatGBW7k5iRbb15MLStZNpNukt2YdGle91riwdCM4
+ 9+VNb6z0y1iYprCZLitLYPeGMRJuFDfd1pkJ6khYJqfiOCOmAUteXqsSujMHPMjEk83FaqssY+l
+ nE5JcSsHfHppTFlY=
+X-Google-Smtp-Source: AGHT+IFQ8LW9RTSMx316iiBnCrKC++OfGZqWRTBj59NXdQh9cJmdJ08Q8za3gukxznk5+tstJeDxpA==
+X-Received: by 2002:a17:90b:278e:b0:2fa:1a23:c01d with SMTP id
+ 98e67ed59e1d1-30aac1b407amr10664017a91.21.1746711675615; 
+ Thu, 08 May 2025 06:41:15 -0700 (PDT)
 Received: from localhost.localdomain (88-187-86-199.subs.proxad.net.
  [88.187.86.199]) by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-22e150eb5d2sm112359365ad.7.2025.05.08.06.40.40
+ 98e67ed59e1d1-30ad4d56981sm2115127a91.28.2025.05.08.06.41.01
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Thu, 08 May 2025 06:40:53 -0700 (PDT)
+ Thu, 08 May 2025 06:41:15 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Richard Henderson <richard.henderson@linaro.org>, kvm@vger.kernel.org,
@@ -86,26 +86,28 @@ Cc: Richard Henderson <richard.henderson@linaro.org>, kvm@vger.kernel.org,
  =?UTF-8?q?Cl=C3=A9ment=20Mathieu--Drif?= <clement.mathieu--drif@eviden.com>,
  qemu-arm@nongnu.org,
  =?UTF-8?q?Marc-Andr=C3=A9=20Lureau?= <marcandre.lureau@redhat.com>,
- Huacai Chen <chenhuacai@kernel.org>, Jason Wang <jasowang@redhat.com>
-Subject: [PATCH v4 13/27] target/i386/cpu: Remove CPUX86State::fill_mtrr_mask
- field
-Date: Thu,  8 May 2025 15:35:36 +0200
-Message-ID: <20250508133550.81391-14-philmd@linaro.org>
+ Huacai Chen <chenhuacai@kernel.org>, Jason Wang <jasowang@redhat.com>,
+ Mark Cave-Ayland <mark.caveayland@nutanix.com>,
+ Thomas Huth <thuth@redhat.com>
+Subject: [PATCH v4 14/27] hw/intc/apic: Remove
+ APICCommonState::legacy_instance_id field
+Date: Thu,  8 May 2025 15:35:37 +0200
+Message-ID: <20250508133550.81391-15-philmd@linaro.org>
 X-Mailer: git-send-email 2.47.1
 In-Reply-To: <20250508133550.81391-1-philmd@linaro.org>
 References: <20250508133550.81391-1-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::62d;
- envelope-from=philmd@linaro.org; helo=mail-pl1-x62d.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::534;
+ envelope-from=philmd@linaro.org; helo=mail-pg1-x534.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -121,65 +123,57 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-The CPUX86State::fill_mtrr_mask boolean was only disabled
-for the pc-q35-2.6 and pc-i440fx-2.6 machines, which got
-removed. Being now always %true, we can remove it and simplify
-kvm_get_msrs().
+The APICCommonState::legacy_instance_id boolean was only set
+in the pc_compat_2_6[] array, via the 'legacy-instance-id=on'
+property. We removed all machines using that array, lets remove
+that property, simplifying apic_common_realize().
+
+Because instance_id is initialized as initial_apic_id, we can
+not register vmstate_apic_common directly via dc->vmsd.
 
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+Reviewed-by: Mark Cave-Ayland <mark.caveayland@nutanix.com>
+Reviewed-by: Thomas Huth <thuth@redhat.com>
 ---
- target/i386/cpu.h     |  3 ---
- target/i386/cpu.c     |  1 -
- target/i386/kvm/kvm.c | 10 +++-------
- 3 files changed, 3 insertions(+), 11 deletions(-)
+ include/hw/i386/apic_internal.h | 1 -
+ hw/intc/apic_common.c           | 5 -----
+ 2 files changed, 6 deletions(-)
 
-diff --git a/target/i386/cpu.h b/target/i386/cpu.h
-index 06817a31cf9..7585407da54 100644
---- a/target/i386/cpu.h
-+++ b/target/i386/cpu.h
-@@ -2253,9 +2253,6 @@ struct ArchCPU {
-     /* Enable auto level-increase for Intel Processor Trace leave */
-     bool intel_pt_auto_level;
+diff --git a/include/hw/i386/apic_internal.h b/include/hw/i386/apic_internal.h
+index 429278da618..db6a9101530 100644
+--- a/include/hw/i386/apic_internal.h
++++ b/include/hw/i386/apic_internal.h
+@@ -188,7 +188,6 @@ struct APICCommonState {
+     uint32_t vapic_control;
+     DeviceState *vapic;
+     hwaddr vapic_paddr; /* note: persistence via kvmvapic */
+-    bool legacy_instance_id;
+     uint32_t extended_log_dest;
+ };
  
--    /* if true fill the top bits of the MTRR_PHYSMASKn variable range */
--    bool fill_mtrr_mask;
--
-     /* if true override the phys_bits value with a value read from the host */
-     bool host_phys_bits;
+diff --git a/hw/intc/apic_common.c b/hw/intc/apic_common.c
+index 37a7a7019d3..1d259b97e63 100644
+--- a/hw/intc/apic_common.c
++++ b/hw/intc/apic_common.c
+@@ -294,9 +294,6 @@ static void apic_common_realize(DeviceState *dev, Error **errp)
+         info->enable_tpr_reporting(s, true);
+     }
  
-diff --git a/target/i386/cpu.c b/target/i386/cpu.c
-index 6fe37f71b1e..fb505d13122 100644
---- a/target/i386/cpu.c
-+++ b/target/i386/cpu.c
-@@ -8810,7 +8810,6 @@ static const Property x86_cpu_properties[] = {
-     DEFINE_PROP_UINT32("guest-phys-bits", X86CPU, guest_phys_bits, -1),
-     DEFINE_PROP_BOOL("host-phys-bits", X86CPU, host_phys_bits, false),
-     DEFINE_PROP_UINT8("host-phys-bits-limit", X86CPU, host_phys_bits_limit, 0),
--    DEFINE_PROP_BOOL("fill-mtrr-mask", X86CPU, fill_mtrr_mask, true),
-     DEFINE_PROP_UINT32("level-func7", X86CPU, env.cpuid_level_func7,
-                        UINT32_MAX),
-     DEFINE_PROP_UINT32("level", X86CPU, env.cpuid_level, UINT32_MAX),
-diff --git a/target/i386/kvm/kvm.c b/target/i386/kvm/kvm.c
-index c9a3c02e3e3..87edce99e85 100644
---- a/target/i386/kvm/kvm.c
-+++ b/target/i386/kvm/kvm.c
-@@ -4635,13 +4635,9 @@ static int kvm_get_msrs(X86CPU *cpu)
-      * we're migrating to.
-      */
- 
--    if (cpu->fill_mtrr_mask) {
--        QEMU_BUILD_BUG_ON(TARGET_PHYS_ADDR_SPACE_BITS > 52);
--        assert(cpu->phys_bits <= TARGET_PHYS_ADDR_SPACE_BITS);
--        mtrr_top_bits = MAKE_64BIT_MASK(cpu->phys_bits, 52 - cpu->phys_bits);
--    } else {
--        mtrr_top_bits = 0;
+-    if (s->legacy_instance_id) {
+-        instance_id = VMSTATE_INSTANCE_ID_ANY;
 -    }
-+    QEMU_BUILD_BUG_ON(TARGET_PHYS_ADDR_SPACE_BITS > 52);
-+    assert(cpu->phys_bits <= TARGET_PHYS_ADDR_SPACE_BITS);
-+    mtrr_top_bits = MAKE_64BIT_MASK(cpu->phys_bits, 52 - cpu->phys_bits);
+     vmstate_register_with_alias_id(NULL, instance_id, &vmstate_apic_common,
+                                    s, -1, 0, NULL);
  
-     for (i = 0; i < ret; i++) {
-         uint32_t index = msrs[i].index;
+@@ -412,8 +409,6 @@ static const Property apic_properties_common[] = {
+     DEFINE_PROP_UINT8("version", APICCommonState, version, 0x14),
+     DEFINE_PROP_BIT("vapic", APICCommonState, vapic_control, VAPIC_ENABLE_BIT,
+                     true),
+-    DEFINE_PROP_BOOL("legacy-instance-id", APICCommonState, legacy_instance_id,
+-                     false),
+ };
+ 
+ static void apic_common_get_id(Object *obj, Visitor *v, const char *name,
 -- 
 2.47.1
 
