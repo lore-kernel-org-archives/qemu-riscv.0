@@ -4,66 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CB1AFC3ABC0
-	for <qemu-riscv@archiver.kernel.org>; Thu,  8 May 2025 13:44:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 18176C3ABBE
+	for <qemu-riscv@archiver.kernel.org>; Thu,  8 May 2025 13:45:05 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uD1Xv-0000cW-NJ; Thu, 08 May 2025 09:44:19 -0400
+	id 1uD1YL-0001bQ-7o; Thu, 08 May 2025 09:44:45 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1uD1Xu-0000VQ-Id
- for qemu-riscv@nongnu.org; Thu, 08 May 2025 09:44:18 -0400
-Received: from mail-pg1-x529.google.com ([2607:f8b0:4864:20::529])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1uD1YH-0001R6-3e
+ for qemu-riscv@nongnu.org; Thu, 08 May 2025 09:44:42 -0400
+Received: from mail-pj1-x102b.google.com ([2607:f8b0:4864:20::102b])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1uD1Xs-0004ww-FQ
- for qemu-riscv@nongnu.org; Thu, 08 May 2025 09:44:18 -0400
-Received: by mail-pg1-x529.google.com with SMTP id
- 41be03b00d2f7-b074d908e56so613702a12.2
- for <qemu-riscv@nongnu.org>; Thu, 08 May 2025 06:44:16 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1uD1YF-0004yM-5B
+ for qemu-riscv@nongnu.org; Thu, 08 May 2025 09:44:40 -0400
+Received: by mail-pj1-x102b.google.com with SMTP id
+ 98e67ed59e1d1-30a9cd61159so972083a91.1
+ for <qemu-riscv@nongnu.org>; Thu, 08 May 2025 06:44:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1746711855; x=1747316655; darn=nongnu.org;
+ d=linaro.org; s=google; t=1746711877; x=1747316677; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=gMLC32cD5rQa4ngqh9n69biVbtvyYihadQEH/qk7LQg=;
- b=dTWvQ8bjrLumrHb0Cg/sgd0tPT7FLfbCLx5UwPeoOKUxxcgM6Zg0hVNtW2fj61CmMh
- Pt4aMkvbBJ/DzW5apd3hv5W6yTmUe7bw+JTMutNIgXxTCyusKWjwR1u8L8zA48dJP7aH
- +IPK04VXLkQzBv5l50a/ue/CwL398lkL7EjEXgh8zQukJSwcylfbUld/42kpbzhgtmX4
- tZ3PHvyQTJWL4EFuHPfoVv8bWTowfb3ixt6QCLqHhZMKFr4WSXbWl5fCc7fXlidLlRXA
- jrGQNKfQUsmIgDeh9uvseMR+l6N1dzwQrlY8wxX6EDeuw7DSIDgCxpUxSfCTA9zQOBRa
- FnJw==
+ bh=ABC8+QfGyso1WyDvOcXI+0OZWgW+TnNwcrP3jxKT+bs=;
+ b=QOUTzPxCqlZc4K9W/VfTZrsgac9diUmTUlj3ALrUr05YAoqk3Z9Rk+P/DD7rotCo1x
+ qyY/BzuH/fE6MoGbC7zHQtqUBXjNETy/7f+zoFfpwd0G+cwiDDAFCiX4ZJ2IAg+xPdFZ
+ duT+inpobW+E/hI9pL/0Ic7KFTnjC4tOFFF5CuoJRMVBfcxHO+KxaSHIkzvLSOx0ElL8
+ Mgimi4UwsTiVQeQ5npRArdK0Up4TAHqTXpdDtOtqrg6OAK+hz7p976M3qoU0w+SvLRDa
+ Deo6oNpHp2jU6RCqcrFXi231i4uI8u8AXZcUacUDenng5dTEJkLYe0YQdiGNPT2E5cpM
+ bL9Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1746711855; x=1747316655;
+ d=1e100.net; s=20230601; t=1746711877; x=1747316677;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=gMLC32cD5rQa4ngqh9n69biVbtvyYihadQEH/qk7LQg=;
- b=AO0SR8wrKAai7tn4bfpzs1/AXDbNRxidItmB38FCsFEq3H8hYhSl8wPMQl2FQoB3tZ
- YKKK5EZ8VuuhEEwb2bE4l5P8q469vC2baE2Coxm90JI2NZY95fizij+6FMTotXmQSRZI
- 36qBhKjp/59iexSdgd01Kz5Rcj5y8/vqQBfRrxMOv16tFjp8qsp5TK348kUmttaBDJeS
- r21XkKh/9OdFTRDZlTDUUj0ZWAFqrNuVybrCh1vkNfHwWI3nETC5haX7HzOldzuoIxSX
- y5A39Mlr9QT0ZvWGOYu7x+pXHIWps8H5//VU8Xjwmzkv8GzixU4+cDrQU3V0HpUcMLkB
- Ic4A==
+ bh=ABC8+QfGyso1WyDvOcXI+0OZWgW+TnNwcrP3jxKT+bs=;
+ b=AKEwy4MeWe56jXX8ye/DDGirRs6BUEYS32AMVrJy6wMJTvkDlvIEyWeHchVk6yXekp
+ ySL8jK7/FcvCiexAFzZE3733o97PW2qodieuAm/FbXtXzmmollW65UGlY5XByCg4ywuD
+ oQW12MMukFh648Bqihr36bI1GyuAkTfL6XBWLdkSmY8VNmSeAvXoGRHaZ4bwIk+hhA9A
+ zSuS/qkP76acAZDf4A1qproS7uSn4yFJDLd+N1fCxfjpB6jKgW8wjY8jbcDzjCrZ1r7L
+ dg4L40H6M0YBUIooyxQRCJbSAmmX/FQZg+fat5ROflfZM7Am7fXzH1p4qaVZLySVtAQF
+ a6Rw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXZb6BdeDR75xuXJJUHtYjxMYW0y/34sBZm+3qIfeB32uH2cW4Zpb1JQ9ITcy+DOvDe4onLDKa7LuN/@nongnu.org
-X-Gm-Message-State: AOJu0YxhXgxDPlIZiCxI2mQQnuFyF7Yyto8ys8z2M1GzZ0ivX3qg/fEa
- Ku850BhfeE/M8+iWCWMPLUyy0jE9FMIzBlAOrThtM5uiVxm/5C5gJc8hcS6+XPo=
-X-Gm-Gg: ASbGncvOAXC9U8EoVaYKktrOY+iy2rz6nFipjuPYLtLlARWLJdT54IS/I17X7iQqccp
- QvbKsliuC4vkdpjuJdfnpwt0JkT0rL5QkxIVd4LUzIJ525rzFT3YpbHFZzy/K6G00n3XIHlIGUL
- 301tbllh/o9iAM+pKue2TW7kPAve+4VQcGsPScjNYpGGmeI8zZSXnxtLC5cBOUy/6JKpH9Qw8jH
- a6fRex7vcekQplW54h4LhXa57DuMZ4iDAWQ6dA+aYf+qwDG1bjkO74CLGYgmpwE+LDlEFY/Mvbf
- dwESvT38oo80LQLw5sczY+wV5e3qJSIH6m+01xC8TBxXuqL44O6odmzRzdGRX7B6Rx/H1cyhq7N
- PN7TC81UzQle4ogU=
-X-Google-Smtp-Source: AGHT+IHMW98LKLrBk/HrYfcCCVQ80r3nhlUHxeo5FoUvbXLo766SGUMibKHsMA0gfPKgCoMTxObdMg==
-X-Received: by 2002:a05:6a21:6e41:b0:1f5:852a:dd81 with SMTP id
- adf61e73a8af0-2148d52bbe3mr13246245637.34.1746711854843; 
- Thu, 08 May 2025 06:44:14 -0700 (PDT)
+ AJvYcCX04Pq8JIphWSpW7Xm97pNBFzawROXqZeslWPWnUSFXpE1Wpv+S1YnWd+hgZX1YWN+WjW9niqmPlhKD@nongnu.org
+X-Gm-Message-State: AOJu0Yzl473tExmALF9VFU/7BNwUSODDIKXr73cb6nn74nsGoN0z2rVZ
+ om5YgAuRBsROAqQaOOv06LWNiXsx2hxZJ2g3BRSrQvLkCi/OONHy23RMzobuqbs=
+X-Gm-Gg: ASbGncucpj0Ix/rc23ElQOC18c7t1Lpm/j3m0OXy3m25BYsW31A8cxUVEJovMqizU8E
+ RCCr+H9/9blMcFS6QqYNxVtoaOkidbcmuKJlviszib2ZZhQ43lF7V3qrZh87tSU6IettFISi44P
+ KL8MG6yga/oNjemL9w+4VsViEdzU+tHHF7qJg4eBdOldLgAg5Bj14wpa9CsxZhkgQUFpvShYukL
+ /qLUFS0zbbQZZp9lHDOofulM5xVIG94TMcQaN7bYTgUY4ju+D/MYPhAiME8BwWqjoIjNCVdwXRb
+ d1Fwx+SUCZmB1ktK8zFa4AZFaB4eA03EfdZXU1rjC4QSyhi1AekkoBk0emZPtt4QuHkWYzfWCns
+ /ANWREYHnL5VED9E=
+X-Google-Smtp-Source: AGHT+IEUdsHAoEH5Q8KZKtz2AvzabbEqVKF3EUjTCg5XRDEcrks+oGqKHzSziA06tvgUnitC8tKtJg==
+X-Received: by 2002:a17:90b:224e:b0:2ee:c30f:33c9 with SMTP id
+ 98e67ed59e1d1-30adbf3b191mr5502686a91.14.1746711876787; 
+ Thu, 08 May 2025 06:44:36 -0700 (PDT)
 Received: from localhost.localdomain (88-187-86-199.subs.proxad.net.
  [88.187.86.199]) by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-74058df2a6csm13272789b3a.81.2025.05.08.06.44.00
+ 98e67ed59e1d1-30ad474a05bsm2173239a91.2.2025.05.08.06.44.22
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Thu, 08 May 2025 06:44:14 -0700 (PDT)
+ Thu, 08 May 2025 06:44:36 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Richard Henderson <richard.henderson@linaro.org>, kvm@vger.kernel.org,
@@ -88,17 +88,18 @@ Cc: Richard Henderson <richard.henderson@linaro.org>, kvm@vger.kernel.org,
  =?UTF-8?q?Marc-Andr=C3=A9=20Lureau?= <marcandre.lureau@redhat.com>,
  Huacai Chen <chenhuacai@kernel.org>, Jason Wang <jasowang@redhat.com>,
  Mark Cave-Ayland <mark.caveayland@nutanix.com>
-Subject: [PATCH v4 22/27] hw/core/machine: Remove hw_compat_2_7[] array
-Date: Thu,  8 May 2025 15:35:45 +0200
-Message-ID: <20250508133550.81391-23-philmd@linaro.org>
+Subject: [PATCH v4 23/27] hw/i386/intel_iommu: Remove
+ IntelIOMMUState::buggy_eim field
+Date: Thu,  8 May 2025 15:35:46 +0200
+Message-ID: <20250508133550.81391-24-philmd@linaro.org>
 X-Mailer: git-send-email 2.47.1
 In-Reply-To: <20250508133550.81391-1-philmd@linaro.org>
 References: <20250508133550.81391-1-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::529;
- envelope-from=philmd@linaro.org; helo=mail-pg1-x529.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::102b;
+ envelope-from=philmd@linaro.org; helo=mail-pj1-x102b.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -121,48 +122,56 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-The hw_compat_2_7[] array was only used by the pc-q35-2.7 and
-pc-i440fx-2.7 machines, which got removed. Remove it.
+The IntelIOMMUState::buggy_eim boolean was only set in
+the hw_compat_2_7[] array, via the 'x-buggy-eim=true'
+property. We removed all machines using that array, lets
+remove that property, simplifying vtd_decide_config().
 
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 Reviewed-by: Mark Cave-Ayland <mark.caveayland@nutanix.com>
 ---
- include/hw/boards.h | 3 ---
- hw/core/machine.c   | 9 ---------
- 2 files changed, 12 deletions(-)
+ include/hw/i386/intel_iommu.h | 1 -
+ hw/i386/intel_iommu.c         | 5 ++---
+ 2 files changed, 2 insertions(+), 4 deletions(-)
 
-diff --git a/include/hw/boards.h b/include/hw/boards.h
-index a881db8e7d6..77707c4376a 100644
---- a/include/hw/boards.h
-+++ b/include/hw/boards.h
-@@ -838,7 +838,4 @@ extern const size_t hw_compat_2_9_len;
- extern GlobalProperty hw_compat_2_8[];
- extern const size_t hw_compat_2_8_len;
+diff --git a/include/hw/i386/intel_iommu.h b/include/hw/i386/intel_iommu.h
+index e95477e8554..29304329d05 100644
+--- a/include/hw/i386/intel_iommu.h
++++ b/include/hw/i386/intel_iommu.h
+@@ -303,7 +303,6 @@ struct IntelIOMMUState {
+     uint32_t intr_size;             /* Number of IR table entries */
+     bool intr_eime;                 /* Extended interrupt mode enabled */
+     OnOffAuto intr_eim;             /* Toggle for EIM cabability */
+-    bool buggy_eim;                 /* Force buggy EIM unless eim=off */
+     uint8_t aw_bits;                /* Host/IOVA address width (in bits) */
+     bool dma_drain;                 /* Whether DMA r/w draining enabled */
+     bool dma_translation;           /* Whether DMA translation supported */
+diff --git a/hw/i386/intel_iommu.c b/hw/i386/intel_iommu.c
+index 5f8ed1243d1..c980cecb4ee 100644
+--- a/hw/i386/intel_iommu.c
++++ b/hw/i386/intel_iommu.c
+@@ -3823,7 +3823,6 @@ static const Property vtd_properties[] = {
+     DEFINE_PROP_UINT32("version", IntelIOMMUState, version, 0),
+     DEFINE_PROP_ON_OFF_AUTO("eim", IntelIOMMUState, intr_eim,
+                             ON_OFF_AUTO_AUTO),
+-    DEFINE_PROP_BOOL("x-buggy-eim", IntelIOMMUState, buggy_eim, false),
+     DEFINE_PROP_UINT8("aw-bits", IntelIOMMUState, aw_bits,
+                       VTD_HOST_ADDRESS_WIDTH),
+     DEFINE_PROP_BOOL("caching-mode", IntelIOMMUState, caching_mode, FALSE),
+@@ -4731,11 +4730,11 @@ static bool vtd_decide_config(IntelIOMMUState *s, Error **errp)
+     }
  
--extern GlobalProperty hw_compat_2_7[];
--extern const size_t hw_compat_2_7_len;
--
- #endif
-diff --git a/hw/core/machine.c b/hw/core/machine.c
-index ce98820f277..bde19a2ff67 100644
---- a/hw/core/machine.c
-+++ b/hw/core/machine.c
-@@ -266,15 +266,6 @@ GlobalProperty hw_compat_2_8[] = {
- };
- const size_t hw_compat_2_8_len = G_N_ELEMENTS(hw_compat_2_8);
- 
--GlobalProperty hw_compat_2_7[] = {
--    { "virtio-pci", "page-per-vq", "on" },
--    { "virtio-serial-device", "emergency-write", "off" },
--    { "ioapic", "version", "0x11" },
--    { "intel-iommu", "x-buggy-eim", "true" },
--    { "virtio-pci", "x-ignore-backend-features", "on" },
--};
--const size_t hw_compat_2_7_len = G_N_ELEMENTS(hw_compat_2_7);
--
- MachineState *current_machine;
- 
- static char *machine_get_kernel(Object *obj, Error **errp)
+     if (s->intr_eim == ON_OFF_AUTO_AUTO) {
+-        s->intr_eim = (kvm_irqchip_in_kernel() || s->buggy_eim)
++        s->intr_eim = kvm_irqchip_in_kernel()
+                       && x86_iommu_ir_supported(x86_iommu) ?
+                                               ON_OFF_AUTO_ON : ON_OFF_AUTO_OFF;
+     }
+-    if (s->intr_eim == ON_OFF_AUTO_ON && !s->buggy_eim) {
++    if (s->intr_eim == ON_OFF_AUTO_ON) {
+         if (kvm_irqchip_is_split() && !kvm_enable_x2apic()) {
+             error_setg(errp, "eim=on requires support on the KVM side"
+                              "(X2APIC_API, first shipped in v4.7)");
 -- 
 2.47.1
 
