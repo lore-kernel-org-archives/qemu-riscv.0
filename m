@@ -4,66 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4778CC3ABBE
-	for <qemu-riscv@archiver.kernel.org>; Thu,  8 May 2025 13:39:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 41658C3ABBE
+	for <qemu-riscv@archiver.kernel.org>; Thu,  8 May 2025 13:39:33 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uD1S2-0000Fp-5Q; Thu, 08 May 2025 09:38:16 -0400
+	id 1uD1Sv-0001s6-EW; Thu, 08 May 2025 09:39:09 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1uD1Rq-0008K6-KJ
- for qemu-riscv@nongnu.org; Thu, 08 May 2025 09:38:03 -0400
-Received: from mail-pl1-x634.google.com ([2607:f8b0:4864:20::634])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1uD1SW-0000vg-Gz
+ for qemu-riscv@nongnu.org; Thu, 08 May 2025 09:38:45 -0400
+Received: from mail-pl1-x631.google.com ([2607:f8b0:4864:20::631])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1uD1Ro-0003qm-EX
- for qemu-riscv@nongnu.org; Thu, 08 May 2025 09:38:02 -0400
-Received: by mail-pl1-x634.google.com with SMTP id
- d9443c01a7336-22e45088d6eso13992005ad.0
- for <qemu-riscv@nongnu.org>; Thu, 08 May 2025 06:37:59 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1uD1SU-0003wn-Gz
+ for qemu-riscv@nongnu.org; Thu, 08 May 2025 09:38:44 -0400
+Received: by mail-pl1-x631.google.com with SMTP id
+ d9443c01a7336-227b828de00so9514725ad.1
+ for <qemu-riscv@nongnu.org>; Thu, 08 May 2025 06:38:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1746711478; x=1747316278; darn=nongnu.org;
+ d=linaro.org; s=google; t=1746711521; x=1747316321; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=WY7gSBXT6cR7bWSaiDRLSHPRiSnEJ0DiKBMO01arpK0=;
- b=st6zY8gdtQxfu2ev4NTpXSr0YGXqWQuhwEir7C8e4T7OpoUad6V60nP0sK4urVXcjq
- DEvol2Wl0MbfpG0iACc7zikVVtoHPJJVfKw0tvwZoEkJGib6hCdD/DWPldOXgy0GVco+
- th75CjygbmUzsY3CoLpE1pepTmhveIky62hA/wIWr2inHSvBzOe/JWUzt3CwzjhQJBRE
- mhY8E2ZmBbccu87M2cfMswhwy6OZGc1sC33jA4CGg0Txo0GhobKat3Se5TSwcla8XxI+
- O84tg+hQaKP3Oo623djRdERsR02exbaNGkLT9VS4mKoXAiSaHbnC+Er+DrZ1fDhWQxsN
- yOCg==
+ bh=ePutPBZZqx13DDtsmzXUVgqQnJtyUKSO1VjVCMGLpvw=;
+ b=DmQVI2BEN1CwGD+i3WIDfSUsucc1//Oy68U5bV5QWb39ZSXi10yYf7jLk+065ZiXbC
+ LSOPdTefsDvChMpFLgXfwW4bPkSo3D98NjHY9178Tz+W7AQ+mQYXu69EX2lDytpb932v
+ Gq66TonR93Xxj3zQHlfbtRwzGbUpLahR3KiDxp/mdNgryZY0p4O6HpTGg6rOrbIm+8WV
+ pLrJe+YvcwP3k17IRAefYKlGhWNPlXkBw5DOc+PKoH4xc7/l5LPAh8hvA3XRRhBgKL1U
+ TjOb4rXYdrCK8nNk+QCW93GhJGGGnxPOub9lqCSR82kRkqe2AzRcnD//PS+Vfk48bolr
+ oL3A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1746711478; x=1747316278;
+ d=1e100.net; s=20230601; t=1746711521; x=1747316321;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=WY7gSBXT6cR7bWSaiDRLSHPRiSnEJ0DiKBMO01arpK0=;
- b=UV6uq5lKwjf+JKPSCV0kQ6hzEYs8Y/V2/aOUMjlqIffhJEt1mkwUv25lhb2VToKIZm
- cpfwkdXeg3HIIdo205UmR+zo5//qkYL+qZp8P0fY3xSMtN5PxkSzpQ0yF/VCSDp6VVHj
- bmMYeDCyHvm6hdAz/T1eBDs4/cDlHaw/6LepPXJmJMhAxmhiZ7pCeUJOiE5Vuggm6VaN
- UVzO13/g74hGiHqRkYt9ZTyEf+0StWInQwgj4t3Eci66izQVTKcP3OXQ3WYfkmpAh47U
- TqNWWYUsHOmQTPuXxd8OiHwroOan575PrGIYx40XgTdPAPZ1GPinfTug1p1BQWIy/z0d
- g4wA==
+ bh=ePutPBZZqx13DDtsmzXUVgqQnJtyUKSO1VjVCMGLpvw=;
+ b=NAzEfFIK4ImBDfHzs34UjvVFva0oPyFelKCPCydJtdodGbkI5Tp1+JGCqbISHEeBCw
+ +UlqUUZg9LigA4LSY0L3VHGKowtBShfIjs/4heYnUF+Q4jsmJt74N6NdPyNhCVsKx1Ql
+ gmMmBWWTmYvu+9Y46+8hmWv+HKbHNJIrJZkO72Jdu9ty+FWH1xkwpgIvXAJ2g7lRbXnK
+ UP1gH7H28SsUnb10zx0h2C6cR5WapqBpkJj12SSVGX6nb94JrD8Iw6V7896nuD6vYG+g
+ k1aUuf/XDnOugeGvbXB53bZFDXPx50aCqQW9MMVgCnSeiXvBWdVuIkfuOmRHMWXnyLMG
+ 8sdg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXhb71KiotkONaUOInGJmZX/qWfFntAk/kCpY0mJ/9oY+4LrNBPDzcI6NTsgF8qeXWJchETRC4hFE5Y@nongnu.org
-X-Gm-Message-State: AOJu0YzkD2Ciy0uq6WbtdhowoyriW92SymNA7M1D/OVrN1vzsC11BNAg
- fI9mYndBJNOdk6Ekkd3HbiGIPj0M5/KD2X++u0UUgBl49fFAJXwRrTZmGXbKX10=
-X-Gm-Gg: ASbGncuob9i0RcBjqM7EIY0hryAUlfc2FaeMpB6H+afAxKkfcWqzYG1ipAUdqhe9uPz
- DTeGo+HchRTgGDBcmQcNBXSrf25oDv0F6LQCN20E5HYn6ai+Kq0LqU4AF/kPtV66f7zjbfUZHf7
- ixCaA91SvFi5vBUXPOSCE0527dbsCNT5IX+kbj5ySC2RZhODg32MoqX2DJHEXZESj1WfXV2Khfn
- lnqYG1hTlz64dJkEihMG2JtsfgOn/POPy1LtIOH1npxGS03cMFAmMwEhQ2xxiPSwSX/QcFLfWaH
- PT0BtSU2t4i1VaHwpN+s+5eu4/gQj2oFQT6bcVntVKi1cD2iPgk5eGngapYu9tfenXfHPf9SeyG
- ILiqnFIwHOnf+xL8aqHJEVQ1eqg==
-X-Google-Smtp-Source: AGHT+IFLlPSB1rrLA2f2qz61Ov5siZIkGu3fk4846ZY3wJHNQUHlcR79jlid3BO4tuhX5LA8XNMdHA==
-X-Received: by 2002:a17:903:244b:b0:22e:b215:1b6 with SMTP id
- d9443c01a7336-22eb2150297mr51984415ad.28.1746711478628; 
- Thu, 08 May 2025 06:37:58 -0700 (PDT)
+ AJvYcCVoUkEH6OahtzVKxqCYoNXmRgIWKPEWdzc6hn5FKGhF7ocSSPnpkYyKviIn47Ge9elrfd/HNdLXq/+Z@nongnu.org
+X-Gm-Message-State: AOJu0YxM+k+/+zMqkzhxEgfHV9RZtDHfE5cR/kZKrt1Ohnb97IEErIuN
+ ZctP/8ADeL+CNkPpoMw8m2t6ZQzKstzF03KF/OOoA2NlepAnmhCLnVcac+ybupI=
+X-Gm-Gg: ASbGnctk9p4wNSk10PWYM8QImi6bYBUsSHhw8+zPTelbajXoP3rXVFBz+XaB4AihDsm
+ qXCXy3/cTlxbmk7cuhyRwmWvh1jXAOluvC630c2T8AXnwA6lcjxQPiwC50pUA3AHNVsWKWHkE1z
+ jaH7C2c52oI4XjViHF2sj56ixKs+ZtrrKRyjGq16KlmKPMTq+h8KgNZDqOLEB3dDqFvhco+Bnt4
+ 1HWdOIJazptxLDqP10/IPRIdE2/yNmHbNEQwBFejoakkgIS2SHJxVIJJyACcMx3DUHFNWiJ6bBL
+ F9Ax9uelF9VlSb7Xte1Recg7k3FjATHVwb3b57IOsqGaSJX0MSD/ImT0VvQDR5SglvVwVMxiIIp
+ AnOgvpr4zd9ChNNk=
+X-Google-Smtp-Source: AGHT+IGNgxOPLiTzh1fGobc2t1F5+RIKAiji7b9B9I1DfVv+yb0iKtesoZBDvhr0nJNnujewbvszoQ==
+X-Received: by 2002:a17:903:32c1:b0:21f:4c8b:c4de with SMTP id
+ d9443c01a7336-22e5ecab7c3mr113369565ad.42.1746711521068; 
+ Thu, 08 May 2025 06:38:41 -0700 (PDT)
 Received: from localhost.localdomain (88-187-86-199.subs.proxad.net.
  [88.187.86.199]) by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-22e151ebd08sm111835505ad.104.2025.05.08.06.37.45
+ d9443c01a7336-22e4299618esm51501905ad.198.2025.05.08.06.38.27
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Thu, 08 May 2025 06:37:58 -0700 (PDT)
+ Thu, 08 May 2025 06:38:40 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Richard Henderson <richard.henderson@linaro.org>, kvm@vger.kernel.org,
@@ -87,25 +87,25 @@ Cc: Richard Henderson <richard.henderson@linaro.org>, kvm@vger.kernel.org,
  qemu-arm@nongnu.org,
  =?UTF-8?q?Marc-Andr=C3=A9=20Lureau?= <marcandre.lureau@redhat.com>,
  Huacai Chen <chenhuacai@kernel.org>, Jason Wang <jasowang@redhat.com>
-Subject: [PATCH v4 05/27] hw/nvram/fw_cfg: Factor fw_cfg_init_mem_internal()
- out
-Date: Thu,  8 May 2025 15:35:28 +0200
-Message-ID: <20250508133550.81391-6-philmd@linaro.org>
+Subject: [PATCH v4 07/27] hw/i386/x86: Remove
+ X86MachineClass::fwcfg_dma_enabled field
+Date: Thu,  8 May 2025 15:35:30 +0200
+Message-ID: <20250508133550.81391-8-philmd@linaro.org>
 X-Mailer: git-send-email 2.47.1
 In-Reply-To: <20250508133550.81391-1-philmd@linaro.org>
 References: <20250508133550.81391-1-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::634;
- envelope-from=philmd@linaro.org; helo=mail-pl1-x634.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::631;
+ envelope-from=philmd@linaro.org; helo=mail-pl1-x631.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -121,53 +121,121 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Factor fw_cfg_init_mem_internal() out of fw_cfg_init_mem_wide().
-In fw_cfg_init_mem_wide(), assert DMA arguments are provided.
-Callers without DMA have to use the fw_cfg_init_mem() helper.
+The X86MachineClass::fwcfg_dma_enabled boolean was only used
+by the pc-q35-2.6 and pc-i440fx-2.6 machines, which got
+removed. Remove it and simplify.
+
+'multiboot.bin' isn't used anymore, we'll remove it in the
+next commit.
 
 Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 ---
- hw/nvram/fw_cfg.c | 17 +++++++++++++----
- 1 file changed, 13 insertions(+), 4 deletions(-)
+ include/hw/i386/x86.h | 2 --
+ hw/i386/microvm.c     | 3 ---
+ hw/i386/multiboot.c   | 7 +------
+ hw/i386/x86-common.c  | 3 +--
+ hw/i386/x86.c         | 2 --
+ 5 files changed, 2 insertions(+), 15 deletions(-)
 
-diff --git a/hw/nvram/fw_cfg.c b/hw/nvram/fw_cfg.c
-index 10f8f8db86f..4067324fb09 100644
---- a/hw/nvram/fw_cfg.c
-+++ b/hw/nvram/fw_cfg.c
-@@ -1053,9 +1053,9 @@ FWCfgState *fw_cfg_init_io_dma(uint32_t iobase, uint32_t dma_iobase,
-     return s;
- }
+diff --git a/include/hw/i386/x86.h b/include/hw/i386/x86.h
+index fc460b82f82..29d37af11e6 100644
+--- a/include/hw/i386/x86.h
++++ b/include/hw/i386/x86.h
+@@ -29,8 +29,6 @@
+ struct X86MachineClass {
+     MachineClass parent;
  
--FWCfgState *fw_cfg_init_mem_wide(hwaddr ctl_addr,
--                                 hwaddr data_addr, uint32_t data_width,
--                                 hwaddr dma_addr, AddressSpace *dma_as)
-+static FWCfgState *fw_cfg_init_mem_internal(hwaddr ctl_addr,
-+                                            hwaddr data_addr, uint32_t data_width,
-+                                            hwaddr dma_addr, AddressSpace *dma_as)
+-    /* use DMA capable linuxboot option rom */
+-    bool fwcfg_dma_enabled;
+     /* CPU and apic information: */
+     bool apic_xrupt_override;
+ };
+diff --git a/hw/i386/microvm.c b/hw/i386/microvm.c
+index e0daf0d4fc3..b1262fb1523 100644
+--- a/hw/i386/microvm.c
++++ b/hw/i386/microvm.c
+@@ -637,7 +637,6 @@ GlobalProperty microvm_properties[] = {
+ 
+ static void microvm_class_init(ObjectClass *oc, const void *data)
  {
-     DeviceState *dev;
-     SysBusDevice *sbd;
-@@ -1087,10 +1087,19 @@ FWCfgState *fw_cfg_init_mem_wide(hwaddr ctl_addr,
-     return s;
- }
+-    X86MachineClass *x86mc = X86_MACHINE_CLASS(oc);
+     MicrovmMachineClass *mmc = MICROVM_MACHINE_CLASS(oc);
+     MachineClass *mc = MACHINE_CLASS(oc);
+     HotplugHandlerClass *hc = HOTPLUG_HANDLER_CLASS(oc);
+@@ -671,8 +670,6 @@ static void microvm_class_init(ObjectClass *oc, const void *data)
+     hc->unplug_request = microvm_device_unplug_request_cb;
+     hc->unplug = microvm_device_unplug_cb;
  
-+FWCfgState *fw_cfg_init_mem_wide(hwaddr ctl_addr,
-+                                 hwaddr data_addr, uint32_t data_width,
-+                                 hwaddr dma_addr, AddressSpace *dma_as)
-+{
-+    assert(dma_addr && dma_as);
-+    return fw_cfg_init_mem_internal(ctl_addr, data_addr, data_addr,
-+                                    dma_addr, dma_as);
-+}
-+
- FWCfgState *fw_cfg_init_mem_nodma(hwaddr ctl_addr, hwaddr data_addr,
-                                   unsigned data_width)
+-    x86mc->fwcfg_dma_enabled = true;
+-
+     object_class_property_add(oc, MICROVM_MACHINE_RTC, "OnOffAuto",
+                               microvm_machine_get_rtc,
+                               microvm_machine_set_rtc,
+diff --git a/hw/i386/multiboot.c b/hw/i386/multiboot.c
+index 6e6b96bc345..bfa7e8f1e83 100644
+--- a/hw/i386/multiboot.c
++++ b/hw/i386/multiboot.c
+@@ -153,7 +153,6 @@ int load_multiboot(X86MachineState *x86ms,
+                    int kernel_file_size,
+                    uint8_t *header)
  {
--    return fw_cfg_init_mem_wide(ctl_addr, data_addr, data_width, 0, NULL);
-+    return fw_cfg_init_mem_internal(ctl_addr, data_addr, data_width, 0, NULL);
- }
+-    bool multiboot_dma_enabled = X86_MACHINE_GET_CLASS(x86ms)->fwcfg_dma_enabled;
+     int i, is_multiboot = 0;
+     uint32_t flags = 0;
+     uint32_t mh_entry_addr;
+@@ -402,11 +401,7 @@ int load_multiboot(X86MachineState *x86ms,
+     fw_cfg_add_bytes(fw_cfg, FW_CFG_INITRD_DATA, mb_bootinfo_data,
+                      sizeof(bootinfo));
  
+-    if (multiboot_dma_enabled) {
+-        option_rom[nb_option_roms].name = "multiboot_dma.bin";
+-    } else {
+-        option_rom[nb_option_roms].name = "multiboot.bin";
+-    }
++    option_rom[nb_option_roms].name = "multiboot_dma.bin";
+     option_rom[nb_option_roms].bootindex = 0;
+     nb_option_roms++;
  
+diff --git a/hw/i386/x86-common.c b/hw/i386/x86-common.c
+index 1b0671c5239..27254a0e9f1 100644
+--- a/hw/i386/x86-common.c
++++ b/hw/i386/x86-common.c
+@@ -634,7 +634,6 @@ void x86_load_linux(X86MachineState *x86ms,
+                     int acpi_data_size,
+                     bool pvh_enabled)
+ {
+-    bool linuxboot_dma_enabled = X86_MACHINE_GET_CLASS(x86ms)->fwcfg_dma_enabled;
+     uint16_t protocol;
+     int setup_size, kernel_size, cmdline_size;
+     int dtb_size, setup_data_offset;
+@@ -993,7 +992,7 @@ void x86_load_linux(X86MachineState *x86ms,
+ 
+     option_rom[nb_option_roms].bootindex = 0;
+     option_rom[nb_option_roms].name = "linuxboot.bin";
+-    if (linuxboot_dma_enabled && fw_cfg_dma_enabled(fw_cfg)) {
++    if (fw_cfg_dma_enabled(fw_cfg)) {
+         option_rom[nb_option_roms].name = "linuxboot_dma.bin";
+     }
+     nb_option_roms++;
+diff --git a/hw/i386/x86.c b/hw/i386/x86.c
+index f80533df1c5..dbf104d60af 100644
+--- a/hw/i386/x86.c
++++ b/hw/i386/x86.c
+@@ -375,14 +375,12 @@ static void x86_machine_initfn(Object *obj)
+ static void x86_machine_class_init(ObjectClass *oc, const void *data)
+ {
+     MachineClass *mc = MACHINE_CLASS(oc);
+-    X86MachineClass *x86mc = X86_MACHINE_CLASS(oc);
+     NMIClass *nc = NMI_CLASS(oc);
+ 
+     mc->cpu_index_to_instance_props = x86_cpu_index_to_props;
+     mc->get_default_cpu_node_id = x86_get_default_cpu_node_id;
+     mc->possible_cpu_arch_ids = x86_possible_cpu_arch_ids;
+     mc->kvm_type = x86_kvm_type;
+-    x86mc->fwcfg_dma_enabled = true;
+     nc->nmi_monitor_handler = x86_nmi;
+ 
+     object_class_property_add(oc, X86_MACHINE_SMM, "OnOffAuto",
 -- 
 2.47.1
 
