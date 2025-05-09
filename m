@@ -4,50 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9A625C3ABC3
-	for <qemu-riscv@archiver.kernel.org>; Fri,  9 May 2025 07:12:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 98980C3ABC3
+	for <qemu-riscv@archiver.kernel.org>; Fri,  9 May 2025 08:50:38 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uDHta-0007AW-Hm; Fri, 09 May 2025 03:11:46 -0400
+	id 1uDJR7-0005T1-Ht; Fri, 09 May 2025 04:50:29 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhao1.liu@intel.com>)
- id 1uDHtW-00079w-B4; Fri, 09 May 2025 03:11:43 -0400
-Received: from mgamail.intel.com ([192.198.163.17])
+ id 1uDJR4-0005SC-Ue; Fri, 09 May 2025 04:50:26 -0400
+Received: from mgamail.intel.com ([198.175.65.10])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhao1.liu@intel.com>)
- id 1uDHtT-0002UI-RY; Fri, 09 May 2025 03:11:42 -0400
+ id 1uDJR2-0006oi-Cs; Fri, 09 May 2025 04:50:26 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1746774700; x=1778310700;
+ t=1746780625; x=1778316625;
  h=date:from:to:cc:subject:message-id:references:
  mime-version:content-transfer-encoding:in-reply-to;
- bh=2C5nET5W0bcIefwZbA8VGGLLv3FN4P08bT/uTlqla4U=;
- b=X4jd3BH0CDz1bkctTH4SFJNqS7mLi783drkRpEvj1VhrBIn/5xVZxWsS
- 815JgA+cc503DFP+3qaEYeG5G3O/AS5swBEidcOaGHSxQY4RJVQcmgz1H
- kUty3Tl+E0OD3FConAIUhByrstfcACi3K/6ozqsbTv+M84P1FAg4CXe5n
- ZXnQ4MTTo6rXlB9pmYF3I3R+jGEjTOu45Vlr1+WtKnRy6W7APMoPbzGIP
- 4uhV8rVPTRMKNHc3KJtPqvP4phR6o0/U631zv9z1BvR8DH8SX4ayMg1pR
- +RcOkBkOjNwjpxI4Iq6BtKtAiKGXdHQRU3zHESX8Lo6uWm6ME7S32DBtC g==;
-X-CSE-ConnectionGUID: /gksMlF2Q6uX3X3EmaF4ug==
-X-CSE-MsgGUID: giyLz8jKT8eDuqW/+rq6BA==
-X-IronPort-AV: E=McAfee;i="6700,10204,11427"; a="48505798"
-X-IronPort-AV: E=Sophos;i="6.15,274,1739865600"; d="scan'208";a="48505798"
-Received: from orviesa003.jf.intel.com ([10.64.159.143])
- by fmvoesa111.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 09 May 2025 00:11:35 -0700
-X-CSE-ConnectionGUID: n9zxyQjGRH+MShzMygYUyA==
-X-CSE-MsgGUID: 8Fjt0m4zT2CGbDnrIJiefA==
+ bh=frJ8xDYf5dCgwXDohsd3IDh9hXwJr3cVlXyTzjKPOJA=;
+ b=KSu29SL6zFk840M82TE7m/gGK3RozCW5GvfkpQcLLiEHVaUos6xEeuJS
+ dNXrJ6J/hbRp4i9mD4uc5n8Tp65Q3rcyFDFk1JuA5RpkL2NrL8b7dddyy
+ kZzPhpafPvlgy8Ud6gh5ujEyfYiCAWJSleXbWF21hja2LIog7pHqiXEkq
+ 1j3avNPAAzq34Pvr/K/mFN3Itv9wPhbQK74FqkorMu1YcKlufhlfZ4rX+
+ eqaNyYv4db7YjrOwSkkydFNKEvhUms/5RMQxIBtVO7qmJpcQzXC5/B6v5
+ qa1AHdVBRqLByI3m7GfcJTw6Qj8w2xrM3d5kaEMft4voG/WvXaXRDzn4+ w==;
+X-CSE-ConnectionGUID: Ub7xsblcQS2sPsaxrbf/cQ==
+X-CSE-MsgGUID: HbvqJtfiQvy9iVmDfrUJoQ==
+X-IronPort-AV: E=McAfee;i="6700,10204,11427"; a="66005249"
+X-IronPort-AV: E=Sophos;i="6.15,274,1739865600"; d="scan'208";a="66005249"
+Received: from fmviesa002.fm.intel.com ([10.60.135.142])
+ by orvoesa102.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 09 May 2025 01:50:19 -0700
+X-CSE-ConnectionGUID: OMtp7xesTVq/J5C7ScuQFg==
+X-CSE-MsgGUID: 4CmTpZuORRSlXGdxVuxfhQ==
 X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.15,274,1739865600"; d="scan'208";a="141311969"
+X-IronPort-AV: E=Sophos;i="6.15,274,1739865600"; d="scan'208";a="159855159"
 Received: from liuzhao-optiplex-7080.sh.intel.com (HELO localhost)
  ([10.239.160.39])
- by orviesa003.jf.intel.com with ESMTP; 09 May 2025 00:11:28 -0700
-Date: Fri, 9 May 2025 15:32:30 +0800
+ by fmviesa002.fm.intel.com with ESMTP; 09 May 2025 01:50:11 -0700
+Date: Fri, 9 May 2025 17:11:13 +0800
 From: Zhao Liu <zhao1.liu@intel.com>
-To: Xiaoyao Li <xiaoyao.li@intel.com>,
- Philippe =?iso-8859-1?Q?Mathieu-Daud=E9?= <philmd@linaro.org>
+To: Philippe =?iso-8859-1?Q?Mathieu-Daud=E9?= <philmd@linaro.org>
 Cc: qemu-devel@nongnu.org, Richard Henderson <richard.henderson@linaro.org>,
  kvm@vger.kernel.org, Sergio Lopez <slp@redhat.com>,
  Gerd Hoffmann <kraxel@redhat.com>,
@@ -70,18 +69,17 @@ Cc: qemu-devel@nongnu.org, Richard Henderson <richard.henderson@linaro.org>,
  qemu-arm@nongnu.org,
  =?iso-8859-1?Q?Marc-Andr=E9?= Lureau <marcandre.lureau@redhat.com>,
  Huacai Chen <chenhuacai@kernel.org>, Jason Wang <jasowang@redhat.com>
-Subject: Re: [PATCH v4 12/27] target/i386/cpu: Remove
- CPUX86State::enable_cpuid_0xb field
-Message-ID: <aB2vjuT07EuO6JSQ@intel.com>
+Subject: Re: [PATCH v4 20/27] target/i386/cpu: Remove
+ CPUX86State::enable_l3_cache field
+Message-ID: <aB3GsY71YH4usdSi@intel.com>
 References: <20250508133550.81391-1-philmd@linaro.org>
- <20250508133550.81391-13-philmd@linaro.org>
- <23260c74-01ba-45bc-bf2f-b3e19c28ec8a@intel.com>
+ <20250508133550.81391-21-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=iso-8859-1
 Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <23260c74-01ba-45bc-bf2f-b3e19c28ec8a@intel.com>
-Received-SPF: pass client-ip=192.198.163.17; envelope-from=zhao1.liu@intel.com;
+In-Reply-To: <20250508133550.81391-21-philmd@linaro.org>
+Received-SPF: pass client-ip=198.175.65.10; envelope-from=zhao1.liu@intel.com;
  helo=mgamail.intel.com
 X-Spam_score_int: -57
 X-Spam_score: -5.8
@@ -106,89 +104,50 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Fri, May 09, 2025 at 02:49:27PM +0800, Xiaoyao Li wrote:
-> Date: Fri, 9 May 2025 14:49:27 +0800
-> From: Xiaoyao Li <xiaoyao.li@intel.com>
-> Subject: Re: [PATCH v4 12/27] target/i386/cpu: Remove
->  CPUX86State::enable_cpuid_0xb field
+On Thu, May 08, 2025 at 03:35:43PM +0200, Philippe Mathieu-Daudé wrote:
+> Date: Thu,  8 May 2025 15:35:43 +0200
+> From: Philippe Mathieu-Daudé <philmd@linaro.org>
+> Subject: [PATCH v4 20/27] target/i386/cpu: Remove
+>  CPUX86State::enable_l3_cache field
+> X-Mailer: git-send-email 2.47.1
 > 
-> On 5/8/2025 9:35 PM, Philippe Mathieu-Daudé wrote:
-> > The CPUX86State::enable_cpuid_0xb boolean was only disabled
-> > for the pc-q35-2.6 and pc-i440fx-2.6 machines, which got
-> > removed. Being now always %true, we can remove it and simplify
-> > cpu_x86_cpuid().
-> > 
-> > Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
-> > ---
-> >   target/i386/cpu.h | 3 ---
-> >   target/i386/cpu.c | 6 ------
-> >   2 files changed, 9 deletions(-)
-> > 
-> > diff --git a/target/i386/cpu.h b/target/i386/cpu.h
-> > index 0db70a70439..06817a31cf9 100644
-> > --- a/target/i386/cpu.h
-> > +++ b/target/i386/cpu.h
-> > @@ -2241,9 +2241,6 @@ struct ArchCPU {
-> >        */
-> >       bool legacy_multi_node;
-> > -    /* Compatibility bits for old machine types: */
-> > -    bool enable_cpuid_0xb;
-> > -
-> >       /* Enable auto level-increase for all CPUID leaves */
-> >       bool full_cpuid_auto_level;
-> > diff --git a/target/i386/cpu.c b/target/i386/cpu.c
-> > index 49179f35812..6fe37f71b1e 100644
-> > --- a/target/i386/cpu.c
-> > +++ b/target/i386/cpu.c
-> > @@ -6982,11 +6982,6 @@ void cpu_x86_cpuid(CPUX86State *env, uint32_t index, uint32_t count,
-> >           break;
-> >       case 0xB:
-> >           /* Extended Topology Enumeration Leaf */
-> > -        if (!cpu->enable_cpuid_0xb) {
-> > -                *eax = *ebx = *ecx = *edx = 0;
-> > -                break;
-> > -        }
-> > -
-> >           *ecx = count & 0xff;
-> >           *edx = cpu->apic_id;
-> > @@ -8828,7 +8823,6 @@ static const Property x86_cpu_properties[] = {
-> >       DEFINE_PROP_UINT64("ucode-rev", X86CPU, ucode_rev, 0),
-> >       DEFINE_PROP_BOOL("full-cpuid-auto-level", X86CPU, full_cpuid_auto_level, true),
-> >       DEFINE_PROP_STRING("hv-vendor-id", X86CPU, hyperv_vendor),
-> > -    DEFINE_PROP_BOOL("cpuid-0xb", X86CPU, enable_cpuid_0xb, true),
+> The CPUX86State::enable_l3_cache boolean was only disabled
+> for the pc-q35-2.7 and pc-i440fx-2.7 machines, which got
+> removed.  Being now always %true, we can remove it and simplify
+> cpu_x86_cpuid() and encode_cache_cpuid80000006().
 > 
-> It's deprecating the "cpuid-0xb" property.
+> Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+> ---
+>  target/i386/cpu.h |  6 ------
+>  target/i386/cpu.c | 39 +++++++++++++--------------------------
+>  2 files changed, 13 insertions(+), 32 deletions(-)
 > 
-> I think we need go with the standard process to deprecate it.
+> diff --git a/target/i386/cpu.h b/target/i386/cpu.h
+> index b5cbd91c156..62239b0a562 100644
+> --- a/target/i386/cpu.h
+> +++ b/target/i386/cpu.h
+> @@ -2219,12 +2219,6 @@ struct ArchCPU {
+>       */
+>      bool enable_lmce;
+>  
+> -    /* Compatibility bits for old machine types.
+> -     * If true present virtual l3 cache for VM, the vcpus in the same virtual
+> -     * socket share an virtual l3 cache.
+> -     */
+> -    bool enable_l3_cache;
+> -
+>      /* Compatibility bits for old machine types.
+>       * If true present L1 cache as per-thread, not per-core.
+>       */
 
-Thanks! I got your point.
+I realize this is another special case.
 
-Though this property is introduced for compatibility, as its comment
-said "Compatibility bits for old machine types", it is also useful for 
-somer users.
+There is no support for hybrid x86 CPUs in QEMU, but it's also true that
+there are some actual modern x86 Client CPUs without l3 cache, such as
+Intel MTL's low power E core (and it has vmx support, i.e., support KVM).
 
-Fo example, in the early development stages of TDX, when there was no
-full support for CPU topology, Intel had disable this property for
-testing and found this bug:
+So I think we can keep this property as well, to have some more
+configuration options for users' emulation.
 
-https://lore.kernel.org/qemu-devel/20250227062523.124601-3-zhao1.liu@intel.com/
-
-So, I think there may be other similar use cases as well.
-
-And, if someone wants to emulate ancient x86 CPUs (though I can't
-currently confirm from which generation of CPUs 0xb support started), he
-may want to consider disable this property as well.
-
-The main problem here is that the "property" mechanism doesn't
-distinguish between internal use/public use, and although it was originally
-intended for internal QEMU use, it also leaks to the user, creating some
-external use cases.
-
-@Philippe, thank you for cleaning up this case! I think we can keep this
-property, and if you don't mind, I can modify its comment later to
-indicate that it's used to adjust the topology support for the CPU.
-
-Thanks,
-Zhao
 
 
