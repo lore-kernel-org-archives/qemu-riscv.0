@@ -4,108 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9FF7BC3ABC0
-	for <qemu-riscv@archiver.kernel.org>; Thu,  8 May 2025 13:46:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9832DC3ABBE
+	for <qemu-riscv@archiver.kernel.org>; Fri,  9 May 2025 02:28:56 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uD1Zt-0005Im-34; Thu, 08 May 2025 09:46:21 -0400
+	id 1uDDTY-000761-Ib; Thu, 08 May 2025 22:28:40 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1uD1Zp-000533-Cf
- for qemu-riscv@nongnu.org; Thu, 08 May 2025 09:46:17 -0400
-Received: from mail-pg1-x533.google.com ([2607:f8b0:4864:20::533])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1uD1Zm-0005Iw-VX
- for qemu-riscv@nongnu.org; Thu, 08 May 2025 09:46:16 -0400
-Received: by mail-pg1-x533.google.com with SMTP id
- 41be03b00d2f7-b1a1930a922so631088a12.3
- for <qemu-riscv@nongnu.org>; Thu, 08 May 2025 06:46:13 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1746711972; x=1747316772; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=dAEnpROpQK6DxM6uJJQ1bpWzbrmSzQalAkAVB3r0tgU=;
- b=KdqjNB3v2TPCkIeePrVgdcO+TaS/pmxH4S/VN+EWl6FW+iwYPIeTS/9DbO0I1cMNuT
- 83WSZGtNDnAOGnGhgqCQQV26qbQA+M7cYtj9rSjEjnE/tgMbJbg+YSipsXdLABzbR+3V
- Cu14WErV7D4G2B4GzSrYrAHH21CDgOu4zbQf21ZGMhb7L+m1rLAYjfLbSz1sHY3e0vxj
- 9ZQmYW/rwBo0VaatHNupxDyahJM9nc8hVUhgnAref1Xz5iEvqyuqviuTbpxjkcDi6GBx
- 9filnkk70SP8l0Vvyz6gZ1DzbSl8jiX+aENC6uM7NcDA3EXgimTaRSsExWEOtxuFb/ic
- jSWw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1746711972; x=1747316772;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=dAEnpROpQK6DxM6uJJQ1bpWzbrmSzQalAkAVB3r0tgU=;
- b=Vd9Lion2PmIy01OHuVGbtsOLA8Q8zxbIHDX35LVuVJaCacTNe6hLx5eGJnfFrXXIDi
- C3AcdKGFXvYPUviWNicQe740XfEtR+p1KK28BGFPYiUCLjC+00EcAhgHBchY1OvWFXvK
- xh9EvGdWVMNQn+TJDhu4T0oqpU2IS0y2FqMDtpz8NCPQUIN3qkEzHAXq5xQBTsISpMGK
- 8cAc6eOvcr2pjx99xDy2FpL2qb6lvd2DaLfkbYsqHKYWgrO6pXVu24pUxOsFdBs/8PAX
- Kw0ML6z3XixgEctDR91ALAijlk3G+nK9GzlKtpyuTEAcCE9/RSuL8IYjkC6XuMGZin+R
- m8tg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVsVodTI5oC9DRaidC2N5CnZ9zP7WpynVCrJhkjl3IzBqCx6yjPH7caai0giQgN+hffNbprNrYFwcno@nongnu.org
-X-Gm-Message-State: AOJu0YwhtytVPWTK3GUmrnGFKdIyw8hjxHidXvLz8R7IMEvB8o09TOdv
- 8Jv0v/Cn+Q8BCxVOxEl1U7UI/gQ7IJAEYLA56FhhFTmaCdrLJQWMkl54oKAjt0g=
-X-Gm-Gg: ASbGncv2H2vJAjCoctX6JAbA9SlvPuDzH5gizr+sjdLxPmisyO/xbIxJScpjqNWYO90
- VtZhHGux/mniRmtJBqmzDmSHsrx5SGxMkwZjM89XpMRM6lWhiKI+pneiC9UjHQ0KZtN2kxeLSeb
- 4neLenhQrxDStWfo+7G+DFMYiLyvCyBZqr7rzuXIBpT+iAb4IVXmIsn0VchtbiRbRCjYmuGEFqd
- G1k7yuUw7Gsfy1w4FJc5GFHRWG8Ay7YnqhjcPMmhFjVPn7LtV5WL6HPLDWOgiXatAJnu3yR+/gK
- XOoGiVbGaGJtE8iVfgs8bMPGZ9q/KN6huMAGH2ULzrrDdQ+pWPWpOwWrVKyNL5qk9dO1NBJPAFp
- T5LlXqdTNDiEzhaY=
-X-Google-Smtp-Source: AGHT+IG9WzoCZnHzGx/rhe5MQGTbfwj2jk9eAlMQ107yUfErvTrwEaQ0R1H/OfqPr8whvcSNPiejCQ==
-X-Received: by 2002:a05:6a20:9f8f:b0:1f5:5ca4:2744 with SMTP id
- adf61e73a8af0-2148ba256e3mr9499152637.17.1746711972638; 
- Thu, 08 May 2025 06:46:12 -0700 (PDT)
-Received: from localhost.localdomain (88-187-86-199.subs.proxad.net.
- [88.187.86.199]) by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-74058d7a397sm13221110b3a.28.2025.05.08.06.45.56
- (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Thu, 08 May 2025 06:46:12 -0700 (PDT)
-From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-To: qemu-devel@nongnu.org
-Cc: Richard Henderson <richard.henderson@linaro.org>, kvm@vger.kernel.org,
- Sergio Lopez <slp@redhat.com>, Gerd Hoffmann <kraxel@redhat.com>,
+ (Exim 4.90_1) (envelope-from <zhao1.liu@intel.com>)
+ id 1uDDTO-0006zK-8G; Thu, 08 May 2025 22:28:26 -0400
+Received: from mgamail.intel.com ([192.198.163.18])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <zhao1.liu@intel.com>)
+ id 1uDDTM-0002tJ-6M; Thu, 08 May 2025 22:28:26 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+ d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+ t=1746757704; x=1778293704;
+ h=date:from:to:cc:subject:message-id:references:
+ mime-version:content-transfer-encoding:in-reply-to;
+ bh=HbeDO7ZVXvOmx4YVzsa4pjo9QCbE4vkbbC4HZsiYVtQ=;
+ b=KIDVFBfOO5zmeAvV4GkLPJOX89xVF5BCue7fnnqPv1UpYzlDaoPxYtsS
+ M+zoZUVfLG+okWuBVATnWtb3ZA6iKOZGr7Y+rHeTTtAMnXKwZF9ihXRGa
+ 0tB7FoX7KYSxK9Vxtoq4kJTN2Bk97fAFzXoagDNGKEj46WpT7eX+quTyx
+ 1Q3HOvEdkAAST8WUO9ByIYeswNZTNk9kCq/WpxtzNZsHDVD8sm9xm043k
+ 1L3HnaCp2iyZU22THaetabwbRguSocTQ5DTtrZHvqSJ7Uj3jW06a5FO9B
+ Sx+EZ2igA0JHbXWlkKyrToLR1jOtKk56au3velcbzgsIvxv9NZG0Od2Td g==;
+X-CSE-ConnectionGUID: mycNg7TCTxKPZq2o7/Hu/g==
+X-CSE-MsgGUID: 7yUVTqjnTp6kLj+vUhlr4w==
+X-IronPort-AV: E=McAfee;i="6700,10204,11427"; a="47827607"
+X-IronPort-AV: E=Sophos;i="6.15,274,1739865600"; d="scan'208";a="47827607"
+Received: from fmviesa004.fm.intel.com ([10.60.135.144])
+ by fmvoesa112.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 08 May 2025 19:28:19 -0700
+X-CSE-ConnectionGUID: tXMqZeFxRrOJzvCFF6Qm8A==
+X-CSE-MsgGUID: wBhidVKCTveefVXArIqFKg==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.15,274,1739865600"; d="scan'208";a="141686752"
+Received: from liuzhao-optiplex-7080.sh.intel.com (HELO localhost)
+ ([10.239.160.39])
+ by fmviesa004.fm.intel.com with ESMTP; 08 May 2025 19:28:12 -0700
+Date: Fri, 9 May 2025 10:49:14 +0800
+From: Zhao Liu <zhao1.liu@intel.com>
+To: Philippe =?iso-8859-1?Q?Mathieu-Daud=E9?= <philmd@linaro.org>
+Cc: qemu-devel@nongnu.org, Richard Henderson <richard.henderson@linaro.org>,
+ kvm@vger.kernel.org, Sergio Lopez <slp@redhat.com>,
+ Gerd Hoffmann <kraxel@redhat.com>,
  Peter Maydell <peter.maydell@linaro.org>,
- Laurent Vivier <lvivier@redhat.com>, Jiaxun Yang <jiaxun.yang@flygoat.com>,
- Yi Liu <yi.l.liu@intel.com>, "Michael S. Tsirkin" <mst@redhat.com>,
+ Laurent Vivier <lvivier@redhat.com>,
+ Jiaxun Yang <jiaxun.yang@flygoat.com>, Yi Liu <yi.l.liu@intel.com>,
+ "Michael S. Tsirkin" <mst@redhat.com>,
  Eduardo Habkost <eduardo@habkost.net>,
  Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
  Alistair Francis <alistair.francis@wdc.com>,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
  Marcelo Tosatti <mtosatti@redhat.com>, qemu-riscv@nongnu.org,
  Weiwei Li <liwei1518@gmail.com>, Amit Shah <amit@kernel.org>,
- Zhao Liu <zhao1.liu@intel.com>, Yanan Wang <wangyanan55@huawei.com>,
- Helge Deller <deller@gmx.de>, Palmer Dabbelt <palmer@dabbelt.com>,
- Ani Sinha <anisinha@redhat.com>, Igor Mammedov <imammedo@redhat.com>,
- Fabiano Rosas <farosas@suse.de>, Paolo Bonzini <pbonzini@redhat.com>,
- =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
+ Yanan Wang <wangyanan55@huawei.com>, Helge Deller <deller@gmx.de>,
+ Palmer Dabbelt <palmer@dabbelt.com>, Ani Sinha <anisinha@redhat.com>,
+ Igor Mammedov <imammedo@redhat.com>, Fabiano Rosas <farosas@suse.de>,
+ Paolo Bonzini <pbonzini@redhat.com>,
  Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- =?UTF-8?q?Cl=C3=A9ment=20Mathieu--Drif?= <clement.mathieu--drif@eviden.com>,
+ =?iso-8859-1?Q?Cl=E9ment?= Mathieu--Drif <clement.mathieu--drif@eviden.com>,
  qemu-arm@nongnu.org,
- =?UTF-8?q?Marc-Andr=C3=A9=20Lureau?= <marcandre.lureau@redhat.com>,
- Huacai Chen <chenhuacai@kernel.org>, Jason Wang <jasowang@redhat.com>,
- Mark Cave-Ayland <mark.caveayland@nutanix.com>
-Subject: [PATCH v4 27/27] hw/virtio/virtio-pci: Remove
- VIRTIO_PCI_FLAG_PAGE_PER_VQ definition
-Date: Thu,  8 May 2025 15:35:50 +0200
-Message-ID: <20250508133550.81391-28-philmd@linaro.org>
-X-Mailer: git-send-email 2.47.1
-In-Reply-To: <20250508133550.81391-1-philmd@linaro.org>
+ =?iso-8859-1?Q?Marc-Andr=E9?= Lureau <marcandre.lureau@redhat.com>,
+ Huacai Chen <chenhuacai@kernel.org>, Jason Wang <jasowang@redhat.com>
+Subject: Re: [PATCH v4 03/27] hw/nvram/fw_cfg: Rename fw_cfg_init_mem() with
+ '_nodma' suffix
+Message-ID: <aB1tKnGs4slN5AEi@intel.com>
 References: <20250508133550.81391-1-philmd@linaro.org>
+ <20250508133550.81391-4-philmd@linaro.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::533;
- envelope-from=philmd@linaro.org; helo=mail-pg1-x533.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+In-Reply-To: <20250508133550.81391-4-philmd@linaro.org>
+Received-SPF: pass client-ip=192.198.163.18; envelope-from=zhao1.liu@intel.com;
+ helo=mgamail.intel.com
+X-Spam_score_int: -57
+X-Spam_score: -5.8
+X-Spam_bar: -----
+X-Spam_report: (-5.8 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-1.416,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_MED=-2.3, RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001,
+ RCVD_IN_VALIDITY_SAFE_BLOCKED=0.001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -122,81 +104,25 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-VIRTIO_PCI_FLAG_PAGE_PER_VQ was only used by the hw_compat_2_7[]
-array, via the 'page-per-vq=on' property. We removed all
-machines using that array, lets remove all the code around
-VIRTIO_PCI_FLAG_PAGE_PER_VQ (see commit 9a4c0e220d8 for similar
-VIRTIO_PCI_FLAG_* enum removal).
+On Thu, May 08, 2025 at 03:35:26PM +0200, Philippe Mathieu-Daudé wrote:
+> Date: Thu,  8 May 2025 15:35:26 +0200
+> From: Philippe Mathieu-Daudé <philmd@linaro.org>
+> Subject: [PATCH v4 03/27] hw/nvram/fw_cfg: Rename fw_cfg_init_mem() with
+>  '_nodma' suffix
+> X-Mailer: git-send-email 2.47.1
+> 
+> Rename fw_cfg_init_mem() as fw_cfg_init_mem_nodma()
+> to distinct with the DMA version (currently named
+> fw_cfg_init_mem_wide).
+> 
+> Suggested-by: Zhao Liu <zhao1.liu@intel.com>
+> Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+> ---
+>  include/hw/nvram/fw_cfg.h | 3 ++-
+>  hw/hppa/machine.c         | 2 +-
+>  hw/nvram/fw_cfg.c         | 7 +++----
+>  3 files changed, 6 insertions(+), 6 deletions(-)
 
-Signed-off-by: Philippe Mathieu-DaudÃ© <philmd@linaro.org>
-Reviewed-by: Mark Cave-Ayland <mark.caveayland@nutanix.com>
----
- include/hw/virtio/virtio-pci.h |  1 -
- hw/display/virtio-vga.c        | 10 ----------
- hw/virtio/virtio-pci.c         |  7 +------
- 3 files changed, 1 insertion(+), 17 deletions(-)
-
-diff --git a/include/hw/virtio/virtio-pci.h b/include/hw/virtio/virtio-pci.h
-index 9838e8650a6..8abc5f8f20d 100644
---- a/include/hw/virtio/virtio-pci.h
-+++ b/include/hw/virtio/virtio-pci.h
-@@ -33,7 +33,6 @@ enum {
-     VIRTIO_PCI_FLAG_BUS_MASTER_BUG_MIGRATION_BIT,
-     VIRTIO_PCI_FLAG_USE_IOEVENTFD_BIT,
-     VIRTIO_PCI_FLAG_MODERN_PIO_NOTIFY_BIT,
--    VIRTIO_PCI_FLAG_PAGE_PER_VQ_BIT,
-     VIRTIO_PCI_FLAG_ATS_BIT,
-     VIRTIO_PCI_FLAG_INIT_DEVERR_BIT,
-     VIRTIO_PCI_FLAG_INIT_LNKCTL_BIT,
-diff --git a/hw/display/virtio-vga.c b/hw/display/virtio-vga.c
-index 40e60f70fcd..83d01f089b5 100644
---- a/hw/display/virtio-vga.c
-+++ b/hw/display/virtio-vga.c
-@@ -141,16 +141,6 @@ static void virtio_vga_base_realize(VirtIOPCIProxy *vpci_dev, Error **errp)
-                                VIRTIO_GPU_SHM_ID_HOST_VISIBLE);
-     }
- 
--    if (!(vpci_dev->flags & VIRTIO_PCI_FLAG_PAGE_PER_VQ)) {
--        /*
--         * with page-per-vq=off there is no padding space we can use
--         * for the stdvga registers.  Make the common and isr regions
--         * smaller then.
--         */
--        vpci_dev->common.size /= 2;
--        vpci_dev->isr.size /= 2;
--    }
--
-     offset = memory_region_size(&vpci_dev->modern_bar);
-     offset -= vpci_dev->notify.size;
-     vpci_dev->notify.offset = offset;
-diff --git a/hw/virtio/virtio-pci.c b/hw/virtio/virtio-pci.c
-index 7c965771907..4e0d4bda6ed 100644
---- a/hw/virtio/virtio-pci.c
-+++ b/hw/virtio/virtio-pci.c
-@@ -314,12 +314,9 @@ static bool virtio_pci_ioeventfd_enabled(DeviceState *d)
-     return (proxy->flags & VIRTIO_PCI_FLAG_USE_IOEVENTFD) != 0;
- }
- 
--#define QEMU_VIRTIO_PCI_QUEUE_MEM_MULT 0x1000
--
- static inline int virtio_pci_queue_mem_mult(struct VirtIOPCIProxy *proxy)
- {
--    return (proxy->flags & VIRTIO_PCI_FLAG_PAGE_PER_VQ) ?
--        QEMU_VIRTIO_PCI_QUEUE_MEM_MULT : 4;
-+    return 4;
- }
- 
- static int virtio_pci_ioeventfd_assign(DeviceState *d, EventNotifier *notifier,
-@@ -2348,8 +2345,6 @@ static const Property virtio_pci_properties[] = {
-                     VIRTIO_PCI_FLAG_BUS_MASTER_BUG_MIGRATION_BIT, false),
-     DEFINE_PROP_BIT("modern-pio-notify", VirtIOPCIProxy, flags,
-                     VIRTIO_PCI_FLAG_MODERN_PIO_NOTIFY_BIT, false),
--    DEFINE_PROP_BIT("page-per-vq", VirtIOPCIProxy, flags,
--                    VIRTIO_PCI_FLAG_PAGE_PER_VQ_BIT, false),
-     DEFINE_PROP_BIT("ats", VirtIOPCIProxy, flags,
-                     VIRTIO_PCI_FLAG_ATS_BIT, false),
-     DEFINE_PROP_BIT("x-ats-page-aligned", VirtIOPCIProxy, flags,
--- 
-2.47.1
+Reviewed-by: Zhao Liu <zhao1.liu@intel.com>
 
 
