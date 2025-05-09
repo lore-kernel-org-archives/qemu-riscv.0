@@ -4,47 +4,47 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 98980C3ABC3
-	for <qemu-riscv@archiver.kernel.org>; Fri,  9 May 2025 08:50:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DB09BC3ABC3
+	for <qemu-riscv@archiver.kernel.org>; Fri,  9 May 2025 09:10:08 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uDJR7-0005T1-Ht; Fri, 09 May 2025 04:50:29 -0400
+	id 1uDJjW-0006ZB-1D; Fri, 09 May 2025 05:09:30 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhao1.liu@intel.com>)
- id 1uDJR4-0005SC-Ue; Fri, 09 May 2025 04:50:26 -0400
-Received: from mgamail.intel.com ([198.175.65.10])
+ id 1uDJjT-0006YY-Kr; Fri, 09 May 2025 05:09:27 -0400
+Received: from mgamail.intel.com ([198.175.65.11])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhao1.liu@intel.com>)
- id 1uDJR2-0006oi-Cs; Fri, 09 May 2025 04:50:26 -0400
+ id 1uDJjS-0000SZ-3B; Fri, 09 May 2025 05:09:27 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1746780625; x=1778316625;
+ t=1746781766; x=1778317766;
  h=date:from:to:cc:subject:message-id:references:
  mime-version:content-transfer-encoding:in-reply-to;
- bh=frJ8xDYf5dCgwXDohsd3IDh9hXwJr3cVlXyTzjKPOJA=;
- b=KSu29SL6zFk840M82TE7m/gGK3RozCW5GvfkpQcLLiEHVaUos6xEeuJS
- dNXrJ6J/hbRp4i9mD4uc5n8Tp65Q3rcyFDFk1JuA5RpkL2NrL8b7dddyy
- kZzPhpafPvlgy8Ud6gh5ujEyfYiCAWJSleXbWF21hja2LIog7pHqiXEkq
- 1j3avNPAAzq34Pvr/K/mFN3Itv9wPhbQK74FqkorMu1YcKlufhlfZ4rX+
- eqaNyYv4db7YjrOwSkkydFNKEvhUms/5RMQxIBtVO7qmJpcQzXC5/B6v5
- qa1AHdVBRqLByI3m7GfcJTw6Qj8w2xrM3d5kaEMft4voG/WvXaXRDzn4+ w==;
-X-CSE-ConnectionGUID: Ub7xsblcQS2sPsaxrbf/cQ==
-X-CSE-MsgGUID: HbvqJtfiQvy9iVmDfrUJoQ==
-X-IronPort-AV: E=McAfee;i="6700,10204,11427"; a="66005249"
-X-IronPort-AV: E=Sophos;i="6.15,274,1739865600"; d="scan'208";a="66005249"
-Received: from fmviesa002.fm.intel.com ([10.60.135.142])
- by orvoesa102.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 09 May 2025 01:50:19 -0700
-X-CSE-ConnectionGUID: OMtp7xesTVq/J5C7ScuQFg==
-X-CSE-MsgGUID: 4CmTpZuORRSlXGdxVuxfhQ==
+ bh=5oAxwranscwqB3GHDqmAi9ptxiiQwuBPM52/1nXSzK0=;
+ b=ng3i+BaRpbXrFcCLVh6PrnurJrNhse53yFQrse8rKHG8qkG8mJrYsha8
+ 9pALjUkwgYydEEGZuaGqRkhrqJfE/VcAfspG0vZ1U/uEErUlGOjvZ3Zqe
+ GZNjysTvRUZjjkmEyknRJfg+zI08OiXsRs7Wu2QUiio/xbSS8JbBPkk7r
+ Kc3xrcrClzdr8sJIoOTtj03lcXhfYyd7CX1dwdm/r3py4SGcW+duU5Awg
+ tdtdpteTjor7Vfm2QU0Xe2AD70RddPxktsi+OtJS9upy0A4a37LGjDZR/
+ RQwJW42E8dTC6dvQdhgrQyWMu6+/M7cEXpEO4aoyFLwyCGJiYe0Mf6RnP A==;
+X-CSE-ConnectionGUID: zqlsPSgiRjObA+O/7T5chw==
+X-CSE-MsgGUID: sqOwCT4LTr+G/+a3GXKP2w==
+X-IronPort-AV: E=McAfee;i="6700,10204,11427"; a="58820693"
+X-IronPort-AV: E=Sophos;i="6.15,274,1739865600"; d="scan'208";a="58820693"
+Received: from orviesa008.jf.intel.com ([10.64.159.148])
+ by orvoesa103.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 09 May 2025 02:09:20 -0700
+X-CSE-ConnectionGUID: 23mZ4JMRS06K1Y55uYr9rw==
+X-CSE-MsgGUID: SoaA/M/dRXKbfVT6oLvAug==
 X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.15,274,1739865600"; d="scan'208";a="159855159"
+X-IronPort-AV: E=Sophos;i="6.15,274,1739865600"; d="scan'208";a="137496563"
 Received: from liuzhao-optiplex-7080.sh.intel.com (HELO localhost)
  ([10.239.160.39])
- by fmviesa002.fm.intel.com with ESMTP; 09 May 2025 01:50:11 -0700
-Date: Fri, 9 May 2025 17:11:13 +0800
+ by orviesa008.jf.intel.com with ESMTP; 09 May 2025 02:09:13 -0700
+Date: Fri, 9 May 2025 17:30:15 +0800
 From: Zhao Liu <zhao1.liu@intel.com>
 To: Philippe =?iso-8859-1?Q?Mathieu-Daud=E9?= <philmd@linaro.org>
 Cc: qemu-devel@nongnu.org, Richard Henderson <richard.henderson@linaro.org>,
@@ -69,17 +69,17 @@ Cc: qemu-devel@nongnu.org, Richard Henderson <richard.henderson@linaro.org>,
  qemu-arm@nongnu.org,
  =?iso-8859-1?Q?Marc-Andr=E9?= Lureau <marcandre.lureau@redhat.com>,
  Huacai Chen <chenhuacai@kernel.org>, Jason Wang <jasowang@redhat.com>
-Subject: Re: [PATCH v4 20/27] target/i386/cpu: Remove
- CPUX86State::enable_l3_cache field
-Message-ID: <aB3GsY71YH4usdSi@intel.com>
+Subject: Re: [PATCH v4 13/27] target/i386/cpu: Remove
+ CPUX86State::fill_mtrr_mask field
+Message-ID: <aB3LJ8cI/zdJVbCA@intel.com>
 References: <20250508133550.81391-1-philmd@linaro.org>
- <20250508133550.81391-21-philmd@linaro.org>
+ <20250508133550.81391-14-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=iso-8859-1
 Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <20250508133550.81391-21-philmd@linaro.org>
-Received-SPF: pass client-ip=198.175.65.10; envelope-from=zhao1.liu@intel.com;
+In-Reply-To: <20250508133550.81391-14-philmd@linaro.org>
+Received-SPF: pass client-ip=198.175.65.11; envelope-from=zhao1.liu@intel.com;
  helo=mgamail.intel.com
 X-Spam_score_int: -57
 X-Spam_score: -5.8
@@ -104,50 +104,27 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Thu, May 08, 2025 at 03:35:43PM +0200, Philippe Mathieu-Daudé wrote:
-> Date: Thu,  8 May 2025 15:35:43 +0200
+On Thu, May 08, 2025 at 03:35:36PM +0200, Philippe Mathieu-Daudé wrote:
+> Date: Thu,  8 May 2025 15:35:36 +0200
 > From: Philippe Mathieu-Daudé <philmd@linaro.org>
-> Subject: [PATCH v4 20/27] target/i386/cpu: Remove
->  CPUX86State::enable_l3_cache field
+> Subject: [PATCH v4 13/27] target/i386/cpu: Remove
+>  CPUX86State::fill_mtrr_mask field
 > X-Mailer: git-send-email 2.47.1
 > 
-> The CPUX86State::enable_l3_cache boolean was only disabled
-> for the pc-q35-2.7 and pc-i440fx-2.7 machines, which got
-> removed.  Being now always %true, we can remove it and simplify
-> cpu_x86_cpuid() and encode_cache_cpuid80000006().
+> The CPUX86State::fill_mtrr_mask boolean was only disabled
+> for the pc-q35-2.6 and pc-i440fx-2.6 machines, which got
+> removed. Being now always %true, we can remove it and simplify
+> kvm_get_msrs().
 > 
 > Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 > ---
->  target/i386/cpu.h |  6 ------
->  target/i386/cpu.c | 39 +++++++++++++--------------------------
->  2 files changed, 13 insertions(+), 32 deletions(-)
-> 
-> diff --git a/target/i386/cpu.h b/target/i386/cpu.h
-> index b5cbd91c156..62239b0a562 100644
-> --- a/target/i386/cpu.h
-> +++ b/target/i386/cpu.h
-> @@ -2219,12 +2219,6 @@ struct ArchCPU {
->       */
->      bool enable_lmce;
->  
-> -    /* Compatibility bits for old machine types.
-> -     * If true present virtual l3 cache for VM, the vcpus in the same virtual
-> -     * socket share an virtual l3 cache.
-> -     */
-> -    bool enable_l3_cache;
-> -
->      /* Compatibility bits for old machine types.
->       * If true present L1 cache as per-thread, not per-core.
->       */
+>  target/i386/cpu.h     |  3 ---
+>  target/i386/cpu.c     |  1 -
+>  target/i386/kvm/kvm.c | 10 +++-------
+>  3 files changed, 3 insertions(+), 11 deletions(-)
 
-I realize this is another special case.
+No case found for external user use, so,
 
-There is no support for hybrid x86 CPUs in QEMU, but it's also true that
-there are some actual modern x86 Client CPUs without l3 cache, such as
-Intel MTL's low power E core (and it has vmx support, i.e., support KVM).
-
-So I think we can keep this property as well, to have some more
-configuration options for users' emulation.
-
+Reviewed-by: Zhao Liu <zhao1.liu@intel.com>
 
 
