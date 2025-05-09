@@ -4,76 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E68C4C3ABBC
-	for <qemu-riscv@archiver.kernel.org>; Fri,  9 May 2025 15:19:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5BF04C3ABC3
+	for <qemu-riscv@archiver.kernel.org>; Fri,  9 May 2025 15:24:17 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uDPV8-0000Am-Qq; Fri, 09 May 2025 11:19:03 -0400
+	id 1uDPZl-0002P4-9q; Fri, 09 May 2025 11:23:49 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <imammedo@redhat.com>)
- id 1uDPV7-0000AF-3K
- for qemu-riscv@nongnu.org; Fri, 09 May 2025 11:19:01 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
+ id 1uDPZk-0002OY-9D
+ for qemu-riscv@nongnu.org; Fri, 09 May 2025 11:23:48 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <imammedo@redhat.com>)
- id 1uDPV4-0006eM-P7
- for qemu-riscv@nongnu.org; Fri, 09 May 2025 11:19:00 -0400
+ id 1uDPZh-0007Qd-Pk
+ for qemu-riscv@nongnu.org; Fri, 09 May 2025 11:23:48 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1746803937;
+ s=mimecast20190719; t=1746804225;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=Rjbqdx3HPRg/NEzpoex5iQGAnHsm98NJ2C6e7cdmgEs=;
- b=XxwXqChUqj2Pdstugh4iCxCU6Jf84nXo6On6fxvCJuuf81xwkKmFfz95JhAtJeeDls49x7
- CjYYMxK/zKFDaj/6PVBh69f2U4eyp5wipvwZcIkaBTbr0Y1N2b/TfgQdYc2VIwsE/pMBJi
- a1bvR9oStcNCOBerBceMw3hNhUN0uMg=
+ bh=UbfgctwTat72Vztwb/ysK4sx3FtDutARgQGzZ60JQJo=;
+ b=ciuLo88IOzdGZjGQ8vko/8o8fv673kNzLH3Oaxh2W+ZjRFhmNvmP+DZuAI8dthKIzItanG
+ D0RXXF8JBUJbtXtboYhNbGsCuHWqbgxsTkUJjsxMS6iKbN+DKA5uExmBC4U3O1s+NoE6uw
+ K7lwo+1JWxUZE0adP3tGXbU1+BgxR98=
 Received: from mail-wm1-f70.google.com (mail-wm1-f70.google.com
  [209.85.128.70]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-248-wd7jq_-GM1KbyiHbHvUJEg-1; Fri, 09 May 2025 11:18:53 -0400
-X-MC-Unique: wd7jq_-GM1KbyiHbHvUJEg-1
-X-Mimecast-MFC-AGG-ID: wd7jq_-GM1KbyiHbHvUJEg_1746803932
+ us-mta-253-B-3m0yqiMGGIBFHu9jCQ4w-1; Fri, 09 May 2025 11:23:42 -0400
+X-MC-Unique: B-3m0yqiMGGIBFHu9jCQ4w-1
+X-Mimecast-MFC-AGG-ID: B-3m0yqiMGGIBFHu9jCQ4w_1746804221
 Received: by mail-wm1-f70.google.com with SMTP id
- 5b1f17b1804b1-442cd12d151so14111425e9.1
- for <qemu-riscv@nongnu.org>; Fri, 09 May 2025 08:18:53 -0700 (PDT)
+ 5b1f17b1804b1-441c122fa56so9353335e9.2
+ for <qemu-riscv@nongnu.org>; Fri, 09 May 2025 08:23:42 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1746803932; x=1747408732;
+ d=1e100.net; s=20230601; t=1746804221; x=1747409021;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:subject:cc:to:from:date:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=JWJim7G+Siwefyo++b2WmY1msvaLlI1d6zRqWaOxyzA=;
- b=OvL2Z3vvF7QVdVLKAiN0YUBBMcq0oZ4XzBgN64XYJaZRTttjGMuIJW+pGMs7w1TLrq
- YY0RRjE/bn3comU473DqCjxGxyR4LoSyUAMO4cdqmVetOGjCbrLIrlheOTZcmGzWQyCa
- 7tXSuoUO7O9v+ufovxw4v4+rn7Yh/OnyfK0sl71LLoAlVZyd2lK+0gf8ylq3qZ/5htT4
- ZVuBFxhbG45LD8jlHNZqRj1IkzSgECkcL3ZezhjyxAPc6cMhOVTWxAwKn/yGEq2tEO2F
- utbJ3OZQoDB9JtIPL+tXyIvPwgZZVmCyseJF/gQrIaC0Eqm71LPUZ5K1LlkytJL+w64k
- xExw==
+ bh=UbfgctwTat72Vztwb/ysK4sx3FtDutARgQGzZ60JQJo=;
+ b=Arek7PvjS8/jIpg3HT9gkL8E6sCskZ2vK2Kgg+d7U3EARNjKohpYVR+tNEuUra+TrF
+ yy/1nhL4i0pG1VrUNZ+lGbXfjMTNyFS5uNW05O7OlMk5epilwEsSwFuruv1DdIE4VQms
+ wA0lk8Z/kkLuEfPfu/jXUQE7f6DD3D8Mmh9hW2VKPjSu/Yn7ykJNvbDM2BwCVDNdn6Ih
+ LDss2ZyXgSalPV/HVmIsth9w8zSk8YVLkItof1Od1+eSDckzttNeOV+OGkPMUVb79Kux
+ yUQsnD3GcJkWL/W+S6EKFl5rAlb2rovbps9/b1n39XJpURkoBQ8i6c40sRUfwEeuTxdv
+ pK0Q==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWMwPtEhebLPQa3UABOOmWHGQ3ERAbn3xJKJmbrHFdtv7SvEudtM2C+yhjmI2iEVgtF+aDEPB9YBZhx@nongnu.org
-X-Gm-Message-State: AOJu0Yyxhv1pEMsIs6q1ytVvisVcf77fUqm/q6ZeD2LNZPQPfEN09BqZ
- 2QkWAWIdjeHYDHqMK4rA0IleoEdomlkKNz8MRowDcO8+owRSFTYUT/1Aico7xgD9WG+BQxZdvwv
- j4h4+hAhLBrnKzQdqsPKhd3kzoi0Z0YGXdiDCRSytjarmqqheuby8
-X-Gm-Gg: ASbGncveY/ZWviYsnJGRdAytWwcxgJD5TiKf/tt6TJQp8sDizgmx6+zdM1WNJ8gePkh
- 6JnYwEZhunZ8vpqPfRQMVLmzK/ZoBoy3c6ZxQN+gKMbZAaTYdcMEHERIUTbaSFACbL9nTHpl0KZ
- AfhmLmRjmTGpdOnsqJTgsANxfo+Mq9EcD9YWBjqBXlLBZSADFVXaKvaS148a+Yu7EngXBUQv7cq
- PwZJ+q8l78kVP1QNVuPRtZhlu/p9IPcKvrrRbxd9UGAOFUoSSf1UlMc8vyjsFmXPMMlZ+0YVukP
- hOWH4gfp3pzhDSe33fuhtfzudVngBjTG
-X-Received: by 2002:a05:600c:6487:b0:43d:7a:471f with SMTP id
- 5b1f17b1804b1-442d6d5d178mr32661415e9.18.1746803932395; 
- Fri, 09 May 2025 08:18:52 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IGWV3J6bpvPo+qOaKHJGbLAXu3HltVy9Aw1OV77LyApiIBOyXHQKhK2ndFIELG8bCn3yooizQ==
-X-Received: by 2002:a05:600c:6487:b0:43d:7a:471f with SMTP id
- 5b1f17b1804b1-442d6d5d178mr32660905e9.18.1746803931902; 
- Fri, 09 May 2025 08:18:51 -0700 (PDT)
+ AJvYcCU2uXyrQLY4hQrZ94mGizUrT/PWhwPwDidstvo6NqHraXJAg3FgJP7QfjAb4lLje1KqZWSw/gJ361F5@nongnu.org
+X-Gm-Message-State: AOJu0YzhdNpduh1eTBDl3vDuyJar5JZ0XECYzBXXGPYJbrnMDkz6qwPi
+ x6DBOYPtt3FDvb9T4TGBssyom4V3srGKG4xJq6LcjPyigGnA7Y6pv0AmA8C9sfnB94mUO6ibbsZ
+ 1KBmjuBhDHeob79Dhk5vg7ekAzn88/0kZNyU17igc6wY16oBGv4+B
+X-Gm-Gg: ASbGnctV9Zc+cYgpYxu7ssHnUDATz3YT2yYmwHiFLONYahWia7BHkDOwXN1lmR2XK9j
+ enEp8jzD9YTT/6+ZNOQ6KdboeEONb0raUwnlRyYMTNycFGO8F+0UWkG2Q5mLZz80MKv5ddt7aLo
+ NzPWj2g+vkelFr672eG/eqqbruy7uekW3prFp7gb0kFRvLgr59NEdX8Oqi5ZC4/o+SWssk39i5y
+ yDqihQ9MxX7RRkUfSV1LULh1PIYsX7Z1qvO+weqsTJEOkwLPBmZSZRmQoBS4gcxh1iU0iMuriPG
+ vHCoSSCNy86T89ddoBAw/4Ge3pLQlpsV
+X-Received: by 2002:a05:600c:4e46:b0:442:c993:6f94 with SMTP id
+ 5b1f17b1804b1-442d6d3dafbmr37079605e9.12.1746804221461; 
+ Fri, 09 May 2025 08:23:41 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IFP9pYN9puPiqkAj4uLWOelxROpw1y+p6NieMuknXnqrPphphHn4Ue+I3VMsXEnn2/RaKCr7w==
+X-Received: by 2002:a05:600c:4e46:b0:442:c993:6f94 with SMTP id
+ 5b1f17b1804b1-442d6d3dafbmr37079275e9.12.1746804221031; 
+ Fri, 09 May 2025 08:23:41 -0700 (PDT)
 Received: from imammedo.users.ipa.redhat.com ([85.93.96.130])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-442d67d5c35sm33173825e9.5.2025.05.09.08.18.49
+ 5b1f17b1804b1-442d67efdd0sm32939935e9.24.2025.05.09.08.23.38
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 09 May 2025 08:18:51 -0700 (PDT)
-Date: Fri, 9 May 2025 17:18:47 +0200
+ Fri, 09 May 2025 08:23:40 -0700 (PDT)
+Date: Fri, 9 May 2025 17:23:36 +0200
 From: Igor Mammedov <imammedo@redhat.com>
 To: Philippe =?UTF-8?B?TWF0aGlldS1EYXVkw6k=?= <philmd@linaro.org>
 Cc: qemu-devel@nongnu.org, Richard Henderson <richard.henderson@linaro.org>,
@@ -95,20 +95,20 @@ Cc: qemu-devel@nongnu.org, Richard Henderson <richard.henderson@linaro.org>,
  <marcandre.lureau@redhat.com>, Huacai Chen <chenhuacai@kernel.org>, Jason
  Wang <jasowang@redhat.com>, Mark Cave-Ayland <mark.caveayland@nutanix.com>,
  Thomas Huth <thuth@redhat.com>
-Subject: Re: [PATCH v4 02/27] hw/i386/pc: Remove
- PCMachineClass::legacy_cpu_hotplug field
-Message-ID: <20250509171847.0b505c96@imammedo.users.ipa.redhat.com>
-In-Reply-To: <20250508133550.81391-3-philmd@linaro.org>
+Subject: Re: [PATCH v4 01/27] hw/i386/pc: Remove deprecated pc-q35-2.6 and
+ pc-i440fx-2.6 machines
+Message-ID: <20250509172336.6e73884f@imammedo.users.ipa.redhat.com>
+In-Reply-To: <20250508133550.81391-2-philmd@linaro.org>
 References: <20250508133550.81391-1-philmd@linaro.org>
- <20250508133550.81391-3-philmd@linaro.org>
+ <20250508133550.81391-2-philmd@linaro.org>
 X-Mailer: Claws Mail 4.3.1 (GTK 3.24.43; x86_64-redhat-linux-gnu)
 MIME-Version: 1.0
 X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: JbplRQw3ka6ddqTLjv3qqqfAc_o9N7AMKNRVDGiCfLU_1746803932
+X-Mimecast-MFC-PROC-ID: SdY821IjiC67Stq3juUDybQtuzKraH3tQ2n_asXJgLA_1746804221
 X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=170.10.133.124; envelope-from=imammedo@redhat.com;
+Received-SPF: pass client-ip=170.10.129.124; envelope-from=imammedo@redhat.com;
  helo=us-smtp-delivery-124.mimecast.com
 X-Spam_score_int: -34
 X-Spam_score: -3.5
@@ -133,72 +133,77 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Thu,  8 May 2025 15:35:25 +0200
+On Thu,  8 May 2025 15:35:24 +0200
 Philippe Mathieu-Daud=C3=A9 <philmd@linaro.org> wrote:
 
-> The PCMachineClass::legacy_cpu_hotplug boolean was only used
-> by the pc-q35-2.6 and pc-i440fx-2.6 machines, which got
-> removed. Remove it and simplify build_dsdt(), removing
-> build_legacy_cpu_hotplug_aml() altogether.
->=20
-> Note, this field was added by commit 679dd1a957d ("pc: use
-> new CPU hotplug interface since 2.7 machine type"):
->=20
->  >  For compatibility reasons PC/Q35 will start with legacy
->  >  CPU hotplug interface by default but with new CPU hotplug
->  >  AML code since 2.7 machine type. That way legacy firmware
->  >  that doesn't use QEMU generated ACPI tables will be
->  >  able to continue using legacy CPU hotplug interface.
->  >
->  >  While new machine type, with firmware supporting QEMU
->  >  provided ACPI tables, will generate new CPU hotplug AML,
->  >  which will switch to new CPU hotplug interface when
->  >  guest OS executes its _INI method on ACPI tables
->  >  loading. =20
+> These machines has been supported for a period of more than 6 years.
+> According to our versioned machine support policy (see commit
+> ce80c4fa6ff "docs: document special exception for machine type
+> deprecation & removal") they can now be removed.
+
+if these machine types are the last users of compat arrays,
+it's better to remove array at the same time, aka squash
+those patches later in series into this one.
+That leaves no illusion that compats could be used in the later patches.
+=20
 >=20
 > Signed-off-by: Philippe Mathieu-Daud=C3=A9 <philmd@linaro.org>
 > Reviewed-by: Mark Cave-Ayland <mark.caveayland@nutanix.com>
 > Reviewed-by: Thomas Huth <thuth@redhat.com>
 > Reviewed-by: Zhao Liu <zhao1.liu@intel.com>
 > ---
->  include/hw/acpi/cpu_hotplug.h |   3 -
->  include/hw/i386/pc.h          |   3 -
->  hw/acpi/cpu_hotplug.c         | 230 ----------------------------------
->  hw/i386/acpi-build.c          |   4 +-
->  4 files changed, 1 insertion(+), 239 deletions(-)
+>  hw/i386/pc_piix.c | 14 --------------
+>  hw/i386/pc_q35.c  | 14 --------------
+>  2 files changed, 28 deletions(-)
 >=20
-
-...
-
-> diff --git a/hw/i386/acpi-build.c b/hw/i386/acpi-build.c
-> index 3fffa4a3328..625889783ec 100644
-> --- a/hw/i386/acpi-build.c
-> +++ b/hw/i386/acpi-build.c
-> @@ -1465,9 +1465,7 @@ build_dsdt(GArray *table_data, BIOSLinker *linker,
->      }
->      aml_append(dsdt, scope);
+> diff --git a/hw/i386/pc_piix.c b/hw/i386/pc_piix.c
+> index 7a62bb06500..98a118fd4a0 100644
+> --- a/hw/i386/pc_piix.c
+> +++ b/hw/i386/pc_piix.c
+> @@ -764,20 +764,6 @@ static void pc_i440fx_machine_2_7_options(MachineCla=
+ss *m)
 > =20
-> -    if (pcmc->legacy_cpu_hotplug) {
-> -        build_legacy_cpu_hotplug_aml(dsdt, machine, pm->cpu_hp_io_base);
-> -    } else {
-> +    {
->          CPUHotplugFeatures opts =3D {
->              .acpi_1_compatible =3D true, .has_legacy_cphp =3D true,
-                                           ^^^^^
-that still leaves legacy CPU hotplug hardware around, which we should remov=
-e
-at the same time as legacy AML.
-
-i.e.:
-  drop _INI in hw/acpi/cpu.c
-  and at the same time replace legacy_acpi_cpu_hotplug_init() at call sites=
- with
-  cpu_hotplug_hw_init()
-  after that you can safely remove legacy_cpu_hotplug and no longer needed =
-hw/acpi/cpu_hotplug.c && co
-
-
->              .smi_path =3D pm->smi_on_cpuhp ? "\\_SB.PCI0.SMI0.SMIC" : NU=
-LL,
+>  DEFINE_I440FX_MACHINE(2, 7);
+> =20
+> -static void pc_i440fx_machine_2_6_options(MachineClass *m)
+> -{
+> -    X86MachineClass *x86mc =3D X86_MACHINE_CLASS(m);
+> -    PCMachineClass *pcmc =3D PC_MACHINE_CLASS(m);
+> -
+> -    pc_i440fx_machine_2_7_options(m);
+> -    pcmc->legacy_cpu_hotplug =3D true;
+> -    x86mc->fwcfg_dma_enabled =3D false;
+> -    compat_props_add(m->compat_props, hw_compat_2_6, hw_compat_2_6_len);
+> -    compat_props_add(m->compat_props, pc_compat_2_6, pc_compat_2_6_len);
+> -}
+> -
+> -DEFINE_I440FX_MACHINE(2, 6);
+> -
+>  #ifdef CONFIG_ISAPC
+>  static void isapc_machine_options(MachineClass *m)
+>  {
+> diff --git a/hw/i386/pc_q35.c b/hw/i386/pc_q35.c
+> index 33211b1876f..b7ffb5f1216 100644
+> --- a/hw/i386/pc_q35.c
+> +++ b/hw/i386/pc_q35.c
+> @@ -658,17 +658,3 @@ static void pc_q35_machine_2_7_options(MachineClass =
+*m)
+>  }
+> =20
+>  DEFINE_Q35_MACHINE(2, 7);
+> -
+> -static void pc_q35_machine_2_6_options(MachineClass *m)
+> -{
+> -    X86MachineClass *x86mc =3D X86_MACHINE_CLASS(m);
+> -    PCMachineClass *pcmc =3D PC_MACHINE_CLASS(m);
+> -
+> -    pc_q35_machine_2_7_options(m);
+> -    pcmc->legacy_cpu_hotplug =3D true;
+> -    x86mc->fwcfg_dma_enabled =3D false;
+> -    compat_props_add(m->compat_props, hw_compat_2_6, hw_compat_2_6_len);
+> -    compat_props_add(m->compat_props, pc_compat_2_6, pc_compat_2_6_len);
+> -}
+> -
+> -DEFINE_Q35_MACHINE(2, 6);
 
 
