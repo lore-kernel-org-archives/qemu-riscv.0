@@ -4,79 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E8B27C3ABC3
-	for <qemu-riscv@archiver.kernel.org>; Fri,  9 May 2025 15:38:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 82C50C3ABC3
+	for <qemu-riscv@archiver.kernel.org>; Fri,  9 May 2025 15:39:26 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uDPoC-0005Sw-R1; Fri, 09 May 2025 11:38:44 -0400
+	id 1uDPoc-0005dW-Vz; Fri, 09 May 2025 11:39:11 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <imammedo@redhat.com>)
- id 1uDPo9-0005Rq-P7
- for qemu-riscv@nongnu.org; Fri, 09 May 2025 11:38:41 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
+ id 1uDPob-0005d2-PL
+ for qemu-riscv@nongnu.org; Fri, 09 May 2025 11:39:09 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <imammedo@redhat.com>)
- id 1uDPo6-0001CF-3U
- for qemu-riscv@nongnu.org; Fri, 09 May 2025 11:38:41 -0400
+ id 1uDPoa-0001Ew-74
+ for qemu-riscv@nongnu.org; Fri, 09 May 2025 11:39:09 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1746805116;
+ s=mimecast20190719; t=1746805147;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=nacOks2riggVWBsNA+mzbNQsW0rVzzTbedwggtXVT54=;
- b=erkhUovX1PZCTbRcHpdEnTw/GYDIjIk162ElgQsQZNxt5N8jAe1XsN3u5k+PnqwiCvxRIO
- L7Fvby7CbyQtcq+k5sGblTxFMwDjq0B1LiVT0M6ybpcD6NftHwv8UnU+wz+CschhInkhRq
- 93MY15rVIeP6jGPENJ235lgNM06mPPs=
-Received: from mail-wm1-f72.google.com (mail-wm1-f72.google.com
- [209.85.128.72]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=0q9Jy98uK5VZ3vYkkKTg9elLrKYm7ghVzOBceZF6LV8=;
+ b=WgEP3s46w6bYHfxeuGbQtopCjCfY1CsvwZ3ARZovjM1bLRyF3ZqC3NXhN874zp5z66gjwi
+ mVvkZBycO97uQrb+Or/m1arVlHUuKf6mbJxjps9Upwc5wxnyjaoV9uKcbNG8+2RnpVOLPu
+ Skb9L5HY8XyengAbxy5GXb5lbLrtix8=
+Received: from mail-wr1-f71.google.com (mail-wr1-f71.google.com
+ [209.85.221.71]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-689-Msx3rULDPe2-t1KoOpxK7Q-1; Fri, 09 May 2025 11:38:35 -0400
-X-MC-Unique: Msx3rULDPe2-t1KoOpxK7Q-1
-X-Mimecast-MFC-AGG-ID: Msx3rULDPe2-t1KoOpxK7Q_1746805114
-Received: by mail-wm1-f72.google.com with SMTP id
- 5b1f17b1804b1-43f251dc364so13890815e9.2
- for <qemu-riscv@nongnu.org>; Fri, 09 May 2025 08:38:35 -0700 (PDT)
+ us-mta-658-biE6kR_VPciGuw-y7mfx3w-1; Fri, 09 May 2025 11:39:06 -0400
+X-MC-Unique: biE6kR_VPciGuw-y7mfx3w-1
+X-Mimecast-MFC-AGG-ID: biE6kR_VPciGuw-y7mfx3w_1746805145
+Received: by mail-wr1-f71.google.com with SMTP id
+ ffacd0b85a97d-3a1fc08c424so194417f8f.3
+ for <qemu-riscv@nongnu.org>; Fri, 09 May 2025 08:39:06 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1746805114; x=1747409914;
+ d=1e100.net; s=20230601; t=1746805145; x=1747409945;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:subject:cc:to:from:date:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=nacOks2riggVWBsNA+mzbNQsW0rVzzTbedwggtXVT54=;
- b=m0HKdVrIeHml461C9QCAHwjF4wg4lRvMhZMIYZakjcdhpYjukHwQThdmq/AAzb0aA8
- BzNpCopojmyYfRyVRsz/jG0crWjCMKlXqW+HYuJkWnd72NdTQcbh4Y+qwKoy3/x9HhjT
- 1FYi4aG903a4ZtLg/Zm2anxAK6RtPXshAK6MDd96DVrao8uWA3W/QTEt2pXPQhwZ3KvS
- yDTDn1VI4VqtR4eJCHkxmivgCqG+aZwrKpDc9MkLhPkfG4i9fYWFMlieT99sIWbNsO7/
- Hp/Mkd0A51fuhQE2hwp+ZQUnxm/5ZLp9eoeuBQ9OaaAM25jh8nQwwrIbJ/AQ9i0eF9LM
- XTcw==
+ bh=XjfMm92yDrp8r2ZOJnfR/TKWAwp/QZ0ox7aMgUojhHI=;
+ b=KcX5AxaDZGnPAAnpaH4jB8mGCT2XDnP0mC56xU+YOsgPyN0PBEZlyl8+dMfWAuOEk2
+ rG+E5igaOcy4fPcVHbRZVarlKcteVQd7BOFiHTccACoHTghhLgKwLqznQqd0CCz0KRg4
+ LD7YF6cXEMh7PppXZmC9/lvKaTzPWY1CcjN1mEBhA7ZPCz5/QjczZvBCVx7wNOtVYjSJ
+ 0RKwMx6YhO6lV19HJLx03hpBd2BvS3mDfXdgMpzdjyQc0ckRxAYqN2UXaLjjqONGGuHw
+ w/wLncTasLvQwmYG4DvojaXO/6jQ6Te6B60BBWUeQZLEADs81BWMjqOUruWSYpn0aRv4
+ 45BA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWIqrJ29IgmCIVJER64GgIJQqWs2dUnJxRYKgo7IAfVJJrWrile2Ill5uc59rupvCe/0jWziqVdMQhQ@nongnu.org
-X-Gm-Message-State: AOJu0Yz0H6/yhBwXWXuW5ejUnSqvS6gQNW1AQZUngUAjrIAoIRoI+IVI
- i5fqLbdX1xFmoBDmR0DJGTmN/bgFylBGRvvBDDYCKH2KLlyiWMmBqGtUQgA/iTP6slSGbCeo4qT
- Uw+gaFzw7G6m+Q+vMb0Tl/sLo/DeUadqCW4Cgja135M9f0GqdCliA
-X-Gm-Gg: ASbGncuZFwA6BC4gQGHXprMj0PRVdwxKlCWUNf62juknw2cG8LyxvFqN9ddy31NAl37
- 4D9O/jyxNDQfXc7BrIP/qJFRq14M9ARPOAPnBODxzMqFExygHpFH+CflFrl4S3eTmz3uOL75Thn
- UIWqKJeIvTWKNHIQOyPwV1pCU1t3WlEp7ZIWgZ+wlEpm8CD1hlAZTXt6EnOUXWJWTxQBh0IbABp
- I/id26KTcb6k3bFtPFgZ7UH3zMGU4bNApRm/gs/CUrm946Em42E1AEyE42fHAvsexjjTc9wEu+p
- 9bMYixSi7ERQMbHlmqQvhBNStYFHjlF6
-X-Received: by 2002:a05:600c:1da8:b0:43c:fb95:c76f with SMTP id
- 5b1f17b1804b1-442d6d1f997mr36588915e9.9.1746805114255; 
- Fri, 09 May 2025 08:38:34 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IFBEcV+/MRGEimFQAdvMHfUPN89iu355oNKXju8PihTLwzByIgEtqzNodbo9ktiTe49ZmDRCg==
-X-Received: by 2002:a05:600c:1da8:b0:43c:fb95:c76f with SMTP id
- 5b1f17b1804b1-442d6d1f997mr36588685e9.9.1746805113892; 
- Fri, 09 May 2025 08:38:33 -0700 (PDT)
+ AJvYcCWyVwGSfOAzmc8oTAjG5/TlVp9SzVw4TsHJbvq13LSBkns3WDN6NifgJ2NxcGRC5WBvq0es6eKxqErV@nongnu.org
+X-Gm-Message-State: AOJu0YweWuWUTTO/sjlcd3ldvLjo8whiUqzEJhgecnY/iHmR91SaAJxx
+ 450Vb67EM/k5Grow5eaEfyKHUPWteqmjWNVM6UNe3jjwVhDt8Z1I2JiA0s7G2TRbojwNrhnkka8
+ N0UDlGkNmSszPn27FEoZBxi82tMYe/7ZqHA1AicEbTc3dl7Q8LNfF
+X-Gm-Gg: ASbGncusEuofFPFQvRTuBd0hHk6R0ccJTSob1az4asNAXnR9QceKXnzqv/6GStzJPUW
+ GldBsv0079TOQZkoQMzoTyG4WzurB/IUaOfRI2fDCFswCKpun5LQo2MJXLkwH+LShhNZF0iGvLK
+ KlEBRljc18kwNiA6MAarxwj/p36o27Bysh8ILevWrKaCxuejTb/vUiU3T8R+ODjG7/Gq6ZU3Pt4
+ AhQ9Vl4NAId1zUDNFHEdXuV5f/bB2DiTQdn9MLVTDOxucNks5dRnpTgZsgpYMg6+7ac1hI0Xcn3
+ 3WwF+uer5i3nfpWLqLxqNtMYyPt8pRy7
+X-Received: by 2002:a5d:64ad:0:b0:3a0:b4f1:8bda with SMTP id
+ ffacd0b85a97d-3a1f643ac2fmr3272167f8f.1.1746805144982; 
+ Fri, 09 May 2025 08:39:04 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IGhKPmGTam1SWc4Gq6m5qYczHRHd+/PPrONEzG16dZjSMP8SZ3aFRBc8dbuayiDSu1cWlR1ag==
+X-Received: by 2002:a5d:64ad:0:b0:3a0:b4f1:8bda with SMTP id
+ ffacd0b85a97d-3a1f643ac2fmr3272131f8f.1.1746805144552; 
+ Fri, 09 May 2025 08:39:04 -0700 (PDT)
 Received: from imammedo.users.ipa.redhat.com ([85.93.96.130])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-442cd34bc2esm75445085e9.20.2025.05.09.08.38.31
+ ffacd0b85a97d-3a1f57de001sm3565183f8f.20.2025.05.09.08.39.03
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 09 May 2025 08:38:33 -0700 (PDT)
-Date: Fri, 9 May 2025 17:38:30 +0200
+ Fri, 09 May 2025 08:39:04 -0700 (PDT)
+Date: Fri, 9 May 2025 17:39:02 +0200
 From: Igor Mammedov <imammedo@redhat.com>
-To: Philippe =?UTF-8?B?TWF0aGlldS1EYXVkw6k=?= <philmd@linaro.org>
-Cc: qemu-devel@nongnu.org, Richard Henderson <richard.henderson@linaro.org>,
+To: Zhao Liu <zhao1.liu@intel.com>
+Cc: Philippe =?UTF-8?B?TWF0aGlldS1EYXVkw6k=?= <philmd@linaro.org>,
+ qemu-devel@nongnu.org, Richard Henderson <richard.henderson@linaro.org>,
  kvm@vger.kernel.org, Sergio Lopez <slp@redhat.com>, Gerd Hoffmann
  <kraxel@redhat.com>, Peter Maydell <peter.maydell@linaro.org>, Laurent
  Vivier <lvivier@redhat.com>, Jiaxun Yang <jiaxun.yang@flygoat.com>, Yi Liu
@@ -85,29 +86,29 @@ Cc: qemu-devel@nongnu.org, Richard Henderson <richard.henderson@linaro.org>,
  <marcel.apfelbaum@gmail.com>, Alistair Francis <alistair.francis@wdc.com>,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>, Marcelo Tosatti
  <mtosatti@redhat.com>, qemu-riscv@nongnu.org, Weiwei Li
- <liwei1518@gmail.com>, Amit Shah <amit@kernel.org>, Zhao Liu
- <zhao1.liu@intel.com>, Yanan Wang <wangyanan55@huawei.com>, Helge Deller
- <deller@gmx.de>, Palmer Dabbelt <palmer@dabbelt.com>, Ani Sinha
- <anisinha@redhat.com>, Fabiano Rosas <farosas@suse.de>, Paolo Bonzini
- <pbonzini@redhat.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- =?UTF-8?B?Q2zDqW1lbnQ=?= Mathieu--Drif <clement.mathieu--drif@eviden.com>,
- qemu-arm@nongnu.org, =?UTF-8?B?TWFyYy1BbmRyw6k=?= Lureau
- <marcandre.lureau@redhat.com>, Huacai Chen <chenhuacai@kernel.org>, Jason
- Wang <jasowang@redhat.com>
-Subject: Re: [PATCH v4 05/27] hw/nvram/fw_cfg: Factor
- fw_cfg_init_mem_internal() out
-Message-ID: <20250509173830.65d0fde7@imammedo.users.ipa.redhat.com>
-In-Reply-To: <20250508133550.81391-6-philmd@linaro.org>
+ <liwei1518@gmail.com>, Amit Shah <amit@kernel.org>, Yanan Wang
+ <wangyanan55@huawei.com>, Helge Deller <deller@gmx.de>, Palmer Dabbelt
+ <palmer@dabbelt.com>, Ani Sinha <anisinha@redhat.com>, Fabiano Rosas
+ <farosas@suse.de>, Paolo Bonzini <pbonzini@redhat.com>, Liu Zhiwei
+ <zhiwei_liu@linux.alibaba.com>, =?UTF-8?B?Q2zDqW1lbnQ=?= Mathieu--Drif
+ <clement.mathieu--drif@eviden.com>, qemu-arm@nongnu.org, =?UTF-8?B?TWFy?=
+ =?UTF-8?B?Yy1BbmRyw6k=?= Lureau <marcandre.lureau@redhat.com>, Huacai Chen
+ <chenhuacai@kernel.org>, Jason Wang <jasowang@redhat.com>
+Subject: Re: [PATCH v4 06/27] hw/nvram/fw_cfg: Rename fw_cfg_init_mem_wide()
+ -> fw_cfg_init_mem_dma()
+Message-ID: <20250509173902.718c2dc5@imammedo.users.ipa.redhat.com>
+In-Reply-To: <aB2l25PwH4e0jaTb@intel.com>
 References: <20250508133550.81391-1-philmd@linaro.org>
- <20250508133550.81391-6-philmd@linaro.org>
+ <20250508133550.81391-7-philmd@linaro.org>
+ <aB2l25PwH4e0jaTb@intel.com>
 X-Mailer: Claws Mail 4.3.1 (GTK 3.24.43; x86_64-redhat-linux-gnu)
 MIME-Version: 1.0
 X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: hr2sFWLNc7lm6IQ1Xa3-1s4OZC6HXbIh9XOF7olvk6s_1746805114
+X-Mimecast-MFC-PROC-ID: qk2y3AlxrgK-76dOJneikCDLmtLUnLTjFJCADS-FZ-Y_1746805145
 X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=170.10.129.124; envelope-from=imammedo@redhat.com;
+Received-SPF: pass client-ip=170.10.133.124; envelope-from=imammedo@redhat.com;
  helo=us-smtp-delivery-124.mimecast.com
 X-Spam_score_int: -34
 X-Spam_score: -3.5
@@ -116,7 +117,7 @@ X-Spam_report: (-3.5 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-1.413,
  DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H5=0.001, RCVD_IN_MSPIKE_WL=0.001,
  RCVD_IN_VALIDITY_CERTIFIED_BLOCKED=0.001, RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -132,63 +133,56 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Thu,  8 May 2025 15:35:28 +0200
-Philippe Mathieu-Daud=C3=A9 <philmd@linaro.org> wrote:
+On Fri, 9 May 2025 14:51:07 +0800
+Zhao Liu <zhao1.liu@intel.com> wrote:
 
-> Factor fw_cfg_init_mem_internal() out of fw_cfg_init_mem_wide().
-> In fw_cfg_init_mem_wide(), assert DMA arguments are provided.
-> Callers without DMA have to use the fw_cfg_init_mem() helper.
->=20
-> Signed-off-by: Philippe Mathieu-Daud=C3=A9 <philmd@linaro.org>
-
-Reviewed-by: Igor Mammedov <imammedo@redhat.com>
-
-> ---
->  hw/nvram/fw_cfg.c | 17 +++++++++++++----
->  1 file changed, 13 insertions(+), 4 deletions(-)
->=20
-> diff --git a/hw/nvram/fw_cfg.c b/hw/nvram/fw_cfg.c
-> index 10f8f8db86f..4067324fb09 100644
-> --- a/hw/nvram/fw_cfg.c
-> +++ b/hw/nvram/fw_cfg.c
-> @@ -1053,9 +1053,9 @@ FWCfgState *fw_cfg_init_io_dma(uint32_t iobase, uin=
+> On Thu, May 08, 2025 at 03:35:29PM +0200, Philippe Mathieu-Daud=C3=A9 wro=
+te:
+> > Date: Thu,  8 May 2025 15:35:29 +0200
+> > From: Philippe Mathieu-Daud=C3=A9 <philmd@linaro.org>
+> > Subject: [PATCH v4 06/27] hw/nvram/fw_cfg: Rename fw_cfg_init_mem_wide(=
+) ->
+> >  fw_cfg_init_mem_dma()
+> > X-Mailer: git-send-email 2.47.1
+> >=20
+> > "wide" in fw_cfg_init_mem_wide() means "DMA support".
+> > Rename for clarity.
+> >=20
+> > Suggested-by: Zhao Liu <zhao1.liu@intel.com>
+> > Signed-off-by: Philippe Mathieu-Daud=C3=A9 <philmd@linaro.org>
+> > ---
+> >  include/hw/nvram/fw_cfg.h | 6 +++---
+> >  hw/arm/virt.c             | 2 +-
+> >  hw/nvram/fw_cfg.c         | 6 +++---
+> >  hw/riscv/virt.c           | 4 ++--
+> >  4 files changed, 9 insertions(+), 9 deletions(-)
+> >=20
+> > diff --git a/include/hw/nvram/fw_cfg.h b/include/hw/nvram/fw_cfg.h
+> > index d5161a79436..c4c49886754 100644
+> > --- a/include/hw/nvram/fw_cfg.h
+> > +++ b/include/hw/nvram/fw_cfg.h
+> > @@ -309,9 +309,9 @@ FWCfgState *fw_cfg_init_io_dma(uint32_t iobase, uin=
 t32_t dma_iobase,
->      return s;
->  }
-> =20
-> -FWCfgState *fw_cfg_init_mem_wide(hwaddr ctl_addr,
-> -                                 hwaddr data_addr, uint32_t data_width,
-> -                                 hwaddr dma_addr, AddressSpace *dma_as)
-> +static FWCfgState *fw_cfg_init_mem_internal(hwaddr ctl_addr,
-> +                                            hwaddr data_addr, uint32_t d=
-ata_width,
-> +                                            hwaddr dma_addr, AddressSpac=
-e *dma_as)
->  {
->      DeviceState *dev;
->      SysBusDevice *sbd;
-> @@ -1087,10 +1087,19 @@ FWCfgState *fw_cfg_init_mem_wide(hwaddr ctl_addr,
->      return s;
->  }
-> =20
-> +FWCfgState *fw_cfg_init_mem_wide(hwaddr ctl_addr,
-> +                                 hwaddr data_addr, uint32_t data_width,
-> +                                 hwaddr dma_addr, AddressSpace *dma_as)
-> +{
-> +    assert(dma_addr && dma_as);
-> +    return fw_cfg_init_mem_internal(ctl_addr, data_addr, data_addr,
-> +                                    dma_addr, dma_as);
-> +}
-> +
->  FWCfgState *fw_cfg_init_mem_nodma(hwaddr ctl_addr, hwaddr data_addr,
->                                    unsigned data_width)
->  {
-> -    return fw_cfg_init_mem_wide(ctl_addr, data_addr, data_width, 0, NULL=
+> >                                  AddressSpace *dma_as);
+> >  FWCfgState *fw_cfg_init_mem_nodma(hwaddr ctl_addr, hwaddr data_addr,
+> >                                    unsigned data_width);
+> > -FWCfgState *fw_cfg_init_mem_wide(hwaddr ctl_addr,
+> > -                                 hwaddr data_addr, uint32_t data_width=
+,
+> > -                                 hwaddr dma_addr, AddressSpace *dma_as=
 );
-> +    return fw_cfg_init_mem_internal(ctl_addr, data_addr, data_width, 0, =
-NULL);
->  }
-> =20
-> =20
+> > +FWCfgState *fw_cfg_init_mem_dma(hwaddr ctl_addr,
+> > +                                hwaddr data_addr, uint32_t data_width,
+> > +                                hwaddr dma_addr, AddressSpace *dma_as)=
+; =20
+>=20
+> There's one more use in latest master:
+>=20
+> git grep fw_cfg_init_mem_wide
+> hw/loongarch/fw_cfg.c:    fw_cfg =3D fw_cfg_init_mem_wide(VIRT_FWCFG_BASE=
+ + 8, VIRT_FWCFG_BASE, 8,
+
+with that fixed:
+  Reviewed-by: Igor Mammedov <imammedo@redhat.com>
 
 
