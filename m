@@ -4,76 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 406AFC3ABC3
-	for <qemu-riscv@archiver.kernel.org>; Fri,  9 May 2025 15:44:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 69B97C3ABBC
+	for <qemu-riscv@archiver.kernel.org>; Fri,  9 May 2025 16:02:33 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uDPto-0008Lf-8y; Fri, 09 May 2025 11:44:34 -0400
+	id 1uDQA6-0008F9-Eo; Fri, 09 May 2025 12:01:22 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <imammedo@redhat.com>)
- id 1uDPtX-0008E2-7g
- for qemu-riscv@nongnu.org; Fri, 09 May 2025 11:44:15 -0400
+ id 1uDQ9n-0007lh-UC
+ for qemu-riscv@nongnu.org; Fri, 09 May 2025 12:01:08 -0400
 Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <imammedo@redhat.com>)
- id 1uDPtS-0001z1-F1
- for qemu-riscv@nongnu.org; Fri, 09 May 2025 11:44:13 -0400
+ id 1uDQ9j-00042F-HJ
+ for qemu-riscv@nongnu.org; Fri, 09 May 2025 12:01:03 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1746805446;
+ s=mimecast20190719; t=1746806458;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=K3YdAPz/G+ySpv1BewJ+oTg4/vb8fkPHd3D7oo2CbsY=;
- b=ILbGEJDJv21y3rsxIbMcDBYVLxTSEbsuMkLiLJjbFJl5QRx3jzvuuEtxkTbV9zsrrTw34n
- n/DGcRDSCuyzO7m1pVOg9AYUnil8IRoKyXvr4qCZqWOX2T05oLW5InS3nYheBZftYm/b+m
- XEUNKmWKEf0rAfZME78dHxsYWdFM6ao=
-Received: from mail-wr1-f69.google.com (mail-wr1-f69.google.com
- [209.85.221.69]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=1l2f1VTt8XFWF8y5nnU3g+hJzfAgoHTdTr9qTI5UxXU=;
+ b=K/4Wt74AVUuStY2qeO+6aPFi2IjHrEYfpP2Pb1TJCskT21VaCuOYHkwoRoJCBpjx5AVbiq
+ 4s9LhmPFyhzUspNFDSSWqFigpXXjZUq8bLGyzPvuq5mV34RcJUmLsUZ2jh97GGKO0R8geQ
+ yeICVryiEijKDB9k0oTLu4fI9z5d2wI=
+Received: from mail-wm1-f69.google.com (mail-wm1-f69.google.com
+ [209.85.128.69]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-277-EVWYjQm8OSSoAJXrKQ0MRQ-1; Fri, 09 May 2025 11:44:04 -0400
-X-MC-Unique: EVWYjQm8OSSoAJXrKQ0MRQ-1
-X-Mimecast-MFC-AGG-ID: EVWYjQm8OSSoAJXrKQ0MRQ_1746805443
-Received: by mail-wr1-f69.google.com with SMTP id
- ffacd0b85a97d-3a0b7c8b3e2so1460344f8f.1
- for <qemu-riscv@nongnu.org>; Fri, 09 May 2025 08:44:04 -0700 (PDT)
+ us-mta-557-_LrDhKn8OYuNqWPfHVNVWw-1; Fri, 09 May 2025 12:00:55 -0400
+X-MC-Unique: _LrDhKn8OYuNqWPfHVNVWw-1
+X-Mimecast-MFC-AGG-ID: _LrDhKn8OYuNqWPfHVNVWw_1746806455
+Received: by mail-wm1-f69.google.com with SMTP id
+ 5b1f17b1804b1-43ea256f039so17435405e9.0
+ for <qemu-riscv@nongnu.org>; Fri, 09 May 2025 09:00:55 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1746805443; x=1747410243;
+ d=1e100.net; s=20230601; t=1746806455; x=1747411255;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:subject:cc:to:from:date:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=K3YdAPz/G+ySpv1BewJ+oTg4/vb8fkPHd3D7oo2CbsY=;
- b=sUKerJL/UV4jPl1W1dD/tTC8xTgPE2Cjx21x5NqSCUQwRPwgsLMZ/i+Jv0aykhV2Ln
- X9zW1pkcMKf5r6rZieYJvSUFIw92use8BqZND/VKruU7fK8voXu8NK1i9F8obcVggd2T
- 7fNlDNVTIDUBJ+YNe35VQOrO0deECAu5iv/IjAkseR0yOdFzrQhjDTIIMIuOCn7fPnuM
- t1nyRSvodHAkZjSCl9eYRSag2RQ04rC5yHAP3ND/yt3TUvO9VoTZ74+Yhci+J8i73G/g
- clNnaVCcvOsdlAaimoYUVC1rWzqe1IQYNP5uNeTPS0e1Bp0zQa/wj7YCJKr9/MJ7sIHg
- C53w==
+ bh=pp1R+sHe0G6QXL8IYhdEIVqTNgya/k6FcsiXO1F4Qzc=;
+ b=Hp2P944JPBZ9vL1zfJ3/VioctxA5ybW867W0u2ZpdW5dnvyjIytVLGLB8mUQihEIRp
+ 6vxT7lzWk1ERrQ88QbmIe5Xd3phZyavi5wZO6D3lFiodScW4ULE9ddI00FT814SGZ66A
+ 41oJPgOtK4RcVyUBMjy/jGPOI79NLbfR7o9jJn6Q16g/p/ec9ZM/4upE+LA1aJnY4E5U
+ EB1Y8dwLrd0iehGHIPdYFshCy9xDpEFs0OTCMXNgfTBeUi7uI+3N0UacBjPU2OWGq3Xc
+ iF2ujGMIzwiJm6ep/7HcgxvqRrKrZBgiaqrpbDQ7+Jjf7d3TMTzPAh/zAg+ADom0pk49
+ tPrw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUDmoYPq2JGi+QQOKm8nwhwhHhHfYhOhCPiJimskDDzzIbuYDtvPKOEAI9QpFPhqJjJ+0/VVWqUVW6b@nongnu.org
-X-Gm-Message-State: AOJu0YxkrhBKwWRmgqI6E3qxUz2H5XH/QicsSrX4tOuvczBWCc82bJAm
- oTWLijSq0cq14WT/EOx6KRk5ShEgIhXZbxgnSe03wGg43HuJxYd9SY3PKk3X4eZ7lRAvB38QwY8
- vv4lwV67Q4gTw/fwyb8Xdn42n2nIz/UwtkRTUszslzFa8ZdbnshuD
-X-Gm-Gg: ASbGncvWtlMa9jNu1rsKnmBmSeJND67rBZ+eTfMA93WZsFA4zK0sio8lWgIBAwkS8ux
- thop6c1FbsnT23TuaDW19C/ngQep9pXaU9PCU7IC9kVFrqMSe6PcgoHEB9jO6hdkeLLLp1oagOG
- RK+tn4cgGUj09nezHizGCyShWyAfmbXIrsdsuYZL/Va7YRg6sNoVO+pREcthjk7Nq29i/ECITBG
- BZp9RfBzX9TtTT6PX62fvaTIGvVv2XtNCNV+pQfEwjfgJCllKNO9No43nzpMz7y7k9bhYHe95IU
- oe1isOOWh06B4mWAIfxpXf2mocel2IJn
-X-Received: by 2002:a05:6000:a90:b0:3a1:f8d1:6340 with SMTP id
- ffacd0b85a97d-3a1f8d163efmr2412463f8f.34.1746805443456; 
- Fri, 09 May 2025 08:44:03 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IGJ4tApLs/7beq2ISsmZX0H/5JPrpQGPA+N4z3F46IuN+nZ43V5QuLAvkC132uAnnrZxwdO0w==
-X-Received: by 2002:a05:6000:a90:b0:3a1:f8d1:6340 with SMTP id
- ffacd0b85a97d-3a1f8d163efmr2412425f8f.34.1746805442994; 
- Fri, 09 May 2025 08:44:02 -0700 (PDT)
+ AJvYcCU5XPWPfZKObI1Ec+D83kTJPdBKLyX1fjvoT3ZbtUS7MRLyQWza+5yzS1ned3Nyl1r4hiUJo9cwbo1A@nongnu.org
+X-Gm-Message-State: AOJu0Yz/8fWTi02Fet3JjmlH2sNM6YcyWECeIL7UClDzKYV/ItmrOoPj
+ O47du1jFA60vKuIFD0KmM7QB5sjeE/MRtQ55mzMwOqpqZcZ2tE2AllgZa9m4UR1+aP2uFaX/eU7
+ 6bPNd7Gty37e2s0cda5K7gAEgI/oQ4hzmLrB+YJFSZQbZVZLsYugw
+X-Gm-Gg: ASbGncudT3HIYXjnmN1vEb44hQmivre5xhC6cU7nf/GYqq7DwZzzGYZqhEBq/shOjSK
+ sMunlPvWQ+T7F2yrgXO8UPOXgwFE8sNyVbzywji28fzyHdCGnUa/C31WmifSnLLbbhjcTKgyCp0
+ f4rPYMxRWAzBlKc4oSsjomH/DYWHdWHNH7zyds1q5CUF1JZxE96wFcCp+xaGhyNS5N3JzanTqTt
+ 1tRxM1AYI4p6VqFv4HOhfnI+AQrCGOH7wAwlCa30yH07sqK8EindJn5IB4RxyXArlTIQVK2RbMV
+ hIAq2XO4m656sZMvPdLjRZtqEYKxuyaZ
+X-Received: by 2002:a05:600c:699a:b0:43c:ee3f:2c3 with SMTP id
+ 5b1f17b1804b1-442d6d18b4dmr37308365e9.7.1746806454575; 
+ Fri, 09 May 2025 09:00:54 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IHS6pTd6+VJXAdfrY7kXu0jP714J0Kn35h7fvaLNzrQyXsYvefWneKyFITxNj+O58PDLW9NnQ==
+X-Received: by 2002:a05:600c:699a:b0:43c:ee3f:2c3 with SMTP id
+ 5b1f17b1804b1-442d6d18b4dmr37307645e9.7.1746806454010; 
+ Fri, 09 May 2025 09:00:54 -0700 (PDT)
 Received: from imammedo.users.ipa.redhat.com ([85.93.96.130])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3a1f5a2d2c8sm3612110f8f.61.2025.05.09.08.44.00
+ 5b1f17b1804b1-442d67df5ecsm33860625e9.9.2025.05.09.09.00.51
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 09 May 2025 08:44:02 -0700 (PDT)
-Date: Fri, 9 May 2025 17:44:00 +0200
+ Fri, 09 May 2025 09:00:53 -0700 (PDT)
+Date: Fri, 9 May 2025 18:00:50 +0200
 From: Igor Mammedov <imammedo@redhat.com>
 To: Philippe =?UTF-8?B?TWF0aGlldS1EYXVkw6k=?= <philmd@linaro.org>
 Cc: qemu-devel@nongnu.org, Richard Henderson <richard.henderson@linaro.org>,
@@ -94,17 +94,16 @@ Cc: qemu-devel@nongnu.org, Richard Henderson <richard.henderson@linaro.org>,
  qemu-arm@nongnu.org, =?UTF-8?B?TWFyYy1BbmRyw6k=?= Lureau
  <marcandre.lureau@redhat.com>, Huacai Chen <chenhuacai@kernel.org>, Jason
  Wang <jasowang@redhat.com>
-Subject: Re: [PATCH v4 07/27] hw/i386/x86: Remove
- X86MachineClass::fwcfg_dma_enabled field
-Message-ID: <20250509174400.1cb2ca7b@imammedo.users.ipa.redhat.com>
-In-Reply-To: <20250509174125.41bc03a3@imammedo.users.ipa.redhat.com>
+Subject: Re: [PATCH v4 09/27] hw/nvram/fw_cfg: Remove
+ fw_cfg_io_properties::dma_enabled
+Message-ID: <20250509180050.0b91cef1@imammedo.users.ipa.redhat.com>
+In-Reply-To: <20250508133550.81391-10-philmd@linaro.org>
 References: <20250508133550.81391-1-philmd@linaro.org>
- <20250508133550.81391-8-philmd@linaro.org>
- <20250509174125.41bc03a3@imammedo.users.ipa.redhat.com>
+ <20250508133550.81391-10-philmd@linaro.org>
 X-Mailer: Claws Mail 4.3.1 (GTK 3.24.43; x86_64-redhat-linux-gnu)
 MIME-Version: 1.0
 X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: 0dS1h-JyqDrX_bMWUbbP_2ZtylzrstBv7k7R9oz3ieM_1746805443
+X-Mimecast-MFC-PROC-ID: STW3KCZnyfowRfjxigPKvxb9-mHgZkhrXmtYqDQZW8Y_1746806455
 X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
@@ -133,89 +132,145 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Fri, 9 May 2025 17:41:25 +0200
-Igor Mammedov <imammedo@redhat.com> wrote:
+On Thu,  8 May 2025 15:35:32 +0200
+Philippe Mathieu-Daud=C3=A9 <philmd@linaro.org> wrote:
 
-> On Thu,  8 May 2025 15:35:30 +0200
-> Philippe Mathieu-Daud=C3=A9 <philmd@linaro.org> wrote:
+> Now than all calls to fw_cfg_init_io_dma() pass DMA arguments,
+> the 'dma_enabled' of the TYPE_FW_CFG_IO type is not used anymore.
+> Remove it, simplifying fw_cfg_init_io_dma() and fw_cfg_io_realize().
 >=20
-> > The X86MachineClass::fwcfg_dma_enabled boolean was only used
-> > by the pc-q35-2.6 and pc-i440fx-2.6 machines, which got
-> > removed. Remove it and simplify.
-> >=20
-> > 'multiboot.bin' isn't used anymore, we'll remove it in the
-> > next commit.
-> >=20
-> > Signed-off-by: Philippe Mathieu-Daud=C3=A9 <philmd@linaro.org>
-> > ---
-> >  include/hw/i386/x86.h | 2 --
-> >  hw/i386/microvm.c     | 3 ---
-> >  hw/i386/multiboot.c   | 7 +------
-> >  hw/i386/x86-common.c  | 3 +--
-> >  hw/i386/x86.c         | 2 --
-> >  5 files changed, 2 insertions(+), 15 deletions(-)
-> >=20
-> > diff --git a/include/hw/i386/x86.h b/include/hw/i386/x86.h
-> > index fc460b82f82..29d37af11e6 100644
-> > --- a/include/hw/i386/x86.h
-> > +++ b/include/hw/i386/x86.h
-> > @@ -29,8 +29,6 @@
-> >  struct X86MachineClass {
-> >      MachineClass parent;
-> > =20
-> > -    /* use DMA capable linuxboot option rom */
-> > -    bool fwcfg_dma_enabled;
-> >      /* CPU and apic information: */
-> >      bool apic_xrupt_override;
-> >  };
-> > diff --git a/hw/i386/microvm.c b/hw/i386/microvm.c
-> > index e0daf0d4fc3..b1262fb1523 100644
-> > --- a/hw/i386/microvm.c
-> > +++ b/hw/i386/microvm.c
-> > @@ -637,7 +637,6 @@ GlobalProperty microvm_properties[] =3D {
-> > =20
-> >  static void microvm_class_init(ObjectClass *oc, const void *data)
-> >  {
-> > -    X86MachineClass *x86mc =3D X86_MACHINE_CLASS(oc);
-> >      MicrovmMachineClass *mmc =3D MICROVM_MACHINE_CLASS(oc);
-> >      MachineClass *mc =3D MACHINE_CLASS(oc);
-> >      HotplugHandlerClass *hc =3D HOTPLUG_HANDLER_CLASS(oc);
-> > @@ -671,8 +670,6 @@ static void microvm_class_init(ObjectClass *oc, con=
-st void *data)
-> >      hc->unplug_request =3D microvm_device_unplug_request_cb;
-> >      hc->unplug =3D microvm_device_unplug_cb;
-> > =20
-> > -    x86mc->fwcfg_dma_enabled =3D true;
-> > -
-> >      object_class_property_add(oc, MICROVM_MACHINE_RTC, "OnOffAuto",
-> >                                microvm_machine_get_rtc,
-> >                                microvm_machine_set_rtc,
-> > diff --git a/hw/i386/multiboot.c b/hw/i386/multiboot.c
-> > index 6e6b96bc345..bfa7e8f1e83 100644
-> > --- a/hw/i386/multiboot.c
-> > +++ b/hw/i386/multiboot.c
-> > @@ -153,7 +153,6 @@ int load_multiboot(X86MachineState *x86ms,
-> >                     int kernel_file_size,
-> >                     uint8_t *header)
-> >  {
-> > -    bool multiboot_dma_enabled =3D X86_MACHINE_GET_CLASS(x86ms)->fwcfg=
-_dma_enabled;
-> >      int i, is_multiboot =3D 0;
-> >      uint32_t flags =3D 0;
-> >      uint32_t mh_entry_addr;
-> > @@ -402,11 +401,7 @@ int load_multiboot(X86MachineState *x86ms,
-> >      fw_cfg_add_bytes(fw_cfg, FW_CFG_INITRD_DATA, mb_bootinfo_data,
-> >                       sizeof(bootinfo));
-> > =20
-> > -    if (multiboot_dma_enabled) {
-> > -        option_rom[nb_option_roms].name =3D "multiboot_dma.bin";
-> > -    } else {
-> > -        option_rom[nb_option_roms].name =3D "multiboot.bin"; =20
+> Note, we can not remove the equivalent in fw_cfg_mem_properties[]
+> because it is still used in HPPA and MIPS Loongson3 machines:
 >=20
-> shouldn't we remove "multiboot.bin" as well?
+>   $ git grep -w fw_cfg_init_mem_nodma
+>   hw/hppa/machine.c:204:    fw_cfg =3D fw_cfg_init_mem_nodma(addr, addr +=
+ 4, 1);
+>   hw/mips/loongson3_virt.c:289:    fw_cfg =3D fw_cfg_init_mem_nodma(cfg_a=
+ddr, cfg_addr + 8, 8);
+>=20
+> 'linuxboot.bin' isn't used anymore, we'll remove it in the
+> next commit.
+>=20
+> Signed-off-by: Philippe Mathieu-Daud=C3=A9 <philmd@linaro.org>
+> Reviewed-by: Zhao Liu <zhao1.liu@intel.com>
+> ---
+>  hw/i386/fw_cfg.c     |  5 +----
+>  hw/i386/x86-common.c |  5 +----
+>  hw/nvram/fw_cfg.c    | 26 ++++++++------------------
+>  3 files changed, 10 insertions(+), 26 deletions(-)
+>=20
+> diff --git a/hw/i386/fw_cfg.c b/hw/i386/fw_cfg.c
+> index 5c0bcd5f8a9..1fe084fd720 100644
+> --- a/hw/i386/fw_cfg.c
+> +++ b/hw/i386/fw_cfg.c
+> @@ -221,10 +221,7 @@ void fw_cfg_add_acpi_dsdt(Aml *scope, FWCfgState *fw=
+_cfg)
+>       * of the i/o region used is FW_CFG_CTL_SIZE; when using DMA, the
+>       * DMA control register is located at FW_CFG_DMA_IO_BASE + 4
+>       */
+> -    Object *obj =3D OBJECT(fw_cfg);
+> -    uint8_t io_size =3D object_property_get_bool(obj, "dma_enabled", NUL=
+L) ?
+> -        ROUND_UP(FW_CFG_CTL_SIZE, 4) + sizeof(dma_addr_t) :
+> -        FW_CFG_CTL_SIZE;
+> +    uint8_t io_size =3D ROUND_UP(FW_CFG_CTL_SIZE, 4) + sizeof(dma_addr_t=
+);
+>      Aml *dev =3D aml_device("FWCF");
+>      Aml *crs =3D aml_resource_template();
+> =20
+> diff --git a/hw/i386/x86-common.c b/hw/i386/x86-common.c
+> index 27254a0e9f1..ee594364415 100644
+> --- a/hw/i386/x86-common.c
+> +++ b/hw/i386/x86-common.c
+> @@ -991,10 +991,7 @@ void x86_load_linux(X86MachineState *x86ms,
+>      }
+> =20
+>      option_rom[nb_option_roms].bootindex =3D 0;
+> -    option_rom[nb_option_roms].name =3D "linuxboot.bin";
+> -    if (fw_cfg_dma_enabled(fw_cfg)) {
+> -        option_rom[nb_option_roms].name =3D "linuxboot_dma.bin";
+> -    }
+> +    option_rom[nb_option_roms].name =3D "linuxboot_dma.bin";
+>      nb_option_roms++;
+>  }
+> =20
+> diff --git a/hw/nvram/fw_cfg.c b/hw/nvram/fw_cfg.c
+> index 51b028b5d0a..ef976a4bce2 100644
+> --- a/hw/nvram/fw_cfg.c
+> +++ b/hw/nvram/fw_cfg.c
+> @@ -1026,12 +1026,9 @@ FWCfgState *fw_cfg_init_io_dma(uint32_t iobase, ui=
+nt32_t dma_iobase,
+>      FWCfgIoState *ios;
+>      FWCfgState *s;
+>      MemoryRegion *iomem =3D get_system_io();
+> -    bool dma_requested =3D dma_iobase && dma_as;
+> =20
+> +    assert(dma_iobase);
+>      dev =3D qdev_new(TYPE_FW_CFG_IO);
+> -    if (!dma_requested) {
+> -        qdev_prop_set_bit(dev, "dma_enabled", false);
+> -    }
+> =20
+>      object_property_add_child(OBJECT(qdev_get_machine()), TYPE_FW_CFG,
+>                                OBJECT(dev));
+> @@ -1042,13 +1039,10 @@ FWCfgState *fw_cfg_init_io_dma(uint32_t iobase, u=
+int32_t dma_iobase,
+>      memory_region_add_subregion(iomem, iobase, &ios->comb_iomem);
+> =20
+>      s =3D FW_CFG(dev);
+> -
+> -    if (s->dma_enabled) {
+> -        /* 64 bits for the address field */
+> -        s->dma_as =3D dma_as;
+> -        s->dma_addr =3D 0;
+> -        memory_region_add_subregion(iomem, dma_iobase, &s->dma_iomem);
+> -    }
+> +    /* 64 bits for the address field */
+> +    s->dma_as =3D dma_as;
+> +    s->dma_addr =3D 0;
+> +    memory_region_add_subregion(iomem, dma_iobase, &s->dma_iomem);
+> =20
+>      return s;
+>  }
+> @@ -1185,8 +1179,6 @@ static void fw_cfg_file_slots_allocate(FWCfgState *=
+s, Error **errp)
+>  }
+> =20
+>  static const Property fw_cfg_io_properties[] =3D {
+> -    DEFINE_PROP_BOOL("dma_enabled", FWCfgIoState, parent_obj.dma_enabled=
+,
+> -                     true),
 
-never mind, I see it's being removed by the next patch
+in 7/27 you still have, fw_cfg_dma_enabled(fw_cfg) which works around
+now missing property (in IO case) in obscure way.
+that is also used in bios_linker_loader_can_write_pointer().
 
-Reviewed-by: Igor Mammedov <imammedo@redhat.com>
+It would be better to get rid of fw_cfg_dma_enabled() as well
+or keep property as RO and replace fw_cfg_dma_enabled() with property
+accessor if both calls can happen on nondma path                     =20
+
+
+>      DEFINE_PROP_UINT16("x-file-slots", FWCfgIoState, parent_obj.file_slo=
+ts,
+>                         FW_CFG_FILE_SLOTS_DFLT),
+>  };
+> @@ -1207,11 +1199,9 @@ static void fw_cfg_io_realize(DeviceState *dev, Er=
+ror **errp)
+>      memory_region_init_io(&s->comb_iomem, OBJECT(s), &fw_cfg_comb_mem_op=
+s,
+>                            FW_CFG(s), "fwcfg", FW_CFG_CTL_SIZE);
+> =20
+> -    if (FW_CFG(s)->dma_enabled) {
+> -        memory_region_init_io(&FW_CFG(s)->dma_iomem, OBJECT(s),
+> -                              &fw_cfg_dma_mem_ops, FW_CFG(s), "fwcfg.dma=
+",
+> -                              sizeof(dma_addr_t));
+> -    }
+> +    memory_region_init_io(&FW_CFG(s)->dma_iomem, OBJECT(s),
+> +                          &fw_cfg_dma_mem_ops, FW_CFG(s), "fwcfg.dma",
+> +                          sizeof(dma_addr_t));
+> =20
+>      fw_cfg_common_realize(dev, errp);
+>  }
 
 
