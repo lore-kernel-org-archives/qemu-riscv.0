@@ -4,76 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 69B97C3ABBC
-	for <qemu-riscv@archiver.kernel.org>; Fri,  9 May 2025 16:02:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7EF56C3ABBC
+	for <qemu-riscv@archiver.kernel.org>; Fri,  9 May 2025 16:04:51 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uDQA6-0008F9-Eo; Fri, 09 May 2025 12:01:22 -0400
+	id 1uDQDO-0006Wc-BC; Fri, 09 May 2025 12:04:46 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <imammedo@redhat.com>)
- id 1uDQ9n-0007lh-UC
- for qemu-riscv@nongnu.org; Fri, 09 May 2025 12:01:08 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
+ id 1uDQD5-0006CF-6c
+ for qemu-riscv@nongnu.org; Fri, 09 May 2025 12:04:30 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <imammedo@redhat.com>)
- id 1uDQ9j-00042F-HJ
- for qemu-riscv@nongnu.org; Fri, 09 May 2025 12:01:03 -0400
+ id 1uDQCz-0004XY-E8
+ for qemu-riscv@nongnu.org; Fri, 09 May 2025 12:04:25 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1746806458;
+ s=mimecast20190719; t=1746806659;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=1l2f1VTt8XFWF8y5nnU3g+hJzfAgoHTdTr9qTI5UxXU=;
- b=K/4Wt74AVUuStY2qeO+6aPFi2IjHrEYfpP2Pb1TJCskT21VaCuOYHkwoRoJCBpjx5AVbiq
- 4s9LhmPFyhzUspNFDSSWqFigpXXjZUq8bLGyzPvuq5mV34RcJUmLsUZ2jh97GGKO0R8geQ
- yeICVryiEijKDB9k0oTLu4fI9z5d2wI=
-Received: from mail-wm1-f69.google.com (mail-wm1-f69.google.com
- [209.85.128.69]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=pMOeXTqXFsYkgCRn4QYaUzZ6C7YdcKAYjPWcjG5hKjQ=;
+ b=WuUhWrgAuR8jWi3EK0dR6XiE2bt+oMyNzlSfwF74ok3inXPUk8hr+c3ehJ/fM3K0Fn4qsr
+ hKmtUmxMNbQenwAoi+pgFQs3U5TJqOjJOc73JKKh0ct/ZDkQGaF5l8AEIYyDS96TbWXp2f
+ uzIkyNPpewaeUQf2lh92kdHFtLyj1BY=
+Received: from mail-wr1-f71.google.com (mail-wr1-f71.google.com
+ [209.85.221.71]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-557-_LrDhKn8OYuNqWPfHVNVWw-1; Fri, 09 May 2025 12:00:55 -0400
-X-MC-Unique: _LrDhKn8OYuNqWPfHVNVWw-1
-X-Mimecast-MFC-AGG-ID: _LrDhKn8OYuNqWPfHVNVWw_1746806455
-Received: by mail-wm1-f69.google.com with SMTP id
- 5b1f17b1804b1-43ea256f039so17435405e9.0
- for <qemu-riscv@nongnu.org>; Fri, 09 May 2025 09:00:55 -0700 (PDT)
+ us-mta-576-yb8IojahPO608iHikWTA1g-1; Fri, 09 May 2025 12:04:17 -0400
+X-MC-Unique: yb8IojahPO608iHikWTA1g-1
+X-Mimecast-MFC-AGG-ID: yb8IojahPO608iHikWTA1g_1746806656
+Received: by mail-wr1-f71.google.com with SMTP id
+ ffacd0b85a97d-3a0b7124b5fso1460900f8f.2
+ for <qemu-riscv@nongnu.org>; Fri, 09 May 2025 09:04:17 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1746806455; x=1747411255;
+ d=1e100.net; s=20230601; t=1746806656; x=1747411456;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:subject:cc:to:from:date:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=pp1R+sHe0G6QXL8IYhdEIVqTNgya/k6FcsiXO1F4Qzc=;
- b=Hp2P944JPBZ9vL1zfJ3/VioctxA5ybW867W0u2ZpdW5dnvyjIytVLGLB8mUQihEIRp
- 6vxT7lzWk1ERrQ88QbmIe5Xd3phZyavi5wZO6D3lFiodScW4ULE9ddI00FT814SGZ66A
- 41oJPgOtK4RcVyUBMjy/jGPOI79NLbfR7o9jJn6Q16g/p/ec9ZM/4upE+LA1aJnY4E5U
- EB1Y8dwLrd0iehGHIPdYFshCy9xDpEFs0OTCMXNgfTBeUi7uI+3N0UacBjPU2OWGq3Xc
- iF2ujGMIzwiJm6ep/7HcgxvqRrKrZBgiaqrpbDQ7+Jjf7d3TMTzPAh/zAg+ADom0pk49
- tPrw==
+ bh=T9SGTty9vioSZ28fB68+a+8ZO7FqN4j+nQiW9zGlb68=;
+ b=HPALGr7skwFVN3Hf/yxgltEMXfgCZ/qQ4VdmRtcOTGY4j66cd8XPPbkrschAcRqH9R
+ Ea6fLxsA22JCPrT272ClmaXbOuYrLs7KzQeG516JHBE2B6d+oSAdgpFKvHCTV12fYAMh
+ x2ValTH6ZapOLWUUaUwSiZAMQNvs0dZJ6CiBMISk5wY7Q9ewLWTL+OCY79L/JracOgXH
+ QqeAjuGPWUEEFrhu2x+y3WjXGbU+Sf45dk10Dp5upI5V1Q3ouzk5iuG67wA5G8QXdnK4
+ eYd00lXhmB2AblovusS1mRU9DezJLbFLIREclluMkk7kVnkBxjoSgZi84CkA8L/oght+
+ 4sFw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCU5XPWPfZKObI1Ec+D83kTJPdBKLyX1fjvoT3ZbtUS7MRLyQWza+5yzS1ned3Nyl1r4hiUJo9cwbo1A@nongnu.org
-X-Gm-Message-State: AOJu0Yz/8fWTi02Fet3JjmlH2sNM6YcyWECeIL7UClDzKYV/ItmrOoPj
- O47du1jFA60vKuIFD0KmM7QB5sjeE/MRtQ55mzMwOqpqZcZ2tE2AllgZa9m4UR1+aP2uFaX/eU7
- 6bPNd7Gty37e2s0cda5K7gAEgI/oQ4hzmLrB+YJFSZQbZVZLsYugw
-X-Gm-Gg: ASbGncudT3HIYXjnmN1vEb44hQmivre5xhC6cU7nf/GYqq7DwZzzGYZqhEBq/shOjSK
- sMunlPvWQ+T7F2yrgXO8UPOXgwFE8sNyVbzywji28fzyHdCGnUa/C31WmifSnLLbbhjcTKgyCp0
- f4rPYMxRWAzBlKc4oSsjomH/DYWHdWHNH7zyds1q5CUF1JZxE96wFcCp+xaGhyNS5N3JzanTqTt
- 1tRxM1AYI4p6VqFv4HOhfnI+AQrCGOH7wAwlCa30yH07sqK8EindJn5IB4RxyXArlTIQVK2RbMV
- hIAq2XO4m656sZMvPdLjRZtqEYKxuyaZ
-X-Received: by 2002:a05:600c:699a:b0:43c:ee3f:2c3 with SMTP id
- 5b1f17b1804b1-442d6d18b4dmr37308365e9.7.1746806454575; 
- Fri, 09 May 2025 09:00:54 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IHS6pTd6+VJXAdfrY7kXu0jP714J0Kn35h7fvaLNzrQyXsYvefWneKyFITxNj+O58PDLW9NnQ==
-X-Received: by 2002:a05:600c:699a:b0:43c:ee3f:2c3 with SMTP id
- 5b1f17b1804b1-442d6d18b4dmr37307645e9.7.1746806454010; 
- Fri, 09 May 2025 09:00:54 -0700 (PDT)
+ AJvYcCUJBr5KK29i/jFlRnJ18TWRTdvMM3C/kLM92I0dHZ30n92ru9cmTKFQ9kgIwPPfOXP8xf9gd0TTq52x@nongnu.org
+X-Gm-Message-State: AOJu0YzwgYILbJ08U6M35UIjN3kk5tIdASNuky5aulwLKuDqqxd5JeTM
+ AS3d07TGHPn+NKCBshHuBbfQtW3ZGZTXcppYzNy4GHC+/68MHjX5r5YC7h91hDclQsKbPhx3mTt
+ ywfxnrd5kuy5gHQwMFDntefFAvYeu84y4EBLp3VCGnorpEn/SEqoD
+X-Gm-Gg: ASbGncu2zJPB5kCOhHslMgTSTjQxTe5FteCevby981gauQjmWYbtyaH6YXiBUWkxV85
+ vIZUqxwY9eZd4TL6na3YZ9WUPzRI4wwJDnVmGkWOnp4Os4CgfrFMrY5yoMNZU/+p2GuFcQIDFr6
+ YiO+uMy6UvlXOzA5XALz4hJfDPRF0blkeC6VfwH1ypJR/pfDiJuRemYqkLILHOZF8D/8HAQTVIX
+ rQY9Wdz31jyExRcxjiiNEOdA6nGS21/JVLbRduON9SyhJ0V+15uC/L6WVy3Xksm/JQkDcg0JadX
+ FpVF7qlyCEN3hfv/nI1ZjgUk4ejgZ+1W
+X-Received: by 2002:a05:6000:3113:b0:39c:1f0e:95af with SMTP id
+ ffacd0b85a97d-3a1f64279d3mr3602011f8f.3.1746806656211; 
+ Fri, 09 May 2025 09:04:16 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IG6cQYF6EWJWz+6FcQdM7QsRdpFYn7ZHkZ4Tmns/dMEuuVwt/TrFHlK5zhhQj3FktvxJlzsog==
+X-Received: by 2002:a05:6000:3113:b0:39c:1f0e:95af with SMTP id
+ ffacd0b85a97d-3a1f64279d3mr3601929f8f.3.1746806655504; 
+ Fri, 09 May 2025 09:04:15 -0700 (PDT)
 Received: from imammedo.users.ipa.redhat.com ([85.93.96.130])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-442d67df5ecsm33860625e9.9.2025.05.09.09.00.51
+ ffacd0b85a97d-3a1f5a2d2d3sm3674769f8f.63.2025.05.09.09.04.12
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 09 May 2025 09:00:53 -0700 (PDT)
-Date: Fri, 9 May 2025 18:00:50 +0200
+ Fri, 09 May 2025 09:04:15 -0700 (PDT)
+Date: Fri, 9 May 2025 18:04:11 +0200
 From: Igor Mammedov <imammedo@redhat.com>
 To: Philippe =?UTF-8?B?TWF0aGlldS1EYXVkw6k=?= <philmd@linaro.org>
 Cc: qemu-devel@nongnu.org, Richard Henderson <richard.henderson@linaro.org>,
@@ -93,30 +93,30 @@ Cc: qemu-devel@nongnu.org, Richard Henderson <richard.henderson@linaro.org>,
  =?UTF-8?B?Q2zDqW1lbnQ=?= Mathieu--Drif <clement.mathieu--drif@eviden.com>,
  qemu-arm@nongnu.org, =?UTF-8?B?TWFyYy1BbmRyw6k=?= Lureau
  <marcandre.lureau@redhat.com>, Huacai Chen <chenhuacai@kernel.org>, Jason
- Wang <jasowang@redhat.com>
-Subject: Re: [PATCH v4 09/27] hw/nvram/fw_cfg: Remove
- fw_cfg_io_properties::dma_enabled
-Message-ID: <20250509180050.0b91cef1@imammedo.users.ipa.redhat.com>
-In-Reply-To: <20250508133550.81391-10-philmd@linaro.org>
+ Wang <jasowang@redhat.com>, Thomas Huth <thuth@redhat.com>
+Subject: Re: [PATCH v4 10/27] hw/i386/pc: Remove linuxboot.bin
+Message-ID: <20250509180411.10f6e683@imammedo.users.ipa.redhat.com>
+In-Reply-To: <20250508133550.81391-11-philmd@linaro.org>
 References: <20250508133550.81391-1-philmd@linaro.org>
- <20250508133550.81391-10-philmd@linaro.org>
+ <20250508133550.81391-11-philmd@linaro.org>
 X-Mailer: Claws Mail 4.3.1 (GTK 3.24.43; x86_64-redhat-linux-gnu)
 MIME-Version: 1.0
 X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: STW3KCZnyfowRfjxigPKvxb9-mHgZkhrXmtYqDQZW8Y_1746806455
+X-Mimecast-MFC-PROC-ID: rcM-DUcco2zdLvSbUSGeNtRgek7_A_t2YeMLv2WXwjM_1746806656
 X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=170.10.129.124; envelope-from=imammedo@redhat.com;
+Received-SPF: pass client-ip=170.10.133.124; envelope-from=imammedo@redhat.com;
  helo=us-smtp-delivery-124.mimecast.com
 X-Spam_score_int: -34
 X-Spam_score: -3.5
 X-Spam_bar: ---
 X-Spam_report: (-3.5 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-1.413,
  DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H5=0.001, RCVD_IN_MSPIKE_WL=0.001,
- RCVD_IN_VALIDITY_CERTIFIED_BLOCKED=0.001, RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ LOTS_OF_MONEY=0.001, RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H5=0.001,
+ RCVD_IN_MSPIKE_WL=0.001, RCVD_IN_VALIDITY_CERTIFIED_BLOCKED=0.001,
+ RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -132,145 +132,275 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Thu,  8 May 2025 15:35:32 +0200
+On Thu,  8 May 2025 15:35:33 +0200
 Philippe Mathieu-Daud=C3=A9 <philmd@linaro.org> wrote:
 
-> Now than all calls to fw_cfg_init_io_dma() pass DMA arguments,
-> the 'dma_enabled' of the TYPE_FW_CFG_IO type is not used anymore.
-> Remove it, simplifying fw_cfg_init_io_dma() and fw_cfg_io_realize().
+> All PC machines now use the linuxboot_dma.bin binary,
+> we can remove the non-DMA version (linuxboot.bin).
 >=20
-> Note, we can not remove the equivalent in fw_cfg_mem_properties[]
-> because it is still used in HPPA and MIPS Loongson3 machines:
->=20
->   $ git grep -w fw_cfg_init_mem_nodma
->   hw/hppa/machine.c:204:    fw_cfg =3D fw_cfg_init_mem_nodma(addr, addr +=
- 4, 1);
->   hw/mips/loongson3_virt.c:289:    fw_cfg =3D fw_cfg_init_mem_nodma(cfg_a=
-ddr, cfg_addr + 8, 8);
->=20
-> 'linuxboot.bin' isn't used anymore, we'll remove it in the
-> next commit.
->=20
+> Suggested-by: Thomas Huth <thuth@redhat.com>
 > Signed-off-by: Philippe Mathieu-Daud=C3=A9 <philmd@linaro.org>
-> Reviewed-by: Zhao Liu <zhao1.liu@intel.com>
 > ---
->  hw/i386/fw_cfg.c     |  5 +----
->  hw/i386/x86-common.c |  5 +----
->  hw/nvram/fw_cfg.c    | 26 ++++++++------------------
->  3 files changed, 10 insertions(+), 26 deletions(-)
+>  hw/i386/pc.c                  |   3 +-
+
+
+linuxboot.bin is referenced in a few more files:
+
+hw/i386/x86-common.c:    option_rom[nb_option_roms].name =3D "linuxboot.bin=
+";
+hw/nvram/fw_cfg.c:    { "genroms/linuxboot.bin", 60 },
+
+are you sure we should keep it there?
+
+>  pc-bios/meson.build           |   1 -
+>  pc-bios/optionrom/Makefile    |   2 +-
+>  pc-bios/optionrom/linuxboot.S | 195 ----------------------------------
+>  4 files changed, 2 insertions(+), 199 deletions(-)
+>  delete mode 100644 pc-bios/optionrom/linuxboot.S
 >=20
-> diff --git a/hw/i386/fw_cfg.c b/hw/i386/fw_cfg.c
-> index 5c0bcd5f8a9..1fe084fd720 100644
-> --- a/hw/i386/fw_cfg.c
-> +++ b/hw/i386/fw_cfg.c
-> @@ -221,10 +221,7 @@ void fw_cfg_add_acpi_dsdt(Aml *scope, FWCfgState *fw=
-_cfg)
->       * of the i/o region used is FW_CFG_CTL_SIZE; when using DMA, the
->       * DMA control register is located at FW_CFG_DMA_IO_BASE + 4
->       */
-> -    Object *obj =3D OBJECT(fw_cfg);
-> -    uint8_t io_size =3D object_property_get_bool(obj, "dma_enabled", NUL=
-L) ?
-> -        ROUND_UP(FW_CFG_CTL_SIZE, 4) + sizeof(dma_addr_t) :
-> -        FW_CFG_CTL_SIZE;
-> +    uint8_t io_size =3D ROUND_UP(FW_CFG_CTL_SIZE, 4) + sizeof(dma_addr_t=
-);
->      Aml *dev =3D aml_device("FWCF");
->      Aml *crs =3D aml_resource_template();
+> diff --git a/hw/i386/pc.c b/hw/i386/pc.c
+> index 524d2fd98e8..4e6fe68e2e0 100644
+> --- a/hw/i386/pc.c
+> +++ b/hw/i386/pc.c
+> @@ -654,8 +654,7 @@ void xen_load_linux(PCMachineState *pcms)
 > =20
-> diff --git a/hw/i386/x86-common.c b/hw/i386/x86-common.c
-> index 27254a0e9f1..ee594364415 100644
-> --- a/hw/i386/x86-common.c
-> +++ b/hw/i386/x86-common.c
-> @@ -991,10 +991,7 @@ void x86_load_linux(X86MachineState *x86ms,
->      }
+>      x86_load_linux(x86ms, fw_cfg, PC_FW_DATA, pcmc->pvh_enabled);
+>      for (i =3D 0; i < nb_option_roms; i++) {
+> -        assert(!strcmp(option_rom[i].name, "linuxboot.bin") ||
+> -               !strcmp(option_rom[i].name, "linuxboot_dma.bin") ||
+> +        assert(!strcmp(option_rom[i].name, "linuxboot_dma.bin") ||
+>                 !strcmp(option_rom[i].name, "pvh.bin") ||
+>                 !strcmp(option_rom[i].name, "multiboot_dma.bin"));
+>          rom_add_option(option_rom[i].name, option_rom[i].bootindex);
+> diff --git a/pc-bios/meson.build b/pc-bios/meson.build
+> index f2d4dc416a4..39a7fea332e 100644
+> --- a/pc-bios/meson.build
+> +++ b/pc-bios/meson.build
+> @@ -63,7 +63,6 @@ blobs =3D [
+>    'efi-vmxnet3.rom',
+>    'qemu-nsis.bmp',
+>    'multiboot_dma.bin',
+> -  'linuxboot.bin',
+>    'linuxboot_dma.bin',
+>    'kvmvapic.bin',
+>    'pvh.bin',
+> diff --git a/pc-bios/optionrom/Makefile b/pc-bios/optionrom/Makefile
+> index 1183ef88922..e694c7aac00 100644
+> --- a/pc-bios/optionrom/Makefile
+> +++ b/pc-bios/optionrom/Makefile
+> @@ -2,7 +2,7 @@ include config.mak
+>  SRC_DIR :=3D $(TOPSRC_DIR)/pc-bios/optionrom
+>  VPATH =3D $(SRC_DIR)
 > =20
->      option_rom[nb_option_roms].bootindex =3D 0;
-> -    option_rom[nb_option_roms].name =3D "linuxboot.bin";
-> -    if (fw_cfg_dma_enabled(fw_cfg)) {
-> -        option_rom[nb_option_roms].name =3D "linuxboot_dma.bin";
-> -    }
-> +    option_rom[nb_option_roms].name =3D "linuxboot_dma.bin";
->      nb_option_roms++;
->  }
+> -all: multiboot_dma.bin linuxboot.bin linuxboot_dma.bin kvmvapic.bin pvh.=
+bin
+> +all: multiboot_dma.bin linuxboot_dma.bin kvmvapic.bin pvh.bin
+>  # Dummy command so that make thinks it has done something
+>  =09@true
 > =20
-> diff --git a/hw/nvram/fw_cfg.c b/hw/nvram/fw_cfg.c
-> index 51b028b5d0a..ef976a4bce2 100644
-> --- a/hw/nvram/fw_cfg.c
-> +++ b/hw/nvram/fw_cfg.c
-> @@ -1026,12 +1026,9 @@ FWCfgState *fw_cfg_init_io_dma(uint32_t iobase, ui=
-nt32_t dma_iobase,
->      FWCfgIoState *ios;
->      FWCfgState *s;
->      MemoryRegion *iomem =3D get_system_io();
-> -    bool dma_requested =3D dma_iobase && dma_as;
-> =20
-> +    assert(dma_iobase);
->      dev =3D qdev_new(TYPE_FW_CFG_IO);
-> -    if (!dma_requested) {
-> -        qdev_prop_set_bit(dev, "dma_enabled", false);
-> -    }
-> =20
->      object_property_add_child(OBJECT(qdev_get_machine()), TYPE_FW_CFG,
->                                OBJECT(dev));
-> @@ -1042,13 +1039,10 @@ FWCfgState *fw_cfg_init_io_dma(uint32_t iobase, u=
-int32_t dma_iobase,
->      memory_region_add_subregion(iomem, iobase, &ios->comb_iomem);
-> =20
->      s =3D FW_CFG(dev);
+> diff --git a/pc-bios/optionrom/linuxboot.S b/pc-bios/optionrom/linuxboot.=
+S
+> deleted file mode 100644
+> index ba821ab922d..00000000000
+> --- a/pc-bios/optionrom/linuxboot.S
+> +++ /dev/null
+> @@ -1,195 +0,0 @@
+> -/*
+> - * Linux Boot Option ROM
+> - *
+> - * This program is free software; you can redistribute it and/or modify
+> - * it under the terms of the GNU General Public License as published by
+> - * the Free Software Foundation; either version 2 of the License, or
+> - * (at your option) any later version.
+> - *
+> - * This program is distributed in the hope that it will be useful,
+> - * but WITHOUT ANY WARRANTY; without even the implied warranty of
+> - * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+> - * GNU General Public License for more details.
+> - *
+> - * You should have received a copy of the GNU General Public License
+> - * along with this program; if not, see <http://www.gnu.org/licenses/>.
+> - *
+> - * Copyright Novell Inc, 2009
+> - *   Authors: Alexander Graf <agraf@suse.de>
+> - *
+> - * Based on code in hw/pc.c.
+> - */
 > -
-> -    if (s->dma_enabled) {
-> -        /* 64 bits for the address field */
-> -        s->dma_as =3D dma_as;
-> -        s->dma_addr =3D 0;
-> -        memory_region_add_subregion(iomem, dma_iobase, &s->dma_iomem);
-> -    }
-> +    /* 64 bits for the address field */
-> +    s->dma_as =3D dma_as;
-> +    s->dma_addr =3D 0;
-> +    memory_region_add_subregion(iomem, dma_iobase, &s->dma_iomem);
-> =20
->      return s;
->  }
-> @@ -1185,8 +1179,6 @@ static void fw_cfg_file_slots_allocate(FWCfgState *=
-s, Error **errp)
->  }
-> =20
->  static const Property fw_cfg_io_properties[] =3D {
-> -    DEFINE_PROP_BOOL("dma_enabled", FWCfgIoState, parent_obj.dma_enabled=
-,
-> -                     true),
-
-in 7/27 you still have, fw_cfg_dma_enabled(fw_cfg) which works around
-now missing property (in IO case) in obscure way.
-that is also used in bios_linker_loader_can_write_pointer().
-
-It would be better to get rid of fw_cfg_dma_enabled() as well
-or keep property as RO and replace fw_cfg_dma_enabled() with property
-accessor if both calls can happen on nondma path                     =20
-
-
->      DEFINE_PROP_UINT16("x-file-slots", FWCfgIoState, parent_obj.file_slo=
-ts,
->                         FW_CFG_FILE_SLOTS_DFLT),
->  };
-> @@ -1207,11 +1199,9 @@ static void fw_cfg_io_realize(DeviceState *dev, Er=
-ror **errp)
->      memory_region_init_io(&s->comb_iomem, OBJECT(s), &fw_cfg_comb_mem_op=
-s,
->                            FW_CFG(s), "fwcfg", FW_CFG_CTL_SIZE);
-> =20
-> -    if (FW_CFG(s)->dma_enabled) {
-> -        memory_region_init_io(&FW_CFG(s)->dma_iomem, OBJECT(s),
-> -                              &fw_cfg_dma_mem_ops, FW_CFG(s), "fwcfg.dma=
-",
-> -                              sizeof(dma_addr_t));
-> -    }
-> +    memory_region_init_io(&FW_CFG(s)->dma_iomem, OBJECT(s),
-> +                          &fw_cfg_dma_mem_ops, FW_CFG(s), "fwcfg.dma",
-> +                          sizeof(dma_addr_t));
-> =20
->      fw_cfg_common_realize(dev, errp);
->  }
+> -#include "optionrom.h"
+> -
+> -#define BOOT_ROM_PRODUCT "Linux loader"
+> -
+> -BOOT_ROM_START
+> -
+> -run_linuxboot:
+> -
+> -=09cli
+> -=09cld
+> -
+> -=09jmp=09=09copy_kernel
+> -boot_kernel:
+> -
+> -=09read_fw=09=09FW_CFG_SETUP_ADDR
+> -
+> -=09mov=09=09%eax, %ebx
+> -=09shr=09=09$4, %ebx
+> -
+> -=09/* All segments contain real_addr */
+> -=09mov=09=09%bx, %ds
+> -=09mov=09=09%bx, %es
+> -=09mov=09=09%bx, %fs
+> -=09mov=09=09%bx, %gs
+> -=09mov=09=09%bx, %ss
+> -
+> -=09/* CX =3D CS we want to jump to */
+> -=09add=09=09$0x20, %bx
+> -=09mov=09=09%bx, %cx
+> -
+> -=09/* SP =3D cmdline_addr-real_addr-16 */
+> -=09read_fw=09=09FW_CFG_CMDLINE_ADDR
+> -=09mov=09=09%eax, %ebx
+> -=09read_fw=09=09FW_CFG_SETUP_ADDR
+> -=09sub=09=09%eax, %ebx
+> -=09sub=09=09$16, %ebx
+> -=09mov=09=09%ebx, %esp
+> -
+> -=09/* Build indirect lret descriptor */
+> -=09pushw=09=09%cx=09=09/* CS */
+> -=09xor=09=09%ax, %ax
+> -=09pushw=09=09%ax=09=09/* IP =3D 0 */
+> -
+> -=09/* Clear registers */
+> -=09xor=09=09%eax, %eax
+> -=09xor=09=09%ebx, %ebx
+> -=09xor=09=09%ecx, %ecx
+> -=09xor=09=09%edx, %edx
+> -=09xor=09=09%edi, %edi
+> -=09xor=09=09%ebp, %ebp
+> -
+> -=09/* Jump to Linux */
+> -=09lret
+> -
+> -
+> -copy_kernel:
+> -=09/* Read info block in low memory (0x10000 or 0x90000) */
+> -=09read_fw=09=09FW_CFG_SETUP_ADDR
+> -=09shr=09=09$4, %eax
+> -=09mov=09=09%eax, %es
+> -=09xor=09=09%edi, %edi
+> -=09read_fw_blob_addr32_edi(FW_CFG_SETUP)
+> -
+> -=09cmpw            $0x203, %es:0x206      // if protocol >=3D 0x203
+> -=09jae             1f                     // have initrd_max
+> -=09movl            $0x37ffffff, %es:0x22c // else assume 0x37ffffff
+> -1:
+> -
+> -=09/* Check if using kernel-specified initrd address */
+> -=09read_fw=09=09FW_CFG_INITRD_ADDR
+> -=09mov=09=09%eax, %edi             // (load_kernel wants it in %edi)
+> -=09read_fw=09=09FW_CFG_INITRD_SIZE     // find end of initrd
+> -=09add=09=09%edi, %eax
+> -=09xor=09=09%es:0x22c, %eax        // if it matches es:0x22c
+> -=09and=09=09$-4096, %eax           // (apart from padding for page)
+> -=09jz=09=09load_kernel            // then initrd is not at top
+> -=09=09=09=09=09       // of memory
+> -
+> -=09/* pc.c placed the initrd at end of memory.  Compute a better
+> -=09 * initrd address based on e801 data.
+> -=09 */
+> -=09mov=09=09$0xe801, %ax
+> -=09xor=09=09%cx, %cx
+> -=09xor=09=09%dx, %dx
+> -=09int=09=09$0x15
+> -
+> -=09/* Output could be in AX/BX or CX/DX */
+> -=09or=09=09%cx, %cx
+> -=09jnz=09=091f
+> -=09or=09=09%dx, %dx
+> -=09jnz=09=091f
+> -=09mov=09=09%ax, %cx
+> -=09mov=09=09%bx, %dx
+> -1:
+> -
+> -=09or=09=09%dx, %dx
+> -=09jnz=09=092f
+> -=09addw=09=09$1024, %cx            /* add 1 MB */
+> -=09movzwl=09=09%cx, %edi
+> -=09shll=09=09$10, %edi             /* convert to bytes */
+> -=09jmp=09=093f
+> -
+> -2:
+> -=09addw=09=09$16777216 >> 16, %dx  /* add 16 MB */
+> -=09movzwl=09=09%dx, %edi
+> -=09shll=09=09$16, %edi             /* convert to bytes */
+> -
+> -3:
+> -=09read_fw         FW_CFG_INITRD_SIZE
+> -=09subl            %eax, %edi
+> -=09andl            $-4096, %edi          /* EDI =3D start of initrd */
+> -=09movl=09=09%edi, %es:0x218       /* put it in the header */
+> -
+> -load_kernel:
+> -=09/* We need to load the kernel into memory we can't access in 16 bit
+> -=09   mode, so let's get into 32 bit mode, write the kernel and jump
+> -=09   back again. */
+> -
+> -=09/* Reserve space on the stack for our GDT descriptor. */
+> -=09mov             %esp, %ebp
+> -=09sub             $16, %esp
+> -
+> -=09/* Now create the GDT descriptor */
+> -=09movw=09=09$((3 * 8) - 1), -16(%bp)
+> -=09mov=09=09%cs, %eax
+> -=09movzwl=09=09%ax, %eax
+> -=09shl=09=09$4, %eax
+> -=09addl=09=09$gdt, %eax
+> -=09movl=09=09%eax, -14(%bp)
+> -
+> -=09/* And load the GDT */
+> -=09data32 lgdt=09-16(%bp)
+> -=09mov=09=09%ebp, %esp
+> -
+> -=09/* Get us to protected mode now */
+> -=09mov=09=09$1, %eax
+> -=09mov=09=09%eax, %cr0
+> -
+> -=09/* So we can set ES to a 32-bit segment */
+> -=09mov=09=09$0x10, %eax
+> -=09mov=09=09%eax, %es
+> -
+> -=09/* We're now running in 16-bit CS, but 32-bit ES! */
+> -
+> -=09/* Load kernel and initrd */
+> -=09read_fw_blob_addr32_edi(FW_CFG_INITRD)
+> -=09read_fw_blob_addr32(FW_CFG_KERNEL)
+> -=09read_fw_blob_addr32(FW_CFG_CMDLINE)
+> -
+> -=09/* And now jump into Linux! */
+> -=09mov=09=09$0, %eax
+> -=09mov=09=09%eax, %cr0
+> -
+> -=09/* ES =3D CS */
+> -=09mov=09=09%cs, %ax
+> -=09mov=09=09%ax, %es
+> -
+> -=09jmp=09=09boot_kernel
+> -
+> -/* Variables */
+> -
+> -.align 4, 0
+> -gdt:
+> -=09/* 0x00 */
+> -.byte=090x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+> -
+> -=09/* 0x08: code segment (base=3D0, limit=3D0xfffff, type=3D32bit code e=
+xec/read, DPL=3D0, 4k) */
+> -.byte=090xff, 0xff, 0x00, 0x00, 0x00, 0x9a, 0xcf, 0x00
+> -
+> -=09/* 0x10: data segment (base=3D0, limit=3D0xfffff, type=3D32bit data r=
+ead/write, DPL=3D0, 4k) */
+> -.byte=090xff, 0xff, 0x00, 0x00, 0x00, 0x92, 0xcf, 0x00
+> -
+> -BOOT_ROM_END
 
 
