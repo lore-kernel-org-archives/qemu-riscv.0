@@ -4,47 +4,47 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6A761C3ABC5
-	for <qemu-riscv@archiver.kernel.org>; Fri,  9 May 2025 02:30:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CF871C3ABBE
+	for <qemu-riscv@archiver.kernel.org>; Fri,  9 May 2025 02:39:55 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uDDV3-0001B6-Rx; Thu, 08 May 2025 22:30:09 -0400
+	id 1uDDdn-0000a6-38; Thu, 08 May 2025 22:39:11 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhao1.liu@intel.com>)
- id 1uDDUz-0000wm-Sl; Thu, 08 May 2025 22:30:05 -0400
-Received: from mgamail.intel.com ([192.198.163.16])
+ id 1uDDdj-0000T7-SL; Thu, 08 May 2025 22:39:07 -0400
+Received: from mgamail.intel.com ([192.198.163.15])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhao1.liu@intel.com>)
- id 1uDDUu-0002yC-Om; Thu, 08 May 2025 22:30:05 -0400
+ id 1uDDdi-0003nF-7j; Thu, 08 May 2025 22:39:07 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1746757800; x=1778293800;
+ t=1746758346; x=1778294346;
  h=date:from:to:cc:subject:message-id:references:
  mime-version:content-transfer-encoding:in-reply-to;
- bh=7Tb77gPHUH0LPQdGOdm6IjNB2V0ob4F/eCHrWe81rIU=;
- b=LHhxXlPNnWUiIyrPab02twia+YmndKA1cYLQTEv7FHJGt58F3+K32kyp
- 3NuVm9lD/a+HyabnIMNtUmy/BsFmKwmI5FmbF1+JggpLuEPIXdplVBUU3
- XCmRDTDWZBH38nUBj5Dp4on476QEwtAOodhe5ePHjw+OrUuDAt8kscg4d
- E0akkuWtnDaywttqhur43nckTZsGJ1VwZdT0/lcPHsN0e5l+6uihbJ3Ef
- x1y97iHgcIpPoINjJOAXJEjbbtB+hVAOsjikZm3txqwvBqin5wdKZhJzR
- pFS5ANqwwn+Ql+LKWda5RGwBL3v1z2seEyIzgCT+tPF/zCqkJ/tynGZtB w==;
-X-CSE-ConnectionGUID: ySz2y5MHTPSJecOXZV1S1A==
-X-CSE-MsgGUID: /8UPPYvJT5KTaGAw/kcdhA==
-X-IronPort-AV: E=McAfee;i="6700,10204,11427"; a="36196641"
-X-IronPort-AV: E=Sophos;i="6.15,274,1739865600"; d="scan'208";a="36196641"
-Received: from orviesa010.jf.intel.com ([10.64.159.150])
- by fmvoesa110.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 08 May 2025 19:29:56 -0700
-X-CSE-ConnectionGUID: O4kiPmhbQaGrST7uwiUwRg==
-X-CSE-MsgGUID: ovYRMySHRxKudYS2HsQStw==
+ bh=JXwi2uJoss8m2Ee12mCsjw2jbINKA+zy0KI8tSqNQa8=;
+ b=JJ7Hl3OcQWA3gFtcH46HVS8/T4QXUIUrAstThyJl0Wjns5pOOTDSM5Gr
+ +wvj93Tn/l25ngAXnofZQ3UpFuqM8bren2fiBn7mcRznmXOzbGBBrtCtN
+ iQzcZ645oHNN40c9neC9dPCwuN+qj/Uh0cbB1Jv1lbtPP/TBzdlcjgbkk
+ O2sRDDWX/Sgc40MLm8sVQHnjjjIqmV3m4cGjOHP6bNCjQWQfOzOzDxhT0
+ AqVMMw0Par/RRdleOwhoP1r66BXoAkGCl4OuvXQOcuz1aayyRWH5qbYzR
+ CfmZ6isqa5ZEPvO438aXe5oBv7jUPU6CZMT4pw6F6nBdiqIjxJdzHwA3W A==;
+X-CSE-ConnectionGUID: 3zsJcp8RT++fA+5NTg+vjg==
+X-CSE-MsgGUID: fgJDZBjAQbCKC/BaE92O8g==
+X-IronPort-AV: E=McAfee;i="6700,10204,11427"; a="48719468"
+X-IronPort-AV: E=Sophos;i="6.15,274,1739865600"; d="scan'208";a="48719468"
+Received: from fmviesa005.fm.intel.com ([10.60.135.145])
+ by fmvoesa109.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 08 May 2025 19:39:03 -0700
+X-CSE-ConnectionGUID: yB6P+4VPT6q1SmQ9DdW/PA==
+X-CSE-MsgGUID: JLvymKaORr6aflr+3VRG7Q==
 X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.15,274,1739865600"; d="scan'208";a="136362015"
+X-IronPort-AV: E=Sophos;i="6.15,274,1739865600"; d="scan'208";a="141389104"
 Received: from liuzhao-optiplex-7080.sh.intel.com (HELO localhost)
  ([10.239.160.39])
- by orviesa010.jf.intel.com with ESMTP; 08 May 2025 19:29:50 -0700
-Date: Fri, 9 May 2025 10:50:51 +0800
+ by fmviesa005.fm.intel.com with ESMTP; 08 May 2025 19:31:01 -0700
+Date: Fri, 9 May 2025 10:52:03 +0800
 From: Zhao Liu <zhao1.liu@intel.com>
 To: Philippe =?iso-8859-1?Q?Mathieu-Daud=E9?= <philmd@linaro.org>
 Cc: qemu-devel@nongnu.org, Richard Henderson <richard.henderson@linaro.org>,
@@ -69,25 +69,26 @@ Cc: qemu-devel@nongnu.org, Richard Henderson <richard.henderson@linaro.org>,
  qemu-arm@nongnu.org,
  =?iso-8859-1?Q?Marc-Andr=E9?= Lureau <marcandre.lureau@redhat.com>,
  Huacai Chen <chenhuacai@kernel.org>, Jason Wang <jasowang@redhat.com>
-Subject: Re: [PATCH v4 05/27] hw/nvram/fw_cfg: Factor
- fw_cfg_init_mem_internal() out
-Message-ID: <aB1ti7GJSJwbhaoz@intel.com>
+Subject: Re: [PATCH v4 06/27] hw/nvram/fw_cfg: Rename fw_cfg_init_mem_wide()
+ -> fw_cfg_init_mem_dma()
+Message-ID: <aB1t0zLvOGz065ho@intel.com>
 References: <20250508133550.81391-1-philmd@linaro.org>
- <20250508133550.81391-6-philmd@linaro.org>
+ <20250508133550.81391-7-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=iso-8859-1
 Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <20250508133550.81391-6-philmd@linaro.org>
-Received-SPF: pass client-ip=192.198.163.16; envelope-from=zhao1.liu@intel.com;
+In-Reply-To: <20250508133550.81391-7-philmd@linaro.org>
+Received-SPF: pass client-ip=192.198.163.15; envelope-from=zhao1.liu@intel.com;
  helo=mgamail.intel.com
-X-Spam_score_int: -34
-X-Spam_score: -3.5
-X-Spam_bar: ---
-X-Spam_report: (-3.5 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-1.416,
+X-Spam_score_int: -57
+X-Spam_score: -5.8
+X-Spam_bar: -----
+X-Spam_report: (-5.8 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-1.416,
  DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001, RCVD_IN_VALIDITY_SAFE_BLOCKED=0.001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ RCVD_IN_DNSWL_MED=-2.3, RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001,
+ RCVD_IN_VALIDITY_SAFE_BLOCKED=0.001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -103,23 +104,24 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Thu, May 08, 2025 at 03:35:28PM +0200, Philippe Mathieu-Daudé wrote:
-> Date: Thu,  8 May 2025 15:35:28 +0200
+On Thu, May 08, 2025 at 03:35:29PM +0200, Philippe Mathieu-Daudé wrote:
+> Date: Thu,  8 May 2025 15:35:29 +0200
 > From: Philippe Mathieu-Daudé <philmd@linaro.org>
-> Subject: [PATCH v4 05/27] hw/nvram/fw_cfg: Factor
->  fw_cfg_init_mem_internal() out
+> Subject: [PATCH v4 06/27] hw/nvram/fw_cfg: Rename fw_cfg_init_mem_wide() ->
+>  fw_cfg_init_mem_dma()
 > X-Mailer: git-send-email 2.47.1
 > 
-> Factor fw_cfg_init_mem_internal() out of fw_cfg_init_mem_wide().
-> In fw_cfg_init_mem_wide(), assert DMA arguments are provided.
-> Callers without DMA have to use the fw_cfg_init_mem() helper.
+> "wide" in fw_cfg_init_mem_wide() means "DMA support".
+> Rename for clarity.
 > 
+> Suggested-by: Zhao Liu <zhao1.liu@intel.com>
 > Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 > ---
->  hw/nvram/fw_cfg.c | 17 +++++++++++++----
->  1 file changed, 13 insertions(+), 4 deletions(-)
-
-Fine for me,
+>  include/hw/nvram/fw_cfg.h | 6 +++---
+>  hw/arm/virt.c             | 2 +-
+>  hw/nvram/fw_cfg.c         | 6 +++---
+>  hw/riscv/virt.c           | 4 ++--
+>  4 files changed, 9 insertions(+), 9 deletions(-)
 
 Reviewed-by: Zhao Liu <zhao1.liu@intel.com>
 
