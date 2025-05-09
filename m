@@ -4,47 +4,47 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 30ACEC3ABC3
-	for <qemu-riscv@archiver.kernel.org>; Fri,  9 May 2025 09:13:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 47442C3ABBC
+	for <qemu-riscv@archiver.kernel.org>; Fri,  9 May 2025 09:15:13 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uDJmw-00010L-N4; Fri, 09 May 2025 05:13:02 -0400
+	id 1uDJoI-0002m7-8K; Fri, 09 May 2025 05:14:26 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhao1.liu@intel.com>)
- id 1uDJmp-0000sf-8I; Fri, 09 May 2025 05:12:56 -0400
-Received: from mgamail.intel.com ([198.175.65.11])
+ id 1uDJoH-0002jc-0e; Fri, 09 May 2025 05:14:25 -0400
+Received: from mgamail.intel.com ([198.175.65.10])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhao1.liu@intel.com>)
- id 1uDJmn-0000uk-9d; Fri, 09 May 2025 05:12:54 -0400
+ id 1uDJoF-0001Mo-7p; Fri, 09 May 2025 05:14:24 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1746781973; x=1778317973;
+ t=1746782063; x=1778318063;
  h=date:from:to:cc:subject:message-id:references:
  mime-version:content-transfer-encoding:in-reply-to;
- bh=OxAOtgqS95oq/T1fpT4BK/8L86LhYAjPTsvn5Tvd2ZA=;
- b=VRoHio+VsPo7M9VT2o3gko1C6NG6BvaLfmVP448u7usUU+c/Uisi8he5
- TYrZMn5g8OnxtCs6NJsCDWU781jwA0EpxruPXa6tvRrRnF0LPWbBtNJ32
- ITq3Wr8isXuNArU/ObzQUO8flh+/dMGVu/tDgJqYU+3+JSSsUML1pTpUO
- 8K3y+v9OEi0h1aqyZx1IoFAz92yXSB+70vXTfBykkHMR/zb/k8gCQiSl0
- GkUeOau6tVKEMamWAjl1L/H+vtGJViMBnmKngey/iCmk3erbqPqjkKF5U
- ErVTALfD6W2rSABiiG3YVGDxtfGEt0KYlX1NjJ0wla1C3yvDxktdQjdaG g==;
-X-CSE-ConnectionGUID: m4wGLa7AT7qKm9bReiOBAA==
-X-CSE-MsgGUID: XRxovLwsQXOc9a5I63Tp5w==
-X-IronPort-AV: E=McAfee;i="6700,10204,11427"; a="58821494"
-X-IronPort-AV: E=Sophos;i="6.15,274,1739865600"; d="scan'208";a="58821494"
-Received: from orviesa008.jf.intel.com ([10.64.159.148])
- by orvoesa103.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 09 May 2025 02:12:50 -0700
-X-CSE-ConnectionGUID: RmOe6Q0tS12beDPOMS9eQw==
-X-CSE-MsgGUID: zi5cOttHTI65JzRYGKKcnQ==
+ bh=yOfR3/SCjW8m6LHYck+yUmtN9nPJnKBOsrhORO48N2Y=;
+ b=D12T9D/q1FQjE3ADTuOpgq+2G3/AieycUyQPI3dNdP6/ckpktsAQ5boA
+ I6/ZEECv00MQ0S9PSVTeTozdTIk8NdzMnu1r8PJ77/GCTfwZwZeTDBR+K
+ cun/frhCJvVUnqmoZLXIGJ+TsvHqH3jTpzjWwEnA5N7PMZ0xGYw0rWhTY
+ /DLH+KOaTYaQ5SVmu7nuvBukfHUlp4dG6p9onwRFvgQdbyfMJ8SNoLhVA
+ fNA5o7uKG2zxp9YQGzFhVc5MXXyVmrJskp/BaCN5YsLPPNo+sXlc1NUD5
+ 2T7bl9m8+9T2rCP8SwsGWi81udLtDuvCkLcVts0qILjUGBWk4bFEXL+9l w==;
+X-CSE-ConnectionGUID: 6W8Va7VKSq2O9oERUt6F9w==
+X-CSE-MsgGUID: V6YA4+VxSMCOE1IdC7sdXQ==
+X-IronPort-AV: E=McAfee;i="6700,10204,11427"; a="66008401"
+X-IronPort-AV: E=Sophos;i="6.15,274,1739865600"; d="scan'208";a="66008401"
+Received: from fmviesa004.fm.intel.com ([10.60.135.144])
+ by orvoesa102.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 09 May 2025 02:14:20 -0700
+X-CSE-ConnectionGUID: Kyk8rOoGToSDu0vEaYOiAA==
+X-CSE-MsgGUID: qXi3Pi5HRCyZIy7ZvkebgQ==
 X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.15,274,1739865600"; d="scan'208";a="137496974"
+X-IronPort-AV: E=Sophos;i="6.15,274,1739865600"; d="scan'208";a="141776520"
 Received: from liuzhao-optiplex-7080.sh.intel.com (HELO localhost)
  ([10.239.160.39])
- by orviesa008.jf.intel.com with ESMTP; 09 May 2025 02:12:43 -0700
-Date: Fri, 9 May 2025 17:33:44 +0800
+ by fmviesa004.fm.intel.com with ESMTP; 09 May 2025 02:14:13 -0700
+Date: Fri, 9 May 2025 17:35:15 +0800
 From: Zhao Liu <zhao1.liu@intel.com>
 To: Philippe =?iso-8859-1?Q?Mathieu-Daud=E9?= <philmd@linaro.org>
 Cc: qemu-devel@nongnu.org, Richard Henderson <richard.henderson@linaro.org>,
@@ -69,19 +69,17 @@ Cc: qemu-devel@nongnu.org, Richard Henderson <richard.henderson@linaro.org>,
  qemu-arm@nongnu.org,
  =?iso-8859-1?Q?Marc-Andr=E9?= Lureau <marcandre.lureau@redhat.com>,
  Huacai Chen <chenhuacai@kernel.org>, Jason Wang <jasowang@redhat.com>,
- Mark Cave-Ayland <mark.caveayland@nutanix.com>,
- Thomas Huth <thuth@redhat.com>
-Subject: Re: [PATCH v4 17/27] hw/i386/pc: Remove deprecated pc-q35-2.7 and
- pc-i440fx-2.7 machines
-Message-ID: <aB3L+MVC0MWhXIp9@intel.com>
+ Mark Cave-Ayland <mark.caveayland@nutanix.com>
+Subject: Re: [PATCH v4 18/27] hw/i386/pc: Remove pc_compat_2_7[] array
+Message-ID: <aB3MUyPaJkiotnvf@intel.com>
 References: <20250508133550.81391-1-philmd@linaro.org>
- <20250508133550.81391-18-philmd@linaro.org>
+ <20250508133550.81391-19-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=iso-8859-1
 Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <20250508133550.81391-18-philmd@linaro.org>
-Received-SPF: pass client-ip=198.175.65.11; envelope-from=zhao1.liu@intel.com;
+In-Reply-To: <20250508133550.81391-19-philmd@linaro.org>
+Received-SPF: pass client-ip=198.175.65.10; envelope-from=zhao1.liu@intel.com;
  helo=mgamail.intel.com
 X-Spam_score_int: -57
 X-Spam_score: -5.8
@@ -106,27 +104,21 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Thu, May 08, 2025 at 03:35:40PM +0200, Philippe Mathieu-Daudé wrote:
-> Date: Thu,  8 May 2025 15:35:40 +0200
+On Thu, May 08, 2025 at 03:35:41PM +0200, Philippe Mathieu-Daudé wrote:
+> Date: Thu,  8 May 2025 15:35:41 +0200
 > From: Philippe Mathieu-Daudé <philmd@linaro.org>
-> Subject: [PATCH v4 17/27] hw/i386/pc: Remove deprecated pc-q35-2.7 and
->  pc-i440fx-2.7 machines
+> Subject: [PATCH v4 18/27] hw/i386/pc: Remove pc_compat_2_7[] array
 > X-Mailer: git-send-email 2.47.1
 > 
-> These machines has been supported for a period of more than 6 years.
-> According to our versioned machine support policy (see commit
-> ce80c4fa6ff "docs: document special exception for machine type
-> deprecation & removal") they can now be removed.  Remove the qtest
-> in test-x86-cpuid-compat.c file.
+> The pc_compat_2_7[] array was only used by the pc-q35-2.7
+> and pc-i440fx-2.7 machines, which got removed. Remove it.
 > 
 > Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 > Reviewed-by: Mark Cave-Ayland <mark.caveayland@nutanix.com>
-> Reviewed-by: Thomas Huth <thuth@redhat.com>
 > ---
->  hw/i386/pc_piix.c                   |  9 ---------
->  hw/i386/pc_q35.c                    | 10 ----------
->  tests/qtest/test-x86-cpuid-compat.c | 11 -----------
->  3 files changed, 30 deletions(-)
+>  include/hw/i386/pc.h |  3 ---
+>  hw/i386/pc.c         | 10 ----------
+>  2 files changed, 13 deletions(-)
 
 Reviewed-by: Zhao Liu <zhao1.liu@intel.com>
 
