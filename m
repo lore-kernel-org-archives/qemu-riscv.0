@@ -4,47 +4,47 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 351A4C3ABC3
-	for <qemu-riscv@archiver.kernel.org>; Fri,  9 May 2025 09:25:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2D903C3ABC3
+	for <qemu-riscv@archiver.kernel.org>; Fri,  9 May 2025 09:59:35 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uDJz5-0003vX-OV; Fri, 09 May 2025 05:25:35 -0400
+	id 1uDKVg-0008Hq-7x; Fri, 09 May 2025 05:59:17 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhao1.liu@intel.com>)
- id 1uDJz3-0003t1-2o; Fri, 09 May 2025 05:25:33 -0400
-Received: from mgamail.intel.com ([198.175.65.11])
+ id 1uDKVd-0008HE-G4; Fri, 09 May 2025 05:59:13 -0400
+Received: from mgamail.intel.com ([192.198.163.13])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhao1.liu@intel.com>)
- id 1uDJz1-00035c-9N; Fri, 09 May 2025 05:25:32 -0400
+ id 1uDKVX-00087Y-4A; Fri, 09 May 2025 05:59:09 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1746782732; x=1778318732;
+ t=1746784747; x=1778320747;
  h=date:from:to:cc:subject:message-id:references:
  mime-version:content-transfer-encoding:in-reply-to;
- bh=9iNtYOExfCHQLupl4872ceXY3Fwlz00/haql1chioEs=;
- b=MFmvKy21ARJS8UMkXydCOkEJ+25UxGFKJE3Ifjsf+z8AHknbQtwyPKlq
- yQTqGg6pWKtmu03wa660Sm66ttRylNX76RVSacQgs1Ggvfkp/GrYo03Rq
- eJAi1Xu33Ri1L+C2BPOFLVjzbtGVwetlqZYscuayMEBTSlrlgS5MxzONr
- bEFtVyTpb+xTj3nmJ2Q3A4eMFRy93zpceJyEPIT0T6fh+47ePkCXtFV4l
- UgcX5l+eGlFgzdceA0EJE6X9BNb+oWRP+yA4QopYOSOkWHOTw8B3qNa0X
- iUxvmpfZju+f9KE35WSTNdzeGFuyt6KGMwyIjukMNz4yyrevRnwqrQJ1G w==;
-X-CSE-ConnectionGUID: 7zvaIHldQRyLZ/x6Ah2nWw==
-X-CSE-MsgGUID: wKpY2ENURnaDyolM1kXHjQ==
-X-IronPort-AV: E=McAfee;i="6700,10204,11427"; a="58822991"
-X-IronPort-AV: E=Sophos;i="6.15,274,1739865600"; d="scan'208";a="58822991"
-Received: from fmviesa003.fm.intel.com ([10.60.135.143])
- by orvoesa103.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 09 May 2025 02:25:26 -0700
-X-CSE-ConnectionGUID: Jm0O7L1BQUKWI+PSzhWqwA==
-X-CSE-MsgGUID: 05/v4SvJSY2CwuTEFUrItg==
+ bh=FrtgzPushvTfBtYzrA4xryV0T5y0Ofrk1OzBI442UsA=;
+ b=dPTLJaQoWh5RzbOUen0bq5cUzp9fW9wgl/VN84VsHE44nQ2RG7gbeLYK
+ 3Yf4OKgYOXiSn3g5/0/qxjwDoFWCt+cseAWZmC8NPtnaQGHDEIKE2tA4S
+ 0Lkeby/tQ4IoqDb73B9MFxjH7D7nD4U+xPRRyMhz3hJUdB9Lh3JY+i0TY
+ h3/7A4Rv7K90VqAGBpYZgRaSmsZyoBEANaF1NRMRXVAPcpcnsbBCfqnIa
+ o+kZHzrYXYH8Bf5rOErPqHqKDOt7ohlZtVRt/KjCx3p6R++uL53/z/oOG
+ 1y7ONzJkGcCXBIaLfvLPvwsCrYCEIe0Gzu2hdJgQQCQqgjUFqmSfRL/P8 Q==;
+X-CSE-ConnectionGUID: 6dcJPCzHQfS8DWuOzNCFlA==
+X-CSE-MsgGUID: nvAUAgYoQMy2u3w/A/F4ig==
+X-IronPort-AV: E=McAfee;i="6700,10204,11427"; a="51263061"
+X-IronPort-AV: E=Sophos;i="6.15,274,1739865600"; d="scan'208";a="51263061"
+Received: from orviesa004.jf.intel.com ([10.64.159.144])
+ by fmvoesa107.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 09 May 2025 02:59:02 -0700
+X-CSE-ConnectionGUID: QWtv1rnXQuKrD0DM8sgCQA==
+X-CSE-MsgGUID: iX3VjJpPSQSoXwK10eontg==
 X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.15,274,1739865600"; d="scan'208";a="140620735"
+X-IronPort-AV: E=Sophos;i="6.15,274,1739865600"; d="scan'208";a="141524192"
 Received: from liuzhao-optiplex-7080.sh.intel.com (HELO localhost)
  ([10.239.160.39])
- by fmviesa003.fm.intel.com with ESMTP; 09 May 2025 02:25:19 -0700
-Date: Fri, 9 May 2025 17:46:21 +0800
+ by orviesa004.jf.intel.com with ESMTP; 09 May 2025 02:58:54 -0700
+Date: Fri, 9 May 2025 18:19:56 +0800
 From: Zhao Liu <zhao1.liu@intel.com>
 To: Philippe =?iso-8859-1?Q?Mathieu-Daud=E9?= <philmd@linaro.org>
 Cc: qemu-devel@nongnu.org, Richard Henderson <richard.henderson@linaro.org>,
@@ -68,18 +68,19 @@ Cc: qemu-devel@nongnu.org, Richard Henderson <richard.henderson@linaro.org>,
  =?iso-8859-1?Q?Cl=E9ment?= Mathieu--Drif <clement.mathieu--drif@eviden.com>,
  qemu-arm@nongnu.org,
  =?iso-8859-1?Q?Marc-Andr=E9?= Lureau <marcandre.lureau@redhat.com>,
- Huacai Chen <chenhuacai@kernel.org>, Jason Wang <jasowang@redhat.com>
-Subject: Re: [PATCH v4 26/27] hw/char/virtio-serial: Do not expose the
- 'emergency-write' property
-Message-ID: <aB3O7WrGQc1N5+ny@intel.com>
+ Huacai Chen <chenhuacai@kernel.org>, Jason Wang <jasowang@redhat.com>,
+ Mark Cave-Ayland <mark.caveayland@nutanix.com>
+Subject: Re: [PATCH v4 27/27] hw/virtio/virtio-pci: Remove
+ VIRTIO_PCI_FLAG_PAGE_PER_VQ definition
+Message-ID: <aB3WzIjvBmE1SjI9@intel.com>
 References: <20250508133550.81391-1-philmd@linaro.org>
- <20250508133550.81391-27-philmd@linaro.org>
+ <20250508133550.81391-28-philmd@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=iso-8859-1
 Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <20250508133550.81391-27-philmd@linaro.org>
-Received-SPF: pass client-ip=198.175.65.11; envelope-from=zhao1.liu@intel.com;
+In-Reply-To: <20250508133550.81391-28-philmd@linaro.org>
+Received-SPF: pass client-ip=192.198.163.13; envelope-from=zhao1.liu@intel.com;
  helo=mgamail.intel.com
 X-Spam_score_int: -57
 X-Spam_score: -5.8
@@ -104,25 +105,26 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Thu, May 08, 2025 at 03:35:49PM +0200, Philippe Mathieu-Daudé wrote:
-> Date: Thu,  8 May 2025 15:35:49 +0200
+On Thu, May 08, 2025 at 03:35:50PM +0200, Philippe Mathieu-Daudé wrote:
+> Date: Thu,  8 May 2025 15:35:50 +0200
 > From: Philippe Mathieu-Daudé <philmd@linaro.org>
-> Subject: [PATCH v4 26/27] hw/char/virtio-serial: Do not expose the
->  'emergency-write' property
+> Subject: [PATCH v4 27/27] hw/virtio/virtio-pci: Remove
+>  VIRTIO_PCI_FLAG_PAGE_PER_VQ definition
 > X-Mailer: git-send-email 2.47.1
 > 
-> The VIRTIO_CONSOLE_F_EMERG_WRITE feature bit was only set
-> in the hw_compat_2_7[] array, via the 'emergency-write=off'
-> property. We removed all machines using that array, lets remove
-> that property. All instances have this feature bit set and
-> it can not be disabled. VirtIOSerial::host_features mask is
-> now unused, remove it.
+> VIRTIO_PCI_FLAG_PAGE_PER_VQ was only used by the hw_compat_2_7[]
+> array, via the 'page-per-vq=on' property. We removed all
+> machines using that array, lets remove all the code around
+> VIRTIO_PCI_FLAG_PAGE_PER_VQ (see commit 9a4c0e220d8 for similar
+> VIRTIO_PCI_FLAG_* enum removal).
 > 
 > Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
+> Reviewed-by: Mark Cave-Ayland <mark.caveayland@nutanix.com>
 > ---
->  include/hw/virtio/virtio-serial.h | 2 --
->  hw/char/virtio-serial-bus.c       | 9 +++------
->  2 files changed, 3 insertions(+), 8 deletions(-)
+>  include/hw/virtio/virtio-pci.h |  1 -
+>  hw/display/virtio-vga.c        | 10 ----------
+>  hw/virtio/virtio-pci.c         |  7 +------
+>  3 files changed, 1 insertion(+), 17 deletions(-)
 
 Reviewed-by: Zhao Liu <zhao1.liu@intel.com>
 
