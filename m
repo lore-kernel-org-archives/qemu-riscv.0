@@ -4,107 +4,96 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C6EBBC3ABCB
-	for <qemu-riscv@archiver.kernel.org>; Sun, 11 May 2025 13:50:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E1E15C3ABC3
+	for <qemu-riscv@archiver.kernel.org>; Mon, 12 May 2025 02:25:08 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uE73n-0005du-9S; Sun, 11 May 2025 09:49:43 -0400
+	id 1uEIqi-0003S6-Ql; Sun, 11 May 2025 22:25:00 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <mst@redhat.com>) id 1uE73l-0005dT-TN
- for qemu-riscv@nongnu.org; Sun, 11 May 2025 09:49:41 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
+ (Exim 4.90_1) (envelope-from <zhao1.liu@intel.com>)
+ id 1uEIqd-0003R6-U9; Sun, 11 May 2025 22:24:56 -0400
+Received: from mgamail.intel.com ([198.175.65.12])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <mst@redhat.com>) id 1uE73j-0002xL-Uu
- for qemu-riscv@nongnu.org; Sun, 11 May 2025 09:49:41 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1746971379;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=oeGpKGElYWdXPzY44xLkHOg5kh0ZxJrvla0lMfzEXOw=;
- b=TnrxiwW1MVJu5a3Hbmlp1uxgdv+fNT4NbkzzEkWck7O1391jMrmwpJ7KduWbz4YYQs3KmT
- f6lLnV4ENhh0DL5V/68f78R9JQNFQkuM6rPVulQf2rxy9XVU9oV21+zepXNHrq2GsDim7D
- J0d4Cms+K6vdJuTMG4j9wJpiMNdH1cs=
-Received: from mail-wm1-f70.google.com (mail-wm1-f70.google.com
- [209.85.128.70]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-569-YC7Be3HsMCifydaUv9XiHg-1; Sun, 11 May 2025 09:49:37 -0400
-X-MC-Unique: YC7Be3HsMCifydaUv9XiHg-1
-X-Mimecast-MFC-AGG-ID: YC7Be3HsMCifydaUv9XiHg_1746971377
-Received: by mail-wm1-f70.google.com with SMTP id
- 5b1f17b1804b1-43efa869b0aso25544835e9.3
- for <qemu-riscv@nongnu.org>; Sun, 11 May 2025 06:49:37 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1746971376; x=1747576176;
- h=in-reply-to:content-transfer-encoding:content-disposition
- :mime-version:references:message-id:subject:cc:to:from:date
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=oeGpKGElYWdXPzY44xLkHOg5kh0ZxJrvla0lMfzEXOw=;
- b=SO4bs1REjJ3nejo+PYx8JEUuDySuvpooQaBdhDpg1oRNrjRfMDI/qDOC81Cj9DqV3c
- ccTm/8aK3eXsR72MFw2eOcRwQhiGOwDMlCFP1fN/SMgQ8XZdjbb6fm8pcWOq0hpMxNd4
- ZBpAv/GBvAua7H72iOAAnDxP7q1Bo3drYnQrpEf0qQPcRrBTR1/QOAfGjrZMXd0Zi3cW
- 4NTDUlE6KWLFR9sIHBo1rMVseyPiF8MAVDwT80rGbPilSNIuuIdJI1R3WGFNslRV0IbR
- 47N09Bxibin4myksJI4HSZgLsSfI5UkRezOjySQzbCrLFDhcgQMP+jPpSa9rry5X+PEn
- d2RA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUiGhLFZeRrPeJEkCrlO7mU4MoT+PZuRnzKyKZxGQn/BXWnrp5oSiQivbJl80MeTF5LJf7dWH+lcoeK@nongnu.org
-X-Gm-Message-State: AOJu0YzhzOFRE2eDdWrFORNddz2dTuODFcj0im3oLl2GZtn2pbWjrqXx
- gvyVF7WIZ67rtrbZINNpy3LT1ilAjJ/PaIVTXbZYpCN7E0wKAerP76rrHCp6W4Kt/X992pLX7d4
- hkmTjMo5/HNM9kE/GcnFkoqNAKjGeXbUR0tvGSIBF5If9/DCtJE3J
-X-Gm-Gg: ASbGncup9hPM30yw1Ye/tq5BmKH4eZVI/A3XrFxTbXLHmPrivUd/eFjLTdpymx2zNpC
- 9nQJaGA+8lS9R4TeXcStGBMUo0tgw3NZ4x6DuilY3QHxFzi1lpN/o7Zh89m5bgHq33AM1DRMNv1
- W9B+iL9SAujpsv8XYLoz4at5763MZ7JjQtZh2/AMnstW/0SBfQv32wBIpcSAqg7021M1vdabnXz
- whb75H5t8zwkAET8UvWy782gwFw+ltfs5H2u7k/j6t+Uynb0bmOjus0XsVan8n+aXI0/6ThpiZs
- zDesOA==
-X-Received: by 2002:a05:600c:3482:b0:43d:7588:6688 with SMTP id
- 5b1f17b1804b1-442d6d1fb46mr95610405e9.12.1746971376620; 
- Sun, 11 May 2025 06:49:36 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IG2NXC9IiTkxQvIIZmNC+D37RbKV1hathZfceRhRAG+N+asE+0YvEQhdohdgfaxzzsKXhKTRg==
-X-Received: by 2002:a05:600c:3482:b0:43d:7588:6688 with SMTP id
- 5b1f17b1804b1-442d6d1fb46mr95610295e9.12.1746971376213; 
- Sun, 11 May 2025 06:49:36 -0700 (PDT)
-Received: from redhat.com ([2a0d:6fc0:1517:1000:ea83:8e5f:3302:3575])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-442d6858626sm94596225e9.27.2025.05.11.06.49.33
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 11 May 2025 06:49:34 -0700 (PDT)
-Date: Sun, 11 May 2025 09:49:31 -0400
-From: "Michael S. Tsirkin" <mst@redhat.com>
-To: Jason Chien <jason.chien@sifive.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org,
+ (Exim 4.90_1) (envelope-from <zhao1.liu@intel.com>)
+ id 1uEIqb-0002fF-6n; Sun, 11 May 2025 22:24:55 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+ d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+ t=1747016693; x=1778552693;
+ h=date:from:to:cc:subject:message-id:references:
+ mime-version:content-transfer-encoding:in-reply-to;
+ bh=z7qhnh/wiUvOpKBKk84OgMz6hz8R1PuKuj0Ro9Ok98M=;
+ b=Il4RtjogniuZ1Vc47Rt4Z9LOQPhjE66PNjCWylTwcnuwMZ13Up4THUCO
+ N4J2UabTWRTP4IUWHf+hcO+J+sg9dteiKfFurjllb3ibVTd9HatngOl+p
+ H4MiRfxIdeG7J9lo1wwHcJhtCWdxqH2eK8ZSBA8r83uXKcsiqT8zhwlAT
+ XN21uAkOI8PHt2fOh8UR9RNSUtfKmIxhnBdJOsMuigZ6RAoFTHUjgzkPZ
+ xmknITFlhIMKga+4ZYMfASP5Zy1uak9rAyhkqfd/jQBeHtC44glUjL3UX
+ x9Xgu49SRMsQ7pLifBoIMNetLWQlnYoLWh9TkZDIeZ2WWFXukUQbKjRAI A==;
+X-CSE-ConnectionGUID: SBrb44oPSjuOXuV1jV5MCQ==
+X-CSE-MsgGUID: 3Tcd+DZISQy1hwd49i0lug==
+X-IronPort-AV: E=McAfee;i="6700,10204,11430"; a="60202903"
+X-IronPort-AV: E=Sophos;i="6.15,281,1739865600"; d="scan'208";a="60202903"
+Received: from orviesa010.jf.intel.com ([10.64.159.150])
+ by orvoesa104.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 11 May 2025 19:24:47 -0700
+X-CSE-ConnectionGUID: MOgSV+puRlO3gTTA58Sv+Q==
+X-CSE-MsgGUID: nX5TD5wBSsGv9x37LRRe2Q==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.15,281,1739865600"; d="scan'208";a="137094374"
+Received: from liuzhao-optiplex-7080.sh.intel.com (HELO localhost)
+ ([10.239.160.39])
+ by orviesa010.jf.intel.com with ESMTP; 11 May 2025 19:24:40 -0700
+Date: Mon, 12 May 2025 10:45:42 +0800
+From: Zhao Liu <zhao1.liu@intel.com>
+To: Thomas Huth <thuth@redhat.com>
+Cc: Xiaoyao Li <xiaoyao.li@intel.com>,
+ Philippe =?iso-8859-1?Q?Mathieu-Daud=E9?= <philmd@linaro.org>,
+ Markus Armbruster <armbru@redhat.com>, Paolo Bonzini <pbonzini@redhat.com>,
+ "Daniel P. Berrange" <berrange@redhat.com>, qemu-devel@nongnu.org,
+ Richard Henderson <richard.henderson@linaro.org>,
+ kvm@vger.kernel.org, Gerd Hoffmann <kraxel@redhat.com>,
  Peter Maydell <peter.maydell@linaro.org>,
- Andrey Smirnov <andrew.smirnov@gmail.com>,
+ Laurent Vivier <lvivier@redhat.com>,
+ Jiaxun Yang <jiaxun.yang@flygoat.com>, Yi Liu <yi.l.liu@intel.com>,
+ "Michael S. Tsirkin" <mst@redhat.com>,
+ Eduardo Habkost <eduardo@habkost.net>,
  Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
- Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <alistair.francis@wdc.com>,
- Weiwei Li <liwei1518@gmail.com>,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Marcelo Tosatti <mtosatti@redhat.com>, qemu-riscv@nongnu.org,
+ Weiwei Li <liwei1518@gmail.com>, Amit Shah <amit@kernel.org>,
+ Yanan Wang <wangyanan55@huawei.com>, Helge Deller <deller@gmx.de>,
+ Palmer Dabbelt <palmer@dabbelt.com>, Ani Sinha <anisinha@redhat.com>,
+ Igor Mammedov <imammedo@redhat.com>, Fabiano Rosas <farosas@suse.de>,
  Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- "open list:MCIMX7D SABRE / i..." <qemu-arm@nongnu.org>
-Subject: Re: [PATCH 0/4] Integrate IOMMUs with PCI hosts that have ATUs
-Message-ID: <20250511094907-mutt-send-email-mst@kernel.org>
-References: <20250307203952.13871-1-jason.chien@sifive.com>
+ =?iso-8859-1?Q?Cl=E9ment?= Mathieu--Drif <clement.mathieu--drif@eviden.com>,
+ qemu-arm@nongnu.org,
+ =?iso-8859-1?Q?Marc-Andr=E9?= Lureau <marcandre.lureau@redhat.com>,
+ Huacai Chen <chenhuacai@kernel.org>, Jason Wang <jasowang@redhat.com>
+Subject: Re: How to mark internal properties (was: Re: [PATCH v4 12/27]
+ target/i386/cpu: Remove CPUX86State::enable_cpuid_0xb field)
+Message-ID: <aCFg1hr1wpNZIcL3@intel.com>
+References: <20250508133550.81391-1-philmd@linaro.org>
+ <20250508133550.81391-13-philmd@linaro.org>
+ <23260c74-01ba-45bc-bf2f-b3e19c28ec8a@intel.com>
+ <aB2vjuT07EuO6JSQ@intel.com>
+ <2f526570-7ab0-479c-967c-b3f95f9f19e3@redhat.com>
 MIME-Version: 1.0
-In-Reply-To: <20250307203952.13871-1-jason.chien@sifive.com>
-X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: 2VW3D2uM_2Zzhqo-oQfQGoXstoDWSN6BFPBpfemOjGw_1746971377
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset=utf-8
+Content-Type: text/plain; charset=gb2312
 Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=170.10.129.124; envelope-from=mst@redhat.com;
- helo=us-smtp-delivery-124.mimecast.com
-X-Spam_score_int: -46
-X-Spam_score: -4.7
-X-Spam_bar: ----
-X-Spam_report: (-4.7 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-1.587,
+In-Reply-To: <2f526570-7ab0-479c-967c-b3f95f9f19e3@redhat.com>
+Received-SPF: pass client-ip=198.175.65.12; envelope-from=zhao1.liu@intel.com;
+ helo=mgamail.intel.com
+X-Spam_score_int: -59
+X-Spam_score: -6.0
+X-Spam_bar: ------
+X-Spam_report: (-6.0 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-1.587,
  DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H5=-1, RCVD_IN_MSPIKE_WL=-0.01,
- RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001, RCVD_IN_VALIDITY_SAFE_BLOCKED=0.001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ RCVD_IN_DNSWL_MED=-2.3, RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001,
+ RCVD_IN_VALIDITY_SAFE_BLOCKED=0.001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -120,41 +109,105 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Sat, Mar 08, 2025 at 04:39:33AM +0800, Jason Chien wrote:
-> The struct PCIIOMMUOps is designed for use by an IOMMU, but many PCI hosts
-> also utilize it to implement their ATUs, preventing coexistence with IOMMUs.
-> Overwriting a PCI hostâ€™s PCIIOMMUOps disrupts its translation rules.
+On Fri, May 09, 2025 at 12:04:19PM +0200, Thomas Huth wrote:
+> Date: Fri, 9 May 2025 12:04:19 +0200
+> From: Thomas Huth <thuth@redhat.com>
+> Subject: How to mark internal properties (was: Re: [PATCH v4 12/27]
+>  target/i386/cpu: Remove CPUX86State::enable_cpuid_0xb field)
 > 
-> This patch series introduces a mechanism to route inbound transactions from
-> PCI hosts to the IOMMU, enabling proper integration.
+> On 09/05/2025 09.32, Zhao Liu wrote:
+> > On Fri, May 09, 2025 at 02:49:27PM +0800, Xiaoyao Li wrote:
+> > > Date: Fri, 9 May 2025 14:49:27 +0800
+> > > From: Xiaoyao Li <xiaoyao.li@intel.com>
+> > > Subject: Re: [PATCH v4 12/27] target/i386/cpu: Remove
+> > >   CPUX86State::enable_cpuid_0xb field
+> > > 
+> > > On 5/8/2025 9:35 PM, Philippe Mathieu-Daud¨¦ wrote:
+> > > > The CPUX86State::enable_cpuid_0xb boolean was only disabled
+> > > > for the pc-q35-2.6 and pc-i440fx-2.6 machines, which got
+> > > > removed. Being now always %true, we can remove it and simplify
+> > > > cpu_x86_cpuid().
+> > > > 
+> > > > Signed-off-by: Philippe Mathieu-Daud¨¦ <philmd@linaro.org>
+> > > > ---
+> > > >    target/i386/cpu.h | 3 ---
+> > > >    target/i386/cpu.c | 6 ------
+> > > >    2 files changed, 9 deletions(-)
+> > > > 
+> > > > diff --git a/target/i386/cpu.h b/target/i386/cpu.h
+> > > > index 0db70a70439..06817a31cf9 100644
+> > > > --- a/target/i386/cpu.h
+> > > > +++ b/target/i386/cpu.h
+> > > > @@ -2241,9 +2241,6 @@ struct ArchCPU {
+> > > >         */
+> > > >        bool legacy_multi_node;
+> > > > -    /* Compatibility bits for old machine types: */
+> > > > -    bool enable_cpuid_0xb;
+> > > > -
+> > > >        /* Enable auto level-increase for all CPUID leaves */
+> > > >        bool full_cpuid_auto_level;
+> > > > diff --git a/target/i386/cpu.c b/target/i386/cpu.c
+> > > > index 49179f35812..6fe37f71b1e 100644
+> > > > --- a/target/i386/cpu.c
+> > > > +++ b/target/i386/cpu.c
+> > > > @@ -6982,11 +6982,6 @@ void cpu_x86_cpuid(CPUX86State *env, uint32_t index, uint32_t count,
+> > > >            break;
+> > > >        case 0xB:
+> > > >            /* Extended Topology Enumeration Leaf */
+> > > > -        if (!cpu->enable_cpuid_0xb) {
+> > > > -                *eax = *ebx = *ecx = *edx = 0;
+> > > > -                break;
+> > > > -        }
+> > > > -
+> > > >            *ecx = count & 0xff;
+> > > >            *edx = cpu->apic_id;
+> > > > @@ -8828,7 +8823,6 @@ static const Property x86_cpu_properties[] = {
+> > > >        DEFINE_PROP_UINT64("ucode-rev", X86CPU, ucode_rev, 0),
+> > > >        DEFINE_PROP_BOOL("full-cpuid-auto-level", X86CPU, full_cpuid_auto_level, true),
+> > > >        DEFINE_PROP_STRING("hv-vendor-id", X86CPU, hyperv_vendor),
+> > > > -    DEFINE_PROP_BOOL("cpuid-0xb", X86CPU, enable_cpuid_0xb, true),
+> > > 
+> > > It's deprecating the "cpuid-0xb" property.
+> > > 
+> > > I think we need go with the standard process to deprecate it.
+> > 
+> > Thanks! I got your point.
+> > 
+> > Though this property is introduced for compatibility, as its comment
+> > said "Compatibility bits for old machine types", it is also useful for
+> > somer users.
 > 
-> The final patch depends on another patch series:
-> https://lists.nongnu.org/archive/html/qemu-riscv/2025-03/msg00003.html
+> Thanks for your clarifications, Zhao! But I think this shows again the
+> problem that we have hit a couple of times in the past already: Properties
+> are currently used for both, config knobs for the users and internal
+> switches for configuration of the machine. We lack a proper way to say "this
+> property is usable for the user" and "this property is meant for internal
+> configuration only".
 
+Hi Thomas, thank you.
 
-PCI things:
+AFAIK, there are two ways to configure whether an object/device is
+allowed to be created by user or not:
 
-Reviewed-by: Michael S. Tsirkin <mst@redhat.com>
+* TYPE_USER_CREATABLE
+* DeviceClass: user_creatable
 
+So, it looks like it would be tricky to change the infrastructure around
+object_property_add because it's not easy to be compatible with both of the
+above user creation ways.
 
-given the dependency, pls merge through risc-v tree.
+> I wonder whether we could maybe come up with a naming scheme to better
+> distinguish the two sets, e.g. by using a prefix similar to the "x-" prefix
+> for experimental properties? We could e.g. say that all properties starting
+> with a "q-" are meant for QEMU-internal configuration only or something
+> similar (and maybe even hide those from the default help output when running
+> "-device xyz,help" ?)? Anybody any opinions or better ideas on this?
 
-> Jason Chien (4):
->   include/hw/pci: Introduce a callback to set the downstream mr of PCI
->     hosts
->   hw/pci: Introduce an API to set PCI host downstream mr for IOMMU
->     integration
->   hw/pci-host/designware: Implement PCIIOMMUOps.set_downstream_mr()
->   hw/riscv/riscv-iommu: Connect the IOMMU with PCI hosts that have ATUs
-> 
->  hw/pci-host/designware.c         | 18 +++++++++++++++---
->  hw/pci/pci.c                     |  8 ++++++++
->  hw/riscv/riscv-iommu.c           | 15 ++++++++++-----
->  include/hw/pci-host/designware.h |  2 ++
->  include/hw/pci/pci.h             | 21 +++++++++++++++++++++
->  5 files changed, 56 insertions(+), 8 deletions(-)
-> 
-> -- 
-> 2.43.2
+Therefore, I think the ¡°q-¡± prefix might be a good way, simple and effective.
+
+Let's see if any other maintainers have a better idea.
+
+Regards,
+Zhao
 
 
