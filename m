@@ -4,100 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E6FD8C3ABC3
-	for <qemu-riscv@archiver.kernel.org>; Mon, 12 May 2025 10:55:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CD8D1C3ABC3
+	for <qemu-riscv@archiver.kernel.org>; Mon, 12 May 2025 12:50:19 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uEQo0-0002iM-Vg; Mon, 12 May 2025 06:54:44 -0400
+	id 1uESbT-0006Bm-Dq; Mon, 12 May 2025 08:50:05 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1uEQnz-0002h6-EP
- for qemu-riscv@nongnu.org; Mon, 12 May 2025 06:54:43 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1uEQnx-0008Fm-CZ
- for qemu-riscv@nongnu.org; Mon, 12 May 2025 06:54:43 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1747047279;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=SrhwlyGHBUeZB9shLrDj8sqTvUNxSWhy6HB7k6LP93M=;
- b=iCChHwCgNuvlCMaK+o4+zvzUysqvfT54c6npibsqHDje1BOTBNRkg+FmXC1dmvfL++R79J
- C/dkjhOUFHRoy2bEOQoz9cLY/21dq9foVfogHa9BDc54BqiUJvJdfUcKIWI/oZk64WPHg8
- qmpKHgzHxMOsqL2dD2mMQN/HBbdeLUM=
-Received: from mx-prod-mc-06.mail-002.prod.us-west-2.aws.redhat.com
- (ec2-35-165-154-97.us-west-2.compute.amazonaws.com [35.165.154.97]) by
- relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-592-44B2jiPpPf6gVRkeWUfX9g-1; Mon,
- 12 May 2025 06:54:36 -0400
-X-MC-Unique: 44B2jiPpPf6gVRkeWUfX9g-1
-X-Mimecast-MFC-AGG-ID: 44B2jiPpPf6gVRkeWUfX9g_1747047273
-Received: from mx-prod-int-06.mail-002.prod.us-west-2.aws.redhat.com
- (mx-prod-int-06.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.93])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by mx-prod-mc-06.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id 4108E180045B; Mon, 12 May 2025 10:54:32 +0000 (UTC)
-Received: from blackfin.pond.sub.org (unknown [10.45.242.27])
- by mx-prod-int-06.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id 1F165180049D; Mon, 12 May 2025 10:54:30 +0000 (UTC)
-Received: by blackfin.pond.sub.org (Postfix, from userid 1000)
- id 506DC21E66E3; Mon, 12 May 2025 12:54:27 +0200 (CEST)
-From: Markus Armbruster <armbru@redhat.com>
-To: Daniel P. =?utf-8?Q?Berrang=C3=A9?= <berrange@redhat.com>
-Cc: Peter Maydell <peter.maydell@linaro.org>,  Thomas Huth
- <thuth@redhat.com>,  Zhao Liu <zhao1.liu@intel.com>,  Xiaoyao Li
- <xiaoyao.li@intel.com>,  Philippe =?utf-8?Q?Mathieu-Daud=C3=A9?=
- <philmd@linaro.org>,
- Paolo Bonzini <pbonzini@redhat.com>,  qemu-devel@nongnu.org,  Richard
- Henderson <richard.henderson@linaro.org>,  kvm@vger.kernel.org,  Gerd
- Hoffmann <kraxel@redhat.com>,  Laurent Vivier <lvivier@redhat.com>,
- Jiaxun Yang <jiaxun.yang@flygoat.com>,  Yi Liu <yi.l.liu@intel.com>,
- "Michael S. Tsirkin" <mst@redhat.com>,  Eduardo Habkost
- <eduardo@habkost.net>,  Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
- Alistair Francis <alistair.francis@wdc.com>,  Daniel Henrique Barboza
- <dbarboza@ventanamicro.com>,  Marcelo Tosatti <mtosatti@redhat.com>,
- qemu-riscv@nongnu.org,  Weiwei Li <liwei1518@gmail.com>,  Amit Shah
- <amit@kernel.org>,  Yanan Wang <wangyanan55@huawei.com>,  Helge Deller
- <deller@gmx.de>,  Palmer Dabbelt <palmer@dabbelt.com>,  Ani Sinha
- <anisinha@redhat.com>,  Igor Mammedov <imammedo@redhat.com>,  Fabiano
- Rosas <farosas@suse.de>,  Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- =?utf-8?Q?Cl=C3=A9ment?= Mathieu--Drif <clement.mathieu--drif@eviden.com>,
- qemu-arm@nongnu.org,  =?utf-8?Q?Marc-Andr=C3=A9?= Lureau
- <marcandre.lureau@redhat.com>,
- Huacai Chen <chenhuacai@kernel.org>,  Jason Wang <jasowang@redhat.com>
-Subject: Re: How to mark internal properties
-In-Reply-To: <aCG6MuDLrQpoTqpg@redhat.com> ("Daniel P. =?utf-8?Q?Berrang?=
- =?utf-8?Q?=C3=A9=22's?= message of
- "Mon, 12 May 2025 10:06:58 +0100")
-References: <20250508133550.81391-1-philmd@linaro.org>
- <20250508133550.81391-13-philmd@linaro.org>
- <23260c74-01ba-45bc-bf2f-b3e19c28ec8a@intel.com>
- <aB2vjuT07EuO6JSQ@intel.com>
- <2f526570-7ab0-479c-967c-b3f95f9f19e3@redhat.com>
- <CAFEAcA-kuHvxjuV_cMh-Px3C-k2Gd51jFqhwndO52vm++M_jAA@mail.gmail.com>
- <aCG6MuDLrQpoTqpg@redhat.com>
-Date: Mon, 12 May 2025 12:54:26 +0200
-Message-ID: <87jz6mqeu5.fsf@pond.sub.org>
-User-Agent: Gnus/5.13 (Gnus v5.13)
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1uESbB-00066X-96
+ for qemu-riscv@nongnu.org; Mon, 12 May 2025 08:49:37 -0400
+Received: from mail-vs1-xe33.google.com ([2607:f8b0:4864:20::e33])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1uESb4-0005EX-3w
+ for qemu-riscv@nongnu.org; Mon, 12 May 2025 08:49:35 -0400
+Received: by mail-vs1-xe33.google.com with SMTP id
+ ada2fe7eead31-4ddbb0fc1e7so1274968137.2
+ for <qemu-riscv@nongnu.org>; Mon, 12 May 2025 05:49:28 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=ventanamicro.com; s=google; t=1747054167; x=1747658967; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=vF/ohKV4eqweLIx2Ark7Ixvx2S1UIg1AJFcUNH/hOyY=;
+ b=RmVv+EqBz9daOE+09LU4QLvSVBUbc+lm/ydSxHwDnf2cfPs123NTUV+XXD4eSHc3RD
+ pAXJh3OdPKYx39zMpY4SUUsg8lc+Ewgo7FRdDaCcCJ7oSjffwQTnLzZMBxWP7dQVuUyY
+ nUQWMILWP4SkOs6Betj2Tc9ECokm0iFsszLnk9gEJXFVF5mk4ChfVNxlBNR843sTX3Qi
+ OijlLxhmC/87JmB14NTkrBZ6RfvQE5EPRqaZn7C7fi2BL6qvUSiFZ2wTIAgpl+XaopGX
+ uhJlhAm3SDJRULpnu3w4fVRXx6IhQivWCS4gAZuW3yGI2yJ9XidTf6tXPEVEBPgVEnyj
+ rY6Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1747054167; x=1747658967;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=vF/ohKV4eqweLIx2Ark7Ixvx2S1UIg1AJFcUNH/hOyY=;
+ b=IuFzMm3PchDUtr3N9iu9OzRpsZB5BjaeyOLVsKtd2WFZff48a9YgFfgSIrW5tbpotP
+ I8z75Wt8WpFxg2yGy7NOsxzM0/ahuH0biJ6pH7LUH4Uvvsf6bddEb5xxqE3K8Ebfog9B
+ gLRWxXdYhiLiXySWUKeiKLKR+ieJTCtVyYFNTxDSYTs7HPOJ9pm9YPrfsX1M2x1vcLGs
+ UbHAiPlPdjcrp443NXiVuNPbNhtCQOtcFUHskOYV3gnQBFQtpJKQfjtq4qbLZZs+KmCF
+ vPANlOvMPmMhFY2AW3Qbzslzo//SO1+DA8GmeWaum2IVIdUePsvvCJjwrsmUAJldopm4
+ a/uw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCX+FxiS8267GdVeXfbulp3VLpN/Ut8RfZvnNKZSBt21qGuEqkpRmmEwWjePNIPQImd94vRkq5St4HLm@nongnu.org
+X-Gm-Message-State: AOJu0YxnPl6pJ9XwfLG5OjyfGU1MBB0ZZeA+O9fBP+xqDwtl63W2ZIx8
+ CrP70LrkCgLgmyTvTFuQUV4izhEHnBGpGESFcuvA80/qCc5iREw2j4hpOuYQrh8=
+X-Gm-Gg: ASbGncv/lPWrFNXd+T67ZCtMazdUf3lZff8hoQGlDyo8653Y4Qe0Qj6TrGbN4VmHU6T
+ 9/GpgiSE9lBuxYVmT21Qo6559KUNwxE7SOggwQPWXn4wK5MTzVt5Th+Wql3U879cGF7Z7vyyUBe
+ SUQ5dDXAydYJqgihtfz3aEQnIOraz1NDYQd3qOYXcpro6bd0Zgf2Otv1yj8oWfqY17fUUFMN5mM
+ bT3k068Vu6i0EunZ0wF6O+AS1C20znhxeqVoY7fFf6ikoLolx7VRlAm5l3RIsvMOVJeivCaZtcs
+ YRtHahfHY+KB43wYyWStEy6pLXGiHhOiJVcvCj3puGNqIETsstPGUuTlrfi3d5wS/A==
+X-Google-Smtp-Source: AGHT+IHJIY662gUj52i/lT9x/t3pf+k6j4ZQ6uVLXApHEA3nPgcKXReAb3+HtM6kHQ/6NlW/MOcL5g==
+X-Received: by 2002:a05:6102:4b8b:b0:4de:b205:dd57 with SMTP id
+ ada2fe7eead31-4deed406e69mr10723052137.25.1747054167241; 
+ Mon, 12 May 2025 05:49:27 -0700 (PDT)
+Received: from [192.168.68.110] ([152.234.125.33])
+ by smtp.gmail.com with ESMTPSA id
+ a1e0cc1a2514c-879f626c0casm4979184241.27.2025.05.12.05.49.24
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 12 May 2025 05:49:26 -0700 (PDT)
+Message-ID: <64371020-0d72-4fbc-8fc3-d0f3554090db@ventanamicro.com>
+Date: Mon, 12 May 2025 09:49:22 -0300
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.93
-Received-SPF: pass client-ip=170.10.133.124; envelope-from=armbru@redhat.com;
- helo=us-smtp-delivery-124.mimecast.com
-X-Spam_score_int: -46
-X-Spam_score: -4.7
-X-Spam_bar: ----
-X-Spam_report: (-4.7 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-1.587,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H5=-1, RCVD_IN_MSPIKE_WL=-0.01,
- RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001, RCVD_IN_VALIDITY_SAFE_BLOCKED=0.001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v4 16/23] target/riscv: call plugin trap callbacks
+To: Julian Ganz <neither@nut.email>, qemu-devel@nongnu.org
+Cc: Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, Weiwei Li
+ <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ "open list:RISC-V TCG CPUs" <qemu-riscv@nongnu.org>
+References: <cover.1746968215.git.neither@nut.email>
+ <40c7216b842b7d06a0b947a7eee7cc11b9305b15.1746968215.git.neither@nut.email>
+Content-Language: en-US
+From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+In-Reply-To: <40c7216b842b7d06a0b947a7eee7cc11b9305b15.1746968215.git.neither@nut.email>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::e33;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-vs1-xe33.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -113,90 +106,64 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Daniel P. Berrang=C3=A9 <berrange@redhat.com> writes:
-
-> On Mon, May 12, 2025 at 09:46:30AM +0100, Peter Maydell wrote:
->> On Fri, 9 May 2025 at 11:04, Thomas Huth <thuth@redhat.com> wrote:
->> > Thanks for your clarifications, Zhao! But I think this shows again the
->> > problem that we have hit a couple of times in the past already: Proper=
-ties
->> > are currently used for both, config knobs for the users and internal
->> > switches for configuration of the machine. We lack a proper way to say=
- "this
->> > property is usable for the user" and "this property is meant for inter=
-nal
->> > configuration only".
->> >
->> > I wonder whether we could maybe come up with a naming scheme to better
->> > distinguish the two sets, e.g. by using a prefix similar to the "x-" p=
-refix
->> > for experimental properties? We could e.g. say that all properties sta=
-rting
->> > with a "q-" are meant for QEMU-internal configuration only or something
->> > similar (and maybe even hide those from the default help output when r=
-unning
->> > "-device xyz,help" ?)? Anybody any opinions or better ideas on this?
->>=20
->> I think a q-prefix is potentially a bit clunky unless we also have
->> infrastructure to say eg DEFINE_INTERNAL_PROP_BOOL("foo", ...)
->> and have it auto-add the prefix, and to have the C APIs for
->> setting properties search for both "foo" and "q-foo" so you
->> don't have to write qdev_prop_set_bit(dev, "q-foo", ...).
-
-If we make intent explicit with DEFINE_INTERNAL_PROP_FOO(), is repeating
-intent in the name useful?
-
-> I think it is also not obvious enough that a 'q-' prefix means private.
-
-Concur.
-
-> Perhaps borrow from the C world and declare that a leading underscore
-> indicates a private property. People are more likely to understand and
-> remember that, than 'q-'.
-
-This is fine for device properties now.  It's not fine for properties of
-user-creatable objects, because these are defined in QAPI, and QAPI
-prohibits names starting with a single underscore.  I append relevant
-parts of docs/devel/qapi-code-gen.rst for your convenience.
-
-Why does QAPI prohibit leading underscores?  Chiefly because such names
-are reserved identifiers in C.  Instead of complicating the mapping from
-QAPI name to C identifier, we restrict QAPI names and call it a day.
-
-The mapping between device property name and C identifiers is entirely
-manual.  When a property is backed by a member of the device state
-struct, naming the member exactly like the property makes sense.  Having
-to mentally strip / insert a leading underscore would hardly be
-terrible, just a bit of friction.  I'd prefer not to.
 
 
+On 5/11/25 10:14 AM, Julian Ganz wrote:
+> We recently introduced API for registering callbacks for trap related
+> events as well as the corresponding hook functions. Due to differences
+> between architectures, the latter need to be called from target specific
+> code.
+> 
+> This change places hooks for RISC-V targets.
+> 
+> Signed-off-by: Julian Ganz <neither@nut.email>
+> ---
 
+Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 
-Naming rules and reserved names
--------------------------------
-
-All names must begin with a letter, and contain only ASCII letters,
-digits, hyphen, and underscore.  There are two exceptions: enum values
-may start with a digit, and names that are downstream extensions (see
-section `Downstream extensions`_) start with underscore.
-
-Names beginning with ``q_`` are reserved for the generator, which uses
-them for munging QMP names that resemble C keywords or other
-problematic strings.  For example, a member named ``default`` in qapi
-becomes ``q_default`` in the generated C code.
-
-[...]
-
-Downstream extensions
----------------------
-
-QAPI schema names that are externally visible, say in the Client JSON
-Protocol, need to be managed with care.  Names starting with a
-downstream prefix of the form __RFQDN_ are reserved for the downstream
-who controls the valid, reverse fully qualified domain name RFQDN.
-RFQDN may only contain ASCII letters, digits, hyphen and period.
-
-Example: Red Hat, Inc. controls redhat.com, and may therefore add a
-downstream command ``__com.redhat_drive-mirror``.
+>   target/riscv/cpu_helper.c | 9 +++++++++
+>   1 file changed, 9 insertions(+)
+> 
+> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+> index d5039f69a9..dce7e34cba 100644
+> --- a/target/riscv/cpu_helper.c
+> +++ b/target/riscv/cpu_helper.c
+> @@ -36,6 +36,7 @@
+>   #include "cpu_bits.h"
+>   #include "debug.h"
+>   #include "pmp.h"
+> +#include "qemu/plugin.h"
+>   
+>   int riscv_env_mmu_index(CPURISCVState *env, bool ifetch)
+>   {
+> @@ -2173,6 +2174,7 @@ void riscv_cpu_do_interrupt(CPUState *cs)
+>       uint64_t hdeleg = async ? env->hideleg : env->hedeleg;
+>       const bool prev_virt = env->virt_enabled;
+>       const target_ulong prev_priv = env->priv;
+> +    uint64_t last_pc = env->pc;
+>       target_ulong tval = 0;
+>       target_ulong tinst = 0;
+>       target_ulong htval = 0;
+> @@ -2195,6 +2197,7 @@ void riscv_cpu_do_interrupt(CPUState *cs)
+>           case RISCV_EXCP_SEMIHOST:
+>               do_common_semihosting(cs);
+>               env->pc += 4;
+> +            qemu_plugin_vcpu_hostcall_cb(cs, last_pc);
+>               return;
+>   #endif
+>           case RISCV_EXCP_LOAD_GUEST_ACCESS_FAULT:
+> @@ -2464,6 +2467,12 @@ void riscv_cpu_do_interrupt(CPUState *cs)
+>                           prev_priv, prev_virt);
+>       }
+>   
+> +    if (async) {
+> +        qemu_plugin_vcpu_interrupt_cb(cs, last_pc);
+> +    } else {
+> +        qemu_plugin_vcpu_exception_cb(cs, last_pc);
+> +    }
+> +
+>       /*
+>        * Interrupt/exception/trap delivery is asynchronous event and as per
+>        * zicfilp spec CPU should clear up the ELP state. No harm in clearing
 
 
