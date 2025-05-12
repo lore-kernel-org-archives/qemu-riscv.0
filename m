@@ -4,58 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F25EBC3ABCB
-	for <qemu-riscv@archiver.kernel.org>; Mon, 12 May 2025 16:33:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DA505C3ABCB
+	for <qemu-riscv@archiver.kernel.org>; Mon, 12 May 2025 22:51:11 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uEW5M-0006WL-LC; Mon, 12 May 2025 12:33:00 -0400
+	id 1uEbz4-0000ZL-Sv; Mon, 12 May 2025 18:50:54 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <liu.xuemei1@zte.com.cn>)
- id 1uERxl-0005i5-Dy; Mon, 12 May 2025 08:08:54 -0400
-Received: from mxhk.zte.com.cn ([63.216.63.40])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <liu.xuemei1@zte.com.cn>)
- id 1uERxh-000165-HL; Mon, 12 May 2025 08:08:52 -0400
-Received: from mse-fl1.zte.com.cn (unknown [10.5.228.132])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by mxhk.zte.com.cn (FangMail) with ESMTPS id 4Zwz0H57mqz8R045;
- Mon, 12 May 2025 20:08:31 +0800 (CST)
-Received: from xaxapp02.zte.com.cn ([10.88.97.241])
- by mse-fl1.zte.com.cn with SMTP id 54CC7DSC031745;
- Mon, 12 May 2025 20:07:13 +0800 (+08)
- (envelope-from liu.xuemei1@zte.com.cn)
-Received: from mapi (xaxapp01[null]) by mapi (Zmail) with MAPI id mid32;
- Mon, 12 May 2025 20:07:17 +0800 (CST)
-Date: Mon, 12 May 2025 20:07:17 +0800 (CST)
-X-Zmail-TransId: 2af96821e475ffffffffc46-daa40
-X-Mailer: Zmail v1.0
-Message-ID: <202505122007170451_WeaVnOMOCnJghLHZ5zH@zte.com.cn>
-Mime-Version: 1.0
-From: <liu.xuemei1@zte.com.cn>
-To: <palmer@dabbelt.com>, <alistair.francis@wdc.com>, <liwei1518@gmail.com>,
- <dbarboza@ventanamicro.com>, <zhiwei_liu@linux.alibaba.com>,
- <peterx@redhat.com>, <farosas@suse.de>
-Cc: <qemu-riscv@nongnu.org>, <qemu-devel@nongnu.org>
-Subject: =?UTF-8?B?W1BBVENIIHYyXSBtaWdyYXRpb246IEZpeCBtaWdyYXRpb24gZmFpbHVyZSB3aGVuIGFpYSBpcyBjb25maWd1cmVkIGFzCiAnYXBsaWMtaW1zaWMn?=
-Content-Type: text/plain;
-	charset="UTF-8"
-X-MAIL: mse-fl1.zte.com.cn 54CC7DSC031745
-X-Fangmail-Anti-Spam-Filtered: true
-X-Fangmail-MID-QID: 6821E4BF.004/4Zwz0H57mqz8R045
-Received-SPF: pass client-ip=63.216.63.40; envelope-from=liu.xuemei1@zte.com.cn;
- helo=mxhk.zte.com.cn
-X-Spam_score_int: -41
-X-Spam_score: -4.2
-X-Spam_bar: ----
-X-Spam_report: (-4.2 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_MED=-2.3,
- RCVD_IN_VALIDITY_CERTIFIED_BLOCKED=0.001, RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- UNPARSEABLE_RELAY=0.001 autolearn=ham autolearn_force=no
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1uEbz3-0000Yp-Bd; Mon, 12 May 2025 18:50:53 -0400
+Received: from mail-vk1-xa2a.google.com ([2607:f8b0:4864:20::a2a])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1uEbz1-0001x2-3f; Mon, 12 May 2025 18:50:52 -0400
+Received: by mail-vk1-xa2a.google.com with SMTP id
+ 71dfb90a1353d-52c55db3743so1273702e0c.1; 
+ Mon, 12 May 2025 15:50:50 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1747090249; x=1747695049; darn=nongnu.org;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=UVZmC3NLKELZ8+sF0ymWu0+rEBEHAecwjsCl4g4zr8w=;
+ b=brCD5jxEN9LZgJiK2m9AhJrZE971AtXTJTDeLOTgnLd+hu8Enb8U3rkZrqp15mXvwb
+ V1+tEn5zJrap+/9NhXCIqq6qSIKV3UceIRAZUwSV23YvWFkkFwZRL7qUHkNpg0vIRUZw
+ JQyU/RhmF0Qg26aqSRi0cpSmOY5Wbuq/9hl1YR2srwFkzfwyn8Z9GU2TwpzXgkHgzJqk
+ pDgpo1SLISa2tmPPMY4yHMF0Rl/qVG+lR9Mn9iIMaqkKzTCzyWXq3RhtjgQQs0KkbAhj
+ jZSCJbi91yQ1CaCk/0Hb4PzRLWYOvxzP/OcTGcSgrOOqvshoqrCFJG/6vh0N0bRULknZ
+ T+IA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1747090249; x=1747695049;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=UVZmC3NLKELZ8+sF0ymWu0+rEBEHAecwjsCl4g4zr8w=;
+ b=X28kA39LvXbAGzgDetwRY1iM7wPN6KS8b+xBDcmaJl8VecB4eytznjC1yAt70VsAVp
+ 7rAtpMjwmxvFf8m6xVSq8Zbye+Bz8snHym9z6H7UY49pSCDLDI35CRqlanLMCGpGqImG
+ d6hc5MACyV5NkHOikkmlUOmaGfBFAr14P5OwccIrFURz8n+kgIsMczcadr56WtcSNA6r
+ AcyN2MoIf3IOVi8ApI9Lwean10+XJNvYzgqEZF3iaXc50dr5pIZYvtUb6MDyNHZ6G1++
+ hQ5Tf1Pqtx4p9taNExvcBdssxdPQAzhYEBblWJ7t+zBDkS3i4ns029Nnuh9LCLA3DLY/
+ 4uSA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCX5oy+RSmwbdIYuW8EjDPQDBMguWnaRINktcqRPEgH9flNzhMedyzUj4HYE+eC3Y+imtBPeWVQRtB60@nongnu.org
+X-Gm-Message-State: AOJu0YzdFVM4nCFIvIXnxpynTSmY7siT3cFoMZANwgABBEdKkMhW6YfG
+ WsAdPc43avIL04xUYKGwrPK+SzEDLaNcJhbs8QgedlHyeZs6dUcXUFkGUlJQhc0wiZoCvzAjBzO
+ GH4wb95loNj3dyqBwxaIomRjPD9Y=
+X-Gm-Gg: ASbGnctsNPy46JBh48v9eVG5OQGXr3gndeYg69q8svFV5W7vPP2G4l5cYe/tfoooz6g
+ hmSBbbCMUEl7m2CkGvbWcYdGS3xjNL3wFtwwUH68P8thm4S6/PAhTRuWi1nYQiuo2XVaiT3jIEi
+ G0fzHB41UNBoAqS/k3tz+GlXJU0T6iQdSA2od+1EsykZcrZdPc9/PNeaZGMj1MyQk=
+X-Google-Smtp-Source: AGHT+IFS6+sKDgdtJRjCFUUbvab3mLR67n+l8BZV1MAX0PCtNk1xRq83zGAB1tz0D/6RbIJFF8UXQCd9b7iwqvLuhlg=
+X-Received: by 2002:a05:6122:828d:b0:52c:5062:c84d with SMTP id
+ 71dfb90a1353d-52c538121aemr9412682e0c.0.1747090249224; Mon, 12 May 2025
+ 15:50:49 -0700 (PDT)
+MIME-Version: 1.0
+References: <cover.1746968215.git.neither@nut.email>
+ <40c7216b842b7d06a0b947a7eee7cc11b9305b15.1746968215.git.neither@nut.email>
+In-Reply-To: <40c7216b842b7d06a0b947a7eee7cc11b9305b15.1746968215.git.neither@nut.email>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Tue, 13 May 2025 08:50:23 +1000
+X-Gm-Features: AX0GCFtC_8yO4px2eHIpPXvURVdxBA33BKDXu2crm9lxd5YpaR3NfWKvRK9gFtA
+Message-ID: <CAKmqyKNmHYuyvG8w5ELL2nheS332YLLuQsVrnKiE-A0-Kt_Bww@mail.gmail.com>
+Subject: Re: [PATCH v4 16/23] target/riscv: call plugin trap callbacks
+To: Julian Ganz <neither@nut.email>
+Cc: qemu-devel@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>, 
+ Alistair Francis <alistair.francis@wdc.com>, Weiwei Li <liwei1518@gmail.com>, 
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
+ "open list:RISC-V TCG CPUs" <qemu-riscv@nongnu.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2607:f8b0:4864:20::a2a;
+ envelope-from=alistair23@gmail.com; helo=mail-vk1-xa2a.google.com
+X-Spam_score_int: -17
+X-Spam_score: -1.8
+X-Spam_bar: -
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
-X-Mailman-Approved-At: Mon, 12 May 2025 12:32:59 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -70,79 +99,71 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Xuemei Liu <liu.xuemei1@zte.com.cn>
+On Sun, May 11, 2025 at 11:18=E2=80=AFPM Julian Ganz <neither@nut.email> wr=
+ote:
+>
+> We recently introduced API for registering callbacks for trap related
+> events as well as the corresponding hook functions. Due to differences
+> between architectures, the latter need to be called from target specific
+> code.
+>
+> This change places hooks for RISC-V targets.
+>
+> Signed-off-by: Julian Ganz <neither@nut.email>
 
-Address an error in migration when aia is configured as 'aplic-imsic' in
-riscv kvm vm by adding riscv_aplic_state_needed() and
-riscv_imsic_state_needed() to determine whether the corresponding sates are
-needed.
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
-Previously, the fields in the vmsds of 'riscv_aplic' and 'riscv_imsic' can
-only be initialized under certain special conditions in commit 95a97b3fd2.
-However, the corresponding ses of these vmsds are inserted into the
-savevm_state.handlers unconditionally. This led to migration failure
-characterized by uninitialized fields when save vm state:
-qemu-system-riscv64: ../migration/vmstate.c:433: vmstate_save_state_v:
-Assertion 'first_elem || !n_elems || !size' failed.
+Alistair
 
-Fixes: 95a97b3fd2 ("target/riscv: update APLIC and IMSIC to support KVM AIA")
-
-Signed-off-by: Xuemei Liu <liu.xuemei1@zte.com.cn>
----
-
- Changes in v2:
-
- - Dropped the modifications in vmstate_register_with_alias_id()
- - Added riscv_aplic_state_needed() and riscv_imsic_state_needed()
-
- hw/intc/riscv_aplic.c | 8 ++++++++
- hw/intc/riscv_imsic.c | 6 ++++++
- 2 files changed, 14 insertions(+)
-
-diff --git a/hw/intc/riscv_aplic.c b/hw/intc/riscv_aplic.c
-index 8bcd9f4697..c9abef2e0f 100644
---- a/hw/intc/riscv_aplic.c
-+++ b/hw/intc/riscv_aplic.c
-@@ -962,10 +962,18 @@ static const Property riscv_aplic_properties[] = {
-     DEFINE_PROP_BOOL("mmode", RISCVAPLICState, mmode, 0),
- };
-
-+static bool riscv_aplic_state_needed(void *opaque)
-+{
-+    RISCVAPLICState *aplic = opaque;
-+
-+    return riscv_use_emulated_aplic(aplic->msimode);
-+}
-+
- static const VMStateDescription vmstate_riscv_aplic = {
-     .name = "riscv_aplic",
-     .version_id = 2,
-     .minimum_version_id = 2,
-+    .needed = riscv_aplic_state_needed,
-     .fields = (const VMStateField[]) {
-             VMSTATE_UINT32(domaincfg, RISCVAPLICState),
-             VMSTATE_UINT32(mmsicfgaddr, RISCVAPLICState),
-diff --git a/hw/intc/riscv_imsic.c b/hw/intc/riscv_imsic.c
-index 2169988167..92a7254076 100644
---- a/hw/intc/riscv_imsic.c
-+++ b/hw/intc/riscv_imsic.c
-@@ -398,10 +398,16 @@ static const Property riscv_imsic_properties[] = {
-     DEFINE_PROP_UINT32("num-irqs", RISCVIMSICState, num_irqs, 0),
- };
-
-+static bool riscv_imsic_state_needed(void *opaque)
-+{
-+    return !kvm_irqchip_in_kernel();
-+}
-+
- static const VMStateDescription vmstate_riscv_imsic = {
-     .name = "riscv_imsic",
-     .version_id = 1,
-     .minimum_version_id = 1,
-+    .needed = riscv_imsic_state_needed,
-     .fields = (const VMStateField[]) {
-             VMSTATE_VARRAY_UINT32(eidelivery, RISCVIMSICState,
-                                   num_pages, 0,
--- 
-2.27.0
+> ---
+>  target/riscv/cpu_helper.c | 9 +++++++++
+>  1 file changed, 9 insertions(+)
+>
+> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+> index d5039f69a9..dce7e34cba 100644
+> --- a/target/riscv/cpu_helper.c
+> +++ b/target/riscv/cpu_helper.c
+> @@ -36,6 +36,7 @@
+>  #include "cpu_bits.h"
+>  #include "debug.h"
+>  #include "pmp.h"
+> +#include "qemu/plugin.h"
+>
+>  int riscv_env_mmu_index(CPURISCVState *env, bool ifetch)
+>  {
+> @@ -2173,6 +2174,7 @@ void riscv_cpu_do_interrupt(CPUState *cs)
+>      uint64_t hdeleg =3D async ? env->hideleg : env->hedeleg;
+>      const bool prev_virt =3D env->virt_enabled;
+>      const target_ulong prev_priv =3D env->priv;
+> +    uint64_t last_pc =3D env->pc;
+>      target_ulong tval =3D 0;
+>      target_ulong tinst =3D 0;
+>      target_ulong htval =3D 0;
+> @@ -2195,6 +2197,7 @@ void riscv_cpu_do_interrupt(CPUState *cs)
+>          case RISCV_EXCP_SEMIHOST:
+>              do_common_semihosting(cs);
+>              env->pc +=3D 4;
+> +            qemu_plugin_vcpu_hostcall_cb(cs, last_pc);
+>              return;
+>  #endif
+>          case RISCV_EXCP_LOAD_GUEST_ACCESS_FAULT:
+> @@ -2464,6 +2467,12 @@ void riscv_cpu_do_interrupt(CPUState *cs)
+>                          prev_priv, prev_virt);
+>      }
+>
+> +    if (async) {
+> +        qemu_plugin_vcpu_interrupt_cb(cs, last_pc);
+> +    } else {
+> +        qemu_plugin_vcpu_exception_cb(cs, last_pc);
+> +    }
+> +
+>      /*
+>       * Interrupt/exception/trap delivery is asynchronous event and as pe=
+r
+>       * zicfilp spec CPU should clear up the ELP state. No harm in cleari=
+ng
+> --
+> 2.49.0
+>
+>
 
