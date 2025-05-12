@@ -4,89 +4,110 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 42E39C3ABBC
-	for <qemu-riscv@archiver.kernel.org>; Mon, 12 May 2025 06:35:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1FDBCC3ABBC
+	for <qemu-riscv@archiver.kernel.org>; Mon, 12 May 2025 08:19:35 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uEMkk-0003TC-13; Mon, 12 May 2025 02:35:06 -0400
+	id 1uEONm-0007ij-KH; Mon, 12 May 2025 04:19:30 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1uEMkh-0003Qu-F0
- for qemu-riscv@nongnu.org; Mon, 12 May 2025 02:35:04 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
+ (Exim 4.90_1) (envelope-from <imammedo@redhat.com>)
+ id 1uEONf-0007gY-8J
+ for qemu-riscv@nongnu.org; Mon, 12 May 2025 04:19:24 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1uEMkd-0002dS-FU
- for qemu-riscv@nongnu.org; Mon, 12 May 2025 02:35:02 -0400
+ (Exim 4.90_1) (envelope-from <imammedo@redhat.com>)
+ id 1uEONc-000883-Sp
+ for qemu-riscv@nongnu.org; Mon, 12 May 2025 04:19:22 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1747031698;
+ s=mimecast20190719; t=1747037959;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=natpKHXNFNFKQUWTeJGwNh7Gg+YeikwA5L3IRAwW6PU=;
- b=Z4hkmxGE4RC23PbyvCdo8Z3qoWtRKMb6w8mj4SRyJmSX2vOsK15fYm6cc9hlkQ1s7rJnH+
- YJNhpMs5XkYpPrVj9tqZ7EZkho3rbIo5LCnYKoLi7Rco3s/fe5nA6gyvccJsok/4h1vl/C
- d+O5hyCMHB1XE5qVTXuP8UQXdlMtX3s=
-Received: from mx-prod-mc-06.mail-002.prod.us-west-2.aws.redhat.com
- (ec2-35-165-154-97.us-west-2.compute.amazonaws.com [35.165.154.97]) by
- relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-644-MX620s8OMBq5RhpUJ_HC0A-1; Mon,
- 12 May 2025 02:34:55 -0400
-X-MC-Unique: MX620s8OMBq5RhpUJ_HC0A-1
-X-Mimecast-MFC-AGG-ID: MX620s8OMBq5RhpUJ_HC0A_1747031692
-Received: from mx-prod-int-05.mail-002.prod.us-west-2.aws.redhat.com
- (mx-prod-int-05.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.17])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by mx-prod-mc-06.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id 1C3E71800264; Mon, 12 May 2025 06:34:51 +0000 (UTC)
-Received: from blackfin.pond.sub.org (unknown [10.45.242.27])
- by mx-prod-int-05.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id 0AB541956058; Mon, 12 May 2025 06:34:48 +0000 (UTC)
-Received: by blackfin.pond.sub.org (Postfix, from userid 1000)
- id 769C921E66C2; Mon, 12 May 2025 08:34:46 +0200 (CEST)
-From: Markus Armbruster <armbru@redhat.com>
-To: Thomas Huth <thuth@redhat.com>
-Cc: Zhao Liu <zhao1.liu@intel.com>,  Xiaoyao Li <xiaoyao.li@intel.com>,
- Philippe =?utf-8?Q?Mathieu-Daud=C3=A9?= <philmd@linaro.org>,  Markus
- Armbruster
- <armbru@redhat.com>,  Paolo Bonzini <pbonzini@redhat.com>,  "Daniel P.
- Berrange" <berrange@redhat.com>,  qemu-devel@nongnu.org,  Richard
- Henderson <richard.henderson@linaro.org>,  kvm@vger.kernel.org,  Gerd
- Hoffmann <kraxel@redhat.com>,  Peter Maydell <peter.maydell@linaro.org>,
- Laurent Vivier <lvivier@redhat.com>,  Jiaxun Yang
- <jiaxun.yang@flygoat.com>,  Yi Liu <yi.l.liu@intel.com>,  "Michael S.
- Tsirkin" <mst@redhat.com>,  Eduardo Habkost <eduardo@habkost.net>,  Marcel
- Apfelbaum <marcel.apfelbaum@gmail.com>,  Alistair Francis
- <alistair.francis@wdc.com>,  Daniel Henrique Barboza
- <dbarboza@ventanamicro.com>,  Marcelo Tosatti <mtosatti@redhat.com>,
- qemu-riscv@nongnu.org,  Weiwei Li <liwei1518@gmail.com>,  Amit Shah
- <amit@kernel.org>,  Yanan Wang <wangyanan55@huawei.com>,  Helge Deller
- <deller@gmx.de>,  Palmer Dabbelt <palmer@dabbelt.com>,  Ani Sinha
- <anisinha@redhat.com>,  Igor Mammedov <imammedo@redhat.com>,  Fabiano
- Rosas <farosas@suse.de>,  Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- =?utf-8?Q?Cl=C3=A9ment?= Mathieu--Drif <clement.mathieu--drif@eviden.com>,
- qemu-arm@nongnu.org,  =?utf-8?Q?Marc-Andr=C3=A9?= Lureau
- <marcandre.lureau@redhat.com>,
- Huacai Chen <chenhuacai@kernel.org>,  Jason Wang <jasowang@redhat.com>
-Subject: Re: How to mark internal properties
-In-Reply-To: <2f526570-7ab0-479c-967c-b3f95f9f19e3@redhat.com> (Thomas Huth's
- message of "Fri, 9 May 2025 12:04:19 +0200")
+ bh=jsIWwwyrtrOUkoO1vQ1+6wZHrcK7SweP2sge3Q6Um7I=;
+ b=BSN8X/tpbdho6a1sHmTaxAwRyZHT6WqByZLeh/6pBuOEwkGcratLNFbysAHTEI/1mKX27f
+ Z43reo9lQHJLgYsjQE12xrr+4ONEEtbwxYpSmltxX/0H9c6QdckrViKxlvVRXbbRfJjw0W
+ KyvQYOi0TVA5brxicS2lE1oQgF2inuo=
+Received: from mail-wr1-f71.google.com (mail-wr1-f71.google.com
+ [209.85.221.71]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-449-JazUq-CIN6WmGA2ye1tlpw-1; Mon, 12 May 2025 04:19:16 -0400
+X-MC-Unique: JazUq-CIN6WmGA2ye1tlpw-1
+X-Mimecast-MFC-AGG-ID: JazUq-CIN6WmGA2ye1tlpw_1747037955
+Received: by mail-wr1-f71.google.com with SMTP id
+ ffacd0b85a97d-3a0bd786a53so1618269f8f.0
+ for <qemu-riscv@nongnu.org>; Mon, 12 May 2025 01:19:16 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1747037955; x=1747642755;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:subject:cc:to:from:date:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=2fvSZBSz7SW+rN/UmgDYVlAuf9XOlhIq2nJC4JEI3cs=;
+ b=J+1YjvqK+rMdB55ivVcAQOmnBYAImxZJJ9DWIyCg7XDNsjJG7QDUfTevHt8kTRhaK2
+ XHYYXRDL1NiudHo5Lw9HsE4Y9jA+JPq8wKv2beoGQtHNYnUnUfrrmR/UE60C8J1FnVhK
+ Ov3llDNfA7KJl3lkVzEgAnYfhfRzupVaBSSGg3brO7qsKELsc45qHWRoQua2ha5hvriA
+ 5hHozt1ODHYOxlTK5M/ycz+skiCpzkzQA6DUmIHXETkccyUq/U7X2gtq0wbxuY0r8p4y
+ TiDLlOOwWcq6jb8+6HruUdh2atvsQ/CtuRH78PYaDAqM/kjZwS0KQ/+dw84AbfV6A/50
+ v1cQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCV3KyjMqxzW06bl+N0jSBNL8JyMx8QhlAIBwBRjZG1FtuD1hFSXQ/cP4kwDSlN+bAjtGMeU0Lq8fVUk@nongnu.org
+X-Gm-Message-State: AOJu0YyjK1ML4OeUqoGJzxWxlc3FslVsosAt1yHBxdxFJVJ8TqN5wWwK
+ 28F9UTOSsr0fJ+fxFTeuDbXrFai/l1cJHaRXbrh7+REyilBLj8kgYIaoKYU//eF7GrkIuU05Z0k
+ M3yjEfObv4taoPIqWS0wisrLwPm36C0NZGeKBbRdyGCtdj86X1/Ru
+X-Gm-Gg: ASbGnct42TaLPLw3dcwKB0lPD+UtK+8ISTIj5bG7f75WIxO0n7/31F4UyixGu2L1r5M
+ RVdEIvlJdOQbBdExiQKT8Nzxo00ENwLLUjXrVmd0oLGqi3xytCEbKm4waBHmrxMNapE26qly24S
+ atwlvEJF33QMLhirEPKWQHyy9sy9LU0iJxPML/UJgSzZmA2ZcX9aZMWp7zUDXyme28xdxTFXhhj
+ tBiFh9SffpQ64BZx6C9EqbydL86RE1ZXT4EcIQ4wGzwh5aShw5R/Jg1nMrrLMBkPv8M3WOPyQkG
+ Ufo9IOYuSwupu3DZOrD8CMGT5KL4xDkC
+X-Received: by 2002:a05:6000:401e:b0:3a0:aee0:c647 with SMTP id
+ ffacd0b85a97d-3a1f64374e1mr9506407f8f.17.1747037955349; 
+ Mon, 12 May 2025 01:19:15 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IGgHeilnFjVtlzQeFAWYCb/Ncwx/SQ6IkBm/EN6BrcPThYXSIr2QrCJWo6KgNXFdjoS9BV4Tg==
+X-Received: by 2002:a05:6000:401e:b0:3a0:aee0:c647 with SMTP id
+ ffacd0b85a97d-3a1f64374e1mr9506370f8f.17.1747037954950; 
+ Mon, 12 May 2025 01:19:14 -0700 (PDT)
+Received: from imammedo.users.ipa.redhat.com ([85.93.96.130])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-442d6858626sm118499335e9.27.2025.05.12.01.19.13
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 12 May 2025 01:19:14 -0700 (PDT)
+Date: Mon, 12 May 2025 10:19:12 +0200
+From: Igor Mammedov <imammedo@redhat.com>
+To: Philippe =?UTF-8?B?TWF0aGlldS1EYXVkw6k=?= <philmd@linaro.org>
+Cc: qemu-devel@nongnu.org, Richard Henderson <richard.henderson@linaro.org>,
+ kvm@vger.kernel.org, Sergio Lopez <slp@redhat.com>, Gerd Hoffmann
+ <kraxel@redhat.com>, Peter Maydell <peter.maydell@linaro.org>, Laurent
+ Vivier <lvivier@redhat.com>, Jiaxun Yang <jiaxun.yang@flygoat.com>, Yi Liu
+ <yi.l.liu@intel.com>, "Michael S. Tsirkin" <mst@redhat.com>, Eduardo
+ Habkost <eduardo@habkost.net>, Marcel Apfelbaum
+ <marcel.apfelbaum@gmail.com>, Alistair Francis <alistair.francis@wdc.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>, Marcelo Tosatti
+ <mtosatti@redhat.com>, qemu-riscv@nongnu.org, Weiwei Li
+ <liwei1518@gmail.com>, Amit Shah <amit@kernel.org>, Zhao Liu
+ <zhao1.liu@intel.com>, Yanan Wang <wangyanan55@huawei.com>, Helge Deller
+ <deller@gmx.de>, Palmer Dabbelt <palmer@dabbelt.com>, Ani Sinha
+ <anisinha@redhat.com>, Fabiano Rosas <farosas@suse.de>, Paolo Bonzini
+ <pbonzini@redhat.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ =?UTF-8?B?Q2zDqW1lbnQ=?= Mathieu--Drif <clement.mathieu--drif@eviden.com>,
+ qemu-arm@nongnu.org, =?UTF-8?B?TWFyYy1BbmRyw6k=?= Lureau
+ <marcandre.lureau@redhat.com>, Huacai Chen <chenhuacai@kernel.org>, Jason
+ Wang <jasowang@redhat.com>, Mark Cave-Ayland <mark.caveayland@nutanix.com>,
+ Thomas Huth <thuth@redhat.com>
+Subject: Re: [PATCH v4 11/27] hw/i386/pc: Remove pc_compat_2_6[] array
+Message-ID: <20250512101912.6900beaf@imammedo.users.ipa.redhat.com>
+In-Reply-To: <20250508133550.81391-12-philmd@linaro.org>
 References: <20250508133550.81391-1-philmd@linaro.org>
- <20250508133550.81391-13-philmd@linaro.org>
- <23260c74-01ba-45bc-bf2f-b3e19c28ec8a@intel.com>
- <aB2vjuT07EuO6JSQ@intel.com>
- <2f526570-7ab0-479c-967c-b3f95f9f19e3@redhat.com>
-Date: Mon, 12 May 2025 08:34:46 +0200
-Message-ID: <87selauyk9.fsf@pond.sub.org>
-User-Agent: Gnus/5.13 (Gnus v5.13)
+ <20250508133550.81391-12-philmd@linaro.org>
+X-Mailer: Claws Mail 4.3.1 (GTK 3.24.43; x86_64-redhat-linux-gnu)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
+X-Mimecast-Spam-Score: 0
+X-Mimecast-MFC-PROC-ID: 3LsBVoAlt2sx60iG543MueJn7B10UWlnHRDxxRwuV5M_1747037955
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
-X-Scanned-By: MIMEDefang 3.0 on 10.30.177.17
-Received-SPF: pass client-ip=170.10.133.124; envelope-from=armbru@redhat.com;
+Received-SPF: pass client-ip=170.10.129.124; envelope-from=imammedo@redhat.com;
  helo=us-smtp-delivery-124.mimecast.com
 X-Spam_score_int: -46
 X-Spam_score: -4.7
@@ -95,7 +116,7 @@ X-Spam_report: (-4.7 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-1.587,
  DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H5=-1, RCVD_IN_MSPIKE_WL=-0.01,
  RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001, RCVD_IN_VALIDITY_SAFE_BLOCKED=0.001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -111,181 +132,57 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Thomas Huth <thuth@redhat.com> writes:
+On Thu,  8 May 2025 15:35:34 +0200
+Philippe Mathieu-Daud=C3=A9 <philmd@linaro.org> wrote:
 
-> On 09/05/2025 09.32, Zhao Liu wrote:
->> On Fri, May 09, 2025 at 02:49:27PM +0800, Xiaoyao Li wrote:
->>> Date: Fri, 9 May 2025 14:49:27 +0800
->>> From: Xiaoyao Li <xiaoyao.li@intel.com>
->>> Subject: Re: [PATCH v4 12/27] target/i386/cpu: Remove
->>>   CPUX86State::enable_cpuid_0xb field
->>>
->>> On 5/8/2025 9:35 PM, Philippe Mathieu-Daud=C3=A9 wrote:
->>>> The CPUX86State::enable_cpuid_0xb boolean was only disabled
->>>> for the pc-q35-2.6 and pc-i440fx-2.6 machines, which got
->>>> removed. Being now always %true, we can remove it and simplify
->>>> cpu_x86_cpuid().
->>>>
->>>> Signed-off-by: Philippe Mathieu-Daud=C3=A9 <philmd@linaro.org>
->>>> ---
->>>> target/i386/cpu.h | 3 ---
->>>> target/i386/cpu.c | 6 ------
->>>> 2 files changed, 9 deletions(-)
->>>>
->>>> diff --git a/target/i386/cpu.h b/target/i386/cpu.h
->>>> index 0db70a70439..06817a31cf9 100644
->>>> --- a/target/i386/cpu.h
->>>> +++ b/target/i386/cpu.h
->>>> @@ -2241,9 +2241,6 @@ struct ArchCPU {
->>>>       */
->>>>      bool legacy_multi_node;
->>>> -    /* Compatibility bits for old machine types: */
->>>> -    bool enable_cpuid_0xb;
->>>> -
->>>>      /* Enable auto level-increase for all CPUID leaves */
->>>>      bool full_cpuid_auto_level;
->>>> diff --git a/target/i386/cpu.c b/target/i386/cpu.c
->>>> index 49179f35812..6fe37f71b1e 100644
->>>> --- a/target/i386/cpu.c
->>>> +++ b/target/i386/cpu.c
->>>> @@ -6982,11 +6982,6 @@ void cpu_x86_cpuid(CPUX86State *env, uint32_t i=
-ndex, uint32_t count,
->>>>          break;
->>>>      case 0xB:
->>>>            /* Extended Topology Enumeration Leaf */
->>>> -        if (!cpu->enable_cpuid_0xb) {
->>>> -            *eax =3D *ebx =3D *ecx =3D *edx =3D 0;
->>>> -            break;
->>>> -        }
->>>> -
->>>>          *ecx =3D count & 0xff;
->>>>          *edx =3D cpu->apic_id;
->>>> @@ -8828,7 +8823,6 @@ static const Property x86_cpu_properties[] =3D {
->>>>      DEFINE_PROP_UINT64("ucode-rev", X86CPU, ucode_rev, 0),
->>>>      DEFINE_PROP_BOOL("full-cpuid-auto-level", X86CPU, full_cpuid_auto=
-_level, true),
->>>>      DEFINE_PROP_STRING("hv-vendor-id", X86CPU, hyperv_vendor),
->>>> -    DEFINE_PROP_BOOL("cpuid-0xb", X86CPU, enable_cpuid_0xb, true),
->>>
->>> It's deprecating the "cpuid-0xb" property.
->>>
->>> I think we need go with the standard process to deprecate it.
->>=20
->> Thanks! I got your point.
->>=20
->> Though this property is introduced for compatibility, as its comment
->> said "Compatibility bits for old machine types", it is also useful for
->> somer users.
->
-> Thanks for your clarifications, Zhao! But I think this shows again the=20
-> problem that we have hit a couple of times in the past already: Propertie=
-s=20
-> are currently used for both, config knobs for the users and internal=20
-> switches for configuration of the machine. We lack a proper way to say "t=
-his=20
-> property is usable for the user" and "this property is meant for internal=
-=20
-> configuration only".
+> The pc_compat_2_6[] array was only used by the pc-q35-2.6
+> and pc-i440fx-2.6 machines, which got removed. Remove it.
 
-Correct.
+see my comment in 1/27
 
-Exposing properties meant for internal use at the external interface
-inevitably leads to (uncertainty about) external use.
-
-> I wonder whether we could maybe come up with a naming scheme to better=20
-> distinguish the two sets, e.g. by using a prefix similar to the "x-" pref=
-ix=20
-> for experimental properties? We could e.g. say that all properties starti=
-ng=20
-> with a "q-" are meant for QEMU-internal configuration only or something=20
-> similar (and maybe even hide those from the default help output when runn=
-ing=20
-> "-device xyz,help" ?)? Anybody any opinions or better ideas on this?
-
-This papers over our inability / unwillingness to isolate the external
-interface from internal detail.
-
-The proper solution is to make the internal properties inaccessible at
-the external interface.  This requires declaring properties' intent.
-Which strikes me as a very good idea.
-
-A naming convention is a simple, stupid way to do that.  There are
-drawbacks, as experience with the "x-" prefix has shown:
-
-* Flipping a flag bit involves changing the name.  Tolerable when all
-  uses are internal, compatibility break when not.  Not a problem when
-  the bit governs external access, of course.
-
-* Name capture: consider InputBarrier properties x-origin, y-origin.
-  Oops.
-
-* If we have multiple flag bits, their prefixes can accumulate.  This
-  gets ugly and confusing real quick.  Not an issue when at most one of
-  the flags can be set, as is the case for "unstable" and "internal
-  use".
-
-* QAPI reserves "q_" for the generator's use.  Since "q-" would get
-  mapped to "q_" in C, we risk name clashes.
-
-For what it's worth, QAPI abandoned the "x-" naming convention (commit
-a3c45b3e629 (qapi: New special feature flag "unstable"), commit message
-appended for your convenience).  Developers are free to use "x-" to help
-guide human users, but the feature flag is the sole source of thruth.
-
-
-
-[...]
-
-
-
-commit a3c45b3e62962f99338716b1347cfb0d427cea44
-Author: Markus Armbruster <armbru@redhat.com>
-Date:   Thu Oct 28 12:25:12 2021 +0200
-
-    qapi: New special feature flag "unstable"
-=20=20=20=20
-    By convention, names starting with "x-" are experimental.  The parts
-    of external interfaces so named may be withdrawn or changed
-    incompatibly in future releases.
-=20=20=20=20
-    The naming convention makes unstable interfaces easy to recognize.
-    Promoting something from experimental to stable involves a name
-    change.  Client code needs to be updated.  Occasionally bothersome.
-=20=20=20=20
-    Worse, the convention is not universally observed:
-=20=20=20=20
-    * QOM type "input-barrier" has properties "x-origin", "y-origin".
-      Looks accidental, but it's ABI since 4.2.
-=20=20=20=20
-    * QOM types "memory-backend-file", "memory-backend-memfd",
-      "memory-backend-ram", and "memory-backend-epc" have a property
-      "x-use-canonical-path-for-ramblock-id" that is documented to be
-      stable despite its name.
-=20=20=20=20
-    We could document these exceptions, but documentation helps only
-    humans.  We want to recognize "unstable" in code, like "deprecated".
-=20=20=20=20
-    So support recognizing it the same way: introduce new special feature
-    flag "unstable".  It will be treated specially by the QAPI generator,
-    like the existing feature flag "deprecated", and unlike regular
-    feature flags.
-=20=20=20=20
-    This commit updates documentation and prepares tests.  The next commit
-    updates the QAPI schema.  The remaining patches update the QAPI
-    generator and wire up -compat policy checking.
-=20=20=20=20
-    Management applications can then use query-qmp-schema and -compat to
-    manage or guard against use of unstable interfaces the same way as for
-    deprecated interfaces.
-=20=20=20=20
-    docs/devel/qapi-code-gen.txt no longer mandates the naming convention.
-    Using it anyway might help writers of programs that aren't
-    full-fledged management applications.  Not using it can save us
-    bothersome renames.  We'll see how that shakes out.
-=20=20=20=20
-    Signed-off-by: Markus Armbruster <armbru@redhat.com>
-    Reviewed-by: Juan Quintela <quintela@redhat.com>
-    Reviewed-by: John Snow <jsnow@redhat.com>
-    Message-Id: <20211028102520.747396-2-armbru@redhat.com>
+>=20
+> Signed-off-by: Philippe Mathieu-Daud=C3=A9 <philmd@linaro.org>
+> Reviewed-by: Mark Cave-Ayland <mark.caveayland@nutanix.com>
+> Reviewed-by: Thomas Huth <thuth@redhat.com>
+> Reviewed-by: Zhao Liu <zhao1.liu@intel.com>
+> ---
+>  include/hw/i386/pc.h | 3 ---
+>  hw/i386/pc.c         | 8 --------
+>  2 files changed, 11 deletions(-)
+>=20
+> diff --git a/include/hw/i386/pc.h b/include/hw/i386/pc.h
+> index a3de3e9560d..4fb2033bc54 100644
+> --- a/include/hw/i386/pc.h
+> +++ b/include/hw/i386/pc.h
+> @@ -292,9 +292,6 @@ extern const size_t pc_compat_2_8_len;
+>  extern GlobalProperty pc_compat_2_7[];
+>  extern const size_t pc_compat_2_7_len;
+> =20
+> -extern GlobalProperty pc_compat_2_6[];
+> -extern const size_t pc_compat_2_6_len;
+> -
+>  #define DEFINE_PC_MACHINE(suffix, namestr, initfn, optsfn) \
+>      static void pc_machine_##suffix##_class_init(ObjectClass *oc, \
+>                                                   const void *data) \
+> diff --git a/hw/i386/pc.c b/hw/i386/pc.c
+> index 4e6fe68e2e0..65a11ea8f99 100644
+> --- a/hw/i386/pc.c
+> +++ b/hw/i386/pc.c
+> @@ -251,14 +251,6 @@ GlobalProperty pc_compat_2_7[] =3D {
+>  };
+>  const size_t pc_compat_2_7_len =3D G_N_ELEMENTS(pc_compat_2_7);
+> =20
+> -GlobalProperty pc_compat_2_6[] =3D {
+> -    { TYPE_X86_CPU, "cpuid-0xb", "off" },
+> -    { "vmxnet3", "romfile", "" },
+> -    { TYPE_X86_CPU, "fill-mtrr-mask", "off" },
+> -    { "apic-common", "legacy-instance-id", "on", }
+> -};
+> -const size_t pc_compat_2_6_len =3D G_N_ELEMENTS(pc_compat_2_6);
+> -
+>  /*
+>   * @PC_FW_DATA:
+>   * Size of the chunk of memory at the top of RAM for the BIOS ACPI table=
+s
 
 
