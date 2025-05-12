@@ -4,116 +4,110 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0B7DDC3ABC3
-	for <qemu-riscv@archiver.kernel.org>; Mon, 12 May 2025 15:23:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A4BC9C3ABCB
+	for <qemu-riscv@archiver.kernel.org>; Mon, 12 May 2025 15:24:59 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uEUzH-0003TU-T8; Mon, 12 May 2025 11:22:39 -0400
+	id 1uEV1L-0005D9-D0; Mon, 12 May 2025 11:24:47 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <imammedo@redhat.com>)
- id 1uEUzF-0003SW-NI
- for qemu-riscv@nongnu.org; Mon, 12 May 2025 11:22:37 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
+ id 1uEV1I-000590-L8
+ for qemu-riscv@nongnu.org; Mon, 12 May 2025 11:24:44 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <imammedo@redhat.com>)
- id 1uEUzD-0005KR-Ha
- for qemu-riscv@nongnu.org; Mon, 12 May 2025 11:22:37 -0400
+ id 1uEV1H-0005UO-3P
+ for qemu-riscv@nongnu.org; Mon, 12 May 2025 11:24:44 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1747063353;
+ s=mimecast20190719; t=1747063482;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=s8G7Z9wHgR/rNemsXSSNPwg3mTiNytDChMsJQGUo7YI=;
- b=H1FGbW9bHjuOyiPpP7XSWfR4uNJ61345pxv8JNFxtqBvUd0d71FZPA7TK9GlKgnFTJm+2U
- Terd689dS+Co2a5byVRQY5MixSTYsW5CizX9LKmPMGmaF3GP9KG8Ksc41rdtsgPJe3olLa
- XeKQrd9XO+FIJKAD9dE++gsDPYzidkw=
-Received: from mail-wm1-f72.google.com (mail-wm1-f72.google.com
- [209.85.128.72]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=0uPxPAlbokCBFELfvxkftEEGEGO3nEqu1EeO7daiHGU=;
+ b=Z+mOpSMJKTMJimYuvq5k9a6shYdc6nwNxO47ZaK3pZ/VCeLOGSRMpizQdUVhcnwpB4+VbA
+ CpG/gODayZ7gCaY6lqVwpA2CjikN8mUWDhm086NFHeCklVnKBGXtAq/Fbg8pRVlFk7Y3jW
+ hUAqQuat/eT8/7yAsMQs0ZVzpIMnYCU=
+Received: from mail-wm1-f69.google.com (mail-wm1-f69.google.com
+ [209.85.128.69]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-561-1OIU6DhkMdefHlfEmFOJQg-1; Mon, 12 May 2025 11:22:32 -0400
-X-MC-Unique: 1OIU6DhkMdefHlfEmFOJQg-1
-X-Mimecast-MFC-AGG-ID: 1OIU6DhkMdefHlfEmFOJQg_1747063351
-Received: by mail-wm1-f72.google.com with SMTP id
- 5b1f17b1804b1-442dc702850so13370675e9.1
- for <qemu-riscv@nongnu.org>; Mon, 12 May 2025 08:22:32 -0700 (PDT)
+ us-mta-346-9JqjE1aUO2WX4toxwWxetA-1; Mon, 12 May 2025 11:24:40 -0400
+X-MC-Unique: 9JqjE1aUO2WX4toxwWxetA-1
+X-Mimecast-MFC-AGG-ID: 9JqjE1aUO2WX4toxwWxetA_1747063479
+Received: by mail-wm1-f69.google.com with SMTP id
+ 5b1f17b1804b1-43ce8f82e66so23752585e9.3
+ for <qemu-riscv@nongnu.org>; Mon, 12 May 2025 08:24:40 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1747063351; x=1747668151;
+ d=1e100.net; s=20230601; t=1747063479; x=1747668279;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:subject:cc:to:from:date:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=3fDbveoy634fX30HQGWyRUGP5YagE3FENcZZx4UjSE4=;
- b=fvx0J03+NSFhgyeI1CVQksddU+c+/Torr4ZMHXw8QtHyzLF1MOb+P7bvGbvuSAh1AM
- taY+Tpwbf115hFViTGSIarntptSue2RWeCtXyR2P4x4F9Ko6GIUcBqPLS9mzubpc3sLI
- FseI3PB1wBljvm/UapLvkxEULsOKe4oZUa3z8znMVoorYV2z20S8b0OhlMjZ1PwK1UHd
- mZfUaT15BnqeDWKxHI9LuWF3Un+D/JpplM09vlThlRLdXHdPkK1J+7DB7s4HBeQuGnG3
- 4kIXr9xNDtkeGMxGNMi6ewtjBw7q6vf9QviaUUdLs2r10+ZEqLVkLhAPMLzwSgE7UZKh
- ua0Q==
+ bh=0uPxPAlbokCBFELfvxkftEEGEGO3nEqu1EeO7daiHGU=;
+ b=qT1C7ksR6bMVG8Q7Cb40JsPZcsya/nGlviMY1kx5WGBwCweFFnFOBvLzq0FTsD5wQ4
+ 7YYncNOstusRZRTMJC2i4tqxmUn/sx6oYaRbc3cDKwZZEPrzrUhadm+9DCplPpEgAlDW
+ FcMIFPK9k06SfYHM2Er+HSQMp4cP1aB7XXnS8V0QdZChP8Tcqolc67WwkSisnSK3UpjX
+ dJBrR2RGFcFRCYhuDYdlOy7M3HMP2WddfeOpEa34MU0URPMHre8R6DWigCEuO4TQlv1x
+ jLENzkSJfGRyZeuZDotVYzHZ/2Nm+bindE0BYKsJ4kuwSMrHLpftKV4g/IZhqqpam63F
+ mgVg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWTIImnl5iz3Mm8WKfdJA9Mr5+aV6ex+QFrQ4AGzrnd9eqEj61lL3E/RJXqFX11ut5VkMXOU9vVvwo2@nongnu.org
-X-Gm-Message-State: AOJu0YwmMwGLDBXa08S5NcnoZ6L0kHd4ctOx8XdbXuqVaCxegsGYwY3h
- SeOK9RLOixGU3giQnxqtPPX04AH3O/Obr0O2q6Ngmbvjl7rsA3vXeuvRrPQbGI1VpRXBPb9afhu
- y6XXuqKkREPme+9zDW7FX2DHP2ytyQKlA+dYrS1QpYIFXbZSSiPi/
-X-Gm-Gg: ASbGncvO94aGFKSBv+RSW2RgayH9k+NsVey9oQHwwjunP4CJ2rMyqtfvCpqyo1LC8AN
- B5aM2z72Zi4v4/zl18gZdNCLZ0wrpOkBRNOF4WAL+sfiqK4mDyhdBgZ1GIszT0144ObUahQglrK
- w27Rfd3KuK9oZkeJLndjr3o5HumQ1zF80yD99d5IgjUJSv9Ocs8+x96CHPCwmkVtJOE5GVHmjOB
- mNbfvyBcLytEnNsjCWu0csAP0/geM6TwMWreVLuzv8OhdxEqbbrGU+uBSNVUso+54EeakitxItF
- pt8Ww5JCh3YgMyESSc3J33nguJoav+SV
-X-Received: by 2002:a5d:64cb:0:b0:3a2:56f:e931 with SMTP id
- ffacd0b85a97d-3a2056fea7bmr4650575f8f.19.1747063351051; 
- Mon, 12 May 2025 08:22:31 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IFpfuYUF3ZtquPfDbtUbsIXdvtVrYdxS4GjvinNAdEoeVjZYWPtRk7OTMzvGsodv9XiY0XPiA==
-X-Received: by 2002:a5d:64cb:0:b0:3a2:56f:e931 with SMTP id
- ffacd0b85a97d-3a2056fea7bmr4650532f8f.19.1747063350573; 
- Mon, 12 May 2025 08:22:30 -0700 (PDT)
+ AJvYcCVWLqxves2EjFMqWp87znxo5FScHoplCsYw1zqTxwCdxOai6zc0U8XhUgImQ9xJSRbWA788LR2GoNBJ@nongnu.org
+X-Gm-Message-State: AOJu0YzbBk3egWXgGA86N5b95RC2valX7nW7XKCdGcnMQGG9XFLGR2me
+ OFSUsb59rsFPBLE7HYTKnuQbjZsvj8Dxbjjbk793J6PsXEtl20nHT67BBLTCIB8n1AomYJrouRO
+ QFjsBbQUbAe+F51A5E9Vuh1ewEFSDP2g1tuXk8rK2gLgvFtZcNChs
+X-Gm-Gg: ASbGncvObndvXpzWZ3X8C5W5DM6dWv9k+HUa6ACqWtfHTKT5tuQvpYSYpvGeE+y6xSX
+ hmGTww6OBvjhXrYPdndfuNnC7bXn7oFZ3+HmUEO0teALxsRzz8CaJdZo2L/zyPm4UlktynZSj52
+ 0i2PudOm987iA76WcVsKoqJ8KMPW5kFiZvyh9OyqtXe9f1wZgogcIC6HZo5Zd8aMEgfb8ZSP9uB
+ b3jGUJA2SaiEV9Vq/LNjybTYfy+AGFZSfKFbPyH3PzZJ49uQd5/w0Q7N9RP87qNarVj7LpdP1zh
+ mlNTnPk3hcT5cVqcApwD0g+gVSVleViL
+X-Received: by 2002:a05:6000:1868:b0:3a0:b392:c2f with SMTP id
+ ffacd0b85a97d-3a1f648782cmr10140814f8f.44.1747063479034; 
+ Mon, 12 May 2025 08:24:39 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IFRwsDfeYtYF+7qmQcCxF1BK6h492q4dwhfvDuSeqqhilSyAsRupcamC17OhxBDNUZGCm4Q8g==
+X-Received: by 2002:a05:6000:1868:b0:3a0:b392:c2f with SMTP id
+ ffacd0b85a97d-3a1f648782cmr10140783f8f.44.1747063478678; 
+ Mon, 12 May 2025 08:24:38 -0700 (PDT)
 Received: from imammedo.users.ipa.redhat.com ([85.93.96.130])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-442d67ed1bcsm127891875e9.18.2025.05.12.08.22.26
+ 5b1f17b1804b1-442cd3aeb26sm173676635e9.29.2025.05.12.08.24.36
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 12 May 2025 08:22:30 -0700 (PDT)
-Date: Mon, 12 May 2025 17:22:26 +0200
+ Mon, 12 May 2025 08:24:38 -0700 (PDT)
+Date: Mon, 12 May 2025 17:24:35 +0200
 From: Igor Mammedov <imammedo@redhat.com>
-To: Markus Armbruster <armbru@redhat.com>
-Cc: "Daniel P. =?UTF-8?B?QmVycmFuZ8Op?=" <berrange@redhat.com>, Peter
- Maydell <peter.maydell@linaro.org>, Thomas Huth <thuth@redhat.com>, Zhao
- Liu <zhao1.liu@intel.com>, Xiaoyao Li <xiaoyao.li@intel.com>, Philippe
- =?UTF-8?B?TWF0aGlldS1EYXVkw6k=?= <philmd@linaro.org>, Paolo Bonzini
- <pbonzini@redhat.com>, qemu-devel@nongnu.org, Richard Henderson
- <richard.henderson@linaro.org>, kvm@vger.kernel.org, Gerd Hoffmann
- <kraxel@redhat.com>, Laurent Vivier <lvivier@redhat.com>, Jiaxun Yang
- <jiaxun.yang@flygoat.com>, Yi Liu <yi.l.liu@intel.com>, "Michael S.
- Tsirkin" <mst@redhat.com>, Eduardo Habkost <eduardo@habkost.net>, Marcel
- Apfelbaum <marcel.apfelbaum@gmail.com>, Alistair Francis
- <alistair.francis@wdc.com>, Daniel Henrique Barboza
- <dbarboza@ventanamicro.com>, Marcelo Tosatti <mtosatti@redhat.com>,
- qemu-riscv@nongnu.org, Weiwei Li <liwei1518@gmail.com>, Amit Shah
- <amit@kernel.org>, Yanan Wang <wangyanan55@huawei.com>, Helge Deller
+To: Philippe =?UTF-8?B?TWF0aGlldS1EYXVkw6k=?= <philmd@linaro.org>
+Cc: qemu-devel@nongnu.org, Richard Henderson <richard.henderson@linaro.org>,
+ kvm@vger.kernel.org, Sergio Lopez <slp@redhat.com>, Gerd Hoffmann
+ <kraxel@redhat.com>, Peter Maydell <peter.maydell@linaro.org>, Laurent
+ Vivier <lvivier@redhat.com>, Jiaxun Yang <jiaxun.yang@flygoat.com>, Yi Liu
+ <yi.l.liu@intel.com>, "Michael S. Tsirkin" <mst@redhat.com>, Eduardo
+ Habkost <eduardo@habkost.net>, Marcel Apfelbaum
+ <marcel.apfelbaum@gmail.com>, Alistair Francis <alistair.francis@wdc.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>, Marcelo Tosatti
+ <mtosatti@redhat.com>, qemu-riscv@nongnu.org, Weiwei Li
+ <liwei1518@gmail.com>, Amit Shah <amit@kernel.org>, Zhao Liu
+ <zhao1.liu@intel.com>, Yanan Wang <wangyanan55@huawei.com>, Helge Deller
  <deller@gmx.de>, Palmer Dabbelt <palmer@dabbelt.com>, Ani Sinha
- <anisinha@redhat.com>, Fabiano Rosas <farosas@suse.de>, Liu Zhiwei
- <zhiwei_liu@linux.alibaba.com>, =?UTF-8?B?Q2zDqW1lbnQ=?= Mathieu--Drif
- <clement.mathieu--drif@eviden.com>, qemu-arm@nongnu.org, =?UTF-8?B?TWFy?=
- =?UTF-8?B?Yy1BbmRyw6k=?= Lureau <marcandre.lureau@redhat.com>, Huacai Chen
- <chenhuacai@kernel.org>, Jason Wang <jasowang@redhat.com>
-Subject: Re: How to mark internal properties
-Message-ID: <20250512172226.433900f8@imammedo.users.ipa.redhat.com>
-In-Reply-To: <87jz6mqeu5.fsf@pond.sub.org>
+ <anisinha@redhat.com>, Fabiano Rosas <farosas@suse.de>, Paolo Bonzini
+ <pbonzini@redhat.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ =?UTF-8?B?Q2zDqW1lbnQ=?= Mathieu--Drif <clement.mathieu--drif@eviden.com>,
+ qemu-arm@nongnu.org, =?UTF-8?B?TWFyYy1BbmRyw6k=?= Lureau
+ <marcandre.lureau@redhat.com>, Huacai Chen <chenhuacai@kernel.org>, Jason
+ Wang <jasowang@redhat.com>
+Subject: Re: [PATCH v4 13/27] target/i386/cpu: Remove
+ CPUX86State::fill_mtrr_mask field
+Message-ID: <20250512172435.6ad4cbbc@imammedo.users.ipa.redhat.com>
+In-Reply-To: <20250508133550.81391-14-philmd@linaro.org>
 References: <20250508133550.81391-1-philmd@linaro.org>
- <20250508133550.81391-13-philmd@linaro.org>
- <23260c74-01ba-45bc-bf2f-b3e19c28ec8a@intel.com>
- <aB2vjuT07EuO6JSQ@intel.com>
- <2f526570-7ab0-479c-967c-b3f95f9f19e3@redhat.com>
- <CAFEAcA-kuHvxjuV_cMh-Px3C-k2Gd51jFqhwndO52vm++M_jAA@mail.gmail.com>
- <aCG6MuDLrQpoTqpg@redhat.com> <87jz6mqeu5.fsf@pond.sub.org>
+ <20250508133550.81391-14-philmd@linaro.org>
 X-Mailer: Claws Mail 4.3.1 (GTK 3.24.43; x86_64-redhat-linux-gnu)
 MIME-Version: 1.0
 X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: WKVnL4utgrmVHTbIkFKoLZ6Z2RzjVQyU54SHWLxWNt4_1747063351
+X-Mimecast-MFC-PROC-ID: oSklDgGJF_YHCm3eAT74hqpZSfM2RdxaqevPi-nCV9Y_1747063479
 X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=170.10.129.124; envelope-from=imammedo@redhat.com;
+Received-SPF: pass client-ip=170.10.133.124; envelope-from=imammedo@redhat.com;
  helo=us-smtp-delivery-124.mimecast.com
 X-Spam_score_int: -35
 X-Spam_score: -3.6
@@ -138,69 +132,74 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Mon, 12 May 2025 12:54:26 +0200
-Markus Armbruster <armbru@redhat.com> wrote:
+On Thu,  8 May 2025 15:35:36 +0200
+Philippe Mathieu-Daud=C3=A9 <philmd@linaro.org> wrote:
 
-> Daniel P. Berrang=C3=A9 <berrange@redhat.com> writes:
+> The CPUX86State::fill_mtrr_mask boolean was only disabled
+> for the pc-q35-2.6 and pc-i440fx-2.6 machines, which got
+> removed. Being now always %true, we can remove it and simplify
+> kvm_get_msrs().
 >=20
-> > On Mon, May 12, 2025 at 09:46:30AM +0100, Peter Maydell wrote: =20
-> >> On Fri, 9 May 2025 at 11:04, Thomas Huth <thuth@redhat.com> wrote: =20
-> >> > Thanks for your clarifications, Zhao! But I think this shows again t=
-he
-> >> > problem that we have hit a couple of times in the past already: Prop=
-erties
-> >> > are currently used for both, config knobs for the users and internal
-> >> > switches for configuration of the machine. We lack a proper way to s=
-ay "this
-> >> > property is usable for the user" and "this property is meant for int=
-ernal
-> >> > configuration only".
-> >> >
-> >> > I wonder whether we could maybe come up with a naming scheme to bett=
-er
-> >> > distinguish the two sets, e.g. by using a prefix similar to the "x-"=
- prefix
-> >> > for experimental properties? We could e.g. say that all properties s=
-tarting
-> >> > with a "q-" are meant for QEMU-internal configuration only or someth=
-ing
-> >> > similar (and maybe even hide those from the default help output when=
- running
-> >> > "-device xyz,help" ?)? Anybody any opinions or better ideas on this?=
- =20
-> >>=20
-> >> I think a q-prefix is potentially a bit clunky unless we also have
-> >> infrastructure to say eg DEFINE_INTERNAL_PROP_BOOL("foo", ...)
-> >> and have it auto-add the prefix, and to have the C APIs for
-> >> setting properties search for both "foo" and "q-foo" so you
-> >> don't have to write qdev_prop_set_bit(dev, "q-foo", ...). =20
+> Signed-off-by: Philippe Mathieu-Daud=C3=A9 <philmd@linaro.org>
+> ---
+>  target/i386/cpu.h     |  3 ---
+>  target/i386/cpu.c     |  1 -
+>  target/i386/kvm/kvm.c | 10 +++-------
+>  3 files changed, 3 insertions(+), 11 deletions(-)
 >=20
-> If we make intent explicit with DEFINE_INTERNAL_PROP_FOO(), is repeating
-> intent in the name useful?
+> diff --git a/target/i386/cpu.h b/target/i386/cpu.h
+> index 06817a31cf9..7585407da54 100644
+> --- a/target/i386/cpu.h
+> +++ b/target/i386/cpu.h
+> @@ -2253,9 +2253,6 @@ struct ArchCPU {
+>      /* Enable auto level-increase for Intel Processor Trace leave */
+>      bool intel_pt_auto_level;
+> =20
+> -    /* if true fill the top bits of the MTRR_PHYSMASKn variable range */
+> -    bool fill_mtrr_mask;
+> -
+>      /* if true override the phys_bits value with a value read from the h=
+ost */
+>      bool host_phys_bits;
+> =20
+> diff --git a/target/i386/cpu.c b/target/i386/cpu.c
+> index 6fe37f71b1e..fb505d13122 100644
+> --- a/target/i386/cpu.c
+> +++ b/target/i386/cpu.c
+> @@ -8810,7 +8810,6 @@ static const Property x86_cpu_properties[] =3D {
+>      DEFINE_PROP_UINT32("guest-phys-bits", X86CPU, guest_phys_bits, -1),
+>      DEFINE_PROP_BOOL("host-phys-bits", X86CPU, host_phys_bits, false),
+>      DEFINE_PROP_UINT8("host-phys-bits-limit", X86CPU, host_phys_bits_lim=
+it, 0),
+> -    DEFINE_PROP_BOOL("fill-mtrr-mask", X86CPU, fill_mtrr_mask, true),
 
-While we are inventing a new API, I'd say that _INTERNAL_ is not the only t=
-hing
-on my wish-list wrt properties.
-It would be also nice to know when a property is set by internal or externa=
-l user
-or if it still has default value.
+same as previous patch, deprecate 1st then remove
 
-Basically we are looking at different flags for properties and INERNAL bein=
-g
-one of them.
-
-Maybe instead of specialized macro, we should have a more generic
-   DEFINE_PROP_WITH_FLAGS_FOO(...,flags)
-So we won't have to rewrite it again when we think of another flag to turn =
-on/off.
-
-
-From previous uses of x- flag, some of such properties are created as
-temporary | developer-only and occasionally as a crutch (still no intended =
-for end user).
-But then sometimes such properties get promoted to ABI with fat warnings
-not to touch them. Having stable|unstable flag could help here without
-need to rename property (and prevent breaking users who (ab)used it if we c=
-are).
+>      DEFINE_PROP_UINT32("level-func7", X86CPU, env.cpuid_level_func7,
+>                         UINT32_MAX),
+>      DEFINE_PROP_UINT32("level", X86CPU, env.cpuid_level, UINT32_MAX),
+> diff --git a/target/i386/kvm/kvm.c b/target/i386/kvm/kvm.c
+> index c9a3c02e3e3..87edce99e85 100644
+> --- a/target/i386/kvm/kvm.c
+> +++ b/target/i386/kvm/kvm.c
+> @@ -4635,13 +4635,9 @@ static int kvm_get_msrs(X86CPU *cpu)
+>       * we're migrating to.
+>       */
+> =20
+> -    if (cpu->fill_mtrr_mask) {
+> -        QEMU_BUILD_BUG_ON(TARGET_PHYS_ADDR_SPACE_BITS > 52);
+> -        assert(cpu->phys_bits <=3D TARGET_PHYS_ADDR_SPACE_BITS);
+> -        mtrr_top_bits =3D MAKE_64BIT_MASK(cpu->phys_bits, 52 - cpu->phys=
+_bits);
+> -    } else {
+> -        mtrr_top_bits =3D 0;
+> -    }
+> +    QEMU_BUILD_BUG_ON(TARGET_PHYS_ADDR_SPACE_BITS > 52);
+> +    assert(cpu->phys_bits <=3D TARGET_PHYS_ADDR_SPACE_BITS);
+> +    mtrr_top_bits =3D MAKE_64BIT_MASK(cpu->phys_bits, 52 - cpu->phys_bit=
+s);
+> =20
+>      for (i =3D 0; i < ret; i++) {
+>          uint32_t index =3D msrs[i].index;
 
 
