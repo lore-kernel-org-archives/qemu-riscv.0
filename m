@@ -4,76 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 60983C3ABC9
-	for <qemu-riscv@archiver.kernel.org>; Tue, 13 May 2025 09:03:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AC4FCC3ABC9
+	for <qemu-riscv@archiver.kernel.org>; Tue, 13 May 2025 09:16:53 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uElX5-0006vA-K8; Tue, 13 May 2025 05:02:39 -0400
+	id 1uElkP-0005tU-9z; Tue, 13 May 2025 05:16:25 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <imammedo@redhat.com>)
- id 1uElX2-0006tr-Oo
- for qemu-riscv@nongnu.org; Tue, 13 May 2025 05:02:36 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
+ id 1uElkN-0005t5-Jk
+ for qemu-riscv@nongnu.org; Tue, 13 May 2025 05:16:23 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <imammedo@redhat.com>)
- id 1uElX0-0000bu-C5
- for qemu-riscv@nongnu.org; Tue, 13 May 2025 05:02:36 -0400
+ id 1uElkL-0002IZ-JW
+ for qemu-riscv@nongnu.org; Tue, 13 May 2025 05:16:23 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1747126952;
+ s=mimecast20190719; t=1747127779;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=HE5E63A6rmg07JemaPIfncFI01OB8TrlgBKDzNGQzCc=;
- b=FlqB2w1FxAvztT4Ph7UpEnufeCeGaunFAlrLwYroSRoTuEg8AztzMsIn1UJWYEeETyPUwz
- 2dcOdTaxcMjNOvj0WJl+2qXk29nv1rk/TuxBfmzaiVEWn/jJ2JiYURS0GWzTSajPQlD424
- LlHTOYAqqRJmEHlZSLiGiD1yukdqm88=
-Received: from mail-wr1-f71.google.com (mail-wr1-f71.google.com
- [209.85.221.71]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=v31MioDOVgoqh4rKpjITKNEs7rYnhOhzHg49WrhLJCA=;
+ b=HglpLuPaXetyo/6DwsLr3wZXSCA4Ce3+gtEG9ADeHyq80vZXisBZoZ3Hq2OO6vvaQm7qNW
+ aebRtKEkytIEIYM7v2pFKCPKDeuAMqr9iZFDp/IBzX7wgw3FyYgdCV+SPvCODHLoXcMDFS
+ PAU3gFMFmnXjuUSpwMUqoLar+yPBx8I=
+Received: from mail-wm1-f72.google.com (mail-wm1-f72.google.com
+ [209.85.128.72]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-350-LO1Y3VZbO9CCEjdTUaF5sQ-1; Tue, 13 May 2025 05:02:30 -0400
-X-MC-Unique: LO1Y3VZbO9CCEjdTUaF5sQ-1
-X-Mimecast-MFC-AGG-ID: LO1Y3VZbO9CCEjdTUaF5sQ_1747126950
-Received: by mail-wr1-f71.google.com with SMTP id
- ffacd0b85a97d-3a1f9ddf04bso2220941f8f.3
- for <qemu-riscv@nongnu.org>; Tue, 13 May 2025 02:02:30 -0700 (PDT)
+ us-mta-653-Rwzk46QsPJyObl2eZO4hvA-1; Tue, 13 May 2025 05:16:17 -0400
+X-MC-Unique: Rwzk46QsPJyObl2eZO4hvA-1
+X-Mimecast-MFC-AGG-ID: Rwzk46QsPJyObl2eZO4hvA_1747127777
+Received: by mail-wm1-f72.google.com with SMTP id
+ 5b1f17b1804b1-43ea256f039so39710775e9.0
+ for <qemu-riscv@nongnu.org>; Tue, 13 May 2025 02:16:17 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1747126949; x=1747731749;
+ d=1e100.net; s=20230601; t=1747127777; x=1747732577;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:subject:cc:to:from:date:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=HE5E63A6rmg07JemaPIfncFI01OB8TrlgBKDzNGQzCc=;
- b=AEGVrQz5PUBpTKLPaVevYfoKpHAplUqFq6BYkdbbmn9kY0NLjQBNTsy4AQ7k5hKJHX
- TGMkPeDH9JnsXoVSOiZh47Bj+UEWPh3ChUu58wGtgA8R5mlt9eh6FJQsGeuMGn2vS5G3
- 6dLQD5XgK3saE+wpVm/S+Lj8ah0vA77teW/gZ76Y3QYLIhxSaNoGErEJB1cBMMjcjRYP
- SWIkk/SduL38nHhGziJg8dweFBQamiyJXbrG9hkUuVMho90rDD2cMSpqJ2fT3b1/5XkL
- 1Qg3oMz//82CiWtXDm5m5ccWY70KogaUsclFwQgGbha79POuYGaD3T9xxjymS+9/1Jdn
- 1qgA==
+ bh=HlADszS+Jp7Q3TGl9uZ1eHzM09x0nyHrIGrUpdW9aBo=;
+ b=TH03vI0TIpoh5gfbPvD0euHJhjuY1mI9eyHvrYaiTZHURtqSQoqDEpOVSMylCou1Xc
+ EI2kxnI2K0CJo1sYzHxSjrqdOvzDWpatMO8PzUyekxM0/uRgh0E0Y0uGPt6jzZ9kAN3z
+ swbhhsa7vHvA6pAq6CAcoZfyMhfb5eZC97hhcubNnnQDZYJgsEFlqP5nggS/wQYJnNbt
+ FlEijXdmiGwo09+ZQ8sKW+l6u1RVXQuF8rQqIHu54DmA0xqSgujHb9LnQdbyl50s05hl
+ VAjo3HTXP75LzaYfzQwzlJIWaDNlIDstjW7rP97vttrjzhP4ptftRTP+eHIBGhr0HmdF
+ C02A==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVqkxvbw7YUR2s+mmzLzrmAt8WSrYFs0vrVpNs7O48cIO82RBW7yb+wTrAQ+fl8T+FRjFzwGrX+qI+N@nongnu.org
-X-Gm-Message-State: AOJu0Yz3JD27HZe/4IcdGRwheSgmUwzjRRyDITzzy+aPgEnPtUNRoDY0
- LlbzofQpxh+/IGbLmKhERtC1Jsqz0JURcXqh27nkBbalKh2+lHK/3O3uTRuZHD6pG170ubVDmf2
- 3VAlqvPhqOoDMWge3Txnmako64R1AjZgDlL30Zog1K7bLo2eM0qkp
-X-Gm-Gg: ASbGncspr4YR4MTRPqlsRs3y7rdybTSHHJamfzfyp6Ia8F3BuJK1kXDFHn2iBHwSi30
- rZpp1rYTLQQf9gNSfjMgB1S5smxZcY2quPqPfY+2rMxBS32bgBT53P75HNMis5NuKpyM4XmHceB
- N2ovimnPF+SyVa+Tr8e6UNbbn8OB8v5S7CgZpeOFOoufyQTVCzlLef8oB7woEClyD0DX7xTPMIS
- Nqt7/uTVTNXy14JQ1U06Fylw7/TljQdvM7G+aWoB6nElOf+LTlotKcopJpkmT062mexLXAj0dli
- EHChWpemgFDMUJh13L27hoy3mCUzeBZC
-X-Received: by 2002:adf:f687:0:b0:3a1:fa6c:4735 with SMTP id
- ffacd0b85a97d-3a1fa6c4838mr8573380f8f.35.1747126949667; 
- Tue, 13 May 2025 02:02:29 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IFuyZeASJoiDIgAZ42Fslx6v9M83ncZUjLwgaiHV4EALKZNgG04LuVa4ibD678KGNhv6DCCrw==
-X-Received: by 2002:adf:f687:0:b0:3a1:fa6c:4735 with SMTP id
- ffacd0b85a97d-3a1fa6c4838mr8573329f8f.35.1747126949240; 
- Tue, 13 May 2025 02:02:29 -0700 (PDT)
+ AJvYcCVBeymImpApdSAYkvXee1kOY6BRA/Y+fLeW83+G89qLZ6/w4a/qQOpMNhfZP93Gf+0+b4Q9IX+3CzLs@nongnu.org
+X-Gm-Message-State: AOJu0YyKMr7MZWhcmaZR1bP+L6ZjxNJuX/cYXEPMIQrsDD+4JkcwRx/Q
+ bzFwTitBUsgOReCtlp7FM0HnXFvTQUm+mbmGrpOmPV5C8tcMr/fcl5OC+2K6Ji4CLWQH74TLM+K
+ 5piOwXYWn8w5WcmTzJ+LbmuUyrCmDQX71pLdo8bnbyDG+2sQH1ORt
+X-Gm-Gg: ASbGncv18mLqavl+IEAD5jYnwJl8qQuXXZqueNwzGmxXrcfjY59T6urquJLI3Z6zQAY
+ YZBAfRu0k1PJv7uMWvgpp+HYlCXk9toe+Xfjm8HEvPvylq/Yd7ZnxDiat1gwfKik0HI+6PzOzKt
+ bvVS2trhEGB8hc51ch87qFes5WZpt6EoGyifUKRautbud5jEbCtPX4ehsHUrdtc2h+hzAXrpTwy
+ 8pHikphCBAo1Yqi6mJSIuh2ICdrjkzj0yxhpOg5VZTqa/zeps4wUbW7xh69ZBQLIUYyLjjqz1In
+ hXj4/WUbR/wE+SSayiFkjARECsZTYBzd
+X-Received: by 2002:a05:600c:6308:b0:43c:fe15:41c9 with SMTP id
+ 5b1f17b1804b1-442d6d3e6d9mr160272765e9.9.1747127776783; 
+ Tue, 13 May 2025 02:16:16 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IE1T/5gFVuk4ijjzA9YbA5QxEtUdD+KlrGtP96PmXtcNzFC1cX7Zq93bTxtyhDRAIbOqgjkbg==
+X-Received: by 2002:a05:600c:6308:b0:43c:fe15:41c9 with SMTP id
+ 5b1f17b1804b1-442d6d3e6d9mr160272145e9.9.1747127776344; 
+ Tue, 13 May 2025 02:16:16 -0700 (PDT)
 Received: from imammedo.users.ipa.redhat.com ([85.93.96.130])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3a1f58f296csm15256712f8f.47.2025.05.13.02.02.27
+ ffacd0b85a97d-3a1f58f2f65sm15734373f8f.55.2025.05.13.02.16.15
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 13 May 2025 02:02:28 -0700 (PDT)
-Date: Tue, 13 May 2025 11:02:27 +0200
+ Tue, 13 May 2025 02:16:15 -0700 (PDT)
+Date: Tue, 13 May 2025 11:16:14 +0200
 From: Igor Mammedov <imammedo@redhat.com>
 To: Philippe =?UTF-8?B?TWF0aGlldS1EYXVkw6k=?= <philmd@linaro.org>
 Cc: qemu-devel@nongnu.org, Richard Henderson <richard.henderson@linaro.org>,
@@ -93,21 +93,21 @@ Cc: qemu-devel@nongnu.org, Richard Henderson <richard.henderson@linaro.org>,
  =?UTF-8?B?Q2zDqW1lbnQ=?= Mathieu--Drif <clement.mathieu--drif@eviden.com>,
  qemu-arm@nongnu.org, =?UTF-8?B?TWFyYy1BbmRyw6k=?= Lureau
  <marcandre.lureau@redhat.com>, Huacai Chen <chenhuacai@kernel.org>, Jason
- Wang <jasowang@redhat.com>, Mark Cave-Ayland <mark.caveayland@nutanix.com>,
- Thomas Huth <thuth@redhat.com>
-Subject: Re: [PATCH v4 21/27] hw/audio/pcspk: Remove PCSpkState::migrate field
-Message-ID: <20250513110227.04d709b2@imammedo.users.ipa.redhat.com>
-In-Reply-To: <20250508133550.81391-22-philmd@linaro.org>
+ Wang <jasowang@redhat.com>, Mark Cave-Ayland <mark.caveayland@nutanix.com>
+Subject: Re: [PATCH v4 23/27] hw/i386/intel_iommu: Remove
+ IntelIOMMUState::buggy_eim field
+Message-ID: <20250513111614.31479c42@imammedo.users.ipa.redhat.com>
+In-Reply-To: <20250508133550.81391-24-philmd@linaro.org>
 References: <20250508133550.81391-1-philmd@linaro.org>
- <20250508133550.81391-22-philmd@linaro.org>
+ <20250508133550.81391-24-philmd@linaro.org>
 X-Mailer: Claws Mail 4.3.1 (GTK 3.24.43; x86_64-redhat-linux-gnu)
 MIME-Version: 1.0
 X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: v5Y2zf81eCeW8Kk-Z8OPuVptI4PQTNushZ8BgHh2118_1747126950
+X-Mimecast-MFC-PROC-ID: k4pckiIiH1toPUeC-JaRGk99BHgiPe5EsMVHDO483bU_1747127777
 X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=170.10.133.124; envelope-from=imammedo@redhat.com;
+Received-SPF: pass client-ip=170.10.129.124; envelope-from=imammedo@redhat.com;
  helo=us-smtp-delivery-124.mimecast.com
 X-Spam_score_int: -35
 X-Spam_score: -3.6
@@ -132,66 +132,70 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Thu,  8 May 2025 15:35:44 +0200
+On Thu,  8 May 2025 15:35:46 +0200
 Philippe Mathieu-Daud=C3=A9 <philmd@linaro.org> wrote:
 
-> The PCSpkState::migrate boolean was only set in the
-> pc_compat_2_7[] array, via the 'migrate=3Doff' property.
-> We removed all machines using that array, lets remove
-> that property, simplifying vmstate_spk[].
-
-same as 14/27, it should be safe to remove without deprecation
-
-Reviewed-by: Igor Mammedov <imammedo@redhat.com>
-
-=20
+> The IntelIOMMUState::buggy_eim boolean was only set in
+> the hw_compat_2_7[] array, via the 'x-buggy-eim=3Dtrue'
+> property. We removed all machines using that array, lets
+> remove that property, simplifying vtd_decide_config().
 >=20
 > Signed-off-by: Philippe Mathieu-Daud=C3=A9 <philmd@linaro.org>
 > Reviewed-by: Mark Cave-Ayland <mark.caveayland@nutanix.com>
-> Reviewed-by: Thomas Huth <thuth@redhat.com>
+
+Reviewed-by: Igor Mammedov <imammedo@redhat.com>
+
 > ---
->  hw/audio/pcspk.c | 10 ----------
->  1 file changed, 10 deletions(-)
+>  include/hw/i386/intel_iommu.h | 1 -
+>  hw/i386/intel_iommu.c         | 5 ++---
+>  2 files changed, 2 insertions(+), 4 deletions(-)
 >=20
-> diff --git a/hw/audio/pcspk.c b/hw/audio/pcspk.c
-> index a419161b5b1..0e83ba0bf73 100644
-> --- a/hw/audio/pcspk.c
-> +++ b/hw/audio/pcspk.c
-> @@ -56,7 +56,6 @@ struct PCSpkState {
->      unsigned int play_pos;
->      uint8_t data_on;
->      uint8_t dummy_refresh_clock;
-> -    bool migrate;
->  };
+> diff --git a/include/hw/i386/intel_iommu.h b/include/hw/i386/intel_iommu.=
+h
+> index e95477e8554..29304329d05 100644
+> --- a/include/hw/i386/intel_iommu.h
+> +++ b/include/hw/i386/intel_iommu.h
+> @@ -303,7 +303,6 @@ struct IntelIOMMUState {
+>      uint32_t intr_size;             /* Number of IR table entries */
+>      bool intr_eime;                 /* Extended interrupt mode enabled *=
+/
+>      OnOffAuto intr_eim;             /* Toggle for EIM cabability */
+> -    bool buggy_eim;                 /* Force buggy EIM unless eim=3Doff =
+*/
+>      uint8_t aw_bits;                /* Host/IOVA address width (in bits)=
+ */
+>      bool dma_drain;                 /* Whether DMA r/w draining enabled =
+*/
+>      bool dma_translation;           /* Whether DMA translation supported=
+ */
+> diff --git a/hw/i386/intel_iommu.c b/hw/i386/intel_iommu.c
+> index 5f8ed1243d1..c980cecb4ee 100644
+> --- a/hw/i386/intel_iommu.c
+> +++ b/hw/i386/intel_iommu.c
+> @@ -3823,7 +3823,6 @@ static const Property vtd_properties[] =3D {
+>      DEFINE_PROP_UINT32("version", IntelIOMMUState, version, 0),
+>      DEFINE_PROP_ON_OFF_AUTO("eim", IntelIOMMUState, intr_eim,
+>                              ON_OFF_AUTO_AUTO),
+> -    DEFINE_PROP_BOOL("x-buggy-eim", IntelIOMMUState, buggy_eim, false),
+>      DEFINE_PROP_UINT8("aw-bits", IntelIOMMUState, aw_bits,
+>                        VTD_HOST_ADDRESS_WIDTH),
+>      DEFINE_PROP_BOOL("caching-mode", IntelIOMMUState, caching_mode, FALS=
+E),
+> @@ -4731,11 +4730,11 @@ static bool vtd_decide_config(IntelIOMMUState *s,=
+ Error **errp)
+>      }
 > =20
->  static const char *s_spk =3D "pcspk";
-> @@ -196,18 +195,10 @@ static void pcspk_realizefn(DeviceState *dev, Error=
- **errp)
->      pcspk_state =3D s;
->  }
-> =20
-> -static bool migrate_needed(void *opaque)
-> -{
-> -    PCSpkState *s =3D opaque;
-> -
-> -    return s->migrate;
-> -}
-> -
->  static const VMStateDescription vmstate_spk =3D {
->      .name =3D "pcspk",
->      .version_id =3D 1,
->      .minimum_version_id =3D 1,
-> -    .needed =3D migrate_needed,
->      .fields =3D (const VMStateField[]) {
->          VMSTATE_UINT8(data_on, PCSpkState),
->          VMSTATE_UINT8(dummy_refresh_clock, PCSpkState),
-> @@ -218,7 +209,6 @@ static const VMStateDescription vmstate_spk =3D {
->  static const Property pcspk_properties[] =3D {
->      DEFINE_AUDIO_PROPERTIES(PCSpkState, card),
->      DEFINE_PROP_UINT32("iobase", PCSpkState, iobase,  0x61),
-> -    DEFINE_PROP_BOOL("migrate", PCSpkState, migrate,  true),
->  };
-> =20
->  static void pcspk_class_initfn(ObjectClass *klass, const void *data)
+>      if (s->intr_eim =3D=3D ON_OFF_AUTO_AUTO) {
+> -        s->intr_eim =3D (kvm_irqchip_in_kernel() || s->buggy_eim)
+> +        s->intr_eim =3D kvm_irqchip_in_kernel()
+>                        && x86_iommu_ir_supported(x86_iommu) ?
+>                                                ON_OFF_AUTO_ON : ON_OFF_AU=
+TO_OFF;
+>      }
+> -    if (s->intr_eim =3D=3D ON_OFF_AUTO_ON && !s->buggy_eim) {
+> +    if (s->intr_eim =3D=3D ON_OFF_AUTO_ON) {
+>          if (kvm_irqchip_is_split() && !kvm_enable_x2apic()) {
+>              error_setg(errp, "eim=3Don requires support on the KVM side"
+>                               "(X2APIC_API, first shipped in v4.7)");
 
 
