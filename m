@@ -4,95 +4,110 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EFB1CC3ABC3
-	for <qemu-riscv@archiver.kernel.org>; Tue, 13 May 2025 09:33:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7FB57C3ABD7
+	for <qemu-riscv@archiver.kernel.org>; Tue, 13 May 2025 10:29:24 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uEm0o-0005ZN-4p; Tue, 13 May 2025 05:33:22 -0400
+	id 1uEmss-0004O6-0C; Tue, 13 May 2025 06:29:15 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <berrange@redhat.com>)
- id 1uEm0m-0005Z2-PG
- for qemu-riscv@nongnu.org; Tue, 13 May 2025 05:33:20 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
+ (Exim 4.90_1) (envelope-from <imammedo@redhat.com>)
+ id 1uEmsm-0004K8-2r
+ for qemu-riscv@nongnu.org; Tue, 13 May 2025 06:29:09 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <berrange@redhat.com>)
- id 1uEm0j-00041I-VN
- for qemu-riscv@nongnu.org; Tue, 13 May 2025 05:33:20 -0400
+ (Exim 4.90_1) (envelope-from <imammedo@redhat.com>)
+ id 1uEmsj-0001Ye-3r
+ for qemu-riscv@nongnu.org; Tue, 13 May 2025 06:29:07 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1747128796;
- h=from:from:reply-to:reply-to:subject:subject:date:date:
- message-id:message-id:to:to:cc:cc:mime-version:mime-version:
- content-type:content-type:in-reply-to:in-reply-to:  references:references;
- bh=FSlig199wVoNbDgW3dvwZUsFQR5bFCcLzhfmn5TmBRM=;
- b=MtzlO7cx/FGWDWlQNnOjzbi3hnmy6IyrSO9+Ugr1YC3tHwIHYVPLtVCwR8WKMn96IV8szy
- UmVb2YNCm/GE2z5CzBG2+rjzIGT6KcrpcBz4QRzVEndlALRUVnoR9BWcwIuiKQfC/1f7S0
- C5WdRgRz8sTr3AlFoHHunhBRV7OklSU=
-Received: from mx-prod-mc-08.mail-002.prod.us-west-2.aws.redhat.com
- (ec2-35-165-154-97.us-west-2.compute.amazonaws.com [35.165.154.97]) by
- relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-341-926khPqKNyaih3aDkOWbew-1; Tue,
- 13 May 2025 05:33:13 -0400
-X-MC-Unique: 926khPqKNyaih3aDkOWbew-1
-X-Mimecast-MFC-AGG-ID: 926khPqKNyaih3aDkOWbew_1747128790
-Received: from mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com
- (mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.4])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by mx-prod-mc-08.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id AF84E18004A7; Tue, 13 May 2025 09:33:08 +0000 (UTC)
-Received: from redhat.com (unknown [10.42.28.110])
- by mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id D703730001A1; Tue, 13 May 2025 09:32:50 +0000 (UTC)
-Date: Tue, 13 May 2025 10:32:44 +0100
-From: Daniel =?utf-8?B?UC4gQmVycmFuZ8Op?= <berrange@redhat.com>
-To: BALATON Zoltan <balaton@eik.bme.hu>
-Cc: Markus Armbruster <armbru@redhat.com>,
- Mark Cave-Ayland <mark.caveayland@nutanix.com>,
- Peter Maydell <peter.maydell@linaro.org>,
- Thomas Huth <thuth@redhat.com>, Zhao Liu <zhao1.liu@intel.com>,
- Xiaoyao Li <xiaoyao.li@intel.com>,
- Philippe =?utf-8?Q?Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Paolo Bonzini <pbonzini@redhat.com>, qemu-devel@nongnu.org,
- Richard Henderson <richard.henderson@linaro.org>,
- kvm@vger.kernel.org, Gerd Hoffmann <kraxel@redhat.com>,
- Laurent Vivier <lvivier@redhat.com>,
- Jiaxun Yang <jiaxun.yang@flygoat.com>, Yi Liu <yi.l.liu@intel.com>,
- "Michael S. Tsirkin" <mst@redhat.com>,
- Eduardo Habkost <eduardo@habkost.net>,
- Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Marcelo Tosatti <mtosatti@redhat.com>, qemu-riscv@nongnu.org,
- Weiwei Li <liwei1518@gmail.com>, Amit Shah <amit@kernel.org>,
- Yanan Wang <wangyanan55@huawei.com>, Helge Deller <deller@gmx.de>,
- Palmer Dabbelt <palmer@dabbelt.com>, Ani Sinha <anisinha@redhat.com>,
- Igor Mammedov <imammedo@redhat.com>, Fabiano Rosas <farosas@suse.de>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- =?utf-8?Q?Cl=C3=A9ment?= Mathieu--Drif <clement.mathieu--drif@eviden.com>,
- qemu-arm@nongnu.org,
- =?utf-8?Q?Marc-Andr=C3=A9?= Lureau <marcandre.lureau@redhat.com>,
- Huacai Chen <chenhuacai@kernel.org>, Jason Wang <jasowang@redhat.com>
-Subject: Re: How to mark internal properties
-Message-ID: <aCMRvH0rWpWlgSNs@redhat.com>
-References: <20250508133550.81391-13-philmd@linaro.org>
- <23260c74-01ba-45bc-bf2f-b3e19c28ec8a@intel.com>
- <aB2vjuT07EuO6JSQ@intel.com>
- <2f526570-7ab0-479c-967c-b3f95f9f19e3@redhat.com>
- <CAFEAcA-kuHvxjuV_cMh-Px3C-k2Gd51jFqhwndO52vm++M_jAA@mail.gmail.com>
- <aCG6MuDLrQpoTqpg@redhat.com> <87jz6mqeu5.fsf@pond.sub.org>
- <eedd1fa2-5856-41b8-8e6b-38bd5c98ce8f@nutanix.com>
- <87ecwshqj4.fsf@pond.sub.org>
- <60cd3ba8-2ab1-74ac-54ea-5e3b309788a1@eik.bme.hu>
+ s=mimecast20190719; t=1747132144;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=2Q9Purpm/K4u0zXRViMrb/8QUlPpX+E7LaiOih2O93w=;
+ b=R011LYuoW/LFcJLF+vvXgLVR8LLrY4lk9boS+gPScb5CuJHwDSIa5tbZqBNiFBCKrFuH6+
+ 3FdRYEZ3SMdoZa7OoLH3ICacBXBX8cbsXAbAEGmAfZp+MDfRq+IpyP9aNvzLCgELxWCSHY
+ /wPulp6tLPMRKE9Fde+KUA0WcfHyDK0=
+Received: from mail-wm1-f72.google.com (mail-wm1-f72.google.com
+ [209.85.128.72]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-486-ZllfO4K4NNqzfZjBIN_nOw-1; Tue, 13 May 2025 06:29:02 -0400
+X-MC-Unique: ZllfO4K4NNqzfZjBIN_nOw-1
+X-Mimecast-MFC-AGG-ID: ZllfO4K4NNqzfZjBIN_nOw_1747132142
+Received: by mail-wm1-f72.google.com with SMTP id
+ 5b1f17b1804b1-43d5ca7c86aso26146995e9.0
+ for <qemu-riscv@nongnu.org>; Tue, 13 May 2025 03:29:02 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1747132141; x=1747736941;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:subject:cc:to:from:date:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=2Q9Purpm/K4u0zXRViMrb/8QUlPpX+E7LaiOih2O93w=;
+ b=vi3mAtxyl4eBnpZE4M9dMJfmxXFLCkvrrt6cJgpW+ZtcFO1+c7+OsjwaLDSpzFy052
+ 6lpIfteZAHWq6bmpPJhs9Qm3HTtxe8fbVvWSo311aXXN3hunRsxVp5vVSmHjr0BMgm/Y
+ Aq3wAyTVxO1dOmXJEgQcEKsom+zqtTjJOOhsoxZC7G4aT7Euj+R1PtJFuupT4NqRDfiG
+ UcpZg1xODDYns5uPxEpvzoDbpQsuQkB0fiTvRnePNDg2EfM2jCoKcWPc7/guGOEroevs
+ kbySDJW7Ul0FQlupaZIQF6VxRQ4z5/ah/tT1Z0+qCL26RwTBAv22Bc2q0/jLxG11xHFk
+ oUUQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWiP44/SpRzAD+jBZYvjwLKxfCgnQD56DQLGUgazlVLO1OMgMfPK7mECmFnolCZKqTVoLYlOxeTs6IM@nongnu.org
+X-Gm-Message-State: AOJu0YwzwA4QgtI4vHIYgek3UVx7Gm+dXp92IoS0tZrCwX+RL7GSXLxT
+ XjQ/lGEotz413upv3DdEcQPy3k09+HlsFSiMV0MceiQW0gQDDIixwXCYTBNRipHNUvTy8qzaEWB
+ zd9AbucNZAhFONxt/idmUeQcQY7dKHYkSjhZ3WOiKNJ92nLM5sFaK
+X-Gm-Gg: ASbGncux9QwAOk5MCTIHTi/ZyMqPtEMOIMw/KU3GUtSRDf0tNDwt4vB5+y7n+XIs8BK
+ os2AP8i2JA4SxleJKJX2AK7nRT/ZUIkoAlXV2NILGcupnUbXf+jD/gnqIF84cq9FUEQj6kJJFPN
+ IUrCW/apGZS+bsgqJFyLm0HrNh2/cIeA50Myuo1GhFuhJ4LBM+lZgfuYvzdqo6hqQMPQvuT+IUi
+ Dy5WVtvG9FL2KkUAYvub8x0xvOGfa6/IyLBBGr4h2jU7U+tEUmRd/XhyzR3s9GRca/RVghHuOtu
+ wzlTFg7uwu/5ba3tC1zFURujCJuuWkhy
+X-Received: by 2002:a05:600c:a089:b0:43c:e9d0:9ee5 with SMTP id
+ 5b1f17b1804b1-442d6d6ad82mr144907105e9.18.1747132141548; 
+ Tue, 13 May 2025 03:29:01 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IHi10nzAH1EKGO/kzFRGmvYqSgNFAee4ggzvFi1MDmC4i0/84NFAoHOBMIjVrdAh6iczoq/8A==
+X-Received: by 2002:a05:600c:a089:b0:43c:e9d0:9ee5 with SMTP id
+ 5b1f17b1804b1-442d6d6ad82mr144906565e9.18.1747132141134; 
+ Tue, 13 May 2025 03:29:01 -0700 (PDT)
+Received: from imammedo.users.ipa.redhat.com ([85.93.96.130])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-442cd34bde2sm201853865e9.19.2025.05.13.03.28.59
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 13 May 2025 03:29:00 -0700 (PDT)
+Date: Tue, 13 May 2025 12:28:58 +0200
+From: Igor Mammedov <imammedo@redhat.com>
+To: Philippe =?UTF-8?B?TWF0aGlldS1EYXVkw6k=?= <philmd@linaro.org>
+Cc: qemu-devel@nongnu.org, Richard Henderson <richard.henderson@linaro.org>,
+ kvm@vger.kernel.org, Sergio Lopez <slp@redhat.com>, Gerd Hoffmann
+ <kraxel@redhat.com>, Peter Maydell <peter.maydell@linaro.org>, Laurent
+ Vivier <lvivier@redhat.com>, Jiaxun Yang <jiaxun.yang@flygoat.com>, Yi Liu
+ <yi.l.liu@intel.com>, "Michael S. Tsirkin" <mst@redhat.com>, Eduardo
+ Habkost <eduardo@habkost.net>, Marcel Apfelbaum
+ <marcel.apfelbaum@gmail.com>, Alistair Francis <alistair.francis@wdc.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>, Marcelo Tosatti
+ <mtosatti@redhat.com>, qemu-riscv@nongnu.org, Weiwei Li
+ <liwei1518@gmail.com>, Amit Shah <amit@kernel.org>, Zhao Liu
+ <zhao1.liu@intel.com>, Yanan Wang <wangyanan55@huawei.com>, Helge Deller
+ <deller@gmx.de>, Palmer Dabbelt <palmer@dabbelt.com>, Ani Sinha
+ <anisinha@redhat.com>, Fabiano Rosas <farosas@suse.de>, Paolo Bonzini
+ <pbonzini@redhat.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ =?UTF-8?B?Q2zDqW1lbnQ=?= Mathieu--Drif <clement.mathieu--drif@eviden.com>,
+ qemu-arm@nongnu.org, =?UTF-8?B?TWFyYy1BbmRyw6k=?= Lureau
+ <marcandre.lureau@redhat.com>, Huacai Chen <chenhuacai@kernel.org>, Jason
+ Wang <jasowang@redhat.com>, Mark Cave-Ayland <mark.caveayland@nutanix.com>
+Subject: Re: [PATCH v4 24/27] hw/intc/ioapic: Remove
+ IOAPICCommonState::version field
+Message-ID: <20250513122858.2a596bd9@imammedo.users.ipa.redhat.com>
+In-Reply-To: <20250508133550.81391-25-philmd@linaro.org>
+References: <20250508133550.81391-1-philmd@linaro.org>
+ <20250508133550.81391-25-philmd@linaro.org>
+X-Mailer: Claws Mail 4.3.1 (GTK 3.24.43; x86_64-redhat-linux-gnu)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-In-Reply-To: <60cd3ba8-2ab1-74ac-54ea-5e3b309788a1@eik.bme.hu>
-User-Agent: Mutt/2.2.14 (2025-02-20)
-X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.4
-Received-SPF: pass client-ip=170.10.129.124; envelope-from=berrange@redhat.com;
+X-Mimecast-Spam-Score: 0
+X-Mimecast-MFC-PROC-ID: WavzUNrOg9-VavOZoVpx38OmV68wRUbAw4ZVEGguEts_1747132142
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=170.10.133.124; envelope-from=imammedo@redhat.com;
  helo=us-smtp-delivery-124.mimecast.com
 X-Spam_score_int: -35
 X-Spam_score: -3.6
@@ -114,47 +129,164 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-Reply-To: Daniel =?utf-8?B?UC4gQmVycmFuZ8Op?= <berrange@redhat.com>
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Tue, May 13, 2025 at 11:26:31AM +0200, BALATON Zoltan wrote:
-> On Tue, 13 May 2025, Markus Armbruster wrote:
-> > Mark Cave-Ayland <mark.caveayland@nutanix.com> writes:
-> > > On a related note this also brings us back to the discussion as to
-> > > the relationship between qdev and QOM: at one point I was under the
-> > > impression that qdev properties were simply QOM properties that were
-> > > exposed externally, i.e on the commmand line for use with -device.
-> > > 
-> > > Can you provide an update on what the current thinking is in this
-> > > area, in particular re: scoping of qdev vs QOM properties?
-> > 
-> > qdev is a leaky layer above QOM.
-> > 
-> > qdev properties are also QOM properties.
-> > 
-> > All device properties are exposed externally.
-> 
-> That was clear but the question was if QOM properties (that are not qdev
-> properties) exist and if so are they also exposed? If not exposed it may be
-> used for internal properties (where simpler solutions aren't convenient) but
-> maybe qdev also adds easier definition of properties that's why they used
-> instead of QOM properties?
+On Thu,  8 May 2025 15:35:47 +0200
+Philippe Mathieu-Daud=C3=A9 <philmd@linaro.org> wrote:
 
-NB, not everything we expose is a QDev. We directly expose QOM
-via "-object" if they implement the 'UserCreatable' interface.
-If we want internal properties, that should likely be wired in
-to the QOM level directly.
+> The IOAPICCommonState::version integer was only set
+> in the hw_compat_2_7[] array, via the 'version=3D0x11'
+> property. We removed all machines using that array,
+> lets remove that property, simplify by only using the
+> default version (defined as IOAPIC_VER_DEF).
+>=20
+> For the record, this field was introduced in commit
+> 20fd4b7b6d9 ("x86: ioapic: add support for explicit EOI"):
+>=20
+>  >   Some old Linux kernels (upstream before v4.0), or any released RHEL
+>  >   kernels has problem in sending APIC EOI when IR is enabled.
+>  >   Meanwhile, many of them only support explicit EOI for IOAPIC, which
+>  >   is only introduced in IOAPIC version 0x20. This patch provide a way
+>  >   to boost QEMU IOAPIC to version 0x20, in order for QEMU to correctly
+>  >   receive EOI messages.
+>  >
+>  >   Without boosting IOAPIC version to 0x20, kernels before commit
+>  >   d32932d ("x86/irq: Convert IOAPIC to use hierarchical irqdomain
+>  >   interfaces") will have trouble enabling both IR and level-triggered
+>  >   interrupt devices (like e1000).
+>  >
+>  >   To upgrade IOAPIC to version 0x20, we need to specify:
+>  >
+>  >     -global ioapic.version=3D0x20
+>  >
 
-Conceptually you could even say that everything QEMU creates should
-live under -object, and no other args ought to need to exist. We have
-decades of evolved code making that impractical though.
+that crutch might be in-use by external users, and even if they use
+0x20, removing property will break CLI.
 
-With regards,
-Daniel
--- 
-|: https://berrange.com      -o-    https://www.flickr.com/photos/dberrange :|
-|: https://libvirt.org         -o-            https://fstop138.berrange.com :|
-|: https://entangle-photo.org    -o-    https://www.instagram.com/dberrange :|
+I'd deprecate it first and then remove.
+
+>  >   To be compatible with old systems, 0x11 will still be the default
+>  >   IOAPIC version. Here 0x11 and 0x20 are the only versions to be
+>  >   supported.
+looking at the code removed, default is 0x20 which doesn't match above
+statement. Have something changed between then and now (missing ref to
+0x20 becoming default)?
+
+>  >
+>  >   One thing to mention: this patch only applies to emulated IOAPIC. It
+>  >   does not affect kernel IOAPIC behavior. =20
+>=20
+> Signed-off-by: Philippe Mathieu-Daud=C3=A9 <philmd@linaro.org>
+> Reviewed-by: Mark Cave-Ayland <mark.caveayland@nutanix.com>
+> ---
+>  hw/intc/ioapic_internal.h |  3 +--
+>  hw/intc/ioapic.c          | 18 ++----------------
+>  hw/intc/ioapic_common.c   |  2 +-
+>  3 files changed, 4 insertions(+), 19 deletions(-)
+>=20
+> diff --git a/hw/intc/ioapic_internal.h b/hw/intc/ioapic_internal.h
+> index 51205767f44..330ce195222 100644
+> --- a/hw/intc/ioapic_internal.h
+> +++ b/hw/intc/ioapic_internal.h
+> @@ -82,7 +82,7 @@
+>  #define IOAPIC_ID_MASK                  0xf
+> =20
+>  #define IOAPIC_VER_ENTRIES_SHIFT        16
+> -
+> +#define IOAPIC_VER_DEF                  0x20
+> =20
+>  #define TYPE_IOAPIC_COMMON "ioapic-common"
+>  OBJECT_DECLARE_TYPE(IOAPICCommonState, IOAPICCommonClass, IOAPIC_COMMON)
+> @@ -104,7 +104,6 @@ struct IOAPICCommonState {
+>      uint32_t irr;
+>      uint64_t ioredtbl[IOAPIC_NUM_PINS];
+>      Notifier machine_done;
+> -    uint8_t version;
+>      uint64_t irq_count[IOAPIC_NUM_PINS];
+>      int irq_level[IOAPIC_NUM_PINS];
+>      int irq_eoi[IOAPIC_NUM_PINS];
+> diff --git a/hw/intc/ioapic.c b/hw/intc/ioapic.c
+> index 133bef852d1..5cc97767d9d 100644
+> --- a/hw/intc/ioapic.c
+> +++ b/hw/intc/ioapic.c
+> @@ -315,7 +315,7 @@ ioapic_mem_read(void *opaque, hwaddr addr, unsigned i=
+nt size)
+>              val =3D s->id << IOAPIC_ID_SHIFT;
+>              break;
+>          case IOAPIC_REG_VER:
+> -            val =3D s->version |
+> +            val =3D IOAPIC_VER_DEF |
+>                  ((IOAPIC_NUM_PINS - 1) << IOAPIC_VER_ENTRIES_SHIFT);
+>              break;
+>          default:
+> @@ -411,8 +411,7 @@ ioapic_mem_write(void *opaque, hwaddr addr, uint64_t =
+val,
+>          }
+>          break;
+>      case IOAPIC_EOI:
+> -        /* Explicit EOI is only supported for IOAPIC version 0x20 */
+> -        if (size !=3D 4 || s->version !=3D 0x20) {
+> +        if (size !=3D 4) {
+>              break;
+>          }
+>          ioapic_eoi_broadcast(val);
+> @@ -444,18 +443,10 @@ static void ioapic_machine_done_notify(Notifier *no=
+tifier, void *data)
+>  #endif
+>  }
+> =20
+> -#define IOAPIC_VER_DEF 0x20
+> -
+>  static void ioapic_realize(DeviceState *dev, Error **errp)
+>  {
+>      IOAPICCommonState *s =3D IOAPIC_COMMON(dev);
+> =20
+> -    if (s->version !=3D 0x11 && s->version !=3D 0x20) {
+> -        error_setg(errp, "IOAPIC only supports version 0x11 or 0x20 "
+> -                   "(default: 0x%x).", IOAPIC_VER_DEF);
+> -        return;
+> -    }
+> -
+>      memory_region_init_io(&s->io_memory, OBJECT(s), &ioapic_io_ops, s,
+>                            "ioapic", 0x1000);
+> =20
+> @@ -476,10 +467,6 @@ static void ioapic_unrealize(DeviceState *dev)
+>      timer_free(s->delayed_ioapic_service_timer);
+>  }
+> =20
+> -static const Property ioapic_properties[] =3D {
+> -    DEFINE_PROP_UINT8("version", IOAPICCommonState, version, IOAPIC_VER_=
+DEF),
+> -};
+> -
+>  static void ioapic_class_init(ObjectClass *klass, const void *data)
+>  {
+>      IOAPICCommonClass *k =3D IOAPIC_COMMON_CLASS(klass);
+> @@ -493,7 +480,6 @@ static void ioapic_class_init(ObjectClass *klass, con=
+st void *data)
+>       */
+>      k->post_load =3D ioapic_update_kvm_routes;
+>      device_class_set_legacy_reset(dc, ioapic_reset_common);
+> -    device_class_set_props(dc, ioapic_properties);
+>  }
+> =20
+>  static const TypeInfo ioapic_info =3D {
+> diff --git a/hw/intc/ioapic_common.c b/hw/intc/ioapic_common.c
+> index fce3486e519..8b3e2ba9384 100644
+> --- a/hw/intc/ioapic_common.c
+> +++ b/hw/intc/ioapic_common.c
+> @@ -83,7 +83,7 @@ static void ioapic_print_redtbl(GString *buf, IOAPICCom=
+monState *s)
+>      int i;
+> =20
+>      g_string_append_printf(buf, "ioapic0: ver=3D0x%x id=3D0x%02x sel=3D0=
+x%02x",
+> -                           s->version, s->id, s->ioregsel);
+> +                           IOAPIC_VER_DEF, s->id, s->ioregsel);
+>      if (s->ioregsel) {
+>          g_string_append_printf(buf, " (redir[%u])\n",
+>                                 (s->ioregsel - IOAPIC_REG_REDTBL_BASE) >>=
+ 1);
 
 
