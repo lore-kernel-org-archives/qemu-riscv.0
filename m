@@ -4,86 +4,100 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DA505C3ABCB
-	for <qemu-riscv@archiver.kernel.org>; Mon, 12 May 2025 22:51:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F09CCC3ABC3
+	for <qemu-riscv@archiver.kernel.org>; Tue, 13 May 2025 08:08:56 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uEbz4-0000ZL-Sv; Mon, 12 May 2025 18:50:54 -0400
+	id 1uEkgk-0005Ch-KK; Tue, 13 May 2025 04:08:34 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1uEbz3-0000Yp-Bd; Mon, 12 May 2025 18:50:53 -0400
-Received: from mail-vk1-xa2a.google.com ([2607:f8b0:4864:20::a2a])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1uEbz1-0001x2-3f; Mon, 12 May 2025 18:50:52 -0400
-Received: by mail-vk1-xa2a.google.com with SMTP id
- 71dfb90a1353d-52c55db3743so1273702e0c.1; 
- Mon, 12 May 2025 15:50:50 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1747090249; x=1747695049; darn=nongnu.org;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=UVZmC3NLKELZ8+sF0ymWu0+rEBEHAecwjsCl4g4zr8w=;
- b=brCD5jxEN9LZgJiK2m9AhJrZE971AtXTJTDeLOTgnLd+hu8Enb8U3rkZrqp15mXvwb
- V1+tEn5zJrap+/9NhXCIqq6qSIKV3UceIRAZUwSV23YvWFkkFwZRL7qUHkNpg0vIRUZw
- JQyU/RhmF0Qg26aqSRi0cpSmOY5Wbuq/9hl1YR2srwFkzfwyn8Z9GU2TwpzXgkHgzJqk
- pDgpo1SLISa2tmPPMY4yHMF0Rl/qVG+lR9Mn9iIMaqkKzTCzyWXq3RhtjgQQs0KkbAhj
- jZSCJbi91yQ1CaCk/0Hb4PzRLWYOvxzP/OcTGcSgrOOqvshoqrCFJG/6vh0N0bRULknZ
- T+IA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1747090249; x=1747695049;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=UVZmC3NLKELZ8+sF0ymWu0+rEBEHAecwjsCl4g4zr8w=;
- b=X28kA39LvXbAGzgDetwRY1iM7wPN6KS8b+xBDcmaJl8VecB4eytznjC1yAt70VsAVp
- 7rAtpMjwmxvFf8m6xVSq8Zbye+Bz8snHym9z6H7UY49pSCDLDI35CRqlanLMCGpGqImG
- d6hc5MACyV5NkHOikkmlUOmaGfBFAr14P5OwccIrFURz8n+kgIsMczcadr56WtcSNA6r
- AcyN2MoIf3IOVi8ApI9Lwean10+XJNvYzgqEZF3iaXc50dr5pIZYvtUb6MDyNHZ6G1++
- hQ5Tf1Pqtx4p9taNExvcBdssxdPQAzhYEBblWJ7t+zBDkS3i4ns029Nnuh9LCLA3DLY/
- 4uSA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCX5oy+RSmwbdIYuW8EjDPQDBMguWnaRINktcqRPEgH9flNzhMedyzUj4HYE+eC3Y+imtBPeWVQRtB60@nongnu.org
-X-Gm-Message-State: AOJu0YzdFVM4nCFIvIXnxpynTSmY7siT3cFoMZANwgABBEdKkMhW6YfG
- WsAdPc43avIL04xUYKGwrPK+SzEDLaNcJhbs8QgedlHyeZs6dUcXUFkGUlJQhc0wiZoCvzAjBzO
- GH4wb95loNj3dyqBwxaIomRjPD9Y=
-X-Gm-Gg: ASbGnctsNPy46JBh48v9eVG5OQGXr3gndeYg69q8svFV5W7vPP2G4l5cYe/tfoooz6g
- hmSBbbCMUEl7m2CkGvbWcYdGS3xjNL3wFtwwUH68P8thm4S6/PAhTRuWi1nYQiuo2XVaiT3jIEi
- G0fzHB41UNBoAqS/k3tz+GlXJU0T6iQdSA2od+1EsykZcrZdPc9/PNeaZGMj1MyQk=
-X-Google-Smtp-Source: AGHT+IFS6+sKDgdtJRjCFUUbvab3mLR67n+l8BZV1MAX0PCtNk1xRq83zGAB1tz0D/6RbIJFF8UXQCd9b7iwqvLuhlg=
-X-Received: by 2002:a05:6122:828d:b0:52c:5062:c84d with SMTP id
- 71dfb90a1353d-52c538121aemr9412682e0c.0.1747090249224; Mon, 12 May 2025
- 15:50:49 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1uEkgi-0005BY-Nt
+ for qemu-riscv@nongnu.org; Tue, 13 May 2025 04:08:32 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1uEkgg-0003Zb-Or
+ for qemu-riscv@nongnu.org; Tue, 13 May 2025 04:08:32 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1747123708;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=I+Gv9eTQq4KU9E7dEF3HAfmHKcWMwL8LbrI4vrBOurs=;
+ b=Joo+orzOBbh5yeo00KQNwo2qCAzrij3pJalr/cSTqLtzPD0YMtCDKjCARQ468TAko2yK1/
+ opuOH9cpy43m/jlHt6603O8EI/cXP+VdgbtgwBEqXhWGQ8NOKz5VQ+g+bf7YU9CJ1LMCSy
+ cwGpnfgpaezXzVACKr50QSpNUvl4T7Q=
+Received: from mx-prod-mc-03.mail-002.prod.us-west-2.aws.redhat.com
+ (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
+ relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-145-Tdm_Y8VHNDu_jRyW3wVE9A-1; Tue,
+ 13 May 2025 04:08:24 -0400
+X-MC-Unique: Tdm_Y8VHNDu_jRyW3wVE9A-1
+X-Mimecast-MFC-AGG-ID: Tdm_Y8VHNDu_jRyW3wVE9A_1747123701
+Received: from mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com
+ (mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.111])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mx-prod-mc-03.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id 9E6531955D8F; Tue, 13 May 2025 08:08:20 +0000 (UTC)
+Received: from blackfin.pond.sub.org (unknown [10.45.242.27])
+ by mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id 8AFA818003FC; Tue, 13 May 2025 08:08:18 +0000 (UTC)
+Received: by blackfin.pond.sub.org (Postfix, from userid 1000)
+ id C227321E66C3; Tue, 13 May 2025 10:08:15 +0200 (CEST)
+From: Markus Armbruster <armbru@redhat.com>
+To: Igor Mammedov <imammedo@redhat.com>
+Cc: =?utf-8?Q?Daniel_P=2E_Berrang=C3=A9?= <berrange@redhat.com>,  Peter Maydell
+ <peter.maydell@linaro.org>,  Thomas Huth <thuth@redhat.com>,  Zhao Liu
+ <zhao1.liu@intel.com>,  Xiaoyao Li <xiaoyao.li@intel.com>,  Philippe
+ =?utf-8?Q?Mathieu-Daud=C3=A9?= <philmd@linaro.org>,  Paolo Bonzini
+ <pbonzini@redhat.com>,
+ qemu-devel@nongnu.org,  Richard Henderson <richard.henderson@linaro.org>,
+ kvm@vger.kernel.org,  Gerd Hoffmann <kraxel@redhat.com>,  Laurent Vivier
+ <lvivier@redhat.com>,  Jiaxun Yang <jiaxun.yang@flygoat.com>,  Yi Liu
+ <yi.l.liu@intel.com>,  "Michael S. Tsirkin" <mst@redhat.com>,  Eduardo
+ Habkost <eduardo@habkost.net>,  Marcel Apfelbaum
+ <marcel.apfelbaum@gmail.com>,  Alistair Francis
+ <alistair.francis@wdc.com>,  Daniel Henrique Barboza
+ <dbarboza@ventanamicro.com>,  Marcelo Tosatti <mtosatti@redhat.com>,
+ qemu-riscv@nongnu.org,  Weiwei Li <liwei1518@gmail.com>,  Amit Shah
+ <amit@kernel.org>,  Yanan Wang <wangyanan55@huawei.com>,  Helge Deller
+ <deller@gmx.de>,  Palmer Dabbelt <palmer@dabbelt.com>,  Ani Sinha
+ <anisinha@redhat.com>,  Fabiano Rosas <farosas@suse.de>,  Liu Zhiwei
+ <zhiwei_liu@linux.alibaba.com>,  =?utf-8?Q?Cl=C3=A9ment?= Mathieu--Drif
+ <clement.mathieu--drif@eviden.com>,  qemu-arm@nongnu.org,  =?utf-8?Q?Marc?=
+ =?utf-8?Q?-Andr=C3=A9?= Lureau <marcandre.lureau@redhat.com>,  Huacai Chen
+ <chenhuacai@kernel.org>,  Jason Wang <jasowang@redhat.com>
+Subject: Re: How to mark internal properties
+In-Reply-To: <20250512172226.433900f8@imammedo.users.ipa.redhat.com> (Igor
+ Mammedov's message of "Mon, 12 May 2025 17:22:26 +0200")
+References: <20250508133550.81391-1-philmd@linaro.org>
+ <20250508133550.81391-13-philmd@linaro.org>
+ <23260c74-01ba-45bc-bf2f-b3e19c28ec8a@intel.com>
+ <aB2vjuT07EuO6JSQ@intel.com>
+ <2f526570-7ab0-479c-967c-b3f95f9f19e3@redhat.com>
+ <CAFEAcA-kuHvxjuV_cMh-Px3C-k2Gd51jFqhwndO52vm++M_jAA@mail.gmail.com>
+ <aCG6MuDLrQpoTqpg@redhat.com> <87jz6mqeu5.fsf@pond.sub.org>
+ <20250512172226.433900f8@imammedo.users.ipa.redhat.com>
+Date: Tue, 13 May 2025 10:08:15 +0200
+Message-ID: <87msbhgcgg.fsf@pond.sub.org>
+User-Agent: Gnus/5.13 (Gnus v5.13)
 MIME-Version: 1.0
-References: <cover.1746968215.git.neither@nut.email>
- <40c7216b842b7d06a0b947a7eee7cc11b9305b15.1746968215.git.neither@nut.email>
-In-Reply-To: <40c7216b842b7d06a0b947a7eee7cc11b9305b15.1746968215.git.neither@nut.email>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Tue, 13 May 2025 08:50:23 +1000
-X-Gm-Features: AX0GCFtC_8yO4px2eHIpPXvURVdxBA33BKDXu2crm9lxd5YpaR3NfWKvRK9gFtA
-Message-ID: <CAKmqyKNmHYuyvG8w5ELL2nheS332YLLuQsVrnKiE-A0-Kt_Bww@mail.gmail.com>
-Subject: Re: [PATCH v4 16/23] target/riscv: call plugin trap callbacks
-To: Julian Ganz <neither@nut.email>
-Cc: qemu-devel@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>, 
- Alistair Francis <alistair.francis@wdc.com>, Weiwei Li <liwei1518@gmail.com>, 
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
- "open list:RISC-V TCG CPUs" <qemu-riscv@nongnu.org>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::a2a;
- envelope-from=alistair23@gmail.com; helo=mail-vk1-xa2a.google.com
-X-Spam_score_int: -17
-X-Spam_score: -1.8
-X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.111
+Received-SPF: pass client-ip=170.10.129.124; envelope-from=armbru@redhat.com;
+ helo=us-smtp-delivery-124.mimecast.com
+X-Spam_score_int: -35
+X-Spam_score: -3.6
+X-Spam_bar: ---
+X-Spam_report: (-3.6 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-1.551,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H5=0.001, RCVD_IN_MSPIKE_WL=0.001,
+ RCVD_IN_VALIDITY_CERTIFIED_BLOCKED=0.001, RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -99,71 +113,81 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Sun, May 11, 2025 at 11:18=E2=80=AFPM Julian Ganz <neither@nut.email> wr=
-ote:
->
-> We recently introduced API for registering callbacks for trap related
-> events as well as the corresponding hook functions. Due to differences
-> between architectures, the latter need to be called from target specific
-> code.
->
-> This change places hooks for RISC-V targets.
->
-> Signed-off-by: Julian Ganz <neither@nut.email>
+Igor Mammedov <imammedo@redhat.com> writes:
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+> On Mon, 12 May 2025 12:54:26 +0200
+> Markus Armbruster <armbru@redhat.com> wrote:
+>
+>> Daniel P. Berrang=C3=A9 <berrange@redhat.com> writes:
+>>=20
+>> > On Mon, May 12, 2025 at 09:46:30AM +0100, Peter Maydell wrote:=20=20
+>> >> On Fri, 9 May 2025 at 11:04, Thomas Huth <thuth@redhat.com> wrote:=20=
+=20
+>> >> > Thanks for your clarifications, Zhao! But I think this shows again =
+the
+>> >> > problem that we have hit a couple of times in the past already: Pro=
+perties
+>> >> > are currently used for both, config knobs for the users and internal
+>> >> > switches for configuration of the machine. We lack a proper way to =
+say "this
+>> >> > property is usable for the user" and "this property is meant for in=
+ternal
+>> >> > configuration only".
+>> >> >
+>> >> > I wonder whether we could maybe come up with a naming scheme to bet=
+ter
+>> >> > distinguish the two sets, e.g. by using a prefix similar to the "x-=
+" prefix
+>> >> > for experimental properties? We could e.g. say that all properties =
+starting
+>> >> > with a "q-" are meant for QEMU-internal configuration only or somet=
+hing
+>> >> > similar (and maybe even hide those from the default help output whe=
+n running
+>> >> > "-device xyz,help" ?)? Anybody any opinions or better ideas on this=
+?=20=20
+>> >>=20
+>> >> I think a q-prefix is potentially a bit clunky unless we also have
+>> >> infrastructure to say eg DEFINE_INTERNAL_PROP_BOOL("foo", ...)
+>> >> and have it auto-add the prefix, and to have the C APIs for
+>> >> setting properties search for both "foo" and "q-foo" so you
+>> >> don't have to write qdev_prop_set_bit(dev, "q-foo", ...).=20=20
+>>=20
+>> If we make intent explicit with DEFINE_INTERNAL_PROP_FOO(), is repeating
+>> intent in the name useful?
+>
+> While we are inventing a new API, I'd say that _INTERNAL_ is not the only=
+ thing
+> on my wish-list wrt properties.
+> It would be also nice to know when a property is set by internal or exter=
+nal user
+> or if it still has default value.
 
-Alistair
+We commonly assume "value is default implies user didn't touch it",
+which is of course wrong unless it's a value the user cannot set.
 
-> ---
->  target/riscv/cpu_helper.c | 9 +++++++++
->  1 file changed, 9 insertions(+)
+> Basically we are looking at different flags for properties and INERNAL be=
+ing
+> one of them.
 >
-> diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
-> index d5039f69a9..dce7e34cba 100644
-> --- a/target/riscv/cpu_helper.c
-> +++ b/target/riscv/cpu_helper.c
-> @@ -36,6 +36,7 @@
->  #include "cpu_bits.h"
->  #include "debug.h"
->  #include "pmp.h"
-> +#include "qemu/plugin.h"
->
->  int riscv_env_mmu_index(CPURISCVState *env, bool ifetch)
->  {
-> @@ -2173,6 +2174,7 @@ void riscv_cpu_do_interrupt(CPUState *cs)
->      uint64_t hdeleg =3D async ? env->hideleg : env->hedeleg;
->      const bool prev_virt =3D env->virt_enabled;
->      const target_ulong prev_priv =3D env->priv;
-> +    uint64_t last_pc =3D env->pc;
->      target_ulong tval =3D 0;
->      target_ulong tinst =3D 0;
->      target_ulong htval =3D 0;
-> @@ -2195,6 +2197,7 @@ void riscv_cpu_do_interrupt(CPUState *cs)
->          case RISCV_EXCP_SEMIHOST:
->              do_common_semihosting(cs);
->              env->pc +=3D 4;
-> +            qemu_plugin_vcpu_hostcall_cb(cs, last_pc);
->              return;
->  #endif
->          case RISCV_EXCP_LOAD_GUEST_ACCESS_FAULT:
-> @@ -2464,6 +2467,12 @@ void riscv_cpu_do_interrupt(CPUState *cs)
->                          prev_priv, prev_virt);
->      }
->
-> +    if (async) {
-> +        qemu_plugin_vcpu_interrupt_cb(cs, last_pc);
-> +    } else {
-> +        qemu_plugin_vcpu_exception_cb(cs, last_pc);
-> +    }
-> +
->      /*
->       * Interrupt/exception/trap delivery is asynchronous event and as pe=
-r
->       * zicfilp spec CPU should clear up the ELP state. No harm in cleari=
-ng
-> --
-> 2.49.0
+> Maybe instead of specialized macro, we should have a more generic
+>    DEFINE_PROP_WITH_FLAGS_FOO(...,flags)
+> So we won't have to rewrite it again when we think of another flag to tur=
+n on/off.
 >
 >
+> From previous uses of x- flag, some of such properties are created as
+> temporary | developer-only and occasionally as a crutch (still no intende=
+d for end user).
+> But then sometimes such properties get promoted to ABI with fat warnings
+> not to touch them. Having stable|unstable flag could help here without
+> need to rename property (and prevent breaking users who (ab)used it if we=
+ care).
+
+I think QAPI's explicit 'unstable' and 'deprecated' flags have been a
+success.  Their meaning is clear, and they come with documentation
+(because adding them without won't compile).
+
+Pushing QOM closer to QAPI when we can makes sense to me.
+
 
