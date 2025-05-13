@@ -4,79 +4,104 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 68704C3ABC9
-	for <qemu-riscv@archiver.kernel.org>; Tue, 13 May 2025 09:27:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EFB1CC3ABC3
+	for <qemu-riscv@archiver.kernel.org>; Tue, 13 May 2025 09:33:57 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uEluT-0002yi-Kt; Tue, 13 May 2025 05:26:49 -0400
+	id 1uEm0o-0005ZN-4p; Tue, 13 May 2025 05:33:22 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <balaton@eik.bme.hu>)
- id 1uEluR-0002xa-63; Tue, 13 May 2025 05:26:47 -0400
-Received: from zero.eik.bme.hu ([2001:738:2001:2001::2001])
+ (Exim 4.90_1) (envelope-from <berrange@redhat.com>)
+ id 1uEm0m-0005Z2-PG
+ for qemu-riscv@nongnu.org; Tue, 13 May 2025 05:33:20 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <balaton@eik.bme.hu>)
- id 1uEluO-0003FU-Om; Tue, 13 May 2025 05:26:46 -0400
-Received: from zero.eik.bme.hu (localhost [127.0.0.1])
- by zero.eik.bme.hu (Postfix) with ESMTP id BAE3C55CA5C;
- Tue, 13 May 2025 11:26:33 +0200 (CEST)
-X-Virus-Scanned: amavisd-new at eik.bme.hu
-Received: from zero.eik.bme.hu ([127.0.0.1])
- by zero.eik.bme.hu (zero.eik.bme.hu [127.0.0.1]) (amavisd-new, port 10028)
- with ESMTP id yB4rYU66MMtP; Tue, 13 May 2025 11:26:31 +0200 (CEST)
-Received: by zero.eik.bme.hu (Postfix, from userid 432)
- id B632C55CA5D; Tue, 13 May 2025 11:26:31 +0200 (CEST)
-Received: from localhost (localhost [127.0.0.1])
- by zero.eik.bme.hu (Postfix) with ESMTP id B3669745683;
- Tue, 13 May 2025 11:26:31 +0200 (CEST)
-Date: Tue, 13 May 2025 11:26:31 +0200 (CEST)
-From: BALATON Zoltan <balaton@eik.bme.hu>
-To: Markus Armbruster <armbru@redhat.com>
-cc: Mark Cave-Ayland <mark.caveayland@nutanix.com>, 
- =?ISO-8859-15?Q?Daniel_P=2E_Berrang=E9?= <berrange@redhat.com>, 
- Peter Maydell <peter.maydell@linaro.org>, Thomas Huth <thuth@redhat.com>, 
- Zhao Liu <zhao1.liu@intel.com>, Xiaoyao Li <xiaoyao.li@intel.com>, 
- =?ISO-8859-15?Q?Philippe_Mathieu-Daud=E9?= <philmd@linaro.org>, 
- Paolo Bonzini <pbonzini@redhat.com>, qemu-devel@nongnu.org, 
- Richard Henderson <richard.henderson@linaro.org>, kvm@vger.kernel.org, 
- Gerd Hoffmann <kraxel@redhat.com>, Laurent Vivier <lvivier@redhat.com>, 
- Jiaxun Yang <jiaxun.yang@flygoat.com>, Yi Liu <yi.l.liu@intel.com>, 
- "Michael S. Tsirkin" <mst@redhat.com>, 
- Eduardo Habkost <eduardo@habkost.net>, 
- Marcel Apfelbaum <marcel.apfelbaum@gmail.com>, 
- Alistair Francis <alistair.francis@wdc.com>, 
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>, 
- Marcelo Tosatti <mtosatti@redhat.com>, qemu-riscv@nongnu.org, 
- Weiwei Li <liwei1518@gmail.com>, Amit Shah <amit@kernel.org>, 
- Yanan Wang <wangyanan55@huawei.com>, Helge Deller <deller@gmx.de>, 
- Palmer Dabbelt <palmer@dabbelt.com>, Ani Sinha <anisinha@redhat.com>, 
- Igor Mammedov <imammedo@redhat.com>, Fabiano Rosas <farosas@suse.de>, 
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
- =?ISO-8859-15?Q?Cl=E9ment_Mathieu--Drif?= <clement.mathieu--drif@eviden.com>, 
- qemu-arm@nongnu.org, 
- =?ISO-8859-15?Q?Marc-Andr=E9_Lureau?= <marcandre.lureau@redhat.com>, 
+ (Exim 4.90_1) (envelope-from <berrange@redhat.com>)
+ id 1uEm0j-00041I-VN
+ for qemu-riscv@nongnu.org; Tue, 13 May 2025 05:33:20 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1747128796;
+ h=from:from:reply-to:reply-to:subject:subject:date:date:
+ message-id:message-id:to:to:cc:cc:mime-version:mime-version:
+ content-type:content-type:in-reply-to:in-reply-to:  references:references;
+ bh=FSlig199wVoNbDgW3dvwZUsFQR5bFCcLzhfmn5TmBRM=;
+ b=MtzlO7cx/FGWDWlQNnOjzbi3hnmy6IyrSO9+Ugr1YC3tHwIHYVPLtVCwR8WKMn96IV8szy
+ UmVb2YNCm/GE2z5CzBG2+rjzIGT6KcrpcBz4QRzVEndlALRUVnoR9BWcwIuiKQfC/1f7S0
+ C5WdRgRz8sTr3AlFoHHunhBRV7OklSU=
+Received: from mx-prod-mc-08.mail-002.prod.us-west-2.aws.redhat.com
+ (ec2-35-165-154-97.us-west-2.compute.amazonaws.com [35.165.154.97]) by
+ relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-341-926khPqKNyaih3aDkOWbew-1; Tue,
+ 13 May 2025 05:33:13 -0400
+X-MC-Unique: 926khPqKNyaih3aDkOWbew-1
+X-Mimecast-MFC-AGG-ID: 926khPqKNyaih3aDkOWbew_1747128790
+Received: from mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com
+ (mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.4])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mx-prod-mc-08.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id AF84E18004A7; Tue, 13 May 2025 09:33:08 +0000 (UTC)
+Received: from redhat.com (unknown [10.42.28.110])
+ by mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id D703730001A1; Tue, 13 May 2025 09:32:50 +0000 (UTC)
+Date: Tue, 13 May 2025 10:32:44 +0100
+From: Daniel =?utf-8?B?UC4gQmVycmFuZ8Op?= <berrange@redhat.com>
+To: BALATON Zoltan <balaton@eik.bme.hu>
+Cc: Markus Armbruster <armbru@redhat.com>,
+ Mark Cave-Ayland <mark.caveayland@nutanix.com>,
+ Peter Maydell <peter.maydell@linaro.org>,
+ Thomas Huth <thuth@redhat.com>, Zhao Liu <zhao1.liu@intel.com>,
+ Xiaoyao Li <xiaoyao.li@intel.com>,
+ Philippe =?utf-8?Q?Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
+ Paolo Bonzini <pbonzini@redhat.com>, qemu-devel@nongnu.org,
+ Richard Henderson <richard.henderson@linaro.org>,
+ kvm@vger.kernel.org, Gerd Hoffmann <kraxel@redhat.com>,
+ Laurent Vivier <lvivier@redhat.com>,
+ Jiaxun Yang <jiaxun.yang@flygoat.com>, Yi Liu <yi.l.liu@intel.com>,
+ "Michael S. Tsirkin" <mst@redhat.com>,
+ Eduardo Habkost <eduardo@habkost.net>,
+ Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Marcelo Tosatti <mtosatti@redhat.com>, qemu-riscv@nongnu.org,
+ Weiwei Li <liwei1518@gmail.com>, Amit Shah <amit@kernel.org>,
+ Yanan Wang <wangyanan55@huawei.com>, Helge Deller <deller@gmx.de>,
+ Palmer Dabbelt <palmer@dabbelt.com>, Ani Sinha <anisinha@redhat.com>,
+ Igor Mammedov <imammedo@redhat.com>, Fabiano Rosas <farosas@suse.de>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ =?utf-8?Q?Cl=C3=A9ment?= Mathieu--Drif <clement.mathieu--drif@eviden.com>,
+ qemu-arm@nongnu.org,
+ =?utf-8?Q?Marc-Andr=C3=A9?= Lureau <marcandre.lureau@redhat.com>,
  Huacai Chen <chenhuacai@kernel.org>, Jason Wang <jasowang@redhat.com>
 Subject: Re: How to mark internal properties
-In-Reply-To: <87ecwshqj4.fsf@pond.sub.org>
-Message-ID: <60cd3ba8-2ab1-74ac-54ea-5e3b309788a1@eik.bme.hu>
-References: <20250508133550.81391-1-philmd@linaro.org>
- <20250508133550.81391-13-philmd@linaro.org>
- <23260c74-01ba-45bc-bf2f-b3e19c28ec8a@intel.com> <aB2vjuT07EuO6JSQ@intel.com>
+Message-ID: <aCMRvH0rWpWlgSNs@redhat.com>
+References: <20250508133550.81391-13-philmd@linaro.org>
+ <23260c74-01ba-45bc-bf2f-b3e19c28ec8a@intel.com>
+ <aB2vjuT07EuO6JSQ@intel.com>
  <2f526570-7ab0-479c-967c-b3f95f9f19e3@redhat.com>
  <CAFEAcA-kuHvxjuV_cMh-Px3C-k2Gd51jFqhwndO52vm++M_jAA@mail.gmail.com>
  <aCG6MuDLrQpoTqpg@redhat.com> <87jz6mqeu5.fsf@pond.sub.org>
  <eedd1fa2-5856-41b8-8e6b-38bd5c98ce8f@nutanix.com>
  <87ecwshqj4.fsf@pond.sub.org>
+ <60cd3ba8-2ab1-74ac-54ea-5e3b309788a1@eik.bme.hu>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII; format=flowed
-Received-SPF: pass client-ip=2001:738:2001:2001::2001;
- envelope-from=balaton@eik.bme.hu; helo=zero.eik.bme.hu
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+In-Reply-To: <60cd3ba8-2ab1-74ac-54ea-5e3b309788a1@eik.bme.hu>
+User-Agent: Mutt/2.2.14 (2025-02-20)
+X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.4
+Received-SPF: pass client-ip=170.10.129.124; envelope-from=berrange@redhat.com;
+ helo=us-smtp-delivery-124.mimecast.com
+X-Spam_score_int: -35
+X-Spam_score: -3.6
+X-Spam_bar: ---
+X-Spam_report: (-3.6 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-1.551,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H5=0.001, RCVD_IN_MSPIKE_WL=0.001,
+ RCVD_IN_VALIDITY_CERTIFIED_BLOCKED=0.001, RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -89,61 +114,47 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
+Reply-To: Daniel =?utf-8?B?UC4gQmVycmFuZ8Op?= <berrange@redhat.com>
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Tue, 13 May 2025, Markus Armbruster wrote:
-> Mark Cave-Ayland <mark.caveayland@nutanix.com> writes:
->> On a related note this also brings us back to the discussion as to the 
->> relationship between qdev and QOM: at one point I was under the 
->> impression that qdev properties were simply QOM properties that were 
->> exposed externally, i.e on the commmand line for use with -device.
->>
->> Can you provide an update on what the current thinking is in this area, 
->> in particular re: scoping of qdev vs QOM properties?
->
-> qdev is a leaky layer above QOM.
->
-> qdev properties are also QOM properties.
->
-> All device properties are exposed externally.
+On Tue, May 13, 2025 at 11:26:31AM +0200, BALATON Zoltan wrote:
+> On Tue, 13 May 2025, Markus Armbruster wrote:
+> > Mark Cave-Ayland <mark.caveayland@nutanix.com> writes:
+> > > On a related note this also brings us back to the discussion as to
+> > > the relationship between qdev and QOM: at one point I was under the
+> > > impression that qdev properties were simply QOM properties that were
+> > > exposed externally, i.e on the commmand line for use with -device.
+> > > 
+> > > Can you provide an update on what the current thinking is in this
+> > > area, in particular re: scoping of qdev vs QOM properties?
+> > 
+> > qdev is a leaky layer above QOM.
+> > 
+> > qdev properties are also QOM properties.
+> > 
+> > All device properties are exposed externally.
+> 
+> That was clear but the question was if QOM properties (that are not qdev
+> properties) exist and if so are they also exposed? If not exposed it may be
+> used for internal properties (where simpler solutions aren't convenient) but
+> maybe qdev also adds easier definition of properties that's why they used
+> instead of QOM properties?
 
-That was clear but the question was if QOM properties (that are not qdev 
-properties) exist and if so are they also exposed? If not exposed it may 
-be used for internal properties (where simpler solutions aren't 
-convenient) but maybe qdev also adds easier definition of properties 
-that's why they used instead of QOM properties?
+NB, not everything we expose is a QDev. We directly expose QOM
+via "-object" if they implement the 'UserCreatable' interface.
+If we want internal properties, that should likely be wired in
+to the QOM level directly.
 
-> We use device properties for:
->
-> * Letting users configure pluggable devices, with -device or device_add
->
-> * Letting code configure onboard devices
->
->  For onboard devices that are also pluggable, everything exposed to
->  code is also exposed externally.  This might be a mistake in places.
+Conceptually you could even say that everything QEMU creates should
+live under -object, and no other args ought to need to exist. We have
+decades of evolved code making that impractical though.
 
-If a device is pluggable, theoretically a user could create a machine from 
-them declaratively, e.g. starting from a "none" machine or like plugging 
-cards in a motherboard so their properties should be exposed as long as 
-those properties correspond to the device pins they model or configurable 
-options. Only properties that are implementation details should not be 
-exposed because setting them can break the device. There are a few places 
-where we have such properties. But you say "in places" so I think you 
-meant the same.
+With regards,
+Daniel
+-- 
+|: https://berrange.com      -o-    https://www.flickr.com/photos/dberrange :|
+|: https://libvirt.org         -o-            https://fstop138.berrange.com :|
+|: https://entangle-photo.org    -o-    https://www.instagram.com/dberrange :|
 
-> * Letting the machine versioning machinery adjust device configuration
->
->  Some properties are meant to be used just for this.  They're exposed
->  externally regardless, which is a mistake.
-
-Question is if we want to allow users to tweak these compatibility 
-options, like selectively enable/disable when migrating between QEMU 
-versions or for testing. It might have some uses and maybe that's the 
-reason why people would like these to go through deprecation instead of 
-just dropping them. Marking some properties not exposed would get the same 
-resistance then so may not solve the issue.
-
-Regards,
-BALATON Zoltan
 
