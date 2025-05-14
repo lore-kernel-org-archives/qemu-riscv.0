@@ -4,95 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A8E0CC3ABCB
-	for <qemu-riscv@archiver.kernel.org>; Wed, 14 May 2025 04:12:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CB6AFC3ABCC
+	for <qemu-riscv@archiver.kernel.org>; Wed, 14 May 2025 12:59:54 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uF3T2-00022s-LQ; Wed, 14 May 2025 00:11:40 -0400
+	id 1uFBgr-0002vc-4G; Wed, 14 May 2025 08:58:29 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1uF3T0-0001zF-VT
- for qemu-riscv@nongnu.org; Wed, 14 May 2025 00:11:38 -0400
-Received: from mail-pj1-x1031.google.com ([2607:f8b0:4864:20::1031])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <frank.chang@sifive.com>)
- id 1uF3Sy-0001jB-RR
- for qemu-riscv@nongnu.org; Wed, 14 May 2025 00:11:38 -0400
-Received: by mail-pj1-x1031.google.com with SMTP id
- 98e67ed59e1d1-30a9cd61159so432272a91.1
- for <qemu-riscv@nongnu.org>; Tue, 13 May 2025 21:11:36 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1747195895; x=1747800695; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=1A6Tdq+NlocQQr+dW43vTkDs6+pSgcMdXP/qV+lPTUo=;
- b=ilmsAxtmrG0uEHZnamDZTyxMGKuf3/EQxzIPMsuCpvHgBaZgDZsgz9szUFN/UNLsT3
- dJDcOxBcYIQHbYDmDSt+tST49ojNViR8JZR7ldLoykDOIY6qhKzrrecup5Fsz/dlWRV4
- K+0h3owIBoyfx4P3MoVkypNWD907ZvVvEXzcqG7m0hzvUPZV0gkBT3NwBhTorOr3Se80
- BC5VBG9pp3v7AXOJILAKmbtYQjY+8VUmBJ2JnEVAvEJlP7OiZBLLD7UdJbk0/SGqneTo
- W4CUYcgMrFYmcuRLPpJzpqQ6DE4sjBDoKfHIagtwjcTNZtRps1HZDMJmJV2dlO87ESbY
- THRg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1747195895; x=1747800695;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=1A6Tdq+NlocQQr+dW43vTkDs6+pSgcMdXP/qV+lPTUo=;
- b=luK0LPPBPq7rsaZ2/PjG4IF+O0wk6+pDByZw/Q4ZYCwcAZkv6EaGKRTpptVGuhXAnK
- S55qUAx7YjIXJk7tdlmrekVYVCA8gd+gqadg0An6r8Kkz5Bs3hIcFNtp6ZAeZ4H+Bhcc
- sw5S0QH5YmXv4miCpkbvEHwg45h+JRXfcMXEfHPx+BFhpkFL0tf4EDJ/FTGkzVgee9F4
- 0qQrVM9L91z2Xr3TEWHC9RaoQzzUg/7fZPS3iKsisT4+KW05O3ieNYgd3I1+zzH+3m0P
- dmNrff4gkB07ail5vadcDuLw/O0JQKa443TiK163yZNObURzs+EZA9uSVDs5VM8djVI6
- GAFw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUfY3DOCZOaQyC2kSS/4PWhEjCsX1SX9uMjMH/Rr3OXA+sQ0P2Cd7W5+NeEMKpfFDReRcYvgYZDmSvi@nongnu.org
-X-Gm-Message-State: AOJu0YziwlXqeq6g5ctuH59+TwZa/XmeM3E2wJt4+crHWf10XUs+wgxx
- r6kJrIe/3GqXwJEgYm5ZANDSR7gmWB9lZD7DdslvisTOHlTfY2eth611VXRwZ1c=
-X-Gm-Gg: ASbGncu8iAL06EqXVZP1g7OoWId7wMARXWK5rdSczd2bH93Cmoe9gusQAHtuAmn1XS4
- AwSrB1ym781yfZMthXAHHvzTi0LYDDW9gkkRqDPtdea5Y2aioVlEcnSZb091c033UVq/88lxJJJ
- 3m/RQKDTPvG7wvJX9d1nPWSrTfXRIQKmkDirKLebrCOHgVv/4YC1PF+992mBcjWn8ECy5dE5C2D
- PPTC1Inx3EydrQYTX85WPlVEWRtgkP/BMoYQPt6bHiDEie15dGVQ929MBjl7FI7vf6nAcwwFMOP
- dvn/PpxAKlRjBH3jBQ3ypLlIs+uytg7VDyJ8bFBrbg9FgtAk+42wwF3jJXIwOJgaJ2uCfY4QHrK
- f3Y4=
-X-Google-Smtp-Source: AGHT+IGbn8Wg/ANip1Vr5TSN3ZvLJF31+rLv1UOgk+0WGEUycv8aF2qmAOByzPeAvwLSWvnVQMdUTA==
-X-Received: by 2002:a17:90b:51cf:b0:2fa:42f3:e3e4 with SMTP id
- 98e67ed59e1d1-30e0daf5dd2mr8260370a91.3.1747195894836; 
- Tue, 13 May 2025 21:11:34 -0700 (PDT)
-Received: from hsinchu16.internal.sifive.com ([210.176.154.34])
- by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-30e3354b633sm533552a91.49.2025.05.13.21.11.32
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 13 May 2025 21:11:34 -0700 (PDT)
-From: frank.chang@sifive.com
+ (Exim 4.90_1) (envelope-from <mjt@tls.msk.ru>)
+ id 1uFBgl-0002XI-Am; Wed, 14 May 2025 08:58:23 -0400
+Received: from isrv.corpit.ru ([86.62.121.231])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <mjt@tls.msk.ru>)
+ id 1uFBgi-0007pu-Qx; Wed, 14 May 2025 08:58:22 -0400
+Received: from tsrv.corpit.ru (tsrv.tls.msk.ru [192.168.177.2])
+ by isrv.corpit.ru (Postfix) with ESMTP id F271B121ADF;
+ Wed, 14 May 2025 15:57:48 +0300 (MSK)
+Received: from think4mjt.tls.msk.ru (mjtthink.wg.tls.msk.ru [192.168.177.146])
+ by tsrv.corpit.ru (Postfix) with ESMTP id 9D99C20B84D;
+ Wed, 14 May 2025 15:57:58 +0300 (MSK)
+From: Michael Tokarev <mjt@tls.msk.ru>
 To: qemu-devel@nongnu.org
-Cc: Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Weiwei Li <liwei1518@gmail.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- qemu-riscv@nongnu.org (open list:RISC-V TCG CPUs),
- Frank Chang <frank.chang@sifive.com>,
- Jerry Zhang Jian <jerry.zhangjian@sifive.com>, Jim Shu <jim.shu@sifive.com>
-Subject: [PATCH 2/2] target/riscv: Add standard B extension implied rule
-Date: Wed, 14 May 2025 12:11:18 +0800
-Message-ID: <20250514041118.1614-2-frank.chang@sifive.com>
-X-Mailer: git-send-email 2.49.0
-In-Reply-To: <20250514041118.1614-1-frank.chang@sifive.com>
-References: <20250514041118.1614-1-frank.chang@sifive.com>
+Cc: qemu-stable@nongnu.org,
+ "hemanshu.khilari.foss" <hemanshu.khilari.foss@gmail.com>,
+ qemu-riscv@nongnu.org, Alistair Francis <alistair.francis@wdc.com>,
+ Michael Tokarev <mjt@tls.msk.ru>
+Subject: [Stable-9.2.4 01/34] docs/specs/riscv-iommu: Fixed broken link to
+ external risv iommu document
+Date: Wed, 14 May 2025 15:57:23 +0300
+Message-Id: <20250514125758.92030-1-mjt@tls.msk.ru>
+X-Mailer: git-send-email 2.39.5
+In-Reply-To: <qemu-stable-9.2.4-20250514155748@cover.tls.msk.ru>
+References: <qemu-stable-9.2.4-20250514155748@cover.tls.msk.ru>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1031;
- envelope-from=frank.chang@sifive.com; helo=mail-pj1-x1031.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+Received-SPF: pass client-ip=86.62.121.231; envelope-from=mjt@tls.msk.ru;
+ helo=isrv.corpit.ru
+X-Spam_score_int: -68
+X-Spam_score: -6.9
+X-Spam_bar: ------
+X-Spam_report: (-6.9 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_HI=-5,
+ RCVD_IN_VALIDITY_CERTIFIED_BLOCKED=0.001, RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -108,53 +62,53 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Frank Chang <frank.chang@sifive.com>
+From: "hemanshu.khilari.foss" <hemanshu.khilari.foss@gmail.com>
 
-Add the missing implied rule for standard B extension.
-Standard B extension implies Zba, Zbb, Zbs extensions.
+The links to riscv iommu specification document are incorrect. This patch
+updates all the said link to point to correct location.
 
-RISC-V B spec: https://github.com/riscv/riscv-b
+Cc: qemu-stable@nongnu.org
+Cc: qemu-riscv@nongnu.org
+Resolves: https://gitlab.com/qemu-project/qemu/-/issues/2808
+Signed-off-by: hemanshu.khilari.foss <hemanshu.khilari.foss@gmail.com>
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Message-ID: <20250323063404.13206-1-hemanshu.khilari.foss@gmail.com>
+Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+(cherry picked from commit e768f0246ce2625880800a2bdce78438b5e9282c)
+Signed-off-by: Michael Tokarev <mjt@tls.msk.ru>
 
-Signed-off-by: Frank Chang <frank.chang@sifive.com>
-Reviewed-by: Jerry Zhang Jian <jerry.zhangjian@sifive.com>
-Reviewed-by: Jim Shu <jim.shu@sifive.com>
----
- target/riscv/cpu.c | 14 +++++++++++++-
- 1 file changed, 13 insertions(+), 1 deletion(-)
-
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 27edd5af62..f737b703da 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -2532,6 +2532,17 @@ static RISCVCPUImpliedExtsRule RVG_IMPLIED = {
-     },
- };
+diff --git a/docs/specs/riscv-iommu.rst b/docs/specs/riscv-iommu.rst
+index 463f4cffb6..decd81cf4f 100644
+--- a/docs/specs/riscv-iommu.rst
++++ b/docs/specs/riscv-iommu.rst
+@@ -4,7 +4,7 @@ RISC-V IOMMU support for RISC-V machines
+ ========================================
  
-+static RISCVCPUImpliedExtsRule RVB_IMPLIED = {
-+    .is_misa = true,
-+    .ext = RVB,
-+    .implied_multi_exts = {
-+        CPU_CFG_OFFSET(ext_zba), CPU_CFG_OFFSET(ext_zbb),
-+        CPU_CFG_OFFSET(ext_zbs),
-+
-+        RISCV_IMPLIED_EXTS_RULE_END
-+    },
-+};
-+
- static RISCVCPUImpliedExtsRule ZCB_IMPLIED = {
-     .ext = CPU_CFG_OFFSET(ext_zcb),
-     .implied_multi_exts = {
-@@ -2910,7 +2921,8 @@ static RISCVCPUImpliedExtsRule SSCTR_IMPLIED = {
+ QEMU implements a RISC-V IOMMU emulation based on the RISC-V IOMMU spec
+-version 1.0 `iommu1.0`_.
++version 1.0 `iommu1.0.0`_.
  
- RISCVCPUImpliedExtsRule *riscv_misa_ext_implied_rules[] = {
-     &RVA_IMPLIED, &RVD_IMPLIED, &RVF_IMPLIED,
--    &RVM_IMPLIED, &RVV_IMPLIED, &RVG_IMPLIED, NULL
-+    &RVM_IMPLIED, &RVV_IMPLIED, &RVG_IMPLIED,
-+    &RVB_IMPLIED, NULL
- };
+ The emulation includes a PCI reference device, riscv-iommu-pci, that QEMU
+ RISC-V boards can use.  The 'virt' RISC-V machine is compatible with this
+@@ -14,7 +14,7 @@ riscv-iommu-pci reference device
+ --------------------------------
  
- RISCVCPUImpliedExtsRule *riscv_multi_ext_implied_rules[] = {
+ This device implements the RISC-V IOMMU emulation as recommended by the section
+-"Integrating an IOMMU as a PCIe device" of `iommu1.0`_: a PCI device with base
++"Integrating an IOMMU as a PCIe device" of `iommu1.0.0`_: a PCI device with base
+ class 08h, sub-class 06h and programming interface 00h.
+ 
+ As a reference device it doesn't implement anything outside of the specification,
+@@ -83,7 +83,7 @@ Several options are available to control the capabilities of the device, namely:
+ - "s-stage": enable s-stage support
+ - "g-stage": enable g-stage support
+ 
+-.. _iommu1.0: https://github.com/riscv-non-isa/riscv-iommu/releases/download/v1.0/riscv-iommu.pdf
++.. _iommu1.0.0: https://github.com/riscv-non-isa/riscv-iommu/releases/download/v1.0.0/riscv-iommu.pdf
+ 
+ .. _linux-v8: https://lore.kernel.org/linux-riscv/cover.1718388908.git.tjeznach@rivosinc.com/
+ 
 -- 
-2.49.0
+2.39.5
 
 
