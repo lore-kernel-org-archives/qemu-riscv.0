@@ -4,92 +4,95 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 34366C3ABC9
-	for <qemu-riscv@archiver.kernel.org>; Thu, 15 May 2025 08:20:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 66A80C2D0CD
+	for <qemu-riscv@archiver.kernel.org>; Thu, 15 May 2025 11:12:02 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uFTnc-0005Of-5a; Thu, 15 May 2025 04:18:40 -0400
+	id 1uFWV6-0006Du-1Z; Thu, 15 May 2025 07:11:45 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <xiaoyao.li@intel.com>)
- id 1uFTmx-0004UN-90; Thu, 15 May 2025 04:17:59 -0400
-Received: from mgamail.intel.com ([198.175.65.19])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <xiaoyao.li@intel.com>)
- id 1uFTmt-0002J6-AU; Thu, 15 May 2025 04:17:58 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1747297076; x=1778833076;
- h=message-id:date:mime-version:subject:to:cc:references:
- from:in-reply-to:content-transfer-encoding;
- bh=J0d7qIZ0wAM9NtgBW44TtLkYeQrux0sEamdBuRSRMrc=;
- b=c/VW0JvykPdwzRGwubb/0nxsvznsD33wzeDXiAM8x+ElVT/VquuRrj3M
- BDT6m4pk8SOuK7wvDP+pkGHvG2URz/dhiOuUE/HcIx+ZjiRQMm6O+zuKH
- GKX7iVTKnvXvRD18QzQqrp/l+WZIxHp0phlB79lO+tMKnLLmgQLG37kKO
- fovOgg2axRi/aphjotvZLULBSSJrGgYHmXf76OA14Txy9xMn5sI2ZxE0t
- kL2G9IkoRZaXCUqzujOw5df5mygH6NIT1tQ4BwOr4TDUp3TUJZpfkAPw9
- z+7ZOFdSWAPYkD5NET5omo5teRq1XJn/VznCm+JsZZo1shBWahh2mNSMI A==;
-X-CSE-ConnectionGUID: fVcagOJGTyKnc0nqajqjwg==
-X-CSE-MsgGUID: joYNj3EFQNy8mpRwqhKQVw==
-X-IronPort-AV: E=McAfee;i="6700,10204,11433"; a="49089798"
-X-IronPort-AV: E=Sophos;i="6.15,290,1739865600"; d="scan'208";a="49089798"
-Received: from fmviesa001.fm.intel.com ([10.60.135.141])
- by orvoesa111.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 15 May 2025 01:17:50 -0700
-X-CSE-ConnectionGUID: hqga7r+1R4WuaPQz4z97Ew==
-X-CSE-MsgGUID: w3HeNXTfQGigkpkjZsqihg==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.15,290,1739865600"; d="scan'208";a="169367933"
-Received: from xiaoyaol-hp-g830.ccr.corp.intel.com (HELO [10.124.247.1])
- ([10.124.247.1])
- by smtpauth.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 15 May 2025 01:17:42 -0700
-Message-ID: <0805f8a8-1680-4962-80e3-6b43a6e344b6@intel.com>
-Date: Thu, 15 May 2025 16:17:38 +0800
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1uFWV4-00066d-4O
+ for qemu-riscv@nongnu.org; Thu, 15 May 2025 07:11:42 -0400
+Received: from mail-vk1-xa31.google.com ([2607:f8b0:4864:20::a31])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1uFWV1-0005TY-R4
+ for qemu-riscv@nongnu.org; Thu, 15 May 2025 07:11:41 -0400
+Received: by mail-vk1-xa31.google.com with SMTP id
+ 71dfb90a1353d-5240a432462so587513e0c.1
+ for <qemu-riscv@nongnu.org>; Thu, 15 May 2025 04:11:39 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=ventanamicro.com; s=google; t=1747307498; x=1747912298; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=iJ5uLHQR2o5tqtu2r5fD3H76NuaknHqx3UXQ5rPSCEE=;
+ b=DW47O6al2IsAdggS1p/6+CVhIjrul2KzDEbBhMa/QqW3B7aQxQFah6ZmbLZgsZMQXp
+ g+kVQku1yRDiW7osYqmUcpeZxc8O1sXw5oEtDFltGDmqKqWHTvMTVGT3V/MnYgaYtf/V
+ JuIEPHVEy81byS2PitqVvXKASBIJF7vR/bOXuMPOsM3weSBao+jwjccj5itjbXoTH6w2
+ skXeZIOkiaaW5Ka8i7qdIjQfE05WeykmI0oSXEpbtz5f4EGqlKtprBhxtfBqYCHTed/5
+ mRBfDwfiYI9BcpV1UXTnjKAXQF4+PGAowgfR+fENcveU/tu5uNKZgrZENuyYBi6487ac
+ pGGg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1747307498; x=1747912298;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=iJ5uLHQR2o5tqtu2r5fD3H76NuaknHqx3UXQ5rPSCEE=;
+ b=BpqITVK+X+wU6PLQzqtlQ6cEjbwOc7HJOOBsZVDYxKjRAWXMCnLEzKZLNIeglLusOM
+ LV7YuQGfX10ajt+SABWDSGXRuorJarTfstX1NkGQliCwrLACKCOEXP/C7upnR1ng0MQW
+ NDl4/kkGs6cNTs8tvAUH+5oQGM/zja/PSpazCG8WkqCxoVwn0ATuMSJsTdCa9cx4HeNT
+ GuypFjQQf1TzF4jhzEB2i4470puAnUIOglFruHQgCvwz4FQunDK0DzssirBULtw5/EnP
+ 9M3Y6XfJ+e8vh4THFQqkkcLf10v0xUZetIa3YOa156O8bgUzWtoFynTDGWulsWKzliCv
+ v7dg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCX8xyQo412Ji0Xc7xrZ44TwDp4fpI5ecGVh92DoOZ6SdG9Zg3yoV9fFRWAWSMpLSGjXL5Us6HBWPLle@nongnu.org
+X-Gm-Message-State: AOJu0Yz6q9WLMSOneMmdL8yN+Jzca71KB92W144IyNuIl3tXSihqdPhF
+ sHnD0IRy1m37i22kNGATYycH7B4IZhpBdO7/GOauz7sy0cjP5ODT+xQHrrJOXcglD+g=
+X-Gm-Gg: ASbGncuyG1sTSVr8NVuJbg0VUoGFwEscV32DMHsn+RKXTW7ALc3E8s6p1PXJ6x1A8UP
+ LuMt88eCbz8vut5rWooUs9BkKNMCyeGZOdyIPL13i+EnDJEgTun6978ezeO6mVPueHfLFi5NDDL
+ ZkY4gvLjlNNjWa/pLF5N+AUsPCgiDrTE2sm9k5QrLjm/KmlsKjGNHw4f8RANFDpw/dqS8nyhki3
+ QY+itXN7wAzOIjEksivvtQ6d17EEz57UXKCBxBdI2oWaeBnjdFe7byWYXrczzJfjyxmpVT3xOos
+ z7oVQkUG1Vx5jgLpblb9N7YTU0Isb7qEOUw3ZdoNuy6gDgxJa0RxNjLi1EPkgVr1SrfQPBjO2Jb
+ pnl42vH0Hpiw7H+BDm6jM3B/PAVTLpQ==
+X-Google-Smtp-Source: AGHT+IEuh+CM1GikSMpXFJGO8XYjIsmPmxK4STzIxSdNIthzKu1AFZ+qo5Ct7au4nIYDKRYfC64H7w==
+X-Received: by 2002:ac5:ce87:0:b0:527:b804:ff78 with SMTP id
+ 71dfb90a1353d-52da902fc0emr2244992e0c.1.1747307498501; 
+ Thu, 15 May 2025 04:11:38 -0700 (PDT)
+Received: from ?IPV6:2804:7f0:bcc0:906e:57d5:dca2:1ab3:20de?
+ ([2804:7f0:bcc0:906e:57d5:dca2:1ab3:20de])
+ by smtp.gmail.com with ESMTPSA id
+ 71dfb90a1353d-52c53865814sm11023821e0c.38.2025.05.15.04.11.35
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 15 May 2025 04:11:38 -0700 (PDT)
+Message-ID: <fee247fc-d7b4-4ac6-8723-28feb3a2cfdb@ventanamicro.com>
+Date: Thu, 15 May 2025 08:11:34 -0300
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 06/27] hw/nvram/fw_cfg: Rename fw_cfg_init_mem_wide()
- -> fw_cfg_init_mem_dma()
-To: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- qemu-devel@nongnu.org
-Cc: Richard Henderson <richard.henderson@linaro.org>, kvm@vger.kernel.org,
- Sergio Lopez <slp@redhat.com>, Gerd Hoffmann <kraxel@redhat.com>,
- Peter Maydell <peter.maydell@linaro.org>, Laurent Vivier
- <lvivier@redhat.com>, Jiaxun Yang <jiaxun.yang@flygoat.com>,
- Yi Liu <yi.l.liu@intel.com>, "Michael S. Tsirkin" <mst@redhat.com>,
- Eduardo Habkost <eduardo@habkost.net>,
- Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Marcelo Tosatti <mtosatti@redhat.com>, qemu-riscv@nongnu.org,
- Weiwei Li <liwei1518@gmail.com>, Amit Shah <amit@kernel.org>,
- Zhao Liu <zhao1.liu@intel.com>, Yanan Wang <wangyanan55@huawei.com>,
- Helge Deller <deller@gmx.de>, Palmer Dabbelt <palmer@dabbelt.com>,
- Ani Sinha <anisinha@redhat.com>, Igor Mammedov <imammedo@redhat.com>,
- Fabiano Rosas <farosas@suse.de>, Paolo Bonzini <pbonzini@redhat.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- =?UTF-8?Q?Cl=C3=A9ment_Mathieu--Drif?= <clement.mathieu--drif@eviden.com>,
- qemu-arm@nongnu.org, =?UTF-8?Q?Marc-Andr=C3=A9_Lureau?=
- <marcandre.lureau@redhat.com>, Huacai Chen <chenhuacai@kernel.org>,
- Jason Wang <jasowang@redhat.com>
-References: <20250508133550.81391-1-philmd@linaro.org>
- <20250508133550.81391-7-philmd@linaro.org>
+Subject: Re: [PATCH 1/2] target/riscv: Add the implied rule for G extension
+To: frank.chang@sifive.com, qemu-devel@nongnu.org
+Cc: Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, Weiwei Li
+ <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ "open list:RISC-V TCG CPUs" <qemu-riscv@nongnu.org>,
+ Jim Shu <jim.shu@sifive.com>
+References: <20250514041118.1614-1-frank.chang@sifive.com>
 Content-Language: en-US
-From: Xiaoyao Li <xiaoyao.li@intel.com>
-In-Reply-To: <20250508133550.81391-7-philmd@linaro.org>
+From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+In-Reply-To: <20250514041118.1614-1-frank.chang@sifive.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=198.175.65.19; envelope-from=xiaoyao.li@intel.com;
- helo=mgamail.intel.com
-X-Spam_score_int: -50
-X-Spam_score: -5.1
-X-Spam_bar: -----
-X-Spam_report: (-5.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-1.686,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- HK_RANDOM_ENVFROM=0.001, HK_RANDOM_FROM=1, RCVD_IN_DNSWL_MED=-2.3,
- RCVD_IN_VALIDITY_CERTIFIED_BLOCKED=0.001, RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::a31;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-vk1-xa31.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -105,88 +108,61 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 5/8/2025 9:35 PM, Philippe Mathieu-Daudé wrote:
-> "wide" in fw_cfg_init_mem_wide() means "DMA support".
-> Rename for clarity.
 
-PS: at the time when fw_cfg_init_mem_wide() was first introcuded,
-'wide' was exactly for data_width. see commit 6c87e3d5967a.
 
-> Suggested-by: Zhao Liu <zhao1.liu@intel.com>
-> Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
-
-with the usage in hw/loongarch/fw_cfg.c fixed,
-
-Reviewed-by: Xiaoyao Li <xiaoyao.li@intel.com>
-
-> ---
->   include/hw/nvram/fw_cfg.h | 6 +++---
->   hw/arm/virt.c             | 2 +-
->   hw/nvram/fw_cfg.c         | 6 +++---
->   hw/riscv/virt.c           | 4 ++--
->   4 files changed, 9 insertions(+), 9 deletions(-)
+On 5/14/25 1:11 AM, frank.chang@sifive.com wrote:
+> From: Jim Shu <jim.shu@sifive.com>
 > 
-> diff --git a/include/hw/nvram/fw_cfg.h b/include/hw/nvram/fw_cfg.h
-> index d5161a79436..c4c49886754 100644
-> --- a/include/hw/nvram/fw_cfg.h
-> +++ b/include/hw/nvram/fw_cfg.h
-> @@ -309,9 +309,9 @@ FWCfgState *fw_cfg_init_io_dma(uint32_t iobase, uint32_t dma_iobase,
->                                   AddressSpace *dma_as);
->   FWCfgState *fw_cfg_init_mem_nodma(hwaddr ctl_addr, hwaddr data_addr,
->                                     unsigned data_width);
-> -FWCfgState *fw_cfg_init_mem_wide(hwaddr ctl_addr,
-> -                                 hwaddr data_addr, uint32_t data_width,
-> -                                 hwaddr dma_addr, AddressSpace *dma_as);
-> +FWCfgState *fw_cfg_init_mem_dma(hwaddr ctl_addr,
-> +                                hwaddr data_addr, uint32_t data_width,
-> +                                hwaddr dma_addr, AddressSpace *dma_as);
+> Add the missing implied rule from G to imafd_zicsr_zifencei.
+> 
+> Signed-off-by: Jim Shu <jim.shu@sifive.com>
+> Reviewed-by: Frank Chang <frank.chang@sifive.com>
+> ---
+
+
+Patch LGTM. I believe this will deprecate everything we're doing in
+riscv_cpu_validate_g() in tcg-cpu.c and we should remove it in this same
+patch.
+
+
+Thanks,
+
+Daniel
+
+>   target/riscv/cpu.c | 14 +++++++++++++-
+>   1 file changed, 13 insertions(+), 1 deletion(-)
+> 
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index d92874baa0..27edd5af62 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -2520,6 +2520,18 @@ static RISCVCPUImpliedExtsRule RVV_IMPLIED = {
+>       },
+>   };
 >   
->   FWCfgState *fw_cfg_find(void);
->   bool fw_cfg_dma_enabled(void *opaque);
-> diff --git a/hw/arm/virt.c b/hw/arm/virt.c
-> index 9a6cd085a37..7583f0a85d9 100644
-> --- a/hw/arm/virt.c
-> +++ b/hw/arm/virt.c
-> @@ -1361,7 +1361,7 @@ static FWCfgState *create_fw_cfg(const VirtMachineState *vms, AddressSpace *as)
->       FWCfgState *fw_cfg;
->       char *nodename;
+> +static RISCVCPUImpliedExtsRule RVG_IMPLIED = {
+> +    .is_misa = true,
+> +    .ext = RVG,
+> +    .implied_misa_exts = RVI | RVM | RVA | RVF | RVD,
+> +    .implied_multi_exts = {
+> +        CPU_CFG_OFFSET(ext_zicsr),
+> +        CPU_CFG_OFFSET(ext_zifencei),
+> +
+> +        RISCV_IMPLIED_EXTS_RULE_END
+> +    },
+> +};
+> +
+>   static RISCVCPUImpliedExtsRule ZCB_IMPLIED = {
+>       .ext = CPU_CFG_OFFSET(ext_zcb),
+>       .implied_multi_exts = {
+> @@ -2898,7 +2910,7 @@ static RISCVCPUImpliedExtsRule SSCTR_IMPLIED = {
 >   
-> -    fw_cfg = fw_cfg_init_mem_wide(base + 8, base, 8, base + 16, as);
-> +    fw_cfg = fw_cfg_init_mem_dma(base + 8, base, 8, base + 16, as);
->       fw_cfg_add_i16(fw_cfg, FW_CFG_NB_CPUS, (uint16_t)ms->smp.cpus);
+>   RISCVCPUImpliedExtsRule *riscv_misa_ext_implied_rules[] = {
+>       &RVA_IMPLIED, &RVD_IMPLIED, &RVF_IMPLIED,
+> -    &RVM_IMPLIED, &RVV_IMPLIED, NULL
+> +    &RVM_IMPLIED, &RVV_IMPLIED, &RVG_IMPLIED, NULL
+>   };
 >   
->       nodename = g_strdup_printf("/fw-cfg@%" PRIx64, base);
-> diff --git a/hw/nvram/fw_cfg.c b/hw/nvram/fw_cfg.c
-> index 4067324fb09..51b028b5d0a 100644
-> --- a/hw/nvram/fw_cfg.c
-> +++ b/hw/nvram/fw_cfg.c
-> @@ -1087,9 +1087,9 @@ static FWCfgState *fw_cfg_init_mem_internal(hwaddr ctl_addr,
->       return s;
->   }
->   
-> -FWCfgState *fw_cfg_init_mem_wide(hwaddr ctl_addr,
-> -                                 hwaddr data_addr, uint32_t data_width,
-> -                                 hwaddr dma_addr, AddressSpace *dma_as)
-> +FWCfgState *fw_cfg_init_mem_dma(hwaddr ctl_addr,
-> +                                hwaddr data_addr, uint32_t data_width,
-> +                                hwaddr dma_addr, AddressSpace *dma_as)
->   {
->       assert(dma_addr && dma_as);
->       return fw_cfg_init_mem_internal(ctl_addr, data_addr, data_addr,
-> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-> index be1bf0f6468..3ddea18c93e 100644
-> --- a/hw/riscv/virt.c
-> +++ b/hw/riscv/virt.c
-> @@ -1266,8 +1266,8 @@ static FWCfgState *create_fw_cfg(const MachineState *ms)
->       hwaddr base = virt_memmap[VIRT_FW_CFG].base;
->       FWCfgState *fw_cfg;
->   
-> -    fw_cfg = fw_cfg_init_mem_wide(base + 8, base, 8, base + 16,
-> -                                  &address_space_memory);
-> +    fw_cfg = fw_cfg_init_mem_dma(base + 8, base, 8, base + 16,
-> +                                 &address_space_memory);
->       fw_cfg_add_i16(fw_cfg, FW_CFG_NB_CPUS, (uint16_t)ms->smp.cpus);
->   
->       return fw_cfg;
+>   RISCVCPUImpliedExtsRule *riscv_multi_ext_implied_rules[] = {
 
 
