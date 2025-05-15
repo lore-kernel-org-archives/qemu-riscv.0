@@ -4,96 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E660CC3ABC9
-	for <qemu-riscv@archiver.kernel.org>; Thu, 15 May 2025 11:12:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0E89DC2D0CD
+	for <qemu-riscv@archiver.kernel.org>; Thu, 15 May 2025 12:37:34 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uFWVg-0007As-MB; Thu, 15 May 2025 07:12:20 -0400
+	id 1uFXpR-0003vA-H9; Thu, 15 May 2025 08:36:49 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1uFWVU-00073g-2W
- for qemu-riscv@nongnu.org; Thu, 15 May 2025 07:12:09 -0400
-Received: from mail-vk1-xa2e.google.com ([2607:f8b0:4864:20::a2e])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1uFWVS-0005Uz-8r
- for qemu-riscv@nongnu.org; Thu, 15 May 2025 07:12:07 -0400
-Received: by mail-vk1-xa2e.google.com with SMTP id
- 71dfb90a1353d-52c58804270so572551e0c.0
- for <qemu-riscv@nongnu.org>; Thu, 15 May 2025 04:12:05 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1747307525; x=1747912325; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=T7apgF3B5elLfEeTOpMUwbUwu7aE/NwrgsqOEWNeupk=;
- b=OlFJ+qtKzU/ZwoibC9hrE+Ckgkt0pel51Jk3SfCC/vjZtHceRSTLznQwIatpV9xUnO
- CcvZhcCxpNtL/l+rWgLWsHAhwIZHf7sArlV73KreDFjoPGAelyghZbdY1jIONPXCyEiI
- 2qgD8HgAfxQp68PSphrjtrT9/WqseaacpWsOut8hjWkIQ5el4/+McBMtWAbgzC0EqfbV
- ZfM1Qi0l0q5guuWFPyh4ZdNAQDGwVc77kZEgGJMwVvqIBcTYidJZwsSbJx3b18MRp12y
- 8jM2kHi/mpCXkQ42j84YRHvyOCOkrUexDIbBU/2pWOqi4/d+lTusiJkW/5xPJLLOxO/a
- AGuw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1747307525; x=1747912325;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=T7apgF3B5elLfEeTOpMUwbUwu7aE/NwrgsqOEWNeupk=;
- b=doNI9C6Krhot7Sp+FO06jpf/c9ngRyPIawQEXLCupwwAaM9lHkGwSvGc/pHyv0gUW9
- nj7Th0ybevDGFigqEa+u+8Jx15GjkBY+dRKbgEi1dwo1v7AwtBYRT5ngNZpTAHu58Xdv
- 5Cs5QXb1KA7E1XYg/xuQCH67m1T8bC5zz5uotbMq04uz8a0NbyX8aVHLh73lyYrHcsb1
- YcL78GRLCKct0nKMxV49OPUbvbLwmBe+0JJiwG4XoGEGLsxAzwAXg/oIpzmaTd52jFhY
- 2kpwkSdBuUFEJOX9Bru0pTnrr7CZZPPCtxTu18E74mqb4uGsTqYDS48V5glb2QeDiX4y
- mtTw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCULtF21Ic6sTA1D2/SLLCLMLM7CiOAk9MH2FjWSu1xghQW7Mt8nzkxE5ULci3iXXIXH3yIRjeuB7W7y@nongnu.org
-X-Gm-Message-State: AOJu0YymWtqv/r5t1e9mvtTpWcT30RrTyFbWQ1p0fIpYv72A5QT5U8GT
- eM5z9q0xg+ypTjxUbugLPfdMloH+kZDSQ6j81F2NHlIB0H5bLJJdv6mBL+HOLAU=
-X-Gm-Gg: ASbGncuJi0qGxAi1GKw0BlE4JrBo9kIYFAisoUOzK41Noffo0QfeaP728B1/cA4IeNi
- slstnE4fbPrnzMfcq5Wgh7VU9jb4uD+ZOdMQy7nr69nXNYVAqCn2ngzckScyzH8srFWaYUzyiTZ
- SoOBOHitkE6aByplrGgbKTtdPhlv+hackCrUx2HGTaGifwh9Lx/aRuAzJIkr8jna4S1Bo8U+Zo6
- GDZZ3HAM4QJgC2rwQprQlgw/4sGaHstHo1eTgfBqG2Mghq0eCfD7wXmlij3xH5gbJMDxnFKks1W
- 1ql8t319lnpsqDbkbDBQ33BnSqRqLpWhkGjNuDvDRVEhUWvNTb6eS+J1gvMdlBX0p7dn7vZHTBK
- 93xUm5jQiVwkMkd4hOePS95TTSCAJsw==
-X-Google-Smtp-Source: AGHT+IG2DgRU4X7VASV3ZE9/53KfSr++MpYsB+kcllScLhxRRmcaRofHzp+BUFmqa2viV/v+ePLzcg==
-X-Received: by 2002:a05:6122:4594:b0:526:2210:5b68 with SMTP id
- 71dfb90a1353d-52d9c5a5a4dmr6577514e0c.4.1747307525041; 
- Thu, 15 May 2025 04:12:05 -0700 (PDT)
-Received: from ?IPV6:2804:7f0:bcc0:906e:57d5:dca2:1ab3:20de?
- ([2804:7f0:bcc0:906e:57d5:dca2:1ab3:20de])
- by smtp.gmail.com with ESMTPSA id
- 71dfb90a1353d-52db096d621sm508995e0c.20.2025.05.15.04.12.01
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 15 May 2025 04:12:03 -0700 (PDT)
-Message-ID: <fd781319-d0ab-43e5-bfd2-f256151f1982@ventanamicro.com>
-Date: Thu, 15 May 2025 08:12:00 -0300
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/2] target/riscv: Add standard B extension implied rule
-To: frank.chang@sifive.com, qemu-devel@nongnu.org
-Cc: Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, Weiwei Li
- <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- "open list:RISC-V TCG CPUs" <qemu-riscv@nongnu.org>,
- Jerry Zhang Jian <jerry.zhangjian@sifive.com>, Jim Shu <jim.shu@sifive.com>
-References: <20250514041118.1614-1-frank.chang@sifive.com>
- <20250514041118.1614-2-frank.chang@sifive.com>
-Content-Language: en-US
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <20250514041118.1614-2-frank.chang@sifive.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::a2e;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-vk1-xa2e.google.com
+ (Exim 4.90_1) (envelope-from <me@linux.beauty>)
+ id 1uFXpM-0003sO-Tz; Thu, 15 May 2025 08:36:44 -0400
+Received: from sender4-op-o15.zoho.com ([136.143.188.15])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <me@linux.beauty>)
+ id 1uFXpK-0006xc-1b; Thu, 15 May 2025 08:36:44 -0400
+ARC-Seal: i=1; a=rsa-sha256; t=1747312559; cv=none; 
+ d=zohomail.com; s=zohoarc; 
+ b=mJI7QE8vwde86Qo38uW5D6665a7D6zQ/BVn1bDgSWq0OsYac6nHB8e/JoRjLSXbG5xt/s6kn5ZQy0n1gIIxVdZL9mfXIrJlYspy3qZvN2JTU/ZPJzYmC9q2qCEIdInpuWL4CjAPFMtYFc48ctBOvlUpN9tNh9nZSECrDTx9uIe0=
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com;
+ s=zohoarc; t=1747312559;
+ h=Content-Type:Content-Transfer-Encoding:Date:Date:From:From:MIME-Version:Message-ID:Subject:Subject:To:To:Message-Id:Reply-To:Cc;
+ bh=DhzVf+/zd/L811b/GSupjdEZC8EpQtL3QJUTQukMbIw=; 
+ b=jnB/yQ4yAOMhCr0uETg6sfy0kkQtC3XZeW9oNnzlbBCH1rozlud59e8+UcI9S0gn7EGpUTqxzNC0mdyojk17bIv3huIfIjyS33QvPe8M2lXCzWLwGP1aClz4nli5U+G0nMnvcoiZstP/IFn80lOILnG0DwAZnEyNGRf+ZC0o34c=
+ARC-Authentication-Results: i=1; mx.zohomail.com;
+ dkim=pass  header.i=linux.beauty;
+ spf=pass  smtp.mailfrom=me@linux.beauty;
+ dmarc=pass header.from=<me@linux.beauty>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1747312559; 
+ s=zmail; d=linux.beauty; i=me@linux.beauty;
+ h=Date:Date:Message-ID:From:From:To:To:Subject:Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:Reply-To:Cc;
+ bh=DhzVf+/zd/L811b/GSupjdEZC8EpQtL3QJUTQukMbIw=;
+ b=KVBl7vQolcvK5GQOEmkMlTAqOOhzdKjyKQAlfPkIUbv3xwj9GPwvMB9t5cM2DUJu
+ ec0PpFvf4DExolA8Q3Lprhtoybiq0Iks4mCuGmnwUrV/OwLiAXlJWCMfC10FpWVOVXx
+ CLh/5sDRQopsIwmruolDe0QoKJGfkTvSclaE1iok=
+Received: by mx.zohomail.com with SMTPS id 1747312555901507.4337961815878;
+ Thu, 15 May 2025 05:35:55 -0700 (PDT)
+Date: Thu, 15 May 2025 20:35:45 +0800
+Message-ID: <87msberqzi.wl-me@linux.beauty>
+From: Li Chen <me@linux.beauty>
+To: "Peter Maydell" <peter.maydell@linaro.org>,"Shannon Zhao"
+ <shannon.zhaosl@gmail.com>,"Michael S. Tsirkin"
+ <mst@redhat.com>,"Igor Mammedov" <imammedo@redhat.com>,"Ani Sinha"
+ <anisinha@redhat.com>,"Eduardo Habkost"
+ <eduardo@habkost.net>,"Marcel Apfelbaum"
+ <marcel.apfelbaum@gmail.com>,=?ISO-8859-1?Q?=22Philippe_Mathieu-Daud=E9?=
+ =?ISO-8859-1?Q?=22?= <philmd@linaro.org>,"Yanan Wang"
+ <wangyanan55@huawei.com>,"Zhao Liu" <zhao1.liu@intel.com>,"Song Gao"
+ <gaosong@loongson.cn>,"Jiaxun Yang" <jiaxun.yang@flygoat.com>,"Sunil V L"
+ <sunilvl@ventanamicro.com>,"Palmer Dabbelt"
+ <palmer@dabbelt.com>,"Alistair Francis"
+ <alistair.francis@wdc.com>,"Weiwei Li" <liwei1518@gmail.com>,"qemu-arm"
+ <qemu-arm@nongnu.org>,"qemu-devel" <qemu-devel@nongnu.org>,"qemu-riscv"
+ <qemu-riscv@nongnu.org>
+Subject: [PATCH V3 0/4] acpi: Add machine option to disable SPCR table
+User-Agent: Wanderlust/2.15.9 (Almost Unreal) SEMI-EPG/1.14.7 (Harue)
+ FLIM-LB/1.14.9 (=?ISO-8859-4?Q?Goj=F2?=) APEL-LB/10.8 EasyPG/1.0.0
+ Emacs/30.1 (x86_64-pc-linux-gnu) MULE/6.0 (HANACHIRUSATO)
+MIME-Version: 1.0 (generated by SEMI-EPG 1.14.7 - "Harue")
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
+X-ZohoMailClient: External
+Received-SPF: pass client-ip=136.143.188.15; envelope-from=me@linux.beauty;
+ helo=sender4-op-o15.zoho.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H5=0.001, RCVD_IN_MSPIKE_WL=0.001,
+ RCVD_IN_VALIDITY_CERTIFIED_BLOCKED=0.001, RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -110,56 +90,47 @@ Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 
+This series introduces a new machine option, spcr=3Don|off, allowing users
+to disable the ACPI SPCR (Serial Port Console Redirection) table.
+By default, SPCR is enabled. Disabling it can help ensure that the guest's
+console behavior is determined solely by kernel command-line parameters
+on arch like arm64, avoiding unintended serial console configurations impos=
+ed
+ by firmware.
 
-On 5/14/25 1:11 AM, frank.chang@sifive.com wrote:
-> From: Frank Chang <frank.chang@sifive.com>
-> 
-> Add the missing implied rule for standard B extension.
-> Standard B extension implies Zba, Zbb, Zbs extensions.
-> 
-> RISC-V B spec: https://github.com/riscv/riscv-b
-> 
-> Signed-off-by: Frank Chang <frank.chang@sifive.com>
-> Reviewed-by: Jerry Zhang Jian <jerry.zhangjian@sifive.com>
-> Reviewed-by: Jim Shu <jim.shu@sifive.com>
-> ---
+Also add tests on AArch64 and RISC-V virt machines using TCG and UEFI boot.
 
-Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Changes since v2:
+- Omit UART device from DSDT and SPCR construction if no serial device is p=
+resent,
+  as suggested by Philippe Mathieu-Daud=E9.
+- Add Reviewed-by from Gavin Shan <gshan@redhat.com> for the first patch an=
+d fix style issue.
 
->   target/riscv/cpu.c | 14 +++++++++++++-
->   1 file changed, 13 insertions(+), 1 deletion(-)
-> 
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index 27edd5af62..f737b703da 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -2532,6 +2532,17 @@ static RISCVCPUImpliedExtsRule RVG_IMPLIED = {
->       },
->   };
->   
-> +static RISCVCPUImpliedExtsRule RVB_IMPLIED = {
-> +    .is_misa = true,
-> +    .ext = RVB,
-> +    .implied_multi_exts = {
-> +        CPU_CFG_OFFSET(ext_zba), CPU_CFG_OFFSET(ext_zbb),
-> +        CPU_CFG_OFFSET(ext_zbs),
-> +
-> +        RISCV_IMPLIED_EXTS_RULE_END
-> +    },
-> +};
-> +
->   static RISCVCPUImpliedExtsRule ZCB_IMPLIED = {
->       .ext = CPU_CFG_OFFSET(ext_zcb),
->       .implied_multi_exts = {
-> @@ -2910,7 +2921,8 @@ static RISCVCPUImpliedExtsRule SSCTR_IMPLIED = {
->   
->   RISCVCPUImpliedExtsRule *riscv_misa_ext_implied_rules[] = {
->       &RVA_IMPLIED, &RVD_IMPLIED, &RVF_IMPLIED,
-> -    &RVM_IMPLIED, &RVV_IMPLIED, &RVG_IMPLIED, NULL
-> +    &RVM_IMPLIED, &RVV_IMPLIED, &RVG_IMPLIED,
-> +    &RVB_IMPLIED, NULL
->   };
->   
->   RISCVCPUImpliedExtsRule *riscv_multi_ext_implied_rules[] = {
+Changes since v1:
+- Add bios-tables-test for RISC-V and ARM as suggested by=20
+- Add Acked-by from Michael S. Tsirkin for the first patch
+- Add Reviewed-by from Bibo Mao for the first patch
+
+Li Chen (4):
+  acpi: Add machine option to disable SPCR table
+  tests/qtest/bios-tables-test: Add test for disabling SPCR on AArch64
+  tests/qtest/bios-tables-test: Add test for disabling SPCR on RISC-V
+  acpi/virt: suppress UART device & SPCR when guest has no serial
+    hardware
+
+ hw/arm/virt-acpi-build.c       | 18 ++++++++++-----
+ hw/core/machine.c              | 22 ++++++++++++++++++
+ hw/loongarch/virt-acpi-build.c |  4 +++-
+ hw/riscv/virt-acpi-build.c     |  9 ++++++--
+ include/hw/boards.h            |  1 +
+ include/system/system.h        |  2 ++
+ qemu-options.hx                |  5 ++++
+ system/vl.c                    |  5 ++++
+ tests/qtest/bios-tables-test.c | 42 ++++++++++++++++++++++++++++++++++
+ 9 files changed, 99 insertions(+), 9 deletions(-)
+
+--=20
+2.49.0
 
 
