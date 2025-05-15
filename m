@@ -4,89 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 08074C3ABDA
-	for <qemu-riscv@archiver.kernel.org>; Wed, 14 May 2025 21:34:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 91012C3ABC9
+	for <qemu-riscv@archiver.kernel.org>; Thu, 15 May 2025 08:05:27 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uFJjq-0005vq-NH; Wed, 14 May 2025 17:34:06 -0400
+	id 1uFTaK-0004xu-Lj; Thu, 15 May 2025 04:05:01 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1uFJjp-0005vG-0L
- for qemu-riscv@nongnu.org; Wed, 14 May 2025 17:34:05 -0400
-Received: from mail-ua1-x934.google.com ([2607:f8b0:4864:20::934])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1uFJjn-00062E-BX
- for qemu-riscv@nongnu.org; Wed, 14 May 2025 17:34:04 -0400
-Received: by mail-ua1-x934.google.com with SMTP id
- a1e0cc1a2514c-879ed601971so68474241.1
- for <qemu-riscv@nongnu.org>; Wed, 14 May 2025 14:34:02 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1747258442; x=1747863242; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=0CKhmihup1Qwffg7785kc7S9/MLcRLKMAG1DNsHXFpw=;
- b=LTsDYIA5OcxoICNUP0IFcYn4xE/FHJqUsPXDq1okvekz55q8w1GvnjHabZpJKBEnb2
- JcM3UL+DgLjh6D5UKRj49ysRAIAcGG/xpz98KL8OmmD4yFIXFVfVrHtsrhBsXPYXZVBV
- diXNq1URFTDocaMZnmym/KvaaIl2XDinul/4xU/KxBAQQJQ5/cy9emCfzqOZR0fHkL/g
- BrwC+HrMOtvqa6kpJSqllEnwp82//esjwE/kthMCDDOSyslYwtimX8Ca1MZtVVHreNB5
- r7rDDD0ZwFTwreRoWDuMRWkCTGab6PVyU3xn5fcTYsMgdoX5a8WpduKd2z++1yW6gVjU
- 0Rmg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1747258442; x=1747863242;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=0CKhmihup1Qwffg7785kc7S9/MLcRLKMAG1DNsHXFpw=;
- b=f8i3PrlG+MH/YN6+k4UOTgAJBGkMGUvwoIrV7YXhX7sYSIBpjAu1QpoEEm+lPjFyre
- jJ4dgAPjU+JzrZqcygXmgSfpKsPDU02V7fQe5aDjDJonxhAEJvc7DC6iNp7w5/x782io
- hVDS91U8Rv+BSAhqG6p+3gjASNZJj0YaQBUiml/wjAbVliREANKKXq7aZyFzVdr3WnJu
- ThIIXQDzVg4rNymRuNov4IF1XFVBKXoErxOR9wZmzzh+EDaNeeuiPwGghhr+XpwkuOEF
- fYMOoiNSf8OcLJLzD7HeIByy2qRP6GY6GPQvyMWG7+3y8YFRPxfG1bn4gUgdTrw2JfGV
- bx5w==
-X-Gm-Message-State: AOJu0YzxCuahm+ys9jv+meaHs1PrYks5MYuKw5r2rf8nGv22m3LKGRZU
- MW3Y1Zl1oOTsYAqitmvpgqOlKriQUbqCz7dZok3SoH9GO9NqY+r5qnTUZKr4/30=
-X-Gm-Gg: ASbGnctqF/GGQyanp1CCimwBeDMTtibfNdvs1rji7OVBlgO4ExS3ZcDOkwaFuUTA1bg
- zImGM86QLGqBTZKr9vzWonlpjersUIuYdR/tHIrTdGJ3CHPFxvmLYkAzjvR448Q8Znw0kd975FY
- I1vmDeHOecsg9i5TvqTlE8a2jngyonGgiWfRtVqPJToL+chjvmxTKZX3/PuTxuFlWieZVRk+oZ/
- d2doW6Exaasr95L6JqYPF0EMYclOFDG8Get9DfBL3aYtDtE0kucfKS3vccPs1PLmpNM/lBxd+aB
- /u7AICKe0A2d/LtBDR2eiZZFB/a5ugDE2xE5kF2KR2mI4cCBC3+Y3muFg5FhIZTdyE0jSCjDXPN
- d
-X-Google-Smtp-Source: AGHT+IEsmntuqiPCQELWVImqdxhiy+GKc7xaYngAHzB41ue/+g8E7pGci8OoKUkeepwdBWJteXcXGA==
-X-Received: by 2002:a05:6102:2d09:b0:4de:1ab2:ac67 with SMTP id
- ada2fe7eead31-4df953f7c08mr102747137.2.1747258441793; 
- Wed, 14 May 2025 14:34:01 -0700 (PDT)
-Received: from [192.168.68.110] ([152.234.125.33])
- by smtp.gmail.com with ESMTPSA id
- 71dfb90a1353d-52c5375fde5sm10467747e0c.27.2025.05.14.14.34.00
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 14 May 2025 14:34:01 -0700 (PDT)
-Message-ID: <b1b72b45-d1fe-4ff4-8649-cbfd32e5f8a8@ventanamicro.com>
-Date: Wed, 14 May 2025 18:33:58 -0300
+ (Exim 4.90_1) (envelope-from <xiaoyao.li@intel.com>)
+ id 1uFTa5-0004lh-VE; Thu, 15 May 2025 04:04:42 -0400
+Received: from mgamail.intel.com ([198.175.65.13])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <xiaoyao.li@intel.com>)
+ id 1uFTa3-0000B9-Bw; Thu, 15 May 2025 04:04:41 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+ d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+ t=1747296279; x=1778832279;
+ h=message-id:date:mime-version:subject:to:cc:references:
+ from:in-reply-to:content-transfer-encoding;
+ bh=x2mLUxA+et8iwA9rDXZwVtIWILZ108fGO+5QLFn1iKw=;
+ b=lAQ/TDksNEMGj0AfVXn10TGVhINKBhOSdHC06yje6lWBtWC5/zX5QPha
+ 3APyMGJUsSM0k9Bh1fby5rQD0jWpLIjRxJfagOaQgG0VFxsIBftJYvwLk
+ mShhuquzCzuAHB2/bkUp0Ou4Ql9H0gffun49vsrLPUIl5Mrr0vrYJ0tem
+ Gwned3pNxvsjrw7Ehr3itBpRzez+3BymRDP2epPy7ibLxnrE64YAhNJVw
+ 7yQ+IdXGbgScoHi3/xenek8eS6DBug+TNXIDEo0hR+udXP4f5ciErb00P
+ Rpsyx/2zqTJa0Ru1+hRAVBHh4cy5EWnNWhCAyB1Xkqpk9Exao4YLsBDvr g==;
+X-CSE-ConnectionGUID: stH7jMFJQYOS1Ih7Kob94A==
+X-CSE-MsgGUID: uv7k5YXRSEW5MJJoZsSbFA==
+X-IronPort-AV: E=McAfee;i="6700,10204,11433"; a="60230381"
+X-IronPort-AV: E=Sophos;i="6.15,290,1739865600"; d="scan'208";a="60230381"
+Received: from fmviesa006.fm.intel.com ([10.60.135.146])
+ by orvoesa105.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 15 May 2025 01:04:35 -0700
+X-CSE-ConnectionGUID: i46b0jPrQnaeMMhU2eB1pw==
+X-CSE-MsgGUID: ax5soz81Qsezcgk15CnXCA==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.15,290,1739865600"; d="scan'208";a="138177647"
+Received: from xiaoyaol-hp-g830.ccr.corp.intel.com (HELO [10.124.247.1])
+ ([10.124.247.1])
+ by fmviesa006-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 15 May 2025 01:04:27 -0700
+Message-ID: <1c347ea7-1e33-420e-a666-cd02573d9089@intel.com>
+Date: Thu, 15 May 2025 16:04:23 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 7/7] target/riscv: Fix write_misa vs aligned next_pc
-To: Richard Henderson <richard.henderson@linaro.org>, qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com
-References: <20250425152311.804338-1-richard.henderson@linaro.org>
- <20250425152311.804338-8-richard.henderson@linaro.org>
+Subject: Re: [PATCH v4 03/27] hw/nvram/fw_cfg: Rename fw_cfg_init_mem() with
+ '_nodma' suffix
+To: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
+ qemu-devel@nongnu.org
+Cc: Richard Henderson <richard.henderson@linaro.org>, kvm@vger.kernel.org,
+ Sergio Lopez <slp@redhat.com>, Gerd Hoffmann <kraxel@redhat.com>,
+ Peter Maydell <peter.maydell@linaro.org>, Laurent Vivier
+ <lvivier@redhat.com>, Jiaxun Yang <jiaxun.yang@flygoat.com>,
+ Yi Liu <yi.l.liu@intel.com>, "Michael S. Tsirkin" <mst@redhat.com>,
+ Eduardo Habkost <eduardo@habkost.net>,
+ Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Marcelo Tosatti <mtosatti@redhat.com>, qemu-riscv@nongnu.org,
+ Weiwei Li <liwei1518@gmail.com>, Amit Shah <amit@kernel.org>,
+ Zhao Liu <zhao1.liu@intel.com>, Yanan Wang <wangyanan55@huawei.com>,
+ Helge Deller <deller@gmx.de>, Palmer Dabbelt <palmer@dabbelt.com>,
+ Ani Sinha <anisinha@redhat.com>, Igor Mammedov <imammedo@redhat.com>,
+ Fabiano Rosas <farosas@suse.de>, Paolo Bonzini <pbonzini@redhat.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ =?UTF-8?Q?Cl=C3=A9ment_Mathieu--Drif?= <clement.mathieu--drif@eviden.com>,
+ qemu-arm@nongnu.org, =?UTF-8?Q?Marc-Andr=C3=A9_Lureau?=
+ <marcandre.lureau@redhat.com>, Huacai Chen <chenhuacai@kernel.org>,
+ Jason Wang <jasowang@redhat.com>
+References: <20250508133550.81391-1-philmd@linaro.org>
+ <20250508133550.81391-4-philmd@linaro.org>
 Content-Language: en-US
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <20250425152311.804338-8-richard.henderson@linaro.org>
+From: Xiaoyao Li <xiaoyao.li@intel.com>
+In-Reply-To: <20250508133550.81391-4-philmd@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::934;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-ua1-x934.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+Received-SPF: pass client-ip=198.175.65.13; envelope-from=xiaoyao.li@intel.com;
+ helo=mgamail.intel.com
+X-Spam_score_int: -50
+X-Spam_score: -5.1
+X-Spam_bar: -----
+X-Spam_report: (-5.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-1.686,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ HK_RANDOM_ENVFROM=0.001, HK_RANDOM_FROM=1, RCVD_IN_DNSWL_MED=-2.3,
+ RCVD_IN_VALIDITY_CERTIFIED_BLOCKED=0.001, RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -102,116 +105,77 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Richard,
-
-On 4/25/25 12:23 PM, Richard Henderson wrote:
-> Do not examine a random host return address, but
-> properly compute the next pc for the guest cpu.
+On 5/8/2025 9:35 PM, Philippe Mathieu-Daudé wrote:
+> Rename fw_cfg_init_mem() as fw_cfg_init_mem_nodma()
+> to distinct with the DMA version (currently named
+> fw_cfg_init_mem_wide).
 > 
-> Fixes: f18637cd611 ("RISC-V: Add misa runtime write support")
-> Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
+> Suggested-by: Zhao Liu <zhao1.liu@intel.com>
+> Signed-off-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 > ---
->   target/riscv/csr.c | 22 +++++++++++++++++-----
->   1 file changed, 17 insertions(+), 5 deletions(-)
+>   include/hw/nvram/fw_cfg.h | 3 ++-
+>   hw/hppa/machine.c         | 2 +-
+>   hw/nvram/fw_cfg.c         | 7 +++----
+>   3 files changed, 6 insertions(+), 6 deletions(-)
 > 
-> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-> index a663f527a4..85f9b4c3d2 100644
-> --- a/target/riscv/csr.c
-> +++ b/target/riscv/csr.c
-> @@ -30,6 +30,8 @@
->   #include "exec/icount.h"
->   #include "qemu/guest-random.h"
->   #include "qapi/error.h"
-> +#include "tcg/insn-start-words.h"
-> +#include "internals.h"
->   #include <stdbool.h>
+> diff --git a/include/hw/nvram/fw_cfg.h b/include/hw/nvram/fw_cfg.h
+> index d41b9328fd1..d5161a79436 100644
+> --- a/include/hw/nvram/fw_cfg.h
+> +++ b/include/hw/nvram/fw_cfg.h
+> @@ -307,7 +307,8 @@ bool fw_cfg_add_file_from_generator(FWCfgState *s,
 >   
->   /* CSR function table public API */
-> @@ -2099,6 +2101,19 @@ static RISCVException read_misa(CPURISCVState *env, int csrno,
->       return RISCV_EXCP_NONE;
+>   FWCfgState *fw_cfg_init_io_dma(uint32_t iobase, uint32_t dma_iobase,
+>                                   AddressSpace *dma_as);
+> -FWCfgState *fw_cfg_init_mem(hwaddr ctl_addr, hwaddr data_addr);
+> +FWCfgState *fw_cfg_init_mem_nodma(hwaddr ctl_addr, hwaddr data_addr,
+> +                                  unsigned data_width);
+>   FWCfgState *fw_cfg_init_mem_wide(hwaddr ctl_addr,
+>                                    hwaddr data_addr, uint32_t data_width,
+>                                    hwaddr dma_addr, AddressSpace *dma_as);
+> diff --git a/hw/hppa/machine.c b/hw/hppa/machine.c
+> index dacedc5409c..0d768cb90b0 100644
+> --- a/hw/hppa/machine.c
+> +++ b/hw/hppa/machine.c
+> @@ -201,7 +201,7 @@ static FWCfgState *create_fw_cfg(MachineState *ms, PCIBus *pci_bus,
+>       int btlb_entries = HPPA_BTLB_ENTRIES(&cpu[0]->env);
+>       int len;
+>   
+> -    fw_cfg = fw_cfg_init_mem(addr, addr + 4);
+> +    fw_cfg = fw_cfg_init_mem_nodma(addr, addr + 4, 1);
+
+It does additional job to replace 
+fw_cfg_data_mem_ops.valid.max_access_size with a hardcode 1.
+
+It needs clarification at least in commit message that doing it is safe 
+that fw_cfg_data_mem_ops.valid.max_access_size is not changed by other code.
+
+It's even better to put this in a seperate patch.
+
+For the pure rename part:
+
+Reviewed-by: Xiaoyao Li <xiaoyao.li@intel.com>
+
+>       fw_cfg_add_i16(fw_cfg, FW_CFG_NB_CPUS, ms->smp.cpus);
+>       fw_cfg_add_i16(fw_cfg, FW_CFG_MAX_CPUS, HPPA_MAX_CPUS);
+>       fw_cfg_add_i64(fw_cfg, FW_CFG_RAM_SIZE, ms->ram_size);
+> diff --git a/hw/nvram/fw_cfg.c b/hw/nvram/fw_cfg.c
+> index 54cfa07d3f5..10f8f8db86f 100644
+> --- a/hw/nvram/fw_cfg.c
+> +++ b/hw/nvram/fw_cfg.c
+> @@ -1087,11 +1087,10 @@ FWCfgState *fw_cfg_init_mem_wide(hwaddr ctl_addr,
+>       return s;
 >   }
 >   
-> +static target_ulong get_next_pc(CPURISCVState *env, uintptr_t ra)
-> +{
-> +    uint64_t data[TARGET_INSN_START_WORDS];
-
-Isn't this 'INSN_START_WORDS'?  I'm seeing code in i386 that is similar
-to what we're doing here and it's using INSN_START_WORDS:
-
-====
-static inline target_ulong get_memio_eip(CPUX86State *env)
-{
-#ifdef CONFIG_TCG
-     uint64_t data[INSN_START_WORDS];
-     CPUState *cs = env_cpu(env);
-
-     if (!cpu_unwind_state_data(cs, cs->mem_io_pc, data)) {
-         return env->eip;
-     }
-
-     /* Per x86_restore_state_to_opc. */
-     if (tcg_cflags_has(cs, CF_PCREL)) {
-         return (env->eip & TARGET_PAGE_MASK) | data[0];
-     } else {
-         return data[0] - env->segs[R_CS].base;
-     }
-#else
-     qemu_build_not_reached();
-#endif
-}
-====
-
-I'm asking because the build in Alistair's branch is failing with this error:
-
-
-../target/riscv/csr.c: In function ‘get_next_pc’:
-../target/riscv/csr.c:2106:19: error: ‘TARGET_INSN_START_WORDS’ undeclared (first use in this function); did you mean ‘TCG_INSN_START_WORDS’?
-  2106 |     uint64_t data[TARGET_INSN_START_WORDS];
-       |                   ^~~~~~~~~~~~~~~~~~~~~~~
-       |                   TCG_INSN_START_WORDS
-../target/riscv/csr.c:2106:19: note: each undeclared identifier is reported only once for each function it appears in
-../target/riscv/csr.c:2106:14: error: unused variable ‘data’ [-Werror=unused-variable]
-  2106 |     uint64_t data[TARGET_INSN_START_WORDS];
-       |              ^~~~
-../target/riscv/csr.c:2115:1: error: control reaches end of non-void function [-Werror=return-type]
-  2115 | }
-       | ^
-cc1: all warnings being treated as errors
-[2206/3000] Compiling C object libqemu-riscv
-
-
-Changing TARGET_INSN_START_WORDS to INSN_START_WORDS fixes the build issue.
-Thanks,
-
-
-Daniel
-
-> +
-> +    /* Outside of a running cpu, env contains the next pc. */
-> +    if (ra == 0 || !cpu_unwind_state_data(env_cpu(env), ra, data)) {
-> +        return env->pc;
-> +    }
-> +
-> +    /* Within unwind data, [0] is pc and [1] is the opcode. */
-> +    return data[0] + insn_len(data[1]);
-> +}
-> +
->   static RISCVException write_misa(CPURISCVState *env, int csrno,
->                                    target_ulong val, uintptr_t ra)
+> -FWCfgState *fw_cfg_init_mem(hwaddr ctl_addr, hwaddr data_addr)
+> +FWCfgState *fw_cfg_init_mem_nodma(hwaddr ctl_addr, hwaddr data_addr,
+> +                                  unsigned data_width)
 >   {
-> @@ -2114,11 +2129,8 @@ static RISCVException write_misa(CPURISCVState *env, int csrno,
->       /* Mask extensions that are not supported by this hart */
->       val &= env->misa_ext_mask;
+> -    return fw_cfg_init_mem_wide(ctl_addr, data_addr,
+> -                                fw_cfg_data_mem_ops.valid.max_access_size,
+> -                                0, NULL);
+> +    return fw_cfg_init_mem_wide(ctl_addr, data_addr, data_width, 0, NULL);
+>   }
 >   
-> -    /*
-> -     * Suppress 'C' if next instruction is not aligned
-> -     * TODO: this should check next_pc
-> -     */
-> -    if ((val & RVC) && (GETPC() & ~3) != 0) {
-> +    /* Suppress 'C' if next instruction is not aligned. */
-> +    if ((val & RVC) && (get_next_pc(env, ra) & ~3) != 0) {
->           val &= ~RVC;
->       }
 >   
 
 
