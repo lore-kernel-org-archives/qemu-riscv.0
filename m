@@ -4,78 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AC39CC3ABD8
-	for <qemu-riscv@archiver.kernel.org>; Mon, 19 May 2025 03:25:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2F702C2D0CD
+	for <qemu-riscv@archiver.kernel.org>; Mon, 19 May 2025 03:25:48 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uGr7q-00077n-Um; Sun, 18 May 2025 23:25:14 -0400
+	id 1uGr87-0007CS-5V; Sun, 18 May 2025 23:25:31 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1uGr7o-000778-3o; Sun, 18 May 2025 23:25:12 -0400
-Received: from mail-ua1-x934.google.com ([2607:f8b0:4864:20::934])
+ id 1uGr84-0007CF-Pb; Sun, 18 May 2025 23:25:28 -0400
+Received: from mail-vs1-xe2d.google.com ([2607:f8b0:4864:20::e2d])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1uGr7k-0007V1-85; Sun, 18 May 2025 23:25:11 -0400
-Received: by mail-ua1-x934.google.com with SMTP id
- a1e0cc1a2514c-87bf5c80f56so1452706241.2; 
- Sun, 18 May 2025 20:25:07 -0700 (PDT)
+ id 1uGr83-0007XS-9x; Sun, 18 May 2025 23:25:28 -0400
+Received: by mail-vs1-xe2d.google.com with SMTP id
+ ada2fe7eead31-4e2881202f0so313094137.0; 
+ Sun, 18 May 2025 20:25:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1747625106; x=1748229906; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1747625126; x=1748229926; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=m8CE9Or7O+vz8tkllB6X9o67rFt86YkC2U/ryCCZRvM=;
- b=imnIpXXkfdYOL6roWL+/TAI3eVxOpv3QDzvAzTvYTNoeDeOQNGeGaKKVVL0oo8eNPX
- uVBM4aeM9OXyApVw2+xu1HCyLV1uuQfWsOyUHAauVeCMQkeiVY+anmcZzRS1FqMFJR7n
- AaeGihAT6/OK++J1vAkH9OdH4WPV+q5nKs5Yi+jhXzT6SgqE3d+YwKYJ/eAR/qh98Ha1
- 9k6b1770XurwkH3ft3xKufHvZmN8BmGIHXQSZkVjzNsFb800LGtrloGgZKpB85pBt8or
- IdwAGwunnoVMsVrIxSmjIyN6uSq/bNKRl8z8NERqMw9h4Qc8UPvNTE+cF+mSoJBPCaCL
- XhTg==
+ bh=L9wg+Kox9TIDdtB4fL1r/gilyrEEOLXQjnByBP5Jono=;
+ b=FydXW84DJRjcvX1s+Yg6Pls5b19Al2NyPcClbkf3IOh2wIjWUNjyOFhvYtS0hoNLNY
+ XiC5L5v/9ak1YuzWqd9LSVNcQq0+oHtPPqSUs//fx6in/f36HDa+Gf44LSpArupYWipo
+ zr+Q01Vc0gVF0G8t7ZvPxQpyalEUlU3W/oGlDc0q8V4pJC85zcC5jJ0pWrpcbvdLJHjX
+ Iv9zxR5yqgHkN1j/EEzWl8toBHkeF28EJsJXRaoIGpN07y5RctLom8BCwp4GuGLZ6EgO
+ dnwn+gzsVlfYXLuLQNsIw+q1qEgHjEWY57YBvyB1VeAHlxogm+y/R1Penr+JfvG1OXzT
+ /tJw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1747625106; x=1748229906;
+ d=1e100.net; s=20230601; t=1747625126; x=1748229926;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=m8CE9Or7O+vz8tkllB6X9o67rFt86YkC2U/ryCCZRvM=;
- b=pcd3JvVWYNzimxcfNSFkMnsqqHXVbX8BlFc1/cMlFLg3kPPocvZdQugDSmvL6ifmzJ
- HZQd4FVi2afGSid4hXeo16Cx4eQVxl0C+B+i2g+GDn1I83cyTJMPqwVx3IZHmbvSUf7B
- iw6/ghznTxsyMDt9VVYWT9bV+c5A0GhMyH/dW7+qK0bE0RvmvT2YuJZyzRkMwCEdXmzU
- kwZPIPP2YcUW+fl6Ujno6crzBLJGjSPVM93gKUNxcmB0twereH5j+qcZ66BKUyX9161i
- 5SJ7OP1CBOC8TPjeJ/LXm/wReCmpSajl5iIvc9dh//JpPW8b0vIiNHiKbr6PKbm7pqma
- V2Hg==
+ bh=L9wg+Kox9TIDdtB4fL1r/gilyrEEOLXQjnByBP5Jono=;
+ b=LPZUO6/ncOwoohcrWF+ywlj3dSXN3hE1OBEL1kH+95geVwca6kR3yywQPJ7ubRolpp
+ grU5eYWv7RIJTkPw4EZ12xm5l04bDYwYolXv+o+jN0DGGuy0ScG7Ij2x/TDOqF74uiog
+ MJOCf3KwPnDNYvpfp/7hy8che14ntE+Qd0YmOOnqEphDb88Lnl9WapHp7xrVKNG5BT20
+ ywTuMbj/qcG/82vgt4CeWyNmNzacdOdkUsu3n6nocls2suHzDzx3RbE8gKlGFpNWWnRg
+ AuTrpOAeZQ4Ak0bk1/69MhuYklgE9gWXEpW+x7YBpjAuH3/+tnYbiZfWQDfkpDJ0ridp
+ wwkg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXjp2uZ44NkFCaVLK0PFzRcjfQLuFOdE5iqrueskmQtkFT6VQH0wkU65804Rhs1meHOMgPG+KAOhZbS@nongnu.org
-X-Gm-Message-State: AOJu0YyazMP6R5HWRJgzoZ2NucPZwtYTANwXpsTRkdORvrXpNjCOJm7e
- yMcu3SCmJyVMs8fV0urzHCGX6Vl/56KLflc5HJSBioOuXqSRxUXXvE4/JMaAqchHvxJdvobvxBc
- no0VlhgfChmo0XkGcjf2wUuizFMNBTyc=
-X-Gm-Gg: ASbGncu7O1jGk/5n/VZArIMTKxBJGGFLbfcfSE91ZFQirAUmSD3RnV/Cx4VUsBixwBj
- 8xV4Puav4uO1Ga+eIXl1ajtmnSLJIIVGgPDgjsEUCLfvjVWUgish1N8Y4iCS3+1M1W+nALZxa3O
- Qecw+y6rctLvbFXcgeTu+S4TVURqPGQWQitcT8sfMPd+5/ybFlrBRrc4ETutNty8DsBIF23ImT7
- A==
-X-Google-Smtp-Source: AGHT+IHBbzN+zqF50I66dPGdaXMjERnuZRaRXsBEH2pRmU37LnvOGM5s6lSdAsQS/wA4z8SSMm47PlJOY5yDPSgFnJw=
-X-Received: by 2002:a05:6102:1514:b0:4bb:e36f:6a35 with SMTP id
- ada2fe7eead31-4dfa6bd805bmr10325499137.14.1747625106491; Sun, 18 May 2025
- 20:25:06 -0700 (PDT)
+ AJvYcCXuV1ar7MP42JMuDmNyPw535rE7+lWsaMFJ3UQ3tKaV0Ol6oW88rsggTujTRabaRYBVyvruuVe/Vqvp@nongnu.org
+X-Gm-Message-State: AOJu0Yx+6AvrIabPV4d0R0Rkc8HaXBf0TuSOZHh1Rbk27Zi+JCKk1UNo
+ vinPEU/54O9+TuFdPSPsWBXhCGfzGiPG9h2RQAqLmnmKwOCaQkbQJiYS0rDtmQbbopgTAFiH7JD
+ i+whTEt363IrZpYWR2kQvYhR6b/nhNPk=
+X-Gm-Gg: ASbGncsUNtxBnU/K3R9/XXhBxh+KYk2nRFLPzicFocbO23naHR4HdefNXo4Ca5KyBXh
+ utts/hq2NmFNsMREPf4OJ6PlhLlNz0nXbG0T6L+HYshfhkhnzSl4QPOCOSc8Inz1HlmsegO5duU
+ ZtYsvlSZV+vz34MdP40fEKETewReZK9L3YyqdqUQ7FbdCXoyZz1LR78zJTMpgW9jE=
+X-Google-Smtp-Source: AGHT+IGBd8Q8aOevw7/x5Zd+TFrVOwtthu0Pe+Nhew3YiVUJSa4yJWpkIRihEkChW5JMZXjQgdKaR0fKLQ3ndlaFxkA=
+X-Received: by 2002:a05:6102:3ca1:b0:4de:81a:7d42 with SMTP id
+ ada2fe7eead31-4dfa6af4f05mr12728927137.1.1747625125970; Sun, 18 May 2025
+ 20:25:25 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250428085632.3102-1-mengzhuo@iscas.ac.cn>
-In-Reply-To: <20250428085632.3102-1-mengzhuo@iscas.ac.cn>
+References: <20250409025131.3670-1-jim.shu@sifive.com>
+In-Reply-To: <20250409025131.3670-1-jim.shu@sifive.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 19 May 2025 13:24:39 +1000
-X-Gm-Features: AX0GCFu4_fZRcSz5ZGSczjma6QtvrgKv0Y_A0quh2lSWBxrN2-q6_LQk4_SU86A
-Message-ID: <CAKmqyKPMwvDV=VYSkSMDC90jqQZ5FynRns8yttyrbJEZDeK2hA@mail.gmail.com>
-Subject: Re: [PATCH v2] target/riscv/kvm: add satp mode for host cpu
-To: Meng Zhuo <mengzhuo@iscas.ac.cn>
-Cc: qemu-devel@nongnu.org, Alistair Francis <alistair.francis@wdc.com>, 
- Weiwei Li <liwei1518@gmail.com>, qemu-riscv@nongnu.org, 
+Date: Mon, 19 May 2025 13:24:59 +1000
+X-Gm-Features: AX0GCFv3F7DMDWfwzaRIrcik1wRm1SeIliFbjuKCxzRzcU4RLIFEkLzOw6hYpoo
+Message-ID: <CAKmqyKOPOJku+102LtcgYQrt-AhawnWm2QgDQk0tx=iDGnG9_g@mail.gmail.com>
+Subject: Re: [PATCH v2 0/4] Several sstc extension fixes
+To: Jim Shu <jim.shu@sifive.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, 
  Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Weiwei Li <liwei1518@gmail.com>,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>, 
  Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::934;
- envelope-from=alistair23@gmail.com; helo=mail-ua1-x934.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::e2d;
+ envelope-from=alistair23@gmail.com; helo=mail-vs1-xe2d.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -99,106 +99,37 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Mon, Apr 28, 2025 at 6:57=E2=80=AFPM Meng Zhuo <mengzhuo@iscas.ac.cn> wr=
-ote:
+On Wed, Apr 9, 2025 at 12:53=E2=80=AFPM Jim Shu <jim.shu@sifive.com> wrote:
 >
-> This patch adds host satp mode while kvm/host cpu satp mode is not
-> set.
+> This patch series contains several sstc fixes:
 >
-> Resolves: https://gitlab.com/qemu-project/qemu/-/issues/2931
-> Signed-off-by: Meng Zhuo <mengzhuo@iscas.ac.cn>
+> (1) Writing to ACLINT mtime should also update the period of S/VS-mode
+>     timer, just like M-mode timer.
+> (2) VSTIP bit of $mip CSR should check both M-mode and H-mode STCE.
+> (3) Writing to STCE bit may enable/disable sstc extension in S/VS-mode,
+>     which should update the timer and IRQ pending bits.
+>
+>
+> Jim Shu (4):
+>   target/riscv: Add the checking into stimecmp write function.
+>   hw/intc: riscv_aclint: Fix mtime write for sstc extension
+>   target/riscv: Fix VSTIP bit in sstc extension.
+>   target/riscv: Enable/Disable S/VS-mode Timer when STCE bit is changed
 
 Can you please rebase this on
 https://github.com/alistair23/qemu/tree/riscv-to-apply.next
 
 Alistair
 
-> ---
->  target/riscv/cpu.c         |  3 +--
->  target/riscv/cpu.h         |  1 +
->  target/riscv/kvm/kvm-cpu.c | 20 +++++++++++++++++++-
->  3 files changed, 21 insertions(+), 3 deletions(-)
 >
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index 2b830b3317..98f78886e6 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -434,8 +434,7 @@ const char *satp_mode_str(uint8_t satp_mode, bool is_=
-32_bit)
->      g_assert_not_reached();
->  }
+>  hw/intc/riscv_aclint.c     |  5 +++
+>  target/riscv/csr.c         | 53 ++++++++++++++++++++++++++++++-
+>  target/riscv/time_helper.c | 65 ++++++++++++++++++++++++++++++++++++--
+>  target/riscv/time_helper.h |  1 +
+>  4 files changed, 121 insertions(+), 3 deletions(-)
 >
-> -static void set_satp_mode_max_supported(RISCVCPU *cpu,
-> -                                        uint8_t satp_mode)
-> +void set_satp_mode_max_supported(RISCVCPU *cpu, uint8_t satp_mode)
->  {
->      bool rv32 =3D riscv_cpu_mxl(&cpu->env) =3D=3D MXL_RV32;
->      const bool *valid_vm =3D rv32 ? valid_vm_1_10_32 : valid_vm_1_10_64;
-> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> index 167909c89b..44318d2e97 100644
-> --- a/target/riscv/cpu.h
-> +++ b/target/riscv/cpu.h
-> @@ -916,6 +916,7 @@ char *riscv_cpu_get_name(RISCVCPU *cpu);
->
->  void riscv_cpu_finalize_features(RISCVCPU *cpu, Error **errp);
->  void riscv_add_satp_mode_properties(Object *obj);
-> +void set_satp_mode_max_supported(RISCVCPU *cpu, uint8_t satp_mode);
->  bool riscv_cpu_accelerator_compatible(RISCVCPU *cpu);
->
->  /* CSR function table */
-> diff --git a/target/riscv/kvm/kvm-cpu.c b/target/riscv/kvm/kvm-cpu.c
-> index 5315134e08..8f465119f5 100644
-> --- a/target/riscv/kvm/kvm-cpu.c
-> +++ b/target/riscv/kvm/kvm-cpu.c
-> @@ -953,6 +953,23 @@ static void kvm_riscv_destroy_scratch_vcpu(KVMScratc=
-hCPU *scratch)
->      close(scratch->kvmfd);
->  }
->
-> +static void kvm_riscv_init_satp_mode(RISCVCPU *cpu, KVMScratchCPU *kvmcp=
-u)
-> +{
-> +    CPURISCVState *env =3D &cpu->env;
-> +    struct kvm_one_reg reg;
-> +    int ret;
-> +    uint64_t val;
-> +
-> +    reg.id =3D RISCV_CONFIG_REG(env, satp_mode);
-> +    reg.addr =3D (uint64_t)&val;
-> +    ret =3D ioctl(kvmcpu->cpufd, KVM_GET_ONE_REG, &reg);
-> +    if (ret !=3D 0) {
-> +        error_report("Unable to retrieve satp from host, error %d", ret)=
-;
-> +    }
-> +
-> +    set_satp_mode_max_supported(cpu, val);
-> +}
-> +
->  static void kvm_riscv_init_machine_ids(RISCVCPU *cpu, KVMScratchCPU *kvm=
-cpu)
->  {
->      CPURISCVState *env =3D &cpu->env;
-> @@ -1212,6 +1229,7 @@ static void riscv_init_kvm_registers(Object *cpu_ob=
-j)
->      kvm_riscv_init_machine_ids(cpu, &kvmcpu);
->      kvm_riscv_init_misa_ext_mask(cpu, &kvmcpu);
->      kvm_riscv_init_multiext_cfg(cpu, &kvmcpu);
-> +    kvm_riscv_init_satp_mode(cpu, &kvmcpu);
->
->      kvm_riscv_destroy_scratch_vcpu(&kvmcpu);
->  }
-> @@ -1891,7 +1909,7 @@ static bool kvm_cpu_realize(CPUState *cs, Error **e=
-rrp)
->          }
->      }
->
-> -   return true;
-> +    return true;
->  }
->
->  void riscv_kvm_cpu_finalize_features(RISCVCPU *cpu, Error **errp)
 > --
-> 2.39.5
+> 2.17.1
 >
 >
 
