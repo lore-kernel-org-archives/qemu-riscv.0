@@ -4,68 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C77C5C2D0CD
-	for <qemu-riscv@archiver.kernel.org>; Mon, 19 May 2025 04:09:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 957B1C2D0CD
+	for <qemu-riscv@archiver.kernel.org>; Mon, 19 May 2025 04:19:20 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uGrnA-0004pm-RT; Mon, 19 May 2025 00:07:59 -0400
+	id 1uGry5-0008EW-7w; Mon, 19 May 2025 00:19:13 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <sunilvl@ventanamicro.com>)
- id 1uGrmu-0004lN-Oo
- for qemu-riscv@nongnu.org; Mon, 19 May 2025 00:07:41 -0400
-Received: from mail-pj1-x102b.google.com ([2607:f8b0:4864:20::102b])
+ id 1uGrjN-0003LW-U0
+ for qemu-riscv@nongnu.org; Mon, 19 May 2025 00:04:02 -0400
+Received: from mail-pg1-x52d.google.com ([2607:f8b0:4864:20::52d])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <sunilvl@ventanamicro.com>)
- id 1uGrmq-00048v-3D
- for qemu-riscv@nongnu.org; Mon, 19 May 2025 00:07:40 -0400
-Received: by mail-pj1-x102b.google.com with SMTP id
- 98e67ed59e1d1-30ecc762cb7so811996a91.1
- for <qemu-riscv@nongnu.org>; Sun, 18 May 2025 21:07:35 -0700 (PDT)
+ id 1uGrjL-0003fc-Nw
+ for qemu-riscv@nongnu.org; Mon, 19 May 2025 00:04:01 -0400
+Received: by mail-pg1-x52d.google.com with SMTP id
+ 41be03b00d2f7-b1ff9b276c2so2330837a12.1
+ for <qemu-riscv@nongnu.org>; Sun, 18 May 2025 21:03:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1747627654; x=1748232454; darn=nongnu.org;
- h=in-reply-to:content-transfer-encoding:content-disposition
- :mime-version:references:message-id:subject:cc:to:from:date:from:to
- :cc:subject:date:message-id:reply-to;
- bh=+3ZuYq+x9kFtr1OyrTJo9g69tzuSK4CN4Scb9G+xpT4=;
- b=ecWvLcz9yJU73dQUKak6cGbG9PzVHO7b/onV529vjqAGYTVrOTIEdi4P2tz994ppHy
- TkNb8YyFBkqkFy+ysxvp+vV2W0OmDmpVcaRTNj2wRglA30gP1y3sMJ/7qTjjwpr2Y9Q1
- NUBMvAG0o3y/AJF3rrUnjdxWXjUEwkMRYXGYm5bOuDfspXk2+UhVsZ2SR1GMGTLwGuHK
- nowTnATcVqMQSR26osWFC+4lw6kASmf9FcrS3vXMRByNmWuUk75/+aMmWUalcMfXmHUx
- hEFax46KSeg/PMfUhstOTwIYk53Uy1KnVA/oYjxWKPjYfU2mizSyX/bD/TkSGwj0RIFf
- +rdw==
+ d=ventanamicro.com; s=google; t=1747627437; x=1748232237; darn=nongnu.org;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=02NqxBW3qQdmYXTr1KkhoGNaQoa1PsgXXqCCGD+KoUg=;
+ b=eK+6yZUZ88ISyGlLp9PiEypTnO0AGoyABY+ol9jN9SBbCeCL0/4Um3NdyMeeuHHcce
+ HR8dWQxQgauaf2On8flUediWmxez4qIMPscB7UenEvhC9MJkVxnAxCIlZYvEzOu2rGMX
+ MN85Fq18PsuG9S6AGkf98MNUCX4tlDy1sEQWVJjbZQuR6+QMLfH/a56N3scqAUEXi2jr
+ aM+4WrzSboGP9RxRYRhOvo/u6k80yQ/C1mqIVR6/X9RSfOeKnmM1hp0tFq+hT3fqScfS
+ 9mj/SrgEmcHGMMkoZKH+p9mgs+Nrs+RJ2JBTLFb15JG3ko5UZqlfRG3BOichXCv7ITAI
+ Bk/g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1747627654; x=1748232454;
- h=in-reply-to:content-transfer-encoding:content-disposition
- :mime-version:references:message-id:subject:cc:to:from:date
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=+3ZuYq+x9kFtr1OyrTJo9g69tzuSK4CN4Scb9G+xpT4=;
- b=PQH3ycwak0zu3aYtdJKuTY1fI2bK8/Pajam9D51274Ppl9H2F2IaX0eBMKpSUaNCHg
- Q5fucKbi7teODxoxnaBiPY8q4S8viApTpa8DRD5bzYgpP4vfqXaYC5aQOEOZ1aWUhy6D
- E7QsIgjCfWcHqRY74Lx2I7scjiUcpSjR6sBHxOl5PnXl1mHbqeEOQc2QyKci8ERgzKyB
- qXpowC7icCdAaY4odLI2cfrygg7FyVB2lvWie06iAismVJaZBY+U+KIL3qDzHHC9kiP3
- sG/pUiBGI7xhc9GUsRYN9R5RWFHoFNR3uOSzp9lkk45GO0CLqmZW74FBOvkAJNd1UH3M
- 2D7w==
+ d=1e100.net; s=20230601; t=1747627438; x=1748232238;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=02NqxBW3qQdmYXTr1KkhoGNaQoa1PsgXXqCCGD+KoUg=;
+ b=q3cy1edA4p1EDuBQ8yoVpmXQ3fSvDk5py8qyMcpldglcuysiJxhLAGEDiIARAMZpS8
+ t2mP5p6F+THHnyZmfQ1+Qlilpxfhp4R0a8U34fx8qiPlm7Be5AlnV93viQHuG+nnwQuf
+ m51AmM33QZKEqGtqei2Qo2350STfi0W18KACbNRk7rKoyISAAyCtW8mWfUt6tJJKsJhJ
+ FiT2VjkD+Fhy9SQ2p/CBTtXu5MveplYbWzd7EkS8aMap8L5b3D32ltSXLPEQnkeNnwJ/
+ 8lJvR5qHJD0NmbTPjyvcXEbLsuJDIlOrq5Jm6Ftqi5BlAAIz/rwMUhUGVCsNiJqQZRJr
+ 3lcA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCU8yLTODK0esEQf14Uu0wyypIpQpp9++mL5VseVWbe9+Kkt+UTM95Isl0JCxnIigLS4YLyjVFc4KWET@nongnu.org
-X-Gm-Message-State: AOJu0YycYAtp9arLXroB4Jw3PiY9qQOP5FR3IGClNMY38L4gBjEWezr+
- jzlyv8LAHQXkv4HCgwdFP934yR2E95EXA6qeAB7UlgSC+xCww3pHrnzJEBPaelcXT9c=
-X-Gm-Gg: ASbGncsCFf37RdObvwEWfKi1hpfvTSHVzPJGv07x2fk1pfKDbgmWGRY2qHgWViY/iJn
- D711UOUfz24hir2Vxf1FeBW/lVGEazjg1EMB7GoGE23L57mKkpO5MEuQzvaXhuGESL4GzmYyJJm
- C3L6pi3wSa8skshFc93xX+rkZP9eFMKkz80S+wBYKDzN/NlNaBlvFNjsUnhIOXz7VAHVHQMk3Z7
- e6Z7R5dLI3d+bMzltyFlCfXkTWk0Al27fP04ekMzq8m+gU4zjPI7/tlsLloS7l/UcbOdX4/Gp5p
- mpprT/RmYoU6wt1ji4vCSOrwQuDlV8L/J9mV4D9eT8dQKqhgStOvUyREoXk=
-X-Google-Smtp-Source: AGHT+IHUx0vbqdxGAcB2VDXygAGOHP7VwURn9nh/+eiscdMXWc1t6XJc3MYLezARPdRzs/vWsHAVKQ==
-X-Received: by 2002:a17:90b:3bce:b0:2fe:b907:5e5a with SMTP id
- 98e67ed59e1d1-30e4db3d8c5mr22296901a91.10.1747627654078; 
- Sun, 18 May 2025 21:07:34 -0700 (PDT)
+ AJvYcCVsEBoVuG24WQGJMLI0sA3Af7BafAgmuzLWRQoAYMfEszCoa5d8fX6eOqjzC1/e2t2MWz71FxRsDIYF@nongnu.org
+X-Gm-Message-State: AOJu0YxwTOazy2H+jJIrUJOqDXAcW9WvIM40/yKUALizcZupGBWYpFKe
+ f3SdeOgv+lkq/FO52Mb27CJowdO7LTGS6qG9K6u9aZjfjVs+mfs3OCBINKfon1E2/zo=
+X-Gm-Gg: ASbGnct0v9/qKOfyMQq4dVFPmVZ+uf5CckL5WxY8QmuK2m6478Lky7Ve8CRnFxy2/Hf
+ syKYnKexf2i0x7bjLL6l0Ws7dIbBc4dpWB9ZcSnm31nm8kp0pPwe7HlgWt3UKD4sCzzzqwm5hvF
+ uxNzc88/KumhhWT8Kb3UIrnbC/oA2jwmAEQxeLu59jRzzzRlbdi8LiAJ+PGpqz1qTRm3bytsuCK
+ JcWisVYgBxZyF87bghJEosACnlY1lxG6exSvDkDVVpzasz4M7IZxMc25de1Qf1xnTslx9pZv0wx
+ vdUK7lcIyhZ8YrYBupcADxyqoPDkq4PZHPmjkBXiXNlxnGAeBC+mH4QQZs0=
+X-Google-Smtp-Source: AGHT+IFtzBUirzOOsBz7D+ouMbSTc/hyVnclkhndAVDkubanaRBQPwqJF0zLVFRd/AhHbO5UMmjnrA==
+X-Received: by 2002:a17:903:24e:b0:22e:4a6c:fef2 with SMTP id
+ d9443c01a7336-231d45ae355mr183382195ad.53.1747627437632; 
+ Sun, 18 May 2025 21:03:57 -0700 (PDT)
 Received: from sunil-laptop ([103.97.166.196])
  by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-30e7d591862sm5590679a91.47.2025.05.18.21.07.27
+ d9443c01a7336-231d4ed546fsm50138045ad.231.2025.05.18.21.03.48
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 18 May 2025 21:07:33 -0700 (PDT)
-Date: Mon, 19 May 2025 09:37:23 +0530
+ Sun, 18 May 2025 21:03:55 -0700 (PDT)
+Date: Mon, 19 May 2025 09:33:45 +0530
 From: Sunil V L <sunilvl@ventanamicro.com>
 To: Li Chen <me@linux.beauty>
 Cc: Peter Maydell <peter.maydell@linaro.org>,
@@ -80,25 +79,24 @@ Cc: Peter Maydell <peter.maydell@linaro.org>,
  Alistair Francis <alistair.francis@wdc.com>,
  Weiwei Li <liwei1518@gmail.com>, qemu-arm <qemu-arm@nongnu.org>,
  qemu-devel <qemu-devel@nongnu.org>, qemu-riscv <qemu-riscv@nongnu.org>
-Subject: Re: [PATCH V3 4/4] acpi/virt: suppress UART device & SPCR when guest
- has no serial hardware
-Message-ID: <aCque4iAzEc8VWAx@sunil-laptop>
+Subject: Re: [PATCH V3 3/4] tests/qtest/bios-tables-test: Add test for
+ disabling SPCR on RISC-V
+Message-ID: <aCqtob_S5FKsG-1r@sunil-laptop>
 References: <87msberqzi.wl-me@linux.beauty>
- <87h61mrqko.wl-me@linux.beauty>
+ <87ikm2rqn8.wl-me@linux.beauty>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <87h61mrqko.wl-me@linux.beauty>
-Received-SPF: pass client-ip=2607:f8b0:4864:20::102b;
- envelope-from=sunilvl@ventanamicro.com; helo=mail-pj1-x102b.google.com
+In-Reply-To: <87ikm2rqn8.wl-me@linux.beauty>
+Received-SPF: pass client-ip=2607:f8b0:4864:20::52d;
+ envelope-from=sunilvl@ventanamicro.com; helo=mail-pg1-x52d.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -114,123 +112,53 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Thu, May 15, 2025 at 08:44:39PM +0800, Li Chen wrote:
+On Thu, May 15, 2025 at 08:43:07PM +0800, Li Chen wrote:
 > From: Li Chen <chenl311@chinatelecom.cn>
+>  
+> Add ACPI SPCR table test case for RISC-V when SPCR was off.
 > 
-> The virt machines always instantiate a PL011/16550 at UART0 and
-> describe it in ACPI (DSDT device node plus optional SPCR table).  When
-> the command line contains “-serial none” there is no backend attached to
-> that UART, yet the guest still discovers it via ACPI and may try to use
-> it as a console, causing unexpected results.
-> 
-> Suggested-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 > Signed-off-by: Li Chen <chenl311@chinatelecom.cn>
 > ---
+>  tests/qtest/bios-tables-test.c | 22 ++++++++++++++++++++++
+>  1 file changed, 22 insertions(+)
 > 
->  hw/arm/virt-acpi-build.c   | 15 +++++++++------
->  hw/riscv/virt-acpi-build.c |  6 ++++--
->  include/system/system.h    |  2 ++
->  system/vl.c                |  5 +++++
->  4 files changed, 20 insertions(+), 8 deletions(-)
-> 
-> diff --git a/hw/arm/virt-acpi-build.c b/hw/arm/virt-acpi-build.c
-> index f25c3b26ce..8a1cde4b44 100644
-> --- a/hw/arm/virt-acpi-build.c
-> +++ b/hw/arm/virt-acpi-build.c
-> @@ -59,6 +59,7 @@
->  #include "hw/acpi/viot.h"
->  #include "hw/virtio/virtio-acpi.h"
->  #include "target/arm/multiprocessing.h"
-> +#include "system/system.h"
->  
->  #define ARM_SPI_BASE 32
->  
-> @@ -825,11 +826,13 @@ build_dsdt(GArray *table_data, BIOSLinker *linker, VirtMachineState *vms)
->       */
->      scope = aml_scope("\\_SB");
->      acpi_dsdt_add_cpus(scope, vms);
-> -    acpi_dsdt_add_uart(scope, &memmap[VIRT_UART0],
-> -                       (irqmap[VIRT_UART0] + ARM_SPI_BASE), 0);
-> -    if (vms->second_ns_uart_present) {
-> -        acpi_dsdt_add_uart(scope, &memmap[VIRT_UART1],
-> -                           (irqmap[VIRT_UART1] + ARM_SPI_BASE), 1);
-> +    if (serial_exist()) {
-> +        acpi_dsdt_add_uart(scope, &memmap[VIRT_UART0],
-> +                           (irqmap[VIRT_UART0] + ARM_SPI_BASE), 0);
-> +        if (vms->second_ns_uart_present) {
-> +            acpi_dsdt_add_uart(scope, &memmap[VIRT_UART1],
-> +                               (irqmap[VIRT_UART1] + ARM_SPI_BASE), 1);
-> +        }
->      }
->      if (vmc->acpi_expose_flash) {
->          acpi_dsdt_add_flash(scope, &memmap[VIRT_FLASH]);
-> @@ -941,7 +944,7 @@ void virt_acpi_build(VirtMachineState *vms, AcpiBuildTables *tables)
->  
->      acpi_add_table(table_offsets, tables_blob);
->  
-> -    if (ms->enable_spcr) {
-> +    if (ms->enable_spcr && serial_exist()) {
->          spcr_setup(tables_blob, tables->linker, vms);
->      }
->  
-> diff --git a/hw/riscv/virt-acpi-build.c b/hw/riscv/virt-acpi-build.c
-> index 7f6d221c63..4e0f695a16 100644
-> --- a/hw/riscv/virt-acpi-build.c
-> +++ b/hw/riscv/virt-acpi-build.c
-> @@ -39,6 +39,7 @@
->  #include "qapi/error.h"
->  #include "qemu/error-report.h"
->  #include "system/reset.h"
-> +#include "system/system.h"
->  
->  #define ACPI_BUILD_TABLE_SIZE             0x20000
->  #define ACPI_BUILD_INTC_ID(socket, index) ((socket << 24) | (index))
-> @@ -449,7 +450,8 @@ static void build_dsdt(GArray *table_data,
->                                   memmap[VIRT_APLIC_S].size, "RSCV0002");
->      }
->  
-> -    acpi_dsdt_add_uart(scope, &memmap[VIRT_UART0], UART0_IRQ);
-> +    if (serial_exist())
-> +        acpi_dsdt_add_uart(scope, &memmap[VIRT_UART0], UART0_IRQ);
->  
->      if (socket_count == 1) {
->          virtio_acpi_dsdt_add(scope, memmap[VIRT_VIRTIO].base,
-> @@ -681,7 +683,7 @@ static void virt_acpi_build(RISCVVirtState *s, AcpiBuildTables *tables)
->  
->      acpi_add_table(table_offsets, tables_blob);
->  
-> -    if (ms->enable_spcr) {
-> +    if (ms->enable_spcr && serial_exist()) {
->          spcr_setup(tables_blob, tables->linker, s);
->      }
->  
-> diff --git a/include/system/system.h b/include/system/system.h
-> index a7effe7dfd..ca1af38432 100644
-> --- a/include/system/system.h
-> +++ b/include/system/system.h
-> @@ -75,6 +75,8 @@ extern unsigned int nb_prom_envs;
->  /* Return the Chardev for serial port i, or NULL if none */
->  Chardev *serial_hd(int i);
->  
-> +bool serial_exist(void);
-> +
->  /* parallel ports */
->  
->  #define MAX_PARALLEL_PORTS 3
-> diff --git a/system/vl.c b/system/vl.c
-> index 520956f4a1..7e219df7bf 100644
-> --- a/system/vl.c
-> +++ b/system/vl.c
-> @@ -1484,6 +1484,11 @@ Chardev *serial_hd(int i)
->      return NULL;
+> diff --git a/tests/qtest/bios-tables-test.c b/tests/qtest/bios-tables-test.c
+> index d2a1aa7fb3..44de152a36 100644
+> --- a/tests/qtest/bios-tables-test.c
+> +++ b/tests/qtest/bios-tables-test.c
+> @@ -1807,6 +1807,26 @@ static void test_acpi_aarch64_virt_tcg_acpi_spcr(void)
+>                    " -machine spcr=off", &data);
+>      free_test_data(&data);
 >  }
->  
-> +bool serial_exist(void)
+> +
+> +static void test_acpi_riscv_virt_tcg_acpi_spcr(void)
 > +{
-> +    return serial_hd(0) ? true : false;
+> +    test_data data = {
+> +        .machine = "virt",
+> +        .arch = "riscv64",
+> +        .tcg_only = true,
+> +        .uefi_fl1 = "pc-bios/edk2-riscv-code.fd",
+> +        .uefi_fl2 = "pc-bios/edk2-riscv-vars.fd",
+> +        .cd = "tests/data/uefi-boot-images/bios-tables-test.riscv64.iso.qcow2",
+> +        .ram_start = 0x80000000ULL,
+> +        .scan_len = 128ULL * 1024 * 1024,
+> +        .variant = ".acpispcr",
+> +    };
+> +
+> +    test_acpi_one("-cpu rva22s64 "
+> +                  "-machine spcr=off", &data);
+> +    free_test_data(&data);
 > +}
 > +
-LGTM.
-
+>  static void test_acpi_tcg_acpi_hmat(const char *machine, const char *arch)
+>  {
+>      test_data data = {};
+> @@ -2612,6 +2632,8 @@ int main(int argc, char *argv[])
+>              qtest_add_func("acpi/virt", test_acpi_riscv64_virt_tcg);
+>              qtest_add_func("acpi/virt/numamem",
+>                             test_acpi_riscv64_virt_tcg_numamem);
+> +            qtest_add_func("acpi/virt/acpispcr",
+> +                           test_acpi_riscv_virt_tcg_acpi_spcr);
+>          }
 Reviewed-by: Sunil V L <sunilvl@ventanamicro.com>
 
