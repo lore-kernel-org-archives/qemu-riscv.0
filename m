@@ -4,71 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5DFE3C2D0CD
-	for <qemu-riscv@archiver.kernel.org>; Mon, 19 May 2025 15:27:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 82A17C2D0CD
+	for <qemu-riscv@archiver.kernel.org>; Mon, 19 May 2025 16:36:18 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uH2MN-0000Jn-Q0; Mon, 19 May 2025 11:25:00 -0400
+	id 1uH3T5-0001RZ-8I; Mon, 19 May 2025 12:36:00 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <neither@nut.email>) id 1uH2Lm-0007xL-Uh
- for qemu-riscv@nongnu.org; Mon, 19 May 2025 11:24:26 -0400
-Received: from mailgate02.uberspace.is ([2a00:d0c0:200:0:1c7b:a6ff:fee0:8ea4])
+ (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
+ id 1uH3Sz-0001OG-6b
+ for qemu-riscv@nongnu.org; Mon, 19 May 2025 12:35:53 -0400
+Received: from mail-wr1-x42c.google.com ([2a00:1450:4864:20::42c])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <neither@nut.email>) id 1uH2Lj-0005oi-DW
- for qemu-riscv@nongnu.org; Mon, 19 May 2025 11:24:22 -0400
-Received: from skiff.uberspace.de (skiff.uberspace.de [185.26.156.131])
- by mailgate02.uberspace.is (Postfix) with ESMTPS id 4C4B6180EB8
- for <qemu-riscv@nongnu.org>; Mon, 19 May 2025 17:24:18 +0200 (CEST)
-Received: (qmail 5993 invoked by uid 990); 19 May 2025 15:24:18 -0000
-Authentication-Results: skiff.uberspace.de;
-	auth=pass (plain)
-Received: from unknown (HELO unkown) (::1)
- by skiff.uberspace.de (Haraka/3.0.1) with ESMTPSA;
- Mon, 19 May 2025 17:24:18 +0200
-From: Julian Ganz <neither@nut.email>
-To: qemu-devel@nongnu.org
-Cc: Julian Ganz <neither@nut.email>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ (Exim 4.90_1) (envelope-from <ajones@ventanamicro.com>)
+ id 1uH3Sw-0005bC-Nw
+ for qemu-riscv@nongnu.org; Mon, 19 May 2025 12:35:52 -0400
+Received: by mail-wr1-x42c.google.com with SMTP id
+ ffacd0b85a97d-3a367ec7840so1444877f8f.2
+ for <qemu-riscv@nongnu.org>; Mon, 19 May 2025 09:35:49 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=ventanamicro.com; s=google; t=1747672548; x=1748277348; darn=nongnu.org;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=j/8OU9GwBScM7IdCPEI5Z6hfoyVtLf9FiHGqtQG5zUY=;
+ b=mupJ1Ein4iaqiKDJjaaIpq0RSMxKBFBu7gyJ05Xm/aDsM2qS3I1b9OxbXIUpJB2Yhz
+ KTkF9ZFVfb+eUdjAxW3BGUcyqEvBHKttG0cAtXpsVSqL/chHW41WfTd3Wy86pPbMD7QH
+ yHyjfoQ0+Vc2FCGZ+lI6u1Vzv1JVNchxPwe3mqi2A7bVcpQVYfTkY2YfsNARNMiBtUBE
+ FwA/sWVMuIS+i9mYPK1JxavS5HHK6f0wHQB/xjDePYL/tumfAvrHV3Fspn8GVyHaDpxO
+ L6iH/LSU2Rp65/Vwuk1W1SM85YwfgVZYllPu5oNiGRw5OYZh4XOXwhG1EB750GqHdWSZ
+ MLhw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1747672548; x=1748277348;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=j/8OU9GwBScM7IdCPEI5Z6hfoyVtLf9FiHGqtQG5zUY=;
+ b=sdxUGRAmq8gkmfHZ9a8dzw3ght8WLiaioF7C5hxhxKQK8If+FcnGIeaHGPeRHxSB0N
+ xKHxTDZWxSMNxItXaKgfy6QSqiP3LtlxqUvVHfYgVRvfz5Yk1+swp4W24Y9DXDQRDd+F
+ 7MsDRMdk2JBQoQ4n4zaZSGdXVl0SXUXzId4n1jSlvMV5GLRueACb8AfNK4ZH04abLoj+
+ T7imcRXTqN1EQbHew8K8dcFeUa0hCwMAjH6sSHkYxfMPX1VGDQjfED7x6ON8niu7wUxx
+ p1006TRlShn9a9lZqG28d/u/vdcJg/EcGQ/pCXcvUGFEArA+SAPjAqC7F7I7oCUoOM8H
+ cekQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCW2GUgb/l6iXi+0ZQfKR6hA6LMMr24ngPl9tWZl/K7m+AQoLxj2p0+KzIMfi2DC13Uy85hvDJH+hSAx@nongnu.org
+X-Gm-Message-State: AOJu0YzJYjW3IAc2UB/h526S8PCSRG9N0NJhk8C5I7ZZNLbuMwq1w9Bw
+ DixF+hruhBMiYzC1wM3SYZstdY3QlM+qjwRGnDEKiP8PXSVcf/1t+KAulrWM+iBniMs=
+X-Gm-Gg: ASbGncs4xovYfyZvWVIQpU8iviNkRmUb9jtrHrmhz4mL+AejXu3oYdyWviQ6Qh96fkp
+ 9yZ94scUMWRTNeh93j/SQAs3+KAQVMNjb9cTgfNNWVgLpQMm1Dm45a2HtUAkq6ph6LbEQPFyQNu
+ rtN/fVlV3uMwHtIBa6MNFGNJhJ2fjh4T/mVFzdg8W21Dh6g67icKNCOGhuVRHN/icHnJsrIQnY6
+ 30l24ILXt6EvG/SHAbGqjU9VfbQZiAseVOgmesZR9ty6+whfC67FAiby5DQvd+6U3Xpi2MpTniE
+ x8PHnEw0wga5Mf3WCbgLpoeDJFX5n7F+jcfAIZw=
+X-Google-Smtp-Source: AGHT+IE6fGD+nqfy+GVrxhTagsRGuY2GsEZ5h18vCzrSlogS0QztjKJxMs/DWLPnRghgEcmYR2wo9Q==
+X-Received: by 2002:a05:6000:2384:b0:3a1:f684:39a7 with SMTP id
+ ffacd0b85a97d-3a35fde361amr10219404f8f.0.1747672547945; 
+ Mon, 19 May 2025 09:35:47 -0700 (PDT)
+Received: from localhost ([2a02:8308:a00c:e200::ce80])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-3a35ca8d258sm13298494f8f.100.2025.05.19.09.35.46
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 19 May 2025 09:35:47 -0700 (PDT)
+Date: Mon, 19 May 2025 18:35:46 +0200
+From: Andrew Jones <ajones@ventanamicro.com>
+To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Cc: Alexandre Ghiti <alexghiti@rivosinc.com>, 
  Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Weiwei Li <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- qemu-riscv@nongnu.org (open list:RISC-V TCG CPUs)
-Subject: [PATCH v5 25/25] tests: add test with interrupted memory accesses on
- rv64
-Date: Mon, 19 May 2025 17:24:09 +0200
-Message-ID: <d98d3db427eba7a1bee4bb4c00e63e07f7ec3bf4.1747666625.git.neither@nut.email>
-X-Mailer: git-send-email 2.49.0
-In-Reply-To: <cover.1747666625.git.neither@nut.email>
-References: <cover.1747666625.git.neither@nut.email>
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Bin Meng <bin.meng@windriver.com>, Weiwei Li <liwei1518@gmail.com>, 
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, qemu-riscv@nongnu.org,
+ qemu-devel@nongnu.org
+Subject: Re: [PATCH RFC] target: riscv: Fix satp mode initialization based on
+ profile
+Message-ID: <20250519-a153c03e434d1bf31498eb01@orel>
+References: <20250516122319.4100121-1-alexghiti@rivosinc.com>
+ <e86af5b2-7d8a-4503-8a5c-5ee2147aa850@ventanamicro.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Rspamd-Bar: -----
-X-Rspamd-Report: REPLY(-4) BAYES_HAM(-2.776343) MID_CONTAINS_FROM(1)
- MIME_GOOD(-0.1) R_MISSING_CHARSET(0.5)
-X-Rspamd-Score: -5.376343
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=nut.email; s=uberspace;
- h=from:to:cc:subject:date;
- bh=HE7sfSzhKX2oFLAmIERtf6GP8LdpE8qiGbOolHCRMo0=;
- b=E1zj/b59fiKKOk/syU18Z8rHMwqFa0FCOd85IeLc0yv9IkskTATyUOQk/L0OGB4fyUFl0+guHz
- sJ/LuExk/glw4nn5OYklBJiyW/1KpQQcyeYGso8or1YqwvMdE5sMzjMiAfcxJ5lvywC44AbpfuOU
- GhQSbXagYjggE8Fnp9TvUmF1ml1RpHF538NvEmY/ZZTQ7Kpx8RgSXFdHE3ghzynliVeYp2eaTVX1
- gDe8rOI4iXgFtTwCN/hFAuMwEDUwMXt61Bv4Q/2sjkhDcXAfs5gZru0r/n2oMZCQoJtiXp2rHEi1
- r9fP758i17Qsdp/y2g/Q4fV51+MmM4JMgTUJSBfoECdxLEeIfLLtCw1W0hqktk7zpRxIWNZijI5p
- qZ5dHL+4PYljSwrL7WttxgZgx9Kaz43uOKDTtXYUi2qlYMV+A8cGXR03WSgynv8On0JiBFB/Rc3z
- hrv2tYMC2yXzoPTVGge91S08SdcS9zjP7D3CLTZTJj6iMK7iXyLLL/F+oakMboOFegVpZjtr1wgU
- g3CB7S7tSZM3hOUXsPlrd53iU2gfsfsp48SOGoBzAXIo9HuILHCAQ08z5ZVNo7klnHipjCciKk46
- p2ReNXA5HfQimWf/FrG14GaNWYGCrXEF+39z9+djLgeoGxCoP4a/4G5VH4iF2uWZ9v1umeEs6buZ
- A=
-Received-SPF: pass client-ip=2a00:d0c0:200:0:1c7b:a6ff:fee0:8ea4;
- envelope-from=neither@nut.email; helo=mailgate02.uberspace.is
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <e86af5b2-7d8a-4503-8a5c-5ee2147aa850@ventanamicro.com>
+Received-SPF: pass client-ip=2a00:1450:4864:20::42c;
+ envelope-from=ajones@ventanamicro.com; helo=mail-wr1-x42c.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -84,117 +106,69 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-This test aims at catching API misbehaviour w.r.t. the interaction
-between interrupts and memory accesses, such as the bug fixed in
+On Mon, May 19, 2025 at 09:48:14AM -0300, Daniel Henrique Barboza wrote:
+> 
+> 
+> On 5/16/25 9:23 AM, Alexandre Ghiti wrote:
+> > The satp mode is set using the svXX properties, but that actually
+> > restricts the satp mode to the minimum required by the profile and
+> > prevents the use of higher satp modes.
+> 
+> For rva23s64, in "Optional Extensions" we'll find:
 
-    27f347e6a1d269c533633c812321cabb249eada8
+The keyword is "Optional". The profile should only set sv39 since that's
+what rva23 (and rv22) have for the mandatory support. sv48 and sv57 are
+both optional so, while the user should be allowed to turn them on, just
+like other optional extensions, they shouldn't be on by default since we
+don't set any optional extensions on by default.
 
-Because the condition for triggering misbehaviour may not be
-deterministic and the cross-section between memory accesses and
-interrupt handlers may be small, we have to place our trust in large
-numbers. Instead of guessing/trying an arbitrary, fixed loop-bound, we
-decided to loop for a fixed amount of real-time. This avoids the test
-running into a time-out on slower machines while enabling a high number
-of possible interactions on faster machines.
+So we don't want this change, but fixing any bugs with the first hart vs.
+the other harts is of course necessary.
 
-Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Signed-off-by: Julian Ganz <neither@nut.email>
----
- tests/tcg/riscv64/Makefile.softmmu-target |  6 ++
- tests/tcg/riscv64/interruptedmemory.S     | 67 +++++++++++++++++++++++
- 2 files changed, 73 insertions(+)
- create mode 100644 tests/tcg/riscv64/interruptedmemory.S
+Thanks,
+drew
 
-diff --git a/tests/tcg/riscv64/Makefile.softmmu-target b/tests/tcg/riscv64/Makefile.softmmu-target
-index 5fba973e18..5d07755964 100644
---- a/tests/tcg/riscv64/Makefile.softmmu-target
-+++ b/tests/tcg/riscv64/Makefile.softmmu-target
-@@ -26,5 +26,11 @@ run-plugin-doubletrap: doubletrap
- 	  $(QEMU) -plugin ../plugins/libdiscons.so -d plugin -D $*.pout \
- 	  $(QEMU_OPTS)$<)
- 
-+EXTRA_RUNS += run-plugin-interruptedmemory
-+run-plugin-interruptedmemory: interruptedmemory
-+	$(call run-test, $<, \
-+	  $(QEMU) -plugin ../plugins/libdiscons.so -d plugin -D $*.pout \
-+	  $(QEMU_OPTS)$<)
-+
- # We don't currently support the multiarch system tests
- undefine MULTIARCH_TESTS
-diff --git a/tests/tcg/riscv64/interruptedmemory.S b/tests/tcg/riscv64/interruptedmemory.S
-new file mode 100644
-index 0000000000..a32d672849
---- /dev/null
-+++ b/tests/tcg/riscv64/interruptedmemory.S
-@@ -0,0 +1,67 @@
-+	.option norvc
-+
-+	.text
-+	.global _start
-+_start:
-+	# Set up trap vector
-+	lla	t0, trap
-+	csrw	mtvec, t0
-+
-+	# Set up timer
-+	lui	t1, 0x02004
-+	sd	zero, 0(t1) # MTIMECMP0
-+
-+	# Enable timer interrupts
-+	li	t0, 0x80
-+	csrrs	zero, mie, t0
-+	csrrsi	zero, mstatus, 0x8
-+
-+	# Find out when to stop
-+	call	rtc_get
-+	li	t0, 60
-+	slli	t0, t0, 30 # Approx. 10e9 ns
-+	add	t0, t0, a0
-+
-+	# Loop with memory accesses
-+	la	t1, semiargs
-+0:
-+	ld	t2, 0(t1)
-+	sd	t2, 0(t1)
-+	call	rtc_get
-+	bltu	a0, t0, 0b
-+
-+	li	a0, 0
-+	lla	a1, semiargs
-+	li	t0, 0x20026	# ADP_Stopped_ApplicationExit
-+	sd	t0, 0(a1)
-+	sd	a0, 8(a1)
-+	li	a0, 0x20	# TARGET_SYS_EXIT_EXTENDED
-+
-+	# Semihosting call sequence
-+	.balign	16
-+	slli	zero, zero, 0x1f
-+	ebreak
-+	srai	zero, zero, 0x7
-+	j	.
-+
-+rtc_get:
-+	# Get current time from the goldfish RTC
-+	lui	t3, 0x0101
-+	lw	a0, 0(t3)
-+	lw	t3, 4(t3)
-+	slli	t3, t3, 32
-+	add	a0, a0, t3
-+	ret
-+
-+trap:
-+	lui	t5, 0x0200c
-+	ld	t6, -0x8(t5) # MTIME
-+	addi	t6, t6, 100
-+	lui	t5, 0x02004
-+	sd	t6, 0(t5) # MTIMECMP
-+	mret
-+
-+	.data
-+	.balign	16
-+semiargs:
-+	.space	16
--- 
-2.49.0
-
+> 
+> https://github.com/riscv/riscv-profiles/blob/main/src/rva23-profile.adoc
+> 
+> - Sv48 Page-based 48-bit virtual-memory system.
+> - Sv57 Page-based 57-bit virtual-memory system.
+> 
+> So in theory we could go up to sv57 for rva23s64 (and rva22s64, just checked).
+> Changing satp_mode to the maximum allowed seems sensible.
+> 
+> But allowing all satp modes to go in a profile defeats the purpose, doesn't it?
+> None of the existing profiles in QEMU claims supports sv64. Granted, I'm not a
+> satp expert, but removing the satp restriction in profiles doesn't seem right.
+> 
+> 
+> Thanks,
+> 
+> Daniel
+> 
+> 
+> > 
+> > Fix this by not setting any svXX property and allow all satp mode to be
+> > supported.
+> > 
+> > Signed-off-by: Alexandre Ghiti <alexghiti@rivosinc.com>
+> > ---
+> >   target/riscv/tcg/tcg-cpu.c | 3 ---
+> >   1 file changed, 3 deletions(-)
+> > 
+> > diff --git a/target/riscv/tcg/tcg-cpu.c b/target/riscv/tcg/tcg-cpu.c
+> > index 5aef9eef36..ca2d2950eb 100644
+> > --- a/target/riscv/tcg/tcg-cpu.c
+> > +++ b/target/riscv/tcg/tcg-cpu.c
+> > @@ -1232,9 +1232,6 @@ static void cpu_set_profile(Object *obj, Visitor *v, const char *name,
+> >   #ifndef CONFIG_USER_ONLY
+> >       if (profile->satp_mode != RISCV_PROFILE_ATTR_UNUSED) {
+> >           object_property_set_bool(obj, "mmu", true, NULL);
+> > -        const char *satp_prop = satp_mode_str(profile->satp_mode,
+> > -                                              riscv_cpu_is_32bit(cpu));
+> > -        object_property_set_bool(obj, satp_prop, profile->enabled, NULL);
+> >       }
+> >   #endif
+> 
+> 
 
