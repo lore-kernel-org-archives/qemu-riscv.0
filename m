@@ -4,89 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6BADEC3ABD8
-	for <qemu-riscv@archiver.kernel.org>; Fri, 16 May 2025 12:23:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 14698C3ABD8
+	for <qemu-riscv@archiver.kernel.org>; Mon, 19 May 2025 00:17:58 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uFu6J-0008Uv-5P; Fri, 16 May 2025 08:23:43 -0400
+	id 1uGoCK-0000YD-VW; Sun, 18 May 2025 20:17:40 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alexghiti@rivosinc.com>)
- id 1uFu67-0008UW-2Q
- for qemu-riscv@nongnu.org; Fri, 16 May 2025 08:23:31 -0400
-Received: from mail-pj1-x102b.google.com ([2607:f8b0:4864:20::102b])
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1uGoCF-0000XO-9q; Sun, 18 May 2025 20:17:37 -0400
+Received: from mail-vk1-xa2d.google.com ([2607:f8b0:4864:20::a2d])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alexghiti@rivosinc.com>)
- id 1uFu64-0005wP-5B
- for qemu-riscv@nongnu.org; Fri, 16 May 2025 08:23:30 -0400
-Received: by mail-pj1-x102b.google.com with SMTP id
- 98e67ed59e1d1-30e8daea8c6so198447a91.0
- for <qemu-riscv@nongnu.org>; Fri, 16 May 2025 05:23:26 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1uGoCD-0007Nq-2q; Sun, 18 May 2025 20:17:34 -0400
+Received: by mail-vk1-xa2d.google.com with SMTP id
+ 71dfb90a1353d-52410fb2afeso2622328e0c.3; 
+ Sun, 18 May 2025 17:17:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1747398205; x=1748003005;
- darn=nongnu.org; 
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=zFGmEPgUuAxw3aWTUk4BZA6z6uqVN1EffF2YNTuRFgI=;
- b=Jx02Nzg/wuvfMd0DONs7t56GVouPmY3HEO+i0KFlmVQyA9vdkpdWPqaBnTxfXDRpvn
- jfrlMn/41KNNMOrVumY+tIjeJtiltlgaXbReOzJJxSTm+1V13k5mBwVGo/k00R/Xd/ek
- HYJLJ2wxHS34b5TCnvfqyriMQW78nLdJ/OpYRxJQRHTGZhkJR92UOYa52UDzdfK6eLYs
- vzbcqDPMBHNRifplnlYVpgLrWkw4qgeSCyXGhdGxTjoGc1Bzn8gELqZEHw5sZBQUjt2V
- Zv3ne5fHupNycfuhMrqbLPyknKHkFDUiBA/1ExlWpsUhJXDqgALNxx/YDhksX3VLMk1m
- zBUA==
+ d=gmail.com; s=20230601; t=1747613849; x=1748218649; darn=nongnu.org;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=JZVKVF/qTw65cv51/4KNi53uu2B84G9DNrG+BqCQr4Q=;
+ b=docpBOrFFMbo8H4hIHv6JZBpfGOwHHFSp0MintkY4VNUSZbdFHm15RjVUWLBvKkhK6
+ 1+edEfrQimvS98wfH/q3WUEsQgG6o5EwobiHPTK/gfRXeGtOPNJPcau6vq2cX95ndPJM
+ 2gVteR6jgZbw/9yeY5p4luf6Y4TBe1R61NNnKDtvREULQPkSzVZN0jfobFdqfZjl2CSC
+ 6fJ/JxxDjy0A5GpI3WMU1oljecPo8B60+AmMggPMUkI05htsjOBb90pIWnME0qD2TVUA
+ YfP8pYeXNTBMQCiAB5c9YyJ7gMNGqsoQ4XvPSABKjEX0+rEJgJOep6MndheLNi2fl6gA
+ okrQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1747398205; x=1748003005;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=zFGmEPgUuAxw3aWTUk4BZA6z6uqVN1EffF2YNTuRFgI=;
- b=tArCS/8fs35Nzo/9ftJpIkBuagiipv/dJRxpS0jt4qXJjQiK35DLGdpWXGtgn6Uj5z
- rY3ocCdct7MMGfHGlg4YOXIb2YnI4StChME7OACPkaUauAlp4BHgNXATtvPs5r/u67Jb
- bFSd3IirbAIQKCoNLZsTUGsPcP5BrWw8Y3V6NN8LQ1+hw+dARXYoy7+IPG2W4OM2vxJ0
- InOtdKnHsR/eHQDu5RFRqtx+m1o+/yWxUrBBt5Hc9TXDXev6MXNBRDptnfaqjRjZ3tUk
- jSj0eJyUfAOacGObZyzUqP0Biksn+nt1UnN12ruqfb5MNUB/GW61ZX02yr4wVNIukLvG
- GIEA==
+ d=1e100.net; s=20230601; t=1747613849; x=1748218649;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=JZVKVF/qTw65cv51/4KNi53uu2B84G9DNrG+BqCQr4Q=;
+ b=IYkXWffBwScu2I583PgQeV095xdk0aEfmXZ80bjlbdGDXY+yGJG8fcwOk0qyJ6LOTa
+ xvySPPGmBwILbuKk2P5sFHvO/znzD9OKGe908oamYWWWCI9OMaEDLrfJNq5rofomRqV0
+ 7oQ3+qtciT3hYiNzgHqNW6AeyFubwegFq3gzjFQPpvOagFy1dtgqJYWg30+42xlRsanI
+ NZ3H1pVD1uWxGxUpjtnpmlkaLr+fYSx53QLDfPLgeWVchkt1UWAoZv8r4jTlnS1FicWO
+ V0G8mfuEl55/QIi9/vqGnBZOgxfjZO6Yztv5u3XdErh7XxoyScq4iEeG1hD885/9/sII
+ zbuA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVmWUd16cFrlBg3KZSLIX+S+kug6aLVy18eVN1pyplXS5uUfW4obROLp98KPhRubXgadh3lLgC6ovBU@nongnu.org
-X-Gm-Message-State: AOJu0YxTa3RRext4htGd5gGjKVDEq63qoBvbPv6WaPopFAE9n8Tb/28Z
- fsYBZnd+xhfTbaPm7F6Ro++w+kZ6i+QCOtBNVnmXw2aQzQC/Dq0WNWPaWI0YNltzb+c=
-X-Gm-Gg: ASbGncs31IISaP/v22IeOCrCckJFqHFJsmR4AsPl3ADZ0fyMn02w4US2iEr5DB+1j8H
- izpEdiPMjU5VOqgIO8XvJsxXdOyMn1fYQm8aADI3NZ2dQv9CVpK+buzwM78tFfsJfKdi4pHuZyD
- A9TqeHCjyKSaqJ7ogMhna1zeQp6mUhyAmVju5gL1iIXf3iSB+3ANJLs7FAqVB6/2kRibFRlxAPf
- 9koL/o/Fqvoy2ysCuw1DMUISfPTZxVmyaAMWQKekbqBQEwKpph8QV+DqWVIKdC8hQUc4cuF8WDy
- 8MMSOcI5UDjZ/mv7P1O++tAGqQdK8sIU4Ymnk/auOVYen4bGdXaT
-X-Google-Smtp-Source: AGHT+IGSbrZ5yIrXU0mkUdq3nsZG4JClGnXAB1Egwm6uCsvSwnZIVpVwkSL5qUPQmHFhgDITcPaWFw==
-X-Received: by 2002:a17:90b:2d83:b0:2ee:863e:9ffc with SMTP id
- 98e67ed59e1d1-30e7d585bb2mr4170268a91.21.1747398204987; 
- Fri, 16 May 2025 05:23:24 -0700 (PDT)
-Received: from alexghiti.ba.rivosinc.com ([2001:41d0:306:1be8::])
- by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-30e33401872sm5198799a91.6.2025.05.16.05.23.21
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 16 May 2025 05:23:24 -0700 (PDT)
-From: Alexandre Ghiti <alexghiti@rivosinc.com>
-To: Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Bin Meng <bin.meng@windriver.com>, Weiwei Li <liwei1518@gmail.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, qemu-riscv@nongnu.org,
- qemu-devel@nongnu.org
-Cc: Alexandre Ghiti <alexghiti@rivosinc.com>
-Subject: [PATCH RFC] target: riscv: Fix satp mode initialization based on
- profile
-Date: Fri, 16 May 2025 12:23:19 +0000
-Message-Id: <20250516122319.4100121-1-alexghiti@rivosinc.com>
-X-Mailer: git-send-email 2.34.1
+ AJvYcCWMVbO5ozgZJifQ3tMMGnPc6xbOZHcI7yREi8zHyUaubYB/DuYkwDR6eTkXwxAcqYOzaYBlbnlFDweW@nongnu.org
+X-Gm-Message-State: AOJu0Yw0Qy66JRQ6LFLi3CJdpnH1t55xaPHNeFmJTZl+o7RpNgj3/fpT
+ eWxc2cvJR42dP+w2oTKfHtJg7xOkDG3pRdTG9rGMO74fv1KdCZ42NcLL2Y1LNTqAQRps77DIAcW
+ CGfV2CUjMH5M58iD2+/s3IxLSRTbRsPs=
+X-Gm-Gg: ASbGncvLQAvqntR8AFsWcwfUbYpaaDI4NUGouOFeN6ptzZsmFfJKgW/1oC61dTde7fv
+ pBvR65855nJQNJPv4vxYIBDj6mO0ZkmhPPjUUhhTpnTnTI5tp8HmMDrdlDLbsZw+rqxH1/P9ohF
+ /c4Oclf1pwSi5TQUa1/mCOMi32tUhn7AjOspHFvlhzWctkStUTOn6F9pF1Q+zi2ZY=
+X-Google-Smtp-Source: AGHT+IGTdNxbfcFImbKZe/u7StOJxwCzMM4GGQo+jLyBu4wCKszoRW+kWkchIqtkhJopZfpL1pUCDXXerB3kn3U0U88=
+X-Received: by 2002:a05:6122:46a7:b0:52a:863f:78dd with SMTP id
+ 71dfb90a1353d-52dba91e5a2mr10982973e0c.6.1747613849494; Sun, 18 May 2025
+ 17:17:29 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::102b;
- envelope-from=alexghiti@rivosinc.com; helo=mail-pj1-x102b.google.com
-X-Spam_score_int: -18
-X-Spam_score: -1.9
+References: <20250504205714.3432096-1-richard.henderson@linaro.org>
+ <20250504205714.3432096-10-richard.henderson@linaro.org>
+In-Reply-To: <20250504205714.3432096-10-richard.henderson@linaro.org>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Mon, 19 May 2025 10:17:03 +1000
+X-Gm-Features: AX0GCFtF1g0SDv8pO09Rs__WSuaJ71bU_x8OFQiafOQ5Yhea4xLeDPv6w8zFGbA
+Message-ID: <CAKmqyKOw5_b=_GrTd6exz4JnPFQMmFBFUdKTi4-LvFP9=gKvUw@mail.gmail.com>
+Subject: Re: [PATCH 09/12] target/riscv: Fill in TCGCPUOps.pointer_wrap
+To: Richard Henderson <richard.henderson@linaro.org>
+Cc: qemu-devel@nongnu.org, foss@percivaleng.com, qemu-riscv@nongnu.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2607:f8b0:4864:20::a2d;
+ envelope-from=alistair23@gmail.com; helo=mail-vk1-xa2d.google.com
+X-Spam_score_int: -17
+X-Spam_score: -1.8
 X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -103,33 +95,68 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-The satp mode is set using the svXX properties, but that actually
-restricts the satp mode to the minimum required by the profile and
-prevents the use of higher satp modes.
+On Mon, May 5, 2025 at 6:59=E2=80=AFAM Richard Henderson
+<richard.henderson@linaro.org> wrote:
+>
+> Check 32 vs 64-bit and pointer masking state.
+>
+> Cc: qemu-riscv@nongnu.org
+> Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
 
-Fix this by not setting any svXX property and allow all satp mode to be
-supported.
+Acked-by: Alistair Francis <alistair.francis@wdc.com>
 
-Signed-off-by: Alexandre Ghiti <alexghiti@rivosinc.com>
----
- target/riscv/tcg/tcg-cpu.c | 3 ---
- 1 file changed, 3 deletions(-)
+Alistair
 
-diff --git a/target/riscv/tcg/tcg-cpu.c b/target/riscv/tcg/tcg-cpu.c
-index 5aef9eef36..ca2d2950eb 100644
---- a/target/riscv/tcg/tcg-cpu.c
-+++ b/target/riscv/tcg/tcg-cpu.c
-@@ -1232,9 +1232,6 @@ static void cpu_set_profile(Object *obj, Visitor *v, const char *name,
- #ifndef CONFIG_USER_ONLY
-     if (profile->satp_mode != RISCV_PROFILE_ATTR_UNUSED) {
-         object_property_set_bool(obj, "mmu", true, NULL);
--        const char *satp_prop = satp_mode_str(profile->satp_mode,
--                                              riscv_cpu_is_32bit(cpu));
--        object_property_set_bool(obj, satp_prop, profile->enabled, NULL);
-     }
- #endif
- 
--- 
-2.34.1
-
+> ---
+>  target/riscv/tcg/tcg-cpu.c | 26 ++++++++++++++++++++++++++
+>  1 file changed, 26 insertions(+)
+>
+> diff --git a/target/riscv/tcg/tcg-cpu.c b/target/riscv/tcg/tcg-cpu.c
+> index 55e00972b7..267186e5e3 100644
+> --- a/target/riscv/tcg/tcg-cpu.c
+> +++ b/target/riscv/tcg/tcg-cpu.c
+> @@ -237,6 +237,31 @@ static void riscv_restore_state_to_opc(CPUState *cs,
+>      env->excp_uw2 =3D data[2];
+>  }
+>
+> +#ifndef CONFIG_USER_ONLY
+> +static vaddr riscv_pointer_wrap(CPUState *cs, int mmu_idx,
+> +                                vaddr result, vaddr base)
+> +{
+> +    CPURISCVState *env =3D cpu_env(cs);
+> +    uint32_t pm_len;
+> +    bool pm_signext;
+> +
+> +    if (cpu_address_xl(env) =3D=3D MXL_RV32) {
+> +        return (uint32_t)result;
+> +    }
+> +
+> +    pm_len =3D riscv_pm_get_pmlen(riscv_pm_get_pmm(env));
+> +    if (pm_len =3D=3D 0) {
+> +        return result;
+> +    }
+> +
+> +    pm_signext =3D riscv_cpu_virt_mem_enabled(env);
+> +    if (pm_signext) {
+> +        return sextract64(result, 0, 64 - pm_len);
+> +    }
+> +    return extract64(result, 0, 64 - pm_len);
+> +}
+> +#endif
+> +
+>  const TCGCPUOps riscv_tcg_ops =3D {
+>      .mttcg_supported =3D true,
+>      .guest_default_memory_order =3D 0,
+> @@ -250,6 +275,7 @@ const TCGCPUOps riscv_tcg_ops =3D {
+>
+>  #ifndef CONFIG_USER_ONLY
+>      .tlb_fill =3D riscv_cpu_tlb_fill,
+> +    .pointer_wrap =3D riscv_pointer_wrap,
+>      .cpu_exec_interrupt =3D riscv_cpu_exec_interrupt,
+>      .cpu_exec_halt =3D riscv_cpu_has_work,
+>      .cpu_exec_reset =3D cpu_reset,
+> --
+> 2.43.0
+>
+>
 
