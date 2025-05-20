@@ -4,86 +4,48 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B5F0CC2D0CD
-	for <qemu-riscv@archiver.kernel.org>; Tue, 20 May 2025 01:11:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 600FCC2D0CD
+	for <qemu-riscv@archiver.kernel.org>; Tue, 20 May 2025 03:27:21 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uHBVB-0000Hp-5M; Mon, 19 May 2025 21:10:41 -0400
+	id 1uHDd9-0001kf-K6; Mon, 19 May 2025 23:27:03 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1uHBV5-0000G2-UH; Mon, 19 May 2025 21:10:38 -0400
-Received: from mail-ot1-x32c.google.com ([2607:f8b0:4864:20::32c])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1uHBV3-0007d1-83; Mon, 19 May 2025 21:10:35 -0400
-Received: by mail-ot1-x32c.google.com with SMTP id
- 46e09a7af769-72ecc30903cso3058266a34.0; 
- Mon, 19 May 2025 18:10:32 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1747703431; x=1748308231; darn=nongnu.org;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=xuQoaZP8vmcl5+94rrQWrkGLXx0fS7PXsVxqfyIzJ70=;
- b=IttXkl+aPlbijPF6PqChfPDZDn4ToMuegzgE1+fY9hsmBYE8vO9uia6xR7BsFIqgSC
- myLOwgqjYUTRWZSiSNn4t5BfnoQlaWfkAxX+3LZDAGEQ3H6bwJGcwXcPVcQWuqF41IP6
- 3J1Q6/PUTobnfrGMdDHv4W5+AxgLSNrf/it/7VxfBUO6Tg2VYOTG8KCSnujR5JNHQJxh
- tvSq+/Jc8znSOQeP3Y+W0nmK3E+mmi0wyc2VRn+64+FBRTsmZtJxEb9E5otV936+lBSy
- x6K9Dv7Q1fLnwrZ5tfGwEyvYhJ7RByBx1koHhx9X4M79OHAa+S7H1yTNDs+VTicaNvO+
- yP1w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1747703431; x=1748308231;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=xuQoaZP8vmcl5+94rrQWrkGLXx0fS7PXsVxqfyIzJ70=;
- b=EFHP/ETxAymABRzHPORgV4TOd2++6eosV5mosMX8UcxqoFyFcc5CcfTyDY8US3J+0n
- YUA/AIZlFd8Gflrqrr+I+Ibf/nTX45nhbbssGP8hhnNv14yX9ujJ846K3wtcEL5PjBlw
- eEjvvBFeqZyN/D/43IYFnC1JIbyl8eK+4IETS9qD22XIRweiGKh7FMJa43myHU1mBq4q
- 5IjvBSskjc6KzMfUkIcV0XxIwjXB+VHoIsA1G4TbH4DsKxUNVwzVGxtqwmlPT6ps4Shu
- nhPNsMfRVe4uvOOMb4TkX2hEU6VbMLnHyk/dgL1VTy00kEmZJs2O4h9e7v06BG/T1oOA
- 0CFg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUz+R+4OoAPYFiYWCPC9lDQI4TpoKn/GVHL+c9IK8PiMgBtk7YlFjaeYpNrI//tKiz6cepzouuWoQ2U@nongnu.org
-X-Gm-Message-State: AOJu0YxhqdYStLiZaO9v1sdSeFrxCDjhSpI5izuAKIJ01C9jvJ1d9HcO
- vKIuMfjD3lP3S9KZ6F3sPZtHHyGoIeihMeJTizTILavNsW9yGq7gZeTjz+ufR9q/2rGk6BKDgd+
- Chc4kA+6ZozqNYbUdyAi9xvOB0+W3fYVeDQ==
-X-Gm-Gg: ASbGnctL9/PbRyrjkbwRyww5PJu6YiX/CpkcXx0uY7q0VAh/pQNTXYHlwzDKFzBe8Z7
- Ch02s375g67S+D71z5sShDtK5Jxsj9BjvvYlifmR4cWRgDEUs8BQt0c6F2spYEtQ+WYbVFGlTpF
- 6nEup3thtGgV0EalLF19phwmIsgHlTvo6YbnG0lBMYQuItcWDOcSqc19risofmGyc=
-X-Google-Smtp-Source: AGHT+IEEkKiHTx8H7q3gj/z9tuOZD2L+gxct5gIL4E0SF8v6SVm8s28q2mX5PRRjTQr+/P02IjLYPguDBb8blwXmrcs=
-X-Received: by 2002:a05:6122:46a7:b0:52a:863f:78dd with SMTP id
- 71dfb90a1353d-52dba91e5a2mr14558774e0c.6.1747702636527; Mon, 19 May 2025
- 17:57:16 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <wangran@bosc.ac.cn>)
+ id 1uHDd6-0001jg-VN; Mon, 19 May 2025 23:27:00 -0400
+Received: from out28-124.mail.aliyun.com ([115.124.28.124])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <wangran@bosc.ac.cn>)
+ id 1uHDd4-0001L2-OX; Mon, 19 May 2025 23:27:00 -0400
+Received: from 172.38.29.63(mailfrom:wangran@bosc.ac.cn
+ fp:SMTPD_---.cv7.F1e_1747711601 cluster:ay29) by smtp.aliyun-inc.com;
+ Tue, 20 May 2025 11:26:42 +0800
+Message-ID: <b21b4c36-17cb-43f4-80ba-e6d8b034c35d@bosc.ac.cn>
+Date: Tue, 20 May 2025 11:26:41 +0800
 MIME-Version: 1.0
-References: <20250519143518.11086-1-jim.shu@sifive.com>
-In-Reply-To: <20250519143518.11086-1-jim.shu@sifive.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Tue, 20 May 2025 10:56:50 +1000
-X-Gm-Features: AX0GCFskRlFZGyLXdHImqcd7hZdbj2rFA2LKqjYeldkCbuPXtVY4jSuUmGf7sGo
-Message-ID: <CAKmqyKNB52uxCKhXE_k1B55z9P8iHGt5vFkFC2_Zy0j7zrmjbg@mail.gmail.com>
-Subject: Re: [PATCH v3 0/4] Several sstc extension fixes
-To: Jim Shu <jim.shu@sifive.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, 
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, 
- Weiwei Li <liwei1518@gmail.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>, 
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::32c;
- envelope-from=alistair23@gmail.com; helo=mail-ot1-x32c.google.com
-X-Spam_score_int: -17
-X-Spam_score: -1.8
-X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+User-Agent: Mozilla Thunderbird
+From: Ran Wang <wangran@bosc.ac.cn>
+Subject: Re: [PATCH v4 0/2] riscv: Add Kunminghu CPU and platform
+To: alistair23@gmail.com
+Cc: 3543977024@qq.com, palmer@dabbelt.com, alistair.francis@wdc.com,
+ liwei1518@gmail.com, dbarboza@ventanamicro.com,
+ zhiwei_liu@linux.alibaba.com, qemu-riscv@nongnu.org, qemu-devel@nongnu.org,
+ wangran@bosc.ac.cn
+References: <20250425121750.311-1-wangran@bosc.ac.cn>
+In-Reply-To: <20250425121750.311-1-wangran@bosc.ac.cn>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=115.124.28.124; envelope-from=wangran@bosc.ac.cn;
+ helo=out28-124.mail.aliyun.com
+X-Spam_score_int: -28
+X-Spam_score: -2.9
+X-Spam_bar: --
+X-Spam_report: (-2.9 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_NONE=-0.0001,
+ RCVD_IN_MSPIKE_H5=-1, RCVD_IN_MSPIKE_WL=-0.01,
+ RCVD_IN_VALIDITY_CERTIFIED_BLOCKED=0.001, RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
+ UNPARSEABLE_RELAY=0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -99,45 +61,45 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Tue, May 20, 2025 at 12:36=E2=80=AFAM Jim Shu <jim.shu@sifive.com> wrote=
-:
->
-> This patch series contains several sstc fixes:
->
-> (1) Writing to ACLINT mtime should also update the period of S/VS-mode
->     timer, just like M-mode timer.
-> (2) VSTIP bit of $mip CSR should check both M-mode and H-mode STCE.
-> (3) Writing to STCE bit may enable/disable sstc extension in S/VS-mode,
->     which should update the timer and IRQ pending bits.
->
-> Changed in v3:
-> - Rebase to riscv-to-apply.next
->
-> Changed in v2:
-> - Remove duplicated code in riscv_timer_stce_changed() function
-> - Add sstc spec description in the commit log
->
-> Jim Shu (4):
->   target/riscv: Add the checking into stimecmp write function.
->   hw/intc: riscv_aclint: Fix mtime write for sstc extension
->   target/riscv: Fix VSTIP bit in sstc extension.
->   target/riscv: Enable/Disable S/VS-mode Timer when STCE bit is changed
+Hello Alistair,
 
-Thanks!
+Could you please comment?
 
-Applied to riscv-to-apply.next
+I'd like to know if this version of patch set need any more work.
 
-Alistair
+Thanks & Regards,
 
->
->  hw/intc/riscv_aclint.c     |  5 +++
->  target/riscv/csr.c         | 55 +++++++++++++++++++++++++++++++-
->  target/riscv/time_helper.c | 65 ++++++++++++++++++++++++++++++++++++--
->  target/riscv/time_helper.h |  1 +
->  4 files changed, 123 insertions(+), 3 deletions(-)
->
-> --
-> 2.17.1
->
->
+Ran
+
+On 2025/4/25 20:17, Ran Wang wrote:
+> This serial adds Xiangshan Kunminghu CPU and its FPGA prototype
+> platform, which include UART, CLINT, IMSIC, and APLIC
+> devices.
+> 
+> More details can be found at
+> https://github.com/OpenXiangShan/XiangShan
+> 
+> Patches based on alistair/riscv-to-apply.next
+> 
+> Huang Borong (2):
+>    target/riscv: Add BOSC's Xiangshan Kunminghu CPU
+>    hw/riscv: Initial support for BOSC's Xiangshan Kunminghu FPGA
+>      prototype
+> 
+>   MAINTAINERS                                 |   7 +
+>   configs/devices/riscv64-softmmu/default.mak |   1 +
+>   docs/system/riscv/xiangshan-kunminghu.rst   |  39 ++++
+>   docs/system/target-riscv.rst                |   1 +
+>   hw/riscv/Kconfig                            |   9 +
+>   hw/riscv/meson.build                        |   1 +
+>   hw/riscv/xiangshan_kmh.c                    | 220 ++++++++++++++++++++
+>   include/hw/riscv/xiangshan_kmh.h            |  78 +++++++
+>   target/riscv/cpu-qom.h                      |   1 +
+>   target/riscv/cpu.c                          |  64 ++++++
+>   10 files changed, 421 insertions(+)
+>   create mode 100644 docs/system/riscv/xiangshan-kunminghu.rst
+>   create mode 100644 hw/riscv/xiangshan_kmh.c
+>   create mode 100644 include/hw/riscv/xiangshan_kmh.h
+> 
+
 
