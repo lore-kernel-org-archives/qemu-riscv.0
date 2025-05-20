@@ -4,66 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B1B29C3ABDD
-	for <qemu-riscv@archiver.kernel.org>; Tue, 20 May 2025 13:07:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ECE7CC3ABDD
+	for <qemu-riscv@archiver.kernel.org>; Tue, 20 May 2025 13:08:04 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uHMVv-0007Co-Ld; Tue, 20 May 2025 08:56:11 -0400
+	id 1uHMVm-0006fe-UY; Tue, 20 May 2025 08:56:03 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <ktokunaga.mail@gmail.com>)
- id 1uHMVI-00052Q-RX; Tue, 20 May 2025 08:55:36 -0400
-Received: from mail-pf1-x433.google.com ([2607:f8b0:4864:20::433])
+ id 1uHMVE-00050x-Q1; Tue, 20 May 2025 08:55:32 -0400
+Received: from mail-pj1-x1029.google.com ([2607:f8b0:4864:20::1029])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <ktokunaga.mail@gmail.com>)
- id 1uHMVC-0001MT-0b; Tue, 20 May 2025 08:55:30 -0400
-Received: by mail-pf1-x433.google.com with SMTP id
- d2e1a72fcca58-73bf5aa95e7so5065026b3a.1; 
- Tue, 20 May 2025 05:55:22 -0700 (PDT)
+ id 1uHMV7-0001LT-L4; Tue, 20 May 2025 08:55:28 -0400
+Received: by mail-pj1-x1029.google.com with SMTP id
+ 98e67ed59e1d1-30e8feb1830so3375184a91.0; 
+ Tue, 20 May 2025 05:55:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1747745721; x=1748350521; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1747745717; x=1748350517; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=byOBE0LXqcmVn/uVzQGaT6uRuP0TTdALhSny48CvJBE=;
- b=k87iyALfdwYYmqYrDFFXJcoJ4RHkHvoojJanFB5HuK84xlM4rWYgw2bW/XbXOl+kgk
- KxFApBpZB/vMCzslCNQO9UHgLZkGMwc3gaLL0JMiKiAtPvr2HaOZipSxR4bVNM7D2SIX
- oV1jaCqeTq7Q+ytn0S0xzyo43roCorxI+XWTdPb3i6CmLen/CiQoNWyzmAOcno5G70yI
- yrKorVEdPGDKWlYoG3KeTq0ApQiRjHFyJIztYB0/xyZF8s8WWtaR8Fikfy4fsp3d3gPN
- PtorremaRNUFHy8rXlKO9udD3/BG5/9ZfnNHLexi0C974ohVwitbnwmx7IxkD3o5RuAi
- ot7w==
+ bh=pjfIs5gITyjRMKLD5/LED/i/qyf7Ai8DnNu3qgZkijk=;
+ b=RKI+4I0q4EOlQkt2gIQGujUhIc2MQHMTAqfr71jJZpLYXByZMjX1Jfmf3LJ3dB9LMi
+ relHILGb5bsFjVbTyFgoZ9rPElnBNIYC48as0iZl4gsfk0iei/8UemCLQ9cbSlKmup42
+ ldltbRjs5f+3fLN4sueQ0PCqoeOG7mErqpu0E/O9RlXadtS05uFoZoik3Bqc9apUQfd/
+ OT7Rf1V7BfvCX5R+YqNj7rmOJZRlRqCHjQDSiFZAUkWEy/4pg8PKTQSmvKEhClTy5NZ6
+ 0k2stGAIL5ME2lf3SYtMgzIuy8MLP+PVSCsK0hTnsS9F0KYvMLer1hpnquspcqmhIZoo
+ e8Yg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1747745721; x=1748350521;
+ d=1e100.net; s=20230601; t=1747745717; x=1748350517;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=byOBE0LXqcmVn/uVzQGaT6uRuP0TTdALhSny48CvJBE=;
- b=uEHrjFL6qhJs8CKZGKpQ/rwPWCErdAVABQhrM8/jZx0aKRlMvzmn+gMm/m4qS+/isH
- pcF6hZKSVecpbUq+L85nPda6ZbljY9W9ADzRCKN/oc0fdp+r2Le+ekZYvtxAs4Gy5LAm
- UoyJuiVDKxh/d9aXZtcV1igAw85fRaYEeuu/rX5AlxJlgBnK6l4ENgojMv7UVZQ71hsw
- WVjtmKr6AtlrL8tTVxXYLMA/OnayMULhuoPxHJ1hYWvcQwSgBJIrGfG7DJ/MZ26gjA3b
- 5PLiX+Gtqyi2/kVDScCa1xGB4OjaLRIdY2mn0P09XGo0oHrM2aLTLMj2jS0PbW2oj0A/
- 1SjA==
+ bh=pjfIs5gITyjRMKLD5/LED/i/qyf7Ai8DnNu3qgZkijk=;
+ b=ZDe/9IR3zTn2cz5fryq9dHfA4C71YugLDogks7Ka1litIZG+y/b+dBAM9Y4idAKK5U
+ 6sobzvpp0ungbRHb1IIF7c7xVAukWpTthzuBZ7UQ3ca9Azp9pSa3LK6cy1AFA9aEpZVe
+ Xy39ZlZrreTTfa2irn0H60IiOhacm3emdX7vDMmyrklslqII8/GxT13gfcaiSc0PKQzz
+ ZeysXSgWGn9n9RgfAo17SJS1KDwOpKEAX/6HLmrVOWvw4AnMlL2Y2aMJcHrhQJZsiRtW
+ nAUfZPvcMNWDkMyZCcrP0lYwncrD7qtYlMGLR71QWq1xnZTw3EnruN033sVld23GeTLd
+ +OwA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCV7gSn5jK/Zm0LsO1mTs2ql3rbaeBCiK5TKenWZ0Lu5Amp9M2fRBRELhDg+mHrj/5G4/4UEcg1nSA==@nongnu.org,
- AJvYcCVOw5X3wB7HhpqMkdCpltv5RMgoV1ISx99V+CEMx3Y6ZnlIlV8vOmB6OT1q4a9DvZqGn3J6iyUpzx0vnw==@nongnu.org
-X-Gm-Message-State: AOJu0YzMeO/r15mnH7geoBznFj94CEOxCTc/yldILrIIe9uJc8nA1HOj
- zd3tFNZHWi05kn8NvOgWc8mT5VLYoCfrFOwf7o/u+vs2QzgDcOJlcKA4Am7oq0SC
-X-Gm-Gg: ASbGncuSkkuzy0cKDbbWizBopawh3o0bN+5KbHflD6VUg5UqdPBjOAfhKCN00M5oT2i
- fNT4boPMULXoLjhYKTu3qZX5EKdvhhCQYxLTokKs4PD3vvRSA83rG0T2BDBQE40XQ0Z1FyMATRJ
- mBofMjj+IvUs3+046Bg5djO16uwV5cSAd8/qZdC1SA3MBPe3cl0UI6g/Vxl1yLMMpnhTtY1lBJh
- 2ZuQCkNXf5MjgATG3vKaCjXx2stB49H0mMEoP7Tuui3dcoKWw8k0pVmRwvUWnK9K5kXsN2k432p
- FTOZpOqOWTHW9sEYuCvUmyle1gNh9zdKabqwihBQdJx4L5ABC3Y=
-X-Google-Smtp-Source: AGHT+IHCNeXOoJTyXF78Adx/1Dxrax03p01KnXN3FbNUlv+jV9FjmGCEvba2dD4sWsgzbjHjN7ba3Q==
-X-Received: by 2002:a17:90b:1c05:b0:2ff:5ec1:6c6a with SMTP id
- 98e67ed59e1d1-30e7d55ba27mr27946322a91.18.1747745721589; 
- Tue, 20 May 2025 05:55:21 -0700 (PDT)
+ AJvYcCW2UbVfyN3nZLJV4o7Ekv5bfRL8Ws62TC21E/cA9k/ct8MOQ6O8ueCZk4WP4EUA55zM9YBuWioCS3jB2Q==@nongnu.org,
+ AJvYcCXjhTufwYSrX23UaLZ0MCSphFKCkqC9sqe21A5XAvLphyWf8KMKyUt6iAZhVlCcYonZQ9sTyrehbg==@nongnu.org
+X-Gm-Message-State: AOJu0YzqfS6MLqk6mJvDTs1YDNCceWI75/r5Xyc5gjboEKa1lSDNacr4
+ ktjovmy5CPQR8lzJ2y0hAj104HPg3uJ0NE/T0TXnKVsHXh8XMm+R6vpNGjyExryw
+X-Gm-Gg: ASbGnctGv4KiZ+PXvjtDGCK3tr96PKJrmQbN0aD+YsjR/Ps5UCg94qxLyl4AJvPTyX5
+ lMBMxtf3nkGFFxlOVf7IVBarIHHFpWMyIRMErPwfXUTnNdqARkYoVqC+ammYStmLmDq1r2d77A5
+ qpdbfMvccmXckrvbEt4yJSawHHs3Ts2pyyhHkahQZ2RzIrFxfYsQpO8KQpLbzBQhYB0ozfz1/t0
+ jBKLb0xvdAeGh/axd4sNscYaxKCEcsebp19kGGDejzhav2ZhDsIchu3O1rhT7Ha8IZzuFc0tNQL
+ q3ZyMJUcs4jA2gnoJrt1RG2WNNvi/1JIFegrhUABCZMsncvoo7danmu0Oh8+CQ==
+X-Google-Smtp-Source: AGHT+IFctWoCBwXZjWVIzlvOeAGpN4yYvW8TpdBxj/ko0x2Fmf9rUlfVzBwaYGHdhUFZEuZxeGUt7Q==
+X-Received: by 2002:a17:90b:3505:b0:305:2d27:7c9f with SMTP id
+ 98e67ed59e1d1-30e7d555aadmr28951571a91.16.1747745716767; 
+ Tue, 20 May 2025 05:55:16 -0700 (PDT)
 Received: from ktock.. ([240d:1a:3b6:8b00:1bde:8310:e993:5dcc])
  by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-30f36364f9asm1625916a91.4.2025.05.20.05.55.17
+ 98e67ed59e1d1-30f36364f9asm1625916a91.4.2025.05.20.05.55.11
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 20 May 2025 05:55:21 -0700 (PDT)
+ Tue, 20 May 2025 05:55:16 -0700 (PDT)
 From: Kohei Tokunaga <ktokunaga.mail@gmail.com>
 To: qemu-devel@nongnu.org
 Cc: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
@@ -81,23 +81,24 @@ Cc: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
  Pierrick Bouvier <pierrick.bouvier@linaro.org>,
  Kohei Tokunaga <ktokunaga.mail@gmail.com>, qemu-arm@nongnu.org,
  qemu-riscv@nongnu.org
-Subject: [PATCH 33/33] .gitlab-ci.d: build wasm backend in CI
-Date: Tue, 20 May 2025 21:51:35 +0900
-Message-ID: <36a7f4334e9e08691d7496809a5d06b23de22e26.1747744132.git.ktokunaga.mail@gmail.com>
+Subject: [PATCH 32/33] meson: Propagate optimization flag for linking on
+ Emscripten
+Date: Tue, 20 May 2025 21:51:34 +0900
+Message-ID: <8d969f197a9b3785fd6bca4ec57e3a42afdf62c0.1747744132.git.ktokunaga.mail@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <cover.1747744132.git.ktokunaga.mail@gmail.com>
 References: <cover.1747744132.git.ktokunaga.mail@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::433;
- envelope-from=ktokunaga.mail@gmail.com; helo=mail-pf1-x433.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1029;
+ envelope-from=ktokunaga.mail@gmail.com; helo=mail-pj1-x1029.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ T_SPF_TEMPERROR=0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -113,23 +114,34 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Check if wasm backend can be built in CI.
+Emscripten uses the optimization flag at link time to enable optimizations
+via Binaryen [1]. While meson.build currently recognizes the -Doptimization
+option, it does not propagate it to the linking. This commit updates
+meson.build to propagate the optimization flag to the linking when targeting
+WebAssembly.
+
+[1] https://emscripten.org/docs/optimizing/Optimizing-Code.html#how-emscripten-optimizes
 
 Signed-off-by: Kohei Tokunaga <ktokunaga.mail@gmail.com>
 ---
- .gitlab-ci.d/buildtest.yml | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ meson.build | 4 ++++
+ 1 file changed, 4 insertions(+)
 
-diff --git a/.gitlab-ci.d/buildtest.yml b/.gitlab-ci.d/buildtest.yml
-index 248aaed137..fc42de231a 100644
---- a/.gitlab-ci.d/buildtest.yml
-+++ b/.gitlab-ci.d/buildtest.yml
-@@ -800,4 +800,4 @@ build-wasm:
-     job: wasm-emsdk-cross-container
-   variables:
-     IMAGE: emsdk-wasm32-cross
--    CONFIGURE_ARGS: --static --disable-tools --enable-debug --enable-tcg-interpreter
-+    CONFIGURE_ARGS: --static --disable-tools --enable-debug
+diff --git a/meson.build b/meson.build
+index f6ed867819..91e182092d 100644
+--- a/meson.build
++++ b/meson.build
+@@ -869,6 +869,10 @@ elif host_os == 'openbsd'
+     # Disable OpenBSD W^X if available
+     emulator_link_args = cc.get_supported_link_arguments('-Wl,-z,wxneeded')
+   endif
++elif host_os == 'emscripten'
++  if get_option('optimization') != 'plain'
++    emulator_link_args += ['-O' + get_option('optimization')]
++  endif
+ endif
+ 
+ ###############################################
 -- 
 2.43.0
 
