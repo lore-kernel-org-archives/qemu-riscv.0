@@ -4,89 +4,131 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3BFEDC3DA6D
-	for <qemu-riscv@archiver.kernel.org>; Tue, 20 May 2025 17:24:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E194BC54E71
+	for <qemu-riscv@archiver.kernel.org>; Tue, 20 May 2025 22:23:01 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uHQgv-0000tp-Gj; Tue, 20 May 2025 13:23:49 -0400
+	id 1uHVLv-0005A5-V5; Tue, 20 May 2025 18:22:28 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1uHQgu-0000tC-2h
- for qemu-riscv@nongnu.org; Tue, 20 May 2025 13:23:48 -0400
-Received: from mail-vs1-xe33.google.com ([2607:f8b0:4864:20::e33])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1uHQgs-00059a-GK
- for qemu-riscv@nongnu.org; Tue, 20 May 2025 13:23:47 -0400
-Received: by mail-vs1-xe33.google.com with SMTP id
- ada2fe7eead31-4c34dcdaf88so2198940137.2
- for <qemu-riscv@nongnu.org>; Tue, 20 May 2025 10:23:46 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1747761825; x=1748366625; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=FbnhFvL+Xckg4Tz2j+XMYiP2ecfnROLPqe0PL000DBA=;
- b=gWA+v56tiTdTn9fvwI/8oeyRg8/PIhrJea1hzg8EEOVp7+duyu/ZwfPbQcPn0ooDf9
- BUEJMzx8/G02AwZWd9G5dsDduR0FnkLSiTNtaSnPIpnGLO27olsDV6Pt5ku/avSDAlyh
- K4mlSrdMr3pnpOE5RvFkEDMMc0vEems62U+tYB9koBRwkZNKBlAK6b/XeZVkx+1IMZHF
- jKy6VHuiHtAGIkoWzbnjP5mxfRHLbZMuaMBdTX1Ai56b7Y0r8pQUDMr95LG430VF7qXb
- oewCbPkDEhoraaBzH2EDwl+0Nfwm7TOcdcBWuvV4YfQVMWwBAo8hyV3W+iEO/uwlltR4
- 9iWQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1747761825; x=1748366625;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=FbnhFvL+Xckg4Tz2j+XMYiP2ecfnROLPqe0PL000DBA=;
- b=aOOm5dJrMXVeyk6zHr9QegwLQdGA+fRhSkfZS5KNXbZrnlTgjLs/CtvEjKRQGxyadr
- kE9i4ls0srzuCJ6kr+H5efpnyLg9pavijQFZsTuCOhBkqxfuTehkHaP+ByXEdkuQhyGO
- YZg03hOTqckXtIp4YWxPXnONm+l+d5iTgEvLyoTimOcnjwnyT5f1VBFXAHqpZ14YanZR
- KbUubDgNkIr7V/0ZazTWP1tv+fVxWcttXOmmSLorqEfisf7whFzXee8UlsGd0xC8DhTH
- 7j2LVCUhDkKzIxMMw0Zv5FdR8DbyPLj/xNJSbG1+kVphJt6u239WqXUfZPZrQ4XaJg6v
- T1rQ==
-X-Gm-Message-State: AOJu0YwVIbUbnHGArKZ6IBgOz9hAANLaXkJ+sGtDWnyPaG+G0dIaCW6i
- wEbW8fR0miHjnZKhKZg39XAaHINw4NX0w41OO49Hk4CDpJb67qR03X5HQNFntKj2Po8=
-X-Gm-Gg: ASbGncvYAgQ3mWCwoNR5rqFYgHjgRUjumJL9+2bksHDivWsas0PPsidbBhTo5YXHpVO
- kY4wU3IVuoEvQr9x5U22k4avgTwSDLiM70YrCR1GSPi2Ri4cz95Nl+ar2AnT0bnaoek4IVfDPcB
- KWXB8qo4ybDE7CPuhdKBMZBQMwcvM4jRbIS3ZCTu3xVbJYUdPN9b7+u4jH62UXCbMCjJOIJ+X2v
- e6JbsSgg4mN58EKXNlAHT0JWB+mFE1knWB+PwUEaCxVGLK/iQZpqgM6mUAmxQxmjKnLJVRxZNW2
- eJQ3TFZzaN4eSyu1LwOBCSi7X7bHqNY5p/1jdWS42EQT7AppahIyna5lmaMBcqXvcUrI4afo1wM
- gRE5H
-X-Google-Smtp-Source: AGHT+IGOgEu+tEofSgOTNiQonWjrnQ68QbK3YPqIOxqVfX57GgwmwPMSuayNBhioq9aPqCZGE6yGvA==
-X-Received: by 2002:a05:6102:548f:b0:4da:e6e9:e008 with SMTP id
- ada2fe7eead31-4e049d18e88mr14192572137.4.1747761825558; 
- Tue, 20 May 2025 10:23:45 -0700 (PDT)
-Received: from grind.dc1.ventanamicro.com ([152.250.131.100])
- by smtp.gmail.com with ESMTPSA id
- a1e0cc1a2514c-87bec155e21sm7698107241.17.2025.05.20.10.23.42
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 20 May 2025 10:23:45 -0700 (PDT)
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-To: qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, liwei1518@gmail.com,
- zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com, ajones@ventanamicro.com,
- bjorn@kernel.org, Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Subject: [PATCH 1/3] target/riscv/tcg: restrict satp_mode changes in
- cpu_set_profile
-Date: Tue, 20 May 2025 14:23:34 -0300
-Message-ID: <20250520172336.759708-2-dbarboza@ventanamicro.com>
-X-Mailer: git-send-email 2.49.0
-In-Reply-To: <20250520172336.759708-1-dbarboza@ventanamicro.com>
-References: <20250520172336.759708-1-dbarboza@ventanamicro.com>
+ (Exim 4.90_1) (envelope-from <iii@linux.ibm.com>)
+ id 1uHVLk-00058E-SQ; Tue, 20 May 2025 18:22:18 -0400
+Received: from mx0a-001b2d01.pphosted.com ([148.163.156.1])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <iii@linux.ibm.com>)
+ id 1uHVLh-00042n-2C; Tue, 20 May 2025 18:22:16 -0400
+Received: from pps.filterd (m0356517.ppops.net [127.0.0.1])
+ by mx0a-001b2d01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 54KIoiCc023106;
+ Tue, 20 May 2025 22:21:43 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ibm.com; h=cc
+ :content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=pp1; bh=9p09lx
+ +xxbHsNO/bXtu8ToIhAFds31gXqfLJZrp+Zys=; b=clcib5BzFCwRIG9wOrbQ8d
+ TRGdg9JgaCPrXjOKZuI/CIVl1JTuitNpvGhd4suFFZW9F2/HJ4fgw8aH3mYY6BQB
+ ERk+jD5/btw91Tb/9q9cZndvO27ARrJwq5S5Xeije78Zmg+gf9QC3k5fA/3F2sLc
+ aG4jhx+Dv0w8E1Q3D6+4RMmTYU+a8yP9OUeqbrlaLmgWtV36LD3VJYXaE/46iFsW
+ ICLf4Q3TD/pPrimtQFtrxloweEeFtnutCsukHVaV1s+YKE55s/2btNKy/VYxsyIh
+ xfqifwAQtAD8ljriMgQEM8WGPLMzSV3txwaNnL3uiJtoyXO2WSe3UW1XmYntQ4uQ
+ ==
+Received: from pps.reinject (localhost [127.0.0.1])
+ by mx0a-001b2d01.pphosted.com (PPS) with ESMTPS id 46ryc88un0-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Tue, 20 May 2025 22:21:43 +0000 (GMT)
+Received: from m0356517.ppops.net (m0356517.ppops.net [127.0.0.1])
+ by pps.reinject (8.18.0.8/8.18.0.8) with ESMTP id 54KMLgQu007504;
+ Tue, 20 May 2025 22:21:42 GMT
+Received: from ppma23.wdc07v.mail.ibm.com
+ (5d.69.3da9.ip4.static.sl-reverse.com [169.61.105.93])
+ by mx0a-001b2d01.pphosted.com (PPS) with ESMTPS id 46ryc88umv-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Tue, 20 May 2025 22:21:42 +0000 (GMT)
+Received: from pps.filterd (ppma23.wdc07v.mail.ibm.com [127.0.0.1])
+ by ppma23.wdc07v.mail.ibm.com (8.18.1.2/8.18.1.2) with ESMTP id 54KKOXi3031996;
+ Tue, 20 May 2025 22:21:41 GMT
+Received: from smtprelay05.dal12v.mail.ibm.com ([172.16.1.7])
+ by ppma23.wdc07v.mail.ibm.com (PPS) with ESMTPS id 46rwmq192u-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Tue, 20 May 2025 22:21:40 +0000
+Received: from smtpav02.wdc07v.mail.ibm.com (smtpav02.wdc07v.mail.ibm.com
+ [10.39.53.229])
+ by smtprelay05.dal12v.mail.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id
+ 54KMLepL29754034
+ (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Tue, 20 May 2025 22:21:40 GMT
+Received: from smtpav02.wdc07v.mail.ibm.com (unknown [127.0.0.1])
+ by IMSVA (Postfix) with ESMTP id DBC0B58058;
+ Tue, 20 May 2025 22:21:39 +0000 (GMT)
+Received: from smtpav02.wdc07v.mail.ibm.com (unknown [127.0.0.1])
+ by IMSVA (Postfix) with ESMTP id E22B458059;
+ Tue, 20 May 2025 22:21:37 +0000 (GMT)
+Received: from ltc.linux.ibm.com (unknown [9.5.196.140])
+ by smtpav02.wdc07v.mail.ibm.com (Postfix) with ESMTP;
+ Tue, 20 May 2025 22:21:37 +0000 (GMT)
 MIME-Version: 1.0
+Date: Tue, 20 May 2025 23:21:37 +0100
+From: Ilya Leoshkevich <iii@linux.ibm.com>
+To: Michael Tokarev <mjt@tls.msk.ru>
+Cc: =?UTF-8?Q?Alex_Benn=C3=A9e?= <alex.bennee@linaro.org>,
+ qemu-devel@nongnu.org, Peter Xu <peterx@redhat.com>, Thomas Huth
+ <thuth@redhat.com>, Weiwei Li <liwei1518@gmail.com>,
+ qemu-arm@nongnu.org, Nicholas Piggin <npiggin@gmail.com>, Liu Zhiwei
+ <zhiwei_liu@linux.alibaba.com>, Bin Meng <bmeng.cn@gmail.com>, Tyrone Ting
+ <kfting@nuvoton.com>, Hao Wu <wuhaotsh@google.com>, Kyle Evans
+ <kevans@freebsd.org>, Alistair Francis <alistair.francis@wdc.com>,
+ =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>, Laurent Vivier
+ <laurent@vivier.eu>, Riku Voipio <riku.voipio@iki.fi>, Harsh Prateek Bora
+ <harshpb@linux.ibm.com>, Fabiano Rosas <farosas@suse.de>, Alexandre Iooss
+ <erdnaxe@crans.org>, Laurent Vivier <lvivier@redhat.com>, Daniel Henrique
+ Barboza <danielhb413@gmail.com>, Warner Losh <imp@bsdimp.com>, Pierrick
+ Bouvier <pierrick.bouvier@linaro.org>, Palmer Dabbelt <palmer@dabbelt.com>,
+ Mahmoud Mandour <ma.mandourr@gmail.com>, qemu-ppc@nongnu.org, Paolo Bonzini
+ <pbonzini@redhat.com>, qemu-rust@nongnu.org, qemu-riscv@nongnu.org
+Subject: Re: [PATCH v2 11/17] gdbstub: Try unlinking the unix socket before
+ binding
+In-Reply-To: <ee091002-a552-49fe-ae5e-8916937dba15@tls.msk.ru>
+References: <20250207153112.3939799-1-alex.bennee@linaro.org>
+ <20250207153112.3939799-12-alex.bennee@linaro.org>
+ <ee091002-a552-49fe-ae5e-8916937dba15@tls.msk.ru>
+Message-ID: <56e0a35b5c53b416db130c414cd0f3d6@linux.ibm.com>
+X-Sender: iii@linux.ibm.com
+Content-Type: text/plain; charset=UTF-8;
+ format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::e33;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-vs1-xe33.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
+X-TM-AS-GCONF: 00
+X-Authority-Analysis: v=2.4 cv=XaCJzJ55 c=1 sm=1 tr=0 ts=682d0077 cx=c_pps
+ a=3Bg1Hr4SwmMryq2xdFQyZA==:117 a=3Bg1Hr4SwmMryq2xdFQyZA==:17
+ a=IkcTkHD0fZMA:10 a=dt9VzEwgFbYA:10 a=VnNF1IyMAAAA:8 a=dwixPFO5EDRWQakTH6kA:9
+ a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
+X-Proofpoint-GUID: QJsZVEz1xESpOME9ciwkwrUVa51ecEg8
+X-Proofpoint-ORIG-GUID: vjLgG9uT6KzjuiWAx3FmejLsrItBt8S7
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwNTIwMDE3OSBTYWx0ZWRfX8YoPQ28a7zAS
+ CbItkAD0cvQsjLQmlffpmzla3j+JN2Vn2028nFIMAQT0COKRNgoAWu/ju0BZnDZFxWDqAfu8Iaj
+ cP3KlFb/TlArfEx2uVH93g8aS1g68STHinNeGAGvz3ky+3p78REG9tf6//EjMJVBwF1+N+FAJ07
+ 6DnkDviEHi7beZ9kVxfUv5OasyzWm3wg4+Fpi+6d8YQMPQJvBPgzuKwXtGefeFgmUUVmHP+pdp7
+ DMabT8ty6Xvbou658amxDMjxhKLDR05eKq1D4+xMexhQUXPOWiKaN8AfRLtwEVDmZmyfQYCnygC
+ /rZeZxpOndKHOJDhIT0D5lCos8KEhJwgD8CrZNhNbhIgNP8f2OwpXAnfTFRiua6etaVbQ7cw2Q8
+ 2HbLgjwbPhkjIQ1/1Jq7Whwqvj2+KNgZjxqYKBzClbAXBTsASQC/G05mZ2ar7EhnLSLl5GS2
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.0.736,FMLib:17.12.80.40
+ definitions=2025-05-20_10,2025-05-20_03,2025-03-28_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ suspectscore=0 adultscore=0
+ impostorscore=0 spamscore=0 clxscore=1011 mlxscore=0 lowpriorityscore=0
+ phishscore=0 malwarescore=0 bulkscore=0 priorityscore=1501 mlxlogscore=999
+ classifier=spam authscore=0 authtc=n/a authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.19.0-2505160000
+ definitions=main-2505200179
+Received-SPF: pass client-ip=148.163.156.1; envelope-from=iii@linux.ibm.com;
+ helo=mx0a-001b2d01.pphosted.com
+X-Spam_score_int: -26
+X-Spam_score: -2.7
 X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+X-Spam_report: (-2.7 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_EF=-0.1, RCVD_IN_DNSWL_LOW=-0.7,
+ RCVD_IN_MSPIKE_H5=0.001, RCVD_IN_MSPIKE_WL=0.001,
+ RCVD_IN_VALIDITY_CERTIFIED_BLOCKED=0.001, RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -102,51 +144,62 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-We're changing 'mmu' to true regardless of whether the profile is
-being enabled or not, and at the same time we're changing satp_mode to
-profile->enabled.
+On 2025-05-20 15:50, Michael Tokarev wrote:
+> 07.02.2025 18:31, Alex Bennée wrote:
+>> From: Ilya Leoshkevich <iii@linux.ibm.com>
+>> 
+>> In case an emulated process execve()s another emulated process, bind()
+>> will fail, because the socket already exists. So try deleting it. Use
+>> the existing unix_listen() function which does this. Link qemu-user
+>> with qemu-sockets.c and add the monitor_get_fd() stub.
+>> 
+>> Note that it is not possible to handle this in do_execv(): deleting
+>> gdbserver_user_state.socket_path before safe_execve() is not correct,
+>> because the latter may fail, and afterwards we may lose control.
+> 
+> Please note: this is linux-user stuff, which is usually linked 
+> statically.
+> By linking it with qemu-sockets, we basically broke static linking, 
+> because
+> qemu-sockets uses getaddrinfo() &Co.  The previous code, I think, was 
+> there
+> for a reason, - to avoid this linkage.
+> 
+> How do you think about reverting this one and addressing the original
+> problem without using qemu-sockets?
+> 
+> Alternatively, it might be possible to split qemu-sockets.c into 
+> unix-related
+> stuff and generic stuff.
+> 
+> Thanks,
+> 
+> /mjt
 
-This will promote a situation where we'll set mmu=on without a virtual
-memory mode, which is a mistake.
+I can split it.
 
-Only touch 'mmu' and satp_mode if the profile is being enabled.
+However, wasn't it already broken in this regard?
+With fccb744f41c69fec6fd92225fe907c6e69de5d44^ I get:
 
-Suggested-by: Andrew Jones <ajones@ventanamicro.com>
-Fixes: 55398025e7 ("target/riscv: add satp_mode profile support")
-Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
----
- target/riscv/tcg/tcg-cpu.c | 14 +++++++-------
- 1 file changed, 7 insertions(+), 7 deletions(-)
+[2/2] Linking target qemu-s390x
+/usr/bin/ld: /usr/lib64/libglib-2.0.a(gutils.c.o): in function 
+`g_get_user_database_entry':
+(.text+0xeb): warning: Using 'getpwnam_r' in statically linked 
+applications requires at runtime the shared libraries from the glibc 
+version used for linking
+/usr/bin/ld: (.text+0x2be): warning: Using 'getpwuid' in statically 
+linked applications requires at runtime the shared libraries from the 
+glibc version used for linking
+/usr/bin/ld: (.text+0x134): warning: Using 'getpwuid_r' in statically 
+linked applications requires at runtime the shared libraries from the 
+glibc version used for linking
 
-diff --git a/target/riscv/tcg/tcg-cpu.c b/target/riscv/tcg/tcg-cpu.c
-index 55e00972b7..7f93414a76 100644
---- a/target/riscv/tcg/tcg-cpu.c
-+++ b/target/riscv/tcg/tcg-cpu.c
-@@ -1338,16 +1338,16 @@ static void cpu_set_profile(Object *obj, Visitor *v, const char *name,
- 
-     if (profile->enabled) {
-         cpu->env.priv_ver = profile->priv_spec;
--    }
- 
- #ifndef CONFIG_USER_ONLY
--    if (profile->satp_mode != RISCV_PROFILE_ATTR_UNUSED) {
--        object_property_set_bool(obj, "mmu", true, NULL);
--        const char *satp_prop = satp_mode_str(profile->satp_mode,
--                                              riscv_cpu_is_32bit(cpu));
--        object_property_set_bool(obj, satp_prop, profile->enabled, NULL);
--    }
-+        if (profile->satp_mode != RISCV_PROFILE_ATTR_UNUSED) {
-+            object_property_set_bool(obj, "mmu", true, NULL);
-+            const char *satp_prop = satp_mode_str(profile->satp_mode,
-+                                                  riscv_cpu_is_32bit(cpu));
-+            object_property_set_bool(obj, satp_prop, true, NULL);
-+        }
- #endif
-+    }
- 
-     for (i = 0; misa_bits[i] != 0; i++) {
-         uint32_t bit = misa_bits[i];
--- 
-2.49.0
+This comes from glib, but the ultimate result is still the same.
 
+Also, what are the symptoms of the breakage? IIUC as long as execution
+does not reach getaddrinfo(), which it in this case should not, because
+it is used only on inet paths, there should not be any issues, right?
+
+In any case, the new warning is annoying and I better fix it for this
+reason alone.
 
