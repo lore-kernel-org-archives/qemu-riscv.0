@@ -4,105 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 71D17C54E71
-	for <qemu-riscv@archiver.kernel.org>; Wed, 21 May 2025 15:41:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5CB7DC2D0CD
+	for <qemu-riscv@archiver.kernel.org>; Wed, 21 May 2025 15:56:21 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uHlZf-0000dH-Su; Wed, 21 May 2025 11:41:43 -0400
+	id 1uHlnB-00045Y-71; Wed, 21 May 2025 11:55:41 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
- id 1uHlZe-0000cQ-94
- for qemu-riscv@nongnu.org; Wed, 21 May 2025 11:41:42 -0400
-Received: from mail-yw1-x1134.google.com ([2607:f8b0:4864:20::1134])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
- id 1uHlZc-0006W1-1b
- for qemu-riscv@nongnu.org; Wed, 21 May 2025 11:41:41 -0400
-Received: by mail-yw1-x1134.google.com with SMTP id
- 00721157ae682-70825de932bso81648577b3.0
- for <qemu-riscv@nongnu.org>; Wed, 21 May 2025 08:41:38 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1747842097; x=1748446897; darn=nongnu.org;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=spfLx4z/2w6V3UeSHe3VBdiO1OMuzXoFQOHptwcYaYc=;
- b=GqmtG4yVqQZ+Mq6tvFDkbDw7sF7N7XPbZKaCy0TbsMORTt29ewuZhyD4gi++k/QySZ
- jcDeETZm1JSwXAxsjxjSJIOKTwkLN1t6+8m+Grs4Cs+mrRcKZ0c6AwJvJOxeaulTuk0Q
- k9q2yxLSBpOHcN72D4iH0zK2SPIL2XHd0mH/32cLVgtTgq19ia+7OEq1iRWC4yIvrpC1
- lsCARruOWz0eA3PbM/MkBYPG6ge6V/GLzWDimT6dnBuzk6hkBoHjRzkqgcle2dGL8zLt
- y26cvwD3Ib1Ac4TjUKS9t8w2gSXZHeEotqDcQJt88CI+ZZ8vnfQRYm+bass1LfgRQqHl
- FcNg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1747842097; x=1748446897;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=spfLx4z/2w6V3UeSHe3VBdiO1OMuzXoFQOHptwcYaYc=;
- b=ARrfk0MxfT+H6dsU3UhDiqCWNGp8UgSMLbc5n8o8G5Qh6xIgYxtVZugzRVZUdW4gTM
- H66jeYn9+UTP6IoeBcn2dilLYSgRz4kysDsT1aacFvE0wTwAVjh6y2aUhlEckfroKhzL
- QsADszl9nfMG6d0Ur0HcvAj8uOXhUKxszkaBExjKfJYNTIQWJUQ5qGtzHOTnqfuoD2sE
- 3XV0MgETWp8pC4RB07uSkPP6B1kEzkepv6idL6uzJ189LtBF3oywlQFBGbV73Ew3XuJI
- DrZ6RAflvch8xhdNbfzCa4YMfoG6oTEJGY1SBwcSo+uQ7N2SURVmDF1p4LflzYxZyx6H
- RagQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCX3Gs2eVz38oa4r2+aqwW9jigCFgkuVwo8KZd/YoVO25d6aCo28a4hDsHCtRS8m/ny+HGdC0iUjHAVs@nongnu.org
-X-Gm-Message-State: AOJu0YwOeNinXctn0MdZPiuIX7e9sejwRms88N71HSPLvKzTwceMcYFY
- lYHDdchQ80scjlGMvCmJ5VoHqeO4KZiy23FOA3VLo6AOcsF6wO+R4l9KC6nnMAteVvqfpH4Q25I
- DoAp4rtEQYRqTFcothb/B6njs83F3D3a3wV6UKdGFxw==
-X-Gm-Gg: ASbGncuYngWkuNT3cngDeK6ZvDoz5gjYlcRLSGtLZ6s25cFqtGcQUd2jdncnQwgjjRM
- AjrVAiao90lCtzFFt9/eJ3IeCnfu9GNPeKZ5JH8u1yXYzjLRxEm2vr0jrm8nlAum0qy3uE2fZ75
- l6nlVbaIjTtnhUvLY/JYynGU7XJQxQbAG8665aHdBB56Jp
-X-Google-Smtp-Source: AGHT+IE4lqVILNbp+91oyYEN/v1dl/Zmyx+CpYjMBQPP1jiCqBYQw6fdo1H43hpPWRJPQhryy9tig6s4K7Ji5mcRMms=
-X-Received: by 2002:a05:690c:6002:b0:70c:beb2:d15d with SMTP id
- 00721157ae682-70cbeb2d57cmr238950107b3.15.1747842096924; Wed, 21 May 2025
- 08:41:36 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <srv_ts003@codethink.com>)
+ id 1uHlmz-00043W-1m; Wed, 21 May 2025 11:55:29 -0400
+Received: from imap5.colo.codethink.co.uk ([78.40.148.171])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <srv_ts003@codethink.com>)
+ id 1uHlmv-0008Ag-IT; Wed, 21 May 2025 11:55:28 -0400
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=codethink.co.uk; s=imap5-20230908; h=Sender:Content-Transfer-Encoding:
+ MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:
+ Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:Resent-From:
+ Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:
+ List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=s3+CHHmXAYyrW55D/Y+I1Y7QpnQ4qrn51rNdFIxUd7I=; b=Qv+CEgSSzOXJdyWVJSTzJ9S0g+
+ L9rci/Jcez9IGmbGdI1c2Mr/QVbwtCGcvpRYol5J/GlYfz8Mw65Y0pr/V2G0XVJmF46YEg5zGqYyX
+ FlZUrMWyLu4pxQCXTOFSA5NHU0eE23s939m948YVnsaR6MIy93YDZqvgAG8RzYLBJIQ1qp/44rHjW
+ ZhzFU9RElRuQnTpbpSSynkXKaSvXuTeqoYXkQywMlJfhQhIH0kS9Lh6IuZWpMf+v3R1zngQD6pQym
+ xJaec55KakXhGngpKUm3pPDRhpo9yW0JDxi+Sp9EVn5NbkbqEyviBvKZf5maQiM2MK0UgpyeXZxAz
+ 64UwpyqA==;
+Received: from [167.98.27.226] (helo=rainbowdash)
+ by imap5.colo.codethink.co.uk with esmtpsa  (Exim 4.94.2 #2 (Debian))
+ id 1uHlmZ-001dlq-B4; Wed, 21 May 2025 16:55:03 +0100
+Received: from ben by rainbowdash with local (Exim 4.98.2)
+ (envelope-from <ben@rainbowdash>) id 1uHlmZ-000000006KP-0Yky;
+ Wed, 21 May 2025 16:55:03 +0100
+From: Ben Dooks <ben.dooks@codethink.co.uk>
+To: nazar.kazakov@codethink.co.uk, joseph.baker@codethink.co.uk,
+ fran.redondo@codethink.co.uk, lawrence.hunter@codethink.co.uk,
+ liwei1518@gmail.com, dbarboza@ventanamicro.com,
+ zhiwei_liu@linux.alibaba.com, qemu-riscv@nongnu.org
+Cc: ben.dooks@codethink.co.uk,
+	qemu-devel@nongnu.org
+Subject: [PATCH 2/2] target/riscv: add cva6 cpu type
+Date: Wed, 21 May 2025 16:54:58 +0100
+Message-Id: <20250521155458.24255-3-ben.dooks@codethink.co.uk>
+X-Mailer: git-send-email 2.37.2.352.g3c44437643
+In-Reply-To: <20250521155458.24255-1-ben.dooks@codethink.co.uk>
+References: <20250521155458.24255-1-ben.dooks@codethink.co.uk>
 MIME-Version: 1.0
-References: <20250207153112.3939799-1-alex.bennee@linaro.org>
- <20250207153112.3939799-12-alex.bennee@linaro.org>
- <ee091002-a552-49fe-ae5e-8916937dba15@tls.msk.ru>
- <56e0a35b5c53b416db130c414cd0f3d6@linux.ibm.com>
- <CAFEAcA8Mzo-Ne48=uFBTcy+CXNcnxGOaW941p=CRkD6gmC=JfA@mail.gmail.com>
- <aC3zT7gOMn4i-d4U@redhat.com>
-In-Reply-To: <aC3zT7gOMn4i-d4U@redhat.com>
-From: Peter Maydell <peter.maydell@linaro.org>
-Date: Wed, 21 May 2025 16:41:24 +0100
-X-Gm-Features: AX0GCFv5PEVvm_Y2xRgD4c7fEzTF202zrflBykavwYv7tsKc7GPCnyfB1SeKVGQ
-Message-ID: <CAFEAcA_M5cJ3atABVCdR+_p2t3wvr3+Pmesq9Hs39J9c2ateWg@mail.gmail.com>
-Subject: Re: [PATCH v2 11/17] gdbstub: Try unlinking the unix socket before
- binding
-To: =?UTF-8?Q?Daniel_P=2E_Berrang=C3=A9?= <berrange@redhat.com>
-Cc: Ilya Leoshkevich <iii@linux.ibm.com>, Michael Tokarev <mjt@tls.msk.ru>, 
- =?UTF-8?B?QWxleCBCZW5uw6ll?= <alex.bennee@linaro.org>, qemu-devel@nongnu.org, 
- Peter Xu <peterx@redhat.com>, Thomas Huth <thuth@redhat.com>,
- Weiwei Li <liwei1518@gmail.com>, 
- qemu-arm@nongnu.org, Nicholas Piggin <npiggin@gmail.com>, 
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, Bin Meng <bmeng.cn@gmail.com>, 
- Tyrone Ting <kfting@nuvoton.com>, Hao Wu <wuhaotsh@google.com>, 
- Kyle Evans <kevans@freebsd.org>, Alistair Francis <alistair.francis@wdc.com>, 
- =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@linaro.org>, 
- Laurent Vivier <laurent@vivier.eu>, Riku Voipio <riku.voipio@iki.fi>, 
- Harsh Prateek Bora <harshpb@linux.ibm.com>, Fabiano Rosas <farosas@suse.de>, 
- Alexandre Iooss <erdnaxe@crans.org>, Laurent Vivier <lvivier@redhat.com>, 
- Daniel Henrique Barboza <danielhb413@gmail.com>, Warner Losh <imp@bsdimp.com>, 
- Pierrick Bouvier <pierrick.bouvier@linaro.org>,
- Palmer Dabbelt <palmer@dabbelt.com>, 
- Mahmoud Mandour <ma.mandourr@gmail.com>, qemu-ppc@nongnu.org, 
- Paolo Bonzini <pbonzini@redhat.com>, qemu-rust@nongnu.org,
- qemu-riscv@nongnu.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1134;
- envelope-from=peter.maydell@linaro.org; helo=mail-yw1-x1134.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=78.40.148.171;
+ envelope-from=srv_ts003@codethink.com; helo=imap5.colo.codethink.co.uk
+X-Spam_score_int: -19
+X-Spam_score: -2.0
 X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+X-Spam_report: (-2.0 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, HEADER_FROM_DIFFERENT_DOMAINS=0.001,
+ RCVD_IN_VALIDITY_CERTIFIED_BLOCKED=0.001, RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001,
+ SPF_HELO_PASS=-0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -118,31 +75,64 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Wed, 21 May 2025 at 16:38, Daniel P. Berrang=C3=A9 <berrange@redhat.com>=
- wrote:
->
-> On Wed, May 21, 2025 at 04:34:24PM +0100, Peter Maydell wrote:
-> > Also, mjt's packaging for Debian puts in some stubs for the
-> > offending getwpuid etc functions, which suppress the glib warnings
-> > (this is why he noticed this whereas none of the rest of us did):
-> >
-> > https://sources.debian.org/patches/qemu/1:10.0.0%2Bds-2/static-linux-us=
-er-stubs.diff/
->
-> Oh interesting, I was conincidentally wondering if adding dummy
-> stubs might suppress this.
+Add CVA6 CPU type, for the OpenHW CVA6 cores
 
-If we do I think that g_assert_not_reached() is probably better than
-returning -1 etc.
+Signed-off-by: Ben Dooks <ben.dooks@codethink.co.uk>
+---
+ target/riscv/cpu-qom.h |  1 +
+ target/riscv/cpu.c     | 19 +++++++++++++++++++
+ 2 files changed, 20 insertions(+)
 
-> How about we pull that change upstream, and expand it to getaddrinfo
-> too ?  I like the stubs much more than artificially splitting up
-> the source files
+diff --git a/target/riscv/cpu-qom.h b/target/riscv/cpu-qom.h
+index 4cfdb74891..b5460771d7 100644
+--- a/target/riscv/cpu-qom.h
++++ b/target/riscv/cpu-qom.h
+@@ -34,6 +34,7 @@
+ #define TYPE_RISCV_CPU_BASE32           RISCV_CPU_TYPE_NAME("rv32")
+ #define TYPE_RISCV_CPU_BASE64           RISCV_CPU_TYPE_NAME("rv64")
+ #define TYPE_RISCV_CPU_BASE128          RISCV_CPU_TYPE_NAME("x-rv128")
++#define TYPE_RISCV_CPU_CVA6             RISCV_CPU_TYPE_NAME("cva6")
+ #define TYPE_RISCV_CPU_RV32I            RISCV_CPU_TYPE_NAME("rv32i")
+ #define TYPE_RISCV_CPU_RV32E            RISCV_CPU_TYPE_NAME("rv32e")
+ #define TYPE_RISCV_CPU_RV64I            RISCV_CPU_TYPE_NAME("rv64i")
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index d92874baa0..0ad6a7b616 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -496,6 +496,24 @@ static void rv64_base_cpu_init(Object *obj)
+ #endif
+ }
+ 
++static void rv64_cva6_cpu_init(Object *obj)
++{
++    RISCVCPU *cpu = RISCV_CPU(obj);
++    CPURISCVState *env = &cpu->env;
++
++    riscv_cpu_set_misa_ext(env, RVI | RVM | RVA | RVF | RVD | RVC | RVB | RVS | RVU);
++    env->priv_ver = PRIV_VERSION_1_12_0;
++#ifndef CONFIG_USER_ONLY
++    set_satp_mode_max_supported(RISCV_CPU(obj), VM_1_10_SV39);
++#endif
++
++    /* inherited from parent obj via riscv_cpu_init() */
++    cpu->cfg.ext_zifencei = true;
++    cpu->cfg.ext_zicsr = true;
++    cpu->cfg.mmu = true;
++    cpu->cfg.pmp = true;
++}
++
+ static void rv64_sifive_u_cpu_init(Object *obj)
+ {
+     RISCVCPU *cpu = RISCV_CPU(obj);
+@@ -3247,6 +3265,7 @@ static const TypeInfo riscv_cpu_type_infos[] = {
+ 
+ #if defined(TARGET_RISCV64)
+     DEFINE_DYNAMIC_CPU(TYPE_RISCV_CPU_BASE64,    MXL_RV64,  rv64_base_cpu_init),
++    DEFINE_VENDOR_CPU(TYPE_RISCV_CPU_CVA6,       MXL_RV64,  rv64_cva6_cpu_init),
+     DEFINE_VENDOR_CPU(TYPE_RISCV_CPU_SIFIVE_E51, MXL_RV64,  rv64_sifive_e_cpu_init),
+     DEFINE_VENDOR_CPU(TYPE_RISCV_CPU_SIFIVE_U54, MXL_RV64,  rv64_sifive_u_cpu_init),
+     DEFINE_VENDOR_CPU(TYPE_RISCV_CPU_SHAKTI_C,   MXL_RV64,  rv64_sifive_u_cpu_init),
+-- 
+2.37.2.352.g3c44437643
 
-The stub is still effectively a runtime assert. Splitting the
-source file gives us a compile time guarantee that we don't
-call the function, so I prefer that.
-
-thanks
--- PMM
 
