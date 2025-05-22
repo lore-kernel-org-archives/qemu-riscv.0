@@ -4,69 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 37B6FC54ED0
-	for <qemu-riscv@archiver.kernel.org>; Thu, 22 May 2025 01:28:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D1869C54E65
+	for <qemu-riscv@archiver.kernel.org>; Thu, 22 May 2025 01:30:11 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uHujH-0003Rd-S9; Wed, 21 May 2025 21:28:15 -0400
+	id 1uHul6-0004bq-59; Wed, 21 May 2025 21:30:08 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1uHujF-0003RJ-6j; Wed, 21 May 2025 21:28:14 -0400
-Received: from mail-ua1-x932.google.com ([2607:f8b0:4864:20::932])
+ id 1uHul2-0004VY-Sx; Wed, 21 May 2025 21:30:04 -0400
+Received: from mail-vs1-xe2b.google.com ([2607:f8b0:4864:20::e2b])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1uHujB-0002UM-8P; Wed, 21 May 2025 21:28:12 -0400
-Received: by mail-ua1-x932.google.com with SMTP id
- a1e0cc1a2514c-87be74a6e59so1276151241.0; 
- Wed, 21 May 2025 18:28:08 -0700 (PDT)
+ id 1uHul0-0002as-5w; Wed, 21 May 2025 21:30:04 -0400
+Received: by mail-vs1-xe2b.google.com with SMTP id
+ ada2fe7eead31-4dfc11e2520so2413523137.0; 
+ Wed, 21 May 2025 18:30:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1747877287; x=1748482087; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1747877400; x=1748482200; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Y8RBS05c0SuNK5R75sWyDujnMFIebrtfOxp91yj5Ke4=;
- b=LcEyTHmVHHs2X8c8zej5LvSRKazJOtac+NcMvWBzdHD8z35HoqehvXkSgGAJi0R2zg
- McX7Lg/VPj2O94SjTGwt+2CtlpTzYKG6nzbAkweBls5RNIzXa/mvULv93dI1ZGIwKUsf
- OVttpkDFtKD7+WQ3Yh+KuIULaRncDzHH29X4JwH0MWzGJ5y057xCCbZdL+7E70oGgq2P
- ejbJyIILMdE8xYqkbJtrEpwJHif9o0SKXq42fbc0TEqcqu1DbEzlD+cWvr4gY4ZoNzzo
- djvWYJytt/c6z6EU5nvtQ5nFB0apWR0b7cePIL9s00fpzLKrWywvu0esYvcI9z9TixUW
- lagw==
+ bh=FHdtDyjNBPRIxapv3WRMHfDwSZu+Wz6wo11bBDhdb/0=;
+ b=BPKlSVIEeyER73uyCkqIEGqpob0gcAYD8AJmcPEGc1ybJo6vehCPMeFBEgFK42NXq+
+ lTHhesZLUfC/G4QmfGZY7CaXIIt75mm7KVBV3f+uvCjaet/nKwqEkrOtkvYE4DP0SF3F
+ e68t5KYZR4QmDCQ1FVHM5No2I2l1Qam/hRChupTf1veO5axXYH0o1nON4mQM0hBhKNE+
+ KLtkUH4S7Pc4yy5P3uoE+4oddKK3vE6Rs9ktIDAbkct/+umUkFh2d/ET2bQhNSCpYK33
+ wzaD1KN30QStsrTrYJ42pck9J72pVBIrQ7r6Iju4+nxgC+xk0mOE4vT0GPeM0zY+hHQm
+ Raig==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1747877287; x=1748482087;
+ d=1e100.net; s=20230601; t=1747877400; x=1748482200;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Y8RBS05c0SuNK5R75sWyDujnMFIebrtfOxp91yj5Ke4=;
- b=ROall3HTLcoGhHFGcXF09kRxMxr7OLPMri+JXM/OTzX795ThkYwIjl26j58/Yizm8l
- OG5yTSvoV5ZtF1R4IT++anUA+nlnJp2NDxmg4N3Ojy2DnO10IQ3/1e55Y6+OZhIVqpZu
- xszSboPCiHC7I4V3rXEwSFRwTzs1XHtMbQIYAB8y9Q5lqoUR27i8RHEnOfnn+/RFCdVI
- Otx8vdDvMbbxCVawlmgUHI2ko1znTx4m/GNxSe89kjRMIt7nl+hxkPaEboC0Q+EciZTc
- 0n4eft/Q827UzTuf588kMspN9X6bHZuj8iaenQJdxlG3AZcUHL2pJSd7+oO+I8R9xI3l
- otmQ==
+ bh=FHdtDyjNBPRIxapv3WRMHfDwSZu+Wz6wo11bBDhdb/0=;
+ b=Ks5SBzG51f6u0MDH2LDxDTboSO43oC4CZg/zNZy80UvdJbsxpSbsxdZ9JvcVLYcwoP
+ WxaLK2Fko0bldpmFIXCgqkLLmLpFC1OODNeiIQqfddNgIZG2OY8iA9/oOx+sOA9p42cS
+ cdbu7CRfTBQON0FQ7DwfRJ+K5P4w3vRQKaoXeUXACyfUcij7ovBaH+0FYobKJ3PLPdyP
+ ZTZW3qUX17HozkbdZ/6RFMDEip1PbWtZuX+7JqyZ2S4LNgveEJEWwE/H6t0/PlYaBMeX
+ B3oHq1FeQDfHYVd+EmRG6cyk5o+OUeq60k+74IWD7K/UzLFeaZ79XJ1adD73LXZpZV6c
+ nNcA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUcnQgE7gb45R00Vn56X1tnX1j0or5/cE69jjdJSyid6ICfFV3ECjzOa40RFieAemFrmf87Yp2Daioj@nongnu.org,
- AJvYcCXdHq1gc5GFmuTMf/XG69yWucFMU8fdEi2zHr1B2+V86iC24ew/452AexISd/TWY34PdtyeQSKZ9Y4pnQ==@nongnu.org
-X-Gm-Message-State: AOJu0YxdzjP8aX3c8QUwMoCeF4g09yvven+iiC79MEY59KQr5Sejad0k
- 004ijUW9Xiyv1YK5Bw0t/hGk9tsXFQB2bMosnj/wy+Cp7BMfeeI8lOWcrIPJiOGDecD5opSRdm0
- XW5zhweMgZ1sFgS+TDDoHxITLz7VgrMg=
-X-Gm-Gg: ASbGncvEfch62U1CCYxrkpZYBDG9OrSVRcUjgYBG5Dby+DIRsoRGnxb2tnEGX5OORWP
- jwZTOrQjja1vN5jCFKsGKJDIhuUNPe8wAedUYAW6Ebwo9DyrdlSHEQC8ClVosAmXY9syM5JqSuj
- ZbcLFOy1Z+qM0TcwREo+HKOWDGRCkZpMLf9aD0eIckTzW3H3AtL6VODUh1Rd2P+6VPdK/WALBzr
- w==
-X-Google-Smtp-Source: AGHT+IGRypOYMpTB00pxxvll1CXlVwCHuPJ4279E2oxYb9PyIgfTkuiSr3+guqeA54aJjP0B74J/TiVTEJbODF1QEZo=
-X-Received: by 2002:a05:6102:3e13:b0:4da:e6e9:1f56 with SMTP id
- ada2fe7eead31-4dfa6c66d7emr23830891137.23.1747877287236; Wed, 21 May 2025
- 18:28:07 -0700 (PDT)
+ AJvYcCVJM7aQcBqPOREmxaUWA/2YE/X9PGcSJu02QarBis1Rrr+t1kGlIAx2NRJGm+0dyst3Z7iSQ0xzKb53gQ==@nongnu.org,
+ AJvYcCX2gbB/pi3f2D4wEUJtf6N/+QvLlScQVLDbt/qwcspvoaZyT2s2GjZj7uwCA8Q+BWxI3JeI5pYAOdjV@nongnu.org
+X-Gm-Message-State: AOJu0YwHYDAetqV9Z1Zd2Ln9RS7S8mfYVgxHwRQQjIMkWwDTlhiN06MC
+ 3R96lmschJv0wWhSdBM/D8Rfnt2mbewABqJBlEU70g52UlEodD9JY5cqoaRk/SQ2AZl9oE1zEWM
+ D+Aef22svvQJcAk1FtwRDeBNrQCCeA0c=
+X-Gm-Gg: ASbGnctndbRSKORzCOYc8XZ1ycDLcaPyHN9LnOWUmfp1lG4ecHz9WRWqaSMwn+/VSJ/
+ NvGV0qAOvXP9OulTz4lwT4pnOxsM/kFlTPXphzAsTyL5nwIWBL2pbF4QFVcESNw6NRrQO+8AaBm
+ UqYSxAtfXeT4DtY85cwdQ47jCN/f0emj5vrKFmrR0OVgGilP8eqMjHMDfzZgnRt/xYLMyQMuaQB
+ g==
+X-Google-Smtp-Source: AGHT+IEQn9i/M56gt3dXESSUfDyPFjyKGjK0HvB56ZvLsZOOMuDeJwZBz2imLDxFlXkKiaAxlRWq3v4svMfWpI97uTc=
+X-Received: by 2002:a05:6102:2005:b0:4e2:82b9:b6fc with SMTP id
+ ada2fe7eead31-4e282b9b862mr10657721137.16.1747877399681; Wed, 21 May 2025
+ 18:29:59 -0700 (PDT)
 MIME-Version: 1.0
 References: <cover.1744779826.git.lc00631@tecorigin.com>
  <b7ba615aeef5abca603413cfd17dcaecd0b99bf1.1744779826.git.lc00631@tecorigin.com>
 In-Reply-To: <b7ba615aeef5abca603413cfd17dcaecd0b99bf1.1744779826.git.lc00631@tecorigin.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Thu, 22 May 2025 11:27:41 +1000
-X-Gm-Features: AX0GCFtcGLh2bmCFjwIYowhjjT9gKbgx1PGq4BW7W3SdUSRLMB3DZzgNp4Roi9E
-Message-ID: <CAKmqyKPTjYOhgOL-Dr=nzvr6heinL3sPXJja2spoiGE_09Wr5A@mail.gmail.com>
+Date: Thu, 22 May 2025 11:29:33 +1000
+X-Gm-Features: AX0GCFtY8whmppx5bFeMfgjOyamoqrSsbqbxyMEDW3iJhCKaqkQj8BHTv-FBoxU
+Message-ID: <CAKmqyKOr53P1peGKpkOoYOeusFsADW=A-guwpzb_5TrNyCkdhw@mail.gmail.com>
 Subject: Re: [PATCH v3 1/1] hw/riscv: fix PLIC hart topology configuration
  string when not getting CPUState correctly
 To: Chao Liu <lc00631@tecorigin.com>
@@ -75,8 +75,8 @@ Cc: palmer@dabbelt.com, zhiwei_liu@linux.alibaba.com, alistair.francis@wdc.com,
  zqz00548@tecorigin.com, qemu-devel@nongnu.org, qemu-riscv@nongnu.org
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::932;
- envelope-from=alistair23@gmail.com; helo=mail-ua1-x932.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::e2b;
+ envelope-from=alistair23@gmail.com; helo=mail-vs1-xe2b.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -116,7 +116,8 @@ ote:
 > Reviewed-by: Qingze Zhao <zqz00548@tecorigin.com>
 > Reviewed-by: Tingjian Zhang <zhangtj@tecorigin.com>
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Do you mind rebasing this on
+https://github.com/alistair23/qemu/tree/riscv-to-apply.next
 
 Alistair
 
