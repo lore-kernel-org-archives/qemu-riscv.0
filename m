@@ -4,86 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B1B16C54E90
-	for <qemu-riscv@archiver.kernel.org>; Thu, 22 May 2025 11:34:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BF919C3DA6D
+	for <qemu-riscv@archiver.kernel.org>; Fri, 23 May 2025 04:34:42 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uI4Bm-0008IY-90; Thu, 22 May 2025 07:34:18 -0400
+	id 1uIK6h-0001yh-8j; Fri, 23 May 2025 00:34:07 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1uI4Bf-0008EA-CK
- for qemu-riscv@nongnu.org; Thu, 22 May 2025 07:34:11 -0400
-Received: from mail-qv1-xf33.google.com ([2607:f8b0:4864:20::f33])
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1uIK6f-0001yM-KL; Fri, 23 May 2025 00:34:05 -0400
+Received: from mail-vk1-xa2a.google.com ([2607:f8b0:4864:20::a2a])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1uI4BY-0008K3-KG
- for qemu-riscv@nongnu.org; Thu, 22 May 2025 07:34:10 -0400
-Received: by mail-qv1-xf33.google.com with SMTP id
- 6a1803df08f44-6f8d8fb211eso35893616d6.3
- for <qemu-riscv@nongnu.org>; Thu, 22 May 2025 04:34:02 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1uIK6e-0000sn-0y; Fri, 23 May 2025 00:34:05 -0400
+Received: by mail-vk1-xa2a.google.com with SMTP id
+ 71dfb90a1353d-52b2290e292so2646820e0c.3; 
+ Thu, 22 May 2025 21:34:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1747913641; x=1748518441; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=pvtJvKwED2g/sZa1Pk53e57hJmDqDX/ksZLl4/V2mTo=;
- b=fa9nWotXASHcE/BB3lSkmxrgoDHp7wyE4wRgqk2Um99P2NvpCn2l2LS4JxVTbAaR1E
- RQZGsUgTExS+/qudrnQ0ZeBa4CNRma2qfPw4Rcuntlwgyuu9rQUJvD06R0/xDw0WmH8b
- aabQ+dkODmaV6tsQIYroL86Z1HTgJ6xCosemmHbLrZSN2dkt3ZXYTRtHPGaoMvkTE8lO
- fK7plEqY+6+OjU3+3asqmbICjsj+3YTg3x8N4B7BfWVkWoKVBZW+QpWGXam2GoodMzwq
- btK20KGy/kuk4RC6HhJk+eLWgeDe353oU82DOXBCw6bjZWLrKKy/oW/ZArA/7LDz827e
- YcFQ==
+ d=gmail.com; s=20230601; t=1747974842; x=1748579642; darn=nongnu.org;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=TjUh1CwUK8mxoZVtJGOaaznjNCixznMw7V0d99g6Z5s=;
+ b=WJe3lHAXgt+O/WK4x7eS0sH87iK7GgM6z7cxEdKhptRRVywSHxaDHGBcFaBD2QE9R/
+ sS4mOYKlsybdy2YIkEAjLz1NOtMUmDHD6wfP1ottEwTwbTE8rWmFsC/RCuJRiaAN8gTp
+ GX1pmEaMUUHtANNYFdPD2j508T52+vaKU4zbH8C1nSHUT1zF94yCWvjLTCsUTeeS/LT0
+ psVp9sBtcfvzXczitynAChNf3AywgVqPR+ncQJ0fdX0ytj5w0+liKgUBAzH2xJywCtdV
+ kbFrSAaHuvZUdbDwoA/kswWO0q0nO+5TWHjM/9Ko/rhroxOYGyPqywc7V3r5UUO3Tpqy
+ CCow==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1747913641; x=1748518441;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=pvtJvKwED2g/sZa1Pk53e57hJmDqDX/ksZLl4/V2mTo=;
- b=mXUHkYLyIw2tvTU/v4ZVnmkqzPx/0uwPGXP4PxF2sBIZncUPbRNMXMk2vH0MPJSSHD
- dhxq305XcfSde5JIMpXGbTJ+6l9LxeGsuSa+zbmGVPiVGYw1x/uDkza+W448FO/OadVB
- wGoOQh9C0P0h5y99TcL/VVthD1uAkQ6czkDD6oa6SrJPF36pxF5Z2qzu+1kS1jEnvLKT
- Jhc4BEws3LMEuuNbNFhZqWYlZA03btQhGTkd6yvrqQyu/c2PCWRyOgckTDSQdf9c1gm/
- 89djanqTzRSEqc2oiLfZh98xyyB1KC+VmGTw9h98Tl41BPyQ9YiojU2aAYYDHy2QnjIi
- k/NQ==
-X-Gm-Message-State: AOJu0YxzmGdhNJe+ZnQuh+vgshHLmd3X90q0OUe0p7JP01btZLx+R/he
- Dwqd1wdosq4S7rovFtm7svlWD5atu9yJEU/wXrQsSyfgNzRBP9qmuLP4J2CTWYMwymu+rTXULr1
- oA5Sq
-X-Gm-Gg: ASbGnctfyLf/2J7wCR9USCN+RYf778cAYyY1hFjTdDJar3+CNa3/D09pe89RF8WVflf
- CcEVhgWj5hF2VOuEFgcqAS90aRadktdyLWf3HfJ1JgPwMPJN6qg1p7gEaoXe4zLn0fd6MkcuoWO
- c/ScZwzIKK04zoyEyvpmOnhHC7EBxGPVQILX6LlwDtAsQxrrF3IcGrys3yclQUr20cjnJqWtrKJ
- kf7s7vkKOwjX6tIYCk1WKoBp4uaBhLzaLsbaTRTemFH4EsmtYdsS4//wP1d1Gr4ZqG64hHEyt7B
- ayy/pw/4Nt8giHtKJN6EMwpZB3yxK6hjlF+WGfDxWEF7PGaptb3eiAsEDm5A01HzNA==
-X-Google-Smtp-Source: AGHT+IFo5+kejL+1q9pTU9z+PYylIyDVyGojvS6ukE9jY+rlX+f4ftGNkfHM4KjSbiiKIPQWGIQKrQ==
-X-Received: by 2002:a05:6122:88c:b0:52a:cdd8:fc33 with SMTP id
- 71dfb90a1353d-52dba614e02mr19310817e0c.0.1747913630748; 
- Thu, 22 May 2025 04:33:50 -0700 (PDT)
-Received: from grind.. ([2804:7f0:bcc0:906e:57d5:dca2:1ab3:20de])
- by smtp.gmail.com with ESMTPSA id
- 71dfb90a1353d-52dbab6c0c2sm11514466e0c.42.2025.05.22.04.33.48
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 22 May 2025 04:33:50 -0700 (PDT)
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-To: qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, liwei1518@gmail.com,
- zhiwei_liu@linux.alibaba.com, palmer@dabbelt.com,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- qemu-trivial@nongnu.org
-Subject: [PATCH] target/riscv/cpu.c: fix zama16b order in isa_edata_arr[]
-Date: Thu, 22 May 2025 08:33:44 -0300
-Message-ID: <20250522113344.823294-1-dbarboza@ventanamicro.com>
-X-Mailer: git-send-email 2.49.0
+ d=1e100.net; s=20230601; t=1747974842; x=1748579642;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=TjUh1CwUK8mxoZVtJGOaaznjNCixznMw7V0d99g6Z5s=;
+ b=VIIR31RPaQOCei6/QNfVke7OYGqWu4WvptO3CKU/GRPqi2iSHQ9ZT92yoV35egZErt
+ 8XNEHIP1WimI2CgLziAZArDU8NMK7bCqSsu71furLPqzzgqCNDrJaSeE5gA4Wk25Bqws
+ eOTu6LAVZtLyTdIlGCfMRN7b1TkZa9g+HjdiBp3syIMOZobrmI+e6zzNpif5UnwowlmH
+ 0bx7DsnNuyuYhBFse7GpugbTlHDET0JDe4rPxWeRRqI5Xms2HKzKmdLsD9/OH94ehl71
+ 1dgKgGQobaabQL524KKnkr6jJMWGiUKDDxlMRz/NiBUio0h2aOFHnSeUVoN5UEsUDCgr
+ Q5Fg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXlYpctjnsJdV1jC4FdDX059THOwI4N1GN9mPIsLZRdG4MarBa6UE7sZsuIpE3N4ZzKoMMwQ+27lAFrOvkx@nongnu.org,
+ AJvYcCXwkY9tLnFNEb0f4ls7LCqTmPHeJsAlJuOeV/aYiguUKAWA7Po7JNmGPQFEklsh6SlEgbx4a7bc8XGD@nongnu.org
+X-Gm-Message-State: AOJu0YwHusJYMqAKmTW1DlTdepz/mp8OTaySMSESdmKlIDpYGuZY4aJ6
+ 8dnrBmJX6vQ6iylKH4FKMrFMiGnWr8Csv3DdMolaPTcHNSttf2qOUQwDM4owUwUEZI0hTTC3FnL
+ azipBSjGcw9x8fHGDfFoxjwQ5zyEJZKA=
+X-Gm-Gg: ASbGncsawc/9wkCTS+BYEySHoXL3KlWebvWw784BDeJe+CEBvQ4sKDHyA1sBXjoWnCB
+ YXjmAZS2Di3jFEDRooPJu67RSfEULT3hNm82E+9qwQ0UqTz99kCU3GGZntBg6OHYe3D/V4K2llG
+ kCIkMu23l/1TIAw8Ti8UuKfEHT8F7GBgdGFYUX6HkqQNmgkBsTG3d4UxepFfY3G6gOLi5mkC5sz
+ w==
+X-Google-Smtp-Source: AGHT+IEVv+9EEHvPwMxe9SN1kFob+xb21Ha7XvvZ/7OBW7H81LCKuluWz5DJhMUVTx7EWNS15i9ifE+Z8fdlzwGTz1s=
+X-Received: by 2002:a05:6122:da7:b0:52d:b8fc:991f with SMTP id
+ 71dfb90a1353d-52dbce2ab91mr23408406e0c.6.1747974841647; Thu, 22 May 2025
+ 21:34:01 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::f33;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-qv1-xf33.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+References: <20250522113344.823294-1-dbarboza@ventanamicro.com>
+In-Reply-To: <20250522113344.823294-1-dbarboza@ventanamicro.com>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Fri, 23 May 2025 14:33:35 +1000
+X-Gm-Features: AX0GCFtcBwjofdAJJ0NHsNuJgfYSQQTpNLNasjZYySZDQv0Rv6eBR8FU2ARPwZY
+Message-ID: <CAKmqyKOY+Wxj+uHzUXvyFc7sTj2459__YYGPTz-GRTuEoH2rbA@mail.gmail.com>
+Subject: Re: [PATCH] target/riscv/cpu.c: fix zama16b order in isa_edata_arr[]
+To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
+ liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, palmer@dabbelt.com, 
+ qemu-trivial@nongnu.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2607:f8b0:4864:20::a2a;
+ envelope-from=alistair23@gmail.com; helo=mail-vk1-xa2a.google.com
+X-Spam_score_int: -17
+X-Spam_score: -1.8
+X-Spam_bar: -
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -99,30 +98,39 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Put it after zalrsc and before zawrs.
+On Thu, May 22, 2025 at 9:35=E2=80=AFPM Daniel Henrique Barboza
+<dbarboza@ventanamicro.com> wrote:
+>
+> Put it after zalrsc and before zawrs.
+>
+> Cc: qemu-trivial@nongnu.org
+> Fixes: a60ce58fd9 ("target/riscv: Support Zama16b extension")
+> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 
-Cc: qemu-trivial@nongnu.org
-Fixes: a60ce58fd9 ("target/riscv: Support Zama16b extension")
-Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
----
- target/riscv/cpu.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 629ac37501..fe21e0fb44 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -127,8 +127,8 @@ const RISCVIsaExtData isa_edata_arr[] = {
-     ISA_EXT_DATA_ENTRY(zaamo, PRIV_VERSION_1_12_0, ext_zaamo),
-     ISA_EXT_DATA_ENTRY(zabha, PRIV_VERSION_1_13_0, ext_zabha),
-     ISA_EXT_DATA_ENTRY(zacas, PRIV_VERSION_1_12_0, ext_zacas),
--    ISA_EXT_DATA_ENTRY(zama16b, PRIV_VERSION_1_13_0, ext_zama16b),
-     ISA_EXT_DATA_ENTRY(zalrsc, PRIV_VERSION_1_12_0, ext_zalrsc),
-+    ISA_EXT_DATA_ENTRY(zama16b, PRIV_VERSION_1_13_0, ext_zama16b),
-     ISA_EXT_DATA_ENTRY(zawrs, PRIV_VERSION_1_12_0, ext_zawrs),
-     ISA_EXT_DATA_ENTRY(zfa, PRIV_VERSION_1_12_0, ext_zfa),
-     ISA_EXT_DATA_ENTRY(zfbfmin, PRIV_VERSION_1_12_0, ext_zfbfmin),
--- 
-2.49.0
+Alistair
 
+> ---
+>  target/riscv/cpu.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index 629ac37501..fe21e0fb44 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -127,8 +127,8 @@ const RISCVIsaExtData isa_edata_arr[] =3D {
+>      ISA_EXT_DATA_ENTRY(zaamo, PRIV_VERSION_1_12_0, ext_zaamo),
+>      ISA_EXT_DATA_ENTRY(zabha, PRIV_VERSION_1_13_0, ext_zabha),
+>      ISA_EXT_DATA_ENTRY(zacas, PRIV_VERSION_1_12_0, ext_zacas),
+> -    ISA_EXT_DATA_ENTRY(zama16b, PRIV_VERSION_1_13_0, ext_zama16b),
+>      ISA_EXT_DATA_ENTRY(zalrsc, PRIV_VERSION_1_12_0, ext_zalrsc),
+> +    ISA_EXT_DATA_ENTRY(zama16b, PRIV_VERSION_1_13_0, ext_zama16b),
+>      ISA_EXT_DATA_ENTRY(zawrs, PRIV_VERSION_1_12_0, ext_zawrs),
+>      ISA_EXT_DATA_ENTRY(zfa, PRIV_VERSION_1_12_0, ext_zfa),
+>      ISA_EXT_DATA_ENTRY(zfbfmin, PRIV_VERSION_1_12_0, ext_zfbfmin),
+> --
+> 2.49.0
+>
+>
 
