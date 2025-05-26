@@ -4,65 +4,102 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C0684C54FB3
-	for <qemu-riscv@archiver.kernel.org>; Mon, 26 May 2025 07:58:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1635FC5AD49
+	for <qemu-riscv@archiver.kernel.org>; Mon, 26 May 2025 08:58:56 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uJSig-0001sm-Cw; Mon, 26 May 2025 03:58:02 -0400
+	id 1uJTfM-0007y9-2i; Mon, 26 May 2025 04:58:40 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <mengzhuo@iscas.ac.cn>)
- id 1uJSiX-0001oF-Is; Mon, 26 May 2025 03:57:53 -0400
-Received: from smtp84.cstnet.cn ([159.226.251.84] helo=cstnet.cn)
- by eggs.gnu.org with esmtps (TLS1.2:DHE_RSA_AES_256_CBC_SHA1:256)
- (Exim 4.90_1) (envelope-from <mengzhuo@iscas.ac.cn>)
- id 1uJSiQ-0001Fv-M5; Mon, 26 May 2025 03:57:52 -0400
-Received: from iscas.ac.cn (unknown [180.140.173.24])
- by APP-05 (Coremail) with SMTP id zQCowABXpRPpHjRofekYAA--.12997S2;
- Mon, 26 May 2025 15:57:30 +0800 (CST)
-From: Meng Zhuo <mengzhuo@iscas.ac.cn>
-To: qemu-devel@nongnu.org
-Cc: Meng Zhuo <mengzhuo@iscas.ac.cn>, Andrew Jones <ajones@ventanamicro.com>,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Weiwei Li <liwei1518@gmail.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- qemu-riscv@nongnu.org (open list:RISC-V TCG CPUs)
-Subject: [PATCH v5] target/riscv/kvm: add satp mode for host cpu
-Date: Mon, 26 May 2025 15:57:27 +0800
-Message-Id: <20250526075727.105004-1-mengzhuo@iscas.ac.cn>
-X-Mailer: git-send-email 2.39.5
+ (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1uJTfK-0007xN-VZ
+ for qemu-riscv@nongnu.org; Mon, 26 May 2025 04:58:38 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1uJTfI-0008Hl-Rn
+ for qemu-riscv@nongnu.org; Mon, 26 May 2025 04:58:38 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1748249913;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=jzzd0Z2q7oavj1TygOVzuj6Z/b/VFUvuYV5UB2zwGk4=;
+ b=dvvn6SRRlvrXTSknQ2K0vWkpfpKtenBfQM9A2XYseclKoN7ATzy7eduC/RTG4xqPyJ5hGP
+ BCr8ZyNz1H06kPj4iPzFHqfUSS2JNUmKmPJQ15OeBDP4cjM3Mce8hYzNHvo1UV8tHlcOT/
+ NCd5DerA6863CSuJ/pMisEDOp3QWK9Q=
+Received: from mx-prod-mc-02.mail-002.prod.us-west-2.aws.redhat.com
+ (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
+ relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-78-gabRBkCUN3ihfu9bwQcvGg-1; Mon,
+ 26 May 2025 04:58:28 -0400
+X-MC-Unique: gabRBkCUN3ihfu9bwQcvGg-1
+X-Mimecast-MFC-AGG-ID: gabRBkCUN3ihfu9bwQcvGg_1748249905
+Received: from mx-prod-int-02.mail-002.prod.us-west-2.aws.redhat.com
+ (mx-prod-int-02.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.15])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mx-prod-mc-02.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id 19EB81956095; Mon, 26 May 2025 08:58:24 +0000 (UTC)
+Received: from blackfin.pond.sub.org (unknown [10.45.242.2])
+ by mx-prod-int-02.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id 4244F1956095; Mon, 26 May 2025 08:58:22 +0000 (UTC)
+Received: by blackfin.pond.sub.org (Postfix, from userid 1000)
+ id CA91B21E66C3; Mon, 26 May 2025 10:58:19 +0200 (CEST)
+From: Markus Armbruster <armbru@redhat.com>
+To: BALATON Zoltan <balaton@eik.bme.hu>
+Cc: Mark Cave-Ayland <mark.caveayland@nutanix.com>,  Daniel P. =?utf-8?Q?B?=
+ =?utf-8?Q?errang=C3=A9?=
+ <berrange@redhat.com>,  Peter Maydell <peter.maydell@linaro.org>,  Thomas
+ Huth <thuth@redhat.com>,  Zhao Liu <zhao1.liu@intel.com>,  Xiaoyao Li
+ <xiaoyao.li@intel.com>,  Philippe =?utf-8?Q?Mathieu-Daud=C3=A9?=
+ <philmd@linaro.org>,
+ Paolo Bonzini <pbonzini@redhat.com>,  qemu-devel@nongnu.org,  Richard
+ Henderson <richard.henderson@linaro.org>,  kvm@vger.kernel.org,  Gerd
+ Hoffmann <kraxel@redhat.com>,  Laurent Vivier <lvivier@redhat.com>,
+ Jiaxun Yang <jiaxun.yang@flygoat.com>,  Yi Liu <yi.l.liu@intel.com>,
+ "Michael S. Tsirkin" <mst@redhat.com>,  Eduardo Habkost
+ <eduardo@habkost.net>,  Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
+ Alistair Francis <alistair.francis@wdc.com>,  Daniel Henrique Barboza
+ <dbarboza@ventanamicro.com>,  Marcelo Tosatti <mtosatti@redhat.com>,
+ qemu-riscv@nongnu.org,  Weiwei Li <liwei1518@gmail.com>,  Amit Shah
+ <amit@kernel.org>,  Yanan Wang <wangyanan55@huawei.com>,  Helge Deller
+ <deller@gmx.de>,  Palmer Dabbelt <palmer@dabbelt.com>,  Ani Sinha
+ <anisinha@redhat.com>,  Igor Mammedov <imammedo@redhat.com>,  Fabiano
+ Rosas <farosas@suse.de>,  Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ =?utf-8?Q?Cl=C3=A9ment?= Mathieu--Drif <clement.mathieu--drif@eviden.com>,
+ qemu-arm@nongnu.org,  =?utf-8?Q?Marc-Andr=C3=A9?= Lureau
+ <marcandre.lureau@redhat.com>,
+ Huacai Chen <chenhuacai@kernel.org>,  Jason Wang <jasowang@redhat.com>
+Subject: Re: How to mark internal properties
+In-Reply-To: <60cd3ba8-2ab1-74ac-54ea-5e3b309788a1@eik.bme.hu> (BALATON
+ Zoltan's message of "Tue, 13 May 2025 11:26:31 +0200 (CEST)")
+References: <20250508133550.81391-1-philmd@linaro.org>
+ <20250508133550.81391-13-philmd@linaro.org>
+ <23260c74-01ba-45bc-bf2f-b3e19c28ec8a@intel.com>
+ <aB2vjuT07EuO6JSQ@intel.com>
+ <2f526570-7ab0-479c-967c-b3f95f9f19e3@redhat.com>
+ <CAFEAcA-kuHvxjuV_cMh-Px3C-k2Gd51jFqhwndO52vm++M_jAA@mail.gmail.com>
+ <aCG6MuDLrQpoTqpg@redhat.com> <87jz6mqeu5.fsf@pond.sub.org>
+ <eedd1fa2-5856-41b8-8e6b-38bd5c98ce8f@nutanix.com>
+ <87ecwshqj4.fsf@pond.sub.org>
+ <60cd3ba8-2ab1-74ac-54ea-5e3b309788a1@eik.bme.hu>
+Date: Mon, 26 May 2025 10:58:19 +0200
+Message-ID: <874ix792ac.fsf@pond.sub.org>
+User-Agent: Gnus/5.13 (Gnus v5.13)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-CM-TRANSID: zQCowABXpRPpHjRofekYAA--.12997S2
-X-Coremail-Antispam: 1UD129KBjvJXoWxZw15AF13tF1fCrWDWFWDXFb_yoW5KF4kpr
- W5GrZ5CrWftF9rJayxtr1kXF45Jws5Kr42ka1j9r17Xan8JrWUWF1kKa13CF98JF47AFnx
- A3WFkrW3CF40yFJanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
- 9KBjDU0xBIdaVrnRJUUUvK14x267AKxVW8JVW5JwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
- rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK02
- 1l84ACjcxK6xIIjxv20xvE14v26F1j6w1UM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26F4j
- 6r4UJwA2z4x0Y4vEx4A2jsIE14v26rxl6s0DM28EF7xvwVC2z280aVCY1x0267AKxVW0oV
- Cq3wAS0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC0VAKzVAqx4xG6I80ewAv7VC0
- I7IYx2IY67AKxVWUJVWUGwAv7VC2z280aVAFwI0_Jr0_Gr1lOx8S6xCaFVCjc4AY6r1j6r
- 4UM4x0Y48IcxkI7VAKI48JM4x0x7Aq67IIx4CEVc8vx2IErcIFxwCY1x0262kKe7AKxVWU
- tVW8ZwCY1x0264kExVAvwVAq07x20xyl42xK82IYc2Ij64vIr41l4I8I3I0E4IkC6x0Yz7
- v_Jr0_Gr1lx2IqxVAqx4xG67AKxVWUJVWUGwC20s026x8GjcxK67AKxVWUGVWUWwC2zVAF
- 1VAY17CE14v26r1q6r43MIIYrxkI7VAKI48JMIIF0xvE2Ix0cI8IcVAFwI0_Jr0_JF4lIx
- AIcVC0I7IYx2IY6xkF7I0E14v26r1j6r4UMIIF0xvE42xK8VAvwI8IcIk0rVWUJVWUCwCI
- 42IY6I8E87Iv67AKxVWUJVW8JwCI42IY6I8E87Iv6xkF7I0E14v26r1j6r4UYxBIdaVFxh
- VjvjDU0xZFpf9x0JU2oGQUUUUU=
-X-Originating-IP: [180.140.173.24]
-X-CM-SenderInfo: pphqw6xkxrqxpvfd2hldfou0/1tbiBwsOEmgz9QejzAAAsW
-Received-SPF: pass client-ip=159.226.251.84; envelope-from=mengzhuo@iscas.ac.cn;
- helo=cstnet.cn
-X-Spam_score_int: -41
-X-Spam_score: -4.2
-X-Spam_bar: ----
-X-Spam_report: (-4.2 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_MED=-2.3,
+Content-Type: text/plain
+X-Scanned-By: MIMEDefang 3.0 on 10.30.177.15
+Received-SPF: pass client-ip=170.10.133.124; envelope-from=armbru@redhat.com;
+ helo=us-smtp-delivery-124.mimecast.com
+X-Spam_score_int: -59
+X-Spam_score: -6.0
+X-Spam_bar: ------
+X-Spam_report: (-6.0 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-2.904,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H5=-1, RCVD_IN_MSPIKE_WL=-0.01,
  RCVD_IN_VALIDITY_CERTIFIED_BLOCKED=0.001, RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001,
- SPF_HELO_PASS=-0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -78,109 +115,29 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-This patch adds host satp mode while kvm/host cpu satp mode is not
-set.
+BALATON Zoltan <balaton@eik.bme.hu> writes:
 
-This patch not change the output of errno nor errno strings pattern
-like other functions do. See [v3] for further information.
+> On Tue, 13 May 2025, Markus Armbruster wrote:
+>> Mark Cave-Ayland <mark.caveayland@nutanix.com> writes:
+>>> On a related note this also brings us back to the discussion as to the relationship between qdev and QOM: at one point I was under the impression that qdev properties were simply QOM properties that were exposed externally, i.e on the commmand line for use with -device.
+>>>
+>>> Can you provide an update on what the current thinking is in this area, in particular re: scoping of qdev vs QOM properties?
+>>
+>> qdev is a leaky layer above QOM.
+>>
+>> qdev properties are also QOM properties.
+>>
+>> All device properties are exposed externally.
+>
+> That was clear but the question was if QOM properties (that are not qdev properties) exist and if so are they also exposed? If not exposed it may be used for internal properties (where simpler solutions aren't convenient) but maybe qdev also adds easier definition of properties that's why they used instead of QOM properties?
 
-Change in v5:
-- Adds R-B comment from Andrew Jones
+I'm afraid we haven't answered your question clearly, yet.  The answer
+is yes, QOM properties that are not qdev properties do exist.  The first
+one that comes along: ich9_pm_add_properties() adds a bunch to device
+ICH9-LPC.  They are exposted externally.  To see them, try
 
-Change in v4:
-- Adds changelog in commit message
-- Link to v3: https://lists.nongnu.org/archive/html/qemu-devel/2025-05/msg04629.html
+    $ qemu-system-x86_64 -device ICH9-LPC,help
 
-Change in v3:
-- Rebase on https://github.com/alistair23/qemu/tree/riscv-to-apply.next
-  as requested
-- Link to v2: https://lists.nongnu.org/archive/html/qemu-devel/2025-04/msg05203.html
-
-Changes in v2:
-- use set_satp_mode_max_supported instead of hard code
-- Link to v1: https://lists.nongnu.org/archive/html/qemu-devel/2025-04/msg05094.html
-
-Reviewed-by: Andrew Jones <ajones@ventanamicro.com>
-Resolves: https://gitlab.com/qemu-project/qemu/-/issues/2931
-Signed-off-by: Meng Zhuo <mengzhuo@iscas.ac.cn>
----
- target/riscv/cpu.c         |  3 +--
- target/riscv/cpu.h         |  1 +
- target/riscv/kvm/kvm-cpu.c | 20 +++++++++++++++++++-
- 3 files changed, 21 insertions(+), 3 deletions(-)
-
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index d92874baa0..a84edd3a3b 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -433,8 +433,7 @@ const char *satp_mode_str(uint8_t satp_mode, bool is_32_bit)
-     g_assert_not_reached();
- }
- 
--static void set_satp_mode_max_supported(RISCVCPU *cpu,
--                                        uint8_t satp_mode)
-+void set_satp_mode_max_supported(RISCVCPU *cpu, uint8_t satp_mode)
- {
-     bool rv32 = riscv_cpu_mxl(&cpu->env) == MXL_RV32;
-     const bool *valid_vm = rv32 ? valid_vm_1_10_32 : valid_vm_1_10_64;
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index b56d3afa69..d7136f1d72 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -915,6 +915,7 @@ char *riscv_cpu_get_name(RISCVCPU *cpu);
- 
- void riscv_cpu_finalize_features(RISCVCPU *cpu, Error **errp);
- void riscv_add_satp_mode_properties(Object *obj);
-+void set_satp_mode_max_supported(RISCVCPU *cpu, uint8_t satp_mode);
- bool riscv_cpu_accelerator_compatible(RISCVCPU *cpu);
- 
- /* CSR function table */
-diff --git a/target/riscv/kvm/kvm-cpu.c b/target/riscv/kvm/kvm-cpu.c
-index 82f9728636..18fbca1a08 100644
---- a/target/riscv/kvm/kvm-cpu.c
-+++ b/target/riscv/kvm/kvm-cpu.c
-@@ -999,6 +999,23 @@ static void kvm_riscv_destroy_scratch_vcpu(KVMScratchCPU *scratch)
-     close(scratch->kvmfd);
- }
- 
-+static void kvm_riscv_init_satp_mode(RISCVCPU *cpu, KVMScratchCPU *kvmcpu)
-+{
-+    CPURISCVState *env = &cpu->env;
-+    struct kvm_one_reg reg;
-+    int ret;
-+    uint64_t val;
-+
-+    reg.id = RISCV_CONFIG_REG(env, satp_mode);
-+    reg.addr = (uint64_t)&val;
-+    ret = ioctl(kvmcpu->cpufd, KVM_GET_ONE_REG, &reg);
-+    if (ret != 0) {
-+        error_report("Unable to retrieve satp from host, error %d", ret);
-+    }
-+
-+    set_satp_mode_max_supported(cpu, val);
-+}
-+
- static void kvm_riscv_init_machine_ids(RISCVCPU *cpu, KVMScratchCPU *kvmcpu)
- {
-     struct kvm_one_reg reg;
-@@ -1302,6 +1319,7 @@ static void riscv_init_kvm_registers(Object *cpu_obj)
-     kvm_riscv_init_machine_ids(cpu, &kvmcpu);
-     kvm_riscv_init_misa_ext_mask(cpu, &kvmcpu);
-     kvm_riscv_init_cfg(cpu, &kvmcpu);
-+    kvm_riscv_init_satp_mode(cpu, &kvmcpu);
- 
-     kvm_riscv_destroy_scratch_vcpu(&kvmcpu);
- }
-@@ -1980,7 +1998,7 @@ static bool kvm_cpu_realize(CPUState *cs, Error **errp)
-         }
-     }
- 
--   return true;
-+    return true;
- }
- 
- void riscv_kvm_cpu_finalize_features(RISCVCPU *cpu, Error **errp)
--- 
-2.39.5
+[...]
 
 
