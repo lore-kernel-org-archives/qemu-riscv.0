@@ -4,102 +4,97 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1635FC5AD49
-	for <qemu-riscv@archiver.kernel.org>; Mon, 26 May 2025 08:58:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1459CC54FB3
+	for <qemu-riscv@archiver.kernel.org>; Mon, 26 May 2025 10:07:46 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uJTfM-0007y9-2i; Mon, 26 May 2025 04:58:40 -0400
+	id 1uJUjw-000484-C3; Mon, 26 May 2025 06:07:28 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1uJTfK-0007xN-VZ
- for qemu-riscv@nongnu.org; Mon, 26 May 2025 04:58:38 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1uJTfI-0008Hl-Rn
- for qemu-riscv@nongnu.org; Mon, 26 May 2025 04:58:38 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1748249913;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=jzzd0Z2q7oavj1TygOVzuj6Z/b/VFUvuYV5UB2zwGk4=;
- b=dvvn6SRRlvrXTSknQ2K0vWkpfpKtenBfQM9A2XYseclKoN7ATzy7eduC/RTG4xqPyJ5hGP
- BCr8ZyNz1H06kPj4iPzFHqfUSS2JNUmKmPJQ15OeBDP4cjM3Mce8hYzNHvo1UV8tHlcOT/
- NCd5DerA6863CSuJ/pMisEDOp3QWK9Q=
-Received: from mx-prod-mc-02.mail-002.prod.us-west-2.aws.redhat.com
- (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
- relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-78-gabRBkCUN3ihfu9bwQcvGg-1; Mon,
- 26 May 2025 04:58:28 -0400
-X-MC-Unique: gabRBkCUN3ihfu9bwQcvGg-1
-X-Mimecast-MFC-AGG-ID: gabRBkCUN3ihfu9bwQcvGg_1748249905
-Received: from mx-prod-int-02.mail-002.prod.us-west-2.aws.redhat.com
- (mx-prod-int-02.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.15])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by mx-prod-mc-02.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id 19EB81956095; Mon, 26 May 2025 08:58:24 +0000 (UTC)
-Received: from blackfin.pond.sub.org (unknown [10.45.242.2])
- by mx-prod-int-02.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id 4244F1956095; Mon, 26 May 2025 08:58:22 +0000 (UTC)
-Received: by blackfin.pond.sub.org (Postfix, from userid 1000)
- id CA91B21E66C3; Mon, 26 May 2025 10:58:19 +0200 (CEST)
-From: Markus Armbruster <armbru@redhat.com>
-To: BALATON Zoltan <balaton@eik.bme.hu>
-Cc: Mark Cave-Ayland <mark.caveayland@nutanix.com>,  Daniel P. =?utf-8?Q?B?=
- =?utf-8?Q?errang=C3=A9?=
- <berrange@redhat.com>,  Peter Maydell <peter.maydell@linaro.org>,  Thomas
- Huth <thuth@redhat.com>,  Zhao Liu <zhao1.liu@intel.com>,  Xiaoyao Li
- <xiaoyao.li@intel.com>,  Philippe =?utf-8?Q?Mathieu-Daud=C3=A9?=
- <philmd@linaro.org>,
- Paolo Bonzini <pbonzini@redhat.com>,  qemu-devel@nongnu.org,  Richard
- Henderson <richard.henderson@linaro.org>,  kvm@vger.kernel.org,  Gerd
- Hoffmann <kraxel@redhat.com>,  Laurent Vivier <lvivier@redhat.com>,
- Jiaxun Yang <jiaxun.yang@flygoat.com>,  Yi Liu <yi.l.liu@intel.com>,
- "Michael S. Tsirkin" <mst@redhat.com>,  Eduardo Habkost
- <eduardo@habkost.net>,  Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
- Alistair Francis <alistair.francis@wdc.com>,  Daniel Henrique Barboza
- <dbarboza@ventanamicro.com>,  Marcelo Tosatti <mtosatti@redhat.com>,
- qemu-riscv@nongnu.org,  Weiwei Li <liwei1518@gmail.com>,  Amit Shah
- <amit@kernel.org>,  Yanan Wang <wangyanan55@huawei.com>,  Helge Deller
- <deller@gmx.de>,  Palmer Dabbelt <palmer@dabbelt.com>,  Ani Sinha
- <anisinha@redhat.com>,  Igor Mammedov <imammedo@redhat.com>,  Fabiano
- Rosas <farosas@suse.de>,  Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- =?utf-8?Q?Cl=C3=A9ment?= Mathieu--Drif <clement.mathieu--drif@eviden.com>,
- qemu-arm@nongnu.org,  =?utf-8?Q?Marc-Andr=C3=A9?= Lureau
- <marcandre.lureau@redhat.com>,
- Huacai Chen <chenhuacai@kernel.org>,  Jason Wang <jasowang@redhat.com>
-Subject: Re: How to mark internal properties
-In-Reply-To: <60cd3ba8-2ab1-74ac-54ea-5e3b309788a1@eik.bme.hu> (BALATON
- Zoltan's message of "Tue, 13 May 2025 11:26:31 +0200 (CEST)")
-References: <20250508133550.81391-1-philmd@linaro.org>
- <20250508133550.81391-13-philmd@linaro.org>
- <23260c74-01ba-45bc-bf2f-b3e19c28ec8a@intel.com>
- <aB2vjuT07EuO6JSQ@intel.com>
- <2f526570-7ab0-479c-967c-b3f95f9f19e3@redhat.com>
- <CAFEAcA-kuHvxjuV_cMh-Px3C-k2Gd51jFqhwndO52vm++M_jAA@mail.gmail.com>
- <aCG6MuDLrQpoTqpg@redhat.com> <87jz6mqeu5.fsf@pond.sub.org>
- <eedd1fa2-5856-41b8-8e6b-38bd5c98ce8f@nutanix.com>
- <87ecwshqj4.fsf@pond.sub.org>
- <60cd3ba8-2ab1-74ac-54ea-5e3b309788a1@eik.bme.hu>
-Date: Mon, 26 May 2025 10:58:19 +0200
-Message-ID: <874ix792ac.fsf@pond.sub.org>
-User-Agent: Gnus/5.13 (Gnus v5.13)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1uJUjt-00046T-5o
+ for qemu-riscv@nongnu.org; Mon, 26 May 2025 06:07:25 -0400
+Received: from mail-wm1-x32f.google.com ([2a00:1450:4864:20::32f])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1uJUjo-0000R9-QY
+ for qemu-riscv@nongnu.org; Mon, 26 May 2025 06:07:24 -0400
+Received: by mail-wm1-x32f.google.com with SMTP id
+ 5b1f17b1804b1-442d146a1aaso24930685e9.1
+ for <qemu-riscv@nongnu.org>; Mon, 26 May 2025 03:07:20 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1748254039; x=1748858839; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:to:subject:user-agent:mime-version:date:message-id:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=UeWDwAIij9m4P5yCgviVByHQv/VRO+qlqUjNrp5s81Y=;
+ b=keyOla8TBUjjebCptlITw65RiD4rf3p9KQU0N3hWSb6UeYigCd9U41aCA0qbUO5U5l
+ hghq31V+Oo0GS0vZfE+bS95RNANPZ2/Sq2AzcxJ+aj9+nRU6g++qV2U/M3ibZIogXimv
+ +Giu8zM3UMEFnDIwgJU3LX4lNHjOz+LtqYSzPztcX1vizjtMEu5Ur2P7GDMExPGVJ0i4
+ alWupVWvhTiVDFlPllE5mSJ4YOO/KwxZW81CUxwq5eRlcz0EJthqAjN68SbuSGczMuFy
+ TF1qMA/rkMDn6E5ENY2Zd2PPZ82O1dYV1X3NCrri1z3rHgHuCmR4KHJjanOyjRVy5rSW
+ xvxg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1748254039; x=1748858839;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=UeWDwAIij9m4P5yCgviVByHQv/VRO+qlqUjNrp5s81Y=;
+ b=RGBwxiNH2olj+EtCUizWYxvbuoNI+nit9qaMpd7TAY+MnYN0WEHTwz8FNsoPLlq0mR
+ T8IYz/fuqKZOSBg22B1xxPDqfvGAZko8WRL9+/8W883dxdEBELow0fUvzSZBK4is4sN4
+ KLqoUDx/cTuU3ErpZg8FF1dZvjX5coyyqkUSFPYYfUr2m8pkgzmVTmuyjzM+tRadpzd2
+ og2w1595Rk/Fkvv7SkxSKgLwXqbIERDSmIkY0ozv3py6BeZ2mfwLNe/MvnVpguN1a3t3
+ pycwTgXvmKUqU4rSIMPOic+EkPkxHtFoDihjvLNx0qygcEUql0jChZRbCUGFJBhAtdzA
+ CX1g==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVknCYr0PNcsLv0qqAHLI7iOqMGNVGxvms8pBagSDpg9lNRsfofF5aSyx0DyznLGEvJEChYc8Kx38QA@nongnu.org
+X-Gm-Message-State: AOJu0YziPh33N9CXKKMzDZGqxS/YuEqu0YLnP7BZDW19738yc0YT9OSJ
+ 3i/9OXtSo1W9kLjPvLugfnIl5D2/7fHlDMaxGWgSwlejMvjcR+PWtXFWD5tcUluv78c=
+X-Gm-Gg: ASbGncvARvvvr5xOr3RdFByNH9+LcQwrySdLqxdKxqa7UXCvOi7OM1Nof32Y1rVlzO4
+ rUBN9hfkgPuF9vfgNAJCjihycCTys6Rzvvwlpn7TqhQ532O5qOaji7uCePS3bvLq33bTvPqrXA4
+ cK8tI7FWtWZMHL1fZ2vfTQZq4P73de+Mn+HFTTtimGh1Yb87HhI/1PAeyY6Vx0gG7fH9KReO+Xu
+ ar0rXodI6UNJgHb/oGTW9VxcvRI9gSMvz7/BTLCLSreSpKt78j3Go90VIYHqE35ShNYB6xZEdtD
+ n7e1m21N+8qPOYV/t/Fgs8RXkG92aJM7t34UbaCOJVXP0WAjhqtlhjYDmH3XVesvIgf8pmI8NOa
+ i+fXp+ti8hu3toshQxTXGFj0R
+X-Google-Smtp-Source: AGHT+IE6xJlSgvyBMrkFwk/bvUzspZwflqpVzWji54kK0D9NZKfwYWo23bk+AA61wcCDcpmfSMliuw==
+X-Received: by 2002:a05:600c:4684:b0:43c:f87c:24ce with SMTP id
+ 5b1f17b1804b1-44c955dc476mr70458015e9.21.1748254038651; 
+ Mon, 26 May 2025 03:07:18 -0700 (PDT)
+Received: from [192.168.69.138] (88-187-86-199.subs.proxad.net.
+ [88.187.86.199]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-447f18251adsm239618765e9.2.2025.05.26.03.07.16
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 26 May 2025 03:07:17 -0700 (PDT)
+Message-ID: <be8c1d4d-b68e-42b1-9466-3698ded1be10@linaro.org>
+Date: Mon, 26 May 2025 12:07:16 +0200
 MIME-Version: 1.0
-Content-Type: text/plain
-X-Scanned-By: MIMEDefang 3.0 on 10.30.177.15
-Received-SPF: pass client-ip=170.10.133.124; envelope-from=armbru@redhat.com;
- helo=us-smtp-delivery-124.mimecast.com
-X-Spam_score_int: -59
-X-Spam_score: -6.0
-X-Spam_bar: ------
-X-Spam_report: (-6.0 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-2.904,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H5=-1, RCVD_IN_MSPIKE_WL=-0.01,
- RCVD_IN_VALIDITY_CERTIFIED_BLOCKED=0.001, RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH V3 1/4] acpi: Add machine option to disable SPCR table
+To: Li Chen <me@linux.beauty>, Peter Maydell <peter.maydell@linaro.org>,
+ Shannon Zhao <shannon.zhaosl@gmail.com>, "Michael S. Tsirkin"
+ <mst@redhat.com>, Igor Mammedov <imammedo@redhat.com>,
+ Ani Sinha <anisinha@redhat.com>, Eduardo Habkost <eduardo@habkost.net>,
+ Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
+ Yanan Wang <wangyanan55@huawei.com>, Zhao Liu <zhao1.liu@intel.com>,
+ Song Gao <gaosong@loongson.cn>, Jiaxun Yang <jiaxun.yang@flygoat.com>,
+ Sunil V L <sunilvl@ventanamicro.com>, Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, Weiwei Li
+ <liwei1518@gmail.com>, qemu-arm <qemu-arm@nongnu.org>,
+ qemu-devel <qemu-devel@nongnu.org>, qemu-riscv <qemu-riscv@nongnu.org>
+References: <87msberqzi.wl-me@linux.beauty> <87ldqyrqqo.wl-me@linux.beauty>
+Content-Language: en-US
+From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+In-Reply-To: <87ldqyrqqo.wl-me@linux.beauty>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::32f;
+ envelope-from=philmd@linaro.org; helo=mail-wm1-x32f.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -115,29 +110,53 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-BALATON Zoltan <balaton@eik.bme.hu> writes:
+Hi Li,
 
-> On Tue, 13 May 2025, Markus Armbruster wrote:
->> Mark Cave-Ayland <mark.caveayland@nutanix.com> writes:
->>> On a related note this also brings us back to the discussion as to the relationship between qdev and QOM: at one point I was under the impression that qdev properties were simply QOM properties that were exposed externally, i.e on the commmand line for use with -device.
->>>
->>> Can you provide an update on what the current thinking is in this area, in particular re: scoping of qdev vs QOM properties?
->>
->> qdev is a leaky layer above QOM.
->>
->> qdev properties are also QOM properties.
->>
->> All device properties are exposed externally.
->
-> That was clear but the question was if QOM properties (that are not qdev properties) exist and if so are they also exposed? If not exposed it may be used for internal properties (where simpler solutions aren't convenient) but maybe qdev also adds easier definition of properties that's why they used instead of QOM properties?
+On 15/5/25 14:41, Li Chen wrote:
+> From: Li Chen <chenl311@chinatelecom.cn>
+> 
+> The ACPI SPCR (Serial Port Console Redirection) table allows firmware
+> to specify a preferred serial console device to the operating system.
+> On ARM64 systems, Linux by default respects this table: even if the
+> kernel command line does not include a hardware serial console (e.g.,
+> "console=ttyAMA0"), the kernel still register the serial device
+> referenced by SPCR as a printk console.
+> 
+> While this behavior is standard-compliant, it can lead to situations
+> where guest console behavior is influenced by platform firmware rather
+> than user-specified configuration. To make guest console behavior more
+> predictable and under user control, this patch introduces a machine
+> option to explicitly disable SPCR table exposure:
+> 
+>      -machine spcr=off
+> 
+> By default, the option is enabled (spcr=on), preserving existing
+> behavior. When disabled, QEMU will omit the SPCR table from the guest's
+> ACPI namespace, ensuring that only consoles explicitly declared in the
+> kernel command line are registered.
+> 
+> Signed-off-by: Li Chen <chenl311@chinatelecom.cn>
+> Reviewed-by: Bibo Mao <maobibo@loongson.cn>
+> Acked-by: Michael S. Tsirkin <mst@redhat.com>
+> Reviewed-by: Gavin Shan <gshan@redhat.com>
+> ---
 
-I'm afraid we haven't answered your question clearly, yet.  The answer
-is yes, QOM properties that are not qdev properties do exist.  The first
-one that comes along: ich9_pm_add_properties() adds a bunch to device
-ICH9-LPC.  They are exposted externally.  To see them, try
 
-    $ qemu-system-x86_64 -device ICH9-LPC,help
+> diff --git a/include/hw/boards.h b/include/hw/boards.h
+> index 765dc8dd35..089104d54b 100644
+> --- a/include/hw/boards.h
+> +++ b/include/hw/boards.h
+> @@ -444,6 +444,7 @@ struct MachineState {
+>       SmpCache smp_cache;
+>       struct NVDIMMState *nvdimms_state;
+>       struct NumaState *numa_state;
+> +    bool enable_spcr;
 
-[...]
+This structure is used by all machines. Can we be more
+descriptive, maybe naming as "acpi_spcr_enabled"?
+
+Thanks,
+
+Phil.
 
 
