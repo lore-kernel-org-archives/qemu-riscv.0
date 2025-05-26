@@ -4,90 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1459CC54FB3
-	for <qemu-riscv@archiver.kernel.org>; Mon, 26 May 2025 10:07:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 03AD4C54FB3
+	for <qemu-riscv@archiver.kernel.org>; Mon, 26 May 2025 10:11:40 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uJUjw-000484-C3; Mon, 26 May 2025 06:07:28 -0400
+	id 1uJUnT-000588-AI; Mon, 26 May 2025 06:11:07 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1uJUjt-00046T-5o
- for qemu-riscv@nongnu.org; Mon, 26 May 2025 06:07:25 -0400
-Received: from mail-wm1-x32f.google.com ([2a00:1450:4864:20::32f])
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1uJUnR-00057s-Aq
+ for qemu-riscv@nongnu.org; Mon, 26 May 2025 06:11:05 -0400
+Received: from mail-oi1-x232.google.com ([2607:f8b0:4864:20::232])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1uJUjo-0000R9-QY
- for qemu-riscv@nongnu.org; Mon, 26 May 2025 06:07:24 -0400
-Received: by mail-wm1-x32f.google.com with SMTP id
- 5b1f17b1804b1-442d146a1aaso24930685e9.1
- for <qemu-riscv@nongnu.org>; Mon, 26 May 2025 03:07:20 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1uJUnN-0000zI-2G
+ for qemu-riscv@nongnu.org; Mon, 26 May 2025 06:11:05 -0400
+Received: by mail-oi1-x232.google.com with SMTP id
+ 5614622812f47-401c43671ecso932974b6e.0
+ for <qemu-riscv@nongnu.org>; Mon, 26 May 2025 03:10:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1748254039; x=1748858839; darn=nongnu.org;
+ d=ventanamicro.com; s=google; t=1748254259; x=1748859059; darn=nongnu.org;
  h=content-transfer-encoding:in-reply-to:from:content-language
- :references:to:subject:user-agent:mime-version:date:message-id:from
- :to:cc:subject:date:message-id:reply-to;
- bh=UeWDwAIij9m4P5yCgviVByHQv/VRO+qlqUjNrp5s81Y=;
- b=keyOla8TBUjjebCptlITw65RiD4rf3p9KQU0N3hWSb6UeYigCd9U41aCA0qbUO5U5l
- hghq31V+Oo0GS0vZfE+bS95RNANPZ2/Sq2AzcxJ+aj9+nRU6g++qV2U/M3ibZIogXimv
- +Giu8zM3UMEFnDIwgJU3LX4lNHjOz+LtqYSzPztcX1vizjtMEu5Ur2P7GDMExPGVJ0i4
- alWupVWvhTiVDFlPllE5mSJ4YOO/KwxZW81CUxwq5eRlcz0EJthqAjN68SbuSGczMuFy
- TF1qMA/rkMDn6E5ENY2Zd2PPZ82O1dYV1X3NCrri1z3rHgHuCmR4KHJjanOyjRVy5rSW
- xvxg==
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=iXkGYY4USc3T5Kv7vHlHPs6bhIowb84s8n2jY5Erh3Q=;
+ b=pgYysSg04o+sc08zLkhtdhzNWzySgUj46iluSgePUmTcdQZ9WVm2KUCDtY7tje3Eco
+ xBFKXHWwWOp2aWi6f2pVT7NDPkpswxSPYeM5D4c83p7tLLH6IPuGzhVn9vfak7n6btQ0
+ j6ShvEHesso8WnaJsvBn38Ou0ZGFDL4PyRRcQ0b4lBjrtAUGNCFmnxT9NagwAAntMnUE
+ Z8CMs4c5Qa8MHjMCnanGbARaLeOXQZWvD6e+CDL/AbYNNK+dKybCk01j7csIgJL0DFLv
+ GC/pASGDJZ7ynKM0s8LCL11X4DTAuHV4jIsXhRm6fbPYGBoWX2SMyPsMqxuTPMHoobx+
+ kLKw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1748254039; x=1748858839;
+ d=1e100.net; s=20230601; t=1748254259; x=1748859059;
  h=content-transfer-encoding:in-reply-to:from:content-language
- :references:to:subject:user-agent:mime-version:date:message-id
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=UeWDwAIij9m4P5yCgviVByHQv/VRO+qlqUjNrp5s81Y=;
- b=RGBwxiNH2olj+EtCUizWYxvbuoNI+nit9qaMpd7TAY+MnYN0WEHTwz8FNsoPLlq0mR
- T8IYz/fuqKZOSBg22B1xxPDqfvGAZko8WRL9+/8W883dxdEBELow0fUvzSZBK4is4sN4
- KLqoUDx/cTuU3ErpZg8FF1dZvjX5coyyqkUSFPYYfUr2m8pkgzmVTmuyjzM+tRadpzd2
- og2w1595Rk/Fkvv7SkxSKgLwXqbIERDSmIkY0ozv3py6BeZ2mfwLNe/MvnVpguN1a3t3
- pycwTgXvmKUqU4rSIMPOic+EkPkxHtFoDihjvLNx0qygcEUql0jChZRbCUGFJBhAtdzA
- CX1g==
+ bh=iXkGYY4USc3T5Kv7vHlHPs6bhIowb84s8n2jY5Erh3Q=;
+ b=GnaAvKtKkNTTLLJjxUeoVq6r6+nX5FUrMteCxuPYeLE4r3AIlRvRCZHlGZzm0WQFhX
+ Gw2FLUKJpNsff7mOqlidXfzGLR2Rx0coQRxBuenrZwQYrhWStyYZEzJIrd+bjiXrW7EI
+ m0xW0g5tqvsgt4hOHKHCVgNii43sAC7GaEw2M50qIkCOcb04IuDhIwKkqp0UzLKqQdaH
+ SMrjifpX7CR+40rrAN1AccIwUZjshbfHEDUYLTi8cp3edAFhTLTX6ato/UB+Yjle//WR
+ Ae09GKrjsS8iKMBvRKdzRQrljel3C0qmqhggx50DHidJU+COm62TP6vWUHaJUzwAJYMD
+ /A5Q==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVknCYr0PNcsLv0qqAHLI7iOqMGNVGxvms8pBagSDpg9lNRsfofF5aSyx0DyznLGEvJEChYc8Kx38QA@nongnu.org
-X-Gm-Message-State: AOJu0YziPh33N9CXKKMzDZGqxS/YuEqu0YLnP7BZDW19738yc0YT9OSJ
- 3i/9OXtSo1W9kLjPvLugfnIl5D2/7fHlDMaxGWgSwlejMvjcR+PWtXFWD5tcUluv78c=
-X-Gm-Gg: ASbGncvARvvvr5xOr3RdFByNH9+LcQwrySdLqxdKxqa7UXCvOi7OM1Nof32Y1rVlzO4
- rUBN9hfkgPuF9vfgNAJCjihycCTys6Rzvvwlpn7TqhQ532O5qOaji7uCePS3bvLq33bTvPqrXA4
- cK8tI7FWtWZMHL1fZ2vfTQZq4P73de+Mn+HFTTtimGh1Yb87HhI/1PAeyY6Vx0gG7fH9KReO+Xu
- ar0rXodI6UNJgHb/oGTW9VxcvRI9gSMvz7/BTLCLSreSpKt78j3Go90VIYHqE35ShNYB6xZEdtD
- n7e1m21N+8qPOYV/t/Fgs8RXkG92aJM7t34UbaCOJVXP0WAjhqtlhjYDmH3XVesvIgf8pmI8NOa
- i+fXp+ti8hu3toshQxTXGFj0R
-X-Google-Smtp-Source: AGHT+IE6xJlSgvyBMrkFwk/bvUzspZwflqpVzWji54kK0D9NZKfwYWo23bk+AA61wcCDcpmfSMliuw==
-X-Received: by 2002:a05:600c:4684:b0:43c:f87c:24ce with SMTP id
- 5b1f17b1804b1-44c955dc476mr70458015e9.21.1748254038651; 
- Mon, 26 May 2025 03:07:18 -0700 (PDT)
-Received: from [192.168.69.138] (88-187-86-199.subs.proxad.net.
- [88.187.86.199]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-447f18251adsm239618765e9.2.2025.05.26.03.07.16
+ AJvYcCVhE/1FrpBeeV+ZNE8kUIjajsJfUMYRNDZMG/3QEvswmfd3Z0sejl4ozRqmBoCpIj2Qh9mtZEflosja@nongnu.org
+X-Gm-Message-State: AOJu0YwhGWoGXPj8M/c8HLUL5nzoLjdwYfMgWSdtPyuq7+lw9zBDygqL
+ RwrChBBW9ZLXFfFFbakm7jHHr5nJ1gTJkxav7SuyoLcHwttqW6UNSux5MfFkI2b+FNL8IoRuOyr
+ XX9tx
+X-Gm-Gg: ASbGncv+A5rXUpzxcbivtsKppE1W/co3HYK5uaZCxOnTJMH1R1qxDeXuOnRqoF4FSM+
+ m43TAeMsxkpWnK1gf1m2Dg8KxV1EK9mb/MUPm6nf5I2dq+ypc4mPIB2YnJX09Pe98mBOUQS5gcu
+ Iu3UwPQlWN52drIXnMLRBQjIiEXvw+TgmOLjWCHY+pSah3+xL+KmdZJXFTQ1b8jMcjP79z8ELym
+ vJLqEUqaLxY/9axAjv7gQQrV40Hg45c3I7CXKFREPdB8umEgrdQjvOg94ucJp4Bh/WdbaUuU3Ta
+ 7+adUnEe33BASrZlAlFABdCSRgGdc4pP+vISMc6G5dHsYu7QyMzpV36N6DVHaH2uVZcFOi6Warh
+ k
+X-Google-Smtp-Source: AGHT+IG+fJk/DHUOOWtb1RomuJHSEglhpqg7rVbkOiO/om9tXyKxnopwh5fO6VuwUrI5qKEJka3Csw==
+X-Received: by 2002:a05:6122:3547:b0:52e:630b:166f with SMTP id
+ 71dfb90a1353d-52f1eec45a4mr9617896e0c.3.1748254247514; 
+ Mon, 26 May 2025 03:10:47 -0700 (PDT)
+Received: from [192.168.68.110] ([191.255.35.190])
+ by smtp.gmail.com with ESMTPSA id
+ a1e0cc1a2514c-87bec1ef3a8sm15579500241.21.2025.05.26.03.10.44
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 26 May 2025 03:07:17 -0700 (PDT)
-Message-ID: <be8c1d4d-b68e-42b1-9466-3698ded1be10@linaro.org>
-Date: Mon, 26 May 2025 12:07:16 +0200
+ Mon, 26 May 2025 03:10:46 -0700 (PDT)
+Message-ID: <0afe5f70-73bf-4cf6-bf65-1bc350f20545@ventanamicro.com>
+Date: Mon, 26 May 2025 07:10:42 -0300
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH V3 1/4] acpi: Add machine option to disable SPCR table
-To: Li Chen <me@linux.beauty>, Peter Maydell <peter.maydell@linaro.org>,
- Shannon Zhao <shannon.zhaosl@gmail.com>, "Michael S. Tsirkin"
- <mst@redhat.com>, Igor Mammedov <imammedo@redhat.com>,
- Ani Sinha <anisinha@redhat.com>, Eduardo Habkost <eduardo@habkost.net>,
- Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
- Yanan Wang <wangyanan55@huawei.com>, Zhao Liu <zhao1.liu@intel.com>,
- Song Gao <gaosong@loongson.cn>, Jiaxun Yang <jiaxun.yang@flygoat.com>,
- Sunil V L <sunilvl@ventanamicro.com>, Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, Weiwei Li
- <liwei1518@gmail.com>, qemu-arm <qemu-arm@nongnu.org>,
- qemu-devel <qemu-devel@nongnu.org>, qemu-riscv <qemu-riscv@nongnu.org>
-References: <87msberqzi.wl-me@linux.beauty> <87ldqyrqqo.wl-me@linux.beauty>
+Subject: Re: [PATCH 1/2] hw/riscv: add CVA6 machine
+To: Ben Dooks <ben.dooks@codethink.co.uk>, nazar.kazakov@codethink.co.uk,
+ joseph.baker@codethink.co.uk, fran.redondo@codethink.co.uk,
+ lawrence.hunter@codethink.co.uk, liwei1518@gmail.com,
+ zhiwei_liu@linux.alibaba.com, qemu-riscv@nongnu.org
+Cc: qemu-devel@nongnu.org
+References: <20250521155458.24255-1-ben.dooks@codethink.co.uk>
+ <20250521155458.24255-2-ben.dooks@codethink.co.uk>
 Content-Language: en-US
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-In-Reply-To: <87ldqyrqqo.wl-me@linux.beauty>
+From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+In-Reply-To: <20250521155458.24255-2-ben.dooks@codethink.co.uk>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::32f;
- envelope-from=philmd@linaro.org; helo=mail-wm1-x32f.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::232;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-oi1-x232.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -110,53 +108,431 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Hi Li,
 
-On 15/5/25 14:41, Li Chen wrote:
-> From: Li Chen <chenl311@chinatelecom.cn>
+
+On 5/21/25 12:54 PM, Ben Dooks wrote:
+> Add a (currently Genesy2 based) CVA6 machine.
 > 
-> The ACPI SPCR (Serial Port Console Redirection) table allows firmware
-> to specify a preferred serial console device to the operating system.
-> On ARM64 systems, Linux by default respects this table: even if the
-> kernel command line does not include a hardware serial console (e.g.,
-> "console=ttyAMA0"), the kernel still register the serial device
-> referenced by SPCR as a printk console.
+> Has SPI and UART, the GPIO and Ethernet are currently black-holed
+> as there is no hardware model for them (lowRISC ethernet and Xilinx
+> GPIO)
 > 
-> While this behavior is standard-compliant, it can lead to situations
-> where guest console behavior is influenced by platform firmware rather
-> than user-specified configuration. To make guest console behavior more
-> predictable and under user control, this patch introduces a machine
-> option to explicitly disable SPCR table exposure:
-> 
->      -machine spcr=off
-> 
-> By default, the option is enabled (spcr=on), preserving existing
-> behavior. When disabled, QEMU will omit the SPCR table from the guest's
-> ACPI namespace, ensuring that only consoles explicitly declared in the
-> kernel command line are registered.
-> 
-> Signed-off-by: Li Chen <chenl311@chinatelecom.cn>
-> Reviewed-by: Bibo Mao <maobibo@loongson.cn>
-> Acked-by: Michael S. Tsirkin <mst@redhat.com>
-> Reviewed-by: Gavin Shan <gshan@redhat.com>
+> Signed-off-by: Ben Dooks <ben.dooks@codethink.co.uk>
 > ---
 
+Please remove the blank line at the EOF in include/hw/riscv/cva6.h:
 
-> diff --git a/include/hw/boards.h b/include/hw/boards.h
-> index 765dc8dd35..089104d54b 100644
-> --- a/include/hw/boards.h
-> +++ b/include/hw/boards.h
-> @@ -444,6 +444,7 @@ struct MachineState {
->       SmpCache smp_cache;
->       struct NVDIMMState *nvdimms_state;
->       struct NumaState *numa_state;
-> +    bool enable_spcr;
+$ git am \[PATCH\ 1_2\]\ hw_riscv\:\ add\ CVA6\ machine\ -\ Ben\ Dooks\ \<ben.dooks@codethink.co.uk\>\ -\ 2025-05-21\ 1254.eml
+Applying: hw/riscv: add CVA6 machine
+.git/rebase-apply/patch:372: new blank line at EOF.
++
+warning: 1 line adds whitespace errors.
 
-This structure is used by all machines. Can we be more
-descriptive, maybe naming as "acpi_spcr_enabled"?
+
+> - squashed in fixes for sd-card and new qemu init
+> - move to spdx for cva6 machine
+> - code cleanups missed in first review
+> ---
+>   hw/riscv/Kconfig        |  10 ++
+>   hw/riscv/cva6.c         | 231 ++++++++++++++++++++++++++++++++++++++++
+>   hw/riscv/meson.build    |   1 +
+>   include/hw/riscv/cva6.h |  83 +++++++++++++++
+>   4 files changed, 325 insertions(+)
+>   create mode 100644 hw/riscv/cva6.c
+>   create mode 100644 include/hw/riscv/cva6.h
+> 
+> diff --git a/hw/riscv/Kconfig b/hw/riscv/Kconfig
+> index e6a0ac1fa1..b96f6fa014 100644
+> --- a/hw/riscv/Kconfig
+> +++ b/hw/riscv/Kconfig
+> @@ -9,6 +9,16 @@ config IBEX
+>   
+>   # RISC-V machines in alphabetical order
+>   
+> +config CVA6
+> +    bool
+> +    default y
+> +    depends on RISCV32 || RISCV64
+> +    select DEVICE_TREE
+> +    select SIFIVE_PLIC
+> +    select XILINX_SPI
+> +    select RISCV_ACLINT
+> +    select UNIMP
+> +
+>   config MICROCHIP_PFSOC
+>       bool
+>       default y
+> diff --git a/hw/riscv/cva6.c b/hw/riscv/cva6.c
+> new file mode 100644
+> index 0000000000..822714d794
+> --- /dev/null
+> +++ b/hw/riscv/cva6.c
+> @@ -0,0 +1,231 @@
+> +/*
+> + * QEMU RISC-V Board for OpenHW CVA6 SoC
+> + *
+> + * Copyright (c) 2025 Codethink Ltd
+> + * Ben Dooks <ben.dooks@codethink.co.uk>
+> + *
+> + * SPDX-License-Identifier: GPL-2.0-or-later
+> + */
+> +
+> +#include "qemu/osdep.h"
+> +#include "qemu/error-report.h"
+> +#include "qemu/units.h"
+> +#include "qapi/error.h"
+> +#include "qapi/visitor.h"
+> +#include "hw/boards.h"
+> +#include "hw/irq.h"
+> +#include "hw/loader.h"
+> +#include "hw/sysbus.h"
+> +#include "hw/misc/unimp.h"
+> +
+> +#include "hw/sd/sd.h"
+> +#include "hw/ssi/ssi.h"
+> +
+> +#include "hw/riscv/cva6.h"
+> +#include "hw/riscv/boot.h"
+> +#include "hw/intc/riscv_aclint.h"
+> +
+> +#include "system/system.h"
+> +
+> +#include <libfdt.h>
+> +
+> +#define CVA6_ROM_BASE  0x10000
+> +
+> +static const MemMapEntry cva6_memmap[] = {
+> +    [CVA6_DEBUG] =              {  0x0000000,  0x1000 },
+> +    [CVA6_ROM] =                { CVA6_ROM_BASE, 0x10000 },
+> +    [CVA6_CLINT] =              {  0x2000000, 0xC0000 },
+> +    [CVA6_PLIC] =               {  0xC000000, 0x4000000 },
+> +    [CVA6_UART] =               { 0x10000000, 0x1000 },
+> +    [CVA6_TIMER] =              { 0x18000000, 0x10000 },
+> +    [CVA6_SPI] =                { 0x20000000, 0x800000 },
+> +    [CVA6_ETHERNET] =           { 0x30000000, 0x10000 },
+> +    [CVA6_GPIO] =               { 0x40000000, 0x1000 },
+> +    [CVA6_DRAM] =               { 0x80000000, 0x40000000 },
+> +};
+> +
+> +static void cva6_machine_init(MachineState *machine)
+> +{
+> +    MachineClass *mc = MACHINE_GET_CLASS(machine);
+> +    MemoryRegion *sys_mem = get_system_memory();
+> +    hwaddr dram_addr = cva6_memmap[CVA6_DRAM].base;
+> +    CVA6State *s = CVA6_MACHINE(machine);
+> +    RISCVBootInfo boot_info;
+> +
+> +    object_initialize_child(OBJECT(machine), "soc", &s->soc, TYPE_RISCV_CVA6);
+> +    qdev_realize(DEVICE(&s->soc), NULL, &error_fatal);
+> +
+> +    if (machine->ram_size > mc->default_ram_size) {
+> +        error_report("RAM size is too big for DRAM area");
+> +        exit(EXIT_FAILURE);
+> +    }
+> +
+> +    memory_region_add_subregion(sys_mem, dram_addr, machine->ram);
+> +    riscv_boot_info_init(&boot_info, &s->soc.cpus);
+> +
+> +    if (machine->firmware) {
+> +         hwaddr firmware_load_addr = cva6_memmap[CVA6_ROM].base;
+> +         riscv_load_firmware(machine->firmware, &firmware_load_addr, NULL);
+> +    }
+> +
+> +     if (machine->kernel_filename) {
+> +         /* note - we've not tested just loading the kernel w/o uboot */
+> +         riscv_load_kernel(machine, &boot_info, dram_addr, false, NULL);
+> +    }
+> +
+> +}
+> +
+> +static void cva6_machine_class_init(ObjectClass *oc, const void *data)
+> +{
+> +    MachineClass *mc = MACHINE_CLASS(oc);
+> +
+> +    mc->desc = "RISC-V board for CVA6";
+> +    mc->init = cva6_machine_init;
+> +    mc->max_cpus = 1;
+> +    mc->default_ram_id = "cva6.ram";
+> +    /* start with "max" cpu type until we sort out CVA6 type */
+> +    mc->default_cpu_type = TYPE_RISCV_CPU_MAX;
+> +    mc->default_ram_size = cva6_memmap[CVA6_DRAM].size;
+> +};
+> +
+> +static void cva6_soc_init(Object *obj)
+> +{
+> +    CVA6SoCState *s = RISCV_CVA6(obj);
+> +
+> +    object_initialize_child(obj, "cpus", &s->cpus, TYPE_RISCV_HART_ARRAY);
+> +}
+> +
+> +static void cva6_add_spi(CVA6SoCState *s, const MemMapEntry *map)
+> +{
+> +    DriveInfo *dinfo;
+> +    BlockBackend *blk;
+> +    DeviceState *card_dev;
+> +    qemu_irq sd_cs;
+> +    DeviceState *sddev;
+> +    SysBusDevice *busdev;
+> +    DeviceState *spi_dev;
+> +    SSIBus *spi;
+> +
+> +    spi_dev = qdev_new("xlnx.xps-spi");
+> +    qdev_prop_set_uint8(spi_dev, "num-ss-bits", 1);
+> +    qdev_prop_set_string(spi_dev, "endianness", "little");
+> +
+> +    busdev = SYS_BUS_DEVICE(spi_dev);
+> +    sysbus_realize_and_unref(busdev, &error_fatal);
+> +    sysbus_mmio_map(busdev, 0, map->base);
+> +    sysbus_connect_irq(busdev, 0, qdev_get_gpio_in(DEVICE(s->plic), CVA6_SPI_IRQ));
+> +
+> +    spi = (SSIBus *)qdev_get_child_bus(spi_dev, "spi");
+> +
+> +    sddev = ssi_create_peripheral(spi, "ssi-sd");
+> +    sd_cs = qdev_get_gpio_in_named(sddev, SSI_GPIO_CS, 0);
+> +    sysbus_connect_irq(busdev, 1, sd_cs);
+> +
+> +    dinfo = drive_get(IF_SD, 0, 0);
+> +    blk = dinfo ? blk_by_legacy_dinfo(dinfo) : NULL;
+> +    card_dev = qdev_new(TYPE_SD_CARD_SPI);
+> +    qdev_prop_set_drive_err(card_dev, "drive", blk, &error_fatal);
+> +
+> +    qdev_realize_and_unref(card_dev, qdev_get_child_bus(sddev, "sd-bus"), &error_fatal);
+> +}
+> +
+> +static void not_implemented(const char *name, const MemMapEntry *map)
+> +{
+> +    create_unimplemented_device(name, map->base, map->size);
+> +}
+> +
+> +static void cva6_soc_realize(DeviceState *dev_soc, Error **errp)
+> +{
+> +    MemoryRegion *system_memory = get_system_memory();
+> +    MachineState *ms = MACHINE(qdev_get_machine());
+> +    CVA6SoCState *s = RISCV_CVA6(dev_soc);
+> +    const MemMapEntry *memmap = cva6_memmap;
+> +    MemoryRegion *rom = g_new(MemoryRegion, 1);
+> +    char *plic_hart_config;
+
+You can use
+
+g_autofree char *plic_hart_config = NULL;
+
+
+And avoid the g_free() call afterwards.
+
+> +
+> +    object_property_set_str(OBJECT(&s->cpus), "cpu-type", ms->cpu_type,
+> +                            &error_abort);
+> +    object_property_set_int(OBJECT(&s->cpus), "num-harts", ms->smp.cpus,
+> +                            &error_abort);
+> +    object_property_set_int(OBJECT(&s->cpus), "resetvec", CVA6_ROM_BASE,
+> +                            &error_abort);
+> +    sysbus_realize(SYS_BUS_DEVICE(&s->cpus), &error_fatal);
+> +
+> +    /* boot rom */
+> +    memory_region_init_rom(rom, OBJECT(dev_soc), "riscv.cva6.bootrom",
+> +                           memmap[CVA6_ROM].size, &error_fatal);
+> +    memory_region_add_subregion(system_memory, memmap[CVA6_ROM].base,
+> +                                rom);
+> +
+> +    /* create PLIC hart topology configuration string */
+> +    plic_hart_config = riscv_plic_hart_config_string(ms->smp.cpus);
+> +
+> +    /* MMIO */
+> +    s->plic = sifive_plic_create(memmap[CVA6_PLIC].base,
+> +        plic_hart_config, ms->smp.cpus, 0,
+> +        CVA6_PLIC_NUM_SOURCES,
+> +        CVA6_PLIC_NUM_PRIORITIES,
+> +        CVA6_PLIC_PRIORITY_BASE,
+> +        CVA6_PLIC_PENDING_BASE,
+> +        CVA6_PLIC_ENABLE_BASE,
+> +        CVA6_PLIC_ENABLE_STRIDE,
+> +        CVA6_PLIC_CONTEXT_BASE,
+> +        CVA6_PLIC_CONTEXT_STRIDE,
+> +        memmap[CVA6_PLIC].size);
+> +    g_free(plic_hart_config);
+> +
+> +    riscv_aclint_swi_create(memmap[CVA6_CLINT].base, 0,
+> +                            ms->smp.cpus, false);
+> +
+> +#define CLINT_TIMEBASE_FREQ 25000000
+
+Although we have some instances of macros being defined inside functions,
+when a macro is doing something that is only relevant inside the function
+scope, this is not a pattern we want to promote.
+
+Please move this define outside cva6_soc_realize(), preferably at the start
+of the file.
+
+
+> +    riscv_aclint_mtimer_create(
+> +        memmap[CVA6_CLINT].base + RISCV_ACLINT_SWI_SIZE,
+> +        RISCV_ACLINT_DEFAULT_MTIMER_SIZE, 0, ms->smp.cpus,
+> +        RISCV_ACLINT_DEFAULT_MTIMECMP, RISCV_ACLINT_DEFAULT_MTIME,
+> +        CLINT_TIMEBASE_FREQ, true);
+> +
+> +    /* something in cva6-sdk uboot seems to prod the debug
+> +     * unit by accident, so make it not implemented */
+> +    not_implemented("debug", &memmap[CVA6_DEBUG]);
+> +
+> +    /* 16550 uart, one 32bit register per 32bit word */
+> +
+> +    serial_mm_init(system_memory, memmap[CVA6_UART].base, 2,
+> +                   qdev_get_gpio_in(DEVICE(s->plic), CVA6_UART_IRQ),
+> +                   50*1000*10000,
+> +                   serial_hd(0), DEVICE_LITTLE_ENDIAN);
+> +
+> +    /* just unimplement the timers, network and gpio here for now.
+> +     * no-one seems to be using the apb timer block anyway*/
+> +    not_implemented("net", &memmap[CVA6_ETHERNET]);
+> +    not_implemented("gpio", &memmap[CVA6_GPIO]);
+> +    not_implemented("timer", &memmap[CVA6_TIMER]);
+> +
+> +    /* connect xilinx spi block here */
+> +    cva6_add_spi(s, &memmap[CVA6_SPI]);
+> +}
+> +
+> +static void cva6_soc_class_init(ObjectClass *oc, const void *data)
+> +{
+> +    DeviceClass *dc = DEVICE_CLASS(oc);
+> +
+> +    dc->realize = cva6_soc_realize;
+> +    dc->user_creatable = false;
+> +};
+> +
+> +static const TypeInfo cva6_types[] = {
+> +    {
+> +        .name           = TYPE_RISCV_CVA6,
+> +        .parent         = TYPE_DEVICE,
+> +        .instance_size  = sizeof(CVA6SoCState),
+> +        .instance_init  = cva6_soc_init,
+> +        .class_init     = cva6_soc_class_init,
+> +    }, {
+> +        .name           = TYPE_CVA6_MACHINE,
+> +        .parent         = TYPE_MACHINE,
+> +        .instance_size  = sizeof(CVA6State),
+> +        .class_init     = cva6_machine_class_init,
+> +    }
+> +};
+> +
+> +DEFINE_TYPES(cva6_types)
+> diff --git a/hw/riscv/meson.build b/hw/riscv/meson.build
+> index c22f3a7216..a32fffab63 100644
+> --- a/hw/riscv/meson.build
+> +++ b/hw/riscv/meson.build
+> @@ -2,6 +2,7 @@ riscv_ss = ss.source_set()
+>   riscv_ss.add(files('boot.c'))
+>   riscv_ss.add(when: 'CONFIG_RISCV_NUMA', if_true: files('numa.c'))
+>   riscv_ss.add(files('riscv_hart.c'))
+> +riscv_ss.add(when: 'CONFIG_CVA6', if_true: files('cva6.c'))
+>   riscv_ss.add(when: 'CONFIG_OPENTITAN', if_true: files('opentitan.c'))
+>   riscv_ss.add(when: 'CONFIG_RISCV_VIRT', if_true: files('virt.c'))
+>   riscv_ss.add(when: 'CONFIG_SHAKTI_C', if_true: files('shakti_c.c'))
+> diff --git a/include/hw/riscv/cva6.h b/include/hw/riscv/cva6.h
+> new file mode 100644
+> index 0000000000..2d82d7eaf0
+> --- /dev/null
+> +++ b/include/hw/riscv/cva6.h
+> @@ -0,0 +1,83 @@
+> +/*
+> + * QEMU RISC-V Board for OpenHW CVA6 SoC
+> + *
+> + * Copyright (c) 2025 Codethink Ltd
+> + * Ben Dooks <ben.dooks@codethink.co.uk>
+> + *
+> + * SPDX-License-Identifier: GPL-2.0-or-later
+> + */
+> +
+> +#ifndef HW_CVA6_H
+> +#define HW_CVA6_H
+> +
+> +#include "hw/riscv/riscv_hart.h"
+> +#include "hw/intc/sifive_plic.h"
+> +#include "hw/char/serial-mm.h"
+> +
+> +#include "hw/boards.h"
+> +#include "hw/sysbus.h"
+> +#include "qom/object.h"
+> +
+> +#define TYPE_RISCV_CVA6 "riscv.cva6.soc"
+> +OBJECT_DECLARE_SIMPLE_TYPE(CVA6SoCState, RISCV_CVA6)
+> +
+> +typedef struct CVA6SoCState {
+> +    /*< private >*/
+> +    DeviceState parent_obj;
+> +
+> +    /*< public >*/
+> +    RISCVHartArrayState cpus;
+> +    DeviceState *plic;
+> +    MemoryRegion rom;
+> +
+> +    uint32_t resetvec;
+> +} CVA6SoCState;
+> +
+> +#define TYPE_CVA6_MACHINE MACHINE_TYPE_NAME("cva6")
+> +OBJECT_DECLARE_SIMPLE_TYPE(CVA6State, CVA6_MACHINE)
+> +
+> +typedef struct CVA6State {
+> +    /*< private >*/
+> +    MachineState parent_obj;
+> +
+> +    /*< public >*/
+> +    CVA6SoCState soc;
+> +}
+> +CVA6State;
+> +
+> +enum {
+> +    CVA6_DEBUG,
+> +    CVA6_ROM,
+> +    CVA6_CLINT,
+> +    CVA6_PLIC,
+> +    CVA6_UART,
+> +    CVA6_TIMER,
+> +    CVA6_SPI,
+> +    CVA6_ETHERNET,
+> +    CVA6_GPIO,
+> +    CVA6_DRAM,
+> +};
+> +
+> +enum {
+> +    CVA6_UART_IRQ       = 1,
+> +    CVA6_SPI_IRQ        = 2,
+> +    CVA6_ETH_IRQ        = 3,
+> +    CVA6_TIMER0_OVF_IRQ = 4,
+> +    CVA6_TIMER0_CMP_IRQ = 5,
+> +    CVA6_TIMER1_OVF_IRQ = 6,
+> +    CVA6_TIMER1_CMP_IRQ = 7,
+> +};
+> +
+> +/* plic register interface in corev_apu/rv_plic/rtl/plic_regmap.sv  */
+
+
+Where is this file? It's not on QEMU or Linux.
+
+I'm assuming that you're referring to plic_regmap.sv from this repo:
+
+https://github.com/openhwgroup/cva6/tree/master/corev_apu
+
+If that's the case we need to point to this repo in the comment. The commit
+msg also works.
+
 
 Thanks,
 
-Phil.
+Daniel
+
+
+> +
+> +#define CVA6_PLIC_NUM_SOURCES           32
+> +#define CVA6_PLIC_NUM_PRIORITIES        7
+> +#define CVA6_PLIC_PRIORITY_BASE         0x0000
+> +#define CVA6_PLIC_PENDING_BASE          0x1000
+> +#define CVA6_PLIC_ENABLE_BASE           0x2000
+> +#define CVA6_PLIC_ENABLE_STRIDE         0x80
+> +#define CVA6_PLIC_CONTEXT_BASE          0x200000
+> +#define CVA6_PLIC_CONTEXT_STRIDE        0x1000
+> +
+> +#endif
+> +
 
 
