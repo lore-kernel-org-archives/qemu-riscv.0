@@ -4,93 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 12D39C54FB3
-	for <qemu-riscv@archiver.kernel.org>; Mon, 26 May 2025 10:13:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 30E46C54FB3
+	for <qemu-riscv@archiver.kernel.org>; Mon, 26 May 2025 18:15:31 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uJUpN-0005qZ-6U; Mon, 26 May 2025 06:13:05 -0400
+	id 1uJcM7-00086h-Ij; Mon, 26 May 2025 14:15:23 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1uJUpL-0005qI-Lp
- for qemu-riscv@nongnu.org; Mon, 26 May 2025 06:13:03 -0400
-Received: from mail-vk1-xa29.google.com ([2607:f8b0:4864:20::a29])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1uJcM0-00085y-BE
+ for qemu-riscv@nongnu.org; Mon, 26 May 2025 14:15:17 -0400
+Received: from mail-wm1-x336.google.com ([2a00:1450:4864:20::336])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1uJUpJ-0001Ea-SH
- for qemu-riscv@nongnu.org; Mon, 26 May 2025 06:13:03 -0400
-Received: by mail-vk1-xa29.google.com with SMTP id
- 71dfb90a1353d-5259327a93bso441574e0c.2
- for <qemu-riscv@nongnu.org>; Mon, 26 May 2025 03:13:01 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1uJcLy-0006Hf-5k
+ for qemu-riscv@nongnu.org; Mon, 26 May 2025 14:15:15 -0400
+Received: by mail-wm1-x336.google.com with SMTP id
+ 5b1f17b1804b1-43ede096d73so19141515e9.2
+ for <qemu-riscv@nongnu.org>; Mon, 26 May 2025 11:15:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1748254380; x=1748859180; darn=nongnu.org;
+ d=linaro.org; s=google; t=1748283312; x=1748888112; darn=nongnu.org;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=ZF4WH1L926HBZQvALbKypa7jXOpWVLWvgKJeNMDiD+Q=;
- b=bz+IDjGaOjTaAh4dzTnKRPtAl+qPAt+sp4eLe4vk71iE5CW14XCl7ahl8/We0h763A
- ErAfWjSqp6N/NaZIX8JfXMjoQawbMxbU5FgN9epl3WmhfqlSjJbjJWTpG5jQytmdJAOC
- zWH5PzNH4Beop862khVW8080tE8YkNQG89hJTP5dOtCqzVw80sJavcC3lYBnwt4YLKZF
- 3Z7Zorvf82ncBgBtZAazEa3SoWWQaBTLkxTiZkPgGZq75lVthKBdHuThpce/BnCmgfNk
- b5MjT5N0J7OJfLP4s8xsuVlx5UYvm2ypJ8y+M1gtqlCeyw6Bg0ifBQcxS5sOFkmGb39Z
- vu9g==
+ bh=DRWTXK6F0TtjftMzftbtG1pBhONz9R1WrCmvSecwMds=;
+ b=i3FQYXsnk27YbhT0qOGWCWf9LOhTzmr/y5QaIZxQkncTFbiZybd6kTMp2tkZfJIiQm
+ M5sbDKH8/aQ01CTAJctnzDK9pM0+NPXKQjxjbBSKczPOtyVjN1iUYXymcF3c6v8cseAK
+ HFoqyyohUUrXqB6mtxeB4ihniUG3JQaoWYD29w4BacgRgWV0sysVWGYxK1Ssz+15SC47
+ 8nfCceDH8bHgMcaRyapgrfSO1Acf2c6YJRRxdYBxz7jZR6v5LCM0CXubxROjkJ+KLhNw
+ fbt4sAIh6Qu6R6HpZ0vYogl04lf8wUryT/diyrprMzrRD+ThrfacSLPrB0mAHIEp8U7e
+ NpVw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1748254380; x=1748859180;
+ d=1e100.net; s=20230601; t=1748283312; x=1748888112;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=ZF4WH1L926HBZQvALbKypa7jXOpWVLWvgKJeNMDiD+Q=;
- b=oFbYwgMK0dTYeSAZ9ck3eVvPZw41Z3eO5w/RWBSKmOskKc6iytOdRAa1GOPOsE48+W
- 0CiukeuunsNXmutSZUanY7Cd/T11zFJLebdNeJrlNbJ4O6/z/upZK0RhDrKhTFNOOlWN
- /jWrclDkTKoiyFpGUGcEb7ga74jJRYwDPkUyr0yC9Og3RNAh4TIDn19A8iw2HPhXCUeE
- 6laXhN1tikLPE5QL5BTZdLRiOspLXiljkQDfOYHFpYx2agxnXQqACFZhr51OhyhJsokL
- xsUHCchOwpaYWzOdib6Qx7QNpFPrVkxBlXjgsiBtZAIu2DP5Bc2wOMET9D/3ohHJ9znF
- Be2w==
+ bh=DRWTXK6F0TtjftMzftbtG1pBhONz9R1WrCmvSecwMds=;
+ b=Ut8uq5Uxx5DIS1Jm3u1kJlhopycwRzRL8sRByjmwJpNdPTVxPL4xAHIgxzW2HGc0Xj
+ GcM3kIVu6jIqNXmXEjwKIzVwDMe7Ec7OJm6WGR/itJS0nSH4dzSLShzQhZ6XVNiYHhtg
+ 8g5mfcTWhaiPHpaaEVpHNnPx5tb50IV2+m5F74o7fJ0Zd6oL+U2L4fQAtZV4/042xeCb
+ isGexh5OPgtBKXeb83L2C/ePKkjgCVaMv8CfjRxZvSksPsy6Hs3PTm8bU7Xyz3ZawQPR
+ guPMyQ+xYC8BCS3Owvs2cqOj3NPJa5b6uGLKiu0TCua9LHwESmqCEn8iPNBmKMyXGvG+
+ 7xZw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXQUdet5beQQCDqm7bRIrBOJgcHOA2m4KIMA/Be063HdayWsL9I5vd6z4Pq1k23IbQOL+BAMwZ44+3r@nongnu.org
-X-Gm-Message-State: AOJu0YxFUwf+FJE7FNjWilCRlqCRireDUsxq+hfhYrsKPxGdWJC8zDVj
- PCzHRlfUX4FiTAZC5ykv2aSpf6kt0xTS/mmgPuYlZk1fKeNvTV4Xnr058xybXgM4CVE=
-X-Gm-Gg: ASbGnct+DioEmda0J0GgyRG9jU5ZhCUAmaM2/pHa5rXDkfXaWDniOnKKA/0EMKC5D80
- r6vAWQcT2XbwW1pWbrdpfHuh6bjGUb2vUCHbN+6/t1OI2Qz/DpGQviLKUouGWoiy7qaazBke89G
- ojk9DHwo/Wi1xjJCxX8FS0I/Du/F9z8ZZvlFdaM/ujIRFizV9xrwFDffrNKGipXqduKB9/eawYU
- HQnHe0EMv5j/aO+ErTHmd1wB9JGG02d2YF4QuqLpVUBaY/qOzcknpzM+upM5mWwuEL9N6yiMfn/
- KtXfcrWRtVNTl627BRAPIHtZ/QV/SctrPZAKoPqA/TKTD5newcTl4yOm/lUKn8r+kA==
-X-Google-Smtp-Source: AGHT+IGQH78t9mPwnKoomMddqi+VDN9ipN8vu5OwLS8xHR0BWblFIWoDAbH1hN/6J01abSfJmFokZA==
-X-Received: by 2002:a05:6122:a23:b0:520:3536:feb5 with SMTP id
- 71dfb90a1353d-52f2c5ab85emr5908390e0c.11.1748254380502; 
- Mon, 26 May 2025 03:13:00 -0700 (PDT)
-Received: from [192.168.68.110] ([191.255.35.190])
- by smtp.gmail.com with ESMTPSA id
- 71dfb90a1353d-52dba910d62sm17330183e0c.10.2025.05.26.03.12.57
+ AJvYcCVgNJgHLRt3rZUWfH5xcPKjATvRMCCA7D8ZRpyGZ8IxyZUkG31W1aiRM2wTFHbzC4DrkjUiyO5B32Xm@nongnu.org
+X-Gm-Message-State: AOJu0Yx22Uw4iDWYvkpIDmiiXnE97q480vgFpqMaBiuxaXHE9uwG9j63
+ LNkW4jrYXyRdsz4bo4s98htArZ+aPSa7BUYSM8rVsxF5Uz2Sjxte4QDOwlHhL0Yy7UpUSR4IQnP
+ Mt3GeKXY=
+X-Gm-Gg: ASbGncv/cpU10CnZO76QrhsZOpwoTcvRwyEH9qdJScHsoFYWBwhLmmLe5AIhZ5yavzt
+ Mz6KtUWt5aB0wFvK9EuQZMg/ZDAYhMhsvD1C6dVahubL+ODXCy7ysgApH78XaiVyXyphLyO9Y2e
+ 9xCwFqem/oWkkdC+wQ/iIjzcHnClrHEd6ZTUvJmUEtdhHZAsE15Tvgyq3CcV+LmProj7K4z52gU
+ NxPjGZnpmFAHTmj9GNZynibYzhkTXV+9+pvxqzXafTEbXIS283H0+MryCcyRy7Bsx8eCf6KJHX/
+ I2Kg1n95AvJr7ojk1LRYI5kueIB3x5LHDrcDwgf3URNNDXqFAZUR1eNcae4RZk/76wJA1TuOgxA
+ au6wfHZ5XsIxG7U02WVZvKHf0
+X-Google-Smtp-Source: AGHT+IFMxQLEv2ZxU9/LVdfnpCq8u5a8B+HuHh+1TvK7xwqy3AysJaI9Pf+HCtXIdzFj458BI+2Veg==
+X-Received: by 2002:a05:600c:8189:b0:43c:f050:fed3 with SMTP id
+ 5b1f17b1804b1-44c919e13f3mr80705585e9.11.1748283311925; 
+ Mon, 26 May 2025 11:15:11 -0700 (PDT)
+Received: from [192.168.69.138] (88-187-86-199.subs.proxad.net.
+ [88.187.86.199]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-3a4d5deae4dsm4827908f8f.2.2025.05.26.11.15.11
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 26 May 2025 03:13:00 -0700 (PDT)
-Message-ID: <1223c068-062c-44f9-91b4-d9a456556b29@ventanamicro.com>
-Date: Mon, 26 May 2025 07:12:56 -0300
+ Mon, 26 May 2025 11:15:11 -0700 (PDT)
+Message-ID: <f1fc4726-8b87-4995-a874-60e0c969b633@linaro.org>
+Date: Mon, 26 May 2025 20:15:10 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/2] target/riscv: add cva6 cpu type
-To: Ben Dooks <ben.dooks@codethink.co.uk>, nazar.kazakov@codethink.co.uk,
- joseph.baker@codethink.co.uk, fran.redondo@codethink.co.uk,
- lawrence.hunter@codethink.co.uk, liwei1518@gmail.com,
- zhiwei_liu@linux.alibaba.com, qemu-riscv@nongnu.org
-Cc: qemu-devel@nongnu.org
-References: <20250521155458.24255-1-ben.dooks@codethink.co.uk>
- <20250521155458.24255-3-ben.dooks@codethink.co.uk>
+Subject: Re: [PATCH 09/12] target/riscv: Fill in TCGCPUOps.pointer_wrap
+To: Richard Henderson <richard.henderson@linaro.org>, qemu-devel@nongnu.org
+Cc: foss@percivaleng.com, qemu-riscv@nongnu.org
+References: <20250504205714.3432096-1-richard.henderson@linaro.org>
+ <20250504205714.3432096-10-richard.henderson@linaro.org>
+ <e8db1ec3-fcb3-42d1-a488-cf55d6060904@linaro.org>
+ <702b4c82-653d-4782-8805-c4ff9a1155ae@linaro.org>
 Content-Language: en-US
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <20250521155458.24255-3-ben.dooks@codethink.co.uk>
+From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+In-Reply-To: <702b4c82-653d-4782-8805-c4ff9a1155ae@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::a29;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-vk1-xa29.google.com
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::336;
+ envelope-from=philmd@linaro.org; helo=mail-wm1-x336.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -106,75 +105,54 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-
-
-On 5/21/25 12:54 PM, Ben Dooks wrote:
-> Add CVA6 CPU type, for the OpenHW CVA6 cores
+On 5/5/25 20:59, Richard Henderson wrote:
+> On 5/5/25 09:47, Philippe Mathieu-Daudé wrote:
+>> On 4/5/25 22:57, Richard Henderson wrote:
+>>> Check 32 vs 64-bit and pointer masking state.
+>>>
+>>> Cc: qemu-riscv@nongnu.org
+>>> Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
+>>> ---
+>>>   target/riscv/tcg/tcg-cpu.c | 26 ++++++++++++++++++++++++++
+>>>   1 file changed, 26 insertions(+)
+>>>
+>>> diff --git a/target/riscv/tcg/tcg-cpu.c b/target/riscv/tcg/tcg-cpu.c
+>>> index 55e00972b7..267186e5e3 100644
+>>> --- a/target/riscv/tcg/tcg-cpu.c
+>>> +++ b/target/riscv/tcg/tcg-cpu.c
+>>> @@ -237,6 +237,31 @@ static void riscv_restore_state_to_opc(CPUState 
+>>> *cs,
+>>>       env->excp_uw2 = data[2];
+>>>   }
+>>> +#ifndef CONFIG_USER_ONLY
+>>> +static vaddr riscv_pointer_wrap(CPUState *cs, int mmu_idx,
+>>> +                                vaddr result, vaddr base)
+>>> +{
+>>> +    CPURISCVState *env = cpu_env(cs);
+>>> +    uint32_t pm_len;
+>>> +    bool pm_signext;
+>>> +
+>>> +    if (cpu_address_xl(env) == MXL_RV32) {
+>>> +        return (uint32_t)result;
+>>> +    }
+>>> +
+>>> +    pm_len = riscv_pm_get_pmlen(riscv_pm_get_pmm(env));
+>>> +    if (pm_len == 0) {
+>>> +        return result;
+>>> +    }
+>>> +
+>>> +    pm_signext = riscv_cpu_virt_mem_enabled(env);
+>>> +    if (pm_signext) {
+>>> +        return sextract64(result, 0, 64 - pm_len);
+>>> +    }
+>>> +    return extract64(result, 0, 64 - pm_len);
+>>
+>> Is this safe for MXL_RV128?
 > 
-> Signed-off-by: Ben Dooks <ben.dooks@codethink.co.uk>
-> ---
+> The RV128 implementation only uses 64-bit pointers, so, yes.
 
-The patch LGTM but I'm afraid you'll have to rebase it with the current
-master: we changed how CPUs are declared after the RISCVCPUDef changes
-landed.
+Thanks.
 
-
-Thanks,
-
-Daniel
-
->   target/riscv/cpu-qom.h |  1 +
->   target/riscv/cpu.c     | 19 +++++++++++++++++++
->   2 files changed, 20 insertions(+)
-> 
-> diff --git a/target/riscv/cpu-qom.h b/target/riscv/cpu-qom.h
-> index 4cfdb74891..b5460771d7 100644
-> --- a/target/riscv/cpu-qom.h
-> +++ b/target/riscv/cpu-qom.h
-> @@ -34,6 +34,7 @@
->   #define TYPE_RISCV_CPU_BASE32           RISCV_CPU_TYPE_NAME("rv32")
->   #define TYPE_RISCV_CPU_BASE64           RISCV_CPU_TYPE_NAME("rv64")
->   #define TYPE_RISCV_CPU_BASE128          RISCV_CPU_TYPE_NAME("x-rv128")
-> +#define TYPE_RISCV_CPU_CVA6             RISCV_CPU_TYPE_NAME("cva6")
->   #define TYPE_RISCV_CPU_RV32I            RISCV_CPU_TYPE_NAME("rv32i")
->   #define TYPE_RISCV_CPU_RV32E            RISCV_CPU_TYPE_NAME("rv32e")
->   #define TYPE_RISCV_CPU_RV64I            RISCV_CPU_TYPE_NAME("rv64i")
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index d92874baa0..0ad6a7b616 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -496,6 +496,24 @@ static void rv64_base_cpu_init(Object *obj)
->   #endif
->   }
->   
-> +static void rv64_cva6_cpu_init(Object *obj)
-> +{
-> +    RISCVCPU *cpu = RISCV_CPU(obj);
-> +    CPURISCVState *env = &cpu->env;
-> +
-> +    riscv_cpu_set_misa_ext(env, RVI | RVM | RVA | RVF | RVD | RVC | RVB | RVS | RVU);
-> +    env->priv_ver = PRIV_VERSION_1_12_0;
-> +#ifndef CONFIG_USER_ONLY
-> +    set_satp_mode_max_supported(RISCV_CPU(obj), VM_1_10_SV39);
-> +#endif
-> +
-> +    /* inherited from parent obj via riscv_cpu_init() */
-> +    cpu->cfg.ext_zifencei = true;
-> +    cpu->cfg.ext_zicsr = true;
-> +    cpu->cfg.mmu = true;
-> +    cpu->cfg.pmp = true;
-> +}
-> +
->   static void rv64_sifive_u_cpu_init(Object *obj)
->   {
->       RISCVCPU *cpu = RISCV_CPU(obj);
-> @@ -3247,6 +3265,7 @@ static const TypeInfo riscv_cpu_type_infos[] = {
->   
->   #if defined(TARGET_RISCV64)
->       DEFINE_DYNAMIC_CPU(TYPE_RISCV_CPU_BASE64,    MXL_RV64,  rv64_base_cpu_init),
-> +    DEFINE_VENDOR_CPU(TYPE_RISCV_CPU_CVA6,       MXL_RV64,  rv64_cva6_cpu_init),
->       DEFINE_VENDOR_CPU(TYPE_RISCV_CPU_SIFIVE_E51, MXL_RV64,  rv64_sifive_e_cpu_init),
->       DEFINE_VENDOR_CPU(TYPE_RISCV_CPU_SIFIVE_U54, MXL_RV64,  rv64_sifive_u_cpu_init),
->       DEFINE_VENDOR_CPU(TYPE_RISCV_CPU_SHAKTI_C,   MXL_RV64,  rv64_sifive_u_cpu_init),
+Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
 
 
