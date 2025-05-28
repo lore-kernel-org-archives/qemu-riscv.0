@@ -4,86 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 51181C5AE59
-	for <qemu-riscv@archiver.kernel.org>; Wed, 28 May 2025 08:22:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 34086C3ABB2
+	for <qemu-riscv@archiver.kernel.org>; Wed, 28 May 2025 09:12:53 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uKBz7-0003xS-1A; Wed, 28 May 2025 04:18:01 -0400
+	id 1uKCpQ-0002uo-QJ; Wed, 28 May 2025 05:12:04 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1uKBwS-0008Qb-1r
- for qemu-riscv@nongnu.org; Wed, 28 May 2025 04:15:19 -0400
-Received: from mail-wm1-x32d.google.com ([2a00:1450:4864:20::32d])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1uKBwE-0005Jl-KS
- for qemu-riscv@nongnu.org; Wed, 28 May 2025 04:15:14 -0400
-Received: by mail-wm1-x32d.google.com with SMTP id
- 5b1f17b1804b1-450cb2ddd46so857045e9.2
- for <qemu-riscv@nongnu.org>; Wed, 28 May 2025 01:14:47 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1748420087; x=1749024887; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=GYj9gZK7rwvghXe4/pGvPJxZVsy5pAC3NZqaoEu66Ig=;
- b=sI+22Ttqm0xTBGeAYuXWszdGpoCfrn7Xbf7cfxm2btEjNtRBztx4lfHzSQYlXKhMwt
- spiI7n232K1iMz8mujZeFKrN4w+OEj1f9qW6lBzjcRO5/HKEc1jJLQYdIaaPsyH7czMX
- 9kjljYdHiZTp6lgAg45ht+Kj+fn9Fg/HZcwNqDx5CwGVMIYoSzmRYyenWzo/i2gla7KQ
- Oqum9sg1N9yVsz0xOadG6JPs5eFHwjuDejV59LeGtTLR/Cmts+8dZsrWKgv1OTWafybT
- 4G+ID7dqhW75k6zjS/21EOBaWFdEjX4AU+qqIjJzvlhgMj+co4Ko6NGFgoEissnB/2L4
- wMwQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1748420087; x=1749024887;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=GYj9gZK7rwvghXe4/pGvPJxZVsy5pAC3NZqaoEu66Ig=;
- b=LfHsXGKvtHy5EutsfSGh9ZzsnnuTQexq/z3BoZLhLIW3ypJRzKovjKz8ggE6l5cdDI
- qrzaqWn8jWVT/z4eSRX4z3io8BnStiq4hKzq2WBiqhpBMUy3xi4DORs0E/w11iCMB6xX
- 5IzdkmSB/4OwdOFFhlqKW0N/omTrtxYWF/5Zw/obfv4IshctsAPWe8l++3zvWKKJg8Xg
- 8tsqoShkF7qR8FlO3vZk5OhfKlF2zvGpQt5DXpczerGbXbCftNX4dMy3KFtW7shHtDIE
- WzxFckiW8WH0C0WMVGmkPv+yo6dNYe3zIbylSHuAyoU8AhAp25yMGRvn/Gqye9XBiuVV
- n0yg==
-X-Gm-Message-State: AOJu0YxieSuoqzhZVPF+X+7jeIPRYOfXCjwSBTWhrxoij1e5nG7EYt1P
- vT+PKsViDbLwAYnPTbxQvn0+ruwnrMlnVcq2gYv8lr3kWVf1Pt/p/EJxyGSRHLCJDhDf4N3ioGa
- l/DvF80QP/A==
-X-Gm-Gg: ASbGncvQHuXhGZrRT5NvM8mj/t8VnWPumd9/rM7ROUgwhFegWIZszrQuDZboTaQ0dpw
- 8N5tNrtIyqLZVLIgOBRJvmWee3aVtXYgJmUxG++ZBNE9I3a6NC32Yu2aJuWCdKEWTwSvGzvss70
- Npmw8X7dC4Kb+ItWooUkx76haw1RtXkw3YHy6as0FHpgrjDtwqULZ6RDDTkdVwV0irCeVSY1f0L
- ClRiZSW/LQ0wIC1PlKqOpbrkgYa8Vt4fmLVEEICT7by061h/zO9QfK3q7NXxJmeqPnbkD4gVP90
- gqt6xpVfr67vDHNjVYgoeByMBa+aFabXFV6Bv+vuidqHdE6vAzJoqRll
-X-Google-Smtp-Source: AGHT+IFRz6SC9HM9VeqUQg3aGeuBc3TfWqiHb9vq4070cTkkX1MEe3O7JPA6czuWbq5DhNdJVipM1A==
-X-Received: by 2002:a05:600c:8711:b0:43c:fceb:91a with SMTP id
- 5b1f17b1804b1-44c919e141bmr138579005e9.11.1748420086846; 
- Wed, 28 May 2025 01:14:46 -0700 (PDT)
-Received: from stoup.. ([195.53.115.74]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4500e1d85b5sm13178645e9.32.2025.05.28.01.14.45
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 28 May 2025 01:14:46 -0700 (PDT)
-From: Richard Henderson <richard.henderson@linaro.org>
-To: qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org,
- =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- Alistair Francis <alistair.francis@wdc.com>
-Subject: [PULL 25/28] target/riscv: Fill in TCGCPUOps.pointer_wrap
-Date: Wed, 28 May 2025 09:14:07 +0100
-Message-ID: <20250528081410.157251-26-richard.henderson@linaro.org>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20250528081410.157251-1-richard.henderson@linaro.org>
-References: <20250528081410.157251-1-richard.henderson@linaro.org>
+ (Exim 4.90_1) (envelope-from <me@linux.beauty>) id 1uKCpP-0002so-3q
+ for qemu-riscv@nongnu.org; Wed, 28 May 2025 05:12:03 -0400
+Received: from sender4-op-o12.zoho.com ([136.143.188.12])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <me@linux.beauty>) id 1uKCpN-0006gA-C5
+ for qemu-riscv@nongnu.org; Wed, 28 May 2025 05:12:02 -0400
+ARC-Seal: i=1; a=rsa-sha256; t=1748423472; cv=none; 
+ d=zohomail.com; s=zohoarc; 
+ b=lHL1m++Pka3pTtvLLt1O0cs/SnCxOPwx0a07sQl3L82Khsk6CoAIu9kkEUiy4IABjT5onX9vJJc+q4tQzT1MKlI5iFGsDoPVz6SZxnmvDgQb0lAJ9woQVVsOoqwhPaf6JO/gCdQecdpecsqB/JDlA+5lrYG0Z/z0Jq1BumZ24Gg=
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com;
+ s=zohoarc; t=1748423472;
+ h=Content-Type:Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To;
+ bh=REdgpME5NVjjTg0yulNaYNQiNqkO0DVBlnGxD93ndHE=; 
+ b=ije4vvNWIRg+0M6sNqJxOV1I+MmIEBGxfToTLWPAOci8YTU2g/PqevLF1m1eVPFzJGtqfTmFj6+/bMyQSG6vtT2ghHNJ/aHFDTsYfrF9iOgHXvBC0yrXD2fkOH1EYBSv1+EFpwrlKWx5tMuB3Yd1IQPhK1R+WA5M1qprI/Rd9M0=
+ARC-Authentication-Results: i=1; mx.zohomail.com;
+ dkim=pass  header.i=linux.beauty;
+ spf=pass  smtp.mailfrom=me@linux.beauty;
+ dmarc=pass header.from=<me@linux.beauty>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1748423472; 
+ s=zmail; d=linux.beauty; i=me@linux.beauty;
+ h=Date:Date:From:From:To:To:Cc:Cc:Message-ID:In-Reply-To:References:Subject:Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:Reply-To;
+ bh=REdgpME5NVjjTg0yulNaYNQiNqkO0DVBlnGxD93ndHE=;
+ b=GpEFs1Xa0VndtcziYI3lB89G/vMxgKdXbH0fUxJoCx6rB0VAMbL2ZrN3ZwDNsDRp
+ iI7g1tVqqzFRrT8qSiN7Yscz/ZAyDpzsYf24vnkvIVSstrByETq4BjnaEACf4xOgHNd
+ 1oDko0GuCL19sm9k3uwPc+d+zd+4oVoe2vYw9hbk=
+Received: from mail.zoho.com by mx.zohomail.com
+ with SMTP id 174842344914184.75137743719858;
+ Wed, 28 May 2025 02:10:49 -0700 (PDT)
+Date: Wed, 28 May 2025 17:10:49 +0800
+From: Li Chen <me@linux.beauty>
+To: =?UTF-8?Q?=22Philippe_Mathieu-Daud=C3=A9=22?= <philmd@linaro.org>
+Cc: "Peter Maydell" <peter.maydell@linaro.org>,
+ "Shannon Zhao" <shannon.zhaosl@gmail.com>,
+ "Michael S. Tsirkin" <mst@redhat.com>,
+ "Igor Mammedov" <imammedo@redhat.com>, "Ani Sinha" <anisinha@redhat.com>,
+ "Eduardo Habkost" <eduardo@habkost.net>,
+ "Marcel Apfelbaum" <marcel.apfelbaum@gmail.com>,
+ "Yanan Wang" <wangyanan55@huawei.com>,
+ "Zhao Liu" <zhao1.liu@intel.com>, "Song Gao" <gaosong@loongson.cn>,
+ "Jiaxun Yang" <jiaxun.yang@flygoat.com>,
+ "Sunil V L" <sunilvl@ventanamicro.com>,
+ "Palmer Dabbelt" <palmer@dabbelt.com>,
+ "Alistair Francis" <alistair.francis@wdc.com>,
+ "Weiwei Li" <liwei1518@gmail.com>, "qemu-arm" <qemu-arm@nongnu.org>,
+ "qemu-devel" <qemu-devel@nongnu.org>, "qemu-riscv" <qemu-riscv@nongnu.org>
+Message-ID: <19716289a19.118e5995d2887663.8392966219912427610@linux.beauty>
+In-Reply-To: <be8c1d4d-b68e-42b1-9466-3698ded1be10@linaro.org>
+References: <87msberqzi.wl-me@linux.beauty> <87ldqyrqqo.wl-me@linux.beauty>
+ <be8c1d4d-b68e-42b1-9466-3698ded1be10@linaro.org>
+Subject: Re: [PATCH V3 1/4] acpi: Add machine option to disable SPCR table
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::32d;
- envelope-from=richard.henderson@linaro.org; helo=mail-wm1-x32d.google.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Importance: Medium
+User-Agent: Zoho Mail
+X-Mailer: Zoho Mail
+Received-SPF: pass client-ip=136.143.188.12; envelope-from=me@linux.beauty;
+ helo=sender4-op-o12.zoho.com
 X-Spam_score_int: -1
 X-Spam_score: -0.2
 X-Spam_bar: /
 X-Spam_report: (-0.2 / 5.0 requ) DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
  DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, RCVD_IN_DNSWL_NONE=-0.0001,
+ RCVD_IN_MSPIKE_H5=0.001, RCVD_IN_MSPIKE_WL=0.001,
+ RCVD_IN_VALIDITY_CERTIFIED_BLOCKED=0.001, RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001,
  SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -100,61 +93,62 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Check 32 vs 64-bit and pointer masking state.
+Hi Philippe,
 
-Cc: qemu-riscv@nongnu.org
-Reviewed-by: Philippe Mathieu-Daudé <philmd@linaro.org>
-Acked-by: Alistair Francis <alistair.francis@wdc.com>
-Signed-off-by: Richard Henderson <richard.henderson@linaro.org>
----
- target/riscv/tcg/tcg-cpu.c | 26 ++++++++++++++++++++++++++
- 1 file changed, 26 insertions(+)
+ ---- On Mon, 26 May 2025 18:07:16 +0800  Philippe Mathieu-Daud=C3=A9 <phil=
+md@linaro.org> wrote ---=20
+ > Hi Li,
+ >=20
+ > On 15/5/25 14:41, Li Chen wrote:
+ > > From: Li Chen <chenl311@chinatelecom.cn>
+ > >=20
+ > > The ACPI SPCR (Serial Port Console Redirection) table allows firmware
+ > > to specify a preferred serial console device to the operating system.
+ > > On ARM64 systems, Linux by default respects this table: even if the
+ > > kernel command line does not include a hardware serial console (e.g.,
+ > > "console=3DttyAMA0"), the kernel still register the serial device
+ > > referenced by SPCR as a printk console.
+ > >=20
+ > > While this behavior is standard-compliant, it can lead to situations
+ > > where guest console behavior is influenced by platform firmware rather
+ > > than user-specified configuration. To make guest console behavior more
+ > > predictable and under user control, this patch introduces a machine
+ > > option to explicitly disable SPCR table exposure:
+ > >=20
+ > >      -machine spcr=3Doff
+ > >=20
+ > > By default, the option is enabled (spcr=3Don), preserving existing
+ > > behavior. When disabled, QEMU will omit the SPCR table from the guest'=
+s
+ > > ACPI namespace, ensuring that only consoles explicitly declared in the
+ > > kernel command line are registered.
+ > >=20
+ > > Signed-off-by: Li Chen <chenl311@chinatelecom.cn>
+ > > Reviewed-by: Bibo Mao <maobibo@loongson.cn>
+ > > Acked-by: Michael S. Tsirkin <mst@redhat.com>
+ > > Reviewed-by: Gavin Shan <gshan@redhat.com>
+ > > ---
+ >=20
+ >=20
+ > > diff --git a/include/hw/boards.h b/include/hw/boards.h
+ > > index 765dc8dd35..089104d54b 100644
+ > > --- a/include/hw/boards.h
+ > > +++ b/include/hw/boards.h
+ > > @@ -444,6 +444,7 @@ struct MachineState {
+ > >       SmpCache smp_cache;
+ > >       struct NVDIMMState *nvdimms_state;
+ > >       struct NumaState *numa_state;
+ > > +    bool enable_spcr;
+ >=20
+ > This structure is used by all machines. Can we be more
+ > descriptive, maybe naming as "acpi_spcr_enabled"?
 
-diff --git a/target/riscv/tcg/tcg-cpu.c b/target/riscv/tcg/tcg-cpu.c
-index 305912b8dd..55fd9e5584 100644
---- a/target/riscv/tcg/tcg-cpu.c
-+++ b/target/riscv/tcg/tcg-cpu.c
-@@ -237,6 +237,31 @@ static void riscv_restore_state_to_opc(CPUState *cs,
-     env->excp_uw2 = data[2];
- }
- 
-+#ifndef CONFIG_USER_ONLY
-+static vaddr riscv_pointer_wrap(CPUState *cs, int mmu_idx,
-+                                vaddr result, vaddr base)
-+{
-+    CPURISCVState *env = cpu_env(cs);
-+    uint32_t pm_len;
-+    bool pm_signext;
-+
-+    if (cpu_address_xl(env) == MXL_RV32) {
-+        return (uint32_t)result;
-+    }
-+
-+    pm_len = riscv_pm_get_pmlen(riscv_pm_get_pmm(env));
-+    if (pm_len == 0) {
-+        return result;
-+    }
-+
-+    pm_signext = riscv_cpu_virt_mem_enabled(env);
-+    if (pm_signext) {
-+        return sextract64(result, 0, 64 - pm_len);
-+    }
-+    return extract64(result, 0, 64 - pm_len);
-+}
-+#endif
-+
- const TCGCPUOps riscv_tcg_ops = {
-     .mttcg_supported = true,
-     .guest_default_memory_order = 0,
-@@ -250,6 +275,7 @@ const TCGCPUOps riscv_tcg_ops = {
- 
- #ifndef CONFIG_USER_ONLY
-     .tlb_fill = riscv_cpu_tlb_fill,
-+    .pointer_wrap = riscv_pointer_wrap,
-     .cpu_exec_interrupt = riscv_cpu_exec_interrupt,
-     .cpu_exec_halt = riscv_cpu_has_work,
-     .cpu_exec_reset = cpu_reset,
--- 
-2.43.0
+Make sense to me, updated in v4, thanks!
+(But I'm not sure why v4 failed to send to qemu-devel/qemu-arm/qemu-riscv a=
+nd report
+ "Message headers fail syntax check" error).
+
+Regards,
+Li
 
 
