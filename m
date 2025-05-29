@@ -4,57 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ECEB4C5AD49
-	for <qemu-riscv@archiver.kernel.org>; Thu, 29 May 2025 12:52:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 63826C5AD49
+	for <qemu-riscv@archiver.kernel.org>; Thu, 29 May 2025 14:01:08 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uKckN-0004kl-Ug; Thu, 29 May 2025 08:52:35 -0400
+	id 1uKdoS-00046A-TV; Thu, 29 May 2025 10:00:52 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <liu.xuemei1@zte.com.cn>)
- id 1uKb8y-0000PQ-3S; Thu, 29 May 2025 07:09:52 -0400
-Received: from mxhk.zte.com.cn ([63.216.63.40])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <liu.xuemei1@zte.com.cn>)
- id 1uKb8u-0005Ti-A8; Thu, 29 May 2025 07:09:50 -0400
-Received: from mse-fl1.zte.com.cn (unknown [10.5.228.132])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by mxhk.zte.com.cn (FangMail) with ESMTPS id 4b7NtP3LpFz8R039;
- Thu, 29 May 2025 19:09:33 +0800 (CST)
-Received: from xaxapp02.zte.com.cn ([10.88.97.241])
- by mse-fl1.zte.com.cn with SMTP id 54TB9ODb027625;
- Thu, 29 May 2025 19:09:24 +0800 (+08)
- (envelope-from liu.xuemei1@zte.com.cn)
-Received: from mapi (xaxapp01[null]) by mapi (Zmail) with MAPI id mid32;
- Thu, 29 May 2025 19:09:27 +0800 (CST)
-Date: Thu, 29 May 2025 19:09:27 +0800 (CST)
-X-Zmail-TransId: 2af968384067048-5a408
-X-Mailer: Zmail v1.0
-Message-ID: <20250529190927602l5laXr0T8mBWNeGuGixJp@zte.com.cn>
-Mime-Version: 1.0
-From: <liu.xuemei1@zte.com.cn>
-To: <palmer@dabbelt.com>, <alistair.francis@wdc.com>, <liwei1518@gmail.com>,
- <dbarboza@ventanamicro.com>, <zhiwei_liu@linux.alibaba.com>
-Cc: <qemu-riscv@nongnu.org>, <qemu-devel@nongnu.org>
-Subject: =?UTF-8?B?W1BBVENIIHYzXSBtaWdyYXRpb246IEZpeCBtaWdyYXRpb24gZmFpbHVyZSB3aGVuIGFpYSBpcyBjb25maWd1cmVkIGFzCgogYXBsaWMtaW1zaWM=?=
-Content-Type: text/plain;
-	charset="UTF-8"
-X-MAIL: mse-fl1.zte.com.cn 54TB9ODb027625
-X-Fangmail-Anti-Spam-Filtered: true
-X-Fangmail-MID-QID: 6838406D.000/4b7NtP3LpFz8R039
-Received-SPF: pass client-ip=63.216.63.40; envelope-from=liu.xuemei1@zte.com.cn;
- helo=mxhk.zte.com.cn
+ (Exim 4.90_1) (envelope-from <mengzhuo@iscas.ac.cn>)
+ id 1uKdoM-00044y-CP; Thu, 29 May 2025 10:00:47 -0400
+Received: from smtp81.cstnet.cn ([159.226.251.81] helo=cstnet.cn)
+ by eggs.gnu.org with esmtps (TLS1.2:DHE_RSA_AES_256_CBC_SHA1:256)
+ (Exim 4.90_1) (envelope-from <mengzhuo@iscas.ac.cn>)
+ id 1uKdoG-0000kd-OR; Thu, 29 May 2025 10:00:46 -0400
+Received: from iscas.ac.cn (unknown [180.140.173.24])
+ by APP-03 (Coremail) with SMTP id rQCowACH2FB2aDhohxw6AQ--.4569S2;
+ Thu, 29 May 2025 22:00:24 +0800 (CST)
+From: Meng Zhuo <mengzhuo@iscas.ac.cn>
+To: qemu-devel@nongnu.org
+Cc: Meng Zhuo <mengzhuo@iscas.ac.cn>, Andrew Jones <ajones@ventanamicro.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Weiwei Li <liwei1518@gmail.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ qemu-riscv@nongnu.org (open list:RISC-V TCG CPUs)
+Subject: [PATCH v5] target/riscv/kvm: add satp mode for host cpu
+Date: Thu, 29 May 2025 22:00:12 +0800
+Message-Id: <20250529140012.135408-1-mengzhuo@iscas.ac.cn>
+X-Mailer: git-send-email 2.39.5
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+X-CM-TRANSID: rQCowACH2FB2aDhohxw6AQ--.4569S2
+X-Coremail-Antispam: 1UD129KBjvJXoWxAw47Gr17Ar4DZw43WFy3Jwb_yoW5KF17pr
+ W5GrZ5CrWftF9rJayxtrykXF45Jws5Kr42ka1j9r1fXan8JrWUWF1vga13CF98JF47AFsx
+ Aa1Fkr43CFW8tFJanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+ 9KBjDU0xBIdaVrnRJUUUvC14x267AKxVW8JVW5JwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
+ rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK02
+ 1l84ACjcxK6xIIjxv20xvE14v26r4j6ryUM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26r4j
+ 6F4UM28EF7xvwVC2z280aVAFwI0_GcCE3s1l84ACjcxK6I8E87Iv6xkF7I0E14v26rxl6s
+ 0DM2AIxVAIcxkEcVAq07x20xvEncxIr21l5I8CrVACY4xI64kE6c02F40Ex7xfMcIj6xII
+ jxv20xvE14v26r1j6r18McIj6I8E87Iv67AKxVWUJVW8JwAm72CE4IkC6x0Yz7v_Jr0_Gr
+ 1lF7xvr2IYc2Ij64vIr41lF7I21c0EjII2zVCS5cI20VAGYxC7MxkF7I0En4kS14v26r1q
+ 6r43MxkF7I0Ew4C26cxK6c8Ij28IcwCF04k20xvY0x0EwIxGrwCFx2IqxVCFs4IE7xkEbV
+ WUJVW8JwC20s026c02F40E14v26r1j6r18MI8I3I0E7480Y4vE14v26r106r1rMI8E67AF
+ 67kF1VAFwI0_Jw0_GFylIxkGc2Ij64vIr41lIxAIcVC0I7IYx2IY67AKxVWUJVWUCwCI42
+ IY6xIIjxv20xvEc7CjxVAFwI0_Jr0_Gr1lIxAIcVCF04k26cxKx2IYs7xG6r1j6r1xMIIF
+ 0xvEx4A2jsIE14v26r1j6r4UMIIF0xvEx4A2jsIEc7CjxVAFwI0_Jr0_GrUvcSsGvfC2Kf
+ nxnUUI43ZEXa7VUj8pnPUUUUU==
+X-Originating-IP: [180.140.173.24]
+X-CM-SenderInfo: pphqw6xkxrqxpvfd2hldfou0/1tbiDAYREmg33wi9QgACs8
+Received-SPF: pass client-ip=159.226.251.81; envelope-from=mengzhuo@iscas.ac.cn;
+ helo=cstnet.cn
 X-Spam_score_int: -41
 X-Spam_score: -4.2
 X-Spam_bar: ----
 X-Spam_report: (-4.2 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_MED=-2.3,
  RCVD_IN_VALIDITY_CERTIFIED_BLOCKED=0.001, RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- UNPARSEABLE_RELAY=0.001 autolearn=ham autolearn_force=no
+ SPF_HELO_PASS=-0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
-X-Mailman-Approved-At: Thu, 29 May 2025 08:52:28 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -69,80 +78,109 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Date: Mon, 12 May 2025 17:03:38 +0800
+This patch adds host satp mode while kvm/host cpu satp mode is not
+set.
 
-Address an error in migration when aia is configured as 'aplic-imsic' in
-riscv kvm vm by adding riscv_aplic_state_needed() and
-riscv_imsic_state_needed() to determine whether the corresponding sates are
-needed.
-
-Previously, the fields in the vmsds of 'riscv_aplic' and 'riscv_imsic' can
-only be initialized under certain special conditions in commit 95a97b3fd2.
-However, the corresponding ses of these vmsds are inserted into the
-savevm_state.handlers unconditionally. This led to migration failure
-characterized by uninitialized fields when save vm state:
-qemu-system-riscv64: ../migration/vmstate.c:433: vmstate_save_state_v:
-Assertion 'first_elem || !n_elems || !size' failed.
-
-Fixes: 95a97b3fd2 ("target/riscv: update APLIC and IMSIC to support KVM AIA")
-
-Signed-off-by: Xuemei Liu <liu.xuemei1@zte.com.cn>
+Reviewed-by: Andrew Jones <ajones@ventanamicro.com>
+Resolves: https://gitlab.com/qemu-project/qemu/-/issues/2931
+Signed-off-by: Meng Zhuo <mengzhuo@iscas.ac.cn>
 ---
- Changes in v3:
- - Increase version_id and minimum_version_id
+This patch don't change the output of errno nor errno strings pattern.
+See [v3] for further information.
 
- hw/intc/riscv_aplic.c | 12 ++++++++++--
- hw/intc/riscv_imsic.c | 10 ++++++++--
- 2 files changed, 18 insertions(+), 4 deletions(-)
+Change in v5:
+- Adds R-B comment from Andrew Jones
 
-diff --git a/hw/intc/riscv_aplic.c b/hw/intc/riscv_aplic.c
-index 8bcd9f4697..4fa5f7597b 100644
---- a/hw/intc/riscv_aplic.c
-+++ b/hw/intc/riscv_aplic.c
-@@ -962,10 +962,18 @@ static const Property riscv_aplic_properties[] = {
-     DEFINE_PROP_BOOL("mmode", RISCVAPLICState, mmode, 0),
- };
+Change in v4:
+- Adds changelog in commit message
+- Link to v3: https://lists.nongnu.org/archive/html/qemu-devel/2025-05/msg04629.html
 
-+static bool riscv_aplic_state_needed(void *opaque)
+Change in v3:
+- Rebase on https://github.com/alistair23/qemu/tree/riscv-to-apply.next
+  as requested
+- Link to v2: https://lists.nongnu.org/archive/html/qemu-devel/2025-04/msg05203.html
+
+Changes in v2:
+- use set_satp_mode_max_supported instead of hard code
+- Link to v1: https://lists.nongnu.org/archive/html/qemu-devel/2025-04/msg05094.html
+---
+ target/riscv/cpu.c         |  3 +--
+ target/riscv/cpu.h         |  1 +
+ target/riscv/kvm/kvm-cpu.c | 20 +++++++++++++++++++-
+ 3 files changed, 21 insertions(+), 3 deletions(-)
+
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index d92874baa0..a84edd3a3b 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -433,8 +433,7 @@ const char *satp_mode_str(uint8_t satp_mode, bool is_32_bit)
+     g_assert_not_reached();
+ }
+ 
+-static void set_satp_mode_max_supported(RISCVCPU *cpu,
+-                                        uint8_t satp_mode)
++void set_satp_mode_max_supported(RISCVCPU *cpu, uint8_t satp_mode)
+ {
+     bool rv32 = riscv_cpu_mxl(&cpu->env) == MXL_RV32;
+     const bool *valid_vm = rv32 ? valid_vm_1_10_32 : valid_vm_1_10_64;
+diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+index b56d3afa69..d7136f1d72 100644
+--- a/target/riscv/cpu.h
++++ b/target/riscv/cpu.h
+@@ -915,6 +915,7 @@ char *riscv_cpu_get_name(RISCVCPU *cpu);
+ 
+ void riscv_cpu_finalize_features(RISCVCPU *cpu, Error **errp);
+ void riscv_add_satp_mode_properties(Object *obj);
++void set_satp_mode_max_supported(RISCVCPU *cpu, uint8_t satp_mode);
+ bool riscv_cpu_accelerator_compatible(RISCVCPU *cpu);
+ 
+ /* CSR function table */
+diff --git a/target/riscv/kvm/kvm-cpu.c b/target/riscv/kvm/kvm-cpu.c
+index 82f9728636..18fbca1a08 100644
+--- a/target/riscv/kvm/kvm-cpu.c
++++ b/target/riscv/kvm/kvm-cpu.c
+@@ -999,6 +999,23 @@ static void kvm_riscv_destroy_scratch_vcpu(KVMScratchCPU *scratch)
+     close(scratch->kvmfd);
+ }
+ 
++static void kvm_riscv_init_satp_mode(RISCVCPU *cpu, KVMScratchCPU *kvmcpu)
 +{
-+    RISCVAPLICState *aplic = opaque;
++    CPURISCVState *env = &cpu->env;
++    struct kvm_one_reg reg;
++    int ret;
++    uint64_t val;
 +
-+    return riscv_use_emulated_aplic(aplic->msimode);
++    reg.id = RISCV_CONFIG_REG(env, satp_mode);
++    reg.addr = (uint64_t)&val;
++    ret = ioctl(kvmcpu->cpufd, KVM_GET_ONE_REG, &reg);
++    if (ret != 0) {
++        error_report("Unable to retrieve satp from host, error %d", ret);
++    }
++
++    set_satp_mode_max_supported(cpu, val);
 +}
 +
- static const VMStateDescription vmstate_riscv_aplic = {
-     .name = "riscv_aplic",
--    .version_id = 2,
--    .minimum_version_id = 2,
-+    .version_id = 3,
-+    .minimum_version_id = 3,
-+    .needed = riscv_aplic_state_needed,
-     .fields = (const VMStateField[]) {
-             VMSTATE_UINT32(domaincfg, RISCVAPLICState),
-             VMSTATE_UINT32(mmsicfgaddr, RISCVAPLICState),
-diff --git a/hw/intc/riscv_imsic.c b/hw/intc/riscv_imsic.c
-index 2169988167..6174e1a05d 100644
---- a/hw/intc/riscv_imsic.c
-+++ b/hw/intc/riscv_imsic.c
-@@ -398,10 +398,16 @@ static const Property riscv_imsic_properties[] = {
-     DEFINE_PROP_UINT32("num-irqs", RISCVIMSICState, num_irqs, 0),
- };
-
-+static bool riscv_imsic_state_needed(void *opaque)
-+{
-+    return !kvm_irqchip_in_kernel();
-+}
-+
- static const VMStateDescription vmstate_riscv_imsic = {
-     .name = "riscv_imsic",
--    .version_id = 1,
--    .minimum_version_id = 1,
-+    .version_id = 2,
-+    .minimum_version_id = 2,
-+    .needed = riscv_imsic_state_needed,
-     .fields = (const VMStateField[]) {
-             VMSTATE_VARRAY_UINT32(eidelivery, RISCVIMSICState,
-                                   num_pages, 0,
+ static void kvm_riscv_init_machine_ids(RISCVCPU *cpu, KVMScratchCPU *kvmcpu)
+ {
+     struct kvm_one_reg reg;
+@@ -1302,6 +1319,7 @@ static void riscv_init_kvm_registers(Object *cpu_obj)
+     kvm_riscv_init_machine_ids(cpu, &kvmcpu);
+     kvm_riscv_init_misa_ext_mask(cpu, &kvmcpu);
+     kvm_riscv_init_cfg(cpu, &kvmcpu);
++    kvm_riscv_init_satp_mode(cpu, &kvmcpu);
+ 
+     kvm_riscv_destroy_scratch_vcpu(&kvmcpu);
+ }
+@@ -1980,7 +1998,7 @@ static bool kvm_cpu_realize(CPUState *cs, Error **errp)
+         }
+     }
+ 
+-   return true;
++    return true;
+ }
+ 
+ void riscv_kvm_cpu_finalize_features(RISCVCPU *cpu, Error **errp)
 -- 
-2.27.0
+2.39.5
+
 
