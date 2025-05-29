@@ -4,76 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CB206C5B543
-	for <qemu-riscv@archiver.kernel.org>; Thu, 29 May 2025 03:12:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 57C49C54FB3
+	for <qemu-riscv@archiver.kernel.org>; Thu, 29 May 2025 04:34:23 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uKTgq-0000sS-If; Wed, 28 May 2025 23:12:20 -0400
+	id 1uKUxX-0001IS-6c; Thu, 29 May 2025 00:33:39 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1uKTgn-0000rW-6J; Wed, 28 May 2025 23:12:17 -0400
-Received: from mail-vk1-xa2b.google.com ([2607:f8b0:4864:20::a2b])
+ id 1uKUxV-0001HY-Qm; Thu, 29 May 2025 00:33:37 -0400
+Received: from mail-ua1-x92a.google.com ([2607:f8b0:4864:20::92a])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1uKTgk-0001YN-Tn; Wed, 28 May 2025 23:12:16 -0400
-Received: by mail-vk1-xa2b.google.com with SMTP id
- 71dfb90a1353d-52edc9ad68aso164339e0c.0; 
- Wed, 28 May 2025 20:12:13 -0700 (PDT)
+ id 1uKUxN-0003Ph-WE; Thu, 29 May 2025 00:33:37 -0400
+Received: by mail-ua1-x92a.google.com with SMTP id
+ a1e0cc1a2514c-87de3223127so124448241.1; 
+ Wed, 28 May 2025 21:33:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1748488332; x=1749093132; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1748493201; x=1749098001; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=IN5Ub5STD3lUD6Eadw+k5IGgzuzFosvvJNPv1qkGSMI=;
- b=Bmj2HLpkXOcptnpRpOtMJV5kgYzL1j+KgqvueC8AzOvuR2tRPVIlCk9g9T5uOspLAR
- 4a8JoWd0dR8NExY4hzhjL4u9nHB9x7zrA2ja6bBi3N9YDhd5CXlWehQw9rjAiC5hxDCV
- ZM//9jpvEG9BQo+9uPMa5NR35ps6UXE+cqTAMqAPrAxpHW3Cb5wCh1OQadxUM4ZkJQD4
- KT3nERKGC2sfBqx6mo3cLd1Z17TqUV71x+jXacEx1B8RMXNn0WwgwuLsIPTqssO/N67E
- 55+MX94eXcURwpIrgFzvVbPWSiz4DgDcj9LLZg01kq/2z+T6/8ZgQ402WL3+ZNEM4kp/
- G0sg==
+ bh=OKJAFsHaqTPbavvbHENbp9UkgGNHv2yqdu2MMuLDQh0=;
+ b=YxnfoFdFdkOwTT06RtixhSLqj+mb0B6bijymxkWrnVvjZ1FcqV1TYftyIbJ5eG6vSv
+ DHqaCKJ9FsSH5VGXkBuUN2i+mw+IlNZ+YxnSXQAeV8M9n9vLtaoXYIyj/I2ieprM5k+q
+ DV+UM45SLf9NEoC4F+XF//UyIQjeh9v8l2tX1mM15++R+Y1IIUKhI3hrFq4vFqwHB7C9
+ a4U0wNK8ooaia53WTcWj0wlgPPkSKuaQcHLxd1pBVSv96dENtB2y+VxsPtcrQjzu65wa
+ w0ZijQU6WsSpkQ1FZgBilX+EYXaQ48KwH2skOd4Dt7ycVR07CRjddBihmrivVOGptr2N
+ 1GKA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1748488332; x=1749093132;
+ d=1e100.net; s=20230601; t=1748493201; x=1749098001;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=IN5Ub5STD3lUD6Eadw+k5IGgzuzFosvvJNPv1qkGSMI=;
- b=KjbQ7cK96u83merxUAP+dFTco/osictvlMq87lBQOmlDG1T+uZ06+RgJA9FgEtNAoz
- WY2Lg4MaUso0hZLtBbGIGFy/5t4XmGr5pvEKsU9u4EDNUTRivnVgr+ZcCZOkCXammfub
- sNlD2xxtbkcfbV0M69rGnvGo6ckaRVODaTMIOKDppkifnZ5PTFbMEgfYFz9hOqIl65dX
- /IrwlHNv5ovvQ8TG+XIpFZrUCm4LXgS3SpIQxcDRfUekGhpsbmEiiHuJak6REsi50LUV
- CpakCZGIavO50/JGcHOBSPnet1wMNOEiRblTugNdxQ9dQ4Ue7w8uwocH+OMSVyTPKC7E
- I5ow==
+ bh=OKJAFsHaqTPbavvbHENbp9UkgGNHv2yqdu2MMuLDQh0=;
+ b=CX09S90ELXxPfZsvzjuJ7GSCx1VLNBKcikwDVHc4k6o87npHbOvGwd0EaFNwVOQRYI
+ MfqBS2VNFBvV/OQ9PR7NfwiK8oIx7X6SxmlxNuBOoFAeb+f/MKsIDOapeKtfplwbULdl
+ zeOI0f5xdr1B+PO8G7esKMgmjRbkpJDgbPDbiiM/HEupUgkMn0FHeKB0qHvgNRnwZQaE
+ KNuMkRf+fOYuQPNZPue4iec4zzhAfhvfR683kYoBll1cD2DGmUNjBlAnMZQscf1E8YRA
+ lh2R5pG7Q6W9QjeDP+SyIkLDQhP/3GqMGtrK6/+kk6BnQ/amdAVfjF/Rw9gl82O1zUZo
+ RZvw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVmmMxKGPGTc+FdSzf3aX8Ka0TjupfHVpjcIZ40+ALc6cdWlehwUDsRSragd4AUbSk6n+Jb0yXqWlPG@nongnu.org
-X-Gm-Message-State: AOJu0YxXX5T9KVjX8CNx8OTd2S7pvPdiWupBH/q6q1FLbC/2tiLDA4m4
- T4fG0DsZgWzYJ2A4RkoKDxjzJOklE9ayw7iLehIydoKwh9yj8upf4PO1bESQi0u4fvBZnzcNxui
- d5aAtgy6vdefhTWYVf6cmjL8LPjOKWBh27g==
-X-Gm-Gg: ASbGncukjScOQp7vIPE4jhn8bQkK2kBjJF6gNhv/XavVEbIgznSM8adW+G41K9mD4xP
- A82zeZUBtwPXB6AsYgDBOlV67zxSJMFhEAKoLxhS8ED+O2UwcvJTvglRyxLmMCdXtE09huFN/px
- +d3eGQP/HKRpKFfv7pB+Ls2NLxzqo5B8Xpl0WZq3aI54OKr2bThuWY3zXvktJ80BE=
-X-Google-Smtp-Source: AGHT+IHUHDFMT7waReGOCuPTv1h6Js1MNK3RWmZyStUGFLxbkuaKTt12MH5jex01gDnTXfpBCKJAkYtq8UzKc7YfRMM=
-X-Received: by 2002:a05:6122:d9b:b0:526:1ddc:6354 with SMTP id
- 71dfb90a1353d-52f2c310e57mr14173288e0c.0.1748488332359; Wed, 28 May 2025
- 20:12:12 -0700 (PDT)
+ AJvYcCV78AAwolSka+ugi4N+ThH/P125VzGqAYY3uAkiAR0kKeM6fV/tNPKHatSH/0TY4dMFsEhOUzkeUO9H@nongnu.org
+X-Gm-Message-State: AOJu0YyPIrlFBLxhnpt7gB0GHfs1zcoY+eQuU4dH3NzEf1QHflGSqUen
+ lrHpPKyjjN/XcqRmoUke1Sv0rUTh9VHLakBb4FXT8/cyjHudoB9QbIB017QEKxxD7Sfn4Ngv7s2
+ nZwtMQzZcCcS8NBAgfg+eW9rbDpKDmAI=
+X-Gm-Gg: ASbGncsWEaOu0meJd3UMviodaUlz8kPBupM9Vv/05cgAK6faNL1xw6VvVTqq9YhhVwN
+ vOqgEByCfAdrT0sjmKLPG1vRBSvndJamDqOCL4IhaMz8sMUU1FnCjXMZL655VlKBZwZJmU4Z807
+ 0Ovvr7hsLr9dEVIVsn5rRsOAnDMOOfd3mJLrd4rziUq7UsTsdTkbn0Ub58riUqCEk=
+X-Google-Smtp-Source: AGHT+IFuF/sNAFIibyxqde3pfkHNNT0TX/vrZQ9agjghhcCI4Dd5VEWg4w4rfrg/wF+hZ7qjA3FGB1KoTTnopa1NsaQ=
+X-Received: by 2002:a05:6102:441b:b0:4e5:9fbe:79f1 with SMTP id
+ ada2fe7eead31-4e59fbe7f3amr5046944137.24.1748493201342; Wed, 28 May 2025
+ 21:33:21 -0700 (PDT)
 MIME-Version: 1.0
 References: <20250520172336.759708-1-dbarboza@ventanamicro.com>
- <20250520172336.759708-4-dbarboza@ventanamicro.com>
-In-Reply-To: <20250520172336.759708-4-dbarboza@ventanamicro.com>
+In-Reply-To: <20250520172336.759708-1-dbarboza@ventanamicro.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Thu, 29 May 2025 13:11:46 +1000
-X-Gm-Features: AX0GCFshPU625s5KyIQEbXBGKTy72Be8TUSfPswd72hYk9wXkcmjCGUdDDv2duI
-Message-ID: <CAKmqyKP6LEWOviTX+ayVcFpfdSP+yEwkw6XP2dki8C036xvR1Q@mail.gmail.com>
-Subject: Re: [PATCH 3/3] target/riscv: add profile->present flag
+Date: Thu, 29 May 2025 14:32:55 +1000
+X-Gm-Features: AX0GCFt_eTzHLnuH-ngNa_2WQcnzGj9vHbPMn7bySaxjmnWvPY96gbunsdhKRbo
+Message-ID: <CAKmqyKOh+JhEUPz9NLbfW_JZaV2-j0_fgopU9BjbNp4EkrD4Dg@mail.gmail.com>
+Subject: Re: [PATCH 0/3] target/riscv: profile handling fixes
 To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
  liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com, 
  ajones@ventanamicro.com, bjorn@kernel.org
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::a2b;
- envelope-from=alistair23@gmail.com; helo=mail-vk1-xa2b.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::92a;
+ envelope-from=alistair23@gmail.com; helo=mail-ua1-x92a.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -100,132 +99,36 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 On Wed, May 21, 2025 at 3:24=E2=80=AFAM Daniel Henrique Barboza
 <dbarboza@ventanamicro.com> wrote:
 >
-> Bj=C3=B6rn reported in [1] a case where a rv64 CPU is going through the
-> profile code path to enable satp mode. In this case,the amount of
-> extensions on top of the rv64 CPU made it compliant with the RVA22S64
-> profile during the validation of CPU 0. When the subsequent CPUs were
-> initialized the static profile object has the 'enable' flag set,
-> enabling the profile code path for those CPUs.
+> Hi,
 >
-> This happens because we are initializing and realizing each CPU before
-> going to the next, i.e. init and realize CPU0, then init and realize
-> CPU1 and so on. If we change any persistent state during the validation
-> of CPU N it will interfere with the init/realization of CPU N+1.
+> The motivation of this short series is to fix a reported in [1]. A
+> couple of bugs were fixed along the way.
 >
-> We're using the 'enabled' profile flag to do two distinct things: inform
-> cpu_init() that we want profile extensions to be enabled, and telling
-> QMP that a profile is currently enabled in the CPU. We want to be
-> flexible enough to recognize profile support for all CPUs that has the
-> extension prerequisites, but we do not want to force the profile code
-> path if a profile wasn't set too.
+> Bj=C3=B6rn, these patches should remediate the situation you're experienc=
+ing.
 >
-> Add a new 'present' flag for profiles that will coexist with the 'enabled=
-'
-> flag. Enabling a profile means "we want to switch on all its mandatory
-> extensions". A profile is 'present' if we asserted during validation
-> that the CPU has the needed prerequisites.
->
-> This means that the case reported by Bj=C3=B6rn now results in
-> RVA22S64.enabled=3Dfalse and RVA22S64.present=3Dtrue. QMP will recognize =
-it
-> as a RVA22 compliant CPU and we won't force the CPU into the profile
-> path.
+> Patches based on master.
 >
 > [1] https://lore.kernel.org/qemu-riscv/87y0usiz22.fsf@all.your.base.are.b=
 elong.to.us/
 >
-> Reported-by: Bj=C3=B6rn T=C3=B6pel <bjorn@kernel.org>
-> Fixes: 2af005d610 ("target/riscv/tcg: validate profiles during finalize")
-> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
->
-> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+> Daniel Henrique Barboza (3):
+>   target/riscv/tcg: restrict satp_mode changes in cpu_set_profile
+>   target/riscv/tcg: decouple profile enablement from user prop
+>   target/riscv: add profile->present flag
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Thanks!
+
+Applied to riscv-to-apply.next
 
 Alistair
 
-> ---
->  target/riscv/cpu.h            | 15 +++++++++++++++
->  target/riscv/riscv-qmp-cmds.c |  2 +-
->  target/riscv/tcg/tcg-cpu.c    | 11 +++--------
->  3 files changed, 19 insertions(+), 9 deletions(-)
 >
-> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> index b56d3afa69..82ca41d55b 100644
-> --- a/target/riscv/cpu.h
-> +++ b/target/riscv/cpu.h
-> @@ -82,7 +82,22 @@ typedef struct riscv_cpu_profile {
->      struct riscv_cpu_profile *s_parent;
->      const char *name;
->      uint32_t misa_ext;
-> +    /*
-> +     * The profile is enabled/disabled via command line or
-> +     * via cpu_init(). Enabling a profile will add all its
-> +     * mandatory extensions in the CPU during init().
-> +     */
->      bool enabled;
-> +    /*
-> +     * The profile is present in the CPU, i.e. the current set of
-> +     * CPU extensions complies with it. A profile can be enabled
-> +     * and not present (e.g. the user disabled a mandatory extension)
-> +     * and the other way around (e.g. all mandatory extensions are
-> +     * present in a non-profile CPU).
-> +     *
-> +     * QMP uses this flag.
-> +     */
-> +    bool present;
->      bool user_set;
->      int priv_spec;
->      int satp_mode;
-> diff --git a/target/riscv/riscv-qmp-cmds.c b/target/riscv/riscv-qmp-cmds.=
-c
-> index d0a324364d..ad8efd180d 100644
-> --- a/target/riscv/riscv-qmp-cmds.c
-> +++ b/target/riscv/riscv-qmp-cmds.c
-> @@ -121,7 +121,7 @@ static void riscv_obj_add_profiles_qdict(Object *obj,=
- QDict *qdict_out)
+>  target/riscv/cpu.h            |  15 ++++
+>  target/riscv/riscv-qmp-cmds.c |   2 +-
+>  target/riscv/tcg/tcg-cpu.c    | 138 +++++++++++++++++-----------------
+>  3 files changed, 86 insertions(+), 69 deletions(-)
 >
->      for (int i =3D 0; riscv_profiles[i] !=3D NULL; i++) {
->          profile =3D riscv_profiles[i];
-> -        value =3D QOBJECT(qbool_from_bool(profile->enabled));
-> +        value =3D QOBJECT(qbool_from_bool(profile->present));
->
->          qdict_put_obj(qdict_out, profile->name, value);
->      }
-> diff --git a/target/riscv/tcg/tcg-cpu.c b/target/riscv/tcg/tcg-cpu.c
-> index af202c92a3..396fac0938 100644
-> --- a/target/riscv/tcg/tcg-cpu.c
-> +++ b/target/riscv/tcg/tcg-cpu.c
-> @@ -840,16 +840,11 @@ static void riscv_cpu_check_parent_profile(RISCVCPU=
- *cpu,
->                                             RISCVCPUProfile *profile,
->                                             RISCVCPUProfile *parent)
->  {
-> -    const char *parent_name;
-> -    bool parent_enabled;
-> -
-> -    if (!profile->enabled || !parent) {
-> +    if (!profile->present || !parent) {
->          return;
->      }
->
-> -    parent_name =3D parent->name;
-> -    parent_enabled =3D object_property_get_bool(OBJECT(cpu), parent_name=
-, NULL);
-> -    profile->enabled =3D parent_enabled;
-> +    profile->present =3D parent->present;
->  }
->
->  static void riscv_cpu_validate_profile(RISCVCPU *cpu,
-> @@ -910,7 +905,7 @@ static void riscv_cpu_validate_profile(RISCVCPU *cpu,
->          }
->      }
->
-> -    profile->enabled =3D profile_impl;
-> +    profile->present =3D profile_impl;
->
->      riscv_cpu_check_parent_profile(cpu, profile, profile->u_parent);
->      riscv_cpu_check_parent_profile(cpu, profile, profile->s_parent);
 > --
 > 2.49.0
 >
