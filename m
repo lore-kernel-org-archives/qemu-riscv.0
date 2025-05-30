@@ -4,102 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DBFD9C5B549
-	for <qemu-riscv@archiver.kernel.org>; Fri, 30 May 2025 12:11:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A1F8CC5B549
+	for <qemu-riscv@archiver.kernel.org>; Fri, 30 May 2025 13:03:57 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uKyZk-00017d-OH; Fri, 30 May 2025 08:11:04 -0400
+	id 1uKzOh-0005ES-IE; Fri, 30 May 2025 09:03:43 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <mst@redhat.com>) id 1uKyZi-000178-Jo
- for qemu-riscv@nongnu.org; Fri, 30 May 2025 08:11:02 -0400
+ (Exim 4.90_1) (envelope-from <pkrempa@redhat.com>)
+ id 1uKyXd-000805-B9
+ for qemu-riscv@nongnu.org; Fri, 30 May 2025 08:08:55 -0400
 Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <mst@redhat.com>) id 1uKyZg-0005FB-JL
- for qemu-riscv@nongnu.org; Fri, 30 May 2025 08:11:02 -0400
+ (Exim 4.90_1) (envelope-from <pkrempa@redhat.com>)
+ id 1uKyXb-0004pP-Gl
+ for qemu-riscv@nongnu.org; Fri, 30 May 2025 08:08:53 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1748607059;
+ s=mimecast20190719; t=1748606927;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=56Obo1kAqckMoE+zmxTq8NB/uf8Zra/91iFs6e+CSNk=;
- b=egH9ZraKToyVyk/zkc6KeH9EfMlAQbyvWNSQWdl/ICD+0OsV2aaUpGYIYaN1jEgbrpzSZr
- WAYP/LlV48I8KlXiOG7ify4Wr47HjaMLSmIWdz/4HFr2H7oyyIqx1NoYuuNj3r2bQvd9+k
- V+p/IRZgola3IyXGWHmvaqekdN8/R9A=
-Received: from mail-wm1-f71.google.com (mail-wm1-f71.google.com
- [209.85.128.71]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-75-lO-6TXIlOHaPaQnyhILBrg-1; Fri, 30 May 2025 08:10:58 -0400
-X-MC-Unique: lO-6TXIlOHaPaQnyhILBrg-1
-X-Mimecast-MFC-AGG-ID: lO-6TXIlOHaPaQnyhILBrg_1748607057
-Received: by mail-wm1-f71.google.com with SMTP id
- 5b1f17b1804b1-442f4a3851fso16704195e9.1
- for <qemu-riscv@nongnu.org>; Fri, 30 May 2025 05:10:58 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1748607057; x=1749211857;
- h=in-reply-to:content-transfer-encoding:content-disposition
- :mime-version:references:message-id:subject:cc:to:from:date
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=56Obo1kAqckMoE+zmxTq8NB/uf8Zra/91iFs6e+CSNk=;
- b=P494/yAae2Wvg3BbOmukMI0Qtsn0w/nort75In52EJnuGJvm76UiXxk5nY3ORmcGDS
- ks3vYQlJPdDBSIp6GyNdxsiwVarSmWq4n0q4WuAZmVBGChfT7H6+4c11wIhWQM2ZXr9S
- SzMgO8F0JpgjP/+LR0GsNUswd4JeOFpPlyAD1HBGVFP3IzKlsUHDBztgk698cjiXOvtV
- T2G9pNL20B1K+OnDmYaVc3dhya/Dpv9pd7z7aiLKKwaFQ+IIH7sX6/p9QLUosZSGm5oX
- CU+bDZEHS3vttHbuyPacWZHEqr/FpaiaxnDrKtsIobygi0Jmmo2fyjl+vQI3l1LGI70d
- ocFw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVNAAV3sOyT95zhT4mBgBLbwoblDis0wx2FecyEVCyyn17220B8sGEfZMGUMHQc/n4SenC7sGNc0CUE@nongnu.org
-X-Gm-Message-State: AOJu0YxZPKapUFjfocn3RT3kLnldmIHkRoFHNohlQ9Ng0Cw81UX6tS06
- iGJm/pMedVEVkqHdbuTuC3oYzF0ovyVezB2w12J2NQfyFwtncEY8vggmR0LInRiUwyK2G96Up3L
- tvuV782QOUmEYRxCaVFpkC+yuw8vwrDN7p47aZSVMHWP2a/8reoKmsrFz
-X-Gm-Gg: ASbGncvE726LkZ4gc1mC5YX36a3f2xLMC/Z9o7Q35xQypMPu4tnXhdhO7qrKh4Yz4f5
- 0VihIA2X/phxy7fHdkF19JlxiBDQ0lYQLEzO/gXFPgi+Y925G6Zp1XHJt5zcngzbTXkASM1Gyrt
- 81oxvZ/wAKSudmc70iQBCM65OjzXbHhAjOXZgW8QSeJhL278QFqAx8f3Ug44nKLkc+1sdSzzyIv
- RImqzKpPVaAK9DsOcW71g2/uzTzbuf17jof/bX/mtR1plcy61qBFSwlp2UHIFijBTc3l0OCNUgV
- a7Bgee3uVfgBANvO
-X-Received: by 2002:a05:600c:3147:b0:43d:b85:1831 with SMTP id
- 5b1f17b1804b1-450d8757eb5mr22549805e9.0.1748607057050; 
- Fri, 30 May 2025 05:10:57 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IEUc0DMrk+8B1R0QjICerx0PDQ33QuxUpvmHpmbig9dnqjeFVNMVMuX8Gt6+t5/FD1ZuAJx8A==
-X-Received: by 2002:a05:600c:3147:b0:43d:b85:1831 with SMTP id
- 5b1f17b1804b1-450d8757eb5mr22549375e9.0.1748607056632; 
- Fri, 30 May 2025 05:10:56 -0700 (PDT)
-Received: from redhat.com ([2a0d:6fc0:1517:1000:ea83:8e5f:3302:3575])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-450d7fb00ccsm16526085e9.17.2025.05.30.05.10.54
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 30 May 2025 05:10:55 -0700 (PDT)
-Date: Fri, 30 May 2025 08:10:52 -0400
-From: "Michael S. Tsirkin" <mst@redhat.com>
-To: Li Chen <me@linux.beauty>
-Cc: Peter Maydell <peter.maydell@linaro.org>,
- Shannon Zhao <shannon.zhaosl@gmail.com>,
- Igor Mammedov <imammedo@redhat.com>, Ani Sinha <anisinha@redhat.com>,
+ bh=sU0N6WlJ5TO/u4ut1lrXrvR6Inh+h+at/x1N2MEci8A=;
+ b=FirrEwr3MiEeMFiiNYVxlhMksYDw1836pmlmOMwRyKpPHMvSGliacg24FtA2WRxuuHet8V
+ IKu3q7svD36NzqVDSzCAxcyoLjWGpub2O4Jc2CuJexvJGG/MpXhh0fCiUOjpysDkQ9rXzo
+ 9HwOy5rhIfe4fPIl8WFoY2LD5sEyG50=
+Received: from mx-prod-mc-06.mail-002.prod.us-west-2.aws.redhat.com
+ (ec2-35-165-154-97.us-west-2.compute.amazonaws.com [35.165.154.97]) by
+ relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-13-7JU8xvgmOYmmbcElxZx7FA-1; Fri,
+ 30 May 2025 08:08:44 -0400
+X-MC-Unique: 7JU8xvgmOYmmbcElxZx7FA-1
+X-Mimecast-MFC-AGG-ID: 7JU8xvgmOYmmbcElxZx7FA_1748606921
+Received: from mx-prod-int-05.mail-002.prod.us-west-2.aws.redhat.com
+ (mx-prod-int-05.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.17])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mx-prod-mc-06.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id 4F0DA1800258; Fri, 30 May 2025 12:08:40 +0000 (UTC)
+Received: from angien.pipo.sk (unknown [10.44.22.3])
+ by mx-prod-int-05.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id DCC621954185; Fri, 30 May 2025 12:08:28 +0000 (UTC)
+Date: Fri, 30 May 2025 14:08:25 +0200
+From: Peter Krempa <pkrempa@redhat.com>
+To: "Michael S. Tsirkin" <mst@redhat.com>
+Cc: Igor Mammedov <imammedo@redhat.com>,
+ Philippe =?iso-8859-1?Q?Mathieu-Daud=E9?= <philmd@linaro.org>,
+ qemu-devel@nongnu.org, Richard Henderson <richard.henderson@linaro.org>,
+ kvm@vger.kernel.org, Sergio Lopez <slp@redhat.com>,
+ Gerd Hoffmann <kraxel@redhat.com>,
+ Peter Maydell <peter.maydell@linaro.org>,
+ Laurent Vivier <lvivier@redhat.com>,
+ Jiaxun Yang <jiaxun.yang@flygoat.com>, Yi Liu <yi.l.liu@intel.com>,
  Eduardo Habkost <eduardo@habkost.net>,
  Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
- Philippe =?iso-8859-1?Q?Mathieu-Daud=E9?= <philmd@linaro.org>,
- Yanan Wang <wangyanan55@huawei.com>, Zhao Liu <zhao1.liu@intel.com>,
- Song Gao <gaosong@loongson.cn>, Jiaxun Yang <jiaxun.yang@flygoat.com>,
- Sunil V L <sunilvl@ventanamicro.com>, Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <alistair.francis@wdc.com>,
- Weiwei Li <liwei1518@gmail.com>, qemu-arm <qemu-arm@nongnu.org>,
- qemu-devel <qemu-devel@nongnu.org>, qemu-riscv <qemu-riscv@nongnu.org>,
- Li Chen <chenl311@chinatelecom.cn>
-Subject: Re: [PATCH REPOST v4 0/4] acpi: Add machine option to disable SPCR
- table
-Message-ID: <20250530081034-mutt-send-email-mst@kernel.org>
-References: <20250528105404.457729-1-me@linux.beauty>
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Marcelo Tosatti <mtosatti@redhat.com>, qemu-riscv@nongnu.org,
+ Weiwei Li <liwei1518@gmail.com>, Amit Shah <amit@kernel.org>,
+ Zhao Liu <zhao1.liu@intel.com>, Yanan Wang <wangyanan55@huawei.com>,
+ Helge Deller <deller@gmx.de>, Palmer Dabbelt <palmer@dabbelt.com>,
+ Ani Sinha <anisinha@redhat.com>, Fabiano Rosas <farosas@suse.de>,
+ Paolo Bonzini <pbonzini@redhat.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ =?iso-8859-1?Q?Cl=E9ment?= Mathieu --Drif <clement.mathieu--drif@eviden.com>, 
+ qemu-arm@nongnu.org,
+ =?iso-8859-1?Q?Marc-Andr=E9?= Lureau <marcandre.lureau@redhat.com>,
+ Huacai Chen <chenhuacai@kernel.org>,
+ Jason Wang <jasowang@redhat.com>, devel@lists.libvirt.org
+Subject: Re: [PATCH v4 00/27] hw/i386/pc: Remove deprecated 2.6 and 2.7 PC
+ machines
+Message-ID: <aDmfuVLXmfvJB0tX@angien.pipo.sk>
+References: <20250508133550.81391-1-philmd@linaro.org>
+ <20250513132338.4089736b@imammedo.users.ipa.redhat.com>
+ <20250530073524-mutt-send-email-mst@kernel.org>
 MIME-Version: 1.0
-In-Reply-To: <20250528105404.457729-1-me@linux.beauty>
-X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: H88ejv0NnVgR8kP1-pQoCnCQoEf45Kasw2zIUSkUZJI_1748607057
-X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset=iso-8859-1
 Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=170.10.129.124; envelope-from=mst@redhat.com;
+In-Reply-To: <20250530073524-mutt-send-email-mst@kernel.org>
+User-Agent: Mutt/2.2.14 (2025-02-20)
+X-Scanned-By: MIMEDefang 3.0 on 10.30.177.17
+Received-SPF: pass client-ip=170.10.129.124; envelope-from=pkrempa@redhat.com;
  helo=us-smtp-delivery-124.mimecast.com
 X-Spam_score_int: -49
 X-Spam_score: -5.0
@@ -108,8 +96,9 @@ X-Spam_report: (-5.0 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-2.907,
  DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H5=0.001, RCVD_IN_MSPIKE_WL=0.001,
  RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001, RCVD_IN_VALIDITY_SAFE_BLOCKED=0.001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
+X-Mailman-Approved-At: Fri, 30 May 2025 09:03:41 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -124,56 +113,90 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Wed, May 28, 2025 at 06:53:34PM +0800, Li Chen wrote:
-> From: Li Chen <chenl311@chinatelecom.cn>
+On Fri, May 30, 2025 at 07:35:38 -0400, Michael S. Tsirkin via Devel wrote:
+> On Tue, May 13, 2025 at 01:23:38PM +0200, Igor Mammedov wrote:
+> > On Thu,  8 May 2025 15:35:23 +0200
+> > Philippe Mathieu-Daudé <philmd@linaro.org> wrote:
+> > 
+> > > Since v3:
+> > > - Addressed Thomas and Zhao review comments
+> > > - Rename fw_cfg_init_mem_[no]dma() helpers
+> > > - Remove unused CPU properties
+> > > - Remove {multi,linux}boot.bin
+> > > - Added R-b tags
+> > > 
+> > > Since v2:
+> > > - Addressed Mark review comments and added his R-b tags
+> > > 
+> > > The versioned 'pc' and 'q35' machines up to 2.12 been marked
+> > > as deprecated two releases ago, and are older than 6 years,
+> > > so according to our support policy we can remove them.
+> > > 
+> > > This series only includes the 2.6 and 2.7 machines removal,
+> > > as it is a big enough number of LoC removed. Rest will
+> > > follow.
+> > 
+> > CCing libvirt folks
+> > 
+> > series removes some properties that has been used as compat
+> > knobs with 2.6/2.7 machine types that are being removed.
+> > 
+> > However libvirt might still use them,
+> > please check if being removed properties are safe to remove
+> > as is | should be deprecated 1st | should be left alone
+> > from an immediate user perspective.
 > 
-> (REPOST because the previous post failed to send to qemu-devel/qemu-riscv/qemu-arm,
->  see https://lore.kernel.org/qemu-devel/1971648603b.dce1f5d22901195.6702025346547333607@linux.beauty/T/#u)
-> 
-> This series introduces a new machine option, spcr=on|off, allowing users
-> to disable the ACPI SPCR (Serial Port Console Redirection) table.
-> By default, SPCR is enabled. Disabling it can help ensure that the guest's
-> console behavior is determined solely by kernel command-line parameters
-> on arch like arm64, avoiding unintended serial console configurations imposed
-> by firmware.
-> 
-> Also add tests on AArch64 and RISC-V virt machines using TCG and UEFI boot.
-> 
-> Changes since v3:
-> - Add Reviewed-by from Sunil V L <sunilvl@ventanamicro.com> for patch 1, 3, and 4.
-> - rename enable_spcr to acpi_spcr_enabled as suggested by Philippe Mathieu-Daudé.
-> Changes since v2:
-> - Omit UART device from DSDT and SPCR construction if no serial device is present,
-> as suggested by Philippe Mathieu-Daudé.
-> - Add Reviewed-by from Gavin Shan <gshan@redhat.com> for the first patch and fix style issue.
-> 
-> Changes since v1:
-> - Add bios-tables-test for RISC-V and ARM as suggested by
-> - Add Acked-by from Michael S. Tsirkin for the first patch
-> - Add Reviewed-by from Bibo Mao for the first patch
-> 
-> Li Chen (4):
->   acpi: Add machine option to disable SPCR table
->   tests/qtest/bios-tables-test: Add test for disabling SPCR on AArch64
->   tests/qtest/bios-tables-test: Add test for disabling SPCR on RISC-V
->   acpi/virt: suppress UART device & SPCR when guest has no serial
->     hardware
+> Anyone on libvirt side can confirm please?
 
-Who's merging this?
+Sorry, it was a bit of a chore to go through the patches.
 
+IIUC the following list is to be reviewed:
 
->  hw/arm/virt-acpi-build.c       | 18 ++++++++-----
->  hw/core/machine.c              | 22 ++++++++++++++++
->  hw/loongarch/virt-acpi-build.c |  4 ++-
->  hw/riscv/virt-acpi-build.c     | 10 ++++++--
->  include/hw/boards.h            |  1 +
->  include/system/system.h        |  2 ++
->  qemu-options.hx                |  5 ++++
->  system/vl.c                    |  5 ++++
->  tests/qtest/bios-tables-test.c | 47 ++++++++++++++++++++++++++++++++--
->  9 files changed, 103 insertions(+), 11 deletions(-)
-> 
-> -- 
-> 2.49.0
+ DEFINE_PROP_BOOL("x-buggy-eim", IntelIOMMUState, buggy_eim, false)
+ DEFINE_PROP_BOOL("x-ignore-backend-features", VirtIOPCIProxy,
+ DEFINE_PROP_BOOL("migrate", PCSpkState, migrate,  true),
+ DEFINE_PROP_UINT8("version", IOAPICCommonState, version, IOAPIC_VER_DEF)
+ DEFINE_PROP_BIT64("emergency-write", VirtIOSerial, host_features
+ DEFINE_PROP_BOOL("format_transport_address", VirtIOMMIOProxy,
+ DEFINE_PROP_BOOL("legacy-instance-id", APICCommonState, legacy_instance_id,
+
+None of the above are exposed by libvirt to the user nor used by libvirt
+internally.
+
+ DEFINE_PROP_BIT("page-per-vq", VirtIOPCIProxy, flags
+
+This property is exposed to users for all virtio devices as
+'page_per_vq' property:a
+
+https://www.libvirt.org/formatdomain.html#virtio-related-options
+
+It is an optional property and not formatted to qemu unless explicitly
+requested by the user. Removing it thus should be fine without the need
+to change anything in libvirt
+
+The rest are CPU properties
+
+ DEFINE_PROP_BOOL("cpuid-0xb", X86CPU, enable_cpuid_0xb, true),
+ DEFINE_PROP_BOOL("fill-mtrr-mask", X86CPU, fill_mtrr_mask, true),
+ DEFINE_PROP_BOOL("full-cpuid-auto-level", X86CPU, full_cpuid_auto_level, true),
+
+which appear in our cpu test data but I'm not 100% sure how they are
+used. Jirka, can you please comment?
+
+Finally there's
+
+ DEFINE_PROP_BOOL("l3-cache", X86CPU, enable_l3_cache, true),
+
+which is exposed to the users via cache mode setting of cpu:
+
+https://www.libvirt.org/formatdomain.html#cpu-model-and-topology
+
+look for 'cache'.
+
+Thus from libvirt's side 'page-per-vq' and 'l3-cache' will likely require
+deprecation period. The rest except for CPU is fine to remove without
+anything at least from our PoV.
+
+Jirka will hopefully clarify the Cpu property side.
 
 
