@@ -4,101 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A1F8CC5B549
-	for <qemu-riscv@archiver.kernel.org>; Fri, 30 May 2025 13:03:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3BD62C5AD49
+	for <qemu-riscv@archiver.kernel.org>; Fri, 30 May 2025 13:46:58 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uKzOh-0005ES-IE; Fri, 30 May 2025 09:03:43 -0400
+	id 1uL040-00073C-Eo; Fri, 30 May 2025 09:46:24 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <pkrempa@redhat.com>)
- id 1uKyXd-000805-B9
- for qemu-riscv@nongnu.org; Fri, 30 May 2025 08:08:55 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <pkrempa@redhat.com>)
- id 1uKyXb-0004pP-Gl
- for qemu-riscv@nongnu.org; Fri, 30 May 2025 08:08:53 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1748606927;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=sU0N6WlJ5TO/u4ut1lrXrvR6Inh+h+at/x1N2MEci8A=;
- b=FirrEwr3MiEeMFiiNYVxlhMksYDw1836pmlmOMwRyKpPHMvSGliacg24FtA2WRxuuHet8V
- IKu3q7svD36NzqVDSzCAxcyoLjWGpub2O4Jc2CuJexvJGG/MpXhh0fCiUOjpysDkQ9rXzo
- 9HwOy5rhIfe4fPIl8WFoY2LD5sEyG50=
-Received: from mx-prod-mc-06.mail-002.prod.us-west-2.aws.redhat.com
- (ec2-35-165-154-97.us-west-2.compute.amazonaws.com [35.165.154.97]) by
- relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-13-7JU8xvgmOYmmbcElxZx7FA-1; Fri,
- 30 May 2025 08:08:44 -0400
-X-MC-Unique: 7JU8xvgmOYmmbcElxZx7FA-1
-X-Mimecast-MFC-AGG-ID: 7JU8xvgmOYmmbcElxZx7FA_1748606921
-Received: from mx-prod-int-05.mail-002.prod.us-west-2.aws.redhat.com
- (mx-prod-int-05.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.17])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by mx-prod-mc-06.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id 4F0DA1800258; Fri, 30 May 2025 12:08:40 +0000 (UTC)
-Received: from angien.pipo.sk (unknown [10.44.22.3])
- by mx-prod-int-05.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id DCC621954185; Fri, 30 May 2025 12:08:28 +0000 (UTC)
-Date: Fri, 30 May 2025 14:08:25 +0200
-From: Peter Krempa <pkrempa@redhat.com>
-To: "Michael S. Tsirkin" <mst@redhat.com>
-Cc: Igor Mammedov <imammedo@redhat.com>,
- Philippe =?iso-8859-1?Q?Mathieu-Daud=E9?= <philmd@linaro.org>,
- qemu-devel@nongnu.org, Richard Henderson <richard.henderson@linaro.org>,
- kvm@vger.kernel.org, Sergio Lopez <slp@redhat.com>,
- Gerd Hoffmann <kraxel@redhat.com>,
- Peter Maydell <peter.maydell@linaro.org>,
- Laurent Vivier <lvivier@redhat.com>,
- Jiaxun Yang <jiaxun.yang@flygoat.com>, Yi Liu <yi.l.liu@intel.com>,
- Eduardo Habkost <eduardo@habkost.net>,
- Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Marcelo Tosatti <mtosatti@redhat.com>, qemu-riscv@nongnu.org,
- Weiwei Li <liwei1518@gmail.com>, Amit Shah <amit@kernel.org>,
- Zhao Liu <zhao1.liu@intel.com>, Yanan Wang <wangyanan55@huawei.com>,
- Helge Deller <deller@gmx.de>, Palmer Dabbelt <palmer@dabbelt.com>,
- Ani Sinha <anisinha@redhat.com>, Fabiano Rosas <farosas@suse.de>,
- Paolo Bonzini <pbonzini@redhat.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- =?iso-8859-1?Q?Cl=E9ment?= Mathieu --Drif <clement.mathieu--drif@eviden.com>, 
- qemu-arm@nongnu.org,
- =?iso-8859-1?Q?Marc-Andr=E9?= Lureau <marcandre.lureau@redhat.com>,
- Huacai Chen <chenhuacai@kernel.org>,
- Jason Wang <jasowang@redhat.com>, devel@lists.libvirt.org
-Subject: Re: [PATCH v4 00/27] hw/i386/pc: Remove deprecated 2.6 and 2.7 PC
- machines
-Message-ID: <aDmfuVLXmfvJB0tX@angien.pipo.sk>
-References: <20250508133550.81391-1-philmd@linaro.org>
- <20250513132338.4089736b@imammedo.users.ipa.redhat.com>
- <20250530073524-mutt-send-email-mst@kernel.org>
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1uL03y-00072Y-FY
+ for qemu-riscv@nongnu.org; Fri, 30 May 2025 09:46:22 -0400
+Received: from mail-vk1-xa31.google.com ([2607:f8b0:4864:20::a31])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1uL03v-0000Tg-Kl
+ for qemu-riscv@nongnu.org; Fri, 30 May 2025 09:46:21 -0400
+Received: by mail-vk1-xa31.google.com with SMTP id
+ 71dfb90a1353d-5240b014f47so679990e0c.1
+ for <qemu-riscv@nongnu.org>; Fri, 30 May 2025 06:46:19 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=ventanamicro.com; s=google; t=1748612778; x=1749217578; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=iVefdb7qkX42XJzWCxv1YPV0+MjP7QAzAJ23vLZC8d8=;
+ b=dn6T6cEH401MVzLkhJ2s3FaUk1XFnIhZda5f04jumqTX3tpAG4q8UVnDXpN/egn2or
+ Y72KHfEXfhAT048yeTdgqzy41CWQefoqxFceYNm/G5YW8wKKpGQ9XUywZ0XdslM9/PnW
+ GP2J8tNThADRD8CdRAsXJFXzsnVN07On9pVPhBxfyOaiOc3oJocQ8COdi6KJwJHtvnG9
+ MgnUPlR1rOkGgT9uxLfDQVd6xpA77mKTNJR8NI/tHoPuPEWOXtYkR+et/Pn3voCsbHHr
+ mWO+OhaR1rK9PShqlfP2mGoe/x1pZJGFW4VCm8yEVnfamDBx4ZmfsMAmS0P+jiA62eXY
+ HsAw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1748612778; x=1749217578;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=iVefdb7qkX42XJzWCxv1YPV0+MjP7QAzAJ23vLZC8d8=;
+ b=MYGylcHd271p8SS7lU3vAHXNlxBAhOkIU/TB1wYnLCCLKf3iTZd1dQlO3pn/Lu8Yhv
+ 3TRseyVWr74XTFNMWywohHv0mT8tHHujLf7YgRm3dS4MQVZdoZfmGzXrUJ4jDafYgHDL
+ ORghqCxgYpwgmi3OOokAqqxLMLcaEAzLaehik5qkyDMmb/3kzYelgs+70tPQdOeZ3k2o
+ D6pnJqub2ULOSsp/kqBwN07I/FqpHS8upDcSbpSCEwfDRa4E72r2i1CRcjpWe0Ab1kAa
+ tDVluQ6mCsLhrb8UW6qEuc5y0mMokj4541OYBE+JX8Rgb/z2U9QVVeTQJ7Xh+h9v84ZP
+ 0pDg==
+X-Gm-Message-State: AOJu0YzsJEamP36R2wwlbCKfPcYHTDEPFk8PFVs/e2CMVJ1QfEcigLRC
+ 0Kzw2zrvr18RcYfkZYjAofNUskmHfDe2y2DfvUCFeB8XYc15oet+go9VDNQd/rSJH4I=
+X-Gm-Gg: ASbGncvHiln9Bll87KEfahqQJ2IoAj4ZhLFNaIGKawVtCKx50KCwJsaTt/TLOejPsVQ
+ m8o5ePJ35ELaXSPZ0VHh31PhaOpJWOPDcJ4K4p6mr48NcVxIwK8dTYeXYe3gmleEVoAhe5pwD+1
+ R54u04JdPweuLNoZuhOaaGeLURI9thT/4qCd7XicQLm5kR/OAn6Q4jqJ7UlvDV9skNhgQiDrFcb
+ E9Knsw3e/Ys1lLbGcSHW0ZjLNvfKXsH99vYLYXgwI23+oFfa7y2osQ+zWWM8/Hc+y3YH7OUO2bO
+ jKJvF98sg7JFmRdkIl3+TvoDmMyLSy50s8uHcYf3yUNSzixwoIB3Xlnmbb1X3PHlYPYuyJvFDwx
+ Yb0uV
+X-Google-Smtp-Source: AGHT+IG1v8EQAkTWfF4hA+q8IKy23d2tpb/Sy9O4CprezlMlXso0hGVEngkGkZpoH5YHP7qZKnmeWw==
+X-Received: by 2002:a05:6122:4f83:b0:530:66e6:e21a with SMTP id
+ 71dfb90a1353d-53084bc1a70mr1450983e0c.3.1748612777960; 
+ Fri, 30 May 2025 06:46:17 -0700 (PDT)
+Received: from grind.dc1.ventanamicro.com ([177.188.133.196])
+ by smtp.gmail.com with ESMTPSA id
+ 71dfb90a1353d-53074bf86bcsm3121345e0c.35.2025.05.30.06.46.14
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 30 May 2025 06:46:17 -0700 (PDT)
+From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+To: qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, liwei1518@gmail.com,
+ zhiwei_liu@linux.alibaba.com, palmer@dabbelt.com,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Subject: [PATCH] target/riscv: remove capital 'Z' CPU properties
+Date: Fri, 30 May 2025 10:46:08 -0300
+Message-ID: <20250530134608.1806922-1-dbarboza@ventanamicro.com>
+X-Mailer: git-send-email 2.49.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <20250530073524-mutt-send-email-mst@kernel.org>
-User-Agent: Mutt/2.2.14 (2025-02-20)
-X-Scanned-By: MIMEDefang 3.0 on 10.30.177.17
-Received-SPF: pass client-ip=170.10.129.124; envelope-from=pkrempa@redhat.com;
- helo=us-smtp-delivery-124.mimecast.com
-X-Spam_score_int: -49
-X-Spam_score: -5.0
-X-Spam_bar: -----
-X-Spam_report: (-5.0 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-2.907,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H5=0.001, RCVD_IN_MSPIKE_WL=0.001,
- RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001, RCVD_IN_VALIDITY_SAFE_BLOCKED=0.001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+Received-SPF: pass client-ip=2607:f8b0:4864:20::a31;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-vk1-xa31.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
-X-Mailman-Approved-At: Fri, 30 May 2025 09:03:41 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -113,90 +98,125 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Fri, May 30, 2025 at 07:35:38 -0400, Michael S. Tsirkin via Devel wrote:
-> On Tue, May 13, 2025 at 01:23:38PM +0200, Igor Mammedov wrote:
-> > On Thu,  8 May 2025 15:35:23 +0200
-> > Philippe Mathieu-Daudé <philmd@linaro.org> wrote:
-> > 
-> > > Since v3:
-> > > - Addressed Thomas and Zhao review comments
-> > > - Rename fw_cfg_init_mem_[no]dma() helpers
-> > > - Remove unused CPU properties
-> > > - Remove {multi,linux}boot.bin
-> > > - Added R-b tags
-> > > 
-> > > Since v2:
-> > > - Addressed Mark review comments and added his R-b tags
-> > > 
-> > > The versioned 'pc' and 'q35' machines up to 2.12 been marked
-> > > as deprecated two releases ago, and are older than 6 years,
-> > > so according to our support policy we can remove them.
-> > > 
-> > > This series only includes the 2.6 and 2.7 machines removal,
-> > > as it is a big enough number of LoC removed. Rest will
-> > > follow.
-> > 
-> > CCing libvirt folks
-> > 
-> > series removes some properties that has been used as compat
-> > knobs with 2.6/2.7 machine types that are being removed.
-> > 
-> > However libvirt might still use them,
-> > please check if being removed properties are safe to remove
-> > as is | should be deprecated 1st | should be left alone
-> > from an immediate user perspective.
-> 
-> Anyone on libvirt side can confirm please?
+These properties were deprecated in QEMU 8.2, commit 8043effd9b.
 
-Sorry, it was a bit of a chore to go through the patches.
+Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+---
+ target/riscv/cpu.c         | 17 -----------------
+ target/riscv/cpu.h         |  1 -
+ target/riscv/tcg/tcg-cpu.c | 31 +------------------------------
+ 3 files changed, 1 insertion(+), 48 deletions(-)
 
-IIUC the following list is to be reviewed:
-
- DEFINE_PROP_BOOL("x-buggy-eim", IntelIOMMUState, buggy_eim, false)
- DEFINE_PROP_BOOL("x-ignore-backend-features", VirtIOPCIProxy,
- DEFINE_PROP_BOOL("migrate", PCSpkState, migrate,  true),
- DEFINE_PROP_UINT8("version", IOAPICCommonState, version, IOAPIC_VER_DEF)
- DEFINE_PROP_BIT64("emergency-write", VirtIOSerial, host_features
- DEFINE_PROP_BOOL("format_transport_address", VirtIOMMIOProxy,
- DEFINE_PROP_BOOL("legacy-instance-id", APICCommonState, legacy_instance_id,
-
-None of the above are exposed by libvirt to the user nor used by libvirt
-internally.
-
- DEFINE_PROP_BIT("page-per-vq", VirtIOPCIProxy, flags
-
-This property is exposed to users for all virtio devices as
-'page_per_vq' property:a
-
-https://www.libvirt.org/formatdomain.html#virtio-related-options
-
-It is an optional property and not formatted to qemu unless explicitly
-requested by the user. Removing it thus should be fine without the need
-to change anything in libvirt
-
-The rest are CPU properties
-
- DEFINE_PROP_BOOL("cpuid-0xb", X86CPU, enable_cpuid_0xb, true),
- DEFINE_PROP_BOOL("fill-mtrr-mask", X86CPU, fill_mtrr_mask, true),
- DEFINE_PROP_BOOL("full-cpuid-auto-level", X86CPU, full_cpuid_auto_level, true),
-
-which appear in our cpu test data but I'm not 100% sure how they are
-used. Jirka, can you please comment?
-
-Finally there's
-
- DEFINE_PROP_BOOL("l3-cache", X86CPU, enable_l3_cache, true),
-
-which is exposed to the users via cache mode setting of cpu:
-
-https://www.libvirt.org/formatdomain.html#cpu-model-and-topology
-
-look for 'cache'.
-
-Thus from libvirt's side 'page-per-vq' and 'l3-cache' will likely require
-deprecation period. The rest except for CPU is fine to remove without
-anything at least from our PoV.
-
-Jirka will hopefully clarify the Cpu property side.
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index fe21e0fb44..7c6e0844d0 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -1387,23 +1387,6 @@ const RISCVCPUMultiExtConfig riscv_cpu_named_features[] = {
+     { },
+ };
+ 
+-/* Deprecated entries marked for future removal */
+-const RISCVCPUMultiExtConfig riscv_cpu_deprecated_exts[] = {
+-    MULTI_EXT_CFG_BOOL("Zifencei", ext_zifencei, true),
+-    MULTI_EXT_CFG_BOOL("Zicsr", ext_zicsr, true),
+-    MULTI_EXT_CFG_BOOL("Zihintntl", ext_zihintntl, true),
+-    MULTI_EXT_CFG_BOOL("Zihintpause", ext_zihintpause, true),
+-    MULTI_EXT_CFG_BOOL("Zawrs", ext_zawrs, true),
+-    MULTI_EXT_CFG_BOOL("Zfa", ext_zfa, true),
+-    MULTI_EXT_CFG_BOOL("Zfh", ext_zfh, false),
+-    MULTI_EXT_CFG_BOOL("Zfhmin", ext_zfhmin, false),
+-    MULTI_EXT_CFG_BOOL("Zve32f", ext_zve32f, false),
+-    MULTI_EXT_CFG_BOOL("Zve64f", ext_zve64f, false),
+-    MULTI_EXT_CFG_BOOL("Zve64d", ext_zve64d, false),
+-
+-    { },
+-};
+-
+ static void cpu_set_prop_err(RISCVCPU *cpu, const char *propname,
+                              Error **errp)
+ {
+diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+index 2a6793e022..17bf4e7579 100644
+--- a/target/riscv/cpu.h
++++ b/target/riscv/cpu.h
+@@ -951,7 +951,6 @@ extern const RISCVCPUMultiExtConfig riscv_cpu_extensions[];
+ extern const RISCVCPUMultiExtConfig riscv_cpu_vendor_exts[];
+ extern const RISCVCPUMultiExtConfig riscv_cpu_experimental_exts[];
+ extern const RISCVCPUMultiExtConfig riscv_cpu_named_features[];
+-extern const RISCVCPUMultiExtConfig riscv_cpu_deprecated_exts[];
+ 
+ typedef struct isa_ext_data {
+     const char *name;
+diff --git a/target/riscv/tcg/tcg-cpu.c b/target/riscv/tcg/tcg-cpu.c
+index 66929f2e8d..8ebffe55bc 100644
+--- a/target/riscv/tcg/tcg-cpu.c
++++ b/target/riscv/tcg/tcg-cpu.c
+@@ -1416,25 +1416,6 @@ static void riscv_cpu_add_profiles(Object *cpu_obj)
+     }
+ }
+ 
+-static bool cpu_ext_is_deprecated(const char *ext_name)
+-{
+-    return isupper(ext_name[0]);
+-}
+-
+-/*
+- * String will be allocated in the heap. Caller is responsible
+- * for freeing it.
+- */
+-static char *cpu_ext_to_lower(const char *ext_name)
+-{
+-    char *ret = g_malloc0(strlen(ext_name) + 1);
+-
+-    strcpy(ret, ext_name);
+-    ret[0] = tolower(ret[0]);
+-
+-    return ret;
+-}
+-
+ static void cpu_set_multi_ext_cfg(Object *obj, Visitor *v, const char *name,
+                                   void *opaque, Error **errp)
+ {
+@@ -1447,13 +1428,6 @@ static void cpu_set_multi_ext_cfg(Object *obj, Visitor *v, const char *name,
+         return;
+     }
+ 
+-    if (cpu_ext_is_deprecated(multi_ext_cfg->name)) {
+-        g_autofree char *lower = cpu_ext_to_lower(multi_ext_cfg->name);
+-
+-        warn_report("CPU property '%s' is deprecated. Please use '%s' instead",
+-                    multi_ext_cfg->name, lower);
+-    }
+-
+     cpu_cfg_ext_add_user_opt(multi_ext_cfg->offset, value);
+ 
+     prev_val = isa_ext_is_enabled(cpu, multi_ext_cfg->offset);
+@@ -1489,14 +1463,13 @@ static void cpu_add_multi_ext_prop(Object *cpu_obj,
+                                    const RISCVCPUMultiExtConfig *multi_cfg)
+ {
+     bool generic_cpu = riscv_cpu_is_generic(cpu_obj);
+-    bool deprecated_ext = cpu_ext_is_deprecated(multi_cfg->name);
+ 
+     object_property_add(cpu_obj, multi_cfg->name, "bool",
+                         cpu_get_multi_ext_cfg,
+                         cpu_set_multi_ext_cfg,
+                         NULL, (void *)multi_cfg);
+ 
+-    if (!generic_cpu || deprecated_ext) {
++    if (!generic_cpu) {
+         return;
+     }
+ 
+@@ -1539,8 +1512,6 @@ static void riscv_cpu_add_user_properties(Object *obj)
+     riscv_cpu_add_multiext_prop_array(obj, riscv_cpu_vendor_exts);
+     riscv_cpu_add_multiext_prop_array(obj, riscv_cpu_experimental_exts);
+ 
+-    riscv_cpu_add_multiext_prop_array(obj, riscv_cpu_deprecated_exts);
+-
+     riscv_cpu_add_profiles(obj);
+ }
+ 
+-- 
+2.49.0
 
 
