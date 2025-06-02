@@ -4,75 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 51E12C5B549
-	for <qemu-riscv@archiver.kernel.org>; Mon,  2 Jun 2025 06:13:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CE49EC54FB3
+	for <qemu-riscv@archiver.kernel.org>; Mon,  2 Jun 2025 06:15:49 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uLyMi-00071j-Ki; Mon, 02 Jun 2025 02:09:49 -0400
+	id 1uLyOk-0007oN-72; Mon, 02 Jun 2025 02:11:52 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1uLy5F-0002GA-97; Mon, 02 Jun 2025 01:52:07 -0400
-Received: from mail-qv1-xf31.google.com ([2607:f8b0:4864:20::f31])
+ id 1uLy79-0002jA-U6; Mon, 02 Jun 2025 01:53:54 -0400
+Received: from mail-vs1-xe2e.google.com ([2607:f8b0:4864:20::e2e])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1uLy5C-00006G-6k; Mon, 02 Jun 2025 01:51:41 -0400
-Received: by mail-qv1-xf31.google.com with SMTP id
- 6a1803df08f44-6face367320so29315356d6.3; 
- Sun, 01 Jun 2025 22:51:35 -0700 (PDT)
+ id 1uLy6z-0000DJ-QZ; Mon, 02 Jun 2025 01:53:38 -0400
+Received: by mail-vs1-xe2e.google.com with SMTP id
+ ada2fe7eead31-4e47c2a9cdcso3088265137.1; 
+ Sun, 01 Jun 2025 22:53:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1748843495; x=1749448295; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1748843594; x=1749448394; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=/PY2tyVSrVtdCJOVkgykGxb6xAi/RN7Z4HUkkStkp4w=;
- b=A/Lt/jQYUuAtUiOLnN2IPcWlmKxQ3oFUqvgYE6YzMiR/Y1iw+9arDMAhSwK84HsIDn
- ejQmTMsg4E/Mu2n/dSBgNOJ2QUQqfAY1dZboTkcaSX/phFg6hc1by7yEcBphSfSjFpVM
- JqHOsGffvhmgUds97LTE9GhofR+W8RELNuGlHpSuLH+VMQ4IPRmiv6sg7QGgrCsz/qyV
- uUmKmqgVwfIxMvkZw7p3+XXU1+OoefP5XqFnb20lDAdPPygEN3hMx0alJgUdmre7+FRr
- 7ERifiqVBvgTa3TPQTAuRQZYUyPoTvEwe78WVF+7nVTdoCCv/o9EjnlhDdbavGtoLu0o
- hLTA==
+ bh=vPuEJZPFTvmnnxKx2qBHy+u2/akhfMU6ZEJbyKzkVEY=;
+ b=eoe4hd7XGVWRthQRVt9KhAv/Uz8i6V5KvtjslkIdqmoh5NF2N4DdyK6dsnpcSRdCQD
+ atVOpCEhaDxuxGtOzhMEXvqLhOwbKGFmcHAQyVbttrgbdPZNSHfyFabnf7TutUwGDmpi
+ TkpPu8OvpHbPht3c4WA0Ii2fB/s8Q1LxlMI0k6sepIUC0QFBAiq8aeAYmel5caY1PJXQ
+ YDXOAdS4ExVnhadesWwx1cWVKvH5PqvmTVMsbNJLbRWh4k5cD+ylaF24h8x47zQ24i8k
+ AG+NRlaZdJknPEoyIlcy+4v6VAqlO3qa7fy6ulWiLtD1WuQVectf3yhMSPAwuNHL3QAv
+ SRtg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1748843495; x=1749448295;
+ d=1e100.net; s=20230601; t=1748843594; x=1749448394;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=/PY2tyVSrVtdCJOVkgykGxb6xAi/RN7Z4HUkkStkp4w=;
- b=ddny8X46JqCTNY8pL29tQFOw5CP4r1s2KfrxHeg0S5Fiu99cxt9t5GttsE7nziaHlr
- iTwR1/zwwmtB+eWa+dvKjGVpTRIS8ZwkSdfxlKORPdzjeXPTQz+jbHtQu+G+wXyp8JPT
- 2bkbEs5voCXqUJ76b5zW8VmSWsg0xqImr24NTLBuM2NKHj/5dPeQK4s1kvjDc/+JkXfo
- v/BB1SZpfLKNUCrZ8erZ/UTZvJk9KePki+g58NjKIhUKTopXw04nVCURnY3FXz9J++qt
- 1sXwqK65yekmuKGLIknp2F3LPz9A0tdqilXCQc1YnCri5r59BN8hzTlKnQwYitUotU8k
- jE1w==
+ bh=vPuEJZPFTvmnnxKx2qBHy+u2/akhfMU6ZEJbyKzkVEY=;
+ b=tQmUYr8CVdwQPS/YbnGtTmR2zDl1Lbujdqk4VdJurrJJY/L9LxePE0mZGQZYmtC8Qy
+ 7wLvsaaORA3lr4YjRkz2aIpINyJS7r8/ijISro9bo9TfeoOwE2l8vBGbmFF5DoTe5wXy
+ xNFgWS7+8lffrdo+qlLSnfvIlvKRyZjE1nsUdh6pwhN8CK2XNcHY5sI2oDakVP2uvFCy
+ DiM6l4nQ+/HFOYJ472kExOtQewJYVjlZjFXUpxtz3PDEW1XLEUPvyZF4uhFgi6RKWBPB
+ 8jz8Avrj7VAEVhq30pKuNgMmn9alqAZhcQ5Mjp56diZ6KwW4Ks62CQVZGpW3C3Xw8e47
+ uMrQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUq47h0O7iVeVrK2TThTnZqIve+A9C/P6661yosouDXZ0udsatMA03diS97cfOyypOE9VpXROoqvaf4@nongnu.org
-X-Gm-Message-State: AOJu0YzULmJluvzxdNmnnMLQ0j//he2rcO0qBd5UP2G6mmZgojZhQFgv
- 3p9xQ0yt0Pcd4nDYVOMnrPoi4Uyj8dkHP2ZWoTfBuRI7TMmnCLSn9hxDUGndsBnWt1UoDZJf/Ik
- mVs0nDHH8YggITEYdncLtiuyvLh/HKspwYw==
-X-Gm-Gg: ASbGnctRn4iFOLnyXaD2+nBNH2y5XpO0gwEG3jU5mztJROkQbsJbtlfG2drdNjfUhW/
- kfmwnlICyJuvviRFtF9YHEaLhg5FKA7mn9H6WTYDDEDhtDReQWNID9h0x2DqHaSz21EuRltdjB0
- dgLgRxligHn5m+b8ueLnsa9iATCroSJxKmdBafQ7m92eQpT2/pzddSZO6YsXvpBRY=
-X-Google-Smtp-Source: AGHT+IFh8WfbPpgZfzru18RjqPu+xNQQAVqSDc7oiPSwF+btbGEaS0qHb3dxWGvXNqIht+2MwWyYoi43/EkIlvxQLzY=
-X-Received: by 2002:a05:6102:4b0a:b0:4e5:958d:4962 with SMTP id
- ada2fe7eead31-4e6ecd2e5a9mr8439215137.2.1748838700000; Sun, 01 Jun 2025
- 21:31:40 -0700 (PDT)
+ AJvYcCVHCIb/n+pt6ezwYazcVxFcZIwtvcmbG7MbVHgvfAmPQUFPqgD21doLQGvNkUlKyBUb5We2JmpCP1Du@nongnu.org,
+ AJvYcCWN++s+1u/OTvJp1NkiP5DRgo1g3EPJ4TNN3PxkF3XQSgvIxF7i3pytmx8gbhE5hgCtOgD/LqqWoLSBaA==@nongnu.org
+X-Gm-Message-State: AOJu0YyzqnjJqqYJxucwvswR4o2nONL9nmSAKkx8aDSZc8npl++rvQdH
+ z2Po9PDUhsgEZ+uHATEMyINNra3mdvgwkYCz8riQK0ID71iFVL/jlxr1QMs8WDOZzwuAFYzBPzw
+ tN2fkFX7x0D7XNbtbVsSPr7cxcA3LG4xrdQ==
+X-Gm-Gg: ASbGncu/B2sjv9IWQLUHiICkxsNG4TKBdfl5OssfovjsClGldwuhfjDxePWr7uTpdbm
+ +uLj0YYg7TfTHj4jaADP7vsTAT+iAHhThumeQoVJVErqjtkrs7dacBCkhGfdI6GqZZsO5p6LKOI
+ h7hCLZzbm2FjtFr6PERI3yai54PpupOV8exjqAFqy5CSyswZIi5q/Lb9ezq3JAWjd5YL8mPW5kz
+ A==
+X-Google-Smtp-Source: AGHT+IHkfLpNxawnsvQX/0zOjlRXg5naoTXoj1q1+tPVeUbb5ytsMKTXFJc9wSlEL+hr3gQ73nyLJSzwkDrFyxR/XG0=
+X-Received: by 2002:a05:6122:90d:b0:530:602c:4d4c with SMTP id
+ 71dfb90a1353d-5309366e9d4mr3733761e0c.1.1748841936246; Sun, 01 Jun 2025
+ 22:25:36 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250529202315.1684198-1-dbarboza@ventanamicro.com>
- <20250529202315.1684198-3-dbarboza@ventanamicro.com>
-In-Reply-To: <20250529202315.1684198-3-dbarboza@ventanamicro.com>
+References: <20250425122212.364-1-wangran@bosc.ac.cn>
+In-Reply-To: <20250425122212.364-1-wangran@bosc.ac.cn>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 2 Jun 2025 14:31:14 +1000
-X-Gm-Features: AX0GCFuLzkNcyU3FqGbhh8GacwY72o_kiNBdoHyVq8xMelxA5syDjCLlhE8qXGA
-Message-ID: <CAKmqyKPo1oH2q1vC+MQA2ce29wrMZgSo1JUEP5pzNKikLOunSg@mail.gmail.com>
-Subject: Re: [qemu PATCH 2/3] target/riscv/cpu.c: add 'ssstrict' to riscv,isa
-To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
- liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, palmer@dabbelt.com
+Date: Mon, 2 Jun 2025 15:25:10 +1000
+X-Gm-Features: AX0GCFu7GN67J9nyoP51AwJFrIHtQgAVNt95OLCi3-pjsfNbIWzahP2NTPjEypI
+Message-ID: <CAKmqyKOzwxUSWPr5sO3+drHbG=cjmeG6u+EeTPFosnOHkHLFUw@mail.gmail.com>
+Subject: Re: [PATCH v4 1/2] target/riscv: Add BOSC's Xiangshan Kunminghu CPU
+To: Ran Wang <wangran@bosc.ac.cn>
+Cc: 3543977024@qq.com, palmer@dabbelt.com, alistair.francis@wdc.com, 
+ liwei1518@gmail.com, dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com, 
+ qemu-riscv@nongnu.org, qemu-devel@nongnu.org
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::f31;
- envelope-from=alistair23@gmail.com; helo=mail-qv1-xf31.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::e2e;
+ envelope-from=alistair23@gmail.com; helo=mail-vs1-xe2e.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -96,43 +98,127 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Fri, May 30, 2025 at 6:24=E2=80=AFAM Daniel Henrique Barboza
-<dbarboza@ventanamicro.com> wrote:
+On Fri, Apr 25, 2025 at 10:22=E2=80=AFPM Ran Wang <wangran@bosc.ac.cn> wrot=
+e:
 >
-> 'ssstrict' is a RVA23 profile-defined extension defined as follows:
+> From: Huang Borong <3543977024@qq.com>
 >
-> "No non-conforming extensions are present. Attempts to execute
-> unimplemented opcodes or access unimplemented CSRs in the standard or
-> reserved encoding spaces raises an illegal instruction exception that
-> results in a contained trap to the supervisor-mode trap handler."
+> Add a CPU entry for the Xiangshan Kunminghu CPU, an open-source,
+> high-performance RISC-V processor. More details can be found at:
+> https://github.com/OpenXiangShan/XiangShan
 >
-> In short, we need to throw an exception when accessing unimplemented
-> CSRs or opcodes. We do that, so let's advertise it.
+> Note: The ISA extensions supported by the Xiangshan Kunminghu CPU are
+> categorized based on four RISC-V specifications: Volume I: Unprivileged
+> Architecture, Volume II: Privileged Architecture, AIA, and RVA23. The
+> extensions within each category are organized according to the chapter
+> order in the specifications.
 >
-> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+> Signed-off-by: Yu Hu <huyu@bosc.ac.cn>
+> Signed-off-by: Ran Wang <wangran@bosc.ac.cn>
+> Signed-off-by: Borong Huang <3543977024@qq.com>
+> Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Acked-by: Alistair Francis <alistair.francis@wdc.com>
 
 Alistair
 
 > ---
->  target/riscv/cpu.c | 1 +
->  1 file changed, 1 insertion(+)
+>  target/riscv/cpu-qom.h |  1 +
+>  target/riscv/cpu.c     | 64 ++++++++++++++++++++++++++++++++++++++++++
+>  2 files changed, 65 insertions(+)
 >
+> diff --git a/target/riscv/cpu-qom.h b/target/riscv/cpu-qom.h
+> index 1ee05eb393..75f4e43408 100644
+> --- a/target/riscv/cpu-qom.h
+> +++ b/target/riscv/cpu-qom.h
+> @@ -55,6 +55,7 @@
+>  #define TYPE_RISCV_CPU_VEYRON_V1        RISCV_CPU_TYPE_NAME("veyron-v1")
+>  #define TYPE_RISCV_CPU_TT_ASCALON       RISCV_CPU_TYPE_NAME("tt-ascalon"=
+)
+>  #define TYPE_RISCV_CPU_XIANGSHAN_NANHU  RISCV_CPU_TYPE_NAME("xiangshan-n=
+anhu")
+> +#define TYPE_RISCV_CPU_XIANGSHAN_KMH    RISCV_CPU_TYPE_NAME("xiangshan-k=
+unminghu")
+>  #define TYPE_RISCV_CPU_HOST             RISCV_CPU_TYPE_NAME("host")
+>
+>  OBJECT_DECLARE_CPU_TYPE(RISCVCPU, RISCVCPUClass, RISCV_CPU)
 > diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index 9d6fae72b2..cd0b159ed5 100644
+> index ee20bd7ca2..1fde2769bf 100644
 > --- a/target/riscv/cpu.c
 > +++ b/target/riscv/cpu.c
-> @@ -217,6 +217,7 @@ const RISCVIsaExtData isa_edata_arr[] =3D {
->      ISA_EXT_DATA_ENTRY(ssnpm, PRIV_VERSION_1_13_0, ext_ssnpm),
->      ISA_EXT_DATA_ENTRY(sspm, PRIV_VERSION_1_13_0, ext_sspm),
->      ISA_EXT_DATA_ENTRY(ssstateen, PRIV_VERSION_1_12_0, ext_ssstateen),
-> +    ISA_EXT_DATA_ENTRY(ssstrict, PRIV_VERSION_1_12_0, has_priv_1_12),
->      ISA_EXT_DATA_ENTRY(sstc, PRIV_VERSION_1_12_0, ext_sstc),
->      ISA_EXT_DATA_ENTRY(sstvala, PRIV_VERSION_1_12_0, has_priv_1_12),
->      ISA_EXT_DATA_ENTRY(sstvecd, PRIV_VERSION_1_12_0, has_priv_1_12),
-> --
-> 2.49.0
+> @@ -3171,6 +3171,70 @@ static const TypeInfo riscv_cpu_type_infos[] =3D {
+>          .cfg.max_satp_mode =3D VM_1_10_SV39,
+>      ),
 >
+> +    DEFINE_RISCV_CPU(TYPE_RISCV_CPU_XIANGSHAN_KMH, TYPE_RISCV_VENDOR_CPU=
+,
+> +        .misa_mxl_max =3D MXL_RV64,
+> +        .misa_ext =3D RVG | RVC | RVB | RVS | RVU | RVH | RVV,
+> +        .priv_spec =3D PRIV_VERSION_1_13_0,
+> +
+> +       /*
+> +        * The RISC-V Instruction Set Manual: Volume I
+> +        * Unprivileged Architecture
+> +        */
+> +       .cfg.ext_zicntr =3D true,
+> +       .cfg.ext_zihpm =3D true,
+> +       .cfg.ext_zihintntl =3D true,
+> +       .cfg.ext_zihintpause =3D true,
+> +       .cfg.ext_zimop =3D true,
+> +       .cfg.ext_zcmop =3D true,
+> +       .cfg.ext_zicond =3D true,
+> +       .cfg.ext_zawrs =3D true,
+> +       .cfg.ext_zacas =3D true,
+> +       .cfg.ext_zfh =3D true,
+> +       .cfg.ext_zfa =3D true,
+> +       .cfg.ext_zcb =3D true,
+> +       .cfg.ext_zbc =3D true,
+> +       .cfg.ext_zvfh =3D true,
+> +       .cfg.ext_zkn =3D true,
+> +       .cfg.ext_zks =3D true,
+> +       .cfg.ext_zkt =3D true,
+> +       .cfg.ext_zvbb =3D true,
+> +       .cfg.ext_zvkt =3D true,
+> +
+> +       /*
+> +        * The RISC-V Instruction Set Manual: Volume II
+> +        * Privileged Architecture
+> +        */
+> +       .cfg.ext_smstateen =3D true,
+> +       .cfg.ext_smcsrind =3D true,
+> +       .cfg.ext_sscsrind =3D true,
+> +       .cfg.ext_svnapot =3D true,
+> +       .cfg.ext_svpbmt =3D true,
+> +       .cfg.ext_svinval =3D true,
+> +       .cfg.ext_sstc =3D true,
+> +       .cfg.ext_sscofpmf =3D true,
+> +       .cfg.ext_ssdbltrp =3D true,
+> +       .cfg.ext_ssnpm =3D true,
+> +       .cfg.ext_smnpm =3D true,
+> +       .cfg.ext_smmpm =3D true,
+> +       .cfg.ext_sspm =3D true,
+> +       .cfg.ext_supm =3D true,
+> +
+> +       /* The RISC-V Advanced Interrupt Architecture */
+> +       .cfg.ext_smaia =3D true,
+> +       .cfg.ext_ssaia =3D true,
+> +
+> +       /* RVA23 Profiles */
+> +       .cfg.ext_zicbom =3D true,
+> +       .cfg.ext_zicbop =3D true,
+> +       .cfg.ext_zicboz =3D true,
+> +       .cfg.ext_svade =3D true,
+> +
+> +        .cfg.mmu =3D true,
+> +        .cfg.pmp =3D true,
+> +
+> +        .cfg.max_satp_mode =3D VM_1_10_SV48,
+> +    ),
+> +
+>  #ifdef CONFIG_TCG
+>      DEFINE_RISCV_CPU(TYPE_RISCV_CPU_BASE128, TYPE_RISCV_DYNAMIC_CPU,
+>          .cfg.max_satp_mode =3D VM_1_10_SV57,
+> --
+> 2.34.1
 >
 
