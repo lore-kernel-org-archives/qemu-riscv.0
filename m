@@ -4,79 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 70FE4C54FB3
-	for <qemu-riscv@archiver.kernel.org>; Mon,  2 Jun 2025 04:04:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1C0A8C54FB3
+	for <qemu-riscv@archiver.kernel.org>; Mon,  2 Jun 2025 05:47:15 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uLwOu-0001Rp-WB; Mon, 02 Jun 2025 00:03:54 -0400
+	id 1uLy0i-00072k-MP; Mon, 02 Jun 2025 01:47:00 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1uLwOn-0001RB-Ma; Mon, 02 Jun 2025 00:03:46 -0400
-Received: from mail-vk1-xa31.google.com ([2607:f8b0:4864:20::a31])
+ id 1uLxxD-0005dj-E2; Mon, 02 Jun 2025 01:43:29 -0400
+Received: from mail-qt1-x82e.google.com ([2607:f8b0:4864:20::82e])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1uLwOk-0007DI-3Z; Mon, 02 Jun 2025 00:03:45 -0400
-Received: by mail-vk1-xa31.google.com with SMTP id
- 71dfb90a1353d-52e728960c3so1476870e0c.2; 
- Sun, 01 Jun 2025 21:03:41 -0700 (PDT)
+ id 1uLxwO-000316-1w; Mon, 02 Jun 2025 01:43:20 -0400
+Received: by mail-qt1-x82e.google.com with SMTP id
+ d75a77b69052e-4a58d95ea53so6045921cf.0; 
+ Sun, 01 Jun 2025 22:42:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1748837020; x=1749441820; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1748842949; x=1749447749; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=oR/T4sj4Sz9nH//5IYvWjlk1YKbUuAfasS2nfIXYCr4=;
- b=Dx471hIoNytFbCKckZ4SmV9Me6jsAe1mjs+GTJWoYEot7Wb/vQX+XalCmoeME2BQ9V
- 7C14WMiy2P5SOUuYLsqnI3GlrIJZrXCm6fOM3UVFkx2AZG6Idd8P+D/L0mvB8M9ZAAX3
- /SGoEQnU5p4xiavHB8+UKa7EKVnPUuoCoKTtCGYSXTY61xqgrtaHPlru2z2AkNb7BNMM
- 27sutU9npCY1h6ZOS/qpMjs5Ldm6kiDXK3TheSDTmNGShXFVR2ewHqx7A3omgppyA+bk
- 84qS96FnK8HP33dG5HK4zlEG5Gy8wbky5cadkY8MUCvYG/utfw7fYCagSNo5xJoj8wAZ
- G5og==
+ bh=ZDjt/1Oq3qv3l1LceDFVzaa+v1qRMH9yh2FyC56g2ZI=;
+ b=aFpDnYfCRY5X8LqPX0zu556NKlk1FAr4ifpeIijlGnEJVU0411yr8VfvFeMGzpxtjl
+ WkRrNCqgZWSbfCpoTgxAAdW8KI9q3/h2VsMXkgS2pTLJwBwlAR1nOh8OeoqTecYpF7Ux
+ X5YSj3bbI1oJ/Zttruek9aZKlhqSjuvNUuC+aTeadbCKiqDpWwMYTpgFGtzrVlLFinRD
+ IqeTtKYB/Dh11VmrtX8xahlFExMcWScacaQjt3y3b1HaHn2kKuq5ikGxRbP9gc0CGXsV
+ 6r1pQ+uRiTCW0rwd6Qhxe/pnJE2N23bpZ6sX1GhVy24lc1c+o3Zc1m8D60o6k/Airfxe
+ rSTQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1748837020; x=1749441820;
+ d=1e100.net; s=20230601; t=1748842949; x=1749447749;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=oR/T4sj4Sz9nH//5IYvWjlk1YKbUuAfasS2nfIXYCr4=;
- b=f8rS1/bEbOanJZfnfyHiuRlv9VXNmxPl5YMnhT9tvkmkkF9CJx6+Us6hcaCmvUlp4/
- vV/CRVBP5hHHlCKotg8DNNs+1WBgvtfwIP/f5fvCrc0E/GN2dWDz/o5c4XITf+SX7mwE
- plOj8NvhkyiSE9Z5pftO2uqA06JJh9Wb0/3EDSZnclCXNDFGvxkOQStMIy4wEAFOikZK
- kTlHPEB0b7YU7ih6bkHd7Ha5X1qYHA2oYBgI1WjBdPDJMMBKn1Tidpn0WJE3vWTvpBb/
- L5HuWYy68kfqDB4ZzFVGZmGA6tN5U6IeuQROH81w0n8pq2bWjTtBJ3N+maFLtJMxTSAB
- 2AWw==
+ bh=ZDjt/1Oq3qv3l1LceDFVzaa+v1qRMH9yh2FyC56g2ZI=;
+ b=WbYTwBEAmi5pwtuHCvk1Pvo2epFH4+Y9qiqSlMqDnjJM1SwTaP0mXr71zoIp1FKY/c
+ eAiExoZlAGiqty2i/+UMP2MlsN2caPvGx9CNXGKT1XIH55acLymFbEvKVVcEXdiZNGPA
+ jTteU22oRjdATt/2wfP3UsBtsGGAJaodo0HhnlHPBWg2cUPackhAwFE5iKsRdQDkoXQ9
+ lGmiW77nXJM6uspxwG/RJ9+ZKK+M25rgIJqujQu0Tq0IqgwLuYq/Li0I6tCtXahYzlJI
+ K/VGAIB5045u1lLOzQA3snErBgL3eAlPOuXG+bkn2OaB1PEDsIPcVSiedkDvcLQ2NV54
+ 5nUw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUu/gF34/jQDHx91h9eH9+MXGY8IikO+s+zAtICtNr8/6YJAyK77Yy5PIAk7knxYu+FRzOCMeIJqyJa@nongnu.org
-X-Gm-Message-State: AOJu0Yw+JHn0yei0Lg7MpnOu+08vPcacO6X+o/walKK1PKKiG5HzHZwa
- f+ZPPpSUU4VYNGAudw4mxD04Zc/IIP9z82L5MxaNE+drtnPMmrv1NwB8pHNFEdtUPVsIiXy0XK1
- azyRqyIvAA2PJ8EhhWnLexx6XqODHrVQ=
-X-Gm-Gg: ASbGncuK4RUCcxuR71Pz9Y0/iYGD1qyB6+HU3EVCq+La+wANRjaKMOme2WhGzBpZgkC
- 44ho7rSeN+9QwhXk8ms+KhZ5U0Hlxyr3UIOmZWnUVVB0aKT17jxn6YZejxgtGRzzWw0SkzhQ9cy
- sH/f/tapLEj2cABkTX6mlcnBB4mSk/J8K8X5PEDneB1JEgWXFi6jkUVPmrj2u2oWQ=
-X-Google-Smtp-Source: AGHT+IFohOUNpKisSTnxTyGjbGw9k0gDRubq10xSFD9VbOxoN8loNk+foQiBc9cOUgpNy8dAd5KL8jMy59/HDJmkw9o=
-X-Received: by 2002:a05:6122:c97:b0:530:7a17:88ca with SMTP id
- 71dfb90a1353d-5309379993cmr4127019e0c.9.1748837020323; Sun, 01 Jun 2025
- 21:03:40 -0700 (PDT)
+ AJvYcCWUq168/ibFoCiQdA2oMwN3l6tkmEwnrj4094mTnNne0fpdXUTKK6m+UerUi5rpFhQSSTVeYtTb0omg@nongnu.org
+X-Gm-Message-State: AOJu0YwPUVkwBxYfLzDjsbVi5r6+/EmNAThJSf6Ix4af68koy6M+zSsj
+ KZBKinK/YtJdzKFIkvztrPSWiLOHTYlzeRcVywWyJOBhuElyPQNI9rrPL+cNlw4OKTy2SFv2DlO
+ YR2jub/Emh4qDOX5bl3sTJQpVq1sSaUuZpQ==
+X-Gm-Gg: ASbGncs4mxNibvClLuWOT7Q31nXko8gDRc6IR2nqrlb6F++3dweG4iNQEU9OzZTvP01
+ O1Ep3JgE60MA5CVzykQ243niDK3Rh8Z/5UO+gjRafb/99dr+dLiUnUYzmY8TrI5Ntvsa8QvF5PE
+ IEZGCaefPG8j3Xfz97U8RiJvftYhkza73gfDQuus4fsMUbuLw5rJ7faYQYmPum7z4=
+X-Google-Smtp-Source: AGHT+IHmQPDQwS79pC52oVn8j92v/e+7jcMPCc1tTanKme/Ppxwzrw0Lj5ZHVJ1bpGFbA5gMryoNX9/yLWK9/2tfr+w=
+X-Received: by 2002:ac5:cdcd:0:b0:530:5b54:e035 with SMTP id
+ 71dfb90a1353d-530711eae2emr9482791e0c.4.1748839041791; Sun, 01 Jun 2025
+ 21:37:21 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250529140012.135408-1-mengzhuo@iscas.ac.cn>
-In-Reply-To: <20250529140012.135408-1-mengzhuo@iscas.ac.cn>
+References: <20250529202315.1684198-1-dbarboza@ventanamicro.com>
+In-Reply-To: <20250529202315.1684198-1-dbarboza@ventanamicro.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 2 Jun 2025 14:03:14 +1000
-X-Gm-Features: AX0GCFtvDEdP5fYpxqd-nu71X_Av0bs9XhdtdO0CLH0l3B48Lb1GEGJQFwbIvhY
-Message-ID: <CAKmqyKOjEdt_w6uv3cZHBtk2ctZiNwznp-Gv6TkX=5=Q=pfodw@mail.gmail.com>
-Subject: Re: [PATCH v5] target/riscv/kvm: add satp mode for host cpu
-To: Meng Zhuo <mengzhuo@iscas.ac.cn>
-Cc: qemu-devel@nongnu.org, Andrew Jones <ajones@ventanamicro.com>, 
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, 
- Weiwei Li <liwei1518@gmail.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>, 
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
- "open list:RISC-V TCG CPUs" <qemu-riscv@nongnu.org>
+Date: Mon, 2 Jun 2025 14:36:55 +1000
+X-Gm-Features: AX0GCFsSs9L25y-to5GFCUKk9ZnkAJM6oUPN9FKZKfYMTtSLrXngMfHXRGnQp_w
+Message-ID: <CAKmqyKPiKgnD_NxeTyQjG4i--b+vTKi3=yuYS_cC6HkCSRU1Sw@mail.gmail.com>
+Subject: Re: [qemu PATCH 0/3] target/riscv: add missing named features
+To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, alistair.francis@wdc.com, 
+ liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, palmer@dabbelt.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::a31;
- envelope-from=alistair23@gmail.com; helo=mail-vk1-xa31.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::82e;
+ envelope-from=alistair23@gmail.com; helo=mail-qt1-x82e.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -100,130 +95,34 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Fri, May 30, 2025 at 12:01=E2=80=AFAM Meng Zhuo <mengzhuo@iscas.ac.cn> w=
-rote:
+On Fri, May 30, 2025 at 6:24=E2=80=AFAM Daniel Henrique Barboza
+<dbarboza@ventanamicro.com> wrote:
 >
-> This patch adds host satp mode while kvm/host cpu satp mode is not
-> set.
+> Hi,
 >
-> Reviewed-by: Andrew Jones <ajones@ventanamicro.com>
-> Resolves: https://gitlab.com/qemu-project/qemu/-/issues/2931
-> Signed-off-by: Meng Zhuo <mengzhuo@iscas.ac.cn>
-> ---
-> This patch don't change the output of errno nor errno strings pattern.
-> See [v3] for further information.
+> These simple patches add two missing named features in riscv,isa.  Third
+> patch is a doc change I figured was worth doing.
 >
-> Change in v5:
-> - Adds R-B comment from Andrew Jones
+> Drew, as far as Server SoC Reference platform goes, we don't have
+> 'sdext'. I guess we'll have to postpone the Server Soc Ref work for now.
 >
-> Change in v4:
-> - Adds changelog in commit message
-> - Link to v3: https://lists.nongnu.org/archive/html/qemu-devel/2025-05/ms=
-g04629.html
->
-> Change in v3:
-> - Rebase on https://github.com/alistair23/qemu/tree/riscv-to-apply.next
->   as requested
-> - Link to v2: https://lists.nongnu.org/archive/html/qemu-devel/2025-04/ms=
-g05203.html
->
-> Changes in v2:
-> - use set_satp_mode_max_supported instead of hard code
-> - Link to v1: https://lists.nongnu.org/archive/html/qemu-devel/2025-04/ms=
-g05094.html
-> ---
->  target/riscv/cpu.c         |  3 +--
->  target/riscv/cpu.h         |  1 +
->  target/riscv/kvm/kvm-cpu.c | 20 +++++++++++++++++++-
->  3 files changed, 21 insertions(+), 3 deletions(-)
->
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index d92874baa0..a84edd3a3b 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -433,8 +433,7 @@ const char *satp_mode_str(uint8_t satp_mode, bool is_=
-32_bit)
->      g_assert_not_reached();
->  }
->
-> -static void set_satp_mode_max_supported(RISCVCPU *cpu,
-> -                                        uint8_t satp_mode)
-> +void set_satp_mode_max_supported(RISCVCPU *cpu, uint8_t satp_mode)
->  {
+> Daniel Henrique Barboza (3):
+>   target/riscv/cpu.c: add 'sdtrig' in riscv,isa
+>   target/riscv/cpu.c: add 'ssstrict' to riscv,isa
+>   target/riscv/cpu.c: do better with 'named features' doc
 
-This function has been removed in the latest master branch, can you
-please rebase on
-https://github.com/alistair23/qemu/tree/riscv-to-apply.next
+Thanks!
+
+Applied to riscv-to-apply.next
 
 Alistair
 
->      bool rv32 =3D riscv_cpu_mxl(&cpu->env) =3D=3D MXL_RV32;
->      const bool *valid_vm =3D rv32 ? valid_vm_1_10_32 : valid_vm_1_10_64;
-> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> index b56d3afa69..d7136f1d72 100644
-> --- a/target/riscv/cpu.h
-> +++ b/target/riscv/cpu.h
-> @@ -915,6 +915,7 @@ char *riscv_cpu_get_name(RISCVCPU *cpu);
 >
->  void riscv_cpu_finalize_features(RISCVCPU *cpu, Error **errp);
->  void riscv_add_satp_mode_properties(Object *obj);
-> +void set_satp_mode_max_supported(RISCVCPU *cpu, uint8_t satp_mode);
->  bool riscv_cpu_accelerator_compatible(RISCVCPU *cpu);
+>  target/riscv/cpu.c | 16 ++++++++++++++--
+>  1 file changed, 14 insertions(+), 2 deletions(-)
 >
->  /* CSR function table */
-> diff --git a/target/riscv/kvm/kvm-cpu.c b/target/riscv/kvm/kvm-cpu.c
-> index 82f9728636..18fbca1a08 100644
-> --- a/target/riscv/kvm/kvm-cpu.c
-> +++ b/target/riscv/kvm/kvm-cpu.c
-> @@ -999,6 +999,23 @@ static void kvm_riscv_destroy_scratch_vcpu(KVMScratc=
-hCPU *scratch)
->      close(scratch->kvmfd);
->  }
->
-> +static void kvm_riscv_init_satp_mode(RISCVCPU *cpu, KVMScratchCPU *kvmcp=
-u)
-> +{
-> +    CPURISCVState *env =3D &cpu->env;
-> +    struct kvm_one_reg reg;
-> +    int ret;
-> +    uint64_t val;
-> +
-> +    reg.id =3D RISCV_CONFIG_REG(env, satp_mode);
-> +    reg.addr =3D (uint64_t)&val;
-> +    ret =3D ioctl(kvmcpu->cpufd, KVM_GET_ONE_REG, &reg);
-> +    if (ret !=3D 0) {
-> +        error_report("Unable to retrieve satp from host, error %d", ret)=
-;
-> +    }
-> +
-> +    set_satp_mode_max_supported(cpu, val);
-> +}
-> +
->  static void kvm_riscv_init_machine_ids(RISCVCPU *cpu, KVMScratchCPU *kvm=
-cpu)
->  {
->      struct kvm_one_reg reg;
-> @@ -1302,6 +1319,7 @@ static void riscv_init_kvm_registers(Object *cpu_ob=
-j)
->      kvm_riscv_init_machine_ids(cpu, &kvmcpu);
->      kvm_riscv_init_misa_ext_mask(cpu, &kvmcpu);
->      kvm_riscv_init_cfg(cpu, &kvmcpu);
-> +    kvm_riscv_init_satp_mode(cpu, &kvmcpu);
->
->      kvm_riscv_destroy_scratch_vcpu(&kvmcpu);
->  }
-> @@ -1980,7 +1998,7 @@ static bool kvm_cpu_realize(CPUState *cs, Error **e=
-rrp)
->          }
->      }
->
-> -   return true;
-> +    return true;
->  }
->
->  void riscv_kvm_cpu_finalize_features(RISCVCPU *cpu, Error **errp)
 > --
-> 2.39.5
+> 2.49.0
 >
 >
 
