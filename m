@@ -4,67 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A5C64C5AE59
-	for <qemu-riscv@archiver.kernel.org>; Tue,  3 Jun 2025 08:03:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 54345C5AD49
+	for <qemu-riscv@archiver.kernel.org>; Tue,  3 Jun 2025 13:20:35 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uMMbh-0006mF-8b; Tue, 03 Jun 2025 04:02:49 -0400
+	id 1uMRYc-0006ak-Nd; Tue, 03 Jun 2025 09:19:58 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <liujingqi@lanxincomputing.com>)
- id 1uMMba-0006lo-9b
- for qemu-riscv@nongnu.org; Tue, 03 Jun 2025 04:02:42 -0400
-Received: from sg-1-14.ptr.blmpb.com ([118.26.132.14])
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1uMRYO-0006Yh-U6
+ for qemu-riscv@nongnu.org; Tue, 03 Jun 2025 09:19:47 -0400
+Received: from mail-wr1-x42b.google.com ([2a00:1450:4864:20::42b])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <liujingqi@lanxincomputing.com>)
- id 1uMMbV-0004XJ-2u
- for qemu-riscv@nongnu.org; Tue, 03 Jun 2025 04:02:42 -0400
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- s=s1; d=lanxincomputing-com.20200927.dkim.feishu.cn; t=1748937745;
- h=from:subject:mime-version:from:date:message-id:subject:to:cc:
- reply-to:content-type:mime-version:in-reply-to:message-id;
- bh=q/mmO4mWauBeFH+weps+XVhR72n4lkubEVs6dR5/2U4=;
- b=EjUpUI7ac6h4JmLzrF3jI1ivzJo55aHYwJJMnzIcQ8t6XlPLp7Fe8a/iIOcIF/yaoPn8lv
- 2XGOyYkzjQDsCBDFeeI4wMc6sVcmCZNlliuSNeWk1MTD7AzzEh+lQc+b4hYajIsAK9OGhv
- eaD+Fv7JQ9nXnk/oAQNAwlecWf1MlRZY8GhGHPId1nTtnZs8d/oE89+Cwt+Q7Kd3cyN6Qx
- E7Hzl/1KQjl7vmUqtf3W2abbjZ6oFXy8/YEY/o1plEacBrOcxsX9cpsFrS7bRdgdUmA7FG
- VckIb9bAcAgIq1yjzO3LAnwiO88+T/4wLHgt63LkRjeVa+Ok7NUXuPDiaaKaLQ==
-Content-Language: en-US
-X-Lms-Return-Path: <lba+2683eac0f+26e5e3+nongnu.org+liujingqi@lanxincomputing.com>
-Date: Tue, 3 Jun 2025 16:02:21 +0800
-Received: from [127.0.0.1] ([180.165.23.184]) by smtp.feishu.cn with ESMTPS;
- Tue, 03 Jun 2025 16:02:22 +0800
+ (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1uMRYK-0007jJ-QM
+ for qemu-riscv@nongnu.org; Tue, 03 Jun 2025 09:19:44 -0400
+Received: by mail-wr1-x42b.google.com with SMTP id
+ ffacd0b85a97d-3a363d15c64so3881396f8f.3
+ for <qemu-riscv@nongnu.org>; Tue, 03 Jun 2025 06:19:38 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1748956777; x=1749561577; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=pT2eBUGhOkjoueuI1Sf97uLzV4Sk7Vq1sawGHZtgE+c=;
+ b=GMAhF1Jsg1MuKq8CtHUYY3iRazrAm4zWyV7iaEmR3gRdNrP101K76KUlsGCWWcqbuJ
+ YK0CCVedr0SNXxQdxR3oUj7BAe8EVEyC0+qjdjR8ASS7D+gAEnH/nqEFFFInRINom5Hc
+ KAyjEbKL2FJuccYVo0fMMhPgha2WDa7RLsyrQ/qlc04P7gFWp9aZw02ZZxCZbJgDq8bp
+ wE0CXGzhikP/pO1mbMB0Y1u/EyMHlGfrB/BPXl3obpzz+qJ5cgv79c5neWftmbPyjryr
+ 2bKFVTrABeCFBz3boQlMDua/FyFg6vMEd+XGJZwDSRTFbu70+OMuB8tPw/1jEj4CowHf
+ puGw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1748956777; x=1749561577;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=pT2eBUGhOkjoueuI1Sf97uLzV4Sk7Vq1sawGHZtgE+c=;
+ b=tVBhkIjo0s2nVzcmoB8k1fBq+vG9yzjqTdQONvHB88XWALUefYJfosNzXGvbL9s0f8
+ CEOOenigtHT3J2f4R9mJOnf2hueKu71iMPJzkPcwNrui76KI5rF6xkXQv2y3K9uPH2q/
+ Y0fRu26QRZLwHA/amqlT7yX/UVhUjJ8Hwpd8nXXxJ/YbL50EbrizP58VHEODJ3AjfzGb
+ tpN5mzVatTrQJ98nCJ6U3RkSDFOz0e2OkiH1xxm8xuEajXHtMtrmbkJH68Lg7+Z8lI1x
+ Oy/AkepHfBZw05F/b92nA+ALsMi0IGvI4rPnLohkSbBYQh508uqCqjAmMjX33E/Soe5Y
+ UHCQ==
+X-Gm-Message-State: AOJu0Yx/vrCiuRICLrE5rCL4WUq89FirnlDw54Fi/NpnUYkji1tPj6zV
+ c0WO1lu1uyjctaohdMCHzNnUFrtx5bAWDIdn6aGIDmmuw250rwvKREUEO+gDdwyMKJQ=
+X-Gm-Gg: ASbGnctx9WDhVW82H8SWHlNnRlh7AthSmDbHwt9c5rhSBvvz0idaVMMmFSyMpcPxhWC
+ VEgsy4O1P/rjmHOGZbV+bCdfDm1iYQ0/GIkF1i8E02P9nFuVKfqF35/CYfOiEGvWfv9A1J0Wa5P
+ /3iYw6EwPK16akjWPwBvDRQVka2Qz++sJpQ1E9r7GsTeQOhzhIkmiBSim007KcXUu33IUunQ0+e
+ sHOL4Pb455gPAvHCiM3Zb5FSs/Fuw1y6kF268XICfMtOME8ojAfJX3HoNQDxzCiIwimIGeVg6fU
+ tjeJaZbsjVtIzmdIGVYbNkpeHHtkV29R3vyAMw/ugvtpRj6MauuXVwPzf+tj44DFR979aLV5DwJ
+ cm9f4yQti3ndPN40dENMYxgqeoxh1RhIMQOE=
+X-Google-Smtp-Source: AGHT+IHxQ82b6ar1O4FPf34PrTHNJY9aomusPKxyHye9JbMt+qdZ6V71eISnSz/wyRgUUcpFIDk8Yg==
+X-Received: by 2002:a05:6000:250d:b0:3a4:d7ba:941e with SMTP id
+ ffacd0b85a97d-3a4f7a353e4mr13503633f8f.25.1748956776695; 
+ Tue, 03 Jun 2025 06:19:36 -0700 (PDT)
+Received: from [192.168.69.138] (88-187-86-199.subs.proxad.net.
+ [88.187.86.199]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-3a4efe5b7a5sm18465376f8f.15.2025.06.03.06.19.35
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 03 Jun 2025 06:19:36 -0700 (PDT)
+Message-ID: <eb6bd3d7-c66b-4300-9573-c29830a3aff4@linaro.org>
+Date: Tue, 3 Jun 2025 15:19:35 +0200
+MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] hw/riscv/riscv-iommu: Fix PPN field of
- Translation-reponse register
-X-Original-From: Nutty Liu <liujingqi@lanxincomputing.com>
-Content-Type: text/plain; charset=UTF-8
-In-Reply-To: <CAKmqyKPKLHk97s-eVGANq7hYfny1g-WgFQA32eoNo9UYLC9ixA@mail.gmail.com>
-From: "Nutty Liu" <liujingqi@lanxincomputing.com>
-Message-Id: <7d398658-71f2-4c79-9779-947f79b55ca8@lanxincomputing.com>
-Mime-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-References: <20250529092632.4367-1-liujingqi@lanxincomputing.com>
- <CAKmqyKPKLHk97s-eVGANq7hYfny1g-WgFQA32eoNo9UYLC9ixA@mail.gmail.com>
-To: "Alistair Francis" <alistair23@gmail.com>
-Cc: "Palmer Dabbelt" <palmer@dabbelt.com>, 
- "Alistair Francis" <alistair.francis@wdc.com>, 
- "Weiwei Li" <liwei1518@gmail.com>, 
- "Daniel Henrique Barboza" <dbarboza@ventanamicro.com>, 
- "Liu Zhiwei" <zhiwei_liu@linux.alibaba.com>, 
- "Tomasz Jeznach" <tjeznach@rivosinc.com>, 
- "Richard Henderson" <richard.henderson@linaro.org>, 
- <qemu-riscv@nongnu.org>, <qemu-devel@nongnu.org>
-Received-SPF: pass client-ip=118.26.132.14;
- envelope-from=liujingqi@lanxincomputing.com; helo=sg-1-14.ptr.blmpb.com
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, RCVD_IN_VALIDITY_CERTIFIED_BLOCKED=0.001,
- RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+Subject: Re: [PATCH] target/riscv/kvm: implement SBI debug console (DBCN) calls
+To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>, qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
+ liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, palmer@rivosinc.com
+References: <20240425155012.581366-1-dbarboza@ventanamicro.com>
+Content-Language: en-US
+From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>
+In-Reply-To: <20240425155012.581366-1-dbarboza@ventanamicro.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2a00:1450:4864:20::42b;
+ envelope-from=philmd@linaro.org; helo=mail-wr1-x42b.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -80,132 +100,116 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Hi Alistair,
+Hi Daniel,
 
-Thanks for your review.
+(now merged as commit a6b53378f537)
 
-(Sorry, just resend this email due to the incorrect line break in the
-previous reply email.)
-
-On 6/2/2025 1:11 PM, Alistair Francis wrote:
-> On Thu, May 29, 2025 at 10:52=E2=80=AFPM Nutty Liu
-> <liujingqi@lanxincomputing.com> wrote:
->> The original implementation incorrectly performed a bitwise AND
->> operation between the PPN of iova and PPN Mask, leading to an
->> incorrect PPN field in Translation-reponse register.
->>
->> The PPN of iova should be set entirely in the PPN field of
->> Translation-reponse register.
->>
->> Signed-off-by: Nutty Liu <liujingqi@lanxincomputing.com>
->> ---
->>   hw/riscv/riscv-iommu.c | 3 +--
->>   1 file changed, 1 insertion(+), 2 deletions(-)
->>
->> diff --git a/hw/riscv/riscv-iommu.c b/hw/riscv/riscv-iommu.c
->> index a877e5da84..f529a6a3d7 100644
->> --- a/hw/riscv/riscv-iommu.c
->> +++ b/hw/riscv/riscv-iommu.c
->> @@ -1935,8 +1935,7 @@ static void riscv_iommu_process_dbg(RISCVIOMMUStat=
-e *s)
->>               iova =3D RISCV_IOMMU_TR_RESPONSE_FAULT | (((uint64_t) faul=
-t) << 10);
->>           } else {
->>               iova =3D iotlb.translated_addr & ~iotlb.addr_mask;
->> -            iova >>=3D TARGET_PAGE_BITS;
->> -            iova &=3D RISCV_IOMMU_TR_RESPONSE_PPN;
->> +            iova =3D set_field(0, RISCV_IOMMU_TR_RESPONSE_PPN, PPN_DOWN=
-(iova));
-> I don't see how this is different.
->
-> PPN_DOWN(iova)
-> is the same as
-> iova >> TARGET_PAGE_BITS
-
-Yes. The results of above operations are the same.
-
->
-> and
->
-> set_field(0, RISCV_IOMMU_TR_RESPONSE_PPN, PPN_DOWN(iova))
-> should just return
-> (0 & ~RISCV_IOMMU_TR_RESPONSE_PPN) |
->      (RISCV_IOMMU_TR_RESPONSE_PPN & PPN_DOWN(iova))
-
-It's not correct.
-Let me show the definitions of the related macros as follows.
-
-1) The definition of 'set_field' in 'target/riscv/cpu_bits.h' is as below:
-
-     #define set_field(reg, mask, val) (((reg) & ~(uint64_t)(mask)) | \
-                                       (((uint64_t)(val) * ((mask) & ~((mas=
-k) << 1))) & \
-                                       (uint64_t)(mask)))
-
-2) The definition of 'RISCV_IOMMU_TR_RESPONSE_PPN' in 'hw/riscv/riscv-iommu=
--bits.h' is as follows:
-
-     #define RISCV_IOMMU_PPN_FIELD GENMASK_ULL(53, 10)
-     #define RISCV_IOMMU_TR_RESPONSE_PPN RISCV_IOMMU_PPN_FIELD
-
-So the 'RISCV_IOMMU_TR_RESPONSE_PPN' is 0x3ffffffffffc00.
+On 25/4/24 17:50, Daniel Henrique Barboza wrote:
+> SBI defines a Debug Console extension "DBCN" that will, in time, replace
+> the legacy console putchar and getchar SBI extensions.
+> 
+> The appeal of the DBCN extension is that it allows multiple bytes to be
+> read/written in the SBI console in a single SBI call.
+> 
+> As far as KVM goes, the DBCN calls are forwarded by an in-kernel KVM
+> module to userspace. But this will only happens if the KVM module
+> actually supports this SBI extension and we activate it.
+> 
+> We'll check for DBCN support during init time, checking if get-reg-list
+> is advertising KVM_RISCV_SBI_EXT_DBCN. In that case, we'll enable it via
+> kvm_set_one_reg() during kvm_arch_init_vcpu().
+> 
+> Finally, change kvm_riscv_handle_sbi() to handle the incoming calls for
+> SBI_EXT_DBCN, reading and writing as required.
+> 
+> A simple KVM guest with 'earlycon=sbi', running in an emulated RISC-V
+> host, takes around 20 seconds to boot without using DBCN. With this
+> patch we're taking around 14 seconds to boot due to the speed-up in the
+> terminal output.  There's no change in boot time if the guest isn't
+> using earlycon.
+> 
+> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+> ---
+>   target/riscv/kvm/kvm-cpu.c         | 111 +++++++++++++++++++++++++++++
+>   target/riscv/sbi_ecall_interface.h |  17 +++++
+>   2 files changed, 128 insertions(+)
 
 
-Let me give you an example as follows.
+> +static void kvm_riscv_handle_sbi_dbcn(CPUState *cs, struct kvm_run *run)
+> +{
+> +    g_autofree uint8_t *buf = NULL;
+> +    RISCVCPU *cpu = RISCV_CPU(cs);
+> +    target_ulong num_bytes;
+> +    uint64_t addr;
+> +    unsigned char ch;
+> +    int ret;
+> +
+> +    switch (run->riscv_sbi.function_id) {
+> +    case SBI_EXT_DBCN_CONSOLE_READ:
+> +    case SBI_EXT_DBCN_CONSOLE_WRITE:
+> +        num_bytes = run->riscv_sbi.args[0];
+> +
+> +        if (num_bytes == 0) {
+> +            run->riscv_sbi.ret[0] = SBI_SUCCESS;
+> +            run->riscv_sbi.ret[1] = 0;
+> +            break;
+> +        }
+> +
+> +        addr = run->riscv_sbi.args[1];
+> +
+> +        /*
+> +         * Handle the case where a 32 bit CPU is running in a
+> +         * 64 bit addressing env.
+> +         */
+> +        if (riscv_cpu_mxl(&cpu->env) == MXL_RV32) {
+> +            addr |= (uint64_t)run->riscv_sbi.args[2] << 32;
+> +        }
+> +
+> +        buf = g_malloc0(num_bytes);
+> +
+> +        if (run->riscv_sbi.function_id == SBI_EXT_DBCN_CONSOLE_READ) {
+> +            ret = qemu_chr_fe_read_all(serial_hd(0)->be, buf, num_bytes);
+> +            if (ret < 0) {
+> +                error_report("SBI_EXT_DBCN_CONSOLE_READ: error when "
+> +                             "reading chardev");
+> +                exit(1);
+> +            }
+> +
+> +            cpu_physical_memory_write(addr, buf, ret);
+> +        } else {
+> +            cpu_physical_memory_read(addr, buf, num_bytes);
+> +
+> +            ret = qemu_chr_fe_write_all(serial_hd(0)->be, buf, num_bytes);
+> +            if (ret < 0) {
+> +                error_report("SBI_EXT_DBCN_CONSOLE_WRITE: error when "
+> +                             "writing chardev");
+> +                exit(1);
+> +            }
+> +        }
+> +
+> +        run->riscv_sbi.ret[0] = SBI_SUCCESS;
+> +        run->riscv_sbi.ret[1] = ret;
+> +        break;
+> +    case SBI_EXT_DBCN_CONSOLE_WRITE_BYTE:
+> +        ch = run->riscv_sbi.args[0];
+> +        ret = qemu_chr_fe_write(serial_hd(0)->be, &ch, sizeof(ch));
+> +
+> +        if (ret < 0) {
+> +            error_report("SBI_EXT_DBCN_CONSOLE_WRITE_BYTE: error when "
+> +                         "writing chardev");
+> +            exit(1);
+> +        }
 
-With the original implementation,
-1) Assume: iova =3D 0x12345678;
+We are ignoring partial writes (non-blocking call returning 0 byte
+written), is that expected? If so, is it OK to add a comment we can
+safely discard not-yet-written DBCN_CONSOLE_WRITE_BYTE?
 
-2) iova >>=3D TARGET_PAGE_BITS;
-The result is as follows:
- =C2=A0 iova =3D 0x12345;
-
-It's the same as PPN_DOWN(iova).
-This is the correct value of PPN.
-
-3) iova &=3D RISCV_IOMMU_TR_RESPONSE_PPN;
-After substituting with 'iova =3D 0x12345', the result is as follows:
-   =C2=A0iova =3D 0x12345 & 0x3ffffffffffc00;
-The final 'iova' is as follows:
-     iova =3D 0x12000;
-This 'iova' will be set to Translation-reponse register finally by thebelow=
- sentence.
-   =C2=A0riscv_iommu_reg_set64(s, RISCV_IOMMU_REG_TR_RESPONSE, iova);
-
-Then the value of Translation-reponse register will be set to '0x12000'.
-The PPN field is between bit 10 and bit 53.
-So the PPN is 0x48 which is calculated by '0x12000 >> 10 =3D 0x48'.
-
-It's incorrect. Actually the PPN field should be 0x12345.
-
-It should be calculated as follows:
-     iova =3D (iova << 10) & RISCV_IOMMU_TR_RESPONSE_PPN;
-After substituting with 'iova =3D 0x12345', and the result is as follows:
-     iova =3D (0x12345 << 10) & 0x3ffffffffffc00 =3D 0x48D1400
-The correct value of Translation-reponse register should be '0x48D1400'.
-
-4) With the new implementation,
-     iova =3D set_field(0, RISCV_IOMMU_TR_RESPONSE_PPN, PPN_DOWN(iova));
-
-It will set the bit 10 to bit 53 of 'iova' to PPN_DOWN(iova).
-After substituting with 'iova =3D 0x12345', the final 'iova' is as follows:
-     iova =3D 0x48D1400;
-And then the correct 'iova' will be set to Translation-reponse register.
-
-> Can you describe the issue with the original implementation and why
-> this fixes it in the commit message?
-
-Hope the above description and the example can help you understand.
-
-Nutty,
-Thanks
-
->
-> Alistair
->
->>               /* We do not support superpages (> 4kbs) for now */
->>               iova &=3D ~RISCV_IOMMU_TR_RESPONSE_S;
->> --
->> 2.49.0.windows.1
->>
+> +
+> +        run->riscv_sbi.ret[0] = SBI_SUCCESS;
+> +        run->riscv_sbi.ret[1] = 0;
+> +        break;
+> +    default:
+> +        run->riscv_sbi.ret[0] = SBI_ERR_NOT_SUPPORTED;
+> +    }
+> +}
 
