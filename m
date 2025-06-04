@@ -4,100 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 53352C5B552
-	for <qemu-riscv@archiver.kernel.org>; Wed,  4 Jun 2025 10:55:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AF42FC5B543
+	for <qemu-riscv@archiver.kernel.org>; Wed,  4 Jun 2025 12:51:00 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uMllg-0001gZ-2w; Wed, 04 Jun 2025 06:54:48 -0400
+	id 1uMnZw-0005oD-M0; Wed, 04 Jun 2025 08:50:49 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1uMlle-0001fn-7l
- for qemu-riscv@nongnu.org; Wed, 04 Jun 2025 06:54:46 -0400
-Received: from mail-ua1-x935.google.com ([2607:f8b0:4864:20::935])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1uMllc-0000WE-43
- for qemu-riscv@nongnu.org; Wed, 04 Jun 2025 06:54:45 -0400
-Received: by mail-ua1-x935.google.com with SMTP id
- a1e0cc1a2514c-87dfe906a87so1802010241.0
- for <qemu-riscv@nongnu.org>; Wed, 04 Jun 2025 03:54:43 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1749034483; x=1749639283; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=apmfOP4Rp497ljxAggMmJaQTwC4oUaYLeroIYEOwTrs=;
- b=BEJE7QY8LLaOHSStMD37GFeWl5H1tMCpS2gYAkjV15YGH5JJaWDX/IQiHQHzvnYIN1
- PLLDB6oVXM75e84xN4j7RblDsWc1rvIt9qey53cnToLhOyJaoatMK0y/xt4YJGEgMuCz
- GuX4iMPEQJ2ESno4qQ82aHvpldaPhgSoPfeeTpqcJopQk71QtuF6aL+lSnYyYELDcrs3
- jycfiJqlMZHClk5eBzxnyty0y0Ma/OOPF+ZIvOSxu9ppReJU6rCAGidUXtweX8//c9nu
- gDge6dN0kxgwg7MxScE0/eWBPjuQ7d6ZaS+iF66NTBjSoECmHWSKBXwYA/nmGRfKsIT3
- BIXA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1749034483; x=1749639283;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=apmfOP4Rp497ljxAggMmJaQTwC4oUaYLeroIYEOwTrs=;
- b=XYNMGCpBEEPlp9WYTW1PeEP9AxShTpCAHaEShqu+ZHP4j0cskmY5aBy8MUlGUX5Izv
- PHdzkE1NqcfVk5CWZFwGFFvSWhxpbrKZ+Pk1NJdqNZQiMbXhfLmlAZ28ccBik+ffBnlM
- zDas4jZHsR32JFU/rYfc72kgz0jC4Yrnlpf/LZTBKB2al6jLvnEfm5yY8qfBIdSmo0+C
- zWoRCCkYlai4YN1EATQ8Szw9StC/cP2MaZ+aXXdy1jz24Pnj6VvBSWnaj08av7o9/nLO
- jp3kFQGWXVScXSprvyTtHMI5bCgt77uieHsHHbw9tkQyp+BCR1ImDU6h5vyQq45jfrr8
- QPLA==
-X-Gm-Message-State: AOJu0YzaWnvxS0Wld6R7V+65GxpFx5OngoSlCx+FRNDuJdUMxlAg5QtS
- WIZ56EZRl7jzLStMEPeVelwdwcWBgNV2JIinO4DacQz10nbizjGjgwmu8nrD2N3ilVM=
-X-Gm-Gg: ASbGncv6/Rn+/v4EiYe16mawbkmk5K7NSum4K6NqQAORhou/BAF16ZzzzqTUF2xC2rR
- m3iT8AiLKhvUq2O+daGYAbMhyl6QIVQDjRbaMDCSqMBtX6E6ozmuMNK6DaGZ6vQaGsadKrlDOYj
- ECtGw1n0WX5CNwGMZnLTu6Jv3SCLDtEVSQ6mM5kko/4+pYGrN4rD05P7zxOf5AycLsyPR0a6hLc
- HC5PlC5NsRIZDB5MvdFnCvrcu1JS6Uvx1xkAue7BV3qn7lFZzebeWGxfVrAx21Ej2SQ9VC1kLXE
- kTSBt3gcUPs0f7II6Negbl6aiaK1zMwdVU6QVcHzoBJ2qw8V96g1sFd/SCEegYa0cKxgK8HcuFW
- fKIu0vF8iB0YjSLV+SNnruIVfB5+Icw==
-X-Google-Smtp-Source: AGHT+IFwEdrNUo00/5f3h09p6IwauUnqxckpH9djuKmUSeSrar4YqB9+/U/J446QsEtt233hic3oIQ==
-X-Received: by 2002:a05:6102:4406:b0:4e5:ac0f:582c with SMTP id
- ada2fe7eead31-4e746ddab63mr998957137.13.1749034482788; 
- Wed, 04 Jun 2025 03:54:42 -0700 (PDT)
-Received: from ?IPV6:2804:7f0:bcc0:8f02:a679:333c:d017:a155?
- ([2804:7f0:bcc0:8f02:a679:333c:d017:a155])
- by smtp.gmail.com with ESMTPSA id
- ada2fe7eead31-4e6444964casm9865070137.13.2025.06.04.03.54.39
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 04 Jun 2025 03:54:42 -0700 (PDT)
-Message-ID: <c2b0fb25-8b17-4a69-a128-2f8cc9bbba76@ventanamicro.com>
-Date: Wed, 4 Jun 2025 07:54:38 -0300
+ (Exim 4.90_1) (envelope-from <zhenzhong.duan@intel.com>)
+ id 1uMmku-0005E5-R2; Wed, 04 Jun 2025 07:58:04 -0400
+Received: from mgamail.intel.com ([198.175.65.14])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <zhenzhong.duan@intel.com>)
+ id 1uMmkt-0000nv-0N; Wed, 04 Jun 2025 07:58:04 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+ d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+ t=1749038283; x=1780574283;
+ h=from:to:cc:subject:date:message-id:in-reply-to:
+ references:mime-version:content-transfer-encoding;
+ bh=rfwYVDGlNpbzEzjq775sd9js/uc2F1Sn7IF6JJk8KZM=;
+ b=B1DAmIMmplz9yq1Pn+MZDbOp7d+BU9ZOZm7djDuU91uoDNbspiv48lK6
+ JqA0kEL3WFDp2yN8fLtnxdnX6XFf0KPDXUsZC8flpizEdIl7H9PBS9hD4
+ Y/c00WUzs/CHcHFG0DQGsGuwO/tBDgIpW9I3lCMIaVuNNLHZ847BqlKr/
+ c8GkfVMM+JdNB9GEGTpNoOHr3Lx6rClJLmKaytcvoJq2ahQ9ZskmlyUNf
+ PcqI0881h3ujW8t5huZcwK2oC3Zim1cDBGSF0/tHqakCp3yAhVdQhK2I1
+ h1cRe6qjpQ+lv+4Q+mRRuyk+KMmYAYMapjG1wkEo9a4nXsRaJd5MIDOfe g==;
+X-CSE-ConnectionGUID: BUq6P3dsS/qVFQoBu5qv4A==
+X-CSE-MsgGUID: PbpjoLvlRsmUuKaQah3MqA==
+X-IronPort-AV: E=McAfee;i="6800,10657,11454"; a="54915388"
+X-IronPort-AV: E=Sophos;i="6.16,209,1744095600"; d="scan'208";a="54915388"
+Received: from fmviesa005.fm.intel.com ([10.60.135.145])
+ by orvoesa106.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 04 Jun 2025 04:58:01 -0700
+X-CSE-ConnectionGUID: JVKkhhfTRQmFMYHAETW9Yw==
+X-CSE-MsgGUID: foIAhaxjTRmHCouE/9Ix1Q==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.16,209,1744095600"; d="scan'208";a="150048321"
+Received: from spr-s2600bt.bj.intel.com ([10.240.192.127])
+ by fmviesa005-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 04 Jun 2025 04:57:58 -0700
+From: Zhenzhong Duan <zhenzhong.duan@intel.com>
+To: qemu-devel@nongnu.org
+Cc: chao.p.peng@intel.com, david@redhat.com,
+ Zhenzhong Duan <zhenzhong.duan@intel.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Weiwei Li <liwei1518@gmail.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ qemu-riscv@nongnu.org (open list:RISC-V TCG CPUs)
+Subject: [PATCH v2 5/5] hw/riscv/riscv-iommu: Remove definition of
+ RISCVIOMMU[Pci|Sys]Class
+Date: Wed,  4 Jun 2025 19:54:00 +0800
+Message-Id: <20250604115400.98905-6-zhenzhong.duan@intel.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20250604115400.98905-1-zhenzhong.duan@intel.com>
+References: <20250604115400.98905-1-zhenzhong.duan@intel.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] target/riscv/kvm: implement SBI debug console (DBCN) calls
-To: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
- liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com,
- Peter Maydell <peter.maydell@linaro.org>,
- =?UTF-8?Q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>,
- Paolo Bonzini <pbonzini@redhat.com>
-References: <20240425155012.581366-1-dbarboza@ventanamicro.com>
- <eb6bd3d7-c66b-4300-9573-c29830a3aff4@linaro.org>
- <102e2e67-4c4d-4912-a892-20f5136f241a@ventanamicro.com>
- <47327da2-be3c-4aaa-ab3d-36e8d0c25185@linaro.org>
- <0eb5bcf9-bc2e-46c6-9f54-1514039557e0@ventanamicro.com>
- <37e6fecd-948a-4840-9189-918d44c0be72@linaro.org>
-Content-Language: en-US
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <37e6fecd-948a-4840-9189-918d44c0be72@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::935;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-ua1-x935.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+Received-SPF: pass client-ip=198.175.65.14;
+ envelope-from=zhenzhong.duan@intel.com; helo=mgamail.intel.com
+X-Spam_score_int: -44
+X-Spam_score: -4.5
+X-Spam_bar: ----
+X-Spam_report: (-4.5 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.128,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_MED=-2.3, RCVD_IN_VALIDITY_CERTIFIED_BLOCKED=0.001,
+ RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
+X-Mailman-Approved-At: Wed, 04 Jun 2025 08:50:38 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -112,236 +89,76 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
+RISCVIOMMUPciClass and RISCVIOMMUSysClass are defined with missed
+parent class, this may lead to corruption of parent class fields.
 
+It's lucky enough that parent_realize and parent_phases are not
+initialized or used until now, so just remove the definitions.
+They can be added back when really necessary.
 
-On 6/4/25 6:38 AM, Philippe Mathieu-Daudé wrote:
-> (+Marc-André and Paolo who I forgot to Cc first)
-> 
-> On 4/6/25 11:17, Daniel Henrique Barboza wrote:
->>
->>
->> On 6/4/25 4:32 AM, Philippe Mathieu-Daudé wrote:
->>> On 3/6/25 20:04, Daniel Henrique Barboza wrote:
->>>>
->>>>
->>>> On 6/3/25 10:19 AM, Philippe Mathieu-Daudé wrote:
->>>>> Hi Daniel,
->>>>>
->>>>> (now merged as commit a6b53378f537)
->>>>>
->>>>> On 25/4/24 17:50, Daniel Henrique Barboza wrote:
->>>>>> SBI defines a Debug Console extension "DBCN" that will, in time, replace
->>>>>> the legacy console putchar and getchar SBI extensions.
->>>>>>
->>>>>> The appeal of the DBCN extension is that it allows multiple bytes to be
->>>>>> read/written in the SBI console in a single SBI call.
->>>>>>
->>>>>> As far as KVM goes, the DBCN calls are forwarded by an in-kernel KVM
->>>>>> module to userspace. But this will only happens if the KVM module
->>>>>> actually supports this SBI extension and we activate it.
->>>>>>
->>>>>> We'll check for DBCN support during init time, checking if get-reg- list
->>>>>> is advertising KVM_RISCV_SBI_EXT_DBCN. In that case, we'll enable it via
->>>>>> kvm_set_one_reg() during kvm_arch_init_vcpu().
->>>>>>
->>>>>> Finally, change kvm_riscv_handle_sbi() to handle the incoming calls for
->>>>>> SBI_EXT_DBCN, reading and writing as required.
->>>>>>
->>>>>> A simple KVM guest with 'earlycon=sbi', running in an emulated RISC-V
->>>>>> host, takes around 20 seconds to boot without using DBCN. With this
->>>>>> patch we're taking around 14 seconds to boot due to the speed-up in the
->>>>>> terminal output.  There's no change in boot time if the guest isn't
->>>>>> using earlycon.
->>>>>>
->>>>>> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
->>>>>> ---
->>>>>>   target/riscv/kvm/kvm-cpu.c         | 111 ++++++++++++++++++++++++ +++++
->>>>>>   target/riscv/sbi_ecall_interface.h |  17 +++++
->>>>>>   2 files changed, 128 insertions(+)
->>>>>
->>>>>
->>>>>> +static void kvm_riscv_handle_sbi_dbcn(CPUState *cs, struct kvm_run *run)
->>>>>> +{
->>>>>> +    g_autofree uint8_t *buf = NULL;
->>>>>> +    RISCVCPU *cpu = RISCV_CPU(cs);
->>>>>> +    target_ulong num_bytes;
->>>>>> +    uint64_t addr;
->>>>>> +    unsigned char ch;
->>>>>> +    int ret;
->>>>>> +
->>>>>> +    switch (run->riscv_sbi.function_id) {
->>>>>> +    case SBI_EXT_DBCN_CONSOLE_READ:
->>>>>> +    case SBI_EXT_DBCN_CONSOLE_WRITE:
->>>>>> +        num_bytes = run->riscv_sbi.args[0];
->>>>>> +
->>>>>> +        if (num_bytes == 0) {
->>>>>> +            run->riscv_sbi.ret[0] = SBI_SUCCESS;
->>>>>> +            run->riscv_sbi.ret[1] = 0;
->>>>>> +            break;
->>>>>> +        }
->>>>>> +
->>>>>> +        addr = run->riscv_sbi.args[1];
->>>>>> +
->>>>>> +        /*
->>>>>> +         * Handle the case where a 32 bit CPU is running in a
->>>>>> +         * 64 bit addressing env.
->>>>>> +         */
->>>>>> +        if (riscv_cpu_mxl(&cpu->env) == MXL_RV32) {
->>>>>> +            addr |= (uint64_t)run->riscv_sbi.args[2] << 32;
->>>>>> +        }
->>>>>> +
->>>>>> +        buf = g_malloc0(num_bytes);
->>>>>> +
->>>>>> +        if (run->riscv_sbi.function_id == SBI_EXT_DBCN_CONSOLE_READ) {
->>>>>> +            ret = qemu_chr_fe_read_all(serial_hd(0)->be, buf, num_bytes);
->>>>>> +            if (ret < 0) {
->>>>>> +                error_report("SBI_EXT_DBCN_CONSOLE_READ: error when "
->>>>>> +                             "reading chardev");
->>>>>> +                exit(1);
->>>>>> +            }
->>>>>> +
->>>>>> +            cpu_physical_memory_write(addr, buf, ret);
->>>>>> +        } else {
->>>>>> +            cpu_physical_memory_read(addr, buf, num_bytes);
->>>>>> +
->>>>>> +            ret = qemu_chr_fe_write_all(serial_hd(0)->be, buf, num_bytes);
->>>>>> +            if (ret < 0) {
->>>>>> +                error_report("SBI_EXT_DBCN_CONSOLE_WRITE: error when "
->>>>>> +                             "writing chardev");
->>>>>> +                exit(1);
->>>>>> +            }
->>>>>> +        }
->>>>>> +
->>>>>> +        run->riscv_sbi.ret[0] = SBI_SUCCESS;
->>>>>> +        run->riscv_sbi.ret[1] = ret;
->>>>>> +        break;
->>>>>> +    case SBI_EXT_DBCN_CONSOLE_WRITE_BYTE:
->>>>>> +        ch = run->riscv_sbi.args[0];
->>>>>> +        ret = qemu_chr_fe_write(serial_hd(0)->be, &ch, sizeof(ch));
->>>>>> +
->>>>>> +        if (ret < 0) {
->>>>>> +            error_report("SBI_EXT_DBCN_CONSOLE_WRITE_BYTE: error when "
->>>>>> +                         "writing chardev");
->>>>>> +            exit(1);
->>>>>> +        }
->>>>>
->>>>> We are ignoring partial writes (non-blocking call returning 0 byte
->>>>> written), is that expected? If so, is it OK to add a comment we can
->>>>> safely discard not-yet-written DBCN_CONSOLE_WRITE_BYTE?
->>>>
->>>> Not sure what you meant. IIUC qemu_chr_fe_write() returns the number
->>>> of bytes consumed, 0 if no chardev is found, and -1 on error.
->>>
->>> I'm trying to address an issue Peter reported with qemu_chr_fe_write():
->>> https://lore.kernel.org/qemu-devel/ CAFEAcA_kEndvNtw4EHySXWwQPoGs029yAzZGGBcV=zGHaj7KUQ@mail.gmail.com/
->>>
->>> Basically upon introduction in commit cd18720a294 in 2013
->>> ("char: introduce a blocking version of qemu_chr_fe_write") the API
->>> contract was "Returns: the number of bytes consumed" which could be 0,
->>> so some frontends return 0 for "wrote no bytes".
->>>
->>> Later in 2016 in commit fa394ed6257 ("char: make some qemu_chr_fe
->>> skip if no driver") the API documentation was changed:
->>>
->>> - * Returns: the number of bytes consumed
->>> + * Returns: the number of bytes consumed (0 if no assicated CharDriver)
->>>
->>> After this commit, some frontends started to handle '<=0' as error,
->>> while 0 is not an error.
->>
->> I think I got the gist of it, thanks.
->>
->> For this particular console call the spec says:
->>
->> "This is a blocking SBI call and it will only return after writing the specified
->> byte to the debug console. It will also return, with SBI_ERR_FAILED, if there are
->> I/O errors."
->>
->>
->> So I think it pairs well with the blocking version qemu_chr_fe_write_all()
->> instead. I can do this change and get out of your way in changing the callers
->> of qemu_chr_fe_write().
-> 
-> I appreciate if you post the patch (this is a 1 line change, but what
-> matters here is the justification you just provided), but if you are
-> busy I can do it, I have enough information to write the commit desc.
+Signed-off-by: Zhenzhong Duan <zhenzhong.duan@intel.com>
+---
+ include/hw/riscv/iommu.h   | 6 ++----
+ hw/riscv/riscv-iommu-pci.c | 6 ------
+ hw/riscv/riscv-iommu-sys.c | 6 ------
+ 3 files changed, 2 insertions(+), 16 deletions(-)
 
-I can handle this change, don't worry about it. I'll send it out today.
-
-> 
->>
->> But I still have questions, hehe. This blocking version has the following
->> doc:
->>
->> "(...) Unlike @qemu_chr_fe_write, this function will block if the back end
->> cannot consume all of the data attempted to be written. This function is
->> thread-safe.
->>
->> Returns: the number of bytes consumed (0 if no associated Chardev)
->> or -1 on error."
->>
->> Do we have plans to change this API like we're doing with the non-blocking
->> version? Because being a blocking call that promises "block until all bytes
->> are written", and I have len  > 0, I don't expect a ret = 0 to be interpret
->> as "no bytes were written".  I am ok with ret = 0 being 'no associated chardev'
->> and not handling it as an error (for now at least) but I would like to confirm
->> that qemu_chr_fe_write_all() will not interpret ret = 0 as a zero byte write.
->> In other words, if for some reason other than "no chardev present" we ended up
->> with zero bytes written I would like a ret < 0 return.
-> 
-> Correct. Clarifying this method is in my TODO. What about this example:
-> 
-> - frontend wants to block to write 8 bytes
-> - backend writes 5 bytes, hits an unrecoverable link error
-> 
-> Should the backend support be responsible to re-establish link and retry
-> (when possible) to complete?
-> 
-> If we return -1 for error, could the frontend try to reconnect and write
-> the 8 bytes, ending with the first 5 bytes being transmitted twice?
-> 
-> Meanwhile I'm thinking to document as:
-> 
-> "Returns @len on success, or -1 on error (some data might has been written)".
-> 
-
-This make sense to me. It also goes in line with what Daniel mentioned in
-his reply. I'll make the change with this semantic in mind.
-
-
-Thanks,
-
-Daniel
-
-
-
-
-> Simpler API could be: "Returns 0 on success, otherwise -errno" but
-> we'd need to rework all the callers.
-> 
->>
->>
->> Thanks,
->>
->> Daniel
->>
->>
->>
->>>
->>>> Are you
->>>> saying that we should do a loop when there's no chardev found (ret = 0)
->>>> and wait a certain time until there's one available?
->>>>
->>>>
->>>> In fact, seeing how SBI_EXT_DBCN_CONSOLE_WRITE is written, I wonder if
->>>> we could use qemu_chr_fe_write_all() in this case too.
->>>
->>> This is certainly simpler.
->>>
->>> Regards,
->>>
->>> Phil.
->>
-> 
+diff --git a/include/hw/riscv/iommu.h b/include/hw/riscv/iommu.h
+index b03339d75c..8a8acfc3f0 100644
+--- a/include/hw/riscv/iommu.h
++++ b/include/hw/riscv/iommu.h
+@@ -30,14 +30,12 @@ typedef struct RISCVIOMMUState RISCVIOMMUState;
+ typedef struct RISCVIOMMUSpace RISCVIOMMUSpace;
+ 
+ #define TYPE_RISCV_IOMMU_PCI "riscv-iommu-pci"
+-OBJECT_DECLARE_TYPE(RISCVIOMMUStatePci, RISCVIOMMUPciClass, RISCV_IOMMU_PCI)
++OBJECT_DECLARE_SIMPLE_TYPE(RISCVIOMMUStatePci, RISCV_IOMMU_PCI)
+ typedef struct RISCVIOMMUStatePci RISCVIOMMUStatePci;
+-typedef struct RISCVIOMMUPciClass RISCVIOMMUPciClass;
+ 
+ #define TYPE_RISCV_IOMMU_SYS "riscv-iommu-device"
+-OBJECT_DECLARE_TYPE(RISCVIOMMUStateSys, RISCVIOMMUSysClass, RISCV_IOMMU_SYS)
++OBJECT_DECLARE_SIMPLE_TYPE(RISCVIOMMUStateSys, RISCV_IOMMU_SYS)
+ typedef struct RISCVIOMMUStateSys RISCVIOMMUStateSys;
+-typedef struct RISCVIOMMUSysClass RISCVIOMMUSysClass;
+ 
+ #define FDT_IRQ_TYPE_EDGE_LOW 1
+ 
+diff --git a/hw/riscv/riscv-iommu-pci.c b/hw/riscv/riscv-iommu-pci.c
+index 1f44eef74e..cdb4a7a8f0 100644
+--- a/hw/riscv/riscv-iommu-pci.c
++++ b/hw/riscv/riscv-iommu-pci.c
+@@ -68,12 +68,6 @@ typedef struct RISCVIOMMUStatePci {
+     RISCVIOMMUState  iommu;   /* common IOMMU state */
+ } RISCVIOMMUStatePci;
+ 
+-struct RISCVIOMMUPciClass {
+-    /*< public >*/
+-    DeviceRealize parent_realize;
+-    ResettablePhases parent_phases;
+-};
+-
+ /* interrupt delivery callback */
+ static void riscv_iommu_pci_notify(RISCVIOMMUState *iommu, unsigned vector)
+ {
+diff --git a/hw/riscv/riscv-iommu-sys.c b/hw/riscv/riscv-iommu-sys.c
+index 74e76b94a5..e34d00aef6 100644
+--- a/hw/riscv/riscv-iommu-sys.c
++++ b/hw/riscv/riscv-iommu-sys.c
+@@ -53,12 +53,6 @@ struct RISCVIOMMUStateSys {
+     uint8_t *msix_pba;
+ };
+ 
+-struct RISCVIOMMUSysClass {
+-    /*< public >*/
+-    DeviceRealize parent_realize;
+-    ResettablePhases parent_phases;
+-};
+-
+ static uint64_t msix_table_mmio_read(void *opaque, hwaddr addr,
+                                      unsigned size)
+ {
+-- 
+2.34.1
 
 
