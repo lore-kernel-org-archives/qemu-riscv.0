@@ -4,94 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D17CCC5B543
-	for <qemu-riscv@archiver.kernel.org>; Wed,  4 Jun 2025 09:39:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C515FC5B543
+	for <qemu-riscv@archiver.kernel.org>; Wed,  4 Jun 2025 09:41:18 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uMkZu-0006JW-Fs; Wed, 04 Jun 2025 05:38:34 -0400
+	id 1uMkc0-0007Ai-MC; Wed, 04 Jun 2025 05:40:44 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1uMkZs-0006I2-OJ
- for qemu-riscv@nongnu.org; Wed, 04 Jun 2025 05:38:32 -0400
-Received: from mail-wm1-x329.google.com ([2a00:1450:4864:20::329])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <philmd@linaro.org>) id 1uMkZq-0008KF-4q
- for qemu-riscv@nongnu.org; Wed, 04 Jun 2025 05:38:32 -0400
-Received: by mail-wm1-x329.google.com with SMTP id
- 5b1f17b1804b1-4508287895dso4637245e9.1
- for <qemu-riscv@nongnu.org>; Wed, 04 Jun 2025 02:38:29 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1749029908; x=1749634708; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=kJNbYih2BhiYcF2yhC06sYNzsVwoT8BqId9NFTFNV4o=;
- b=OvPLyCRCO1i5SRftFC7WqIOfJTn0WtSCRY8tg3ZwqICSEUzETGNtKz7mS/VJsye9In
- yqxiJYMilEuMSvuideUOj7+4S5Lxsz0ud4n1EoNykoBYwsLJt4AdArghPT+ufqWSypu+
- 8PXwCR8DLR3oYbOic9Hi8JCim/xX4r7ev8ui6w+iAWsOlTn54VhHiSQcTlc/Kz0FWyHc
- tREpHVYd9ZdwQEye3/CyjLEbPr1rO/cLm76+iVlYJZyePSGPOG9wWjlWRkZ+fwFHQYjw
- heoMDhWVvqnWFKUvOPaaW/gfZsX7F/v/hc18GWRH2AOe3rymfobX41RrNA7Vrmkr39xQ
- m68A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1749029908; x=1749634708;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=kJNbYih2BhiYcF2yhC06sYNzsVwoT8BqId9NFTFNV4o=;
- b=N5gp+q/EMM2maqTaJ6KAbcH6hMr26M/1YSL4jbX4mS7mOT2AQwLQNl8orlxcSpEEnJ
- g/QrmF7ql3XfQi5fmcBhu+rQ81bdSlzRZf/BRTBJWAYfouR3O4Mr8WTV5SNlZiRABXyw
- 250ALpRpiN+CE20LrAPbSirg6wOtXzLJT0TkJbaIWc96LMeg1d/wTAlm2lxXknyBltS5
- d0qen/zRgcmSnRsnL2SF1sAMw/B9IvQrq0qf1/UnyHfX0tv8kAnYZX8Bg8GVww4bUr2N
- lCU76HgBD1R+xvmrs5tOtDx8eDyu0Ez6mu9icJi/IugA331rPp3HJB3G73jdtrYfYqzl
- m7fg==
-X-Gm-Message-State: AOJu0YyREuMF8PYPxEondvjHgcNd1362Ro0EV+Be23EOcSi9brgtfp0x
- ZN0xiwQA7iugoBTdGdC0KQan4nvlB/8kNyrjYWA8EBjLjtXVTgoqe34nwK0xL8CZSYw=
-X-Gm-Gg: ASbGnctxIh0tdcAyI+T6+ftN6wXCb5kW8CQZ+eJHL/bJy2uQxjVOclL8t2S23H7tSgk
- 0Wqb5eOc448bPU8n5DBn1+zMqqQMaasjAD3pTrn5OPj2HfUWwbPH3C92kqHOdeNH4namPfVLEQo
- FETbz0xM/vLjBBz//I1H5C4i6r9ssqkKDKhb4QhEDpruLO1Fzlwg37bvkWvo2vKL3lLGJiK2gH4
- 7170BRzgCMvGwR6c9LXGDM+Ym6RrutSm+b9tjUAz0MR16Xvlu2uSAHdGFugUp4HFgJjqEbeYqUY
- 1dB5ZUTKeRVuwZ/yID9t3HWNl8keuoENrl8ZaoNIglD0Xcm3D+EUUagfJnDxu/RkQ9WK0thR+zD
- sAaJRZDnRo+WjZIKAng8=
-X-Google-Smtp-Source: AGHT+IEZ7xsJ2k6VLih5klOWD2HSL2NrnoE8RCo4oxmA7Yf71rfFYWSl4Q64YKsgcmUNa2XL6CLLXg==
-X-Received: by 2002:a5d:64ed:0:b0:3a4:eee4:cdec with SMTP id
- ffacd0b85a97d-3a514168e0cmr4683015f8f.6.1749029908252; 
- Wed, 04 Jun 2025 02:38:28 -0700 (PDT)
-Received: from [192.168.69.138] (88-187-86-199.subs.proxad.net.
- [88.187.86.199]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3a4efe73f3csm20764531f8f.42.2025.06.04.02.38.27
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 04 Jun 2025 02:38:27 -0700 (PDT)
-Message-ID: <37e6fecd-948a-4840-9189-918d44c0be72@linaro.org>
-Date: Wed, 4 Jun 2025 11:38:26 +0200
+ (Exim 4.90_1) (envelope-from <roan.richmond@codethink.co.uk>)
+ id 1uMkby-00079r-5v; Wed, 04 Jun 2025 05:40:42 -0400
+Received: from imap5.colo.codethink.co.uk ([78.40.148.171])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <roan.richmond@codethink.co.uk>)
+ id 1uMkbu-0000Do-Pj; Wed, 04 Jun 2025 05:40:41 -0400
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=codethink.co.uk; s=imap5-20230908; h=Sender:Content-Transfer-Encoding:
+ MIME-Version:Message-ID:Date:Subject:Cc:To:From:Reply-To:Content-Type:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Id:
+ List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=G8xerR2KLeQs4nhDiyLncfjRmfNoajejA0Ka6/GbCgc=; b=S8ct64yAPyh8H+fYA2kbkWiWqM
+ ePdoCIgNg6/Z/yASt2mUzzKURxU2HZbh8jAJmmQeuBs7jGydybh8aiM60NjTU/uSkJjKC6Z/H85xQ
+ zcAYF39LL5YBLwpN2v9mHquLZKNP+UHhha3Sjrr1nGUCgQXrcJs9iIlL1lUHYRbHd5BDz3/7ZwXLP
+ U/xac+jg2Vix7RdIQ65u1Oj/DTZ696cpMogrv2+/8LNXOJqvPCaieYwGIidqt8aaRpyd0a5SLQOxW
+ VzXr0MJ4JghRBYKf1jGTPHI26guq8vODtk+eaHBm04x9usKNZ88jKR7FjpRFN2i3VkpvUXBccxHIf
+ LyFE4HCw==;
+Received: from [167.98.27.226] (helo=codethink.office.codethink.co.uk)
+ by imap5.colo.codethink.co.uk with esmtpsa  (Exim 4.94.2 #2 (Debian))
+ id 1uMkbn-00C5Lb-IP; Wed, 04 Jun 2025 10:40:31 +0100
+From: Roan Richmond <roan.richmond@codethink.co.uk>
+To: qemu-riscv@nongnu.org
+Cc: palmer@dabbelt.com, alistair.francis@wdc.com, liwei1518@gmail.com,
+ dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com,
+ qemu-devel@nongnu.org, Roan Richmond <roan.richmond@codethink.co.uk>
+Subject: [PATCH v2] Add RISCV ZALASR extension
+Date: Wed,  4 Jun 2025 10:39:35 +0100
+Message-ID: <20250604093949.16070-1-roan.richmond@codethink.co.uk>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] target/riscv/kvm: implement SBI debug console (DBCN) calls
-To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>, qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, bmeng@tinylab.org,
- liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com,
- Peter Maydell <peter.maydell@linaro.org>,
- =?UTF-8?Q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>,
- Paolo Bonzini <pbonzini@redhat.com>
-References: <20240425155012.581366-1-dbarboza@ventanamicro.com>
- <eb6bd3d7-c66b-4300-9573-c29830a3aff4@linaro.org>
- <102e2e67-4c4d-4912-a892-20f5136f241a@ventanamicro.com>
- <47327da2-be3c-4aaa-ab3d-36e8d0c25185@linaro.org>
- <0eb5bcf9-bc2e-46c6-9f54-1514039557e0@ventanamicro.com>
-Content-Language: en-US
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>
-In-Reply-To: <0eb5bcf9-bc2e-46c6-9f54-1514039557e0@ventanamicro.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::329;
- envelope-from=philmd@linaro.org; helo=mail-wm1-x329.google.com
+Received-SPF: pass client-ip=78.40.148.171;
+ envelope-from=roan.richmond@codethink.co.uk; helo=imap5.colo.codethink.co.uk
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ RCVD_IN_VALIDITY_CERTIFIED_BLOCKED=0.001, RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001,
+ SPF_HELO_PASS=-0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -107,239 +68,188 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-(+Marc-André and Paolo who I forgot to Cc first)
+This is based on version v0.8.3 of the ZALASR specification [1].
+The specification is listed as in Frozen state [2].
 
-On 4/6/25 11:17, Daniel Henrique Barboza wrote:
-> 
-> 
-> On 6/4/25 4:32 AM, Philippe Mathieu-Daudé wrote:
->> On 3/6/25 20:04, Daniel Henrique Barboza wrote:
->>>
->>>
->>> On 6/3/25 10:19 AM, Philippe Mathieu-Daudé wrote:
->>>> Hi Daniel,
->>>>
->>>> (now merged as commit a6b53378f537)
->>>>
->>>> On 25/4/24 17:50, Daniel Henrique Barboza wrote:
->>>>> SBI defines a Debug Console extension "DBCN" that will, in time, 
->>>>> replace
->>>>> the legacy console putchar and getchar SBI extensions.
->>>>>
->>>>> The appeal of the DBCN extension is that it allows multiple bytes 
->>>>> to be
->>>>> read/written in the SBI console in a single SBI call.
->>>>>
->>>>> As far as KVM goes, the DBCN calls are forwarded by an in-kernel KVM
->>>>> module to userspace. But this will only happens if the KVM module
->>>>> actually supports this SBI extension and we activate it.
->>>>>
->>>>> We'll check for DBCN support during init time, checking if get-reg- 
->>>>> list
->>>>> is advertising KVM_RISCV_SBI_EXT_DBCN. In that case, we'll enable 
->>>>> it via
->>>>> kvm_set_one_reg() during kvm_arch_init_vcpu().
->>>>>
->>>>> Finally, change kvm_riscv_handle_sbi() to handle the incoming calls 
->>>>> for
->>>>> SBI_EXT_DBCN, reading and writing as required.
->>>>>
->>>>> A simple KVM guest with 'earlycon=sbi', running in an emulated RISC-V
->>>>> host, takes around 20 seconds to boot without using DBCN. With this
->>>>> patch we're taking around 14 seconds to boot due to the speed-up in 
->>>>> the
->>>>> terminal output.  There's no change in boot time if the guest isn't
->>>>> using earlycon.
->>>>>
->>>>> Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
->>>>> ---
->>>>>   target/riscv/kvm/kvm-cpu.c         | 111 ++++++++++++++++++++++++ 
->>>>> +++++
->>>>>   target/riscv/sbi_ecall_interface.h |  17 +++++
->>>>>   2 files changed, 128 insertions(+)
->>>>
->>>>
->>>>> +static void kvm_riscv_handle_sbi_dbcn(CPUState *cs, struct kvm_run 
->>>>> *run)
->>>>> +{
->>>>> +    g_autofree uint8_t *buf = NULL;
->>>>> +    RISCVCPU *cpu = RISCV_CPU(cs);
->>>>> +    target_ulong num_bytes;
->>>>> +    uint64_t addr;
->>>>> +    unsigned char ch;
->>>>> +    int ret;
->>>>> +
->>>>> +    switch (run->riscv_sbi.function_id) {
->>>>> +    case SBI_EXT_DBCN_CONSOLE_READ:
->>>>> +    case SBI_EXT_DBCN_CONSOLE_WRITE:
->>>>> +        num_bytes = run->riscv_sbi.args[0];
->>>>> +
->>>>> +        if (num_bytes == 0) {
->>>>> +            run->riscv_sbi.ret[0] = SBI_SUCCESS;
->>>>> +            run->riscv_sbi.ret[1] = 0;
->>>>> +            break;
->>>>> +        }
->>>>> +
->>>>> +        addr = run->riscv_sbi.args[1];
->>>>> +
->>>>> +        /*
->>>>> +         * Handle the case where a 32 bit CPU is running in a
->>>>> +         * 64 bit addressing env.
->>>>> +         */
->>>>> +        if (riscv_cpu_mxl(&cpu->env) == MXL_RV32) {
->>>>> +            addr |= (uint64_t)run->riscv_sbi.args[2] << 32;
->>>>> +        }
->>>>> +
->>>>> +        buf = g_malloc0(num_bytes);
->>>>> +
->>>>> +        if (run->riscv_sbi.function_id == 
->>>>> SBI_EXT_DBCN_CONSOLE_READ) {
->>>>> +            ret = qemu_chr_fe_read_all(serial_hd(0)->be, buf, 
->>>>> num_bytes);
->>>>> +            if (ret < 0) {
->>>>> +                error_report("SBI_EXT_DBCN_CONSOLE_READ: error when "
->>>>> +                             "reading chardev");
->>>>> +                exit(1);
->>>>> +            }
->>>>> +
->>>>> +            cpu_physical_memory_write(addr, buf, ret);
->>>>> +        } else {
->>>>> +            cpu_physical_memory_read(addr, buf, num_bytes);
->>>>> +
->>>>> +            ret = qemu_chr_fe_write_all(serial_hd(0)->be, buf, 
->>>>> num_bytes);
->>>>> +            if (ret < 0) {
->>>>> +                error_report("SBI_EXT_DBCN_CONSOLE_WRITE: error 
->>>>> when "
->>>>> +                             "writing chardev");
->>>>> +                exit(1);
->>>>> +            }
->>>>> +        }
->>>>> +
->>>>> +        run->riscv_sbi.ret[0] = SBI_SUCCESS;
->>>>> +        run->riscv_sbi.ret[1] = ret;
->>>>> +        break;
->>>>> +    case SBI_EXT_DBCN_CONSOLE_WRITE_BYTE:
->>>>> +        ch = run->riscv_sbi.args[0];
->>>>> +        ret = qemu_chr_fe_write(serial_hd(0)->be, &ch, sizeof(ch));
->>>>> +
->>>>> +        if (ret < 0) {
->>>>> +            error_report("SBI_EXT_DBCN_CONSOLE_WRITE_BYTE: error 
->>>>> when "
->>>>> +                         "writing chardev");
->>>>> +            exit(1);
->>>>> +        }
->>>>
->>>> We are ignoring partial writes (non-blocking call returning 0 byte
->>>> written), is that expected? If so, is it OK to add a comment we can
->>>> safely discard not-yet-written DBCN_CONSOLE_WRITE_BYTE?
->>>
->>> Not sure what you meant. IIUC qemu_chr_fe_write() returns the number
->>> of bytes consumed, 0 if no chardev is found, and -1 on error.
->>
->> I'm trying to address an issue Peter reported with qemu_chr_fe_write():
->> https://lore.kernel.org/qemu-devel/ 
->> CAFEAcA_kEndvNtw4EHySXWwQPoGs029yAzZGGBcV=zGHaj7KUQ@mail.gmail.com/
->>
->> Basically upon introduction in commit cd18720a294 in 2013
->> ("char: introduce a blocking version of qemu_chr_fe_write") the API
->> contract was "Returns: the number of bytes consumed" which could be 0,
->> so some frontends return 0 for "wrote no bytes".
->>
->> Later in 2016 in commit fa394ed6257 ("char: make some qemu_chr_fe
->> skip if no driver") the API documentation was changed:
->>
->> - * Returns: the number of bytes consumed
->> + * Returns: the number of bytes consumed (0 if no assicated CharDriver)
->>
->> After this commit, some frontends started to handle '<=0' as error,
->> while 0 is not an error.
-> 
-> I think I got the gist of it, thanks.
-> 
-> For this particular console call the spec says:
-> 
-> "This is a blocking SBI call and it will only return after writing the 
-> specified
-> byte to the debug console. It will also return, with SBI_ERR_FAILED, if 
-> there are
-> I/O errors."
-> 
-> 
-> So I think it pairs well with the blocking version qemu_chr_fe_write_all()
-> instead. I can do this change and get out of your way in changing the 
-> callers
-> of qemu_chr_fe_write().
+[1]: https://github.com/riscv/riscv-zalasr/tree/v0.8.3
+[2]: https://lf-riscv.atlassian.net/wiki/spaces/HOME/pages/16154882/All+RISC-V+Specifications+Under+Active+Development
 
-I appreciate if you post the patch (this is a 1 line change, but what
-matters here is the justification you just provided), but if you are
-busy I can do it, I have enough information to write the commit desc.
+Signed-off-by: Roan Richmond <roan.richmond@codethink.co.uk>
+---
+V2:
+  - rebased patch onto master branch
+  - added check for RV64() for Load Double, as pointed out by Alistair Palmer.
 
-> 
-> But I still have questions, hehe. This blocking version has the following
-> doc:
-> 
-> "(...) Unlike @qemu_chr_fe_write, this function will block if the back end
-> cannot consume all of the data attempted to be written. This function is
-> thread-safe.
-> 
-> Returns: the number of bytes consumed (0 if no associated Chardev)
-> or -1 on error."
-> 
-> Do we have plans to change this API like we're doing with the non-blocking
-> version? Because being a blocking call that promises "block until all bytes
-> are written", and I have len  > 0, I don't expect a ret = 0 to be interpret
-> as "no bytes were written".  I am ok with ret = 0 being 'no associated 
-> chardev'
-> and not handling it as an error (for now at least) but I would like to 
-> confirm
-> that qemu_chr_fe_write_all() will not interpret ret = 0 as a zero byte 
-> write.
-> In other words, if for some reason other than "no chardev present" we 
-> ended up
-> with zero bytes written I would like a ret < 0 return.
+In response to Alistair Palmer (https://lists.gnu.org/archive/html/qemu-riscv/2025-06/msg00010.html):
+"Aren't you missing a check to ensure RL is set?"
+  - There is no need to check if RL is set, as this is required by Spec for all Store Release instructions. 
 
-Correct. Clarifying this method is in my TODO. What about this example:
+ target/riscv/cpu.c                           |   1 +
+ target/riscv/insn32.decode                   |  10 ++
+ target/riscv/insn_trans/trans_rvzalasr.c.inc | 110 +++++++++++++++++++
+ target/riscv/translate.c                     |   1 +
+ 4 files changed, 122 insertions(+)
+ create mode 100644 target/riscv/insn_trans/trans_rvzalasr.c.inc
 
-- frontend wants to block to write 8 bytes
-- backend writes 5 bytes, hits an unrecoverable link error
-
-Should the backend support be responsible to re-establish link and retry
-(when possible) to complete?
-
-If we return -1 for error, could the frontend try to reconnect and write
-the 8 bytes, ending with the first 5 bytes being transmitted twice?
-
-Meanwhile I'm thinking to document as:
-
-"Returns @len on success, or -1 on error (some data might has been 
-written)".
-
-Simpler API could be: "Returns 0 on success, otherwise -errno" but
-we'd need to rework all the callers.
-
-> 
-> 
-> Thanks,
-> 
-> Daniel
-> 
-> 
-> 
->>
->>> Are you
->>> saying that we should do a loop when there's no chardev found (ret = 0)
->>> and wait a certain time until there's one available?
->>>
->>>
->>> In fact, seeing how SBI_EXT_DBCN_CONSOLE_WRITE is written, I wonder if
->>> we could use qemu_chr_fe_write_all() in this case too.
->>
->> This is certainly simpler.
->>
->> Regards,
->>
->> Phil.
-> 
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index 629ac37501..b52bbf0936 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -128,6 +128,7 @@ const RISCVIsaExtData isa_edata_arr[] = {
+     ISA_EXT_DATA_ENTRY(zabha, PRIV_VERSION_1_13_0, ext_zabha),
+     ISA_EXT_DATA_ENTRY(zacas, PRIV_VERSION_1_12_0, ext_zacas),
+     ISA_EXT_DATA_ENTRY(zama16b, PRIV_VERSION_1_13_0, ext_zama16b),
++    ISA_EXT_DATA_ENTRY(zalasr, PRIV_VERSION_1_12_0, ext_zalasr),
+     ISA_EXT_DATA_ENTRY(zalrsc, PRIV_VERSION_1_12_0, ext_zalrsc),
+     ISA_EXT_DATA_ENTRY(zawrs, PRIV_VERSION_1_12_0, ext_zawrs),
+     ISA_EXT_DATA_ENTRY(zfa, PRIV_VERSION_1_12_0, ext_zfa),
+diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
+index cd23b1f3a9..c848c0c1c5 100644
+--- a/target/riscv/insn32.decode
++++ b/target/riscv/insn32.decode
+@@ -1066,3 +1066,13 @@ amominu_h  11000 . . ..... ..... 001 ..... 0101111 @atom_st
+ amomaxu_h  11100 . . ..... ..... 001 ..... 0101111 @atom_st
+ amocas_b    00101 . . ..... ..... 000 ..... 0101111 @atom_st
+ amocas_h    00101 . . ..... ..... 001 ..... 0101111 @atom_st
++
++# *** Zalasr Standard Extension ***
++lb_aqrl  00110 . . ..... ..... 000 ..... 0101111 @atom_st
++lh_aqrl  00110 . . ..... ..... 001 ..... 0101111 @atom_st
++lw_aqrl  00110 . . ..... ..... 010 ..... 0101111 @atom_st
++ld_aqrl  00110 . . ..... ..... 011 ..... 0101111 @atom_st
++sb_aqrl  00111 . . ..... ..... 000 ..... 0101111 @atom_st
++sh_aqrl  00111 . . ..... ..... 001 ..... 0101111 @atom_st
++sw_aqrl  00111 . . ..... ..... 010 ..... 0101111 @atom_st
++sd_aqrl  00111 . . ..... ..... 011 ..... 0101111 @atom_st
+diff --git a/target/riscv/insn_trans/trans_rvzalasr.c.inc b/target/riscv/insn_trans/trans_rvzalasr.c.inc
+new file mode 100644
+index 0000000000..2f2934e731
+--- /dev/null
++++ b/target/riscv/insn_trans/trans_rvzalasr.c.inc
+@@ -0,0 +1,110 @@
++/*
++ * RISC-V translation routines for the ZALASR (Load-Aquire and Store-Release)
++ * Extension.
++ *
++ * Copyright (c) 2025 Roan Richmond, roan.richmond@codethink.co.uk
++ *
++ * This program is free software; you can redistribute it and/or modify it
++ * under the terms and conditions of the GNU General Public License,
++ * version 2 or later, as published by the Free Software Foundation.
++ *
++ * This program is distributed in the hope it will be useful, but WITHOUT
++ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
++ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
++ * more details.
++ *
++ * You should have received a copy of the GNU General Public License along with
++ * this program.  If not, see <http://www.gnu.org/licenses/>.
++ */
++
++#define REQUIRE_ZALASR(ctx) do {     \
++    if (!ctx->cfg_ptr->ext_zalasr) { \
++        return false;                \
++    }                                \
++} while (0)
++
++static bool gen_load_acquire(DisasContext *ctx, arg_lb_aqrl *a, MemOp memop)
++{
++    decode_save_opc(ctx, 0);
++
++    TCGv addr = get_address(ctx, a->rs1, 0);
++    TCGv dest = get_gpr(ctx, a->rd, EXT_NONE);
++    TCGBar bar = (a->rl) ? TCG_BAR_STRL : 0;
++
++    memop |= (ctx->cfg_ptr->ext_zama16b) ? MO_ATOM_WITHIN16 : 0;
++
++    tcg_gen_qemu_ld_tl(dest, addr, ctx->mem_idx, memop);
++    gen_set_gpr(ctx, a->rd, dest);
++
++    /* Add a memory barrier implied by AQ (mandatory) and RL (optional) */
++    tcg_gen_mb(TCG_MO_ALL | TCG_BAR_LDAQ | bar);
++
++    return true;
++}
++
++static bool trans_lb_aqrl(DisasContext *ctx, arg_lb_aqrl *a)
++{
++    REQUIRE_ZALASR(ctx);
++    return gen_load_acquire(ctx, a, (MO_ALIGN | MO_SB));
++}
++
++static bool trans_lh_aqrl(DisasContext *ctx, arg_lh_aqrl *a)
++{
++    REQUIRE_ZALASR(ctx);
++    return gen_load_acquire(ctx, a, (MO_ALIGN | MO_TESW));
++}
++
++static bool trans_lw_aqrl(DisasContext *ctx, arg_lw_aqrl *a)
++{
++    REQUIRE_ZALASR(ctx);
++    return gen_load_acquire(ctx, a, (MO_ALIGN | MO_TESL));
++}
++
++static bool trans_ld_aqrl(DisasContext *ctx, arg_ld_aqrl *a)
++{
++    REQUIRE_64BIT(ctx);
++    REQUIRE_ZALASR(ctx);
++    return gen_load_acquire(ctx, a, (MO_ALIGN | MO_TEUQ));
++}
++
++static bool gen_store_release(DisasContext *ctx, arg_sb_aqrl *a, MemOp memop)
++{
++    decode_save_opc(ctx, 0);
++
++    TCGv addr = get_address(ctx, a->rs1, 0);
++    TCGv data = get_gpr(ctx, a->rs2, EXT_NONE);
++    TCGBar bar = (a->aq) ? TCG_BAR_LDAQ : 0;
++
++    memop |= (ctx->cfg_ptr->ext_zama16b) ? MO_ATOM_WITHIN16 : 0;
++
++    /* Add a memory barrier implied by RL (mandatory) and AQ (optional) */
++    tcg_gen_mb(TCG_MO_ALL | TCG_BAR_STRL | bar);
++
++    tcg_gen_qemu_st_tl(data, addr, ctx->mem_idx, memop);
++    return true;
++}
++
++static bool trans_sb_aqrl(DisasContext *ctx, arg_sb_aqrl *a)
++{
++    REQUIRE_ZALASR(ctx);
++    return gen_store_release(ctx, a, (MO_ALIGN | MO_SB));
++}
++
++static bool trans_sh_aqrl(DisasContext *ctx, arg_sh_aqrl *a)
++{
++    REQUIRE_ZALASR(ctx);
++    return gen_store_release(ctx, a, (MO_ALIGN | MO_TESW));
++}
++
++static bool trans_sw_aqrl(DisasContext *ctx, arg_sw_aqrl *a)
++{
++    REQUIRE_ZALASR(ctx);
++    return gen_store_release(ctx, a, (MO_ALIGN | MO_TESL));
++}
++
++static bool trans_sd_aqrl(DisasContext *ctx, arg_sd_aqrl *a)
++{
++    REQUIRE_64BIT(ctx);
++    REQUIRE_ZALASR(ctx);
++    return gen_store_release(ctx, a, (MO_ALIGN | MO_TEUQ));
++}
+diff --git a/target/riscv/translate.c b/target/riscv/translate.c
+index d7a6de02df..4cd2d68e46 100644
+--- a/target/riscv/translate.c
++++ b/target/riscv/translate.c
+@@ -1183,6 +1183,7 @@ static uint32_t opcode_at(DisasContextBase *dcbase, target_ulong pc)
+ #include "insn_trans/trans_rvzicond.c.inc"
+ #include "insn_trans/trans_rvzacas.c.inc"
+ #include "insn_trans/trans_rvzabha.c.inc"
++#include "insn_trans/trans_rvzalasr.c.inc"
+ #include "insn_trans/trans_rvzawrs.c.inc"
+ #include "insn_trans/trans_rvzicbo.c.inc"
+ #include "insn_trans/trans_rvzimop.c.inc"
+-- 
+2.43.0
 
 
