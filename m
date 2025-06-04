@@ -4,80 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6992FC5B559
-	for <qemu-riscv@archiver.kernel.org>; Wed,  4 Jun 2025 02:57:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CB284C5AD49
+	for <qemu-riscv@archiver.kernel.org>; Wed,  4 Jun 2025 02:57:46 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uMeIo-0002D8-PS; Tue, 03 Jun 2025 22:56:30 -0400
+	id 1uMeId-00029t-QK; Tue, 03 Jun 2025 22:56:19 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <joel.stan@gmail.com>)
- id 1uMeIm-0002Cp-Sk; Tue, 03 Jun 2025 22:56:28 -0400
-Received: from mail-pl1-x636.google.com ([2607:f8b0:4864:20::636])
+ id 1uMeIb-00029B-UU; Tue, 03 Jun 2025 22:56:17 -0400
+Received: from mail-pl1-x633.google.com ([2607:f8b0:4864:20::633])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <joel.stan@gmail.com>)
- id 1uMeIl-0000Qv-Ei; Tue, 03 Jun 2025 22:56:28 -0400
-Received: by mail-pl1-x636.google.com with SMTP id
- d9443c01a7336-2351227b098so44027535ad.2; 
- Tue, 03 Jun 2025 19:56:26 -0700 (PDT)
+ id 1uMeIa-0000Pg-Cg; Tue, 03 Jun 2025 22:56:17 -0400
+Received: by mail-pl1-x633.google.com with SMTP id
+ d9443c01a7336-23035b3edf1so57517665ad.3; 
+ Tue, 03 Jun 2025 19:56:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1749005785; x=1749610585; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1749005774; x=1749610574; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:sender:from:to:cc:subject:date
  :message-id:reply-to;
- bh=mZb1PN7GT5tBM4E+RD0BlKVebwzNtkntVesD3GuzMrw=;
- b=U4+2PdQEXfSGF251F/ngzwTr7tXpYxV9CkczzN3hTOIzSZ2eM5tGx3SeBix6zFj3zj
- /uFzvc1v2WYfOOkCNQVhezxHJRpsvzbcMdEF7MCcbczNuoSpcLm4kNLE67Zf5ITSsep2
- eiJM5GWIYckP8rKIKWyxvM7cU5y1Xx0jKhoxVNExwW66SgLwtgP80KF9xP9+KK4j8JEU
- BTzpXzLzK7GH1Xv5r+DT+6JJZrhZQfwapvWHs+PAKseKE5OSxmBQ9t0p6WsxS4lljK69
- KjpPVF8RLpv3DElh3/EQY68y0R72aV7AhGeWUfK9ZyyjWTGMiLWbLMENRCfCP0vuI3uP
- uVVQ==
+ bh=2TW2qvDv71buLaLj/Jgf+ppXxchJib0Z3gTkRO9ucyE=;
+ b=APW3pJaHjDRlJGT6M/RA/HcTT1PP2VV+5lKFbrr+GAk0Ajvtm5jxlx/elp5gFMwlUi
+ 3MtZOyspHTi65hwv2pymRZ/ty2axfVLQC3cwqMcJ4FBwRU7UPutPuq1A2g/17BkLXNOs
+ eKT3EoUNf0+B4IqzXi1Cm0uER0/ypCQ3Cum3nsNlydgrOnfE7vJaDKO7GXmXLNeMMYPK
+ 1GeP4ixo3QaTiVobHXHfa5FTultV3sHicRK8LOVKJkWP8K0X87BYXfqDbN82Q2DQKKwZ
+ 0K4z9mvAqeBEiwtLleLeYqqydcxaOcm3SM1hbI0o/e1xLIZocWdRCdRjwjgfD0/yHRu5
+ UkJw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1749005785; x=1749610585;
+ d=1e100.net; s=20230601; t=1749005774; x=1749610574;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:sender:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=mZb1PN7GT5tBM4E+RD0BlKVebwzNtkntVesD3GuzMrw=;
- b=np8ZTgv/nmjd0pebpRaXSHTGIUP/MFkZ2fU6GOw0i+8v4ueNFSO1tWNcvmWHyn/qci
- yOpvJ4kx/3oqmQXegqfTFsgYKBdk59PYh8UNTJl7uX8u90RZNO18r2JlrCsf1dh60i3H
- rA7f/+0AzyZeLNeoO+6N5Zw4eWI+EFUE5ZLF/F1ET5gHSHTyHamSFR8Qb6Vv4uKmyfpF
- F4Jv8WH4yDguU37fCK30lnfBIeBZzq3y/K4hV6bf1wyJQpx5Obb5GTVvDQYqSXSCXCMa
- E0W2VstTTzXQereZackYy9IU9c5pc2bin4lpu2oRHPH1aEvBVwcCSfImLDSuDtkS7Zms
- EQog==
+ bh=2TW2qvDv71buLaLj/Jgf+ppXxchJib0Z3gTkRO9ucyE=;
+ b=K/OrHcjIn6Gm624PsUvkuM1eRmbiB5E9IGKAapqxnKFTHuHtM92KxXbWR+8MCn//qm
+ fvk/3ZX13GuO7VD0oyXydnBcqmQDJg6NnfMLPJwULZlCJOlK7y7qLzn/GXjuOO8BocSv
+ BzyRJqepPZ1XGgUkIURxMq8KO4bn29X0sElLbih1QJD59aTwulG+7KqRxVQkExmcakks
+ Hr18RDLqIFJXPjogTGOFgFVOMHjSA2O8T8w7nJtF/b7lMVEEhS9j2G+U854JSEUV6Tt6
+ dxbA/hy2Nejbvgcu00Lo8DM92LA2eeeSvOIZrrCA+O7Pywctuea48jTyS4o5ojWB3Pg2
+ QoDg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUZlxJJBu9rrpM/GDliWPrxKukgGWpy7l1nAnvaWv6V6jKG5u9Q0yaxhMd+QUMbj6ACUgNKt0+CHMCS@nongnu.org
-X-Gm-Message-State: AOJu0Yy984YRyy6W12nHEuZLg6LB3PrFLJ696J0LM4Z8bD3uTh77V9I/
- RTLD2gmTxQxeMfFYsA4bL9gGfwfmC7wZ+FGLPDgb9xZUXhRcM3V58DnpWbjSGB65
-X-Gm-Gg: ASbGncszsRNxphIFDvjq66YdhxLCLcPoxX7UGDKK8pWN65izCyRiKgDOyJp+nxScxeg
- VHmsbA+tmR7pftBdug+jfFNtETxvH1yD4Kc7LuvUYKIFxxHlFBGKxfkA2MyR5swbsD9TaVGxGNd
- d05gjIKfE8/o3FHutcx+rzCH13KkIZ9OKuvylvG/eDBVwewJCnvwpjcZZd1XUtCCdZmOVqzsJBE
- 5xdZhVBZh4rzG8h8rP1DAXyMaabshPH6I8u5I2j2J97lc31q6RFpv7NnbKyAfqJDIU9zvW16cow
- kv9tei/9xlIkOK876LZk0GG686c5tBQqRK631F1/QhDUaZ+5vILg4lOyvG7x4w==
-X-Google-Smtp-Source: AGHT+IFcTlOVQJh7u63++qJTY0fw1RSrBjukHzN+g9JLGVr5lwCWAcoXBe6/sLLtYo52bBJlJxsRZA==
-X-Received: by 2002:a17:903:228a:b0:220:df73:b639 with SMTP id
- d9443c01a7336-235e11e74d0mr16848525ad.36.1749005785662; 
- Tue, 03 Jun 2025 19:56:25 -0700 (PDT)
+ AJvYcCVGscPa4RAUh4QEF7Giit/MD1PnS9rAI8Pgfs/MDkrzGWIb8BWDhCOpB1dn/zefOBI1GGK66b+3qmnO@nongnu.org
+X-Gm-Message-State: AOJu0YxtzKIivynrSpImJREDsBIvr9FPCpx3eORlHC5vVYOHucT44aIi
+ 3LapH6xlLFCJUFHvzqrA3hxo3ZM9fvEaDKc4+dc7cwUeMyjZcYtRhbDk
+X-Gm-Gg: ASbGncuO3mMG2KvTdLbgUdh3awzfATcmAoJSaPv4PQKPjUNuEy0yQx0NgP3UL/DU1s0
+ DDcvh+N2n8vy3QC4ey60hMNgac00EWMJoVaWHeH/nMfhLmk4cNGYlmYDzWKiRA3HDN/MaXa92YF
+ aGZefqmmy2i85hCgnVX6ZhJFfz/TiwMXlpLMV172Bono5yMrpQSQcJa8p103VFXlZ+iE6hZni1m
+ jDHuXE1DJHOtc3Esd/4B5gcFh/PtzkN13oQaEwybfJE57gLOgCctuM1gScTgZ1Q59m55DGQuWYa
+ YXDlTJFuHsr4K4rv6ysvmjAeXMuYR0cbL9KUDmyX8r/3+7h8/TJnGQgES7f6zg==
+X-Google-Smtp-Source: AGHT+IE5nQMp5rPZ9tpEiPdq6ffxx6p/6RGswvmuZeosf0Pi5lVRHSNDlous3NxYm0iYD4WAS2ap3w==
+X-Received: by 2002:a17:903:2291:b0:234:c8f6:1afb with SMTP id
+ d9443c01a7336-235e12c4defmr16200855ad.0.1749005774607; 
+ Tue, 03 Jun 2025 19:56:14 -0700 (PDT)
 Received: from donnager-debian.. ([45.124.203.19])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-23506d21818sm94457555ad.254.2025.06.03.19.56.23
+ d9443c01a7336-23506d21818sm94457555ad.254.2025.06.03.19.56.12
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 03 Jun 2025 19:56:25 -0700 (PDT)
+ Tue, 03 Jun 2025 19:56:13 -0700 (PDT)
 From: Joel Stanley <joel@jms.id.au>
 To: Alistair Francis <alistair.francis@wdc.com>,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 Cc: qemu-riscv@nongnu.org,
 	qemu-devel@nongnu.org
-Subject: [PATCH v2 11/12] hw/riscv/virt: Use setprop_sized_cells for iommu
-Date: Wed,  4 Jun 2025 12:24:47 +0930
-Message-ID: <20250604025450.85327-12-joel@jms.id.au>
+Subject: [PATCH v2 07/12] hw/riscv/virt: Use setprop_sized_cells for virtio
+Date: Wed,  4 Jun 2025 12:24:43 +0930
+Message-ID: <20250604025450.85327-8-joel@jms.id.au>
 X-Mailer: git-send-email 2.47.2
 In-Reply-To: <20250604025450.85327-1-joel@jms.id.au>
 References: <20250604025450.85327-1-joel@jms.id.au>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::636;
- envelope-from=joel.stan@gmail.com; helo=mail-pl1-x636.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::633;
+ envelope-from=joel.stan@gmail.com; helo=mail-pl1-x633.google.com
 X-Spam_score_int: -19
 X-Spam_score: -2.0
 X-Spam_bar: --
@@ -112,23 +112,24 @@ Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
 Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 Signed-off-by: Joel Stanley <joel@jms.id.au>
 ---
- hw/riscv/virt.c | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
+ hw/riscv/virt.c | 4 +---
+ 1 file changed, 1 insertion(+), 3 deletions(-)
 
 diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-index 4fa2bad24804..67490c5c693a 100644
+index 67e60eec1f00..851c7cc82ad5 100644
 --- a/hw/riscv/virt.c
 +++ b/hw/riscv/virt.c
-@@ -1088,8 +1088,7 @@ static void create_fdt_iommu_sys(RISCVVirtState *s, uint32_t irq_chip,
-     qemu_fdt_setprop_cell(fdt, iommu_node, "#iommu-cells", 1);
-     qemu_fdt_setprop_cell(fdt, iommu_node, "phandle", iommu_phandle);
+@@ -856,9 +856,7 @@ static void create_fdt_virtio(RISCVVirtState *s, uint32_t irq_virtio_phandle)
  
--    qemu_fdt_setprop_cells(fdt, iommu_node, "reg",
--                           addr >> 32, addr, size >> 32, size);
-+    qemu_fdt_setprop_sized_cells(fdt, iommu_node, "reg", 2, addr, 2, size);
-     qemu_fdt_setprop_cell(fdt, iommu_node, "interrupt-parent", irq_chip);
- 
-     qemu_fdt_setprop_cells(fdt, iommu_node, "interrupts",
+         qemu_fdt_add_subnode(ms->fdt, name);
+         qemu_fdt_setprop_string(ms->fdt, name, "compatible", "virtio,mmio");
+-        qemu_fdt_setprop_cells(ms->fdt, name, "reg",
+-                               0x0, addr,
+-                               0x0, size);
++        qemu_fdt_setprop_sized_cells(ms->fdt, name, "reg", 2, addr, 2, size);
+         qemu_fdt_setprop_cell(ms->fdt, name, "interrupt-parent",
+             irq_virtio_phandle);
+         if (s->aia_type == VIRT_AIA_TYPE_NONE) {
 -- 
 2.47.2
 
