@@ -4,77 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AF42FC5B543
-	for <qemu-riscv@archiver.kernel.org>; Wed,  4 Jun 2025 12:51:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9ECA3C5B549
+	for <qemu-riscv@archiver.kernel.org>; Wed,  4 Jun 2025 14:17:13 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uMnZw-0005oD-M0; Wed, 04 Jun 2025 08:50:49 -0400
+	id 1uMovK-0006b2-Pd; Wed, 04 Jun 2025 10:16:58 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <zhenzhong.duan@intel.com>)
- id 1uMmku-0005E5-R2; Wed, 04 Jun 2025 07:58:04 -0400
-Received: from mgamail.intel.com ([198.175.65.14])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <zhenzhong.duan@intel.com>)
- id 1uMmkt-0000nv-0N; Wed, 04 Jun 2025 07:58:04 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1749038283; x=1780574283;
- h=from:to:cc:subject:date:message-id:in-reply-to:
- references:mime-version:content-transfer-encoding;
- bh=rfwYVDGlNpbzEzjq775sd9js/uc2F1Sn7IF6JJk8KZM=;
- b=B1DAmIMmplz9yq1Pn+MZDbOp7d+BU9ZOZm7djDuU91uoDNbspiv48lK6
- JqA0kEL3WFDp2yN8fLtnxdnX6XFf0KPDXUsZC8flpizEdIl7H9PBS9hD4
- Y/c00WUzs/CHcHFG0DQGsGuwO/tBDgIpW9I3lCMIaVuNNLHZ847BqlKr/
- c8GkfVMM+JdNB9GEGTpNoOHr3Lx6rClJLmKaytcvoJq2ahQ9ZskmlyUNf
- PcqI0881h3ujW8t5huZcwK2oC3Zim1cDBGSF0/tHqakCp3yAhVdQhK2I1
- h1cRe6qjpQ+lv+4Q+mRRuyk+KMmYAYMapjG1wkEo9a4nXsRaJd5MIDOfe g==;
-X-CSE-ConnectionGUID: BUq6P3dsS/qVFQoBu5qv4A==
-X-CSE-MsgGUID: PbpjoLvlRsmUuKaQah3MqA==
-X-IronPort-AV: E=McAfee;i="6800,10657,11454"; a="54915388"
-X-IronPort-AV: E=Sophos;i="6.16,209,1744095600"; d="scan'208";a="54915388"
-Received: from fmviesa005.fm.intel.com ([10.60.135.145])
- by orvoesa106.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 04 Jun 2025 04:58:01 -0700
-X-CSE-ConnectionGUID: JVKkhhfTRQmFMYHAETW9Yw==
-X-CSE-MsgGUID: foIAhaxjTRmHCouE/9Ix1Q==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.16,209,1744095600"; d="scan'208";a="150048321"
-Received: from spr-s2600bt.bj.intel.com ([10.240.192.127])
- by fmviesa005-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 04 Jun 2025 04:57:58 -0700
-From: Zhenzhong Duan <zhenzhong.duan@intel.com>
-To: qemu-devel@nongnu.org
-Cc: chao.p.peng@intel.com, david@redhat.com,
- Zhenzhong Duan <zhenzhong.duan@intel.com>,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Weiwei Li <liwei1518@gmail.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- qemu-riscv@nongnu.org (open list:RISC-V TCG CPUs)
-Subject: [PATCH v2 5/5] hw/riscv/riscv-iommu: Remove definition of
- RISCVIOMMU[Pci|Sys]Class
-Date: Wed,  4 Jun 2025 19:54:00 +0800
-Message-Id: <20250604115400.98905-6-zhenzhong.duan@intel.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20250604115400.98905-1-zhenzhong.duan@intel.com>
-References: <20250604115400.98905-1-zhenzhong.duan@intel.com>
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1uMovH-0006Zh-Sq
+ for qemu-riscv@nongnu.org; Wed, 04 Jun 2025 10:16:55 -0400
+Received: from mail-pg1-x52f.google.com ([2607:f8b0:4864:20::52f])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1uMovF-0003WM-HI
+ for qemu-riscv@nongnu.org; Wed, 04 Jun 2025 10:16:55 -0400
+Received: by mail-pg1-x52f.google.com with SMTP id
+ 41be03b00d2f7-af6a315b491so5718005a12.1
+ for <qemu-riscv@nongnu.org>; Wed, 04 Jun 2025 07:16:51 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=ventanamicro.com; s=google; t=1749046610; x=1749651410; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=91CSEGpuWTGEwrNZTiP/RIeMSz/gKpPRsK9PPutKk90=;
+ b=SjjEyK0XoLbagx9ez1uceHwya+t1kH8xQjZUsd8xVpzK1UqbWoSgC+BEEqYjVdkJs8
+ oKmCVWlCtK2XJbPOrd8IC0XW+SkHNyTgL3D9mfgCC92Y8OyZwh+KHutBX5uEPD7r0J0X
+ 6ivtUbyrXMa/5pwMlLwFFLWPOve8x6XeDlYdszn6hZpt/uPwJoq1H8nlxFqIkiC14iJS
+ LoQT5k5S9i8ZDZ2XjpkT8a5/hLkMbrgsv8yfUYkIkf8I25rBKgxg0O39iUXzXpeoKpHH
+ NK2wQh3OxDVCjx5dtdjq1mrf+ozIERRDAQrloBU3mMZ2H6QihjLY6CWmnDHi9McjsQRC
+ fdvQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1749046610; x=1749651410;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=91CSEGpuWTGEwrNZTiP/RIeMSz/gKpPRsK9PPutKk90=;
+ b=M5CNsCMJW6YT9vLi5JT8iBQww+4x2CQSV2IOnHjyTNqkC2n3M/LBC+emu7ZSL66Ev8
+ FMZcWwxvtZkz6+IV1fOtlM+2+v+bMRZoKFyDMwk88clDOtZqe9SSRD2qXvWQdeX5b+1b
+ djXzgHra23v3XhAstMMZhFym9+q2AKjKj7au7+LJZtR71NDkwcWtjP685o9Qj3cF62sk
+ i0DC8ohJOkea3jY3ezOc83XWGDw9M8z1xxFNzGKldH6DKPLqIRQH9NgcxSBTQjjOp6II
+ H91bdIRZmtYOG4Wp0Jime495K8IjotNK3A4RieEs4whVmoTbyCZqbX/OOx5e65AwC6hM
+ SP2g==
+X-Gm-Message-State: AOJu0YxHlyzfkjMA8ghe2k666kukzGcdn2dtkMYvXDv6mEhJLE1avhii
+ qedK+Md673evBfqjm/WOiiLrx9n5f87yBV+0p1l6Zr6dg49bS2O61FKz23UnAUOcCBc=
+X-Gm-Gg: ASbGncudjKmoqEjkhxMji3ZtBiy6l+p9mljVDH7qqGm7s2rIOAfszE3Q5SAy3eNdJFp
+ Jqaxa1t5nxWuDdVwHu6qksW1SYvPYqwKhnFbGehyNGUxebzmgVI1xbtV/HQL645GmXE3EkHNJ/B
+ YFWT9V2bh6zZHGVMZwvmOzyK/KOgG85/VHr0qGl37L6bU08TAoNJOx7fdagzdIUFbFFc0uU2Es8
+ 5lO8Q14qzYn4URDye22BFHvzw7sARJyVwPrPrp8Ii++yFC5bCQBm7XD8jCY/z3o0sYCc9rqSXhy
+ gv2uMOM0Oq3/7cqSpkXLn/0JWeMZLBYtIf2VanwJD9WIbbW8FSAlu+rerh1ZUUUQRsE=
+X-Google-Smtp-Source: AGHT+IHkLsxFEVYGWtmffmXCQGKgmqJ5BguFuuzF5k3sp58ADicj0JXCWi+hZ+Q3RAZL3l3vI5bNMg==
+X-Received: by 2002:a17:90b:3d8a:b0:311:a4d6:30f8 with SMTP id
+ 98e67ed59e1d1-3130ccce9c5mr4841233a91.13.1749046610151; 
+ Wed, 04 Jun 2025 07:16:50 -0700 (PDT)
+Received: from [192.168.68.110] ([177.188.133.196])
+ by smtp.gmail.com with ESMTPSA id
+ 98e67ed59e1d1-313156df664sm1087186a91.29.2025.06.04.07.16.47
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 04 Jun 2025 07:16:49 -0700 (PDT)
+Message-ID: <4b5f47bd-b9f1-4207-adb0-ab46ef4a25eb@ventanamicro.com>
+Date: Wed, 4 Jun 2025 11:16:46 -0300
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=198.175.65.14;
- envelope-from=zhenzhong.duan@intel.com; helo=mgamail.intel.com
-X-Spam_score_int: -44
-X-Spam_score: -4.5
-X-Spam_bar: ----
-X-Spam_report: (-4.5 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.128,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_MED=-2.3, RCVD_IN_VALIDITY_CERTIFIED_BLOCKED=0.001,
- RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+User-Agent: Mozilla Thunderbird
+Subject: Re: [qemu PATCH 0/3] target/riscv: add missing named features
+To: qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, liwei1518@gmail.com,
+ zhiwei_liu@linux.alibaba.com, palmer@dabbelt.com
+References: <20250529202315.1684198-1-dbarboza@ventanamicro.com>
+Content-Language: en-US
+From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+In-Reply-To: <20250529202315.1684198-1-dbarboza@ventanamicro.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::52f;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pg1-x52f.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
-X-Mailman-Approved-At: Wed, 04 Jun 2025 08:50:38 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -89,76 +101,34 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-RISCVIOMMUPciClass and RISCVIOMMUSysClass are defined with missed
-parent class, this may lead to corruption of parent class fields.
+Alistair,
 
-It's lucky enough that parent_realize and parent_phases are not
-initialized or used until now, so just remove the definitions.
-They can be added back when really necessary.
 
-Signed-off-by: Zhenzhong Duan <zhenzhong.duan@intel.com>
----
- include/hw/riscv/iommu.h   | 6 ++----
- hw/riscv/riscv-iommu-pci.c | 6 ------
- hw/riscv/riscv-iommu-sys.c | 6 ------
- 3 files changed, 2 insertions(+), 16 deletions(-)
+This series is breaking bios-table-test on patches 1 and 2 because we're
+adding more stuff in the default riscv,isa and I forgot to update the
+bios table.
 
-diff --git a/include/hw/riscv/iommu.h b/include/hw/riscv/iommu.h
-index b03339d75c..8a8acfc3f0 100644
---- a/include/hw/riscv/iommu.h
-+++ b/include/hw/riscv/iommu.h
-@@ -30,14 +30,12 @@ typedef struct RISCVIOMMUState RISCVIOMMUState;
- typedef struct RISCVIOMMUSpace RISCVIOMMUSpace;
- 
- #define TYPE_RISCV_IOMMU_PCI "riscv-iommu-pci"
--OBJECT_DECLARE_TYPE(RISCVIOMMUStatePci, RISCVIOMMUPciClass, RISCV_IOMMU_PCI)
-+OBJECT_DECLARE_SIMPLE_TYPE(RISCVIOMMUStatePci, RISCV_IOMMU_PCI)
- typedef struct RISCVIOMMUStatePci RISCVIOMMUStatePci;
--typedef struct RISCVIOMMUPciClass RISCVIOMMUPciClass;
- 
- #define TYPE_RISCV_IOMMU_SYS "riscv-iommu-device"
--OBJECT_DECLARE_TYPE(RISCVIOMMUStateSys, RISCVIOMMUSysClass, RISCV_IOMMU_SYS)
-+OBJECT_DECLARE_SIMPLE_TYPE(RISCVIOMMUStateSys, RISCV_IOMMU_SYS)
- typedef struct RISCVIOMMUStateSys RISCVIOMMUStateSys;
--typedef struct RISCVIOMMUSysClass RISCVIOMMUSysClass;
- 
- #define FDT_IRQ_TYPE_EDGE_LOW 1
- 
-diff --git a/hw/riscv/riscv-iommu-pci.c b/hw/riscv/riscv-iommu-pci.c
-index 1f44eef74e..cdb4a7a8f0 100644
---- a/hw/riscv/riscv-iommu-pci.c
-+++ b/hw/riscv/riscv-iommu-pci.c
-@@ -68,12 +68,6 @@ typedef struct RISCVIOMMUStatePci {
-     RISCVIOMMUState  iommu;   /* common IOMMU state */
- } RISCVIOMMUStatePci;
- 
--struct RISCVIOMMUPciClass {
--    /*< public >*/
--    DeviceRealize parent_realize;
--    ResettablePhases parent_phases;
--};
--
- /* interrupt delivery callback */
- static void riscv_iommu_pci_notify(RISCVIOMMUState *iommu, unsigned vector)
- {
-diff --git a/hw/riscv/riscv-iommu-sys.c b/hw/riscv/riscv-iommu-sys.c
-index 74e76b94a5..e34d00aef6 100644
---- a/hw/riscv/riscv-iommu-sys.c
-+++ b/hw/riscv/riscv-iommu-sys.c
-@@ -53,12 +53,6 @@ struct RISCVIOMMUStateSys {
-     uint8_t *msix_pba;
- };
- 
--struct RISCVIOMMUSysClass {
--    /*< public >*/
--    DeviceRealize parent_realize;
--    ResettablePhases parent_phases;
--};
--
- static uint64_t msix_table_mmio_read(void *opaque, hwaddr addr,
-                                      unsigned size)
- {
--- 
-2.34.1
+I'll send a v2. Thanks,
+
+
+Daniel
+
+On 5/29/25 5:23 PM, Daniel Henrique Barboza wrote:
+> Hi,
+> 
+> These simple patches add two missing named features in riscv,isa.  Third
+> patch is a doc change I figured was worth doing.
+> 
+> Drew, as far as Server SoC Reference platform goes, we don't have
+> 'sdext'. I guess we'll have to postpone the Server Soc Ref work for now.
+> 
+> Daniel Henrique Barboza (3):
+>    target/riscv/cpu.c: add 'sdtrig' in riscv,isa
+>    target/riscv/cpu.c: add 'ssstrict' to riscv,isa
+>    target/riscv/cpu.c: do better with 'named features' doc
+> 
+>   target/riscv/cpu.c | 16 ++++++++++++++--
+>   1 file changed, 14 insertions(+), 2 deletions(-)
+> 
 
 
