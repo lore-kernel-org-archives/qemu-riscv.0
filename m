@@ -4,94 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C01F1C5B543
-	for <qemu-riscv@archiver.kernel.org>; Thu,  5 Jun 2025 13:25:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AD3B8C5B543
+	for <qemu-riscv@archiver.kernel.org>; Thu,  5 Jun 2025 14:23:02 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uNAaR-0006eU-Gj; Thu, 05 Jun 2025 09:24:51 -0400
+	id 1uNBTr-0006ny-TS; Thu, 05 Jun 2025 10:22:08 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1uNAaM-0006by-4s
- for qemu-riscv@nongnu.org; Thu, 05 Jun 2025 09:24:46 -0400
-Received: from mail-pl1-x636.google.com ([2607:f8b0:4864:20::636])
+ (Exim 4.90_1) (envelope-from <alexghiti@rivosinc.com>)
+ id 1uNBTW-0006lm-GE
+ for qemu-riscv@nongnu.org; Thu, 05 Jun 2025 10:21:51 -0400
+Received: from mail-pl1-x629.google.com ([2607:f8b0:4864:20::629])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1uNAaK-0004qA-Ag
- for qemu-riscv@nongnu.org; Thu, 05 Jun 2025 09:24:45 -0400
-Received: by mail-pl1-x636.google.com with SMTP id
- d9443c01a7336-2350fc2591dso7975055ad.1
- for <qemu-riscv@nongnu.org>; Thu, 05 Jun 2025 06:24:43 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <alexghiti@rivosinc.com>)
+ id 1uNBTO-0001e4-Ou
+ for qemu-riscv@nongnu.org; Thu, 05 Jun 2025 10:21:46 -0400
+Received: by mail-pl1-x629.google.com with SMTP id
+ d9443c01a7336-23035b3edf1so9833845ad.3
+ for <qemu-riscv@nongnu.org>; Thu, 05 Jun 2025 07:21:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1749129882; x=1749734682; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=dy4790QiAapTU/9dINaY6YYy/qZEB1KGF6g9bVd7Ixo=;
- b=F+7FNtkQI/zWdagp2P3fV7Qd52AHminnHScSjHUcrTrFxYy0LFuh5rQgtn8VzHRARq
- 6u30uiPcJm2LXrIP0wyfgLG9CLgGFJPJoMXtRTT1BW7uAXog/S485Nen7TL7PFfY3A63
- +6QqWRkOMxSvMC4DnbLDyxanzkOpmZLM3ITrKOWLkDihM+Xx/ZpCmUShNioSaVTTNkfx
- 2xb4OxlJpzy8Odl+zfTrfJ9sIYWEMjUoqhRIGdgEepCzmZRJ9J/kJ6gUnLRAf/ZAkff8
- PADtrqDkZdi0tJKAgsIAWTdJMKW4LRQLDYtQ0DjIqNXQ635KjtyWTWn51K8Fh3rCGD37
- 40Jg==
+ d=rivosinc-com.20230601.gappssmtp.com; s=20230601; t=1749133294; x=1749738094;
+ darn=nongnu.org; 
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=KXXXFrJFdk4huw55fmj7c8efWKURKDsWycIpd79ULng=;
+ b=3bM0bRHjNlrvXTKe2SSrnkxGSYRmH/ryaZyRy06Jkh01AIgv///TARXA6W030I+43I
+ betaEK96G70/naoxM73nXY+8Gi4p8Ir0t3I8xwRsTiRyO1cRA9eIVfRoBsXoDRvnNQju
+ iYxo4mVy+ZsM9GscdXVCt2rvhwvw5xoK571SAWMBWWAwAU63MvODMOfz1IUyipAyudB3
+ 48q/02Jg+YvpjhXYoQdbH86AasmmzFp854HcyBexhQyc++XhLhjD4lbVbIueG+6k8hVc
+ GPaxgSOGEfPQprIVpDJO4+l1w393Wb45GjkMbcVsjqH3xj7Ao+tLR5n58bGlBw88LJQ6
+ 5wJg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1749129882; x=1749734682;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=dy4790QiAapTU/9dINaY6YYy/qZEB1KGF6g9bVd7Ixo=;
- b=Xwf5rQ84NCj76hEPiRtEQanpkT2Ht2bVFnc06XO2M958EGkaKuh5hh4oXcZasdbZa2
- 2z1vRAZ1C7X7h537a82YBWChRZT/IcFEmDFmH31TrsTyTAaaIIMAoExKmAijekRDKWmI
- DHPq43XSfmqKbwOpJObfCbLIoXQJYtqXrZnAVS1zLg9w0RjIZVRtxapAiC+tUHkj1shk
- GNlS11OBe4oGcAMeYybmUZVAmSlk0eMuWLQRlimZXwcpvBFv42y+grrNbVBBgx1BCT6z
- /3ZSKeznQoY8XWPCrOY47j4tM9eNf0flVy6Q55YoArxZOLXzgkr2EgTLaOPihjkbBxKn
- Dleg==
+ d=1e100.net; s=20230601; t=1749133294; x=1749738094;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=KXXXFrJFdk4huw55fmj7c8efWKURKDsWycIpd79ULng=;
+ b=V6baxqx51VwlbKNZRt6sw19H31yt3bzP8OZtzfXg860s4xY2bfeaqibMPpXjiApmrI
+ cj5nUJNOSVXLF5WOAwa+LeWhZKOVHDt5Bk400tbOx+EtqjjSHipTCNs8iN00Gdpkx09v
+ zWMYxOza6WtalHlkALy11UvxAQxgycxkF/sD+KT+JVY74gqWHjM38CpaL60oK1HAWjb/
+ xXGcTUYZ5m2lBGGZLb2rY9izT3XQtE/YgSbJxWBMAKcegPZ+u+Aoy4CDfiahprc/kNhF
+ +ontX0fUPe7vHkV41YHoDjNdGJv1Bj78T6ML59fQenwovUIzj3rVQpEfUY6hgxhz92nh
+ urAQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUkjtFHHPf/YSl/M73ekgDjia5SIB6V+p+HOntYKsrqOgPMZdkuzL8k6/kOuJE5VAAOd0qLKTgxeEzq@nongnu.org
-X-Gm-Message-State: AOJu0YzhjkmYt0x1A0r1fzMAgtVs99J0f/oI3ibsJ3XkagM17iUuklyN
- 5QJhIxrKJoX79r90kJwUnYnOzyiClkM4L3zMakad4vt4AOLVxz40IhKx7Wof7nlJ+Go=
-X-Gm-Gg: ASbGncu6EgVBnKWxAnRV4upzgNTt1PxqjBA6jiLwOHlkVtOVM+xJI5JpUz5hMGtlzPM
- wifLCnR2mOkHIS0VyNCKjQddsfZT3fIAWK7/0NDEQ9Uny9uC8uneBEnw5BBTQC12ZISK7KdhiM+
- rZDyHNAQXzhRUpN6fwhoKfFt1iRQgJ+RvM4JfrWIq7aqwF4aGJ17rrjneLHy4mQ6Cc2q7S+qW1j
- ZgcBjYtjp7m9oEC0QJB+5Wl6iWwaFPnWoygcw9mUx3363NG2dRQRf1ckLTLuc7hFSz+SvfOVwCI
- 2WYWcdKrp0Nwru0B8n/GskH+1B/kd2iDKG5VCoWHs2NaeD13yuGijZfYfpu4j/fMEcE=
-X-Google-Smtp-Source: AGHT+IFS246kGsrx8xYDplw7j4Xv5CtqdZknErJI9Y0VejgLzXLRT+jBgX/i0av9TE0ZZ8Ak8q9s0g==
-X-Received: by 2002:a17:902:c94f:b0:231:9817:6ec1 with SMTP id
- d9443c01a7336-235f166aa57mr49969275ad.17.1749129882366; 
- Thu, 05 Jun 2025 06:24:42 -0700 (PDT)
-Received: from [192.168.68.110] ([177.188.133.196])
- by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-235e5aafa94sm24213645ad.186.2025.06.05.06.24.38
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 05 Jun 2025 06:24:41 -0700 (PDT)
-Message-ID: <3d1b8880-bf87-453c-9e16-06312337ffcb@ventanamicro.com>
-Date: Thu, 5 Jun 2025 10:24:36 -0300
+ AJvYcCVcs7LszSa9lPddV92Gnu5tGk01XA7GynQ+nZjfyjMjptYuxu+mMvYsfEnSYhn5R+8qkAvGzcUIMPFY@nongnu.org
+X-Gm-Message-State: AOJu0YyvepIcxC3a8eqZbMCloE5By56ql5FfSw9RznSY/zmjL0vAWzff
+ V3MnnHfTGsL99M55rT2rR1u5JlO/Tw+UJqk+nAnbfGUL8vOwWJhPuAYlc7cP0fh1I84=
+X-Gm-Gg: ASbGncu7GOVWPGChMiKTD7zSbET+Mbg9KCaLaGbgnn+Lrc3CWCQ67FoWARClH1ZeWXY
+ aPDLx+q5FKwXvNsVWUKvHZ0PGXPAqu2fL2NxVIuormN3d9jk6mqYJ4ouoN5CvmLlu5PU5/GGPf+
+ k5VKfA5VNzShW2vuNGzh+eHcbwpTXPDsngXezKZkhtt9TqVscqthEKcaVitTgWAPs3Y+gcMjilw
+ nSRug85BJuVY6/B7CqWnfq+4YEwjSFqPvZCVMgEyLckmA/x0Q+yNbl6WiHQd64KlMFSTZIWPpbl
+ CaI5djeAda/PkSczRd7n0awt0pL5mMjEEe6wJ0FqEjZr3birVVTXjAodXWnQFkQygXXiNZC5XaW
+ BI8QctHLk7sWN827zs23JCA4=
+X-Google-Smtp-Source: AGHT+IHcuPtKDtunOBQLZwVBjEums2tZ1GaCA0uqS/LNriZM34KwVEfMS1XZDBHo+zqWQMljH9n4Eg==
+X-Received: by 2002:a17:902:e845:b0:234:b41e:37a2 with SMTP id
+ d9443c01a7336-235e1485b45mr96099825ad.11.1749133294513; 
+ Thu, 05 Jun 2025 07:21:34 -0700 (PDT)
+Received: from alexghiti.ba.rivosinc.com (alexghiti.eu.rivosinc.com.
+ [141.95.202.232]) by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-23506cd3407sm120464055ad.141.2025.06.05.07.21.31
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 05 Jun 2025 07:21:34 -0700 (PDT)
+From: Alexandre Ghiti <alexghiti@rivosinc.com>
+To: Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Bin Meng <bin.meng@windriver.com>, Weiwei Li <liwei1518@gmail.com>,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, debug@rivosinc.com,
+ qemu-riscv@nongnu.org, qemu-devel@nongnu.org
+Cc: Alexandre Ghiti <alexghiti@rivosinc.com>
+Subject: [PATCH] target: riscv: Add Svrsw60t59b extension support
+Date: Thu,  5 Jun 2025 14:21:26 +0000
+Message-Id: <20250605142126.1939798-1-alexghiti@rivosinc.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 5/5] hw/riscv/riscv-iommu: Remove definition of
- RISCVIOMMU[Pci|Sys]Class
-To: Zhenzhong Duan <zhenzhong.duan@intel.com>, qemu-devel@nongnu.org
-Cc: chao.p.peng@intel.com, david@redhat.com,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, Weiwei Li
- <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- "open list:RISC-V TCG CPUs" <qemu-riscv@nongnu.org>
-References: <20250605102311.148171-1-zhenzhong.duan@intel.com>
- <20250605102311.148171-6-zhenzhong.duan@intel.com>
-Content-Language: en-US
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <20250605102311.148171-6-zhenzhong.duan@intel.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::636;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pl1-x636.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::629;
+ envelope-from=alexghiti@rivosinc.com; helo=mail-pl1-x629.google.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -108,81 +103,140 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
+The Svrsw60t59b extension allows to free the PTE reserved bits 60 and 59
+for software to use.
 
+Signed-off-by: Alexandre Ghiti <alexghiti@rivosinc.com>
+---
 
-On 6/5/25 7:23 AM, Zhenzhong Duan wrote:
-> RISCVIOMMUPciClass and RISCVIOMMUSysClass are defined with missed
-> parent class, class_init on them may corrupt their parent class
-> fields.
-> 
-> It's lucky that parent_realize and parent_phases are not initialized
-> or used until now, so just remove the definitions. They can be added
-> back when really necessary.
-> 
-> Signed-off-by: Zhenzhong Duan <zhenzhong.duan@intel.com>
-> ---
+Changes in v2:
+ - Add support for IOMMU
+ - Make svrsw60t59b depend on sv39 (deepak)
 
-Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Open question: svrsw60t59b in IOMMU should also depend on 64bit, but I
+did not find an easy to way in riscv_iommu_realize() to detect that, how
+should I do?
 
->   include/hw/riscv/iommu.h   | 6 ++----
->   hw/riscv/riscv-iommu-pci.c | 6 ------
->   hw/riscv/riscv-iommu-sys.c | 6 ------
->   3 files changed, 2 insertions(+), 16 deletions(-)
-> 
-> diff --git a/include/hw/riscv/iommu.h b/include/hw/riscv/iommu.h
-> index b03339d75c..8a8acfc3f0 100644
-> --- a/include/hw/riscv/iommu.h
-> +++ b/include/hw/riscv/iommu.h
-> @@ -30,14 +30,12 @@ typedef struct RISCVIOMMUState RISCVIOMMUState;
->   typedef struct RISCVIOMMUSpace RISCVIOMMUSpace;
->   
->   #define TYPE_RISCV_IOMMU_PCI "riscv-iommu-pci"
-> -OBJECT_DECLARE_TYPE(RISCVIOMMUStatePci, RISCVIOMMUPciClass, RISCV_IOMMU_PCI)
-> +OBJECT_DECLARE_SIMPLE_TYPE(RISCVIOMMUStatePci, RISCV_IOMMU_PCI)
->   typedef struct RISCVIOMMUStatePci RISCVIOMMUStatePci;
-> -typedef struct RISCVIOMMUPciClass RISCVIOMMUPciClass;
->   
->   #define TYPE_RISCV_IOMMU_SYS "riscv-iommu-device"
-> -OBJECT_DECLARE_TYPE(RISCVIOMMUStateSys, RISCVIOMMUSysClass, RISCV_IOMMU_SYS)
-> +OBJECT_DECLARE_SIMPLE_TYPE(RISCVIOMMUStateSys, RISCV_IOMMU_SYS)
->   typedef struct RISCVIOMMUStateSys RISCVIOMMUStateSys;
-> -typedef struct RISCVIOMMUSysClass RISCVIOMMUSysClass;
->   
->   #define FDT_IRQ_TYPE_EDGE_LOW 1
->   
-> diff --git a/hw/riscv/riscv-iommu-pci.c b/hw/riscv/riscv-iommu-pci.c
-> index 1f44eef74e..cdb4a7a8f0 100644
-> --- a/hw/riscv/riscv-iommu-pci.c
-> +++ b/hw/riscv/riscv-iommu-pci.c
-> @@ -68,12 +68,6 @@ typedef struct RISCVIOMMUStatePci {
->       RISCVIOMMUState  iommu;   /* common IOMMU state */
->   } RISCVIOMMUStatePci;
->   
-> -struct RISCVIOMMUPciClass {
-> -    /*< public >*/
-> -    DeviceRealize parent_realize;
-> -    ResettablePhases parent_phases;
-> -};
-> -
->   /* interrupt delivery callback */
->   static void riscv_iommu_pci_notify(RISCVIOMMUState *iommu, unsigned vector)
->   {
-> diff --git a/hw/riscv/riscv-iommu-sys.c b/hw/riscv/riscv-iommu-sys.c
-> index 74e76b94a5..e34d00aef6 100644
-> --- a/hw/riscv/riscv-iommu-sys.c
-> +++ b/hw/riscv/riscv-iommu-sys.c
-> @@ -53,12 +53,6 @@ struct RISCVIOMMUStateSys {
->       uint8_t *msix_pba;
->   };
->   
-> -struct RISCVIOMMUSysClass {
-> -    /*< public >*/
-> -    DeviceRealize parent_realize;
-> -    ResettablePhases parent_phases;
-> -};
-> -
->   static uint64_t msix_table_mmio_read(void *opaque, hwaddr addr,
->                                        unsigned size)
->   {
+ hw/riscv/riscv-iommu-bits.h       | 1 +
+ hw/riscv/riscv-iommu.c            | 3 ++-
+ target/riscv/cpu.c                | 2 ++
+ target/riscv/cpu_bits.h           | 3 ++-
+ target/riscv/cpu_cfg_fields.h.inc | 1 +
+ target/riscv/cpu_helper.c         | 3 ++-
+ target/riscv/tcg/tcg-cpu.c        | 6 ++++++
+ 7 files changed, 16 insertions(+), 3 deletions(-)
+
+diff --git a/hw/riscv/riscv-iommu-bits.h b/hw/riscv/riscv-iommu-bits.h
+index 1017d73fc6..47fe01bee5 100644
+--- a/hw/riscv/riscv-iommu-bits.h
++++ b/hw/riscv/riscv-iommu-bits.h
+@@ -79,6 +79,7 @@ struct riscv_iommu_pq_record {
+ #define RISCV_IOMMU_CAP_SV39            BIT_ULL(9)
+ #define RISCV_IOMMU_CAP_SV48            BIT_ULL(10)
+ #define RISCV_IOMMU_CAP_SV57            BIT_ULL(11)
++#define RISCV_IOMMU_CAP_SVRSW60T59B     BIT_ULL(14)
+ #define RISCV_IOMMU_CAP_SV32X4          BIT_ULL(16)
+ #define RISCV_IOMMU_CAP_SV39X4          BIT_ULL(17)
+ #define RISCV_IOMMU_CAP_SV48X4          BIT_ULL(18)
+diff --git a/hw/riscv/riscv-iommu.c b/hw/riscv/riscv-iommu.c
+index a877e5da84..36eda95a1c 100644
+--- a/hw/riscv/riscv-iommu.c
++++ b/hw/riscv/riscv-iommu.c
+@@ -2355,7 +2355,8 @@ static void riscv_iommu_realize(DeviceState *dev, Error **errp)
+     }
+     if (s->enable_g_stage) {
+         s->cap |= RISCV_IOMMU_CAP_SV32X4 | RISCV_IOMMU_CAP_SV39X4 |
+-                  RISCV_IOMMU_CAP_SV48X4 | RISCV_IOMMU_CAP_SV57X4;
++                  RISCV_IOMMU_CAP_SV48X4 | RISCV_IOMMU_CAP_SV57X4 |
++                  RISCV_IOMMU_CAP_SVRSW60T59B;
+     }
+ 
+     if (s->hpm_cntrs > 0) {
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index 629ac37501..13f1f56d95 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -228,6 +228,7 @@ const RISCVIsaExtData isa_edata_arr[] = {
+     ISA_EXT_DATA_ENTRY(svinval, PRIV_VERSION_1_12_0, ext_svinval),
+     ISA_EXT_DATA_ENTRY(svnapot, PRIV_VERSION_1_12_0, ext_svnapot),
+     ISA_EXT_DATA_ENTRY(svpbmt, PRIV_VERSION_1_12_0, ext_svpbmt),
++    ISA_EXT_DATA_ENTRY(svrsw60t59b, PRIV_VERSION_1_13_0, ext_svrsw60t59b),
+     ISA_EXT_DATA_ENTRY(svukte, PRIV_VERSION_1_13_0, ext_svukte),
+     ISA_EXT_DATA_ENTRY(svvptc, PRIV_VERSION_1_13_0, ext_svvptc),
+     ISA_EXT_DATA_ENTRY(xtheadba, PRIV_VERSION_1_11_0, ext_xtheadba),
+@@ -1282,6 +1283,7 @@ const RISCVCPUMultiExtConfig riscv_cpu_extensions[] = {
+     MULTI_EXT_CFG_BOOL("svinval", ext_svinval, false),
+     MULTI_EXT_CFG_BOOL("svnapot", ext_svnapot, false),
+     MULTI_EXT_CFG_BOOL("svpbmt", ext_svpbmt, false),
++    MULTI_EXT_CFG_BOOL("svrsw60t59b", ext_svrsw60t59b, false),
+     MULTI_EXT_CFG_BOOL("svvptc", ext_svvptc, true),
+ 
+     MULTI_EXT_CFG_BOOL("zicntr", ext_zicntr, true),
+diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
+index a30317c617..51eb7114da 100644
+--- a/target/riscv/cpu_bits.h
++++ b/target/riscv/cpu_bits.h
+@@ -675,7 +675,8 @@ typedef enum {
+ #define PTE_SOFT            0x300 /* Reserved for Software */
+ #define PTE_PBMT            0x6000000000000000ULL /* Page-based memory types */
+ #define PTE_N               0x8000000000000000ULL /* NAPOT translation */
+-#define PTE_RESERVED        0x1FC0000000000000ULL /* Reserved bits */
++#define PTE_RESERVED(svrsw60t59b)		\
++		(svrsw60t59b ? 0x07C0000000000000ULL : 0x1FC0000000000000ULL) /* Reserved bits */
+ #define PTE_ATTR            (PTE_N | PTE_PBMT) /* All attributes bits */
+ 
+ /* Page table PPN shift amount */
+diff --git a/target/riscv/cpu_cfg_fields.h.inc b/target/riscv/cpu_cfg_fields.h.inc
+index 59f134a419..ab61c1ccf2 100644
+--- a/target/riscv/cpu_cfg_fields.h.inc
++++ b/target/riscv/cpu_cfg_fields.h.inc
+@@ -57,6 +57,7 @@ BOOL_FIELD(ext_svadu)
+ BOOL_FIELD(ext_svinval)
+ BOOL_FIELD(ext_svnapot)
+ BOOL_FIELD(ext_svpbmt)
++BOOL_FIELD(ext_svrsw60t59b)
+ BOOL_FIELD(ext_svvptc)
+ BOOL_FIELD(ext_svukte)
+ BOOL_FIELD(ext_zdinx)
+diff --git a/target/riscv/cpu_helper.c b/target/riscv/cpu_helper.c
+index 2ed69d7c2d..3479a62cc7 100644
+--- a/target/riscv/cpu_helper.c
++++ b/target/riscv/cpu_helper.c
+@@ -1309,6 +1309,7 @@ static int get_physical_address(CPURISCVState *env, hwaddr *physical,
+     bool svade = riscv_cpu_cfg(env)->ext_svade;
+     bool svadu = riscv_cpu_cfg(env)->ext_svadu;
+     bool adue = svadu ? env->menvcfg & MENVCFG_ADUE : !svade;
++    bool svrsw60t59b = riscv_cpu_cfg(env)->ext_svrsw60t59b;
+ 
+     if (first_stage && two_stage && env->virt_enabled) {
+         pbmte = pbmte && (env->henvcfg & HENVCFG_PBMTE);
+@@ -1376,7 +1377,7 @@ static int get_physical_address(CPURISCVState *env, hwaddr *physical,
+         if (riscv_cpu_sxl(env) == MXL_RV32) {
+             ppn = pte >> PTE_PPN_SHIFT;
+         } else {
+-            if (pte & PTE_RESERVED) {
++            if (pte & PTE_RESERVED(svrsw60t59b)) {
+                 qemu_log_mask(LOG_GUEST_ERROR, "%s: reserved bits set in PTE: "
+                               "addr: 0x%" HWADDR_PRIx " pte: 0x" TARGET_FMT_lx "\n",
+                               __func__, pte_addr, pte);
+diff --git a/target/riscv/tcg/tcg-cpu.c b/target/riscv/tcg/tcg-cpu.c
+index 305912b8dd..886006abc3 100644
+--- a/target/riscv/tcg/tcg-cpu.c
++++ b/target/riscv/tcg/tcg-cpu.c
+@@ -804,6 +804,12 @@ void riscv_cpu_validate_set_extensions(RISCVCPU *cpu, Error **errp)
+         cpu->cfg.ext_ssctr = false;
+     }
+ 
++    if (cpu->cfg.ext_svrsw60t59b &&
++        (!cpu->cfg.mmu || mcc->def->misa_mxl_max == MXL_RV32)) {
++        error_setg(errp, "svrsw60t59b is not supported on RV32 and MMU-less platforms");
++        return;
++    }
++
+     /*
+      * Disable isa extensions based on priv spec after we
+      * validated and set everything we need.
+-- 
+2.34.1
 
 
