@@ -4,78 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8B95DC5AE59
-	for <qemu-riscv@archiver.kernel.org>; Thu,  5 Jun 2025 07:55:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 31C8BC5B543
+	for <qemu-riscv@archiver.kernel.org>; Thu,  5 Jun 2025 09:00:48 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uN5RG-0008Nm-W0; Thu, 05 Jun 2025 03:55:03 -0400
+	id 1uN6SW-00038d-Oa; Thu, 05 Jun 2025 05:00:24 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
- id 1uN5RD-0008NB-Ag
- for qemu-riscv@nongnu.org; Thu, 05 Jun 2025 03:54:59 -0400
-Received: from mail-oo1-xc31.google.com ([2607:f8b0:4864:20::c31])
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1uN6SU-000389-Ga
+ for qemu-riscv@nongnu.org; Thu, 05 Jun 2025 05:00:22 -0400
+Received: from mail-vs1-xe42.google.com ([2607:f8b0:4864:20::e42])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
- id 1uN5RB-0001x6-NU
- for qemu-riscv@nongnu.org; Thu, 05 Jun 2025 03:54:59 -0400
-Received: by mail-oo1-xc31.google.com with SMTP id
- 006d021491bc7-60634f82c77so191536eaf.1
- for <qemu-riscv@nongnu.org>; Thu, 05 Jun 2025 00:54:56 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1uN6SS-0005Z7-PQ
+ for qemu-riscv@nongnu.org; Thu, 05 Jun 2025 05:00:22 -0400
+Received: by mail-vs1-xe42.google.com with SMTP id
+ ada2fe7eead31-4e2b5ffb932so288316137.0
+ for <qemu-riscv@nongnu.org>; Thu, 05 Jun 2025 02:00:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1749110095; x=1749714895; darn=nongnu.org;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=HF0IElq1Rav86RADaCO6kDBYd4JFsL65+E44asCoz2g=;
- b=IYFT/bCH6DK9eWa1NtBUue8P5jYnaqnOPZdmBwtpn83GOUnwaybhCaBQ29asRgL9R4
- cVidipuKjRZCa+nZLk3nBapqFpLpmaQK7tI0JM00zawwNhTRv3wWWQ1s8agNH6SyhBxR
- yw9v4Ael7uahyHRzA9DZYBD8cNMXbwSErh9pIQW8GWyV9gBCT75eeMNEd6AGADM2AJjr
- PJQCVgdkyj6oQvkwRZspMtyB09eKpPqkPPDuTkhRXfM8mBboCt9op+D0UnxAC9Edzb5O
- dOhd0ijdDFKBJeJaxL1X/v1xJOj0Sb33yZZQ4R/3zVGvUeFFxtO3R22yaThaa9pN+eF6
- 3YPA==
+ d=ventanamicro.com; s=google; t=1749114019; x=1749718819; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=jHTTv6qaPjg9mjTN+H6fpzOa+vA+iw+s8NFNFON67iA=;
+ b=BWBgDDJcFNDYUGrtlOUoNq2xSpFme0mv6GQ+JnHoYLdcf/BcogKBibCiUUD/sDe/ZF
+ XCQv7Q06F0ijgnIGTqKmkWTzWUZ2E+2I6Sgb7nHoyNS44AjWRMkkIJ8nxq9o2MszsvBj
+ ymRKYL6QLPQfknC2gzvAPl1Wc2+LNUojEjF4h7x3HEErA3O+DhkT7BSsH5V8N5BcNtyt
+ mpPD91AshCnTrt2YGS7VmkA01o7vWfa2RRNSW+bKXFs/FkTLih9tuAMbuitLORx4bSe0
+ cAWrUqU2US2UH/1O5qCmCmtqGXNn+WxvuL/KkXBjSib8MhzXVavtOgnR3cPFAknEkEzF
+ Crxg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1749110095; x=1749714895;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1749114019; x=1749718819;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=HF0IElq1Rav86RADaCO6kDBYd4JFsL65+E44asCoz2g=;
- b=NY1RwWbtOu4PpBsuhViB+9RMFx4jSKnAXVoMzQCtWTwu3mHKulKLovELrvwGZK9zeu
- XY61ZB9dMhN0MGhndBg/mQ83f119n5CHN6k3ySMLVh+SLSI4NVYXMHk/tmRPNK16Hmrp
- 4oJqT0uW5C/vtD8F+r6t6vtpBrwhz/j3UuPX8JuZhZj+1C1mqNRsribKGV7wtj4ps+zj
- hQ+4RmjfZfP2FqoYJDIH7xl7VhZvzcqWVV8iOmEtJSD4MFV+huOkRzSeURpAiZ8Ie5bC
- rlO+7U6AtpehqV1RuA1iR7+lvkkkfm8Mtu0t9rjOcnsK7LnnfGPGerbwWQaXjjbJaLPt
- yDlA==
-X-Gm-Message-State: AOJu0Yy2eprh6NBD6F5nVc4v9jKbX/MOo5FfkGH56rc7vmbdER/8wT6n
- 2SVcb3kkgTBUm7z+OkCGbQx78pT1eOTVSs/dsrG6L4Jyt8VLo4RzxgPTwj9vXWUYFGXjXs/sJWy
- axyUHHOgLtPoI/q1wsETeXV6mLCBTLH41wdahnOd8lw==
-X-Gm-Gg: ASbGncvbK7ihU9zCFKSxmH/xsgkLdaO2y5S60rAuIVKMIkLeadlZJVOn4L0RVrsVXmB
- TESZtFnE6fsJ2k4Vf56V4GDXFyHLIhOVjz+QEPRoC0iyeNA31eKcQw3akmJxRjwG7AG4ZRG9+1U
- c/gtG4am4nA6ucsF/dFos2gaTVNnQ/1x2tYy+HdnpKnuNgBg==
-X-Google-Smtp-Source: AGHT+IFrqV+Cb58QumV270FOQKFCz/np/Ol8+ts5OGI/DgJRlidyMvhbdDtCfFsafceCeaBvKlcyrSqi2VLZQYK3TwY=
-X-Received: by 2002:a05:6808:448c:b0:404:b5c6:46f3 with SMTP id
- 5614622812f47-408f0f6d022mr5477773b6e.21.1749110095166; Thu, 05 Jun 2025
- 00:54:55 -0700 (PDT)
+ bh=jHTTv6qaPjg9mjTN+H6fpzOa+vA+iw+s8NFNFON67iA=;
+ b=AEAGcxMNhPdnVYR1rclJJdePEq3/ahOpAprKBKeP1NfLrhDPGIpNz8B7HKoVeBUSUf
+ uAPgVnPV+Ytij/iY3kN20QbtyTXtiiU3qR40g7H2sfQuoT7+53e8U8P/IylbqP6DvBYc
+ g1Ta8Fo84lHZ1j12+525c3yWzixgZ3ymhm6tTtj3OYJuw5QwUSmKIOGJXMrLnuWniNmc
+ 2uG5wwE9g6djQ/63QomiSb4H7sypIZgf4Epuky5arQH4Fqb/J1dmOfdAzXzq0N3OQmYa
+ Fp9VCqUXVYxfI72UCkLuM7yBdDSqnDEV0PyxxYf466oVj+eRKp+Eh5RtZz6RREcLXxdK
+ lT8Q==
+X-Gm-Message-State: AOJu0YxbWgNh0OHjxyiuMeLeTPNYUPtH6ej4pz4YHCSm8wRFDPHt1/+p
+ 5m/OyNyawabE2RxyrzinyjK103ZXQCrZKxN1b01rFMjwKnDP3Jfs21vFzqX/HyzS3PI=
+X-Gm-Gg: ASbGncsZRCpmglq7Gf+wyWQfu//E/7Ad3QFh+4Ipnf6w2LjPnACkCz/P/mdgtyq7UYJ
+ EJO6NFt/emYYfwzo+zwUb3F43sN6Sa4YoBuba289uAjwBqpfRp5oIgbevpormhbH2vy8TIGhl4b
+ vJFhDj1C7qTfhvgOJM5Xxf8Enk/iA0o6UfqUaiMe+aGszLLNZily/SaOH6n37x9mtpxErgagz7z
+ oIA+qHG8AcIlEcXWY03pMfjchqII+QfDRKFSttVlSX4cQkPWwGe77jwNTYRjDyvppnzUSRwTlAJ
+ vkk+xc4iEcdUgYnyaG+V4nylMiAdQ0Ci+iBpWnBXoFzp06X+lVdR5m1rMnCJHQm6fLhSFtvrmwW
+ MlLq84cAiyXGuhJc=
+X-Google-Smtp-Source: AGHT+IHS9BWgKA2/DTEfD7xIQqdPXHgWBPHxHyc2LkOP8z9a3ZaTccBpxPZNfGhy7ArAG9P0zafjLQ==
+X-Received: by 2002:a05:6102:534f:b0:4de:81a:7d42 with SMTP id
+ ada2fe7eead31-4e746d11581mr4674544137.1.1749114019150; 
+ Thu, 05 Jun 2025 02:00:19 -0700 (PDT)
+Received: from grind.dc1.ventanamicro.com ([177.188.133.196])
+ by smtp.gmail.com with ESMTPSA id
+ a1e0cc1a2514c-87e2a27de8fsm10370670241.7.2025.06.05.02.00.15
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 05 Jun 2025 02:00:17 -0700 (PDT)
+From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+To: qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, liwei1518@gmail.com,
+ zhiwei_liu@linux.alibaba.com, palmer@dabbelt.com, philmd@linaro.org,
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Subject: [PATCH] target/riscv/kvm: use qemu_chr_fe_write_all() in
+ SBI_EXT_DBCN_CONSOLE_WRITE_BYTE
+Date: Thu,  5 Jun 2025 06:00:12 -0300
+Message-ID: <20250605090012.1268809-1-dbarboza@ventanamicro.com>
+X-Mailer: git-send-email 2.49.0
 MIME-Version: 1.0
-References: <20250415043207.3512209-1-antonb@tenstorrent.com>
-In-Reply-To: <20250415043207.3512209-1-antonb@tenstorrent.com>
-From: Max Chou <max.chou@sifive.com>
-Date: Thu, 5 Jun 2025 15:54:44 +0800
-X-Gm-Features: AX0GCFuSv3ynZ93ir_fSfbbTp9TkTk75sG7My18YRaWwBe1JKVZxTzJT5cMm_eY
-Message-ID: <CANiaA1t2t-O3eo=EUia=6atdj0c1zp7p1h7OTAS5gCn4DBcoVg@mail.gmail.com>
-Subject: Re: [PATCH 0/3] Fix some more RVV source overlap issues
-To: Anton Blanchard <antonb@tenstorrent.com>
-Cc: qemu-riscv@nongnu.org, qemu-devel@nongnu.or, dbarboza@ventanamicro.com, 
- palmer@dabbelt.com, alistair.francis@wdc.com, liwei1518@gmail.com, 
- zhiwei_liu@linux.alibaba.com
-Content-Type: multipart/alternative; boundary="000000000000e553db0636ce6dd2"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::c31;
- envelope-from=max.chou@sifive.com; helo=mail-oo1-xc31.google.com
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::e42;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-vs1-xe42.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, HTML_MESSAGE=0.001,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -93,100 +99,43 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
---000000000000e553db0636ce6dd2
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+The SBI spec states, for console write byte:
 
-Hi Anton,
+"This is a blocking SBI call and it will only return after writing the
+specified byte to the debug console. It will also return, with
+SBI_ERR_FAILED, if there are I/O errors."
 
-I hope you=E2=80=99re doing well.
+Being a blocker call will either succeed writing the byte or error out,
+it's feasible to use the blocking qemu_chr_fe_write_all() instead of
+qemu_chr_fe_write(). This is also how SBI_EXT_DBCN_CONSOLE_WRITE is
+implemented, so we're also being more consistent.
 
-I have fixed the issue mentioned in the previous review.
-And I also have some commits related to this issue.
-I think it would be better to merge these fixes into this
-patchset to maintain the series=E2=80=99 cohesion and keep up to date.
+Last but not the least, we will duck possible changes in
+qemu_chr_fe_write() where ret = 0 will have a 'zero byte written'
+semantic [1] - something that we're not ready to deal in this current
+state.
 
-I can help to integrate the fixes and update this patchset.
-Please let me know your thoughts, and we can discuss the details further.
+[1] https://lore.kernel.org/qemu-devel/ CAFEAcA_kEndvNtw4EHySXWwQPoGs029yAzZGGBcV=zGHaj7KUQ@mail.gmail.com/
 
-Thanks,
-Max
+Signed-off-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+---
+ target/riscv/kvm/kvm-cpu.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
+diff --git a/target/riscv/kvm/kvm-cpu.c b/target/riscv/kvm/kvm-cpu.c
+index e1a04be20f..86724e5c44 100644
+--- a/target/riscv/kvm/kvm-cpu.c
++++ b/target/riscv/kvm/kvm-cpu.c
+@@ -1605,7 +1605,7 @@ static void kvm_riscv_handle_sbi_dbcn(CPUState *cs, struct kvm_run *run)
+         break;
+     case SBI_EXT_DBCN_CONSOLE_WRITE_BYTE:
+         ch = run->riscv_sbi.args[0];
+-        ret = qemu_chr_fe_write(serial_hd(0)->be, &ch, sizeof(ch));
++        ret = qemu_chr_fe_write_all(serial_hd(0)->be, &ch, sizeof(ch));
+ 
+         if (ret < 0) {
+             error_report("SBI_EXT_DBCN_CONSOLE_WRITE_BYTE: error when "
+-- 
+2.49.0
 
-On Tue, Apr 15, 2025 at 12:32=E2=80=AFPM Anton Blanchard <antonb@tenstorren=
-t.com>
-wrote:
-
-> Thanks Max and Daniel for helping to resolve the RVV source register
-> overlap issues. I ran some random patterns against the Max's latest
-> patch series (comparing QEMU to the Tenstorrent version of whisper)
-> and spotted a couple more. Max: can you please check if the fixes I
-> made look right?
->
-> Anton
-> --
->
-> Anton Blanchard (3):
->   target/riscv: rvv: Apply vext_check_input_eew to vector integer/fp
->     compare instructions
->   target/riscv: rvv: Apply vext_check_input_eew to vector reduction
->     instructions
->   target/riscv: vadc and vsbc are vm=3D0 instructions
->
->  target/riscv/insn32.decode              | 10 +++++-----
->  target/riscv/insn_trans/trans_rvv.c.inc | 23 +++++++++++++----------
->  2 files changed, 18 insertions(+), 15 deletions(-)
->
-> --
-> 2.34.1
->
->
-
---000000000000e553db0636ce6dd2
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><div>Hi Anton,<br><br>I hope you=E2=80=99re doing well.<br=
-><br>I have fixed the issue mentioned in the previous review.<br>And I also=
- have some commits related to this issue.<br>I think it would be better to =
-merge these fixes into this<br>patchset to maintain the series=E2=80=99 coh=
-esion and keep up to date.<br><br>I can help to integrate the fixes and upd=
-ate this patchset.<br>Please let me know your thoughts, and we can discuss =
-the details further.<br><br>Thanks,<br>Max</div><br></div><br><div class=3D=
-"gmail_quote gmail_quote_container"><div dir=3D"ltr" class=3D"gmail_attr">O=
-n Tue, Apr 15, 2025 at 12:32=E2=80=AFPM Anton Blanchard &lt;<a href=3D"mail=
-to:antonb@tenstorrent.com">antonb@tenstorrent.com</a>&gt; wrote:<br></div><=
-blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-l=
-eft-width:1px;border-left-style:solid;border-left-color:rgb(204,204,204);pa=
-dding-left:1ex">Thanks Max and Daniel for helping to resolve the RVV source=
- register<br>
-overlap issues. I ran some random patterns against the Max&#39;s latest<br>
-patch series (comparing QEMU to the Tenstorrent version of whisper)<br>
-and spotted a couple more. Max: can you please check if the fixes I<br>
-made look right?<br>
-<br>
-Anton<br>
---<br>
-<br>
-Anton Blanchard (3):<br>
-=C2=A0 target/riscv: rvv: Apply vext_check_input_eew to vector integer/fp<b=
-r>
-=C2=A0 =C2=A0 compare instructions<br>
-=C2=A0 target/riscv: rvv: Apply vext_check_input_eew to vector reduction<br=
->
-=C2=A0 =C2=A0 instructions<br>
-=C2=A0 target/riscv: vadc and vsbc are vm=3D0 instructions<br>
-<br>
-=C2=A0target/riscv/insn32.decode=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 | 10 +++++-----<br>
-=C2=A0target/riscv/insn_trans/trans_rvv.c.inc | 23 +++++++++++++----------<=
-br>
-=C2=A02 files changed, 18 insertions(+), 15 deletions(-)<br>
-<br>
--- <br>
-2.34.1<br>
-<br>
-</blockquote></div>
-
---000000000000e553db0636ce6dd2--
 
