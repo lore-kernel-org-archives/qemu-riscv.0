@@ -4,55 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A9298C5B543
-	for <qemu-riscv@archiver.kernel.org>; Thu,  5 Jun 2025 11:57:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2BD06C5AE59
+	for <qemu-riscv@archiver.kernel.org>; Thu,  5 Jun 2025 12:49:54 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uN9E1-0002ph-Pp; Thu, 05 Jun 2025 07:57:37 -0400
+	id 1uNA2M-0004WN-Kj; Thu, 05 Jun 2025 08:49:38 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <liujingqi@lanxincomputing.com>)
- id 1uN9Di-0002ZX-Ur
- for qemu-riscv@nongnu.org; Thu, 05 Jun 2025 07:57:23 -0400
+ id 1uNA2J-0004Vq-Or
+ for qemu-riscv@nongnu.org; Thu, 05 Jun 2025 08:49:35 -0400
 Received: from sg-1-17.ptr.blmpb.com ([118.26.132.17])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <liujingqi@lanxincomputing.com>)
- id 1uN9Dd-0003Ny-4W
- for qemu-riscv@nongnu.org; Thu, 05 Jun 2025 07:57:18 -0400
+ id 1uNA2B-0002v0-TV
+ for qemu-riscv@nongnu.org; Thu, 05 Jun 2025 08:49:35 -0400
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- s=s1; d=lanxincomputing-com.20200927.dkim.feishu.cn; t=1749124618;
+ s=s1; d=lanxincomputing-com.20200927.dkim.feishu.cn; t=1749127755;
  h=from:subject:mime-version:from:date:message-id:subject:to:cc:
  reply-to:content-type:mime-version:in-reply-to:message-id;
- bh=3mDuP2s2I6/k7lD3fwHjr3v1hd0NxwWVh9qh5Z+7hQs=;
- b=F8dnkYitYm5ulBa/7zMRG6Q4LpGJsytTqy2pltHkFTaRmLXMryHRcUrTxgHg2Pjro5v9MG
- fQJkuCPZdrX8eGlcxEYnePJfrcJOzziX2s/whbpChvfDBKBzhn42vBa7I725fOaKIOipDd
- m4/aEixTp1B0hmDFd8ciJCXfWXTvFh1bY8+kNMJ8tyZ+dUqRmiT0yH95hDKvrvPAqGIU41
- DdVID9vFyeMy0VTLdb++36wHAtvPJKAgnSasHk/sD2BB3nex2URiKlL/TH4O/vba6OnjQJ
- rB7SYelcytlgxxq9EropEppCIOSILr03MIAF95xtcDp5MHDRowQ07wNlGJq8Cg==
-To: "Tomasz Jeznach" <tjeznach@rivosinc.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
-Mime-Version: 1.0
-Content-Language: en-US
-User-Agent: Mozilla Thunderbird
-X-Lms-Return-Path: <lba+268418608+46c7bf+nongnu.org+liujingqi@lanxincomputing.com>
-Cc: "Alistair Francis" <alistair.francis@wdc.com>, 
- "Daniel Henrique Barboza" <dbarboza@ventanamicro.com>, 
- "Richard Henderson" <richard.henderson@linaro.org>, 
- "Jason Chien" <jason.chien@sifive.com>, <qemu-riscv@nongnu.org>, 
- <qemu-devel@nongnu.org>
-Subject: Re: [PATCH] hw/riscv/riscv-iommu: Fix PPN field of
- Translation-reponse register
-Date: Thu, 5 Jun 2025 19:56:53 +0800
-From: "Nutty Liu" <liujingqi@lanxincomputing.com>
-Received: from [127.0.0.1] ([180.165.23.184]) by smtp.feishu.cn with ESMTPS;
- Thu, 05 Jun 2025 19:56:54 +0800
+ bh=BwT03PuYNPx6ZhnFlEBVIWTkbTJBcigSSkfhmsOlP0w=;
+ b=apSQOcWClLk6rQmNu32bJlGzGghJmgrteRxWawnq9qiGd1tScKhF1HosbZZK8EeReLarZ0
+ R7aL4V5k87OHJLPCmnlXaV6PJ/K85Yi6jdhyOnDLfDLyxt8bnjpcDSpLL0RZcgxZoV3GHq
+ C9vti7GRvJW86T8z1p20VRSo60xwYRIJvyLApEDcVYDm2nIaTzbkiqbypCwDKtx1IXTQtT
+ ZT9CNJ4ZWzm6XOiZBxdbE1s9GFD0/b3pmP0XhDnLmNbmd9tUNzogyKCkPnq12rs/gZUA72
+ iE9gYzLp9u15gbvr1NjGQA33LP4282kDKY7Qk4QJRAxEv/HyufUGfGv64HYYoA==
+Content-Transfer-Encoding: 7bit
+Cc: "Nutty Liu" <liujingqi@lanxincomputing.com>, 
+ "Tomasz Jeznach" <tjeznach@rivosinc.com>
 X-Original-From: Nutty Liu <liujingqi@lanxincomputing.com>
-Message-Id: <9b26fbae-d07b-4a56-8300-1cbb17b524b1@lanxincomputing.com>
-References: <20250529091351.4304-1-liujingqi@lanxincomputing.com>
- <CAH2o1u7L=O+AOtbpkb09EanpmdhKX20Xx+EoFBJOStv3kVxKwg@mail.gmail.com>
-In-Reply-To: <CAH2o1u7L=O+AOtbpkb09EanpmdhKX20Xx+EoFBJOStv3kVxKwg@mail.gmail.com>
+X-Mailer: git-send-email 2.49.0.windows.1
+Received: from localhost.localdomain ([180.165.23.184]) by smtp.feishu.cn with
+ ESMTP; Thu, 05 Jun 2025 20:49:12 +0800
+Mime-Version: 1.0
+Message-Id: <20250605124848.1248-1-liujingqi@lanxincomputing.com>
+X-Lms-Return-Path: <lba+268419249+a25c3e+nongnu.org+liujingqi@lanxincomputing.com>
+Content-Type: text/plain; charset=UTF-8
+Date: Thu,  5 Jun 2025 20:48:48 +0800
+From: "Nutty Liu" <liujingqi@lanxincomputing.com>
+Subject: [PATCH v2] hw/riscv/riscv-iommu: Fix PPN field of Translation-reponse
+ register
+To: "Palmer Dabbelt" <palmer@dabbelt.com>, 
+ "Alistair Francis" <alistair.francis@wdc.com>, 
+ "Weiwei Li" <liwei1518@gmail.com>, 
+ "Daniel Henrique Barboza" <dbarboza@ventanamicro.com>, 
+ "Liu Zhiwei" <zhiwei_liu@linux.alibaba.com>, <qemu-riscv@nongnu.org>, 
+ <qemu-devel@nongnu.org>
 Received-SPF: pass client-ip=118.26.132.17;
  envelope-from=liujingqi@lanxincomputing.com; helo=sg-1-17.ptr.blmpb.com
 X-Spam_score_int: -18
@@ -77,51 +75,44 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 6/4/2025 1:52 AM, Tomasz Jeznach wrote:
-> On Thu, May 29, 2025 at 2:14=E2=80=AFAM Nutty Liu <liujingqi@lanxincomput=
-ing.com> wrote:
->> The original implementation incorrectly performed a bitwise AND
->> operation between the PPN of iova and PPN Mask, leading to an
->> incorrect PPN field in Translation-reponse register.
->>
->> The PPN of iova should be set entirely in the PPN field of
->> Translation-reponse register.
->>
->> Signed-off-by: Nutty Liu <liujingqi@lanxincomputing.com>
->> ---
->>   hw/riscv/riscv-iommu.c | 3 +--
->>   1 file changed, 1 insertion(+), 2 deletions(-)
->>
->> diff --git a/hw/riscv/riscv-iommu.c b/hw/riscv/riscv-iommu.c
->> index a877e5da84..f529a6a3d7 100644
->> --- a/hw/riscv/riscv-iommu.c
->> +++ b/hw/riscv/riscv-iommu.c
->> @@ -1935,8 +1935,7 @@ static void riscv_iommu_process_dbg(RISCVIOMMUStat=
-e *s)
->>               iova =3D RISCV_IOMMU_TR_RESPONSE_FAULT | (((uint64_t) faul=
-t) << 10);
->>           } else {
->>               iova =3D iotlb.translated_addr & ~iotlb.addr_mask;
->> -            iova >>=3D TARGET_PAGE_BITS;
->> -            iova &=3D RISCV_IOMMU_TR_RESPONSE_PPN;
->> +            iova =3D set_field(0, RISCV_IOMMU_TR_RESPONSE_PPN, PPN_DOWN=
-(iova));
->>
-> Thanks for catching this. Yes, there is an issue here.
-> Also, the line below, clearing _S bit, is no longer needed.
+The original implementation incorrectly performed a bitwise AND
+operation between the PPN of iova and PPN Mask, leading to an
+incorrect PPN field in Translation-reponse register.
 
-Thanks for your review.
-Indeed. I will also remove the line below.
+The PPN of iova should be set entirely in the PPN field of
+Translation-reponse register.
 
->>               /* We do not support superpages (> 4kbs) for now */
->>               iova &=3D ~RISCV_IOMMU_TR_RESPONSE_S;
->> --
->> 2.49.0.windows.1
-> Reviewed-by: Tomasz Jeznach <tjeznach@rivosinc.com>
->
-> Best,
-> - Tomasz
+Also remove the code that was used to clear S field since this
+field is already zero.
 
-Thanks,
-Nutty
+Signed-off-by: Nutty Liu <liujingqi@lanxincomputing.com>
+Reviewed-by: Tomasz Jeznach <tjeznach@rivosinc.com>
+---
+V1 -> V2:
+ - Commented by Alistair
+ - Reviewed by Tomasz
+ - Remove the extra code
+---
+ hw/riscv/riscv-iommu.c | 6 +-----
+ 1 file changed, 1 insertion(+), 5 deletions(-)
+
+diff --git a/hw/riscv/riscv-iommu.c b/hw/riscv/riscv-iommu.c
+index a877e5da84..d8b1cb03a8 100644
+--- a/hw/riscv/riscv-iommu.c
++++ b/hw/riscv/riscv-iommu.c
+@@ -1935,11 +1935,7 @@ static void riscv_iommu_process_dbg(RISCVIOMMUState *s)
+             iova = RISCV_IOMMU_TR_RESPONSE_FAULT | (((uint64_t) fault) << 10);
+         } else {
+             iova = iotlb.translated_addr & ~iotlb.addr_mask;
+-            iova >>= TARGET_PAGE_BITS;
+-            iova &= RISCV_IOMMU_TR_RESPONSE_PPN;
+-
+-            /* We do not support superpages (> 4kbs) for now */
+-            iova &= ~RISCV_IOMMU_TR_RESPONSE_S;
++            iova = set_field(0, RISCV_IOMMU_TR_RESPONSE_PPN, PPN_DOWN(iova));
+         }
+         riscv_iommu_reg_set64(s, RISCV_IOMMU_REG_TR_RESPONSE, iova);
+     }
+-- 
+2.49.0.windows.1
 
