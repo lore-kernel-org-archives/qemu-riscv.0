@@ -4,65 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CA8F8C5AD49
-	for <qemu-riscv@archiver.kernel.org>; Fri,  6 Jun 2025 03:44:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3EF34C5B549
+	for <qemu-riscv@archiver.kernel.org>; Fri,  6 Jun 2025 07:25:51 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uNO0H-0001CH-K0; Thu, 05 Jun 2025 23:44:25 -0400
+	id 1uNRSO-0005CH-8u; Fri, 06 Jun 2025 03:25:40 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <mengzhuo@iscas.ac.cn>)
- id 1uNO0E-0001Bi-Ek; Thu, 05 Jun 2025 23:44:22 -0400
-Received: from smtp84.cstnet.cn ([159.226.251.84] helo=cstnet.cn)
- by eggs.gnu.org with esmtps (TLS1.2:DHE_RSA_AES_256_CBC_SHA1:256)
- (Exim 4.90_1) (envelope-from <mengzhuo@iscas.ac.cn>)
- id 1uNO09-00038l-N4; Thu, 05 Jun 2025 23:44:22 -0400
-Received: from iscas.ac.cn (unknown [113.16.146.215])
- by APP-05 (Coremail) with SMTP id zQCowAAHUxH_Y0JoYzbmAw--.10740S2;
- Fri, 06 Jun 2025 11:44:00 +0800 (CST)
-From: Meng Zhuo <mengzhuo@iscas.ac.cn>
-To: qemu-devel@nongnu.org
-Cc: Meng Zhuo <mengzhuo@iscas.ac.cn>, Andrew Jones <ajones@ventanamicro.com>,
- Palmer Dabbelt <palmer@dabbelt.com>,
+ (Exim 4.90_1) (envelope-from <jay.chang@sifive.com>)
+ id 1uNRSJ-0005BY-Il
+ for qemu-riscv@nongnu.org; Fri, 06 Jun 2025 03:25:36 -0400
+Received: from mail-pj1-x1029.google.com ([2607:f8b0:4864:20::1029])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <jay.chang@sifive.com>)
+ id 1uNRSH-0007ZN-FF
+ for qemu-riscv@nongnu.org; Fri, 06 Jun 2025 03:25:35 -0400
+Received: by mail-pj1-x1029.google.com with SMTP id
+ 98e67ed59e1d1-312028c644bso1418872a91.0
+ for <qemu-riscv@nongnu.org>; Fri, 06 Jun 2025 00:25:32 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=sifive.com; s=google; t=1749194731; x=1749799531; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=eqQgg7FhIoL/447jsGOcCEkgWZv5U2WvjQztrTXd0ZU=;
+ b=LIYhJSq9/V9PYT+INuLGvO4VBzSGsee5quRNn46rmQwdTb+cS1uDahfSCrCNL3KxTF
+ piJvOxtLR/HUKS92xZ2jTiyVdN24riS4UMODyScffXz8wp45CpFkiQwP7RvbRP5u1iIC
+ F4F+2BuJSraMA/hj+PgOsO29GUL3klGCLCRdHvKNzJQwzFnzA38ED/pPGw2Rf5v4aFBn
+ NmR+LgRcVCi4WpxWDqkbV4DpF61dqYO4574GX57nCvIezedvOlVJFylnpzSUtJA25NF+
+ 3TuOFwsEhfJ/pRgxBLBaVLXf6UIOS6zKpR3wK6zloY08mHAYccQVMFuwAEFDtNvqLHDT
+ FAfg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1749194731; x=1749799531;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=eqQgg7FhIoL/447jsGOcCEkgWZv5U2WvjQztrTXd0ZU=;
+ b=lQp4ZGQ/YT6Um1nQv/vYQL1CapSTbxOIJGeB9Mu5EhaXjsr7cuRMGdZ36S0KTHSDQE
+ BekvfzBaswKWO7uAIrRgQ8sklyb+K+ZsRJVRXH/HRAO3tsFLv0TeLw6bIxqQ856UQED7
+ XiqXAq1cJsR6WvSwsw/xxVbIQYHo1DjuixLU/rdkHaZ2orYXi67tIGLQcKV2ksxXcwyp
+ IJE5taHnYVU1rbTHIowTwCKqmykmPTQDwkwT30befVekyulyjZq191rDn+YX9TTFkYeY
+ sUXOc3ERz4ai6UlXCWjeYhafNOAUdVqhudRRja+LpYFERWhOVErfP+gRf6pqxvFwlAqQ
+ AqUQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVZUUz2T0rdYel+RDeSmG4mJQtLYjTvD6fopS0epwPikqqt4EnY/eyAvkzbmTTzfo5rc+I4nPi+pYWf@nongnu.org
+X-Gm-Message-State: AOJu0YzNceWfMaa7DBgBxjbRUAQUK4tTEddV9IkIbP23kv33IZplbVma
+ 3dUjR6TkxI2QZV6eLoaWkApSnJ/hsWA+yyoNoBaiH+bUFLBbmbphBTbHd0+UxA/8ow8=
+X-Gm-Gg: ASbGncv+VVFZVROoTetvSZ6FL0BzHrzE83op+PBuSmOjWsNIoe1CUhFEtrvNF5Gue69
+ arTu6ci/pLnzFdej1bB576cXjtx/swrXg3ZoxtFIpnh9d2OIy7NROlp4GUbHsQwXjlsJxHMXEp2
+ 81wGzOm9P3qMSKvsHW8b84GtrIZZD4WYyNwXA3PlmTuuycBdvOZL+IiEhfXF3gcGl7A6YKsjg5R
+ aOCLhvoW9qpU38Mby7B2cuLOAMFEOsoCevBaKWmsAFEOvw4BDotIU4q49QmwzHRJKcj1dINShvG
+ YQLSrrgb3+68poicpWP8kDjbDxOeaIq0UyMSlc6wxRn4OJyZ7QdEqIOHWbZBSAUFxnq45sZBLSF
+ 7HRaFJo0BxCQQItU=
+X-Google-Smtp-Source: AGHT+IH3uP+SzyW+Hb0EtoTBQrLVDPauSC7nKygY/6do2xIwQgfQRdL0UNdsEIj4gKOeVO7B9nsO3Q==
+X-Received: by 2002:a17:90b:5345:b0:311:ffe8:20e9 with SMTP id
+ 98e67ed59e1d1-31347308c79mr4429732a91.17.1749194730855; 
+ Fri, 06 Jun 2025 00:25:30 -0700 (PDT)
+Received: from jchang-1875.internal.sifive.com ([136.226.240.181])
+ by smtp.gmail.com with ESMTPSA id
+ 98e67ed59e1d1-31349f17bddsm774703a91.9.2025.06.06.00.25.28
+ (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
+ Fri, 06 Jun 2025 00:25:30 -0700 (PDT)
+From: Jay Chang <jay.chang@sifive.com>
+To: qemu-devel@nongnu.org,
+	qemu-riscv@nongnu.org
+Cc: Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <alistair.francis@wdc.com>,
  Weiwei Li <liwei1518@gmail.com>,
  Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- qemu-riscv@nongnu.org (open list:RISC-V TCG CPUs)
-Subject: [PATCH v6] target/riscv/kvm: add max_satp_mode from host cpu
-Date: Fri,  6 Jun 2025 11:42:51 +0800
-Message-Id: <20250606034250.181707-1-mengzhuo@iscas.ac.cn>
-X-Mailer: git-send-email 2.39.5
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, Jay Chang <jay.chang@sifive.com>
+Subject: [PATCH v5 0/2] Extend and configure PMP region count
+Date: Fri,  6 Jun 2025 15:25:23 +0800
+Message-ID: <20250606072525.17313-1-jay.chang@sifive.com>
+X-Mailer: git-send-email 2.48.1
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-CM-TRANSID: zQCowAAHUxH_Y0JoYzbmAw--.10740S2
-X-Coremail-Antispam: 1UD129KBjvJXoW7Kr1xZr48Jry7KF18ur4rKrg_yoW8Kw48pF
- W5GrZ5Crs3tryxJayftrn7XF15Krs5KFW7ta1jgw1xX3Z8JFW8Wr1vg3yaqF98XF4xZFs8
- AFsYyr4xCF4YqFDanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
- 9KBjDU0xBIdaVrnRJUUU9j14x267AKxVW8JVW5JwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
- rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK02
- 1l84ACjcxK6xIIjxv20xvE14v26ryj6F1UM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26r4j
- 6F4UM28EF7xvwVC2z280aVAFwI0_Gr1j6F4UJwA2z4x0Y4vEx4A2jsIEc7CjxVAFwI0_Cr
- 1j6rxdM2AIxVAIcxkEcVAq07x20xvEncxIr21l5I8CrVACY4xI64kE6c02F40Ex7xfMcIj
- 6xIIjxv20xvE14v26r1j6r18McIj6I8E87Iv67AKxVWUJVW8JwAm72CE4IkC6x0Yz7v_Jr
- 0_Gr1lF7xvr2IYc2Ij64vIr41lF7I21c0EjII2zVCS5cI20VAGYxC7MxkF7I0En4kS14v2
- 6r1q6r43MxkF7I0Ew4C26cxK6c8Ij28IcwCF04k20xvY0x0EwIxGrwCFx2IqxVCFs4IE7x
- kEbVWUJVW8JwC20s026c02F40E14v26r1j6r18MI8I3I0E7480Y4vE14v26r106r1rMI8E
- 67AF67kF1VAFwI0_Jw0_GFylIxkGc2Ij64vIr41lIxAIcVC0I7IYx2IY67AKxVWUJVWUCw
- CI42IY6xIIjxv20xvEc7CjxVAFwI0_Jr0_Gr1lIxAIcVCF04k26cxKx2IYs7xG6r1j6r1x
- MIIF0xvEx4A2jsIE14v26r1j6r4UMIIF0xvEx4A2jsIEc7CjxVAFwI0_Jr0_GrUvcSsGvf
- C2KfnxnUUI43ZEXa7VUj8pnPUUUUU==
-X-Originating-IP: [113.16.146.215]
-X-CM-SenderInfo: pphqw6xkxrqxpvfd2hldfou0/1tbiCRAEEmhBD5iDLQABse
-Received-SPF: pass client-ip=159.226.251.84; envelope-from=mengzhuo@iscas.ac.cn;
- helo=cstnet.cn
-X-Spam_score_int: -41
-X-Spam_score: -4.2
-X-Spam_bar: ----
-X-Spam_report: (-4.2 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_MED=-2.3,
- RCVD_IN_VALIDITY_CERTIFIED_BLOCKED=0.001, RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001,
- SPF_HELO_PASS=-0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1029;
+ envelope-from=jay.chang@sifive.com; helo=mail-pj1-x1029.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -78,79 +104,35 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-This patch adds max_satp_mode from host kvm cpu setting.
+The first patch extends the number of PMP regions supported up to 64,
+following the RISC-V Privileged Specification (version >1.12), where
+RV32 can have up to 64 PMP regions configured through 16 CSRs.
 
-Tested on: Milkv Megrez (Eswin 7700x)
+The second patch makes the PMP region count configurable via a new
+CPU parameter `num-pmp-regions`. This allows platforms to adjust
+the number of PMP regions without relying on a fixed default value.
+If unspecified, the default remains 16 to preserve compatibility.
 
-Reviewed-by: Andrew Jones <ajones@ventanamicro.com>
-Resolves: https://gitlab.com/qemu-project/qemu/-/issues/2931
-Signed-off-by: Meng Zhuo <mengzhuo@iscas.ac.cn>
----
-Change in v6:
-- Rebase on https://github.com/alistair23/qemu/tree/riscv-to-apply.next
-- Minor change in title
+Change log:
+  V5:
+  * Dropped all pmp_regions = 8 overrides except SiFive-specific cases,
+    and every other vendor CPU should set its own default if they want.
+    (based on feedback from Daniel)
 
-Change in v5:
-- Adds R-B comment from Andrew Jones
+Jay Chang (2):
+  target/riscv: Extend PMP region up to 64
+  target/riscv: Make PMP region count configurable
 
-Change in v4:
-- Adds changelog in commit message
-- Link to v3: https://lists.nongnu.org/archive/html/qemu-devel/2025-05/msg04629.html
+ target/riscv/cpu.c                |  48 ++++++++++-
+ target/riscv/cpu.h                |   3 +-
+ target/riscv/cpu_bits.h           |  60 ++++++++++++++
+ target/riscv/cpu_cfg_fields.h.inc |   1 +
+ target/riscv/csr.c                | 129 +++++++++++++++++++++++++++++-
+ target/riscv/machine.c            |   3 +-
+ target/riscv/pmp.c                |  28 ++++---
+ 7 files changed, 256 insertions(+), 16 deletions(-)
 
-Change in v3:
-- Rebase on https://github.com/alistair23/qemu/tree/riscv-to-apply.next
-  as requested
-- Link to v2: https://lists.nongnu.org/archive/html/qemu-devel/2025-04/msg05203.html
-
-Changes in v2:
-- use set_satp_mode_max_supported instead of hard code
-- Link to v1: https://lists.nongnu.org/archive/html/qemu-devel/2025-04/msg05094.html
----
- target/riscv/kvm/kvm-cpu.c | 16 +++++++++++++++-
- 1 file changed, 15 insertions(+), 1 deletion(-)
-
-diff --git a/target/riscv/kvm/kvm-cpu.c b/target/riscv/kvm/kvm-cpu.c
-index e1a04be20f..502d33f404 100644
---- a/target/riscv/kvm/kvm-cpu.c
-+++ b/target/riscv/kvm/kvm-cpu.c
-@@ -999,6 +999,19 @@ static void kvm_riscv_destroy_scratch_vcpu(KVMScratchCPU *scratch)
-     close(scratch->kvmfd);
- }
- 
-+static void kvm_riscv_init_max_satp_mode(RISCVCPU *cpu, KVMScratchCPU *kvmcpu)
-+{
-+    struct kvm_one_reg reg;
-+    int ret;
-+
-+    reg.id = RISCV_CONFIG_REG(satp_mode);
-+    reg.addr = (uint64_t)&cpu->cfg.max_satp_mode;
-+    ret = ioctl(kvmcpu->cpufd, KVM_GET_ONE_REG, &reg);
-+    if (ret != 0) {
-+        error_report("Unable to retrieve satp mode from host, error %d", ret);
-+    }
-+}
-+
- static void kvm_riscv_init_machine_ids(RISCVCPU *cpu, KVMScratchCPU *kvmcpu)
- {
-     struct kvm_one_reg reg;
-@@ -1302,6 +1315,7 @@ static void riscv_init_kvm_registers(Object *cpu_obj)
-     kvm_riscv_init_machine_ids(cpu, &kvmcpu);
-     kvm_riscv_init_misa_ext_mask(cpu, &kvmcpu);
-     kvm_riscv_init_cfg(cpu, &kvmcpu);
-+    kvm_riscv_init_max_satp_mode(cpu, &kvmcpu);
- 
-     kvm_riscv_destroy_scratch_vcpu(&kvmcpu);
- }
-@@ -1985,7 +1999,7 @@ static bool kvm_cpu_realize(CPUState *cs, Error **errp)
-         }
-     }
- 
--   return true;
-+    return true;
- }
- 
- void riscv_kvm_cpu_finalize_features(RISCVCPU *cpu, Error **errp)
 -- 
-2.39.5
+2.48.1
 
 
