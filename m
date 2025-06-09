@@ -4,97 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 990C5C61CE8
-	for <qemu-riscv@archiver.kernel.org>; Mon,  9 Jun 2025 12:31:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 07219C61CE8
+	for <qemu-riscv@archiver.kernel.org>; Mon,  9 Jun 2025 13:18:18 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uObel-0005wz-8W; Mon, 09 Jun 2025 08:31:16 -0400
+	id 1uOcNs-0001Q5-HX; Mon, 09 Jun 2025 09:17:52 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1uObea-0005vO-BA
- for qemu-riscv@nongnu.org; Mon, 09 Jun 2025 08:31:04 -0400
-Received: from mail-pf1-x436.google.com ([2607:f8b0:4864:20::436])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1uObeR-0000jr-2C
- for qemu-riscv@nongnu.org; Mon, 09 Jun 2025 08:31:02 -0400
-Received: by mail-pf1-x436.google.com with SMTP id
- d2e1a72fcca58-73bf5aa95e7so3116344b3a.1
- for <qemu-riscv@nongnu.org>; Mon, 09 Jun 2025 05:30:54 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1749472253; x=1750077053; darn=nongnu.org;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=/azUsPlgQ0qnNuRghzS6BtLGc4+GWDUgZUUWcnIh2vo=;
- b=mkRfHxd+0qX4jn+TY46OpSD2/9f2BU1JAF2ulMrSQpaJOSrCIPcdA54T9cR0oIkEYN
- 8NRNjvcI11q9lF2/SGw9SWVMuHCwuQmMo2SJi91lrnJbt5p5WwC01gzH8PpmgWrX3YKO
- qxfX3ds5eAFXWPrbCo0vAc83GAohbUGc60yFWi29mKAwsBaWEZCl8HiN4US727uA8Nnt
- 4I+JhQTm+7KPEt5LLLAqWY8BBiAjg45WZb4x+OKebGED/p6YXWTze283sNMOdcR9ww8u
- LdSVRR2EmxN5xBgN+i9I/9NsYwU/AKP3rxXAQvSqzsZ0VF3o6iT6z0IEZ0pWpePrBgYr
- FKTw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1749472253; x=1750077053;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=/azUsPlgQ0qnNuRghzS6BtLGc4+GWDUgZUUWcnIh2vo=;
- b=CzZ4LkqMEan6c5ohaCUKidCdMzd6d83U7kV29zJd+yj+WGwAoMurX6yPorPhhG1FBM
- FecNMIEpb+SYaG0cz8cfeyPZe9pm8lTfhTmoSdszi6Fe3CkgEzXTDQKyh2Kgffp/pgyW
- Ag1WBDD0pVJqfJJq/2gzvLGsDmP+VF/wIHOgUCxZ9HajFS5x/u9RHRHj8JUI/Dea2yeq
- lX1/PHYHSD9nfpk44kwjBiuAqHXjDbCERpBgt8cEri6YlwXy3owxLD/r1qWKJdkWvGT/
- 7gj8k6uNYwO+MXRVV9rxhEc9o2YRYpUf3JIdSeHSp9syrFCG2PoqOxuu7Ly855vcGpp0
- CA5g==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVhQ26jSZoNVrhPvn0Twc0JW4rzb64PE8VHbdeBjcuK52x3k+In6z6qb+DYDaLWcbj/aT7DnEXUBODn@nongnu.org
-X-Gm-Message-State: AOJu0YwXgRna26HwoRwxRH4WAfaY2zMXXqok5oisxTVsQiegA6hF9qGk
- VTlKQ2vTZcT2KqUOG9KROBuuDHPGaSsIoCI7z82JNN3mSS17qad3P0fUeI9xxuMkuzY=
-X-Gm-Gg: ASbGnct2iT81i9VleTIKmrlh7TvlUWMfDa48pDYdkXfoSRCcpOceiRL3heTx8Brvr3v
- dtuQaVZEl4JofmqMTncDgB/4op5u0NlYva+DYcDjwyQEccFpbLaEVnsIuUcEWPVs7iXjFs837Qx
- zz/TvLM03RWDgGlJabHFgtAS7MV1OeI4q2HPSu62LT7MZsd77/vLE//WVRJgzC4+xx8TJp/wMdU
- 07zvvP9x6rLicLdC+m0rNsn8+fd81Bzt4cgrUBIvhk/J4wrC5yTZNQ1HvaA2s2YUwdsZwYZYNuB
- 4ZSDXTMR2m9Vn2FfBMgTrGci9M16Vv6dLdqw6ovR3apQmRs9fOa4gH/5q10bdi8a
-X-Google-Smtp-Source: AGHT+IENljqOWWZNwNJwClbgGMOmjfoluvhx3ZbH5nVIU4gChRFrYhJ86MbLwEOXuElijfLRH83ZVw==
-X-Received: by 2002:a05:6a00:22d1:b0:742:3cc1:9485 with SMTP id
- d2e1a72fcca58-74827e9c914mr16024452b3a.12.1749472252711; 
- Mon, 09 Jun 2025 05:30:52 -0700 (PDT)
-Received: from [192.168.68.110] ([179.93.21.192])
- by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-7482b0c00d5sm5573765b3a.120.2025.06.09.05.30.50
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 09 Jun 2025 05:30:52 -0700 (PDT)
-Message-ID: <f6a3a6d7-6a3b-4d90-8bd1-6954b90c9fe0@ventanamicro.com>
-Date: Mon, 9 Jun 2025 09:30:48 -0300
+ (Exim 4.90_1) (envelope-from <srv_ts003@codethink.com>)
+ id 1uOcNo-0001DY-DV; Mon, 09 Jun 2025 09:17:48 -0400
+Received: from imap4.hz.codethink.co.uk ([188.40.203.114])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <srv_ts003@codethink.com>)
+ id 1uOcNm-0006fp-2D; Mon, 09 Jun 2025 09:17:48 -0400
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=codethink.co.uk; s=imap4-20230908; h=Sender:Content-Transfer-Encoding:
+ MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:
+ Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:Resent-From:
+ Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:
+ List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=yima1nGxODtmOyU6SbGTW9h9zw+/b2Gwa6neFo8mOxg=; b=RH9+Mqi0Lc54Rh/VCumpie8I2Z
+ qHOnniUEZbxV74kRd4UVl2ion+EeNHOzh4qAgR/EETPKy42QMZZGTUXu4NG0ZxYdLH8XydtmfUdmY
+ nOB8x5vN5HLMtMO8fa/LuMEv8skUaAEeEaZ3vkR9mTitPD3beVrTLH3IKh1b2UCiekfGd6WDPKx9c
+ o8njoT5h1K2CGe55Gn2R0lJsR3Ma62fut8S/Begw6sMjmcrzhMXvFzN0jD/1EF7vz0PAzOL1Gdam7
+ oExt0E4zX5chOKvA8x2NENdT6lq7qRnlip286aIsB2hfidI21hAhg4q6u3W4DvuFaBiSQEcd84DFk
+ qqL6fGpg==;
+Received: from [63.135.74.212] (helo=rainbowdash)
+ by imap4.hz.codethink.co.uk with esmtpsa  (Exim 4.94.2 #2 (Debian))
+ id 1uOcNZ-00BKI1-9B; Mon, 09 Jun 2025 14:17:33 +0100
+Received: from ben by rainbowdash with local (Exim 4.98.2)
+ (envelope-from <ben@rainbowdash>) id 1uOcNY-0000000696F-35Pa;
+ Mon, 09 Jun 2025 14:17:32 +0100
+From: Ben Dooks <ben.dooks@codethink.co.uk>
+To: nazar.kazakov@codethink.co.uk, joseph.baker@codethink.co.uk,
+ fran.redondo@codethink.co.uk, lawrence.hunter@codethink.co.uk,
+ liwei1518@gmail.com, dbarboza@ventanamicro.com,
+ zhiwei_liu@linux.alibaba.com, alistair.francis@wdc.com,
+ qemu-riscv@nongnu.org
+Cc: ben.dooks@codethink.co.uk,
+	qemu-devel@nongnu.org
+Subject: [PATCH v3 3/3] hw/riscv: set cva6 to use TYPE_RISCV_CPU_CVA6
+Date: Mon,  9 Jun 2025 14:17:31 +0100
+Message-Id: <20250609131731.1464616-4-ben.dooks@codethink.co.uk>
+X-Mailer: git-send-email 2.37.2.352.g3c44437643
+In-Reply-To: <20250609131731.1464616-1-ben.dooks@codethink.co.uk>
+References: <20250609131731.1464616-1-ben.dooks@codethink.co.uk>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 2/3] target/riscv: add cva6 core type
-To: Ben Dooks <ben.dooks@codethink.co.uk>, nazar.kazakov@codethink.co.uk,
- joseph.baker@codethink.co.uk, fran.redondo@codethink.co.uk,
- lawrence.hunter@codethink.co.uk, liwei1518@gmail.com,
- zhiwei_liu@linux.alibaba.com, qemu-riscv@nongnu.org
-Cc: qemu-devel@nongnu.org
-References: <20250527112437.291445-1-ben.dooks@codethink.co.uk>
- <20250527112437.291445-3-ben.dooks@codethink.co.uk>
- <ef6c7b15-04a7-42cf-a89b-c2674388810f@ventanamicro.com>
- <06323162-66b9-4165-ab2e-86ec6272aca8@codethink.co.uk>
- <341224e9-d335-40ac-af98-6395b3aede84@ventanamicro.com>
- <5663397f-e1b6-46fa-953d-fb21d1a700df@codethink.co.uk>
-Content-Language: en-US
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-In-Reply-To: <5663397f-e1b6-46fa-953d-fb21d1a700df@codethink.co.uk>
-Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::436;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pf1-x436.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+Received-SPF: pass client-ip=188.40.203.114;
+ envelope-from=srv_ts003@codethink.com; helo=imap4.hz.codethink.co.uk
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, HEADER_FROM_DIFFERENT_DOMAINS=0.097,
+ RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001, RCVD_IN_VALIDITY_SAFE_BLOCKED=0.001,
+ SPF_HELO_PASS=-0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -110,52 +76,28 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
+Change to using TYPE_RISCV_CPU_CVA6 once this is merged.
 
+Signed-off-by: Ben Dooks <ben.dooks@codethink.co.uk>
+---
+ hw/riscv/cva6.c | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
 
-On 6/9/25 8:59 AM, Ben Dooks wrote:
-> On 09/06/2025 12:30, Daniel Henrique Barboza wrote:
->>
->>
->> On 6/9/25 7:40 AM, Ben Dooks wrote:
->>> On 07/06/2025 21:17, Daniel Henrique Barboza wrote:
->>>>
->>>>
->>>> On 5/27/25 8:24 AM, Ben Dooks wrote:
->>>>> Add TYPE_RISCV_CPU_CVA6 for the CVA6 core
->>>>>
->>>>> Signed-off-by: Ben Dooks <ben.dooks@codethink.co.uk>
->>>>> ---
-> 
->> The README states right at the start:
->>
->>
->> "CVA6 is a 6-stage, single-issue, in-order CPU which implements the 64- bit RISC-V instruction set."
->>
->>
->> So this means that CVA6 is a 64-bit CPU only. This means that we want the second
->> option: the CPU declaration is fine, but the CVA6 board must be built only for 64
->> bits. In patch 1, this line:
->>
->>
->>>> config CVA6
->>>>      bool
->>>>      default y
->>>>      depends on RISCV32 || RISCV64  <------------------
->>
->>
->> Should be "depends on RISCV64".
-> 
-> 
-> I think given the confusion, let's go with the RISCV64 for now and if
-> it turns out there is an 32-bit build option we can always add it in
-> later and change anything else around.
-
-Just sent a reply making this same suggestion. I agree.
-
-
-Daniel
-
-> 
-> 
+diff --git a/hw/riscv/cva6.c b/hw/riscv/cva6.c
+index 3adfa8b5cc..e6fd0ebafc 100644
+--- a/hw/riscv/cva6.c
++++ b/hw/riscv/cva6.c
+@@ -83,8 +83,7 @@ static void cva6_machine_class_init(ObjectClass *oc, const void *data)
+     mc->init = cva6_machine_init;
+     mc->max_cpus = 1;
+     mc->default_ram_id = "cva6.ram";
+-    /* start with "max" cpu type until we sort out CVA6 type */
+-    mc->default_cpu_type = TYPE_RISCV_CPU_MAX;
++    mc->default_cpu_type = TYPE_RISCV_CPU_CVA6;
+     mc->default_ram_size = cva6_memmap[CVA6_DRAM].size;
+ };
+ 
+-- 
+2.37.2.352.g3c44437643
 
 
