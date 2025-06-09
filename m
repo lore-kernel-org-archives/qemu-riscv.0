@@ -4,86 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DB395C5B552
-	for <qemu-riscv@archiver.kernel.org>; Mon,  9 Jun 2025 05:27:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B9DA3C5B552
+	for <qemu-riscv@archiver.kernel.org>; Mon,  9 Jun 2025 10:41:06 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uOV2e-0007eR-0e; Mon, 09 Jun 2025 01:27:28 -0400
+	id 1uOZvy-0003R7-B2; Mon, 09 Jun 2025 06:40:54 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1uOV2Y-0007dm-It; Mon, 09 Jun 2025 01:27:22 -0400
-Received: from mail-oa1-x34.google.com ([2001:4860:4864:20::34])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1uOV2X-0007tv-1Q; Mon, 09 Jun 2025 01:27:22 -0400
-Received: by mail-oa1-x34.google.com with SMTP id
- 586e51a60fabf-2cc89c59cc0so2926147fac.0; 
- Sun, 08 Jun 2025 22:27:20 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1749446839; x=1750051639; darn=nongnu.org;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=m/6qbjkWbO/i365IDyoZgWyUSWgaRgybc8iWD05/6sI=;
- b=OFPxtBmXpz5tdvUt5pN6vVLdlb7IL/n+uAeKCtydprHmH2Oraq+tC6Eof7NE2RN2Y1
- yOdCAGxzGmXyT5C/kQpBph2HCwT+ViEPszVQYuLvD+h3MQ9ZppSz1AFvasXJmDtLqhie
- TOHoisL4fEQsLQI+tS+eabK929wHiHoMk5peDCWKpRfTJ7dql6dJ2ShlXFopLJuFwykD
- a8YpKQ0FvU8dtsgmZPWx2F2hrZ2ut/XPQjq0kDUPAAJuUqLvyazbGEdZyFt0OsGQnj6i
- ImgmRS2vO88tOIrehfjBwhyXHxnbaLH7Awicv/bc4mYXyZ39ZWPpQfUST8dpfWWTHoVB
- uKjQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1749446839; x=1750051639;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=m/6qbjkWbO/i365IDyoZgWyUSWgaRgybc8iWD05/6sI=;
- b=aBBNfV00vqYRFJOGi6DgtstpTcSkHr5PbGVvDG0sZ03zjLVx7Woui0zc6yrAfnaKDr
- zQeCahFiuNn48A38BGIoTH8y+V82808DKs4mEzU1uWGNUfoOz1ksBHCdwPpuZl//DhSw
- clrKR24QBd6MdLX2ENxcPVdNLjUnBeey3zTB0vtqp+Zmo1cj+gUVoU0F/sBYNBShWCU6
- w+2gueLsz0GZN0Szbqw7J+2NkhdfBBUlJcZFx4tST0VjLuLu+4HpIEBOEkBIxCRoymoq
- MV5wWzwYPpIYibtSeOqjr1139CHOEfMYYsEAmUyvjGnTw8oD6c9IIDJl8QThI5DfzQdM
- cSOQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVli68wkkSY08wl+lALxzfWIrehb12amJT95H84VX0/M/qcs6wh4vEItIOn28yX550eBj+1YEa3j7vg@nongnu.org
-X-Gm-Message-State: AOJu0YzTDmh9S0zZ0NFgIiGKusQN3jODkm4p0lvt4xjOkEQiYPdwu+db
- PwU58W1unra+ByzF9HY7oytXuV1tJESiCgs6gMm8/dNCxiLngCAU88KtacwkCEF/hEdAKHxyJJy
- al/KRFuNjtj+E/+RkL/p6UnIFj0iteGlE0Q==
-X-Gm-Gg: ASbGncsA9ik664agY23/kW9QAFvIW1MvwEPC5BtqK2CKbHSN2VWXo90fcXzhw7MfoW7
- AzU4h2EQkMxco7ZAoIV1aQ27nXCZYpyuUsc8mM/g/QStdf0bMz8bWyY80JLDpwMp6DXYn6NvytN
- atgYTCfqYPHw9ZpodrnUqY9oQHGzYSDRGnwy3w0aB3Oj+9+77oiyctJ5RQKDF2xqs=
-X-Google-Smtp-Source: AGHT+IFyCqgvXUvSttpToZxZ85CfK+vzT3vCNtb/L3438aaa1H448tRIUopHOBc59e+OBoA9LKgjTekQc7BOiw0+Qws=
-X-Received: by 2002:a05:6102:54aa:b0:4e5:5c14:5937 with SMTP id
- ada2fe7eead31-4e772b8c453mr9924628137.1.1749446827872; Sun, 08 Jun 2025
- 22:27:07 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <ben.dooks@codethink.co.uk>)
+ id 1uOZvw-0003Qr-TW; Mon, 09 Jun 2025 06:40:52 -0400
+Received: from imap5.colo.codethink.co.uk ([78.40.148.171])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <ben.dooks@codethink.co.uk>)
+ id 1uOZvu-0003QB-Pw; Mon, 09 Jun 2025 06:40:52 -0400
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=codethink.co.uk; s=imap5-20230908; h=Sender:Content-Transfer-Encoding:
+ Content-Type:In-Reply-To:From:References:Cc:To:Subject:MIME-Version:Date:
+ Message-ID:Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:
+ Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:
+ List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=/jvXeGUNmt0KOjdur3S/SoFm1b7dpO4x5a6GuO+2xIo=; b=uiRDXTMQt3jDqSvhWw1aRYRnDv
+ cNjiX3tpCBvPws43h43FuruNJUoOyipjPy+5NqxbOIZmRIG7uLavDXRJNQSH7QWVJOfuwMHWN4bOU
+ 7vDDWYIUrDqbM21w5edJgFW89e6TcBcv71maOadBjGOSYFP9uDtvG2cKWiS85qNCeA6etEWB381pW
+ VuLPFhEZTWjXypPqic7z2CR0EeHTLgi+7JoLbd6bCU7G2aXFnrDKVgQZU1AD4UujxqT7ULjgWHqEg
+ 4KH5KYNnyapiRatv2+/lWhpmYZAJkFypEORAAmrc3HtkMxCvJNYQoJucdR3lN3ni033YTI+CFFghh
+ UhRh3DaQ==;
+Received: from [63.135.74.212] (helo=[192.168.1.249])
+ by imap5.colo.codethink.co.uk with esmtpsa  (Exim 4.94.2 #2 (Debian))
+ id 1uOZvj-00FL9O-P3; Mon, 09 Jun 2025 11:40:39 +0100
+Message-ID: <06323162-66b9-4165-ab2e-86ec6272aca8@codethink.co.uk>
+Date: Mon, 9 Jun 2025 11:40:37 +0100
 MIME-Version: 1.0
-References: <20250605101255.797162-1-florian.lugou@provenrun.com>
-In-Reply-To: <20250605101255.797162-1-florian.lugou@provenrun.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 9 Jun 2025 15:26:42 +1000
-X-Gm-Features: AX0GCFt3Lz4G6Aepn_XqURsUGewQQQd2C75paDZtMoZVsTE6MbE-lRqDZ2Z4DwM
-Message-ID: <CAKmqyKM4YsNantoUA7vEmt-+VpmtiF-US+LFC0sSbY_K49KRqg@mail.gmail.com>
-Subject: Re: [PATCH] hw/char: sifive_uart: Avoid infinite delay of async xmit
- function
-To: Florian Lugou <florian.lugou@provenrun.com>
-Cc: qemu-devel@nongnu.org, Alistair Francis <Alistair.Francis@wdc.com>, 
- Palmer Dabbelt <palmer@dabbelt.com>,
- =?UTF-8?B?TWFyYy1BbmRyw6kgTHVyZWF1?= <marcandre.lureau@redhat.com>, 
- Paolo Bonzini <pbonzini@redhat.com>,
- "open list:SiFive Machines" <qemu-riscv@nongnu.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2001:4860:4864:20::34;
- envelope-from=alistair23@gmail.com; helo=mail-oa1-x34.google.com
-X-Spam_score_int: -17
-X-Spam_score: -1.8
-X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 2/3] target/riscv: add cva6 core type
+To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ nazar.kazakov@codethink.co.uk, joseph.baker@codethink.co.uk,
+ fran.redondo@codethink.co.uk, lawrence.hunter@codethink.co.uk,
+ liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com, qemu-riscv@nongnu.org
+Cc: qemu-devel@nongnu.org
+References: <20250527112437.291445-1-ben.dooks@codethink.co.uk>
+ <20250527112437.291445-3-ben.dooks@codethink.co.uk>
+ <ef6c7b15-04a7-42cf-a89b-c2674388810f@ventanamicro.com>
+Content-Language: en-GB
+From: Ben Dooks <ben.dooks@codethink.co.uk>
+Organization: Codethink Limited.
+In-Reply-To: <ef6c7b15-04a7-42cf-a89b-c2674388810f@ventanamicro.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=78.40.148.171;
+ envelope-from=ben.dooks@codethink.co.uk; helo=imap5.colo.codethink.co.uk
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001, RCVD_IN_VALIDITY_SAFE_BLOCKED=0.001,
+ SPF_HELO_PASS=-0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -99,53 +76,120 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Thu, Jun 5, 2025 at 8:14=E2=80=AFPM Florian Lugou
-<florian.lugou@provenrun.com> wrote:
->
-> The current handler for TXFIFO writes schedules an async callback to
-> pop characters from the queue. When software writes to TXFIFO faster
-> than the async callback delay (100ns), the timer may be pushed back
-> while the previous character has not be dequeued yet. This happens in
-> particular when using -icount with small shift values. This is
-> especially worrysome when software repetitively issues amoor.w
-> instructions (as suggested by SiFive specification) and the FIFO is
-> full, leading to the callback being infinitly pushed back.
->
-> This commit fixes the issue by never pushing back the timer, only
-> updating it if it is not already active.
->
-> Signed-off-by: Florian Lugou <florian.lugou@provenrun.com>
+On 07/06/2025 21:17, Daniel Henrique Barboza wrote:
+> 
+> 
+> On 5/27/25 8:24 AM, Ben Dooks wrote:
+>> Add TYPE_RISCV_CPU_CVA6 for the CVA6 core
+>>
+>> Signed-off-by: Ben Dooks <ben.dooks@codethink.co.uk>
+>> ---
+>>   target/riscv/cpu-qom.h |  1 +
+>>   target/riscv/cpu.c     | 11 +++++++++++
+>>   2 files changed, 12 insertions(+)
+>>
+>> diff --git a/target/riscv/cpu-qom.h b/target/riscv/cpu-qom.h
+>> index 1ee05eb393..3daf75568c 100644
+>> --- a/target/riscv/cpu-qom.h
+>> +++ b/target/riscv/cpu-qom.h
+>> @@ -34,6 +34,7 @@
+>>   #define TYPE_RISCV_CPU_BASE32           RISCV_CPU_TYPE_NAME("rv32")
+>>   #define TYPE_RISCV_CPU_BASE64           RISCV_CPU_TYPE_NAME("rv64")
+>>   #define TYPE_RISCV_CPU_BASE128          RISCV_CPU_TYPE_NAME("x-rv128")
+>> +#define TYPE_RISCV_CPU_CVA6             RISCV_CPU_TYPE_NAME("cva6")
+>>   #define TYPE_RISCV_CPU_RV32I            RISCV_CPU_TYPE_NAME("rv32i")
+>>   #define TYPE_RISCV_CPU_RV32E            RISCV_CPU_TYPE_NAME("rv32e")
+>>   #define TYPE_RISCV_CPU_RV64I            RISCV_CPU_TYPE_NAME("rv64i")
+>> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+>> index 629ac37501..fca45dc9d9 100644
+>> --- a/target/riscv/cpu.c
+>> +++ b/target/riscv/cpu.c
+>> @@ -3009,6 +3009,17 @@ static const TypeInfo riscv_cpu_type_infos[] = {
+>>           .misa_mxl_max = MXL_RV64,
+>>       ),
+>> +    DEFINE_RISCV_CPU(TYPE_RISCV_CPU_CVA6, TYPE_RISCV_VENDOR_CPU,
+>> +        .misa_ext = RVI | RVM | RVA | RVF | RVD | RVC | RVB | RVS | RVU,
+>> +        .misa_mxl_max = MXL_RV64,
+>> +        .cfg.max_satp_mode = VM_1_10_SV39,
+>> +        .priv_spec = PRIV_VERSION_1_12_0,
+>> +        .cfg.pmp = true,
+>> +        .cfg.mmu = true,
+>> +        .cfg.ext_zifencei = true,
+>> +        .cfg.ext_zicsr = true,
+>> +    ),
+>> +
+> 
+> The CPU is being added inside a "#if defined(TARGET_RISCV64)" block, 
+> meaning
+> that it's a 64-bit CPU only. But the CVA6 board added in patch 1 is being
+> added for both 32 and 64 bit emulations in hw/riscv/Kconfig:
 
-Thanks!
+Ah yes, it is possible to make a cva6 32bit, is it ok just to ove this
+into a different place or is there anything else needed to allow 32 or 
+64bit?
 
-Applied to riscv-to-apply.next
+I've only been building a 64bit userland to test so didn't notice the
+lack of 32bit was an issue.
 
-Alistair
+> config CVA6
+>      bool
+>      default y
+>      depends on RISCV32 || RISCV64  <------------------
+> 
+> This setup (after patch 3 is added) triggered a test failure in 'check- 
+> qtest',
+> when polling all available boards in qemu-system-riscv32, because it 
+> didn't find
+> a default 32 bit CPU for the cva6 board:
+> 
+> # starting QEMU: exec ./qemu-system-riscv32 -qtest unix:/tmp/ 
+> qtest-1683816.sock -qtest-log /dev/null -chardev socket,path=/tmp/ 
+> qtest-1683816.qmp,id=char0 -mon chardev=char0,mode=control -display none 
+> -audio none -machine cva6 -accel qtest
+> ----------------------------------- stderr 
+> -----------------------------------
+> qemu-system-riscv32: ../hw/core/machine.c:1574: is_cpu_type_supported: 
+> Assertion `cc != NULL' failed.
+> Broken pipe
+> ../tests/qtest/libqtest.c:208: kill_qemu() detected QEMU death from 
+> signal 6 (Aborted) (core dumped)
+> 
+> 
+> 
+> We have 2 options here:
+> 
+> - if the CVA6 board is supposed to run in RISCV32 and RISCV64, then its 
+> default
+> CPU must be 32 bit compliant too. The CPU declaration in this patch must 
+> be moved
+> outside the "#if defined(TARGET_RISCV64)" block (e.g right after
+> TYPE_RISCV_CPU_SIFIVE_U);
+> 
+> - if the board is 64 bit only then the CPU declaration is fine, and we 
+> need to
+> change the board hw/riscv/Kconfig entry to "depends on RISCV64".
+> 
 
-> ---
->  hw/char/sifive_uart.c | 6 ++++--
->  1 file changed, 4 insertions(+), 2 deletions(-)
->
-> diff --git a/hw/char/sifive_uart.c b/hw/char/sifive_uart.c
-> index 0fc89e76d1..9bc697a67b 100644
-> --- a/hw/char/sifive_uart.c
-> +++ b/hw/char/sifive_uart.c
-> @@ -128,8 +128,10 @@ static void sifive_uart_write_tx_fifo(SiFiveUARTStat=
-e *s, const uint8_t *buf,
->          s->txfifo |=3D SIFIVE_UART_TXFIFO_FULL;
->      }
->
-> -    timer_mod(s->fifo_trigger_handle, current_time +
-> -                  TX_INTERRUPT_TRIGGER_DELAY_NS);
-> +    if (!timer_pending(s->fifo_trigger_handle)) {
-> +        timer_mod(s->fifo_trigger_handle, current_time +
-> +                      TX_INTERRUPT_TRIGGER_DELAY_NS);
-> +    }
->  }
->
->  static uint64_t
-> --
-> 2.43.0
->
->
+As long as it is just the #ifdef block I will move it.
+
+Should I just re-send this change?
+
+> Thanks,
+> 
+> Daniel
+> 
+> 
+>>       DEFINE_RISCV_CPU(TYPE_RISCV_CPU_SIFIVE_E51, 
+>> TYPE_RISCV_CPU_SIFIVE_E,
+>>           .misa_mxl_max = MXL_RV64
+>>       ),
+> 
+> 
+
+
+-- 
+Ben Dooks				http://www.codethink.co.uk/
+Senior Engineer				Codethink - Providing Genius
+
+https://www.codethink.co.uk/privacy.html
 
