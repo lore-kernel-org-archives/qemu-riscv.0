@@ -4,86 +4,99 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D4EB3C61CE8
-	for <qemu-riscv@archiver.kernel.org>; Mon,  9 Jun 2025 12:06:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 57C87C5B552
+	for <qemu-riscv@archiver.kernel.org>; Mon,  9 Jun 2025 12:28:59 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uObGE-0000iE-L9; Mon, 09 Jun 2025 08:05:54 -0400
+	id 1uObcC-0004rF-MC; Mon, 09 Jun 2025 08:28:36 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <zhao1.liu@intel.com>)
- id 1uObG4-0000hA-Ji; Mon, 09 Jun 2025 08:05:44 -0400
-Received: from mgamail.intel.com ([198.175.65.15])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <zhao1.liu@intel.com>)
- id 1uObFz-00060z-AP; Mon, 09 Jun 2025 08:05:42 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1749470739; x=1781006739;
- h=date:from:to:cc:subject:message-id:references:
- mime-version:in-reply-to;
- bh=Ot80FdygVaU40feRZ301n0PWrVBN6sbOj4IHwArYDLM=;
- b=J/7uIh+Bmk05b/R7NuFYsfSMKHILOY5iUJDsC4J/7hM2GJgAHi95hpdK
- dyNQCxUJpiDXG2MRKa7JMBJXzx0RFPm7zzxebVtKa3XQA1Y/E9s4jlkaS
- JBM5RHn+5Rq8OGjfJHV1Bk5nN7UvDfvP1XS83PIvEH03OHkWZeTCB5wmE
- syCC5Ma/14cnmkPH9lrHNHENOOE11bRb0/4CquXL9j968AcdavmzZBztc
- bJp6ktDL2haxppJB/8KbqbF98GrKB5TgqnwMyswdZoK2vPY5QBzaLr8BI
- Tclt6IOgmMwInVI1upaXU36fL2xvnJOZcv9Rx2NnPefBWwJDmT8C0x+g0 A==;
-X-CSE-ConnectionGUID: 3c8+2N3SSKuY1bpLA1kgnQ==
-X-CSE-MsgGUID: 86xmJm9wSi6dChPJqiJ4Zg==
-X-IronPort-AV: E=McAfee;i="6800,10657,11459"; a="55207656"
-X-IronPort-AV: E=Sophos;i="6.16,222,1744095600"; d="scan'208";a="55207656"
-Received: from fmviesa002.fm.intel.com ([10.60.135.142])
- by orvoesa107.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 09 Jun 2025 05:05:27 -0700
-X-CSE-ConnectionGUID: neqNMhuqTByEfy8638EDwQ==
-X-CSE-MsgGUID: Gb/B1zMdQ6GGp9Vb048ccQ==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.16,222,1744095600"; d="scan'208";a="169667573"
-Received: from liuzhao-optiplex-7080.sh.intel.com (HELO localhost)
- ([10.239.160.39])
- by fmviesa002.fm.intel.com with ESMTP; 09 Jun 2025 05:05:16 -0700
-Date: Mon, 9 Jun 2025 20:26:31 +0800
-From: Zhao Liu <zhao1.liu@intel.com>
-To: Dongli Zhang <dongli.zhang@oracle.com>
-Cc: qemu-devel@nongnu.org, kvm@vger.kernel.org, qemu-arm@nongnu.org,
- qemu-ppc@nongnu.org, qemu-riscv@nongnu.org, qemu-s390x@nongnu.org,
- pbonzini@redhat.com, mtosatti@redhat.com, sandipan.das@amd.com,
- babu.moger@amd.com, likexu@tencent.com, like.xu.linux@gmail.com,
- groug@kaod.org, khorenko@virtuozzo.com,
- alexander.ivanov@virtuozzo.com, den@virtuozzo.com,
- davydov-max@yandex-team.ru, xiaoyao.li@intel.com,
- dapeng1.mi@linux.intel.com, joe.jin@oracle.com,
- peter.maydell@linaro.org, gaosong@loongson.cn,
- chenhuacai@kernel.org, philmd@linaro.org, aurelien@aurel32.net,
- jiaxun.yang@flygoat.com, arikalo@gmail.com, npiggin@gmail.com,
- danielhb413@gmail.com, palmer@dabbelt.com, alistair.francis@wdc.com,
- liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com,
- pasic@linux.ibm.com, borntraeger@linux.ibm.com,
- richard.henderson@linaro.org, david@redhat.com, iii@linux.ibm.com,
- thuth@redhat.com, flavra@baylibre.com, ewanhai-oc@zhaoxin.com,
- ewanhai@zhaoxin.com, cobechen@zhaoxin.com, louisqi@zhaoxin.com,
- liamni@zhaoxin.com, frankzhu@zhaoxin.com, silviazhao@zhaoxin.com,
- kraxel@redhat.com, berrange@redhat.com
-Subject: Re: [PATCH v5 00/10] target/i386/kvm/pmu: PMU Enhancement, Bugfix
- and Cleanup
-Message-ID: <aEbS93r7YRcIadj0@intel.com>
-References: <20250425213037.8137-1-dongli.zhang@oracle.com>
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1uObc9-0004r0-Nb
+ for qemu-riscv@nongnu.org; Mon, 09 Jun 2025 08:28:33 -0400
+Received: from mail-pj1-x1041.google.com ([2607:f8b0:4864:20::1041])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
+ id 1uObc4-0000EA-VE
+ for qemu-riscv@nongnu.org; Mon, 09 Jun 2025 08:28:33 -0400
+Received: by mail-pj1-x1041.google.com with SMTP id
+ 98e67ed59e1d1-3137c20213cso1393154a91.3
+ for <qemu-riscv@nongnu.org>; Mon, 09 Jun 2025 05:28:28 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=ventanamicro.com; s=google; t=1749472105; x=1750076905; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=ub+MWuTeJwn0mWQ/V74oIXblSC0hZqAKQ7t+F27WxDQ=;
+ b=BDKym024lSo28ZDe3iSUSzi1OuBiWzi1PCGQDh72Rbd3hfJfKL1j6WQSplhqYVyEKX
+ Uwvw83ohgTd544L/NEKxdwVcvexPQYhDejBx46nPg0yheYyibfE4HI0RqNRDV4eMMXwi
+ APBfqBxPn9Jl8W7oD22R+fmyTWhhceV4oWdxilQhLMg5sExw3WqGaqGI6OsyzNCCN2d1
+ 5OqHZvnqhFLuAgaotV1JrdJp+QgvqGZ+bYtWW23g+DE228Lb56UaEoBMCXJFBSWstwsA
+ VypdrKctTxs2YwS6zdapwrs+aAh5A5VaoPF7NsaDQVlynkbl/q6ewyCucdo/a+hedL5S
+ m6Jg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1749472105; x=1750076905;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=ub+MWuTeJwn0mWQ/V74oIXblSC0hZqAKQ7t+F27WxDQ=;
+ b=w0+zbJcO86ivYRkrB4/UyKVqSmLmAxk48M+cadrWwaRvt1WwFAk1/GQ69r62LJPFbd
+ eZhe/dZLYhjiI72xGZLcvwX3Tcw19dNLqqurt7Ox0AeMXqhGIv49NkmNLigDgdlqCFkj
+ klWyRlP79gfN/JX5xZlK/yw46iHy89EGlMwCLNiidAfdfx3kKGO6wE9Bqv++TzdUcD4u
+ hO1wYiXDzPYgQx6da3QnawB0XnX8Z+im/nuRk03fbRNiy+JBnH2xhsYZuqra85XtSGwj
+ 5LPmIw7NA022ceup0jkVFQoiUuWqiPFjWMziPAQGvEIcgEERawELsXll8LKjfb8NPf3O
+ 9HqQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUc2j29JD+jiAgccNQk33h0NcMosftfDpKuq4e1RkIdMG24juxAduNdlNSc6NXcqTd0cY6K901ePYLe@nongnu.org
+X-Gm-Message-State: AOJu0YwJzLQ6ufdJPOZ5er0LEqDBLrFgpxCTpUdlDZJU49Yc2WAdio2b
+ AdSLUZ+G2EwYxoz/93pOFIMBH4WmYw0MGrJKwqupbs7vOrdZr/aN3MFw6HycT6OaJtzmViXdjvj
+ uMLLNONR20g==
+X-Gm-Gg: ASbGncu6MyoKQcy7HOuVTzdFLNLurwAJpgBE29WM6YT+IP3M7YpbUurndlQ1vzt9zgy
+ oi3VX20T8tJaItQjlp+FD1nDBCukFLHknn/ue0WKKq9vvP1US7pl5B+VRn3TxvQpNZbYH1TkqLl
+ xM7gcDVh9yWQCE9MyvAJn5I0FiSWr2epgVVt/v6wrC/NINwFmceKWJEbFiYF3buQbsrQ8Un9mB1
+ 5Q4Yvds7r14AilYw6ez/mOUn4S+sQV3tRK0xpjLFp8ELy+eybyuEUtWD9q07ddOLA0osiG/+XyQ
+ 2+KFQY5dV1CDr5rlpQLy3wqVrnjH/D+j86AJkEConh21U6kNPShFkJ1cPZ1+EsDai0O+bWwwS14
+ =
+X-Google-Smtp-Source: AGHT+IHt0mqDrjpqtzUwxoVLfq5NjbfpMtnYSiU7lJsOWM9Bnw9ULUM2WubsHlK6K9ZdESduoAV8Yw==
+X-Received: by 2002:a17:90b:3911:b0:311:ab20:159a with SMTP id
+ 98e67ed59e1d1-31347698038mr16727297a91.29.1749472104612; 
+ Mon, 09 Jun 2025 05:28:24 -0700 (PDT)
+Received: from [192.168.68.110] ([179.93.21.192])
+ by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-2360340fbffsm53323425ad.197.2025.06.09.05.28.21
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 09 Jun 2025 05:28:24 -0700 (PDT)
+Message-ID: <01cb822d-0587-44b5-a5a5-da8413a45386@ventanamicro.com>
+Date: Mon, 9 Jun 2025 09:28:20 -0300
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20250425213037.8137-1-dongli.zhang@oracle.com>
-Received-SPF: pass client-ip=198.175.65.15; envelope-from=zhao1.liu@intel.com;
- helo=mgamail.intel.com
-X-Spam_score_int: -43
-X-Spam_score: -4.4
-X-Spam_bar: ----
-X-Spam_report: (-4.4 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_MED=-2.3, RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001,
- RCVD_IN_VALIDITY_SAFE_BLOCKED=0.001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 2/3] target/riscv: add cva6 core type
+To: Ben Dooks <ben.dooks@codethink.co.uk>, nazar.kazakov@codethink.co.uk,
+ joseph.baker@codethink.co.uk, fran.redondo@codethink.co.uk,
+ lawrence.hunter@codethink.co.uk, liwei1518@gmail.com,
+ zhiwei_liu@linux.alibaba.com, qemu-riscv@nongnu.org
+Cc: qemu-devel@nongnu.org
+References: <20250527112437.291445-1-ben.dooks@codethink.co.uk>
+ <20250527112437.291445-3-ben.dooks@codethink.co.uk>
+ <ef6c7b15-04a7-42cf-a89b-c2674388810f@ventanamicro.com>
+ <06323162-66b9-4165-ab2e-86ec6272aca8@codethink.co.uk>
+ <341224e9-d335-40ac-af98-6395b3aede84@ventanamicro.com>
+ <a661eb0c-ba27-4348-93d2-dfb1a080c18e@codethink.co.uk>
+Content-Language: en-US
+From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+In-Reply-To: <a661eb0c-ba27-4348-93d2-dfb1a080c18e@codethink.co.uk>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1041;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pj1-x1041.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -99,136 +112,136 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Hi Dongli,
 
-Since the patch 3 was merged. I think you can rebase this series.
+
+On 6/9/25 8:47 AM, Ben Dooks wrote:
+> On 09/06/2025 12:30, Daniel Henrique Barboza wrote:
+>>
+>>
+>> On 6/9/25 7:40 AM, Ben Dooks wrote:
+>>> On 07/06/2025 21:17, Daniel Henrique Barboza wrote:
+>>>>
+>>>>
+>>>> On 5/27/25 8:24 AM, Ben Dooks wrote:
+>>>>> Add TYPE_RISCV_CPU_CVA6 for the CVA6 core
+>>>>>
+>>>>> Signed-off-by: Ben Dooks <ben.dooks@codethink.co.uk>
+>>>>> ---
+>>>>>   target/riscv/cpu-qom.h |  1 +
+>>>>>   target/riscv/cpu.c     | 11 +++++++++++
+>>>>>   2 files changed, 12 insertions(+)
+>>>>>
+>>>>> diff --git a/target/riscv/cpu-qom.h b/target/riscv/cpu-qom.h
+>>>>> index 1ee05eb393..3daf75568c 100644
+>>>>> --- a/target/riscv/cpu-qom.h
+>>>>> +++ b/target/riscv/cpu-qom.h
+>>>>> @@ -34,6 +34,7 @@
+>>>>>   #define TYPE_RISCV_CPU_BASE32           RISCV_CPU_TYPE_NAME("rv32")
+>>>>>   #define TYPE_RISCV_CPU_BASE64           RISCV_CPU_TYPE_NAME("rv64")
+>>>>>   #define TYPE_RISCV_CPU_BASE128          RISCV_CPU_TYPE_NAME("x- rv128")
+>>>>> +#define TYPE_RISCV_CPU_CVA6             RISCV_CPU_TYPE_NAME("cva6")
+>>>>>   #define TYPE_RISCV_CPU_RV32I            RISCV_CPU_TYPE_NAME("rv32i")
+>>>>>   #define TYPE_RISCV_CPU_RV32E            RISCV_CPU_TYPE_NAME("rv32e")
+>>>>>   #define TYPE_RISCV_CPU_RV64I            RISCV_CPU_TYPE_NAME("rv64i")
+>>>>> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+>>>>> index 629ac37501..fca45dc9d9 100644
+>>>>> --- a/target/riscv/cpu.c
+>>>>> +++ b/target/riscv/cpu.c
+>>>>> @@ -3009,6 +3009,17 @@ static const TypeInfo riscv_cpu_type_infos[] = {
+>>>>>           .misa_mxl_max = MXL_RV64,
+>>>>>       ),
+>>>>> +    DEFINE_RISCV_CPU(TYPE_RISCV_CPU_CVA6, TYPE_RISCV_VENDOR_CPU,
+>>>>> +        .misa_ext = RVI | RVM | RVA | RVF | RVD | RVC | RVB | RVS | RVU,
+>>>>> +        .misa_mxl_max = MXL_RV64,
+>>>>> +        .cfg.max_satp_mode = VM_1_10_SV39,
+>>>>> +        .priv_spec = PRIV_VERSION_1_12_0,
+>>>>> +        .cfg.pmp = true,
+>>>>> +        .cfg.mmu = true,
+>>>>> +        .cfg.ext_zifencei = true,
+>>>>> +        .cfg.ext_zicsr = true,
+>>>>> +    ),
+>>>>> +
+>>>>
+>>>> The CPU is being added inside a "#if defined(TARGET_RISCV64)" block, meaning
+>>>> that it's a 64-bit CPU only. But the CVA6 board added in patch 1 is being
+>>>> added for both 32 and 64 bit emulations in hw/riscv/Kconfig:
+>>>
+>>> Ah yes, it is possible to make a cva6 32bit, is it ok just to ove this
+>>> into a different place or is there anything else needed to allow 32 or 64bit?
+>>>
+>>> I've only been building a 64bit userland to test so didn't notice the
+>>> lack of 32bit was an issue.
+>>>
+>>>> config CVA6
+>>>>      bool
+>>>>      default y
+>>>>      depends on RISCV32 || RISCV64  <------------------
+>>>>
+>>>> This setup (after patch 3 is added) triggered a test failure in 'check- qtest',
+>>>> when polling all available boards in qemu-system-riscv32, because it didn't find
+>>>> a default 32 bit CPU for the cva6 board:
+>>>>
+>>>> # starting QEMU: exec ./qemu-system-riscv32 -qtest unix:/tmp/ qtest-1683816.sock -qtest-log /dev/null -chardev socket,path=/tmp/ qtest-1683816.qmp,id=char0 -mon chardev=char0,mode=control -display none -audio none -machine cva6 -accel qtest
+>>>> ----------------------------------- stderr -----------------------------------
+>>>> qemu-system-riscv32: ../hw/core/machine.c:1574: is_cpu_type_supported: Assertion `cc != NULL' failed.
+>>>> Broken pipe
+>>>> ../tests/qtest/libqtest.c:208: kill_qemu() detected QEMU death from signal 6 (Aborted) (core dumped)
+>>>>
+>>>>
+>>>>
+>>>> We have 2 options here:
+>>>>
+>>>> - if the CVA6 board is supposed to run in RISCV32 and RISCV64, then its default
+>>>> CPU must be 32 bit compliant too. The CPU declaration in this patch must be moved
+>>>> outside the "#if defined(TARGET_RISCV64)" block (e.g right after
+>>>> TYPE_RISCV_CPU_SIFIVE_U);
+>>>>
+>>>> - if the board is 64 bit only then the CPU declaration is fine, and we need to
+>>>> change the board hw/riscv/Kconfig entry to "depends on RISCV64".
+>>>>
+>>>
+>>> As long as it is just the #ifdef block I will move it.
+>>
+>> I just read the CV6 documentation at:
+>>
+>> https://github.com/openhwgroup/cva6/
+>>
+>>
+>> The README states right at the start:
+>>
+>>
+>> "CVA6 is a 6-stage, single-issue, in-order CPU which implements the 64- bit RISC-V instruction set."
+>>
+>>
+>> So this means that CVA6 is a 64-bit CPU only. This means that we want the second
+>> option: the CPU declaration is fine, but the CVA6 board must be built only for 64
+>> bits. In patch 1, this line:
+> 
+> 
+> There do seem to be some build variants for cva32a6 deep in the docs
+> and the cva6-sdk has builds for both xlen==32 and xlen==64 so I am a
+> bit confused here.
+
+It looks like that the 32 bit version (which I assume to be this cva32a65x target)
+is not the same CPU as you're adding here. At least in a quick read at the docs.
+
+Even if we move the CPU declaration as I've suggested, making this cva6 work 32 bit
+compliant too, that doesn't mean that it'll have the intended purpose as per its
+own spec.
+
+My suggestion is to get a clarification with the cva6 folks (or any other interested
+party) about whether this is supposed to be a 64 bit only board/cpu or not. If
+unsure, I suggest to contribute this as a 64 bit only CPU/board for now and then
+revisit this later in case there's a 32 bit variant too.
+
 
 Thanks,
-Zhao
 
-On Fri, Apr 25, 2025 at 02:29:57PM -0700, Dongli Zhang wrote:
-> Date: Fri, 25 Apr 2025 14:29:57 -0700
-> From: Dongli Zhang <dongli.zhang@oracle.com>
-> Subject: [PATCH v5 00/10] target/i386/kvm/pmu: PMU Enhancement, Bugfix and
->  Cleanup
-> X-Mailer: git-send-email 2.43.5
-> 
-> This patchset addresses four bugs related to AMD PMU virtualization.
-> 
-> 1. The PerfMonV2 is still available if PERCORE if disabled via
-> "-cpu host,-perfctr-core".
-> 
-> 2. The VM 'cpuid' command still returns PERFCORE although "-pmu" is
-> configured.
-> 
-> 3. The third issue is that using "-cpu host,-pmu" does not disable AMD PMU
-> virtualization. When using "-cpu EPYC" or "-cpu host,-pmu", AMD PMU
-> virtualization remains enabled. On the VM's Linux side, you might still
-> see:
-> 
-> [    0.510611] Performance Events: Fam17h+ core perfctr, AMD PMU driver.
-> 
-> instead of:
-> 
-> [    0.596381] Performance Events: PMU not available due to virtualization, using software events only.
-> [    0.600972] NMI watchdog: Perf NMI watchdog permanently disabled
-> 
-> To address this, KVM_CAP_PMU_CAPABILITY is used to set KVM_PMU_CAP_DISABLE
-> when "-pmu" is configured.
-> 
-> 4. The fourth issue is that unreclaimed performance events (after a QEMU
-> system_reset) in KVM may cause random, unwanted, or unknown NMIs to be
-> injected into the VM.
-> 
-> The AMD PMU registers are not reset during QEMU system_reset.
-> 
-> (1) If the VM is reset (e.g., via QEMU system_reset or VM kdump/kexec) while
-> running "perf top", the PMU registers are not disabled properly.
-> 
-> (2) Despite x86_cpu_reset() resetting many registers to zero, kvm_put_msrs()
-> does not handle AMD PMU registers, causing some PMU events to remain
-> enabled in KVM.
-> 
-> (3) The KVM kvm_pmc_speculative_in_use() function consistently returns true,
-> preventing the reclamation of these events. Consequently, the
-> kvm_pmc->perf_event remains active.
-> 
-> (4) After a reboot, the VM kernel may report the following error:
-> 
-> [    0.092011] Performance Events: Fam17h+ core perfctr, Broken BIOS detected, complain to your hardware vendor.
-> [    0.092023] [Firmware Bug]: the BIOS has corrupted hw-PMU resources (MSR c0010200 is 530076)
-> 
-> (5) In the worst case, the active kvm_pmc->perf_event may inject unknown
-> NMIs randomly into the VM kernel:
-> 
-> [...] Uhhuh. NMI received for unknown reason 30 on CPU 0.
-> 
-> To resolve these issues, we propose resetting AMD PMU registers during the
-> VM reset process
+Daniel
+
+
+
 > 
 > 
-> Changed since v1:
->   - Use feature_dependencies for CPUID_EXT3_PERFCORE and
->     CPUID_8000_0022_EAX_PERFMON_V2.
->   - Remove CPUID_EXT3_PERFCORE when !cpu->enable_pmu.
->   - Pick kvm_arch_pre_create_vcpu() patch from Xiaoyao Li.
->   - Use "-pmu" but not a global "pmu-cap-disabled" for KVM_PMU_CAP_DISABLE.
->   - Also use sysfs kvm.enable_pmu=N to determine if PMU is supported.
->   - Some changes to PMU register limit calculation.
-> Changed since v2:
->   - Change has_pmu_cap to pmu_cap.
->   - Use cpuid_find_entry() instead of cpu_x86_cpuid().
->   - Rework the code flow of PATCH 07 related to kvm.enable_pmu=N following
->     Zhao's suggestion.
->   - Use object_property_get_int() to get CPU family.
->   - Add support to Zhaoxin.
-> Changed since v3:
->   - Re-base on top of Zhao's queued patch.
->   - Use host_cpu_vendor_fms() from Zhao's patch.
->   - Pick new version of kvm_arch_pre_create_vcpu() patch from Xiaoyao.
->   - Re-split the cases into enable_pmu and !enable_pmu, following Zhao's
->     suggestion.
->   - Check AMD directly makes the "compat" rule clear.
->   - Some changes on commit message and comment.
->   - Bring back global static variable 'kvm_pmu_disabled' read from
->     /sys/module/kvm/parameters/enable_pmu.
-> Changed since v4:
->   - Re-base on top of most recent mainline QEMU.
->   - Add more Reviewed-by.
->   - All patches are reviewed.
-> 
-> 
-> Xiaoyao Li (1):
->   kvm: Introduce kvm_arch_pre_create_vcpu()
-> 
-> Dongli Zhang (9):
->   target/i386: disable PerfMonV2 when PERFCORE unavailable
->   target/i386: disable PERFCORE when "-pmu" is configured
->   target/i386/kvm: set KVM_PMU_CAP_DISABLE if "-pmu" is configured
->   target/i386/kvm: extract unrelated code out of kvm_x86_build_cpuid()
->   target/i386/kvm: rename architectural PMU variables
->   target/i386/kvm: query kvm.enable_pmu parameter
->   target/i386/kvm: reset AMD PMU registers during VM reset
->   target/i386/kvm: support perfmon-v2 for reset
->   target/i386/kvm: don't stop Intel PMU counters
-> 
->  accel/kvm/kvm-all.c        |   5 +
->  include/system/kvm.h       |   1 +
->  target/arm/kvm.c           |   5 +
->  target/i386/cpu.c          |   8 +
->  target/i386/cpu.h          |  16 ++
->  target/i386/kvm/kvm.c      | 360 ++++++++++++++++++++++++++++++++++------
->  target/loongarch/kvm/kvm.c |   4 +
->  target/mips/kvm.c          |   5 +
->  target/ppc/kvm.c           |   5 +
->  target/riscv/kvm/kvm-cpu.c |   5 +
->  target/s390x/kvm/kvm.c     |   5 +
->  11 files changed, 372 insertions(+), 47 deletions(-)
-> 
-> base-commit: 019fbfa4bcd2d3a835c241295e22ab2b5b56129b
-> 
-> Thank you very much!
-> 
-> Dongli Zhang
-> 
+
 
