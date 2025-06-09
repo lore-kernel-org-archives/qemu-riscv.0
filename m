@@ -4,66 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B8805C5B552
-	for <qemu-riscv@archiver.kernel.org>; Mon,  9 Jun 2025 05:05:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DB395C5B552
+	for <qemu-riscv@archiver.kernel.org>; Mon,  9 Jun 2025 05:27:41 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uOUhb-0003O8-VP; Mon, 09 Jun 2025 01:05:43 -0400
+	id 1uOV2e-0007eR-0e; Mon, 09 Jun 2025 01:27:28 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1uOUhZ-0003Nr-VN; Mon, 09 Jun 2025 01:05:42 -0400
-Received: from mail-ed1-x52e.google.com ([2a00:1450:4864:20::52e])
+ id 1uOV2Y-0007dm-It; Mon, 09 Jun 2025 01:27:22 -0400
+Received: from mail-oa1-x34.google.com ([2001:4860:4864:20::34])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1uOUhY-0005Z5-Eh; Mon, 09 Jun 2025 01:05:41 -0400
-Received: by mail-ed1-x52e.google.com with SMTP id
- 4fb4d7f45d1cf-6070293103cso6488961a12.0; 
- Sun, 08 Jun 2025 22:05:38 -0700 (PDT)
+ id 1uOV2X-0007tv-1Q; Mon, 09 Jun 2025 01:27:22 -0400
+Received: by mail-oa1-x34.google.com with SMTP id
+ 586e51a60fabf-2cc89c59cc0so2926147fac.0; 
+ Sun, 08 Jun 2025 22:27:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1749445537; x=1750050337; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1749446839; x=1750051639; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=QweGwBhLfJ0ZJNk8QbWva6oyOljIx9hhKwC9unVjrN8=;
- b=BRzHEVNSaA83skczyDJh23RnCcimNb/iDerIhm9LXFZ7ibIi2qjK3Nh+AVBUg8ezsI
- OW959+LbaKvI1L9kYg8gmfzE5CHHrjtq5X+fNJpgOjR6b2VpTSjZVDFQEgu8C+BXo6Tw
- x6RSTWlRL1v6YHniKs0qvYF84PiSypefWzvLabkiJtAoGQHsXTkNZ23tQs3aMwrzCb+8
- J5qdKlgljHrJ96ASzQvHYUbEd+IvmL0INV1x8kQtNRJalEOoprJfU/6HFeQIq6qzw/pS
- b6fgYDEwVpyDcz6tmfTejaSR01VU0O1iZqkGpDQfw942kCsV5myehojDcSHemqB1Prt3
- mHog==
+ bh=m/6qbjkWbO/i365IDyoZgWyUSWgaRgybc8iWD05/6sI=;
+ b=OFPxtBmXpz5tdvUt5pN6vVLdlb7IL/n+uAeKCtydprHmH2Oraq+tC6Eof7NE2RN2Y1
+ yOdCAGxzGmXyT5C/kQpBph2HCwT+ViEPszVQYuLvD+h3MQ9ZppSz1AFvasXJmDtLqhie
+ TOHoisL4fEQsLQI+tS+eabK929wHiHoMk5peDCWKpRfTJ7dql6dJ2ShlXFopLJuFwykD
+ a8YpKQ0FvU8dtsgmZPWx2F2hrZ2ut/XPQjq0kDUPAAJuUqLvyazbGEdZyFt0OsGQnj6i
+ ImgmRS2vO88tOIrehfjBwhyXHxnbaLH7Awicv/bc4mYXyZ39ZWPpQfUST8dpfWWTHoVB
+ uKjQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1749445537; x=1750050337;
+ d=1e100.net; s=20230601; t=1749446839; x=1750051639;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=QweGwBhLfJ0ZJNk8QbWva6oyOljIx9hhKwC9unVjrN8=;
- b=mtRjNoo19QVV2wQ6AVXSEPT770ZQAQU05x3U8RTBP9vXWz9VKp0AvmfN5Y5t6MOu+y
- SAeXF75MWauke1iDMazMJnaH1DVOE4439oVt1CfZBiKtnwWEOg789TUuEjgOtBOWC7mO
- xnU/fNURqbOSFbHLg5auYxZIjKHpfiAcUAiyfCQ2Zj73Cux4QIfqiwR5NfLOClWg2CeU
- IsNum+dWxLLmOo64+QKQWb9hgJdhlKSsbDIVsNYuswl9rGLYs6MRvulUQvxwqkoBog9+
- WH+zumSe2kUCykvspytj8rOuFjsWXY0fqozXip2kra6V6TYsBp5fpm78OahVHUeOCDSZ
- L0hw==
+ bh=m/6qbjkWbO/i365IDyoZgWyUSWgaRgybc8iWD05/6sI=;
+ b=aBBNfV00vqYRFJOGi6DgtstpTcSkHr5PbGVvDG0sZ03zjLVx7Woui0zc6yrAfnaKDr
+ zQeCahFiuNn48A38BGIoTH8y+V82808DKs4mEzU1uWGNUfoOz1ksBHCdwPpuZl//DhSw
+ clrKR24QBd6MdLX2ENxcPVdNLjUnBeey3zTB0vtqp+Zmo1cj+gUVoU0F/sBYNBShWCU6
+ w+2gueLsz0GZN0Szbqw7J+2NkhdfBBUlJcZFx4tST0VjLuLu+4HpIEBOEkBIxCRoymoq
+ MV5wWzwYPpIYibtSeOqjr1139CHOEfMYYsEAmUyvjGnTw8oD6c9IIDJl8QThI5DfzQdM
+ cSOQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVtIqBn+ucNjtofjpdNSF7/vqtVjnWA5v954ncSj+lgREuln7jAIecKAIPdYhtMQyUvb0eiAiXGuMsF@nongnu.org
-X-Gm-Message-State: AOJu0YyV0k4upYHJnMZF9cX1vWu2BiznB93KAjA33C24XV1ASZdzinjg
- VEU2bBPqr5NkUGXTNyhulC6IdoP86mFoTS80CWhCrvIFLme69+CPOD5bn1fYo4xwQJZR2bjWWMN
- bEF610rWzeQlAww5L2w1vxYGq62tVGQmkNg==
-X-Gm-Gg: ASbGnctQiBOxG4K0GhWPDpOE9xkvqyM18Q+2LbgmigA+Uoy9NFtgbn6yh/fNovfulSd
- FGPS+rb6GPx32zltEn5BYEsiTCipyTMQG9nTLzCx3WzecWRAUmiWmy5U5L8mleqG3QE4a3IvKRY
- 4jsGaEjQxAWdE0WnQRKmnSogvzDAR6SonmEa2+4/TOCBo00eCsASQFGfjMt3TtTjU=
-X-Google-Smtp-Source: AGHT+IEOSJY8NGMBNOopsTitieOfng0RQ8PZ3UwfZ0vF/uEKW+TR0+1zW+cKsT/lMIM0UdKCSBO7P2iwCeksbXeurLg=
-X-Received: by 2002:a17:907:972a:b0:ad4:d9b2:6ee4 with SMTP id
- a640c23a62f3a-ade1a9e9361mr1085349566b.49.1749445537206; Sun, 08 Jun 2025
- 22:05:37 -0700 (PDT)
+ AJvYcCVli68wkkSY08wl+lALxzfWIrehb12amJT95H84VX0/M/qcs6wh4vEItIOn28yX550eBj+1YEa3j7vg@nongnu.org
+X-Gm-Message-State: AOJu0YzTDmh9S0zZ0NFgIiGKusQN3jODkm4p0lvt4xjOkEQiYPdwu+db
+ PwU58W1unra+ByzF9HY7oytXuV1tJESiCgs6gMm8/dNCxiLngCAU88KtacwkCEF/hEdAKHxyJJy
+ al/KRFuNjtj+E/+RkL/p6UnIFj0iteGlE0Q==
+X-Gm-Gg: ASbGncsA9ik664agY23/kW9QAFvIW1MvwEPC5BtqK2CKbHSN2VWXo90fcXzhw7MfoW7
+ AzU4h2EQkMxco7ZAoIV1aQ27nXCZYpyuUsc8mM/g/QStdf0bMz8bWyY80JLDpwMp6DXYn6NvytN
+ atgYTCfqYPHw9ZpodrnUqY9oQHGzYSDRGnwy3w0aB3Oj+9+77oiyctJ5RQKDF2xqs=
+X-Google-Smtp-Source: AGHT+IFyCqgvXUvSttpToZxZ85CfK+vzT3vCNtb/L3438aaa1H448tRIUopHOBc59e+OBoA9LKgjTekQc7BOiw0+Qws=
+X-Received: by 2002:a05:6102:54aa:b0:4e5:5c14:5937 with SMTP id
+ ada2fe7eead31-4e772b8c453mr9924628137.1.1749446827872; Sun, 08 Jun 2025
+ 22:27:07 -0700 (PDT)
 MIME-Version: 1.0
 References: <20250605101255.797162-1-florian.lugou@provenrun.com>
 In-Reply-To: <20250605101255.797162-1-florian.lugou@provenrun.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Mon, 9 Jun 2025 15:05:09 +1000
-X-Gm-Features: AX0GCFsGyiAl48q0eiN7DrNGnDfgnz0U4xue-BaP1BXZetH_eIFa-ZPUf0D8XvI
-Message-ID: <CAKmqyKNJFojTN77=hcQu__pLaAfcPoG5Tzgm=L7piWUN=wFPpg@mail.gmail.com>
+Date: Mon, 9 Jun 2025 15:26:42 +1000
+X-Gm-Features: AX0GCFt3Lz4G6Aepn_XqURsUGewQQQd2C75paDZtMoZVsTE6MbE-lRqDZ2Z4DwM
+Message-ID: <CAKmqyKM4YsNantoUA7vEmt-+VpmtiF-US+LFC0sSbY_K49KRqg@mail.gmail.com>
 Subject: Re: [PATCH] hw/char: sifive_uart: Avoid infinite delay of async xmit
  function
 To: Florian Lugou <florian.lugou@provenrun.com>
@@ -74,8 +74,8 @@ Cc: qemu-devel@nongnu.org, Alistair Francis <Alistair.Francis@wdc.com>,
  "open list:SiFive Machines" <qemu-riscv@nongnu.org>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2a00:1450:4864:20::52e;
- envelope-from=alistair23@gmail.com; helo=mail-ed1-x52e.google.com
+Received-SPF: pass client-ip=2001:4860:4864:20::34;
+ envelope-from=alistair23@gmail.com; helo=mail-oa1-x34.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -110,20 +110,15 @@ On Thu, Jun 5, 2025 at 8:14=E2=80=AFPM Florian Lugou
 > especially worrysome when software repetitively issues amoor.w
 > instructions (as suggested by SiFive specification) and the FIFO is
 > full, leading to the callback being infinitly pushed back.
-
-You would hope the guest software doesn't write to the register when
-the FIFO is full
-
 >
 > This commit fixes the issue by never pushing back the timer, only
 > updating it if it is not already active.
-
-The fix looks correct though
-
 >
 > Signed-off-by: Florian Lugou <florian.lugou@provenrun.com>
 
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
+Thanks!
+
+Applied to riscv-to-apply.next
 
 Alistair
 
