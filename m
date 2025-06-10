@@ -4,77 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4A81FC5B543
-	for <qemu-riscv@archiver.kernel.org>; Tue, 10 Jun 2025 11:30:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BF363C5B543
+	for <qemu-riscv@archiver.kernel.org>; Tue, 10 Jun 2025 11:37:31 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uOxBd-0008VP-Ch; Tue, 10 Jun 2025 07:30:37 -0400
+	id 1uOxHz-0003Rj-Pi; Tue, 10 Jun 2025 07:37:12 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1uOxBR-0008Tx-KH; Tue, 10 Jun 2025 07:30:25 -0400
-Received: from mail-ua1-x92c.google.com ([2607:f8b0:4864:20::92c])
+ id 1uOxHy-0003QD-2A; Tue, 10 Jun 2025 07:37:10 -0400
+Received: from mail-vk1-xa35.google.com ([2607:f8b0:4864:20::a35])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1uOxBP-0008PR-WE; Tue, 10 Jun 2025 07:30:25 -0400
-Received: by mail-ua1-x92c.google.com with SMTP id
- a1e0cc1a2514c-87eeca0d038so195633241.0; 
- Tue, 10 Jun 2025 04:30:22 -0700 (PDT)
+ id 1uOxHq-0000nB-BI; Tue, 10 Jun 2025 07:37:09 -0400
+Received: by mail-vk1-xa35.google.com with SMTP id
+ 71dfb90a1353d-528ce9730cfso1638139e0c.3; 
+ Tue, 10 Jun 2025 04:37:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1749555022; x=1750159822; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1749555420; x=1750160220; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=T8ESx4ZkWoFQTW7Q6XIzDvmCu8W5od9QHK2M3ZOSUbc=;
- b=Glp3EH8ht9hCwKUTSs46Tr15XH4yhng0LMvn6W+Rbae1thByxhZMli9WoSL0z887TH
- 2HYGHXCGOzYk2+hjx7/znusurx8MPiJwQAAFQijBdK6mrkpBUiqDUZNMQNaMSJGAVcO1
- zXlDkPFGt++zP3w9PR7K/QfXM0BXOh1m3aiiXwzqsphMD/IVbu4sFdXV8kj0jpuXdRML
- r7Cmxm2Uvizhf05yPzWYrcSw3qf3cejhflZn4YAcwWC50elhXNfQ5+MJQ2tNrgG/d7un
- qzOGPLsghaVcrx3yBMSHm1cjG64zEXHwVsIlYMV2JdWbj1ukzTjT/ZcLOwO7XE0CptL/
- LLqA==
+ bh=BhQilxE3hibV+3HwBYnI18lXusrw5bAFAxoMF9ajj0M=;
+ b=duPkq0W0FRvAa8biMOrVxQoKFxydwyQXdb3dpsgwrkOHlxxbZipchAexcLifBOnUNm
+ JptiWmXe0wA9EIX2YYliy96iAF6lpBIiqZlfIFY0yOKD8qwrB/bnZ8XSkXTh2Kmkjq6W
+ zskV6STE+ZVedGSRT79nRj/IlPqLENK9FEetVuIVSYnVO1z4aQzqIO+MTncPidLrIQbI
+ LuzcB1sSTlw+/NAWNx2Dq4+wIKBya//Fzc1aoCgaYX16iFrdsc75Od1yryBVoSJ6KuVL
+ dBG4LEPmtoi8gbTE6jX/oR7/DavFC30A1ccUNGzgkUKOo+Wrk3gsF6KgiI6BwNc6Otpn
+ GDwg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1749555022; x=1750159822;
+ d=1e100.net; s=20230601; t=1749555420; x=1750160220;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=T8ESx4ZkWoFQTW7Q6XIzDvmCu8W5od9QHK2M3ZOSUbc=;
- b=R8+HmRFCLF037xDupiG9ahIYe0FYXzxiyxz/fqnd6v4ai/hvik84/62tgrxKI37GWD
- tf7/eYAWhmS8tsH63paBfZRIzSG/TfcfLfgz35J6vnTNUehTlpQ+S414u9ss9t5JjYhl
- dhSh679G7vxUtGQTxbOGGElObZ8gE6YS+DVIhhxN3gHhYuzVZIKNj6VX1qUvALyd+gLf
- xc6dtWC094tY0y1TSJ5gEph8i6Y/Pvn+53cIjuUsj48y2UJtW7TR/VKQcfev3kMQsaHr
- K8HHbezeh62Ucr9LE79qdV2qNMQheE0kXZS83fvKswVLySw3rXcmWC1Ntkb5GFtDO9/g
- EuYw==
+ bh=BhQilxE3hibV+3HwBYnI18lXusrw5bAFAxoMF9ajj0M=;
+ b=kz94NLVkyA15OQU/WMQQh8OtZoouQvQRiWuW0d+yrhJoOSvDyXI7oTIGNknC0PpLYZ
+ Ccjay28Wk+s+f1QA36XwrV6XZ6p3StgGho8OcPeK/CuS8fORRXFI//+vX4KHk8Ppqqfo
+ 7N7MGvTmt1t8wZyypHI9lda0WzIqrIzPyMHJai4uxmRLhI5HJ7MlHWQnOUYFvYJbtP7F
+ VQ7AvgDeGvzK8ZWwkEXDOg0/bfS8K0PCTw1VXvvsSiwb9k680tsCUGsiM72+cxkHUwqV
+ U5ae/ZeTrz3APqnzIHxd5JVbqJ+m2msON7Q/9p/0ihHY+hP5YjXGj6FlDmIaZN/6NCnK
+ zyCw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCW8AIrLqYMAGrReWRJ6gNac9atBfxNtWngyrbhZbobU/vam3uf1h1C7Uy7rG/mnYkkM81j/NLy/9cwJ@nongnu.org
-X-Gm-Message-State: AOJu0YxwtEt+nTZEYKloC4NWLBXXX6KD8Z0Cqog0sMjE5diCaYuBgdF5
- cocEixOPaD6wQ3nub2TD97+qAKXOSnvTvavyDmvNeaQ0rfmXiJ5lUHWgIX/dgvkbm2DQURqYuXz
- VNmHks2UxmH+yrwVWlLFHhwGDLrl3HYo=
-X-Gm-Gg: ASbGncv//m82ZL9sZbVRWsPm0wKXlHXtHjNAY7759NJHHSdsjqHXUTpx5GkVkcY+0nG
- ckVD+5hRFa9WmAihCa7BwqTvTDTzTCbjO27074SQtR8tgHVKUu0oy1crnJ/SWXZoNEpzs43M3vG
- 7UKhV7JZTjvUQp6Oi4QujcRsQlDGS/TGUdtkEHlcba0dpoSEEu1fB1pHqttx26BVwfOo6GvXlZd
+ AJvYcCWXlb1i/aHMqd+i4fCk86xEma/eXzknZUfwG6aYquHYBcvcqN1+QfFvX8dY6xX5ElO4U/hupKZkEvDg@nongnu.org,
+ AJvYcCX/0b2/qI4b0PU91OQKjV3l0ADhSTzcEAJyuD9uPJRR+DZ0FNGhBVD0qnrpZotddLQrLUVYghsNxLltAQ==@nongnu.org
+X-Gm-Message-State: AOJu0YxaAdvUQvZsppkrQC9lmDVJCl5gQjHfZ7iVEduiqEocOkwRG4WQ
+ WLcCBjU2hJfE5RWTPxvllYOVHiQS4L3I4SaKlh/C7J7Kh3M+SF6+Q83Q+2oKS8amInNW5T4muQp
+ McE7xVrbgL5APTm4FnPisNX3VQKjuGaN/Gdch
+X-Gm-Gg: ASbGncuKj1KUH6+vsapB4G4ig/sHEiXzMR/GTpm2GhpdaSr9Jei4HfKVLvZGYdF5J9t
+ 11+HNQ1ONHUu9BZ9XfJsuQCDQGUSK2iajOgowLIMA0V6yboDpPw0gvDaYnLjfAmrj4lc5V3IPCw
+ //SvDROX4HPJw2SWMnZUVxSgcXjC7YcVi0JJ7b0YnQjgNNunk6dRx9qx20YUvqlSzy/WG44myVt
  A==
-X-Google-Smtp-Source: AGHT+IFczZyeXHXgwCH76s1MxG+t5fE6FOpVAwBBYc9EHPbDqAxWoOVWLxWOWC9L/3tx4ZDLsWAPferw41oVb+KkP98=
-X-Received: by 2002:a05:6102:3c9f:b0:4e6:a338:a41d with SMTP id
- ada2fe7eead31-4e7728e359fmr14855726137.11.1749555021738; Tue, 10 Jun 2025
- 04:30:21 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IHMkutu5eT/E1981GiIb4lRgOKDfyKao0BaOBcd0w6lv4JlxwDkgOSTal33ErAe0gR7TVCRAOn32AxiYeM5CfY=
+X-Received: by 2002:a05:6122:641b:10b0:531:19ee:93ea with SMTP id
+ 71dfb90a1353d-53119ef494bmr344471e0c.0.1749555420073; Tue, 10 Jun 2025
+ 04:37:00 -0700 (PDT)
 MIME-Version: 1.0
 References: <20250602131226.1137281-1-djordje.todorovic@htecgroup.com>
- <20250602131226.1137281-3-djordje.todorovic@htecgroup.com>
-In-Reply-To: <20250602131226.1137281-3-djordje.todorovic@htecgroup.com>
+ <20250602131226.1137281-5-djordje.todorovic@htecgroup.com>
+ <bf645bff-3ec2-4c14-8fe6-b1dd48682af2@linaro.org>
+In-Reply-To: <bf645bff-3ec2-4c14-8fe6-b1dd48682af2@linaro.org>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Tue, 10 Jun 2025 21:29:53 +1000
-X-Gm-Features: AX0GCFtII4fFzfuaZ6sVxEkCY7lG4mmNZyQnoY_YjzyTASf7BDtN_zLNU04W4Kc
-Message-ID: <CAKmqyKMW_avMGtQ73oRLKt_3VjpHDknH_KsRAt0jrmT0Qfkm-A@mail.gmail.com>
-Subject: Re: [PATCH v2 2/9] target/riscv: Add cpu_set_exception_base
-To: Djordje Todorovic <Djordje.Todorovic@htecgroup.com>
-Cc: "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>,
+Date: Tue, 10 Jun 2025 21:36:34 +1000
+X-Gm-Features: AX0GCFvsPKwjHN0DerzzghDOBMs8twfBqYvQcq2dnYrHKmXvZWaXKi4gYr7tfgI
+Message-ID: <CAKmqyKMGPaQuneBy_K+XBG9TCJcT5mV_U4-a7xDPtE-ikNKyPg@mail.gmail.com>
+Subject: Re: [PATCH v2 4/9] target/riscv: Add MIPS P8700 CSRs
+To: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@linaro.org>
+Cc: Djordje Todorovic <Djordje.Todorovic@htecgroup.com>, 
+ "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>,
  "qemu-riscv@nongnu.org" <qemu-riscv@nongnu.org>, 
  "cfu@mips.com" <cfu@mips.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::92c;
- envelope-from=alistair23@gmail.com; helo=mail-ua1-x92c.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::a35;
+ envelope-from=alistair23@gmail.com; helo=mail-vk1-xa35.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -82,7 +85,7 @@ X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ T_SPF_TEMPERROR=0.01 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -98,57 +101,55 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Mon, Jun 2, 2025 at 11:15=E2=80=AFPM Djordje Todorovic
-<Djordje.Todorovic@htecgroup.com> wrote:
+On Tue, Jun 10, 2025 at 5:42=E2=80=AFPM Philippe Mathieu-Daud=C3=A9
+<philmd@linaro.org> wrote:
 >
-> Add a new function, so we can change reset vector from platforms.
+> On 2/6/25 15:12, Djordje Todorovic wrote:
+> > Define MIPS CSRs used for P8700 CPU.
+> >
+> > Signed-off-by: Chao-ying Fu <cfu@mips.com>
+> > Signed-off-by: Djordje Todorovic <djordje.todorovic@htecgroup.com>
+> > ---
+> >   target/riscv/cpu.c       |   3 +
+> >   target/riscv/cpu.h       |   7 ++
+> >   target/riscv/meson.build |   1 +
+> >   target/riscv/mips_csr.c  | 219 ++++++++++++++++++++++++++++++++++++++=
++
+> >   4 files changed, 230 insertions(+)
+> >   create mode 100644 target/riscv/mips_csr.c
+>
+>
+> > diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+> > index c0e048a66d..984f93dd4a 100644
+> > --- a/target/riscv/cpu.h
+> > +++ b/target/riscv/cpu.h
+> > @@ -497,6 +497,10 @@ struct CPUArchState {
+> >       target_ulong rnmip;
+> >       uint64_t rnmi_irqvec;
+> >       uint64_t rnmi_excpvec;
+> > +
+> > +    uint64_t mipstvec; /* MIPS tvec register */
+> > +    uint64_t mipsconfig[12]; /* MIPS config register */
+> > +    uint64_t mipspmacfg[15]; /* MIPS pmacfg register */
+>
+> Pointless comments (not helpful at all).
+>
+> Alternatively:
+>
+>         struct {
+>             uint64_t tvec;
+>             uint64_t config[12];
+>             uint64_t pmacfg[15];
+>         } mips;
 
-You can use the "resetvec" property instead, there are a range of
-RISC-V machines already doing this. Have a look at
-hw/riscv/opentitan.c or hw/riscv/sifive_u.c for examples
+We don't want to store these in the CPUArchState. So you will need to
+create a vendor specific struct and you can then point to that from
+CPUArchState, similar to the existing `RISCVCSR *custom_csrs`
 
 Alistair
 
 >
-> Signed-off-by: Chao-ying Fu <cfu@mips.com>
-> Signed-off-by: Djordje Todorovic <djordje.todorovic@htecgroup.com>
-> ---
->  target/riscv/cpu.h       | 2 ++
->  target/riscv/translate.c | 8 ++++++++
->  2 files changed, 10 insertions(+)
+> >   };
 >
-> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-> index 229ade9ed9..c0e048a66d 100644
-> --- a/target/riscv/cpu.h
-> +++ b/target/riscv/cpu.h
-> @@ -656,6 +656,8 @@ G_NORETURN void riscv_raise_exception(CPURISCVState *=
-env,
->  target_ulong riscv_cpu_get_fflags(CPURISCVState *env);
->  void riscv_cpu_set_fflags(CPURISCVState *env, target_ulong);
->
-> +void cpu_set_exception_base(int vp_index, target_ulong address);
-> +
->  FIELD(TB_FLAGS, MEM_IDX, 0, 3)
->  FIELD(TB_FLAGS, FS, 3, 2)
->  /* Vector flags */
-> diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-> index d7a6de02df..2cba1a26a7 100644
-> --- a/target/riscv/translate.c
-> +++ b/target/riscv/translate.c
-> @@ -1427,3 +1427,11 @@ void riscv_translate_init(void)
->      load_val =3D tcg_global_mem_new(tcg_env, offsetof(CPURISCVState, loa=
-d_val),
->                               "load_val");
->  }
-> +
-> +void cpu_set_exception_base(int vp_index, target_ulong address)
-> +{
-> +#ifndef CONFIG_USER_ONLY
-> +    RISCVCPU *vp =3D RISCV_CPU(qemu_get_cpu(vp_index));
-> +    vp->env.resetvec =3D address;
-> +#endif
-> +}
-> --
-> 2.34.1
 >
 
