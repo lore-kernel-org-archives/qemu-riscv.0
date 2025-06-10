@@ -4,78 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1BF3FC5B543
-	for <qemu-riscv@archiver.kernel.org>; Tue, 10 Jun 2025 11:42:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 25786C5B552
+	for <qemu-riscv@archiver.kernel.org>; Tue, 10 Jun 2025 11:43:26 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uOxMp-0006j5-Ul; Tue, 10 Jun 2025 07:42:12 -0400
+	id 1uOxNa-0007Az-TI; Tue, 10 Jun 2025 07:42:59 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1uOxMj-0006gV-2N; Tue, 10 Jun 2025 07:42:05 -0400
-Received: from mail-ua1-x933.google.com ([2607:f8b0:4864:20::933])
+ id 1uOxNW-000787-1B; Tue, 10 Jun 2025 07:42:54 -0400
+Received: from mail-ua1-x92e.google.com ([2607:f8b0:4864:20::92e])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1uOxMc-0001LM-Mb; Tue, 10 Jun 2025 07:42:04 -0400
-Received: by mail-ua1-x933.google.com with SMTP id
- a1e0cc1a2514c-86dc3482b3dso4727201241.0; 
- Tue, 10 Jun 2025 04:41:55 -0700 (PDT)
+ id 1uOxNN-0001U2-KV; Tue, 10 Jun 2025 07:42:52 -0400
+Received: by mail-ua1-x92e.google.com with SMTP id
+ a1e0cc1a2514c-87ed98a23easo500590241.0; 
+ Tue, 10 Jun 2025 04:42:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1749555714; x=1750160514; darn=nongnu.org;
+ d=gmail.com; s=20230601; t=1749555761; x=1750160561; darn=nongnu.org;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=NEdcmlrm9ckPisfc6n4cgVimYjbQhyxN90i/poVHvSU=;
- b=VUwRAsJIJHGAd3r4BvAuSZw448eUMpLnRgODEnDiDGQ9rDOEXqpfrJTxkSxXJsY7mD
- Nar/isB+zQur9wCRmyZVhtSVGZpI02BjVDD+9BGRz0zgjjmTdd8mMYnZvOfzvCOMcJMd
- JVfn7zghDp49d83J1qen4aZaNwGslUEDDshKNnu049ZpUtMAY/2Mso1v7Mdv0UbOVhXj
- B2hPALXGi/lHWpxvzkhu0MaoCJWlwIh2HU7+9KCKWEab57eWEbAsvczvW8UJ8xee+YyO
- ArTFOWn2R0z9BBbAlT25BzXhWRbIffh7HGEqI2NL4QXsepoT+J321VZZe+NaDDsjUHyH
- k+oQ==
+ bh=JhYIIVZv7ePO3lqnGBfS1WXHqsZYT44EfoArc5Bwch8=;
+ b=DuIALdigQmZ2KGO9JB2tt0XofuqILieYPRJwfvWLq4KxXA8uie9i5kdvauiaN2Q6P9
+ VxFoLx8IseX3MeGk1uqipn9Cql3xR1zv2KQ8H59zPOUebNMGoeAbzD1QQ0A7hoHvUKZg
+ XD7GPCPZmKkZ7cPf4ttfkSoirma6yAKuVjyNOtEpj8/69CaTRSW3BQw0y3V7xPhVaANS
+ oK745gGresW0Lj6NQAQrcDyMPmDNPDJP7X92G0k53e+rWPSd1xlluAtxqM1y95qCTGp8
+ 69lImTDbQQ6Vj7lWK3p6mpXAuD4fVOGe+DKAROueMNGSp3hOydKL0c0UpPWp9WuBYEuH
+ 8edA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1749555714; x=1750160514;
+ d=1e100.net; s=20230601; t=1749555761; x=1750160561;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=NEdcmlrm9ckPisfc6n4cgVimYjbQhyxN90i/poVHvSU=;
- b=Bx/H2otj7qEZDFHARwIt3gAzZSEaIpi9oDobTjUKDjtiAXe+WiUYaFZvwUvJ1e45S5
- KBZpeFskvi/9CyQpxSAmE/TSZsQxFAFCje/8248nV3xouls6bb+gnfp8Ed7Npt+fPyyQ
- v5UoQ0SbTbQNoP8PGFb8UzXUtTXHrRBv3UxORmtdDkpAP6HqGxpAMC6XNg9HRK+GVVuH
- 9VNuNIr8nXXWER35Ez9MRHV3sVCC3igyZMUHYizYm2jmFnkkG9qdmBKf653kw9wO9la4
- G0p9rrwJPT9T3oCJtXuYKvlfTPc+GKpIxS8pvfzZCwYeDDjxX7DXAVrHwaVvqwOUPn+n
- MCSw==
+ bh=JhYIIVZv7ePO3lqnGBfS1WXHqsZYT44EfoArc5Bwch8=;
+ b=kMJhTxL7NtN+GOs3ulb06Q6vYG0SZaLk7mq5bxhTQm9EMU567/ZjLmVejcJf+aH9au
+ 6U4EFGhqPJW3/IisnGX7Bepzqwj3pDLn6rPPECshHqOPAJk/WGuPybqcLDcj4Y/pw1z7
+ ImNzbwg/0V16dsaMQinnB1UrsCLyGyDr6e4RJ1ZtXBRZTH64McwTzmGUzE3SBFo6nIIN
+ Q4YmYINbFRXCZ3XqPpzQ8f4A7whzimM2KXosHW0OR3uYuNXPJCnRGxtt4UQFxPh9z3KD
+ Uw28w2o5k7iRNVpVwlANeZ0SA16U/ANi37exi5NmQNTgizBeZqLBvI7MUe/reTjxQ3mv
+ eV4w==
 X-Forwarded-Encrypted: i=1;
- AJvYcCW/2/V/vwRg/5lgxEC3z4lBTRTIAMzwYsxzb0kZbZx9LR4KKSJK85qZHX5VksGB1JaKR+J9oa1xVGOC@nongnu.org
-X-Gm-Message-State: AOJu0Yz2FlOvcY8MzbubSWjqBCJ7zRC66Bmq47k5ha1cehspwp/dKQoz
- 2cx5FywCm7jSU/yjb2ked5AUgAvByFkuT0wowtuThMRkdEw51lhQT6YZbgNuAv1NpcOZeBx4dZJ
- qcRINNiy4wfx/uZdyvhuXWqaXG2j0xZs=
-X-Gm-Gg: ASbGncu3gU9LsIV8w8k+hLLO/AM8JSnUf5tGditNUlOijzOKr+0HtCTOOcRHqD+ESOw
- FPNmxpFIV0LP2nc0Y4vg17QftfN9tt9lLer3YiZtzRCkthZ1Ni6ufKgIfJ0ePwWigmxMOlsjuQC
- E9e022x5rwUfuK+AeZjvTAppIo8FZQHND5PkBl0aGS8XVE6K92BXpNL0fDH3T28Mm39XvZq5O0f
- g==
-X-Google-Smtp-Source: AGHT+IGC28ABDkIdWrm9j7ECk0kHIYjSTg+NC32s3xzKNaqKbqRTc+pd3uozhnwhqQScPSUDUrBIDSMCbgltCjTwcBU=
-X-Received: by 2002:a05:6102:4187:b0:4e2:a235:24d1 with SMTP id
- ada2fe7eead31-4e7a5d45d3dmr2235262137.4.1749555713749; Tue, 10 Jun 2025
- 04:41:53 -0700 (PDT)
+ AJvYcCXQ0W2tWOjB8p5vvvsrXrCQt6tGovWzxSlbDb13of53Ntxs8JcD9/2A9/yaJpsRu4gB0ZfGnlYM7rey@nongnu.org
+X-Gm-Message-State: AOJu0Yyg3vZUpR2L5XVlqt0fvDObykEenTMB1Kqcj0x04rX4uqj/7heV
+ 04aDsoQIYapWNST7OpcP4pgdUWIGFX69bpJTaK3wSlpb/g5Px2jDU7Y8rnt3qHlQnXNAaui+2DS
+ 3gGfsaRT177/37Kq1BHJ2oIniSA5D3Ik7lg==
+X-Gm-Gg: ASbGnctWqLn5VsEeMhk4BuL/p1jIbO9jtqRKZymb9cy4Z1Dtherf8uIQusFT9E5stVj
+ E8xGgU4KMdacZ0OG4421SxRbI18Y5ui89et8nVVrO0XKZ0AxSCHNo+VQ5EkaQDFNyHsm3s4CbZj
+ novC+sFSOO4M0UooxEFuhhp+/1F2GfskL9yH2onn/+wgT3jrPKHnAGQkozr6N3LU2nSwgO15ddq
+ eTztNGwG9ZO
+X-Google-Smtp-Source: AGHT+IHTyOJFUqm0y9KGgGmOBRAjs+dp7D9G9lYn7HJsxqallqwlrTk/vNbYcGXSUaeEWIGwZFkMIRjWmctPczndTAo=
+X-Received: by 2002:a05:6102:3e93:b0:4e5:abd3:626c with SMTP id
+ ada2fe7eead31-4e7728ce2f3mr12867904137.1.1749555761457; Tue, 10 Jun 2025
+ 04:42:41 -0700 (PDT)
 MIME-Version: 1.0
 References: <20250602131226.1137281-1-djordje.todorovic@htecgroup.com>
- <20250602131226.1137281-10-djordje.todorovic@htecgroup.com>
-In-Reply-To: <20250602131226.1137281-10-djordje.todorovic@htecgroup.com>
+In-Reply-To: <20250602131226.1137281-1-djordje.todorovic@htecgroup.com>
 From: Alistair Francis <alistair23@gmail.com>
-Date: Tue, 10 Jun 2025 21:41:27 +1000
-X-Gm-Features: AX0GCFvDOzGT92WJY1NXA6GH1dnZAV22Qw1Gi0JhJxTTCZ4lU7FJ00Kd4ihDGWw
-Message-ID: <CAKmqyKOo26Ji7B8=BhJJTD9q9njyHExx3FURR2+Tug-FEoTc0w@mail.gmail.com>
-Subject: Re: [PATCH v2 9/9] hw/riscv: Add a network device e1000e to the
- boston-aia
+Date: Tue, 10 Jun 2025 21:42:15 +1000
+X-Gm-Features: AX0GCFsvwaKQzx8EL_89nhNpNdaWeBN6-UeuTlYAmS-M1GNTcns9ASfcCauRLZM
+Message-ID: <CAKmqyKOPahax+3EYvrsV1_+S22exmt2JmctU_wtKSJShwABBwA@mail.gmail.com>
+Subject: Re: [PATCH v2 0/9] riscv: Add support for MIPS P8700 CPU
 To: Djordje Todorovic <Djordje.Todorovic@htecgroup.com>
 Cc: "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>,
  "qemu-riscv@nongnu.org" <qemu-riscv@nongnu.org>, 
  "cfu@mips.com" <cfu@mips.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::933;
- envelope-from=alistair23@gmail.com; helo=mail-ua1-x933.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::92e;
+ envelope-from=alistair23@gmail.com; helo=mail-ua1-x92e.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -99,99 +97,69 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Mon, Jun 2, 2025 at 11:13=E2=80=AFPM Djordje Todorovic
+On Mon, Jun 2, 2025 at 11:14=E2=80=AFPM Djordje Todorovic
 <Djordje.Todorovic@htecgroup.com> wrote:
 >
-> Add a network device e1000e to the boston-aia board model.
-> There is no pch_gbe emulation, so we add e1000e in slot 0 func 1,
-> instead. We need to pass func to call pci_parse_devaddr to find
-> out slot and func.
+> Several things implemented in v2:
+>   - Addressing review comments
+>     - Simplify `target/riscv/xmips.decode`
+>   - Rebase on top of latest master
+>   - Fix code format
 >
-> Signed-off-by: Chao-ying Fu <cfu@mips.com>
-> Signed-off-by: Djordje Todorovic <djordje.todorovic@htecgroup.com>
-> ---
->  hw/pci/pci.c          | 15 +++++++++------
->  hw/riscv/boston-aia.c |  5 +++++
->  2 files changed, 14 insertions(+), 6 deletions(-)
->
-> diff --git a/hw/pci/pci.c b/hw/pci/pci.c
-> index f5ab510697..23f7f02837 100644
-> --- a/hw/pci/pci.c
-> +++ b/hw/pci/pci.c
-> @@ -974,14 +974,15 @@ static int pci_parse_devaddr(const char *addr, int =
-*domp, int *busp,
->
->      slot =3D val;
->
-> -    if (funcp !=3D NULL) {
-> -        if (*e !=3D '.')
-> +    if (funcp !=3D NULL && *e !=3D 0) {
-> +        if (*e !=3D '.') {
->              return -1;
-> -
-> +        }
->          p =3D e + 1;
->          val =3D strtoul(p, &e, 16);
-> -        if (e =3D=3D p)
-> +        if (e =3D=3D p) {
->              return -1;
-> +        }
->
->          func =3D val;
->      }
-> @@ -2045,13 +2046,15 @@ bool pci_init_nic_in_slot(PCIBus *rootbus, const =
-char *model,
->      int dom, busnr, devfn;
->      PCIDevice *pci_dev;
->      unsigned slot;
-> +
->      PCIBus *bus;
->
->      if (!nd) {
->          return false;
->      }
->
-> -    if (!devaddr || pci_parse_devaddr(devaddr, &dom, &busnr, &slot, NULL=
-) < 0) {
-> +    unsigned func;
-> +    if (!devaddr || pci_parse_devaddr(devaddr, &dom, &busnr, &slot, &fun=
-c) < 0) {
->          error_report("Invalid PCI device address %s for device %s",
->                       devaddr, model);
->          exit(1);
-> @@ -2062,7 +2065,7 @@ bool pci_init_nic_in_slot(PCIBus *rootbus, const ch=
-ar *model,
->          exit(1);
->      }
->
-> -    devfn =3D PCI_DEVFN(slot, 0);
-> +    devfn =3D PCI_DEVFN(slot, func);
+> Djordje Todorovic (9):
+>   hw/intc: Allow gaps in hartids for aclint and aplic
+>   target/riscv: Add cpu_set_exception_base
+>   target/riscv: Add MIPS P8700 CPU
+>   target/riscv: Add MIPS P8700 CSRs
+>   target/riscv: Add mips.ccmov instruction
+>   target/riscv: Add mips.pref instruction
+>   target/riscv: Add Xmipslsp instructions
+>   configs/devices: Add MIPS Boston-aia board model to RISC-V
+>   hw/riscv: Add a network device e1000e to the boston-aia
 
-These core pci changes should be split out into their own patch and
-will need a bit more justification
+Thanks for the patches! There are now some review comments (sorry for
+the delay), please send a v3 once they have been addressed
 
 Alistair
 
 >
->      bus =3D pci_find_bus_nr(rootbus, busnr);
->      if (!bus) {
-> diff --git a/hw/riscv/boston-aia.c b/hw/riscv/boston-aia.c
-> index 6ed5c636cc..34cc0abe79 100644
-> --- a/hw/riscv/boston-aia.c
-> +++ b/hw/riscv/boston-aia.c
-> @@ -437,6 +437,11 @@ static void boston_mach_init(MachineState *machine)
->      ide_drive_get(hd, ich9->ahci.ports);
->      ahci_ide_create_devs(&ich9->ahci, hd);
+>  configs/devices/riscv64-softmmu/default.mak |   1 +
+>  hw/intc/riscv_aclint.c                      |  33 +-
+>  hw/intc/riscv_aplic.c                       |  10 +-
+>  hw/misc/Kconfig                             |   5 +
+>  hw/misc/meson.build                         |   1 +
+>  hw/misc/riscv_cmgcr.c                       | 204 ++++++++
+>  hw/misc/riscv_cpc.c                         | 225 +++++++++
+>  hw/pci/pci.c                                |  15 +-
+>  hw/riscv/Kconfig                            |   6 +
+>  hw/riscv/boston-aia.c                       | 489 ++++++++++++++++++++
+>  hw/riscv/cps.c                              | 187 ++++++++
+>  hw/riscv/meson.build                        |   1 +
+>  include/hw/misc/riscv_cmgcr.h               |  77 +++
+>  include/hw/misc/riscv_cpc.h                 |  69 +++
+>  include/hw/riscv/cps.h                      |  75 +++
+>  target/riscv/cpu-qom.h                      |   1 +
+>  target/riscv/cpu.c                          |  28 ++
+>  target/riscv/cpu.h                          |   9 +
+>  target/riscv/cpu_cfg.h                      |   5 +
+>  target/riscv/cpu_cfg_fields.h.inc           |   3 +
+>  target/riscv/insn_trans/trans_xmips.c.inc   | 137 ++++++
+>  target/riscv/meson.build                    |   2 +
+>  target/riscv/mips_csr.c                     | 219 +++++++++
+>  target/riscv/translate.c                    |  11 +
+>  target/riscv/xmips.decode                   |  35 ++
+>  25 files changed, 1837 insertions(+), 11 deletions(-)
+>  create mode 100644 hw/misc/riscv_cmgcr.c
+>  create mode 100644 hw/misc/riscv_cpc.c
+>  create mode 100644 hw/riscv/boston-aia.c
+>  create mode 100644 hw/riscv/cps.c
+>  create mode 100644 include/hw/misc/riscv_cmgcr.h
+>  create mode 100644 include/hw/misc/riscv_cpc.h
+>  create mode 100644 include/hw/riscv/cps.h
+>  create mode 100644 target/riscv/insn_trans/trans_xmips.c.inc
+>  create mode 100644 target/riscv/mips_csr.c
+>  create mode 100644 target/riscv/xmips.decode
 >
-> +    /* Create e1000e using slot 0 func 1 */
-> +    pci_init_nic_in_slot(&PCI_BRIDGE(&pcie2->root)->sec_bus, "e1000e", N=
-ULL,
-> +                         "00.1");
-> +    pci_init_nic_devices(&PCI_BRIDGE(&pcie2->root)->sec_bus, "e1000e");
-> +
->      if (machine->firmware) {
->          fw_size =3D load_image_targphys(machine->firmware,
->                                        0x1fc00000, 4 * MiB);
 > --
 > 2.34.1
 >
