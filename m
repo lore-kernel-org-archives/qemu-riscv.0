@@ -4,233 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 62D36C61CE7
-	for <qemu-riscv@archiver.kernel.org>; Wed, 11 Jun 2025 08:47:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 08EABC677C4
+	for <qemu-riscv@archiver.kernel.org>; Wed, 11 Jun 2025 09:33:56 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uPH6i-00089r-Kn; Wed, 11 Jun 2025 04:46:52 -0400
+	id 1uPHq4-0007zj-OX; Wed, 11 Jun 2025 05:33:44 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dongli.zhang@oracle.com>)
- id 1uPH6U-0007zr-43; Wed, 11 Jun 2025 04:46:40 -0400
-Received: from mx0b-00069f02.pphosted.com ([205.220.177.32])
+ (Exim 4.90_1) (envelope-from <roan.richmond@codethink.co.uk>)
+ id 1uPHq2-0007yt-GY; Wed, 11 Jun 2025 05:33:42 -0400
+Received: from imap4.hz.codethink.co.uk ([188.40.203.114])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <dongli.zhang@oracle.com>)
- id 1uPH6R-0004yT-SE; Wed, 11 Jun 2025 04:46:37 -0400
-Received: from pps.filterd (m0246631.ppops.net [127.0.0.1])
- by mx0b-00069f02.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 55B1BwdR001340;
- Wed, 11 Jun 2025 08:45:40 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com; h=cc
- :content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=
- corp-2025-04-25; bh=1/YzwtTMNRohtgOY8/HGOdvsPs3BOSU4u8OIIcRDQx8=; b=
- aC3jHqaEIzK2RwyF8B9CB7B/0qznLIhz+xFmTDv0VaZ/GZRTlcrg9P7qJVelqTKg
- qkUC+S568ac6+nLys8zL7VaJh6a7gpKUATRR078HZhUIvAySAg4BOa+e/nF9sZqS
- eWFZcAcUZWeT+tRL4xTvkVkp9YE8/y8HFI6eLi/VpsfJKBK9gc4CpCVWDbwyq7Nh
- e2TRcjioiNDppvbkRJwuv9U7J613Vih8yIqo5l3O8yuWK1LlGN0Ho3vq1ekKUYSm
- 7N7XYqWxDKSS7dKBb+MvT/7qtf1ZcYuOcrc4H+vlNXBRCsEmY/eFFMpkJGEGEdJr
- YOqHUmyxtnuma5FRB+YULg==
-Received: from phxpaimrmta03.imrmtpd1.prodappphxaev1.oraclevcn.com
- (phxpaimrmta03.appoci.oracle.com [138.1.37.129])
- by mx0b-00069f02.pphosted.com (PPS) with ESMTPS id 474c74wua4-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Wed, 11 Jun 2025 08:45:39 +0000 (GMT)
-Received: from pps.filterd
- (phxpaimrmta03.imrmtpd1.prodappphxaev1.oraclevcn.com [127.0.0.1])
- by phxpaimrmta03.imrmtpd1.prodappphxaev1.oraclevcn.com (8.18.1.2/8.18.1.2)
- with ESMTP id 55B7jAl8011872; Wed, 11 Jun 2025 08:45:38 GMT
-Received: from nam10-mw2-obe.outbound.protection.outlook.com
- (mail-mw2nam10on2066.outbound.protection.outlook.com [40.107.94.66])
- by phxpaimrmta03.imrmtpd1.prodappphxaev1.oraclevcn.com (PPS) with ESMTPS id
- 474bvaukt3-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Wed, 11 Jun 2025 08:45:38 +0000
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=YARUm//kp3qo5YRSFo5IyoX/txftBXj7CUyU/6spnPDP9pEBMtB+QyAT5uvcC2KzlcLOARqgpUb3SCoOrbwPI30zkHJTJmGa5zaJXO19ovQ5DZYHi7uP7K9PhFvpd3YnpdVnLJUpq8rh4HlH/iWWl+oSJWJMnEJuIIwxh2eXRklbNxDGgjhyb4nIfyZTBQBcxBadOAaOi4OU79GfLlBbVdq8odlaFsrgC6oWRymzFlMnX4fLHZCsZqMpFjssSFqnQyNhdQE4br4C6Ge3/VUN0ZZl2pQTYlxfbd2Xx+GNkWuoxEvHxulUuAWHnkGk2YTenVjdjHkzCz9Bh2CKVqRWcw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=1/YzwtTMNRohtgOY8/HGOdvsPs3BOSU4u8OIIcRDQx8=;
- b=WtQfl0oBplfKjobt1lWvQAO+8AN3zjoqFjKLa32TtHVNNpSBNxNcWqJJctI+u+LmrrdVWzH3c5zfT7JXfgE/L5dQeAr+rv5R0zFmuh1EtpjVDU5NJ4IX9ndDkBDFETg4rI+oo+c758320pys4Qtb8R0KwWQPcv/sKcY2d0fdyJqMy1YciEB4BRoLAtThhTAhh5fC5tLBD6xXquXINfmszCLACqEBmZs/WVh3A0x65OlkJDYZI/XqAGqKNdCatYH2qyp9tyXHoSon4sOzwKLxk3T2q9A12FX4pG562UuZqdXNUIezyUboAv7BBx2nH4rwZKrMJ3ZZvkkseDofbjPQ5A==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=oracle.com; dmarc=pass action=none header.from=oracle.com;
- dkim=pass header.d=oracle.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oracle.onmicrosoft.com; s=selector2-oracle-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=1/YzwtTMNRohtgOY8/HGOdvsPs3BOSU4u8OIIcRDQx8=;
- b=UEm1bOnB54NlyLrHFTjBhrPGjlZ3M/fU4EPg5KRzpMuWrHfODzfVHB81WxdZo6mNVTH6KzsXhIzs/eOqREZVZZVPvlg0npnZ7AGTQ6HsnJ8ILoEwU3J4hNLEgIS/mbAUv9p2Nyh1d/7g0mxSSpNjJJ9jUBRsH/8NynsuWPYCCC8=
-Received: from DS7PR10MB7129.namprd10.prod.outlook.com (2603:10b6:8:e6::5) by
- IA1PR10MB6685.namprd10.prod.outlook.com (2603:10b6:208:41b::11) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8813.30; Wed, 11 Jun
- 2025 08:45:35 +0000
-Received: from DS7PR10MB7129.namprd10.prod.outlook.com
- ([fe80::721c:7e49:d8c5:799c]) by DS7PR10MB7129.namprd10.prod.outlook.com
- ([fe80::721c:7e49:d8c5:799c%4]) with mapi id 15.20.8835.018; Wed, 11 Jun 2025
- 08:45:35 +0000
-Message-ID: <3897e8f1-73d8-4fb7-a894-22c73902e634@oracle.com>
-Date: Wed, 11 Jun 2025 01:45:29 -0700
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v5 00/10] target/i386/kvm/pmu: PMU Enhancement, Bugfix and
- Cleanup
-To: Zhao Liu <zhao1.liu@intel.com>
-Cc: qemu-devel@nongnu.org, kvm@vger.kernel.org, qemu-arm@nongnu.org,
- qemu-ppc@nongnu.org, qemu-riscv@nongnu.org, qemu-s390x@nongnu.org,
- pbonzini@redhat.com, mtosatti@redhat.com, sandipan.das@amd.com,
- babu.moger@amd.com, likexu@tencent.com, like.xu.linux@gmail.com,
- groug@kaod.org, khorenko@virtuozzo.com, alexander.ivanov@virtuozzo.com,
- den@virtuozzo.com, davydov-max@yandex-team.ru, xiaoyao.li@intel.com,
- dapeng1.mi@linux.intel.com, joe.jin@oracle.com,
- peter.maydell@linaro.org, gaosong@loongson.cn, chenhuacai@kernel.org,
- philmd@linaro.org, aurelien@aurel32.net, jiaxun.yang@flygoat.com,
- arikalo@gmail.com, npiggin@gmail.com, danielhb413@gmail.com,
- palmer@dabbelt.com, alistair.francis@wdc.com, liwei1518@gmail.com,
- zhiwei_liu@linux.alibaba.com, pasic@linux.ibm.com,
- borntraeger@linux.ibm.com, richard.henderson@linaro.org,
- david@redhat.com, iii@linux.ibm.com, thuth@redhat.com,
- flavra@baylibre.com, ewanhai-oc@zhaoxin.com, ewanhai@zhaoxin.com,
- cobechen@zhaoxin.com, louisqi@zhaoxin.com, liamni@zhaoxin.com,
- frankzhu@zhaoxin.com, silviazhao@zhaoxin.com, kraxel@redhat.com,
- berrange@redhat.com
-References: <20250425213037.8137-1-dongli.zhang@oracle.com>
- <aEbS93r7YRcIadj0@intel.com>
-Content-Language: en-US
-From: Dongli Zhang <dongli.zhang@oracle.com>
-In-Reply-To: <aEbS93r7YRcIadj0@intel.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: CH0PR03CA0042.namprd03.prod.outlook.com
- (2603:10b6:610:b3::17) To DS7PR10MB7129.namprd10.prod.outlook.com
- (2603:10b6:8:e6::5)
+ (Exim 4.90_1) (envelope-from <roan.richmond@codethink.co.uk>)
+ id 1uPHpz-00021R-A4; Wed, 11 Jun 2025 05:33:42 -0400
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=codethink.co.uk; s=imap4-20230908; h=Sender:Content-Transfer-Encoding:
+ Content-Type:In-Reply-To:From:References:Cc:To:Subject:MIME-Version:Date:
+ Message-ID:Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:
+ Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:
+ List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=cFQy2W40EyvS2+VvC0lkkXo04Uagl7gI6EvP6jsnenI=; b=yqLFKBA7Wn3ErDOqL49LsZGCEv
+ 4sMURb8Q4YhTAF4ztO85tnd8L18gD4dzTJaVGRybmCW6eNyrSkjQgaPH/D8w9n472C2vB7/uLiRjN
+ SV7ni0d6wkbPH47/pz2kZajf+1MmnPU4fhN0F7sA4IctBuCpQsFEzqanaBtqO1buLASzLL95myMuw
+ LLbpaOHXTyT7Rayra+zifXUMqUgLHBKE5zruv2uGpS6zNbncAPCw9GzNG6NT9HNmuMC50UWLdWk3R
+ 86GnDXoMjMmXz7XtkMrXZ3GTziL/lmEh/bxryXERyexY7YJjfk2q5jkl/prEtms+oJv29GZ4sEkW4
+ BBnMQzsw==;
+Received: from [167.98.27.226] (helo=[10.35.4.30])
+ by imap4.hz.codethink.co.uk with esmtpsa  (Exim 4.94.2 #2 (Debian))
+ id 1uPHpq-00CSo8-Bq; Wed, 11 Jun 2025 10:33:30 +0100
+Message-ID: <786197e2-360b-4723-99d6-445b8a2076ae@codethink.co.uk>
+Date: Wed, 11 Jun 2025 10:33:29 +0100
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DS7PR10MB7129:EE_|IA1PR10MB6685:EE_
-X-MS-Office365-Filtering-Correlation-Id: f2cabc82-d19d-4039-07a4-08dda8c454d8
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|7416014|366016|1800799024|376014;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?STZTSlY4eGhqQXZkdkZhVTh3MGMzWkVtellYeUNRMjByWkVFazhqdFNRUVZT?=
- =?utf-8?B?bnhFZW9CTi8xTUdkQWNtemVIcmZ3VjBmdk1kYnFvWWdsWlRxaW42R1pyWmE2?=
- =?utf-8?B?aTNuSVg3MDVLUEdJYUwyQ2M0ZkVRQ3JHdzBLS1VGeDIxcHlMZy9GMnNVc0xS?=
- =?utf-8?B?UlhwR2NNQlczZWFYWnRscmRpQVFndzJ4cUVvYXRGbTNSSGNGU3lOSWp0K3Fv?=
- =?utf-8?B?Tk11SGhaRFNOd1pxcmtYOWx3WmdJWjMzUmcra2VGL2I4T2VtN0hTOHpQZjhZ?=
- =?utf-8?B?a0hXZEZZcTBJTjVJVXRYOCtBbDR3M24vQVd5VDNEdGRPMENYdWpDMkk0VHFD?=
- =?utf-8?B?RVNpZ0JCU09qYkVUZkRoMFZNQW9UanB4cW5qY0JSV05VS1k5Um5FUVpzcjU4?=
- =?utf-8?B?N3NObFQ1b3J6ZXB5NUpYWjVlR3VOSkszQXRwemNqdzAvaWlicFhGUzZSNkN4?=
- =?utf-8?B?Ukx1V2xYR3k1N3FaS09qMUluZk5nVW5ieXF2aE1VT2gybzU1Mjl2TFhQcTlH?=
- =?utf-8?B?bU4ybmhpaVpqY1VVZkRYSHVlM2FnZUZKZVFnMmx1T25qcmZPRytVd2wxNEJm?=
- =?utf-8?B?eU9keFpSTDRZcFZsY3JRWG94Ky9RQUU5R1pGK0lSdFRJVnBNNExKMGhsSmly?=
- =?utf-8?B?RWpOOW1MQU1qc1BBeWZVemVYRmlsRTJ0MnpGUXczUllsZWNZQlJtZXVjQ2pt?=
- =?utf-8?B?b1JjVjh6cFp0dlpIcFJ3QTY5NjAraVp2OHRRL2dScWRyMUxVVlUrNGk0WEFP?=
- =?utf-8?B?a21sOEx5VHVIaWp5c01PZEpuN0FpUnlSb3Y1NjZvcVpqaUR1YTdOalc0bzFI?=
- =?utf-8?B?SEx6YnJqd2pqalJ4YmRPUkZtdUtYSUhCWExrS2srRnIrc2Q2RTlYVlNiUTVo?=
- =?utf-8?B?OFd0ZVZJTUdKRFdSWXNvdGlvdWJ3ZWI4ODdvb1lLWnRGUFBxSnRQMGhTS0Ro?=
- =?utf-8?B?amdKRWRwK2tkOGRFUUJSaWJnZnZJQ05TWnF0QVNlUmhkTEZoY1FBb3pDUlpD?=
- =?utf-8?B?SUhUeGx2Y3JVWDFOUXFrK2MvUUFaUmFiU0pGNmtXZXBMaElWQjR3cVlmdVBX?=
- =?utf-8?B?amJuc3doL0plVi9lL3FSa1BMU1l2Rk9uUnYvUFpSbHpYbHY0ai9TM1R1ellh?=
- =?utf-8?B?QXluNDA4eUllWGoweWlheTI1OTcrR0xnNzEvM01ka3JYMVNRN1NuOE5BaEFr?=
- =?utf-8?B?SEJEZWdmbTJSM2wvSW9KQWlOUkxLcnVIU2pWMDdLYzFtY2xXc3JLeWhFRk1H?=
- =?utf-8?B?ZDZNOFZEdWc4UHdham54ZTVLN2RiMGtTTlEyQ2lkTWoyTTN1d0NtTmdmN0VT?=
- =?utf-8?B?cFgxUmFSbHArSEs3aFpMS0ZXM0pZYkR6TzI5SkVXNWZSRHZYcWI4UndRQWdl?=
- =?utf-8?B?SkRVbi9ZUlVkVWVBa0QzcWQ2Qy81Ny83QldPQ0srcEdrRVlmeEc2OGppa0VZ?=
- =?utf-8?B?dnNOdTlmaGdDVUV0N0V6RnA0dDFUK3hwTi8yZkw3ckJlQmx6U2phc0FSRGZT?=
- =?utf-8?B?ZFd3NjhHek5yNjlaZTNQTnR3QVU4bU1QWGJFUlhVYVU2Y2VTL1ZnY2hPazZ0?=
- =?utf-8?B?YU9NY2VUNGE2ZmgrdGFnclFsNHI5RUpreU1oTVVhTU9lMkN1TU1OSGEvcjhG?=
- =?utf-8?B?QlZvNmw1bG8xSDdDeVZTSmJtemY4b1lPZHNsWnBLRzdtL3RmNFBkQmFycTRF?=
- =?utf-8?B?U0txMjNxVlBHMFZ0VCs4S1pwM0hEWmJCS05JSmVzbmhodVBVSFQ4WEZhM2hI?=
- =?utf-8?B?WlFPTFZKb1ZTZGtTY3MzcUNNbzZPVDhFdVRjY0d5WUtUaG9teit2Yk5uL0kr?=
- =?utf-8?B?OWlCQ2pFRkVwbHVqQTlFZE00OEV3blEraDIxcWtRTkFkSi9mQjlVYXY0aStZ?=
- =?utf-8?B?Wkk0Rm5hbDNNQ0x4dEJ6Y3o0RUt0OG1ySTZXS1BmUDIyMjlOZFhpUGk1ZU9z?=
- =?utf-8?Q?fi73i6ladWs=3D?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:DS7PR10MB7129.namprd10.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(7416014)(366016)(1800799024)(376014); DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?N2pVSDVjUEhDNENLNC9IekY3MXNXbUpiR096NC9Wc1dEaWl6YmhFWlpQdzFN?=
- =?utf-8?B?QktsZWExS3NlZUpsa2JqeGtFYmdJTlVPYmtCQWYxRk5HSi9nR202S2EwR2pT?=
- =?utf-8?B?cHRWVUhXL3E4MW1zMExqUDNORzh4cmFtKzdFZ2F3aTBsMktod1ZVYkYwQXJX?=
- =?utf-8?B?WjQ4b0pBd0tkMU5sUFJzOXNheHJnVmQwT3ZYMEpNaWV4MWxldTlKMkh6T1I3?=
- =?utf-8?B?SW56N3lIZHFDZEJ6WExnU2RoUm9tRHNYd0x4WndIc2xKckZVQjM0WWFsN1lX?=
- =?utf-8?B?NXNZdHcvSEV0aHgyUjBZM05teU02U3lkK2Y5Y0RQRmIySTZBMWk2OWhwbEV3?=
- =?utf-8?B?b1NYQ0cxdHdrNGFGQU0yRTRmNHk1QlFUTGx6bjlJSVJGZ1d2My9tK2FHRk9x?=
- =?utf-8?B?cHZKWWliVHp1QVFXSnFLQTJiVjNHblhzQldJQVRQa1JqN05QSnZpdlQxamxa?=
- =?utf-8?B?OENuZnNTU2VweXBQemdVWHMwU1lTT2xaclZpVi93RG9wR05jZFptM0ZqTmJU?=
- =?utf-8?B?RzlqeWRlbjg3bzd2eTM2UkN1VkxtYjRhclhCM0h4cTN0cUdqR05xSWNMeHVE?=
- =?utf-8?B?MlM5d3VWanVHN3A4UlcrYzZ3SmpxYWl4Sm04dHVTQmJ1c3NoV1VkMHJKeWE1?=
- =?utf-8?B?UVhVV2cxMi85ZHhqdkJUNnVyR3R6N2s2MkhMU3RLdEVJcm5QUUh2Z1VtZ2Nt?=
- =?utf-8?B?RjhybW9QcTZLNWJ0OGVGR29aQWRwN1c0eHR4VDJYZTBJNStsRkg0RjBvTDFT?=
- =?utf-8?B?TE96OFRod1FVRDJnUGtidUVxekpsTGZESkhHVHlMb3RUTW9nVnhNTmhPSmIz?=
- =?utf-8?B?aWxjbTN3TlBOZ3VXSnllbXkzdENkWWlUbGdKazJlMS8xc3FXQ2tINEwzZXFi?=
- =?utf-8?B?bHBrSVFDaVp3UDE5aStWeGtmbjJlS3E4ZS84clcrMk52ejQ5UmMzcXNSK29K?=
- =?utf-8?B?NVBIWGl5SkV5RU9weTNPaEFEcjhuR0d2VWtsaElxSmpkUWtvWm85ZkVLYVJt?=
- =?utf-8?B?bUJDWnVkV0Z4eEwwNWRsK3ROOWdXK2cxMEc0cFQyL1dFTzhwZW1pRUtjaS9Z?=
- =?utf-8?B?MW44TDJxMWMxdDAwdEVsYTFUZ3FmbkhXRURyZGx2NDBUb1d5Vjg5ZnNFb044?=
- =?utf-8?B?d09NQXJzajFkSUxOcFhCcHpQcnN2bVNDYit4cWpDWlpoMU4zWGhjWkREaXl5?=
- =?utf-8?B?cFRTUXcxdk1XMGJSOXZTakg0MHRicDNpNTFMeUtiT2o3bm5HN2RkWlNFT1Yw?=
- =?utf-8?B?MXRNYUhaeC85NGNKMzdoMFpBTGV2NUd1bTJxR1RFY3U1N0hkOWx5RTJQTEYy?=
- =?utf-8?B?ZFR0MFg5ajA4Wmd1VVhsdTU5M0hHQitNVzQva3BuSC9jSElFVXlDTHAyRnRi?=
- =?utf-8?B?clJwQ3JKN0sweHFnM1kvNm5WRkNPZDVFRTU0SVlCdDRmQ2pVdndGaDdrSkJk?=
- =?utf-8?B?NGFJVlNLWmcxcG45WkxkZ282WnFrVGFOYkk3MGRKSHIrSGkybWM0Sll0aElx?=
- =?utf-8?B?V3JHam1Bd3BJcUM1cU9lNGI4ditJVE45a2lhRzJlS1hkaE5HNEVQVnFJNmNs?=
- =?utf-8?B?TG1mbm0yalcwRTZZMmlud1pvcUJGbzlqUCtYUFBqM0VGamszWFZUY3UweStO?=
- =?utf-8?B?L01VZUE1R2h6b0Q5a2tmQXVUbS8zaHV3WHIrQ0h6bzJuQW5PZzdoN2t2MDhv?=
- =?utf-8?B?aFNkTllwT2JDREZySlY4clAxN00vOFZ1cm9nZTc4R0ZzWk41NVdsak5YUlBk?=
- =?utf-8?B?Q29ZRXhDaURqSlFoRUJyYW1oejBLNXVlcWtTRXM2d3pKWko1SWNvdFVyRGh5?=
- =?utf-8?B?WUtEejUwTlQxSVVybzgvcHJ5eDRrTzMyb0NDd29NNm9kY3lqVTRreHRFcXVI?=
- =?utf-8?B?aHEwZHhFam1lM2FhMXVFRlZjeXp2QU00RFdGY0RFNWxFZmZETHJ4RGhpU3Vz?=
- =?utf-8?B?VXNrRmZYdEVUcVBIY25EYnhSV3RCZ2RpN2sveFFMK3FhTGluSlFFTmVrZ3d3?=
- =?utf-8?B?Rjc0dW5nVkpZWTJSMVB0NTd4dmZGK0orZ1Y1ZE5oNm9GNHR3dzJjZHA3UkYy?=
- =?utf-8?B?UnZXRERzZS9LWVVlN1poRXNOTWR5dk4wZmRjRXZoM3Y1OFBLakx2T0pWcEI3?=
- =?utf-8?B?ZWJLYzhMakQwTlFwYjcxa3FhZ3owenZIcSswV0UrR3lLN3pRNVAwS2twNk1U?=
- =?utf-8?B?eVE9PQ==?=
-X-MS-Exchange-AntiSpam-ExternalHop-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-ExternalHop-MessageData-0: ZM8S0s/uY3lepQqwy/xYSlhNPHnKe7Bkh3gvehYP9isjEHE/XszNzH64EYslkoQxwmigjPNXjngz/21+KrhUHTHXu53Ep5fEKFJ6cxiF+DN7NuaA29On+6eDWo96LM51Q20V0zIIZ61oOWfjQHeW3pbXYrfF64/KanjBcbZGvsj3R1fE3fzdMUUTVSY6NDCqrUUfQAqCPfvMYAFQciNLokL92XIJj8U5m9i2ofWpDoCcaKt9b05jJdbVdELcYLE0B2P1xcpCxr4fLL7Y1sMIMgXMJt4c17wG3laTdeuZix1UAlNW7KIOwPp342ugxQOc1kKTOuqn3SVUstOYs/FJztq/d5BG9R71z1SLebCYTZrKVlHLMnXrfRtfqBdp18c45HE7KDI/4/RojJzTUnIYKWqwM12H8JIib34l+mfZuggnFZaaSoIFgJe75GIh2S0OHJ512vImnbqFaDBjc9bkupIy+RiYbmd/IUXmIPo/WixJzM9wKQM1vRWnWiigrD2IvZeWwuAkZtHnVudokeqyCJszGPC/AWgRAMhMvZwtXpMk7jiYHWHKs+Yy6kSPuNSUw3IfubE8d7tYr9n4PI1EodJiECul5yH6doNlDK78KuQ=
-X-OriginatorOrg: oracle.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: f2cabc82-d19d-4039-07a4-08dda8c454d8
-X-MS-Exchange-CrossTenant-AuthSource: DS7PR10MB7129.namprd10.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Jun 2025 08:45:34.9109 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 4e2c6054-71cb-48f1-bd6c-3a9705aca71b
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 2RiZ8z8ACgXUfpgCWvYvg+NMSdHpJ75nbbLMRgiH2Hsn1hVTuUalbivvkG0giSAp8qn+TkYW2k/N82rrMBvaVA==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA1PR10MB6685
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1099,Hydra:6.0.736,FMLib:17.12.80.40
- definitions=2025-06-11_03,2025-06-10_01,2025-03-28_01
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 mlxscore=0
- adultscore=0 malwarescore=0
- mlxlogscore=920 bulkscore=0 spamscore=0 phishscore=0 suspectscore=0
- classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2505160000
- definitions=main-2506110076
-X-Authority-Analysis: v=2.4 cv=LIpmQIW9 c=1 sm=1 tr=0 ts=68494233 b=1 cx=c_pps
- a=WeWmnZmh0fydH62SvGsd2A==:117 a=WeWmnZmh0fydH62SvGsd2A==:17
- a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19 a=lCpzRmAYbLLaTzLvsPZ7Mbvzbb8=:19
- a=wKuvFiaSGQ0qltdbU6+NXLB8nM8=:19
- a=Ol13hO9ccFRV9qXi2t6ftBPywas=:19 a=xqWC_Br6kY4A:10 a=IkcTkHD0fZMA:10
- a=6IFa9wvqVegA:10 a=GoEa3M9JfhUA:10 a=8v4FunDBqJgXfeyFKsAA:9
- a=QEXdDO2ut3YA:10
-X-Proofpoint-ORIG-GUID: 7LXdAY3mZyDHRKGdJZMOSR_pF0RmZ_Dv
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwNjExMDA3NiBTYWx0ZWRfXzjt4p4rdEXvD
- dj47srJcSCuvuTTiS6X1Ras6ruqBb8LI1OmiXhfVDJ0VgosbahrGBfKDOSl4s6PF6AWv6xkCCsr
- 2MqK8Hp16DuIS8RcFWQOyagE+9nmrnUL1G7XtPPQFhI0ibypk3z7R0Gu/NZMNcMT4MzMdUgRt5x
- U3GZ7dyY2sm9VmEC5f3El5dYpD09zGfOXUnYDGJ8eYaOS6wNw7SUDTv/LABoaSiXnFvHNpDpUNe
- TkXJCCky9CXuu5Cnf7y82MY3lKsmTHfJU9FoNTRUQ8DipwcH2mxfc7ZBzQKIOQEisoAu4bZSb6H
- GXhxgsx23hY3upa5EQRWBjb2tsBwJ6xF8fCa1g3h5eI4YDNGdT3u5mBid35Hveap+q7XgagNF+a
- O/xD+DzeI+qgrDHtZDOA2og1h8F6NVIUgy8AKqKlYuf0l7sCiVwp67MNYdBh+hjMm/a3rs/i
-X-Proofpoint-GUID: 7LXdAY3mZyDHRKGdJZMOSR_pF0RmZ_Dv
-Received-SPF: pass client-ip=205.220.177.32;
- envelope-from=dongli.zhang@oracle.com; helo=mx0b-00069f02.pphosted.com
-X-Spam_score_int: -27
-X-Spam_score: -2.8
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 1/1] Add RISCV ZALASR extension
+To: Alistair Francis <alistair23@gmail.com>
+Cc: qemu-riscv@nongnu.org, palmer@dabbelt.com, alistair.francis@wdc.com,
+ liwei1518@gmail.com, dbarboza@ventanamicro.com,
+ zhiwei_liu@linux.alibaba.com, qemu-devel@nongnu.org
+References: <20250610083309.992724-1-roan.richmond@codethink.co.uk>
+ <20250610083309.992724-2-roan.richmond@codethink.co.uk>
+ <CAKmqyKMG_wNPNdAYhsUFJ4K7o4g+LNYwUDUAO_8V14=GezDKPg@mail.gmail.com>
+Content-Language: en-US
+From: Roan Richmond <roan.richmond@codethink.co.uk>
+In-Reply-To: <CAKmqyKMG_wNPNdAYhsUFJ4K7o4g+LNYwUDUAO_8V14=GezDKPg@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=188.40.203.114;
+ envelope-from=roan.richmond@codethink.co.uk; helo=imap4.hz.codethink.co.uk
+X-Spam_score_int: -20
+X-Spam_score: -2.1
 X-Spam_bar: --
-X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_LOW=-0.7, RCVD_IN_MSPIKE_H5=0.001, RCVD_IN_MSPIKE_WL=0.001,
  RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001, RCVD_IN_VALIDITY_SAFE_BLOCKED=0.001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_HELO_PASS=-0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -246,17 +74,203 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Hi Zhao,
 
-On 6/9/25 5:26 AM, Zhao Liu wrote:
-> Hi Dongli,
-> 
-> Since the patch 3 was merged. I think you can rebase this series.
-> 
+On 11/06/2025 05:29, Alistair Francis wrote:
+> On Tue, Jun 10, 2025 at 6:33 PM Roan Richmond
+> <roan.richmond@codethink.co.uk> wrote:
+>> This is based on version v0.8.3 of the ZALASR specification [1].
+>> The specification is listed as in Frozen state [2].
+>>
+>> [1]: https://github.com/riscv/riscv-zalasr/tree/v0.8.3
+>> [2]: https://lf-riscv.atlassian.net/wiki/spaces/HOME/pages/16154882/All+RISC-V+Specifications+Under+Active+Development
+>>
+>> Signed-off-by: Roan Richmond <roan.richmond@codethink.co.uk>
+>> ---
+>>   target/riscv/cpu.c                           |   1 +
+>>   target/riscv/insn32.decode                   |  10 ++
+>>   target/riscv/insn_trans/trans_rvzalasr.c.inc | 110 +++++++++++++++++++
+>>   target/riscv/translate.c                     |   1 +
+>>   4 files changed, 122 insertions(+)
+>>   create mode 100644 target/riscv/insn_trans/trans_rvzalasr.c.inc
+>>
+>> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+>> index 629ac37501..b52bbf0936 100644
+>> --- a/target/riscv/cpu.c
+>> +++ b/target/riscv/cpu.c
+>> @@ -128,6 +128,7 @@ const RISCVIsaExtData isa_edata_arr[] = {
+>>       ISA_EXT_DATA_ENTRY(zabha, PRIV_VERSION_1_13_0, ext_zabha),
+>>       ISA_EXT_DATA_ENTRY(zacas, PRIV_VERSION_1_12_0, ext_zacas),
+>>       ISA_EXT_DATA_ENTRY(zama16b, PRIV_VERSION_1_13_0, ext_zama16b),
+>> +    ISA_EXT_DATA_ENTRY(zalasr, PRIV_VERSION_1_12_0, ext_zalasr),
+>>       ISA_EXT_DATA_ENTRY(zalrsc, PRIV_VERSION_1_12_0, ext_zalrsc),
+>>       ISA_EXT_DATA_ENTRY(zawrs, PRIV_VERSION_1_12_0, ext_zawrs),
+>>       ISA_EXT_DATA_ENTRY(zfa, PRIV_VERSION_1_12_0, ext_zfa),
+>> diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
+>> index cd23b1f3a9..c848c0c1c5 100644
+>> --- a/target/riscv/insn32.decode
+>> +++ b/target/riscv/insn32.decode
+>> @@ -1066,3 +1066,13 @@ amominu_h  11000 . . ..... ..... 001 ..... 0101111 @atom_st
+>>   amomaxu_h  11100 . . ..... ..... 001 ..... 0101111 @atom_st
+>>   amocas_b    00101 . . ..... ..... 000 ..... 0101111 @atom_st
+>>   amocas_h    00101 . . ..... ..... 001 ..... 0101111 @atom_st
+>> +
+>> +# *** Zalasr Standard Extension ***
+>> +lb_aqrl  00110 . . ..... ..... 000 ..... 0101111 @atom_st
+>> +lh_aqrl  00110 . . ..... ..... 001 ..... 0101111 @atom_st
+>> +lw_aqrl  00110 . . ..... ..... 010 ..... 0101111 @atom_st
+>> +ld_aqrl  00110 . . ..... ..... 011 ..... 0101111 @atom_st
+>> +sb_aqrl  00111 . . ..... ..... 000 ..... 0101111 @atom_st
+>> +sh_aqrl  00111 . . ..... ..... 001 ..... 0101111 @atom_st
+>> +sw_aqrl  00111 . . ..... ..... 010 ..... 0101111 @atom_st
+>> +sd_aqrl  00111 . . ..... ..... 011 ..... 0101111 @atom_st
+>> diff --git a/target/riscv/insn_trans/trans_rvzalasr.c.inc b/target/riscv/insn_trans/trans_rvzalasr.c.inc
+>> new file mode 100644
+>> index 0000000000..2f2934e731
+>> --- /dev/null
+>> +++ b/target/riscv/insn_trans/trans_rvzalasr.c.inc
+>> @@ -0,0 +1,110 @@
+>> +/*
+>> + * RISC-V translation routines for the ZALASR (Load-Aquire and Store-Release)
+>> + * Extension.
+>> + *
+>> + * Copyright (c) 2025 Roan Richmond, roan.richmond@codethink.co.uk
+>> + *
+>> + * This program is free software; you can redistribute it and/or modify it
+>> + * under the terms and conditions of the GNU General Public License,
+>> + * version 2 or later, as published by the Free Software Foundation.
+>> + *
+>> + * This program is distributed in the hope it will be useful, but WITHOUT
+>> + * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+>> + * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
+>> + * more details.
+>> + *
+>> + * You should have received a copy of the GNU General Public License along with
+>> + * this program.  If not, see <http://www.gnu.org/licenses/>.
+>> + */
+>> +
+>> +#define REQUIRE_ZALASR(ctx) do {     \
+>> +    if (!ctx->cfg_ptr->ext_zalasr) { \
+>> +        return false;                \
+>> +    }                                \
+>> +} while (0)
+>> +
+>> +static bool gen_load_acquire(DisasContext *ctx, arg_lb_aqrl *a, MemOp memop)
+>> +{
+>> +    decode_save_opc(ctx, 0);
+>> +
+>> +    TCGv addr = get_address(ctx, a->rs1, 0);
+>> +    TCGv dest = get_gpr(ctx, a->rd, EXT_NONE);
+>> +    TCGBar bar = (a->rl) ? TCG_BAR_STRL : 0;
+> I think we should check that aq isn't set
+According to the spec, it is valid for both of `rl` and `aq` to be set.
+For the Load Acquire instruction it just states that `aq` must be set, 
+and `rl` is optionally set.
+Therefore, I don't think we should check that `aq` isn't set here.
+>> +
+>> +    memop |= (ctx->cfg_ptr->ext_zama16b) ? MO_ATOM_WITHIN16 : 0;
+>> +
+>> +    tcg_gen_qemu_ld_tl(dest, addr, ctx->mem_idx, memop);
+>> +    gen_set_gpr(ctx, a->rd, dest);
+>> +
+>> +    /* Add a memory barrier implied by AQ (mandatory) and RL (optional) */
+>> +    tcg_gen_mb(TCG_MO_ALL | TCG_BAR_LDAQ | bar);
+>> +
+>> +    return true;
+>> +}
+>> +
+>> +static bool trans_lb_aqrl(DisasContext *ctx, arg_lb_aqrl *a)
+>> +{
+>> +    REQUIRE_ZALASR(ctx);
+>> +    return gen_load_acquire(ctx, a, (MO_ALIGN | MO_SB));
+>> +}
+>> +
+>> +static bool trans_lh_aqrl(DisasContext *ctx, arg_lh_aqrl *a)
+>> +{
+>> +    REQUIRE_ZALASR(ctx);
+>> +    return gen_load_acquire(ctx, a, (MO_ALIGN | MO_TESW));
+>> +}
+>> +
+>> +static bool trans_lw_aqrl(DisasContext *ctx, arg_lw_aqrl *a)
+>> +{
+>> +    REQUIRE_ZALASR(ctx);
+>> +    return gen_load_acquire(ctx, a, (MO_ALIGN | MO_TESL));
+>> +}
+>> +
+>> +static bool trans_ld_aqrl(DisasContext *ctx, arg_ld_aqrl *a)
+>> +{
+>> +    REQUIRE_64BIT(ctx);
+>> +    REQUIRE_ZALASR(ctx);
+>> +    return gen_load_acquire(ctx, a, (MO_ALIGN | MO_TEUQ));
+>> +}
+>> +
+>> +static bool gen_store_release(DisasContext *ctx, arg_sb_aqrl *a, MemOp memop)
+>> +{
+>> +    decode_save_opc(ctx, 0);
+>> +
+>> +    TCGv addr = get_address(ctx, a->rs1, 0);
+>> +    TCGv data = get_gpr(ctx, a->rs2, EXT_NONE);
+>> +    TCGBar bar = (a->aq) ? TCG_BAR_LDAQ : 0;
+> and check here that rq isn't set either
+>
+> Alistair
+For the Store Release instruction it the spec just states that `rl` must 
+be set, and `aq` is optionally set.
+Therefore, I don't think we should check that `rl` isn't set here.
+>> +
+>> +    memop |= (ctx->cfg_ptr->ext_zama16b) ? MO_ATOM_WITHIN16 : 0;
+>> +
+>> +    /* Add a memory barrier implied by RL (mandatory) and AQ (optional) */
+>> +    tcg_gen_mb(TCG_MO_ALL | TCG_BAR_STRL | bar);
+>> +
+>> +    tcg_gen_qemu_st_tl(data, addr, ctx->mem_idx, memop);
+>> +    return true;
+>> +}
+>> +
+>> +static bool trans_sb_aqrl(DisasContext *ctx, arg_sb_aqrl *a)
+>> +{
+>> +    REQUIRE_ZALASR(ctx);
+>> +    return gen_store_release(ctx, a, (MO_ALIGN | MO_SB));
+>> +}
+>> +
+>> +static bool trans_sh_aqrl(DisasContext *ctx, arg_sh_aqrl *a)
+>> +{
+>> +    REQUIRE_ZALASR(ctx);
+>> +    return gen_store_release(ctx, a, (MO_ALIGN | MO_TESW));
+>> +}
+>> +
+>> +static bool trans_sw_aqrl(DisasContext *ctx, arg_sw_aqrl *a)
+>> +{
+>> +    REQUIRE_ZALASR(ctx);
+>> +    return gen_store_release(ctx, a, (MO_ALIGN | MO_TESL));
+>> +}
+>> +
+>> +static bool trans_sd_aqrl(DisasContext *ctx, arg_sd_aqrl *a)
+>> +{
+>> +    REQUIRE_64BIT(ctx);
+>> +    REQUIRE_ZALASR(ctx);
+>> +    return gen_store_release(ctx, a, (MO_ALIGN | MO_TEUQ));
+>> +}
+>> diff --git a/target/riscv/translate.c b/target/riscv/translate.c
+>> index d7a6de02df..4cd2d68e46 100644
+>> --- a/target/riscv/translate.c
+>> +++ b/target/riscv/translate.c
+>> @@ -1183,6 +1183,7 @@ static uint32_t opcode_at(DisasContextBase *dcbase, target_ulong pc)
+>>   #include "insn_trans/trans_rvzicond.c.inc"
+>>   #include "insn_trans/trans_rvzacas.c.inc"
+>>   #include "insn_trans/trans_rvzabha.c.inc"
+>> +#include "insn_trans/trans_rvzalasr.c.inc"
+>>   #include "insn_trans/trans_rvzawrs.c.inc"
+>>   #include "insn_trans/trans_rvzicbo.c.inc"
+>>   #include "insn_trans/trans_rvzimop.c.inc"
+>> --
+>> 2.43.0
+>>
+Thanks,
+Roan
 
-I will rebase the series.
+-- 
+Roan Richmond (he/him)
+Software Engineer
+Codethink Ltd
 
-Thank you very much!
-
-Dongli Zhang
 
