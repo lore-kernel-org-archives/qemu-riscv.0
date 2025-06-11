@@ -4,84 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E5319C61CE7
-	for <qemu-riscv@archiver.kernel.org>; Wed, 11 Jun 2025 04:31:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ADBDBC677C4
+	for <qemu-riscv@archiver.kernel.org>; Wed, 11 Jun 2025 07:44:35 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uPD7j-00036Q-6D; Wed, 11 Jun 2025 00:31:39 -0400
+	id 1uPG7w-0000Og-9k; Wed, 11 Jun 2025 03:44:04 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1uPD7g-00035x-IF; Wed, 11 Jun 2025 00:31:36 -0400
-Received: from mail-vs1-xe32.google.com ([2607:f8b0:4864:20::e32])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
- id 1uPD7d-0001aF-4i; Wed, 11 Jun 2025 00:31:35 -0400
-Received: by mail-vs1-xe32.google.com with SMTP id
- ada2fe7eead31-4e7b3363c5aso330600137.1; 
- Tue, 10 Jun 2025 21:31:31 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1749616291; x=1750221091; darn=nongnu.org;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=4GFacjXElYcpgysBTYJrwW7iEZGXZBIzzC0oGvp6J2A=;
- b=Rs/RtbCAql3FIDX/jiHXsnrJorrJVRXQ4T3C+wT3wWf8uTkVdnBFJ3n55BmtvneR0b
- 8cubJXoReYAsc/PhQW2t+HUUokbN4RTjkI2YKBES4Kqt9X2PxS3qlHPnKbbL8MDA5ACM
- ogkbsOyR3tTMQ5kqEXIvxF9fgvfB4kafbD1z4/rviWTpVBFl7OA9SRCWwqu8D8WYRvhC
- 0vonyBRvt06o5NgxqlqfV8IKP/OkkfDjIFuRO770DlxpQiWSltuY914LzCAKtcd64ure
- iHXnpMB/AR8tTturlqPWQSOjeKEe1Azo6wDQit+j/ag58upl/vjMC8ZdSBoawu94Z34Y
- hK6Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1749616291; x=1750221091;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=4GFacjXElYcpgysBTYJrwW7iEZGXZBIzzC0oGvp6J2A=;
- b=CEyEfc9i3/jzi5nTCnAncQVdAYZ7N1CMGcVixEvdzm5jqA8kT0Cbg/RPoVRP8SO3eu
- Ypjgr+Q+EcCiGWrraEjGCVMnD+A3eArUQGQxmyMm+RDlzV+MDvpBAUgtOiru0Y5XJa/K
- u5qzyh+7BTAYpzd4wmxC56KVNJjEb6B1rE5lmuw36d7ewawf7nrnR6olaiPofOkajZY4
- EtbsPUt4jIIm38JOivKdWByyqgl8WFoCQWUaxLyHtCiQ8rbUplaNkAgQ2W/bZu1iNIBW
- befqDgt9L8m2ug8DuZUUtgHnRipZwl6kHE+Y1+OOSmSJzi9EIc7ECFjW2hVz6arMb1jr
- AB5w==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWNzUfaF4LBLr0nvelg2rM4f3kh4mypWHszg++p62xp8ywWN4dLcwtDiKqakqfqb6QrrjVw18g7KELm@nongnu.org
-X-Gm-Message-State: AOJu0YzM684JA6HMKCvF2lOpMDfM6O3RO4nkNYOdKYa462NJUBw1uSAY
- mD8LinFlyydNeqW6uUhwpdwdskpY/R6yzUCpOsj5Ieic3gMLYGts8kDv5CFpF4G+hvA+SOSGFYR
- Eq2MV5sbuUzqFeSfnyy0Qvfig8D1W7Uk=
-X-Gm-Gg: ASbGncuOpDg7P4EoXZoRjga+/gZw5F/lzyM2yy9DrSD3NzVIuCN7v4ixHaMhjlMjB+y
- 72C1I+b6IZlv4P6HjbxpqRDJQ5BvWGR27RW6ZcmH9jKfcUAD+OeibNMsrAxpR29OMF/IoaDKQZE
- B0rEhziAnfV+crtq8T+5gt6Vv3PaEkh6GqMyoeTkkNs5d30M5y75QeWfAwbhDAY+f9/4VgNbSTz
- ZgvNlHmWrZy
-X-Google-Smtp-Source: AGHT+IFdK0oj7akwuvbuaaqOeO6aKZSmPihiNV4uTTzNtZrdDhkkHhMiyqcjvGWE9kj7jFvBZn29TBSL3KEzlFBYez8=
-X-Received: by 2002:a05:6102:396e:b0:4e5:911b:60e1 with SMTP id
- ada2fe7eead31-4e7ba571be5mr1600596137.1.1749616290847; Tue, 10 Jun 2025
- 21:31:30 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <me@linux.beauty>)
+ id 1uPG7j-0000FF-OF; Wed, 11 Jun 2025 03:43:51 -0400
+Received: from sender4-op-o12.zoho.com ([136.143.188.12])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <me@linux.beauty>)
+ id 1uPG7h-0004yA-Jl; Wed, 11 Jun 2025 03:43:51 -0400
+ARC-Seal: i=1; a=rsa-sha256; t=1749627784; cv=none; 
+ d=zohomail.com; s=zohoarc; 
+ b=gb/WbGgwbpzeKpANmFR4LYPZaFyhbGcEAhP9JWZ2VyP7uPI8DiV9iQextsIdbZSX78FtSXjfQl3AIeGu/8FnlH2JOaE2HuH2ZMgUbNoVD2suAO2xc7hNHfVXokGr6B8r1D9r51Hi1eXvX77UTwuPLhdRC8C5oKnvkJCgbYGMuZY=
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com;
+ s=zohoarc; t=1749627784;
+ h=Content-Type:Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To;
+ bh=3Uwhm8oxCUHFLAbGIqSbi6COCmFeWALYd7Q4GoMM1e4=; 
+ b=V5L/xL6gVL7OEn1jSevleaiuVjUeLajtqZGG2X5GVcLQm+giHvc0KzIqeUyiMo5/cFjAswTaTTxJ6qPc0flG+URrfx9BAOw3gSlW9SEWYZSCfY3yNx2FJp7dxcGlnLhcy82nH+bT8+zz4noZeouJDJEE+6Hvl4tEwasX4+PpYmI=
+ARC-Authentication-Results: i=1; mx.zohomail.com;
+ dkim=pass  header.i=linux.beauty;
+ spf=pass  smtp.mailfrom=me@linux.beauty;
+ dmarc=pass header.from=<me@linux.beauty>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1749627784; 
+ s=zmail; d=linux.beauty; i=me@linux.beauty;
+ h=Date:Date:From:From:To:To:Cc:Cc:Message-ID:In-Reply-To:References:Subject:Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:Reply-To;
+ bh=3Uwhm8oxCUHFLAbGIqSbi6COCmFeWALYd7Q4GoMM1e4=;
+ b=O0XBIcI9XdX6U4DsdreDOQKykGI8qmCrsT6WGEQwVbNhlzikgf4XU3PQEAiM/Ws/
+ GNTBP38TRIZHaZny9zqzYdSLdtuhJVrvHkaGVg386WQAVdQtuyKm42bTcJrrnuuL0Ft
+ wb90ItabmhP0ilP+Hu1wL9CJu6eBPuuvWQNzwpd8=
+Received: from mail.zoho.com by mx.zohomail.com
+ with SMTP id 1749627781743457.84030402502935;
+ Wed, 11 Jun 2025 00:43:01 -0700 (PDT)
+Date: Wed, 11 Jun 2025 15:43:01 +0800
+From: Li Chen <me@linux.beauty>
+To: "Michael S. Tsirkin" <mst@redhat.com>
+Cc: "Peter Maydell" <peter.maydell@linaro.org>,
+ "Shannon Zhao" <shannon.zhaosl@gmail.com>,
+ "Igor Mammedov" <imammedo@redhat.com>, "Ani Sinha" <anisinha@redhat.com>,
+ "Eduardo Habkost" <eduardo@habkost.net>,
+ "Marcel Apfelbaum" <marcel.apfelbaum@gmail.com>,
+ =?UTF-8?Q?=22Philippe_Mathieu-Daud=C3=A9=22?= <philmd@linaro.org>,
+ "Yanan Wang" <wangyanan55@huawei.com>,
+ "Zhao Liu" <zhao1.liu@intel.com>, "Song Gao" <gaosong@loongson.cn>,
+ "Jiaxun Yang" <jiaxun.yang@flygoat.com>,
+ "Sunil V L" <sunilvl@ventanamicro.com>,
+ "Palmer Dabbelt" <palmer@dabbelt.com>,
+ "Alistair Francis" <alistair.francis@wdc.com>,
+ "Weiwei Li" <liwei1518@gmail.com>, "qemu-arm" <qemu-arm@nongnu.org>,
+ "qemu-devel" <qemu-devel@nongnu.org>, "qemu-riscv" <qemu-riscv@nongnu.org>,
+ "Li Chen" <chenl311@chinatelecom.cn>
+Message-ID: <1975df14254.befbf0eb40991.3434588463284220379@linux.beauty>
+In-Reply-To: <20250530081034-mutt-send-email-mst@kernel.org>
+References: <20250528105404.457729-1-me@linux.beauty>
+ <20250530081034-mutt-send-email-mst@kernel.org>
+Subject: Re: [PATCH REPOST v4 0/4] acpi: Add machine option to disable SPCR
+ table
 MIME-Version: 1.0
-References: <20250610083309.992724-1-roan.richmond@codethink.co.uk>
-In-Reply-To: <20250610083309.992724-1-roan.richmond@codethink.co.uk>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Wed, 11 Jun 2025 14:31:04 +1000
-X-Gm-Features: AX0GCFtK1_X-CEEUQIaM7MARps1xdWJohEVKcMuP_s09fUNlXKmaIZT49iN4vv4
-Message-ID: <CAKmqyKPQ=TjrgdvHBRoe1CYLR4eoMsd+Hs+2LNVzUOEMApDeow@mail.gmail.com>
-Subject: Re: [PATCH v2 0/1] Add RISCV ZALASR Extension
-To: Roan Richmond <roan.richmond@codethink.co.uk>
-Cc: qemu-riscv@nongnu.org, palmer@dabbelt.com, alistair.francis@wdc.com, 
- liwei1518@gmail.com, dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com, 
- qemu-devel@nongnu.org
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::e32;
- envelope-from=alistair23@gmail.com; helo=mail-vs1-xe32.google.com
-X-Spam_score_int: -17
-X-Spam_score: -1.8
-X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+Importance: Medium
+User-Agent: Zoho Mail
+X-Mailer: Zoho Mail
+Received-SPF: pass client-ip=136.143.188.12; envelope-from=me@linux.beauty;
+ helo=sender4-op-o12.zoho.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H5=0.001, RCVD_IN_MSPIKE_WL=0.001,
+ RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001, RCVD_IN_VALIDITY_SAFE_BLOCKED=0.001,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -97,41 +95,75 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On Tue, Jun 10, 2025 at 6:33=E2=80=AFPM Roan Richmond
-<roan.richmond@codethink.co.uk> wrote:
->
-> Ping, resending as no responses in over week.
->
-> V2:
->   - rebased patch onto master branch
->   - added check for RV64() for Load Double, as pointed out by Alistair Pa=
-lmer.
->
-> In response to Alistair Palmer (https://lists.gnu.org/archive/html/qemu-r=
-iscv/2025-06/msg00010.html):
-> "Aren't you missing a check to ensure RL is set?"
->   - There is no need to check if RL is set, as this is required by Spec f=
-or all Store Release instructions.
+Hi Michael,
 
-I don't follow this justification.
+ ---- On Fri, 30 May 2025 20:10:52 +0800  Michael S. Tsirkin <mst@redhat.co=
+m> wrote ---=20
+ > On Wed, May 28, 2025 at 06:53:34PM +0800, Li Chen wrote:
+ > > From: Li Chen <chenl311@chinatelecom.cn>
+ > >=20
+ > > (REPOST because the previous post failed to send to qemu-devel/qemu-ri=
+scv/qemu-arm,
+ > >  see https://lore.kernel.org/qemu-devel/1971648603b.dce1f5d22901195.67=
+02025346547333607@linux.beauty/T/#u)
+ > >=20
+ > > This series introduces a new machine option, spcr=3Don|off, allowing u=
+sers
+ > > to disable the ACPI SPCR (Serial Port Console Redirection) table.
+ > > By default, SPCR is enabled. Disabling it can help ensure that the gue=
+st's
+ > > console behavior is determined solely by kernel command-line parameter=
+s
+ > > on arch like arm64, avoiding unintended serial console configurations =
+imposed
+ > > by firmware.
+ > >=20
+ > > Also add tests on AArch64 and RISC-V virt machines using TCG and UEFI =
+boot.
+ > >=20
+ > > Changes since v3:
+ > > - Add Reviewed-by from Sunil V L <sunilvl@ventanamicro.com> for patch =
+1, 3, and 4.
+ > > - rename enable_spcr to acpi_spcr_enabled as suggested by Philippe Mat=
+hieu-Daud=C3=A9.
+ > > Changes since v2:
+ > > - Omit UART device from DSDT and SPCR construction if no serial device=
+ is present,
+ > > as suggested by Philippe Mathieu-Daud=C3=A9.
+ > > - Add Reviewed-by from Gavin Shan <gshan@redhat.com> for the first pat=
+ch and fix style issue.
+ > >=20
+ > > Changes since v1:
+ > > - Add bios-tables-test for RISC-V and ARM as suggested by
+ > > - Add Acked-by from Michael S. Tsirkin for the first patch
+ > > - Add Reviewed-by from Bibo Mao for the first patch
+ > >=20
+ > > Li Chen (4):
+ > >   acpi: Add machine option to disable SPCR table
+ > >   tests/qtest/bios-tables-test: Add test for disabling SPCR on AArch64
+ > >   tests/qtest/bios-tables-test: Add test for disabling SPCR on RISC-V
+ > >   acpi/virt: suppress UART device & SPCR when guest has no serial
+ > >     hardware
+ >=20
+ > Who's merging this?
+=20
+Sorry for the late reply.
 
-What would happen on real hardware if an invalid instruction is run?
-It should cause an exception, which is what we should be doing as well.
+If I understand correctly, you are asking who can merge this series?
 
-Alistair
+Per get_maintainer result:
 
->
-> Roan Richmond (1):
->   Add RISCV ZALASR extension
->
->  target/riscv/cpu.c                           |   1 +
->  target/riscv/insn32.decode                   |  10 ++
->  target/riscv/insn_trans/trans_rvzalasr.c.inc | 110 +++++++++++++++++++
->  target/riscv/translate.c                     |   1 +
->  4 files changed, 122 insertions(+)
->  create mode 100644 target/riscv/insn_trans/trans_rvzalasr.c.inc
->
-> --
-> 2.43.0
->
+firstlove@archlinux ~/p/qemu (spcr)> ./scripts/get_maintainer.pl *.patch
+./scripts/get_maintainer.pl: file 'v4-0000-cover-letter.patch' doesn't appe=
+ar to be a patch.  Add -f to options?
+Peter Maydell <peter.maydell@linaro.org> (maintainer:Virt)
+Shannon Zhao <shannon.zhaosl@gmail.com> (maintainer:ARM ACPI Subsystem)
+
+I think Peter Maydell and Shannon Zhao would be the appropriate maintainers=
+ to merge it.
+
+If this is not what you meant, please correct me.
+
+Regards,
+Li
 
