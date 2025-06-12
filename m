@@ -4,47 +4,47 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 41052C71136
-	for <qemu-riscv@archiver.kernel.org>; Thu, 12 Jun 2025 20:58:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8D1E1C61CE8
+	for <qemu-riscv@archiver.kernel.org>; Thu, 12 Jun 2025 20:58:43 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uPp02-0007U6-Q8; Thu, 12 Jun 2025 16:58:14 -0400
+	id 1uPp0S-000889-PO; Thu, 12 Jun 2025 16:58:41 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <jsnow@redhat.com>) id 1uPozs-0007Ib-G7
- for qemu-riscv@nongnu.org; Thu, 12 Jun 2025 16:58:06 -0400
+ (Exim 4.90_1) (envelope-from <jsnow@redhat.com>) id 1uPp0O-0007vO-BO
+ for qemu-riscv@nongnu.org; Thu, 12 Jun 2025 16:58:36 -0400
 Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <jsnow@redhat.com>) id 1uPozp-0000Wd-Ud
- for qemu-riscv@nongnu.org; Thu, 12 Jun 2025 16:58:04 -0400
+ (Exim 4.90_1) (envelope-from <jsnow@redhat.com>) id 1uPp0M-0000cL-JT
+ for qemu-riscv@nongnu.org; Thu, 12 Jun 2025 16:58:36 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1749761881;
+ s=mimecast20190719; t=1749761913;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=UMyq4IM8orE552UKyUH3BKbgGyjRLLE1wmihoPQ7GH0=;
- b=Hvm2616dyYhi+hNR2ZHiz8mwd9l1r/a9l5IbgBT4YyeCfQWJ7YNxjdh5rnPb2YfAXbtDHF
- GwzPFhl5iDgI+wIbnZW+JFqBLPcaGLCAZFWkQmXsVtUcWpgnRmVDOhkiMbWtwSZdCQP6ct
- G8WhcA9/Tr/M12C4Elu8tMMUW1Rq8lk=
-Received: from mx-prod-mc-04.mail-002.prod.us-west-2.aws.redhat.com
+ bh=uCM/Luch++bkeRG2d0E9z2F9L/FoZdsWLzzalPuqzaM=;
+ b=Td5/0xhblZUkABNqPm13jCuCBiXvFF9bsxH7mRWzJjV2yYuOClj0reDjxlolWZicOnafyS
+ opAvuKA7QLTSWK5hmfzMh84IuQJ38j6jArf1Tbb40b6Q3oM3tcnE7UHYTlegbl8+fiITsC
+ +iul1NbFQeIswOqzFRNwyLnKNf3HAZ0=
+Received: from mx-prod-mc-05.mail-002.prod.us-west-2.aws.redhat.com
  (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
  relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-696-PKTUzVbfM6eijA0y1ZoMeA-1; Thu,
- 12 Jun 2025 16:57:57 -0400
-X-MC-Unique: PKTUzVbfM6eijA0y1ZoMeA-1
-X-Mimecast-MFC-AGG-ID: PKTUzVbfM6eijA0y1ZoMeA_1749761871
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-32-JE3lZeGoPGWbpbmm6pLJqg-1; Thu,
+ 12 Jun 2025 16:58:32 -0400
+X-MC-Unique: JE3lZeGoPGWbpbmm6pLJqg-1
+X-Mimecast-MFC-AGG-ID: JE3lZeGoPGWbpbmm6pLJqg_1749761907
 Received: from mx-prod-int-05.mail-002.prod.us-west-2.aws.redhat.com
  (mx-prod-int-05.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.17])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by mx-prod-mc-04.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id 023B119560BF; Thu, 12 Jun 2025 20:57:51 +0000 (UTC)
+ by mx-prod-mc-05.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id B4C4F195608C; Thu, 12 Jun 2025 20:58:26 +0000 (UTC)
 Received: from jsnow-thinkpadp16vgen1.westford.csb (unknown [10.22.80.54])
  by mx-prod-int-05.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
- id B5BBB1955F57; Thu, 12 Jun 2025 20:57:18 +0000 (UTC)
+ id 709B21956050; Thu, 12 Jun 2025 20:57:51 +0000 (UTC)
 From: John Snow <jsnow@redhat.com>
 To: qemu-devel@nongnu.org
 Cc: Joel Stanley <joel@jms.id.au>, Yi Liu <yi.l.liu@intel.com>,
@@ -126,10 +126,9 @@ Cc: Joel Stanley <joel@jms.id.au>, Yi Liu <yi.l.liu@intel.com>,
  Huacai Chen <chenhuacai@kernel.org>,
  Mahmoud Mandour <ma.mandourr@gmail.com>,
  Harsh Prateek Bora <harshpb@linux.ibm.com>
-Subject: [PATCH v2 04/12] python: update shebangs to standard,
- using /usr/bin/env
-Date: Thu, 12 Jun 2025 16:54:42 -0400
-Message-ID: <20250612205451.1177751-5-jsnow@redhat.com>
+Subject: [PATCH v2 05/12] python: fix illegal escape sequences
+Date: Thu, 12 Jun 2025 16:54:43 -0400
+Message-ID: <20250612205451.1177751-6-jsnow@redhat.com>
 In-Reply-To: <20250612205451.1177751-1-jsnow@redhat.com>
 References: <20250612205451.1177751-1-jsnow@redhat.com>
 MIME-Version: 1.0
@@ -144,7 +143,7 @@ X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
  DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H5=0.001, RCVD_IN_MSPIKE_WL=0.001,
  RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001, RCVD_IN_VALIDITY_SAFE_BLOCKED=0.001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -160,50 +159,30 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-This is the standard shebang we should always be using, as it plays
-nicely with virtual environments and our desire to always be using a
-specific python interpreter in our environments.
+\{ is an illegal escape sequence, to get a literal backslash we need to
+use \\.
 
-(It also makes sure I can find all of the python scripts in our tree
-easily.)
+This is being fixed because of an issue spotted when attempting to use
+the pyupgrade script.
 
 Signed-off-by: John Snow <jsnow@redhat.com>
 ---
- roms/edk2-build.py           | 2 +-
- scripts/cpu-x86-uarch-abi.py | 2 +-
- scripts/userfaultfd-wrlat.py | 2 +-
- 3 files changed, 3 insertions(+), 3 deletions(-)
+ scripts/feature_to_c.py | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/roms/edk2-build.py b/roms/edk2-build.py
-index e564765aaa7..8dc38700394 100755
---- a/roms/edk2-build.py
-+++ b/roms/edk2-build.py
-@@ -1,4 +1,4 @@
--#!/usr/bin/python3
-+#!/usr/bin/env python3
- """
- build helper script for edk2, see
- https://gitlab.com/kraxel/edk2-build-config
-diff --git a/scripts/cpu-x86-uarch-abi.py b/scripts/cpu-x86-uarch-abi.py
-index 7360e55c6e0..5a052083eea 100644
---- a/scripts/cpu-x86-uarch-abi.py
-+++ b/scripts/cpu-x86-uarch-abi.py
-@@ -1,4 +1,4 @@
--#!/usr/bin/python3
-+#!/usr/bin/env python3
- #
- # SPDX-License-Identifier: GPL-2.0-or-later
- #
-diff --git a/scripts/userfaultfd-wrlat.py b/scripts/userfaultfd-wrlat.py
-index 0684be4e044..5f36c7af565 100755
---- a/scripts/userfaultfd-wrlat.py
-+++ b/scripts/userfaultfd-wrlat.py
-@@ -1,4 +1,4 @@
--#!/usr/bin/python3
-+#!/usr/bin/env python3
- #
- # userfaultfd-wrlat Summarize userfaultfd write fault latencies.
- #                   Events are continuously accumulated for the
+diff --git a/scripts/feature_to_c.py b/scripts/feature_to_c.py
+index 807af0e685c..5f8fa8ad5c6 100644
+--- a/scripts/feature_to_c.py
++++ b/scripts/feature_to_c.py
+@@ -25,7 +25,7 @@ def writeliteral(indent, bytes):
+         elif c >= 32 and c < 127:
+             sys.stdout.write(c.to_bytes(1, 'big').decode())
+         else:
+-            sys.stdout.write(f'\{c:03o}')
++            sys.stdout.write(f'\\{c:03o}')
+ 
+     if quoted:
+         sys.stdout.write('"')
 -- 
 2.48.1
 
