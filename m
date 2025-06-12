@@ -4,56 +4,146 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B4F38C71136
-	for <qemu-riscv@archiver.kernel.org>; Thu, 12 Jun 2025 07:56:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E8C25C61CE8
+	for <qemu-riscv@archiver.kernel.org>; Thu, 12 Jun 2025 20:56:31 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uPcmq-0001BB-T8; Thu, 12 Jun 2025 03:55:48 -0400
+	id 1uPoyI-0004Hf-92; Thu, 12 Jun 2025 16:56:26 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <roan.richmond@codethink.co.uk>)
- id 1uPcmo-0001Av-UA; Thu, 12 Jun 2025 03:55:46 -0400
-Received: from imap5.colo.codethink.co.uk ([78.40.148.171])
+ (Exim 4.90_1) (envelope-from <jsnow@redhat.com>) id 1uPoyG-0004FI-4a
+ for qemu-riscv@nongnu.org; Thu, 12 Jun 2025 16:56:24 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <roan.richmond@codethink.co.uk>)
- id 1uPcmm-0008QO-Hj; Thu, 12 Jun 2025 03:55:46 -0400
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=codethink.co.uk; s=imap5-20230908; h=Sender:Content-Transfer-Encoding:
- MIME-Version:Message-ID:Date:Subject:Cc:To:From:Reply-To:Content-Type:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Id:
- List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=zex+xFKcGkKpcW7uPNq1h+/d1Mvig3m8rvW3+/zMxaA=; b=qg4Ksz3rUQb3MccQeqk+O7ZtC9
- xbz2TwLFjOTVNkAinrY0VprFz2ml/MF/7VYsZyheQ4ip9BuNwU6tpdit6nuLXYNcv6A2tCqJHLOf3
- WGi6YMfZegvru1yShTb0/F0Zm/QcnC46eWed6nG3MHQdfKCFI0CaEOadNFDsCsqaJkDWCH+hEuAZv
- siMhWUVUpJtLqqdpk4P/DRXacPRUrvLyvXKNBwRydCSw+P/+oOw47SODQ0J/pWvhJUoh7ldOAon4J
- GAESlzDqdB0p5/CdnBDnx2uU3TI1Z3EuVLgaEW76rGxIMEz7+5RX6tpPkTxHxCE9ZWcZSs7RioCbV
- aEog07YQ==;
-Received: from [167.98.27.226] (helo=codethink.office.codethink.co.uk)
- by imap5.colo.codethink.co.uk with esmtpsa  (Exim 4.94.2 #2 (Debian))
- id 1uPcme-000RbX-CV; Thu, 12 Jun 2025 08:55:37 +0100
-From: Roan Richmond <roan.richmond@codethink.co.uk>
-To: qemu-riscv@nongnu.org
-Cc: palmer@dabbelt.com, alistair.francis@wdc.com, liwei1518@gmail.com,
- dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com,
- qemu-devel@nongnu.org, alistair23@gmail.com,
- Roan Richmond <roan.richmond@codethink.co.uk>
-Subject: [PATCH v3] Add RISCV ZALASR extension
-Date: Thu, 12 Jun 2025 08:54:44 +0100
-Message-ID: <20250612075527.330174-1-roan.richmond@codethink.co.uk>
-X-Mailer: git-send-email 2.43.0
+ (Exim 4.90_1) (envelope-from <jsnow@redhat.com>) id 1uPoyD-0000J1-QC
+ for qemu-riscv@nongnu.org; Thu, 12 Jun 2025 16:56:23 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1749761780;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=R+HVWn5ejM2NRJ2UzNsYUYT8arVp5yX8Fj0AdCrYiak=;
+ b=cZSmOWPdK6OF1ynJ/WQLZ/FgK6/AO+qd6RzPVGAaZO/IovtYMvqEBr2+h6zMMmYM5TC+z0
+ WECxqtcGC9cM3vQduEF0rHolJ49AaE5Kqk0ElKz2n5dPj3w6PQby3v5ODKKaQ34Ani27Ro
+ Qm0FguJ3rqEXY5jU2DlCNCaGc4ODbxw=
+Received: from mx-prod-mc-08.mail-002.prod.us-west-2.aws.redhat.com
+ (ec2-35-165-154-97.us-west-2.compute.amazonaws.com [35.165.154.97]) by
+ relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-482-2izI2JldOwuIv7BGoZ4ZeA-1; Thu,
+ 12 Jun 2025 16:56:18 -0400
+X-MC-Unique: 2izI2JldOwuIv7BGoZ4ZeA-1
+X-Mimecast-MFC-AGG-ID: 2izI2JldOwuIv7BGoZ4ZeA_1749761772
+Received: from mx-prod-int-05.mail-002.prod.us-west-2.aws.redhat.com
+ (mx-prod-int-05.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.17])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mx-prod-mc-08.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id 42FF11800366; Thu, 12 Jun 2025 20:56:10 +0000 (UTC)
+Received: from jsnow-thinkpadp16vgen1.westford.csb (unknown [10.22.80.54])
+ by mx-prod-int-05.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
+ id 7ADA61955F4A; Thu, 12 Jun 2025 20:55:36 +0000 (UTC)
+From: John Snow <jsnow@redhat.com>
+To: qemu-devel@nongnu.org
+Cc: Joel Stanley <joel@jms.id.au>, Yi Liu <yi.l.liu@intel.com>,
+ =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
+ Helge Deller <deller@gmx.de>,
+ Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
+ Andrew Jeffery <andrew@codeconstruct.com.au>,
+ Fabiano Rosas <farosas@suse.de>, Alexander Bulekov <alxndr@bu.edu>,
+ Darren Kenny <darren.kenny@oracle.com>,
+ Leif Lindholm <leif.lindholm@oss.qualcomm.com>,
+ =?UTF-8?q?C=C3=A9dric=20Le=20Goater?= <clg@kaod.org>,
+ Ed Maste <emaste@freebsd.org>, Gerd Hoffmann <kraxel@redhat.com>,
+ Warner Losh <imp@bsdimp.com>, Kevin Wolf <kwolf@redhat.com>,
+ Tyrone Ting <kfting@nuvoton.com>, Eric Blake <eblake@redhat.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Yoshinori Sato <ysato@users.sourceforge.jp>, Troy Lee <leetroy@gmail.com>,
+ Halil Pasic <pasic@linux.ibm.com>,
+ Akihiko Odaki <odaki@rsg.ci.i.u-tokyo.ac.jp>,
+ Michael Roth <michael.roth@amd.com>, Laurent Vivier <laurent@vivier.eu>,
+ Ani Sinha <anisinha@redhat.com>, Weiwei Li <liwei1518@gmail.com>,
+ John Snow <jsnow@redhat.com>, Eric Farman <farman@linux.ibm.com>,
+ Steven Lee <steven_lee@aspeedtech.com>,
+ Brian Cain <brian.cain@oss.qualcomm.com>, Li-Wen Hsu <lwhsu@freebsd.org>,
+ Jamin Lin <jamin_lin@aspeedtech.com>, qemu-s390x@nongnu.org,
+ Vladimir Sementsov-Ogievskiy <vsementsov@yandex-team.ru>,
+ qemu-block@nongnu.org, Bernhard Beschow <shentey@gmail.com>,
+ =?UTF-8?q?Cl=C3=A9ment=20Mathieu--Drif?= <clement.mathieu--drif@eviden.com>,
+ Maksim Davydov <davydov-max@yandex-team.ru>,
+ Niek Linnenbank <nieklinnenbank@gmail.com>,
+ =?UTF-8?q?Herv=C3=A9=20Poussineau?= <hpoussin@reactos.org>,
+ Christian Borntraeger <borntraeger@linux.ibm.com>,
+ Paul Durrant <paul@xen.org>,
+ Manos Pitsidianakis <manos.pitsidianakis@linaro.org>,
+ Jagannathan Raman <jag.raman@oracle.com>,
+ Igor Mitsyanko <i.mitsyanko@gmail.com>, Max Filippov <jcmvbkbc@gmail.com>,
+ Markus Armbruster <armbru@redhat.com>,
+ Pierrick Bouvier <pierrick.bouvier@linaro.org>,
+ "Michael S. Tsirkin" <mst@redhat.com>, Anton Johansson <anjo@rev.ng>,
+ Peter Maydell <peter.maydell@linaro.org>, Cleber Rosa <crosa@redhat.com>,
+ Eric Auger <eric.auger@redhat.com>, Yanan Wang <wangyanan55@huawei.com>,
+ qemu-arm@nongnu.org, Hao Wu <wuhaotsh@google.com>,
+ Mads Ynddal <mads@ynddal.dk>,
+ Sriram Yagnaraman <sriram.yagnaraman@ericsson.com>, qemu-riscv@nongnu.org,
+ Paolo Bonzini <pbonzini@redhat.com>, Jason Wang <jasowang@redhat.com>,
+ Nicholas Piggin <npiggin@gmail.com>, Michael Rolnik <mrolnik@gmail.com>,
+ Zhao Liu <zhao1.liu@intel.com>, Alessandro Di Federico <ale@rev.ng>,
+ Thomas Huth <thuth@redhat.com>, Antony Pavlov <antonynpavlov@gmail.com>,
+ Jiaxun Yang <jiaxun.yang@flygoat.com>, Hanna Reitz <hreitz@redhat.com>,
+ Ilya Leoshkevich <iii@linux.ibm.com>,
+ Marcelo Tosatti <mtosatti@redhat.com>,
+ Nina Schoetterl-Glausch <nsg@linux.ibm.com>,
+ Daniel Henrique Barboza <danielhb413@gmail.com>,
+ Qiuhao Li <Qiuhao.Li@outlook.com>, Hyman Huang <yong.huang@smartx.com>,
+ =?UTF-8?q?Daniel=20P=2E=20Berrang=C3=A9?= <berrange@redhat.com>,
+ Magnus Damm <magnus.damm@gmail.com>, qemu-rust@nongnu.org,
+ Bandan Das <bsd@redhat.com>,
+ Strahinja Jankovic <strahinja.p.jankovic@gmail.com>,
+ Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
+ kvm@vger.kernel.org, Fam Zheng <fam@euphon.net>,
+ Jia Liu <proljc@gmail.com>,
+ =?UTF-8?q?Marc-Andr=C3=A9=20Lureau?= <marcandre.lureau@redhat.com>,
+ Alistair Francis <alistair@alistair23.me>,
+ Subbaraya Sundeep <sundeep.lkml@gmail.com>,
+ Kyle Evans <kevans@freebsd.org>, Song Gao <gaosong@loongson.cn>,
+ Alexandre Iooss <erdnaxe@crans.org>, Aurelien Jarno <aurelien@aurel32.net>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, Peter Xu <peterx@redhat.com>,
+ Stefan Hajnoczi <stefanha@redhat.com>, BALATON Zoltan <balaton@eik.bme.hu>,
+ Elena Ufimtseva <elena.ufimtseva@oracle.com>,
+ "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
+ =?UTF-8?q?Fr=C3=A9d=C3=A9ric=20Barrat?= <fbarrat@linux.ibm.com>,
+ qemu-ppc@nongnu.org, Radoslaw Biernacki <rad@semihalf.com>,
+ Beniamino Galvani <b.galvani@gmail.com>,
+ David Hildenbrand <david@redhat.com>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ David Woodhouse <dwmw2@infradead.org>,
+ Eduardo Habkost <eduardo@habkost.net>,
+ Ahmed Karaman <ahmedkhaledkaraman@gmail.com>,
+ Huacai Chen <chenhuacai@kernel.org>,
+ Mahmoud Mandour <ma.mandourr@gmail.com>,
+ Harsh Prateek Bora <harshpb@linux.ibm.com>
+Subject: [PATCH v2 01/12] python: convert packages to PEP517/pyproject.toml
+Date: Thu, 12 Jun 2025 16:54:39 -0400
+Message-ID: <20250612205451.1177751-2-jsnow@redhat.com>
+In-Reply-To: <20250612205451.1177751-1-jsnow@redhat.com>
+References: <20250612205451.1177751-1-jsnow@redhat.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=78.40.148.171;
- envelope-from=roan.richmond@codethink.co.uk; helo=imap5.colo.codethink.co.uk
+X-Scanned-By: MIMEDefang 3.0 on 10.30.177.17
+Received-SPF: pass client-ip=170.10.133.124; envelope-from=jsnow@redhat.com;
+ helo=us-smtp-delivery-124.mimecast.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H5=0.001, RCVD_IN_MSPIKE_WL=0.001,
  RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001, RCVD_IN_VALIDITY_SAFE_BLOCKED=0.001,
- SPF_HELO_PASS=-0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -69,195 +159,217 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-This is based on version v0.8.3 of the ZALASR specification [1].
-The specification is listed as in Frozen state [2].
+Newer versions of setuptools increasingly expect that packages are
+defined using the pyproject.toml/PEP517 packaging layout format. With
+3.9 as our minimum, I believe it's finally appropriate to make the shift
+away from the legacy packaging format.
 
-[1]: https://github.com/riscv/riscv-zalasr/tree/v0.8.3
-[2]: https://lf-riscv.atlassian.net/wiki/spaces/HOME/pages/16154882/All+RISC-V+Specifications+Under+Active+Development
+Update documentation and dependencies that change as a result of the
+different build/packaging/installation pathways.
 
-Signed-off-by: Roan Richmond <roan.richmond@codethink.co.uk>
+This change has the effect of fixing "make check-dev", which has been
+broken on newer versions of Fedora for a while, now.
+
+Signed-off-by: John Snow <jsnow@redhat.com>
 ---
-V3:
-  - rebased patch onto master branch
-  - added check for aq on Load Acquire, as pointed out by Alistair Palmer
-  - added check for rl on Store Release, as mentioned by Alistair Palmer
+ python/README.rst        | 33 ++++++++++++++++-----------------
+ python/Makefile          | 18 +++++++++---------
+ python/pyproject.toml    | 10 ++++++++++
+ python/setup.py          | 40 ----------------------------------------
+ python/tests/minreqs.txt |  2 +-
+ 5 files changed, 36 insertions(+), 67 deletions(-)
+ create mode 100644 python/pyproject.toml
+ delete mode 100755 python/setup.py
 
- target/riscv/cpu.c                           |   1 +
- target/riscv/insn32.decode                   |  10 ++
- target/riscv/insn_trans/trans_rvzalasr.c.inc | 120 +++++++++++++++++++
- target/riscv/translate.c                     |   1 +
- 4 files changed, 132 insertions(+)
- create mode 100644 target/riscv/insn_trans/trans_rvzalasr.c.inc
-
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 629ac37501..b52bbf0936 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -128,6 +128,7 @@ const RISCVIsaExtData isa_edata_arr[] = {
-     ISA_EXT_DATA_ENTRY(zabha, PRIV_VERSION_1_13_0, ext_zabha),
-     ISA_EXT_DATA_ENTRY(zacas, PRIV_VERSION_1_12_0, ext_zacas),
-     ISA_EXT_DATA_ENTRY(zama16b, PRIV_VERSION_1_13_0, ext_zama16b),
-+    ISA_EXT_DATA_ENTRY(zalasr, PRIV_VERSION_1_12_0, ext_zalasr),
-     ISA_EXT_DATA_ENTRY(zalrsc, PRIV_VERSION_1_12_0, ext_zalrsc),
-     ISA_EXT_DATA_ENTRY(zawrs, PRIV_VERSION_1_12_0, ext_zawrs),
-     ISA_EXT_DATA_ENTRY(zfa, PRIV_VERSION_1_12_0, ext_zfa),
-diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
-index cd23b1f3a9..c848c0c1c5 100644
---- a/target/riscv/insn32.decode
-+++ b/target/riscv/insn32.decode
-@@ -1066,3 +1066,13 @@ amominu_h  11000 . . ..... ..... 001 ..... 0101111 @atom_st
- amomaxu_h  11100 . . ..... ..... 001 ..... 0101111 @atom_st
- amocas_b    00101 . . ..... ..... 000 ..... 0101111 @atom_st
- amocas_h    00101 . . ..... ..... 001 ..... 0101111 @atom_st
-+
-+# *** Zalasr Standard Extension ***
-+lb_aqrl  00110 . . ..... ..... 000 ..... 0101111 @atom_st
-+lh_aqrl  00110 . . ..... ..... 001 ..... 0101111 @atom_st
-+lw_aqrl  00110 . . ..... ..... 010 ..... 0101111 @atom_st
-+ld_aqrl  00110 . . ..... ..... 011 ..... 0101111 @atom_st
-+sb_aqrl  00111 . . ..... ..... 000 ..... 0101111 @atom_st
-+sh_aqrl  00111 . . ..... ..... 001 ..... 0101111 @atom_st
-+sw_aqrl  00111 . . ..... ..... 010 ..... 0101111 @atom_st
-+sd_aqrl  00111 . . ..... ..... 011 ..... 0101111 @atom_st
-diff --git a/target/riscv/insn_trans/trans_rvzalasr.c.inc b/target/riscv/insn_trans/trans_rvzalasr.c.inc
+diff --git a/python/README.rst b/python/README.rst
+index d62e71528d2..befa84e3261 100644
+--- a/python/README.rst
++++ b/python/README.rst
+@@ -5,24 +5,23 @@ This directory houses Python tooling used by the QEMU project to build,
+ configure, and test QEMU. It is organized by namespace (``qemu``), and
+ then by package (e.g. ``qemu/machine``, ``qemu/qmp``, etc).
+ 
+-``setup.py`` is used by ``pip`` to install this tooling to the current
+-environment. ``setup.cfg`` provides the packaging configuration used by
+-``setup.py``. You will generally invoke it by doing one of the following:
++``pyproject.toml`` and ``setup.cfg`` are used by ``pip`` to install this
++tooling to the current environment. ``setup.cfg`` provides the packaging
++configuration, while ``pyproject.toml`` describes the package build
++system requirements.
+ 
+-1. ``pip3 install .`` will install these packages to your current
+-   environment. If you are inside a virtual environment, they will
+-   install there. If you are not, it will attempt to install to the
+-   global environment, which is **not recommended**.
++You will generally install these packages by invoking ``pip3 install
++.``; which will install these packages to your current environment. If
++you are inside a virtual environment, they will install there. If you
++are not, modern versions of pip will attempt instead to install to your
++local user environment. Older versions of pip will attempt to install to
++the global environment, which is **not recommended**.
+ 
+-2. ``pip3 install --user .`` will install these packages to your user's
+-   local python packages. If you are inside of a virtual environment,
+-   this will fail; you want the first invocation above.
+-
+-If you append the ``--editable`` or ``-e`` argument to either invocation
+-above, pip will install in "editable" mode. This installs the package as
+-a forwarder ("qemu.egg-link") that points to the source tree. In so
+-doing, the installed package always reflects the latest version in your
+-source tree.
++If you append the ``--editable`` or ``-e`` argument to the above
++invocation, pip will install in "editable" mode. This installs the
++package as a "forwarder" that points to the source tree, so that the
++installed package always reflects the latest version in your source
++tree.
+ 
+ Installing ".[devel]" instead of "." will additionally pull in required
+ packages for testing this package. They are not runtime requirements,
+@@ -81,4 +80,4 @@ Files in this directory
+ - ``VERSION`` contains the PEP-440 compliant version used to describe
+   this package; it is referenced by ``setup.cfg``.
+ - ``setup.cfg`` houses setuptools package configuration.
+-- ``setup.py`` is the setuptools installer used by pip; See above.
++- ``pyproject.toml`` lists build system requirements for the Python packages.
+diff --git a/python/Makefile b/python/Makefile
+index 764b79ccb23..845fbb66cf4 100644
+--- a/python/Makefile
++++ b/python/Makefile
+@@ -15,8 +15,8 @@ help:
+ 	@echo "make check-tox:"
+ 	@echo "    Run tests against multiple python versions."
+ 	@echo "    These tests use the newest dependencies."
+-	@echo "    Requires: Python 3.9 - 3.11, and tox."
+-	@echo "    Hint (Fedora): 'sudo dnf install python3-tox python3.11'"
++	@echo "    Requires: Python 3.9 - 3.13, and tox."
++	@echo "    Hint (Fedora): 'sudo dnf install python3-tox python3.13'"
+ 	@echo "    The variable QEMU_TOX_EXTRA_ARGS can be use to pass extra"
+ 	@echo "    arguments to tox".
+ 	@echo ""
+@@ -63,12 +63,12 @@ $(QEMU_MINVENV_DIR) $(QEMU_MINVENV_DIR)/bin/activate: setup.cfg tests/minreqs.tx
+ 	@(								\
+ 		echo "ACTIVATE $(QEMU_MINVENV_DIR)";			\
+ 		. $(QEMU_MINVENV_DIR)/bin/activate;			\
+-		echo "INSTALL wheel $(QEMU_MINVENV_DIR)";               \
+-		$(PIP_INSTALL) wheel 1>/dev/null;		               \
++		echo "INSTALL wheel $(QEMU_MINVENV_DIR)";		\
++		$(PIP_INSTALL) wheel 1>/dev/null;			\
+ 		echo "INSTALL -r tests/minreqs.txt $(QEMU_MINVENV_DIR)";\
+ 		$(PIP_INSTALL) -r tests/minreqs.txt 1>/dev/null;	\
+ 		echo "INSTALL -e qemu $(QEMU_MINVENV_DIR)";		\
+-		$(PIP_INSTALL) -e . 1>/dev/null;			\
++		$(PIP_INSTALL) -e . --config-settings=editable_mode=compat 1>/dev/null;			\
+ 	)
+ 	@touch $(QEMU_MINVENV_DIR)
+ 
+@@ -103,7 +103,7 @@ check-dev: dev-venv
+ 
+ .PHONY: develop
+ develop:
+-	$(PIP_INSTALL) -e .[devel]
++	$(PIP_INSTALL) -e .[devel] --config-settings=editable_mode=compat
+ 
+ .PHONY: check
+ check:
+@@ -122,12 +122,12 @@ check-coverage:
+ 
+ .PHONY: clean
+ clean:
+-	python3 setup.py clean --all
+-	rm -f pyproject.toml
++	rm -rf build/
+ 
+ .PHONY: distclean
+ distclean: clean
+-	rm -rf qemu.egg-info/ .eggs/ dist/
++	rm -rf qemu.egg-info/
+ 	rm -rf $(QEMU_VENV_DIR) $(QEMU_MINVENV_DIR) .tox/
++	rm -rf .mypy_cache/
+ 	rm -f .coverage .coverage.*
+ 	rm -rf htmlcov/
+diff --git a/python/pyproject.toml b/python/pyproject.toml
 new file mode 100644
-index 0000000000..8761508de3
+index 00000000000..2de34bf4729
 --- /dev/null
-+++ b/target/riscv/insn_trans/trans_rvzalasr.c.inc
-@@ -0,0 +1,120 @@
-+/*
-+ * RISC-V translation routines for the ZALASR (Load-Aquire and Store-Release)
-+ * Extension.
-+ *
-+ * Copyright (c) 2025 Roan Richmond, roan.richmond@codethink.co.uk
-+ *
-+ * This program is free software; you can redistribute it and/or modify it
-+ * under the terms and conditions of the GNU General Public License,
-+ * version 2 or later, as published by the Free Software Foundation.
-+ *
-+ * This program is distributed in the hope it will be useful, but WITHOUT
-+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
-+ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
-+ * more details.
-+ *
-+ * You should have received a copy of the GNU General Public License along with
-+ * this program.  If not, see <http://www.gnu.org/licenses/>.
-+ */
++++ b/python/pyproject.toml
+@@ -0,0 +1,10 @@
++# SPDX-License-Identifier: GPL-2.0-or-later
 +
-+#define REQUIRE_ZALASR(ctx) do {     \
-+    if (!ctx->cfg_ptr->ext_zalasr) { \
-+        return false;                \
-+    }                                \
-+} while (0)
++[build-system]
++requires = [
++    "setuptools>=39.2",
++    "wheel",
++]
++build-backend = "setuptools.build_meta"
 +
-+static bool gen_load_acquire(DisasContext *ctx, arg_lb_aqrl *a, MemOp memop)
-+{
-+    decode_save_opc(ctx, 0);
-+
-+    TCGv addr = get_address(ctx, a->rs1, 0);
-+    TCGv dest = get_gpr(ctx, a->rd, EXT_NONE);
-+    TCGBar bar = (a->rl) ? TCG_BAR_STRL : 0;
-+
-+    /* Check that AQ is set, as this is mandatory */
-+    if (!a->aq) {
-+        return false;    
-+    }
-+
-+    memop |= (ctx->cfg_ptr->ext_zama16b) ? MO_ATOM_WITHIN16 : 0;
-+
-+    tcg_gen_qemu_ld_tl(dest, addr, ctx->mem_idx, memop);
-+    gen_set_gpr(ctx, a->rd, dest);
-+
-+    /* Add a memory barrier implied by AQ (mandatory) and RL (optional) */
-+    tcg_gen_mb(TCG_MO_ALL | TCG_BAR_LDAQ | bar);
-+
-+    return true;
-+}
-+
-+static bool trans_lb_aqrl(DisasContext *ctx, arg_lb_aqrl *a)
-+{
-+    REQUIRE_ZALASR(ctx);
-+    return gen_load_acquire(ctx, a, (MO_ALIGN | MO_SB));
-+}
-+
-+static bool trans_lh_aqrl(DisasContext *ctx, arg_lh_aqrl *a)
-+{
-+    REQUIRE_ZALASR(ctx);
-+    return gen_load_acquire(ctx, a, (MO_ALIGN | MO_TESW));
-+}
-+
-+static bool trans_lw_aqrl(DisasContext *ctx, arg_lw_aqrl *a)
-+{
-+    REQUIRE_ZALASR(ctx);
-+    return gen_load_acquire(ctx, a, (MO_ALIGN | MO_TESL));
-+}
-+
-+static bool trans_ld_aqrl(DisasContext *ctx, arg_ld_aqrl *a)
-+{
-+    REQUIRE_64BIT(ctx);
-+    REQUIRE_ZALASR(ctx);
-+    return gen_load_acquire(ctx, a, (MO_ALIGN | MO_TEUQ));
-+}
-+
-+static bool gen_store_release(DisasContext *ctx, arg_sb_aqrl *a, MemOp memop)
-+{
-+    decode_save_opc(ctx, 0);
-+
-+    TCGv addr = get_address(ctx, a->rs1, 0);
-+    TCGv data = get_gpr(ctx, a->rs2, EXT_NONE);
-+    TCGBar bar = (a->aq) ? TCG_BAR_LDAQ : 0;
-+
-+    /* Check that RL is set, as this is mandatory */
-+    if (!a->rl) {
-+        return false;    
-+    }
-+
-+    memop |= (ctx->cfg_ptr->ext_zama16b) ? MO_ATOM_WITHIN16 : 0;
-+
-+    /* Add a memory barrier implied by RL (mandatory) and AQ (optional) */
-+    tcg_gen_mb(TCG_MO_ALL | TCG_BAR_STRL | bar);
-+
-+    tcg_gen_qemu_st_tl(data, addr, ctx->mem_idx, memop);
-+    return true;
-+}
-+
-+static bool trans_sb_aqrl(DisasContext *ctx, arg_sb_aqrl *a)
-+{
-+    REQUIRE_ZALASR(ctx);
-+    return gen_store_release(ctx, a, (MO_ALIGN | MO_SB));
-+}
-+
-+static bool trans_sh_aqrl(DisasContext *ctx, arg_sh_aqrl *a)
-+{
-+    REQUIRE_ZALASR(ctx);
-+    return gen_store_release(ctx, a, (MO_ALIGN | MO_TESW));
-+}
-+
-+static bool trans_sw_aqrl(DisasContext *ctx, arg_sw_aqrl *a)
-+{
-+    REQUIRE_ZALASR(ctx);
-+    return gen_store_release(ctx, a, (MO_ALIGN | MO_TESL));
-+}
-+
-+static bool trans_sd_aqrl(DisasContext *ctx, arg_sd_aqrl *a)
-+{
-+    REQUIRE_64BIT(ctx);
-+    REQUIRE_ZALASR(ctx);
-+    return gen_store_release(ctx, a, (MO_ALIGN | MO_TEUQ));
-+}
-diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-index d7a6de02df..4cd2d68e46 100644
---- a/target/riscv/translate.c
-+++ b/target/riscv/translate.c
-@@ -1183,6 +1183,7 @@ static uint32_t opcode_at(DisasContextBase *dcbase, target_ulong pc)
- #include "insn_trans/trans_rvzicond.c.inc"
- #include "insn_trans/trans_rvzacas.c.inc"
- #include "insn_trans/trans_rvzabha.c.inc"
-+#include "insn_trans/trans_rvzalasr.c.inc"
- #include "insn_trans/trans_rvzawrs.c.inc"
- #include "insn_trans/trans_rvzicbo.c.inc"
- #include "insn_trans/trans_rvzimop.c.inc"
++[tool.setuptools_scm]
+diff --git a/python/setup.py b/python/setup.py
+deleted file mode 100755
+index c5bc45919a4..00000000000
+--- a/python/setup.py
++++ /dev/null
+@@ -1,40 +0,0 @@
+-#!/usr/bin/env python3
+-"""
+-QEMU tooling installer script
+-Copyright (c) 2020-2021 John Snow for Red Hat, Inc.
+-"""
+-
+-import setuptools
+-from setuptools.command import bdist_egg
+-import sys
+-import pkg_resources
+-
+-
+-class bdist_egg_guard(bdist_egg.bdist_egg):
+-    """
+-    Protect against bdist_egg from being executed
+-
+-    This prevents calling 'setup.py install' directly, as the 'install'
+-    CLI option will invoke the deprecated bdist_egg hook. "pip install"
+-    calls the more modern bdist_wheel hook, which is what we want.
+-    """
+-    def run(self):
+-        sys.exit(
+-            'Installation directly via setup.py is not supported.\n'
+-            'Please use `pip install .` instead.'
+-        )
+-
+-
+-def main():
+-    """
+-    QEMU tooling installer
+-    """
+-
+-    # https://medium.com/@daveshawley/safely-using-setup-cfg-for-metadata-1babbe54c108
+-    pkg_resources.require('setuptools>=39.2')
+-
+-    setuptools.setup(cmdclass={'bdist_egg': bdist_egg_guard})
+-
+-
+-if __name__ == '__main__':
+-    main()
+diff --git a/python/tests/minreqs.txt b/python/tests/minreqs.txt
+index cd2e2a81c3d..e9edfa55eb7 100644
+--- a/python/tests/minreqs.txt
++++ b/python/tests/minreqs.txt
+@@ -15,6 +15,7 @@
+ # also pin setuptools to version 70 or below. Otherwise, the
+ # installation of the QEMU package itself fails, failing to find
+ # setuptools.
++# Avocado also appears to require an older setuptools.
+ setuptools<=70
+ 
+ # Dependencies for qapidoc/qapi_domain et al
+@@ -55,7 +56,6 @@ astroid==2.15.4
+ dill==0.2
+ lazy-object-proxy==1.4.0
+ platformdirs==2.2.0
+-toml==0.10.0
+ tomlkit==0.10.1
+ wrapt==1.14.0
+ 
 -- 
-2.43.0
+2.48.1
 
 
