@@ -4,47 +4,47 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 95F74C61CE8
-	for <qemu-riscv@archiver.kernel.org>; Thu, 12 Jun 2025 21:01:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B19C8C61CE8
+	for <qemu-riscv@archiver.kernel.org>; Thu, 12 Jun 2025 21:01:35 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uPp1u-0002NK-8Z; Thu, 12 Jun 2025 17:00:10 -0400
+	id 1uPp1P-0001kY-DU; Thu, 12 Jun 2025 16:59:39 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <jsnow@redhat.com>) id 1uPp1s-0002IH-Ex
- for qemu-riscv@nongnu.org; Thu, 12 Jun 2025 17:00:08 -0400
+ (Exim 4.90_1) (envelope-from <jsnow@redhat.com>) id 1uPp1N-0001jI-E7
+ for qemu-riscv@nongnu.org; Thu, 12 Jun 2025 16:59:37 -0400
 Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <jsnow@redhat.com>) id 1uPp1n-0000q8-S0
- for qemu-riscv@nongnu.org; Thu, 12 Jun 2025 17:00:08 -0400
+ (Exim 4.90_1) (envelope-from <jsnow@redhat.com>) id 1uPp1K-0000mL-O0
+ for qemu-riscv@nongnu.org; Thu, 12 Jun 2025 16:59:36 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1749762002;
+ s=mimecast20190719; t=1749761974;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=emNV1/voq8vLNxrXGL0MQiHgqI8v5/GVX6i/w8ik8zI=;
- b=XJ8RVA8Dapj42b42A2xq9wplaYFN6Xs4NU1bVFC6IVc+ldgJqH6viprr4ed3rT4GUD+Ok/
- U98hN28SxWznkF6KuExQiVPj7FqwNSw8w0gDQ+JBEK6v2zo6xyRTt9hunBYbB3M/HV+i1m
- P6JY4hFZjfhK8oBTd0X34Q0P/tSze/s=
-Received: from mx-prod-mc-05.mail-002.prod.us-west-2.aws.redhat.com
+ bh=jCIejFSQfcGoCjcsgn+YLuJOKRTgKy2BSecLZSTojbc=;
+ b=T7CupbXLJL+P74v6hC04hK9kcnKxGmbUmN1laUPoXmkMNF5Obgx6hSadMm1KCnKKfGeU1Y
+ fXela/R8F/HnsefW5r33tkIK6x1e/Cw6be6kPzDr4w0Fd8YmBXFscaovBmBYfxiOIwtgzq
+ l1Znb3EKI+Lr8qurYixHorX9qQHAFGg=
+Received: from mx-prod-mc-04.mail-002.prod.us-west-2.aws.redhat.com
  (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
  relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-124-FMI1iKeyOf-ip1YEUJLvsQ-1; Thu,
- 12 Jun 2025 17:00:00 -0400
-X-MC-Unique: FMI1iKeyOf-ip1YEUJLvsQ-1
-X-Mimecast-MFC-AGG-ID: FMI1iKeyOf-ip1YEUJLvsQ_1749761996
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-76--dlK-Bb-Pq2wXo9ih3MOiQ-1; Thu,
+ 12 Jun 2025 16:59:31 -0400
+X-MC-Unique: -dlK-Bb-Pq2wXo9ih3MOiQ-1
+X-Mimecast-MFC-AGG-ID: -dlK-Bb-Pq2wXo9ih3MOiQ_1749761966
 Received: from mx-prod-int-05.mail-002.prod.us-west-2.aws.redhat.com
  (mx-prod-int-05.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.17])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by mx-prod-mc-05.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id C0E471956095; Thu, 12 Jun 2025 20:59:55 +0000 (UTC)
+ by mx-prod-mc-04.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id 12AD919560B2; Thu, 12 Jun 2025 20:59:26 +0000 (UTC)
 Received: from jsnow-thinkpadp16vgen1.westford.csb (unknown [10.22.80.54])
  by mx-prod-int-05.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
- id A265C1955F4A; Thu, 12 Jun 2025 20:59:26 +0000 (UTC)
+ id B9E4B1956050; Thu, 12 Jun 2025 20:58:57 +0000 (UTC)
 From: John Snow <jsnow@redhat.com>
 To: qemu-devel@nongnu.org
 Cc: Joel Stanley <joel@jms.id.au>, Yi Liu <yi.l.liu@intel.com>,
@@ -126,9 +126,9 @@ Cc: Joel Stanley <joel@jms.id.au>, Yi Liu <yi.l.liu@intel.com>,
  Huacai Chen <chenhuacai@kernel.org>,
  Mahmoud Mandour <ma.mandourr@gmail.com>,
  Harsh Prateek Bora <harshpb@linux.ibm.com>
-Subject: [PATCH v2 08/12] python: further 3.9+ syntax upgrades
-Date: Thu, 12 Jun 2025 16:54:46 -0400
-Message-ID: <20250612205451.1177751-9-jsnow@redhat.com>
+Subject: [PATCH v2 07/12] fixup
+Date: Thu, 12 Jun 2025 16:54:45 -0400
+Message-ID: <20250612205451.1177751-8-jsnow@redhat.com>
 In-Reply-To: <20250612205451.1177751-1-jsnow@redhat.com>
 References: <20250612205451.1177751-1-jsnow@redhat.com>
 MIME-Version: 1.0
@@ -159,189 +159,80 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-pyupgrade does not catch absolutely everything - there are still a few
-deprecated type aliases we need to shift away from using.
+These are manual fixes that ought be merged into the prior patch, but
+are here separated for clarity to separate the automated portions of
+this patch from the non-automated portions.
+
+These fixes are only the necessary portions to allow python static
+checks (and checkpatch.pl) to pass again, and don't perform any
+"optional" cleanups. (i.e. this patch strictly prevents regressions.)
 
 Signed-off-by: John Snow <jsnow@redhat.com>
 ---
- docs/sphinx/compat.py                 | 8 ++------
- docs/sphinx/qapi_domain.py            | 6 +++---
- python/qemu/machine/console_socket.py | 4 ++--
- python/qemu/qmp/events.py             | 9 +++++++--
- python/qemu/qmp/protocol.py           | 3 +--
- python/qemu/utils/qemu_ga_client.py   | 4 ++--
- tests/qemu-iotests/fat16.py           | 3 ++-
- tests/qemu-iotests/iotests.py         | 8 ++++++--
- 8 files changed, 25 insertions(+), 20 deletions(-)
+ python/qemu/utils/qom_fuse.py |  1 +
+ scripts/qapi/common.py        | 28 ++++++++++++++--------------
+ 2 files changed, 15 insertions(+), 14 deletions(-)
 
-diff --git a/docs/sphinx/compat.py b/docs/sphinx/compat.py
-index 2a93687cb3e..1eb1a49d976 100644
---- a/docs/sphinx/compat.py
-+++ b/docs/sphinx/compat.py
-@@ -2,13 +2,9 @@
- Sphinx cross-version compatibility goop
- """
+diff --git a/python/qemu/utils/qom_fuse.py b/python/qemu/utils/qom_fuse.py
+index c1f596e3273..e2ed70f9ded 100644
+--- a/python/qemu/utils/qom_fuse.py
++++ b/python/qemu/utils/qom_fuse.py
+@@ -41,6 +41,7 @@
  
-+from collections.abc import Callable
- import re
--from typing import (
--    TYPE_CHECKING,
--    Any,
--    Callable,
--    Optional,
--)
-+from typing import TYPE_CHECKING, Any, Optional
+ import fuse
+ from fuse import FUSE, FuseOSError, Operations
++
+ from qemu.qmp import ExecuteError
  
- from docutils import nodes
- from docutils.nodes import Element, Node, Text
-diff --git a/docs/sphinx/qapi_domain.py b/docs/sphinx/qapi_domain.py
-index cb6104922b5..7673eaed6d5 100644
---- a/docs/sphinx/qapi_domain.py
-+++ b/docs/sphinx/qapi_domain.py
-@@ -39,8 +39,8 @@
- 
- 
- if TYPE_CHECKING:
--    from collections.abc import Iterable
--    from typing import AbstractSet, Any
-+    from collections.abc import Iterable, Set
-+    from typing import Any
- 
-     from docutils.nodes import Element, Node
-     from sphinx.addnodes import desc_signature, pending_xref
-@@ -825,7 +825,7 @@ def clear_doc(self, docname: str) -> None:
-                 del self.objects[fullname]
- 
-     def merge_domaindata(
--        self, docnames: AbstractSet[str], otherdata: dict[str, Any]
-+        self, docnames: Set[str], otherdata: dict[str, Any]
-     ) -> None:
-         for fullname, obj in otherdata["objects"].items():
-             if obj.docname in docnames:
-diff --git a/python/qemu/machine/console_socket.py b/python/qemu/machine/console_socket.py
-index 0754f340310..bcd27017fc9 100644
---- a/python/qemu/machine/console_socket.py
-+++ b/python/qemu/machine/console_socket.py
-@@ -17,7 +17,7 @@
- import socket
- import threading
- import time
--from typing import Deque, Optional
-+from typing import Optional
- 
- 
- class ConsoleSocket(socket.socket):
-@@ -43,7 +43,7 @@ def __init__(self,
- 
-         self._recv_timeout_sec = 300.0
-         self._sleep_time = 0.5
--        self._buffer: Deque[int] = deque()
-+        self._buffer: deque[int] = deque()
-         if address is not None:
-             socket.socket.__init__(self, socket.AF_UNIX, socket.SOCK_STREAM)
-             self.connect(address)
-diff --git a/python/qemu/qmp/events.py b/python/qemu/qmp/events.py
-index e444d9334ec..33a9317e4d4 100644
---- a/python/qemu/qmp/events.py
-+++ b/python/qemu/qmp/events.py
-@@ -448,10 +448,15 @@ def accept(self, event) -> bool:
- """
- 
- import asyncio
--from collections.abc import AsyncIterator, Iterable, Iterator
-+from collections.abc import (
-+    AsyncIterator,
-+    Callable,
-+    Iterable,
-+    Iterator,
-+)
- from contextlib import contextmanager
- import logging
--from typing import Callable, Optional, Union
-+from typing import Optional, Union
- 
- from .error import QMPError
- from .message import Message
-diff --git a/python/qemu/qmp/protocol.py b/python/qemu/qmp/protocol.py
-index 4ec9564c4b3..683df61f55e 100644
---- a/python/qemu/qmp/protocol.py
-+++ b/python/qemu/qmp/protocol.py
-@@ -15,7 +15,7 @@
- 
- import asyncio
- from asyncio import StreamReader, StreamWriter
--from collections.abc import AsyncGenerator, Awaitable
-+from collections.abc import AsyncGenerator, Awaitable, Callable
- from contextlib import asynccontextmanager
- from enum import Enum
- from functools import wraps
-@@ -25,7 +25,6 @@
- from ssl import SSLContext
- from typing import (
-     Any,
--    Callable,
-     Generic,
-     Optional,
-     TypeVar,
-diff --git a/python/qemu/utils/qemu_ga_client.py b/python/qemu/utils/qemu_ga_client.py
-index a653c234c4b..d15848667b1 100644
---- a/python/qemu/utils/qemu_ga_client.py
-+++ b/python/qemu/utils/qemu_ga_client.py
-@@ -39,11 +39,11 @@
- import argparse
- import asyncio
- import base64
--from collections.abc import Sequence
-+from collections.abc import Callable, Sequence
- import os
- import random
- import sys
--from typing import Any, Callable, Optional
-+from typing import Any, Optional
- 
- from qemu.qmp import ConnectError, SocketAddrT
- from qemu.qmp.legacy import QEMUMonitorProtocol
-diff --git a/tests/qemu-iotests/fat16.py b/tests/qemu-iotests/fat16.py
-index 88c3d56c662..ec4bc980725 100644
---- a/tests/qemu-iotests/fat16.py
-+++ b/tests/qemu-iotests/fat16.py
-@@ -15,8 +15,9 @@
- # You should have received a copy of the GNU General Public License
- # along with this program.  If not, see <http://www.gnu.org/licenses/>.
- 
-+from collections.abc import Callable
- import string
--from typing import Callable, Optional, Protocol
-+from typing import Optional, Protocol
- 
- 
- SECTOR_SIZE = 512
-diff --git a/tests/qemu-iotests/iotests.py b/tests/qemu-iotests/iotests.py
-index 104a61058fa..b69895cd117 100644
---- a/tests/qemu-iotests/iotests.py
-+++ b/tests/qemu-iotests/iotests.py
-@@ -20,7 +20,12 @@
- import atexit
- import bz2
- from collections import OrderedDict
--from collections.abc import Iterable, Iterator, Sequence
-+from collections.abc import (
-+    Callable,
-+    Iterable,
-+    Iterator,
-+    Sequence,
-+)
- from contextlib import contextmanager
- import faulthandler
- import json
-@@ -35,7 +40,6 @@
- import time
- from typing import (
-     Any,
--    Callable,
-     Optional,
-     TextIO,
-     TypeVar,
+ from .qom_common import QOMCommand
+diff --git a/scripts/qapi/common.py b/scripts/qapi/common.py
+index d1fa5003c29..ecdac1dff85 100644
+--- a/scripts/qapi/common.py
++++ b/scripts/qapi/common.py
+@@ -91,29 +91,29 @@ def c_name(name: str, protect: bool = True) -> str:
+     """
+     # ANSI X3J11/88-090, 3.1.1
+     c89_words = {'auto', 'break', 'case', 'char', 'const', 'continue',
+-                     'default', 'do', 'double', 'else', 'enum', 'extern',
+-                     'float', 'for', 'goto', 'if', 'int', 'long', 'register',
+-                     'return', 'short', 'signed', 'sizeof', 'static',
+-                     'struct', 'switch', 'typedef', 'union', 'unsigned',
+-                     'void', 'volatile', 'while'}
++                 'default', 'do', 'double', 'else', 'enum', 'extern',
++                 'float', 'for', 'goto', 'if', 'int', 'long', 'register',
++                 'return', 'short', 'signed', 'sizeof', 'static',
++                 'struct', 'switch', 'typedef', 'union', 'unsigned',
++                 'void', 'volatile', 'while'}
+     # ISO/IEC 9899:1999, 6.4.1
+     c99_words = {'inline', 'restrict', '_Bool', '_Complex', '_Imaginary'}
+     # ISO/IEC 9899:2011, 6.4.1
+     c11_words = {'_Alignas', '_Alignof', '_Atomic', '_Generic',
+-                     '_Noreturn', '_Static_assert', '_Thread_local'}
++                 '_Noreturn', '_Static_assert', '_Thread_local'}
+     # GCC http://gcc.gnu.org/onlinedocs/gcc-4.7.1/gcc/C-Extensions.html
+     # excluding _.*
+     gcc_words = {'asm', 'typeof'}
+     # C++ ISO/IEC 14882:2003 2.11
+     cpp_words = {'bool', 'catch', 'class', 'const_cast', 'delete',
+-                     'dynamic_cast', 'explicit', 'false', 'friend', 'mutable',
+-                     'namespace', 'new', 'operator', 'private', 'protected',
+-                     'public', 'reinterpret_cast', 'static_cast', 'template',
+-                     'this', 'throw', 'true', 'try', 'typeid', 'typename',
+-                     'using', 'virtual', 'wchar_t',
+-                     # alternative representations
+-                     'and', 'and_eq', 'bitand', 'bitor', 'compl', 'not',
+-                     'not_eq', 'or', 'or_eq', 'xor', 'xor_eq'}
++                 'dynamic_cast', 'explicit', 'false', 'friend', 'mutable',
++                 'namespace', 'new', 'operator', 'private', 'protected',
++                 'public', 'reinterpret_cast', 'static_cast', 'template',
++                 'this', 'throw', 'true', 'try', 'typeid', 'typename',
++                 'using', 'virtual', 'wchar_t',
++                 # alternative representations
++                 'and', 'and_eq', 'bitand', 'bitor', 'compl', 'not',
++                 'not_eq', 'or', 'or_eq', 'xor', 'xor_eq'}
+     # namespace pollution:
+     polluted_words = {'unix', 'errno', 'mips', 'sparc', 'i386', 'linux'}
+     name = re.sub(r'[^A-Za-z0-9_]', '_', name)
 -- 
 2.48.1
 
