@@ -4,122 +4,120 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4454CC61DB2
-	for <qemu-riscv@archiver.kernel.org>; Fri, 13 Jun 2025 10:19:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 35204C61DB2
+	for <qemu-riscv@archiver.kernel.org>; Fri, 13 Jun 2025 10:42:03 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uQ1UW-00006I-3K; Fri, 13 Jun 2025 06:18:32 -0400
+	id 1uQ1rB-0006nd-Jy; Fri, 13 Jun 2025 06:41:58 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1uQ1UN-0008Tr-A3
- for qemu-riscv@nongnu.org; Fri, 13 Jun 2025 06:18:24 -0400
+ (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1uQ1r1-0006YR-Qd
+ for qemu-riscv@nongnu.org; Fri, 13 Jun 2025 06:41:48 -0400
 Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1uQ1UJ-0006zd-IC
- for qemu-riscv@nongnu.org; Fri, 13 Jun 2025 06:18:22 -0400
+ (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1uQ1qz-0002Kk-HF
+ for qemu-riscv@nongnu.org; Fri, 13 Jun 2025 06:41:47 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1749809897;
+ s=mimecast20190719; t=1749811295;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
- bh=9Gppa7BAPiTJbTtafNpUQg+an3/WD3nhPG5Bw17Zkcg=;
- b=QUAL/szMtprwk8ah492nmSs4xNnQQDgOAUM0aG1CnKxF9Y27q39acDe2k1LgPqJRIlaCBp
- jVmWgC7CLM6ar+18GcVkv7yiZa8M5NbeUEC2Ec0mwx/Ywm4hSwTy6swN0XN5hn+VP7TtLi
- Sz/42BiV6uTkCk1p/D8BaDBspM+BhaU=
+ bh=figJZmNZUAIV8ivTAUr2WUKY/O33ofJJymTbtraOGVc=;
+ b=UXtFZTh3l+3u9W9BbmQTyJgcfu/CTEIxgAhfWsXqN2aYvgdPfyr3P2muYJpzHGzEsinCsX
+ qUhEIbvAVlmdFjFSKTdg9jyTn+ASr1QKXcju+vdl/e1tit0G3190aBlP5L2nDgGsouHHPw
+ 5rxxbEi3TT4M01eOiyL6PiAid3XV/WE=
 Received: from mail-wr1-f72.google.com (mail-wr1-f72.google.com
  [209.85.221.72]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-630-gLLgPsOXNqyY981uzddE8g-1; Fri, 13 Jun 2025 06:18:14 -0400
-X-MC-Unique: gLLgPsOXNqyY981uzddE8g-1
-X-Mimecast-MFC-AGG-ID: gLLgPsOXNqyY981uzddE8g_1749809891
+ us-mta-380-8Ltn4KveOde3Z38P8gwEdA-1; Fri, 13 Jun 2025 06:41:34 -0400
+X-MC-Unique: 8Ltn4KveOde3Z38P8gwEdA-1
+X-Mimecast-MFC-AGG-ID: 8Ltn4KveOde3Z38P8gwEdA_1749811293
 Received: by mail-wr1-f72.google.com with SMTP id
- ffacd0b85a97d-3a37a0d1005so1191711f8f.3
- for <qemu-riscv@nongnu.org>; Fri, 13 Jun 2025 03:18:14 -0700 (PDT)
+ ffacd0b85a97d-3a4f7f1b932so1269066f8f.2
+ for <qemu-riscv@nongnu.org>; Fri, 13 Jun 2025 03:41:34 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1749809891; x=1750414691;
+ d=1e100.net; s=20230601; t=1749811293; x=1750416093;
  h=content-transfer-encoding:in-reply-to:autocrypt:content-language
  :from:references:cc:to:subject:user-agent:mime-version:date
  :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=9Gppa7BAPiTJbTtafNpUQg+an3/WD3nhPG5Bw17Zkcg=;
- b=R+dVKMxGpHFPTs2Ef3xZ8liQd6CEGl0/Lul7EQL8a6Z2N66qh2AOTl3EnvsJvrPrbx
- THgut5deW75lW5zAZ499vKDwSeIu7ecHht8+aNQtpKxTZz2OX0naIax5p9+8ZfV5av+U
- dd+C4bTqS/Cl3NTCscCXplxgfFsMBTls/j93WxYJYgmLv/0hSnbefoK/XqwdmGj7WI8Q
- bky2wLqJRwiSQq2O3kDH+bUAMhVyb+Kg3xquarw+NnVLQdoWgNIy7vZT0hCn/SUULdhr
- Sma10HBftyqwXBz7O1vy5utrzuPM0cJ6cqmeJVxilEmqRo8fbmlnmDCihWZJ4TqXj/sV
- QSZw==
+ bh=figJZmNZUAIV8ivTAUr2WUKY/O33ofJJymTbtraOGVc=;
+ b=rw6xdkJhKnKf+gCsInhLG66WkNuJGI6fLuEJ1Wk53fReLEs+hMnFPAGgsy1id4Hy6f
+ vLGl8dF/coNG/VqgJxUL7QebiaV4BNBc+nMR+F04fb24A3WArM6JfyYPU+w/Y9+BHTtq
+ Dxox99TQ2WCioJZ9b1NsNtlrOjWuhn5Pepj2ZbLycjVQmkCWcJ5Uwc/Q0XfZ6+O1Ykpf
+ KICyzDDr2xhtoD8H4hpUsGB+gp+DL30c7ObqPVPw3xJlSbeLc1Dk15GuMowpWor0SQyA
+ ovF9RBc1HNVm3PsBSBfWyaZ/nhNCbqS2l9mXNxS670d8ch9sLh8HG+lPL3xVIHtT5t0h
+ lfLg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVt7ziSiHVmdZ+aWoflKJB814aksV56ef7+PTcIotE3dE++XqTSh9NFSCWK8ppWqIb0r5k6BZ82oAFl@nongnu.org
-X-Gm-Message-State: AOJu0YxyWSsPoXZXP9P85gVnzSuBD6twIQqR72QlEwl9LAq3iPGmhPWQ
- GGykmABeJmrJlEi55pxcLUXXIBZax6kdS7WYEY1ZunLP2MC8XuItf9/X3N1aaotXYuUVpWS3BIL
- QXzCbpPDKs3gkkNXYraJBD4fjXrXFWKIjJYdAtOIlr4xtU5PzLO11CG4n
-X-Gm-Gg: ASbGncs3HvWW+3M5LiiqJOSOh9vEB6bI5Rjz+R2J2GzpKtDwLQBK+RhXCmILOIerdOb
- a4tdlFyAHtSv0usSxjbRVVpMyafJ827I9gF587rjT4RjfVHJuIUlCW4bxJERPISiLYXsRpgI9aW
- rpNH0uIzl8Nt7CeQrRoHu4fYB1Atym8sQDZDu01XCGMl5UmossvRmWARNn2pW3H1rkGtOpDQe7e
- AaVYsP4hGWacB7JJhXTyQUX3rYdca0u09wlQgAETiGfGV+ZR6twmvDg6j73rpTIARE9eCsnghgU
- AwvY2LJ4bsfGGSCUEBocqgpvjHBfhvJE4nd61MdC2UyXJ99GJ6EX/Lv8KlFQEQ==
-X-Received: by 2002:a05:6000:240d:b0:3a4:f7df:baf5 with SMTP id
- ffacd0b85a97d-3a56850045amr2490765f8f.0.1749809890840; 
- Fri, 13 Jun 2025 03:18:10 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IGUcCUzrmhym6DcEdRvbLCi/6KESO020/BzSayZJh8dRA2Gt3SPHJKtX4CLI2+Iv4DiusTsRA==
-X-Received: by 2002:a05:6000:240d:b0:3a4:f7df:baf5 with SMTP id
- ffacd0b85a97d-3a56850045amr2490620f8f.0.1749809889999; 
- Fri, 13 Jun 2025 03:18:09 -0700 (PDT)
+ AJvYcCXK0EwxeDVbpyD4/gPZRWtkj0sYAvFVYn9Cxjt8fC2yN22nIrSwcXJadWW7Cvg1LCdwhTzjrGX5p90F@nongnu.org
+X-Gm-Message-State: AOJu0YyUQTcSAHuXUV13pmcISQSpO2ZT5bnsbx4mAlhCBXU7X+fz+BtP
+ ZePxdWRZW84Q6scmzYUOz77bfO5QZZqbZOPSN0qj5IMzWav6leNpzjGZWJLaNxpniGk6rFMO/Ln
+ 3FrRu8aOXx9onZuk7vnBVdPGFce+Aa5YL/y8ok5zoWM/jTk18r5VCEUgD
+X-Gm-Gg: ASbGnctKE9vHD1+JSJ3N4+xip3aiYUteiiLV6jpcsBKMoh9cWU7XcE9ZtEhe/Vvso0w
+ 9PQke+H7fTIlfHhQGZ8AQFkstVCN+3VT90foPYA9XkLzWQNbleqZzvM7gRic/ITOcgzL0NyQqy6
+ NsgfiN0kwEHD2XHFuBQkQaQQ4SyNXPpzF9aDOPFz2e1vVuu322h9+dXF1VjUCrAvF1hsOjvPvb7
+ WBHIMVpVZHTJg3DYj6p7dgHj8OwmkYImByC6HSLO0KxE7p+BchGYrnM0iUIsM1TcWcDSDdzyFIC
+ Im7fB7noAlMkMo6kg3/7G7AcCyWokuR+o/F+sKE7YZEl2P6hnkRusgHCfGrnmA==
+X-Received: by 2002:a05:6000:2312:b0:3a5:2599:4183 with SMTP id
+ ffacd0b85a97d-3a568717a0bmr2102305f8f.25.1749811292871; 
+ Fri, 13 Jun 2025 03:41:32 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IHJlJNgrePZmATp2R205Kf4PA9FIhO0maj7nVLAo7B4qoXmvRW3bpUlsacbB7nyFhXz0AEztw==
+X-Received: by 2002:a05:6000:2312:b0:3a5:2599:4183 with SMTP id
+ ffacd0b85a97d-3a568717a0bmr2102200f8f.25.1749811292158; 
+ Fri, 13 Jun 2025 03:41:32 -0700 (PDT)
 Received: from [192.168.0.4] (ltea-047-064-114-027.pools.arcor-ip.net.
  [47.64.114.27]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3a568b089d8sm1923446f8f.57.2025.06.13.03.18.05
+ 5b1f17b1804b1-4532e13c19esm48431355e9.25.2025.06.13.03.41.27
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 13 Jun 2025 03:18:09 -0700 (PDT)
-Message-ID: <3797652b-86a5-4abf-becb-de62dfebccd4@redhat.com>
-Date: Fri, 13 Jun 2025 12:18:04 +0200
+ Fri, 13 Jun 2025 03:41:31 -0700 (PDT)
+Message-ID: <932ebe19-e581-499b-9294-022f3fb4d76a@redhat.com>
+Date: Fri, 13 Jun 2025 12:41:26 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 02/12] python: update pylint ignores
+Subject: Re: [PATCH v2 05/12] python: fix illegal escape sequences
 To: John Snow <jsnow@redhat.com>, qemu-devel@nongnu.org
 Cc: Joel Stanley <joel@jms.id.au>, Yi Liu <yi.l.liu@intel.com>,
  =?UTF-8?Q?Alex_Benn=C3=A9e?= <alex.bennee@linaro.org>,
- Helge Deller <deller@gmx.de>, Andrew Jeffery <andrew@codeconstruct.com.au>,
- Fabiano Rosas <farosas@suse.de>, Alexander Bulekov <alxndr@bu.edu>,
- Darren Kenny <darren.kenny@oracle.com>,
+ Helge Deller <deller@gmx.de>, Fabiano Rosas <farosas@suse.de>,
+ Alexander Bulekov <alxndr@bu.edu>, Darren Kenny <darren.kenny@oracle.com>,
  Leif Lindholm <leif.lindholm@oss.qualcomm.com>,
  =?UTF-8?Q?C=C3=A9dric_Le_Goater?= <clg@kaod.org>,
  Ed Maste <emaste@freebsd.org>, Gerd Hoffmann <kraxel@redhat.com>,
  Warner Losh <imp@bsdimp.com>, Kevin Wolf <kwolf@redhat.com>,
  Tyrone Ting <kfting@nuvoton.com>, Eric Blake <eblake@redhat.com>,
  Palmer Dabbelt <palmer@dabbelt.com>, Troy Lee <leetroy@gmail.com>,
- Halil Pasic <pasic@linux.ibm.com>,
  Akihiko Odaki <odaki@rsg.ci.i.u-tokyo.ac.jp>,
  Michael Roth <michael.roth@amd.com>, Laurent Vivier <laurent@vivier.eu>,
  Ani Sinha <anisinha@redhat.com>, Weiwei Li <liwei1518@gmail.com>,
  Eric Farman <farman@linux.ibm.com>, Steven Lee <steven_lee@aspeedtech.com>,
  Brian Cain <brian.cain@oss.qualcomm.com>, Li-Wen Hsu <lwhsu@freebsd.org>,
- Jamin Lin <jamin_lin@aspeedtech.com>, qemu-block@nongnu.org,
- Bernhard Beschow <shentey@gmail.com>,
+ Jamin Lin <jamin_lin@aspeedtech.com>, qemu-s390x@nongnu.org,
+ Vladimir Sementsov-Ogievskiy <vsementsov@yandex-team.ru>,
+ qemu-block@nongnu.org, Bernhard Beschow <shentey@gmail.com>,
  =?UTF-8?Q?Cl=C3=A9ment_Mathieu--Drif?= <clement.mathieu--drif@eviden.com>,
  Maksim Davydov <davydov-max@yandex-team.ru>,
  Niek Linnenbank <nieklinnenbank@gmail.com>,
- Manos Pitsidianakis <manos.pitsidianakis@linaro.org>,
- Jagannathan Raman <jag.raman@oracle.com>,
+ =?UTF-8?Q?Herv=C3=A9_Poussineau?= <hpoussin@reactos.org>,
+ Christian Borntraeger <borntraeger@linux.ibm.com>,
+ Paul Durrant <paul@xen.org>, Jagannathan Raman <jag.raman@oracle.com>,
  Igor Mitsyanko <i.mitsyanko@gmail.com>, Max Filippov <jcmvbkbc@gmail.com>,
  Markus Armbruster <armbru@redhat.com>,
  Pierrick Bouvier <pierrick.bouvier@linaro.org>,
  "Michael S. Tsirkin" <mst@redhat.com>, Anton Johansson <anjo@rev.ng>,
- Peter Maydell <peter.maydell@linaro.org>, Eric Auger
- <eric.auger@redhat.com>, Yanan Wang <wangyanan55@huawei.com>,
+ Peter Maydell <peter.maydell@linaro.org>, Cleber Rosa <crosa@redhat.com>,
+ Eric Auger <eric.auger@redhat.com>, Yanan Wang <wangyanan55@huawei.com>,
  qemu-arm@nongnu.org, Hao Wu <wuhaotsh@google.com>,
- Mads Ynddal <mads@ynddal.dk>,
- Sriram Yagnaraman <sriram.yagnaraman@ericsson.com>, qemu-riscv@nongnu.org,
+ Mads Ynddal <mads@ynddal.dk>, qemu-riscv@nongnu.org,
  Paolo Bonzini <pbonzini@redhat.com>, Jason Wang <jasowang@redhat.com>,
  Nicholas Piggin <npiggin@gmail.com>, Michael Rolnik <mrolnik@gmail.com>,
  Zhao Liu <zhao1.liu@intel.com>, Alessandro Di Federico <ale@rev.ng>,
  Antony Pavlov <antonynpavlov@gmail.com>,
  Jiaxun Yang <jiaxun.yang@flygoat.com>, Hanna Reitz <hreitz@redhat.com>,
- Ilya Leoshkevich <iii@linux.ibm.com>, Marcelo Tosatti <mtosatti@redhat.com>,
- Daniel Henrique Barboza <danielhb413@gmail.com>,
  Qiuhao Li <Qiuhao.Li@outlook.com>, Hyman Huang <yong.huang@smartx.com>,
  =?UTF-8?Q?Daniel_P=2E_Berrang=C3=A9?= <berrange@redhat.com>,
+ Magnus Damm <magnus.damm@gmail.com>, qemu-rust@nongnu.org,
  Bandan Das <bsd@redhat.com>,
  Strahinja Jankovic <strahinja.p.jankovic@gmail.com>,
  Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
@@ -143,7 +141,7 @@ Cc: Joel Stanley <joel@jms.id.au>, Yi Liu <yi.l.liu@intel.com>,
  Huacai Chen <chenhuacai@kernel.org>, Mahmoud Mandour
  <ma.mandourr@gmail.com>, Harsh Prateek Bora <harshpb@linux.ibm.com>
 References: <20250612205451.1177751-1-jsnow@redhat.com>
- <20250612205451.1177751-3-jsnow@redhat.com>
+ <20250612205451.1177751-6-jsnow@redhat.com>
 From: Thomas Huth <thuth@redhat.com>
 Autocrypt: addr=thuth@redhat.com; keydata=
  xsFNBFH7eUwBEACzyOXKU+5Pcs6wNpKzrlJwzRl3VGZt95VCdb+FgoU9g11m7FWcOafrVRwU
@@ -187,9 +185,9 @@ Autocrypt: addr=thuth@redhat.com; keydata=
  oiT+z+/E59qj/EKfyce3sbC9XLjXv3mHMrq1tKX4G7IJGnS989E/fg6crv6NHae9Ckm7+lSs
  IQu4bBP2GxiRQ+NV3iV/KU3ebMRzqIC//DCOxzQNFNJAKldPe/bKZMCxEqtVoRkuJtNdp/5a
  yXFZ6TfE1hGKrDBYAm4vrnZ4CXFSBDllL59cFFOJCkn4Xboj/aVxxJxF30bn
-In-Reply-To: <20250612205451.1177751-3-jsnow@redhat.com>
+In-Reply-To: <20250612205451.1177751-6-jsnow@redhat.com>
 X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: m5t8hw_gfqeviQjSCcxa56zC1fkQtAVD2i23tePj8Kc_1749809891
+X-Mimecast-MFC-PROC-ID: _JLv5ZEr8Q_t0qZOc4HllZ7P7Enc_bvVACu8m3g7PCI_1749811293
 X-Mimecast-Originator: redhat.com
 Content-Language: en-US
 Content-Type: text/plain; charset=UTF-8; format=flowed
@@ -220,14 +218,30 @@ Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 On 12/06/2025 22.54, John Snow wrote:
-> The next patch will synchronize the qemu.qmp library with the external,
-> standalone version. That synchronization will require an extra ignore
-> for pylint, so do that now.
+> \{ is an illegal escape sequence, to get a literal backslash we need to
+> use \\.
+> 
+> This is being fixed because of an issue spotted when attempting to use
+> the pyupgrade script.
 > 
 > Signed-off-by: John Snow <jsnow@redhat.com>
 > ---
->   python/setup.cfg | 5 +++--
->   1 file changed, 3 insertions(+), 2 deletions(-)
+>   scripts/feature_to_c.py | 2 +-
+>   1 file changed, 1 insertion(+), 1 deletion(-)
+> 
+> diff --git a/scripts/feature_to_c.py b/scripts/feature_to_c.py
+> index 807af0e685c..5f8fa8ad5c6 100644
+> --- a/scripts/feature_to_c.py
+> +++ b/scripts/feature_to_c.py
+> @@ -25,7 +25,7 @@ def writeliteral(indent, bytes):
+>           elif c >= 32 and c < 127:
+>               sys.stdout.write(c.to_bytes(1, 'big').decode())
+>           else:
+> -            sys.stdout.write(f'\{c:03o}')
+> +            sys.stdout.write(f'\\{c:03o}')
+>   
+>       if quoted:
+>           sys.stdout.write('"')
 
 Reviewed-by: Thomas Huth <thuth@redhat.com>
 
