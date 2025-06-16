@@ -4,43 +4,41 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 76B4FC71155
-	for <qemu-riscv@archiver.kernel.org>; Mon, 16 Jun 2025 13:16:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8F9B1C71136
+	for <qemu-riscv@archiver.kernel.org>; Mon, 16 Jun 2025 13:17:00 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uR9hR-0007jQ-TO; Mon, 16 Jun 2025 09:16:33 -0400
+	id 1uR9hS-0007k0-3o; Mon, 16 Jun 2025 09:16:34 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <odaki@rsg.ci.i.u-tokyo.ac.jp>)
- id 1uR5jj-0006Vi-95; Mon, 16 Jun 2025 05:02:41 -0400
+ id 1uR8kg-0006xJ-TA; Mon, 16 Jun 2025 08:15:51 -0400
 Received: from www3579.sakura.ne.jp ([49.212.243.89])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <odaki@rsg.ci.i.u-tokyo.ac.jp>)
- id 1uR5jf-0006Fs-Gl; Mon, 16 Jun 2025 05:02:38 -0400
+ id 1uR8kY-0004Yd-AI; Mon, 16 Jun 2025 08:15:49 -0400
 Received: from [133.11.54.205] (h205.csg.ci.i.u-tokyo.ac.jp [133.11.54.205])
  (authenticated bits=0)
- by www3579.sakura.ne.jp (8.16.1/8.16.1) with ESMTPSA id 55G8rZGk082978
+ by www3579.sakura.ne.jp (8.16.1/8.16.1) with ESMTPSA id 55GCDKG0047581
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO);
- Mon, 16 Jun 2025 17:53:35 +0900 (JST)
+ Mon, 16 Jun 2025 21:13:20 +0900 (JST)
  (envelope-from odaki@rsg.ci.i.u-tokyo.ac.jp)
-DKIM-Signature: a=rsa-sha256; bh=KScVJRjX5qHx2qPV2Idy8E22L/QoVbymW4s2ZmhlRqk=; 
+DKIM-Signature: a=rsa-sha256; bh=hyI6ifgDk3Q7Kv3xDnCmgrJzLzLKSQRU+5vx/8ccJHo=; 
  c=relaxed/relaxed; d=rsg.ci.i.u-tokyo.ac.jp;
- h=Message-ID:Date:From:Subject:To;
- s=rs20250326; t=1750064017; v=1;
- b=u8P2EHe+1Y+3zACB4AUA3bkn/KAg15g60iwqmmx8tIcExa0kj2B3qDQM0W6d7OY+
- VSnFJGbZc2rJgdN5gK8R7ctygc0RUk3VAF7yFGFwbbQEaW7nx/1j99kraEJM522U
- 880sw6x8Y0OFe7fe1iLwC4VUTiJZfCP2sX7s/EF+VrmF7u3x2fGeDYlp2LNKYWbj
- EIMlWMtydWaTXPmIe6mZv1bmhCS9fwPPGINHFbhzxcqIJs4ukEN6xFpliyxAsq4l
- kdwV17yNkvKZujSwi0NB3erFgwCY1Bv8y8tlCJDE9A/q9Fru+iBod8QBtDaFASvS
- xtUzTYDCN4eH5DW21FDDYg==
-Message-ID: <ffdab955-0255-4781-8bcf-909dcc195a01@rsg.ci.i.u-tokyo.ac.jp>
-Date: Mon, 16 Jun 2025 17:53:35 +0900
+ h=Message-ID:Date:Subject:To:From;
+ s=rs20250326; t=1750076002; v=1;
+ b=sUHoe9SQkfJw6ynMY3sqqNwW1/D5eKVGMvw70KzOHvhFaEAUBvdIFPQ8RiQ9kG/C
+ K6zj8j45TkI3CIkKUkKcsn9Kpw+FFcPQ0Tv7u6h6FImfNp2xrCTcPc8IavUjqvcq
+ oZKLMZ80ACxveklcdUjoRoVM44HPjlaIBmk0d8eLfk3aU7VNeaffIfO2xSa07Kv6
+ 8BgNNQYR0osuF+xJthsL6B+vyEfdWLOJfgi61eLAmS3/qhh2g5cfMYoJnx85YR1/
+ +Zb6NB4YfV5Wo8xscZQXH8zXfJbdC13YSPu3ax1PJGlV6JY/xlEAuMGPeeaEJui1
+ 0xOgaGo9AKLjN8MbUasCjQ==
+Message-ID: <3c997a88-d0df-45f5-be1e-02f8d3018605@rsg.ci.i.u-tokyo.ac.jp>
+Date: Mon, 16 Jun 2025 21:13:19 +0900
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-From: Akihiko Odaki <odaki@rsg.ci.i.u-tokyo.ac.jp>
-Subject: Re: [PATCH v2 00/12] Python: Fix 'make check-dev' and modernize to
- 3.9+
+Subject: Re: [PATCH v2 05/12] python: fix illegal escape sequences
 To: John Snow <jsnow@redhat.com>, qemu-devel@nongnu.org
 Cc: Joel Stanley <joel@jms.id.au>, Yi Liu <yi.l.liu@intel.com>,
  =?UTF-8?Q?Alex_Benn=C3=A9e?= <alex.bennee@linaro.org>,
@@ -121,21 +119,23 @@ Cc: Joel Stanley <joel@jms.id.au>, Yi Liu <yi.l.liu@intel.com>,
  Huacai Chen <chenhuacai@kernel.org>, Mahmoud Mandour
  <ma.mandourr@gmail.com>, Harsh Prateek Bora <harshpb@linux.ibm.com>
 References: <20250612205451.1177751-1-jsnow@redhat.com>
+ <20250612205451.1177751-6-jsnow@redhat.com>
 Content-Language: en-US
-In-Reply-To: <20250612205451.1177751-1-jsnow@redhat.com>
+From: Akihiko Odaki <odaki@rsg.ci.i.u-tokyo.ac.jp>
+In-Reply-To: <20250612205451.1177751-6-jsnow@redhat.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
 Received-SPF: pass client-ip=49.212.243.89;
  envelope-from=odaki@rsg.ci.i.u-tokyo.ac.jp; helo=www3579.sakura.ne.jp
 X-Spam_score_int: -16
 X-Spam_score: -1.7
 X-Spam_bar: -
 X-Spam_report: (-1.7 / 5.0 requ) BAYES_00=-1.9, DKIM_INVALID=0.1,
- DKIM_SIGNED=0.1, RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001,
- RCVD_IN_VALIDITY_SAFE_BLOCKED=0.001, SPF_HELO_NONE=0.001,
+ DKIM_SIGNED=0.1, RCVD_IN_VALIDITY_CERTIFIED_BLOCKED=0.001,
+ RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=no autolearn_force=no
 X-Spam_action: no action
-X-Mailman-Approved-At: Mon, 16 Jun 2025 09:15:45 -0400
+X-Mailman-Approved-At: Mon, 16 Jun 2025 09:16:02 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -151,84 +151,13 @@ Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
 On 2025/06/13 5:54, John Snow wrote:
-> This series does a couple things that I'll probably end up splitting out
-> into smaller series if history is any guide, but either way, here it
-> goes:
-
-I'm surprised with the large number of Ccs. I suggest splitting the 
-series with subsystem boundaries to reduce the number of Ccs for each 
-split series.
-
+> \{ is an illegal escape sequence, to get a literal backslash we need to
+> use \\.
 > 
-> A) Convert qemu.git/python/ to a PEP517/pyproject.toml
-> package. Ultimately this means deleting setup.py and fully migrating to
-> newer python infrastructure. I think this should be safe to do by now,
-> but admittedly I am not *confident* as it relies on setuptools versions
-> in the wild, not python versions. My motivation for trying it is to fix
-> "make check-dev", which has been broken for the last two Fedora releases
-> under newer setuptools which have started removing support for the
-> pre-PEP517 packaging formats, which will only continue to get worse from
-> here on out.
+> This is being fixed because of an issue spotted when attempting to use
+> the pyupgrade script.
+> 
+> Signed-off-by: John Snow <jsnow@redhat.com>
 
-I'm afraid this change may not be safe.
-
-The documentation of setuptools says pyproject.toml is supported since 
-61.0.0:
-https://setuptools.pypa.io/en/stable/userguide/pyproject_config.html
-
-Looking at Repology as suggested in docs/about/build-platforms.rst, the 
-following distributions have older setuptools, unfortunately:
-CentOS Stream 9: 53.0.0
-Debian 11: 44.1.1
-Ubuntu 22.04: 44.1.1
-
-docs/about/build-platforms.rst also says:
- > Optional build dependencies
- >   Build components whose absence does not affect the ability to build
- >   QEMU may not be available in distros, or may be too old for our
- >   requirements. Many of these, such as additional modules for the
- >   functional testing framework or various linters, are written in
- >   Python and therefore can also be installed using ``pip``.
-
-In my understanding, QEMU Python Tooling is an optional component so 
-dropping the support of old Linux distribution is tolerated according to 
-the documentation. But I think we still need to assess the potential 
-impact on the usability to justify that.
-
-A possible option is to fetch a new version of setuptools version when 
-necessary. The same documentation says:
- > Python build dependencies
- >   Some of QEMU's build dependencies are written in Python.  Usually
- >   these are only packaged by distributions for the default Python
- >   runtime.
- >   If QEMU bumps its minimum Python version and a non-default runtime
- >   is required, it may be necessary to fetch python modules from the
- >   Python Package Index (PyPI) via ``pip``, in order to build QEMU.
-
-Automatically fetching a compatible version of setuptools as described 
-here will reduce the adverse effect of the change.
-
-The documentation page of setuptools I mentioned earlier has the 
-following note:
- > If compatibility with legacy builds or versions of tools that don’t
- > support certain packaging standards (e.g. PEP 517 or PEP 660), a
- > simple setup.py script can be added to your project [1] (while keeping
- > the configuration in pyproject.toml):
- >
- > from setuptools import setup
- >
- > setup()
-
-I have no idea what it means though. (Will it automatically fetch new 
-setuptools to parse pyproject.toml or something?)
-
-> C) Move us to 3.9+ style type hints. They are deprecated in 3.9, and
-> *could* be removed at any time. I figured now was a good time as any to
-> get rid of them before they become a problem randomly some day in the
-> future.
-
-I guess you meant that the old style type hints are deprecated.
-
-Regards,
-Akihiko Odaki
+Reviewed-by: Akihiko Odaki <odaki@rsg.ci.i.u-tokyo.ac.jp>
 
