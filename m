@@ -4,48 +4,166 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 50381C71157
-	for <qemu-riscv@archiver.kernel.org>; Tue, 17 Jun 2025 07:47:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 43AC8C71136
+	for <qemu-riscv@archiver.kernel.org>; Tue, 17 Jun 2025 16:08:51 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uRR20-0003eK-JG; Tue, 17 Jun 2025 03:46:56 -0400
+	id 1uRYi4-0006Nn-Vy; Tue, 17 Jun 2025 11:58:53 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <wangran@bosc.ac.cn>)
- id 1uRR1w-0003dR-9l; Tue, 17 Jun 2025 03:46:52 -0400
-Received: from [115.124.28.75] (helo=out28-75.mail.aliyun.com)
+ (Exim 4.90_1) (envelope-from <jsnow@redhat.com>) id 1uRYcP-0004cL-Or
+ for qemu-riscv@nongnu.org; Tue, 17 Jun 2025 11:53:02 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <wangran@bosc.ac.cn>)
- id 1uRR1o-0002iY-Ps; Tue, 17 Jun 2025 03:46:52 -0400
-Received: from LAPTOP-H8E09QHL.localdomain(mailfrom:wangran@bosc.ac.cn
- fp:SMTPD_---.dO1mMKh_1750146151 cluster:ay29) by smtp.aliyun-inc.com;
- Tue, 17 Jun 2025 15:42:36 +0800
-From: Ran Wang <wangran@bosc.ac.cn>
-To: alistair23@gmail.com
-Cc: 3543977024@qq.com, palmer@dabbelt.com, alistair.francis@wdc.com,
- liwei1518@gmail.com, dbarboza@ventanamicro.com,
- zhiwei_liu@linux.alibaba.com, qemu-riscv@nongnu.org, qemu-devel@nongnu.org,
- wangran@bosc.ac.cn, qinshaoqing <qinshaoqing@bosc.ac.cn>,
- Yang Wang <wangyang@bosc.ac.cn>, Yu Hu <819258943@qq.com>
-Subject: [PATCH v5 2/2] hw/riscv: Initial support for BOSC's Xiangshan
- Kunminghu FPGA prototype
-Date: Tue, 17 Jun 2025 15:42:22 +0800
-Message-Id: <20250617074222.17618-1-wangran@bosc.ac.cn>
-X-Mailer: git-send-email 2.34.1
+ (Exim 4.90_1) (envelope-from <jsnow@redhat.com>) id 1uRYcN-000865-7W
+ for qemu-riscv@nongnu.org; Tue, 17 Jun 2025 11:53:01 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1750175578;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=F4Gxdm+xcAbyZgNWf3Hg1JfGy7tAiBkLt6vETvm7wdo=;
+ b=V3rmCg55UVC1VjDv/hSKmkEO1YF6KLrILwya6Jz6spgoUr2+bLUWD2BPQRe7FAV9q2gDwf
+ YfWWmgNA1zmXYVX45tHSIPwken4iAvk9xkzWV+xJoeVi7126wHXDDM9AdzuLLqRy3zJYtu
+ Eix5lswp9p92SnqWwOho4NaWf5yimYA=
+Received: from mail-pg1-f199.google.com (mail-pg1-f199.google.com
+ [209.85.215.199]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-668-B703x6yGPiimKhmaR1m6hg-1; Tue, 17 Jun 2025 11:52:56 -0400
+X-MC-Unique: B703x6yGPiimKhmaR1m6hg-1
+X-Mimecast-MFC-AGG-ID: B703x6yGPiimKhmaR1m6hg_1750175575
+Received: by mail-pg1-f199.google.com with SMTP id
+ 41be03b00d2f7-b00e4358a34so3673885a12.0
+ for <qemu-riscv@nongnu.org>; Tue, 17 Jun 2025 08:52:55 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1750175575; x=1750780375;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=F4Gxdm+xcAbyZgNWf3Hg1JfGy7tAiBkLt6vETvm7wdo=;
+ b=wLwOpgIIC2tb8+tN2vvmZ2QXtDfyhC6KHbbjnr9XsG3zxESeMkrbIbTi2FZOU1w1Ok
+ dTwg8amdbUhXgYMpE8wX0sO/pdjFDnLQmRpsdm16WKeuf8kHM+1Byoeq4UCG18z6RcWJ
+ j4LPxhCkWhGqWDow2Vvz1IF7xM8ZxKv9LDhNcxkr2k14qH0SAVKvDLoHqzfhGFMrh68o
+ bcpYflCKpRGXQhO6IvtDAmcizL3i1mBblbmBwvYau95sndLnLqvKiF+b91IR5iqwXJ1Z
+ Jfnedi+hl5ThiZKX8Lz0xOJ1a4BH0a3SW3NL6jQNVi0K2EHflPomsKWhQPxpPnfCoHbi
+ +/RQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUG2kWTXK0+/qmBFNH7iID10DnxWrF5QLLEKCwM+cn4Vgw5BQJw+z9Y65YGT4CdZhSpgGg1xDEYvSxp@nongnu.org
+X-Gm-Message-State: AOJu0Yx9jCrtG/pzwfvKEJO0wZHu+xN7DfxDhhlC7TLlcv6lvtJR22ox
+ Z0qHZCNJ+wm5VffP6Y9til1WvwPhPflVsEYXo380f6vJ9kK8syo7eobSdRE0eA/fpmicXqQDf5d
+ HvvZZcC8TkHBpfIUjEWXI3/oBQE3AXd+LlAV+VeiUZvBp3wwuvQkb6o7L3xJIexEwQ2/yJYfOi4
+ JkN/DQNyKONVlBxoR/m329Y1STslVXEl0=
+X-Gm-Gg: ASbGnctLrmt4YyAPlhx+6NgY4+otrAqwv9KXiF1MhXKvjtpS7hK97Eb5c3hhvJxHixR
+ v+NgbOgYlFW9/tJ/TuT+ZqDOEmFCoN6VPPcCeXG7M6FrkIkpbLuYc/x3QYNpfMMzl48RMji2/wX
+ bYfSHc6g/WIz++ieu5yxKbStWUxcenkpxsoA==
+X-Received: by 2002:a17:90b:350c:b0:312:f0d0:bb0 with SMTP id
+ 98e67ed59e1d1-313f1ca0fbfmr26514780a91.12.1750175574752; 
+ Tue, 17 Jun 2025 08:52:54 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IHHxJrWNFcK2/79BrkP+JHwBJoHNjZIR1s2/UmP3aKYOex68AC/E6YMXKeIMAfEBsgzycaBNYong/qWkuRgv5c=
+X-Received: by 2002:a17:90b:350c:b0:312:f0d0:bb0 with SMTP id
+ 98e67ed59e1d1-313f1ca0fbfmr26514626a91.12.1750175573986; Tue, 17 Jun 2025
+ 08:52:53 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 115.124.28.75 (deferred)
-Received-SPF: pass client-ip=115.124.28.75; envelope-from=wangran@bosc.ac.cn;
- helo=out28-75.mail.aliyun.com
-X-Spam_score_int: -10
-X-Spam_score: -1.1
-X-Spam_bar: -
-X-Spam_report: (-1.1 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_NONE=-0.0001,
- RCVD_IN_MSPIKE_H5=0.001, RCVD_IN_MSPIKE_WL=0.001,
- RCVD_IN_VALIDITY_CERTIFIED_BLOCKED=0.001, RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001,
- RDNS_NONE=0.793, SPF_HELO_NONE=0.001, T_SPF_TEMPERROR=0.01,
- UNPARSEABLE_RELAY=0.001 autolearn=no autolearn_force=no
+References: <20250612205451.1177751-1-jsnow@redhat.com>
+ <20250612205451.1177751-7-jsnow@redhat.com>
+ <9C057F25-8BE4-45FC-9332-99F24440DB92@ynddal.dk>
+In-Reply-To: <9C057F25-8BE4-45FC-9332-99F24440DB92@ynddal.dk>
+From: John Snow <jsnow@redhat.com>
+Date: Tue, 17 Jun 2025 11:52:40 -0400
+X-Gm-Features: AX0GCFsuUgDDRlS0rl88kz7AniydcsMDdrQ5XUJ9XCcVPUFVLTFv0N4Feru0eFA
+Message-ID: <CAFn=p-ZMB61pN6swURytd_m7vJuXEW+HyuTmVcWzkME-XNMCqw@mail.gmail.com>
+Subject: Re: [PATCH v2 06/12] python: upgrade to python3.9+ syntax
+To: Mads Ynddal <mads@ynddal.dk>
+Cc: qemu-devel <qemu-devel@nongnu.org>, Joel Stanley <joel@jms.id.au>,
+ Yi Liu <yi.l.liu@intel.com>, 
+ =?UTF-8?B?QWxleCBCZW5uw6ll?= <alex.bennee@linaro.org>, 
+ Helge Deller <deller@gmx.de>, Marcel Apfelbaum <marcel.apfelbaum@gmail.com>, 
+ Andrew Jeffery <andrew@codeconstruct.com.au>, Fabiano Rosas <farosas@suse.de>, 
+ Alexander Bulekov <alxndr@bu.edu>, Darren Kenny <darren.kenny@oracle.com>, 
+ Leif Lindholm <leif.lindholm@oss.qualcomm.com>,
+ =?UTF-8?Q?C=C3=A9dric_Le_Goater?= <clg@kaod.org>, 
+ Ed Maste <emaste@freebsd.org>, Gerd Hoffmann <kraxel@redhat.com>,
+ Warner Losh <imp@bsdimp.com>, 
+ Kevin Wolf <kwolf@redhat.com>, Tyrone Ting <kfting@nuvoton.com>,
+ Eric Blake <eblake@redhat.com>, Palmer Dabbelt <palmer@dabbelt.com>,
+ Yoshinori Sato <ysato@users.sourceforge.jp>, 
+ Troy Lee <leetroy@gmail.com>, Halil Pasic <pasic@linux.ibm.com>, 
+ Akihiko Odaki <odaki@rsg.ci.i.u-tokyo.ac.jp>,
+ Michael Roth <michael.roth@amd.com>, 
+ Laurent Vivier <laurent@vivier.eu>, Ani Sinha <anisinha@redhat.com>,
+ Weiwei Li <liwei1518@gmail.com>, 
+ Eric Farman <farman@linux.ibm.com>, Steven Lee <steven_lee@aspeedtech.com>, 
+ Brian Cain <brian.cain@oss.qualcomm.com>, Li-Wen Hsu <lwhsu@freebsd.org>, 
+ Jamin Lin <jamin_lin@aspeedtech.com>, qemu-s390x@nongnu.org, 
+ Vladimir Sementsov-Ogievskiy <vsementsov@yandex-team.ru>,
+ Qemu-block <qemu-block@nongnu.org>, Bernhard Beschow <shentey@gmail.com>, 
+ =?UTF-8?Q?Cl=C3=A9ment_Mathieu=2D=2DDrif?= <clement.mathieu--drif@eviden.com>, 
+ Maksim Davydov <davydov-max@yandex-team.ru>,
+ Niek Linnenbank <nieklinnenbank@gmail.com>, 
+ =?UTF-8?Q?Herv=C3=A9_Poussineau?= <hpoussin@reactos.org>, 
+ Christian Borntraeger <borntraeger@linux.ibm.com>, Paul Durrant <paul@xen.org>,
+ Manos Pitsidianakis <manos.pitsidianakis@linaro.org>,
+ Jagannathan Raman <jag.raman@oracle.com>, 
+ Igor Mitsyanko <i.mitsyanko@gmail.com>, Max Filippov <jcmvbkbc@gmail.com>, 
+ Markus Armbruster <armbru@redhat.com>,
+ Pierrick Bouvier <pierrick.bouvier@linaro.org>, 
+ "Michael S. Tsirkin" <mst@redhat.com>, Anton Johansson <anjo@rev.ng>,
+ Peter Maydell <peter.maydell@linaro.org>, 
+ Cleber Rosa <crosa@redhat.com>, Eric Auger <eric.auger@redhat.com>, 
+ Yanan Wang <wangyanan55@huawei.com>, qemu-arm <qemu-arm@nongnu.org>, 
+ Hao Wu <wuhaotsh@google.com>,
+ Sriram Yagnaraman <sriram.yagnaraman@ericsson.com>, 
+ qemu-riscv@nongnu.org, Paolo Bonzini <pbonzini@redhat.com>, 
+ Jason Wang <jasowang@redhat.com>, Nicholas Piggin <npiggin@gmail.com>, 
+ Michael Rolnik <mrolnik@gmail.com>, Zhao Liu <zhao1.liu@intel.com>, 
+ Alessandro Di Federico <ale@rev.ng>, Thomas Huth <thuth@redhat.com>,
+ Antony Pavlov <antonynpavlov@gmail.com>, 
+ Jiaxun Yang <jiaxun.yang@flygoat.com>, Hanna Reitz <hreitz@redhat.com>, 
+ Ilya Leoshkevich <iii@linux.ibm.com>, Marcelo Tosatti <mtosatti@redhat.com>, 
+ Nina Schoetterl-Glausch <nsg@linux.ibm.com>,
+ Daniel Henrique Barboza <danielhb413@gmail.com>, 
+ Qiuhao Li <Qiuhao.Li@outlook.com>, Hyman Huang <yong.huang@smartx.com>, 
+ =?UTF-8?B?IkRhbmllbCBQLiBCZXJyYW5nw6ki?= <berrange@redhat.com>, 
+ Magnus Damm <magnus.damm@gmail.com>, qemu-rust@nongnu.org,
+ Bandan Das <bsd@redhat.com>, 
+ Strahinja Jankovic <strahinja.p.jankovic@gmail.com>, 
+ Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>, 
+ =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@linaro.org>, 
+ kvm@vger.kernel.org, Fam Zheng <fam@euphon.net>, Jia Liu <proljc@gmail.com>, 
+ =?UTF-8?B?TWFyYy1BbmRyw6kgTHVyZWF1?= <marcandre.lureau@redhat.com>, 
+ Alistair Francis <alistair@alistair23.me>,
+ Subbaraya Sundeep <sundeep.lkml@gmail.com>, 
+ Kyle Evans <kevans@freebsd.org>, Song Gao <gaosong@loongson.cn>, 
+ Alexandre Iooss <erdnaxe@crans.org>, Aurelien Jarno <aurelien@aurel32.net>, 
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, Peter Xu <peterx@redhat.com>, 
+ Stefan Hajnoczi <stefanha@redhat.com>, BALATON Zoltan <balaton@eik.bme.hu>, 
+ Elena Ufimtseva <elena.ufimtseva@oracle.com>,
+ "Edgar E. Iglesias" <edgar.iglesias@gmail.com>, 
+ =?UTF-8?B?RnLDqWTDqXJpYyBCYXJyYXQ=?= <fbarrat@linux.ibm.com>, 
+ qemu-ppc@nongnu.org, Radoslaw Biernacki <rad@semihalf.com>, 
+ Beniamino Galvani <b.galvani@gmail.com>, David Hildenbrand <david@redhat.com>, 
+ Richard Henderson <richard.henderson@linaro.org>,
+ David Woodhouse <dwmw2@infradead.org>, 
+ Eduardo Habkost <eduardo@habkost.net>,
+ Ahmed Karaman <ahmedkhaledkaraman@gmail.com>, 
+ Huacai Chen <chenhuacai@kernel.org>, Mahmoud Mandour <ma.mandourr@gmail.com>, 
+ Harsh Prateek Bora <harshpb@linux.ibm.com>
+X-Mimecast-Spam-Score: 0
+X-Mimecast-MFC-PROC-ID: xBnJrWluNPGmv3YtqT-MMgfCkC3ukJJctiIDJ84L6ns_1750175575
+X-Mimecast-Originator: redhat.com
+Content-Type: multipart/alternative; boundary="0000000000006200220637c68115"
+Received-SPF: pass client-ip=170.10.133.124; envelope-from=jsnow@redhat.com;
+ helo=us-smtp-delivery-124.mimecast.com
+X-Spam_score_int: -39
+X-Spam_score: -4.0
+X-Spam_bar: ----
+X-Spam_report: (-4.0 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-1.89,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ HTML_MESSAGE=0.001, RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H5=0.001,
+ RCVD_IN_MSPIKE_WL=0.001, RCVD_IN_VALIDITY_CERTIFIED_BLOCKED=0.001,
+ RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -61,446 +179,233 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Huang Borong <3543977024@qq.com>
+--0000000000006200220637c68115
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-This implementation provides emulation for the Xiangshan Kunminghu
-FPGA prototype platform, including support for UART, CLINT, IMSIC,
-and APLIC devices. More details can be found at
-https://github.com/OpenXiangShan/XiangShan
+On Tue, Jun 17, 2025, 5:16=E2=80=AFAM Mads Ynddal <mads@ynddal.dk> wrote:
 
-Signed-off-by: qinshaoqing <qinshaoqing@bosc.ac.cn>
-Signed-off-by: Yang Wang <wangyang@bosc.ac.cn>
-Signed-off-by: Yu Hu <819258943@qq.com>
-Signed-off-by: Ran Wang <wangran@bosc.ac.cn>
-Signed-off-by: Borong Huang <3543977024@qq.com>
-Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
----
- MAINTAINERS                                 |   7 +
- configs/devices/riscv64-softmmu/default.mak |   1 +
- docs/system/riscv/xiangshan-kunminghu.rst   |  39 ++++
- docs/system/target-riscv.rst                |   1 +
- hw/riscv/Kconfig                            |   9 +
- hw/riscv/meson.build                        |   1 +
- hw/riscv/xiangshan_kmh.c                    | 220 ++++++++++++++++++++
- include/hw/riscv/xiangshan_kmh.h            |  68 ++++++
- 8 files changed, 346 insertions(+)
- create mode 100644 docs/system/riscv/xiangshan-kunminghu.rst
- create mode 100644 hw/riscv/xiangshan_kmh.c
- create mode 100644 include/hw/riscv/xiangshan_kmh.h
+>
+> > diff --git a/scripts/simpletrace.py b/scripts/simpletrace.py
+> > index cef81b0707f..a013e4402de 100755
+> > --- a/scripts/simpletrace.py
+> > +++ b/scripts/simpletrace.py
+> > @@ -9,13 +9,15 @@
+> > #
+> > # For help see docs/devel/tracing.rst
+> >
+> > -import sys
+> > -import struct
+> > import inspect
+> > +import struct
+> > +import sys
+> > import warnings
+> > -from tracetool import read_events, Event
+> > +
+> > +from tracetool import Event, read_events
+> > from tracetool.backend.simple import is_string
+> >
+> > +
+> > __all__ =3D ['Analyzer', 'Analyzer2', 'process', 'run']
+> >
+> > # This is the binary format that the QEMU "simple" trace backend
+> > @@ -166,11 +168,9 @@ def runstate_set(self, timestamp, pid, new_state):
+> >
+> >     def begin(self):
+> >         """Called at the start of the trace."""
+> > -        pass
+> >
+> >     def catchall(self, event, rec):
+> >         """Called if no specific method for processing a trace event ha=
+s
+> been found."""
+> > -        pass
+> >
+> >     def _build_fn(self, event):
+> >         fn =3D getattr(self, event.name, None)
+> > @@ -208,7 +208,6 @@ def _process_event(self, rec_args, *, event,
+> event_id, timestamp_ns, pid, **kwar
+> >
+> >     def end(self):
+> >         """Called at the end of the trace."""
+> > -        pass
+> >
+> >     def __enter__(self):
+> >         self.begin()
+> > @@ -263,7 +262,6 @@ def runstate_set(self, new_state, *, timestamp_ns,
+> pid, **kwargs):
+> >
+> >     def catchall(self, *rec_args, event, timestamp_ns, pid, event_id,
+> **kwargs):
+> >         """Called if no specific method for processing a trace event ha=
+s
+> been found."""
+> > -        pass
+> >
+> >     def _process_event(self, rec_args, *, event, **kwargs):
+> >         fn =3D getattr(self, event.name, self.catchall)
+> > @@ -279,7 +277,7 @@ def process(events, log, analyzer, read_header=3DTr=
+ue):
+> >     """
+> >
+> >     if isinstance(events, str):
+> > -        with open(events, 'r') as f:
+> > +        with open(events) as f:
+> >             events_list =3D read_events(f, events)
+> >     elif isinstance(events, list):
+> >         # Treat as a list of events already produced by
+> tracetool.read_events
+> > @@ -332,7 +330,7 @@ def run(analyzer):
+> >     except (AssertionError, ValueError):
+> >         raise SimpleException(f'usage: {sys.argv[0]} [--no-header]
+> <trace-events> <trace-file>\n')
+> >
+> > -    with open(trace_event_path, 'r') as events_fobj,
+> open(trace_file_path, 'rb') as log_fobj:
+> > +    with open(trace_event_path) as events_fobj, open(trace_file_path,
+> 'rb') as log_fobj:
+> >         process(events_fobj, log_fobj, analyzer, read_header=3Dnot
+> no_header)
+> >
+> > if __name__ =3D=3D '__main__':
+>
+> I'm not really a fan of the implicit default arguments, but I guess the
+> rest is fine. If this is the way everyone else wants to go, I won't stand
+> in the way.
+>
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index 28b3dd2684..eb4ba1b61f 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -1692,6 +1692,13 @@ S: Maintained
- F: hw/riscv/microblaze-v-generic.c
- F: docs/system/riscv/microblaze-v-generic.rst
- 
-+Xiangshan Kunminghu
-+M: Ran Wang <wangran@bosc.ac.cn>
-+S: Maintained
-+F: docs/system/riscv/xiangshan-kunminghu.rst
-+F: hw/riscv/xiangshan_kmh.c
-+F: include/hw/riscv/xiangshan_kmh.h
-+
- RX Machines
- -----------
- rx-gdbsim
-diff --git a/configs/devices/riscv64-softmmu/default.mak b/configs/devices/riscv64-softmmu/default.mak
-index 39ed3a0061..e485bbd1a3 100644
---- a/configs/devices/riscv64-softmmu/default.mak
-+++ b/configs/devices/riscv64-softmmu/default.mak
-@@ -11,3 +11,4 @@
- # CONFIG_RISCV_VIRT=n
- # CONFIG_MICROCHIP_PFSOC=n
- # CONFIG_SHAKTI_C=n
-+# CONFIG_XIANGSHAN_KUNMINGHU=n
-diff --git a/docs/system/riscv/xiangshan-kunminghu.rst b/docs/system/riscv/xiangshan-kunminghu.rst
-new file mode 100644
-index 0000000000..46e7ceeda0
---- /dev/null
-+++ b/docs/system/riscv/xiangshan-kunminghu.rst
-@@ -0,0 +1,39 @@
-+BOSC Xiangshan Kunminghu FPGA prototype platform (``xiangshan-kunminghu``)
-+==========================================================================
-+The ``xiangshan-kunminghu`` machine is compatible with our FPGA prototype
-+platform.
-+
-+XiangShan is an open-source high-performance RISC-V processor project.
-+The third generation processor is called Kunminghu. Kunminghu is a 64-bit
-+RV64GCBSUHV processor core. More information can be found in our Github
-+repository:
-+https://github.com/OpenXiangShan/XiangShan
-+
-+Supported devices
-+-----------------
-+The ``xiangshan-kunminghu`` machine supports the following devices:
-+
-+* Up to 16 xiangshan-kunminghu cores
-+* Core Local Interruptor (CLINT)
-+* Incoming MSI Controller (IMSIC)
-+* Advanced Platform-Level Interrupt Controller (APLIC)
-+* 1 UART
-+
-+Boot options
-+------------
-+The ``xiangshan-kunminghu`` machine can start using the standard ``-bios``
-+functionality for loading the boot image. You need to compile and link
-+the firmware, kernel, and Device Tree (FDT) into a single binary file,
-+such as ``fw_payload.bin``.
-+
-+Running
-+-------
-+Below is an example command line for running the ``xiangshan-kunminghu``
-+machine:
-+
-+.. code-block:: bash
-+
-+   $ qemu-system-riscv64 -machine xiangshan-kunminghu \
-+      -smp 16 -m 16G \
-+      -bios path/to/opensbi/platform/generic/firmware/fw_payload.bin \
-+      -nographic
-diff --git a/docs/system/target-riscv.rst b/docs/system/target-riscv.rst
-index 95457af130..89b2cb732c 100644
---- a/docs/system/target-riscv.rst
-+++ b/docs/system/target-riscv.rst
-@@ -71,6 +71,7 @@ undocumented; you can get a complete list by running
-    riscv/shakti-c
-    riscv/sifive_u
-    riscv/virt
-+   riscv/xiangshan-kunminghu
- 
- RISC-V CPU firmware
- -------------------
-diff --git a/hw/riscv/Kconfig b/hw/riscv/Kconfig
-index e6a0ac1fa1..fc9c35bd98 100644
---- a/hw/riscv/Kconfig
-+++ b/hw/riscv/Kconfig
-@@ -119,3 +119,12 @@ config SPIKE
-     select HTIF
-     select RISCV_ACLINT
-     select SIFIVE_PLIC
-+
-+config XIANGSHAN_KUNMINGHU
-+    bool
-+    default y
-+    depends on RISCV64
-+    select RISCV_ACLINT
-+    select RISCV_APLIC
-+    select RISCV_IMSIC
-+    select SERIAL_MM
-diff --git a/hw/riscv/meson.build b/hw/riscv/meson.build
-index c22f3a7216..2a8d5b136c 100644
---- a/hw/riscv/meson.build
-+++ b/hw/riscv/meson.build
-@@ -13,5 +13,6 @@ riscv_ss.add(when: 'CONFIG_ACPI', if_true: files('virt-acpi-build.c'))
- riscv_ss.add(when: 'CONFIG_RISCV_IOMMU', if_true: files(
- 	'riscv-iommu.c', 'riscv-iommu-pci.c', 'riscv-iommu-sys.c', 'riscv-iommu-hpm.c'))
- riscv_ss.add(when: 'CONFIG_MICROBLAZE_V', if_true: files('microblaze-v-generic.c'))
-+riscv_ss.add(when: 'CONFIG_XIANGSHAN_KUNMINGHU', if_true: files('xiangshan_kmh.c'))
- 
- hw_arch += {'riscv': riscv_ss}
-diff --git a/hw/riscv/xiangshan_kmh.c b/hw/riscv/xiangshan_kmh.c
-new file mode 100644
-index 0000000000..a95fd6174f
---- /dev/null
-+++ b/hw/riscv/xiangshan_kmh.c
-@@ -0,0 +1,220 @@
-+/*
-+ * QEMU RISC-V Board Compatible with the Xiangshan Kunminghu
-+ * FPGA prototype platform
-+ *
-+ * Copyright (c) 2025 Beijing Institute of Open Source Chip (BOSC)
-+ * SPDX-License-Identifier: GPL-2.0-or-later
-+ *
-+ * Provides a board compatible with the Xiangshan Kunminghu
-+ * FPGA prototype platform:
-+ *
-+ * 0) UART (16550A)
-+ * 1) CLINT (Core-Local Interruptor)
-+ * 2) IMSIC (Incoming MSI Controller)
-+ * 3) APLIC (Advanced Platform-Level Interrupt Controller)
-+ *
-+ * More information can be found in our Github repository:
-+ * https://github.com/OpenXiangShan/XiangShan
-+ *
-+ * This program is free software; you can redistribute it and/or modify it
-+ * under the terms and conditions of the GNU General Public License,
-+ * version 2 or later, as published by the Free Software Foundation.
-+ *
-+ * This program is distributed in the hope it will be useful, but WITHOUT
-+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
-+ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
-+ * more details.
-+ *
-+ * You should have received a copy of the GNU General Public License along with
-+ * this program.  If not, see <http://www.gnu.org/licenses/>.
-+ */
-+
-+#include "qemu/osdep.h"
-+#include "qapi/error.h"
-+#include "system/address-spaces.h"
-+#include "hw/boards.h"
-+#include "hw/char/serial-mm.h"
-+#include "hw/intc/riscv_aclint.h"
-+#include "hw/intc/riscv_aplic.h"
-+#include "hw/intc/riscv_imsic.h"
-+#include "hw/qdev-properties.h"
-+#include "hw/riscv/boot.h"
-+#include "hw/riscv/xiangshan_kmh.h"
-+#include "hw/riscv/riscv_hart.h"
-+#include "system/system.h"
-+
-+static const MemMapEntry xiangshan_kmh_memmap[] = {
-+    [XIANGSHAN_KMH_ROM] =          {     0x1000,        0xF000 },
-+    [XIANGSHAN_KMH_UART0] =        { 0x310B0000,       0x10000 },
-+    [XIANGSHAN_KMH_CLINT] =        { 0x38000000,       0x10000 },
-+    [XIANGSHAN_KMH_APLIC_M] =      { 0x31100000,        0x4000 },
-+    [XIANGSHAN_KMH_APLIC_S] =      { 0x31120000,        0x4000 },
-+    [XIANGSHAN_KMH_IMSIC_M] =      { 0x3A800000,       0x10000 },
-+    [XIANGSHAN_KMH_IMSIC_S] =      { 0x3B000000,       0x80000 },
-+    [XIANGSHAN_KMH_DRAM] =         { 0x80000000,           0x0 },
-+};
-+
-+static DeviceState *xiangshan_kmh_create_aia(uint32_t num_harts)
-+{
-+    int i;
-+    const MemMapEntry *memmap = xiangshan_kmh_memmap;
-+    hwaddr addr = 0;
-+    DeviceState *aplic_m = NULL;
-+
-+    /* M-level IMSICs */
-+    addr = memmap[XIANGSHAN_KMH_IMSIC_M].base;
-+    for (i = 0; i < num_harts; i++) {
-+        riscv_imsic_create(addr + i * IMSIC_HART_SIZE(0), i, true,
-+                           1, XIANGSHAN_KMH_IMSIC_NUM_IDS);
-+    }
-+
-+    /* S-level IMSICs */
-+    addr = memmap[XIANGSHAN_KMH_IMSIC_S].base;
-+    for (i = 0; i < num_harts; i++) {
-+        riscv_imsic_create(addr +
-+                           i * IMSIC_HART_SIZE(XIANGSHAN_KMH_IMSIC_GUEST_BITS),
-+                           i, false, 1 + XIANGSHAN_KMH_IMSIC_GUEST_BITS,
-+                           XIANGSHAN_KMH_IMSIC_NUM_IDS);
-+    }
-+
-+    /* M-level APLIC */
-+    aplic_m = riscv_aplic_create(memmap[XIANGSHAN_KMH_APLIC_M].base,
-+                                 memmap[XIANGSHAN_KMH_APLIC_M].size,
-+                                 0, 0, XIANGSHAN_KMH_APLIC_NUM_SOURCES,
-+                                 1, true, true, NULL);
-+
-+    /* S-level APLIC */
-+    riscv_aplic_create(memmap[XIANGSHAN_KMH_APLIC_S].base,
-+                       memmap[XIANGSHAN_KMH_APLIC_S].size,
-+                       0, 0, XIANGSHAN_KMH_APLIC_NUM_SOURCES,
-+                       1, true, false, aplic_m);
-+
-+    return aplic_m;
-+}
-+
-+static void xiangshan_kmh_soc_realize(DeviceState *dev, Error **errp)
-+{
-+    MachineState *ms = MACHINE(qdev_get_machine());
-+    XiangshanKmhSoCState *s = XIANGSHAN_KMH_SOC(dev);
-+    const MemMapEntry *memmap = xiangshan_kmh_memmap;
-+    MemoryRegion *system_memory = get_system_memory();
-+    uint32_t num_harts = ms->smp.cpus;
-+
-+    qdev_prop_set_uint32(DEVICE(&s->cpus), "num-harts", num_harts);
-+    qdev_prop_set_uint32(DEVICE(&s->cpus), "hartid-base", 0);
-+    qdev_prop_set_string(DEVICE(&s->cpus), "cpu-type",
-+                         TYPE_RISCV_CPU_XIANGSHAN_KMH);
-+    sysbus_realize(SYS_BUS_DEVICE(&s->cpus), &error_fatal);
-+
-+    /* AIA */
-+    s->irqchip = xiangshan_kmh_create_aia(num_harts);
-+
-+    /* UART */
-+    serial_mm_init(system_memory, memmap[XIANGSHAN_KMH_UART0].base, 2,
-+                   qdev_get_gpio_in(s->irqchip, XIANGSHAN_KMH_UART0_IRQ),
-+                   115200, serial_hd(0), DEVICE_LITTLE_ENDIAN);
-+
-+    /* CLINT */
-+    riscv_aclint_swi_create(memmap[XIANGSHAN_KMH_CLINT].base,
-+                            0, num_harts, false);
-+    riscv_aclint_mtimer_create(memmap[XIANGSHAN_KMH_CLINT].base +
-+                               RISCV_ACLINT_SWI_SIZE,
-+                               RISCV_ACLINT_DEFAULT_MTIMER_SIZE,
-+                               0, num_harts, RISCV_ACLINT_DEFAULT_MTIMECMP,
-+                               RISCV_ACLINT_DEFAULT_MTIME,
-+                               XIANGSHAN_KMH_CLINT_TIMEBASE_FREQ, true);
-+
-+    /* ROM */
-+    memory_region_init_rom(&s->rom, OBJECT(dev), "xiangshan.kunminghu.rom",
-+                           memmap[XIANGSHAN_KMH_ROM].size, &error_fatal);
-+    memory_region_add_subregion(system_memory,
-+                                memmap[XIANGSHAN_KMH_ROM].base, &s->rom);
-+}
-+
-+static void xiangshan_kmh_soc_class_init(ObjectClass *klass, const void *data)
-+{
-+    DeviceClass *dc = DEVICE_CLASS(klass);
-+
-+    dc->realize = xiangshan_kmh_soc_realize;
-+    dc->user_creatable = false;
-+}
-+
-+static void xiangshan_kmh_soc_instance_init(Object *obj)
-+{
-+    XiangshanKmhSoCState *s = XIANGSHAN_KMH_SOC(obj);
-+
-+    object_initialize_child(obj, "cpus", &s->cpus, TYPE_RISCV_HART_ARRAY);
-+}
-+
-+static const TypeInfo xiangshan_kmh_soc_info = {
-+    .name = TYPE_XIANGSHAN_KMH_SOC,
-+    .parent = TYPE_DEVICE,
-+    .instance_size = sizeof(XiangshanKmhSoCState),
-+    .instance_init = xiangshan_kmh_soc_instance_init,
-+    .class_init = xiangshan_kmh_soc_class_init,
-+};
-+
-+static void xiangshan_kmh_soc_register_types(void)
-+{
-+    type_register_static(&xiangshan_kmh_soc_info);
-+}
-+type_init(xiangshan_kmh_soc_register_types)
-+
-+static void xiangshan_kmh_machine_init(MachineState *machine)
-+{
-+    XiangshanKmhState *s = XIANGSHAN_KMH_MACHINE(machine);
-+    const MemMapEntry *memmap = xiangshan_kmh_memmap;
-+    MemoryRegion *system_memory = get_system_memory();
-+    hwaddr start_addr = memmap[XIANGSHAN_KMH_DRAM].base;
-+
-+    /* Initialize SoC */
-+    object_initialize_child(OBJECT(machine), "soc", &s->soc,
-+                            TYPE_XIANGSHAN_KMH_SOC);
-+    qdev_realize(DEVICE(&s->soc), NULL, &error_fatal);
-+
-+    /* Register RAM */
-+    memory_region_add_subregion(system_memory,
-+                                memmap[XIANGSHAN_KMH_DRAM].base,
-+                                machine->ram);
-+
-+    /* ROM reset vector */
-+    riscv_setup_rom_reset_vec(machine, &s->soc.cpus,
-+                              start_addr,
-+                              memmap[XIANGSHAN_KMH_ROM].base,
-+                              memmap[XIANGSHAN_KMH_ROM].size, 0, 0);
-+    if (machine->firmware) {
-+        riscv_load_firmware(machine->firmware, &start_addr, NULL);
-+    }
-+
-+    /* Note: dtb has been integrated into firmware(OpenSBI) when compiling */
-+}
-+
-+static void xiangshan_kmh_machine_class_init(ObjectClass *klass, const void *data)
-+{
-+    MachineClass *mc = MACHINE_CLASS(klass);
-+    static const char *const valid_cpu_types[] = {
-+        TYPE_RISCV_CPU_XIANGSHAN_KMH,
-+        NULL
-+    };
-+
-+    mc->desc = "RISC-V Board compatible with the Xiangshan " \
-+               "Kunminghu FPGA prototype platform";
-+    mc->init = xiangshan_kmh_machine_init;
-+    mc->max_cpus = XIANGSHAN_KMH_MAX_CPUS;
-+    mc->default_cpu_type = TYPE_RISCV_CPU_XIANGSHAN_KMH;
-+    mc->valid_cpu_types = valid_cpu_types;
-+    mc->default_ram_id = "xiangshan.kunminghu.ram";
-+}
-+
-+static const TypeInfo xiangshan_kmh_machine_info = {
-+    .name = TYPE_XIANGSHAN_KMH_MACHINE,
-+    .parent = TYPE_MACHINE,
-+    .instance_size = sizeof(XiangshanKmhState),
-+    .class_init = xiangshan_kmh_machine_class_init,
-+};
-+
-+static void xiangshan_kmh_machine_register_types(void)
-+{
-+    type_register_static(&xiangshan_kmh_machine_info);
-+}
-+type_init(xiangshan_kmh_machine_register_types)
-diff --git a/include/hw/riscv/xiangshan_kmh.h b/include/hw/riscv/xiangshan_kmh.h
-new file mode 100644
-index 0000000000..c5dc6b1a9a
---- /dev/null
-+++ b/include/hw/riscv/xiangshan_kmh.h
-@@ -0,0 +1,68 @@
-+/* SPDX-License-Identifier: BSD-2-Clause */
-+/*
-+ * QEMU RISC-V Board Compatible with the Xiangshan Kunminghu
-+ * FPGA prototype platform
-+ *
-+ * Copyright (c) 2025 Beijing Institute of Open Source Chip (BOSC)
-+ *
-+ */
-+
-+#ifndef HW_XIANGSHAN_KMH_H
-+#define HW_XIANGSHAN_KMH_H
-+
-+#include "hw/boards.h"
-+#include "hw/riscv/riscv_hart.h"
-+
-+#define XIANGSHAN_KMH_MAX_CPUS 16
-+
-+typedef struct XiangshanKmhSoCState {
-+    /*< private >*/
-+    DeviceState parent_obj;
-+
-+    /*< public >*/
-+    RISCVHartArrayState cpus;
-+    DeviceState *irqchip;
-+    MemoryRegion rom;
-+} XiangshanKmhSoCState;
-+
-+#define TYPE_XIANGSHAN_KMH_SOC "xiangshan.kunminghu.soc"
-+DECLARE_INSTANCE_CHECKER(XiangshanKmhSoCState, XIANGSHAN_KMH_SOC,
-+                         TYPE_XIANGSHAN_KMH_SOC)
-+
-+typedef struct XiangshanKmhState {
-+    /*< private >*/
-+    MachineState parent_obj;
-+
-+    /*< public >*/
-+    XiangshanKmhSoCState soc;
-+} XiangshanKmhState;
-+
-+#define TYPE_XIANGSHAN_KMH_MACHINE MACHINE_TYPE_NAME("xiangshan-kunminghu")
-+DECLARE_INSTANCE_CHECKER(XiangshanKmhState, XIANGSHAN_KMH_MACHINE,
-+                         TYPE_XIANGSHAN_KMH_MACHINE)
-+
-+enum {
-+    XIANGSHAN_KMH_ROM,
-+    XIANGSHAN_KMH_UART0,
-+    XIANGSHAN_KMH_CLINT,
-+    XIANGSHAN_KMH_APLIC_M,
-+    XIANGSHAN_KMH_APLIC_S,
-+    XIANGSHAN_KMH_IMSIC_M,
-+    XIANGSHAN_KMH_IMSIC_S,
-+    XIANGSHAN_KMH_DRAM,
-+};
-+
-+enum {
-+    XIANGSHAN_KMH_UART0_IRQ = 10,
-+};
-+
-+/* Indicating Timebase-freq (1MHZ) */
-+#define XIANGSHAN_KMH_CLINT_TIMEBASE_FREQ 1000000
-+
-+#define XIANGSHAN_KMH_IMSIC_NUM_IDS 255
-+#define XIANGSHAN_KMH_IMSIC_NUM_GUESTS 7
-+#define XIANGSHAN_KMH_IMSIC_GUEST_BITS 3
-+
-+#define XIANGSHAN_KMH_APLIC_NUM_SOURCES 96
-+
-+#endif
--- 
-2.34.1
+I can manually restore it. It just happens to be the style the upgrade tool
+prefers which saves an awful lot of manual work, but I have no prejudice
+against explicit open parameters.
+
+Thanks for reviewing!
+
+
+> =E2=80=94
+> Mads Ynddal
+>
+>
+
+--0000000000006200220637c68115
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"auto"><div><br><br><div class=3D"gmail_quote gmail_quote_contai=
+ner"><div dir=3D"ltr" class=3D"gmail_attr">On Tue, Jun 17, 2025, 5:16=E2=80=
+=AFAM Mads Ynddal &lt;<a href=3D"mailto:mads@ynddal.dk">mads@ynddal.dk</a>&=
+gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0 0 0=
+ .8ex;border-left:1px #ccc solid;padding-left:1ex"><br>
+&gt; diff --git a/scripts/simpletrace.py b/scripts/simpletrace.py<br>
+&gt; index cef81b0707f..a013e4402de 100755<br>
+&gt; --- a/scripts/simpletrace.py<br>
+&gt; +++ b/scripts/simpletrace.py<br>
+&gt; @@ -9,13 +9,15 @@<br>
+&gt; #<br>
+&gt; # For help see docs/devel/tracing.rst<br>
+&gt; <br>
+&gt; -import sys<br>
+&gt; -import struct<br>
+&gt; import inspect<br>
+&gt; +import struct<br>
+&gt; +import sys<br>
+&gt; import warnings<br>
+&gt; -from tracetool import read_events, Event<br>
+&gt; +<br>
+&gt; +from tracetool import Event, read_events<br>
+&gt; from tracetool.backend.simple import is_string<br>
+&gt; <br>
+&gt; +<br>
+&gt; __all__ =3D [&#39;Analyzer&#39;, &#39;Analyzer2&#39;, &#39;process&#39=
+;, &#39;run&#39;]<br>
+&gt; <br>
+&gt; # This is the binary format that the QEMU &quot;simple&quot; trace bac=
+kend<br>
+&gt; @@ -166,11 +168,9 @@ def runstate_set(self, timestamp, pid, new_state)=
+:<br>
+&gt; <br>
+&gt;=C2=A0 =C2=A0 =C2=A0def begin(self):<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0&quot;&quot;&quot;Called at the start=
+ of the trace.&quot;&quot;&quot;<br>
+&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 pass<br>
+&gt; <br>
+&gt;=C2=A0 =C2=A0 =C2=A0def catchall(self, event, rec):<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0&quot;&quot;&quot;Called if no specif=
+ic method for processing a trace event has been found.&quot;&quot;&quot;<br=
+>
+&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 pass<br>
+&gt; <br>
+&gt;=C2=A0 =C2=A0 =C2=A0def _build_fn(self, event):<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0fn =3D getattr(self, <a href=3D"http:=
+//event.name" rel=3D"noreferrer noreferrer" target=3D"_blank">event.name</a=
+>, None)<br>
+&gt; @@ -208,7 +208,6 @@ def _process_event(self, rec_args, *, event, event=
+_id, timestamp_ns, pid, **kwar<br>
+&gt; <br>
+&gt;=C2=A0 =C2=A0 =C2=A0def end(self):<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0&quot;&quot;&quot;Called at the end o=
+f the trace.&quot;&quot;&quot;<br>
+&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 pass<br>
+&gt; <br>
+&gt;=C2=A0 =C2=A0 =C2=A0def __enter__(self):<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0self.begin()<br>
+&gt; @@ -263,7 +262,6 @@ def runstate_set(self, new_state, *, timestamp_ns,=
+ pid, **kwargs):<br>
+&gt; <br>
+&gt;=C2=A0 =C2=A0 =C2=A0def catchall(self, *rec_args, event, timestamp_ns, =
+pid, event_id, **kwargs):<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0&quot;&quot;&quot;Called if no specif=
+ic method for processing a trace event has been found.&quot;&quot;&quot;<br=
+>
+&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 pass<br>
+&gt; <br>
+&gt;=C2=A0 =C2=A0 =C2=A0def _process_event(self, rec_args, *, event, **kwar=
+gs):<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0fn =3D getattr(self, <a href=3D"http:=
+//event.name" rel=3D"noreferrer noreferrer" target=3D"_blank">event.name</a=
+>, self.catchall)<br>
+&gt; @@ -279,7 +277,7 @@ def process(events, log, analyzer, read_header=3DT=
+rue):<br>
+&gt;=C2=A0 =C2=A0 =C2=A0&quot;&quot;&quot;<br>
+&gt; <br>
+&gt;=C2=A0 =C2=A0 =C2=A0if isinstance(events, str):<br>
+&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 with open(events, &#39;r&#39;) as f:<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 with open(events) as f:<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0events_list =3D read_ev=
+ents(f, events)<br>
+&gt;=C2=A0 =C2=A0 =C2=A0elif isinstance(events, list):<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0# Treat as a list of events already p=
+roduced by tracetool.read_events<br>
+&gt; @@ -332,7 +330,7 @@ def run(analyzer):<br>
+&gt;=C2=A0 =C2=A0 =C2=A0except (AssertionError, ValueError):<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0raise SimpleException(f&#39;usage: {s=
+ys.argv[0]} [--no-header] &lt;trace-events&gt; &lt;trace-file&gt;\n&#39;)<b=
+r>
+&gt; <br>
+&gt; -=C2=A0 =C2=A0 with open(trace_event_path, &#39;r&#39;) as events_fobj=
+, open(trace_file_path, &#39;rb&#39;) as log_fobj:<br>
+&gt; +=C2=A0 =C2=A0 with open(trace_event_path) as events_fobj, open(trace_=
+file_path, &#39;rb&#39;) as log_fobj:<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0process(events_fobj, log_fobj, analyz=
+er, read_header=3Dnot no_header)<br>
+&gt; <br>
+&gt; if __name__ =3D=3D &#39;__main__&#39;:<br>
+<br>
+I&#39;m not really a fan of the implicit default arguments, but I guess the=
+ rest is fine. If this is the way everyone else wants to go, I won&#39;t st=
+and in the way.<br></blockquote></div></div><div dir=3D"auto"><br></div><di=
+v dir=3D"auto">I can manually restore it. It just happens to be the style t=
+he upgrade tool prefers which saves an awful lot of manual work, but I have=
+ no prejudice against explicit open parameters.</div><div dir=3D"auto"><br>=
+</div><div dir=3D"auto">Thanks for reviewing!</div><div dir=3D"auto"><br></=
+div><div dir=3D"auto"><div class=3D"gmail_quote gmail_quote_container"><blo=
+ckquote class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;border-left:1px #c=
+cc solid;padding-left:1ex">
+<br>
+=E2=80=94<br>
+Mads Ynddal<br>
+<br>
+</blockquote></div></div></div>
+
+--0000000000006200220637c68115--
 
 
