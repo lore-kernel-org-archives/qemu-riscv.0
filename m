@@ -4,138 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8F9B1C71136
-	for <qemu-riscv@archiver.kernel.org>; Mon, 16 Jun 2025 13:17:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 079C6C71136
+	for <qemu-riscv@archiver.kernel.org>; Tue, 17 Jun 2025 02:38:27 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uR9hS-0007k0-3o; Mon, 16 Jun 2025 09:16:34 -0400
+	id 1uRMD3-0006uw-IT; Mon, 16 Jun 2025 22:38:01 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <odaki@rsg.ci.i.u-tokyo.ac.jp>)
- id 1uR8kg-0006xJ-TA; Mon, 16 Jun 2025 08:15:51 -0400
-Received: from www3579.sakura.ne.jp ([49.212.243.89])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <odaki@rsg.ci.i.u-tokyo.ac.jp>)
- id 1uR8kY-0004Yd-AI; Mon, 16 Jun 2025 08:15:49 -0400
-Received: from [133.11.54.205] (h205.csg.ci.i.u-tokyo.ac.jp [133.11.54.205])
- (authenticated bits=0)
- by www3579.sakura.ne.jp (8.16.1/8.16.1) with ESMTPSA id 55GCDKG0047581
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO);
- Mon, 16 Jun 2025 21:13:20 +0900 (JST)
- (envelope-from odaki@rsg.ci.i.u-tokyo.ac.jp)
-DKIM-Signature: a=rsa-sha256; bh=hyI6ifgDk3Q7Kv3xDnCmgrJzLzLKSQRU+5vx/8ccJHo=; 
- c=relaxed/relaxed; d=rsg.ci.i.u-tokyo.ac.jp;
- h=Message-ID:Date:Subject:To:From;
- s=rs20250326; t=1750076002; v=1;
- b=sUHoe9SQkfJw6ynMY3sqqNwW1/D5eKVGMvw70KzOHvhFaEAUBvdIFPQ8RiQ9kG/C
- K6zj8j45TkI3CIkKUkKcsn9Kpw+FFcPQ0Tv7u6h6FImfNp2xrCTcPc8IavUjqvcq
- oZKLMZ80ACxveklcdUjoRoVM44HPjlaIBmk0d8eLfk3aU7VNeaffIfO2xSa07Kv6
- 8BgNNQYR0osuF+xJthsL6B+vyEfdWLOJfgi61eLAmS3/qhh2g5cfMYoJnx85YR1/
- +Zb6NB4YfV5Wo8xscZQXH8zXfJbdC13YSPu3ax1PJGlV6JY/xlEAuMGPeeaEJui1
- 0xOgaGo9AKLjN8MbUasCjQ==
-Message-ID: <3c997a88-d0df-45f5-be1e-02f8d3018605@rsg.ci.i.u-tokyo.ac.jp>
-Date: Mon, 16 Jun 2025 21:13:19 +0900
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1uRMD2-0006uk-QM; Mon, 16 Jun 2025 22:38:00 -0400
+Received: from mail-vs1-xe2f.google.com ([2607:f8b0:4864:20::e2f])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <alistair23@gmail.com>)
+ id 1uRMD1-0001HG-4W; Mon, 16 Jun 2025 22:38:00 -0400
+Received: by mail-vs1-xe2f.google.com with SMTP id
+ ada2fe7eead31-4e7f7d0f7baso1982287137.0; 
+ Mon, 16 Jun 2025 19:37:58 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1750127877; x=1750732677; darn=nongnu.org;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=O6URteAf+pRhF1OQuwj3gK8Bsv5VVcghBrlBh6BG360=;
+ b=ZcTV4B/x+BnOxqsaeWe7pANxq5+sdT+gz9Zhza5pmh7y+FXm1EopcUACpDBDy530gi
+ UHodrNw6SD2T/XDt3BY+X9w9ffb+QvhnuMEK1y8Kom/4V3VyrgmxcRFJp+VFg5urDLsX
+ 8lmuYobmF3Nqnc/NbfJnQ6bAJSXYdRoCnvIiS7btMRfse+rZEC1+HKK3q/Xc1BRfi+I1
+ c4C+nA/9/dDNbTNd1Yjbo4U0w1iMO41GrYLa3YizcKR7D/C1duk9QQ2bnzo6YbWJH6JL
+ vk+qGyIgGBC1aJ2r5NxLEbYJdIGWwGamw6Kgdjmgg7gOxpl+2zR1+WcvTqz5D1c7+rl1
+ p5Fw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1750127877; x=1750732677;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=O6URteAf+pRhF1OQuwj3gK8Bsv5VVcghBrlBh6BG360=;
+ b=uu9o9h3CnCpsu0Q3TfeVWsFmty949pZ3dS97z0JyCr+6WU+I2GamPjObzNhOYFrIZ2
+ DQ0RAODMQ2fxO40xpGBxxCoupx0PCcUaws8Sjz7dKTjdCJBBTf/LamY1f63iIaPFRhDH
+ 4VwvHNN2GVos28C8w2hSOivlNEIS34QXtwRlo/dqHaRz96Apyn7Zm/XDYYnaJZTBO958
+ QbOBPwJ5IysbwFbJ+aV/Yb8/m0tZInPRkl1u/2gs685W6mXpy6gKpJXy8xCpa+KwKCFz
+ Xl+5hh9FOLG6zry8a77euiCaPStZeDS8Ad1xarkhn75xm4+JIYhxbUyMKOsuBxpXOSOn
+ qywA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCW0AIcjouY0ed8gcmIN4LReibTQuVkXxjLwIhIXcUi8T3FiUmOd2RcaXnXrqhVba0wPy2smE3q3xFsFLQ==@nongnu.org,
+ AJvYcCXRGEt+Cf6jqJExdXiJ+3ovH2EiGHHxXMPt/ZFhoUay0xPpg8ktDo3mL9Z9449txuAAVmGzBzsBalD7@nongnu.org
+X-Gm-Message-State: AOJu0Yx1SnNRR+ga+OIV9JDGZaDaGuurKpOoevFOdqzUcPAwxIYK3yQ5
+ DGJUUqx+UZBaW4g7RENn930N54pOG79C7Zw7wnob9cGq82MxMHktTQyrN9t3XbGX21vxs2FtTiP
+ 36dGXz/bzLHwZceCWMJtq9VK3Hufe2/E=
+X-Gm-Gg: ASbGncvCZeHC6UWECzTlisn0M8DBT72Tta/UqI3nr6Uu+iqiC8AsV9GWxQYBCVYfUev
+ C3wX47ePXYfjD59vx/r1XFkaCM2bQkSVYP7NUqZNe9OHmUYqsjqZnhRXAjWNLGTNUcAtaiWBF2w
+ eT5J6X7v3PqtXwrbT9ljUBKUd9JTBD35HN2eagnUXyZpa65HNwIib4mE3eAVwe+8iVE65yDugVW
+ A==
+X-Google-Smtp-Source: AGHT+IESNDl3l5C1jpCQ1GzmEABrFaXWKjL3Omy5wBJi5BTtd5EBB1JdIU1gfTAhKNsg+XbNDPl8Keu6LFgG7NTCpDA=
+X-Received: by 2002:a05:6102:5a8f:b0:4e4:5a1f:1414 with SMTP id
+ ada2fe7eead31-4e977ce0a76mr476644137.12.1750127877179; Mon, 16 Jun 2025
+ 19:37:57 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 05/12] python: fix illegal escape sequences
-To: John Snow <jsnow@redhat.com>, qemu-devel@nongnu.org
-Cc: Joel Stanley <joel@jms.id.au>, Yi Liu <yi.l.liu@intel.com>,
- =?UTF-8?Q?Alex_Benn=C3=A9e?= <alex.bennee@linaro.org>,
- Helge Deller <deller@gmx.de>,
- Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
- Andrew Jeffery <andrew@codeconstruct.com.au>, Fabiano Rosas
- <farosas@suse.de>, Alexander Bulekov <alxndr@bu.edu>,
- Darren Kenny <darren.kenny@oracle.com>,
- Leif Lindholm <leif.lindholm@oss.qualcomm.com>,
- =?UTF-8?Q?C=C3=A9dric_Le_Goater?= <clg@kaod.org>,
- Ed Maste <emaste@freebsd.org>, Gerd Hoffmann <kraxel@redhat.com>,
- Warner Losh <imp@bsdimp.com>, Kevin Wolf <kwolf@redhat.com>,
- Tyrone Ting <kfting@nuvoton.com>, Eric Blake <eblake@redhat.com>,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Yoshinori Sato <ysato@users.sourceforge.jp>,
- Troy Lee <leetroy@gmail.com>, Halil Pasic <pasic@linux.ibm.com>,
- Michael Roth <michael.roth@amd.com>,
- Laurent Vivier <laurent@vivier.eu>, Ani Sinha <anisinha@redhat.com>,
- Weiwei Li <liwei1518@gmail.com>, Eric Farman <farman@linux.ibm.com>,
- Steven Lee <steven_lee@aspeedtech.com>,
- Brian Cain <brian.cain@oss.qualcomm.com>,
- Li-Wen Hsu <lwhsu@freebsd.org>, Jamin Lin <jamin_lin@aspeedtech.com>,
- qemu-s390x@nongnu.org,
- Vladimir Sementsov-Ogievskiy <vsementsov@yandex-team.ru>,
- qemu-block@nongnu.org, Bernhard Beschow <shentey@gmail.com>,
- =?UTF-8?Q?Cl=C3=A9ment_Mathieu--Drif?= <clement.mathieu--drif@eviden.com>,
- Maksim Davydov <davydov-max@yandex-team.ru>,
- Niek Linnenbank <nieklinnenbank@gmail.com>,
- =?UTF-8?Q?Herv=C3=A9_Poussineau?= <hpoussin@reactos.org>,
- Christian Borntraeger <borntraeger@linux.ibm.com>,
- Paul Durrant <paul@xen.org>,
- Manos Pitsidianakis <manos.pitsidianakis@linaro.org>,
- Jagannathan Raman <jag.raman@oracle.com>,
- Igor Mitsyanko <i.mitsyanko@gmail.com>, Max Filippov <jcmvbkbc@gmail.com>,
- Markus Armbruster <armbru@redhat.com>,
- Pierrick Bouvier <pierrick.bouvier@linaro.org>,
- "Michael S. Tsirkin" <mst@redhat.com>, Anton Johansson <anjo@rev.ng>,
- Peter Maydell <peter.maydell@linaro.org>,
- Cleber Rosa <crosa@redhat.com>, Eric Auger <eric.auger@redhat.com>,
- Yanan Wang <wangyanan55@huawei.com>, qemu-arm@nongnu.org,
- Hao Wu <wuhaotsh@google.com>, Mads Ynddal <mads@ynddal.dk>,
- Sriram Yagnaraman <sriram.yagnaraman@ericsson.com>,
- qemu-riscv@nongnu.org, Paolo Bonzini <pbonzini@redhat.com>,
- Jason Wang <jasowang@redhat.com>, Nicholas Piggin <npiggin@gmail.com>,
- Michael Rolnik <mrolnik@gmail.com>, Zhao Liu <zhao1.liu@intel.com>,
- Alessandro Di Federico <ale@rev.ng>, Thomas Huth <thuth@redhat.com>,
- Antony Pavlov <antonynpavlov@gmail.com>,
- Jiaxun Yang <jiaxun.yang@flygoat.com>, Hanna Reitz <hreitz@redhat.com>,
- Ilya Leoshkevich <iii@linux.ibm.com>,
- Marcelo Tosatti <mtosatti@redhat.com>,
- Nina Schoetterl-Glausch <nsg@linux.ibm.com>,
- Daniel Henrique Barboza <danielhb413@gmail.com>,
- Qiuhao Li <Qiuhao.Li@outlook.com>, Hyman Huang <yong.huang@smartx.com>,
- =?UTF-8?Q?Daniel_P=2E_Berrang=C3=A9?= <berrange@redhat.com>,
- Magnus Damm <magnus.damm@gmail.com>, qemu-rust@nongnu.org,
- Bandan Das <bsd@redhat.com>,
- Strahinja Jankovic <strahinja.p.jankovic@gmail.com>,
- Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
- =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@linaro.org>,
- kvm@vger.kernel.org, Fam Zheng <fam@euphon.net>,
- Jia Liu <proljc@gmail.com>,
- =?UTF-8?Q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>,
- Alistair Francis <alistair@alistair23.me>,
- Subbaraya Sundeep <sundeep.lkml@gmail.com>,
- Kyle Evans <kevans@freebsd.org>, Song Gao <gaosong@loongson.cn>,
- Alexandre Iooss <erdnaxe@crans.org>, Aurelien Jarno <aurelien@aurel32.net>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Peter Xu <peterx@redhat.com>, Stefan Hajnoczi <stefanha@redhat.com>,
- BALATON Zoltan <balaton@eik.bme.hu>,
- Elena Ufimtseva <elena.ufimtseva@oracle.com>,
- "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
- =?UTF-8?B?RnLDqWTDqXJpYyBCYXJyYXQ=?= <fbarrat@linux.ibm.com>,
- qemu-ppc@nongnu.org, Radoslaw Biernacki <rad@semihalf.com>,
- Beniamino Galvani <b.galvani@gmail.com>, David Hildenbrand
- <david@redhat.com>, Richard Henderson <richard.henderson@linaro.org>,
- David Woodhouse <dwmw2@infradead.org>, Eduardo Habkost
- <eduardo@habkost.net>, Ahmed Karaman <ahmedkhaledkaraman@gmail.com>,
- Huacai Chen <chenhuacai@kernel.org>, Mahmoud Mandour
- <ma.mandourr@gmail.com>, Harsh Prateek Bora <harshpb@linux.ibm.com>
-References: <20250612205451.1177751-1-jsnow@redhat.com>
- <20250612205451.1177751-6-jsnow@redhat.com>
-Content-Language: en-US
-From: Akihiko Odaki <odaki@rsg.ci.i.u-tokyo.ac.jp>
-In-Reply-To: <20250612205451.1177751-6-jsnow@redhat.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=49.212.243.89;
- envelope-from=odaki@rsg.ci.i.u-tokyo.ac.jp; helo=www3579.sakura.ne.jp
-X-Spam_score_int: -16
-X-Spam_score: -1.7
+References: <20250425121750.311-1-wangran@bosc.ac.cn>
+In-Reply-To: <20250425121750.311-1-wangran@bosc.ac.cn>
+From: Alistair Francis <alistair23@gmail.com>
+Date: Tue, 17 Jun 2025 12:37:31 +1000
+X-Gm-Features: AX0GCFvCHbC0xUhJxkzhnQRSPm26fw_7o17WTifseu708xYoNQAbN43WsruQzmg
+Message-ID: <CAKmqyKP9yaT_raamZEevP04QkjMyA3BkagbyDVFKPzm0_tgVEw@mail.gmail.com>
+Subject: Re: [PATCH v4 0/2] riscv: Add Kunminghu CPU and platform
+To: Ran Wang <wangran@bosc.ac.cn>
+Cc: 3543977024@qq.com, palmer@dabbelt.com, alistair.francis@wdc.com, 
+ liwei1518@gmail.com, dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com, 
+ qemu-riscv@nongnu.org, qemu-devel@nongnu.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2607:f8b0:4864:20::e2f;
+ envelope-from=alistair23@gmail.com; helo=mail-vs1-xe2f.google.com
+X-Spam_score_int: -17
+X-Spam_score: -1.8
 X-Spam_bar: -
-X-Spam_report: (-1.7 / 5.0 requ) BAYES_00=-1.9, DKIM_INVALID=0.1,
- DKIM_SIGNED=0.1, RCVD_IN_VALIDITY_CERTIFIED_BLOCKED=0.001,
- RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=no autolearn_force=no
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
-X-Mailman-Approved-At: Mon, 16 Jun 2025 09:16:02 -0400
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -150,14 +98,46 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-On 2025/06/13 5:54, John Snow wrote:
-> \{ is an illegal escape sequence, to get a literal backslash we need to
-> use \\.
-> 
-> This is being fixed because of an issue spotted when attempting to use
-> the pyupgrade script.
-> 
-> Signed-off-by: John Snow <jsnow@redhat.com>
+On Fri, Apr 25, 2025 at 10:18=E2=80=AFPM Ran Wang <wangran@bosc.ac.cn> wrot=
+e:
+>
+> This serial adds Xiangshan Kunminghu CPU and its FPGA prototype
+> platform, which include UART, CLINT, IMSIC, and APLIC
+> devices.
+>
+> More details can be found at
+> https://github.com/OpenXiangShan/XiangShan
+>
+> Patches based on alistair/riscv-to-apply.next
+>
+> Huang Borong (2):
+>   target/riscv: Add BOSC's Xiangshan Kunminghu CPU
+>   hw/riscv: Initial support for BOSC's Xiangshan Kunminghu FPGA
+>     prototype
 
-Reviewed-by: Akihiko Odaki <odaki@rsg.ci.i.u-tokyo.ac.jp>
+Thanks!
+
+Applied to riscv-to-apply.next
+
+Alistair
+
+>
+>  MAINTAINERS                                 |   7 +
+>  configs/devices/riscv64-softmmu/default.mak |   1 +
+>  docs/system/riscv/xiangshan-kunminghu.rst   |  39 ++++
+>  docs/system/target-riscv.rst                |   1 +
+>  hw/riscv/Kconfig                            |   9 +
+>  hw/riscv/meson.build                        |   1 +
+>  hw/riscv/xiangshan_kmh.c                    | 220 ++++++++++++++++++++
+>  include/hw/riscv/xiangshan_kmh.h            |  78 +++++++
+>  target/riscv/cpu-qom.h                      |   1 +
+>  target/riscv/cpu.c                          |  64 ++++++
+>  10 files changed, 421 insertions(+)
+>  create mode 100644 docs/system/riscv/xiangshan-kunminghu.rst
+>  create mode 100644 hw/riscv/xiangshan_kmh.c
+>  create mode 100644 include/hw/riscv/xiangshan_kmh.h
+>
+> --
+> 2.34.1
+>
 
