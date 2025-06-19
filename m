@@ -4,81 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4CD71C7115A
-	for <qemu-riscv@archiver.kernel.org>; Thu, 19 Jun 2025 11:50:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E0634C7115B
+	for <qemu-riscv@archiver.kernel.org>; Thu, 19 Jun 2025 13:56:19 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uSDmy-0008Vv-NH; Thu, 19 Jun 2025 07:50:40 -0400
+	id 1uSFkR-0004fv-1O; Thu, 19 Jun 2025 09:56:12 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <me@linux.beauty>)
- id 1uSDmv-0008Uc-Vj; Thu, 19 Jun 2025 07:50:37 -0400
-Received: from sender4-op-o15.zoho.com ([136.143.188.15])
+ (Exim 4.90_1) (envelope-from <roan.richmond@codethink.co.uk>)
+ id 1uSFkN-0004fc-Ay; Thu, 19 Jun 2025 09:56:07 -0400
+Received: from imap4.hz.codethink.co.uk ([188.40.203.114])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <me@linux.beauty>)
- id 1uSDmr-0005bk-HJ; Thu, 19 Jun 2025 07:50:37 -0400
-ARC-Seal: i=1; a=rsa-sha256; t=1750333664; cv=none; 
- d=zohomail.com; s=zohoarc; 
- b=h8mlfb8H1FHNhvyxO/OVm4PSqaXrVFtVRbrLJzMtZN0VPSsjNYxZkAGVziA0w5ilCYJMKP/+Lee0g+4Dy99rFM7dirITpNNxPRNqQ6dhYGvvPFQgCf89jY3diE2JdKdsyk3uUuwgEqEsrEhfgIDLq2JKp95MBH+uHnULiGozScg=
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com;
- s=zohoarc; t=1750333664;
- h=Content-Type:Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To;
- bh=gLDIUWyUND5lO0YnJQuBpvtjL0yTeCSTT0edWuoQoBQ=; 
- b=Pdf6zq7FmaLTMIJtgukgiknKOtpGOxdHkRBTiQFt66Kz6CLMwcGT/utnHJT2E6WIV922StTfjpoQjciFN7oqeUz0IwX3LfENlotmJUPoJazYVffLotEXtT5PzhhsDH1UJd9z1v2G6tIYyTYd+T8EOeGQdKAOJBTe9t2Y22/1LRY=
-ARC-Authentication-Results: i=1; mx.zohomail.com;
- dkim=pass  header.i=linux.beauty;
- spf=pass  smtp.mailfrom=me@linux.beauty;
- dmarc=pass header.from=<me@linux.beauty>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1750333664; 
- s=zmail; d=linux.beauty; i=me@linux.beauty;
- h=Date:Date:From:From:To:To:Cc:Cc:Message-ID:In-Reply-To:References:Subject:Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:Reply-To;
- bh=gLDIUWyUND5lO0YnJQuBpvtjL0yTeCSTT0edWuoQoBQ=;
- b=DNMEOnc4DN6ig1tZruvrwKTIu1nkeuSogAWLKxB50cm7Y4MgIF6EMSsgmRE7zsN5
- /olHGh1e/zBqazECw9D8qBfTXHCh770sOzv4C068LAeqXDlabnPc+L7GtI7RKWI7Z/T
- /tfIhkveLKjkt4jG8kMQlv4s4ycwyFz2MFYU4pb8=
-Received: from mail.zoho.com by mx.zohomail.com
- with SMTP id 175033366310758.05017782068148;
- Thu, 19 Jun 2025 04:47:43 -0700 (PDT)
-Date: Thu, 19 Jun 2025 19:47:43 +0800
-From: Li Chen <me@linux.beauty>
-To: "Peter Maydell" <peter.maydell@linaro.org>,
- "Shannon Zhao" <shannon.zhaosl@gmail.com>,
- "Michael S. Tsirkin" <mst@redhat.com>,
- "Igor Mammedov" <imammedo@redhat.com>, "Ani Sinha" <anisinha@redhat.com>,
- "Eduardo Habkost" <eduardo@habkost.net>,
- "Marcel Apfelbaum" <marcel.apfelbaum@gmail.com>,
- =?UTF-8?Q?=22Philippe_Mathieu-Daud=C3=A9=22?= <philmd@linaro.org>,
- "Yanan Wang" <wangyanan55@huawei.com>,
- "Zhao Liu" <zhao1.liu@intel.com>, "Song Gao" <gaosong@loongson.cn>,
- "Jiaxun Yang" <jiaxun.yang@flygoat.com>,
- "Sunil V L" <sunilvl@ventanamicro.com>,
- "Palmer Dabbelt" <palmer@dabbelt.com>,
- "Alistair Francis" <alistair.francis@wdc.com>,
- "Weiwei Li" <liwei1518@gmail.com>, "qemu-arm" <qemu-arm@nongnu.org>,
- "qemu-devel" <qemu-devel@nongnu.org>, "qemu-riscv" <qemu-riscv@nongnu.org>
-Cc: "Li Chen" <chenl311@chinatelecom.cn>
-Message-ID: <19788042767.f03f56de434541.2975113673579743624@linux.beauty>
-In-Reply-To: <20250528105404.457729-1-me@linux.beauty>
-References: <20250528105404.457729-1-me@linux.beauty>
-Subject: Re: [PATCH REPOST v4 0/4] acpi: Add machine option to disable SPCR
- table
+ (Exim 4.90_1) (envelope-from <roan.richmond@codethink.co.uk>)
+ id 1uSFkI-0004Ty-2R; Thu, 19 Jun 2025 09:56:06 -0400
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=codethink.co.uk; s=imap4-20230908; h=Sender:Content-Transfer-Encoding:
+ MIME-Version:Message-ID:Date:Subject:Cc:To:From:Reply-To:Content-Type:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Id:
+ List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=Jutczu6K8Py3B8oNLBGk8xVbzF/SrvYto3P/Uulchhk=; b=uoZ41bkVgxREJAuFjDShFnfdoo
+ AGKeD0h1RRDINz2iAa6dePpd12TnCsUygZBLUdduQgpcWDJ8zM570m9Jez6LmzTz7wIqeCfavkK6J
+ 6sDgGh0zuyg0p5YYzUTGIfNkzIN/eQSACQUk/Kw4Y5er9h7mXoiDFzzTy+lL4EUeNO+xhlsctcdy7
+ Coj842piwkNrBEVu/EJ4zn8/ooQuzB2tvjhlf5ufQsLP3dut/o5mOgXpyj2bpdqMhs5xPkHRjGfjg
+ g1QRKGOIIRTdwe0ZAQL2cvSbQLIu4H7T3vcjzdSm5ndNI1FpOWtBeVlOsaox68Aly8PQs6V2Rmfn7
+ Gl1PxsgQ==;
+Received: from [167.98.27.226] (helo=codethink.office.codethink.co.uk)
+ by imap4.hz.codethink.co.uk with esmtpsa  (Exim 4.94.2 #2 (Debian))
+ id 1uSFk9-000TSv-Oo; Thu, 19 Jun 2025 14:55:55 +0100
+From: Roan Richmond <roan.richmond@codethink.co.uk>
+To: qemu-riscv@nongnu.org
+Cc: palmer@dabbelt.com, alistair.francis@wdc.com, liwei1518@gmail.com,
+ dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com,
+ qemu-devel@nongnu.org, alistair23@gmail.com,
+ Roan Richmond <roan.richmond@codethink.co.uk>
+Subject: [PATCH v3] Add RISCV ZALASR extension
+Date: Thu, 19 Jun 2025 14:55:31 +0100
+Message-ID: <20250619135545.61956-1-roan.richmond@codethink.co.uk>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Importance: Medium
-User-Agent: Zoho Mail
-X-Mailer: Zoho Mail
-Received-SPF: pass client-ip=136.143.188.15; envelope-from=me@linux.beauty;
- helo=sender4-op-o15.zoho.com
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=188.40.203.114;
+ envelope-from=roan.richmond@codethink.co.uk; helo=imap4.hz.codethink.co.uk
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H5=0.001, RCVD_IN_MSPIKE_WL=0.001,
  RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001, RCVD_IN_VALIDITY_SAFE_BLOCKED=0.001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_HELO_PASS=-0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -94,70 +69,198 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Gentle ping incase of forgotten.
+This is based on version v0.8.3 of the ZALASR specification [1].
+The specification is listed as in Frozen state [2].
 
- ---- On Wed, 28 May 2025 18:53:34 +0800  Li Chen <me@linux.beauty> wrote -=
---=20
- > From: Li Chen <chenl311@chinatelecom.cn>
- >=20
- > (REPOST because the previous post failed to send to qemu-devel/qemu-risc=
-v/qemu-arm,
- >  see https://lore.kernel.org/qemu-devel/1971648603b.dce1f5d22901195.6702=
-025346547333607@linux.beauty/T/#u)
- >=20
- > This series introduces a new machine option, spcr=3Don|off, allowing use=
-rs
- > to disable the ACPI SPCR (Serial Port Console Redirection) table.
- > By default, SPCR is enabled. Disabling it can help ensure that the guest=
-'s
- > console behavior is determined solely by kernel command-line parameters
- > on arch like arm64, avoiding unintended serial console configurations im=
-posed
- > by firmware.
- >=20
- > Also add tests on AArch64 and RISC-V virt machines using TCG and UEFI bo=
-ot.
- >=20
- > Changes since v3:
- > - Add Reviewed-by from Sunil V L <sunilvl@ventanamicro.com> for patch 1,=
- 3, and 4.
- > - rename enable_spcr to acpi_spcr_enabled as suggested by Philippe Mathi=
-eu-Daud=C3=A9.
- > Changes since v2:
- > - Omit UART device from DSDT and SPCR construction if no serial device i=
-s present,
- > as suggested by Philippe Mathieu-Daud=C3=A9.
- > - Add Reviewed-by from Gavin Shan <gshan@redhat.com> for the first patch=
- and fix style issue.
- >=20
- > Changes since v1:
- > - Add bios-tables-test for RISC-V and ARM as suggested by
- > - Add Acked-by from Michael S. Tsirkin for the first patch
- > - Add Reviewed-by from Bibo Mao for the first patch
- >=20
- > Li Chen (4):
- >   acpi: Add machine option to disable SPCR table
- >   tests/qtest/bios-tables-test: Add test for disabling SPCR on AArch64
- >   tests/qtest/bios-tables-test: Add test for disabling SPCR on RISC-V
- >   acpi/virt: suppress UART device & SPCR when guest has no serial
- >     hardware
- >=20
- >  hw/arm/virt-acpi-build.c       | 18 ++++++++-----
- >  hw/core/machine.c              | 22 ++++++++++++++++
- >  hw/loongarch/virt-acpi-build.c |  4 ++-
- >  hw/riscv/virt-acpi-build.c     | 10 ++++++--
- >  include/hw/boards.h            |  1 +
- >  include/system/system.h        |  2 ++
- >  qemu-options.hx                |  5 ++++
- >  system/vl.c                    |  5 ++++
- >  tests/qtest/bios-tables-test.c | 47 ++++++++++++++++++++++++++++++++--
- >  9 files changed, 103 insertions(+), 11 deletions(-)
- >=20
- > --=20
- > 2.49.0
- >=20
- >=20
+[1]: https://github.com/riscv/riscv-zalasr/tree/v0.8.3
+[2]: https://lf-riscv.atlassian.net/wiki/spaces/HOME/pages/16154882/All+RISC-V+Specifications+Under+Active+Development
 
-Regards,
-Li
+Signed-off-by: Roan Richmond <roan.richmond@codethink.co.uk>
+---
+
+Ping! resending this as no movement on previous send.
+
+V3:
+  - rebased patch onto master branch
+  - added check for aq on Load Acquire, as pointed out by Alistair Francis
+  - added check for rl on Store Release, as mentioned by Alistair Francis
+
+ target/riscv/cpu.c                           |   1 +
+ target/riscv/insn32.decode                   |  10 ++
+ target/riscv/insn_trans/trans_rvzalasr.c.inc | 120 +++++++++++++++++++
+ target/riscv/translate.c                     |   1 +
+ 4 files changed, 132 insertions(+)
+ create mode 100644 target/riscv/insn_trans/trans_rvzalasr.c.inc
+
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index 629ac37501..b52bbf0936 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -128,6 +128,7 @@ const RISCVIsaExtData isa_edata_arr[] = {
+     ISA_EXT_DATA_ENTRY(zabha, PRIV_VERSION_1_13_0, ext_zabha),
+     ISA_EXT_DATA_ENTRY(zacas, PRIV_VERSION_1_12_0, ext_zacas),
+     ISA_EXT_DATA_ENTRY(zama16b, PRIV_VERSION_1_13_0, ext_zama16b),
++    ISA_EXT_DATA_ENTRY(zalasr, PRIV_VERSION_1_12_0, ext_zalasr),
+     ISA_EXT_DATA_ENTRY(zalrsc, PRIV_VERSION_1_12_0, ext_zalrsc),
+     ISA_EXT_DATA_ENTRY(zawrs, PRIV_VERSION_1_12_0, ext_zawrs),
+     ISA_EXT_DATA_ENTRY(zfa, PRIV_VERSION_1_12_0, ext_zfa),
+diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
+index cd23b1f3a9..c848c0c1c5 100644
+--- a/target/riscv/insn32.decode
++++ b/target/riscv/insn32.decode
+@@ -1066,3 +1066,13 @@ amominu_h  11000 . . ..... ..... 001 ..... 0101111 @atom_st
+ amomaxu_h  11100 . . ..... ..... 001 ..... 0101111 @atom_st
+ amocas_b    00101 . . ..... ..... 000 ..... 0101111 @atom_st
+ amocas_h    00101 . . ..... ..... 001 ..... 0101111 @atom_st
++
++# *** Zalasr Standard Extension ***
++lb_aqrl  00110 . . ..... ..... 000 ..... 0101111 @atom_st
++lh_aqrl  00110 . . ..... ..... 001 ..... 0101111 @atom_st
++lw_aqrl  00110 . . ..... ..... 010 ..... 0101111 @atom_st
++ld_aqrl  00110 . . ..... ..... 011 ..... 0101111 @atom_st
++sb_aqrl  00111 . . ..... ..... 000 ..... 0101111 @atom_st
++sh_aqrl  00111 . . ..... ..... 001 ..... 0101111 @atom_st
++sw_aqrl  00111 . . ..... ..... 010 ..... 0101111 @atom_st
++sd_aqrl  00111 . . ..... ..... 011 ..... 0101111 @atom_st
+diff --git a/target/riscv/insn_trans/trans_rvzalasr.c.inc b/target/riscv/insn_trans/trans_rvzalasr.c.inc
+new file mode 100644
+index 0000000000..8761508de3
+--- /dev/null
++++ b/target/riscv/insn_trans/trans_rvzalasr.c.inc
+@@ -0,0 +1,120 @@
++/*
++ * RISC-V translation routines for the ZALASR (Load-Aquire and Store-Release)
++ * Extension.
++ *
++ * Copyright (c) 2025 Roan Richmond, roan.richmond@codethink.co.uk
++ *
++ * This program is free software; you can redistribute it and/or modify it
++ * under the terms and conditions of the GNU General Public License,
++ * version 2 or later, as published by the Free Software Foundation.
++ *
++ * This program is distributed in the hope it will be useful, but WITHOUT
++ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
++ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
++ * more details.
++ *
++ * You should have received a copy of the GNU General Public License along with
++ * this program.  If not, see <http://www.gnu.org/licenses/>.
++ */
++
++#define REQUIRE_ZALASR(ctx) do {     \
++    if (!ctx->cfg_ptr->ext_zalasr) { \
++        return false;                \
++    }                                \
++} while (0)
++
++static bool gen_load_acquire(DisasContext *ctx, arg_lb_aqrl *a, MemOp memop)
++{
++    decode_save_opc(ctx, 0);
++
++    TCGv addr = get_address(ctx, a->rs1, 0);
++    TCGv dest = get_gpr(ctx, a->rd, EXT_NONE);
++    TCGBar bar = (a->rl) ? TCG_BAR_STRL : 0;
++
++    /* Check that AQ is set, as this is mandatory */
++    if (!a->aq) {
++        return false;    
++    }
++
++    memop |= (ctx->cfg_ptr->ext_zama16b) ? MO_ATOM_WITHIN16 : 0;
++
++    tcg_gen_qemu_ld_tl(dest, addr, ctx->mem_idx, memop);
++    gen_set_gpr(ctx, a->rd, dest);
++
++    /* Add a memory barrier implied by AQ (mandatory) and RL (optional) */
++    tcg_gen_mb(TCG_MO_ALL | TCG_BAR_LDAQ | bar);
++
++    return true;
++}
++
++static bool trans_lb_aqrl(DisasContext *ctx, arg_lb_aqrl *a)
++{
++    REQUIRE_ZALASR(ctx);
++    return gen_load_acquire(ctx, a, (MO_ALIGN | MO_SB));
++}
++
++static bool trans_lh_aqrl(DisasContext *ctx, arg_lh_aqrl *a)
++{
++    REQUIRE_ZALASR(ctx);
++    return gen_load_acquire(ctx, a, (MO_ALIGN | MO_TESW));
++}
++
++static bool trans_lw_aqrl(DisasContext *ctx, arg_lw_aqrl *a)
++{
++    REQUIRE_ZALASR(ctx);
++    return gen_load_acquire(ctx, a, (MO_ALIGN | MO_TESL));
++}
++
++static bool trans_ld_aqrl(DisasContext *ctx, arg_ld_aqrl *a)
++{
++    REQUIRE_64BIT(ctx);
++    REQUIRE_ZALASR(ctx);
++    return gen_load_acquire(ctx, a, (MO_ALIGN | MO_TEUQ));
++}
++
++static bool gen_store_release(DisasContext *ctx, arg_sb_aqrl *a, MemOp memop)
++{
++    decode_save_opc(ctx, 0);
++
++    TCGv addr = get_address(ctx, a->rs1, 0);
++    TCGv data = get_gpr(ctx, a->rs2, EXT_NONE);
++    TCGBar bar = (a->aq) ? TCG_BAR_LDAQ : 0;
++
++    /* Check that RL is set, as this is mandatory */
++    if (!a->rl) {
++        return false;    
++    }
++
++    memop |= (ctx->cfg_ptr->ext_zama16b) ? MO_ATOM_WITHIN16 : 0;
++
++    /* Add a memory barrier implied by RL (mandatory) and AQ (optional) */
++    tcg_gen_mb(TCG_MO_ALL | TCG_BAR_STRL | bar);
++
++    tcg_gen_qemu_st_tl(data, addr, ctx->mem_idx, memop);
++    return true;
++}
++
++static bool trans_sb_aqrl(DisasContext *ctx, arg_sb_aqrl *a)
++{
++    REQUIRE_ZALASR(ctx);
++    return gen_store_release(ctx, a, (MO_ALIGN | MO_SB));
++}
++
++static bool trans_sh_aqrl(DisasContext *ctx, arg_sh_aqrl *a)
++{
++    REQUIRE_ZALASR(ctx);
++    return gen_store_release(ctx, a, (MO_ALIGN | MO_TESW));
++}
++
++static bool trans_sw_aqrl(DisasContext *ctx, arg_sw_aqrl *a)
++{
++    REQUIRE_ZALASR(ctx);
++    return gen_store_release(ctx, a, (MO_ALIGN | MO_TESL));
++}
++
++static bool trans_sd_aqrl(DisasContext *ctx, arg_sd_aqrl *a)
++{
++    REQUIRE_64BIT(ctx);
++    REQUIRE_ZALASR(ctx);
++    return gen_store_release(ctx, a, (MO_ALIGN | MO_TEUQ));
++}
+diff --git a/target/riscv/translate.c b/target/riscv/translate.c
+index d7a6de02df..4cd2d68e46 100644
+--- a/target/riscv/translate.c
++++ b/target/riscv/translate.c
+@@ -1183,6 +1183,7 @@ static uint32_t opcode_at(DisasContextBase *dcbase, target_ulong pc)
+ #include "insn_trans/trans_rvzicond.c.inc"
+ #include "insn_trans/trans_rvzacas.c.inc"
+ #include "insn_trans/trans_rvzabha.c.inc"
++#include "insn_trans/trans_rvzalasr.c.inc"
+ #include "insn_trans/trans_rvzawrs.c.inc"
+ #include "insn_trans/trans_rvzicbo.c.inc"
+ #include "insn_trans/trans_rvzimop.c.inc"
+-- 
+2.43.0
+
 
