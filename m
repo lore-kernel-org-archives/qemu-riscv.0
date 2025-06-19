@@ -4,57 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 57D4BC7115E
-	for <qemu-riscv@archiver.kernel.org>; Thu, 19 Jun 2025 07:57:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4CD71C7115A
+	for <qemu-riscv@archiver.kernel.org>; Thu, 19 Jun 2025 11:50:52 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uSA91-0006CH-Nu; Thu, 19 Jun 2025 03:57:11 -0400
+	id 1uSDmy-0008Vv-NH; Thu, 19 Jun 2025 07:50:40 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <liu.xuemei1@zte.com.cn>)
- id 1uSA8y-0006BG-O4; Thu, 19 Jun 2025 03:57:09 -0400
-Received: from mxhk.zte.com.cn ([160.30.148.35])
+ (Exim 4.90_1) (envelope-from <me@linux.beauty>)
+ id 1uSDmv-0008Uc-Vj; Thu, 19 Jun 2025 07:50:37 -0400
+Received: from sender4-op-o15.zoho.com ([136.143.188.15])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <liu.xuemei1@zte.com.cn>)
- id 1uSA8v-00087e-52; Thu, 19 Jun 2025 03:57:08 -0400
-Received: from mse-fl2.zte.com.cn (unknown [10.5.228.133])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by mxhk.zte.com.cn (FangMail) with ESMTPS id 4bNCcG37k0z8R039;
- Thu, 19 Jun 2025 15:56:46 +0800 (CST)
-Received: from xaxapp01.zte.com.cn ([10.88.99.176])
- by mse-fl2.zte.com.cn with SMTP id 55J7uNBR004225;
- Thu, 19 Jun 2025 15:56:24 +0800 (+08)
- (envelope-from liu.xuemei1@zte.com.cn)
-Received: from mapi (xaxapp01[null]) by mapi (Zmail) with MAPI id mid32;
- Thu, 19 Jun 2025 15:56:26 +0800 (CST)
-Date: Thu, 19 Jun 2025 15:56:26 +0800 (CST)
-X-Zmail-TransId: 2af96853c2aa1d7-03030
-X-Mailer: Zmail v1.0
-Message-ID: <202506191556260735QxWC8sxRwFURYEvlD24y@zte.com.cn>
-Mime-Version: 1.0
-From: <liu.xuemei1@zte.com.cn>
-To: <pbonzini@redhat.com>, <palmer@dabbelt.com>, <alistair.francis@wdc.com>,
- <liwei1518@gmail.com>, <dbarboza@ventanamicro.com>,
- <zhiwei_liu@linux.alibaba.com>, <sunilvl@ventanamicro.com>,
- <bjorn@rivosinc.com>
-Cc: <qemu-riscv@nongnu.org>, <qemu-devel@nongnu.org>
-Subject: =?UTF-8?B?W1BBVENIXSBody9yaXNjdi92aXJ0OiBBZGQgYWNwaSBnZWQgYW5kIHBvd2VyZG93biBzdXBwb3J0?=
-Content-Type: text/plain;
-	charset="UTF-8"
-X-MAIL: mse-fl2.zte.com.cn 55J7uNBR004225
-X-Fangmail-Anti-Spam-Filtered: true
-X-Fangmail-MID-QID: 6853C2BE.001/4bNCcG37k0z8R039
-Received-SPF: pass client-ip=160.30.148.35;
- envelope-from=liu.xuemei1@zte.com.cn; helo=mxhk.zte.com.cn
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, CTE_8BIT_MISMATCH=0.001,
- RCVD_IN_MSPIKE_H2=0.001, RCVD_IN_VALIDITY_CERTIFIED_BLOCKED=0.001,
- RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- UNPARSEABLE_RELAY=0.001 autolearn=ham autolearn_force=no
+ (Exim 4.90_1) (envelope-from <me@linux.beauty>)
+ id 1uSDmr-0005bk-HJ; Thu, 19 Jun 2025 07:50:37 -0400
+ARC-Seal: i=1; a=rsa-sha256; t=1750333664; cv=none; 
+ d=zohomail.com; s=zohoarc; 
+ b=h8mlfb8H1FHNhvyxO/OVm4PSqaXrVFtVRbrLJzMtZN0VPSsjNYxZkAGVziA0w5ilCYJMKP/+Lee0g+4Dy99rFM7dirITpNNxPRNqQ6dhYGvvPFQgCf89jY3diE2JdKdsyk3uUuwgEqEsrEhfgIDLq2JKp95MBH+uHnULiGozScg=
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com;
+ s=zohoarc; t=1750333664;
+ h=Content-Type:Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:Subject:To:To:Message-Id:Reply-To;
+ bh=gLDIUWyUND5lO0YnJQuBpvtjL0yTeCSTT0edWuoQoBQ=; 
+ b=Pdf6zq7FmaLTMIJtgukgiknKOtpGOxdHkRBTiQFt66Kz6CLMwcGT/utnHJT2E6WIV922StTfjpoQjciFN7oqeUz0IwX3LfENlotmJUPoJazYVffLotEXtT5PzhhsDH1UJd9z1v2G6tIYyTYd+T8EOeGQdKAOJBTe9t2Y22/1LRY=
+ARC-Authentication-Results: i=1; mx.zohomail.com;
+ dkim=pass  header.i=linux.beauty;
+ spf=pass  smtp.mailfrom=me@linux.beauty;
+ dmarc=pass header.from=<me@linux.beauty>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1750333664; 
+ s=zmail; d=linux.beauty; i=me@linux.beauty;
+ h=Date:Date:From:From:To:To:Cc:Cc:Message-ID:In-Reply-To:References:Subject:Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:Reply-To;
+ bh=gLDIUWyUND5lO0YnJQuBpvtjL0yTeCSTT0edWuoQoBQ=;
+ b=DNMEOnc4DN6ig1tZruvrwKTIu1nkeuSogAWLKxB50cm7Y4MgIF6EMSsgmRE7zsN5
+ /olHGh1e/zBqazECw9D8qBfTXHCh770sOzv4C068LAeqXDlabnPc+L7GtI7RKWI7Z/T
+ /tfIhkveLKjkt4jG8kMQlv4s4ycwyFz2MFYU4pb8=
+Received: from mail.zoho.com by mx.zohomail.com
+ with SMTP id 175033366310758.05017782068148;
+ Thu, 19 Jun 2025 04:47:43 -0700 (PDT)
+Date: Thu, 19 Jun 2025 19:47:43 +0800
+From: Li Chen <me@linux.beauty>
+To: "Peter Maydell" <peter.maydell@linaro.org>,
+ "Shannon Zhao" <shannon.zhaosl@gmail.com>,
+ "Michael S. Tsirkin" <mst@redhat.com>,
+ "Igor Mammedov" <imammedo@redhat.com>, "Ani Sinha" <anisinha@redhat.com>,
+ "Eduardo Habkost" <eduardo@habkost.net>,
+ "Marcel Apfelbaum" <marcel.apfelbaum@gmail.com>,
+ =?UTF-8?Q?=22Philippe_Mathieu-Daud=C3=A9=22?= <philmd@linaro.org>,
+ "Yanan Wang" <wangyanan55@huawei.com>,
+ "Zhao Liu" <zhao1.liu@intel.com>, "Song Gao" <gaosong@loongson.cn>,
+ "Jiaxun Yang" <jiaxun.yang@flygoat.com>,
+ "Sunil V L" <sunilvl@ventanamicro.com>,
+ "Palmer Dabbelt" <palmer@dabbelt.com>,
+ "Alistair Francis" <alistair.francis@wdc.com>,
+ "Weiwei Li" <liwei1518@gmail.com>, "qemu-arm" <qemu-arm@nongnu.org>,
+ "qemu-devel" <qemu-devel@nongnu.org>, "qemu-riscv" <qemu-riscv@nongnu.org>
+Cc: "Li Chen" <chenl311@chinatelecom.cn>
+Message-ID: <19788042767.f03f56de434541.2975113673579743624@linux.beauty>
+In-Reply-To: <20250528105404.457729-1-me@linux.beauty>
+References: <20250528105404.457729-1-me@linux.beauty>
+Subject: Re: [PATCH REPOST v4 0/4] acpi: Add machine option to disable SPCR
+ table
+MIME-Version: 1.0
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Importance: Medium
+User-Agent: Zoho Mail
+X-Mailer: Zoho Mail
+Received-SPF: pass client-ip=136.143.188.15; envelope-from=me@linux.beauty;
+ helo=sender4-op-o15.zoho.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H5=0.001, RCVD_IN_MSPIKE_WL=0.001,
+ RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001, RCVD_IN_VALIDITY_SAFE_BLOCKED=0.001,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -70,180 +94,70 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-From: Xuemei Liu <liu.xuemei1@zte.com.cn>
+Gentle ping incase of forgotten.
 
-This adds powerdown support by implementing the ACPI GED.
+ ---- On Wed, 28 May 2025 18:53:34 +0800  Li Chen <me@linux.beauty> wrote -=
+--=20
+ > From: Li Chen <chenl311@chinatelecom.cn>
+ >=20
+ > (REPOST because the previous post failed to send to qemu-devel/qemu-risc=
+v/qemu-arm,
+ >  see https://lore.kernel.org/qemu-devel/1971648603b.dce1f5d22901195.6702=
+025346547333607@linux.beauty/T/#u)
+ >=20
+ > This series introduces a new machine option, spcr=3Don|off, allowing use=
+rs
+ > to disable the ACPI SPCR (Serial Port Console Redirection) table.
+ > By default, SPCR is enabled. Disabling it can help ensure that the guest=
+'s
+ > console behavior is determined solely by kernel command-line parameters
+ > on arch like arm64, avoiding unintended serial console configurations im=
+posed
+ > by firmware.
+ >=20
+ > Also add tests on AArch64 and RISC-V virt machines using TCG and UEFI bo=
+ot.
+ >=20
+ > Changes since v3:
+ > - Add Reviewed-by from Sunil V L <sunilvl@ventanamicro.com> for patch 1,=
+ 3, and 4.
+ > - rename enable_spcr to acpi_spcr_enabled as suggested by Philippe Mathi=
+eu-Daud=C3=A9.
+ > Changes since v2:
+ > - Omit UART device from DSDT and SPCR construction if no serial device i=
+s present,
+ > as suggested by Philippe Mathieu-Daud=C3=A9.
+ > - Add Reviewed-by from Gavin Shan <gshan@redhat.com> for the first patch=
+ and fix style issue.
+ >=20
+ > Changes since v1:
+ > - Add bios-tables-test for RISC-V and ARM as suggested by
+ > - Add Acked-by from Michael S. Tsirkin for the first patch
+ > - Add Reviewed-by from Bibo Mao for the first patch
+ >=20
+ > Li Chen (4):
+ >   acpi: Add machine option to disable SPCR table
+ >   tests/qtest/bios-tables-test: Add test for disabling SPCR on AArch64
+ >   tests/qtest/bios-tables-test: Add test for disabling SPCR on RISC-V
+ >   acpi/virt: suppress UART device & SPCR when guest has no serial
+ >     hardware
+ >=20
+ >  hw/arm/virt-acpi-build.c       | 18 ++++++++-----
+ >  hw/core/machine.c              | 22 ++++++++++++++++
+ >  hw/loongarch/virt-acpi-build.c |  4 ++-
+ >  hw/riscv/virt-acpi-build.c     | 10 ++++++--
+ >  include/hw/boards.h            |  1 +
+ >  include/system/system.h        |  2 ++
+ >  qemu-options.hx                |  5 ++++
+ >  system/vl.c                    |  5 ++++
+ >  tests/qtest/bios-tables-test.c | 47 ++++++++++++++++++++++++++++++++--
+ >  9 files changed, 103 insertions(+), 11 deletions(-)
+ >=20
+ > --=20
+ > 2.49.0
+ >=20
+ >=20
 
-Signed-off-by: Xuemei Liu <liu.xuemei1@zte.com.cn>
-Co-authored-by: Björn Töpel <bjorn@rivosinc.com>
----
- hw/riscv/Kconfig           |  1 +
- hw/riscv/virt-acpi-build.c | 12 ++++++++++++
- hw/riscv/virt.c            | 32 ++++++++++++++++++++++++++++++++
- include/hw/riscv/virt.h    |  4 ++++
- 4 files changed, 49 insertions(+)
-
-diff --git a/hw/riscv/Kconfig b/hw/riscv/Kconfig
-index e6a0ac1fa1..16837e0e8f 100644
---- a/hw/riscv/Kconfig
-+++ b/hw/riscv/Kconfig
-@@ -68,6 +68,7 @@ config RISCV_VIRT
-     select PLATFORM_BUS
-     select ACPI
-     select ACPI_PCI
-+    select ACPI_HW_REDUCED
-
- config SHAKTI_C
-     bool
-diff --git a/hw/riscv/virt-acpi-build.c b/hw/riscv/virt-acpi-build.c
-index 8b5683dbde..89365c40b4 100644
---- a/hw/riscv/virt-acpi-build.c
-+++ b/hw/riscv/virt-acpi-build.c
-@@ -29,6 +29,7 @@
- #include "hw/acpi/aml-build.h"
- #include "hw/acpi/pci.h"
- #include "hw/acpi/utils.h"
-+#include "hw/acpi/generic_event_device.h"
- #include "hw/intc/riscv_aclint.h"
- #include "hw/nvram/fw_cfg_acpi.h"
- #include "hw/pci-host/gpex.h"
-@@ -224,6 +225,16 @@ static void acpi_dsdt_add_iommu_sys(Aml *scope, const MemMapEntry *iommu_memmap,
-     aml_append(scope, dev);
- }
-
-+static void acpi_dsdt_add_ged(Aml *scope, RISCVVirtState *s)
-+{
-+    build_ged_aml(scope, "\\_SB."GED_DEVICE,
-+                  HOTPLUG_HANDLER(s->acpi_ged),
-+                  ACPI_GED_IRQ, AML_SYSTEM_MEMORY,
-+                  s->memmap[VIRT_ACPI_GED].base);
-+
-+    acpi_dsdt_add_power_button(scope);
-+}
-+
- /*
-  * Serial Port Console Redirection Table (SPCR)
-  * Rev: 1.10
-@@ -497,6 +508,7 @@ static void build_dsdt(GArray *table_data,
-                              VIRTIO_COUNT);
-         acpi_dsdt_add_gpex_host(scope, PCIE_IRQ + VIRT_IRQCHIP_NUM_SOURCES * 2);
-     }
-+    acpi_dsdt_add_ged(scope, s);
-
-     aml_append(dsdt, scope);
-
-diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-index cf280a92e5..aaa33b9740 100644
---- a/hw/riscv/virt.c
-+++ b/hw/riscv/virt.c
-@@ -51,10 +51,12 @@
- #include "system/kvm.h"
- #include "system/tpm.h"
- #include "system/qtest.h"
-+#include "system/runstate.h"
- #include "hw/pci/pci.h"
- #include "hw/pci-host/gpex.h"
- #include "hw/display/ramfb.h"
- #include "hw/acpi/aml-build.h"
-+#include "hw/acpi/generic_event_device.h"
- #include "qapi/qapi-visit-common.h"
- #include "hw/virtio/virtio-iommu.h"
- #include "hw/uefi/var-service-api.h"
-@@ -95,6 +97,7 @@ static const MemMapEntry virt_memmap[] = {
-     [VIRT_UART0] =        { 0x10000000,         0x100 },
-     [VIRT_VIRTIO] =       { 0x10001000,        0x1000 },
-     [VIRT_FW_CFG] =       { 0x10100000,          0x18 },
-+    [VIRT_ACPI_GED] =     { 0x10200000, ACPI_GED_EVT_SEL_LEN },
-     [VIRT_FLASH] =        { 0x20000000,     0x4000000 },
-     [VIRT_IMSIC_M] =      { 0x24000000, VIRT_IMSIC_MAX_SIZE },
-     [VIRT_IMSIC_S] =      { 0x28000000, VIRT_IMSIC_MAX_SIZE },
-@@ -1272,6 +1275,21 @@ static inline DeviceState *gpex_pcie_init(MemoryRegion *sys_mem,
-     return dev;
- }
-
-+static DeviceState *create_acpi_ged(RISCVVirtState *s, DeviceState *irqchip)
-+{
-+    DeviceState *dev;
-+    uint32_t event = ACPI_GED_PWR_DOWN_EVT;
-+
-+    dev = qdev_new(TYPE_ACPI_GED);
-+    qdev_prop_set_uint32(dev, "ged-event", event);
-+    sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
-+
-+    sysbus_mmio_map(SYS_BUS_DEVICE(dev), 0, s->memmap[VIRT_ACPI_GED].base);
-+    sysbus_connect_irq(SYS_BUS_DEVICE(dev), 0, qdev_get_gpio_in(irqchip, ACPI_GED_IRQ));
-+
-+    return dev;
-+}
-+
- static FWCfgState *create_fw_cfg(const MachineState *ms, hwaddr base)
- {
-     FWCfgState *fw_cfg;
-@@ -1430,6 +1448,14 @@ static void virt_build_smbios(RISCVVirtState *s)
-     }
- }
-
-+static void virt_powerdown_req(Notifier *notifier, void *opaque)
-+{
-+    RISCVVirtState *s;
-+
-+    s = container_of(notifier, RISCVVirtState, powerdown_notifier);
-+    acpi_send_event(s->acpi_ged, ACPI_POWER_DOWN_STATUS);
-+}
-+
- static void virt_machine_done(Notifier *notifier, void *data)
- {
-     RISCVVirtState *s = container_of(notifier, RISCVVirtState,
-@@ -1703,6 +1729,9 @@ static void virt_machine_init(MachineState *machine)
-
-     create_platform_bus(s, mmio_irqchip);
-
-+    /* acpi ged */
-+    s->acpi_ged = create_acpi_ged(s, mmio_irqchip);
-+
-     serial_mm_init(system_memory, s->memmap[VIRT_UART0].base,
-         0, qdev_get_gpio_in(mmio_irqchip, UART0_IRQ), 399193,
-         serial_hd(0), DEVICE_LITTLE_ENDIAN);
-@@ -1744,6 +1773,9 @@ static void virt_machine_init(MachineState *machine)
-         sysbus_realize_and_unref(SYS_BUS_DEVICE(iommu_sys), &error_fatal);
-     }
-
-+    s->powerdown_notifier.notify = virt_powerdown_req;
-+    qemu_register_powerdown_notifier(&s->powerdown_notifier);
-+
-     s->machine_done.notify = virt_machine_done;
-     qemu_add_machine_init_done_notifier(&s->machine_done);
- }
-diff --git a/include/hw/riscv/virt.h b/include/hw/riscv/virt.h
-index 7b4c2c8b7d..82d6470174 100644
---- a/include/hw/riscv/virt.h
-+++ b/include/hw/riscv/virt.h
-@@ -47,11 +47,13 @@ struct RISCVVirtState {
-
-     /*< public >*/
-     Notifier machine_done;
-+    Notifier powerdown_notifier;
-     DeviceState *platform_bus_dev;
-     RISCVHartArrayState soc[VIRT_SOCKETS_MAX];
-     DeviceState *irqchip[VIRT_SOCKETS_MAX];
-     PFlashCFI01 *flash[2];
-     FWCfgState *fw_cfg;
-+    DeviceState *acpi_ged;
-
-     int fdt_size;
-     bool have_aclint;
-@@ -88,9 +90,11 @@ enum {
-     VIRT_PLATFORM_BUS,
-     VIRT_PCIE_ECAM,
-     VIRT_IOMMU_SYS,
-+    VIRT_ACPI_GED,
- };
-
- enum {
-+    ACPI_GED_IRQ = 9,
-     UART0_IRQ = 10,
-     RTC_IRQ = 11,
-     VIRTIO_IRQ = 1, /* 1 to 8 */
--- 
-2.27.0
+Regards,
+Li
 
