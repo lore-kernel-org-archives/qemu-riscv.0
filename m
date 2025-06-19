@@ -4,56 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E0634C7115B
-	for <qemu-riscv@archiver.kernel.org>; Thu, 19 Jun 2025 13:56:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0F157C7115B
+	for <qemu-riscv@archiver.kernel.org>; Thu, 19 Jun 2025 15:28:15 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uSFkR-0004fv-1O; Thu, 19 Jun 2025 09:56:12 -0400
+	id 1uSHBT-0001xZ-3a; Thu, 19 Jun 2025 11:28:11 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <roan.richmond@codethink.co.uk>)
- id 1uSFkN-0004fc-Ay; Thu, 19 Jun 2025 09:56:07 -0400
-Received: from imap4.hz.codethink.co.uk ([188.40.203.114])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <roan.richmond@codethink.co.uk>)
- id 1uSFkI-0004Ty-2R; Thu, 19 Jun 2025 09:56:06 -0400
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=codethink.co.uk; s=imap4-20230908; h=Sender:Content-Transfer-Encoding:
- MIME-Version:Message-ID:Date:Subject:Cc:To:From:Reply-To:Content-Type:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Id:
- List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=Jutczu6K8Py3B8oNLBGk8xVbzF/SrvYto3P/Uulchhk=; b=uoZ41bkVgxREJAuFjDShFnfdoo
- AGKeD0h1RRDINz2iAa6dePpd12TnCsUygZBLUdduQgpcWDJ8zM570m9Jez6LmzTz7wIqeCfavkK6J
- 6sDgGh0zuyg0p5YYzUTGIfNkzIN/eQSACQUk/Kw4Y5er9h7mXoiDFzzTy+lL4EUeNO+xhlsctcdy7
- Coj842piwkNrBEVu/EJ4zn8/ooQuzB2tvjhlf5ufQsLP3dut/o5mOgXpyj2bpdqMhs5xPkHRjGfjg
- g1QRKGOIIRTdwe0ZAQL2cvSbQLIu4H7T3vcjzdSm5ndNI1FpOWtBeVlOsaox68Aly8PQs6V2Rmfn7
- Gl1PxsgQ==;
-Received: from [167.98.27.226] (helo=codethink.office.codethink.co.uk)
- by imap4.hz.codethink.co.uk with esmtpsa  (Exim 4.94.2 #2 (Debian))
- id 1uSFk9-000TSv-Oo; Thu, 19 Jun 2025 14:55:55 +0100
-From: Roan Richmond <roan.richmond@codethink.co.uk>
-To: qemu-riscv@nongnu.org
-Cc: palmer@dabbelt.com, alistair.francis@wdc.com, liwei1518@gmail.com,
- dbarboza@ventanamicro.com, zhiwei_liu@linux.alibaba.com,
- qemu-devel@nongnu.org, alistair23@gmail.com,
- Roan Richmond <roan.richmond@codethink.co.uk>
-Subject: [PATCH v3] Add RISCV ZALASR extension
-Date: Thu, 19 Jun 2025 14:55:31 +0100
-Message-ID: <20250619135545.61956-1-roan.richmond@codethink.co.uk>
-X-Mailer: git-send-email 2.43.0
+ (Exim 4.90_1) (envelope-from <sunilvl@ventanamicro.com>)
+ id 1uSHBQ-0001wr-TG
+ for qemu-riscv@nongnu.org; Thu, 19 Jun 2025 11:28:09 -0400
+Received: from mail-pf1-x435.google.com ([2607:f8b0:4864:20::435])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <sunilvl@ventanamicro.com>)
+ id 1uSHBO-00049S-US
+ for qemu-riscv@nongnu.org; Thu, 19 Jun 2025 11:28:08 -0400
+Received: by mail-pf1-x435.google.com with SMTP id
+ d2e1a72fcca58-748da522e79so496559b3a.1
+ for <qemu-riscv@nongnu.org>; Thu, 19 Jun 2025 08:28:04 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=ventanamicro.com; s=google; t=1750346883; x=1750951683; darn=nongnu.org;
+ h=in-reply-to:content-transfer-encoding:content-disposition
+ :mime-version:references:message-id:subject:cc:to:from:date:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=luOWSFgzP/rKccc7s4K9TLiyXYoWyKmChcndNKlURKc=;
+ b=ibXa6TRasB+DQJ0ypJInEiuTWJtMzF46i6jWAwrRepoxA3aFxUCkN7mb+zs0Rvms9R
+ hy7GBYV1yUiNKrJ+KIJS8HOLYmHjDU3HGSsqjUpmvFvCscIVSkXBXs4lIS8LWj6bArvP
+ EAc8eKwVpjrkiVKRnpoWROj1zyFxi64IlNHDK8qNUrJ1K8ncjbyeCDulru6Cn+wfHfqn
+ gD0518VEHK5ajQ/IQ5ar9FsucTatEneb0LVysFBfrr35jREdrSi+WQ4XxNjF1w+ESn7R
+ xobJOCQ2YiknO1TtDRgZRgV9kLQJCDnOZOO4avE5FwatYNXetn0PVfjd8pFNcFLCCsJw
+ 6PDA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1750346883; x=1750951683;
+ h=in-reply-to:content-transfer-encoding:content-disposition
+ :mime-version:references:message-id:subject:cc:to:from:date
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=luOWSFgzP/rKccc7s4K9TLiyXYoWyKmChcndNKlURKc=;
+ b=cwiXtKeUqW3suPgio141PicSt7MoweIPuyOOYoaNsyOfHF2mq7wLo6v5iP0Q77B7Nw
+ vGGLYJw2zgJbRvf7hzHHa/D8g3I+1/yZ/fVH5I9bAjWYPiiJFvdRKkdWF5xMH6wKGtiC
+ 0uJsGM+w/BYyk+TZOZPiTjWjZllyPm2Vj+fVErh1bCLKUpy/RlOL9pfBfFOAqualUREh
+ j+khpn9F+zSE2jtNLzuaWX24So7e0wnnaDTtmYFmQl2QzOY2V9RfvVE1vea2bvngNsBQ
+ w7vpuPXf98aJcR9uawAe5HgUCRnbieMCoUGGVoNQhFd3eGqXPIn+WAud1ZwW3fw3cKhl
+ HYqw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUC2fJIcuYnThOdHdv/CNY3Czm4NTsQeClGBI7/+zEfxUEAl6sd8GQlspDcUTpnzPPtxr/pWgqkaa7P@nongnu.org
+X-Gm-Message-State: AOJu0Yykv+pplGX2QbAaBa7iKFrSyGBot353T/KPj61U0grvAFMl+tk+
+ HuQ/uOaMTDWRKULHXMWEA2acy5V1Gzf/z/6rpkl0dj0LvesRc3hPsJRXAMGXSmb999w=
+X-Gm-Gg: ASbGncs5L1MTPmlAQBIF1O926//vtt/2BDNLLs+hAy5Wd+ZujNtSt1YHUUHkF+CozIK
+ F4opaXSB2/Gdfp8eeGPlyLcqW9oT4QZMDB/1GydY4umrUkvNEoQLssEjT4/ja0Er4xMpafzQaZD
+ PHxuEyQTLmdeDjtgFc9YeTL5heQSqPxBfed1cEqrtvlh0QcatVEesE30LGQ0/0ateR8EefMQWZM
+ zzIuiCNvxCT4ExvH8AWi3N2aKKxP9zCcsRHanEmp+RsB8ritRREBLSeqNBx1DQ1zOVJYhOCZ2bT
+ pEuBsMazVy55obJrLWaCH291eWvGHGWtRo4aKRIKT/J5Ltp4HC+k074tHdSaFHGt006qlw==
+X-Google-Smtp-Source: AGHT+IF9oYXXshN3eBZ947NClFg9EzZik2AZgCUwk+ajmuz5HHa2UBuAW1wWbOfQsB7E+JbEBsdF+A==
+X-Received: by 2002:a05:6a20:9f43:b0:1f5:6f61:a0ac with SMTP id
+ adf61e73a8af0-21fbd5591d4mr28267821637.5.1750346883209; 
+ Thu, 19 Jun 2025 08:28:03 -0700 (PDT)
+Received: from sunil-laptop ([103.97.166.196])
+ by smtp.gmail.com with ESMTPSA id
+ d2e1a72fcca58-7490a465c40sm148684b3a.17.2025.06.19.08.27.58
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 19 Jun 2025 08:28:02 -0700 (PDT)
+Date: Thu, 19 Jun 2025 20:57:54 +0530
+From: Sunil V L <sunilvl@ventanamicro.com>
+To: liu.xuemei1@zte.com.cn
+Cc: pbonzini@redhat.com, palmer@dabbelt.com, alistair.francis@wdc.com,
+ liwei1518@gmail.com, dbarboza@ventanamicro.com,
+ zhiwei_liu@linux.alibaba.com, bjorn@rivosinc.com,
+ qemu-riscv@nongnu.org, qemu-devel@nongnu.org
+Subject: Re: [PATCH] hw/riscv/virt: Add acpi ged and powerdown support
+Message-ID: <aFQseigG0Wbqx1CC@sunil-laptop>
+References: <202506191556260735QxWC8sxRwFURYEvlD24y@zte.com.cn>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=188.40.203.114;
- envelope-from=roan.richmond@codethink.co.uk; helo=imap4.hz.codethink.co.uk
+In-Reply-To: <202506191556260735QxWC8sxRwFURYEvlD24y@zte.com.cn>
+Received-SPF: pass client-ip=2607:f8b0:4864:20::435;
+ envelope-from=sunilvl@ventanamicro.com; helo=mail-pf1-x435.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001, RCVD_IN_VALIDITY_SAFE_BLOCKED=0.001,
- SPF_HELO_PASS=-0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -69,198 +104,161 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-This is based on version v0.8.3 of the ZALASR specification [1].
-The specification is listed as in Frozen state [2].
+Hi Xuemei Liu,
 
-[1]: https://github.com/riscv/riscv-zalasr/tree/v0.8.3
-[2]: https://lf-riscv.atlassian.net/wiki/spaces/HOME/pages/16154882/All+RISC-V+Specifications+Under+Active+Development
+Thank you for the patch!
 
-Signed-off-by: Roan Richmond <roan.richmond@codethink.co.uk>
----
+On Thu, Jun 19, 2025 at 03:56:26PM +0800, liu.xuemei1@zte.com.cn wrote:
+> From: Xuemei Liu <liu.xuemei1@zte.com.cn>
+> 
+> This adds powerdown support by implementing the ACPI GED.
+> 
+> Signed-off-by: Xuemei Liu <liu.xuemei1@zte.com.cn>
+> Co-authored-by: Björn Töpel <bjorn@rivosinc.com>
+> ---
+>  hw/riscv/Kconfig           |  1 +
+>  hw/riscv/virt-acpi-build.c | 12 ++++++++++++
+>  hw/riscv/virt.c            | 32 ++++++++++++++++++++++++++++++++
+>  include/hw/riscv/virt.h    |  4 ++++
+>  4 files changed, 49 insertions(+)
+> 
+> diff --git a/hw/riscv/Kconfig b/hw/riscv/Kconfig
+> index e6a0ac1fa1..16837e0e8f 100644
+> --- a/hw/riscv/Kconfig
+> +++ b/hw/riscv/Kconfig
+> @@ -68,6 +68,7 @@ config RISCV_VIRT
+>      select PLATFORM_BUS
+>      select ACPI
+>      select ACPI_PCI
+> +    select ACPI_HW_REDUCED
+> 
+>  config SHAKTI_C
+>      bool
+> diff --git a/hw/riscv/virt-acpi-build.c b/hw/riscv/virt-acpi-build.c
+> index 8b5683dbde..89365c40b4 100644
+> --- a/hw/riscv/virt-acpi-build.c
+> +++ b/hw/riscv/virt-acpi-build.c
+> @@ -29,6 +29,7 @@
+>  #include "hw/acpi/aml-build.h"
+>  #include "hw/acpi/pci.h"
+>  #include "hw/acpi/utils.h"
+> +#include "hw/acpi/generic_event_device.h"
+>
+NIT: Could you include this after aml-build.h to keep it sorted?
 
-Ping! resending this as no movement on previous send.
+>  #include "hw/intc/riscv_aclint.h"
+>  #include "hw/nvram/fw_cfg_acpi.h"
+>  #include "hw/pci-host/gpex.h"
+> @@ -224,6 +225,16 @@ static void acpi_dsdt_add_iommu_sys(Aml *scope, const MemMapEntry *iommu_memmap,
+>      aml_append(scope, dev);
+>  }
+> 
+> +static void acpi_dsdt_add_ged(Aml *scope, RISCVVirtState *s)
+> +{
+> +    build_ged_aml(scope, "\\_SB."GED_DEVICE,
+> +                  HOTPLUG_HANDLER(s->acpi_ged),
+> +                  ACPI_GED_IRQ, AML_SYSTEM_MEMORY,
+> +                  s->memmap[VIRT_ACPI_GED].base);
+> +
+> +    acpi_dsdt_add_power_button(scope);
+>
+Instead of this wrapper function to create both ged and power button,
+please call them directly below where you are calling
+acpi_dsdt_add_ged(). It will help in future to add some other eventing
+mechanism to the power button.
 
-V3:
-  - rebased patch onto master branch
-  - added check for aq on Load Acquire, as pointed out by Alistair Francis
-  - added check for rl on Store Release, as mentioned by Alistair Francis
+> +}
+> +
+>  /*
+>   * Serial Port Console Redirection Table (SPCR)
+>   * Rev: 1.10
+> @@ -497,6 +508,7 @@ static void build_dsdt(GArray *table_data,
+>                               VIRTIO_COUNT);
+>          acpi_dsdt_add_gpex_host(scope, PCIE_IRQ + VIRT_IRQCHIP_NUM_SOURCES * 2);
+>      }
+> +    acpi_dsdt_add_ged(scope, s);
+> 
+This should be conditional - only if s->acpi_ged is set.
 
- target/riscv/cpu.c                           |   1 +
- target/riscv/insn32.decode                   |  10 ++
- target/riscv/insn_trans/trans_rvzalasr.c.inc | 120 +++++++++++++++++++
- target/riscv/translate.c                     |   1 +
- 4 files changed, 132 insertions(+)
- create mode 100644 target/riscv/insn_trans/trans_rvzalasr.c.inc
+>      aml_append(dsdt, scope);
+> 
+> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+> index cf280a92e5..aaa33b9740 100644
+> --- a/hw/riscv/virt.c
+> +++ b/hw/riscv/virt.c
+> @@ -51,10 +51,12 @@
+>  #include "system/kvm.h"
+>  #include "system/tpm.h"
+>  #include "system/qtest.h"
+> +#include "system/runstate.h"
+>  #include "hw/pci/pci.h"
+>  #include "hw/pci-host/gpex.h"
+>  #include "hw/display/ramfb.h"
+>  #include "hw/acpi/aml-build.h"
+> +#include "hw/acpi/generic_event_device.h"
+>  #include "qapi/qapi-visit-common.h"
+>  #include "hw/virtio/virtio-iommu.h"
+>  #include "hw/uefi/var-service-api.h"
+> @@ -95,6 +97,7 @@ static const MemMapEntry virt_memmap[] = {
+>      [VIRT_UART0] =        { 0x10000000,         0x100 },
+>      [VIRT_VIRTIO] =       { 0x10001000,        0x1000 },
+>      [VIRT_FW_CFG] =       { 0x10100000,          0x18 },
+> +    [VIRT_ACPI_GED] =     { 0x10200000, ACPI_GED_EVT_SEL_LEN },
+Do we need to align the base address at 1MB? It can create a larger hole
+unnecessarily.
 
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 629ac37501..b52bbf0936 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -128,6 +128,7 @@ const RISCVIsaExtData isa_edata_arr[] = {
-     ISA_EXT_DATA_ENTRY(zabha, PRIV_VERSION_1_13_0, ext_zabha),
-     ISA_EXT_DATA_ENTRY(zacas, PRIV_VERSION_1_12_0, ext_zacas),
-     ISA_EXT_DATA_ENTRY(zama16b, PRIV_VERSION_1_13_0, ext_zama16b),
-+    ISA_EXT_DATA_ENTRY(zalasr, PRIV_VERSION_1_12_0, ext_zalasr),
-     ISA_EXT_DATA_ENTRY(zalrsc, PRIV_VERSION_1_12_0, ext_zalrsc),
-     ISA_EXT_DATA_ENTRY(zawrs, PRIV_VERSION_1_12_0, ext_zawrs),
-     ISA_EXT_DATA_ENTRY(zfa, PRIV_VERSION_1_12_0, ext_zfa),
-diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
-index cd23b1f3a9..c848c0c1c5 100644
---- a/target/riscv/insn32.decode
-+++ b/target/riscv/insn32.decode
-@@ -1066,3 +1066,13 @@ amominu_h  11000 . . ..... ..... 001 ..... 0101111 @atom_st
- amomaxu_h  11100 . . ..... ..... 001 ..... 0101111 @atom_st
- amocas_b    00101 . . ..... ..... 000 ..... 0101111 @atom_st
- amocas_h    00101 . . ..... ..... 001 ..... 0101111 @atom_st
-+
-+# *** Zalasr Standard Extension ***
-+lb_aqrl  00110 . . ..... ..... 000 ..... 0101111 @atom_st
-+lh_aqrl  00110 . . ..... ..... 001 ..... 0101111 @atom_st
-+lw_aqrl  00110 . . ..... ..... 010 ..... 0101111 @atom_st
-+ld_aqrl  00110 . . ..... ..... 011 ..... 0101111 @atom_st
-+sb_aqrl  00111 . . ..... ..... 000 ..... 0101111 @atom_st
-+sh_aqrl  00111 . . ..... ..... 001 ..... 0101111 @atom_st
-+sw_aqrl  00111 . . ..... ..... 010 ..... 0101111 @atom_st
-+sd_aqrl  00111 . . ..... ..... 011 ..... 0101111 @atom_st
-diff --git a/target/riscv/insn_trans/trans_rvzalasr.c.inc b/target/riscv/insn_trans/trans_rvzalasr.c.inc
-new file mode 100644
-index 0000000000..8761508de3
---- /dev/null
-+++ b/target/riscv/insn_trans/trans_rvzalasr.c.inc
-@@ -0,0 +1,120 @@
-+/*
-+ * RISC-V translation routines for the ZALASR (Load-Aquire and Store-Release)
-+ * Extension.
-+ *
-+ * Copyright (c) 2025 Roan Richmond, roan.richmond@codethink.co.uk
-+ *
-+ * This program is free software; you can redistribute it and/or modify it
-+ * under the terms and conditions of the GNU General Public License,
-+ * version 2 or later, as published by the Free Software Foundation.
-+ *
-+ * This program is distributed in the hope it will be useful, but WITHOUT
-+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
-+ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
-+ * more details.
-+ *
-+ * You should have received a copy of the GNU General Public License along with
-+ * this program.  If not, see <http://www.gnu.org/licenses/>.
-+ */
-+
-+#define REQUIRE_ZALASR(ctx) do {     \
-+    if (!ctx->cfg_ptr->ext_zalasr) { \
-+        return false;                \
-+    }                                \
-+} while (0)
-+
-+static bool gen_load_acquire(DisasContext *ctx, arg_lb_aqrl *a, MemOp memop)
-+{
-+    decode_save_opc(ctx, 0);
-+
-+    TCGv addr = get_address(ctx, a->rs1, 0);
-+    TCGv dest = get_gpr(ctx, a->rd, EXT_NONE);
-+    TCGBar bar = (a->rl) ? TCG_BAR_STRL : 0;
-+
-+    /* Check that AQ is set, as this is mandatory */
-+    if (!a->aq) {
-+        return false;    
-+    }
-+
-+    memop |= (ctx->cfg_ptr->ext_zama16b) ? MO_ATOM_WITHIN16 : 0;
-+
-+    tcg_gen_qemu_ld_tl(dest, addr, ctx->mem_idx, memop);
-+    gen_set_gpr(ctx, a->rd, dest);
-+
-+    /* Add a memory barrier implied by AQ (mandatory) and RL (optional) */
-+    tcg_gen_mb(TCG_MO_ALL | TCG_BAR_LDAQ | bar);
-+
-+    return true;
-+}
-+
-+static bool trans_lb_aqrl(DisasContext *ctx, arg_lb_aqrl *a)
-+{
-+    REQUIRE_ZALASR(ctx);
-+    return gen_load_acquire(ctx, a, (MO_ALIGN | MO_SB));
-+}
-+
-+static bool trans_lh_aqrl(DisasContext *ctx, arg_lh_aqrl *a)
-+{
-+    REQUIRE_ZALASR(ctx);
-+    return gen_load_acquire(ctx, a, (MO_ALIGN | MO_TESW));
-+}
-+
-+static bool trans_lw_aqrl(DisasContext *ctx, arg_lw_aqrl *a)
-+{
-+    REQUIRE_ZALASR(ctx);
-+    return gen_load_acquire(ctx, a, (MO_ALIGN | MO_TESL));
-+}
-+
-+static bool trans_ld_aqrl(DisasContext *ctx, arg_ld_aqrl *a)
-+{
-+    REQUIRE_64BIT(ctx);
-+    REQUIRE_ZALASR(ctx);
-+    return gen_load_acquire(ctx, a, (MO_ALIGN | MO_TEUQ));
-+}
-+
-+static bool gen_store_release(DisasContext *ctx, arg_sb_aqrl *a, MemOp memop)
-+{
-+    decode_save_opc(ctx, 0);
-+
-+    TCGv addr = get_address(ctx, a->rs1, 0);
-+    TCGv data = get_gpr(ctx, a->rs2, EXT_NONE);
-+    TCGBar bar = (a->aq) ? TCG_BAR_LDAQ : 0;
-+
-+    /* Check that RL is set, as this is mandatory */
-+    if (!a->rl) {
-+        return false;    
-+    }
-+
-+    memop |= (ctx->cfg_ptr->ext_zama16b) ? MO_ATOM_WITHIN16 : 0;
-+
-+    /* Add a memory barrier implied by RL (mandatory) and AQ (optional) */
-+    tcg_gen_mb(TCG_MO_ALL | TCG_BAR_STRL | bar);
-+
-+    tcg_gen_qemu_st_tl(data, addr, ctx->mem_idx, memop);
-+    return true;
-+}
-+
-+static bool trans_sb_aqrl(DisasContext *ctx, arg_sb_aqrl *a)
-+{
-+    REQUIRE_ZALASR(ctx);
-+    return gen_store_release(ctx, a, (MO_ALIGN | MO_SB));
-+}
-+
-+static bool trans_sh_aqrl(DisasContext *ctx, arg_sh_aqrl *a)
-+{
-+    REQUIRE_ZALASR(ctx);
-+    return gen_store_release(ctx, a, (MO_ALIGN | MO_TESW));
-+}
-+
-+static bool trans_sw_aqrl(DisasContext *ctx, arg_sw_aqrl *a)
-+{
-+    REQUIRE_ZALASR(ctx);
-+    return gen_store_release(ctx, a, (MO_ALIGN | MO_TESL));
-+}
-+
-+static bool trans_sd_aqrl(DisasContext *ctx, arg_sd_aqrl *a)
-+{
-+    REQUIRE_64BIT(ctx);
-+    REQUIRE_ZALASR(ctx);
-+    return gen_store_release(ctx, a, (MO_ALIGN | MO_TEUQ));
-+}
-diff --git a/target/riscv/translate.c b/target/riscv/translate.c
-index d7a6de02df..4cd2d68e46 100644
---- a/target/riscv/translate.c
-+++ b/target/riscv/translate.c
-@@ -1183,6 +1183,7 @@ static uint32_t opcode_at(DisasContextBase *dcbase, target_ulong pc)
- #include "insn_trans/trans_rvzicond.c.inc"
- #include "insn_trans/trans_rvzacas.c.inc"
- #include "insn_trans/trans_rvzabha.c.inc"
-+#include "insn_trans/trans_rvzalasr.c.inc"
- #include "insn_trans/trans_rvzawrs.c.inc"
- #include "insn_trans/trans_rvzicbo.c.inc"
- #include "insn_trans/trans_rvzimop.c.inc"
--- 
-2.43.0
+>      [VIRT_FLASH] =        { 0x20000000,     0x4000000 },
+>      [VIRT_IMSIC_M] =      { 0x24000000, VIRT_IMSIC_MAX_SIZE },
+>      [VIRT_IMSIC_S] =      { 0x28000000, VIRT_IMSIC_MAX_SIZE },
+> @@ -1272,6 +1275,21 @@ static inline DeviceState *gpex_pcie_init(MemoryRegion *sys_mem,
+>      return dev;
+>  }
+> 
+> +static DeviceState *create_acpi_ged(RISCVVirtState *s, DeviceState *irqchip)
+> +{
+> +    DeviceState *dev;
+> +    uint32_t event = ACPI_GED_PWR_DOWN_EVT;
+> +
+> +    dev = qdev_new(TYPE_ACPI_GED);
+> +    qdev_prop_set_uint32(dev, "ged-event", event);
+> +    sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
+> +
+> +    sysbus_mmio_map(SYS_BUS_DEVICE(dev), 0, s->memmap[VIRT_ACPI_GED].base);
+> +    sysbus_connect_irq(SYS_BUS_DEVICE(dev), 0, qdev_get_gpio_in(irqchip, ACPI_GED_IRQ));
+> +
+> +    return dev;
+> +}
+> +
+>  static FWCfgState *create_fw_cfg(const MachineState *ms, hwaddr base)
+>  {
+>      FWCfgState *fw_cfg;
+> @@ -1430,6 +1448,14 @@ static void virt_build_smbios(RISCVVirtState *s)
+>      }
+>  }
+> 
+> +static void virt_powerdown_req(Notifier *notifier, void *opaque)
+> +{
+> +    RISCVVirtState *s;
+> +
+> +    s = container_of(notifier, RISCVVirtState, powerdown_notifier);
+> +    acpi_send_event(s->acpi_ged, ACPI_POWER_DOWN_STATUS);
+Check for s->acpi_ged here. 
 
+> +}
+> +
+>  static void virt_machine_done(Notifier *notifier, void *data)
+>  {
+>      RISCVVirtState *s = container_of(notifier, RISCVVirtState,
+> @@ -1703,6 +1729,9 @@ static void virt_machine_init(MachineState *machine)
+> 
+>      create_platform_bus(s, mmio_irqchip);
+> 
+> +    /* acpi ged */
+> +    s->acpi_ged = create_acpi_ged(s, mmio_irqchip);
+> +
+>
+I think we should create GED only if ACPI is enabled.
+
+Thanks!
+Sunil
 
