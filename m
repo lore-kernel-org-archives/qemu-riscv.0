@@ -4,76 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0607EC7115B
-	for <qemu-riscv@archiver.kernel.org>; Mon, 23 Jun 2025 17:22:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6AF5AC7115B
+	for <qemu-riscv@archiver.kernel.org>; Mon, 23 Jun 2025 21:39:19 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uTkrK-0004QE-IQ; Mon, 23 Jun 2025 13:21:30 -0400
+	id 1uTosh-0006f1-Vp; Mon, 23 Jun 2025 17:39:12 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1uTkrJ-0004Pm-66
- for qemu-riscv@nongnu.org; Mon, 23 Jun 2025 13:21:29 -0400
-Received: from mail-pl1-x643.google.com ([2607:f8b0:4864:20::643])
+ id 1uTosg-0006eo-EH
+ for qemu-riscv@nongnu.org; Mon, 23 Jun 2025 17:39:10 -0400
+Received: from mail-pl1-x62e.google.com ([2607:f8b0:4864:20::62e])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <dbarboza@ventanamicro.com>)
- id 1uTkrH-0006CY-1o
- for qemu-riscv@nongnu.org; Mon, 23 Jun 2025 13:21:28 -0400
-Received: by mail-pl1-x643.google.com with SMTP id
- d9443c01a7336-23636167b30so41443105ad.1
- for <qemu-riscv@nongnu.org>; Mon, 23 Jun 2025 10:21:26 -0700 (PDT)
+ id 1uTose-0005L3-LM
+ for qemu-riscv@nongnu.org; Mon, 23 Jun 2025 17:39:10 -0400
+Received: by mail-pl1-x62e.google.com with SMTP id
+ d9443c01a7336-2363616a1a6so37835955ad.3
+ for <qemu-riscv@nongnu.org>; Mon, 23 Jun 2025 14:39:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1750699285; x=1751304085; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=gI+dIkhmMbZjzwWaUE/wQuMEVtNYADLma5F4gjIEl9M=;
- b=CoRnpBAW/v8j34POemc5lGFyxFrSxxCGQKv1BdUceRB1S6PMdMhFYbvIseLU6Sdn6a
- sNFlgbhWvuR8oMDjxtFWDSy0SK3ritNDFfMy7jUhBIIFqGp1D0PAgczSt5gLOcL7WLIh
- jwsZcMHwdY7A9kFNh2fSP96hTUDhVvimHD+tNxKPwVqiWDFBS//CmobbrGIeTDAdnr5p
- jw4Z75s0CLRLf5gfjaBDhiFo4V8bi24p/x/yg59LCgAm81+pLwnp1iLrSg81oDBGUNxM
- OUa8+/UYMkyTDonpYxzupZ/UsQ/DGy9VchPtbcXPwA1DhbmmWyLyGVLeLDpv0+HcdOyC
- dP1g==
+ d=ventanamicro.com; s=google; t=1750714747; x=1751319547; darn=nongnu.org;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=/SJ8XGZKOSTcdSpimrphHSXihH5db5LKplkn5InuLGk=;
+ b=TgfxFl3G8Ldu13X5jA68YOty7Iib+KIwxkOl6tT2wMxKwVxqtDHSEqXuLqFy3dOd2/
+ HphxSW2p5oqLj4gvyiJJhL7ye+I0OqJodvHqyQkcMW80ERJ1VGWTD+t/+tEzZqoHlhFl
+ /DB/avpB0Nb9qniuyJyr2IfkMkzDRz4qf6X9jnYXjFt3lG+nYbcbOcU1y+s/7TE20yMe
+ tW6XdIvvl0oM6v+79P/16criO1ehWfRN+0kf/ZjdfqNCgZ6hACHTDHB+DyCWywAdTyyZ
+ M/VespfnjMN9rgMCoYtwo5oKUHjlppxC1uqF/5wUraB9eAWnsEADeOQHstqf4o+kRFkH
+ NodA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1750699285; x=1751304085;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=gI+dIkhmMbZjzwWaUE/wQuMEVtNYADLma5F4gjIEl9M=;
- b=SvFrtae6AOpnSSohHl8hIBWM24QBF20/7xje+EuVsTWuced93mFdzxrvSQl1xel15B
- GogHfZivMrU3mNmTqVtl1MXivry4nX8fdEWL3A9KpHTXmA7oniOrjfypKOKc1+VaI5ni
- jN4DC6A+fK0c9VjpqgNLJOOXw+4/plE8Iuzx8CVHdfsH2nkOCCU0aii6vPVx7kRAOn+V
- NUWow8ySkzKA76KF9hXER4lMGFIbdwCWOEk/6VQnsj+5UK4b2FHkXxAY99RKfAD9v8pW
- tPKqe5UTXOsb9qmA0tj5aZzUYi3C91pEvRfVqJc7KZWTMwOXbp7lZmc/udY40IXnDkNF
- eTrQ==
-X-Gm-Message-State: AOJu0YyqmKzvPOtfFM4iuOarY7i/6kVR4fuZ2Q1gdy5czR1MCSSixtsa
- nD2FXycP9shmTZ7l1CxjcFMUnibT0bXAZrKY+BFSqDff73Z7PHUQcQ76mQgSanKY5+I=
-X-Gm-Gg: ASbGncsjxDQkDUS7tnngHbm3UuNPdXfeqI5KSM8SWXbh5/LXWCzPJ5+sQHfnDX6HCas
- FP24+PtI0SIb6znXlMkW0A9FZR4KWPyhQFbMGi9xN7SdegoUnfCEIjaZ7mf909Uneo4HbJUfpmU
- I7UFIwzK1G/5dJiiMrAriCKC/deLaNaKcG7h82KImb/JaG4ZYvKuKtwyxPdwr+qMOQUR9dBXoDg
- kDFYckO+9H4nH42O2wSdMwmxtz3TqkH+EA2oe9hWqOCmcYAGOurt8c1GU5AoUvStZo5Ve0W5Ydj
- d3Lf3b038EkcCz4WCIWHWIjAwkLOh1MR8eC2znwtsYR9g5DZK+gKvtnpJo9/65QZ
-X-Google-Smtp-Source: AGHT+IEoWFv7DmrgwAMVFkjBW3NJ25nOmpDkgiXHs4tNX8qNLO/LFa79IPLWkVj63UhKmKQ4yXbLyA==
-X-Received: by 2002:a17:902:dace:b0:235:f3c4:b884 with SMTP id
- d9443c01a7336-237d9779d68mr200979395ad.11.1750699285152; 
- Mon, 23 Jun 2025 10:21:25 -0700 (PDT)
-Received: from grind.. ([191.255.35.152]) by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-237d873845esm90847525ad.243.2025.06.23.10.21.22
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 23 Jun 2025 10:21:24 -0700 (PDT)
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-To: qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, liwei1518@gmail.com,
- zhiwei_liu@linux.alibaba.com, palmer@dabbelt.com,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Subject: [PATCH 0/3] riscv: add all available CSRs to 'info registers'
-Date: Mon, 23 Jun 2025 14:21:16 -0300
-Message-ID: <20250623172119.997166-1-dbarboza@ventanamicro.com>
-X-Mailer: git-send-email 2.49.0
+ d=1e100.net; s=20230601; t=1750714747; x=1751319547;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=/SJ8XGZKOSTcdSpimrphHSXihH5db5LKplkn5InuLGk=;
+ b=nIyHgJh5coe8l83iszoQDdOufnO0ltXoBiVKB8oEZ23PeujlkAq3FQPrQ8dyPOwRyK
+ q7Bm+pxpGbxOlas031oYudTad6nfloSGIyg+9rx3qutdlTg3zV5hbYRSD+zHIMcwPw6E
+ X/0fAUtYv3VaSSy20vRV3ck1jN8vDDEowTyO2ZPts/UPN3akxLkV8ZQ8MH7Mq43deS5e
+ 0D5BdNkAQZVvBkkJEZ1qvhogVOvgXhwTHQ0TqIVwzGHV330Dd7fetRCP6ePFgn5vO15j
+ LC8KB6W8LSTRBGyx6P5KyuOfGo+ZAQnwS0bOUILuDcpqjKLZClGT1/OcI9aIXPihrRJs
+ u4ZA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWxYL/6YjCFgDsKiyGQvwgW0dGUqoAYDYcF+drH0s3pwFu3L08eLP77Z6cnbDdiGF9Tg3Xy26QiUoGi@nongnu.org
+X-Gm-Message-State: AOJu0YwSeCKp0jxdq8K7dUndRMV7qwfDAEa+1rFcs20XOGhb5kSEyJmg
+ 0CcDccHSLGuP3GwESM+NLP8GZUejH96i0pBLOWWcep5XMR+cNVi9G2MpbMYIe+fvRWc=
+X-Gm-Gg: ASbGnctpeMJ+8+z2Zl3cyB4KDQeKp513hreQR93gowaBnDhYRFxWufIuyun5lU8+XRQ
+ 3o+CrKQTfYP3UTgwdMz4jXnWeIko6r5eMjBTygTLDcRBiuIKHxjDAA471mU5L6hGNwdf7cudXD0
+ a7oRouin9UrQvLnyI46+pVOlJt7zLmYtcpYA1MSX8NAq050rdi6umvVYZj+NhTn5MZCL80CXu8G
+ BDpMp5SARvtC5Oh0sJNFvS5pNsW65pFFN8+YHrwVLmeAjryiCtmbTYd6SEAmmNeK0VJVYYXPjRG
+ m4+uqRYOnT6XU/C/KSysBBQ+ufbazdVXC2zP8pVARyOm7NZfAchwNxI6HWUnXUBUUMQ+MQVZeqE
+ p
+X-Google-Smtp-Source: AGHT+IEvLgtN+QpHnET40nBbowAZlEHraQVlxeSDZ+WFAZphavKvB8qi4YWB1t11DFzO6VSRGn8myQ==
+X-Received: by 2002:a17:903:2f4b:b0:235:f70:fd44 with SMTP id
+ d9443c01a7336-237d9870d24mr201928405ad.21.1750714747045; 
+ Mon, 23 Jun 2025 14:39:07 -0700 (PDT)
+Received: from [192.168.68.110] ([191.255.35.152])
+ by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-237d8391494sm93564425ad.1.2025.06.23.14.39.04
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 23 Jun 2025 14:39:06 -0700 (PDT)
+Message-ID: <0811914e-623e-41a2-a54b-8ce42f45740c@ventanamicro.com>
+Date: Mon, 23 Jun 2025 18:39:02 -0300
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/2] target/riscv: disable *stimecmp interrupts without
+ *envcfg.STCE
+To: =?UTF-8?B?UmFkaW0gS3LEjW3DocWZ?= <rkrcmar@ventanamicro.com>,
+ qemu-riscv@nongnu.org
+Cc: qemu-devel@nongnu.org, Alistair Francis <alistair.francis@wdc.com>,
+ Weiwei Li <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Atish Patra <atishp@rivosinc.com>
+References: <20250623165329.2759651-1-rkrcmar@ventanamicro.com>
+ <20250623165329.2759651-2-rkrcmar@ventanamicro.com>
+Content-Language: en-US
+From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+In-Reply-To: <20250623165329.2759651-2-rkrcmar@ventanamicro.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::643;
- envelope-from=dbarboza@ventanamicro.com; helo=mail-pl1-x643.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::62e;
+ envelope-from=dbarboza@ventanamicro.com; helo=mail-pl1-x62e.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -96,32 +108,110 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
-Hi,
+Hi Radim,
 
-The output of HMP 'info registers', implemented by the cpu_dump_state
-callback, returns way less CSRs than what we have available in the
-default rv64 CPU with default options. 
+It seems like this patch is breaking 'make check-functional':
 
-This series changes the callback to add all available non-vector CSRs
-when issuing 'info registers'. The vector CSRs are being handled by
-another patch [1]. 
+12/12 qemu:func-quick+func-riscv64 / func-riscv64-riscv_opensbi   TIMEOUT         90.06s   killed by signal 15 SIGTERM
 
-Patches based on alistair/riscv-to-apply.next.
+Checking the logs I verified that the problem can be reproduced by running the
+'spike' machine as follows:
 
-[1] https://lore.kernel.org/qemu-riscv/20250623145306.991562-1-dbarboza@ventanamicro.com/
+$ ./build/qemu-system-riscv64 -M spike   --nographic
+Segmentation fault (core dumped)
+
+The expected result is to boot opensbi. The problem can't be reproduced with
+the 'virt' board, so something that you did here impacted 'spike' in particular
+for some reason.
 
 
-Daniel Henrique Barboza (3):
-  target/riscv/cpu: add riscv_dump_csr() helper
-  target/riscv/cpu: print all FPU CSRs in riscv_cpu_dump_state()
-  target/riscv: print all available CSRs in riscv_cpu_dump_state()
+Thanks,
 
- target/riscv/cpu.c | 107 +++++++++++++++++----------------------------
- target/riscv/cpu.h |   2 +
- target/riscv/csr.c |  18 ++++++++
- 3 files changed, 61 insertions(+), 66 deletions(-)
+Daniel
 
--- 
-2.49.0
+On 6/23/25 1:53 PM, Radim Krčmář wrote:
+> The specification states that menvcfg.STCE=0 prevents both *stimecmp
+> CSRs from having an effect on the pending interrupts.
+> henvcfg.STCE=0 disables only vstimecmp.
+> 
+> Make sure that when *envcfg.STCE is not set:
+> * writing the *stimecmp CSRs doesn't modify the *ip CSRs,
+> * and that the interrupt timer is disarmed.
+> 
+> Call the *stimecmp CSR update functions when *envcfg.STCE is toggled,
+> because the *ip CSRs need to immediately reflect the new behavior.
+> 
+> Fixes: 43888c2f1823 ("target/riscv: Add stimecmp support")
+> Signed-off-by: Radim Krčmář <rkrcmar@ventanamicro.com>
+> ---
+>   target/riscv/csr.c         | 12 ++++++++++++
+>   target/riscv/time_helper.c | 10 ++++++++++
+>   2 files changed, 22 insertions(+)
+> 
+> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
+> index fb149721691d..43eae9bcf153 100644
+> --- a/target/riscv/csr.c
+> +++ b/target/riscv/csr.c
+> @@ -3181,6 +3181,7 @@ static RISCVException write_menvcfg(CPURISCVState *env, int csrno,
+>       const RISCVCPUConfig *cfg = riscv_cpu_cfg(env);
+>       uint64_t mask = MENVCFG_FIOM | MENVCFG_CBIE | MENVCFG_CBCFE |
+>                       MENVCFG_CBZE | MENVCFG_CDE;
+> +    typeof(env->menvcfg) old = env->menvcfg;
+>   
+>       if (riscv_cpu_mxl(env) == MXL_RV64) {
+>           mask |= (cfg->ext_svpbmt ? MENVCFG_PBMTE : 0) |
+> @@ -3208,6 +3209,11 @@ static RISCVException write_menvcfg(CPURISCVState *env, int csrno,
+>           }
+>       }
+>       env->menvcfg = (env->menvcfg & ~mask) | (val & mask);
+> +
+> +    if ((old ^ env->menvcfg) & MENVCFG_STCE) {
+> +        riscv_timer_write_timecmp(env, env->stimer, env->stimecmp, 0, MIP_STIP);
+> +    }
+> +
+>       return write_henvcfg(env, CSR_HENVCFG, env->henvcfg, ra);
+>   }
+>   
+> @@ -3314,6 +3320,7 @@ static RISCVException write_henvcfg(CPURISCVState *env, int csrno,
+>                                       target_ulong val, uintptr_t ra)
+>   {
+>       uint64_t mask = HENVCFG_FIOM | HENVCFG_CBIE | HENVCFG_CBCFE | HENVCFG_CBZE;
+> +    typeof(env->henvcfg) old = env->henvcfg;
+>       RISCVException ret;
+>   
+>       ret = smstateen_acc_ok(env, 0, SMSTATEEN0_HSENVCFG);
+> @@ -3347,6 +3354,11 @@ static RISCVException write_henvcfg(CPURISCVState *env, int csrno,
+>           env->vsstatus &= ~MSTATUS_SDT;
+>       }
+>   
+> +    if ((old ^ env->henvcfg) & HENVCFG_STCE) {
+> +        riscv_timer_write_timecmp(env, env->vstimer, env->vstimecmp,
+> +                                  env->htimedelta, MIP_VSTIP);
+> +    }
+> +
+>       return RISCV_EXCP_NONE;
+>   }
+>   
+> diff --git a/target/riscv/time_helper.c b/target/riscv/time_helper.c
+> index bc0d9a0c4c35..8198a2d8d92d 100644
+> --- a/target/riscv/time_helper.c
+> +++ b/target/riscv/time_helper.c
+> @@ -49,6 +49,16 @@ void riscv_timer_write_timecmp(CPURISCVState *env, QEMUTimer *timer,
+>       uint32_t timebase_freq = mtimer->timebase_freq;
+>       uint64_t rtc_r = env->rdtime_fn(env->rdtime_fn_arg) + delta;
+>   
+> +    /*
+> +     * *envcfg.STCE disables *stimecmp interrupts, but still allows higher
+> +     * privileges to write the *stimecmp CSRs.
+> +     */
+> +    if (!get_field(env->menvcfg, MENVCFG_STCE) ||
+> +        (timer_irq == MIP_VSTIP && !get_field(env->henvcfg, HENVCFG_STCE))) {
+> +        timer_del(timer);
+> +        return;
+> +    }
+> +
+>       if (timecmp <= rtc_r) {
+>           /*
+>            * If we're setting an stimecmp value in the "past",
 
 
