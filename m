@@ -4,85 +4,141 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.gnu.org (lists.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8EB7CC7115B
-	for <qemu-riscv@archiver.kernel.org>; Tue, 24 Jun 2025 03:12:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1C352C7EE2A
+	for <qemu-riscv@archiver.kernel.org>; Tue, 24 Jun 2025 07:41:41 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1uTu5H-0007bx-Pn; Mon, 23 Jun 2025 23:12:31 -0400
+	id 1uTyHA-0005zy-22; Tue, 24 Jun 2025 03:41:04 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <jay.chang@sifive.com>)
- id 1uTu5F-0007Yd-RP
- for qemu-riscv@nongnu.org; Mon, 23 Jun 2025 23:12:29 -0400
-Received: from mail-pg1-x532.google.com ([2607:f8b0:4864:20::532])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <jay.chang@sifive.com>)
- id 1uTu5E-000350-01
- for qemu-riscv@nongnu.org; Mon, 23 Jun 2025 23:12:29 -0400
-Received: by mail-pg1-x532.google.com with SMTP id
- 41be03b00d2f7-b31e076f714so4075799a12.0
- for <qemu-riscv@nongnu.org>; Mon, 23 Jun 2025 20:12:27 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1750734746; x=1751339546; darn=nongnu.org;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=a8WABByH5fUTCtQw5whMIskkE+MdZh/jm0wbwSTvqsk=;
- b=X1eeUHbJYqrRO6Bi0AN1EmcipU7MUdh1uaz0ZBsq0uQ/YbUr7ZJLvRjSMQkP2CPJ93
- G+2MRkSrsom7UzcuJs3LMZRbCMyhIjNwScon9EnSOGz4nsnz/ak0/8KERp9Rpi4qYkRn
- UEjUJobTPHBj5ho8vbb5NKeCqHDO2jIBYVUkDhFMPFGsz1q/x7XWJaepYSwmsqR09CtQ
- NuMiP20p47MnifYP6X5c/5UY8qC2E+ch3G/X4O9c7HeqYur24oGUimGS/iMZgCpx1ke8
- 0ZmzK8Lvck8wA+QdkL+LXsOpHJabGpbUb74DzvxgHEkvXRMZwrnQ1eljPtvh4mIOIElm
- 8ihA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1750734746; x=1751339546;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=a8WABByH5fUTCtQw5whMIskkE+MdZh/jm0wbwSTvqsk=;
- b=erVu05kM2hnG/Tz6xUactvLn0zWGm0u2csVZpxMyjZgYd6O0i1U8ZccNggg9n5aDQA
- yi1jb9zTlODu3j5x9x3Ly7ZQMFzof/za9WD6N6H0TOex6jZkUPkNUWdm5oLOtH/33mRn
- e2fKVNj79sdNLE9gFTrLYLg8/tGT6xRp8cspkDJa8dappxUXUWNX/uh2PSZghmulUhR7
- uhNMhD9WWpOcHg6Ut3874q1KxaAVW6M50D1/dyccJcF5iYNoTeU1aPmLCBu1OoffDUto
- cB0DwhRv6HLG1D4jkBa2Bd8VSk9a4bPnMIyGcz4Aj4i+D0h0S7dJkTjCOnryHIELvoB9
- nm2w==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXdVNb0eu20/GJyl8wJfHehGGXNhlINIYgNm5cPwCLf3oaazUoceQuDcrA5o3Da19cLEeZOD7Xgw7+j@nongnu.org
-X-Gm-Message-State: AOJu0YxhQivv2aydJINIjW4uoCr7uC+VY/V/AqkLAHnFioTx4JWIFscS
- 1mWe8BZyWovS2wlogzSrvQBBT/sZHNFjsN85cUD8TOTf4CoSmDzmXVMIARWXoFPkSQn/dYexe7Y
- u84D6spbjWvjBJOhfCy7GO6kq38HclHinOwD5gDSfDg==
-X-Gm-Gg: ASbGnctc9xlUCiHrmi/sJLwidydGqfnJrofclMJwaXLKgdWIzHG386OKUEJSPTqtJWt
- 4e2SlYQ9GGpXLijoxOS40gzrelmb6w0dUL7Crgna3ipU943NdAZdDZNIYIvYx1LLa19cVRA7aUm
- FB9arHduRAlzaJ7BCUT5JfnkL7pXiE62YSeFZ7vmTMq2ZUDXUVc8wOR1zx
-X-Google-Smtp-Source: AGHT+IFJhPwFzG0ihnslUC5QBWZd983snHwoSyEBz9+0kyf7EiOa3oPkzWa7KdB8oIPx03/boAp7z02/duU2supmUmQ=
-X-Received: by 2002:a17:90b:5586:b0:312:e73e:cded with SMTP id
- 98e67ed59e1d1-315ccd7261emr2794155a91.16.1750734745753; Mon, 23 Jun 2025
- 20:12:25 -0700 (PDT)
+ (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1uTyGc-0005mI-Ch
+ for qemu-riscv@nongnu.org; Tue, 24 Jun 2025 03:40:32 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1uTyGB-0005cV-3l
+ for qemu-riscv@nongnu.org; Tue, 24 Jun 2025 03:40:27 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1750750801;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=Jq44Z2zwbgcBqtfTirT5nLheLYiyc6cOV9sFWrSjdZA=;
+ b=dLxrN1YUqf5y3DKs395gcLY9A1G2Tt2jAcV5qdZzDg91J9PrlKM5jWeutcy0460nzuHMpc
+ n4KmtJRlAPf2JI8svzZKH1zopfsk5P3q+1A2kf7h0myQmomkZcjPsxMNMBylzX3K/78YRa
+ TeWwk9Lnl2JInbdMkp2FNPMe5qqGD2g=
+Received: from mx-prod-mc-03.mail-002.prod.us-west-2.aws.redhat.com
+ (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
+ relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-299-hNeMNkewOqm9aLZiD0mV1g-1; Tue,
+ 24 Jun 2025 03:34:21 -0400
+X-MC-Unique: hNeMNkewOqm9aLZiD0mV1g-1
+X-Mimecast-MFC-AGG-ID: hNeMNkewOqm9aLZiD0mV1g_1750750457
+Received: from mx-prod-int-02.mail-002.prod.us-west-2.aws.redhat.com
+ (mx-prod-int-02.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.15])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mx-prod-mc-03.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id 8193E19560B2; Tue, 24 Jun 2025 07:34:14 +0000 (UTC)
+Received: from blackfin.pond.sub.org (unknown [10.45.242.10])
+ by mx-prod-int-02.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id F1F2B1956096; Tue, 24 Jun 2025 07:34:09 +0000 (UTC)
+Received: by blackfin.pond.sub.org (Postfix, from userid 1000)
+ id 4E5A821E6A27; Tue, 24 Jun 2025 09:34:07 +0200 (CEST)
+From: Markus Armbruster <armbru@redhat.com>
+To: John Snow <jsnow@redhat.com>
+Cc: qemu-devel@nongnu.org,  Joel Stanley <joel@jms.id.au>,  Yi Liu
+ <yi.l.liu@intel.com>,  Alex =?utf-8?Q?Benn=C3=A9e?=
+ <alex.bennee@linaro.org>,  Helge Deller
+ <deller@gmx.de>,  Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,  Andrew
+ Jeffery <andrew@codeconstruct.com.au>,  Fabiano Rosas <farosas@suse.de>,
+ Alexander Bulekov <alxndr@bu.edu>,  Darren Kenny
+ <darren.kenny@oracle.com>,  Leif Lindholm
+ <leif.lindholm@oss.qualcomm.com>,  =?utf-8?Q?C=C3=A9dric?= Le Goater
+ <clg@kaod.org>,  Ed
+ Maste <emaste@freebsd.org>,  Gerd Hoffmann <kraxel@redhat.com>,  Warner
+ Losh <imp@bsdimp.com>,  Kevin Wolf <kwolf@redhat.com>,  Tyrone Ting
+ <kfting@nuvoton.com>,  Eric Blake <eblake@redhat.com>,  Palmer Dabbelt
+ <palmer@dabbelt.com>,  Yoshinori Sato <ysato@users.sourceforge.jp>,  Troy
+ Lee <leetroy@gmail.com>,  Halil Pasic <pasic@linux.ibm.com>,  Akihiko
+ Odaki <odaki@rsg.ci.i.u-tokyo.ac.jp>,  Michael Roth
+ <michael.roth@amd.com>,  Laurent Vivier <laurent@vivier.eu>,  Ani Sinha
+ <anisinha@redhat.com>,  Weiwei Li <liwei1518@gmail.com>,  Eric Farman
+ <farman@linux.ibm.com>,  Steven Lee <steven_lee@aspeedtech.com>,  Brian
+ Cain <brian.cain@oss.qualcomm.com>,  Li-Wen Hsu <lwhsu@freebsd.org>,
+ Jamin Lin <jamin_lin@aspeedtech.com>,  qemu-s390x@nongnu.org,  Vladimir
+ Sementsov-Ogievskiy <vsementsov@yandex-team.ru>,  qemu-block@nongnu.org,
+ Bernhard Beschow <shentey@gmail.com>,  =?utf-8?Q?Cl=C3=A9ment?=
+ Mathieu--Drif <clement.mathieu--drif@eviden.com>,  Maksim Davydov
+ <davydov-max@yandex-team.ru>,  Niek Linnenbank <nieklinnenbank@gmail.com>,
+ =?utf-8?Q?Herv=C3=A9?= Poussineau <hpoussin@reactos.org>,  Christian
+ Borntraeger
+ <borntraeger@linux.ibm.com>,  Paul Durrant <paul@xen.org>,  Manos
+ Pitsidianakis <manos.pitsidianakis@linaro.org>,  Jagannathan Raman
+ <jag.raman@oracle.com>,  Igor Mitsyanko <i.mitsyanko@gmail.com>,  Max
+ Filippov <jcmvbkbc@gmail.com>,  Pierrick Bouvier
+ <pierrick.bouvier@linaro.org>,  "Michael S. Tsirkin" <mst@redhat.com>,
+ Anton Johansson <anjo@rev.ng>,  Peter Maydell <peter.maydell@linaro.org>,
+ Cleber Rosa <crosa@redhat.com>,  Eric Auger <eric.auger@redhat.com>,
+ Yanan Wang <wangyanan55@huawei.com>,  qemu-arm@nongnu.org,  Hao Wu
+ <wuhaotsh@google.com>,  Mads Ynddal <mads@ynddal.dk>,  Sriram Yagnaraman
+ <sriram.yagnaraman@ericsson.com>,  qemu-riscv@nongnu.org,  Paolo Bonzini
+ <pbonzini@redhat.com>,  Jason Wang <jasowang@redhat.com>,  Nicholas Piggin
+ <npiggin@gmail.com>,  Michael Rolnik <mrolnik@gmail.com>,  Zhao Liu
+ <zhao1.liu@intel.com>,  Alessandro Di Federico <ale@rev.ng>,  Thomas Huth
+ <thuth@redhat.com>,  Antony Pavlov <antonynpavlov@gmail.com>,  Jiaxun Yang
+ <jiaxun.yang@flygoat.com>,  Hanna Reitz <hreitz@redhat.com>,  Ilya
+ Leoshkevich <iii@linux.ibm.com>,  Marcelo Tosatti <mtosatti@redhat.com>,
+ Nina Schoetterl-Glausch <nsg@linux.ibm.com>,  Daniel Henrique Barboza
+ <danielhb413@gmail.com>,  Qiuhao Li <Qiuhao.Li@outlook.com>,  Hyman Huang
+ <yong.huang@smartx.com>,  Daniel P. =?utf-8?Q?Berrang=C3=A9?=
+ <berrange@redhat.com>,
+ Magnus Damm <magnus.damm@gmail.com>,  qemu-rust@nongnu.org,  Bandan Das
+ <bsd@redhat.com>,  Strahinja Jankovic <strahinja.p.jankovic@gmail.com>,
+ Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,  Philippe =?utf-8?Q?Ma?=
+ =?utf-8?Q?thieu-Daud=C3=A9?=
+ <philmd@linaro.org>,  kvm@vger.kernel.org,  Fam Zheng <fam@euphon.net>,
+ Jia Liu <proljc@gmail.com>,  =?utf-8?Q?Marc-Andr=C3=A9?= Lureau
+ <marcandre.lureau@redhat.com>,  Alistair Francis <alistair@alistair23.me>,
+ Subbaraya Sundeep <sundeep.lkml@gmail.com>,  Kyle Evans
+ <kevans@freebsd.org>,  Song Gao <gaosong@loongson.cn>,  Alexandre Iooss
+ <erdnaxe@crans.org>,  Aurelien Jarno <aurelien@aurel32.net>,  Liu Zhiwei
+ <zhiwei_liu@linux.alibaba.com>,  Peter Xu <peterx@redhat.com>,  Stefan
+ Hajnoczi <stefanha@redhat.com>,  BALATON Zoltan <balaton@eik.bme.hu>,
+ Elena Ufimtseva <elena.ufimtseva@oracle.com>,  "Edgar E. Iglesias"
+ <edgar.iglesias@gmail.com>,  =?utf-8?B?RnLDqWTDqXJpYw==?= Barrat
+ <fbarrat@linux.ibm.com>,
+ qemu-ppc@nongnu.org,  Radoslaw Biernacki <rad@semihalf.com>,  Beniamino
+ Galvani <b.galvani@gmail.com>,  David Hildenbrand <david@redhat.com>,
+ Richard Henderson <richard.henderson@linaro.org>,  David Woodhouse
+ <dwmw2@infradead.org>,  Eduardo Habkost <eduardo@habkost.net>,  Ahmed
+ Karaman <ahmedkhaledkaraman@gmail.com>,  Huacai Chen
+ <chenhuacai@kernel.org>,  Mahmoud Mandour <ma.mandourr@gmail.com>,  Harsh
+ Prateek Bora <harshpb@linux.ibm.com>
+Subject: Re: [PATCH v2 06/12] python: upgrade to python3.9+ syntax
+In-Reply-To: <20250612205451.1177751-7-jsnow@redhat.com> (John Snow's message
+ of "Thu, 12 Jun 2025 16:54:44 -0400")
+References: <20250612205451.1177751-1-jsnow@redhat.com>
+ <20250612205451.1177751-7-jsnow@redhat.com>
+Date: Tue, 24 Jun 2025 09:34:07 +0200
+Message-ID: <87cyatmw40.fsf@pond.sub.org>
+User-Agent: Gnus/5.13 (Gnus v5.13)
 MIME-Version: 1.0
-References: <20250401103344.84257-1-jay.chang@sifive.com>
-In-Reply-To: <20250401103344.84257-1-jay.chang@sifive.com>
-From: Jay Chang <jay.chang@sifive.com>
-Date: Tue, 24 Jun 2025 11:12:14 +0800
-X-Gm-Features: AX0GCFu6Gti6niGyiSDlG2TCXm8MS5Be-sWZYVyAdtav8G2GPxjCBlliwlt6EOY
-Message-ID: <CACNNAjP_h4Z2QZZHJXryqsFNSENyLbhZ-ArLFjosChFzou3_kQ@mail.gmail.com>
-Subject: Re: [PATCH v2 1/2] target/riscv: Restrict mideleg/medeleg/medelegh
- access to S-mode harts
-To: qemu-devel@nongnu.org, qemu-riscv@nongnu.org
-Cc: Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, 
- Weiwei Li <liwei1518@gmail.com>,
- Daniel Henrique Barboza <dbarboza@ventanamicro.com>, 
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, Frank Chang <frank.chang@sifive.com>
-Content-Type: multipart/alternative; boundary="0000000000009dff2c063848b299"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::532;
- envelope-from=jay.chang@sifive.com; helo=mail-pg1-x532.google.com
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+X-Scanned-By: MIMEDefang 3.0 on 10.30.177.15
+Received-SPF: pass client-ip=170.10.133.124; envelope-from=armbru@redhat.com;
+ helo=us-smtp-delivery-124.mimecast.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, HTML_MESSAGE=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H5=0.001, RCVD_IN_MSPIKE_WL=0.001,
+ RCVD_IN_VALIDITY_RPBL_BLOCKED=0.001, RCVD_IN_VALIDITY_SAFE_BLOCKED=0.001,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -98,173 +154,66 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Errors-To: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 
---0000000000009dff2c063848b299
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+John Snow <jsnow@redhat.com> writes:
 
-Hi,
+> This patch is fully automated, using pymagic, isort and autoflake.
+>
+> Create a script named pymagic.sh:
+>
+> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D
+>
+> pyupgrade --exit-zero-even-if-changed --keep-percent-format \
+>           --py39-plus "$@"
+>
+> autoflake -i "$@"
+>
+> isort --settings-file python/setup.cfg \
+>       -p compat -p qapidoc_legacy -p iotests -o qemu "$@"
+> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D
+>
+> Then, from qemu.git root:
+>
+>> find . -type f -name '*.py' | xargs pymagic
+>> git grep --name-only "#!/usr/bin/env python" | xargs pymagic
+>
+> This changes a lot of old Pythonisms, but in particular it upgrades the
+> old Python type hint paradigm to the new 3.9+ paradigm wherein you no
+> longer need to import List, Dict, Tuple, Set, etc from the Typing module
+> and instead directly subscript the built-in types list, dict, tuple,
+> set, etc. The old-style annotations are deprecated as of 3.9 and are
+> eligible for removal starting in Python 3.14, though the exact date of
+> their removal is not yet known.
+>
+> pyupgrade updates the imports and type hint paradigms (as well as
+> updating other old 'isms, such as removing the unicode string
+> prefix). autoflake in turn then removes any unused import statements,
+> possibly left behind by pyupgrade. Lastly, isort fixes the import order
+> and formatting to the standard we use in qemu.git/python and
+> scripts/qapi in particular.
+>
+> Signed-off-by: John Snow <jsnow@redhat.com>
 
-Gentle ping on this patch.
+[...]
 
-Thanks,
-Jay Chang
+>  448 files changed, 1959 insertions(+), 1631 deletions(-)
 
-On Tue, Apr 1, 2025 at 6:34=E2=80=AFPM Jay Chang <jay.chang@sifive.com> wro=
-te:
+*=C3=84chz*
 
-> RISC-V Privileged Spec states:
-> "In harts with S-mode, the medeleg and mideleg registers must exist, and
-> setting a bit in medeleg or mideleg will delegate the corresponding trap
-> , when occurring in S-mode or U-mode, to the S-mode trap handler. In
-> harts without S-mode, the medeleg and mideleg registers should not
-> exist."
->
-> Add smode predicate to ensure these CSRs are only accessible when S-mode
-> is supported.
->
-> Reviewed-by: Frank Chang <frank.chang@sifive.com>
-> Signed-off-by: Jay Chang <jay.chang@sifive.com>
-> ---
->  target/riscv/csr.c | 6 +++---
->  1 file changed, 3 insertions(+), 3 deletions(-)
->
-> diff --git a/target/riscv/csr.c b/target/riscv/csr.c
-> index 7948188356..975d6e307f 100644
-> --- a/target/riscv/csr.c
-> +++ b/target/riscv/csr.c
-> @@ -5783,8 +5783,8 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] =3D {
->                            NULL,                read_mstatus_i128
->  },
->      [CSR_MISA]        =3D { "misa",       any,   read_misa,    write_mis=
-a,
->                            NULL,                read_misa_i128
->   },
-> -    [CSR_MIDELEG]     =3D { "mideleg",    any,   NULL, NULL,   rmw_midel=
-eg
->  },
-> -    [CSR_MEDELEG]     =3D { "medeleg",    any,   read_medeleg,
-> write_medeleg },
-> +    [CSR_MIDELEG]     =3D { "mideleg",    smode,   NULL, NULL,
->  rmw_mideleg   },
-> +    [CSR_MEDELEG]     =3D { "medeleg",    smode,   read_medeleg,
-> write_medeleg },
->      [CSR_MIE]         =3D { "mie",        any,   NULL, NULL,   rmw_mie
->  },
->      [CSR_MTVEC]       =3D { "mtvec",      any,   read_mtvec,   write_mtv=
-ec
->  },
->      [CSR_MCOUNTEREN]  =3D { "mcounteren", umode, read_mcounteren,
-> @@ -5792,7 +5792,7 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] =3D {
->
->      [CSR_MSTATUSH]    =3D { "mstatush",   any32, read_mstatush,
->                            write_mstatush
->  },
-> -    [CSR_MEDELEGH]    =3D { "medelegh",   any32, read_zero, write_ignore=
-,
-> +    [CSR_MEDELEGH]    =3D { "medelegh",   smode32, read_zero, write_igno=
-re,
->                            .min_priv_ver =3D PRIV_VERSION_1_13_0
->   },
->      [CSR_HEDELEGH]    =3D { "hedelegh",   hmode32, read_hedelegh,
-> write_hedelegh,
->                            .min_priv_ver =3D PRIV_VERSION_1_13_0
->   },
-> --
-> 2.48.1
->
->
+I hate it when people ask me to split up my mechanical patches...
 
---0000000000009dff2c063848b299
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+One split is by subsystem / maintainer.  I've done this a few times, and
+it's quite a bother.  Questionable use of your time if you ask me.
 
-<div dir=3D"ltr">Hi,<br><br>Gentle=C2=A0<span class=3D"gmail-il"><span clas=
-s=3D"gmail-il">ping</span></span>=C2=A0on this patch.<br><br>Thanks,<br>Jay=
- Chang</div><br><div class=3D"gmail_quote gmail_quote_container"><div dir=
-=3D"ltr" class=3D"gmail_attr">On Tue, Apr 1, 2025 at 6:34=E2=80=AFPM Jay Ch=
-ang &lt;<a href=3D"mailto:jay.chang@sifive.com">jay.chang@sifive.com</a>&gt=
-; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px=
- 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">RISC-V =
-Privileged Spec states:<br>
-&quot;In harts with S-mode, the medeleg and mideleg registers must exist, a=
-nd<br>
-setting a bit in medeleg or mideleg will delegate the corresponding trap<br=
->
-, when occurring in S-mode or U-mode, to the S-mode trap handler. In<br>
-harts without S-mode, the medeleg and mideleg registers should not<br>
-exist.&quot;<br>
-<br>
-Add smode predicate to ensure these CSRs are only accessible when S-mode<br=
->
-is supported.<br>
-<br>
-Reviewed-by: Frank Chang &lt;<a href=3D"mailto:frank.chang@sifive.com" targ=
-et=3D"_blank">frank.chang@sifive.com</a>&gt;<br>
-Signed-off-by: Jay Chang &lt;<a href=3D"mailto:jay.chang@sifive.com" target=
-=3D"_blank">jay.chang@sifive.com</a>&gt;<br>
----<br>
-=C2=A0target/riscv/csr.c | 6 +++---<br>
-=C2=A01 file changed, 3 insertions(+), 3 deletions(-)<br>
-<br>
-diff --git a/target/riscv/csr.c b/target/riscv/csr.c<br>
-index 7948188356..975d6e307f 100644<br>
---- a/target/riscv/csr.c<br>
-+++ b/target/riscv/csr.c<br>
-@@ -5783,8 +5783,8 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] =3D {<br=
->
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0NULL,=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 read_mstatus_i128=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0},<br>
-=C2=A0 =C2=A0 =C2=A0[CSR_MISA]=C2=A0 =C2=A0 =C2=A0 =C2=A0 =3D { &quot;misa&=
-quot;,=C2=A0 =C2=A0 =C2=A0 =C2=A0any,=C2=A0 =C2=A0read_misa,=C2=A0 =C2=A0 w=
-rite_misa,<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0NULL,=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 read_misa_i128=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 }=
-,<br>
--=C2=A0 =C2=A0 [CSR_MIDELEG]=C2=A0 =C2=A0 =C2=A0=3D { &quot;mideleg&quot;,=
-=C2=A0 =C2=A0 any,=C2=A0 =C2=A0NULL, NULL,=C2=A0 =C2=A0rmw_mideleg=C2=A0 =
-=C2=A0},<br>
--=C2=A0 =C2=A0 [CSR_MEDELEG]=C2=A0 =C2=A0 =C2=A0=3D { &quot;medeleg&quot;,=
-=C2=A0 =C2=A0 any,=C2=A0 =C2=A0read_medeleg, write_medeleg },<br>
-+=C2=A0 =C2=A0 [CSR_MIDELEG]=C2=A0 =C2=A0 =C2=A0=3D { &quot;mideleg&quot;,=
-=C2=A0 =C2=A0 smode,=C2=A0 =C2=A0NULL, NULL,=C2=A0 =C2=A0rmw_mideleg=C2=A0 =
-=C2=A0},<br>
-+=C2=A0 =C2=A0 [CSR_MEDELEG]=C2=A0 =C2=A0 =C2=A0=3D { &quot;medeleg&quot;,=
-=C2=A0 =C2=A0 smode,=C2=A0 =C2=A0read_medeleg, write_medeleg },<br>
-=C2=A0 =C2=A0 =C2=A0[CSR_MIE]=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=3D { &quot;=
-mie&quot;,=C2=A0 =C2=A0 =C2=A0 =C2=A0 any,=C2=A0 =C2=A0NULL, NULL,=C2=A0 =
-=C2=A0rmw_mie=C2=A0 =C2=A0 =C2=A0 =C2=A0},<br>
-=C2=A0 =C2=A0 =C2=A0[CSR_MTVEC]=C2=A0 =C2=A0 =C2=A0 =C2=A0=3D { &quot;mtvec=
-&quot;,=C2=A0 =C2=A0 =C2=A0 any,=C2=A0 =C2=A0read_mtvec,=C2=A0 =C2=A0write_=
-mtvec=C2=A0 =C2=A0},<br>
-=C2=A0 =C2=A0 =C2=A0[CSR_MCOUNTEREN]=C2=A0 =3D { &quot;mcounteren&quot;, um=
-ode, read_mcounteren,<br>
-@@ -5792,7 +5792,7 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] =3D {<br=
->
-<br>
-=C2=A0 =C2=A0 =C2=A0[CSR_MSTATUSH]=C2=A0 =C2=A0 =3D { &quot;mstatush&quot;,=
-=C2=A0 =C2=A0any32, read_mstatush,<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0write_mstatush=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0},<br>
--=C2=A0 =C2=A0 [CSR_MEDELEGH]=C2=A0 =C2=A0 =3D { &quot;medelegh&quot;,=C2=
-=A0 =C2=A0any32, read_zero, write_ignore,<br>
-+=C2=A0 =C2=A0 [CSR_MEDELEGH]=C2=A0 =C2=A0 =3D { &quot;medelegh&quot;,=C2=
-=A0 =C2=A0smode32, read_zero, write_ignore,<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0.min_priv_ver =3D PRIV_VERSION_1_13_0=C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 },<br>
-=C2=A0 =C2=A0 =C2=A0[CSR_HEDELEGH]=C2=A0 =C2=A0 =3D { &quot;hedelegh&quot;,=
-=C2=A0 =C2=A0hmode32, read_hedelegh, write_hedelegh,<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0.min_priv_ver =3D PRIV_VERSION_1_13_0=C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 },<br>
--- <br>
-2.48.1<br>
-<br>
-</blockquote></div>
+There's another split here...  Your pymagic.sh runs three tools.  If you
+commit after each one, the patch splits into three.
 
---0000000000009dff2c063848b299--
+I understand you pass --py39-plus to pyupgrade to get the type hints
+modernized.  If you run it without --py39-plus for all the miscellaneous
+upgrades, commit, then run it with --py39-plus for just the type hint
+upgrades, commit, the last patch splits again.
+
+Thoughts?
+
 
